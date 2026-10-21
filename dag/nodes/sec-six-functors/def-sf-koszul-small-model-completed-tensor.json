@@ -1,0 +1,107 @@
+{
+ "id": "def-sf-koszul-small-model-completed-tensor",
+ "kind": "definition",
+ "title": "Local derived completeness and completed tensor on the canonical small site model",
+ "statement": "Let $\\mathcal S$ be a site, with independent object and morphism universes, essentially small relative to a coefficient universe, and let $R$ be a sheaf of commutative rings. Write $\\operatorname{Mod}(R)$ for its module sheaves [def-weil-sheaf-of-modules-category]. Let $e:\\mathcal S\\simeq\\mathcal S_0$ be the canonical small-model equivalence with induced topology, and put $R_0=e^{-1,*}R$. Restriction transports global sections of $R$ to $R_0$, and induces the module equivalence $E:\\operatorname{Mod}(R)\\simeq\\operatorname{Mod}(R_0)$ and its exact derived equivalence $D(E):D(R)\\simeq D(R_0)$ [def-weil-abstract-derived-category]; the two derived morphism universes are independent. For an ideal mono $\\iota:I\\to R_0$, define $\\mathcal C(M)$ to mean that $D(E)(M)$ is locally derived $I$-complete [def-weil-pbc-locally-derived-ringed-ideal-complete], namely that on every slice its derived internal Hom from localization at every local section of $I$ vanishes. For the specified K-flat derived tensor $T:D(R)\\times D(R)\\to D(R)$ [lem-weil-pbc-site-derived-tensor-descent] and a supplied functor $L:D(R)\\to\\mathcal C$, where $\\mathcal C$ is the full subcategory of objects satisfying this predicate, define the completed tensor $B=(\\mathcal C\\hookrightarrow D(R))^{\\times2}\\mathbin{\\circ}T\\mathbin{\\circ}L$, in diagrammatic composition order: $B(M,N)=L(T(M,N))$ and $B(f,g)=L(T(f,g))$. In particular this applies when $L$ is a Koszul completion reflector; this definition makes no choice of such a reflector.",
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-locally-derived-ringed-ideal-complete",
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/def-wf-tensor-product.md",
+  "place": "first sentence, coefficient tensor model; canonical small-site transport of Stacks algebraization.tex Tags 0999, 099F and 0A0E (lemma-derived-completion-koszul)"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Transport local derived Koszul completeness along the canonical small model site equivalence and restrict derived tensor to complete objects",
+   "results": "8 hits: HasDerivedCategory.standard, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism, HomologicalComplexUpToQuasiIso.instIsLocalizationHomotopyCategoryQhQuasiIso, HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism, DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhTrWSubcategoryAcyclic, DerivedCategory.instIsTriangulated",
+   "date": "2026-10-21",
+   "verdict": "no exact match: existing ingredients are used, and ordinary functor composition defines B; no existing node owns the transported completeness and its completed tensor specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical small model of an essentially small ringed site transports sheaves of modules and derived completeness, and completed tensor is derived tensor followed by reflection",
+   "results": "8 hits: LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology, LightCondensed.instMonoidalCategoryLightCondMod, LightCondensed.instMonoidalLightCondSetLightCondModFree, LightCondensed.instMonoidalClosedLightCondMod, LightCondensed.instIsGrothendieckAbelianLightCondMod",
+   "date": "2026-10-21",
+   "verdict": "no exact match: existing ingredients are used, and ordinary functor composition defines B; no existing node owns the transported completeness and its completed tensor specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "KoszulSmallModel|smallModel.*[Cc]omplet|[Cc]omplet.*smallModel",
+   "results": "0 hits: ; direct rg of this pattern in lean/WeilConjectures, lean/Sheaf and dag/lean_names_upstream.json found only scheme-specific constant completion usages, no canonical-small-model completeness interface. blueprint_refs search small model completed tensor and KoszulSmallModel found zero blueprint nodes. DAG rg found no node carrying this transport definition.",
+   "date": "2026-10-21",
+   "verdict": "no exact match: existing ingredients are used, and ordinary functor composition defines B; no existing node owns the transported completeness and its completed tensor specialization"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-derived-completed-tensor-bilinearity",
+  "date": "2026-10-21",
+  "group": "NF"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-wf-tensor-product",
+   "place": "first sentence, coefficient tensor model; canonical small-model interpretation of local completeness and B(M,N)=L(T(M,N)) used in the bilinearity leaf",
+   "via": [
+    "lem-sf-derived-completed-tensor-bilinearity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RingedKoszulSmallModelCompletedTensor",
+  "declaration": "CategoryTheory.DerivedCompletedTensor.tensor",
+  "declarations": [
+   "CategoryTheory.KoszulSmallModel.ring",
+   "CategoryTheory.KoszulSmallModel.globalSection",
+   "CategoryTheory.KoszulSmallModel.Modules",
+   "CategoryTheory.KoszulSmallModel.modulesEquiv",
+   "CategoryTheory.KoszulSmallModel.derivedEquiv",
+   "CategoryTheory.KoszulSmallModel.complete",
+   "CategoryTheory.DerivedCompletedTensor.tensor"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/RingedKoszulSmallModelCompletedTensor.lean",
+  "statement": "abbrev tensor (L : DerivedCategory (KoszulSmallModel.Modules R) ⥤ (KoszulSmallModel.complete R I ι).FullSubcategory)",
+  "branch": "newtargets-dag",
+  "by": "NF",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Owns the canonical-small-model transport definitions and the actual completed tensor composite. The only chosen tensor is the already recorded site-derived tensor, determined by its descent comparison; B is plain functor composition. No theorem is postponed here and no reflector existence is asserted."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1f7ec90c9",
+  "group": "NF",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1f7ec90c9",
+  "group": "NF",
+  "result": "pass",
+  "note": "Re-delivery meets the b92b3ac1 correction: reflector record byte-identical to live (NJ wfCompletionReflector); new def node def-sf-koszul-small-model-completed-tensor owns KoszulSmallModel ring/globalSection/Modules/modulesEquiv/derivedEquiv/complete and DerivedCompletedTensor.tensor, all real data (pushforward, pushforwardPushforwardEquivalence, mapDerivedCategory, IsLocallyDerivedRingedIdealComplete, plain composite), no sorry/choice; item only gains that node in stmt_deps; rational-naturality theorem dep and exists_reflector dropped. Item clauses checked: coefficientLinear = homLinear along s; T = siteDerivedTensorIndependentCoefficients; Mono ι + _hgen generating list; L/η/_hL reflector; L,T,B additive and A-linear in each variable; β pure/unique/id/comp (order checked vs composition_tmul)/denominator; bifunctor F with HEq. Statements verbatim; universes independent; edge cases n=0, S=0, torsion, empty site. Advisory: IsRingedIdealGeneratingList owner def-weil-pbc-ringed-ideal-generators reached only through the reflector node; proof-dep imports. No compile (no file changed); worker compiled 5.1 s / 27.4 s."
+ }
+}
