@@ -1,0 +1,98 @@
+{
+ "id": "lem-weil-constant-scalar-unit-quasi-isomorphism",
+ "kind": "statement",
+ "title": "The normalized regular coefficient scalar unit is a quasi-isomorphism",
+ "statement": "Fix a finite-field datum $(p,a,q,k_0,k)$ [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, finite extensions $E\\subset L$ of $\\mathbf Q_\\ell$ with valuation rings $\\mathcal O_E\\subset\\mathcal O_L$ and uniformizers $\\varpi_E,\\varpi_L$ [def-weil-l-adic-coefficient-extension], and any scheme $Y$. On its small pro-etale site [def-weil-pbc-proetale-site], put $A_{F,m}=\\mathcal O_F/\\varpi_F^m$, $R_F=\\varprojlim_{m\\ge1}(A_{F,m})_Y$, and write $\\pi^F_m:R_F\\to(A_{F,m})_Y$ for the limit projections, for $F=E,L$ [def-weil-completed-integral-coefficients]. Use the coefficient maps $\\rho_m:R_E\\to(A_{L,m})_Y$ induced by $\\mathcal O_E\\subset\\mathcal O_L$ as in [def-weil-integral-scalar-extension]. Let $P=R_E[0]$, and let $T_m=\\operatorname{Res}^L_m(P\\otimes_{R_E}(A_{L,m})_Y)$ with transition $t_m:T_{m+1}\\to T_m$ induced by reduction. Tensors are sheafified tensors applied termwise [def-pur-sheaf-tensor-product]; restriction uses $\\pi^L_m$. Put $B=\\prod_{m\\ge1}T_m$ (termwise product) and $C_{E,L}=\\operatorname{Cone}(1-s:B\\to B)[-1]$, where $(1-s)(x)_m=x_m-t_m(x_{m+1})$, with the strict mapping-cocone convention and projections $\\mathrm{fst}:C_{E,L}\\to B$, $\\mathrm{snd}:C_{E,L}\\to B[-1]$ on graded objects. All complexes and derived categories are those of module sheaves [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category].\n\nLet $\\eta_{E,L}:R_L[0]\\to C_{E,L}$ be the uniquely normalized chain map of [lem-weil-constant-scalar-strict-unit], with $m$-th product coordinate $s\\mapsto1\\otimes\\pi^L_m(s)$ and zero shifted-product component. Each $A_{L,m}$ is finite; the transition maps of constant sheaves $(A_{L,m+1})_Y\\to(A_{L,m})_Y$ are epimorphisms. The multiplication identifications $u_m:T_m\\cong\\operatorname{Res}^L_m(A_{L,m})_Y[0]$ identify their ordinary limit, with its projections, with $R_L[0]$. The map $\\eta_{E,L}$ is a quasi-isomorphism. More precisely, the termwise product $B$ represents the product of the $T_m$ in $D(Y_{\\mathrm{proet}},\\mathcal O_L)$, and for some $\\delta$ the triangle\n$$R_L[0]\\xrightarrow{(u_m^{-1}\\pi^L_m)_m}B\\xrightarrow{1-s}B\\xrightarrow{\\delta}R_L[1]$$\nis distinguished, hence a Roos triangle [def-weil-derived-limit]. Under $u_m$, the inverse of $Q(\\eta_{E,L})$ identifies the strict cone computing integral scalar extension [def-weil-integral-scalar-extension] with $R_L[0]$, compatibly with all the quotient projections; here $Q$ is localization at quasi-isomorphisms. For $E=L$ this is a distinguished Roos triangle whose first map is the prescribed reduction-unit map of $R_E[0]$, so $R_E[0]$ is derived complete [def-weil-derived-complete]. These conclusions hold also for $E=L$, ramified extensions, disconnected $Y$, and $Y=\\varnothing$, with no finiteness hypothesis on $Y$.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 3.1.10 (p. 17), Proposition 3.2.3(1) (p. 18), Proposition 4.2.8 (p. 29), Definition 3.5.2 (p. 24), Lemma 6.8.2(1) (pp. 58-59); tower and completion arguments extracted from old parent Steps 1, 6 and 9; the specified strict unit is lean/Sheaf/Paper/ConstantCoefficientScalarNormalization.lean, constantCoefficientScalarUnit_isIso, lines 85-95."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-integral-scalar-extension",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-constant-scalar-strict-unit",
+  "def-weil-derived-limit",
+  "def-weil-derived-complete",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "surjective.*(tower|limit)|[Rr]eplete|[Rr]oos|pro[Ee]tale.*(limit|complet)",
+   "results": "msearch.py: OK, 25 hits; Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/Gluing.lean, Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean, Mathlib/AlgebraicTopology/SimplicialSet/Skeleton.lean, Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap.lean, Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap.lean, Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/RelativeCellComplex.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary limits, light condensed epimorphisms, unrelated resolutions, and general homological infrastructure do not assert this pro-etale regular coefficient scalar-unit quasi-isomorphism"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.IsLimit, CochainComplex",
+   "results": "msearch.py: OK, 9 hits; CochainComplex.HomComplex.Cocycle.isKernel, CochainComplex.HomComplex.Cocycle.isKernel', CochainComplex.Lifting.cochain₁, CochainComplex.Lifting.cocycle₁, CochainComplex.Lifting.hasLift, CochainComplex.Lifting.comp_coe_cocycle₁_comp, CochainComplex.Lifting.π_f_cochain₁_v_ι_f, CochainComplex.Lifting.π_f_cochain₁_v_ι_f_assoc",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary limits, light condensed epimorphisms, unrelated resolutions, and general homological infrastructure do not assert this pro-etale regular coefficient scalar-unit quasi-isomorphism"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A surjective inverse system of sheaves of modules on the small pro-etale site has ordinary inverse limit equal to its derived inverse limit, and the normalized unit of completed scalar extension of the regular coefficient module is a quasi-isomorphism.",
+   "results": "msearch.py: OK, 8 hits; BDeRhamPlus, Rep.standardComplex.quasiIso_forget₂_εToSingle₀, localCohomology.isoSelfLERadical, CondensedMod.ofSheafProfinite, BDeRham, AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq, AdicCompletion.exists_smodEq_pow_smul_top_and_smodEq_pow_add_one_smul_top, AdicCompletion.mk_smul_top_ofAlgEquiv_symm",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary limits, light condensed epimorphisms, unrelated resolutions, and general homological infrastructure do not assert this pro-etale regular coefficient scalar-unit quasi-isomorphism"
+  },
+  {
+   "tool": "grep",
+   "query": "surjective|replete|Roos|derived",
+   "results": "msearch.py: OK, 0 hits; ; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary limits, light condensed epimorphisms, unrelated resolutions, and general homological infrastructure do not assert this pro-etale regular coefficient scalar-unit quasi-isomorphism"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"surjective\", \"limit\"",
+   "results": "msearch.py: OK, 12 hits; CategoryTheory.Functor.ιColimitType_jointly_surjective, CategoryTheory.Functor.CoconeTypes.IsColimit.ι_jointly_surjective, CategoryTheory.Functor.CoconeTypes.descColimitType_surjective_iff, CategoryTheory.Limits.Types.jointly_surjective', CategoryTheory.Limits.Types.jointly_surjective, CategoryTheory.Limits.Types.jointly_surjective_of_isColimit, CategoryTheory.Limits.Types.FilteredColimit.jointly_surjective_of_isColimit₂, AddMonCat.FilteredColimits.M.mk_surjective",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary limits, light condensed epimorphisms, unrelated resolutions, and general homological infrastructure do not assert this pro-etale regular coefficient scalar-unit quasi-isomorphism"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a replete topos, for an epimorphic countable tower of module sheaves, the map one minus shift on their product is epimorphic and the compatible limit cone induces a quasi-isomorphism from the inverse limit in degree zero to its two-term Roos complex.",
+   "results": "msearch.py: OK, 8 hits; LightCondensed.epi_π_app_zero_of_epi, LightCondensed.instEpiLightCondModMapNat, CategoryTheory.coherentTopology.epi_π_app_zero_of_epi, LightCondensed.instPreservesEpimorphismsFunctorDiscreteNatLightCondModLim, CategoryTheory.Functor.homologySequence_epi_shift_map_mor₁_iff, CategoryTheory.Limits.SequentialProduct.functorMap_epi, CategoryTheory.Functor.homologySequence_epi_shift_map_mor₂_iff, CochainComplex.cm5b.instQuasiIsoIntP",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary limits, light condensed epimorphisms, unrelated resolutions, and general homological infrastructure do not assert this pro-etale regular coefficient scalar-unit quasi-isomorphism"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Surjective towers of pro-etale module sheaves compute derived inverse limits and give a quasi-isomorphism from their ordinary limit to the mapping cocone",
+   "results": "msearch.py: OK, 8 hits; ModuleCat.directLimitCocone, PresheafOfModules.isLimitLimitCone, SheafOfModules.hasLimit, SheafOfModules.hasLimitsOfShape, SheafOfModules.Presentation.isColimit, Profinite.asLimitConeIso, AlgebraicGeometry.Scheme.Modules.instHasLimits, Profinite.asLimit",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary limits, light condensed epimorphisms, unrelated resolutions, and general homological infrastructure do not assert this pro-etale regular coefficient scalar-unit quasi-isomorphism"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-constant-coefficient-objects-constructible",
+  "date": "2026-10-21",
+  "group": "Q21"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-admissible",
+ "blueprint": {
+  "from": {
+   "node": "def-weil-ordinary-compact-cohomology",
+   "place": "Coefficient-object paragraph: 'the completed coefficient sheaf' and 'the scalar extensions supplied by the rationalized coefficient construction'; makes the coefficient objects used by the final cohomology abbreviations well defined. Proposition 3.1.10 (p. 17), Proposition 3.2.3(1) (p. 18), Proposition 4.2.8 (p. 29), Definition 3.5.2 (p. 24), Lemma 6.8.2(1) (pp. 58-59); tower and completion arguments extracted from old parent Steps 1, 6 and 9; the specified strict unit is lean/Sheaf/Paper/ConstantCoefficientScalarNormalization.lean, constantCoefficientScalarUnit_isIso, lines 85-95.",
+   "via": [
+    "lem-weil-constant-coefficient-objects-constructible"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
