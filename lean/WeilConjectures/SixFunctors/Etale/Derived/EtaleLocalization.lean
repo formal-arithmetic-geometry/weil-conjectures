@@ -9,6 +9,9 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunc
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.OpenImmersion
 public import WeilConjectures.SixFunctors.OpenClosed.Conservative
 
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComposition
+import Sheaf.AlgebraicGeometry.EtaleCompactSupportGraphDerivedIso
+
 /-!
 # Étale localization of the derived categories of étale sheaves
 
@@ -92,8 +95,31 @@ theorem nonempty_iso_rightDerivedUpperShriek_comp_leftDerivedUpperStar_of_etale
     (f : X ⟶ Y) (h : U ⟶ Y) (w : u ≫ f = h) [HasCompactification f]
     [HasCompactification h] :
     Nonempty (R(f)^![ModuleCat.{u + 1} Λ] ⋙ L((u)^*[ModuleCat.{u + 1} Λ]) ≅
-      R(h)^![ModuleCat.{u + 1} Λ]) :=
-  sorry
+      R(h)^![ModuleCat.{u + 1} Λ]) := by
+  subst h
+  let c := HasCompactification.compactification (u ≫ f)
+  let a : U ⟶ pullback c.g f := pullback.lift c.i u c.comm.symm
+  have ha : a ≫ pullback.fst c.g f = c.i := pullback.lift_fst _ _ _
+  have : IsOpenImmersion c.i := c.isOpenImmersion
+  have : IsImmersion (a ≫ pullback.fst c.g f) := by rw [ha]; infer_instance
+  have : IsImmersion a := IsImmersion.of_comp a (pullback.fst c.g f)
+  have : IsProper (pullback.snd c.g f) :=
+    MorphismProperty.pullback_snd _ _ c.isProper
+  have : HasCompactification u := HasCompactification.of_isImmersion a
+    (pullback.snd c.g f) (pullback.lift_snd _ _ _)
+  let cu := HasCompactification.compactification u
+  let eu : R(u)_![ModuleCat.{u + 1} Λ] ≅
+      D(etaleLowerShriek (ModuleCat.{u + 1} Λ) u inferInstance) :=
+    canonicalEtaleCompactSupportComparison Λ u cu
+  let adjU := ((etaleLowerShriekUpperStarAdjunction
+    (ModuleCat.{u + 1} Λ) u inferInstance).mapDerivedCategoryAdjunction).ofNatIsoLeft eu.symm
+  obtain ⟨ecomp⟩ := nonempty_iso_rightDerivedLowerShriek_comp Λ u f
+  let adj := (adjU.comp
+    (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f)).ofNatIsoLeft ecomp.symm
+  exact ⟨Functor.isoWhiskerLeft R(f)^![ModuleCat.{u + 1} Λ]
+    (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} Λ) u) ≪≫
+      adj.rightAdjointUniq
+        (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) (u ≫ f))⟩
 
 end Etale
 
