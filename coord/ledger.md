@@ -22396,3 +22396,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 12:06 L: merged deliver/NJ/lem-sfb-rationalization-localization-hom-criterion (reviewer PASS; after a return; new nodes: 2)
 - 12:06 L: merged deliver/T8/Sheaf.AlgebraicGeometry.LocalFinitePresentationInverseImage (stage 3; reviewer PASS; first push; landing 20261021T120643-L-3928650 (proof); batch 20261021T120309; modules 1; new nodes 0)
 - 12:06 L: merged deliver/T8/Sheaf.CategoryTheory.DerivedCategory.ConstantTowerNormalization (stage 3; reviewer PASS; first push; landing 20261021T120647-L-3930039 (interface); batch 20261021T120309; modules 1; new nodes 0; change records: coord/changes/T8-constant-tower-normalization-proof-context.md)
+- 12:06 L: merged deliver/T8/Sheaf.CategoryTheory.ExactOpenClosedUnboundedCalculus (stage 3; reviewer PASS; first push; landing 20261021T120651-L-3931211 (proof); batch 20261021T120309; modules 1; new nodes 0)

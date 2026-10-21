@@ -25,10 +25,10 @@
    }
   },
   {
-   "text": "Use the specified exact-derived adjunction construction [def-weil-exact-derived-adjunction] for $J\\dashv P$ and $Q\\dashv I$. Here is the normalization explicitly. For an exact pair $F\\dashv G$ with unit $u$ and counit $v$, transposition degree by degree gives the cochain adjunction: the differential equation for a transposed map follows from naturality of $u,v$, and the inverse equations hold in each degree. The derived unit at $q_SK$ is the composite\n$$q_SK\\xrightarrow{q_S(C(u)_K)}q_SC(G)C(F)K\\xrightarrow{a_{G,C(F)K}^{-1}}D(G)q_TC(F)K\\xrightarrow{D(G)(a_{F,K}^{-1})}D(G)D(F)q_SK.$$\nThe derived counit at $q_TL$ is\n$$D(F)D(G)q_TL\\xrightarrow{D(F)(a_{G,L})}D(F)q_SC(G)L\\xrightarrow{a_{F,C(G)L}}q_TC(F)C(G)L\\xrightarrow{q_T(C(v)_L)}q_TL.$$\nThese extend uniquely to natural transformations by [lem-weil-pbc-localization-universal-property](2), with the exact termwise factorizations of step 1. Thus the maps are the localizations of the given maps, rather than newly chosen adjunction maps.",
+   "text": "Localize the actual degreewise adjunctions with Mathlib Adjunction.localization, installing the four CatCommSq instances from the inverses of mapDerivedCategoryFactors. Mathlib localization_unit_app and localization_counit_app give exactly the four required equations, with precisely these factorization components. This is the natural-transformation localization construction of [lem-weil-pbc-localization-universal-property], applied to the termwise factorizations of [lem-weil-pbc-exact-functor-derived-factorization]. It works with independent universes for the three categories and their derived categories.",
    "uses": [
-    "def-weil-exact-derived-adjunction",
-    "lem-weil-pbc-localization-universal-property"
+    "lem-weil-pbc-localization-universal-property",
+    "lem-weil-pbc-exact-functor-derived-factorization"
    ],
    "elementary": false,
    "source": {
@@ -37,7 +37,7 @@
    }
   },
   {
-   "text": "Check the two triangle identities for the maps in step 2 after precomposition with $q_S$ or $q_T$. Under the $a_F,a_G$ identifications, the two composites become respectively $q_T(C(v)_{C(F)K}\\circ C(F)(C(u)_K))$ and $q_S(C(G)(C(v)_L)\\circ C(u)_{C(G)L})$. In each degree these are $v_{F(K^n)}\\circ F(u_{K^n})=1$ and $G(v_{L^n})\\circ u_{G(L^n)}=1$, the original triangle identities. Clause (3) of [lem-weil-pbc-localization-universal-property] implies equality with the identity transformations on the derived categories. Hence the actual localized maps satisfy both triangles for both adjunctions.",
+   "text": "The two localized structures already satisfy the triangle identities: Adjunction.localization proves them by localization extensionality as in [lem-weil-pbc-localization-universal-property], reducing to the original componentwise triangle identities. No separate choice of adjunction or adjunction maps is made.",
    "uses": [
     "lem-weil-pbc-localization-universal-property"
    ],
@@ -48,10 +48,11 @@
    }
   },
   {
-   "text": "The open unit $1\\to PJ$ and closed counit $QI\\to1$ are isomorphisms on each object by assumption, so their termwise maps have inverse chain maps (the component inverses are natural). Their localized maps in step 2 are therefore isomorphisms. More formally, [lem-weil-pbc-localization-universal-property](2) lifts these transformations and their inverses and preserves both inverse equations. Likewise the specified zero functor identities $PI=0$ and $QJ=0$ give termwise natural isomorphisms $C(P)C(I)\\cong0$ and $C(Q)C(J)\\cong0$. The factorizations from step 1 make $D(P)D(I)$ and $D(Q)D(J)$ lifts of their localizations; clause (2) identifies them with the zero functors. Zero objects remain zero here because the localizations in [def-weil-abstract-derived-category] are additive and their zero complex represents zero. These arguments also show that the four induced functors preserve zero objects.",
+   "text": "The original open unit and closed counit are invertible in every degree, so HomologicalComplex.Hom.isIso_of_components makes their chain maps invertible. The four formulas of step 2 then give invertibility at every localized complex. Essential surjectivity of localization and naturality transport this to every derived object, proving that the derived open unit and closed counit are invertible transformations. For a mixed composite, use the exact-functor cohomology comparison of [lem-weil-pbc-exact-functor-complex-cohomology], descended as in step 5: the cohomology of D(P)D(I)H is P(I(H^n H)), hence zero by the hypothesis PI=0. The unbounded zero-object criterion (the object form of [lem-weil-pbc-unbounded-derived-iso-cohomology]) gives D(P)D(I)H=0. The same argument proves D(Q)D(J)H=0.",
    "uses": [
     "lem-weil-pbc-localization-universal-property",
-    "def-weil-abstract-derived-category"
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
    ],
    "elementary": true,
    "source": {
@@ -60,7 +61,7 @@
    }
   },
   {
-   "text": "For every integer $n$ and every $F\\in\\{J,P,Q,I\\}$, [lem-weil-pbc-exact-functor-complex-cohomology] supplies a natural isomorphism $H^n(C(F)K)\\cong F(H^n(K))$ on all cochain complexes. Combine it with $a_F$ and with $H^nq\\cong H^n$ from [def-weil-abstract-derived-category]. Both sides invert quasi-isomorphisms, and [lem-weil-pbc-localization-universal-property](2) therefore lifts this isomorphism to\n$$c_F^n:H^nD(F)\\xrightarrow{\\sim}F H^n.$$\nThis is natural for every derived morphism, since it is a lifted natural transformation, not merely an objectwise identification. It is only the existing cochain cohomology comparison descended through localization.",
+   "text": "Use the library natural comparison Functor.mapDerivedCategoryHomologyFunctorIso in each integer degree. This is exactly the descent of [lem-weil-pbc-exact-functor-complex-cohomology] through [lem-weil-pbc-localization-universal-property], using the cohomology factorizations of [def-weil-abstract-derived-category]. Naturality and NatIso.isIso_map_iff turn invertibility of D(P)(f), D(Q)(f) into invertibility of P(H^n f), Q(H^n f). The same comparisons were used for the mixed zero conclusions in step 4.",
    "uses": [
     "lem-weil-pbc-exact-functor-complex-cohomology",
     "def-weil-abstract-derived-category",
@@ -106,7 +107,6 @@
  "proof_deps": [
   "lem-weil-pbc-exact-functor-derived-factorization",
   "def-weil-abstract-derived-category",
-  "def-weil-exact-derived-adjunction",
   "lem-weil-pbc-localization-universal-property",
   "lem-weil-pbc-exact-functor-complex-cohomology",
   "lem-weil-pbc-short-five-lemma",
@@ -115,7 +115,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
-  "place": "(2), expanded abstract exact open/closed localization argument; Stacks 015F, 010N, 05QB, 05RT and 04VG supply the cited general tools"
+  "place": "(2), exact open/closed route formalized by T8 using Mathlib Adjunction.localization and the existing exact-derived cohomology comparison; all support and five-lemma arguments proved in Lean"
  },
  "mathlib_searches": [
   {
@@ -248,5 +248,15 @@
   "group": "N8",
   "result": "pass",
   "note": "Statement verbatim, node changes only lean; every hypothesis/conclusion matches the node with nothing stronger or missing. The four unit/counit equations equal Mathlib localization_unit_app/counit_app with CatCommSq=mapDerivedCategoryFactors.symm, so the adjunctions are pinned uniquely. Joint reflection, support unit and essImage full faithfulness are correct. Nine independent universes. Imports = statement uses + recorded proof-dep modules (brief l.104). Docstrings with source and 8 steps; sorry only. nt_compile unavailable because the live build was absent (.lake rebuilt 12:06); Lean 4.33.1 probes on restored Mathlib: delivered statement (inline mapHomologicalComplex) compiles with only sorry; canonical localized adjunction satisfies the pinned clauses by rw+rfl. No findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T8",
+  "result": "pass",
+  "landing": "20261021T120651-L-3931211",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
