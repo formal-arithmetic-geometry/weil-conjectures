@@ -107,7 +107,14 @@ theorem sfCompactSupportProjection_transition (T : Scheme.{u}) (n : ℕ) :
         (constantSheaf (ProEt.topology T) CommRingCat.{u + 1}).map
           (CommRingCat.ofHom (Padic.coefficientExtensionTransition l E (n + 1)).ulift) =
       completedIntegralCommRingProjectionUnrestricted l E T n := by
-  sorry
+  apply (sheafCompose (ProEt.topology T)
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map_injective
+  change limit.π (integralCoefficientSheafSystem l E T) (Opposite.op (n + 1)) ≫
+      integralCoefficientSheafTransition l E T n =
+    limit.π (integralCoefficientSheafSystem l E T) (Opposite.op n)
+  simpa only [integralCoefficientSheafSystem, Functor.ofOpSequence_map_homOfLE_succ]
+    using limit.w (integralCoefficientSheafSystem l E T)
+      (homOfLE (Nat.le_succ n)).op
 
 /-- The sectionwise identity composite restriction comparison, supplied by the shared
 commutative ring-sheaf restriction interface. Source: Stacks Tags 03DA and 03CO

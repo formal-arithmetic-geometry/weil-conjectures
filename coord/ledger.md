@@ -23196,3 +23196,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:32 L: merged deliver/Q09/lem-sfb-trivial-ladic-derived-exterior (reviewer FIX; first push; new nodes: 3)
 - 17:32 L: merged deliver/NU/lem-sfb-wstrict-lisse-component-cohomology (reviewer FIX; first push; new nodes: 1)
 - 17:32 L: merged deliver/NJ/lem-sfb-integral-lattice-cubical-contraction (reviewer PASS; first push; new nodes: 0)
+- 17:33 L: merged deliver/A6/Sheaf.Paper.SfIntegralCompactSupportConstructible (stage 3; reviewer PASS; first push; landing 20261021T173332-L-3587733 (proof); batch 20261021T173331; modules 1; new nodes 0)
