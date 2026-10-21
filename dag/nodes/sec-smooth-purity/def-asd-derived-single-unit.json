@@ -1,0 +1,91 @@
+{
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-asd-smooth-tensor",
+   "place": "Proof second and third paragraphs: the ordinary projective-line adjunction uses the supported Cartier Kummer class",
+   "via": [
+    "lem-asd-ordinary-supported-kummer",
+    "lem-asd-ordinary-finite-p1-adjunction"
+   ]
+  },
+  "same_as": []
+ },
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/lem-amb-cartier-kummer-map.proof.md",
+  "place": "Paragraph 4: the support-Hom map and its forgetting-support unit normalization"
+ },
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An exact adjunction induces a derived adjunction whose unit on a single complex agrees with the single of the ordinary unit",
+   "results": "derived_unit, derived'_unit, derivedη, derivedε, derivedη_fac_app and its reassociated form. These give localization-level units and their factorization, but not the exact single-object computation.",
+   "date": "2026-10-21",
+   "verdict": "generic ingredients"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"singleFunctor\", \"unit\"",
+   "results": "No hits.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*unit.*single|single.*derived.*unit",
+   "results": "No Mathlib hits. Local search found DerivedAdjunctionSingleZero, which treats the degree-zero homology of the bounded-below unit rather than the full unbounded exact comparison.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OrdinarySupportedCartierKummer",
+  "date": "2026-10-21",
+  "group": "C3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "id": "def-asd-derived-single-unit",
+ "kind": "definition",
+ "title": "Canonical full derived single-object adjunction unit",
+ "statement": "Let C and D be abelian categories with chosen unbounded derived categories [def-weil-abstract-derived-category]. Assume the monoidal, tensor, exact countable-colimit and functorial-flat-resolution hypotheses needed for the library total left-derived functor on C, and K-injective resolutions on D. For additive adjoints f:C→D and g:D→C with f exact, X in C, Y in D and c:f(X)→Y, name the morphism X[0]→Rg(Y[0]) given by the unit of the existing full adjunction Lf ⊣ Rg, followed by Rg of the canonical exact single comparison Lf(X[0])→f(X)[0] and c[0]. This is an explicit composite of the existing morphisms and makes no new choice.",
+ "stmt_deps": [
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.DerivedSingleUnit",
+  "file": "lean/Sheaf/CategoryTheory/DerivedSingleUnit.lean",
+  "declaration": "CategoryTheory.Adjunction.derivedSingleUnit",
+  "statement": "def derivedSingleUnit (adj : f ⊣ g) (X : C) (Y : D) (c : f.obj X ⟶ Y) :\n    (DerivedCategory.singleFunctor C 0).obj X ⟶\n      g.rightDerivedFunctor.obj ((DerivedCategory.singleFunctor D 0).obj Y)",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261021T002927-L-1578869",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261021T002927-L-1578869",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
