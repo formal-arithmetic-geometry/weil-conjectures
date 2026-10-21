@@ -21836,3 +21836,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:17 L: returned deliver/Q74/lem-trf-section-rees-noetherian-geometry (reviewer RETURN: L: independent stage-2 immutable head be2267ef680d: H2: delivery added theorem stmt_dep lem-pur-dnc-etale-rees-chart, bu)
 - 09:17 L: returned deliver/Q33/lem-weil-proetale-tor-interval-shift (reviewer RETURN: L: independent stage-2 immutable head c5a5b60e3bd7: H13: the delivery rebinds the landed NE record of def-weil-derived-t)
 - 09:17 L: returned deliver/NA/lem-cbc-completed-ring-strict-finite-exchange (reviewer RETURN: L: independent stage-2 immutable head e75eae498358: H13: the delivery rebinds the def-weil-pbc-completed-pullback record)
+- 09:17 L: returned deliver/NN/lem-weil-pbc-affine-cohomology-etale-module-realization (reviewer RETURN: L: independent stage-2 immutable head f860f10ce33d: Item maths correct (H3 clauses, action pinned on local classes, uniq)
