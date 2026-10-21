@@ -16,7 +16,8 @@
   "def-weil-regular-scheme",
   "def-trf-strict-normal-crossings-boundary",
   "def-sfb-lisse-coefficient-module",
-  "def-sfb-profinite-test-objects"
+  "def-sfb-profinite-test-objects",
+  "def-sfb-strict-local-kummer-tame-module"
  ],
  "proof": [
   {
@@ -270,5 +271,37 @@
   "group": "Q03",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-a65aebd25 (reviewer sub-agent of L); spot-checked: I read every step in full. The statement, stmt_deps and source are unchanged from the live unsplit node. There are no new nodes, no cycle, nothing is on the dropped list and nothing cites SGA. Step 1: lem-sfb-alpha-iso holds for any condensed ring, so f^* is exact and Lj^*=D(j^*); lem-sfb-internal-module-operations-transport identifies the internal and sectionwise adjunctions, including units. Step 2: X[P]=Spec LC(P,Z)xX (def-sfb-profinite-test-objects), so T[P] is the root tower over the affine pro-etale U[P]; lisse modules pull back. Step 3: the hypotheses of lem-sfb-root-coordinate-supported-vanishing match the item exactly (chart B, reduced SNC t_1..t_r, affine pro-etale U, T_J, a not in J). The complement of D_{a,J} in the affine T_J is principal, hence quasi-compact, so clause 4 of det-lem-formal-closed-support-adjunction makes the unit invertible. Step 4: a proper induction from J_0 empty. The composite unit Ri_m*(eta_{J_m,a}) o eta_m comes from lem-sfb-derived-composition-adjunction-normalization, with the Grothendieck hypothesis via the E_T equivalence; I checked the formula. Step 6: I verified the mate identity b o g^*eta = eta' by hand through the triangle identity. Step 7: the Q-family case works on the actual action map, with (T[P])[Q]=T[P x Q]. Edge cases checked: A empty, r=0, rank 0, empty P or chart, and empty D; t_a is a nonzerodivisor otherwise. The split is not a relabelling: the cited input is strictly smaller (one-coordinate local cohomology, no naturality). Accepted tool_uses: det-lem-formal-closed-support-adjunction, lem-sfb-derived-composition-adjunction-normalization, lem-weil-pbc-ring-sheaves-grothendieck, lem-sfb-alpha-iso, lem-sfb-internal-module-operations-transport; all are generic. Maintainer note: lem-sfb-root-tower-boundary-acyclicity repeats this chain inline and could cite this item."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RootTowerPunctureInvariance",
+  "declaration": "AlgebraicGeometry.ProEtale.rootTower_puncture_invariance",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.rootCoordinateOpen",
+   "AlgebraicGeometry.ProEtale.rootTestOpen",
+   "AlgebraicGeometry.ProEtale.CondensedRing.punctureDerivedAdjunction",
+   "AlgebraicGeometry.ProEtale.CondensedRing.punctureSquareComparison",
+   "AlgebraicGeometry.ProEtale.CondensedRing.punctureDerivedExchange",
+   "AlgebraicGeometry.ProEtale.CondensedRing.punctureUnitExchange",
+   "AlgebraicGeometry.ProEtale.CondensedRing.punctureIdentityLeftComparison",
+   "AlgebraicGeometry.ProEtale.CondensedRing.punctureIdentityRightComparison",
+   "AlgebraicGeometry.ProEtale.CondensedRing.PunctureIdentityAssertions",
+   "AlgebraicGeometry.ProEtale.CondensedRing.PunctureUnitAssertions",
+   "AlgebraicGeometry.ProEtale.rootTower_puncture_invariance"
+  ],
+  "file": "lean/Sheaf/Paper/RootTowerPunctureInvariance.lean",
+  "statement": "theorem rootTower_puncture_invariance (p ℓ : ℕ) [Fact p.Prime] [Fact ℓ.Prime] (hpℓ : p ≠ ℓ) (k : Type u) [Field k] [CharP k p] (E Ω : Type u) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] [NormedField Ω] [NormedAlgebra E Ω] [IsAlgClosure E Ω] (Y : Scheme.{u}) (y : Y ⟶ Spec (.of k)) [LocallyOfFiniteType y] [QuasiCompact y] [IsSeparated y] (hY : IsRegularScheme Y) (A : Type u) [CommRing A] (b : Spec (.of A) ⟶ Y) [Etale b] (r : ℕ) (t : Fin r → A) (H : (Spec (.of A)).IdealSheafData) (hH : IsStrictNormalCrossingsBoundary H) (hproduct : H = Scheme.IdealSheafData.ofIdealTop (Ideal.span {(Scheme.ΓSpecIso (CommRingCat.of A)).inv (∏ i, t i)})) (hbranches : Set.range (fun i : Fin r ↦ PrimeSpectrum.zeroLocus ({t i} : Set A)) = Set.image (Set.image Subtype.val) (irreducibleComponents (H.support : Set (Spec (.of A))))) (R : Type u) [CommRing R] (a : A →+* R) [WeaklyEtale (Spec.map (CommRingCat.ofHom a))] : (∀ (N : Mod (Sheaf (Scheme.ProEt.topology (Spec (.of (tameRootAlgebra p (fun i ↦ a (t i)))))) Ab.{u + 1}) (condensedRingObj (Profinite.continuousCoefficientRingObj E) (Spec (.of (tameRootAlgebra p (fun i ↦ a (t i))))))), IsLisseCoefficientModule (Profinite.continuousCoefficientRingObj E) N → ∀ (s : Finset (Fin r)) (U' : Scheme.{u}) (v : U' ⟶ Spec (.of R)) [WeaklyEtale v] (P : Profinite.{u}), CondensedRing.PunctureUnitAssertions (Profinite.continuousCoefficientRingObj E) (rootTestOpen ((TopologicalSpace.Opens.map (pullback.fst (Spec.map (CommRingCat.ofHom (algebraMap R (tameRootAlgebra p (fun i ↦ a (t i)))))) v).base).obj (rootCoordinateOpen p (fun i ↦ a (t i)) s)) P).ι ((DerivedCategory.singleFunctor _ 0).obj ((CondensedRing.upperStar (Profinite.continuousCoefficientRingObj E) (((profiniteToProEtOf _).obj P).hom ≫ pullback.fst (Spec.map (CommRingCat.ofHom (algebraMap R (tameRootAlgebra p (fun i ↦ a (t i)))))) v)).obj N))) ∧ (∀ (N : Mod (Sheaf (Scheme.ProEt.topology (Spec (.of (tameRootAlgebra p (fun i ↦ a (t i)))))) Ab.{u + 1}) (condensedRingObj (Profinite.continuousCoefficientRingObj Ω) (Spec (.of (tameRootAlgebra p (fun i ↦ a (t i))))))), IsLisseCoefficientModule (Profinite.continuousCoefficientRingObj Ω) N → ∀ (s : Finset (Fin r)) (U' : Scheme.{u}) (v : U' ⟶ Spec (.of R)) [WeaklyEtale v] (P : Profinite.{u}), CondensedRing.PunctureUnitAssertions (Profinite.continuousCoefficientRingObj Ω) (rootTestOpen ((TopologicalSpace.Opens.map (pullback.fst (Spec.map (CommRingCat.ofHom (algebraMap R (tameRootAlgebra p (fun i ↦ a (t i)))))) v).base).obj (rootCoordinateOpen p (fun i ↦ a (t i)) s)) P).ι ((DerivedCategory.singleFunctor _ 0).obj ((CondensedRing.upperStar (Profinite.continuousCoefficientRingObj Ω) (((profiniteToProEtOf _).obj P).hom ≫ pullback.fst (Spec.map (CommRingCat.ofHom (algebraMap R (tameRootAlgebra p (fun i ↦ a (t i)))))) v)).obj N))) ∧ CondensedRing.PunctureIdentityAssertions (Profinite.continuousCoefficientRingObj E) ∧ CondensedRing.PunctureIdentityAssertions (Profinite.continuousCoefficientRingObj Ω)",
+  "branch": "newtargets-dag",
+  "by": "NY",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The isomorphism has hom equal to the actual derived adjunction unit, canonically expressed with the exact termwise pullback. Both E and its norm-topological algebraic closure are included. The assertion predicates expand to normalized isomorphisms, module-map naturality, actual whole-scheme exchange equations and inverse compatibility. Identity-open normalization is given by the canonical left comparison and its right mate. The added landed statement dependencies own the reused tameRootAlgebra and parameterRootProjection constructions; neither theorem is assumed in place of the puncture result. Repair of return 47122defe385: the scheme projection is written directly as Spec.map of the canonical algebraMap from R to tameRootAlgebra; no theorem dependency is used to obtain this plain construction. Dropped lem-sfb-root-tower-lisse-morphism-extension from stmt_deps and its module import."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-67a981c52",
+  "group": "NY",
+  "result": "pass",
+  "note": "Re-delivery fixing return 47122defe385 (H2): parameterRootProjection inlined as Spec.map (CommRingCat.ofHom (algebraMap R (tameRootAlgebra p (a∘t)))), definitionally its old body (RootTowerLisseMorphismExtension.lean:57-59); theorem stmt_dep lem-sfb-root-tower-lisse-morphism-extension and its import dropped; explicit public imports added. stmt_deps = 9 base defs + landed def node def-sfb-strict-local-kummer-tame-module (owns tameRootAlgebra). Rest unchanged and re-read: hypotheses, all-continuous coefficients, root-tower relations, rootTestOpen/j_{A,P}, unit iso = actual derived unit, module-map naturality, adjunct exchange on all squares, identity clause; edge cases s=∅, r=0, rank 0, empty P/chart; universes ok; sorry only; docstrings ok; statement verbatim; not on dropped list; live node still lean:null. Advisory: stale note sentence naming parameterRootProjection; unused/redundant imports. No compile (no file changed)."
  }
 }
