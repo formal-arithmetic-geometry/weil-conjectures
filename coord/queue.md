@@ -1,6 +1,6 @@
 # Work queue
 
-134 items; claim with `tools/claim.py next <group> [--stage N]`.
+132 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Rework: quarantined by the upstream sync (14 clusters, 948 modules)
 
@@ -49,7 +49,7 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `sk-thm-pe-wc-cover` | - | none |
 | `def-per-support-condition` | - | none |
 
-## Stage 2: nodes to state (30)
+## Stage 2: nodes to state (28)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -59,7 +59,6 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-fd-whole-tower-integral-pullback-comparison` | 1 | state | 0 |
 | `lem-pe-internal-module-sectionwise-short-exact` | 1 | state | 0 |
 | `lem-per-adic-normalized-fibre-comparisons` | 1 | state | 0 |
-| `lem-sfb-bicosimplicial-shuffle-totalization` | 1 | state | 0 |
 | `lem-sfb-cech-localization-unit-totalization` | 1 | state | 0 |
 | `lem-sfb-condensed-derived-invariant-bar` | 1 | state | 0 |
 | `lem-sfb-condensed-product-bar-comparison` | 1 | state | 0 |
@@ -77,7 +76,6 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-snc-finite-root-regular-ring` | 1 | state | 0 |
 | `lem-sfb-snc-tame-finite-fibre-classification` | 1 | state | 0 |
 | `lem-sfb-snc-universal-residual-charts` | 1 | state | 0 |
-| `lem-sfb-supported-finite-stage-topology-defect` | 1 | state | 0 |
 | `lem-sfb-tame-root-tower-extension` | 1 | state | 0 |
 | `lem-sfb-tame-stratum-kummer-descent` | 1 | state | 0 |
 | `lem-zl-raw-heart-adic-lisse-stratification` | 1 | state | 0 |
