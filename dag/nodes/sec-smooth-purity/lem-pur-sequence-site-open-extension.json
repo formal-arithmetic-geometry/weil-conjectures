@@ -336,5 +336,38 @@
   "group": "Q81",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q81-fc0f5e6c0 (reviewer sub-agent of L); spot-checked: I read the item's statement, all 8 steps and the statements of all 15 cited nodes in full, plus Stacks 03DI/03DJ/03CY/04IE (sites-modules.tex, extension by zero at l.2058) and 04GZ/0791. I also read the first proof sentence of lem-weil-compact-support-representative-independence in main-20261015. Pre-checks: the item is not in route-pivot-dropped; it is unsplit on live and side-live with no proof (no supersession); there is no re-split note for the item (the parent's 10-21 re-split note created this node); the statement is byte-identical to base; there is no SGA citation. The maths is correct. Step 1: ΔH is a sheaf by diagram-site-realization with J=N^op; its element site is (C/V)×N, and slice-adjunction applies at a non-representable sheaf. Step 2: exact J̃⊣L. Step 3: e_q is the identity on the common additive sheafification. Step 4: composition, plus a transpose formula the step derives itself from sheafification. Step 5: I recomputed the triple-index transition t_{l,n}=Res(t_{m,n})t_{l,m}. Step 6: transposing system maps gives J⊣L, and conjugate-iso gives a unit-preserving J≅J̃. Step 7: exact termwise descent plus localization (2). Step 8: scalar endomorphisms. Edge cases checked: V empty, V=W, zero ring, non-flat q, m=n, unbounded complexes. 0 new nodes, no duplicate. lem-sf-open-extension-scalar-restriction-coherence covers finite constant rings only. I accepted the three generic tool_uses: diagram-site-realization, ringed-sheaf-slice-adjunction and ringed-presentation-transport. FIX (B3): the statement's 'localization at the constant sequence of the subterminal sheaf' cited only def-pur-localized-ringed-site, which defines localization at a site object, but ΔH is not representable in the sequence site. I added [lem-weil-pbc-ringed-sheaf-slice-adjunction] (localization at a sheaf of sets) to that sentence and to stmt_deps; the meaning is unchanged, and the node was already a proof_dep, so no cycle. Corrected file: fixes/dag/nodes/sec-smooth-purity/lem-pur-sequence-site-open-extension.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SequenceSiteOpenExtension",
+  "declaration": "WeilConjectures.SemilinearSections.sequenceSiteOpenExtension",
+  "declarations": [
+   "WeilConjectures.SemilinearSections.openTower",
+   "WeilConjectures.SemilinearSections.openTowerMap",
+   "WeilConjectures.SemilinearSections.openExtensionSection",
+   "WeilConjectures.SemilinearSections.SequenceOpenCoefficientData",
+   "WeilConjectures.SemilinearSections.SequenceOpenOrdinary",
+   "WeilConjectures.SemilinearSections.SequenceOpenOrdinary.Transitions",
+   "WeilConjectures.SemilinearSections.SequenceOpenOrdinary.Scalars",
+   "WeilConjectures.SemilinearSections.SequenceOpenOrdinary.derivedLevel",
+   "WeilConjectures.SemilinearSections.SequenceOpenCoefficientData.derivedComparison",
+   "WeilConjectures.SemilinearSections.SequenceOpenOrdinary.DerivedTransitions",
+   "WeilConjectures.SemilinearSections.SequenceOpenDerivedAdjunction",
+   "WeilConjectures.SemilinearSections.sequenceSiteOpenExtension"
+  ],
+  "file": "lean/Sheaf/Paper/SequenceSiteOpenExtension.lean",
+  "statement": "theorem sequenceSiteOpenExtension (W : Scheme.{u}) (V : W.ProEt) [IsOpenImmersion V.hom] (B : ℕ → Sheaf (Scheme.ProEt.topology W) CommRingCat.{max (u + 1) r}) (τ : ∀ n : ℕ, B (n + 1) ⟶ B n) : ∃ O : SequenceOpenOrdinary.{u + 1, u, r} (Scheme.ProEt.topology W) V B τ, O.Transitions ∧ O.Scalars.{u + 1, u, r, s} ∧ O.DerivedTransitions ∧ Nonempty (SequenceOpenDerivedAdjunction.{u + 1, u, r} (Scheme.ProEt.topology W) V B τ O)",
+  "branch": "sheaf-dag",
+  "by": "NG",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The open site is the canonical localized presentation Over V; Scheme.ProEt.sliceEquiv W V identifies this presentation, with its topology, with V.left.ProEt. Its ring is the actual restriction (B n).over V. N starts at zero, with index n denoting the source level n+1. All helper data and predicates belong to this node; only the final existence theorem is postponed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-85253c2a1",
+  "group": "NG",
+  "result": "pass",
+  "note": "Delta vs side-live is only the item's lean field; the statement appears verbatim in the file; only the main theorem has sorry. Hypotheses are an arbitrary open immersion V:W.ProEt and the tower B,τ, nothing more; site universes (u+1,u) kept, coefficients max(u+1) r. Clauses checked: geometric morphism (inverse image pinned as restriction along (1×Over.forget), ring map identity on sections, modules right adjoint of L); localization via H ≅ constant uliftYoneda V, subterminal, inverse⋙slice ≅ Over.star H with no representability assumed; Jfun ⊣ L with L pinned by HEq and exactness as conclusions; level isos and Transitions for all n≤m with direction j_{!,Bm}Res ≅ Res j_{!,Bn}; comparison pinned on summand generators plus comp/identity/unit/counit; derived level/comparison as localization definitions, DerivedTransitions, derived adjunction with Q-normalized unit/counit; Scalars with f,g pinned and Jfun.map f = g. localizedSystemAdjunction is .choose of an ∃! theorem, so that stmt_dep is genuine. Edge cases covered: empty V, V=W, zero rings, non-flat maps, m=n, unbounded complexes. No recompile because no fix (worker reports clean 38.4 s/36.4 s). Advisory: openTower/openTowerMap duplicate openRings/openTransitions of def-coef-semilinear-derived-calculus (not a stmt_dep, S2 cannot add it); restrictionLevel unpinned, so O.level is canonical only up to a transition-compatible twist; some imports unused by the statement; NG second reading by the same worker but lists clauses and changes, accepted under H11."
  }
 }
