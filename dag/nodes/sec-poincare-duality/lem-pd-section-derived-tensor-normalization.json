@@ -23,9 +23,123 @@
   "lem-weil-pbc-site-derived-tensor-descent",
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each $T$, write $Q_T$ for the section-module homotopy-to-derived localization and $\\mathcal P_T$ for its full subcategory of K-flat complexes with flat terms. The exact equivalence $E_T$ identifies flat objects, K-flat complexes, acyclicity and total tensors by [lem-pe-internal-section-tensor-comparison]. Thus it identifies quasi-isomorphisms (their cohomology maps are isomorphisms under an exact equivalence). Its inverse carries $\\mathcal P_T$ to internal K-flat complexes with flat terms. By [lem-weil-pbc-site-derived-tensor-descent], every section-derived object is isomorphic to $Q_TP$ for $P\\in\\mathcal P_T$, and restriction to pairs of these representatives is fully faithful. Consequently these are also resolving representatives internally. Use $D(E_T)$ and its pullback comparison with resolution transformations exactly as fixed by [lem-pd-section-derived-pushpull-normalization]. The site objects and module sections both lie in the coefficient universe $u+1$, so the hypothesis on the site in the tensor-equivalence lemma is satisfied; its sheaf-tensor hypotheses hold because [sk-def-sfb-sheaf-tensor] gives, on the small pro-étale site, the closed symmetric monoidal sheafified objectwise tensor over $\\mathbf Z$ with strong monoidal sheafification, so tensoring preserves local isomorphisms.",
+   "uses": [
+    "lem-pe-internal-section-tensor-comparison",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-pd-section-derived-pushpull-normalization",
+    "sk-def-sfb-sheaf-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS and 06YU, K-flat resolving representatives; internal/section equivalence"
+   }
+  },
+  {
+   "text": "On internal representatives $P,Q$ let $t_{P,Q}:E_T\\operatorname{Tot}(P\\otimes Q)\\xrightarrow{\\sim}\\operatorname{Tot}(E_TP\\otimes E_TQ)$ be the total-complex comparison of [lem-pe-internal-section-tensor-comparison]. Conjugate its localization by the two representative tensor isomorphisms to obtain\n$D(E_T)(Q_{\\rm int}P\\otimes^{\\mathbf L}Q_{\\rm int}Q)\\xrightarrow{\\sim}Q_TE_TP\\otimes^{\\mathbf L}Q_TE_TQ$.\nHere the internal tensor is the relative two-variable K-flat derived tensor of [sk-def-sfb-derived-tensor-hom], and the section tensor and its representative isomorphism are those of [lem-weil-pbc-site-derived-tensor-descent]. Naturality of $t$ gives naturality on representatives. When a quasi-isomorphism is inverted its naturality equation can be multiplied by the inverse on either side, so the same equation holds on the localized categories. Full faithfulness of restriction in [lem-weil-pbc-site-derived-tensor-descent] gives a unique extension $\\theta_T$ to all pairs, and also extends the inverse. Their composites are identities because this holds on representatives. This proves the claimed tensor identification together with its localization comparison, rather than choosing an unrelated tensor isomorphism.",
+   "uses": [
+    "lem-pe-internal-section-tensor-comparison",
+    "sk-def-sfb-derived-tensor-hom",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU, derived tensor and its representative comparison"
+   }
+  },
+  {
+   "text": "The regular module in degree zero is flat and K-flat: tensoring with it is the identity on modules and, respectively, on total complexes, via the unitors. Thus it is itself an allowed flat-term representative. The map $E_T(R_T)\\cong R_{T,\\rm sec}$ and both unitors are identified by [lem-pe-internal-section-tensor-comparison]. Localizing these very maps identifies the derived regular-module unit. The internal derived associators and unitors are induced from complexes by [lem-sfb-derived-monoidal]; the section ones are their corresponding total-tensor maps. On K-flat representatives the two sides of the comparison diagrams are equal because $t$ respects the ordinary associators and unitors. For a diagram in three variables, first fix two resolving representatives and use localization faithfulness in the third variable, then fix one and repeat in the second, and finally repeat in the first. The resolving localizations in [lem-weil-pbc-site-derived-tensor-descent] and the faithfulness clause of [lem-weil-pbc-localization-universal-property] justify each repetition. This proves the constraint comparisons for $\\theta_T$ on all objects.",
+   "uses": [
+    "lem-pe-internal-section-tensor-comparison",
+    "lem-sfb-derived-monoidal",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU; ordinary constraints and localization of total-tensor constraints"
+   }
+  },
+  {
+   "text": "Write $F=f^*_{\\rm sec}$. For $P,Q\\in\\mathcal P_Y$ totalize the ordinary tensor arrow of [lem-pd-section-ordinary-oplax-normalization] to obtain\n$b_{P,Q}:F\\operatorname{Tot}(P\\otimes Q)\\xrightarrow{\\sim}\\operatorname{Tot}(FP\\otimes FQ)$.\nThe direct-sum comparison used here is the canonical one: $F$ is the specified left adjoint of [def-pd-section-module-operations-data], and $\\operatorname{Hom}(F(\\bigoplus A_i),B)=\\operatorname{Hom}(\\bigoplus A_i,f_*B)=\\prod_i\\operatorname{Hom}(FA_i,B)$ gives its coproduct universal property. On the $(p,q)$ summand, $b$ sends $s\\otimes(x\\otimes y)$ to $(s\\otimes x)\\otimes(1\\otimes y)$. Naturality of the ordinary arrow with $d_P$ and $d_Q$ identifies its two differential components; both second components have the same factor $(-1)^p$ from [def-pc-tensor-complex-sheaves]. Thus $b$ is a chain isomorphism, natural in both complexes. This is also the image of the actual internal total oplax arrow under $E_X,E_Y$, because the ordinary normalization asserts equality with that arrow, not just invertibility of its source and target.",
+   "uses": [
+    "lem-pd-section-ordinary-oplax-normalization",
+    "def-pd-section-module-operations-data",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, totalization of the tensor-pullback isomorphism; Tag 03EL"
+   }
+  },
+  {
+   "text": "Let $r_Y:Q_Y\\operatorname{Tot}(P\\otimes Q)\\xrightarrow{\\sim}Q_YP\\otimes^{\\mathbf L}Q_YQ$ and $r_X:Q_X\\operatorname{Tot}(FP\\otimes FQ)\\xrightarrow{\\sim}Q_XFP\\otimes^{\\mathbf L}Q_XFQ$ be the representative comparisons of [lem-weil-pbc-site-derived-tensor-descent]. Pullback preserves K-flat complexes with flat terms by [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], so $r_X$ applies. Write $\\epsilon_A:LF(Q_YA)\\to Q_XFA$ for the specified derived-pullback comparison. Both $\\epsilon_P,\\epsilon_Q$ and $\\epsilon_{\\operatorname{Tot}(P\\otimes Q)}$ are invertible by [lem-weil-pbc-kflat-tensor-pullback-computation-universes]. Put\n$a=\\epsilon_{\\operatorname{Tot}(P\\otimes Q)}\\circ LF(r_Y^{-1})$ and $c=r_X^{-1}\\circ(\\epsilon_P\\otimes^{\\mathbf L}\\epsilon_Q)$.\nThus $a$ runs from $LF(Q_YP\\otimes^{\\mathbf L}Q_YQ)$ to $Q_XF\\operatorname{Tot}(P\\otimes Q)$ and $c$ from $LF(Q_YP)\\otimes^{\\mathbf L}LF(Q_YQ)$ to $Q_X\\operatorname{Tot}(FP\\otimes FQ)$. All the hypotheses of [lem-weil-pbc-tensor-comparison-descent-representatives] now hold: full faithfulness is the cited tensor descent, preservation of representatives is the cited pullback theorem, the two $r$'s are specified, $b$ is Step 4, and the required $\\epsilon$'s are invertible. It gives the unique natural isomorphism whose representative component is $c^{-1}\\circ Q_X(b_{P,Q})\\circ a$. This is the canonical ringed tensor isomorphism: it is obtained by localizing the ordinary tensor arrow with these resolution comparisons, the construction in Tag 07A4.",
+   "uses": [
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-kflat-tensor-pullback-computation-universes",
+    "lem-weil-pbc-tensor-comparison-descent-representatives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, lemma-pullback-tensor-product; Tag 0G7E; representative descent square"
+   }
+  },
+  {
+   "text": "Let $\\widehat\\delta_f$ denote the actual internal derived oplax arrow after conjugating by $D(E_T)$, $\\theta_T$ and the pullback comparison. By the meaning of the arrow induced by internal pullback and localization, its representative square has bottom arrow the localization of the ordinary internal total oplax map and vertical arrows the tensor and pullback resolution comparisons. Step 4 identifies that bottom arrow with $Q_X(b_{P,Q})$. Step 2 identifies the tensor resolution comparisons, and [lem-pd-section-derived-pushpull-normalization] identifies the pullback resolution transformations themselves, so the vertical arrows are precisely $a$ and $c$ of Step 5. Hence $c\\circ\\widehat\\delta_{f,Q_YP,Q_YQ}=Q_X(b_{P,Q})\\circ a$. Multiplying by $c^{-1}$ gives exactly the representative component of the ringed arrow in Step 5. Restriction to pairs of resolving representatives is faithful by [lem-weil-pbc-site-derived-tensor-descent]; therefore the two specified natural transformations are equal on all derived objects. The argument compares their defining squares and does not identify maps merely because both are isomorphisms.",
+   "uses": [
+    "lem-pd-section-ordinary-oplax-normalization",
+    "lem-pd-section-derived-pushpull-normalization",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, equality after the defining localization/resolution comparisons"
+   }
+  },
+  {
+   "text": "The inverse of the ordinary arrow on a tensor summand sends $(s\\otimes x)\\otimes(t\\otimes y)$ to $st\\otimes(x\\otimes y)$ by [lem-pd-section-ordinary-oplax-normalization]. The two composites are identities there, so localization preserves the two inverse equations by [lem-weil-pbc-localization-universal-property]. Thus the actual lax arrow $\\mu_f=\\delta_f^{-1}$ is carried to the inverse of the ringed arrow identified in Step 6. The unit arrow in the same ordinary normalization is scalar multiplication. Evaluate it on the degree-zero regular-module representatives of Step 3: the pullback resolution comparison is invertible on these by [lem-weil-pbc-kflat-tensor-pullback-computation-universes], and the resulting arrow is the same scalar multiplication on both sides. The ordinary associator and unitor compatibility is part of the ordinary normalization. Totalization respects those equations, since on each summand the maps are those ordinary maps with the same degrees and signs as in Step 4. Apply the one-variable localization faithfulness of [lem-weil-pbc-localization-universal-property] successively in each variable, as in Step 3, using the resolving representatives of [lem-weil-pbc-site-derived-tensor-descent]. This proves the tensor-unit and constraint compatibility of the identified natural transformations.",
+   "uses": [
+    "lem-pd-section-ordinary-oplax-normalization",
+    "lem-weil-pbc-localization-universal-property",
+    "lem-weil-pbc-kflat-tensor-pullback-computation-universes",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 03EL and 07A4; scalar-multiplication unit and localized constraint equations"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pe-internal-section-tensor-comparison",
+  "sk-def-sfb-sheaf-tensor",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-pd-section-derived-pushpull-normalization",
+  "sk-def-sfb-derived-tensor-hom",
+  "lem-sfb-derived-monoidal",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-pd-section-ordinary-oplax-normalization",
+  "def-pd-section-module-operations-data",
+  "def-pc-tensor-complex-sheaves",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-kflat-tensor-pullback-computation-universes",
+  "lem-weil-pbc-tensor-comparison-descent-representatives"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YU, 0G7E and 07A4, with the internal/section normalization argument written explicitly by N6; ordinary normalization uses sites-modules.tex Tag 03EL."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -68,10 +182,45 @@
    "results": "{\"n_hits\": 1, \"top\": [\"CategoryTheory.Localization.natTrans₂_ext\"], \"note\": \"\", \"digest\": \"bf75f81431a7a1b4\"}",
    "date": "2026-10-21",
    "verdict": "no match for this node: this is generic two-variable localization extensionality, already supplied by lem-weil-pbc-site-derived-tensor-descent; it does not compare the internal module oplax map to the independently specified ringed one"
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|[Dd]erived.*[Tt]ensor|[Tt]ensor.*[Dd]erived",
+   "results": "{\"n_hits\": 7, \"top\": [\"Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean\", \"Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Tor.lean\", \"Mathlib/CategoryTheory/Monoidal/Tor.lean\", \"Mathlib/CategoryTheory/Monoidal/Tor.lean\", \"Mathlib/CategoryTheory/Monoidal/Tor.lean\", \"Mathlib/CategoryTheory/Monoidal/Tor.lean\"], \"note\": \"\", \"digest\": \"ac25ea8a01109eb0\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: generic localization extensionality, ordinary pullback/unit or monoidal transport and homology Tor results do not identify the specified internal/section K-flat derived tensor and actual pullback arrows"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor comparison under a monoidal equivalence agrees with pullback tensor comparison on K-flat resolutions",
+   "results": "{\"n_hits\": 8, \"top\": [\"CategoryTheory.Monoidal.transportStruct_tensorHom\", \"CategoryTheory.Monoidal.transportStruct\", \"CategoryTheory.FreeMonoidalCategory.HomEquiv.below.tensor\", \"CategoryTheory.FreeMonoidalCategory.HomEquiv.tensor\", \"CategoryTheory.Monoidal.transportStruct_tensorObj\", \"CategoryTheory.Equivalence.monoidalOfPrecompFunctor\", \"CategoryTheory.instIsMonoidalFunctorCongrLeft\", \"CategoryTheory.MonoidalClosed.instTransported\"], \"note\": \"\", \"digest\": \"cc30555e71b2db6a\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: generic localization extensionality, ordinary pullback/unit or monoidal transport and homology Tor results do not identify the specified internal/section K-flat derived tensor and actual pullback arrows"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.natTrans₂_ext",
+   "results": "{\"n_hits\": 1, \"top\": [\"CategoryTheory.Localization.natTrans₂_ext\"], \"note\": \"\", \"digest\": \"bf75f81431a7a1b4\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: generic localization extensionality, ordinary pullback/unit or monoidal transport and homology Tor results do not identify the specified internal/section K-flat derived tensor and actual pullback arrows"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact symmetric monoidal equivalence between internal sheaf modules and section modules identifies K-flat derived tensor and the actual derived pullback oplax natural transformation",
+   "results": "{\"n_hits\": 8, \"top\": [\"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"SheafOfModules.pushforwardSections_unitHomEquiv\", \"SheafOfModules.freeFunctorCompPullbackIso\", \"SheafOfModules.pullbackIso\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"SheafOfModules.pullbackObjUnitToUnit\", \"SheafOfModules.PullbackConstruction.adjunction\"], \"note\": \"\", \"digest\": \"f487c261cdd45dc2\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: generic localization extensionality, ordinary pullback/unit or monoidal transport and homology Tor results do not identify the specified internal/section K-flat derived tensor and actual pullback arrows"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural transformations of two variable localized functors are determined by restriction to resolving K-flat objects",
+   "results": "{\"n_hits\": 8, \"top\": [\"CategoryTheory.Localization.natTrans₂_ext\", \"CategoryTheory.Localization.Construction.natTransExtension\", \"CategoryTheory.Localization.natTrans_ext\", \"CategoryTheory.Localization.lift₂NatTrans_app_app\", \"CategoryTheory.Localization.lift₂NatTrans\", \"CategoryTheory.LocalizerMorphism.isIso_iff_of_hasLeftResolutions\", \"CategoryTheory.LocalizerMorphism.isIso_iff_of_hasRightResolutions\", \"CategoryTheory.Localization.liftNatTrans\"], \"note\": \"\", \"digest\": \"e1e114765d4e137d\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: generic localization extensionality, ordinary pullback/unit or monoidal transport and homology Tor results do not identify the specified internal/section K-flat derived tensor and actual pullback arrows"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pd-module-ringed-topos-derived-comparison",
@@ -89,5 +238,69 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pd-section-derived-tensor-normalization",
+  "worker": "stage1",
+  "summary": "Identified exact K-flat representatives under E; descended the specified total-tensor comparison, its unit and constraints; totalized the actual ordinary oplax arrow and compared the two defining derived representative squares. Existing nodes cover all non-elementary input; no new nodes or statement changes.",
+  "blueprint": "No imported blueprint ancestor (blueprint_refs.py ancestor returns None). Realizes seeded nt-target-poincare-isiso Step 2 via lem-pd-module-ringed-topos-derived-comparison Step 3, specifically its derived-tensor and actual-oplax-arrow clauses. The K-flat tensor route agrees with main-20261015 sk-def-sfb-derived-tensor-hom and Stacks 07A4.",
+  "tool_uses": [
+   {
+    "node": "lem-pe-internal-section-tensor-comparison",
+    "why": "Exact monoidal internal/section equivalence and its total/K-flat comparison, not a duality theorem."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Generic ringed-site K-flat, totalization or localization input for comparing the specified maps; the Verdier-exchange unit supplies no such representative-comparison theorem."
+   },
+   {
+    "node": "sk-def-sfb-derived-tensor-hom",
+    "why": "Generic ringed-site K-flat, totalization or localization input for comparing the specified maps; the Verdier-exchange unit supplies no such representative-comparison theorem."
+   },
+   {
+    "node": "lem-sfb-derived-monoidal",
+    "why": "Generic derived associativity and unit constraints induced from complexes."
+   },
+   {
+    "node": "lem-weil-pbc-localization-universal-property",
+    "why": "Generic ringed-site K-flat, totalization or localization input for comparing the specified maps; the Verdier-exchange unit supplies no such representative-comparison theorem."
+   },
+   {
+    "node": "def-pc-tensor-complex-sheaves",
+    "why": "Generic ringed-site K-flat, totalization or localization input for comparing the specified maps; the Verdier-exchange unit supplies no such representative-comparison theorem."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic ringed-site K-flat, totalization or localization input for comparing the specified maps; the Verdier-exchange unit supplies no such representative-comparison theorem."
+   },
+   {
+    "node": "lem-weil-pbc-kflat-tensor-pullback-computation-universes",
+    "why": "Generic ringed-site K-flat, totalization or localization input for comparing the specified maps; the Verdier-exchange unit supplies no such representative-comparison theorem."
+   },
+   {
+    "node": "lem-weil-pbc-tensor-comparison-descent-representatives",
+    "why": "Generic ringed-site K-flat, totalization or localization input for comparing the specified maps; the Verdier-exchange unit supplies no such representative-comparison theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "sk-def-sfb-derived-tensor-hom",
+  "lem-sfb-derived-monoidal",
+  "lem-weil-pbc-localization-universal-property",
+  "def-pc-tensor-complex-sheaves",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-kflat-tensor-pullback-computation-universes",
+  "lem-weil-pbc-tensor-comparison-descent-representatives"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-N6-dabfd05c2",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-dabfd05c2 (reviewer sub-agent of L); spot-checked: Read the item's 7 steps in full against every cited statement, Stacks 07A4 (sites-cohomology l.3684-3724) and the Lean statement of tensorComparisonDescent. Statement, stmt_deps and metadata are unchanged from the parent split (4c966032); there are no new nodes. The steps carry the old parent Step 7 argument as a real proof. Step 2: theta_T is the localized total comparison t conjugated by the two representative tensor isomorphisms, extended by full faithfulness in two variables. Step 3: the degree-0 regular module is K-flat, and the constraints are checked one variable at a time. Step 4: the totalized oplax b has differential sign (-1)^p on both sides, and F commutes with sums as a left adjoint. Step 5: a = eps_Tot∘LF(r_Y^-1) and c = r_X^-1∘(eps_P⊗eps_Q) match the descent square exactly (eps direction q⋙LF⟶F⋙q'). Its hypotheses hold: pullback preserves K-flat complexes with flat terms, and eps is invertible on representatives and their Tot. Step 6: the actual internal delta_f satisfies the same representative square, so equality follows by faithfulness, not by an 'any two isos agree' argument. Step 7: inverse, scalar unit and constraints. Edge cases checked: f=id, Lambda=0, odd/negative degrees, unbounded complexes. One fault fixed: Step 1 did not discharge the sheaf-tensor hypotheses (sheafification, monoidal local equivalences, closed sheafified tensor) of lem-pe-internal-section-tensor-comparison. Added a sentence citing sk-def-sfb-sheaf-tensor clauses 1-2 for the pro-étale site; it is a definition node, so there is no route issue; uses and proof_deps updated. All 9 declared tool_uses are accepted as generic K-flat, localization or total-tensor tools; no SGA is used. Advisory 1: the statement of lem-weil-pbc-ringed-topoi-derived-tensor-pullback says only 'a canonical isomorphism'; its proof and Lean pin it by the same descent of the canonical ordinary comparison, which is the map used here. Advisory 2: def-pd-section-derived-realization already defines this tensor-pullback isomorphism by the same representative square, so stage 2 should reuse it. It is a definition, not a duplicate of this equality statement.; 1 file(s) fixed by the reviewer"
  }
 }
