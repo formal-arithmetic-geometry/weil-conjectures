@@ -1,0 +1,128 @@
+{
+ "id": "def-weil-compact-support-native-system-evaluation",
+ "kind": "definition",
+ "title": "Native geometric evaluation of compact-support systems",
+ "statement": "Let l be prime, E/Q_l finite, A_n its positive integer-ring quotients, and c=(j,p) a compactification X to Y [def-weil-compactifications-refinements]. On the ringed sequence sites take the native exact extension J along j and separately right-derived direct image P along p [def-sp-varying-ring-operations]. There is a specified natural isomorphism (J followed by P) followed by evaluation at n to evaluation at n followed by intrinsic compact support F_n [def-compact-support-direct-image-detailed]. The direct-image model comparison is fixed by the constant-sheaf adjunction, and the open model comparison by the adjunction unit.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/lem-weil-compact-support-representative-independence.proof.md",
+  "place": "Original tower proof steps 2 and 3: geometric evaluation before the transition calculation."
+ },
+ "stmt_deps": [
+  "def-weil-compact-support-reduction-tower-data",
+  "def-sp-varying-ring-operations",
+  "def-compact-support-direct-image-detailed",
+  "lem-trf-open-square-exchange"
+ ],
+ "proof": [
+  {
+   "text": "Identify the ordinary direct-image coefficient map using the sheaf adjunction homEquiv inverse law. Identify the two ordinary open extensions by left-adjoint uniqueness and the constant open pullback model.",
+   "uses": [
+    "def-weil-compact-support-reduction-tower-data",
+    "lem-trf-open-square-exchange"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose native evalP and evalJ with right-derived and exact-derived model isomorphisms. Insert functor associators to obtain the specified evaluation.",
+   "uses": [
+    "def-sp-varying-ring-operations"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-compact-support-reduction-tower-data",
+  "lem-trf-open-square-exchange",
+  "def-sp-varying-ring-operations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/lem-weil-compact-support-representative-independence.proof.md",
+  "place": "Original tower proof steps 2 and 3: geometric evaluation before the transition calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Evaluation of derived compact support on inverse systems commutes with restriction of coefficient rings",
+   "results": "8 hits: Polynomial.eval₂_restriction, smooth sheaf stalk evaluation identities, and supported smooth maps; none involves derived compact support or coefficient systems.",
+   "date": "2026-10-22",
+   "verdict": "No matching theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of derived compact support on inverse systems commutes with restriction of coefficient rings",
+   "results": "8 hits: inverse-system set equivalences and Profinite Nobeling maps; no derived module-system comparison.",
+   "date": "2026-10-22",
+   "verdict": "No matching theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategory",
+   "results": "12 hits: exact functor descent, natural transformations, composition and identity comparisons; used as the generic localization API.",
+   "date": "2026-10-22",
+   "verdict": "Generic localization available; no compact-support coefficient-system theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "compactSupport.*[Tt]ransition|coefficient.*[Tt]ransition",
+   "results": "0 hits in Mathlib.",
+   "date": "2026-10-22",
+   "verdict": "No matching specialized declaration."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportReductionTower",
+  "group": "C4",
+  "date": "2026-10-22"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-compact-support-reduction-tower-functor",
+   "place": "Original tower proof steps 2 and 3: geometric evaluation before the transition calculation.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompactSupportNativeSystemEvaluation",
+  "file": "lean/Sheaf/Paper/CompactSupportNativeSystemEvaluation.lean",
+  "declaration": "WeilConjectures.compactSupportSystemEvaluation",
+  "statement": "def compactSupportSystemEvaluation {X Y : Scheme.{u}} {f : X ⟶ Y}\n    (c : Compactification f) (n : ℕ) :\n    (ProEtale.VaryingRing.J (compactSupportSystemLevel l E)\n        (compactSupportSystemQuotient l E) c.i ⋙\n      ProEtale.VaryingRing.P (compactSupportSystemLevel l E)\n        (compactSupportSystemQuotient l E) c.g) ⋙\n      coefficientSequenceDerivedEvaluation.{u, u} l E Y n ≅\n    coefficientSequenceDerivedEvaluation.{u, u} l E X n ⋙\n      sfIntrinsicCompactSupport c (Padic.coefficientExtensionRing l E (n + 1))",
+  "branch": "sheaf-dag",
+  "by": "C4",
+  "date": "2026-10-22",
+  "declarations": [
+   "WeilConjectures.compactSupportDirectModel",
+   "WeilConjectures.compactSupportOpenModel",
+   "WeilConjectures.compactSupportSystemLevel",
+   "WeilConjectures.compactSupportSystemQuotient",
+   "WeilConjectures.compactSupportSystemEvaluation"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-4faf0",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261021T233627-L-839060",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-4faf0",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261021T233627-L-839060",
+  "kind": "interface",
+  "note": "independent cc review: delivered item/Data/new modules vs clones/live CompactSupportReductionTower (moved block verbatim, theorem statement byte-identical, public imports re-exported); leftover sorry compactSupportNativeSystemTransition vs canonical definitions of evalP/evalJ, compactSupportOpenModel/DirectModel, sfCompactSupportRestriction; 9 live direct importers compiled rc 0"
+ }
+}

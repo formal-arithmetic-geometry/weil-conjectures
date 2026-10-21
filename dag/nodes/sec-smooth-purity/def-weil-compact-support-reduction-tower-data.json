@@ -1,0 +1,142 @@
+{
+ "id": "def-weil-compact-support-reduction-tower-data",
+ "kind": "definition",
+ "title": "Coefficient data for compact-support reduction towers",
+ "statement": "For a prime l, finite extension E of Q_l with integer ring R, and schemes W, define A_n=R/(varpi^(n+1)), the direct quotient A_m to A_n for n<=m, its constant sheaf map, and the restriction-composition isomorphism to the completed coefficient sheaf [def-weil-completed-integral-coefficients, def-weil-integral-derived-reduction]. For a compactification c define the restricted compact-support level Res_n F_n(K_n), and its transition by reduction followed by the specified compact-support coefficient square [lem-sf-compact-support-restriction-of-scalars]. Define the constant scalar action on completed module sheaves using the constant sections of R. These are exactly the coefficient definitions previously in the tower module, without alteration.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/lem-weil-compact-support-representative-independence.proof.md",
+  "place": "Coefficient definitions of the coherent tower, before the first proof step."
+ },
+ "stmt_deps": [
+  "def-weil-scheme-morphism-properties",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-inverse-system",
+  "lem-weil-tower-category-levelwise-abelian",
+  "def-weil-compactifications-refinements",
+  "def-compact-support-direct-image-detailed",
+  "def-weil-integral-derived-reduction",
+  "def-weil-linear-functor",
+  "def-weil-triangulated-category",
+  "lem-sf-compact-support-restriction-of-scalars",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-weil-restriction-of-scalars-exact",
+  "def-weil-pbc-bounded-constructible-tower",
+  "lem-weil-derived-scalar-extension-restriction-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "Use ideal quotient factor maps and their composition law. Apply the normalized coefficient restriction-composition isomorphism. Define the transition as the displayed composite, and the scalar predicate by equality on every section.",
+   "uses": [
+    "def-weil-integral-derived-reduction",
+    "lem-sf-compact-support-restriction-of-scalars",
+    "def-weil-completed-integral-coefficients"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-integral-derived-reduction",
+  "lem-sf-compact-support-restriction-of-scalars",
+  "def-weil-completed-integral-coefficients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/lem-weil-compact-support-representative-independence.proof.md",
+  "place": "Coefficient definitions of the coherent tower, before the first proof step."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Evaluation of derived compact support on inverse systems commutes with restriction of coefficient rings",
+   "results": "8 hits: Polynomial.eval₂_restriction, smooth sheaf stalk evaluation identities, and supported smooth maps; none involves derived compact support or coefficient systems.",
+   "date": "2026-10-22",
+   "verdict": "No matching theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of derived compact support on inverse systems commutes with restriction of coefficient rings",
+   "results": "8 hits: inverse-system set equivalences and Profinite Nobeling maps; no derived module-system comparison.",
+   "date": "2026-10-22",
+   "verdict": "No matching theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategory",
+   "results": "12 hits: exact functor descent, natural transformations, composition and identity comparisons; used as the generic localization API.",
+   "date": "2026-10-22",
+   "verdict": "Generic localization available; no compact-support coefficient-system theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "compactSupport.*[Tt]ransition|coefficient.*[Tt]ransition",
+   "results": "0 hits in Mathlib.",
+   "date": "2026-10-22",
+   "verdict": "No matching specialized declaration."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportReductionTower",
+  "group": "C4",
+  "date": "2026-10-22"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-compact-support-reduction-tower-functor",
+   "place": "Coefficient definitions of the coherent tower, before the first proof step.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompactSupportReductionTowerData",
+  "file": "lean/Sheaf/Paper/CompactSupportReductionTowerData.lean",
+  "declaration": "WeilConjectures.compactSupportLevelQuotient",
+  "statement": "def compactSupportLevelQuotient (m n : ℕ) (h : n ≤ m) :\n    Padic.coefficientExtensionRing l E (m + 1) →+*\n      Padic.coefficientExtensionRing l E (n + 1)",
+  "branch": "sheaf-dag",
+  "by": "C4",
+  "date": "2026-10-22",
+  "declarations": [
+   "WeilConjectures.compactSupportLevelFinite",
+   "WeilConjectures.compactSupportLevelQuotient",
+   "WeilConjectures.compactSupportLevelSheafQuotient",
+   "WeilConjectures.compactSupportProjection_comp",
+   "WeilConjectures.compactSupportRestrictionComp",
+   "WeilConjectures.compactSupportReductionMap",
+   "WeilConjectures.compactSupportRestrictedLevel",
+   "WeilConjectures.compactSupportRestrictedTransition",
+   "WeilConjectures.compactSupportConstantScalar",
+   "WeilConjectures.IsCompactSupportScalarAction"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-4faf0",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261021T233627-L-839060",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-4faf0",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261021T233627-L-839060",
+  "kind": "interface",
+  "note": "independent cc review: delivered item/Data/new modules vs clones/live CompactSupportReductionTower (moved block verbatim, theorem statement byte-identical, public imports re-exported); leftover sorry compactSupportNativeSystemTransition vs canonical definitions of evalP/evalJ, compactSupportOpenModel/DirectModel, sfCompactSupportRestriction; 9 live direct importers compiled rc 0"
+ }
+}

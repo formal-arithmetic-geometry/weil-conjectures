@@ -1,0 +1,143 @@
+{
+ "id": "lem-weil-compact-support-coefficient-transition",
+ "kind": "statement",
+ "title": "Native horizontal coefficient transitions and completed restriction",
+ "statement": "Let l be prime, E/Q_l finite, W a scheme, and M a derived coefficient system on the ringed sequence site [def-coef-ringed-sequence-site], using the fixed-universe derived system instances [def-sp-varying-ring-operations]. For n<=m let q:A_m to A_n be the direct quotient and tau the localization of the ordinary horizontal section map M_m to Res_q M_n. Under the canonical completed restriction evaluation e_n U = Res_n e_n [def-coef-derived-system-calculus-data], the strict completed-module tower transition of U(M), followed by that evaluation, is evaluation at m followed by Res_m(tau) and the specified restriction-composition isomorphism [def-weil-compact-support-reduction-tower-data]. No cartesian condition on M is imposed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/lem-weil-compact-support-representative-independence.proof.md",
+  "place": "Original tower proof steps 1 and 4: horizontal transition before geometry."
+ },
+ "stmt_deps": [
+  "def-weil-compact-support-reduction-tower-data",
+  "def-coef-ringed-sequence-site",
+  "def-coef-derived-system-calculus-data",
+  "def-sp-varying-ring-operations"
+ ],
+ "proof": [
+  {
+   "text": "Induct over comparable natural indices to identify the normalized quotient sheaf with the direct ideal quotient. Construct the horizontal natural transformation from actual module section maps, using the sequence ring naturality square.",
+   "uses": [
+    "def-coef-ringed-sequence-site",
+    "def-weil-compact-support-reduction-tower-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Localize the horizontal map through exact evaluation and exact scalar restriction. On complexes its factorization is the degreewise horizontal map.",
+   "uses": [
+    "lem-pod-derived-exact-square-composition",
+    "def-sp-varying-ring-operations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The ordinary completed restriction comparison preserves every section, so the transition square holds sectionwise after transport across the normalized evaluation equality. Localize this equality by localization natural-transformation extensionality and the degreewise factorization of the tower transition.",
+   "uses": [
+    "def-coef-derived-system-calculus-data",
+    "def-weil-compact-support-reduction-tower-data",
+    "lem-pod-derived-exact-square-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-coef-ringed-sequence-site",
+  "def-weil-compact-support-reduction-tower-data",
+  "lem-pod-derived-exact-square-composition",
+  "def-sp-varying-ring-operations",
+  "def-coef-derived-system-calculus-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/lem-weil-compact-support-representative-independence.proof.md",
+  "place": "Original tower proof steps 1 and 4: horizontal transition before geometry."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Evaluation of derived compact support on inverse systems commutes with restriction of coefficient rings",
+   "results": "8 hits: Polynomial.eval₂_restriction, smooth sheaf stalk evaluation identities, and supported smooth maps; none involves derived compact support or coefficient systems.",
+   "date": "2026-10-22",
+   "verdict": "No matching theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of derived compact support on inverse systems commutes with restriction of coefficient rings",
+   "results": "8 hits: inverse-system set equivalences and Profinite Nobeling maps; no derived module-system comparison.",
+   "date": "2026-10-22",
+   "verdict": "No matching theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategory",
+   "results": "12 hits: exact functor descent, natural transformations, composition and identity comparisons; used as the generic localization API.",
+   "date": "2026-10-22",
+   "verdict": "Generic localization available; no compact-support coefficient-system theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "compactSupport.*[Tt]ransition|coefficient.*[Tt]ransition",
+   "results": "0 hits in Mathlib.",
+   "date": "2026-10-22",
+   "verdict": "No matching specialized declaration."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportReductionTower",
+  "group": "C4",
+  "date": "2026-10-22"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-compact-support-reduction-tower-functor",
+   "place": "Original tower proof steps 1 and 4: horizontal transition before geometry.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompactSupportCoefficientTransition",
+  "file": "lean/Sheaf/Paper/CompactSupportCoefficientTransition.lean",
+  "declaration": "WeilConjectures.compactSupportCoefficientTransition_restricted",
+  "statement": "theorem compactSupportCoefficientTransition_restricted (W : Scheme.{u}) {m n : ℕ}\n    (h : n ≤ m) (M : coefficientSequenceDerived.{u, u} l E W) :\n    (pbcTowerTransition W (completedIntegralCommRingSheafUnrestricted l E W) m n h).app\n        ((coefficientSequenceDerivedRestriction l E W).obj M) ≫\n      (coefficientRestrictedEvaluationIso l E W n).hom.app M =\n    (coefficientRestrictedEvaluationIso l E W m).hom.app M ≫\n      (scalarReductionDerivedRestriction l E W m).map\n        ((compactSupportCoefficientTransition l E W h).app M) ≫\n      (compactSupportRestrictionComp l E W m n h).hom.app\n        ((coefficientSequenceDerivedEvaluation l E W n).obj M)",
+  "branch": "sheaf-dag",
+  "by": "C4",
+  "date": "2026-10-22",
+  "declarations": [
+   "WeilConjectures.compactSupportQuotient_eq",
+   "WeilConjectures.compactSupportModuleRes_eq",
+   "WeilConjectures.compactSupportHorizontalWithCoefficients",
+   "WeilConjectures.compactSupportHorizontalIndex",
+   "WeilConjectures.compactSupportHorizontalRingSquare",
+   "WeilConjectures.compactSupportOrdinaryCoefficientTransition",
+   "WeilConjectures.compactSupportCoefficientTransition",
+   "WeilConjectures.compactSupportCoefficientTransition_restricted"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-4faf0",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261021T233627-L-839060",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-4faf0",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261021T233627-L-839060",
+  "kind": "interface",
+  "note": "independent cc review: delivered item/Data/new modules vs clones/live CompactSupportReductionTower (moved block verbatim, theorem statement byte-identical, public imports re-exported); leftover sorry compactSupportNativeSystemTransition vs canonical definitions of evalP/evalJ, compactSupportOpenModel/DirectModel, sfCompactSupportRestriction; 9 live direct importers compiled rc 0"
+ }
+}

@@ -1,0 +1,137 @@
+{
+ "id": "lem-weil-compact-support-native-system-transition",
+ "kind": "statement",
+ "title": "Geometric compatibility of native compact-support coefficient transitions",
+ "statement": "Let l be prime, E/Q_l finite, c=(j,p) any compactification X to Y, and M any derived coefficient system on X [def-weil-compactifications-refinements, def-coef-ringed-sequence-site]. For n<=m let tau be the actual horizontal coefficient transition [lem-weil-compact-support-coefficient-transition], epsilon the specified native compact-support evaluation [def-weil-compact-support-native-system-evaluation], and chi the normalized compact-support coefficient restriction square [lem-sf-compact-support-restriction-of-scalars]. Then tau_Y((J followed by P)M) followed by Res_q(epsilon_n) equals epsilon_m followed by F_m(tau_X M) followed by chi on M_n. This concerns arbitrary systems, without a completed input, reduction functor, scalar linearity, or a tower-existence assertion.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/lem-weil-compact-support-representative-independence.proof.md",
+  "place": "Original tower proof step 4: the geometric transition square for an arbitrary system."
+ },
+ "stmt_deps": [
+  "def-weil-compact-support-reduction-tower-data",
+  "def-weil-compact-support-native-system-evaluation",
+  "lem-weil-compact-support-coefficient-transition",
+  "lem-sf-compact-support-restriction-of-scalars"
+ ],
+ "proof": [
+  {
+   "text": "For open extension transpose the ordinary horizontal-map square under the open adjunctions. The native evaluation and constant open model are fixed by their units, so their transposes are the same restriction section map. Descend this equality through exact localization.",
+   "uses": [
+    "def-sp-varying-ring-operations",
+    "def-weil-compact-support-native-system-evaluation",
+    "lem-weil-compact-support-coefficient-transition",
+    "lem-trf-open-square-exchange"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the direct-image restriction-transition calculation to the extended system. Transport the native constant coefficient model and compare the proper-image mate with the normalized finite coefficient comparison on arbitrary K-injective representatives. The ordinary comparison is identity on sections, and both derived maps localize the same resolution map; no evaluation or quotient restriction is assumed to preserve K-injectives.",
+   "uses": [
+    "lem-pur-system-pushforward-restriction-transition",
+    "lem-weil-proetale-direct-image-restriction-of-scalars",
+    "def-weil-compact-support-native-system-evaluation",
+    "lem-weil-compact-support-coefficient-transition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Paste the open and proper squares. Naturality of proper evaluation and the definition of the specified compact-support restriction square give the displayed equation for every m>=n, including equality.",
+   "uses": [
+    "lem-sf-compact-support-restriction-of-scalars"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-varying-ring-operations",
+  "def-weil-compact-support-native-system-evaluation",
+  "lem-weil-compact-support-coefficient-transition",
+  "lem-trf-open-square-exchange",
+  "lem-pur-system-pushforward-restriction-transition",
+  "lem-weil-proetale-direct-image-restriction-of-scalars",
+  "lem-sf-compact-support-restriction-of-scalars"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/lem-weil-compact-support-representative-independence.proof.md",
+  "place": "Original tower proof step 4: the geometric transition square for an arbitrary system."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Evaluation of derived compact support on inverse systems commutes with restriction of coefficient rings",
+   "results": "8 hits: Polynomial.eval₂_restriction, smooth sheaf stalk evaluation identities, and supported smooth maps; none involves derived compact support or coefficient systems.",
+   "date": "2026-10-22",
+   "verdict": "No matching theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of derived compact support on inverse systems commutes with restriction of coefficient rings",
+   "results": "8 hits: inverse-system set equivalences and Profinite Nobeling maps; no derived module-system comparison.",
+   "date": "2026-10-22",
+   "verdict": "No matching theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategory",
+   "results": "12 hits: exact functor descent, natural transformations, composition and identity comparisons; used as the generic localization API.",
+   "date": "2026-10-22",
+   "verdict": "Generic localization available; no compact-support coefficient-system theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "compactSupport.*[Tt]ransition|coefficient.*[Tt]ransition",
+   "results": "0 hits in Mathlib.",
+   "date": "2026-10-22",
+   "verdict": "No matching specialized declaration."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportReductionTower",
+  "group": "C4",
+  "date": "2026-10-22"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-compact-support-reduction-tower-functor",
+   "place": "Original tower proof step 4: the geometric transition square for an arbitrary system.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompactSupportNativeSystemTransition",
+  "file": "lean/Sheaf/Paper/CompactSupportNativeSystemTransition.lean",
+  "declaration": "WeilConjectures.compactSupportNativeSystemTransition",
+  "statement": "theorem compactSupportNativeSystemTransition\n    {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)\n    {m n : ℕ} (h : n ≤ m) (M : coefficientSequenceDerived.{u, u} l E X) :\n    (compactSupportCoefficientTransition l E Y h).app\n        ((ProEtale.VaryingRing.J (compactSupportSystemLevel l E)\n          (compactSupportSystemQuotient l E) c.i ⋙\n          ProEtale.VaryingRing.P (compactSupportSystemLevel l E)\n            (compactSupportSystemQuotient l E) c.g).obj M) ≫\n      (proEtaleCoefficientRestrictScalars Y\n        (compactSupportLevelQuotient l E m n h)).mapDerivedCategory.map\n          ((compactSupportSystemEvaluation l E c n).hom.app M) =\n    (compactSupportSystemEvaluation l E c m).hom.app M ≫\n      (sfIntrinsicCompactSupport c (Padic.coefficientExtensionRing l E (m + 1))).map\n        ((compactSupportCoefficientTransition l E X h).app M) ≫\n      (sfCompactSupportRestriction c (compactSupportLevelQuotient l E m n h)).hom.app\n        ((coefficientSequenceDerivedEvaluation l E X n).obj M)",
+  "branch": "sheaf-dag",
+  "by": "C4",
+  "date": "2026-10-22"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-4faf0",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261021T233627-L-839060",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-4faf0",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261021T233627-L-839060",
+  "kind": "interface",
+  "note": "independent cc review: delivered item/Data/new modules vs clones/live CompactSupportReductionTower (moved block verbatim, theorem statement byte-identical, public imports re-exported); leftover sorry compactSupportNativeSystemTransition vs canonical definitions of evalP/evalJ, compactSupportOpenModel/DirectModel, sfCompactSupportRestriction; 9 live direct importers compiled rc 0"
+ }
+}
