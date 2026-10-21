@@ -26,6 +26,10 @@ public import Sheaf.Paper.PbcRationalTransport
 import WeilConjectures.CategoryTheory.DerivedCategory.Complete.RationalizationHom
 import Sheaf.Algebra.Homology.DerivedScalarExtensionCounitShift
 import WeilConjectures.CategoryTheory.RightKanExtensionCoherentShift
+import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
+import WeilConjectures.Mathlib.CategoryTheory.Linear.LinearFunctor
+import Mathlib.Algebra.Homology.DerivedCategory.Linear
+import Sheaf.CategoryTheory.SemilinearScalarLocalization
 
 /-! # Finite scalar extension on the actual proper-base-change categories
 
@@ -51,6 +55,7 @@ attribute [-instance] WeilConjectures.integralOperationsAbSheafify
 attribute [-instance] WeilConjectures.integralOperationsAbLocallyBijective
 attribute [-instance] WeilConjectures.integralOperationsSiteSmall
 attribute [-instance] WeilConjectures.integralOperationsCommHasDerivedCategory
+attribute [local irreducible] AlgebraicGeometry.Scheme.pbcRationalCoefficientEquiv
 namespace CategoryTheory.ScalarLocalization
 open scoped TensorProduct
 private noncomputable def pbcRationalComparison
@@ -379,6 +384,194 @@ def pbcEmbeddingIntegralTensor :
       pbcEmbeddingAmbientTensor l E F i T)
     (pbcEmbeddingAmbientTensor_preserves l E F i T hDim hInv)
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem scalarLevelConstantComparison_eq (T : Scheme.{u})
+    {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ) :
+    (pbcLevelConstantComparison T d n).hom =
+      AdicCoefficients.constantComparison T (A ⧸ d.ideal ^ (n + 1)) := by
+  apply Sheaf.hom_ext
+  apply sheafify_hom_ext _ _ _ ((pbcAdicRings T d).obj (op n)).property
+  change toSheafify _ _ ≫ (pbcLevelConstantComparison T d n).hom.hom =
+    toSheafify _ _ ≫ sheafifyMap _ _
+  rw [← toSheafify_naturality]
+  ext U b
+  exact (pbcLevelConstantComparison_exists T d n).exists.choose_spec U b
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem scalarLevelConstantComparison_naturality (T : Scheme.{u})
+    {A B : Type (u + 1)} [CommRing A] [CommRing B]
+    (dA : AdicCoefficientDatum A) (dB : AdicCoefficientDatum B) (n : ℕ)
+    (q : (A ⧸ dA.ideal ^ (n + 1)) →+* (B ⧸ dB.ideal ^ (n + 1))) :
+    (constantSheaf (ProEt.topology T) CommRingCat.{u + 1}).map (CommRingCat.ofHom q) ≫
+        (pbcLevelConstantComparison T dB n).hom =
+      (pbcLevelConstantComparison T dA n).hom ≫ AdicCoefficients.coefficientMap T q := by
+  rw [scalarLevelConstantComparison_eq, scalarLevelConstantComparison_eq]
+  change (presheafToSheaf _ CommRingCat).map _ ≫
+      (presheafToSheaf _ CommRingCat).map _ =
+    (presheafToSheaf _ CommRingCat).map _ ≫
+      (presheafToSheaf _ CommRingCat).map _
+  rw [← Functor.map_comp, ← Functor.map_comp]
+  congr 1
+
+private theorem scalarExactDerived
+    {R S C D : Type*} [CommRing R] [CommRing S]
+    [Category C] [Category D] [Abelian C] [Abelian D] [Linear R C] [Linear S D]
+    [HasDerivedCategory C] [HasDerivedCategory D]
+    (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    (a : R) (b : S)
+    (h : ∀ (M N : C) (f : M ⟶ N), F.map (a • f) = b • F.map f)
+    (K L : DerivedCategory C) (f : K ⟶ L) :
+    F.mapDerivedCategory.map (a • f) = b • F.mapDerivedCategory.map f := by
+  let G := F.mapDerivedCategory
+  let γ₁ : G ⟶ G :=
+    { app := fun M ↦ G.map (a • 𝟙 M)
+      naturality := fun M N f ↦ by
+        simp only [← G.map_comp, Linear.comp_smul, Linear.smul_comp,
+          Category.comp_id, Category.id_comp] }
+  let γ₂ : G ⟶ G :=
+    { app := fun M ↦ b • 𝟙 (G.obj M)
+      naturality := fun M N f ↦ by simp }
+  have heq : γ₁ = γ₂ := by
+    apply Localization.natTrans_ext DerivedCategory.Q
+      (HomologicalComplex.quasiIso C (.up ℤ))
+    intro P
+    change G.map (a • 𝟙 (DerivedCategory.Q.obj P)) = b • 𝟙 _
+    apply (cancel_mono (F.mapDerivedCategoryFactors.hom.app P)).mp
+    have hn := F.mapDerivedCategoryFactors.hom.naturality (a • 𝟙 P)
+    have hc : (F.mapHomologicalComplex (.up ℤ)).map (a • 𝟙 P) =
+        b • 𝟙 ((F.mapHomologicalComplex (.up ℤ)).obj P) := by
+      ext n
+      change F.map (a • 𝟙 (P.X n)) = b • 𝟙 (F.obj (P.X n))
+      simpa only [CategoryTheory.Functor.map_id] using h (P.X n) (P.X n) (𝟙 _)
+    simp only [Functor.comp_map, Functor.map_smul, CategoryTheory.Functor.map_id, hc,
+      Linear.comp_smul] at hn
+    rw [Linear.smul_comp, Category.id_comp]
+    change G.map (a • 𝟙 (DerivedCategory.Q.obj P)) ≫
+      F.mapDerivedCategoryFactors.hom.app P = b • F.mapDerivedCategoryFactors.hom.app P
+    exact hn.trans (congrArg (fun z ↦ b • z)
+      (Category.comp_id (F.mapDerivedCategoryFactors.hom.app P)))
+  have hi := congrArg (fun γ : G ⟶ G ↦ γ.app K) heq
+  change G.map (a • f) = b • G.map f
+  change G.map (a • 𝟙 K) = b • 𝟙 (G.obj K) at hi
+  calc
+    G.map (a • f) = G.map ((a • 𝟙 K) ≫ f) :=
+      congrArg G.map (by rw [Linear.smul_comp, Category.id_comp])
+    _ = (b • 𝟙 (G.obj K)) ≫ G.map f := by rw [G.map_comp, hi]
+    _ = b • G.map f := by rw [Linear.smul_comp, Category.id_comp]
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+omit [IsNoetherian T] in
+private theorem scalarCompletedCoefficientConstant :
+    pbcCompletedScalar T (pbcIntegralDatum l E) ≫ pbcScalarCoefficientMap l E F i T =
+      (constantSheaf (ProEt.topology T) CommRingCat.{u + 1}).map
+          (CommRingCat.ofHom (pbcEmbeddingIntegerMap l E F i)) ≫
+        pbcCompletedScalar T (pbcIntegralDatum l F) := by
+  have hp (A : Type u) [Field A] [Algebra (Padic l) A]
+      [FiniteDimensional (Padic l) A] (n : ℕ) :
+      pbcCompletedScalar T (pbcIntegralDatum l A) ≫
+          pbcAdicProjection T (pbcIntegralDatum l A) n =
+        (constantSheaf (ProEt.topology T) CommRingCat.{u + 1}).map
+          (CommRingCat.ofHom (Ideal.Quotient.mk ((pbcIntegralDatum l A).ideal ^ (n + 1)))) ≫
+            (pbcLevelConstantComparison T (pbcIntegralDatum l A) n).hom := by
+    dsimp only [pbcCompletedScalar, pbcAdicProjection, pbcCompletedComparison]
+    rw [Category.assoc]
+    erw [HasLimit.isoOfNatIso_hom_π]
+    rw [← Category.assoc]
+    erw [(adicDatumScalar_exists T
+      { toCompleteCoefficientDatum := (pbcIntegralDatum l A).toCompleteCoefficientDatum,
+        quotientFinite := (pbcIntegralDatum l A).quotientFinite }).exists.choose_spec n]
+    rfl
+  apply limit.hom_ext
+  rintro ⟨n⟩
+  change _ ≫ pbcAdicProjection T (pbcIntegralDatum l F) n =
+    _ ≫ pbcAdicProjection T (pbcIntegralDatum l F) n
+  have hc := (pbcScalarCoefficientMap_exists l E F i T).exists.choose_spec n
+  change pbcScalarCoefficientMap l E F i T ≫ _ = _ at hc
+  rw [Category.assoc, hc,
+    ← Category.assoc, hp, Category.assoc, Category.assoc, hp]
+  rw [← scalarLevelConstantComparison_naturality]
+  simp only [← Functor.map_comp_assoc]
+  congr 2
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+omit [IsNoetherian T] in
+private theorem scalarCompletedCoefficientSection (U : T.ProEtᵒᵖ) (a : PbcIntegralRing l E) :
+    (pbcScalarCoefficientMap l E F i T).hom.app U
+        (pbcCompletedSection T (pbcIntegralDatum l E) U a) =
+      pbcCompletedSection T (pbcIntegralDatum l F) U (pbcEmbeddingIntegerMap l E F i a) := by
+  have h := congrArg (fun f ↦ f.hom.app U
+    (((toSheafify (ProEt.topology T)
+      ((Functor.const T.ProEtᵒᵖ).obj (CommRingCat.of (PbcIntegralRing l E))))).app U a))
+    (scalarCompletedCoefficientConstant l E F i T)
+  have hn := toSheafify_naturality (ProEt.topology T)
+    ((Functor.const T.ProEtᵒᵖ).map (CommRingCat.ofHom (pbcEmbeddingIntegerMap l E F i)))
+  have hc := congrArg (fun f ↦ f.app U a) hn
+  change _ = (pbcCompletedScalar T (pbcIntegralDatum l F)).hom.app U _ at h
+  exact h.trans (congrArg ((pbcCompletedScalar T (pbcIntegralDatum l F)).hom.app U) hc.symm)
+
+
+private theorem scalarAdjunction
+    {R S C D : Type*} [CommRing R] [CommRing S]
+    [Category C] [Category D] [Preadditive C] [Preadditive D] [Linear R C] [Linear S D]
+    {L : C ⥤ D} {G : D ⥤ C} (adj : L ⊣ G) (a : R) (b : S)
+    (h : ∀ (M N : D) (f : M ⟶ N), G.map (b • f) = a • G.map f)
+    (K K' : C) (f : K ⟶ K') : L.map (a • f) = b • L.map f := by
+  apply (adj.homEquiv _ _).injective
+  simp only [Adjunction.homEquiv_unit, h]
+  have hn := adj.unit.naturality (a • f)
+  have hf := adj.unit.naturality f
+  simp only [Functor.id_map, Functor.comp_map] at hn hf
+  rw [← hn, Linear.smul_comp, hf, Linear.comp_smul]
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+omit [IsNoetherian T] in
+private theorem scalarRestrict (a : PbcIntegralRing l E)
+    (M N : pbcModules T (pbcAdicCompletion T (pbcIntegralDatum l F))) (f : M ⟶ N) :
+    (pbcRestrict (pbcScalarCoefficientMap l E F i T)).map
+        ((pbcEmbeddingIntegerMap l E F i a) • f) =
+      a • (pbcRestrict (pbcScalarCoefficientMap l E F i T)).map f := by
+  ext U x
+  change pbcCompletedSection T (pbcIntegralDatum l F) U (pbcEmbeddingIntegerMap l E F i a) •
+      f.val.app U x =
+    (pbcScalarCoefficientMap l E F i T).hom.app U
+      (pbcCompletedSection T (pbcIntegralDatum l E) U a) • f.val.app U x
+  rw [scalarCompletedCoefficientSection]
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem scalarIntegralSemilinear :
+    ScalarLocalization.IsSemilinear (pbcEmbeddingIntegerMap l E F i)
+      (pbcEmbeddingIntegralTensor l E F i T hDim hInv) := by
+  intro K L a f
+  apply ObjectProperty.hom_ext
+  exact scalarAdjunction (pbcDerivedScalarAdjunction (pbcScalarCoefficientMap l E F i T))
+    a (pbcEmbeddingIntegerMap l E F i a)
+    (scalarExactDerived (pbcRestrict (pbcScalarCoefficientMap l E F i T))
+      (pbcEmbeddingIntegerMap l E F i a) a (scalarRestrict l E F i T a))
+    K.obj L.obj f.hom
+
+private theorem scalarRationalCoefficient (A : Type u) [Field A] [Algebra (Padic l) A]
+    [FiniteDimensional (Padic l) A] (a : PbcIntegralRing l A) :
+    pbcRationalCoefficientEquiv l A (algebraMap (PbcIntegralRing l A)
+      (Localization.Away (pbcUniformizer l A)) a) = (a.down : A) := by
+  unfold pbcRationalCoefficientEquiv
+  rw [RingEquiv.trans_apply]
+  erw [IsLocalization.ringEquivOfRingEquiv_eq]
+  exact (Padic.coefficientExtension_localization_uniformizer l A).2.choose.commutes a.down
+
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+section
+attribute [-instance] ULift.module
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- The additive Hom map of rational extension is uniquely fixed on pure tensors.
 Source: blueprint order 1307 (blueprint: prop-weil-pbc-scalar-extension).
 Proof: integral derived tensor is additive and semilinear for pbcEmbeddingIntegerMap,
@@ -400,7 +593,72 @@ theorem pbcRationalScalarHom_exists (K L : PbcIntegralCategory l E T hDim hInv) 
           (pbcRationalCoefficientEquiv l F).symm (i (pbcRationalCoefficientEquiv l E a))
             • (pbcRationalization T (pbcIntegralDatum l F) (pbcUniformizer l F)).map
               ((pbcEmbeddingIntegralTensor l E F i T hDim hInv).map f) := by
-  sorry
+  let φ := pbcEmbeddingIntegerMap l E F i
+  let k : Localization.Away (pbcUniformizer l E) →+*
+      Localization.Away (pbcUniformizer l F) :=
+    (pbcRationalCoefficientEquiv l F).symm.toRingHom.comp
+      (i.toRingHom.comp (pbcRationalCoefficientEquiv l E).toRingHom)
+  have hc : k.comp (algebraMap (PbcIntegralRing l E)
+      (Localization.Away (pbcUniformizer l E))) =
+      (algebraMap (PbcIntegralRing l F) (Localization.Away (pbcUniformizer l F))).comp φ := by
+    ext a
+    apply (pbcRationalCoefficientEquiv l F).injective
+    simp only [RingHom.comp_apply, k, RingEquiv.toRingHom_eq_coe, RingHom.coe_coe,
+      RingEquiv.apply_symm_apply, scalarRationalCoefficient]
+    rfl
+  have hu : IsUnit (algebraMap (PbcIntegralRing l F)
+      (Localization.Away (pbcUniformizer l F)) (φ (pbcUniformizer l E))) := by
+    have hh := congrArg (fun f ↦ f (pbcUniformizer l E)) hc
+    change k (algebraMap _ _ (pbcUniformizer l E)) =
+      algebraMap (PbcIntegralRing l F) (Localization.Away (pbcUniformizer l F))
+        (φ (pbcUniformizer l E)) at hh
+    rw [← hh]
+    exact (IsLocalization.Away.algebraMap_isUnit (pbcUniformizer l E)).map k
+  have hk := (ScalarLocalization.coefficientMap_unique
+    (pbcUniformizer l E) (pbcUniformizer l F) φ hu k).mp hc
+  have hFAdd : (pbcEmbeddingIntegralTensor l E F i T hDim hInv).Additive := by
+    constructor
+    intro M N f g
+    apply ObjectProperty.hom_ext
+    change (pbcEmbeddingAmbientTensor l E F i T).map (f.hom + g.hom) =
+      (pbcEmbeddingAmbientTensor l E F i T).map f.hom +
+        (pbcEmbeddingAmbientTensor l E F i T).map g.hom
+    have : (pbcDerivedRestrict (pbcScalarCoefficientMap l E F i T)).Additive := by
+      unfold pbcDerivedRestrict
+      infer_instance
+    have : (pbcEmbeddingAmbientTensor l E F i T).Additive :=
+      (pbcDerivedScalarAdjunction (pbcScalarCoefficientMap l E F i T)).left_adjoint_additive
+    exact Functor.map_add _
+  obtain ⟨m, hm, huniq⟩ := ScalarLocalization.existsUnique_semilinearHom
+    (pbcUniformizer l E) (pbcUniformizer l F) φ hu
+    (pbcEmbeddingIntegralTensor l E F i T hDim hInv)
+    (scalarIntegralSemilinear l E F i T hDim hInv) K L
+  have hm' (a : Localization.Away (pbcUniformizer l E)) (f : K ⟶ L) :
+      m (a ⊗ₜ[PbcIntegralRing l E] f) =
+        k a ⊗ₜ[PbcIntegralRing l F]
+          (pbcEmbeddingIntegralTensor l E F i T hDim hInv).map f := by
+    rw [hm, ← hk]
+  refine ⟨m, ?_, ?_⟩
+  · intro a f
+    change m ((a * 1) ⊗ₜ[PbcIntegralRing l E] f) =
+      (k a * 1) ⊗ₜ[PbcIntegralRing l F]
+        (pbcEmbeddingIntegralTensor l E F i T hDim hInv).map f
+    simpa only [mul_one] using hm' a f
+  · intro m' hm''
+    apply huniq m'
+    intro a f
+    have h' := hm'' a f
+    change m' ((a * 1) ⊗ₜ[PbcIntegralRing l E] f) =
+      (k a * 1) ⊗ₜ[PbcIntegralRing l F]
+        (pbcEmbeddingIntegralTensor l E F i T hDim hInv).map f at h'
+    rw [← hk]
+    change m' (a ⊗ₜ[PbcIntegralRing l E] f) =
+      k a ⊗ₜ[PbcIntegralRing l F]
+        (pbcEmbeddingIntegralTensor l E F i T hDim hInv).map f
+    simpa only [mul_one] using h' 
+
+
+end
 
 /-- The unique additive extension of the integral coefficient-change Hom formula.
 Source: blueprint order 1307 (blueprint: prop-weil-pbc-scalar-extension). -/
@@ -1273,6 +1531,43 @@ variable (l : ℕ) [Fact l.Prime]
     [FiniteDimensional ℚ_[l] E] [FiniteDimensional ℚ_[l] F] (i : E →ₐ[ℚ_[l]] F)
 variable {X Y : Scheme.{u}} (g : X ⟶ Y)
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem scalarCompletedCoefficientMap_projection {X Y : Scheme.{u}} (g : X ⟶ Y)
+    {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ) :
+    completedCoefficientMap g d ≫ pbcAdicProjection X d n =
+      (proEtaleSheafInverseImage g CommRingCat.{u + 1}).map (pbcAdicProjection Y d n) ≫
+        completedFiniteCoefficientMap g d n := by
+  exact limit.lift_π _ (op n)
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem scalarFiniteCoefficientMap_naturality {X Y : Scheme.{u}} (g : X ⟶ Y)
+    {A B : Type (u + 1)} [CommRing A] [CommRing B]
+    (dA : AdicCoefficientDatum A) (dB : AdicCoefficientDatum B) (n : ℕ)
+    (q : (A ⧸ dA.ideal ^ (n + 1)) →+* (B ⧸ dB.ideal ^ (n + 1))) :
+    (proEtaleSheafInverseImage g CommRingCat.{u + 1}).map
+        (AdicCoefficients.coefficientMap Y q) ≫ completedFiniteCoefficientMap g dB n =
+      completedFiniteCoefficientMap g dA n ≫ AdicCoefficients.coefficientMap X q := by
+  let L := proEtaleSheafInverseImage g CommRingCat.{u + 1}
+  have hinv : AdicCoefficients.coefficientMap Y q ≫
+      (pbcLevelConstantComparison Y dB n).inv =
+    (pbcLevelConstantComparison Y dA n).inv ≫
+      (constantSheaf (ProEt.topology Y) CommRingCat.{u + 1}).map (CommRingCat.ofHom q) := by
+    apply (Iso.eq_inv_comp _).2
+    rw [← Category.assoc]
+    apply (Iso.comp_inv_eq _).2
+    exact (scalarLevelConstantComparison_naturality Y dA dB n q).symm
+  unfold completedFiniteCoefficientMap
+  change L.map _ ≫ L.map _ ≫ _ ≫ _ = _
+  rw [← L.map_comp_assoc, hinv, L.map_comp, Category.assoc]
+  erw [reassoc_of% (proEtaleConstantInverseImageMap_naturality g (CommRingCat.ofHom q))]
+  simp only [Category.assoc]
+  rw [scalarLevelConstantComparison_naturality]
+
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- The actual completed coefficient inclusion commutes with the ringed structure map.
 Source: blueprint order 1307 (blueprint: prop-weil-pbc-scalar-extension).
 Proof: apply every finite target projection. Both paths take a continuous residue
@@ -1285,7 +1580,42 @@ theorem pbcScalarCoefficientStructureSquare :
       pbcActualStructureMap g (pbcIntegralDatum l E) ≫
         (proEtaleSheafDirectImage g RingCat.{u + 1}).map
           (pbcActualCoefficientRingMap X (pbcScalarCoefficientMap l E F i X)) := by
-  sorry
+  let dE := pbcIntegralDatum l E
+  let dF := pbcIntegralDatum l F
+  let c (T : Scheme.{u}) := pbcScalarCoefficientMap l E F i T
+  let L := proEtaleSheafInverseImage g CommRingCat.{u + 1}
+  let R := proEtaleSheafDirectImage g CommRingCat.{u + 1}
+  have hc (T : Scheme.{u}) (n : ℕ) :
+      c T ≫ pbcAdicProjection T dF n = pbcAdicProjection T dE n ≫
+        AdicCoefficients.coefficientMap T (pbcScalarQuotientMap l E F i n) :=
+    (pbcScalarCoefficientMap_exists l E F i T).exists.choose_spec n
+  have h : L.map (c Y) ≫ completedCoefficientMap g dF =
+      completedCoefficientMap g dE ≫ c X := by
+    apply limit.hom_ext
+    intro n
+    change (L.map (c Y) ≫ completedCoefficientMap g dF) ≫
+        pbcAdicProjection X dF n.unop =
+      (completedCoefficientMap g dE ≫ c X) ≫ pbcAdicProjection X dF n.unop
+    simp only [Category.assoc, hc]
+    rw [scalarCompletedCoefficientMap_projection]
+    rw [← Category.assoc (completedCoefficientMap g dE), scalarCompletedCoefficientMap_projection]
+    rw [← L.map_comp_assoc, hc, L.map_comp, Category.assoc]
+    simpa only [Category.assoc] using congrArg
+      (fun k ↦ L.map (pbcAdicProjection Y dE n.unop) ≫ k)
+      (scalarFiniteCoefficientMap_naturality g dE dF n.unop
+        (pbcScalarQuotientMap l E F i n.unop))
+  have hd : c Y ≫ completedCoefficientDirectImageMap g dF =
+      completedCoefficientDirectImageMap g dE ≫ R.map (c X) := by
+    unfold completedCoefficientDirectImageMap
+    have hn := (proEtaleSheafAdjunction g CommRingCat.{u + 1}).unit.naturality (c Y)
+    change c Y ≫ (proEtaleSheafAdjunction g CommRingCat.{u + 1}).unit.app _ =
+      (proEtaleSheafAdjunction g CommRingCat.{u + 1}).unit.app _ ≫ R.map (L.map (c Y)) at hn
+    rw [← Category.assoc]
+    erw [hn]
+    rw [Category.assoc, ← R.map_comp, h, R.map_comp, Category.assoc]
+  exact congrArg
+    (fun k ↦ (sheafCompose (ProEt.topology Y)
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map k) hd
 
 /-- The ambient ordinary-pullback comparison is the normalized derived tensor comparison.
 Source: blueprint order 1307 (blueprint: prop-weil-pbc-scalar-extension). -/
@@ -1328,6 +1658,11 @@ Source: blueprint order 1307 (blueprint: prop-weil-pbc-scalar-extension). -/
       pbcEmbeddingAmbientTensor l E F i X ⋙
         pbcActualDerivedPush g (pbcIntegralDatum l F) :=
   asIso (pbcScalarDirectImageMap l E F i g)
+
+private theorem pbcScalarDirectImageIso_hom :
+    (pbcScalarDirectImageIso l E F i g).hom = pbcScalarDirectImageMap l E F i g := by
+  unfold pbcScalarDirectImageIso
+  rfl
 
 /-- Scalar extension commutes with completion through the actual quotient augmentation.
 Source: blueprint order 1307 (blueprint: prop-weil-pbc-scalar-extension).
@@ -1676,25 +2011,6 @@ theorem pbcScalarCompletedPull_identity (W : Scheme.{u})
 
 variable {Z : Scheme.{u}} (h : Z ⟶ X)
 
-/-- Direct-image comparison respects composition with its canonical adjunction pasting.
-Source: blueprint order 1307 (blueprint: prop-weil-pbc-scalar-extension).
-Proof: the counit of a composite adjunction is the composite of its two counits.
-Tensoring those counits with one is consequently the same projection mate on
-both paths. The canonical balancing comparison identifies their coefficients,
-and the derived universal comparisons preserve this equality. -/
-theorem pbcScalarDirectImage_comp
-    (K : PbcCompletedDerived Z (pbcIntegralDatum l E)) :
-    (pbcScalarDirectImageIso l E F i g).hom.app
-        ((pbcActualDerivedPush h (pbcIntegralDatum l E)).obj K) ≫
-      (pbcActualDerivedPush g (pbcIntegralDatum l F)).map
-        ((pbcScalarDirectImageIso l E F i h).hom.app K) ≫
-      (pbcActualDerivedDirectCompIso h g (pbcIntegralDatum l F)).hom.app
-        ((pbcEmbeddingAmbientTensor l E F i Z).obj K) =
-    (pbcEmbeddingAmbientTensor l E F i Y).map
-        ((pbcActualDerivedDirectCompIso h g (pbcIntegralDatum l E)).hom.app K) ≫
-      (pbcScalarDirectImageIso l E F i (h ≫ g)).hom.app K := by
-  sorry
-
 /-- The ordinary pullback comparison respects the same canonical pasting.
 Source: blueprint order 1307 (blueprint: prop-weil-pbc-scalar-extension).
 Proof: on flat-term K-flat models both paths are the ordinary adjunction conjugate
@@ -1713,6 +2029,93 @@ theorem pbcScalarOrdinaryPull_comp
       (pbcEmbeddingAmbientTensor l E F i Z).map
         ((pbcActualDerivedPullCompIso h g (pbcIntegralDatum l E)).hom.app K) := by
   sorry
+
+private theorem scalarMate_comp
+    {C₁ C₂ C₃ D₁ D₂ D₃ : Type*}
+    [Category C₁] [Category C₂] [Category C₃]
+    [Category D₁] [Category D₂] [Category D₃]
+    {L₁ : C₁ ⥤ C₂} {R₁ : C₂ ⥤ C₁} (a₁ : L₁ ⊣ R₁)
+    {L₂ : C₂ ⥤ C₃} {R₂ : C₃ ⥤ C₂} (a₂ : L₂ ⊣ R₂)
+    {M₁ : D₁ ⥤ D₂} {S₁ : D₂ ⥤ D₁} (b₁ : M₁ ⊣ S₁)
+    {M₂ : D₂ ⥤ D₃} {S₂ : D₃ ⥤ D₂} (b₂ : M₂ ⊣ S₂)
+    {L : C₁ ⥤ C₃} {R : C₃ ⥤ C₁} (a : L ⊣ R)
+    {M : D₁ ⥤ D₃} {S : D₃ ⥤ D₁} (b : M ⊣ S)
+    {F : C₁ ⥤ D₁} {G : C₂ ⥤ D₂} {H : C₃ ⥤ D₃}
+    (α : TwoSquare F L₁ M₁ G) (β : TwoSquare G L₂ M₂ H)
+    (γ : TwoSquare F L M H) (u : L ≅ L₁ ⋙ L₂) (v : M ≅ M₁ ⋙ M₂)
+    (ho : ∀ K : C₁, M₂.map (α.natTrans.app K) ≫ β.natTrans.app (L₁.obj K) =
+      v.inv.app (F.obj K) ≫ γ.natTrans.app K ≫ H.map (u.hom.app K)) (K : C₃) :
+    (mateEquiv a₁ b₁ α).natTrans.app (R₂.obj K) ≫
+        S₁.map ((mateEquiv a₂ b₂ β).natTrans.app K) ≫
+        (conjugateIsoEquiv (b₁.comp b₂) b v).hom.app (H.obj K) =
+      F.map ((conjugateIsoEquiv (a₁.comp a₂) a u).hom.app K) ≫
+        (mateEquiv a b γ).natTrans.app K := by
+  have hs : (TwoSquare.vComp α β).whiskerLeft u.inv = γ.whiskerRight v.inv := by
+    ext T
+    have ht := congrArg (fun z ↦ z ≫ H.map (u.inv.app T)) (ho T)
+    simp only [Category.assoc] at ht
+    rw [← H.map_comp, Iso.hom_inv_id_app, H.map_id] at ht
+    have htid := congrArg (fun z ↦ v.inv.app (F.obj T) ≫ z)
+      (Category.comp_id (γ.natTrans.app T))
+    have ht' := ht.trans htid
+    simpa only [TwoSquare.vComp, TwoSquare.whiskerLeft, TwoSquare.whiskerRight,
+      NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+      Functor.associator_hom_app, Functor.associator_inv_app,
+      Category.id_comp, Category.comp_id, Category.assoc] using ht'
+  have hm := congrArg (mateEquiv a (b₁.comp b₂)) hs
+  rw [conjugateEquiv_mateEquiv_vcomp a (a₁.comp a₂) (b₁.comp b₂),
+    mateEquiv_conjugateEquiv_vcomp a b (b₁.comp b₂),
+    mateEquiv_hcomp a₁ b₁ a₂ b₂] at hm
+  have hc := congrArg (fun z ↦ z.natTrans.app K) hm
+  simp only [TwoSquare.whiskerTop, TwoSquare.whiskerBottom, TwoSquare.hComp,
+    NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    Functor.associator_hom_app, Functor.associator_inv_app,
+    Category.id_comp, Category.comp_id] at hc
+  rw [← conjugateIsoEquiv_apply_inv, ← conjugateIsoEquiv_apply_inv] at hc
+  apply (cancel_epi (F.map ((conjugateIsoEquiv (a₁.comp a₂) a u).inv.app K))).mp
+  have ht := congrArg
+    (fun z ↦ z ≫ (conjugateIsoEquiv (b₁.comp b₂) b v).hom.app (H.obj K)) hc
+  simp only [Category.assoc] at ht
+  rw [Iso.inv_hom_id_app] at ht
+  have ht' := ht.trans (Category.comp_id ((mateEquiv a b γ).natTrans.app K))
+  simpa only [Category.assoc, ← F.map_comp_assoc,
+    Iso.inv_hom_id_app, F.map_id, Category.id_comp] using ht'
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+/-- Direct-image comparison respects composition with its canonical adjunction pasting.
+Source: blueprint order 1307 (blueprint: prop-weil-pbc-scalar-extension).
+Proof: the counit of a composite adjunction is the composite of its two counits.
+Tensoring those counits with one is consequently the same projection mate on
+both paths. The canonical balancing comparison identifies their coefficients,
+and the derived universal comparisons preserve this equality. -/
+theorem pbcScalarDirectImage_comp
+    (K : PbcCompletedDerived Z (pbcIntegralDatum l E)) :
+    (pbcScalarDirectImageIso l E F i g).hom.app
+        ((pbcActualDerivedPush h (pbcIntegralDatum l E)).obj K) ≫
+      (pbcActualDerivedPush g (pbcIntegralDatum l F)).map
+        ((pbcScalarDirectImageIso l E F i h).hom.app K) ≫
+      (pbcActualDerivedDirectCompIso h g (pbcIntegralDatum l F)).hom.app
+        ((pbcEmbeddingAmbientTensor l E F i Z).obj K) =
+    (pbcEmbeddingAmbientTensor l E F i Y).map
+        ((pbcActualDerivedDirectCompIso h g (pbcIntegralDatum l E)).hom.app K) ≫
+      (pbcScalarDirectImageIso l E F i (h ≫ g)).hom.app K := by
+  have hm := scalarMate_comp
+    (pbcActualDerivedAdjunction g (pbcIntegralDatum l E))
+    (pbcActualDerivedAdjunction h (pbcIntegralDatum l E))
+    (pbcActualDerivedAdjunction g (pbcIntegralDatum l F))
+    (pbcActualDerivedAdjunction h (pbcIntegralDatum l F))
+    (pbcActualDerivedAdjunction (h ≫ g) (pbcIntegralDatum l E))
+    (pbcActualDerivedAdjunction (h ≫ g) (pbcIntegralDatum l F))
+    (TwoSquare.mk _ _ _ _ (pbcScalarOrdinaryPullIso l E F i g).hom)
+    (TwoSquare.mk _ _ _ _ (pbcScalarOrdinaryPullIso l E F i h).hom)
+    (TwoSquare.mk _ _ _ _ (pbcScalarOrdinaryPullIso l E F i (h ≫ g)).hom)
+    (pbcActualDerivedPullCompIso h g (pbcIntegralDatum l E))
+    (pbcActualDerivedPullCompIso h g (pbcIntegralDatum l F))
+    (pbcScalarOrdinaryPull_comp l E F i g h) K
+  simpa only [pbcScalarDirectImageIso_hom, pbcScalarDirectImageMap,
+    pbcActualScalarDirectImageMap, pbcScalarOrdinaryPullIso,
+    pbcActualDerivedDirectCompIso] using hm
 
 /-- Completed pullback comparison respects composition with its actual unit pasting.
 Source: blueprint order 1307 (blueprint: prop-weil-pbc-scalar-extension).
@@ -1738,25 +2141,6 @@ theorem pbcScalarCompletedPull_comp
 variable (G : Type u) [Field G] [Algebra ℚ_[l] G] [FiniteDimensional ℚ_[l] G]
     (j : F →ₐ[ℚ_[l]] G)
 
-/-- Direct-image comparison respects successive finite coefficient extensions.
-Source: blueprint order 1307 (blueprint: prop-weil-pbc-scalar-extension).
-Proof: the two composites are projection mates with the same counit tensored
-with the product coefficient. Ordinary tensor balancing sends the iterated
-coefficient tensor to that product. The universal derived normalizations make
-this equality independent of the chosen flat representative. -/
-theorem pbcScalarDirectImage_coefficients
-    (K : PbcCompletedDerived X (pbcIntegralDatum l E)) :
-    (pbcEmbeddingAmbientTensor l F G j Y).map
-        ((pbcScalarDirectImageIso l E F i g).hom.app K) ≫
-      (pbcScalarDirectImageIso l F G j g).hom.app
-        ((pbcEmbeddingAmbientTensor l E F i X).obj K) ≫
-      (pbcActualDerivedPush g (pbcIntegralDatum l G)).map
-        ((pbcAmbientScalarComp l E F G i j X).hom.app K) =
-    (pbcAmbientScalarComp l E F G i j Y).hom.app
-        ((pbcActualDerivedPush g (pbcIntegralDatum l E)).obj K) ≫
-      (pbcScalarDirectImageIso l E G (j.comp i) g).hom.app K := by
-  sorry
-
 /-- Pullback comparison respects successive finite coefficient extensions.
 Source: blueprint order 1307 (blueprint: prop-weil-pbc-scalar-extension).
 Proof: on resolving complexes all three coefficient extensions are sheafified
@@ -1775,6 +2159,73 @@ theorem pbcScalarOrdinaryPull_coefficients
         ((pbcAmbientScalarComp l E F G i j Y).hom.app K) ≫
       (pbcScalarOrdinaryPullIso l E G (j.comp i) g).hom.app K := by
   sorry
+
+private theorem scalarMate_coefficients
+    {C D E C' D' E' : Type*}
+    [Category C] [Category D] [Category E]
+    [Category C'] [Category D'] [Category E']
+    {L₁ : C ⥤ C'} {R₁ : C' ⥤ C} (a₁ : L₁ ⊣ R₁)
+    {L₂ : D ⥤ D'} {R₂ : D' ⥤ D} (a₂ : L₂ ⊣ R₂)
+    {L₃ : E ⥤ E'} {R₃ : E' ⥤ E} (a₃ : L₃ ⊣ R₃)
+    {F : C ⥤ D} {F' : C' ⥤ D'} {G : D ⥤ E} {G' : D' ⥤ E'}
+    {H : C ⥤ E} {H' : C' ⥤ E'}
+    (α : TwoSquare F L₁ L₂ F') (β : TwoSquare G L₂ L₃ G')
+    (γ : TwoSquare H L₁ L₃ H') (u : F ⋙ G ≅ H) (v : F' ⋙ G' ≅ H')
+    (ho : ∀ T : C, β.natTrans.app (F.obj T) ≫ G'.map (α.natTrans.app T) ≫
+      v.hom.app (L₁.obj T) = L₃.map (u.hom.app T) ≫ γ.natTrans.app T) (K : C') :
+    G.map ((mateEquiv a₁ a₂ α).natTrans.app K) ≫
+        (mateEquiv a₂ a₃ β).natTrans.app (F'.obj K) ≫ R₃.map (v.hom.app K) =
+      u.hom.app (R₁.obj K) ≫ (mateEquiv a₁ a₃ γ).natTrans.app K := by
+  have hs : ((TwoSquare.hComp α β).whiskerTop u.inv).whiskerBottom v.hom = γ := by
+    ext T
+    have ht := congrArg (fun z ↦ L₃.map (u.inv.app T) ≫ z) (ho T)
+    simp only [← L₃.map_comp_assoc, Iso.inv_hom_id_app, L₃.map_id,
+      Category.id_comp] at ht
+    simpa only [TwoSquare.hComp, TwoSquare.whiskerTop, TwoSquare.whiskerBottom,
+      NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+      Functor.associator_hom_app, Functor.associator_inv_app,
+      Category.id_comp, Category.comp_id, Category.assoc] using ht
+  have hm := mateEquiv_whiskerTop_whiskerBottom a₁ a₃ (TwoSquare.hComp α β)
+    u.inv v.hom
+  rw [hs, mateEquiv_vcomp a₁ a₂ a₃] at hm
+  have hc := congrArg (fun z ↦ z.natTrans.app K) hm
+  apply (cancel_epi (u.inv.app (R₁.obj K))).mp
+  change _ = u.inv.app _ ≫ u.hom.app _ ≫ _
+  simpa only [TwoSquare.whiskerRight, TwoSquare.whiskerLeft, TwoSquare.vComp,
+    NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    Functor.associator_hom_app, Functor.associator_inv_app,
+    Category.id_comp, Category.comp_id, Category.assoc, Iso.inv_hom_id_app_assoc] using hc.symm
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+/-- Direct-image comparison respects successive finite coefficient extensions.
+Source: blueprint order 1307 (blueprint: prop-weil-pbc-scalar-extension).
+Proof: the two composites are projection mates with the same counit tensored
+with the product coefficient. Ordinary tensor balancing sends the iterated
+coefficient tensor to that product. The universal derived normalizations make
+this equality independent of the chosen flat representative. -/
+theorem pbcScalarDirectImage_coefficients
+    (K : PbcCompletedDerived X (pbcIntegralDatum l E)) :
+    (pbcEmbeddingAmbientTensor l F G j Y).map
+        ((pbcScalarDirectImageIso l E F i g).hom.app K) ≫
+      (pbcScalarDirectImageIso l F G j g).hom.app
+        ((pbcEmbeddingAmbientTensor l E F i X).obj K) ≫
+      (pbcActualDerivedPush g (pbcIntegralDatum l G)).map
+        ((pbcAmbientScalarComp l E F G i j X).hom.app K) =
+    (pbcAmbientScalarComp l E F G i j Y).hom.app
+        ((pbcActualDerivedPush g (pbcIntegralDatum l E)).obj K) ≫
+      (pbcScalarDirectImageIso l E G (j.comp i) g).hom.app K := by
+  have hm := scalarMate_coefficients
+    (pbcActualDerivedAdjunction g (pbcIntegralDatum l E))
+    (pbcActualDerivedAdjunction g (pbcIntegralDatum l F))
+    (pbcActualDerivedAdjunction g (pbcIntegralDatum l G))
+    (TwoSquare.mk _ _ _ _ (pbcScalarOrdinaryPullIso l E F i g).hom)
+    (TwoSquare.mk _ _ _ _ (pbcScalarOrdinaryPullIso l F G j g).hom)
+    (TwoSquare.mk _ _ _ _ (pbcScalarOrdinaryPullIso l E G (j.comp i) g).hom)
+    (pbcAmbientScalarComp l E F G i j Y) (pbcAmbientScalarComp l E F G i j X)
+    (pbcScalarOrdinaryPull_coefficients l E F i g G j) K
+  simpa only [pbcScalarDirectImageIso_hom, pbcScalarDirectImageMap,
+    pbcActualScalarDirectImageMap, pbcScalarOrdinaryPullIso] using hm
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
@@ -1966,6 +2417,156 @@ variable [Algebra (Padic l) E] [Algebra (Padic l) F]
 variable [FiniteDimensional (Padic l) E] [FiniteDimensional (Padic l) F]
 variable (i : E →ₐ[Padic l] F) {X Y : Scheme.{u}} (g : X ⟶ Y)
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem pbcCompletedScalar_directImage
+    {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) :
+    pbcCompletedScalar Y d ≫ completedCoefficientDirectImageMap g d =
+      proEtaleConstantDirectImageMap g CommRingCat.{u + 1} (CommRingCat.of A) ≫
+        (proEtaleSheafDirectImage g CommRingCat.{u + 1}).map
+          (pbcCompletedScalar X d) := by
+  have hp (W : Scheme.{u}) (n : ℕ) :
+      pbcCompletedScalar W d ≫ pbcAdicProjection W d n =
+        (constantSheaf (ProEt.topology W) CommRingCat.{u + 1}).map
+          (CommRingCat.ofHom (Ideal.Quotient.mk (d.ideal ^ (n + 1)))) ≫
+            (pbcLevelConstantComparison W d n).hom := by
+    dsimp only [pbcCompletedScalar, pbcAdicProjection, pbcCompletedComparison]
+    rw [Category.assoc]
+    erw [HasLimit.isoOfNatIso_hom_π]
+    rw [← Category.assoc]
+    erw [(adicDatumScalar_exists W
+      { toCompleteCoefficientDatum := d.toCompleteCoefficientDatum,
+        quotientFinite := d.quotientFinite }).exists.choose_spec n]
+    rfl
+  have hp' := hp
+  simp only [pbcAdicProjection] at hp'
+  have hs : proEtaleConstantInverseImageMap g CommRingCat.{u + 1}
+      (CommRingCat.of A) ≫ pbcCompletedScalar X d =
+      (proEtaleSheafInverseImage g CommRingCat.{u + 1}).map
+        (pbcCompletedScalar Y d) ≫ completedCoefficientMap g d := by
+    apply limit.hom_ext
+    rintro ⟨n⟩
+    change _ ≫ pbcAdicProjection X d n = _ ≫ pbcAdicProjection X d n
+    rw [Category.assoc, hp]
+    simp only [pbcAdicProjection, completedCoefficientMap, limit.lift_π,
+      completedCoefficientComponent, completedFiniteCoefficientMap, Category.assoc]
+    rw [← Functor.map_comp_assoc, hp']
+    simp only [Functor.map_comp, Category.assoc]
+    rw [← Functor.map_comp_assoc _ (pbcLevelConstantComparison Y d n).hom
+      (pbcLevelConstantComparison Y d n).inv, Iso.hom_inv_id,
+      CategoryTheory.Functor.map_id, Category.id_comp]
+    exact (proEtaleConstantInverseImageMap_naturality g
+      (CommRingCat.ofHom (Ideal.Quotient.mk (d.ideal ^ (n + 1))))).symm =≫ _
+  have hd : pbcCompletedScalar Y d ≫ completedCoefficientDirectImageMap g d =
+      proEtaleConstantDirectImageMap g CommRingCat.{u + 1} (CommRingCat.of A) ≫
+        (proEtaleSheafDirectImage g CommRingCat.{u + 1}).map
+          (pbcCompletedScalar X d) := by
+    let adj := proEtaleSheafAdjunction g CommRingCat.{u + 1}
+    have h := congrArg (adj.homEquiv _ _) hs
+    dsimp only [adj] at h
+    simpa only [Adjunction.homEquiv_unit, proEtaleConstantInverseImageMap,
+      completedCoefficientDirectImageMap,
+      Functor.map_comp, Category.assoc, Adjunction.unit_naturality_assoc,
+      Adjunction.right_triangle_components_assoc] using h.symm
+  exact hd
+
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem pbcCompletedSection_directImage
+    {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
+    (U : Y.ProEtᵒᵖ) (b : A) :
+    (completedCoefficientDirectImageMap g d).hom.app U (pbcCompletedSection Y d U b) =
+      pbcCompletedSection X d ((proEtaleBaseChange g).op.obj U) b := by
+  have h := congrArg (fun f ↦ f.hom.app U
+    ((toSheafify (ProEt.topology Y)
+      ((Functor.const Y.ProEtᵒᵖ).obj (CommRingCat.of A))).app U b))
+    (pbcCompletedScalar_directImage g d)
+  have hc := ((sheafificationAdjunction (ProEt.topology Y) CommRingCat.{u + 1}).homEquiv
+    ((Functor.const Y.ProEtᵒᵖ).obj (CommRingCat.of A))
+    ((proEtaleSheafDirectImage g CommRingCat.{u + 1}).obj
+      ((constantSheaf (ProEt.topology X) CommRingCat.{u + 1}).obj
+        (CommRingCat.of A)))).apply_symm_apply (Functor.whiskerLeft (proEtaleBaseChange g).op
+      (toSheafify (ProEt.topology X)
+        ((Functor.const X.ProEtᵒᵖ).obj (CommRingCat.of A))))
+  have hcU := congrArg (fun f ↦ f.app U b) hc
+  change (proEtaleConstantDirectImageMap g CommRingCat.{u + 1}
+    (CommRingCat.of A)).hom.app U _ = _ at hcU
+  change _ = (pbcCompletedScalar X d).hom.app
+    ((proEtaleBaseChange g).op.obj U) _ at h
+  exact h.trans (congrArg
+    ((pbcCompletedScalar X d).hom.app ((proEtaleBaseChange g).op.obj U)) hcU)
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem pbcActualOperations_linear_aux
+    {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) :
+    (pbcActualDerivedPush g d).Additive ∧ (pbcActualDerivedPush g d).Linear A ∧
+    (pbcActualCompletedPull g d).Additive ∧ (pbcActualCompletedPull g d).Linear A := by
+  have hG : (completedModuleDirectImage g d).Linear A := by
+    constructor
+    intro M N f b
+    ext U x
+    change (pbcCompletedSection X d ((proEtaleBaseChange g).op.obj U) b) •
+        f.val.app ((proEtaleBaseChange g).op.obj U) x =
+      ((completedCoefficientDirectImageMap g d).hom.app U
+        (pbcCompletedSection Y d U b)) •
+        f.val.app ((proEtaleBaseChange g).op.obj U) x
+    rw [pbcCompletedSection_directImage]
+  let RF := (completedModuleDirectImage g d).rightDerivedFunctor
+  let η := (completedModuleDirectImage g d).rightDerivedFunctorUnit
+  have hRF : RF.Linear A := by
+    rw [Functor.linear_iff]
+    intro K r
+    let γ₁ : RF ⟶ RF :=
+      { app := fun L ↦ RF.map (r • 𝟙 L)
+        naturality := fun L M f ↦ by
+          simp only [← RF.map_comp, Linear.comp_smul, Linear.smul_comp,
+            Category.comp_id, Category.id_comp] }
+    let γ₂ : RF ⟶ RF :=
+      { app := fun L ↦ r • 𝟙 (RF.obj L)
+        naturality := fun L M f ↦ by simp }
+    have heq : γ₁ = γ₂ := by
+      apply Functor.rightDerived_ext RF η
+        (HomotopyCategory.quasiIso _ (.up ℤ)) RF
+      ext L
+      have hn := η.naturality (r • 𝟙 L)
+      change η.app L ≫ RF.map (r • 𝟙 (DerivedCategory.Qh.obj L)) =
+        η.app L ≫ (r • 𝟙 (RF.obj (DerivedCategory.Qh.obj L)))
+      have hQ : DerivedCategory.Qh.map (r • 𝟙 L) =
+          r • 𝟙 (DerivedCategory.Qh.obj L) := by
+        rw [CategoryTheory.Functor.map_smul, CategoryTheory.Functor.map_id]
+      have hT : ((completedModuleDirectImage g d).mapHomotopyCategory (.up ℤ) ⋙
+          DerivedCategory.Qh).map (r • 𝟙 L) = r • 𝟙 _ := by
+        rw [CategoryTheory.Functor.map_smul, CategoryTheory.Functor.map_id]
+      change ((completedModuleDirectImage g d).mapHomotopyCategory (.up ℤ) ⋙
+          DerivedCategory.Qh).map (r • 𝟙 L) ≫ η.app L =
+        η.app L ≫ RF.map (DerivedCategory.Qh.map (r • 𝟙 L)) at hn
+      rw [hQ, hT, Linear.smul_comp, Category.id_comp] at hn
+      rw [Linear.comp_smul]
+      exact hn.symm.trans (congrArg (fun z ↦ r • z) (Category.comp_id (η.app L))).symm
+    exact congrArg (fun γ : RF ⟶ RF ↦ γ.app K) heq
+  have hRFAdd : RF.Additive :=
+    Functor.additive_of_iso
+      (completedModuleDirectImage g d).rightDerivedFunctorIsoKInjectives.symm
+  have hPullAdd : (pbcActualDerivedPull g d).Additive :=
+    (pbcActualDerivedAdjunction g d).left_adjoint_additive
+  have hPull : (pbcActualDerivedPull g d).Linear A :=
+    (pbcActualDerivedAdjunction g d).left_adjoint_linear
+  let I := ObjectProperty.ι (PbcIsIntrinsicallyComplete X d)
+  have hReflect : I.leftAdjoint.Linear A :=
+    (Adjunction.ofIsRightAdjoint I).left_adjoint_linear
+  have hReflectAdd : I.leftAdjoint.Additive :=
+    (Adjunction.ofIsRightAdjoint I).left_adjoint_additive
+  refine ⟨inferInstance, hRF, ?_, ?_⟩
+  · change (pbcActualDerivedPull g d ⋙ I.leftAdjoint ⋙ I).Additive
+    infer_instance
+  · change (pbcActualDerivedPull g d ⋙ I.leftAdjoint ⋙ I).Linear A
+    infer_instance
+
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- Actual direct image and completed pullback retain constant coefficient scalars.
 Source: blueprint order 1307 (blueprint: prop-weil-pbc-scalar-extension).
 Proof: ordinary direct image uses the unchanged additive section maps. Its module
@@ -1977,7 +2578,7 @@ theorem pbcActualOperations_linear :
     (pbcActualDerivedPush g (pbcIntegralDatum l E)).Linear (PbcIntegralRing l E) ∧
     (pbcActualCompletedPull g (pbcIntegralDatum l E)).Additive ∧
     (pbcActualCompletedPull g (pbcIntegralDatum l E)).Linear (PbcIntegralRing l E) := by
-  sorry
+  exact pbcActualOperations_linear_aux g (pbcIntegralDatum l E)
 
 /-- Additivity of actual derived direct image.
 Source: blueprint order 1307 (blueprint: prop-weil-pbc-scalar-extension). -/
@@ -2372,9 +2973,9 @@ theorem pbcCoherentScalarExtension
         (pbcStageAssociator l Ω T h' h'').hom.app ((pbcStageTransition l Ω T h).obj K) ≫
           (pbcStageAssociator l Ω T h (h'.trans h'')).hom.app K) ∧
     NatTrans.CommShift (pbcStageAssociator l Ω T h h').hom ℤ := by
-  obtain ⟨hPentagon, hId, hUnits⟩ := pbcStageAssociator_laws l Ω T
+  have hLaws := pbcStageAssociator_laws l Ω T
   exact ⟨(pbcStageExact l Ω T h).1, (pbcStageExact l Ω T h).2,
-    hId E, (hUnits h).1, (hUnits h).2, hPentagon h h' h'',
+    hLaws.2.1 E, (hLaws.2.2 h).1, (hLaws.2.2 h).2, hLaws.1 h h' h'',
     pbcStageAssociatorShift l Ω T h h'⟩
 
 end AlgebraicGeometry.Scheme
