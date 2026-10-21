@@ -17,9 +17,84 @@
   "def-weil-proetale-constructible-sheaf",
   "def-weil-pbc-constructible-complexes"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The field $k$ is Noetherian: its only ideals are $(0)$ and $(1)$; $\\operatorname{Spec}k$ is locally Noetherian and is a one-point, hence quasi-compact, space. Apply [lem-weil-pbc-finite-type-over-noetherian] to $X\\to\\operatorname{Spec}k$ to make $X$ Noetherian. By [lem-weil-pbc-noetherian-open-subscheme-noetherian], every open subscheme of $X$ is quasi-compact. In particular the preimage of any affine open of $Y$ under $f$ is quasi-compact, so $f$ is quasi-compact. Likewise, the preimage of any affine open of $X\\times_YX$ under $\\Delta_f:X\\to X\\times_YX$ is an open subscheme of $X$ and therefore quasi-compact. Thus $\\Delta_f$ is quasi-compact and $f$ is quasi-separated. These are exactly the hypotheses needed for direct-image site comparison; no closed-diagonal or separatedness assertion is used.",
+   "uses": [
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "def-weil-finite-type-morphism",
+    "def-weil-quasi-separated-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T6, lemma-finite-type-noetherian; properties.tex Tags 01OV (definition-noetherian), 01OW (lemma-locally-Noetherian), 01OZ (lemma-Noetherian-topology); the two quasi-compactness tests are immediate from the definitions"
+   }
+  },
+  {
+   "text": "Choose integers $a\\leq b$ outside which the cohomology of $C$ vanishes (choose $a=b=0$ if every cohomology sheaf vanishes). The intrinsic constructibility hypothesis and finiteness of $B$ meet [lem-weil-pbc-finite-ring-constructible-derived-origin] exactly. Its essential-image assertion gives $L\\in D^b_c(X_{\\mathrm{et}},B)$ and an isomorphism $\\alpha:\\nu_X^*L\\xrightarrow{\\sim}C$. Its interval reflection shows that $L$ has cohomology in $[a,b]$, so in particular it is bounded below. This proves the origin clause for arbitrary finite commutative $B$, with no quotient-of-a-DVR or finite-Tor-amplitude hypothesis.",
+   "uses": [
+    "lem-weil-pbc-finite-ring-constructible-derived-origin"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AL, lemma-compare-constructible-derived, together with Tag 09AK, lemma-compare-constructible; bounded restriction and exact cohomology comparison"
+   }
+  },
+  {
+   "text": "Apply [thm-dg-finite-type-constructibility] with coefficient ring $A=B$, input $L$, and annihilator $m$. Both schemes are finite type over the same field $k$, $B$ is finite, $mB=0$, and $m$ is invertible in $k$. That theorem explicitly permits a nonseparated $f$ and applies to the ordinary etale derived direct image. Consequently $N:=Rf_{\\mathrm{et},*}L$ belongs to $D^b_c(Y_{\\mathrm{et}},B)$.",
+   "uses": [
+    "thm-dg-finite-type-constructibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Theorem 6.7.1 and the finite-coefficient comparison argument of Lemma 6.7.2, using the existing thm-dg-finite-type-constructibility in its main-20261015 nonseparated form"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-comparison-direct-image-canonical-mate] with $u=f$, $\\Lambda=B$ and $K=L$: step 1 supplies qcqs and step 2 supplies bounded-below membership. It proves that the specified mate $b_{f,L}:\\nu_Y^*Rf_{\\mathrm{et},*}L\\to Rf_{\\mathrm{proet},*}\\nu_X^*L$ is an isomorphism. More explicitly, writing $a_f:\\nu_X^*f_{\\mathrm{et}}^*\\xrightarrow{\\sim}f_{\\mathrm{proet}}^*\\nu_Y^*$, this is the adjoint transpose of $\\nu_X^*(\\varepsilon^e_{f,L})\\circ a_{f,Rf_{\\mathrm{et},*}L}^{-1}$; its counit normalization is part of that cited statement. Compose it with $Rf_{\\mathrm{proet},*}(\\alpha)$. The resulting isomorphism $\\beta=Rf_{\\mathrm{proet},*}(\\alpha)\\circ b_{f,L}:\\nu_Y^*N\\xrightarrow{\\sim}Rf_{\\mathrm{proet},*}C$ is precisely the canonical comparison after identifying $C$ with the chosen etale realization by $\\alpha$. A functor carries $\\alpha$ and its inverse to mutually inverse maps, so this last composition remains an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-comparison-direct-image-canonical-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A6, lemma-morphism-comparison; named bounded-below module mate and counit normalization as in prop-weil-pbc-comparison-direct-image, proof, first and named-map-verification paragraphs"
+   }
+  },
+  {
+   "text": "By step 3, $N$ has constructible etale cohomology and is bounded. Apply the forward direction of [lem-weil-pbc-finite-ring-constructible-derived-origin] at $Y$. It says that $\\nu_Y^*N$ has intrinsically constructible pro-etale cohomology, and its interval-preservation clause retains a finite cohomological interval for $N$. The isomorphism $\\beta$ of step 4 identifies each cohomology sheaf of $Rf_{\\mathrm{proet},*}C$ with that of $\\nu_Y^*N$. Vanishing and the local constant finite models on each constructible stratum are invariant under this isomorphism: restrict it to the strata and compose the local trivializations with it. Thus the direct image is bounded and intrinsically constructible, as asserted.",
+   "uses": [
+    "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "def-weil-proetale-constructible-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09AK (lemma-compare-constructible) and 09AL (lemma-compare-constructible-derived), forward implication and exactness"
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "def-weil-finite-type-morphism",
+  "def-weil-quasi-separated-morphism",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "thm-dg-finite-type-constructibility",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "def-weil-proetale-constructible-sheaf"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Finite-coefficient etale-origin / direct-image comparison argument of Lemma 6.7.2, with Theorem 6.7.1 supplied by thm-dg-finite-type-constructibility and the general finite-ring comparisons of Stacks 09AK, 09AL and 09A6; written assembly of existing nodes"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,10 +130,45 @@
    "results": "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean (Mathlib/AlgebraicGeometry)",
    "date": "2026-10-21",
    "verdict": "no match: Chevalley constructible subsets, etale site definitions and algebraic etaleness do not state intrinsic constructible pro-etale derived pushforward"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible|Constructible|proetale|ProEtale",
+   "results": "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean (Mathlib/AlgebraicGeometry)",
+   "date": "2026-10-21",
+   "verdict": "no match: site definitions, Chevalley constructible subsets, algebraic etaleness and ordinary sheaf pushforward do not state the finite-ring intrinsic constructible derived comparison/pushforward theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite coefficient etale proetale derived comparison and constructibility of higher direct images",
+   "results": "Algebra.Etale.finitePresentation, AlgebraicGeometry.IsEtale, Algebra.Etale.formallyEtale, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.smallEtalePretopology, Algebra.FormallyEtale.instTensorProduct",
+   "date": "2026-10-21",
+   "verdict": "no match: site definitions, Chevalley constructible subsets, algebraic etaleness and ordinary sheaf pushforward do not state the finite-ring intrinsic constructible derived comparison/pushforward theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, CategoryTheory.Sheaf, CategoryTheory.Functor.rightDerived",
+   "results": "No hits",
+   "date": "2026-10-21",
+   "verdict": "no match: site definitions, Chevalley constructible subsets, algebraic etaleness and ordinary sheaf pushforward do not state the finite-ring intrinsic constructible derived comparison/pushforward theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived direct image of a bounded constructible torsion sheaf complex under a nonseparated morphism of schemes over a field compared between etale and proetale sites",
+   "results": "AlgebraicGeometry.Scheme.Modules.pushforward, SheafOfModules.pushforward, SheafOfModules.pushforwardNatIso, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, SheafOfModules.pushforward_map_val, SheafOfModules.pushforward_obj_val, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τr, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_r",
+   "date": "2026-10-21",
+   "verdict": "no match: site definitions, Chevalley constructible subsets, algebraic etaleness and ordinary sheaf pushforward do not state the finite-ring intrinsic constructible derived comparison/pushforward theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bounded intrinsically constructible complexes of finite ring modules on the proetale site have bounded constructible etale origin and finite type pushforward preserves constructibility without separatedness",
+   "results": "AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.Hom.isConstructible_image, AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, AlgebraicGeometry.Scheme.smallEtalePretopology, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, PrimeSpectrum.isConstructible_comap_image, AlgebraicGeometry.Scheme.etalePretopology",
+   "date": "2026-10-21",
+   "verdict": "no match: site definitions, Chevalley constructible subsets, algebraic etaleness and ordinary sheaf pushforward do not state the finite-ring intrinsic constructible derived comparison/pushforward theorem"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sf-integral-direct-image-constructible",
@@ -79,5 +189,49 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sf-finite-proetale-pushforward-constructible",
+  "worker": "stage1",
+  "summary": "Kept the statement and all original statement dependencies. Reused existing finite-ring derived origin, nonseparated etale direct-image constructibility and the specified qcqs canonical comparison mate. Proved qcqs directly using Noetherian open subschemes; explicitly composed the comparison with the input origin isomorphism and transferred the output interval and finite local models. No new nodes, no Tor or separatedness hypothesis, no completion or coefficient-encoding change. Searched live project declarations and Mathlib; the separated pro-etale source theorem is not an attachment.",
+  "blueprint": "Realizes the ordinary direct-image constructible codomain needed by def-weil-ordinary-compact-cohomology (main-20261015, displayed RGamma definition), through lem-weil-structure-direct-images-constructible and parent lem-sf-integral-direct-image-constructible step 4: intrinsic finite reductions, etale origin, nonseparated etale finite-type constructibility, and pro-etale direct-image comparison. The imported unit is a definition with no proof steps; no chapter or unit route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic geometric finiteness tool: finite type over the Noetherian field spectrum makes the source Noetherian, needed for qcqs; the item unit contains no such geometric lemma."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "why": "Generic Noetherian open-subscheme tool used for the affine-preimage tests of f and its diagonal; no same-unit replacement exists."
+   },
+   {
+    "node": "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "why": "Generic site-comparison equivalence for every finite commutative ring, used for input origin and output intrinsic constructibility without Tor assumptions; the same-unit item needs this established general tool."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "why": "Generic qcqs comparison tool proving invertibility of the specified canonical mate on bounded-below finite-coefficient complexes, not a new pushforward finiteness route."
+   },
+   {
+    "node": "thm-dg-finite-type-constructibility",
+    "why": "Existing nonseparated finite-type etale finiteness theorem, precisely the etale input named in the item source and the parent split; not a replacement for a unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "thm-dg-finite-type-constructibility"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q21-b39377e41",
+  "group": "Q21",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q21-b39377e41 (reviewer sub-agent of L); spot-checked: I read every step and every cited statement; there are 0 new nodes. Shape: one commit; the statement and stmt_deps are byte-identical to the live node, which is still unsplit live. No repair note and no dropped-list entry. No SGA. Sources checked: Stacks proetale.tex 09A6 lemma-morphism-comparison (needs qcqs f and an abelian/D+ input), 09AK and 09AL compare-constructible(-derived) (any scheme, Noetherian Λ, and a finite ring is Noetherian), and Bhatt-Scholze Thm 6.7.1 / Lemma 6.7.2, whose finite-level input is the existing nonseparated thm-dg-finite-type-constructibility. Step 1: X is Noetherian by lem-weil-pbc-finite-type-over-noetherian, opens are quasi-compact by the open-subscheme leaf, so the affine preimages under f and Δ_f are quasi-compact and f is qcqs; no affine intersections or separatedness are used. Step 2: the finite-ring origin node applies to an arbitrary finite commutative B, giving L ∈ D^b_c and α; interval reflection makes L bounded below. Step 3: all thm-dg hypotheses hold (same field k, finite type, B finite, m invertible). Step 4: the canonical-mate node applies with u=f qcqs and K=L ∈ D^+; β = Rf_proet(α)∘b is the named comparison, not an arbitrary isomorphism. Step 5: the forward direction at Y plus transport along β gives the conclusion. The closure of every proof_dep was computed and none reaches the item, so there is no cycle. No duplicate: cor-sf-direct-image-ctf-etale-origin needs separated f and ctf input, and thm-sf-ctf-stability covers only separated f with A_{E,n}. The unit sk-def-sf-admissible is a definition with uses=[]. I accept the five tool_uses: two Noetherian leaves, the finite-ring comparison, the qcqs mate and thm-dg. Edge cases tested: empty X, C=0, identity f, doubled-origin line, B=Z/4 with Z/2 (no finite Tor amplitude), m=1, product rings. No fixes."
+ }
 }
