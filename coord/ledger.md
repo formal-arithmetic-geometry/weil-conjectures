@@ -20439,3 +20439,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:32 L: merged deliver/Q45/lem-sfb-constructible-cocone-ambient-realization (reviewer PASS; after a return; new nodes: 2)
 - 06:32 L: merged deliver/N9/lem-sfb-etale-derived-tensor-stalk (reviewer PASS; after a return; new nodes: 2)
 - 06:33 L: returned deliver/Q07/lem-weil-pbc-exact-faithful-torsion (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-pbc-exact-faithful-torsion: lem-weil-pbc-exac)
+- 06:34 L: returned deliver/N0/det-def-sfb-filtered-two-colimit-model (reviewer RETURN: Returned as superseded (A7/B10); the mathematics itself is sound. The delivery was committed at 05:54 UTC. At 06:10 UTC )
