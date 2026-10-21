@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "det-def-sfb-filtered-two-colimit-characterization",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Filtered 2-colimits are equivalences with $\\mathcal C_\\infty$",
@@ -18,35 +18,128 @@
  ],
  "proof": [
   {
-   "text": "1. The objects of $\\mathcal D$ in the essential image of $\\Phi$ are those isomorphic to some\n   $\\Phi(i,x)=\\Phi_i(x)$, which is (Obj).",
-   "uses": [],
-   "elementary": null
+   "text": "By [det-def-sfb-filtered-two-colimit-model], every object of $\\mathcal C_\\infty$ is a pair $(i,x)$ and $\\Phi(i,x)=\\Phi_i(x)$. Essential surjectivity therefore says exactly that every $d\\in\\mathcal D$ is isomorphic to some $\\Phi_i(x)$, which is (Obj) in [det-def-sfb-filtered-two-colimit-conditions]. The direction of the isomorphism is immaterial because it can be inverted.",
+   "uses": [
+    "det-def-sfb-filtered-two-colimit-model",
+    "det-def-sfb-filtered-two-colimit-conditions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-characterization.proof.md",
+    "place": "Blueprint step 1: essential surjectivity"
+   }
   },
   {
-   "text": "2. Every morphism $(i,x)\\to(j,y)$ of $\\mathcal C_\\infty$ is a class $[k,g]$ with $k\\ge i,j$ and\n   $g\\colon T_{ik}x\\to T_{jk}y$, and $\\Phi([k,g])=\\theta_{jk,y}\\Phi_k(g)\\theta_{ik,x}^{-1}$. So the\n   image of $\\Hom_{\\mathcal C_\\infty}((i,x),(j,y))\\to\\Hom_{\\mathcal D}(\\Phi_ix,\\Phi_jy)$ consists exactly\n   of the morphisms of the form in (Hom-surj), and surjectivity for all $(i,x),(j,y)$ is (Hom-surj).",
-   "uses": [],
-   "elementary": null
+   "text": "Fix $a=(i,x)$ and $b=(j,y)$. The index $J_{ij}=\\{k\\in I:k\\ge i,j\\}$ in [det-def-sfb-filtered-two-colimit-model] is a set, is nonempty by directedness, and any two indices have an upper bound still in $J_{ij}$. As a preorder it has at most one arrow between fixed objects, so it is a small filtered category. Apply clause (1) of [lem-weil-pbc-filtered-colimit-sets-elementwise] to its Hom diagram: every arrow $a\\to b$ is $[k,g]$. The model gives\n$$\\Phi([k,g])=\\theta_{jk,y}\\Phi_k(g)\\theta_{ik,x}^{-1}.$$\nThus, if $\\Phi$ is full, a preimage of any $\\varphi:\\Phi_i(x)\\to\\Phi_j(y)$ has a representative giving exactly the equation in (Hom-surj) of [det-def-sfb-filtered-two-colimit-conditions]. Conversely that condition supplies $[k,g]$ mapping to every such $\\varphi$. Since all objects are pairs, this is fullness.",
+   "uses": [
+    "det-def-sfb-filtered-two-colimit-model",
+    "lem-weil-pbc-filtered-colimit-sets-elementwise",
+    "det-def-sfb-filtered-two-colimit-conditions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-characterization.proof.md",
+    "place": "Blueprint step 2: representatives and fullness; Stacks Tag 04AX (section-directed-colimits)"
+   }
   },
   {
-   "text": "3. Suppose (Hom-inj), and let $[k,g],[k',g']\\colon(i,x)\\to(j,y)$ have the same image. Choose\n   $m\\ge k,k'$ and put $g_m=t_{km}(g)$, $g'_m=t_{k'm}(g')$, morphisms $T_{im}x\\to T_{jm}y$ of\n   $\\mathcal C_m$. By well-definedness of $\\Phi$, $\\theta_{jm,y}\\Phi_m(g_m)\\theta_{im,x}^{-1}=\\theta_{jm,y}\\Phi_m(g'_m)\\theta_{im,x}^{-1}$,\n   so $\\Phi_m(g_m)=\\Phi_m(g'_m)$. By (Hom-inj) there is $m'\\ge m$ with $T_{mm'}(g_m)=T_{mm'}(g'_m)$,\n   hence $t_{mm'}(g_m)=t_{mm'}(g'_m)$ and $[k,g]=[k',g']$. So $\\Phi$ is faithful.\n\n   Conversely, suppose $\\Phi$ faithful, and let $g,g'\\colon x\\to y$ in $\\mathcal C_k$ with\n   $\\Phi_k(g)=\\Phi_k(g')$. Since $T_{kk}=\\mathrm{Id}$ and $\\theta_{kk}=\\mathrm{id}$, $[k,g]$ and $[k,g']$ are\n   morphisms $(k,x)\\to(k,y)$ with $\\Phi([k,g])=\\Phi_k(g)=\\Phi_k(g')=\\Phi([k,g'])$. So $[k,g]=[k,g']$:\n   there is $k'\\ge k$ with $t_{kk'}(g)=t_{kk'}(g')$, i.e.\n   $\\tau_{kkk',y}T_{kk'}(g)\\tau_{kkk',x}^{-1}=\\tau_{kkk',y}T_{kk'}(g')\\tau_{kkk',x}^{-1}$; as\n   $\\tau_{kkk'}$ is the identity, $T_{kk'}(g)=T_{kk'}(g')$. This is (Hom-inj).",
-   "uses": [],
-   "elementary": null
+   "text": "Assume (Hom-inj) of [det-def-sfb-filtered-two-colimit-conditions]. For fixed $(i,x),(j,y)$, take arrows with equal $\\Phi$-images. By [lem-weil-pbc-filtered-colimit-sets-elementwise](1) write them as $[k,g]$ and $[l,h]$. Choose $m\\ge k,l$ and put $u=t_{km}(g)$, $v=t_{lm}(h)$ using [det-def-sfb-filtered-two-colimit-model]. They have the same classes as $g,h$. Since the comparison is a well-defined functor, equality of their images gives\n$$\\theta_{jm,y}\\Phi_m(u)\\theta_{im,x}^{-1}=\\theta_{jm,y}\\Phi_m(v)\\theta_{im,x}^{-1}.$$\nCancel the outer isomorphisms to get $\\Phi_m(u)=\\Phi_m(v)$. Apply (Hom-inj) to the two arrows $u,v:T_{im}x\\to T_{jm}y$ in $\\mathcal C_m$: there is $n\\ge m$ with $T_{mn}(u)=T_{mn}(v)$. Conjugating both sides by the same source and target associators gives\n$$t_{mn}(u)=\\tau_{jmn,y}T_{mn}(u)\\tau_{imn,x}^{-1}=\\tau_{jmn,y}T_{mn}(v)\\tau_{imn,x}^{-1}=t_{mn}(v).$$\nThe equality criterion (3) of the set-colimit node now gives $[m,u]=[m,v]$, hence $[k,g]=[l,h]$. This proves faithfulness on each Hom set. The small filtered index needed here is the $J_{ij}$ checked in step 2.",
+   "uses": [
+    "det-def-sfb-filtered-two-colimit-model",
+    "lem-weil-pbc-filtered-colimit-sets-elementwise",
+    "det-def-sfb-filtered-two-colimit-conditions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-characterization.proof.md",
+    "place": "Blueprint step 3, forward direction: common-stage equality; Stacks Tag 04AX (section-directed-colimits)"
+   }
   },
   {
-   "text": "Finally, a functor is an equivalence if and only if it is fully faithful and essentially surjective.",
-   "uses": [],
-   "elementary": null
+   "text": "Conversely assume $\\Phi$ faithful, and let $g,g':x\\to y$ in $\\mathcal C_k$ satisfy $\\Phi_k(g)=\\Phi_k(g')$. Normalization $T_{kk}=\\mathrm{Id}$ and $\\theta_{kk}=\\mathrm{id}$ in [det-def-sfb-filtered-two-colimit-model] makes $[k,g]$ and $[k,g']$ arrows $(k,x)\\to(k,y)$ whose images are $\\Phi_k(g),\\Phi_k(g')$. Faithfulness gives $[k,g]=[k,g']$. Clause (3) of [lem-weil-pbc-filtered-colimit-sets-elementwise], applied to the small filtered tail $J_{kk}$, gives $n\\ge k$ with $t_{kn}(g)=t_{kn}(g')$. Here the model formula is\n$$t_{kn}(g)=\\tau_{kkn,y}T_{kn}(g)\\tau_{kkn,x}^{-1}=T_{kn}(g),$$\nand the same formula holds for $g'$, since $\\tau_{kkn}$ is an identity by normalization. Thus $T_{kn}(g)=T_{kn}(g')$, precisely (Hom-inj) in [det-def-sfb-filtered-two-colimit-conditions].",
+   "uses": [
+    "det-def-sfb-filtered-two-colimit-model",
+    "lem-weil-pbc-filtered-colimit-sets-elementwise",
+    "det-def-sfb-filtered-two-colimit-conditions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-characterization.proof.md",
+    "place": "Blueprint step 3, reverse direction: normalized representatives; Stacks Tag 04AX (section-directed-colimits)"
+   }
+  },
+  {
+   "text": "If the cocone is a filtered 2-colimit as defined in [det-def-sfb-filtered-two-colimit-conditions], steps 1–4 show that $\\Phi$ is essentially surjective and bijective on every Hom set. Apply [lem-trf-fully-faithful-ess-surj-equivalence] to $\\mathcal C_\\infty,\\mathcal D,\\Phi$ to obtain a quasi-inverse and natural isomorphisms; use a common sufficiently large universe for these ordinary categories. Conversely if $\\Phi$ is an equivalence, choose its quasi-inverse $G$ with $G\\Phi\\cong\\mathrm{id}$ and $\\Phi G\\cong\\mathrm{id}$. By [lem-sf-quasi-inverse-hom-bijection], its Hom maps are bijective, so it is full and faithful. Each object $d$ is isomorphic to $\\Phi(Gd)$ by the second natural isomorphism, so it is essentially surjective. Steps 1–4 give (Obj), (Hom-surj), and (Hom-inj); their conjunction is exactly the filtered 2-colimit predicate. This proves the final equivalence.",
+   "uses": [
+    "det-def-sfb-filtered-two-colimit-conditions",
+    "lem-trf-fully-faithful-ess-surj-equivalence",
+    "lem-sf-quasi-inverse-hom-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-characterization.proof.md",
+    "place": "Blueprint final sentence; Stacks Tag 02C3 (lemma-equivalence-categories) and definition-equivalence-categories"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "det-def-sfb-filtered-two-colimit-model",
+  "det-def-sfb-filtered-two-colimit-conditions",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise",
+  "lem-trf-fully-faithful-ess-surj-equivalence",
+  "lem-sf-quasi-inverse-hom-bijection"
+ ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-characterization.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-characterization.proof.md",
+  "place": "All three numbered arguments and final sentence, with explicit citations of the filtered set-colimit and equivalence criteria (Stacks Tags 04AX and 02C3)."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "FilteredTwoColimit|CategoryCocone|isEquivalence_iff",
+   "results": "9 hits: Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean, Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean, Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean, Mathlib/CategoryTheory/Equivalence.lean, Mathlib/CategoryTheory/Equivalence.lean, Mathlib/CategoryTheory/Equivalence.lean, Mathlib/CategoryTheory/Equivalence.lean, Mathlib/CategoryTheory/Sites/Descent/DescentData.lean (scope CategoryTheory)",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern localization-equivalence transport or monad/comonad comparison functors, not the category-of-pairs comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "comparison functor from filtered colimit category is faithful if equality of morphisms descends to a finite stage",
+   "results": "8 hits: CategoryTheory.Limits.IsColimit.ofFaithful, CategoryTheory.Functor.CoconeTypes.descColimitType_injective_iff_of_isFiltered', CategoryTheory.Functor.CoconeTypes.descColimitType_injective_iff_of_isFiltered, CategoryTheory.Limits.Types.FilteredColimit.isColimit_eq_iff', CategoryTheory.Limits.Types.FilteredColimit.colimit_eq_iff, CategoryTheory.IsFiltered.SmallFilteredIntermediate.instFaithfulInclusion, CategoryTheory.Limits.fullyFaithful_reflectsColimits, CategoryTheory.Limits.colimitLimitIso",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: set-colimit injectivity criteria cover only the existing set-colimit tool, not the category comparison characterization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsEquivalence\"",
+   "results": "12 hits: CategoryTheory.Functor.isEquivalence_refl, CategoryTheory.Functor.IsEquivalence, CategoryTheory.Equivalence.isEquivalence_functor, CategoryTheory.Equivalence.isEquivalence_inverse, CategoryTheory.Functor.IsEquivalence.essSurj, CategoryTheory.Functor.IsEquivalence.faithful, CategoryTheory.Functor.IsEquivalence.full, CategoryTheory.Functor.isEquivalence_inv",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: IsEquivalence and asEquivalence cover only the final categorical criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A comparison functor from a directed category colimit with eventual Hom sets is essentially surjective full and faithful exactly when objects morphisms and equalities descend to a finite stage",
+   "results": "8 hits: instEssSurjLightDiagram'LightDiagramToLightFunctor, CategoryTheory.Functor.IsLocallyDirected.cond, CategoryTheory.IsFinitelyPresentable.exists_eq_of_isColimit, CategoryTheory.Functor.exists_map_eq_of_isLocallyDirected, CategoryTheory.Functor.IsEventuallyConstantFrom.isColimitCocone, CategoryTheory.Functor.IsEventuallyConstantFrom.hasColimit, CategoryTheory.Functor.EssSurj, CategoryTheory.MorphismProperty.exists_hom_of_isFinitelyPresentable",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern locally directed functors, presentability or prestack descent, not this coherent directed category comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "CoherentCategoryCocone|HomSurj|HomInj|comparison.*Faithful|faithful.*comparison",
+   "results": "3 hits: Mathlib/CategoryTheory/Monad/Adjunction.lean, Mathlib/CategoryTheory/Monad/Adjunction.lean, Mathlib/CategoryTheory/Monad/Adjunction.lean (scope CategoryTheory)",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern localization-equivalence transport or monad/comonad comparison functors, not the category-of-pairs comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Essential surjectivity fullness and faithfulness of the comparison from the category of pairs for a coherent directed pseudofunctor are finite stage descent of objects morphisms and equality",
+   "results": "8 hits: CategoryTheory.Pseudofunctor.fullyFaithfulToDescentData, CategoryTheory.Pseudofunctor.IsPrestackFor.fullyFaithful, CategoryTheory.Pseudofunctor.isPrestackFor_ofArrows_iff, CategoryTheory.Pseudofunctor.IsPrestackFor.nonempty_fullyFaithful, CategoryTheory.Pseudofunctor.DescentData.nonempty_fullyFaithful_toDescentData_iff_of_sieve_eq, CategoryTheory.Pseudofunctor.isPrestackFor_iff, CategoryTheory.Pseudofunctor.isEquivalence_toDescentData, CategoryTheory.Pseudofunctor.IsStack.essSurj_of_sieve",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern locally directed functors, presentability or prestack descent, not this coherent directed category comparison"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -72,5 +165,21 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "det-def-sfb-filtered-two-colimit-characterization",
+  "worker": "stage1",
+  "summary": "Kept the statement and unit route unchanged. Made object descent and fullness explicit, proved both faithfulness directions by common-stage representatives and normalized transitions, and cited existing Mathlib leaves for both directions of the equivalence criterion. No new nodes; all searches were run through msearch and read.",
+  "blueprint": "Steps 1 and 2 realize blueprint proof points 1 and 2; steps 3–4 realize both directions of point 3; step 5 realizes the final equivalence sentence. This is the characterization portion of unit proof step 2.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NA-6359e11e8",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-6359e11e8 (reviewer sub-agent of L); spot-checked: I read the whole split; it is correct and needs no fixes. The delivery has no new nodes. The item statement matches main-20261015 det-def-sfb-filtered-two-colimit-characterization.md exactly, its stmt_deps (model, conditions) are unchanged, and nothing is weakened. Steps 1-4 follow the four blueprint proof points and are correct against the model and conditions statements. The index set {k ≥ i,j} is directed and nonempty, so the existing filtered set-colimit node (Stacks 04AX) applies through its clauses (1) and (3). Step 3 conjugates by the associators to pass from T_mn to the transition map t_mn. Step 4 uses that τ_kkn is the identity, which is the model's own normalization. Step 5 uses the two existing equivalence nodes (Stacks 02C3, at categories.tex l.403 with l.362) only for what they state: one direction each, with no triangle identities assumed. Small cases (a single index, empty stage categories, arrows that become equal only at a later stage) behave correctly. No existing node or blueprint statement duplicates the item, and the live FilteredTwoColimit.lean only defines the three conditions without proving this characterization. Batch-5 finding: lem-trf-fully-faithful-ess-surj-equivalence is the general Stacks 02C3 fact (fully faithful and essentially surjective implies equivalence). Its only dependency is def-nagata-category, it has no proof dependencies, and it is not a step of the trace-formula or Poincaré-duality proofs, so I accept the citation. No item or cited node is on the route-pivot drop list."
  }
 }

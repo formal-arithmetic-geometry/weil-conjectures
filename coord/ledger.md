@@ -19708,3 +19708,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:17 L: merged deliver/Q26/lem-sfb-extend-to-qlbar-constructible (reviewer FIX; after a return; new nodes: 2)
 - 03:17 L: merged deliver/Q30/sk-prop-sfb-cartesian-coefficients (reviewer PASS; after a return; new nodes: 2)
 - 03:18 L: merged deliver/Q06/det-sf-comp-composition-interchange (reviewer PASS; after a return; new nodes: 2)
+- 03:18 L: merged deliver/NA/det-def-sfb-filtered-two-colimit-characterization (reviewer PASS; first push; new nodes: 0)
