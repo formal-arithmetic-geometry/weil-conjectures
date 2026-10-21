@@ -13,7 +13,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 import WeilConjectures.AlgebraicGeometry.Modules.Dual
 import WeilConjectures.AlgebraicGeometry.DeterminantExteriorDualIso
 import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafPowerComparison
-import Sheaf.AlgebraicGeometry.Modules.DeterminantShortExact
+import WeilConjectures.AlgebraicGeometry.Modules.DeterminantShortExact
 
 /-! # Ordinary determinant evaluation
 
@@ -69,8 +69,10 @@ theorem determinant_dual_evaluation (X : Scheme.{u})
     (ShortComplex.Splitting.ofIsZeroOfIsIso S hZ (inferInstance : IsIso S.g)).shortExact
   have : M.IsFiniteLocallyFreeOfRank d := hfree
   let F := Scheme.Modules.exteriorSheaf M d
-  have : F.IsInvertible :=
+  have : (Scheme.Modules.exteriorPower M d).IsInvertible :=
     (Scheme.Modules.determinant_shortExact S hS 0 d d (by omega)).2.1
+  have : F.IsInvertible :=
+    Scheme.Modules.IsInvertible.of_iso (Scheme.Modules.exteriorSheafPowerIso M d).symm
   obtain ⟨e⟩ := exteriorSheaf_dual_iso X M d hfree
   let e' := (Scheme.Modules.exteriorSheafPowerIso (Scheme.Modules.dual M) d).trans
     (e.trans ((Scheme.Modules.dualFunctor X).mapIso
