@@ -26,39 +26,32 @@
  ],
  "proof": [
   {
-   "text": "Apply general module section transport along an isomorphism to pullback symmetry for the small-model structural map. The supplied neighbourhood leg and its projection identity give exactly the original restriction formula. Use the proved existential equivalence only inside the theorem proof. Mathlib sheafFiberCompIso identifies the set stalk and underlying module stalk and preserves germ maps.",
+   "text": "For the adopted full strict-local model, use strictLocalModuleSectionsSetEquiv and its unit/restriction formula. Mathlib sheafFiberCompIso identifies the underlying module stalk with the set stalk compatibly with germ maps.",
    "uses": [
-    "lem-weil-pbc-module-sections-iso-transport",
-    "def-weil-pbc-small-strict-local-section-maps"
+    "def-weil-pbc-strict-local-module-sections-set-equiv",
+    "lem-weil-pbc-strict-local-module-sections-set-transport",
+    "def-weil-pbc-geometric-stalks"
    ],
    "elementary": false
   },
   {
-   "text": "Use the small affine pointed-neighbourhood final functor to compute the set stalk as a colimit. The base-changed neighbourhood cone is limiting, with qcqs stages and affine transitions. Apply cofilteredLimitSections to obtain the section colimit. Its diagonal section maps agree with the transported small-model maps by the two pullback projections. The unique colimit comparison is bijective. The coefficient transport formula and the assumed representative equation show that the given map, conjugated by the source and target bijections, agrees with this comparison on every colimit component. Joint surjectivity of the components proves equality; conjugation proves bijectivity.",
+   "text": "Apply the official sets_pushforward_stalk_strictHenselization theorem to the underlying set sheaf. Its uniqueness clause identifies the given linear map conjugated by the source and target bijections with its bijective comparison. Cancel the bijections to obtain bijectivity of the given linear map.",
    "uses": [
-    "def-weil-pbc-small-strict-local-section-maps",
-    "lem-weil-pbc-strict-henselization-base-change-cone",
-    "lem-weil-pbc-cofiltered-etale-limit-sections",
-    "def-weil-pbc-strict-henselization-limit",
-    "def-weil-pbc-geometric-stalks",
-    "lem-weil-pbc-qcqs-morphism-permanence"
+    "lem-weil-pbc-sets-pushforward-stalk-strict-henselization"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-module-sections-iso-transport",
-  "def-weil-pbc-small-strict-local-section-maps",
-  "lem-weil-pbc-strict-henselization-base-change-cone",
-  "lem-weil-pbc-cofiltered-etale-limit-sections",
-  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-local-module-sections-set-equiv",
+  "lem-weil-pbc-strict-local-module-sections-set-transport",
   "def-weil-pbc-geometric-stalks",
-  "lem-weil-pbc-qcqs-morphism-permanence"
+  "lem-weil-pbc-sets-pushforward-stalk-strict-henselization"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 03Q9, degree-zero comparison; Tags 03D3 and 03D7 for coefficient forgetting and inverse-image units"
+  "place": "Tag 03Q9, degree zero; adopted source theorem proof with coefficient and pullback symmetry transport from Tags 03D3 and 03D7"
  },
  "mathlib_searches": [
   {
@@ -94,14 +87,15 @@
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-iff",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.QcqsStrictLocalRestrictionBijective",
-  "file": "lean/Sheaf/AlgebraicGeometry/QcqsStrictLocalRestrictionBijective.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.QcqsStrictLocalRestrictionBijective",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/QcqsStrictLocalRestrictionBijective.lean",
   "declaration": "AlgebraicGeometry.Etale.bijective_qcqsStrictLocalRestriction_of_formula",
-  "statement": "theorem bijective_qcqsStrictLocalRestriction_of_formula (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f] {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ Y) (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (a : (Scheme.pointSmallEtale s).sheafFiber.obj ((lowerStar (ModuleCat.{u + 1} Λ) f).obj F) ⟶ (Sheaf.Γ (pullback f (Scheme.strictHenselizationStructuralMap s)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj ((upperStar (ModuleCat.{u + 1} Λ) (pullback.fst f (Scheme.strictHenselizationStructuralMap s))).obj F)) (ha : ∀ j : SmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s), (Scheme.pointSmallEtale s).toPresheafFiber ((Scheme.AffineEtale.Spec Y).obj ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).1) ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).2 ((lowerStar (ModuleCat.{u + 1} Λ) f).obj F).obj ≫ a = ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) (pullback.fst f (Scheme.strictHenselizationStructuralMap s))).unit.app F).hom.app (op (f.Etale.obj ((Scheme.AffineEtale.Spec Y).obj ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).1))) ≫ ((upperStar (ModuleCat.{u + 1} Λ) (pullback.fst f (Scheme.strictHenselizationStructuralMap s))).obj F).obj.map (MorphismProperty.Over.homMk (pullback.lift ((pullbackSymmetry f (Scheme.strictHenselizationStructuralMap s)).hom ≫ Scheme.smallStrictHenselizationBaseChangeMap f s j) (𝟙 _) (by change (pullbackSymmetry f (Scheme.strictHenselizationStructuralMap s)).hom ≫ Scheme.smallStrictHenselizationBaseChangeMap f s j ≫ pullback.snd _ f = _ simp only [Scheme.smallStrictHenselizationBaseChangeMap_snd, pullbackSymmetry_hom_comp_snd, Category.id_comp])) (pullback.lift_snd _ _ _)).op ≫ (Sheaf.ΓNatIsoSheafSections _ _ (IsTerminal.isTerminalOfObj (MorphismProperty.Over.forget @AlgebraicGeometry.Etale ⊤ (pullback f (Scheme.strictHenselizationStructuralMap s))) (Scheme.Etale.mk (𝟙 _)) Over.mkIdTerminal)).inv.app _) : Function.Bijective (ConcreteCategory.hom a)",
+  "statement": "theorem bijective_qcqsStrictLocalRestriction_of_formula\n    (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}} (f : X ⟶ Y)\n    [QuasiCompact f] [QuasiSeparated f]\n    {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ Y)\n    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))\n    (a : (Scheme.pointSmallEtale s).sheafFiber.obj\n        ((lowerStar (ModuleCat.{u + 1} Λ) f).obj F) ⟶\n      (Sheaf.Γ (pullback f (Scheme.strictLocalizationToBase s)).smallEtaleTopology\n        (ModuleCat.{u + 1} Λ)).obj\n        ((upperStar (ModuleCat.{u + 1} Λ)\n          (pullback.fst f (Scheme.strictLocalizationToBase s))).obj F))\n    (ha : ∀ j : SmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s),\n      (Scheme.pointSmallEtale s).toPresheafFiber\n        ((Scheme.AffineEtale.Spec Y).obj\n          ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).1)\n        ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).2\n        ((lowerStar (ModuleCat.{u + 1} Λ) f).obj F).obj ≫ a =\n  ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)\n    (pullback.fst f (Scheme.strictLocalizationToBase s))).unit.app F).hom.app\n      (op (f.Etale.obj ((Scheme.AffineEtale.Spec Y).obj\n        ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).1))) ≫\n    ((upperStar (ModuleCat.{u + 1} Λ)\n      (pullback.fst f (Scheme.strictLocalizationToBase s))).obj F).obj.map\n        (MorphismProperty.Over.homMk\n    (pullback.lift\n      ((pullbackSymmetry f (Scheme.strictLocalizationToBase s)).hom ≫\n        Scheme.strictHenselizationBaseChangeMap f s j)\n      (𝟙 _)\n      (by\n        change (pullbackSymmetry f (Scheme.strictLocalizationToBase s)).hom ≫\n          Scheme.strictHenselizationBaseChangeMap f s j ≫ pullback.snd _ f = _\n        simp only [Scheme.strictHenselizationBaseChangeMap, pullback.lift_snd,\n          pullbackSymmetry_hom_comp_snd, Category.id_comp]))\n    (pullback.lift_snd _ _ _)).op ≫\n    (Sheaf.ΓNatIsoSheafSections _ _\n      (IsTerminal.isTerminalOfObj\n        (MorphismProperty.Over.forget @AlgebraicGeometry.Etale ⊤\n          (pullback f (Scheme.strictLocalizationToBase s)))\n        (Scheme.Etale.mk (𝟙 _)) Over.mkIdTerminal)).inv.app _) :\n    Function.Bijective (ConcreteCategory.hom a)",
   "branch": "sheaf-dag",
-  "by": "R3",
-  "date": "2026-10-13"
+  "by": "W2",
+  "date": "2026-10-22",
+  "note": "Retire the Sheaf duplicate in favor of the adopted theorem on strictLocalizationToBase. The former small-model consumer is proved directly from the official set comparison using the canonical small/full colimit isomorphism and the general module section transport theorem. Its public signature is unchanged; no equality of the two scheme presentations is assumed."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -116,12 +110,12 @@
  "reviewed_proof": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "C-0633c",
-  "group": "R2",
+  "reviewer": "C-68254",
+  "group": "W2",
   "result": "pass",
-  "landing": "20261021T203817-L-3875636",
+  "landing": "20261021T225232-L-3803112",
   "kind": "interface",
-  "note": "independent cc review: existing:true lean records of both item nodes vs the adopted WeilConjectures StrictLocalModuleSectionsSetTransport declarations (verbatim); new node lean.statement vs exists_moduleSectionsIsoTransport; adapted QcqsStrictLocalRestrictionBijective signature vs clone; sandbox set compile of all three delivered modules with #print axioms (clean)"
+  "note": "independent cc review: retired Sheaf copy vs WeilConjectures twin (node lean.statement verbatim); adapted QcqsStrictLocalRestrictionIsomorphism signature vs live clone, compiled in sandbox with ModuleSectionsIsoTransport (23.1 s, axioms clean); node field diffs vs live"
  },
  "lean_audit": {}
 }

@@ -17,28 +17,38 @@
  ],
  "proof": [
   {
-   "text": "Apply the bijectivity theorem to the same map and representative equations.",
-   "uses": [
-    "lem-weil-pbc-strict-local-module-restriction-bijective"
-   ],
-   "elementary": true
-  },
-  {
-   "text": "Use the transported small-model leg and its two projection identities from [def-weil-pbc-small-strict-local-section-maps] in place of unfolding the retired duplicate definition. The representative restriction formula and all existing mathematical hypotheses remain unchanged.",
+   "text": "Base change Spec.map of the inverse canonical small/full ring-colimit isomorphism, using smallStrictLocalization_toBase, and compose with pullback symmetry. The resulting scheme isomorphism is over X, and its composite with each full-model leg equals pullback symmetry followed by the small-model leg, by the latter's definition.",
    "uses": [
     "def-weil-pbc-small-strict-local-section-maps"
    ],
-   "elementary": true
+   "elementary": false
+  },
+  {
+   "text": "Apply exists_moduleSectionsIsoTransport along this isomorphism, obtaining a bijection from the given target module to the full-model terminal set sections and the formula for each neighbourhood restriction. The forgetful functor preserves the relevant filtered colimits; sheafFiberCompIso supplies the source bijection and its germ formula.",
+   "uses": [
+    "lem-weil-pbc-module-sections-iso-transport",
+    "def-weil-pbc-geometric-stalks"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the uniqueness clause of the official sets_pushforward_stalk_strictHenselization theorem to the conjugated given map. The assumed representative equation, coefficient-forgetting germ identity, and transported graph formula verify its hypotheses. The canonical set map is bijective. Cancel the source and target bijections using Mathlib Function.Bijective.of_comp_iff and Equiv.comp_bijective; the concrete-category criterion proves the given module map is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-sets-pushforward-stalk-strict-henselization"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-strict-local-module-restriction-bijective",
-  "def-weil-pbc-small-strict-local-section-maps"
+  "def-weil-pbc-small-strict-local-section-maps",
+  "lem-weil-pbc-module-sections-iso-transport",
+  "def-weil-pbc-geometric-stalks",
+  "lem-weil-pbc-sets-pushforward-stalk-strict-henselization"
  ],
  "proof_origin": {
-  "by": "worker",
+  "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 03Q9, proof, degree-zero comparison and canonical maps"
+  "place": "Tag 03Q9, degree-zero comparison; Tags 03D3 and 03D7 for coefficient and inverse-image transport; canonical small/full colimit isomorphism"
  },
  "mathlib_searches": [
   {
@@ -109,12 +119,12 @@
  "reviewed_proof": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "C-59f3f",
-  "group": "E3",
+  "reviewer": "C-68254",
+  "group": "W2",
   "result": "pass",
-  "landing": "20261021T183343-L-1605786",
+  "landing": "20261021T225232-L-3803112",
   "kind": "interface",
-  "note": "independent cc review: Retirement of the Sheaf twin of SetsPushforwardStalkStrictHenselization against the WeilConjectures twin; the new small-model transport map's _fst/_snd lemmas match the old pullback.lift components, so the 4 changed consumer statements are unchanged in meaning; change record lists all edited unclaimed modules; 8 delivered modules plus 5 external direct importers compiled in sandbox; axioms clean"
+  "note": "independent cc review: retired Sheaf copy vs WeilConjectures twin (node lean.statement verbatim); adapted QcqsStrictLocalRestrictionIsomorphism signature vs live clone, compiled in sandbox with ModuleSectionsIsoTransport (23.1 s, axioms clean); node field diffs vs live"
  },
  "lean_audit": {}
 }
