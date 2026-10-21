@@ -24,56 +24,44 @@
  ],
  "proof": [
   {
-   "text": "Work at the finite coefficient $A=A_{E,n}$ fixed by the purity conventions. First regard $u:U\\to X$ as a covering of $X_{\\mathrm{proet}}$. Clause (1) of [det-pe-morphisms-etale-comparison] makes $u$ weakly etale. It is flat and locally of finite presentation by [def-weil-etale-morphism], so [lem-weil-pbc-flat-lfp-open] makes its underlying map open. For every affine open $V\\subset X$, choose affine opens $W\\subset u^{-1}(V)$ covering $u^{-1}(V)$. The open subsets $u(W)$ cover $V$ by surjectivity. The affine scheme $V$ is quasi-compact by [lem-weil-pbc-affine-scheme-qcqs], so finitely many of these images cover $V$. This is exactly the finite-affine-refinement covering condition in [def-weil-pbc-proetale-site]. Thus the singleton $\\{u\\}$ is a pro-etale cover. Empty $V$ uses the empty finite refinement.",
+   "text": "Fix the finite coefficient $A=A_{E,n}$ of [def-pur-conventions]. Apply [lem-pur-etale-proetale-cover] to the singleton family $\\{u\\}$. It is a pro-etale cover of $X$; in particular $u$ is an object of $X_{\\mathrm{proet}}$ by [def-weil-pbc-proetale-site].",
    "uses": [
     "def-pur-conventions",
-    "det-pe-morphisms-etale-comparison",
-    "def-weil-etale-morphism",
-    "lem-weil-pbc-flat-lfp-open",
-    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-pur-etale-proetale-cover",
     "def-weil-pbc-proetale-site"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "proetale.tex Tags 0989 (proetale-definition-fpqc-covering) and 098B (proetale-lemma-etale-proetale); more-morphisms.tex Tag 094X (more-morphisms-lemma-when-weakly-etale); morphisms.tex Tag 01UA (morphisms-lemma-fppf-open); algebra.tex Tag 00E8 (algebra-lemma-quasi-compact)"
+    "place": "Tag 098B, label lemma-etale-proetale (the finite-affine-refinement covering argument is delegated to the existing covering node)."
    }
   },
   {
-   "text": "The site identification and constant-ring identification in [lem-weil-proetale-weakly-etale-localization] identify $U_{\\mathrm{proet}}$ with $X_{\\mathrm{proet}}/U$ and $A_U$ with $A_X|_U$. Under these identifications the inverse image along $u$ is sectionwise restriction, as follows directly from [def-weil-proetale-inverse-image]. For $W\\to U$ in $U_{\\mathrm{proet}}$, $W$ is also a weakly etale $X$-scheme. In the category $\\mathcal I_W$ defining the inverse-image presheaf, the pair $(W,\\gamma)$, where $\\gamma:W\\to U\\times_XW$ is the graph of $W\\to U$, is initial: the unique arrow to $(V,\\phi:W\\to U\\times_XV)$ is $\\operatorname{pr}_V\\phi:W\\to V$. Hence the opposite-indexed colimit is $F(W)$. These identifications commute with restrictions and sheaf morphisms; the resulting presheaf is already the restriction sheaf of [def-pur-localized-ringed-site]. For the coefficient ring they fix each constant section, so they give precisely the canonical localized constant-ring identification, and the induced module pullback is $F|_U$ with its restricted action. This restriction is exact by [lem-pur-site-restriction-module-adjunction-exact].",
+   "text": "Since $\\ell\\neq p=\\operatorname{char}k$ by [def-pur-conventions], $\\ell$ is invertible on the $k$-schemes $X$ and $U$, and $u$ is an object of $X_{\\mathrm{proet}}$ by step 1. The objects $M,N$ of the full subcategory $D^b_c(X,A)$ are objects of $D(X_{\\mathrm{proet}},A)$ [def-weil-finite-torsion-constructibility]. Apply [lem-pur-finite-pullback-localization-cohomology] to $u$, $K=M$, $L=N$ and $\\psi=\\varphi$. Its naturality equation $c^r_N\\circ\\mathcal H^r(Lu^*\\varphi)=R_U(h_r)\\circ c^r_M$, with $c^r_M,c^r_N$ isomorphisms, identifies $\\mathcal H^r(Lu^*\\varphi)$ with $R_U(h_r)$, where $h_r=\\mathcal H^r(\\varphi)$. Since $Lu^*\\varphi$ is an isomorphism, so is its image under every cohomology functor, and hence every $R_U(h_r)$ is an isomorphism.",
    "uses": [
-    "lem-weil-proetale-weakly-etale-localization",
-    "def-weil-proetale-inverse-image",
-    "def-pur-localized-ringed-site",
-    "lem-pur-site-restriction-module-adjunction-exact"
+    "def-pur-conventions",
+    "def-weil-finite-torsion-constructibility",
+    "lem-pur-finite-pullback-localization-cohomology"
    ],
    "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "sites-modules.tex Tag 04IX (sites-modules-definition-localize-ringed-site), Tags 03DI (sites-modules-lemma-extension-by-zero) and 03DJ (sites-modules-lemma-extension-by-zero-exact); sites.tex Tag 06UM (sites-section-pullback); proetale.tex Tag 09A5 (proetale-section-morphism). The graph calculation explicitly identifies the scheme inverse image with localization restriction"
-   }
-  },
-  {
-   "text": "By the finite-level definition [def-weil-derived-pullback-tensor-hom], $Lu^*$ is computed by applying this exact module inverse image termwise to any representative complex. The natural cohomology comparison of [lem-weil-pbc-exact-functor-complex-cohomology] therefore gives $\\mathcal H^r(Lu^*K)\\cong(\\mathcal H^rK)|_U$ for every integer $r$. This holds for derived morphisms as well: the comparison is natural on complex maps, and its naturality equation remains true after inverting quasi-isomorphisms and composing the resulting roofs. For $K=M,N$ it identifies $\\mathcal H^r(Lu^*\\varphi)$ with the restriction of $h_r=\\mathcal H^r(\\varphi)$. The hypothesis on $Lu^*\\varphi$ implies that every $h_r|_U$ is an isomorphism.",
-   "uses": [
-    "def-weil-derived-pullback-tensor-hom",
-    "lem-weil-pbc-exact-functor-complex-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "homology.tex Tag 010N (homology-lemma-exact-functor); derived.tex Tag 015F (derived-lemma-right-derived-exact-functor). Naturality on roofs is written out"
-   }
-  },
-  {
-   "text": "Fix $r$ and a test object $T\\to X$ of the pro-etale site. The site base-change axiom in [def-weil-pbc-sites-and-cohomology] makes $T\\times_XU\\to T$ a cover. This object and its double overlap both map to $U$, so step 3 makes $h_r$ bijective on their sections. If two source sections on $T$ have the same image, their restrictions to $T\\times_XU$ agree, hence they agree by the separatedness part of the sheaf equalizer axiom in that definition. Given a target section on $T$, invert $h_r$ on $T\\times_XU$; the two restrictions of the inverse section to the double overlap agree because their images agree and $h_r$ there is injective. The sheaf axiom glues this section uniquely to $T$, and its image is the original section by separatedness. Thus $(h_r)_T$ is bijective for every $T$. Its inverse is additive, $A_X(T)$-linear and compatible with restrictions, since each of these equations follows after applying the injective map $(h_r)_T$. Consequently $h_r$ is an isomorphism of module sheaves. This also covers $X=\\emptyset$: the empty covering forces a module sheaf on the empty object to have just its zero section.",
-   "uses": [
-    "def-weil-pbc-sites-and-cohomology"
-   ],
-   "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites.tex",
-    "place": "sites.tex Tags 00VH (sites-definition-site), 00VM (sites-definition-sheaf-sets), 00VR (sites-definition-sheaf); proetale.tex Tag 098C (proetale-lemma-proetale) for cover base change. The local inverse and its overlap equation are explicit"
+    "place": "Tag 03CE, label lemma-localize-given-products, in the normalized derived module form stated in lem-pur-finite-pullback-localization-cohomology."
+   }
+  },
+  {
+   "text": "Fix $r$. By the formula $(R_UF)(W\\to U)=F(W\\to X)$ of [lem-pur-finite-pullback-localization-cohomology], the underlying morphism of set-valued sheaves of $R_U(h_r)$, read on $X_{\\mathrm{proet}}/U$ through the site identification of [lem-weil-proetale-weakly-etale-localization], is the restriction $h_r|_U$ of [def-pur-localized-ringed-site]; it is an isomorphism by step 2. Apply [lem-sfb-sheaf-cover-local-isomorphism] to the site $X_{\\mathrm{proet}}$ with its covering topology, the category of sets, the single object $C=(U\\xrightarrow{u}X)$ and the underlying set-sheaf morphism of $h_r$. Its covering hypothesis holds: for an object $V$ of $X_{\\mathrm{proet}}$, the base-change axiom of [def-weil-pbc-sites-and-cohomology] applied to the covering $\\{u\\}$ of the final object $X$ of step 1 makes $\\{V\\times_XU\\to V\\}$ a covering, and its arrow factors through the projection $V\\times_XU\\to U$; this also covers $X=\\emptyset$ and $V=\\emptyset$. Hence $(h_r)_T$ is bijective for every object $T$. Its inverse is additive, $A_X(T)$-linear and compatible with restrictions, since each of these equations follows after applying the injective map $(h_r)_T$. Consequently $h_r$ is an isomorphism of module sheaves.",
+   "uses": [
+    "lem-pur-finite-pullback-localization-cohomology",
+    "lem-weil-proetale-weakly-etale-localization",
+    "def-pur-localized-ringed-site",
+    "lem-sfb-sheaf-cover-local-isomorphism",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 04TQ, label lemma-glue-maps (maps of sheaves glue on a covering); cover-local isomorphism criterion as stated in lem-sfb-sheaf-cover-local-isomorphism (Mathlib CategoryTheory.Sheaf.isIso_of_coversTop)."
    }
   },
   {
@@ -91,25 +79,20 @@
  ],
  "proof_deps": [
   "def-pur-conventions",
-  "det-pe-morphisms-etale-comparison",
-  "def-weil-etale-morphism",
-  "lem-weil-pbc-flat-lfp-open",
-  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-pur-etale-proetale-cover",
   "def-weil-pbc-proetale-site",
+  "def-weil-finite-torsion-constructibility",
+  "lem-pur-finite-pullback-localization-cohomology",
   "lem-weil-proetale-weakly-etale-localization",
-  "def-weil-proetale-inverse-image",
   "def-pur-localized-ringed-site",
-  "lem-pur-site-restriction-module-adjunction-exact",
-  "def-weil-derived-pullback-tensor-hom",
-  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-sfb-sheaf-cover-local-isomorphism",
   "def-weil-pbc-sites-and-cohomology",
-  "lem-weil-pbc-unbounded-derived-iso-cohomology",
-  "def-weil-finite-torsion-constructibility"
+  "lem-weil-pbc-unbounded-derived-iso-cohomology"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-etale-iso-descent.proof.md",
-  "place": "The cohomology/local-to-global argument, expanded on the actual pro-etale site using Stacks Tags 0989, 098B, 04IX, 03DJ, 010N, 00VM and 05RT; covering detection is proved by the sheaf axiom rather than assuming conservativity for all pro-etale geometric stalks"
+  "place": "Short assembly of covering (existing Mathlib leaf lem-pur-etale-proetale-cover), normalized derived localization/cohomology comparison (new node lem-pur-finite-pullback-localization-cohomology), the cover-local isomorphism criterion for sheaves (existing Mathlib leaf lem-sfb-sheaf-cover-local-isomorphism, replacing the hand-written sectionwise gluing of old step 4), and the derived cohomology criterion; the old graph, coefficient, termwise and roof arguments are assigned to lem-pur-finite-pullback-localization-cohomology, with their full text retained in report.md."
  },
  "mathlib_searches": [
   {
@@ -178,25 +161,12 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-cohsm",
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-21",
   "item": "lem-pur-etale-iso-descent",
   "worker": "stage1",
-  "summary": "Kept the statement and its finite pro-etale coefficient scope. Expanded the proof into the covering criterion, an explicit graph computation identifying inverse image with exact slice restriction, natural cohomology comparison, the sheaf-axiom local inverse, and the derived cohomology criterion. Reused existing nodes throughout; no new nodes, no attachments. Avoided applying etale geometric-stalk conservativity to arbitrary pro-etale sheaves. Replaced irrelevant smooth-morphism statement dependency with the actual etale, surjective, separated, finite-type and coefficient definitions; recorded real Mathlib searches.",
-  "blueprint": "Realizes the item proof cohomology reduction and local-to-global assertion. The current main-20261015 sk-prop-cohsm proof, first paragraph, explicitly uses that coordinate charts form a pro-etale covering; steps 1 and 4 spell out this detection. The historical unit sk-prop-cohsm steps 0, 3 and 4 local-to-global role is unchanged. No key unit statement is being realized by this auxiliary lemma; no unit fields changed.",
-  "tool_uses": [
-   {
-    "node": "det-pe-morphisms-etale-comparison",
-    "why": "Clause (1) supplies weak etaleness of an etale morphism, a generic site-entry fact not supplied by the cohomological-smoothness unit."
-   },
-   {
-    "node": "lem-weil-proetale-weakly-etale-localization",
-    "why": "Its site and constant-ring identifications let the proof compute inverse image as restriction, a generic pro-etale localization tool."
-   },
-   {
-    "node": "lem-pur-site-restriction-module-adjunction-exact",
-    "why": "Exact module restriction is the generic sheaf tool needed to pass to cohomology; no cohomological-smoothness result supplies it."
-   }
-  ]
+  "summary": "Repair of the requested re-split: statement unchanged; one new statement-only unsplit node isolates normalized finite derived pullback versus slice restriction, including derived cohomology naturality. Reused the existing etale pro-etale cover node and underived graph/module comparison instead of duplicating them. Kept the full sheaf-axiom local inverse and derived-isomorphism argument in the parent. Full original argument and its allocation are retained in report.md. No Lean files or compilers used.",
+  "blueprint": "The current main-20261015 item proof reduces to cohomology and identifies pullbacks locally; the new node realizes this comparison without assuming geometric stalk conservativity for arbitrary pro-etale sheaves. The original sheaf-axiom replacement of the stalk argument and the sk-prop-cohsm local-to-global route are preserved. This is an auxiliary node, not the unit key statement; no unit realization fields changed.",
+  "tool_uses": []
  },
  "tool_uses": [
   "det-pe-morphisms-etale-comparison",
@@ -204,12 +174,12 @@
   "lem-pur-site-restriction-module-adjunction-exact"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-Codex-Q33-c6f9a7524",
-  "group": "Q33",
+  "reviewer": "NT-cc-Q80-add98afd8",
+  "group": "Q80",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q33-c6f9a7524 (reviewer sub-agent of L); spot-checked: PASS for Q33/lem-pur-etale-iso-descent. The statement is unchanged and matches both blueprint snapshots exactly. Coefficients are A=A_{E,n} on X_proet (scope from def-pur-conventions), D^b_c is the full subcategory from def-weil-finite-torsion-constructibility, and Lu^* is the finite-level pullback from def-weil-derived-pullback-tensor-hom. The stmt_deps changes are justified: smooth morphisms are dropped, and separated comes from def-weil-proper-morphism. The delivery has no new nodes, proof_deps equals the union of the step uses, and the graph is acyclic. Step 1: étale implies weakly étale (det-pe (1), Stacks 094X(4)) and the map is open (UniversallyOpen.of_flat, 01UA); with quasi-compactness of V this is exactly the condition in Stacks 0989 (proetale.tex:2126). Step 2: I checked that the graph pair (W,γ) is initial in I_W, because pr_U∘φ is the structure map, so the colimit is F(W). Inverse image is therefore restriction, and that restriction is exact by lem-pur-site-restriction-module-adjunction-exact. Step 3: termwise representability is stated in the pullback definition, and homologyFunctorIso gives the natural comparison. Step 4 is an elementary sheaf-axiom gluing argument, complete and covering X=∅. Step 5: DerivedCategory.isIso_iff (HomologySequence.lean:88) plus fullness of D^b_c. The proof departs from the blueprint's geometric-stalk argument, and the departure is justified: lem-cbc-proetale-stalk-conservative (4) shows stalk non-conservativity, and its cover-locality clause (1) is a generalization only in the different Λ_{T,Proet} category, so it is not cited and same_as stays []. I accept the three declared tool uses: det-pe-morphisms-etale-comparison, lem-weil-proetale-weakly-etale-localization and lem-pur-site-restriction-module-adjunction-exact. No SGA source is cited. No fixes were needed."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q80-add98afd8 (reviewer sub-agent of L); spot-checked: Re-split of 2026-10-21 (4282-character proof, at least 1 new node, parent at most 3000 characters). The item is not dropped and not superseded: live and side-live still have the 5-step Q33 proof and do not have the new node. Statement unchanged and verbatim equal to main-20261015, order 2336. Allocation of the old steps: (1) cover → existing Mathlib leaf lem-pur-etale-proetale-cover, Stacks 098B at proetale.tex:2175; (2) graph, coefficient and module comparison → existing lem-sfb-proetale-object-inverse-image-restriction (1)-(3) and lem-pur-site-restriction-module-adjunction-exact, both stmt_deps of the new node; (3) termwise Lu^* and cohomology naturality on roofs → new node lem-pur-finite-pullback-localization-cohomology; (5) → lem-weil-pbc-unbounded-derived-iso-cohomology plus the fullness of D^b_c. The new node is true: the finite Lu^* is termwise f^{-1} with transported action, and lem-sfb (3) identifies that with R_U. A natural iso of exact functors induces one on the derived categories, and exact functors commute with cohomology naturally on roofs. Checked on u=id, U empty, shifted and unbounded complexes, non-surjective open immersions and multi-sheeted étale maps. Statement-only, self-contained, source Stacks 03CE lemma-localize-given-products (sites.tex:6093). Four real searches recorded. Not a duplicate: I checked lem-sp-canonical-derived-pullback-normalization, lem-cbc-open-localized-counit-comparison, lem-sf-open-tensor-normalization and the underived 03CE nodes. It does not restate the item, since it assumes no surjectivity and asserts no conservativity. Fault (D/C5 and the note's 'every argument becomes a node'): parent step 3 kept old step 4's sectionwise gluing proof (about 1200 characters) inline and marked it elementary. That argument is exactly the existing Mathlib leaf lem-sfb-sheaf-cover-local-isomorphism (Sheaf.isIso_of_coversTop, LocalProperties.lean:35; Stacks 04TQ glue-maps). FIX: step 3 now applies that leaf with sets and the family {U}. Its covering hypothesis comes from base-change axiom (iii) of def-weil-pbc-sites-and-cohomology applied to the cover {u} from step 1, and the empty cases are covered. The step keeps the original sentence on the linearity of the inverse. Step 2 now states that ℓ≠p is invertible and that M,N lie in D(X_proet,A), which the new node needs, and writes its naturality equation explicitly. Parent is now 2696 characters, proof_deps equals the union of the uses, and only proof, proof_deps and proof_origin.place changed. Route: the cited leaves are status mathlib. I accept again the existing tool use lem-weil-proetale-weakly-etale-localization (identification of the slice site), and no new tool use is needed. No SGA source. Corrected file: fixes/dag/nodes/sec-smooth-purity/lem-pur-etale-iso-descent.json.; 1 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
   "date": "2026-10-17",
