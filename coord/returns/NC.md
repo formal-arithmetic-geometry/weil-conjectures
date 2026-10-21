@@ -55,6 +55,3 @@ L: independent stage-2 immutable head 408006eebdb1: --apply-fixes: coord/reports
 
 L: approved by the reader, but the landing refused it: NOT MERGED lem-trf-algclosed-curve-model: lem-trf-algclosed-curve-model: completed in this project's DAG but not in the live DAG the queue reads (side completion never promoted; L promotes it) Rebase the delivery onto the current DAG, re-read every cited node that changed, adjust the split, and push again.
 
-## lem-sfb-relative-cyclic-restriction-model (2026-10-21 22:09 UTC, branch head 461dcd41912)
-
-L: independent stage-2 immutable head 461dcd41912c: A7/A6: credit-only re-delivery after NB's stage-2 merge (ledger 21:43, 2026-10-21). This head 461dcd41912c is byte-identical to the returned NC head 86835388efab (diff -rq of the snapshots is empty; the third returned head was cd552a575238, the first d8090fdb551d). Against live: the module differs only by the docstring line 'Parallel statement verification: NC, 2026-10-22'; the node differs only in lean.by NB->NC and lean.date; no new nodes or dependency changes. The mathematics is NB's reviewed module, with no new finding. Not recompiled (the human's rule) and no files changed. Required: retire the NC claim; do not re-push this content or a restored copy. Lead/maintainer: close the claim lead-side; this is the fourth identical NC head.
