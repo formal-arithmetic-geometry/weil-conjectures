@@ -367,5 +367,23 @@
   "group": "N5",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-9432739e5 (reviewer sub-agent of L); spot-checked: The item's statement is unchanged and correct; I tested it on trivial K, finite K of order prime to ℓ and empty P/P'. The prime-to-ℓ hypothesis is needed: with ℓ | |Q| the denominator has norm > 1 and the bound fails. All nine steps check. Steps 1–2: finite index and constant fibre size t=|U/V| make the finite-quotient average A well defined. Step 3: def-weil-l-adic-numbers gives v_ℓ(n)=0, and the isometric inclusion gives |n|_B=1; translation invariance uses normality of U. Steps 4–5: K is shown totally disconnected explicitly; Mathlib exists_finite_approximation_of_mem_nhds_diagonal (DisjointCover.lean:140–141, read) is applied with S={|b−c|<ε/2}; finite-coset refinement then puts the approximant in D with error ≤ ε/2. Steps 6–7: the extension leaf applies with k=B, E=C(K,B), F=B; translation invariance follows from its uniqueness clause, which matches extendOfNorm_unique (any continuous linear g with g∘e=f, Extend.lean 180–216, read). Step 8 is a correct tube-lemma argument. Step 9 is pointwise. Both new nodes are exact or one-line Mathlib specializations, self-contained, with no proof and strictly generic. A duplicate search over dag/nodes (extendOfNorm, exists_finite_approximation, normalized integral/average, the proper-ultrametric Hahn–Banach node, the finite-subfield retraction, the coset-basis node) found no existing node stating either leaf or the item. No SGA source is used, there is no re-split note, and the item is not dropped. from.node null is inherited, and blueprint paragraph (3) gives only the open-direct-image context; the WANTED literature reference is reported honestly. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Analysis.PrimeToEllCompleteScalarIntegral",
+  "declaration": "WeilConjectures.primeToEll_completeScalar_integral",
+  "file": "lean/Sheaf/Analysis/PrimeToEllCompleteScalarIntegral.lean",
+  "statement": "theorem primeToEll_completeScalar_integral (ell : ℕ) [Fact ell.Prime] (B : Type v) [NormedField B] [CompleteSpace B] (iota : Padic ell →+* B) (hiota : Isometry iota) (hultra : ∀ x y : B, ‖x + y‖ ≤ max ‖x‖ ‖y‖) (K : Type u) [Group K] [TopologicalSpace K] [IsTopologicalGroup K] [CompactSpace K] [T2Space K] (hbasis : ∀ V : Set K, IsOpen V → (1 : K) ∈ V → ∃ U : OpenNormalSubgroup K, (U : Set K) ⊆ V) (hprime : ∀ U : OpenNormalSubgroup K, Nat.Coprime (Nat.card (K ⧸ U.toSubgroup)) ell) : ∃ I : C(K, B) →L[B] B, (∀ f : C(K, B), ‖I f‖ ≤ ‖f‖) ∧ I 1 = 1 ∧ (∀ (a : K) (f : C(K, B)), I (f.comp ⟨fun h ↦ a * h, continuous_const.mul continuous_id⟩) = I f ∧ I (f.comp ⟨fun h ↦ h * a, continuous_id.mul continuous_const⟩) = I f) ∧ (∀ (U : OpenNormalSubgroup K) (g : K ⧸ U.toSubgroup → B) (f : C(K, B)), (∀ h : K, f h = g (QuotientGroup.mk h)) → I f = (Nat.card (K ⧸ U.toSubgroup) : B)⁻¹ * ∑' q, g q) ∧ ∃ J : (P : Profinite.{w}) → C(P × K, B) →ₗ[B] C(P, B), (∀ (P : Profinite.{w}) (f : C(P × K, B)) (p : P), J P f p = I (f.curry p)) ∧ (∀ (P : Profinite.{w}) (c : C(P, B)) (f : C(P × K, B)), J P ((c.comp ContinuousMap.fst) * f) = c * J P f) ∧ (∀ (P P' : Profinite.{w}) (a : C(P', P)) (f : C(P × K, B)), J P' (f.comp (a.prodMap (ContinuousMap.id K))) = (J P f).comp a) ∧ (∀ (P : Profinite.{w}) (n : ℕ) (f : Fin n → C(P × K, B)), J P (∑ j, f j) = ∑ j, J P (f j))",
+  "branch": "newtargets-dag",
+  "by": "NR",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1e2ed724f",
+  "group": "NR",
+  "result": "pass",
+  "note": "Node differs from live only in `lean`; lean.statement is the file's signature verbatim. Lean matches every clause: Padic ℓ isometrically in a complete normed field B (strong triangle inequality stated, redundant but faithful); compact T2 topological group K with an open-normal basis at 1; prime-to-ℓ Nat.card of every open-normal quotient; continuous linear I with ‖I f‖≤‖f‖, I 1 = 1, left/right translation invariance, finite-quotient average via tsum over a finite type; J P : C(P×K,B)→ₗ C(P,B) with J P f p = I (f.curry p) (continuity in the type), C(P,B)-scalar identity, precomposition naturality, Fin n sums; universes u v w explicit. Edge cases checked: trivial/finite K, empty P, U=K, n=0, ℓ=2; prime-to-ℓ is necessary. Not hollow (formula plus density determine I). Only stmt_dep used is Padic (Mathlib match); no duplicate in the project or Mathlib. Docstrings carry source place, blueprint tag and 9 proof steps; sorry only; source document exists. Not recompiled (no change). Advisory: imports of the proof dependencies are unused by the statement."
  }
 }

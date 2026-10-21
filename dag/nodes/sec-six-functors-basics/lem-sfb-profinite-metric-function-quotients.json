@@ -409,5 +409,23 @@
   "group": "N6",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-6da3cb80a (reviewer sub-agent of L); spot-checked: I read the item, the new leaf, every cited statement, the parent's step 4 and the Mathlib source in full. The item statement is unchanged; this is a first split, not a re-split. Steps 2–4: Tychonoff (an arbitrary family) gives compactness. Clopen-by-coset rectangles of oscillation <2ε/3, one normal subgroup per rectangle, Boolean atoms and N=∩H_j give a bound inside a single rectangle. The 2^{-n} sequence needs no nesting. Steps 5–6: the diagonal images are compact (isCompact_range) and Hausdorff, with cylinder clopen bases. In G_0 the subgroups K_F are open normal and form a neighbourhood basis of 1. Step 7: discrete 0/1 metrics; the leaf's hypotheses hold. Steps 8–10: fibre constancy in Y itself, with no completion. lem-sfb-compact-hausdorff-surjection-quotient applies with U=X, V=Y. Continuity of f_0 follows from the open-set criterion. Edge cases checked: empty S; empty Y (then no f exists); finite S and G; noncommutative G; r=1. New leaf: Metric.PiNatEmbed.TopologicalSpace.MetrizableSpace.of_countable_separating in PiNat.lean, read at lines 967, 984, 1012, 1063, 1072 and 1093–1097. It takes ι=ℕ (Encodable) and assumes no T2 or nonemptiness. It is not a duplicate (rg -L metrizab over the DAG finds only search logs) and does not restate an item clause. Paragraph (3) of the main-20261015 direct-images proof has no metrizable argument. The inherited source and agent proof_origin are recorded correctly, with the literature WANTED. All cited nodes are Mathlib leaves or definitions, so there is no route issue and no tool_uses. No SGA source is used. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.ProfiniteMetricFunctionQuotients",
+  "declaration": "Profinite.exists_metrizable_quotients_factorization",
+  "file": "lean/Sheaf/Topology/ProfiniteMetricFunctionQuotients.lean",
+  "statement": "theorem exists_metrizable_quotients_factorization (S : Profinite.{u}) (G : ProfiniteGrp.{u}) (r : ℕ) (hr : 1 ≤ r) (Y : Type v) [MetricSpace Y] (f : C(S × (Fin r → G), Y)) : ∃ (S₀ : Profinite.{u}) (G₀ : ProfiniteGrp.{u}), TopologicalSpace.MetrizableSpace S₀ ∧ TopologicalSpace.MetrizableSpace G₀ ∧ ∃ (p : C(S, S₀)) (q : G →ₜ* G₀) (f₀ : C(S₀ × (Fin r → G₀), Y)), Function.Surjective p ∧ Function.Surjective q ∧ ∀ x : S × (Fin r → G), f x = f₀ (p x.1, fun i : Fin r => q (x.2 i))",
+  "branch": "newtargets-dag",
+  "by": "NU",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cd7747c96",
+  "group": "NU",
+  "result": "pass",
+  "note": "Node change is the lean record only (live lean was null); lean.statement verbatim in the file. Clause match: S:Profinite.{u}, G:ProfiniteGrp.{u}, r:ℕ with 1≤r, Y:Type v with MetricSpace only, f:C(S×(Fin r→G),Y); ∃ S₀:Profinite.{u}, G₀:ProfiniteGrp.{u} with MetrizableSpace both, p:C(S,S₀), q:G→ₜ*G₀, both surjective, f₀ continuous, pointwise f=f₀∘(p×q^r); quantifier order as in the node; universes u/v independent, matching def-weil-size-convention. Edge cases: empty S, empty Y, r=1, r=0 excluded as in the node, noncommutative G, incomplete Y. Plain imports are exactly the Mathlib leaf modules of the 5 proof_deps (brief-stage2 rule 7). No duplicate found in Mathlib Profinite/LightProfinite/ProfiniteGrp or project lean. sorry only, no definitions, source/blueprint docstrings with all 10 steps, autoImplicit false, lines ≤100. Report has Worker report and Second reading sections. No file changed, so no compile."
  }
 }
