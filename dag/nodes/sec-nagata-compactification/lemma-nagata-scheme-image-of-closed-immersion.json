@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lemma-nagata-scheme-image-of-closed-immersion",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Scheme-theoretic image of a closed immersion",
@@ -13,24 +13,16 @@
   "place": "node lemma-nagata-scheme-image-of-closed-immersion, order 69"
  },
  "stmt_deps": [
+  "def-weil-closed-immersion",
   "def-nagata-scheme-image-factor",
-  "def-nagata-scheme-theoretic-closure",
   "def-nagata-scheme-theoretic-image"
  ],
- "proof": [
-  {
-   "text": "The current Mathlib instance\n`AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage`\nsupplies the isomorphism for every morphism carrying the\n`IsClosedImmersion` property. Its compatibility with the inclusion\nis the factorization equality\n`Scheme.Hom.toImage_imageι`.",
-   "uses": [],
-   "elementary": null
-  }
- ],
- "proof_deps": [
-  "lemma-nagata-scheme-image-ideal-qc"
- ],
+ "proof": [],
+ "proof_deps": [],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-closure/lemma-nagata-scheme-image-of-closed-immersion.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-closure/lemma-nagata-scheme-image-of-closed-immersion.proof.md",
+  "place": "Complete proof: the Mathlib closed-immersion image instance and the canonical factorization equality."
  },
  "mathlib_searches": [
   {
@@ -38,10 +30,57 @@
    "query": "AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage",
    "results": [],
    "date": "2026-10-08"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical map from a closed immersion source to its scheme theoretic image is an isomorphism",
+   "results": "8 hits; first is AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage, Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion: IsClosedImmersion f implies IsIso f.toImage.",
+   "date": "2026-10-21",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage",
+   "results": "One hit: AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage, Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion; exactly IsIso f.toImage under IsClosedImmersion f.",
+   "date": "2026-10-21",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "instIsIsoSchemeToImage|toImage_imageι",
+   "results": "13 hits in AlgebraicGeometry; Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean:715, AlgebraicGeometry.Scheme.Hom.toImage_imageι, states f.toImage ≫ f.imageι = f. The generated instance name is absent literally because the instance is anonymous.",
+   "date": "2026-10-21",
+   "verdict": "match for compatibility clause"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a closed immersion of schemes the morphism to the scheme theoretic image is an isomorphism",
+   "results": "8 hits; first is AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage, Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion, with only the closed immersion hypothesis.",
+   "date": "2026-10-21",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsIso f.toImage|instance \\{X Y : Scheme",
+   "results": "Search of AlgebraicGeometry/Morphisms/ClosedImmersion.lean returned the anonymous instance at lines 155–156. The single-file output parser put line numbers in the file field; the next directory search confirms the proper file and line.",
+   "date": "2026-10-21",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsIso f.toImage",
+   "results": "One hit in AlgebraicGeometry/Morphisms: Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean:156; instance starts at line 155 and its complete proof ends at line 174.",
+   "date": "2026-10-21",
+   "verdict": "match"
   }
  ],
- "mathlib_match": null,
- "status": "imported",
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean",
+  "line": 155,
+  "how": "exact, one Mathlib declaration per clause: AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage (Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean:155–174) states IsIso f.toImage for arbitrary schemes X,Y and f : X ⟶ Y with IsClosedImmersion f. AlgebraicGeometry.Scheme.Hom.toImage_imageι (Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean:715–718) states f.toImage ≫ f.imageι = f, giving compatibility over Y. Here f.image is definitionally f.ker.subscheme (Subscheme.lean:662), f.imageι is its closed inclusion (:665), and f.toImage is the canonical factor (:710–712); these are precisely the current blueprint notions. No reducedness, noetherianity or finite type hypothesis is used. The current statement of def-nagata-scheme-theoretic-image defines the kernel ideal as the largest quasi-coherent ideal contained in the sheaf kernel. This agrees with Hom.ker (Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean:692), defined by IdealSheafData.ofIdeals (:104); le_ofIdeals_iff (:125) gives its maximality. Thus this match uses the current definition itself, without assuming that the raw sheaf kernel is quasi-coherent for an arbitrary morphism. The current def-nagata-scheme-image-factor explicitly defines the factor as Hom.toImage, so the instance and factorization equality concern exactly the maps in the item. Revalidated after the Q90 repair of def-nagata-scheme-image-factor (2026-10-21): that definition now explicitly takes the largest quasi-coherent ideal inside the sheaf kernel, names its image inclusion g_im, defines g^im as Hom.toImage g, and states Hom.toImage_imageι g. With g = i these are exactly the domain, codomain and factor in the instance and the compatibility equality above; no identification of an arbitrary raw sheaf kernel with a quasi-coherent ideal is required."
+ },
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -81,5 +120,21 @@
   ],
   "sorry_free": true,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lemma-nagata-scheme-image-of-closed-immersion",
+  "worker": "stage1",
+  "group": "Q94",
+  "summary": "Verified the exact Mathlib match including the compatibility clause, by reading the anonymous closed-immersion instance and the canonical-factor definitions and equality. Recorded the actual searches. Converted the imported purported proof to a Mathlib leaf with no proof dependencies. Added the existing closed-immersion definition and removed the unused scheme-theoretic-closure notion. No statement change and no new nodes. Repair of the returned delivery 6e2273dbc56: re-read all three current statement dependencies, including the newly reviewed def-nagata-scheme-theoretic-image, and rebuilt this item on the current DAG metadata. Expanded the Mathlib match to verify explicitly the revised largest-quasi-coherent-subideal definition against Hom.ker, ofIdeals and le_ofIdeals_iff. The statement and dependency list remain valid; retained the proof provenance, all six logged searches and their results, and the original review. Latest return repair (changed def-nagata-scheme-image-factor): rebased the retained delivery fields onto the current repository item and re-read the repaired Q90 factor definition, Q92 image definition and closed-immersion definition. Revalidated the new explicit largest-quasi-coherent-subideal convention and both named maps against Subscheme.lean:662,665,710,715 and Basic.lean:104,125,692; recorded this return separately in the report and Mathlib match. No target statement or search question changed.",
+  "blueprint": "The entire proof of lemma-nagata-scheme-image-of-closed-immersion in main-20261015: its first sentence is the Mathlib instance at ClosedImmersion.lean:155, and its second sentence is toImage_imageι at Subscheme.lean:715. The main-20261015 statement agrees with the imported statement. This is a Mathlib leaf, so no proof steps or unit realization edits are needed."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q94-259cd3c45",
+  "group": "Q94",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q94-259cd3c45 (reviewer sub-agent of L); spot-checked: Exact Mathlib leaf, statement unchanged, no new nodes. Clause 1 is Mathlib's instance IsClosedImmersion.instIsIsoSchemeToImage (ClosedImmersion.lean:155-174), read in full: for any f with [IsClosedImmersion f] it gives IsIso f.toImage, needs no other hypothesis and has no sorry. Clause 2 is Hom.toImage_imageι (Subscheme.lean:715): f.toImage ≫ f.imageι = f. Hom.image (:662) is f.ker.subscheme. Hom.ker (Basic.lean:692) is ofIdeals (:104 and :125), the largest quasi-coherent ideal inside the kernel; this matches the current def-nagata-scheme-theoretic-image. The current Q90 def-nagata-scheme-image-factor defines the factor as Hom.toImage. Its change caused the landing refusal, and its text in the snapshot is identical to clones/side-live, as are the other two stmt_deps (all three are Mathlib leaves). Dropping the unused def-nagata-scheme-theoretic-closure is correct. The main-20261015 statement and proof agree. Edge cases hold: empty Z, the identity, and a non-reduced Spec(A/I). There is no cycle, no repair note, no dropped-list entry and no SGA citation. No fixes."
  }
 }
