@@ -23019,3 +23019,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:16 L: returned deliver/NN/lem-sfb-lisse-lattice-potential-kummer-tameness (reviewer RETURN: C1 / route-pivot drop rule at Step 5, plus G1/G3/G4. This is the fourth delivery of this item, after NL 1f51eeaf, N5 68c)
 - 16:17 L: merged deliver/NV/lem-sfb-root-tower-inner-support (reviewer FIX; first push; new nodes: 3)
 - 16:18 L: merged deliver/NP/lem-sfb-snc-root-limit-normal-charts (reviewer FIX+NODE(1); first push; new nodes: 2)
+- 16:18 L: returned deliver/NF/lem-sfb-gabber-global-snc-alteration (reviewer RETURN: C1/F (route pivot, working around the drop check) and B5. The item is live: it is not in the 2026-10-19 drop section, an)
