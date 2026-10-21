@@ -18,7 +18,16 @@
   "def-weil-derived-pullback-tensor-hom",
   "def-weil-algebraically-closed-coefficients",
   "def-weil-finite-coefficient-point",
-  "def-weil-frobenius-point-transport"
+  "def-weil-frobenius-point-transport",
+  "def-real-rational-lisse-heart",
+  "def-real-lisse-realization-data",
+  "def-real-lisse-tensor-normalization",
+  "def-real-lisse-pullback-normalization",
+  "def-real-lisse-field-normalization",
+  "def-real-lisse-point-normalization",
+  "def-real-common-stage-lisse",
+  "lem-pur-derived-pullback-tensor-iso",
+  "def-real-point-automorphism-transport-construction"
  ],
  "proof": [
   {
@@ -447,5 +456,27 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q60-ce235861d (reviewer sub-agent of L); spot-checked: Read the item, new integral pullback node, all cited statements, current blueprint route, Bhatt–Scholze sources, Stacks Tag 01T6, and recorded Mathlib searches. Verified all 13 proof steps, hypotheses, coefficient/base-change normalizations, edge cases, route constraints, duplicate checks, and no SGA or batch-5 violations. Wrote review.md; no repairs needed."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.Paper.LisseRationalRealization",
+  "declaration": "WeilConjectures.LisseRealization.lisse_rational_realization",
+  "declarations": [
+   "WeilConjectures.LisseRealization.CommonNormalized",
+   "WeilConjectures.LisseRealization.lisse_rational_realization"
+  ],
+  "file": "lean/Sheaf/Paper/LisseRationalRealization.lean",
+  "statement": "theorem lisse_rational_realization : ∃ a : Family D l hl, (∀ (A : Type u) [Field A] [Algebra ℚ_[l] A] [FiniteDimensional ℚ_[l] A] (X : Base D l hl), Nonempty (TensorNormalized D l hl A X (a.realization A X) (a.tensor A X))) ∧ (∀ (A : Type u) [Field A] [Algebra ℚ_[l] A] [FiniteDimensional ℚ_[l] A] {X Y : Base D l hl} (f : X.scheme ⟶ Y.scheme), Nonempty (PullNormalized D l hl A f (a.realization A X) (a.realization A Y) (a.along A f))) ∧ (∀ (A B : Type u) [Field A] [Field B] [Algebra ℚ_[l] A] [Algebra ℚ_[l] B] [FiniteDimensional ℚ_[l] A] [FiniteDimensional ℚ_[l] B] (i : A →ₐ[ℚ_[l]] B) (X : Base D l hl), Nonempty (FieldNormalized D l hl A B i X (a.realization A X) (a.realization B X) (a.fieldChange A B i X))) ∧ (∀ (A : Type u) [Field A] [Algebra ℚ_[l] A] [FiniteDimensional ℚ_[l] A], Nonempty (PointNormalized D l hl A (a.realization A (point D l hl)) (a.point A))) ∧ (∀ (Ω : Type u) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω] (X : Base D l hl), ∃ c : CommonStage D l hl Ω a X, Nonempty (CommonNormalized D l hl a Ω X c))",
+  "branch": "newtargets-dag",
+  "by": "Q12",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-47c5485e7",
+  "group": "Q12",
+  "result": "pass",
+  "note": "Re-delivery after 11eb RETURN. The seven Lean modules are byte-identical to 11eb; only records and report changed. H2 fixed: new existing:true def node def-real-point-automorphism-transport-construction owns pointAutomorphismRestrictionModules/Derived, pointTransportKappa and pointTransport. Bodies read: they match its statement, and lean.statement equals the source signature verbatim. stmt_deps carry restriction-natural (.choose) and def-weil-inverse-image-pullback-comparison. Item and data node cite it instead of the theorem node. def-real-lisse-pullback-normalization now cites def-sf-ordinary-integral-pullback-construction. Spurious immersion-restriction stmt_dep dropped from the data node. Mechanical finding PASS: composition, associator, braiding and left/right unitors from DerivedPullbackTensorIso are .exists.choose of the node's ∃! theorems; the unit is in the unitors' types. Clause correspondence and edge cases re-checked against the unchanged Lean. Live item lean null. Advisories: the new node's owner of pointCompletedSections (lem-weil-point-sections-scalar-extension) is missing from its stmt_deps but is in the item closure, base-era use; Identity.raw is determined on lisse objects. No compile, no FIX."
+ }
 }

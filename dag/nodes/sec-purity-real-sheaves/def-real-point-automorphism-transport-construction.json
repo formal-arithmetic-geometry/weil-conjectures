@@ -1,0 +1,115 @@
+{
+ "id": "def-real-point-automorphism-transport-construction",
+ "kind": "definition",
+ "title": "Canonical point-automorphism restriction and integral transport construction",
+ "status": "split",
+ "statement": "Fix a finite-field datum $D$ with algebraic closure $k$ and characteristic prime $p$ [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, and a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $R$ [def-weil-l-adic-coefficient-extension]. Put $s=\\operatorname{Spec}k$ and let $g:s\\to s$ be any scheme automorphism. Use the completed integral coefficient sheaf $\\widehat R_s$ [def-weil-completed-integral-coefficients], its module category [def-weil-sheaf-of-modules-category], and its derived category [def-weil-abstract-derived-category]. Let $\\Gamma_R$ be evaluation at the terminal pro-etale object followed by restriction to the constant $R$-scalars, and let $R\\Gamma_R$ be its exact termwise derived functor [lem-weil-point-proetale-sections-exact]. Let $G_g$ be the exact module inverse image with the action transported by the specified coefficient isomorphism, and $P_g$ the completed integral derived pullback [def-weil-inverse-image-pullback-comparison]. Define $\\sigma_g:\\Gamma_R\\to\\Gamma_R\\circ G_g$ by the section-normalized restriction-and-coprojection transformation of [lem-weil-point-automorphism-restriction-natural] at integral coefficients, followed by the canonical unlift of constant scalars. Define $\\sigma_g^D:R\\Gamma_R\\to R\\Gamma_R\\circ G_g^D$ by applying this transformation termwise, localizing at quasi-isomorphisms, and applying the canonical exact-functor composition comparison. For every derived $\\widehat R_s$-module $K$, define $\\kappa_{g,K}:G_g^D K\\to P_g K$ by the specified chosen-resolution comparison of [def-weil-inverse-image-pullback-comparison], supplying its prime-unit witnesses from $\\ell\\ne p$. Define the point transport to be $t_{g,K}=R\\Gamma_R(\\kappa_{g,K})\\circ\\sigma^D_{g,K}$. These are the four existing constructions pointAutomorphismRestrictionModules, pointAutomorphismRestrictionDerived, pointTransportKappa, and pointTransport. No compatibility with scalar extension, constructibility assumption, or naturality assertion for the composite is part of this definition.",
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "lem-weil-point-proetale-sections-exact",
+  "def-weil-inverse-image-pullback-comparison",
+  "lem-weil-point-automorphism-restriction-natural"
+ ],
+ "source": {
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "(1.1.3) and (1.1.7), pp. 150–151 (context); the explicit completed-coefficient restriction, derived localization, and kappa composite are the agent-written constructions in Sheaf.Paper.PointAutomorphismTransportScalarExtension, preceding the scalar-extension theorem."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical point automorphism restriction derived sections transport inverse image coprojection",
+   "results": "[leansearch] OK 8 hit(s)\\n  CategoryTheory.Sheaf.ΓRes, AlgebraicGeometry.Scheme.Modules.restrictFunctorId_inv_app_app, AlgebraicGeometry.Proj.res_apply, AlgebraicGeometry.SheafedSpace.restrictTopIso_inv, AlgebraicGeometry.PresheafedSpace.restrictStalkIso_inv_eq_ofRestrict, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.isoRestrict_inv_ofRestrict, CategoryTheory.sheafHomSectionsEquiv_symm_apply_coe_apply, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_inv_ofRestrict",
+   "date": "2026-10-21",
+   "verdict": "No Mathlib match for the coefficient-normalized point-automorphism construction; use the existing Sheaf definitions without rewriting them."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.liftNatTrans, CategoryTheory.NatTrans.mapHomologicalComplex",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-21",
+   "verdict": "No Mathlib match for the coefficient-normalized point-automorphism construction; use the existing Sheaf definitions without rewriting them."
+  },
+  {
+   "tool": "grep",
+   "query": "pointTransport|pointAutomorphismRestriction",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-21",
+   "verdict": "No Mathlib match for the coefficient-normalized point-automorphism construction; use the existing Sheaf definitions without rewriting them."
+  },
+  {
+   "tool": "grep",
+   "query": "rg pointTransport|pointAutomorphismRestriction in lean/WeilConjectures and lean/Sheaf; rg pointAutomorphismRestrictionModules|pointTransportKappa in dag/nodes; python3 tools/blueprint_refs.py search pointTransport",
+   "results": "WeilConjectures: no hits. Sheaf.Paper.PointAutomorphismTransportScalarExtension defines all four constructions at lines 67, 84, 109, 119. DAG: only the theorem node lem-weil-point-automorphism-transport-scalar-extension lists these definitions; no definition node owns them. blueprint_refs: 0 blueprint nodes match pointTransport.",
+   "date": "2026-10-21",
+   "verdict": "Add definition-node ownership of the unchanged existing declarations, as requested by independent review H2; do not depend on the scalar-extension conclusion."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-tw-lisse-rational-realization",
+  "date": "2026-10-21",
+  "group": "Q12"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-tw-dual-negation",
+   "place": "Point-transport normalization in the lisse realization supporting the dual-stalk Frobenius comparison.",
+   "via": [
+    "lem-tw-lisse-rational-realization",
+    "lem-tw-dual-stalk-frobenius"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-r-real-linear",
+ "lean": {
+  "module": "Sheaf.Paper.PointAutomorphismTransportScalarExtension",
+  "declaration": "WeilConjectures.pointTransport",
+  "declarations": [
+   "WeilConjectures.pointAutomorphismRestrictionModules",
+   "WeilConjectures.pointAutomorphismRestrictionDerived",
+   "WeilConjectures.pointTransportKappa",
+   "WeilConjectures.pointTransport"
+  ],
+  "statement": "def pointTransport (K : DerivedCategory (integralTowerModules l E (Spec (.of D.k))))",
+  "branch": "newtargets-dag",
+  "by": "Q12",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "H2 repair: definition-node ownership of the unchanged published module restriction, exact derived lift, specified kappa, and their point-transport composite. The prime-unit proof is supplied by pointTransportPrimeUnits from the finite-field datum. None of these constructions uses the conclusion of point_automorphism_transport_scalar_extension; that theorem is not a prerequisite. No source module is duplicated or edited."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-47c5485e7",
+  "group": "Q12",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-47c5485e7",
+  "group": "Q12",
+  "result": "pass",
+  "note": "Re-delivery after 11eb RETURN. The seven Lean modules are byte-identical to 11eb; only records and report changed. H2 fixed: new existing:true def node def-real-point-automorphism-transport-construction owns pointAutomorphismRestrictionModules/Derived, pointTransportKappa and pointTransport. Bodies read: they match its statement, and lean.statement equals the source signature verbatim. stmt_deps carry restriction-natural (.choose) and def-weil-inverse-image-pullback-comparison. Item and data node cite it instead of the theorem node. def-real-lisse-pullback-normalization now cites def-sf-ordinary-integral-pullback-construction. Spurious immersion-restriction stmt_dep dropped from the data node. Mechanical finding PASS: composition, associator, braiding and left/right unitors from DerivedPullbackTensorIso are .exists.choose of the node's ∃! theorems; the unit is in the unitors' types. Clause correspondence and edge cases re-checked against the unchanged Lean. Live item lean null. Advisories: the new node's owner of pointCompletedSections (lem-weil-point-sections-scalar-extension) is missing from its stmt_deps but is in the item closure, base-era use; Identity.raw is determined on lisse objects. No compile, no FIX."
+ }
+}

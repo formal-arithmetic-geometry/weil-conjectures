@@ -1,0 +1,113 @@
+{
+ "id": "def-real-lisse-field-normalization",
+ "kind": "definition",
+ "title": "Representative normalization of lisse coefficient extension",
+ "status": "split",
+ "statement": "For normalized realizations over finite fields $E\\to F$ [def-real-lisse-realization-data], require the coefficient ring square to commute. Identify the recorded ordinary completed scalar extension with ordinary change of rings by the map sending $c\\otimes m$ to $c\\otimes m$; fix the corresponding derived comparison by its universal counit. On each integral constructible object invert the specified completion map $\\chi$ [lem-weil-finite-free-completed-scalar-comparison], extend to rational coefficients, and use the canonical derived scalar associators to obtain the comparison with rational field extension. Require the lisse comparison to be its degree-zero map, using the exact ordinary field-extension functor and a homology-normalized degree-zero identification.",
+ "stmt_deps": [
+  "def-real-lisse-realization-data",
+  "lem-weil-finite-free-completed-scalar-comparison"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.2, Definition 6.8.3, Proposition 6.8.4(1),(4),(6), Proposition 6.8.14(2) and Remark 6.8.15, pp. 58-62. Lisse restriction with explicit normalization for the completed/rationalized operations and point transport; these normalization clauses are an agent formulation of the comparison, not a verbatim theorem of the source."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "lisse|rationalization|ellAdicSheaf",
+   "results": "5 hits: Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean",
+   "date": "2026-10-21",
+   "verdict": "No statement of this normalized rational lisse realization or its representative interface; reuse the ordinary sheaf, scalar, and completed operation definitions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"Equivalence\"",
+   "results": "3 hits: SheafOfModules.pushforwardPushforwardEquivalence, SheafOfModules.pushforwardPushforwardEquivalence_unit_app_val_app, SheafOfModules.pushforwardPushforwardEquivalence_counit_app_val_app",
+   "date": "2026-10-21",
+   "verdict": "No statement of this normalized rational lisse realization or its representative interface; reuse the ordinary sheaf, scalar, and completed operation definitions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lisse realization of the rationalized constructible l-adic heart as finite locally free continuous coefficient sheaves preserving tensor and point transport",
+   "results": "8 hits: Condensed.finFree, Condensed.profiniteSolid, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, Condensed.profiniteFree, Condensed.free, LightCondensed.free, CondensedMod.LocallyConstant.functor, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf",
+   "date": "2026-10-21",
+   "verdict": "No statement of this normalized rational lisse realization or its representative interface; reuse the ordinary sheaf, scalar, and completed operation definitions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pro-etale locally finite free objects in a rationalized constructible heart with canonical tensor pullback realization",
+   "results": "8 hits: SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso_hom_naturality, Algebra.Etale.baseChange, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullbackObjFreeIso.congr_simp, SheafOfModules.freeFunctorCompPullbackIso, Algebra.FormallyEtale.instTensorProduct, AlgebraicGeometry.Scheme.Etale",
+   "date": "2026-10-21",
+   "verdict": "No statement of this normalized rational lisse realization or its representative interface; reuse the ordinary sheaf, scalar, and completed operation definitions."
+  },
+  {
+   "tool": "grep",
+   "query": "rg IsRationalLisse|rationalLisseHeartProperty|LisseRealization in Mathlib, lean/WeilConjectures and lean/Sheaf; rg rational lisse and normalized realization in dag/nodes; tools/blueprint_refs.py search rational lisse",
+   "results": "No exact predicate or normalized comparison interface; CommonStageLocallyFree defines the algebraic-closure predicate only. ContinuousRationalDerivedRealization concerns the distinct Pbc rationalization, and does not supply the recorded raw rational lisse tensor/point comparison. Existing ordinary sheaf tensor, scalar extension and completed operation constructions are used.",
+   "date": "2026-10-21",
+   "verdict": "New nodes package the missing predicate and normalized interfaces, without duplicating an existing ring, module category, tensor, pullback, or point fibre."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-tw-lisse-rational-realization",
+  "date": "2026-10-21",
+  "group": "Q12"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-tw-dual-negation",
+   "place": "Proof first sentence: lisse dual representation and its tensor/point normalization.",
+   "via": [
+    "lem-tw-lisse-rational-realization",
+    "lem-tw-dual-stalk-frobenius"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-r-real-linear",
+ "lean": {
+  "module": "Sheaf.Paper.LisseFieldNormalization",
+  "declaration": "WeilConjectures.LisseRealization.FieldNormalized",
+  "declarations": [
+   "WeilConjectures.LisseRealization.FieldNormalized"
+  ],
+  "file": "lean/Sheaf/Paper/LisseFieldNormalization.lean",
+  "statement": "structure FieldNormalized (i : E →ₐ[ℚ_[l]] F) (X : Base D l hl) (aE : At D l hl E X) (aF : At D l hl F X) (b : FieldChange D l hl E F i X aE aF)",
+  "branch": "newtargets-dag",
+  "by": "Q12",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-47c5485e7",
+  "group": "Q12",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-47c5485e7",
+  "group": "Q12",
+  "result": "pass",
+  "note": "Re-delivery after 11eb RETURN. The seven Lean modules are byte-identical to 11eb; only records and report changed. H2 fixed: new existing:true def node def-real-point-automorphism-transport-construction owns pointAutomorphismRestrictionModules/Derived, pointTransportKappa and pointTransport. Bodies read: they match its statement, and lean.statement equals the source signature verbatim. stmt_deps carry restriction-natural (.choose) and def-weil-inverse-image-pullback-comparison. Item and data node cite it instead of the theorem node. def-real-lisse-pullback-normalization now cites def-sf-ordinary-integral-pullback-construction. Spurious immersion-restriction stmt_dep dropped from the data node. Mechanical finding PASS: composition, associator, braiding and left/right unitors from DerivedPullbackTensorIso are .exists.choose of the node's ∃! theorems; the unit is in the unitors' types. Clause correspondence and edge cases re-checked against the unchanged Lean. Live item lean null. Advisories: the new node's owner of pointCompletedSections (lem-weil-point-sections-scalar-extension) is missing from its stmt_deps but is in the item closure, base-era use; Identity.raw is determined on lisse objects. No compile, no FIX."
+ }
+}
