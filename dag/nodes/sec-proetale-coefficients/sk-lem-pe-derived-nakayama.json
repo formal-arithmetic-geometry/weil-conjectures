@@ -18,11 +18,9 @@
  ],
  "proof": [
   {
-   "text": "The finite coefficient quotient has the two-term finite free resolution over $\\mathcal O_E$ given by [lem-weil-pbc-standard-quotients-perfect], with the notation $\\varpi=\\pi_E$. The exact sequence of [det-pe-derived-nakayama-resolution] gives the corresponding resolution on $X_{\\Proet}$: the complex $P_n=[\\mathcal O_{E,X}\\xrightarrow{\\pi_E^n}\\mathcal O_{E,X}]$ in degrees $-1,0$, with augmentation the reduction to $(\\mathcal O_E/\\pi_E^n)_X$, is a quasi-isomorphism, so $P_n$ represents $(\\mathcal O_E/\\pi_E^n)_X[0]$. Its terms in degrees $-1,0$ are free of rank one over $\\mathcal O_{E,X}$, with all other terms zero. Hence $P_n$ is perfect in the sense of [def-weil-pbc-strict-perfect-coefficient-package] for the ringed site $(X_{\\Proet},\\mathcal O_{E,X})$: for every object $V$ take the one-member covering $\\{V\\to V\\}$ and the identity quasi-isomorphism of $P_n|_V$, a bounded complex whose terms $\\mathcal O_{E,V}=\\mathcal O_{E,V}^{\\oplus1}$ are finite free (package data $N_r=1$, $i_r=p_r=\\mathrm{id}$ in degrees $-1,0$). The same statement of [det-pe-derived-nakayama-resolution] identifies $K_n$ naturally with the cone of $\\pi_E^n\\colon K\\to K$.",
+   "text": "Use the scalar d and the pulled-back short exact sequence of det-pe-derived-nakayama-resolution at exponent n+1. Conjugate its first two terms by regularPullbackIso, and identify the quotient map with finiteUnit by faithfulness of the point-module forgetful functor. Form HomologicalComplex.double of this multiplication map in degrees -1 and 0. Its augmentation to the coefficient in degree zero is a quasi-isomorphism: at degree 0, exactness and surjectivity identify the cokernel; at degree -1, injectivity kills the kernel; elsewhere both complexes have zero homology. The two nonzero terms are regular modules, as required. The natural cone identification is the second conclusion of det-pe-derived-nakayama-resolution. No ordinary-module perfectness or local strict-perfect package is needed to construct this explicitly specified rank-one resolution.",
    "uses": [
-    "lem-weil-pbc-standard-quotients-perfect",
-    "det-pe-derived-nakayama-resolution",
-    "def-weil-pbc-strict-perfect-coefficient-package"
+    "det-pe-derived-nakayama-resolution"
    ],
    "elementary": false,
    "source": {
@@ -31,9 +29,10 @@
    }
   },
   {
-   "text": "If $K$ is derived complete and $K_1=0$, the vanishing assertion of [det-pe-derived-nakayama-first-reduction] gives $K_n=0$ for every $n\\geq1$ and $K=0$.",
+   "text": "Identify canonical derived scalar extension followed by exact restriction with reductionFunctor at the corresponding positive exponent, using the proved generic residueDerivedTensorIso construction of new-integral-residue-tensor-presentation and the inverse-image compatibility with scalar restriction. Restriction of scalars is faithful and exact, so its derived functor reflects zero objects by its homology comparison. Hence the vanishing of integral first reduction implies the finite-coefficient first reduction vanishes. Apply the vanishing assertion of det-pe-derived-nakayama-first-reduction and retain its IsZero K conclusion.",
    "uses": [
-    "det-pe-derived-nakayama-first-reduction"
+    "det-pe-derived-nakayama-first-reduction",
+    "new-integral-residue-tensor-presentation"
    ],
    "elementary": false,
    "source": {
@@ -42,9 +41,10 @@
    }
   },
   {
-   "text": "For a morphism $f\\colon K\\to L$ of derived-complete complexes whose first derived reduction $f_1$ is an isomorphism, the final assertion of [det-pe-derived-nakayama-first-reduction] directly gives that $f$ is an isomorphism.",
+   "text": "Use the same natural comparison between restricted scalar extension and tensor reduction. Its naturality transfers invertibility of the tensor-reduction map to invertibility after exact restriction. Restriction reflects isomorphisms on modules and hence on derived categories, using the homology comparison and the homology criterion for invertibility. Apply the isomorphism-detection assertion of det-pe-derived-nakayama-first-reduction.",
    "uses": [
-    "det-pe-derived-nakayama-first-reduction"
+    "det-pe-derived-nakayama-first-reduction",
+    "new-integral-residue-tensor-presentation"
    ],
    "elementary": false,
    "source": {
@@ -54,15 +54,16 @@
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-strict-perfect-coefficient-package",
   "det-pe-derived-nakayama-first-reduction",
   "det-pe-derived-nakayama-resolution",
-  "lem-weil-pbc-standard-quotients-perfect"
+  "new-integral-residue-tensor-presentation"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
+  "group": "J7",
+  "date": "2026-10-21",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/_section.md",
-  "place": "## Proof; expanded using the existing resolution and first-reduction nodes"
+  "place": "Proof: explicit double complex from the coefficient sequence; first-reduction consequences via the existing canonical scalar-tensor comparison."
  },
  "mathlib_searches": [
   {
@@ -152,9 +153,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-pbc-standard-quotients-perfect"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-16",
   "by": "L",
@@ -181,5 +180,15 @@
   "by": "Q21",
   "date": "2026-10-18",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J7",
+  "result": "pass",
+  "landing": "20261021T152315-L-1863299",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
