@@ -22203,3 +22203,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:10 L: merged deliver/E2/Sheaf.CategoryTheory.FullyFaithfulExceptionalHomTransport (stage 3; reviewer PASS; first push; landing 20261021T111032-L-3942693 (proof); batch 20261021T110859; modules 1; new nodes 0)
 - 11:10 L: merged deliver/E3/Sheaf.CategoryTheory.ModulePullbackTensorIsoE (stage 3; reviewer PASS; first push; landing 20261021T111034-L-3951262 (proof); batch 20261021T110859; modules 1; new nodes 0)
 - 11:10 L: merged deliver/E3/Sheaf.Paper.SectionLocalDualizingComparisons (stage 3; reviewer PASS; first push; landing 20261021T111038-L-3961700 (proof); batch 20261021T110859; modules 1; new nodes 0)
+- 11:10 L: merged deliver/E8/Sheaf.Paper.BoundaryEtaleAdjunctionRestriction (stage 3; reviewer PASS; first push; landing 20261021T111042-L-3971699 (proof); batch 20261021T110859; modules 1; new nodes 0)

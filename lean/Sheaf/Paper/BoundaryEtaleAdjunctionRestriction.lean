@@ -23,19 +23,9 @@ public import Mathlib.CategoryTheory.Adjunction.Restrict
 import WeilConjectures.Compactification.NagataCompactification
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
-import Sheaf.AlgebraicGeometry.EtaleConstantModuleDirectImageLeftExact
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 import WeilConjectures.SixFunctors.Etale.Derived.DirectImageVanishingTorsion
-import WeilConjectures.CategoryTheory.RingedSiteGrothendieckAbelian
-import Sheaf.AlgebraicGeometry.EtaleModuleEnoughInjectives
-import Sheaf.AlgebraicGeometry.KInjectiveResolutionsExist
 import Sheaf.CategoryTheory.RightDerivedFunctorUpperBound
-import Sheaf.SixFunctors.Etale.Derived.UpperShriekBoundedBelow
-import Sheaf.Paper.ComparisonPullbackExact
-import Sheaf.AlgebraicGeometry.CompactSupportComparisonUnit
 
 /-!
 # Bounded-below ordinary etale compact-support adjunctions
@@ -175,6 +165,99 @@ theorem boundary_etale_adjunction_restriction
     (_hover : h ≫ aW = aV) :
     BoundaryEtaleAdjunctionRestriction
       (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n)) h aW := by
-  sorry
+  classical
+  have : IsAlgClosed D.k := IsAlgClosure.isAlgClosed D.k₀
+  let Λ := ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n)
+  have : Finite (Padic.coefficientExtensionRing l E n) :=
+    Padic.finite_coefficientExtensionRing l E n _hn
+  have : Finite Λ := inferInstance
+  have : IsLocallyNoetherian V := LocallyOfFiniteType.isLocallyNoetherian aV
+  have : CompactSpace V := QuasiCompact.compactSpace_of_compactSpace aV
+  have : IsNoetherian V := ⟨⟩
+  have : IsLocallyNoetherian W := LocallyOfFiniteType.isLocallyNoetherian aW
+  have : CompactSpace W := QuasiCompact.compactSpace_of_compactSpace aW
+  have : IsNoetherian W := ⟨⟩
+  refine ⟨⟨NagataCompactification h⟩, inferInstance, inferInstance,
+    inferInstance, inferInstance, ?_, ?_⟩
+  · intro c
+    have : LocallyOfFiniteType (c.g ≫ aW) := inferInstance
+    have : QuasiCompact (c.g ≫ aW) := inferInstance
+    have : IsLocallyNoetherian c.Z :=
+      LocallyOfFiniteType.isLocallyNoetherian (c.g ≫ aW)
+    have : CompactSpace c.Z := QuasiCompact.compactSpace_of_compactSpace (c.g ≫ aW)
+    have : IsNoetherian c.Z := ⟨⟩
+    obtain ⟨d, hd⟩ := exists_topologicalKrullDim_le (c.g ≫ aW)
+    refine ⟨inferInstance, inferInstance, inferInstance, inferInstance, ⟨d, hd⟩, ?_⟩
+    let A := ModuleCat.{u + 1} Λ
+    let F := rightDerivedLowerShriekOfCompactification A c
+    let P := lowerStar A c.g
+    let J := openImmersionLowerShriek A c.i
+    have hvan (M : Sheaf c.Z.smallEtaleTopology A) (q : ℕ) (hq : 2 * d < q) :
+        IsZero ((P.rightDerived q).obj M) := by
+      have hz := isZero_higherDirectImage_of_two_mul_lt
+        (Λ := Λ) isAddTorsion_of_finite c.g (c.g ≫ aW) aW rfl d hd M q
+        (by exact_mod_cast hq)
+      exact hz.of_iso (P.homologyRightDerivedFunctorPlusObjSingleFunctorIso M q).symm
+    let N : ℤ := (2 * d : ℕ)
+    have hAmp (K : DerivedCategory (Sheaf V.smallEtaleTopology A)) (b : ℤ)
+        (hK : K.IsLE b) : (F.obj K).IsLE (b + N) := by
+      have : K.IsLE b := hK
+      exact P.isLE_rightDerivedFunctor_obj_of_dimension (2 * d) hvan _ b
+        (J.isLE_mapDerivedCategory_obj K b)
+    have : F.IsLeftAdjoint := isLeftAdjoint_rightDerivedLowerShriekOfCompactification Λ c
+    let R := F.rightAdjoint
+    let adj : F ⊣ R := Adjunction.ofIsLeftAdjoint F
+    have hR (L : DerivedCategory (Sheaf W.smallEtaleTopology A))
+        (hL : DerivedCategory.TStructure.t.plus L) :
+        DerivedCategory.TStructure.t.plus (R.obj L) := by
+      obtain ⟨b, hb⟩ := hL
+      refine ⟨b - N, ?_⟩
+      rw [DerivedCategory.TStructure.t.isGE_iff_orthogonal
+        (b - N - 1) (b - N) (by omega)]
+      intro K φ hK
+      have hFK : (F.obj K).IsLE (b - 1) := by
+        convert hAmp K (b - N - 1) hK using 1
+        omega
+      apply (adj.homEquiv K L).symm.injective
+      rw [adj.homAddEquiv_symm_zero]
+      exact DerivedCategory.TStructure.t.zero _ (b - 1) b (by omega)
+    have hF (K : DerivedCategory (Sheaf V.smallEtaleTopology A))
+        (hK : DerivedCategory.TStructure.t.plus K) :
+        DerivedCategory.TStructure.t.plus (F.obj K) :=
+      DerivedCategory.TStructure.t.plus.prop_of_iso
+        ((rightDerivedLowerShriekOfCompactificationPlusCompatibility A c).app ⟨K, hK⟩)
+        (rightDerivedLowerShriekOfCompactificationPlus A c |>.obj ⟨K, hK⟩).property
+    let Rplus := DerivedCategory.TStructure.t.plus.lift (DerivedCategory.Plus.ι ⋙ R)
+      (fun L ↦ hR L.obj L.property)
+    let eR : DerivedCategory.Plus.ι ⋙ R ≅ Rplus ⋙ DerivedCategory.Plus.ι := Iso.refl _
+    let adjPlus := adj.restrictFullyFaithful
+      (ObjectProperty.fullyFaithfulι _) (ObjectProperty.fullyFaithfulι _)
+      (rightDerivedLowerShriekOfCompactificationPlusCompatibility A c).symm eR
+    refine ⟨R, adj, hF, hR, ⟨Rplus, eR, adjPlus, rfl⟩, ?_⟩
+    intro L
+    have hunit := ProEtale.isIso_derivedComparisonAdjunction_unit_app A W L.obj L.property
+    have ht : DerivedCategory.TStructure.t.plus
+        (((ProEtale.comparisonUpperStar A W).mapDerivedCategory ⋙
+          (ProEtale.comparisonLowerStar A W).rightDerivedFunctor).obj L.obj) :=
+      DerivedCategory.TStructure.t.plus.prop_of_iso
+        (asIso ((ProEtale.derivedComparisonAdjunction A W).unit.app L.obj)) L.property
+    have hS (K : DerivedCategory (Sheaf V.smallEtaleTopology A))
+        (hK : DerivedCategory.TStructure.t.plus K) :
+        DerivedCategory.TStructure.t.plus
+          ((ProEtale.comparisonUpperStar A V).mapDerivedCategory.obj K) := by
+      obtain ⟨b, hb⟩ := hK
+      have : K.IsGE b := hb
+      exact ⟨b, (ProEtale.comparisonUpperStar A V).isGE_mapDerivedCategory_obj K b⟩
+    exact ⟨inferInstance, hS _ (hR _ L.property), hS _ (hR _ ht)⟩
+  · intro C b
+    let S := ProEtale.comparisonUpperStar (ModuleCat.{u + 1} Λ) V
+    constructor
+    · intro hC
+      exact (DerivedCategory.isGE_iff C b).2 fun i hi ↦
+        S.isZero_homologyFunctor_of_isZero_homologyFunctor_mapDerivedCategory_obj
+          ((DerivedCategory.isGE_iff _ b).1 hC i hi)
+    · intro hC
+      have : C.IsGE b := hC
+      exact S.isGE_mapDerivedCategory_obj C b
 
 end AlgebraicGeometry.Etale

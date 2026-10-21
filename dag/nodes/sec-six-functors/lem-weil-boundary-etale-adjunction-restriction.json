@@ -63,13 +63,9 @@
    }
   },
   {
-   "text": "By [lem-weil-pbc-extension-by-zero-exact] and [lem-weil-pbc-exact-functor-complex-cohomology], $j_!$ preserves each cohomological bound. The module direct image $p_*$ is additive and left exact by [lem-weil-pbc-module-direct-image-left-exact]. The module-sheaf categories of $\\overline V$ and $W$ are Grothendieck abelian by [lem-pur-ringed-site-grothendieck-abelian] (small sites taken in a common larger universe), so [lem-weil-pbc-derived-functor-negative-vanishing] applies: its bounded-below right derived functor, computed by K-injective resolutions, preserves each lower bound. The natural compatibility [src-right-derived-functor-plus-compatibility] identifies that functor with the restriction of the unbounded total $Rp_*$ defining $F_c$. Therefore $F_c(D^{\\ge b})\\subset D^{\\ge b}$ for every integer $b$, so $F_c$ preserves $D^+$.",
+   "text": "The existing bounded-below compact-support functor is a functor between D+ categories. Its compatibility isomorphism with the ambient functor is rightDerivedLowerShriekOfCompactificationPlusCompatibility, assembled from exact extension by zero [lem-weil-pbc-extension-by-zero-exact] and unbounded/plus right-derived compatibility [src-right-derived-functor-plus-compatibility]. Transport the boundedness property of its value along that isomorphism. No separate negative-cohomology calculation is needed.",
    "uses": [
     "lem-weil-pbc-extension-by-zero-exact",
-    "lem-weil-pbc-exact-functor-complex-cohomology",
-    "lem-weil-pbc-module-direct-image-left-exact",
-    "lem-pur-ringed-site-grothendieck-abelian",
-    "lem-weil-pbc-derived-functor-negative-vanishing",
     "src-right-derived-functor-plus-compatibility"
    ],
    "elementary": false,
@@ -79,17 +75,12 @@
    }
   },
   {
-   "text": "Apply [lem-kun-relative-torsion-direct-image-dimension-bound] to $p:\\overline V\\to W$: $k$ is separably closed, $A$ is additively torsion, $p$ is quasi-compact and locally finite type, $W/k$ is locally finite type, and $\\dim\\overline V\\le d_c$. Thus $R^qp_*M=0$ for every module sheaf $M$ and $q>2d_c$. The module-sheaf category is Grothendieck by [lem-pur-ringed-site-grothendieck-abelian], with the small sites understood in a common larger universe; it has enough injectives by [lem-weil-pbc-module-sheaves-enough-injectives] and K-injective resolutions by [prop-weil-pbc-kinjective-resolutions-exist]. Use these and the left exactness in step 4 in [lem-etale-derived-functor-upper-amplitude]. It gives $Rp_*(D^{\\le m})\\subset D^{\\le m+2d_c}$ even for unbounded-below inputs. Exactness of $j_!$ gives the same upper bound for $F_c$. Now [lem-etale-upper-shriek-explicit-amplitude-interface] with $N=2d_c$ and the ambient adjunction of step 3 shows that $R_c$ preserves $D^+$. This proves boundedness before making any restriction of the adjunction.",
+   "text": "The field D.k is algebraically closed by IsAlgClosure.isAlgClosed, hence separably closed. Apply [lem-kun-relative-torsion-direct-image-dimension-bound] to the proper factor p with a_X=p followed by a_W and dimension bound d. The library comparison H^q(R+ p_* M[0]) isomorphic to the classical R^q p_* M gives vanishing in every natural degree q>2d. Apply [lem-etale-derived-functor-upper-amplitude], with the standard Grothendieck, injective-resolution and K-injective-resolution instances already provided for fixed-coefficient module sheaves by the adopted derived-category library. Exact extension by zero preserves upper bounds by [lem-weil-pbc-extension-by-zero-exact, lem-weil-pbc-exact-functor-complex-cohomology]. Thus F_c sends D^{<=m} into D^{<=m+N}, N=2d, on arbitrary unbounded input. For L in D^{>=b}, test R_c L against K in D^{<=b-N-1}. Adjunction identifies each map K to R_c L with a map F_c K to L. The latter is zero by t-structure orthogonality, since F_c K belongs to D^{<=b-1}. Orthogonality characterizes D^{>=b-N}, so R_c L belongs to it. This is the fixed-compactification version of the elementary argument of the former chosen-compactification amplitude interface; no transport to a chosen compactification is needed.",
    "uses": [
     "lem-kun-relative-torsion-direct-image-dimension-bound",
-    "lem-pur-ringed-site-grothendieck-abelian",
-    "lem-weil-pbc-module-sheaves-enough-injectives",
-    "prop-weil-pbc-kinjective-resolutions-exist",
-    "lem-weil-pbc-module-direct-image-left-exact",
     "lem-etale-derived-functor-upper-amplitude",
     "lem-weil-pbc-extension-by-zero-exact",
-    "lem-weil-pbc-exact-functor-complex-cohomology",
-    "lem-etale-upper-shriek-explicit-amplitude-interface"
+    "lem-weil-pbc-exact-functor-complex-cohomology"
    ],
    "elementary": false,
    "source": {
@@ -107,10 +98,11 @@
    }
   },
   {
-   "text": "By [lem-sf-comparison-pullback-exact], for every integer $i$ and arbitrary unbounded $C$ one has $\\mathcal H^i(S_VC)\\cong S_V\\mathcal H^i(C)$. On degree-zero sheaves, [thm-weil-pbc-site-comparison] makes $S_V$ faithful, since such sheaves are bounded below. If $S_VM=0$ for a sheaf $M$, then faithfulness sends the equality $S_V(1_M)=S_V(0)$ back to $1_M=0$, hence $M=0$. Thus each $\\mathcal H^i(S_VC)$ vanishes exactly when $\\mathcal H^i(C)$ vanishes. Requiring this for all $i<b$ proves the stated equivalence for any $C$, without assuming $C$ bounded below.",
+   "text": "The fixed-coefficient comparison inverse image already has exactness and faithfulness instances in the adopted source library (the exactness and full faithfulness assertions of [lem-sf-comparison-pullback-exact, thm-weil-pbc-site-comparison]). Use [lem-weil-pbc-exact-functor-bounded-below]: its mapDerivedCategoryHomologyFunctorIso identifies each derived cohomology sheaf after comparison with comparison of the original cohomology sheaf. The proved generic faithful-exact-functor lemma isZero_homologyFunctor_of_isZero_homologyFunctor_mapDerivedCategory_obj reflects vanishing by faithfulness; the exact-functor bound lemma preserves it. Apply the characterization of IsGE by vanishing in every degree i<b. This proves the equivalence for arbitrary C, with no lower boundedness assumption. The extra scalar-extension normalization clauses of lem-sf-comparison-pullback-exact are unused: its specialized module need not be imported because the exactness instances are already supplied by the adopted comparison construction.",
    "uses": [
     "lem-sf-comparison-pullback-exact",
-    "thm-weil-pbc-site-comparison"
+    "thm-weil-pbc-site-comparison",
+    "lem-weil-pbc-exact-functor-bounded-below"
    ],
    "elementary": true,
    "source": {
@@ -119,7 +111,7 @@
    }
   },
   {
-   "text": "For $L\\in D^+(W_{\\mathrm{et}},A)$, [thm-weil-pbc-site-comparison] says that the specified unit $\\eta_{W,L}:L\\to U_WS_WL$ is invertible. Its target is therefore bounded below, and step 5 puts both $R_cL$ and $R_cU_WS_WL$ in $D^+$. Step 7 (or its forward implication) puts their $S_V$-images in $D^+$. Every functor carries an inverse to an inverse, so applying $S_VR_c$ to this actual unit gives exactly the displayed isomorphism. No bound on $R_cL$ was an input; it was proved in step 5.",
+   "text": "For L in D+, apply the existing unbounded canonical-unit theorem isIso_derivedComparisonAdjunction_unit_app, the ordinary fixed-coefficient form of [thm-weil-pbc-site-comparison], at the underlying bounded-below object. Its target is bounded below by transport along this very unit isomorphism. The boundedness of R_c from step 5 and exact comparison from step 7 put both S_V R_c images in D+. Functors preserve isomorphisms, so applying S_V R_c to the specified unit gives precisely the required invertible morphism.",
    "uses": [
     "thm-weil-pbc-site-comparison"
    ],
@@ -139,23 +131,18 @@
   "lem-kun-dimension-finite-type",
   "thm-amb-etale-exceptional-adjoint",
   "lem-weil-pbc-extension-by-zero-exact",
-  "lem-weil-pbc-exact-functor-complex-cohomology",
-  "lem-weil-pbc-module-direct-image-left-exact",
-  "lem-weil-pbc-derived-functor-negative-vanishing",
   "src-right-derived-functor-plus-compatibility",
   "lem-kun-relative-torsion-direct-image-dimension-bound",
-  "lem-pur-ringed-site-grothendieck-abelian",
-  "lem-weil-pbc-module-sheaves-enough-injectives",
-  "prop-weil-pbc-kinjective-resolutions-exist",
   "lem-etale-derived-functor-upper-amplitude",
-  "lem-etale-upper-shriek-explicit-amplitude-interface",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
   "lem-sf-comparison-pullback-exact",
-  "thm-weil-pbc-site-comparison"
+  "thm-weil-pbc-site-comparison",
+  "lem-weil-pbc-exact-functor-bounded-below"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/cor-weil-boundary-duality-discharge.md",
-  "place": "Preparation for ordinary etale costalk adjunctions: geometric compactification, finite-cd bounds, full-subcategory restriction, and Bhatt–Scholze Corollary 5.1.6."
+  "place": "E8 Lean proof of the existing eight-step argument: use the existing plus compatibility isomorphism directly for left boundedness; apply the stated dimension-bound and unbounded-amplitude theorems, then prove fixed-compactification right boundedness by adjunction orthogonality; use the adopted faithful exact comparison API and canonical unbounded comparison unit. No statement or definition change."
  },
  "mathlib_searches": [
   {
@@ -344,15 +331,9 @@
   "thm-amb-etale-exceptional-adjoint",
   "lem-weil-pbc-extension-by-zero-exact",
   "lem-weil-pbc-exact-functor-complex-cohomology",
-  "lem-weil-pbc-module-direct-image-left-exact",
-  "lem-weil-pbc-derived-functor-negative-vanishing",
   "src-right-derived-functor-plus-compatibility",
   "lem-kun-relative-torsion-direct-image-dimension-bound",
-  "lem-pur-ringed-site-grothendieck-abelian",
-  "lem-weil-pbc-module-sheaves-enough-injectives",
-  "prop-weil-pbc-kinjective-resolutions-exist",
   "lem-etale-derived-functor-upper-amplitude",
-  "lem-etale-upper-shriek-explicit-amplitude-interface",
   "lem-sf-comparison-pullback-exact",
   "thm-weil-pbc-site-comparison"
  ],
@@ -386,5 +367,15 @@
   "group": "Q94",
   "result": "pass",
   "note": "Snapshot differs from the side-live node only in the lean record; no statement change; item not dropped and has no repair note. Clause-by-clause match against the declarations: FiniteFieldDatum k, l ≠ D.p, E finite over Q_l, 1 ≤ n, ULift coefficientExtensionRing; V, W, h separated + LOFT + QC with h ≫ aW = aV. Conclusions: Nonempty Compactification h; IsNoetherian and QuasiSeparatedSpace for V, W and every c.Z; finite type of c.g ≫ aW; ∃ d : ℕ bounding topologicalKrullDim (empty case ⊥). F_c is the recorded unbounded D(i_!) ⋙ R(g_*) with an actual right adjoint R; both preserve t.plus. The restricted adjunction equals restrictFullyFaithful of the ambient one via the recorded PlusCompatibility (orientation checked). Comparison pullback reflects IsGE for arbitrary C and b. IsIso of S_V(R(unit_W L)) uses the actual derivedComparisonAdjunction unit (the BS 5.1.6 unit), both ends t.plus, no bound on R_c L assumed. Pro-étale side uses the fixed-ring ModuleCat presentation recorded under §1(B) for def-sf-comparison-derived-pullback, so no substitute. Statement verbatim, autoImplicit off, universes u/u+1 as in the records, no hollow defs, docstrings carry source, blueprint tag and 8 proof steps, sorry only, private proof-only imports with no cycle. Report has both required sections. No compile (2026-10-21 rule); no file changed. Advisory: U_T and η_T from modules outside stmt_deps (pre-existing gap, def node for Rν_* suggested); QuasiSeparatedSpace used where the record names QuasiSeparated (equivalent in Mathlib)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E8",
+  "result": "pass",
+  "landing": "20261021T111042-L-3971699",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
