@@ -23405,3 +23405,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:56 L: returned deliver/N9/sk-thm-groth-ss (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-thm-groth-ss: sk-thm-groth-ss: completed in this pr)
 - 18:57 L: merged deliver/Q27/lem-pur-dualizing-unit-composite (stage 2; reviewer PASS; parallel immutable checks)
 - 2026-10-21T18:58:33Z L: superseded stage-1 delivery NJ/lem-sfb-condensed-split-coset-induction at 5403ce562a05aaeade2573c44246fb1e6f924ea7; current completion retained; packet archived at refs/superseded/NJ/lem-sfb-condensed-split-coset-induction/5403ce562a05aaeade2573c44246fb1e6f924ea7; stale return retired.
+- 18:58 L: returned deliver/Q85/lem-weil-integral-twist-scalar-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-integral-twist-scalar-coherence: lem-weil-int)
