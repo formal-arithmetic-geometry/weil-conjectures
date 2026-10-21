@@ -1,0 +1,82 @@
+{
+ "id": "lem-weil-pbc-strict-quotient-scalar-balancing",
+ "kind": "statement",
+ "title": "Strict quotient balancing and pullback preserve the quotient augmentation",
+ "statement": "Let $A$ be a commutative Noetherian ring, $I$ a finitely generated ideal, $A/I$ additive torsion, and $P_n=A/I^n$ finite and perfect over $A$ for every $n\\geq1$. For a scheme $T$, use its small pro-etale site, the constant ring sheaves $\\underline A_T$, $\\underline{P_n}_T$, and $A_T=\\varprojlim_n\\underline{P_n}_T$, with canonical scalar map $\\underline A_T\\to A_T$ and quotient projections [def-weil-pbc-adic-coefficient-datum]. All sites are small in [def-weil-size-convention]. Write $D(A_T)$ and $D(\\underline A_T)$ for unbounded derived module categories and $r_T$ for restriction along this scalar map [def-pc-sheaf-restrict-scalars]. Let $J=\\mathbf N_{\\geq1}^{op}$, $\\Delta$ be its constant-diagram functor, and $Q_T=(\\underline{P_n}_T)_n$ with quotient transitions. On the ringed diagram site [lem-weil-pbc-diagram-site-realization], define $\\mathcal R_T^aL=\\Delta L\\otimes^L_{\\Delta A_T}Q_T$ and $\\mathcal R_T^0L_0=\\Delta L_0\\otimes^L_{\\Delta\\underline A_T}Q_T$. These are actual derived strict towers. For an edge $u:U\\to V$ use the canonical coefficient isomorphisms $u^{-1}A_V\\cong A_U$, $u^{-1}\\underline{P_n}_V\\cong\\underline{P_n}_U$ [lem-weil-pbc-profinite-coefficient-inverse-image], the ordinary ringed operations $L_u^a\\dashv R_u^a$ [def-weil-pbc-proetale-operations], their strict-diagram operations $\\mathscr L_u^a\\dashv\\mathscr R_u^a$, and the constant-coefficient counterparts $G_u\\dashv R_u^0$ and $G_u\\dashv R_u^{\\mathcal T}$. Let $a_u:r_UL_u^a\\cong G_ur_V$, $\\chi_u:r_VR_u^a\\cong R_u^0r_U$, $p_u:r_U\\mathscr L_u^a\\cong G_ur_V$ and $d_u:r_V\\mathscr R_u^a\\cong R_u^{\\mathcal T}r_U$ be the normalized flat scalar comparisons [lem-weil-pbc-flat-ringed-diagram-restriction].\n\nFor every ambient $L\\in D(A_T)$ there is a natural strict-diagram balancing isomorphism $\\rho_L:r_T\\mathcal R_T^aL\\cong\\mathcal R_T^0r_TL$. On a flat-term K-flat representative it is the balancing map identifying the two quotient diagrams, sending each tensor class to itself, with all quotient transitions. It satisfies the strict augmentation equation $\\rho_Lr_T(\\Delta L\\to\\mathcal R_T^aL)=(\\Delta r_TL\\to\\mathcal R_T^0r_TL)$ under $r_T\\Delta\\cong\\Delta r_T$. Here K-flat means tensoring with the complex takes acyclic complexes to acyclic complexes [def-pc-kflat-complex]. Let $\\tau_{u,L}:\\mathcal R_U^aL_u^aL\\cong\\mathscr L_u^a\\mathcal R_V^aL$ be canonical pullback/tensor reassociation [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Set $q_{u,L}=(G_u\\rho_L)p_{u,\\mathcal R_V^aL}$. Then\n$$q_{u,L}\\,r_U(\\tau_{u,L})=\\mathcal R_U^0(a_{u,L})\\rho_{L_u^aL},$$\nwhere the right side uses the canonical identification $\\mathcal R_U^0G_u\\cong G_u\\mathcal R_V^0$.\n\nAll these are natural isomorphisms and equalities in the actual derived strict-tower category, on arbitrary ambient inputs.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
+  "place": "Second paragraph: same reconstruction and projection-formula conjugations, strict coefficient supplement old Step 4. Agent strict-diagram argument; Stacks 099M (proetale.tex, lemma-naive-completion) supplies completion context, not the strict balancing or augmentation/pullback equations."
+ },
+ "stmt_deps": [
+  "def-pc-kflat-complex",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-size-convention",
+  "lem-weil-pbc-diagram-site-realization",
+  "lem-weil-pbc-flat-ringed-diagram-restriction",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars from a completed sheaf ring to a constant ring preserves the actual strict derived quotient diagram and its augmentation with pullback tensor comparison",
+   "results": "{\"t\": \"2026-10-21T06:20:54Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction of scalars from a completed sheaf ring to a constant ring preserves the actual strict derived quotient diagram and its augmentation with pullback tensor comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.restrictScalars\", \"SheafOfModules.restrictScalars_obj_val\", \"SheafOfModules.Presentation.map\", \"SheafOfModules.Presentation.map_π_eq\", \"LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf\", \"localCohomology.diagram\", \"PresheafOfModules.restrictScalarsCompToPresheaf\", \"LightCondMod.ofSheafLightProfinite\"], \"digest\": \"ef2eaf014f1890f2\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits give ordinary module/sheaf scalar restriction, ordinary adic completion, abstract adjunctions, or unrelated algebraic base change; none states this normalized derived strict-diagram comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Balancing of derived finite coefficient reductions on one ringed diagram site commutes with the quotient tower unit and inverse image",
+   "results": "{\"t\": \"2026-10-21T06:20:54Z\", \"tool\": \"leanfinder\", \"query\": \"Balancing of derived finite coefficient reductions on one ringed diagram site commutes with the quotient tower unit and inverse image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyRingedSpace.toΓSpecCApp_iff\", \"AlgebraicGeometry.LocallyRingedSpace.toΓSpecSheafedSpace_app_spec\", \"AlgebraicGeometry.LocallyRingedSpace.toΓSpecCApp_spec\", \"AlgebraicGeometry.LocallyRingedSpace.toΓSpecSheafedSpace_app_spec_assoc\", \"ModuleCat.Tilde.toOpen_res\", \"AlgebraicGeometry.StructureSheaf.toOpen_comp_comap\", \"SheafOfModules.Presentation.map_π_eq\", \"AlgebraicGeometry.StructureSheaf.toOpen_comp_comap_assoc\"], \"digest\": \"da280099551f5a1a\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits give ordinary module/sheaf scalar restriction, ordinary adic completion, abstract adjunctions, or unrelated algebraic base change; none states this normalized derived strict-diagram comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.NatTrans",
+   "results": "{\"t\": \"2026-10-21T06:20:43Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction, CategoryTheory.NatTrans\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits give ordinary module/sheaf scalar restriction, ordinary adic completion, abstract adjunctions, or unrelated algebraic base change; none states this normalized derived strict-diagram comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars.*(quotient|tensor)|quotient.*restrictScalars",
+   "results": "{\"t\": \"2026-10-21T06:20:43Z\", \"tool\": \"grep\", \"query\": \"restrictScalars.*(quotient|tensor)|quotient.*restrictScalars\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/RamificationInertia/Basic.lean\", \"Mathlib/Algebra/Polynomial/Module/TensorProduct.lean\", \"Mathlib/RingTheory/PicardGroup.lean\", \"Mathlib/RingTheory/IsTensorProduct.lean\", \"Mathlib/LinearAlgebra/FreeModule/Finite/Quotient.lean\", \"Mathlib/RingTheory/Bialgebra/TensorProduct.lean\", \"Mathlib/LinearAlgebra/FreeModule/IdealQuotient.lean\", \"Mathlib/LinearAlgebra/FreeModule/IdealQuotient.lean\"], \"digest\": \"56ce4ef39e77c043\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits give ordinary module/sheaf scalar restriction, ordinary adic completion, abstract adjunctions, or unrelated algebraic base change; none states this normalized derived strict-diagram comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars from a completed sheaf ring to a constant ring preserves the actual strict derived quotient diagram and its augmentation with pullback tensor comparison",
+   "results": "{\"t\": \"2026-10-21T06:20:44Z\", \"tool\": \"leansearch\", \"query\": \"Restriction of scalars from a completed sheaf ring to a constant ring preserves the actual strict derived quotient diagram and its augmentation with pullback tensor comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RestrictScalars\", \"ModuleCat.RestrictScalars.obj'\", \"ModuleCat.restrictScalars\", \"PresheafOfModules.restrictScalarsObj\", \"SheafOfModules.restrictScalars\", \"PresheafOfModules.restrictScalars\", \"instRingRestrictScalars\", \"ModuleCat.preservesLimit_restrictScalars\"], \"digest\": \"0ecd02c89ca1c8d4\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits give ordinary module/sheaf scalar restriction, ordinary adic completion, abstract adjunctions, or unrelated algebraic base change; none states this normalized derived strict-diagram comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-ordered-exchange-coefficient-comparison",
+  "date": "2026-10-21",
+  "group": "NZ"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "from": {
+   "node": "lemma-weil-pbc-completed-exchange-coherence",
+   "place": "Second paragraph: same reconstruction and projection-formula conjugations, strict coefficient supplement old Step 4. Agent strict-diagram argument; Stacks 099M (proetale.tex, lemma-naive-completion) supplies completion context, not the strict balancing or augmentation/pullback equations.",
+   "via": [
+    "lem-weil-pbc-ordered-exchange-coefficient-comparison"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

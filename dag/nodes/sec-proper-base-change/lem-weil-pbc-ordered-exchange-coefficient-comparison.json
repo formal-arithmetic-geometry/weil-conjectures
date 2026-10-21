@@ -41,240 +41,93 @@
  ],
  "proof": [
   {
-   "text": "Write $r_T=\\operatorname{Res}_T$, and distinguish the one-object indexing category from $J=\\mathbf N_{\\geq1}^{op}$. The coefficient maps commute with $\\underline A\\to A_T$: on constant sections both composites send $a$ to its image, and the finite projections determine the map to $A_U$. The profinite inverse-image lemma supplies both the coefficient isomorphisms and their composition/transition compatibility. Flatness of $A_T$ over $\\underline A_T$ is supplied by the constant-completion equivalence. Apply the flat ringed diagram restriction theorem first with the one-object category and then with $J$. All sites are small; its scalar-square and flatness hypotheses have just been checked. In the first application it gives $a_u:r_ULu_a^*\\simeq G_ur_V$ and $\\chi_u:r_VRu_*\\simeq R_u^0r_U$ on AMBIENT module complexes, with the stated adjunct compatibility. In the second it gives $p_u:r_U\\mathscr L_u\\simeq G_ur_V$ and $d_u:r_V\\mathscr R_u\\simeq R_u^{\\mathcal T}r_U$. These use the identified underlying inverse image and direct image on a K-injective model. Explicitly the left adjoint of restriction is $A_T\\otimes_{\\underline A_T}-$, exact by flatness; the right-adjoint K-injective theorem applies for this reason, not merely because restriction itself is exact.",
+   "text": "The coefficient maps commute with $\\underline A\\to A_T$ on constant sections and hence on all finite projections. Profinite inverse image gives their composition compatibility; constant-completion gives flatness. Apply flat diagram restriction with one-object index and with $J$, obtaining $a,\\chi,p,d$ with their adjunct normalization. Apply the scalar-limit-square lemma to obtain $\\lambda$ and its canonical direct-image compatibility.",
    "uses": [
     "lem-weil-pbc-profinite-coefficient-inverse-image",
     "lem-weil-pbc-constant-completion-equivalence",
     "lem-weil-pbc-flat-ringed-diagram-restriction",
-    "lem-weil-pbc-right-adjoint-preserves-kinjective"
+    "lem-weil-pbc-flat-scalar-tower-limit-square"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
-    "place": "Second paragraph: ambient and diagram coefficient comparisons; Stacks 08BJ (lemma-adjoint-preserve-K-injectives), flat scalar case"
+    "place": "Second proof paragraph; assembly of the separated strict coefficient arguments."
    }
   },
   {
-   "text": "For an ARBITRARY completed-coefficient tower $Z$, apply the ringed tower pushforward/limit comparison to the identity geometric morphism with structure map $\\underline A_T\\to A_T$. Its module direct image is restriction; restriction is exact, so its derived functor is $r_T$. This gives $\\lambda_Z:r_T\\mathcal L^aZ\\simeq\\mathcal Lr_TZ$, without a finite-reduction hypothesis. Check its normalization together with direct image as follows. Choose a K-injective tower $Z\\to J_Z$; such resolutions exist since the small module diagram categories are Grothendieck. Restriction preserves its K-injectivity by Step 1. Also $\\lim J_Z$ is K-injective: $\\lim$ is right adjoint to the exact constant-diagram functor, so the right-adjoint theorem applies. For each edge the ordinary and diagram direct images preserve K-injectives, since their identified inverse images are exact. Thus $J_Z,rJ_Z,u_*J_Z,\\lim J_Z$ compute the required derived composites. Denote their direct-image/limit comparisons by $\\kappa_u^a,\\kappa_u^0$. On these models the two routes below are the SAME equality of complexes, $r_Vu_*\\lim J_Z=\\lim u_*r_UJ_Z$:\n$$\\mathcal L(d_{u,Z})\\lambda_{\\mathscr R_uZ}r_V(\\kappa_u^a(Z))=\\kappa_u^0(r_UZ)R_u^0(\\lambda_Z)\\chi_{u,\\mathcal L^aZ}.$$\nThe K-injective total-derived theorem identifies these models with the canonical derived functors. This proves compatibility of the specified comparisons, not uniqueness from their finite projections.",
+   "text": "Strict quotient scalar balancing gives $\\rho_L,q_{u,L}$, the augmentation equation and $q_{u,L}r(\\tau_{u,L})=\\mathcal R^0(a_{u,L})\\rho_{L_uL}$. Define $\\beta=(G_gR_f^{\\mathcal T}\\rho_K)(G_gd_f)p_g$ and $\\delta=(R_{f'}^{\\mathcal T}G_{g'}\\rho_K)(R_{f'}^{\\mathcal T}p_{g'})d_{f'}$; define $\\rho_M$ by balancing followed by $\\mathcal R(a_g)$ and $\\mathcal R(G_g\\chi_f)$. Pull the scalar projection equation for $f$ back by $G_g$; naturality of $p_g$ and the $q$-equation at $L=Rf_*K$ give $\\beta r(H^a)=H^0\\rho_M$.",
    "uses": [
-    "lem-weil-ringed-tower-pushforward-limit-comparison",
-    "lem-weil-pbc-small-module-diagrams-grothendieck",
-    "lem-weil-pbc-kinjective-functorial-existence",
-    "lem-weil-pbc-right-adjoint-preserves-kinjective",
-    "lem-weil-pbc-kinjective-total-derived",
-    "lem-weil-pbc-flat-ringed-diagram-restriction"
+    "lem-weil-pbc-strict-quotient-scalar-balancing",
+    "lem-weil-pbc-quotient-diagram-scalar-projection"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
-    "place": "Second paragraph: direct-image/limit conjugations; Stacks 0A07 (lemma-Rf-commutes-with-Rlim), first proof on tower sites"
+    "place": "Second proof paragraph; assembly of the separated strict coefficient arguments."
    }
   },
   {
-   "text": "The diagram-site realization identifies strict towers with modules on one small ringed site, with ring $\\Delta A_T$. For this $J$, object $1$ is terminal, so $\\operatorname{colim}_J=\\operatorname{ev}_1$ is exact. Its right adjoint $\\Delta$ therefore preserves K-injectives by the right-adjoint theorem. An ambient K-injective representative $I_K$ consequently computes $\\mathscr R_f\\Delta K=\\Delta Rf_*K$ by the same complex $\\Delta f_*I_K$; the same argument applies to $f'$ and any ambient input $E$. A diagonal flat-term K-flat representative is K-flat on the diagram site: its tensor with an acyclic diagram is acyclic at every level, hence acyclic by levelwise cohomology. Existence of the ambient representative and the derived tensor comparison are supplied by the K-flat resolution and tensor-descent nodes. On these representatives the diagonal adjunction bijections are the componentwise ordinary ones. The characterization of the derived bijection on fraction representatives therefore identifies diagonal units and counits with the ambient ones. Pullback composition is termwise as well. By the mate's transpose formula the diagram exchange on $\\Delta K$ is $\\Delta e$. This comparison uses no properness or finite-origin witnesses.",
+   "text": "The exact-adjunction diagonal comparison and strict-quotient exchange lemma identify the specified $v^a$ with the completed-coefficient strict mate $W$; hypotheses: coefficient pullbacks are isomorphisms (profinite inverse image), and $P_n$ is perfect over $A_T$, as $A_T$ is flat over $\\underline A_T$ with $A_T/I^n=\\underline{P_n}_T$. Flat scalar tower exchange applied at $\\mathcal R_X^aK$, followed by naturality for $\\rho_K$, gives $\\delta r(v^a)=E^{\\mathcal T}_{\\mathcal R_X\\bar K}\\beta$. In the witnessed proper case the existing normalization lemma specifies exactly these towers, $v^a$ and the scalar corner maps. Substitution into the ordered definition identifies $x_K^a$ with its completed exchange, independently of witnesses.",
    "uses": [
-    "lem-weil-pbc-diagram-site-realization",
-    "lem-weil-pbc-right-adjoint-preserves-kinjective",
-    "lem-weil-pbc-kinjective-total-derived",
-    "lem-pc-kflat-resolution",
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "lem-weil-tower-category-levelwise-abelian",
-    "lem-pc-pre-derived-adjoint-functors-general",
-    "def-weil-pbc-adjunction-mate"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
-    "place": "Second paragraph: actual strict-diagram construction; expanded diagonal argument corresponding to normalization lemma Step 2"
-   }
-  },
-  {
-   "text": "On the diagram site, the constant-completion equivalence applies to $\\Delta\\underline A_T\\to\\Delta A_T$: constant sheaves and limits are fiberwise under the diagram-site equivalence. Apply its finite-reduction comparison to $\\Delta K$. The strict tensor construction gives\n$$\\rho_K:r_X\\mathcal R_X^aK\\simeq\\mathcal R_X\\bar K.$$\nOn a flat-term K-flat representative $P$, both sides are the SAME quotient diagram $(P/I^nP)_n$ with its quotient transitions; the map sends the class of $p$ to itself. Thus it respects the quotient unit as well. The derived tensor/pullback comparison and the coefficient identities identify $\\mathcal R_U^aLu_a^*L$ with $\\mathscr L_u\\mathcal R_V^aL$. Combining this with $p_u$ and the preceding balancing map gives $\\rho_{u,L}:r_U\\mathscr L_u\\mathcal R_V^aL\\simeq G_u\\mathcal R_Vr_VL$. These are strict-diagram comparisons, natural in $L$. Define\n$$\\beta=(G_gR_f^{\\mathcal T}\\rho_K)(G_gd_f)p_g,\\qquad\n\\delta=(R_{f'}^{\\mathcal T}G_{g'}\\rho_K)(R_{f'}^{\\mathcal T}p_{g'})d_{f'}.$$\nFinally $\\rho_M$ is the same reduction comparison for $M$, followed by $\\mathcal R(a_g)$ and $\\mathcal R(G_g\\chi_f)$. These formulas give exactly the source, target and coefficient identifications specified in (2).",
-   "uses": [
-    "lem-weil-pbc-diagram-site-realization",
-    "lem-weil-pbc-constant-completion-equivalence",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-pbc-flat-ringed-diagram-restriction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
-    "place": "Second paragraph: strict finite-reduction and pullback/tensor identifications"
-   }
-  },
-  {
-   "text": "Check the projection-formula equation by transposition, rather than by evaluations. On each coefficient diagram the projection map is the adjunct of $(\\varepsilon_{f,K}\\otimes1)t_f$. The adjunct clause of flat diagram restriction identifies its restricted adjunct with the adjunct of its restricted transpose, and in particular identifies the restricted counit with the constant-coefficient counit. Under $\\rho$, the tensor factor in that transpose is a quotient: on a K-flat representative the comparison is $p\\otimes\\bar a\\mapsto p\\otimes\\bar a$, and the pullback/tensor comparison sends it to $(p\\otimes1)\\otimes\\bar a$. Applying a morphism $h$ before or after either map sends it to $(h(p)\\otimes1)\\otimes\\bar a$. Use this with the counit and the identified pullback. Hence the restricted transpose is exactly $(\\varepsilon^0_{f,\\bar K}\\otimes1)t_f^0$. Bijectivity of the adjunct correspondence identifies the two projection maps. Apply $G_g$ and use the formulas for $\\beta,\\rho_M$ in Step 4 to obtain\n$$\\beta\\,r(H^a)=H^0\\rho_M.$$\nThis is an equality of derived diagram morphisms: the tensor comparisons come from natural maps on the resolving class, and tensor descent makes their equality an equality after localization. No general monoidal identification of the two ambient scalar categories is used.",
-   "uses": [
-    "def-weil-pbc-projection-formula-map",
-    "lem-weil-pbc-flat-ringed-diagram-restriction",
-    "lem-weil-pbc-constant-completion-equivalence",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-pbc-site-derived-tensor-descent"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
-    "place": "Second paragraph: compatibility of the specified projection-formula conjugating map; Stacks 0B56, equation-projection-formula-map"
-   }
-  },
-  {
-   "text": "Let $W$ be the completed-coefficient strict-diagram exchange at $\\mathcal R_X^aK$, defined by its adjunction mate. Apply ringed exchange/tensor coherence on the completed ringed diagram sites with object $\\Delta K$ and coefficient object $Q_{Y,\\bullet}=(\\underline{P_n}_Y)_n$. This theorem allows arbitrary ringed topoi and needs no properness. The coefficient isomorphisms give $\\mathscr L_uQ_{V,\\bullet}\\simeq Q_{U,\\bullet}$, respecting the full quotient diagram and the square. Step 3 identifies exchange at $\\Delta K$ with $\\Delta e$. Thus the first composite in the coherence theorem is $WH^a$, while the second is $H'^a\\mathcal R_{Y'}^a(e)$. Its stated equality gives\n$$WH^a=H'^a\\mathcal R_{Y'}^a(e),\\qquad W=v^a.$$\nHere right composition with the specified inverse of $H^a$ gives the second equation. The inverses in the item exist: their evaluations are perfect projection-formula isomorphisms; their cones have zero evaluated cohomology and hence zero cohomology diagram. This uses conservativity for isomorphisms from levelwise exactness, never faithfulness of evaluations on morphisms.",
-   "uses": [
-    "lem-weil-pbc-ringed-exchange-tensor-coherence",
-    "lem-weil-pbc-profinite-coefficient-inverse-image",
-    "def-weil-pbc-strict-tower-operations",
-    "lemma-weil-pbc-perfect-projection-formula",
-    "lem-weil-tower-category-levelwise-abelian",
-    "lem-weil-ringed-tower-pushforward-limit-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
-    "place": "Second paragraph: exchange/projection-formula equality; Stacks 0E48, remark-compatible-with-diagram, supplied by the cited coherence node"
-   }
-  },
-  {
-   "text": "Before composing with $\\rho_K$, let $b,d$ be the two composites of $p_u,d_u$ for the corners at $r_X\\mathcal R_X^aK$. Transpose $d\\,r(W)b^{-1}$ under $G_{f'}\\dashv R_{f'}^{\\mathcal T}$. The adjunct clause of flat diagram restriction replaces its counit by the constant-coefficient counit. Pullback composition is also identified: its K-flat representative multiplies nested extension scalars, and after restriction both routes are the same composite inverse-image identification; the coefficient composition compatibility identifies their ring actions. Consequently its transpose is\n$$G_{g'}\\varepsilon_f^{\\mathcal T}\\circ\\theta^{\\mathcal T}_{\\square,R_f^{\\mathcal T}r_X\\mathcal R_X^aK}.$$\nThis is precisely the transpose defining $E^{\\mathcal T}_{r_X\\mathcal R_X^aK}$. The adjunction bijection gives $d\\,r(W)=E^{\\mathcal T}b$. Compose with $R_{f'}^{\\mathcal T}G_{g'}\\rho_K$ and use naturality of this mate for $\\rho_K$; with Step 6 and the definitions of $\\beta,\\delta$ this is\n$$\\delta\\,r(v^a)=E^{\\mathcal T}_{\\mathcal R_X\\bar K}\\beta.$$\nAll equalities are in the derived strict-diagram category and hold for every complete $K$.",
-   "uses": [
-    "lem-weil-pbc-flat-ringed-diagram-restriction",
-    "lem-weil-pbc-proetale-derived-pullback-composition",
-    "lem-weil-pbc-profinite-coefficient-inverse-image",
-    "def-weil-pbc-adjunction-mate",
-    "def-weil-pbc-strict-tower-operations"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
-    "place": "Second paragraph: strict mate comparison; expanded adjunct argument corresponding to normalization lemma Steps 6–7"
-   }
-  },
-  {
-   "text": "Only now assume the additional properness and the levelwise etale-origin witnesses in the strict-tower exchange normalization lemma. Its statement specifies $B_\\bullet,D_\\bullet$ as precisely $B^a,D^a$ and $v'_\\bullet=H'^a\\mathcal R^a(e)(H^a)^{-1}=v^a$. Its $b,d$ are normalized by the same restricted inverse images and the same K-injective direct images as Step 1. Therefore the $\\beta,\\delta$ of Step 4 are those $b,d$ followed by the images of $\\rho_K$. The ordered completed base-change definition has source map $\\mathcal L^a(H^a)r_S=s^a$, tower map $v^a$, and target comparison $c^a$ with the same direction. Substitution gives exactly $x^a_K=(c^a)^{-1}\\mathcal L^a(v^a)s^a$. Since this expression was constructed before witnesses, it is independent of which witnesses are supplied. No assertion of that lemma was applied to an unwitnessed input.",
-   "uses": [
+    "lem-sbc-unbounded-exact-adjunction-square",
+    "lem-sbc-strict-quotient-exchange-unit-equation",
+    "lem-weil-pbc-flat-scalar-tower-exchange",
     "lem-weil-pbc-strict-tower-exchange-mate-normalization",
-    "def-weil-pbc-completed-base-change-map"
+    "def-weil-pbc-completed-base-change-map",
+    "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "lem-weil-pbc-constant-completion-equivalence"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
-    "place": "Second paragraph: identification of the raw ordered expression with the witnessed construction"
+    "place": "Second proof paragraph; assembly of the separated strict coefficient arguments."
    }
   },
   {
-   "text": "We fix the completed comparison by its unit. Let $L$ be complete on $V$, and put $j^a_{u,L}:Lu_a^*L\\to F_u^aL$. By the completed-pullback definition and Koszul reconstruction, this is quotient completion, with its canonical unit. The constant-completion equivalence identifies this unit with the constant coefficient completion unit. With the strict pullback/reduction comparison of Step 4 and $\\lambda$ of Step 2, set\n$$\\Psi_{u,L}=\\mathcal L(\\rho_{u,L})\\lambda\\,r_U(r_{u,L}):r_UF_u^aL\\longrightarrow\\mathcal L G_u\\mathcal R_Vr_VL=F_u^0r_VL.$$\nHere $r_{u,L}$ is the defining reconstruction into $\\mathcal L^a\\mathscr L_u\\mathcal R_V^aL$. All factors are isomorphisms. The two maps out of the uncompleted pullback satisfy\n$$\\Psi_{u,L}\\,r_U(j^a_{u,L})=j^0_{u,r_VL}\\,a_{u,L}.$$\nIndeed they arise from the identical strict map from the constant representative to its quotient diagram: Step 4 sends $p$ to its same class at every level WITH its transitions, and Step 2 takes the same limit after restriction. Thus this is equality of induced completion-unit maps, not an argument from evaluated equalities. The reflector node supplies bijectivity of precomposition with this unit for maps into any complete object; Koszul reconstruction identifies its unit with the quotient unit being used.",
+   "text": "Completion-unit scalar adjunction gives $\\phi$, its Hom bijections, units, counits and conjugates. Its reconstruction equation at $(g',K)$ is the target reconstruction equation. At $(g,Rf_*K)$, $r_S=\\mathcal L^a(\\tau_{g,Rf_*K})^{-1}r_{g,Rf_*K}$ (completed-pullback definition), and the balancing $q$-equation turns $q_{g,Rf_*K}$ into $\\rho_M$; transporting by $\\chi_f$, it is the source reconstruction equation with $\\rho_M,\\iota_S$; direct-image completeness verifies this input. Thus (1) and both fixed reconstruction equations hold on the full complete categories.",
    "uses": [
-    "def-weil-pbc-completed-pullback",
-    "prop-weil-pbc-koszul-reconstruction",
-    "lem-weil-pbc-constant-completion-equivalence",
-    "lem-weil-pbc-ringed-koszul-completion-reflector",
-    "lem-sp-completed-pullback-adjunction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
-    "place": "Second paragraph: reconstruction conjugations; Stacks 099M (lemma-naive-completion), 099N (lemma-pushforward-Noetherian-case), and 099B (lemma-derived-completion)"
-   }
-  },
-  {
-   "text": "The unit identity in Step 9 identifies $\\Psi_{u,L}$ with the stipulated $\\phi_{u,L}$, as follows. For complete $N$ on $U$, the two completed-adjunction Hom bijections first precompose with $j^a_{u,L}$ or $j^0_{u,r_VL}$ and then use the ambient adjunction. Step 1's adjunct clause says the second operations agree under $a_u,\\chi_u$; Step 9's identity says the first operations agree under $\\Psi_u$. Equivalences on complete objects are fully faithful by constant-completion equivalence. Hence $\\Psi_u$ respects exactly these Hom bijections and is the isomorphism defining $\\phi_u$ in (1). Uniqueness also follows directly from the reflector's injective precomposition map. Taking identities under these Hom bijections identifies the units and counits. Direct image preserves completeness by the direct-image-limits node (and on the constant side by completed-pullback-adjunction); thus the adjunctions are on the full complete subcategories as required. Finally the explicit conjugate formula, using just the identified units and counits, carries the specified direct-image composition and identity maps to their corresponding completed pullback comparisons. This proves all of (1).",
-   "uses": [
-    "lem-weil-pbc-flat-ringed-diagram-restriction",
-    "lem-weil-pbc-constant-completion-equivalence",
-    "lem-weil-pbc-ringed-koszul-completion-reflector",
-    "lem-sp-completed-pullback-adjunction",
+    "lem-weil-pbc-completed-scalar-unit-adjunction",
     "prop-weil-pbc-direct-image-limits",
-    "def-weil-pbc-adjunction-conjugate"
+    "lem-weil-pbc-strict-quotient-scalar-balancing",
+    "def-weil-pbc-completed-pullback"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
-    "place": "Second paragraph: units, counits and fixed adjunction-conjugate normalization"
+    "place": "Second proof paragraph; assembly of the separated strict coefficient arguments."
    }
   },
   {
-   "text": "Apply $\\Psi=\\phi$ from Steps 9–10 to $(u,L)=(g',K)$. Its defining formula is precisely\n$$\\mathcal L(\\rho_{g',K})\\lambda\\,r(r_{g',K})=r_{g',K}^0\\phi_{g'}.$$\nFor the source apply it to $(u,L)=(g,Rf_*K)$; this input is complete by direct-image-limits. Replace $r_YRf_*K$ by $R_f^0\\bar K$ through $\\chi_f$. Naturality of the completion unit and of its strict quotient diagram gives the comparison $F_g^0\\chi_f$ on completed pullbacks and $\\mathcal R(G_g\\chi_f)$ on the reduction diagram. By Step 4 their composite on the latter diagram is exactly $\\rho_M$. With the source reconstruction $r_S$ this yields\n$$\\mathcal L(\\rho_M)\\lambda_{\\mathcal R^aM}\\,r(r_S)=r_S^0(F_g^0\\chi_f)\\phi_g=r_S^0\\iota_S.$$\nFor clarity the equality of these extensions can be tested by precomposing with the completion unit, where both maps are the strict quotient map followed by $G_g\\chi_f$; injectivity of unit precomposition into a complete target, supplied by the reflector, proves the equality. This derives both fixed reconstruction equations in (3).",
+   "text": "Naturality of $\\lambda$ and $s^a=\\mathcal L^a(H^a)r_S$ give $\\mathcal L(\\beta)\\lambda r(s^a)=\\mathcal L(H^0)r_S^0\\iota_S=s^0\\iota_S$. For $Z=\\mathscr L_{g'}\\mathcal R_X^aK$, use $c^a=\\kappa_{f'}^a(Z)Rf'_*(r_{g',K})$ and the scalar-limit square; substitute the target reconstruction equation to get $\\mathcal L(\\delta)\\lambda r(c^a)=t^0\\iota_T$. Here $s^0,t^0$ are precisely the specified constant comparisons. Applying $\\mathcal L$ to the mate equation and cancelling yields $\\iota_Tr(x_K^a)=(t^0)^{-1}\\mathcal L(E^{\\mathcal T})s^0\\iota_S$. These are compositions of natural transformations, hence apply to every complete-object morphism and intermediate complete input.",
    "uses": [
-    "def-weil-pbc-completed-pullback",
+    "lem-weil-pbc-flat-scalar-tower-limit-square",
     "prop-weil-pbc-direct-image-limits",
-    "lem-weil-pbc-ringed-koszul-completion-reflector",
-    "lem-sp-completion-mate-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
-    "place": "Second paragraph: the two specified reconstruction normalizations"
-   }
-  },
-  {
-   "text": "The source normalization now follows by functoriality. Since $s^a=\\mathcal L^a(H^a)r_S$, naturality of $\\lambda$ and Step 5 give\n$$\\begin{aligned}\n\\mathcal L(\\beta)\\lambda_{B^a}r(s^a)\n&=\\mathcal L(\\beta\\,r(H^a))\\lambda_{\\mathcal R^aM}r(r_S)\\\\\n&=\\mathcal L(H^0)\\mathcal L(\\rho_M)\\lambda_{\\mathcal R^aM}r(r_S)\\\\\n&=\\mathcal L(H^0)r_S^0\\iota_S=s^0\\iota_S.\n\\end{aligned}$$\nThe last equality uses exactly the definition of $s$ in completion-mate-comparison, so an arbitrary source isomorphism has not been substituted.",
-   "uses": [
-    "prop-weil-pbc-rlim-functoriality",
-    "lem-sp-completion-mate-comparison"
+    "lem-sp-completion-mate-comparison",
+    "prop-weil-pbc-rlim-functoriality"
    ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
-    "place": "Second paragraph: conjugation by the source projection-formula and reconstruction maps"
-   }
-  },
-  {
-   "text": "For the target put $u=f'$ and $Z=\\mathscr L_{g'}\\mathcal R_X^aK$, and abbreviate $\\rho_{g',K}$ to $q$. The definitions give\n$$c^a=\\kappa_u^a(Z)Ru_*(r_{g',K}),\\quad\n\\delta=(R_u^{\\mathcal T}q)d_{u,Z},\\quad\nt^0=\\kappa_u^0(G_{g'}\\mathcal R_X\\bar K)R_u^0(r_{g',K}^0).$$\nUse the comparison square of Step 2, followed by naturality of $\\kappa_u^0$ for $q$ and of $\\chi_u$ for $r_{g',K}$. It gives, in the written order,\n$$\\begin{aligned}\n\\mathcal L(\\delta)\\lambda_{D^a}r(c^a)\n&=\\kappa_u^0(G_{g'}\\mathcal R_X\\bar K)\\,\nR_u^0\\bigl(\\mathcal L(q)\\lambda_Zr(r_{g',K})\\bigr)\\chi_{u,F_{g'}^aK}\\\\\n&=\\kappa_u^0(G_{g'}\\mathcal R_X\\bar K)R_u^0(r_{g',K}^0\\phi_{g'})\\chi_{u,F_{g'}^aK}\\\\\n&=t^0(R_u^0\\phi_{g'})\\chi_{u,F_{g'}^aK}=t^0\\iota_T.\n\\end{aligned}$$\nThe second equality is the target reconstruction identity of Step 11. The direct-image-limits statement and completion-mate-comparison specify their $c^a,t^0$ by the K-injective direct-image/limit comparison used in Step 2. Thus this calculation proves compatibility of those specified comparisons, including $\\chi,\\lambda,\\delta$, rather than assuming a finite-reduction normalization.",
-   "uses": [
-    "prop-weil-pbc-direct-image-limits",
-    "lem-sp-completion-mate-comparison",
-    "lem-weil-ringed-tower-pushforward-limit-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
-    "place": "Second paragraph: fixed target direct-image/limit normalization"
-   }
-  },
-  {
-   "text": "Apply $\\mathcal L$ to Step 7 and use naturality of $\\lambda$. Substitute the source and target normalizations of Steps 12–13 into $x_K^a=(c^a)^{-1}\\mathcal L^a(v^a)s^a$ and cancel the isomorphisms in order:\n$$\\begin{aligned}\n\\iota_Tr(x_K^a)\n&=(t^0)^{-1}\\mathcal L(\\delta)\\lambda_{D^a}\\,r(\\mathcal L^a(v^a))r(s^a)\\\\\n&=(t^0)^{-1}\\mathcal L(\\delta\\,r(v^a))\\lambda_{B^a}r(s^a)\\\\\n&=(t^0)^{-1}\\mathcal L(E^{\\mathcal T})\\mathcal L(\\beta)\\lambda_{B^a}r(s^a)\\\\\n&=(t^0)^{-1}\\mathcal L(E^{\\mathcal T})s^0\\iota_S.\n\\end{aligned}$$\nAll transformations in the construction are natural: the scalar and finite-reduction comparisons, the adjuncts, completion units, and the K-injective limit comparisons. The displayed derivations are operations on those transformations, hence hold naturally for every morphism of complete $K$. Completed pullback lands in the complete category by its reflector description, and direct image preserves that category; the same proof therefore applies to those intermediate complete inputs. Completion-mate-comparison identifies the right-hand expression with the completed constant-coefficient mate; its Noetherian and perfect-quotient hypotheses are those of the datum. No identity-square or pasting law is used.",
-   "uses": [
-    "prop-weil-pbc-rlim-functoriality",
-    "lem-sp-completion-mate-comparison",
-    "lem-sp-completed-pullback-adjunction",
-    "prop-weil-pbc-direct-image-limits"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
-    "place": "Second paragraph: final ordered conjugation, naturality and complete intermediate inputs"
+    "place": "Second proof paragraph; assembly of the separated strict coefficient arguments."
    }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-adjunction-conjugate",
-  "def-weil-pbc-adjunction-mate",
   "def-weil-pbc-completed-base-change-map",
   "def-weil-pbc-completed-pullback",
-  "def-weil-pbc-projection-formula-map",
-  "def-weil-pbc-strict-tower-operations",
-  "lem-pc-kflat-resolution",
-  "lem-pc-pre-derived-adjoint-functors-general",
-  "lem-sp-completed-pullback-adjunction",
+  "lem-sbc-strict-quotient-exchange-unit-equation",
+  "lem-sbc-unbounded-exact-adjunction-square",
   "lem-sp-completion-mate-comparison",
+  "lem-weil-pbc-completed-scalar-unit-adjunction",
   "lem-weil-pbc-constant-completion-equivalence",
-  "lem-weil-pbc-diagram-site-realization",
   "lem-weil-pbc-flat-ringed-diagram-restriction",
-  "lem-weil-pbc-kinjective-functorial-existence",
-  "lem-weil-pbc-kinjective-total-derived",
-  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-weil-pbc-flat-scalar-tower-exchange",
+  "lem-weil-pbc-flat-scalar-tower-limit-square",
   "lem-weil-pbc-profinite-coefficient-inverse-image",
-  "lem-weil-pbc-right-adjoint-preserves-kinjective",
-  "lem-weil-pbc-ringed-exchange-tensor-coherence",
-  "lem-weil-pbc-ringed-koszul-completion-reflector",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "lem-weil-pbc-small-module-diagrams-grothendieck",
+  "lem-weil-pbc-quotient-diagram-scalar-projection",
+  "lem-weil-pbc-strict-quotient-scalar-balancing",
   "lem-weil-pbc-strict-tower-exchange-mate-normalization",
-  "lem-weil-ringed-tower-pushforward-limit-comparison",
-  "lem-weil-tower-category-levelwise-abelian",
-  "lemma-weil-pbc-perfect-projection-formula",
   "prop-weil-pbc-direct-image-limits",
-  "prop-weil-pbc-koszul-reconstruction",
   "prop-weil-pbc-rlim-functoriality"
  ],
  "proof_origin": {
@@ -374,38 +227,40 @@
  "unit": "sk-thm-properbasechange",
  "lean_audit": {},
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "item": "lem-weil-pbc-ordered-exchange-coefficient-comparison",
   "worker": "stage1",
-  "summary": "Repair of fac22715b9: replaced three compressed steps by fourteen explicit steps. Used flat exact extension, arbitrary-tower restriction/limit comparison, diagonal exchange/tensor coherence and adjunct transposes; derived both reconstruction identities from completion units and the target normalization on the same K-injective tower. Statement unchanged; no new nodes.",
-  "blueprint": "lemma-weil-pbc-completed-exchange-coherence: second proof paragraph, namely coefficient normalization, conjugation by reconstruction/projection/direct-image-limit maps, and validity on intermediate complete inputs.",
+  "summary": "Human-requested re-split: five independent statement-only strict-diagram comparison lemmas replace the long inline arguments; statement unchanged. The report preserves the old fourteen arguments verbatim and maps each to its new obligation or assembly step.",
+  "blueprint": "Second proof paragraph of lemma-weil-pbc-completed-exchange-coherence: same reconstruction, projection-formula and direct-image/limit conjugations; five statement-only nodes carry the coefficient supplement.",
   "tool_uses": [
    {
-    "node": "lem-sp-completed-pullback-adjunction",
-    "why": "Generic constant-coefficient completion reflector and its fixed Hom bijections, used to compare coefficient adjunctions; no proper-base-change assertion is imported."
+    "node": "lem-sbc-unbounded-exact-adjunction-square",
+    "why": "Generic small ringed-site diagonal adjunction theorem; supplies the complete old diagonal argument without duplicating it."
+   },
+   {
+    "node": "lem-sbc-strict-quotient-exchange-unit-equation",
+    "why": "Generic perfect strict-quotient ringed square theorem already identifies the diagram mate with H prime reduction of ambient exchange H inverse; no proper or smooth base-change assertion is used."
    },
    {
     "node": "lem-sp-completion-mate-comparison",
-    "why": "Specifies the constant-coefficient maps H,s,t and their completed mate, used as the comparison target, as already accepted on the parent."
-   },
-   {
-    "node": "lem-weil-ringed-tower-pushforward-limit-comparison",
-    "why": "Generic ringed-topos theorem for arbitrary strict towers, applied to scalar restriction and to the K-injective normalization square; the constant-completion node states limit compatibility only for finite-reduction towers."
+    "why": "Fixes the constant-coefficient maps H,s,t used in the final assembly; not a proper-base-change theorem."
    }
   ]
  },
  "tool_uses": [
   "lem-sp-completed-pullback-adjunction",
   "lem-sp-completion-mate-comparison",
-  "lem-weil-ringed-tower-pushforward-limit-comparison"
+  "lem-weil-ringed-tower-pushforward-limit-comparison",
+  "lem-sbc-unbounded-exact-adjunction-square",
+  "lem-sbc-strict-quotient-exchange-unit-equation"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-NU-0ecc7781e",
-  "group": "NU",
+  "reviewer": "NT-cc-NZ-dab0f8079",
+  "group": "NZ",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-0ecc7781e (reviewer sub-agent of L); spot-checked: I read the item, all 14 steps, the full statements of all 21 stmt_deps and 30 proof_deps, the parent and its main-20261015 blueprint proof (the second paragraph is the place served), and Stacks 099N and 0A07 in the local copy. No new nodes and no fixes; review.md has the details. Base-change map: x^a=(c^a)^{-1}L^a(v^a)s^a, with v^a=H'R(e)H^{-1} and s^a=L^a(H^a)r_S, matches the ordered composite of def-weil-pbc-completed-base-change-map. In the witnessed proper case the strict-tower normalization lemma makes it literally Ex^comp; that lemma's extra hypotheses are used only in Step 8. Coefficients: the completed A_T and the constant underline-A are never identified; they are compared only through Res (an equivalence on complete objects, by constant-completion) and the explicit comparisons chi, phi, rho, beta, delta, lambda. Flat restriction applies because A_T is flat over underline-A and is an exact left adjoint, so the K-injective lemma's hypothesis holds. I checked myself the K-injective square in Step 2, Delta e in Step 3 (colim_J=ev_1 is exact), the strict quotient diagram for rho_K, the transpositions in Steps 5 and 7, and the exchange/tensor coherence on diagram sites in Step 6 (no properness; H^a and H'^a are invertible by the perfect projection formula for any f). I also checked the hom-bijection argument for Psi=phi in Steps 9-10, and recomputed the chains in Steps 12, 13 and 14, which give iota_T Res(x)=(t^0)^{-1}L(E^T)s^0 iota_S. Edge cases K=0, I=A, A=0, I=0 with A finite, and A=Z with I=(l) all work. The item is not a restatement of the parent (no identity or pasting law), not a duplicate, and has no cycle. Accepted tool_uses: lem-sp-completed-pullback-adjunction, lem-sp-completion-mate-comparison and lem-weil-ringed-tower-pushforward-limit-comparison, all generic; the third gives lambda for arbitrary towers, which no node of the unit gives. All other cited statements are on the route. The search record has leanfinder, leansearch, valid loogle and grep entries; the invalid loogle queries are labelled as such."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-dab0f8079 (reviewer sub-agent of L); spot-checked: Read the item, all five new statement-only nodes and the 14 old steps (all byte-equal to the base, preserved in the report). Also read the cited statements: flat-ringed-diagram-restriction, lem-sbc-unbounded-exact-adjunction-square, lem-sbc-strict-quotient-exchange-unit-equation (both landed by NN at 11:50, before base 452e99a at 14:26), strict-tower-exchange-mate-normalization, lem-sp-completion-mate-comparison, constant-completion-equivalence and def-weil-pbc-completed-pullback. Checked the main-20261015 coherence proof ¶2 and the Stacks labels 0A07, 08BJ, 099M, 099N, 0B56 and 0E48. No SGA. Re-split note (≥5 nodes, parent ≤3000): met. 5 nodes of 2.1–4.4k characters; parent 2469, 2924 after the fix. Every old argument has a carrier: old 2→limit-square, 4→balancing, 5→projection, 7→flat-tower-exchange, 9–11→completed-unit-adjunction. Old 3 and 6 go to the existing lem-sbc tools, whose statements say exactly that Δ carries the mate and that v is the actual diagram mate with H and H′ invertible. Old 12–14 are elementary cancellation in step 5. No node restates the item. Type-checked every new equation and tested the small cases R=S, I=0, A=Z_ℓ and I=A. Hand-verified βr(H^a)=H⁰ρ_M, δr(v^a)=E^Tβ and both corner equations. No cycle. FIX: three gaps in the item assembly, corrected in fixes/dag/nodes/sec-proper-base-change/<item>.json with the statement unchanged. (1) Step 2 called the balancing node \"projection\" and left out the q-equation and the p_g naturality the derivation needs. (2) Step 3 did not check the hypotheses of the sbc strict-quotient tool: coefficient pullbacks are isomorphisms, and P_n is perfect over A_T because A_T is flat with A_T/I^n=P_n. (3) Step 4's source equation needs r_S=L^a(τ)^{-1}r_{g,Rf_*K} and the balancing q-equation; added both, citing balancing and def-weil-pbc-completed-pullback. Advisory: lem-weil-pbc-pulled-reduction-strict-tower-comparison (NF, already in the base) partly overlaps the φ/unit part of completed-scalar-unit-adjunction and the q part of balancing. Kept: it lacks the Hom bijections, conjugates and λ-normalization, and dropping a node would break the ≥5 count. The balancing, projection and unit nodes rely on A_T being flat (constant-completion) without citing it; minor, left for the prover. Maintainer note: snapshot chapter symlinks dangle, so cited nodes were read from clones/live.; 1 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
   "date": "2026-10-17",
