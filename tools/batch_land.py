@@ -1589,8 +1589,19 @@ def drop_other_writers(b: dict, last: dict, failures: list, log, persist: bool =
     # failed module, so they are not named as failing; left in the candidate they fail the next build on their import
     # of the dropped file ("bad import"), one layer per build (938-landing build of 993813cbe8: 404 bad imports after
     # 12 restores were dropped alone).
-    _imports = library_imports()
     _recs = {r['id']: r for r in ld.records(ld.REQUESTS)}
+    # the import lines of the open landings' own files, read now: the cached library graph predates the restores and
+    # missed their importers (11:53-11:57: 218, 68, 34 landings dropped in four builds instead of one)
+    _imp_re = re.compile(r"^(?:public\s+)?(?:meta\s+)?import\s+(?:all\s+)?([\w.']+)", re.M)
+    _imports = {}
+    for _r in _recs.values():
+        for _f in _r.get('files') or []:
+            _p = li.LEAN / _f['path']
+            if _f.get('module') and _p.is_file():
+                try:
+                    _imports[_f['module']] = set(_imp_re.findall(_p.read_text(errors='replace')))
+                except OSError:
+                    pass
     _mod_of = {f['module']: r['id'] for r in _recs.values() if r['id'] not in batch_ids
                for f in r.get('files') or [] if f.get('module')}
     _importers = {}

@@ -1,6 +1,6 @@
 # Work queue
 
-288 items; claim with `tools/claim.py next <group> [--stage N]`.
+293 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Rework: quarantined by the upstream sync (11 clusters, 1358 modules)
 
@@ -20,9 +20,9 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 | `Sheaf.Algebra.Homology.DerivedTensorTruncationWindow` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.PerfectGeneratorPullback` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 
-Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 68, stage 3 203 items.
+Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 69, stage 3 201 items.
 
-## Stage 1: nodes to split (111)
+## Stage 1: nodes to split (106)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -52,11 +52,14 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `sk-prop-sfb-qlbar-colimit-x` | 1000 | rests_on_sorry |
 | `lem-weil-finite-free-completed-scalar-comparison` | 1001 | none |
 | `lem-sf-compact-support-restriction-of-scalars` | 1002 | none |
-| `lem-sf-integral-compact-support-constructible` | 1002 | none |
 | `lem-weil-compact-support-reduction-tower-functor` | 1002 | none |
 | `lem-pur-additive-localization-descent` | 1003 | none |
 | `lem-pur-compatible-coefficient-tower` | 1003 | none |
 | `lem-pur-strict-roos-homotopy-functor` | 1003 | none |
+| `lem-sf-compact-support-proper-image-tower` | 1003 | none |
+| `lem-sf-open-finite-constructibility-interval` | 1003 | none |
+| `lem-sf-ringed-open-roos-preservation` | 1003 | none |
+| `lem-sf-ringed-open-total-tensor-kflat` | 1003 | none |
 | `lem-pur-diagram-ring-restriction-pushforward` | 1004 | none |
 | `def-weil-common-stage-derived-direct-image` | 1016 | none |
 | `det-def-sp-tate-twist-locally-free` | 2000 | none |
@@ -69,11 +72,12 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-pur-adic-line-system-base-change` | 2005 | none |
 | `lem-pur-etale-compact-scalar-coherence` | 2005 | none |
 | `lem-pur-signed-line-derived-base-change` | 2005 | none |
-| `lem-pur-site-representable-algebraic-pullback` | 2005 | none |
-| `lem-pur-torsion-line-system-base-change` | 2005 | none |
 | `lem-fix-operation-reduction` | 3002 | none |
 | `lem-coef-derived-system-evaluation-calculus` | 5002 | none |
-| `lem-fix-compact-support-coefficient-change` | 5003 | none |
+| `lem-fix-open-scalar-tensor-normalization` | 5004 | none |
+| `lem-fix-proetale-scalar-mate-normalization` | 5004 | none |
+| `lem-fix-proper-etale-origin-scalar-isomorphism` | 5004 | none |
+| `lem-fix-reduction-open-etale-origin` | 5004 | none |
 | `lem-sf-bounded-below-hom-test` | 5005 | none |
 | `lem-sfb-constant-scalar-geometric-adjunctions` | 5005 | none |
 | `lem-sfb-constant-scalar-restriction-tensor` | 5005 | none |
@@ -85,15 +89,12 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-subfield-push-iso` | - | sorry_here |
 | `det-sp-scalar-extension-functor` | - | none |
 | `lem-pur-finite-free-completion-exchange` | - | none |
-| `lem-pur-integral-ambient-operation-models` | - | none |
 | `lem-pur-scalar-hom-comparison-tower` | - | none |
 | `lem-sfb-closed-supported-scalar-comparison` | - | none |
 | `lem-sfb-coextension-iso-evaluation-formula` | - | none |
 | `lem-sfb-equivalence-square-inverse-mate-coherence` | - | none |
 | `lem-sfb-exact-open-closed-unbounded-calculus` | - | none |
 | `lem-sfb-extension-iso-quotient-formula` | - | none |
-| `lem-sfb-filtered-colimit-flat-module-sheaves` | - | none |
-| `lem-sfb-integral-constructible-completion-bridge` | - | none |
 | `lem-sfb-integral-quotient-direct-image-comparison` | - | none |
 | `lem-sfb-integral-quotient-exchange-comparison` | - | none |
 | `lem-sfb-integral-quotient-projection-comparison` | - | none |
@@ -122,7 +123,6 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sp-smooth-admissible-coordinate-cover` | - | none |
 | `lem-sf-semilinear-alpha-pullback` | - | none |
 | `lem-sf-semilinear-compositor-coherence` | - | none |
-| `lem-sf-semilinear-scalar-ordinary-comparison` | - | none |
 | `lem-sfb-constructible-local-tor-etale-origin` | - | none |
 | `lem-sfb-local-integral-perfect-model-cohomology` | - | none |
 | `lem-sfb-module-object-ringed-site-derived-comparison` | - | none |
@@ -130,19 +130,15 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `det-brown-hypotheses-small` | - | none |
 | `lem-sfb-base-coefficient-condensed-identification` | - | none |
 | `lem-sfb-shriek-coefficient-isomorphism` | - | none |
-| `lem-sp-exact-derived-transformation-pasting` | - | none |
 | `lem-sp-varying-ring-cartesian-comparison-lift-relabelling` | - | none |
-| `lem-sp-varying-ring-cartesian-lift-pullback-equivalence` | - | none |
-| `lem-sp-varying-ring-open-unit-coherence` | - | none |
-| `lem-sp-varying-ring-pullback-unit-coherence` | - | none |
-| `lem-sfb-finite-proper-classical-neighborhood-vanishing` | - | none |
 | `lem-sp-etale-derived-chain-transpose` | - | none |
 
-## Stage 2: nodes to state (58)
+## Stage 2: nodes to state (68)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
 | `lem-weil-pbc-realization-scalar-functor` | 1 | state | 3 |
+| `lem-sf-semilinear-scalar-ordinary-comparison` | 1 | state | 1 |
 | `lem-weil-pbc-constant-tower-pushforward-normalization` | 1 | state | 1 |
 | `lem-weil-pbc-finite-intersection-limit-compatibility` | 1 | state | 1 |
 | `lem-weil-pbc-reduction-pullback-derived-tower` | 1 | state | 1 |
@@ -154,6 +150,9 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-pe-profinite-sections-finite-quotient` | 1 | state | 0 |
 | `lem-pe-scalar-cone-tensor-model` | 1 | state | 0 |
 | `lem-pe-successive-quotient-linear-triangle` | 1 | state | 0 |
+| `lem-pur-integral-ambient-operation-models` | 1 | state | 0 |
+| `lem-pur-site-representable-algebraic-pullback` | 1 | state | 0 |
+| `lem-pur-torsion-line-system-base-change` | 1 | state | 0 |
 | `lem-sf-adjunct-conjugate-open-factor` | 1 | state | 0 |
 | `lem-sf-etale-chart-adjoint-comparison` | 1 | state | 0 |
 | `lem-sf-semilinear-clopen-unit-projector` | 1 | state | 0 |
@@ -163,8 +162,10 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-closed-support-bounded-continuity` | 1 | state | 0 |
 | `lem-sfb-constructible-cocone-ambient-realization` | 1 | state | 0 |
 | `lem-sfb-continuous-lattice-sum` | 1 | state | 0 |
+| `lem-sfb-filtered-colimit-flat-module-sheaves` | 1 | state | 0 |
 | `lem-sfb-finite-etale-trace-image` | 1 | state | 0 |
 | `lem-sfb-finite-field-stratified-generation` | 1 | state | 0 |
+| `lem-sfb-finite-proper-classical-neighborhood-vanishing` | 1 | state | 0 |
 | `lem-sfb-finite-sum-lattice` | 1 | state | 0 |
 | `lem-sfb-flat-dvr-scalar-tensor` | 1 | state | 0 |
 | `lem-sfb-flat-scalar-cyclic-resolution` | 1 | state | 0 |
@@ -186,11 +187,15 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-square-zero-periodic-tensor` | 1 | state | 0 |
 | `lem-sfb-subobject-inclusion-cokernel` | 1 | state | 0 |
 | `lem-sp-etale-sum-coefficient-computation` | 1 | state | 0 |
+| `lem-sp-exact-derived-transformation-pasting` | 1 | state | 0 |
 | `lem-sp-finite-compact-site-coherence` | 1 | state | 0 |
 | `lem-sp-finite-ring-action-local-constancy` | 1 | state | 0 |
 | `lem-sp-open-scalar-site-coherence` | 1 | state | 0 |
 | `lem-sp-ordinary-horizontal-pasting-transport` | 1 | state | 0 |
 | `lem-sp-ordinary-vertical-pasting-transport` | 1 | state | 0 |
+| `lem-sp-varying-ring-cartesian-lift-pullback-equivalence` | 1 | state | 0 |
+| `lem-sp-varying-ring-open-unit-coherence` | 1 | state | 0 |
+| `lem-sp-varying-ring-pullback-unit-coherence` | 1 | state | 0 |
 | `lem-weil-pbc-direct-image-roos-normalization` | 1 | state | 0 |
 | `lem-weil-pbc-finite-etale-cover-cech-stage-comparison` | 1 | state | 0 |
 | `lem-weil-pbc-flat-common-quotient-reduction-tower` | 1 | state | 0 |
@@ -201,7 +206,7 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-finite-classical-localizing` | 2 | state | 0 |
 | `lem-sfb-subfield-extension-local-presentation` | 2 | state | 0 |
 
-Not open yet: 300 nodes that below a finished node, not needed, 94 nodes that wait for a statement dependency (bottom-up), 82 nodes that wait for stage 1 (statement downstream not grounded).
+Not open yet: 300 nodes that below a finished node, not needed, 94 nodes that wait for a statement dependency (bottom-up), 79 nodes that wait for stage 1 (statement downstream not grounded).
 
 ## Stage 3: modules to prove (98)
 
@@ -308,7 +313,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.DivisibleExtensionDerivedReduction` | - | 5 | proof | 6 |
 | `Sheaf.Paper.ExternalRHomConePairing` | - | 1 | proof | 6 |
 
-## Stage 3: waiting for statements of dependencies (27)
+## Stage 3: waiting for statements of dependencies (29)
 
 Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean statement yet (the human, 2026-10-17 and 2026-10-18).
 
@@ -323,6 +328,7 @@ Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean stat
 | `Sheaf.Paper.CondensedERealization` | - | 1 | `det-sp-rational-localized-hom` |
 | `Sheaf.Paper.DerivedNakayamaFirstReduction` | - | 1 | `lem-pe-completion-triangle-comparison` |
 | `Sheaf.Paper.DirectImageChangeRingTranspose` | - | 1 | `lem-sp-proetale-scalar-tensor-normalization` |
+| `Sheaf.Paper.EtaleCompactSupportCoefficientChange` | - | 3 | `lem-fix-reduction-open-etale-origin` |
 | `Sheaf.Paper.FiniteProperBaseChange` | - | 1 | `lem-sfb-projection-comparison-etale-proetale` |
 | `Sheaf.Paper.FiniteProperLocalizing` | - | 3 | `lem-sfb-finite-classical-localizing` |
 | `Sheaf.Paper.IntegralCriterionReductions` | - | 8 | `lem-pe-finite-coefficient-model-comparison` |
@@ -333,6 +339,7 @@ Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean stat
 | `Sheaf.Paper.ProEtaleSectionModuleFunctors` | - | 3 | `lem-pd-ringed-direct-image-pairing-lax` |
 | `Sheaf.Paper.RelativeSupportCoordinateModel` | - | 7 | `cor-pur-affine-space-zero-section-purity` |
 | `Sheaf.Paper.SbcCompletedOperations` | - | 15 | `lem-sbc-koszul-fibre-linear-descent` |
+| `Sheaf.Paper.SfIntegralCompactSupportConstructible` | - | 2 | `lem-sf-ringed-open-total-tensor-kflat` |
 | `Sheaf.Paper.StratifiedLattice` | - | 1 | `lem-sfb-lattice-pullback` |
 | `Sheaf.SecSmoothPurity.ScalarExtensionFunctor` | - | 15 | `lem-sp-finite-ring-action-local-constancy` |
 | `Sheaf.SixFunctors.FiniteProperClassicalTruncation` | - | 1 | `lem-sfb-finite-proper-classical-neighborhood-vanishing` |
