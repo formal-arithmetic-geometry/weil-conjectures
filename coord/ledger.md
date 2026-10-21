@@ -23543,3 +23543,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:41 L: merged deliver/NX/lem-sfb-topological-homogeneous-cochain-coordinates (stage 2; reviewer PASS; parallel immutable checks)
 - 19:41 L: merged deliver/Q31/lem-zl-constant-geometric-stalk-unit (stage 2; reviewer PASS; parallel immutable checks)
 - 2026-10-21T19:41:54Z L: superseded stage-1 delivery NL/lem-sfb-continuous-cochain-finite-index-transfer at d0170b8c05f6ee738228abcf712ef0f4c935de04; current completion retained; packet archived at refs/superseded/NL/lem-sfb-continuous-cochain-finite-index-transfer/d0170b8c05f6ee738228abcf712ef0f4c935de04; stale return retired.
+- 19:41 L: returned deliver/NN/lem-sfb-lisse-lattice-potential-kummer-tameness (reviewer RETURN: C1/C4, F, G1/G4. Step 9 cites lem-per-snc-root-punctured-torsor-splitting and Step 4 cites lem-per-snc-root-algebra-stru)
