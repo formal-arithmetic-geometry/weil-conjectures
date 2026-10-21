@@ -16,7 +16,23 @@
  },
  "proof": [
   {
-   "text": "The ringed diagram-site K-injective calculation identifies the explicit restriction map as a composite of invertible exchange, clopen extension, open-to-direct-image, and composition comparisons. In the cartesian case the clopen lift is the pullback component and the mate identities reduce this composite to the canonical square mate. Transposing the same composite under the open adjunction and applying the unit and counit triangle identities identifies its adjunct with gamma.",
+   "text": "The inverse open-extension comparison betaInv is invertible for a cartesian open square. Its open-adjunction mate is squareG, by the defining hom-equivalence and the inverse open units. Iterating mates under the two inverse-image/direct-image adjunctions expresses exchange as the conjugate of betaInv. Conjugation preserves isomorphisms, so the pullback exchange is invertible. Each remaining factor of the explicit restriction map is an isomorphism: restricted open extension, the canonical clopen openToR, the normalized direct-image compositor, and equality transport. Their composite is therefore invertible.",
+   "uses": [
+    "def-cbc-strict-tower-proper-open-arrows",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Write delta at M as the open unit at Rr M followed by Gi of gamma M. Expand the proper-adjunction mate formula for gamma. Naturality of the pullback exchange and its unit-mate identity move the proper counit past exchange, giving the Rq-image of the open unit, squareG, the restriction of alpha, and the proper counit. The unit equation for betaInv, followed by beta, cancels the beta contribution. Naturality of the open-composition isomorphism and the invertible open unit cancel the restricted-extension comparison. The remaining term is pi_s followed by Js of the inverse pullback compositor and the proper counit. Naturality of openToR cancels its inverse in pi_s, leaving the composite-adjunction unit. By the definition of rComp as the adjunction conjugate of gComp, this is the inverse direct-image compositor (including equality transport). Cancelling it with the final compositor proves delta followed by the restriction map is identity. These identities hold at arbitrary objects of the derived categories; no faithfulness of coefficient evaluation is used.",
+   "uses": [
+    "def-cbc-strict-tower-proper-open-arrows",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a cartesian square, alpha_cartesian identifies alpha with beta. The same mate calculation for the cartesian restriction map now cancels beta by its unit identity; naturality and the inverse open unit leave the direct-image adjunction right triangle. Thus delta followed by the cartesian restriction is identity too. Since the explicit restriction is invertible, these two right inverses imply equality of the restriction maps. Finally apply the bijective hom-equivalence for the whiskered open adjunction. The inverse of any isomorphism with this restriction map as its hom equals delta, so its open adjunct is gamma.",
    "uses": [
     "def-cbc-strict-tower-proper-open-arrows",
     "lem-cbc-strict-tower-proper-open-calculus",
@@ -27,10 +43,10 @@
  ],
  "proof_deps": [
   "def-cbc-strict-tower-proper-open-arrows",
-  "lem-cbc-strict-tower-proper-open-calculus",
-  "def-weil-pbc-adjunction-mate"
+  "def-weil-pbc-adjunction-mate",
+  "lem-cbc-strict-tower-proper-open-calculus"
  ],
- "proof_origin": "The three structural comparisons are the independent normalization portion of the parent proper/open tower proof.",
+ "proof_origin": "P1: formal mate and conjugation calculation from the existing strict-tower operations; no separate diagram-site K-injective calculation is needed.",
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -91,12 +107,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-21",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "D3",
+  "group": "P1",
   "result": "pass",
-  "landing": "20261020T235548-L-1189515",
+  "landing": "20261021T011028-L-2030013",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

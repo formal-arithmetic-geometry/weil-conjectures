@@ -45,85 +45,26 @@
  ],
  "proof": [
   {
-   "text": "Identify the operations with the existing strict constant-coefficient tower operations, taking $B=A$ and reindexing $n\\geq1$ as $n-1\\in\\mathbb N$. The localized-site equivalence identifies the coefficient ring with $\\underline A$ on the open, preserving constant sections. In the extension-by-zero presheaf of the module adjunction, the summands at a test object $H$ are indexed by maps $H\\to U$ over the ambient scheme. There is at most one such map, and it exists precisely when $H$ factors through the open. Thus that presheaf is exactly the presheaf in the statement, not a different version of extension by zero. Its restriction to the open is the original sheaf, so the adjunction unit is the indicated identification. Exactness and the induced derived adjunction are those of the cited open-extension operation. The quasi-compactness hypothesis in the strict-tower calculus holds: the inverse image of an affine open under $i$ or $k$ is an open subscheme of a Noetherian scheme, hence quasi-compact by the cited Noetherian-open lemma. Apply the calculus to this square. It supplies $S=V\\times_ZW$, $b:S\\hookrightarrow V$, $q:S\\to W$, and the clopen lift $s:U\\hookrightarrow S$, with $bs=k$, $qs=r$. It also supplies a comparison $\\gamma_Q:J_iR_r^{\\mathcal T}\\to R_p^{\\mathcal T}J_k$, defined as the proper-adjunction mate of $\\alpha_Q=(J_b\\pi_sG_q)\\beta_{i,p}$. In the following steps we identify this specific comparison with the one specified in the item.",
-   "uses": [
-    "lem-weil-proetale-weakly-etale-localization",
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "def-cbc-strict-tower-open-extension",
-    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-    "lem-cbc-strict-tower-proper-open-calculus"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09AE (definition-extension-zero); the module construction is sites-modules.tex Section 03DH and Tag 03DJ; agent identification with the strict-tower calculus"
-   }
-  },
-  {
-   "text": "For the clopen $s$, put $S'=S\\setminus s(U)$. Every test object $H\\to S$ is covered by its disjoint inverse images in $s(U)$ and $S'$. A module sheaf is therefore uniquely specified by its two restrictions: sections on $H$ are the product of the sections on those two opens, and gluing gives the inverse to restriction. This applies to maps, transitions, and differentials as well. In this product description $G_s$ is projection onto the first factor and both $J_s$ and $s_*$ are $F\\mapsto(F,0)$. They are canonically identified by the map which is identity on $U$ and zero on $S'$. In particular $s_*$ is exact and $J_s=R_s^{\\mathcal T}$ after deriving. The direct-image adjunction unit $1\\to R_s^{\\mathcal T}G_s$ is exactly the clopen projection $\\pi_s$ of the calculus. Open-extension composition gives $G_bJ_k=G_bJ_bJ_s=J_s$, with all identifications preserving the open units. No proper base-change theorem or finiteness of coefficients is used in this decomposition.",
-   "uses": [
-    "lem-cbc-strict-tower-proper-open-calculus",
-    "lem-weil-proetale-weakly-etale-localization",
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "def-cbc-strict-tower-open-extension",
-    "lem-weil-pbc-exact-functor-derived-factorization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09AE, with the disjoint-open sheaf gluing argument written here; derived descent is derived.tex Tag 015F"
-   }
-  },
-  {
-   "text": "Work on the small ringed diagram sites realizing the tower categories. They have K-injective resolutions. The ringed-site localization comparison gives the sectionwise identity $G_i p_*\\cong q_*G_b$ before deriving. Restriction $G_b$ preserves K-injectives because it is right adjoint to the exact $J_b$. Consequently, if $F\\to I$ is a K-injective diagram resolution, both $G_iR_p^{\\mathcal T}F$ and $R_q^{\\mathcal T}G_bF$ are represented by the identical complex $q_*G_bI$. This constructs a natural isomorphism $\\chi:G_iR_p^{\\mathcal T}\\xrightarrow{\\sim}R_q^{\\mathcal T}G_b$, normalized by the identity on restricted sections. It is the inverse-image/direct-image square mate: the sectionwise identity is the transpose of the restricted direct-image counit, and deriving the same adjunctions preserves this description. With the clopen identification of step 2 and the canonical derived direct-image composition comparison, form\n$$\\lambda_Q:G_iR_p^{\\mathcal T}J_k\\xrightarrow{\\chi J_k}R_q^{\\mathcal T}G_bJ_k\\cong R_q^{\\mathcal T}J_s\\cong R_q^{\\mathcal T}R_s^{\\mathcal T}\\cong R_r^{\\mathcal T}.$$\nThese operations occur on the diagram sites, so this is a natural isomorphism of functors on the entire derived tower category. When the original square is cartesian, $s=1$ and this formula is precisely the open base-change mate followed by $G_kJ_k=1$.",
+   "text": "Use the published strict-tower operations and the explicit properOpenRestrictionMap. Noetherianity supplies quasi-compactness for the open immersions. Apply properOpenComparisonNormalization to obtain invertibility, agreement with the cartesian restriction map, and the equality of its open adjunct with gamma. Choose the isomorphism asIso of the explicit restriction map, which fixes its data, and obtain uniqueness by extensionality of isomorphisms on hom.",
    "uses": [
     "lem-sp-proper-open-comparison-normalization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 04J0 (lemma-localize-morphism-ringed-sites); derived.tex Tags 08BJ and 070K; sites-cohomology.tex Tags 0D6E and 07A7; agent application on the diagram sites"
-   }
+   "elementary": false
   },
   {
-   "text": "We compute the open adjunct of $\\gamma_Q$, suppressing the normalized composition isomorphisms. Write $R_u=R_u^{\\mathcal T}$, and write $\\eta_u,\\varepsilon_u$ for $G_u\\dashv R_u$. By the mate formula,\n$$\\gamma_Q=R_pJ_k\\varepsilon_r\\circ R_p\\alpha_QR_r\\circ\\eta_pJ_iR_r.$$\nLet $\\theta:G_bG_p\\xrightarrow{\\sim}G_qG_i$ be the localized inverse-image identification. The mate formula for the sectionwise comparison $\\chi:G_iR_p\\to R_qG_b$ gives the typed unit equation\n$$R_q\\theta\\circ\\chi G_p\\circ G_i\\eta_p=\\eta_qG_i.$$\nThis follows by substituting the mate formula and canceling the $G_p\\dashv R_p$ unit-counit pair. Apply this equation at $J_iR_rN$ and identify $G_iJ_iR_rN=R_rN$. The restriction of $\\beta_{i,p}$, after $G_bJ_b=1$ and $G_iJ_i=1$, is the identity of $G_qR_rN$: indeed its inverse has precisely the open-unit transpose specified by the calculus, and that unit becomes the identity after these identifications. Thus restricting $\\alpha_Q=(J_b\\pi_sG_q)\\beta_{i,p}$ leaves $\\pi_sG_q$, with no residual automorphism. Naturality of $\\chi$ moves $R_pJ_k\\varepsilon_r$ through the restriction comparison. Inserting these three equalities into the mate formula gives\n$$\\lambda_Q\\,G_i\\gamma_Q\n=R_qJ_s\\varepsilon_r\\circ R_q\\pi_sG_qR_r\\circ\\eta_qR_r.$$\nHere $R_qJ_s=R_r$ by step 2. Moreover $\\pi_s=\\eta_s$ under $J_s=R_s$. The composite-adjunction unit for $G_r=G_sG_q\\dashv R_qR_s=R_r$ is\n$$\\eta_r=R_q\\eta_sG_q\\circ\\eta_q.$$\nSubstitution therefore gives\n$$\\lambda_Q\\,G_i\\gamma_Q=R_r\\varepsilon_r\\circ\\eta_rR_r=1_{R_r},$$\nby the adjunction triangle identity. The computation uses transformations in the derived tower categories and their normalized units, rather than an equality tested after evaluation. Thus $G_i\\gamma_Q=\\lambda_Q^{-1}$. The bijection for $J_i\\dashv G_i$, whose unit is the open identification, says that $\\gamma_Q$ is exactly the adjunct defining $\\Gamma_Q$. This proves both existence of the specified actual morphism and its normalization.",
+   "text": "The open adjunction hom-equivalence applied to the inverse of the restriction isomorphism gives the displayed open-unit identity; compose it with the restriction hom and use the inverse-hom identity. For a quotient-origin witness, form the specified scalar origin over A/I^(n+1). The existing gamma_isIso and gamma_evaluation theorems give respectively invertibility and the normalized finite-coefficient comparison at every level; rewrite gamma as the open adjunct using the preceding normalization.",
    "uses": [
-    "lem-sp-proper-open-comparison-normalization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 0DV0 (lemma-compose-counits), dual unit formula; sites-cohomology.tex Tag 07A7 (remark-base-change); agent explicit calculation of the two adjunction normalizations"
-   }
-  },
-  {
-   "text": "Apply the finite-origin and finite-evaluation clauses of the strict-tower calculus to $B=A$, the homomorphisms $A\\to P_n=A/I^n$, and the given isomorphisms $N_n\\simeq\\operatorname{Res}\\nu_U^*L_n$. Each $P_n$ is a finite commutative ring and each $L_n$ is bounded below, exactly as required there. The calculus permits a different bound and finite coefficient ring at each $n$; it requires no system of transitions between the $L_n$. Its strict tower input is $N$ itself. It follows that $\\gamma_{Q,N}$ is invertible and that its $n$-th evaluation, through the canonical scalar and site direct-image/open-extension comparisons, is the normalized finite proper/open map of the cited finite-coherence node, directed $i_!Rr_*\\to Rp_*k_!$. Since step 4 proves $\\Gamma_Q=\\gamma_Q$ before evaluating, these assertions hold for the specific $\\Gamma_{Q,N}$ in the item. No injectivity of evaluation on morphisms is used.",
-   "uses": [
-    "lem-cbc-proper-open-interchange-coherence",
+    "lem-sp-proper-open-comparison-normalization",
     "lem-cbc-strict-tower-proper-open-calculus"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0F7B (lemma-shriek-proper-and-open), finite etale comparison; the cited strict-tower calculus states its scalar/pro-etale evaluation normalization"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-proetale-weakly-etale-localization",
-  "lem-pur-site-restriction-module-adjunction-exact",
-  "def-cbc-strict-tower-open-extension",
-  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-  "lem-cbc-strict-tower-proper-open-calculus",
-  "lem-weil-pbc-exact-functor-derived-factorization",
   "lem-sp-proper-open-comparison-normalization",
-  "lem-cbc-proper-open-interchange-coherence"
+  "lem-cbc-strict-tower-proper-open-calculus"
  ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/fix-lem-exchanges.md",
-  "place": "Proof Steps 3 and 5; open-adjunction normalization obtained from the existing strict-tower calculus by the explicit clopen projection and triangle calculation in steps 2-4"
- },
+ "proof_origin": "P1: use the proved structural normalization and the published gamma_isIso/gamma_evaluation API. The finite-origin witnesses and all target-facing definitions are unchanged.",
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -327,15 +268,6 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-proetale-weakly-etale-localization",
-  "lem-pur-site-restriction-module-adjunction-exact",
-  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-  "lem-weil-pbc-diagram-site-realization",
-  "prop-pur-kinjective-resolutions-exist",
-  "lem-weil-pbc-localize-ringed-site-morphism",
-  "lem-weil-pbc-right-adjoint-preserves-kinjective",
-  "lem-weil-pbc-kinjective-total-derived",
-  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
   "def-weil-pbc-adjunction-mate",
   "def-weil-pbc-composite-adjunction"
  ],
@@ -387,12 +319,12 @@
   }
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-21",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "D3",
+  "group": "P1",
   "result": "pass",
-  "landing": "20261020T235548-L-1189515",
+  "landing": "20261021T011028-L-2030013",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
