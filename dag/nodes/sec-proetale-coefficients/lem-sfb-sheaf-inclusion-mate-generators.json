@@ -1,0 +1,114 @@
+{
+ "id": "lem-sfb-sheaf-inclusion-mate-generators",
+ "kind": "statement",
+ "title": "The sheaf inclusion mate maps are the actual sheafification generators",
+ "statement": "Fix a universe $\\mathcal V$, a $\\mathcal V$-small site $(C,J)$ [def-weil-pbc-sites-and-cohomology], and a closed braided monoidal Grothendieck abelian category $\\mathcal A$ relative to $\\mathcal V$, with $\\mathcal V$-small morphism sets. Put $\\mathcal P=\\operatorname{Fun}(C^{\\mathrm{op}},\\mathcal A)$ with pointwise tensor $\\otimes_p$ and constant unit $I$. Let $a:\\mathcal P\\rightleftarrows\\mathcal S:\\!U$ be sheafification and full inclusion, where $\\mathcal S=\\operatorname{Sh}(C,J;\\mathcal A)$ and $a\\dashv U$ has unit $\\eta$ and counit $\\epsilon$ [def-weil-pbc-sheafification]. Use the canonical braided structure of [lem-sfb-braided-sheaf-tensor-generators], with $F\\otimes G=a(UF\\otimes_p UG)$, $f\\otimes g=a(Uf\\otimes_p Ug)$ and $\\mathbf1_{\\mathcal S}=aI$. Its strong sheafification comparison $\\mu^a_{P,Q}:aP\\otimes aQ\\xrightarrow{\\sim}a(P\\otimes_p Q)$ has inverse $\\delta_{P,Q}=a(\\eta_P\\otimes_p\\eta_Q)$, and its unit comparison is $1_{aI}$.\n\nGive $U$ the lax structure obtained as adjunction mates of this strong structure [lem-sfb-monoidal-adjunction-mates]. Its tensor and unit comparisons are precisely the actual sheafification generators: for all $F,G\\in\\mathcal S$,\n$$\nm_{U,F,G}=\\eta_{UF\\otimes_p UG}:UF\\otimes_p UG\\longrightarrow U(F\\otimes G),\\qquad e_U=\\eta_I:I\\longrightarrow U\\mathbf1_{\\mathcal S}.\n$$",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/lem-sfb-pushforward-comp-monoidal.proof.md",
+  "place": "Proof, second sentence: identification of the sheaf-inclusion adjunction mates with actual tensor and unit sheafification generators; extracted old step 1 of lem-sfb-sheaf-pushforward-generator-comparison."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-sfb-braided-sheaf-tensor-generators",
+  "def-weil-pbc-sheafification",
+  "lem-sfb-monoidal-adjunction-mates"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "sheafToPresheaf_μ|sheafToPresheaf_ε|rightAdjointLaxMonoidal",
+   "results": "{\"t\": \"2026-10-21T05:48:13Z\", \"tool\": \"grep\", \"query\": \"sheafToPresheaf_μ|sheafToPresheaf_ε|rightAdjointLaxMonoidal\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/CartesianMonoidal.lean\", \"Mathlib/CategoryTheory/Sites/CartesianMonoidal.lean\", \"Mathlib/CategoryTheory/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Functor.lean\"], \"digest\": \"79d781443bf0fedd\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: rightAdjointLaxMonoidal gives the unnormalized mate; sheafToPresheaf_μ and sheafToPresheaf_ε require CartesianMonoidalCategory and do not identify the actual unit for the prescribed sheafified tensor."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The mate tensor map of sheaf inclusion equals the sheafification unit for the sheafified pointwise tensor",
+   "results": "{\"t\": \"2026-10-21T05:48:14Z\", \"tool\": \"leansearch\", \"query\": \"The mate tensor map of sheaf inclusion equals the sheafification unit for the sheafified pointwise tensor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.toSheafification_app\", \"CategoryTheory.toSheafification\", \"CategoryTheory.toSheafify\", \"CategoryTheory.isoSheafify_hom\", \"CategoryTheory.sheafificationAdjunction_unit_app\", \"CategoryTheory.Sheaf.sheafifyCocone_ι_app_val\", \"CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf\", \"CategoryTheory.GrothendieckTopology.W_toSheafify\"], \"digest\": \"813215410fdf41a3\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: rightAdjointLaxMonoidal gives the unnormalized mate; sheafToPresheaf_μ and sheafToPresheaf_ε require CartesianMonoidalCategory and do not identify the actual unit for the prescribed sheafified tensor."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafToPresheaf\", \"μ\"",
+   "results": "{\"t\": \"2026-10-21T05:48:14Z\", \"tool\": \"loogle\", \"query\": \"\\\"sheafToPresheaf\\\", \\\"μ\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.sheafToPresheaf_μ\"], \"digest\": \"9cdc3cd5bcc52527\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: rightAdjointLaxMonoidal gives the unnormalized mate; sheafToPresheaf_μ and sheafToPresheaf_ε require CartesianMonoidalCategory and do not identify the actual unit for the prescribed sheafified tensor."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The right adjoint of canonical sheafification has lax tensor and unit maps equal to the actual sheafification unit maps on the pointwise tensor and constant unit",
+   "results": "{\"t\": \"2026-10-21T05:48:22Z\", \"tool\": \"leanfinder\", \"query\": \"The right adjoint of canonical sheafification has lax tensor and unit maps equal to the actual sheafification unit maps on the pointwise tensor and constant unit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.adjunction_unit_app_val\", \"PresheafOfModules.toPresheaf_map_sheafificationAdjunction_unit_app\", \"PresheafOfModules.sheafificationAdjunction\", \"CategoryTheory.Sheaf.adjunction\", \"CategoryTheory.sheafificationAdjunction_unit_app\", \"CategoryTheory.plusPlusAdjunction_unit_app\", \"CategoryTheory.Sheaf.adjunction_counit_app_val\", \"PresheafOfModules.sheafificationAdjunction_homEquiv_apply\"], \"digest\": \"4ac78655fc7a4fd3\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: rightAdjointLaxMonoidal gives the unnormalized mate; sheafToPresheaf_μ and sheafToPresheaf_ε require CartesianMonoidalCategory and do not identify the actual unit for the prescribed sheafified tensor."
+  },
+  {
+   "tool": "grep",
+   "query": "rightAdjointLaxMonoidal_μ|rightAdjointLaxMonoidal_ε|sheafToPresheaf_μ|sheafToPresheaf_ε",
+   "results": "{\"t\": \"2026-10-21T05:49:06Z\", \"tool\": \"grep\", \"query\": \"rightAdjointLaxMonoidal_μ|rightAdjointLaxMonoidal_ε|sheafToPresheaf_μ|sheafToPresheaf_ε\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/CartesianMonoidal.lean\", \"Mathlib/CategoryTheory/Sites/CartesianMonoidal.lean\", \"Mathlib/CategoryTheory/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Functor.lean\"], \"digest\": \"73d577070f511f89\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: rightAdjointLaxMonoidal gives the unnormalized mate; sheafToPresheaf_μ and sheafToPresheaf_ε require CartesianMonoidalCategory and do not identify the actual unit for the prescribed sheafified tensor."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalize the right adjoint monoidal tensor of a sheafification adjunction using the inverse tensorator a(eta tensor eta) and the triangle identities",
+   "results": "{\"t\": \"2026-10-21T05:49:16Z\", \"tool\": \"leanfinder\", \"query\": \"Normalize the right adjoint monoidal tensor of a sheafification adjunction using the inverse tensorator a(eta tensor eta) and the triangle identities\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf\", \"CategoryTheory.sheafToPresheaf_μ\", \"CategoryTheory.Sheaf.monoidalCategory\", \"instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite\", \"CategoryTheory.sheafToPresheaf_δ\", \"CategoryTheory.Sheaf.adjunction\", \"PresheafOfModules.sheafificationAdjunction\", \"PresheafOfModules.toPresheaf_map_sheafificationAdjunction_unit_app\"], \"digest\": \"8424c129d0de522f\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: rightAdjointLaxMonoidal gives the unnormalized mate; sheafToPresheaf_μ and sheafToPresheaf_ε require CartesianMonoidalCategory and do not identify the actual unit for the prescribed sheafified tensor."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-sheaf-pushforward-generator-comparison",
+  "date": "2026-10-21",
+  "group": "Q42"
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-def-sfb-module-pushforward-pullback",
+ "lean_candidates": [
+  {
+   "name": "CategoryTheory.Sheaf.inclusion_tensor",
+   "module": "Sheaf.CategoryTheory.SheafPushforwardGeneratorComparison",
+   "lines": [
+    143,
+    160
+   ],
+   "kind": "theorem",
+   "private": true,
+   "sorry": false,
+   "note": "Existing private source declaration, source-qualified name (not claimed to be an exported environment name). Attach this clause from the landed module; do not schedule a new proof. Its complete source proof is present without sorry, and the parent F3 landing 20261021T061056-L-1696739 has sorry_after []. Stage-1 protocol reports attachments in lean_candidates; the maintainer resolves private constant names and writes lean/existing:true. Prescribed tensor and unit object equalities account for eqToHom in the Lean statement.",
+   "existing": true,
+   "branch": "sheaf-dag"
+  },
+  {
+   "name": "CategoryTheory.Sheaf.inclusion_unit",
+   "module": "Sheaf.CategoryTheory.SheafPushforwardGeneratorComparison",
+   "lines": [
+    162,
+    180
+   ],
+   "kind": "theorem",
+   "private": true,
+   "sorry": false,
+   "note": "Existing private source declaration, source-qualified name (not claimed to be an exported environment name). Attach this clause from the landed module; do not schedule a new proof. Its complete source proof is present without sorry, and the parent F3 landing 20261021T061056-L-1696739 has sorry_after []. Stage-1 protocol reports attachments in lean_candidates; the maintainer resolves private constant names and writes lean/existing:true. Prescribed tensor and unit object equalities account for eqToHom in the Lean statement.",
+   "existing": true,
+   "branch": "sheaf-dag"
+  }
+ ],
+ "blueprint": {
+  "from": {
+   "node": "lem-sfb-pushforward-comp-monoidal",
+   "place": "Proof, second sentence: identification of the sheaf-inclusion adjunction mates with actual tensor and unit sheafification generators; extracted old step 1 of lem-sfb-sheaf-pushforward-generator-comparison.",
+   "via": [
+    "lem-sfb-sheaf-pushforward-generator-comparison"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

@@ -1,0 +1,170 @@
+{
+ "id": "lem-sfb-sheaf-valued-lax-counit-transport",
+ "kind": "statement",
+ "title": "Counit transport of a sheaf-valued lax monoidal functor",
+ "statement": "Fix a universe $\\mathcal V$, two $\\mathcal V$-small sites $(C,J)$ and $(D,K)$ [def-weil-pbc-sites-and-cohomology], and a closed braided monoidal Grothendieck abelian category $\\mathcal A$ relative to $\\mathcal V$, with $\\mathcal V$-small morphism sets. Use the canonical sheafified pointwise tensors and strong monoidal sheafification functors of [lem-sfb-braided-sheaf-tensor-generators]. Write $a_C\\dashv U_C$, $a_D\\dashv U_D$ for sheafification and full inclusion, with units $\\eta_C,\\eta_D$ and counits $\\epsilon_C,\\epsilon_D$ [def-weil-pbc-sheafification]. For presheaves write $\\otimes_p$ for pointwise tensor and $I_C,I_D$ for its units. Thus the sheaf tensor on $C$ is $H\\otimes L=a_C(U_CH\\otimes_p U_CL)$ and its tensorator is $\\mu^{a_C}_{P,Q}:a_CP\\otimes a_CQ\\to a_C(P\\otimes_p Q)$. Put $t_D(F,G)=\\eta_{D,U_DF\\otimes_p U_DG}$ and $u_D=\\eta_{D,I_D}$. Let $E:C\\to D$ be a functor such that $r(P)=P\\circ E^{\\mathrm{op}}$ preserves these coefficient-valued sheaves, and write $R$ for its sheaf restriction, so $U_CR=rU_D$. Give $U_D$ the right-adjoint mate lax structure [lem-sfb-monoidal-adjunction-mates], give $r$ its pointwise strong structure, and transport the composite lax structure of $a_CrU_D$ to $R$ along $\\epsilon_CR$.\n\nFor every pair $H,L$ of sheaves on $C$, the counits are invertible and satisfy\n$$\n\\mu^{a_C}_{U_CH,U_CL}\\circ(\\epsilon_{C,H}^{-1}\\otimes\\epsilon_{C,L}^{-1})=1_{H\\otimes L}.\n$$\nFor every pair $F,G$ of sheaves on $D$, the transported tensor and unit comparisons are\n$$\n\\mu_{R,F,G}=\\epsilon_{C,R(F\\otimes G)}\\circ a_C(r(t_D(F,G))),\\qquad e_R=\\epsilon_{C,R\\mathbf1_D}\\circ a_C(r(u_D)).\n$$\nAll object identifications are the prescribed sheafified tensor and unit identifications.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/lem-sfb-pushforward-comp-monoidal.proof.md",
+  "place": "Proof, second sentence: counit cancellation and extension formulas for restriction, old parent step 2; exact existing private helpers Sheaf/CategoryTheory/SheafPushforwardGeneratorComparison.lean:182-254."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-sfb-braided-sheaf-tensor-generators",
+  "def-weil-pbc-sheafification",
+  "lem-sfb-monoidal-adjunction-mates"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "LaxMonoidal.transport|transport_μ|transport_ε|rightAdjointLaxMonoidal",
+   "results": "{\"t\": \"2026-10-21T05:48:13Z\", \"tool\": \"grep\", \"query\": \"LaxMonoidal.transport|transport_μ|transport_ε|rightAdjointLaxMonoidal\", \"sub\": \"CategoryTheory/Monoidal\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/NaturalTransformation.lean\"], \"digest\": \"ca6eb2dfd3b0387f\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: Monoidal.transport_μ assumes a strong functor, whereas T is lax; the mate and composite/transport definitions do not perform the inverse-counit cancellation on the prescribed sheaf tensor."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LaxMonoidal.transport\"",
+   "results": "{\"t\": \"2026-10-21T05:48:14Z\", \"tool\": \"loogle\", \"query\": \"\\\"LaxMonoidal.transport\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: Monoidal.transport_μ assumes a strong functor, whereas T is lax; the mate and composite/transport definitions do not perform the inverse-counit cancellation on the prescribed sheaf tensor."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a monoidal reflective sheafification the counit transported tensor comparison is the adjoint extension of the original presheaf tensor map",
+   "results": "{\"t\": \"2026-10-21T05:48:14Z\", \"tool\": \"leansearch\", \"query\": \"For a monoidal reflective sheafification the counit transported tensor comparison is the adjoint extension of the original presheaf tensor map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.plusPlusAdjunction\", \"CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalCounit\", \"CategoryTheory.Sheaf.adjunction_counit_app_val\", \"CategoryTheory.constantSheafAdj_counit_app\", \"PresheafOfModules.Monoidal.tensorHom\", \"CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf\", \"CategoryTheory.Sheaf.monoidalCategory\", \"CategoryTheory.plusPlusAdjunction_counit_app_val\"], \"digest\": \"3f36da3f6fc5728d\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: Monoidal.transport_μ assumes a strong functor, whereas T is lax; the mate and composite/transport definitions do not perform the inverse-counit cancellation on the prescribed sheaf tensor."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A lax monoidal functor into presheaves whose objects are sheaves lifts by counit transport and its tensor comparison is counit composed with sheafification of the original comparison",
+   "results": "{\"t\": \"2026-10-21T05:48:21Z\", \"tool\": \"leanfinder\", \"query\": \"A lax monoidal functor into presheaves whose objects are sheaves lifts by counit transport and its tensor comparison is counit composed with sheafification of the original comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.sheafToPresheaf_μ\", \"CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf\", \"CategoryTheory.constantSheafAdj_counit_w\", \"CategoryTheory.instLiftingFunctorOppositeSheafPresheafToSheafWCompObjWhiskeringRightComposeAndSheafify\", \"CategoryTheory.GrothendieckTopology.sheafToPresheaf_map_sheafComposeNatTrans_eq_sheafifyCompIso_inv\", \"CategoryTheory.sheafToPresheaf_δ\", \"CategoryTheory.sheafToPresheaf_ε\", \"CategoryTheory.sheafComposeNatIso\"], \"digest\": \"ce2c092a72db5b26\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: Monoidal.transport_μ assumes a strong functor, whereas T is lax; the mate and composite/transport definitions do not perform the inverse-counit cancellation on the prescribed sheaf tensor."
+  },
+  {
+   "tool": "grep",
+   "query": "def transport|transport_μ|transport_ε|counit.*[Mm]onoidal",
+   "results": "{\"t\": \"2026-10-21T05:49:06Z\", \"tool\": \"grep\", \"query\": \"def transport|transport_μ|transport_ε|counit.*[Mm]onoidal\", \"sub\": \"CategoryTheory/Monoidal/NaturalTransformation.lean\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"239\"], \"digest\": \"2e29cb50db4b4512\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: Monoidal.transport_μ assumes a strong functor, whereas T is lax; the mate and composite/transport definitions do not perform the inverse-counit cancellation on the prescribed sheaf tensor."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"transport\", \"μ\"",
+   "results": "{\"t\": \"2026-10-21T05:49:06Z\", \"tool\": \"loogle\", \"query\": \"\\\"transport\\\", \\\"μ\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.Monoidal.transport_μ\", \"CategoryTheory.Functor.Monoidal.coreMonoidalTransport_μIso_hom\", \"CategoryTheory.Functor.Monoidal.coreMonoidalTransport_μIso_inv\", \"CategoryTheory.Functor.Monoidal.transport_μ_assoc\"], \"digest\": \"d4f8658c0958db1d\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: Monoidal.transport_μ assumes a strong functor, whereas T is lax; the mate and composite/transport definitions do not perform the inverse-counit cancellation on the prescribed sheaf tensor."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a full reflective subcategory with tensor a(UX tensor UY), transporting a lax monoidal functor through the reflection counit cancels the tensorator",
+   "results": "{\"t\": \"2026-10-21T05:49:16Z\", \"tool\": \"leanfinder\", \"query\": \"For a full reflective subcategory with tensor a(UX tensor UY), transporting a lax monoidal functor through the reflection counit cancels the tensorator\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Monoidal.Reflective.instIsIsoMapTensorHomAppUnit\", \"CategoryTheory.Monoidal.Reflective.isIso_tfae\", \"CategoryTheory.Monoidal.Reflective.instIsIsoAppUnitObjIhom\", \"CategoryTheory.Monoidal.Reflective.closed\", \"CategoryTheory.Monoidal.Reflective.monoidalClosed\", \"CategoryTheory.unit_obj_eq_map_unit\", \"CategoryTheory.μ_iso_of_reflective\", \"CategoryTheory.exponentialIdealReflective\"], \"digest\": \"d23cb7fdea1312bf\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: Monoidal.transport_μ assumes a strong functor, whereas T is lax; the mate and composite/transport definitions do not perform the inverse-counit cancellation on the prescribed sheaf tensor."
+  },
+  {
+   "tool": "grep",
+   "query": "LaxMonoidal.transport_μ|LaxMonoidal.transport_ε|inv_counit_map|sheafPushforwardContinuous",
+   "results": "{\"t\": \"2026-10-21T08:30:50Z\", \"tool\": \"grep\", \"query\": \"LaxMonoidal.transport_μ|LaxMonoidal.transport_ε|inv_counit_map|sheafPushforwardContinuous\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Point/Map.lean\", \"Mathlib/CategoryTheory/Sites/Point/Map.lean\", \"Mathlib/CategoryTheory/Sites/Point/Map.lean\", \"Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean\", \"Mathlib/CategoryTheory/Sites/Point/Comap.lean\", \"Mathlib/CategoryTheory/Sites/Point/Comap.lean\", \"Mathlib/CategoryTheory/Sites/Point/Comap.lean\", \"Mathlib/CategoryTheory/Sites/Point/Comap.lean\"], \"digest\": \"5fd99cb86a1f0b18\"}",
+   "date": "2026-10-21",
+   "verdict": "no full match: inv_counit_map and generic transport supply component identities; the normalized cancellation and restriction extension formulas are existing project private helpers, not a one-line Mathlib specialization. Cartesian sheaf tensor formulas require stronger hypotheses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The tensor and unit maps of counit transported sheaf restriction are the sheafification extensions of the restricted actual sheafification generators",
+   "results": "{\"t\": \"2026-10-21T08:30:51Z\", \"tool\": \"leansearch\", \"query\": \"The tensor and unit maps of counit transported sheaf restriction are the sheafification extensions of the restricted actual sheafification generators\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.adjunction_counit_app_val\", \"CategoryTheory.toSheafify\", \"ModuleCat.RestrictionCoextensionAdj.counit'\", \"CategoryTheory.Sheaf.ΓRes\", \"CategoryTheory.constantSheafAdj_counit_app\", \"CategoryTheory.Sheaf.tensorUnit_isSheaf\", \"CategoryTheory.plusPlusAdjunction_counit_app_val\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app\"], \"digest\": \"c1b885efac0edd45\"}",
+   "date": "2026-10-21",
+   "verdict": "no full match: inv_counit_map and generic transport supply component identities; the normalized cancellation and restriction extension formulas are existing project private helpers, not a one-line Mathlib specialization. Cartesian sheaf tensor formulas require stronger hypotheses."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LaxMonoidal.transport_μ\"",
+   "results": "{\"t\": \"2026-10-21T08:30:51Z\", \"tool\": \"loogle\", \"query\": \"\\\"LaxMonoidal.transport_μ\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no full match: inv_counit_map and generic transport supply component identities; the normalized cancellation and restriction extension formulas are existing project private helpers, not a one-line Mathlib specialization. Cartesian sheaf tensor formulas require stronger hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Counit transport of the composite sheaf inclusion, pointwise restriction and strong sheafification has tensor comparison equal to counit after sheafification of the restricted tensor generator",
+   "results": "{\"t\": \"2026-10-21T08:30:52Z\", \"tool\": \"leanfinder\", \"query\": \"Counit transport of the composite sheaf inclusion, pointwise restriction and strong sheafification has tensor comparison equal to counit after sheafification of the restricted tensor generator\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.constantSheafAdj_counit_w\", \"CategoryTheory.Sheaf.adjunction_counit_app_val\", \"CategoryTheory.Functor.sheafAdjunctionCocontinuous_counit_app_val\", \"PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom\", \"SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app\", \"PresheafOfModules.sheafificationAdjunction_homEquiv_apply\", \"PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm\", \"PresheafOfModules.toPresheaf_map_sheafificationAdjunction_unit_app\"], \"digest\": \"927dd0d355506e84\"}",
+   "date": "2026-10-21",
+   "verdict": "no full match: inv_counit_map and generic transport supply component identities; the normalized cancellation and restriction extension formulas are existing project private helpers, not a one-line Mathlib specialization. Cartesian sheaf tensor formulas require stronger hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalize a lax monoidal restriction functor on sheaves by cancelling the tensor of inverse reflection counits against the sheafification tensorator",
+   "results": "{\"t\": \"2026-10-21T08:30:53Z\", \"tool\": \"leanfinder\", \"query\": \"Normalize a lax monoidal restriction functor on sheaves by cancelling the tensor of inverse reflection counits against the sheafification tensorator\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.sheafToPresheaf_μ\", \"CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf\", \"CategoryTheory.sheafToPresheaf_δ\", \"CategoryTheory.Sheaf.monoidalCategory\", \"CategoryTheory.sheafToPresheaf_ε\", \"CategoryTheory.sheafToPresheafMonoidal\", \"CategoryTheory.sheafComposeNatIso\", \"LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf\"], \"digest\": \"8b34c3467f4690a8\"}",
+   "date": "2026-10-21",
+   "verdict": "no full match: inv_counit_map and generic transport supply component identities; the normalized cancellation and restriction extension formulas are existing project private helpers, not a one-line Mathlib specialization. Cartesian sheaf tensor formulas require stronger hypotheses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-sheaf-pushforward-generator-comparison",
+  "date": "2026-10-21",
+  "group": "Q42"
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-def-sfb-module-pushforward-pullback",
+ "lean_candidates": [
+  {
+   "name": "CategoryTheory.Sheaf.inverse_counits_tensor",
+   "module": "Sheaf.CategoryTheory.SheafPushforwardGeneratorComparison",
+   "lines": [
+    182,
+    202
+   ],
+   "kind": "theorem",
+   "private": true,
+   "sorry": false,
+   "note": "Existing private source declaration, source-qualified name (not claimed to be an exported environment name). Attach this clause from the landed module; do not schedule a new proof. Its complete source proof is present without sorry, and the parent F3 landing 20261021T061056-L-1696739 has sorry_after []. Stage-1 protocol reports attachments in lean_candidates; the maintainer resolves private constant names and writes lean/existing:true. Prescribed tensor and unit object equalities account for eqToHom in the Lean statement.",
+   "existing": true,
+   "branch": "sheaf-dag"
+  },
+  {
+   "name": "CategoryTheory.Sheaf.restriction_tensor_extension",
+   "module": "Sheaf.CategoryTheory.SheafPushforwardGeneratorComparison",
+   "lines": [
+    204,
+    228
+   ],
+   "kind": "theorem",
+   "private": true,
+   "sorry": false,
+   "note": "Existing private source declaration, source-qualified name (not claimed to be an exported environment name). Attach this clause from the landed module; do not schedule a new proof. Its complete source proof is present without sorry, and the parent F3 landing 20261021T061056-L-1696739 has sorry_after []. Stage-1 protocol reports attachments in lean_candidates; the maintainer resolves private constant names and writes lean/existing:true. Prescribed tensor and unit object equalities account for eqToHom in the Lean statement.",
+   "existing": true,
+   "branch": "sheaf-dag"
+  },
+  {
+   "name": "CategoryTheory.Sheaf.restriction_unit_extension",
+   "module": "Sheaf.CategoryTheory.SheafPushforwardGeneratorComparison",
+   "lines": [
+    230,
+    254
+   ],
+   "kind": "theorem",
+   "private": true,
+   "sorry": false,
+   "note": "Existing private source declaration, source-qualified name (not claimed to be an exported environment name). Attach this clause from the landed module; do not schedule a new proof. Its complete source proof is present without sorry, and the parent F3 landing 20261021T061056-L-1696739 has sorry_after []. Stage-1 protocol reports attachments in lean_candidates; the maintainer resolves private constant names and writes lean/existing:true. Prescribed tensor and unit object equalities account for eqToHom in the Lean statement.",
+   "existing": true,
+   "branch": "sheaf-dag"
+  }
+ ],
+ "blueprint": {
+  "from": {
+   "node": "lem-sfb-pushforward-comp-monoidal",
+   "place": "Proof, second sentence: counit tensorator cancellation and extension formulas for restriction; old step 2 of lem-sfb-sheaf-pushforward-generator-comparison.",
+   "via": [
+    "lem-sfb-sheaf-pushforward-generator-comparison"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

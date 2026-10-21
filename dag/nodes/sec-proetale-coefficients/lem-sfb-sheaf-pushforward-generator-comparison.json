@@ -14,32 +14,19 @@
  ],
  "proof": [
   {
-   "text": "Use the canonical sheafified tensor of [lem-sfb-braided-sheaf-tensor-generators]. We write composition right to left and suppress pointwise tensor subscripts. For either site write $a\\dashv U$, with unit $\\eta$ and counit $\\epsilon$ [def-weil-pbc-sheafification]. Unpacking its canonical strong comparison, its inverse is\n$$\\delta_{P,Q}=a(\\eta_P\\otimes\\eta_Q):a(P\\otimes Q)\\longrightarrow aP\\otimes aQ=a(UaP\\otimes UaQ),$$\nand its unit comparison is $1_{a\\underline{\\mathbf1}}$; on sheaf morphisms the tensor is $f\\otimes g=a(Uf\\otimes Ug)$. By the mate construction [lem-sfb-monoidal-adjunction-mates], the lax tensor of $U$ at $F,G$ is\n$$m_{F,G}=U((\\epsilon_F\\otimes\\epsilon_G)\\delta_{UF,UG})\\eta_{UF\\otimes UG}.$$\nThe composite inside $U$ equals $a((U\\epsilon_F\\eta_{UF})\\otimes(U\\epsilon_G\\eta_{UG}))=1$, by the two triangle identities. Therefore $m_{F,G}=\\eta_{UF\\otimes UG}=t(F,G)$. The mate of the identity unit comparison is $\\eta_{\\underline{\\mathbf1}}=u$. This identifies the mate maps with the actual generators, for both sites.",
+   "text": "By [lem-sfb-sheaf-inclusion-mate-generators], the mate comparisons of $U_D$ are the actual generators $t_D,u_D$. Restriction has identity pointwise tensor and unit comparisons. Apply [lem-sfb-sheaf-valued-lax-counit-transport] to the given $E$ and its coefficient-sheaf restriction $R$. With $v_{F,G}=r(t_D(F,G))$ and $v_0=r(u_D)$ it gives $$\\mu_{R,F,G}=\\epsilon_{C,R(F\\otimes G)}a_C(v_{F,G}),\\qquad e_R=\\epsilon_{C,R\\mathbf1_D}a_C(v_0).$$",
    "uses": [
-    "lem-sfb-braided-sheaf-tensor-generators",
-    "def-weil-pbc-sheafification",
-    "lem-sfb-monoidal-adjunction-mates"
+    "lem-sfb-sheaf-inclusion-mate-generators",
+    "lem-sfb-sheaf-valued-lax-counit-transport"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/lem-sfb-pushforward-comp-monoidal.proof.md",
-    "place": "Second sentence; normalization of the sheaf-inclusion mate maps."
+    "place": "Second sentence; assemble inclusion-mate normalization and counit transport."
    }
   },
   {
-   "text": "Put $P=rU_DF=U_CRF$, $Q=rU_DG=U_CRG$, $H=R(F\\otimes G)$ and $v=r(t_D(F,G)):P\\otimes Q\\to U_CH$. Restriction preserves the pointwise tensor and its unit componentwise, so its comparison maps are identities. Expand the composite lax structure and its transport along $\\epsilon_CR:a_CU_CR\\to R$:\n$$\\mu_{R,F,G}=\\epsilon_{C,H}\\,a_C(v)\\,\\mu^{a_C}_{P,Q}(\\epsilon_{C,RF}^{-1}\\otimes\\epsilon_{C,RG}^{-1}).$$\nHere step 1 supplies $m_D=t_D$. The counits are invertible because $U_C$ is a full inclusion [lem-sfb-braided-sheaf-tensor-generators, def-weil-pbc-sheafification]; indeed the unique extension of $1_{U_CRF}$ is inverse to its counit, as both composites are identities by unique extension. The triangle identity gives $U_C(\\epsilon_{C,RF}^{-1})=\\eta_{C,P}$, and similarly for $G$. Consequently the tensor of these inverse counits is $a_C(\\eta_{C,P}\\otimes\\eta_{C,Q})=\\delta_{C,P,Q}$, which cancels $\\mu^{a_C}_{P,Q}$. Thus\n$$\\mu_{R,F,G}=\\epsilon_{C,H}a_C(v).$$\nFor the unit, put $H_0=R\\mathbf1_D$ and $v_0=r(u_D):\\underline{\\mathbf1}\\to U_CH_0$. The composite and transport unit formula directly gives $e_R=\\epsilon_{C,H_0}a_C(v_0)$, since both the restriction and sheafification unit comparisons are identities.",
-   "uses": [
-    "lem-sfb-braided-sheaf-tensor-generators",
-    "def-weil-pbc-sheafification"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/lem-sfb-pushforward-comp-monoidal.proof.md",
-    "place": "Second sentence; explicit tensor and unit transport and cancellation."
-   }
-  },
-  {
-   "text": "For any presheaf map $w:S\\to U_CH'$, naturality of the adjunction unit and the triangle identity give\n$$U_C(\\epsilon_{C,H'}a_C(w))\\eta_{C,S}=U_C\\epsilon_{C,H'}\\,\\eta_{C,U_CH'}w=w.$$\nApply this first with $S=P\\otimes Q$, $H'=H$, $w=v$, and then with $S=\\underline{\\mathbf1}$, $H'=H_0$, $w=v_0$. By [lem-sfb-braided-sheaf-tensor-generators], $t_C(RF,RG)=\\eta_{C,P\\otimes Q}$ and $u_C=\\eta_{C,\\underline{\\mathbf1}}$. Inserting step 2 proves both displayed identities of the statement. This calculation is in presheaf Hom sets and uses no preservation of sheaf tensor products by evaluation.",
+   "text": "For any presheaf map $w:S\\to U_CH$, naturality of the adjunction unit and the triangle identity [def-weil-pbc-sheafification] give\n$$U_C(\\epsilon_{C,H}a_C(w))\\eta_{C,S}=U_C\\epsilon_{C,H}\\,\\eta_{C,U_CH}w=w.$$\nApply this with $(S,H,w)=(U_CRF\\otimes_p U_CRG,R(F\\otimes G),v_{F,G})$ and with $(I,R\\mathbf1_D,v_0)$. Since [lem-sfb-braided-sheaf-tensor-generators] identifies $t_C(RF,RG)=\\eta_{C,U_CRF\\otimes_p U_CRG}$ and $u_C=\\eta_{C,I}$, the formulas from step 1 give both required equations.",
    "uses": [
     "def-weil-pbc-sheafification",
     "lem-sfb-braided-sheaf-tensor-generators"
@@ -47,25 +34,26 @@
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/lem-sfb-pushforward-comp-monoidal.proof.md",
-    "place": "Second sentence; generator equations from naturality and the triangle identity."
+    "place": "Second sentence; adjunction naturality gives the generator equations."
    }
   },
   {
-   "text": "Finally apply the two Hom bijections of [lem-sfb-braided-sheaf-tensor-generators], on $C$, to the sheaf targets $R(F\\otimes G)$ and $R\\mathbf1_D$. The restricted generators are presheaf natural transformations, since restriction is precomposition. Each therefore has a unique sheaf extension, and step 3 identifies those extensions with $\\mu_R$ and $e_R$. All objects involved are on the given $\\mathcal V$-small sites and all morphism sets are in the fixed universe, as required by that lemma.",
+   "text": "The tensor and unit Hom bijections in [lem-sfb-braided-sheaf-tensor-generators], applied on $C$ with targets $R(F\\otimes G)$ and $R\\mathbf1_D$, imply uniqueness of each extension from its composite with $t_C$ or $u_C$. Their existence is given by step 2. The restricted generators are presheaf natural transformations because restriction is precomposition. Both sites and all Hom sets have the required fixed-universe sizes. These are presheaf Hom calculations. No evaluation functor is used to preserve a sheaf tensor.",
    "uses": [
     "lem-sfb-braided-sheaf-tensor-generators"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/lem-sfb-pushforward-comp-monoidal.proof.md",
-    "place": "Second sentence; equivalence with unique sheaf extension."
+    "place": "Second sentence; generator Hom bijections give unique extensions."
    }
   }
  ],
  "proof_deps": [
-  "lem-sfb-braided-sheaf-tensor-generators",
+  "lem-sfb-sheaf-inclusion-mate-generators",
+  "lem-sfb-sheaf-valued-lax-counit-transport",
   "def-weil-pbc-sheafification",
-  "lem-sfb-monoidal-adjunction-mates"
+  "lem-sfb-braided-sheaf-tensor-generators"
  ],
  "proof_origin": {
   "by": "agent",
@@ -193,17 +181,17 @@
   "date": "2026-10-21",
   "item": "lem-sfb-sheaf-pushforward-generator-comparison",
   "worker": "stage1",
-  "summary": "Statement unchanged. Expanded the mate tensor and unit of sheaf inclusion, calculated the counit transport on restriction explicitly, and used adjunction naturality and the generator Hom bijections to obtain the two equations and uniqueness. Reused three existing nodes, with no new nodes; checked project candidates and reran recorded Mathlib searches.",
-  "blueprint": "Realizes the second sentence of lem-sfb-pushforward-comp-monoidal.proof.md: the single-restriction lax comparison is the sheaf extension of the objectwise generator.",
+  "summary": "Attachment repair of supersession return: the parent statement and F3 closure record are retained. Both extracted statement-only nodes now carry explicit existing:true attachment proposals in the stage-1-owned lean_candidates field. The transport child is restricted to exactly the landed restriction helper signatures rather than claiming an unsupported arbitrary-lax-source attachment. Parent step 1 and its citation witness are adjusted accordingly. The reviewer must finalize the existing private-helper attachments instead of placing these finished arguments in a proof queue; lean and lean_audit remain maintainer-owned. No claim that the old re-split note postdates F3 is made.",
+  "blueprint": "Realizes the second sentence of lem-sfb-pushforward-comp-monoidal.proof.md using separate mate-normalization and counit-transport arguments.",
   "tool_uses": []
  },
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-NN-0625a3754",
-  "group": "NN",
+  "reviewer": "NT-cc-Q42-1ebdb6996",
+  "group": "Q42",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-0625a3754 (reviewer sub-agent of L); spot-checked: I read the item, its 4 steps, all 4 cited statements and the blueprint source (main-20261015 lem-sfb-pushforward-comp-monoidal.proof.md, second sentence). The delivery adds no new nodes. The statement is retained and matches its unique citer, parent step 1. There is no repair or re-split note, no SGA, and no cycle: the generator node's proof_deps do not lead back to the item. Step 1: the mate tensor rightAdjointLaxMonoidal is U((ε⊗ε)δ)η, δ=a(η⊗η), and the triangle identities give m=η=t; the unit is Φ(1)=η_1=u. δ=a(η⊗η) is the canonical comparison of lem-sfb-braided-sheaf-tensor-generators, constructed so in its step 7; I accept reading it from 'canonical' as a definitional unpacking. Step 2: the transport along ε_C R is checked. U(ε^{-1})=η_P, so ε^{-1}⊗ε^{-1}=δ cancels μ^{a_C}, giving μ_R=ε_H a_C(r t_D), and the unit gives e_R=ε a_C(r u_D). Types are checked. Step 3: U(ε a(w))η=w by naturality and the triangle identity gives both equations. Step 4: the Hom bijections give uniqueness. Edge cases tested: E=id, a=U=id, A=0, and Ab with a non-trivial topology, where nothing evaluates the sheaf tensor. Uses outside the unit are of Mathlib leaves only, so they are automatic. No duplicates found by a DAG scan."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-1ebdb6996 (reviewer sub-agent of L); spot-checked: Judged on the merits: the re-split note (side-live coord/repair-notes, 14:08 +0800) is still released, and under the 10:58 UTC maintenance rule (243a4db5baf) the earlier 'note older than F3 landing → superseded' returns are withdrawn. Not A6: compared with the returned 77b4fb28, both nodes gained lean_candidates, which attach them as existing:true to the landed private theorems, as the last reviewer asked. The counit-transport node was narrowed to the exact form of those helpers. The item statement is byte-equal to side-live. Re-split check: old step 1 (mate tensor U((ε⊗ε)δ)η with δ=a(η⊗η) reduces to η by the triangle identities; the unit becomes η_I) is now lem-sfb-sheaf-inclusion-mate-generators, which is true and matches inclusion_tensor:143 and inclusion_unit:162. Old step 2 (U(ε⁻¹)=η, so ε⁻¹⊗ε⁻¹=δ cancels μ^a, giving μ_R=ε a_C(r t_D) and e_R=ε a_C(r u_D)) is now lem-sfb-sheaf-valued-lax-counit-transport, which is true, with types checked, and matches inverse_counits_tensor:182 and restriction_tensor/unit_extension:204/230. Old steps 3–4 (unit naturality plus the triangle identity, then uniqueness from the Hom bijections of lem-sfb-braided-sheaf-tensor-generators) are kept as item steps 2–3. Nothing was dropped. The nodes are of comparable size and strictly smaller than the item (D1 not met). The item proof is about 1.5k characters. Node 2's future proof uses node 1; there is no cycle. Edge cases E=id, trivial topology and A=0 all check. Blueprint main-20261015 lem-sfb-pushforward-comp-monoidal.proof.md, second sentence: read. No SGA. Duplicate search over the DAG found nothing. Same unit. Maintainer: attach the five private theorems as existing:true rather than queuing them. Advisory: item step 1's citation of node 1 is redundant."
  },
  "lean": {
   "module": "Sheaf.CategoryTheory.SheafPushforwardGeneratorComparison",
