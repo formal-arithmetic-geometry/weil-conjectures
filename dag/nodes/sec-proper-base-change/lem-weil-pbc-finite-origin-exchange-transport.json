@@ -1,0 +1,131 @@
+{
+ "id": "lem-weil-pbc-finite-origin-exchange-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-level-proetale",
+   "place": "## Proof, finite coefficient transport step",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Finite exchange after coefficient restriction",
+ "statement": "For a proper chosen Cartesian square and finite commutative coefficient ring,\napply the canonical restriction from the continuous-function coefficient modules to the\nconstant coefficient modules to the ambient ringed exchange. If the input carries a\nfinite etale-origin witness, the resulting morphism is an isomorphism.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-weil-pbc-finite-level-proetale.md",
+  "place": "## Proof, finite coefficient transport step"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-origin-witness",
+  "def-weil-pbc-ambient-ringed-exchange"
+ ],
+ "proof": [
+  {
+   "text": "Use the constants-to-functions isomorphism at each corner as the scalar-change square;\nthe coefficient coherence hypothesis makes both paths commute. The derived pullback and\ndirect-image comparison isomorphisms supplied by the ring-sheaf change-of-rings adjunction\nidentify the restriction of the function-coefficient ambient mate with the constant-coefficient\nmate. Apply the constant-coefficient proper exchange theorem to the finite-coefficient object\nrealized from the retained etale complex and its canonical witness. Conjugate by the retained\nwitness isomorphism to obtain the component at K, then use reflection of isomorphisms by exact\nrestriction of scalars.",
+   "uses": [
+    "def-weil-pbc-ambient-ringed-exchange",
+    "def-weil-pbc-etale-origin-witness",
+    "lem-weil-pbc-ring-sheaf-change-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-weil-pbc-finite-level-proetale.md",
+    "place": "## Proof, finite coefficient transport step"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ambient-ringed-exchange",
+  "def-weil-pbc-etale-origin-witness",
+  "lem-weil-pbc-ring-sheaf-change-adjunction"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-weil-pbc-finite-level-proetale.md",
+  "place": "## Proof, finite coefficient transport step"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "restriction of scalars transports proper base change ambient ringed exchange",
+   "results": "LeanSearch returned no matching declaration.",
+   "date": "2026-10-21",
+   "verdict": "no Mathlib match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "restriction of scalars transports proper base change ambient ringed exchange",
+   "results": "Only general properness stability declarations were returned; no matching exchange transport theorem.",
+   "date": "2026-10-21",
+   "verdict": "no Mathlib match"
+  },
+  {
+   "tool": "loogle",
+   "query": "proEtaleRingSheafChangeAdjunction proEtaleRingRestrictionDerivedPullback",
+   "results": "No matching declaration was found by Loogle.",
+   "date": "2026-10-21",
+   "verdict": "no Mathlib match"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteRingComparison|finiteOriginToConstant|ringed.*exchange",
+   "results": "No matching declaration was found in the repository search.",
+   "date": "2026-10-20",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 1325,
+ "blueprint_uses": [
+  "def-weil-pbc-ambient-ringed-exchange",
+  "def-weil-pbc-etale-origin-witness"
+ ],
+ "uses_not_cited": [],
+ "proof_split_by": "transport step",
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteLevelProEtaleBaseChange",
+  "date": "2026-10-21",
+  "group": "J4"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteCoefficientExchangeTransport",
+  "declaration": "AlgebraicGeometry.Scheme.finiteOriginToConstant_map_ambientExchange_isIso",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.finiteOriginToConstant_map_ambientExchange_isIso"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteCoefficientExchangeTransport.lean",
+  "statement": "theorem finiteOriginToConstant_map_ambientExchange_isIso (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (sq : ChosenCartesianSquare g' f' f g) [IsProper f] (c_f : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj (finiteOriginFunctionRing Y Λ) ≅ finiteOriginFunctionRing X Λ) (c_g : (proEtaleSheafInverseImage g CommRingCat.{u + 1}).obj (finiteOriginFunctionRing Y Λ) ≅ finiteOriginFunctionRing Y' Λ) (c_g' : (proEtaleSheafInverseImage g' CommRingCat.{u + 1}).obj (finiteOriginFunctionRing X Λ) ≅ finiteOriginFunctionRing X' Λ) (c_f' : (proEtaleSheafInverseImage f' CommRingCat.{u + 1}).obj (finiteOriginFunctionRing Y' Λ) ≅ finiteOriginFunctionRing X' Λ) (hc : HEq (proEtaleRingCompositeCoefficients g' f (finiteOriginFunctionRing Y Λ) (finiteOriginFunctionRing X Λ) (finiteOriginFunctionRing X' Λ) c_f c_g') (proEtaleRingCompositeCoefficients f' g (finiteOriginFunctionRing Y Λ) (finiteOriginFunctionRing Y' Λ) (finiteOriginFunctionRing X' Λ) c_g c_f')) (K : DerivedCategory (proEtaleRingModules X (finiteOriginFunctionRing X Λ))) (_W : FiniteEtaleOriginWitness X Λ K) : IsIso ((finiteOriginToConstant Y' Λ).map ((proEtaleAmbientRingedExchange sq (finiteOriginFunctionRing X Λ) (finiteOriginFunctionRing Y Λ) (finiteOriginFunctionRing X' Λ) (finiteOriginFunctionRing Y' Λ) c_f c_g c_g' c_f' hc).app K))",
+  "branch": "sheaf-dag",
+  "by": "J4",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261021T004830-L-1792209",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261021T004830-L-1792209",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

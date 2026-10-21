@@ -9,11 +9,8 @@ public import Sheaf.Paper.RingedEtaleOriginWitness
 public import Sheaf.AlgebraicGeometry.ProEtaleAmbientRingedExchange
 public import Sheaf.AlgebraicGeometry.ProfiniteCoefficientInverseImage
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Sheaf.AlgebraicGeometry.CompactSupportComparisonUnit
-import Sheaf.AlgebraicGeometry.FixedEtaleOriginWitness
-import Sheaf.Paper.CondensedAmbientExchange
-import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
-import WeilConjectures.SixFunctors.ProEtale.BaseChange.SmoothBaseChange
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ScalarExtension
+import Sheaf.Paper.FiniteCoefficientExchangeTransport
 
 /-!
 # Finite-level pro-etale proper base change
@@ -31,6 +28,7 @@ Tag 09C8, the finite-coefficient step in Tag 09C9
 @[expose] public section
 
 set_option autoImplicit false
+set_option linter.style.haveILetI false
 
 universe u
 
@@ -128,6 +126,19 @@ theorem finiteLevelProEtaleBaseChange [IsProper f]
     (K : DerivedCategory (proEtaleRingModules X (finiteOriginFunctionRing X Λ)))
     (_W : FiniteEtaleOriginWitness X Λ K) :
     IsIso ((finiteCoefficientExchange Λ sq).app K) := by
-  sorry
+  let a := (finiteOriginConstantIso Y' Λ).hom
+  letI : (proEtaleRingRestrictScalars a).Additive := inferInstance
+  letI : PreservesFiniteLimits (proEtaleRingRestrictScalars a) :=
+    (proEtaleRingRestrictScalars_properties a).1
+  letI : PreservesFiniteColimits (proEtaleRingRestrictScalars a) :=
+    (proEtaleRingRestrictScalars_properties a).2.1
+  letI : (proEtaleRingRestrictScalars a).ReflectsIsomorphisms :=
+    (proEtaleRingRestrictScalars_properties a).2.2
+  letI : (proEtaleRingRestrictScalars a).mapDerivedCategory.ReflectsIsomorphisms := inferInstance
+  have hmap := finiteOriginToConstant_map_ambientExchange_isIso Λ sq
+    (finiteCoefficientRingIso Λ f) (finiteCoefficientRingIso Λ g)
+    (finiteCoefficientRingIso Λ g') (finiteCoefficientRingIso Λ f')
+    (finiteCoefficientRingIso_coherent Λ sq) K _W
+  exact isIso_of_reflects_iso _ (finiteOriginToConstant Y' Λ)
 
 end AlgebraicGeometry.Scheme
