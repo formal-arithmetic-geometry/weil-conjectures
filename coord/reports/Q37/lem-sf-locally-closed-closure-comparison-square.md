@@ -1,0 +1,41 @@
+# Q37: lem-sf-locally-closed-closure-comparison-square
+
+## Files written
+
+- `dag/nodes/sec-six-functors/lem-sf-locally-closed-closure-comparison-square.json`: statement node, split into six steps, no Mathlib match. The statement and its statement dependencies are unchanged.
+- `citations.json`: 21 step/node entries, each copied verbatim from the cited node statement.
+- `report.md`: this report. No new DAG nodes and no Mathlib leaves.
+
+## Attachments
+
+None. Searched the live `lean/WeilConjectures/` by the exact blueprint tag/id and by closure/comparison, locally closed, and extension terminology. The topology closure statements and the etale finite/open comparisons do not assert this two-site derived closure square. No complete project declaration giving every clause was found. No compiler or Lake command was run.
+
+## WANTED
+
+None. The blueprint and Stacks component sources used here are available locally. The composite proof is marked `proof_origin.by = agent`: the blueprint says to combine the open and closed comparisons but does not print this normalized-map calculation.
+
+## Corrections and scope
+
+The original node had a statement and searches but no proof. I retained the statement, source, creator, blueprint ancestry, and all prior search records, and added the six-step argument. I did not create a replacement node for the main square or any of its clauses. The principal potential mistake was inferring equality of arbitrary ambient maps just from their restriction to S. The proof instead conjugates both maps into endomorphisms of F_p C_S L, where the existing restriction Hom bijection applies; this gives precisely the faithfulness needed.
+
+The ancestor is `lem-weil-finite-duality-site-comparison`, second proof paragraph, with the existing via node `lem-weil-finite-duality-locally-closed-comparison`. I read the chapter and the assigned unit. This is an auxiliary calculation in that parent’s locally closed comparison, not the key statement of the unit, so no unit realization record is changed. The generic off-unit tools are declared in `split_report.tool_uses`, with a reason for each. No unit proof route is replaced.
+
+## Searches and duplicate check
+
+The required msearch commands ran under Q37 and this item id: LeanFinder with two phrasings, Loogle for adjunction/counit, LeanSearch for factorization-independent two-site extension, and two Mathlib grep patterns. Their actual outputs were read and recorded, including the zero-hit grep. The semantic hits concern scheme normalization, etale morphisms, restriction of homological complexes, hypercovers, and the generic exact derived functor; none states the specified two-site square. The grep hits in Mathlib/AlgebraicGeometry/Sites/Proetale.lean and ElladicCohomology.lean were opened: these define sites and coefficient sheaves, not the comparison in question. The inherited searches are retained as inherited evidence, not represented as freshly run by Q37. New entries are taken from this sandbox’s searches.jsonl.
+
+Searched the entire blueprint with blueprint_refs.py for locally closed, extension/coherence, closure/comparison, and comparison, and the DAG for full faithfulness and extension normalization. This located the existing etale closure identification, pro-etale coherence, and derived immersion normalization, all reused. No new node was needed. No same-tag new/existing pair exists and the item has no other blueprint statement with exactly its named-map square.
+
+## Review by Q37
+
+I read the current blueprint proof of `lem-weil-finite-duality-site-comparison`, especially its second paragraph stating that locally closed exceptional comparison is assembled from the open and closed comparisons. I also read the parent DAG split to check exactly how it uses this item. For the underlying factors I read Stacks proetale.tex Tag 09AA (lemma-closed-immersion), Tag 09BM (lemma-closed-immersion-complement-retrocompact-exact), Tag 09BN (lemma-open-immersion), sites-modules.tex Tags 03DI/03DJ (lemma-extension-by-zero / lemma-extension-by-zero-exact), and etale-cohomology.tex Tag 0GJ1 (lemma-compatible-shriek-push-finite). I read categories.tex lemma-transformation-between-functors-and-adjoints (0B65) for the named counit normalization and derived.tex lemma-right-derived-exact-functor (015F) for termwise descent. These are component sources; the mixed closure square itself is the agent-written argument in the item. No SGA source was used. There are no new nodes requiring a separate source review.
+
+Step 1 also verifies the Noetherian bases explicitly: V is an open subscheme of T, and S and the closure are finite type over the respective Noetherian targets. The two cited inheritance lemmas state exactly these consequences; the finite-type claim for closed immersions is the elementary affine quotient argument from the two cited definitions. Step 1 uses the actual statements of the etale closure comparison and pro-etale extension coherence to obtain the normalized q maps. The derived normalization statement explicitly asserts exact closed direct images and identification of the named derived mate with its termwise mate. Etale open exactness comes from the module-sheaf exactness node, not a definition of extension. The exact-functor bounded-below statement explicitly gives preservation of D+, so the two inputs to delta really meet its hypothesis. The two comparison statements supply naturality and invertibility of their actual components. Coefficients throughout are finite discrete constant A modules; nothing uses condensed coefficients or a constructible equivalence.
+
+Step 2 defines the restrictions by the inverse open unit and closed counit. The normalization node supplies those particular maps; the q statements specify identity after restriction. The pullback comparison statement explicitly includes composites. Thus both factorizations of s use the same pullback compositor. Steps 3 and 4 use the unit and counit equations actually printed in the normalization node: open then closed removes the factors of Delta; closed then open removes those of B. I wrote out the order of removal and naturality of the closed counit, rather than asserting transport of normalization without calculation.
+
+Step 5 first computes both restricted composites and includes naturality of a_s at q_e. The cited pro-etale coherence statement explicitly provides the restriction Hom bijection on ordinary unbounded derived categories. It applies because the source and target have been conjugated to F_p C_S L, the base T is Noetherian, and the pulled-back coefficient ring is A_S. This is the decisive equality argument; no conservativity assertion on arbitrary ambient maps is assumed. Step 6 is the displayed inverse-cancellation calculation for a second factorization and for three factorizations. It needs no new lemma. The normalized maps in its conclusion are the ones obtained through the common closure, as specified in the item.
+
+I checked B–E against the node and sources: no new unsplit node, duplicate, undefined replacement notion, or lemma containing an item clause was introduced; every non-elementary input is an existing cited statement and is paired with a verbatim citation; proof_deps is exactly the union of the step uses; statement and proof ancestry are retained. Each step is below 2000 characters. Tested empty S and zero coefficients (all maps remain the same canonical units/counits), identity immersion, open-only and closed-only cases (the corresponding identity factor cancels), and a genuinely locally closed stratum with boundary (restriction is used only on its extension image). The argument imposes no density, reducedness, constructibility, finite Tor amplitude, or nonzero ring condition. The closure factorization is the supplied one; no set-theoretic containment is used to infer a scheme factorization. Nothing remains unfinished.
+
+Final self-check added the explicit Noetherian inheritance calculation for V, S and the closure, so that the normalization lemma is applied with every base hypothesis recorded. The first dry run requested a longer exactness quotation; it was expanded to the full relevant statement. A subsequent dry run passed before this final hypothesis-explication, which is checked again below.
