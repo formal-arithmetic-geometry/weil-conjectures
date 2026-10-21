@@ -37,9 +37,8 @@
  ],
  "proof": [
   {
-   "text": "First check the bases for smooth duality. Since $g$ is finite type and $S$ is Noetherian, $V$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. The same lemma applies to $\\mathbf A^1_S$, whose polynomial coordinate algebra has one generator. The hypothesis already makes $D_sV$ Noetherian. Invertibility of $N$ persists because a ring homomorphism sends units to units. Apply [thm-asd-smooth-tensor] to $g$ and $q$: their dualizing objects shifted by $[-2d]$ are locally constant sheaves locally isomorphic to the coefficient sheaf. Exact inverse image [prop-weil-pbc-inverse-image-modules-exact] commutes with shifts and carries a degree-zero sheaf to its inverse image. Pulling a trivializing etale cover back along $s$ or $\\sigma$ still trivializes its inverse image. Hence $C[-2d]$ and $F[-2d]$ are locally constant rank-one sheaves, as asserted.",
+   "text": "Install the invertible-exponent instances from N, hN, hA and hS and pull them to V and the actual deformation space. Apply smooth tensor duality in its upstream form exists_dualizingComplex_iso_and_tensor to g and q. Exact inverse image along the two sections commutes with shifts and degree-zero single complexes. Locally constant sheaves pull back to locally constant sheaves and their geometric stalks pull back unchanged. For a trivializing chart choose a geometric point to identify its constant module with A; refine the cover by pairs of a chart and one of its points, which discards empty charts. This produces exactly the two shifted rank-one sheaf clauses, including empty bases.",
    "uses": [
-    "lem-weil-pbc-finite-type-over-noetherian",
     "thm-asd-smooth-tensor",
     "prop-weil-pbc-inverse-image-modules-exact"
    ],
@@ -50,11 +49,12 @@
    }
   },
   {
-   "text": "For $r=0,1$, apply [prop-asd-smooth-base-change] to $q$ and $i_r:S\\to\\mathbf A^1_S$, with coefficient object $A$. Its hypotheses hold: $q$ is smooth, separated, compactifiable, of dimension $d$, and both bases are Noetherian; the fibre structural maps are the assumed compactifiable $g$ and $\\pi$. It gives the actual counit-transpose isomorphisms $j_1^*\\omega_q\\to\\omega_g$ and $j_0^*\\omega_q\\to\\omega_\\pi$, where $j_r$ denotes the fibre inclusion. Pull back along the fibre sections. The identities $j_1s=\\sigma i_1$ and $j_0z=\\sigma i_0$, with the module inverse-image compositors of [lem-weil-pbc-inverse-image-composition-module-linear], give precisely $\\theta:i_1^*F\\to C$ and $\\eta:i_0^*F\\to z^*\\omega_\\pi$. Exact inverse images descend termwise to these unbounded categories by [prop-weil-pbc-inverse-image-modules-exact]. These are the specified maps because we have used the counit-defined comparisons themselves.",
+   "text": "The general smooth exceptional base-change theorem applies to every Cartesian square used by sectionMap. Its component at the coefficient unit, followed by the canonical coefficient-unit isomorphism, is dualizingComplexBaseChangeMap. Pulling this map to a compatible section and composing the inverse-image compositors proves sectionMap is invertible. Apply this first to the actual Rees fibre at one, and then to the specified symmetric normal-bundle fibre at zero using normalFibre_spec and normalProjectionQuasiCompact. This gives atOne and normalFibreMap themselves, with no replacement fibre identifications.",
    "uses": [
     "prop-asd-smooth-base-change",
-    "lem-weil-pbc-inverse-image-composition-module-linear",
-    "prop-weil-pbc-inverse-image-modules-exact"
+    "def-pur-noetherian-section-specialization-arrows",
+    "def-trf-section-normal-fibre-map",
+    "lem-weil-pbc-inverse-image-composition-module-linear"
    ],
    "elementary": false,
    "source": {
@@ -63,67 +63,39 @@
    }
   },
   {
-   "text": "Choose affine centred coordinates $e_i:U_i\\to\\mathbf A^d_{S_i}$ from [lem-trf-smooth-section-centred-coordinates], with $S_i$ an affine open cover of $S$ and $U_i$ an affine open neighbourhood of the section in $V_i=V\\times_SS_i$. Write $g_i:V_i\\to S_i$, $u_i:U_i\\hookrightarrow V_i$, and $p_i:\\mathbf A^d_{S_i}\\to S_i$. The square of centres is Cartesian, not merely a pointwise equality. All maps to which locality will be applied are between Noetherian schemes and are compactifiable: base changes of $g,q$ are separated finite type by [lem-pod-separated-finite-type-base-change]; the chart maps are separated etale finite type; their structural composites are separated finite type. Polynomial affine spaces and these finite-type sources are Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. Over each affine Noetherian base they are compactifiable by [thm-nagata-compactification]. The open inclusions are etale by [lem-weil-pbc-open-immersion-etale]; they are separated, and finite type here since their sources are quasi-compact opens in Noetherian schemes. The same checks apply to the deformed charts below.",
+   "text": "Fix an arbitrary Chart c. Its declared theorem chartGeometry supplies the Noetherian, compactification, etale and finite-type locality domains and the Cartesian and section equations for the actual Rees maps. No coordinate-cover existence theorem is necessary: the statement quantifies over charts already given. Apply the affine-space ambient adjunction over c.T and its affine line to exhibit adjT and adjL. Invertibility of N on these bases follows by pullback of units.",
    "uses": [
-    "lem-trf-smooth-section-centred-coordinates",
-    "lem-pod-separated-finite-type-base-change",
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "thm-nagata-compactification",
-    "lem-weil-pbc-open-immersion-etale"
+    "def-trf-section-centred-chart-data",
+    "def-trf-section-local-comparison-data",
+    "cor-amb-affine-space-adjunction"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
-    "place": "Local construction, centred affine charts and locality hypotheses"
+    "place": "Local construction, affine centred charts and affine-space adjunction"
    }
   },
   {
-   "text": "For an affine-space projection $p:\\mathbf A^d_T\\to T$ with a Noetherian base as above, [cor-amb-affine-space-adjunction] supplies a right adjoint $K\\mapsto p^*K(d)[2d]$ to $Rp_!$ on the entire unbounded category. Compare it with the chosen $p^\\times$ by [det-sp-unique-right-adjoint]. Choose the unique isomorphism whose image under $Rp_!$, followed by the target counit, is the source counit. Evaluating at $A_T$, and using the canonical isomorphism $p^{-1}A_T\\cong A_{\\mathbf A^d_T}$ of constant coefficient rings [prop-weil-pbc-inverse-image-modules-exact], identifies $\\omega_p$ with $A_{\\mathbf A^d_T}(d)[2d]$. Pulling to the zero section identifies $0^*\\omega_p$ with $A_T(d)[2d]$ by [lem-asd-etale-finite-twist-pullback]. Thus the identification compares adjunctions by their counits; it does not select an arbitrary isomorphism of rank-one fibres. This construction also applies to $T=\\mathbf A^1_{S_i}$.",
+   "text": "Unfold chartMap: it is inverse sectionLocality followed by affineSectionIso, hence invertible. These are the counit-compatible locality and right-adjoint-uniqueness comparisons, followed by canonical Tate pullback. Unfold localSourceMap and localFamilyMap. Each is the sectionMap of Step 2 followed by a sectionLocality isomorphism and a chartMap. The source and deformed chartGeometry equations supply exactly their arguments. Thus both prescribed arrows are invertible; take their asIso isomorphisms so their hom equalities hold reflexively.",
    "uses": [
-    "cor-amb-affine-space-adjunction",
-    "det-sp-unique-right-adjoint",
-    "lem-asd-etale-finite-twist-pullback",
-    "prop-weil-pbc-inverse-image-modules-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
-    "place": "Local construction, affine-space adjunction"
-   }
-  },
-  {
-   "text": "Base change $g$ to $S_i$ using [prop-asd-smooth-base-change]. After section pullback this identifies $C|_{S_i}$ with $s_i^*\\omega_{g_i}$. Apply [lem-amb-etale-adjoint-locality] to $u_i$ over $S_i$ and to $e_i$ over $S_i$. Since $g_i u_i=p_i e_i$, their locality isomorphisms give $u_i^*\\omega_{g_i}\\cong\\omega_{g_i u_i}\\cong e_i^*\\omega_{p_i}$. The comparisons are normalized by the unique counit-compatible right-adjoint comparison [det-sp-unique-right-adjoint]. Pull back along the section in $U_i$. The equalities $u_i s_{U_i}=s_i$ and $e_i s_{U_i}=0_i$, using [lem-weil-pbc-inverse-image-composition-module-linear], identify the result with $0_i^*\\omega_{p_i}$. Step 4 therefore gives an isomorphism $c_i:C|_{S_i}\\to A_{S_i}(d)[2d]$.",
-   "uses": [
-    "prop-asd-smooth-base-change",
+    "def-trf-section-local-comparison-data",
+    "def-trf-section-centred-chart-data",
     "lem-amb-etale-adjoint-locality",
     "det-sp-unique-right-adjoint",
-    "lem-weil-pbc-inverse-image-composition-module-linear"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
-    "place": "Local construction, chart identification of the section dualizing object"
-   }
-  },
-  {
-   "text": "The standard pair has deformation algebra $R_i[x][t,(x)/t]=R_i[t,u_1,\\ldots,u_d]$, with $x_j=tu_j$. Indeed the latter polynomial algebra maps into $R_i[x,t,t^{-1}]$ by $u_j\\mapsto x_j/t$; distinct monomials $t^a u^b$ map to distinct Laurent monomials $t^{a-|b|}x^b$, so this is injective over any $R_i$, and its image is exactly the stated generated subalgebra. Apply [lem-trf-section-rees-base-change-etale] first to $S_i\\to S$, then to the etale maps of pairs $u_i$ and $e_i$. This gives a deformed open neighbourhood of $\\sigma(\\mathbf A^1_{S_i})$ with a separated etale finite-type map to $\\mathbf A^d_{\\mathbf A^1_{S_i}}$, preserving its zero section. Use [prop-asd-smooth-base-change] for restriction of $q$ to this base, followed by [lem-amb-etale-adjoint-locality] for the two deformed chart maps. As in Step 5, their equal structural composites and the counit-compatible comparison of [det-sp-unique-right-adjoint] identify the restriction of $F$ with the zero-section pullback of the standard affine-space dualizing object. Step 4 over $\\mathbf A^1_{S_i}$ gives $f_i:F|_{\\mathbf A^1_{S_i}}\\to A_{\\mathbf A^1_{S_i}}(d)[2d]$. The section compositions use the same module inverse-image compositors [lem-weil-pbc-inverse-image-composition-module-linear].",
-   "uses": [
-    "lem-trf-section-rees-base-change-etale",
-    "prop-asd-smooth-base-change",
-    "lem-amb-etale-adjoint-locality",
-    "det-sp-unique-right-adjoint",
-    "lem-weil-pbc-inverse-image-composition-module-linear"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
-    "place": "Local construction, Rees etale chart and x_j=t u_j standard model"
-   }
-  },
-  {
-   "text": "Let $\\tau_i:a_i^*A_{S_i}(d)[2d]\\xrightarrow{\\sim}A_{\\mathbf A^1_{S_i}}(d)[2d]$ be Tate pullback [lem-asd-etale-finite-twist-pullback]. The formula $\\lambda_i=(a_i^*c_i)^{-1}\\tau_i^{-1}f_i$ is an isomorphism from $F|_{\\mathbf A^1_{S_i}}$ to $a_i^*(C|_{S_i})$. All three arrows have been specified: two use the counit-normalized locality and affine adjunction comparisons of Steps 4–6, and the middle arrow is canonical Tate pullback. No equality between this initial map at $1$ and $\\theta_i$ is being assumed.",
-   "uses": [
     "lem-asd-etale-finite-twist-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+    "place": "Local construction, source and actual deformed-chart comparisons"
+   }
+  },
+  {
+   "text": "restrictedTheta is a composite of inverse-image compositors and the inverse image of atOne, already invertible by Step 2. Take its asIso for theta. The rawComparison is exactly the stated composite of the two chart identifications and Tate pullback, so the construction preserves every specified map.",
+   "uses": [
+    "def-trf-section-local-comparison-data",
+    "def-pur-noetherian-section-specialization-arrows",
+    "lem-weil-pbc-inverse-image-composition-module-linear"
    ],
    "elementary": true,
    "source": {
@@ -132,8 +104,9 @@
    }
   },
   {
-   "text": "Use the inverse-image compositors [lem-weil-pbc-inverse-image-composition-module-linear] and $a_i i_1=1_{S_i}$ to regard $i_1^*\\lambda_i$ as an isomorphism $i_1^*F\\to C|_{S_i}$. Thus $h_i=(i_1^*\\lambda_i)\\theta_i^{-1}$ is an automorphism of $C|_{S_i}$, and $\\lambda_i^{\\mathrm{norm}}=a_i^*(h_i^{-1})\\lambda_i$ is an isomorphism. Its restriction is $h_i^{-1}(i_1^*\\lambda_i)=h_i^{-1}h_i\\theta_i=\\theta_i$. This proves exactly the normalization claimed, using the actual $\\theta_i$ from Step 2. For $d=0$ the polynomial calculation has no $u_j$, the twist and shift are trivial, and the same computation applies. For the empty base all constructions and equations restrict to the empty sites.",
+   "text": "For any isomorphism l:F -> a* C and theta:i1*F -> C, put h=theta inverse followed by restrictionAtOne(l), as in discrepancy. By naturality of the section compositor epsilon:i1*a* -> id, restrictionAtOne(l followed by a*(h inverse)) is restrictionAtOne(l) followed by h inverse. Substituting h inverse gives epsilon followed by epsilon inverse and i1*(l) followed by i1*(l inverse); both cancel, leaving theta. The Lean proof is Iso.ext, naturality of epsilon, functoriality, associativity and the two inverse identities. Apply it to rawComparison. The calculation requires no positive rank, nonzero coefficient, or nonempty-base assumption.",
    "uses": [
+    "def-trf-section-local-comparison-data",
     "lem-weil-pbc-inverse-image-composition-module-linear"
    ],
    "elementary": true,
@@ -145,24 +118,22 @@
  ],
  "proof_deps": [
   "cor-amb-affine-space-adjunction",
+  "def-pur-noetherian-section-specialization-arrows",
+  "def-trf-section-centred-chart-data",
+  "def-trf-section-local-comparison-data",
+  "def-trf-section-normal-fibre-map",
   "det-sp-unique-right-adjoint",
   "lem-amb-etale-adjoint-locality",
   "lem-asd-etale-finite-twist-pullback",
-  "lem-pod-separated-finite-type-base-change",
-  "lem-trf-section-rees-base-change-etale",
-  "lem-trf-smooth-section-centred-coordinates",
-  "lem-weil-pbc-finite-type-over-noetherian",
   "lem-weil-pbc-inverse-image-composition-module-linear",
-  "lem-weil-pbc-open-immersion-etale",
   "prop-asd-smooth-base-change",
   "prop-weil-pbc-inverse-image-modules-exact",
-  "thm-asd-smooth-tensor",
-  "thm-nagata-compactification"
+  "thm-asd-smooth-tensor"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
-  "place": "Opening paragraph and Local construction; detailed counit comparisons and normalization"
+  "place": "Opening paragraph and Local construction; E3 Lean proof using the already declared chartGeometry and canonical section-map interfaces"
  },
  "mathlib_searches": [
   {
@@ -329,14 +300,10 @@
   "det-sp-unique-right-adjoint",
   "lem-amb-etale-adjoint-locality",
   "lem-asd-etale-finite-twist-pullback",
-  "lem-pod-separated-finite-type-base-change",
-  "lem-weil-pbc-finite-type-over-noetherian",
   "lem-weil-pbc-inverse-image-composition-module-linear",
-  "lem-weil-pbc-open-immersion-etale",
   "prop-asd-smooth-base-change",
   "prop-weil-pbc-inverse-image-modules-exact",
-  "thm-asd-smooth-tensor",
-  "thm-nagata-compactification"
+  "thm-asd-smooth-tensor"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -366,5 +333,15 @@
   "group": "Q72",
   "result": "pass",
   "note": "Item matches the node clause by clause: A/N/S hypotheses, smooth separated finite-type g with closed section, D_sV/q/sigma Rees data, compactifiable g, q, pi, Noetherian D_sV; both shifted rank-one sheaf clauses; IsIso of atOne (theta) and normalFibreMap (eta on Spec Sym(I/I^2) through the unique-normalized Rees comparison); for every affine centred chart, c and f pinned to localSourceMap/localFamilyMap, lambda = f then inverse Tate pullback then a*(c inverse), h and lambda_norm, i1*lambda_norm = actual restricted theta. The existential affine adjunction is faithful because cor-amb-affine-space-adjunction asserts only existence; rightAdjointUniq and the unique-choice locality iso are canonical, and the normalization removes the dependence at 1. Three new definition nodes: real data, named well-definedness sorries checked true (chartGeometry via SectionReesBaseChangeEtale.etale, deformationSpaceToAffineSpace iso, Nagata). Section 1(B) dependency module SectionComparisonArrows copies verbatim the 7 defs of the quarantined NoetherianEtaleSectionSpecialization; no live users of the old names, nothing route-pivot dropped, no competing repair. All lean.statement fields verbatim. Advisories: missing proof-plan imports SectionReesBaseChangeEtale and SmoothSectionCentredCoordinates; Chart and conormal-theorem overlap with SmoothSectionCentredCoordinates (more general, not H4); def-pur-dnc-section-family declarations used outside the item stmt_deps; docstring proof condensed from 8 to 6 steps. Not recompiled per the human's 2026-10-21 instruction; worker compile evidence clean."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261021T111038-L-3961700",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
