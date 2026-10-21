@@ -23147,3 +23147,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:10 L: merged deliver/O3/lem-sfb-partial-kummer-boundary-unit-model (stage 2; reviewer PASS; parallel immutable checks)
 - 17:10 L: returned deliver/NW/lem-sfb-integral-general-lfp-hom-finiteness (reviewer RETURN: L: independent stage-2 immutable head c1fa1440e777: H2 / mechanical theorem-stmt_dep finding upheld. The delivery adds d)
 - 17:11 L: merged deliver/NL/lem-sfb-snc-universal-residual-charts (stage 2; reviewer PASS; parallel immutable checks)
+- 2026-10-21T17:11:55Z L: superseded stage-1 delivery Q07/lem-sp-cofinal-finite-reduction-constructibility at 3d7a8461d1a6cdfafc11e00e3b11d3d6092a7603; current completion retained; packet archived at refs/superseded/Q07/lem-sp-cofinal-finite-reduction-constructibility/3d7a8461d1a6cdfafc11e00e3b11d3d6092a7603; stale return retired.
