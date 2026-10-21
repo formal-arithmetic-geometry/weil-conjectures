@@ -19,64 +19,71 @@
  ],
  "proof": [
   {
-   "text": "Put $A=j^*\\Lambda_X$ and $B=\\Lambda_U$. By [sk-def-sfb-coefficient-morphisms], $\\alpha_j:A\\to B$ is an isomorphism of ring objects. By [def-sfb-modobj-restriction], $R=\\operatorname{Res}_{\\alpha_j}$ sends a $B$-action $\\gamma$ to $\\gamma(\\alpha_j\\otimes M)$ and leaves underlying objects and morphisms unchanged. Restriction along $\\alpha_j^{-1}$ is inverse to $R$: on a $B$-module with action $\\gamma$ the composite action is $\\gamma((\\alpha_j\\circ\\alpha_j^{-1})\\otimes M)=\\gamma$, while on an $A$-module with action $\\delta$ it is $\\delta((\\alpha_j^{-1}\\circ\\alpha_j)\\otimes M)=\\delta$. Both composites fix every morphism, and $R$ preserves zero morphisms because it leaves their underlying maps unchanged. In particular $R$ preserves kernels and cokernels: apply its inverse to a cone or cocone satisfying the zero-composite condition, use the original universal factorization, and apply $R$ back; these mutually inverse operations preserve the factorization equation and its uniqueness. Thus $R$ is exact.",
+   "text": "Put $A=j^*\\Lambda_X$, $B=\\Lambda_U$. The abelian-sheaf categories on $U,X$ are abelian by [lem-weil-pbc-site-sheaves-enough-injectives]; their tensor factors are additive and preserve colimits by [det-def-sfb-sheaf-tensor-closed]. Thus [lem-sfb-modobj-abelian] gives abelian categories of $A$-modules and $B$-modules on $U$ and $\\Lambda_X$-modules on $X$.",
+   "uses": [
+    "lem-weil-pbc-site-sheaves-enough-injectives",
+    "det-def-sfb-sheaf-tensor-closed",
+    "lem-sfb-modobj-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-module-lower-shriek/def-sfb-module-open-lower-shriek.proof.md",
+    "place": "Ambient hypotheses of the first sentence and the concluding additivity clause"
+   }
+  },
+  {
+   "text": "The coefficient map $\\alpha_j:A\\to B$ is a ring morphism by [sk-def-sfb-coefficient-morphisms]. Apply [lem-sfb-modobj-restriction-finite-exact] in the abelian-sheaf category on $U$: it has finite limits and colimits, and both $A\\otimes-$ and $B\\otimes-$ preserve finite colimits by step 1. Hence $R=\\operatorname{Res}_{\\alpha_j}$ preserves finite limits and colimits.",
    "uses": [
     "sk-def-sfb-coefficient-morphisms",
+    "lem-sfb-modobj-restriction-finite-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-module-lower-shriek/def-sfb-module-open-lower-shriek.proof.md",
+    "place": "First sentence: finite exactness of restriction, now a separate statement-only lemma"
+   }
+  },
+  {
+   "text": "Let $L=j^{\\mathrm{lin}}_!$ be [def-sfb-module-linear-open-lower-shriek] and define $j_!=L\\circ R$. Restriction fixes underlying objects and maps by [def-sfb-modobj-restriction], while the underlying functor of $L$ is $j^{\\Ab}_!$. Therefore $j_!M$ has underlying sheaf $j^{\\Ab}_!M$; equality on underlying maps makes the identification natural.",
+   "uses": [
+    "def-sfb-module-linear-open-lower-shriek",
     "def-sfb-modobj-restriction"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-module-lower-shriek/def-sfb-module-open-lower-shriek.proof.md",
-    "place": "Definition of the composite; proof, first sentence (restriction of scalars is exact), using the coefficient isomorphism of sk-def-sfb-coefficient-morphisms"
-   }
-  },
-  {
-   "text": "Let $L=j^{\\mathrm{lin}}_!$ of [def-sfb-module-linear-open-lower-shriek], whose domain is $\\Mod_A$ and codomain is $\\Mod_{\\Lambda_X}$. Consequently $j_!=L\\circ R$ is a well-typed functor $\\Mod_{\\Lambda_U}\\to\\Mod_{\\Lambda_X}$. For the forgetful functors $V_U,V_X$, restriction leaves underlying sheaves and maps unchanged ([def-sfb-modobj-restriction]) and $L$ has underlying sheaf functor $j^{\\Ab}_!$ ([def-sfb-module-linear-open-lower-shriek]). Hence $V_X(j_!M)=j^{\\Ab}_!(V_UM)$, naturally in $M$, with the corresponding equality on morphisms.",
-   "uses": [
-    "def-sfb-modobj-restriction",
-    "def-sfb-module-linear-open-lower-shriek"
-   ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-module-lower-shriek/def-sfb-module-open-lower-shriek.proof.md",
-    "place": "Displayed definition and underlying-sheaf clause; proof, first two sentences"
+    "place": "Displayed composite and underlying-sheaf clause; first two proof sentences"
    }
   },
   {
-   "text": "By [def-sfb-module-linear-open-lower-shriek], $L$ is exact. Given any short exact sequence of $\\Lambda_U$-module objects, step 1 gives a short exact sequence after $R$, and applying $L$ gives a short exact sequence after $L\\circ R=j_!$. This proves exactness of the composite without a further lemma about composition.",
+   "text": "The functor $L$ is exact by [def-sfb-module-linear-open-lower-shriek], so it preserves finite limits and colimits by [def-galois-exact-functor]. Since the three module categories are abelian, [lem-sfb-preserving-colimits-additive] applies to both $R$ and $L$. Hence $j_!(h+k)=L(Rh+Rk)=j_!h+j_!k$, proving additivity. A finite limit cone remains limiting first under $R$ and then under $L$; the same holds for finite colimit cocones. Thus $L\\circ R=j_!$ is exact by the cited definition.",
    "uses": [
-    "def-sfb-module-linear-open-lower-shriek"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-module-lower-shriek/def-sfb-module-open-lower-shriek.proof.md",
-    "place": "Exactness clause; proof, last sentence"
-   }
-  },
-  {
-   "text": "For module objects as in [sk-def-sfb-module-objects], the sum of two linear maps is linear: $(h+k)\\gamma_M=h\\gamma_M+k\\gamma_M=\\gamma_N(A\\otimes h)+\\gamma_N(A\\otimes k)=\\gamma_N(A\\otimes(h+k))$. Zero and finite direct sums carry the zero and componentwise actions, with the usual inclusions and projections linear; hence they are zero objects and biproducts. Restriction is additive because it is the identity on underlying morphisms ([def-sfb-modobj-restriction]). The functor $L$ is a left adjoint by [def-sfb-module-linear-open-lower-shriek]. The adjunction identifies maps out of $L(M\\oplus N)$ with pairs of maps out of $LM,LN$, and maps out of $L0$ with a singleton, so $L$ preserves binary coproducts and the zero object. Every zero morphism factors through the zero object, so $L$ also preserves zero morphisms. Under the coproduct comparison isomorphism it preserves the biproduct projections: they are the maps $[1,0]$ and $[0,1]$ determined by the injections. Therefore it preserves the diagonal and codiagonal as well, and the identity $h+k=\\nabla\\circ(h\\oplus k)\\circ\\Delta$ proves $L(h+k)=Lh+Lk$. It follows explicitly that $j_!(h+k)=L(Rh+Rk)=j_!h+j_!k$, and likewise $j_!(0)=0$. Thus $j_!$ is additive.",
-   "uses": [
-    "sk-def-sfb-module-objects",
-    "def-sfb-modobj-restriction",
-    "def-sfb-module-linear-open-lower-shriek"
+    "def-sfb-module-linear-open-lower-shriek",
+    "def-galois-exact-functor",
+    "lem-sfb-preserving-colimits-additive"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-module-lower-shriek/def-sfb-module-open-lower-shriek.proof.md",
-    "place": "Additivity clause; proof, last sentence (details of additivity from the stated linear adjunction)"
+    "place": "Last sentence: short assembly of additive and exact functors"
    }
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-site-sheaves-enough-injectives",
+  "det-def-sfb-sheaf-tensor-closed",
+  "lem-sfb-modobj-abelian",
   "sk-def-sfb-coefficient-morphisms",
-  "def-sfb-modobj-restriction",
+  "lem-sfb-modobj-restriction-finite-exact",
   "def-sfb-module-linear-open-lower-shriek",
-  "sk-def-sfb-module-objects"
+  "def-sfb-modobj-restriction",
+  "def-galois-exact-functor",
+  "lem-sfb-preserving-colimits-additive"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-module-lower-shriek/def-sfb-module-open-lower-shriek.proof.md",
-  "place": "Proof: restriction and linear extension by zero; restriction exactness expanded using the canonical coefficient isomorphism, additivity expanded using the linear adjunction"
+  "place": "Restriction-then-linear-extension route; finite exactness of restriction isolated in lem-sfb-modobj-restriction-finite-exact, additivity supplied by the existing finite-colimit lemma."
  },
  "mathlib_searches": [
   {
@@ -194,19 +201,33 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-21",
   "item": "def-sfb-module-open-lower-shriek",
   "worker": "stage1",
-  "summary": "Checked the current main-20261015 definition and proof, both source checkouts and two phrasings of Mathlib searches. Reused the existing coefficient-isomorphism, scalar-restriction and linear-extension nodes; expanded inverse restriction, exactness, the natural underlying-sheaf identity and additivity. No statement change and no new nodes. The imported node has no chapter/unit metadata, and no matching chapter/unit JSON record is present, so the current blueprint chapter and sketch _section.md were read directly without changing maintainer metadata.",
-  "blueprint": "The displayed composite and all three concluding clauses of def-sfb-module-open-lower-shriek; the first sentence of its proof is steps 1-2, the second is steps 2-3, and the last is steps 3-4. This realizes the Extension by zero bullet of sk-def-sfb-module-lower-shriek, preserving the restriction-then-linear-extension route."
+  "summary": "Second repair of the coarse-proof return, including the explicit requirement for a NEW statement-only node. Statement unchanged. Extracted finite exactness of internal scalar restriction into a new unsplit lemma valid without closedness, braiding, commutativity or coefficient invertibility; existing change-of-scalars/equivalence nodes require these stronger hypotheses. Kept ambient abelianness and finite-colimit-to-additivity as applications of existing nodes. Parent proof is a short four-step assembly. All prior search logs and the earlier repair report/proof are retained in the sandbox.",
+  "blueprint": "The displayed composite and all three concluding clauses of def-sfb-module-open-lower-shriek, realizing the Extension by zero bullet of sk-def-sfb-module-lower-shriek. Steps 1-2 discharge the first proof sentence, step 3 gives the displayed composite and underlying sheaf, step 4 gives the last proof sentence.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-sheaves-enough-injectives",
+    "why": "Only abelianness of abelian sheaves is used to check the generic module-category hypotheses; the unit does not reprove this ambient fact."
+   },
+   {
+    "node": "det-def-sfb-sheaf-tensor-closed",
+    "why": "Only its stated facts that the sheaf tensor factors are additive and preserve colimits are used, to check the hypotheses of lem-sfb-modobj-abelian and lem-sfb-modobj-restriction-finite-exact; the unit does not reprove this ambient structure."
+   },
+   {
+    "node": "lem-sfb-modobj-abelian",
+    "why": "Generic abelian structure on internal module categories is needed for finite-colimit-to-additivity; the unit constructs extension by zero, not that ambient structure."
+   }
+  ]
  },
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-Codex-Q28-b02b27d75",
-  "group": "Q28",
+  "reviewer": "NT-cc-Q17-f80c0b0c5",
+  "group": "Q17",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q28-b02b27d75 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, current blueprint sources and chapter/unit route. All four steps are valid; coefficient categories and functor directions agree. Checked edge cases, duplicate candidates and dependency acyclicity. No new nodes, repairs or accepted tool_uses. Detailed findings written to review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q17-f80c0b0c5 (reviewer sub-agent of L); spot-checked: Read in full: the item, the report, new node lem-sfb-modobj-restriction-finite-exact, all 10 cited statements, the main-20261015 blueprint statement and proof, unit sk-def-sfb-module-lower-shriek, the 2026-10-21 human re-split note (at least 1 new node) and the base 4-step proof (1009/543/318/1217 chars). The item statement and non-split fields are unchanged; the proof is 4 steps, 1551 chars. All four steps are correct. Step 1: Ab(site) is abelian, the tensor factors are additive and preserve colimits, so lem-sfb-modobj-abelian gives abelian Mod_A, Mod_B and Mod_{Λ_X}. Step 2: α_j: j^*Λ_X→Λ_U is a ring morphism, and the direction of Res matches the source and Mod.comap; the new lemma's hypotheses hold. Step 3 (underlying sheaf) is elementary. Step 4: L is exact, and lem-sfb-preserving-colimits-additive (Mathlib rightExactFunctor_le_additiveFunctor) applies to both R and L, so the composite is additive and exact. Re-split mapping: old step 1 (inverse restriction) became the new generalized lemma plus step 2; old step 2 became step 3; old step 3 became the end of step 4; old step 4 (adjunction/biproduct additivity) became the existing Mathlib leaf. Nothing was blurred, and the new node does not restate the item. The new node is true: forget creates limits, and creates the colimits that R⊗− and R⊗R⊗− preserve (project Mod/Limits.lean createsLimit/createsColimit); Res commutes with the forgetful functors. I tested empty diagrams, Set with ×, and Z→Z/2 in Ab. Its searches cover all three kinds and there is no Mathlib match. Duplicate check: sk-def-sfb-change-of-scalars clause 4 (Lean-closed, cited by the blueprint proof at this place) and det-prop-sfb-module-pullback-exact-lifted (F=id) state the abelian special case the item needs. The new node strictly generalizes them, and I accept it because the human note requires a new node. Fixes: (1) B3: monoid objects and their morphisms now cite sk-def-sfb-ring-object, added to stmt_deps (still acyclic); (2) B9: same_as was [], now [sk-def-sfb-change-of-scalars, det-prop-sfb-module-pullback-exact-lifted]; (3) the item's stale tool_uses wording for det-def-sfb-sheaf-tensor-closed, which mentioned the dropped equivalence lemma, is corrected. Accepted tool_uses: lem-weil-pbc-site-sheaves-enough-injectives, det-def-sfb-sheaf-tensor-closed, lem-sfb-modobj-abelian. Maintainer note: the new node's proof is a few lines from Monoidal/Mod/Limits.lean, and its use here is also covered by the closed change-of-scalars clause 4.; 2 file(s) fixed by the reviewer"
  },
  "chapter": "sec-six-functors-basics",
  "unit": "sk-def-sfb-module-lower-shriek",
@@ -374,5 +395,10 @@
   "date": "2026-10-18",
   "existing": true,
   "note": "Exact existing upstream definition, read from the current server source with scompile.py --source. For Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1} with [MonObj Λ] [IsCommMonObj Λ], schemes U X : Scheme.{u}, j : U ⟶ X and [IsOpenImmersion j], openImmersionLowerShriek is Mod.comap (condensedPullbackHom Λ j) followed by linearOpenImmersionLowerShriek Λ j, exactly restriction of scalars along α_j followed by linear extension by zero. The listed companion declarations give the underlying-sheaf equality and additivity/exactness (finite limits, finite colimits, and homology preservation). This matches every clause of the node statement; no duplicate module is needed."
- }
+ },
+ "tool_uses": [
+  "lem-weil-pbc-site-sheaves-enough-injectives",
+  "det-def-sfb-sheaf-tensor-closed",
+  "lem-sfb-modobj-abelian"
+ ]
 }

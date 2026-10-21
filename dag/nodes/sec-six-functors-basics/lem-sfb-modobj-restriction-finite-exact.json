@@ -1,0 +1,100 @@
+{
+ "id": "lem-sfb-modobj-restriction-finite-exact",
+ "kind": "statement",
+ "title": "Finite exactness of internal scalar restriction without closedness",
+ "statement": "Let $\\mathcal C$ be a monoidal category with finite limits and finite colimits ([def-galois-finite-limits-colimits]). Let $R,S$ be monoid objects of $\\mathcal C$ and $\\varphi:R\\to S$ a morphism of monoid objects ([sk-def-sfb-ring-object]). Suppose that $R\\otimes-$ and $S\\otimes-$ preserve finite colimits. Then the internal module categories $\\Mod_R(\\mathcal C)$ and $\\Mod_S(\\mathcal C)$ ([sk-def-sfb-module-objects]) have finite limits and finite colimits, and restriction of scalars\n$$\n\\operatorname{Res}_{\\varphi}:\\Mod_S(\\mathcal C)\\longrightarrow\\Mod_R(\\mathcal C)\n$$\n([def-sfb-modobj-restriction]) preserves finite limits and finite colimits, hence is exact ([def-galois-exact-functor]). No braiding, closed structure, commutativity of $R$ or $S$, or invertibility of $\\varphi$ is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-module-lower-shriek/def-sfb-module-open-lower-shriek.proof.md",
+  "place": "First sentence, exactness of scalar restriction: general finite universal-property lemma extracted by the agent. Supporting explicit internal-module (co)limit constructions: lean/WeilConjectures/CategoryTheory/Monoidal/Mod/Limits.lean:44-244 (createsLimit and createsColimit for the forgetful functors; these are not scalar-restriction preservation declarations)."
+ },
+ "stmt_deps": [
+  "def-galois-finite-limits-colimits",
+  "sk-def-sfb-ring-object",
+  "sk-def-sfb-module-objects",
+  "def-sfb-modobj-restriction",
+  "def-galois-exact-functor"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In an abelian monoidal category with additive tensor preserving finite colimits, restriction of scalars along any morphism of internal monoid objects preserves kernels and cokernels and finite biproducts",
+   "results": "8 hits; CategoryTheory.Mod_.scalarRestriction, CategoryTheory.Mod_.scalarRestriction_hom, CategoryTheory.Mod_.comap, CategoryTheory.monoidalLinearOfFaithful, CategoryTheory.Mod_.comap_obj_mod, CategoryTheory.MonoidalLinear.ofFaithful, CategoryTheory.IsGrothendieckAbelian.tensorObj, CategoryTheory.Mod_.scalarRestriction_smul",
+   "date": "2026-10-21",
+   "verdict": "no match: internal Mod.comap/scalarRestriction only defines restriction; ModuleCat restriction preservation concerns ordinary type-valued rings. No finite-limit/finite-colimit preservation theorem for arbitrary internal monoid morphisms in a finitely complete and finitely cocomplete monoidal category was found."
+  },
+  {
+   "tool": "grep",
+   "query": "comapComp|comapId|comap.*[Ll]imit|comap.*[Aa]dditive",
+   "results": "6 hits; Mathlib/CategoryTheory/GradedObject.lean, Mathlib/CategoryTheory/GradedObject.lean, Mathlib/CategoryTheory/GradedObject.lean, Mathlib/CategoryTheory/GradedObject.lean, Mathlib/CategoryTheory/Pi/Basic.lean, Mathlib/CategoryTheory/Pi/Basic.lean (searched CategoryTheory)",
+   "date": "2026-10-21",
+   "verdict": "no match: internal Mod.comap/scalarRestriction only defines restriction; ModuleCat restriction preservation concerns ordinary type-valued rings. No finite-limit/finite-colimit preservation theorem for arbitrary internal monoid morphisms in a finitely complete and finitely cocomplete monoidal category was found."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Mod.comap\"",
+   "results": "8 hits; CategoryTheory.AddMod.comap, CategoryTheory.Mod.comap, CategoryTheory.AddMod.comap_obj_X, CategoryTheory.Mod.comap_obj_X, CategoryTheory.AddMod.comap_obj_addMod, CategoryTheory.Mod.comap_obj_mod, CategoryTheory.AddMod.comap_map_hom, CategoryTheory.Mod.comap_map_hom",
+   "date": "2026-10-21",
+   "verdict": "no match: internal Mod.comap/scalarRestriction only defines restriction; ModuleCat restriction preservation concerns ordinary type-valued rings. No finite-limit/finite-colimit preservation theorem for arbitrary internal monoid morphisms in a finitely complete and finitely cocomplete monoidal category was found."
+  },
+  {
+   "tool": "grep",
+   "query": "comap|scalarRestriction",
+   "results": "5 hits; 351, 363, 387, 389, 390 (searched CategoryTheory/Monoidal/Mod.lean)",
+   "date": "2026-10-21",
+   "verdict": "no match: internal Mod.comap/scalarRestriction only defines restriction; ModuleCat restriction preservation concerns ordinary type-valued rings. No finite-limit/finite-colimit preservation theorem for arbitrary internal monoid morphisms in a finitely complete and finitely cocomplete monoidal category was found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars between internal module objects in an abelian monoidal category is exact if tensoring with either ring preserves finite colimits",
+   "results": "8 hits; ModuleCat.RestrictScalars.obj', ModuleCat.restrictScalars, CategoryTheory.Mod_.scalarRestriction, ModuleCat.preservesLimit_restrictScalars, ModuleCat.preservesColimit_restrictScalars, ModuleCat.instPreservesMonomorphismsRestrictScalars, PresheafOfModules.restrictScalarsObj, CategoryTheory.Mod_.scalarRestriction_hom",
+   "date": "2026-10-21",
+   "verdict": "no match: internal Mod.comap/scalarRestriction only defines restriction; ModuleCat restriction preservation concerns ordinary type-valued rings. No finite-limit/finite-colimit preservation theorem for arbitrary internal monoid morphisms in a finitely complete and finitely cocomplete monoidal category was found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The restriction functor for a homomorphism of monoid objects preserves finite limits and finite colimits without assuming the ambient monoidal category is closed or braided",
+   "results": "8 hits; CategoryTheory.Mod_.comap, CategoryTheory.Mon.forget_preservesLimitsOfShape, CategoryTheory.Mod_.comap_obj_mod, CategoryTheory.Functor.homMonoidHom, CategoryTheory.Functor.FullyFaithful.isMonHom_preimage, CategoryTheory.Mon.instMonoidalForget, CategoryTheory.Monoidal.MonFunctorCategoryEquivalence.functorObj, HomologicalComplex.Monoidal.inducingFunctorData",
+   "date": "2026-10-21",
+   "verdict": "no match: internal Mod.comap/scalarRestriction only defines restriction; ModuleCat restriction preservation concerns ordinary type-valued rings. No finite-limit/finite-colimit preservation theorem for arbitrary internal monoid morphisms in a finitely complete and finitely cocomplete monoidal category was found."
+  },
+  {
+   "tool": "grep",
+   "query": "PreservesFinite.*comap|PreservesLimits.*comap|PreservesColimits.*comap|preservesLimit.*restrictScalars|preservesColimit.*restrictScalars",
+   "results": "0 hits;  (searched CategoryTheory)",
+   "date": "2026-10-21",
+   "verdict": "no match: internal Mod.comap/scalarRestriction only defines restriction; ModuleCat restriction preservation concerns ordinary type-valued rings. No finite-limit/finite-colimit preservation theorem for arbitrary internal monoid morphisms in a finitely complete and finitely cocomplete monoidal category was found."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"scalarRestriction\"",
+   "results": "8 hits; CategoryTheory.AddMod.scalarRestriction, CategoryTheory.Mod.scalarRestriction, CategoryTheory.Mod_.scalarRestriction, CategoryTheory.AddMod.scalarRestriction_hom, CategoryTheory.Mod.scalarRestriction_hom, CategoryTheory.Mod_.scalarRestriction_hom, CategoryTheory.AddMod.scalarRestriction_vadd, CategoryTheory.Mod.scalarRestriction_smul",
+   "date": "2026-10-21",
+   "verdict": "no match: internal Mod.comap/scalarRestriction only defines restriction; ModuleCat restriction preservation concerns ordinary type-valued rings. No finite-limit/finite-colimit preservation theorem for arbitrary internal monoid morphisms in a finitely complete and finitely cocomplete monoidal category was found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "def-sfb-module-open-lower-shriek",
+  "date": "2026-10-21",
+  "group": "Q17"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-def-sfb-module-lower-shriek",
+ "blueprint": {
+  "from": {
+   "node": "def-sfb-module-open-lower-shriek",
+   "place": "Proof, first sentence: \"Restriction of scalars does not change the underlying sheaf and is exact\"; the finite universal-property argument behind exactness, independently of invertibility of the coefficient map.",
+   "via": []
+  },
+  "same_as": [
+   "sk-def-sfb-change-of-scalars",
+   "det-prop-sfb-module-pullback-exact-lifted"
+  ],
+  "is": null
+ }
+}
