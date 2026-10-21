@@ -22873,3 +22873,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:03 L: merged deliver/Q02/lem-sfb-prime-to-ell-linear-image-finite (reviewer PASS; first push; new nodes: 1)
 - 15:03 L: merged deliver/NX/lem-sfb-condensed-product-action-inflation (reviewer FIX; first push; new nodes: 1)
 - 15:06 L: returned deliver/NK/lem-per-adic-stratified-pullback-texact (reviewer RETURN: L: independent stage-2 immutable head 746b5293073b: H13/H2: the delivery replaces group NM's landed record for def-weil-)
+- 15:06 L: returned deliver/Q85/lem-weil-integral-twist-scalar-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-integral-twist-scalar-coherence: lem-weil-int)
