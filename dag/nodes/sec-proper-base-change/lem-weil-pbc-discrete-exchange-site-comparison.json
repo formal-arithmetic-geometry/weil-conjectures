@@ -23,9 +23,116 @@
   "def-weil-pbc-ambient-ringed-exchange",
   "sk-def-pe-classical-definition"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [sk-thm-pe-direct-image-comparison] to each of the four edges for its exact inverse-image comparison, and to f and f' for the direct-image comparisons b_f,b_f'. The latter applications have precisely the required qcqs hypotheses. The theorem allows any discrete commutative ring, and its canonical direct-image transformation is the specified right-derived etale/pro-etale base-change transformation beta of [lem-pe-direct-image-mate-compatibility]. The second identity of that lemma, for u=f and u=f', says that the transpose of beta under p_u dashv s_u is A_U(epsilon^e_u) o a_{u,r_u}^{-1}; since the adjunction correspondence of [def-weil-pbc-adjunction-mate] is a bijection, beta equals the counit-normalized b_u of the statement. Thus all a_u and these two b_u are natural isomorphisms on the indicated bounded-below categories. In particular the displayed composites S_L and T_L exist and are isomorphisms. Put c_u=a_u^{-1}, and write theta^e:l_{f'}l_g -> l_{g'}l_f and theta^p:p_{f'}p_g -> p_{g'}p_f for the canonical square comparisons. All compositions below are written in the order v o u, meaning first u then v.",
+   "uses": [
+    "sk-thm-pe-direct-image-comparison",
+    "lem-pe-direct-image-mate-compatibility",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-direct-image-comparison/sk-thm-pe-direct-image-comparison.proof.md",
+    "place": "Opening paragraph: inverse-image comparison and the counit-normalized map; qcqs comparison theorem"
+   }
+  },
+  {
+   "text": "The composition coherence of [lem-pe-inverse-image-comparison-coherence], with c there equal to our a^{-1}, gives, for every M in D^+(Y_et,Lambda),\n theta^p_{A_Y M} o p_{f'}(a_{g,M}) o a_{f',l_g M}\n = p_{g'}(a_{f,M}) o a_{g',l_f M} o A_{X'}(theta^e_M).  (C)\nIndeed, apply its composition equation once to X' -> Y' -> Y and once to X' -> X -> Y. Both composites have the same comparison a_{fg'}=a_{gf'} since fg'=gf'; cancel it and replace the two composition comparisons by their square composite. These are exactly theta^e and theta^p in [sk-def-exchange] and [def-weil-pbc-ambient-ringed-exchange], since every coefficient identification is the canonical constant-ring one. The sheaf equations hold termwise on complexes: exactness makes all the functors preserve quasi-isomorphisms by [lem-weil-pbc-exact-functor-derived-factorization]. Their isomorphisms and equations descend uniquely by clauses (2)-(3) of [lem-weil-pbc-localization-universal-property], and restrict to D^+. This proves (C) for the specified derived square comparisons, rather than for separately chosen isomorphisms.",
+   "uses": [
+    "lem-pe-inverse-image-comparison-coherence",
+    "sk-def-exchange",
+    "def-weil-pbc-ambient-ringed-exchange",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-direct-image-comparison/lem-weil-pbc-comparison-pullback.proof.md",
+    "place": "Final paragraph: identity and composition coherence and exact passage to complexes"
+   }
+  },
+  {
+   "text": "Use [lem-pe-direct-image-mate-compatibility] with u=f and u=f'. Its c is our c_u=a_u^{-1}, its beta is b_u by the normalization fixed in Step 1, and its two direct images are the ordinary derived module direct images. Its counit identity reads\n epsilon^p_{u,A_U N} o p_u(b_{u,N})\n = A_U(epsilon^e_{u,N}) o c_{u,r_u N}.  (E)\nHere epsilon^e_u:l_ur_u -> id and epsilon^p_u:p_us_u -> id are the specified counits, and N is any object of D^+(U_et,Lambda). This identity needs no further coefficient or geometric hypothesis. We will use it at N=L for f and at N=l_{g'}L for f'.",
+   "uses": [
+    "lem-pe-direct-image-mate-compatibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-direct-image-comparison/sk-thm-pe-direct-image-comparison.proof.md",
+    "place": "Opening paragraph: compatibility with the adjunction counits"
+   }
+  },
+  {
+   "text": "Let F_L=T_L o A_{Y'}(e_L). Under p_{f'} dashv s_{f'} its transpose is epsilon^p_{f',p_{g'}A_X L} o p_{f'}(F_L). Naturality of this counit and the definition of T_L first give\n a_{g',L} o epsilon^p_{f',A_{X'}l_{g'}L} o p_{f'}(b_{f',l_{g'}L}) o p_{f'}A_{Y'}(e_L).\nBy (E) for f' this equals\n a_{g',L} o A_{X'}(epsilon^e_{f',l_{g'}L}) o c_{f',r_{f'}l_{g'}L} o p_{f'}A_{Y'}(e_L).\nNaturality of c_{f'} moves e_L to its left. The transpose formula defining e in [sk-def-exchange] says epsilon^e_{f',l_{g'}L} o l_{f'}(e_L)=l_{g'}(epsilon^e_{f,L}) o theta^e_{r_f L}. Consequently the transpose is exactly\n D_L := a_{g',L} o A_{X'}(l_{g'}(epsilon^e_{f,L})) o A_{X'}(theta^e_{r_f L}) o c_{f',l_g r_f L}.\nThis is a map p_{f'}A_{Y'}l_g r_f L -> p_{g'}A_X L. The adjunction transpose convention is [def-weil-pbc-adjunction-mate].",
+   "uses": [
+    "sk-def-exchange",
+    "lem-pe-direct-image-mate-compatibility",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Remark 07A7 (remark-base-change): exchange as the transpose of pullback of the counit"
+   }
+  },
+  {
+   "text": "Let G_L=e^p_{A_X L} o S_L. By [def-weil-pbc-ambient-ringed-exchange], its transpose under p_{f'} dashv s_{f'} is\n p_{g'}(epsilon^p_{f,A_X L}) o theta^p_{s_f A_X L} o p_{f'}p_g(b_{f,L}) o p_{f'}(a_{g,r_f L}).\nNaturality of theta^p moves b_f to the left, and (E) for f changes the first two resulting factors to p_{g'}(A_X(epsilon^e_{f,L}) o c_{f,r_f L}). Thus this becomes\n p_{g'}A_X(epsilon^e_{f,L}) o p_{g'}(c_{f,r_f L}) o theta^p_{A_Y r_f L} o p_{f'}(a_{g,r_f L}).\nSet M=r_f L in (C), compose on the left with p_{g'}(c_{f,M}) and on the right with c_{f',l_g M}, and cancel a_f with c_f and a_{f'} with c_{f'}. The last three factors then equal a_{g',l_f r_f L} o A_{X'}(theta^e_{r_f L}) o c_{f',l_g r_f L}. Finally naturality of a_{g'} for epsilon^e_{f,L} gives precisely D_L from Step 4. This is the explicit equality of the two transposes.",
+   "uses": [
+    "def-weil-pbc-ambient-ringed-exchange",
+    "lem-pe-direct-image-mate-compatibility",
+    "lem-pe-inverse-image-comparison-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Remark 07A7 (remark-base-change); the displayed transpose computation supplies the verification behind Remarks 0E46 and 0E47"
+   }
+  },
+  {
+   "text": "The adjunction correspondence of [def-weil-pbc-adjunction-mate] is injective. Since Steps 4-5 give the same transpose D_L for F_L and G_L under the same p_{f'} dashv s_{f'}, they are equal. This is exactly T_L o A_{Y'}(e_L)=e^p_{A_X L} o S_L. The comparisons of [sk-thm-pe-direct-image-comparison] are natural, and whiskering and composing natural transformations preserves naturality: applying naturality of a_g and b_f successively proves it for S; applying naturality of b_{f'} and a_{g'} proves it for T. All of these equalities are in the ordinary constant-ring module derived categories; no completed or internal condensed-coefficient exchange has been substituted.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "sk-thm-pe-direct-image-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/sk-thm-properbasechange.proof.md",
+    "place": "Pro-etale site paragraph: comparisons identify the canonical exchange map"
+   }
+  },
+  {
+   "text": "For any scheme T and M in D^+(T_et,Lambda), exactness of A_T and [lem-weil-pbc-exact-functor-bounded-below] give H^q(A_T M)=nu_T^*H^q(M) and preserve a lower cohomological bound. Each such sheaf is classical by the module essential-image assertion of [sk-thm-pe-classical-sheaves]; hence A_T M is a bounded-below classical complex. Now l_g r_f L and r_{f'}l_{g'}L lie in D^+(Y'_et,Lambda) by the domains of [sk-def-exchange]. The isomorphisms S_L and T_L from [sk-thm-pe-direct-image-comparison] identify the two claimed pro-etale endpoints with A_{Y'} of these two etale complexes. Classicality and boundedness pass across an isomorphism, since its cohomology maps are isomorphisms and the continuity maps defining classicality are natural. This proves both endpoint claims without requiring either exchange map to be invertible.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-bounded-below",
+    "sk-thm-pe-classical-sheaves",
+    "sk-def-exchange",
+    "sk-thm-pe-direct-image-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/sk-thm-properbasechange.proof.md",
+    "place": "Pro-etale site paragraph: comparison of the two endpoints; classicality via the comparison essential image"
+   }
+  }
+ ],
+ "proof_deps": [
+  "sk-thm-pe-direct-image-comparison",
+  "lem-pe-inverse-image-comparison-coherence",
+  "sk-def-exchange",
+  "def-weil-pbc-ambient-ringed-exchange",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-pe-direct-image-mate-compatibility",
+  "def-weil-pbc-adjunction-mate",
+  "lem-weil-pbc-exact-functor-bounded-below",
+  "sk-thm-pe-classical-sheaves"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/sk-thm-properbasechange.proof.md",
+  "place": "Pro-etale site paragraph; explicit coefficient-independent transpose calculation using Stacks Tag 07A7 and the existing comparison/coherence statements"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -68,10 +175,45 @@
    "results": "8 hits: CategoryTheory.Functor.toSheafify_pullbackSheafificationCompatibility, CategoryTheory.sheafComposeNatIso, CategoryTheory.sheafComposeNatTrans_fac, CategoryTheory.Functor.sheafPullbackConstruction.sheafPullbackIso, CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous, CategoryTheory.instIsIsoFunctorOppositeSheafSheafComposeNatTrans, CategoryTheory.Functor.sheafAdjunctionCocontinuous_homEquiv_apply_val, SheafOfModules.pullbackComp. Mathlib has generic mates identities and proetale precoverage stability; these do not give the scheme-site comparison isomorphisms or identify the two derived exchanges for arbitrary coefficients.",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical etale proetale comparison identifies derived base change exchange for an arbitrary discrete commutative ring",
+   "results": "8 hits: RingHom.Etale.isStableUnderBaseChange, RingHom.Etale.respectsIso, Algebra.Etale.comp, StandardEtalePair.homEquiv_apply_coe, Algebra.Etale.of_equiv, KaehlerDifferential.isBaseChange_of_formallyEtale, StandardEtalePresentation.mapEquiv, StandardEtalePair.homEquiv. The hits concern etale algebras, proetale precoverage stability, or abstract adjunction/module composition; none states the full site-comparison exchange assertion.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"proetale\", \"baseChange\"",
+   "results": "1 hits: AlgebraicGeometry.Scheme.instIsStableUnderBaseChangeProetalePrecoverage. The hits concern etale algebras, proetale precoverage stability, or abstract adjunction/module composition; none states the full site-comparison exchange assertion.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(pro[Ee]tale|proetale).*(exchange|baseChange)|(exchange|baseChange).*(pro[Ee]tale|proetale)",
+   "results": "0 hits: none. The hits concern etale algebras, proetale precoverage stability, or abstract adjunction/module composition; none states the full site-comparison exchange assertion.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The etale to proetale inverse image intertwines the canonical base change mates",
+   "results": "8 hits: LinearEquiv.baseChange_inv, Algebra.Etale.baseChange, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, KaehlerDifferential.isBaseChange_of_formallyEtale, RingHom.Etale.isStableUnderBaseChange, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale. The hits concern etale algebras, proetale precoverage stability, or abstract adjunction/module composition; none states the full site-comparison exchange assertion.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A comparison of inverse image functors compatible with composition and its adjoint mate intertwine the two Beck Chevalley transformations",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit, PresheafOfModules.pullbackComp, CategoryTheory.Adjunction.leftAdjointCompNatTrans₀₁₃_eq_conjugateEquiv_symm, CategoryTheory.Adjunction.leftAdjointCompNatTrans₀₂₃_eq_conjugateEquiv_symm, CategoryTheory.Adjunction.leftAdjointCompIso_inv_app, CategoryTheory.sheafComposeNatTrans_fac, CategoryTheory.Adjunction.conjugateEquiv_leftAdjointCompIso_inv. The hits concern etale algebras, proetale precoverage stability, or abstract adjunction/module composition; none states the full site-comparison exchange assertion.",
+   "date": "2026-10-21",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "sk-thm-properbasechange",
@@ -88,5 +230,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-weil-pbc-discrete-exchange-site-comparison",
+  "worker": "stage1",
+  "summary": "Q12: retained the arbitrary-discrete-ring statement, gave seven proof steps with an explicit equality of adjoint transposes, and proved bounded-below classicality of both endpoints using existing exact comparison and classical-module-image statements. No new nodes. Checked node statements, constant coefficient identifications, qcqs hypotheses, units/counits, and identity/empty/zero-coefficient cases.",
+  "blueprint": "Realizes the pro-etale-site paragraph of main-20261015 sk-thm-properbasechange.proof.md: comparison of both endpoints and identification of the canonical unit--square--counit exchange mate.",
+  "tool_uses": [
+   {
+    "node": "sk-thm-pe-direct-image-comparison",
+    "why": "The blueprint pro-etale paragraph explicitly calls this arbitrary-discrete-coefficient qcqs comparison; it supplies the endpoint isomorphisms."
+   },
+   {
+    "node": "lem-pe-inverse-image-comparison-coherence",
+    "why": "Generic composition coherence of the canonical site inverse-image comparisons, needed to identify the specified square comparisons; no local-unit statement gives its formula."
+   },
+   {
+    "node": "lem-pe-direct-image-mate-compatibility",
+    "why": "Generic counit identity for the canonical comparison mate, used with f and f′ to compute both transposes; this refines the comparison theorem already called by the route."
+   },
+   {
+    "node": "sk-thm-pe-classical-sheaves",
+    "why": "Generic essential-image theorem for exact nu-star on module sheaves; used only to infer classicality of the cohomology of the compared endpoints."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-bounded-below",
+    "why": "Generic exact-functor cohomology and lower-bound comparison for nu-star; used to deduce classicality degree by degree."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sk-thm-pe-direct-image-comparison",
+  "lem-pe-inverse-image-comparison-coherence",
+  "lem-pe-direct-image-mate-compatibility",
+  "sk-thm-pe-classical-sheaves",
+  "lem-weil-pbc-exact-functor-bounded-below"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q12-8688c7c43",
+  "group": "Q12",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-8688c7c43 (reviewer sub-agent of L); spot-checked: Read the item in full: an unchanged statement (it is identical to the live unsplit Q70 node), seven steps and no new nodes. There is no repair note and no cycle (DFS over 1119 nodes). Source checks: the 'Pro-étale site' paragraph of main-20261015 sk-thm-properbasechange.proof.md (comparisons respect units and counits, so the result is the canonical exchange), and the opening of sk-thm-pe-direct-image-comparison.proof.md (its map is the adjoint of comparison followed by the étale counit, i.e. the counit-normalized b_u). I also read the last paragraph of lem-weil-pbc-comparison-pullback.proof.md. No SGA is used. I redid the algebra: (C) follows from the two composition equations of lem-pe-inverse-image-comparison-coherence once c_{gf'}=c_{fg'} is eliminated, and the θ orientations agree with sk-def-exchange and with the ambient θ_□. (E) is exactly the second identity of lem-pe-direct-image-mate-compatibility. The Step 4 and Step 5 transposes both reduce to D_L, and I checked every naturality move and the typing. Step 6 is injectivity of the mate bijection. Step 7 (classicality) holds via exact-functor-bounded-below and the essential-image clause of sk-thm-pe-classical-sheaves. Coefficients are ordinary constant Λ for any discrete Λ, and qcqs is required only on f and f'. Small cases checked: f=id, g=id, Λ=0, Λ=Z, L=0. lem-weil-pbc-transport-identifies-exchange is the same equation for finite Λ only; the item generalizes it, as sk-thm-properbasechange (any commutative Λ) needs, so this is advisory and not a duplicate. Accepted tool_uses: the two lem-pe-* lemmas from the unit of the blueprint-cited theorem, plus the generic sk-thm-pe-classical-sheaves and exact-functor-bounded-below. One C4 fault, which I fixed: Step 1 credited the comparison theorem's statement with identifying its map as the counit-normalized b_u. It now derives β=b_u from lem-pe-direct-image-mate-compatibility (second identity) and the bijection of def-weil-pbc-adjunction-mate, and cites both. The corrected item is in fixes/dag/nodes/sec-proper-base-change/; only Step 1 changed.; 1 file(s) fixed by the reviewer"
  }
 }
