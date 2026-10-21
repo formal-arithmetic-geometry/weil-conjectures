@@ -21323,3 +21323,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:45 L: returned deliver/NB/lem-weil-pbc-reflected-adjunction-coefficient-squares (reviewer RETURN: L: independent stage-2 immutable head 7b9a2fbeed58: H2/theorem-stmt_dep: the delivery adds theorem node lem-sbc-reflecto)
 - 08:45 L: returned deliver/Q22/lem-pe-endomorphism-fibre-coordinate-calculus (reviewer RETURN: L: independent stage-2 immutable head 876ef0d871f2: H2: the item adds theorem node lem-weil-signed-mapping-cocone-shift )
 - 08:45 L: returned deliver/Q30/lem-pur-etale-direct-image-scalar-composition (reviewer RETURN: L: independent stage-2 immutable head 8a9c2e521187: H2: the delivery adds theorem node lem-pur-etale-scalar-mate-project)
+- 08:45 L: returned deliver/Q40/lem-sf-etale-derived-pullback-stalk (reviewer RETURN: L: independent stage-2 immutable head 9182a5b22d8b: H2: delivery adds theorem node lem-sfb-etale-derived-tensor-stalk to)
