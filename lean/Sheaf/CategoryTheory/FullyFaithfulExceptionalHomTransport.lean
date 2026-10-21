@@ -107,6 +107,69 @@ theorem fullyFaithful_transport
         homMap CZ adjT adjE b (Ge.obj N) (CT.obj N) q ≫ inv (originMap CZ Ge adjT N) =
             𝟙 (CZ.obj (Ge.obj N)) ↔
           q = b.inv.app (Ge.obj N) ≫ CT.map (adjE.counit.app N))) := by
-  sorry
+  have hbij (H : Xe) (L : Tp) :
+      Function.Bijective (homMap CZ adjT adjE b H L) := by
+    have hb : Function.Bijective
+        (fun q : Fp.obj (CZ.obj H) ⟶ L ↦ b.hom.app H ≫ q) := by
+      constructor
+      · intro q q' h
+        simpa using congrArg (fun f ↦ b.inv.app H ≫ f) h
+      · intro w
+        exact ⟨b.inv.app H ≫ w, by simp⟩
+    exact (Function.Bijective.comp ⟨CZ.map_injective, CZ.map_surjective⟩
+      ((adjE.homEquiv H (R.obj L)).bijective.comp
+        ((adjT.homEquiv (Fe.obj H) L).bijective.comp hb)))
+  have hfactor (N : Te) (H : Xe) (q : Fp.obj (CZ.obj H) ⟶ CT.obj N) :
+      homMap CZ adjT adjE b H (CT.obj N) q =
+        CZ.map (adjE.homEquiv H N (CT.preimage (b.hom.app H ≫ q))) ≫
+          originMap CZ Ge adjT N := by
+    unfold homMap originMap
+    rw [← CZ.map_comp, ← adjE.homEquiv_naturality_right]
+    congr 2
+    calc
+      adjT.homEquiv (Fe.obj H) (CT.obj N) (b.hom.app H ≫ q) =
+          adjT.homEquiv (Fe.obj H) (CT.obj N)
+            (CT.map (CT.preimage (b.hom.app H ≫ q))) := by rw [CT.map_preimage]
+      _ = CT.preimage (b.hom.app H ≫ q) ≫ adjT.unit.app N := by
+        rw [Adjunction.homEquiv_unit, ← adjT.unit_naturality]
+  refine ⟨hbij, ?_, ?_, ?_⟩
+  · intro H' H L a q
+    have hb := b.hom.naturality a
+    dsimp only [Functor.comp_map] at hb
+    unfold homMap
+    rw [← Category.assoc, ← hb, Category.assoc,
+      adjT.homEquiv_naturality_left, adjE.homEquiv_naturality_left, CZ.map_comp]
+  · intro H L L' q s
+    simp only [homMap, ← Category.assoc, adjT.homEquiv_naturality_right,
+      adjE.homEquiv_naturality_right, CZ.map_comp, Functor.comp_map]
+  · intro N
+    have ho : IsIso (originMap CZ Ge adjT N) := by
+      dsimp only [originMap]
+      infer_instance
+    have hc : homMap CZ adjT adjE b (Ge.obj N) (CT.obj N)
+        (b.inv.app (Ge.obj N) ≫ CT.map (adjE.counit.app N)) =
+          originMap CZ Ge adjT N := by
+      rw [hfactor]
+      simp only [← Category.assoc, Iso.hom_inv_id_app, Functor.comp_obj, Category.id_comp,
+        CT.preimage_map]
+      have hε : adjE.homEquiv (Ge.obj N) N (adjE.counit.app N) = 𝟙 (Ge.obj N) := by
+        rw [← adjE.homEquiv_symm_id N, Equiv.apply_symm_apply]
+      rw [hε, CZ.map_id, Category.id_comp]
+    have hpre (q : Fp.obj (CZ.obj (Ge.obj N)) ⟶ CT.obj N) :
+        homMap CZ adjT adjE b (Ge.obj N) (CT.obj N) q = originMap CZ Ge adjT N ↔
+          q = b.inv.app (Ge.obj N) ≫ CT.map (adjE.counit.app N) := by
+      rw [← hc, (hbij (Ge.obj N) (CT.obj N)).injective.eq_iff]
+    refine ⟨ho, hc, ?_, hpre, ?_⟩
+    · intro H q
+      rw [hfactor]
+      simp
+    · intro q
+      rw [← hpre]
+      constructor
+      · intro h
+        simpa using congrArg (fun f ↦ f ≫ originMap CZ Ge adjT N) h
+      · intro h
+        rw [h]
+        simp
 
 end CategoryTheory.ExceptionalHomTransport
