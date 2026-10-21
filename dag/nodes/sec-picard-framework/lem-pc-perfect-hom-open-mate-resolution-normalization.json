@@ -129,9 +129,9 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-semicon",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.PerfectHomOpenMateResolutionNormalization",
-  "file": "lean/Sheaf/AlgebraicGeometry/PerfectHomOpenMateResolutionNormalization.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.PerfectHomOpenMateResolutionNormalization",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/PerfectHomOpenMateResolutionNormalization.lean",
   "declaration": "AlgebraicGeometry.perfectHomOpenComparison_counit_resolution",
   "declarations": [
    "AlgebraicGeometry.perfectHomOpenDerivedComparison",
@@ -140,8 +140,9 @@
   ],
   "statement": "theorem perfectHomOpenComparison_counit_resolution\n    {S Y T : Scheme.{u}} (s : Y ⟶ S) (B : Y.Opens) (r : T ⟶ S)\n    (I : CochainComplex\n      (SheafOfModules.{u} (moduleRings (pullback s r).toRingedSpace)) ℤ)\n    [I.IsKInjective] :\n    let a := canonicalPullbackAdjunction B.ι\n    let ap := canonicalPullbackAdjunction (pullback.fst s r)\n    let ap' := canonicalPullbackAdjunction (pullback.fst (B.ι ≫ s) r)\n    let b := perfectHomOpenMap s B r\n    let σ : schemeMVDerivedRestriction Y B ≅ derivedPullback B.ι :=\n      (conjugateIsoEquiv a (schemeMVAdjunction Y B)).symm (Iso.refl _)\n    let he : b ≫ pullback.fst s r = pullback.fst (B.ι ≫ s) r ≫ B.ι := by\n      simp [b, perfectHomOpenMap, pullback.map]\n    let κ := perfectHomComposition b (pullback.fst s r) ≪≫\n      eqToIso (congrArg (fun f ↦ derivedPullback f) he) ≪≫\n      (perfectHomComposition (pullback.fst (B.ι ≫ s) r) B.ι).symm ≪≫\n      Functor.isoWhiskerRight σ.symm (derivedPullback (pullback.fst (B.ι ≫ s) r))\n    (derivedPullback (pullback.fst (B.ι ≫ s) r)).map\n        ((perfectHomOpenDerivedComparison s B r).hom.app\n          (DerivedCategory.Q.obj I)) ≫\n        ap'.counit.app ((derivedPullback b).obj (DerivedCategory.Q.obj I)) =\n      κ.inv.app ((schemeDerivedDirectImage (pullback.fst s r)).obj\n        (DerivedCategory.Q.obj I)) ≫\n        (derivedPullback b).map (ap.counit.app (DerivedCategory.Q.obj I))",
   "branch": "sheaf-dag",
-  "by": "F3",
-  "date": "2026-10-14"
+  "by": "S3",
+  "date": "2026-10-22",
+  "note": "S3 rework restoration: the Sheaf path publicly re-exports the complete adopted source proof and the two explicit comparison constructions. The original declaration names, signatures, statement, proof plan and all dependencies are retained. The source constructions are definitionally equal to their archived forms after synthesizing the current additive instance."
  },
  "reviewed": {
   "date": "2026-10-14",
@@ -154,14 +155,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-14",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "X-1a815",
-  "group": "H2",
+  "reviewer": "C-a3139",
+  "group": "S3",
   "result": "pass",
-  "landing": "20261014T052439-L-1913452",
-  "kind": "interface",
-  "note": "independent Codex review: Packet statements and DAG nodes matched delivered Lean declarations; all delivered modules compiled cleanly and mechanical findings were empty."
+  "landing": "20261021T225218-L-3797398",
+  "kind": "proof",
+  "note": "independent cc review: node lem-pc-perfect-hom-open-mate-resolution-normalization lean record (statement, 3 declarations) vs live WeilConjectures/AlgebraicGeometry/PerfectHomOpenMateResolutionNormalization.lean, byte-identical; Sheaf wrapper vs AffineGlobalHomBaseChangeMap precedent; axioms probe clean"
  },
  "lean_audit": {}
 }
