@@ -1,0 +1,165 @@
+{
+ "id": "lem-ctf-finite-comparison-ordinary-fully-faithful",
+ "kind": "statement",
+ "title": "Full faithfulness of finite-coefficient comparison in the ordinary presentation",
+ "statement": "Let k be a finite or algebraically closed field, let l be a prime invertible in k, and let A be a finite discrete commutative ring annihilated by some power of l. For every quasi-compact scheme locally of finite type over k, comparison inverse image on the ordinary unbounded derived categories of A-module sheaves is fully faithful. These are the fixed scalar presentations of def-weil-pbc-proetale-modules and def-weil-pbc-site-comparison-morphism.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-comparison/sk-prop-ctf-finite-comparison-localizing.proof.md",
+  "place": "opening paragraph: finite-Tor generators correspond under comparison"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-site-comparison-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Apply unboundedSiteComparison to the recorded ringed-coefficient derived comparison. The exact realization from ordinary A-module sheaves is an equivalence. Its derived functor is an equivalence, hence faithful. The exact-functor composition isomorphism factors the ringed derived comparison as ordinary comparison followed by derived realization. Cancel this faithful factor to obtain fullness, and cancel the composite to obtain faithfulness. This includes the zero ring and empty scheme.",
+   "uses": [
+    "lem-sfb-unbounded-site-comparison",
+    "def-weil-pbc-proetale-modules"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-unbounded-site-comparison",
+  "def-weil-pbc-proetale-modules"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-comparison/sk-prop-ctf-finite-comparison-localizing.proof.md",
+  "place": "unbounded comparison step, with the specified coefficient realization cancelled"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "isEquivalence_mapDerivedCategory|of_comp_faithful_iso|of_comp_iso",
+   "results": {
+    "hits": [
+     "Mathlib/Geometry/Manifold/ContMDiff/Basic.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf.lean",
+     "Mathlib/Geometry/Manifold/Instances/UnitsOfNormedAlgebra.lean",
+     "Mathlib/Geometry/Manifold/Instances/UnitsOfNormedAlgebra.lean",
+     "Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean",
+     "Mathlib/CategoryTheory/FiberedCategory/Cartesian.lean",
+     "Mathlib/CategoryTheory/ObjectProperty/FullSubcategory.lean",
+     "Mathlib/CategoryTheory/ObjectProperty/FullSubcategory.lean"
+    ],
+    "n_hits": 12,
+    "note": ""
+   },
+   "date": "2026-10-19",
+   "verdict": "Use the generic exact derived functor and fully faithful cancellation APIs; the geometric comparison is the existing project theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Full, CategoryTheory.Functor.Faithful",
+   "results": {
+    "hits": [
+     "CategoryTheory.Functor.FullyFaithful.ofFullyFaithful",
+     "CategoryTheory.Functor.Full.of_comp_faithful",
+     "CategoryTheory.Functor.preimageIso",
+     "CategoryTheory.Functor.preimageIso_mapIso",
+     "CategoryTheory.Functor.preimage_id",
+     "CategoryTheory.Functor.preimage_map",
+     "CategoryTheory.Functor.Full.of_comp_faithful_iso",
+     "CategoryTheory.isIso_of_fully_faithful"
+    ],
+    "n_hits": 12,
+    "note": ""
+   },
+   "date": "2026-10-19",
+   "verdict": "Use the generic exact derived functor and fully faithful cancellation APIs; the geometric comparison is the existing project theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact equivalence of abelian categories induces an equivalence on derived categories; cancel this equivalence to deduce full faithfulness of an exact functor",
+   "results": {
+    "hits": [
+     "CategoryTheory.Abelian.Ext.mapExactFunctor_hom",
+     "CategoryTheory.Functor.exact_tfae",
+     "CategoryTheory.Functor.mapDerivedCategoryFactorsh",
+     "CategoryTheory.Functor.mapDerivedCategoryFactors",
+     "CategoryTheory.Abelian.Ext.mapExactFunctor",
+     "CategoryTheory.Functor.mapDerivedCategory",
+     "CategoryTheory.Functor.map_distinguished_exact",
+     "DerivedCategory.instFullSingleFunctor"
+    ],
+    "n_hits": 8,
+    "note": ""
+   },
+   "date": "2026-10-19",
+   "verdict": "Use the generic exact derived functor and fully faithful cancellation APIs; the geometric comparison is the existing project theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact equivalence of abelian categories induces an equivalence of derived categories and a faithful equivalence may be cancelled from a fully faithful composite",
+   "results": {
+    "hits": [
+     "CategoryTheory.Functor.mapDerivedCategory",
+     "HasDerivedCategory.standard",
+     "CategoryTheory.Functor.fullyFaithfulCancelRight",
+     "HasDerivedCategory",
+     "DerivedCategory.instFaithfulSingleFunctor",
+     "CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory",
+     "DerivedCategory.instCategory",
+     "CategoryTheory.Abelian.Ext.mapExactFunctor_hom"
+    ],
+    "n_hits": 8,
+    "note": ""
+   },
+   "date": "2026-10-19",
+   "verdict": "The exact derived functor and cancellation APIs supply the categorical transport. The geometric full-faithfulness theorem remains the existing project comparison; Mathlib has no replacement for it."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteComparisonLocalizing",
+  "date": "2026-10-21",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-ctf-finite-comparison-localizing",
+   "place": "unbounded full faithfulness in proof step 1",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-ctf-finite-comparison",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteComparisonFaithful",
+  "file": "lean/Sheaf/Paper/FiniteComparisonFaithful.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.finiteComparisonOrdinary_fullyFaithful",
+  "statement": "theorem finiteComparisonOrdinary_fullyFaithful\n    (A : Type (u + 1)) [CommRing A] [TopologicalSpace A]\n    [DiscreteTopology A] [Finite A]\n    (k : Type u) [Field k] (hbase : Finite k ∨ IsAlgClosed k)\n    {ℓ : ℕ} [Fact ℓ.Prime] (hℓ : IsUnit (algebraMap ℤ k (ℓ : ℤ)))\n    (hA : ∃ n : ℕ, (ℓ : A) ^ n = 0)\n    (X : Scheme.{u}) [X.Over (Spec (.of k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] :\n    Nonempty ((comparisonUpperStar\n      (ModuleCat.{u + 1} A) X).mapDerivedCategory).FullyFaithful",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261021T012352-L-2180691",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261021T012352-L-2180691",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

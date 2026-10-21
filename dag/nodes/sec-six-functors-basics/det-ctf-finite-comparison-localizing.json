@@ -38,9 +38,8 @@
    "text": "First identify the coefficient conventions. By [lem-weil-pbc-finite-discrete-condensed-ring-constant] the continuous-function condensed ring of finite discrete $A$ is its sheafified constant ring on profinite sets. By [lem-weil-pbc-finite-discrete-scheme-ring-constant] its pullback to $X$ is the constant $A$-ring sheaf. Transporting module actions along this ring isomorphism leaves the underlying abelian sheaves and maps unchanged; its inverse transports along the inverse ring isomorphism. These exact inverse functors apply termwise to complexes and identify ambient sums, tensor products, finite Tor amplitude and the finite constant local models in the constructibility definition. Thus the ordinary coefficient categories specified here realize the finite-$A$ categories in the cited constructibility and closure nodes. By [lem-sfb-unbounded-site-comparison], $\\nu_X^*$ is exact, fully faithful and preserves arbitrary sums on the unbounded derived categories. By [det-pe-finite-tor-comparison-noetherian], specialized to the finite Noetherian coefficient ring $A$, it restricts to an equivalence $\\Dctf(X_{\\mathrm{ét}},A)\\simeq\\Dctf(X,A)$. Thus the finite-Tor generators correspond under $\\nu_X^*$.",
    "uses": [
     "lem-sfb-unbounded-site-comparison",
-    "det-pe-finite-tor-comparison-noetherian",
-    "lem-weil-pbc-finite-discrete-condensed-ring-constant",
-    "lem-weil-pbc-finite-discrete-scheme-ring-constant"
+    "lem-ctf-finite-comparison-ordinary-fully-faithful",
+    "lem-ctf-finite-comparison-generators"
    ],
    "elementary": false,
    "source": {
@@ -109,12 +108,14 @@
   "lem-weil-pbc-finite-discrete-condensed-ring-constant",
   "lem-weil-pbc-finite-discrete-scheme-ring-constant",
   "sk-def-localizing-closure",
-  "sk-thm-pe-direct-image-comparison"
+  "sk-thm-pe-direct-image-comparison",
+  "lem-ctf-finite-comparison-ordinary-fully-faithful",
+  "lem-ctf-finite-comparison-generators"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-comparison/sk-prop-ctf-finite-comparison-localizing.md",
-  "place": "## Proof"
+  "date": "2026-10-21",
+  "summary": "The coefficient transport exactness is proved by the internal module encoding. The localizing equivalence is obtained from the ordinary full-faithfulness and generator-identification helper statements, using closure inverse-image/image lemmas; operation clauses follow from the ambient comparison maps and exactness."
  },
  "mathlib_searches": [
   {
@@ -341,5 +342,15 @@
   "group": "Q21",
   "result": "pass",
   "note": "Re-delivery after the landing refused 40ee as duplicate declarations: the renamed FiniteComparisonLocalizingRepair module is removed and the owning Sheaf/Paper/FiniteComparisonLocalizing.lean is repaired in place. Its only change vs live is a one-line import swap to ProEtale.FiniteCoefficient.Derived.LowerShriekComparison. It is byte-identical to the previously reviewed repair, and all 14 declarations and signatures are unchanged. The item module is identical to 40ee except for that import; node records are unchanged apart from lean. Statement re-read clause by clause: ess image = finiteComparisonProEtaleClosure, unique ρ with the counit equation, β pinned to finiteComparisonCompactSupportMap, PF pinned to projectionMapOfCompactification, route equality, transposes in both tensor orders with DerivedCategory braidings. No extra hypotheses; X=∅ and the zero ring are covered. Statement verbatim and the 17 declarations checked; docstrings carry source, blueprint and 11 steps; sorry only; nothing hollow. nt_compile --json clean: dependency module 7.2 s, item 10.4 s. Maintainer note: overwrites NY's landed import-only det-ctf record. There are no live or pending importers, and the new import matches the family of det-ctf's recorded lem-cbc dependency."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261021T012352-L-2180691",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
