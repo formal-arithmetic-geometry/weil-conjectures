@@ -24,123 +24,57 @@
  ],
  "proof": [
   {
-   "text": "Work at the finite level $\\Lambda=A=A_{E,n}$, for the arbitrary $n\\geq1$ of [def-pur-conventions]. By [def-pur-vector-bundle-zero-section], locally on $B$ the pair $(E,z)$ is $(\\operatorname{Spec}R[t],V(t))$. Multiplication by $t$ is injective in $R[t]$ for every $R$, including nonreduced $R$, by comparing coefficients. Thus $z(B)$ is Cartier [def-pc-divisor-line-bundle], and remains Cartier after every change of base. The same local polynomial presentation makes $\\pi$ separated and of finite type (its relative diagonal has ideal $(t_1-t_2)$); it is smooth of relative dimension one by [sbc-lem-affine-space-smooth], while $z(B)\\to B$ is the identity and the relative codimension is one. Hence [lem-pur-divisor-class] applies. It supplies $\\operatorname{cl}(z(B))\\in H^2_{z(B)}(E,A(1))$: the relative-torsor Kummer boundary of the pair $(\\mathcal O_E(z(B)),s_{z(B)}|_{E-z(B)})$ at the exponent $m=\\ell^n$, followed by the coefficient map of [def-pur-frame-class], namely the inverse-limit projection $\\mathbf Z_\\ell(1)/m\\cong\\mu_m$ tensored with $A$. The statement of [lem-amb-cartier-kummer-map] says that $c_{z(B),A}$ is the pro-etale realization of the same supported morphism on its etale witness $\\mu^{\\mathrm{et}}_{\\ell^r}\\otimes^L_{\\mathbf Z/\\ell^r}A$, followed by the projection-induced identification with $A_E(1)$; that ordinary etale morphism is the one of [lem-asd-ordinary-supported-kummer], which by its statement is determined by the supported Kummer boundary of the same pair $(\\mathcal O_E(z(B)),s_{z(B)})$ and is the scalar extension of $c_{z(B),\\mathbf Z/N}$. Taking $r=n$, $N=\\ell^n$, both constructions start from one relative Kummer class and apply the same projection to the twist, so under the supported-class/morphism identification of [lem-asd-ordinary-supported-kummer] the class of [lem-pur-divisor-class] is the morphism $c_{z(B),A}$. Use this morphism as $\\operatorname{thom}(E)$. Its local class is $\\partial\\kappa(t)$, so this retains the sign and normalization specified in the item.",
+   "text": "Work at the arbitrary finite level $A=A_{E,n}$ of [def-pur-conventions]. By [lem-pur-line-zero-class-etale-realization], the zero divisor is Cartier, its specified class is $c_{z(B),A}$, and $R\\pi_!z_*A_B=A_B$ canonically. Hence $\\tau_E=R\\pi_!c_{z(B),A}$ is the actual bounded-below etale-origin morphism supplied there, with the prescribed pro-etale twist.",
    "uses": [
-    "def-pur-conventions",
-    "def-pur-vector-bundle-zero-section",
-    "def-pc-divisor-line-bundle",
-    "sbc-lem-affine-space-smooth",
-    "lem-pur-divisor-class",
-    "lem-amb-cartier-kummer-map",
-    "lem-asd-ordinary-supported-kummer",
-    "def-pur-frame-class"
+    "lem-pur-line-zero-class-etale-realization",
+    "def-pur-conventions"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-rank-one-thom.proof.md",
-    "place": "Step 1: global class and its local equation"
+    "place": "Step 1: global class and induced map"
    }
   },
   {
-   "text": "The closed immersion $z$ is proper by [lem-weil-pbc-closed-immersion-proper]. Its compact-support functor is therefore $Rz_*=z_*$, using the compactification with identity open part in [def-compact-support-direct-image-detailed]; exactness of closed direct image is also part of [lem-cbc-open-closed-recollement]. Since $\\pi z=\\mathrm{id}_B$, the identity-normalized composition comparison [thm-sf-comp-composition] identifies $R\\pi_!z_*A_B$ with $A_B$. This is the source identification in $\\tau_E=R\\pi_!c_{z(B),A}$. All these maps have bounded-below etale representatives: [lem-amb-cartier-kummer-map] gives the representative of the supported class and of the specified finite twist, and [lem-sf-class-compact-support-comparison] identifies the compact direct images of these representatives with their pro-etale realizations, naturally on morphisms. In particular $\\tau_E$ is the realization of an actual etale morphism, not just a map between objects separately known to come from that site.",
+   "text": "Apply [lem-pur-line-zero-class-exchange]. It gives compatibility of $\\tau_E$ with the specified compact-support exchange for every base change, with identity source component. At a geometric point $\\bar b:\\operatorname{Spec}\\Omega\\to B$, choose a basis of the fibre line. The same lemma identifies its stalk morphism with the realization of the compact image $\\tau_X^e$ of the origin class on $X=\\mathbf A^1_\\Omega$, with ordinary etale twist $L=\\mu_{\\ell^n}^{\\mathrm{et}}\\otimes A$.",
    "uses": [
-    "lem-weil-pbc-closed-immersion-proper",
-    "def-compact-support-direct-image-detailed",
-    "lem-cbc-open-closed-recollement",
-    "thm-sf-comp-composition",
-    "lem-amb-cartier-kummer-map",
-    "lem-sf-class-compact-support-comparison"
+    "lem-pur-line-zero-class-exchange"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-rank-one-thom.proof.md",
-    "place": "Step 1: definition and source of the induced global morphism"
+    "place": "Step 3 and Step 2: normalized base change and fibres"
    }
   },
   {
-   "text": "Let $g:B'\\to B$ be arbitrary, and write $v:E'=E\\times_BB'\\to E$, $\\pi':E'\\to B'$ and $z':B'\\to E'$. Step 1 shows that the pulled-back divisor is Cartier. Thus [lem-amb-cartier-kummer-map] identifies $v^{-1}c_{z(B),A}$ with $c_{z'(B'),A}$, including the supported-constant and twist comparisons. Let $C_{\\pi,g}:g^{-1}R\\pi_!\\xrightarrow{\\sim}R\\pi'_!v^{-1}$ be [thm-cbc-finite-level-proetale]. Naturality applied to the supported morphism gives a commutative square between its compact direct images. Its source component is the identity of $A_{B'}$: on etale witnesses, vertical pasting and identity normalization in [thm-cbc-finite-torsion], applied to $\\pi z=\\mathrm{id}$, identify that component with the exchange for the identity morphism. This is also the transported pro-etale normalization in [thm-cbc-finite-level-proetale]. Consequently, under the indicated identifications,\n$$C_{\\pi,g}(A_E(1)[2])\\circ g^{-1}(\\tau_E)=\\tau_{E'}.$$\nThis proves compatibility for the specified exchange map, including nonflat changes of base. It uses no purity exchange for $Rz^!$.",
+   "text": "Take $N=\\ell^n$, $S=\\operatorname{Spec}\\Omega$ (Noetherian, $N$ invertible), $P=\\mathbf P^1_S$ with $q:P\\to S$, $j:X\\hookrightarrow P$, and $C$, $a$, $h$ of [lem-pur-origin-class-projective-comparison], which gives $a\\tau_X^e=h$. By [def-amb-p1-trace], $t_q=\\operatorname{pr}_2b_q^{-1}$ for the decomposition $b_q$ of [lem-asd-ordinary-finite-p1-adjunction], and $t_qh=1_A$. By [lem-amb-affine-space-top-trace] with $d=1$, the counit $t_{p_1}$ at $A_S$ is an isomorphism; by [def-weil-pbc-composite-adjunction] it is $\\epsilon_{q,A_S}\\circ Rq_*(\\epsilon^j)$, that is $\\epsilon_{q,A_S}\\circ a$ after the unit isomorphism $q^*A_S\\otimes^L_AL_P\\cong L_P$. At $K=A_S$ the projection map of [lem-amb-proper-coproducts-projection] is the identity under the unit isomorphisms (the symmetry has sign $+1$ in degree zero, and $\\mathrm{PF}$ is adjoint to the counit $q^*Rq_*M\\to M$), so $\\epsilon_{q,A_S}=t_q$. Hence $\\beta:=t_qa:C\\to A$ is an isomorphism and $\\beta\\tau_X^e=t_qh=1_A$. Thus $\\tau_X^e=\\beta^{-1}$ is invertible, with coefficient $+1$.",
    "uses": [
-    "lem-amb-cartier-kummer-map",
-    "thm-cbc-finite-level-proetale",
-    "thm-cbc-finite-torsion"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-rank-one-thom.proof.md",
-    "place": "Step 3: base change, with the exchange square and its source normalization written out"
-   }
-  },
-  {
-   "text": "Choose a geometric point $\\bar b:\\operatorname{Spec}\\Omega\\to B$. A fibre of a line bundle is a one-dimensional vector space, so a choice of nonzero basis identifies $(E_{\\bar b},z_{\\bar b})$ with $(X,0)$, $X=\\mathbf A^1_\\Omega$. The finite twist is locally free of rank one and has Tor amplitude $[0,0]$: on the etale representative this is [lem-asd-etale-finite-twist-pullback], and [lem-amb-cartier-kummer-map] identifies that representative with the prescribed pro-etale twist. Thus [lem-pur-cfiber-stalk] applies to $A_E(1)[2]$. Together with the morphism identity of Step 3, it identifies the stalk of $\\tau_E$ with the compact direct image of the supported class of $0\\subset X$. We compute that morphism on the ordinary etale site. By [lem-sf-class-compact-support-comparison], applied over the field $\\Omega$, this computation realizes to the desired pro-etale compact direct image. The class and twist comparison is the one in [lem-amb-cartier-kummer-map]; no coefficient category is silently changed.",
-   "uses": [
-    "lem-asd-etale-finite-twist-pullback",
-    "lem-amb-cartier-kummer-map",
-    "lem-pur-cfiber-stalk",
-    "lem-sf-class-compact-support-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-rank-one-thom.proof.md",
-    "place": "Step 2: identify the geometric-fibre morphism"
-   }
-  },
-  {
-   "text": "Put $P=\\mathbf P^1_\\Omega$, $j:X\\hookrightarrow P$, $q:P\\to\\operatorname{Spec}\\Omega$, and let $i_\\infty$ be the section at infinity. Choose an exponent $N=\\ell^r$ killing $A$; it is invertible in $\\Omega$. The scheme $\\operatorname{Spec}\\Omega$ is Noetherian, so the decomposition clause of [lem-asd-ordinary-finite-p1-adjunction] gives\n$$b:A(1)[2]\\oplus A\\xrightarrow{\\sim}R\\Gamma(P,A(1)[2]),$$\nwith second component $h=c_1(\\mathcal O_P(1))$. Here the constant objects on the point are identified with the modules by [lem-weil-pbc-geometric-point-cohomology]. Apply $Rq_*$ to the open--closed triangle [lem-cbc-open-closed-recollement] for $A_P(1)[2]$, using [lem-weil-pbc-derived-direct-image-triangulated] and the compactification formula [def-amb-etale-compact-support]. This gives\n$$C:=R\\Gamma_c(X,A(1)[2])\\xrightarrow{a}R\\Gamma(P,A(1)[2])\\longrightarrow A(1)[2]\\longrightarrow C[1].$$\nUnder $b$, the middle arrow is $(1,0)$: restriction of the unit is the identity, and restriction of $h$ is zero since $\\mathcal O_P(1)|_\\infty$ is the trivial line bundle, whose Kummer torsor class is zero. The long exact sequence [lem-sf-derived-homology-long-exact] now identifies $H^i(C)$ via $a$ with the kernel of $H^i(A(1)[2]\\oplus A)\\to H^i(A(1)[2])$, namely $H^i(A)$. Thus\n$$\\beta=\\operatorname{pr}_2b^{-1}a:C\\xrightarrow{\\sim}A$$\nis an isomorphism by [lem-weil-pbc-unbounded-derived-iso-cohomology].",
-   "uses": [
+    "lem-pur-origin-class-projective-comparison",
+    "def-amb-p1-trace",
     "lem-asd-ordinary-finite-p1-adjunction",
-    "lem-weil-pbc-geometric-point-cohomology",
-    "lem-cbc-open-closed-recollement",
-    "lem-weil-pbc-derived-direct-image-triangulated",
-    "def-amb-etale-compact-support",
-    "lem-sf-derived-homology-long-exact",
-    "lem-weil-pbc-unbounded-derived-iso-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/_section.md",
-    "place": "Step 2: supply the missing compact-support computation; unit integration paragraph"
-   }
-  },
-  {
-   "text": "Let $i_0:0\\hookrightarrow X$ and $\\bar i_0:0\\hookrightarrow P$. The direct-image formula [def-weil-pbc-direct-image] gives $j^{-1}\\bar i_{0*}A=i_{0*}A$ and $i_\\infty^{-1}\\bar i_{0*}A=0$: off $0$ its sections are sections on the empty scheme, hence zero. Apply [lem-cbc-open-closed-recollement] to $\\bar i_{0*}A$. Its counit is therefore an isomorphism\n$$e:j_!i_{0*}A\\xrightarrow{\\sim}\\bar i_{0*}A.$$\nFor the Cartier divisor $0\\subset P$, [lem-asd-ordinary-supported-kummer] gives $c_{0,P}:\\bar i_{0*}A\\to A_P(1)[2]$, whose restriction to $X$ is $c_{0,X}$. Naturality of the counit $\\epsilon:j_!j^{-1}\\to\\mathrm{id}$, part of [lem-cbc-open-closed-recollement], gives the equality\n$$\\epsilon_{A_P(1)[2]}\\circ j_!c_{0,X}=c_{0,P}\\circ e.$$\nThus the map $a$ of Step 5 carries the compact image of the origin class to its ordinary image on $P$. This is an equality of the actual maps, not an identification of supported cohomology with compactly supported cohomology.",
-   "uses": [
-    "def-weil-pbc-direct-image",
-    "lem-cbc-open-closed-recollement",
-    "lem-asd-ordinary-supported-kummer"
+    "lem-amb-affine-space-top-trace",
+    "def-weil-pbc-composite-adjunction",
+    "lem-amb-proper-coproducts-projection"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-rank-one-thom.proof.md",
-    "place": "Step 2: compare the supported-origin morphism with its compact image"
+    "place": "Step 2: geometric compact generator"
    }
   },
   {
-   "text": "The line bundle of $D_0=(x_1=0)$ on $P$ is $\\mathcal O_P(1)$. Explicitly, on $D(x_0)$ its local equation is $t=x_1/x_0$ and on $D(x_1)$ its ideal has generator $1$. Dualizing gives generators $e_0=1/t$, $e_1=1$ and the transition $e_0=t^{-1}e_1$, which is the $\\mathcal O(1)$ convention of [lem-asd-ordinary-finite-p1-adjunction] and the dual-ideal construction of [def-pc-divisor-line-bundle]. By [lem-asd-ordinary-supported-kummer], forgetting support is the composite with $A_P\\to\\bar i_{0*}A$, and its image is $c_1(\\mathcal O_P(D_0))=h$. On global sections that unit is the identity on $A=R\\Gamma(0,A)$ by [lem-weil-pbc-geometric-point-cohomology]. Hence, for the fibre map $\\tau_X:A\\to C$ of Step 4, Step 6 gives $a\\tau_X=h=b\\iota_2$, so\n$$\\beta\\tau_X=\\operatorname{pr}_2b^{-1}b\\iota_2=1_A.$$\nSince $\\beta$ is invertible, $\\tau_X=\\beta^{-1}$ is invertible. In particular the supported Kummer class maps to the compact generator with coefficient $+1$.",
-   "uses": [
-    "lem-asd-ordinary-finite-p1-adjunction",
-    "def-pc-divisor-line-bundle",
-    "lem-asd-ordinary-supported-kummer",
-    "lem-weil-pbc-geometric-point-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-rank-one-thom.proof.md",
-    "place": "Step 2: the origin maps to the normalized compact generator; unit normalization paragraph"
-   }
-  },
-  {
-   "text": "Steps 4--7 show that every geometric stalk of $\\tau_E$ is an isomorphism in every cohomological degree. Step 2 exhibited $\\tau_E$ as a morphism of bounded-below etale-origin objects. Apply precisely clause 3 of [lem-cbc-proetale-stalk-conservative] to this morphism: $\\tau_E$ is an isomorphism. This invokes the etale-origin criterion, and makes no assertion that geometric points detect all pro-etale sheaves. Step 3 already proves its base-change compatibility.",
+   "text": "Every geometric stalk of $\\tau_E$ is consequently an isomorphism in every degree. Step 1 supplied an etale representative of the morphism itself, so clause 3 of [lem-cbc-proetale-stalk-conservative] applies and proves $\\tau_E$ invertible. Define $\\operatorname{tr}_\\pi=\\tau_E^{-1}$; inverting the exchange identity from Step 2 gives its base-change compatibility.",
    "uses": [
     "lem-cbc-proetale-stalk-conservative"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-rank-one-thom.proof.md",
-    "place": "Step 2, last sentence: global isomorphy from the correct conservativity statement"
+    "place": "Step 2, last sentence: etale-origin conservativity"
    }
   },
   {
-   "text": "Define $\\operatorname{tr}_\\pi=\\tau_E^{-1}$. Inverting the identity of Step 3 proves the same base-change compatibility for this trace. Finally [lem-weil-finite-compact-projection-formula] applies with $K=A_E$ and $L=A_B(1)$: both are bounded constructible and $L$ has Tor amplitude $[0,0]$ by [lem-asd-etale-finite-twist-pullback], with its prescribed pro-etale realization as in [lem-amb-cartier-kummer-map]. It identifies\n$$R\\pi_!A_E(1)[2]\\cong(R\\pi_!A_E)\\otimes_A^L A_B(1)[2].$$\nTensor with $A_B(-1)[-2]$. The evaluation and twist-pullback identifications of [lem-asd-etale-finite-twist-pullback], realized with the same finite twist, cancel $A_B(1)$, giving $R\\pi_!A_E\\cong A_B(-1)[-2]$.",
+   "text": "Finally [lem-weil-finite-compact-projection-formula] applies with $K=A_E$ and $L=A_B(1)$: both are bounded constructible and $L$ has Tor amplitude $[0,0]$ by [lem-asd-etale-finite-twist-pullback], with its prescribed pro-etale realization as in [lem-amb-cartier-kummer-map]. It identifies\n$$R\\pi_!A_E(1)[2]\\cong(R\\pi_!A_E)\\otimes_A^L A_B(1)[2].$$\nTensor with $A_B(-1)[-2]$. The evaluation and twist-pullback identifications of [lem-asd-etale-finite-twist-pullback], realized with the same finite twist, cancel $A_B(1)$, giving $R\\pi_!A_E\\cong A_B(-1)[-2]$.",
    "uses": [
     "lem-weil-finite-compact-projection-formula",
     "lem-asd-etale-finite-twist-pullback",
@@ -149,42 +83,29 @@
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-rank-one-thom.proof.md",
-    "place": "Statement, final two assertions: inverse trace and untwisted formula"
+    "place": "Statement: inverse trace and final untwisted formula"
    }
   }
  ],
  "proof_deps": [
+  "lem-pur-line-zero-class-etale-realization",
   "def-pur-conventions",
-  "def-pur-vector-bundle-zero-section",
-  "def-pc-divisor-line-bundle",
-  "sbc-lem-affine-space-smooth",
-  "lem-pur-divisor-class",
-  "lem-amb-cartier-kummer-map",
-  "def-pur-frame-class",
-  "lem-weil-pbc-closed-immersion-proper",
-  "def-compact-support-direct-image-detailed",
-  "lem-cbc-open-closed-recollement",
-  "thm-sf-comp-composition",
-  "lem-sf-class-compact-support-comparison",
-  "thm-cbc-finite-level-proetale",
-  "thm-cbc-finite-torsion",
-  "lem-asd-etale-finite-twist-pullback",
-  "lem-pur-cfiber-stalk",
+  "lem-pur-line-zero-class-exchange",
+  "lem-pur-origin-class-projective-comparison",
+  "def-amb-p1-trace",
   "lem-asd-ordinary-finite-p1-adjunction",
-  "lem-weil-pbc-geometric-point-cohomology",
-  "lem-weil-pbc-derived-direct-image-triangulated",
-  "def-amb-etale-compact-support",
-  "lem-sf-derived-homology-long-exact",
-  "lem-weil-pbc-unbounded-derived-iso-cohomology",
-  "def-weil-pbc-direct-image",
-  "lem-asd-ordinary-supported-kummer",
+  "lem-amb-affine-space-top-trace",
+  "def-weil-pbc-composite-adjunction",
+  "lem-amb-proper-coproducts-projection",
   "lem-cbc-proetale-stalk-conservative",
-  "lem-weil-finite-compact-projection-formula"
+  "lem-weil-finite-compact-projection-formula",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-amb-cartier-kummer-map"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-rank-one-thom.proof.md",
-  "place": "Steps 1--3, repaired using the unit integration paragraph and existing Cartier, projective-line, compact-exchange and etale-origin interfaces"
+  "place": "Q88 re-split of the previously reviewed nine-step argument: four independently queued statement-only lemmas and short assembly; P1 integration/normalization follows historical unit Step 5(a),(b),(d)"
  },
  "mathlib_searches": [
   {
@@ -261,31 +182,15 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-an",
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "item": "thm-pur-rank-one-thom",
   "worker": "stage1",
-  "summary": "Q157 checked the current and historical blueprint, searched slopmaster2 and Mathlib, and repaired the supported-versus-compact gap using P1 recollement and the actual supported divisor morphism. Base change is proved by a naturality square and the normalized exchange for pi z=id. Geometric conservativity is restricted to etale-origin morphisms. The statement is unchanged; all ingredients are reused and no nodes are created.",
-  "blueprint": "Step 1 realizes the global-class paragraph; steps 2--3 realize its induced-map and base-change paragraphs; steps 4--8 repair the geometric-fibre paragraph by the projective-line integration and normalization argument of the unit; step 9 realizes the inverse-trace and final untwisted conclusions.",
+  "summary": "Q88 repairs the explicit human re-split request: four comparable independent statement-only lemmas retain geometry/site realization, exchange/fibre identification, localization matrix, and supported-origin Chern comparison. The full earlier argument and its allocation are retained in report.md. The parent statement is byte-for-byte unchanged and its assembly has fewer than 3000 characters. The current live divisor-class local sign is negative of the frame boundary; the old proof sign is corrected without changing the named divisor class. Review FIX (2026-10-21): the localization-matrix node duplicated the existing d=1 case of lem-amb-affine-space-top-trace (whose counit at A_S is t_q a) and lem-amb-affine-trace-line-localization; it is dropped and Step 3 cites the existing trace theorem.",
+  "blueprint": "Step 1 realizes the global-class paragraph; Step 2 the base-change paragraph and geometric-fibre identification; Step 3 assembles the projective-line localization and origin normalization for Step 2 of the blueprint; Step 4 applies the correct conservativity criterion; Step 5 untwists the result. Each expanded mathematical argument of old steps 1--7 is assigned to one of four new nodes.",
   "tool_uses": [
-   {
-    "node": "sbc-lem-affine-space-smooth",
-    "why": "Generic coordinate-model geometry: polynomial affine space is smooth of its dimension; this is not a replacement for any purity argument."
-   },
-   {
-    "node": "thm-sf-comp-composition",
-    "why": "Generic identity-normalized compact-support composition identifies Rpi_! z_* with the identity, since pi z=id."
-   },
-   {
-    "node": "lem-sf-class-compact-support-comparison",
-    "why": "Generic finite constant-coefficient etale/pro-etale comparison, natural on the etale class witnesses; it supplies a site bridge, not purity."
-   },
    {
     "node": "lem-cbc-proetale-stalk-conservative",
     "why": "Generic conservativity restricted to bounded-below morphisms of etale origin; the item needs exactly its clause 3."
-   },
-   {
-    "node": "lem-weil-pbc-derived-direct-image-triangulated",
-    "why": "Generic exactness of the right derived direct image, needed to apply Rq_* to recollement; it does not supply a purity calculation."
    },
    {
     "node": "lem-weil-finite-compact-projection-formula",
@@ -302,12 +207,12 @@
   "lem-weil-finite-compact-projection-formula"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-Q157-1c4734bd1",
-  "group": "Q157",
+  "reviewer": "NT-cc-Q88-96939f849",
+  "group": "Q88",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q157-1c4734bd1 (reviewer sub-agent of L); spot-checked: I read the whole delivery: AGENTS, stage-1 rules, brief, GOAL, dag-sync, delivery-errors A–F, the packet, the report, the item, all 25 cited statements, the current (main-20261015) and master blueprint text of the item, and the sk-prop-an _section and unit record. The statement is unchanged against both blueprint snapshots, and the finite-level reading is the one def-pur-conventions prescribes. There are no new nodes. The dependency closure has no cycle (14,280 nodes); all cited ids exist and none is merged. The only near-duplicate is thm-pur-vector-bundle-thom, a rank-r generalization that cites this item, so same_as=[] is right. The proof follows the unit's route: affine-line integration through the P1 compactification and j_!. Fault, C3/C4, fixed: Step 1 identified the class cl of lem-pur-divisor-class with c_{z(B),A} of lem-amb-cartier-kummer-map by 'the same construction', but that construction is only in lem-amb-cartier-kummer-map's proof. Its stated properties do not pin the morphism down, since two such morphisms can differ by H^1(E-z(B),A(1)). I rewrote Step 1 to use statements only: lem-amb-cartier-kummer-map says its morphism is the realization of an etale morphism on a stated etale witness; lem-asd-ordinary-supported-kummer says that etale morphism is built from the same Kummer boundary and is the scalar extension of the Z/N version; def-pur-frame-class gives the same projection onto the twist. I added lem-asd-ordinary-supported-kummer and def-pur-frame-class to the step's uses, and def-pur-frame-class to proof_deps; the corrected file is at fixes/dag/nodes/sec-smooth-purity/thm-pur-rank-one-thom.json. Steps 2–9 check against the cited statements. Step 2: z is proper, Rz_! = z_*, the identity-normalized composition gives the source, and tau_E is the realization of an etale morphism. Step 3: the compact-support exchange from thm-cbc-finite-level-proetale; the source component is the identity by vertical pasting (thm-cbc-finite-torsion); valid for non-flat g. Step 4: the hypotheses of lem-pur-cfiber-stalk (D^b_ctf) and the comparison over K_0=Omega hold. Step 5: the hypotheses of the P1 decomposition hold; the restriction map is (1,0), since the h-component is zero because H^2(Omega,A(1))=0; the long exact sequence makes beta invertible. Step 6: the counit e is an isomorphism and the naturality square holds. Step 7: O(D_0)=O(1) with the convention e_0=t^{-1}e_1, so beta tau_X=1 and the normalization coefficient is +1. Step 8: clause 3 of the conservativity lemma (etale origin). Step 9: projection formula with L of Tor amplitude [0,0], then evaluation, giving A_B(-1)[-2]. Small cases checked: B empty, B a point, B non-reduced, n not divisible by the ramification index, non-flat base change, a non-trivial line bundle. I accept the six declared tool_uses as generic black boxes. No SGA source is cited.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q88-96939f849 (reviewer sub-agent of L); spot-checked: Re-split for the human note of 2026-10-21 (at least 3 new nodes, parent proof at most 3000 characters). I compared the 9 base steps with the delivery one by one; nothing was shortened or blurred. Base Steps 1-2 are in lem-pur-line-zero-class-etale-realization, Steps 3-4 in lem-pur-line-zero-class-exchange, Steps 6-7 in lem-pur-origin-class-projective-comparison, and Steps 8-9 stay in the parent. These three new nodes are true and are not duplicates. (a) Zero-section geometry holds for nonreduced R and stays Cartier after base change. The local class -dk(t) matches the current lem-pur-divisor-class Yoneda convention, which corrects the base sign without touching the item statement. The class equals c_{D,A} with an etale witness of the morphism itself, and the compact source is A_B by thm-sf-comp-composition. (b) thm-cbc-finite-level-proetale allows any g because B is qcqs. The source component is the identity because pi z = id. The fibre morphism is identified through cfiber-stalk (A_E(1)[2] is ctf) and the site comparison over Omega. (c) e is an isomorphism, and naturality of the counit gives the square. O(D0) = O(1) with g0 = t^{-1}g1, and forgetting support gives +h, so a tau = h. Fault: lem-pur-geometric-line-localization-matrix duplicates existing nodes in the same unit, sk-prop-an, which are split, reviewed and have Lean attached. Its conclusion is that beta = pr2 b^{-1} a is an isomorphism. That is lem-amb-affine-space-top-trace with d=1 over Spec Omega: its counit at A_S is, by the composite adjunction and def-amb-p1-trace, t_q a = beta. The intermediate localization facts are lem-amb-affine-trace-line-localization and -counit-iso. FIX: drop the node and rewrite parent Step 3 to cite the origin comparison, def-amb-p1-trace, lem-asd-ordinary-finite-p1-adjunction, lem-amb-affine-space-top-trace, def-weil-pbc-composite-adjunction and lem-amb-proper-coproducts-projection (the projection map at the unit is the identity). The new Step 3 is 1040 characters and the proof total is 2799. After the drop, 3 new nodes remain, which meets the at-least-3 requirement. There is no cycle. Steps 4-5 are unchanged and correct (clause 3 conservativity; projection formula with L = A_B(1) locally free, giving (-1)[-2]). Batch 5: lem-pur-divisor-class, lem-asd-ordinary-supported-kummer and def-pur-frame-class were already cited by base Steps 1, 6 and 7. The trace-formula and Poincare-duality nodes in the item's closure are identical before and after (lem-trf-valuation-general-mod-injective is commutative algebra; lem-pod-etale-stalk-tensor-scalar is a sheaf stalk fact). Neither is a step of the trace formula or of Poincare duality, so all flags are accepted. No SGA. The snapshot's chapter symlinks outside sec-smooth-purity are dangling, so I read those cited statements from side-live.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "branch": "master",
