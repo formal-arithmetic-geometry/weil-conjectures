@@ -26,9 +26,101 @@
   "def-weil-pbc-sites-and-cohomology",
   "det-pe-classical-sheaves-modules"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Base change of the proper morphism $f$ along $V\\to Y$ is proper, so $h:Z\\to V$ is proper. The assumed bound applies in particular to every fibre of $h$, with the same integer $e$. Properness includes finite type and separatedness. Finite type includes quasi-compactness, and separatedness implies quasi-separatedness; hence $h$ satisfies the qcqs hypothesis of the comparison theorem.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism",
+    "lem-pc-separated-quasi-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex; literature/stacks-project/schemes.tex",
+    "place": "Tag 01W4, lemma-base-change-proper; Tag 01KK, definition-separated, and Tag 01K7, lemma-closed-immersion-quasi-compact"
+   }
+  },
+  {
+   "text": "Since $A$ is finite and discrete, the two finite-discrete coefficient lemmas identify, for $T=Z,V$, the coefficient ring sheaf of [def-weil-pbc-proetale-modules] used in the statement with the constant ring sheaf $\\nu_T^*A_{T,\\mathrm{\\acute et}}$, as rings. Hence the classical-module equivalence and the comparison statements for constant coefficients used below apply to the module sheaves of the statement. Choose an étale $A$-module sheaf $F$ on $Z$ with $H\\cong\\nu_Z^*F$, using the classical module equivalence. Since $A$ is finite, the additive order $n$ of $1_A$ is a positive integer and $n\\cdot m=(n1_A)m=0$ for every local section $m$ of $F$. Thus its underlying abelian sheaf $U_ZF$ is torsion. For the zero ring take $n=1$; then $F=0$. This choice is made on $Z$ itself and imposes no descent condition from $X$.",
+   "uses": [
+    "lem-weil-pbc-finite-discrete-condensed-ring-constant",
+    "lem-weil-pbc-finite-discrete-scheme-ring-constant",
+    "det-pe-classical-sheaves-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 5.1.3 and Lemma 5.1.2, module form; elementary finite-ring torsion argument"
+   }
+  },
+  {
+   "text": "Apply the proper torsion direct-image bound to $h$ and $U_ZF$: $R^qh_{\\mathrm{ét},*}(U_ZF)=0$ for $q>2e$. The coefficient-forgetting comparison identifies the underlying abelian sheaf of $R^qh_{\\mathrm{ét},*}F$ with this sheaf. Forgetting is faithful and detects zero, since a module with zero underlying abelian group is zero. Consequently $R^qh_{\\mathrm{ét},*}F=0$. An ordinary bounded-below injective resolution of $F$ is K-injective, and computes both the total derived functor on $F[0]$ and its classical higher derived functors. Hence $\\mathcal H^qRh_{\\mathrm{ét},*}(F[0])=0$ for $q>2e$.",
+   "uses": [
+    "lem-kun-proper-torsion-cd-bound",
+    "lem-sbc-higher-direct-image-forget-comparison",
+    "lem-sp-kinjective-computes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex; literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 095U, lemma-cohomological-dimension-proper; Tag 03FD, lemma-cohomology-modules-abelian-agree; bounded-below injective computation"
+   }
+  },
+  {
+   "text": "The complex $F[0]$ is bounded below, so the canonical total-derived comparison is invertible for the qcqs morphism $h$: $\\nu_V^*Rh_{\\mathrm{ét},*}(F[0])\\cong Rh_*(\\nu_Z^*F[0])\\cong Rh_*(H[0])$. Here the bounded-below total-comparison node supplies precisely the compatibility with K-injective total derivation. The module comparison inverse image $\\nu_V^*$ is exact. An exact functor preserves kernels and images, hence the kernel/image quotient defining cohomology; therefore $\\mathcal H^qRh_*(H[0])\\cong\\nu_V^*\\mathcal H^qRh_{\\mathrm{ét},*}(F[0])=0$ for $q>2e$.",
+   "uses": [
+    "lem-sfb-unbounded-direct-image-bounded-below",
+    "def-sfb-unbounded-direct-image-mate",
+    "det-pe-classical-sheaves-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-proper/sk-prop-ctf-finite-proper-localizing.proof.md",
+    "place": "Transfer paragraph, bounded-below application; canonical mate and total D+ compatibility from sk-prop-pe-unbounded-classical-direct-image"
+   }
+  },
+  {
+   "text": "Choose a bounded-below injective resolution $H\\to I^\\bullet$ in the module-sheaf category. It is K-injective, so $h_*I^\\bullet$ represents $Rh_*(H[0])$ and $\\Gamma(Z,I^\\bullet)$ represents $R\\Gamma(Z,H[0])$. By the direct-image section formula, $\\Gamma(Z,I^\\bullet)=\\Gamma(V,h_*I^\\bullet)$ term by term. The weakly étale localization node identifies $V_{\\mathrm{proét}}$ with $Y_{\\mathrm{proét}}/V$ and identifies the constant coefficient rings. We check that the final object $V$ of $V_{\\mathrm{proét}}$ is weakly contractible there. Let $\\varphi:F\\to G$ be an epimorphism of sheaves of sets on $V_{\\mathrm{proét}}=Y_{\\mathrm{proét}}/V$ and $s\\in G(V)$. For an object $U$ of $Y_{\\mathrm{proét}}$ let $P(U)$ be the set of pairs $(a,t)$ with $a:U\\to V$ a $Y$-morphism and $t\\in F(U\\xrightarrow{a}V)$ such that $\\varphi(t)=s|_a$. Then $P$ is a sheaf on $Y_{\\mathrm{proét}}$: for a covering $\\{U_i\\to U\\}$, compatible $a_i$ glue to a unique $a$ because $h_V$ is a sheaf (the topology is subcanonical); the $t_i$ then glue in $F$ because the slice coverings are the coverings of $Y_{\\mathrm{proét}}$; and $\\varphi(t)=s|_a$ holds because $G$ is separated. The map $P\\to h_V$, $(a,t)\\mapsto a$, is an epimorphism: $\\varphi$ is locally surjective, so $s|_a$ lifts on a covering of $U$. Since $V$ is weakly contractible in $Y_{\\mathrm{proét}}$, this map has a section $\\sigma$. Then $\\sigma(\\mathrm{id}_V)=(\\mathrm{id}_V,t)$ with $t\\in F(V)$ and $\\varphi(t)=s$. Thus $V$ is a weakly contractible affine object of $V_{\\mathrm{proét}}$. Exact evaluation applied there makes $\\Gamma(V,-)$ exact on module sheaves of $V_{\\mathrm{proét}}$. Exactness preserves the kernel/image quotients of the complex, giving $H^qR\\Gamma(Z,H[0])=\\Gamma(V,\\mathcal H^qRh_*(H[0]))=0$ for $q>2e$.",
+   "uses": [
+    "lem-sp-kinjective-computes",
+    "def-weil-pbc-proetale-operations",
+    "det-proper-heart-continuity-sections",
+    "sk-def-pe-weak-contractible",
+    "lem-weil-proetale-weakly-etale-localization",
+    "det-pe-topos-functoriality-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0946, lemma-w-contractible, (1); evaluation of the K-injective direct-image model"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-proper-base-change",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "lem-pc-separated-quasi-separated",
+  "det-pe-classical-sheaves-modules",
+  "lem-kun-proper-torsion-cd-bound",
+  "lem-sbc-higher-direct-image-forget-comparison",
+  "lem-sp-kinjective-computes",
+  "lem-sfb-unbounded-direct-image-bounded-below",
+  "def-sfb-unbounded-direct-image-mate",
+  "def-weil-pbc-proetale-operations",
+  "det-proper-heart-continuity-sections",
+  "sk-def-pe-weak-contractible",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-weil-pbc-finite-discrete-condensed-ring-constant",
+  "lem-weil-pbc-finite-discrete-scheme-ring-constant",
+  "det-pe-topos-functoriality-site"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-proper/sk-prop-ctf-finite-proper-localizing.proof.md",
+  "place": "Uniform étale bound and Transfer paragraph; explicit finite-ring coefficient reduction and exact weakly contractible evaluation using Stacks 095U, 03FD and 0946"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,10 +149,45 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \"[∀ i, IsAffine (D.obj i)] (i : I) (s : Γ(D.obj i, ⊤)) (hs : (c.π.app i).appTop s = 0) :\\n  ∃ (j : I) (f : j ⟶ i), (D.map f).appTop s = 0\", \"doc\": \"Given a cofiltered diagram of affine schemes with a limit cone, if a global section of the structure sheaf of some object in the diagram maps to zero under the projection to the limit, then there exis\"}\n  {\"name\": \"AlgebraicTopology.isZero_singularHomologyFunctor_of_totallyDisconnectedSpace\", \"module\": \"Mathlib.AlgebraicTopology.SingularHomology.Basic\", \"type\": \"(hn : n ≠ 0) : IsZero (((singularHomologyFunctor C n).obj R).obj X)\", \"doc\": \"For any totally disconnected topological space $ X $ and any natural number $ n \\neq 0 $, the $ n $-th singular homology group of $ X $ is trivial, i.e., $ H_n(X) = 0 $.\"}\n  {\"name\": \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact\", \"type\": \"(X : Scheme) {U : X.Opens} (hU : IsAffineOpen U) (x f : Γ(X, U)) (H : x |_ (X.basicOpen f) = 0) :\\n  ∃ n : ℕ, f ^ n * x = 0\", \"doc\": \"For an affine open subset $ U $ of a scheme $ X $, if a section $ x $ of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $ vanishes on the basic open set $ D(f) $ defined by a section $ f \\\\in \\\\Gamma(U,\"}\n  {\"name\": \"LightCondensed\", \"module\": \"Mathlib.Condensed.Light.Basic\", \"type\": \"(C : Type w) [Category.{v} C]\", \"doc\": \"The category of sheaves on the category of light profinite spaces equipped with the coherent Grothendieck topology, taking values in the category $ \\\\mathcal{C} $.\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"{X : Scheme} [CompactSpace X] [QuasiSeparatedSpace X] {f s : Γ(X, ⊤)} (hf : f |_ X.basicOpen s = 0) :\\n  ∃ n, s ^ n * f = 0\", \"doc\": \"Let $X$ be a quasi-compact and quasi-separated scheme, and let $f$ and $s$ be global sections of the structure sheaf $\\\\mathcal{O}_X$. If the restriction of $f$ to the basic open subset $D(s)$ defined \"}\n  {\"name\": \"instHasFiniteColimitsCondensedOfHasWeakSheafifyCompHausCoherentTopology\", \"module\": \"Mathlib.Condensed.Limits\", \"type\": \"{A : Type*} [Category* A] [HasFiniteColimits A] [HasWeakSheafify (coherentTopology CompHaus.{u}) A] :\\n  HasFiniteColimits (Condensed.{u} A)\", \"doc\": \"If a category $\\\\mathcal{A}$ has finite colimits and the category of compact Hausdorff spaces equipped with the coherent Grothendieck topology admits weak sheafification into $\\\\mathcal{A}$, then the ca\"}\n  {\"name\": \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact\", \"type\": \"(X : Scheme.{u}) {U : X.Opens} (hU : IsCompact U.1) (x f : Γ(X, U)) (H : x |_ (X.basicOpen f) = 0) :\\n  ∃ n : ℕ, f ^ n * x = 0\", \"doc\": \"Let $X$ be a scheme and $U$ be a compact open subset of $X$. For any sections $f, x \\\\in \\\\mathcal{O}_X(U)$ of the structure sheaf, if $x$ vanishes on the basic open subset $D(f) \\\\subseteq U$ (the locus\"}\n  {\"name\": \"CategoryTheory.isZero_Tor_succ_of_projective\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Tor\", \"type\": \"(X Y : C) [Projective Y] (n : ℕ) : IsZero (((Tor C (n + 1)).obj X).obj Y)\", \"doc\": \"In a monoidal abelian category with enough projectives, for any object $X$ and projective object $Y$, the $(n+1)$-th left-derived tensor product functor $\\\\mathrm{Tor}_{n+1}(X, Y)$ is zero.\"}",
    "date": "2026-10-21",
    "verdict": "no match: the returned declarations concern general truncations, ordinary sheaf sections, K-injectives, or unrelated affine/singular-cohomology vanishing; none gives this proper classical pro-etale statement or a one-line specialization of it."
+  },
+  {
+   "tool": "grep",
+   "query": "proetale|[Cc]ohomological[Dd]imension|weakly[Cc]ontractible",
+   "results": "10 hits: Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern ordinary direct images, affine limits, or site definitions, not the two proper classical torsion cohomology bounds."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper pushforward of torsion sheaves has cohomological dimension at most twice fibre dimension",
+   "results": "8 hits: TopCat.Sheaf.pushforward_sheaf_of_sheaf, TopCat.Sheaf.pushforward, SheafOfModules.pushforward_map_val, AlgebraicGeometry.Scheme.Modules.pushforward_obj_obj, AlgebraicGeometry.Scheme.Modules.pushforward, SheafOfModules.pushforward_obj_val, SheafOfModules.pushforward, CategoryTheory.Functor.sheafPushforwardCocontinuous",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern ordinary direct images, affine limits, or site definitions, not the two proper classical torsion cohomology bounds."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"higherDirectImage\"",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern ordinary direct images, affine limits, or site definitions, not the two proper classical torsion cohomology bounds."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct images of classical torsion proetale sheaves under a proper morphism vanish above twice the fibre dimension",
+   "results": "8 hits: AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, Algebra.etaleLocus_eq_compl_support, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, Rep.isZero_Tor_succ_of_projective",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern ordinary direct images, affine limits, or site definitions, not the two proper classical torsion cohomology bounds."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale cohomological dimension bound for proper morphisms and torsion sheaves with weakly contractible base",
+   "results": "8 hits: AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.IsEtale.of_comp",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern ordinary direct images, affine limits, or site definitions, not the two proper classical torsion cohomology bounds."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-finite-proper-classical-truncation",
@@ -79,5 +206,79 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-finite-proper-classical-neighborhood-vanishing",
+  "worker": "stage1",
+  "summary": "Preserved the statement and all coefficients and arbitrary-neighborhood quantifiers. Proved the etale bound by finite-ring torsion and the existing arbitrary-ring forgetful comparison, transferred it by the bounded-below total-derived mate, and evaluated the same injective model exactly over the weakly contractible base. All supporting nodes already exist; no new nodes.",
+  "blueprint": "Realizes the uniform R^q p_* bound in Étale statements and its bounded-below classical Transfer to arbitrary proper pro-etale neighborhoods in det-ctf-finite-proper-localizing.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Properness survives the arbitrary neighborhood base change; this is a generic scheme tool and not a replacement for the unit route."
+   },
+   {
+    "node": "lem-pc-separated-quasi-separated",
+    "why": "Separatedness of a proper morphism supplies the comparison qcqs hypothesis; generic scheme tool."
+   },
+   {
+    "node": "lem-kun-proper-torsion-cd-bound",
+    "why": "The unit explicitly uses the uniform proper torsion bound; this existing node states Tag 095U without extra coefficient or base hypotheses."
+   },
+   {
+    "node": "lem-sbc-higher-direct-image-forget-comparison",
+    "why": "Generic arbitrary-ring coefficient-forgetting comparison is needed to use the abelian torsion bound with module coefficients."
+   },
+   {
+    "node": "lem-sp-kinjective-computes",
+    "why": "Generic bounded-below injective/K-injective compatibility justifies computing the specified total functors on sheaves."
+   },
+   {
+    "node": "lem-sfb-unbounded-direct-image-bounded-below",
+    "why": "Generic compatibility of the bounded-below etale comparison with the specified total K-injective mate."
+   },
+   {
+    "node": "det-proper-heart-continuity-sections",
+    "why": "Generic exact evaluation on a weakly contractible affine, needed for the absolute cohomology conclusion."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Identifies the small pro-etale site of V with the site localized at V, with the same coefficients, so weak contractibility over Y supplies exact final-object evaluation on V."
+   },
+   {
+    "node": "lem-weil-pbc-finite-discrete-condensed-ring-constant",
+    "why": "Identifies the finite-discrete condensed coefficient ring with the constant ring; needed to apply the constant-coefficient classical and comparison nodes to the statement's module sheaves (as in the parent det-ctf-finite-proper-localizing)."
+   },
+   {
+    "node": "lem-weil-pbc-finite-discrete-scheme-ring-constant",
+    "why": "Pulls the finite-discrete ring identification back to Z and V; same bridge as above."
+   },
+   {
+    "node": "det-pe-topos-functoriality-site",
+    "why": "Subcanonicity of the pro-etale topology, used to glue the maps a_i:U_i->V in the weak-contractibility check on the slice."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-proper-base-change",
+  "lem-pc-separated-quasi-separated",
+  "lem-kun-proper-torsion-cd-bound",
+  "lem-sbc-higher-direct-image-forget-comparison",
+  "lem-sp-kinjective-computes",
+  "lem-sfb-unbounded-direct-image-bounded-below",
+  "det-proper-heart-continuity-sections",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-weil-pbc-finite-discrete-condensed-ring-constant",
+  "lem-weil-pbc-finite-discrete-scheme-ring-constant",
+  "det-pe-topos-functoriality-site"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-N5-638f9b1fd",
+  "group": "N5",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-638f9b1fd (reviewer sub-agent of L); spot-checked: I read the whole item. It has 5 steps and no new nodes; the statement is unchanged and true. There is no re-split repair note for it. Sources checked: blueprint main-20261015 sk-prop-ctf-finite-proper-localizing.proof.md (the uniform bound R^q p_*=0 for q>2d, the forgetful reduction 0D6J, and the Transfer paragraph), and Stacks etale-cohomology.tex Tag 095U at l.18786 (proper morphism, fibre dimension at most n, any abelian torsion sheaf, no invertibility hypothesis). Step checks: step 1 (proper base change, finite type and separatedness give qcqs, the fibres of h are fibres of a base change of f) is correct. Step 3 (095U, then lem-sbc-higher-direct-image-forget-comparison, then lem-sp-kinjective-computes (2)) is correct. Step 4 (lem-sfb-unbounded-direct-image-bounded-below for the bounded-below F[0] over the qcqs h, plus exactness of nu^*) is correct. Step 5 (Gamma(Z,I)=Gamma(V,h_*I) termwise, then exact evaluation) is correct. Small cases checked: e=0 (finite morphism), empty Z or V, the zero ring, residue characteristic dividing |A|. Two repairs, applied in the whole corrected item file under fixes/dag/nodes/sec-six-functors-basics/. (1) C4/E1: the statement uses the ring of def-weil-pbc-proetale-modules, (Cont(pi0,A))^#, but det-pe-classical-sheaves-modules, sk-thm-pe-direct-image-comparison and the mate node are stated for the constant ring nu^*A. I added lem-weil-pbc-finite-discrete-condensed-ring-constant and lem-weil-pbc-finite-discrete-scheme-ring-constant to step 2, the same bridge used by the parent and by the Q129 sibling. (2) C1/E5: step 5 justified exact evaluation at the final object of V_proet = Y_proet/V only by 'pulling back to an epimorphism onto h_V', which uses an uncited slice-topos fact. I replaced it with a direct proof that V is weakly contractible in V_proet: the sheaf P(U)={(a:U->V, t in F(a), phi(t)=s|_a)} maps onto h_V, and weak contractibility splits that map. It cites det-pe-topos-functoriality-site for subcanonicity, then applies det-proper-heart-continuity-sections. proof_deps and split_report.tool_uses are updated. The tool_uses already in the delivery are accepted: generic scheme facts, the unit's own 095U bound, the 0D6J forgetful comparison, and the K-injective, evaluation and localization interfaces. Cycle check: no proof_dep, old or added, reaches the item. Batch-5 flag: lem-kun-proper-torsion-cd-bound has a 9706-node closure, and its only pod/trf nodes are def-pod-ring-scalar-extension, lem-pod-lisse-module-sheaves-as-module-objects, the two lem-pod-module-local-constancy nodes, lem-pod-separated-finite-type-base-change, lem-trf-localization-essentially-surjective and lem-trf-proper-finite-fibre-finite-near. All are generic and none is a step of the trace formula or of Poincare duality, so the flag is accepted, as it was for Q129. The added nodes bring no b5-forbidden nodes into the closure.; 1 file(s) fixed by the reviewer"
  }
 }
