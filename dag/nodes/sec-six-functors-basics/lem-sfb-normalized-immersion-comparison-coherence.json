@@ -16,9 +16,95 @@
   "def-weil-abstract-derived-category",
   "lem-sfb-locally-closed-extension-coherence"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $L_a^r=a_r^*$ and $\\rho_a^r:L_a^rE_a^r\\xrightarrow{\\sim}1$. The cited extension theorem applies: quasi-compact and locally Noetherian is precisely its Noetherian hypothesis, and the cartesian coefficient identifications allow its inverse-image rings at every factor. We insert the coherent restriction-composition isomorphisms throughout, so $L_{ab}^r=L_b^rL_a^r$ denotes an identification, not a literal equality. Normalization of its composition maps says, at $M$,\n$$\\rho_{ab}^r\\circ L_{ab}^r(\\gamma_{a,b}^r)=\\rho_b^r\\circ L_b^r(\\rho_a^r E_b^r).\\tag{G}$$\nFor fixed $r,s$, a comparison $h_a:F_X^{rs}E_a^r\\to E_a^sF_S^{rs}$ is normalized exactly when\n$$\\rho_a^s F_S^{rs}\\circ L_a^s(h_a)=F_S^{rs}(\\rho_a^r)\\circ(q_a^{rs}E_a^r).\\tag{N}$$\nThis gives a typed meaning to the statement's restriction requirement. The supplied open and closed comparisons satisfy (N) by hypothesis.",
+   "uses": [
+    "lem-sfb-locally-closed-extension-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
+    "place": "(2), formal restriction-normalization calculation"
+   }
+  },
+  {
+   "text": "Restriction detects equality between any objects already isomorphic to extension images. Indeed, for isomorphisms $u:A\\xrightarrow{\\sim}E_a^sP$ and $v:B\\xrightarrow{\\sim}E_a^sQ$, two arrows $f,g:A\\to B$ with $L_a^s(f)=L_a^s(g)$ give equal restrictions of $vfu^{-1},vgu^{-1}$. Injectivity of the cited Hom bijection makes these conjugated arrows equal, hence $f=g$. In particular, if there is one comparison isomorphism $h_0:F_X^{rs}E_a^rM\\xrightarrow{\\sim}E_a^sF_S^{rs}M$, there is at most one comparison with the restriction prescribed by (N): use $u=h_0$ and $v=1$. Applying this argument at every $M$ proves equality of the natural transformations. No global faithfulness of $L_a^s$, and no support-preservation hypothesis on $F_X^{rs}$, is used.",
+   "uses": [
+    "lem-sfb-locally-closed-extension-coherence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
+    "place": "(2), formal restriction-normalization calculation"
+   }
+  },
+  {
+   "text": "Here is the binary restriction calculation, for any normalized comparison isomorphisms $h_a,h_b$ for two composable immersions. Suppress $rs$ on $F,q$. Before inserting $\\gamma$, set\n$$H=(E_a^s h_b)\\circ(h_aE_b^r),\\qquad \\eta^r=\\rho_b^r\\circ L_b^r(\\rho_a^rE_b^r).$$\nNaturality of $\\rho_a^s$ with respect to $h_b$, followed by (N) for $a$, gives\n$$\\eta^s F_T\\circ L_b^sL_a^s(H)=\\rho_b^s F_T\\circ L_b^s(h_b)\\circ L_b^sF_S(\\rho_a^rE_b^r)\\circ L_b^s(q_aE_a^rE_b^r).$$\nApply (N) for $b$ and the naturality identity\n$$q_b\\circ L_b^sF_S(\\rho_a^rE_b^r)=F_TL_b^r(\\rho_a^rE_b^r)\\circ(q_bL_a^rE_a^rE_b^r).$$\nThe result is\n$$F_T(\\eta^r)\\circ(q_bL_a^rE_a^rE_b^r)\\circ L_b^s(q_aE_a^rE_b^r).\\tag{B}$$\nThe two $q$ factors are $q_{ab}E_a^rE_b^r$ by the assumed composition law. Equation (G) for each coefficient and naturality of $q_{ab}$ with respect to $\\gamma_{a,b}^r$ therefore show that\n$$\\gamma_{a,b}^sF_T\\circ H\\circ F_X((\\gamma_{a,b}^r)^{-1})$$\nsatisfies (N) for $ab$. This is a calculation with the supplied natural transformations and the cited normalized $\\gamma$, valid for either order of open and closed factors.",
+   "uses": [
+    "lem-sfb-locally-closed-extension-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
+    "place": "(2), formal restriction-normalization calculation"
+   }
+  },
+  {
+   "text": "For the closed-then-open factorization $a=vc$, define, with all functor arguments understood,\n$$d_a=\\gamma_{v,c}^sF_S^{rs}\\circ(E_v^sd_c^{rs})\\circ(d_v^{rs}E_c^r)\\circ F_X^{rs}((\\gamma_{v,c}^r)^{-1}).$$\nIt is an isomorphism, and Step 3 proves its normalization. The cited theorem identifies every other closed-then-open extension presentation with $E_a$, restricting to the identity on $S$. The comparison constructed with another factorization thus has the same domain, codomain and (N). Step 2, using the first constructed $d_a$ as its source isomorphism, proves equality. For a supplied open-then-closed factorization $a=iu$, repeat the displayed formula with $(i,u)$; the cited theorem supplies exactly its normalized extension identification. Step 3 normalizes this composite and Step 2 identifies it with $d_a$. This also handles immersions already open or closed: their supplied comparison satisfies (N), so agrees with the assembled one.",
+   "uses": [
+    "lem-sfb-locally-closed-extension-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
+    "place": "(2), formal restriction-normalization calculation"
+   }
+  },
+  {
+   "text": "For arbitrary composable $a,b$, use their now constructed normalized $d_a,d_b$. Step 3 shows that\n$$\\widetilde d_{ab}=\\gamma_{a,b}^sF_T^{rs}\\circ(E_a^sd_b)\\circ(d_aE_b^r)\\circ F_X^{rs}((\\gamma_{a,b}^r)^{-1})$$\nis a normalized isomorphism. Both $\\widetilde d_{ab}$ and $d_{ab}$ have domain $F_X^{rs}E_{ab}^rM$ and target $E_{ab}^sF_T^{rs}M$. Step 2 therefore gives $\\widetilde d_{ab}=d_{ab}$. Precomposing with $F_X^{rs}(\\gamma_{a,b}^r)$ gives precisely the immersion-composition equation of the statement. Thus no common refinement of factorizations, nor a separately assumed mixed-composition equation for $d$, is needed.",
+   "uses": [
+    "lem-sfb-locally-closed-extension-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
+    "place": "(2), formal restriction-normalization calculation"
+   }
+  },
+  {
+   "text": "For the tower square fix $a:S\\hookrightarrow X$ and $M\\in D(S,r)$. Let $A=F_X^{st}F_X^{rs}E_a^rM$, $B=E_a^tF_S^{rt}M$, and let $h_L:A\\to B$ be the left-hand path in the square. By naturality of $\\rho_a^t$ with respect to $t_S$ and then (N) for $st$,\n$$\\rho_a^t F_S^{rt}M\\circ L_a^t(h_L)=t_S(M)\\circ F_S^{st}(\\rho_a^s F_S^{rs}M)\\circ q_a^{st}(E_a^sF_S^{rs}M)\\circ L_a^tF_X^{st}(d_a^{rs}(M)).$$\nNaturality of $q_a^{st}$ at $d_a^{rs}(M)$ moves the last arrow across $q_a^{st}$; functoriality and (N) for $rs$ give\n$$\\rho_a^t F_S^{rt}M\\circ L_a^t(h_L)=t_S(M)\\circ F_S^{st}F_S^{rs}(\\rho_a^r(M))\\circ F_S^{st}(q_a^{rs}(E_a^rM))\\circ q_a^{st}(F_X^{rs}E_a^rM).\\tag{L}$$\nEach arrow has source $L_a^tA$ and the entire composite ends at $F_S^{rt}M$. This calculation uses the normalization already proved, not any additional coefficient-comparison theorem.",
+   "uses": [
+    "lem-sfb-locally-closed-extension-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
+    "place": "(3), coefficient-tower normalization calculation"
+   }
+  },
+  {
+   "text": "Let $h_R=d_a^{rt}(M)\\circ t_X(E_a^rM)$ be the other tower path. By (N) for $rt$ and the given compatibility between $q$ and $t$,\n$$\\rho_a^t F_S^{rt}M\\circ L_a^t(h_R)=F_S^{rt}(\\rho_a^r(M))\\circ t_S(L_a^rE_a^rM)\\circ F_S^{st}(q_a^{rs}(E_a^rM))\\circ q_a^{st}(F_X^{rs}E_a^rM).$$\nNaturality of $t_S$ at $\\rho_a^r(M)$ says\n$$F_S^{rt}(\\rho_a^r(M))\\circ t_S(L_a^rE_a^rM)=t_S(M)\\circ F_S^{st}F_S^{rs}(\\rho_a^r(M)).$$\nSubstitution gives exactly (L). Cancel the invertible target map $\\rho_a^t F_S^{rt}M$ to obtain $L_a^t(h_L)=L_a^t(h_R)$. To apply Step 2 here, the source is identified with $E_a^t(F_S^{st}F_S^{rs}M)$ by the isomorphism $d_a^{st}(F_S^{rs}M)\\circ F_X^{st}(d_a^{rs}(M))$; the target is already $E_a^tF_S^{rt}M$. The Hom bijection for coefficient $t$ detects equality of these arrows even though these two objects on $S$ differ. Hence $h_L=h_R$, which is the required tower equation, naturally in $M$.",
+   "uses": [
+    "lem-sfb-locally-closed-extension-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
+    "place": "(3), coefficient-tower normalization calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-locally-closed-extension-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
+  "place": "Proof (2)-(3), conditional coherence argument written explicitly from the assumed q and t equations and the existing extension-coherence theorem",
+  "group": "Q68",
+  "date": "2026-10-21"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -61,10 +147,52 @@
    "results": "0 hits: ",
    "date": "2026-10-21",
    "verdict": "no match: faithful-functor primitives and scheme immersion uniqueness do not give these conditional factorization, composition and coefficient-tower equations for normalized comparisons"
+  },
+  {
+   "tool": "grep",
+   "query": "normalized.*immersion|immersion.*comparison.*coher|extensionByZero",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: generic faithful/essential-image functors, finite-support objects and Zariski module restriction do not state the normalized pro-etale comparison equations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Faithfulness of restriction on extension by zero images detects equality of normalized coefficient comparison maps",
+   "results": "8 hits: Finsupp.restrictSupportEquiv_symm_apply_coe, Finsupp.restrictSupportEquiv, ContinuousLinearMap.restrictScalars_zero, Finsupp.supportedEquivFinsupp, ZeroHom.mk.noConfusion, AlgHom.restrictNormal.congr_simp, ContinuousMapZero.mk.noConfusion, ZeroHom.ext_iff",
+   "date": "2026-10-21",
+   "verdict": "no match: generic faithful/essential-image functors, finite-support objects and Zariski module restriction do not state the normalized pro-etale comparison equations"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Faithful, CategoryTheory.NatTrans",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: generic faithful/essential-image functors, finite-support objects and Zariski module restriction do not state the normalized pro-etale comparison equations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction normalized comparison isomorphisms for fully faithful immersion extensions respect factorization composition and coefficient towers",
+   "results": "8 hits: AlgHom.restrictNormal_comp, AlgEquiv.restrictNormal_trans, IsScalarTower.AlgEquiv.restrictNormalHom_comp, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, IsScalarTower.AlgEquiv.restrictNormalHom_comp_apply, AlgebraicGeometry.IsOpenImmersion.app_eq_appIso_inv_app_of_comp_eq, AlgebraicGeometry.Scheme.Hom.liftCoborder_ι_assoc, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app",
+   "date": "2026-10-21",
+   "verdict": "no match: generic faithful/essential-image functors, finite-support objects and Zariski module restriction do not state the normalized pro-etale comparison equations"
+  },
+  {
+   "tool": "grep",
+   "query": "Faithful|map_injective",
+   "results": "25 hits: Mathlib/CategoryTheory/Functor/CurryingThree.lean, Mathlib/CategoryTheory/Functor/CurryingThree.lean, Mathlib/CategoryTheory/Functor/CurryingThree.lean, Mathlib/CategoryTheory/Functor/CurryingThree.lean, Mathlib/CategoryTheory/Functor/CurryingThree.lean, Mathlib/CategoryTheory/Functor/ReflectsIso/Jointly.lean, Mathlib/CategoryTheory/Functor/ReflectsIso/Jointly.lean, Mathlib/CategoryTheory/Functor/ReflectsIso/Jointly.lean; subdirectory CategoryTheory/Functor",
+   "date": "2026-10-21",
+   "verdict": "no match: generic faithful/essential-image functors, finite-support objects and Zariski module restriction do not state the normalized pro-etale comparison equations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor faithful on the essential image of an extension functor proves coherence by equality after restriction",
+   "results": "8 hits: CategoryTheory.Functor.essImage_ext, CategoryTheory.Functor.essImage.liftFunctorCompIso, CategoryTheory.Functor.essImage_ext_iff, CategoryTheory.Functor.Faithful.div, CategoryTheory.Functor.essImage.liftFunctor_map, CategoryTheory.Functor.Faithful.toEssImage, CategoryTheory.Functor.essImage.liftFunctor, CategoryTheory.Functor.essImage.liftFunctorCompIso_hom_app",
+   "date": "2026-10-21",
+   "verdict": "no match: generic faithful/essential-image functors, finite-support objects and Zariski module restriction do not state the normalized pro-etale comparison equations"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-prop-scalar-six-pullback",
@@ -81,5 +209,22 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-normalized-immersion-comparison-coherence",
+  "worker": "stage1",
+  "group": "Q68",
+  "summary": "Statement unchanged. Seven explicit steps use the existing locally closed extension theorem, prove restriction detection on isomorphic extension images, compute binary normalization, and derive factorization independence, immersion composition, and the coefficient tower equation. No new nodes: all further inferences are naturality and cancellation with their equations written out. Checked exact citation statements, source route, edge cases and logged searches.",
+  "blueprint": "det-prop-scalar-six-pullback proof (2), extension-by-zero composition, and proof (3), compatibility with coefficient associativity. This item isolates conditional coherence of already supplied maps and neither constructs scalar extension nor invokes purity.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q68-c6939730c",
+  "group": "Q68",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q68-c6939730c (reviewer sub-agent of L); spot-checked: Read the item in full: statement, 7 steps, deps and searches. The statement is byte-identical to its Q20 creation, so it is not weakened. Also read the full statement of the only cited node lem-sfb-locally-closed-extension-coherence (same unit sk-prop-scalar-six, reviewed pass), unit sk-prop-scalar-six, main-20261015 det-prop-scalar-six-pullback proof (2)-(3), and the citer's steps 6 and 8 (F=T, q=θ⁻¹, t=τ). Step 1: the hypotheses match the cited theorem (Noetherian X, any commutative ring sheaf, R_S=a⁻¹R through the cartesian identifications); (G) is its γ normalization and (N) types 'restriction is q'. Step 2: conjugating to extension images and using injectivity of the Hom bijection is correct; (N) determines L(h) because ρF is invertible. Step 3: recomputed (B) from naturality of ρ_a, (N) for a and b, and naturality of q_b; the q-composition law, (G) for both coefficients and naturality of q_ab then give (N) for ab. Steps 4-5: factorization independence (closed-then-open, open-then-closed, clopen with two supplied d's) and the composition equation follow from Steps 3 and 2. Steps 6-7: recomputed (L) on both paths using the assumed q-t square and naturality of t_S, then cancelled ρ and applied Step 2 at coefficient t with P≠Q. Edge cases checked: identity immersion, empty S, zero ring, clopen a, t=id; no exactness or additivity of F is used. Duplicate search by rg (module extension coherence, étale locally closed comparison, coherence refinement, open-shriek iso nodes) found nothing. No SGA citation, no route departure, no new nodes, no tool_uses, no fixes."
  }
 }
