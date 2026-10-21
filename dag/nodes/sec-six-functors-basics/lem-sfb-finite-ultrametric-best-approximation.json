@@ -8,11 +8,81 @@
   "place": "Paragraph (3), geometric norm-coefficient projection: finite-dimensional best-approximation induction used to construct the orthogonal basis; exact external reference WANTED."
  },
  "stmt_deps": [
-  "def-weil-l-adic-coefficient-extension"
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-finite-dimensional-subspace"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Give $W$ its restricted norm and write $r=\\|x\\|$. The ultrametric inequality implies the usual triangle inequality. By [lem-weil-l-adic-extension-proper], closed balls in $E$ are compact, so each point has a compact neighbourhood (its closed ball of radius $1$). Thus $E$ is locally compact. Its absolute value is nontrivial since $|\\ell|=\\ell^{-1}<1$. These observations supply the scalar hypotheses of the finite-dimensional properness theorem.",
+   "uses": [
+    "lem-weil-l-adic-extension-proper"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), proper/open direct-image coefficient argument: finite-dimensional nearest-point input to the supported-lattice orthogonal-basis construction; this analytic input is an agent expansion, absent from the blueprint paragraph itself. Agent proof using the two cited Mathlib results."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-finite-dimensional-normed-proper] with $K=E$ and $Y=W$, which is finite-dimensional by hypothesis and has a definite homogeneous restricted norm. The set $C=\\{w\\in W:\\|w\\|\\leq r\\}$ is consequently compact in $W$. It is nonempty because $0\\in W$ and $r\\geq0$. This applies also when $r=0$ or $W=0$.",
+   "uses": [
+    "lem-sfb-finite-dimensional-normed-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), proper/open direct-image coefficient argument: finite-dimensional nearest-point input to the supported-lattice orthogonal-basis construction; this analytic input is an agent expansion, absent from the blueprint paragraph itself. Agent proof using the two cited Mathlib results."
+   }
+  },
+  {
+   "text": "Define $f:W\\to\\mathbf R$ by $f(w)=\\|x-w\\|$. For $u,v\\in W$, the ordinary triangle inequality gives $f(u)\\leq f(v)+\\|u-v\\|$ and $f(v)\\leq f(u)+\\|u-v\\|$. Hence $|f(u)-f(v)|\\leq\\|u-v\\|$, proving continuity of $f$ on $W$ and therefore on $C$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), proper/open direct-image coefficient argument: finite-dimensional nearest-point input to the supported-lattice orthogonal-basis construction; this analytic input is an agent expansion, absent from the blueprint paragraph itself. Agent proof using the two cited Mathlib results."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-compact-real-function-minimum] to the nonempty compact subset $C$ of the normed space $W$ and the continuous real function $f$. Obtain $w_0\\in C$ with $f(w_0)\\leq f(w)$ for all $w\\in C$. In particular, since $0\\in C$, $f(w_0)\\leq f(0)=r$.",
+   "uses": [
+    "lem-sfb-compact-real-function-minimum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), proper/open direct-image coefficient argument: finite-dimensional nearest-point input to the supported-lattice orthogonal-basis construction; this analytic input is an agent expansion, absent from the blueprint paragraph itself. Agent proof using the two cited Mathlib results."
+   }
+  },
+  {
+   "text": "If $w\\in W\\setminus C$, then $\\|w\\|>r$. Ultrametricity gives $f(w)\\leq\\max(r,\\|w\\|)=\\|w\\|$ and $\\|w\\|\\leq\\max(r,f(w))$, using $w=x-(x-w)$. The latter inequality and $\\|w\\|>r$ force $\\|w\\|\\leq f(w)$. Therefore $f(w)=\\|w\\|>r\\geq f(w_0)$. Together with the minimum inequality on $C$, this proves that $w_0$ minimizes $f$ over all of $W$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), proper/open direct-image coefficient argument: finite-dimensional nearest-point input to the supported-lattice orthogonal-basis construction; this analytic input is an agent expansion, absent from the blueprint paragraph itself. Agent proof using the two cited Mathlib results."
+   }
+  },
+  {
+   "text": "The set $\\{\\|x-w\\|:w\\in W\\}$ is nonempty and bounded below by $0$. Its member $f(w_0)$ is a lower bound by the previous step, so it equals the infimum. If $x\\notin W$, then $x-w_0\\ne0$ because $w_0\\in W$. Definiteness gives $f(w_0)>0$. Only the restricted norm on $W$ and its compact ball were used; the ambient space $V$ was never assumed complete.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), proper/open direct-image coefficient argument: finite-dimensional nearest-point input to the supported-lattice orthogonal-basis construction; this analytic input is an agent expansion, absent from the blueprint paragraph itself. Agent proof using the two cited Mathlib results."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-l-adic-extension-proper",
+  "lem-sfb-finite-dimensional-normed-proper",
+  "lem-sfb-compact-real-function-minimum"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3) supplies only the direct-image route, not the analytic proof. The worker wrote the compact-ball minimization argument using FiniteDimensional.proper and IsCompact.exists_isMinOn read in the pinned Mathlib source."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -108,10 +178,104 @@
    },
    "date": "2026-10-21",
    "verdict": "no match: hits are real inner-product projection or generic finite-dimensional completeness, not the ultrametric attainment statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every nonempty closed subset of a proper metric space contains a nearest point to any point",
+   "results": {
+    "t": "2026-10-21T22:33:49Z",
+    "tool": "leanfinder",
+    "query": "Every nonempty closed subset of a proper metric space contains a nearest point to any point",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "IsClosed.exists_infDist_eq_dist",
+     "Metric.exists_mem_closure_infDist_eq_dist",
+     "isClosedMap_nndist",
+     "IsCompact.exists_infDist_eq_dist",
+     "isProperMap_nndist",
+     "isClosedMap_dist",
+     "IsCompact.exists_infEdist_eq_edist",
+     "IsCompact.exists_infEDist_eq_edist"
+    ],
+    "digest": "21bbfc0b496bb98f"
+   },
+   "date": "2026-10-22",
+   "verdict": "no exact match: properness and compact extreme-value results support the split, but nearest-point results for closed subsets of a proper ambient space assume properness of that ambient space, and the inner-product projection theorem requires a real/complex inner product absent here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Nearest point to a finite dimensional subspace of a normed space over a locally compact normed field",
+   "results": {
+    "t": "2026-10-21T22:33:59Z",
+    "tool": "leansearch",
+    "query": "Nearest point to a finite dimensional subspace of a normed space over a locally compact normed field",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Submodule.exists_norm_eq_iInf_of_complete_subspace",
+     "riesz_lemma",
+     "exists_norm_eq_iInf_of_complete_convex",
+     "AffineSubspace.signedInfDist_apply_self",
+     "EuclideanGeometry.dist_orthogonalProjection_eq_infNndist",
+     "Submodule.starProjection_minimal",
+     "AffineSubspace.signedInfDist_def",
+     "EuclideanGeometry.dist_orthogonalProjection_eq_infDist"
+    ],
+    "digest": "2c71cbdd4d72bb02"
+   },
+   "date": "2026-10-22",
+   "verdict": "no exact match: properness and compact extreme-value results support the split, but nearest-point results for closed subsets of a proper ambient space assume properness of that ambient space, and the inner-product projection theorem requires a real/complex inner product absent here."
+  },
+  {
+   "tool": "loogle",
+   "query": "FiniteDimensional.proper",
+   "results": {
+    "t": "2026-10-21T22:34:00Z",
+    "tool": "loogle",
+    "query": "FiniteDimensional.proper",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "FiniteDimensional.proper"
+    ],
+    "digest": "876593002071cd90"
+   },
+   "date": "2026-10-22",
+   "verdict": "no exact match: properness and compact extreme-value results support the split, but nearest-point results for closed subsets of a proper ambient space assume properness of that ambient space, and the inner-product projection theorem requires a real/complex inner product absent here."
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*(norm|dist).*(iInf|infDist)|theorem proper|exists_isMinOn",
+   "results": {
+    "t": "2026-10-21T22:33:59Z",
+    "tool": "grep",
+    "query": "exists.*(norm|dist).*(iInf|infDist)|theorem proper|exists_isMinOn",
+    "sub": "Analysis/Normed",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Mathlib/Analysis/Normed/Algebra/GelfandMazur.lean",
+     "Mathlib/Analysis/Normed/Algebra/GelfandMazur.lean",
+     "Mathlib/Analysis/Normed/Algebra/GelfandMazur.lean",
+     "Mathlib/Analysis/Normed/Algebra/GelfandMazur.lean",
+     "Mathlib/Analysis/Normed/Algebra/GelfandMazur.lean"
+    ],
+    "digest": "632111cafa947989"
+   },
+   "date": "2026-10-22",
+   "verdict": "no exact match: properness and compact extreme-value results support the split, but nearest-point results for closed subsets of a proper ambient space assume properness of that ambient space, and the inner-product projection theorem requires a real/complex inner product absent here."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-countable-normed-orthogonal-basis",
@@ -123,7 +287,7 @@
  "blueprint": {
   "from": {
    "node": null,
-   "place": "Paragraph (3), geometric norm-coefficient projection: finite-dimensional best-approximation induction used to construct the orthogonal basis; exact external reference WANTED.",
+   "place": "Paragraph (3), proper/open direct-image coefficient argument: finite-dimensional nearest-point input to the supported-lattice orthogonal-basis construction; this analytic input is an agent expansion, absent from the blueprint paragraph itself.",
    "via": [
     "lem-sfb-countable-normed-orthogonal-basis",
     "lem-sfb-supported-lattice-norm-projection",
@@ -139,5 +303,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-finite-ultrametric-best-approximation",
+  "worker": "stage1",
+  "summary": "Unchanged statement; a compact ball in W suffices for minimization. Reused finite-extension properness, added two generic Mathlib leaves, proved norm-distance continuity and the ultrametric exclusion of points outside the ball explicitly, and deduced positivity from attainment. Retained the null blueprint ancestor as required by blueprint_refs.py and preflight; reported the explicit older ancestor found by tracing to lem-sfb-admissible-direct-image. No ambient completeness, discrete norm values for V, or finite-dimensional closedness theorem is used.",
+  "blueprint": "Paragraph (3), proper/open direct-image coefficient argument: finite-dimensional nearest-point input to the supported-lattice orthogonal-basis construction; this analytic input is an agent expansion, absent from the blueprint paragraph itself.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NH-bbfca1fa7",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-bbfca1fa7 (reviewer sub-agent of L); spot-checked: I read the item, both new Mathlib leaves, every cited node (lem-weil-l-adic-extension-proper, def-weil-l-adic-coefficient-extension, lem-weil-l-adic-extension-absolute-value, def-weil-l-adic-numbers, def-weil-finite-dimensional-subspace, def-weil-field, def-kun-subspace-topology), the citer lem-sfb-countable-normed-orthogonal-basis step 1, blueprint main-20261015 sk-thm-sf-ctf-stability-direct-images.proof.md paragraph (3), and the Mathlib source of FiniteDimensional.proper (FiniteDimension.lean 544-556) and IsCompact.exists_isMinOn (Topology/Order/Compact.lean 229-234). The statement is unchanged, so the citer still gets the nearest point it needs. The proof checks out step by step. Step 1: E is proper, hence locally compact, and |l|=1/l<1 makes it nontrivially normed. Step 2: the ball C of radius r=||x|| in W is compact by FiniteDimensional.proper with K=E, Y=W; no completeness or properness of V is used. Step 3: w -> ||x-w|| is 1-Lipschitz, so continuous. Step 4: it attains a minimum w0 on C, and f(w0)<=f(0)=r. Step 5: for ||w||>r, the two ultrametric inequalities give f(w)=||w||>r, so w0 is a global minimum; no value-group discreteness is needed. Step 6: the infimum is attained and is positive by definiteness when x is not in W. Small cases checked: the Gauss norm on Q_l(t) with W=Q_l and x=t; W=0; x in W; a case with several nearest points; incomplete V. Both leaves are exact or one-line Mathlib matches with lines given and all three search kinds recorded. The proper leaf shares its declaration with lem-weil-l-adic-extension-proper, but that node is only the special case K=Q_l, Y=E and cannot give compactness of balls in an arbitrary normed E-space W, so the new node is not a duplicate. No DAG node carries exists_isMinOn. No new node restates a clause of the item, there is no cycle, proof_deps equals the union of the step uses, no SGA is cited, and this is not a re-split under a repair note. One immaterial slip: the minimum leaf's line range says 230-235, but the proof ends at 234. No fixes."
  }
 }
