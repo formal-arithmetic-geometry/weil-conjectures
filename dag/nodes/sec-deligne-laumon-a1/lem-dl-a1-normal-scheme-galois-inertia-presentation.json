@@ -16,9 +16,181 @@
   "def-weil-geometric-point",
   "def-weil-algebraic-closure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each $x$, $A_x$ is a normal local domain. Lying over supplies a prime above its maximal ideal in its integral closure in $\\Omega$; that prime is maximal because the extension is integral. Apply the local henselian/global inertia comparison to $A_x$: both henselizations are domains and its compatible embedding $A_x^{\\mathrm{sh}}\\subset\\Omega$ extends to the fraction field. Thus the domains and compatible embeddings required in the statement exist. We use the comparison for arbitrary chosen embeddings below.",
+   "uses": [
+    "pqf-lem-lying-over",
+    "lem-weil-pbc-integral-prime-over-maximal-maximal",
+    "lem-dl-a1-henselian-global-inertia-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BTD, setup; Tag 0BSW, lemma-identify-inertia and its preceding setup."
+   }
+  },
+  {
+   "text": "For a finite etale $X$-scheme $P$, restrict to $\\operatorname{Spec}K$ and act on its geometric generic lifts by $\\sigma\\cdot t=t\\circ\\operatorname{Spec}(\\widetilde\\sigma)$. The field Galois equivalence identifies this with the continuous action on $\\operatorname{Hom}_K(\\operatorname{Spec}\\Omega,P_K)$; the extension to $\\widetilde\\Omega$ does not change these lifts. Naturality in $P$ gives an automorphism of its fibre functor, hence an element $q_X(\\sigma)$ of $\\pi_1(X,\\bar\\eta)$ under the finite-etale/fibre equivalence. Composition satisfies $(\\sigma\\tau)\\cdot t=\\sigma\\cdot(\\tau\\cdot t)$, since Spec reverses compositions. Every evaluation is continuous on a finite discrete fibre, so $q_X$ is continuous for the evaluation topology. Functoriality identifies this map with the one induced by $\\operatorname{Spec}K\\to X$.",
+   "uses": [
+    "lem-exc-etale-field-gsets",
+    "thm-galois-fundamental",
+    "lem-galois-pi1-functoriality",
+    "def-galois-fibre-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BNE and Remark 0BQ9, remark-variance; Tag 0BND, theorem-fundamental-group."
+   }
+  },
+  {
+   "text": "Put $\\Pi=\\pi_1(X,\\bar\\eta)$ and $H=q_X(G)$. The group $G$ is compact: by the Krull limit theorem (applicable since $\\Omega/K$ is Galois) it is isomorphic as a topological group to the inverse limit of the finite discrete groups $\\operatorname{Gal}(L'/K)$, a closed subset of their product, which is compact. $\\Pi$ is profinite, hence Hausdorff. The image $H$ is therefore compact and closed. If $H\\ne\\Pi$, profinite subgroup separation gives a proper open subgroup $W\\supset H$. Its coset set $\\Pi/W$ is finite (its discrete cosets cover compact $\\Pi$) and continuous, and the fibre equivalence realizes it by a finite etale cover $P$ of $X$. The coset $W$ is fixed by $H$, hence gives a $G$-equivariant map from a singleton to the generic fibre of $P$. The field equivalence gives a section over $\\operatorname{Spec}K$. Generic-point full faithfulness extends it to a section over $X$. Under the fibre equivalence the chosen coset is then fixed by every element of $\\Pi$, forcing $W=\\Pi$, a contradiction. Thus $q_X$ is surjective.",
+   "uses": [
+    "lem-galois-aut-profinite",
+    "lem-exc-galois-krull-finite-limit",
+    "lem-weil-pbc-separable-closure-exists-galois",
+    "lem-wf-profinite-closed-subgroup-intersection-open",
+    "thm-galois-fundamental",
+    "lem-exc-etale-field-gsets",
+    "lem-sbc-normal-integral-generic-hom-full"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BQM, proposition-normal, surjectivity argument through generic-point full faithfulness."
+   }
+  },
+  {
+   "text": "Let $N$ be the smallest closed normal subgroup containing the $J_x$. For a finite etale $P\\to X$, its pullback to $\\operatorname{Spec}A_x^{\\mathrm{sh}}$ is finite etale. The strict henselization $A_x^{\\mathrm{sh}}$ is a strictly henselian local ring, so it is henselian with separably closed residue field. Henselian finite-etale equivalence identifies its algebra with a finite etale algebra over the separably closed residue field. The field product classification says the latter is a finite product of that residue field; full faithfulness of the equivalence therefore identifies the original algebra with a finite product of $A_x^{\\mathrm{sh}}$. Its generic fibre is consequently a disjoint union of copies of $\\operatorname{Spec}K_x^{\\mathrm{sh}}$. Since $J_x$ fixes this field, it acts trivially on the geometric fibre of $P$. This holds for every $P$, so $q_X(J_x)=1$. The kernel of the continuous homomorphism is closed and normal, and therefore $N\\subseteq\\ker q_X$.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-local-structure",
+    "lem-galois-pi1-functoriality",
+    "lem-weil-pbc-henselian-finite-etale-equivalence",
+    "lem-weil-pbc-etale-algebra-over-field-product",
+    "thm-galois-fundamental"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BTD, first proof paragraph; Tag 0BSM, lemma-local-exact-sequence-normal, trivial-composition argument."
+   }
+  },
+  {
+   "text": "Fix an open normal subgroup $U\\supseteq N$ of $G$. The open-subgroup fixed-field theorem gives a finite separable extension $L=\\Omega^U$ and $U=\\operatorname{Gal}(\\Omega/L)$. For $g\\in G$, $u\\in U$, $a\\in L$, one has $u(g(a))=g((g^{-1}ug)(a))=g(a)$, so $g(L)=L$. Any $K$-embedding $L\\to\\Omega$ extends to a $K$-endomorphism of $\\Omega$, which is an automorphism because $\\Omega/K$ is algebraic. Thus all embeddings carry $L$ into itself; $L/K$ is normal and hence finite Galois. We will prove that $\\ker q_X\\subseteq U$ by constructing its finite etale normalization cover.",
+   "uses": [
+    "lem-exc-etale-open-subgroup-fixed-field",
+    "lem-exc-etale-embedding-extension-sepclosed",
+    "lem-exc-etale-algebraic-endomorphism-bijective",
+    "lem-weil-pbc-separable-closure-exists-galois"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BTD, second proof paragraph, open-normal finite-quotient reduction."
+   }
+  },
+  {
+   "text": "Two $K$-embeddings $i,j:K_x^{\\mathrm{sh}}\\to\\Omega$ have conjugate fixing subgroups: the isomorphism $j\\circ i^{-1}:i(K_x^{\\mathrm{sh}})\\to j(K_x^{\\mathrm{sh}})$ extends to a $K$-endomorphism of $\\Omega$ by the embedding-extension theorem, and the algebraic-endomorphism theorem makes it an automorphism $g$. Pointwise evaluation then gives $\\operatorname{Aut}_{j(K_x^{\\mathrm{sh}})}(\\Omega)=g\\operatorname{Aut}_{i(K_x^{\\mathrm{sh}})}(\\Omega)g^{-1}$. For a prime over $x$ in the integral closure in $\\Omega$, localize the affine base at $x$. Integral closure commutes with this localization and its prime over the maximal ideal is maximal. The local inertia comparison identifies the inertia of this prime with the fixing subgroup of one such embedding. Localization does not change its fraction residue field or stabilizer. Hence every such inertia subgroup is conjugate to the chosen $J_x$, and is contained in $N$.",
+   "uses": [
+    "lem-exc-etale-embedding-extension-sepclosed",
+    "lem-exc-etale-algebraic-endomorphism-bijective",
+    "lem-weil-pbc-separable-closure-exists-galois",
+    "lem-weil-pbc-integral-closure-commutes-localization",
+    "lem-weil-pbc-integral-prime-over-maximal-maximal",
+    "lem-dl-a1-henselian-global-inertia-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BTD, first sentence of proof, using Tag 0BSW; conjugacy of embeddings written out."
+   }
+  },
+  {
+   "text": "Take a nonempty affine open $V=\\operatorname{Spec}A$ of $X$. Its ring is a domain with fraction field $K$, and is integrally closed: an element $z\\in K$ integral over $A$ belongs to every $A_{\\mathfrak p}$ by normality of the stalks; the ideal $\\{a\\in A:az\\in A\\}$ is therefore contained in no maximal ideal, so contains $1$. Put $B$ and $C$ for the integral closures of $A$ in $L$ and $\\Omega$. For every prime $\\mathfrak q\\subset B$, lying over for $B\\subset C$ gives $\\mathfrak r\\subset C$ above it. (Every element of $C$ is integral over $B$ since it is integral over $A$.) By step 6, $I_{\\mathfrak r}\\subset N\\subset U$. Inertia restriction in the Galois tower $\\Omega/L/K$ is surjective onto $I_{\\mathfrak q}$. But $U$ fixes $L$, so its restriction is trivial. Therefore $I_{\\mathfrak q}=1$ for every prime of $B$.",
+   "uses": [
+    "pqf-lem-lying-over",
+    "lem-dl-a1-inertia-restriction-surjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BTD, second proof paragraph; Tag 0BSX, lemma-one-orbit-geometric-galois-compare."
+   }
+  },
+  {
+   "text": "Let $\\Gamma=\\operatorname{Gal}(L/K)$. It acts on $B$ because it preserves monic equations over $A$. Its invariant ring is $A$: an invariant element of $B$ belongs to $K$ by finite Galois fixed-field theory and then belongs to $A$ by the integrally closed property proved in step 7; the reverse inclusion is immediate. At every prime $\\mathfrak q$ of $B$, step 7 gives $I_{\\mathfrak q}=1$, so the inertia-invariant-ring theorem says that $\\operatorname{Spec}(B)=\\operatorname{Spec}(B^{I_{\\mathfrak q}})\\to\\operatorname{Spec}(B^\\Gamma)=\\operatorname{Spec}A$ is etale near $\\mathfrak q$. These neighbourhoods cover $\\operatorname{Spec}B$. The map is integral by construction and locally of finite type because it is etale, hence is finite. Apply this on every affine open $V$. The relative normalization $Y\\to X$ of $X$ in $\\operatorname{Spec}L$ is given there by these same rings $B$, so is finite etale globally. Here $\\operatorname{Spec}L\\to X$ is qcqs: its inverse image over every nonempty affine is $\\operatorname{Spec}L$, and it is separated. No finiteness of normalization has been assumed.",
+   "uses": [
+    "lem-weil-pbc-finite-galois-fixed-field",
+    "lem-dl-a1-finite-group-inertia-invariants-etale",
+    "lem-weil-pbc-relative-normalization",
+    "lem-weil-pbc-finite-iff-integral-lft",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BTD, last proof sentences; Tag 0BST, lemma-inertia-invariants-etale; Tag 01WJ, morphisms-lemma-finite-integral."
+   }
+  },
+  {
+   "text": "The generic fibre of $Y$ is $\\operatorname{Spec}L$: integral closure commutes with localization to $K$, and the integral closure of $K$ in the algebraic field extension $L$ is all of $L$. Its geometric fibre is $\\operatorname{Hom}_K(L,\\Omega)$. In this finite $G$-set the stabilizer of the inclusion $L\\subset\\Omega$ is $\\operatorname{Gal}(\\Omega/L)=U$. Every element of $\\ker q_X$ fixes the fibre of every finite etale $X$-cover, in particular that chosen point of $Y$. Therefore $\\ker q_X\\subseteq U$.",
+   "uses": [
+    "lem-weil-pbc-integral-closure-commutes-localization",
+    "lem-exc-etale-field-galois-classification",
+    "thm-galois-fundamental"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BTD, finite quotient factors through pi_1(X), realized on the normalization cover."
+   }
+  },
+  {
+   "text": "Finally $N$ is the intersection of its open normal overgroups. Indeed, profinite subgroup separation expresses $N$ as the intersection of its open overgroups $W$. For each such $W$, its finite coset action has open normal kernel $U_W\\subseteq W$. Since $N$ is normal and contained in $W$, every $n\\in N$ fixes every coset $gW$ ($g^{-1}ng\\in N\\subset W$), hence $N\\subseteq U_W$. Thus these open normal overgroups already have intersection $N$. Step 9 puts $\\ker q_X$ in each of them, and step 4 gives the reverse containment. This proves equality. Step 6 shows that changing any of the embeddings only conjugates the corresponding $J_x$, which leaves their closed normal closure unchanged; the construction and proof consequently apply to all the choices in the statement.",
+   "uses": [
+    "lem-wf-profinite-closed-subgroup-intersection-open"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BTD, open-normal quotient reduction and conclusion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-lem-lying-over",
+  "lem-weil-pbc-integral-prime-over-maximal-maximal",
+  "lem-dl-a1-henselian-global-inertia-comparison",
+  "lem-exc-etale-field-gsets",
+  "thm-galois-fundamental",
+  "lem-galois-pi1-functoriality",
+  "def-galois-fibre-functor",
+  "lem-galois-aut-profinite",
+  "lem-wf-profinite-closed-subgroup-intersection-open",
+  "lem-sbc-normal-integral-generic-hom-full",
+  "lem-weil-pbc-henselian-finite-etale-equivalence",
+  "lem-weil-pbc-etale-algebra-over-field-product",
+  "lem-exc-etale-open-subgroup-fixed-field",
+  "lem-exc-etale-embedding-extension-sepclosed",
+  "lem-exc-etale-algebraic-endomorphism-bijective",
+  "lem-weil-pbc-separable-closure-exists-galois",
+  "lem-weil-pbc-integral-closure-commutes-localization",
+  "lem-dl-a1-inertia-restriction-surjective",
+  "lem-weil-pbc-finite-galois-fixed-field",
+  "lem-dl-a1-finite-group-inertia-invariants-etale",
+  "lem-weil-pbc-relative-normalization",
+  "lem-weil-pbc-finite-iff-integral-lft",
+  "def-weil-etale-morphism",
+  "lem-exc-etale-field-galois-classification",
+  "lem-exc-galois-krull-finite-limit",
+  "lem-weil-pbc-strict-henselization-local-structure"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tag 0BTD, lemma-normal-pione-quotient-inertia, proof of (1)=(3); surjectivity from Tag 0BQM via generic full faithfulness; elementary finite-quotient and embedding-conjugacy details supplied."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,7 +229,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-dl-a1-weil-kernel-inertia",
@@ -76,5 +248,134 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-dl-a1-normal-scheme-galois-inertia-presentation",
+  "worker": "stage1",
+  "summary": "Expanded Stacks 0BTD into a complete finite-quotient argument, retaining the arbitrary normal integral scheme and all embedding choices. Reused the existing local inertia comparison, generic full faithfulness, henselian finite-etale equivalence, field classification and profinite separation. Added two strictly smaller statement-only algebra inputs: 0BSX inertia restriction and 0BST inertia invariant etaleness. Proved surjectivity directly by extending a generic section of a coset cover; finiteness of normalization is deduced after etaleness, not assumed. No statement correction.",
+  "blueprint": "Second paragraph of rem-dl-a1-conventions, equivalence between lisse extension across infinity and trivial inertia, via lem-dl-a1-lisse-extension-inertia and lem-dl-a1-weil-kernel-inertia; finite-quotient argument of Stacks 0BTD.",
+  "tool_uses": [
+   {
+    "node": "pqf-lem-lying-over",
+    "why": "Generic tool: Lying over for an injective integral extension. Its precise statement is used in the finite-quotient proof of 0BTD; no node in the conventions unit supplies this result."
+   },
+   {
+    "node": "lem-weil-pbc-integral-prime-over-maximal-maximal",
+    "why": "Generic tool: Under an integral ring map, a prime lying over a maximal ideal is maximal. Its precise statement is used in the finite-quotient proof of 0BTD; no node in the conventions unit supplies this result."
+   },
+   {
+    "node": "lem-exc-etale-field-gsets",
+    "why": "Generic tool: Etale schemes over a field and continuous G-sets. Its precise statement is used in the finite-quotient proof of 0BTD; no node in the conventions unit supplies this result."
+   },
+   {
+    "node": "thm-galois-fundamental",
+    "why": "Generic tool: The fibre functor is an equivalence. Its precise statement is used in the finite-quotient proof of 0BTD; no node in the conventions unit supplies this result."
+   },
+   {
+    "node": "lem-galois-pi1-functoriality",
+    "why": "Generic tool: Base change of finite etale covers and the map of fundamental groups. Its precise statement is used in the finite-quotient proof of 0BTD; no node in the conventions unit supplies this result."
+   },
+   {
+    "node": "def-galois-fibre-functor",
+    "why": "Generic tool: The fibre functor. Its precise statement is used in the finite-quotient proof of 0BTD; no node in the conventions unit supplies this result."
+   },
+   {
+    "node": "lem-galois-aut-profinite",
+    "why": "Generic tool: $\\operatorname{Aut}(F)$ is profinite. Its precise statement is used in the finite-quotient proof of 0BTD; no node in the conventions unit supplies this result."
+   },
+   {
+    "node": "lem-wf-profinite-closed-subgroup-intersection-open",
+    "why": "Generic tool: Closed subgroups of profinite groups are intersections of open overgroups. Its precise statement is used in the finite-quotient proof of 0BTD; no node in the conventions unit supplies this result."
+   },
+   {
+    "node": "lem-sbc-normal-integral-generic-hom-full",
+    "why": "Generic tool: Generic-point full faithfulness for finite etale covers of a normal integral scheme. Its precise statement is used in the finite-quotient proof of 0BTD; no node in the conventions unit supplies this result."
+   },
+   {
+    "node": "lem-weil-pbc-henselian-finite-etale-equivalence",
+    "why": "Generic tool: Finite etale algebras over a henselian local ring and over its residue field. Its precise statement is used in the finite-quotient proof of 0BTD; no node in the conventions unit supplies this result."
+   },
+   {
+    "node": "lem-weil-pbc-etale-algebra-over-field-product",
+    "why": "Generic tool: An etale algebra over a field is a finite product of finite separable extensions. Its precise statement is used in the finite-quotient proof of 0BTD; no node in the conventions unit supplies this result."
+   },
+   {
+    "node": "lem-exc-etale-open-subgroup-fixed-field",
+    "why": "Generic tool: Open subgroups of an absolute Galois group. Its precise statement is used in the finite-quotient proof of 0BTD; no node in the conventions unit supplies this result."
+   },
+   {
+    "node": "lem-exc-etale-embedding-extension-sepclosed",
+    "why": "Generic tool: Extension of an embedding into a separably closed field. Its precise statement is used in the finite-quotient proof of 0BTD; no node in the conventions unit supplies this result."
+   },
+   {
+    "node": "lem-exc-etale-algebraic-endomorphism-bijective",
+    "why": "Generic tool: Endomorphisms of algebraic field extensions are bijective. Its precise statement is used in the finite-quotient proof of 0BTD; no node in the conventions unit supplies this result."
+   },
+   {
+    "node": "lem-weil-pbc-separable-closure-exists-galois",
+    "why": "Generic tool: Existence of a separable closure; it is Galois over every intermediate field. Its precise statement is used in the finite-quotient proof of 0BTD; no node in the conventions unit supplies this result."
+   },
+   {
+    "node": "lem-weil-pbc-integral-closure-commutes-localization",
+    "why": "Generic tool: Integral closure commutes with localization (Stacks 0307). Its precise statement is used in the finite-quotient proof of 0BTD; no node in the conventions unit supplies this result."
+   },
+   {
+    "node": "lem-weil-pbc-finite-galois-fixed-field",
+    "why": "Generic tool: A finite Galois extension has finitely many automorphisms and fixed field the base. Its precise statement is used in the finite-quotient proof of 0BTD; no node in the conventions unit supplies this result."
+   },
+   {
+    "node": "lem-weil-pbc-relative-normalization",
+    "why": "Generic tool: The normalization of a scheme in a quasi-compact quasi-separated scheme over it. Its precise statement is used in the finite-quotient proof of 0BTD; no node in the conventions unit supplies this result."
+   },
+   {
+    "node": "lem-weil-pbc-finite-iff-integral-lft",
+    "why": "Generic tool: Finite = integral + locally of finite type. Its precise statement is used in the finite-quotient proof of 0BTD; no node in the conventions unit supplies this result."
+   },
+   {
+    "node": "def-weil-etale-morphism",
+    "why": "Generic tool: Etale morphism of schemes. Its precise statement is used in the finite-quotient proof of 0BTD; no node in the conventions unit supplies this result."
+   },
+   {
+    "node": "lem-exc-etale-field-galois-classification",
+    "why": "Generic tool: Finite separable field extensions and finite continuous G-sets. Its precise statement is used in the finite-quotient proof of 0BTD; no node in the conventions unit supplies this result."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-local-structure",
+    "why": "Generic tool: the geometric strict henselization colimit is a strictly henselian local ring. Step 4 needs henselianity and a separably closed residue field to apply the henselian finite-etale equivalence; no node in the conventions unit supplies this (added on review)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "pqf-lem-lying-over",
+  "lem-weil-pbc-integral-prime-over-maximal-maximal",
+  "lem-exc-etale-field-gsets",
+  "thm-galois-fundamental",
+  "lem-galois-pi1-functoriality",
+  "def-galois-fibre-functor",
+  "lem-galois-aut-profinite",
+  "lem-wf-profinite-closed-subgroup-intersection-open",
+  "lem-sbc-normal-integral-generic-hom-full",
+  "lem-weil-pbc-henselian-finite-etale-equivalence",
+  "lem-weil-pbc-etale-algebra-over-field-product",
+  "lem-exc-etale-open-subgroup-fixed-field",
+  "lem-exc-etale-embedding-extension-sepclosed",
+  "lem-exc-etale-algebraic-endomorphism-bijective",
+  "lem-weil-pbc-separable-closure-exists-galois",
+  "lem-weil-pbc-integral-closure-commutes-localization",
+  "lem-weil-pbc-finite-galois-fixed-field",
+  "lem-weil-pbc-relative-normalization",
+  "lem-weil-pbc-finite-iff-integral-lft",
+  "def-weil-etale-morphism",
+  "lem-exc-etale-field-galois-classification",
+  "lem-weil-pbc-strict-henselization-local-structure"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q151-814e07007",
+  "group": "Q151",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q151-814e07007 (reviewer sub-agent of L); spot-checked: I read Stacks 0BTD (setup and proof), 0BST and 0BSX at their labels, the item, both new nodes and the statement of every cited node; the reasoning is in review.md. The item states 0BTD (1)=(3) for any normal integral scheme, plus surjectivity via 0BQM, continuity, and independence of the embeddings. Nothing in it is weakened. The ten steps are correct: the q_X variance and continuity, surjectivity by extending the section of a coset cover through generic full faithfulness, triviality of J_x on finite étale covers, the fixed field L being normal, conjugacy of local inertia through localization, I_q=1 via 0BSX with M=Omega, Y->X finite étale via 0BST with I=1 then integral plus lft (qcqs of Spec L->X checked), stabilizer U, and the core argument for open normal overgroups. New 0BSX node: matches the source (infinite towers, arbitrary primes). It does not duplicate lem-exc-finite-galois-prime-residue-lifting (one finite extension) or lem-exc-finite-tame-character-tower (finite towers over a DVR). New 0BST node: matches the source and holds in the tests Z/2 on k[t] (t->-t at (t) and (t-1), and char 2 t->t+1). Both new nodes are statement-only and self-contained, each with 5 Mathlib searches; neither restates a clause of the item. No cycle, no SGA source. FIX, two C1/C4 citations: step 3 used compactness of the Krull group with no cited node, so I cited lem-exc-galois-krull-finite-limit and lem-weil-pbc-separable-closure-exists-galois. Step 4 applied the henselian finite-étale equivalence and a separably closed residue field without a node saying the strict henselization is strictly henselian, so I cited lem-weil-pbc-strict-henselization-local-structure and added a tool_uses entry for it. The statement is unchanged; the corrected file is fixes/dag/nodes/sec-deligne-laumon-a1/lem-dl-a1-normal-scheme-galois-inertia-presentation.json.; 1 file(s) fixed by the reviewer"
  }
 }
