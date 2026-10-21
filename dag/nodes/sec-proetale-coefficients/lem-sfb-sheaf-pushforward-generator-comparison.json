@@ -12,9 +12,66 @@
   "lem-sfb-braided-sheaf-tensor-generators",
   "lem-sfb-monoidal-adjunction-mates"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the canonical sheafified tensor of [lem-sfb-braided-sheaf-tensor-generators]. We write composition right to left and suppress pointwise tensor subscripts. For either site write $a\\dashv U$, with unit $\\eta$ and counit $\\epsilon$ [def-weil-pbc-sheafification]. Unpacking its canonical strong comparison, its inverse is\n$$\\delta_{P,Q}=a(\\eta_P\\otimes\\eta_Q):a(P\\otimes Q)\\longrightarrow aP\\otimes aQ=a(UaP\\otimes UaQ),$$\nand its unit comparison is $1_{a\\underline{\\mathbf1}}$; on sheaf morphisms the tensor is $f\\otimes g=a(Uf\\otimes Ug)$. By the mate construction [lem-sfb-monoidal-adjunction-mates], the lax tensor of $U$ at $F,G$ is\n$$m_{F,G}=U((\\epsilon_F\\otimes\\epsilon_G)\\delta_{UF,UG})\\eta_{UF\\otimes UG}.$$\nThe composite inside $U$ equals $a((U\\epsilon_F\\eta_{UF})\\otimes(U\\epsilon_G\\eta_{UG}))=1$, by the two triangle identities. Therefore $m_{F,G}=\\eta_{UF\\otimes UG}=t(F,G)$. The mate of the identity unit comparison is $\\eta_{\\underline{\\mathbf1}}=u$. This identifies the mate maps with the actual generators, for both sites.",
+   "uses": [
+    "lem-sfb-braided-sheaf-tensor-generators",
+    "def-weil-pbc-sheafification",
+    "lem-sfb-monoidal-adjunction-mates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/lem-sfb-pushforward-comp-monoidal.proof.md",
+    "place": "Second sentence; normalization of the sheaf-inclusion mate maps."
+   }
+  },
+  {
+   "text": "Put $P=rU_DF=U_CRF$, $Q=rU_DG=U_CRG$, $H=R(F\\otimes G)$ and $v=r(t_D(F,G)):P\\otimes Q\\to U_CH$. Restriction preserves the pointwise tensor and its unit componentwise, so its comparison maps are identities. Expand the composite lax structure and its transport along $\\epsilon_CR:a_CU_CR\\to R$:\n$$\\mu_{R,F,G}=\\epsilon_{C,H}\\,a_C(v)\\,\\mu^{a_C}_{P,Q}(\\epsilon_{C,RF}^{-1}\\otimes\\epsilon_{C,RG}^{-1}).$$\nHere step 1 supplies $m_D=t_D$. The counits are invertible because $U_C$ is a full inclusion [lem-sfb-braided-sheaf-tensor-generators, def-weil-pbc-sheafification]; indeed the unique extension of $1_{U_CRF}$ is inverse to its counit, as both composites are identities by unique extension. The triangle identity gives $U_C(\\epsilon_{C,RF}^{-1})=\\eta_{C,P}$, and similarly for $G$. Consequently the tensor of these inverse counits is $a_C(\\eta_{C,P}\\otimes\\eta_{C,Q})=\\delta_{C,P,Q}$, which cancels $\\mu^{a_C}_{P,Q}$. Thus\n$$\\mu_{R,F,G}=\\epsilon_{C,H}a_C(v).$$\nFor the unit, put $H_0=R\\mathbf1_D$ and $v_0=r(u_D):\\underline{\\mathbf1}\\to U_CH_0$. The composite and transport unit formula directly gives $e_R=\\epsilon_{C,H_0}a_C(v_0)$, since both the restriction and sheafification unit comparisons are identities.",
+   "uses": [
+    "lem-sfb-braided-sheaf-tensor-generators",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/lem-sfb-pushforward-comp-monoidal.proof.md",
+    "place": "Second sentence; explicit tensor and unit transport and cancellation."
+   }
+  },
+  {
+   "text": "For any presheaf map $w:S\\to U_CH'$, naturality of the adjunction unit and the triangle identity give\n$$U_C(\\epsilon_{C,H'}a_C(w))\\eta_{C,S}=U_C\\epsilon_{C,H'}\\,\\eta_{C,U_CH'}w=w.$$\nApply this first with $S=P\\otimes Q$, $H'=H$, $w=v$, and then with $S=\\underline{\\mathbf1}$, $H'=H_0$, $w=v_0$. By [lem-sfb-braided-sheaf-tensor-generators], $t_C(RF,RG)=\\eta_{C,P\\otimes Q}$ and $u_C=\\eta_{C,\\underline{\\mathbf1}}$. Inserting step 2 proves both displayed identities of the statement. This calculation is in presheaf Hom sets and uses no preservation of sheaf tensor products by evaluation.",
+   "uses": [
+    "def-weil-pbc-sheafification",
+    "lem-sfb-braided-sheaf-tensor-generators"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/lem-sfb-pushforward-comp-monoidal.proof.md",
+    "place": "Second sentence; generator equations from naturality and the triangle identity."
+   }
+  },
+  {
+   "text": "Finally apply the two Hom bijections of [lem-sfb-braided-sheaf-tensor-generators], on $C$, to the sheaf targets $R(F\\otimes G)$ and $R\\mathbf1_D$. The restricted generators are presheaf natural transformations, since restriction is precomposition. Each therefore has a unique sheaf extension, and step 3 identifies those extensions with $\\mu_R$ and $e_R$. All objects involved are on the given $\\mathcal V$-small sites and all morphism sets are in the fixed universe, as required by that lemma.",
+   "uses": [
+    "lem-sfb-braided-sheaf-tensor-generators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/lem-sfb-pushforward-comp-monoidal.proof.md",
+    "place": "Second sentence; equivalence with unique sheaf extension."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-braided-sheaf-tensor-generators",
+  "def-weil-pbc-sheafification",
+  "lem-sfb-monoidal-adjunction-mates"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/lem-sfb-pushforward-comp-monoidal.proof.md",
+  "place": "Second sentence; explicit mate and counit calculation, corroborated by the project source listed in source.place."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -64,10 +121,52 @@
    "results": "1 hits: 122; ; digest 9a1a964449e87a5d",
    "date": "2026-10-21",
    "verdict": "No match for the normalized arbitrary braided sheafification/pushforward comparison. CartesianMonoidal requires cartesian tensor; Sites/Monoidal provides the tensor structure, not these pushforward formulas."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafPushforwardContinuous|sheafToPresheaf.*(μ|ε)|rightAdjointLaxMonoidal",
+   "results": "25 hits: Mathlib/CategoryTheory/Sites/Point/Map.lean, Mathlib/CategoryTheory/Sites/Point/Map.lean, Mathlib/CategoryTheory/Sites/Point/Map.lean, Mathlib/CategoryTheory/Sites/Point/Comap.lean, Mathlib/CategoryTheory/Sites/Point/Comap.lean, Mathlib/CategoryTheory/Sites/Point/Comap.lean, Mathlib/CategoryTheory/Sites/Point/Comap.lean, Mathlib/CategoryTheory/Sites/Point/Comap.lean; ; digest f1430757aad79f17",
+   "date": "2026-10-21",
+   "verdict": "No match: CartesianMonoidal formulas assume CartesianMonoidalCategory; localized monoidal sheafification alone does not state the normalized transported pushforward equations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a monoidal reflective localization the right adjoint tensor map is the sheafification unit and restriction of sheaves is compatible with it",
+   "results": "8 hits: PresheafOfModules.sheafificationAdjunction, CategoryTheory.toSheafification, CategoryTheory.plusPlusAdjunction, CategoryTheory.sheafificationAdjunction_unit_app, CategoryTheory.Localization.Monoidal.ε', CategoryTheory.GrothendieckTopology.instIsLocalizationFunctorOppositeSheafPresheafToSheafW, CategoryTheory.sheafificationAdjunction, CategoryTheory.Localization.Monoidal.toMonoidalCategory; ; digest e4d0c0e210cee1d6",
+   "date": "2026-10-21",
+   "verdict": "No match: CartesianMonoidal formulas assume CartesianMonoidalCategory; localized monoidal sheafification alone does not state the normalized transported pushforward equations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafToPresheaf\", \"μ\"",
+   "results": "1 hits: CategoryTheory.sheafToPresheaf_μ; ; digest 9cdc3cd5bcc52527",
+   "date": "2026-10-21",
+   "verdict": "No match: CartesianMonoidal formulas assume CartesianMonoidalCategory; localized monoidal sheafification alone does not state the normalized transported pushforward equations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The transported lax monoidal structure on restriction of sheaves agrees on actual sheafification tensor and unit generators with restriction of those generators",
+   "results": "8 hits: CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf, CategoryTheory.GrothendieckTopology.W.transport_isMonoidal, CategoryTheory.Sheaf.monoidalCategory, CategoryTheory.sheafToPresheaf_μ, instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite, SheafOfModules.sheafificationCompPullback, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, CategoryTheory.sheafToPresheaf_δ; ; digest 431e2fb580a9d8fc",
+   "date": "2026-10-21",
+   "verdict": "No match: CartesianMonoidal formulas assume CartesianMonoidalCategory; localized monoidal sheafification alone does not state the normalized transported pushforward equations."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafToPresheaf_μ|sheafToPresheaf_ε|μ_sheaf|ε_sheaf",
+   "results": "2 hits: Mathlib/CategoryTheory/Sites/CartesianMonoidal.lean, Mathlib/CategoryTheory/Sites/CartesianMonoidal.lean; ; digest 8d157d9c6fadfa27",
+   "date": "2026-10-21",
+   "verdict": "No match: CartesianMonoidal formulas assume CartesianMonoidalCategory; localized monoidal sheafification alone does not state the normalized transported pushforward equations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The right adjoint of strong monoidal sheafification has tensor map equal to the unit at the pointwise tensor of two sheaves",
+   "results": "8 hits: CategoryTheory.sheafToPresheaf_μ, CategoryTheory.sheafToPresheaf_δ, CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf, instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite, CategoryTheory.Sheaf.monoidalCategory, PresheafOfModules.toPresheaf_map_sheafificationAdjunction_unit_app, PresheafOfModules.sheafificationAdjunction_homEquiv_apply, SheafOfModules.PullbackConstruction.adjunction; ; digest e9fbaf4d58bc4aa4",
+   "date": "2026-10-21",
+   "verdict": "No match: CartesianMonoidal formulas assume CartesianMonoidalCategory; localized monoidal sheafification alone does not state the normalized transported pushforward equations."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-pushforward-comp-monoidal",
@@ -89,5 +188,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-sheaf-pushforward-generator-comparison",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Expanded the mate tensor and unit of sheaf inclusion, calculated the counit transport on restriction explicitly, and used adjunction naturality and the generator Hom bijections to obtain the two equations and uniqueness. Reused three existing nodes, with no new nodes; checked project candidates and reran recorded Mathlib searches.",
+  "blueprint": "Realizes the second sentence of lem-sfb-pushforward-comp-monoidal.proof.md: the single-restriction lax comparison is the sheaf extension of the objectwise generator.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NN-0625a3754",
+  "group": "NN",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-0625a3754 (reviewer sub-agent of L); spot-checked: I read the item, its 4 steps, all 4 cited statements and the blueprint source (main-20261015 lem-sfb-pushforward-comp-monoidal.proof.md, second sentence). The delivery adds no new nodes. The statement is retained and matches its unique citer, parent step 1. There is no repair or re-split note, no SGA, and no cycle: the generator node's proof_deps do not lead back to the item. Step 1: the mate tensor rightAdjointLaxMonoidal is U((ε⊗ε)δ)η, δ=a(η⊗η), and the triangle identities give m=η=t; the unit is Φ(1)=η_1=u. δ=a(η⊗η) is the canonical comparison of lem-sfb-braided-sheaf-tensor-generators, constructed so in its step 7; I accept reading it from 'canonical' as a definitional unpacking. Step 2: the transport along ε_C R is checked. U(ε^{-1})=η_P, so ε^{-1}⊗ε^{-1}=δ cancels μ^{a_C}, giving μ_R=ε_H a_C(r t_D), and the unit gives e_R=ε a_C(r u_D). Types are checked. Step 3: U(ε a(w))η=w by naturality and the triangle identity gives both equations. Step 4: the Hom bijections give uniqueness. Edge cases tested: E=id, a=U=id, A=0, and Ab with a non-trivial topology, where nothing evaluates the sheaf tensor. Uses outside the unit are of Mathlib leaves only, so they are automatic. No duplicates found by a DAG scan."
  }
 }
