@@ -285,5 +285,28 @@
   "group": "N6",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-a73b6ab64 (reviewer sub-agent of L); spot-checked: PASS, no fixes and no new nodes. I read the item in full: statement unchanged, six steps. Live and side-live both still have it unsplit, so it is not superseded; no repair note, not dropped, no SGA. B10 does not apply: the Lean declarations kFlat_scalarCone, tensorScalarConeIso' and tensorScalarConeIso_hom_naturality (TensorMappingCone.lean 67-158) cover K-flatness and the comparison, but none states the descent to a functor on D(A). Step 1: I recomputed both total-tensor differentials. d_R(x,y)=(dx+(-1)^{n+1}by,dy) and d_L(x,y)=(dx+by,-dy); d_L is the cone [[d,b],[0,-d]] of def-weil-abstract-derived-category. diag(1,(-1)^{n+1}) intertwines them because s_{n+1}=-s_n. Step 2: diagonal naturality follows from B-linearity and unitor naturality. Step 3: the cone sequence is degreewise split, and the long exact sequence, its naturality and the five-lemma leaves are used as stated (Stacks 0117 lemma-long-exact-sequence-cochain, 05QB lemma-five-lemma). Step 4: two-sided K-flatness matches def-sfb-preserves-kflat-quasi-iso. Step 5: lem-sfb-derived-monoidal says it is computed by K-flat replacement with Q lax monoidal; I accept reading this as μ invertible at a K-flat argument (it is the derived-functor counit, as in isIso_μ_scalarCone), and the declared tool use is accepted. Step 6: clauses (1) and (2) of lem-weil-pbc-localization-universal-property apply with F1=HQ, F2=F̄_bQ and identity φ (04VG lemma-properties-left-localization). Small cases checked: b=0, b a unit, b a zero divisor, C=0. Duplicate search: lem-pe-principal-reduction-cone-calculus is a specialization (b=π^n, quotient, tower) and is not cited, so there is no cycle; no generalization exists in the DAG."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.ScalarConeTensorModel",
+  "declaration": "DerivedCategory.scalarCone_totalTensor_model",
+  "declarations": [
+   "DerivedCategory.scalarConeCochainFunctor",
+   "DerivedCategory.scalarCone_totalTensor_model"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/ScalarConeTensorModel.lean",
+  "statement": "theorem scalarCone_totalTensor_model (b : B) : CochainComplex.IsKFlatForTotalTensor (scalarCone (A := A) b) ∧ ∃ (Φ : tensorRight (scalarCone (A := A) b) ≅ scalarConeCochainFunctor (A := A) b) (θ : Q ⋙ tensorRight (Q.obj (scalarCone (A := A) b)) ≅ scalarConeCochainFunctor (A := A) b ⋙ Q), (∀ C : CochainComplex A ℤ, θ.hom.app C = Functor.LaxMonoidal.μ Q C (scalarCone b) ≫ Q.map (Φ.hom.app C)) ∧ (HomologicalComplex.quasiIso A (.up ℤ)).IsInvertedBy (scalarConeCochainFunctor (A := A) b ⋙ Q) ∧ ∃ (F : DerivedCategory A ⥤ DerivedCategory A) (η : Q ⋙ F ≅ scalarConeCochainFunctor (A := A) b ⋙ Q) (δ : tensorRight (Q.obj (scalarCone (A := A) b)) ≅ F), ∀ C : CochainComplex A ℤ, δ.hom.app (Q.obj C) ≫ η.hom.app C = θ.hom.app C",
+  "branch": "newtargets-dag",
+  "by": "NJ",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Reuses DerivedCategory.scalarCone and the upstream monoidal and scalar-cone constructions. States the recorded two-sided binary-total-tensor K-flatness together with the natural cochain and localized comparisons, their canonical lax-monoidal comparison formula, inversion of quasi-isomorphisms, and compatible derived descent. The helper is the actual cochain cone functor with diagonal cone maps."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7bfc4dc29",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Read node, 5 stmt_deps, source TensorMappingCone.lean, IsKFlatForTotalTensor, derived monoidal instances. All hypotheses (Grothendieck .{v}, closed braided MonoidalPreadditive, HasFunctorialFlatResolution, CommRing B with Linear+MonoidalLinear, universe r free) and clauses match: two-sided recorded K-flat predicate; natural Φ: tensorRight P_b ≅ cone functor; θ pinned to μ Q C P_b ≫ Q.map Φ (forces μ iso); IsInvertedBy; descent F,η,δ compatible with θ. Probe: tensorRight map = HomologicalComplex.tensorHom by rfl, Q lax structure = laxMonoidalQ from hasDerivedMonoidalCategory, upstream tensorScalarConeIso typechecks on the same objects. Helper scalarConeCochainFunctor has real data (mappingCone, diagonal maps), no existing equivalent. Docstrings/blueprint/6 steps present, only sorry in theorem, statement verbatim, node change only lean, item not landed elsewhere. nt_compile --json clean 4.4 s; broken control fails. Advisory: IsInvertedBy and descent clauses follow formally from θ, as in the node's 'Thus'."
  }
 }

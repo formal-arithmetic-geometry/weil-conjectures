@@ -15,7 +15,8 @@
   "def-sc-discrete-valuation-ring",
   "def-pc-flat-sheaf-modules",
   "def-weil-abstract-derived-category",
-  "def-pc-kflat-complex"
+  "def-pc-kflat-complex",
+  "def-sf-site-constant-module-functor"
  ],
  "proof": [
   {
@@ -299,5 +300,38 @@
   "group": "Q23",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-3312bde2d (reviewer sub-agent of L); spot-checked: FIX: I read the item and all 9 steps in full; the delivery adds no new nodes and leaves the statement byte-identical to base. The item is not on the 2026-10-19 drop list and has no re-split note. Source: main-20261015 ctf-equals-bc 'Local models' (lines 8-16), checked against Stacks 0AUW(3) (more-algebra l.4954) and sites-cohomology 06YQ (l.3120), 06YP, 06YS and 06YU. Step checks: step 1 kernel = im u, finitely generated and torsion-free in R^n, then free by lem-sc-dvr-fg-torsionfree-free. Steps 2-3 use exact sheafification clauses (1)/(2) and def-pc-flat-sheaf-modules with F=B over R_C. Step 4: H^-1=0, H^0=M. Step 5: B^s is flat, so the bounded-above flat complex is K-flat (06YQ). Step 6: Q and K are both in the descent class P_R; quasiiso-independent is applied as f⊗id_K, its own form; I checked the (-1)^{pq} swap against the Tot differential. Step 7: differential (z_j) maps to (Σ_j a_ij z_j). Small cases R/t, non-flat B=R_C/t, P=0 and B=0 all behave as stated. One fault (C1/C3), repaired in fixes/: step 8 identifies (R^r)_C with (R_C)^r, which needs sheafification to preserve finite products (lem-weil-pbc-site-r-module-presheaf-sheafification-exact clause 2), but the step did not cite that node. I added the citation and set elementary=false. I also added def-pc-tensor-complex-sheaves and def-pur-sheaf-tensor-product to step 9's uses; proof_deps is unchanged and still equals the union of uses. The 5 declared tool_uses are generic ringed-site infrastructure and are accepted. Maintainer notes: lem-pc-bounded-above-flat-kflat-site gives source 06YS, but its statement is 06YQ. lem-sfb-finite-constant-model-two-term-free-resolution (Q26) is the special O_E/E pro-étale case of this item's resolution clause; it is not a duplicate that this item could cite.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ScalarModelFiniteFlatResolution",
+  "declaration": "SheafOfModules.scalarModel_finite_flat_resolution_dvr",
+  "declarations": [
+   "CategoryTheory.siteConstantModulePresheafIndependent",
+   "CategoryTheory.siteConstantModuleFunctorIndependent",
+   "CategoryTheory.independentConstantRing",
+   "CategoryTheory.independentConstantRingUnit",
+   "CategoryTheory.independentConstantRingUnit_locallyBijective",
+   "CategoryTheory.commutativeConstantModuleIndependent",
+   "SheafOfModules.scalarModelModules",
+   "SheafOfModules.scalarModelPower",
+   "SheafOfModules.scalarModelTwoTerm",
+   "SheafOfModules.scalarModel",
+   "SheafOfModules.scalarModel_finite_flat_resolution_dvr",
+   "SheafOfModules.scalarModel_finite_free_field"
+  ],
+  "file": "lean/Sheaf/Paper/ScalarModelFiniteFlatResolution.lean",
+  "statement": "theorem scalarModel_finite_flat_resolution_dvr (R : Type r) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] (B : Sheaf J CommRingCat.{r}) (α : independentConstantRing J R ⟶ B) (P : ModuleCat.{r} R) [Module.FinitePresentation R P] (hB : IsFlatOnSite (R := independentConstantRing J R) ((restrictScalars ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).map α)).obj (unit ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj B)))) [HasDerivedCategory.{w} (scalarModelModules B)] : ∃ (m n : ℕ) (f : scalarModelPower (unit ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj B)) m ⟶ scalarModelPower (unit ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj B)) n) (g : scalarModelPower (unit ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj B)) n ⟶ scalarModel R α P) (h : f ≫ g = 0), (ShortComplex.mk f g h).ShortExact ∧ ∃ ε : scalarModelTwoTerm f ⟶ (CochainComplex.singleFunctor (scalarModelModules B) 0).obj (scalarModel R α P), QuasiIso ε ∧ CochainComplex.IsKFlatIndependentCoefficients (scalarModelTwoTerm f) ∧ ∀ N : scalarModelModules B, ∃ (em : (siteSheafTensorRight N).obj (scalarModelPower (unit ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj B)) m) ≅ scalarModelPower N m) (en : (siteSheafTensorRight N).obj (scalarModelPower (unit ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj B)) n) ≅ scalarModelPower N n), Nonempty ((siteDerivedTensorIndependentCoefficients J B).obj (DerivedCategory.Q.obj ((CochainComplex.singleFunctor (scalarModelModules B) 0).obj (scalarModel R α P)), DerivedCategory.Q.obj ((CochainComplex.singleFunctor (scalarModelModules B) 0).obj N)) ≅ DerivedCategory.Q.obj (scalarModelTwoTerm (em.inv ≫ (siteSheafTensorRight N).map f ≫ en.hom)))",
+  "branch": "newtargets-dag",
+  "by": "Q11",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The two theorem declarations jointly state the DVR and field clauses. The scalar model is the recorded sheafified extension of scalars of the actual constant module sheaf; its finite-power tensor differential is transported from the very same short exact sequence. Per the H13 return, six independent-coefficient helper declarations belong to this item module and are listed here. ND's SiteConstantModuleFunctorGeneral module and dependency record are preserved unchanged. The node statement and proof are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-eee029795",
+  "group": "Q11",
+  "result": "pass",
+  "note": "Re-delivery after H13 RETURN of 3881ef0399cf: the def-sf-site-constant-module-functor node file and the separate helper module are dropped; the snapshot dep record equals the live one; the six independent-universe helpers have moved into the item module and are listed in lean.declarations. Both theorem signatures are byte-identical to the previously reviewed head; clauses re-checked against the node (DVR flatness over R_C, ShortExact, QuasiIso of double f at -1,0, K-flat, resolution chosen before N, field case without flatness). Node statement, proof and source unchanged; only stmt_dep addition def-sf-site-constant-module-functor. Helpers have real data; the sole sorry is the true Prop independentConstantRingUnit_locallyBijective. nt_compile --json clean, 6.5 s, exit 0. Advisory: 5 public imports individually removable (H9); the item now holds an independent-universe copy of the constant-module notion, which later citers should reuse; siteConstantModuleFunctorIndependent is unused."
  }
 }

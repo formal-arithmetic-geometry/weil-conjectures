@@ -230,5 +230,34 @@
   "group": "O2",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O2-aa20f0219 (reviewer sub-agent of L); spot-checked: I read the whole item: all six steps, every cited statement, and the main-20261015 source lem-sfb-constructible-cocone-obj.proof.md (Modules and Complexes paragraphs); this is a one-level split with no new nodes. The statement and stmt_deps are unchanged, there is no cycle, and proof_deps equals the union of the step uses. Step 1: both pullbacks are the sheafified Lan construction (sk-def-sfb-pullback-from-point/def-sfb-finite-upper-star vs def-weil-pbc-condensed-e-module-category/def-weil-proetale-inverse-image), and the restricted norm on E agrees. So E_X=E_X^c and Omega_X=Omega_X^c canonically. Step 2: the stratified local-cokernel predicates and the bounded intervals agree word for word, and neither side imposes completeness. Step 3: the Serre node (whose only scheme hypothesis is a Noetherian underlying space), together with zero and isomorphism invariance, satisfies the conditional triangulatedness clause of sk-def-sfb-bounded-constructible; the step does not use the false unconditional version. Step 4: lem-sfb-qlbar-flat plus change-of-scalars (2)/(4) plus additivity give an exact functor, then LF=D(F) via def-sfb-left-derived-exact, which is triangulated. Step 5: V_E is the literal restriction, Phi_E=LF_E iota_E, and no triangulated structure on C_Omega is needed. Step 6: the comparison is by definition the restriction of def-sfb-derived-extend-comp-iso. Of the three tool_uses, I accept the Serre node because the on-route det-lem-coefficient-heart-closure needs a Noetherian scheme, which is stronger than the item's hypothesis; the other two are generic Mathlib leaves, also accepted. The new route improves on the parent's old Lean-API citation. I checked the edge cases: empty X, rank-zero presentations, E=F. There is no SGA. Minor: Omega_X^c is defined in the Serre node rather than in def-weil-pbc-condensed-e-module-category, but this wording is inherited from the base statement and is not a fault."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ConstructibleCoconeAmbientRealization",
+  "declaration": "AlgebraicGeometry.ProEtale.constructibleCocone_ambient_triangulated",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.constructibleCoconeAmbientFunctor",
+   "AlgebraicGeometry.ProEtale.constructibleCoconeAmbientDerivedIso",
+   "AlgebraicGeometry.ProEtale.constructibleCoconeAmbientTermwiseIso",
+   "AlgebraicGeometry.ProEtale.constructibleCoconeAmbientCommShift",
+   "AlgebraicGeometry.ProEtale.constructibleCocone_coefficient_identifications",
+   "AlgebraicGeometry.ProEtale.constructibleCocone_constructibility_identifications",
+   "AlgebraicGeometry.ProEtale.constructibleCocone_ambient_triangulated",
+   "AlgebraicGeometry.ProEtale.constructibleCocone_ambient_comparisons"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ConstructibleCoconeAmbientRealization.lean",
+  "statement": "theorem constructibleCocone_ambient_triangulated [TopologicalSpace.NoetherianSpace X] (E : FiniteIntermediateField ℓ) : (boundedConstructible (padicSubfieldRingObj X ℓ E)).IsTriangulated ∧ (∀ n : ℤ, (shiftFunctor (PadicSubfieldConstructible X ℓ E) n).Additive) ∧ (boundedConstructible (padicSubfieldRingObj X ℓ E)).ι.IsTriangulated ∧ (constructibleCoconeAmbientFunctor X ℓ E).IsTriangulated ∧ NatTrans.CommShift (constructibleCoconeAmbientTermwiseIso X ℓ E).hom ℤ",
+  "branch": "newtargets-dag",
+  "by": "Q03",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The four theorem declarations jointly state the coefficient/category identifications, the explicit common stratified local finite-presentation predicate, inherited finite-stage triangulatedness with additive integer shifts, triangulated ambient vertex realization by the canonical exact-termwise isomorphism, and both actual comparison-component equations. The ambient functor, realization isomorphisms and transported CommShift structure have real data and use the specified existing cocone."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f17df0d47",
+  "group": "Q03",
+  "result": "pass",
+  "note": "Lean matches the node clause by clause: coefficient rings/categories = sfbPullbackFromPoint of continuousMapRingObj E / finite-image padicAlgClRingObj and the archived BoundedConstructible(condensedRingObj C(-,E)) (all rfl); constructibility = literal unfolding of IsConstructibleModuleObject/IsLocallyFinitelyPresented/Mod.IsFinitelyPresented; inherited IsTriangulated + additive shifts + triangulated ι under NoetherianSpace only; Φ_E = cocone vertex ⋙ ι with CommShift transported via canonical leftDerivedFunctorIsoMapDerivedCategory (instance probe rfl); forward/inverse comparison equations with derivedExtendScalarsCompIso. Dep records unchanged vs side-live, statement verbatim, docstrings/sorry gates OK. nt_compile --json clean 25.3 s. Advisory: final NatTrans.CommShift conjunct tautological by ofIso_compatibility; IsTriangulated conjunct currently closable by sorried unconditional isTriangulated_boundedConstructible, so stage 3 should use finiteBoundedTriangulated (Serre route)."
  }
 }

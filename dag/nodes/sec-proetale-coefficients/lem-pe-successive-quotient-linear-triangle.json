@@ -13,7 +13,8 @@
   "def-weil-sheaf-of-modules-category",
   "def-weil-abstract-derived-category",
   "def-pc-kflat-complex",
-  "def-pc-flat-sheaf-modules"
+  "def-pc-flat-sheaf-modules",
+  "def-pe-principal-power-ring-quotients"
  ],
  "proof": [
   {
@@ -230,5 +231,32 @@
   "group": "Q22",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-2c081b581 (reviewer sub-agent of L); spot-checked: I read the delivery in full: one commit, item only, no new nodes, statement verbatim from base. This is an ordinary split of Q34's statement-only node; there is no repair note for this item, and side-live still has it unsplit. All five steps are correct. Step 1: regularity of t gives injectivity of a:R_{n-1}->R_n (locally tc=t^n d gives t(c-t^{n-1}d)=0); the sequence is exact and R_n-linear using the kernel/cokernel formulas in def-weil-sheaf-of-modules-category; elementary. Step 2: lem-pc-kflat-resolution gives a flat-term K-flat resolution (Stacks 06YS, sites-cohomology.tex:3207). Step 3: def-pc-flat-sheaf-modules (03ER) defines flatness as exactness of G |-> G⊗F; the item tensors R_j⊗P^i in that order, and exactness carries over to Mod(R_n) on the same abelian sheaves. Step 4: the Mathlib leaf lem-weil-pbc-complex-ses-triangle applies in the abelian category Mod(R_n). Step 5: the tensor swap plus lem-pur-derived-change-of-rings(2) identify the terms with K_j; termwise restriction preserves quasi-isomorphisms and shifts; the triangle is distinguished as isomorphic to a cone triangle. Edge cases checked: Z with t=p and n=2, t a unit, t=0 (the regularity hypothesis is needed), unbounded K. Tool uses lem-pc-kflat-resolution and lem-pur-derived-change-of-rings are accepted as generic ringed-site tools. No cycle. I searched the DAG for duplicates (successive/reduction triangles, t^{n-1} triangles) and found none. Advisory: the quotient ring sheaf B/t^jB has no definition node; this is inherited from Q34's statement."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.SuccessiveQuotientLinearTriangle",
+  "declaration": "SheafOfModules.successive_quotient_linear_triangle",
+  "declarations": [
+   "SheafOfModules.successiveQuotientLocalization",
+   "SheafOfModules.successiveQuotientTensorModel",
+   "SheafOfModules.successiveQuotientTensorSection",
+   "SheafOfModules.successiveQuotientRestrictedModel",
+   "SheafOfModules.SuccessiveQuotientLinearTriangle",
+   "SheafOfModules.successive_quotient_linear_triangle"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/SuccessiveQuotientLinearTriangle.lean",
+  "statement": "theorem successive_quotient_linear_triangle (n : ℕ) (hn : 1 < n) (ht : ∀ U : Cᵒᵖ, Function.Injective (fun b : B.obj.obj U ↦ (@id (B.obj.obj U) (t.val U)) * b)) [HasDerivedCategory.{wB} (ringedSiteModules.{r} (derivedChangeRingIndependentCoefficients J B))] [HasDerivedCategory.{wPrev} (ringedSiteModules.{r} (derivedChangeRingIndependentCoefficients J (principalPowerRingQuotient B t (n - 1))))] [HasDerivedCategory.{wN} (ringedSiteModules.{r} (derivedChangeRingIndependentCoefficients J (principalPowerRingQuotient B t n)))] [HasDerivedCategory.{wOne} (ringedSiteModules.{r} (derivedChangeRingIndependentCoefficients J (principalPowerRingQuotient B t 1)))] (FPrev : DerivedChangeOfRingsCochainModel.{u, v, r, wB, wPrev} (principalPowerRingProjection B t (n - 1))) (FN : DerivedChangeOfRingsCochainModel.{u, v, r, wB, wN} (principalPowerRingProjection B t n)) (FOne : DerivedChangeOfRingsCochainModel.{u, v, r, wB, wOne} (principalPowerRingProjection B t 1)) (K : DerivedCategory (ringedSiteModules.{r} (derivedChangeRingIndependentCoefficients J B))) (G P : CochainComplex (ringedSiteModules.{r} (derivedChangeRingIndependentCoefficients J B)) ℤ) (e : DerivedCategory.Q.obj G ≅ K) (f : P ⟶ G) (hf : CochainComplex.IsKFlatResolutionIndependentCoefficients (R := B) f) (hflat : ∀ i : ℤ, IsFlatOnSite (R := B) (P.X i)) : Nonempty (SuccessiveQuotientLinearTriangle t (principalPowerRingProjection B t (n - 1)) (principalPowerRingProjection B t n) (principalPowerRingProjection B t 1) FPrev FN FOne K G P e f)",
+  "branch": "sheaf-dag",
+  "by": "N9",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The triangle is displayed on termwise-restricted flat-term K-flat representatives, as the node specifies. The three computation isomorphisms are fixed by the resolution and the universal derived counits. Every representative of every unbounded K and every such resolution is quantified. The quotient maps and tensor arrows are fixed by projection and local-pure-tensor equations."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-14f319268",
+  "group": "N9",
+  "result": "pass",
+  "note": "Clause-by-clause match. R_j = principalPowerRingQuotient: CommRingCat sheafification of B(U)/(t_U^j), real data. The rPrev/rOne quotient maps are pinned by the projections; the e_j isos are pinned by the counit along f. Every representative and every flat-term K-flat resolution is quantified. Res is restrictScalars applied termwise. The triangle is distinguished in D(R_n); alpha/beta are pinned by pure-tensor formulas [b]x->[tb]x and [b]x->[b]x; delta is existential as in the node. No extra hypotheses; HasSheafify CommRingCat holds for essentially small sites. Edge cases (t unit, t=0, n=2, unbounded, universes) are covered. H4: no duplicate quotient ring sheaf in side-live, run snapshots or Mathlib. Records: only lean and stmt_deps (+ the new node) change; statements verbatim; dependency records identical to side-live. nt_compile --json clean (2.5 s / 7.7 s). Advisory: changeOfRingsPresheaf owner (def-pur-sheaf-tensor-product) is a transitive stmt_dep only; the new node cites no [id]; proof-only imports kept; a later bridge to constant O_E/pi^n coefficients is needed in the parent."
  }
 }

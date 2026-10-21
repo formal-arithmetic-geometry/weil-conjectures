@@ -17,7 +17,8 @@
   "def-pc-sheaf-restrict-scalars",
   "lem-pur-derived-change-of-rings",
   "def-weil-pbc-ringed-tensor-section-calculus",
-  "def-weil-inverse-system"
+  "def-weil-inverse-system",
+  "def-weil-pbc-common-quotient-tower-presentation"
  ],
  "proof": [
   {
@@ -239,5 +240,34 @@
   "group": "Q16",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-1c6d97ad6 (reviewer sub-agent of L); spot-checked: I read the item in full: 6 steps, no new nodes. It is the first split of an NE-created node, and I found no repair note for it, so the 2026-10-21 re-split rules do not apply. Against the base text, the statement changes only by its final sentence, which defines 'strict tower' via def-weil-inverse-system (a mathlib leaf, added to stmt_deps). This makes the conclusion precise and does not weaken it; parent constant-completion-equivalence step 3 still fits. Step 1: lem-pc-kflat-resolution (on the route via picard-semicon) and flat-scalar-restriction-kflat are used exactly as stated, and Res keeps quasi-isomorphisms because the underlying abelian sheaves are the same. Steps 2-5 are correctly marked elementary: F⊗R/J≅F/JF via local lifts and the universal properties; (J_nB)F=J_nF; c_n(p⊗s)=p⊗s; differential d⊗1 with no sign; transition squares p⊗s↦p⊗t_n(s); strict cone equality. Step 6: derived-change-of-rings (1)(2) together with left-derived-from-kflat-class on the class of K-flat complexes with flat terms. Its condition (1) is step 1, and condition (2) holds on the R side by flat restriction and on the B side by (1), so the natural isomorphism descends. Source: Stacks 099L (motivation) and 06YS/06YY/03EK, with labels checked in tags/tags; the Stacks proof of 099I goes through Čech complexes, so the agent-written mark is honest. Small cases: ℤ→ℤ_p with (p^n); the non-flat ℤ→ℤ/p shows the flatness hypothesis is needed; J_n=0 or R; empty site. No duplicate: ringed-common-quotient-pullback-comparison concerns a geometric morphism, sfb integral-tensor-quotient-epimorphism gives only an epimorphism, and no DAG node states F⊗O/J≅F/JF for sheaves. Accepted tool uses: lem-pur-derived-change-of-rings and lem-pur-left-derived-from-kflat-class (generic sf-operations derived tools); kflat-resolution is on the route anyway. No SGA citations."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FlatCommonQuotientReductionTower",
+  "declaration": "SheafOfModules.CommonQuotientReduction.nonempty_comparison",
+  "declarations": [
+   "SheafOfModules.CommonQuotientReduction.Modules",
+   "SheafOfModules.CommonQuotientReduction.restriction",
+   "SheafOfModules.CommonQuotientReduction.scalarSection",
+   "SheafOfModules.CommonQuotientReduction.leftComplex",
+   "SheafOfModules.CommonQuotientReduction.rightComplex",
+   "SheafOfModules.CommonQuotientReduction.leftLevel",
+   "SheafOfModules.CommonQuotientReduction.rightLevel",
+   "SheafOfModules.CommonQuotientReduction.Comparison",
+   "SheafOfModules.CommonQuotientReduction.nonempty_comparison"
+  ],
+  "file": "lean/Sheaf/Paper/FlatCommonQuotientReductionTower.lean",
+  "statement": "theorem nonempty_comparison (hflat : IsFlatOnSite (R := R) ((restriction φ).obj (unit (derivedChangeRingIndependentCoefficients J B)))) : Nonempty (Comparison D a b)",
+  "branch": "newtargets-dag",
+  "by": "Q27",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8fbefaafd",
+  "group": "Q27",
+  "result": "pass",
+  "note": "Statement matches the node clause by clause. Flatness is IsFlatOnSite of Res_φ B. The new CommonQuotientTowerPresentation (q_n locally surjective, IsPushout φ q_n b_n 𝟙, orientation checked) encodes R/I_n ≅ B/I_nB with compatible transitions. ordinary is fixed by pure changeOfRings sections. derived is fixed through computes and the counits, which are iso on K-flat complexes. strict fixes tL/tR/ηL/ηR by formulas, gives e = restricted ordinary and ηL≫e=ηR, and adds epi plus the locallyInIdealProduct kernel clause, which is true via sheafify(S⊗P)=sheafify(P/IP). Edge cases (I_n=R, I_n=0, empty site, universes) are covered and no stronger assumptions were added. No duplicate: RingedSiteIdeal has no quotient tower and needs SmallCategory with universe u; no live collision. No hollow defs; only the item theorem is sorry, with the 6-step docstring; source and blueprint docstrings present; statements verbatim. nt_compile --json: 3.0 s and 19.9 s, clean, exit 0. Advisories: the RingedTopoiTensorSections and CochainTensorUniverses imports can be dropped (H9); the base-era theorem stmt_dep lem-pur-derived-change-of-rings owns the plain DerivedChangeOfRingsCochainModel (not item-added, so not a fault)."
  }
 }

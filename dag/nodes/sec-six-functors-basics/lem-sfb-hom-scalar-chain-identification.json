@@ -333,5 +333,42 @@
   "group": "Q118",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q118-027696ebf (reviewer sub-agent of L); spot-checked: I read the item and all 11 steps in full; there are no new nodes. The statement is byte-identical to the base created by Q52, the dependency closure has no cycle, no SGA source is used, and the blueprint from-node lem-sfb-dc-hom-preserves via lem-sfb-dc-hom-filtered-colimit matches the citer. Step 2 follows Stacks 03CZ (sites-modules.tex lines 933-962: presheaf adjunction, then sheafification) slice by slice, using the 05DQ formulas from lem-weil-pbc-scalar-extension-hom. Steps 1, 4, 6 and 7 use lem-sfb-localized-site-tensor-restriction, which is 03EL applied to j_U; it is a generic tool of another unit, and I accept the tool_use. I recomputed the 0A8X differential signs for theta (step 5), alpha (step 6) and sigma (step 8, which uses that q is a chain map), the balancing and R-linearity checks, the square in step 9 (both sides give s q(1⊗f(p)) by S-linearity of q), the contravariant naturality in step 10, and the theta and sigma coefficient triangles in step 11. Edge cases checked: the point site with Z→Z/2, where Hom_Z(Z/2,Z)=0 and sigma=0, zero inputs, S=0, and unbounded complexes, where no infinite sum or product exchange appears. Duplicate candidates checked and ruled out: the topological-space 008A/006R nodes, the 03D7 ringed-topoi adjunction (no formula), the ring-iso scalar extension, the derived adjunctions, and the slice evaluation/transpose nodes. FIX (C2): steps 4, 6 and 7 were marked elementary:true although they cite statement lemmas and apply step 2; they are now false, with nothing else changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.StrictScalarHomChain",
+  "declaration": "SheafOfModules.StrictScalarHom.exists_scalarHomChainIdentification",
+  "declarations": [
+   "SheafOfModules.StrictScalarHom.Complex",
+   "SheafOfModules.StrictScalarHom.restriction",
+   "SheafOfModules.StrictScalarHom.scalarModule",
+   "SheafOfModules.StrictScalarHom.tensor",
+   "SheafOfModules.StrictScalarHom.tensorSection",
+   "SheafOfModules.StrictScalarHom.evaluate",
+   "SheafOfModules.StrictScalarHom.homMap",
+   "SheafOfModules.StrictScalarHom.Extension",
+   "SheafOfModules.StrictScalarHom.Extension.complex",
+   "SheafOfModules.StrictScalarHom.Extension.section",
+   "SheafOfModules.StrictScalarHom.SigmaFormula",
+   "SheafOfModules.StrictScalarHom.Data",
+   "SheafOfModules.StrictScalarHom.Data.homComparison",
+   "SheafOfModules.StrictScalarHom.CoefficientSquare",
+   "SheafOfModules.StrictScalarHom.CoefficientSquare.tensorComparison",
+   "SheafOfModules.StrictScalarHom.CoefficientCompatibility",
+   "SheafOfModules.StrictScalarHom.exists_scalarHomChainIdentification"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/StrictScalarHomChain.lean",
+  "statement": "theorem exists_scalarHomChainIdentification : ∃ D : ∀ (R S : Sheaf J CommRingCat.{max c v u}) (φ : R ⟶ S), Data.{c, v, u} φ, ∀ (R S R' S' : Sheaf J CommRingCat.{max c v u}) (φ : R ⟶ S) (a : R ⟶ R') (b : S ⟶ S') (φ' : R' ⟶ S'), φ ≫ b = a ≫ φ' → ∃ Q : CoefficientSquare.{c, v, u} (D R S φ) (D R R' a) (D S S' b) (D R' S' φ'), CoefficientCompatibility.{c, v, u} Q",
+  "branch": "newtargets-dag",
+  "by": "O4",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cef2aa99e",
+  "group": "O4",
+  "result": "pass",
+  "note": "Node copy changes only lean; lean.statement verbatim; 17 declarations match. Clause-by-clause: E pinned to changeOfRingsOfUniverses, U = Mathlib restrictScalars termwise, actual homComplex with the homComplexπ + identity-of-slice evaluation (= coefficientHomComponent convention); nu/theta/alpha pinned on generators over every V, sigma by SigmaFormula plus sigma_unique; strict square and input naturality (contravariant P, E b≫q'=q≫w) match the node. Coefficient squares: extensionIso and mate pinned on generators; recomputed the tensor_pure, theta, alpha and sigma coefficient equations on generators and all agree (mate well-defined via φ'a=bφ). No flatness/boundedness/K-injectivity; universes c,v,u independent and bound; edge cases (empty site, S=0, non-flat Z→Z/2, unbounded) admitted. H4: no existing declaration; ScalarDerivedPair is derived/single-universe. Only sorry is the main theorem; docstrings carry source, blueprint and all 11 steps. nt_compile --json: exit 0, no messages, 16.3 s. Advisories: CoefficientCompatibility.nu is definitional (content carried by tensor_pure); evaluate could call coefficientHomComponent; plain imports are proof-only."
  }
 }

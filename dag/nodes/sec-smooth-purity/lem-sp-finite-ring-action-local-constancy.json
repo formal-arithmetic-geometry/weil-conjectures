@@ -11,7 +11,8 @@
   "def-weil-pbc-sites-and-cohomology",
   "def-weil-pbc-constant-sheaf",
   "def-weil-sheaf-of-modules-category",
-  "def-pur-localized-ringed-site"
+  "def-pur-localized-ringed-site",
+  "def-sfb-site-derived-constant-module-functor"
  ],
  "proof": [
   {
@@ -226,5 +227,24 @@
   "group": "Q44",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-9df20ec93 (reviewer sub-agent of L); spot-checked: I read all 6 steps and every cited statement in full; the split is correct and needs no fixes. No new nodes; statement, stmt_deps and source are unchanged. Sources: Stacks 093S at sites-modules.tex:8448 (proof omitted) and blueprint main-20261015 sk-def-sp-scalar-extension-functor proof (2), which the parent det-sp-scalar-extension-functor step 4 cites with Λ=B. Steps 1-2: S̲≅|F|_T is given by the hypothesis; lem-cbc-sieve-slice-sheafification (sets and rings) and 00WK local representation via lem-weil-pbc-site-sheafification-sections-local are applied to the finite family {0, σ_s+σ_t, λσ_s}; the common refinement uses axioms (ii) and (iii) of def-weil-pbc-sites-and-cohomology. Step 3: the image of S is a finite Λ-submodule, by semilinearity. Step 4: lem-pc-sites-module-sheafification-interface plus lem-pc-sites-sheafification-underlying-sets give |ψ|=|a|^#. Step 5: both hypotheses of lem-cbc-set-presheaf-sheafification-local-bijection hold; local injectivity uses local equality of labels, and an empty cover makes it vacuous. Step 6: linear inverses and composed covers are elementary. Edge cases checked: point site, S empty, objects covered by the empty family, Λ=0; no points are used. Duplicate search found only étale-site analogues (lem-pod-module-local-constancy-of-finite-underlying, lem-weil-pbc-finite-local-abelian-forget, lem-weil-pbc-finite-constant-abelian-neighborhood, lem-weil-pbc-finite-constant-set-sections-cover); none covers an arbitrary small site. Accepted tool_use: lem-weil-pbc-site-sheafification-sections-local, the generic 00WK statement used as a black box. No SGA citation. Minor: the report mentions a citations.json that the commit does not contain; this does not affect the DAG."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FiniteRingActionLocalConstancy",
+  "declaration": "SheafOfModules.finite_ring_action_local_constancy",
+  "file": "lean/Sheaf/CategoryTheory/FiniteRingActionLocalConstancy.lean",
+  "statement": "theorem finite_ring_action_local_constancy {C : Type uC} [Category.{vC} C] (J : Precoverage C) (hJ : J.IsSiteForCoverings) (Λ : Type (max uC vC)) [CommRing Λ] [Finite Λ] (F : CategoryTheory.ringedSiteModules.{max uC vC} ((sheafCompose J.toGrothendieck (forget₂ CommRingCat.{max uC vC} RingCat.{max uC vC})).obj ((constantSheaf J.toGrothendieck CommRingCat.{max uC vC}).obj (CommRingCat.of Λ)))) (hF : ∀ U : C, ∃ S : Presieve U, S ∈ J U ∧ ∀ (V : C) (f : V ⟶ U), S f → ∃ X : Type (max uC vC), Finite X ∧ Nonempty ((((sheafCompose J.toGrothendieck (CategoryTheory.forget AddCommGrpCat.{max uC vC})).obj ((SheafOfModules.toSheaf _).obj F)).over V) ≅ (constantSheaf (J.toGrothendieck.over V) (Type (max uC vC))).obj X)) : ∀ U : C, ∃ S : Presieve U, S ∈ J U ∧ ∀ (V : C) (f : V ⟶ U), S f → ∃ M : ModuleCat.{max uC vC} Λ, Finite M ∧ Nonempty (F.over V ≅ ((commutativeSiteConstantModuleFunctor J.toGrothendieck Λ).obj M).over V)",
+  "branch": "newtargets-dag",
+  "by": "Q56",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "H3 repair: independent site object and morphism universes uC and vC, coefficients and finite models in max uC vC. Reuse the already-landed commutativeSiteConstantModuleFunctor: identity-restriction constant module presheaf followed by module sheafification over the forgotten constant CommRingCat sheaf. This directly accepts the pro-etale citer coefficient ring on ULift A. No SmallCategory constraint or new constant-module definition."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-096f932ef",
+  "group": "Q56",
+  "result": "pass",
+  "note": "Re-delivery fixes the H3 universe RETURN of a05421e5: the site is now {C : Type uC} [Category.{vC} C] with a Precoverage J and IsSiteForCoverings; Λ, the finite sets and the modules are in max uC vC; the constant model is the landed commutativeSiteConstantModuleFunctor (constant presheaf, then module sheafification along the forgotten CommRingCat unit), and its owning node def-sfb-site-derived-constant-module-functor is added to stmt_deps. Clause-by-clause match with the node (hF on actual covers with finite X; conclusion F.over V ≅ c(M).over V over Λ̲|_V with Finite M). Edge cases (empty site, empty covers, empty X, zero ring) are fine. lean.statement is verbatim; docstrings have the source, blueprint and six proof steps; proof is sorry only. nt_compile --json: module clean 2.1 s; the T.ProEt / ULift A consumer probe is clean 2.2 s; the control without hF errors. Advisory only: unused plain proof imports."
  }
 }

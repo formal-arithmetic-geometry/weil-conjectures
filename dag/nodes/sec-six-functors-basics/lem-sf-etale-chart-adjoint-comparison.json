@@ -308,5 +308,33 @@
   "group": "Q63",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q63-c93322ac7 (reviewer sub-agent of L); spot-checked: I read the item, all six steps, every cited statement and the blueprint main-20261015 proof of sk-prop-sf-rf-shriek-preservation (final paragraph, composition and open locality). The statement is correct and unchanged; I tested the cases H=0, identity charts, empty U and A=0. Steps 1, 3, 5 and 6 check. Normalization: Rw_!=Dw_! via compactification (w,id) and Ri_!=i_*, using the closed immersion being proper and finite with exact direct image (the blueprint_update statement covers Mod_Λ). The compositor γ_H has the right direction, and lem-amb-etale-compact-comparisons applies on D+ to (s,f), (i,p) and (pi,v). The exceptional adjoints are unbounded, so K is arbitrary. One fault, C4/E4, which I repaired. Steps 2 and 4 took s_!⊣s^* and v_!⊣v^* from prop-weil-open-closed-recollement-adjunctions. Through def-weil-open-closed-recollement, that node is set on pro-étale sites with A=O_E/ϖ^n and ℓ invertible, not the ordinary étale categories with an arbitrary finite A that the item uses; the report misread 'ordinary' there. The FIX replaces it with lem-weil-pbc-open-immersion-etale, lem-amb-etale-adjoint-locality (unbounded ordinary-étale Du_!⊣u^* for separated étale finite-type u) and lem-cbc-open-extension-zero-etale-adjunction-agreement (the isomorphism κ: j_!≅j^et_! identifies the two adjunctions). It also recomputes proof_deps and replaces that tool_uses entry with the three new nodes. No cycles: none of the three new nodes depends on the item or its parent. All declared tool_uses are accepted. No new nodes, and the item duplicates no existing node.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleChartAdjointComparison",
+  "declaration": "AlgebraicGeometry.Etale.ChartAdjointComparison.exists_homEquiv",
+  "declarations": [
+   "AlgebraicGeometry.Etale.ChartAdjointComparison.openNormalization",
+   "AlgebraicGeometry.Etale.ChartAdjointComparison.closedNormalization",
+   "AlgebraicGeometry.Etale.ChartAdjointComparison.leftComparisonPlus",
+   "AlgebraicGeometry.Etale.ChartAdjointComparison.leftComparison",
+   "AlgebraicGeometry.Etale.ChartAdjointComparison.closedNormalizationAmbient",
+   "AlgebraicGeometry.Etale.ChartAdjointComparison.homChain",
+   "AlgebraicGeometry.Etale.ChartAdjointComparison.exists_homEquiv"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleChartAdjointComparison.lean",
+  "statement": "theorem exists_homEquiv [IsNoetherian X] [IsNoetherian Y] [IsNoetherian U] [IsNoetherian V] [IsNoetherian P] : ∃ e : ∀ (H : DerivedCategory.Plus (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A))) (K : DerivedCategoryModule A Y), (H.obj ⟶ I.obj (G.obj (D((v)^*[ModuleCat.{u + 1} A]).obj K))) ≃ (H.obj ⟶ D((s)^*[ModuleCat.{u + 1} A]).obj (F.obj K)), (∀ H K, (e H K).symm = homChain A f s v i p w F G I adjF adjP adjI H K) ∧ (∀ (H H' : DerivedCategory.Plus (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A))) (a : H' ⟶ H) (K : DerivedCategoryModule A Y) (b : H.obj ⟶ I.obj (G.obj (D((v)^*[ModuleCat.{u + 1} A]).obj K))), e H' K (DerivedCategory.Plus.ι.map a ≫ b) = DerivedCategory.Plus.ι.map a ≫ e H K b) ∧ (∀ (H : DerivedCategory.Plus (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A))) (K K' : DerivedCategoryModule A Y) (a : K ⟶ K') (b : H.obj ⟶ I.obj (G.obj (D((v)^*[ModuleCat.{u + 1} A]).obj K))), e H K' (b ≫ I.map (G.map (D((v)^*[ModuleCat.{u + 1} A]).map a))) = e H K b ≫ D((s)^*[ModuleCat.{u + 1} A]).map (F.map a))",
+  "branch": "sheaf-dag",
+  "by": "N0",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Canonical helpers belong to this comparison: open and closed compact-support normalizations, the D+ left comparison and its ambient value, and the explicit forward Hom chain. The theorem supplies its inverse, natural in both variables, for arbitrary chosen ambient right adjoints F, G, I with their adjunctions. No boundedness assumption is placed on K or either representing target; only H belongs to the full D+ subcategory. All helper data are constructed from existing canonical comparisons, with no choice of an unspecified isomorphism."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bdd348bff",
+  "group": "N0",
+  "result": "pass",
+  "note": "Statement matches node clause by clause. Hypotheses are no stronger: HasCompactification is a Prop class, immersions supply separated/finite type, A : Type (u+1) is the recorded ModuleCat encoding. homChain checked step by step against the node's chain (open s/v transposes via derivedOpenImmersionLowerShriekUpperStarAdjunction, adjF/adjP/adjI, precomposition by gamma^-1 and closedNormalizationAmbient.hom). gamma is built only from canonical compositors (rightDerivedLowerShriekPlusCompIso, shriekIso, pfId, shId, rightDerivedFunctorPlusIsoMapDerivedCategoryPlus). Naturality in H (D+) and K (unbounded) are the content-bearing clauses. Right adjoints are universally quantified, not vacuous for Noetherian compactifications. Edge cases empty U, H=0, K=0, A=0, identity charts type-check. Node unchanged except lean record; lean.statement verbatim; docstrings with source place, blueprint tag and six proof steps; only sorry is the theorem proof. nt_compile --json clean, 7.7 s. Advisories: helpers use rightDerivedLowerShriekPlusCompIso (owner lem-amb-etale-compact-comparisons, a proof_dep) and other decls outside stmt_deps; three non-public proof-only imports are unused by the statement."
  }
 }
