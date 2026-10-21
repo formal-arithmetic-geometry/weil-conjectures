@@ -3,41 +3,81 @@
  "blueprint": {
   "is": "lemma-nagata-local-domain-valuation-dominates",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Valuation domination of a local domain",
- "statement": "If $B$ is a local domain with fraction field $L$, there is a valuation ring\n$C\\subseteq L$ whose maximal ideal contracts to the maximal ideal of $B$.",
+ "statement": "If $B$ is a local subring of a field $L$, there is a valuation ring\n$C$ of $L$ containing $B$ and dominating it, i.e. whose maximal ideal\ncontracts to the maximal ideal of $B$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-dense-valuative/lemma-nagata-local-domain-valuation-dominates.md",
   "place": "node lemma-nagata-local-domain-valuation-dominates, order 278"
  },
  "stmt_deps": [],
- "proof": [
-  {
-   "text": "Consider the set of subrings of $L$ containing $B$ and whose units avoid the\nmaximal ideal of $B$, ordered by inclusion. The union of a chain has the\nsame property, so Zorn's lemma gives a maximal such ring $C$. For any\n$x\\in L^\\times$, if neither $x$ nor $x^{-1}$ belonged to $C$, adjoining one\nof them and localizing at the complement of the maximal ideal would produce\na strictly larger ring with the same property, contradicting maximality.\nThus $C$ is a valuation ring. Its unique maximal ideal contracts to the\nmaximal ideal of $B$ because $B$ is local and every element outside that\nideal is a unit in $C$.",
-   "uses": [],
-   "elementary": null
-  }
- ],
+ "proof": [],
  "proof_deps": [],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-dense-valuative/lemma-nagata-local-domain-valuation-dominates.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00IA, label lemma-dominate; exact Mathlib leaf LocalSubring.exists_le_valuationSubring (no DAG proof steps)"
  },
  "mathlib_searches": [
   {
-   "tool": "text search of the local Mathlib checkout (0df444a360)",
-   "query": "LocalSubring.exists_le_valuationSubring",
-   "results": [
-    "Mathlib.RingTheory.Valuation.LocalSubring:119 (lemma)"
-   ],
-   "date": "2026-10-08"
+   "tool": "leanfinder",
+   "query": "Every local subring of a field is dominated by a valuation subring of that field",
+   "results": "LocalSubring.exists_le_valuationSubring, LocalSubring.exists_valuationRing_of_isMax, ValuationSubring.isMax_toLocalSubring, ValuationSubring.toLocalSubring, ValuationSubring.instInhabited, ValuationSubring.ofSubring, LocalSubring.isMax_iff, LocalSubring.exists_le_valuationSubring_of_isIntegrallyClosedIn",
+   "date": "2026-10-21",
+   "verdict": "match: LocalSubring.exists_le_valuationSubring states the item exactly"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_le_valuationSubring|le_def|isLocalHom_inclusion",
+   "results": "Mathlib/RingTheory/Valuation/LocalSubring.lean, Mathlib/RingTheory/Valuation/LocalSubring.lean, Mathlib/RingTheory/Valuation/LocalSubring.lean, Mathlib/RingTheory/Valuation/LocalSubring.lean, Mathlib/RingTheory/Valuation/LocalSubring.lean; searched RingTheory/Valuation",
+   "date": "2026-10-21",
+   "verdict": "match: LocalSubring.exists_le_valuationSubring states the item exactly"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every local subring of a field is dominated by a valuation subring of that field",
+   "results": "LocalSubring.exists_le_valuationSubring, ValuationSubring, ValuationSubring.isMax_toLocalSubring, LocalSubring.exists_valuationRing_of_isMax, ValuationSubring.mk, instIsIntegrallyClosedSubtypeMemValuationSubring, ValuationSubring.instValuationRingSubtypeMem, ValuationSubring.mk.noConfusion",
+   "date": "2026-10-21",
+   "verdict": "match: LocalSubring.exists_le_valuationSubring states the item exactly"
+  },
+  {
+   "tool": "loogle",
+   "query": "LocalSubring, ValuationSubring",
+   "results": "ValuationSubring.toLocalSubring, ValuationSubring.toLocalSubring_injective, ValuationSubring.isMax_toLocalSubring, LocalSubring.exists_le_valuationSubring, LocalSubring.exists_valuationRing_of_isMax, LocalSubring.isMax_iff, LocalSubring.exists_le_valuationSubring_of_isIntegrallyClosedIn, LocalSubring.eq_iInf_of_isIntegrallyClosedIn",
+   "date": "2026-10-21",
+   "verdict": "match: LocalSubring.exists_le_valuationSubring states the item exactly"
+  },
+  {
+   "tool": "grep",
+   "query": "le_def|def LE|IsLocalHom|inclusion",
+   "results": "46; searched RingTheory/LocalRing/Subring.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: searched Subring.lean rather than LocalSubring.lean; its one returned hit is unrelated"
+  },
+  {
+   "tool": "grep",
+   "query": "le_def|IsLocalHom|inclusion|PartialOrder",
+   "results": "69, 70, 72, 76, 77; searched RingTheory/LocalRing/LocalSubring.lean",
+   "date": "2026-10-21",
+   "verdict": "support: LocalSubring.le_def and the domination-order definition, lines 69-77; the command printed line numbers as file names for this single-file search"
+  },
+  {
+   "tool": "grep",
+   "query": "local_hom_TFAE|comap_maximalIdeal|map_mem_nonunits_iff",
+   "results": "Mathlib/RingTheory/LocalRing/RingHom/Basic.lean, Mathlib/RingTheory/LocalRing/RingHom/Basic.lean, Mathlib/RingTheory/LocalRing/RingHom/Basic.lean, Mathlib/RingTheory/LocalRing/ResidueField/Fiber.lean, Mathlib/RingTheory/LocalRing/ResidueField/Basic.lean; searched RingTheory/LocalRing",
+   "date": "2026-10-21",
+   "verdict": "support: local_hom_TFAE, RingTheory/LocalRing/RingHom/Basic.lean:80-87, identifies local homomorphisms with contraction of maximal ideals"
   }
  ],
- "mathlib_match": null,
- "status": "imported",
+ "mathlib_match": {
+  "declaration": "LocalSubring.exists_le_valuationSubring",
+  "file": "Mathlib/RingTheory/Valuation/LocalSubring.lean",
+  "line": 119,
+  "how": "exact: lines 119-120 state, for an arbitrary field K and local subring A, the existence of a valuation subring B with A ≤ B.toLocalSubring (proof read through line 145). This is containment and domination by the order definition and LocalSubring.le_def at Mathlib/RingTheory/LocalRing/LocalSubring.lean:69-77. The local inclusion contracts the maximal ideal exactly, as local_hom_TFAE at Mathlib/RingTheory/LocalRing/RingHom/Basic.lean:80-87 states. No fraction-field equality for A and no Noetherian hypothesis is required."
+ },
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -78,5 +118,20 @@
    }
   ],
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lemma-nagata-local-domain-valuation-dominates",
+  "worker": "stage1",
+  "summary": "Q101 checked the live project declarations, the main-20261015 blueprint update, Stacks Tag 00IA (algebra-lemma-dominate), and the Mathlib source. The item is an exact Mathlib leaf, not a project attachment. Applied the explicitly recorded blueprint statement update from fraction-field-only to any local subring of a field. Replaced the imported unjudged proof by the verified Mathlib match; no new nodes are needed.",
+  "blueprint": "The whole updated statement, main-20261015/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-dense-valuative/lemma-nagata-local-domain-valuation-dominates.md, is LocalSubring.exists_le_valuationSubring. This discharges the valuation-domination tool within the unit route without a further Zorn split."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q101-749e1e7e4",
+  "group": "Q101",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q101-749e1e7e4 (reviewer sub-agent of L); spot-checked: The item is an exact Mathlib leaf: LocalSubring.exists_le_valuationSubring at Mathlib/RingTheory/Valuation/LocalSubring.lean:119, tagged stacks 00IA, for any field K and any local subring A. The order on local subrings (LocalSubring.lean:69-77) means containment plus a local inclusion, and local_hom_TFAE (RingHom/Basic.lean:80-84) turns that into comap m_C = m_B, i.e. domination. A ValuationSubring K has fraction field K, so it is a valuation ring of L. The statement now generalizes from 'local domain with fraction field L' to 'local subring of a field L'. It is verbatim the recorded blueprint_update, which I checked against main-20261015/.../lemma-nagata-local-domain-valuation-dominates.md. It matches Stacks algebra.tex:11750 lemma-dominate hypothesis by hypothesis. All 8 citers apply the fraction-field special case, so none breaks. Edge cases B=L and B a subfield are handled; the zero ring cannot occur. The three kinds of search are recorded honestly. There are no new nodes or steps, the delivery shape is one commit with item and report, the item is not dropped and has no repair note, and the live node is still unreviewed. No fixes."
  }
 }

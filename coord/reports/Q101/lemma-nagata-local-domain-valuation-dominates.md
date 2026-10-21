@@ -1,0 +1,25 @@
+# Worker report
+
+1. Files written: `dag/nodes/sec-nagata-compactification/lemma-nagata-local-domain-valuation-dominates.json` — statement; exact Mathlib leaf `LocalSubring.exists_le_valuationSubring`, `Mathlib/RingTheory/Valuation/LocalSubring.lean:119`. No new nodes. `citations.json` is empty because a Mathlib leaf has no DAG proof steps or cited nodes.
+2. Attachments: none. The project search for the node tag, the declaration name and valuation domination found related project lemmas, but no project declaration stating the full item for arbitrary local subrings. In particular `ValuationSubring.exists_comap_eq` starts with a valuation subring and is not an attachment for arbitrary local subrings; the discrete valuation ring existence results impose Noetherian hypotheses.
+3. WANTED: none.
+4. Statement update: followed `blueprint_update.statement`, confirmed in `literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-dense-valuative/lemma-nagata-local-domain-valuation-dominates.md`. The old statement assumes that L is the fraction field of B; the current statement allows any field containing the local subring B and explicitly includes containment. This is the recorded blueprint update, not a weakening or a statement dispute. All maintainer-owned metadata, including the old source path and blueprint_update, is preserved. The old imported search already named the correct Mathlib declaration but did not establish a match. Fresh searches establish it, and replace that unverified imported search record. The imported informal Zorn argument is unnecessary once the whole item is identified as a leaf.
+5. Unfinished work: none.
+
+## Blueprint and DAG searches
+
+Read the Nagata chapter and `sk-lem-nagata-sketch-dense-valuative` unit records. This item is a supporting tool, not the key statement of the unit, so the unit realization fields are not changed. Searched the whole DAG for `exists_le_valuationSubring`, valuation domination, `00IA`, and `algebra-lemma-dominate`; ran blueprint searches for valuation, dominating, local subring, valuation ring, and 00IA. No other blueprint node states arbitrary local-subring domination. The valuation intersection and valuation extension nodes have different input hypotheses and conclusions. No new nodes were created.
+
+## Not duplicates
+
+No new nodes; hence there are no new-versus-existing pairs to justify.
+
+## Review by Q101
+
+I read the current blueprint statement and the complete statement and proof of Stacks Tag 00IA, `literature/stacks-project/algebra.tex`, label `lemma-dominate`, beginning at line 11750. That source explicitly permits any local subring of a field and produces a dominating valuation ring with that field as its fraction field. I read Mathlib's `LocalSubring.exists_le_valuationSubring` at line 119 and its proof, with only a field and a local subring as inputs. It returns a valuation subring of that same field. The statement matches every clause of the current blueprint, so the rule for Mathlib leaves applies directly.
+
+The critical meaning check was that ≤ on local subrings is domination, not mere set inclusion. I read the order instance and `LocalSubring.le_def` at `Mathlib/RingTheory/LocalRing/LocalSubring.lean:69-77`: its data are an inclusion and `IsLocalHom` on that inclusion. I also read `IsLocalRing.local_hom_TFAE` at `Mathlib/RingTheory/LocalRing/RingHom/Basic.lean:80-87`, whose equivalences include equality of the maximal ideal with the inverse image of the target maximal ideal. Thus the match supplies both B ⊆ C and m_C ∩ B = m_B. There is no hidden Noetherian, nonfield or fraction-field hypothesis on B. The case B = L is allowed: C = L has maximal ideal zero. If B is a field properly contained in L, C = L also dominates B. A zero local ring cannot embed as a unital subring of the nontrivial field L, so it is not a missing boundary case. A local domain in its fraction field is the original special case.
+
+I checked delivery-errors B–E against the actual files and source: no new-node definitions, hidden lemmas, clause-restating nodes, off-route tools or circular dependencies are introduced. There are no item proof steps to assess for C1/C4, no non-elementary assertions assigned to an elementary step, and no long steps. The mathematical argument is delegated to the exact Mathlib declaration under the leaf rule, with its source location and the domination interpretation recorded in mathlib_match. No cited DAG statements occur, so citations.json is the empty list. All Mathlib searches were actually run through msearch.py and are recorded from searches.jsonl, including the unhelpful search of Subring.lean before correcting the path to LocalSubring.lean. I read each search result; no unavailable service is recorded as a negative result. No Lean was written and no compiler, Lake or build command was used.
+
+The first dry run required proof_origin to name a document even for this Mathlib leaf. I supplied the Stacks Tag 00IA provenance read above; proof remains empty, as required for a Mathlib leaf.
