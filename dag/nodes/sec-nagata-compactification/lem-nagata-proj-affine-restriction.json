@@ -22,87 +22,41 @@
  ],
  "proof": [
   {
-   "text": "The underlying module of $\\mathcal A$ is the sheaf coproduct of the quasi-coherent modules $\\mathcal A_n$ by [def-weil-pbc-graded-sheaf-structures]. Apply [lem-weil-pbc-quasi-coherent-module-coproduct-closure] to the small index set $\\mathbb N$: the underlying module is quasi-coherent. Thus the affine algebra inclusion theorem is applicable to $\\mathcal A$ itself, without finite generation and without assuming $\\mathcal A_0=\\mathcal O_X$. For an affine open $T=\\operatorname{Spec}Q$, set $M_n=\\Gamma(T,\\mathcal A_n)$. Clauses (3) and (4) of [lem-weil-pbc-affine-tilde-gamma-adjunction] identify the sheaf coproduct on $T$ with $\\widetilde{\\bigoplus_n M_n}$, compatibly with the summand inclusions. Clause (2) then identifies $\\Gamma(T,\\mathcal A)=\\bigoplus_n M_n$. Thus the sections used below have the asserted grading, not merely a family of homogeneous submodules.",
+   "text": "The homogeneous section subgroups of the input are ranges of linear maps, hence submodules. Their underlying additive groups carry the given internal grading. Use the identity graded homomorphisms to identify the Proj of this submodule grading with the specified local Proj, compatibly with its degree-zero base map.",
    "uses": [
-    "def-weil-pbc-graded-sheaf-structures",
-    "lem-weil-pbc-quasi-coherent-module-coproduct-closure",
-    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+    "def-nagata-relative-proj"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Tag 01ID (lemma-colimit-quasi-coherent), and Section 01LA (section-quasi-coherent), closure under direct sums; Tag 01IB (lemma-equivalence-quasi-coherent), affine sections of the direct sum"
-   }
+   "elementary": true
   },
   {
-   "text": "Fix affine opens $V\\subseteq U$. Put $R=\\mathcal O_X(U)$, $S=\\mathcal O_X(V)$, $C=\\Gamma(U,\\mathcal A)$ and $D=\\Gamma(V,\\mathcal A)$. Clause (i) of [lem-weil-pbc-quasi-coherent-algebra-affine-inclusion] gives the ring isomorphism $C\\otimes_R S\\to D$, $a\\otimes s\\mapsto s\\,a|_V$. Swap the tensor factors to write it as $\\beta:S\\otimes_R C\\to D$, $s\\otimes a\\mapsto s\\,a|_V$. This swap respects multiplication since both rings are commutative. The tensor module has the direct-sum decomposition $S\\otimes_R C=\\bigoplus_n(S\\otimes_R C_n)$: maps from either side to any $S$-module are exactly families of $R$-balanced bilinear maps $S\\times C_n$ into that module, so the balanced-tensor and direct-sum universal properties give inverse comparisons. Restriction preserves every homogeneous component by [def-weil-pbc-graded-sheaf-structures], and $S$ acts in degree zero, so $\\beta$ is graded. Its inverse preserves degree as well: decompose a preimage into homogeneous components and use injectivity to kill every component of a different degree. The induced map $a\\mapsto\\beta(1\\otimes a)$ is precisely restriction $C\\to D$.",
+   "text": "Quasi-coherent affine section base change identifies the underlying section restriction with scalar extension. Tensoring commutes with the direct-sum grading. Under the decomposition equivalences the total comparison is the direct sum of the degreewise comparisons; its bijectivity implies bijectivity in each degree. Apply affine Proj base change (the source primitive Proj.isPullback_map_of_isGradedBaseChange used by lem-nagata-affine-proj-scalar-extension), and paste with the canonical affine spectrum identifications. Transport along the identity-induced grading isomorphisms to get the asserted pullback square.",
    "uses": [
-    "lem-weil-pbc-quasi-coherent-algebra-affine-inclusion",
-    "def-weil-pbc-graded-sheaf-structures"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Tag 01NO (lemma-proj-inclusion), proof: the quasi-coherent sections tensor isomorphism, citing Schemes 01I9"
-   }
-  },
-  {
-   "text": "Apply [lem-nagata-affine-proj-scalar-extension] with $(A,B)=(C,D)$ and the graded isomorphism $\\beta$ from Step 2. It gives a morphism $r^U_V:P_V\\to P_U$ on all of $P_V$, with inverse-image charts $D_+(f|_V)$ and ring maps $a/f^m\\mapsto(a|_V)/(f|_V)^m$. Its cartesian square has bottom map $\\operatorname{Spec}(R\\to S)$, which is the affine open inclusion $V\\hookrightarrow U$ under the affine identifications in [lem-weil-pbc-quasi-coherent-algebra-affine-inclusion], with spectrum functoriality as in [def-weil-affine-spectrum]. The vertical maps are exactly $p_U,p_V$, since their degree-zero maps are the algebra units. Hence $p_U\\circ r^U_V$ is $p_V$ followed by this inclusion.",
-   "uses": [
+    "lem-weil-pbc-quasi-coherent-affine-section-base-change",
     "lem-nagata-affine-proj-scalar-extension",
-    "def-weil-affine-spectrum",
-    "lem-weil-pbc-quasi-coherent-algebra-affine-inclusion"
+    "lem-weil-pbc-affine-open-inclusion-spec-map"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Tags 01NO (lemma-proj-inclusion), proof, and 01N2 (lemma-base-change-map-proj)"
-   }
+   "elementary": false
   },
   {
-   "text": "The open subscheme $p_U^{-1}(V)$ represents the fibre product $P_U\\times_U V$: a map into it is exactly a map into $P_U$ whose composite into $U$ factors through the open subscheme $V$, and that factorization is unique. Indeed, a map $a:T\\to P_U$ whose base map factors through $V$ has image in $p_U^{-1}(V)$. Restrict its continuous map to that open and its structure-sheaf map to $\\mathcal O_{P_U}|_{p_U^{-1}(V)}$; the maps on stalks are unchanged and hence remain local. This gives the required scheme morphism, and composing with the open inclusion recovers $a$. Both the continuous map and the sheaf map are forced by this equality. This uses the description of an open subscheme in [def-weil-open-immersion]. By the uniqueness clause of [def-pc-fibre-product], the cartesian square in Step 3 identifies $P_V$ with $p_U^{-1}(V)$ over $V$, and its first projection is $r^U_V$.",
+   "text": "The restriction homomorphisms satisfy identity and composition by the sheaf functor laws. Proj.map_id and Proj.map_comp give the corresponding identity and composition for localTransition.",
    "uses": [
-    "def-weil-open-immersion",
-    "def-pc-fibre-product"
+    "def-nagata-relative-proj"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Tag 01NO (lemma-proj-inclusion), following sentence: the morphism is an open immersion"
-   }
-  },
-  {
-   "text": "For $V=U$, the chart maps of [lem-nagata-affine-proj-scalar-extension] send every fraction $a/f^m$ to itself. They are identity ring maps, so their spectrum maps are identities by [def-weil-affine-spectrum], and the chart cover gives $r^U_U=\\mathrm{id}$. For affine $W\\subseteq V\\subseteq U$, write $f_V=f|_V$ and $f_W=f|_W$. The inverse image of $D_+(f)$ under either proposed composite is $D_+(f_W)$, and on its coordinate rings the composite is\n$$a/f^m\\longmapsto(a|_V)/f_V^m\\longmapsto((a|_V)|_W)/f_W^m=(a|_W)/f_W^m.$$\nThe last equality is the restriction axiom of the sheaf algebra [def-weil-pbc-graded-sheaf-structures]. This is the chart map of $r^U_W$. Fractions represent all elements of these chart rings [def-nagata-homogeneous-localization-degree-zero], so the ring maps agree; their spectrum maps agree by [def-weil-affine-spectrum]. The opens $D_+(f_W)$ cover $P_W$ by the scalar-extension node, hence [lem-weil-pbc-scheme-morphism-gluing], specifically its uniqueness clause, makes equality of these restrictions equality of the scheme morphisms. Thus $r^U_W=r^U_V\\circ r^V_W$.",
-   "uses": [
-    "lem-nagata-affine-proj-scalar-extension",
-    "def-weil-affine-spectrum",
-    "def-weil-pbc-graded-sheaf-structures",
-    "def-nagata-homogeneous-localization-degree-zero",
-    "lem-weil-pbc-scheme-morphism-gluing"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Tag 01NP (lemma-transitive-proj), proof citing 01MZ; the fraction calculation supplies the omitted compatibility details"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-graded-sheaf-structures",
-  "lem-weil-pbc-quasi-coherent-module-coproduct-closure",
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "lem-weil-pbc-quasi-coherent-algebra-affine-inclusion",
+  "def-nagata-relative-proj",
+  "lem-weil-pbc-quasi-coherent-affine-section-base-change",
   "lem-nagata-affine-proj-scalar-extension",
-  "def-weil-affine-spectrum",
-  "def-weil-open-immersion",
-  "def-pc-fibre-product",
-  "def-nagata-homogeneous-localization-degree-zero",
-  "lem-weil-pbc-scheme-morphism-gluing"
+  "lem-weil-pbc-affine-open-inclusion-spec-map"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "F3",
+  "date": "2026-10-22",
   "document": "literature/stacks-project/constructions.tex",
-  "place": "Tags 01NO and 01NP; scalar extension 01N2 with chart characterization 01MY; quasi-coherent direct sums from Schemes 01ID/01LA"
+  "place": "Tags 01NO and 01NP; the coefficientwise base-change verification is expanded using direct-sum linear algebra."
  },
  "mathlib_searches": [
   {
@@ -186,5 +140,30 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-ND-6ac9a281e (reviewer sub-agent of L); spot-checked: Read the full item, new scalar-extension node, cited DAG statements, unit/chapter route, delivery rules, and Stacks Tags 01N2, 01MY, 01NO, and 01NP. Verified all five proof steps, hypotheses, base-change directions, coefficient category, chart formulas, identity/composition, edge cases, searches, and duplicate checks. Review written to review.md."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeProjAffineRestriction",
+  "declaration": "AlgebraicGeometry.RelativeProjAlgebra.localTransition_isPullback",
+  "declarations": [
+   "AlgebraicGeometry.RelativeProjAlgebra.localTransition_isPullback",
+   "AlgebraicGeometry.RelativeProjAlgebra.localTransition_id",
+   "AlgebraicGeometry.RelativeProjAlgebra.localTransition_comp"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeProjAffineRestriction.lean",
+  "existing": false,
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-22",
+  "statement": "theorem localTransition_isPullback {V W : X.affineOpens} (h : W ≤ V) :\n    IsPullback (A.localTransition h) (A.localBase W) (A.localBase V) (X.homOfLE h)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261021T214753-L-1850992",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }
