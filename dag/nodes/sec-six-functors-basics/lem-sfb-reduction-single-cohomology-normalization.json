@@ -20,9 +20,115 @@
   "lem-sf-derived-ses-triangle",
   "lem-pur-torsion-sheaf-constant-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $K_A=\\operatorname{Res}Lq(A)$. The scalar-reduction triangle gives $A\\xrightarrow{n}A\\xrightarrow{\\eta_A}K_A\\xrightarrow{\\delta_A}A[1]$ with precisely the specified unit and last map. Apply the long exact cohomology sequence of a distinguished triangle to this triangle and to its rotations $A\\xrightarrow{\\eta_A}K_A\\xrightarrow{\\delta_A}A[1]\\xrightarrow{-n[1]}A[1]$ and $K_A\\xrightarrow{\\delta_A}A[1]\\xrightarrow{-n[1]}A[1]\\xrightarrow{-\\eta_A[1]}K_A[1]$, which are distinguished by TR2. Exactness at the middle term of each triangle is exactness of $H^j$ applied to its first two maps, so the sequence below consists of the cohomology maps of $\\eta_A$, $\\delta_A$ and $\\pm n$, not of unspecified connecting morphisms; the sign of $-n$ does not change kernels or images. Since $A[0]$ has cohomology $A$ in degree zero and zero elsewhere, the terms in each degree outside $-1,0$ force $H^j(K_A)=0$. The remaining segment is $0\\to H^{-1}(K_A)\\xrightarrow{H^{-1}(\\delta_A)}A\\xrightarrow{n}A\\xrightarrow{H^0(\\eta_A)}H^0(K_A)\\to0$, using $H^{-1}(A[1])=A$. This is the asserted exact sequence, with its actual maps, rather than just an identification of its objects.",
+   "uses": [
+    "lem-sfb-scalar-reduction-unit-triangle",
+    "lem-sf-derived-homology-long-exact",
+    "def-weil-abstract-derived-category",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RS, lemma-cohomology-homological, and Tag 0147, definition-homological-functor; multiplication triangle supplied by the cited node"
+   }
+  },
+  {
+   "text": "Restriction is exact by the ordinary ringed-site scalar-adjunction theorem, applied to $Z\\to R$. In particular it preserves kernels, images and cokernels, so termwise restriction gives $\\operatorname{Res}H^a(Q)=H^a(\\operatorname{Res}Q)$, including the induced maps. It is conservative on sheaves: a map with an invertible underlying additive map has an $R$-linear inverse, since $f(rx)=rf(x)$ implies $f^{-1}(ry)=rf^{-1}(y)$. Thus vanishing computed in Step 1 also holds for the $R$-cohomology of $Q_A$. Exact termwise restriction induces the triangulated functor on derived categories, commutes with shifts and single complexes, and sends quasi-isomorphisms to quasi-isomorphisms. These are the comparisons used below.",
+   "uses": [
+    "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+    "def-pc-sheaf-restrict-scalars",
+    "lem-sf-exact-functor-derived-triangulated",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D7 and 03DA, scalar restriction; termwise derived exactness from the cited exact-functor node"
+   }
+  },
+  {
+   "text": "For a complex $Q$ with cohomology only in degree $a$, set $T=\\tau_{\\le a}Q$. Its terms are $Q^j$ for $j<a$, $\\ker d_Q^a$ for $j=a$, and zero for $j>a$. Let $c:T\\to Q$ be the inclusion and let $p:T\\to H^a(Q)[-a]$ have sole nonzero component the quotient $\\ker d_Q^a\\to\\ker d_Q^a/\\operatorname{im}d_Q^{a-1}$ in degree $a$. The equation $p^a d_T^{a-1}=0$ makes $p$ a chain map. Directly from these kernels and quotients, $H^j(c)$ is the identity for $j\\le a$, while $H^a(p)$ is the identity and both sides have zero cohomology in every other degree. Hence $c,p$ are quasi-isomorphisms. Their components are $R$-linear; a chain map preserves cycles and boundaries, so it commutes with both $c$ and $p$. This proves the natural $R$-linear zigzag and defines $\\epsilon_Q=Q(p)Q(c)^{-1}$, inducing the identity on $H^a$. The same formulas apply to abelian sheaves. Restriction carries these maps to the identical kernel/quotient maps under Step 2's comparisons.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category",
+    "def-weil-abstract-derived-category",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0118, section-truncations, canonical cochain truncations; explicit cycles-to-cohomology quotient"
+   }
+  },
+  {
+   "text": "We will use the following immediate consequence of the preceding zigzag and full faithfulness of the single-complex embedding. If $X,Y$ have cohomology only in the same degree $a$, conjugating a morphism $u:X\\to Y$ by $\\epsilon_X,\\epsilon_Y$ and shifting by $a$ identifies it with a unique ordinary map $H^a(X)\\to H^a(Y)$. Applying $H^a$ shows that this map is $H^a(u)$, since both $\\epsilon$ maps induce identities. Thus two such morphisms are equal if their $H^a$ maps agree, and every isomorphism of these cohomology objects gives an isomorphism $X\\to Y$. This also shows that the isomorphisms from Step 3 are natural for derived morphisms, not merely for chain maps. We use the assertion separately in the abelian categories of $Z$-sheaves and of $R$-sheaves, never full faithfulness of derived restriction.",
+   "uses": [
+    "lem-weil-pbc-derived-single-fully-faithful",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06XS, lemma-negative-exts (2), together with Step 3 and the shift autoequivalence"
+   }
+  },
+  {
+   "text": "Suppose $n:F\\to F$ is monic. Step 1 gives $H^{-1}(K_F)=0$, and $h=H^0(\\eta_F):F\\to H^0(K_F)$ is a cokernel of $n$. The cokernel universal property supplies the unique isomorphism $t:H^0(K_F)\\to\\bar F$ with $th=p_F$. Both sheaves are killed by $n$: for $\\bar F$ this follows from $p_Fn=0$, and for $H^0(K_F)$ it follows from its $R$-module structure. The torsion-sheaf module theorem makes $t$ $R$-linear. Form $\\alpha_F=t[0]\\epsilon_{Q_F}c_F$ in $D(R)$, where $c_F:Lq(F)\\xrightarrow{\\sim}Q_F$ is the given resolution comparison. Its restriction composed with $\\eta_F$ induces $th=p_F$ on $H^0$. Both this composite and $p_F$ are morphisms from $F[0]$ to $\\bar F[0]$, so Step 4 proves equality. This proves the monic case including its unit normalization.",
+   "uses": [
+    "lem-pur-torsion-sheaf-constant-module",
+    "lem-sfb-scalar-reduction-unit-triangle"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 0152, lemma-derived-canonical-delta-functor, and 06XS, lemma-negative-exts; cokernel comparison and Steps 1–4"
+   }
+  },
+  {
+   "text": "Suppose $n:B\\to B$ is epic. The short exact sequence $0\\to H\\xrightarrow{i}B\\xrightarrow{n}B\\to0$ gives the distinguished triangle $H\\xrightarrow{i}B\\xrightarrow{n}B\\xrightarrow{\\kappa_B}H[1]$. By signed rotation its rotation is $B\\xrightarrow{n}B\\xrightarrow{\\kappa_B}H[1]\\xrightarrow{-i[1]}B[1]$. Compare this with $B\\xrightarrow{n}B\\xrightarrow{\\eta_B}K_B\\xrightarrow{\\delta_B}B[1]$. TR3 applied to the identity on each of the first two copies of $B$ gives $u:K_B\\to H[1]$ satisfying $u\\eta_B=\\kappa_B$ and $(-i[1])u=\\delta_B$. Taking $H^{-1}$ yields $(-i)H^{-1}(u)=H^{-1}(\\delta_B)$. By Step 1 the map on the right identifies its source with $\\ker n$, and $-i:H\\to B$ is also a kernel of $n$. Consequently $v=H^{-1}(u)$ is the unique isomorphism with $(-i)v=H^{-1}(\\delta_B)$. Notice that the rotation forces the minus sign.",
+   "uses": [
+    "lem-sf-derived-ses-triangle",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0152, lemma-derived-canonical-delta-functor; Tag 0145, definition-triangulated-category, TR2 and TR3"
+   }
+  },
+  {
+   "text": "Step 1 and epicness give $H^0(K_B)=0$; thus $K_B$ and $Q_B$ are concentrated in cohomological degree $-1$. Also $nH=0$ since $ni=0$ and $i$ is monic. The torsion-sheaf module theorem makes $v:H^{-1}(K_B)\\to H$ $R$-linear. In $D(R)$ define $\\alpha_B=v[1]\\epsilon_{Q_B}c_B:Lq(B)\\xrightarrow{\\sim}H[1]$, using the cohomology comparison of Step 2. Its restriction and the map $u$ from Step 6 have the same map $v$ on $H^{-1}$. Step 4 in $D(Z)$ therefore gives $\\operatorname{Res}(\\alpha_B)=u$. Substituting in the two equations from TR3 proves $(\\operatorname{Res}\\alpha_B)\\eta_B=\\kappa_B$ and $(-i[1])\\operatorname{Res}(\\alpha_B)=\\delta_B$. It also proves the stated uniqueness characterization of the degree $-1$ map. All isomorphisms were constructed by $R$-linear maps and the $R$-linear truncation zigzag; only their comparison with the two $Z$-linear boundaries was made after restriction.",
+   "uses": [
+    "lem-pur-torsion-sheaf-constant-module",
+    "lem-sfb-scalar-reduction-unit-triangle"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 06XS, lemma-negative-exts, and 0145, definition-triangulated-category; Steps 1–6 give the signed normalization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-scalar-reduction-unit-triangle",
+  "lem-sf-derived-homology-long-exact",
+  "def-weil-abstract-derived-category",
+  "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-sf-exact-functor-derived-triangulated",
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "lem-pur-torsion-sheaf-constant-module",
+  "lem-sf-derived-ses-triangle",
+  "def-weil-triangulated-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
+  "place": "Paragraph 4: explicit scalar-reduction cohomology calculation and signed Kummer identification, using Stacks Tags 0118, 0145, 0152, 05RS and 06XS as detailed in the steps"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -65,10 +171,52 @@
    "results": "{\"n_hits\": 12, \"note\": \"\", \"top\": [\"DerivedCategory.singleFunctor\", \"DerivedCategory.instAdditiveSingleFunctor\", \"DerivedCategory.singleFunctorIsoCompQ\", \"DerivedCategory.singleFunctorIsoCompQh\", \"DerivedCategory.Q_obj_single_obj\", \"DerivedCategory.singleFunctorIsoCompQ_hom_app\", \"DerivedCategory.singleFunctorIsoCompQ_inv_app\", \"DerivedCategory.Q_map_single_map\"]}",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor reduction modulo n of an abelian sheaf has kernel n in cohomological degree minus one and cokernel n in degree zero with the Kummer boundary sign",
+   "results": "{\"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.instAddCommGroupH\", \"Rep.Tor_obj\", \"Rep.torIso\", \"Rep.Tor_map\", \"Rep.FiniteCyclicGroup.coinvariantsTensorResolutionIso\", \"groupCohomology.mapShortComplex₂\", \"Rep.FiniteCyclicGroup.coinvariantsTensorResolutionIso_hom_f_hom_apply\", \"Rep.Tor\"]}",
+   "date": "2026-10-21",
+   "verdict": "no match for the complete item; full faithfulness and single-cohomology comparison hits are reused through the existing single-fully-faithful node"
+  },
+  {
+   "tool": "grep",
+   "query": "[Kk]ummer|[Mm]ultiplication.*[Tt]riangle|[Tt]riangle.*[Mm]ultiplication|[Rr]eduction.*[Cc]ohomolog",
+   "results": "{\"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/KummerDedekind.lean\", \"Mathlib/NumberTheory/KummerDedekind.lean\", \"Mathlib/NumberTheory/KummerDedekind.lean\", \"Mathlib/NumberTheory/KummerDedekind.lean\", \"Mathlib/NumberTheory/KummerDedekind.lean\", \"Mathlib/NumberTheory/NumberField/Cyclotomic/Ideal.lean\", \"Mathlib/NumberTheory/NumberField/Cyclotomic/Three.lean\", \"Mathlib/NumberTheory/NumberField/Cyclotomic/Three.lean\"]}",
+   "date": "2026-10-21",
+   "verdict": "no match for the complete item; full faithfulness and single-cohomology comparison hits are reused through the existing single-fully-faithful node"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived reduction of a divisible abelian sheaf modulo n is its n torsion shifted one with the short exact sequence boundary",
+   "results": "{\"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.rightDerived\", \"CategoryTheory.ShortComplex.ShortExact.singleδ.congr_simp\", \"DerivedCategory.triangleOfSESδ\", \"DerivedCategory.triangleOfSESδ.congr_simp\", \"CategoryTheory.ShortComplex.ShortExact.singleδ\", \"CategoryTheory.ShortComplex.ShortExact.singleTriangle\", \"DerivedCategory.triangleOfSES\", \"DerivedCategory.triangleOfSES_mor₁\"]}",
+   "date": "2026-10-21",
+   "verdict": "no match for the complete item; full faithfulness and single-cohomology comparison hits are reused through the existing single-fully-faithful node"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.singleFunctor, DerivedCategory.homologyFunctor",
+   "results": "{\"n_hits\": 1, \"note\": \"\", \"top\": [\"DerivedCategory.singleFunctorCompHomologyFunctorIso\"]}",
+   "date": "2026-10-21",
+   "verdict": "no match for the complete item; full faithfulness and single-cohomology comparison hits are reused through the existing single-fully-faithful node"
+  },
+  {
+   "tool": "grep",
+   "query": "singleFunctorCompHomologyFunctorIso|instance.*singleFunctor.*(Full|Faithful)|n.torsion|[Rr]eduction.*[Cc]ohomolog",
+   "results": "{\"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/HomotopyCategory/SingleFunctors.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/SingleFunctors.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/FullyFaithful.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/FullyFaithful.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/FullyFaithful.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/FullyFaithful.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/FullyFaithful.lean\"]} (subdirectory Algebra/Homology)",
+   "date": "2026-10-21",
+   "verdict": "no match for the complete item; full faithfulness and single-cohomology comparison hits are reused through the existing single-fully-faithful node"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universal coefficient sequence for tensoring abelian group sheaves with ZMod n together with the signed identification of derived reduction of an n divisible sheaf",
+   "results": "{\"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.H\", \"CategoryTheory.Sheaf.cohomologyPresheaf\", \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"CategoryTheory.Sheaf.instAddCommGroupH\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex\", \"instAbelianCondensedMod\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₃\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₁\"]}",
+   "date": "2026-10-21",
+   "verdict": "no match for the complete item; full faithfulness and single-cohomology comparison hits are reused through the existing single-fully-faithful node"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-divisible-extension-derived-reduction",
@@ -87,5 +235,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-reduction-single-cohomology-normalization",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Computed the cohomology exact sequence from the specified multiplication triangle, constructed the R-linear truncation zigzag explicitly, and compared triangles using TR3 to prove both unit and signed-boundary identities. Reused existing nodes throughout; no new nodes. Checked the restriction/cohomology comparisons and same-degree full faithfulness without assuming derived restriction is fully faithful.",
+  "blueprint": "sk-lem-geo-cartier proof paragraph 4: the source quotient and the target Kummer torsion shifted once; this item supplies their unit and sign normalization.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+    "why": "Use only exactness of same-site restriction of ring-sheaf scalars, for the cohomology comparison; this general categorical tool is not supplied by another statement in sk-lem-geo-cartier."
+   },
+   {
+    "node": "lem-pur-torsion-sheaf-constant-module",
+    "why": "Use the unique residue-module structure and R-linearity of additive maps killed by n; a general sheaf-coefficient tool, not a replacement for the Cartier construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+  "lem-pur-torsion-sheaf-constant-module"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q07-40ffe19c9",
+  "group": "Q07",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q07-40ffe19c9 (reviewer sub-agent of L); spot-checked: I read all 7 steps and the statement of every cited node. The statement is unchanged from live side. There are no new nodes, no SGA citations and no cycle. The live item is still unsplit and not dropped. The route is right: per sk-lem-geo-cartier.proof.md paragraph 4, the source i_*Z_D (n monic) reduces to its quotient and G_m (n epic) to mu[1]. I accept both tool_uses: lem-pur-sheaf-ring-coefficient-ordinary-adjunction is used only for exactness of Res along Z->Z/n, and lem-pur-torsion-sheaf-constant-module clause 2 for linearity of maps between n-killed sheaves. One fault, C3/C4 in Step 1: lem-sf-derived-homology-long-exact gives exactness with unspecified connecting maps delta^n, yet the step names the map H^{-1}(K_A)->A as H^{-1}(delta_A). Fix: apply the long exact sequence to the triangle and its two TR2 rotations, use only middle-term exactness, and add def-weil-triangulated-category to the step's uses. Steps 2-7 are correct. Step 3: the tau_{<=a} zigzag gives quasi-isomorphisms, with the single term in degree a under the cohomological convention. Step 4: same-degree full faithfulness through the single-complex leaf. Step 5: the unique cokernel iso t, made R-linear, gives alpha_F; checked in degree 0. Step 6: TR3 from (B,B,K_B) into the rotated SES triangle gives u with u eta_B=kappa_B and (-i[1])u=delta_B, and v is the unique kernel comparison. Step 7: Res alpha_B=u, checked in degree -1 in D(Z). Small cases on the point site with n=3 and n=1: F=Z; B=Q/Z, where Tor_1=Z/3 in degree -1 and the sign -i[1] is detectable; B=Q. Advisory: Steps 3-4 repeat the content of the existing unsplit lem-pur-good-truncation-exact-normalization; the item's own statement already contains this clause, so this is not a fault. The whole corrected node is at fixes/dag/nodes/sec-six-functors-basics/lem-sfb-reduction-single-cohomology-normalization.json.; 1 file(s) fixed by the reviewer"
  }
 }
