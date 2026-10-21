@@ -22566,3 +22566,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:34 L: merged deliver/NC/det-def-sfb-filtered-two-colimit-characterization (reviewer PASS; after a return; new nodes: 2)
 - 13:34 L: merged deliver/NB/lem-cbc-ringed-open-extension-products (reviewer PASS; after a return; new nodes: 2)
 - 13:34 L: merged deliver/NA/lem-sfb-continuous-algcl-proper-scalar-comparison (reviewer PASS; first push; new nodes: 1)
+- 2026-10-21T13:35:04Z L: superseded stage-1 delivery ND/lem-sfb-qcqs-proper-integral-rational-scalar-comparison at d2afd578fd122291f926b0b48209f9e3eb19d517; current completion retained; packet archived at refs/superseded/ND/lem-sfb-qcqs-proper-integral-rational-scalar-comparison/d2afd578fd122291f926b0b48209f9e3eb19d517; stale return retired.
