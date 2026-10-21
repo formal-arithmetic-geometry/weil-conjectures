@@ -23285,3 +23285,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:09 L: returned deliver/NA/lem-sfb-norm-algcl-internal-hom-base-change (reviewer RETURN: D4/C6 (circular in substance), C5 (duplicate), D2. The new node lem-sfb-norm-algcl-closed-costalk-exchange (kappa: S_Z R)
 - 18:09 L: merged deliver/NP/lem-sfb-snc-tame-root-etale-extension (stage 2; reviewer PASS; parallel immutable checks)
 - 2026-10-21T18:10:28Z L: superseded stage-1 delivery Q36/lem-pur-closed-etale-transport-bounds at 25b49b6447e510db6a3f13676a4c8eab901ade93; current completion retained; packet archived at refs/superseded/Q36/lem-pur-closed-etale-transport-bounds/25b49b6447e510db6a3f13676a4c8eab901ade93; stale return retired.
+- 18:11 L: merged deliver/O3/lem-sfb-discrete-lattice-koszul-resolution (stage 2; reviewer PASS; parallel immutable checks)

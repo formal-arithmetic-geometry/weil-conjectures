@@ -342,5 +342,52 @@
   "group": "NV",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-86d810d00 (reviewer sub-agent of L); spot-checked: Read the item, the new node and every cited statement in full. All ten steps are correct, and I re-derived the signs, the transpose sign and the homotopies. Step 1: Fun(BD,Mod) is Grothendieck abelian with J=BD, so there are enough injectives, and invariants are right adjoint to the trivial action. Step 2: the matrices of the integral contraction are column-finite, so it carries over to any module Q, and exactness is equivariant by the creates-kernels/cokernels clause of the action-site presentation. Step 3: Hom from the R[S]-tensored complex into an equivariant injective is exact, using the free property of R[S] and tensor-Hom; no projectivity is needed. Step 4: precomposing with the boundary gives exactly the statement's (T_i-1) differential and the invariant augmentation, and the d^2 signs cancel. Steps 5-6: total-complex comparisons on the first-quadrant double complex with at most r+1 terms per diagonal, conforming to Stacks 0133. The (-1)^{ab} transpose intertwines the two total differentials, and the normalization square holds. Step 7: the homotopy (-1)^a K(k) is a total homotopy. Step 8: lift-along-injective-quasi-iso is applied to UP'[0]->UJ, which is monic and a quasi-isomorphism, so injectivity of UJ over R is not needed, and Gamma(beta) is a quasi-isomorphism. This is consistent with c_J of lem-sfb-condensed-derived-restriction-calculus and with the citer tame-inertia step 6. Step 9: the derived-functor unit is inverted. Step 10: r=0 reduces to eta_P, and the r=1 and r=2 cases check out. New node lem-sfb-integral-lattice-cubical-contraction: the cellular chains of the cube decomposition of R^r. True, checked for r=0, for r=1 with explicit h_0, for general r via the tensor homotopy, and in top degree (the boundary is injective). Statement-only, no proof sketch, searches recorded, not a duplicate: the simplex-shuffle and ring Koszul nodes state other things. It is a real algebraic lemma below the item, not a restatement of any clause. The item is not dropped and has no re-split note; it is still unsplit on live and side-live; no SGA source. Stacks tags 03EV, 03DA, 0133, 013P, 05TH and 0156 were checked in the .tex. I accept the 11 declared tool uses as generic. One fault, B3, repaired: the statement used 'total right derived functor' and 'Res_phi' without definition nodes. The corrected item adds [def-sfb-right-derived-functor] and [def-pc-sheaf-restrict-scalars] inline and in stmt_deps; nothing else changes. Maintainer note: lem-sfb-discrete-lattice-cup-exterior (NP, unsplit) is the trivial-action special case with cup normalization; its split could cite this item.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DiscreteLatticeKoszulResolution",
+  "declaration": "Profinite.DiscreteLattice.discrete_lattice_koszul_resolution",
+  "declarations": [
+   "Profinite.DiscreteLattice.Modules",
+   "Profinite.DiscreteLattice.Group",
+   "Profinite.DiscreteLattice.Equivariant",
+   "Profinite.DiscreteLattice.generator",
+   "Profinite.DiscreteLattice.invariants",
+   "Profinite.DiscreteLattice.invariants_additive",
+   "Profinite.DiscreteLattice.resolutions",
+   "Profinite.DiscreteLattice.modulesDerived",
+   "Profinite.DiscreteLattice.equivariantDerived",
+   "Profinite.DiscreteLattice.derivedInvariants",
+   "Profinite.DiscreteLattice.Subsets",
+   "Profinite.DiscreteLattice.differentialEntry",
+   "Profinite.DiscreteLattice.subsetFinite",
+   "Profinite.DiscreteLattice.KoszulModel",
+   "Profinite.DiscreteLattice.derivedUnit",
+   "Profinite.DiscreteLattice.invariantUnit",
+   "Profinite.DiscreteLattice.restriction",
+   "Profinite.DiscreteLattice.equivariantRestriction",
+   "Profinite.DiscreteLattice.equivariantRestriction_additive",
+   "Profinite.DiscreteLattice.restrictionInvariants",
+   "Profinite.DiscreteLattice.restrictionInvariants_naturality",
+   "Profinite.DiscreteLattice.restrictionInvariantComplex",
+   "Profinite.DiscreteLattice.resolutionComparison",
+   "Profinite.DiscreteLattice.CoefficientComparison",
+   "Profinite.DiscreteLattice.Comparison",
+   "Profinite.DiscreteLattice.discrete_lattice_koszul_resolution"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/DiscreteLatticeKoszulResolution.lean",
+  "statement": "theorem discrete_lattice_koszul_resolution : ∃ (K : ∀ (R : Profinite.CondensedRing.{u}) [IsCommMonObj R.X] (r : ℕ), KoszulModel R r) (comparison : ∀ (R : Profinite.CondensedRing.{u}) [IsCommMonObj R.X] (r : ℕ), Comparison R r (K R r)), (∀ (R R' : Profinite.CondensedRing.{u}) [IsCommMonObj R.X] [IsCommMonObj R'.X] (φ : R ⟶ R') (r : ℕ), ∃ c : CoefficientComparison φ r, ∀ P' : Equivariant R' r, ∃ k : (K R r).functor.obj ((equivariantRestriction φ r).obj P') ≅ ((restriction φ).mapHomologicalComplex (.up ℤ)).obj ((K R' r).functor.obj P'), (∀ (a : ℤ) (I J : Subsets r a), biproduct.ι _ I ≫ ((K R r).coordinates _ a).inv ≫ k.hom.f a ≫ (restriction φ).map (((K R' r).coordinates P' a).hom ≫ biproduct.π _ J) = if I = J then 𝟙 _ else 0) ∧ (∀ (P : Equivariant R r) (f : P ⟶ (equivariantRestriction φ r).obj P'), (comparison R r).iso.hom.app P ≫ (derivedInvariants R r).map ((DerivedCategory.singleFunctor _ 0).map f) ≫ (c.iso P').hom = DerivedCategory.Q.map ((K R r).functor.map f ≫ k.hom) ≫ (restriction φ).mapDerivedCategoryFactors.inv.app ((K R' r).functor.obj P') ≫ (restriction φ).mapDerivedCategory.map ((comparison R' r).iso.hom.app P'))) ∧ (∀ (R : Profinite.CondensedRing.{u}) [IsCommMonObj R.X] (P : Equivariant R 0), ∃ (e : P.V ≅ (invariants R 0).obj P) (k : (K R 0).functor.obj P ≅ (HomologicalComplex.single _ (.up ℤ) 0).obj P.V), e.hom ≫ limit.π ((Action.functorCategoryEquivalence (Modules R) (Group 0)).functor.obj P) PUnit.unit = 𝟙 P.V ∧ k.hom.f 0 = ((K R 0).coordinates P 0).hom ≫ biproduct.π _ ⟨∅, rfl⟩ ≫ (HomologicalComplex.singleObjXSelf (.up ℤ) 0 P.V).inv ∧ (comparison R 0).iso.hom.app P = DerivedCategory.Q.map k.hom ≫ (DerivedCategory.singleFunctor _ 0).map e.hom ≫ invariantUnit R 0 P)",
+  "branch": "sheaf-dag",
+  "by": "O3",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The owning module gives discrete actions as Mathlib Action, invariants as the limit of the one-object diagram, the recorded universal total right-derived functor, finite ordered-subset Koszul coordinates, and resolution-normalized coefficient comparisons. The main theorem asserts existence of the natural derived isomorphism, its invariant normalization, coefficient square, and rank-zero identity under the canonical identifications. All definitions have real data; the only postponed proofs are named theorems covered by this node and its proof plan."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8e7eaaf7f",
+  "group": "O3",
+  "result": "pass",
+  "note": "Read the node (10 steps, source paragraph (3)), the 5 stmt_dep records and rightDerivedFunctorOfQuasiIsoResolutions source, the module and report. All clauses match. Discrete ℤ^r Action with T_i = ρ(generator i). Invariants = actual limit. RΓ = recorded K-injective right derived functor. KoszulModel pinned by biproduct coordinates, signed differentialEntry (sign/direction checked for r=0,1,2) and diagonal maps. λ is a derived natural iso normalized by augmentation_zero + derived unit. CoefficientComparison is uniquely pinned by resolution normalization (step 8-9 Γ(β) inverse). Coefficient square matches rows/columns. r=0 identity clause faithful (implied by normalization, as in node). No extra hypotheses or universe restriction, no hollow defs; 4 docstringed sorries; statement verbatim; 26 declarations present; only the lean field differs from live. No duplicate notion found. Advisories: Res via Mod.comap (owner sk-def-sfb-change-of-scalars) while stmt_dep def-pc-sheaf-restrict-scalars records SheafOfModules.restrictScalars (same notion, S2 cannot change stmt_deps); global HasDerivedCategory.{u+2} instances. No compile run (no file changed); worker reported clean scompile."
  }
 }
