@@ -19,9 +19,156 @@
   "def-weil-proetale-inverse-image",
   "def-weil-derived-cohomology-sheaves"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The coefficient ring $R$ is a discrete valuation ring with maximal ideal $(\\pi)$ and finite residue field. In particular it is a PID and is Noetherian. Each $A_n$ is finite, its consecutive quotient map is surjective, and it is killed by a power of $\\ell$: write $\\ell=u\\pi^e$ with $e\\ge1$ using the extended absolute value and the DVR factorization, and choose $m$ with $em\\ge n$. Since $R$ is a domain and $\\pi\\ne0$, the complex $[R\\xrightarrow{\\pi^n}R]$ in degrees $-1,0$ resolves $A_n$ by two finite free modules. Thus $(R,(\\pi))$ satisfies the hypotheses of the adic coefficient datum, including perfectness of all its quotients. Use its actual coefficient sheaves, completed limit, projections and strict quotient tower. The identification of finite coefficient sheaves with constant sheaves, supplied by the completed-constant reduction theorem, identifies this limit with the $B_T$ in the statement and respects every projection.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-pbc-pid-noetherian-normal",
+    "lem-weil-valued-dvr-finite-quotients",
+    "def-weil-pbc-adic-coefficient-datum",
+    "lem-weil-pbc-completed-constant-sheaf-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 093M (lemma-completion-flat), with the finite-coefficient identification of the adic datum; the DVR consequences and its two-term quotient resolution"
+   }
+  },
+  {
+   "text": "For each degree $r$, choose a finite set of generators of $P^r$, giving a surjection $s_r:R^{m_r}\\to P^r$. Projectivity lifts $1_{P^r}$ through $s_r$ to $i_r$, so $s_ri_r=1$. Applying constants and scalar extension exhibits $C_T(P)^r$ as a split summand of $B_T^{m_r}$. Tensoring with it is exact: on a short exact sequence it takes the image of the same idempotent on a finite direct sum; a local lift of an element in the target image can be projected by that idempotent to a lift in the source image. Thus its terms are flat over $B_T$, and the bounded-above-flat theorem makes $C_T(P)$ K-flat. Derived reduction is consequently its ordinary tensor complex. In every degree the isomorphism is\n$$(b\\otimes p)\\otimes a\\longmapsto a\\,\\operatorname{pr}_n(b)\\otimes p,$$\nwith inverse $a\\otimes p\\mapsto(1\\otimes p)\\otimes a$. The balancing equations show these are inverse, and applying $d^r$ in either order sends this element to $a\\operatorname{pr}_n(b)\\otimes d^rp$. Replacing $a$ by its image modulo $\\pi^n$ also commutes with the formula. This proves the first displayed comparison with its specified differential and consecutive quotient maps.",
+   "uses": [
+    "def-weil-pbc-projective-module",
+    "lem-pc-bounded-above-flat-kflat-site",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YQ (lemma-bounded-flat-K-flat); finite-summand tensor calculation and K-flat computation of derived change of rings"
+   }
+  },
+  {
+   "text": "Choose integers $c\\le d$ outside which $P^\\bullet$ is zero. Apply the completed perfect model completeness lemma with $A=R$, $I=(\\pi)$, this bounded complex and either $T$. The Noetherian and maximal-ideal hypotheses were checked in step 1. Its complex $M^\\bullet=B_T\\otimes_RP^\\bullet$ is exactly our displayed complex, with its original scalar differential. Hence $C_T(P)$ is locally derived $(\\pi)B_T$-complete: $R\\mathcal Hom(B_U[1/b],C_T(P)|_U)=0$ for every slice $U$ and every local section $b$ of $\\pi B_T$. By step 1, $(R,(\\pi))$ satisfies the adic coefficient datum, and $B_T$ is the coefficient sheaf $\\varprojlim_n(A_n)_T$ of the completeness-equivalence theorem (its auxiliary prime $p$ is any prime $\\ne\\ell$ and enters none of its conditions). Its implication (ii)$\\Rightarrow$(i),(iv) shows that $C_T(P)$ is derived complete in the Roos-triangle sense and that the explicit product-fibre unit of the intrinsic Koszul completion is invertible. This is the completeness required by the specified completed-pullback definition and by the integral-pullback comparison used in step 6; it imposes no finiteness or Noetherian hypothesis on $T$.",
+   "uses": [
+    "lem-sfb-adic-perfect-model-complete-reduction",
+    "lem-pur-roos-intrinsic-completeness-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099Q (proposition-enough-weakly-contractibles), bounded perfect scalar model; Bhatt–Scholze Proposition 6.6.11 reverse-direction local model"
+   }
+  },
+  {
+   "text": "Set $D_{T,n}=(A_n)_T\\otimes_{\\underline R_T}\\underline{P^\\bullet}_T$, restricted along $\\operatorname{pr}_n$. Its quotient cone is $b\\otimes p\\mapsto\\operatorname{pr}_n(b)\\otimes p$ from $C_T(P)$. The $R$-linear splitting $i_r,s_r$ of step 2, tensored with $B_T$ and each $(A_n)_T$, makes the degree-$r$ cone a compatible split retract of the $m_r$-fold coefficient cone, degreewise only. By the finite-perfect coefficient-limit theorem, $C_T(P)$ with the quotient maps is the ordinary limit of the complex tower. In each degree $r$ the transition $\\operatorname{Res}_{n+1}D^r_{T,n+1}\\to\\operatorname{Res}_nD^r_{T,n}$ is $q_{n+1,n}\\otimes1$, epi by right exactness of tensor. Hence the epimorphic-tower theorem makes $1-s:\\prod_nD^r_{T,n}\\to\\prod_nD^r_{T,n}$ surjective with kernel the limit, which the coefficient-limit theorem identifies with $C_T(P)^r$ and its quotient maps. Let $\\mathsf C(D)=\\operatorname{Cone}(1-s)[-1]$, with degree-$k$ part $\\prod_nD^k\\oplus\\prod_nD^{k-1}$, and let $b:C_T(P)\\to\\mathsf C(D)$ have product component the quotient maps and zero shifted component. It is a chain map, since $1-s$ kills the quotient family, and degreewise injective. Its cokernel is identified, through $1-s$ on the first summand, with $\\prod_nD^k\\oplus\\prod_nD^{k-1}$ and differential $(z,y)\\mapsto(dz,\\pm z-dy)$: the shifted cone of an identity, which is contractible. By the long exact cohomology sequence $b$ is a quasi-isomorphism. Pro-etale countable products are exact, so the strict Roos comparison theorem applies; it says that $b$ corresponds under its natural isomorphism $\\rho_D:\\mathsf C(D)\\cong R\\lim_n\\operatorname{Res}_nD_{T,n}$ to the canonical derived map induced by the strict augmentation, and that $\\rho_D$ commutes with every projection. Thus the canonical map $C_T(P)\\to R\\varprojlim_n\\operatorname{Res}_nD_{T,n}$ (cone model and K-injective strict model alike) is an isomorphism whose projections are the original quotient maps. Both $b$ and $\\rho$ are natural in strict maps of towers.",
+   "uses": [
+    "lem-weil-pbc-finite-perfect-adic-coefficient-limit",
+    "lem-weil-proetale-surjective-tower-derived-limit",
+    "lem-weil-proetale-countable-products-exact",
+    "lem-weil-strict-roos-comparison",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0940 (section-derived-limits) and 0941 (lemma-derived-limit-is-ok), applied to the finite-projective retracts of the actual coefficient cone"
+   }
+  },
+  {
+   "text": "At finite level the canonical constant-module inverse-image isomorphisms give $g^{-1}\\underline R_V\\cong\\underline R_{V'}$, $g^{-1}(A_n)_V\\cong(A_n)_{V'}$ and $g^{-1}\\underline{P^r}_V\\cong\\underline{P^r}_{V'}$. They preserve constant scalar sections and are natural in $R$-linear maps. Combine them with the inverse-image tensor comparison, then cancel extension along the constant-ring isomorphism. This gives\n$$g_n^*D_{V,n}\\cong D_{V',n}.$$\nOn a tensor of constant sections the map is $a\\otimes p\\mapsto a\\otimes p$. On its image under a differential both composites are $a\\otimes d^rp$, and under a quotient transition both are $q_{n+1,n}(a)\\otimes p$. The tensor comparisons are sheaf maps determined locally by pure tensors, so these equalities prove compatibility on the whole sheaves. Finite-level pullback is exact, hence this is also its derived comparison. It is an isomorphism of the strict towers of complexes, rather than a collection of unrelated derived isomorphisms.",
+   "uses": [
+    "lem-sfb-geometric-inverse-image-constant-module",
+    "lem-pur-proetale-inverse-image-tensor-comparison",
+    "prop-weil-pbc-proetale-constant-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL (lemma-tensor-product-pullback); sites.tex Tag 0H7J (example-constant-sheaf), with canonical constant-section maps"
+   }
+  },
+  {
+   "text": "Use $C_V(P)$ itself as the K-flat representative from step 2. By the specified strict reduction-tower pullback, step 5 gives\n$$Lg^*C_V(P)\\cong R\\varprojlim_n\\operatorname{Res}_nD_{V',n}.$$\nThe inverse of the comparison in step 4 for $T=V'$ gives the asserted isomorphism with $C_{V'}(P)$, and identifies every projection with its ordinary quotient map. By step 3, $C_V(P)$ is derived complete in the Roos-triangle sense, so the integral-pullback comparison theorem gives a natural isomorphism $Lg^*C_V(P)\\cong Lg^*_{\\mathrm{comp}}C_V(P)$ with the strict-tower completed pullback, under which the defining projections of the two derived limits correspond. This is the asserted equivalence of the two pullbacks on this complete object. For a chain map $f:P\\to Q$, every displayed reduction map commutes with $1\\otimes f$ because both composites send $(b\\otimes p)\\otimes a$ to $a\\operatorname{pr}_n(b)\\otimes f(p)$. The ordinary limit cone comparison is natural by its universal property, and the strict derived-limit functor preserves this square. Thus the isomorphisms are natural in chain maps, independently of the auxiliary splittings, which were used only to establish invertibility.",
+   "uses": [
+    "def-pur-integral-derived-operations",
+    "def-weil-pbc-completed-pullback",
+    "prop-weil-pbc-rlim-functoriality",
+    "lem-a1-integral-pullback-completed-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.5.9(4)-(5), interpreted via the specified strict quotient tower; agent assembly and chain-map calculation"
+   }
+  },
+  {
+   "text": "The constant-sheaf functor on $R$-modules is additive and exact by the constant-module section-properties theorem. The completed-constant reduction theorem says that $B_T$ is flat over $\\underline R_T$, so $M\\mapsto B_T\\otimes_{\\underline R_T}\\underline M_T$ is additive and exact. Apply exact-functor preservation of complex cohomology to $P^\\bullet$. Its comparison is induced by preservation of cycles and boundaries, so for every $j$ it is the canonical natural isomorphism\n$$\\mathcal H^j(C_T(P))\\cong B_T\\otimes_{\\underline R_T}\\underline{H^j(P^\\bullet)}_T.$$\nThis uses flatness over the constant scalar ring; it makes no assertion about flatness of the coefficient map associated with $g$.",
+   "uses": [
+    "lem-weil-pbc-constant-module-section-properties",
+    "lem-weil-pbc-completed-constant-sheaf-reduction",
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 093J (lemma-constant-exact) and 093M (lemma-completion-flat); homology.tex Tag 010N (lemma-exact-functor)"
+   }
+  },
+  {
+   "text": "For any $R$-module $N$, use the constant-module inverse-image isomorphism and the inverse-image tensor isomorphism to write the ordinary ringed pullback as\n$$B_{V'}\\otimes_{g^{-1}B_V}\\bigl(g^{-1}B_V\\otimes_{\\underline R_{V'}}\\underline N_{V'}\\bigr).$$\nThe projection-induced map $g^\\sharp:g^{-1}B_V\\to B_{V'}$ agrees on $\\underline R_{V'}$ with the target constant-scalar map: composing with every finite projection sends $r$ to its class modulo $\\pi^n$ on both sides. The limit universal property proves the equality. Hence the balanced map $b'\\otimes(b\\otimes n)\\mapsto b'g^\\sharp(b)\\otimes n$ is well defined. Its inverse is $b'\\otimes n\\mapsto b'\\otimes(1\\otimes n)$. One composite is the identity by the unit equation, and the other by the balancing equation $b'g^\\sharp(b)\\otimes(1\\otimes n)=b'\\otimes(b\\otimes n)$. These maps commute with restrictions and are natural in $N$, so they define the asserted canonical isomorphism of module sheaves. Take $N=H^j(P^\\bullet)$ and use step 7.",
+   "uses": [
+    "lem-sfb-geometric-inverse-image-constant-module",
+    "lem-pur-proetale-inverse-image-tensor-comparison",
+    "def-weil-pbc-completed-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL (lemma-tensor-product-pullback); elementary balanced-tensor cancellation along the projection-induced coefficient map"
+   }
+  },
+  {
+   "text": "If $j\\notin[a,b]$, step 7 identifies the assumed zero sheaf $\\mathcal H^j(C_V(P))$ with $B_V\\otimes\\underline{H^j(P)}_V$. Ordinary ringed pullback sends the zero sheaf to zero, since inverse image and tensor send zero to zero. Step 8 identifies that pullback with $B_{V'}\\otimes\\underline{H^j(P)}_{V'}$, and step 7 identifies the latter with $\\mathcal H^j(C_{V'}(P))$. Therefore the latter vanishes. This argument applies to each $j$ outside the given cohomological interval, irrespective of the degrees in which the chosen representative $P^\\bullet$ is supported.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Elementary consequence of the exact cohomology and ordinary pullback identifications above"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-pid-noetherian-normal",
+  "lem-weil-valued-dvr-finite-quotients",
+  "def-weil-pbc-adic-coefficient-datum",
+  "lem-weil-pbc-completed-constant-sheaf-reduction",
+  "def-weil-pbc-projective-module",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-pur-derived-change-of-rings",
+  "lem-sfb-adic-perfect-model-complete-reduction",
+  "lem-pur-roos-intrinsic-completeness-equivalence",
+  "lem-weil-pbc-finite-perfect-adic-coefficient-limit",
+  "lem-weil-proetale-surjective-tower-derived-limit",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-strict-roos-comparison",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-sfb-geometric-inverse-image-constant-module",
+  "lem-pur-proetale-inverse-image-tensor-comparison",
+  "prop-weil-pbc-proetale-constant-exact",
+  "def-pur-integral-derived-operations",
+  "def-weil-pbc-completed-pullback",
+  "prop-weil-pbc-rlim-functoriality",
+  "lem-a1-integral-pullback-completed-comparison",
+  "lem-weil-pbc-constant-module-section-properties",
+  "lem-weil-pbc-exact-functor-complex-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.9(4)-(5) and Proposition 6.6.11 explain the completed perfect model; explicit finite-projective retract, strict-tower and balanced-tensor argument using Stacks 093J, 093M, 06YQ, 0941 and 03EL."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,10 +197,52 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Condensed.isoLocallyConstantOfIsColimit\", \"module\": \"Mathlib.Condensed.Discrete.Colimit\", \"type\": \"(hF : ∀ S : Profinite, IsColimit <| F.mapCocone S.asLimitCone.op) :\\n  F ≅ (locallyConstantPresheaf (F.obj (toProfinite.op.obj ⟨of PUnit.{u + 1}⟩)))\", \"doc\": \"Given a functor $ F : \\text{Profinite}^{\\text{op}} \\to \\text{Type} $ such that for every profinite space $ S $, the image of the limit cone $ S.asLimitCone $ under $ F $ satisfies the colimit condition, t\"}\n  {\"name\": \"Condensed.isoLocallyConstantOfIsColimit_inv\", \"module\": \"Mathlib.Condensed.Discrete.Colimit\", \"type\": \"(X : Profinite.{u}ᵒᵖ ⥤ Type (u + 1)) [PreservesFiniteProducts X]\\n  (hX : ∀ S : Profinite.{u}, (IsColimit <| X.mapCocone S.asLimitCone.op)) :\\n  (isoLocallyConstantOfIsColimit X hX).inv = (CompHausLike.LocallyConstant.counitApp.{u, u + 1} X)\", \"doc\": \"Given a functor $ F : \\text{Profinite}^{\\text{op}} \\to \\text{Type} $ that preserves finite products and satisfies the condition that for every profinite space $ S $, the image of the limit cone $ S.asLimi\"}\n  {\"name\": \"CategoryTheory.Sheaf.ΓNatIsoLim\", \"module\": \"Mathlib.CategoryTheory.Sites.GlobalSections\", \"type\": \"[HasLimitsOfShape Cᵒᵖ A] : Γ J A ≅ sheafToPresheaf J A ⋙ lim\", \"doc\": \"Given that the opposite category $\\\\mathcal{C}^{\\\\text{op}}$ has all limits of shape $J$, there exists a natural isomorphism between the global sections functor $\\\\Gamma_{J,A}$ and the composition of the\"}\n  {\"name\": \"SheafOfModules.hasLimit\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits\", \"type\": \": HasLimit F\", \"doc\": \"For any category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, the category of sheaves of modules over $R$ has all limits. This means that for any diagram (\"}\n  {\"name\": \"SheafOfModules.hasLimitsOfShape\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits\", \"type\": \": HasLimitsOfShape D (SheafOfModules.{v} R)\", \"doc\": \"For any category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, the category of sheaves of modules over $R$ has all limits of shape $D$. This means that give\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instHasLimits\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": HasLimits X.Modules\", \"doc\": \"For any scheme $X$, the category of sheaves of modules over the structure sheaf of $X$ has all limits. This means that for every diagram in this category indexed by a category of the same size, the li\"}\n  {\"name\": \"Condensed.lanCondensedSet\", \"module\": \"Mathlib.Condensed.Discrete.Colimit\", \"type\": \"(X : Type (u + 1)) : CondensedSet.{u}\", \"doc\": \"For a type $X$, this constructs the condensed set obtained by applying the equivalence functor between sheaves on profinite spaces and condensed sets to the sheaf defined as the left Kan extension of \"}\n  {\"name\": \"instHasLimitsOfShapeCondensed\", \"module\": \"Mathlib.Condensed.Limits\", \"type\": \"{A J : Type*} [Category* A] [Category* J] [HasLimitsOfShape J A] : HasLimitsOfShape J (Condensed.{u} A)\", \"doc\": \"For any category $ \\\\mathcal{A} $ and any diagram shape $ \\\\mathcal{J} $, if $ \\\\mathcal{A} $ has all limits of shape $ \\\\mathcal{J} $, then the category of condensed objects over $ \\\\mathcal{A} $, defined\"}",
    "date": "2026-10-21",
    "verdict": "no match: The hits give ordinary presheaf pullback, projective resolutions and existence of sheaf limits, not this completed scalar-model calculation or its bound transfer."
+  },
+  {
+   "tool": "grep",
+   "query": "completed.*[Pp]ullback|[Pp]erfect.*[Cc]onstant|[Cc]onstant.*[Pp]erfect",
+   "results": "[grep] OK 3 hit(s); [\"Mathlib/Topology/CantorBendixson.lean\", \"Mathlib/Topology/CantorBendixson.lean\", \"Mathlib/Topology/CantorBendixson.lean\"]",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary presheaf pullback, abstract projective resolutions, profinite limits, or scheme flatness do not give this completed scalar-complex comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived inverse limit of reductions of finite projective complexes of constant sheaves and completed scalar pullback",
+   "results": "[leansearch] OK 8 hit(s); [\"InverseSystem.invLimEquiv_symm_apply_coe\", \"InverseSystem.invLimEquiv.congr_simp\", \"CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_inv_naturality_assoc\", \"PresheafOfModules.pullback\", \"PresheafOfModules.limitPresheafOfModules\", \"Profinite.asLimit\", \"CategoryTheory.Limits.limit.isoLimitCone_inv_π\", \"Profinite.lim\"]",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary presheaf pullback, abstract projective resolutions, profinite limits, or scheme flatness do not give this completed scalar-complex comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"pullback\"",
+   "results": "[loogle] OK 12 hit(s); [\"PresheafOfModules.pullbackId\", \"PresheafOfModules.pullbackObjIsDefined\", \"PresheafOfModules.pullback\", \"PresheafOfModules.pullbackObjIsDefined_eq_top\", \"PresheafOfModules.pullbackObjIsDefined_free_yoneda\", \"PresheafOfModules.pullbackPushforwardAdjunction\", \"PresheafOfModules.pullbackComp\", \"PresheafOfModules.pullback_comp_id\"]",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary presheaf pullback, abstract projective resolutions, profinite limits, or scheme flatness do not give this completed scalar-complex comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completed derived pullback of a bounded finite projective scalar complex is its completed constant realization and preserves cohomological bounds",
+   "results": "[leanfinder] OK 8 hit(s); [\"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"CategoryTheory.Functor.isZero_leftDerived_obj_projective_succ\", \"CochainComplex.isKProjective_of_projective\", \"CochainComplex.IsKProjective\", \"CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex\", \"CategoryTheory.ProjectiveResolution.instProjectiveXIntCochainComplex\", \"CategoryTheory.Functor.mapProjectiveResolution_complex\", \"CategoryTheory.Functor.mapProjectiveResolution\"]",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary presheaf pullback, abstract projective resolutions, profinite limits, or scheme flatness do not give this completed scalar-complex comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "adic|proetale|pro.etale",
+   "results": "[grep] OK 0 hit(s); []",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary presheaf pullback, abstract projective resolutions, profinite limits, or scheme flatness do not give this completed scalar-complex comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat completed coefficient sheaves commute with homology of perfect scalar complexes under arbitrary scheme pullback",
+   "results": "[leansearch] OK 8 hit(s); [\"Perfection.coeff_map\", \"SheafOfModules.sheafificationCompPullback\", \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"AlgebraicGeometry.Flat.stalkMap\", \"AlgebraicGeometry.Scheme.Modules.instAdditivePullback\", \"CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat\", \"AlgebraicGeometry.flat_iff\", \"AlgebraicGeometry.Flat.flat_appLE\"]",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary presheaf pullback, abstract projective resolutions, profinite limits, or scheme flatness do not give this completed scalar-complex comparison."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-a1-constructible-pullback-t-exact",
@@ -73,5 +262,104 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-a1-completed-perfect-scalar-pullback",
+  "worker": "stage1",
+  "summary": "No mathematical statement change. Reused existing generic completion, finite-projective coefficient-limit, constant inverse-image and exact cohomology nodes. Wrote canonical reduction maps, strict-tower pullback and derived-limit projections explicitly; separated scalar flatness from arbitrary coefficient-map pullback. No new nodes.",
+  "blueprint": "Proof, first paragraph: 'By [lemma-weil-pbc-finite-stalk-formula], the geometric stalk of the direct image is the direct sum over all geometric points above $\\bar y$' -- the restriction of $\\mathcal F$ to the geometric fibre is again a constructible sheaf whose stalks are those of $\\mathcal F$. Subargument: Lemma 6.5.9(4)-(5) and Proposition 6.6.11, finite perfect scalar models; Stacks Tag 093M (sites-modules.tex, lemma-completion-flat); agent calculation in returned proof Steps 3 and 5, including the projective-summand inverse limit and balanced-tensor identification.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Its DVR and finite-residue conclusions check the scalar datum; this is a local-field tool, not an alternate affine-line argument."
+   },
+   {
+    "node": "lem-weil-pbc-completed-constant-sheaf-reduction",
+    "why": "Its scalar flatness and canonical finite-coefficient identification apply to the actual coefficient sheaf; the affine-line unit has no such generic coefficient theorem."
+   },
+   {
+    "node": "lem-pc-bounded-above-flat-kflat-site",
+    "why": "Its ringed-site K-flat criterion computes the stated reductions from the chosen bounded complex."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Its K-flat change-of-rings functor computes finite reductions with their canonical representatives."
+   },
+   {
+    "node": "lem-sfb-adic-perfect-model-complete-reduction",
+    "why": "Only its local derived completeness conclusion is used to check the domain of completed pullback; the other clauses of this item are proved here."
+   },
+   {
+    "node": "lem-weil-pbc-finite-perfect-adic-coefficient-limit",
+    "why": "Its compatible degreewise finite-free retract criterion computes the completed scalar quotient cone and its actual projections."
+   },
+   {
+    "node": "lem-weil-proetale-countable-products-exact",
+    "why": "Its exact-products theorem is used for the canonical strict-tower comparison, not as a replacement for any geometric route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "why": "Its natural strict derived-limit triangle compares the chosen tower-resolution model with the explicit quotient cone."
+   },
+   {
+    "node": "lem-sfb-geometric-inverse-image-constant-module",
+    "why": "Its comparison for every scalar module is needed for finite pullback and cohomology-module pullback."
+   },
+   {
+    "node": "lem-pur-proetale-inverse-image-tensor-comparison",
+    "why": "Its normalized tensor comparison preserves the scalar differentials and permits the ordinary balanced-tensor cancellation."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-exact",
+    "why": "Its exactness at finite constant coefficients identifies ordinary finite pullback with derived finite pullback."
+   },
+   {
+    "node": "prop-weil-pbc-rlim-functoriality",
+    "why": "Its strict derived-limit functor preserves the natural squares of quotient towers."
+   },
+   {
+    "node": "lem-weil-pbc-constant-module-section-properties",
+    "why": "Generic homological tool used as a black box; no affine-line unit step is replaced."
+   },
+   {
+    "node": "lem-pur-roos-intrinsic-completeness-equivalence",
+    "why": "Its implication from local derived completeness to Roos and intrinsic Koszul completeness checks the domain of the completed pullback; the affine-line unit has no completeness criterion."
+   },
+   {
+    "node": "lem-weil-strict-roos-comparison",
+    "why": "Its normalized comparison between the cone model and the K-injective strict derived limit identifies the canonical augmentation map; no node of the unit gives it."
+   },
+   {
+    "node": "lem-weil-proetale-surjective-tower-derived-limit",
+    "why": "Its surjectivity of 1-s for epimorphic pro-etale towers gives the short exact sequence behind the quotient-cone quasi-isomorphism."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-completed-constant-sheaf-reduction",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-pur-derived-change-of-rings",
+  "lem-sfb-adic-perfect-model-complete-reduction",
+  "lem-weil-pbc-finite-perfect-adic-coefficient-limit",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-sfb-geometric-inverse-image-constant-module",
+  "lem-pur-proetale-inverse-image-tensor-comparison",
+  "prop-weil-pbc-proetale-constant-exact",
+  "prop-weil-pbc-rlim-functoriality",
+  "lem-weil-pbc-constant-module-section-properties",
+  "lem-pur-roos-intrinsic-completeness-equivalence",
+  "lem-weil-strict-roos-comparison",
+  "lem-weil-proetale-surjective-tower-derived-limit"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q91-84ec04ed9",
+  "group": "Q91",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q91-84ec04ed9 (reviewer sub-agent of L); spot-checked: Read in full; the statement is unchanged from live and is true. Small-case checks: P=0, R[k], [R -π-> R] (torsion H^0 = (A_1)_T), empty V'. Item is live-unsplit, not dropped, no re-split note, no new nodes, no cycles; Stacks tags checked against stacks-project/tags/tags (06YQ, 093M read), BS 6.5.9 read, no SGA. Two repairable faults, fixed in the whole item JSON under fixes/dag/nodes/sec-deligne-laumon-a1/. (1) C4, steps 3 and 6: step 3 shows only local derived completeness (lem-sfb-adic-perfect-model-complete-reduction), but completed pullback needs Koszul (def-weil-pbc-intrinsic-completion) completeness, and the statement's 'equivalently completed pullback' rested only on 'Step 3 ensures'. Fix: step 3 now cites lem-pur-roos-intrinsic-completeness-equivalence ((ii)=>(i),(iv)); step 6 cites lem-a1-integral-pullback-completed-comparison (same unit, projection-compatible) and is no longer marked elementary. (2) E5, step 4: the step applied two-out-of-three between the cone's Roos triangle (the coefficient-limit lemma gives only some δ) and the strict-tower triangle without the connecting square, which can fail since Hom(C, ∏D[-1]) ≠ 0 in general. Fix: degreewise-epi transitions plus lem-weil-proetale-surjective-tower-derived-limit(1) give a short exact sequence; the chain map C -> Cone(1-s)[-1] with components (quotient maps, 0) is a quasi-iso (contractible cokernel, written out); lem-weil-strict-roos-comparison identifies it with the canonical augmentation into R lim, projections preserved. Steps 1, 2, 5, 7, 8, 9 checked against the cited statements and correct. tool_uses added for the 3 off-unit nodes. Advisory: lem-tw-ordinary-pullback-stratified-models (Q57) overlaps the ordinary, uncompleted chart pullback; it is not a duplicate.; 1 file(s) fixed by the reviewer"
  }
 }
