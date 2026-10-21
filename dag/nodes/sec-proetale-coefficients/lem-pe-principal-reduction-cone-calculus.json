@@ -14,18 +14,19 @@
  ],
  "proof": [
   {
-   "text": "Write $t_n=\\pi^n$. By [def-weil-abstract-derived-category], $D_n(M)^q=M^q\\oplus M^{q+1}$ with $d_n(x,y)=(d_Mx+t_ny,-d_My)$. Its square is zero since $d_Mt_n=t_nd_M$. For $g:M\\to N$, put $D_n(g)(x,y)=(gx,gy)$; the chain-map equation, identities, composition and addition hold componentwise. The transition $T_n(x,y)=(x,\\pi y)$ is a chain map because $t_n\\pi=t_{n+1}$; its composites give all tower arrows. Also $d_n(m,0)=(d_Mm,0)$, so $j_n$ is a chain map. The equations $T_nj_{n+1}=j_n$ and naturality of $T_n,j_n$ are componentwise identities. No multiplication on $M$ is assumed injective.",
+   "text": "Construct the prescribed uniformizer endomorphism explicitly by pointwise multiplication on continuous-map sections, as in det-pe-derived-nakayama-resolution, and prove its module linearity and section formula. Construct the strict endofunctor as the standard scalar mapping cone with diagonal cone maps, its transition as cone.map(d,id), and its unit as cone.inr. Functoriality is cone-map composition; the power identity follows functorially from multiplication of regular-module endomorphisms. The fixed degreewise biproduct coordinates prove all strict map and unit formulas.",
    "uses": [
+    "det-pe-derived-nakayama-resolution",
     "def-weil-abstract-derived-category"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-first-reduction.proof.md",
-    "place": "Cones, first two sentences: strict reduction functors and tower"
+    "place": "Cones paragraph, first two sentences and the cone/shift commutation sentence; explicit strict principal-reduction comparison. Supporting cone convention: Stacks Tag 014E (definition-cone)."
    }
   },
   {
-   "text": "If $g:M\\to N$ is a quasi-isomorphism, its two copies and $D_n(g)$ give a morphism between the scalar cone triangles of [def-weil-abstract-derived-category]: inclusion and projection commute with the diagonal map. In $D(R)$ the first two components $Qg$ are isomorphisms, so [lem-sf-triangle-morphism-iso] makes $QD_n(g)$ an isomorphism. The cohomology functors factoring through $Q$ in [def-weil-abstract-derived-category] then show that $D_n(g)$ is a quasi-isomorphism. The localization property in that definition therefore descends $QD_n$ to an endofunctor $F_n$ of $D(R)$ and descends $T_n,j_n$ to natural transformations. For additivity, rearranging the four summands identifies $D_n(M\\oplus N)$ with $D_n(M)\\oplus D_n(N)$ and preserves each inclusion and projection. The additive structure on the derived category induced from complexes in [def-weil-abstract-derived-category] makes these localized diagrams biproduct diagrams. Every derived object is represented by a complex, so $F_n$ preserves zero and binary biproducts. The identity $f+g=\\nabla(f\\oplus g)\\Delta$, with diagonal $\\Delta$ and codiagonal $\\nabla$ determined by these diagrams, now proves additivity.",
+   "text": "A scalar-cone morphism induced by a quasi-isomorphism is the third component of a morphism of distinguished scalar-cone triangles whose first two components are isomorphisms. The derived-category two-out-of-three lemma makes its localization invertible, hence the cone map is a quasi-isomorphism.",
    "uses": [
     "def-weil-abstract-derived-category",
     "lem-sf-triangle-morphism-iso"
@@ -33,116 +34,44 @@
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-first-reduction.proof.md",
-    "place": "Cones: representative independence and additive descent"
+    "place": "Cones paragraph, first two sentences and the cone/shift commutation sentence; explicit strict principal-reduction comparison. Supporting cone convention: Stacks Tag 014E (definition-cone)."
    }
   },
   {
-   "text": "Put $B_n=(\\mathcal O_E/\\pi^n)_X$ and let $P_n$ have $R$ in degrees $-1,0$, differential $t_n$, and augmentation $\\epsilon_n:P_n\\to B_n[0]$ equal to reduction in degree zero. Exactness of the coefficient sequence in [det-pe-derived-nakayama-resolution] says precisely that $\\epsilon_n$ is a quasi-isomorphism: its only cohomology is $B_n$ in degree zero. Each term is flat, since the maps $R\\otimes_RN\\to N$, $a\\otimes z\\mapsto az$, and $z\\mapsto1\\otimes z$ are inverse; hence tensor by $R$ is the identity and is exact. On a small site model of $X_{\\mathrm{proét}}$, [lem-weil-pbc-independent-bounded-flat-kflat] makes $P_n$ K-flat (it is zero outside degrees $-1,0$). The same argument applies to $R[0]$.",
+   "text": "For the two scalar rows and f, construct a double-cone chain isomorphism by the four-coordinate permutation (b,a,bprime,aprime) to (b,bprime,a,-aprime). Its inverse uses the same permutation and sign. Verify the differential by the two cone projections and additivity. The same projections prove naturality, compatibility with scalar transitions, cone inclusions and the cone map of coaugmentations. Construct coherent all-integer shift isomorphisms from the standard mappingCone.shiftIso and the scalar transformation commuting with termwise shifts; verify the zero and addition laws and the stated signed coordinates. The boundary equation follows by the cone projections, including the negative sign of its shifted component.",
    "uses": [
-    "det-pe-derived-nakayama-resolution",
-    "lem-weil-pbc-independent-bounded-flat-kflat"
+    "def-weil-abstract-derived-category"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-first-reduction.proof.md",
-    "place": "Cones: the specified two-term coefficient resolution; Stacks Tag 06YQ (lemma-bounded-flat-K-flat)"
+    "place": "Cones paragraph, first two sentences and the cone/shift commutation sentence; explicit strict principal-reduction comparison. Supporting cone convention: Stacks Tag 014E (definition-cone)."
    }
   },
   {
-   "text": "For any $M$, choose $u:C\\to M$ K-flat with flat terms by [lem-pc-kflat-resolution]. By [lem-weil-pbc-site-derived-tensor-descent], $QC\\otimes_R^{\\mathbf L}QP_n$ is computed by $\\operatorname{Tot}(C\\otimes_RP_n)$. The signed interchange $c\\otimes p\\mapsto(-1)^{ij}p\\otimes c$ in bidegree $(i,j)$ identifies this with $\\operatorname{Tot}(P_n\\otimes_RC)$: in the total differential [def-pc-tensor-complex-sheaves], the two signs on the $d_C$ term are $(-1)^{(i+1)j}$ and $(-1)^{ij+j}$, and those on the $d_P$ term are $(-1)^{i+i(j+1)}$ and $(-1)^{ij}$, respectively. They agree. In degree $q$ the latter total is $C^q\\oplus C^{q+1}$ and its differential is $(x,y)\\mapsto(d_Cx+t_ny,-d_Cy)$, so it is $D_n(C)$. The augmentation $QP_n\\cong B_n[0]$ and the invertible $QD_n(u)$ from step 2 yield $QD_n(M)\\cong(QM)_n$. All these identifications are natural on the K-flat flat-term resolving category; its localization equivalence and natural-transformation extension in [lem-weil-pbc-site-derived-tensor-descent] extend them naturally to $D(R)$. This gives one family of comparisons, rather than separately chosen triangulated cones.",
+   "text": "Apply lem-pe-principal-reduction-derived-normalization to the uniformizer and the proved power identity. Its natural isomorphisms identify the already constructed cone model with canonical derived extension/restriction and identify its tower and unit maps. Its triangulated shift structures and derived shift normalization combine with the strictly proved shift formula. Assemble all nineteen conjunctions without any remaining hole in this module.",
    "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "def-pc-tensor-complex-sheaves"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-first-reduction.proof.md",
-    "place": "Cones, first two sentences: tensor computation and natural comparison"
-   }
-  },
-  {
-   "text": "The coefficient quotient $B_{n+1}\\to B_n$ lifts to $v_n:P_{n+1}\\to P_n$ whose degree $-1$ map is multiplication by $\\pi$ and degree zero map is the identity. Indeed $t_n\\pi=t_{n+1}$, and $\\epsilon_nv_n$ is the quotient composed with $\\epsilon_{n+1}$. The reduction $R\\to B_n$ lifts to $e_n:R[0]\\to P_n$ by the identity in degree zero; $\\epsilon_ne_n$ is reduction and $v_ne_{n+1}=e_n$. After the signed interchange of step 4, $v_n\\otimes1_C$ is exactly $(x,y)\\mapsto(x,\\pi y)$, while $e_n\\otimes1_C$ is $c\\mapsto(c,0)$. Naturality in both variables and the extension uniqueness in [lem-weil-pbc-site-derived-tensor-descent] therefore identify $QT_n$ with the canonical derived quotient transition, and $Qj_n$ with the canonical reduction map of [sk-def-pe-derived-completion]. These are maps of underlying $R$-objects, so no exactness of ordinary reduction on $M$ is used.",
-   "uses": [
-    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-pe-principal-reduction-derived-normalization",
     "sk-def-pe-derived-completion"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-first-reduction.proof.md",
-    "place": "Cones: compatibility with the coefficient quotient maps and the canonical reduction maps"
-   }
-  },
-  {
-   "text": "Let $f:A\\to B$ and write $(b,a,b',a')$ for $D_n(\\operatorname{Cone}(f))^q$. Using the cone differential of [def-weil-abstract-derived-category], its differential is\n$$(d_Bb+fa+t_nb',\\ -d_Aa+t_na',\\ -d_Bb'-fa',\\ d_Aa').$$\nUnder $\\Phi_n(b,a,b',a')=(b,b',a,-a')$, this becomes\n$$(d_Bb+fa+t_nb',\\ -d_Bb'-fa',\\ -d_Aa+t_na',\\ -d_Aa').$$\nThis is also the differential of $(b,b',a,-a')$ in $\\operatorname{Cone}(D_n(f))$. The inverse permutation is $(u,v,w,z)\\mapsto(u,w,v,-z)$, so $\\Phi_n$ is a chain isomorphism with precisely the formula asserted.",
-   "uses": [
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-first-reduction.proof.md",
-    "place": "Cones: explicit cone interchange; Stacks Tag 014E (definition-cone)"
-   }
-  },
-  {
-   "text": "For $r\\in\\mathbf Z$, put $e=(-1)^r$. The source differential on $D_n(M[r])$ is $(x,y)\\mapsto(e\\,d_Mx+t_ny,-e\\,d_My)$. Applying $S_r(x,y)=(x,e y)$ gives $(e\\,d_Mx+t_ny,-d_My)$. The target differential on $D_n(M)[r]$ applied to $(x,e y)$ is the same pair, since $e^2=1$. Thus $S_r$ is an isomorphism, with inverse the same sign change. The formula $(-1)^{r+s}=(-1)^r(-1)^s$ gives the coherence of these shift comparisons, including negative shifts; $S_0$ is the identity. These use the integer shifts of [def-weil-abstract-derived-category].",
-   "uses": [
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-first-reduction.proof.md",
-    "place": "Cones: shift commutation sentence and all integer shifts"
-   }
-  },
-  {
-   "text": "Every square of chain maps between $f:A\\to B$ and $\\widetilde f:\\widetilde A\\to\\widetilde B$ acts on the four coordinates by its $B,A,B,A$ maps. These commute with the permutation and minus sign in $\\Phi_n$, proving its naturality; two copies of a chain map likewise commute with $S_r$. Applying $T_n$ before $\\Phi_n$ gives $(b,\\pi b',a,-\\pi a')$, which is its value after the cone map of $(T_n(A),T_n(B))$. Also $T_nS_r(x,y)=S_rT_n(x,y)=(x,(-1)^r\\pi y)$. Hence both comparisons commute with the whole tower (adjacent-transition commutation implies commutation with their composites).",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-first-reduction.proof.md",
-    "place": "Cones: naturality and tower compatibility of the explicit comparisons"
-   }
-  },
-  {
-   "text": "For the cone inclusion $i:B\\to\\operatorname{Cone}(f)$, $\\Phi_nD_n(i)(b,b')=(b,b',0,0)$, the cone inclusion of $D_n(f)$. For the boundary $-p:\\operatorname{Cone}(f)\\to A[1]$ of [def-weil-abstract-derived-category], $D_n(-p)(b,a,b',a')=(-a,-a')$ and then $S_1$ gives $(-a,a')$. This equals the cone boundary applied to $\\Phi_n(b,a,b',a')$, so the boundary square has the required sign. Finally $\\Phi_nj_{\\operatorname{Cone}(f)}(b,a)=(b,0,a,0)$, exactly the cone map of $(j_A,j_B)$, and $S_rj_{M[r]}(m)=(m,0)=j_M[r](m)$. These identities also prove compatibility of the coaugmentations with the displayed comparisons.",
-   "uses": [
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-first-reduction.proof.md",
-    "place": "Cones: inclusions, negative-projection boundary and coaugmentation squares"
-   }
-  },
-  {
-   "text": "By [def-weil-abstract-derived-category], every distinguished triangle is isomorphic to the image of a chain-map cone triangle. Steps 6 and 9 identify the image under $F_n$ of such a triangle with the cone triangle of $D_n(f)$, using $\\Phi_n$ on its third object and $S_1$ on its shifted first object. It is therefore distinguished. Step 7 supplies the natural shift isomorphism after localization, and step 2 supplies additivity. This is exactly the definition of an exact endofunctor in [def-weil-triangulated-category]. Together with steps 4–5 and 8–9 it proves every clause of the strict derived-reduction tower assertion.",
-   "uses": [
-    "def-weil-abstract-derived-category",
-    "def-weil-triangulated-category"
-   ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-first-reduction.proof.md",
-    "place": "Cones and Isomorphisms: passage from the explicit strict comparisons to exactness"
+    "place": "Cones paragraph, first two sentences and the cone/shift commutation sentence; explicit strict principal-reduction comparison. Supporting cone convention: Stacks Tag 014E (definition-cone)."
    }
   }
  ],
  "proof_deps": [
+  "det-pe-derived-nakayama-resolution",
   "def-weil-abstract-derived-category",
   "lem-sf-triangle-morphism-iso",
-  "det-pe-derived-nakayama-resolution",
-  "lem-weil-pbc-independent-bounded-flat-kflat",
-  "lem-pc-kflat-resolution",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "def-pc-tensor-complex-sheaves",
-  "sk-def-pe-derived-completion",
-  "def-weil-triangulated-category"
+  "lem-pe-principal-reduction-derived-normalization",
+  "sk-def-pe-derived-completion"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-first-reduction.proof.md",
-  "place": "Cones paragraph, expanded coordinate proof; Stacks Tags 014E, 06YQ, 06YS, 06YU, 0G7D supply conventions and resolving-category inputs"
+  "place": "Y2 Lean reduction: explicit strict cone functor, coherent signed shifts, double-cone coordinate calculus and quasi-isomorphism preservation; the separate normalized derived-quotient comparison retains the rank-one-resolution route."
  },
  "mathlib_searches": [
   {
@@ -302,18 +231,11 @@
  "reviewed_proof": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "M5",
+  "reviewer": "COMPILER",
+  "group": "Y2",
   "result": "pass",
-  "landing": "20261021T134505-L-1220119",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.ProEtale.PrincipalReduction.principalReductionConeData",
-   "AlgebraicGeometry.ProEtale.PrincipalReduction.principal_reduction_cone_calculus"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.ProEtale.PrincipalReduction.principal_reduction_cone_calculus"
-  ]
+  "landing": "20261021T204056-L-3935640",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
