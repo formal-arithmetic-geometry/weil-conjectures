@@ -16,7 +16,7 @@
  },
  "proof": [
   {
-   "text": "Use smallStrictHenselizationColimitIso to compare the small and full affine-neighbourhood colimits. The final-functor coprojection formula and the structural-map equations identify the maps to the base. Compose b with the comparison and transport its nonunit hypothesis through the inverse. Apply the retained upstream regularity and domain components to this composite. Ideal.quotientEquiv for the inverse comparison identifies their full-colimit principal quotient with the original small-colimit principal quotient. Transport regularity using IsRegularRing.of_ringEquiv and the domain property using MulEquiv.isDomain_iff, and pair the results.",
+   "text": "The retained upstream full-colimit theorem pairs the proved regularity and domain components. To recover the original small-colimit formulation, both live consumers use the final-functor coprojection formula to identify the structural maps under smallStrictHenselizationColimitIso. They compose b with this comparison, transport the nonunit hypothesis through its inverse, apply the upstream theorem, and use Ideal.quotientEquiv and IsRegularRing.of_ringEquiv to transfer regularity. The combined quotient consumer also transfers the domain property by MulEquiv.isDomain_iff.",
    "uses": [
     "lem-sbc-strict-hensel-regular-divisor-quotient-regular-part",
     "lem-sbc-strict-hensel-regular-divisor-quotient-domain-part"
@@ -30,10 +30,10 @@
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "B8",
+  "group": "M1",
   "document": "Stacks Project",
-  "place": "Tags 04HX, 05WS, 06LN and 00NP; retirement of the duplicate Sheaf domain component in favor of its proved upstream owner",
-  "note": "The upstream theorem, all consumer signatures, and every mathematical dependency are preserved. The consumer now transports both properties through the same quotient equivalence."
+  "place": "Tags 04HX, 05WS, 06LJ, 06LN and 00NP; retirement of the duplicate Sheaf regular-divisor quotient theorem in favor of its proved upstream owner",
+  "note": "Preserve all upstream declarations and consumer signatures. The mathematical regularity node stays attached to its upstream theorem; both consumers perform the canonical quotient transport explicitly."
  },
  "mathlib_searches": [
   {
@@ -99,14 +99,15 @@
  "chapter": "sec-smooth-base-change",
  "unit": "sk-prop-input-spreading",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.Morphisms.StrictHenselRegularDivisorQuotientRegular",
-  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/StrictHenselRegularDivisorQuotientRegular.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.Morphisms.StrictHenselRegularDivisorQuotientRegular",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Morphisms/StrictHenselRegularDivisorQuotientRegular.lean",
   "declaration": "AlgebraicGeometry.Scheme.strictHenselizationRing_regular_divisor_quotient",
-  "statement": "theorem strictHenselizationRing_regular_divisor_quotient\n    (R : CommRingCat.{u}) [IsRegularRing R] (f : R)\n    [IsRegularRing (R ⧸ Ideal.span {f})]\n    {Ω : Type u} [Field Ω] [IsAlgClosed Ω]\n    (barY : Spec (.of Ω) ⟶ Spec R)\n    (b : R ⟶ strictHenselizationRing barY)\n    (hb : Spec.map b = strictHenselizationStructuralMap barY)\n    (hg : ¬ IsUnit (b.hom f)) :\n    IsRegularRing (strictHenselizationRing barY ⧸ Ideal.span {b.hom f}) ∧\n      IsDomain (strictHenselizationRing barY ⧸ Ideal.span {b.hom f})",
+  "statement": "theorem strictHenselizationRing_regular_divisor_quotient\n    (R : CommRingCat.{u}) [IsRegularRing R] (f : R)\n    [IsRegularRing (R ⧸ Ideal.span {f})]\n    {Ω : Type u} [Field Ω] [IsAlgClosed Ω]\n    (barY : Spec (.of Ω) ⟶ Spec R)\n    (b : R ⟶ strictHenselization barY)\n    (hb : Spec.map b = strictLocalizationToBase barY)\n    (hg : ¬ IsUnit (b.hom f)) :\n    IsRegularRing (strictHenselization barY ⧸ Ideal.span {b.hom f}) ∧\n      IsDomain (strictHenselization barY ⧸ Ideal.span {b.hom f})",
   "branch": "sheaf-dag",
-  "by": "B4",
-  "date": "2026-10-13"
+  "by": "M1",
+  "date": "2026-10-21",
+  "note": "Retired the duplicate Sheaf module. The retained upstream theorem uses the canonically isomorphic full affine-neighbourhood colimit. Both current small-colimit consumers explicitly transport through smallStrictHenselizationColimitIso, its structural-map compatibility, and the induced principal-quotient ring equivalence. Their signatures are unchanged."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -121,12 +122,12 @@
  "reviewed_proof": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "C-aece6",
-  "group": "B8",
-  "result": "pass",
-  "landing": "20261021T023303-L-2944832",
+  "reviewer": "C-d477a",
+  "group": "M1",
+  "result": "fix",
+  "landing": "20261021T061520-L-1784928",
   "kind": "interface",
-  "note": "independent cc review: retired Sheaf DomainPart stub + existing:true node record vs upstream WeilConjectures DomainPart theorem (verbatim); adapted unclaimed Regular vs live (signature unchanged, domain transported via quotientEquiv + MulEquiv.isDomain_iff); importers Quotient, Noetherian compiled; axioms clean"
+  "note": "independent cc review: delivered Quotient/Noetherian/empty item vs live Sheaf modules and the upstream WeilConjectures twin; regular node lean record vs upstream theorem (verbatim); 4 importers of Quotient compiled; axioms clean"
  },
  "lean_audit": {}
 }

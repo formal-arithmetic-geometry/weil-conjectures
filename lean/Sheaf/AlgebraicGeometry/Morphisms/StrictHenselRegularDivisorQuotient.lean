@@ -5,10 +5,10 @@ Authors: SHEAF group F2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
+public import WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMap
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 import Sheaf.AlgebraicGeometry.Morphisms.StrictHenselRegularDivisorQuotientNoetherian
-import Sheaf.AlgebraicGeometry.Morphisms.StrictHenselRegularDivisorQuotientRegular
+import WeilConjectures.AlgebraicGeometry.Morphisms.StrictHenselRegularDivisorQuotientRegular
 
 /-! # The regular divisor quotient of the canonical strict henselization
 Source: Stacks Project, Tag 0EYG, strict henselization paragraph; Tags 06LN and 05WS.
@@ -16,8 +16,48 @@ Source: Stacks Project, Tag 0EYG, strict henselization paragraph; Tags 06LN and 
 
 @[expose] public section
 universe u
-open CategoryTheory
+open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
+
+/-- The canonical colimit comparison identifies the structural maps.
+Source: Stacks Project, Tag 04HX, via the final-functor coprojection formula. -/
+private theorem comparison_base
+    {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
+    (s : Spec (.of Ω) ⟶ S) :
+    Spec.map (smallStrictHenselizationColimitIso s).hom ≫
+      strictHenselizationStructuralMap s = strictLocalizationToBase s := by
+  classical
+  let : HasColimit (strictHenselizationDiagram s) := inferInstance
+  let := (strictHenselization_properties s).2.1
+  let j := Classical.choice (IsCofiltered.nonempty (C :=
+    SmallModel.{u} (strictHenselizationNeighbourhoods s)))
+  have hs : (strictHenselizationCone s).π.app (Opposite.op (Opposite.op j)) ≫
+      Spec.map (ΓSpecIso
+        (((equivSmallModel.{u}
+          (strictHenselizationNeighbourhoods s)).inverse.obj j).1.left.unop)).inv ≫
+      ((AffineEtale.Spec S).obj
+        (((equivSmallModel.{u}
+          (strictHenselizationNeighbourhoods s)).inverse.obj j).1)).hom =
+      strictHenselizationStructuralMap s :=
+    (exists_strictHenselizationStructuralMap s).choose_spec j
+  rw [← hs]
+  have hι : colimit.ι (strictHenselizationAffineDiagram s) (Opposite.op j) ≫
+      (smallStrictHenselizationColimitIso s).hom =
+      (smallStrictHenselizationCocone s).ι.app (Opposite.op j) := by
+    let := strictHenselizationAffineInclusion_isEquivalence s
+    exact Functor.Final.ι_colimitIso_hom
+      ((equivSmallModel.{u} (strictHenselizationNeighbourhoods s)).inverse ⋙
+        strictHenselizationAffineInclusion s).op (strictHenselizationDiagram s) (Opposite.op j)
+  have hleg : Spec.map (smallStrictHenselizationColimitIso s).hom ≫
+      (strictHenselizationCone s).π.app (Opposite.op (Opposite.op j)) =
+      (strictHenselizationAffineCone s).π.app (Opposite.op (Opposite.op j)) := by
+    change Spec.map (smallStrictHenselizationColimitIso s).hom ≫
+      Spec.map (colimit.ι (strictHenselizationAffineDiagram s) (Opposite.op j)) = _
+    rw [← Spec.map_comp, hι]
+    rfl
+  rw [← Category.assoc, hleg]
+  exact strictHenselizationStructuralMap_eq s j
+
 
 /-- The canonical strict henselization is Noetherian and its nonempty divisor quotient
 is a regular domain.
@@ -45,7 +85,33 @@ theorem strictHenselization_regular_divisor_quotient
       IsRegularRing (strictHenselizationRing barY ⧸ Ideal.span {b.hom f}) ∧
       IsDomain (strictHenselizationRing barY ⧸ Ideal.span {b.hom f}) := by
   have hN := strictHenselizationRing_noetherian_of_regular R barY b hb
-  have hQ := strictHenselizationRing_regular_divisor_quotient R f barY b hb hg
+  have hQ :
+      IsRegularRing (strictHenselizationRing barY ⧸ Ideal.span {b.hom f}) ∧
+        IsDomain (strictHenselizationRing barY ⧸ Ideal.span {b.hom f}) := by
+    let e : strictHenselizationRing barY ≅ strictHenselization barY :=
+      smallStrictHenselizationColimitIso barY
+    have hbe : Spec.map (b ≫ e.hom) = strictLocalizationToBase barY := by
+      rw [Spec.map_comp, hb]
+      exact comparison_base barY
+    have hg' : ¬ IsUnit ((b ≫ e.hom).hom f) := by
+      intro h
+      apply hg
+      have h' := h.map e.inv.hom
+      change IsUnit (e.commRingCatIsoToRingEquiv.symm
+        (e.commRingCatIsoToRingEquiv (b.hom f))) at h'
+      simpa only [RingEquiv.symm_apply_apply] using h'
+    have hQ := strictHenselizationRing_regular_divisor_quotient R f barY (b ≫ e.hom) hbe hg'
+    let : IsRegularRing
+        (strictHenselization barY ⧸ Ideal.span {(b ≫ e.hom).hom f}) := hQ.1
+    let eQ : (strictHenselization barY ⧸ Ideal.span {(b ≫ e.hom).hom f}) ≃+*
+        (strictHenselizationRing barY ⧸ Ideal.span {b.hom f}) :=
+      Ideal.quotientEquiv _ _ e.symm.commRingCatIsoToRingEquiv (by
+        rw [Ideal.map_span, Set.image_singleton]
+        change Ideal.span {b.hom f} = Ideal.span {
+          e.commRingCatIsoToRingEquiv.symm (e.commRingCatIsoToRingEquiv (b.hom f))}
+        rw [RingEquiv.symm_apply_apply])
+    refine ⟨IsRegularRing.of_ringEquiv eQ, eQ.toMulEquiv.isDomain_iff.mp ?_⟩
+    exact hQ.2
   exact ⟨hN, hQ.1, hQ.2⟩
 
 end AlgebraicGeometry.Scheme

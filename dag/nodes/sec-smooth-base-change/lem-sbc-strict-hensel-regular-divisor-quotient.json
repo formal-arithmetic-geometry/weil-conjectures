@@ -16,37 +16,24 @@
  ],
  "proof": [
   {
-   "text": "Identify H with the strict henselization of the local ring at the geometric point via pointed etale triples and their colimit. The structural map identity determines b by faithfulness of Spec. The local ring is Noetherian and its strict henselization is Noetherian.",
+   "text": "Obtain Noetherianity of the small-colimit strict henselization from strictHenselizationRing_noetherian_of_regular. Compare its structural morphism with the full affine-neighbourhood structural morphism by the final-functor coprojection equation, and compose the supplied b with smallStrictHenselizationColimitIso. Transport the nonunit condition through the inverse comparison. Apply the retained upstream regularity-and-domain theorem. The induced Ideal.quotientEquiv identifies the full-colimit principal quotient with the original small-colimit quotient; transfer regularity by IsRegularRing.of_ringEquiv and the domain property by MulEquiv.isDomain_iff. Pair these results with Noetherianity.",
    "uses": [
-    "def-weil-pbc-strict-henselization-limit",
-    "lem-weil-pbc-etale-local-ring-triples",
-    "lem-weil-pbc-strict-henselization-triples",
-    "lem-sc-strict-henselization-noetherian"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The nonunit condition puts the point on the divisor. Tag 05WS (lemma-quotient-strict-henselization) identifies H/(b(f)) with the strict henselization of the corresponding local ring of R/(f). This is regular local by Tag 06LN, hence a domain and a regular ring.",
-   "uses": [
-    "lem-sc-strict-henselization-regular",
-    "def-weil-regular-scheme"
+    "lem-sbc-strict-hensel-regular-divisor-quotient-noetherian",
+    "lem-sbc-strict-hensel-regular-divisor-quotient-regular"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-strict-henselization-limit",
-  "def-weil-regular-scheme",
-  "lem-sc-strict-henselization-noetherian",
-  "lem-sc-strict-henselization-regular",
-  "lem-weil-pbc-etale-local-ring-triples",
-  "lem-weil-pbc-strict-henselization-triples"
+  "lem-sbc-strict-hensel-regular-divisor-quotient-noetherian",
+  "lem-sbc-strict-hensel-regular-divisor-quotient-regular"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "F2",
+  "group": "M1",
   "document": "Stacks Project",
-  "place": "Tag 0EYG (pione-lemma-abhyankar-one-divisor), strict henselization paragraph; Tag 05WS (lemma-quotient-strict-henselization); Tag 06LN, regularity under strict henselization."
+  "place": "Tags 04HX, 05WS, 06LJ, 06LN and 00NP; retirement of the duplicate Sheaf regular-divisor quotient theorem in favor of its proved upstream owner",
+  "note": "Preserve all upstream declarations and consumer signatures. The mathematical regularity node stays attached to its upstream theorem; both consumers perform the canonical quotient transport explicitly."
  },
  "mathlib_searches": [
   {
@@ -134,18 +121,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "B4",
-  "result": "pass",
-  "landing": "20261013T151132-L-876355",
+  "reviewer": "C-d477a",
+  "group": "M1",
+  "result": "fix",
+  "landing": "20261021T061520-L-1784928",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.Scheme.strictHenselization_regular_divisor_quotient"
-  ],
-  "sorry_after": []
+  "note": "independent cc review: delivered Quotient/Noetherian/empty item vs live Sheaf modules and the upstream WeilConjectures twin; regular node lean record vs upstream theorem (verbatim); 4 importers of Quotient compiled; axioms clean"
  },
  "lean_audit": {}
 }
