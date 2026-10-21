@@ -3,26 +3,85 @@
  "blueprint": {
   "is": "def-nagata-strict-transform-closed-chart-model",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Closed chart model of the global strict transform",
- "statement": "Let $f\\colon Y\\to X$, let $\\mathcal I$ be a finite-type quasi-coherent\nideal, and put $X'=\\operatorname{Bl}_{\\mathcal I}(X)$. Choose an affine\ncover $V_i=\\operatorname{Spec}(A_i)$ of $X$, finite generating sets for\n$\\mathcal I|_{V_i}$, and affine covers\n$W_{ij}=\\operatorname{Spec}(B_{ij})$ of $f^{-1}(V_i)$. Define\n$Y^{\\mathrm{st}}_{\\mathrm{chart}}$ by gluing the affine schemes\n$\\operatorname{Spec}(C_{i,j,a}^{\\mathrm{st}})$ and their quotient closed\nimmersions into the corresponding affine pieces of $Y\\times_XX'$.\nOn an overlap, refine to basic opens in the chosen $W_{ij}$ and in the\nblow-up chart. The transition maps are the localizations of\n[lemma-nagata-strict-transform-chart-localization-data]; they preserve\nthe quotient ideals and satisfy the double- and triple-overlap identities.\nThese maps, together with the affine closed immersions, are the specified\nscheme-glue datum. No affineness of an unchosen fibre product is used.",
+ "statement": "Let $f\\colon Y\\to X$ be a morphism of schemes [def-pc-scheme], let $\\mathcal I\\subseteq\\mathcal O_X$ be a finite-type quasi-coherent ideal [pqf-def-coherent], and put $X'=\\operatorname{Bl}_{\\mathcal I}(X)$ [def-nagata-global-blowup] and $P=Y\\times_X X'$ [def-pc-fibre-product]. Choose an affine cover $V_i=\\operatorname{Spec}(A_i)$ of $X$, finite generating sets $G_i$ for $I_i=\\Gamma(V_i,\\mathcal I)$, and affine covers $W_{ij}=\\operatorname{Spec}(B_{ij})$ of $f^{-1}(V_i)$. Spectra and their contravariant maps have the meaning of [def-weil-affine-spectrum].\n\nFor $c=(i,j,a)$ with $a\\in G_i$, put $C_c=C_a(A_i,B_{ij},I_i)$ [def-nagata-strict-transform-basechange-chart-ring] and $C_c^{\\mathrm{st}}=C_a^{\\mathrm{st}}(A_i,B_{ij},I_i)$ [def-nagata-strict-transform-chart-ring]. Thus $C_c^{\\mathrm{st}}$ is the quotient of $C_c$ by its $a$-power torsion. Take the $V_i$ among the affine opens over which $X'$ is glued in [def-nagata-global-blowup] (for the current blueprint datum every affine open of $X$ is one); then the local model $\\mathsf B_{V_i}(\\mathcal I)=\\operatorname{Bl}_{I_i}(V_i)$ [def-nagata-global-blowup-local-model] is the open subscheme of $X'$ lying over $V_i$, and, $G_i$ generating $I_i$, the affine opens $\\operatorname{Spec}(A_i[I_i/a])$ with $a\\in G_i$ cover it [prop-nagata-affine-blowup-chart-cover]. Write $P_c=\\operatorname{Spec}(C_c)$ for the corresponding ordinary base-change chart in $P$: the open subscheme $W_{ij}\\times_{V_i}\\operatorname{Spec}(A_i[I_i/a])$ of $P$ [lem-weil-pbc-open-preimage-fibre-product], identified with $\\operatorname{Spec}(B_{ij}\\otimes_{A_i}A_i[I_i/a])$ by [lem-weil-pbc-fibre-product-affine-spectra]. Write $S_c=\\operatorname{Spec}(C_c^{\\mathrm{st}})$, and $q_c:S_c\\to P_c$ for the quotient closed immersion [lemma-nagata-strict-transform-chart-closed].\n\nSpecify a scheme-glue datum as follows. Its pieces are the $S_c$. Its overlap open in $S_c$ for a pair $c,d$ is $q_c^{-1}(P_c\\cap P_d)$, where the intersection is taken as an open subscheme of $P_c$. On basic open refinements in the chosen $W_{ij}$ and in the blow-up charts, take the transition maps induced by the quotient-localization isomorphisms [lemma-nagata-strict-transform-chart-localization-data] and the localized chart comparisons [def-nagata-strict-transform-chart-comparison-localized, prop-nagata-strict-transform-chart-iso, lemma-nagata-strict-transform-chart-localization]. Concretely, for each comparison $h=\\overline\\sigma_a:R\\xrightarrow{\\sim}T$, where $R=C_a^{\\mathrm{st}}(A,B,I)$ and $T=B[IB/b]$ with $b$ the image of $a$ in $B$, localization at $e\\in R$ means the map $h_e:R_e\\to T_{h(e)}$, $z/e^n\\mapsto h(z)/h(e)^n$. For a basic-open denominator in $B$ or $A$, $e$ is its structural image. In alternative presentations $\\alpha:R_e\\xrightarrow{\\sim}R'$ and $\\beta:T_{h(e)}\\xrightarrow{\\sim}T'$, use $\\beta\\circ h_e\\circ\\alpha^{-1}$, with precisely the tensor-product and iterated-localization identifications specified in the cited definition. These localized equivalences identify the strict-chart presentations on the common refinements; the localization lemma identifies them with the comparisons constructed from localized data. Apply the contravariant spectrum construction to obtain the overlap maps. Glue these local maps on the overlap opens using [lem-weil-pbc-scheme-morphism-gluing]. The compatibility data needed here, including agreement on double localizations and the triple-overlap cocycle, are those of [lemma-nagata-strict-transform-chart-cocycle]. The maps are over the corresponding ambient overlaps in $P$.\n\nDefine $Y^{\\mathrm{st}}_{\\mathrm{chart}}$ to be the glued scheme of this datum, using the scheme-gluing construction [lem-weil-pbc-glue-schemes], and define its morphism to $P$ by gluing the maps $S_c\\xrightarrow{q_c}P_c\\to P$ [lem-weil-pbc-scheme-morphism-gluing]. These specified transition maps and affine quotient maps are part of the construction. No affineness of an unchosen overlap or fibre product is assumed.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-blowups/def-nagata-strict-transform-closed-chart-model.md",
   "place": "node def-nagata-strict-transform-closed-chart-model, order 156"
  },
  "stmt_deps": [
-  "lemma-nagata-strict-transform-chart-localization-data",
+  "def-pc-scheme",
+  "pqf-def-coherent",
   "def-nagata-global-blowup",
-  "def-nagata-strict-transform-chart-ring"
+  "def-pc-fibre-product",
+  "def-nagata-global-blowup-local-model",
+  "prop-nagata-affine-blowup-chart-cover",
+  "lem-weil-pbc-open-preimage-fibre-product",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-weil-affine-spectrum",
+  "def-nagata-strict-transform-basechange-chart-ring",
+  "def-nagata-strict-transform-chart-ring",
+  "lemma-nagata-strict-transform-chart-closed",
+  "lemma-nagata-strict-transform-chart-localization-data",
+  "def-nagata-strict-transform-chart-comparison-localized",
+  "prop-nagata-strict-transform-chart-iso",
+  "lemma-nagata-strict-transform-chart-localization",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "lemma-nagata-strict-transform-chart-cocycle",
+  "lem-weil-pbc-glue-schemes"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Glue affine strict transform charts obtained by quotienting base change blowup chart rings by power torsion to a closed subscheme of a fibre product",
+   "results": "AlgebraicGeometry.Scheme.IdealSheafData.glueDataObj, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjι, AlgebraicGeometry.Scheme.IdealSheafData.instIsPreimmersionGlueDataObjι, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjι_ι, AlgebraicGeometry.Scheme.GlueData.gluedScheme, AlgebraicGeometry.Scheme.IdealSheafData.isOpenImmersion_glueDataObjMap, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjMap, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjHom",
+   "date": "2026-10-21",
+   "verdict": "no match: generic Proj and ideal-sheaf gluing constructions do not construct these strict-transform quotient charts and their transition datum"
+  },
+  {
+   "tool": "grep",
+   "query": "strictTransform|StrictTransform|strict.transform|strict_transform",
+   "results": "No hits; subdirectory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-21",
+   "verdict": "no match: no hits in Mathlib/AlgebraicGeometry"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.GlueData, AlgebraicGeometry.IsClosedImmersion",
+   "results": "No hits",
+   "date": "2026-10-21",
+   "verdict": "no match: no hits"
+  },
+  {
+   "tool": "grep",
+   "query": "blowup|Blowup|torsion.*[Gg]lu|[Gg]lu.*torsion",
+   "results": "No hits; subdirectory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-21",
+   "verdict": "no match: no hits in Mathlib/AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The strict transform is obtained by gluing affine blowup charts modulo power torsion",
+   "results": "AlgebraicGeometry.Scheme.Cover.fromGlued, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObj, AlgebraicGeometry.Scheme.IdealSheafData.range_glueDataObjι, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.IdealSheafData.opensRange_glueDataObjMap, AlgebraicGeometry.Scheme.Cover.instIsIsoCommRingCatStalkMapFromGlued, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjι, AlgebraicGeometry.localRingHom_comp_stalkIso",
+   "date": "2026-10-21",
+   "verdict": "no match: generic gluing and normalization constructions; none states this strict-transform chart construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Construction of a strict transform by gluing spectra of tensor product blowup chart rings modulo the kernel of localization at the chart generator",
+   "results": "AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec, AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjι, AlgebraicGeometry.Proj.SpecMap_awayMap_awayι, AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec_fromSpec, AlgebraicGeometry.Scheme.IdealSheafData.instIsPreimmersionGlueDataObjι, AlgebraicGeometry.Proj.awayι_toSpecZero, AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_left",
+   "date": "2026-10-21",
+   "verdict": "no match: generic Proj and ideal-sheaf gluing constructions do not construct these strict-transform quotient charts and their transition datum"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "bypassed"
@@ -53,5 +112,21 @@
   "statement": "Let $f\\colon Y\\to X$, let $\\mathcal I$ be a finite-type quasi-coherent\nideal, and put $X'=\\operatorname{Bl}_{\\mathcal I}(X)$. Choose an affine\ncover $V_i=\\operatorname{Spec}(A_i)$ of $X$, finite generating sets for\n$\\mathcal I|_{V_i}$, and affine covers\n$W_{ij}=\\operatorname{Spec}(B_{ij})$ of $f^{-1}(V_i)$. Define\n$Y^{\\mathrm{st}}_{\\mathrm{chart}}$ by gluing the affine schemes\n$\\operatorname{Spec}(C_{i,j,a}^{\\mathrm{st}})$ and their quotient closed\nimmersions into the corresponding affine pieces of $Y\\times_XX'$.\nOn an overlap, refine to basic opens in the chosen $W_{ij}$ and in the\nblow-up chart. The transition maps are the localizations of\n[lemma-nagata-strict-transform-chart-localization-data]; they preserve\nthe quotient ideals and satisfy the double- and triple-overlap identities.\nThese maps, together with the affine closed immersions, are the specified\nscheme-glue datum.",
   "proof": [],
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "def-nagata-strict-transform-closed-chart-model",
+  "worker": "stage1",
+  "summary": "Expanded the chosen affine chart scheme-glue datum, its overlap opens, and the glued morphism into the fibre product. Reused the existing quotient-chart, localized-comparison, cocycle and scheme-gluing nodes for all construction prerequisites; no new node and no replacement by the closure-based strict transform. Checked the main-20261015 update, Stacks 080D/080E and 01JA/01JB/01JC, and the newer Lean chart-model file, which supplies an ideal-sheaf construction rather than this selected scheme-glue datum. Returned-landing repair: revalidated all fifteen current statement dependencies and made the localized comparison target T_{h(e)}, its fraction formula, and conjugation by the specified presentation isomorphisms explicit, following the newly landed localized-comparison definition.",
+  "blueprint": "main-20261015/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-blowups/def-nagata-strict-transform-closed-chart-model.md: all three construction paragraphs (charts and quotient maps; basic-open transition maps and overlap identities; specified scheme-glue datum). Also realizes the unit sentence about quotienting pulled-back charts by a-power torsion and commuting with localization.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q126-324fa37b2",
+  "group": "Q126",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q126-324fa37b2 (reviewer sub-agent of L); spot-checked: This is a re-delivery after a returned landing. The earlier head b4e9302567d2 was reviewed as FIX, but the landing refused it because def-nagata-strict-transform-chart-comparison-localized (Q129) changed. The new head adds the localized comparison h_e:R_e→T_{h(e)}, z/e^n↦h(z)/h(e)^n, and the transport β∘h_e∘α^{-1}; both match the current dependency, which is identical in the snapshot and on live. The new head lost both parts of the earlier FIX, so I re-applied them on top of the new text. FIX 1 (C1/C4): the overlap q_c^{-1}(P_c∩P_d) needs P_c⊂P to be open, and the delivered statement cites nothing for that. I spliced back the sentence and four stmt_deps: def-nagata-global-blowup-local-model (glue-data blueprint_update: X' is glued over all affine opens), prop-nagata-affine-blowup-chart-cover (the Stacks 080E charts; this is why the generators G_i are needed), lem-weil-pbc-open-preimage-fibre-product and lem-weil-pbc-fibre-product-affine-spectra. FIX 2: source was still master order 156; I changed it to main-20261015 order 164, as the report already claims. I read all 15 cited statements. Glue-schemes conditions: U_cc=S_c and the preimage condition hold because the transitions lie over the identity of P_c∩P_d and q_c is a monomorphism; the cocycle is the chart-cocycle node; the morphism to P glues because q_d∘φ_cd=q_c. Charts over different V_i are compared through T=B[IB/b], which does not depend on A. Stacks 080E (divisors.tex l.8840) gives the chart (B⊗A[I/a])/a-power torsion, as the item does. The stmt_dep closure (146 nodes) does not contain the item. Edge cases checked: I=0, I=(1), a or e nilpotent, a fat point that is all torsion, and e=1. The item is not superseded on live or side-live, has no repair note and is not in the dropped list. There are no new nodes and no tool_uses.; 1 file(s) fixed by the reviewer"
  }
 }

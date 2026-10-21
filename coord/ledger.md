@@ -21029,3 +21029,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:13 L: returned deliver/Q06/lemma-nagata-flat-pullback-ideal-pow (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-flat-pullback-ideal-pow: lemma-nagata-fla)
 - 08:13 L: returned deliver/Q02/lemma-nagata-strict-transform-chart-closed (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-strict-transform-chart-closed: lemma-naga)
 - 08:15 L: merged deliver/Q61/lem-zl-complex-extension (reviewer PASS; first push; new nodes: 0); claim not held by Q61: not your claim
+- 08:15 L: merged deliver/Q126/def-nagata-strict-transform-closed-chart-model (reviewer FIX; after a return; new nodes: 0)
