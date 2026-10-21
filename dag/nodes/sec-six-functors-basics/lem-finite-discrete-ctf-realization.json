@@ -14,28 +14,41 @@
  ],
  "proof": [
   {
-   "text": "Construct the inverse section-action equivalence to finiteComparisonRealization by restricting scalars along the specified coefficient-ring isomorphism. Sheafification and restriction are inverse on finite discrete scalar modules, and the induced equivalence is exact on module sheaves and on unbounded derived categories.",
+   "text": "Use finiteComparisonRealization_exact to install the exact coefficient equivalence. Its derived functor reflects canonical t-boundedness by the proved source lemma Functor.bounded_of_bounded_mapDerivedCategory_obj, applied to the boundedness component of the hypothesis.",
    "uses": [
     "det-ctf-finite-comparison-localizing"
    ],
    "elementary": false
   },
   {
-   "text": "The equivalence preserves cohomology and finite constant local models on the same pro-etale covers and constructible strata. Its monoidal comparison identifies the two relative derived tensors, so the degree-zero tensor tests reflect every finite Tor interval. Therefore bounded constructibility and finite Tor amplitude reflect from the realization.",
+   "text": "A Noetherian scheme is quasi-compact and quasi-separated. Apply the reverse direction of finiteComparisonGenerators_identification to obtain an etale bounded constructible finite-Tor complex L and an isomorphism from its ordinary pro-etale comparison image to K.",
    "uses": [
-    "lem-sf-module-object-ordinary-coefficient-equivalence"
+    "lem-ctf-finite-comparison-generators"
    ],
    "elementary": false
+  },
+  {
+   "text": "For each integer q, convert the constructibility of H^q(L) to Scheme.IsConstructibleSheaf using isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf. Apply the proved source theorem isConstructible_comparisonUpperStar_obj. The exact-functor homology isomorphism followed by homology of the isomorphism to K identifies this comparison image with H^q(K); transport constructibility along that isomorphism.",
+   "uses": [
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Take a Tor interval [a,b] for L. The proved source theorem ProEtale.DerivedCategory.torAmplitudeIn_mapDerivedCategory sends this same interval through ordinary comparison inverse image. Transport the resulting property along the isomorphism to K using ObjectProperty.prop_of_iso. Together with boundedness and cohomological constructibility this is the asserted conjunction.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "det-ctf-finite-comparison-localizing",
-  "lem-sf-module-object-ordinary-coefficient-equivalence"
+  "lem-ctf-finite-comparison-generators",
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-compact/sk-prop-ctf-finite-compact-proetale.proof.md",
-  "place": "Coefficient-identification paragraph."
+  "place": "Coefficient-identification paragraph, using the existing bounded finite-Tor generator identification and the proved ordinary-comparison preservation of constructibility and Tor intervals; no new coefficient tensor equivalence is needed."
  },
  "mathlib_match": null,
  "status": "split",
@@ -102,13 +115,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-21",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G6",
+  "group": "B4",
   "result": "pass",
-  "landing": "20261020T051329-L-1639838",
-  "kind": "interface",
+  "landing": "20261021T014212-L-2386576",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
