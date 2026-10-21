@@ -266,5 +266,37 @@
   "group": "Q42",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-04460e3f7 (reviewer sub-agent of L); spot-checked: Ordinary one-level split of lem-sfb-flat-single-scalar-conventions (created by Q31 as the old Step 4 of lem-sfb-locally-free-derived-scalars), with no new nodes. The item is unsplit in both live and side-live, is not on the drop list, has no repair note of its own, and the dependency closure has no cycle. Statement, stmt_deps, source and blueprint are unchanged, and proof_deps equals the union of the step uses. I checked all six steps against the cited statements. Step 1: in Mod(R) the two coequalizer arrows B⊗R⊗M⇉B⊗_RM are equal by balancing at presheaf level, so the coequalizer is split by the identity and e_M q_M=1 on pure tensors. Step 2: B-linearity and naturality follow from coequalizer uniqueness (B⊗q_M is an epimorphism because B⊗- is a left adjoint). Step 3: flat means exact tensoring (def-pc-flat-sheaf-modules), and the Mathlib leaf from Tag 010N (lem-weil-pbc-exact-functor-complex-cohomology) gives preservation of quasi-isomorphisms and of acyclicity. I verified the total-tensor signs for M[0] on both sides ((-1)^0, d_M=0), so both K-flat predicates (def-sfb-preserves-kflat-quasi-iso and def-pc-kflat-complex) hold. Step 4: clause (2) of lem-pur-derived-change-of-rings with the identity K-flat resolution makes the counit at M[0] an isomorphism, the flip to the B⊗- convention is B-linear, and B is arbitrary. Step 5: the derived comparison e^L is built from the universal property of def-sfb-left-derived-functor; I checked the arrows a and b and that ba=1 and ab=1 follow from uniqueness. Step 6: the displayed equation is the counit equation at M[0], c_mon is an isomorphism as a composite of isomorphisms, and naturality follows. Edge cases: M=0, B=0, φ=id, Z→Z/2 with M=Z or Z[1/2] all agree, and M=Z/2 is correctly excluded by flatness. Duplicate search over sk-def-sfb-change-of-scalars citers and K-flat degree-zero nodes (lem-sf-ringed-kflat-single-tensor-comparison, def-sfb-internal-scalar-tensor-comparison, lem-sfb-extend-scalars-kflat, def-sfb-left-derived-exact, lem-pc-bounded-above-flat-kflat-site) found none. Tool use lem-pur-derived-change-of-rings (unit sk-def-sf-operations) accepted as the generic ringed-site change of rings, with no unit step replaced. Stacks tags 03EK, 03ER, 06YQ, 06YY, 06XN and 010N are confirmed, no SGA is cited, and the coefficient categories Mod(R) and Mod(B) are matched exactly."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FlatSingleScalarConventions",
+  "declaration": "SheafOfModules.FlatSingleScalar.flat_single_scalar_conventions",
+  "declarations": [
+   "SheafOfModules.FlatSingleScalar.Modules",
+   "SheafOfModules.FlatSingleScalar.scalarAlgebra",
+   "SheafOfModules.FlatSingleScalar.tensorSection",
+   "SheafOfModules.FlatSingleScalar.Identifications",
+   "SheafOfModules.FlatSingleScalar.monExtension",
+   "SheafOfModules.FlatSingleScalar.monExtension_additive",
+   "SheafOfModules.FlatSingleScalar.projection",
+   "SheafOfModules.FlatSingleScalar.degreeZeroCounit",
+   "SheafOfModules.FlatSingleScalar.Normalized",
+   "SheafOfModules.FlatSingleScalar.DerivedCompatible",
+   "SheafOfModules.FlatSingleScalar.flat_single_scalar_conventions"
+  ],
+  "file": "lean/Sheaf/Paper/FlatSingleScalarConventions.lean",
+  "statement": "theorem flat_single_scalar_conventions : (∀ (M : Modules R), IsFlatOnSite M → CochainComplex.IsKFlatForTotalTensor ((HomologicalComplex.single (Modules R) (.up ℤ) 0).obj M) ∧ CochainComplex.IsKFlatIndependentCoefficients ((HomologicalComplex.single (Modules R) (.up ℤ) 0).obj M)) ∧ ∃ d : Identifications φ, ∀ s : DerivedChangeOfRingsCochainModel φ, ∃ e : monExtension φ d ≅ s.E, Normalized φ d s e ∧ DerivedCompatible φ d s e",
+  "branch": "newtargets-dag",
+  "by": "Q55",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The helpers package the action-preserving identifications in this node, use the actual Mod.extendScalars/extendπ coequalizer, and specify the section extension by the existing DerivedChangeOfRingsCochainModel. No data is chosen from an unspecified existence theorem. The derived assertion quantifies over universal left-derived pairs and pins its comparison by the counit equation; all degree-zero maps are natural transformations."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4917cdf9a",
+  "group": "Q55",
+  "result": "pass",
+  "note": "First S2 delivery; only the item lean field changed (11 stmt_dep records identical to side-live). Clause check: EssentiallySmall.{r} site with the same instance block as DerivedChangeOfRingsCochainModel; Modules R = ringedSiteModules; tensor = cochainModulesMonoidal (same monoidalCategory as IsKFlatIndependentCoefficients); Identifications pins η=φ, μ = B multiplication and B-action on local pure tensors (residual automorphism twist absorbed by ∃ e, coequalizer projection preserved); E_mon = Mod.extendScalars (recorded, existing), E_sec = s.E with obj_eq/map_eq = changeOfRings (B first factor, read TensorProduct.lean); e natural B-linear iso pinned by Normalized via extendπ; flat M ⇒ IsKFlatForTotalTensor ∧ IsKFlatIndependentCoefficients of single 0; independent HasDerivedCategory universes; ∀ L ε IsLeftDerivedFunctor, ∃ eL with counit equation (unique); degreeZeroCounit via singleMapHomologicalComplex; IsIso of both comparisons for flat M; displayed equation in diagram order; naturality via NatTrans; no B-flatness or local freeness. Edge cases M=0, B=0, φ=id, Z→Z/2 with Z or Z[1/2], Z/2 excluded, empty site. One sorry; docstrings with source and blueprint tag; 6-step proof; statement verbatim; all 11 declarations present; no duplicate found. Advisory: proof-only plain imports; toSheafify vs adjunction-unit styles. No compile (no file changed)."
  }
 }

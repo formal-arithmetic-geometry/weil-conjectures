@@ -413,5 +413,28 @@
   "group": "Q129",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q129-b2c02eb10 (reviewer sub-agent of L); spot-checked: Read the item, the inherited statement against the base (only a definition-reference sentence was added, with def-per-regular-closed-immersion-codimension and def-pc-base-change in stmt_deps; nothing weakened), all 21 cited statements, and the main-20261015 sk-thm-dnc Local construction. The item is still unsplit on live and side-live, has no repair note and is not on the dropped list. There are no new nodes. Steps 1-4 realize the blueprint Local construction with a Zariski cover: standard-smooth chart of exact relative dimension d; affine refinement U_0 x_T T_1; translation to centre the section; zero fibre etale and separated, so the section is clopen by etale-section-clopen and the complement is removed; second affine refinement through a fibre product over an affine base, so E1 is respected. I checked that gs=1 gives s^{-1}(U_i)=S_i and that the zero fibre is exactly s(S_i). Steps 5-8 are correct: etale implies flat; B_i/J_iB_i=R_i via s^#; regularity from flat tensoring of the polynomial injections with nonzero final quotient R_i; graded-polynomial theorem; regular immersion of codimension d; free conormal frame of rank d. FIX, C1/C4 at Steps 9-10: Step 9 proves psi bijective only on sections over each affine S_i, but Step 10 glued 'inverses' as if psi|S_i were already a sheaf isomorphism. Repaired by citing the existing lem-weil-pbc-quasi-coherent-iso-on-affine-cover (Sym(E) and G are both quasi-coherent by the cited symmetric-affine and conormal nodes). Step 10 is now non-elementary; proof_deps and tool_uses are updated. Edge cases checked: S empty, d=0, non-reduced base, several zero-fibre components. No duplicate: lem-pur-smooth-pair-local-coordinates and lem-pur-smooth-pair-regular-immersion are general, with no centring and no Sym iso. The declared generic tool uses are accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothSectionCentredCoordinates",
+  "declaration": "AlgebraicGeometry.SmoothSectionCentredCoordinates.exists_centred_coordinates",
+  "declarations": [
+   "AlgebraicGeometry.SmoothSectionCentredCoordinates.Chart",
+   "AlgebraicGeometry.SmoothSectionCentredCoordinates.exists_centred_coordinates"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothSectionCentredCoordinates.lean",
+  "statement": "theorem exists_centred_coordinates {V S : Scheme.{u}} [IsNoetherian S] (d : ℕ) (g : V ⟶ S) [SmoothOfRelativeDimension d g] [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g] (s : S ⟶ V) [IsClosedImmersion s] (hs : s ≫ g = 𝟙 S) : (∃ (A : Type u) (c : A → Chart d g s), ⨆ a, (c a).T.1 = ⊤) ∧ IsRegularClosedImmersionWithCodimension s (fun _ ↦ d) ∧ (ConormalGradedAlgebra.piece s 1).IsFiniteLocallyFreeOfRank d ∧ IsIso (ConormalGradedAlgebra.symmetricComparison s)",
+  "branch": "sheaf-dag",
+  "by": "Q82",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Chart packages the affine neighbourhoods and all local coordinate, quotient, regularity and conormal monomial clauses; it is a witness for this statement, not a replacement for any dependency notion. The conormal algebra, its graded pieces and the canonical symmetric comparison are the dependency declarations."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c8e17a910",
+  "group": "Q82",
+  "result": "pass",
+  "note": "Single new module Sheaf.AlgebraicGeometry.SmoothSectionCentredCoordinates; node diff vs live = lean record only; statement verbatim. Hypotheses match exactly (IsNoetherian S, SmoothOfRelativeDimension d, IsSeparated, LocallyOfFiniteType+QuasiCompact, IsClosedImmersion s, s≫g=𝟙), with no extra assumptions or universe restriction. Chart: affine T/U, actual base-change open immersion, etale separated e over T, Cartesian zero fibre via homOfVector (𝟙 T) 0 (scheme-theoretic), x tied to e.appTop coord, eval₂Hom etale and flat, J·B = s.ker.ideal U, quotient pinned to s.appLE, full IsRegular; conormal basis = representatives of the actual coordinates; the monomial clause uses the canonical symmetricComparison and homogeneousClass (affineChart gives the class in gr_J), so it is not hollow and restriction-compatible. Global conjuncts: IsRegularClosedImmersionWithCodimension s (fun _ ↦ d), piece s 1 IsFiniteLocallyFreeOfRank d, IsIso of the canonical ψ. Edge cases empty S, d=0 and universes OK. Advisory: owner def-amb-finite-locally-free-module not in stmt_deps (stage-1 field); openInBaseChange and sectionPreimage redundant; proof-only plain imports. No compile rerun per instructions."
  }
 }

@@ -307,5 +307,36 @@
   "group": "NV",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-75a23ecfa (reviewer sub-agent of L); spot-checked: Read in full: the item, all 8 steps, the statement of every cited node, and Stacks sites-modules 03EU(2) (l.4342) and 03EP (l.4001). The delivery has 0 new nodes, and its statement and stmt_deps are byte-identical to base and to the side-live node, which is still unsplit. There is no repair note, it is not in the dropped list, it has no SGA source, proof_deps equals the union of the uses, and every off-unit statement is declared in tool_uses. Steps 1-3 are the omitted details of 03EU(2) for this case. S_i⊗M≅M^{d_i} is exact, including d_i=0. λ comes from independent-sheaf-tensor-colimits, which covers all small colimits, not only posets, together with the extension-tensor comparison. Exactness uses the I-colimit hypothesis, and U is exact and reflects exactness by the sectionwise kernel/cokernel formulas. Steps 4-5: I checked the κ differential, chain and coefficient squares on η(q_i(s)⊗a), with uniqueness from pure-tensor generation and the sheafification universal property. Step 6: H^nE≅EH^n, and the factorization holds on unbounded complexes. Step 7: (D(E),φ) is the right Kan extension (the left derived half of the exact-functor lemma) and E^L is the change-of-rings left derived functor, so uniqueness gives ε invertible. Naturality ε_A∘E^L(Qp)=Q(Ep)∘ε_P gives ε_A=Q_S(Ep). Step 8: descent by the localization universal property, and coefficient compatibility through a common K-flat resolution. Tested: one-object I, zero rings, R×R, non-poset filtered I with parallel arrows, unbounded complexes; non-flat Z→Z/2 shows the finite-free hypothesis is needed. No duplicate among filtered-colimit-flat-module-sheaves (posets, flatness only), sbc-scalar-extension-counit-properties, pc-kflat-scalar-extension-counit, sfb-kflat-scalar-comparison-normalization or trf-derived-colimit-change-rings. Advisory only: Step 7 leaves implicit the CoCh-vs-K(R) and S⊗− vs −⊗S identifications; Step 3 uses λ-naturality written out in Step 5; the 5306-character proof with no new nodes may attract a later re-split."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.IndFiniteFreeScalarModel",
+  "declaration": "SheafOfModules.IndFiniteFree.ind_finite_free_scalar_model",
+  "declarations": [
+   "SheafOfModules.IndFiniteFree.Modules",
+   "SheafOfModules.IndFiniteFree.restriction",
+   "SheafOfModules.IndFiniteFree.algebraModules",
+   "SheafOfModules.IndFiniteFree.tensorComplex",
+   "SheafOfModules.IndFiniteFree.tensorDiagram",
+   "SheafOfModules.IndFiniteFree.tensorColimit",
+   "SheafOfModules.IndFiniteFree.pureTensor",
+   "SheafOfModules.IndFiniteFree.extensionPure",
+   "SheafOfModules.IndFiniteFree.Normalized",
+   "SheafOfModules.IndFiniteFree.CoefficientCompatible",
+   "SheafOfModules.IndFiniteFree.ind_finite_free_scalar_model"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/IndFiniteFreeScalarModel.lean",
+  "statement": "theorem ind_finite_free_scalar_model {I : Type r} [SmallCategory I] [IsFiltered I] [HasExactColimitsOfShape I (Modules R)] (D : I ⥤ Under R) (c : Cocone D) (hc : IsColimit c) (hcModules : IsColimit ((algebraModules R).mapCocone c)) (hfree : ∀ i : I, ∃ d : ℕ, Nonempty ((algebraModules R).obj (D.obj i) ≅ ∏ᶜ fun _ : Fin d ↦ unit (derivedChangeRingIndependentCoefficients J R))) [HasDerivedCategory.{wS} (Modules c.pt.right)] (m : DerivedChangeOfRingsCochainModel.{u, v, r, wR, wS} c.pt.hom) : ∃ (_ : PreservesFiniteLimits m.E) (_ : PreservesFiniteColimits m.E) (_ : PreservesFiniteLimits (restriction c.pt.hom)) (_ : PreservesFiniteColimits (restriction c.pt.hom)), (∀ (A B : CochainComplex (Modules R) ℤ) (f : A ⟶ B), QuasiIso f → QuasiIso ((m.E.mapHomologicalComplex (.up ℤ)).map f)) ∧ IsIso m.ε ∧ (∀ (P A : CochainComplex (Modules R) ℤ) (p : P ⟶ A) [QuasiIso p], CochainComplex.IsKFlatIndependentCoefficients (R := R) P → ∃ e : m.T.obj (DerivedCategory.Q.obj A) ≅ DerivedCategory.Q.obj ((m.E.mapHomologicalComplex (.up ℤ)).obj P), e.hom = m.T.map (inv (DerivedCategory.Q.map p)) ≫ m.ε.app P ∧ e.hom ≫ DerivedCategory.Q.map ((m.E.mapHomologicalComplex (.up ℤ)).map p) = m.ε.app A) ∧ ∃ κ : tensorColimit D ≅ m.E.mapHomologicalComplex (.up ℤ) ⋙ (restriction c.pt.hom).mapHomologicalComplex (.up ℤ), Normalized D c m κ ∧ (∀ (A B : CochainComplex (Modules R) ℤ) (f : A ⟶ B), QuasiIso f → QuasiIso ((tensorColimit D).map f)) ∧ (∃ (KD : DerivedCategory (Modules R) ⥤ DerivedCategory (Modules R)) (θ : DerivedCategory.Q ⋙ KD ≅ tensorColimit D ⋙ DerivedCategory.Q) (κD : KD ≅ m.T ⋙ (restriction c.pt.hom).mapDerivedCategory), ∀ A : CochainComplex (Modules R) ℤ, θ.hom.app A ≫ DerivedCategory.Q.map (κ.hom.app A) = κD.hom.app (DerivedCategory.Q.obj A) ≫ (restriction c.pt.hom).mapDerivedCategory.map (m.ε.app A) ≫ (restriction c.pt.hom).mapDerivedCategoryFactors.hom.app ((m.E.mapHomologicalComplex (.up ℤ)).obj A)) ∧ CoefficientCompatible.{u, v, r, wR, wS, wT} D c m κ",
+  "branch": "newtargets-dag",
+  "by": "Q98",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-19095fab8",
+  "group": "Q98",
+  "result": "pass",
+  "note": "Item lean-only change; statement, stmt_deps and proof match side-live; not dropped; first stage-2 delivery. lean.statement matches the file verbatim; all 11 declarations present; one sorry. Clause check: EssentiallySmall.{r} site with independent u/v/r and wR/wS/wT; D : I ⥤ Under R with IsFiltered and HasExactColimitsOfShape; algebra colimit hc plus module colimit hcModules; hfree is ∃ d, Nonempty(≅ ∏ᶜ Fin d unit), covering d=0 with no compatible bases. Exactness of E via PreservesFiniteLimits/Colimits; all quasi-isos preserved; IsIso m.ε on the canonical universal counit (DerivedChangeOfRingsCochainModel pins E to changeOfRings and T/ε to a universal left-derived pair, so quantifying over every m is sound); for every K-flat resolution p, e.hom = T(inv Qp)≫ε_P and e.hom≫Q(Ep)=ε_A. κ is a natural iso from colim of the tensor diagram to U∘E, Normalized on sheafification-unit pure tensors with q_i; KD/θ/κD clause for the derived category; CoefficientCompatible over all F, τ, h with βS pinned on pure tensors, L pinned on legs, the κ square, and the derived square in D(S) (the canonical universal-property map). Read the DerivedChangeOfRingsCochainModel, changeOfRings, tensorObjIsoSheafification and cochainModulesMonoidal sources and Stacks 03EU. No recompile (no file changed); worker reports clean scompile. Advisory: KD and K-flat second equations are formal consequences of naturality, as the node's own clauses are; pureTensor duplicates CochainPullback.moduleTmul, owned by theorem node lem-pur-module-tensor-generator-calculus and not citable without a stmt_dep; second reading is the author's own re-read."
  }
 }

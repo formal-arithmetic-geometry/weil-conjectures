@@ -249,5 +249,28 @@
   "group": "Q48",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q48-2f3f0637e (reviewer sub-agent of L); spot-checked: I read the full 8-step proof of the item; the delivery has no new nodes and leaves the statement and stmt_deps unchanged. I recomputed every step against the statements of the cited nodes and found no error. Steps 1-2: the (f,g) normalization of lem-weil-pbc-ringed-topoi-derived-pushforward-composition states that g_*j is a quasi-isomorphism, so w=k∘g_*j is one too. Step 3: the K-injective Hom bijection, used with source T and then source B, gives the unique class u with Qu=Qw(Qt)^{-1} and ut≃w. Step 4: E_t is exactly c_t of lem-sf-kinjective-derived-map-computation. Step 5: the (gf,h) normalization with resolution t has target coordinate e_{h,T}R_h(Qt·v)=m, giving mκ_{h,gf}s^{-1}=Q(h_*t). Step 6: the map computation applied to Qp with resolutions t,k gives exactly the class u, so dαs^{-1}=Q(h_*u)Q(h_*t). Step 7: the (f,hg) and (g,h) normalizations plus naturality of κ_{h,g} along a give dβs^{-1}=Q(h_*k)Q(h_*g_*j), with the same s and d as the first path. Step 8: changing t cancels in the α product, and d'd^{-1} is the canonical transition Q(h_*z) obtained from b'b^{-1}. Edge cases checked: I=0, identity morphisms, t=w, and Z→F_p, where only I,J,K,T are used as K-injective, never f_*I or g_*J. Route: the unit sk-lem-sf-mate uses sk-def-sf-operations; the composition node (sk-thm-properbasechange) is a declared generic tool, and I accept all three declared tool_uses. Sources: Stacks Tag 0D6E (sites-cohomology.tex:4010-4030) proves only Rg_*Rf_*=R(gf)_*, so the formulas are the agent's own extraction, as proof_origin says; the blueprint ancestor is fix-prop-adjunctions Step 3, which needs the composition comparison to be associative. No SGA is used. No duplicate exists in the DAG; lem-sf-normalized-derived-comparison-common-resolution and lem-weil-pbc-derived-leray-composition state different things. There is no cycle: the item's dependency closure (230 nodes) excludes the parent cocycle node. One harmless inaccuracy: the report mentions citations.json and searches.jsonl, but neither file is in the commit."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RingedTripleResolutionFormulas",
+  "declaration": "CategoryTheory.ringedTripleResolution_formulas",
+  "file": "lean/Sheaf/CategoryTheory/RingedTripleResolutionFormulas.lean",
+  "statement": "theorem ringedTripleResolution_formulas (I : CochainComplex (ringedSiteModules.{u, u, u, u} ((sheafCompose J0 (forget₂ CommRingCat.{u} RingCat.{u})).obj A0)) ℤ) [I.IsKInjective] (J : CochainComplex (ringedSiteModules.{u, u, u, u} ((sheafCompose J1 (forget₂ CommRingCat.{u} RingCat.{u})).obj A1)) ℤ) [J.IsKInjective] (K T : CochainComplex (ringedSiteModules.{u, u, u, u} ((sheafCompose J2 (forget₂ CommRingCat.{u} RingCat.{u})).obj A2)) ℤ) [K.IsKInjective] [T.IsKInjective] (j : (f.modules.mapHomologicalComplex (.up ℤ)).obj I ⟶ J) [QuasiIso j] (k : (g.modules.mapHomologicalComplex (.up ℤ)).obj J ⟶ K) [QuasiIso k] (t : ((g.modules.mapHomologicalComplex (.up ℤ)).obj ((f.modules.mapHomologicalComplex (.up ℤ)).obj I)) ⟶ T) [QuasiIso t] : Functor.HasTripleResolutionFormulas f.modules g.modules h.modules Rf Rg Rh Rgf Rhg Rhgf ηf ηg ηh ηgf ηhg ηhgf κgf κhg κh_gf κhg_f I J K T j k t",
+  "branch": "newtargets-dag",
+  "by": "O3",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "All site, ring, morphism, total-derived-pair and normalized-comparison parameters are explicitly bound in the section context. The unit normalization is the characterization in the recorded pair-composition theorem. Unfold Functor.HasTripleResolutionFormulas, the real-data predicate packaging this same node’s conclusion, to read the quasi-isomorphisms, unique homotopy class, seven canonically specified coordinate isomorphisms, four component formulas, both full paths, and both kinds of resolution transition. Factoring the predicate over additive functors avoids repeatedly elaborating concrete sheaf-module categories; it changes no hypothesis or conclusion.",
+  "declarations": [
+   "CategoryTheory.Functor.HasTripleResolutionFormulas",
+   "CategoryTheory.ringedTripleResolution_formulas"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-01933aac7",
+  "group": "O3",
+  "result": "pass",
+  "note": "Only the lean field changed; lean.statement matches the file verbatim; single sorry; item not dropped and not yet landed. Hypotheses: hκ* are verbatim the unit characterization in ringedToposDerivedPushforwardComposition, which pins each κ uniquely; composites use f.modules ⋙ g.modules like the dependency; universes Type u / CommRingCat.{u} match the dependency, w free; only I,J,K,T assumed K-injective, no preservation assumption. Checked: u equations via kInjectiveResolutionHomTarget and kInjectiveHomotopyImage; the 7 coordinates a,v,b,s,m,r,d against proof step 4 in ≫ order (exist because all units used are at K-injective objects); 4 factor formulas and the α/β paths in common s,d coordinates; t-change and simultaneous j,k-change transitions computed by hand equal the canonical ones. Predicate body is an explicit conjunction, no hollow clause. Edge cases I=0, empty sites, zero rings, identities, unbounded covered. Advisories: u uniqueness taken from the Qh equation alone (stronger than the node, true via the K-injective Hom bijection); three proof-only imports. No file changed, so no compile."
  }
 }

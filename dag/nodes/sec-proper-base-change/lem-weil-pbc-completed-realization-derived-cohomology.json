@@ -211,5 +211,31 @@
   "group": "NW",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-6d8c54808 (reviewer sub-agent of L); spot-checked: I read the whole delivery: no new nodes, and the item's statement, stmt_deps and blueprint are unchanged from side-live. The item is not on the drop list, has no re-split note, and its live node is still unsplit. Steps checked: step 1 (lem-weil-pbc-finite-type-constant-exact is for all modules on a small site; Stacks 093J line 8198; 03CY). Step 2 (flatness from lem-weil-pbc-completed-constant-sheaf-reduction clause 1, which matches Stacks 093M lemma-completion-flat, line 8261: only Λ Noetherian, any site). Step 3 (exact-functor-derived-factorization; derived.tex 015F parts (3)-(4) and 014X). Step 4 (cohomology comparison via 010N, inverted and composed with H^q(φ_K)^{-1}, then descended by localization-universal-property(2); both functors invert quasi-isomorphisms). Step 5 (elementary: σ composed with φ_{M[0]}, with τ the identity). Edge cases checked: M=0; r negative, zero and positive; unbounded P; I=0; empty T. One fault, repaired: step 2 uses γ^{-1} but never shows γ is invertible. I added that γ is the limit of the levelwise isomorphisms A̲/I^n≅(A/I^n)_T given by the last clause of the already-cited completed-constant-sheaf-reduction (every A/I^n is finite by the adic datum). I also made explicit that an additive functor preserving short exact sequences preserves finite limits and colimits (Homology 010N(4)), which step 3's hypothesis needs. The corrected item is under fixes/dag/nodes/sec-proper-base-change/. Advisory: the exactness clause overlaps the existing lem-weil-pbc-completed-constant-algebra-flat-quotients and the parallel lem-sfb-admissible-scalar-realization-exact; the derived and cohomology clauses are new. No tool_uses.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompletedRealizationDerivedCohomology",
+  "declaration": "AlgebraicGeometry.Scheme.integralConstantRealization_exact_derived",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.integralConstantDerived_commShift",
+   "AlgebraicGeometry.Scheme.integralRealizationFactors",
+   "AlgebraicGeometry.Scheme.integralRealizationHomologyIso",
+   "AlgebraicGeometry.Scheme.integralRealizationShiftedModuleIso",
+   "AlgebraicGeometry.Scheme.integralConstantRealization_exact_derived"
+  ],
+  "file": "lean/Sheaf/Paper/CompletedRealizationDerivedCohomology.lean",
+  "statement": "theorem integralConstantRealization_exact_derived (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) : (integralConstantModule T d).Additive ∧ PreservesFiniteLimits (integralConstantModule T d) ∧ PreservesFiniteColimits (integralConstantModule T d) ∧ (integralConstantDerived T d).IsTriangulated ∧ NatTrans.CommShift (integralRealizationFactors T d).hom ℤ",
+  "branch": "sheaf-dag",
+  "by": "Q28",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Exactness and triangulated descent are stated by the main theorem; the same module constructs the normalized localization, homology and shifted-module natural isomorphisms as real data using the recorded realization and canonical exact-functor interfaces."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0935d4578",
+  "group": "Q28",
+  "result": "pass",
+  "note": "Re-delivery after H13 RETURN of b3477c2d3d69. def-weil-derived-cohomology-sheaves.json is now byte-identical to side-live, so N5's record is kept. Of the 11 snapshot node records, only the item node differs from live, and only in its new lean record. The item module is byte-identical to the previous head. Report has Worker report, Second reading by Q28 and Return repair sections; the dependency-module paragraph is removed. Item and its 10 stmt_deps are not on the drop list and there is no repair note. Independent clause-by-clause H3 check passes: integralConstantModule is completedKoszulConstant then pbcRestrict along gamma inverse; integralConstantDerived is mapDerivedCategory on the standard derived category; the homology comparison is mapDerivedCategoryHomologyFunctorIso, a functor iso for all q in the node's orientation; the shifted comparison is commShiftIso r composed with mapDerivedCategorySingleFunctor 0, for all r and all M. No hollow defs, only the theorem has sorry, docstrings carry source and blueprint, lean.statement is verbatim. Advisory: every conjunct follows from landed or Mathlib results; some imports are proof-only. No compile, since no file changed."
  }
 }

@@ -66,16 +66,18 @@
   "summary": "Definition checked against its blueprint source (order 413) and against the Lean of slopmaster2 (WeilConjectures/Compactification/Defs.lean:61 `Compactification`, Refinement.lean:51 `Compactification.Refinement`, :113 `Compactification.category`, all without sorry). The mathematical content is unchanged; citations were made precise: the collective node def-weil-scheme-morphism-properties was replaced by the nodes it names for the notions used (finite type, separated/proper, open immersion), and def-pc-scheme, def-weil-scheme-over-base (S-schemes, S- and Y-morphisms) were added. Two parenthetical clarifications were added: the S-structure of the compactifying scheme is the one through Y, and the Y-structure of each compactifying scheme is through its proper map. The claim that compactifications and refinements form a category is a statement, split off as lem-nagata-refinements-form-category (identities and composites of refinements are refinements; unsplit); the notion of category is the new Mathlib leaf def-nagata-category (CategoryTheory.Category). The Lean refinement asks u ∘ j_1 = j_2 and u over Y, exactly as this node; properness of u is a derived instance there, and no cartesian square is required (cartesianness is a theorem for dense sources, RefinementPullback.lean). The clause imposing the geometric hypotheses on S is kept as in the source, though it constrains nothing in the definition."
  },
  "lean": {
-  "module": "WeilConjectures.Compactification.Refinement",
+  "module": "WeilConjectures.Compactification.RefinementCategory",
   "declaration": "AlgebraicGeometry.Compactification.Refinement",
-  "branch": "slopmaster2",
-  "line": 48,
   "declarations": [
    "AlgebraicGeometry.Compactification.Refinement",
    "AlgebraicGeometry.Compactification.category"
   ],
-  "sorry_free": true,
-  "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+  "statement": "structure Refinement (c d : Compactification f)",
+  "branch": "slopmaster2",
+  "by": "Q52",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Section 1(B): the previous module Compactification.Refinement defines the different OverRefinement construction, not the recorded Refinement/category declarations. These existing declarations are in Compactification.RefinementCategory. Its Refinement has the ambient hom, i_hom and hom_g fields, with automatic properness, exactly the node's notion. Only the declaration attachment is repaired."
  },
  "reviewed": {
   "date": "2026-10-09",
@@ -83,5 +85,13 @@
   "result": "pass"
  },
  "chapter": "sec-nagata-compactification",
- "unit": "sk-prop-nagata-sketch-comp-category"
+ "unit": "sk-prop-nagata-sketch-comp-category",
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6cc4c19ea",
+  "group": "Q52",
+  "result": "pass",
+  "note": "Re-delivery after RETURN d3438d3454a7; both findings repaired. H2/H12: dropped theorem stmt_deps prop-finite-compact-support-constructibility and cor-exc-base-change-open-immersion-general; finiteLevelCompactSupport inlined as its exact sfIntrinsicCompactSupport body (pure unfolding, checked by line diff); comparison owned via def-sf-intrinsic-compact-support-realization, HasProEtaleTorAmplitude via def-weil-proetale-tor-amplitude (CoefficientProEtaleTorAmplitude imported). H2/H13: def-weil-finite-tor-amplitude byte-identical to live NW record. def-weil-compactifications-refinements lean-only RefinementCategory rebind kept (accepted). Only item and that dep differ from side-live; all 13 stmt_deps are def nodes, no cycle, none dropped. H3 clause table, edge cases (X empty, n=1, d=0, a=b, f=id, extra components, nonreduced) and universes ok; statement verbatim; single sorry; helpers non-hollow; docstrings ok. No compile (no change). Advisory: sfIntrinsicDerivedEquivalence has no node record (pre-existing); redundant ∃ α binder."
+ }
 }

@@ -23,7 +23,8 @@
   "def-pc-kflat-complex",
   "lem-pc-kflat-resolution",
   "def-weil-inverse-image-pullback-comparison",
-  "lem-weil-strict-roos-comparison"
+  "lem-weil-strict-roos-comparison",
+  "def-trf-integral-comparison-realization-models"
  ],
  "proof": [
   {
@@ -266,5 +267,31 @@
   "group": "Q84",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q84-56868694d (reviewer sub-agent of L); spot-checked: I read the whole item. The statement and stmt_deps are unchanged from base and from live/side-live, where the node is still unsplit. The item is not in the route-pivot dropped list, has no repair note, adds no new nodes and has no cycle back to itself. Each step checks out. Step 1: the Δ ⊣ lim adjunction follows from the sectionwise limit (def-pur-sheaf-inverse-limit), and Δ is exact because exactness in Tow is levelwise. Step 2: in Stacks 0FND/0DVC (derived.tex l.9517/9570) and lem-pc-pre-derived-adjoint-functors-general the roles are reversed: their A=Tow, B=Mod, F=lim, G=Δ. LΔ=Δ because Δ preserves quasi-isomorphisms. RF is defined with value lim J by lem-weil-pbc-ringed-strict-tower-homotopy-limit, which is Stacks 0941 (sites-cohomology l.5067). Step 3: the fraction formula with s=j, t=id, f=id gives a_h(id)=e_J, so e(id)=[j]^{-1}[e_J]=ε_T. Functoriality with l=Δ(m) gives Φ. Taking s=j' gives independence of the resolution. Step 4: the data quoted from def-weil-inverse-image-pullback-comparison(b) are faithful (θ_m, θ̃(z)=(0,θz), g^{-1}(q) a quasi-isomorphism, κ=[θ̃][g^{-1}q]^{-1}). The Roos exact-product hypothesis holds for the completed R_X by lem-weil-proetale-countable-products-exact. Step 5: C(j)θ̃=i_J a holds coordinatewise. With ρ_C=[i_J]^{-1}[C(j)] this gives ρ_C[θ̃]=[a] and ε_CΔ[a]=[θ^Δ], an equality of whole tower morphisms. Step 6: precomposing with Δ[g^{-1}q]^{-1} and using the bijection at H=g^{-1}K gives uniqueness. Edge cases checked: K=0, a constant tower, g=id (gives the completion map) and unbounded H. Duplicate search: lem-coef-derived-system-evaluation-calculus is a different adjunction (reduction ⊣ L_W on semilinear systems); lem-coef-constant-tower-roos and the other candidates state other things. No duplicate found. I accept all five declared tool_uses: ringed tower R lim, termwise homotopy adjunction, pre-derived adjunction, pro-étale countable products, strict Roos comparison. Each is a generic black box with no in-unit replacement. No SGA citation. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.IntegralComparisonCounitCharacterization",
+  "declaration": "AlgebraicGeometry.ProEtale.integralComparisonCounitCharacterization",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.integralComparisonLimitCounitCharacterization",
+   "AlgebraicGeometry.ProEtale.integralComparisonPullbackStrictTower",
+   "AlgebraicGeometry.ProEtale.integralComparisonThetaStrictTower",
+   "AlgebraicGeometry.ProEtale.integralComparisonPullbackLimitIso",
+   "AlgebraicGeometry.ProEtale.integralComparisonCounitCharacterization"
+  ],
+  "file": "lean/Sheaf/TraceFormula/IntegralComparisonCounitCharacterization.lean",
+  "statement": "theorem integralComparisonCounitCharacterization {S T : AlgebraicGeometry.Scheme.{u}} (h : S ⟶ T) [IsIso h] (hS : ∀ x : S, IsUnit (l : S.presheaf.stalk x)) (hT : ∀ y : T, IsUnit (l : T.presheaf.stalk y)) (ρ : IntegralComparisonRoosModel l E S) (K : CochainComplex (integralTowerModules l E T) ℤ) (_hK : sfIntegralConstructible l E T (DerivedCategory.Q.obj K)) (P : (integralOperationsGoodComplex l E T).FullSubcategory) (q : P.obj ⟶ K) [QuasiIso q] : (∀ f : (inverseImageIntegralDerived l E h).obj (DerivedCategory.Q.obj K) ⟶ (integralDerivedPullback l E h).obj (DerivedCategory.Q.obj K), ((integralComparisonConstantTower l E S).map (f ≫ (integralComparisonPullbackLimitIso l E h ρ K P q).hom) ≫ (integralComparisonTowerCounit l E S).app (DerivedCategory.Q.obj (integralComparisonPullbackStrictTower l E h P.obj)) = (integralComparisonConstantTower l E S).map ((inverseImageIntegralModules l E h).mapDerivedCategoryFactors.hom.app K ≫ inv (DerivedCategory.Q.map (((inverseImageIntegralModules l E h).mapHomologicalComplex (.up ℤ)).map q))) ≫ (Functor.const ℕᵒᵖ : integralTowerModules l E S ⥤ ℕᵒᵖ ⥤ integralTowerModules l E S).mapDerivedCategoryFactors.hom.app (((inverseImageIntegralModules l E h).mapHomologicalComplex (.up ℤ)).obj P.obj) ≫ DerivedCategory.Q.map (integralComparisonThetaStrictTower l E h P.obj)) ↔ f = inverseImagePullbackComparison l E h hS hT K P q) ∧ (inverseImagePullbackComparison l E h hS hT K P q ≫ (integralComparisonPullbackLimitIso l E h ρ K P q).hom = (inverseImageIntegralModules l E h).mapDerivedCategoryFactors.hom.app K ≫ inv (DerivedCategory.Q.map (((inverseImageIntegralModules l E h).mapHomologicalComplex (.up ℤ)).map q)) ≫ DerivedCategory.Q.map (inverseImageRoosComparisonComplex l E h P.obj) ≫ (ρ.comparison.app (integralComparisonPullbackStrictTower l E h P.obj)).inv)",
+  "branch": "newtargets-dag",
+  "by": "Q116",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Two statement clauses: the unbounded Hom bijection/naturality/every-resolution counit formula, and the unique whole-tower adjunct of the specified integral comparison. Three real-data helpers package the actual strict pullback tower, its theta family, and the normalized Roos identification. Existing derived adjunction, counit and Roos model are reused."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b79439575",
+  "group": "Q116",
+  "result": "pass",
+  "note": "Lean matches the node clause by clause. Theorem 1: Φ bijective for all H and derived T, natural in arbitrary derived a,b, and the counit equals [j]^{-1}[Δlim J→J] for every K-injective j with injective terms, which gives resolution independence. Theorem 2: for all f, the whole-tower adjunct equation holds iff f = the recorded inverseImagePullbackComparison K P q, using the actual pullback tower, the strict θ family from inverseImageReductionTheta_compatible, and a ρ uniquely pinned by its computes field (existence via strictRoosComparison; same pattern already landed). The cone-lift clause is near-definitional and acceptable as the node's 'in particular'. The only stmt_deps change adds landed def-trf-integral-comparison-realization-models; its closure does not reach the item. lean.statement is verbatim; all 5 declarations have source/blueprint docstrings; only two sorry theorems; the common universe is inherited from sfIntegralConstructible; no existing duplicate found. Not recompiled per instruction; worker reports a clean compile. Advisory: unused proof-dep imports."
  }
 }

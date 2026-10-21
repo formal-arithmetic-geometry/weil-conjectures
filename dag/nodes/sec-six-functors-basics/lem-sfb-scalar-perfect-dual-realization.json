@@ -17,7 +17,10 @@
   "def-weil-pbc-strict-perfect-coefficient-package",
   "def-pur-hom-complex",
   "def-pur-derived-internal-hom",
-  "def-pur-sheaf-hom"
+  "def-pur-sheaf-hom",
+  "def-weil-pbc-constant-coefficient-scalar-extension",
+  "def-sc-module-total-hom-complex",
+  "def-sc-signed-sheaf-dual-complex"
  ],
  "proof": [
   {
@@ -388,5 +391,50 @@
   "group": "Q28",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-84952a657 (reviewer sub-agent of L); spot-checked: Statement is byte-identical to the live base. The only stmt_dep added is def-pur-sheaf-hom, which the statement uses as Hom_B. 0 new nodes, no repair note, item not dropped. The only citer (lem-sfb-internal-hom-dual-constructible-models) uses the unchanged statement. Step 1: the projective lifting clause gives a section i of p:R^N→V, and the dual-generator identities v=Σλ_j(v)v_j and φ=Σφ(v_j)λ_j check. Step 2: C_B(R^N)=B^N holds already at presheaf level, so C_B(V) is a retract of B^N with no flatness used. Step 3: lem-sfb-ringed-site-finite-retract-dual-exact (same unit) gives exact internal Hom on every short exact sequence. Steps 4–5: β is extended via product-preserving sheafification, and I recomputed βγ(h)=h and γβ(b⊗φ)=b⊗φ. Step 6: with B[0], d(f)^{-q-1}=-(-1)^q f^{-q}d^{-q-1} matches the stated signed differential, and the [-b,-a] bounds hold. Step 7: lem-pc-bounded-exact-term-hom-quasi-iso allows arbitrary targets, so it covers every K-injective resolution. This tool use is accepted: it is a generic black box, already recorded in tool_uses of lem-sfb-ringed-site-strict-perfect-hom in this unit, and that node gives only the fixed augmentation. The route matches Stacks 08JH/08JJ and main-20261015 det-thm-sf-ctf-stability-internal-hom paragraph 2; no SGA. Candidates checked and not duplicates: strict-perfect-hom, lem-pc-finite-projective-internal-hom-evaluation (B⊗E^∨ over one ring sheaf, not the change of rings), lem-pod-coefficient-dual-perfect, lem-sf-etale-finite-projective-pullback-hom. Edge cases checked: V=0, R=0, Z→2→Z sign, non-flat B=Z/2, non-free projective V, unbounded I. review_split's 'no such node' lines are a symlink-loader artefact: all cited nodes resolve with find -L."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ScalarPerfectDualRealization",
+  "declaration": "CategoryTheory.ScalarPerfectDual.scalarPerfectDualRealization",
+  "declarations": [
+   "CategoryTheory.ScalarPerfectDual.Modules",
+   "CategoryTheory.ScalarPerfectDual.realize",
+   "CategoryTheory.ScalarPerfectDual.realizeMap",
+   "CategoryTheory.ScalarPerfectDual.realizeMap_laws",
+   "CategoryTheory.ScalarPerfectDual.realization",
+   "CategoryTheory.ScalarPerfectDual.realization_additive",
+   "CategoryTheory.ScalarPerfectDual.complexRealization",
+   "CategoryTheory.ScalarPerfectDual.scalar",
+   "CategoryTheory.ScalarPerfectDual.constantElement",
+   "CategoryTheory.ScalarPerfectDual.tensorElement",
+   "CategoryTheory.ScalarPerfectDual.dual",
+   "CategoryTheory.ScalarPerfectDual.dual_coordinates",
+   "CategoryTheory.ScalarPerfectDual.evaluation_existsUnique",
+   "CategoryTheory.ScalarPerfectDual.evaluation",
+   "CategoryTheory.ScalarPerfectDual.evaluation_natural_isIso",
+   "CategoryTheory.ScalarPerfectDual.coordinates",
+   "CategoryTheory.ScalarPerfectDual.unitComplex",
+   "CategoryTheory.ScalarPerfectDual.scalarPerfectDualRealization",
+   "CategoryTheory.ScalarPerfectDual.comparison_existsUnique",
+   "CategoryTheory.ScalarPerfectDual.comparison",
+   "CategoryTheory.ScalarPerfectDual.comparison_natural",
+   "CategoryTheory.ScalarPerfectDual.ordinary_comparison",
+   "CategoryTheory.ScalarPerfectDual.dual_bounds",
+   "CategoryTheory.ScalarPerfectDual.derived_comparison_natural"
+  ],
+  "file": "lean/Sheaf/Paper/ScalarPerfectDualRealization.lean",
+  "statement": "theorem scalarPerfectDualRealization (F : CochainComplex (ModuleCat.{u} R) ℤ) (P : ModuleCat.StrictPerfectCoefficientPackage F) (a b : ℤ) (hbounded : ∀ q : ℤ, q < a ∨ b < q → IsZero (F.X q)) : Nonempty (SheafOfModules.StrictPerfectCoefficientPackage ((sheafCompose J (forget₂ CommRingCat RingCat)).obj B) ((complexRealization J R B α).obj F)) ∧ (∀ (q : ℤ) (S : ShortComplex (Modules J B)), S.ShortExact → ∃ hz : SheafOfModules.homObjMap (R := B) (𝟙 (((complexRealization J R B α).obj F).X q)) S.f ≫ SheafOfModules.homObjMap (R := B) (𝟙 (((complexRealization J R B α).obj F).X q)) S.g = 0, (ShortComplex.mk (SheafOfModules.homObjMap (R := B) (𝟙 (((complexRealization J R B α).obj F).X q)) S.f) (SheafOfModules.homObjMap (R := B) (𝟙 (((complexRealization J R B α).obj F).X q)) S.g) hz).ShortExact) ∧ ∀ (I : CochainComplex (Modules J B) ℤ) (ι : unitComplex J B ⟶ I), QuasiIso ι → I.IsKInjective → QuasiIso (((homComplexFunctor (R := B)).obj (op ((complexRealization J R B α).obj F))).map ι)",
+  "branch": "newtargets-dag",
+  "by": "Q17",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The listed declarations jointly state every clause: actual ordinary scalar realization and generator evaluation, signed scalar Hom coordinates, finite-free retracts and internal-Hom exactness, every K-injective comparison, uniquely normalized signed cochain comparison and its product-Hom presentation, naturality, reversed bounds, and the natural derived Hom isomorphism. Definitions have real data; every theorem proof is sorry."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a0d428cfb",
+  "group": "Q17",
+  "result": "pass",
+  "note": "Read the node, all 13 stmt_deps, the module and the report (Worker report and Second reading by Q17 present). Records: the item changes only in lean and in stmt_deps, which gain 3 landed def nodes (allowed, each used). The statement is verbatim and all 24 declarations exist. Clause check: R CommRing; C : Type u small with no extra hypotheses; α from the constant sheaf to B with no flatness. C_B = changeOfRings α ∘ constantCoefficientModule, i.e. sheafified extendScalars of the constant module, which is B⊗M. The dual is moduleHomComplex F R[0]; dual_coordinates pins τ by evaluation at (-q,0), and the sign -(-1)^q dualMap d was checked against Mathlib δ_v. β is an ∃! fixed by bb'φ(v) on the sheafification-unit pure tensors at the slice identity; it is natural and IsIso exactly under Finite+Projective. The main theorem states: Nonempty sheaf finite-free package; internal homObjMap exact on every ShortExact; quasi-iso for every K-injective resolution, unbounded I allowed. κ is an ∃! iso to signedSheafDualComplex with components pinned by HEq over definitionally equal types (no cross-type pin). comparison_natural and dual_bounds [-b,-a] are stated for both complexes. Edge cases checked: V=0, rank 0, F=0, a>b, R=0, non-flat α, unbounded I, empty site. No hollow defs, all proofs sorry, docstrings carry the source and blueprint id. No compile run (no file changed). Advisory: (1) derived_comparison_natural is an existential natural family not pinned to κ; accepted because κ and the every-resolution quasi-iso are pinned, homComplex_to_single_iso and the derivedInternalHomOfUniverses comparisons are Nonempty only, and the only citer (internal-hom-dual-constructible-models) uses existence only. (2) ordinary_comparison is Nonempty, consistent with the library. (3) An unused proof-plan import of BoundedExactTermHomQuasiIso, as in other landed modules. (4) The citer's separate u+1 scalarDual is the citer's concern."
  }
 }

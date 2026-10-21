@@ -17,7 +17,10 @@
   "def-kun-dimension",
   "def-nagata-dense-refinement",
   "def-weil-finite-torsion-constructibility",
-  "def-weil-finite-tor-amplitude"
+  "def-weil-finite-tor-amplitude",
+  "def-sf-refinement-comparison-isomorphism",
+  "def-sf-intrinsic-compact-support-realization",
+  "def-weil-proetale-tor-amplitude"
  ],
  "proof": [
   {
@@ -287,5 +290,29 @@
   "group": "Q159",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q159-19548fdb7 (reviewer sub-agent of L); spot-checked: I read every step and every cited statement in full. This is an ordinary one-level split of a fresh Q61 child; there is no repair note for this item. The statement, stmt_deps and blueprint fields are byte-identical to live. There are no new nodes, and the item and its cites are not in route-pivot-dropped. The 7 steps carry the parent's preserved Original Steps 3–5 (Q61 report lines 89–112) completely: old 3 → new 1–4, old 4 → new 5, old 5 → new 6–7. Checks: (1) lemma-nagata-open-immersion-qc-over-separated-target on X→X̄_0→Y, with p_0 proper ⇒ separated ⇒ quasi-separated, gives j_0 quasi-compact. (2) Dense(c_0) via def-/prop-nagata-dense-refinement is a compactification of f; it lies in the Weil Comp(f) trivially (open immersion plus proper Y-morphism). lemma-nagata-immersion-open-in-scheme-image gives topological density. (3) X̄ finite type over k, elementary on affine charts. (4) lem-kun-dimension-extension, dense-open clause: dim X̄ = dim X ≤ d. def-kun-dimension equals the def-kun-topological-krull-dimension used by the corollary. (5) lem-trf-open-ctf is in the right setting (F̄_q, pro-étale, A_{E,n}). cor-sf-direct-image-ctf-proetale applies to intrinsic input with no origin needed and gives [a,b+2d]. (6) lem-sf-proetale-constructible-origin(ii) gives an étale-origin witness; prop-compactification-coherence-detailed then gives an iso Rp_*j_! ≅ Rf^{c_0}_! on that domain (K_0 = k, ℓ ≠ p). (7) Transport across the iso, using the all-module test of def-weil-finite-tor-amplitude; uniform in n and c_0. Edge cases checked: X empty; A¹→pt gives A_n[−2] in [0,2]; f = id; X̄_0 with extra high-dimensional components; nonreduced X. Separatedness of X and Y is never used. No duplicate: thm-sf-ctf-stability(iv) gives no interval and assumes separated schemes; the cor-sf-*, prop-finite-compact-support-constructibility and lem-fd-* nodes are étale, cohomological-range or unspecified-N results. split_report.tool_uses are accepted as generic tools; prop-compactification-coherence-detailed is on the route (sk-def-sf-operations). proof_deps equals the union of the step uses, and 6 dated searches were added. No SGA is cited and no fixes were made."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteCompactSupportUniformTor",
+  "declaration": "AlgebraicGeometry.ProEtale.finiteCompactSupport_uniformTor_after_denseRefinement",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.compactSupportDenseRefinementArrow",
+   "AlgebraicGeometry.ProEtale.finiteCompactSupportDenseComparison",
+   "AlgebraicGeometry.ProEtale.finiteCompactSupport_uniformTor_after_denseRefinement"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteCompactSupportUniformTor.lean",
+  "statement": "theorem finiteCompactSupport_uniformTor_after_denseRefinement (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] {X Y : Scheme.{u}} [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))] (f : X ⟶ Y) [f.IsOver (Spec (.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (c₀ : Compactification f) (d : ℕ) (_hd : topologicalKrullDim X ≤ (d : WithBot ℕ∞)) : LocallyOfFiniteType (c₀.denseRefinement.g ≫ (Y ↘ Spec (.of D.k))) ∧ QuasiCompact (c₀.denseRefinement.g ≫ (Y ↘ Spec (.of D.k))) ∧ DenseRange c₀.denseRefinement.i ∧ topologicalKrullDim c₀.denseRefinement.Z = topologicalKrullDim X ∧ topologicalKrullDim c₀.denseRefinement.Z ≤ (d : WithBot ℕ∞) ∧ ∀ (n : ℕ) (hn : 1 ≤ n) (a b : ℤ) (_hab : a ≤ b) (L : proEtaleDerivedCategory X (Padic.coefficientExtensionRing l E n)) (_hL : intrinsicFiniteTorsionConstructible l E n hn X L) (_hTor : HasProEtaleTorAmplitude X (Padic.coefficientExtensionRing l E n) L a b), intrinsicFiniteTorsionConstructible l E n hn Y ((@sfIntrinsicCompactSupport X Y f c₀.denseRefinement (Padic.coefficientExtensionRing l E n) _ (Padic.finite_coefficientExtensionRing l E n hn)).obj L) ∧ HasProEtaleTorAmplitude Y (Padic.coefficientExtensionRing l E n) ((@sfIntrinsicCompactSupport X Y f c₀.denseRefinement (Padic.coefficientExtensionRing l E n) _ (Padic.finite_coefficientExtensionRing l E n hn)).obj L) a (b + 2 * (d : ℤ)) ∧ intrinsicFiniteTorsionConstructible l E n hn Y ((@sfIntrinsicCompactSupport X Y f c₀ (Padic.coefficientExtensionRing l E n) _ (Padic.finite_coefficientExtensionRing l E n hn)).obj L) ∧ HasProEtaleTorAmplitude Y (Padic.coefficientExtensionRing l E n) ((@sfIntrinsicCompactSupport X Y f c₀ (Padic.coefficientExtensionRing l E n) _ (Padic.finite_coefficientExtensionRing l E n hn)).obj L) a (b + 2 * (d : ℤ)) ∧ ∃ (O : RefinementFiniteLevelOrigin l E n hn X) (w : (@sfIntrinsicDerivedEquivalence X (Padic.coefficientExtensionRing l E n) _ (Padic.finite_coefficientExtensionRing l E n hn)).functor.obj (refinementFiniteLevelFixedObject l E n hn X O) ≅ L) (α : (@sfIntrinsicCompactSupport X Y f c₀.denseRefinement (Padic.coefficientExtensionRing l E n) _ (Padic.finite_coefficientExtensionRing l E n hn)).obj L ≅ (@sfIntrinsicCompactSupport X Y f c₀ (Padic.coefficientExtensionRing l E n) _ (Padic.finite_coefficientExtensionRing l E n hn)).obj L), α = finiteCompactSupportDenseComparison l E n hn c₀ L O w",
+  "branch": "newtargets-dag",
+  "by": "Q52",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The specified denseRefinement is used before the quantification over n. The comparison is the existing proper-composition/proper-open refinement comparison transported through the section-normalized intrinsic realization at an existentially supplied etale-origin witness. Both output objects use the recorded intrinsic bounded constructibility and ordered Tor amplitude."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6cc4c19ea",
+  "group": "Q52",
+  "result": "pass",
+  "note": "Re-delivery after RETURN d3438d3454a7; both findings repaired. H2/H12: dropped theorem stmt_deps prop-finite-compact-support-constructibility and cor-exc-base-change-open-immersion-general; finiteLevelCompactSupport inlined as its exact sfIntrinsicCompactSupport body (pure unfolding, checked by line diff); comparison owned via def-sf-intrinsic-compact-support-realization, HasProEtaleTorAmplitude via def-weil-proetale-tor-amplitude (CoefficientProEtaleTorAmplitude imported). H2/H13: def-weil-finite-tor-amplitude byte-identical to live NW record. def-weil-compactifications-refinements lean-only RefinementCategory rebind kept (accepted). Only item and that dep differ from side-live; all 13 stmt_deps are def nodes, no cycle, none dropped. H3 clause table, edge cases (X empty, n=1, d=0, a=b, f=id, extra components, nonreduced) and universes ok; statement verbatim; single sorry; helpers non-hollow; docstrings ok. No compile (no change). Advisory: sfIntrinsicDerivedEquivalence has no node record (pre-existing); redundant ∃ α binder."
  }
 }

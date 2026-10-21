@@ -282,5 +282,37 @@
   "group": "NV",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-fa6f3cead (reviewer sub-agent of L); spot-checked: The mathematics is correct; one citation is missing in step 6. I read the item and all 8 steps in full against every cited statement and against Tate §3 pp.156–157 and §4 p.157. Tate proves the case of O_X and divisor twists, with completed local fields and abelian sheaves. The item proves the finite-locally-free case with uncompleted quotients and module sheaves, and its proof is correctly marked agent-written. The statement is unchanged from base and there are no new nodes. The proof checks: step 1 gets injectivity of the generic-germ map from the trivializations and clause 2 of the integral-scheme leaf. Step 2 gets finite pole sets and shows every non-generic point is closed via uniqueness of generic points. Step 3 turns the locally finite support given by the coproduct lemma into globally finite support by quasi-compactness of opens, and both sheaves are flasque. Steps 4–5 prove the kernel by gluing (overlaps contain η) and stalkwise surjectivity, and an abelian epi is a module epi because the forgetful functor is faithful. Step 6 uses module flasque acyclicity, which is about the same module cohomology as pqf-def-cohomology. Step 7 gives naturality through a morphism of the short exact sequences and the δ-functor clause. Step 8 identifies the differential stalks with Ω_{O_x/k} and Ω_{K/k} by the localization node at A∖p and at A∖0. Small cases: rank 0, a DVR spectrum, A¹ (H¹=0 by partial fractions) and an imperfect k all agree with the statement. There is no duplicate: the closest nodes are regular-curve-divisor-calculus, the étale G_m divisor sequence and generic-kummer-residues, and none states this sequence for finite locally free modules. There is no cycle, no SGA citation, and live/side-live still have the item unsplit. The off-unit tool_uses are generic and I accept them. FIX (C1/C4): step 6 used H^0 = Γ, i.e. R^0Γ ≅ Γ, which pqf-def-cohomology does not state. I added lem-weil-pbc-right-derived-universal-delta-functor (R^0v ≅ v) to step 6's text and uses; it was already in proof_deps and tool_uses. Advisory: the unchanged base statement uses i_{x,*} and the direct sum without citing a definition, but step 3 defines both explicitly.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Curve.VectorBundlePrincipalParts",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.finiteLocallyFree_principalParts_resolution",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.vectorBundleToGeneric",
+   "AlgebraicGeometry.Scheme.Modules.vectorBundleGenericMap",
+   "AlgebraicGeometry.Scheme.Modules.vectorBundleModuleH0Iso",
+   "AlgebraicGeometry.Scheme.Modules.vectorBundleGenericStalkModule",
+   "AlgebraicGeometry.Scheme.Modules.vectorBundleGenericStalkTower",
+   "AlgebraicGeometry.Scheme.Modules.finiteLocallyFree_generic_germs",
+   "AlgebraicGeometry.Scheme.Modules.vectorBundle_generic_generates",
+   "AlgebraicGeometry.Scheme.Modules.finiteLocallyFree_principalParts_resolution",
+   "AlgebraicGeometry.Scheme.Modules.finiteLocallyFree_principalParts_cohomology",
+   "AlgebraicGeometry.Scheme.Modules.finiteLocallyFree_principalParts_naturality",
+   "AlgebraicGeometry.Scheme.Modules.finiteLocallyFree_principalParts_differentials"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/VectorBundlePrincipalParts.lean",
+  "statement": "theorem finiteLocallyFree_principalParts_resolution (E : X.Modules) [E.IsFiniteLocallyFree] : (residueShortComplex k (vectorBundleToGeneric E)).ShortExact ∧ TopCat.Presheaf.IsFlasque (skyscraper (genericPoint X) (E.presheaf.stalk (genericPoint X))).presheaf ∧ TopCat.Presheaf.IsFlasque (principalParts k (vectorBundleToGeneric E)).presheaf ∧ (∀ v : E.presheaf.stalk (genericPoint X), {x : closedPoints X | v ∉ stalkLattice k (vectorBundleToGeneric E) x.1}.Finite) ∧ ∃ e : ∀ U : X.Opens, Γ(principalParts k (vectorBundleToGeneric E), U) ≃+ Π₀ x : {x : closedPoints X // x.1 ∈ U}, E.presheaf.stalk (genericPoint X) ⧸ stalkLattice k (vectorBundleToGeneric E) x.1.1, (∀ (U : X.Opens) (s : Γ(principalParts k (vectorBundleToGeneric E), U)) (x : {x : closedPoints X // x.1 ∈ U}), e U s x = PrincipalParts.val (vectorBundleToGeneric E) s ⟨x.1.1, x.2⟩) ∧ ∀ (U W : X.Opens) (h : W ≤ U) (s : Γ(principalParts k (vectorBundleToGeneric E), U)) (x : {x : closedPoints X // x.1 ∈ W}), e W ((principalParts k (vectorBundleToGeneric E)).presheaf.map (homOfLE h).op s) x = e U s ⟨x.1, h x.2⟩",
+  "branch": "newtargets-dag",
+  "by": "Q14",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "All clauses are carried together by the listed declarations: actual generic-stalk embedding and stalk image, exact flasque principal-parts sequence with finite-support sections on every open, finite pole sets, derived module H0/H1 and connecting-map normalization, naturality for all finite locally free morphisms, and smooth differential specialization. Helpers construct canonical maps and restriction-of-scalars data; no auxiliary objects are chosen from existence."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fdf4fdf74",
+  "group": "Q14",
+  "result": "pass",
+  "note": "Only change: new module VectorBundlePrincipalParts and the item's lean record; statement, stmt_deps and proof unchanged; lean.statement verbatim; all 11 declarations present; item not dropped. Hypotheses match the node exactly (IsIntegral, scheme IsNoetherian, IsRegular, topologicalKrullDim = 1, X.Over Spec k, IsFiniteLocallyFree with varying rank); the Algebra k K instance is pinned by IsFunctionFieldAlgebra, so no extra assumption. E → j_*V is toSkyscraper id (generic germ); exactness via residueShortComplex.ShortExact; principal parts identified with Π₀ over closed x of V/E_x on every open, coordinates pinned to PrincipalParts.val, restrictions discard coordinates; both sheaves flasque; finite poles. H0 ≃ ⨅ stalk lattices, pinned through rightDerivedZeroIsoSelf; H1 ≃ cokernel, pinned to rightDerivedδ of the sequence (determined because globalPrincipalParts is bijective). Naturality at sheaf and cohomology level, with coordinate formulas. Smooth case: K-linear equiv to Ω[K/k] pinned to differentialsToGeneric; lattice images equal the range of KaehlerDifferential.map from localSubalgebra. Upstream ResidueSequence, AdelicH1, AdelicStructureSheaf, AdelicDifferentials, Regular, Connecting and the four dependency records read. No hollow definitions, only sorry proofs, docstrings carry source, blueprint tag and steps 1-8; report sections present; no duplicate found. Edge cases rank 0, empty open, DVR, A1, imperfect k fine. No compile run (nothing changed). Advisories: global Module k instance on generic stalks; author header."
  }
 }

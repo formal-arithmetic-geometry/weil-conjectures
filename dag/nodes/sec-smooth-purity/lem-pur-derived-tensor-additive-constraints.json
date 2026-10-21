@@ -264,5 +264,51 @@
   "group": "Q74",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q74-219a49ee1 (reviewer sub-agent of L); spot-checked: I read the item, its 8 steps and every cited statement in full. Shape: first split with no new nodes. Statement, stmt_deps, source, created and unit are unchanged. proof_deps equals the union of the step uses. No repair note, nothing dropped, no cycle (only citer is the parent shifted-tensor-morphism-calculus), no SGA. Source: Stacks sites-cohomology.tex:13136 (0FPT) gives the proof as 'Omitted', so proof_origin=agent is correct. Step 1: finite sums are countable sums padded with zeros; P[0] is bounded-above flat, hence in P; T(P[0],Q[0])=(P⊗Q)[0]. Step 2: L=q|_P is the localization P->W^{-1}P followed by the descent equivalence. product-localization gives L^J for finite J, which covers the ternary case the binary descent clause lacks. Fullness comes from universal-property (2) with phi=id, faithfulness from (3). Steps 3-5: I recomputed by hand that (-1)^{bp} is a chain map T(E[a],F[b])->T(E,F)[a+b]; both components match. The ends of t_{a,b}, A_R q(alpha) A_L^{-1} and sigma are correct, and a=b=0 reduces to the identity. Step 7: exact functors are additive by the text of def-weil-triangulated-category. The node gives exact functors identified with QA⊗^L-, and conjugating by 1⊗u carries additivity to any H on arbitrary derived maps. Step 8 is an elementary biproduct argument. Advisory: lem-sf-ringed-derived-closed-symmetric-monoidal overlaps in asserting symmetric monoidality, but it lacks the r-normalized uniqueness, t_{a,b}, J-variable full faithfulness and additivity, so it is not a duplicate. Tool_uses (site-derived-tensor-descent, kflat-fixed-tensor-triangulated, kflat-closure, kflat-total-tensor-model) are generic module-sheaf homological algebra and are accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.DerivedTensorAdditiveConstraints",
+  "declaration": "SheafOfModules.DerivedTensorConstraints.existsUnique_derived_tensor_constraints",
+  "declarations": [
+   "SheafOfModules.DerivedTensorConstraints.Modules",
+   "SheafOfModules.DerivedTensorConstraints.Complex",
+   "SheafOfModules.DerivedTensorConstraints.resolvingComplex",
+   "SheafOfModules.DerivedTensorConstraints.Model",
+   "SheafOfModules.DerivedTensorConstraints.resolvingHomotopy",
+   "SheafOfModules.DerivedTensorConstraints.D",
+   "SheafOfModules.DerivedTensorConstraints.tensor",
+   "SheafOfModules.DerivedTensorConstraints.localization",
+   "SheafOfModules.DerivedTensorConstraints.totalModel",
+   "SheafOfModules.DerivedTensorConstraints.shiftModel",
+   "SheafOfModules.DerivedTensorConstraints.representative",
+   "SheafOfModules.DerivedTensorConstraints.chainShift",
+   "SheafOfModules.DerivedTensorConstraints.shiftedSource",
+   "SheafOfModules.DerivedTensorConstraints.shiftedTarget",
+   "SheafOfModules.DerivedTensorConstraints.leftAssociated",
+   "SheafOfModules.DerivedTensorConstraints.rightAssociated",
+   "SheafOfModules.DerivedTensorConstraints.swapped",
+   "SheafOfModules.DerivedTensorConstraints.shiftRepresentative",
+   "SheafOfModules.DerivedTensorConstraints.leftRepresentative",
+   "SheafOfModules.DerivedTensorConstraints.rightRepresentative",
+   "SheafOfModules.DerivedTensorConstraints.IsNormalized",
+   "SheafOfModules.DerivedTensorConstraints.derived_tensor_model_closure",
+   "SheafOfModules.DerivedTensorConstraints.existsUnique_derived_tensor_constraints",
+   "SheafOfModules.DerivedTensorConstraints.derived_tensor_restriction_fully_faithful",
+   "SheafOfModules.DerivedTensorConstraints.derived_tensor_additive"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/DerivedTensorAdditiveConstraints.lean",
+  "statement": "theorem existsUnique_derived_tensor_constraints : ∃! s : (∀ a b : ℤ, shiftedSource R a b ≅ shiftedTarget R a b) × (leftAssociated R ≅ rightAssociated R) × (tensor R ≅ swapped R), IsNormalized R s.1 s.2.1 s.2.2",
+  "branch": "newtargets-dag",
+  "by": "Q104",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Four sorry-only statements jointly render every clause: resolving model closure and normalized degree-zero comparison; unique derived natural shift, reassociation and Koszul-symmetry constraints; full faithfulness and equality detection for every finite product of resolving homotopy localizations; separate additivity, actual biproduct diagram preservation and both map-add identities. Helper definitions reuse the published tensor, its actual representativeIso, Mathlib signed shifts, chain associator and upstream Koszul braiding. All site, coefficient, localization, finite-index and target-category universes remain independent."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-81dd4fa58",
+  "group": "Q104",
+  "result": "pass",
+  "note": "Read node, all 9 stmt_dep records, module, report and dependency declarations (KFlatFixedTensor representativeIso/derivedTensor/kFlat_fixed_tensor_triangulated, siteDerivedTensorIndependentCoefficients, upstream braiding, Mathlib BifunctorShift and associator). Every clause matches: EssentiallySmall.{r} ringed site in CommRingCat with independent universes; P = recorded K-flat plus termwise flat; tensor and r are the published ones, not new choices; closure under tensor, every shift and Fin n sums including n=0; flat P[0] in P; P⊗Q flat with unsigned degree-zero chain iso c pinned and derived iso = r^-1 then Q(c); chainShift sign (-1)^(bp) from mapBifunctorShift₂Iso's (n₁*y).negOnePow, shift₁ and shiftFunctorAdd unsigned; shiftRepresentative equals the step-5 formula factor by factor; alpha = A_L^-1 then Q(unsigned associator) then A_R; sigma uses braiding with (-1)^(pq); ∃! over natural isos; restriction fully faithful for any Finite I (empty included) and any category; additivity, bilimit preservation and both map-add identities with no boundedness or flatness. Only the item lean field changed, statement verbatim, no stmt_deps added; theorem-module defs are .choose-built; plain imports are proof-dep modules; docstrings and line lengths OK; no duplicate found. Not recompiled (no file changed). Advisory: the ∃ d = r^-1 then Q(c) clause is tautological (content is c); full faithfulness is stated on Pi categories I→D, so prod-shaped uses need transport."
  }
 }

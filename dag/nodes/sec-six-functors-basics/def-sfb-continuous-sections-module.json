@@ -1,0 +1,110 @@
+{
+ "id": "def-sfb-continuous-sections-module",
+ "kind": "definition",
+ "title": "Continuous sections of a topological algebra as condensed module objects",
+ "status": "split",
+ "statement": "Let $A$ and $T$ be commutative topological rings in a common universe and let $T$ be an $A$-algebra with continuous scalar multiplication, so the structural unital ring homomorphism $a:A\\to T$ is continuous. Use the continuous-function condensed rings $\\underline A(S)=C(S,A)$ and $\\underline T(S)=C(S,T)$ on the coherent site of profinite sets [sk-def-sfb-condensed-ring]. Define the continuous-section $\\underline A$-module object [sk-def-sfb-module-objects] to be restriction of the regular $\\underline T$-module along the postcomposition ring-object morphism $a_*:\\underline A\\to\\underline T$ [def-sfb-continuous-map-condensed-ring-map]. Its sections are $C(S,T)$, restrictions are precomposition, and the action is pointwise: $(b\\cdot f)(s)=a(b(s))f(s)$.",
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-module-objects",
+  "def-sfb-continuous-map-condensed-ring-map"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
+  "place": "Finite free and finitely presented coefficient extensions: exactness of the condensed finite free resolution of a finite O_E-algebra"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "continuous functions on profinite sets as a module object over continuous functions into the scalar ring",
+   "results": "{\"t\": \"2026-10-21T09:07:08Z\", \"tool\": \"leansearch\", \"query\": \"continuous functions on profinite sets as a module object over continuous functions into the scalar ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ContinuousMap.module'\", \"BoundedContinuousFunction.instModule'\", \"TopCat.continuousFunctions\", \"TopModuleCat.freeObj\", \"ContinuousMap.module.congr_simp\", \"instIsModuleTopology\", \"ContinuousMap.module\", \"TopModuleCat.toModuleCat\"], \"digest\": \"8b016703cd0144f7\"}",
+   "date": "2026-10-21",
+   "verdict": "The exact existing project construction is used below; the Mathlib hits do not provide this specialized named constructor."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "continuous sections of a topological algebra as condensed module objects with pointwise scalar action by restriction of scalars",
+   "results": "{\"t\": \"2026-10-21T09:07:09Z\", \"tool\": \"leanfinder\", \"query\": \"continuous sections of a topological algebra as condensed module objects with pointwise scalar action by restriction of scalars\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CondensedMod\", \"LightCondMod\", \"CondensedMod.LocallyConstant.functor\", \"CondensedMod.ofSheafCompHaus\", \"CondensedMod.LocallyConstant.functorToPresheaves\", \"Condensed.free\", \"Condensed.profiniteFree\", \"LightCondMod.LocallyConstant.functor\"], \"digest\": \"7cb9cad515892851\"}",
+   "date": "2026-10-21",
+   "verdict": "The exact existing project construction is used below; the Mathlib hits do not provide this specialized named constructor."
+  },
+  {
+   "tool": "grep",
+   "query": "continuousSectionsModule|def comap|def regular",
+   "results": "{\"t\": \"2026-10-21T09:07:07Z\", \"tool\": \"grep\", \"query\": \"continuousSectionsModule|def comap|def regular\", \"sub\": \"CategoryTheory/Monoidal\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Bimod.lean\", \"Mathlib/CategoryTheory/Monoidal/Mod.lean\", \"Mathlib/CategoryTheory/Monoidal/Mod.lean\"], \"digest\": \"fb2e2de7d4f09f38\"}",
+   "date": "2026-10-21",
+   "verdict": "The exact existing project construction is used below; the Mathlib hits do not provide this specialized named constructor."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n continuousSectionsModule lean/WeilConjectures lean/Sheaf; rg -l continuousSectionsModule dag/nodes",
+   "results": "No occurrence in lean/WeilConjectures; lean/Sheaf/Topology/ProfiniteSectionsFiniteQuotient.lean:45 defines continuousSectionsModule using Mod.comap and Mod.regular. The only DAG hit is theorem node lem-pe-profinite-sections-finite-quotient, not a definition node owning the constructor.",
+   "date": "2026-10-21",
+   "verdict": "Exact existing Sheaf definition found; no definition node carries it. Register that definition without copying it."
+  },
+  {
+   "tool": "blueprint_refs.py search",
+   "query": "continuous sections",
+   "results": "Two blueprint hits: det-lem-coefficient-finite-descent-lisse, det-thm-sf-pf-field-tensor; neither owns the continuous-section module construction.",
+   "date": "2026-10-21",
+   "verdict": "No existing definition node for this specialized constructor."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-integral-condensed-resolution",
+  "date": "2026-10-21",
+  "group": "Q107"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-scalar-six-direct-image",
+   "place": "Finite free and finitely presented coefficient extensions: the continuous-function condensed modules in the finite free resolution",
+   "via": [
+    "lem-sfb-finite-integral-condensed-resolution"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-scalar-six",
+ "lean": {
+  "module": "Sheaf.Topology.ProfiniteSectionsFiniteQuotient",
+  "declaration": "Profinite.continuousSectionsModule",
+  "statement": "noncomputable def continuousSectionsModule\n    (A T : Type u) [CommRing A] [CommRing T]\n    [TopologicalSpace A] [TopologicalSpace T]\n    [IsTopologicalRing A] [IsTopologicalRing T]\n    [Algebra A T] [ContinuousSMul A T] :\n    Mod (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n      (continuousCoefficientRingObj A)",
+  "branch": "newtargets-dag",
+  "by": "Q107",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Registers the existing real-data definition in the unchanged published module. No use of the theorem conclusion in that module is required."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-81eeb6a34",
+  "group": "Q107",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-81eeb6a34",
+  "group": "Q107",
+  "result": "pass",
+  "note": "Re-delivery of the 10dcaeb5 H2/H13 RETURN. Item Lean byte-identical (sha256 3db16005); item record differs from live only in lean + stmt_deps (two theorem nodes replaced by new existing:true def nodes def-sfb-coefficient-extension-integers-topology (Padic.coefficientExtensionIntegersTopology, TopologicalSpace.induced via spectralNorm, IntegersProfiniteTower:63) and def-sfb-continuous-sections-module (Profinite.continuousSectionsModule, Mod.comap of regular along continuousMapRingSheafMapOfUniverse, ProfiniteSectionsFiniteQuotient:45)); node statements match bodies; body owners in stmt_deps (def-weil-l-adic-coefficient-extension, def-sfb-continuous-map-condensed-ring-map, sk-def-sfb-condensed-ring, sk-def-sfb-module-objects); check_existing/check_new_node no failures (noncomputable note only); no ownership collision or cycle; item lean.statement verbatim; prior clause-by-clause and edge-case verdict (A=0/r=0, empty S, ramified E) still applies; both report sections present. No compile (no file changed). Advisory: later citers of these decls should cite the new def nodes."
+ }
+}

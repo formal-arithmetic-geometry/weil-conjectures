@@ -1,0 +1,108 @@
+{
+ "id": "def-sfb-coefficient-extension-integers-topology",
+ "kind": "definition",
+ "title": "Valuation topology on the integers of a finite p-adic coefficient extension",
+ "status": "split",
+ "statement": "Fix a prime $\\ell$ and a finite extension $E/\\mathbf Q_\\ell$, with its extending absolute value $|\\cdot|_E$ and ring of integers $O=\\mathcal O_E$ [def-weil-l-adic-coefficient-extension]. Define the valuation topology on $O$ to be the topology induced by the inclusion $O\\hookrightarrow E$, where $E$ has the metric topology of $|\\cdot|_E$.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
+  "place": "Finite free and finitely presented coefficient extensions: exactness of the condensed finite free resolution of a finite O_E-algebra"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "topology on the ring of integers of a finite extension of p adic numbers induced by the spectral norm",
+   "results": "{\"t\": \"2026-10-21T09:07:08Z\", \"tool\": \"leansearch\", \"query\": \"topology on the ring of integers of a finite extension of p adic numbers induced by the spectral norm\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.adicTopology\", \"IsNonarchimedeanLocalField.instCompleteSpaceSubtypeMemSubringIntegerValueGroupWithZeroValuation\", \"PadicInt\", \"PadicInt.compactSpace\", \"PadicInt.subring\", \"PadicInt.instNormedCommRing\", \"PadicInt.instNorm\", \"PadicInt.norm_def\"], \"digest\": \"f32fbd005ae5b2f6\"}",
+   "date": "2026-10-21",
+   "verdict": "The exact existing project construction is used below; the Mathlib hits do not provide this specialized named constructor."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "ring of integers of a finite p-adic extension with topology induced from its spectral norm",
+   "results": "{\"t\": \"2026-10-21T09:07:09Z\", \"tool\": \"leanfinder\", \"query\": \"ring of integers of a finite p-adic extension with topology induced from its spectral norm\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PadicComplexInt.integers\", \"PadicInt.instNormedCommRing\", \"PadicAlgCl\", \"PadicInt\", \"PadicComplexInt\", \"PadicAlgCl.normedField\", \"PadicComplex\", \"PadicInt.completeSpace\"], \"digest\": \"349fd4acb5b1ae5d\"}",
+   "date": "2026-10-21",
+   "verdict": "The exact existing project construction is used below; the Mathlib hits do not provide this specialized named constructor."
+  },
+  {
+   "tool": "grep",
+   "query": "coefficientExtensionIntegersTopology|spectralNorm.*[Tt]opolog",
+   "results": "{\"t\": \"2026-10-21T09:07:07Z\", \"tool\": \"grep\", \"query\": \"coefficientExtensionIntegersTopology|spectralNorm.*[Tt]opolog\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "The exact existing project construction is used below; the Mathlib hits do not provide this specialized named constructor."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n coefficientExtensionIntegersTopology lean/WeilConjectures lean/Sheaf; rg -l coefficientExtensionIntegersTopology dag/nodes",
+   "results": "No occurrence in lean/WeilConjectures; lean/Sheaf/NumberTheory/Padics/IntegersProfiniteTower.lean:63 defines coefficientExtensionIntegersTopology with spectralNorm.normedField and TopologicalSpace.induced. DAG hits are theorem nodes lem-sfb-integers-profinite-tower and lem-sfb-continuous-integral-pivot-splitting, not a definition node owning this topology.",
+   "date": "2026-10-21",
+   "verdict": "Exact existing Sheaf definition found; no definition node carries it. Register that definition without copying it."
+  },
+  {
+   "tool": "blueprint_refs.py search",
+   "query": "valuation topology",
+   "results": "Three blueprint hits: lem-wf-additive-characters-h1, pur713-def-coefficient-rings, pur713-def-qbar-ring; none owns this topology construction.",
+   "date": "2026-10-21",
+   "verdict": "No existing definition node for this specialized constructor."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-integral-condensed-resolution",
+  "date": "2026-10-21",
+  "group": "Q107"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-scalar-six-direct-image",
+   "place": "Finite free and finitely presented coefficient extensions: the valuation topology on O_E",
+   "via": [
+    "lem-sfb-finite-integral-condensed-resolution"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-scalar-six",
+ "lean": {
+  "module": "Sheaf.NumberTheory.Padics.IntegersProfiniteTower",
+  "declaration": "Padic.coefficientExtensionIntegersTopology",
+  "statement": "noncomputable def coefficientExtensionIntegersTopology (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] :\n    TopologicalSpace (coefficientExtensionIntegers l E)",
+  "branch": "newtargets-dag",
+  "by": "Q107",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Registers the existing real-data definition in the unchanged published module. No use of the theorem conclusion in that module is required."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-81eeb6a34",
+  "group": "Q107",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-81eeb6a34",
+  "group": "Q107",
+  "result": "pass",
+  "note": "Re-delivery of the 10dcaeb5 H2/H13 RETURN. Item Lean byte-identical (sha256 3db16005); item record differs from live only in lean + stmt_deps (two theorem nodes replaced by new existing:true def nodes def-sfb-coefficient-extension-integers-topology (Padic.coefficientExtensionIntegersTopology, TopologicalSpace.induced via spectralNorm, IntegersProfiniteTower:63) and def-sfb-continuous-sections-module (Profinite.continuousSectionsModule, Mod.comap of regular along continuousMapRingSheafMapOfUniverse, ProfiniteSectionsFiniteQuotient:45)); node statements match bodies; body owners in stmt_deps (def-weil-l-adic-coefficient-extension, def-sfb-continuous-map-condensed-ring-map, sk-def-sfb-condensed-ring, sk-def-sfb-module-objects); check_existing/check_new_node no failures (noncomputable note only); no ownership collision or cycle; item lean.statement verbatim; prior clause-by-clause and edge-case verdict (A=0/r=0, empty S, ramified E) still applies; both report sections present. No compile (no file changed). Advisory: later citers of these decls should cite the new def nodes."
+ }
+}

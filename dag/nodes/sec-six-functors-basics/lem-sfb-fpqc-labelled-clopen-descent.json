@@ -237,5 +237,23 @@
   "group": "Q158",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q158-dfb9a2cca (reviewer sub-agent of L); spot-checked: Read the whole item, all six cited statements, Stacks descent.tex 03N0 (lemma-open-fpqc-covering, l.4101) and topologies.tex 022D(3) (lemma-fpqc, l.3105), and the main-20261015 rank proof of sk-lem-stratified-lattice. There are no new nodes. The statement is true and unchanged, and it exactly serves the parent's use: det-lem-stratified-lattice-rank step 2 applies it with A=N, ρ_i≡n_i and the test clause σ≡s. Step 1: the compatible labels give equal pullbacks of W_{i,a}=ρ_i^{-1}(a) on U_i×_XU_j, so the 03N0 node gives Z_a. Step 2 is elementary: joint surjectivity comes from def-weil-pbc-fpqc-covering, and it gives exactly one label per point, the complement of Z_a as a union of the other pieces (so Z_a is closed), uniqueness and the A=∅ case. Step 3: 022D(3) (lem-galois-fpqc-covering-base-change, a Mathlib leaf) applies after swapping the fibre-product factors, so the q_V are jointly surjective. Step 4 is elementary: h(v)=f_i(q_i w), then a chain of equivalences ending in the test compatibility, and continuity of h gives clopenness. Edge cases checked: I, A, V, U_i empty; A a singleton; I and A infinite; X not quasi-compact. There is no duplicate in the DAG: the fpqc-detects-openness, etale-open and open-subscheme descent nodes and the profinite factorization node each state something else. The off-unit tool use of lem-weil-pbc-open-subscheme-fpqc-descent (from sk-thm-iff) is accepted, because the unit's own text names fpqc descent of opens as a black box. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FpqcLabelledClopenDescent",
+  "declaration": "AlgebraicGeometry.labelledClopenPartition_existsUnique_of_fpqc",
+  "file": "lean/Sheaf/AlgebraicGeometry/FpqcLabelledClopenDescent.lean",
+  "statement": "theorem labelledClopenPartition_existsUnique_of_fpqc {X : Scheme.{u}} {I : Type v} {A : Type w} {U : I → Scheme.{u}} (f : ∀ i, U i ⟶ X) (hf : Presieve.ofArrows U f ∈ Scheme.fpqcPrecoverage X) (ρ : ∀ i, U i → A) (hρ : ∀ (i : I) (a : A), IsOpen (ρ i ⁻¹' {a})) (hcompat : ∀ (i j : I), ρ i ∘ pullback.fst (f i) (f j) = ρ j ∘ pullback.snd (f i) (f j)) : ∃! Z : A → X.Opens, (∀ a, IsClosed (Z a : Set X)) ∧ Pairwise (fun a b ↦ Disjoint (Z a) (Z b)) ∧ (⋃ a, (Z a : Set X)) = Set.univ ∧ (∀ (i : I) (a : A), f i ⁻¹' (Z a : Set X) = ρ i ⁻¹' {a}) ∧ ∀ (V : Scheme.{u}) (h : V ⟶ X) (σ : V → A), (∀ i, ρ i ∘ pullback.fst (f i) h = σ ∘ pullback.snd (f i) h) → ∀ a, h ⁻¹' (Z a : Set X) = σ ⁻¹' {a} ∧ IsClopen (σ ⁻¹' {a})",
+  "branch": "sheaf-dag",
+  "by": "Q127",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ea8957578",
+  "group": "Q127",
+  "result": "pass",
+  "note": "Read the item node (only the lean field changed vs side-live), the 4 stmt_dep records, the proof-dep module openSubscheme_existsUnique_of_fpqc (same universes and covering condition), the Stacks 03N0/022D(3) source places and the module. Every clause matches: arbitrary I and A, open label fibres only, fibre-product compatibility, Z : A → X.Opens closed, pairwise disjoint and exhaustive with prescribed preimages, test clause with arbitrary σ plus clopen fibres. The Lean ∃! also requires the test clause, but the node's uniqueness follows from the statement via V=X, h=𝟙. Edge cases (A or I empty, empty schemes, infinite families, non-quasi-compact X) are covered with no extra instances. The statement field matches the file verbatim; the docstrings have the source, blueprint tag and 4 proof steps; the only plain import is the proof-dep module; proof is sorry only; no duplicate found. No compile because no file was changed."
  }
 }

@@ -10,7 +10,9 @@
  "stmt_deps": [
   "def-weil-l-adic-coefficient-extension",
   "sk-def-sfb-condensed-ring",
-  "sk-def-sfb-module-objects"
+  "sk-def-sfb-module-objects",
+  "def-sfb-coefficient-extension-integers-topology",
+  "def-sfb-continuous-sections-module"
  ],
  "proof": [
   {
@@ -236,5 +238,29 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q121-7c390cee1 (reviewer sub-agent of L); spot-checked: Read the full mathematics and wrote review.md with checks for all ten steps, cited statements and sources, edge cases, duplicates, cycles, coefficient categories and route restrictions. No repairs needed. Accepted the declared DVR arithmetic tool use; no prohibited trace/duality dependencies or long non-elementary steps."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.NumberTheory.Padics.FiniteIntegralCondensedResolution",
+  "declaration": "Padic.finite_integral_condensed_resolution",
+  "declarations": [
+   "Padic.FiniteIntegralCondensedResolution",
+   "Padic.finiteIntegralIntegersTopologicalRing",
+   "Padic.finite_integral_condensed_resolution"
+  ],
+  "file": "lean/Sheaf/NumberTheory/Padics/FiniteIntegralCondensedResolution.lean",
+  "statement": "theorem finite_integral_condensed_resolution (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (A : Type u) [CommRing A] [Finite A] [TopologicalSpace A] [DiscreteTopology A] (a : coefficientExtensionIntegers l E →+* A) (ha : @Continuous _ _ (coefficientExtensionIntegersTopology l E) inferInstance a) : @FiniteIntegralCondensedResolution (coefficientExtensionIntegers l E) A inferInstance inferInstance (coefficientExtensionIntegersTopology l E) inferInstance (finiteIntegralIntegersTopologicalRing l E) inferInstance a ha",
+  "branch": "newtargets-dag",
+  "by": "Q107",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The transparent conclusion predicate fixes all algebraic, topological, sectionwise and condensed clauses, including a finite-biproduct identification. The instance abbreviation exposes the existing topological-ring instance on the recorded valuation topology. Statement dependencies cite the new existing:true definition nodes owning coefficientExtensionIntegersTopology and continuousSectionsModule, rather than the unrelated theorem conclusions in their unchanged modules. No statement correction or Lean source change."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-81eeb6a34",
+  "group": "Q107",
+  "result": "pass",
+  "note": "Re-delivery of the 10dcaeb5 H2/H13 RETURN. Item Lean byte-identical (sha256 3db16005); item record differs from live only in lean + stmt_deps (two theorem nodes replaced by new existing:true def nodes def-sfb-coefficient-extension-integers-topology (Padic.coefficientExtensionIntegersTopology, TopologicalSpace.induced via spectralNorm, IntegersProfiniteTower:63) and def-sfb-continuous-sections-module (Profinite.continuousSectionsModule, Mod.comap of regular along continuousMapRingSheafMapOfUniverse, ProfiniteSectionsFiniteQuotient:45)); node statements match bodies; body owners in stmt_deps (def-weil-l-adic-coefficient-extension, def-sfb-continuous-map-condensed-ring-map, sk-def-sfb-condensed-ring, sk-def-sfb-module-objects); check_existing/check_new_node no failures (noncomputable note only); no ownership collision or cycle; item lean.statement verbatim; prior clause-by-clause and edge-case verdict (A=0/r=0, empty S, ramified E) still applies; both report sections present. No compile (no file changed). Advisory: later citers of these decls should cite the new def nodes."
+ }
 }

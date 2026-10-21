@@ -414,5 +414,48 @@
   "group": "Q123",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q123-3b3f1720e (reviewer sub-agent of L); spot-checked: Read the whole 0-new-node split: item statement, all 10 steps, every cited statement and the source (main-20261015 orientation-charts proof Step 4, lines 26-31). Statement, stmt_deps, source and blueprint are byte-identical to live; no target weakened. No repair note on this item (it is a Q58 re-split child), so the ordinary split rules apply. Nothing cited is in the dropped list, no SGA, no cycle. Checks: Step 1 gets Noetherian overlaps and qc/finite-type/etale/separated open immersions from the cited lemmas, never assuming affine overlaps (E1). Step 2 gets invertibility of alpha_p by conjugating the unbounded compositor iso Rp_!=F_d (lem-amb-unbounded-compact-support-comparisons, def-weil-pbc-adjunction-conjugate); the A_T-component is the adjunct of t_p. Step 3's Hom chain was checked and its domains are right; the mate identity is supported by the exchange/compositor normalizations in lem-amb-unbounded. Step 4 uses the trace base-change clause for any Noetherian W. Step 5 is a_{g!}=(a_g^-1)^*, and lem-amb-linear-trace-invariance holds for all g, so rho_g^-1 or rho_{g^-1} both work; no determinant. Step 6 applies degree-zero gluing to M=z^*omega[-2d] and P=A(d)[0], hypotheses met, inverses glued. Step 7 is naturality via locality plus mate pasting. Step 8 covers d=0, empty S, A=0 and N=1. Step 10 uses thm-amb-vector-bundle-purity with K=A_S and the local traces from def-amb-vector-integration; the l^r vs N Tate line comparison works via m|m' since char A divides N. FIX (C1/C4): Step 9 used the symmetric composite sigma*PF*sigma that thm-amb-vector-bundle-purity takes from lem-amb-proper-coproducts-projection, but cited neither that node nor lem-kun-tensor-sym. Added both to the uses and proof_deps and named them in the text; at the degree-0 unit the sign is 1 and symmetry followed by the unitor is the other unitor. Advisory: Q58 sibling lem-trf-section-coordinate-counit-normalization contains Step 4's open case; not a duplicate. Off-unit generic tools in split_report.tool_uses accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteRingBundleSectionOrientation",
+  "declaration": "AlgebraicGeometry.Etale.finiteRingBundleSectionOrientation",
+  "declarations": [
+   "AlgebraicGeometry.Etale.bundleSectionAffine",
+   "AlgebraicGeometry.Etale.bundleSectionFiniteType",
+   "AlgebraicGeometry.Etale.bundleSectionNoetherian",
+   "AlgebraicGeometry.Etale.bundleSectionOpenNoetherian",
+   "AlgebraicGeometry.Etale.bundleSectionOmega",
+   "AlgebraicGeometry.Etale.bundleSectionObject",
+   "AlgebraicGeometry.Etale.bundleSectionCoefficientIso",
+   "AlgebraicGeometry.Etale.bundleSectionPullbackSquare",
+   "AlgebraicGeometry.Etale.bundleSectionComparison",
+   "AlgebraicGeometry.Etale.bundleSectionChartZero",
+   "AlgebraicGeometry.Etale.bundleSectionChartComparison",
+   "AlgebraicGeometry.Etale.bundleSectionAffineAdjunct",
+   "AlgebraicGeometry.Etale.bundleSectionChartCoefficient",
+   "AlgebraicGeometry.Etale.BundleSectionOrientationNormalization",
+   "AlgebraicGeometry.Etale.finiteRingBundleSectionOrientation",
+   "AlgebraicGeometry.Etale.finiteRingBundleSectionOrientation_naturality",
+   "AlgebraicGeometry.Etale.bundleSectionRankZeroComparison",
+   "AlgebraicGeometry.Etale.finiteRingBundleSectionOrientation_rankZero",
+   "AlgebraicGeometry.Etale.bundleSectionPurityUnitIso",
+   "AlgebraicGeometry.Etale.bundleSectionPurityUnitMap",
+   "AlgebraicGeometry.Etale.BundleSectionPurityCompatibility",
+   "AlgebraicGeometry.Etale.finiteRingBundleSectionOrientation_valuation"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteRingBundleSectionOrientation.lean",
+  "statement": "theorem finiteRingBundleSectionOrientation (N : ℕ) (hN : 0 < N) (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0) (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ) (M : S.Modules) [M.IsFiniteLocallyFreeOfRank d] : ∃! o : bundleSectionObject A S d M ≅ affineLinearBaseCoefficient A N hA S d, BundleSectionOrientationNormalization N hN A hA S hS d M o",
+  "branch": "newtargets-dag",
+  "by": "Q69",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The four theorem declarations state unique gluing with every affine-frame restriction, preservation under all linear bundle isomorphisms, the rank-zero identity, and identification with inverse valuation-coefficient bundle purity. Helpers are concrete canonical pullback, exchange, adjunction and coefficient composites. The projection inverse is characterized by its inverse being the recorded canonical projection map; no projection assumption, orientation datum or compactification is an additional hypothesis."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-abf3efbc8",
+  "group": "Q69",
+  "result": "pass",
+  "note": "Single new module FiniteRingBundleSectionOrientation; item node changed only in its lean field, no dep records or new nodes. All clauses checked: finite comm ring A with NA=0, N>=1 and Noetherian S with N invertible (no Nontrivial/field/flatness; empty S and A=0 covered); omega = rightDerivedUpperShriek pi at the unit (same adjunction as vectorBundlePurityAdjunction); A(d)[2d] = affineLinearBaseCoefficient. The frame normalization holds for every affine V and module frame e: iota^*(o.inv) composed with the canonical base-change-mate comparison equals the coefficient isos followed by w^*(alpha_p), where alpha_p is the homEquiv adjunct of compactComparison.inv then affineTraceCounit (direction checked) and w is the Cartesian lift of the actual zero section. The forall-t,D quantification follows the VectorIntegrationNormalization convention (pinned data, existence by exists_affineSpaceTopTrace). The exists-unique gives gluing plus overlap and linear-change agreement. Naturality via _hlin (charts to charts, equivalent to linearity). Rank 0: canonical identity via conjugateIsoEquiv of unboundedEtaleLowerShriekId. Valuation: finiteTateCoefficient = O_F/varpi^(n+1); gamma = the VectorBundlePurityAtModulus mate at K=A_S with p.inv pinned to vectorBundlePurityProjectionMap; o.inv = coeffIso.inv then z^*gamma. Docstrings give source place, blueprint and Steps 1-10; no hollow defs; all proofs sorry. Advisories: owner nodes of affineLinear*/ordinaryFinite*/unboundedEtaleLowerShriekId/derivedTensor unitors not in the base-era stmt_deps; plain-def use of theorem stmt_deps; 9 proof-only imports. No compile run (no FIX)."
  }
 }
