@@ -5,6 +5,7 @@ Authors: SHEAF group Q15
 -/
 module
 
+public import Sheaf.Paper.IntegralResidueDerivedMonoidal
 public import Sheaf.Paper.ProfinitePointPullback
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
 public import Mathlib.CategoryTheory.Adjunction.Mates
@@ -23,6 +24,17 @@ set_option autoImplicit false
 
 universe u
 
+attribute [local instance 3000]
+  AlgebraicGeometry.ProEtale.CondensedRing.projectionDerivedMonoidal
+attribute [local instance 4000]
+  AlgebraicGeometry.ProEtale.CondensedRing.projectionModuleAbelian
+  AlgebraicGeometry.ProEtale.CondensedRing.projectionModuleMonoidal
+  AlgebraicGeometry.ProEtale.CondensedRing.projectionModuleHasDerived
+attribute [local instance 5000]
+  AlgebraicGeometry.ProEtale.CondensedRing.projectionSheafMonoidal
+  AlgebraicGeometry.ProEtale.CondensedRing.projectionCoefficientMonObj
+  AlgebraicGeometry.ProEtale.CondensedRing.projectionModuleCategory
+
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 open scoped CategoryTheory.Obj
 
@@ -31,6 +43,7 @@ namespace AlgebraicGeometry.ProEtale
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} (f : X ⟶ Y)
 
+attribute [-instance] CategoryTheory.catToReflQuiver in
 /-- A typed alias of the existing total left derived pullback, keeping its inferred
 K-flat structure fixed when using the tensor comparison. There is no new functor.
 Source: blueprint derived pullback convention; Stacks 07A4
@@ -42,6 +55,7 @@ abbrev moduleDerivedPullback :
           (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :=
   (CondensedRing.upperStar Λ f).leftDerivedFunctor
 
+attribute [-instance] CategoryTheory.catToReflQuiver in
 /-- A typed alias of the existing total right derived direct image, retaining its
 canonical K-injective construction. There is no new functor.
 Source: blueprint derived direct-image convention; Stacks 0B56
@@ -58,6 +72,7 @@ namespace ProjectionSection
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
+attribute [-instance] CategoryTheory.catToReflQuiver in
 /-- The left-ordered projection map is the adjunct of the canonical tensor comparison
 followed by identity tensor the counit. Source: blueprint displayed definition of pi
 (blueprint: def-sfb-module-projection-section-arrows). -/
@@ -75,6 +90,7 @@ def projection {Z B : Scheme.{u}} (f : Z ⟶ B)
         (𝟙 ((moduleDerivedPullback Λ f).obj M) ⊗ₘ
           (CondensedRing.derivedUpperStarLowerStarAdjunction Λ f).counit.app N))
 
+attribute [-instance] CategoryTheory.catToReflQuiver in
 /-- The canonical section pullback comparison, using the published composition and
 identity comparisons. Source: blueprint identification i^* r^* = id
 (blueprint: def-sfb-module-projection-section-arrows). -/
@@ -86,6 +102,7 @@ def pullbackSection {X V : Scheme.{u}} (r : V ⟶ X) (i : X ⟶ V) (h : i ≫ r 
     CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory Λ (𝟙 X) ≪≫
     profinitePointModuleDerivedIdentity Λ X
 
+attribute [-instance] CategoryTheory.catToReflQuiver in
 /-- The direct-image section comparison is the adjunction conjugate of pullbackSection.
 Source: blueprint composition identifications, uniqueness of adjoints
 (blueprint: def-sfb-module-projection-section-arrows). -/

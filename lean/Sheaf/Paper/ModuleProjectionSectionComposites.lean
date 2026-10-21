@@ -21,6 +21,17 @@ set_option autoImplicit false
 
 universe u
 
+attribute [local instance 3000]
+  AlgebraicGeometry.ProEtale.CondensedRing.projectionDerivedMonoidal
+attribute [local instance 4000]
+  AlgebraicGeometry.ProEtale.CondensedRing.projectionModuleAbelian
+  AlgebraicGeometry.ProEtale.CondensedRing.projectionModuleMonoidal
+  AlgebraicGeometry.ProEtale.CondensedRing.projectionModuleHasDerived
+attribute [local instance 5000]
+  AlgebraicGeometry.ProEtale.CondensedRing.projectionSheafMonoidal
+  AlgebraicGeometry.ProEtale.CondensedRing.projectionCoefficientMonObj
+  AlgebraicGeometry.ProEtale.CondensedRing.projectionModuleCategory
+
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 open scoped CategoryTheory.Obj
 
@@ -29,6 +40,7 @@ namespace AlgebraicGeometry.ProEtale.ProjectionSection
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
+attribute [-instance] CategoryTheory.catToReflQuiver in
 /-- Insert all coefficient-unit and composition identifications in the forward composite.
 Source: blueprint displayed identity Rr_*(a_M) pi_r = 1_M
 (blueprint: def-sfb-module-projection-section-composites). -/

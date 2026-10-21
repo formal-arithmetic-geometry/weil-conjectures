@@ -28,40 +28,48 @@
  ],
  "proof": [
   {
-   "text": "Transport to ringed topoi. By [lem-pd-module-ringed-topos-derived-comparison], for each scheme $T$ of the setting the equivalence $E_T$ between $R_T$-module objects on $T_{\\mathrm{pro\\acute et}}$ and sheaves of modules over the section-ring sheaf of $R_T$ (on the small pro-etale site) induces an equivalence of the ordinary unbounded derived categories [sk-def-sfb-module-derived-pushpull]. It identifies the K-flat derived tensors [sk-def-sfb-derived-tensor-hom] and their units, the derived module-object pullback and direct image with ringed-topos $Lh^*$ and $Rh_*$, the derived adjunction [def-sfb-module-derived-pushpull-adjunction] with its unit and counit, the pullback composition comparisons, and the pullback/tensor comparison with the ringed-topos isomorphism of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Hence the item's $\\pi_{h,L,N}$, the adjoint transpose of $(1\\otimes c_{h,N})$ after that comparison, is carried to the ringed-topos projection map of [lem-sfb-ringed-projection-tensor-composition] (up to the tensor symmetry fixed there). The direct-image composition isomorphism is the mate of the pullback composition isomorphism under the adjunctions ([sk-def-sfb-module-pushforward-pullback] deduces one from the other by uniqueness of adjoints), so it is carried to the ringed-topos comparison of [lem-weil-pbc-ringed-topoi-derived-pushforward-composition]. The sites and commutative pulled-back rings come from [sk-def-sfb-dc-setting].\n\nApply [lem-sfb-ringed-projection-tensor-composition], final clause, to the ringed-topos morphisms induced by\n$i:X\\to V$ and $r:V\\to X$, with the section-specialization parameters\n$p=r$, $W=V$, $V$ (in the cited lemma) equal to $R_X$, and $M$ as in this statement.\nThe equality $ri=1_X$ of $k$-morphisms supplies the specified composite\nisomorphism of the induced ringed-topos morphisms. In the cited section specialization, tensor symmetry identifies its first\nprojection arrow with\n$\\pi_{r,M,Ri_*R_X}:M\\otimes Ri_*R_X\\to Rr_*(r^*M\\otimes Ri_*R_X)$, while its second\narrow is $Rr_*$ applied to the $i$-projection map $\\pi_{i,r^*M,R_X}$. After the canonical identification\n$i^*r^*M\\simeq M$ and the unit isomorphism $M\\otimes R_X\\simeq M$, that $i$-projection map is exactly the displayed $a_M$; the canonical\ncomposition $Rr_*Ri_*\\simeq1$ is the same identification used in the cited lemma.\nTherefore its identity composite, conjugated by the unit isomorphism $M\\otimes R_X\\simeq M$, is precisely\n$Rr_*(a_M)\\circ\\pi_{r,M,Ri_*R_X}=1_M$. The inverted form follows by inverting both sides when the projection maps are isomorphisms.",
+   "text": "Work directly in the internal-module derived categories. The ordinary profinite-point identity comparison equals CondensedRing.upperStarId by the uniqueness of its underlying abelian-sheaf map. Deriving this equality identifies the identity factor in pullbackSection with leftDerivedUpperStarId. The published derived identity and composition comparisons at the tensor unit therefore give l(1) = Li^*(eta_r) followed by eta_i, where l is pullbackSection and eta denotes the oplax unit comparison. Naturality of l with the right unitor, and right unitality of the composite strong monoidal pullback, imply its tensor compatibility at (M,1). This uses only the coefficient-unit coherence, not a full monoidal-composition comparison.",
    "uses": [
-    "lem-pd-module-ringed-topos-derived-comparison",
-    "lem-sfb-ringed-projection-tensor-composition",
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "sk-def-sfb-module-pushforward-pullback",
-    "sk-def-sfb-module-derived-pushpull",
-    "def-sfb-module-derived-pushpull-adjunction",
+    "lem-weil-pbc-profinite-point-pullback",
+    "def-sfb-module-projection-section-arrows",
     "sk-def-sfb-derived-tensor-hom",
-    "sk-def-sfb-dc-setting"
+    "new-proetale-derived-module-pullback-monoidal"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-int-restriction/sk-thm-int-restriction-line.proof.md",
-    "place": "(1), diagonal projection identification and the cancellations on p_i Delta = id"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Regard each left-ordered projection as the rightAdjointProjectionMap for the flipped curried tensor. Apply the proved projection-map composition formula to the two derived adjunctions. The pointwise conjugation formula, obtained by transposing both sides and using counit naturality, compares this composite with the identity adjunction using the tensor compatibility at (M,1) established above. The conjugate is exactly pushforwardSection. Its naturality moves the final pullback-section identification through the direct image, and conjugation by the right unitor identifies the resulting equality with forward = identity.",
+   "uses": [
+    "def-sfb-module-derived-pushpull-adjunction",
+    "def-sfb-module-projection-section-arrows",
+    "def-sfb-module-section-projection-arrow",
+    "def-sfb-module-projection-section-composites"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Under the two given invertibility instances, reverse the forward identity: inversion reverses a composite, and functors preserve inverses. The inverse of each canonical section comparison and of the right unitor is its displayed inverse, so the reversed composite is exactly backward. Properness, the closed immersion assumption, and constructibility are unnecessary for this formal equality but remain in the unchanged target statement.",
+   "uses": [
+    "def-sfb-module-projection-section-inverse",
+    "def-sfb-module-projection-section-composites"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pd-module-ringed-topos-derived-comparison",
-  "lem-sfb-ringed-projection-tensor-composition",
-  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "sk-def-sfb-module-pushforward-pullback",
-  "sk-def-sfb-module-derived-pushpull",
-  "def-sfb-module-derived-pushpull-adjunction",
+  "lem-weil-pbc-profinite-point-pullback",
+  "def-sfb-module-projection-section-arrows",
   "sk-def-sfb-derived-tensor-hom",
-  "sk-def-sfb-dc-setting"
+  "new-proetale-derived-module-pullback-monoidal",
+  "def-sfb-module-derived-pushpull-adjunction",
+  "def-sfb-module-section-projection-arrow",
+  "def-sfb-module-projection-section-composites",
+  "def-sfb-module-projection-section-inverse"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-int-restriction/sk-thm-int-restriction-line.proof.md",
-  "place": "(1), diagonal projection identification and the cancellations on p_i Delta = id; specialization of the cited projection-coherence lemma"
+  "place": "Clause (1), diagonal cancellation; direct internal-module adjunction calculation by U6, using canonical unit coherence and the proved projection-map composition formula."
  },
  "mathlib_searches": [
   {
@@ -140,11 +148,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-sfb-ringed-projection-tensor-composition",
-  "lem-pd-module-ringed-topos-derived-comparison",
-  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
@@ -176,5 +180,15 @@
   "existing": false,
   "fixed_by": "NT-stage2-cc-4a7ecfab2"
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-e6482",
+  "group": "U6",
+  "result": "pass",
+  "landing": "20261021T233805-L-863099",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 4 unclaimed support-module instance-selection adaptations against the clone, node new-proetale-derived-module-pullback-monoidal and source-library Derived.Monoidal; 5-file set compiled (exit 0), #print axioms traced"
+ }
 }
