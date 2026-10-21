@@ -9,16 +9,112 @@
  },
  "stmt_deps": [
   "def-weil-sheaf-of-modules-category",
-  "def-weil-abstract-derived-category",
   "def-pur-sheaf-tensor-product",
   "def-pc-tensor-complex-sheaves",
   "def-pc-kflat-complex",
   "def-pc-flat-sheaf-modules",
   "def-pc-sheaf-restrict-scalars"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $U=\\operatorname{Res}_\\varphi$, and let $V_R,V_B$ forget to abelian sheaves. By restriction of scalars, $V_RU=V_B$ on objects and maps. The forgetful-functor node says that both forgetful functors are faithful and preserve kernels, cokernels and all small colimits. They detect zero objects: if $V_RM=0$, faithfulness gives $1_M=0$, and likewise over $B$. Thus they detect exactness, by the kernel/image description of homology. It follows that $U$ is exact and preserves and reflects acyclicity. It also commutes with small direct sums: the underlying direct sum and its $R$-action are the same on both sides, since the action is uniquely determined by its composites with all summand inclusions. These observations use only small diagrams; the diagonals of total tensor below are indexed by subsets of $\\mathbf Z^2$.",
+   "uses": [
+    "def-pc-sheaf-restrict-scalars",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DA (lemma-abelian), 03DB (lemma-limits-colimits); homology.tex Tag 010N"
+   }
+  },
+  {
+   "text": "Let $E(M)=M\\otimes_R B$ with its $B$-module structure. The extension/tensor comparison, and symmetry of sheaf tensor, identify $UE(M)$ with $M\\otimes_R U(B)$. This identification is natural in $M$: for $f:M\\to M'$ the two composites $M\\otimes_R U(B)\\to UE(M')$ agree after composing with the module sheafification unit of the presheaf tensor, because both send the image of a local pure tensor $m\\otimes b$ to the image of $f(m)\\otimes b$ under the scalar-extension unit; a map out of a module sheafification is determined by its composite with the unit. Since $B$ is flat over $R$, the latter functor is exact by the definition of flatness. Applying this to a short exact sequence, and using the exactness detection in Step 1, shows that $E:\\operatorname{Mod}(R)\\to\\operatorname{Mod}(B)$ is exact. In particular, for any acyclic, possibly unbounded $R$-complex $A$, apply the exact-functor cohomology node degree by degree to obtain $H^i(E(A))\\cong E(H^i(A))=0$ for every $i$. Hence $E(A)$ is an acyclic $B$-complex. This is exactness in sheaf modules, not exactness on sections over each object.",
+   "uses": [
+    "lem-weil-pbc-extension-tensor-comparison",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "def-pc-flat-sheaf-modules",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK (section-tensor-product), Tag 03ER (definition-flat), item (3); homology.tex Tag 010N"
+   }
+  },
+  {
+   "text": "For an $R$-module sheaf $M$ and a $B$-module sheaf $N$, the sheaf tensor universal property gives mutually inverse $R$-linear maps $\\beta_{M,N}:M\\otimes_R U(N)\\longrightarrow U((M\\otimes_R B)\\otimes_B N)$ and $\\gamma_{M,N}$, specified on local pure tensors by $m\\otimes n\\mapsto(m\\otimes1)\\otimes n$ and $(m\\otimes b)\\otimes n\\mapsto m\\otimes bn$. Give $M\\otimes_R U(N)$ a $B$-action as follows. The presheaf tensor $Q(V)=M(V)\\otimes_{R(V)}N(V)$ is a presheaf of $B$-modules by $c(m\\otimes n)=m\\otimes cn$ (well defined since $c$ acts $R(V)$-linearly on $N(V)$; compatible with restrictions). By the module-sheafification interface (with the sheaf of rings $B$), its abelian sheafification, which is the underlying abelian sheaf of $M\\otimes_R U(N)$, carries a unique $B$-module structure extending this action, and the unit $Q\\to M\\otimes_R U(N)$ is $B$-linear; restricted along $\\varphi$ it is the given $R$-structure, by the uniqueness of the compatible action map for $R$. The map $\\beta$ composed with this unit is sectionwise $B$-linear, so by the uniqueness of factorization through the unit $\\beta$ is $B$-linear; hence so is $\\beta\\gamma$. For the inverse, $R$-balancing follows from $(rm)\\otimes bn=m\\otimes\\varphi(r)bn$, and $B$-balancing from $m\\otimes(bc)n=m\\otimes b(cn)$. The cited bilinear extension theorem extends these sectionwise pairings through the inner sheafification; the tensor universal property then extends them through the outer tensor. The forward pairing is $R$-balanced by the same relations. Both composites are identities: one fixes $m\\otimes n$, and the other sends $(m\\otimes b)\\otimes n$ to $(m\\otimes1)\\otimes bn=(m\\otimes b)\\otimes n$. Uniqueness in the cited universal properties proves the identities on sheaves and naturality in both $M$ and $N$. No assertion that sections of a sheaf tensor are sectionwise tensors is used.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-pc-sheaf-restrict-scalars",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "lem-pc-sites-module-sheafification-bilinear-extension",
+    "lem-pc-sites-module-sheafification-interface"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK (section-tensor-product), balanced tensor identities and bilinear universal property; Tag 0GMW (lemma-sheafification-tensor)"
+   }
+  },
+  {
+   "text": "Apply $\\beta_{A^p,P^q}$ from Step 3 on every summand $p+q=n$. The direct-sum description of total tensor and Step 1 give an isomorphism of graded $R$-module sheaves $\\operatorname{Tot}(A\\otimes_R U(P))\\cong U(\\operatorname{Tot}(E(A)\\otimes_B P))$. It is an isomorphism of complexes: on the summand indexed by $(p,q)$, both ways around the differential square send $a\\otimes x$ to $(d_Aa\\otimes1)\\otimes x+(-1)^p(a\\otimes1)\\otimes d_Px$. The differential of $E(A)$ is induced by $d_A$, and $B$ is in degree zero. Equality on local pure tensors gives equality on each sheaf tensor by the uniqueness in Step 3, and equality after all summand inclusions gives equality on the direct sum. The inverse from Step 3 commutes with the differential because it is the inverse of this chain map. Only direct sums occur, including when both complexes are unbounded.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK; homology.tex Tag 012Z (definition-associated-simple-complex); sites-cohomology.tex Tag 06YN"
+   }
+  },
+  {
+   "text": "Now take any acyclic $R$-complex $A$. Step 2 makes $E(A)$ acyclic over $B$. By the given K-flatness of $P$ and the definition of K-flatness, $\\operatorname{Tot}(E(A)\\otimes_B P)$ is acyclic over $B$. Exact restriction in Step 1 makes its restriction acyclic over $R$, and the chain isomorphism of Step 4 identifies that restriction with $\\operatorname{Tot}(A\\otimes_R U(P))$. Since $A$ was arbitrary, this is precisely the defining acyclic-tensor test for $U(P)$ to be K-flat over $R$.",
+   "uses": [
+    "def-pc-kflat-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YN (definition-K-flat), applied after scalar extension"
+   }
+  },
+  {
+   "text": "Finally suppose every $P^q$ is flat over $B$. For a short exact sequence of $R$-module sheaves, Step 2 gives a short exact sequence after applying $E$. Tensor it over $B$ with $P^q$, which preserves exactness by the definition of flatness, and then apply the exact functor $U$ of Step 1. Naturality in $M$ of the isomorphism in Step 3 identifies the resulting sequence with the original short exact sequence tensored over $R$ with $U(P^q)$. Thus the functor $-\\otimes_R U(P^q)$ is exact. By the definition of flatness, $U(P^q)$ is flat over $R$ for every $q$. This argument is separate from the K-flat test and does not assume that a K-flat complex has flat terms.",
+   "uses": [
+    "def-pc-flat-sheaf-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03ER (definition-flat), item (3), with the balancing identity of Tag 03EK"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-sheaf-restrict-scalars",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-extension-tensor-comparison",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "def-pc-flat-sheaf-modules",
+  "def-weil-presheaf-modules-sheafification",
+  "def-pur-sheaf-tensor-product",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "lem-pc-sites-module-sheafification-bilinear-extension",
+  "lem-pc-sites-module-sheafification-interface",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-kflat-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DA, 03DB, 03EK, 03ER and 0GMW, combined with sites-cohomology.tex Tag 06YN; the flat-restriction argument is supplied explicitly rather than attributed to Tag 06YY."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,10 +150,52 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Module.Flat.of_flat_tensorProduct\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic\", \"type\": \"∀ (R : Type u) (M : Type v) [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] (S : Type u_1)\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Module.FaithfullyFlat R S] [Module.Flat S (TensorProduct R S M)],\\n  Module.Flat R M\", \"doc\": \"If $ S $ is a faithfully flat $ R $-algebra and the tensor product $ S \\\\otimes_R M $ is a flat $ S $-module, then $ M $ is a flat $ R $-module.\"}\n  {\"name\": \"Module.Flat.iff_flat_tensorProduct\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic\", \"type\": \"∀ (R : Type u) (M : Type v) [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] (S : Type u_1)\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Module.FaithfullyFlat R S],\\n  Module.Flat S (TensorProduct R S M) ↔ Module.Flat R M\", \"doc\": \"Let $ R $ and $ S $ be commutative rings with $ S $ a faithfully flat $ R $-algebra. Then an $ R $-module $ M $ is flat over $ R $ if and only if the tensor product $ S \\\\otimes_R M $ is flat as an $ S\"}\n  {\"name\": \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"module\": \"Mathlib/RingTheory/Flat/CategoryTheory\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R),\\n  Module.Flat R ↑M ↔\\n    ∀ (C : CategoryTheory.ShortComplex (ModuleCat R)),\\n      C.Exact → (C.map (CategoryTheory.MonoidalCategory.tensorRight M)).Exact\", \"doc\": \"A module $ M $ over a commutative ring $ R $ is flat if and only if for every short exact sequence in the category of $ R $-modules, the sequence obtained by tensoring with $ M $ remains exact. In oth\"}\n  {\"name\": \"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"module\": \"Mathlib/RingTheory/Flat/CategoryTheory\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R),\\n  Module.Flat R ↑M ↔\\n    ∀ (C : CategoryTheory.ShortComplex (ModuleCat R)),\\n      C.Exact → (C.map (CategoryTheory.MonoidalCategory.tensorLeft M)).Exact\", \"doc\": \"A module $ M $ over a commutative ring $ R $ is flat if and only if for every exact short complex of $ R $-modules, the induced complex obtained by tensoring with $ M $ remains exact. In symbols, $ M \"}\n  {\"name\": \"Module.Flat.lTensor_shortComplex_exact\", \"module\": \"Mathlib/RingTheory/Flat/CategoryTheory\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R) [Module.Flat R ↑M] (C : CategoryTheory.ShortComplex (ModuleCat R)),\\n  C.Exact → (C.map (CategoryTheory.MonoidalCategory.tensorLeft M)).Exact\", \"doc\": \"For a commutative ring $ R $ and a flat $ R $-module $ M $, if $ C $ is an exact short complex in the category of $ R $-modules, then the tensor product of $ C $ with $ M $ (via left tensoring) result\"}\n  {\"name\": \"Module.Flat.rTensor_shortComplex_exact\", \"module\": \"Mathlib/RingTheory/Flat/CategoryTheory\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R) [Module.Flat R ↑M] (C : CategoryTheory.ShortComplex (ModuleCat R)),\\n  C.Exact → (C.map (CategoryTheory.MonoidalCategory.tensorRight M)).Exact\", \"doc\": \"For a commutative ring $ R $, a flat $ R $-module $ M $, and an exact short complex $ C $ in the category of $ R $-modules, the tensor product of $ C $ with $ M $ results in an exact short complex.\"}\n  {\"name\": \"Module.Flat.iff_rTensor_exact'\", \"module\": \"Mathlib/RingTheory/Flat/Basic\", \"type\": \"∀ {R : Type u} {M : Type v} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] [Small.{v', u} R],\\n  Module.Flat R M ↔\\n    ∀ ⦃N N' N'' : Type v'⦄ [inst_4 : AddCommGroup N] [inst_5 : AddCommGroup N'] [inst_6 : AddCommGroup N'']\\n      [inst_7 : Module R N] [inst_8 : Module R N'] [inst_\", \"doc\": \"A module $ M $ over a commutative semiring $ R $ is flat if and only if, for every exact sequence of $ R $-modules $ N \\\\xrightarrow{f} N' \\\\xrightarrow{g} N'' $, the induced sequence $ N \\\\otimes_R M \\\\x\"}\n  {\"name\": \"Module.Flat.iff_lTensor_exact'\", \"module\": \"Mathlib/RingTheory/Flat/Basic\", \"type\": \"∀ {R : Type u} {M : Type v} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] [Small.{v', u} R],\\n  Module.Flat R M ↔\\n    ∀ ⦃N N' N'' : Type v'⦄ [inst_4 : AddCommGroup N] [inst_5 : AddCommGroup N'] [inst_6 : AddCommGroup N'']\\n      [inst_7 : Module R N] [inst_8 : Module R N'] [inst_\", \"doc\": \"A module $ M $ over a commutative semiring $ R $ is flat if and only if for every exact sequence of $ R $-modules $ N \\\\xrightarrow{f} N' \\\\xrightarrow{g} N'' $, the induced sequence $ N \\\\otimes_R M \\\\xr\"}",
    "date": "2026-10-21",
    "verdict": "no match: the hits concern ordinary modules, presheaf pullback, or underived completion; none states this unbounded ringed-site comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars along a flat sheaf of rings algebra preserves K-flat complexes",
+   "results": "8 hits: Algebra.FormallyUnramified.flat_of_restrictScalars, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, ModuleCat.preservesFiniteLimits_extendScalars_of_flat, Module.Flat.of_shrink, Module.Flat.of_flat_tensorProduct, Module.Flat.isBaseChange, Module.Flat.trans, Module.Flat.iff_rTensor_preserves_shortComplex_exact",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary ring modules and flatness of ordinary scalar extension do not state the arbitrary ring-sheaf K-flat or flat-term assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KFlat\", \"restrict\"",
+   "results": "0 hits",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary ring modules and flatness of ordinary scalar extension do not state the arbitrary ring-sheaf K-flat or flat-term assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "[Kk][Ff]lat.*[Rr]estrict|[Rr]estrict.*[Kk][Ff]lat",
+   "results": "0 hits",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary ring modules and flatness of ordinary scalar extension do not state the arbitrary ring-sheaf K-flat or flat-term assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A K-flat complex over a flat sheaf algebra remains K-flat over the base sheaf of rings",
+   "results": "8 hits: Module.Flat.isBaseChange, Algebra.FormallyUnramified.flat_of_restrictScalars, Module.Flat.rTensor_shortComplex_exact, RingHom.Flat.isStableUnderBaseChange, Module.Flat.of_flat_tensorProduct, Module.flat_iff_of_isLocalization, Module.FaithfullyFlat.instTensorProduct, Module.FaithfullyFlat.toFlat",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary ring modules and flatness of ordinary scalar extension do not state the arbitrary ring-sheaf K-flat or flat-term assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|kFlat|IsFlat|Flat",
+   "results": "0 hits. Subdirectory: Algebra/Category/ModuleCat/Sheaf",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary ring modules and flatness of ordinary scalar extension do not state the arbitrary ring-sheaf K-flat or flat-term assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Acyclic tensor tests for K-flat complexes under restriction along a flat algebra in a ringed topos",
+   "results": "8 hits: Module.Flat.lTensor_shortComplex_exact, Module.Flat.rTensor_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_exact', Module.Flat.iff_rTensor_exact, Module.Flat.iff_lTensor_exact'",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary ring modules and flatness of ordinary scalar extension do not state the arbitrary ring-sheaf K-flat or flat-term assertion."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-pbc-constant-completion-equivalence",
@@ -76,5 +214,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-weil-pbc-flat-scalar-restriction-kflat",
+  "worker": "stage1",
+  "summary": "Preserved both clauses and all hypotheses. Gave the acyclic-test proof using exact scalar extension, explicit balanced sheaf maps and the signed direct-sum total differential; proved the flat-term clause separately. Reused existing sheaf exactness, tensor universal-property, bilinear-extension and cohomology nodes; no new nodes. Removed the unused derived-category statement dependency. Project searches found no exact attachment; logged searches found only ordinary-module flatness results.",
+  "blueprint": "Realizes the restriction-of-K-flat-representatives ingredient in the constant/completed coefficient comparison under the equality in def-weil-pbc-completed-pullback, current main-20261015 order 1329, through lem-weil-pbc-constant-completion-equivalence. No unit or chapter route changes.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "Generic symmetry of sheaf tensor, used to orient the scalar-extension tensor comparison; the current unit has no more specific statement."
+   },
+   {
+    "node": "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "why": "Generic universal property for constructing and comparing the two balanced sheaf maps; it does not replace a unit step."
+   },
+   {
+    "node": "lem-pc-sites-module-sheafification-bilinear-extension",
+    "why": "Generic extension of bilinear section pairings through sheafification, needed for the inner tensor in the inverse balancing map."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "lem-pc-sites-module-sheafification-bilinear-extension"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q22-6e6b0caf2",
+  "group": "Q22",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-6e6b0caf2 (reviewer sub-agent of L); spot-checked: I read the whole item. The statement is unchanged, true and source-backed. Flatness of B is needed: Z→F_2 with P=F_2[0] is a counterexample without it, and I checked it. Dropping the derived-category stmt_dep is correct. There are 0 new nodes, the item is not superseded on live/side-live, review_split passes, and no SGA is cited. I read every cited statement against its step. Steps 1, 4, 5 and 6 are correct: forget detects exactness; on summand (p,q) both sides of the differential square equal (d_A a⊗1)⊗x+(-1)^p(a⊗1)⊗d_P x; the acyclic test matches def-pc-kflat-complex; the flat-term clause follows from naturality in M of β. I checked the Stacks places 06YN, 06YY (context only, as the report says), 03EK, 03DA/03DB, 03ER(3), 0GMW, and homology 010N/012Z. Fixes: (1) Step 2 used the extension/tensor comparison 'naturally', but that node states no naturality. I added the argument: the pure-tensor formula plus uniqueness of maps out of a module sheafification, citing def-weil-presheaf-modules-sheafification. (2) Step 3 justified the B-action c(m⊗n)=m⊗cn by the global tensor universal property, which does not handle local sections, and it never said that β is B-linear, which βγ=id needs. I replaced this with module sheafification of the presheaf tensor as a presheaf of B-modules, citing lem-pc-sites-module-sheafification-interface (a Mathlib leaf), and derived B-linearity of β from uniqueness of factorization. lem-pc-balanced-sheaf-tensor-comparison-isIso and lem-weil-pbc-scalar-tensor-comparison-universes are not duplicates: the first is for spaces only, the second is natural only in N and only as abelian sheaves. The declared tool_uses are accepted; they are all in sk-thm-picard-semicon, which is on the route.; 1 file(s) fixed by the reviewer"
  }
 }
