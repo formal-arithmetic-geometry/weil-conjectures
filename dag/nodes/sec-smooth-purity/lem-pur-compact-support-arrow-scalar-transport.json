@@ -212,5 +212,29 @@
   "group": "N6",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-4a67d2b6a (reviewer sub-agent of L); spot-checked: The item's statement, stmt_deps, source and blueprint are unchanged from live, and live still shows it unsplit. The item is not in route-pivot-dropped.txt, nor are its comparison dependency or its citer. No new nodes. Step 1 applies the stated composition law of lem-pur-compact-support-integral-coefficient-comparison with (E,F,L)→(E0,E,F): c_D∘α^Y = P_F(α^X)∘c_{F/E,A_XM}∘B_Y(c_A). The c_{F/E} term needs A_XM ∈ D^b_ctf(X,O_E), which the item assumes. The types check (B_Y A_Y P_{E0}M → P_F D_X M), and the isomorphisms come from the cited statement. Step 2 cancels c_A and c_D, which is elementary, with source B_Y P_E A_X M and target D_Y P_{E0} M. Step 3 uses naturality of α^Y at the arbitrary t, and I recomputed the identity τ_F P_F(α^X)c_B = α^Y_V B_Y(τ_E) myself. Edge cases hold: E=E0 or F=E, t=0, f=id. The citer adic-scalar-trace-coherence Step 1 fits the hypotheses (M=T_0, E0=Q_ℓ). The source is sk-thm-purity-transport Step 3, lines 31-42, on transitivity in coefficient extensions; it is an agent auxiliary with no SGA. No duplicate of the arbitrary-arrow identity exists in the DAG, and the Lean finite-quotient comparison was rightly not attached. No changes, no tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompactSupportArrowScalarTransport",
+  "declaration": "WeilConjectures.PurCompactSupport.compactSupportArrowScalarTransport_tower",
+  "declarations": [
+   "WeilConjectures.PurCompactSupport.compactSupportScalarAssociator",
+   "WeilConjectures.PurCompactSupport.compactSupportArrowScalarTransport",
+   "WeilConjectures.PurCompactSupport.compactSupportScalarAssociatorImage",
+   "WeilConjectures.PurCompactSupport.compactSupportArrowScalarTransport_tower"
+  ],
+  "file": "lean/Sheaf/Paper/CompactSupportArrowScalarTransport.lean",
+  "statement": "theorem compactSupportArrowScalarTransport_tower (M : finiteTorConstructibleIntegralCategory l E₀ X) (V : finiteTorConstructibleIntegralCategory l E₀ Y) (hA : finiteTorConstructibleIntegral l E X ((pbcDerivedExtend (completedCoefficientMap l E₀ E i X)).obj M.obj)) (t : (recordedSupport l E₀ D hl f c).obj M ⟶ V.obj) : (recordedComparisonIso l E F j D hl f c).hom.app ⟨(pbcDerivedExtend (completedCoefficientMap l E₀ E i X)).obj M.obj, hA⟩ ≫ compactSupportScalarAssociatorImage l E₀ E F i j D hl f c M hA ≫ compactSupportArrowScalarTransport l E₀ F (j.comp i) D hl f c M V.obj t = (pbcDerivedExtend (completedCoefficientMap l E F j Y)).map (compactSupportArrowScalarTransport l E₀ E i D hl f c M V.obj t) ≫ (compactSupportScalarAssociator l E₀ E F i j Y).hom.app V.obj",
+  "branch": "newtargets-dag",
+  "by": "Q34",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bce095f99",
+  "group": "Q34",
+  "result": "pass",
+  "note": "Only the item lean record and the new module CompactSupportArrowScalarTransport changed; all 11 stmt_dep records are identical to live, no new nodes, not on route-pivot-dropped. lean.statement is verbatim in the file. Every clause matches the node: FiniteFieldDatum/l≠p, E0⊂E⊂F via AlgHoms i, j, j.comp i; the same separated finite-type instances as integralCoefficientComparison; P_L = recordedSupport; c = recordedComparisonIso (C_Y P_L ≅ scalarFiniteTor ⋙ P_H, matching the node's direction); α = tensorComposition with completedMap_composition, the same α as comparison_composition; M, V in finiteTorConstructibleIntegralCategory; hA kept; t arbitrary ambient; τ = c.inv ≫ A_Y.map t. The conclusion c_B ≫ P_F(α^X) ≫ τ_F = B_Y.map τ_E ≫ α^Y_V is the node's equation in diagrammatic order, from B_Y P_E A_X M to D_Y V. I derived it from comparison_composition after cancelling the recordedIdentification pairs, plus naturality of α^Y at t, so it is provable. The theorem stmt_dep is genuine (comparisonIso is asIso with the IsIso from integralCoefficientComparison; scalarFiniteTor uses its .1; recordedIdentification is a .choose); the same-module plain defs tensorComposition/recordedSupport come along. No hollow defs, only the theorem is sorry, docstrings with source and blueprint tag, the single u is the dependency's convention, both report sections present. No recompile (no changes). Advisories: the associator-image helper equals recordedSupport.map(homMk α) by naturality and its docstring rationale is inaccurate; the citer adic-scalar-trace-coherence Lean uses image/comparison and needs a recordedIdentification transport at stage 3; image/pbcDerivedExtend owners are not in stmt_deps (base-era pattern shared by the comparison dependency)."
  }
 }
