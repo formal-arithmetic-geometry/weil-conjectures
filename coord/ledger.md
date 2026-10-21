@@ -21750,3 +21750,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:13 L: returned deliver/Q34/lem-weil-proetale-tor-interval-triangle (reviewer RETURN: L: independent stage-2 immutable head 7f8cef57ee0e: H13: the delivery rebinds landed dependency records. (1) def-weil-de)
 - 09:13 L: returned deliver/Q83/lem-pur-etale-horizontal-double-counit (reviewer RETURN: L: independent stage-2 immutable head 9574abe22c2c: H2: delivery adds theorem nodes lem-pur-etale-horizontal-support-mat)
 - 09:13 L: returned deliver/Q157/sk-lem-as-properties (reviewer RETURN: L: independent stage-2 immutable head a8c104fdde63: H2: stmt_deps cite theorem nodes lem-a1-artin-schreier-trace-cover-m)
+- 09:13 L: returned deliver/Q45/lem-pod-fixed-pair-truncation-cohomology (reviewer RETURN: L: independent stage-2 immutable head f37073088a90: H3: ConstructiblePullbackComparison.commShift is an unpinned field ()
