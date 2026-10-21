@@ -16,9 +16,150 @@
   "def-pc-flat-sheaf-modules",
   "lem-weil-pbc-total-tensor-integer-shifts"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $H_A(B)=\\operatorname{Tot}(A\\otimes_R B)$ and $H^A(B)=\\operatorname{Tot}(B\\otimes_R A)$. The sheaf tensor is additive in each map, as follows from its balanced sectionwise construction. Its preservation of coproducts, supplied by [lem-weil-pbc-independent-sheaf-tensor-colimits] (and the pure-tensor swap for the other variable), allows distribution over the finite sums used below. The differential is that of [def-pc-tensor-complex-sheaves]. Both functors are additive on complexes and respect homotopy: if $u-v=dh+hd$ in the varying argument, use $h\\otimes1$ for $H^A$, and use $(-1)^p1\\otimes h$ on the summand of first-factor degree $p$ for $H_A$. In each case the cross terms from the fixed differential cancel, leaving respectively $(u-v)\\otimes1$ and $1\\otimes(u-v)$. Thus both define additive functors on $K(R)$. All formulas are maps on presheaf tensors, hence induce the stated maps on sheaf tensors.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "def-pc-tensor-complex-sheaves",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YM (lemma-derived-tor-exact); derived.tex remark-double-complex-as-tensor-product-of, explicit tensor homotopies."
+   }
+  },
+  {
+   "text": "For a chain map $u:X\\to Y$, write $C(u)^q=Y^q\\oplus X^{q+1}$ with differential $(d_Y,u;0,-d_X)$. The cone comparison supplied by [lem-pc-tensor-mapping-cone-iso] can be taken as the following explicit map $\\phi_L:H_A C(u)\\to C(H_Au)$: identity on $A^p\\otimes Y^q$, and multiplication by $(-1)^p$ on $A^p\\otimes X^{q+1}$. Distribution is justified by Step 1. On this second summand both sides of the chain-map equation have $A$-differential coefficient $(-1)^{p+1}$ and $X$-differential coefficient $-1$; their off-diagonal coefficient is $(-1)^p(1\\otimes u)$. For $\\phi_R:H^A C(u)\\to C(H^Au)$ take the identity on both summands: on $X^{q+1}\\otimes A^p$ both differentials are $-d_X\\otimes1+(-1)^q1\\otimes d_A$, with off-diagonal $u\\otimes1$. The displayed maps are invertible, natural in $u$, and preserve the inclusion of $Y$. If $p_u:C(u)\\to X[1]$ and $p_{Hu}:C(Hu)\\to H(X)[1]$ are the projections, their formulas give $p_{Hu}\\phi_L=s^2_1H_A(p_u)$ and $p_{Hu}\\phi_R=s^1_1H^A(p_u)$, with the shifts of [lem-weil-pbc-total-tensor-integer-shifts]. Negating these equalities proves compatibility with the connecting arrow $-p_u$, not just with the first two triangle maps.",
+   "uses": [
+    "lem-pc-tensor-mapping-cone-iso",
+    "def-weil-abstract-derived-category",
+    "def-pc-tensor-complex-sheaves",
+    "lem-weil-pbc-total-tensor-integer-shifts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YM (lemma-derived-tor-exact), expanded using derived.tex definition-cone and definition-distinguished-triangle; more-algebra.tex Tag 0FNH (item-shift-tensor)."
+   }
+  },
+  {
+   "text": "Let $u:X\\to Y$ be any quasi-isomorphism, without a K-flatness assumption on $X$ or $Y$. Its cone is acyclic by [lem-pur-quasi-iso-cone-acyclic], so $C(u)\\otimes_R A$ is acyclic by [def-pc-kflat-complex]. The signed interchange $x_i\\otimes a_j\\mapsto(-1)^{ij}a_j\\otimes x_i$ identifies it with $A\\otimes_R C(u)$. This is a chain isomorphism: the $d_X$ coefficient on either side is $(-1)^{ij+j}$ and the $d_A$ coefficient is $(-1)^{ij}$; the swap in each degree is the balanced swap on the presheaf tensor and passes to sheafification. Its inverse has the same sign. Step 2 now identifies these acyclic complexes with $C(H^Au)$ and $C(H_Au)$. Applying the cone criterion again proves that both tensor functors preserve every quasi-isomorphism.",
+   "uses": [
+    "lem-pur-quasi-iso-cone-acyclic",
+    "def-pc-kflat-complex",
+    "def-pc-tensor-complex-sheaves",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YP (lemma-K-flat-quasi-isomorphism); derived.tex Tag 05RT (lemma-acyclic); more-algebra.tex item-flip-tensor-product."
+   }
+  },
+  {
+   "text": "For each integer $n$ and each acyclic $E$, the first-variable comparison of [lem-weil-pbc-total-tensor-integer-shifts] identifies $A[n]\\otimes E$ with $(A\\otimes E)[n]$. The latter is acyclic by Step 3's signed interchange and the definition of K-flatness: shifting reindexes cohomology. Interchange again shows $E\\otimes A[n]$ acyclic. Thus $A[n]$ is K-flat. Its degree-$i$ term is $A^{i+n}$, so flat terms are preserved as well. This also proves stability under all shifts of the full subcategory $\\mathcal P_R$ of flat-term K-flat complexes used in tensor descent.",
+   "uses": [
+    "lem-weil-pbc-total-tensor-integer-shifts",
+    "def-pc-kflat-complex",
+    "def-pc-flat-sheaf-modules",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YN (definition-K-flat); more-algebra.tex Tag 0FNH (item-shift-tensor)."
+   }
+  },
+  {
+   "text": "Let $Q_h:K(R)\\to D(R)$ be the exact localization of [lem-pur-homotopy-category-triangulated]. Step 3 makes $Q_hH_A$ and $Q_hH^A$ invert quasi-isomorphisms. Apply [lem-weil-pbc-localization-universal-property](1) to obtain $G_A,G^A:D(R)\\to D(R)$ and their canonical representative isomorphisms. For each $n\\in\\mathbf Z$, apply part (2) to the localized natural isomorphisms $s^2_n$ for $H_A$ and $s^1_n$ for $H^A$. This gives $G_A(B[n])\\cong G_A(B)[n]$ and $G^A(B[n])\\cong G^A(B)[n]$, normalized by those exact signed maps. Both sides of each zero-shift or addition-of-shifts identity restrict to the corresponding identity of [lem-weil-pbc-total-tensor-integer-shifts]; part (3) therefore proves the identity after descent. This fixes the coherent integer-shift structures rather than making an arbitrary choice of a shift comparison.",
+   "uses": [
+    "lem-pur-homotopy-category-triangulated",
+    "lem-weil-pbc-localization-universal-property",
+    "lem-weil-pbc-total-tensor-integer-shifts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU (definition-derived-tor, preceding construction); categories.tex Tags 04VG/04VK, localization and natural-transformation universal properties; more-algebra.tex Tag 0FNH."
+   }
+  },
+  {
+   "text": "The functors $G_A,G^A$ are additive: represent any two derived objects by complexes; their biproduct is represented by the direct sum, because $Q_h$ is additive and exact by [lem-pur-homotopy-category-triangulated]. Under the representative comparisons, its inclusions and projections map to those of $H(X)\\oplus H(Y)$ from Step 1. Thus $G$ preserves the zero object and binary biproducts, and $f+g=\\nabla(f\\oplus g)\\Delta$ gives preservation of addition. Now every distinguished triangle is isomorphic to a localized cone triangle by [def-weil-abstract-derived-category]. Step 2 identifies its $G$-image, with connecting arrow $s_1G(-p_u)$, with the localized cone triangle of $H(u)$, including that arrow. The localization carries this latter triangle to a distinguished one. The natural shift comparisons of Step 5 carry isomorphisms of triangles to isomorphisms of image triangles. Hence $G_A,G^A$ take every distinguished triangle to a distinguished triangle and are exact in the sense of [def-weil-triangulated-category].",
+   "uses": [
+    "lem-pur-homotopy-category-triangulated",
+    "def-weil-abstract-derived-category",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU (definition-derived-tor); derived.tex definition-distinguished-triangle and Tag 05QL (definition-exact-functor)."
+   }
+  },
+  {
+   "text": "Put $T=-\\otimes_R^{\\mathbf L}-$ from [lem-weil-pbc-site-derived-tensor-descent]. Since $A\\in\\mathcal P_R$, its representative comparison gives $G_A(Q_hP)\\cong T(Q_hA,Q_hP)$ and $G^A(Q_hP)\\cong T(Q_hP,Q_hA)$ naturally for $P\\in\\mathcal P_R$. The equivalence $W_R^{-1}\\mathcal P_R\\simeq D(R)$ in that same statement means $Q_h|_{\\mathcal P_R}$ is a localization. Apply [lem-weil-pbc-localization-universal-property](2) to extend these comparisons uniquely to natural isomorphisms $G_A\\cong T(Q_hA,-)$ and $G^A\\cong T(-,Q_hA)$. Explicitly, if $r:P\\to B$ is a flat-term K-flat resolution, the left comparison at $Q_hB$ is $T(1,Q_hr)\\,c_P\\,(Q_hH_A(r))^{-1}$, where $c_P$ is the displayed representative comparison; all three factors are isomorphisms. The analogous right formula uses $T(Q_hr,1)$. Existence of $r$ is supplied by [lem-pc-kflat-resolution]; the localization uniqueness proves independence and naturality on all derived maps.",
+   "uses": [
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-weil-pbc-localization-universal-property",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU (definition-derived-tor and preceding construction); Tags 06YS (lemma-K-flat-resolution), 06YT (lemma-derived-tor-quasi-isomorphism-other-side); categories.tex Tag 04VK."
+   }
+  },
+  {
+   "text": "To put shifts on the full bifunctor $T$, for each $n$ restrict the desired comparisons $T(M[n],N)\\to T(M,N)[n]$ and $T(M,N[n])\\to T(M,N)[n]$ to $\\mathcal P_R\\times\\mathcal P_R$. Step 4 ensures shifted representatives remain there. Conjugate $Q_hs^1_n,Q_hs^2_n$ by the canonical representative isomorphisms of [lem-weil-pbc-site-derived-tensor-descent]. These are natural in both homotopy variables by [lem-weil-pbc-total-tensor-integer-shifts]. The arbitrary-transformation extension clause of tensor descent extends them uniquely, and also extends their inverses. Faithfulness proves the inverse, zero and addition identities, since they hold on representatives. For shifts $a,b$, the two extraction orders restrict to maps differing by $(-1)^{ab}$ by that shift leaf. The right side is again a natural transformation: multiplication by this scalar means identity or its negative, natural in the additive derived category. Faithfulness therefore gives exactly the same mixed-sign identity on $D(R)\\times D(R)$. By uniqueness these restrictions at a fixed $Q_hA$ are precisely the comparisons constructed in Step 5 under Step 7's identifications.",
+   "uses": [
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-weil-pbc-total-tensor-integer-shifts",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU (definition-derived-tor), two-variable representative descent; more-algebra.tex Tag 0FNH (item-shift-tensor)."
+   }
+  },
+  {
+   "text": "If $a:A\\to A'$ is a chain map between flat-term K-flat fixed arguments, the comparisons in [lem-weil-pbc-total-tensor-integer-shifts] give the shift square for $a\\otimes1$ (or $1\\otimes a$) in the varying argument. Step 8 extends this square to every derived varying object. For a quasi-isomorphism $a$, Step 7 and tensor descent make its induced transformation invertible; multiplying the same square by its inverse gives the shift square for the inverse transformation. Every map between derived fixed arguments is represented by a word of maps of $\\mathcal P_R$ and inverses of its quasi-isomorphisms, by the localization equivalence in [lem-weil-pbc-site-derived-tensor-descent]. Composing these squares proves the claim for all such derived maps. Relations among words give equal transformations by the localization universal property, so this is independent of the chosen word. Step 8 already proves both orders of shift extraction have the required sign. Every total degree above is a direct sum and all cone sums are finite; the argument nowhere restricts the complexes' bounds or the flatness of their cohomology.",
+   "uses": [
+    "lem-weil-pbc-total-tensor-integer-shifts",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU (definition-derived-tor); categories.tex Tags 04VG/04VK, localization morphisms and transformations; more-algebra.tex Tag 0FNH."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-abstract-derived-category",
+  "lem-pc-tensor-mapping-cone-iso",
+  "lem-weil-pbc-total-tensor-integer-shifts",
+  "lem-pur-quasi-iso-cone-acyclic",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "lem-pur-homotopy-category-triangulated",
+  "lem-weil-pbc-localization-universal-property",
+  "def-weil-triangulated-category",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-pc-kflat-resolution"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YM, 06YP, 06YU, expanded cone and localization argument; derived.tex remark-double-complex-as-tensor-product-of, definition-cone and definition-distinguished-triangle; signed integer shifts from more-algebra.tex Tag 0FNH and the existing Mathlib shift leaf."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,10 +195,45 @@
    "results": "8 hits: CategoryTheory.Functor.IsTriangulated, CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory, Module.Flat.rTensor_shortComplex_exact, DerivedCategory.instIsTriangulated, CategoryTheory.Functor.IsTriangulated.mk, HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory, CategoryTheory.Functor.IsTriangulated.map_distinguished, CategoryTheory.Functor.op_isTriangulated_iff; ",
    "date": "2026-10-21",
    "verdict": "no match: hits concern flat modules, bounded projective Tor or generic localization; they do not construct fixed K-flat tensor on arbitrary small ringed sites or prove the cone/shift descent."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensoring with a fixed K flat complex on a ringed site descends to a triangulated functor on the unbounded derived category with canonical signed shifts",
+   "results": "8 hits: CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory, DerivedCategory.instIsTriangulated, CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt, DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Tor'_obj_obj",
+   "date": "2026-10-21",
+   "verdict": "no match: exact-functor hits start with an exact functor of abelian categories, not tensor by an unbounded complex; the BifunctorShift hit is the existing signed-shift leaf, not ringed-site K-flat exact descent."
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|isKFlat|tensor.*[Tt]riangulated|[Tt]riangulated.*tensor",
+   "results": "0 hits: none; subdirectory Algebra/Homology",
+   "date": "2026-10-21",
+   "verdict": "no match: exact-functor hits start with an exact functor of abelian categories, not tensor by an unbounded complex; the BifunctorShift hit is the existing signed-shift leaf, not ringed-site K-flat exact descent."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor product on a ringed site is exact in both arguments with coherent integer shift comparisons",
+   "results": "8 hits: CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt, CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors, DerivedCategory.instAdditiveShiftFunctorInt, DerivedCategory.instHasShiftInt, DerivedCategory.instIsTriangulated, DerivedCategory.instLinearShiftFunctorInt, CategoryTheory.Functor.instCommShift₂IntCochainComplexIntMap₂CochainComplex, DerivedCategory.singleFunctor",
+   "date": "2026-10-21",
+   "verdict": "no match: exact-functor hits start with an exact functor of abelian categories, not tensor by an unbounded complex; the BifunctorShift hit is the existing signed-shift leaf, not ringed-site K-flat exact descent."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsTriangulated, CochainComplex",
+   "results": "0 hits: none",
+   "date": "2026-10-21",
+   "verdict": "no match: exact-functor hits start with an exact functor of abelian categories, not tensor by an unbounded complex; the BifunctorShift hit is the existing signed-shift leaf, not ringed-site K-flat exact descent."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An unbounded K flat complex of sheaves tensor product preserves quasi isomorphisms mapping cones and distinguished triangles naturally in both factors",
+   "results": "8 hits: CochainComplex.cm5b.instQuasiIsoIntP, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactors, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh, CategoryTheory.Functor.instLiftingHomologicalComplexHomologicalComplexUpToQuasiIsoQQuasiIsoCompMapHomologicalComplexMapHomologicalComplexUpToQuasiIso, CategoryTheory.Functor.isHomological_of_localization, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app_assoc, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app",
+   "date": "2026-10-21",
+   "verdict": "no match: exact-functor hits start with an exact functor of abelian categories, not tensor by an unbounded complex; the BifunctorShift hit is the existing signed-shift leaf, not ringed-site K-flat exact descent."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-pbc-ringed-projection-mate-exact",
@@ -76,5 +252,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+  "worker": "stage1",
+  "summary": "Expanded the fixed-K-flat tensor argument into nine steps: homotopies and additivity, signed cone isomorphisms including the connecting arrow, inversion of all quasi-isomorphisms, shift closure, exact localization, canonical comparison to the existing derived tensor, and descent of coherent bifunctor shifts and all fixed-argument transformations. Statement unchanged; no new nodes. Source and all cited statements checked.",
+  "blueprint": "Realizes the first paragraph of the current blueprint proof of lemma-weil-pbc-perfect-projection-formula: tensor is exact triangulated, commutes with shift comparisons, and therefore can be used in closure under shifts and cones. Via lem-weil-pbc-ringed-projection-mate-exact; no change to the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-tensor-mapping-cone-iso",
+    "why": "Generic total-tensor cone comparison for ringed sites; the proper-base-change unit supplies no such homological-algebra tool. The proof checks the additional projection and sign compatibility explicitly."
+   },
+   {
+    "node": "lem-pur-quasi-iso-cone-acyclic",
+    "why": "Generic abelian-category cone criterion used to apply K-flatness to arbitrary quasi-isomorphisms; no geometric base-change argument is replaced."
+   },
+   {
+    "node": "lem-pur-homotopy-category-triangulated",
+    "why": "Generic exact localization Q_h and homotopy-category triangulation, used only to descend the fixed tensor and prove additivity and exactness."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic flat-term K-flat resolutions used to display the canonical one-fixed-factor comparison; no scheme-only or coefficient-specific result is substituted."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-tensor-mapping-cone-iso",
+  "lem-pur-quasi-iso-cone-acyclic",
+  "lem-pur-homotopy-category-triangulated",
+  "lem-pc-kflat-resolution"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NL-62783e660",
+  "group": "NL",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-62783e660 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item plus report, unchanged statement, 9 steps, no new nodes. I checked it against Stacks sites-cohomology section-flat (06YM, 06YN, 06YP, the construction before 06YU) and the first paragraph of the main-20261015 proof of lemma-weil-pbc-perfect-projection-formula. I recomputed all the signs. Step 1: the homotopies (-1)^p(1⊗h) and h⊗1 cancel the cross terms. Step 2: φ_L, which multiplies the X-part by (-1)^p, and φ_R=id are chain maps; p_{Hu}φ_L=s²_1H_A(p_u) with sign (-1)^p and p φ_R=s¹_1H^A(p_u), so the connecting square for -p holds. The cone-iso node only promises compatibility with the inclusions, so this is a real addition and the step does not claim it from that node (C4 avoided). Step 3: cone criterion plus K-flatness on the acyclic C(u); the Koszul swap is a chain map, with coefficients (-1)^{ij+j} on d_X and (-1)^{ij} on d_A on both sides. Step 4: A[n] stays flat-term and K-flat. Steps 5-6: descent along Q_h via localization parts (1)-(3); exactness through the definition of distinguished triangles. Step 7: Q_h restricted to P_R is a localization because W⁻¹P_R≃D(R), and the explicit comparison formula type-checks. Step 8: the descent node's extension and uniqueness give the bifunctor shifts, their coherence and the (-1)^{ab} mixed sign. Step 9: correct, though it is redundant given Step 8's naturality. Edge cases checked: zero, A=R[0], odd-degree A, unbounded A, and Z--2-->Z, which has non-flat cohomology. Duplicate search: lem-pur-kflat-tensor-quasiiso-independent (other unit, covers only Step 3's right-factor clause), the pc ring-only lemmas, sf-ringed monoidal nodes (other unit, do not state fixed-factor exactness with its connecting map and shifts), kun/étale special cases. None is a duplicate, so same_as [] stands. No cycle. No SGA. The four declared tool uses are generic homological algebra and I accept them. Advisory only: some citations are more than the steps need; the report names citations.json and searches.jsonl, which are not in the branch; lean_audit is absent, inherited from NG's extraction like many sibling nodes."
  }
 }
