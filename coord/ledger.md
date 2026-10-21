@@ -21383,3 +21383,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:51 L: merged deliver/Q14/lem-pur-supported-constant-exchange-normalization (reviewer PASS; first push; new nodes: 0)
 - 08:52 L: merged deliver/Q06/lem-weil-pbc-integral-coefficient-presentation-comparison (reviewer PASS; first push; new nodes: 0)
 - 08:52 L: merged deliver/N5/lem-pur-adjoint-left-projection-action (reviewer PASS; first push; new nodes: 0)
+- 08:52 L: merged deliver/Q131/lem-trf-point-transport-strict-quotient (reviewer FIX; first push; new nodes: 0); claim not held by Q131: not your claim
