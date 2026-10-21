@@ -6,11 +6,7 @@ Authors: SHEAF group NL
 module
 
 public import Sheaf.Paper.SixFunctorOperationDatum
-public import Sheaf.Paper.SfIntegralConstructible
-public import Sheaf.Paper.DerivedPullbackTensorHom
-public import Sheaf.Paper.SfRationalizationKaroubi
 public import Sheaf.Paper.DerivedAutomorphismHomEvaluation
-public import Sheaf.Paper.DerivedPullbackTensorIso
 public import Sheaf.Paper.DirectImagesConstructible
 
 import Sheaf.Paper.CompletedTensorScalarLinearity

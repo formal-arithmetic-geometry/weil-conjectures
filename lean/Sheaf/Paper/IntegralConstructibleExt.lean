@@ -9,11 +9,7 @@ public import Sheaf.Paper.CondensedConstantConstructibility
 public import Sheaf.Paper.FiniteFieldFiber
 public import Sheaf.NumberTheory.Padics.FiniteCoefficientFields
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
-public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
-public import Mathlib.CategoryTheory.Preadditive.Yoneda.Basic
-public import Mathlib.Algebra.Homology.HomologicalComplexLimits
 import Mathlib.Algebra.CharP.CharAndCard
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Sheaf.SixFunctors.IntegralExtHomContinuity
 import Sheaf.Paper.IntegralStratumExtBound
 import Sheaf.Paper.IntegralCoefficientExtComparison

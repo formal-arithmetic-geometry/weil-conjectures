@@ -6,12 +6,8 @@ Authors: SHEAF group F5
 module
 
 public import Mathlib.CategoryTheory.ObjectProperty.Ind
-public import Sheaf.Paper.CondensedConstantConstructibility
 public import Sheaf.Paper.LocalizingClosure
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
-public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
-public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 import Sheaf.Paper.IntegralIndConstructibleHeartClosure
 import Sheaf.CategoryTheory.GrothendieckDerivedCoproducts
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty

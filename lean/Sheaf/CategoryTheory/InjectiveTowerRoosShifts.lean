@@ -5,13 +5,9 @@ Authors: SHEAF group Q11, SHEAF group G9
 -/
 module
 
-public import Sheaf.CategoryTheory.StrictRoosModel
 public import Sheaf.CategoryTheory.TowerProductFunctor
 public import Sheaf.CategoryTheory.RingedSiteModules
-public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
-public import Mathlib.Algebra.Homology.HomotopyCategory.Pretriangulated
 public import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
-public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 import Sheaf.Algebra.Homology.KInjectiveProductsTermwise
 import WeilConjectures.Algebra.Homology.TowerEvaluationKInjective
 import WeilConjectures.Algebra.Homology.KernelShiftedMappingCone

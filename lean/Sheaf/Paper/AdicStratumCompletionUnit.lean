@@ -8,13 +8,10 @@ module
 public import Sheaf.Paper.ConstantCompletionEquivalence
 public import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
 public import Sheaf.AlgebraicGeometry.FiniteLocallyClosedStratification
-public import Sheaf.CategoryTheory.RingedDerivedRestrictionGeneral
-public import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.Paper.AdicStratumCoverConservativity
 import Sheaf.Paper.ExactCompletedKoszulPullback
 import Sheaf.CategoryTheory.RingedCechKoszulHomLimitComparison
 import all Sheaf.Paper.CompletedPullbackAdjunction
-import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 import Sheaf.AlgebraicGeometry.ProEtaleImmersionLimitPreservation
 import Sheaf.AlgebraicGeometry.ProEtaleProductsExact
 import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization

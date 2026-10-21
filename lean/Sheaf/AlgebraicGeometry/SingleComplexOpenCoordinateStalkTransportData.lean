@@ -7,7 +7,6 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.SingleComplexOpenRestrictionData
 public import Sheaf.AlgebraicGeometry.StalkComparisonPullbackNaturality
-public import Mathlib.CategoryTheory.Comma.Arrow
 import Sheaf.AlgebraicGeometry.SingleComplexOpenTermwiseComparison
 
 /-! # Open transport of the normalized tensor comparison

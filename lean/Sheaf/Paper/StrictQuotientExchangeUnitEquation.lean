@@ -6,14 +6,7 @@ Authors: SHEAF group Q58
 module
 
 public import Sheaf.Paper.QuotientExchangeScalarComparisons
-public import Sheaf.Paper.RingedExchangeTensorCoherence
-public import Sheaf.Paper.StrictPerfectCoefficientPackageOfUniverses
-public import Sheaf.CategoryTheory.TowerDerivedEvaluationNormalization
-public import Sheaf.CategoryTheory.DiagramSiteRealization
-public import Mathlib.CategoryTheory.Functor.OfSequence
-public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 import all Sheaf.CategoryTheory.ExchangeMateCube
-import Sheaf.CategoryTheory.RingedTowerPushforwardLimitComparison
 import Sheaf.Paper.StrictPerfectTowerProjection
 import Sheaf.Paper.StrictReductionPullbackSquare
 import Sheaf.Paper.StrictTowerMateEvaluation

@@ -6,16 +6,8 @@ Authors: SHEAF group NE
 module
 
 public import Sheaf.SecSmoothPurity.ScalarExtensionFunctor
-public import Sheaf.AlgebraicGeometry.ProEtaleFiniteModules
-public import Sheaf.AlgebraicGeometry.ProEtaleRingSheafChangeAdjunction
-public import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
-public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Sheaf.SecSmoothPurity.ProEtaleScalarTensorNormalization
 import Sheaf.Algebra.Homology.RingedDerivedTensorNative
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
-import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
-import Sheaf.AlgebraicGeometry.ProEtaleConstantRingMap
-import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
 
 /-!
 # Restriction of the direct-image coefficient mate

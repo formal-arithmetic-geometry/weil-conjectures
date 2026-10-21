@@ -6,12 +6,7 @@ Authors: SHEAF group Q130
 module
 
 public import Sheaf.Paper.FiniteFieldFiber
-public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 public import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
-public import Sheaf.AlgebraicGeometry.EtaleTorAmplitude
-public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
-public import Mathlib.CategoryTheory.Triangulated.Subcategory
-public import Mathlib.CategoryTheory.ObjectProperty.ColimitsOfShape
 
 import WeilConjectures.CategoryTheory.CompactGeneratorsBuildObjects
 import Sheaf.AlgebraicGeometry.FiniteTorConstructibleEtaleCompact

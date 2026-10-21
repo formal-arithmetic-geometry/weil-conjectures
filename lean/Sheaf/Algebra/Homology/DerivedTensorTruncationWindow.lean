@@ -6,18 +6,8 @@ Authors: SHEAF group Q12
 module
 
 public import Sheaf.Paper.WeilTensorProduct
-public import Sheaf.CategoryTheory.SiteCoveringAxioms
-public import Sheaf.CategoryTheory.RingedSiteModules
-public import Sheaf.CategoryTheory.TruncationsAndHomotopyColimits
-public import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLTGE
-public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.Algebra.Homology.BoundedFlatIndependentCoefficients
 import Sheaf.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
-import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLEGT
-import WeilConjectures.Algebra.Homology.HomotopyCategory.Braided
-import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 
 /-! # Finite truncation windows for derived tensor
 

@@ -6,14 +6,7 @@ Authors: SHEAF group NE
 module
 
 public import WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMap
-public import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension
-public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-public import Mathlib.AlgebraicGeometry.FunctionField
 public import Mathlib.RingTheory.RegularLocalRing.Defs
-public import Mathlib.FieldTheory.IsSepClosed
-public import Mathlib.FieldTheory.SeparableClosure
-public import Mathlib.RingTheory.AlgebraicIndependent.Basic
-public import WeilConjectures.Mathlib.Topology.KrullDimension
 
 import Sheaf.AlgebraicGeometry.SmoothStrictLocalFieldModelCore
 import Sheaf.AlgebraicGeometry.SmoothStrictLocalFieldModelCoeff

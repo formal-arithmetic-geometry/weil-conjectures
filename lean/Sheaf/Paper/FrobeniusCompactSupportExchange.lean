@@ -5,13 +5,9 @@ Authors: SHEAF group NE
 -/
 module
 
-public import Sheaf.Paper.SfWeilSheafComplex
 public import Sheaf.Paper.QcqsCompactSupportRealization
-public import Sheaf.Paper.ExchangeProjectionSuppliedDomains
 public import Sheaf.AlgebraicGeometry.SfEtaleExchanges
 public import Sheaf.SixFunctors.FrobeniusSquareCartesian
-import Sheaf.Paper.SfDerivedComplete
-import Sheaf.Paper.SfIntegralConstructibleTriangulated
 import Sheaf.CategoryTheory.MateIsoAlongEquivalences
 
 /-! # Compact-support exchange for geometric Frobenius

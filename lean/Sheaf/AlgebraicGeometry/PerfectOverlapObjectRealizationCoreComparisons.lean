@@ -6,7 +6,6 @@ Authors: SHEAF group W4
 module
 
 public import WeilConjectures.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreComparisons
-public import Sheaf.AlgebraicGeometry.PerfectOverlapStageEquivalence
 
 /-! # Component API for the canonical overlap comparisons
 

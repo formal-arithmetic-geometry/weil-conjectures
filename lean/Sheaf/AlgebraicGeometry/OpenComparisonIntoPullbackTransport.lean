@@ -6,7 +6,6 @@ Authors: SHEAF group H1
 module
 
 public import Sheaf.AlgebraicGeometry.StalkComparisonPullbackNaturality
-public import Mathlib.CategoryTheory.Comma.Arrow
 import WeilConjectures.AlgebraicGeometry.OpenRestrictedComparisonTransport
 
 /-! # Open transport before the coefficient morphism

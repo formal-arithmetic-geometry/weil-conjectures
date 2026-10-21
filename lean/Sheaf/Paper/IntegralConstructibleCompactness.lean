@@ -5,26 +5,17 @@ Authors: SHEAF group Q29
 -/
 module
 
-public import Sheaf.Paper.CondensedConstantConstructibility
 public import Sheaf.Paper.LocalizingClosureExistence
 public import WeilConjectures.CategoryTheory.CompactObject
-public import Sheaf.CategoryTheory.TruncationsAndHomotopyColimits
-public import WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteSubextension
 public import Mathlib.CategoryTheory.ObjectProperty.Ind
 public import Mathlib.CategoryTheory.Limits.Indization.Category
-public import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLEGT
-public import Mathlib.CategoryTheory.Preadditive.Yoneda.Basic
-public import Mathlib.CategoryTheory.EssentialImage
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
 import Sheaf.Paper.IntegralIndHeartRealization
 import Sheaf.Paper.IntegralIndLowerTail
 import Sheaf.Paper.IntegralWindowCoproductComparison
 import Sheaf.CategoryTheory.GrothendieckDerivedCoproducts
-import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
 import WeilConjectures.CategoryTheory.CompactObjectsThick
-import Mathlib.CategoryTheory.Triangulated.Yoneda
 import WeilConjectures.CategoryTheory.DerivedCategory.HomologyCoproducts
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty
 
 /-!
 # Integral constructible complexes are compact

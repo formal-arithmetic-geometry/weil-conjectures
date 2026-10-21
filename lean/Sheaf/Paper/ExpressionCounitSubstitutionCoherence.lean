@@ -7,7 +7,6 @@ module
 
 public import Sheaf.Paper.CompletedOperationExpressions
 public import Sheaf.Paper.CompletedPrimitiveCounitComparison
-public import Mathlib.CategoryTheory.Pi.Basic
 
 /-! # Naturality and substitution of recursive coherent-counit comparisons
 

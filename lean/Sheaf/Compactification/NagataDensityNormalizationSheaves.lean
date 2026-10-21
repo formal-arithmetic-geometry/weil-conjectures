@@ -7,10 +7,6 @@ module
 
 public import Sheaf.Compactification.NagataDensityNormalizationSetup
 public import Sheaf.Topology.ProfiniteCondensedRing
-public import Sheaf.AlgebraicGeometry.ProEtaleModuleObjects
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs
-public import WeilConjectures.CategoryTheory.Monoidal.Mod.Abelian
-public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.OpenClosed
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.UnitCoherence
 import WeilConjectures.CategoryTheory.ModuleObjects.ProjectionFormulaAdjunction

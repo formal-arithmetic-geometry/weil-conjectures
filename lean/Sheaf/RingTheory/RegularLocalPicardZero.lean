@@ -6,15 +6,10 @@ Authors: SHEAF group Q04
 module
 
 public import Mathlib.RingTheory.RegularLocalRing.Defs
-public import Mathlib.RingTheory.Localization.Away.Basic
-public import Mathlib.RingTheory.Localization.AtPrime.Basic
-public import Mathlib.Algebra.Module.LocalizedModule.Basic
-public import Mathlib.Algebra.Module.Projective
 import Sheaf.RingTheory.LocalizedFiniteModuleSpread
 import WeilConjectures.Mathlib.RingTheory.LocalProperties.ProjectiveDimension
 import WeilConjectures.Mathlib.RingTheory.Regular.ProjectiveDimension
 import Mathlib.Algebra.Module.StablyFree.FreeOfInvertible
-import Mathlib.RingTheory.LocalProperties.Exactness
 
 /-!
 # Picard group of a regular-local localization

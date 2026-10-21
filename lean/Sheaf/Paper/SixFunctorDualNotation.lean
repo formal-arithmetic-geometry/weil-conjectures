@@ -6,8 +6,6 @@ Authors: SHEAF group NA
 module
 
 public import Sheaf.Paper.SixFunctorDatum
-public import Sheaf.Paper.DerivedPullbackTensorHom
-public import Sheaf.Paper.ExchangeProjectionSuppliedDomains
 
 /-! # Coefficient dual, Verdier dual, and projection notation
 

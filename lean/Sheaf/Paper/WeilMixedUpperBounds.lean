@@ -6,7 +6,6 @@ Authors: SHEAF group Q52
 module
 
 public import Sheaf.Paper.AdicPunctualWeights
-public import Sheaf.Paper.ConstructiblePullbackTExact
 public import Sheaf.Paper.FieldWeilShriekShiftData
 
 import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.Extensions
