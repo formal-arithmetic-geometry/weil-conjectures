@@ -32,6 +32,11 @@ universe u
 
 open CategoryTheory Limits
 
+/- Without this, `X ⟶ Y` in statements elaborates through `ReflQuiver.toQuiver`, while compositions
+and functor images carry `CategoryStruct.toQuiver`; the kernel reconciles the two on the derived
+categories only by unfolding them, which made the proofs below slow to check. -/
+attribute [-instance] CategoryTheory.catToReflQuiver
+
 namespace CategoryTheory.Functor
 
 variable {C D E : Type*} [Category C] [Category D] [Category E]
@@ -289,6 +294,27 @@ lemma Etale.overLowerStarTransition_singleFunctor (g : T ⟶ S)
   rw [reassoc_of% hn, Etale.overLowerStarTransition, Category.assoc, ← Functor.map_comp,
     Etale.upperStarCompDerivedPlus_inv_app_singleFunctor, Functor.map_comp]
 
+/-- The transition map `AlgebraicGeometry.Etale.higherDirectImageOverMap`, unfolded: the
+degree-`q` homology of the transition map of derived direct images followed by the
+identifications `φ^*(G|_V[0]) ≅ (φ^* G|_V)[0]` and `φ^*(G|_V) ≅ G|_U`. -/
+lemma Etale.higherDirectImageOverMap_eq (g : T ⟶ S)
+    (G : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ) {U V : Over T} (φ : U ⟶ V) :
+    Etale.higherDirectImageOverMap Λ g G q φ =
+      (DerivedCategory.Plus.homologyFunctor _ q).map
+          (Etale.lowerStarPlusTransition Λ φ.left (V.hom ≫ g) (U.hom ≫ g)
+              (by rw [← Category.assoc, Over.w])
+              ((DerivedCategory.Plus.singleFunctor _ 0).obj
+                (((V.hom)^*[ModuleCat.{u + 1} Λ]).obj G)) ≫
+            R+((U.hom ≫ g)_*[ModuleCat.{u + 1} Λ]).map
+              ((((φ.left)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).hom.app
+                (((V.hom)^*[ModuleCat.{u + 1} Λ]).obj G))) ≫
+        (DerivedCategory.Plus.homologyFunctor _ q).map
+          (R+((U.hom ≫ g)_*[ModuleCat.{u + 1} Λ]).map
+            ((DerivedCategory.Plus.singleFunctor _ 0).map
+              ((Etale.upperStarComp (ModuleCat.{u + 1} Λ) φ.left V.hom U.hom
+                (Over.w φ).symm).inv.app G))) :=
+  rfl
+
 /-- In degree `q`, the transition map `AlgebraicGeometry.Etale.overLowerStarTransition` at a sheaf
 placed in degree `0` is `AlgebraicGeometry.Etale.higherDirectImageOverMap`, through the
 identifications `π^*(G[0]) ≅ (π^* G)[0]`. -/
@@ -305,10 +331,9 @@ lemma Etale.homologyFunctor_map_overLowerStarTransition (g : T ⟶ S)
         (R+((V.hom ≫ g)_*[ModuleCat.{u + 1} Λ]).map
           ((((V.hom)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).hom.app G)) ≫
       Etale.higherDirectImageOverMap Λ g G q φ := by
-  rw [← Functor.map_comp, Etale.overLowerStarTransition_singleFunctor,
-    Etale.higherDirectImageOverMap, Etale.higherDirectImageTransition]
-  simp only [Functor.map_comp]
-  exact congrArg (_ ≫ ·) (Category.assoc _ _ _).symm
+  rw [Etale.higherDirectImageOverMap_eq, ← Functor.map_comp, ← Functor.map_comp,
+    ← Functor.map_comp, Etale.overLowerStarTransition_singleFunctor]
+  simp only [Functor.map_comp, Category.assoc]
 
 /-- The identification `e'^*(π^*(F[0])) ≅ (a^*(e^* F))[0]` for a commutative square
 `a ≫ e = e' ≫ π`. -/
@@ -426,10 +451,10 @@ lemma Etale.homologyFunctor_map_overTargetTransition {X Y Tᵢ Tⱼ : Scheme.{u}
         (R+((V.hom ≫ h)_*[ModuleCat.{u + 1} Λ]).map
           (Etale.stageSingleIso Λ e V.hom eᵢ πᵢ waᵢ F).hom) ≫
       Etale.higherDirectImageOverMap Λ h (((e)^*[ModuleCat.{u + 1} Λ]).obj F) q φ := by
-  rw [← Functor.map_comp, Etale.overTargetTransition_stageSingleIso Λ e h φ eᵢ eⱼ πᵢ πⱼ ρ waᵢ waⱼ wa
-      hπ F, Etale.higherDirectImageOverMap, Etale.higherDirectImageTransition]
-  simp only [Functor.map_comp]
-  exact congrArg (_ ≫ ·) (Category.assoc _ _ _).symm
+  rw [Etale.higherDirectImageOverMap_eq, ← Functor.map_comp, ← Functor.map_comp,
+    ← Functor.map_comp, Etale.overTargetTransition_stageSingleIso Λ e h φ eᵢ eⱼ πᵢ πⱼ ρ waᵢ waⱼ wa
+      hπ F]
+  simp only [Functor.map_comp, Category.assoc]
 
 end Conversion
 

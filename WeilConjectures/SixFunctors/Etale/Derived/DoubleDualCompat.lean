@@ -341,6 +341,26 @@ theorem map_verdierDualDoubleDual_app_comp_mateEquiv
     MonoidalClosed.ihomFlipSelfAdjunction_unit_app] at this
   exact this
 
+/-- Blueprint `lem-weil-delta-proper-pushforward`, conditional form over a general coefficient
+category: if the square `α : 𝔻_Y ∘ Rf_* ⟶ Rf_* ∘ 𝔻_X` is invertible at `K` and its mate is
+invertible at `𝔻_X K`, then `Rf_* δ_K` is an isomorphism if and only if `δ_{Rf_* K}` is.
+
+The coefficient category in `hm` is left to unification, as in
+`AlgebraicGeometry.Etale.isIso_map_verdierDualDoubleDual_app_iff_of_isIso_mateEquiv`, so that
+both hypotheses elaborate to the same term and the kernel need not compare them. -/
+theorem isIso_map_verdierDualDoubleDual_app_iff_of_isIso_app_mateEquiv
+    (α : TwoSquare R((f)_*[A]) (verdierDual A aX).rightOp (verdierDual A aY).rightOp
+      (R((f)_*[A])).op)
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) [IsIso (α.app K)]
+    (hm : IsIso ((mateEquiv (MonoidalClosed.ihomFlipSelfAdjunction (dualizingComplex _ aX))
+      (MonoidalClosed.ihomFlipSelfAdjunction (dualizingComplex _ aY)) α).app
+        (op ((verdierDual _ aX).obj (op K))))) :
+    IsIso ((R((f)_*[A])).map ((verdierDualDoubleDual A aX).app K)) ↔
+      IsIso ((verdierDualDoubleDual A aY).app ((R((f)_*[A])).obj K)) := by
+  rw [← isIso_comp_right_iff ((verdierDualDoubleDual A aY).app _)
+    ((verdierDual A aY).map (α.app K)),
+    ← map_verdierDualDoubleDual_app_comp_mateEquiv A aX aY f α K, isIso_comp_right_iff]
+
 end Proper
 
 section ProperFinite
@@ -364,11 +384,9 @@ noncomputable def verdierDualRightDerivedLowerStarSquare :
 are isomorphisms. -/
 instance isIso_verdierDualRightDerivedLowerStarSquare_app
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    IsIso ((verdierDualRightDerivedLowerStarSquare Λ a f).app K) :=
-  inferInstanceAs (IsIso ((verdierDualLowerShriekIso _ a f
-    (derivedHomRightDerivedLowerShriekIsoOfFinite Λ f)
-    (nonempty_iso_rightDerivedUpperShriek_dualizingComplex Λ f a).some
-    (rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} Λ) f)).hom.app K))
+    IsIso ((verdierDualRightDerivedLowerStarSquare Λ a f).app K) := by
+  dsimp only [verdierDualRightDerivedLowerStarSquare]
+  infer_instance
 
 /-- Blueprint `lem-weil-delta-proper-pushforward`, conditional form: for proper `f` and finite
 coefficients, if the mate of the Verdier exchange (the canonical comparison
@@ -381,12 +399,8 @@ theorem isIso_map_verdierDualDoubleDual_app_iff_of_isIso_mateEquiv
         (verdierDualRightDerivedLowerStarSquare Λ a f)).app
           (op ((verdierDual _ (f ≫ a)).obj (op K))))) :
     IsIso ((R((f)_*[ModuleCat.{u + 1} Λ])).map ((verdierDualDoubleDual _ (f ≫ a)).app K)) ↔
-      IsIso ((verdierDualDoubleDual _ a).app ((R((f)_*[ModuleCat.{u + 1} Λ])).obj K)) := by
-  have h := map_verdierDualDoubleDual_app_comp_mateEquiv _ (f ≫ a) a f
-    (verdierDualRightDerivedLowerStarSquare Λ a f) K
-  rw [← isIso_comp_right_iff ((verdierDualDoubleDual _ a).app _)
-    ((verdierDual _ a).map ((verdierDualRightDerivedLowerStarSquare Λ a f).app K)), ← h,
-    isIso_comp_right_iff]
+      IsIso ((verdierDualDoubleDual _ a).app ((R((f)_*[ModuleCat.{u + 1} Λ])).obj K)) :=
+  isIso_map_verdierDualDoubleDual_app_iff_of_isIso_app_mateEquiv _ (f ≫ a) a f _ K hm
 
 end ProperFinite
 

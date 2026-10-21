@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.NoetherianApproximation
+public import WeilConjectures.Mathlib.Algebra.Algebra.Subalgebra.Tower
 
 /-!
 # Finitely many étale algebras descend to a common finitely generated subring
@@ -26,8 +27,6 @@ namespace AlgebraicGeometry
 
 variable {A : Type u} [CommRing A]
 
-set_option maxHeartbeats 1600000 in
--- the kernel checks the scalar tower of nested finitely generated subrings
 /-- **Finitely many étale algebras descend to one finitely generated subring.** -/
 theorem exists_finset_algEquiv_tensorProduct_of_etale_fin {m : ℕ} (B : Fin m → Type u)
     [∀ k, CommRing (B k)] [∀ k, Algebra A (B k)] [∀ k, Algebra.Etale A (B k)] :
@@ -46,7 +45,7 @@ theorem exists_finset_algEquiv_tensorProduct_of_etale_fin {m : ℕ} (B : Fin m �
   let (k : Fin m) : Algebra (Algebra.adjoin ℤ (F k : Set A)) A₀ :=
     (Subalgebra.inclusion (hle k)).toAlgebra
   have (k : Fin m) : IsScalarTower (Algebra.adjoin ℤ (F k : Set A)) A₀ A :=
-    .of_algebraMap_eq fun x ↦ (Subalgebra.coe_inclusion (hle k) x).symm
+    Subalgebra.isScalarTower_inclusion (hle k)
   refine ⟨G, fun k ↦ A₀ ⊗[Algebra.adjoin ℤ (F k : Set A)] B₀ k, fun _ ↦ inferInstance,
     fun _ ↦ inferInstance, fun k ↦ ⟨inferInstance, ?_⟩⟩
   obtain ⟨e⟩ := he k

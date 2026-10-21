@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ForgetCoherence
 public import WeilConjectures.SixFunctors.ProEtale.Adic.GeometricFrobenius
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStarComp
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Coherence
 
 /-!
@@ -50,8 +51,6 @@ section Sections
 variable (A : Type u') [Category.{u + 1} A]
 
 set_option linter.flexible false in
-set_option maxHeartbeats 1000000 in
--- The section-wise comparison of the iterated base changes is a long `simp` computation.
 /-- The unit of the Frobenius equivalences, pushed forward along `J`, followed by the
 composition isomorphisms of pushforwards along `Fr_X ≫ J = J ≫ Fr_Y`, agrees with the unit
 followed by the pushforward of the exchange isomorphism of `J_*` with `Fr^* = (Fr⁻¹)_*`. Both are
@@ -71,10 +70,19 @@ lemma lowerStar_map_unit_comp_lowerStarComp {X Y : Scheme.{u}} (J : Y ⟶ X) (a 
       (b.hom)_*[A].map ((lowerStarComp A J b.inv).hom.app M ≫
         (lowerStarCongr A c').hom.app M ≫ (lowerStarComp A a.inv J).inv.app M) := by
   refine ObjectProperty.hom_ext _ (NatTrans.ext (funext fun V ↦ ?_))
-  simp only [ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app,
-    lowerStarComp_hom_app_hom_app, lowerStarComp_inv_app_hom_app, lowerStarCongr_hom_app_hom_app,
-    lowerStarId_inv_app_hom_app, lowerStar_map_hom_app', lowerStar_obj_obj_map',
-    ← Functor.map_comp, ← op_comp, Category.assoc]
+  -- `rw` rather than `simp only`: `simp only` would close the goal through a single kernel
+  -- conversion between the composite and its sectionwise form, which is very slow.
+  repeat' first
+    | rw [ObjectProperty.FullSubcategory.comp_hom]
+    | rw [NatTrans.comp_app]
+    | rw [lowerStar_map_hom_app']
+    | rw [Functor.map_comp]
+    | rw [lowerStarComp_hom_app_hom_app]
+    | rw [lowerStarComp_inv_app_hom_app]
+    | rw [lowerStarCongr_hom_app_hom_app]
+    | rw [lowerStarId_inv_app_hom_app]
+    | rw [lowerStar_obj_obj_map']
+  simp only [← Functor.map_comp, ← op_comp, Category.assoc]
   congr 1
   apply Quiver.Hom.unop_inj
   apply MorphismProperty.Over.Hom.ext
@@ -146,9 +154,32 @@ lemma conjugateEquiv_adicUpperStarGeometricFiberMapCompFrobeniusIso_inv :
   simp only [Category.comp_id, Category.assoc]
   rw [Category.id_comp]
 
+lemma adicLowerStarId_inv_app_hom_hom_app (X : Scheme.{u}) (M : AdicSheaf l X) (V : X.ProEtᵒᵖ) :
+    ((adicLowerStarId l X).inv.app M).hom.hom.app V =
+      M.X.obj.map ((MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ X).hom.app V.unop).op :=
+  (congrArg (fun φ ↦ φ.hom.app V)
+    (Category.id_comp ((lowerStarId (WeilCoefficients.{u} l) X).inv.app M.X))).trans
+    (lowerStarId_inv_app_hom_app _ M.X V)
+
+/-- On sections, the unit of the adjunction `(e⁻¹)_* ⊣ e_*` of `ℓ`-adic sheaves is the restriction
+map along the canonical isomorphism of iterated base changes. -/
+lemma adicLowerStarEquivalence_symm_unit_app_hom_hom_app {X : Scheme.{u}} (e : X ≅ X)
+    (N : AdicSheaf l X) (W : X.ProEtᵒᵖ) :
+    ((adicLowerStarEquivalence l e).symm.toAdjunction.unit.app N).hom.hom.app W =
+      N.X.obj.map ((MorphismProperty.Over.pullbackComp e.inv e.hom).inv.app W.unop ≫
+        (MorphismProperty.Over.pullbackCongr e.inv_hom_id.symm).inv.app W.unop ≫
+          (MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ X).hom.app W.unop).op := by
+  rw [show (adicLowerStarEquivalence l e).symm.toAdjunction.unit.app N =
+      (((adicLowerStarId l X).inv ≫ (adicLowerStarCongr l e.inv_hom_id).inv) ≫
+        (adicLowerStarComp l e.inv e.hom).inv).app N from rfl,
+    NatTrans.comp_app, NatTrans.comp_app, Mod.comp_hom', Mod.comp_hom',
+    ObjectProperty.FullSubcategory.comp_hom, ObjectProperty.FullSubcategory.comp_hom,
+    NatTrans.comp_app, NatTrans.comp_app, adicLowerStarId_inv_app_hom_hom_app,
+    adicLowerStarCongr_inv_app_hom_hom_app, adicLowerStarComp_inv_app_hom_hom_app,
+    ← Functor.map_comp, ← Functor.map_comp, ← op_comp, ← op_comp]
+
 set_option maxHeartbeats 2000000 in
--- The kernel needs more time to unfold the composite `(Fr⁻¹)_* ⋙ Fr_*` in the unit of the
--- Frobenius equivalence.
+-- Rewriting both sides down to sections takes many elaboration steps.
 /-- The composition isomorphism `J_* ⋙ (b⁻¹)_* ≅ (a⁻¹)_* ⋙ J_*` of pushforwards along the two
 sides of `J ≫ b⁻¹ = a⁻¹ ≫ J` is the mate, under the equivalences `(a⁻¹)_* ⊣ a_*` and
 `(b⁻¹)_* ⊣ b_*`, of the composition isomorphism along the two sides of `a ≫ J = J ≫ b`. -/
@@ -160,17 +191,49 @@ lemma mateEquiv_adicLowerStarComp_hom {X Y : Scheme.{u}} (J : Y ⟶ X) (a : Y �
           (adicLowerStarComp l a.inv J).symm).hom)).natTrans =
     (adicLowerStarComp l a.hom J).hom ≫ (adicLowerStarCongr l c).hom ≫
       (adicLowerStarComp l J b.hom).inv := by
+  -- Both sides are compared on sections, where they are restriction maps of `M.X`; see
+  -- `AlgebraicGeometry.ProEtale.adicLowerStarComp_exchange`.
   refine congrArg TwoSquare.natTrans (mateEquiv_eq_of_unit _ _ _ (TwoSquare.mk _ _ _ _ _)
-    fun M ↦ Mod.hom_ext _ _ ?_)
-  have key := lowerStar_map_unit_comp_lowerStarComp (WeilCoefficients.{u} l) J a b c c' M.X
-  have hu (X : Scheme.{u}) (e : X ≅ X) (N : AdicSheaf l X) :
-      ((adicLowerStarEquivalence l e).symm.toAdjunction.unit.app N).hom =
-        (lowerStarId _ X).inv.app N.X ≫ (lowerStarCongr _ e.inv_hom_id.symm).hom.app N.X ≫
-          (lowerStarComp _ e.inv e.hom).inv.app N.X :=
-    adicLowerStarEquivalence_counitIso_inv_app_hom e N
-  simp only [Mod.comp_hom', adicLowerStar_map_hom, hu, NatTrans.comp_app,
-    adicLowerStarComp_hom_app_hom, adicLowerStarComp_inv_app_hom, adicLowerStarCongr_hom_app_hom,
-    Iso.trans_hom, Iso.symm_hom, Functor.map_comp, Category.assoc] at key ⊢
+    fun M ↦ Mod.hom_ext _ _ (ObjectProperty.hom_ext _ (NatTrans.ext (funext fun V ↦ ?_))))
+  have key := congrArg (fun φ ↦ φ.hom.app V)
+    (lowerStar_map_unit_comp_lowerStarComp (WeilCoefficients.{u} l) J a b c c' M.X)
+  have hi (X : Scheme.{u}) (e : X ≅ X) {N N' : AdicSheaf l X} (φ : N ⟶ N') (W : X.ProEtᵒᵖ) :
+      ((adicLowerStarEquivalence l e).symm.inverse.map φ).hom.hom.app W =
+        φ.hom.hom.app (op ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ e.hom).obj W.unop)) :=
+    rfl
+  have hf (X : Scheme.{u}) (e : X ≅ X) (N : AdicSheaf l X) {W W' : X.ProEtᵒᵖ} (φ : W ⟶ W') :
+      ((adicLowerStarEquivalence l e).symm.functor.obj N).X.obj.map φ =
+        N.X.obj.map ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ e.inv).map φ.unop).op :=
+    rfl
+  repeat' first
+    | rw [Iso.trans_hom]
+    | rw [Iso.symm_hom]
+    | rw [Functor.map_comp]
+    | rw [Mod.comp_hom']
+    | rw [ObjectProperty.FullSubcategory.comp_hom]
+    | rw [NatTrans.comp_app]
+    | rw [adicLowerStar_map_hom_hom_app]
+    | rw [hi]
+    | rw [adicLowerStarEquivalence_symm_unit_app_hom_hom_app]
+    | rw [adicLowerStarComp_hom_app_hom_hom_app]
+    | rw [adicLowerStarComp_inv_app_hom_hom_app]
+    | rw [adicLowerStarCongr_hom_app_hom_hom_app]
+    | rw [adicLowerStar_obj_X_obj_map]
+    | rw [hf]
+  repeat' first
+    | rw [Functor.map_comp] at key
+    | rw [ObjectProperty.FullSubcategory.comp_hom] at key
+    | rw [NatTrans.comp_app] at key
+    | rw [lowerStar_map_hom_app'] at key
+    | rw [lowerStarComp_hom_app_lowerStar_obj_hom_app] at key
+    | rw [lowerStarComp_inv_app_lowerStar_obj_hom_app] at key
+    | rw [lowerStarCongr_hom_app_lowerStar_obj_hom_app] at key
+    | rw [lowerStarComp_hom_app_hom_app] at key
+    | rw [lowerStarComp_inv_app_hom_app] at key
+    | rw [lowerStarCongr_hom_app_hom_app] at key
+    | rw [lowerStarId_inv_app_hom_app] at key
+    | rw [lowerStar_obj_obj_map'] at key
+  simp only [← Functor.map_comp, ← op_comp, Quiver.Hom.unop_op, Category.assoc] at key ⊢
   exact key
 
 /-- The exchange isomorphism

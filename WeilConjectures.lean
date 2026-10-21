@@ -8268,6 +8268,7 @@ public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.ConstructibleSheaf.DenseOpenUnit
 public import WeilConjectures.ConstructibleSheaf.DenseOpenUnitNormal
 public import WeilConjectures.ConstructibleSheaf.DerivedMorphismDescent
+public import WeilConjectures.ConstructibleSheaf.DerivedMorphismDescentShift
 public import WeilConjectures.ConstructibleSheaf.Devissage
 public import WeilConjectures.ConstructibleSheaf.DualLocallyConstant
 public import WeilConjectures.ConstructibleSheaf.DualStalk
@@ -8577,6 +8578,8 @@ public import WeilConjectures.EtaleCohomology.TateTwist.Cohomology
 public import WeilConjectures.EtaleCohomology.TateTwist.FiniteKummerLevel
 public import WeilConjectures.EtaleCohomology.TateTwist.FiniteKummerLevelBaseChange
 public import WeilConjectures.EtaleCohomology.TateTwist.KummerClass
+public import WeilConjectures.EtaleCohomology.TateTwist.KummerClass.Basic
+public import WeilConjectures.EtaleCohomology.TateTwist.KummerClass.TwistPullback
 public import WeilConjectures.EtaleCohomology.TateTwist.KummerClassTorsor
 public import WeilConjectures.EtaleCohomology.TateTwist.KummerLevelIndependence
 public import WeilConjectures.EtaleCohomology.TateTwist.Normalized
@@ -8829,6 +8832,7 @@ public import WeilConjectures.LinearAlgebra.SymmetricAlgebra.Graded
 public import WeilConjectures.LinearAlgebra.TensorProduct.Kunneth
 public import WeilConjectures.Mathlib.Algebra.Algebra.Hom
 public import WeilConjectures.Mathlib.Algebra.Algebra.Pi
+public import WeilConjectures.Mathlib.Algebra.Algebra.Subalgebra.Tower
 public import WeilConjectures.Mathlib.Algebra.BigOperators.Finprod
 public import WeilConjectures.Mathlib.Algebra.BigOperators.GroupWithZero.Finset
 public import WeilConjectures.Mathlib.Algebra.BigOperators.Intervals
@@ -9064,6 +9068,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Abelian.Injective.Resolutio
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.RightDerived
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.Subcategory
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.Subobject
+public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Additive
 public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.FullyFaithful
 public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Limits
@@ -11974,18 +11979,24 @@ public import WeilConjectures.Topology.TopologicalResolutionCocycleLift
 public import WeilConjectures.Topology.TopologicalTerminalResolutionExtComparison
 public import WeilConjectures.Topology.WholeSpaceClosedSubtypeCohomologyVanishing
 public import WeilConjectures.TraceFormula.Basic
+public import WeilConjectures.TraceFormula.CategoricalTrace
 public import WeilConjectures.TraceFormula.CompactCohomology
 public import WeilConjectures.TraceFormula.Correspondence
 public import WeilConjectures.TraceFormula.Dualizing
 public import WeilConjectures.TraceFormula.FixedPoint
 public import WeilConjectures.TraceFormula.Frobenius
+public import WeilConjectures.TraceFormula.FrobeniusIterate
 public import WeilConjectures.TraceFormula.Main
 public import WeilConjectures.TraceFormula.Stalk
+public import WeilConjectures.TraceFormula.Statement
+public import WeilConjectures.TraceFormula.WeilTrace
 public import WeilConjectures.WeilObject.BoundedConstructible.Defs
+public import WeilConjectures.WeilObject.BoundedConstructible.Homology
 public import WeilConjectures.WeilObject.BoundedConstructible.LowerUpperShriek
 public import WeilConjectures.WeilObject.BoundedConstructible.TensorHom
 public import WeilConjectures.WeilObject.BoundedConstructible.UpperLowerStar
 public import WeilConjectures.WeilObject.Defs
+public import WeilConjectures.WeilObject.Sheaf.Stalk
 public import WeilConjectures.WeilSheaf.AffineLineCohomology
 public import WeilConjectures.WeilSheaf.AlgClosedCoefficientCohomology
 public import WeilConjectures.WeilSheaf.ArtinSchreierDual

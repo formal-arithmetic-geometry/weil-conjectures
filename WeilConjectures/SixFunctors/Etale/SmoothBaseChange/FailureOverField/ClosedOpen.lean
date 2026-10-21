@@ -56,6 +56,11 @@ open CategoryTheory Limits
 
 open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 
+/- Without this, `X ⟶ Y` in statements elaborates through `ReflQuiver.toQuiver`, while compositions
+and functor images carry `CategoryStruct.toQuiver`; the kernel reconciles the two on the derived
+categories only by unfolding them, which made the proofs below slow to check. -/
+attribute [-instance] CategoryTheory.catToReflQuiver
+
 namespace CategoryTheory.Adjunction
 
 section Mates
@@ -100,6 +105,74 @@ lemma unit_app_comp_map_naturality (S : C ⥤ C') (S' : D ⥤ D') (s : S ⋙ L' 
   rw [reassoc_of% h₁, Category.assoc, ← R'.map_comp, ← R'.map_comp]
   congr 2
   rw [reassoc_of% h₂, ← S'.map_comp, h₃, S'.map_comp, Category.assoc]
+
+/-- The component `S (R N) ⟶ R' (S' N)` of the mate of `s : S ⋙ L' ⟶ L ⋙ S'`: the map adjoint to
+`L' (S (R N)) ⟶ S' (L (R N)) ⟶ S' N`. It is the component at `N` of Mathlib's
+`CategoryTheory.mateEquiv adj adj' s` (`CategoryTheory.Adjunction.mateApp_eq_mateEquiv_app`);
+the separate definition keeps a regular head that the kernel compares argument by argument. -/
+def mateApp (S : C ⥤ C') (S' : D ⥤ D') (s : S ⋙ L' ⟶ L ⋙ S') (N : D) :
+    S.obj (R.obj N) ⟶ R'.obj (S'.obj N) :=
+  adj'.unit.app (S.obj (R.obj N)) ≫ R'.map (s.app (R.obj N) ≫ S'.map (adj.counit.app N))
+
+/-- The definition of `CategoryTheory.Adjunction.mateApp`. -/
+lemma mateApp_eq (S : C ⥤ C') (S' : D ⥤ D') (s : S ⋙ L' ⟶ L ⋙ S') (N : D) :
+    adj.mateApp adj' S S' s N =
+      adj'.unit.app (S.obj (R.obj N)) ≫ R'.map (s.app (R.obj N) ≫ S'.map (adj.counit.app N)) :=
+  rfl
+
+/-- `CategoryTheory.Adjunction.mateApp` is the component of Mathlib's `CategoryTheory.mateEquiv`. -/
+lemma mateApp_eq_mateEquiv_app (S : C ⥤ C') (S' : D ⥤ D') (s : S ⋙ L' ⟶ L ⋙ S') (N : D) :
+    adj.mateApp adj' S S' s N = (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s)).natTrans.app N := by
+  simp [mateApp]
+
+/-- The mate component `CategoryTheory.Adjunction.mateApp` is natural:
+```
+S (R N) --mateApp N--> R' (S' N)
+   |                       |
+S (R f)               R' (S' f)
+   v                       v
+S (R N') -mateApp N'-> R' (S' N')
+```
+-/
+lemma mateApp_naturality (S : C ⥤ C') (S' : D ⥤ D') (s : S ⋙ L' ⟶ L ⋙ S') {N N' : D}
+    (f : N ⟶ N') :
+    adj.mateApp adj' S S' s N ≫ R'.map (S'.map f) =
+      S.map (R.map f) ≫ adj.mateApp adj' S S' s N' :=
+  adj.unit_app_comp_map_naturality adj' S S' s f
+
+/-- The image of the unit of `adj`, followed by the mate component, is the unit of `adj'` followed
+by the square:
+```
+S F ---S (η F)---> S (R (L F))
+ |                     |
+η' (S F)          mateApp (L F)
+ v                     v
+R' (L' (S F)) -R' (s F)-> R' (S' (L F))
+```
+-/
+lemma map_unit_comp_mateApp (S : C ⥤ C') (S' : D ⥤ D') (s : S ⋙ L' ⟶ L ⋙ S') (F : C) :
+    S.map (adj.unit.app F) ≫ adj.mateApp adj' S S' s (L.obj F) =
+      adj'.unit.app (S.obj F) ≫ R'.map (s.app F) :=
+  adj.map_unit_comp_unit_app_comp_map adj' S S' s F
+
+/-- The mate component precomposed with `S` of a morphism `a : A ⟶ R N` is the map adjoint to
+`L' (S A) ⟶ S' (L A) ⟶ S' N`:
+```
+S A ---------S a---------> S (R N)
+ |                            |
+η' (S A)                  mateApp N
+ v                            v
+R' (L' (S A)) --R' (s A ≫ S' (L a ≫ ε N))--> R' (S' N)
+```
+-/
+lemma map_comp_mateApp (S : C ⥤ C') (S' : D ⥤ D') (s : S ⋙ L' ⟶ L ⋙ S') {A : C} {N : D}
+    (a : A ⟶ R.obj N) :
+    S.map a ≫ adj.mateApp adj' S S' s N =
+      adj'.unit.app (S.obj A) ≫ R'.map (s.app A ≫ S'.map (L.map a ≫ adj.counit.app N)) := by
+  have n₁ := adj'.unit.naturality (S.map a)
+  have n₂ := s.naturality a
+  simp only [Functor.id_map, Functor.comp_map, Functor.id_obj, Functor.comp_obj] at n₁ n₂
+  rw [mateApp, reassoc_of% n₁, ← R'.map_comp, reassoc_of% n₂, S'.map_comp]
 
 end Mates
 
@@ -326,12 +399,10 @@ noncomputable def Etale.singleLowerStarComparison {T' T₁ : Scheme.{u}} (k : T�
     (N : Sheaf T₁.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
     (DerivedCategory.Plus.singleFunctor _ 0).obj (((k)_*[ModuleCat.{u + 1} Λ]).obj N) ⟶
       R+((k)_*[ModuleCat.{u + 1} Λ]).obj ((DerivedCategory.Plus.singleFunctor _ 0).obj N) :=
-  (Etale.derivedUpperStarLowerStarAdjunctionPlus _ k).unit.app
-      ((DerivedCategory.Plus.singleFunctor _ 0).obj (((k)_*[ModuleCat.{u + 1} Λ]).obj N)) ≫
-    R+((k)_*[ModuleCat.{u + 1} Λ]).map
-      ((((k)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).hom.app _ ≫
-        (DerivedCategory.Plus.singleFunctor _ 0).map
-          ((Etale.upperStarLowerStarAdjunction _ k).counit.app N))
+  (Etale.upperStarLowerStarAdjunction _ k).mateApp
+    (Etale.derivedUpperStarLowerStarAdjunctionPlus _ k) (DerivedCategory.Plus.singleFunctor _ 0)
+    (DerivedCategory.Plus.singleFunctor _ 0)
+    (((k)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).hom N
 
 /-- The comparison `AlgebraicGeometry.Etale.singleLowerStarComparison` is natural. -/
 lemma Etale.singleLowerStarComparison_naturality {T' T₁ : Scheme.{u}} (k : T₁ ⟶ T')
@@ -340,7 +411,7 @@ lemma Etale.singleLowerStarComparison_naturality {T' T₁ : Scheme.{u}} (k : T�
         R+((k)_*[ModuleCat.{u + 1} Λ]).map ((DerivedCategory.Plus.singleFunctor _ 0).map f) =
       (DerivedCategory.Plus.singleFunctor _ 0).map (((k)_*[ModuleCat.{u + 1} Λ]).map f) ≫
         Etale.singleLowerStarComparison Λ k N' :=
-  Adjunction.unit_app_comp_map_naturality (Etale.upperStarLowerStarAdjunction _ k)
+  Adjunction.mateApp_naturality (Etale.upperStarLowerStarAdjunction _ k)
     (Etale.derivedUpperStarLowerStarAdjunctionPlus _ k) (DerivedCategory.Plus.singleFunctor _ 0)
     (DerivedCategory.Plus.singleFunctor _ 0)
     (((k)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).hom f
@@ -356,7 +427,7 @@ lemma Etale.singleFunctor_map_unit_comp_singleLowerStarComparison {T' T₁ : Sch
         ((DerivedCategory.Plus.singleFunctor _ 0).obj F) ≫
       R+((k)_*[ModuleCat.{u + 1} Λ]).map
         ((((k)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).hom.app F) :=
-  Adjunction.map_unit_comp_unit_app_comp_map (Etale.upperStarLowerStarAdjunction _ k)
+  Adjunction.map_unit_comp_mateApp (Etale.upperStarLowerStarAdjunction _ k)
     (Etale.derivedUpperStarLowerStarAdjunctionPlus _ k) (DerivedCategory.Plus.singleFunctor _ 0)
     (DerivedCategory.Plus.singleFunctor _ 0)
     (((k)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).hom F
@@ -378,14 +449,11 @@ lemma Etale.singleFunctor_map_comp_singleLowerStarComparison {T' T₁ : Scheme.{
           ((((k)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).hom.app A ≫
             (DerivedCategory.Plus.singleFunctor _ 0).map
               (((k)^*[ModuleCat.{u + 1} Λ]).map a ≫
-                (Etale.upperStarLowerStarAdjunction _ k).counit.app N)) := by
-  have n₁ := (Etale.derivedUpperStarLowerStarAdjunctionPlus (ModuleCat.{u + 1} Λ) k).unit.naturality
-    ((DerivedCategory.Plus.singleFunctor _ 0).map a)
-  have n₂ := (((k)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).hom.naturality a
-  rw [Functor.id_map, Functor.comp_map] at n₁
-  rw [Functor.comp_map, Functor.comp_map] at n₂
-  rw [Etale.singleLowerStarComparison, reassoc_of% n₁, ← Functor.map_comp,
-    reassoc_of% n₂, Functor.map_comp (DerivedCategory.Plus.singleFunctor _ 0)]
+                (Etale.upperStarLowerStarAdjunction _ k).counit.app N)) :=
+  Adjunction.map_comp_mateApp (Etale.upperStarLowerStarAdjunction _ k)
+    (Etale.derivedUpperStarLowerStarAdjunctionPlus _ k) (DerivedCategory.Plus.singleFunctor _ 0)
+    (DerivedCategory.Plus.singleFunctor _ 0)
+    (((k)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).hom a
 
 /-- Postcomposition with the comparison `k_* N [0] ⟶ R k_* (N [0])` is bijective on morphisms out
 of a sheaf placed in degree `0`: both sides are identified with `Hom(k^* A, N)` by the
@@ -644,7 +712,11 @@ lemma Etale.singleLowerStarComparison_eq (k : T' ⟶ T)
         R+((k)_*[ModuleCat.{u + 1} Λ]).map
           ((((k)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).hom.app _ ≫
             (DerivedCategory.Plus.singleFunctor _ 0).map
-              ((Etale.upperStarLowerStarAdjunction _ k).counit.app N)) := rfl
+              ((Etale.upperStarLowerStarAdjunction _ k).counit.app N)) :=
+  Adjunction.mateApp_eq (Etale.upperStarLowerStarAdjunction _ k)
+    (Etale.derivedUpperStarLowerStarAdjunctionPlus _ k) (DerivedCategory.Plus.singleFunctor _ 0)
+    (DerivedCategory.Plus.singleFunctor _ 0)
+    (((k)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).hom N
 
 /-- `e^*` of the comparison `k_* N[0] ⟶ Rk_*(N[0])` is `e^*` of the unit followed by `e^*` of
 `Rk_*` of the counit. -/
@@ -658,7 +730,8 @@ lemma Etale.upperStar_map_singleLowerStarComparison (e : Y ⟶ T) (k : T' ⟶ T)
           ((((k)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).hom.app _ ≫
             (DerivedCategory.Plus.singleFunctor _ 0).map
               ((Etale.upperStarLowerStarAdjunction _ k).counit.app N))) :=
-  CategoryTheory.Functor.map_comp _ _ _
+  (congrArg D+((e)^*[ModuleCat.{u + 1} Λ]).map (Etale.singleLowerStarComparison_eq Λ k N)).trans
+    (CategoryTheory.Functor.map_comp _ _ _)
 
 /-- The base-change maps commute with the comparisons of the sources and of the targets for a
 sheaf pushed forward along `k : T' ⟶ T`. -/
