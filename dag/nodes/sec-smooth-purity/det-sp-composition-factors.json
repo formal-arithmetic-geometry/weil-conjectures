@@ -3,51 +3,273 @@
  "blueprint": {
   "is": "det-sp-composition-factors",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Composition of orientations and of tensor maps",
- "statement": "Let $X\\xrightarrow{f}Y\\xrightarrow{g}Z$ be smooth of pure relative dimensions $d$\nand $e$, with coefficients a finite ring $\\Lambda=A$ or towers\n$\\mathcal O_E/\\ell^\\bullet$.\n\n1. *Orientation.* Under\n   $\\omega_{g\\circ f}\\simeq f^!\\omega_g\\simeq f^*\\omega_g\\otimes\\omega_f$ (composition and\n   the tensor map for $f$ at $\\omega_g$) and the twist additivity\n   $\\Lambda(d+e)[2d+2e]\\simeq\\Lambda(d)[2d]\\otimes\\Lambda(e)[2e]$, the orientation of\n   $g\\circ f$ is the tensor product of $f^*$ of the orientation of $g$ with the\n   orientation of $f$.\n2. *Tensor maps.* Under $(g\\circ f)^!\\simeq f^!g^!$, the tensor map\n   $(g\\circ f)^*K\\otimes\\omega_{g\\circ f}\\to(g\\circ f)^!K$ equals the iterate: the tensor\n   map for $g$ pulled back by $f$ and tensored with $\\omega_f$, followed by the\n   tensor map for $f$ at $g^!K$.\n\nConsequently $\\gamma_{g\\circ f}(K)=\\gamma_f(g^!K)\\circ f^*(\\gamma_g(K))(d)[2d]$ under\nthe canonical identifications.",
+ "statement": "Fix the global finite-field datum $k=\\overline{\\mathbf F}_q$ of characteristic $p$ and a prime $\\ell\\ne p$ [def-weil-finite-field-fiber]. Let $X\\xrightarrow fY\\xrightarrow gZ$ be smooth separated morphisms of pure relative dimensions $d,e\\geq0$ between separated finite-type $k$-schemes [def-weil-finite-type-morphism, def-weil-proper-morphism, def-sbc-smooth-morphisms]. Put $h=gf$.\n\nUse either a finite commutative ring $A$ with $\\ell^rA=0$ for some $r\\geq1$, and the ordinary constant-$A$ pro-etale derived categories and bounded constructible finite-Tor subcategories of [det-sp-finite-general-ring], or the coefficient system $B=A_\\bullet=(\\mathcal O_E/\\ell^n)_{n\\geq1}$ for a finite extension $E/\\mathbf Q_\\ell$, in the ordinary derived categories of varying-coefficient towers [sk-def-sp-coefficient-towers, det-sp-coefficient-towers-abelian] and their uniformly bounded constructible finite-Tor subcategories [sk-def-sp-normalized-towers]. In the finite case write $B=A$. Write $\\mathcal C_T(B)$ for the respective constructible finite-Tor category. An input tower need not be normalized. All tensor products are ordinary derived tensor products over $B$, including in the tower case.\n\nUse pullback, tensor, twists and shifts as in [def-weil-derived-pullback-tensor-hom, def-weil-derived-tensor, def-coefficient-twists-detailed], with arbitrary finite-$A$ twists as in [det-sp-finite-general-ring] and levelwise twists for towers. Put $d_f=d$, $d_g=e$, $d_h=d+e$. For $u=f,g,h$ let $F_u=Ru_{!,B}\\dashv G_u=u_B^!$ and $\\omega_u=G_uB_{\\mathrm{target}(u)}$; use [det-sp-finite-general-ring, def-pur-co-smoothness] at finite coefficients and [det-sp-tower-gluing, det-sp-tower-gamma] for towers. Write $L_u=B_{\\mathrm{source}(u)}(d_u)[2d_u]$ and $a_u:L_u\\xrightarrow{\\sim}\\omega_u$ for the inverse diagonal orientation, and $t_{u,L}:u^*L\\otimes^L\\omega_u\\to G_uL$ for the canonical tensor map, adjoint to inverse projection followed by $1_L\\otimes\\varepsilon_{u,1}$. Thus $\\gamma_u(L)=t_{u,L}(1\\otimes a_u)$ after twist reassociation [def-pur-smooth-purity-map, det-sp-finite-general-ring, det-sp-tower-gamma]. Let $c:G_h\\xrightarrow{\\sim}G_fG_g$ be the adjunction-preserving compositor of [det-sp-composition-comparisons]. Set\n$$W=f^*\\omega_g\\otimes^L\\omega_f,\\qquad \\rho=t_{f,\\omega_g}:W\\xrightarrow{\\sim}G_f\\omega_g,\\qquad \\mu=\\rho^{-1}c_1:\\omega_h\\xrightarrow{\\sim}W.$$\nThen:\n\n1. Under the canonical shifted-Tate tensor splitting $L_h=B_X(d+e)[2d+2e]\\simeq f^*L_g\\otimes^LL_f$, the orientations satisfy\n$$\\mu a_h=f^*a_g\\otimes a_f.$$\nEquivalently the orientation $\\omega_h\\to L_h$ is the product of the two orientations under $\\mu$.\n2. For every $K\\in\\mathcal C_Z(B)$, under pullback composition and tensor reassociation,\n$$c_K\\,t_{h,K}(1\\otimes\\mu^{-1})=t_{f,G_gK}(f^*t_{g,K}\\otimes1_{\\omega_f})$$\nas maps $h^*K\\otimes^LW\\to G_fG_gK$.\n\nConsequently\n$$c_K\\,\\gamma_h(K)=\\gamma_f(G_gK)\\circ f^*(\\gamma_g(K))(d)[2d]$$\nunder the same canonical twist, shift and pullback identifications.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-factors.md",
   "place": "node det-sp-composition-factors, order None"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-sbc-smooth-morphisms",
+  "det-sp-finite-general-ring",
+  "sk-def-sp-coefficient-towers",
+  "det-sp-coefficient-towers-abelian",
+  "sk-def-sp-normalized-towers",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-derived-tensor",
+  "def-coefficient-twists-detailed",
+  "def-pur-co-smoothness",
+  "det-sp-tower-gluing",
+  "det-sp-tower-gamma",
+  "def-pur-smooth-purity-map",
+  "det-sp-composition-comparisons",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism"
+ ],
  "proof": [
   {
-   "text": "(1) Choose coordinates for $g$, $Y\\supset V\\to\\mathbf A^e_Z$ étale, and\ncoordinates for $f$ over $V$, $X\\supset U\\to\\mathbf A^d_V$ étale; then\n$U\\to\\mathbf A^d_V\\to\\mathbf A^{d+e}_Z$ is a chart for $g\\circ f$. By\n[det-sp-orientation-charts], on these charts each diagonal orientation is the\naffine-space orientation, i.e. adjoint to iterated integration along affine\nlines. Both orientations of $g\\circ f$ (the direct one and the composite one)\nare adjoint to integration along the $d$ coordinates of $f$ followed by the $e$\ncoordinates of $g$: the integration on $\\mathbf A^{d+e}$ is defined recursively\nby exactly this composite, and the composite law of\n[prop-pur-affine-space-composition-law] shows that regrouping the coordinates\nintroduces no sign. So the two orientations agree on each chart. After removing\nthe common twist and shift, both are maps of locally constant rank-one sheaves\n(tower sheaves for towers, where equality is tested levelwise); local agreement\nimplies equality.",
+   "text": "All schemes are Noetherian by [lem-weil-pbc-finite-type-over-noetherian], applied over the field $k$ (whose only ideals are $0,k$). Their separated finite-type structure maps make them quasi-compact and quasi-separated. Thus [thm-nagata-compactification] supplies compactifications for $f,g,h$. Domains and notation. The composition $h$ is smooth of relative dimension $d+e$ by [lem-sbc-smooth-relative-dimension-permanence](2). The finite purity isomorphisms of [det-sp-finite-general-ring](1),(3) give $\\omega_u\\simeq B(d_u)[2d_u]$ and $G_uK\\simeq u^*K(d_u)[2d_u]$ in the stated finite-Tor categories. For towers the same statements, with uniform bounds and natural maps in the ordinary derived tower category, are [det-sp-tower-gamma](1),(2). Thus $\\omega_g$, $G_gK$, $W$ and the sources of both sides are legitimate inputs; in particular $\\rho$ is invertible. Tensor invertibility and finite Tor bounds of the lines follow from [lem-pur-twist-sheaf-locally-free] and scalar extension [det-sp-scalar-extension-functor](2),(3). Tensoring locally with a free line preserves a specified Tor interval; a shift by $[2d]$ subtracts $2d$ from its endpoints, uniformly at every tower level. We use no normalization hypothesis on $K_\\bullet$.",
+   "uses": [
+    "lem-sbc-smooth-relative-dimension-permanence",
+    "det-sp-finite-general-ring",
+    "det-sp-tower-gamma",
+    "lem-pur-twist-sheaf-locally-free",
+    "det-sp-scalar-extension-functor",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "thm-nagata-compactification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-factors.proof.md",
+    "place": "(1)-(2): domains before comparing the maps"
+   }
+  },
+  {
+   "text": "Projection composition on the actual coefficient categories. Use the order $\\operatorname{PF}_{u,M,L}:F_uM\\otimes L\\to F_u(M\\otimes u^*L)$. Its composition identity at finite $A$ is [lem-amb-shriek-tensor-composition] on ordinary etale coefficients, transported, including counits and the specified projection transformations, by [lem-pur-finite-ring-site-tensor-transpose](1),(2). The statement of [lem-sp-et-proet-coefficient-compatibility], at the identity coefficient map $A\\to A$, says explicitly that the same site comparison intertwines the canonical compact-support composition identifications; thus the transported projection identity uses the required compositor. For towers use the arbitrary-system identity of [lem-sf-composition-projection-mate], before evaluation. Its uniformizer indexing may be restricted to the subsequence $en$, where $e$ is the ramification index: $(\\varpi_E^{en})=(\\ell^n)$, so its quotient systems and actual section-model maps become precisely the $\\ell$-power ones. The identity has no normalization hypothesis. Invertibility of the tower projection maps on our uniform finite-Tor inputs is [lem-sp-tower-compact-support-projection-formula]. Write $q_{u,L}:F_u(u^*L\\otimes\\omega_u)\\to L$ for inverse projection (including symmetry) followed by $\\varepsilon_{u,1}\\otimes1_L$. These are the transposes defining $t$ in [det-sp-finite-general-ring] and [det-sp-tower-gamma](2).",
+   "uses": [
+    "lem-amb-shriek-tensor-composition",
+    "lem-pur-finite-ring-site-tensor-transpose",
+    "lem-sf-composition-projection-mate",
+    "lem-sp-tower-compact-support-projection-formula",
+    "det-sp-finite-general-ring",
+    "det-sp-tower-gamma",
+    "lem-sp-et-proet-coefficient-compatibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-factors.proof.md",
+    "place": "(2): projection formula composition, including the actual tower maps"
+   }
+  },
+  {
+   "text": "Compare the transposes for clause (2). Put $P=h^*K\\otimes W$ and $s=\\varepsilon_{g,1}\\circ F_g(q_{f,\\omega_g}):F_gF_fW\\to B_Z$. Transposing the iterated tensor map first under $F_f\\dashv G_f$ and then under $F_g\\dashv G_g$ replaces each $t$ by its defining $q$. Naturality of the counits and the projections, and associativity of $\\operatorname{PF}$ in its tensor variable, $\\operatorname{PF}_{u,M,L\\otimes L'}=\\operatorname{PF}_{u,M\\otimes u^*L,L'}(\\operatorname{PF}_{u,M,L}\\otimes1)$ (proper part: [lem-sfb-ringed-projection-tensor-composition] on the ringed topoi of constant $A$ or of $\\mathcal O_E/\\ell^\\bullet$-towers [det-sp-coefficient-towers-abelian](1); for $j_!$ both sides transpose under $j_!\\dashv j^{-1}$ to $\\eta\\otimes1\\otimes1$), applied with $M=\\omega_f$, $L=\\omega_g$, $L'=g^*K$, give\n$$F_gF_fP\\xrightarrow{\\mathrm{sym},\\,\\operatorname{PF}_{\\mathrm{comp}}^{-1}}F_gF_fW\\otimes K\\xrightarrow{s\\otimes1}K,$$\nwhere $\\operatorname{PF}_{\\mathrm{comp}}=F_g(\\operatorname{PF}_{f,W,g^*K})\\operatorname{PF}_{g,F_fW,K}$, with symmetry moving $K$ last.\nFor the other map, use $\\alpha:F_gF_f\\simeq F_h$ and $c=\\theta:G_h\\simeq G_fG_g$ of [det-sp-composition-comparisons](1), or (3) for towers. Their adjunction normalization says\n$$\\varepsilon^{\\mathrm{comp}}_K\\circ F_gF_f(c_K)=\\varepsilon_{h,K}\\circ\\alpha_{G_hK},\\qquad \\varepsilon^{\\mathrm{comp}}_K=\\varepsilon_{g,K}\\circ F_g(\\varepsilon_{f,G_gK}).$$\nSince $c_1\\mu^{-1}=\\rho$ and $\\varepsilon_{f,\\omega_g}F_f(\\rho)=q_{f,\\omega_g}$, naturality of $\\alpha$ identifies the resulting counit on $W$ with\n$$\\varepsilon_{h,1}F_h(\\mu^{-1})\\alpha_W=\\varepsilon^{\\mathrm{comp}}_1F_gF_f(\\rho)=s.$$\nStep 2 identifies the inverse projection for $h$ with $\\operatorname{PF}_{\\mathrm{comp}}^{-1}$ through this same $\\alpha$. Thus the transpose of $c_Kt_{h,K}(1\\otimes\\mu^{-1})$ is the displayed map too. Injectivity of the adjunction bijection proves clause (2), in the tower derived category itself too.",
+   "uses": [
+    "det-sp-composition-comparisons",
+    "lem-amb-shriek-tensor-composition",
+    "lem-pur-finite-ring-site-tensor-transpose",
+    "lem-sf-composition-projection-mate",
+    "lem-sfb-ringed-projection-tensor-composition",
+    "det-sp-coefficient-towers-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-factors.proof.md",
+    "place": "(2): the two counit transposes"
+   }
+  },
+  {
+   "text": "Choose nested affine charts, first with coefficients $R=\\mathbf Z/\\ell^r$. By [sbc-thm-etale-local-normal-form], for every $x\\in X$ choose affine opens $S\\subset Z$, $V\\subset g^{-1}S$ about $f(x)$ and $U\\subset f^{-1}V$ about $x$, and etale maps $v:V\\to\\mathbf A^e_S$ and $u:U\\to\\mathbf A^d_V$. The map $b:\\mathbf A^d_V\\to\\mathbf A^d_{\\mathbf A^e_S}$ is the base change of $v$, hence etale by [lem-weil-pbc-etale-scheme-base-change]. Its composite $bu$ is etale by the dimension-zero case of [lem-sbc-smooth-relative-dimension-permanence](2). Thus $h|_U=p_{d+e,S}bu$ is a chart with ordered $d$-block followed by $e$-block. All bases used for the affine-space law below are affine, hence separated. The chart maps are separated: their diagonals are pullbacks of those of the separated structure morphisms to $k$. Here [lem-weil-pbc-affine-morphism-permanence](3) gives separatedness of the affine bases; [def-weil-proper-morphism] and [lem-weil-pbc-proper-fp-permanence](b) give the asserted closed diagonals. The etale chart maps are of finite presentation by [lem-weil-pbc-qcqs-morphism-permanence](1), since their sources are affine and targets separated. Restricting a finite-type $k$-scheme to these affine opens remains finite type by restriction of its locally finite-type structure map and quasi-compactness of an affine source. Thus the chart lemmas apply on their stated finite-type domains.",
+   "uses": [
+    "sbc-thm-etale-local-normal-form",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-sbc-smooth-relative-dimension-permanence",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-factors.proof.md",
+    "place": "(1): the two successive coordinate charts"
+   }
+  },
+  {
+   "text": "On these $R$-charts the diagonal orientations are the canonical adjunction orientations of [det-sp-orientation-charts]. Open restriction, the etale identification $e^!=e^*$, and tensor/base-change comparisons are those of [thm-pur-cohomological-smoothness](1),(3),(4) and [lem-pur-co-smooth-etale-locality]. Consequently the restriction of\n$$\\rho(f^*a_g\\otimes a_f):f^*L_g\\otimes L_f\\longrightarrow G_fG_gR_Z$$\nis the pullback along $bu$ of\n$$\\Gamma_{p_d,G_{p_e}R}\\circ p_d^*(\\Gamma_{p_e,R})(d)[2d].$$\nTo see the factors explicitly, replace $a_g|_V$ by $v^*\\Gamma_{p_e,R}$ and $a_f|_U$ by $u^*\\Gamma_{p_{d,V},R}$. The base-change square defining $b$ carries the tensor map for $p_{d,V}$ at $v^*\\omega_{p_e}$ to $b^*$ of the tensor map for $p_d$ at $\\omega_{p_e}$; its source and the two line factors are identified by monoidal pullback. Source-etale restriction along $u$ gives the displayed composite. The same chart formula identifies $a_h|_U$ with $(bu)^*\\Gamma_{p_{d+e},R}$. For $d,e\\geq1$, [prop-pur-affine-space-composition-law] equates these maps with their counit-preserving exceptional compositors. Thus $c_1a_h=\\rho(f^*a_g\\otimes a_f)$ on $U$. The sign from interchanging the shifted line blocks is $(-1)^{(2d)(2e)}=1$. Here $\\Gamma_{p_d,L}=t_{p_d,L}(1\\otimes\\Gamma_{p_d,1})$ for every $L\\in D^b_{ctf}$ on the affine base, and $a_{p}=\\Gamma_{p,1}$: [lem-pur-projection-purity-agreement] identifies the smooth purity map of [def-pur-smooth-purity-map] (inverse diagonal orientation followed by the tensor map) with $\\Gamma_{p_d}$, and at the unit $t_{p_d,1}$ is the unit identification. The same node identifies the maps $\\gamma_{p_d}$ of [prop-pur-affine-space-composition-law] with $\\Gamma_{p_d}$ for $E=\\mathbf Q_\\ell$, and it gives the normalization of $\\vartheta^{\\mathrm{aff}}$ in [det-sp-orientation-charts]. We use it with $L=\\omega_{p_e}=G_{p_e}R$, which lies in $D^b_{ctf}$.",
    "uses": [
     "det-sp-orientation-charts",
-    "prop-pur-affine-space-composition-law"
+    "thm-pur-cohomological-smoothness",
+    "lem-pur-co-smooth-etale-locality",
+    "prop-pur-affine-space-composition-law",
+    "lem-pur-projection-purity-agreement",
+    "def-pur-smooth-purity-map"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-factors.proof.md",
+    "place": "(1): ordered affine integration on the nested charts"
+   }
   },
   {
-   "text": "(2) Transpose both maps under the composite adjunction $R(g\\circ f)_!\\dashv f^!g^!$\nof [det-sp-composition-comparisons]. The transpose of the iterated tensor map\napplies the projection formula for $f$ and the counit for $f$, then the\nprojection formula for $g$ and the counit for $g$. The transpose of the tensor\nmap for $g\\circ f$ applies the projection formula for $g\\circ f$ and its counit.\nThe projection formula for $g\\circ f$ is the composite of those for $f$ and $g$\n(associativity of tensor products and the composition isomorphism for\n$R(-)_!$), and the counit of the composite adjunction is the composite of the\ntwo counits. Hence the transposes agree, and so do the maps.",
+   "text": "The zero-dimensional blocks require no positive-dimensional affine-space lemma. By [lem-pur-projection-purity-agreement], $\\Gamma_{p_0,K}=1_K$ and the ordered $d$-space comparison is the recursive composite of $d$ line comparisons. If $d=0$ or $e=0$, deleting the empty block gives literally that same composite with the tensor unit and identity compositor. The chart normalization [det-sp-orientation-charts] includes $d=0$; the etale tensor formula of [thm-pur-cohomological-smoothness] and [lem-pur-co-smooth-etale-locality] identifies the remaining etale factor with inverse image. Therefore the local equation of Step 5 holds also in these cases, including $d=e=0$.",
    "uses": [
-    "det-sp-composition-comparisons"
+    "lem-pur-projection-purity-agreement",
+    "det-sp-orientation-charts",
+    "thm-pur-cohomological-smoothness",
+    "lem-pur-co-smooth-etale-locality"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-factors.proof.md",
+    "place": "(1): empty coordinate blocks"
+   }
   },
   {
-   "text": "The final identity follows by writing each $\\gamma$ as inverse orientation\nfollowed by tensor map, and inserting (1) and (2), together with naturality of\nthe tensor map for $f$ with respect to $\\gamma_g(K)$.",
-   "uses": [],
-   "elementary": null
+   "text": "Globalize the orientation equation at $R$. Compose both local maps of Step 5 with $\\rho^{-1}$ and the inverse product orientation. They become endomorphisms of $R_X(d+e)[2d+2e]$. After removing the common shift these are maps between degree-zero sheaves, by [lem-weil-pbc-derived-single-fully-faithful]. They agree on the open cover by the $U$ of Step 4, so uniqueness in [lem-pur-sheaf-hom-cover-gluing] makes them equal globally. Undoing the invertible factors gives $\\mu a_h=f^*a_g\\otimes a_f$ for $R$. Substituting this into clause (2), already proved in Step 3, and $\\gamma_u=t_u(1\\otimes a_u)$ gives the purity-composition equation at $R$, in particular at the coefficient unit. This is an equation about specified normalized orientations, not merely an isomorphism between their endpoints. Here $t_{u,1}$ is the unit identification: its transpose is exactly $\\varepsilon_{u,1}$, since projection with the coefficient unit is the tensor unitor. The adjunction bijection sends $1_{G_u1}$ to that counit. Hence $\\gamma_u(1)=a_u$.",
+   "uses": [
+    "lem-weil-pbc-derived-single-fully-faithful",
+    "lem-pur-sheaf-hom-cover-gluing",
+    "def-pur-smooth-purity-map",
+    "def-pur-co-smoothness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-factors.proof.md",
+    "place": "(1): local-to-global equality of shifted sheaf maps"
+   }
+  },
+  {
+   "text": "Pass the unit equation from $R=\\mathbf Z/\\ell^r$ to any finite commutative $A$ with $\\ell^rA=0$. Write $S=(-)_A$, $r_u(L):S G_{u,R}L\\xrightarrow\\sim G_{u,A}(SL)$ for the exceptional coefficient comparison, and $c_R,c_A$ for the geometric compositors. The explicit second equation of [det-sp-composition-comparisons](2), with its coefficient rings specialized to $R\\to A$, is\n$$c_A(SK)r_h(K)=G_{f,A}(r_g(K))\\,r_f(G_{g,R}K)\\,S(c_R(K)).$$\nHere $K=R_Z$ and $G_{g,R}K$ meet the constructible finite-Tor hypotheses by Step 1. By [det-sp-reduction-compatibilities](3), $r_u(L)S(\\gamma_{u,R}(L))=\\gamma_{u,A}(SL)$. Apply these equations to Step 7. Naturality of $\\gamma_{f,A}$ in the isomorphism $r_g(R_Z)$ moves $G_{f,A}(r_g(R_Z))$ across $\\gamma_{f,A}(SG_{g,R}R_Z)$. The chart assertion of [det-sp-reduction-exceptional] identifies the sources with the canonical scalar, twist and pullback comparisons. The resulting equation is\n$$c_A(A_Z)a_{h,A}=\\gamma_{f,A}(G_{g,A}A_Z)\\circ f_A^*(a_{g,A})(d)[2d]=\\rho_A(f_A^*a_{g,A}\\otimes a_{f,A}).$$\nThe last equality expands $\\gamma_f=t_f(1\\otimes a_f)$ from [det-sp-finite-general-ring](3). Clauses (1),(2) of that node identify each $a_{u,A}=r_u(R)S(a_{u,R})$ with the direct diagonal orientation. Thus $\\mu_Aa_{h,A}=f_A^*a_{g,A}\\otimes a_{f,A}$. No flatness of $A$ over $R$ is used; scalar extension is derived.",
+   "uses": [
+    "det-sp-reduction-compatibilities",
+    "det-sp-composition-comparisons",
+    "det-sp-reduction-exceptional",
+    "det-sp-finite-general-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-factors.proof.md",
+    "place": "(1): arbitrary finite admissible rings via normalized coefficient comparisons"
+   }
+  },
+  {
+   "text": "Orientation equality for towers. The two arrows $\\mu a_h$ and $f^*a_g\\otimes a_f$ exist in the ordinary derived tower category by [det-sp-tower-gamma] and [det-sp-composition-comparisons](3). Clause (3) supplies actual compositors on uniformly bounded constructible finite-Tor towers, and identifies their evaluations with the finite $\\alpha_{A_n},\\theta_{A_n}$ including counit normalization; it does not require input normalization. Thus the level $n$ evaluations of our arrows are the finite orientation arrows with $A_n=\\mathcal O_E/\\ell^n$; [det-sp-tower-gluing](3) preserves their adjunction units and counits. For $t$ this also follows by cancelling $1\\otimes a_u$ from $\\gamma_u=t_u(1\\otimes a_u)$, since both $a_u$ and $\\gamma_u$ have their specified finite evaluations. Step 8 equates those finite arrows. Both endpoints are concentrated in degree $-2(d+e)$: each orientation identifies its dualizing object with its shifted Tate line, and locally the unshifted tensor of two free lines is a degree-zero sheaf. Evaluation is exact and computes cohomology levelwise by [det-sp-coefficient-towers-abelian](1),(2), so vanishing in other degrees is detected on all levels. By [lem-sf-derived-concentrated-single] remove the common shift, and by [lem-weil-pbc-derived-single-fully-faithful] identify these maps with actual maps of tower sheaves. Such maps are componentwise families by [sk-def-sp-coefficient-towers]. Their equality at every level therefore gives their equality as tower-sheaf maps, and hence in the derived tower category. This proves clause (1) without asserting faithfulness of evaluation for general derived maps.",
+   "uses": [
+    "det-sp-tower-gamma",
+    "det-sp-composition-comparisons",
+    "det-sp-tower-gluing",
+    "det-sp-coefficient-towers-abelian",
+    "lem-sf-derived-concentrated-single",
+    "lem-weil-pbc-derived-single-fully-faithful",
+    "sk-def-sp-coefficient-towers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-factors.proof.md",
+    "place": "(1): equality of shifted rank-one tower-sheaf maps"
+   }
+  },
+  {
+   "text": "Finish at arbitrary $K$ in either coefficient setting. Naturality of the counit-defined tensor map follows by transposing its natural inverse-projection/counit composite; the relevant maps are those of [det-sp-finite-general-ring](3) and [det-sp-tower-gamma](2). In Step 3 replace $\\mu^{-1}(f^*a_g\\otimes a_f)$ by $a_h$, using Steps 8 and 9. This gives\n$$c_K\\gamma_h(K)=t_{f,G_gK}\\bigl(f^*(t_{g,K}(1\\otimes a_g))\\otimes a_f\\bigr).$$\nExpanding $\\gamma_f$ and $\\gamma_g$ rewrites the right side as $\\gamma_f(G_gK)\\circ f^*(\\gamma_g(K))(d)[2d]$. The rebracketing, shift and twist identifications are those in [def-coefficient-twists-detailed] and [def-pur-smooth-purity-map]; all shifted line degrees are even, so their interchange has sign $+1$. This proves the consequence while retaining the separate orientation and tensor identities.",
+   "uses": [
+    "det-sp-finite-general-ring",
+    "det-sp-tower-gamma",
+    "def-coefficient-twists-detailed",
+    "def-pur-smooth-purity-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-factors.proof.md",
+    "place": "final paragraph: substitution of orientation and tensor factors"
+   }
   }
  ],
  "proof_deps": [
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "det-sp-finite-general-ring",
+  "det-sp-tower-gamma",
+  "lem-pur-twist-sheaf-locally-free",
+  "det-sp-scalar-extension-functor",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "thm-nagata-compactification",
+  "lem-amb-shriek-tensor-composition",
+  "lem-pur-finite-ring-site-tensor-transpose",
+  "lem-sf-composition-projection-mate",
+  "lem-sp-tower-compact-support-projection-formula",
+  "lem-sp-et-proet-coefficient-compatibility",
+  "det-sp-composition-comparisons",
+  "sbc-thm-etale-local-normal-form",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-qcqs-morphism-permanence",
   "det-sp-orientation-charts",
+  "thm-pur-cohomological-smoothness",
+  "lem-pur-co-smooth-etale-locality",
   "prop-pur-affine-space-composition-law",
-  "det-sp-composition-comparisons"
+  "lem-pur-projection-purity-agreement",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "lem-pur-sheaf-hom-cover-gluing",
+  "def-pur-smooth-purity-map",
+  "def-pur-co-smoothness",
+  "det-sp-reduction-compatibilities",
+  "det-sp-reduction-exceptional",
+  "det-sp-tower-gluing",
+  "det-sp-coefficient-towers-abelian",
+  "lem-sf-derived-concentrated-single",
+  "sk-def-sp-coefficient-towers",
+  "def-coefficient-twists-detailed",
+  "lem-sfb-ringed-projection-tensor-composition"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-factors.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-factors.proof.md",
+  "place": "Proof (1), (2), and final paragraph; expanded coefficient and tower arguments"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Composition of smooth purity orientations and exceptional inverse image tensor maps on etale sheaves",
+   "results": "Returned: AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τl, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.IsEtale.of_comp, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp. Generic monoidal adjunctions, scheme/module pullbacks or smooth dimension composition; none states normalized smooth orientations and their tensor transposes on these coefficient categories.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp, CategoryTheory.MonoidalCategory",
+   "results": "Returned: CategoryTheory.Adjunction.isMonoidal_comp. Generic monoidal adjunctions, scheme/module pullbacks or smooth dimension composition; none states normalized smooth orientations and their tensor transposes on these coefficient categories.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "orientation.*compos|purity.*compos|tensorMap.*comp",
+   "results": "No hits. Generic monoidal adjunctions, scheme/module pullbacks or smooth dimension composition; none states normalized smooth orientations and their tensor transposes on these coefficient categories.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth purity isomorphism composition law for exceptional pullback",
+   "results": "Returned: CategoryTheory.Over.pullbackComp, CategoryTheory.MonoOver.pullbackComp, SheafOfModules.pullbackComp, CategoryTheory.MorphismProperty.Over.pullbackComp.congr_simp, CategoryTheory.MorphismProperty.Over.pullbackComp_hom_app_left, CategoryTheory.MorphismProperty.Over.pullbackComp_inv_app_left, CategoryTheory.MorphismProperty.Over.pullbackComp_left_fst_fst, AlgebraicGeometry.Scheme.Modules.pullbackComp. Generic monoidal adjunctions, scheme/module pullbacks or smooth dimension composition; none states normalized smooth orientations and their tensor transposes on these coefficient categories.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative dualizing sheaf orientation of a composite smooth morphism is tensor product of orientations",
+   "results": "Returned: AlgebraicGeometry.isSmoothOfRelativeDimension_comp, smoothSheafCommGroup.compLeft, KaehlerDifferential.tensorKaehlerEquiv, AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatCompScheme, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom, PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map, KaehlerDifferential.tensorKaehlerEquiv_tmul_D, KaehlerDifferential.tensorKaehlerEquiv_left_inv. Generic monoidal adjunctions, scheme/module pullbacks or smooth dimension composition; none states normalized smooth orientations and their tensor transposes on these coefficient categories.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -63,5 +285,134 @@
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sp-composition",
- "lean_audit": {}
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "det-sp-composition-factors",
+  "worker": "stage1",
+  "summary": "Made the implicit admissible-coefficient, scheme and K domains explicit and typed both factor identities. Expanded the inverse-projection/counit computation, checked nested affine charts including dimension zero, extended the prime-power orientation equality using the existing coefficient comparisons, and tested tower orientation equality only after reducing to shifted tower sheaves. Reused existing nodes; no new nodes or Lean edits. Repair of return L: re-read the revised composition-comparisons statement, identify c with its explicit theta and the matching alpha, expand the counit equation and scalar-extension compositor square in Steps 3 and 8, and verify the uniformly bounded tower clause in Step 9. Refreshed all three quotations against the current DAG.",
+  "blueprint": "Steps 1 and 4-9 realize proof (1), following nested coordinate charts and ordered affine integration; Steps 2-3 realize proof (2), before derived tower evaluation; Step 10 realizes the final substitution. Both paragraphs of the original proof and all finite/tower clauses of unit sk-prop-sp-composition are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-amb-shriek-tensor-composition",
+    "why": "The actual compact-support projection composition identity at arbitrary finite rings is the generic input to the tensor-transpose calculation."
+   },
+   {
+    "node": "lem-pur-finite-ring-site-tensor-transpose",
+    "why": "Carries the actual finite projection maps and counits from the ordinary etale site to the pro-etale site; no purity-composition conclusion is used."
+   },
+   {
+    "node": "lem-sf-composition-projection-mate",
+    "why": "Supplies composition of the specified projection transformations in arbitrary strict systems, before evaluation and without normalization."
+   },
+   {
+    "node": "lem-sp-tower-compact-support-projection-formula",
+    "why": "Supplies invertibility of actual tower projection maps on uniform constructible finite-Tor inputs."
+   },
+   {
+    "node": "lem-weil-pbc-derived-single-fully-faithful",
+    "why": "Identifies degree-zero derived arrows with sheaf arrows for local-to-global and tower equality tests."
+   },
+   {
+    "node": "lem-sf-derived-concentrated-single",
+    "why": "Reduces concentrated tower complexes to shifted objects of their abelian category."
+   },
+   {
+    "node": "lem-pur-sheaf-hom-cover-gluing",
+    "why": "Uniqueness for module-sheaf maps on the affine chart cover globalizes the prime-power orientation equation."
+   },
+   {
+    "node": "lem-pur-twist-sheaf-locally-free",
+    "why": "Supplies degree-zero free Tate lines and their finite reductions for domain and tower concentration checks."
+   },
+   {
+    "node": "lem-sbc-smooth-relative-dimension-permanence",
+    "why": "Gives the dimension of the composite and the etaleness of composite coordinate maps."
+   },
+   {
+    "node": "sbc-thm-etale-local-normal-form",
+    "why": "Produces the nested etale affine-space charts used by the unit orientation argument."
+   },
+   {
+    "node": "lem-weil-pbc-etale-scheme-base-change",
+    "why": "Gives the etale base-changed coordinate map b used to form the full chart."
+   },
+   {
+    "node": "det-sp-tower-gamma",
+    "why": "Names the actual tower orientation and counit-defined tensor map, their finite evaluations and uniform constructible finite-Tor domains; no composition-of-purity assertion is imported."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Verifies Noetherianity for the ordinary etale tensor-composition tool, rather than silently assuming its hypothesis."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-permanence",
+    "why": "Verifies that affine target charts are separated, as required by the affine comparison law."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "The closed-diagonal base-change clause checks separatedness of the coordinate maps."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Checks finite presentation and hence finite type of the affine-source etale coordinate maps."
+   },
+   {
+    "node": "lem-sp-et-proet-coefficient-compatibility",
+    "why": "Ensures that finite etale-to-pro-etale transport intertwines the actual compact-support compositor, in addition to the projection/counit compatibility already cited."
+   },
+   {
+    "node": "lem-sfb-ringed-projection-tensor-composition",
+    "why": "Associativity of the proper projection maps in the tensor variable on ringed topoi; it is needed for the compact-support projection maps in the transpose calculation, and no node of the unit states it."
+   },
+   {
+    "node": "thm-pur-cohomological-smoothness",
+    "why": "Open restriction, etale composition and base change of the canonical tensor map on the nested charts; this is the orientation-free tensor-formula interface."
+   },
+   {
+    "node": "lem-pur-co-smooth-etale-locality",
+    "why": "Etale maps have trivial dualizing object, which identifies chart restrictions with inverse images."
+   },
+   {
+    "node": "thm-nagata-compactification",
+    "why": "Existence of compactifications, a hypothesis of the compact-support projection-composition identity."
+   },
+   {
+    "node": "det-sp-coefficient-towers-abelian",
+    "why": "Exact level evaluation, and the tower category as modules in a ringed topos of inverse systems, for the tower heart argument and the projection associativity."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-amb-shriek-tensor-composition",
+  "lem-pur-finite-ring-site-tensor-transpose",
+  "lem-sf-composition-projection-mate",
+  "lem-sp-tower-compact-support-projection-formula",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "lem-sf-derived-concentrated-single",
+  "lem-pur-sheaf-hom-cover-gluing",
+  "lem-pur-twist-sheaf-locally-free",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "sbc-thm-etale-local-normal-form",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "det-sp-tower-gamma",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-sp-et-proet-coefficient-compatibility",
+  "lem-sfb-ringed-projection-tensor-composition",
+  "thm-pur-cohomological-smoothness",
+  "lem-pur-co-smooth-etale-locality",
+  "thm-nagata-compactification",
+  "det-sp-coefficient-towers-abelian"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q55-eb8f99c83",
+  "group": "Q55",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q55-eb8f99c83 (reviewer sub-agent of L); spot-checked: I read the item in full: the statement, all 10 steps and the split_report. I also read every cited statement, including the revised det-sp-composition-comparisons, and the main-20261015 sk-prop-sp-composition-factors statement and proof. Live and side-live still show the item as imported. There is no repair note, so this is not a re-split, and the item is not dropped. No SGA is used. Of all cited nodes, only the comparisons node changed since fd4fa2dd. This head answers landing return L with reworded Steps 3, 8 and 9, but it was rebuilt from the delivered fd4f head, so the fd4f FIX was lost. The new parts are correct. Step 3's counit normalization is exactly revised clause (1) with c=theta. Step 8's displayed square is clause (2) with R to A; I recomputed the substitution, and it needs no flatness. Step 9 uses clause (3) on uniformly bounded towers, which does not require them to be normalized. The two earlier faults are still present. (1) C1 in Step 3: the right-hand transpose needs q_{f,omega_g⊗g^*K}=(q_{f,omega_g}⊗1)PF^{-1}. That is associativity of PF in its tensor variable, not naturality. FIX: cite lem-sfb-ringed-projection-tensor-composition on the ringed topoi of constant A or of towers (det-sp-coefficient-towers-abelian(1)); the j_! case is a mate check. (2) C1/C4 in Step 5: Gamma_{p_d,L}=t(1⊗Gamma_{p_d,1}) and gamma=Gamma need lem-pur-projection-purity-agreement and def-pur-smooth-purity-map, which are now added. The fix also declares five tool_uses: lem-sfb-ringed-projection-tensor-composition, thm-pur-cohomological-smoothness, lem-pur-co-smooth-etale-locality, thm-nagata-compactification and det-sp-coefficient-towers-abelian. The splice keeps the new Steps 8 and 9; Step 3 is 1949 characters and Step 5 is 1893. Batch-5: none of the 11 flagged closures reaches sk-thm-trace-transport, an nt-target, or a trf or Poincaré-duality theorem, and none reaches the item. They reach only generic lem/def nodes, cor-galois-lisse-representations, prop-constructible-truncations and the new-e4-galois-* nodes. These are the same 156 trf/pod nodes that the base citations reach, so the difference is 0, and all are accepted. The added citation reaches no trf/pod node. There are no new nodes, the statement is unchanged, and there are two repairable faults. Maintainer note: the group answers landing returns from its delivered head, so a reviewer FIX is lost each time.; 1 file(s) fixed by the reviewer"
+ }
 }

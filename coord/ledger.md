@@ -21997,3 +21997,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:48 L: returned deliver/K3/Sheaf.Paper.DerivedPullbackTensorHom (reviewer RETURN: (reviewer C-d0e3c, head d0e3c619e) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.DerivedPullbac)
 - 09:50 L: merged deliver/Q05/lem-pc-tate-abstract-residue-calculus (stage 2; reviewer PASS; parallel immutable checks)
 - 09:50 L: merged deliver/NV/lem-pc-finite-potent-trace-calculus (stage 2; reviewer PASS; parallel immutable checks)
+- 09:51 L: merged deliver/Q55/det-sp-composition-factors (reviewer FIX; after a return; new nodes: 0)
