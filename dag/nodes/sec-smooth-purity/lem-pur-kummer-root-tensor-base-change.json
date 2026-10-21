@@ -1,0 +1,127 @@
+{
+ "id": "lem-pur-kummer-root-tensor-base-change",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-finite-kummer-level",
+   "place": "Proof steps 9--11, finite-root tensor comparison only"
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Finite-root scalar tensors under arbitrary scheme base change",
+ "statement": "With [def-pur-kummer-comparison-data], for any n,N and coefficient map a:Z/ell^(N+1) to A_n, and any f:T_prime to T with ell invertible in the local rings of both schemes, there is an isomorphism from the canonical constant-A_n-module pullback of A_n tensor mu_(ell^(N+1),T) to the same root tensor over T_prime. On every module-unit pure tensor it pulls back the scalar by the canonical constant-ring map and the root by the fibre-product projection.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/lem-pur-finite-kummer-level.proof.md",
+  "place": "Proof steps 9--11, finite-root tensor comparison only"
+ },
+ "stmt_deps": [
+  "def-pur-kummer-comparison-data"
+ ],
+ "proof": [
+  {
+   "text": "the positive coefficient quotient is finite by\nPadic.finite_coefficientExtensionRing, so the existing finite-coefficient\ncomparison applies. Use the root-square and tensor-unit statements of\nlem-amb-finite-root-site-comparison, transported from fixed-module sheaves to\nmodules over the constant ring sheaf by lem-cbc-constant-ring-module-sheaves.\nThese equivalences preserve underlying sections, additive maps, and constant\nscalar actions. General local coefficients are checked after the locally\nsurjective constant-sheaf unit, so equality on constants implies the displayed\nformula for every section z. The root maps pull units back along the\nfibre-product projections.\nThey commute with restriction. For each positive exponent m=ell^(N+1),\nthe root sheaf is represented\non the etale site by the finite etale scheme defined by z^m=1: on affine charts this\nis the polynomial quotient universal property, and the descriptions glue. Since\nell is invertible, the derivative m*z^(m-1) is a unit at every root. Base change\npreserves that scheme and its universal root. Inverse-image adjunction and Yoneda\nidentify the canonical root map with the representable base-change isomorphism.\nThe pro-etale comparison functor preserves it. Extend scalars by the constant\ncoefficient map a. The canonical constant-ring pullback comparison and the tensor\nuniversal property give delta. On local pure tensors its formula is exactly the\none displayed. Its inverse is induced by the inverse root comparison and the\ninverse constant-ring comparison. The two composites are identities on pure\ntensors and hence after sheafification. Empty schemes give zero sheaves and the\nsame formulas; no infinite-limit preservation by inverse image is used.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension",
+    "lem-amb-finite-root-site-comparison",
+    "lem-cbc-constant-ring-module-sheaves",
+    "lem-weil-pbc-proetale-constant-module-pullback-encoding",
+    "lem-pur-tate-inverse-limit-base-change",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/lem-pur-finite-kummer-level.proof.md",
+    "place": "Proof steps 9--11, finite-root tensor comparison only"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "lem-amb-finite-root-site-comparison",
+  "lem-cbc-constant-ring-module-sheaves",
+  "lem-weil-pbc-proetale-constant-module-pullback-encoding",
+  "lem-pur-tate-inverse-limit-base-change",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "A9",
+  "date": "2026-10-21",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/lem-pur-finite-kummer-level.proof.md",
+  "place": "Proof steps 9--11, finite-root tensor comparison only"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The inverse limit of roots of unity reduced modulo a prime power is canonically the corresponding roots of unity sheaf",
+   "results": "{\"t\": \"2026-10-21T11:57:34Z\", \"tool\": \"leansearch\", \"query\": \"The inverse limit of roots of unity reduced modulo a prime power is canonically the corresponding roots of unity sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ProfiniteGrp.isIso_toLimit\", \"Profinite.lim\", \"Profinite.asLimit\", \"ProfiniteGrp.isoLimittoFiniteQuotientFunctor\", \"Profinite.isoAsLimitConeLift\", \"cyclotomicCharacter.toFun_apply\", \"Profinite.asLimitConeIso\", \"ZMod.rootsOfUnity_eq_top\"], \"digest\": \"3b5c041d2953fcc0\"}",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib match: the hits concern cyclotomic characters and groups, not the normalized pro-etale scalar-extension comparison. Existing project root-local-model and finite-root-site-comparison statements were read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Tate module of roots of unity modulo a prime power is isomorphic to the roots of unity of that order",
+   "results": "{\"t\": \"2026-10-21T11:17:45Z\", \"tool\": \"leanfinder\", \"query\": \"The Tate module of roots of unity modulo a prime power is isomorphic to the roots of unity of that order\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"cyclotomicCharacter.toZModPow_toFun\", \"cyclotomicCharacter.toZModPow\", \"cyclotomicCharacter.toFun_spec\", \"cyclotomicCharacter.spec\", \"cyclotomicCharacter.toFun_apply\", \"cyclotomicCharacter.toFun\", \"cyclotomicCharacter\", \"IsPrimitiveRoot.zmodEquivZPowers\"], \"digest\": \"5f7aab1b91de49a8\"}",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib match: the hits concern cyclotomic characters and groups, not the normalized pro-etale scalar-extension comparison. Existing project root-local-model and finite-root-site-comparison statements were read."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rootsOfUnity\", \"tensor\"",
+   "results": "{\"t\": \"2026-10-21T12:18:03Z\", \"tool\": \"loogle\", \"query\": \"\\\"rootsOfUnity\\\", \\\"tensor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib match: the hits concern cyclotomic characters and groups, not the normalized pro-etale scalar-extension comparison. Existing project root-local-model and finite-root-site-comparison statements were read."
+  },
+  {
+   "tool": "grep",
+   "query": "rootsOfUnity.*(sheaf|inverseImage)|sheaf.*rootsOfUnity",
+   "results": "{\"t\": \"2026-10-21T12:18:03Z\", \"tool\": \"grep\", \"query\": \"rootsOfUnity.*(sheaf|inverseImage)|sheaf.*rootsOfUnity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib match: the hits concern cyclotomic characters and groups, not the normalized pro-etale scalar-extension comparison. Existing project root-local-model and finite-root-site-comparison statements were read."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurityFiniteKummerLevel",
+  "group": "A9",
+  "date": "2026-10-21"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PurityKummerRootTensorBaseChange",
+  "file": "lean/Sheaf/Paper/PurityKummerRootTensorBaseChange.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.kummer_root_tensor_base_change",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.kummer_root_tensor_base_change"
+  ],
+  "statement": "theorem kummer_root_tensor_base_change (P : PurityFiniteSetting.{u}) (n N : ℕ)\n    (a : ZMod (P.coefficients.l ^ (N + 1)) →+* P.kummerCoefficient n)\n    (T T' : Scheme.{u}) (f : T' ⟶ T)\n    (hT : ∀ x : T, IsUnit (P.coefficients.l : T.presheaf.stalk x))\n    (hT' : ∀ x : T', IsUnit (P.coefficients.l : T'.presheaf.stalk x)) :\n    ∃ δ : (Scheme.tatePullback f (P.kummerCoefficient n)).obj\n          (P.kummerRootsTensor n N a T) ≅ P.kummerRootsTensor n N a T',\n      ∀ (U : T.ProEt) (z : (P.kummerRingSheaf n T).obj.obj (op U))\n          (y : (Scheme.proEtaleRootsOfUnitySheaf T (P.coefficients.l ^ (N + 1))).obj.obj\n            (op U)),\n          δ.hom.val.app (op ((Scheme.proEtaleBaseChange f).obj U))\n              (Scheme.tateUnit f (P.kummerCoefficient n) (P.kummerRootsTensor n N a T) U\n                (P.kummerTargetTensor n N a T U z y)) =\n            P.kummerTargetTensor n N a T' ((Scheme.proEtaleBaseChange f).obj U)\n              (Scheme.tateRingUnit f (P.kummerCoefficient n) U z)\n              ((Scheme.proEtaleRootsOfUnityDirectImageMap f\n                (P.coefficients.l ^ (N + 1))).hom.app (op U) y)",
+  "branch": "sheaf-dag",
+  "by": "A9",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-25c4b",
+  "group": "A9",
+  "result": "pass",
+  "landing": "20261021T143838-L-12176",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-25c4b",
+  "group": "A9",
+  "result": "pass",
+  "landing": "20261021T143838-L-12176",
+  "kind": "interface",
+  "note": "independent cc review: delivered item and 4 new modules vs live clone (definition block diff empty, theorem signature diff empty); importer Sheaf.Paper.PurityConventions compiled against the delivered modules; #print axioms; the two sorry statements read against their nodes, the blueprint steps and FiniteRootSiteComparison"
+ }
+}

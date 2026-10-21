@@ -22816,3 +22816,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:34 L: merged deliver/NZ/lem-sfb-integral-pullback-strict-roos-normalization (stage 2; reviewer PASS; parallel immutable checks)
 - 14:35 L: merged deliver/O2/lem-sfb-spectral-clopen-component-homeomorphism (reviewer PASS; first push; new nodes: 0)
 - 14:38 L: returned deliver/P7/Sheaf.Paper.CompletedCoefficientTensorNormalization (reviewer RETURN: (reviewer C-01fbc, head 01fbc69aa) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.CompletedCoeff)
+- 14:38 L: merged deliver/A9/Sheaf.Paper.PurityFiniteKummerLevel (stage 3; reviewer PASS; first push; landing 20261021T143838-L-12176 (interface); batch 20261021T143835; modules 5; new nodes 4; change records: coord/changes/A9-finite-kummer-definition-location.md)
