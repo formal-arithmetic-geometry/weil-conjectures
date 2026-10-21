@@ -58,8 +58,8 @@ Proof plan:
    equality for a source isomorphic to `J A`, by precomposing with that iso.
    Apply this to sources `1 ⊗ J M` and `(X ⊗ Y) ⊗ J M`, using `v` inverses.
 4. For the unit law, apply `Q` and postcompose with `r M`. The normalization
-   from step 2, left-unitor naturality, and the inverse strong-monoidal unit
-   axiom identify both sides. Cancel `r M` and use step 3.
+   from step 2, left-unitor naturality, and the inverse strong-monoidal
+   unit axiom identify both sides. Cancel `r M` and use step 3.
 5. For the associativity law, apply `Q` and postcompose with
    `r (Q X ⊗ (Q Y ⊗ M))`. The normalized left side is the composite of
    `δ Q (X ⊗ Y) (J M)`, `δ Q X Y ⊗ r M`, and the target associator.
@@ -100,6 +100,60 @@ theorem openLeftProjection_action [SymmetricCategory C] [SymmetricCategory D]
         (α_ X Y (J.obj M)).hom ≫
           (𝟙 X ⊗ₘ (openLeftProjectionIso Q J γ Y M).hom) ≫
           (openLeftProjectionIso Q J γ X (Q.obj Y ⊗ M)).hom) := by
-  sorry
+  -- The inverse unit is natural because the fully faithful left adjoint has invertible unit.
+  have hr {A B : D} (f : A ⟶ B) :
+      Q.map (J.map f) ≫ inv (adj.unit.app B) = inv (adj.unit.app A) ≫ f := by
+    simp
+  -- Move restriction through the specified two swaps and cancel their composite.
+  have hn (X : C) (M : D) :
+      Q.map (openLeftProjectionIso Q J γ X M).hom ≫
+          inv (adj.unit.app (Q.obj X ⊗ M)) =
+        Functor.OplaxMonoidal.δ Q X (J.obj M) ≫
+          (𝟙 (Q.obj X) ⊗ₘ inv (adj.unit.app M)) := by
+    simp only [openLeftProjectionIso, Iso.trans_hom, Functor.mapIso_hom,
+      Functor.map_comp, Category.assoc]
+    rw [hr, ← Category.assoc (Q.map (γ M X).hom), hγ_normalized]
+    rw [Functor.map_braiding]
+    simp only [Category.assoc, Functor.Monoidal.μ_δ_assoc]
+    rw [← braiding_naturality_assoc]
+    simp
+  -- Restriction detects equality when the source belongs to the essential image of J.
+  have detect {W Z : C} {A : D} (e : W ≅ J.obj A) (f g : W ⟶ Z)
+      (h : Q.map f = Q.map g) : f = g := by
+    apply (cancel_epi e.inv).mp
+    apply (adj.homEquiv A Z).injective
+    simp only [Adjunction.homEquiv_unit, Functor.map_comp, h]
+  refine ⟨?_, hn, ?_, ?_⟩
+  · intro X Y M N c m
+    simp only [openLeftProjectionIso, Iso.trans_hom, Functor.mapIso_hom,
+      Category.assoc]
+    rw [← J.map_comp, ← braiding_naturality, J.map_comp]
+    rw [← Category.assoc (γ M X).hom, ← hγ_natural]
+    simp only [Category.assoc]
+    rw [← Category.assoc (β_ X (J.obj M)).hom, ← braiding_naturality]
+    simp only [Category.assoc]
+  · intro M
+    apply detect (openLeftProjectionIso Q J γ (𝟙_ C) M)
+    apply (cancel_mono (inv (adj.unit.app M))).mp
+    simp only [Q.map_comp, Category.assoc]
+    rw [hr, ← Category.assoc, hn]
+    simp only [Category.assoc, tensorHom_comp_tensorHom_assoc, Category.id_comp]
+    simp [Functor.OplaxMonoidal.δ_comp_η_tensorHom_assoc]
+  · intro X Y M
+    apply detect (openLeftProjectionIso Q J γ (X ⊗ Y) M)
+    apply (cancel_mono (inv (adj.unit.app (Q.obj X ⊗ (Q.obj Y ⊗ M))))).mp
+    simp only [Q.map_comp, Category.assoc]
+    rw [hr, ← Category.assoc, hn, hn]
+    simp only [Category.assoc, tensorHom_comp_tensorHom_assoc, Category.id_comp]
+    rw [← Functor.OplaxMonoidal.δ_natural_assoc]
+    simp only [Q.map_id, tensorHom_comp_tensorHom, Category.comp_id]
+    rw [hn]
+    simp only [tensorHom_def, id_whiskerRight, Category.id_comp,
+      whiskerLeft_comp, Category.assoc]
+    simp only [Functor.id_obj, whiskerLeft_id, Category.id_comp]
+    rw [associator_naturality_right (Z' := M) (Q.obj X) (Q.obj Y)
+      (inv (adj.unit.app M))]
+    rw [← Functor.OplaxMonoidal.associativity_assoc]
+    simp only [Functor.comp_obj]
 
 end CategoryTheory
