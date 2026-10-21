@@ -3,66 +3,281 @@
  "blueprint": {
   "is": "sk-thm-purity-transport",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Smooth purity for all admissible coefficients",
- "statement": "Let $\\Lambda\\in\\{A,\\Zl,\\mathcal O_E,\\Ql,E,\\Qlb\\}$ be any admissible coefficient\nring and let $f:X\\to Y$ be smooth of pure relative dimension $d$. There is an\nisomorphism of functors $\\Dctf(Y,\\Lambda)\\to\\Dctf(X,\\Lambda)$, given at\n$K\\in\\Dctf(Y,\\Lambda)$ by a canonical isomorphism in $\\Dctf(X,\\Lambda)$\n\n$$\n\\gamma_{f,\\Lambda}(K):\\ f_\\Lambda^*K(d)[2d]\\xrightarrow{\\ \\sim\\ }f_\\Lambda^!K.\n$$\n\nHere $f^!_\\Lambda$ is the restriction of the right adjoint from\n[sk-prop-sf-existence]. The isomorphism is compatible with change of\ncoefficients, base change and composition, with the normalization given by\nintegration on the affine line.\n\nMoreover, $K\\mapsto f_\\Lambda^*K(d)[2d]$ is a right adjoint of\n$Rf_{!,\\Lambda}:\\Dctf(X,\\Lambda)\\to\\Dctf(Y,\\Lambda)$, with counit normalized by\nintegration on the affine line, and $\\gamma_{f,\\Lambda}$ is the *unique*\nisomorphism of functors $f_\\Lambda^*(-)(d)[2d]\\xrightarrow{\\sim}f_\\Lambda^!$ on\n$\\Dctf(Y,\\Lambda)$ compatible with the counits of the two adjunctions.\n\nFor étale $f$ we have $d=0$, and the theorem says $f_\\Lambda^!\\simeq f_\\Lambda^*$\nfor every admissible $\\Lambda$. For a smooth curve $C$ with structure map\n$a:C\\to\\operatorname{Spec}k$ it gives\n$a_{\\Zl}^!\\mathbf Z_{\\ell,\\operatorname{Spec}k}\\simeq\\mathbf Z_{\\ell,C}(1)[2]$, a\nsingle sheaf in degree $-2$.",
+ "statement": "Work in the standing separated finite-type $k$-scheme setting of [sk-def-sfb-dc-setting], with the global purity datum of [def-pur-conventions]: $k=\\overline{\\mathbf F}_q$, $\\ell\\ne\\operatorname{char}(k)$, and finite coefficient extensions inside the fixed $\\Qlb$. Here admissible finite $A$ means any finite commutative ring killed by a power of $\\ell$. The categories $\\Dctf$ are the pro-etale condensed-module categories of [sk-def-sfb-constructible]; the twists are [def-coefficient-twists-detailed], with the finite-$A$ twist specified in [det-sp-finite-general-ring]. Integral categories are compared with completed, derived-complete categories by [sk-lem-integral-models], rational categories with scalar localizations by [det-sp-rational-localized-hom], and the $\\Qlb$ category with finite condensed coefficient stages by [sk-thm-sfb-qlbar-two-colimit]. These comparisons are equivalences, not identifications with discrete non-torsion constant-coefficient categories. Smoothness and relative dimension mean [def-sbc-smooth-morphisms].\n\nLet $\\Lambda\\in\\{A,\\Zl,\\mathcal O_E,\\Ql,E,\\Qlb\\}$ be any admissible coefficient\nring and let $f:X\\to Y$ be smooth of pure relative dimension $d$. There is an\nisomorphism of functors $\\Dctf(Y,\\Lambda)\\to\\Dctf(X,\\Lambda)$, given at\n$K\\in\\Dctf(Y,\\Lambda)$ by a canonical isomorphism in $\\Dctf(X,\\Lambda)$\n\n$$\n\\gamma_{f,\\Lambda}(K):\\ f_\\Lambda^*K(d)[2d]\\xrightarrow{\\ \\sim\\ }f_\\Lambda^!K.\n$$\n\nHere $f^!_\\Lambda$ is the restriction of the right adjoint from\n[sk-prop-sf-existence]. The isomorphism is compatible with change of\ncoefficients, base change and composition, with the normalization given by\nintegration on the affine line.\n\nMoreover, $K\\mapsto f_\\Lambda^*K(d)[2d]$ is a right adjoint of\n$Rf_{!,\\Lambda}:\\Dctf(X,\\Lambda)\\to\\Dctf(Y,\\Lambda)$, with counit normalized by\nintegration on the affine line, and $\\gamma_{f,\\Lambda}$ is the *unique*\nisomorphism of functors $f_\\Lambda^*(-)(d)[2d]\\xrightarrow{\\sim}f_\\Lambda^!$ on\n$\\Dctf(Y,\\Lambda)$ compatible with the counits of the two adjunctions.\n\nFor étale $f$ we have $d=0$, and the theorem says $f_\\Lambda^!\\simeq f_\\Lambda^*$\nfor every admissible $\\Lambda$. For a smooth curve $C$ with structure map\n$a:C\\to\\operatorname{Spec}k$ it gives\n$a_{\\Zl}^!\\mathbf Z_{\\ell,\\operatorname{Spec}k}\\simeq\\mathbf Z_{\\ell,C}(1)[2]$, a\nsingle sheaf in degree $-2$.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md",
   "place": "node sk-thm-purity-transport, order 1810"
  },
  "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "def-pur-conventions",
+  "sk-def-sfb-constructible",
+  "def-coefficient-twists-detailed",
+  "det-sp-finite-general-ring",
+  "sk-lem-integral-models",
+  "det-sp-rational-localized-hom",
+  "sk-thm-sfb-qlbar-two-colimit",
+  "def-sbc-smooth-morphisms",
   "sk-prop-sf-existence"
  ],
  "proof": [
   {
-   "text": "*Step 1 (compatibility with the finite reductions).* For $m\\le n$\nwrite $\\mathrm{red}_{n,m}=(-)\\otimes^{L}_{A_{E,n}}A_{E,m}$. By\n[sk-thm-smooth-purity] the map $\\gamma_{f,K}$ is the composite of three\nconstituents: the canonical twist reassociation, the inverse of the\ndiagonal identification $\\omega_f\\cong\\Lambda_X(d)[2d]$ of\n[sk-thm-smooth-purity], and the tensor formula (G11) of [sk-prop-cohsm]. Each\nis compatible with $\\mathrm{red}_{n,m}$: the finite-level twist\n$A(1)=\\mu_{\\ell^N}\\otimes_{\\Z/\\ell^N}A$ of [sk-def-purity-conv] and the\nKummer boundary $\\kappa(t)$ that orients it ([sk-prop-a1]) reduce to\ntheir counterparts over $A_{E,m}$, and the exceptional adjunction\n$Rf_!\\dashv Rf^{!}$ is compatible with reduction of the coefficient ring.\nHence $\\mathrm{red}_{n,m}(\\gamma_{f,K})=\\gamma_{f,\\mathrm{red}_{n,m}K}$,\nand likewise for the orientations, the smooth traces and the composition\nand base-change squares of [sk-prop-cohsm] (G12).",
+   "text": "Put $F_{f,\\Lambda}=Rf_{!,\\Lambda}$ and $J_{f,\\Lambda}=f^*_\\Lambda(-)(d)[2d]$. We first construct an adjunction $F\\dashv J$, with counit $t$, and then compare it to $F\\dashv G$, where $G=f^!_\\Lambda$ is the restriction in the statement. At finite coefficients the section-action/derived equivalence and the restriction of the localizing adjunction are precisely [sk-prop-sf-rf-shriek-preservation]. At the other stages [det-def-localizing-closure-ctf-equals-bc] gives $\\Dctf=\\Dbc$, and [sk-thm-existence](2)--(4) supplies this restricted $F\\dashv G$. Thus comparison of adjoints will take place on the same categories, not on the entire unbounded derived category.",
    "uses": [
-    "sk-def-purity-conv"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "*Step 2 (the adic stage).* Let\n$K\\in D^b_{ctf}(Y,\\mathcal O_E)$ be the normalized system $(K_n)_n$. By\nStep 1 the isomorphisms $\\gamma_{f,K_n}$ commute with the transition maps\nof the system, so they form a morphism of normalized systems, the common\nbounds and stratifications being those of $K$ with the same $d$-shift.\nThe uniform-tower reconstruction realizes that morphism as a single map\n$Lf^{*}K(d)[2d]\\to Rf^{!}K$ over $\\mathcal O_E$ whose reduction at every\nlevel $n$ is $\\gamma_{f,K_n}$; a map of towers that is an isomorphism at\nevery level is an isomorphism, so $\\gamma_{f,K}$ is one.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "*Step 3 (the $E$- and $\\overline{\\mathbf Q}_\\ell$-stages).* An\n$E$-object is presented by a lattice $K_{\\mathcal O_E}$ with\n$K_E=K_{\\mathcal O_E}\\otimes^{L}_{\\mathcal O_E}E$. Since\n$\\mathcal O_E\\to E$ is flat, $(-)\\otimes^{L}_{\\mathcal O_E}E$ is exact and\ncarries the isomorphism of Step 2 for the lattice to an isomorphism\n$\\gamma_{f,K_E}$, independently of the chosen lattice because two lattices\nagree after inverting $\\varpi$. A $\\overline{\\mathbf Q}_\\ell$-object is\nrepresented by an $E$-object for some finite $E/\\mathbf Q_\\ell$, the\nfinite-stage categories being idempotent complete, and $\\gamma$ transports\nalong $E\\hookrightarrow\\overline{\\mathbf Q}_\\ell$; the transport is well\ndefined because the purity isomorphisms are transitive in coefficient\nextensions and preserve idempotent summands.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "*Step 4 (the dualizing complex).* Apply Steps 1–3 to $f=a_X$ and\n$K=\\Lambda_{\\Spec k}$: the purity isomorphism reads\n$\\omega_{X,\\Lambda}\\cong\\Lambda_X(d)[2d]$, and the counit of\n$Ra_{X!}\\dashv Ra_X^{!}$ becomes the transported normalized integration\nmap. Only the finite stage is proved in this document; Steps 2–4 are\nsketches of Blueprint 14, where the reconstruction and transport lemmas\nare carried out in full.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "*Step 5 (identification with $f^!$ and uniqueness).* Both adjunctions live on\n$\\Dctf(X,\\Lambda)$ and $\\Dctf(Y,\\Lambda)$, and in both $Rf_!$ is the composite\n$R\\bar f_*\\circ j_!$ of ordinary derived functors on module sheaves for a\ncompactification $f=\\bar f\\circ j$, independent of the compactification. Finite\npurity ([sk-thm-smooth-purity]), the integral adjunction\n([sk-prop-sp-integral-adjunction]) and its rational extensions\n([sk-prop-sp-rational] and [sk-thm-sp-qbar]) show, in the respective\ncoefficient cases, that $K\\mapsto f_\\Lambda^*K(d)[2d]$ is right adjoint to\n$Rf_{!,\\Lambda}$. By [sk-prop-sf-existence] and [sk-thm-existence], the\nrestriction of $f^!$ is also right adjoint to $Rf_{!,\\Lambda}$ on $\\Dctf$.\n[sk-prop-sp-unique-adjoint] gives the unique counit-preserving isomorphism from\nthe explicit adjoint $K\\mapsto f_\\Lambda^*K(d)[2d]$ to $f_\\Lambda^!$.\n\nFor every admissible $\\Lambda$ the exceptional inverse image of a smooth\nmorphism is therefore the twisted and shifted inverse image, normalized by\nintegration on the affine line, and the smooth trace is the counit of\n$Rf_!\\dashv f^!$ in this form, compatible with base change, composition, change\nof coefficients and Frobenius.",
-   "uses": [
-    "sk-thm-sp-qbar",
-    "sk-prop-sf-existence",
+    "sk-prop-sf-rf-shriek-preservation",
+    "det-def-localizing-closure-ctf-equals-bc",
     "sk-thm-existence"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+    "place": "Step 5: domains of the two adjunctions"
+   }
+  },
+  {
+   "text": "For finite $A$, choose $r\\geq1$ with $\\ell^r A=0$. Clause (3) of [det-sp-finite-general-ring] gives a natural isomorphism $\\gamma^A:J_{f,A}\\to G_{f,A}$, using the diagonal/DNC orientation; clauses (1)--(2) identify its normalization with scalar extension from $\\mathbf Z/\\ell^r$. Define $t^A_K=\\varepsilon^A_K\\circ F_{f,A}(\\gamma^A_K)$. The Hom bijection for $G$, composed with the inverse of $\\gamma^A$, gives $F_{f,A}\\dashv J_{f,A}$ with counit $t^A$. The exponent independence in that node makes this independent of $r$. This covers arbitrary finite $A$, including nonregular rings, without assuming $\\Dctf=\\Dbc$ there.",
+   "uses": [
+    "det-sp-finite-general-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+    "place": "Steps 1 and 5: finite purity and explicit adjunction"
+   }
+  },
+  {
+   "text": "The finite coefficient comparisons obey the actual equation $c_{A,B}(K)\\circ(\\gamma^A_K)_B=\\gamma^B_{K_B}$ by [det-sp-reduction-compatibilities](3); its clause (2) gives transitivity for $A\\to B\\to C$. At $A_{E,n}\\to A_{E,m}$ this includes [thm-pur-finite-reduction-of-purity], which also transports orientations, traces and the composition/base-change squares. Finite geometric compatibility is supplied on general finite rings by [det-sp-composition-factors] and [det-sp-purity-bc-factors]. Hence the finite maps have all the required compatibilities before any limit is taken.",
+   "uses": [
+    "det-sp-reduction-compatibilities",
+    "thm-pur-finite-reduction-of-purity",
+    "det-sp-composition-factors",
+    "det-sp-purity-bc-factors"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+    "place": "Step 1: compatible finite maps"
+   }
+  },
+  {
+   "text": "Fix $E$. By [sk-lem-integral-models](1)--(3), the integral condensed constructible category is the completed, derived-complete constructible category, and its pullback is the integral pullback used in the tower construction. Use the equivalence with normalized constructible towers in [det-sp-normalized-equivalence]. The normalized tower morphism $\\gamma_{f,\\bullet}$ exists and is natural by [det-sp-tower-gamma](2)--(3), not merely a compatible family in separate derived categories. The integral compact-support functor of the statement is the same functor as the realized tower functor by [det-sp-integral-direct-image-tower](2). These facts identify both source and left adjoint, including their actions on morphisms.",
+   "uses": [
+    "sk-lem-integral-models",
+    "det-sp-normalized-equivalence",
+    "det-sp-tower-gamma",
+    "det-sp-integral-direct-image-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+    "place": "Step 2: integral models and coherent realization"
+   }
+  },
+  {
+   "text": "Apply [det-sp-integral-adjunction-bijection]. It gives $F_{f,\\mathcal O_E}\\dashv H_f$, the realized tower counit $\\varepsilon^H$, and a natural isomorphism $\\gamma^H:J_{f,\\mathcal O_E}\\to H_f$ equal to $R\\varprojlim\\gamma_{f,\\bullet}(\\operatorname{red}K)$. Transfer the adjunction to $J$ by the Hom bijection and set $t_K=\\varepsilon^H_K\\circ F(\\gamma^H_K)$. Its finite reductions are the finite counits and purity maps. This proves the integral explicit adjunction and an actual natural isomorphism; it does not infer uniqueness of a lift from equality of its individual reductions.",
+   "uses": [
+    "det-sp-integral-adjunction-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+    "place": "Steps 2 and 5: integral adjunction"
+   }
+  },
+  {
+   "text": "For the geometric compatibilities use the coherent reconstruction assertion [prop-pur-adic-reconstruction-trace-coherence]: the trace and the composition and smooth base-change equations reconstruct together with purity. To fix which integral family is meant, [lem-pur-tower-trace-purity-comparison] identifies the trace-transpose family with the actual tower family $\\delta\\circ\\gamma^H$, where $\\delta:H_f\\to G_f$ is counit-preserving. Thus the reconstruction's coherent maps, rather than arbitrary lifts of their levels, are used here. For finite $E\\subset F$, [det-sp-field-extension-towers](2) identifies coefficient change on these actual tower adjunctions, units, counits and purity maps, and asserts the coefficient-composition identity. These are the required integral compatibilities, including reduction to every uniformizer level.",
+   "uses": [
+    "prop-pur-adic-reconstruction-trace-coherence",
+    "lem-pur-tower-trace-purity-comparison",
+    "det-sp-field-extension-towers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+    "place": "Steps 1--2: coherent integral compatibility"
+   }
+  },
+  {
+   "text": "For rational coefficients choose integral representatives $M_0,K_0$. The Hom comparison of [det-sp-rational-localized-hom], applied twice, carries the integral adjunction of Step 5 to\n$$\\operatorname{Hom}(F_E(M_0[1/\\ell]),K_0[1/\\ell])\\cong\\operatorname{Hom}(F_{\\mathcal O_E}M_0,K_0)\\otimes E\\cong\\operatorname{Hom}(M_0,J_{\\mathcal O_E}K_0)\\otimes E\\cong\\operatorname{Hom}(M_0[1/\\ell],J_E(K_0[1/\\ell])).$$\nIts functor comparisons identify $F_E$ and pullback with the module-category operations in the statement; twists are the localized twists of [def-coefficient-twists-detailed]. Every rational object has such a representative. Naturality extends from integral arrows to $h/\\ell^s$ by $E$-linearity of the Hom bijections, so replacing representatives by an isomorphic one gives the same bijection. This proves $F_E\\dashv J_E$, with counit the localized $t$. No claim that two arbitrarily chosen lattices are literally equal is used.",
+   "uses": [
+    "det-sp-rational-localized-hom",
+    "def-coefficient-twists-detailed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+    "place": "Step 3 and Step 5: rational adjunction"
+   }
+  },
+  {
+   "text": "The rational purity is the scalar extension of integral purity by [thm-pur-rational-and-qbar-purity], and its trace, composition and base-change coherence are [prop-pur-rational-purity-trace-coherence]. Its identification with the tower family used in Steps 5--7 is the last assertion of [lem-pur-tower-trace-purity-comparison]. The coefficient comparisons carry the rational adjunctions and their units and counits to those over $F$ by [sk-lem-sp-field-extension]; they compose for $E\\subset F\\subset L$. Consequently the preceding Hom bijections and counits commute with the finite-field transition maps. Taking $E=\\mathbf Q_\\ell$ also gives the $\\mathbf Z_\\ell$ and $\\mathbf Q_\\ell$ cases.",
+   "uses": [
+    "thm-pur-rational-and-qbar-purity",
+    "prop-pur-rational-purity-trace-coherence",
+    "lem-pur-tower-trace-purity-comparison",
+    "sk-lem-sp-field-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+    "place": "Step 3: rational maps and coefficient coherence"
+   }
+  },
+  {
+   "text": "For $\\Qlb$, use the condensed finite-stage two-colimit of [sk-thm-sfb-qlbar-two-colimit](2)--(4), together with the rational Hom equivalences of Step 7. The ambient compactification functor and pullback commute with extension from finite $E$: these are [det-prop-scalar-six-compact-support] for the listed maps $E\\to\\Qlb$ and [det-prop-scalar-six-pullback](1); twists have the coefficient comparisons in [sk-prop-sfb-cartesian-coefficients](1). Choose $M_E,K_E$ over one finite field. Then\n$$\\operatorname{Hom}(F_{\\Qlb}M,K)\\cong\\varinjlim_{F\\supset E}\\operatorname{Hom}(F_FM_F,K_F)\\cong\\varinjlim_{F\\supset E}\\operatorname{Hom}(M_F,J_FK_F)\\cong\\operatorname{Hom}(M,J_{\\Qlb}K).$$\nThe middle bijections commute with transition maps by Step 8. Objects, arrows and equalities descend to a common finite stage by the cited two-colimit theorem; hence the displayed bijection is natural and independent of presentations. It proves $F_{\\Qlb}\\dashv J_{\\Qlb}$ with the finite-stage counit. In particular the common-stage construction is related to the condensed category by these equivalences, not equated to it by definition.",
+   "uses": [
+    "sk-thm-sfb-qlbar-two-colimit",
+    "det-prop-scalar-six-compact-support",
+    "det-prop-scalar-six-pullback",
+    "sk-prop-sfb-cartesian-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+    "place": "Steps 3 and 5: algebraically closed coefficients"
+   }
+  },
+  {
+   "text": "At every stage we now have $F\\dashv J$ with its prescribed $t$, and $F\\dashv G$ with $\\varepsilon$ from Step 1. Apply [det-sp-unique-right-adjoint], with its letters $G,J$ replaced by our $J,G$. It yields the natural isomorphism $\\gamma:J\\to G$ uniquely characterized by\n$$\\varepsilon_K\\circ F(\\gamma_K)=t_K.$$\nThis also shows that the comparisons already constructed at finite level and through the integral and rational stages are this same isomorphism: each is counit-preserving for exactly the adjunction just constructed. Thus both existence and uniqueness in the item refer to a fixed pair of adjunctions with fixed counits.",
+   "uses": [
+    "det-sp-unique-right-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+    "place": "Step 5: comparison and uniqueness"
+   }
+  },
+  {
+   "text": "The finite, integral and rational composition/base-change identities of Steps 3, 6 and 8 persist at the $\\Qlb$ stage: each equation is represented by the corresponding equation over a common finite coefficient field, where it is already proved. Their images are equal by functoriality of scalar extension and the Hom colimit. Changing the chosen exceptional adjoint does not change the coefficient equations: [det-sp-unique-adjoint-coefficients] identifies its coefficient mate by conjugation with the unique counit-preserving comparisons, and preserves their coefficient-composition equation. This gives the claimed compatibilities for the particular $f^!$ of [sk-prop-sf-existence], not just for an unnamed isomorphic functor.",
+   "uses": [
+    "det-sp-unique-adjoint-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+    "place": "Steps 3 and 5: compatibility for the chosen adjoint"
+   }
+  },
+  {
+   "text": "The normalization is fixed at finite level: [lem-pur-projection-purity-agreement] identifies the diagonal purity of the affine-line projection with the exceptional transpose of inverse projection formula followed by projective-line integration restricted to $\\mathbf A^1$. At general finite $A$ the specified scalar construction in [det-sp-finite-general-ring](1)--(2) gives this same normalization. The tower counit has exactly these finite counits by [det-sp-tower-gluing](1),(3) and [det-sp-integral-adjunction-bijection]; rationalization and the finite-stage counit construction in Steps 7--9 preserve it. Hence $t$ is the normalized integration counit in every coefficient case, and Step 10 identifies it with $\\varepsilon\\circ F\\gamma$.",
+   "uses": [
+    "lem-pur-projection-purity-agreement",
+    "det-sp-finite-general-ring",
+    "det-sp-tower-gluing",
+    "det-sp-integral-adjunction-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+    "place": "Steps 4--5: integration normalization"
+   }
+  },
+  {
+   "text": "Finally an etale $f$ is smooth of relative dimension zero, so its displayed twist and shift are $(0)[0]$, giving $f^!\\simeq f^*$. For a smooth curve $a:C\\to\\operatorname{Spec}k$, evaluate $\\gamma^{-1}$ at $\\mathbf Z_\\ell$ and use $a^*\\mathbf Z_\\ell=\\mathbf Z_{\\ell,C}$, the coefficient pullback of [sk-prop-sfb-cartesian-coefficients](1). The result is $a^!\\mathbf Z_\\ell\\simeq\\mathbf Z_{\\ell,C}(1)[2]$. A degree-zero sheaf shifted by $[2]$ has its only cohomology in degree $-2$. The same substitution with dimension $d$ gives the dualizing-complex assertion of the source's Step 4.",
+   "uses": [
+    "sk-prop-sfb-cartesian-coefficients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+    "place": "Step 4 and the two specializations in the statement"
+   }
   }
  ],
  "proof_deps": [
-  "sk-def-purity-conv",
-  "sk-thm-sp-qbar",
-  "sk-prop-sf-existence",
+  "def-coefficient-twists-detailed",
+  "det-def-localizing-closure-ctf-equals-bc",
+  "det-prop-scalar-six-compact-support",
+  "det-prop-scalar-six-pullback",
+  "det-sp-composition-factors",
+  "det-sp-field-extension-towers",
+  "det-sp-finite-general-ring",
+  "det-sp-integral-adjunction-bijection",
+  "det-sp-integral-direct-image-tower",
+  "det-sp-normalized-equivalence",
+  "det-sp-purity-bc-factors",
+  "det-sp-rational-localized-hom",
+  "det-sp-reduction-compatibilities",
+  "det-sp-tower-gamma",
+  "det-sp-tower-gluing",
+  "det-sp-unique-adjoint-coefficients",
+  "det-sp-unique-right-adjoint",
+  "lem-pur-projection-purity-agreement",
+  "lem-pur-tower-trace-purity-comparison",
+  "prop-pur-adic-reconstruction-trace-coherence",
+  "prop-pur-rational-purity-trace-coherence",
+  "sk-lem-integral-models",
+  "sk-lem-sp-field-extension",
+  "sk-prop-sf-rf-shriek-preservation",
+  "sk-prop-sfb-cartesian-coefficients",
   "sk-thm-existence",
-  "sk-lem-sf-flat-model"
+  "sk-thm-sfb-qlbar-two-colimit",
+  "thm-pur-finite-reduction-of-purity",
+  "thm-pur-rational-and-qbar-purity"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+  "place": "Steps 1--5, made explicit using the existing normalized-tower and adjunction nodes"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Smooth purity for étale sheaves with integral adic rational and algebraically closed l-adic coefficients: twisted pullback is exceptional inverse image",
+   "results": "AlgebraicGeometry.IsEtale.instIsSmooth; AlgebraicGeometry.Scheme.Etale; AlgebraicGeometry.IsEtale; AlgebraicGeometry.IsEtale.instFormallyUnramified; AlgebraicGeometry.IsEtale.of_comp; AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified; Algebra.etaleLocus_eq_unramfiedLocus_inter_smoothLocus",
+   "date": "2026-10-21",
+   "verdict": "no match for the geometric purity theorem; generic adjoint uniqueness and scheme smoothness hits only"
+  },
+  {
+   "tool": "grep",
+   "query": "purity|upperShriek|UpperShriek",
+   "results": "No hits",
+   "date": "2026-10-21",
+   "verdict": "no match for the geometric purity theorem; generic adjoint uniqueness and scheme smoothness hits only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth purity identifies exceptional inverse image with pullback Tate twist and cohomological shift for l-adic coefficients",
+   "results": "AlgebraicGeometry.IsSmooth.casesOn; AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth; AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange; AlgebraicGeometry.isSmooth_isStableUnderBaseChange; AlgebraicGeometry.IsSmooth; AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τl; AlgebraicGeometry.IsEtale.instIsSmooth; LibraryNote.Design_choices_about_smooth_algebraic_structures",
+   "date": "2026-10-21",
+   "verdict": "no match for the geometric purity theorem; generic adjoint uniqueness and scheme smoothness hits only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, IsIso",
+   "results": "No hits; loogle: unknown identifier 'IsIso'",
+   "date": "2026-10-21",
+   "verdict": "no match for the geometric purity theorem; generic adjoint uniqueness and scheme smoothness hits only"
+  },
+  {
+   "tool": "grep",
+   "query": "TateTwist|tateTwist|Poincare|Poincaré",
+   "results": "Mathlib/Algebra/Lie/Free.lean; Mathlib/Algebra/Lie/SerreConstruction.lean; Mathlib/Dynamics/Ergodic/Conservative.lean; Mathlib/Dynamics/Ergodic/Conservative.lean; Mathlib/Dynamics/Ergodic/Conservative.lean; Mathlib/Dynamics/Ergodic/Conservative.lean; Mathlib/Dynamics/Ergodic/Conservative.lean; Mathlib/Dynamics/Circle/RotationNumber/TranslationNumber.lean",
+   "date": "2026-10-21",
+   "verdict": "no match for the geometric purity theorem; generic adjoint uniqueness and scheme smoothness hits only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Poincare duality for smooth morphisms: the right adjoint of compactly supported pushforward is the inverse image shifted by twice the dimension and Tate twisted",
+   "results": "AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; SheafOfModules.pushforwardPushforwardAdj; AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj; AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback; SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit; SheafOfModules.pullbackPushforwardAdjunction",
+   "date": "2026-10-21",
+   "verdict": "no match for the geometric purity theorem; generic adjoint uniqueness and scheme smoothness hits only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.rightAdjointUniq",
+   "results": "CategoryTheory.Adjunction.rightAdjointUniq; CategoryTheory.Adjunction.rightAdjointUniq_refl; CategoryTheory.Adjunction.rightAdjointUniq_inv_app; CategoryTheory.Adjunction.rightAdjointUniq_hom_counit; CategoryTheory.Adjunction.unit_rightAdjointUniq_hom; CategoryTheory.Adjunction.rightAdjointUniq_trans; CategoryTheory.Adjunction.rightAdjointUniq_trans_app; CategoryTheory.Adjunction.unit_rightAdjointUniq_hom_app",
+   "date": "2026-10-21",
+   "verdict": "no match for the geometric purity theorem; generic adjoint uniqueness and scheme smoothness hits only"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -99,5 +314,144 @@
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-smooth-purity",
  "unit": "sk-thm-purity-transport",
- "lean_audit": {}
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "sk-thm-purity-transport",
+  "worker": "stage1",
+  "summary": "NB direct delivery. Replaced the uncited sketch by explicit finite, coherent integral, rational Hom and finite-stage colimit arguments and comparison of fixed adjunctions. Reused existing nodes, with zero new nodes. Made the source standing hypotheses and category equivalences explicit. Checked actual tower maps rather than inferring equality from their separate reductions.",
+  "blueprint": "Steps 2--3 realize unit Step 1; Steps 4--6 realize unit Step 2; Steps 7--9 and 11 realize unit Step 3; Steps 12--13 realize unit Step 4; Steps 1, 5, 7, 9--10 realize current blueprint proof Step 5.",
+  "tool_uses": [
+   {
+    "node": "det-def-localizing-closure-ctf-equals-bc",
+    "why": "Use the stated $D^b_{ctf}=D^b_c$ for integral and rational coefficients as a generic interface for coefficient models, operations, finite purity, or adjunction comparison; it supports the finite-reduction/reconstruction/localization route rather than replacing it."
+   },
+   {
+    "node": "det-prop-scalar-six-compact-support",
+    "why": "Use the stated Coefficient comparison for compactly supported direct image as a generic interface for coefficient models, operations, finite purity, or adjunction comparison; it supports the finite-reduction/reconstruction/localization route rather than replacing it."
+   },
+   {
+    "node": "det-prop-scalar-six-pullback",
+    "why": "Use the stated Coefficient change commutes with inverse image and extension by zero as a generic interface for coefficient models, operations, finite purity, or adjunction comparison; it supports the finite-reduction/reconstruction/localization route rather than replacing it."
+   },
+   {
+    "node": "det-sp-composition-factors",
+    "why": "Use the stated Composition of orientations and of tensor maps as a generic interface for coefficient models, operations, finite purity, or adjunction comparison; it supports the finite-reduction/reconstruction/localization route rather than replacing it."
+   },
+   {
+    "node": "det-sp-field-extension-towers",
+    "why": "Use the stated Integral comparisons for a finite extension of coefficient fields as a generic interface for coefficient models, operations, finite purity, or adjunction comparison; it supports the finite-reduction/reconstruction/localization route rather than replacing it."
+   },
+   {
+    "node": "det-sp-finite-general-ring",
+    "why": "Use the stated Smooth purity over an arbitrary finite coefficient ring as a generic interface for coefficient models, operations, finite purity, or adjunction comparison; it supports the finite-reduction/reconstruction/localization route rather than replacing it."
+   },
+   {
+    "node": "det-sp-integral-adjunction-bijection",
+    "why": "Use the stated The derived limit of the tower adjunction is an integral adjunction as a generic interface for coefficient models, operations, finite purity, or adjunction comparison; it supports the finite-reduction/reconstruction/localization route rather than replacing it."
+   },
+   {
+    "node": "det-sp-integral-direct-image-tower",
+    "why": "Use the stated Tower description of the integral compactly supported direct image as a generic interface for coefficient models, operations, finite purity, or adjunction comparison; it supports the finite-reduction/reconstruction/localization route rather than replacing it."
+   },
+   {
+    "node": "det-sp-normalized-equivalence",
+    "why": "Use the stated Integral constructible complexes are normalized constructible towers as a generic interface for coefficient models, operations, finite purity, or adjunction comparison; it supports the finite-reduction/reconstruction/localization route rather than replacing it."
+   },
+   {
+    "node": "det-sp-purity-bc-factors",
+    "why": "Use the stated Base change of the orientation and of the tensor map as a generic interface for coefficient models, operations, finite purity, or adjunction comparison; it supports the finite-reduction/reconstruction/localization route rather than replacing it."
+   },
+   {
+    "node": "det-sp-rational-localized-hom",
+    "why": "Use the stated Rational Hom groups from integral models as a generic interface for coefficient models, operations, finite purity, or adjunction comparison; it supports the finite-reduction/reconstruction/localization route rather than replacing it."
+   },
+   {
+    "node": "det-sp-reduction-compatibilities",
+    "why": "Use the stated Coefficient comparisons: units, composition and purity as a generic interface for coefficient models, operations, finite purity, or adjunction comparison; it supports the finite-reduction/reconstruction/localization route rather than replacing it."
+   },
+   {
+    "node": "det-sp-tower-gamma",
+    "why": "Use the stated Tower orientation and tower purity isomorphism as a generic interface for coefficient models, operations, finite purity, or adjunction comparison; it supports the finite-reduction/reconstruction/localization route rather than replacing it."
+   },
+   {
+    "node": "det-sp-tower-gluing",
+    "why": "Use the stated Gluing the local tower adjunctions as a generic interface for coefficient models, operations, finite purity, or adjunction comparison; it supports the finite-reduction/reconstruction/localization route rather than replacing it."
+   },
+   {
+    "node": "det-sp-unique-adjoint-coefficients",
+    "why": "Use the stated Right adjoints inherit the coefficient comparisons as a generic interface for coefficient models, operations, finite purity, or adjunction comparison; it supports the finite-reduction/reconstruction/localization route rather than replacing it."
+   },
+   {
+    "node": "det-sp-unique-right-adjoint",
+    "why": "Use the stated Right adjoints are unique up to a unique counit-compatible isomorphism as a generic interface for coefficient models, operations, finite purity, or adjunction comparison; it supports the finite-reduction/reconstruction/localization route rather than replacing it."
+   },
+   {
+    "node": "lem-pur-projection-purity-agreement",
+    "why": "Use the stated Agreement with the affine-line route on affine space as a generic interface for coefficient models, operations, finite purity, or adjunction comparison; it supports the finite-reduction/reconstruction/localization route rather than replacing it."
+   },
+   {
+    "node": "lem-pur-tower-trace-purity-comparison",
+    "why": "Use the stated Comparison of tower purity with reconstructed-trace purity as a generic interface for coefficient models, operations, finite purity, or adjunction comparison; it supports the finite-reduction/reconstruction/localization route rather than replacing it."
+   },
+   {
+    "node": "sk-lem-integral-models",
+    "why": "Use the stated Integral models as a generic interface for coefficient models, operations, finite purity, or adjunction comparison; it supports the finite-reduction/reconstruction/localization route rather than replacing it."
+   },
+   {
+    "node": "sk-lem-sp-field-extension",
+    "why": "Use the stated Compatibility with finite extensions of $E$ as a generic interface for coefficient models, operations, finite purity, or adjunction comparison; it supports the finite-reduction/reconstruction/localization route rather than replacing it."
+   },
+   {
+    "node": "sk-prop-sf-rf-shriek-preservation",
+    "why": "Use the stated $f^!$ with finite coefficients as a generic interface for coefficient models, operations, finite purity, or adjunction comparison; it supports the finite-reduction/reconstruction/localization route rather than replacing it."
+   },
+   {
+    "node": "sk-prop-sfb-cartesian-coefficients",
+    "why": "Use the stated Inverse image of the coefficient sheaves as a generic interface for coefficient models, operations, finite purity, or adjunction comparison; it supports the finite-reduction/reconstruction/localization route rather than replacing it."
+   },
+   {
+    "node": "sk-thm-existence",
+    "why": "Use the stated The exceptional inverse image as a generic interface for coefficient models, operations, finite purity, or adjunction comparison; it supports the finite-reduction/reconstruction/localization route rather than replacing it."
+   },
+   {
+    "node": "sk-thm-sfb-qlbar-two-colimit",
+    "why": "Use the stated Descent to a finite coefficient field; $\\Dctf(X,\\Qlb)$ as a $2$-colimit as a generic interface for coefficient models, operations, finite purity, or adjunction comparison; it supports the finite-reduction/reconstruction/localization route rather than replacing it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-def-localizing-closure-ctf-equals-bc",
+  "det-prop-scalar-six-compact-support",
+  "det-prop-scalar-six-pullback",
+  "det-sp-composition-factors",
+  "det-sp-field-extension-towers",
+  "det-sp-finite-general-ring",
+  "det-sp-integral-adjunction-bijection",
+  "det-sp-integral-direct-image-tower",
+  "det-sp-normalized-equivalence",
+  "det-sp-purity-bc-factors",
+  "det-sp-rational-localized-hom",
+  "det-sp-reduction-compatibilities",
+  "det-sp-tower-gamma",
+  "det-sp-tower-gluing",
+  "det-sp-unique-adjoint-coefficients",
+  "det-sp-unique-right-adjoint",
+  "lem-pur-projection-purity-agreement",
+  "lem-pur-tower-trace-purity-comparison",
+  "sk-lem-integral-models",
+  "sk-lem-sp-field-extension",
+  "sk-prop-sf-rf-shriek-preservation",
+  "sk-prop-sfb-cartesian-coefficients",
+  "sk-thm-existence",
+  "sk-thm-sfb-qlbar-two-colimit"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NB-a78686a6f",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-a78686a6f (reviewer sub-agent of L); spot-checked: Read in full: the 0-node, 13-step split of sk-thm-purity-transport against the main-20261015 _section.md and proof.md (Steps 1-5) and the master unit (Steps 1-4). All four faults of the earlier returns (NN a34be139, Q29 c11ba1dc, NI 77fb41c6) are repaired. (1) The counit t is pinned at every stage: finite t^A = ε∘F(γ^A) from det-sp-finite-general-ring(3); integral t = ε^H∘F(γ^H) from det-sp-integral-adjunction-bijection; rational and Qlb t are the localized and finite-stage counits. (2) One integral family is used: γ^T = δ∘R lim γ_•, identified with the trace-transpose/reconstruction family by lem-pur-tower-trace-purity-comparison, whose last clause also gives γ^rat = Q_E(γ^T) for thm-pur-rational-and-qbar-purity and prop-pur-rational-purity-trace-coherence. (3) The Qlb categories are identified by sk-thm-sfb-qlbar-two-colimit(2)-(4); E→Qlb is a listed map for det-prop-scalar-six-compact-support. (4) Arbitrary finite A uses det-sp-finite-general-ring and det-sp-reduction-compatibilities(2)-(3) directly; det-sp-unique-adjoint-coefficients is used only where the chosen adjoint changes. Step 10 applies det-sp-unique-right-adjoint with the letters exchanged; I checked the direction ε_G∘F(γ)=t. Step 12 normalization: lem-pur-projection-purity-agreement gives γ_{p_d}=Γ_{p_d}, so t is (1⊗I)∘PF^{-1}; the tower charts come from det-sp-tower-gluing(1),(3). Step 4: sk-lem-integral-models(2) characterizes condensed Dbc(X,O_E) as derived complete with constructible reductions, matching def-weil-derived-complete-integral-detailed (uniform bounds by dévissage); the Noetherian hypothesis of det-sp-normalized-equivalence holds. Step 7: the rational Hom chain via det-sp-rational-localized-hom is correct; naturality for h/ℓ^s follows by E-linearity. Statement: the added opening paragraph only makes the unit's def-pur-conventions setting explicit (k=F̄_q, ℓ≠p, finite A killed by a power of ℓ, and the named category equivalences); it adds no hypothesis and keeps the source text verbatim. The ℓ=p counterexample is correct. Edge cases checked: d=0/étale, empty X or Y, K=0, A=Z/ℓ², E=Q_ℓ, ramified E, three-field towers. Batch-5: recomputing the closure from the targets, every flagged citation except one is already in the base closure or reaches no trace-formula/Poincaré-duality node outside it; their endpoints (geometric-inverse-image-exact, proetale-unit-leray-chain-formula, pod-lisse-tensor-and-scalar-extension, fully-faithful-ess-surj, regular-perfect-smooth, oriented-closed-base-localization, site-functorial-flat-resolution) are generic and accepted. The one addition, lem-pur-tower-trace-purity-comparison, is a purity-family comparison; nt-assume-poincare-duality takes smooth purity as an input, so this lies outside the assumption and is accepted. All 24 declared tool_uses accepted as generic interfaces on the unit route. Advisory: Step 6 could also cite the tower clauses of det-sp-composition-factors and det-sp-purity-bc-factors(ii) for the integral equations. Maintainer notes: sk-def-sp-trace (arbitrary characteristic-p field) cites this F̄_q item, a mismatch already on the base; the report claims a statement_change field that the item lacks."
+ }
 }
