@@ -24,58 +24,53 @@
  ],
  "proof": [
   {
-   "text": "Properness over the field $k$ includes finite type and quasi-compactness. The assumed affine nonvanishing loci therefore satisfy the two conditions of the absolute ampleness definition [def-weil-pbc-ample-invertible-module], so $\\mathcal L$ is ample in that sense.",
+   "text": "Register properness and invertibility as instances. Properness makes X quasi-compact since Spec(k) is affine. For each x take the given positive power and section. The existing nonvanishing/local-generation equivalence identifies its generating open with its fibrewise nonvanishing locus. These affine opens therefore give Scheme.Modules.IsAmple X L.",
    "uses": [
     "def-weil-pbc-ample-invertible-module",
     "def-weil-proper-morphism",
-    "def-weil-finite-type-morphism"
+    "def-weil-finite-type-morphism",
+    "lem-sc-nonvanishing-iff-generates-at"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/properties.tex",
-    "place": "Properties, Definition 01PS and Section 01PR"
+    "place": "Definition 01PS"
    }
   },
   {
-   "text": "Apply the affine-base ample-to-immersion theorem [lem-weil-pbc-ample-very-ample-immersion-affine-base] with $A=k$ and the structure morphism $X\\to\\operatorname{Spec}(k)$. It gives $d\\ge1$, a projective-space immersion $j$ and an isomorphism $\\mathcal L^{\\otimes d}\\cong j^*\\mathcal O(1)$. Over a field this projective-space model is the usual $\\mathbf P^N_k$ model used in [def-sc-ample].",
+   "text": "Apply Scheme.Modules.IsAmple.exists_immersion_affine_base over k, using local finite type from properness. Obtain d>0 and an immersion i into finite projective space over k whose pullback of O(1) is the positive tensor power of L.",
    "uses": [
-    "lem-weil-pbc-ample-very-ample-immersion-affine-base",
-    "def-sc-ample"
+    "lem-weil-pbc-ample-very-ample-immersion-affine-base"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, Lemma 01VT, implication (1) => (5), with base Spec(k), and Constructions Definition 01NF"
+    "place": "Lemma 01VT, (1) implies (5)"
    }
   },
   {
-   "text": "The structure morphism $q_n:P_n\\to\\operatorname{Spec}(k)$ of projective space over $k$ is separated [lem-weil-pbc-projective-space-proj-separated]. Since $X\\to\\operatorname{Spec}(k)$ is proper and $q_n\\circ j$ is the structure morphism of $X$, the immersion $j$ is proper by the proper-to-separated lemma [lem-weil-pbc-proper-to-separated]. A proper immersion is a closed immersion [lem-weil-pbc-proper-immersion-closed]. Put $\\mathcal M=\\mathcal L^{\\otimes d}$ and let $s_0,\\dots,s_n\\in\\Gamma(X,\\mathcal M)$ be the images of the coordinate sections $j^*x_0,\\dots,j^*x_n$ under $j^*\\mathcal O(1)\\cong\\mathcal M$; by the functor of points of projective space [lem-weil-pbc-projective-space-functor-of-points] $j$ is the morphism associated with $(\\mathcal M,(s_0,\\dots,s_n))$. Let $V\\subseteq\\Gamma(X,\\mathcal M)$ be their $k$-span. The morphism $j_V:X\\to\\mathbf P(V^\\vee)_k$ associated with $V$, followed by the linear embedding $\\lambda:\\mathbf P(V^\\vee)_k\\to P_n$ dual to $k^{n+1}\\to V$, $e_l\\mapsto s_l$ (a closed immersion, hence separated [lem-weil-pbc-closed-immersion-integral-separated-uc] (a)), is $j$; so $j_V$ is a closed immersion [lem-weil-pbc-closed-immersion-from-composite], with $j_V^*\\mathcal O(1)\\cong\\mathcal M$.",
+   "text": "The finite projective space is proper, hence separated, over k. Since its composite with i equals f, IsProper.of_comp makes i proper. Its image is closed by universal closedness, so IsClosedImmersion.of_isPreimmersion makes i a closed immersion.",
    "uses": [
     "lem-weil-pbc-projective-space-proj-separated",
     "lem-weil-pbc-proper-to-separated",
-    "lem-weil-pbc-proper-immersion-closed",
-    "def-weil-proper-morphism",
-    "lem-weil-pbc-projective-space-functor-of-points",
-    "lem-weil-pbc-closed-immersion-integral-separated-uc",
-    "lem-weil-pbc-closed-immersion-from-composite"
+    "lem-weil-pbc-proper-immersion-closed"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, Lemma 01W6 and Lemma 01VT; Schemes, Lemma 01IQ; Constructions, Lemma 01NE (morphisms to projective space)"
+    "place": "Lemma 01W6; Schemes Lemma 01IQ"
    }
   },
   {
-   "text": "Apply [lem-pc-complete-linear-system-closed] to $X$, $\\mathcal M=\\mathcal L^{\\otimes d}$ and the subspace $V$ of step 3: the complete linear system $\\Gamma(X,\\mathcal L^{\\otimes d})$ gives a closed immersion into projective space over $k$ pulling $\\mathcal O(1)$ back to $\\mathcal L^{\\otimes d}$. So $\\mathcal L^{\\otimes d}$ is very ample and $\\mathcal L$ is ample in the sense of [def-sc-ample], since $d\\ge1$.",
+   "text": "Identify the recursively defined positive tensor power with L.tensorPow d by induction: degree one uses the right unitor and each successor uses tensoring and symmetry. Identify tensorPullback i with Scheme.Modules.pullback i by uniqueness of left adjoints to pushforward. Compose these isomorphisms with the immersion theorem's isomorphism, in the direction i*O(1) ≅ L.tensorPow d. The closed immersion, finite coordinate type and structure-morphism equality now directly witness IsVeryAmple f (L.tensorPow d); pair this with hL and d>0 to witness IsAmple f L.",
    "uses": [
-    "lem-pc-complete-linear-system-closed",
-    "def-sc-ample",
-    "def-weil-proper-morphism"
+    "def-pc-module-pullback",
+    "def-sc-ample"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-abelian-varieties",
-    "place": "def-sc-ample (very ample = the complete linear system gives a closed immersion); the passage from the finite subsystem to the complete linear system has no Stacks tag, see lem-pc-complete-linear-system-closed"
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Lemma 01VT (1) implies (5); the existing Lean definitions IsVeryAmple and IsAmple"
    }
   }
  ],
@@ -83,20 +78,18 @@
   "def-weil-pbc-ample-invertible-module",
   "def-weil-proper-morphism",
   "def-weil-finite-type-morphism",
+  "lem-sc-nonvanishing-iff-generates-at",
   "lem-weil-pbc-ample-very-ample-immersion-affine-base",
-  "def-sc-ample",
   "lem-weil-pbc-projective-space-proj-separated",
   "lem-weil-pbc-proper-to-separated",
   "lem-weil-pbc-proper-immersion-closed",
-  "lem-weil-pbc-projective-space-functor-of-points",
-  "lem-weil-pbc-closed-immersion-integral-separated-uc",
-  "lem-weil-pbc-closed-immersion-from-composite",
-  "lem-pc-complete-linear-system-closed"
+  "def-pc-module-pullback",
+  "def-sc-ample"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/properties.tex",
-  "place": "Properties Definition 01PS; Morphisms Lemmas 01VT and 01W6; Schemes Lemma 01IQ; the complete-linear-system passage of def-sc-ample is the node lem-pc-complete-linear-system-closed (no Stacks tag)"
+  "place": "Definition 01PS; Morphisms Lemmas 01VT and 01W6; Schemes Lemma 01IQ. F7 directly supplies the existing closed-immersion definition of IsVeryAmple, with tensor-power and pullback comparison isomorphisms."
  },
  "mathlib_searches": [
   {
@@ -148,8 +141,6 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-projective-space-functor-of-points",
-  "lem-weil-pbc-closed-immersion-from-composite",
   "lem-weil-pbc-ample-very-ample-immersion-affine-base",
   "lem-weil-pbc-proper-to-separated"
  ],
@@ -179,5 +170,15 @@
   "result": "pass",
   "note": "K field; X Scheme.{u} with f : X -> Spec K, IsProper f (def-weil-proper-morphism); L invertible (recorded IsInvertible); forall x, exists n>0, s : Gamma(L^n, top) with x in generatingLocus s and IsAffineOpen (generatingLocus s) (= X_s for invertible L by Nakayama, generatesAt_iff_mem_basicOpen); conclusion recorded IsAmple f L (def-sc-ample); one direction as node; no Mathlib/source duplicate"
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F7",
+  "result": "pass",
+  "landing": "20261021T130017-L-2490560",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }
