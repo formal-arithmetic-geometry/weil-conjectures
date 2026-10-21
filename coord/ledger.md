@@ -20438,3 +20438,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:32 L: merged deliver/Q09/lem-fix-scalar-completion-associator (reviewer PASS; first push; new nodes: 1)
 - 06:32 L: merged deliver/Q45/lem-sfb-constructible-cocone-ambient-realization (reviewer PASS; after a return; new nodes: 2)
 - 06:32 L: merged deliver/N9/lem-sfb-etale-derived-tensor-stalk (reviewer PASS; after a return; new nodes: 2)
+- 06:33 L: returned deliver/Q07/lem-weil-pbc-exact-faithful-torsion (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-pbc-exact-faithful-torsion: lem-weil-pbc-exac)
