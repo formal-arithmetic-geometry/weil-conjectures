@@ -23474,3 +23474,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:25 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
 - 19:25 L: merged deliver/NB/lem-sfb-qcqs-zero-dimensional-affine (stage 2; reviewer PASS; parallel immutable checks)
 - 19:25 L: merged deliver/Q20/lem-zl-point-weil-heart-flag (stage 2; reviewer PASS; parallel immutable checks)
+- 19:26 L: returned deliver/NE/lem-sfb-qcqs-proper-serre-heart-bound (reviewer RETURN: E7/C4: the delivery narrows the item's Q̄_ℓ coefficient again, the same fault for which Q29 93d7af was returned. On the )
