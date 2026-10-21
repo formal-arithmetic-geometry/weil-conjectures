@@ -19,7 +19,7 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-weil-pbc-ring-sheaves-grothendieck] to both small ringed sites, and [lem-weil-pbc-small-module-diagrams-grothendieck] with the small index category $\\mathbf N_{\\geq1}^{\\rm op}$. Thus $\\mathcal A,\\mathcal B$ and both tower categories are Grothendieck abelian, also for noncommutative rings. The existence theorem [lem-pur-kinjective-degreewise-existence] in $\\operatorname{Tow}(\\mathcal A)$ supplies $q:X\\to I$ with exactly the required K-injectivity and injective degree terms. The same theorem applies to the other three categories whenever their resolutions are needed below.",
+   "text": "Apply the existing small-site theorem SheafOfModules.isGrothendieckAbelian to both ring sheaves, the small-site specialization of [lem-weil-pbc-ring-sheaves-grothendieck]. Apply [lem-weil-pbc-small-module-diagrams-grothendieck] to the universe-lifted natural-number opposite category and transport along its equivalence with the original tower category. Thus both module and tower categories are Grothendieck abelian. The canonical functorial resolution from [lem-pur-kinjective-degreewise-existence] supplies the required quasi-isomorphism to a K-injective complex with injective terms.",
    "uses": [
     "lem-weil-pbc-ring-sheaves-grothendieck",
     "lem-weil-pbc-small-module-diagrams-grothendieck",
@@ -82,9 +82,9 @@
    }
   },
   {
-   "text": "Use [lem-weil-pbc-kinjective-total-derived] for termwise $G^{\\rm Tow}$, for each termwise limit, and for termwise $G$, followed by the target localization. These are exact functors on homotopy categories: additivity preserves the finite biproduct matrices defining shifts and cones in [def-weil-abstract-derived-category]. Step 1 supplies enough K-injectives. The lemma says their universal comparison units are invertible on K-injectives. Thus $q$ identifies $QJ$ with $R(G^{\\rm Tow})(QX)$ and $Q(L_I)$ with $R\\lim_{\\mathcal A}(QX)$. Since $J$ and $L_I$ are K-injective, the same unit calculations identify $Q(L_J)$ with $R\\lim_{\\mathcal B}(R(G^{\\rm Tow})(QX))$ and $Q(G(L_I))$ with $RG(R\\lim_{\\mathcal A}(QX))$. These are unit identifications, not arbitrary isomorphisms of the objects.",
+   "text": "Construct the four universal derived models using the existing K-injective localizer structure and the Mathlib LocalizerMorphism.Derives criterion. An additive functor takes a quasi-isomorphism between K-injectives to a quasi-isomorphism: [lem-weil-pbc-kinjective-hom-derived] makes the input a homotopy equivalence, and applying the additive functor preserves that homotopy equivalence. The criterion supplies the total right derived functor and a universal unit invertible on K-injectives. For the termwise limit, transport the unit across the natural isomorphism from the degreewise ordinary limit to the chosen limit of complexes. Its projection equation follows from limit.isoLimitCone. Compose the invertible units and the inverse image of Q(q) to obtain the four displayed computation isomorphisms; functoriality proves their normalizations.",
    "uses": [
-    "lem-weil-pbc-kinjective-total-derived",
+    "lem-weil-pbc-kinjective-hom-derived",
     "def-weil-abstract-derived-category"
    ],
    "elementary": false,
@@ -107,7 +107,6 @@
   {
    "text": "Under the units of step 6, the $n$th component of $Q(c)$ is the morphism represented by $G(P_I)\\xrightarrow{G(\\pi_n)}GI_n$. Naturality of the universal unit for $G$ identifies it with $RG(p_n)$, because both $P_I$ and $I_n$ are K-injective. The product universal property from [lem-pc-ringed-space-product-kinjective] identifies $Q(c)$ with the derived product comparison. Next, by [def-weil-tower-transition-endomorphism], writing $t_n:I_{n+1}\\to I_n$ for a transition, the $n$th components of $cG(s_I)$ and $s_Jc$ are both $G(t_n)G(\\pi_{n+1})$. Product uniqueness gives the first identity. Since $G$ is additive [def-weil-pbc-additive-functor], subtracting this identity from $cG(1)=c$ gives $cG(1-s_I)=(1-s_J)c$.",
    "uses": [
-    "lem-weil-pbc-kinjective-total-derived",
     "lem-pc-ringed-space-product-kinjective",
     "def-weil-tower-transition-endomorphism",
     "def-weil-pbc-additive-functor"
@@ -130,9 +129,9 @@
    }
   },
   {
-   "text": "Now assume exact countable products in both categories. For $T=I,J$, use [lem-weil-derived-limit-roos-complex] in its respective abelian category: step 1 gives enough injectives, step 2 gives the limits and products, and $T$ is K-injective by construction or step 3. The lemma specifies exactly the differential $d(y,x)=(-dy-(1-s_T)x,dx)$ and the map $j_T=(0,\\lambda)$ of [def-weil-strict-roos-model], and asserts that $j_T$ is a quasi-isomorphism. Thus the asserted map, with its prescribed sign, is a quasi-isomorphism for either $T$.",
+   "text": "Assume exact countable products only now. Apply the normalized comparison [lem-weil-pbc-exact-products-roos-comparison] to the termwise ordinary-limit unit, obtained by composing the chosen ordinary-limit isomorphism with the universal unit from step 6. This gives an invertible comparison from the negative-difference fibre and its normalization. No independent Roos quasi-isomorphism theorem is required.",
    "uses": [
-    "lem-weil-derived-limit-roos-complex",
+    "lem-weil-pbc-exact-products-roos-comparison",
     "def-weil-strict-roos-model"
    ],
    "elementary": false,
@@ -142,7 +141,7 @@
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-exact-products-roos-comparison] with $RF=R\\lim$ and its universal unit from step 6, separately in $\\mathcal A$ and $\\mathcal B$. The tower category is Grothendieck by step 1; the comparison is invertible on K-injectives by step 6; exact products are now assumed. Write its negative-difference fibre in the same ordered coordinates as [def-weil-strict-roos-model]. Its differential is $d^-(y,x)=(-dy+(1-s_T)x,dx)$. The involution $a(y,x)=(-y,x)$ satisfies $da(y,x)=(dy-(1-s_T)x,dx)=ad^-(y,x)$, so it is a chain isomorphism from that fibre to $H_T$. It takes the ordinary-limit inclusion $(0,\\lambda)$ to $j_T$. If $\\kappa^-Q(j^-)=\\eta^{\\lim}$ is the normalization supplied by the cited lemma, define $\\kappa_T=\\kappa^-Q(a)^{-1}$. Then $\\kappa_TQ(j_T)=\\kappa^-Q(a)^{-1}Q(a)Q(j^-)=\\eta^{\\lim}_T$, as required. The sign map commutes with all diagonal maps of these fibres, so the normalization is natural.",
+   "text": "Use the negative comparison of step 10. Construct the cone isomorphism from Cone(-u) to Cone(u) by the commuting square with source identity and target minus identity; shifting by -1 gives the sign isomorphism. In the ordered coordinates of [def-weil-strict-roos-model] it is exactly (y,x) mapped to (-y,x), as verified using both biproduct projections. Naturality follows from composition of cone maps. Its composite with the negative-fibre inclusion equals the chosen ordinary-limit isomorphism followed by j: the first coordinate is zero and the second coordinate agrees by every product projection. Define kappa as the inverse sign isomorphism followed by the negative comparison from [lem-weil-pbc-exact-products-roos-comparison]. Cancelling the sign isomorphism and the ordinary-limit isomorphism in its normalization gives Q(j) followed by kappa equal to the universal limit unit. On a K-injective complex that unit is invertible, so Q(j) is invertible and j is a quasi-isomorphism. This proves the assertion for both I and J.",
    "uses": [
     "lem-weil-pbc-exact-products-roos-comparison",
     "def-weil-strict-roos-model"
@@ -154,7 +153,7 @@
    }
   },
   {
-   "text": "With the cone convention in [def-weil-abstract-derived-category], the cone triangle of $u=1-s_T$ has maps $(u,i,-p)$. By the rotation axiom of [def-weil-triangulated-category], its inverse rotation has maps $(p[-1],u,i)$; in the coordinates of [def-weil-strict-roos-model] these are precisely $r(y,x)=x$, $u$, and $b(z)=(z,0)$. Localizing gives a distinguished triangle. Transport its first object along the isomorphism $Q(j_T):Q(L_T)\\to Q(H_T)$ from step 10: its first map becomes $Q(rj_T)=Q(\\lambda)$, and its last map becomes $Q(j_T)[1]^{-1}Q(b)$. Finally the equality $\\kappa_TQ(j_T)=\\eta^{\\lim}_T$ of step 11 identifies its first object with $R\\lim(QT)$ by exactly the derived-limit unit. Thus this transported triangle is the unit-normalized Roos triangle claimed in the statement.",
+   "text": "With the cone convention in [def-weil-abstract-derived-category], the cone triangle of $u=1-s_T$ has maps $(u,i,-p)$. By the rotation axiom of [def-weil-triangulated-category], its inverse rotation has maps $(p[-1],u,i)$; in the coordinates of [def-weil-strict-roos-model] these are precisely $r(y,x)=x$, $u$, and $b(z)=(z,0)$. Localizing gives a distinguished triangle. Transport its first object along the isomorphism $Q(j_T):Q(L_T)\\to Q(H_T)$ from steps 10-11: its first map becomes $Q(rj_T)=Q(\\lambda)$, and its last map becomes $Q(j_T)[1]^{-1}Q(b)$. Finally the equality $\\kappa_TQ(j_T)=\\eta^{\\lim}_T$ of step 11 identifies its first object with $R\\lim(QT)$ by exactly the derived-limit unit. Thus this transported triangle is the unit-normalized Roos triangle claimed in the statement.",
    "uses": [
     "def-weil-abstract-derived-category",
     "def-weil-strict-roos-model",
@@ -178,21 +177,19 @@
   "lem-sp-right-adjoint-preserves-injectives",
   "lem-weil-tower-evaluation-kinjective",
   "lem-pc-ringed-space-product-kinjective",
-  "lem-weil-pbc-kinjective-total-derived",
+  "lem-weil-pbc-kinjective-hom-derived",
   "def-weil-abstract-derived-category",
   "lem-weil-pbc-right-adjoint-preserves-limits",
   "def-weil-tower-transition-endomorphism",
   "def-weil-pbc-additive-functor",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-weil-derived-limit-roos-complex",
-  "def-weil-strict-roos-model",
   "lem-weil-pbc-exact-products-roos-comparison",
+  "def-weil-strict-roos-model",
   "def-weil-triangulated-category"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 0A07 (lemma-Rf-commutes-with-Rlim), first proof; explicit exact-adjoint specialization using Tags 079P, 08BJ, 0BK6, 070K, 070Y and 0941. The general exact-adjoint and signed unit calculations are written by NI."
+  "place": "Tag 0A07, lemma-Rf-commutes-with-Rlim, first proof; Tags 079P, 08BJ, 0BK6, 070K, 070Y and 0941. B4 implements the simultaneous models with the K-injective localizer API and derives the positive Roos quasi-isomorphism from the signed, unit-normalized comparison."
  },
  "mathlib_searches": [
   {
@@ -380,5 +377,15 @@
   "group": "Q133",
   "result": "pass",
   "note": "Read node, 8 stmt_dep records, module, report, StrictRoosModel/ExactProductsRoosComparison sources, Mathlib MappingCocone. Records: only item lean changed, deps identical to side-live, statement verbatim, report sections present, item not landed live. Every hypothesis and clause matches the node: small sites in one universe, noncommutative RingCat, additive F ⊣ G with F exact, resolution, all K-injectivity claims incl. J injective terms, four unit identifications pinned by e.hom ≫ R(Qq) = unit, derived products via Q.mapCone limit, c/beta NatIsos on all tower complexes pinned by components, shift and 1−s squares, localized naturality via representative independence; exact products only in exact_products. NormalizedRoos: sign pinned as biprod.map(−1,1) in roosχ coordinates (hand-checked cone/fibre differentials), negative pinned by the comparisonIso normalization, ordinary by degreewise π, inclusion_sign consistent, κQ(j)=η, triangles use mappingCocone.triangle (fst = roosProj) with commShift. Edge cases ok; one universe w is not a restriction. Docstrings/H8/H9 ok; only sorry is the theorem proof. No recompile per 2026-10-21 rule; no FIX. Advisories: ExactProductsRoos plain defs from a theorem node that was already a stage-1 stmt_dep (not added, so not H2); product duplicates roosP as a functor; proof-only imports."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261021T120320-L-3757611",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
