@@ -22,9 +22,77 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-mate/fix-prop-adjunctions.proof.md",
   "place": "Step 1, completed coefficient categories and finite coefficient extension; canonical finite-level constant-sheaf and completion identifications, Stacks 099N and Bhatt--Scholze Lemma 6.8.2(1)."
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The forgetful functor from commutative ring sheaves to ring sheaves is fully faithful. Lift integralDetailedCoefficientComparison with its preimageIso; faithfulness gives the prescribed image and uniqueness.",
+   "uses": [
+    "lem-weil-pbc-integral-stratified-perfect-characterization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the normalized restriction-composition comparison with restriction along the identity. Both act identically on sections, so their composite is the unique ordinary round trip. Construct the inverse restriction equivalence directly from sectionwise identity linear isomorphisms and descend exact scalar restriction to the derived category. The published changeFunctor comparison fixes its specified forward functor.",
+   "uses": [
+    "def-weil-pbc-bounded-constructible-tower",
+    "prop-weil-pbc-scalar-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the normalized completion Roos triangle under inverse coefficient restriction. If K is intrinsically complete, its reflection unit is invertible, so transport the triangle to vertex Phi K. Conversely rotate that triangle and the completeness triangle for Phi K: their first arrows are the identical product transition, so uniqueness of the third vertex gives Phi K isomorphic to Phi(completion K). Lift the isomorphism through the coefficient equivalence and use invariance of intrinsic completeness under isomorphisms. Convert the sf and legacy completeness tests using sfDerivedComplete_iff_legacy; an auxiliary finite field datum exists by choosing a prime larger than l.",
+   "uses": [
+    "lem-pur-completed-coefficient-completion-roos-transport",
+    "lem-sf-derived-complete-legacy-comparison",
+    "lem-weil-pbc-ringed-topoi-module-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Under the stated geometric hypotheses use integralStratifiedPerfectDetailed on Phi K. The inverse transport is integralDetailedTransport, whose round-trip unit identifies its image with K. Use invariance of bounded constructibility under that isomorphism, supplied by integralUniformComplete_isTriangulated.",
+   "uses": [
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "def-weil-pbc-bounded-constructible-complete"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The completed scalar square commutes because every finite projection does: the constant coefficient comparison and ULift quotient comparison respect the finite scalar inclusion. Transport the tensor adjunctions around this square. Uniqueness of left adjoints gives the ordinary scalar isomorphism. Its unit equation proves the formula on 1 tensor x; linearity proves the formula on a tensor x. The same adjunction Hom equivalence proves uniqueness.",
+   "uses": [
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "def-weil-integral-scalar-extension",
+    "prop-weil-pbc-scalar-extension",
+    "def-weil-pbc-bounded-constructible-tower",
+    "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+    "def-weil-pbc-adic-coefficient-datum"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The ordinary scalar square is exact, since its intrinsic side is exact and coefficient restriction is an equivalence. Uniqueness of the universal left derived functor identifies the specified pbc derived tensor with the exact derived functor, with its universal counit. Compose this comparison with the exact derived square. The localization factor equations give precisely the required cochain-representative normalization. Cancel those factors and use localization natural-transformation extensionality to prove uniqueness.",
+   "uses": [
+    "def-weil-integral-scalar-extension",
+    "def-weil-pbc-bounded-constructible-tower"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-integral-scalar-extension",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-bounded-constructible-complete",
+  "def-weil-pbc-bounded-constructible-tower",
+  "lem-pur-completed-coefficient-completion-roos-transport",
+  "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+  "lem-sf-derived-complete-legacy-comparison",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "prop-weil-pbc-scalar-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-mate/fix-prop-adjunctions.proof.md",
+  "place": "Step 1, using the landed coefficient comparison, normalized tensor adjunctions and universal derived tensor counits. Completion comparison separately uses Stacks 099M and 099N."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -165,5 +233,15 @@
   "group": "Q55",
   "result": "fix",
   "note": "Wrote review.md and a complete replacement report under fixes/. Repaired the H1/H11 placeholder second reading and recorded compiler evidence. Both immutable Lean modules passed scompile.py; no substantive mismatch found. No branch mutation performed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261021T111331-L-75331",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
