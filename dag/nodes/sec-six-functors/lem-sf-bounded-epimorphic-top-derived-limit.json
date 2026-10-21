@@ -16,9 +16,75 @@
   "def-weil-abstract-derived-category",
   "def-weil-derived-limit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $A_n=Q(P_n)$ and let $B$ be the product used in the given Roos triangle. By [det-pe-products-derived], the termwise product complex $C=\\prod_nP_n$ represents a product of the $A_n$, and its cohomology comparison is $H^j(C)\\cong V_j:=\\prod_nH^j(P_n)$. By [def-weil-category-product], the maps from $B$ to $Q(C)$ and back induced by the two sets of projections are inverse: each composite has the original projections, hence is the identity. The resulting comparison $c_j:H^j(B)\\xrightarrow{\\sim}V_j$ therefore has components $H^j(\\operatorname{pr}_n)$. Let $S:C\\to C$ be the chain map with $n$th coordinate $t_n\\operatorname{pr}_{n+1}$. Comparing projections shows that $s$ corresponds to $Q(S)$, and $1-s$ corresponds to $Q(1-S)$. On cohomology, [def-weil-abstract-derived-category] computes $H^j(1-S)$ on cycles modulo boundaries: it sends $[x]$ to $[x]-[Sx]$. Thus $c_jH^j(1-s)c_j^{-1}=d_j:=1-T_j$, where the $n$th coordinate of $T_j$ is $H^j(t_n)$ after the $(n+1)$st projection. This identifies both the objects and the actual endomorphism for the supplied product.",
+   "uses": [
+    "det-pe-products-derived",
+    "def-weil-category-product",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0947, proposition-enough-weakly-contractibles, (5)-(7), proof of (6) and (7)"
+   }
+  },
+  {
+   "text": "Apply [lem-sf-derived-homology-long-exact] to the distinguished Roos triangle of [def-weil-derived-limit] supplied with $L$. With the product comparisons of Step 1, its exact sequence contains, for every integer $j$,\n$$V_{j-1}\\xrightarrow{d_{j-1}}V_{j-1}\\xrightarrow{\\delta_j}H^j(L)\\longrightarrow V_j\\xrightarrow{d_j}V_j.$$\nHere the connecting morphism has been composed with the inverse product comparison on its source. Exactness is unchanged by these isomorphisms. This is the product form of the Milnor calculation in Tag 0947, applied directly to the given triangle; no assertion of canonical uniqueness for triangulated cones is needed.",
+   "uses": [
+    "lem-sf-derived-homology-long-exact",
+    "def-weil-derived-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0947, proposition-enough-weakly-contractibles, (5)-(7), proof of (6) and (7)"
+   }
+  },
+  {
+   "text": "If $j<a$, then both $j-1$ and $j$ are below $a$. If $j>b+1$, both are above $b$. In either case every factor of $V_{j-1}$ and $V_j$ is zero by hypothesis. A product of zero objects is zero: every family of maps into its factors consists of zero maps, so its identity is zero by uniqueness of a product map. The sequence of Step 2 consequently has $0\\to H^j(L)\\to0$ exact at its middle term, forcing $H^j(L)=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0947, proposition-enough-weakly-contractibles, (5)-(7), proof of (6) and (7)"
+   }
+  },
+  {
+   "text": "Apply the first assertion of [det-pe-milnor-epimorphic] to the tower $M_n=H^b(P_n)$ of $\\mathcal R$-module sheaves, with transitions $H^b(t_n)$. Its site and ring sheaf are exactly the ones fixed in the statement, and its epimorphy hypothesis is precisely the top-transition assumption. The change from indices $n\\geq1$ here to $n\\geq0$ there is the order isomorphism $n\\mapsto n+1$, which leaves the product coordinates and consecutive transitions unchanged. The conclusion is that $d_b=1-T_b:V_b\\to V_b$ is an epimorphism. This uses no epimorphy on the terms of the complexes or in other cohomological degrees.",
+   "uses": [
+    "det-pe-milnor-epimorphic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-milnor/det-pe-milnor-epimorphic.md",
+    "place": "first assertion: one minus transition on the product is an epimorphism"
+   }
+  },
+  {
+   "text": "It remains to consider $j=b+1$. The bound on each $P_n$ gives $V_{b+1}=0$. In Step 2 the composite $\\delta_{b+1}d_b$ is zero, and $d_b$ is epic by Step 4; canceling this epimorphism gives $\\delta_{b+1}=0$. Exactness at $H^{b+1}(L)$, whose next object is zero, also says that the image of $\\delta_{b+1}$ is all of $H^{b+1}(L)$. Its image is zero, hence $H^{b+1}(L)=0$. Together with Step 3 this proves the required vanishing for every $j\\notin[a,b]$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0947, proposition-enough-weakly-contractibles, (5)-(7), proof of (6) and (7)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "det-pe-products-derived",
+  "def-weil-category-product",
+  "def-weil-abstract-derived-category",
+  "lem-sf-derived-homology-long-exact",
+  "def-weil-derived-limit",
+  "det-pe-milnor-epimorphic"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0947, proposition-enough-weakly-contractibles, (5)-(7), proof of (6) and (7)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -68,10 +134,60 @@
    "results": "{\"t\": \"2026-10-21T06:17:34Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsLE\\\", \\\"limit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.instIsLeftAdjointFunctorColim\", \"CategoryTheory.Functor.instPreservesColimitsOfSizeOfIsLeftAdjoint\", \"CategoryTheory.Functor.instPreservesColimitsOfShapeOfIsLeftAdjoint\", \"CategoryTheory.Limits.hasLimitsOfShape_iff_isLeftAdjoint_const\", \"CategoryTheory.Functor.colimitIsoOfIsLeftKanExtension\", \"CategoryTheory.Functor.isColimitCoconeOfIsLeftKanExtension\", \"CategoryTheory.Functor.ι_colimitIsoOfIsLeftKanExtension_inv\", \"CategoryTheory.Functor.ι_colimitIsoOfIsLeftKanExtension_hom\"], \"digest\": \"9c7642dac5219510\"}",
    "date": "2026-10-21",
    "verdict": "no match: sequential ordinary limits, generic cohomology bounds, and mapping-cone epimorphisms do not state the same-interval bound for arbitrary derived limits of pro-etale sheaf towers"
+  },
+  {
+   "tool": "grep",
+   "query": "[Mm]ilnor|[Rr]oos|derived[Ll]imit|derived_limit|homotopy[Ll]imit",
+   "results": "{\"t\": \"2026-10-21T08:10:28Z\", \"tool\": \"grep\", \"query\": \"[Mm]ilnor|[Rr]oos|derived[Ll]imit|derived_limit|homotopy[Ll]imit\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary limit projections, t-structure characterizations, and complex factorization results do not give this derived-limit bound for arbitrary pro-etale ring sheaves",
+   "sub": "Algebra/Homology"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A derived inverse limit of a uniformly bounded tower with surjective top cohomology is bounded in the same interval",
+   "results": "{\"t\": \"2026-10-21T08:10:29Z\", \"tool\": \"leansearch\", \"query\": \"A derived inverse limit of a uniformly bounded tower with surjective top cohomology is bounded in the same interval\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"InverseSystem.limit\", \"InverseSystem.isNatEquiv_piEquivLim\", \"InverseSystem.invLimEquiv_symm_apply_coe\", \"InverseSystem.invLimEquiv.congr_simp\", \"Profinite.isIso_asLimitCone_lift\", \"ProfiniteGrp.isIso_toLimit\", \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"Profinite.lim\"], \"digest\": \"76a41a9b61f2e17a\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary limit projections, t-structure characterizations, and complex factorization results do not give this derived-limit bound for arbitrary pro-etale ring sheaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"limit\"",
+   "results": "{\"t\": \"2026-10-21T08:10:29Z\", \"tool\": \"loogle\", \"query\": \"\\\"DerivedCategory\\\", \\\"limit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary limit projections, t-structure characterizations, and complex factorization results do not give this derived-limit bound for arbitrary pro-etale ring sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived inverse limit of a uniformly cohomologically bounded tower of proetale sheaf complexes with surjective top cohomology transitions has the same cohomological bounds",
+   "results": "{\"t\": \"2026-10-21T08:10:33Z\", \"tool\": \"leanfinder\", \"query\": \"The derived inverse limit of a uniformly cohomologically bounded tower of proetale sheaf complexes with surjective top cohomology transitions has the same cohomological bounds\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.coherentTopology.isLocallySurjective_π_app_zero_of_isLocallySurjective_map\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"DerivedCategory.isGE_Q_obj_iff\", \"CochainComplex.cm5b.instIsStrictlyGEI\", \"DerivedCategory.isLE_Q_obj_iff\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"LightCondensed.epi_π_app_zero_of_epi\"], \"digest\": \"ca78920432ae4b6c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary limit projections, t-structure characterizations, and complex factorization results do not give this derived-limit bound for arbitrary pro-etale ring sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "[Mm]ilnor|[Rr]oos|homotopyLimit|derivedLimit",
+   "results": "{\"t\": \"2026-10-21T08:10:47Z\", \"tool\": \"grep\", \"query\": \"[Mm]ilnor|[Rr]oos|homotopyLimit|derivedLimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Geometry/Manifold/PoincareConjecture.lean\"], \"digest\": \"dc4c1fdc8feeecd8\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary limit projections, t-structure characterizations, and complex factorization results do not give this derived-limit bound for arbitrary pro-etale ring sheaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLE\", \"limit\"",
+   "results": "{\"t\": \"2026-10-21T08:10:48Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsLE\\\", \\\"limit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.instIsLeftAdjointFunctorColim\", \"CategoryTheory.Functor.instPreservesColimitsOfSizeOfIsLeftAdjoint\", \"CategoryTheory.Functor.instPreservesColimitsOfShapeOfIsLeftAdjoint\", \"CategoryTheory.Limits.hasLimitsOfShape_iff_isLeftAdjoint_const\", \"CategoryTheory.Functor.colimitIsoOfIsLeftKanExtension\", \"CategoryTheory.Functor.isColimitCoconeOfIsLeftKanExtension\", \"CategoryTheory.Functor.ι_colimitIsoOfIsLeftKanExtension_inv\", \"CategoryTheory.Functor.ι_colimitIsoOfIsLeftKanExtension_hom\"], \"digest\": \"9c7642dac5219510\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary limit projections, t-structure characterizations, and complex factorization results do not give this derived-limit bound for arbitrary pro-etale ring sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Milnor exact sequence implies an inverse limit of complexes with cohomology in a fixed interval and epimorphic transition on the highest degree stays in that interval",
+   "results": "{\"t\": \"2026-10-21T08:10:50Z\", \"tool\": \"leanfinder\", \"query\": \"Milnor exact sequence implies an inverse limit of complexes with cohomology in a fixed interval and epimorphic transition on the highest degree stays in that interval\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Profinite.NobelingProof.succ_exact\", \"CochainComplex.cm5b\", \"CochainComplex.isLE_iff\", \"CochainComplex.degreewiseEpiWithInjectiveKernel\", \"HomologicalComplex.HomologySequence.epi_homologyMap_τ₃\", \"CochainComplex.isGE_iff\", \"CochainComplex.cm5b.degreewiseEpiWithInjectiveKernel_p\", \"CochainComplex.exactAt_of_isLE\"], \"digest\": \"b1f8a61cf5599c49\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary limit projections, t-structure characterizations, and complex factorization results do not give this derived-limit bound for arbitrary pro-etale ring sheaves"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sf-complete-residue-cohomology-bounds",
@@ -92,5 +208,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sf-bounded-epimorphic-top-derived-limit",
+  "worker": "stage1",
+  "summary": "Kept the full arbitrary ring-sheaf and arbitrary supplied derived-limit statement. Used existing termwise-derived-product, long-exact-cohomology, and epimorphic-tower nodes; wrote the projection-compatible product comparison and endpoint b+1 argument explicitly. No new nodes or statement corrections.",
+  "blueprint": "Realizes the inherited Milnor/endpoint boundedness input below lem-fix-weil-operations through lem-fix-constructible-tensor-completion, lem-fix-residue-lisse-projective-models, and lem-sf-complete-residue-cohomology-bounds; Steps 1-2 give the termwise-product calculation for the supplied triangle and Steps 3-5 give the common interval and endpoint.",
+  "tool_uses": [
+   {
+    "node": "det-pe-products-derived",
+    "why": "Generic pro-etale ring-sheaf derived-product and product-cohomology comparison, used by the inherited Tag 0947 route; no node in this unit states it."
+   },
+   {
+    "node": "det-pe-milnor-epimorphic",
+    "why": "Generic one-minus-shift epimorphy for an epimorphic tower of arbitrary pro-etale module sheaves, applied only to the top cohomology tower in the Tag 0947 endpoint calculation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-pe-products-derived",
+  "det-pe-milnor-epimorphic"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NH-e83c137cf",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-e83c137cf (reviewer sub-agent of L); spot-checked: Read the whole item and found no faults. The statement and stmt_deps are unchanged from live (status unsplit there). There are no new nodes. The item is not on route-pivot-dropped and has no repair note. The statement is true: Milnor sequence plus R^1lim=coker(1-T)=0 for an epimorphic tower (Stacks Tag 0947 (4)-(7), sites-cohomology.tex:13801ff). Without top epimorphy H^{b+1} can be a nonzero coker(1-T), so the hypothesis is needed. Steps checked: (1) det-pe-products-derived (termwise product is the product in D, piComparison with components H^j(pr_n)) and def-weil-category-product uniqueness identify 1-s with 1-T_j on V_j. (2) lem-sf-derived-homology-long-exact (Mathlib leaf), applied to the supplied Roos triangle of def-weil-derived-limit, gives the exact sequence V_{j-1}->V_{j-1}->H^j(L)->V_j->V_j in the right order, with no cone-model assumption. (3) For j<a or j>b+1 both V vanish. (4) Assertion 1 of det-pe-milnor-epimorphic, applied to the tower H^b(P_n) over the same R and reindexed n->n+1, gives d_b epic. (5) For j=b+1: V_{b+1}=0, delta_{b+1}d_b=0 and d_b epic give delta=0, so H^{b+1}(L)=0. Edge case a=b works. Duplicate search over the snapshot DAG (milnor-sequence/epimorphic, roos-cone-calculus, left-complete-truncation-tower, complete-residue-cohomology-bounds): no node states this result. The only citer, lem-sf-complete-residue-cohomology-bounds, uses the item as stated. The unit sk-rem-sf-pf-done has uses:[]. The two det-pe tool_uses are generic pro-etale black-box tools and I accept them as the maintainer's record; the worker wrote them themselves (A8), which I count as no fault. No SGA is used. The citations.json named in the report is not on the branch; I count that as no fault."
  }
 }
