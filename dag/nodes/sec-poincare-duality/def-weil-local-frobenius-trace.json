@@ -32,9 +32,52 @@
   "def-weil-endomorphism-trace",
   "lem-kun-closed-point-field"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For localExtensionPoint_compatible, use the final choose_spec equality in exists_unique_subfield_of_closure: the extensionEmbedding followed by the subfield inclusion is algebraMap. Rewrite Over.w and contravariant Spec composition. For localClosedPoint_compatible, rewrite Scheme.Hom.specMap_residueFieldAlgebraMap and Spec composition, then use the given compatibility hι.",
+   "uses": [
+    "def-weil-finite-field-fiber",
+    "lem-weil-unique-subfield-of-closure",
+    "def-weil-residue-field"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For localClosedPointDegree_pos, equip the actual residue field with the algebra structure from Y₀.hom.residueFieldAlgebraMap. The finite-residue-field equivalence of closedPoint_iff_residueField_trdeg_zero_and_finite gives Module.Finite. Module.finrank_pos gives degree at least one because a field is nontrivial.",
+   "uses": [
+    "lem-kun-closed-point-field"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Induct on the positive-power index to identify localPositivePower of frobeniusPointIso with Spec of the corresponding positive power of geometricFrobeniusAlgEquivOfAlgebraic. Induct using galoisMap_projections to show that the model projection of localPositivePower of geometricFrobenius is unchanged, and its closure projection is followed by the same positive power of frobeniusPointIso. Pullback.hom_ext then proves the return equation for any lift whose model map is fixed by this point power.",
+   "uses": [
+    "def-weil-frobenius-detailed"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For localExtensionPoint_return, choose_spec of exists_unique_subfield_of_closure gives cardinality q^n of extensionSubfield, hence finiteness. For localClosedPoint_return, the closed-point residue-field theorem gives Module.Finite; Module.finite_of_finite and Module.natCard_eq_pow_finrank give a finite field of cardinality q^r. In each case apply the existing proved source-library theorem FiniteField.geometricFrobeniusAlgEquivOfAlgebraic_pow_apply_of_card_eq to the prescribed field embedding. Spec composition makes the model map fixed, so the lift calculation of the preceding step applies. The inequalities n>=1 and r>=1 identify (n-1)+1 and (r-1)+1 with n and r. The definitions of the local operators and traces are unchanged.",
+   "uses": [
+    "lem-weil-unique-subfield-of-closure",
+    "lem-kun-closed-point-field",
+    "def-weil-frobenius-detailed"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-field-fiber",
+  "lem-weil-unique-subfield-of-closure",
+  "def-weil-residue-field",
+  "lem-kun-closed-point-field",
+  "def-weil-frobenius-detailed"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/def-weil-local-frobenius-trace.md",
+  "place": "A8, 2026-10-21: existing declaration docstrings and the geometric-point return construction; finite-field calculation supplied by the proved source-library geometricFrobeniusAlgEquivOfAlgebraic_pow_apply_of_card_eq."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -188,5 +231,15 @@
   "group": "Q11",
   "result": "pass",
   "note": "Matched every clause of dual_stalk_frobenius against the node (dual exists; lisse and in the heart for every representing dual; finite-dimensional H^0 stalk; Frobenius equal to a linear automorphism A; exists c with c(F_dual phi)(v)=c(phi)(A^-1 v) and conjugacy to dualMap A^-1). No extra hypotheses; Omega : Type u is forced by the pointQbarFibre API and documented. New section 1(A) definitions IsCommonStageLisse (chart-local rational finite freeness, no global lattice) and IsCommonStageWeilLinearDual (internal-Hom universal property plus evaluation-equivariance equation, which gives the contragredient action) are real Props with correct type directions. Section 1(B) LocalFrobeniusTrace is append-only (lines 1-350 identical to side clone); the localQbar operator follows the node's composite with the semilinear return and theta iteration and introduces no arbitrary maps. Recorded statements equal the file signatures for all 4 records; new nodes have exactly the section 5 fields; the item changed only in stmt_deps and lean. The only proof is the theorem's sorry; docstrings and report sections are present. nt_compile --json on all 4 files: exit 0, no diagnostics (29.4/2.7/2.4/3.1 s). Remarks only: the worker's duplicate search omits commonStageDerivedInternalHom (not a usable duplicate: no evaluation or Weil structure); the Q11 second reading was the author's own pass."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A8",
+  "result": "pass",
+  "landing": "20261021T100736-L-4128872",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
