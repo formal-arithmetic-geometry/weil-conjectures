@@ -19743,3 +19743,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:21 L: returned deliver/NI/prop-weil-pbc-direct-image-limits (reviewer RETURN: re-split (the human, 2026-10-21): the purpose is to spread the work over new nodes other workers can take at once; new n)
 - 03:21 L: merged deliver/NG/lem-weil-pbc-ringed-projection-mate-exact (reviewer PASS; after a return; new nodes: 2)
 - 03:21 L: merged deliver/Q36/det-sp-reduction-exceptional (reviewer FIX; after a return; new nodes: 5)
+- 03:21 L: returned deliver/Q23/lem-sfb-dc-lower-star-preserves (reviewer RETURN: I read all of the mathematics, and it is sound; the RETURN is only for granularity. Read: the rules A–G, the repair note)
