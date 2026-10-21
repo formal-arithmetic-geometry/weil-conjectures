@@ -6,7 +6,7 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFr
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 import WeilConjectures.AlgebraicGeometry.Modules.DeterminantWedgeMorphismLocalAt
 import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafPowerComparison
-import Sheaf.AlgebraicGeometry.Modules.DeterminantWedgeMorphismGlue
+import WeilConjectures.AlgebraicGeometry.Modules.DeterminantWedgeMorphismGlue
 
 @[expose] public section
 
@@ -66,6 +66,7 @@ theorem determinant_wedgeMorphism_local_data {X : Scheme.{v}} (S : ShortComplex 
   exact (congrArg ((exteriorSheafPowerIso S.X₂ r₂).inv.app U) (hφ a b c hc)).trans
     (exteriorSheafPowerIso_inv_wedge S.X₂ r₂ U _)
 
+set_option backward.isDefEq.respectTransparency false in
 /-- A compatible family of local wedge maps glues to a sheaf morphism.
 
 Source: blueprint, Riemann--Roch, proof of (*), determinant paragraph.
@@ -98,6 +99,36 @@ theorem determinant_wedgeMorphism_of_local_data {X : Scheme.{v}} (S : ShortCompl
           exteriorSheafSection S.X₂ r₂ U
             (fun i ↦ Fin.append (fun j ↦ S.f.val.app (op U) (a j)) c (Fin.cast hr i)) := by
   choose φU hφU using hlocal
-  exact determinant_wedgeMorphism_glue_family S hS r₁ r₂ r₃ hr φU hφU
+  let e := tensorIso (exteriorSheafPowerIso S.X₁ r₁)
+    (exteriorSheafPowerIso S.X₃ r₃)
+  let d := exteriorSheafPowerIso S.X₂ r₂
+  let ψU := fun U ↦ e.inv ≫ φU U ≫ d.hom
+  have hψU : ∀ (U : X.Opens)
+      (a : Fin r₁ → S.X₁.val.obj (op U))
+      (b : Fin r₃ → S.X₃.val.obj (op U)) (c : Fin r₃ → S.X₂.val.obj (op U)),
+      (∀ i, S.g.val.app (op U) (c i) = b i) →
+      (ψU U).val.app (op U)
+        (tmulSection (wedge (M := S.X₁) (r := r₁) (U := U) a)
+          (wedge (M := S.X₃) (r := r₃) (U := U) b)) =
+        wedge (M := S.X₂) (r := r₂) (U := U)
+          (fun i ↦ Fin.append (fun j ↦ S.f.val.app (op U) (a j)) c (Fin.cast hr i)) := by
+    intro U a b c hc
+    change d.hom.app U ((φU U).app U
+      (((exteriorSheafPowerIso S.X₁ r₁).inv ⊗ₘ
+        (exteriorSheafPowerIso S.X₃ r₃).inv).app U _)) = _
+    rw [tensorHom_app_tmulSection, exteriorSheafPowerIso_inv_wedge,
+      exteriorSheafPowerIso_inv_wedge]
+    exact (congrArg (d.hom.app U) (hφU U a b c hc)).trans
+      (exteriorSheafPowerIso_hom_wedge S.X₂ r₂ U _)
+  obtain ⟨ψ, hψ⟩ := determinant_wedgeMorphism_glue_family S hS r₁ r₂ r₃ hr ψU hψU
+  refine ⟨e.hom ≫ ψ ≫ d.inv, ?_⟩
+  intro U a b c hc
+  change d.inv.app U (ψ.app U
+    (((exteriorSheafPowerIso S.X₁ r₁).hom ⊗ₘ
+      (exteriorSheafPowerIso S.X₃ r₃).hom).app U _)) = _
+  rw [tensorHom_app_tmulSection, exteriorSheafPowerIso_hom_wedge,
+    exteriorSheafPowerIso_hom_wedge]
+  exact (congrArg (d.inv.app U) (hψ U a b c hc)).trans
+    (exteriorSheafPowerIso_inv_wedge S.X₂ r₂ U _)
 
 end AlgebraicGeometry.Scheme.Modules
