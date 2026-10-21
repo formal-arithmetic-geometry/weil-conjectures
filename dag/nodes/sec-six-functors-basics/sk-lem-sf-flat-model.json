@@ -441,7 +441,7 @@
   "by": "Q66",
   "date": "2026-10-16",
   "existing": false,
-  "note": "Import-only repair of the published prerequisite. Its module imported both upstream and Sheaf IsConstructibleEtaleModuleSheaf, which declare the same name with different definitions and fail together. Remove only the redundant upstream import; retain the recorded locally closed constructibility interface supplied through the Sheaf bounded-constructible dependency. Every declaration, signature, definition body and proof is unchanged; no other DAG statement is introduced."
+  "note": "Import-only repair of the published prerequisite. Its module imported both upstream and Sheaf IsConstructibleEtaleModuleSheaf, which declare the same name with different definitions and fail together. Remove only the redundant upstream import; retain the recorded locally closed constructibility interface supplied through the Sheaf bounded-constructible dependency. Every declaration, signature, definition body and proof is unchanged; no other DAG statement is introduced. B2 restoration repair 2026-10-21: restore the quarantined module, replace the retired LocallyClosedStratification type by Scheme.Stratification in both closure-generator definitions and the flat-stratification theorem, and use Stratification.trivial for the identity partition. Preserve every declaration, theorem conclusion and proof dependency. No new proof holes."
  },
  "lean_audit": {
   "master": {
@@ -532,13 +532,13 @@
   }
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "K7",
+  "reviewer": "C-c9b75",
+  "group": "B2",
   "result": "pass",
-  "landing": "20261019T192802-L-1867773",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261021T020054-L-2581227",
+  "kind": "proof",
+  "note": "independent cc review: delivered FlatModel.lean vs quarantine/Sheaf/SixFunctors/FlatModel.lean (diff: LocallyClosedStratification→Stratification, an abbrev per F9 record; identityStratification→Stratification.trivial; empty import dropped) and node vs live dag node (note only)"
  }
 }
