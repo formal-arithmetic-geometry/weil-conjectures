@@ -1,0 +1,92 @@
+{
+ "id": "lem-pur-quotient-expression-kflat-normalization",
+ "kind": "statement",
+ "title": "Simultaneous K-flat normalization of strict quotient expressions",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ with uniformizer $\\varpi$, and composable scheme morphisms $Z\\xrightarrow hX\\xrightarrow fY$ on which $\\ell$ is invertible [def-weil-l-adic-coefficient-extension, def-weil-scheme-morphism-properties]. For $W=Z,X,Y$ set $B_{W,n}=(\\mathcal O_E/\\varpi^n)_W$ on the small pro-etale site, $R_W=\\varprojlim_nB_{W,n}$, and write $q^W_{m,n}:B_{W,m}\\to B_{W,n}$ for the quotient maps, for $m\\geq n\\geq1$ [def-weil-completed-integral-coefficients]. Let $P_1,\\ldots,P_r$ be any finite list, possibly empty, of integer-indexed K-flat complexes of $R_Y$-module sheaves with flat terms [def-pc-kflat-complex, def-pc-flat-sheaf-modules].\n\nA finite expression here starts with the complexes $P_{i,n}=P_i\\otimes_{R_Y}B_{Y,n}$ at $Y$ and the units $B_{W,n}[0]$ at each $W$, and applies finitely many direct-sum total tensors of two expressions on the same scheme [def-pc-tensor-complex-sheaves] and termwise module pullbacks along $f,h,f\\circ h$ [def-weil-proetale-inverse-image]. Denote its resulting complex at $W$ by $K_n$. Give the generators their actual quotient transitions, and give tensor and pullback expressions the induced semilinear transitions $t^K_{m,n}:K_m\\to\\operatorname{Res}_{m,n}K_n$; scalar restriction is along $q^W_{m,n}$ [def-pc-sheaf-restrict-scalars].\n\nEvery such $K_n$ is K-flat with flat terms over $B_{W,n}$. Its localization computes the same expression with derived tensor and derived pullback [lem-pur-derived-change-of-rings, lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. The $t^K_{m,n}$ obey the identity and quotient cocycle strictly, so after restriction to $R_W$ they define a complex of strict towers. Their derived transition-adjoints\n$$\\alpha^K_{m,n}:K_m\\otimes^L_{B_{W,m}}B_{W,n}\\longrightarrow K_n$$\nare represented on these very complexes by the ordinary tensor-adjoints of $t^K_{m,n}$ and are isomorphisms. For a generator $P_i$ this representative is\n$$(P_i\\otimes_{R_Y}B_{Y,m})\\otimes_{B_{Y,m}}B_{Y,n}\\longrightarrow P_i\\otimes_{R_Y}B_{Y,n},\\qquad (x\\otimes b)\\otimes a\\longmapsto x\\otimes q^Y_{m,n}(b)a,$$\nwith inverse $x\\otimes a\\mapsto(x\\otimes1)\\otimes a$; the unit case is the same multiplication formula. For a tensor expression its adjoint is the strong monoidal scalar-extension comparison followed by $\\alpha^U_{m,n}\\otimes^L\\alpha^V_{m,n}$. For a pullback expression along $g:W'\\to W$, its adjoint is $g^{-1}\\alpha^U_{m,n}$ under the canonical scalar-change comparison and $g^{-1}B_{W,j}\\cong B_{W',j}$ for $j=m,n$. Thus these particular strict expression towers are normalized coherent systems [def-coef-normalized-dvr-tower], with the adjoints of their actual transitions. No boundedness, constructibility or flatness of $q^W_{m,n}$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0G7E (label lemma-pullback-K-flat) and 07A2 (label lemma-tensor-product-K-flat); agent-formulated simultaneous strict quotient-expression refinement of lem-pur-integral-coherence-tower, former proof step 1."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-completed-integral-coefficients",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-proetale-inverse-image",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-coef-normalized-dvr-tower"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "quotient.*tower|tower.*quotient|normalized.*tower|KFlat",
+   "results": "No hits.",
+   "date": "2026-10-21",
+   "verdict": "no match: hits do not state simultaneous strict quotient-expression models and their actual derived transition-adjoints"
+  },
+  {
+   "tool": "leansearch",
+   "query": "K-flat quotient complexes over ring sheaves with derived scalar extension and normalized transition adjoints",
+   "results": "Algebra.FormallyUnramified.flat_of_restrictScalars, RingHom.Flat.isStableUnderBaseChange, ModuleCat.preservesFiniteLimits_extendScalars_of_flat, RingHom.Flat, DerivedCategory.quotientCompQhIso, HomologicalComplexUpToQuasiIso.quotientCompQhIso, AlgebraicGeometry.Flat.isStableUnderBaseChange, Algebra.Extension.cotangentComplexBaseChange_eq_lTensor_cotangentComplex",
+   "date": "2026-10-21",
+   "verdict": "no match: hits do not state simultaneous strict quotient-expression models and their actual derived transition-adjoints"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KFlat\"",
+   "results": "Lean.mkFlatCtorOfStructCtorName",
+   "date": "2026-10-21",
+   "verdict": "no match: hits do not state simultaneous strict quotient-expression models and their actual derived transition-adjoints"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat term K-flat complexes reduced modulo powers of a uniformizer form normalized quotient towers whose finite total tensor and inverse image expressions compute derived operations with actual transition adjoints",
+   "results": "AdicCompletion.flat_of_isNoetherian, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.tensor_map_id_left_eq_map, Algebra.Extension.tensorH1Cotangent, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, Algebra.FormallyUnramified.flat_of_restrictScalars, AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of",
+   "date": "2026-10-21",
+   "verdict": "no match: hits do not state simultaneous strict quotient-expression models and their actual derived transition-adjoints"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simultaneous K-flat models for finite tensor and pullback expressions of quotient complexes preserve the actual coefficient transition maps",
+   "results": "Algebra.Presentation.tensorModelOfHasCoeffsInv, Module.Flat.tfae_equational_criterion, Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.rTensor_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, AdicCompletion.tensor_map_id_left_eq_map, Module.Flat.iff_lTensor_exact'",
+   "date": "2026-10-21",
+   "verdict": "no match: hits do not state simultaneous strict quotient-expression models and their actual derived transition-adjoints"
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|K.flat|flat.*complex|tensor.*pullback",
+   "results": "Mathlib/CategoryTheory/LocallyCartesianClosed/Over.lean, Mathlib/CategoryTheory/Dialectica/Monoidal.lean, Mathlib/CategoryTheory/Monoidal/Cartesian/Over.lean, Mathlib/CategoryTheory/Monoidal/Cartesian/Over.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: hits do not state simultaneous strict quotient-expression models and their actual derived transition-adjoints"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-integral-coherence-tower",
+  "date": "2026-10-21",
+  "group": "Q04"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "blueprint": {
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "Former coefficient-twists proof step 5, as extracted in lem-pur-derived-pullback-tensor-iso: constructing the quotient tensor/pullback towers before their coherence equations; lem-pur-integral-coherence-tower former step 1, from actual quotient transitions through K-flat models and normalized transition-adjoints.",
+   "via": [
+    "lem-pur-integral-coherence-tower",
+    "lem-pur-derived-pullback-tensor-iso"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

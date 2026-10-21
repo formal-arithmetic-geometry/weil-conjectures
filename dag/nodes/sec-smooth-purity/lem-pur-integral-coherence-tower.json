@@ -2,67 +2,40 @@
  "kind": "statement",
  "proof": [
   {
-   "text": "For each m≥n, the quotient maps B_{Y,m}→B_{Y,n} and their pullbacks to X and Z give the actual transitions of P_m,Q_m,H_m and of the unit systems. Since P,Q,H are K-flat with flat terms over R_Y, termwise change of rings along R_Y→B_{Y,m} gives K-flat complexes P_m,Q_m,H_m of B_{Y,m}-modules with flat terms [lem-pur-kflat-change-of-rings]; the unit complexes B_{W,m}[0] are of this form with P=R_W. Hence derived change of rings along B_{Y,m}→B_{Y,n} is computed termwise on them [lem-pur-derived-change-of-rings], and the transition-adjoint α_{m,n} is the canonical associativity isomorphism (P⊗_{R_Y}B_{Y,m})⊗_{B_{Y,m}}B_{Y,n}≅P⊗_{R_Y}B_{Y,n}, and similarly for Q,H and the units. Associativity of tensor and q_{r,n}=q_{m,n}q_{r,m} give τ_{n,n}=1 and the cocycle identity, so these strict quotient towers, viewed in Tow_{R_Y} through Res_n, are normalized DVR towers. By the K-flat total tensor model [lem-pur-kflat-total-tensor-model], Tot(P_n⊗_{B_{Y,n}}Q_n) (and the triple tensors) are K-flat with flat terms and represent the derived tensor of the levels; by exactness of the pro-etale module inverse image along the constant-ring identification f^{-1}B_{Y,n}≅B_{X,n} [prop-weil-pbc-proetale-constant-exact], the termwise f_n^*P_n and h_n^*f_n^*P_n represent the derived pullbacks, and they are again K-flat with flat terms [lem-weil-pbc-ringed-topos-kflat-pullback], so the total tensors of pulled-back complexes also represent derived tensors [lem-pur-kflat-total-tensor-model]. So the strict towers in the statement are models of the fiberwise derived tensor and system inverse image, and the normalized tensor/pullback closure lemma applies: it identifies the transition-adjoint of a tensor with the tensor of the transition-adjoints after the strong monoidal scalar-extension comparison, and the transition-adjoint after pullback with the pulled-back transition-adjoint. Both are therefore invertible, and the total tensors and termwise pullbacks in the statement are normalized coherent systems.",
+   "text": "Apply the quotient-expression normalization lemma to the list P,Q,H and the given f,h. Its actual quotient transitions and their derived adjoints give normalized strict towers for every tensor/pullback expression used here, including all units and both triple parenthesizations. Its K-flat, flat-term models compute the derived operations, so subsequent chain-map equations concern these same normalized systems.",
    "uses": [
-    "def-weil-completed-integral-coefficients",
-    "def-pc-kflat-complex",
-    "def-pc-flat-sheaf-modules",
-    "def-pc-tensor-complex-sheaves",
-    "def-weil-proetale-inverse-image",
-    "def-coef-normalized-dvr-tower",
-    "lem-pur-kflat-change-of-rings",
-    "lem-pur-derived-change-of-rings",
-    "lem-pur-kflat-total-tensor-model",
-    "prop-weil-pbc-proetale-constant-exact",
-    "lem-weil-pbc-ringed-topos-kflat-pullback",
-    "lem-pur-system-normalized-tensor-closure"
+    "lem-pur-quotient-expression-kflat-normalization"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A4, label lemma-pullback-tensor-product, total-complex construction; quotient associativity is written out here"
+    "place": "Tags 0G7E and 07A2; the simultaneous strict-model construction is isolated in lem-pur-quotient-expression-kflat-normalization"
    }
   },
   {
-   "text": "Fix n and apply the cochain comparison lemma to the morphism of ringed topoi induced by f_n. Its map is the chain isomorphism c_{f_n;P_n,Q_n} with the stated pure-tensor formula and inverse. Apply its naturality and its compatibility with the usual reassociation to the two parenthesizations of P_n⊗Q_n⊗H_n. The two composites from f_n^*Tot((P_n⊗Q_n)⊗H_n) to Tot(f_n^*P_n⊗(f_n^*Q_n⊗f_n^*H_n)) therefore agree as chain maps. The direct-sum total differential is the one in the tensor-complex definition, so this is an equality before passing to any derived category or limit.",
+   "text": "At each n, apply the cochain comparison to f_n and h_n. Its map and inverse have the stated insertion/multiplication formulas. Naturality and reassociation give the two equal routes on the triple tensor. Its symmetry equation is exactly the displayed equation with sign (-1)^{pq}; its two unit clauses use the action maps and f_n^*B_{Y,n}[0]≅B_{X,n}[0]. Its composition clause uses the canonical adjunction-normalized a_K and gives exactly the displayed composition equation. These are equalities of chain maps with the direct-sum total differential.",
    "uses": [
-    "def-weil-proetale-inverse-image",
-    "def-pc-tensor-complex-sheaves",
     "lem-pur-cochain-pullback-tensor-coherence"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A4, label lemma-pullback-tensor-product, displayed total-complex comparison and its reassociation compatibility"
+    "place": "Tag 07A4, label lemma-pullback-tensor-product, explicit cochain and scalar-change refinement"
    }
   },
   {
-   "text": "At the same level, the signed-symmetry clause of the cochain lemma gives τ_{f_n^*P_n,f_n^*Q_n}c_{f_n;P_n,Q_n}=c_{f_n;Q_n,P_n}f_n^*(τ_{P_n,Q_n}); on a homogeneous tensor it is exactly the sign (-1)^{pq}. Its two unitor clauses give the two unit equations, because the coefficient pullback identifies f_n^*B_{Y,n}[0] with B_{X,n}[0] and the unit maps are the action maps. For composable f_n and h_n, the composition clause of the same lemma, with the canonical adjunction-normalized comparison a_K, is precisely the displayed equation involving c_{(f∘h)_n}, c_{f_n}, and c_{h_n}. Thus all four finite-level coherence equations hold as chain-map equalities.",
+   "text": "The coefficient-change equations of the cochain lemma make c_{f_n} commute with every quotient transition, hence also its inverse. For the other arrows, reassociation sends (x⊗y)⊗z to x⊗(y⊗z), symmetry sends x⊗y to (-1)^{pq}y⊗x, and action multiplies coefficients. Applying a quotient before or after these formulas agrees since q preserves multiplication and (-1)^{pq}. The composition comparison is inverse-image composition followed by scalar association, so the same equality q(st)=q(s)q(t) checks its transition square. Thus all arrows are strict tower maps, and Step 2 gives equalities of whole tower maps before localization.",
    "uses": [
-    "def-weil-proetale-inverse-image",
-    "def-weil-completed-integral-coefficients",
     "lem-pur-cochain-pullback-tensor-coherence"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A4, label lemma-pullback-tensor-product, signed symmetry, action unitors, and composition comparison"
+    "place": "Tag 07A4, label lemma-pullback-tensor-product, explicit cochain and scalar-change refinement"
    }
   },
   {
-   "text": "The final clause of the cochain comparison lemma says that these same formulas on strict quotient towers commute with every transition. Applying it to the towers constructed in Step 1 shows that c_{f_n} and its inverse, all reassociators, action unitors, signed symmetries, and the pullback-composition maps are strict maps of towers. Consequently each finite-level equality from Steps 2 and 3 is one equality in the strict normalized tower category, simultaneously for all n and compatible with every B_{W,m}→B_{W,n}.",
-   "uses": [
-    "def-coef-normalized-dvr-tower",
-    "lem-pur-cochain-pullback-tensor-coherence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A4, label lemma-pullback-tensor-product, final sentence on strict quotient towers and transitions"
-   }
-  },
-  {
-   "text": "The derived inverse-limit construction is a functor on strict tower maps by the strict-tower homotopy-limit lemma. Applying it to the equal tower maps of Step 4 preserves equality, and applying it to c_{f_n} and its strict inverse produces mutually inverse maps after Rlim. The coherent substitution lemma identifies the limits of the tensor, pullback, unit and composition expressions with the corresponding completed integral operations; it also identifies the limits of the canonical reassociators, unitors, signed symmetries and composition comparisons with the completed structural maps. Therefore the tower equalities give the asserted integral associativity, symmetry, unit and composition equations.",
+   "text": "Apply the strict-tower derived-limit functor to Step 3. A functor preserves equality and mutually inverse pairs, so the limit of c and the limit of its inverse are inverse. The substitution lemma identifies the limits of every tensor/pullback/unit expression and of its reassociator, action unitors, signed symmetry and composition comparison with the completed expression and its structural arrows. Conjugating the equalities by these identifications gives the integral associativity, symmetry, unit and composition equations.",
    "uses": [
     "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
     "lem-pur-completed-operation-tower-substitution"
@@ -70,11 +43,11 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941, label lemma-derived-limit-is-ok, functorial derived limit for strict systems; completed-operation substitution is the stated tower-to-limit identification"
+    "place": "Tag 0941, label lemma-derived-limit-is-ok; coherent substitution and effectivity as cited"
    }
   },
   {
-   "text": "Finally use the coherent counit/effectivity comparison for every normalized tower: if M=Rlim_m Res_m M_m, then M⊗^L_R A_n≅M_n for every n. Applying this to each expression in Step 5 and using naturality of the counits identifies the reduction of every integral equation with its finite equation, including the quotient-transition maps. The substitution identifications carry these counits to the completed-operation expressions, so the finite equations obtained in Steps 2–4 are exactly the coherent reductions claimed in the statement.",
+   "text": "For each normalized expression K of Step 1, effectivity gives the coherent counit (Rlim Res K_m)⊗^L_R B_n≅K_n. Naturality conjugates the reduction of each limit arrow to its original finite arrow. The substitution identifications carry these counits to the completed-operation expressions. Consequently reduction of every integral equation is exactly its finite equation from Steps 2–3, as an equality of systems including all quotient-transition maps.",
    "uses": [
     "lem-coef-normalized-dvr-effectivity",
     "lem-pur-completed-operation-tower-substitution"
@@ -82,27 +55,16 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941, label lemma-derived-limit-is-ok, together with the coherent effectivity and substitution statements"
+    "place": "Tag 0941, label lemma-derived-limit-is-ok; coherent substitution and effectivity as cited"
    }
   }
  ],
  "proof_deps": [
-  "def-coef-normalized-dvr-tower",
-  "def-pc-flat-sheaf-modules",
-  "def-pc-kflat-complex",
-  "def-pc-tensor-complex-sheaves",
-  "def-weil-completed-integral-coefficients",
-  "def-weil-proetale-inverse-image",
   "lem-coef-normalized-dvr-effectivity",
   "lem-pur-cochain-pullback-tensor-coherence",
   "lem-pur-completed-operation-tower-substitution",
-  "lem-pur-derived-change-of-rings",
-  "lem-pur-kflat-change-of-rings",
-  "lem-pur-kflat-total-tensor-model",
-  "lem-pur-system-normalized-tensor-closure",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "lem-weil-pbc-ringed-topos-kflat-pullback",
-  "prop-weil-pbc-proetale-constant-exact"
+  "lem-pur-quotient-expression-kflat-normalization",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
  ],
  "proof_origin": {
   "by": "agent",
@@ -217,16 +179,12 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "item": "lem-pur-integral-coherence-tower",
   "worker": "stage1",
-  "summary": "Filled the previously empty proof with six steps. The proof constructs the actual quotient towers and verifies normalizedness using the existing normalized tensor/pullback closure tool, proves the finite associativity, symmetry, unit and composition identities from the cochain comparison, uses its strict-transition clause to obtain tower maps, then transports the equalities through functorial derived inverse limit and coherent operation substitution, finally checking every finite reduction by normalized-tower effectivity. No new node was needed. Maintainer reader (2026-10-17): step 1 now cites the K-flat change-of-rings, derived change-of-rings, K-flat total tensor model, ringed-topos K-flat pullback and pro-etale constant-coefficient exactness nodes for the facts it used implicitly; the off-route tools of steps 1, 5 and 6 are declared.",
-  "blueprint": "Realizes the former proof step 5 of def-weil-frobenius-coefficient-twists: finite chain-level associativity/signed symmetry/unit/composition, strict compatibility with quotient transitions, derived inverse-limit transport, and coherent finite reduction.",
+  "summary": "Human-directed re-split: extracted the simultaneous actual-quotient K-flat model and transition-adjoint construction into the new statement-only lemma lem-pur-quotient-expression-kflat-normalization. Preserved all finite chain-map identities, strict coefficient-transition compatibility, limit transport and coherent reductions in five assembly steps. The item statement, Lean record and route are unchanged. The report reproduces the full extracted argument for the next worker.",
+  "blueprint": "Former coefficient-twists proof step 5 via lem-pur-derived-pullback-tensor-iso: the new node carries the quotient-model construction; assembly steps 2–3 carry all four finite coherence laws and strict transition compatibility, steps 4–5 the integral laws and their coherent finite reductions.",
   "tool_uses": [
-   {
-    "node": "lem-pur-system-normalized-tensor-closure",
-    "why": "Its generic transition-adjoint formulas establish normalizedness of the quotient tensor and pullback systems; this conventions item has no separate normalized-closure construction."
-   },
    {
     "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
     "why": "Step 5 takes only the exact functor Rlim on the derived strict-tower category (a generic ringed-site fact, also a statement dependency of the item); no node of sk-def-purity-conv or sk-def-sf-operations states it."
@@ -234,14 +192,6 @@
    {
     "node": "lem-coef-normalized-dvr-effectivity",
     "why": "Step 6 takes only the coherent counit isomorphisms M⊗^L_R A_n≅M_n for a normalized DVR tower, a statement dependency of the item; no node of this unit's route states it."
-   },
-   {
-    "node": "prop-weil-pbc-proetale-constant-exact",
-    "why": "Step 1 takes only exactness of the module inverse image for constant finite coefficients on pro-etale sites, so the termwise pullback models derived pullback; the same node is used for this in def-pur-integral-derived-operations."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topos-kflat-pullback",
-    "why": "Step 1 takes only that termwise ringed-topos pullback preserves flat-term K-flat complexes (the fact behind Stacks 07A4's proof), so total tensors of pullbacks are derived-tensor models; no node of this unit's route states it."
    }
   ]
  },
@@ -253,12 +203,12 @@
   "lem-weil-pbc-ringed-topos-kflat-pullback"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-Q117-4b5c235a8",
-  "group": "Q117",
+  "reviewer": "NT-cc-Q04-c3eee0784",
+  "group": "Q04",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q117-4b5c235a8 (reviewer sub-agent of L); spot-checked: Read the item in full. Its statement is unchanged from the live side DAG; the delivery fills an empty proof with six steps and adds no new nodes. I read every cited statement and the sources: Stacks 07A4 (sites-cohomology.tex l.3684), which works with flat-term K-flat models and Tot, and Stacks 0941 (l.5067), the derived limit on strict towers. The coefficient category and pullback agree with def-pur-integral-derived-operations: R_W=lim(A_{E,n})_W, P_n=P⊗B_{Y,n}, termwise f_n^*. Steps 2–4 are instances of lem-pur-cochain-pullback-tensor-coherence. I type-checked the composition equation, which matches the lemma's a_P orientation and uses (fh)_n=f_n h_n. I checked the Koszul sign on pure tensors and the edge cases p=q=0 and f or h = id. Steps 5–6 follow from the functorial Rlim, the substitution lemma and the effectivity counits. No SGA is cited and the graph has no cycle. Two repairable faults are fixed in fixes/dag/nodes/sec-smooth-purity/lem-pur-integral-coherence-tower.json, which changes only proof, proof_deps and split_report. (1) C1/E5: step 1 took the underived associativity maps as the derived transition-adjoints that def-coef-normalized-dvr-tower requires, and treated the strict Tot/pullback towers as derived models, without citing the K-flatness facts this needs. It now writes these out and cites lem-pur-kflat-change-of-rings, lem-pur-derived-change-of-rings, lem-pur-kflat-total-tensor-model, prop-weil-pbc-proetale-constant-exact and lem-weil-pbc-ringed-topos-kflat-pullback. (2) The off-route tools lem-weil-pbc-ringed-strict-tower-homotopy-limit and lem-coef-normalized-dvr-effectivity were not declared. They are now in split_report.tool_uses together with the two new step-1 tools. I accept all five tool_uses, including the worker's lem-pur-system-normalized-tensor-closure. Details are in review.md.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q04-c3eee0784 (reviewer sub-agent of L); spot-checked: Re-split of the human's 2026-10-21 note: item statement and stmt_deps unchanged; the proof is now a 2573-char assembly. Compared with the side-live base step by step. Old step 1 (2009 chars, the only substantive argument: quotient transitions, K-flat change of rings, total tensor model, exact constant pullback, K-flat pullback, normalized closure) is now entirely the new statement-only node lem-pur-quotient-expression-kflat-normalization. Old steps 2-6 were already applications of existing nodes and keep every clause: the cochain lemma's naturality, reassociation, (-1)^{pq} symmetry, unitors and a_K composition; strict-tower Rlim and substitution; effectivity counits. Old step 4 wrongly claimed the cochain lemma's final clause made every structural arrow strict; new step 3 uses that clause only for c and checks the reassociator, symmetry, unitors and compositor directly via q(st)=q(s)q(t). New node is true: K-flat with flat terms via lem-pur-kflat-change-of-rings, lem-pur-kflat-total-tensor-model (Stacks 07A2, l.3060) and lem-weil-pbc-ringed-topos-kflat-pullback (Stacks 0G7E, l.3508, using f^{-1}B_{Y,n}≅B_{X,n}); strict cocycle; adjoints are invertible association maps whose tensor and pullback formulas agree with lem-pur-system-normalized-tensor-closure. Cases checked: Z/ℓ^2→Z/ℓ (q not flat but K-flat model), r=0, m=n, signs, empty Z, unbounded inputs. Not circular (item not in the new node's closure). Not a duplicate of the closure, kflat-reduction-model, successive-quotient, ambient-operation-models or single-operation K-flat nodes. It does not restate the item: no c, coherence equations or completed operations. Not dropped, no SGA, unit and chapter unchanged, four Mathlib searches. split_report.tool_uses accepted (generic Rlim and effectivity, both stmt_deps). Advisory: tool_uses 'why' texts still say Step 5/6 (now steps 4/5)."
  },
  "lean": {
   "module": "Sheaf.Paper.IntegralCoherenceTower",

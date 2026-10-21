@@ -20454,3 +20454,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:36 L: merged deliver/Q41/lem-amb-finite-tate-site-descent (reviewer FIX; after a return; new nodes: 2)
 - 06:36 L: merged deliver/Q16/prop-wf-weil-sheaf-representation-equivalence (reviewer FIX; first push; new nodes: 0)
 - 06:36 L: merged deliver/Q43/lem-sfb-square-zero-periodic-tensor (reviewer PASS; after a return; new nodes: 3)
+- 06:36 L: merged deliver/Q04/lem-pur-integral-coherence-tower (reviewer PASS; after a return; new nodes: 1)
