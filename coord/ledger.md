@@ -20915,3 +20915,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:08 L: merged deliver/Q01/thm-zl-relative-line-stratification (reviewer FIX; first push; new nodes: 1); claim not held by Q01: not your claim
 - 08:08 L: merged deliver/NQ/lem-pur-quotient-expression-kflat-normalization (reviewer PASS; first push; new nodes: 0)
 - 08:08 L: merged deliver/NO/lem-pur-ringed-derived-composition-cocycle (reviewer PASS; after a return; new nodes: 1)
+- 08:08 L: merged deliver/Q18/lem-weil-integral-ctf-triangulated (reviewer FIX; after a return; new nodes: 2)
