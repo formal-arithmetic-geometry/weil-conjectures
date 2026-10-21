@@ -123,6 +123,191 @@ def ringedHomRepresentativeMap
         (ringedHomAugmentation.{c, v, u} J R F)) ≫
     (coefficientHomResolutionIso.{u, c, v, w} J R E F).inv
 
+private lemma closed_uncurry_composition
+    {A : Type*} [Category A] {H : Aᵒᵖ × A ⥤ A}
+    (S : CoefficientClosedStructure H) (K L M : A) :
+    (S.transpose _ K M).symm (S.composition K L M) =
+      (S.monoidal.associator (H.obj (op L, M)) (H.obj (op K, L)) K).hom ≫
+        S.tensor.map
+          (X := (H.obj (op L, M), S.tensor.obj (H.obj (op K, L), K)))
+          (Y := (H.obj (op L, M), L)) (𝟙 _, S.evaluation K L) ≫ S.evaluation L M := by
+  exact (S.transpose _ K M).symm_apply_apply _
+
+private lemma closed_uncurry
+    {A : Type*} [Category A] {H : Aᵒᵖ × A ⥤ A}
+    (S : CoefficientClosedStructure H) (X K M : A) (f : X ⟶ H.obj (op K, M)) :
+    (S.transpose X K M).symm f = S.tensor.map (f, 𝟙 K) ≫ S.evaluation K M := by
+  let := S.monoidal
+  change ((S.adjunction K).homEquiv X M).symm f = _
+  erw [Adjunction.homEquiv_symm_apply]
+  simp only [CoefficientClosedStructure.tensor, CoefficientClosedStructure.evaluation,
+    MonoidalCategory.tensor_map, MonoidalCategory.tensorHom_id]
+  rfl
+
+private lemma closed_eval_source
+    {A : Type*} [Category A] {H : Aᵒᵖ × A ⥤ A}
+    (S : CoefficientClosedStructure H) (K K' M : A) (a : K' ⟶ K) :
+    S.tensor.map (X := (H.obj (op K, M), K'))
+        (Y := (H.obj (op K', M), K')) (H.map (a.op, 𝟙 M), 𝟙 K') ≫
+        S.evaluation K' M =
+      S.tensor.map (X := (H.obj (op K, M), K'))
+        (Y := (H.obj (op K, M), K)) (𝟙 (H.obj (op K, M)), a) ≫ S.evaluation K M := by
+  let := S.monoidal
+  simpa only [CoefficientClosedStructure.tensor, CoefficientClosedStructure.evaluation,
+    MonoidalCategory.tensor_map, MonoidalCategory.tensorRight, MonoidalCategory.tensorLeft,
+    Functor.flip, MonoidalCategory.curriedTensor, MonoidalCategory.tensorHom_id,
+    MonoidalCategory.id_tensorHom] using S.evaluation_naturality K K' M a
+
+private lemma closed_uncurry_source
+    {A : Type*} [Category A] {H : Aᵒᵖ × A ⥤ A}
+    (S : CoefficientClosedStructure H) (X K K' M : A) (a : K' ⟶ K)
+    (f : X ⟶ H.obj (op K, M)) :
+    (S.transpose X K' M).symm (f ≫ H.map (a.op, 𝟙 M)) =
+      S.tensor.map (𝟙 X, a) ≫ (S.transpose X K M).symm f := by
+  rw [closed_uncurry, closed_uncurry]
+  have h := congrArg (fun k : S.tensor.obj (H.obj (op K, M), K') ⟶ M ↦
+    S.tensor.map (X := (X, K')) (Y := (H.obj (op K, M), K')) (f, 𝟙 K') ≫ k)
+    (closed_eval_source S K K' M a)
+  simpa only [← Category.assoc, ← S.tensor.map_comp, prod_comp,
+    Category.id_comp, Category.comp_id] using h
+
+private lemma closed_uncurry_precomp
+    {A : Type*} [Category A] {H : Aᵒᵖ × A ⥤ A}
+    (S : CoefficientClosedStructure H) (X X' K M : A) (a : X' ⟶ X)
+    (f : X ⟶ H.obj (op K, M)) :
+    (S.transpose X' K M).symm (a ≫ f) =
+      S.tensor.map (a, 𝟙 K) ≫ (S.transpose X K M).symm f := by
+  rw [closed_uncurry, closed_uncurry]
+  simp only [← Category.assoc, ← S.tensor.map_comp, prod_comp,
+    Category.id_comp]
+
+private lemma closed_uncurry_postcomp
+    {A : Type*} [Category A] {H : Aᵒᵖ × A ⥤ A}
+    (S : CoefficientClosedStructure H) (X K M M' : A) (b : M ⟶ M')
+    (f : X ⟶ H.obj (op K, M)) :
+    (S.transpose X K M').symm (f ≫ H.map (𝟙 (op K), b)) =
+      (S.transpose X K M).symm f ≫ b := by
+  change ((S.adjunction K).homEquiv X M').symm
+    (f ≫ (Prod.sectR (op K) A ⋙ H).map b) =
+      ((S.adjunction K).homEquiv X M).symm f ≫ b
+  exact (S.adjunction K).homEquiv_naturality_right_symm f b
+
+private lemma closed_eval_target
+    {A : Type*} [Category A] {H : Aᵒᵖ × A ⥤ A}
+    (S : CoefficientClosedStructure H) (K M M' : A) (b : M ⟶ M') :
+    S.tensor.map (H.map (𝟙 (op K), b), 𝟙 K) ≫ S.evaluation K M' =
+      S.evaluation K M ≫ b := by
+  let := S.monoidal
+  simpa only [CoefficientClosedStructure.tensor, CoefficientClosedStructure.evaluation,
+    MonoidalCategory.tensor_map, MonoidalCategory.tensorRight,
+    Functor.flip, MonoidalCategory.curriedTensor, MonoidalCategory.tensorHom_id,
+    Functor.comp_map, Prod.sectR, Functor.id_map] using
+      (S.adjunction K).counit.naturality b
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
+open MonoidalCategory in
+private lemma closed_naturality
+    {A : Type*} [Category A] {H : Aᵒᵖ × A ⥤ A}
+    (S : CoefficientClosedStructure H) :
+    (∀ (K K' L M : A) (a : K' ⟶ K),
+      S.composition K L M ≫
+          H.map (a.op, 𝟙 M) =
+        S.tensor.map
+          (𝟙 (H.obj (op L, M)),
+            H.map (a.op, 𝟙 L)) ≫
+          S.composition K' L M) ∧
+    (∀ (K L M M' : A) (b : M ⟶ M'),
+      S.composition K L M ≫
+          H.map (𝟙 (op K), b) =
+        S.tensor.map
+          (H.map (𝟙 (op L), b),
+            𝟙 (H.obj (op K, L))) ≫
+          S.composition K L M') ∧
+    (∀ (K L L' M : A) (f : L ⟶ L'),
+      S.tensor.map
+          (𝟙 (H.obj (op L', M)),
+            H.map (𝟙 (op K), f)) ≫
+          S.composition K L' M =
+        S.tensor.map
+          (X := (H.obj (op L', M),
+            H.obj (op K, L)))
+          (Y := (H.obj (op L, M),
+            H.obj (op K, L)))
+          (H.map (f.op, 𝟙 M),
+            𝟙 (H.obj (op K, L))) ≫
+          S.composition K L M) := by
+  let := S.monoidal
+  let ev (K M : A) : H.obj (op K, M) ⊗ K ⟶ M := S.evaluation K M
+  refine ⟨?_, ?_, ?_⟩
+  · intro K K' L M a
+    apply (S.transpose _ K' M).symm.injective
+    rw [closed_uncurry_source, closed_uncurry_precomp]
+    rw [closed_uncurry_composition, closed_uncurry_composition]
+    simp only [CoefficientClosedStructure.tensor, tensor_obj, MonoidalCategory.tensor_map]
+    change (𝟙 (H.obj (op L, M) ⊗ H.obj (op K, L)) ⊗ₘ a) ≫
+      (α_ (H.obj (op L, M)) (H.obj (op K, L)) K).hom ≫
+        (𝟙 _ ⊗ₘ ev K L) ≫ ev L M =
+      ((𝟙 (H.obj (op L, M)) ⊗ₘ H.map (a.op, 𝟙 L)) ⊗ₘ 𝟙 K') ≫
+        (α_ (H.obj (op L, M)) (H.obj (op K', L)) K').hom ≫
+          (𝟙 _ ⊗ₘ ev K' L) ≫ ev L M
+    have ha := associator_naturality (𝟙 (H.obj (op L, M)))
+      (𝟙 (H.obj (op K, L))) a
+    simp only [id_tensorHom_id] at ha
+    have he : (H.map (a.op, 𝟙 L) ⊗ₘ 𝟙 K') ≫ ev K' L =
+        (𝟙 (H.obj (op K, L)) ⊗ₘ a) ≫ ev K L := by
+      simpa only [CoefficientClosedStructure.tensor, tensor_map] using
+        closed_eval_source S K K' L a
+    rw [reassoc_of% ha, associator_naturality_assoc]
+    simp only [tensorHom_comp_tensorHom_assoc, Category.id_comp, he]
+  · intro K L M M' b
+    apply (S.transpose _ K M').symm.injective
+    rw [closed_uncurry_postcomp, closed_uncurry_precomp]
+    rw [closed_uncurry_composition, closed_uncurry_composition]
+    simp only [CoefficientClosedStructure.tensor, tensor_obj, MonoidalCategory.tensor_map]
+    change ((α_ (H.obj (op L, M)) (H.obj (op K, L)) K).hom ≫
+      (𝟙 _ ⊗ₘ ev K L) ≫ ev L M) ≫ b =
+      ((H.map (𝟙 (op L), b) ⊗ₘ 𝟙 (H.obj (op K, L))) ⊗ₘ 𝟙 K) ≫
+        (α_ (H.obj (op L, M')) (H.obj (op K, L)) K).hom ≫
+          (𝟙 _ ⊗ₘ ev K L) ≫ ev L M'
+    have he : (H.map (𝟙 (op L), b) ⊗ₘ 𝟙 L) ≫ ev L M' =
+        ev L M ≫ b := by
+      simpa only [CoefficientClosedStructure.tensor, tensor_map] using
+        closed_eval_target S L M M' b
+    rw [associator_naturality_assoc]
+    simp only [Category.assoc, id_tensorHom_id]
+    rw [← he]
+    simp only [tensorHom_comp_tensorHom_assoc, Category.id_comp, Category.comp_id]
+  · intro K L L' M f
+    apply (S.transpose _ K M).symm.injective
+    rw [closed_uncurry_precomp, closed_uncurry_precomp]
+    rw [closed_uncurry_composition, closed_uncurry_composition]
+    simp only [CoefficientClosedStructure.tensor, tensor_obj, MonoidalCategory.tensor_map]
+    change ((𝟙 (H.obj (op L', M)) ⊗ₘ H.map (𝟙 (op K), f)) ⊗ₘ 𝟙 K) ≫
+      (α_ (H.obj (op L', M)) (H.obj (op K, L')) K).hom ≫
+        (𝟙 _ ⊗ₘ ev K L') ≫ ev L' M =
+      ((H.map (f.op, 𝟙 M) ⊗ₘ 𝟙 (H.obj (op K, L))) ⊗ₘ 𝟙 K) ≫
+        (α_ (H.obj (op L, M)) (H.obj (op K, L)) K).hom ≫
+          (𝟙 _ ⊗ₘ ev K L) ≫ ev L M
+    have he₁ : (H.map (𝟙 (op K), f) ⊗ₘ 𝟙 K) ≫ ev K L' =
+        ev K L ≫ f := by
+      simpa only [CoefficientClosedStructure.tensor, tensor_map] using
+        closed_eval_target S K L L' f
+    have he₂ : (H.map (f.op, 𝟙 M) ⊗ₘ 𝟙 L) ≫ ev L M =
+        (𝟙 (H.obj (op L', M)) ⊗ₘ f) ≫ ev L' M := by
+      simpa only [CoefficientClosedStructure.tensor, tensor_map] using
+        closed_eval_source S L' L M f
+    rw [associator_naturality_assoc, associator_naturality_assoc]
+    simp only [id_tensorHom_id, tensorHom_comp_tensorHom_assoc,
+      Category.id_comp, Category.comp_id, he₁]
+    rw [show (𝟙 (H.obj (op L', M)) ⊗ₘ ev K L ≫ f) =
+      (𝟙 (H.obj (op L', M)) ⊗ₘ ev K L) ≫
+        (𝟙 (H.obj (op L', M)) ⊗ₘ f) by
+          rw [tensorHom_comp_tensorHom, Category.id_comp]]
+    simp only [Category.assoc]
+    rw [← he₂]
+    simp only [tensorHom_comp_tensorHom_assoc, Category.id_comp, Category.comp_id]
+
 /-- Naturality in the outer variables and dinaturality in the middle variable of
 composition defined as the transpose of the two counit evaluations.
 Source: Stacks 08J9 and 0A98
@@ -163,7 +348,7 @@ theorem ringedHomComposition_naturality
           ((derivedInternalHomOfUniverses.{c, v, u, w} J R).map (f.op, 𝟙 M),
             𝟙 ((derivedInternalHomOfUniverses.{c, v, u, w} J R).obj (op K, L))) ≫
           S.composition K L M) := by
-  sorry
+  exact closed_naturality S
 
 /-- Localization of sign-free Hom-complex composition computes the fixed closed
 composition, using any K-flat resolution of the second Hom factor.
