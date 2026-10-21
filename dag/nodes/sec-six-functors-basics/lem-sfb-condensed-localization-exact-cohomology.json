@@ -18,9 +18,118 @@
   "def-pur-localized-ringed-site",
   "def-weil-abstract-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply clause (1) of [lem-weil-proetale-weakly-etale-localization] to the given object $u:V\\to S$ (the auxiliary ordinary ring in that lemma may be $\\mathbf Z$). Its equivalence sends $W\\to V$ to $(W\\to S,W\\to V)$ and identifies covering families. Thus the localized site is precisely $V_{\\mathrm{proét}}$. Clause (1) of [lem-sfb-proetale-object-inverse-image-restriction], applied to arbitrary abelian and ring sheaves, identifies the actual inverse image with sectionwise restriction, including its maps: $(u^{-1}G)(W\\to V)\\cong G(W\\to S)$. Only its coefficient-independent clause (1) is used, not its constant-ring module clause. The abelian inverse image of [sk-def-sfb-module-pushforward-pullback] is the sheafified pointwise left Kan extension along base change; at $W\\to V$ its pointwise colimit is indexed by the pairs $(T,W\\to T\\times_SV)$, which is the category $\\mathcal I_W$ of that clause, so clause (1) applies to it verbatim.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-sfb-proetale-object-inverse-image-restriction",
+    "sk-def-sfb-module-pushforward-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 03CE, lemma-localize-given-products; proetale.tex Tag 09A5; composition and between-objects permanence in more-morphisms.tex Tags 094T and 0951"
+   }
+  },
+  {
+   "text": "The coefficient map of [sk-def-sfb-coefficient-morphisms] is an isomorphism of ring sheaves for every condensed ring, without an admissibility condition. The internal ring object is read as a sectionwise ring sheaf by the reconstruction used in [lem-sfb-internal-module-operations-transport], whose statement supplies the ring isomorphism $u^{-1}B_S\\cong B_V$ of section-ring sheaves induced by $\\alpha_u$. Through Step 1 write it $\\alpha:R=\\Gamma_S|_V\\xrightarrow{\\sim}B=\\Gamma_V$. For an arrow $h:W'\\to W$ over $V$, naturality says $B(h)\\alpha(W)=\\alpha(W')R(h)$, and its being a ring morphism gives $\\alpha(W)(ab)=\\alpha(W)(a)\\alpha(W)(b)$ and $\\alpha(W)(1)=1$. Its inverse satisfies the corresponding equations. These are exactly the required compatibility with restrictions and scalar multiplication.",
+   "uses": [
+    "sk-def-sfb-coefficient-morphisms",
+    "lem-sfb-internal-module-operations-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-coefficient-morphisms/_section.md",
+    "place": "Definition of alpha as pullback-from-point composition; concluding ring-isomorphism assertion"
+   }
+  },
+  {
+   "text": "Define $T:\\operatorname{Mod}(R)\\to\\operatorname{Mod}(B)$ on a sectionwise module sheaf $M$ by retaining its abelian sheaf and setting $b\\cdot_T m=\\alpha(W)^{-1}(b)m$ over $W$. The ring identities give the module axioms. The restriction equation in Step 2 gives $(b\\cdot_T m)|_{W'}=b|_{W'}\\cdot_T m|_{W'}$, so this is a sheaf of modules in [def-weil-sheaf-of-modules-category]. Retain the same underlying maps on morphisms: $R$-linearity gives $B$-linearity by this formula. Transport back uses $a\\cdot n=\\alpha(W)(a)n$; the two composites recover the original actions and morphisms because $\\alpha^{-1}\\alpha=1=\\alpha\\alpha^{-1}$. Thus $T$ is an equivalence and is additive, as addition of morphisms is unchanged.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CV, definition-sheaf-modules; explicit transport of sectionwise actions along a ring-sheaf isomorphism (agent argument)"
+   }
+  },
+  {
+   "text": "By [lem-sfb-internal-module-operations-transport], under the section equivalences $E_S,E_V$ the module-object pullback of [sk-def-sfb-module-pushforward-pullback] is naturally isomorphic to the sectionwise ringed-topos pullback $B\\otimes_{u^{-1}\\Gamma_S}u^{-1}F$ (sheafified sectionwise tensor) along the ring isomorphism of Step 2. The $u^{-1}\\Gamma_S$-action on $u^{-1}F$ is $u^{-1}$ of the action map; the isomorphism of Step 1 is given by the coprojections at the initial pairs, hence commutes with finite products and carries it to the restricted action. Put $M=F|_V$; the pullback is $B\\otimes_R M$. By [def-pur-sheaf-tensor-product] it is the sheafification of the sectionwise tensor product. On that presheaf define $\\psi_W(b\\otimes m)=\\alpha(W)^{-1}(b)m\\in T(M)(W)$. Balancing follows from $\\alpha^{-1}(b\\alpha(a))m=\\alpha^{-1}(b)(am)$, and $B(W)$-linearity follows from the transported action. These maps commute with restrictions by Step 2. The universal property in [def-weil-presheaf-modules-sheafification] therefore extends $\\psi$ uniquely to a $B$-linear sheaf map $B\\otimes_R M\\to T(M)$. Its inverse sends $m$ to the image of $1\\otimes m$; this is $B$-linear since $1\\otimes\\alpha^{-1}(b)m=b\\otimes m$. One composite fixes $m$; the other fixes every $b\\otimes m$ since $1\\otimes\\alpha^{-1}(b)m=b\\otimes m$, and hence is the identity after sheafification by uniqueness. For a module map $f$, $f(\\alpha^{-1}(b)m)=\\alpha^{-1}(b)f(m)$ proves naturality. This proves $u^*\\cong T\\circ(-|_V)$, with underlying sections $F(W\\to S)$ and precisely the asserted coefficient action.",
+   "uses": [
+    "sk-def-sfb-module-pushforward-pullback",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-sfb-internal-module-operations-transport"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product; Tag 03CY, lemma-sheafification-presheaf-modules; explicit inverse when the ring map is an isomorphism"
+   }
+  },
+  {
+   "text": "Restriction $(-)|_V:\\operatorname{Mod}(\\Gamma_S)\\to\\operatorname{Mod}(R)$ is exact by [lem-pur-site-restriction-module-adjunction-exact], with the localized topology of Step 1; the coefficient ring is a sheaf of commutative rings, as required. The equivalence $T$ preserves all limits and colimits by [lem-galois-equivalence-preserves-limits], in particular the finite ones. Their composite preserves finite limits and finite colimits (apply the two preservation properties successively to each finite cone and cocone). The natural isomorphism of Step 4 transfers both properties to $u^*$ by [lem-sfb-finite-exactness-nat-iso]. Additivity can also be read directly from Step 4: restriction and $T$ preserve addition of maps and conjugating by the natural module isomorphism preserves sums. This proves the exact additive assertion of (1).",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-galois-equivalence-preserves-limits",
+    "lem-sfb-finite-exactness-nat-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04IX, definition-localize-ringed-site, and restriction exactness recalled in section-local (03DK); categories.tex Tag 0038; finite-preservation invariance under natural isomorphism"
+   }
+  },
+  {
+   "text": "The module sheaf categories are abelian by [def-weil-sheaf-of-modules-category], taking sites small relative to the module universe as in that definition and the site's size convention. Apply [lem-weil-pbc-exact-functor-derived-factorization] to the additive exact functor $u^*$ of Step 5. It carries quasi-isomorphisms to quasi-isomorphisms and yields $D(u^*)Q_S(K)\\cong Q_V(C(u^*)K)$ for every unbounded cochain complex $K$. The componentwise isomorphism of Step 4 is an isomorphism of complexes: its naturality applied to each $d^n$ gives $\\psi_{K^{n+1}}u^*(d^n)=T(d^n|_V)\\psi_{K^n}$. Thus the termwise restricted complex with transported actions represents this derived image. If $Q_S(K)\\cong Q$, applying $D(u^*)$ identifies the same complex with $D(u^*)Q$.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor, assertions (3)-(4); termwise representative and natural complex isomorphism"
+   }
+  },
+  {
+   "text": "For each integer $q$, apply [lem-weil-pbc-exact-functor-complex-cohomology] to $u^*$. Inverting its $c^q_K$ gives $u^*H^q(K)\\xrightarrow{\\sim}H^q(C(u^*)K)$. That lemma specifies the identifications of kernels and images, including cycle inclusions and cohomology projections, so this is the asserted comparison on representatives. Through Step 4 these are exactly the restriction-and-transport identifications. Both sides, viewed as functors on complexes, invert quasi-isomorphisms: cohomology does so by [def-weil-abstract-derived-category], functors carry isomorphisms to isomorphisms, and $C(u^*)$ preserves quasi-isomorphisms by Step 6. Part (2) of [lem-weil-pbc-localization-universal-property] therefore descends this natural isomorphism to $u^*H^q(Q)\\xrightarrow{\\sim}H^q(D(u^*)Q)$, natural in derived objects and morphisms. All arguments apply in every degree independently, without bounds on the complex; the only scalar extension was along the ring isomorphism $\\alpha$, so no flatness or finiteness condition on the coefficients or on $u$ has entered.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 010N, lemma-exact-functor, applied to cycles, images and their quotient; derived.tex Tag 015F; categories.tex Tag 04VG localization with its natural-transformation universal property"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-sfb-proetale-object-inverse-image-restriction",
+  "sk-def-sfb-module-pushforward-pullback",
+  "sk-def-sfb-coefficient-morphisms",
+  "lem-sfb-internal-module-operations-transport",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-galois-equivalence-preserves-limits",
+  "lem-sfb-finite-exactness-nat-iso",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex; literature/stacks-project/sites-modules.tex; literature/stacks-project/homology.tex; literature/stacks-project/derived.tex",
+  "place": "Agent-assembled condensed-coefficient specialization of Tags 03CE, 04IX, 03CY, 03EK, 010N and 015F. The coefficient map is the blueprint canonical alpha, not a constant-coefficient replacement."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -63,10 +172,38 @@
    "results": "25 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShiftSequence.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShiftSequence.lean, Mathlib/Algebra/Homology/QuasiIso.lean, Mathlib/Algebra/Homology/QuasiIso.lean, Mathlib/Algebra/Homology/QuasiIso.lean",
    "date": "2026-10-21",
    "verdict": "no match: generic restriction or derived-homology APIs do not identify the specific condensed coefficient pullback with sectionwise localization"
+  },
+  {
+   "tool": "grep",
+   "query": "overFunctor|homologyFunctorIso",
+   "results": "5 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits do not state the condensed coefficient localization together with its actual pullback and cohomology comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a scheme and a commutative condensed coefficient ring, pullback to an object of the small pro-etale site is sectionwise module restriction and commutes with unbounded cohomology",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pullback, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, AlgebraicGeometry.Scheme.Modules.pseudofunctor, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_l, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, AlgebraicGeometry.Scheme.Modules.pullbackComp",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits do not state the condensed coefficient localization together with its actual pullback and cohomology comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Module inverse image for a pro-etale object and condensed coefficients is exact sectionwise localization and commutes with cohomology",
+   "results": "8 hits: CondensedMod.isDiscrete_tfae, CondensedMod.LocallyConstant.instIsIsoCondensedSetMapForgetAppCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor, AlgebraicGeometry.Scheme.Modules.inv_app, ModuleCat.Tilde.stalkIso_inv, LightCondMod.LocallyConstant.fullyFaithfulFunctor, profiniteToCondensed, CondensedMod.LocallyConstant.fullyFaithfulFunctor, LightCondSet.mem_locallyConstant_essImage_of_isColimit_mapCocone",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits do not state the condensed coefficient localization together with its actual pullback and cohomology comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact restriction to a localized ringed site after transport by an isomorphism of coefficient rings preserves kernels images and cohomology of unbounded complexes",
+   "results": "8 hits: CategoryTheory.Functor.isHomological_of_localization, ModuleCat.localizedModule_functor_map_exact, CategoryTheory.Functor.mapHomologicalComplex_upToQuasiIso_Q_inverts_quasiIso, DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoLocalizerMorphism, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIso, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactors",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits do not state the condensed coefficient localization together with its actual pullback and cohomology comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-local-model-cohomology-descent",
@@ -85,5 +222,69 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-condensed-localization-exact-cohomology",
+  "worker": "stage1",
+  "summary": "Seven steps prove the unchanged statement using existing localization, exactness and cohomology nodes; zero new nodes. Wrote the transported action and tensor inverse explicitly, verified coefficient naturality, and descended the comparison to all unbounded derived morphisms. No constant-coefficient specialization or boundedness assumption is introduced.",
+  "blueprint": "Realizes det-prop-scalar-six-ctf paragraph (2), Local models, the restriction P|_W and cohomology of a scalar local model, through lem-sfb-local-model-cohomology-descent. Supplies localization and unbounded cohomology compatibility without modifying the scalar-six unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Generic identification of small pro-etale localization, used in the local models of the ancestor; not a replacement for a coefficient-comparison step."
+   },
+   {
+    "node": "lem-sfb-proetale-object-inverse-image-restriction",
+    "why": "Generic coefficient-independent inverse-image localization theorem, clause (1) only; no node of the scalar-six unit gives the actual inverse-image comparison."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Generic exactness of module restriction to a localized ringed site; applied before transport of the condensed coefficient action."
+   },
+   {
+    "node": "lem-galois-equivalence-preserves-limits",
+    "why": "Generic equivalence preservation of limits and colimits, applied to the explicit action-transport equivalence."
+   },
+   {
+    "node": "lem-sfb-finite-exactness-nat-iso",
+    "why": "Generic invariance of finite limit and colimit preservation under natural isomorphism."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Generic unbounded exact-functor localization, used after the actual condensed pullback was identified and proved exact."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-complex-cohomology",
+    "why": "Generic cohomology comparison for an exact functor, with cycle and quotient normalization; does not impose special coefficients."
+   },
+   {
+    "node": "lem-weil-pbc-localization-universal-property",
+    "why": "Generic localization of natural isomorphisms, used to prove naturality on derived morphisms, rather than only on complex representatives."
+   },
+   {
+    "node": "lem-sfb-internal-module-operations-transport",
+    "why": "Generic comparison of the internal module-object pullback with the sectionwise ringed-topos pullback along the ring isomorphism induced by alpha; no node of the scalar-six unit gives it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-sfb-proetale-object-inverse-image-restriction",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-galois-equivalence-preserves-limits",
+  "lem-sfb-finite-exactness-nat-iso",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-sfb-internal-module-operations-transport"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q104-1e572bfb5",
+  "group": "Q104",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q104-1e572bfb5 (reviewer sub-agent of L); spot-checked: Read the item's statement and all 7 steps, every cited node's statement, the sources at the cited places (Stacks 03CE sites.tex:6094; 04IX sites-modules.tex:2019; 010N homology.tex:1545; 015F derived.tex:5884) and det-prop-scalar-six-ctf.proof paragraph (2), 'Local models'. Zero new nodes, statement unchanged. The statement is true for any commutative condensed Γ because α_u is invertible. Tested V empty, V=S (identity), a ring automorphism (the action must use α^{-1}, and does), and complexes unbounded in both directions. No duplicate: lem-sfb-coefficient-sections-localization gives only θ_V. No cycle, no SGA, every tool_use generic and accepted. One fault (C4/C1, Steps 2/4): Step 4 read the internal module-object pullback of sk-def-sfb-module-pushforward-pullback (Ext_α∘mapMod(f^*_Ab), a coequalizer of internal tensors with the action transported through the strong monoidal structure) as the sectionwise sheaf tensor B⊗_R F|_V. Step 2 likewise read the ring-object iso α_u as a section-ring iso. No cited node gives either identification. Fixed by citing lem-sfb-internal-module-operations-transport (reviewed PASS Q77: E_{T'}f^*_int≅f^*_sec E_T, ring iso f^{-1}B_T≅B_{T'} induced by α_f; no cycle) in Steps 2 and 4, declared as a tool_use; Step 2 is now non-elementary. Step 4 also now says why the u^{-1}Γ_S-action is the restricted action: u^{-1} of the action map, and the clause (1) coprojection iso commutes with finite products. Step 1 now notes that the sfb sheafified Lan u^{-1} has the same index category I_W as def-weil-proetale-inverse-image, so clause (1) of lem-sfb-proetale-object-inverse-image-restriction applies. Steps 3, 5, 6 and 7 were checked as written: transport equivalence, exact restriction plus equivalence plus nat-iso invariance, exact-functor derived factorization, inverted c^q_K descended by localization UP (2). proof_deps recomputed; largest step 1587 chars.; 1 file(s) fixed by the reviewer"
  }
 }

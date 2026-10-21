@@ -21471,3 +21471,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:58 L: merged deliver/Q77/lem-pur-finite-type-coordinate-support-orientation (reviewer FIX; first push; new nodes: 0)
 - 08:58 L: merged deliver/Q123/lem-pur-line-zero-class-etale-realization (reviewer FIX; first push; new nodes: 0); claim not held by Q123: not your claim
 - 08:58 L: merged deliver/Q150/lem-per-rational-realization-scalar-coherence (reviewer PASS; first push; new nodes: 0)
+- 08:58 L: merged deliver/Q104/lem-sfb-condensed-localization-exact-cohomology (reviewer FIX; first push; new nodes: 0)
