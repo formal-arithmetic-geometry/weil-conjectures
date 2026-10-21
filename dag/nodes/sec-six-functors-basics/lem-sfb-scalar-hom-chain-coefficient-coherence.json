@@ -283,5 +283,37 @@
   "group": "Q39",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q39-3e4f42fdc (reviewer sub-agent of L); spot-checked: Read the item in full; the delivery creates no new nodes. The statement and stmt_deps are byte-identical to the Q54 base. The item is not dropped, live and side-live still have it unsplit, and the 2026-10-21 re-split note is on the parent lem-sfb-hom-scalar-chain-identification, not on this item. There is no cycle: the two cited siblings are unsplit, same-unit (sk-def-sfb-dc-restricted-functors) nodes, every other citation is a definition, and no SGA source or tool_uses is involved. Sources checked: Stacks 03CY (sites-modules.tex:815), 03CZ (:933) and 0A8X (sites-cohomology.tex:8571). The proof expands every clause of old parent step 11. Cited statements checked against what each step takes: def-pur-sheaf-tensor-product, def-weil-pbc-module-tensor-product, def-weil-presheaf-modules-sheafification, def-pur-hom-complex, def-pur-sheaf-hom, def-pc-sheaf-restrict-scalars, and the sibling normalisations of nu, theta, alpha and sigma (chi = sigma_id). I redid every generator calculation. For kappa, both balances hold and both inverse composites are the identity. mu and tau are balanced by b phi = phi' a, with no flatness used. Equations 1-4 type-check, including the contravariant kappa_P^{-1}, and evaluate equal: eq2 gives phi'(r'r'') tensor g(1 tensor p); eq3 is equal by R'-balance; eq4 uses kappa_J(1 tensor (1 tensor y)) = 1 tensor (1 tensor y) and the hypothesis q' kappa_J = w B(q), for arbitrary (q', w). Associators, units, composite squares (d phi' = phi'' c), towers and semilinear w are all correct, and the composite-square equations also follow directly from steps 4-7. Edge cases checked: point site with Z -> Z/2, non-invertible mu for Z -> Z/4 -> Z/2, zero rings and complexes, and unbounded coordinates. No duplicate was found; the sec-smooth-base-change raw scalar nodes state something else. Fault B4, repaired: in steps 2-11 every TeX backslash was destroyed. \\varphi and \\nu became a newline plus letters, \\tau, \\theta, \\to and \\text became a tab plus letters, otimes, kappa, mu, chi, sigma, alpha and mapsto lost their backslash, and \\, became a bare comma ('b(s),w(', 'mt,v(ls)'). The corrected item is at fixes/dag/nodes/sec-six-functors-basics/lem-sfb-scalar-hom-chain-coefficient-coherence.json; it restores backslashes inside math only, verified by an exact round-trip against the delivered text for all 11 steps, and changes no other field. Advisory: the proof is about 10.3k characters, but no re-split note applies to this item.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.ScalarHomChainCoefficientCoherence",
+  "declaration": "SheafOfModules.StrictScalarHom.exists_scalarHomChainCoefficientCoherence",
+  "declarations": [
+   "SheafOfModules.StrictScalarHom.NormalizedCoefficientMaps",
+   "SheafOfModules.StrictScalarHom.NormalizedCoefficientMaps.homComparison",
+   "SheafOfModules.StrictScalarHom.NormalizedCoefficientSquare",
+   "SheafOfModules.StrictScalarHom.NormalizedCoefficientSquare.tensorComparison",
+   "SheafOfModules.StrictScalarHom.NormalizedCoefficientCompatibility",
+   "SheafOfModules.StrictScalarHom.NormalizedCoefficientSquare.TensorNatural",
+   "SheafOfModules.StrictScalarHom.CoefficientExtensionAssociators",
+   "SheafOfModules.StrictScalarHom.CoefficientChainSquares",
+   "SheafOfModules.StrictScalarHom.CoefficientChainPasting",
+   "SheafOfModules.StrictScalarHom.CoefficientExtensionAssociators.underlyingComp",
+   "SheafOfModules.StrictScalarHom.CoefficientHomIteration",
+   "SheafOfModules.StrictScalarHom.exists_scalarHomChainCoefficientCoherence"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/ScalarHomChainCoefficientCoherence.lean",
+  "statement": "theorem exists_scalarHomChainCoefficientCoherence (F : ∀ (R S : Sheaf J CommRingCat.{max c v u}) (φ : R ⟶ S), NormalizedCoefficientMaps.{c, v, u} φ) : ∃ L : CoefficientExtensionAssociators.{c, v, u} F, ∃ Q : CoefficientChainSquares.{c, v, u} F, CoefficientChainPasting.{c, v, u} L Q ∧ CoefficientHomIteration.{c, v, u} L",
+  "branch": "newtargets-dag",
+  "by": "Q68",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-761a4c26a",
+  "group": "Q68",
+  "result": "pass",
+  "note": "Only the lean record differs from side-live; lean.statement matches the file verbatim; first stage-2 delivery of the item. kappa (both directions), mu and tau are pinned by generator formulas (tau as A(nu);mu;U'(kappa);nu'^-1 with tensor_pure). I checked the types of the nu, theta, alpha and sigma equations in diagrammatic order and recomputed both sides on generators; sigma has premise kappa_J;q'=B(q);w with arbitrary q', w and N'. Associators and units (comp_pure t*psi(s), comp_inv inserts 1), kappa/mu/tau id and comp, and the HomIteration assoc/unit and nu/chi/theta/alpha/sigma id and comp laws all check on generators. Universes c, v, u independent; no flatness or boundedness; chi never required invertible; one sorry; docstrings present; Worker report and Second reading sections present. No compile since no file changed; worker reports a clean compile. Advisory: nu and nu_comp clauses are true by definition but their content is carried by tensor_pure and nu_pure; the new square structures repeat the parent's over the item's own input type; parent-helper import cycle risk as for siblings Q76/Q77; TensorProduct.Defs import appears unused."
  }
 }

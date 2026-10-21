@@ -14,7 +14,11 @@
   "def-pc-tensor-complex-sheaves",
   "def-sc-discrete-valuation-ring",
   "def-weil-pbc-projective-module",
-  "def-weil-finitely-generated-module"
+  "def-weil-finitely-generated-module",
+  "def-weil-strict-roos-model",
+  "def-sf-adic-module-quotient-data",
+  "def-sf-strict-roos-square-map",
+  "def-sp-strict-tower-arithmetic-restriction-data"
  ],
  "proof": [
   {
@@ -330,5 +334,60 @@
   "group": "NJ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NJ-45100206d (reviewer sub-agent of L); spot-checked: Read the whole 12-step split (no new nodes); statement byte-identical to live (live still unsplit, so no supersession), not on the dropped lists, no SGA. Added stmt_deps (DVR, projective, finitely generated) are used. All 15 proof_deps exist, are unmerged and equal the union of the steps' uses; a closure check finds no cycle. Steps checked by hand. Step 3: completeness of f.g. projective modules by the retract argument, so it does not rely on Tag 031B. Step 4: 1-t is surjective by recursive lifting, with kernel the compatible families. d^2=0 and e is a chain map. Step 5: cycle and boundary computation with fa=y and fz=b, all signs correct. Step 7: the fibre homotopy (hx,-hy) gives (g-g') because hf=fh. Steps 8-9: coherence of pure tensors. Step 11: positive rank gives pi nonzero and a nonunit, so pi=u sigma^e with e>=1 and S/pi^j=S/sigma^{ej}. Step 12: r_e r_f = r_ef. Cited statements verified against hypotheses: the exact-products Roos comparison (exact products of modules; towers Grothendieck via small-module-diagrams; zero-second-coordinate composite = eta); the K-flat scalar-tower realization on the one-point site; the cofinality node with A=R and B=S finite free; finite-free strict-tower transport. Sources verified in Stacks: 0941 lemma-derived-limit-is-ok, 031B, 05CE/05CF. No duplicate in the DAG. The 8 declared tool_uses are generic module/tower tools; accepted. Advisory only: the item's cone coordinate order differs from the cofinality node's by the sign isomorphism (x,y)->(-y,x), left implicit; derived-monoidal does not state the symmetry, but step 8 checks the chain-level Koszul symmetry directly; the report mentions a citations.json that is not in the commit."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.PerfectTensorRoosCompletion",
+  "declaration": "CochainComplex.PerfectTensorRoos.perfect_tensor_roos_completion",
+  "declarations": [
+   "CochainComplex.PerfectTensorRoos.towerFunctor",
+   "CochainComplex.PerfectTensorRoos.towerFunctor_additive",
+   "CochainComplex.PerfectTensorRoos.tower",
+   "CochainComplex.PerfectTensorRoos.quotient",
+   "CochainComplex.PerfectTensorRoos.quotient_compatible",
+   "CochainComplex.PerfectTensorRoos.augmentation",
+   "CochainComplex.PerfectTensorRoos.completion",
+   "CochainComplex.PerfectTensorRoos.extend",
+   "CochainComplex.PerfectTensorRoos.quotientTensor",
+   "CochainComplex.PerfectTensorRoos.FiniteProjective",
+   "CochainComplex.PerfectTensorRoos.Square",
+   "CochainComplex.PerfectTensorRoos.quotient_natural",
+   "CochainComplex.PerfectTensorRoos.quotientCone",
+   "CochainComplex.PerfectTensorRoos.perfect_tensor_roos_completion",
+   "CochainComplex.PerfectTensorRoos.augmentation_coordinates",
+   "CochainComplex.PerfectTensorRoos.tensor_coherence",
+   "CochainComplex.PerfectTensorRoos.derived_completion",
+   "CochainComplex.PerfectTensorRoos.scalarQuotientIso_existsUnique",
+   "CochainComplex.PerfectTensorRoos.scalarQuotientIso",
+   "CochainComplex.PerfectTensorRoos.scalarProduct",
+   "CochainComplex.PerfectTensorRoos.ScalarCoordinates",
+   "CochainComplex.PerfectTensorRoos.scalarComparison_existsUnique",
+   "CochainComplex.PerfectTensorRoos.scalarComparison",
+   "CochainComplex.PerfectTensorRoos.scalarTensorator",
+   "CochainComplex.PerfectTensorRoos.scalar_extension",
+   "CochainComplex.PerfectTensorRoos.arithmetic",
+   "CochainComplex.PerfectTensorRoos.arithmetic_coherence",
+   "CochainComplex.PerfectTensorRoos.ramified_extension",
+   "CochainComplex.PerfectTensorRoos.idealCongr",
+   "CochainComplex.PerfectTensorRoos.extendId",
+   "CochainComplex.PerfectTensorRoos.extendComp",
+   "CochainComplex.PerfectTensorRoos.scalar_identity_composition",
+   "CochainComplex.PerfectTensorRoos.scalar_tensorator_formula",
+   "CochainComplex.PerfectTensorRoos.scalar_naturality"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/PerfectTensorRoosCompletion.lean",
+  "statement": "theorem perfect_tensor_roos_completion [IsDomain R] [IsDiscreteValuationRing R] (π : R) (hπ : Irreducible π) [IsAdicComplete (Ideal.span {π}) R] (P Q : CochainComplex (ModuleCat.{u} R) ℤ) (hP : FiniteProjective P) (hQ : FiniteProjective Q) : FiniteProjective (P ⊗ Q) ∧ (∀ n : ℕ, ∃ φ : quotientTensor (Ideal.span {π}) P Q n ≅ ((tower (Ideal.span {π})).obj (P ⊗ Q)).asFunctor.obj (op n), ∀ (p q : ℤ) (x : P.X p) (y : Q.X q) (a b : R), φ.hom.f (p + q) ((HomologicalComplex.ιTensorObj ((extend (Ideal.Quotient.mk ((Ideal.span {π}) ^ (n + 1)))).obj P) ((extend (Ideal.Quotient.mk ((Ideal.span {π}) ^ (n + 1)))).obj Q) p q (p + q) rfl) (((Ideal.Quotient.mk ((Ideal.span {π}) ^ (n + 1)) a) ⊗ₜ[R, Ideal.Quotient.mk ((Ideal.span {π}) ^ (n + 1))] x) ⊗ₜ[_] ((Ideal.Quotient.mk ((Ideal.span {π}) ^ (n + 1)) b) ⊗ₜ[R, Ideal.Quotient.mk ((Ideal.span {π}) ^ (n + 1))] y))) = a • b • ((AdicCohomology.power (Ideal.span {π}) _ (n + 1)).mkQ ((HomologicalComplex.ιTensorObj P Q p q (p + q) rfl) (x ⊗ₜ[R] y)))) ∧ (∀ (n : ℕ) (q : ℤ), Function.Surjective ((((tower (Ideal.span {π})).obj (P ⊗ Q)).asFunctor.map (homOfLE (Nat.le_succ n)).op).f q)) ∧ Nonempty (IsLimit (quotientCone (Ideal.span {π}) (P ⊗ Q))) ∧ (∀ q : ℤ, Function.Surjective ((roosU ((tower (Ideal.span {π})).obj (P ⊗ Q))).f q)) ∧ (∀ q : ℤ, Function.Injective ((Pi.lift (quotient (Ideal.span {π}) (P ⊗ Q))).f q) ∧ LinearMap.range ((Pi.lift (quotient (Ideal.span {π}) (P ⊗ Q))).f q).hom = LinearMap.ker ((roosU ((tower (Ideal.span {π})).obj (P ⊗ Q))).f q).hom) ∧ QuasiIso (augmentation (Ideal.span {π}) (P ⊗ Q))",
+  "branch": "sheaf-dag",
+  "by": "Q65",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Repair of 29d7d53c90e5: canonical data are cited through their definition-node ownership records, including the existing arithmetic restriction data node. Mathematical statements and canonical constructions are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8e75a9f36",
+  "group": "Q65",
+  "result": "fix",
+  "note": "Re-delivery of the 29d7d53c H2/C5 RETURN. Lean file is byte-identical. The theorem stmt_deps are replaced by def-sf-adic-module-quotient-data and def-sf-strict-roos-square-map (both existing:true; their statements match the live Lean) plus def-sp-strict-tower-arithmetic-restriction-data. Every owner-module declaration the item uses is covered, and there is no cycle. check_new_node is clean. check_existing flagged noncomputable in the strictRoosMapOfSquare lean.statement. FIX: fixes/def-sf-strict-roos-square-map.json with noncomputable trimmed by text replace; check_existing now clean. Mathematics as previously reviewed. No compile because no Lean was changed. Advisories: strictRoosProduct/Endomorphism/Complex/Coordinates are owned only by theorem lem-sf-strict-roos-derived-limit-comparison (older gap); map_power is not listed; tensor_coherence is close to naturality."
  }
 }

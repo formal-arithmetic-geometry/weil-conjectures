@@ -22301,3 +22301,5 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:20 L: returned deliver/NH/lem-sfb-bounded-bifunctor-devissage (reviewer RETURN: Superseded (A7/B10), and C5/D1 on the new node. The live item lem-sfb-bounded-bifunctor-devissage already has reviewed ()
 - 11:24 L: merged deliver/Q71/lem-sfb-continuous-algcl-stratified-finite-models (stage 2; reviewer PASS; parallel immutable checks)
 - 2026-10-21T11:24:18Z L: superseded stage-1 delivery NA/lem-pod-stratified-dualizable-hom-continuity at c046aa1872c3af0ed5b490d095a9ccfe848fbd91; current completion retained; packet archived at refs/superseded/NA/lem-pod-stratified-dualizable-hom-continuity/c046aa1872c3af0ed5b490d095a9ccfe848fbd91; stale return retired.
+- 11:27 L: merged deliver/Q68/lem-sfb-scalar-hom-chain-coefficient-coherence (stage 2; reviewer PASS; parallel immutable checks)
+- 11:27 L: merged deliver/Q65/lem-sf-perfect-tensor-roos-completion (stage 2; reviewer FIX; parallel immutable checks)
