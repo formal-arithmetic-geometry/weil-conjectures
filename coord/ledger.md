@@ -20250,3 +20250,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 2026-10-21T04:08:53Z L: superseded stage-1 delivery Q27/def-weil-common-stage-derived-direct-image at a5489c690d9e6d8b005f2c3e5c7489389cb1e132; current completion retained; packet archived at refs/superseded/Q27/def-weil-common-stage-derived-direct-image/a5489c690d9e6d8b005f2c3e5c7489389cb1e132; stale return retired.
 - 04:09 L: merged deliver/Q15/lem-pd-monoidal-adjunction-equivalence-transport (reviewer PASS; first push; new nodes: 0)
 - 04:09 L: merged deliver/Q09/lem-sbc-strict-quotient-exchange-unit-equation (reviewer FIX; first push; new nodes: 1)
+- 2026-10-21T04:09:05Z L: superseded stage-1 delivery Q13/lem-sfb-constant-field-tor-bounds at 013061150daba6f0bec9e7d2a96c2c13f152b375; current completion retained; packet archived at refs/superseded/Q13/lem-sfb-constant-field-tor-bounds/013061150daba6f0bec9e7d2a96c2c13f152b375; stale return retired.
