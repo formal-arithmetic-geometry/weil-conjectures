@@ -1,67 +1,220 @@
-# Worker report
+## Worker report
 
-## Files written
+The delivery states `TopologicalGroup.completeGroup_forgetful_automorphisms` in
+`Sheaf.GroupTheory.CompleteGroupForgetfulAutomorphisms`. Its proof is `sorry`, with the
+node's full eleven-step proof plan in the docstring. It adds the concrete orbit category,
+its inclusion into Mathlib's discrete continuous actions, and both forgetful functors in
+`Sheaf.GroupTheory.OpenOrbitFunctor`. All definition data are explicit; no existence
+choice or postponed theorem supplies any data. The item's statement is unchanged.
 
-- `dag/nodes/sec-six-functors-basics/lem-sfb-complete-group-forgetful-automorphisms.json`: item, statement unchanged, split into eleven steps; not in Mathlib at the stated generality.
-- `dag/nodes/sec-six-functors-basics/lem-sfb-compact-closed-finite-intersection.json`: statement, Mathlib leaf, exact `CompactSpace.iInter_nonempty`, `Mathlib/Topology/Compactness/Compact.lean:825–829`.
-- `citations.json`: the two step/node citation pairs, each with a verbatim statement excerpt. `searches.jsonl` was produced by the required search command. `write_split.py` is sandbox-only preparation, not a delivered project file.
+Hypotheses and clauses, with the node and source open:
 
-## Attachments
+- The arbitrary group is `(G : Type u) [Group G]`, with `[TopologicalSpace G]`.
+- Hausdorffness is `[T2Space G]`.
+- The topological group structure and basis of identity neighborhoods consisting of open
+  subgroups are `[NonarchimedeanGroup G]`. Mathlib's definition extends
+  `IsTopologicalGroup G` and says every member of `𝓝 1` contains an `OpenSubgroup G`.
+  It imposes neither commutativity nor normality of these subgroups.
+- The alternative hypothesis is exactly `CompactSpace G ∨ @CompleteSpace G
+  (IsTopologicalGroup.leftUniformSpace G ⊓ IsTopologicalGroup.rightUniformSpace G)`.
+  The left uniformity has filter `comap (fun p => p.1⁻¹ * p.2) (𝓝 1)`; the right
+  uniformity has filter `comap (fun p => p.2 * p.1⁻¹) (𝓝 1)`. Their infimum is the
+  two-sided uniformity: Cauchy filters must satisfy both conditions. Swapping the two
+  net indices gives precisely the node's two differences. This is full Cauchy-filter/net
+  completeness, not sequential completeness, one-sided completeness, or a uniform group
+  assumption. The induced topology is the original topology because both factors have it.
+- `OpenOrbitCategory G` is the induced category on `OpenSubgroup G` through the actual
+  left coset action `openOrbitAction G U`, with underlying set `G ⧸ U.toSubgroup`.
+  Its arrows are all morphisms in `DiscreteContAction TopCat G`; these are all equivariant
+  continuous maps, and continuity places no restriction between discrete spaces.
+  The object and morphism universes are both `u`, so this is a small category.
+- The quotient topology is discrete by Mathlib's open-subgroup quotient instance.
+  The action is the actual `g • x` with quotient continuous-action instance.
+- `openOrbitForget G` is the composite `openOrbitInclusion G ⋙ discreteActionForget G`.
+  Its object maps and arrow maps are the underlying sets and original functions.
+- Both automorphism groups have the existing global instance
+  `CategoryTheory.SetFunctorAut.functorTopologyInstance`. It is induced by evaluation
+  into the product of `fiberTopology (F.obj X)`, each itself induced into functions on a
+  discrete set. Thus basic opens fix finitely many coordinates as required, even for
+  infinite fibres. No new topology or private copy of this notion is defined.
+- `∃ e : G ≃ₜ* Aut (openOrbitForget G)` asserts a multiplicative equivalence which is
+  a homeomorphism. Its component equation
+  `((e g).hom.app U) x = g • x` fixes this equivalence to the node's canonical map.
+  These equations specify its value on every object and every element, not just at U.
+- `∃ r : Aut (discreteActionForget G) ≃ₜ* Aut (openOrbitForget G)` asserts the
+  topological group identification with all discrete continuous left actions.
+  The next equation makes `r` exactly the map on automorphisms of precomposition along
+  `openOrbitInclusion G`, using `Functor.whiskeringLeft` and `Functor.mapAut`.
+  Thus this is restriction, not an unspecified abstract isomorphism.
+- The last equation
+  `((r.symm (e g)).hom.app S) x = (S.obj.obj.ρ g).hom x` identifies the induced
+  all-actions reconstruction with translation on every underlying set. It records the
+  canonical action already meant by the equivalently clause, with no additional hypothesis.
+- Universes are explicit. `G : Type u`, its quotient actions have carriers in `Type u`,
+  and all `Type u` discrete continuous actions are included. The category of all such
+  actions lives in `Type (u+1)` and its automorphism type is allowed that universe.
+  There is no smallness hypothesis on the all-actions category, no cardinal bound on a
+  fibre other than the stipulated set universe, and no independent universe below that
+  of G. The statement is uniform in arbitrary `u`.
 
-None. Searched `lean/WeilConjectures/` by the exact blueprint tag, Noohi, complete-group, nonarchimedean, and forgetful/automorphism terms. No project declaration states the item. A use of the compact intersection lemma in `Topology/SpectralSpace/Constructible.lean` is not a declaration of either this item or the generic compactness fact.
+Dependencies read and used:
 
-## WANTED
+- `def-nagata-category` is the Mathlib leaf `CategoryTheory.Category` in
+  `Mathlib.CategoryTheory.Category.Basic` (full class and its CategoryStruct fields read).
+  The induced-category and Mathlib action-category constructions use this class directly.
+  Its existing general-category interface is entirely usable; no dependency repair needed.
+- Newly cited `def-sfb-open-orbit-functor` is realized by the helper module described below.
+- Newly cited `def-sfb-set-functor-aut-pointwise-topology` owns the five existing
+  definitions in `Sheaf.CategoryTheory.Galois.AutProfinite`: `fiberTopology`,
+  `fiberTopologyInstance`, `evaluation`, `functorTopology`, `functorTopologyInstance`,
+  all in namespace `CategoryTheory.SetFunctorAut`. Their full signatures and docstrings
+  were read: arbitrary `C : Type u`, `[Category.{v} C]`, `F : C ⥤ Type w`, with no
+  finiteness assumption. The theorem node `lem-galois-aut-profinite` is removed from
+  `stmt_deps`: its conclusion is not used to state this theorem.
+- The proof leaf `lem-sfb-compact-closed-finite-intersection` is
+  `CompactSpace.iInter_nonempty` in `Mathlib.Topology.Compactness.Compact` (full signature
+  read at lines 825--829). That module is a non-public proof import, as required.
+- Mathlib's `DiscreteContAction`, `ContAction`, `Action`, `InducedCategory`,
+  `inducedFunctor`, `OpenSubgroup`, quotient actions and continuous/discrete quotient
+  instances, `NonarchimedeanGroup`, left and right uniformities, `CompleteSpace`,
+  `ContinuousMulEquiv`, whiskering and mapAut are reused directly. The scoped identity
+  `HasForget₂ TopCat TopCat` instance is explicit real identity-functor data, needed
+  because Mathlib supplies no reflexive instance for this interface.
 
-None. All sources used are present locally.
+Edge cases checked before writing:
 
-## Corrections and scope
+- The trivial group and quotient by the whole group give the singleton orbit.
+- The trivial subgroup is included whenever open, so arbitrary discrete groups retain
+  their regular action and are covered by the complete alternative without compactness.
+- Non-normal open subgroups are permitted; no quotient group structure is requested.
+- Infinite coset sets are admitted; no `Finite`, `FintypeCat`, metrizability, countability,
+  or compactness restriction is placed on these sets or the all-actions category.
+- Empty discrete actions belong to `DiscreteContAction`; their component equation is
+  vacuous and their unique automorphism is determined by naturality on all other actions.
+- An empty finite coordinate list has whole-group simultaneous realizer set, containing
+  1. The proof plan explicitly includes it in the compact finite-intersection argument.
+- The incomplete finitary permutation group does not satisfy the complete alternative;
+  there is no claim to recover an incomplete dense group from its discrete actions.
+- Noncommutative complete nonarchimedean groups are retained: we deliberately use the
+  infimum of left and right uniformities, not `[IsUniformGroup G]` or one-sided completeness.
 
-The item statement and its hypotheses are correct and were retained verbatim. There was no imported proof to retain; the sandbox initially had only dispatcher marker files. The essential issue to expose is that compatibility of the images of identity cosets alone does not immediately establish two-sided Cauchy convergence. Step 6 includes the inverse image of the identity coset under the natural automorphism, giving both differences without requiring open subgroups to be normal. No completeness of an automorphism group or existence of a group completion is invoked without proof. The compact branch uses a generic compactness leaf rather than silently assuming compact groups are complete.
+Searches for an existing statement and notions (all source searches read-only):
 
-The inherited blueprint ancestry is detached: the required ancestor command returns `None`. I preserved its `from.node: null`, exact existing place, and via list, and prepended this item to the new leaf's via list. The route is the inherited all-continuous-coefficient obligation in paragraph (3) of `det-thm-sf-ctf-stability-direct-images`, through complete-group torsor monodromy. I read the recorded chapter and unit, including the clause (iii)/(vii) direct-image route. This subsidiary topological argument does not change either. Whole-blueprint searches for `forgetful automorphisms`, `Noohi`, `Cauchy`, `finite intersection`, `compact intersection`, `closed subsets`, and `005D` found no equivalent blueprint statement.
+1. `msearch.py ... leanfinder "A complete nonarchimedean Hausdorff topological group is
+   the automorphism group of the forgetful functor on its continuous discrete actions"`
+   returned eight finite-Galois-category results, including `toAutHomeo` and
+   `toAutMulEquiv_isHomeomorph`. These are for FintypeCat/compact Galois data, not this
+   theorem about all discrete actions of arbitrary two-sided complete groups.
+2. `msearch.py ... loogle '"Aut", "CompleteSpace"'`: zero hits.
+3. `msearch.py ... grep 'Noohi|forget.*automorph|automorph.*forget'`: zero hits.
+4. `rg` on `lean/WeilConjectures` and `lean/Sheaf` for these concepts found no
+   reconstruction theorem; `rg` for the item id in `lean/WeilConjectures` gave no match.
+   Broader pointwise-aut searches found the reusable `SetFunctorAut` topology module.
+5. `msearch.py ... leansearch "category of discrete continuous actions of a topological
+   group and its orbit quotient actions"` found `DiscreteContAction`, `ContAction`,
+   `Action.IsContinuous` and discrete quotient results, all reused, but no orbit category.
+6. `msearch.py ... leanfinder "category of left cosets of open subgroups with all
+   equivariant maps and the forgetful functor"` returned eight hits including
+   `DiscreteContAction`, its category/forgetful instances, and compact finite-action
+   variants. No exact indexed open-orbit category or its canonical inclusion.
+7. `msearch.py ... loogle '"OpenSubgroup", "Action"'`: one hit,
+   `Action.exists_openSubgroup_of_isContinuous_of_finite`, not the required construction.
+8. `msearch.py ... grep 'OpenOrbitCategory|openOrbitAction|twoSidedUniform'`: zero hits.
+   Direct rg for the proposed names in Mathlib, WeilConjectures and Sheaf: zero hits.
+   The broad Sheaf open-subgroup search found finite-representation uses only.
+9. DAG search for `orbit category|category.*G/U|objects.*open subgroups|discrete orbit
+   functor|two-sided uniformity` found this item and related monodromy/reconstruction
+   statements, not an existing definition node. `tools/blueprint_refs.py search
+   'orbit functor'`: zero blueprint nodes. `ancestor` reports `None`, inherited from the
+   item's detached ancestry, preserved in the new definition's `blueprint.from.node`.
 
-## Mathlib searches and reading
+Source checked: local PDF text of Bhatt--Scholze, Proposition 7.1.5 and Example 7.1.6,
+printed p. 64. The source constructs the coset action/equivariant maps and states
+reconstruction for complete groups with an open-subgroup basis. It determines full
+forgetful automorphisms by decomposition into G/U. No statement correction or disputed
+statement is needed.
 
-All new searches ran through `/home/ubuntu/weil-launcher-all/batch2/msearch.py NP lem-sfb-complete-group-forgetful-automorphisms`, and their exact queries are in the node records and command-generated log. I retained the item's inherited search records. For the item I tried two semantic formulations, Loogle, LeanSearch, and source grep. I read `Mathlib/CategoryTheory/Galois/IsFundamentalgroup.lean`, especially its `CompactSpace G` hypotheses, `FintypeCat` fibre functors and lines 271–290. Its finite Galois category reconstruction does not cover noncompact complete groups or the orbit category of all open subgroups. The NonarchimedeanGroup and DiscreteContAction hits define relevant notions but do not prove reconstruction.
+Validation: `scompile.py NP lem-sfb-complete-group-forgetful-automorphisms` was run with
+both files, each compiled separately in dependency order against the published live
+library. Both sandbox and actual-module compiles passed with no warnings or errors
+(about 1.4--2.4 s each). All variables and universes are explicitly bound, and all lines
+are at most 100 characters. The single postponed theorem is the item's own statement.
 
-For the new leaf, LeanSearch and LeanFinder both return `CompactSpace.iInter_nonempty`. Loogle returns the more general compact-subset statement `IsCompact.inter_iInter_nonempty`. I read the local declarations and proofs at `Compact.lean:295–299` and `825–829`; the leaf has exactly the latter hypotheses and conclusion. The source grep over `Topology/Compactness` confirms its file and line. The empty finite intersection is explicitly included; Mathlib's empty bounded intersection is the whole space. No service failed in these searches.
+## New nodes
 
-## Not duplicates
+`def-sfb-open-orbit-functor` introduces the missing canonical open-orbit category and its
+underlying-set functor from Proposition 7.1.5, printed p. 64. Its module is
+`Sheaf.GroupTheory.OpenOrbitFunctor`, with declarations `TopologicalGroup.openOrbitAction`,
+`OpenOrbitCategory`, `openOrbitInclusion`, `discreteActionForget`, `openOrbitForget`, and
+`topCatIdentityForget`. It reuses Mathlib's complete discrete-action category and induced
+category; it adds only the particular category indexed by open subgroups, its coset-object
+map and canonical functors, which no existing node or declaration supplies. The searches
+above are also recorded in its `mathlib_searches`. It cites `def-nagata-category`; its
+chapter and unit and inherited blueprint ancestry are those of the item. Definitions
+contain real data and only already proved Mathlib structure laws. The item gains this
+node and the new pointwise-topology definition owner in `stmt_deps`; no other old field changes.
 
-lem-sfb-compact-closed-finite-intersection vs lem-sfb-compact-discrete-quotient-realization: the existing leaf realizes compatible choices over all discrete quotients of a compact space; it does not state the finite-intersection property for arbitrary closed subsets. The new leaf is the generic compactness theorem used directly on cosets.
+The prescribed delivery dry run passed server preflight and all per-file compiles: `OK (dry run)`.
 
-lem-sfb-compact-closed-finite-intersection vs lem-sfb-finite-quotient-fiber-product: the existing node identifies a fibre product of profinite spaces with a compatible finite-set limit; it does not state the closed-family theorem on a general compact space.
+`def-sfb-set-functor-aut-pointwise-topology` records the arbitrary-fibre pointwise
+topology as `existing: true` on the unchanged `Sheaf.CategoryTheory.Galois.AutProfinite`
+module. Its five declarations give discrete-fibre permutation topology, component
+evaluation, and the induced natural-automorphism topology, each in independent universes.
+Source: Bhatt--Scholze §7.1 and Definition 7.2.1, printed p. 65. The latter explicitly
+uses compact-open topology on automorphisms of arbitrary discrete sets; their compact
+subsets are finite, giving precisely finite pointwise conditions. No theorem or new Lean
+module is needed. The existing `def-galois-aut-topology` assumes all fibres finite and
+cannot own this general notion. Searches run during this repair: LeanSearch query
+"pointwise convergence topology on natural automorphisms of a functor to sets" gave
+eight unrelated linear-map/function topology results; LeanFinder query "Topology on
+natural automorphisms of a set valued functor induced by pointwise convergence on its
+discrete fibres" gave eight finite-Galois topology declarations; msearch grep
+`functorTopology|fiberTopology|SetFunctorAut` gave zero Mathlib hits. Direct rg of both
+project roots found the five reused definitions and consumers; DAG searches found only
+the finite-fibre definition and the profiniteness theorem. Whole-blueprint search
+"automorphism topology" returned zero matches; ancestor remains None as inherited.
+Edge cases: empty category yields the singleton natural-automorphism group with its
+unique topology; empty fibres impose no coordinate conditions; infinite fibres get
+pointwise topology, not a discrete permutation group; empty finite conditions give the
+whole group. No finiteness, faithfulness, smallness, or equality of universes is added.
 
-lem-sfb-compact-closed-finite-intersection vs lem-weil-pbc-quasicompact-components-clopen-intersection: the existing node identifies a point's connected component using clopen neighborhoods, assuming a compact-open basis and quasi-separatedness; neither that conclusion nor its hypotheses give the generic closed-family intersection theorem.
+## Repair of return L (immutable head f08623fc3d88)
 
-lem-sfb-compact-closed-finite-intersection vs lem-weil-pbc-spectral-proconstructible-closure-specialization: the existing node obtains a specializing point in an intersection of constructible sets of a spectral space; the new leaf requires only quasi-compactness and concerns arbitrary closed sets.
+H2 repaired: replaced `lem-galois-aut-profinite` in the item's `stmt_deps` by the new
+definition node `def-sfb-set-functor-aut-pointwise-topology`. Its existing declaration
+record lists all five requested definitions in the unchanged AutProfinite module.
+The theorem signature, original node statement, and eleven-step proof docstring are
+unchanged. Current shared-base comparison confirms the item changes only `lean` and
+`stmt_deps`. The saved packet's initial dry run passed before this repair.
+Advisory addressed: `topCatIdentityForget` is now a definition registered as a scoped instance in the
+`TopologicalGroup` namespace, rather than an unconditional global instance.
 
-lem-sfb-compact-closed-finite-intersection vs det-pe-condensed-point-basis: the existing node identifies affine ind-etale schemes over a separably closed field with profinite sets; it does not state generic compactness.
+## Second reading by NP
 
-lem-sfb-compact-closed-finite-intersection vs det-pe-wc-cover-second-stage: the existing node constructs a faithfully flat ind-Zariski ring extension with w-contractible spectrum; it is not a topological closed-intersection lemma.
+This is a second self-check, not an independent review: the dispatcher prohibits
+starting other agents, and the maintainer provides the independent reading.
+With the node and both Lean files open, rechecked the precise matching: group,
+Hausdorffness, and open-subgroup basis are `Group`, `T2Space`, and
+`NonarchimedeanGroup`; the alternative is exactly compactness or completeness for
+the infimum of left and right uniformities. The coset objects and every equivariant
+map are the induced `OpenOrbitCategory`. The first equivalence is pinned by its
+component equation to translation on each `G/U`. The second equivalence is pinned
+to `whiskeringLeft.mapAut`, so it is restriction; its final component equation pins
+its inverse on every discrete continuous action to translation. All use the existing
+pointwise topology. No universe or fibre finiteness restriction was introduced.
+The H2 mismatch was ownership of that topology: citing the profiniteness theorem
+used its helper definitions instead of its conclusion. The new definition record
+now owns exactly those helpers and uses the same general signatures, with no new
+Lean declaration or theorem assumption. `def-galois-aut-topology` was read and
+rejected as a substitute because it explicitly assumes every fibre finite.
+The open-orbit new node and its six declarations still agree clause by clause;
+the identity functor instance's scope changes its availability only, not its data.
+No statement correction or disputed statement is needed.
 
-lem-sfb-compact-closed-finite-intersection vs lem-weil-pbc-constructible-module-support-constructible: the existing node concerns stalk vanishing and constructibility of module-sheaf support, not intersections of closed sets in compact spaces.
-
-lem-sfb-compact-closed-finite-intersection vs lem-weil-pbc-spectral-constructible-finite-intersection: the existing statement assumes a spectral space and constructible subsets (closed in its constructible topology); the present use is a family of closed cosets in an arbitrary compact topological group, with neither a spectral-space hypothesis nor a constructibility hypothesis. The new leaf is already an exact Mathlib theorem and supplies the general topology fact directly.
-
-## Review by NP
-
-I read Bhatt–Scholze, *The pro-etale topology for schemes*, the local arXiv PDF, printed pp. 63–64: Definitions 7.1.1 and 7.1.3, Lemma 7.1.4, Proposition 7.1.5, and Example 7.1.6. The source uses compatible identity cosets and their inverse cosets to construct a Cauchy filter; my proof writes that argument as a net indexed by finite coordinate constraints and uses exactly the completeness assumption stated in this item. For the new node I read Stacks `topology.tex`, `lemma-intersection-closed-in-quasi-compact` at line 1724, and checked in `tags/tags` that its tag is 005D. The lemma assumes only quasi-compactness and permits arbitrary closed subsets. I also read the exact Mathlib declaration, not just the search summaries.
-
-Step 1 cites `def-nagata-category`. I opened its full statement: it gives objects, arrow sets, identity, composition and their laws. I use it only for those category axioms. The sets of open subgroups and arrows ensure smallness; the definition of natural automorphism is written in the step, including inverse naturality. Step 2 directly computes the naturality and group laws of translation and the finite coordinate conditions for continuity of multiplication and inversion. Step 3 computes stabilizers and their open-and-closed cosets and proves injectivity using the actual Hausdorff and subgroup-basis hypotheses. The stabilizer of the identity coset pulls back to U, which also gives continuity of the inverse after surjectivity. These are elementary calculations, not an invocation of finite Galois reconstruction.
-
-Step 4 explicitly gives the single common open subgroup V and every comparison arrow q_j; naturality at V proves simultaneous realization. No new node restates that part of the item's conclusion. Step 5 defines the directed set and the chosen net and records the closed sets C_x. Step 6 verifies both differences by evaluating at x and alpha-inverse(x), so it uses neither normality nor an abelian-group convention. Step 7 invokes the *hypothesis* of two-sided net completeness, then proves the closed-tail limit argument in one line. None of steps 4–7 hides a standard lemma about completion, uniform embeddings, or closed subgroups.
-
-Step 8 is the only non-elementary tool invocation. Its cited new node says exactly that an arbitrary family of closed subsets of a quasi-compact space, including the empty finite subfamily, has nonempty total intersection when all finite intersections are nonempty. Step 5 established closedness and step 4 established those finite intersections; compactness of G supplies the remaining hypothesis. The citations file quotes the complete statement of that leaf verbatim. Step 9 assembles the already obtained equalities into bijectivity and the topological group isomorphism.
-
-Steps 10 and 11 prove the all-actions clause explicitly. For each point s, continuity gives the open stabilizer U_s; the arrow q_s from its orbit is written down. Naturality determines every extension at s, and translations supply existence. This proves restriction is a group isomorphism without assuming that arbitrary natural automorphisms preserve a previously chosen orbit decomposition. The formula beta_S(s)=q_s(alpha_{U_s}(U_s)) proves the inverse restriction map continuous one coordinate at a time; finite conditions give precisely the topology in the statement. This is an elementary consequence of the displayed arrows and evaluation definitions, not an unproved category equivalence.
-
-I tested G=1, arbitrary discrete groups (where U={1} occurs), finite and profinite groups, and the complete noncompact permutation group of an infinite set. The proof uses finite intersections of conjugate subgroups rather than finite index or normality, so the noncompact and nonnormal cases are included. On the incomplete subgroup of finitely supported permutations of a countable set, the constructed net can tend to an infinite permutation outside G; step 7 correctly requires completeness and does not claim convergence there. The empty action has a unique bijection and imposes no coordinates. The new compactness leaf is true for empty X vacuously (the empty finite intersection hypothesis then fails), for a one-point space, and for arbitrary non-Hausdorff quasi-compact spaces. Every proof step is below 2000 characters. I checked B–E against these arguments: no added hypotheses, weakened conclusions, SGA references, new unsplit nodes, duplicate statement, or unsupported non-elementary citation remains. Only the two stated citation pairs occur, and both quotes were checked as literal substrings.
-
-## Unfinished
-
-None in this one-level split. No Lean was written and no compiler, Lake, or build command was run. The final required dry run and push are performed with the supplied delivery tool.
-
-## Dry-run repairs
-
-The first preflight returned two metadata diagnostics on the new leaf: it needed an explicit node citation in its statement and an explicit Mathlib line field. I added `mathlib_match.line = 825`, already verified in the pinned source. For size, I opened and read `def-weil-size-convention`: its first sentence fixes compatible Grothendieck universes, which is the only part used. The leaf now cites this convention for the sets and index families, matching the item's existing universe qualification and the existing compact-discrete-quotient leaf. The topology, compactness and closed-set meanings are still given directly; the size node is not cited as a theorem about topology. This is a statement dependency of the leaf only, so it introduces no new item proof-step citation. The verbatim step 8 quote in citations.json was updated to the final leaf statement. No mathematical hypothesis or conclusion of the compact-intersection fact changed.
+Repair validation: both delivered modules passed `scompile.py` separately with the
+scoped identity instance. The first repaired dry run found that preflight does not
+recognize `scoped instance` as a declaration header. Rewrote this as an explicit
+`def topCatIdentityForget` with `attribute [scoped instance] topCatIdentityForget`,
+which retains the same data and scope while exposing the declaration to preflight.
+Added `@[instance_reducible]` as required by Lean for a class-valued definition
+registered as an instance, removing its reducibility warning.

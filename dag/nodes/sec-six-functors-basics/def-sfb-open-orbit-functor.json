@@ -1,0 +1,114 @@
+{
+ "id": "def-sfb-open-orbit-functor",
+ "kind": "definition",
+ "title": "Open-orbit category and its underlying-set functor",
+ "statement": "Let $G$ be a topological group, with $G$ and its coset sets in $\\mathbf{Set}_u$. Let $G\\text{-}\\mathbf{Set}_{\\mathrm{disc}}$ be the category [def-nagata-category] of all discrete continuous left $G$-sets in this universe and all equivariant maps. For each open subgroup $U\\subseteq G$, give $G/U$ its discrete quotient topology and its continuous left translation action. Define $\\mathcal O_G$ as the small category indexed by open subgroups, with $\\operatorname{Hom}_{\\mathcal O_G}(U,V)$ all $G$-equivariant maps $G/U\\to G/V$, and composition and identities those of maps. The canonical inclusion $i_G$ sends $U$ to the action $G/U$ and keeps all arrows. Define $F_G:G\\text{-}\\mathbf{Set}_{\\mathrm{disc}}\\to\\mathbf{Set}_u$ by forgetting the action and topology, and $\\omega_G=F_G\\circ i_G$ as the underlying-set functor on $\\mathcal O_G$.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 7.1.5, printed p. 64: the collection of open subgroups and the equivariant maps between G/U, and determination of the full forgetful functor by these orbit sets."
+ },
+ "stmt_deps": [
+  "def-nagata-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "category of discrete continuous actions of a topological group and its orbit quotient actions",
+   "results": "[leansearch] OK 8 hit(s): DiscreteContAction, DiscreteContAction.instCategory, ContAction, ContAction.IsDiscrete, t2Space_of_properlyDiscontinuousSMul_of_t2Space, Action.IsContinuous, ContinuousConstVAdd.secondCountableTopology, MulAction.isOpenQuotientMap_quotientMk.",
+   "date": "2026-10-21",
+   "verdict": "Mathlib supplies all discrete continuous actions, reused here, but no category indexed by open subgroups with the specified inclusion and orbit forgetful functor."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "category of left cosets of open subgroups with all equivariant maps and the forgetful functor",
+   "results": "[leanfinder] OK 8 hit(s): DiscreteContAction.instCategory, DiscreteContAction, CategoryTheory.PreGaloisCategory.has_decomp_quotients, CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup, CategoryTheory.PreGaloisCategory.IsFundamentalGroup, ProfiniteGrp.toFiniteQuotientFunctor, CategoryTheory.PreGaloisCategory.IsFundamentalGroup.continuous_smul, DiscreteContAction.instHasForget.",
+   "date": "2026-10-21",
+   "verdict": "No exact open-orbit category; compact finite Galois variants do not supply the general construction. Reuse DiscreteContAction and InducedCategory."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"OpenSubgroup\", \"Action\"",
+   "results": "[loogle] OK 1 hit(s): Action.exists_openSubgroup_of_isContinuous_of_finite.",
+   "date": "2026-10-21",
+   "verdict": "No match: this is a theorem about finite actions, not the open-orbit functor."
+  },
+  {
+   "tool": "grep",
+   "query": "OpenOrbitCategory|openOrbitAction|twoSidedUniform",
+   "results": "[grep] OK 0 hit(s). Also rg for openOrbit|OpenOrbit|topCatIdentityForget|completeGroup_forgetful_automorphisms in Mathlib, lean/WeilConjectures and lean/Sheaf returned no matches. DAG search for orbit category|category.*G/U|objects.*open subgroups|discrete orbit functor|two-sided uniformity found this item and related reconstruction/monodromy statements, no definition node. tools/blueprint_refs.py search \"orbit functor\": 0 blueprint nodes match.",
+   "date": "2026-10-21",
+   "verdict": "No existing definition of this orbit category or its canonical functors."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-complete-group-forgetful-automorphisms",
+  "date": "2026-10-21",
+  "group": "NP"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof paragraph (3), the all-continuous compatibility obligation: finite coefficient models on source strata before open-image finiteness; monodromy on the reduced normal refinements, before the compact-matrix finite-field argument; Complete topological group torsors on a normal scheme; Proposition 7.1.5, pp. 63–64, with Example 7.1.6 for the compact case; orbit-category formulation from the proof (the objects G/U determine a natural automorphism on all disjoint unions). The orbit category and canonical restriction of forgetful functors in the reconstruction step.",
+   "via": [
+    "lem-sfb-complete-group-forgetful-automorphisms",
+    "lem-sfb-complete-group-torsor-monodromy",
+    "lem-sfb-normal-continuous-algcl-monodromy",
+    "lem-sfb-continuous-algcl-stratified-finite-models",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.GroupTheory.OpenOrbitFunctor",
+  "declaration": "TopologicalGroup.openOrbitForget",
+  "declarations": [
+   "TopologicalGroup.topCatIdentityForget",
+   "TopologicalGroup.openOrbitAction",
+   "TopologicalGroup.OpenOrbitCategory",
+   "TopologicalGroup.openOrbitInclusion",
+   "TopologicalGroup.discreteActionForget",
+   "TopologicalGroup.openOrbitForget"
+  ],
+  "file": "lean/Sheaf/GroupTheory/OpenOrbitFunctor.lean",
+  "statement": "def openOrbitForget : OpenOrbitCategory G ⥤ Type u",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-aeeca7ce9",
+  "group": "NP",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-aeeca7ce9",
+  "group": "NP",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN (f08623fc3d88): theorem stmt_dep lem-galois-aut-profinite replaced by new def node def-sfb-set-functor-aut-pointwise-topology, existing:true on unchanged Sheaf.CategoryTheory.Galois.AutProfinite owning fiberTopology/fiberTopologyInstance/evaluation/functorTopology/functorTopologyInstance (read live lines 1-60; statement verbatim lines 46-47; arbitrary fibres, independent universes; def-galois-aut-topology finite-only, not a duplicate). Item node identical to live except lean/stmt_deps. Clause check: T2+NonarchimedeanGroup, CompactSpace ∨ CompleteSpace(left ⊓ right uniformity) = two-sided net completeness (Mathlib Defs.lean 607-668), OpenOrbitCategory = InducedCategory over DiscreteContAction on G⧸U with g•x, e pinned to translation, r pinned to whiskeringLeft.mapAut restriction, translation clause on all discrete S implied by step 10; Aut multiplication convention (Endomorphism.lean:135) consistent. Edge cases trivial/discrete/non-normal/infinite/empty actions ok. No hollow data, sorry only in item, docstrings and blueprint tags present, statements verbatim. No compile (no fixes); worker reports clean compiles and dry run OK. Advisory: AutProfinite docstrings still tag lem-galois-aut-profinite."
+ }
+}

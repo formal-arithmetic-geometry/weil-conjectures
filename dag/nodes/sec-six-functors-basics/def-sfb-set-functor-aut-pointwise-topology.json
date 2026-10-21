@@ -1,0 +1,106 @@
+{
+ "id": "def-sfb-set-functor-aut-pointwise-topology",
+ "kind": "definition",
+ "title": "Pointwise topology on natural automorphisms of an arbitrary set-valued functor",
+ "statement": "Let $\\mathcal C$ be a category [def-nagata-category] and $F:\\mathcal C\\to\\mathbf{Set}_w$ any functor, with no finiteness assumption on its fibres. For a set $A$, give $A$ the discrete topology and give $\\operatorname{Aut}(A)$ the topology induced by $\\sigma\\mapsto(a\\mapsto\\sigma(a))$ into $A^A$ with its product topology. Define the evaluation homomorphism $\\operatorname{ev}_F:\\operatorname{Aut}(F)\\to\\prod_{X\\in\\operatorname{Ob}(\\mathcal C)}\\operatorname{Aut}(F(X))$ by $\\alpha\\mapsto(\\alpha_X)_X$. Give $\\operatorname{Aut}(F)$ the topology induced by this homomorphism from the product of those pointwise topologies. Equivalently, a basic neighbourhood of $\\alpha$ prescribes $\\beta_X(x)=\\alpha_X(x)$ at finitely many pairs $(X,x)$ with $x\\in F(X)$. The object, morphism and fibre universes are independent.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 7.1, topology on automorphism groups of discrete sets and forgetful functors, and Definition 7.2.1, printed p. 65, fundamental group of (C,F) topologized by compact-open topology on Aut(S); for discrete S this is pointwise convergence."
+ },
+ "stmt_deps": [
+  "def-nagata-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "pointwise convergence topology on natural automorphisms of a functor to sets",
+   "results": "[leansearch] OK 8 hit(s): PointwiseConvergenceCLM.isInducing_inducingFn, term_→Lₚₜ[_]_, term_→SLₚₜ[_]_, PointwiseConvergenceCLM.tendsto_nhds, PointwiseConvergenceCLM.tendsto_iff_forall_tendsto, UniformFun.topologicalSpace, PointwiseConvergenceCLM.continuousEvalConst, PointwiseConvergenceCLM.withSeminorms.",
+   "date": "2026-10-21",
+   "verdict": "Reuse the existing arbitrary-fibre definitions in Sheaf.CategoryTheory.Galois.AutProfinite; Mathlib search gives only finite-fibre or unrelated pointwise topologies. No DAG definition owns the arbitrary-fibre notion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Topology on natural automorphisms of a set valued functor induced by pointwise convergence on its discrete fibres",
+   "results": "[leanfinder] OK 8 hit(s): CategoryTheory.PreGaloisCategory.instTopologicalSpaceAutFunctorFintypeCat, CategoryTheory.PreGaloisCategory.instTopologicalSpaceAutFintypeCatObj, CategoryTheory.PreGaloisCategory.aut_discreteTopology, CategoryTheory.PreGaloisCategory.continuousSMul_aut_fiber, CategoryTheory.PreGaloisCategory.instIsTopologicalGroupAutFunctorFintypeCat, CategoryTheory.PreGaloisCategory.instT2SpaceAutFunctorFintypeCat, CategoryTheory.PreGaloisCategory.instContinuousSMulAutFintypeCatObjCarrier, CategoryTheory.PreGaloisCategory.instContinuousMulAutFunctorFintypeCat.",
+   "date": "2026-10-21",
+   "verdict": "Reuse the existing arbitrary-fibre definitions in Sheaf.CategoryTheory.Galois.AutProfinite; Mathlib search gives only finite-fibre or unrelated pointwise topologies. No DAG definition owns the arbitrary-fibre notion."
+  },
+  {
+   "tool": "grep",
+   "query": "functorTopology|fiberTopology|SetFunctorAut",
+   "results": "[grep] OK 0 hit(s): . Direct rg in lean/WeilConjectures and lean/Sheaf found only the existing SetFunctorAut definitions in Sheaf.CategoryTheory.Galois.AutProfinite and their consumers. DAG filename and concept searches found def-galois-aut-topology, which covers finite fibres only, and lem-galois-aut-profinite, a theorem rather than the general definition. blueprint_refs.py search \"automorphism topology\": 0 blueprint nodes; ancestor of the item: None.",
+   "date": "2026-10-21",
+   "verdict": "Reuse the existing arbitrary-fibre definitions in Sheaf.CategoryTheory.Galois.AutProfinite; Mathlib search gives only finite-fibre or unrelated pointwise topologies. No DAG definition owns the arbitrary-fibre notion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-complete-group-forgetful-automorphisms",
+  "date": "2026-10-21",
+  "group": "NP"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof paragraph (3), the all-continuous compatibility obligation: finite coefficient models on source strata before open-image finiteness; monodromy on the reduced normal refinements, before the compact-matrix finite-field argument; Complete topological group torsors on a normal scheme; Proposition 7.1.5, pp. 63–64, with Example 7.1.6 for the compact case; orbit-category formulation from the proof (the objects G/U determine a natural automorphism on all disjoint unions). Pointwise topology on natural automorphisms in the reconstruction assertion.",
+   "via": [
+    "lem-sfb-complete-group-forgetful-automorphisms",
+    "lem-sfb-complete-group-torsor-monodromy",
+    "lem-sfb-normal-continuous-algcl-monodromy",
+    "lem-sfb-continuous-algcl-stratified-finite-models",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Galois.AutProfinite",
+  "declaration": "CategoryTheory.SetFunctorAut.functorTopology",
+  "declarations": [
+   "CategoryTheory.SetFunctorAut.fiberTopology",
+   "CategoryTheory.SetFunctorAut.fiberTopologyInstance",
+   "CategoryTheory.SetFunctorAut.evaluation",
+   "CategoryTheory.SetFunctorAut.functorTopology",
+   "CategoryTheory.SetFunctorAut.functorTopologyInstance"
+  ],
+  "statement": "def functorTopology {C : Type u} [Category.{v} C] (F : C ⥤ Type w) :\n    TopologicalSpace (Aut F)",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Owns only the five existing general pointwise-topology definitions, with no finite-fibre hypothesis. The AutProfinite module and its theorem remain unchanged; the theorem conclusion is not a statement dependency."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-aeeca7ce9",
+  "group": "NP",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-aeeca7ce9",
+  "group": "NP",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN (f08623fc3d88): theorem stmt_dep lem-galois-aut-profinite replaced by new def node def-sfb-set-functor-aut-pointwise-topology, existing:true on unchanged Sheaf.CategoryTheory.Galois.AutProfinite owning fiberTopology/fiberTopologyInstance/evaluation/functorTopology/functorTopologyInstance (read live lines 1-60; statement verbatim lines 46-47; arbitrary fibres, independent universes; def-galois-aut-topology finite-only, not a duplicate). Item node identical to live except lean/stmt_deps. Clause check: T2+NonarchimedeanGroup, CompactSpace ∨ CompleteSpace(left ⊓ right uniformity) = two-sided net completeness (Mathlib Defs.lean 607-668), OpenOrbitCategory = InducedCategory over DiscreteContAction on G⧸U with g•x, e pinned to translation, r pinned to whiskeringLeft.mapAut restriction, translation clause on all discrete S implied by step 10; Aut multiplication convention (Endomorphism.lean:135) consistent. Edge cases trivial/discrete/non-normal/infinite/empty actions ok. No hollow data, sorry only in item, docstrings and blueprint tags present, statements verbatim. No compile (no fixes); worker reports clean compiles and dry run OK. Advisory: AutProfinite docstrings still tag lem-galois-aut-profinite."
+ }
+}

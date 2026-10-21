@@ -8,7 +8,9 @@
   "place": "Proposition 7.1.5, pp. 63–64, with Example 7.1.6 for the compact case; orbit-category formulation from the proof (the objects G/U determine a natural automorphism on all disjoint unions)."
  },
  "stmt_deps": [
-  "def-nagata-category"
+  "def-nagata-category",
+  "def-sfb-open-orbit-functor",
+  "def-sfb-set-functor-aut-pointwise-topology"
  ],
  "proof": [
   {
@@ -235,5 +237,23 @@
   "group": "NP",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-1caff08cc (reviewer sub-agent of L); spot-checked: Read the item, all 11 steps, the new leaf, def-nagata-category, def-weil-size-convention and the citer lem-sfb-complete-group-torsor-monodromy. The item's statement and stmt_deps are identical to the base, where it was unsplit with no proof, so no re-split rule applies. Source: Bhatt–Scholze pp. 63-64 (Prop. 7.1.5 / Ex. 7.1.6). The delivery turns the source's Cauchy-filter argument into a net over finite coordinate sets. Step 6 gets the second Cauchy difference from y = alpha_U^{-1}(U), which matches the source's h_U cosets; no normality is used. Steps 2-7 and 9-11 are elementary and correct: V = intersection of the conjugates a_j U_j a_j^{-1}, q_j well defined, closed cosets C_x, continuity in both directions, restriction to all discrete G-sets via q_s : G/U_s -> S. Step 8 uses the new leaf lem-sfb-compact-closed-finite-intersection, which is exactly CompactSpace.iInter_nonempty (Mathlib Compact.lean:825-829, read), including the empty Finset. rg -L over the DAG found no duplicate of the leaf. Edge cases checked: trivial, discrete, profinite, Q_p and Sym(S) groups, and the incomplete finitary permutation group, where completeness is needed. No SGA, no off-route citation, no tool_uses needed; blueprint.from.node null is inherited. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.GroupTheory.CompleteGroupForgetfulAutomorphisms",
+  "declaration": "TopologicalGroup.completeGroup_forgetful_automorphisms",
+  "file": "lean/Sheaf/GroupTheory/CompleteGroupForgetfulAutomorphisms.lean",
+  "statement": "theorem completeGroup_forgetful_automorphisms (G : Type u) [Group G] [TopologicalSpace G] [T2Space G] [NonarchimedeanGroup G] (hG : CompactSpace G ∨ @CompleteSpace G (IsTopologicalGroup.leftUniformSpace G ⊓ IsTopologicalGroup.rightUniformSpace G)) : ∃ e : G ≃ₜ* Aut (openOrbitForget G), (∀ (g : G) (U : OpenOrbitCategory G) (x : G ⧸ U.toSubgroup), ((e g).hom.app U) x = g • x) ∧ ∃ r : Aut (discreteActionForget G) ≃ₜ* Aut (openOrbitForget G), (∀ α : Aut (discreteActionForget G), r α = (((Functor.whiskeringLeft (OpenOrbitCategory G) (DiscreteContAction TopCat.{u} G) (Type u)).obj (openOrbitInclusion G)).mapAut (discreteActionForget G) α)) ∧ (∀ (g : G) (S : DiscreteContAction TopCat.{u} G) (x : (discreteActionForget G).obj S), ((r.symm (e g)).hom.app S) x = (S.obj.obj.ρ g).hom x)",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-aeeca7ce9",
+  "group": "NP",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN (f08623fc3d88): theorem stmt_dep lem-galois-aut-profinite replaced by new def node def-sfb-set-functor-aut-pointwise-topology, existing:true on unchanged Sheaf.CategoryTheory.Galois.AutProfinite owning fiberTopology/fiberTopologyInstance/evaluation/functorTopology/functorTopologyInstance (read live lines 1-60; statement verbatim lines 46-47; arbitrary fibres, independent universes; def-galois-aut-topology finite-only, not a duplicate). Item node identical to live except lean/stmt_deps. Clause check: T2+NonarchimedeanGroup, CompactSpace ∨ CompleteSpace(left ⊓ right uniformity) = two-sided net completeness (Mathlib Defs.lean 607-668), OpenOrbitCategory = InducedCategory over DiscreteContAction on G⧸U with g•x, e pinned to translation, r pinned to whiskeringLeft.mapAut restriction, translation clause on all discrete S implied by step 10; Aut multiplication convention (Endomorphism.lean:135) consistent. Edge cases trivial/discrete/non-normal/infinite/empty actions ok. No hollow data, sorry only in item, docstrings and blueprint tags present, statements verbatim. No compile (no fixes); worker reports clean compiles and dry run OK. Advisory: AutProfinite docstrings still tag lem-galois-aut-profinite."
  }
 }
