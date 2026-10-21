@@ -19931,3 +19931,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:43 L: merged deliver/Q120/lem-sp-etale-sum-coefficient-computation (reviewer PASS; first push; new nodes: 0)
 - 03:43 L: merged deliver/NS/lem-pd-section-derived-pushpull-normalization (reviewer FIX; first push; new nodes: 0); claim not held by NS: not your claim
 - 03:43 L: merged deliver/Q08/det-prop-sfb-cartesian-coefficients-twists (reviewer FIX; after a return; new nodes: 4)
+- 03:43 L: merged deliver/Q115/lem-sfb-finite-field-proetale-direct-image (reviewer FIX; first push; new nodes: 0)
