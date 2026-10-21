@@ -12,9 +12,87 @@
   "def-pur-hom-complex",
   "def-pur-sheaf-hom"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each object $U$ and integer $q$, [def-pur-hom-complex] identifies $D^q(U)$ with the families $(f^p)_p$ of maps $E^p|_U\\to O^{p+q}|_U$. If $p\\ne -q$, the target is zero, so that component has exactly one value, the zero map. Projection to $p=-q$ is therefore inverse to insertion of a map $E^{-q}|_U\\to R|_U$ with all other components zero. Both operations are $R(U)$-linear and commute with restriction. By [def-pur-sheaf-hom] these are inverse morphisms of module sheaves $D^q\\cong(E^{-q})^\\vee$.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A8X, section-hom-complexes, product and differential formulas; Tag 08JJ, lemma-dual-perfect-complex, second proof paragraph, ordinary dual terms and evaluation up to sign."
+   }
+  },
+  {
+   "text": "If $q<-b$, then $-q>b$, and if $-a<q$, then $-q<a$. In either case $E^{-q}=0$ by the assumed bound. There is exactly one module-sheaf map from the zero sheaf to $R$, so [def-pur-sheaf-hom] gives $(E^{-q})^\\vee=0$. Step 1 gives $D^q=0$. This also covers $a>b$, when every $E^p$ is zero.",
+   "uses": [
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A8X, section-hom-complexes, product and differential formulas; Tag 08JJ, lemma-dual-perfect-complex, second proof paragraph, ordinary dual terms and evaluation up to sign."
+   }
+  },
+  {
+   "text": "The differential of $O=R[0]$ is zero. In the component $p=-q-1$, the defining differential in [def-pur-hom-complex] consequently reads $(d_D^q f)^{-q-1}=-(-1)^q f^{-q}d_E^{-q-1}$. Under the projection of step 1 this is exactly $d_D^q(\\phi)=(-1)^{q+1}\\phi d_E^{-q-1}$. All other components have zero target.",
+   "uses": [
+    "def-pur-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A8X, section-hom-complexes, product and differential formulas; Tag 08JJ, lemma-dual-perfect-complex, second proof paragraph, ordinary dual terms and evaluation up to sign."
+   }
+  },
+  {
+   "text": "Apply the insertion/projection construction of step 1 with source $D$ and degree $i$: $(D')^i\\cong(D^{-i})^\\vee\\cong((E^i)^\\vee)^\\vee$. In these identifications a local $\\Psi\\in(D')^i$ is a map $(E^i)^\\vee\\to R$. For a local $\\chi\\in(E^{i+1})^\\vee$, the differential formula of [def-pur-hom-complex], followed by step 3 at $q=-i-1$, gives\n$$ (d_{D'}^i\\Psi)(\\chi)=(-1)^{i+1}\\Psi(d_D^{-i-1}\\chi)=(-1)^{i+1}(-1)^{-i}\\Psi(\\chi d_E^i)=-\\Psi(\\chi d_E^i). $$\nHere linearity pulls the sign through $\\Psi$. The double dual of $d_E^i$ is, by precomposition twice, precisely $\\Psi\\mapsto(\\chi\\mapsto\\Psi(\\chi d_E^i))$, proving the claimed minus sign.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A8X, section-hom-complexes, product and differential formulas; Tag 08JJ, lemma-dual-perfect-complex, second proof paragraph, ordinary dual terms and evaluation up to sign."
+   }
+  },
+  {
+   "text": "For any module sheaf $T$ and $t\\in T(U)$, define $\\delta_T(t)$ over the slice at $U$ by sending, for every $V\\to U$, a local map $\\phi:T|_V\\to R|_V$ to $\\phi_V(t|_V)$. The rule in [def-pur-sheaf-hom] shows directly that this is a map of sheaves $(T^\\vee)|_U\\to R|_U$: evaluation commutes with restriction and is linear in $\\phi$. It is also linear in $t$ and compatible with varying $U$. Thus $\\delta_T:T\\to T^{\\vee\\vee}$ is defined without a reflexivity assumption. If $x$ has degree $i$ and $\\phi$ has degree $q$ in $D$, then $\\phi(x)$ lies in $O^{i+q}$ and is zero unless $q=-i$. In that unique possibly nonzero degree, $(-1)^{iq}=(-1)^{-i^2}=(-1)^i$, since $i^2-i$ is even. Hence the homogeneous formula in the statement defines degreewise sheaf morphisms $\\beta^i=(-1)^i\\delta_{E^i}$ under step 4.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "def-pur-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A8X, section-hom-complexes, product and differential formulas; Tag 08JJ, lemma-dual-perfect-complex, second proof paragraph, ordinary dual terms and evaluation up to sign."
+   }
+  },
+  {
+   "text": "It remains to check the chain-map equation. For $x\\in E^i(U)$ and every $\\chi\\in(E^{i+1})^\\vee(V)$ on every $V\\to U$, steps 4 and 5 give\n$$ (d_{D'}^i\\beta^i(x))_V(\\chi)=-(-1)^i\\chi_V(d_E^i(x)|_V)=(-1)^{i+1}\\chi_V(d_E^i(x)|_V)=(\\beta^{i+1}(d_E^i x))_V(\\chi). $$\nThese equalities for all $V$ and $\\chi$ are equality of the sheaf maps of [def-pur-sheaf-hom]; thus $d_{D'}^i\\beta^i=\\beta^{i+1}d_E^i$ in every degree. This is the definition of a chain map in [def-pur-hom-complex]. Every calculation used only the Hom definitions and the stated bound, so no exactness or finite-free retract hypothesis has entered.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "def-pur-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A8X, section-hom-complexes, product and differential formulas; Tag 08JJ, lemma-dual-perfect-complex, second proof paragraph, ordinary dual terms and evaluation up to sign."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-hom-complex",
+  "def-pur-sheaf-hom"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0A8X, section-hom-complexes, product and differential formulas; Tag 08JJ, lemma-dual-perfect-complex, second proof paragraph, ordinary dual terms and evaluation up to sign."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -43,10 +121,52 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CochainComplex.HomComplex.δ_hom\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.HomComplex\", \"type\": \": Cochain F G n →ₗ[R] Cochain F G m\", \"doc\": \"The differential $\\\\delta$ of the homomorphism complex $\\\\text{Hom}(F,G)$, viewed as an $R$-linear map from cochains of degree $n$ to cochains of degree $m$. For integers $p,q$ satisfying $p + m = q$, $\"}\n  {\"name\": \"CochainComplex.HomComplex.δ\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.HomComplex\", \"type\": \"(z : Cochain F G n) : Cochain F G m\", \"doc\": \"The differential $\\\\delta$ of the homomorphism complex $\\\\text{Hom}(F,G)$ maps a cochain $z$ of degree $n$ to a cochain of degree $m$ by combining the differentials of $F$ and $G$ with a sign factor $(-\"}\n  {\"name\": \"CochainComplex.HomComplex.δ_zero\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.HomComplex\", \"type\": \": δ n m (0 : Cochain F G n) = 0\", \"doc\": \"The differential $\\\\delta$ of the homomorphism complex $\\\\text{Hom}(F,G)$ maps a cochain $z$ of degree $n$ to a cochain of degree $m$ by combining the differentials of $F$ and $G$ with a sign factor $(-\"}\n  {\"name\": \"CochainComplex.HomComplex_d_hom_apply\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.HomComplex\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Preadditive C]\\n  (F G : CochainComplex C ℤ) (i j : ℤ) (a : CochainComplex.HomComplex.Cochain F G i),\\n  (AddCommGrpCat.Hom.hom ((F.HomComplex G).d i j)) a = CochainComplex.HomComplex.δ i j a\", \"doc\": \"For cochain complexes $F$ and $G$ in a preadditive category, the differential $\\\\delta$ of the homomorphism complex $\\\\text{Hom}(F, G)$ satisfies $\\\\delta(z) = z \\\\circ d_G + (-1)^m d_F \\\\circ z$ for appro\"}\n  {\"name\": \"HomologicalComplex.unop\", \"module\": \"Mathlib.Algebra.Homology.Opposite\", \"type\": \"(X : HomologicalComplex Vᵒᵖ c) : HomologicalComplex V c.symm\", \"doc\": \"Given a homological complex $X$ in the opposite category $\\\\mathcal{V}^{\\\\text{op}}$ with shape $c$, this constructs a homological complex in the original category $\\\\mathcal{V}$ with shape $c^{\\\\text{sym\"}\n  {\"name\": \"HomologicalComplex.unop_d\", \"module\": \"Mathlib.Algebra.Homology.Opposite\", \"type\": \"∀ {ι : Type u_1} {V : Type u_2} [inst : CategoryTheory.Category.{v_1, u_2} V] {c : ComplexShape ι}\\n  [inst_1 : CategoryTheory.Limits.HasZeroMorphisms V] (X : HomologicalComplex Vᵒᵖ c) (i j : ι),\\n  X.unop.d i j = (X.d j i).unop\", \"doc\": \"For a homological complex $X$ in the opposite category $\\\\mathcal{V}^{\\\\text{op}}$ with shape $c$, the differential of the opposite complex $X^{\\\\text{unop}}$ at indices $i$ and $j$ equals the projection\"}\n  {\"name\": \"HomologicalComplex.instHasHomologyOppositeOp\", \"module\": \"Mathlib.Algebra.Homology.Opposite\", \"type\": \"(K : HomologicalComplex V c) (i : ι) [K.HasHomology i] : K.op.HasHomology i\", \"doc\": \"If a homological complex $ K $ has homology at index $ i $, then its opposite complex $ K^\\\\text{op} $ also has homology at the same index $ i $. This follows from the fact that taking opposites revers\"}\n  {\"name\": \"HomologicalComplex.op_d\", \"module\": \"Mathlib.Algebra.Homology.Opposite\", \"type\": \"∀ {ι : Type u_1} {V : Type u_2} [inst : CategoryTheory.Category.{v_1, u_2} V] {c : ComplexShape ι}\\n  [inst_1 : CategoryTheory.Limits.HasZeroMorphisms V] (X : HomologicalComplex V c) (i j : ι), X.op.d i j = (X.d j i).op\", \"doc\": \"For a homological complex $X$ in a category $V$ with zero morphisms and shape $c$, the differential of the opposite complex $X^\\\\text{op}$ at indices $i$ and $j$ is equal to the opposite of the differe\"}",
    "date": "2026-10-21",
    "verdict": "no match: Mathlib HomComplex is the external additive-group complex of morphisms; opposite-complex support does not identify the internal sheaf dual or signed bidual components."
+  },
+  {
+   "tool": "grep",
+   "query": "homComplex.*(dual|single)|bidual|doubleDual",
+   "results": "OK 18 hit(s): Mathlib/MeasureTheory/Function/Holder.lean; Mathlib/MeasureTheory/Function/Holder.lean; Mathlib/Analysis/Normed/Lp/lpHolder.lean; Mathlib/Analysis/Normed/Module/PiTensorProduct/ProjectiveSeminorm.lean; Mathlib/Analysis/Normed/Module/DoubleDual.lean; Mathlib/Analysis/Normed/Module/DoubleDual.lean; Mathlib/Analysis/Normed/Module/DoubleDual.lean; Mathlib/Analysis/Normed/Module/DoubleDual.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: the inspected HomComplex and single-target cochains concern external morphism groups, not the internal sheaf dual and all signed bidual clauses; other hits concern different objects."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex, Module.Dual",
+   "results": "OK 0 hit(s): ",
+   "date": "2026-10-21",
+   "verdict": "no match: the inspected HomComplex and single-target cochains concern external morphism groups, not the internal sheaf dual and all signed bidual clauses; other hits concern different objects."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The dual cochain complex with values in the ring in degree zero has differential negative one to degree plus one times precomposition, and the bidual map has sign negative one to degree",
+   "results": "OK 8 hit(s): CochainComplex.mk_d_1_0; CochainComplex.HomComplex.δ; CochainComplex.HomComplex.δ_hom; CochainComplex.cochainComplex_d_succ_succ_zero; CochainComplex.HomComplex.δ_zero_cochain_comp; CochainComplex.shiftFunctor; CochainComplex.ConnectData.d_negSucc; CochainComplex.HomComplex.δ_zero",
+   "date": "2026-10-21",
+   "verdict": "no match: the inspected HomComplex and single-target cochains concern external morphism groups, not the internal sheaf dual and all signed bidual clauses; other hits concern different objects."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The internal Hom complex of a bounded complex of module sheaves into the ring in degree zero has reversed support and signed termwise bidual evaluation",
+   "results": "OK 8 hit(s): CategoryTheory.Sheaf.H; ChainComplex.linearYonedaObj; Ext; HomologicalComplex.evalCompCoyonedaCorepresentative; HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId_homEquiv_apply; HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId_homEquiv_symm_apply; HomologicalComplex.evalCompCoyonedaCorepresentableBySingle; CategoryTheory.Abelian.Ext.homLinearEquiv",
+   "date": "2026-10-21",
+   "verdict": "no match: the inspected HomComplex and single-target cochains concern external morphism groups, not the internal sheaf dual and all signed bidual clauses; other hits concern different objects."
+  },
+  {
+   "tool": "grep",
+   "query": "def HomComplex|def δ|bidual|dual.*[dD]ifferential|[dD]ifferential.*dual",
+   "results": "OK 11 hit(s): Mathlib/Algebra/Homology/HomotopyCategory/HomComplex.lean; Mathlib/Algebra/Homology/HomotopyCategory/HomComplex.lean; Mathlib/Algebra/Homology/HomotopyCategory/HomComplex.lean; Mathlib/Algebra/Homology/HomologySequence.lean; Mathlib/Algebra/Homology/HomologySequence.lean; Mathlib/Algebra/Homology/ShortComplex/SnakeLemma.lean; Mathlib/Algebra/Homology/ShortComplex/SnakeLemma.lean; Mathlib/Algebra/Homology/SpectralObject/Basic.lean (source subdirectory: Algebra/Homology)",
+   "date": "2026-10-21",
+   "verdict": "no match: the inspected HomComplex and single-target cochains concern external morphism groups, not the internal sheaf dual and all signed bidual clauses; other hits concern different objects."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For cochain complexes over a commutative ring, dualizing twice changes the differential to its negative, and the chain evaluation map in degree i is (-1)^i times evaluation",
+   "results": "OK 8 hit(s): CochainComplex.HomComplex.Cochain.δ_toSingleMk; CochainComplex.ConnectData.d_sub_two_sub_one; CochainComplex.HomComplex.δ_neg; CochainComplex.ConnectData.d_negSucc; CochainComplex.HomComplex.Cochain.δ_single; CochainComplex.HomComplex.δ_v; CochainComplex.HomComplex.Cochain.toSingleMk_neg; CochainComplex.HomComplex.Cochain.fromSingleMk_neg",
+   "date": "2026-10-21",
+   "verdict": "no match: the inspected HomComplex and single-target cochains concern external morphism groups, not the internal sheaf dual and all signed bidual clauses; other hits concern different objects."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-ringed-site-strict-perfect-hom",
@@ -58,7 +178,7 @@
  "blueprint": {
   "from": {
    "node": null,
-   "place": "Documented blueprint location det-thm-sf-ctf-stability-internal-hom; Second paragraph, final sentence: coefficient duality from local strictly perfect representatives; second paragraph, ordinary dual terms in degree -n and bidual evaluation up to sign; signs from section-hom-complexes (original item steps 3 and 4). The computed ancestor is null because the existing parent item created.item is a Lean module name, not a DAG node.",
+   "place": "Documented blueprint location det-thm-sf-ctf-stability-internal-hom, proof second paragraph, final sentence: a locally constant perfect complex is dualizable with coefficient dual. This item supplies the ordinary dual degree calculation and the signed bidual map used by lem-sfb-ringed-site-strict-perfect-hom, steps 2 and 4. The computed ancestor is null because the inherited created.item chain reaches a Lean module name rather than a DAG node.",
    "via": [
     "lem-sfb-ringed-site-strict-perfect-hom",
     "lem-sfb-ringed-site-perfect-duality"
@@ -66,5 +186,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-ringed-site-bounded-dual-components",
+  "worker": "stage1",
+  "summary": "Expanded the ordinary Hom construction into six elementary steps: explicit inverse degree projections, reversed bounds, both differential signs, sectionwise bidual evaluation with its parity sign, and its chain-map equation. Checked Stacks 0A8X/08JJ and the current blueprint; no new nodes, strengthened hypotheses, or changed statement. Repeated Mathlib and project searches found no full attachment or leaf.",
+  "blueprint": "Realizes the coefficient-dual calculation beneath det-thm-sf-ctf-stability-internal-hom, second proof paragraph final sentence, through the parent strict-perfect calculation steps 2 and 4. The null computed ancestor is inherited and its documented location is retained.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NC-7e0dee3b5",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-7e0dee3b5 (reviewer sub-agent of L); spot-checked: I read the item and all six steps in full. The delivery is one commit with the item and the report and no new nodes. The statement and stmt_deps are byte-identical to the live base. Live is still unsplit, so no parallel group has superseded it. The item has no repair note: the 2026-10-21 re-split note is on the parent strict-perfect-hom, so the ≥N-node rule does not apply. The item is not in route-pivot-dropped.txt, and no SGA source is used. I checked Stacks sites-cohomology section-hom-complexes (8571ff): its product and differential d_M f − (−1)^n f d_L match def-pur-hom-complex. Stacks 08JJ proof lines 13094–13104 put the dual terms (E^n)^∨ in degree −n and give the bidual as evaluation up to sign. I recomputed every sign independently. Step 3: (df)^{−q−1} = (−1)^{q+1} φ d^{−q−1}. Step 4: (dΨ)(χ) = (−1)^{i+1}(−1)^{−i} Ψ(χ d^i) = −(d^i)^{∨∨}. Step 5: parity (−1)^{−i²} = (−1)^i. Step 6: the chain-map equation holds on every slice V→U and every χ. The support bounds [−b,−a] include the case a>b. Each step is elementary from def-pur-hom-complex and def-pur-sheaf-hom and states only what those definitions say. Small cases I tested: the identity complex over Z in degrees 0,1 gives β = (id, −id), which is a chain map. Characteristic 2 is consistent. E^0 = Z/2 gives β = 0, which is still valid because the statement claims no invertibility. No duplicates: lem-sfb-ringed-site-duality-maps and the pod biduality nodes are derived or perfect statements. The parent's steps 2 and 4 use exactly these clauses, and there is no cycle. The blueprint fields are unchanged in substance. No fixes."
  }
 }

@@ -20956,3 +20956,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:09 L: merged deliver/Q10/lem-sfb-identity-open-derived-adjunction-normalization (reviewer FIX; first push; new nodes: 0)
 - 08:09 L: merged deliver/Q13/lem-sf-etale-module-stalk-cohomology-test (reviewer PASS; first push; new nodes: 0)
 - 08:09 L: merged deliver/Q16/lem-trf-site-one-sided-tensor-normalization (reviewer PASS; first push; new nodes: 0)
+- 08:09 L: merged deliver/NC/lem-sfb-ringed-site-bounded-dual-components (reviewer PASS; first push; new nodes: 0)
