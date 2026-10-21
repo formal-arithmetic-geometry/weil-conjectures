@@ -19991,3 +19991,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:49 L: merged deliver/N6/lem-pe-scalar-cone-tensor-model (reviewer PASS; first push; new nodes: 0)
 - 03:49 L: merged deliver/Q08/lem-sfb-bounded-finite-model-generation (reviewer PASS; first push; new nodes: 0)
 - 2026-10-21T03:49:13Z L: superseded stage-1 delivery Q85/prop-sfb-module-left-derived-upper-star-comp at 52baf7ecedba2bea4b5f625486a1c567296db665; current completion retained; packet archived at refs/superseded/Q85/prop-sfb-module-left-derived-upper-star-comp/52baf7ecedba2bea4b5f625486a1c567296db665; stale return retired.
+- 2026-10-21T03:49:13Z L: superseded stage-1 delivery Q36/det-sp-reduction-exceptional at 64d7c1cfdb1e667a7056fcf466ef6013e30b3efa; current completion retained; packet archived at refs/superseded/Q36/det-sp-reduction-exceptional/64d7c1cfdb1e667a7056fcf466ef6013e30b3efa; stale return retired.
