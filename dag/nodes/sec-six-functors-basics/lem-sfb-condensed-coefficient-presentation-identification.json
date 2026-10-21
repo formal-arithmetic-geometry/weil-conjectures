@@ -25,15 +25,13 @@
  ],
  "proof": [
   {
-   "text": "For either coefficient input write $\\Lambda=\\underline E$ or $\\Lambda=\\underline\\Omega$. For $E$, both conventions take exactly $C(S,E)$ with the restricted norm topology and pointwise ring operations; for $\\Omega$, both take exactly the continuous functions whose image lies in a single finite intermediate field. Restrictions in both are precomposition. In [sk-def-sfb-pullback-from-point] and [def-weil-pbc-condensed-e-module-category], the site functor is the same $S\\mapsto\\operatorname{Spec}\\operatorname{LC}(S,\\mathbf Z)$, its inverse image is the same sheafified left Kan extension, and $p_X^*$ is the same composite with $\\pi_X^{-1}$. Thus the identity on this input gives the asserted coefficient identification. By [sk-def-sfb-pulled-back-coefficients], both units are $\\mathbf Z\\cong p_X^*\\mathbf Z\\to p_X^*\\Lambda$, and both multiplications are $p_X^*\\Lambda\\otimes p_X^*\\Lambda\\cong p_X^*(\\Lambda\\otimes\\Lambda)\\to p_X^*\\Lambda$; their identification preserves these maps. A coefficient inclusion acts on sections by $a\\mapsto\\iota\\circ a$ in both conventions, also for the inclusion into the specified finite-subfield-valued $\\underline\\Omega$. Applying the same functor $p_X^*$ gives the same map, so all coefficient-inclusion squares commute.",
+   "text": "Unfold coefficientRing, sfbPullbackFromPoint, condensedRingObj, the padic coefficient objects, and coefficientMap. Both bundled coefficient-ring equalities, both scalar-inclusion equalities, and the general mapMon equality are definitional. This uses the specified finite-subfield-valued algebraic-closure ring itself and does not use any Serre-closure theorem or general continuous-map comparison lemma.",
    "uses": [
     "def-sfb-padic-subfield-condensed-ring",
     "sk-def-sfb-qlbar-condensed",
     "sk-def-sfb-pullback-from-point",
     "def-weil-pbc-condensed-e-module-category",
-    "lem-weil-pbc-condensed-constructible-serre",
-    "sk-def-sfb-pulled-back-coefficients",
-    "def-sfb-continuous-map-condensed-ring-map"
+    "sk-def-sfb-pulled-back-coefficients"
    ],
    "elementary": true,
    "source": {
@@ -69,11 +67,10 @@
    }
   },
   {
-   "text": "A witness for [def-sfb-constructible-module] is a finite locally closed stratification $g_a:X_a\\to X$, together with a local finite-presentation witness on every stratum. Step 2 identifies the restricted modules, and step 3 keeps each cover and presentation. This gives a witness for the archived constructibility predicate in [def-weil-pbc-condensed-e-module-category], and in the reverse direction the same data give the original witness. For $\\Omega$ use the identical local-presentation condition specified in [lem-weil-pbc-condensed-constructible-serre]; none of its closure conclusions is needed here. Thus the equivalence holds for both coefficients, with exactly the original strata and presentations.",
+   "text": "Unfold IsConstructibleModuleObject and then IsLocallyFinitelyPresented. The displayed finite-stratification and pro-etale-cover predicate is definitionally equal to constructibility for every input ring, so in particular for each of the two specified coefficient inputs. The same strata, covers, and finitely presented module witnesses work in both directions. No closure property is needed.",
    "uses": [
     "def-sfb-constructible-module",
-    "def-weil-pbc-condensed-e-module-category",
-    "lem-weil-pbc-condensed-constructible-serre"
+    "def-weil-pbc-condensed-e-module-category"
    ],
    "elementary": true,
    "source": {
@@ -82,7 +79,7 @@
    }
   },
   {
-   "text": "The common module category of step 2 has the same cochain complexes, differentials and chain maps. Its cohomology is computed by the same kernels and images; therefore the quasi-isomorphisms are the same. The ordinary localization construction in [def-weil-abstract-derived-category] consequently gives the canonical identification of the ambient derived categories: on complexes and chain maps it is the identity, and it sends the formal inverse of each quasi-isomorphism to the inverse of that same map. These prescriptions in both directions are inverse also on all localized morphisms. The cohomology objects and their vanishing degrees agree. By [sk-def-sfb-bounded-constructible], [def-sfb-dcons-subfield] and [def-sfb-dcons-qlbar], membership is precisely vanishing outside a finite interval and constructibility of every cohomology module. The archived category has precisely these two conditions by [def-weil-pbc-condensed-e-module-category], with the specified $\\Omega$ input when appropriate. Step 4 equates their constructibility conditions, and the identity on cohomology keeps every possible bound $[a,b]$. Their full subcategories thus identify on all objects and all morphisms. Neither membership condition imposes finite Tor amplitude or derived completeness.",
+   "text": "Use mem_boundedConstructible_iff from the existing ordinary derived module category. Given bounds a,b without an ordering assumption, replace the lower bound by min(a,b), retaining b: min(a,b) <= b, and i < min(a,b) implies i < a. Conversely forget the ordering proof. For a specified interval [a,b], bounded constructibility implies constructibility of every cohomology module by the same membership theorem; in the reverse direction the specified vanishing condition itself supplies the bounds. Retain this vanishing witness unchanged in both directions. Finally unfold PadicSubfieldConstructible, PadicAlgClConstructible, BoundedConstructible and the coefficient aliases: the two full-subcategory equalities are reflexive. All ambient arrows are therefore unchanged.",
    "uses": [
     "def-weil-abstract-derived-category",
     "sk-def-sfb-bounded-constructible",
@@ -102,9 +99,7 @@
   "sk-def-sfb-qlbar-condensed",
   "sk-def-sfb-pullback-from-point",
   "def-weil-pbc-condensed-e-module-category",
-  "lem-weil-pbc-condensed-constructible-serre",
   "sk-def-sfb-pulled-back-coefficients",
-  "def-sfb-continuous-map-condensed-ring-map",
   "sk-def-sfb-module-objects",
   "def-sfb-constructible-module",
   "def-sfb-locally-finitely-presented",
@@ -117,7 +112,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-constructible-cocone-obj.proof.md",
-  "place": "Modules paragraph: coefficient rings, common point pullback and stratified local finite presentations; Complexes paragraph: bounded constructible categories (returned ambient-realization steps 1-2)."
+  "place": "Existing five-step comparison proof, implemented by definitional identification and mem_boundedConstructible_iff; ordered bounds obtained using min. U2 stage 3, 2026-10-21."
  },
  "mathlib_searches": [
   {
@@ -292,9 +287,7 @@
   "sk-def-sfb-qlbar-condensed",
   "sk-def-sfb-pullback-from-point",
   "def-weil-pbc-condensed-e-module-category",
-  "lem-weil-pbc-condensed-constructible-serre",
   "sk-def-sfb-pulled-back-coefficients",
-  "def-sfb-continuous-map-condensed-ring-map",
   "sk-def-sfb-module-objects",
   "def-sfb-constructible-module",
   "def-sfb-locally-finitely-presented",
@@ -329,5 +322,15 @@
   "group": "Q47",
   "result": "fix",
   "note": "H3: the fixed-interval clause `∀ K a b, a ≤ b → (bC K ∧ vanish) ↔ (constr ∧ vanish)` parses as `(a ≤ b → …) ↔ …`, confirmed by the #check output; it is false for a=1, b=0 and K≠0. FIX: complete module fixes/CondensedCoefficientPresentationIdentification.lean with `a ≤ b → ((…) ↔ (…))`, plus fixes/<item>.lean-record.json with the verbatim statement. nt_compile --json is clean at 40.1 s and refit_record gives no refusals. All other clauses match the node and its deps: Mon equality of E_X and Ω_X with the archived condensedRingObj, coefficientMap inclusions, coefficientRing = sfbPullbackFromPoint.mapMon, IsConstructibleModuleObject unfolded to the stratification/cover/IsFinitelyPresented witness, mem_boundedConstructible_iff with ordered bounds, and FullSubcategory equalities with PadicSubfield/PadicAlgClConstructible. Universes, Noetherian hypothesis, sorry-only proof and docstrings OK; the delivered file compiled clean at 39.8 s. Advisory: the parent ConstructibleCoconeAmbientRealization's weaker sorried helpers overlap this item; two unused proof-dependency imports; the second-reading placeholder is convention."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261021T171845-L-3164210",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

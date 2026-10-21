@@ -9,8 +9,6 @@ public import Sheaf.AlgebraicGeometry.ProEtalePointPullback
 public import Sheaf.AlgebraicGeometry.ContinuousCoefficientCommRing
 public import Sheaf.AlgebraicGeometry.CoefficientBoundedConstructibleProEtale
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimit
-import Sheaf.AlgebraicGeometry.CondensedConstructibleSerre
-import Sheaf.Topology.ContinuousMapCondensedRingMap
 
 /-!
 # Identification of condensed coefficients and local presentations
@@ -130,6 +128,25 @@ theorem condensed_coefficient_presentation_identification
     (PadicAlgClConstructible X ℓ =
       (boundedConstructible (condensedRingObj
         (Mon.mk (Profinite.padicAlgClRingObj ℓ)).X X)).FullSubcategory) := by
-  sorry
+  refine ⟨rfl, rfl, fun _ _ ↦ rfl, rfl, ?_, rfl, rfl⟩
+  intro Λ _
+  refine ⟨rfl, fun _ ↦ Iff.rfl, ?_, ?_⟩
+  · intro K
+    rw [mem_boundedConstructible_iff]
+    constructor
+    · rintro ⟨⟨a, b, h⟩, hcons⟩
+      refine ⟨⟨min a b, b, min_le_right _ _, fun i hi ↦ ?_⟩, hcons⟩
+      rcases hi with hi | hi
+      · exact h i (Or.inl (lt_of_lt_of_le hi (min_le_left _ _)))
+      · exact h i (Or.inr hi)
+    · rintro ⟨⟨a, b, _, h⟩, hcons⟩
+      exact ⟨⟨a, b, h⟩, hcons⟩
+  · intro K a b _
+    constructor
+    · rintro ⟨hK, hbound⟩
+      exact ⟨((mem_boundedConstructible_iff _ K).mp hK).2, hbound⟩
+    · rintro ⟨hcons, hbound⟩
+      exact ⟨(mem_boundedConstructible_iff _ K).mpr ⟨⟨a, b, hbound⟩, hcons⟩,
+        hbound⟩
 
 end AlgebraicGeometry.ProEtale
