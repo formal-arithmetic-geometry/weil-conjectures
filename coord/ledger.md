@@ -23851,3 +23851,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:52 L: returned deliver/Q85/lem-weil-integral-twist-scalar-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-integral-twist-scalar-coherence: lem-weil-int)
 - 21:54 L: merged deliver/NL/lem-sfb-countable-split-profinite-cover (stage 2; reviewer PASS; parallel immutable checks)
 - 21:54 L: returned deliver/Q09/lem-sfb-lattice-koszul-triangulated-cup-comparison (reviewer RETURN: L: independent stage-2 immutable head bdc4ce08b4f8: H3(1): TriangulatedModel.commShift is a free field constrained only )
+- 21:55 L: merged deliver/NF/lem-sfb-norm-algcl-profinite-cech-exact (stage 2; reviewer PASS; parallel immutable checks)

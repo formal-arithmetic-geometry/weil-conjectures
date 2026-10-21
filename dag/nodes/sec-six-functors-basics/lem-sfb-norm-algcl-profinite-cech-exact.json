@@ -10,7 +10,8 @@
  "stmt_deps": [
   "def-weil-algebraic-closure",
   "def-weil-size-convention",
-  "def-sfb-continuous-map-condensed-ring"
+  "def-sfb-continuous-map-condensed-ring",
+  "def-sfb-profinite-cech-tuples"
  ],
  "proof": [
   {
@@ -418,5 +419,33 @@
   "group": "NI",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NI-2dfde744e (reviewer sub-agent of L); spot-checked: Read the item, the new node, every cited statement and the old item statement (NC snapshot). The old global claim is false: every positive-degree Cech cocycle in C(T_V^{n+1},Omega) for noncomplete Omega = algebraic closure of Q_l was said to have a continuous primitive. I checked the counterexample independently. The cover is the graph closure over Cantor space with eventually-alternating sequences split in two. Over v not in D the fibres are singletons, because the lexicographic comparisons are locally constant. Over v_k there are exactly two points, since v_k is approached from both sides by eventually constant sequences. The oriented pairs are clopen in R by a kth-bit condition, and tail density holds via B = V minus q(T minus U). The cocycle f with values a_k, |a_k| <= l^-k, is a uniform limit of continuous f_N, and d^1 f = 0 holds through a fibrewise potential. No continuous primitive g exists: Baire on g^-1(F_j) gives a_k in F_j, contained in F_k. a_k is not in F_k: if b_k^2 = pi_k with b_k in F_k, then 2m = 1. Clause (2) contraction signs checked, including the t_0 face, n=1, the base change via the diagonal section of q', and the empty case. The correction is legitimate under brief-stage1 section 1 and E7, is named in the report, and no target or unit statement is touched. The new node is self-contained topology, not a restated clause, with no duplicate found by rg -L over dag/nodes. Batch-5: lem-sfb-algcl-countable-closed-finite-cover reaches lem-trf-irreducible-separable-derivative (irreducible f is separable iff f' != 0). That is general field algebra outside both assumptions, so I accept it. FIX: step 8 cites lem-sfb-finite-quotient-fiber-product, whose unit sk-def-sfb-pullback-from-point is outside the route, without a tool_uses entry. I added one in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-norm-algcl-profinite-cech-exact.json. Maintainer: the parent lem-sfb-norm-algcl-bar-augmentation, step 3, relies on the disproved global exactness and must be reopened. Also rename the item's title.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Topology.NormAlgclProfiniteCechExact",
+  "declaration": "Profinite.NormAlgclCech.normAlgclProfiniteCech_counterexample_and_local_contraction",
+  "declarations": [
+   "Profinite.NormAlgclCech.prepend",
+   "Profinite.NormAlgclCech.sectionInsert",
+   "Profinite.NormAlgclCech.baseChange",
+   "Profinite.NormAlgclCech.projection",
+   "Profinite.NormAlgclCech.forgetBase",
+   "Profinite.NormAlgclCech.baseInsert",
+   "Profinite.NormAlgclCech.normAlgclProfiniteCech_counterexample_and_local_contraction"
+  ],
+  "file": "lean/Sheaf/Topology/NormAlgclProfiniteCechExact.lean",
+  "statement": "theorem normAlgclProfiniteCech_counterexample_and_local_contraction (l : ℕ) [Fact l.Prime] (Ω : Type u) [NormedField Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω] (hΩ : ∀ a : Padic l, ‖algebraMap (Padic l) Ω a‖ = ‖a‖) : (∃ (T V : Profinite.{v}), Nonempty T ∧ Nonempty V ∧ TopologicalSpace.MetrizableSpace T ∧ TopologicalSpace.MetrizableSpace V ∧ ∃ (q : C(T, V)), Function.Surjective q ∧ ∃ f : C(scalarCechTuples q 2, Ω), (∀ x : scalarCechTuples q 3, ∑ j : Fin 3, (-1 : Ω) ^ j.val * f (scalarCechDelete q 2 j x) = 0) ∧ ¬ ∃ g : C(scalarCechTuples q 1, Ω), ∀ x : scalarCechTuples q 2, ∑ j : Fin 2, (-1 : Ω) ^ j.val * g (scalarCechDelete q 1 j x) = f x) ∧ (∀ (T V : Profinite.{v}) (q : C(T, V)), Function.Surjective q → ∀ (σ : C(V, T)) (hσ : Function.RightInverse σ q) (n : ℕ) (f : C(scalarCechTuples q (n + 2), Ω)), (∀ x : scalarCechTuples q (n + 3), ∑ j : Fin (n + 3), (-1 : Ω) ^ j.val * f (scalarCechDelete q (n + 2) j x) = 0) → ∃ g : C(scalarCechTuples q (n + 1), Ω), (∀ x : scalarCechTuples q (n + 1), g x = f (sectionInsert q σ hσ n x)) ∧ ∀ x : scalarCechTuples q (n + 2), ∑ j : Fin (n + 2), (-1 : Ω) ^ j.val * g (scalarCechDelete q (n + 1) j x) = f x) ∧ (∀ (T V : Profinite.{v}) (q : C(T, V)), Function.Surjective q → ∀ (n : ℕ) (f : C(scalarCechTuples q (n + 2), Ω)), (∀ x : scalarCechTuples q (n + 3), ∑ j : Fin (n + 3), (-1 : Ω) ^ j.val * f (scalarCechDelete q (n + 2) j x) = 0) → ∃ F : C(scalarCechTuples (projection q) (n + 2), Ω), (∀ x : scalarCechTuples (projection q) (n + 2), F x = f (forgetBase q (n + 2) x)) ∧ ∃ h : C(scalarCechTuples (projection q) (n + 1), Ω), (∀ x : scalarCechTuples (projection q) (n + 1), h x = f (baseInsert q n x)) ∧ ∀ x : scalarCechTuples (projection q) (n + 2), ∑ j : Fin (n + 2), (-1 : Ω) ^ j.val * h (scalarCechDelete (projection q) (n + 1) j x) = F x)",
+  "branch": "sheaf-dag",
+  "by": "NF",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "States the current reviewed NI node verbatim in meaning: a nonempty metrizable profinite degree-one counterexample, and the explicitly prescribed split-cover and diagonal-base-change primitives in all positive degrees. Omega is any IsAlgClosure (Padic l) with a norm extending the p-adic norm, without completion. The new definition dependency def-sfb-profinite-cech-tuples records the unchanged existing scalarCechTuples and scalarCechDelete helpers. No theorem conclusion from NormedScalarProfiniteCechExact is used. Positive degree n+1 is indexed by n : Nat; n=0 includes degree one. The base change is Mathlib's explicit profinite pullback. Original statement, proof, proof_deps, split_report and review metadata are preserved."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a6db52350",
+  "group": "NF",
+  "result": "pass",
+  "note": "Re-delivery after the H2 RETURN of 1704e764: the theorem stmt_dep lem-sfb-normed-scalar-profinite-cech-exact is replaced by the new def node def-sfb-profinite-cech-tuples (existing:true on the unchanged NormedScalarProfiniteCechExact module, owning scalarCechTuples/scalarCechDelete; statement matches the live abbrev/def including r=0 and succAbove deletion; header verbatim; H12 fields present; no other owner in side-live). Lean module byte-identical to the previously reviewed head, whose mathematics was checked correct (IsAlgClosure Padic with norm extension, no completion; clause (1) nonempty metrizable counterexample; split and diagonal-base-change contractions for all degrees n+1; empty case). Item JSON differs from live only in lean and stmt_deps. Report sections present. Not recompiled per instruction. Maintainer notes: possible later unification with def-sfb-set-cech-nerve; parent bar-augmentation step 3 still relies on the disproved exactness."
  }
 }
