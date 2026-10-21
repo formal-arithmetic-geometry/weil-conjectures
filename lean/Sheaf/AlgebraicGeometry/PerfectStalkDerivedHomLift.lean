@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.AlgebraicGeometry.OpenModuleStalkFunctor
 import WeilConjectures.AlgebraicGeometry.PerfectAffineMapRepresentative
-import Sheaf.AlgebraicGeometry.PerfectOpenStalkDerivedHomDescent
+import WeilConjectures.AlgebraicGeometry.PerfectOpenStalkDerivedHomDescent
 import WeilConjectures.AlgebraicGeometry.Modules.RestrictionStalkExtensionIso
 
 /-! # Lifting a derived stalk morphism to a chain map between local perfect models
@@ -105,6 +105,7 @@ private theorem local_model_stalk_comparison
       (asIso (ModuleCat.extendRestrictScalarsAdj ρ).unit) (.up ℤ)).app C).symm
   exact ⟨d ≪≫ DerivedCategory.Q.mapIso q⟩
 
+set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency false in
 /-- An arbitrary derived stalk morphism lifts to a chain map between strictly perfect
 models restricted to a smaller affine neighbourhood. The stalk comparison isomorphisms identify
@@ -173,9 +174,9 @@ theorem exists_affine_perfect_stalk_hom_lift
             cG.hom ≫ t ≫ cH.inv := by
   obtain ⟨a⟩ := local_model_stalk_comparison X x U hxU G P iG
   obtain ⟨b⟩ := local_model_stalk_comparison X x U hxU H Q iH
-  obtain ⟨V, hxV, hV, hVU, cP, cQ, g, hg⟩ :=
+  obtain ⟨V, hxV, hV, hVU, g, hg⟩ :=
     exists_affine_perfect_open_stalk_derived_hom_descent
-      X x U hxU hU P Q hP hQ (a.hom ≫ t ≫ b.inv)
+      X x U hxU P Q hP (a.hom ≫ t ≫ b.inv)
   let R := moduleRings X.toRingedSpace
   let T := (SheafOfModules.overMap.{u} R (homOfLE hVU : V ⟶ U)).mapHomologicalComplex
     (.up ℤ)
@@ -188,6 +189,12 @@ theorem exists_affine_perfect_stalk_hom_lift
     AlgebraicGeometry.openModuleStalkFunctor_preservesFiniteLimits X V ⟨x, hxV⟩
   have : PreservesFiniteColimits S :=
     AlgebraicGeometry.openModuleStalkFunctor_preservesFiniteColimits X V ⟨x, hxV⟩
+  let c : T ⋙ S.mapHomologicalComplex (.up ℤ) ≅
+      (openModuleStalkFunctor X U ⟨x, hxU⟩).mapHomologicalComplex (.up ℤ) :=
+    Functor.mapHomologicalComplexCompIso
+      (openModuleStalkRestrictionComparison X U V hVU x hxU hxV) (.up ℤ)
+  let cP := DerivedCategory.Q.mapIso (c.app P)
+  let cQ := DerivedCategory.Q.mapIso (c.app Q)
   let F := SheafOfModules.overMap.{u} R (homOfLE hVU : V ⟶ U)
   let e := fun m : ℕ ↦ (SheafOfModules.mapFreeIso F (ULift.{u} (Fin m))
     (SheafOfModules.overMapUnitIso (R := R) (homOfLE hVU)).symm).symm
@@ -208,6 +215,7 @@ theorem exists_affine_perfect_stalk_hom_lift
     simp
   rw [he, hg]
   simp only [Iso.trans_hom, Iso.trans_inv, Category.assoc]
+  rfl
 
 end
 end AlgebraicGeometry.Scheme

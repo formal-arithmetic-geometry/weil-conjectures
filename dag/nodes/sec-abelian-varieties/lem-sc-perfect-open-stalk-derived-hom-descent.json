@@ -30,14 +30,14 @@
    "elementary": true
   },
   {
-   "text": "Apply the existing source exists_affine_perfect_open_stalk_chainMap_lift to f, using strict perfectness of P. It gives an affine V inside U containing x and a chain map g between the restrictions. Define e to be the canonical termwise openModuleStalkRestrictionComparison specified by the source result. Then S.map g = e_P.hom followed by f followed by e_Q.inv. The original assumptions hU and hQ are unused but their binders stay unchanged.",
+   "text": "Apply the existing source exists_affine_perfect_open_stalk_chainMap_lift to f, using strict perfectness of P. It gives an affine V inside U containing x and a chain map g between the restrictions. Define e to be the canonical termwise openModuleStalkRestrictionComparison specified by the source result. Then S.map g = e_P.hom followed by f followed by e_Q.inv. Neither affineness of U nor strict perfectness of Q is needed; those extra assumptions of the unchanged node statement may be ignored.",
    "uses": [
     "lem-sc-perfect-open-stalk-chain-map-lift"
    ],
    "elementary": false
   },
   {
-   "text": "Take cP = Q.mapIso(e.app P), cQ = Q.mapIso(e.app Q), and the derived map Q.map g. Naturality of S.mapDerivedCategoryFactors.hom rewrites the derived image of Q.map g as Q.map(S.map g), after cancelling the factorization isomorphism. Substitute the lifted chain-map equality, distribute Q.map over composition, and use Q.map f = t. The resulting equality is precisely the required equation.",
+   "text": "Take cP = Q.mapIso(e.app P), cQ = Q.mapIso(e.app Q), and the derived map Q.map g. Naturality of S.mapDerivedCategoryFactors.hom rewrites the derived image of Q.map g as Q.map(S.map g), after cancelling the factorization isomorphism. Substitute the lifted chain-map equality, distribute Q.map over composition, and use Q.map f = t. The resulting equality is precisely the required equation. The source theorem fixes cP and cQ to these canonical comparisons. Choosing these two isomorphisms as existential witnesses gives the original node assertion without changing its statement.",
    "uses": [
     "def-sc-open-module-stalk-functor"
    ],
@@ -53,10 +53,10 @@
  ],
  "proof_origin": {
   "by": "worker",
+  "group": "B5",
+  "date": "2026-10-21",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 09RE affine case (1), bounded-projective chain representatives and finite-component descent; Tag 0BC7 (2). J2 uses the existing open-stalk chain-map lift and Mathlib K-projective localization, without affine derived equivalences or a derived Hom colimit presentation.; retire the duplicate chain-map lift and use its proved source implementation, naming the canonical comparison explicitly without changing this consumer statement.",
-  "group": "F6",
-  "date": "2026-10-21"
+  "place": "Tag 09RE affine case (1), bounded-projective chain representatives and finite-component descent; Tag 0BC7 (2). Reuse the already proved source theorem, retaining the K-projective and chain-map-lift route. The canonical comparisons supply the existential witnesses of the unchanged node statement."
  },
  "mathlib_searches": [
   {
@@ -124,14 +124,15 @@
  "chapter": "sec-abelian-varieties",
  "unit": "sk-prop-av-cube",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.PerfectOpenStalkDerivedHomDescent",
-  "file": "lean/Sheaf/AlgebraicGeometry/PerfectOpenStalkDerivedHomDescent.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.PerfectOpenStalkDerivedHomDescent",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/PerfectOpenStalkDerivedHomDescent.lean",
   "declaration": "AlgebraicGeometry.Scheme.exists_affine_perfect_open_stalk_derived_hom_descent",
-  "statement": "theorem exists_affine_perfect_open_stalk_derived_hom_descent\n    (X : Scheme.{u})\n    [∀ W : X.Opens,\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over W))]\n    (x : X) [HasDerivedCategory.{v} (ModuleCat.{u} (X.presheaf.stalk x))]\n    (U : X.Opens) (hxU : x ∈ U) (hU : IsAffineOpen U)\n    (P Q : CochainComplex\n      (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ)\n    (hP : IsStrictlyPerfect X U P) (hQ : IsStrictlyPerfect X U Q)\n    :\n    let SU : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U) ⥤\n        ModuleCat.{u} (X.presheaf.stalk x) := openModuleStalkFunctor X U ⟨x, hxU⟩\n    letI : SU.PreservesZeroMorphisms :=\n      AlgebraicGeometry.openModuleStalkFunctor_preservesZeroMorphisms X U ⟨x, hxU⟩\n    ∀ t : DerivedCategory.Q.obj ((SU.mapHomologicalComplex (.up ℤ)).obj P) ⟶\n      DerivedCategory.Q.obj ((SU.mapHomologicalComplex (.up ℤ)).obj Q),\n    ∃ (V : X.Opens) (hxV : x ∈ V) (_hV : IsAffineOpen V) (hVU : V ≤ U),\n      let T := (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)\n        (homOfLE hVU : V ⟶ U)).mapHomologicalComplex (.up ℤ)\n      let S : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over V) ⥤\n          ModuleCat.{u} (X.presheaf.stalk x) := openModuleStalkFunctor X V ⟨x, hxV⟩\n      letI : S.PreservesZeroMorphisms :=\n        AlgebraicGeometry.openModuleStalkFunctor_preservesZeroMorphisms X V ⟨x, hxV⟩\n      letI : S.Additive :=\n        AlgebraicGeometry.openModuleStalkFunctor_additive X V ⟨x, hxV⟩\n      letI : PreservesFiniteLimits S :=\n        AlgebraicGeometry.openModuleStalkFunctor_preservesFiniteLimits X V ⟨x, hxV⟩\n      letI : PreservesFiniteColimits S :=\n        AlgebraicGeometry.openModuleStalkFunctor_preservesFiniteColimits X V ⟨x, hxV⟩\n      ∃ (cP : DerivedCategory.Q.obj ((S.mapHomologicalComplex (.up ℤ)).obj (T.obj P)) ≅\n          DerivedCategory.Q.obj\n            ((SU.mapHomologicalComplex (.up ℤ)).obj P))\n        (cQ : DerivedCategory.Q.obj ((S.mapHomologicalComplex (.up ℤ)).obj (T.obj Q)) ≅\n          DerivedCategory.Q.obj\n            ((SU.mapHomologicalComplex (.up ℤ)).obj Q))\n        (g : DerivedCategory.Q.obj (T.obj P) ⟶ DerivedCategory.Q.obj (T.obj Q)),\n        (S.mapDerivedCategoryFactors.app (T.obj P)).inv ≫\n          S.mapDerivedCategory.map g ≫ (S.mapDerivedCategoryFactors.app (T.obj Q)).hom =\n            cP.hom ≫ t ≫ cQ.inv",
+  "statement": "theorem exists_affine_perfect_open_stalk_derived_hom_descent\n    (X : Scheme.{u})\n    [∀ W : X.Opens,\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over W))]\n    (x : X) [HasDerivedCategory.{v} (ModuleCat.{u} (X.presheaf.stalk x))]\n    (U : X.Opens) (hxU : x ∈ U)\n    (P Q : CochainComplex\n      (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ)\n    (hP : IsStrictlyPerfect X U P) :\n    let SU : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U) ⥤\n        ModuleCat.{u} (X.presheaf.stalk x) := openModuleStalkFunctor X U ⟨x, hxU⟩\n    letI : SU.PreservesZeroMorphisms :=\n      AlgebraicGeometry.openModuleStalkFunctor_preservesZeroMorphisms X U ⟨x, hxU⟩\n    ∀ t : DerivedCategory.Q.obj ((SU.mapHomologicalComplex (.up ℤ)).obj P) ⟶\n      DerivedCategory.Q.obj ((SU.mapHomologicalComplex (.up ℤ)).obj Q),\n    ∃ (V : X.Opens) (hxV : x ∈ V) (_hV : IsAffineOpen V) (hVU : V ≤ U),\n      let T := (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)\n        (homOfLE hVU : V ⟶ U)).mapHomologicalComplex (.up ℤ)\n      let S : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over V) ⥤\n          ModuleCat.{u} (X.presheaf.stalk x) := openModuleStalkFunctor X V ⟨x, hxV⟩\n      letI : S.PreservesZeroMorphisms :=\n        AlgebraicGeometry.openModuleStalkFunctor_preservesZeroMorphisms X V ⟨x, hxV⟩\n      letI : S.Additive :=\n        AlgebraicGeometry.openModuleStalkFunctor_additive X V ⟨x, hxV⟩\n      letI : PreservesFiniteLimits S :=\n        AlgebraicGeometry.openModuleStalkFunctor_preservesFiniteLimits X V ⟨x, hxV⟩\n      letI : PreservesFiniteColimits S :=\n        AlgebraicGeometry.openModuleStalkFunctor_preservesFiniteColimits X V ⟨x, hxV⟩\n      let c : T ⋙ S.mapHomologicalComplex (.up ℤ) ≅ SU.mapHomologicalComplex (.up ℤ) :=\n        Functor.mapHomologicalComplexCompIso\n          (openModuleStalkRestrictionComparison X U V hVU x hxU hxV) (.up ℤ)\n      let cP := DerivedCategory.Q.mapIso (c.app P)\n      let cQ := DerivedCategory.Q.mapIso (c.app Q)\n      ∃ g : DerivedCategory.Q.obj (T.obj P) ⟶ DerivedCategory.Q.obj (T.obj Q),\n        (S.mapDerivedCategoryFactors.app (T.obj P)).inv ≫\n          S.mapDerivedCategory.map g ≫ (S.mapDerivedCategoryFactors.app (T.obj Q)).hom =\n            cP.hom ≫ t ≫ cQ.inv",
   "branch": "sheaf-dag",
-  "by": "M3",
-  "date": "2026-10-13"
+  "by": "B5",
+  "date": "2026-10-21",
+  "note": "Retired the duplicate Sheaf module listed in coord/retire-items.tsv. The existing proved source theorem gives canonical restriction comparisons and does not require affineness of U or strict perfectness of Q. Choose its canonical comparisons as the existential witnesses in the unchanged node statement. The sole consumer retains its full public signature and constructs those comparisons explicitly. All node dependencies and the unit route are preserved."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -144,14 +145,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "C-a275a",
-  "group": "F6",
+  "reviewer": "C-4f401",
+  "group": "B5",
   "result": "pass",
-  "landing": "20261020T233140-L-899237",
+  "landing": "20261021T001104-L-1369547",
   "kind": "interface",
-  "note": "independent cc review: Retired Sheaf ChainMapLift stub + node lean record (existing:true) vs the live WeilConjectures twin (signature verbatim, stronger than the node: no hU/hQ, canonical e) and the retire-items.tsv row; both adapted consumers diffed against live (only forced lines changed) and compiled, plus the indirect importer PerfectStalkDerivedHomLift; twin's axioms clean"
+  "note": "independent cc review: retired Sheaf PerfectOpenStalkDerivedHomDescent stub + node lean record (existing:true) vs live WeilConjectures twin (signature verbatim, stronger: no hU/hQ, canonical cP/cQ) and retire-items.tsv row 1353; adapted sole consumer PerfectStalkDerivedHomLift diffed vs live (only forced lines) and compiled; axioms clean"
  },
  "lean_audit": {
   "master": {
