@@ -13,9 +13,70 @@
   "lem-weil-linear-abelian-derived-category",
   "def-weil-linear-functor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $P=u^*$ and $G=u_*$ for the underived module functors of [def-weil-pbc-proetale-operations]. For an object $W$ of the site of $V$, put $W_U=U\\times_V W$. The scalar $a\\in A$ acts on $(GM)(W)=M(W_U)$ through the image of $a$ under $A\\to R_V(W)\\to R_U(W_U)$. The $A$-compatibility of $c$ identifies this image with the restriction to $W_U$ of the specified global section of $R_U$. Thus, for parallel module-sheaf maps $h,k:M\\to N$, the equalities $G(h+k)_W=h_{W_U}+k_{W_U}$ and $G(ah)_W=a h_{W_U}$ hold sectionwise. They commute with restrictions, giving equalities of sheaf maps. In each module-sheaf category the sum and scalar action on Hom are sectionwise; the module laws and bilinearity of composition are checked on sections. These are the $A$-linear category structures of [def-weil-linear-category]. Consequently $G$ is additive and $A$-linear.",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "def-weil-linear-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D3, lemma-adjoint-push-pull-modules, module adjunction and unit formula; elementary scalar refinement using dga.tex Tag 09MK, definition-functor-linear-categories."
+   }
+  },
+  {
+   "text": "Use the underived module adjunction $P\\dashv G$ of [def-weil-pbc-proetale-operations], with unit $\\eta$. For fixed module sheaves $M,N$ on $V$, its bijection $\\Phi:\\operatorname{Hom}(PM,PN)\\to\\operatorname{Hom}(M,GPN)$ is $h\\mapsto G(h)\\circ\\eta_M$. Step 1 and bilinearity of composition [def-weil-linear-category] show directly that $\\Phi(h+k)=\\Phi(h)+\\Phi(k)$ and $\\Phi(ah)=a\\Phi(h)$. Naturality of $\\eta$ gives $\\Phi(Ps)=\\eta_N\\circ s$ for each $s:M\\to N$. Therefore $\\Phi(P(s+t))=\\eta_N\\circ(s+t)=\\Phi(Ps+Pt)$ and $\\Phi(P(as))=\\eta_N\\circ(as)=\\Phi(aPs)$. Injectivity of $\\Phi$ proves that $P$ is additive and $A$-linear. This uses only the given ordinary adjunction, without presupposing that its Hom bijection is linear.",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "def-weil-linear-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D3, lemma-adjoint-push-pull-modules, module adjunction and unit formula; elementary scalar refinement using dga.tex Tag 09MK, definition-functor-linear-categories."
+   }
+  },
+  {
+   "text": "The identified-coefficient construction [def-weil-pbc-proetale-operations] makes $P$ exact and defines $L_u=Lu^*$ by applying $P$ termwise and passing to the ordinary unbounded derived categories. In particular $P$ is additive and preserves finite limits and finite colimits; the coefficient isomorphism, rather than any flatness hypothesis on $u$ as a scheme morphism, is what supplies exactness here. The source and target have precisely the induced $A$-linear derived structures of [lem-weil-linear-abelian-derived-category]. Apply [lem-cbc-exact-linear-derived-functor] with $R=A$, $\\mathcal A=\\operatorname{Mod}(R_V)$, $\\mathcal B=\\operatorname{Mod}(R_U)$ and $F=P$, using step 2 for linearity. It gives $L_u(s+t)=L_u(s)+L_u(t)$ and $L_u(as)=aL_u(s)$ on all derived morphisms.",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-linear-abelian-derived-category",
+    "lem-cbc-exact-linear-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04JC, lemma-flat-pullback-exact, identified-coefficient exactness; Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean:27-43,120-125, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory. Agent refinement of Stacks Tag 09MK."
+   }
+  },
+  {
+   "text": "Finally use the ordinary unbounded derived adjunction $L_u\\dashv D_u$ stated in [def-weil-pbc-proetale-operations], and let $\\epsilon:L_uD_u\\to\\mathrm{id}$ be its counit. For fixed $X,Y\\in D(R_U)$ its bijection $\\Psi:\\operatorname{Hom}(D_uX,D_uY)\\to\\operatorname{Hom}(L_uD_uX,Y)$ sends $h$ to $\\epsilon_Y\\circ L_u(h)$. By step 3 and bilinear composition [def-weil-linear-category], $\\Psi$ preserves addition and $A$-scalars. Counit naturality gives $\\Psi(D_u(s))=s\\circ\\epsilon_X$ for $s:X\\to Y$. Consequently $\\Psi(D_u(s+t))=(s+t)\\circ\\epsilon_X=\\Psi(D_u(s)+D_u(t))$ and $\\Psi(D_u(as))=(as)\\circ\\epsilon_X=\\Psi(aD_u(s))$. Injectivity proves both required identities for $D_u$. Together with step 3 these are exactly additive $A$-linearity [def-weil-linear-functor]. Every Hom and adjunction used is in the ordinary unbounded categories; no boundedness, completeness or constructibility has been introduced.",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "def-weil-linear-category",
+    "def-weil-linear-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09MK, definition-functor-linear-categories; agent-written counit calculation for the ordinary derived adjunction specified in def-weil-pbc-proetale-operations. The adjunction itself is not re-proved here."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proetale-operations",
+  "def-weil-linear-category",
+  "lem-weil-linear-abelian-derived-category",
+  "lem-cbc-exact-linear-derived-functor",
+  "def-weil-linear-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tag 09MK, definition-functor-linear-categories: agent-written linearity refinement of the module adjunction in sites-modules.tex Tag 03D3, lemma-adjoint-push-pull-modules, and the existing ordinary unbounded derived adjunction. Exact derived linearity is the existing Mathlib leaf lem-cbc-exact-linear-derived-functor. No K-injective resolution is assumed to be a linear choice."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,10 +112,38 @@
    "results": "8 hits: CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, DerivedCategory.instLinearCochainComplexIntQ, DerivedCategory.instLinear, DerivedCategory.instLinearHomotopyCategoryIntUpQh, DerivedCategory.instLinearSingleFunctor, Ext, DerivedCategory.instLinearShiftFunctorInt, CategoryTheory.Functor.mapExactFunctor_smul",
    "date": "2026-10-21",
    "verdict": "no match: ordinary sheaf adjunctions and exact linear derived functors are partial ingredients; none states linearity of unbounded right derived module direct image for the identified, possibly nonconstant ring sheaves. ExactFunctor.lean:122 handles only the exact pullback clause."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived pullback and pushforward of modules over sheaves of rings preserve scalar multiplication",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pushforward, PresheafOfModules.map_smul, SheafOfModules.pullback, PresheafOfModules.Sheafify.SMulCandidate.h, PresheafOfModules.pullback, AlgebraicGeometry.Scheme.Modules.pullback, PresheafOfModules.pushforward₀, PresheafOfModules.pushforward₀_obj_obj_isModule",
+   "date": "2026-10-21",
+   "verdict": "no match: none states the combined arbitrary identified-ring-sheaf unbounded operations claim. Exact derived linearity is an ingredient already represented by lem-cbc-exact-linear-derived-functor; the remaining claims are proved by the displayed adjunction calculations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unbounded derived inverse image and direct image of modules over sheaves of A algebras are A linear functors",
+   "results": "8 hits: SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules, SheafOfModules.mapFree, SheafOfModules.pushforward, SheafOfModules.ιFree_mapFree_inv, SheafOfModules.instIsRightAdjointPushforward, SheafOfModules.map_ιFree_mapFree_hom, SheafOfModules.freeFunctorCompPullbackIso",
+   "date": "2026-10-21",
+   "verdict": "no match: none states the combined arbitrary identified-ring-sheaf unbounded operations claim. Exact derived linearity is an ingredient already represented by lem-cbc-exact-linear-derived-functor; the remaining claims are proved by the displayed adjunction calculations."
+  },
+  {
+   "tool": "grep",
+   "query": "left_adjoint_linear|right_adjoint_linear",
+   "results": "0 hits: none",
+   "date": "2026-10-21",
+   "verdict": "no match: none states the combined arbitrary identified-ring-sheaf unbounded operations claim. Exact derived linearity is an ingredient already represented by lem-cbc-exact-linear-derived-functor; the remaining claims are proved by the displayed adjunction calculations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact linear functor induces a linear functor on unbounded derived categories and either adjoint to a linear functor is linear",
+   "results": "8 hits: CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, DerivedCategory.instLinearCochainComplexIntQ, DerivedCategory.instLinear, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, DerivedCategory.instLinearHomotopyCategoryIntUpQh, DerivedCategory.instLinearSingleFunctor, CategoryTheory.Functor.mapDerivedCategory",
+   "date": "2026-10-21",
+   "verdict": "no match: none states the combined arbitrary identified-ring-sheaf unbounded operations claim. Exact derived linearity is an ingredient already represented by lem-cbc-exact-linear-derived-functor; the remaining claims are proved by the displayed adjunction calculations."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sbc-completed-operations-linear-natural-exchange",
@@ -66,12 +155,27 @@
  "blueprint": {
   "from": {
    "node": "sbc-thm-e-coefficient-smooth-base-change",
-   "place": "Proof, central-localization sentence: integral linear operations before inverting the uniformizer; original step 2 of lem-sbc-completed-operations-linear-natural-exchange.",
+   "place": "Proof of sbc-thm-e-coefficient-smooth-base-change, central-localization sentence: “central localization (inverting multiplication by the uniformizer)”; integral scalar-linearity prerequisite, before completion and scalar localization, of step 2 of lem-sbc-completed-operations-linear-natural-exchange.",
    "via": [
     "lem-sbc-completed-operations-linear-natural-exchange"
    ]
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sbc-ambient-operations-scalar-linearity",
+  "worker": "stage1",
+  "summary": "Preserved the full arbitrary identified-ring-sheaf unbounded statement. Proved ordinary direct-image linearity sectionwise, underived inverse-image linearity by an explicit unit calculation, derived inverse-image linearity by the existing exact-linear-derived Mathlib leaf, and derived direct-image linearity by the dual counit calculation. No new nodes and no unproved linearity assumption on a choice of resolutions. Project declarations cover fixed coefficient sheaves only, not this arbitrary ring-sheaf statement. Searches and source readings recorded in report.md.",
+  "blueprint": "The central-localization sentence of the ancestor proof requires integral operations to preserve scalars. Steps 1-2 establish the sheaf-level prerequisite, step 3 derives exact inverse image, and step 4 establishes unbounded direct-image linearity; completion and rationalization are outside this item."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NC-b4bdb665b",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-b4bdb665b (reviewer sub-agent of L); spot-checked: I read the item, all four steps and every cited statement in full. The delivery has no new nodes. The statement is byte-identical to the base (sha1 prefix bcc09fd9de), so it is not weakened. The item is neither dropped nor under a re-split note. Stacks 09MK/070I/03D3/04JC are checked in tags/tags and 09MK at dga.tex l.2887; no SGA is used. Step 1: u_* is linear sectionwise, (u_*M)(W)=M(W_U), and the A-action goes through R_V(W)->R_U(W_U), which equals a_U because c respects the A-structures; that hypothesis is genuinely used. Step 2: u^* is linear because Phi(h)=G(h)eta_M is linear by step 1, naturality gives Phi(Ps)=eta_N s, and Phi is injective; there is no circularity. Step 3: def-weil-pbc-proetale-operations explicitly states that u^* is exact and that Lu^* is the termwise derived functor. lem-cbc-exact-linear-derived-functor applies with A-linear Mod(R_W) and the derived structures of lem-weil-linear-abelian-derived-category. The two termwise constructions are the same factorization through Q_A, and linearity would transfer through a natural iso in any case. Step 4: Ru_* is linear because Psi(h)=eps_Y L_u(h) is linear, Psi(D_u s)=s eps_X, and Psi is injective; no linear choice of K-injective resolutions is assumed, and the argument holds for unbounded complexes. Edge cases u=id, A=0, a=0/1 and non-injective A->Gamma(R) all hold. Every cited node states what its step uses, and I found no duplicate. Minor: the source place still mentions 070I although the proof does not use it, which is harmless. No fixes were made."
  }
 }
