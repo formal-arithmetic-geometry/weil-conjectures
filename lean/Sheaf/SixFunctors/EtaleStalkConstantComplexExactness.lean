@@ -8,11 +8,12 @@ module
 public import Sheaf.AlgebraicGeometry.PointedEtaleStalk
 public import Sheaf.CategoryTheory.ConstantRingModuleSheaves
 public import Sheaf.CategoryTheory.SiteConstantModuleFunctorGeneral
-public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.Algebra.Homology.QuasiIso
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
-import WeilConjectures.AlgebraicGeometry.ConstantSheafGeometricStalk
-import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf
+import Sheaf.CategoryTheory.SiteDerivedConstantModuleFunctor
+import Mathlib.Algebra.Category.ModuleCat.AB
+import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
 import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 import Mathlib.CategoryTheory.Sites.Point.Skyscraper
 
@@ -65,13 +66,38 @@ def etaleConstantModuleStalkFunctor (t : Spec (.of Ω) ⟶ T) :
     etaleConstantComplexModules T A ⥤ ModuleCat.{u + 1} A :=
   constantRingModuleRestriction T.smallEtaleTopology A ⋙ (pointSmallEtale t).sheafFiber
 
+private theorem moduleLimitsSmall : HasLimitsOfSize.{u, u} (ModuleCat.{u + 1} A) :=
+  ModuleCat.hasLimitsOfSize.{u, u, u + 1, u + 1}
+
+attribute [local instance] moduleLimitsSmall
+
+private theorem moduleAB5Small : AB5OfSize.{u, u} (ModuleCat.{u + 1} A) :=
+  AB5OfSize_of_univLE (ModuleCat.{u + 1} A)
+
+attribute [local instance] moduleAB5Small
+
+private theorem moduleForgetFilteredSmall :
+    PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget (ModuleCat.{u + 1} A)) :=
+  preservesFilteredColimitsOfSize_of_univLE.{u + 1, u + 1, u, u}
+    (CategoryTheory.forget (ModuleCat.{u + 1} A))
+
+attribute [local instance] moduleForgetFilteredSmall
+
+private theorem moduleSheafFiberAdditive (t : Spec (.of Ω) ⟶ T) :
+    ((pointSmallEtale t).sheafFiber (A := ModuleCat.{u + 1} A)).Additive := by
+  apply leftExactFunctor_le_additiveFunctor _ _
+  rw [leftExactFunctor_iff]
+  infer_instance
+
+attribute [local instance] moduleSheafFiberAdditive
+
 /-- The constant-module functor is additive.
 Source: Stacks 03EI (blueprint: lem-sfb-etale-stalk-constant-complex-exactness).
 Proof: addition of linear maps is sectionwise on constant presheaves. Module
 sheafification has the underlying additive sheafification and preserves these sums. -/
 theorem etaleConstantComplexFunctor_additive :
     (etaleConstantComplexFunctor T A).Additive := by
-  sorry
+  exact (siteConstantModuleFunctorGeneral_exact T.smallEtaleTopology A).1
 
 attribute [instance] etaleConstantComplexFunctor_additive
 
@@ -82,7 +108,12 @@ sums of germs in the filtered module colimit. The colimit injections jointly det
 this identity. -/
 theorem etaleConstantModuleStalkFunctor_additive (t : Spec (.of Ω) ⟶ T) :
     (etaleConstantModuleStalkFunctor A t).Additive := by
-  sorry
+  obtain ⟨⟨e, he, ha, _⟩, _⟩ := constant_ring_module_sheaves.{u + 1, u} T.smallEtaleTopology A
+  have : (constantRingModuleRestriction T.smallEtaleTopology A).Additive := by
+    rw [← he]
+    exact ha
+  unfold etaleConstantModuleStalkFunctor
+  infer_instance
 
 attribute [instance] etaleConstantModuleStalkFunctor_additive
 
@@ -103,7 +134,18 @@ theorem etale_stalk_constant_exact (t : Spec (.of Ω) ⟶ T) :
     PreservesFiniteColimits (etaleConstantComplexFunctor T A) ∧
     PreservesFiniteLimits (etaleConstantModuleStalkFunctor A t) ∧
     PreservesFiniteColimits (etaleConstantModuleStalkFunctor A t) := by
-  sorry
+  obtain ⟨⟨e, he, _⟩, _⟩ := constant_ring_module_sheaves.{u + 1, u} T.smallEtaleTopology A
+  have : (constantRingModuleRestriction T.smallEtaleTopology A).IsEquivalence := by
+    rw [← he]
+    infer_instance
+  have hc := (siteConstantModuleFunctorGeneral_exact T.smallEtaleTopology A).2
+  refine ⟨hc.1, hc.2, ?_, ?_⟩
+  · exact comp_preservesFiniteLimits (constantRingModuleRestriction T.smallEtaleTopology A)
+      ((pointSmallEtale t).sheafFiber (A := ModuleCat.{u + 1} A))
+  · have : PreservesFiniteColimits
+        ((pointSmallEtale t).sheafFiber (A := ModuleCat.{u + 1} A)) := inferInstance
+    exact comp_preservesFiniteColimits (constantRingModuleRestriction T.smallEtaleTopology A)
+      ((pointSmallEtale t).sheafFiber (A := ModuleCat.{u + 1} A))
 
 /-- Natural linear cohomology comparisons in every integer degree.
 Source: Stacks Homology 010N
@@ -123,7 +165,11 @@ theorem etale_stalk_constant_cohomology (t : Spec (.of Ω) ⟶ T) (n : ℤ) :
       HomologicalComplex.homologyFunctor (etaleConstantComplexModules T A) (.up ℤ) n) ≅
         (HomologicalComplex.homologyFunctor (ModuleCat.{u + 1} A) (.up ℤ) n ⋙
           etaleConstantComplexFunctor T A)) := by
-  sorry
+  obtain ⟨hc₁, hc₂, hs₁, hs₂⟩ := etale_stalk_constant_exact A t
+  exact ⟨⟨Functor.isoWhiskerLeft (HomologicalComplex.shortComplexFunctor _ (.up ℤ) n)
+    (ShortComplex.homologyFunctorIso (etaleConstantModuleStalkFunctor A t))⟩,
+    ⟨Functor.isoWhiskerLeft (HomologicalComplex.shortComplexFunctor _ (.up ℤ) n)
+      (ShortComplex.homologyFunctorIso (etaleConstantComplexFunctor T A))⟩⟩
 
 /-- Both termwise functors preserve acyclicity and quasi-isomorphisms, unboundedly.
 Source: Stacks Homology 010N
@@ -146,7 +192,158 @@ theorem etale_stalk_constant_preserves (t : Spec (.of Ω) ⟶ T) :
     (∀ {E F : CochainComplex (ModuleCat.{u + 1} A) ℤ} (f : E ⟶ F),
       QuasiIso f → QuasiIso
         (((etaleConstantComplexFunctor T A).mapHomologicalComplex (.up ℤ)).map f)) := by
-  sorry
+  obtain ⟨hc₁, hc₂, hs₁, hs₂⟩ := etale_stalk_constant_exact A t
+  refine ⟨?_, ?_, ?_, ?_⟩
+  · intro C h n
+    exact (h n).map (etaleConstantModuleStalkFunctor A t)
+  · intro E h n
+    exact (h n).map (etaleConstantComplexFunctor T A)
+  · intro C D f hf
+    let := hf
+    infer_instance
+  · intro E F f hf
+    let := hf
+    infer_instance
+
+variable (T)
+
+-- The module-sheafification unit, viewed as a map of fixed-ring presheaves.
+set_option backward.isDefEq.respectTransparency false in
+private def constantModuleUnit (M : ModuleCat.{u + 1} A) :
+    (Functor.const T.Etaleᵒᵖ).obj M ⟶
+      ((constantRingModuleRestriction T.smallEtaleTopology A).obj
+        ((etaleConstantComplexFunctor T A).obj M)).obj where
+  app X := ((PresheafOfModules.sheafificationAdjunction.{u + 1}
+    (toSheafify T.smallEtaleTopology
+      ((Functor.const T.Etaleᵒᵖ).obj (RingCat.of A)))).unit.app
+        ((siteConstantModulePresheafGeneral (C := T.Etale) A).obj M)).app X
+  naturality X Y f := by
+    ext x
+    exact PresheafOfModules.naturality_apply
+      ((PresheafOfModules.sheafificationAdjunction.{u + 1}
+        (toSheafify T.smallEtaleTopology
+          ((Functor.const T.Etaleᵒᵖ).obj (RingCat.of A)))).unit.app
+            ((siteConstantModulePresheafGeneral (C := T.Etale) A).obj M)) f x
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem constantModuleUnit_locallyInjective (M : ModuleCat.{u + 1} A) :
+    Presheaf.IsLocallyInjective T.smallEtaleTopology (constantModuleUnit T A M) where
+  equalizerSieve_mem x y h := Presheaf.equalizerSieve_mem T.smallEtaleTopology
+    (toSheafify T.smallEtaleTopology
+      ((siteConstantModulePresheafGeneral (C := T.Etale) A).obj M).presheaf) x y h
+
+attribute [local instance] constantModuleUnit_locallyInjective
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem constantModuleUnit_locallySurjective (M : ModuleCat.{u + 1} A) :
+    Presheaf.IsLocallySurjective T.smallEtaleTopology (constantModuleUnit T A M) where
+  imageSieve_mem x := Presheaf.imageSieve_mem T.smallEtaleTopology
+    (toSheafify T.smallEtaleTopology
+      ((siteConstantModulePresheafGeneral (C := T.Etale) A).obj M).presheaf) x
+
+attribute [local instance] constantModuleUnit_locallySurjective
+
+-- A locally bijective constant-section map becomes an isomorphism on fibres.
+private def constantSectionStalkIso (t : Spec (.of Ω) ⟶ T)
+    (M : ModuleCat.{u + 1} A) (N : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A))
+    (φ : (Functor.const T.Etaleᵒᵖ).obj M ⟶ N.obj)
+    [Presheaf.IsLocallyInjective T.smallEtaleTopology φ]
+    [Presheaf.IsLocallySurjective T.smallEtaleTopology φ] :
+    M ≅ (pointSmallEtale t).sheafFiber.obj N := by
+  have : IsIso ((pointSmallEtale t).presheafFiber.map φ) := by
+    rw [ConcreteCategory.isIso_iff_bijective]
+    exact (pointSmallEtale t).toPresheafFiber_map_bijective φ
+  exact ((pointSmallEtale t).presheafFiberConstIso M).symm ≪≫
+    asIso ((pointSmallEtale t).presheafFiber.map φ)
+
+private theorem constantSectionStalkIso_hom (t : Spec (.of Ω) ⟶ T)
+    (M : ModuleCat.{u + 1} A) (N : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A))
+    (φ : (Functor.const T.Etaleᵒᵖ).obj M ⟶ N.obj)
+    [Presheaf.IsLocallyInjective T.smallEtaleTopology φ]
+    [Presheaf.IsLocallySurjective T.smallEtaleTopology φ] :
+    (constantSectionStalkIso T A t M N φ).hom =
+      φ.app (op (Etale.mk (𝟙 T))) ≫
+        (pointSmallEtale t).toPresheafFiber (Etale.mk (𝟙 T))
+          (Over.homMk t (Category.comp_id t)) N.obj := by
+  have h := (pointSmallEtale t).toPresheafFiber_presheafFiberConstIso_hom M
+    (Etale.mk (𝟙 T)) (Over.homMk t (Category.comp_id t))
+  have hi : ((pointSmallEtale t).presheafFiberConstIso M).inv =
+      (pointSmallEtale t).toPresheafFiber (Etale.mk (𝟙 T))
+        (Over.homMk t (Category.comp_id t)) ((Functor.const T.Etaleᵒᵖ).obj M) := by
+    rw [← cancel_mono ((pointSmallEtale t).presheafFiberConstIso M).hom,
+      Iso.inv_hom_id, h]
+  change ((pointSmallEtale t).presheafFiberConstIso M).inv ≫
+    (pointSmallEtale t).presheafFiber.map φ = _
+  rw [hi, (pointSmallEtale t).toPresheafFiber_naturality]
+
+set_option backward.isDefEq.respectTransparency false in
+private def constantModuleStalkIso (t : Spec (.of Ω) ⟶ T) :
+    𝟭 (ModuleCat.{u + 1} A) ≅
+      etaleConstantComplexFunctor T A ⋙ etaleConstantModuleStalkFunctor A t :=
+  NatIso.ofComponents (fun M ↦ constantSectionStalkIso T A t M _
+    (constantModuleUnit T A M)) (by
+      intro M N f
+      simp only [constantSectionStalkIso_hom, Functor.id_map, Category.assoc]
+      change f ≫ _ ≫ _ = _ ≫ _ ≫ (pointSmallEtale t).presheafFiber.map
+        (((constantRingModuleRestriction T.smallEtaleTopology A).map
+          ((etaleConstantComplexFunctor T A).map f)).hom)
+      rw [(pointSmallEtale t).toPresheafFiber_naturality]
+      have hunit : f ≫ (constantModuleUnit T A N).app (op (Etale.mk (𝟙 T))) =
+          (constantModuleUnit T A M).app (op (Etale.mk (𝟙 T))) ≫
+            (((constantRingModuleRestriction T.smallEtaleTopology A).map
+              ((etaleConstantComplexFunctor T A).map f)).hom.app
+                (op (Etale.mk (𝟙 T)))) := by
+        ext x
+        exact congrArg (fun g ↦ g.app (op (Etale.mk (𝟙 T))) x)
+          (toSheafify_naturality T.smallEtaleTopology
+            ((PresheafOfModules.toPresheaf _).map
+              ((siteConstantModulePresheafGeneral (C := T.Etale) A).map f)))
+      rw [← Category.assoc, hunit, Category.assoc])
+
+set_option backward.isDefEq.respectTransparency false in
+private def regularModuleUnit :
+    (Functor.const T.Etaleᵒᵖ).obj (ModuleCat.of A A) ⟶
+      ((constantRingModuleRestriction T.smallEtaleTopology A).obj
+        (SheafOfModules.unit (etaleConstantComplexRing T A))).obj where
+  app X := ModuleCat.ofHom
+    (Y := ((constantRingModuleRestriction T.smallEtaleTopology A).obj
+      (SheafOfModules.unit (etaleConstantComplexRing T A))).obj.obj X)
+    { toFun := (toSheafify T.smallEtaleTopology
+        ((Functor.const T.Etaleᵒᵖ).obj (RingCat.of A))).app X
+      map_add' := fun x y ↦ map_add _ x y
+      map_smul' := by
+        intro a x
+        change ((toSheafify T.smallEtaleTopology
+          ((Functor.const T.Etaleᵒᵖ).obj (RingCat.of A))).app X) (a * x) =
+            _ * _
+        exact map_mul _ a x }
+  naturality X Y f := by
+    apply ModuleCat.hom_ext
+    apply LinearMap.ext
+    intro x
+    exact congrArg (fun g ↦ g x)
+      ((toSheafify T.smallEtaleTopology
+        ((Functor.const T.Etaleᵒᵖ).obj (RingCat.of A))).naturality f)
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem regularModuleUnit_locallyInjective :
+    Presheaf.IsLocallyInjective T.smallEtaleTopology (regularModuleUnit T A) where
+  equalizerSieve_mem x y h := Presheaf.equalizerSieve_mem T.smallEtaleTopology
+    (toSheafify T.smallEtaleTopology
+      ((Functor.const T.Etaleᵒᵖ).obj (RingCat.of A))) x y h
+
+attribute [local instance] regularModuleUnit_locallyInjective
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem regularModuleUnit_locallySurjective :
+    Presheaf.IsLocallySurjective T.smallEtaleTopology (regularModuleUnit T A) where
+  imageSieve_mem x := Presheaf.imageSieve_mem T.smallEtaleTopology
+    (toSheafify T.smallEtaleTopology
+      ((Functor.const T.Etaleᵒᵖ).obj (RingCat.of A))) x
+
+attribute [local instance] regularModuleUnit_locallySurjective
+
+variable {T}
 
 /-- The natural chain retraction is normalized by constant germs; the stalk of A_T
 is A with its ordinary scalar action.
@@ -184,6 +381,17 @@ theorem etale_stalk_constant_complex_retraction (t : Spec (.of Ω) ⟶ T) :
             ((toSheafify T.smallEtaleTopology
               ((Functor.const T.Etaleᵒᵖ).obj (RingCat.of A))).app
                 (op (Etale.mk (𝟙 T))) a)) := by
-  sorry
+  refine ⟨⟨(Functor.mapHomologicalComplexIdIso (ModuleCat.{u + 1} A) (.up ℤ)).symm ≪≫
+    NatIso.mapHomologicalComplex (constantModuleStalkIso T A t) (.up ℤ), ?_⟩, ?_⟩
+  · intro E n e
+    change ((constantModuleStalkIso T A t).hom.app (E.X n)) e = _
+    rw [show (constantModuleStalkIso T A t).hom.app (E.X n) = _ from
+      constantSectionStalkIso_hom T A t (E.X n) _ (constantModuleUnit T A (E.X n))]
+    rfl
+  · refine ⟨constantSectionStalkIso T A t (ModuleCat.of A A) _
+      (regularModuleUnit T A), ?_⟩
+    intro a
+    rw [constantSectionStalkIso_hom]
+    rfl
 
 end AlgebraicGeometry.Scheme
