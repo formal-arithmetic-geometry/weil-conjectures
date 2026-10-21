@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-sfb-right-derived-exact",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Right derived functor of an exact functor",
@@ -13,28 +13,109 @@
   "place": "node def-sfb-right-derived-exact, order 1610"
  },
  "stmt_deps": [
-  "def-sfb-right-derived-functor"
+  "def-sfb-right-derived-functor",
+  "def-galois-exact-functor"
  ],
  "proof": [
   {
-   "text": "An exact functor preserves cohomology, hence quasi-isomorphisms, so $D(F)$ is defined and\n$Q\\circ F\\cong D(F)\\circ Q$. A functor that already inverts the quasi-isomorphisms is its\nown derived functor: $D(F)$ with this isomorphism as unit satisfies the universal property\nof [def-sfb-right-derived-functor]. Right derived functors are unique up to unique\nisomorphism compatible with the units, which gives $RF\\cong D(F)$.",
+   "text": "Use the notation of [def-sfb-right-derived-functor]: $Q_{\\mathcal C}:K(\\mathcal C)\\to D(\\mathcal C)$, $Q_{\\mathcal D}:K(\\mathcal D)\\to D(\\mathcal D)$, and $T=Q_{\\mathcal D}\\circ F_K$. Exactness of $F$ is precisely the additive, finite-limit and finite-colimit preservation required by [lem-weil-pbc-exact-functor-derived-factorization]. That statement says that degreewise $F$ preserves quasi-isomorphisms. Hence $T$ inverts the quasi-isomorphisms of the homotopy category: represent such a morphism by a chain map $s$; its image under degreewise $F$ is a quasi-isomorphism, and its image under $Q_{\\mathcal D}$ is invertible by [def-weil-abstract-derived-category]. This uses no boundedness restriction and no resolution in $\\mathcal D$.",
+   "uses": [
+    "def-sfb-right-derived-functor",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor, clauses (3)-(4) and proof; omitted universal-property details expanded using the cited localization node"
+   }
+  },
+  {
+   "text": "By [def-weil-abstract-derived-category], $Q_{\\mathcal C}$ is a localization of $K(\\mathcal C)$ at quasi-isomorphisms. Apply clause (1) of [lem-weil-pbc-localization-universal-property] to the functor $T$ of step 1, with target $D(\\mathcal D)$. It supplies a functor $D(F):D(\\mathcal C)\\to D(\\mathcal D)$ and an isomorphism $\\varphi:D(F)\\circ Q_{\\mathcal C}\\xrightarrow{\\sim}T$. On a complex $K$, its component identifies $D(F)(Q_{\\mathcal C}[K])$ with $Q_{\\mathcal D}[F(K)]$, and on a chain map it identifies the image with the termwise image by naturality. Thus this is the functor induced by applying $F$ termwise, as in the statement. The same localization node makes any other factorization of $T$ uniquely isomorphic to this one compatibly with its comparison. Set $\\epsilon=\\varphi^{-1}:T\\Rightarrow D(F)\\circ Q_{\\mathcal C}$.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor, clauses (3)-(4) and proof; omitted universal-property details expanded using the cited localization node"
+   }
+  },
+  {
+   "text": "We verify the derived universal property, rather than assuming that an invertible unit is universal. Fix $G:D(\\mathcal C)\\to D(\\mathcal D)$ and $\\beta:T\\Rightarrow G\\circ Q_{\\mathcal C}$. The composite $\\beta\\circ\\varphi$ goes from $D(F)\\circ Q_{\\mathcal C}$ to $G\\circ Q_{\\mathcal C}$. Both functors invert the quasi-isomorphisms since they factor through $Q_{\\mathcal C}$. Clause (2) of [lem-weil-pbc-localization-universal-property], with identity comparison isomorphisms, gives a unique $\\gamma:D(F)\\Rightarrow G$ such that $\\gamma Q_{\\mathcal C}=\\beta\\circ\\varphi$. Equivalently $(\\gamma Q_{\\mathcal C})\\circ\\epsilon=\\beta$. Conversely, this equation forces $\\gamma Q_{\\mathcal C}=\\beta\\circ\\varphi$, so its lift is unique. Thus $\\gamma\\mapsto(\\gamma Q_{\\mathcal C})\\circ\\epsilon$ is bijective for every $G$. This is exactly the universal property specified in [def-sfb-right-derived-functor].",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property",
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor, clauses (3)-(4) and proof; omitted universal-property details expanded using the cited localization node"
+   }
+  },
+  {
+   "text": "Let $(RF,\\eta)$ be the chosen universal pair of [def-sfb-right-derived-functor]. Its bijection applied to $\\epsilon$ gives a unique $a:RF\\Rightarrow D(F)$ with $(aQ_{\\mathcal C})\\circ\\eta=\\epsilon$. The bijection of step 3 applied to $\\eta$ gives $b:D(F)\\Rightarrow RF$ with $(bQ_{\\mathcal C})\\circ\\epsilon=\\eta$. Consequently $((ba)Q_{\\mathcal C})\\circ\\eta=\\eta$ and $((ab)Q_{\\mathcal C})\\circ\\epsilon=\\epsilon$. Injectivity of the respective bijections gives $ba=1_{RF}$ and $ab=1_{D(F)}$. Therefore $a$ is the asserted isomorphism $RF\\cong D(F)$; its unique unit-compatible characterization makes it canonical. The uniqueness also identifies the comparison with the one for any other chosen localization factorization from step 2.",
    "uses": [
     "def-sfb-right-derived-functor"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor, clauses (3)-(4) and proof; omitted universal-property details expanded using the cited localization node"
+   }
   }
  ],
  "proof_deps": [
-  "def-sfb-right-derived-functor"
+  "def-sfb-right-derived-functor",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-localization-universal-property"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-categories/def-sfb-right-derived-exact.md",
-  "place": "## Proof"
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 015F, lemma-right-derived-exact-functor, proof; explicit expansion of the omitted localization and universal-pair argument following the imported blueprint proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "rightDerivedUnique|isRightDerivedFunctor_of_inverts|mapDerivedCategoryFactorsh|rightDerivedFunctorIsoMapDerivedCategory",
+   "results": "12 hits: Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean",
+   "date": "2026-10-21",
+   "verdict": "Ingredients only: ExactFunctor.lean:61 mapDerivedCategoryFactorsh; RightDerived.lean:139 rightDerivedUnique; PointwiseRightDerived.lean:174 isRightDerivedFunctor_of_inverts. Read their full signatures and hypotheses; no project-specific comparison in Mathlib."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsRightDerivedFunctor, CategoryTheory.Functor.mapDerivedCategory",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: the combined pattern returned zero hits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact functor induces a functor on derived categories canonically isomorphic to any total right derived functor",
+   "results": "8 hits: CategoryTheory.Functor.totalRightDerived, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIso, CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Functor.totalLeftDerived, CategoryTheory.Functor.IsRightDerivedFunctor.recOn, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, CategoryTheory.Functor.IsRightDerivedFunctor, CategoryTheory.Abelian.Ext.mapExactFunctor",
+   "date": "2026-10-21",
+   "verdict": "Ingredients only: totalRightDerived, mapDerivedCategory, IsRightDerivedFunctor and mapHomologicalComplexUpToQuasiIso. They do not identify the recorded chosen universal pair in a single specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The total right derived functor of an exact additive functor between abelian categories is canonically isomorphic to its termwise functor on unbounded derived categories",
+   "results": "8 hits: CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.rightDerivedZeroIsoSelf, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.instIsIsoFunctorToRightDerivedZero, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Functor.mapDerivedCategory",
+   "date": "2026-10-21",
+   "verdict": "Ingredients only: mapDerivedCategory and its comparisons, or isRightDerivedFunctor_of_inverts and rightDerivedUnique. No declaration states the comparison for the recorded project universal pair without supplying these ingredients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor already descending along a localization is its own right derived functor, and uniqueness compares it with any chosen universal pair",
+   "results": "8 hits: CategoryTheory.Functor.isRightDerivedFunctor_of_inverts, CategoryTheory.Functor.rightDerivedUnique, CategoryTheory.Functor.instIsRightDerivedFunctorLiftInvFac, CategoryTheory.Functor.isRightDerivedFunctor_iff_isIso_rightDerivedDesc, CategoryTheory.Functor.HasRightDerivedFunctor.mk', CategoryTheory.Functor.IsRightDerivedFunctor, CategoryTheory.Functor.rightDerived_ext, CategoryTheory.Functor.instIsRightDerivedFunctorTotalRightDerivedTotalRightDerivedUnit",
+   "date": "2026-10-21",
+   "verdict": "Ingredients only: mapDerivedCategory and its comparisons, or isRightDerivedFunctor_of_inverts and rightDerivedUnique. No declaration states the comparison for the recorded project universal pair without supplying these ingredients."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found"
@@ -77,5 +158,20 @@
   "group": "Q20",
   "result": "pass",
   "note": "Statement, dependency interface, source Tag 015F, universes, edge cases, docstrings, and canonical comparison were checked; scompile.py passed sandbox and library compilation."
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "def-sfb-right-derived-exact",
+  "worker": "stage1",
+  "summary": "Expanded exact-functor descent, the localization bijection on natural transformations, and the inverse-comparison equations. Reused three existing nodes plus the recorded derived-functor definition; no new nodes. Reclassified the imported assertion as a statement, retaining blueprint_kind and all Lean records. No mathematical statement change. Upstream comparison has a different resolution interface, so is not an attachment.",
+  "blueprint": "Realizes the exact-functors bullet and step 3 of sk-def-sfb-derived-categories, and all three sentences of the imported item proof: exactness preserves quasi-isomorphisms; the localization factorization is universal; uniqueness gives the canonical comparison. The main-20261015 item source itself has only a statement; Tag 015F and the retained imported proof determine the argument."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q132-ebc1b7a11",
+  "group": "Q132",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q132-ebc1b7a11 (reviewer sub-agent of L); spot-checked: Read the item in full, all 5 cited statements, the unit sk-def-sfb-derived-categories (Exact functors bullet, step 2), the main-20261015 source (statement only, identical to the delivered one) and Stacks derived.tex Tag 015F l.5883-5901. Not superseded: live and side-live still hold the imported one-paragraph proof. No repair note; item not in route-pivot-dropped. The Lean _hom_fac at RightDerivedFunctorOfQuasiIsoResolutionsExact.lean:70-75 is still sorry, so a split is appropriate. No new nodes, no SGA, dependency closure acyclic, proof_deps = union of uses. Step 1: the Mathlib leaf lem-weil-pbc-exact-functor-derived-factorization says termwise exact F preserves quasi-isomorphisms, and def-weil-abstract-derived-category gives the K(C) localization, so T = Q_D∘F_K inverts W. Step 2: clause (1) of lem-weil-pbc-localization-universal-property gives D(F) and φ (Localization.lift/fac); clause (2) identifies other termwise models. Step 3: clause (2) with identity comparisons and τ = β∘φ gives the bijection Nat(D(F),G) → Nat(T,GQ_C) required by def-sfb-right-derived-functor (liftNatTrans + natTrans_ext). Step 4: I recomputed the elementary two-universal-pair comparison, (ba)Q∘η = η and (ab)Q∘ε = ε, and the directions are correct. Hypotheses: K-injective resolutions on C only; additive + exact; no boundedness or target condition; target not weakened. Edge cases checked: zero category, F = id, unbounded and acyclic complexes. Overlap (advisory, not a delivery duplicate): lem-weil-pbc-exact-functor-derived-functor clause (1) states the same Kan-extension property on CoCh in another unit; re-proving from Mathlib leaves keeps to the unit route. Minor: the report claims the node was reclassified as a statement, but kind remains 'definition' as on the base; harmless, since the node supplies an isomorphism (data) and its Lean declaration is a def. No tool_uses needed (off-unit citations are Mathlib leaves or definitions). No fixes."
  }
 }
