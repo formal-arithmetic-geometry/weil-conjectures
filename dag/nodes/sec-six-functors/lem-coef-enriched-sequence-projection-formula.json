@@ -19,9 +19,107 @@
   "lem-pur-system-level-left-extension",
   "lem-pur-system-ringed-sequence-site"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $n$ and write $S_n=-\\otimes_A^LB_n$ and $U_n=\\operatorname{Res}_{A\\to B_n}$. The strict representative $(Q\\otimes_A B_k)_k$ for one flat-term K-flat $Q\\to P$ in the current statement of [lem-coef-sequence-projection-derived-adjunction] identifies $e_n\\mathcal R=S_n$. Write $\\pi_n^M:\\mathcal L M\\to U_nM_n$ for the specified natural projection. Its naturality at $b:\\mathcal R V\\to J$, followed by the unit projection formula of [lem-coef-sequence-pushforward-limit-projections], gives\n$$q_n:=\\pi_n^J\\delta=\\pi_n^J\\mathcal L(b)u_V=U_n(b_n)\\pi_n^{\\mathcal R V}u_V=U_n(b_n)\\eta^n_V,$$\nwhere $b_n=e_n(b)$ and $\\eta^n$ is the scalar-extension unit. These are equalities of actual morphisms in $D(A)$.",
+   "uses": [
+    "lem-coef-sequence-projection-derived-adjunction",
+    "lem-coef-sequence-pushforward-limit-projections"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 (lemma-adjoint), 0D6E (lemma-derived-pushforward-composition); naturality of the projection-normalized adjunction"
+   }
+  },
+  {
+   "text": "Use [lem-sf-ringed-derived-closed-symmetric-monoidal] on both ringed sites and the inverse of the tensor-pullback isomorphism of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] for $p$. The definition of $b$ in [lem-coef-closed-adjunction-enriched-isomorphism] is therefore the tensor-Hom transpose of $e_N\\mathcal R(\\mathrm{ev}_{P,\\mathcal L N})\\mu_{V,P}$. Since $\\mathcal R P$ is normalized, [lem-coef-semilinear-derived-sections] identifies $J_n$ with $H_{B_n}(S_nP,N_n)$ and carries system evaluation and its specified transpose to levelwise evaluation and transpose. Its levelwise tensor/scalar-extension formulas identify $e_n\\mu_{V,P}$ with\n$$\\mu^n_{V,P}:S_nV\\otimes^L_{B_n}S_nP\\xrightarrow{\\sim}S_n(V\\otimes_A^LP).$$\nConsequently the closed transpose of $b_n$ is exactly\n$$e_{N,n}\\circ S_n(\\mathrm{ev}_{P,\\mathcal L N})\\circ\\mu^n_{V,P}.$$\nHere $e_{N,n}$ is the component of the specified system counit; no normalization of $J$ is required.",
+   "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-coef-closed-adjunction-enriched-isomorphism",
+    "lem-coef-semilinear-derived-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 (lemma-pullback-tensor-product), 08J9 (lemma-internal-hom); agent evaluation of the specified system transpose"
+   }
+  },
+  {
+   "text": "Apply [lem-pur-sheaf-ring-derived-coefficient-adjunction] to the map of sheaf rings $A\\to B_n$. Step 1 says that the scalar-extension adjunct of $q_n$ is $b_n$: the adjunct of $U_n(b_n)\\eta^n_V$ is $b_n$ by the triangle identity. By [lem-sf-ringed-derived-closed-symmetric-monoidal], closed transposition is a bijection as well. Thus there is exactly one map $V\\to U_nJ_n$ whose scalar-extension adjunct has the closed transpose in step 2. Substituting $S_nV=V\\otimes_A^LB_n$, $S_nP=P\\otimes_A^LB_n$ and $S_n(\\mathrm{ev})=\\mathrm{ev}\\otimes1$ gives the displayed formula in the statement, including its canonical tensor reassociation.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A6 (lemma-adjoint) for scalar extension, and Tag 08J9 (lemma-internal-hom); composition of the two Hom bijections"
+   }
+  },
+  {
+   "text": "Let $\\Theta_n:H_A(P,U_nN_n)\\xrightarrow{\\sim}U_nH_{B_n}(S_nP,N_n)$ be the inverse of the evaluation-normalized internal scalar isomorphism of [lem-sfb-dc-hom-scalar-adjunction], using symmetry to write the scalar extension on the right. Its normalization says that the closed transpose after restriction is restricted $B_n$-evaluation precomposed with $1\\otimes\\eta^n_P$. Uncurrying $\\Theta_n H_A(P,\\pi_n^N)$ therefore gives the restriction of the map in step 2: naturality of evaluation gives\n$$\\mathrm{ev}_{P,U_nN_n}(H_A(P,\\pi_n^N)\\otimes1_P)=\\pi_n^N\\mathrm{ev}_{P,\\mathcal L N},$$\nand the scalar adjunct of $\\pi_n^N$ is $e_{N,n}$ by [lem-coef-sequence-pushforward-limit-projections]. The scalar and tensor-Hom bijections of [lem-pur-sheaf-ring-derived-coefficient-adjunction] and [lem-sf-ringed-derived-closed-symmetric-monoidal] then give $q_n=\\Theta_n H_A(P,\\pi_n^N)$ by step 3. This proves the equivalent internal formulation while extending only the first Hom input.",
+   "uses": [
+    "lem-sfb-dc-hom-scalar-adjunction",
+    "lem-coef-sequence-pushforward-limit-projections",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 (lemma-adjoint), 08J9 (lemma-internal-hom); agent uncurrying of the evaluation-normalized scalar-Hom comparison"
+   }
+  },
+  {
+   "text": "Write $G=R\\Gamma^{\\operatorname{Tow}}_{\\mathcal C}\\circ U$ as in the current statement of [lem-coef-sequence-global-sections-evaluation]: first restrict to constant-$A$ towers, then take total derived sections using one resolution in that tower category. By [lem-coef-sequence-sections-limit-comparison] there is a specified natural isomorphism $c_J:R\\Gamma(\\mathcal C,Rp_*J)\\xrightarrow{\\sim}R\\lim G(J)$, with $R\\lim:D(\\operatorname{Tow}(\\operatorname{Ab}))\\to D(\\operatorname{Ab})$ the total derived strict-tower limit. Identify $Rp_*J$ with $\\mathcal L J$ by [lem-coef-sequence-pushforward-limit-projections]. Let $\\kappa_n:R\\Gamma(\\mathcal C,U_nJ_n)\\xrightarrow{\\sim}e_nG(J)$ be the inverse of the first finite comparison. The projection clause of the comparison node gives\n$$\\operatorname{pr}_n c_J R\\Gamma(\\delta)=\\kappa_n R\\Gamma(\\pi_n^J\\delta)=\\kappa_n R\\Gamma(q_n).$$\nThe second finite comparison identifies $e_nG(J)$ with $R\\Gamma(\\mathcal C,J_n)$ computed in $B_n$-modules and regarded as an abelian complex; both comparisons are natural in derived input morphisms. Apply them to the equality $q_n=\\Theta_n H_A(P,\\pi_n^N)$ of step 4. The result is exactly the global scalar-extension mapping-complex adjunction of [lem-sfb-dc-hom-scalar-adjunction] after $R\\Gamma H_A(P,\\pi_n^N)=(\\pi_n)_*$. This applies to arbitrary $J$, with no normalization or fiberwise K-injectivity assumption.",
+   "uses": [
+    "lem-coef-sequence-sections-limit-comparison",
+    "lem-coef-sequence-pushforward-limit-projections",
+    "lem-coef-sequence-global-sections-evaluation",
+    "lem-sfb-dc-hom-scalar-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E (lemma-derived-pushforward-composition); projection-retaining comparison and evaluation of strict-system derived sections"
+   }
+  },
+  {
+   "text": "Finally take $H^0$. The canonical isomorphism of [lem-pur-rhom-global-sections] is, for a K-flat representative $Q$ of the first input and a K-injective complex $X$ representing the second, the map sending the class of a degree-zero cocycle $g\\in\\Gamma(\\mathcal C,\\mathcal Hom^0(Q,X))$ to $Q(g)$; it is natural in the second input. Apply it over $A$ to $(P,\\mathcal LN)$ and $(P,U_nN_n)$, and over $B_n$ to $(S_nP,N_n)$. Naturality turns $H^0R\\Gamma H_A(P,\\pi_n^N)$ into $h\\mapsto\\pi_n^Nh$. Now let $Q$ be a flat-term K-flat representative of $P$, so that $S_nP$ is represented by $Q\\otimes_AB_n$ [lem-pur-sheaf-ring-derived-coefficient-adjunction], and let $I$ be a K-injective complex of $B_n$-modules representing $N_n$. Take the termwise isomorphism $\\operatorname{Res}\\mathcal Hom^\\bullet_{B_n}(Q\\otimes_AB_n,I)\\cong\\mathcal Hom^\\bullet_A(Q,\\operatorname{Res}I)$, $\\varphi\\mapsto(x\\mapsto\\varphi(x\\otimes1))$, followed by the map induced by a K-injective resolution $\\operatorname{Res}I\\to I'$ over $A$. Its tensor-Hom transpose is the restricted $B_n$-evaluation precomposed with $1\\otimes\\eta^n_Q$. By the uniqueness in [lem-sfb-dc-hom-scalar-adjunction] it represents $\\Theta_n^{-1}$. Global sections of the restricted sheaf are those of the underlying sheaf, and the second comparison of [lem-coef-sequence-global-sections-evaluation] is the composition comparison for scalar restriction followed by sections. So on $H^0$ the $n$th projection $\\kappa_nR\\Gamma(q_n)$ of step 5, followed by the second comparison, sends the class of $Q(g)$, for $g:Q\\to\\operatorname{Res}I$, to the class of $Q(x\\otimes a\\mapsto a\\,g(x))$. By normalization (2) of [lem-pur-sheaf-ring-derived-coefficient-adjunction], this is the scalar-extension adjunct of $Q(g)$. Hence $h$ goes to the adjunct of $\\pi_n^Nh$, which is $e_{N,n}\\circ S_n(h)=e_{N,n}\\circ(h\\otimes_A^LB_n)$ by the counit normalization of [lem-coef-sequence-pushforward-limit-projections] and naturality of the adjunction.",
+   "uses": [
+    "lem-pur-rhom-global-sections",
+    "lem-sfb-dc-hom-scalar-adjunction",
+    "lem-coef-sequence-global-sections-evaluation",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-coef-sequence-pushforward-limit-projections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08JA (lemma-section-RHom-over-U) and 07A6 (lemma-adjoint); degree-zero evaluation of the specified adjunction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-closed-adjunction-enriched-isomorphism",
+  "lem-coef-semilinear-derived-sections",
+  "lem-coef-sequence-global-sections-evaluation",
+  "lem-coef-sequence-projection-derived-adjunction",
+  "lem-coef-sequence-pushforward-limit-projections",
+  "lem-coef-sequence-sections-limit-comparison",
+  "lem-pur-rhom-global-sections",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-sfb-dc-hom-scalar-adjunction",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Formal projection/naturality calculation using Tags 07A6, 07A4, 08J9, 08JA and 0D6E and the cited strict-system lemmas; realizes prop-coef-integral-exceptional-adjoint proof paragraph 2, first and last mapping-complex comparisons."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -64,10 +162,52 @@
    "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.homEquiv_counit\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) (X : C) (Y : D) (g : X ⟶ G.obj Y) : (adj.homEquiv X Y).symm g = CategoryTheory.CategoryStruct.comp (F.map g) (adj.cou\", \"doc\": \"**Alias** of `CategoryTheory.Adjunction.homEquiv_symm_apply`.\"}",
    "date": "2026-10-21",
    "verdict": "no match: homEquiv_counit only gives an ordinary Hom formula, and underived/enriched functor-category projections do not identify the derived scalar-extension mapping-complex projection"
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv_counit|enriched.*projection|projection.*enriched",
+   "results": "[grep] OK 25 hit(s); ; returned: Mathlib/CategoryTheory/Shift/Adjunction.lean, Mathlib/CategoryTheory/Preadditive/Injective/Basic.lean, Mathlib/CategoryTheory/Functor/EpiMono.lean, Mathlib/CategoryTheory/Triangulated/Orthogonal.lean, Mathlib/CategoryTheory/Triangulated/Adjunction.lean, Mathlib/CategoryTheory/Triangulated/Adjunction.lean, Mathlib/CategoryTheory/Triangulated/Adjunction.lean, Mathlib/CategoryTheory/Triangulated/Adjunction.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary category-theoretic adjunction and tensor morphism declarations do not state the derived strict-system formula"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived internal Hom scalar extension adjunction evaluation counit inverse limit projection",
+   "results": "[leansearch] OK 8 hit(s); ; returned: CategoryTheory.ihom.ihom_adjunction_counit, ModuleCat.ExtendRestrictScalarsAdj.counit_app, ModuleCat.ExtendRestrictScalarsAdj.counit, ModuleCat.RestrictionCoextensionAdj.counit'_app, CategoryTheory.ihom.ev, CategoryTheory.Pi.closedCounit, ModuleCat.RestrictionCoextensionAdj.counit', ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern underived ModuleCat, condensed modules, or enriched functor-category ends, not this derived varying-ring sequence projection"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_counit",
+   "results": "[loogle] OK 1 hit(s); ; returned: CategoryTheory.Adjunction.homEquiv_counit",
+   "date": "2026-10-21",
+   "verdict": "no match: the ordinary adjunct counit formula is only one ingredient, not this derived strict-system enriched finite projection"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite projections of an enriched derived scalar extension inverse limit adjunction are obtained by transposing evaluation followed by the counit",
+   "results": "[leanfinder] OK 8 hit(s); ; returned: Condensed.profiniteSolidCounit, CategoryTheory.Enriched.FunctorCategory.enrichedComp_π, CategoryTheory.Enriched.FunctorCategory.homEquiv_apply_π, Condensed.instIsRightKanExtensionFintypeCatCondensedModProfiniteProfiniteSolidProfiniteSolidCounit, Condensed.profiniteSolidification, Condensed.profiniteSolid, LightCondensed.ihomPoints_symm_comp, CategoryTheory.Enriched.FunctorCategory.coneFunctorEnrichedHom_π_app",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern underived ModuleCat, condensed modules, or enriched functor-category ends, not this derived varying-ring sequence projection"
+  },
+  {
+   "tool": "grep",
+   "query": "RHom|derivedInternalHom|scalar.*adjunction",
+   "results": "[grep] OK 25 hit(s); ; returned: Mathlib/CategoryTheory/Monoidal/Widesubcategory.lean, Mathlib/CategoryTheory/Monoidal/Subcategory.lean, Mathlib/CategoryTheory/Monoidal/Comon_.lean, Mathlib/CategoryTheory/Monoidal/Comon_.lean, Mathlib/CategoryTheory/Monoidal/Comon_.lean, Mathlib/CategoryTheory/Monoidal/Comon_.lean, Mathlib/CategoryTheory/Monoidal/Preadditive.lean, Mathlib/CategoryTheory/Monoidal/Preadditive.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary category-theoretic adjunction and tensor morphism declarations do not state the derived strict-system formula"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internal Hom adjunction for modules on a ringed sequence site evaluated at one index agrees with scalar restriction and derived tensor extension adjunction",
+   "results": "[leanfinder] OK 8 hit(s); ; returned: LightCondensed.ihomPoints_apply, LightCondensed.ihomPoints, LightCondensed.ihom_map_val_app, ModuleCat.RestrictionCoextensionAdj.counit'_app, LightCondensed.ihomPoints_symm_apply, ModuleCat.RestrictionCoextensionAdj.HomEquiv.fromRestriction, ModuleCat.extendRestrictScalarsAdj_homEquiv_apply, ModuleCat.restrictCoextendScalarsAdj",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern underived ModuleCat, condensed modules, or enriched functor-category ends, not this derived varying-ring sequence projection"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-derived-system-evaluation-calculus",
@@ -87,5 +227,44 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-coef-enriched-sequence-projection-formula",
+  "worker": "stage1",
+  "summary": "Revalidated returned head 584a12be36 against current main 099400a2cfaae9ac24af02926da8405c3f9ec603. Re-read the two changed cited statements: projection-derived-adjunction and sections-limit-comparison. Updated step 1 to its flat-term K-flat representative and step 5 to explicitly name the constant-A tower derived-sections functor, the total derived strict-tower limit, and the projection-retaining comparison equation. Refreshed their verbatim citations. Statement and normalization hypotheses unchanged; no new nodes or Mathlib leaves.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint, proof paragraph 2: first and last derived mapping-complex comparisons and their specified finite projections.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic strong tensor comparison for derived ringed-topos pullback, used for p and its evaluated scalar extension; no sequence-adjunction node states this general comparison."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "Generic unbounded scalar extension/restriction Hom bijection with unit normalization for arbitrary sheaf rings A to B_n; no flatness or finite coefficient hypotheses can be assumed."
+   },
+   {
+    "node": "lem-sfb-dc-hom-scalar-adjunction",
+    "why": "Generic evaluation-normalized internal scalar-Hom adjunction for arbitrary sheaf rings, identifying the equivalent internal formulation without tensoring an integral Hom."
+   },
+   {
+    "node": "lem-pur-rhom-global-sections",
+    "why": "Generic H0 of derived global internal Hom equals categorical Hom; the sequence unit does not supply this identification."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-sfb-dc-hom-scalar-adjunction",
+  "lem-pur-rhom-global-sections"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NV-fe60361ca",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-fe60361ca (reviewer sub-agent of L); spot-checked: I read the item, all 6 steps, every cited statement in its current form, and Stacks 08JA in full (sites-cohomology.tex l.8874; 07A6/0D6E/07A4/08J9 labels also verified). This head re-pushes 584a12be. The review of 584a12be was a FIX (step 6 repaired), but the landing refused it: per returns/NV.md, the cited lem-coef-sequence-sections-limit-comparison statement had changed. This head changes only steps 1 and 5, and goes back to the unrepaired step 6. Against 584a12be, statement, stmt_deps, blueprint, source and proof_deps are identical. There are 0 new nodes. Neither the item nor any node it cites is in the dropped list, live or side-live. The item is unsplit in both. The 2026-10-21 re-split note belongs to the parent lem-coef-derived-system-evaluation-calculus, so it does not apply here. No SGA is cited. 𝓡P=(Q⊗_A B_n)_n is always cartesian, so the normalization hypotheses are harmless. Small cases checked: P=0, N=0, the constant identity sequence, and nonflat Z→Z/2. Step 1, revised: the current K-flat representative gives e_n𝓡=S_n, and naturality plus the unit projection gives q_n=U(b_n)η_V. Correct. Steps 2-4 are unchanged and correct. I recomputed step 4: the transpose of Θ_n^{-1}q_n is U(e_{N,n})η ev=π_n ev. Step 5, revised: c_J with projection pr_n c_J RΓ(δ)=κ_n RΓ(q_n) matches the changed comparison statement, and the second finite comparison is the composition comparison. Correct. Step 6 has fault C4, unchanged from 584a12be: no cited node identifies H^0 of RΓ(Θ_n), the composition comparison and the 08JA isomorphisms with the external scalar adjunction. FIX: I re-applied the earlier repair onto the current head node, changing only proof[5]. It uses 08JA class(g)↦Q(g) with K-flat Q and K-injective X; Θ_n^{-1} represented by φ↦(x↦φ(x⊗1)) via the uniqueness clause of lem-sfb-dc-hom-scalar-adjunction; normalization (2) of lem-pur-sheaf-ring-derived-coefficient-adjunction; and the counit normalization. The step is 1974 characters, and its uses add two nodes already in proof_deps. I accept the four generic tool uses. No duplicate nodes were found in side-live.; 1 file(s) fixed by the reviewer"
+ }
 }
