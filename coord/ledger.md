@@ -23125,3 +23125,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:04 L: batch 20261021T165743 dependency take-out
 - 17:04 L: merged deliver/NI/lem-sfb-supported-finite-stage-topology-defect (stage 2; reviewer PASS; parallel immutable checks)
 - 17:04 L: merged deliver/N7/lem-sfb-bicosimplicial-shuffle-totalization (stage 2; reviewer PASS; parallel immutable checks)
+- 17:04 L: returned deliver/Z5/Sheaf.AlgebraicGeometry.PerfectGeneratorPullback (reviewer RETURN: (reviewer C-8879e, head 8879eb555) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Pe)
