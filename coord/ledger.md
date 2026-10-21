@@ -19692,3 +19692,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:14 L: merged deliver/Q53/lem-sfb-extend-subfield-constructible (reviewer PASS; after a return; new nodes: 1)
 - 03:14 L: merged deliver/Q47/def-sfb-derived-extend-comp-iso (reviewer PASS; after a return; new nodes: 2)
 - 03:14 L: merged deliver/Q43/lem-sfb-subfield-flat (reviewer FIX; after a return; new nodes: 3)
+- 03:14 L: merged deliver/Q39/lem-sfb-adic-localizing-exceptional-cohomology (reviewer PASS; after a return; new nodes: 2)

@@ -1,0 +1,79 @@
+{
+ "id": "lem-sfb-adjunction-transport-left-iso",
+ "kind": "statement",
+ "title": "Transport an adjunction through an isomorphism of left functors",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be categories [def-nagata-category], let $L,L':\\mathcal C\\to\\mathcal D$ and $R:\\mathcal D\\to\\mathcal C$ be functors, let $a:L\\dashv R$ be an adjunction, meaning natural bijections $a_{M,N}:\\operatorname{Hom}_{\\mathcal D}(LM,N)\\cong\\operatorname{Hom}_{\\mathcal C}(M,RN)$, and let $e:L\\xrightarrow{\\sim}L'$ be a natural isomorphism. There is an adjunction $L'\\dashv R$ whose Hom bijection sends $f:L'M\\to N$ to $a_{M,N}(f\\circ e_M)$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/det-existence-restriction.proof.md",
+  "place": "Proper-left-functor identification in the geometric restriction argument; categorical construction is Mathlib/CategoryTheory/Adjunction/Basic.lean, ofNatIsoLeft (line 497) and homEquiv_ofNatIsoLeft_apply (line 509)."
+ },
+ "stmt_deps": [
+  "def-nagata-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "ofNatIsoLeft|rightAdjoint.*[Ii]so|[Ii]so.*rightAdjoint",
+   "results": "Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Adjunction/Triple.lean; Mathlib/CategoryTheory/Adjunction/Triple.lean; Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean; Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean; Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean; Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean; Mathlib/CategoryTheory/Adjunction/Opposites.lean",
+   "date": "2026-10-21",
+   "verdict": "match: ofNatIsoLeft gives the construction; homEquiv_ofNatIsoLeft_apply gives its displayed Hom formula"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"ofNatIsoLeft\"",
+   "results": "CategoryTheory.Adjunction.ofNatIsoLeft; CategoryTheory.Adjunction.ofNatIsoLeft_counit; CategoryTheory.Adjunction.ofNatIsoLeft_unit; CategoryTheory.Adjunction.homEquiv_ofNatIsoLeft_apply; CategoryTheory.Adjunction.homEquiv_ofNatIsoLeft_symm_apply",
+   "date": "2026-10-21",
+   "verdict": "match: ofNatIsoLeft gives the construction; homEquiv_ofNatIsoLeft_apply gives its displayed Hom formula"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport an adjunction F left adjoint to H along a natural isomorphism F isomorphic to G to obtain G left adjoint to H",
+   "results": "CategoryTheory.Adjunction.ofNatIsoLeft; CategoryTheory.Functor.isLeftAdjoint_of_iso; CategoryTheory.Adjunction.ofNatIsoRight; CategoryTheory.Adjunction.natIsoOfLeftAdjointNatIso; CategoryTheory.Functor.isRightAdjoint_of_iso; CategoryTheory.Adjunction.leftAdjointUniq; CategoryTheory.Adjunction.leftAdjointCompIso; CategoryTheory.Adjunction.natIsoOfRightAdjointNatIso",
+   "date": "2026-10-21",
+   "verdict": "match: ofNatIsoLeft gives the construction; homEquiv_ofNatIsoLeft_apply gives its displayed Hom formula"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An adjunction can be transported along an isomorphism of left adjoint functors",
+   "results": "CategoryTheory.Adjunction.ofNatIsoLeft; CategoryTheory.Functor.isLeftAdjoint_of_iso; CategoryTheory.Adjunction.ofNatIsoRight; CategoryTheory.Adjunction.natIsoOfLeftAdjointNatIso; CategoryTheory.conjugateIsoEquiv_apply_hom; CategoryTheory.conjugateIsoEquiv; CategoryTheory.Functor.leftExtensionEquivalenceOfIso₂; CategoryTheory.Adjunction.leftAdjointUniq",
+   "date": "2026-10-21",
+   "verdict": "match: ofNatIsoLeft gives the construction; homEquiv_ofNatIsoLeft_apply gives its displayed Hom formula"
+  },
+  {
+   "tool": "grep",
+   "query": "^def ofNatIsoLeft|^lemma homEquiv_ofNatIsoLeft_apply",
+   "results": "Mathlib/CategoryTheory/Adjunction/Basic.lean; Mathlib/CategoryTheory/Adjunction/Basic.lean",
+   "date": "2026-10-21",
+   "verdict": "match: ofNatIsoLeft gives the construction; homEquiv_ofNatIsoLeft_apply gives its displayed Hom formula"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Adjunction.ofNatIsoLeft",
+  "file": "Mathlib/CategoryTheory/Adjunction/Basic.lean",
+  "line": 497,
+  "how": "exact: ofNatIsoLeft at lines 497-504 takes a : L ⊣ R and e : L ≅ L′ to L′ ⊣ R. The Hom formula is homEquiv_ofNatIsoLeft_apply at lines 509-512 of the same file. Composition in Lean is diagrammatic, so e.hom.app M ≫ f is f ∘ e_M. Read both declarations in the pinned source; there are no finiteness or small-category hypotheses."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-adic-localizing-exceptional-cohomology",
+  "date": "2026-10-21",
+  "group": "Q39"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-cor-existence-ii",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Geometric restriction in lem-sfb-dc-proper-pushforward-left-adjoint-e: transport the Brown adjunction across the proper comparison Rg_! ≅ Rg_*; returned item step 4.",
+   "via": [
+    "lem-sfb-adic-localizing-exceptional-cohomology"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

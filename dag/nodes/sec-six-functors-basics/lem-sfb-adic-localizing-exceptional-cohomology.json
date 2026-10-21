@@ -1,309 +1,301 @@
 {
-  "kind": "statement",
-  "chapter": "sec-six-functors-basics",
-  "unit": "sk-cor-existence-ii",
-  "status": "split",
-  "stmt_deps": [
-    "sk-def-sfb-dc-setting",
-    "def-sfb-adic-coefficient-certificate",
-    "sk-def-sfb-qlbar-condensed",
-    "sk-def-sfb-module-derived-pushpull",
-    "sk-def-sfb-bounded-constructible",
-    "def-sfb-constructible-module",
-    "def-sfb-bounded-constructible-localizing-closure",
-    "lem-sfb-adic-proper-localizing-pushforward"
-  ],
-  "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/det-existence-restriction.proof.md",
-    "place": "Part (2): geometric constructibility of the supplied localizing right adjoint; split component"
+ "kind": "statement",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-cor-existence-ii",
+ "status": "split",
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "def-sfb-adic-coefficient-certificate",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-sfb-bounded-constructible",
+  "def-sfb-constructible-module",
+  "def-sfb-bounded-constructible-localizing-closure",
+  "lem-sfb-adic-proper-localizing-pushforward"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/det-existence-restriction.proof.md",
+  "place": "Part (2): geometric constructibility of the supplied localizing right adjoint; split component"
+ },
+ "mathlib_match": null,
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-dc-proper-pushforward-left-adjoint-e",
+   "place": "Proof of proper exceptional-adjoint existence: geometric restriction, via det-existence-restriction.proof.md integral/rational bullets; cohomology constructibility component",
+   "via": [
+    "lem-sfb-adic-localizing-exceptional-constructible"
+   ]
   },
-  "mathlib_match": null,
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "lem-sfb-dc-proper-pushforward-left-adjoint-e",
-      "place": "Proof of proper exceptional-adjoint existence: geometric restriction, via det-existence-restriction.proof.md integral/rational bullets; cohomology constructibility component",
-      "via": [
-        "lem-sfb-adic-localizing-exceptional-constructible"
-      ]
-    },
-    "same_as": []
-  },
-  "created": {
-    "by": "worker",
-    "item": "Sheaf.AlgebraicGeometry.EllAdicLocalizingExceptionalConstructible",
-    "date": "2026-10-17",
-    "group": "A2"
-  },
-  "id": "lem-sfb-adic-localizing-exceptional-cohomology",
-  "title": "Constructibility of localizing exceptional cohomology",
-  "statement": "Fix a universe $u$, a prime $\\ell$, and a field $k$ of characteristic $p>0$ with $p\\ne\\ell$. Let $Z,Y$ be separated finite-type $k$-schemes in universe $u$, and $g:Z\\to Y$ a proper $k$-morphism [sk-def-sfb-dc-setting]. Let $\\Lambda$ be a commutative condensed ring with its specified multiplication and a certificate of one of the three adic coefficient families [def-sfb-adic-coefficient-certificate]; the algebraic-closure coefficient has the finite-subextension-valued meaning of [sk-def-sfb-qlbar-condensed]. For $T=Z,Y$, put $\\Lambda_T=p_T^*\\Lambda$, $D_T=D(\\operatorname{Mod}_{\\Lambda_T})$ [sk-def-sfb-module-derived-pushpull], and let $\\mathcal B_T$ be its bounded constructible full subcategory [sk-def-sfb-bounded-constructible], using constructibility in the stratified local-finite-presentation sense [def-sfb-constructible-module]. Let $\\mathcal L_T=\\operatorname{Loc}(\\mathcal B_T)$ be the full localizing hull formed with ambient coproducts indexed in universe $u+1$ [def-sfb-bounded-constructible-localizing-closure], and $F_g:\\mathcal L_Z\\to\\mathcal L_Y$ the canonical restriction of the actual ambient $Rg_*$ [lem-sfb-adic-proper-localizing-pushforward]. For every functor $G:\\mathcal L_Y\\to\\mathcal L_Z$, every supplied adjunction $F_g\\dashv G$, every $K\\in\\mathcal B_Y$, and every integer $n$, the module $H^n(G(K))$ in $\\operatorname{Mod}_{\\Lambda_Z}$ is constructible in the sense of [def-sfb-constructible-module]. Here $K$ enters $\\mathcal L_Y$ by the canonical full inclusion, and cohomology is taken after the full inclusion $\\mathcal L_Z\\hookrightarrow D_Z$. No derived-completeness condition is imposed.",
-  "lean": {
-    "existing": false,
-    "module": "Sheaf.AlgebraicGeometry.EllAdicLocalizingExceptionalConstructibleCohomology",
-    "file": "lean/Sheaf/AlgebraicGeometry/EllAdicLocalizingExceptionalConstructibleCohomology.lean",
-    "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.ellAdic_localizing_rightAdjoint_obj_homology_constructible",
-    "statement": "theorem ellAdic_localizing_rightAdjoint_obj_homology_constructible (G : (boundedConstructibleLocalizingClosure Λ Y.left).FullSubcategory ⥤ (boundedConstructibleLocalizingClosure Λ Z.left).FullSubcategory) (adj : ellAdicLocalizingLowerStar Λ ℓ g hΛ ⊣ G) (K : (boundedConstructible (condensedRingObj Λ Y.left)).FullSubcategory) : ∀ n : ℤ, IsConstructibleModuleObject (condensedRingObj Λ Z.left) ((DerivedCategory.homologyFunctor _ n).obj ((G.obj ((boundedConstructibleToLocalizing Λ Y.left).obj K)).obj))",
-    "branch": "sheaf-dag",
-    "by": "A2",
-    "date": "2026-10-17"
-  },
-  "proof": [
-    {
-      "text": "The schemes $Z,Y$ are Noetherian. Indeed $\\operatorname{Spec}k$ is Noetherian: its affine ring is a field, whose only ideals are $(0)$ and $(1)$, so every ideal is finitely generated. Apply [lem-weil-pbc-finite-type-over-noetherian] to their finite-type structure morphisms. They are quasi-compact by this same statement. They are quasi-separated since they are separated: their relative diagonal is a closed immersion, and on affine charts a closed immersion is the spectrum of a quotient, hence quasi-compact. By [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal], any descending chain of closed subsets has a minimal member among its terms and is constant from that term on. Thus their underlying spaces are Noetherian. Their locally closed strata have Noetherian underlying spaces: descending chains of relatively closed subsets stabilize in any subspace of a Noetherian space. All coefficient comparisons below therefore have their Noetherian hypotheses, and $Z,Y$ satisfy the qcqs hypothesis of the Tor-amplitude comparison.",
-      "uses": [
-        "lem-weil-pbc-finite-type-over-noetherian",
-        "sk-def-sfb-dc-setting",
-        "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/morphisms.tex",
-        "place": "Tag 01T6, lemma-finite-type-noetherian; Tag 01OZ, lemma-Noetherian-topology in properties.tex, for the topological consequence"
-      }
-    },
-    {
-      "text": "Use [def-weil-pbc-internal-abelian-sheaf-module-equivalence] to view internal coefficient modules as sectionwise module sheaves. This equivalence leaves underlying abelian sheaves, section groups and restrictions identical; the regular module and its finite powers carry the same section action, so their cokernel presentations are the same presentations. For $T=Z,Y$, compare the two constructibility predicates on each cohomology module. In the $E$ case, apply [lem-weil-pbc-condensed-lfp-local-triviality] on each locally closed stratum of a general constructible module; the local presentations become finite free modules. Such a module is the constant scalar model with scalar module $E^r$. In the algebraic-closure case, the identical implication is precisely [lem-weil-pbc-condensed-qbar-lfp-local-triviality], for the finite-subextension-valued ring stipulated in the statement. Conversely a finite constant local model is locally finitely presented by [det-def-sfb-constructible-local-model], on each stratum. For $\\mathcal O_E$, both directions, allowing a refinement of the finite stratification and allowing torsion, are [lem-sfb-integral-lfp-constant-model-comparison]. Thus in all three cases the general constructible modules are exactly the constructible modules of [sk-def-sfb-constructible]. Since boundedness is the same condition in the same ordinary derived category, $\\mathcal B_T=\\Dbc(T,\\Lambda)$.",
-      "uses": [
-        "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
-        "lem-weil-pbc-condensed-lfp-local-triviality",
-        "lem-weil-pbc-condensed-qbar-lfp-local-triviality",
-        "det-def-sfb-constructible-local-model",
-        "lem-sfb-integral-lfp-constant-model-comparison",
-        "sk-def-sfb-constructible",
-        "sk-def-sfb-bounded-constructible"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/det-existence-restriction.proof.md",
-        "place": "Adic coefficient cases: comparison of constructibility predicates"
-      }
-    },
-    {
-      "text": "By [det-def-localizing-closure-ctf-equals-bc], $\\Dbc(T,\\Lambda)=\\Dctf(T,\\Lambda)$ for both qcqs schemes. Combining with step 2 gives $\\mathcal B_T=\\Dctf(T,\\Lambda)$. The two localizing hulls are then equal as full subcategories of $D_T$: their definitions intersect exactly the same replete triangulated object properties containing the same generators and closed under the same ambient coproducts. Use the fixed indexing universe $u+1$ for both hulls. This is the adic specialization explicitly specified in [def-sfb-bounded-constructible-localizing-closure]; in particular no completed derived category or completed coproduct has been substituted. Hence $K$ is an object of $\\Dctf(Y,\\Lambda)$ and both right adjoints below have domain $\\mathcal L_Y$ and codomain $\\mathcal L_Z$.",
-      "uses": [
-        "det-def-localizing-closure-ctf-equals-bc",
-        "def-sfb-bounded-constructible-localizing-closure",
-        "sk-def-localizing-closure"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/det-existence-restriction.proof.md",
-        "place": "Equality of the constructible finite-Tor categories and their localizing hulls"
-      }
-    },
-    {
-      "text": "Let $J=g^!$ be the right adjoint of [sk-prop-sf-existence] on the hulls identified in step 3. Because $g$ is proper, clause (1) of [det-cor-existence-ii-restriction] supplies $Rg_!\\simeq Rg_*|_{\\mathcal L_Z}=F_g$, the last equality being the canonical ambient restriction specified by [lem-sfb-adic-proper-localizing-pushforward]. Write this isomorphism as $\\alpha:Rg_!\\to F_g$. For $M\\in\\mathcal L_Z$ and $N\\in\\mathcal L_Y$, precomposition with $\\alpha_M$ gives $\\operatorname{Hom}(F_gM,N)\\cong\\operatorname{Hom}(Rg_!M,N)$; composing with the existing adjunction gives $\\operatorname{Hom}(F_gM,N)\\cong\\operatorname{Hom}(M,JN)$. Naturality follows from naturality of $\\alpha$ and the original Hom bijection. This gives an adjunction $F_g\\dashv J$ with exactly the same left functor as the supplied one.",
-      "uses": [
-        "sk-prop-sf-existence",
-        "det-cor-existence-ii-restriction",
-        "lem-sfb-adic-proper-localizing-pushforward"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/det-existence-restriction.proof.md",
-        "place": "Proper compactification and the Hom bijection identifying the left functors"
-      }
-    },
-    {
-      "text": "For $\\Lambda=E$ or $\\overline{\\mathbf Q}_\\ell$, apply [sk-thm-restriction] to $g$ and $K$ to get $J(K)\\in\\Dctf(Z,\\Lambda)$. Its hypotheses hold: $k$ has positive characteristic different from $\\ell$, the schemes are separated of finite type over $k$, and the proper $g$ is separated of finite type. For $\\Lambda=\\mathcal O_E$, [det-prop-int-brown-adjoint] identifies its integral right adjoint with this same $J$ under the equalities of step 3, and [sk-thm-int-restriction] gives $J(K)\\in\\Dctf(Z,\\mathcal O_E)$. Thus in each of the certificate's three cases $J(K)$ has constructible cohomology in the finite constant local model sense. This is exactly the integral/rational case division of the source's geometric restriction argument.",
-      "uses": [
-        "sk-thm-restriction",
-        "det-prop-int-brown-adjoint",
-        "sk-thm-int-restriction",
-        "def-sfb-adic-coefficient-certificate"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/det-existence-restriction.proof.md",
-        "place": "Integral and rational restriction bullets"
-      }
-    },
-    {
-      "text": "Apply [det-sp-unique-right-adjoint] to the supplied $F_g\\dashv G$ and the $F_g\\dashv J$ constructed in step 4. It gives an isomorphism $G(K)\\simeq J(K)$ in $\\mathcal L_Z$, hence in $D_Z$ by its full inclusion. Applying the degree-$n$ cohomology functor gives an isomorphism of module objects $H^n(G(K))\\simeq H^n(J(K))$. By step 5 the latter has finite constant local models on a finite stratification; [det-def-sfb-constructible-local-model] turns these into local finite presentations. Pull back the isomorphism to each stratum and then to each presentation cover. Composing the presentation's cokernel isomorphism with this pulled-back isomorphism gives a local finite presentation of $H^n(G(K))$ on that same cover. Consequently the same finite stratification witnesses constructibility in [def-sfb-constructible-module]. Since $n$ was arbitrary, this proves every degree without choosing a right adjoint as new defining data.",
-      "uses": [
-        "det-sp-unique-right-adjoint",
-        "det-def-sfb-constructible-local-model",
-        "def-sfb-constructible-module"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/det-existence-restriction.proof.md",
-        "place": "Uniqueness of the supplied adjoint and transport of the explicit local presentations"
-      }
-    }
-  ],
-  "proof_deps": [
+  "same_as": []
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EllAdicLocalizingExceptionalConstructible",
+  "date": "2026-10-17",
+  "group": "A2"
+ },
+ "id": "lem-sfb-adic-localizing-exceptional-cohomology",
+ "title": "Constructibility of localizing exceptional cohomology",
+ "statement": "Fix a universe $u$, a prime $\\ell$, and a field $k$ of characteristic $p>0$ with $p\\ne\\ell$. Let $Z,Y$ be separated finite-type $k$-schemes in universe $u$, and $g:Z\\to Y$ a proper $k$-morphism [sk-def-sfb-dc-setting]. Let $\\Lambda$ be a commutative condensed ring with its specified multiplication and a certificate of one of the three adic coefficient families [def-sfb-adic-coefficient-certificate]; the algebraic-closure coefficient has the finite-subextension-valued meaning of [sk-def-sfb-qlbar-condensed]. For $T=Z,Y$, put $\\Lambda_T=p_T^*\\Lambda$, $D_T=D(\\operatorname{Mod}_{\\Lambda_T})$ [sk-def-sfb-module-derived-pushpull], and let $\\mathcal B_T$ be its bounded constructible full subcategory [sk-def-sfb-bounded-constructible], using constructibility in the stratified local-finite-presentation sense [def-sfb-constructible-module]. Let $\\mathcal L_T=\\operatorname{Loc}(\\mathcal B_T)$ be the full localizing hull formed with ambient coproducts indexed in universe $u+1$ [def-sfb-bounded-constructible-localizing-closure], and $F_g:\\mathcal L_Z\\to\\mathcal L_Y$ the canonical restriction of the actual ambient $Rg_*$ [lem-sfb-adic-proper-localizing-pushforward]. For every functor $G:\\mathcal L_Y\\to\\mathcal L_Z$, every supplied adjunction $F_g\\dashv G$, every $K\\in\\mathcal B_Y$, and every integer $n$, the module $H^n(G(K))$ in $\\operatorname{Mod}_{\\Lambda_Z}$ is constructible in the sense of [def-sfb-constructible-module]. Here $K$ enters $\\mathcal L_Y$ by the canonical full inclusion, and cohomology is taken after the full inclusion $\\mathcal L_Z\\hookrightarrow D_Z$. No derived-completeness condition is imposed.",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EllAdicLocalizingExceptionalConstructibleCohomology",
+  "file": "lean/Sheaf/AlgebraicGeometry/EllAdicLocalizingExceptionalConstructibleCohomology.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.ellAdic_localizing_rightAdjoint_obj_homology_constructible",
+  "statement": "theorem ellAdic_localizing_rightAdjoint_obj_homology_constructible (G : (boundedConstructibleLocalizingClosure Λ Y.left).FullSubcategory ⥤ (boundedConstructibleLocalizingClosure Λ Z.left).FullSubcategory) (adj : ellAdicLocalizingLowerStar Λ ℓ g hΛ ⊣ G) (K : (boundedConstructible (condensedRingObj Λ Y.left)).FullSubcategory) : ∀ n : ℤ, IsConstructibleModuleObject (condensedRingObj Λ Z.left) ((DerivedCategory.homologyFunctor _ n).obj ((G.obj ((boundedConstructibleToLocalizing Λ Y.left).obj K)).obj))",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-17"
+ },
+ "proof": [
+  {
+   "text": "The field $k$ is Noetherian since its only ideals are $(0)$ and $(1)$. Thus [lem-weil-pbc-finite-type-over-noetherian] makes $Z,Y$ Noetherian and quasi-compact. They are quasi-separated: their separated diagonals are closed immersions, which on affine charts are spectra of quotients and hence quasi-compact. By [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal], a descending closed chain has a minimal term and stabilizes. Thus their spaces, and every subspace given by a locally closed stratum, are Noetherian.",
+   "uses": [
     "lem-weil-pbc-finite-type-over-noetherian",
-    "sk-def-sfb-dc-setting",
-    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
-    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
-    "lem-weil-pbc-condensed-lfp-local-triviality",
-    "lem-weil-pbc-condensed-qbar-lfp-local-triviality",
-    "det-def-sfb-constructible-local-model",
-    "lem-sfb-integral-lfp-constant-model-comparison",
-    "sk-def-sfb-constructible",
-    "sk-def-sfb-bounded-constructible",
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/det-existence-restriction.proof.md",
+    "place": "Part (2), geometric restriction for the adic coefficient cases"
+   }
+  },
+  {
+   "text": "For $T=Z,Y$, [lem-sfb-adic-constructibility-predicate-comparison] applies to step 1 and the specified certificate; hence $\\mathcal B_T=\\Dbc(T,\\Lambda)$.",
+   "uses": [
+    "lem-sfb-adic-constructibility-predicate-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/det-existence-restriction.proof.md",
+    "place": "Part (2), geometric restriction for the adic coefficient cases"
+   }
+  },
+  {
+   "text": "The qcqs hypothesis in step 1 lets [det-def-localizing-closure-ctf-equals-bc] give $\\Dbc=\\Dctf$. The hull definitions [def-sfb-bounded-constructible-localizing-closure; sk-def-localizing-closure] now intersect the same properties containing the same generators, with the same ambient $u+1$-indexed coproducts. Hence $\\mathcal L_T=\\Loc(\\Dctf(T,\\Lambda))$.",
+   "uses": [
     "det-def-localizing-closure-ctf-equals-bc",
     "def-sfb-bounded-constructible-localizing-closure",
-    "sk-def-localizing-closure",
+    "sk-def-localizing-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/det-existence-restriction.proof.md",
+    "place": "Part (2), geometric restriction for the adic coefficient cases"
+   }
+  },
+  {
+   "text": "Let $J=g^!$ and $Rg_!\\dashv J$ be supplied by [sk-prop-sf-existence]. Properness gives $Rg_!\\cong Rg_*|_{\\mathcal L_Z}$ by [det-cor-existence-ii-restriction](1), whose right side is the actual $F_g$ of [lem-sfb-adic-proper-localizing-pushforward]. Apply [lem-sfb-adjunction-transport-left-iso] to obtain $F_g\\dashv J$ on exactly these hulls.",
+   "uses": [
     "sk-prop-sf-existence",
     "det-cor-existence-ii-restriction",
     "lem-sfb-adic-proper-localizing-pushforward",
+    "lem-sfb-adjunction-transport-left-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/det-existence-restriction.proof.md",
+    "place": "Part (2), geometric restriction for the adic coefficient cases"
+   }
+  },
+  {
+   "text": "The certificate [def-sfb-adic-coefficient-certificate] has three cases. For $E$ and $\\overline{\\mathbf Q}_\\ell$, [sk-thm-restriction] gives $J(K)\\in\\Dctf(Z,\\Lambda)$. For $\\mathcal O_E$, [det-prop-int-brown-adjoint] identifies the integral Brown adjoint with $J$ under step 3, and [sk-thm-int-restriction] gives the same conclusion. The schemes and $k$ have the standing hypotheses, and the proper $k$-morphism $g$ is separated of finite type.",
+   "uses": [
+    "def-sfb-adic-coefficient-certificate",
     "sk-thm-restriction",
     "det-prop-int-brown-adjoint",
-    "sk-thm-int-restriction",
-    "def-sfb-adic-coefficient-certificate",
+    "sk-thm-int-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/det-existence-restriction.proof.md",
+    "place": "Part (2), geometric restriction for the adic coefficient cases"
+   }
+  },
+  {
+   "text": "By [det-sp-unique-right-adjoint], $G(K)\\cong J(K)$ in the hull, hence in $D_Z$. Applying $H^n$ gives isomorphic modules. Step 5 and step 2 make $H^n(J(K))$ constructible. Its stratification also works for $H^n(G(K))$: pull back the isomorphism to each presentation cover and compose the cokernel-presentation isomorphism with its inverse, as in [def-sfb-constructible-module]. This proves the claim for every $n$.",
+   "uses": [
     "det-sp-unique-right-adjoint",
     "def-sfb-constructible-module"
-  ],
-  "proof_origin": {
-    "by": "agent",
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/det-existence-restriction.proof.md",
-    "place": "Integral/rational bullets, expanded by existing coefficient comparisons and proper-right-adjoint uniqueness"
+    "place": "Part (2), geometric restriction for the adic coefficient cases"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-sfb-adic-constructibility-predicate-comparison",
+  "det-def-localizing-closure-ctf-equals-bc",
+  "def-sfb-bounded-constructible-localizing-closure",
+  "sk-def-localizing-closure",
+  "sk-prop-sf-existence",
+  "det-cor-existence-ii-restriction",
+  "lem-sfb-adic-proper-localizing-pushforward",
+  "lem-sfb-adjunction-transport-left-iso",
+  "def-sfb-adic-coefficient-certificate",
+  "sk-thm-restriction",
+  "det-prop-int-brown-adjoint",
+  "sk-thm-int-restriction",
+  "det-sp-unique-right-adjoint",
+  "def-sfb-constructible-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/det-existence-restriction.proof.md",
+  "place": "Integral/rational restriction bullets, assembled using the extracted predicate comparison and Mathlib adjunction transport"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite cohomological amplitude of right adjoint exceptional inverse image constructible adic complexes",
+   "results": "No exact theorem found; only generic derived-category adjunction results.",
+   "verdict": "no exact match"
   },
-  "mathlib_searches": [
-    {
-      "tool": "leansearch",
-      "query": "finite cohomological amplitude of right adjoint exceptional inverse image constructible adic complexes",
-      "results": "No exact theorem found; only generic derived-category adjunction results.",
-      "verdict": "no exact match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "right adjoint proper pushforward preserves bounded constructible cohomology",
-      "results": "No exact theorem found; hits are ordinary sheaf adjunctions.",
-      "verdict": "no exact match"
-    },
-    {
-      "tool": "grep",
-      "query": "rightAdjoint.*boundedConstructible|exceptional.*constructible",
-      "results": "No exact declaration in Mathlib or the existing source library.",
-      "verdict": "no exact match"
-    },
-    {
-      "tool": "grep",
-      "query": "exceptional.*constructible|constructible.*rightAdjoint|ellAdic",
-      "results": "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean",
-      "date": "2026-10-17",
-      "verdict": "No match for exceptional constructible cohomology; hits concern ordinary sheaf adjunctions, constructible subsets, or definitions of adic cohomology."
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.Adjunction, \"rightAdjoint\"",
-      "results": "CategoryTheory.Adjunction.isRightAdjoint; CategoryTheory.Adjunction.ofIsRightAdjoint; CategoryTheory.Functor.IsLeftAdjoint.exists_rightAdjoint; CategoryTheory.Functor.IsRightAdjoint.exists_leftAdjoint; CategoryTheory.Functor.IsRightAdjoint.mk; CategoryTheory.CommSq.rightAdjointLiftStructEquiv; CategoryTheory.Limits.IsLimit.ofRightAdjoint; CategoryTheory.Adjunction.rightAdjointLaxMonoidal",
-      "date": "2026-10-17",
-      "verdict": "No match for the geometric item: only generic adjunction API."
-    },
-    {
-      "tool": "leanfinder",
-      "query": "The right adjoint to proper pushforward on the localizing category of adic sheaves has constructible cohomology on bounded constructible objects",
-      "results": "AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward; SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous; CondensedMod.LocallyConstant.adjunction; LightCondMod.LocallyConstant.adjunction; SheafOfModules.instIsRightAdjointPushforward; SheafOfModules.pushforwardPushforwardAdj; CategoryTheory.Functor.sheafAdjunctionCocontinuous; PresheafOfModules.instIsRightAdjointPushforwardCompFunctorOppositeRingCatWhiskerLeftOp",
-      "date": "2026-10-17",
-      "verdict": "No match for exceptional constructible cohomology; hits concern ordinary sheaf adjunctions, constructible subsets, or definitions of adic cohomology."
-    },
-    {
-      "tool": "leansearch",
-      "query": "Exceptional inverse image preserves constructible cohomology for integral and rational l-adic coefficients",
-      "results": "AlgebraicGeometry.Scheme.Hom.isConstructible_preimage; Topology.IsConstructible.preimage_of_isOpenEmbedding; Topology.IsConstructible.preimage; Topology.isConstructible_preimage_iff_of_isOpenEmbedding; Topology.IsConstructible.preimage_of_isClosedEmbedding; Topology.IsLocallyConstructible.preimage_of_isOpenEmbedding; CategoryTheory.InjectiveResolution.extEquivCohomologyClass_symm_sub; CategoryTheory.MorphismProperty.instIsStableUnderRetractsInverseImage",
-      "date": "2026-10-17",
-      "verdict": "No match for exceptional constructible cohomology; hits concern ordinary sheaf adjunctions, constructible subsets, or definitions of adic cohomology."
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Constructibility of all cohomology sheaves of the right adjoint to proper derived direct image of adic module sheaves",
-      "results": "localCohomology.diagram; CondensedMod.ofSheafCompHaus; SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous; SheafOfModules.instIsRightAdjointPushforward; LightCondensed.instIsGrothendieckAbelianLightCondMod; LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat; CondensedMod.ofSheafProfinite",
-      "date": "2026-10-17",
-      "verdict": "No match for exceptional constructible cohomology; hits concern ordinary sheaf adjunctions, constructible subsets, or definitions of adic cohomology."
-    }
-  ],
-  "reviewed": {
-    "date": "2026-10-17",
-    "by": "L",
-    "reviewer": "NT-cc-N8-07943824e",
-    "group": "N8",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-07943824e (reviewer sub-agent of L); spot-checked: I read the item, all 8 stmt_deps and 22 proof_deps statements in full, the unit sk-cor-existence-ii, the blueprint files det-existence-localizing/-restriction(.proof).md (main-20261015), Stacks 01T6 (morphisms.tex l.2765) and 01OZ, the parent node, and the live Lean interface. The correction to positive characteristic p≠ℓ matches the parent, sk-def-sfb-dc-setting and the Lean (`ringChar k` prime, ≠ ℓ). It does not weaken anything, and the item is not a target. The certificate's Q̄_ℓ constructor is padicAlgClRingObj, which EllAdic.lean l.161–193 defines through finiteIntermediateFieldValued, so the finite-subextension reading is right. All six steps check out. Step 1: finite type over Spec k gives Noetherian, qcqs and Noetherian strata. Step 2: for E and Q̄ the lfp local-triviality lemmas apply, the converse comes from the last sentence of the local-model node, and for O_E the integral (i)⇔(ii) comparison applies, so B_T=Dbc. Step 3: ctf=bc on qcqs schemes and the hulls coincide, with no completion. Step 4: sk-prop-sf-existence plus det-cor-existence-ii-restriction(1) moves the adjunction to F_g. Step 5: sk-thm-restriction covers E and Q̄; for O_E, det-prop-int-brown-adjoint plus sk-thm-int-restriction, which is exactly the source's split into bullets. Step 6: Mathlib uniqueness of right adjoints carries the presentations over to G. The steps contain no SGA citation and there is no cycle. Edge cases (0, empty schemes, identity g, torsion) are fine. The only defect is that sk-prop-sf-existence is cited outside the unit-record route without a declaration, even though it is the source's own route (det-existence-localizing (3)). I added it to split_report.tool_uses in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-adic-localizing-exceptional-cohomology.json; that is the only diff. I accept the other declared tool uses: sk-thm-restriction, sk-thm-int-restriction, det-prop-int-brown-adjoint, the lfp comparisons, the Noetherian leaves and the module equivalence. No new nodes.; 1 file(s) fixed by the reviewer"
+  {
+   "tool": "leanfinder",
+   "query": "right adjoint proper pushforward preserves bounded constructible cohomology",
+   "results": "No exact theorem found; hits are ordinary sheaf adjunctions.",
+   "verdict": "no exact match"
   },
-  "reviewed_proof": {
-    "date": "2026-10-17",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "A2",
-    "result": "pass",
-    "landing": "20261017T141635-L-3672321",
-    "kind": "interface",
-    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  {
+   "tool": "grep",
+   "query": "rightAdjoint.*boundedConstructible|exceptional.*constructible",
+   "results": "No exact declaration in Mathlib or the existing source library.",
+   "verdict": "no exact match"
   },
-  "split_report": {
-    "date": "2026-10-17",
-    "item": "lem-sfb-adic-localizing-exceptional-cohomology",
-    "worker": "stage1",
-    "summary": "Expanded the compressed geometric claim into six steps using existing coefficient comparisons, the equality of adic constructible finite-Tor categories, the proper compact-support comparison, integral/rational restriction, and uniqueness for the supplied adjoint. No new nodes. STATEMENT-DISPUTED: made the positive-characteristic standing setting explicit and resolved the algebraic-closure coefficient by its actual finite-subextension-valued definition. Repaired the invalid blueprint ancestor reference without changing maintainer-owned metadata. Repair F1: read the previously unarchived ProEtaleModule/Def.lean and ModuleObject/BaseChangeTheorems/MorphismDefs.lean in the supplied exact-master source checkout, checked their imported finite-presentation, stratification and bounded-derived definitions, and recorded the clause-by-clause source verification in report.md. The six-step argument and its existing-node citations are retained.",
-    "blueprint": "Realizes the geometric restriction in the proof of lem-sfb-dc-proper-pushforward-left-adjoint-e, as expanded by det-existence-restriction.proof.md: the integral and rational restriction bullets, restricted to the cohomology constructibility component. The existing unit route through sk-thm-existence is retained. No new same-statement blueprint node was found.",
-    "tool_uses": [
-      {
-        "node": "lem-weil-pbc-finite-type-over-noetherian",
-        "why": "Generic finite-type permanence of Noetherianity, needed only to check the comparison hypotheses. This unit supplies no replacement for that coefficient-specific or generic comparison."
-      },
-      {
-        "node": "lem-weil-pbc-condensed-lfp-local-triviality",
-        "why": "Generic E-coefficient local-presentation comparison; identifies the input predicate with finite constant local models. This unit supplies no replacement for that coefficient-specific or generic comparison."
-      },
-      {
-        "node": "lem-weil-pbc-condensed-qbar-lfp-local-triviality",
-        "why": "The corresponding generic comparison for the finite-subextension-valued algebraic-closure coefficient. This unit supplies no replacement for that coefficient-specific or generic comparison."
-      },
-      {
-        "node": "det-def-sfb-constructible-local-model",
-        "why": "Generic conversion from scalar finite presentations to local finite presentations over the coefficient sheaf. This unit supplies no replacement for that coefficient-specific or generic comparison."
-      },
-      {
-        "node": "lem-sfb-integral-lfp-constant-model-comparison",
-        "why": "Generic integral comparison, including torsion, needed to identify the two constructibility predicates. This unit supplies no replacement for that coefficient-specific or generic comparison."
-      },
-      {
-        "node": "det-def-localizing-closure-ctf-equals-bc",
-        "why": "Generic finite-Tor comparison for qcqs adic coefficient categories; identifies the hulls used here with the restriction theorems. This unit supplies no replacement for that coefficient-specific or generic comparison."
-      },
-      {
-        "node": "sk-thm-restriction",
-        "why": "The rational geometric restriction theorem explicitly prescribed by the unit route through sk-thm-existence. This unit supplies no replacement for that coefficient-specific or generic comparison."
-      },
-      {
-        "node": "det-prop-int-brown-adjoint",
-        "why": "Identifies the integral right adjoint with the one used for the same localizing compact-support functor. This unit supplies no replacement for that coefficient-specific or generic comparison."
-      },
-      {
-        "node": "sk-thm-int-restriction",
-        "why": "The integral geometric restriction theorem explicitly prescribed by the source route. This unit supplies no replacement for that coefficient-specific or generic comparison."
-      },
-      {
-        "node": "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
-        "why": "Generic conversion from scheme Noetherianity to the descending chain condition needed by the field coefficient comparisons. No statement of this unit replaces this generic tool."
-      },
-      {
-        "node": "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
-        "why": "Generic section-action equivalence identifies internal module presentations with the sectionwise presentations in the coefficient comparison statements. No statement of this unit replaces this generic tool."
-      },
-      {
-        "node": "sk-prop-sf-existence",
-        "why": "Step 4 takes the Brown right adjoint f^! of Rf_! on Loc(Dctf) and its Hom bijection; the source's det-existence-localizing (3) of sk-thm-existence obtains it as exactly this statement, and no node of unit sk-cor-existence-ii states the adjoint's existence."
-      }
-    ]
+  {
+   "tool": "grep",
+   "query": "exceptional.*constructible|constructible.*rightAdjoint|ellAdic",
+   "results": "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean",
+   "date": "2026-10-17",
+   "verdict": "No match for exceptional constructible cohomology; hits concern ordinary sheaf adjunctions, constructible subsets, or definitions of adic cohomology."
   },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"rightAdjoint\"",
+   "results": "CategoryTheory.Adjunction.isRightAdjoint; CategoryTheory.Adjunction.ofIsRightAdjoint; CategoryTheory.Functor.IsLeftAdjoint.exists_rightAdjoint; CategoryTheory.Functor.IsRightAdjoint.exists_leftAdjoint; CategoryTheory.Functor.IsRightAdjoint.mk; CategoryTheory.CommSq.rightAdjointLiftStructEquiv; CategoryTheory.Limits.IsLimit.ofRightAdjoint; CategoryTheory.Adjunction.rightAdjointLaxMonoidal",
+   "date": "2026-10-17",
+   "verdict": "No match for the geometric item: only generic adjunction API."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The right adjoint to proper pushforward on the localizing category of adic sheaves has constructible cohomology on bounded constructible objects",
+   "results": "AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward; SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous; CondensedMod.LocallyConstant.adjunction; LightCondMod.LocallyConstant.adjunction; SheafOfModules.instIsRightAdjointPushforward; SheafOfModules.pushforwardPushforwardAdj; CategoryTheory.Functor.sheafAdjunctionCocontinuous; PresheafOfModules.instIsRightAdjointPushforwardCompFunctorOppositeRingCatWhiskerLeftOp",
+   "date": "2026-10-17",
+   "verdict": "No match for exceptional constructible cohomology; hits concern ordinary sheaf adjunctions, constructible subsets, or definitions of adic cohomology."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exceptional inverse image preserves constructible cohomology for integral and rational l-adic coefficients",
+   "results": "AlgebraicGeometry.Scheme.Hom.isConstructible_preimage; Topology.IsConstructible.preimage_of_isOpenEmbedding; Topology.IsConstructible.preimage; Topology.isConstructible_preimage_iff_of_isOpenEmbedding; Topology.IsConstructible.preimage_of_isClosedEmbedding; Topology.IsLocallyConstructible.preimage_of_isOpenEmbedding; CategoryTheory.InjectiveResolution.extEquivCohomologyClass_symm_sub; CategoryTheory.MorphismProperty.instIsStableUnderRetractsInverseImage",
+   "date": "2026-10-17",
+   "verdict": "No match for exceptional constructible cohomology; hits concern ordinary sheaf adjunctions, constructible subsets, or definitions of adic cohomology."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constructibility of all cohomology sheaves of the right adjoint to proper derived direct image of adic module sheaves",
+   "results": "localCohomology.diagram; CondensedMod.ofSheafCompHaus; SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous; SheafOfModules.instIsRightAdjointPushforward; LightCondensed.instIsGrothendieckAbelianLightCondMod; LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat; CondensedMod.ofSheafProfinite",
+   "date": "2026-10-17",
+   "verdict": "No match for exceptional constructible cohomology; hits concern ordinary sheaf adjunctions, constructible subsets, or definitions of adic cohomology."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q39-690b1e60d",
+  "group": "Q39",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q39-690b1e60d (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, the report, the statements of all 16 proof_deps and 8 stmt_deps, the comparison inputs, det-existence-restriction(.proof).md (main-20261015), unit sk-cor-existence-ii, and Mathlib Adjunction/Basic.lean l.493-512. This is the repair of the human return for the 5702-char proof. The statement and stmt_deps are byte-identical to the base. The proof is now 2221 chars in 6 steps, the longest 518. Step 1: finite type over a field gives Noetherian and qcqs, and Noetherian strata. Step 2 cites the new node lem-sfb-adic-constructibility-predicate-comparison. That node is true: E and Q̄_ℓ via the lfp local-triviality lemmas, with the converse from det-def-sfb-constructible-local-model; O_E is exactly lem-sfb-integral-lfp-constant-model-comparison. Checked on the empty X, Spec F and O_E/ϖ torsion cases. It is not a duplicate: the only comparable argument is inline in the sibling bounded-canonical node. It does not restate the item or its parent. Step 3: ctf=bc on qcqs schemes, same hulls with fixed u+1 coproducts, no completion. Step 4: the new Mathlib leaf is exact: ofNatIsoLeft l.497 and homEquiv_ofNatIsoLeft_apply l.509, orientation Rg_!≅F_g, right functor J kept. Step 5: certificate cases via sk-thm-restriction / det-prop-int-brown-adjoint + sk-thm-int-restriction, all hypotheses present. Step 6: unique right adjoint, then H^n of an iso, then step 2. No SGA, no cycle, off-unit uses already declared. The new nodes' null blueprint.from.node equals the tool's ancestor (None, because the item's created.item is a Lean module name), as preflight requires. The item's split_report.tool_uses still lists inputs that moved into the new node; this is harmless."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261017T141635-L-3672321",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-adic-localizing-exceptional-cohomology",
+  "worker": "stage1",
+  "summary": "Repair of the human return for the 5702-character proof: extracted the adic constructibility-predicate comparison as a separately searched statement node, with its complete short proof in report.md, and replaced the adjunction-transport argument by a searched Mathlib leaf. Existing Noetherian, finite-Tor, geometric restriction and uniqueness statements carry the remaining non-elementary facts. The item statement, coefficient interpretation, ordinary ambient hulls, and all maintainer-owned metadata are unchanged.",
+  "blueprint": "Retains the integral/rational bullets of det-existence-restriction.proof.md in the existing proper-adjoint route. The new comparison realizes the predicate identification in former step 2; the Mathlib leaf realizes categorical transport in former step 4. Steps 1, 3, 5 and 6 reuse the established Noetherian, Tor, restriction and uniqueness nodes. No route or unit change.",
   "tool_uses": [
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-weil-pbc-condensed-lfp-local-triviality",
-    "lem-weil-pbc-condensed-qbar-lfp-local-triviality",
-    "det-def-sfb-constructible-local-model",
-    "lem-sfb-integral-lfp-constant-model-comparison",
-    "det-def-localizing-closure-ctf-equals-bc",
-    "sk-thm-restriction",
-    "det-prop-int-brown-adjoint",
-    "sk-thm-int-restriction",
-    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
-    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
-    "sk-prop-sf-existence"
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic finite-type permanence of Noetherianity, needed only to check the comparison hypotheses. This unit supplies no replacement for that coefficient-specific or generic comparison."
+   },
+   {
+    "node": "lem-weil-pbc-condensed-lfp-local-triviality",
+    "why": "Generic E-coefficient local-presentation comparison; identifies the input predicate with finite constant local models. This unit supplies no replacement for that coefficient-specific or generic comparison."
+   },
+   {
+    "node": "lem-weil-pbc-condensed-qbar-lfp-local-triviality",
+    "why": "The corresponding generic comparison for the finite-subextension-valued algebraic-closure coefficient. This unit supplies no replacement for that coefficient-specific or generic comparison."
+   },
+   {
+    "node": "det-def-sfb-constructible-local-model",
+    "why": "Generic conversion from scalar finite presentations to local finite presentations over the coefficient sheaf. This unit supplies no replacement for that coefficient-specific or generic comparison."
+   },
+   {
+    "node": "lem-sfb-integral-lfp-constant-model-comparison",
+    "why": "Generic integral comparison, including torsion, needed to identify the two constructibility predicates. This unit supplies no replacement for that coefficient-specific or generic comparison."
+   },
+   {
+    "node": "det-def-localizing-closure-ctf-equals-bc",
+    "why": "Generic finite-Tor comparison for qcqs adic coefficient categories; identifies the hulls used here with the restriction theorems. This unit supplies no replacement for that coefficient-specific or generic comparison."
+   },
+   {
+    "node": "sk-thm-restriction",
+    "why": "The rational geometric restriction theorem explicitly prescribed by the unit route through sk-thm-existence. This unit supplies no replacement for that coefficient-specific or generic comparison."
+   },
+   {
+    "node": "det-prop-int-brown-adjoint",
+    "why": "Identifies the integral right adjoint with the one used for the same localizing compact-support functor. This unit supplies no replacement for that coefficient-specific or generic comparison."
+   },
+   {
+    "node": "sk-thm-int-restriction",
+    "why": "The integral geometric restriction theorem explicitly prescribed by the source route. This unit supplies no replacement for that coefficient-specific or generic comparison."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "why": "Generic conversion from scheme Noetherianity to the descending chain condition needed by the field coefficient comparisons. No statement of this unit replaces this generic tool."
+   },
+   {
+    "node": "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "why": "Generic section-action equivalence identifies internal module presentations with the sectionwise presentations in the coefficient comparison statements. No statement of this unit replaces this generic tool."
+   },
+   {
+    "node": "sk-prop-sf-existence",
+    "why": "Step 4 takes the Brown right adjoint f^! of Rf_! on Loc(Dctf) and its Hom bijection; the source's det-existence-localizing (3) of sk-thm-existence obtains it as exactly this statement, and no node of unit sk-cor-existence-ii states the adjoint's existence."
+   },
+   {
+    "node": "lem-sfb-adic-constructibility-predicate-comparison",
+    "why": "Coefficient-predicate comparison needed to match the supplied general constructible category to the existing geometric restriction interface. It is an extracted generic tool from the returned proof, not a replacement of the unit route."
+   }
   ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-condensed-lfp-local-triviality",
+  "lem-weil-pbc-condensed-qbar-lfp-local-triviality",
+  "det-def-sfb-constructible-local-model",
+  "lem-sfb-integral-lfp-constant-model-comparison",
+  "det-def-localizing-closure-ctf-equals-bc",
+  "sk-thm-restriction",
+  "det-prop-int-brown-adjoint",
+  "sk-thm-int-restriction",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "sk-prop-sf-existence",
+  "lem-sfb-adic-constructibility-predicate-comparison"
+ ]
 }
