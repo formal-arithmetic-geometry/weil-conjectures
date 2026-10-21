@@ -1,0 +1,112 @@
+{
+ "id": "lem-sf-clopen-coefficient-comparison",
+ "kind": "statement",
+ "title": "Normalized open coefficient restriction",
+ "statement": "Fix a prime $\\ell$ and a finite extension $E/\\mathbf Q_\\ell$ [def-weil-l-adic-coefficient-extension]. For every scheme $T$ and open $U$ [def-pc-scheme, def-weil-open-immersion], the finite constant coefficient sheaves and their completed inverse limit [def-weil-completed-integral-coefficients, def-pur-sheaf-inverse-limit] have canonical restriction isomorphisms. They fix constant sections and commute with quotient transitions and limit projections. Module restriction [def-weil-sheaf-of-modules-category, def-pc-sheaf-restrict-scalars] along these isomorphisms is additive and preserves finite limits and colimits. No invertibility of $\\ell$ on $T$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 098F and 09C3; sites-cohomology.tex Tag 0946; sites.tex Tags 00Y0 and 03CO; derived.tex Tag 08TC. Extracted from the corresponding steps of lem-sf-clopen-lisse-complete-localization."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-weil-open-immersion",
+  "def-weil-completed-integral-coefficients",
+  "def-pur-sheaf-inverse-limit",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-sheaf-restrict-scalars"
+ ],
+ "proof": [
+  {
+   "text": "composition into an open subscheme is continuous and cocontinuous, so its\nprecomposition commutes with sheafification. Apply that comparison to each constant\nfinite quotient ring; the sheafification units give the constant-section normalization.\nNaturality in the quotient homomorphisms gives all transition squares. Precomposition\npreserves sectionwise limits, so the inverse limit of the finite comparisons gives the\ncompletion comparison and its projection squares. The underlying abelian-sheaf functor\nof module restriction is the same precomposition, even after scalar transport. It\npreserves kernels and locally surjective maps, hence is additive and exact. This applies\nto the completed ring and every finite quotient, including empty opens.",
+   "uses": [
+    "lem-pur-clopen-ringed-module-gluing"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-clopen-ringed-module-gluing"
+ ],
+ "proof_origin": {
+  "by": "G4",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Expanded from the assigned node proof and the cited site/derived arguments."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A clopen open subscheme of a weakly contractible affine scheme is weakly contractible and evaluation of sheaves of modules is exact",
+   "results": "8 hits concerning scheme module restriction, affine opens and stalks; no small pro-etale categorical statement.",
+   "verdict": "No exact result.",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of sheaves of modules to a clopen subscheme commutes with derived scalar extension and preserves homotopy inverse limits and Tor amplitude",
+   "results": "8 Scheme.Modules restriction and adjunction results for the structure sheaf; none handles arbitrary ring sheaves on the small pro-etale site.",
+   "verdict": "No exact result; use local site and sheafification APIs.",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "grep",
+   "query": "IsWeaklyContractible|clopen.*(sheaf|constant)|unitHomEquiv|pushforwardContinuousSheafificationCompatibility",
+   "results": "Inspected Mathlib CategoryTheory/Sites and Algebra/Category/ModuleCat. unitHomEquiv and continuous sheafification compatibility supply parts; no combined theorem.",
+   "verdict": "Partial APIs used; new conclusions require the geometric splitting and normalization arguments.",
+   "date": "2026-10-21"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SfClopenLisseCompleteLocalization",
+  "group": "G4",
+  "date": "2026-10-21"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-weil-operations",
+   "place": "Proof, paragraph beginning \"For an admissible exceptional adjoint\", sentence \"Evaluation is natural in the two Weil maps and their inverses, so its square commutes\": local projective models used to compare ordinary tensor evaluation with integral completed tensor. Extracted local-model argument: Simultaneous clopen lisse trivialization and complete restriction; old parent steps 2-3.",
+   "via": [
+    "lem-fix-residue-lisse-projective-models",
+    "lem-fix-constructible-tensor-completion",
+    "lem-sf-clopen-lisse-complete-localization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SfClopenCoefficientComparison",
+  "file": "lean/Sheaf/Paper/SfClopenCoefficientComparison.lean",
+  "declaration": "WeilConjectures.sf_clopen_coefficient_comparison",
+  "statement": "theorem sf_clopen_coefficient_comparison\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]\n    [FiniteDimensional ℚ_[l] E] (T : Scheme.{t}) (U : T.Opens) :\n    Nonempty (SfClopenCoefficientRestriction l E T U)",
+  "branch": "sheaf-dag",
+  "by": "G4",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-88567",
+  "group": "G4",
+  "result": "fix",
+  "landing": "20261021T174238-L-3771479",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-88567",
+  "group": "G4",
+  "result": "fix",
+  "landing": "20261021T174238-L-3771479",
+  "kind": "interface",
+  "note": "independent cc review: moved interface block vs live item (byte-identical), item theorem vs live (unchanged), new nodes' lean records/proof_deps vs Lean uses, 49 import-removal variants, #print axioms of all proved decls"
+ }
+}

@@ -1,0 +1,124 @@
+{
+ "id": "lem-sf-clopen-derived-compatibility",
+ "kind": "statement",
+ "title": "Normalized derived reduction and Roos restriction",
+ "statement": "Fix coefficient data [def-weil-l-adic-coefficient-extension], a scheme $T$ and a clopen open $U$ [def-pc-scheme, def-weil-open-immersion]. Given normalized finite and completed ring restriction isomorphisms with exact module restriction, as in [def-sf-clopen-restriction-data], ordinary derived restriction commutes with finite scalar reductions, with their universal counits, actual termwise tensor quotients, transitions and units [def-weil-integral-reduction-tower, lem-pur-derived-change-of-rings]. The comparisons fix sheafified pure tensors. Restriction preserves quotient-tower derived completeness [def-weil-derived-complete, def-weil-derived-limit] and the same residue Tor interval on every local site object [def-weil-proetale-tor-amplitude]. These conclusions are the fields of SfClopenCompleteRestriction for the supplied coefficient datum; they impose no lisse, affine or weak-contractibility hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 098F and 09C3; sites-cohomology.tex Tag 0946; sites.tex Tags 00Y0 and 03CO; derived.tex Tag 08TC. Extracted from the corresponding steps of lem-sf-clopen-lisse-complete-localization."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-weil-open-immersion",
+  "def-sf-clopen-restriction-data",
+  "def-weil-integral-reduction-tower",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-derived-complete",
+  "def-weil-derived-limit",
+  "def-weil-proetale-tor-amplitude"
+ ],
+ "proof": [
+  {
+   "text": "use the two-component partition into U and its open complement. The finite-clopen\nmodule equivalence and derived tensor calculus make ordinary restriction exact and\nidentify its unbounded derived functor with the corresponding coordinate projection.\nThe finite and completed coefficient identifications in d commute with the quotient\nprojections; on each test object this identifies the scalar-extension tensors by\ns tensor x mapped to the local s tensor x. Sheafification gives the ordinary natural\nisomorphism; degreewise application gives finite_quotient and quotient with the recorded\npure-tensor normalizations. Descend the ordinary comparison through K-flat localization\nto obtain reduction. Uniqueness of left derived functors with their universal comparison\nmakes its counit square commute on every complex; this is a square of derived-functor\ncomparison transformations, so the assertion is not limited to K-flat inputs.\nThe tensor formula commutes with the coefficient quotient transitions and with the unit\nx mapped to 1 tensor x. Localizing therefore gives the tower natural isomorphism with\nits prescribed components and the augmented unit square. Restriction preserves K-flat\ncomplexes and flat terms by the tensor calculus. Under the finite-product derived\nequivalence, insertion in the U coordinate is left adjoint to restriction, so restriction\npreserves all existing products, in particular the product used in the Roos triangle.\nIts exact derived functor preserves that triangle, the map 1 minus the transition shift,\nand the augmentation. A global K-flat completeness witness thus restricts to a local\none with the same Roos limit condition. Finally a local site object V has the same\nunderlying object over T; relocalization identifies their slice categories and restricted\ncoefficient rings. The residue reduction comparison identifies tensoring with every\nlocal degree-zero module. Transport the assumed vanishings through these exact slice\nand tensor identifications; the integers a and b do not change. Empty components give\nzero categories and satisfy the same argument.",
+   "uses": [
+    "lem-pur-clopen-ringed-module-gluing",
+    "lem-pur-finite-product-derived-tensor-calculus",
+    "lem-weil-integral-reduction-tower-well-defined",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-weil-proetale-weakly-etale-localization",
+    "def-weil-derived-limit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-clopen-ringed-module-gluing",
+  "lem-pur-finite-product-derived-tensor-calculus",
+  "lem-weil-integral-reduction-tower-well-defined",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-proetale-weakly-etale-localization",
+  "def-weil-derived-limit"
+ ],
+ "proof_origin": {
+  "by": "G4",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Expanded from the assigned node proof and the cited site/derived arguments."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A clopen open subscheme of a weakly contractible affine scheme is weakly contractible and evaluation of sheaves of modules is exact",
+   "results": "8 hits concerning scheme module restriction, affine opens and stalks; no small pro-etale categorical statement.",
+   "verdict": "No exact result.",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of sheaves of modules to a clopen subscheme commutes with derived scalar extension and preserves homotopy inverse limits and Tor amplitude",
+   "results": "8 Scheme.Modules restriction and adjunction results for the structure sheaf; none handles arbitrary ring sheaves on the small pro-etale site.",
+   "verdict": "No exact result; use local site and sheafification APIs.",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "grep",
+   "query": "IsWeaklyContractible|clopen.*(sheaf|constant)|unitHomEquiv|pushforwardContinuousSheafificationCompatibility",
+   "results": "Inspected Mathlib CategoryTheory/Sites and Algebra/Category/ModuleCat. unitHomEquiv and continuous sheafification compatibility supply parts; no combined theorem.",
+   "verdict": "Partial APIs used; new conclusions require the geometric splitting and normalization arguments.",
+   "date": "2026-10-21"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SfClopenLisseCompleteLocalization",
+  "group": "G4",
+  "date": "2026-10-21"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-weil-operations",
+   "place": "Proof, paragraph beginning \"For an admissible exceptional adjoint\", sentence \"Evaluation is natural in the two Weil maps and their inverses, so its square commutes\": local projective models used to compare ordinary tensor evaluation with integral completed tensor. Extracted local-model argument: Simultaneous clopen lisse trivialization and complete restriction; old parent steps 2-3.",
+   "via": [
+    "lem-fix-residue-lisse-projective-models",
+    "lem-fix-constructible-tensor-completion",
+    "lem-sf-clopen-lisse-complete-localization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SfClopenDerivedCompatibility",
+  "file": "lean/Sheaf/Paper/SfClopenDerivedCompatibility.lean",
+  "declaration": "WeilConjectures.sf_clopen_derived_compatibility",
+  "statement": "theorem sf_clopen_derived_compatibility\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]\n    [FiniteDimensional ℚ_[l] E] (T : Scheme.{t}) (U : T.Opens)\n    (hU : IsClosed (U : Set T)) (d : SfClopenCoefficientRestriction l E T U) :\n    Nonempty (SfClopenCompleteRestriction d)",
+  "branch": "sheaf-dag",
+  "by": "G4",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-88567",
+  "group": "G4",
+  "result": "fix",
+  "landing": "20261021T174238-L-3771479",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-88567",
+  "group": "G4",
+  "result": "fix",
+  "landing": "20261021T174238-L-3771479",
+  "kind": "interface",
+  "note": "independent cc review: moved interface block vs live item (byte-identical), item theorem vs live (unchanged), new nodes' lean records/proof_deps vs Lean uses, 49 import-removal variants, #print axioms of all proved decls"
+ }
+}

@@ -1,0 +1,117 @@
+{
+ "id": "lem-sf-clopen-cover-geometry",
+ "kind": "statement",
+ "title": "Categorical clopen refinement and inheritance",
+ "statement": "Let $T$ be affine [def-pc-scheme] and suppose terminal evaluation of set sheaves on its small pro-etale site [def-weil-pbc-proetale-site, def-weil-pbc-sites-and-cohomology] sends epimorphisms to surjections. Every covering sieve of $T$ admits a finite disjoint clopen partition refining it. Every clopen open subscheme $U$ [def-weil-open-immersion] has the same evaluation property for set sheaves in every universe containing the site.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 098F and 09C3; sites-cohomology.tex Tag 0946; sites.tex Tags 00Y0 and 03CO; derived.tex Tag 08TC. Extracted from the corresponding steps of lem-sf-clopen-lisse-complete-localization."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "refine a covering sieve of the affine target to finitely many affine members.\nTheir represented coproduct covering is epic, so evaluation lifts the identity to a\nsection. Its inverse images of the coproduct summands form a finite clopen partition\nrefining the sieve. For a cover of a clopen, adjoin its affine clopen complement and\nsplit the resulting cover of the whole target. Restricting that section splits the\noriginal cover. Finite disjoint refinements then glue local lifts of sheaf sections,\nindependently of their universe. Empty covers and empty clopens are included.",
+   "uses": [
+    "lem-weil-pbc-proetale-subcanonical",
+    "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "sk-def-pe-site"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proetale-subcanonical",
+  "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "sk-def-pe-site"
+ ],
+ "proof_origin": {
+  "by": "G4",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Expanded from the assigned node proof and the cited site/derived arguments."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A clopen open subscheme of a weakly contractible affine scheme is weakly contractible and evaluation of sheaves of modules is exact",
+   "results": "8 hits concerning scheme module restriction, affine opens and stalks; no small pro-etale categorical statement.",
+   "verdict": "No exact result.",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of sheaves of modules to a clopen subscheme commutes with derived scalar extension and preserves homotopy inverse limits and Tor amplitude",
+   "results": "8 Scheme.Modules restriction and adjunction results for the structure sheaf; none handles arbitrary ring sheaves on the small pro-etale site.",
+   "verdict": "No exact result; use local site and sheafification APIs.",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "grep",
+   "query": "IsWeaklyContractible|clopen.*(sheaf|constant)|unitHomEquiv|pushforwardContinuousSheafificationCompatibility",
+   "results": "Inspected Mathlib CategoryTheory/Sites and Algebra/Category/ModuleCat. unitHomEquiv and continuous sheafification compatibility supply parts; no combined theorem.",
+   "verdict": "Partial APIs used; new conclusions require the geometric splitting and normalization arguments.",
+   "date": "2026-10-21"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SfClopenLisseCompleteLocalization",
+  "group": "G4",
+  "date": "2026-10-21"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-weil-operations",
+   "place": "Proof, paragraph beginning \"For an admissible exceptional adjoint\", sentence \"Evaluation is natural in the two Weil maps and their inverses, so its square commutes\": local projective models used to compare ordinary tensor evaluation with integral completed tensor. Extracted local-model argument: Simultaneous clopen lisse trivialization and complete restriction; old parent steps 2-3.",
+   "via": [
+    "lem-fix-residue-lisse-projective-models",
+    "lem-fix-constructible-tensor-completion",
+    "lem-sf-clopen-lisse-complete-localization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SfClopenCoverGeometry",
+  "file": "lean/Sheaf/Paper/SfClopenCoverGeometry.lean",
+  "declaration": "WeilConjectures.sf_clopen_cover_geometry",
+  "statement": "theorem sf_clopen_cover_geometry (T : Scheme.{t}) [IsAffine T]\n    (hT : ∀ (F G : Sheaf (ProEt.topology T) (Type (max u (t + 1))))\n      (f : F ⟶ G), Epi f → Function.Surjective (f.hom.app (op (ProEt.mk (𝟙 T))))) :\n    (∀ S ∈ ProEt.topology T (ProEt.mk (𝟙 T)),\n      ∃ (n : ℕ) (O : Fin n → T.Opens),\n        (∀ i, IsClosed (O i : Set T)) ∧\n        Pairwise (fun i j ↦ Disjoint (O i) (O j)) ∧ iSup O = ⊤ ∧\n        ∀ i, S (ProEt.ofOpenImmersionHom (ProEt.mk (𝟙 T)) (O i).ι)) ∧\n    (∀ (U : T.Opens), IsClosed (U : Set T) →\n      ∀ (F G : Sheaf (ProEt.topology U.toScheme) (Type (max w (t + 1))))\n        (f : F ⟶ G), Epi f →\n          Function.Surjective (f.hom.app (op (ProEt.mk (𝟙 U.toScheme)))))",
+  "branch": "sheaf-dag",
+  "by": "G4",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-88567",
+  "group": "G4",
+  "result": "fix",
+  "landing": "20261021T174238-L-3771479",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-88567",
+  "group": "G4",
+  "result": "fix",
+  "landing": "20261021T174238-L-3771479",
+  "kind": "interface",
+  "note": "independent cc review: moved interface block vs live item (byte-identical), item theorem vs live (unchanged), new nodes' lean records/proof_deps vs Lean uses, 49 import-removal variants, #print axioms of all proved decls"
+ }
+}

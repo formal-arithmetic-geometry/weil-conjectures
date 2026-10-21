@@ -1,0 +1,128 @@
+{
+ "id": "def-sf-clopen-restriction-data",
+ "kind": "definition",
+ "title": "Normalized coefficient and complete restriction interfaces",
+ "statement": "For the constant finite and completed coefficient sheaves [def-weil-completed-integral-coefficients] and derived quotient towers [def-weil-integral-reduction-tower], normalized restriction data consist of coefficient isomorphisms fixed by constant sections and completion projections, exact sectionwise module restriction, and compatibility of derived reductions, counits, augmented quotient towers, completeness and local Tor bounds. These are precisely the existing definitions and structures of that node, factored into an interface module without altering their bodies or signatures.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C3, lemma-local-structure-constructible-complex, finite disjoint open decomposition in the base case and restriction of the local models. The covering argument is Tag 098F, lemma-w-contractible-proetale-cover, expanded from categorical weak contractibility; exact evaluation is Tag 0946, sites-cohomology.tex, lemma-w-contractible. Parent proof steps 2-3."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-pur-sheaf-inverse-limit",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-derived-limit",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-proetale-locally-constant-sheaf",
+  "def-weil-open-immersion",
+  "def-weil-proetale-tor-amplitude",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-derived-complete",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-integral-reduction-tower",
+  "def-weil-pbc-ringed-derived-restriction",
+  "def-pur-localized-ringed-site"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "G4",
+  "place": "Verbatim interface extraction; no mathematical change."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A clopen open subscheme of a weakly contractible affine scheme is weakly contractible and evaluation of sheaves of modules is exact",
+   "results": "8 hits concerning scheme module restriction, affine opens and stalks; no small pro-etale categorical statement.",
+   "verdict": "No exact result.",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of sheaves of modules to a clopen subscheme commutes with derived scalar extension and preserves homotopy inverse limits and Tor amplitude",
+   "results": "8 Scheme.Modules restriction and adjunction results for the structure sheaf; none handles arbitrary ring sheaves on the small pro-etale site.",
+   "verdict": "No exact result; use local site and sheafification APIs.",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "grep",
+   "query": "IsWeaklyContractible|clopen.*(sheaf|constant)|unitHomEquiv|pushforwardContinuousSheafificationCompatibility",
+   "results": "Inspected Mathlib CategoryTheory/Sites and Algebra/Category/ModuleCat. unitHomEquiv and continuous sheafification compatibility supply parts; no combined theorem.",
+   "verdict": "Partial APIs used; new conclusions require the geometric splitting and normalization arguments.",
+   "date": "2026-10-21"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SfClopenLisseCompleteLocalization",
+  "group": "G4",
+  "date": "2026-10-21"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-weil-operations",
+   "place": "Proof, paragraph beginning \"For an admissible exceptional adjoint\", sentence \"Evaluation is natural in the two Weil maps and their inverses, so its square commutes\": local projective models used to compare ordinary tensor evaluation with integral completed tensor. Extracted local-model argument: Simultaneous clopen lisse trivialization and complete restriction; old parent steps 2-3.",
+   "via": [
+    "lem-fix-residue-lisse-projective-models",
+    "lem-fix-constructible-tensor-completion"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SfClopenRestrictionData",
+  "file": "lean/Sheaf/Paper/SfClopenRestrictionData.lean",
+  "declaration": "WeilConjectures.sfClopenSiteInclusion",
+  "declarations": [
+   "WeilConjectures.sfClopenSiteInclusion",
+   "WeilConjectures.sfClopenSiteInclusionContinuous",
+   "WeilConjectures.sfClopenRingRestriction",
+   "WeilConjectures.sfClopenModuleRestriction",
+   "WeilConjectures.SfClopenCoefficientRestriction",
+   "WeilConjectures.sfClopenSliceHasDerived",
+   "WeilConjectures.sfClopenDerivedRestriction",
+   "WeilConjectures.sfClopenFiniteDerivedRestriction",
+   "WeilConjectures.sfClopenComplexRestriction",
+   "WeilConjectures.sfClopenLocalizationIso",
+   "WeilConjectures.sfClopenFiniteComplexRestriction",
+   "WeilConjectures.sfClopenFiniteLocalizationIso",
+   "WeilConjectures.sfClopenReductionCounit",
+   "WeilConjectures.SfResidueTorAmplitudeOnEveryObject",
+   "WeilConjectures.SfClopenCompleteRestriction"
+  ],
+  "statement": "abbrev sfClopenSiteInclusion {T : Scheme.{t}} (U : T.Opens) :\n    U.toScheme.ProEt ⥤ T.ProEt",
+  "branch": "sheaf-dag",
+  "by": "G4",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-88567",
+  "group": "G4",
+  "result": "fix",
+  "landing": "20261021T174238-L-3771479",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-88567",
+  "group": "G4",
+  "result": "fix",
+  "landing": "20261021T174238-L-3771479",
+  "kind": "interface",
+  "note": "independent cc review: moved interface block vs live item (byte-identical), item theorem vs live (unchanged), new nodes' lean records/proof_deps vs Lean uses, 49 import-removal variants, #print axioms of all proved decls"
+ }
+}

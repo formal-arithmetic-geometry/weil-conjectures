@@ -1,0 +1,109 @@
+{
+ "id": "lem-sf-weakly-contractible-projective",
+ "kind": "statement",
+ "title": "Exact terminal evaluation and finite free projectivity",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] whose terminal set-sheaf evaluation on the small pro-etale site [def-weil-pbc-proetale-site, def-weil-pbc-sites-and-cohomology] preserves epimorphisms in a coefficient universe containing the site. For every commutative ring sheaf $C$ in that universe, evaluation of $C$-module sheaves [def-weil-sheaf-of-modules-category] preserves homology and each finite product of unit module sheaves is projective.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 098F and 09C3; sites-cohomology.tex Tag 0946; sites.tex Tags 00Y0 and 03CO; derived.tex Tag 08TC. Extracted from the corresponding steps of lem-sf-clopen-lisse-complete-localization."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "forgetting the module structure sends an epimorphism to a locally surjective\nmap of abelian sheaves, then to an epimorphism of set sheaves. The evaluation hypothesis\nmakes its map on terminal sections surjective. Evaluation preserves kernels sectionwise,\nso it preserves homology. A map from the unit module is a global section. A section at\nthe terminal object extends to a compatible family by restriction along the unique\narrows to that object. Lift that terminal section along the epimorphism; its restrictions\nthen lift the given map. Finite products are finite biproducts of these projectives,\nincluding the empty product, which is zero.",
+   "uses": [
+    "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective"
+ ],
+ "proof_origin": {
+  "by": "G4",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Expanded from the assigned node proof and the cited site/derived arguments."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A clopen open subscheme of a weakly contractible affine scheme is weakly contractible and evaluation of sheaves of modules is exact",
+   "results": "8 hits concerning scheme module restriction, affine opens and stalks; no small pro-etale categorical statement.",
+   "verdict": "No exact result.",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of sheaves of modules to a clopen subscheme commutes with derived scalar extension and preserves homotopy inverse limits and Tor amplitude",
+   "results": "8 Scheme.Modules restriction and adjunction results for the structure sheaf; none handles arbitrary ring sheaves on the small pro-etale site.",
+   "verdict": "No exact result; use local site and sheafification APIs.",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "grep",
+   "query": "IsWeaklyContractible|clopen.*(sheaf|constant)|unitHomEquiv|pushforwardContinuousSheafificationCompatibility",
+   "results": "Inspected Mathlib CategoryTheory/Sites and Algebra/Category/ModuleCat. unitHomEquiv and continuous sheafification compatibility supply parts; no combined theorem.",
+   "verdict": "Partial APIs used; new conclusions require the geometric splitting and normalization arguments.",
+   "date": "2026-10-21"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SfClopenLisseCompleteLocalization",
+  "group": "G4",
+  "date": "2026-10-21"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-weil-operations",
+   "place": "Proof, paragraph beginning \"For an admissible exceptional adjoint\", sentence \"Evaluation is natural in the two Weil maps and their inverses, so its square commutes\": local projective models used to compare ordinary tensor evaluation with integral completed tensor. Extracted local-model argument: Simultaneous clopen lisse trivialization and complete restriction; old parent steps 2-3.",
+   "via": [
+    "lem-fix-residue-lisse-projective-models",
+    "lem-fix-constructible-tensor-completion",
+    "lem-sf-clopen-lisse-complete-localization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SfWeaklyContractibleProjective",
+  "file": "lean/Sheaf/Paper/SfWeaklyContractibleProjective.lean",
+  "declaration": "WeilConjectures.sf_weakly_contractible_projective",
+  "statement": "theorem sf_weakly_contractible_projective (X : Scheme.{t})\n    (hX : ∀ (F G : Sheaf (ProEt.topology X) (Type (max w (t + 1))))\n      (f : F ⟶ G), Epi f →\n        Function.Surjective (f.hom.app (op (ProEt.mk (𝟙 X)))))\n    (C : Sheaf (ProEt.topology X) CommRingCat.{max w (t + 1)}) :\n    (SheafOfModules.evaluation.{max w (t + 1)}\n      ((sheafCompose (ProEt.topology X)\n        (forget₂ CommRingCat.{max w (t + 1)} RingCat.{max w (t + 1)})).obj C)\n      (op (ProEt.mk (𝟙 X)))).PreservesHomology ∧\n    ∀ r : ℕ, Projective (∏ᶜ fun _ : Fin r ↦ SheafOfModules.unit\n      ((sheafCompose (ProEt.topology X)\n        (forget₂ CommRingCat.{max w (t + 1)} RingCat.{max w (t + 1)})).obj C))",
+  "branch": "sheaf-dag",
+  "by": "G4",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-88567",
+  "group": "G4",
+  "result": "fix",
+  "landing": "20261021T174238-L-3771479",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-88567",
+  "group": "G4",
+  "result": "fix",
+  "landing": "20261021T174238-L-3771479",
+  "kind": "interface",
+  "note": "independent cc review: moved interface block vs live item (byte-identical), item theorem vs live (unchanged), new nodes' lean records/proof_deps vs Lean uses, 49 import-removal variants, #print axioms of all proved decls"
+ }
+}
