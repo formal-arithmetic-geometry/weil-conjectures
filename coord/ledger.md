@@ -23878,3 +23878,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:17 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
 
 - 06:20 L: batch 20261021T214727 dependency take-out
+- 22:21 L: merged deliver/NC/lem-sfb-supported-lattice-norm-projection (reviewer PASS; first push; new nodes: 3)
