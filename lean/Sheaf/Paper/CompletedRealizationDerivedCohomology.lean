@@ -8,11 +8,6 @@ module
 public import Sheaf.Paper.IntegralStratifiedPerfectModels
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-import Sheaf.CategoryTheory.FiniteTypeConstantExact
-import Sheaf.CategoryTheory.SiteConstantModuleFunctorGeneral
-import Sheaf.Paper.CompletedConstantSheafReduction
-import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
-import Mathlib.CategoryTheory.Localization.Predicate
 
 /-! # Normalized completed realization on unbounded derived categories
 
@@ -139,6 +134,13 @@ theorem integralConstantRealization_exact_derived (T : Scheme.{u})
       PreservesFiniteColimits (integralConstantModule T d) ∧
       (integralConstantDerived T d).IsTriangulated ∧
       NatTrans.CommShift (integralRealizationFactors T d).hom ℤ := by
-  sorry
+  let := HasDerivedCategory.standard (ModuleCat.{u + 1} A)
+  let := (integralConstantModule_exact T d).1
+  let := (integralConstantModule_exact T d).2
+  refine ⟨inferInstance, inferInstance, inferInstance, ?_, ?_⟩
+  · dsimp only [integralConstantDerived]
+    infer_instance
+  · dsimp only [integralRealizationFactors]
+    infer_instance
 
 end AlgebraicGeometry.Scheme
