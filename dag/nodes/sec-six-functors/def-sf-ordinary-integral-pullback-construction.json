@@ -30,9 +30,66 @@
   "def-pur-integral-derived-operations",
   "def-weil-derived-limit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "S4 implementation of ordinaryIntegralDirectRingMap_existsUnique: prove constant-coefficient naturality directly from the sheafification adjunction and toSheafify_naturality, then use this private lemma to assemble the finite direct-image coefficient maps by NatTrans.ofOpSequence. Compose this transformation with the completed coefficient limit cone. Right-adjoint direct image preserves its limit, whose universal property gives the completed map and uniqueness with the prescribed finite projections. This obligation is proved in Lean.",
+   "uses": [
+    "def-weil-completed-integral-coefficients",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.5.9; naturality and the inverse-limit universal property"
+   }
+  },
+  {
+   "text": "S4 implementation of ordinaryIntegralModulePush_isRightAdjoint and ordinaryIntegralModulePull_additive: apply the independent-universe module_pushforward_isRightAdjoint_of_universes theorem to proEtaleBaseChange and the completed ring map. Sectionwise pushforward is additive by its actual formula; Mathlib Adjunction.left_adjoint_additive gives additivity of its specified left adjoint. Both obligations are proved in Lean.",
+   "uses": [
+    "lem-pur-ringed-site-module-pullback-exists-universes",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D1 and 03D2; additivity transported through the module adjunction"
+   }
+  },
+  {
+   "text": "S4 implementation of ordinaryIntegralCompletionChain_condition: project the product augmentation followed by 1-s onto every tower level. The result is the difference between the two sides of the quotient augmentation naturality square for n+1 to n, hence zero. Product projections are jointly monic. The differential of the zero second cochain is zero. This obligation is proved in Lean, conditional on the original quotient-augmentation existence theorem, whose proof remains pending.",
+   "uses": [
+    "def-pur-integral-derived-operations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08TC; the strict product-and-shift model for the derived limit"
+   }
+  },
+  {
+   "text": "The generator-normalized quotient augmentation remains the original named unproved obligation ordinaryIntegralQuotientAugmentation_existsUnique. Its complete balanced-tensor and transition argument is retained in its Lean docstring. No existence proof for it is claimed by this partial implementation.",
+   "uses": [
+    "def-pur-integral-derived-operations",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.5.9"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-integral-derived-operations",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-proetale-inverse-image",
+  "lem-pur-ringed-site-module-pullback-exists-universes"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "S4 partial Lean implementation, 2026-10-21: completed coefficient limit map, independent-universe module adjunction, additivity, and the strict cone condition are proved; the original quotient augmentation obligation remains."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -115,5 +172,15 @@
   "group": "Q69",
   "result": "fix",
   "note": "Re-push after the landing-timeout return of 43c8fcc9f615: Lean module byte-identical to the c42114 (PASS) and 43c8 versions; item and 4 new def nodes identical to 43c8; only report and blueprint index differ, so the 43c8 FIX is missing. Statement re-checked on the snapshot: ell != p, E->L inclusion, separated finite type X/Y/f, fixed compactification, actual adjunctions; kappa = exists-unique evaluation/trace normalization; beta = IntegralFiniteExtension.beta, c = scalarPullbackCompleted, alpha = canonical PurCompactSupport.comparison mate T_Y F_R -> F_S T_X; d_M and b' in node order; conclusion exactly eps_S F_S(b') = T_Y(eps_R) alpha^-1 via naturality of the realization and faithful inclusion; lean.statement verbatim; edge cases E=L, ramified, empty, M=0 retained; gates OK. F1 (H12) fixed again: fixes/def-sf-compact-support-site-comparison-construction.json adds lem-weil-pbc-comparison-direct-image-canonical-mate (isIso_fixedComparisonDirectImageMatePlus, used for asIso) to stmt_deps with inline citation, identical to the 43c8 fix that landing PREPARED. Compile: nt_compile --json rc 0, no warnings, 41.8 s at load ~115 and 28-33 s at load ~100; profiler shows 12-17 s kernel time in dualValue (extracting one clause of integral_verdier_biduality); obtain/separate-theorem variants and linter.all false gave no gain, so no Lean change; the earlier 60 s landing timeout was load, retry at lower load."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261021T130143-L-2567661",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

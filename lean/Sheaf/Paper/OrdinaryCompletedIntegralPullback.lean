@@ -22,21 +22,9 @@ public import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.Topology.KrullDimension
 public import Mathlib.CategoryTheory.Functor.Derived.LeftDerived
-import Sheaf.AlgebraicGeometry.FiniteLocallyClosedStratification
-import Sheaf.Paper.IntegralUniformCoefficient
-import Sheaf.AlgebraicGeometry.ProEtaleToposFunctorialityInverseImage
-import Sheaf.Paper.IntegralOperationsWellDefined
-import Sheaf.Paper.SfImmersionCompletedPullbackComparison
-import Sheaf.SixFunctors.RingedDerivedMonoidalComparisons
-import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
-import Sheaf.Paper.IntegralStratifiedPerfectCharacterization
-import Sheaf.CategoryTheory.SiteInverseImageTensor
-import Sheaf.Paper.RingedDerivedSliceLocalization
-import Sheaf.Paper.RingedTopoiDerivedPullback
-import Sheaf.Paper.KFlatRingedToposPullback
-import Sheaf.Paper.KoszulReconstruction
-import Mathlib.Topology.Algebra.Valued.LocallyCompact
-import Sheaf.AlgebraicGeometry.ProEtaleConstantExact
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.PullbackExistsOfUniverses
+import all Sheaf.Paper.IntegralDerivedOperationsOnSlices
+import all Sheaf.Paper.IntegralOperationsWellDefined
 
 /-!
 # Ordinary and completed integral pullback
@@ -66,6 +54,9 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 set_option synthInstance.maxSize 2048
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
+attribute [-instance] WeilConjectures.integralOperationsSiteSmall
+attribute [-instance] WeilConjectures.integralOperationsCommHasDerivedCategory
+attribute [local instance 3000] WeilConjectures.integralTowerHasDerivedCategory
 
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite
@@ -85,6 +76,47 @@ def ordinaryIntegralFiniteDirectRingMap (n : ℕ) :
     (coefficientProEtaleDirectRingMap.{u, u} f
       (CommRingCat.of (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1)))))
 
+private theorem ordinaryConstantUnit {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (A : CommRingCat.{u + 1}) (U : Y.ProEtᵒᵖ) :
+    (toSheafify (ProEt.topology Y) ((Functor.const Y.ProEtᵒᵖ).obj A)).app U ≫
+      (coefficientProEtaleDirectRingMap.{u, u} f A).hom.app U =
+    (toSheafify (ProEt.topology X) ((Functor.const X.ProEtᵒᵖ).obj A)).app
+      ((proEtaleBaseChange f).op.obj U) := by
+  have h := (sheafificationAdjunction (ProEt.topology Y)
+      CommRingCat.{u + 1}).homEquiv ((Functor.const Y.ProEtᵒᵖ).obj A)
+        (((proEtaleBaseChange f).sheafPushforwardContinuous CommRingCat.{u + 1}
+          (ProEt.topology Y) (ProEt.topology X)).obj
+            ((constantSheaf (ProEt.topology X) CommRingCat.{u + 1}).obj A))
+      |>.apply_symm_apply (Functor.whiskerLeft (proEtaleBaseChange f).op
+        (toSheafify (ProEt.topology X) ((Functor.const X.ProEtᵒᵖ).obj A)))
+  exact congrArg (fun α ↦ α.app U) h
+
+private theorem ordinaryConstantMap_naturality {X Y : Scheme.{u}} (f : X ⟶ Y)
+    {A B : CommRingCat.{u + 1}} (a : A ⟶ B) :
+    (constantSheaf (ProEt.topology Y) CommRingCat.{u + 1}).map a ≫
+      coefficientProEtaleDirectRingMap.{u, u} f B =
+    coefficientProEtaleDirectRingMap.{u, u} f A ≫
+      ((proEtaleBaseChange f).sheafPushforwardContinuous CommRingCat.{u + 1}
+        (ProEt.topology Y) (ProEt.topology X)).map
+          ((constantSheaf (ProEt.topology X) CommRingCat.{u + 1}).map a) := by
+  apply (sheafificationAdjunction (ProEt.topology Y)
+      CommRingCat.{u + 1}).homEquiv ((Functor.const Y.ProEtᵒᵖ).obj A)
+        (((proEtaleBaseChange f).sheafPushforwardContinuous CommRingCat.{u + 1}
+          (ProEt.topology Y) (ProEt.topology X)).obj
+            ((constantSheaf (ProEt.topology X) CommRingCat.{u + 1}).obj B)) |>.injective
+  apply NatTrans.ext
+  funext U
+  change _ ≫ (_ ≫ _) = _ ≫ (_ ≫ _)
+  have hY := congrArg (fun α ↦ α.app U)
+    (toSheafify_naturality (ProEt.topology Y) ((Functor.const Y.ProEtᵒᵖ).map a))
+  change a ≫ _ = _ ≫ _ at hY
+  erw [← Category.assoc, ← hY, Category.assoc, ordinaryConstantUnit,
+    ← Category.assoc, ordinaryConstantUnit]
+  exact congrArg (fun α ↦ α.app ((proEtaleBaseChange f).op.obj U))
+    (toSheafify_naturality (ProEt.topology X) ((Functor.const X.ProEtᵒᵖ).map a))
+
+attribute [local irreducible] constantSheaf HasDerivedCategory.standard
+
 /-- The adjoint completed ring map is uniquely determined by all its quotient projections.
 Its inverse-image adjoint is exactly c_f of the statement.
 Source: Bhatt--Scholze, Lemma 6.5.9; Stacks 06YY
@@ -100,13 +132,38 @@ theorem ordinaryIntegralDirectRingMap_existsUnique :
           (limit.π (integralCoefficientSheafSystem l E X) (op n)) =
         limit.π (integralCoefficientSheafSystem l E Y) (op n) ≫
           ordinaryIntegralFiniteDirectRingMap l E f n := by
-  sorry
+  let G := proEtaleSheafDirectImage f RingCat.{u + 1}
+  let τ : integralCoefficientSheafSystem l E Y ⟶
+      integralCoefficientSheafSystem l E X ⋙ G :=
+    NatTrans.ofOpSequence (ordinaryIntegralFiniteDirectRingMap l E f) (fun n ↦ by
+      simp only [integralCoefficientSheafSystem, Functor.comp_map,
+        Functor.ofOpSequence_map_homOfLE_succ]
+      exact congrArg
+        ((sheafCompose (ProEt.topology Y)
+          (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map)
+        (ordinaryConstantMap_naturality f
+          (CommRingCat.ofHom (Padic.coefficientExtensionTransition l E (n + 1)).ulift)))
+  let c : Cone (integralCoefficientSheafSystem l E X ⋙ G) :=
+    { pt := completedIntegralCoefficientSheafUnrestricted l E Y
+      π := (limit.cone (integralCoefficientSheafSystem l E Y)).π ≫ τ }
+  let hc := isLimitOfPreserves G (limit.isLimit (integralCoefficientSheafSystem l E X))
+  refine ⟨hc.lift c, ?_, ?_⟩
+  · intro n
+    exact hc.fac c (op n)
+  · intro ρ hρ
+    apply hc.hom_ext
+    intro n
+    exact (hρ n.unop).trans (hc.fac c n).symm
+
+attribute [local irreducible] limit
 
 /-- The canonical completed coefficient map, in its direct-image adjoint form.
 Source: Bhatt--Scholze, Lemma 6.5.9
 (blueprint: lem-tw-ordinary-completed-integral-pullback). -/
 def ordinaryIntegralDirectRingMap :=
   (ordinaryIntegralDirectRingMap_existsUnique l E f).exists.choose
+
+attribute [local irreducible] ordinaryIntegralDirectRingMap
 
 /-- The actual sectionwise module direct image with this completed coefficient action.
 Source: Stacks 03D1 (blueprint: lem-tw-ordinary-completed-integral-pullback). -/
@@ -122,7 +179,8 @@ adjunction back. Its right adjoint is the specified sectionwise module pushforwa
 The left adjoint is B_X tensor over f-inverse B_Y with f-inverse of the module. -/
 @[instance] theorem ordinaryIntegralModulePush_isRightAdjoint :
     (ordinaryIntegralModulePush l E f).IsRightAdjoint := by
-  sorry
+  exact SheafOfModules.module_pushforward_isRightAdjoint_of_universes.{u + 1, u, u}
+    (U := proEtaleBaseChange f) (ordinaryIntegralDirectRingMap l E f)
 
 /-- Ordinary ringed module pullback, fixed by its sheafified Kan-extension adjunction.
 Source: Stacks 03D2 (blueprint: lem-tw-ordinary-completed-integral-pullback). -/
@@ -152,7 +210,13 @@ Proof: sectionwise pushforward is additive. Its adjunction makes its left adjoin
 additive by the preadditive adjunction criterion. -/
 @[instance] theorem ordinaryIntegralModulePull_additive :
     (ordinaryIntegralModulePull l E f).Additive := by
-  sorry
+  have : (ordinaryIntegralModulePush l E f).Additive := by
+    refine ⟨?_⟩
+    intro M N a b
+    rfl
+  exact (ordinaryIntegralModuleAdjunction l E f).left_adjoint_additive
+
+attribute [local irreducible] ordinaryIntegralModulePull
 
 /-- The canonical total left derived functor exists on the unbounded category.
 Source: Stacks 06YY (blueprint: lem-tw-ordinary-completed-integral-pullback).
@@ -247,6 +311,19 @@ def ordinaryIntegralProductAugmentation
       ∏ᶜ (fun n : ℕ ↦ ((integralOperationsPullbackTowerFunctor l E f).obj P).obj (op n)) :=
   Pi.lift (fun n ↦ ((ordinaryIntegralQuotientAugmentation l E f).app P).app (op n))
 
+private theorem ordinaryTowerAugmentation_zero
+    (M : Type*) [Category* M] [Abelian M] [HasCountableProducts M]
+    (S : ℕᵒᵖ ⥤ CochainComplex M ℤ) (C : CochainComplex M ℤ)
+    (a : (Functor.const ℕᵒᵖ).obj C ⟶ S) :
+    Pi.lift (fun n : ℕ ↦ a.app (op n)) ≫
+      towerTransitionEndomorphism (K := fun n : ℕ ↦ S.obj (op n))
+        (integralOperationsTowerStep S) = 0 := by
+  apply Pi.hom_ext
+  intro n
+  have h := a.naturality (homOfLE (Nat.le_succ n)).op
+  simpa [towerTransitionEndomorphism, towerProductShift,
+    integralOperationsTowerStep, Category.assoc] using sub_eq_zero.mpr h
+
 /-- The strict quotient augmentation is killed by 1-s, with zero second cone cochain.
 Source: Stacks 08TC (blueprint: lem-tw-ordinary-completed-integral-pullback).
 Proof: after every product projection, the composite with 1-s is the difference
@@ -265,7 +342,19 @@ theorem ordinaryIntegralCompletionChain_condition
               ((integralOperationsPullbackTowerFunctor l E f).obj P).obj (op n))
             (integralOperationsTowerStep
               ((integralOperationsPullbackTowerFunctor l E f).obj P))) = 0 := by
-  sorry
+  have hzero : ordinaryIntegralProductAugmentation l E f P ≫
+      towerTransitionEndomorphism
+        (K := fun n : ℕ ↦
+          ((integralOperationsPullbackTowerFunctor l E f).obj P).obj (op n))
+        (integralOperationsTowerStep
+          ((integralOperationsPullbackTowerFunctor l E f).obj P)) = 0 := by
+    exact ordinaryTowerAugmentation_zero (integralTowerModules l E X)
+      ((integralOperationsPullbackTowerFunctor l E f).obj P)
+      ((ordinaryIntegralPullComplex l E f).obj P)
+      ((ordinaryIntegralQuotientAugmentation l E f).app P)
+  simp only [CochainComplex.HomComplex.δ_zero, zero_add, hzero,
+    CochainComplex.HomComplex.Cochain.ofHom_zero]
+
 
 /-- The prescribed chain map into Cone(1-s)[-1]: quotient maps and zero, respectively.
 Source: Stacks 08TC (blueprint: lem-tw-ordinary-completed-integral-pullback). -/
@@ -279,6 +368,130 @@ def ordinaryIntegralCompletionChain
       (integralOperationsTowerStep ((integralOperationsPullbackTowerFunctor l E f).obj P)))
     (ordinaryIntegralProductAugmentation l E f P) 0
     (ordinaryIntegralCompletionChain_condition l E f P)
+
+attribute [local irreducible] towerTransitionEndomorphism
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
+private theorem ordinaryRoosLift_natural (M : Type*) [Category* M] [Abelian M]
+    [HasCountableProducts M] {C D : CochainComplex M ℤ}
+    {S T : ℕᵒᵖ ⥤ CochainComplex M ℤ} (a : S ⟶ T) (α : C ⟶ D)
+    (u : C ⟶ ∏ᶜ fun n : ℕ ↦ S.obj (op n))
+    (v : D ⟶ ∏ᶜ fun n : ℕ ↦ T.obj (op n))
+    (hu : u ≫ towerTransitionEndomorphism (K := fun n : ℕ ↦ S.obj (op n))
+        (integralOperationsTowerStep S) = 0)
+    (hv : v ≫ towerTransitionEndomorphism (K := fun n : ℕ ↦ T.obj (op n))
+        (integralOperationsTowerStep T) = 0)
+    (hn : α ≫ v = u ≫ Limits.Pi.map (f := fun n : ℕ ↦ S.obj (op n))
+      (g := fun n : ℕ ↦ T.obj (op n)) (fun n ↦ a.app (op n))) :
+    α ≫ CochainComplex.mappingCocone.lift
+        (towerTransitionEndomorphism (K := fun n : ℕ ↦ T.obj (op n))
+        (integralOperationsTowerStep T)) v 0 (by simp [hv]) =
+      CochainComplex.mappingCocone.lift
+        (towerTransitionEndomorphism (K := fun n : ℕ ↦ S.obj (op n))
+        (integralOperationsTowerStep S)) u 0 (by simp [hu]) ≫
+          integralOperationsRoosMap a := by
+  unfold integralOperationsRoosMap
+  rw [arrowConeMap]
+  exact completedCoconeLift_natural M _ _ _ _ (integralOperationsRoos_square a)
+    α u v hu hv hn
+
+private theorem ordinaryIntegralCompletionChain_natural
+    {P Q : CochainComplex (integralTowerModules l E Y) ℤ} (a : P ⟶ Q) :
+    (ordinaryIntegralPullComplex l E f).map a ≫ ordinaryIntegralCompletionChain l E f Q =
+      ordinaryIntegralCompletionChain l E f P ≫
+        (integralOperationsPullbackComplexFunctor l E f).map a := by
+  have hn : (ordinaryIntegralPullComplex l E f).map a ≫
+      ordinaryIntegralProductAugmentation l E f Q =
+    ordinaryIntegralProductAugmentation l E f P ≫
+      Limits.Pi.map
+        (f := fun n : ℕ ↦
+          ((integralOperationsPullbackTowerFunctor l E f).obj P).obj (op n))
+        (g := fun n : ℕ ↦
+          ((integralOperationsPullbackTowerFunctor l E f).obj Q).obj (op n))
+        (fun n ↦ ((integralOperationsPullbackTowerFunctor l E f).map a).app (op n)) := by
+    apply Pi.hom_ext
+    intro n
+    have h := congrArg (fun k ↦ k.app (op n))
+      ((ordinaryIntegralQuotientAugmentation l E f).naturality a)
+    simpa [ordinaryIntegralProductAugmentation, Category.assoc] using h
+  have hz (P : CochainComplex (integralTowerModules l E Y) ℤ) :
+      ordinaryIntegralProductAugmentation l E f P ≫
+        towerTransitionEndomorphism
+          (K := fun n : ℕ ↦
+            ((integralOperationsPullbackTowerFunctor l E f).obj P).obj (op n))
+          (integralOperationsTowerStep
+            ((integralOperationsPullbackTowerFunctor l E f).obj P)) = 0 := by
+    apply CochainComplex.HomComplex.Cochain.ofHom_injective
+    simpa only [CochainComplex.HomComplex.δ_zero, zero_add,
+      CochainComplex.HomComplex.Cochain.ofHom_zero] using
+      ordinaryIntegralCompletionChain_condition l E f P
+  exact ordinaryRoosLift_natural (integralTowerModules l E X)
+    (S := (integralOperationsPullbackTowerFunctor l E f).obj P)
+    (T := (integralOperationsPullbackTowerFunctor l E f).obj Q)
+    ((integralOperationsPullbackTowerFunctor l E f).map a)
+    ((ordinaryIntegralPullComplex l E f).map a)
+    (ordinaryIntegralProductAugmentation l E f P)
+    (ordinaryIntegralProductAugmentation l E f Q) (hz P) (hz Q) hn
+
+attribute [local irreducible] ordinaryIntegralCompletionChain
+  integralOperationsPullbackComplexFunctor integralDerivedPullback integralDerivedPullbackComparison
+
+private theorem ordinaryNormalizedComparison_existsUnique
+    {A B C : Type*} [Category* A] [Category* B] [Category* C]
+    (p : A ⥤ B) (ff : ((Functor.whiskeringLeft A B C).obj p).FullyFaithful)
+    (O F : B ⥤ C) (G : A ⥤ C) (e : p ⋙ F ≅ G) (β : p ⋙ O ⟶ G) :
+    ∃! η : O ⟶ F, ∀ P, η.app (p.obj P) ≫ e.hom.app P = β.app P := by
+  let α := β ≫ e.inv
+  let η := ff.preimage α
+  have hη : Functor.whiskerLeft p η = α := ff.map_preimage α
+  refine ⟨η, ?_, ?_⟩
+  · intro P
+    have h := NatTrans.congr_app hη P
+    change η.app (p.obj P) = β.app P ≫ e.inv.app P at h
+    rw [h, Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
+  · intro η' hη'
+    apply ff.map_injective
+    ext P
+    apply (cancel_mono (e.hom.app P)).1
+    have h := NatTrans.congr_app hη P
+    change η.app (p.obj P) = β.app P ≫ e.inv.app P at h
+    change η'.app (p.obj P) ≫ e.hom.app P = η.app (p.obj P) ≫ e.hom.app P
+    rw [hη', h, Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
+
+private def ordinaryIntegralComparisonOnGood :
+    { β : integralOperationsGoodLocalization l E Y ⋙ ordinaryIntegralDerivedPull l E f ⟶
+        integralOperationsPullbackOnGood l E f //
+      ∀ P : (integralOperationsGoodComplex l E Y).FullSubcategory,
+        β.app P = ordinaryIntegralPullComplexCounit l E f P.obj ≫
+          DerivedCategory.Q.map (ordinaryIntegralCompletionChain l E f P.obj) } := by
+  let c : DerivedCategory.Q ⋙ ordinaryIntegralDerivedPull l E f ⟶
+      ordinaryIntegralPullComplex l E f ⋙ DerivedCategory.Q :=
+    Functor.whiskerRight (DerivedCategory.quotientCompQhIso _).inv
+        (ordinaryIntegralDerivedPull l E f) ≫
+      Functor.whiskerLeft (HomotopyCategory.quotient _ _)
+        (ordinaryIntegralPullCounit l E f) ≫
+      Functor.whiskerRight
+        ((ordinaryIntegralModulePull l E f).mapHomotopyCategoryFactors (.up ℤ)).hom
+        DerivedCategory.Qh ≫
+      Functor.whiskerLeft (ordinaryIntegralPullComplex l E f)
+        (DerivedCategory.quotientCompQhIso _).hom
+  refine ⟨Functor.whiskerLeft (integralOperationsGoodComplex l E Y).ι c ≫
+    { app := fun P ↦ DerivedCategory.Q.map (ordinaryIntegralCompletionChain l E f P.obj)
+      naturality := by
+        intro P Q a
+        change DerivedCategory.Q.map ((ordinaryIntegralPullComplex l E f).map a.hom) ≫ _ =
+          _ ≫ DerivedCategory.Q.map
+            ((integralOperationsPullbackComplexFunctor l E f).map a.hom)
+        simpa only [← Functor.map_comp] using
+          congrArg DerivedCategory.Q.map
+            (ordinaryIntegralCompletionChain_natural l E f a.hom) }, ?_⟩
+  intro P
+  change c.app P.obj ≫ _ = (_ ≫ _ ≫ _ ≫ _) ≫ _
+  dsimp only [c, NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    Functor.comp_obj]
+
+attribute [local irreducible] ordinaryIntegralComparisonOnGood
 
 /-- The specified chain maps descend to a unique natural transformation.
 Source: Stacks 06YY, 08TC (blueprint: lem-tw-ordinary-completed-integral-pullback).
@@ -295,7 +508,27 @@ theorem ordinaryIntegralCompletionComparison_existsUnique :
             (integralDerivedPullbackComparison l E f).hom.app P =
           ordinaryIntegralPullComplexCounit l E f P.obj ≫
             DerivedCategory.Q.map (ordinaryIntegralCompletionChain l E f P.obj) := by
-  sorry
+  let L := integralOperationsGoodLocalization l E Y
+  let O := ordinaryIntegralDerivedPull l E f
+  let F := integralDerivedPullback l E f
+  let e := integralDerivedPullbackComparison l E f
+  let β := (ordinaryIntegralComparisonOnGood l E f).val
+  let ff := Classical.choice (good_whisker_fullyFaithful l E Y
+    (DerivedCategory (integralTowerModules l E X)))
+  have h := ordinaryNormalizedComparison_existsUnique L ff O F _ e β
+  change ∃! η : ordinaryIntegralDerivedPull l E f ⟶ integralDerivedPullback l E f,
+    ∀ P : (integralOperationsGoodComplex l E Y).FullSubcategory,
+      η.app (DerivedCategory.Q.obj P.obj) ≫
+        (integralDerivedPullbackComparison l E f).hom.app P =
+          (ordinaryIntegralComparisonOnGood l E f).val.app P at h
+  obtain ⟨η, hη, hη_unique⟩ := h
+  refine ⟨η, ?_, ?_⟩
+  · intro P
+    exact (hη P).trans ((ordinaryIntegralComparisonOnGood l E f).property P)
+  · intro η' hη'
+    apply hη_unique η'
+    intro P
+    exact (hη' P).trans ((ordinaryIntegralComparisonOnGood l E f).property P).symm
 
 /-- The canonical completion comparison, uniquely fixed by the (quotients,0) chain map.
 Source: Bhatt--Scholze, Lemma 6.5.9; Stacks 08TC
@@ -303,6 +536,8 @@ Source: Bhatt--Scholze, Lemma 6.5.9; Stacks 08TC
 def ordinaryIntegralCompletionComparison :
     ordinaryIntegralDerivedPull l E f ⟶ integralDerivedPullback l E f :=
   (ordinaryIntegralCompletionComparison_existsUnique l E f).exists.choose
+
+attribute [local irreducible] ordinaryIntegralCompletionComparison
 
 /-- Ordinary pullback of an integral constructible object is constructible, and its
 specified completion map is invertible, naturally and independently of its resolution.
