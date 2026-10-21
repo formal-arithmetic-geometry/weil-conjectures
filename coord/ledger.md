@@ -23289,3 +23289,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:12 L: merged deliver/Q03/lem-sfb-wstrict-lisse-component-cohomology (stage 2; reviewer FIX; parallel immutable checks)
 - 18:13 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
 - 2026-10-21T18:13:54Z L: superseded stage-1 delivery Q29/lem-coef-closed-identity-open-hom-normalization at 559b76159f19e30cd5efb286efa607c05f97538f; current completion retained; packet archived at refs/superseded/Q29/lem-coef-closed-identity-open-hom-normalization/559b76159f19e30cd5efb286efa607c05f97538f; stale return retired.
+- 18:14 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
