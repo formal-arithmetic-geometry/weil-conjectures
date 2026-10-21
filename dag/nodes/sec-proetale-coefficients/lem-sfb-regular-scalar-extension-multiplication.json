@@ -12,11 +12,125 @@
  "stmt_deps": [
   "sk-def-sfb-sheaf-tensor",
   "sk-def-sfb-module-objects",
-  "def-sfb-modobj-extension"
+  "def-sfb-modobj-extension",
+  "sk-def-sfb-ring-object"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work in $\\mathcal B=\\Sh(\\mathcal C,\\mathrm{Ab})$, with tensor unit $I=\\underline{\\mathbf Z}$. By [sk-def-sfb-sheaf-tensor], tensoring on either side preserves colimits. Coequalizers exist here directly: for abelian-sheaf maps $f,g:F\\to G$, form the presheaf $P(U)=G(U)/\\operatorname{im}(f_U-g_U)$ with induced restrictions. Maps $G\\to H$ to a sheaf $H$ equalizing $f,g$ factor uniquely through $P$ objectwise, compatibly with restrictions, and then uniquely through its sheafification by [def-weil-pbc-sheafification]. Thus $G\\to aP$ is a coequalizer. The small parallel-pair diagram in [def-weil-pbc-category-colimit] gives cancellation: if $u\\pi=v\\pi$ for its coequalizer projection $\\pi$, both are factorizations of the same cocone, hence $u=v$. The same applies to each tensor of this projection, since tensor preserves colimits.",
+   "uses": [
+    "sk-def-sfb-sheaf-tensor",
+    "def-weil-pbc-sheafification",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 002A (categories-definition-coequalizers) and 002F (categories-definition-colimit); sheafification universal property, Stacks Tag 00WH"
+   }
+  },
+  {
+   "text": "Put $r=\\mu_S\\circ(S\\otimes\\varphi):S\\otimes R\\to S$. By [def-sfb-modobj-extension] the object $P=S$ has left $S$-action $\\mu_S$ and right $R$-action $r$. Explicitly $r(S\\otimes\\eta_R)=\\rho_S$, $r(r\\otimes R)=r(S\\otimes\\mu_R)\\alpha_{S,R,R}$, and $r(\\mu_S\\otimes R)=\\mu_S(S\\otimes r)\\alpha_{S,S,R}$: these are the unit and associativity axioms of [sk-def-sfb-ring-object], after substituting the multiplication and unit compatibilities of $\\varphi$. Thus the two actions commute. The regular $R$-module of [sk-def-sfb-module-objects] has action $\\mu_R$; the two maps defining $Q=\\operatorname{Ext}_\\varphi(R)$ are exactly $r\\otimes R$ and $(S\\otimes\\mu_R)\\alpha_{S,R,R}$, with projection $\\pi:S\\otimes R\\to Q$ and left $S$-action through its first factor.",
+   "uses": [
+    "def-sfb-modobj-extension",
+    "sk-def-sfb-ring-object",
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/def-sfb-modobj-extension.proof.md",
+    "place": "Opening two sentences and displayed preserved coequalizer, specialized to M=R"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-mixed-bimodule-right-unitor] to this $S$-$R$-bimodule $P=S$. Its monoidal-category, coequalizer and tensor-preservation hypotheses hold by step 1. Its coequalizer is exactly the parallel pair of step 2; its left action is also the same action through $S$ specified by [def-sfb-modobj-extension]. If different representatives of the coequalizer were chosen, the universal property of [def-weil-pbc-category-colimit] gives inverse comparison maps preserving the projections; their composites are identities by uniqueness. Tensoring these comparisons and cancelling the tensor of the projection shows they preserve the induced left action. Hence the cited bimodule unitor gives an $S$-linear isomorphism on the specified $Q$, characterized by\n$$q\\pi=r,\\qquad j=q^{-1}=\\pi\\circ(S\\otimes\\eta_R)\\circ\\rho_S^{-1}.$$\nIn particular both $q$ and $j$ use the actual balancing coequalizer and regular actions. Uniqueness of $q$ with $q\\pi=r$ follows from cancellation in step 1.",
+   "uses": [
+    "lem-sfb-mixed-bimodule-right-unitor",
+    "def-sfb-modobj-extension",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/def-sfb-modobj-extension.proof.md",
+    "place": "Coequalizer and induced left action; mixed right-unit specialization as in Mathlib/CategoryTheory/Monoidal/Bimod.lean:685-690,717-737,764-770"
+   }
+  },
+  {
+   "text": "Use the natural maps $t_{F,G}$ from the objectwise tensor presheaf into the sheaf tensor in [lem-sfb-braided-sheaf-tensor-generators]. At each object $U$, define $ab$ in a ring object $A$ as $\\mu_A(t_{A,A}(a\\otimes b))$ and $1$ from its unit on the integer $1$; these are just evaluations of the ring structure maps [sk-def-sfb-ring-object]. Naturality of $t$ gives $r(t_{S,R}(b\\otimes a))=b\\varphi(a)$, so $q\\pi=r$ proves the forward generator equation. By [det-def-sfb-sheaf-tensor-structure] the associator, unitors and symmetry of the sheaf tensor are exactly the maps $\\alpha^\\star,\\lambda^\\star,\\rho^\\star,\\beta^\\star$ of [lem-sfb-sheaf-tensor-unit-comparison], and its unit map $\\eta_I$ is the map $u$ of the generator lemma, so that $d(f,g)=t_{F,G}\\circ(f\\otimes_pg)$. The right-unitor identity of [lem-sfb-sheaf-tensor-unit-comparison], with $F=S$ and $f=\\mathrm{id}_{US}$, identifies $\\rho_S^{-1}$ on a section $b$ with $t_{S,\\mathbf 1}(b\\otimes u(1))$. Following with $S\\otimes\\eta_R$ and $\\pi$ in the formula for $j$ therefore gives $j(b)=\\pi t_{S,R}(b\\otimes1)$. These are identities after the indicated presheaf-to-sheaf maps. The bijections in the generator lemma detect equality of maps out of a sheaf tensor; they make no assertion that its sections are pure tensors.",
+   "uses": [
+    "lem-sfb-braided-sheaf-tensor-generators",
+    "sk-def-sfb-ring-object",
+    "lem-sfb-sheaf-tensor-unit-comparison",
+    "det-def-sfb-sheaf-tensor-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-sheaf-tensor/det-def-sfb-sheaf-tensor-structure.proof.md",
+    "place": "Second paragraph: structure maps are conjugates of objectwise maps by canonical unit comparisons"
+   }
+  },
+  {
+   "text": "Define the underlying sheaf map $\\iota=\\pi\\circ(\\eta_S\\otimes R)\\circ\\lambda_R^{-1}:R\\to Q$. It is the map $a\\mapsto1\\otimes a$: the left-unitor identity of [lem-sfb-sheaf-tensor-unit-comparison] with $F=R$, $f=\\mathrm{id}_{UR}$, read through [det-def-sfb-sheaf-tensor-structure] as in step 4, gives $\\lambda_R^{-1}(a)=t_{\\mathbf 1,R}(u(1)\\otimes a)$, and naturality of $t$ in [lem-sfb-braided-sheaf-tensor-generators] sends this under $\\eta_S\\otimes R$ to $t_{S,R}(1\\otimes a)$. Then\n$$q\\iota=\\mu_S(S\\otimes\\varphi)(\\eta_S\\otimes R)\\lambda_R^{-1}=\\mu_S(\\eta_S\\otimes S)\\lambda_S^{-1}\\varphi=\\varphi.$$\nThe middle equality is tensor bifunctoriality and naturality of the left unitor, and the last is the left unit law of [sk-def-sfb-ring-object]. This computation uses $q\\pi=r$ from step 3 and the unit insertion in the coequalizer [def-sfb-modobj-extension].",
+   "uses": [
+    "sk-def-sfb-ring-object",
+    "def-sfb-modobj-extension",
+    "lem-sfb-sheaf-tensor-unit-comparison",
+    "det-def-sfb-sheaf-tensor-structure",
+    "lem-sfb-braided-sheaf-tensor-generators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/def-sfb-modobj-extension.proof.md",
+    "place": "Unit insertion into the balancing coequalizer and regular left unit law"
+   }
+  },
+  {
+   "text": "A compatible family $t_U$ gives a natural map from the constant integer presheaf to $UR$, sending $n$ to $nt_U$. Conversely such a map is determined by the images of $1$, which form a compatible family. The unit Hom bijection of [lem-sfb-braided-sheaf-tensor-generators] identifies this with $t:I\\to R$, $t\\circ u(1)=t_U$, even when the site has no final object. Put $m_t=\\mu_R(t\\otimes R)\\lambda_R^{-1}$. At $U$ it sends $a$ to $t_Ua=\\mu_R(t_{R,R}(t_U\\otimes a))$: by step 5, $\\lambda_R^{-1}(a)=t_{\\mathbf 1,R}(u(1)\\otimes a)$ ([lem-sfb-sheaf-tensor-unit-comparison] with [det-def-sfb-sheaf-tensor-structure]), and naturality of $t$ moves $t\\otimes R$ inside. So $m_t$ is the sheaf map of the statement. Its $R$-linearity is checked on morphisms, without sectionwise ring laws. Associativity, naturality of $\\lambda$ and $\\alpha$, and the coherence $\\alpha^{-1}_{\\mathbf 1,R,R}\\lambda^{-1}_{R\\otimes R}=\\lambda_R^{-1}\\otimes R$ give $m_t\\mu_R=\\mu_R(t\\otimes\\mu_R)\\lambda^{-1}_{R\\otimes R}=\\mu_R(m_t\\otimes R)$. The triangle identity $\\alpha^{-1}_{R,\\mathbf 1,R}(R\\otimes\\lambda_R^{-1})=\\rho_R^{-1}\\otimes R$ and associativity give $\\mu_R(R\\otimes m_t)=\\mu_R((\\mu_R(R\\otimes t)\\rho_R^{-1})\\otimes R)$, and commutativity $\\mu_R\\beta_{R,R}=\\mu_R$ with naturality of $\\beta$ and $\\beta_{R,\\mathbf 1}\\rho_R^{-1}=\\lambda_R^{-1}$ gives $\\mu_R(R\\otimes t)\\rho_R^{-1}=m_t$. Hence $$m_t\\mu_R=\\mu_R(R\\otimes m_t).$$This is exactly the morphism condition in [sk-def-sfb-module-objects], so $m_t$ is $R$-linear. The identical argument for the commutative ring object $S$ and $\\varphi t:I\\to S$, whose family is $\\varphi_U(t_U)$, defines the $S$-linear map $m_{\\varphi(t)}$.",
+   "uses": [
+    "lem-sfb-braided-sheaf-tensor-generators",
+    "sk-def-sfb-ring-object",
+    "sk-def-sfb-module-objects",
+    "lem-sfb-sheaf-tensor-unit-comparison",
+    "det-def-sfb-sheaf-tensor-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-objects/_section.md",
+    "place": "Module morphism condition, specialized to regular modules; global-family interpretation expanded by the agent"
+   }
+  },
+  {
+   "text": "Functoriality on the balancing coequalizer in [def-sfb-modobj-extension] says, for the $R$-linear $m_t$ of step 6,\n$$\\operatorname{Ext}_\\varphi(m_t)\\pi=\\pi(S\\otimes m_t).$$\nAfter precomposing the desired equality with $\\pi$ and using $q\\pi=r$, its two sides become $r(S\\otimes m_t)$ and $m_{\\varphi(t)}r$. First, $\\varphi m_t=m_{\\varphi(t)}\\varphi$: since $\\varphi$ is a morphism of ring objects [sk-def-sfb-ring-object],\n$$\\varphi\\mu_R(t\\otimes R)\\lambda_R^{-1}=\\mu_S(\\varphi t\\otimes\\varphi)\\lambda_R^{-1}=\\mu_S(\\varphi t\\otimes S)\\lambda_S^{-1}\\varphi,$$\nby bifunctoriality and naturality of $\\lambda$. Second, $m_{\\varphi(t)}$ is $S$-linear by step 6, $\\mu_S(S\\otimes m_{\\varphi(t)})=m_{\\varphi(t)}\\mu_S$. Therefore\n$$r(S\\otimes m_t)=\\mu_S(S\\otimes\\varphi m_t)=\\mu_S(S\\otimes m_{\\varphi(t)})(S\\otimes\\varphi)=m_{\\varphi(t)}\\mu_S(S\\otimes\\varphi)=m_{\\varphi(t)}r.$$\nOn a presheaf tensor generator this reads $b\\varphi(t_Ua)=\\varphi_U(t_U)b\\varphi(a)$, by steps 4 and 6; the proof above is an equality of sheaf morphisms and uses no sectionwise ring law. Finally cancel $\\pi$ by the uniqueness for the small parallel-pair colimit [def-weil-pbc-category-colimit], as in step 1, to obtain $q\\operatorname{Ext}_\\varphi(m_t)=m_{\\varphi(t)}q$. Every operation used a unit, multiplication, sheafification comparison, or coequalizer universal property; none required flatness or invertibility of $\\varphi$.",
+   "uses": [
+    "def-sfb-modobj-extension",
+    "sk-def-sfb-ring-object",
+    "sk-def-sfb-module-objects",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/def-sfb-modobj-extension.proof.md",
+    "place": "Final sentence: S tensor f descends functorially; multiplication specialization expanded by the agent"
+   }
+  }
+ ],
+ "proof_deps": [
+  "sk-def-sfb-sheaf-tensor",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-category-colimit",
+  "def-sfb-modobj-extension",
+  "sk-def-sfb-ring-object",
+  "sk-def-sfb-module-objects",
+  "lem-sfb-mixed-bimodule-right-unitor",
+  "lem-sfb-braided-sheaf-tensor-generators",
+  "lem-sfb-sheaf-tensor-unit-comparison",
+  "det-def-sfb-sheaf-tensor-structure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/def-sfb-modobj-extension.proof.md",
+  "place": "Regular-module specialization of the blueprint balancing construction, using the existing mixed-bimodule right unitor and explicit sheaf generator/unit comparisons; Stacks Tags 002A, 002F, 00WH for universal properties."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -66,10 +180,73 @@
    "results": "8 hits: PresheafOfModules.Sheafify.one_smul, PresheafOfModules.Sheafify.mul_smul, PresheafOfModules.Sheafify.SMulCandidate.h, PresheafOfModules.Sheafify.map_smul_eq, PresheafOfModules.Sheafify.SMulCandidate.mk', SheafOfModules.unitHomEquiv_comp_apply, SheafOfModules.unitHomEquiv_symm_comp, ModuleCat.extendRestrictScalarsAdj_unit_app_apply",
    "date": "2026-10-21",
    "verdict": "no match: TensorProduct.rid handles ordinary modules and Bimod.RightUnitorBimod handles an abstract bimodule unitor, but neither states the internal sheaf regular-module normalization together with global-section multiplication conjugation; the coequalizer and sheafification compatibility still need an argument."
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalars|[Rr]ightUnitorBimod|regular",
+   "results": "10 hits: Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/CategoryTheory/Monoidal/Mod.lean, Mathlib/CategoryTheory/Monoidal/Mod.lean, Mathlib/CategoryTheory/Monoidal/Mod.lean; Mathlib subdirectory CategoryTheory/Monoidal",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: Bimod.rightUnitorBimod is the existing leaf lem-sfb-mixed-bimodule-right-unitor and gives the normalized isomorphism, but the sheaf-generator interpretation and conjugation for global-section multiplication require the explicit comparisons and argument in this split; ordinary-module results do not state those clauses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "extension of scalars of the regular sheaf module sends multiplication by a global section to multiplication by its image",
+   "results": "8 hits: ModuleCat.ExtendScalars.map', ModuleCat.ExtendScalars.obj', PresheafOfModules.Sheafify.map_smul, ModuleCat.extendScalars, ModuleCat.ExtendScalars.map_tmul, PresheafOfModules.Sheafify.smul.congr_simp, ModuleCat.Tilde.smul_section_apply, PresheafOfModules.Sheafify.map_smul_eq",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: Bimod.rightUnitorBimod is the existing leaf lem-sfb-mixed-bimodule-right-unitor and gives the normalized isomorphism, but the sheaf-generator interpretation and conjugation for global-section multiplication require the explicit comparisons and argument in this split; ordinary-module results do not state those clauses."
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct.rid, TensorProduct.map",
+   "results": "12 hits: CoassocSimps.map_counit_comp_comul_right, CoassocSimps.rid_comp_map, CoassocSimps.rid_symm_comp, CoassocSimps.map_counit_comp_comul_right_assoc, CoassocSimps.rid_comp_map_assoc, CoassocSimps.assoc_comp_rid_symm, CoassocSimps.assoc_comp_map_rid_symm, CoassocSimps.assoc_comp_rid_symm_assoc",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: Bimod.rightUnitorBimod is the existing leaf lem-sfb-mixed-bimodule-right-unitor and gives the normalized isomorphism, but the sheaf-generator interpretation and conjugation for global-section multiplication require the explicit comparisons and argument in this split; ordinary-module results do not state those clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "extension of scalars of a regular internal sheaf module is canonically the target ring and intertwines multiplication by global sections",
+   "results": "8 hits: ModuleCat.instModuleCarrierObjOppositeOpensCarrierCarrierCommRingCatSpecOfRingCatValRingCatSheafTopTildeInType, PresheafOfModules.Sheafify.one_smul, PresheafOfModules.Sheafify.SMulCandidate, ModuleCat.tilde, ModuleCat.tildeInModuleCat, PresheafOfModules.Sheafify.SMulCandidate.x, PresheafOfModules.Sheafify.smulCandidate, ModuleCat.Tilde.smul_section_apply",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: Bimod.rightUnitorBimod is the existing leaf lem-sfb-mixed-bimodule-right-unitor and gives the normalized isomorphism, but the sheaf-generator interpretation and conjugation for global-section multiplication require the explicit comparisons and argument in this split; ordinary-module results do not state those clauses."
+  },
+  {
+   "tool": "grep",
+   "query": "RightUnitor|rightUnitor|def rid|rid_tmul",
+   "results": "5 hits: 679, 698, 739, 764, 766; Mathlib subdirectory CategoryTheory/Monoidal/Bimod.lean",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: Bimod.rightUnitorBimod is the existing leaf lem-sfb-mixed-bimodule-right-unitor and gives the normalized isomorphism, but the sheaf-generator interpretation and conjugation for global-section multiplication require the explicit comparisons and argument in this split; ordinary-module results do not state those clauses."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Bimod.rightUnitor",
+   "results": "0 hits: ; loogle: unknown identifier 'CategoryTheory.Bimod.rightUnitor'",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: Bimod.rightUnitorBimod is the existing leaf lem-sfb-mixed-bimodule-right-unitor and gives the normalized isomorphism, but the sheaf-generator interpretation and conjugation for global-section multiplication require the explicit comparisons and argument in this split; ordinary-module results do not state those clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "balanced tensor product with the regular right factor is the original bimodule via its right action, compatible with multiplication by a central scalar",
+   "results": "8 hits: TensorProduct.AlgebraTensorModule.rid, Algebra.TensorProduct.lidOfCompatibleSMul_tmul, Submodule.rTensorOne_tmul, Submodule.rTensorOne'_tmul, TensorProduct.AlgebraTensorModule.rid_tmul, TensorProduct.lidOfCompatibleSMul, Submodule.rTensorOne_tmul_one, Algebra.TensorProduct.rid_tmul",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: Bimod.rightUnitorBimod is the existing leaf lem-sfb-mixed-bimodule-right-unitor and gives the normalized isomorphism, but the sheaf-generator interpretation and conjugation for global-section multiplication require the explicit comparisons and argument in this split; ordinary-module results do not state those clauses."
+  },
+  {
+   "tool": "grep",
+   "query": "rightUnitorBimod|noncomputable def hom|noncomputable def inv",
+   "results": "11 hits: Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/CategoryTheory/Monoidal/Internal/Types/Grp.lean, Mathlib/CategoryTheory/Monoidal/Functor.lean, Mathlib/CategoryTheory/Monoidal/Internal/Types/Basic.lean; Mathlib subdirectory CategoryTheory/Monoidal",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: Bimod.rightUnitorBimod is the existing leaf lem-sfb-mixed-bimodule-right-unitor and gives the normalized isomorphism, but the sheaf-generator interpretation and conjugation for global-section multiplication require the explicit comparisons and argument in this split; ordinary-module results do not state those clauses."
+  },
+  {
+   "tool": "loogle",
+   "query": "Bimod.rightUnitorBimod",
+   "results": "3 hits: Bimod.rightUnitorBimod, Bimod.whiskerRight_id_bimod, Bimod.triangle_bimod",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: Bimod.rightUnitorBimod is the existing leaf lem-sfb-mixed-bimodule-right-unitor and gives the normalized isomorphism, but the sheaf-generator interpretation and conjugation for global-section multiplication require the explicit comparisons and argument in this split; ordinary-module results do not state those clauses."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-coefficient-sections-localization",
@@ -86,5 +263,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-regular-scalar-extension-multiplication",
+  "worker": "stage1",
+  "summary": "Reused the existing Mathlib mixed-bimodule right-unitor leaf and existing sheaf-tensor comparison nodes. Identified the exact balancing coequalizer and its regular actions, proved the local generator normalization, the unit comparison and conjugation of multiplication. Statement unchanged; no new nodes.",
+  "blueprint": "Serves det-def-sfb-constructible-local-model, final sentence and the supplementary nonconstant-section argument through lem-sfb-coefficient-sections-localization: its normalized regular-module extension in the old Steps 6–7.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-braided-sheaf-tensor-generators",
+    "why": "Generic sheaf tensor/unit Hom bijections and natural generator maps, needed to interpret the normalization on an arbitrary essentially small site; the local-model unit supplies no such comparison."
+   },
+   {
+    "node": "lem-sfb-sheaf-tensor-unit-comparison",
+    "why": "Generic right-unitor comparison proves the inverse formula on presheaf generators; the local-model unit supplies no sheaf monoidal comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-braided-sheaf-tensor-generators",
+  "lem-sfb-sheaf-tensor-unit-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q02-97cf96b59",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-97cf96b59 (reviewer sub-agent of L); spot-checked: Read the whole item: 7 steps, statement byte-identical to the live base. It is the first delivery for the item (live and side-live: unsplit), it is not on the dropped list and has no repair note, and it adds no new nodes. Sources checked: blueprint main-20261015 def-sfb-modobj-extension.md and .proof.md, and Mathlib Bimod.lean RightUnitorBimod hom/inv (680-690) and rightUnitorBimod for Bimod X Y (764-770). Statements read: every cited node plus det-def-sfb-sheaf-tensor-structure. Steps 1-3 are correct: the cokernel presheaf sheafifies to a coequalizer, the coequalizer and inverse in step 3 are exactly those of the mixed-bimodule right-unitor leaf, and the left action goes through the first factor. The q∘ι=φ computation in step 5 is correct. Three repairable faults, fixed in fixes/dag/nodes/sec-proetale-coefficients/lem-sfb-regular-scalar-extension-multiplication.json. F1 (C4/C1): steps 4-6 read the sheaf unitors as formulas on sections. Step 4 used the ρ⋆ clause without det-def-sfb-sheaf-tensor-structure, the only node saying the sheaf structure's unitors are ρ⋆ and λ⋆; steps 5-6 used λ_R⁻¹(a)=t(u(1)⊗a) with no citation at all. Both citations are added. F2 (E5/C4): steps 6-7 assumed associativity and commutativity on sections of a general commutative ring object, which no cited node gives. Replaced by checked diagrammatic proofs: m_tμ=μ(m_t⊗R)=μ(R⊗m_t) from the coherence identities, then φm_t=m_{φt}φ and S-linearity of m_{φt} give r(S⊗m_t)=m_{φt}r, and π cancels. F3: added the missing stmt_dep sk-def-sfb-ring-object, which defines commutative ring objects. proof_deps recomputed. Edge cases checked: φ=id, Z→Z/n (not flat), S=0, t=0, t=1, t not a unit, a site with no final object. Tool uses accepted: generators and unit-comparison are generic sheaf-tensor comparisons that this unit does not supply. No duplicate nodes, no cycle, no SGA.; 1 file(s) fixed by the reviewer"
  }
 }
