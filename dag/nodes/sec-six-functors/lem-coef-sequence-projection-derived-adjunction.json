@@ -20,94 +20,80 @@
  ],
  "proof": [
   {
-   "text": "Use the stated equivalence between strict semilinear systems and module sheaves on $\\mathcal T$. The index category $\\mathbf N_{\\ge1}$ is small, so $\\mathcal T$ is small in the same module universe as $\\mathcal C$. Module sheaves form an abelian category. Under the equivalence a kernel has levels $\\ker(f_n)$; a cokernel is the vertical sheafification of the levelwise cokernels, because covers have fixed index. Consequently exactness and quasi-isomorphisms agree with componentwise exactness and quasi-isomorphisms of strict systems. We may compute in $\\operatorname{Mod}(B)$ on $\\mathcal T$ and interpret the result in $\\mathscr S(B)$.",
+   "text": "At level n use the existing normalized SystemScalarModel for A to B_n. Define the extension transition by transposing the unit at m through the sectionwise restriction-composition isomorphism. The pure-tensor transpose formula gives b tensor x mapped to rho(b) tensor x. Equality on local unit tensors proves the identity and composition laws and compatibility with maps of A-modules. Exact evaluation detects the additive structure.",
    "uses": [
-    "lem-pur-system-ringed-sequence-site",
-    "def-weil-sheaf-of-modules-category"
+    "lem-pur-system-scalar-model",
+    "lem-pur-system-scalar-coherence",
+    "lem-pur-system-scalar-generators"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0940, section-derived-limits, first paragraph; ringed-module interpretation"
-   }
+   "elementary": false
   },
   {
-   "text": "For a strict system $N$, define $L(U)=\\{(z_n)\\in\\prod_n N_n(U):t_n(z_{n+1})=z_n\\}$, with componentwise addition and $A(U)$-action through $A(U)\\to B_n(U)$. Compatibility of the structural maps makes this action preserve $L(U)$. Compatible families of local sections glue uniquely in each $N_n$; their transition equalities hold after gluing by uniqueness. Thus $L$ is an $A$-module sheaf and is the limit of the scalar restrictions. A map from a constant sheaf $F$ to the underlying tower is exactly a compatible family $F\\to N_n$, hence a map $F\\to L$. Since $p^{-1}$ is the constant sequence, this is the underlying direct-image adjunction. Its induced $A$-action is precisely the action just specified. Therefore $p_*N=L=\\lim_n\\operatorname{Res}_{A\\to B_n}N_n$, naturally in $N$.",
+   "text": "Restrict each N_n along A to B_n. Apply scalar restriction to each strict transition and compose with the canonical restriction-composition isomorphism, whose section maps are identities. This gives an inverse diagram in A-modules, functorially in N. Define F as its categorical limit and pi_n as its projections. The cone equations give compatibility on sections; every compatible family is a cone and the limit lift gives the full existence and uniqueness assertion.",
    "uses": [
-    "lem-pur-system-ringed-sequence-site",
-    "def-pc-sheaf-restrict-scalars"
+    "def-weil-sheaf-of-modules-category",
+    "def-pc-sheaf-restrict-scalars",
+    "lem-pur-system-scalar-coherence"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0940, section-derived-limits, opening description of constant inverse image and limit direct image"
-   }
+   "elementary": true
   },
   {
-   "text": "The ordinary module adjunction gives $p^*M=B\\otimes_{p^{-1}A}p^{-1}M$ and $p^*\\dashv p_*$. Since $p^{-1}M$ is constant and all covers are vertical, its tensor sheaf at level $n$ is $M\\otimes_A B_n$: the presheaf tensor and its sheafification are computed at that fixed index. The transition sends $x\\otimes b$ to $x\\otimes\\rho_n(b)$, where $\\rho_n:B_{n+1}\\to B_n$. For $h:M\\to p_*N$, its transpose has local pure-tensor formula $x\\otimes b\\mapsto b\\pi_nh(x)$. This is balanced over $A$ and compatible with transitions because $\\rho_n(b)\\pi_nh(x)=t_n(b\\pi_{n+1}h(x))$; it therefore sheafifies. Conversely a strict $B$-linear family $f_n:M\\otimes_A B_n\\to N_n$ yields $x\\mapsto(f_n(x\\otimes1))_n$ in the limit. These maps are inverse: one composite evaluates at $b=1$, and the other uses $f_n(x\\otimes b)=b f_n(x\\otimes1)$. Both formulas commute with precomposition in $M$ and postcomposition in $N$.",
+   "text": "The level scalar Hom equivalences send each strict map G(M) to N to a compatible cone M to Res N_n. Conversely a map M to F(N) transposes each projection to a level map. Generator extensionality and the transition formula prove strict compatibility. The limit universal property and the scalar equivalence inverse identities prove the two composites are identities. Naturality gives the ordinary adjunction. Its normalized tensor formula is b times pi_n(h(x)); additivity of its left adjoint makes its right adjoint additive.",
    "uses": [
-    "lem-weil-pbc-ringed-topoi-module-adjunction",
-    "lem-pur-system-ringed-sequence-site"
+    "lem-pur-system-scalar-model",
+    "lem-pur-system-scalar-coherence",
+    "lem-pur-system-scalar-generators"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03D7, lemma-adjoint-pullback-pushforward-modules, tensor/restriction proof, specialized to the sequence site"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply existence of unbounded K-injective resolutions to the small ringed site $(\\mathcal T,B)$. Every strict-system complex $N$ therefore has a quasi-isomorphism $j:N\\to I$ with $I$ K-injective as a complex of modules on the sequence site. The additive functor $p_*$ induces an exact functor $K(B)\\to D(A)$: applying an additive functor degreewise preserves shifts and the finite-biproduct formulas for mapping cones and homotopies. The total-right-derived theorem now supplies $Rp_*:D(B)\\to D(A)$, computed by $p_*I$. Through step 1 this has domain $D(\\mathscr S(B))$.",
+   "text": "Resolve every base complex by one flat-term K-flat complex using the independent-coefficient K-flat resolution theorem. The scalar cochain models preserve quasi-isomorphisms between these representatives at every level, hence componentwise detection proves the whole extension does so. Pass the class to the homotopy category and apply the resolving-class left-derived theorem. Transfer its universal comparison through the homotopy quotient to complexes. The comparison is invertible on every representative in this class. For q:Q to P define c as the inverse of L([q]) followed by epsilon_Q; its required equation follows from the inverse laws.",
    "uses": [
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-weil-pbc-kinjective-total-derived"
+    "lem-pc-kflat-resolution",
+    "lem-pur-system-scalar-model",
+    "lem-pur-system-derived-evaluation",
+    "lem-pur-left-derived-from-kflat-class",
+    "lem-sfb-resolving-derived-adjunction-normalization",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A5, section-unbounded; derived.tex Tag 070K, lemma-enough-K-injectives-implies"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply the general ringed-topos derived-pullback theorem to $p$, with source ring $A$ and target ring $B$ on $\\mathcal T$. It supplies the universal $Lp^*$, inverts quasi-isomorphisms between flat-term K-flat complexes after termwise pullback, and supplies its canonical comparison isomorphism on every such complex. A flat-term K-flat resolution $q:Q\\to P$ exists on $(\\mathcal C,A)$. The theorem identifies $Lp^*P$ with $p^*Q$, whose levels by step 3 are $(Q\\otimes_A B_n)_n$ with transition $1\\otimes\\rho_n$. One $Q$ supplies the entire strict complex. The theorem's naturality and compatibility with composition of comparisons give the asserted naturality in derived $P$, independently of the chosen resolution.",
+   "text": "The strict-system category is Grothendieck abelian through its equivalence with the ringed sequence site at the coefficient universe. Its K-injective resolutions give the universal right derived pair of F by CategoryTheory.exists_derived, with the comparison invertible on every K-injective complex.",
    "uses": [
-    "lem-weil-pbc-ringed-topoi-derived-pullback",
-    "lem-pc-kflat-resolution"
+    "lem-pur-system-grothendieck",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YS, lemma-K-flat-resolution; Tag 06YY, lemma-derived-base-change, statement and proof"
-   }
+   "elementary": false
   },
   {
-   "text": "Use the ordinary adjunction from step 3 and its termwise homotopy adjunction. The flat-term K-flat class is left resolving: every complex has a resolution in this class and termwise $p^*$ followed by localization inverts its quasi-isomorphisms, as established in step 5. The source of $p_*$ has unbounded K-injective resolutions by step 4. Apply the resolving derived-adjunction normalization theorem to these universal left and right derived pairs. It gives $Lp^*\\dashv Rp_*$ naturally in both derived variables. More explicitly, for $q:Q\\to P$, $j:N\\to I$ as above and any chain map $h:Q\\to p_*I$, let $\\widetilde h:p^*Q\\to I$ be the ordinary transpose. Under $Rp_*N\\simeq[p_*I]$, the class $[h][q]^{-1}$ transposes to $[j]^{-1}[\\widetilde h]\\epsilon_Q Lp^*([q])^{-1}$, where $\\epsilon_Q:Lp^*[Q]\\xrightarrow{\\sim}[p^*Q]$ is the left comparison. At each level $\\widetilde h_n(x\\otimes b)=b\\pi_nh(x)$ by step 3. The normalization theorem and bifunctoriality give the same formula after further quasi-isomorphism denominators, hence exactly the canonical derived fraction extension of the stated ordinary correspondence. This uses the localized Hom bijection, without assuming that a fixed $Q$ represents every derived morphism by a chain map.",
+   "text": "Apply derivedAdjunctionOfResolvingClass to the ordinary adjunction, the resolving class and its preservation result, and the universal left and right pairs. Its normalized Hom equation is exactly the asserted equation on every chain map, after replacing the homotopy comparison with its equal cochain component. This normalization extends along all inverted quasi-isomorphisms, without requiring a chosen representative to represent every derived map by a chain map.",
    "uses": [
     "lem-sfb-resolving-derived-adjunction-normalization",
     "lem-weil-pbc-termwise-adjunction-homotopy"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 09T5, lemma-derived-adjoint-functors, via the fraction characterization in Tag 0FND, lemma-pre-derived-adjoint-functors-general; sites-cohomology.tex Tag 07A6, lemma-adjoint"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pur-system-ringed-sequence-site",
+  "lem-pur-system-scalar-model",
+  "lem-pur-system-scalar-coherence",
+  "lem-pur-system-scalar-generators",
   "def-weil-sheaf-of-modules-category",
   "def-pc-sheaf-restrict-scalars",
-  "lem-weil-pbc-ringed-topoi-module-adjunction",
-  "prop-pur-kinjective-resolutions-exist",
-  "lem-weil-pbc-kinjective-total-derived",
-  "lem-weil-pbc-ringed-topoi-derived-pullback",
   "lem-pc-kflat-resolution",
+  "lem-pur-system-derived-evaluation",
+  "lem-pur-left-derived-from-kflat-class",
   "lem-sfb-resolving-derived-adjunction-normalization",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-pur-system-grothendieck",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
   "lem-weil-pbc-termwise-adjunction-homotopy"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 0940, 06YS, 06YY, 07A5 and 07A6; ordinary module adjunction Tag 03D7 and derived normalization Tag 09T5/0FND, specialized explicitly to the sequence projection."
+  "place": "Tag 0940, section-derived-limits; Modules on Sites Tag 03D7, lemma-adjoint-pullback-pushforward-modules; Derived Categories Tags 06XN, 09T5 and 0FND. The Lean proof constructs the ordinary scalar/limit correspondence explicitly, then uses the existing resolving-class and K-injective universal derivation APIs."
  },
  "mathlib_searches": [
   {
@@ -254,10 +240,6 @@
  },
  "tool_uses": [
   "lem-pur-system-ringed-sequence-site",
-  "lem-weil-pbc-ringed-topoi-module-adjunction",
-  "prop-pur-kinjective-resolutions-exist",
-  "lem-weil-pbc-kinjective-total-derived",
-  "lem-weil-pbc-ringed-topoi-derived-pullback",
   "lem-pc-kflat-resolution",
   "lem-sfb-resolving-derived-adjunction-normalization",
   "lem-weil-pbc-termwise-adjunction-homotopy"
@@ -293,5 +275,15 @@
   "group": "NA",
   "result": "pass",
   "note": "Clause-by-clause match with the node and Stacks 0940/06YY/07A6/03D7. G is pinned to changeOfRings levels with 1⊗ρ transitions on pure tensors; F is pinned by projections and the full ∃! limit property; adj is pinned by the transpose formula b•π_n(h x); L and R are IsLeft/RightDerivedFunctor of G and F; ε is iso on flat-term K-flat complexes and η on K-injectives; the representative iso c is fixed by L[q]≫c=ε_Q; derivedAdj.homEquiv(ε_Q≫[f])=[f♭]≫η_I for every chain map (the canonical derivedη compatibility). No stronger hypotheses (variable block identical to SystemRingedSequenceSite; universes u v w d independent). Edge cases B_n=0, B=A, non-flat A→B_n, m=n and the empty site are covered. Statement field verbatim and 4/4 declarations present; changeOfRings is owned by the stmt_dep def-pur-sheaf-tensor-product; helpers have real data and source/blueprint docstrings; only sorry; the report has both sections. Compile: nt_compile hit its 60 s limit at load ≈300; lcompile.run with timeout 560 gave rc 0 with no errors or warnings (208 s wall under load; worker recorded 13 s). If landing times out, retry at lower load. Advisory: unused RingedToposMorphism and proof-dep imports (H9)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261021T120817-L-3950966",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
