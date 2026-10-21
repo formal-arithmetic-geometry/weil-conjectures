@@ -19,9 +19,120 @@
   "def-weil-finite-type-morphism",
   "def-weil-quasi-separated-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "All inverse images here are the actual module-object pullbacks. By [lem-sfb-alpha-iso] their coefficient-change maps are isomorphisms. Thus the formula for pullback in [sk-def-sfb-module-pushforward-pullback] identifies the underlying abelian sheaf with ordinary inverse image. That inverse image is exact by [det-pe-topos-functoriality-inverse-image](4), and [det-prop-sfb-module-pullback-exact-lifted] makes the module lift exact. These statements hold for every commutative condensed ring, so apply also to the precise algebraic-closure coefficient specified here. The exact functors act termwise on derived categories by [lem-weil-pbc-exact-functor-derived-factorization].",
+   "uses": [
+    "lem-sfb-alpha-iso",
+    "sk-def-sfb-module-pushforward-pullback",
+    "det-pe-topos-functoriality-inverse-image",
+    "det-prop-sfb-module-pullback-exact-lifted",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+    "place": "Coefficient typing before the closed-complement calculation."
+   }
+  },
+  {
+   "text": "Form $B'=Z'\\times_ZB$, with projections $a:B'\\hookrightarrow Z'$ and $h_B:B'\\to B$ [def-pc-fibre-product]. The base-change assertions of [lem-weil-pbc-proper-fp-permanence](b) make $a$ a closed immersion and $h_B$ proper. The image of $a$ is $h^{-1}(|B|)$: on an affine chart the pullback of a closed subscheme defined by an ideal $I$ is defined by its extended ideal, whose vanishing set is the inverse image of $V(I)$. Thus its complementary open is $h^{-1}(j(U))=j'(U)$ by hypothesis. This proves that $a$ and $j'$ have complementary images even when $B'$ is nonreduced. The complementary open immersions $j,j'$ are quasi-compact by hypothesis. The two general proper inputs below are formulated with the given proper $q:Z\\to S$ over the qcqs scheme $S$, so no unstated finite-type-over-a-field or global-dimension inference is needed.",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+    "place": "(2) Isomorphism: the inverse-image closed complement."
+   }
+  },
+  {
+   "text": "Put $J=D(j'_!)$. It carries $\\mathrm D_{\\mathrm{ctf}}(U,\\Lambda)$ into $\\mathrm D_{\\mathrm{ctf}}(Z',\\Lambda)$. To check this, use exactness of $j'_!$ from [sk-def-sfb-module-lower-shriek] and [lem-weil-pbc-exact-functor-complex-cohomology]: $H^n(JK)=j'_!H^n(K)$, with the same bounds. Check constructibility on each affine open $V$ of $Z'$. Its inverse-image open $U_V$ is quasi-compact by quasi-compactness of $j'$, hence qcqs as an open of an affine. The restriction of each constructible cohomology sheaf has a finite stratification on $U_V$ [sk-def-sfb-constructible]. View those strata in $V$ and add $V\\setminus U_V$, with zero local model. The source local models are unchanged on the old strata. These strata are constructible in $V$: quasi-compact opens in the quasi-separated spaces $U_V,V$ are retrocompact, so each Boolean expression in those opens on $U_V$ remains one on $V$, intersected with $U_V$ [def-weil-constructible-subset]. Local closedness is retained under an open inclusion. Extension by zero is computed on these localized opens by the same defining extension/sheafification. On the old strata $j'_!H^n(K)$ restricts to $H^n(K)$, because the open unit $j'^*j'_!\\to\\mathrm{id}$ is invertible, and on $V\\setminus U_V$ its restriction is zero by the mixed restriction $i^*j_!=0$ for a closed immersion with quasi-compact open complement; both are assertions of [lem-sfb-condensed-support-derived-localization]. This checks constructibility of $j'_!H^n(K)$ locally on every affine $V$, which is the condition of [sk-def-sfb-constructible] on an arbitrary scheme. When $Z'$ is qcqs, choose a finite affine cover $V_1,\\dots,V_m$ and stratify $Z'$ by the sets $T\\cap(V_k\\setminus(V_1\\cup\\dots\\cup V_{k-1}))$, $T$ a stratum chosen on $V_k$: each $V_k$ is a retrocompact open of the quasi-separated $Z'$, so these finitely many pairwise disjoint sets are constructible and locally closed in $Z'$ [def-weil-constructible-subset], they cover $Z'$, and on each the restriction keeps the finite constant local model of $T$. This gives the global stratification of the qcqs clause. Finally, for a sheaf $N$ on $Z'$ the general open projection formula [lem-sfb-condensed-support-projection-formula] gives $JK\\otimes^{\\mathbf L}N\\simeq J(K\\otimes^{\\mathbf L}j'^*N)$. The pullback is exact by step 1 and $J$ is exact, so every finite Tor interval for $K$ remains a Tor interval for $JK$. This proves the assertion directly from the definition; no Noetherian extension lemma is used.",
+   "uses": [
+    "sk-def-sfb-module-lower-shriek",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "sk-def-sfb-constructible",
+    "def-weil-constructible-subset",
+    "lem-sfb-condensed-support-projection-formula",
+    "lem-sfb-condensed-support-derived-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+    "place": "(2) Isomorphism: applicability of bounded constructible proper base change to the extended generator."
+   }
+  },
+  {
+   "text": "For a generator $K\\in\\mathrm D_{\\mathrm{ctf}}(U,\\Lambda)$ apply [lem-sfb-qcqs-proper-constructible-closed-base-change] with $f=h$, $c=i$ and $L=JK$. The scheme $S$ is qcqs and $q:Z\\to S$ and $h$ are proper by hypothesis, the open complement of $i$ is the given quasi-compact $j$, and step 3 gives the required finite-Tor constructibility. It follows that $i^*Rh_*JK\\simeq R(h_B)_*a^*JK$. The mixed-restriction assertion of [lem-sfb-condensed-support-derived-localization], applied to $a$ and $j'$, gives $a^*JK\\simeq0$. A right adjoint preserves the zero object: by the adjunction in [sk-def-sfb-module-derived-pushpull], maps from any object into $R(h_B)_*0$ are in bijection with maps into $0$, hence form a singleton. Therefore $i^*Rh_*JK\\simeq0$ on every generator.",
+   "uses": [
+    "lem-sfb-qcqs-proper-constructible-closed-base-change",
+    "lem-sfb-condensed-support-derived-localization",
+    "sk-def-sfb-module-derived-pushpull"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+    "place": "(2) Isomorphism: closed-complement vanishing for the bounded generators."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-exact-functor-derived-factorization], $J$ and $i^*$ are triangulated. Their sheaf adjunctions, from [sk-def-sfb-module-lower-shriek] and [sk-def-sfb-module-derived-pushpull], induce derived adjunctions, for $J$ by [def-weil-exact-derived-adjunction]; hence both preserve small ambient coproducts by [lem-weil-pbc-left-adjoint-preserves-colimits]. The inverse image under $J$ of $\\operatorname{Loc}(\\mathrm D_{\\mathrm{ctf}}(Z',\\Lambda))$ is therefore a replete triangulated subcategory closed under small sums and contains all source generators by step 3. The minimality in [sk-def-localizing-closure] shows that $J$ sends the source localizing hull into that target hull. Now [lem-sfb-qcqs-proper-localizing-coproducts], applied with the given qcqs $S$ and proper $q:Z\\to S$ and $h$, makes $Rh_*J$ preserve small sums on the source hull. The composite $F=i^*Rh_*J$ also preserves these sums. It is triangulated because $Rh_*$ is triangulated by [lem-pc-right-derived-functor-triangulated], and the other two factors are triangulated as just checked.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "sk-def-sfb-module-lower-shriek",
+    "sk-def-sfb-module-derived-pushpull",
+    "def-weil-exact-derived-adjunction",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "sk-def-localizing-closure",
+    "lem-sfb-qcqs-proper-localizing-coproducts",
+    "lem-pc-right-derived-functor-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+    "place": "(2) Isomorphism, first paragraph: extension from generators uses ambient coproduct preservation."
+   }
+  },
+  {
+   "text": "Let $\\mathcal C$ be the full subcategory of $\\operatorname{Loc}(\\mathrm D_{\\mathrm{ctf}}(U,\\Lambda))$ consisting of $K$ with $F(K)\\simeq0$. It is replete. Since $F$ is triangulated, its kernel is closed under shifts and distinguished triangles: in the image triangle, if two objects are zero, exactness of $\\operatorname{Hom}(T,-)$ for all $T$ forces the third to be zero. Since $F$ preserves small sums, a sum of objects of $\\mathcal C$ maps to a sum of zero objects, again zero, including the empty sum. Thus $\\mathcal C$, viewed in $D_U$, is a full replete triangulated subcategory closed under the ambient small sums. Step 4 places every generator in $\\mathcal C$. The defining minimality of [sk-def-localizing-closure] now gives $\\mathcal C=\\operatorname{Loc}(\\mathrm D_{\\mathrm{ctf}}(U,\\Lambda))$. This is exactly $i^*Rh_*D(j'_!)K\\simeq0$ for every $K$ in the stated domain.",
+   "uses": [
+    "sk-def-localizing-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+    "place": "(2) Isomorphism: localizing-kernel argument for all inputs."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-alpha-iso",
+  "sk-def-sfb-module-pushforward-pullback",
+  "det-pe-topos-functoriality-inverse-image",
+  "det-prop-sfb-module-pullback-exact-lifted",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-proper-fp-permanence",
+  "def-pc-fibre-product",
+  "sk-def-sfb-module-lower-shriek",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "sk-def-sfb-constructible",
+  "def-weil-constructible-subset",
+  "lem-sfb-condensed-support-projection-formula",
+  "lem-sfb-qcqs-proper-constructible-closed-base-change",
+  "lem-sfb-condensed-support-derived-localization",
+  "sk-def-sfb-module-derived-pushpull",
+  "def-weil-exact-derived-adjunction",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "sk-def-localizing-closure",
+  "lem-sfb-qcqs-proper-localizing-coproducts",
+  "lem-pc-right-derived-functor-triangulated"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+  "place": "(2) Isomorphism: explicit closed-boundary computation and localizing-kernel extension in the qcqs scope requested by det-sf-comp-coherence-cocycle. The two new qcqs inputs remain statement-only obligations."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -71,10 +182,38 @@
    "results": "AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit; AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit; AlgebraicGeometry.exists_of_res_zero_of_qcqs; AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit; AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact; AlgebraicGeometry.isIso_ΓSpec_adjunction_unit_app_basicOpen",
    "date": "2026-10-21",
    "verdict": "no match: hits concern cohomological support, ordinary section vanishing, base-change stability of scheme properties, or definitions of the pro-etale site, not this derived proper boundary vanishing on the condensed localizing category"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper direct image of extension by zero has zero restriction to the boundary on the localizing closure of constructible complexes over a qcqs scheme",
+   "results": "AlgebraicGeometry.exists_of_res_zero_of_qcqs; AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top; AlgebraicGeometry.Scheme.zeroLocus_map; AlgebraicGeometry.exists_of_res_eq_of_qcqs; AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux; AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated; AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact; AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top",
+   "date": "2026-10-21",
+   "verdict": "no match: none of the hits states condensed derived boundary vanishing on the stated localizing hull"
+  },
+  {
+   "tool": "grep",
+   "query": "proper.*base.?change|extension.?by.?zero|boundary.*vanish",
+   "results": "Mathlib/NumberTheory/MulChar/Basic.lean; Mathlib/AlgebraicGeometry/ValuativeCriterion.lean; Mathlib/AlgebraicGeometry/ColimitsOver.lean; Mathlib/AlgebraicGeometry/Sites/Pretopology.lean; Mathlib/AlgebraicGeometry/Sites/Pretopology.lean; Mathlib/AlgebraicGeometry/Sites/SheafQuasiCompact.lean; Mathlib/AlgebraicGeometry/Sites/MorphismProperty.lean; Mathlib/AlgebraicGeometry/AffineSpace.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: none of the hits states condensed derived boundary vanishing on the stated localizing hull"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper, CategoryTheory.IsIso",
+   "results": "No hits",
+   "date": "2026-10-21",
+   "verdict": "no match: none of the hits states condensed derived boundary vanishing on the stated localizing hull"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper pushforward of extension by zero vanishes on the closed boundary for the localizing category of constructible proetale complexes",
+   "results": "AlgebraicGeometry.Scheme.IdealSheafData.map_vanishingIdeal; Homotopy.extend.hom_eq_zero₂; HomologicalComplex.liftCycles_homologyπ_eq_zero_of_boundary; HomologicalComplex.extend_d_to_eq_zero; CategoryTheory.ShortComplex.rightHomologyι_descOpcycles_π_eq_zero_of_boundary; HomologicalComplex.liftCycles_homologyπ_eq_zero_of_boundary_assoc; HomologicalComplex.homologyι_descOpcycles_eq_zero_of_boundary; HomologicalComplex.IsStrictlySupportedOutside.casesOn",
+   "date": "2026-10-21",
+   "verdict": "no match: none of the hits states condensed derived boundary vanishing on the stated localizing hull"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-sf-comp-coherence-cocycle",
@@ -91,5 +230,74 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-qcqs-proper-open-boundary-vanishing",
+  "worker": "stage1",
+  "summary": "Retained the full qcqs, all-admissible-coefficient and ambient localizing scope. Split into coefficient typing, complementary square, elementary extension of finite-Tor constructible generators, closed proper exchange, coproduct preservation and localizing-kernel minimality. Two new unsplit inputs isolate general closed proper base change on generators and generic proper coproduct preservation; narrower field-restricted nodes are not misapplied. No Lean or compiler was used.",
+  "blueprint": "det-sf-comp-coherence-cocycle, Refinement isomorphisms: the boundary-vanishing input; via the closed-complement and direct-sum paragraphs of det-sf-comp-coherence-refinement (2).",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-alpha-iso",
+    "why": "Generic $\\alpha_f$ is an isomorphism for every $f$ input, used only with its stated hypotheses in the closed-complement and localizing-kernel route; no lemma of this unit supplies that operation."
+   },
+   {
+    "node": "det-pe-topos-functoriality-inverse-image",
+    "why": "Generic The geometric morphism attached to a morphism of schemes input, used only with its stated hypotheses in the closed-complement and localizing-kernel route; no lemma of this unit supplies that operation."
+   },
+   {
+    "node": "det-prop-sfb-module-pullback-exact-lifted",
+    "why": "Generic Lifts of exact functors to module objects are exact input, used only with its stated hypotheses in the closed-complement and localizing-kernel route; no lemma of this unit supplies that operation."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Generic The functor induced on derived categories by an exact functor, with its factorization through the localization functors input, used only with its stated hypotheses in the closed-complement and localizing-kernel route; no lemma of this unit supplies that operation."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Generic Permanence of proper, separated, finite type, finitely presented morphisms and of immersions input, used only with its stated hypotheses in the closed-complement and localizing-kernel route; no lemma of this unit supplies that operation."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-complex-cohomology",
+    "why": "Generic An exact functor commutes with cohomology of cochain complexes input, used only with its stated hypotheses in the closed-complement and localizing-kernel route; no lemma of this unit supplies that operation."
+   },
+   {
+    "node": "lem-sfb-condensed-support-projection-formula",
+    "why": "Generic Natural support tensor projection formulas on unbounded condensed modules input, used only with its stated hypotheses in the closed-complement and localizing-kernel route; no lemma of this unit supplies that operation."
+   },
+   {
+    "node": "lem-sfb-condensed-support-derived-localization",
+    "why": "Generic Open/closed localization for ordinary derived condensed module objects input, used only with its stated hypotheses in the closed-complement and localizing-kernel route; no lemma of this unit supplies that operation."
+   },
+   {
+    "node": "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "why": "Generic Left adjoints preserve colimits input, used only with its stated hypotheses in the closed-complement and localizing-kernel route; no lemma of this unit supplies that operation."
+   },
+   {
+    "node": "lem-pc-right-derived-functor-triangulated",
+    "why": "Generic The unbounded right derived functor is triangulated input, used only with its stated hypotheses in the closed-complement and localizing-kernel route; no lemma of this unit supplies that operation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-alpha-iso",
+  "det-pe-topos-functoriality-inverse-image",
+  "det-prop-sfb-module-pullback-exact-lifted",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-sfb-condensed-support-projection-formula",
+  "lem-sfb-condensed-support-derived-localization",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-pc-right-derived-functor-triangulated"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-O4-0aae0d2e8",
+  "group": "O4",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O4-0aae0d2e8 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement, blueprint main-20261015 det-sf-comp-coherence-refinement (2) and the cocycle proof, and BS 6.1.3/6.1.5, Rem. 6.5.10 and 6.7.5/6.7.10. The item statement and stmt_deps are identical to Q09 e84a51e7, which created it. The item was unsplit, so the re-split rules do not apply. It is not on the dropped list, and no SGA is cited. The split follows the blueprint route. Step 4 applies new node 1, proper base change of h along the closed complement on Dctf: S is qcqs, q and h are proper, the complement j is quasi-compact, and step 3 puts JK in Dctf. Mixed restriction a^*j'_!=0 then gives zero on generators. Step 5 shows that J and i^* preserve sums as left adjoints, uses minimality of Loc to send Loc_U into Loc_Z', and applies new node 2. Step 6 is the localizing-kernel argument. Neither new node restates the item, has a proof, or closes a cycle. Truth checks: node 1's quasi-compact-complement hypothesis is exactly the case where BS Cor 6.1.5 / Rem 6.5.10 make c^* agree with completed pullback, so BS 6.7.5 gives the integral case, and the rational case follows by inverting ℓ. For node 2, the sum test with ⊕A[n] works because proper f over a qcqs base has bounded fibre dimension, and the empty family gives 0. Neither is a duplicate: every existing proper base change or coproduct node is in the separated finite-type over a field setting, or uses completed pullback with étale-origin witnesses. Repairs (two): (1) Step 3 used without citation the facts that j'^*j'_! is the identity and that j'_! restricts to zero on the closed complement, and it checked only the affine-local clause of sk-def-sfb-constructible. I cited lem-sfb-condensed-support-derived-localization and added the finite-affine-cover gluing for qcqs Z'. (2) B9: blueprint.from.place of both new nodes named a place in the refinement proof while from.node is the cocycle; I rewrote both to 'Refinement isomorphisms … via det-sf-comp-coherence-refinement (2)'. The ten generic tool_uses are accepted; the worker wrote them itself, which is advisory only under C8. Corrected files are in fixes/dag/nodes/sec-six-functors-basics/.; 3 file(s) fixed by the reviewer"
  }
 }
