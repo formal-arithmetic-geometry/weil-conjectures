@@ -1,0 +1,76 @@
+{
+ "id": "lem-sfb-integral-quotient-projection-comparison",
+ "kind": "statement",
+ "title": "Reduction of the actual unbounded integral projection morphism",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $A=\\mathcal O_E$ and a uniformizer $\\pi$ [def-weil-l-adic-coefficient-extension]. For a scheme $T$ put $R_T=p_T^*\\underline{\\mathcal O_E}=\\varprojlim_{m\\geq1}(A/\\pi^m)_T$ [sk-def-sfb-pulled-back-coefficients, det-prop-sfb-qlbar-colimit-x-integral-limit], and $S_T=(A/\\pi^n)_T$, the constant finite quotient ring sheaf, for a fixed $n\\geq1$. Use the ordinary unbounded derived categories $D_R(T)=D(\\operatorname{Mod}_{R_T})$, $D_S(T)=D(\\operatorname{Mod}_{S_T})$ of internal module objects, the derived module pullback and pushforward with their derived adjunction [sk-def-sfb-module-derived-pushpull], and the uncompleted relative derived tensor [sk-def-sfb-derived-tensor-hom]. Set $D_{n,T}K=K\\otimes^L_{R_T}S_T$, the derived scalar extension of [lem-pur-derived-change-of-rings].\n\nLet $f:X\\to Y$ be any morphism. Use $L_{f,R}\\dashv F_{f,R}$ and $L_{f,S}\\dashv F_{f,S}$ and precisely the comparisons $\\lambda_f,\\rho_{f,n}$ of [lem-sfb-integral-quotient-direct-image-comparison]. Let $\\pi^R_{f,K,M}$ and $\\pi^S_{f,U,V}$ be the actual module-object projection morphisms, namely the adjuncts of $(\\varepsilon_K\\otimes1)t_f$, where $t_f:L_f(F_fK\\otimes M)\\xrightarrow{\\sim}L_fF_fK\\otimes L_fM$ is the canonical derived pullback-tensor map [def-weil-pbc-projection-formula-map, def-sfb-module-object-projection-map]. Let\n$$b_{T,U,V}:D_{n,T}(U\\otimes^L_{R_T}V)\\xrightarrow{\\sim}D_{n,T}U\\otimes^L_{S_T}D_{n,T}V$$\nbe the canonical derived scalar-tensor balancing map [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], normalized on flat-term K-flat representatives by $(u\\otimes v)\\otimes s\\mapsto(u\\otimes1)\\otimes(v\\otimes s)$.\n\nFor every $K\\in D_R(X)$ and $M\\in D_R(Y)$ the following equality holds in $D_S(Y)$:\n$$\\begin{aligned}\n&\\pi^S_{f,D_{n,X}K,D_{n,Y}M}\\circ(\\rho_{f,n,K}\\otimes1)\\circ b_{Y,F_{f,R}K,M}\\\\\n&=F_{f,S}\\bigl((1\\otimes\\lambda_{f,M}^{-1})\\circ b_{X,K,L_{f,R}M}\\bigr)\\circ\\rho_{f,n,K\\otimes L_{f,R}M}\\circ D_{n,Y}(\\pi^R_{f,K,M}).\n\\end{aligned}$$\nIts source is $D_{n,Y}(F_{f,R}K\\otimes^L_{R_Y}M)$ and its target is $F_{f,S}(D_{n,X}K\\otimes^L_{S_X}L_{f,S}D_{n,Y}M)$. Thus these specified comparisons identify the reduction of the actual integral projection map with the quotient-coefficient projection map, naturally in both inputs. No properness, completeness, boundedness, constructibility or invertibility of the projection map is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.proof.md",
+  "place": "Paragraph (3), the same sentence for the projection formula, including the counit adjunct and tensor reassociation; original ten-step proof step 8. Stacks sites-cohomology.tex, Tag 0B56 (equation-projection-formula-map), its counit-adjunct definition, and the scalar/tensor balancing comparison. The completed-to-quotient comparison is the extracted argument."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sfb-pulled-back-coefficients",
+  "det-prop-sfb-qlbar-colimit-x-integral-limit",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-sfb-derived-tensor-hom",
+  "lem-pur-derived-change-of-rings",
+  "lem-sfb-integral-quotient-direct-image-comparison",
+  "def-weil-pbc-projection-formula-map",
+  "def-sfb-module-object-projection-map",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For arbitrary unbounded completed integral sheaf complexes, reduction of the canonical counit adjunct projection formula map equals the projection map over the uniformizer quotient, under the canonical tensor and direct image comparisons",
+   "results": "8 hits; AdicCompletion.eval_comp_of; AdicCompletion.eval_of; Condensed.profiniteSolidCounit; AdicCompletion.pi_apply_coe; AdicCompletion.factor_evalₐ_eq_eval; AdicCompletion.evalₐ_of; AdicCompletion.tensor_map_id_left_eq_map; AdicCompletion.factorₐ_evalₐ_one",
+   "date": "2026-10-21",
+   "verdict": "no match: the monoidal counit identity in Mathlib/CategoryTheory/Monoidal/Functor.lean:1036 concerns one monoidal adjunction and does not compare the specified two coefficient adjunctions or quotient projection maps"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived projection formula transformation is compatible with regular principal quotient scalar extension on ringed topoi, for arbitrary unbounded complexes",
+   "results": "8 hits; CategoryTheory.Presieve.FamilyOfElements.isCompatible_map_smul_aux; CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_hom_naturality_assoc; Algebra.Extension.Cotangent.val_smul; CategoryTheory.ProjectiveResolution.Hom.hom'_comp_π'; PresheafOfModules.pullbackPushforwardAdjunction; DerivedCategory.instCommShiftHomologicalComplexIntUpHomFunctorQuotientCompQhIso; HomologicalComplexUpToQuasiIso.quotientCompQhIso; Algebra.Generators.H1Cotangent.map_comp_cotangentComplex_baseChange",
+   "date": "2026-10-21",
+   "verdict": "no match: the monoidal counit identity in Mathlib/CategoryTheory/Monoidal/Functor.lean:1036 concerns one monoidal adjunction and does not compare the specified two coefficient adjunctions or quotient projection maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"map_μ_comp_counit_app_tensor\"",
+   "results": "2 hits; CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor; CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor_assoc",
+   "date": "2026-10-21",
+   "verdict": "no match: the monoidal counit identity in Mathlib/CategoryTheory/Monoidal/Functor.lean:1036 concerns one monoidal adjunction and does not compare the specified two coefficient adjunctions or quotient projection maps"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projection_formula|rightAdjointProjectionMap|map_μ_comp_counit_app_tensor",
+   "results": "4 hits; Mathlib/CategoryTheory/Monoidal/NaturalTransformation.lean; Mathlib/CategoryTheory/Monoidal/Functor.lean; Mathlib/CategoryTheory/Monoidal/Functor.lean; Mathlib/CategoryTheory/Monoidal/Functor.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: the monoidal counit identity in Mathlib/CategoryTheory/Monoidal/Functor.lean:1036 concerns one monoidal adjunction and does not compare the specified two coefficient adjunctions or quotient projection maps"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "det-thm-sfb-proper-base-change-integral",
+  "date": "2026-10-21",
+  "group": "Q07"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "blueprint": {
+  "from": {
+   "node": "det-thm-sfb-proper-base-change-integral",
+   "place": "Paragraph (3), the same sentence for the projection formula, including the counit adjunct and tensor reassociation; original ten-step proof step 8.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}
