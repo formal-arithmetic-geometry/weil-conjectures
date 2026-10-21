@@ -42,14 +42,15 @@
    }
   },
   {
-   "text": "[det-prop-integral-criterion-constant-coefficients](2) gives the restriction equivalence on complete objects in (1); its clause (3) identifies the two finite reductions.",
+   "text": "By [det-prop-integral-criterion-constant-coefficients](1)-(2), $C_X\\to R_X$ is flat, has compatible quotients $S_n=(\\cO_E/\\pi_E^n)_X$, and gives (1). Apply [lem-weil-pbc-flat-common-quotient-reduction-tower] on the small pro-étale site with $R=C_X$, $B=R_X$, $J_n=\\pi_E^nC_X$. For any $K$, it gives $\\operatorname{Res}K\\otimes^L_{C_X}S_n\\cong K\\otimes^L_{R_X}S_n$. On one K-flat model both sides are $P/J_nP$; their strict transitions and cones $p\\mapsto p\\otimes1$ agree.",
    "uses": [
-    "det-prop-integral-criterion-constant-coefficients"
+    "det-prop-integral-criterion-constant-coefficients",
+    "lem-weil-pbc-flat-common-quotient-reduction-tower"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-integral-criterion/sk-prop-integral-criterion-constant-coefficients.md",
-    "place": "Clauses (2)-(3); item proof first paragraph."
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099L (section-derived-completion-noetherian), flat common quotients and complete-object equivalence; sites-cohomology.tex Tag 06YY, finite derived reduction comparison."
    }
   },
   {
@@ -64,14 +65,16 @@
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-constant-completion-equivalence] with $A=\\cO_E$ and $I=(\\pi_E)$. It identifies the finite-reduction derived limits and canonical completion units under restriction. Restriction leaves underlying cohomology sheaves unchanged, so it detects isomorphisms. Thus $K$ is complete if and only if $\\operatorname{Res}K$ is complete.",
+   "text": "For the identity ringed topos with $C_X\\to R_X$, direct image is restriction, exact and conservative since underlying sheaves are unchanged [def-pc-sheaf-restrict-scalars]. Apply [lem-weil-ringed-tower-pushforward-limit-comparison] to step 2's strict tower $T$: $\\operatorname{Res}R\\lim T\\cong R\\lim\\operatorname{Res}T$. Its normalized comparison and step 2's cone equality identify the maps from $\\operatorname{Res}K$. By [lem-weil-pbc-constant-completion-equivalence] ($A=\\cO_E$, $I=(\\pi_E)$), these quotient units are the canonical completion units. Hence $K$ is complete iff $\\operatorname{Res}K$ is complete.",
    "uses": [
+    "def-pc-sheaf-restrict-scalars",
+    "lem-weil-ringed-tower-pushforward-limit-comparison",
     "lem-weil-pbc-constant-completion-equivalence"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models.proof.md",
-    "place": "First paragraph; completeness comparison for arbitrary complexes."
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A07 (lemma-Rf-commutes-with-Rlim), first tower-site proof, specialized to identity topos with the structural coefficient map; proetale.tex Tags 099L and 099M, canonical quotient completion unit."
    }
   },
   {
@@ -115,7 +118,10 @@
   "det-def-localizing-closure-ctf-equals-bc",
   "det-def-sfb-constructible-tor-amplitude",
   "det-prop-integral-criterion-constant-coefficients",
+  "lem-weil-pbc-flat-common-quotient-reduction-tower",
   "det-lem-integral-models-stacks",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-weil-ringed-tower-pushforward-limit-comparison",
   "lem-weil-pbc-constant-completion-equivalence",
   "lem-sfb-constant-field-tor-bounds",
   "sk-thm-pe-constructible-comparison",
@@ -198,8 +204,8 @@
   "date": "2026-10-21",
   "item": "sk-lem-integral-models",
   "worker": "stage1",
-  "summary": "Repair of the 2026-10-21 coarse-proof return: statement unchanged. Replaced twelve verbose steps by a seven-step assembly; extracted the good-truncation/K-flat argument as the new statement-only unsplit node lem-sfb-constant-field-tor-bounds, following the clarified route note. Reused existing flatness, comparison, operations and generator nodes. Retained historical searches and maintainer metadata; supplied the unit realization.",
-  "blueprint": "Opening equality: step 1. Unit first paragraph: steps 2-5 and the extracted constant-field Tor-bound lemma. Operation paragraphs: step 6 through the existing operations detail. Last paragraph: step 7 through the existing generators detail.",
+  "summary": "Maintenance repair, statement unchanged: made the flat common-quotient finite-reduction tower and its strict quotient cones explicit in step 2, and used the normalized ringed-tower derived-limit comparison to identify canonical completion units in step 4. Retained the field Tor criterion and all other original arguments through existing statements. Reuses Q45 and NE extractions already landed after the original request; creates no nodes and claims no new-node authorship. Historical searches and maintainer fields retained.",
+  "blueprint": "Opening equality: step 1. Unit first paragraph: steps 2-5, with flat common-quotient tower, normalized derived-limit/unit comparison, and constant-field Tor-bound extraction explicitly applied. Operation paragraphs: step 6 through the operations detail. Last paragraph: step 7 through the generators detail.",
   "tool_uses": [
    {
     "node": "lem-weil-pbc-constant-completion-equivalence",
@@ -212,6 +218,14 @@
    {
     "node": "sk-thm-pe-constructible-comparison",
     "why": "Generic discrete-coefficient etale/pro-etale comparison identifies the bounded constructible residue condition with etale origin; the unit does not reprove this comparison."
+   },
+   {
+    "node": "lem-weil-pbc-flat-common-quotient-reduction-tower",
+    "why": "Generic flat common-quotient comparison supplies the strict finite-reduction tower and equality of quotient cones in step 2. The unit coefficient criterion states levelwise reductions but does not itself state strict transition/cone normalization."
+   },
+   {
+    "node": "lem-weil-ringed-tower-pushforward-limit-comparison",
+    "why": "Generic normalized direct-image/strict-derived-limit comparison for the identity ringed topos identifies the limits of step 2 towers and their projections in step 4. The unit has no such general tower statement."
    }
   ]
  },
@@ -220,15 +234,17 @@
   "det-def-localizing-closure-ctf-equals-bc",
   "lem-pc-sites-modules-sheafification-flat",
   "lem-pc-bounded-above-flat-kflat-site",
-  "sk-thm-pe-constructible-comparison"
+  "sk-thm-pe-constructible-comparison",
+  "lem-weil-pbc-flat-common-quotient-reduction-tower",
+  "lem-weil-ringed-tower-pushforward-limit-comparison"
  ],
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-Q45-e3cacf736",
-  "group": "Q45",
+  "reviewer": "NT-cc-Q86-7dec82cd8",
+  "group": "Q86",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-e3cacf736 (reviewer sub-agent of L); spot-checked: I read the whole item, the new node, the unit, the blueprint main-20261015 proof, and Stacks 09C1 and 06YQ. The statement, stmt_deps and Lean/maintainer fields are byte-identical to live. Only proof, proof_deps and split_report changed. The new proof has 7 steps and 2131 characters, the longest step 450, which meets the human's 2026-10-21 re-split note. Steps: (1) det-def-localizing-closure-ctf-equals-bc(2) gives Dctf=Dbc for qcqs (Noetherian) X, and the definition gives the reverse inclusion. (2) det-prop-integral-criterion-constant-coefficients(2) gives the restriction equivalence on complete objects, and its clause (3) identifies the finite reductions. (3) det-lem-integral-models-stacks gives the Dbc⇔D_c criterion, and its D_c matches the item's definition. (4) lem-weil-pbc-constant-completion-equivalence with A=O_E and I=(π) carries one completion unit to the other, so completeness is reflected for arbitrary K. (5) The new node turns finite Tor dimension of the κ_E reduction into boundedness, and sk-thm-pe-constructible-comparison (qcqs X, discrete Noetherian κ_E) gives étale origin in both directions. (6) det-lem-integral-models-operations(1)-(3) and sk-prop-sfb-cartesian-coefficients(1) give clause (3). (7) det-lem-integral-models-generators(1)-(3) gives clause (4). Every cited statement says what its step takes. New node lem-sfb-constant-field-tor-bounds is statement-only and unsplit, self-contained, and has all 8 definition deps. It is true: good truncation plus lem-exc-constant-field-module-flat plus 06YQ gives one direction, and testing against κ_X gives the converse. I tested it on B=0, a=b, κ_X[-a], a non-constructible sheaf, unbounded B and κ of characteristic p. It does not restate the parent: it has no lattice, completion or constructibility, and it realizes the blueprint's 'O_E/π_E is a field' sentence. The duplicate search found no node stating it; lem-weil-field-tor-amplitude, ctf-equals-bc(1), lem-sf-complete-residue-cohomology-bounds and det-pe-finite-tor-comparison-noetherian all differ. The unit realized fields are correct. Accepted tool_uses: lem-weil-pbc-constant-completion-equivalence, det-def-localizing-closure-ctf-equals-bc and sk-thm-pe-constructible-comparison, all generic black boxes. No SGA. Maintainer note: the live item's tool_uses still lists lem-pc-sites-modules-sheafification-flat and lem-pc-bounded-above-flat-kflat-site, which the item no longer cites."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q86-7dec82cd8 (reviewer sub-agent of L); spot-checked: Read the repair note (human re-split, ≥2 extractions) with its 2026-10-21 Q86 maintenance continuation, the route note and the maintenance record. The continuation makes the count cumulative: Q45's lem-sfb-constant-field-tor-bounds and NE's lem-weil-pbc-flat-common-quotient-reduction-tower are existing extractions that count only if the item really uses them. Compared with live (the Q45 PASS version, 2131 chars): statement and stmt_deps are byte-identical; steps 1, 3, 5, 6 and 7 are unchanged; only steps 2 and 4 are rewritten; the proof is 2704 chars with the longest step 613; proof_deps equals the union of uses; the unit diff touches only realized/realized_by. All 12 steps of the old 6431-char proof (runs/2/NZ snapshots) are accounted for. Old 1–3 and 7–12 were already pure citations and are kept. Old 4–5 (flatness over a field, good truncation, K-flat Tor test) are carried by the Q45 node's two-sided statement. Old 6 (reduction and completeness comparison) is now made explicit. Step 2: the tower node's hypotheses hold. The small pro-étale site is a V-small skeleton. c: C_X→R_X is flat, and R/π^n ≅ B/π^nB by det-prop-integral-criterion-constant-coefficients(1); compatibility with transitions holds because everything is induced by c. The node gives Res K⊗^L S_n ≅ K⊗^L S_n through one K-flat P, with strict towers P/J_nP and matching cones. Step 4: f = id with C_X→R_X is a ringed-topos morphism (f^{-1}S=R not required); its direct image is Res, exact and conservative. lem-weil-ringed-tower-pushforward-limit-comparison gives Res Rlim T ≅ Rlim Res T, compatible with projections and natural, so with step 2 it carries the quotient unit of K to that of Res K. The last paragraph of the completion-equivalence statement (A=O_E Noetherian, I=(π)) identifies the quotient units with the Koszul/local completion units, so K is complete iff Res K is, for arbitrary K. Steps 1, 3, 5, 6 and 7 checked against current statements. Edge cases checked: X empty or K=0; n=1; K=R_X; K=E_X (non-complete on both sides); unbounded K; κ_X[−a]. No cycles, no SGA, item not in route-pivot-dropped, no new nodes and no duplicates. The five generic tool_uses are accepted. Maintainer notes: (a) lean_audit differs from live ({} vs dicts with state 'none'); it is not a split field. (b) The completion-equivalence statement already identifies the units, so the tower and ringed-tower citations make explicit something already covered. The second-extraction credit therefore rests on the maintenance continuation's cumulative interpretation; if the human rejects it, genuinely new nodes would be needed."
  },
  "chapter": "sec-six-functors-basics",
  "unit": "sk-lem-integral-models",
