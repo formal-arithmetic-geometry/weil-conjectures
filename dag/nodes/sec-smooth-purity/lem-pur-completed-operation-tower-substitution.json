@@ -25,171 +25,74 @@
  ],
  "proof": [
   {
-   "text": "Work in the enhanced section model of [lem-coef-semilinear-derived-sections], not in a category of independently specified evaluated derived objects. It supplies tensor, coefficient extension, inverse image and their comparisons on whole systems. On each ringed site choose flat-term K-flat representatives by [lem-pc-kflat-resolution]. By [lem-pur-kflat-total-tensor-model] their total tensor remains such a representative, and by [lem-weil-pbc-ringed-pullback-preserves-kflat] so does pullback, including pullback along a coefficient quotient. Consequently the ordinary total-complex formulas compute every finite derived expression used below, even for complexes unbounded in both directions. The simultaneous section models retain the transition maps and coherence of those formulas.",
+   "text": "Apply the system-model lemma to the normalized inputs: it gives the actual transition adjoints, their quotient cocycles, closure of normalization under $T,F,U$, and simultaneous flat-term K-flat computation. This supplies all system operations used below.",
    "uses": [
-    "lem-coef-semilinear-derived-sections",
-    "lem-pc-kflat-resolution",
-    "lem-pur-kflat-total-tensor-model",
-    "lem-weil-pbc-ringed-pullback-preserves-kflat"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YS (lemma-K-flat-resolution), 07A2 (lemma-tensor-product-K-flat), 0G7E (lemma-pullback-K-flat); enhanced section models are the cited agent-formulated input"
-   }
-  },
-  {
-   "text": "Fix $m\\ge n$ and write $q^*=-\\otimes^L_{B_{W,m}}B_{W,n}$. Apply [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] to the identity topos with this ring map. The adjoint transition for $T_W(A,N)$ is the composite\n$$q^*(A_m\\otimes^L_{B_{W,m}}N_m)\\xrightarrow{\\sim}q^*A_m\\otimes^L_{B_{W,n}}q^*N_m\\xrightarrow{\\alpha^A_{m,n}\\otimes\\alpha^N_{m,n}}A_n\\otimes^L_{B_{W,n}}N_n.$$\nBoth arrows are invertible by the cited comparison and [def-coef-normalized-dvr-tower]. This is the adjoint of the actual tensor transition: on flat representatives it sends $(a\\otimes x)\\otimes b$ to $\\tau_A(a)\\otimes b\\tau_N(x)$. The same formula for $r\\ge m\\ge n$ uses $q_{r,n}=q_{m,n}q_{r,m}$ and the two input cocycles, so gives the quotient cocycle. The section model of step 1 supplies the coherent system, and hence $T_W(A,N)$ is normalized.",
-   "uses": [
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "def-coef-normalized-dvr-tower"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A4 (lemma-pullback-tensor-product), applied to coefficient extension; normalization is the explicit displayed composite"
-   }
-  },
-  {
-   "text": "For pullback, use the coefficient square $B_{Y,m}\\to B_{Y,n}$, $B_{X,m}\\to B_{X,n}$ over $f^{-1}$. It commutes since all four structure maps come from constant sections. In [lem-pur-cochain-pullback-tensor-coherence] set $R=B_{Y,m}$, $R'=B_{Y,n}$, $S=B_{X,m}$, $S'=B_{X,n}$. Its scalar-association map $\\kappa$ identifies\n$$q_X^*Lf_m^*C_m\\cong Lf_n^*q_Y^*C_m;$$\nthe indicated direction is $\\kappa^{-1}$, obtained by inserting $1$ in the intermediate scalar factor. The scalar-association formulas and step 1 compute this isomorphism on flat-term K-flat representatives. Compose with $Lf_n^*(\\alpha^C_{m,n})$ to get the adjoint transition of $F_f(C)$; both factors are invertible by scalar association and [def-coef-normalized-dvr-tower]. The actual transition is the canonical coefficient-extension unit followed by this adjoint: the input transition factors as $C_m\\to\\operatorname{Res}q_Y^*C_m\\xrightarrow{\\operatorname{Res}\\alpha^C_{m,n}}\\operatorname{Res}C_n$. Thus no hypothesis that an arbitrary normalized system has canonical scalar-extension transitions is needed. For $r\\ge m\\ge n$, both iterated scalar-association maps multiply the same three coefficient factors, and the input $\\alpha^C$ satisfies its cocycle. This proves the output cocycle and normalization, with higher compatibilities supplied by step 1. The coefficient unit system is normalized by the action isomorphism $B_{W,m}\\otimes^L_{B_{W,m}}B_{W,n}\\cong B_{W,n}$.",
-   "uses": [
-    "lem-pur-cochain-pullback-tensor-coherence",
-    "def-coef-normalized-dvr-tower"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6D (lemma-derived-pullback-composition); Tag 07A4 and its total-complex coefficient comparisons"
-   }
-  },
-  {
-   "text": "For a normalized system $A$, [lem-coef-normalized-dvr-effectivity] gives the specified coherent counit $e_A:\\mathcal R_W\\mathcal L_WA\\xrightarrow{\\sim}A$. By [lem-coef-derived-system-evaluation-calculus], $\\mathcal R_W$ is a functor on the derived category, left adjoint to $\\mathcal L_W$ as functors between $D(\\operatorname{Mod}(R_W))$ and the derived system category, and the counit $e$ of this adjunction is a natural transformation $\\mathcal R_W\\mathcal L_W\\Rightarrow1$ of derived system maps whose level $n$ is the scalar-extension adjoint of the total-limit projection; this is the canonical counit comparison of [lem-coef-normalized-dvr-effectivity], which is invertible on normalized $A$. Concretely, for $u:A\\to A'$ the limit projections satisfy $p'_n\\mathcal L(u)=u_np_n$, and naturality of the adjunction counit gives\n$$e_{A'}\\,\\mathcal R_W\\mathcal L_W(u)=u\\,e_A$$\nas an equation of system maps in the derived system category, not inferred from evaluations. The simultaneous models of [lem-coef-semilinear-derived-sections] retain the coefficient-extension adjunctions used levelwise. We shall use this naturality equation whenever an output of an expression is substituted into another expression.",
-   "uses": [
-    "lem-coef-normalized-dvr-effectivity",
-    "lem-coef-derived-system-evaluation-calculus",
-    "lem-coef-semilinear-derived-sections"
+    "lem-pur-normalized-operation-system-models"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md",
-    "place": "Coherent counits of lem-coef-normalized-dvr-effectivity; the derived adjunction R_W -| L_W and its natural counit of lem-coef-derived-system-evaluation-calculus"
+    "place": "Agent assembly of re-split original proof; extracted arguments lem-pur-normalized-operation-system-models"
    }
   },
   {
-   "text": "By [def-pur-integral-derived-operations] and [def-weil-integral-reduction-tower], the defining quotient models give\n$$\\widehat T_W(K,H)=\\mathcal L_W T_W(\\mathcal R_WK,\\mathcal R_WH),\\qquad \\widehat F_f(K)=\\mathcal L_X F_f(\\mathcal R_YK).$$\nHere the right sides mean the simultaneous section models of [lem-coef-semilinear-derived-sections], followed by restriction and the total derived-limit functor of [lem-weil-pbc-ringed-strict-tower-homotopy-limit]. They use precisely the actual quotient maps of the definitions. The definitions compute the limit by the complex $\\mathsf C=\\operatorname{Cone}(1-s)[-1]$ on termwise products, whereas $\\mathcal L$ is the total derived limit of strict towers. Countable products of module sheaves on the small pro-etale sites are exact [lem-weil-proetale-countable-products-exact], so [lem-weil-strict-roos-comparison] supplies the natural isomorphism $\\rho:\\mathsf C\\xrightarrow{\\sim}R\\lim$ on $D(\\operatorname{Tow})$, compatible with the projections; we identify the two models by $\\rho$. The comparison with the chosen quotient representatives, and its naturality in the inputs, are the resolution-independent functor comparisons of [lem-pur-integral-operations-well-defined]. Thus these are functor identifications, not choices of isomorphisms separately at each index.",
+   "text": "The primitive-counit comparison gives the natural quotient/Roos identifications $\\widehat T=\\mathcal L T(\\mathcal R-,\\mathcal R-)$ and $\\widehat F=\\mathcal L F\\mathcal R$. On limits of normalized inputs, its $\\beta_T,\\beta_F$ are exactly the images of $T(e,e)$ and $F(e)$ under $\\mathcal L$, with their specified inverses and naturality as whole-system maps.",
    "uses": [
-    "def-pur-integral-derived-operations",
-    "def-weil-integral-reduction-tower",
-    "lem-coef-semilinear-derived-sections",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "lem-weil-proetale-countable-products-exact",
-    "lem-weil-strict-roos-comparison",
-    "lem-pur-integral-operations-well-defined"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YS, 06YT (lemma-derived-tor-quasi-isomorphism-other-side), 0941 (lemma-derived-limit-is-ok); defining quotient-limit models; Roos-complex/total-limit comparison of lem-weil-strict-roos-comparison"
-   }
-  },
-  {
-   "text": "Substitute $K=\\mathcal L_WA$, $H=\\mathcal L_WN$ into step 5 and apply the functor $\\mathcal L_W$ to the system isomorphism $T_W(e_A,e_N)$. This gives\n$$\\beta_T:\\widehat T_W(\\mathcal L_WA,\\mathcal L_WN)\\xrightarrow{\\sim}\\mathcal L_W T_W(A,N).$$\nLikewise applying $\\mathcal L_X$ to $F_f(e_C)$ gives $\\beta_F:\\widehat F_f(\\mathcal L_YC)\\xrightarrow{\\sim}\\mathcal L_XF_f(C)$. Functors preserve inverses: the inverse system maps are $T_W(e_A^{-1},e_N^{-1})$ and $F_f(e_C^{-1})$. Hence these are exactly the asserted images of the coherent counits, with their naturality from step 4.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md",
-    "place": "Formal application of the functors and counits in steps 4-5"
-   }
-  },
-  {
-   "text": "Define the comparison for a finite expression by structural induction. Write $S_E$ for its value in systems, $K_E$ for its value in completed operations, and $\\beta_E:K_E\\xrightarrow{\\sim}\\mathcal L S_E$ for the claim. For an input system $A$ take $\\beta_E=1_{\\mathcal LA}$, and for a coefficient unit system $U$ take $\\beta_E=1_{\\mathcal LU}$. If $E=T(E_1,E_2)$, set\n$$\\beta_E=\\beta_T(S_{E_1},S_{E_2})\\circ\\widehat T(\\beta_{E_1},\\beta_{E_2});$$\nif $E=F_f(E_1)$, set $\\beta_E=\\beta_F(S_{E_1})\\circ\\widehat F_f(\\beta_{E_1})$. Steps 2-3 show that every $S_E$ is normalized. The induction is on the number of operation symbols, so every cited child is smaller and these rules cover all well-typed expressions. Every factor is an isomorphism, proving the comparison assertion.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md",
-    "place": "Finite expression induction using steps 2-3 and 6"
-   }
-  },
-  {
-   "text": "For each expression from step 7 define its coherent reduction comparison by\n$$\\gamma_E=e_{S_E}\\circ\\mathcal R(\\beta_E):\\mathcal R K_E\\xrightarrow{\\sim}S_E.$$\nThis is an isomorphism of whole systems, since $S_E$ is normalized and [lem-coef-normalized-dvr-effectivity] supplies a coherent counit. In particular for $m\\ge n$ its components satisfy $\\tau^{S_E}_{m,n}(\\gamma_E)_m=\\operatorname{Res}_{m,n}((\\gamma_E)_n)\\tau^{\\mathcal RK_E}_{m,n}$, with the coefficient actions implicit. Thus the identification includes every actual quotient transition. No assertion of faithfulness of finite reduction, and no interchange of tensor with an inverse limit, is being used.",
-   "uses": [
-    "lem-coef-normalized-dvr-effectivity"
+    "lem-pur-completed-primitive-counit-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md",
-    "place": "Coherent reduction counit of lem-coef-normalized-dvr-effectivity, applied to the normalized expression of step 7"
+    "place": "Agent assembly of re-split original proof; extracted arguments lem-pur-completed-primitive-counit-comparison"
    }
   },
   {
-   "text": "For the finite system reassociator $a:T(T(A,N),H)\\to T(A,T(N,H))$, the total-complex formula is $(x\\otimes y)\\otimes z\\mapsto x\\otimes(y\\otimes z)$; the action unitors are $b\\otimes x\\mapsto bx$, $x\\otimes b\\mapsto bx$; symmetry is $x\\otimes y\\mapsto(-1)^{pq}y\\otimes x$ in degrees $p,q$. The representative of [lem-pur-kflat-total-tensor-model] computes the iterated derived tensors. Apply the natural tensor comparison and its associativity, signed-symmetry and unit clauses in [lem-pur-cochain-pullback-tensor-coherence] to coefficient extension along $B_{W,m}\\to B_{W,n}$. They give compatibility of these formulas with scalar extension; its $\\varepsilon$ and $\\tau$ equations specify the canonical extension transitions. For arbitrary normalized inputs, factor each actual transition through scalar extension and its adjoint $\\alpha$, as in steps 2-3. The structural maps are natural in those adjoints: both reassociation routes send $(x\\otimes y)\\otimes z$ to the same tensor of their three images; the unit and signed maps have the same check. Composing the scalar-extension square with these naturality squares proves compatibility with the actual input transitions. The coefficient factors have degree zero, so the sign stays $(-1)^{pq}$. The simultaneous constructions of [lem-coef-semilinear-derived-sections] retain these maps and compatibilities as coherent system maps. This uses the cited lemma's restricted tower clause only for canonical extension transitions, and naturality for the additional $\\alpha$ maps.",
+   "text": "Use the finite-expression lemma with the closure from step 1 and primitive comparisons from step 2. Its explicit recursion gives $\\beta_P:K_P\\cong\\mathcal L S_P$ for every finite well-typed expression, and $\\gamma_P=e_{S_P}\\mathcal R(\\beta_P)$ identifies its coherent reduction with the entire system, including every quotient-transition square.",
    "uses": [
-    "lem-pur-kflat-total-tensor-model",
-    "lem-pur-cochain-pullback-tensor-coherence",
-    "lem-coef-semilinear-derived-sections"
+    "lem-pur-finite-expression-reduction-comparison"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A2, total-complex reassociation; Tag 07A4 and Tag 03EL (sites-modules-lemma-tensor-product-pullback), canonical cochain maps"
-   }
-  },
-  {
-   "text": "Let $E_L,E_R$ be the two expressions at either end of one of the tensor system maps $a$ of step 9. The induced map on completed expressions is\n$$\\beta_{E_R}^{-1}\\,\\mathcal L(a)\\,\\beta_{E_L}.$$\nIt is the canonical completed associator, unitor or signed symmetry: on the quotient models of step 5, inserting the counits as in step 6 yields exactly the respective total-complex formula of step 9. Moving an inserted counit past that formula is justified by its naturality, and replacing a reduction of a limit by the original system is exactly the equation in step 4. Thus under $\\beta$ this structural map is $\\mathcal L(a)$. Its coherent reduction is the same $a$: the equation $e_{S_{E_R}}\\mathcal R\\mathcal L(a)=a e_{S_{E_L}}$ gives\n$$\\gamma_{E_R}\\,\\mathcal R(\\beta_{E_R}^{-1}\\mathcal L(a)\\beta_{E_L})=a\\,\\gamma_{E_L}.$$\nThis proves the specified identification of arrows and their transitions, as well as the identification of vertices.",
-   "uses": [],
-   "elementary": true,
-   "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md",
-    "place": "Naturality of the explicit maps of step 9 and the counits of step 4; cancellation using the comparisons of steps 7-8"
+    "place": "Agent assembly of re-split original proof; extracted arguments lem-pur-finite-expression-reduction-comparison"
    }
   },
   {
-   "text": "For composable scheme maps $Z\\xrightarrow{h}X\\xrightarrow{f}Y$, take $a:F_{f\\circ h}(C)\\to F_hF_f(C)$. By [lem-pur-proetale-module-pullback-composition], its finite module evaluations are the comparisons of left adjoints to the canonical direct-image composition identification. Each coefficient ring is finite and commutative, so [prop-weil-pbc-proetale-constant-exact] makes these pullbacks exact and hence computes their derived versions termwise. On the representatives of step 1, [lem-pur-cochain-pullback-tensor-coherence] specifies the same adjunction-normalized comparison via scalar association. Its compatibility with changing coefficients is checked on that formula: collapsing the two pullbacks multiplies the two scalar factors, and reducing coefficients before or after collapse agrees because each quotient map preserves multiplication. Inserting $1$ gives the inverse comparison and the same equality. For the actual transition of $C$, first use this scalar-extension square and then naturality of $a$ for $\\alpha^C_{m,n}$, using the factorization in step 3. This proves the required transition square without applying the canonical-transition tower clause to an arbitrary normalized input. The section models of [lem-coef-semilinear-derived-sections] preserve these specified composition and adjunction constructions, giving a coherent system map. Apply the conjugation formula of step 10 to $a$; its counit naturality equation identifies the limit with the completed composition comparison and the coherent reduction with the finite adjunction-normalized map.",
+   "text": "The tensor-constraint lemma identifies the completed associator, action unitors and Koszul symmetry with $\\beta_Q^{-1}\\mathcal L(a)\\beta_P$ for their canonical total-complex system maps. The pullback-composition lemma gives the same identification for the finite adjunction-normalized compositor. Both give $\\gamma_Q\\mathcal R(\\widehat a)=a\\gamma_P$ as a whole-system equation, with the actual input transitions.",
    "uses": [
-    "lem-pur-proetale-module-pullback-composition",
-    "prop-weil-pbc-proetale-constant-exact",
-    "lem-pur-cochain-pullback-tensor-coherence",
-    "lem-coef-semilinear-derived-sections"
+    "lem-pur-normalized-tensor-constraint-transport",
+    "lem-pur-normalized-pullback-composition-transport"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 03D8 (sites-modules-lemma-push-pull-composition-modules), Tag 0D6D (lemma-derived-pullback-composition); finite constant-coefficient exactness"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md",
+    "place": "Agent assembly of re-split original proof; extracted arguments lem-pur-normalized-tensor-constraint-transport, lem-pur-normalized-pullback-composition-transport"
    }
   },
   {
-   "text": "Finally induct on expression size for naturality and substitution. At a leaf naturality is the identity square. At a tensor vertex the square is the composite of the two child squares with naturality of $T(e,e)$ from step 4; at a pullback vertex it is the child square followed by naturality of $F(e)$. Applying the functor $\\mathcal L$ preserves these squares. For substitution of expressions $H_i$ into the input slots of $E$, compare the flattened recursion of step 7 with first applying $\\beta_{H_i}$ and then the recursion for $E$. At each vertex the only extra replacement is $\\mathcal R\\mathcal L S_{H_i}\\xrightarrow{e_{S_{H_i}}}S_{H_i}$. Moving that replacement past a child comparison uses $e_{S'}\\mathcal R\\mathcal L(u)=u e_S$ from step 4. After that move the two composites are identical by functoriality and associativity of composition. The leaf case is identity, and tensor and pullback are all constructors, so the induction proves compatibility for every finite substitution. It also applies to the maps in steps 9-11, which were natural system maps before the limit.",
-   "uses": [],
-   "elementary": true,
+   "text": "Apply the counit-substitution lemma to this same recursion and the primitive structural equations of step 4. It gives naturality for morphisms in every normalized input, the simultaneous-substitution equation comparing flattened and iterated evaluation, and preservation of the structural equations in all finite tensor and pullback contexts. These are precisely the remaining naturality and substitution assertions.",
+   "uses": [
+    "lem-pur-expression-counit-substitution-coherence"
+   ],
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md",
-    "place": "Formal induction on finite syntax; explicit counit naturality equation of step 4"
+    "place": "Agent assembly of re-split original proof; extracted arguments lem-pur-expression-counit-substitution-coherence"
    }
   }
  ],
  "proof_deps": [
-  "def-coef-normalized-dvr-tower",
-  "def-pur-integral-derived-operations",
-  "def-weil-integral-reduction-tower",
-  "lem-coef-derived-system-evaluation-calculus",
-  "lem-coef-normalized-dvr-effectivity",
-  "lem-coef-semilinear-derived-sections",
-  "lem-pc-kflat-resolution",
-  "lem-pur-cochain-pullback-tensor-coherence",
-  "lem-pur-integral-operations-well-defined",
-  "lem-pur-kflat-total-tensor-model",
-  "lem-pur-proetale-module-pullback-composition",
-  "lem-weil-pbc-ringed-pullback-preserves-kflat",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-proetale-countable-products-exact",
-  "lem-weil-strict-roos-comparison",
-  "prop-weil-pbc-proetale-constant-exact"
+  "lem-pur-normalized-operation-system-models",
+  "lem-pur-completed-primitive-counit-comparison",
+  "lem-pur-finite-expression-reduction-comparison",
+  "lem-pur-normalized-tensor-constraint-transport",
+  "lem-pur-normalized-pullback-composition-transport",
+  "lem-pur-expression-counit-substitution-coherence"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md",
-  "place": "Integral coherent tensor/pullback substitution underlying the natural Weil comparison on twists; formal counit argument using Stacks Tags 07A2, 07A4, 0G7E, 0D6D and 0941 and the existing enhanced-section/effectivity nodes. Bhatt--Scholze Definition 3.4.10 and Lemma 6.5.9(4) motivate the operations, not the extra coherence assertion."
+  "place": "Order 2232 natural Weil comparison; short assembly of six statement-only arguments extracted from the complete original 12-step proof on the explicit re-split instruction of 2026-10-21."
  },
  "mathlib_searches": [
   {
@@ -299,41 +202,11 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "item": "lem-pur-completed-operation-tower-substitution",
   "worker": "stage1",
-  "summary": "Q96 expands the coherent substitution argument into normalization, actual quotient-model identifications, explicit counit comparisons, structural induction, and the naturality equation governing arrow identifications and substitution. Reuses existing generic ringed-topos and coherent-system inputs; creates no nodes and leaves the statement unchanged. No Lean was written or compiled. Repair of return L: rebased owned split fields onto the current DAG record, reread the changed cochain-coherence statement, and rewrote steps 3, 9 and 11 to use its explicit scalar-association equations and naturality for normalization adjoints. Refreshed all three affected verbatim quotations; all other cited quotations remain current. Maintainer-reader FIX: step 4 now cites lem-coef-derived-system-evaluation-calculus for the functoriality of R_W and naturality of the counit as a system map; step 5 cites lem-weil-strict-roos-comparison (with lem-weil-proetale-countable-products-exact) for the identification of the Cone(1-s) limit model with the strict-tower total derived limit.",
-  "blueprint": "Nearest blueprint ancestor def-weil-frobenius-coefficient-twists: natural Weil isomorphism on twists, interpreted through completed tensor and pullback; specifically the integral whole-system comparisons underlying the former steps 4-5 of lem-pur-derived-pullback-tensor-iso. Current main-20261015 order 2232 keeps the natural Weil isomorphism and finite-reduction compatibility. Steps 1-8 supply its nested-operation interpretation, and steps 9-12 supply arrow and substitution coherence.",
-  "tool_uses": [
-   {
-    "node": "lem-coef-semilinear-derived-sections",
-    "why": "Generic enhanced section models for varying coefficient rings, tensor, pullback and their specified comparisons; no purity argument is replaced."
-   },
-   {
-    "node": "lem-pc-kflat-resolution",
-    "why": "Generic unbounded flat-term K-flat resolutions on a ringed site, needed to compute the finite derived functors."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-pullback-preserves-kflat",
-    "why": "Generic preservation of flat-term K-flat representatives under arbitrary ringed-topos pullback, including nonflat quotient ring maps."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "why": "Generic monoidal scalar-extension comparison, specialized to the coefficient quotient to verify normalization."
-   },
-   {
-    "node": "lem-coef-normalized-dvr-effectivity",
-    "why": "Generic coherent counit for normalized DVR systems without finiteness bounds, used in the substitution and reduction comparison."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "why": "Generic functorial total derived limit on whole strict towers, rather than independently chosen homotopy limits."
-   },
-   {
-    "node": "lem-coef-derived-system-evaluation-calculus",
-    "why": "Generic derived adjunction R_W -| L_W between integral complexes and derived coefficient systems with natural counit; gives the system-level naturality of the effectivity counit used in substitution."
-   }
-  ]
+  "summary": "N5 re-splits the 12-step argument into six separately stated unsplit nodes: simultaneous normalized system operations (1-3), quotient/Roos realization and primitive counits (4-6), recursive comparison and reduction (7-8), tensor constraints and transport (9-10), pullback composition and transport (11), and naturality/substitution in all finite contexts (12). Every original argument is retained as an explicit claim of its extracted node, with a complete original-proof-to-node concordance and the original argument text in the report. The item statement is byte-for-byte unchanged; no Lean is written or compiled.",
+  "blueprint": "Nearest blueprint ancestor def-weil-frobenius-coefficient-twists: natural Weil isomorphism on twists, interpreted through completed tensor and pullback; specifically the integral whole-system comparisons underlying the former steps 4-5 of lem-pur-derived-pullback-tensor-iso. Current main-20261015 order 2232 keeps the natural Weil isomorphism and finite-reduction compatibility. Steps 1-8 supply its nested-operation interpretation, and steps 9-12 supply arrow and substitution coherence. The six new nodes refine exactly those same places; assembly steps 1-5 refer to the new node statements."
  },
  "tool_uses": [
   "lem-coef-semilinear-derived-sections",
@@ -345,12 +218,12 @@
   "lem-coef-derived-system-evaluation-calculus"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-Q96-154c90eee",
-  "group": "Q96",
+  "reviewer": "NT-cc-N5-caad06c75",
+  "group": "N5",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q96-154c90eee (reviewer sub-agent of L); spot-checked: I read the item in full: the statement (unchanged), all 12 steps, and the statements of all 9 stmt_deps and 14 proof_deps. I also read Bhatt–Scholze Def. 3.4.10 and Lemma 6.5.9(4) in the local PDF; they only motivate the operations, the qcqs lemma is not used, and proof_origin is correctly agent. The unit sk-def-purity-conv uses sk-def-sf-operations, so those statements are on-route; the sec-six-functors and properbasechange inputs are generic tools declared in tool_uses. No new nodes, no duplicate found in a whole-DAG search, no cycle, no SGA. The math is correct. Normalization of T_W and F_f holds via the monoidal comparison, the composite-pullback comparison and the α isomorphisms, with tensor over B_m, not over R. The identification is L T(e_A,e_N) after the quotient-model equalities. Tested small cases: m=n, the unit system, zero inputs, identity maps, Koszul signs; no flatness of B_m→B_n is used. Two citation faults (C1/C4), both repaired. (1) Step 4 took the system-level naturality of the counit e, and the fact that R_W is a functor, from lem-coef-semilinear-derived-sections, which does not model the R_W ⊣ L_W adjunction. It now cites lem-coef-derived-system-evaluation-calculus, which states that adjunction and its natural counit; I added this to tool_uses. (2) Step 5 identified the definitions' Cone(1-s) limit with the strict-tower total R lim as functors without a comparison; lem-pur-integral-operations-well-defined only says the value is a (non-canonical) derived limit. It now cites lem-weil-strict-roos-comparison, a natural iso ρ, plus lem-weil-proetale-countable-products-exact for its hypothesis. Both nodes are in sk-def-sf-operations, so on-route. proof_deps is updated to 17 ids, the longest step is 1577 characters, and the corrected file is in fixes/dag/nodes/sec-smooth-purity/.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-caad06c75 (reviewer sub-agent of L); spot-checked: Re-split fulfils the 2026-10-21 note (at least 4 nodes, at most 3000 chars, nothing dropped). The base is the Q96 12-step proof (12705 chars), byte-equal to live and side-live. The item statement and stmt_deps are unchanged. The proof is now a 5-step, 1786-char assembly of 6 new statement-only unsplit nodes of comparable size (2961-4551 chars). I matched every old step against the live text. Steps 1-3 go to normalized-operation-system-models: tensor and κ^{-1} pullback adjoints with the correct direction for the κ of lem-pur-cochain-pullback-tensor-coherence, the actual transition factorization, cocycles, unit, K-flat closure. Steps 4-6 go to completed-primitive-counit-comparison: Roos ρ with exactly the normalization of lem-weil-strict-roos-comparison and countable products exact; counit naturality and invertibility from derived-system-evaluation-calculus and normalized-dvr-effectivity; both Q96 citation repairs are kept. Steps 7-8 go to finite-expression-reduction-comparison (a conditional induction; types checked; empty and repeated inputs). Steps 9-10 go to normalized-tensor-constraint-transport (sign (-1)^{pq} kept, scalars in degree 0). Step 11 goes to normalized-pullback-composition-transport: the left-adjoint compositor in the direction of lem-pur-proetale-module-pullback-composition, made termwise by prop-weil-pbc-proetale-constant-exact. Step 12 goes to expression-counit-substitution-coherence. I re-derived the substitution and reduction equations by induction from β_T/β_F naturality and e_{S'}RL(u)=ue_S. No cycle (no new-node closure reaches the item; the citers of the item are avoided). Ids are new, no duplicate in the live DAG, no dropped proof_dep is orphaned, no SGA, three search kinds (LeanSearch honestly recorded unavailable on 3 nodes). Stacks tags 07A4, 0D6D, 0941, 03EL and 03D8 checked. The item is not in the dropped list and no newer live split exists. Maintainer notes: (1) the item's tool_uses (7 Q96 entries) are now stale; those tools return when nodes 1, 2 and 5 are split. (2) The induction and exactness hints in the node statements are B1-adjacent but kept for the future workers. (3) Parent steps 4 and 5 leave the hypothesis supply from steps 1-3 implicit. (4) The snapshot's sec-six-functors symlink dangles."
  },
  "reviewed_lean": {
   "date": "2026-10-18",

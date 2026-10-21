@@ -1,0 +1,86 @@
+{
+ "id": "lem-pur-finite-expression-reduction-comparison",
+ "kind": "statement",
+ "title": "Recursive expression comparison and its whole-system reduction",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi$, and schemes $W$ on which $\\ell$ is invertible [def-weil-l-adic-coefficient-extension, def-weil-scheme-morphism-properties]. On each small pro-etale site set $B_{W,n}=(\\mathcal O_E/\\varpi^n)_W$ for $n\\ge1$ and $R_W=\\lim_n B_{W,n}$ [def-weil-completed-integral-coefficients]. Work in the ordinary unbounded derived category $\\mathscr D_W=D(\\mathscr S(B_{W,\\bullet}))$ of whole semilinear systems, with its tensor and geometric inverse image [lem-coef-semilinear-derived-sections]. A normalized system has invertible transition adjoints $\\alpha^A_{m,n}:q_W^*A_m\\to A_n$, where $q_W^*=-\\otimes^L_{B_{W,m}}B_{W,n}$, for all $m\\ge n\\ge1$, with the identity and quotient cocycles [def-coef-normalized-dvr-tower]. For systems $A,N$ on $W$ and $C$ on $Y$, write $T_W(A,N)_n=A_n\\otimes^L_{B_{W,n}}N_n$, $F_f(C)_n=Lf_n^*C_n$ for $f:X\\to Y$, and $U_W=(B_{W,n}[0])_n$, with the induced whole-system transitions.\n\nWrite $\\mathcal R_WK=(K\\otimes^L_{R_W}B_{W,n})_n$ for coherent reduction [def-weil-integral-reduction-tower] and $\\mathcal L_W=R\\lim\\operatorname{Res}$ for total derived limit of the restricted whole system [lem-weil-pbc-ringed-strict-tower-homotopy-limit]. Use the canonical adjunction $\\mathcal R_W\\dashv\\mathcal L_W$ and its natural counit $e_A:\\mathcal R_W\\mathcal L_WA\\to A$ [lem-coef-derived-system-evaluation-calculus], invertible for normalized $A$ [lem-coef-normalized-dvr-effectivity]. Let $\\widehat T_W,\\widehat F_f$ be the actual quotient-complex/Roos completed operations [def-pur-integral-derived-operations].\n\nFor finite typed expressions $P$ with input locations and constructors input, coefficient unit, tensor and scheme pullback [def-pur-completed-operation-expressions], let $S_P$ evaluate in $T,F,U$ on normalized inputs, and let $K_P$ evaluate in $\\widehat T,\\widehat F,\\mathcal LU$ on their limits. Define $\\beta_P:K_P\\to\\mathcal L S_P$ recursively by identities at inputs and units, $\\beta_{T(P,Q)}=\\beta_T(S_P,S_Q)\\circ\\widehat T(\\beta_P,\\beta_Q)$ and $\\beta_{F_f(P)}=\\beta_F(S_P)\\circ\\widehat F_f(\\beta_P)$. Here the primitive maps are those of [lem-pur-completed-primitive-counit-comparison]: the defining quotient realization followed by $\\mathcal L T(e_A,e_N)$ and $\\mathcal L F_f(e_C)$, respectively. Put $\\gamma_P=e_{S_P}\\circ\\mathcal R(\\beta_P)$.\n\nAssume the operations $T,F,U$ preserve normalization and that the two primitive maps just specified are natural isomorphisms on normalized systems. Then for every finite well-typed $P$, $S_P$ is normalized, $\\beta_P$ is an isomorphism, and $\\gamma_P$ is an isomorphism of whole derived systems. These conclusions hold for the stated recursion, with its given parentheses, including expressions with no input occurrences or with repeated inputs. The induction parameter is the number of operation symbols: both children at a tensor vertex and the child at a pullback vertex are smaller, and inputs and units are the base cases. At each constructor $\\beta_P$ is the displayed composite of the functor images of the child comparisons and the specified primitive comparison; the analogous normalization statement uses the closure of $T,F,U$.\n\nFor every $m\\ge n\\ge1$, $\\gamma_P$ satisfies the actual transition square\n$$\\tau^{S_P}_{m,n}(\\gamma_P)_m=\\operatorname{Res}_{m,n}((\\gamma_P)_n)\\,\\tau^{\\mathcal R K_P}_{m,n}.$$\nThis is the transition equation of the constructed whole-system map $e_{S_P}\\mathcal R(\\beta_P)$, including $m=n$; equality is not inferred from equality of evaluations. The assertion requires neither faithfulness of finite reduction nor any exchange of tensor and inverse limit. The sets of scheme and input indices may be in independent universes and may be empty; only finite well-typed expressions are evaluated.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md",
+  "place": "Order 2232, natural Weil comparison and finite-reduction compatibility; agent extraction of original item proof steps 7-8: finite typed-expression induction and coherent counit reduction, not an assertion quoted from the blueprint."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-completed-integral-coefficients",
+  "lem-coef-semilinear-derived-sections",
+  "def-coef-normalized-dvr-tower",
+  "def-weil-integral-reduction-tower",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-coef-normalized-dvr-effectivity",
+  "def-pur-integral-derived-operations",
+  "def-pur-completed-operation-expressions",
+  "lem-pur-completed-primitive-counit-comparison"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite typed tensor and pullback expressions on limits of normalized systems have recursively invertible comparisons and coherent reduction transition squares",
+   "results": "0 hits: ; service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-21",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite typed tensor and pullback expressions on limits of normalized systems have recursively invertible comparisons and coherent reduction transition squares",
+   "results": "8 hits: CategoryTheory.FreeMonoidalCategory.normalizeObj_tensor, CategoryTheory.FreeMonoidalCategory.normalizeObj_congr, CategoryTheory.CechNerveTerminalFrom.wideCospan.limitIsoPi_inv_comp_pi_assoc, InverseSystem.globalEquiv_naturality, InverseSystem.pEquivOnLim, CategoryTheory.CechNerveTerminalFrom.wideCospan.limitIsoPi_hom_comp_pi, CategoryTheory.FreeMonoidalCategory.normalizeIsoApp', CategoryTheory.FreeMonoidalCategory.normalizeIsoApp",
+   "date": "2026-10-21",
+   "verdict": "no match: free monoidal normalization, ordinary inverse systems and general derived adjunction formulas do not prove this typed completed-operation recursion and coherent reduction square"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Structural induction on nested derived tensor and inverse image gives a whole coefficient system reduction comparison via an adjunction counit",
+   "results": "8 hits: CategoryTheory.Adjunction.derived'_counit, CategoryTheory.Adjunction.derivedε_fac_app, CategoryTheory.Adjunction.derived_counit, CategoryTheory.Adjunction.derivedε, CategoryTheory.Adjunction.derivedε_fac_app_assoc, CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor, CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ, CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor_assoc",
+   "date": "2026-10-21",
+   "verdict": "no match: free monoidal normalization, ordinary inverse systems and general derived adjunction formulas do not prove this typed completed-operation recursion and coherent reduction square"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.counit",
+   "results": "12 hits: CategoryTheory.Adjunction.counit, CategoryTheory.Adjunction.mk'_counit, CategoryTheory.Adjunction.mkOfUnitCounit_counit, CategoryTheory.Equivalence.toAdjunction_counit, CategoryTheory.Adjunction.ext_counit, CategoryTheory.Adjunction.id_counit, CategoryTheory.Adjunction.toEquivalence, CategoryTheory.Adjunction.toEquivalence_functor",
+   "date": "2026-10-21",
+   "verdict": "no match: free monoidal normalization, ordinary inverse systems and general derived adjunction formulas do not prove this typed completed-operation recursion and coherent reduction square"
+  },
+  {
+   "tool": "grep",
+   "query": "normalized.*expression|reductionComparison|systemValue|completedValue",
+   "results": "21 hits: Mathlib/Tactic/Algebra/Basic.lean, Mathlib/Tactic/Algebra/Basic.lean, Mathlib/Tactic/Algebra/Basic.lean, Mathlib/Tactic/Algebra/Basic.lean, Mathlib/Tactic/Algebra/Basic.lean, Mathlib/Tactic/Polynomial/Basic.lean, Mathlib/Tactic/Linarith/Parsing.lean, Mathlib/Tactic/Ring/Common.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: free monoidal normalization, ordinary inverse systems and general derived adjunction formulas do not prove this typed completed-operation recursion and coherent reduction square"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-completed-operation-tower-substitution",
+  "date": "2026-10-21",
+  "group": "N5"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "blueprint": {
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "Natural Weil isomorphism on coefficient twists: interpreting the integral tensor comparison through whole coherent quotient systems, underlying former steps 4 and 5 of lem-pur-derived-pullback-tensor-iso. Extracted argument: Order 2232, natural Weil comparison and finite-reduction compatibility; agent extraction of original item proof steps 7-8: finite typed-expression induction and coherent counit reduction, not an assertion quoted from the blueprint.",
+   "via": [
+    "lem-pur-completed-operation-tower-substitution",
+    "lem-pur-derived-pullback-tensor-iso"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
