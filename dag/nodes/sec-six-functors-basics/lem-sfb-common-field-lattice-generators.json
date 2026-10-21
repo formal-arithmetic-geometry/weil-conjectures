@@ -14,12 +14,82 @@
   "sk-def-sfb-pulled-back-coefficients",
   "sk-def-sfb-coefficient-change",
   "sk-def-sfb-bounded-constructible",
+  "def-sfb-lisse-coefficient-module",
+  "lem-sfb-locally-closed-extension-coherence"
+ ],
+ "proof": [
+  {
+   "text": "Take $F=E_1E_2\\subseteq\\Qlb$. Clause (1) of [det-def-sfb-qlbar-condensed-subextensions], applied to this two-element family, says that $F/\\mathbf Q_\\ell$ is finite and contains both $E_i$. Thus this is one actual finite subfield for the two generators, independent of their strata or their local ranks.",
+   "uses": [
+    "det-def-sfb-qlbar-condensed-subextensions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-rational.proof.md",
+    "place": "paragraph (3), pairs of Qlbar generators before devissage; former step 8; common finite field argument, step 1"
+   }
+  },
+  {
+   "text": "Use the valuation inherited from the fixed valued field $\\Qlb$. By the valuation-ring description in [def-weil-l-adic-coefficient-extension], $\\cO_{E_i}=E_i\\cap\\cO_F$, so the inclusions restrict to continuous ring maps $\\cO_{E_i}\\to\\cO_F$. They send a continuous function to the same function with the larger codomain, hence induce maps of the continuous-function condensed rings. Their composites with $\\cO_F\\to\\Qlb$ are the original inclusions, already on each section. Apply the functorial coefficient change of [sk-def-sfb-coefficient-change] on $Z_i$ and $W_i$ to obtain the corresponding ring-sheaf towers. All these are the coefficient maps used below.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension",
+    "sk-def-sfb-coefficient-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-rational.proof.md",
+    "place": "paragraph (3), pairs of Qlbar generators before devissage; former step 8; common finite field argument, step 2"
+   }
+  },
+  {
+   "text": "For each $i$, apply [lem-sfb-locally-free-derived-scalars] on $(Z_i)_{\\mathrm{pro\\acute et}}$ with $R=\\cO_{E_i,Z_i}$, $B=\\cO_{F,Z_i}$ and $M=L_i$. The hypothesis is exactly the assumed pro-etale local finite freeness: a cover of $Z_i$ restricts to a trivializing cover over every site object. It gives that $L_{i,F}=B\\otimes_R L_i$ is lisse finite free with the same local ranks, and the canonical identification $B\\otimes_R^{\\mathbf L}L_i[0]\\cong L_{i,F}[0]$. In particular this calculation requires no assertion that the whole coefficient-change functor is exact and no uniform bound on local ranks.",
+   "uses": [
+    "lem-sfb-locally-free-derived-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-rational.proof.md",
+    "place": "paragraph (3), pairs of Qlbar generators before devissage; former step 8; common finite field argument, step 3"
+   }
+  },
+  {
+   "text": "Apply clause (3) of [det-lem-integral-models-generators] with coefficient field $F$, ambient standing scheme $W_i$, locally closed immersion $a_i$, and lisse finite free lattice $L_{i,F}$ from step 3. That clause writes $a_{i!}$ as closed direct image after open extension by zero, $a_{i!}=c_*u_!$ for a factorization $a_i=c\\circ u$ with $u$ open and $c$ closed; [lem-sfb-locally-closed-extension-coherence] ($W_i$ is Noetherian, being of finite type over $k$) gives the normalized identification of this functor with the exact locally closed extension by zero of the statement, $a_{i!}\\cong c_*u_!$. Since $\\Dbc(W_i,\\cO_F)$ is closed under isomorphism, it gives $K_{i,F}=a_{i!}L_{i,F}\\in\\Dbc(W_i,\\cO_F)$. These are precisely the hypotheses of that clause; no integral-model existence assertion is needed.",
+   "uses": [
+    "det-lem-integral-models-generators",
+    "lem-sfb-locally-closed-extension-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-rational.proof.md",
+    "place": "paragraph (3), pairs of Qlbar generators before devissage; former step 8; common finite field argument, step 4"
+   }
+  },
+  {
+   "text": "Put $T^V_{A,B}=B_V\\otimes^{\\mathbf L}_{A_V}-$ for coefficient rings in the tower $A=\\cO_{E_i}\\to B=\\cO_F\\to C=\\Qlb$. Clause (2) of [det-prop-scalar-six-pullback], applied to $a_i$ and $L_i[0]$, and the degree-zero comparison of step 3 give $T^{W_i}_{A,B}(a_{i!}L_i)\\cong a_{i!}(T^{Z_i}_{A,B}L_i)\\cong a_{i!}L_{i,F}=K_{i,F}$. Apply $T^{W_i}_{B,C}$ to the inverse of this isomorphism, then clause (3) of the same cited node. The resulting canonical composite is\n$$\\Qlb_{W_i}\\otimes^{\\mathbf L}_{\\cO_{F,W_i}}K_{i,F}\\ \\cong\\ T^{W_i}_{B,C}T^{W_i}_{A,B}(a_{i!}L_i)\\ \\cong\\ T^{W_i}_{A,C}(a_{i!}L_i)=G_i.$$\nThe composite coefficient map is the original inclusion by step 2. The scalar/immersion and tower comparisons in the cited statement are natural, so this is the claimed canonical comparison for each $i$.",
+   "uses": [
+    "det-prop-scalar-six-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-rational.proof.md",
+    "place": "paragraph (3), pairs of Qlbar generators before devissage; former step 8; common finite field argument, step 5"
+   }
+  }
+ ],
+ "proof_deps": [
+  "det-def-sfb-qlbar-condensed-subextensions",
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sfb-coefficient-change",
+  "lem-sfb-locally-free-derived-scalars",
   "det-lem-integral-models-generators",
+  "lem-sfb-locally-closed-extension-coherence",
   "det-prop-scalar-six-pullback"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-rational.proof.md",
+  "place": "paragraph (3), pairs of Qlbar generators before devissage; former step 8; explicit common-compositum and coefficient-comparison argument"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,10 +125,59 @@
    "results": "8 hits: IntermediateField.extendScalars_restrictScalars, IntermediateField.extendScalars_le_iff, IntermediateField.extendScalars_sup, IntermediateField.le_extendScalars_iff, ModuleCat.extendScalarsComp, galLift_galRestrict', galRestrict'_galLift, IntermediateField.FG.of_restrictScalars; ",
    "date": "2026-10-21",
    "verdict": "no match: returned declarations do not state this pro-etale module-object comparison or lattice assertion; see retained full search output in research/lem-sfb-common-field-lattice-generators.search.txt"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two locally free pro-etale lattice sheaves over finite l-adic fields admit scalar extension to a common finite field and recover the same algebraic closure coefficient objects",
+   "results": "8 hits: WittVector.isocrystal_classification, Algebra.Etale.iff_exists_algEquiv_prod, Algebra.FormallyEtale.of_restrictScalars, Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars, Condensed.profiniteFree, Algebra.FormallyEtale.comp, Algebra.FormallyEtale.iff_exists_algEquiv_prod, Algebra.Etale.comp",
+   "date": "2026-10-21",
+   "verdict": "no match: no returned declaration states the entire common-field lattice-generator comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteDimensional_sup|extendScalarsComp|lisse.*[Ss]calar",
+   "results": "12 hits: Mathlib/FieldTheory/IntermediateField/Adjoin/Basic.lean, Mathlib/FieldTheory/IntermediateField/Adjoin/Basic.lean, Mathlib/FieldTheory/IntermediateField/Adjoin/Basic.lean, Mathlib/FieldTheory/KrullTopology.lean, Mathlib/LinearAlgebra/AffineSpace/FiniteDimensional.lean, Mathlib/LinearAlgebra/FiniteDimensional/Basic.lean, Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: field finiteness and ordinary ModuleCat transitivity cover only parts, not the stated derived pro-etale lattice comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scalar extension of locally free sheaves commutes with extension by zero and with a tower of coefficient fields",
+   "results": "8 hits: TrivSqZeroExt.isScalarTower, LinearEquiv.extendScalarsOfIsLocalizationEquiv, LinearMap.extendScalarsOfIsLocalization_apply, Algebra.Extension.instIsScalarTowerRing, ZeroHom.instIsScalarTower, instIsScalarTowerAtPrimeFractionRing, Algebra.Extension.instIsScalarTowerRing_2, ModuleCat.instIsScalarTowerLocalizationCarrierLocalizedModule",
+   "date": "2026-10-21",
+   "verdict": "no match: no returned declaration states the entire common-field lattice-generator comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "IntermediateField, FiniteDimensional",
+   "results": "12 hits: IntermediateField.finiteDimensional_right, IntermediateField.finiteDimensional_left, IntermediateField.finrank_le_of_le_left, IntermediateField.finrank_lt_of_gt, IntermediateField.eq_of_le_of_finrank_eq', IntermediateField.eq_iff_finrank_eq_of_le', IntermediateField.eq_of_le_of_finrank_le', IntermediateField.finiteDimensional_map",
+   "date": "2026-10-21",
+   "verdict": "no match: no returned declaration states the entire common-field lattice-generator comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars of a finite rank locally free sheaf is locally free and derived tensor agrees with ordinary tensor",
+   "results": "8 hits: SheafOfModules.map_ιFree_mapFree_hom, SheafOfModules.mapFree, SheafOfModules.map_ιFree_mapFree_hom_assoc, SheafOfModules.ιFree_mapFree_inv, SheafOfModules.ιFree_mapFree_inv_assoc, Module.mem_freeLocus_iff_tensor, SheafOfModules.freeFunctor, SheafOfModules.freeMap",
+   "date": "2026-10-21",
+   "verdict": "no match for item: SheafOfModules.mapFree/mapFreeIso treats free sheaves under coproduct-preserving functors; it does not supply derived tensor, local restriction, extension by zero or the common coefficient field"
+  },
+  {
+   "tool": "grep",
+   "query": "def mapFree|theorem mapFree|lemma mapFree",
+   "results": "0 hits: ; subdirectory CategoryTheory",
+   "date": "2026-10-21",
+   "verdict": "no match for item: SheafOfModules.mapFree/mapFreeIso treats free sheaves under coproduct-preserving functors; it does not supply derived tensor, local restriction, extension by zero or the common coefficient field"
+  },
+  {
+   "tool": "grep",
+   "query": "def mapFree",
+   "results": "2 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean; subdirectory Algebra/Category/ModuleCat/Sheaf",
+   "date": "2026-10-21",
+   "verdict": "no match for item: SheafOfModules.mapFree/mapFreeIso treats free sheaves under coproduct-preserving functors; it does not supply derived tensor, local restriction, extension by zero or the common coefficient field"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-thm-sfb-proper-base-change-rational",
@@ -75,5 +194,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-common-field-lattice-generators",
+  "worker": "stage1",
+  "summary": "Q31: constructed the common compositum and wrote the scalar/extension-by-zero comparison as an explicit composite. Reused four existing results; no new nodes. Statement unchanged; proof-only dependencies removed from stmt_deps and the local-freeness and locally-closed-extension notions added. Checked all cited statements, edge cases and Mathlib search candidates.",
+  "blueprint": "Realizes paragraph (3) of det-thm-sfb-proper-base-change-rational.proof.md: put a pair of Qlbar lattice generators over one finite field before rationalizing the integral projection formula and performing devissage in each variable.",
+  "tool_uses": [
+   {
+    "node": "det-def-sfb-qlbar-condensed-subextensions",
+    "why": "Generic compositum finiteness tool; the proper-base-change unit assumes finite coefficient stages but does not prove their directedness."
+   },
+   {
+    "node": "det-prop-scalar-six-pullback",
+    "why": "Generic canonical scalar/immersion and tower comparisons used to identify the two generator models; this does not replace the integral-to-rational base-change route."
+   },
+   {
+    "node": "lem-sfb-locally-closed-extension-coherence",
+    "why": "Generic identification of the exact locally closed extension by zero with closed direct image after open extension by zero, needed in step 4 to match the item's a_! with the one in det-lem-integral-models-generators clause (3); the proper-base-change unit's route does not restate this convention."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-def-sfb-qlbar-condensed-subextensions",
+  "det-prop-scalar-six-pullback",
+  "lem-sfb-locally-closed-extension-coherence"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q31-f7921d30d",
+  "group": "Q31",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q31-f7921d30d (reviewer sub-agent of L); spot-checked: I read the item, all five steps and every cited statement in full, against main-20261015 sk-thm-sfb-proper-base-change-rational.proof.md (2)-(3). This is a first split with the statement unchanged; the item is not dropped, has no repair note and is not superseded (unsplit on live and side). Step 1: det-def-sfb-qlbar-condensed-subextensions (1) with n=2 gives F=E1E2. Step 2: uniqueness of the extended absolute value gives O_Ei=Ei∩O_F, the condensed maps match the sections of sk-def-sfb-qlbar-condensed, and coefficient change is functorial; correctly marked elementary. Step 3: the hypotheses of lem-sfb-locally-free-derived-scalars hold (a cover of Z_i pulls back to every object), and it gives lisse with the same ranks plus the degree-0 derived comparison. Step 4 (C1/C4, repaired): det-lem-integral-models-generators (3) uses a_! = closed pushforward after open extension, while the item's a_! is that of lem-sfb-locally-closed-extension-coherence. The identification a_!≅i_*u_! (W_i Noetherian) was used without a citation. The fix adds the citation to step 4 uses, proof_deps and split_report.tool_uses; there is no cycle because the lemma is already an item stmt_dep. Step 5: det-prop-scalar-six-pullback (2) on L_i[0], step 3, then (3) on O_E→O_F→Qlbar gives the stated composite in the correct direction. The parent's step 5 needs only some isomorphism (naturality), so moving the two theorems from stmt_deps to proof_deps is acceptable. Accepted tool uses: qlbar-condensed-subextensions, scalar-six-pullback, locally-closed-extension-coherence. The duplicate search found nothing that states this comparison; no SGA source is cited.; 1 file(s) fixed by the reviewer"
  }
 }
