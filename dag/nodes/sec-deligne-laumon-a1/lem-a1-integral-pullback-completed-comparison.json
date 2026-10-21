@@ -30,7 +30,8 @@
   "def-weil-pbc-intrinsic-completion",
   "prop-weil-pbc-proetale-constant-exact",
   "lem-cbc-completed-pullback-triangles",
-  "def-a1-integral-completed-pullback-interfaces"
+  "def-a1-integral-completed-pullback-interfaces",
+  "def-fd-integral-pullback-shift-coordinates"
  ],
  "proof": [
   {
@@ -239,8 +240,6 @@
    "WeilConjectures.IntegralCompletedComparison.complexes",
    "WeilConjectures.IntegralCompletedComparison.derived",
    "WeilConjectures.IntegralCompletedComparison.derived_commShift",
-   "WeilConjectures.IntegralCompletedComparison.products",
-   "WeilConjectures.IntegralCompletedComparison.complexProducts",
    "WeilConjectures.IntegralCompletedComparison.finiteIntegral",
    "WeilConjectures.IntegralCompletedComparison.finiteIntegral_additive",
    "WeilConjectures.IntegralCompletedComparison.finiteCompleted",
@@ -252,11 +251,6 @@
    "WeilConjectures.IntegralCompletedComparison.towerIso",
    "WeilConjectures.IntegralCompletedComparison.completedProjection",
    "WeilConjectures.IntegralCompletedComparison.finiteComputation",
-   "WeilConjectures.IntegralCompletedComparison.levelShift",
-   "WeilConjectures.IntegralCompletedComparison.productShift",
-   "WeilConjectures.IntegralCompletedComparison.roosEnd",
-   "WeilConjectures.IntegralCompletedComparison.ShiftCoordinates",
-   "WeilConjectures.IntegralCompletedComparison.ShiftDescent",
    "WeilConjectures.IntegralCompletedComparison.integral",
    "WeilConjectures.IntegralCompletedComparison.completed",
    "WeilConjectures.IntegralCompletedComparison.Complete",
@@ -264,12 +258,12 @@
    "WeilConjectures.IntegralCompletedComparison.integralPullback_completedComparison"
   ],
   "file": "lean/Sheaf/Paper/IntegralPullbackCompletedComparison.lean",
-  "statement": "theorem integralPullback_completedComparison (g : X ⟶ Y) (_hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x)) (_hY : ∀ y : Y, IsUnit (l : Y.presheaf.stalk y)) : Nonempty (Comparison l E g)",
+  "statement": "theorem integralPullback_completedComparison\n    (g : X ⟶ Y) (_hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x))\n    (_hY : ∀ y : Y, IsUnit (l : Y.presheaf.stalk y)) :\n    Nonempty (Comparison l E g)",
   "branch": "newtargets-dag",
-  "by": "NY",
-  "date": "2026-10-18",
+  "by": "NC",
+  "date": "2026-10-21",
   "existing": false,
-  "note": "Comparison of the specified integral Roos and strict-tower pullbacks, using the existing projection-normalized completed-ring identification. The clause package includes intrinsic completeness, finite generator normalization, naturality, defining projection equations on every K-flat representative, and all integer shifts with explicit signed Roos coordinates. The coefficient transport and normalized finite evaluation helpers (existing declarations in Sheaf.Paper.SfImmersionCompletedPullbackComparison and Sheaf.Paper.CompletedPullbackReduction) are cited through the new definition node def-a1-integral-completed-pullback-interfaces; no theorem node is added to stmt_deps.",
+  "note": "Comparison of the specified integral Roos and strict-tower pullbacks, using the existing projection-normalized completed-ring identification. The clause package includes intrinsic completeness, finite generator normalization, naturality, defining projection equations on every K-flat representative, and all integer shifts with explicit signed Roos coordinates. The coefficient transport and normalized finite evaluation helpers (existing declarations in Sheaf.Paper.SfImmersionCompletedPullbackComparison and Sheaf.Paper.CompletedPullbackReduction) are cited through the new definition node def-a1-integral-completed-pullback-interfaces; no theorem node is added to stmt_deps. Section 1(B), NC repair of returned d684f6d77462: the old module owned plain signed-shift predicates only through a theorem node, making it unusable as a definition dependency. Move products, complexProducts, levelShift, productShift, roosEnd, ShiftCoordinates and ShiftDescent unchanged to Sheaf.Paper.IntegralPullbackShiftCoordinates, owned by def-fd-integral-pullback-shift-coordinates, and publicly import it here. The comparison theorem, its hypotheses, conclusion and all other definitions are unchanged.",
   "fixed_by": "NT-stage2-cc-6b792bf6d"
  },
  "reviewed_lean": {

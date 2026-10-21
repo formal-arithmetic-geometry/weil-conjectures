@@ -1,0 +1,112 @@
+{
+ "id": "def-fd-integral-pullback-shift-coordinates",
+ "kind": "definition",
+ "title": "Signed integral pullback Roos shift coordinates and derived descent",
+ "status": "split",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, schemes $X,Y$ in the same universe as $E$, and a morphism $g:X\\to Y$. Use the tower transition endomorphism of [def-weil-tower-transition-endomorphism]. Use the completed coefficient module categories, strict finite-reduction pullback tower $B_g(P)$, Roos cochain functor $F_g(P)=\\operatorname{Cone}(1-s_{B_g(P)})[-1]$, good (flat-term K-flat) representatives, derived pullback $D_g$, and retained representative comparison $\\varepsilon_P:D_g(QP)\\simeq QF_g(P)$ of [def-pur-integral-derived-operations]. Here $Q$ is complex localization, and the natural-number index $n$ represents positive quotient exponent $n+1$.\nDefine $\\operatorname{levelShift}_{P,r,n}:B_g(P[r])_n\\simeq B_g(P)_n[r]$ by the canonical cochain shift of the additive finite module pullback composite. Define $\\operatorname{productShift}_{P,r}:\\prod_nB_g(P[r])_n\\simeq(\\prod_nB_g(P)_n)[r]$ by the product of these maps followed by the inverse product-preservation comparison of shift. Define $\\operatorname{roosEnd}_P=1-s_{B_g(P)}$, with its actual quotient transitions.\nFor a shift-commutation structure $c$ on $F_g$, define $\\operatorname{ShiftCoordinates}(c)$ to mean that for every complex $P$ and $r\\in\\mathbf Z$, its component $c_{r,P}:F_g(P[r])\\to F_g(P)[r]$ is unsigned on the unshifted product summand and multiplied by $(-1)^r$ on the product summand shifted by $-1$, via $\\operatorname{productShift}_{P,r}$ and the standard cochain degree reindexing. Thus in mapping-cocone coordinates it is $(x,y)\\mapsto(x,(-1)^r y)$, equivalently in reversed coordinates $(y,x)\\mapsto((-1)^r y,x)$. The predicate is the two component equations, for every degree and every adjacent pair of degrees.\nFor such $c$ and a shift-commutation structure $d$ on $D_g$, define $\\operatorname{ShiftDescent}(c,d)$ to mean: for every good $P$ and integer $r$, $P[r]$ is good and\n$$\\varepsilon_P[r]\\circ d_{r,QP}=\\eta_{F_g(P)}\\circ Q(c_{r,P})\\circ\\varepsilon_{P[r]}\\circ D_g(\\eta_P^{-1}),$$\nwhere $\\eta_P:Q(P[r])\\simeq(QP)[r]$ is the standard localization shift comparison. Both predicates only specify normalization; they assert neither the existence of $c,d$ nor the integral/completed pullback comparison.",
+ "stmt_deps": [
+  "def-pur-integral-derived-operations",
+  "def-weil-tower-transition-endomorphism"
+ ],
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 014E, definition-cone; sites-cohomology.tex Tag 0941, lemma-derived-limit-is-ok; the shift clause of the whole-tower auxiliary comparison for the final coefficient-category sentence of def-fd-trace-function"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "ShiftCoordinates|ShiftDescent|roosEnd|productShift",
+   "results": "0 hits: . No exact project-specific shift-coordinate/descent interface.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Signed shift coordinates on the Roos mapping cocone of one minus transition on a strict tower of cochain complexes and its derived localization descent",
+   "results": "8 hits: CochainComplex.shiftFunctor, CochainComplex.shiftFunctor_obj_d, CochainComplex.HomComplex.Cochain.δ_shift, CochainComplex.HomComplex.Cochain.leftShift_v, CochainComplex.HomComplex.Cochain.rightUnshift, CochainComplex.HomComplex.Cochain.leftUnshift_v, CochainComplex.HomComplex.Cochain.leftShift_rightShift_eq_negOnePow_rightShift_leftShift, CochainComplex.mappingCone.shiftIso. No exact project-specific shift-coordinate/descent interface.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical shift comparison for the product mapping cocone defining integral adic pullback, with sign on the shifted coordinate and descent to derived pullback",
+   "results": "8 hits: AlgebraicGeometry.ExistsHomHomCompEqCompAux.c', localCohomology.diagram, AlgebraicGeometry.ExistsHomHomCompEqCompAux.g, localCohomology.ofDiagram, localCohomology.hasColimitDiagram, AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι, CochainComplex.mappingCone.mapHomologicalComplexXIso'_hom, CochainComplex.mappingCone.mapHomologicalComplexXIso_eq. No exact project-specific shift-coordinate/descent interface.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "rg",
+   "query": "ShiftCoordinates|ShiftDescent|levelShift|productShift|roosEnd in dag/nodes, lean/WeilConjectures and lean/Sheaf",
+   "results": "Only the a1 theorem node records these five declarations, in Sheaf.Paper.IntegralPullbackCompletedComparison. No definition node owns them. def-a1-integral-completed-pullback-interfaces records only coefficient transport and finite evaluation; def-zl-field-weil-shriek-shift-data selects shifts using these predicates and is a consumer, not their owner. No exact upstream declaration.",
+   "date": "2026-10-21",
+   "verdict": "extract existing definitions; no duplicate"
+  },
+  {
+   "tool": "blueprint_refs.py search",
+   "query": "Roos shift",
+   "results": "0 blueprint nodes match 'Roos shift'; ancestor search gives def-fd-trace-function.",
+   "date": "2026-10-21",
+   "verdict": "no duplicate blueprint node"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-fd-whole-tower-integral-pullback-comparison",
+  "date": "2026-10-21",
+  "group": "NC"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-fd-trace-function",
+   "place": "Final sentence assigning local Frobenius operators in the PBC coefficient category; auxiliary whole-tower comparison, signed shift normalization in proof step 11",
+   "via": [
+    "lem-fd-whole-tower-integral-pullback-comparison",
+    "lem-fd-rational-coefficient-category-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-fourier-transform",
+ "unit": "sk-def-trace",
+ "lean": {
+  "module": "Sheaf.Paper.IntegralPullbackShiftCoordinates",
+  "declaration": "WeilConjectures.IntegralCompletedComparison.ShiftCoordinates",
+  "declarations": [
+   "WeilConjectures.IntegralCompletedComparison.products",
+   "WeilConjectures.IntegralCompletedComparison.complexProducts",
+   "WeilConjectures.IntegralCompletedComparison.levelShift",
+   "WeilConjectures.IntegralCompletedComparison.productShift",
+   "WeilConjectures.IntegralCompletedComparison.roosEnd",
+   "WeilConjectures.IntegralCompletedComparison.ShiftCoordinates",
+   "WeilConjectures.IntegralCompletedComparison.ShiftDescent"
+  ],
+  "file": "lean/Sheaf/Paper/IntegralPullbackShiftCoordinates.lean",
+  "statement": "def ShiftCoordinates\n    (c : (integralOperationsPullbackComplexFunctor.{u, u} l E g).CommShift ℤ) : Prop",
+  "branch": "newtargets-dag",
+  "by": "NC",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Extracted without changing names, signatures or bodies from the a1 comparison theorem module, which now publicly imports this definition module. The product instances fix precisely the same product choices as before."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "maintenance-NC-whole-tower-1792602990",
+  "group": "NC",
+  "result": "pass",
+  "note": "Maintenance ownership extraction required by return d684f6d77462. All seven existing declaration signatures and bodies were compared with the live a1 module and are unchanged. No new mathematics or theorem proof; incremental DAG validation passes."
+ }
+}
