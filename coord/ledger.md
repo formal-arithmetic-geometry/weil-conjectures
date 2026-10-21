@@ -23081,3 +23081,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:42 L: merged deliver/Q13/lem-sfb-simplex-lattice-shuffle-boundary (reviewer PASS; first push; new nodes: 0)
 - 2026-10-21T16:42:52Z L: superseded stage-1 delivery NA/lem-sfb-root-tower-lisse-morphism-extension at 959f652e8c4bd12923a504ec424b8f7399a1a7f0; current completion retained; packet archived at refs/superseded/NA/lem-sfb-root-tower-lisse-morphism-extension/959f652e8c4bd12923a504ec424b8f7399a1a7f0; stale return retired.
 - 2026-10-21T16:43:31Z L: superseded stage-1 delivery NY/lem-sfb-condensed-internal-bar-resolution at bd27afd0c24d5f44be8ab088f4eab1b0f69630b4; current completion retained; packet archived at refs/superseded/NY/lem-sfb-condensed-internal-bar-resolution/bd27afd0c24d5f44be8ab088f4eab1b0f69630b4; stale return retired.
+- 16:45 L: merged deliver/Q08/lem-sfb-snc-finite-root-regular-ring (reviewer PASS; first push; new nodes: 0)

@@ -12,9 +12,117 @@
   "def-trf-strict-normal-crossings-boundary",
   "def-weil-pbc-mv-polynomial-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The regular scheme $X$ is locally Noetherian by [def-weil-regular-scheme], so its affine coordinate ring $A$ is Noetherian by [pqf-lem-affine-open-locnoeth]. The displayed finite polynomial presentation of $C_n$ then makes $C_n$ Noetherian by [lem-weil-pbc-finite-type-algebra-noetherian]. If $A=0$, this quotient is zero and has no prime ideals. Otherwise fix an arbitrary prime $q\\subset C_n$, let $p=q\\cap A$, and put $R=A_p=\\mathcal O_{X,p}$ using [lem-weil-pbc-affine-open-stalk-localization]. It suffices to show that the localization of the same root presentation over $R$ at the prime induced by $q$ is regular local.",
+   "uses": [
+    "def-weil-regular-scheme",
+    "pqf-lem-affine-open-locnoeth",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose IX Proposition 2.1 proof, printed p.133: full parameter-root algebra before invariants; the induction below supplies the regularity argument left implicit there."
+   }
+  },
+  {
+   "text": "Write $I=\\{1,\\ldots,r\\}$, $S=\\{i\\in I:t_i\\in p\\}$ and $d=\\dim R$. For $J\\subseteq S$ put $R_J=R/(t_j:j\\in J)$. The intersection of the branches indexed by $J$ is the affine closed subscheme $\\operatorname{Spec}(A/(t_j:j\\in J))$ and contains $p$. By [def-trf-strict-normal-crossings-boundary] its local ring there is regular local, and its dimension plus $|J|$ is $d$. The quotient-localization isomorphism [lem-weil-pbc-localization-at-prime-of-quotient], together with [lem-weil-pbc-affine-open-stalk-localization], identifies this local ring with $R_J$, preserving the images of the $t_i$. Thus each $R_J$ is regular local with $\\dim R_J+|J|=d$. If $i\\notin S$, $t_i$ is already a unit in $R$, hence also in every $R_J$.",
+   "uses": [
+    "def-trf-strict-normal-crossings-boundary",
+    "lem-weil-pbc-localization-at-prime-of-quotient",
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale.tex",
+    "place": "Tag 0BIA (lemma-strict-normal-crossings), regular-intersection criterion and its proof; the required dimension equality is explicitly included in the boundary definition used here."
+   }
+  },
+  {
+   "text": "For disjoint $J\\subseteq S$ and $K\\subseteq I\\setminus J$, set $B_{J,K}=R_J[x_i:i\\in K]/(x_i^n-t_i:i\\in K)$. Iterating [lem-weil-pbc-monic-quotient-free] gives a finite free $R_J$-basis $\\prod_{i\\in K}x_i^{a_i}$, $0\\leq a_i<n$. The presentation can be iterated in any order: the maps in both directions fix constants and send each root coordinate to the coordinate with the same index; their composites fix all algebra generators. In particular all these rings are Noetherian by [lem-weil-pbc-finite-type-algebra-noetherian]. We prove simultaneously for all $J$ that $B_{J,K}$ is regular, by induction on $|K|$. For $K=\\varnothing$ it is $R_J$, which is a regular ring by [lem-weil-pbc-regular-local-localization]. This formulation allows the induction hypothesis to be applied with $J$ enlarged when a root coordinate is killed.",
+   "uses": [
+    "lem-weil-pbc-monic-quotient-free",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-regular-local-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose IX Proposition 2.1 proof, printed p.133: full parameter-root algebra before invariants; the induction below supplies the regularity argument left implicit there."
+   }
+  },
+  {
+   "text": "For the induction step choose $i\\in K$, put $K'=K\\setminus\\{i\\}$ and $D=B_{J,K'}$. The induction hypothesis makes $D$ regular. Set $B=D[T]/(T^n-t_i)$ and write $u$ for the class of $T$; this is $B_{J,K}$. Fix a prime $Q\\subset B$ containing $u$. The relation $u^n=t_i$ implies that $i\\in S$, since otherwise $t_i$, and hence $u$, would be a unit. In $R_J$, $t_i\\ne0$: otherwise $R_{J\\cup\\{i\\}}=R_J$, contradicting the two dimension equalities from step 2. Since $R_J$ is a domain by [lem-sc-regular-local-domain], multiplication by $t_i$ is injective on $R_J$ and therefore on $D$, coordinate by coordinate in the free basis of step 3.",
+   "uses": [
+    "lem-sc-regular-local-domain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose IX Proposition 2.1 proof, printed p.133: full parameter-root algebra before invariants; the induction below supplies the regularity argument left implicit there."
+   }
+  },
+  {
+   "text": "Reduction of the monic presentations modulo $t_i$ identifies $D/(t_i)$ with $B_{J\\cup\\{i\\},K'}$, using [lem-weil-pbc-monic-quotient-free]. Explicitly the map sends each coefficient in $R_J$ to its class in $R_{J\\cup\\{i\\}}$ and fixes the root coordinates; the inverse sends these classes and roots to their classes in $D/(t_i)$. The relations in both presentations are the same, so both composites fix their generators. This ring is regular by the induction hypothesis with $|K'|<|K|$. Now $D$ is Noetherian, multiplication by $t_i$ on $D$ is injective, $n>0$, and $Q$ contains the root. Thus [lem-sbc-root-algebra-regular-at-root] applies with base $D$ and equation $t_i$, and gives that $B_Q$ is regular local.",
+   "uses": [
+    "lem-weil-pbc-monic-quotient-free",
+    "lem-sbc-root-algebra-regular-at-root"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose IX Proposition 2.1 proof, printed p.133: full parameter-root algebra before invariants; the induction below supplies the regularity argument left implicit there."
+   }
+  },
+  {
+   "text": "It remains to treat a prime $Q\\subset B$ not containing $u$. Then $t_i=u^n\\notin Q$. Put $E=D[1/t_i]$, a regular ring by [lem-weil-pbc-localization-of-regular-ring]; its polynomial ring $E[T]$ is regular by [lem-trf-polynomial-ring-regular-base]. The derivative of $F=T^n-t_i$ is $nT^{n-1}$. In $E[T]/(F)$ the coordinate $T$ is a unit, with inverse $T^{n-1}/t_i$, and $n$ is a unit as the image of the given unit of $A$. Therefore the derivative has unit image. Apply [lem-weil-pbc-hypersurface-derivation-regular] to the derivation $\\partial/\\partial T$ to obtain regularity of $E[T]/(F)$. The prime $Q$ extends to this ring, since it misses $t_i$; its prime localization is $B_Q$. Indeed each newly inverted $t_i$ is already a unit in $B_Q$, so the maps in both directions are the maps on fractions fixing $D$ and $u$. Hence $B_Q$ is regular local. Together with step 5 this proves the induction step for every prime of $B$.",
+   "uses": [
+    "lem-weil-pbc-localization-of-regular-ring",
+    "lem-trf-polynomial-ring-regular-base",
+    "lem-weil-pbc-hypersurface-derivation-regular"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07PF (lemma-quotient-regular), applied to the ordinary polynomial derivative after inverting the branch equation."
+   }
+  },
+  {
+   "text": "Apply the completed induction with $J=\\varnothing$ and $K=I$. This proves regularity of $R[x_1,\\ldots,x_r]/(x_i^n-t_i)$. This ring is $(A\\setminus p)^{-1}C_n$: the isomorphism sends $a/s$ to the localized coefficient $a/s$ and each $x_i$ to its localized class; the inverse evaluates polynomials in those fractions, and the defining relations vanish in both directions. As $A\\setminus p$ maps outside $q$, localizing further at the prime induced by $q$ gives exactly $(C_n)_q$ (the two maps on fractions fix $C_n$ and invert all its elements outside $q$). Thus every prime localization of the Noetherian ring $C_n$ is regular local, which is regularity as defined in [def-weil-regular-scheme]. For $r=0$ the empty presentation is $A$, and the induction is its base case; $n=1$ is allowed throughout.",
+   "uses": [
+    "def-weil-regular-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose IX Proposition 2.1 proof, printed p.133: full parameter-root algebra before invariants; the induction below supplies the regularity argument left implicit there."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-regular-scheme",
+  "pqf-lem-affine-open-locnoeth",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "def-trf-strict-normal-crossings-boundary",
+  "lem-weil-pbc-localization-at-prime-of-quotient",
+  "lem-weil-pbc-monic-quotient-free",
+  "lem-weil-pbc-regular-local-localization",
+  "lem-sc-regular-local-domain",
+  "lem-sbc-root-algebra-regular-at-root",
+  "lem-weil-pbc-localization-of-regular-ring",
+  "lem-trf-polynomial-ring-regular-base",
+  "lem-weil-pbc-hypersurface-derivation-regular"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose IX Proposition 2.1 proof, printed p.133: full parameter-root algebra before invariants; the induction below supplies the regularity argument left implicit there.",
+  "agent": "Q08",
+  "note": "Explicit simultaneous induction over partial root presentations and boundary-intersection quotients, using existing Stacks-derived nodes. The regularity calculation is supplied here; ILO states the full root presentation but leaves this calculation implicit."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,10 +165,52 @@
    "results": "5 hits: Mathlib/RingTheory/AdjoinRoot.lean, Mathlib/RingTheory/DedekindDomain/SelmerGroup.lean, Mathlib/RingTheory/RootsOfUnity/Lemmas.lean, Mathlib/RingTheory/RootsOfUnity/Lemmas.lean, Mathlib/RingTheory/DedekindDomain/Ideal/Lemmas.lean",
    "date": "2026-10-21",
    "verdict": "no match: polynomial-ring regularity, regular sequences and standard smooth/etale presentations do not assert regularity of this simultaneous ramified root quotient"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjoining roots of the distinct branches of a strict normal crossings divisor to a regular Noetherian ring gives a regular ring",
+   "results": "8 hits: Algebra.IsStandardSmooth, StandardEtalePair.instEtaleRing, StandardEtalePair.Ring, StandardEtalePair, Algebra.IsStandardSmoothOfRelativeDimension, Polynomial.IsDistinguishedAt.isWeierstrassDivisorAt', Algebra.instIsStandardEtaleRing, Polynomial.instEtaleUniversalCoprimeFactorizationRing",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern standard etale presentations, regular elements or polynomial rings; none states the simultaneous SNC root-ring regularity theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "(IsRegularRing|IsRegularLocalRing).*(AdjoinRoot|MvPolynomial)|(AdjoinRoot|MvPolynomial).*(IsRegularRing|IsRegularLocalRing)",
+   "results": "4 hits: Mathlib/RingTheory/RegularLocalRing/Polynomial.lean, Mathlib/RingTheory/RegularLocalRing/Polynomial.lean, Mathlib/RingTheory/RegularLocalRing/Polynomial.lean, Mathlib/RingTheory/RegularLocalRing/Polynomial.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern standard etale presentations, regular elements or polynomial rings; none states the simultaneous SNC root-ring regularity theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsRegularLocalRing, AdjoinRoot",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern standard etale presentations, regular elements or polynomial rings; none states the simultaneous SNC root-ring regularity theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a regular ring and equations of a strict normal crossings divisor, the simultaneous quotient by x_i^n minus t_i is regular when n is invertible",
+   "results": "8 hits: MvPolynomial.isRegular_X_pow, ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim, DividedPowers.Quotient.dpow, Polynomial.isRegular_X_pow, ringKrullDim_quotSMulTop_succ_eq_ringKrullDim, ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim_of_mem_jacobson, RingTheory.Sequence.IsRegular.ndrecIterModByRegular, RingTheory.Sequence.isRegular_cons_iff'",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern standard etale presentations, regular elements or polynomial rings; none states the simultaneous SNC root-ring regularity theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Kummer cover of a regular scheme ramified along distinct normal crossing parameters is a regular scheme",
+   "results": "8 hits: StandardEtalePair, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization, AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.isSmoothOfRelativeDimension_iff, AlgebraicGeometry.isSmooth_iff",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern standard etale presentations, regular elements or polynomial rings; none states the simultaneous SNC root-ring regularity theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "AdjoinRoot.*[Rr]egular|[Rr]egular.*AdjoinRoot|[Nn]ormal[Cc]rossing|[Kk]ummer",
+   "results": "25 hits: Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/Padics/PadicVal/Basic.lean, Mathlib/NumberTheory/Padics/PadicVal/Basic.lean, Mathlib/NumberTheory/Padics/PadicVal/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern standard etale presentations, regular elements or polynomial rings; none states the simultaneous SNC root-ring regularity theorem"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-snc-root-limit-normal-charts",
@@ -86,5 +236,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-snc-finite-root-regular-ring",
+  "worker": "stage1",
+  "summary": "Kept the statement. Supplied a simultaneous induction over boundary-intersection quotients and partial root presentations, using existing monic-basis, root-at-divisor and derivative-criterion nodes. Checked all branch-present/branch-unit cases, zero ring, empty boundary and n=1. No new nodes and no Lean attachment.",
+  "blueprint": "The inherited paragraph (3), open direct image: regularity of finite simultaneous branch-root stages needed for normal root-limit charts, before passing to invariants or to the root limit. The ancestor command returns null; the inherited from.node=null and via chain are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-regular-local-localization",
+    "why": "Generic regular-local localization theorem supplies the empty-root induction base as a regular ring."
+   },
+   {
+    "node": "lem-sc-regular-local-domain",
+    "why": "The coefficient quotient is regular local, hence a domain; this generic commutative-algebra tool supplies injectivity of a nonzero branch equation."
+   },
+   {
+    "node": "lem-sbc-root-algebra-regular-at-root",
+    "why": "Generic one-equation root algebra lemma applied in the induction at a prime containing the newly adjoined root; no node in this unit supplies this local algebra criterion."
+   },
+   {
+    "node": "lem-weil-pbc-localization-of-regular-ring",
+    "why": "Generic localization permanence used after inverting a branch equation; no geometry or route from the other unit is used."
+   },
+   {
+    "node": "lem-weil-pbc-hypersurface-derivation-regular",
+    "why": "Generic unit-derivative hypersurface criterion handles the open locus where the newly adjoined root is a unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-regular-local-localization",
+  "lem-sc-regular-local-domain",
+  "lem-sbc-root-algebra-regular-at-root",
+  "lem-weil-pbc-localization-of-regular-ring",
+  "lem-weil-pbc-hypersurface-derivation-regular"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q08-e41a9107a",
+  "group": "Q08",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q08-e41a9107a (reviewer sub-agent of L); spot-checked: Read the item's 7-step proof and every cited statement. Source checked: ILO IX Prop 2.1 proof, printed p.133, which uses the full root algebra A[x]/(x_i^n-t_i) and leaves its regularity implicit. The statement is unchanged and true. Edge cases checked: A=0, r=0, n=1, k[s] and k[s,u]. Repeated branches are excluded, and that hypothesis is needed (k[x,y]/(x^n-y^n) is singular). The induction is set up properly: B_{J,K} for disjoint J⊆S, K⊆I∖J, by induction on |K|, with base R_J regular local by the SNC dimension clauses and 00CT/stalk identification. Step 4: t_i≠0 in R_J follows from the two dimension equalities; R_J is a domain, so t_i is injective on the free D. Step 5: D/(t_i)=B_{J∪{i},K'}, and the root-at-divisor lemma applies with all four hypotheses verified (the lemma itself re-derived via 00NU). Step 6: D[1/t_i] regular, E[T] regular, and ∂F=nT^{n-1} is a unit because T is invertible and n is a unit; then 07PF applies. Step 7 is a valid localization identification. The five declared tool_uses are generic algebra and are accepted. Batch-5: lem-trf-polynomial-ring-regular-base is a Mathlib leaf (MvPolynomial.isRegularRing_of_isRegularRing) with no proof_deps; neither batch-5 assumption gives it and it is not part of either proof, so it is accepted. No duplicates: lem-per-snc-root-algebra-structure is only the strictly henselian local case. No new nodes, no SGA, no fixes."
  }
 }
