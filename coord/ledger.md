@@ -22703,3 +22703,5 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:50 L: returned deliver/F2/Sheaf.CategoryTheory.ScalarLocalizationDerivedHom (reviewer RETURN: (reviewer C-38284, head 38284f105) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.CategoryTheory.Scala)
 - 13:52 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
 - 13:53 L: merged deliver/O3/lem-dl-a1-integral-finite-residue-model (reviewer PASS; first push; new nodes: 0)
+- 13:53 L: merged deliver/NP/lem-dl-a1-galois-prime-residue-lifting (stage 2; reviewer PASS; parallel immutable checks)
+- 13:53 L: merged deliver/NQ/lem-sfb-finite-local-model-rhom-continuity (stage 2; reviewer PASS; parallel immutable checks)

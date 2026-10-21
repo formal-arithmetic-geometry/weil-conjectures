@@ -193,5 +193,23 @@
   "group": "Q75",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q75-b11eabeea (reviewer sub-agent of L); spot-checked: Read Stacks 0BRK (more-algebra.tex 32777-32865): the item keeps (1) and the surjectivity part of (2) with the same hypotheses; statement unchanged and not weakened. Both new nodes are statement-only Mathlib leaves that I checked against the pinned source. lem-dl-a1-profinite-invariant-ring-primes is RingTheory/Invariant/Profinite.lean 39-44/49/61/175: same hypotheses (compact, totally disconnected topological group G, discrete B, continuous action, IsInvariant = B^G=A), one declaration per clause, no maximality/domain/finiteness. lem-dl-a1-finite-group-limit-profinite is ProfiniteGrp/Basic.lean 80-86/223-227/317-321/327-328/380/385; true, and its directed-set citation is defined by the cited node. Duplicate search (rg -L over all chapters for 0BRK/0BMJ/one-orbit, profinite+prime, Krull+compact, inverse limit+finite group) found only finite-group versions (lem-exc-finite-galois-prime-residue-lifting, finite-invariant-quotient-normal-action), lem-galois-aut-profinite (functor Aut) and krull-finite-limit (no compactness); no duplicate, and neither new node restates an item clause. Steps checked: step 1 krull-finite-limit + topology leaf; step 2 restriction, orbit-map continuity on discrete S, fixed-field node with L=F, normality gives S^G=R; step 3 leaf transitivity gives (1); step 4 localization T^{-1}S inside E with kernel prime Q, Q∩S=s, Q∩A=pA, action and B^G=A (elementary, checked); step 5 localization-quotient node twice, then integral domain over field A/P is a field, so B/Q = Frac(S/s); the localization is genuinely needed because Aut κ(s) need not preserve S/s; step 6 leaf lifting, contraction gives g(s)=s, induced action equals α. Edge cases: E=F, R a field, s=0, non-maximal and inseparable residue cases. No SGA; all off-unit inputs have status mathlib, so no tool_uses. Project Lean quotient-lifting decls do not state the item exactly. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.GaloisPrimeResidueLifting",
+  "declaration": "Ideal.galois_prime_transitivity_and_residue_lifting",
+  "file": "lean/Sheaf/FieldTheory/GaloisPrimeResidueLifting.lean",
+  "statement": "theorem galois_prime_transitivity_and_residue_lifting (R : Type u) [CommRing R] [IsDomain R] [IsIntegrallyClosed R] (F : Type v) [Field F] [Algebra R F] [IsFractionRing R F] (E : Type w) [Field E] [Algebra F E] [Algebra R E] [IsScalarTower R F E] [IsGalois F E] : (∀ (s s' : Ideal (integralClosure R E)) [s.IsPrime] [s'.IsPrime], s.under R = s'.under R → ∃ g : E ≃ₐ[F] E, g • s = s') ∧ (∀ (s : Ideal (integralClosure R E)) [s.IsPrime] (α : s.ResidueField ≃+* s.ResidueField), α.toRingHom.comp (Ideal.ResidueField.map (s.under R) s (algebraMap R (integralClosure R E)) rfl) = Ideal.ResidueField.map (s.under R) s (algebraMap R (integralClosure R E)) rfl → ∃ g : E ≃ₐ[F] E, g • s = s ∧ ∀ b : integralClosure R E, α (algebraMap (integralClosure R E) s.ResidueField b) = algebraMap (integralClosure R E) s.ResidueField (g • b))",
+  "branch": "sheaf-dag",
+  "by": "NP",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-045810b7e",
+  "group": "NP",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 0BRK clause by clause: normal domain = IsDomain+IsIntegrallyClosed, F with IsFractionRing, IsGalois F E (no finiteness), S = integralClosure R E with Mathlib's restricted action of E ≃ₐ[F] E (IntegralClosure/Algebra/Basic.lean:264); (1) primes with equal under R are conjugate via pointwise g • s; (2) every ring automorphism of s.ResidueField (= Frac(S/s)) fixing the image of ResidueField.map from (s.under R) is induced on generators by some g with g • s = s. The source's algebraic-normal clause is omitted per the node's source place. One sorry, no definitions, source and blueprint docstrings with all 6 proof steps, statement verbatim in file, independent universes u v w, node otherwise identical to live (no Lean landed yet), no duplicate (Mathlib results are finite-group or quotient-ring only). Edge cases E=F, R a field, s=0, non-maximal, inseparable residue fields OK. No compile needed (no file changed)."
  }
 }

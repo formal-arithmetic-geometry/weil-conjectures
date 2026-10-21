@@ -18,7 +18,8 @@
   "sk-def-sfb-constructible",
   "def-pc-cochain-complex-modules",
   "sk-def-sfb-derived-tensor-hom",
-  "def-sbc-standard-tstructure-derived-category"
+  "def-sbc-standard-tstructure-derived-category",
+  "def-sfb-finite-constant-model-data"
  ],
  "proof": [
   {
@@ -304,5 +305,24 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q15-fb08c2a1e (reviewer sub-agent of L); spot-checked: Read the item's nine steps and all 15 cited statements in full. Checked against Stacks 08JH (l.11912, arbitrary target), 08JI and 08JB, and Bhatt–Scholze Prop. 6.8.11(3) (finite projective resolution) and Lemma 6.8.12. The statement is unchanged from base and true. Hom^n(Q,C)=(C^n)^b⊕(C^{n-1})^a for Q=[R^a→R^b] in degrees −1,0, and the sign was re-derived. Small cases: P=A/ϖ puts Ext^1 in degree 1, so the lower bound c is sharp and not lowered by torsion; A=E gives a=0. Steps 1–4 and 6–9: each cited node says what the step takes. Step 3 needs only D-level naturality because H^n of a filtered colimit is the colimit of H^n. Step 9's cover-local criterion holds because the W_α cover the terminal object. No new nodes, no cycle, no SGA. The item is still unsplit in live and side-live and is not dropped. All eight off-unit generic tool uses are accepted (Grothendieck-abelian, weakly étale localization, untwisted cartesian coefficients, slice exactness, module colimits, RHom restriction, strict-perfect Hom, finite-free Hom). One fault (C1/C4), repaired: step 5 identified Hom^•(Q,I(C)) with RHom(L_W[0],C) without citing def-pur-derived-internal-hom or its first-variable quasi-isomorphism invariance (lem-pur-rhom-well-defined), which step 7's naturality also needs. Fixed file fixes/dag/nodes/sec-six-functors-basics/lem-sfb-finite-local-model-rhom-continuity.json: one sentence added to step 5, and def-pur-derived-internal-hom added to its uses and to proof_deps.; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.Paper.FiniteLocalModelRHomContinuity",
+  "declaration": "AlgebraicGeometry.ProEtale.finite_local_model_rhom_continuity",
+  "file": "lean/Sheaf/Paper/FiniteLocalModelRHomContinuity.lean",
+  "statement": "theorem finite_local_model_rhom_continuity (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (T : Scheme.{u}) (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X] (_hΛ : Λ = Mon.mk (FiniteConstantModel.integralCoefficients l E) ∨ Λ = Mon.mk (FiniteConstantModel.rationalCoefficients l E)) (L : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ.X T)) (_hL : HasFiniteConstantLocalModel Λ.X T L) (c : ℤ) : (∀ (I : Type (u + 1)) [SmallCategory I] [IsFiltered I] (N : I ⥤ CochainComplex (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ.X T)) ℤ), (∀ i : I, (DerivedCategory.Q.obj (N.obj i)).IsGE c) → ∀ n : ℤ, Nonempty (IsColimit ((DerivedCategory.Q ⋙ (CondensedRing.derivedHom Λ.X T).obj (op ((DerivedCategory.singleFunctor _ 0).obj L)) ⋙ DerivedCategory.homologyFunctor _ n).mapCocone (colimit.cocone N)))) ∧ (∀ N : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ.X T)), N.IsGE c → (((CondensedRing.derivedHom Λ.X T).obj (op ((DerivedCategory.singleFunctor _ 0).obj L))).obj N).IsGE c)",
+  "branch": "newtargets-dag",
+  "by": "NQ",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Continuity is stated on every cohomology module sheaf of the image of the original termwise-colimit cocone. Exact filtered colimits identify this with invertibility of the evaluation-induced derived comparison. The input bound is cohomological (IsGE), and the second conjunct is the sharp lower bound for every derived target. No Noetherianity or torsion-freeness is assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-407aa2fc0",
+  "group": "NQ",
+  "result": "pass",
+  "note": "Re-delivery of 87d1ccfe RETURN (H2). Only item-node change: stmt_dep lem-sfb-finite-constant-model-two-term-free-resolution replaced by def-sfb-finite-constant-model-data (kind definition, existing:true, module Sheaf.Paper.FiniteConstantModelResolution, owns plain abbrevs integralCoefficients/rationalCoefficients at lines 562,569; record identical to side-live), exactly as instructed. Lean module byte-identical to 87d1; theorem stays in proof_deps; item lean still null in side-live. Independently re-checked HasFiniteConstantLocalModel (pro-etale cover + Mod.IsFinitelyPresented on the point = B_W⊗_A P, no torsion-freeness or Noetherian condition). Re-read hypotheses (prime l, finite E/Q_l, Λ∈{O_E,E}, arbitrary T), universes (u+1 site, values and index), continuity as H^n IsColimit of the original colimit.cocone, sharp IsGE c bound, edge cases, docstrings with source/blueprint tags and 9 steps, sorry only, no hollow defs; lean.statement verbatim. No compile (2026-10-21 rule; unchanged file); no fixes. Maintainer note: parent lem-sfb-constructible-internal-hom-continuity still carries the theorem stmt_dep."
+ }
 }
