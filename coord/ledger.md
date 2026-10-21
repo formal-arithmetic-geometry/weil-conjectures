@@ -22294,3 +22294,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:16 L: merged deliver/S7/Sheaf.CategoryTheory.WordReconstructionCoherence (stage 3; reviewer PASS; first push; landing 20261021T111618-L-410947 (proof); batch 20261021T110859; modules 1; new nodes 0)
 - 11:16 L: merged deliver/S9/Sheaf.CategoryTheory.ScalarCoordinateLimitCriterion (stage 3; reviewer PASS; first push; landing 20261021T111624-L-427296 (proof); batch 20261021T110859; modules 1; new nodes 0)
 - 11:16 L: merged deliver/T1/Sheaf.CategoryTheory.FinitePostnikovIsomorphism (stage 3; reviewer PASS; first push; landing 20261021T111629-L-438603 (proof); batch 20261021T110859; modules 1; new nodes 0)
+- 11:16 L: merged deliver/T3/Sheaf.CategoryTheory.DerivedCategory.AbstractKFlatResolution (stage 3; reviewer PASS; first push; landing 20261021T111633-L-445466 (proof); batch 20261021T110859; modules 1; new nodes 0)

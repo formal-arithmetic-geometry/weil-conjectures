@@ -11,6 +11,8 @@ public import Mathlib.CategoryTheory.Monoidal.Braided.Basic
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
 public import Sheaf.Algebra.Homology.PreservesTotalTensorKFlatQuasiIso
 
+import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
+
 /-!
 # Abstract K-flat resolutions
 
@@ -53,6 +55,14 @@ theorem exists_quasiIso_isKFlatForTotalTensor
     (B : C ⥤ C) (hB : ∀ X : C, ObjectProperty.flat (B.obj X))
     (ε : B ⟶ 𝟭 C) [∀ X : C, Epi (ε.app X)] (L : CochainComplex C ℤ) :
     ∃ (Q : CochainComplex C ℤ) (q : Q ⟶ L), QuasiIso q ∧ Q.IsKFlatForTotalTensor := by
-  sorry
+  let : Abelian.HasFunctorialFlatResolution C :=
+    ⟨{ F := ObjectProperty.lift _ B hB, π := ε }⟩
+  obtain ⟨Q, q, hq, _, hQ⟩ := exists_quasiIso_flat_kFlat L
+  refine ⟨Q, q, hq, ?_⟩
+  constructor
+  · intro Q' Q'' s hs
+    exact hQ.whiskerLeft hs
+  · intro Q' Q'' s hs
+    exact hQ.whiskerRight hs
 
 end CochainComplex
