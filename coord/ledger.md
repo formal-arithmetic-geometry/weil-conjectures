@@ -21833,3 +21833,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:17 L: returned deliver/Q27/lem-weil-coefficient-complex-rationalization (reviewer RETURN: L: independent stage-2 immutable head 818d69d5aba1: H2 / theorem-stmt_dep finding upheld: delivery added stmt_dep lem-we)
 - 09:17 L: returned deliver/NY/lem-weil-point-finite-free-sections-tensor (reviewer RETURN: L: independent stage-2 immutable head a12ed8e1fadd: H2: stmt_deps gained theorem nodes lem-weil-finite-free-completed-sc)
 - 09:17 L: returned deliver/Q41/lem-sbc-ringed-topos-sheaf-slice-derived-comparison (reviewer RETURN: L: independent stage-2 immutable head b223c3c7dc81: H2: the delivery adds theorem stmt_dep lem-weil-pbc-ringed-presentat)
+- 09:17 L: returned deliver/Q74/lem-trf-section-rees-noetherian-geometry (reviewer RETURN: L: independent stage-2 immutable head be2267ef680d: H2: delivery added theorem stmt_dep lem-pur-dnc-etale-rees-chart, bu)
