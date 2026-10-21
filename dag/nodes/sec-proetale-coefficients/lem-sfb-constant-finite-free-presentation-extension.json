@@ -16,9 +16,95 @@
   "def-pur-sheaf-tensor-product",
   "def-pc-flat-sheaf-modules"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For an $R$-module $M$, write $cM$ for the constant module presheaf over the constant ring presheaf $cR$. Any exact sequence of $R$-modules gives an exact sequence of these presheaves: at every object its component is the original sequence, and presheaf kernels and cokernels are sectionwise by [lem-weil-pbc-site-r-module-presheaf-sheafification-exact](1). By part (2) of the same node, sheafifying this sequence is exact. By [def-sf-site-constant-module-functor], its terms, maps and extended scalar actions are precisely $M_{\\mathcal C}$ and the constant module maps in the statement. Exactness here also means exactness as $R_{\\mathcal C}$-modules: kernels are sectionwise and cokernels are sheafifications of sectionwise cokernels by [def-weil-sheaf-of-modules-category], so the extended actions do not change either construction. This proves exactness of the constant module functor.",
+   "uses": [
+    "lem-weil-pbc-site-r-module-presheaf-sheafification-exact",
+    "def-sf-site-constant-module-functor",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EI (lemma-sheafification-exact), applied to the constant ring presheaf; Tag 03DA (lemma-abelian)"
+   }
+  },
+  {
+   "text": "For finite $s$, the coordinate projections give the equality $c(R^s)=(cR)^s$ of module presheaves. Sheafification preserves finite limits, hence finite products, by [lem-weil-pbc-site-r-module-presheaf-sheafification-exact](2). Sheafifying these projections therefore gives a canonical isomorphism $\\alpha_s:(R^s)_{\\mathcal C}\\simeq(R_{\\mathcal C})^s$, linear for the sheafified scalar action of [def-sf-site-constant-module-functor]. It sends each constant basis vector to its coordinate basis section. The empty product in a module category is the zero module, so this also proves $\\alpha_0:0_{\\mathcal C}\\simeq0$.",
+   "uses": [
+    "lem-weil-pbc-site-r-module-presheaf-sheafification-exact",
+    "def-sf-site-constant-module-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EI (lemma-sheafification-exact): finite limits, applied to finite products of the constant module presheaf"
+   }
+  },
+  {
+   "text": "Use $\\alpha_s$ to replace $(R^s)_{\\mathcal C}$ by $(R_{\\mathcal C})^s$. For every object $U$, put $D=R_{\\mathcal C}(U)$ and $T=B(U)$. Define $T\\otimes_DD^s\\to T^s$ by $b\\otimes(x_i)\\mapsto(bx_i)_i$, and $T^s\\to T\\otimes_DD^s$ by $(b_i)\\mapsto\\sum_i b_i\\otimes e_i$. The first map is balanced and $T$-linear; the second is $T$-linear. The composites are identities: one sends $(b_i)$ to $(b_i)$, and the other sends $b\\otimes x$ to $\\sum_i bx_i\\otimes e_i=b\\otimes\\sum_i x_ie_i=b\\otimes x$. These formulas commute with every restriction, so they are inverse isomorphisms of presheaves. The target $B^s$ is a sheaf, since compatible coordinate sections glue uniquely coordinate by coordinate. The sheafified tensor definition [def-pur-sheaf-tensor-product] thus gives the required $B$-linear $\\beta_s:E_B(R^s)\\simeq B^s$ with the stated local formulas. They commute with scalar-algebra maps by the same formulas. For $s=0$ both sides are zero and the sum is empty. The tensor construction is functorial: on a module map $f$, it sends $b\\otimes p$ to $b\\otimes f_{\\mathcal C}(p)$, and the identity and composition laws hold on these tensors and hence after sheafification.",
+   "uses": [
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section 03EK (section-tensor-product): tensor as sheafification of sectionwise tensor; explicit finite free tensor formulas"
+   }
+  },
+  {
+   "text": "Write $A=(a_{ij})$ with $1\\leq i\\leq n$, $1\\leq j\\leq m$. Before sheafification, the $i$th coordinate of $A(x)$ is $\\sum_j a_{ij}x_j$. Applying sheafification to this equality of maps, the coordinate identifications $\\alpha_m,\\alpha_n$ identify $A_{\\mathcal C}$ with that same matrix over $R_{\\mathcal C}$; these are the coordinate projections constructed in step 2 using [def-sf-site-constant-module-functor]. Write $\\bar a_{ij}$ for its image in $B$. On a section $(b_j)$ of $B^m$, the composite $\\beta_n E_B(A)\\beta_m^{-1}$ is, using the tensor maps of [def-pur-sheaf-tensor-product], $\\sum_j b_j\\otimes e_j\\mapsto\\sum_{i,j}b_j\\otimes a_{ij}e_i\\mapsto(\\sum_j\\bar a_{ij}b_j)_i$. This is exactly $A_B$, proving the matrix compatibility (and naturality for every map between finite free modules). If either rank is zero, the indicated sums are empty and the maps are the unique zero maps.",
+   "uses": [
+    "def-sf-site-constant-module-functor",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section 03EK (section-tensor-product): functoriality and balancing; constant module sheafification as in Tag 03EI"
+   }
+  },
+  {
+   "text": "Apply step 1 to the specified sequence $0\\to R^m\\xrightarrow{A}R^n\\xrightarrow{v}P\\to0$. If $B$ is flat as an $R_{\\mathcal C}$-module, [def-pc-flat-sheaf-modules] says that $-\\otimes_{R_{\\mathcal C}}B$ is an exact functor. Apply [lem-sp-exact-functor-preserves-homology](a),(c): it preserves the initial monomorphism, the terminal epimorphism, and the zero middle homology. Interchanging the two tensor factors by $p\\otimes b\\mapsto b\\otimes p$ identifies this with the sequence obtained by $E_B$; the interchange is a natural isomorphism because this balanced sectionwise map is its own inverse, and then sheafifies by [def-pur-sheaf-tensor-product]. Exactness as $B$-modules follows from exactness on the underlying $R_{\\mathcal C}$-modules: [def-weil-sheaf-of-modules-category] computes kernels sectionwise and cokernels by sheafifying sectionwise cokernels for either scalar sheaf, giving the same underlying abelian sheaves. Conjugate the first two terms by $\\beta_m,\\beta_n$. Step 4 identifies the first arrow with $A_B$, and the second is precisely $E_B(v)\\beta_n^{-1}$. This is the required short exact sequence, with the specified arrows.",
+   "uses": [
+    "def-pc-flat-sheaf-modules",
+    "lem-sp-exact-functor-preserves-homology",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03ER (definition-flat), item (3); Tag 03DA (lemma-abelian); exact-functor consequences as in Homology Tag 010N"
+   }
+  },
+  {
+   "text": "For a specified isomorphism $v:R^r\\simeq P$, let $w$ be its inverse. Functoriality of constant sheafification [def-sf-site-constant-module-functor] and of tensor [def-pur-sheaf-tensor-product] gives $E_B(w)E_B(v)=1$ and $E_B(v)E_B(w)=1$. Thus $E_B(v)\\beta_r^{-1}$ has inverse $\\beta_r E_B(w)$, without a flatness hypothesis. For $r=0$, both $P$ and $E_B(P)$ are zero, as the same formulas show. This completes all clauses.",
+   "uses": [
+    "def-sf-site-constant-module-functor",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section 03EK (section-tensor-product): change-of-rings functor; functors preserve specified inverse maps"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-site-r-module-presheaf-sheafification-exact",
+  "def-sf-site-constant-module-functor",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-flat-sheaf-modules",
+  "lem-sp-exact-functor-preserves-homology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EI, 03ER(3), 03DA and Section 03EK; explicit coordinate argument for the Local models paragraph of the blueprint ancestor"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,10 +140,52 @@
    "results": "OK: 8 hit(s); returned names/files: SheafOfModules.map_ιFree_mapFree_hom, PresheafOfModules.sheafifyHomEquiv', SheafOfModules.mapFree, PresheafOfModules.sheafifyHomEquiv, SheafOfModules.ιFree_mapFree_inv, PresheafOfModules.sheafificationHomEquiv, PresheafOfModules.toPresheaf_map_sheafificationHomEquiv, SheafOfModules.freeMap",
    "date": "2026-10-21",
    "verdict": "no match: these are components, not the specified constant-module scalar-extension theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On an arbitrary site the constant module sheaf functor is exact and identifies finite free modules; flat sheaf scalar extension carries a specified free presentation to the same matrix over the algebra sheaf",
+   "results": "OK: 8 hit(s); SheafOfModules.mapFree, SheafOfModules.freeFunctor, SheafOfModules.Presentation.map, SheafOfModules.Presentation.mapGenerators, SheafOfModules.presentationOfIsCokernelFree, SheafOfModules.relationsOfIsCokernelFree, SheafOfModules.Presentation.mapRelations, SheafOfModules.relationsOfIsCokernelFree_s",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits do not state this arbitrary-site constant-module and specified matrix scalar-extension theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.constantSheaf, PreservesFiniteLimits",
+   "results": "OK: 0 hit(s); ; loogle: unknown identifier 'PreservesFiniteLimits'",
+   "date": "2026-10-21",
+   "verdict": "query error: loogle: unknown identifier 'PreservesFiniteLimits'; corrected in the later fully qualified query"
+  },
+  {
+   "tool": "grep",
+   "query": "constantSheaf.*(exact|Exact)|preservesFiniteLimits.*[Ss]heafification|mapFree",
+   "results": "OK: 17 hit(s); Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits do not state this arbitrary-site constant-module and specified matrix scalar-extension theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The constant module sheaf functor is exact and flat extension of sheaf scalars preserves a finite free resolution",
+   "results": "OK: 8 hit(s); CategoryTheory.constantSheaf, CompHausLike.LocallyConstantModule.functor, PresheafOfModules.free, ModuleCat.preservesFiniteLimits_extendScalars_of_flat, CondensedMod.LocallyConstant.instFullModuleCatSheafCompHausCoherentTopologyConstantSheaf, CondensedMod.LocallyConstant.instFaithfulModuleCatSheafCompHausCoherentTopologyConstantSheaf, SheafOfModules.mapFree, SheafOfModules.freeFunctor",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits do not state this arbitrary-site constant-module and specified matrix scalar-extension theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constant sheafification preserves kernels and finite direct sums; tensoring a constant matrix with an algebra sheaf acts by its scalar extended matrix",
+   "results": "OK: 8 hit(s); matrixEquivTensor_apply_symm, MatrixEquivTensor.toFunAlgHom_apply, MatrixEquivTensor.invFun_algebraMap, matrixEquivTensor_apply, moritaEquivalenceMatrix, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, PresheafOfModules.Monoidal.tensorObj",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits do not state this arbitrary-site constant-module and specified matrix scalar-extension theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.constantSheaf, CategoryTheory.Limits.PreservesFiniteLimits",
+   "results": "OK: 0 hit(s); ",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits do not state this arbitrary-site constant-module and specified matrix scalar-extension theorem"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-scalar-model-finite-flat-resolution",
@@ -74,5 +202,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-constant-finite-free-presentation-extension",
+  "worker": "stage1",
+  "summary": "Proved constant-module exactness by sectionwise exactness and exact sheafification; constructed finite-power scalar-extension coordinates with explicit inverses and computed the extended matrix; deduced the specified short exact sequence from flatness and handled the isomorphism case without flatness. All ranks zero included. No new nodes or statement changes.",
+  "blueprint": "det-def-localizing-closure-ctf-equals-bc, proof Local models: exact pullback of the specified scalar finite free resolution with the same matrix, and its field length-zero case.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-N7-fc082c65d",
+  "group": "N7",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-fc082c65d (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, its 6 steps and 11 search records. There are no new nodes. The statement and stmt_deps are byte-identical to live/side-live, where the item is still unsplit with no base proof, so it is not superseded and the re-split rule does not apply. The item is not on any dropped list and has no repair note. Sources checked: blueprint main-20261015 ctf-equals-bc 'Local models' (the pull-back is exact with the same matrix, and the field case has length zero); Stacks 03EI (sites-modules l.874, PMod(O)->Mod(O^#) exact), 03ER (l.4243), 03DA, 03EK and Homology 010N, with all tags confirmed in tags/tags. No SGA is used. Each step uses what its cited statements actually say (C3/C4). Step 1 combines exact sheafification of the constant presheaves with the module-category kernels and cokernels to show the constant functor is exact in Mod(R_C). Step 2 gets the finite products (R^s)_C=(R_C)^s, including s=0. Step 3 defines beta_s by explicit, restriction-compatible inverse maps; the presheaf tensor is already the sheaf B^s. In step 4 I checked the matrix computation (sum_j a_ij b_j)_i = A_B with the n×m convention. Step 5 uses the flatness definition and lem-sp-exact-functor-preserves-homology (a),(c), the factor flip, and exactness detected on underlying sheaves, and lands on exactly the statement's arrows. Step 6 builds the inverse from functoriality alone, with no flatness. The parent (lem-sfb-scalar-model-finite-flat-resolution) uses exactly the flat-sequence and isomorphism clauses. Edge cases: the non-flat B=Z/2_C with P=Z/2 gives A_B=0, so the hypothesis is needed; flat B=Q_C works; ranks 0, R=0 and B=0 all hold. Off-unit citations are Mathlib leaves only, so no tool_uses are needed. Advisory: lem-weil-pbc-finite-type-constant-exact (another unit, Lean-written, defined through the strict-perfect package's constant sheaf) overlaps step 1; the self-contained proof is acceptable. The inherited statement uses 'sheaf of R_C-algebras' and a B-module structure on B⊗P_C without definition nodes. No changes."
  }
 }

@@ -21075,3 +21075,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:16 L: merged deliver/Q19/lem-sfb-flat-constant-module-scalar-mono (reviewer FIX; first push; new nodes: 0)
 - 08:16 L: merged deliver/Q92/prop-functor-package (reviewer FIX; after a return; new nodes: 7)
 - 08:16 L: merged deliver/Q15/lem-sbc-common-stage-inverse-through-karoubi (reviewer FIX; first push; new nodes: 0)
+- 08:16 L: merged deliver/N7/lem-sfb-constant-finite-free-presentation-extension (reviewer PASS; first push; new nodes: 0)
