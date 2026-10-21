@@ -21977,3 +21977,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:38 L: returned deliver/W4/Sheaf.Paper.IntegralComparisonSequenceSystems (reviewer RETURN: (reviewer C-6ca8d, head 6ca8dc27d) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.IntegralCompar)
 - 09:39 L: returned deliver/R9/Sheaf.Paper.IntegralStratifiedPerfectCharacterization (reviewer RETURN: (reviewer C-a2e0d, head a2e0d2bee) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.IntegralStrati)
 - 09:39 L: merged deliver/Q96/lem-weil-boundary-q-defining-composite-comparison (stage 2; reviewer PASS; parallel immutable checks)
+- 09:39 L: returned deliver/Y3/Sheaf.Paper.AdicSmoothBaseChange (reviewer RETURN: (reviewer C-924d9, head 924d90dd4) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.AdicSmoothBase)
