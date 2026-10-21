@@ -10,9 +10,95 @@
  "stmt_deps": [
   "def-weil-size-convention"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "If $S=\\varnothing$, the map $q$ forces $T=\\varnothing$. Take $T_0=S_0=\\varnothing$ and the unique maps and function. All assertions are vacuous since every tuple length is positive. Henceforth $S$ and $T$ are nonempty. Put $k=n+1$. Repeated application of [lem-sfb-finite-quotient-fiber-product] gives compact Hausdorff totally disconnected spaces $T^r$ and $P_r=T_S^r$ for every $r\\geq1$: use the base point to form ordinary products, and use $P_{r+1}=P_r\\times_S T$ for the fibre powers, starting with $P_1=T$. The identifications with tuple subspaces and the maps to $S$ are given by the coordinates. In particular $P_k$ is compact and coordinate-deletion maps are continuous.",
+   "uses": [
+    "lem-sfb-finite-quotient-fiber-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tags 08ZY (lemma-profinite) and 08ZZ (lemma-profinite-refine-open-covering), finite clopen partition construction; agent-written application to the given cocycle."
+   }
+  },
+  {
+   "text": "For each $z\\in P_k$, continuity of $c$ into discrete $M$ gives an open neighbourhood $O_z$ of $z$ in $T^k$ such that $c=c(z)$ on $O_z\\cap P_k$. By the finite-product topology choose a rectangle around $z$ inside $O_z$. Apply [lem-weil-pbc-profinite-clopen-basis] in $T$ to each coordinate neighbourhood to obtain a clopen rectangle $R_z=\\prod_{i=0}^{k-1}U_{z,i}$ around $z$ with $R_z\\subseteq O_z$. Compactness of $P_k$ selects finitely many $R_1,\\ldots,R_N$ covering it; $c$ is constant on each $R_l\\cap P_k$.",
+   "uses": [
+    "lem-weil-pbc-profinite-clopen-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tags 08ZY (lemma-profinite) and 08ZZ (lemma-profinite-refine-open-covering), finite clopen partition construction; agent-written application to the given cocycle."
+   }
+  },
+  {
+   "text": "Let $\\alpha$ consist of the nonempty atoms of the finite family of clopens $U_{l,i}$ in $T$: an atom is an intersection choosing each $U_{l,i}$ or its complement. Thus $\\alpha$ is a finite partition into nonempty clopens. For any $k$-tuple of its blocks $A_0,\\ldots,A_{k-1}$ whose product meets $P_k$, choose a point $z$ of that intersection and an $R_l$ containing $z$. Membership in every $U_{l,i}$ is constant on $A_i$, so $\\prod_iA_i\\subseteq R_l$. Consequently $c$ is constant on $(\\prod_iA_i)\\cap P_k$. Define $h:T^k\\to M$ to have this constant value on $\\prod_iA_i$ if the intersection is nonempty, and value $0$ otherwise. This is well-defined, agrees with $c$ on $P_k$, and is continuous: each fibre is a union of the finitely many clopen product cells.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tags 08ZY (lemma-profinite) and 08ZZ (lemma-profinite-refine-open-covering), finite clopen partition construction; agent-written application to the given cocycle."
+   }
+  },
+  {
+   "text": "Define the continuous function $e:T^{k+1}\\to M$ by\n$$e(t_0,\\ldots,t_k)=\\sum_{j=0}^k(-1)^j h(t_0,\\ldots,\\widehat{t_j},\\ldots,t_k).$$\nContinuity follows because coordinate deletions are continuous and finite sums in discrete $M$ are continuous. Its nonzero locus $D=e^{-1}(M\\setminus\\{0\\})$ is clopen, hence compact as a closed subset of compact $T^{k+1}$. Every face of a tuple in $P_{k+1}$ belongs to $P_k$, where $h=c$; the assumed equation therefore gives $e|_{P_{k+1}}=0$. Thus for each $t\\in D$ there are indices $i,j$ with $q(t_i)\\ne q(t_j)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tags 08ZY (lemma-profinite) and 08ZZ (lemma-profinite-refine-open-covering), finite clopen partition construction; agent-written application to the given cocycle."
+   }
+  },
+  {
+   "text": "For each $t\\in D$ choose such $i,j$. Hausdorffness makes $S\\setminus\\{q(t_j)\\}$ an open neighbourhood of $q(t_i)$. Apply [lem-weil-pbc-profinite-clopen-basis] in $S$ to choose a clopen $V_t$ containing $q(t_i)$ and excluding $q(t_j)$. The open set\n$$W_t=\\{u\\in T^{k+1}:q(u_i)\\in V_t,\\ q(u_j)\\notin V_t\\}$$\ncontains $t$. Compactness of $D$ selects finitely many $W_t$ covering $D$. Let $\\gamma$ be the partition of $S$ into the nonempty atoms of their finitely many clopens $V_t$ (the partition $\\{S\\}$ when the family is empty). A tuple $u$ whose $q(u_i)$ all lie in the same $\\gamma$-block belongs to none of these $W_t$: membership in each selected $V_t$ is constant on a block. Hence such a tuple lies outside $D$, and $e(u)=0$.",
+   "uses": [
+    "lem-weil-pbc-profinite-clopen-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tags 08ZY (lemma-profinite) and 08ZZ (lemma-profinite-refine-open-covering), finite clopen partition construction; agent-written application to the given cocycle."
+   }
+  },
+  {
+   "text": "Refine $\\alpha$ to the finite clopen partition\n$$\\beta=\\{A\\cap q^{-1}(B): A\\in\\alpha,\\ B\\in\\gamma,\\ A\\cap q^{-1}(B)\\ne\\varnothing\\}.$$\nLet $T_0=\\beta$, $S_0=\\gamma$, and let $a,b$ send a point to its block. The maps are continuous surjections because the blocks are open and nonempty. Define $q_0(C)=B$ for the unique $B\\in\\gamma$ with $C\\subseteq q^{-1}(B)$. This is well-defined and $q_0a=bq$. Given $B\\in\\gamma$, choose $s\\in B$ and then $t$ with $q(t)=s$; its $\\beta$-block maps to $B$. Thus $q_0$ is surjective.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tags 08ZY (lemma-profinite) and 08ZZ (lemma-profinite-refine-open-covering), finite clopen partition construction; agent-written application to the given cocycle."
+   }
+  },
+  {
+   "text": "Because $\\beta$ refines $\\alpha$, the function $h$ is constant on each product of $k$ blocks of $\\beta$. Write $h_0:T_0^k\\to M$ for the corresponding function and restrict it to $c_0:(T_0)_{S_0}^k\\to M$. For $(t_0,\\ldots,t_{k-1})\\in P_k$, compatibility $q_0a=bq$ places its block tuple in this domain, and\n$$c_0(a(t_0),\\ldots,a(t_{k-1}))=h(t_0,\\ldots,t_{k-1})=c(t_0,\\ldots,t_{k-1}).$$",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tags 08ZY (lemma-profinite) and 08ZZ (lemma-profinite-refine-open-covering), finite clopen partition construction; agent-written application to the given cocycle."
+   }
+  },
+  {
+   "text": "For any $(x_0,\\ldots,x_k)\\in(T_0)_{S_0}^{k+1}$, independently choose representatives $t_i\\in x_i$. Their $q$-images lie in the single $\\gamma$-block $q_0(x_i)$, so step 5 gives $e(t_0,\\ldots,t_k)=0$. Each face of the block tuple belongs to $(T_0)_{S_0}^k$ and the definition of $h_0$ gives\n$$\\sum_{j=0}^k(-1)^j c_0(x_0,\\ldots,\\widehat{x_j},\\ldots,x_k)=\\sum_{j=0}^k(-1)^j h(t_0,\\ldots,\\widehat{t_j},\\ldots,t_k)=e(t_0,\\ldots,t_k)=0.$$\nThe representatives need not have equal $q$-images. This verifies the equation even on block tuples with no lift to $P_{k+1}$. When $M$ is the zero group, $h=e=0$, $D=\\varnothing$, and the same construction applies.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tags 08ZY (lemma-profinite) and 08ZZ (lemma-profinite-refine-open-covering), finite clopen partition construction; agent-written application to the given cocycle."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-finite-quotient-fiber-product",
+  "lem-weil-pbc-profinite-clopen-basis"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Tags 08ZY (lemma-profinite) and 08ZZ (lemma-profinite-refine-open-covering), finite clopen partition construction; agent-written application to the given cocycle."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -279,10 +365,216 @@
    },
    "date": "2026-10-22",
    "verdict": "no match: factorization of a locally constant function on a supplied limit does not also supply a finite quotient of the arrow and descent of its cocycle equation; the group and Nobeling constructions concern different complexes"
+  },
+  {
+   "tool": "grep",
+   "query": "extend|exists.*[Ff]inite|[Ff]actor",
+   "results": {
+    "t": "2026-10-21T19:18:09Z",
+    "tool": "grep",
+    "query": "extend|exists.*[Ff]inite|[Ff]actor",
+    "sub": "Topology/LocallyConstant",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "Mathlib/Topology/LocallyConstant/Basic.lean"
+    ],
+    "digest": "4953c13015fd727a"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: returned finite-quotient, locally constant factorization and abstract Cech constructions do not assert simultaneous quotient-arrow factorization preserving the cocycle equation; Tietze results require a different target extension hypothesis",
+   "subdirectory": "Topology/LocallyConstant"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every continuous function from a closed subset of a profinite space to a nonempty finite discrete set extends continuously to the whole space",
+   "results": {
+    "t": "2026-10-21T19:18:24Z",
+    "tool": "leanfinder",
+    "query": "Every continuous function from a closed subset of a profinite space to a nonempty finite discrete set extends continuously to the whole space",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Profinite.projective_of_extrDisc",
+     "Profinite.NobelingProof.fin_comap_jointlySurjective",
+     "Profinite.exists_locallyConstant_finite_nonempty",
+     "ContinuousMap.exists_extension_forall_mem",
+     "Stonean.instProjectiveProfiniteObjToProfinite",
+     "ContinuousMap.exists_extension'",
+     "ContinuousMap.exists_extension",
+     "ContinuousMap.exists_forall_mem_restrict_eq"
+    ],
+    "digest": "9fefa7815ad545df"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: returned finite-quotient, locally constant factorization and abstract Cech constructions do not assert simultaneous quotient-arrow factorization preserving the cocycle equation; Tietze results require a different target extension hypothesis"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocallyConstant\", \"extend\"",
+   "results": {
+    "t": "2026-10-21T19:18:25Z",
+    "tool": "loogle",
+    "query": "\"LocallyConstant\", \"extend\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: returned finite-quotient, locally constant factorization and abstract Cech constructions do not assert simultaneous quotient-arrow factorization preserving the cocycle equation; Tietze results require a different target extension hypothesis"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite valued continuous functions on closed subsets of Stone spaces extend to continuous functions on the whole space",
+   "results": {
+    "t": "2026-10-21T19:18:25Z",
+    "tool": "leansearch",
+    "query": "Finite valued continuous functions on closed subsets of Stone spaces extend to continuous functions on the whole space",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "BoundedContinuousFunction.exists_norm_eq_restrict_eq_of_closed",
+     "BoundedContinuousFunction.exists_norm_eq_restrict_eq",
+     "Real.instTietzeExtension",
+     "ContinuousMap.exists_restrict_eq",
+     "RCLike.instTietzeExtension",
+     "TietzeExtension.mk",
+     "continuous_preStoneCechExtend",
+     "Set.instTietzeExtensionUnitClosedBall"
+    ],
+    "digest": "aeee2f54999e7727"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: returned finite-quotient, locally constant factorization and abstract Cech constructions do not assert simultaneous quotient-arrow factorization preserving the cocycle equation; Tietze results require a different target extension hypothesis"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite valued continuous Cech cocycle for a surjection of compact Hausdorff totally disconnected spaces descends with its equation to a finite quotient surjection",
+   "results": {
+    "t": "2026-10-21T19:22:23Z",
+    "tool": "leanfinder",
+    "query": "A finite valued continuous Cech cocycle for a surjection of compact Hausdorff totally disconnected spaces descends with its equation to a finite quotient surjection",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Profinite.indexFunctor",
+     "Profinite.NobelingProof.fin_comap_jointlySurjective",
+     "LightProfinite.surjective_transitionMap",
+     "Profinite.exists_locallyConstant_finite_aux",
+     "CompHaus.effectiveEpiFamily_of_jointly_surjective",
+     "LightProfinite.proj_surjective",
+     "Profinite.lift",
+     "Profinite.effectiveEpiFamily_of_jointly_surjective"
+    ],
+    "digest": "aac20e0b2be51f01"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: returned finite-quotient, locally constant factorization and abstract Cech constructions do not assert simultaneous quotient-arrow factorization preserving the cocycle equation; Tietze results require a different target extension hypothesis"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cechComplexFunctor\"",
+   "results": {
+    "t": "2026-10-21T19:22:23Z",
+    "tool": "loogle",
+    "query": "\"cechComplexFunctor\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "CategoryTheory.cechComplexFunctor"
+    ],
+    "digest": "4596b05316f088d8"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: returned finite-quotient, locally constant factorization and abstract Cech constructions do not assert simultaneous quotient-arrow factorization preserving the cocycle equation; Tietze results require a different target extension hypothesis"
+  },
+  {
+   "tool": "grep",
+   "query": "cocycle|cech|Cech",
+   "results": {
+    "t": "2026-10-21T19:22:23Z",
+    "tool": "grep",
+    "query": "cocycle|cech|Cech",
+    "sub": "Topology/Category/Profinite",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "Mathlib/Topology/Category/Profinite/Projective.lean"
+    ],
+    "digest": "bee7cf4ad316e555"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: returned finite-quotient, locally constant factorization and abstract Cech constructions do not assert simultaneous quotient-arrow factorization preserving the cocycle equation; Tietze results require a different target extension hypothesis",
+   "subdirectory": "Topology/Category/Profinite"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite valued continuous Cech cocycle descends to a finite quotient of a surjective map of profinite spaces preserving its alternating cocycle equation",
+   "results": {
+    "t": "2026-10-21T19:22:24Z",
+    "tool": "leansearch",
+    "query": "A finite valued continuous Cech cocycle descends to a finite quotient of a surjective map of profinite spaces preserving its alternating cocycle equation",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Profinite.lim",
+     "Profinite.isoAsLimitConeLift",
+     "Profinite.asLimit",
+     "ProfiniteGrp.toLimit_surjective",
+     "Profinite.asLimitConeIso",
+     "ProfiniteGrp.continuousMulEquivLimittoFiniteQuotientFunctor",
+     "ProfiniteGrp.toLimit_fun_continuous",
+     "Profinite.exists_locallyConstant_finite_nonempty"
+    ],
+    "digest": "63c2d539b895f9c0"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: returned finite-quotient, locally constant factorization and abstract Cech constructions do not assert simultaneous quotient-arrow factorization preserving the cocycle equation; Tietze results require a different target extension hypothesis"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally constant cocycle on the nerve of a surjection of Stone spaces is pulled back from a cocycle on a surjective map between finite sets",
+   "results": {
+    "t": "2026-10-21T19:23:57Z",
+    "tool": "leanfinder",
+    "query": "A locally constant cocycle on the nerve of a surjection of Stone spaces is pulled back from a cocycle on a surjective map between finite sets",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Profinite.exists_locallyConstant_finite_aux",
+     "Profinite.exists_locallyConstant_fin_two",
+     "CompHausLike.LocallyConstant.counit",
+     "Profinite.exists_locallyConstant_finite_nonempty",
+     "Profinite.NobelingProof.fin_comap_jointlySurjective",
+     "CompHausLike.LocallyConstant.functor_map_val",
+     "Profinite.exists_locallyConstant",
+     "CompHausLike.LocallyConstant.componentHom"
+    ],
+    "digest": "8f783faf4b874f16"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: returned finite-quotient, locally constant factorization and abstract Cech constructions do not assert simultaneous quotient-arrow factorization preserving the cocycle equation; Tietze results require a different target extension hypothesis"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-normed-scalar-profinite-cech-exact",
@@ -309,5 +601,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-finite-valued-cech-cocycle-descent",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Constructed a finite clopen rectangular extension of the given cochain, then separated the compact nonzero locus of its alternating sum by finitely many clopens of the base. The resulting compatible finite partitions preserve the cocycle equation even on nonliftable tuples. Reused two existing nodes; no new nodes.",
+  "blueprint": "The inherited Paragraph (3) finite E open-direct-image branch, via normed-scalar-profinite-cech-exact: supplies exactly its finite discrete cocycle descent step. The blueprint delegates the open-coefficient result and does not state this auxiliary lemma.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-finite-quotient-fiber-product",
+    "why": "Generic topology of finite products and fibre powers of profinite spaces, needed to apply compactness to the cochain domain and the defect locus; no node of the item unit states this topological tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-finite-quotient-fiber-product"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NK-aedcff480",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-aedcff480 (reviewer sub-agent of L); spot-checked: I read the item in full. It is a first split, with 0 new nodes; the statement, stmt_deps and blueprint provenance are unchanged, and there is no SGA citation. The only citer, normed-scalar-profinite-cech-exact step 1, needs the cocycle equation on non-liftable quotient tuples (σ(q_0x_0),x), and the item states exactly that strong form. All eight steps are correct. Step 1 takes compactness of T^r and T_S^r from the statement of lem-sfb-finite-quotient-fiber-product; this off-unit tool use is declared, and I accept it. Steps 2 and 5 use the clopen basis (a Mathlib leaf) on T and on S. Steps 3, 6, 7 and 8 are atom-partition algebra, written out. In step 3, each atom meeting U_{l,i} lies inside it, which makes h well defined. The key step is 5: the defect locus D is compact, and it is separated by finitely many clopens W_t, so tuples whose base images lie in one γ-block have e=0. Edge cases checked: S=∅, M=0, n=1, and T=S={u,v} with a coarse base. I read Stacks topology.tex 08ZY and 08ZZ; proof_origin is by agent, which is correct. The duplicate search found that lem-per-finite-quotient-cochain-colimit concerns group cochains, so it is not a duplicate, and nothing else matches. No faults; no fixes."
  }
 }
