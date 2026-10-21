@@ -22,9 +22,145 @@
   "def-sfb-lisse-coefficient-module",
   "def-weil-triangulated-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Pass to the small-site section-ring model using [lem-pd-module-ringed-topos-derived-comparison] and [lem-sfb-internal-section-scalar-adjunction]. The first identifies the specified derived tensors and exact open extension; closed internal Homs are identified by uniqueness of their right adjunctions. The second identifies scalar extension/restriction AND their actual units, including $v\\mapsto1\\otimes v$; thus this passage does not change the triangle in the assertion. A field is Noetherian (its only ideals are zero and itself); hence $X$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. Every open in $X$ is quasi-compact by [lem-weil-pbc-noetherian-open-subscheme-noetherian]. Closed subschemes are Noetherian too: on a Noetherian affine their rings are quotients, whose ascending chains of ideals lift to chains of ideals upstairs, and closed subsets of a Noetherian space are quasi-compact. These observations apply also to the closures used to define $a_!,b_!$.",
+   "uses": [
+    "lem-pd-module-ringed-topos-derived-comparison",
+    "lem-sfb-internal-section-scalar-adjunction",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent topology-comparison argument; module models and quasi-compactness checks."
+   }
+  },
+  {
+   "text": "Take the finite compositum $E_0=EF\\subset\\Omega$ by [det-def-sfb-qlbar-condensed-subextensions], and write $A_V=A_{E_0,V}$. Extend $L,M$ on their respective supports to $L_0=A_S\\otimes_{A_{E,S}}L$ and $M_0=A_T\\otimes_{A_{F,T}}M$. These are ordinary degree-zero modules: finite-field scalar extension is exact by [lem-sfb-subfield-flat]. They are lisse: pull back to the covers trivializing $L,M$; [lem-sfb-kflat-scalar-comparison-normalization] identifies the pullbacks of these tensors with the tensors of the pullbacks, hence with $A^r,A^s$. Define $K=(a_!L_0)[0]$, $N=(b_!M_0)[0]$ in $D(A_X)$. They are bounded constructible by [lem-sfb-coefficient-heart-lisse-extension-constructible], since $X$ is Noetherian. The two supports and ranks have not been identified.",
+   "uses": [
+    "det-def-sfb-qlbar-condensed-subextensions",
+    "lem-sfb-subfield-flat",
+    "lem-sfb-kflat-scalar-comparison-normalization",
+    "lem-sfb-coefficient-heart-lisse-extension-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent topology-comparison argument; one common finite coefficient field; finite models."
+   }
+  },
+  {
+   "text": "Scalar extension along each coefficient map used here commutes with $a_!$ and $b_!$. For their open factors this is [lem-sf-open-tensor-normalization], with the identity geometric map and the given change of rings. For the closed factors use [lem-sfb-closed-supported-scalar-comparison] with inverse-image comparisons [lem-sfb-kflat-scalar-comparison-normalization]. Its unbounded-calculus hypothesis follows from [lem-weil-pbc-condensed-open-closed-recollement] and [lem-sfb-exact-open-closed-unbounded-calculus]: all four sheaf functors are exact; the open unit and closed counit are isomorphisms; the mixed restrictions are zero by extension by zero and disjoint supports. Applying the first recollement triangle to a degree-zero sheaf gives the required short exact sequence $0\\to j_!j^*M\\to M\\to i_*i^*M\\to0$. Complements are quasi-compact by step 1. Thus the cited unbounded calculus applies, without assuming that the scalar extensions are bounded or flat. The resulting closed comparison is linear over the new coefficient ring, with the precise counit normalization of that node.",
+   "uses": [
+    "lem-sf-open-tensor-normalization",
+    "lem-sfb-closed-supported-scalar-comparison",
+    "lem-sfb-kflat-scalar-comparison-normalization",
+    "lem-weil-pbc-condensed-open-closed-recollement",
+    "lem-sfb-exact-open-closed-unbounded-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent topology-comparison argument; normalized scalar extension across supports."
+   }
+  },
+  {
+   "text": "For $R=C_X,B_X$ put $S_R(V)=R\\otimes_{A_X}^L V$. Apply step 3 first to $E\\to E_0\\to C$ on $S$, and to $F\\to E_0\\to C$ on $T$. The scalar reassociations of [lem-sfb-successive-derived-quotient-normalization] give $G\\simeq S_CK$, $H\\simeq S_CN$. Applying the same reassociation to $A_X\\to C_X\\to B_X$ gives $J_XG\\simeq S_BK$, $J_XH\\simeq S_BN$. All identifications are natural, and the cited reassociation takes successive scalar units to the direct unit, by $(v\\otimes z)\\otimes w\\mapsto v\\otimes c(z)w$. We may therefore make these identifications when computing the actual scalar-extension map on morphisms.",
+   "uses": [
+    "lem-sfb-successive-derived-quotient-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent topology-comparison argument; identify the supported objects and their scalar units."
+   }
+  },
+  {
+   "text": "Put $D=R\\mathcal Hom_{A_X}(K,N)$. The predicate comparison [lem-sfb-adic-constructibility-predicate-comparison] for the field $E_0$ on the Noetherian $X$ shows that $K,N$ are bounded constructible in the stratified local-finite-presentation sense. So $D$ is bounded constructible in that sense by [lem-sfb-dc-hom-preserves], applied to $E_0$ in the standing setting. By the same comparison $D$ also has finite constant local models. The complex $K$ has the internal filtered-colimit continuity property of [lem-sfb-constructible-internal-hom-continuity]: $X$ is Noetherian and $K$ has the finite constant local model from step 2. Since $N$ is degree zero, it is bounded below. Consequently [lem-sfb-qlbar-internal-hom-coefficient-comparison] gives the evaluation-transpose isomorphism $\\phi_C:S_CD\\simeq R\\mathcal Hom_{C_X}(S_CK,S_CN)$. Independently, [lem-sfb-norm-algcl-internal-hom-base-change] gives the evaluation-transpose isomorphism $\\phi_B:S_BD\\simeq R\\mathcal Hom_{B_X}(S_BK,S_BN)$. This second input is about the norm coefficient ring, so it is not inferred from the colimit-coefficient result.",
+   "uses": [
+    "lem-sfb-adic-constructibility-predicate-comparison",
+    "lem-sfb-dc-hom-preserves",
+    "lem-sfb-constructible-internal-hom-continuity",
+    "lem-sfb-qlbar-internal-hom-coefficient-comparison",
+    "lem-sfb-norm-algcl-internal-hom-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent topology-comparison argument; internal-Hom comparisons, with each coefficient topology distinguished."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-norm-algcl-cohomology-topology-comparison] to the bounded constructible $A_X$-complex $D$ from step 5. It makes the actual map $R\\Gamma(m_D):R\\Gamma(S_CD)\\to R\\Gamma(S_BD)$ invertible. Under $\\phi_C,\\phi_B$ this is the morphism on derived global Hom induced by $J_X$. Indeed both evaluation transposes are scalar extension of the same evaluation $D\\otimes_{A_X}^L K\\to N$. Reassociating balanced tensors, their evaluations after $c_X$ agree: both are $B_X\\otimes_{A_X}^L(D\\otimes_{A_X}^L K)\\xrightarrow{1\\otimes\\mathrm{ev}}S_BN$. The defining tensor/internal-Hom adjunction [sk-def-sfb-derived-tensor-hom] makes the transpose unique. Thus this equality identifies the actual map, including its naturality in arrows, rather than merely identifying its endpoints. Derived global sections of a $C_X$- or $B_X$-complex agree with those of its restriction to $A_X$: by [lem-pur-sheaf-ring-derived-coefficient-adjunction] applied to $A_X\\to R$ and the unit $R$ itself, $\\operatorname{Hom}_{D(R)}(R,M[n])=\\operatorname{Hom}_{D(A_X)}(A_X,M[n])$. Taking degree-$n$ cohomology and using [lem-sfb-derived-internal-hom-sections-model] yields a bijection $u\\mapsto J_Xu$ from $\\operatorname{Hom}_{D(C_X)}(G,H[n])$ to $\\operatorname{Hom}_{D(B_X)}(J_XG,J_XH[n])$ for every integer $n$. The module equivalences in step 1 preserve these constructions and underlying abelian sheaves.",
+   "uses": [
+    "lem-sfb-norm-algcl-cohomology-topology-comparison",
+    "sk-def-sfb-derived-tensor-hom",
+    "lem-sfb-derived-internal-hom-sections-model",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent topology-comparison argument; global comparison and evaluation identify its actual map."
+   }
+  },
+  {
+   "text": "Use [lem-pur-sheaf-ring-derived-coefficient-adjunction] for $c_X:C_X\\to B_X$. The right adjoint is exact restriction, and the normalized derived unit is exactly the one in the statement. The adjunction sends $J_Xu:J_XG\\to J_XH[n]$ to $U_XJ_Xu\\circ\\eta_G=\\eta_{H[n]}\\circ u$ by naturality of the unit. Since these exact derived functors and their units commute with shifts, this is $\\eta_H[n]\\circ u$. Composing with the bijections from step 6 therefore shows that the maps $\\operatorname{Hom}(G,H[n])\\xrightarrow{\\eta_H[n]\\circ-}\\operatorname{Hom}(G,U_XJ_XH[n])$ are bijections for all integers $n$. This step uses no flatness of $c_X$.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent topology-comparison argument; adjunction transfers the comparison to the specified unit."
+   }
+  },
+  {
+   "text": "Let the triangle in the assertion be arbitrary and let $q:G\\to Q_H[n]$. By [lem-weil-pbc-hom-into-triangle-exact] applied also to the shifted and rotated distinguished triangles [def-weil-triangulated-category], its boundary $dq:G\\to H[n+1]$ is killed by $\\eta_H[n+1]$. Step 7 makes that map on Hom injective, so $dq=0$. Exactness at $Q_H[n]$ gives $q=vh$ for some $h:G\\to U_XJ_XH[n]$. Surjectivity in step 7 writes $h=\\eta_H[n]u$; consecutive triangle arrows compose to zero, so $q=v\\eta_H[n]u=0$. Thus every element of the asserted Hom group is zero. Nothing depended on a chosen cone, a nonempty support, a positive rank, or a relation between $S,T$ or $E,F$, so the asserted edge cases are included.",
+   "uses": [
+    "lem-weil-pbc-hom-into-triangle-exact",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent topology-comparison argument; exact Hom sequence; arbitrary cones and edge cases."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pd-module-ringed-topos-derived-comparison",
+  "lem-sfb-internal-section-scalar-adjunction",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "det-def-sfb-qlbar-condensed-subextensions",
+  "lem-sfb-subfield-flat",
+  "lem-sfb-kflat-scalar-comparison-normalization",
+  "lem-sfb-coefficient-heart-lisse-extension-constructible",
+  "lem-sf-open-tensor-normalization",
+  "lem-sfb-closed-supported-scalar-comparison",
+  "lem-weil-pbc-condensed-open-closed-recollement",
+  "lem-sfb-exact-open-closed-unbounded-calculus",
+  "lem-sfb-successive-derived-quotient-normalization",
+  "lem-sfb-adic-constructibility-predicate-comparison",
+  "lem-sfb-dc-hom-preserves",
+  "lem-sfb-constructible-internal-hom-continuity",
+  "lem-sfb-qlbar-internal-hom-coefficient-comparison",
+  "lem-sfb-norm-algcl-internal-hom-base-change",
+  "lem-sfb-norm-algcl-cohomology-topology-comparison",
+  "sk-def-sfb-derived-tensor-hom",
+  "lem-sfb-derived-internal-hom-sections-model",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-weil-pbc-hom-into-triangle-exact",
+  "def-weil-triangulated-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), explicit additional topology-comparison obligation; reduction through internal Hom and derived global sections."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -155,10 +291,140 @@
    },
    "date": "2026-10-21",
    "verdict": "no match: results concern profinite free modules, Hom extensionality, support of functions, or unrelated algebra; none gives this scalar-unit cone vanishing for supported local systems."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived Hom from finite-stage supported lisse local systems to cone of scalar extension restriction unit vanishes",
+   "results": {
+    "t": "2026-10-21T15:40:53Z",
+    "tool": "leanfinder",
+    "query": "derived Hom from finite-stage supported lisse local systems to cone of scalar extension restriction unit vanishes",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Profinite.NobelingProof.succ_exact",
+     "localCohomology.diagram",
+     "DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective",
+     "DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective",
+     "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit",
+     "DerivedCategory.isZero_of_isGE",
+     "AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit",
+     "DerivedCategory.isZero_of_isLE"
+    ],
+    "digest": "db4ec2e93202f5bd"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: profinite free-module exactness, discrete condensed full faithfulness, Hom extensionality and condensed definitions do not give the supported scalar-unit cone assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Supported lisse sheaves derived scalar extension unit cone is left orthogonal to finite stage lisse sheaves",
+   "results": {
+    "t": "2026-10-21T15:42:30Z",
+    "tool": "leansearch",
+    "query": "Supported lisse sheaves derived scalar extension unit cone is left orthogonal to finite stage lisse sheaves",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Sheaf.coneΓ",
+     "CategoryTheory.Sheaf.isLimitConeΓ",
+     "CondensedSet.LocallyConstant.functorFullyFaithful",
+     "LightCondensed.lanLightCondSet",
+     "CategoryTheory.Sheaf.isConstant_iff_isIso_counit_app'",
+     "CompHausLike.LocallyConstant.instIsIsoFunctorTypeUnitSheafCoherentTopologyAdjunction",
+     "CompHausLike.LocallyConstant.adjunction",
+     "Condensed.lanCondensedSet"
+    ],
+    "digest": "469c0464c2ec6298"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: profinite free-module exactness, discrete condensed full faithfulness, Hom extensionality and condensed definitions do not give the supported scalar-unit cone assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Full faithfulness of constructible sheaves for change from colimit topology to norm topology on algebraic closure of the l adic rationals",
+   "results": {
+    "t": "2026-10-21T15:42:31Z",
+    "tool": "leanfinder",
+    "query": "Full faithfulness of constructible sheaves for change from colimit topology to norm topology on algebraic closure of the l adic rationals",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LightCondMod.LocallyConstant.fullyFaithfulFunctor",
+     "lightProfiniteToLightCondSetFullyFaithful",
+     "CondensedMod.LocallyConstant.fullyFaithfulFunctor",
+     "CondensedSet.LocallyConstant.functorFullyFaithful",
+     "LightCondSet.LocallyConstant.functorFullyFaithful",
+     "LightCondSet.fullyFaithfulSequentialToLightCondSet",
+     "CondensedSet.fullyFaithfulCompactlyGeneratedToCondensedSet",
+     "instFullLightProfiniteLightCondSetLightProfiniteToLightCondSet"
+    ],
+    "digest": "f0b32c6e48b428c9"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: profinite free-module exactness, discrete condensed full faithfulness, Hom extensionality and condensed definitions do not give the supported scalar-unit cone assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Condensed\", \"Ext\"",
+   "results": {
+    "t": "2026-10-21T15:42:31Z",
+    "tool": "loogle",
+    "query": "\"Condensed\", \"Ext\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "Condensed.hom_ext",
+     "Condensed.hom_ext_iff",
+     "LightCondensed.hom_ext",
+     "LightCondensed.hom_ext_iff",
+     "Condensed.lanPresheafExt",
+     "LightCondensed.lanPresheafExt",
+     "Condensed.lanPresheafExt_hom",
+     "Condensed.lanPresheafExt_inv"
+    ],
+    "digest": "97ba9e29249218c7"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: profinite free-module exactness, discrete condensed full faithfulness, Hom extensionality and condensed definitions do not give the supported scalar-unit cone assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "(orthogonal|scalar|locallyFree|support|topology)",
+   "results": {
+    "t": "2026-10-21T15:42:31Z",
+    "tool": "grep",
+    "query": "(orthogonal|scalar|locallyFree|support|topology)",
+    "sub": "Condensed",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/Condensed/TopComparison.lean",
+     "Mathlib/Condensed/TopComparison.lean",
+     "Mathlib/Condensed/TopComparison.lean",
+     "Mathlib/Condensed/TopComparison.lean",
+     "Mathlib/Condensed/TopComparison.lean",
+     "Mathlib/Condensed/Module.lean",
+     "Mathlib/Condensed/Discrete/Colimit.lean",
+     "Mathlib/Condensed/Discrete/Colimit.lean"
+    ],
+    "digest": "e45d18c096342539"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: profinite free-module exactness, discrete condensed full faithfulness, Hom extensionality and condensed definitions do not give the supported scalar-unit cone assertion."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-constructible-algcl-topology-comparison",
@@ -181,5 +447,134 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-supported-finite-stage-topology-defect",
+  "worker": "stage1",
+  "summary": "Kept the statement, distinguished finite-subextension and norm coefficient sheaves, and reduced supported scalar-unit cone vanishing to separately stated local derived internal-Hom base change and global derived cohomology comparison. Both new inputs are unsplit, with exact literature references explicitly wanted. All canonical maps, scalar units, support comparisons, and Noetherian hypotheses are tracked. No Lean changed or compiled.",
+  "blueprint": "Paragraph (3) of the direct-image stability proof; agent-created topology-comparison obligation absent from the blueprint. No existing blueprint node states either new input. Inherited null blueprint ancestor retained.",
+  "tool_uses": [
+   {
+    "node": "lem-pd-module-ringed-topos-derived-comparison",
+    "why": "Generic Module-object and ringed-topos derived tensor comparison; used only in the explicit reduction, not to replace the unit direct-image route."
+   },
+   {
+    "node": "lem-sfb-internal-section-scalar-adjunction",
+    "why": "Generic Scalar adjunction transport between internal and sectionwise module sheaves; used only in the explicit reduction, not to replace the unit direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic A scheme of finite type over a Noetherian scheme is Noetherian (Stacks 01T6); used only in the explicit reduction, not to replace the unit direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "why": "Generic An open subscheme of a Noetherian scheme is Noetherian; used only in the explicit reduction, not to replace the unit direct-image route."
+   },
+   {
+    "node": "det-def-sfb-qlbar-condensed-subextensions",
+    "why": "Generic Finite subextensions of $\\overline{\\mathbf Q}_\\ell$ form a directed poset; used only in the explicit reduction, not to replace the unit direct-image route."
+   },
+   {
+    "node": "lem-sfb-subfield-flat",
+    "why": "Generic $F_X$ is flat over $E_X$; used only in the explicit reduction, not to replace the unit direct-image route."
+   },
+   {
+    "node": "lem-sfb-kflat-scalar-comparison-normalization",
+    "why": "Generic Representative and adjunction normalization of scalar pullback comparison; used only in the explicit reduction, not to replace the unit direct-image route."
+   },
+   {
+    "node": "lem-sfb-coefficient-heart-lisse-extension-constructible",
+    "why": "Generic Constructibility of a locally closed lisse coefficient extension; used only in the explicit reduction, not to replace the unit direct-image route."
+   },
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "Generic Open-extension unit normalization for derived tensor and base change; used only in the explicit reduction, not to replace the unit direct-image route."
+   },
+   {
+    "node": "lem-sfb-closed-supported-scalar-comparison",
+    "why": "Generic Supported closed-unit construction and normalization of scalar comparison; used only in the explicit reduction, not to replace the unit direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-condensed-open-closed-recollement",
+    "why": "Generic Open/closed recollement for condensed coefficient modules; used only in the explicit reduction, not to replace the unit direct-image route."
+   },
+   {
+    "node": "lem-sfb-exact-open-closed-unbounded-calculus",
+    "why": "Generic Unbounded support calculus from exact abelian open/closed localization data; used only in the explicit reduction, not to replace the unit direct-image route."
+   },
+   {
+    "node": "lem-sfb-successive-derived-quotient-normalization",
+    "why": "Generic Successive derived scalar extensions agree with direct quotient extension; used only in the explicit reduction, not to replace the unit direct-image route."
+   },
+   {
+    "node": "lem-sfb-dc-hom-preserves",
+    "why": "Generic $\\RHom$ preserves bounded constructible complexes ($\\ell$-adic $\\Lambda$); used only in the explicit reduction, not to replace the unit direct-image route."
+   },
+   {
+    "node": "lem-sfb-constructible-internal-hom-continuity",
+    "why": "Generic Bounded-below continuity of constructible derived internal Hom; used only in the explicit reduction, not to replace the unit direct-image route."
+   },
+   {
+    "node": "lem-sfb-qlbar-internal-hom-coefficient-comparison",
+    "why": "Generic Algebraic-closure internal Hom comparison from finite-field continuity; used only in the explicit reduction, not to replace the unit direct-image route."
+   },
+   {
+    "node": "sk-def-sfb-derived-tensor-hom",
+    "why": "Generic Derived tensor product and derived internal hom; used only in the explicit reduction, not to replace the unit direct-image route."
+   },
+   {
+    "node": "lem-sfb-derived-internal-hom-sections-model",
+    "why": "Generic Derived internal Hom into a K-injective and its derived global sections; used only in the explicit reduction, not to replace the unit direct-image route."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "Generic Derived change of rings along a map of ring sheaves is left adjoint to restriction of scalars, with normalized unit and transposes; used only in the explicit reduction, not to replace the unit direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-hom-into-triangle-exact",
+    "why": "Generic Hom(W,-) applied to a distinguished triangle: zero composite and exactness at the middle and at X[1]; used only in the explicit reduction, not to replace the unit direct-image route."
+   },
+   {
+    "node": "def-weil-triangulated-category",
+    "why": "Generic Triangulated category and exact functor; used only in the explicit reduction, not to replace the unit direct-image route."
+   },
+   {
+    "node": "lem-sfb-adic-constructibility-predicate-comparison",
+    "why": "Generic equality of the local-finite-presentation and finite-constant-model constructibility predicates for the field E_0 on Noetherian X; used in step 5 to match the hypothesis and conclusion of lem-sfb-dc-hom-preserves with the constant-model convention of the other inputs (added by the maintainer reader)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pd-module-ringed-topos-derived-comparison",
+  "lem-sfb-internal-section-scalar-adjunction",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "det-def-sfb-qlbar-condensed-subextensions",
+  "lem-sfb-subfield-flat",
+  "lem-sfb-kflat-scalar-comparison-normalization",
+  "lem-sfb-coefficient-heart-lisse-extension-constructible",
+  "lem-sf-open-tensor-normalization",
+  "lem-sfb-closed-supported-scalar-comparison",
+  "lem-weil-pbc-condensed-open-closed-recollement",
+  "lem-sfb-exact-open-closed-unbounded-calculus",
+  "lem-sfb-successive-derived-quotient-normalization",
+  "lem-sfb-dc-hom-preserves",
+  "lem-sfb-constructible-internal-hom-continuity",
+  "lem-sfb-qlbar-internal-hom-coefficient-comparison",
+  "sk-def-sfb-derived-tensor-hom",
+  "lem-sfb-derived-internal-hom-sections-model",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-weil-pbc-hom-into-triangle-exact",
+  "def-weil-triangulated-category",
+  "lem-sfb-adic-constructibility-predicate-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NJ-bc4f45659",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NJ-bc4f45659 (reviewer sub-agent of L); spot-checked: I read in full the item, both new statement-only nodes, the statements of all 23 cited nodes and the coefficient definitions, the parent lem-sfb-constructible-algcl-topology-comparison and its ancestors, and main-20261015 sk-thm-sf-ctf-stability-direct-images.proof.md paragraph (3). The item is an agent obligation several splits below that paragraph, so from.node null is inherited and correct. Coefficients are kept apart throughout: C is finite-subextension-valued and is the T of qlbar-internal-hom, B is all norm-continuous maps, A_E is underline E. The unit is the K-flat 1⊗v unit. No flatness or completeness is assumed. Steps 1-8 are correct: (1) ringed model and adjunction units, X Noetherian; (2) E0=EF, the extended modules are lisse via chi_h, K and N are constant-model bounded constructible; (3) open beta with g=id; for the closed comparison I checked the unbounded-calculus hypotheses against the recollement node (exact functors, adjunctions, PI=QJ=0, the short exact sequence from the degree-zero triangle, quasi-compact complement); (4) reassociation carries the composite of units to the direct unit; (5) dc-hom at E0, continuity, phi_C, and phi_B from N1; (6) transpose uniqueness and the sections model; (7) adjunct of Ju is eta∘u; (8) the triangle argument works for every cone. I made two repairs, written to fixes/dag/nodes/sec-six-functors-basics/lem-sfb-supported-finite-stage-topology-defect.json. C4/E1: lem-sfb-dc-hom-preserves is stated for the lfp predicate (sk-def-sfb-bounded-constructible), while K, N, the continuity node and N2 use finite constant models. Step 5 now cites lem-sfb-adic-constructibility-predicate-comparison in both directions; it is added to proof_deps and declared in tool_uses. Step 6 now states that RΓ over C_X or B_X agrees with RΓ over A_X, via lem-pur-sheaf-ring-derived-coefficient-adjunction. New nodes: N1 is B⊗RHom ≅ RHom_B for constant-model K, N, using the specified evaluation transpose. N2 is RΓ(C⊗V) ≅ RΓ(B⊗V) via the actual c-map. Neither duplicates qlbar-internal-hom, the site-comparison nodes or the parent, and B1-B9 hold. Small cases: for a separably closed point both sides of N2 are Ω[0]; for finite k, H^0 and H^1 agree because a compact subgroup of Ω lies in a finite E (Baire). H^≥2 is the inherited open core (cochains into incomplete Ω need not factor through a finite E). Both nodes are honestly marked WANTED, so I did not RETURN for it. N2 is roughly the item's G=C_X case after dévissage, and N1 does the reduction from general G to the unit, so this is not a relabelling. Batch-5 flags: the pd module-ringed comparison is a generic equivalence between module objects and ringed-topos modules; kflat-normalization and closed-supported reach trf inverse-image exactness, a generic sheaf fact; dc-hom reaches pod adic-limit-finite-modules, which is DVR algebra. I recomputed the whole closure with the added citation: 39 trf/pd-chapter nodes, all generic, and no trace-formula or PD theorem, so I accepted all flags. There is no cycle: no cited node reaches the item. Maintainer note: N1 with K=j_!A, N=j_!C gives β of lem-sfb-continuous-algcl-open-scalar-comparison, an ancestor in via, and the item itself already implies the boundary stalks of that β (i^!j_!=i^*Rj_*[-1]). So the chain open-scalar <- proper-scalar <- topology-comparison <- this item is circular in substance. That comes from the earlier NA/Q01 splits, not from this delivery, and it is not a formal DAG cycle. The maintainer should consider proving open-scalar directly and deriving the topology comparison from it.; 1 file(s) fixed by the reviewer"
  }
 }
