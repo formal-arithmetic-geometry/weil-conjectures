@@ -18,9 +18,176 @@
   "def-sc-ring-strict-henselization",
   "def-weil-geometric-point"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $f=\\prod_i t_i$ (with $f=1$ for $r=0$), $R=H/JH$, $H_n=H[x_1,\\ldots,x_r]/(x_i^n-t_i)_i$, $X_n=\\operatorname{Spec}H_n[1/f]$, and $X=T^\\circ$. Throughout, $n$ ranges over positive integers prime to $p$, ordered by divisibility. Apply the universal-residual-chart statement with $Y=V$, $I$ all labelled boundary components, and the identity affine etale chart $V\\to V$. Its chart hypotheses hold for the given global equations and connected nonempty $S$. Choose the same residual point and compatible roots, so its henselization and lifted pointed residual system give the specified $H$. Thus $(H,JH)$ is henselian, $\\operatorname{Spec}R$ is the pointed universal finite-etale limit cover of $S$, and all $X_n$ and $X$ are nonempty connected affine schemes. It also supplies the pro-etale covering $X\\to U^\\circ$. These conclusions include $r=0$; no Noetherian assertion about $H$ or $H_n$ is made.",
+   "uses": [
+    "lem-sfb-snc-universal-residual-charts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose IX Proposition 2.1(i)–(iii) and proof, printed pp.133–134: strict-local parameter-root quotient description and etale-local descent of the finite tame normalization; finite-type-over-a-field specialization. The simultaneous finite root level is the qc consequence of the local description, not a statement about infinite coefficient objects."
+   }
+  },
+  {
+   "text": "Choose a finite locally constant set sheaf $F_0$ on $V^\\circ$ whose pullback is $F$. Form its sheaf of all finite frames\n$$\\mathcal P=\\coprod_{d\\geq0}\\operatorname{Isom}(\\underline{\\{1,\\ldots,d\\}},F_0).$$\nOn a member of a pro-etale trivializing cover with value $A$, this is the constant finite set of bijections $\\{1,\\ldots,|A|\\}\\to A$: all other summands are empty. Here a map between finite constant objects is locally a choice of the finitely many images of their elements; choosing these simultaneously describes the frame sheaf, including $A=\\varnothing$. Hence $\\mathcal P$ is locally constant and has sections on every member of that cover. The locally-classical etale-section lemma gives an etale covering with sections of $\\mathcal P$. Refining by the summands selected by each section gives actual etale finite frames for $F_0$. Thus $F_0$ comes from an etale finite locally constant sheaf, represented by a finite etale $P\\to V^\\circ$ by the finite-cover equivalence. Full faithfulness of classical comparison identifies maps and fibres. The stipulated strict-local tower triviality is exactly triviality of this represented finite cover.",
+   "uses": [
+    "lem-weil-pbc-proetale-locally-classical-etale-cover",
+    "thm-galois-lc-etale",
+    "sk-thm-pe-classical-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemmas 5.1.2 and 5.1.4, p.34, finite-frame version of Corollary 5.1.5, p.35; Stacks 03RV finite-cover equivalence."
+   }
+  },
+  {
+   "text": "Apply the finite tame root-extension lemma to $P\\to V^\\circ$. Its hypotheses are the regular finite-type chart and the strict-local finite-cover trivializations just established. The parameter hypothesis holds because the $t_i$ cut out the regular branches $V(t_i)$ of the strict normal crossings boundary: at a point $v$ where exactly the $t_j$, $j\\in I(v)$, vanish, $\\mathcal O_{V,v}/(t_j)_{j\\in I(v)}$ is the local ring of the regular intersection $C_{I(v)}$, of dimension $\\dim\\mathcal O_{V,v}-|I(v)|$, so lifting a regular system of parameters of it and adjoining the $t_j$ gives $\\dim\\mathcal O_{V,v}$ generators of the maximal ideal. It gives one integer $n$ prime to $p$, a finite etale $Z\\to V_n$, and the specified punctured isomorphism. Base change along $B_n\\to H_n$ gives a finite etale $E_n\\to\\operatorname{Spec}H_n$ whose restriction to $X_n$ represents $F|_{X_n}$. This invokes no condition that the degree of $P$ be prime to $p$: the remaining horizontal finite etale part will be removed by the residual cover.",
+   "uses": [
+    "lem-sfb-snc-tame-root-etale-extension",
+    "def-weil-pbc-finite-etale-category",
+    "def-trf-strict-normal-crossings-boundary",
+    "def-weil-pbc-regular-system-of-parameters"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose IX Proposition 2.1(i)–(iii) and proof, printed pp.133–134: strict-local parameter-root quotient description and etale-local descent of the finite tame normalization; finite-type-over-a-field specialization. The simultaneous finite root level is the qc consequence of the local description, not a statement about infinite coefficient objects."
+   }
+  },
+  {
+   "text": "Every finite etale scheme over $S_\\infty=\\operatorname{Spec}R$ is split. Indeed descend its etale finite-presentation model to a pointed residual cover $S_a$ by finite-data descent, and descend finiteness by the finite-morphism descent lemma. Call the resulting finite etale cover $W_a\\to S_a$. Its composite with $S_a\\to S$ is finite etale by composition. The pointed universal-cover lemma splits both $S_\\infty\\times_S W_a$ and $S_\\infty\\times_S S_a$, naturally with respect to $W_a\\to S_a$. The structural projection $S_\\infty\\to S_a$ selects the summand of the latter indexed by its chosen point over the base geometric point of $S$. Taking the fibre of the split map over this summand splits $W_a\\times_{S_a}S_\\infty$, which is the original cover. This proves splitting for arbitrary finite etale covers of the limit, not just covers originally defined over $S$.",
+   "uses": [
+    "lem-weil-pbc-etale-finite-data-descent",
+    "lem-weil-pbc-descend-finite",
+    "lem-weil-pbc-finite-composition",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-sfb-pointed-finite-etale-limit-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tags 01ZM (lemma-descend-finite-presentation), 01ZO (lemma-descend-finite-finite-presentation), and 07RP (lemma-descend-etale); applied to the residual pointed inverse system."
+   }
+  },
+  {
+   "text": "The algebra $H_n$ is finite over $H$: successive monic division gives the spanning basis $\\prod_i x_i^{a_i}$ with $0\\leq a_i<n$. In particular it is integral, since the $x_i$ satisfy their monic equations. The integral-over-henselian-pair lemma gives the henselian pair $(H_n,JH_n)$. Its quotient is $C=R[x_1,\\ldots,x_r]/(x_i^n)_i$. Put $K=(x_1,\\ldots,x_r)\\subset C$. Then $C/K=R$ and $K^{r(n-1)+1}=0$ by counting monomial exponents (for $r=0$, $K=0$). The nilpotent base-change idempotent lemma, applied also to every finite $C$-algebra, gives unique idempotent lifting modulo $K$. Thus $(C,K)$ is henselian in the stated idempotent-lifting definition.",
+   "uses": [
+    "lem-weil-pbc-integral-over-henselian-pair",
+    "lem-weil-pbc-base-change-nilpotent-thickening-idempotents",
+    "def-weil-pbc-henselian-terminology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09XK (lemma-integral-over-henselian-pair); nilpotent-idempotent lifting, applied to the explicit root quotient."
+   }
+  },
+  {
+   "text": "Apply finite-etale lifting first to the henselian pair $(C,K)$, with proper scheme the identity $\\operatorname{Spec}C\\to\\operatorname{Spec}C$. Step 4 splits the restriction of $E_n\\times_{H_n}C$ to $R$. Fully faithful lifting of that isomorphism and its inverse identifies $E_n\\times_{H_n}C$ with a finite disjoint union of $\\operatorname{Spec}C$. Apply the same theorem to $(H_n,JH_n)$, again with the identity as proper scheme: that splitting lifts uniquely to an isomorphism $E_n\\simeq\\coprod_A\\operatorname{Spec}H_n$ for a finite set $A$. Restrict to $X_n$ and then to $X$. We obtain $F|_X\\simeq\\underline A_X$. The identity morphisms used here are proper; neither base ring is required to be Noetherian or local.",
+   "uses": [
+    "thm-weil-pbc-finite-etale-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0GS2 (lemma-finite-etale-on-proper-over-henselian-pair), twice with the identity proper scheme; its affine case is Tag 09ZS (lemma-gabber)."
+   }
+  },
+  {
+   "text": "Let $\\bar x$ be the selected geometric point of $X$ and $Q=F_{\\bar x}$. Normalize the splitting by its fibre at $\\bar x$, so $\\phi_F:F|_X\\to\\underline Q_X$ has identity fibre. A map between finite constant sheaves on a nonempty connected scheme is uniquely its map on the fibres: by the constant-sheaf representability theorem it is a map between disjoint unions of the base; the inverse images of the target summands in any source summand are a finite clopen partition and hence exactly one is nonempty. The same assertion on the pro-etale site follows from full faithfulness of classical comparison. Therefore $\\phi_F$ is independent of all splitting choices. For the same reason there is already a uniquely normalized splitting on the connected $X_n$, whose pullback is $\\phi_F$.",
+   "uses": [
+    "lem-galois-constant-sheaf-sets-representable",
+    "sk-thm-pe-classical-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 5.1.2, p.34; finite-disjoint-union interpretation and connectedness."
+   }
+  },
+  {
+   "text": "Put $\\Gamma_n=(\\mathbf Z/n\\mathbf Z)^r$. Over $X_n$ the second root of each parameter satisfies\n$$y_i^n-x_i^n=\\prod_{a\\bmod n}(y_i-\\zeta_n^a x_i).$$\nThe ideals for distinct $a$ are comaximal, because their root differences are units: $x_i$ is invertible on $X_n$ and $\\zeta_n^a-\\zeta_n^b$ is a unit by hypothesis. Repeated Chinese remainders therefore identify\n$$X_n\\times_{U^\\circ}X_n\\simeq\\coprod_{g\\in\\Gamma_n}X_n,$$\nwith comparison $(x,g)\\mapsto(x,gx)$. The identification sends the third vertex $h(gx)$ to $(hg)x$, and is compatible with every divisibility transition by the chosen compatible roots. Inverse limits of these actual affine scheme diagrams give\n$$X\\times_{U^\\circ}X\\simeq X[\\varprojlim_n\\Gamma_n].$$\nThe roots-product lemma evaluated in the algebraically closed field of $\\bar x$ identifies $\\varprojlim_n\\Gamma_n$ with $G$: the chosen primitive roots identify each $\\mathbf Z/n\\mathbf Z$ with its root group there. This also fixes the same coordinate labels as the rotations on $H_n$. The meaning of $X[G]$ is precisely the indicated inverse limit of finite disjoint unions.",
+   "uses": [
+    "lem-pc-crt-ideal-quotient-product",
+    "lem-exc-tame-roots-product",
+    "def-sfb-profinite-test-objects"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX Proposition 2.1, p.133, simultaneous-root rotations; explicit CRT calculation on the punctured root algebra."
+   }
+  },
+  {
+   "text": "Use the normalized splitting over $X_n$ in the canonical descent isomorphism $\\mathrm{pr}_2^*F\\to\\mathrm{pr}_1^*F$. On the component labelled $g\\in\\Gamma_n$ this is a map between finite constant $Q$-sheaves on the connected $X_n$. Step 7 makes it a single permutation $\\rho_n(g)$ of $Q$. The identity and triple-overlap equations give $\\rho_n(1)=1$ and $\\rho_n(hg)=\\rho_n(g)\\rho_n(h)$. Since $\\Gamma_n$ is abelian, applying this also to $gh=hg$ shows the permutations commute and $\\rho_n(gh)=\\rho_n(g)\\rho_n(h)$: it is a left action. Pulling back along $G\\to\\Gamma_n$ gives a continuous action $\\rho_F$ on the discrete finite set $Q$. On the whole overlap $X[G]$ the arrow is exactly $(x,g,v)\\mapsto(x,g,\\rho_F(g)v)$, since it is the pullback of the finite-level arrow. This proves an equality of sheaf arrows on the overlap, not just an equality at individual $g$. Enlarging $n$ or changing a splitting model cannot change it, since both compute the same normalized descent arrow.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX Proposition 2.1, finite root-cover descent; explicit cocycle calculation with the specified torsor comparison convention."
+   }
+  },
+  {
+   "text": "For a morphism $a:F\\to F'$ the two maps from $F|_X$ to $\\underline {Q'}_X$ formed with $\\phi_F$, $\\phi_{F'}$ and its fibre $a_{\\bar x}:Q\\to Q'$ have the same fibre. By Step 7 they coincide, proving naturality. Compatibility with the two projections of the overlap says precisely $a_{\\bar x}(gq)=g\\,a_{\\bar x}(q)$. Conversely let $b:Q\\to Q'$ be equivariant. The map $\\phi_{F'}^{-1}\\underline b\\phi_F$ over $X$ has equal pullbacks to $X\\times_{U^\\circ}X$ by Step 9. For an object $W\\to U^\\circ$ and a section $s\\in F(W)$, apply that local map over the cover $W\\times_{U^\\circ}X\\to W$. The overlap equality makes its resulting sections of $F'$ agree, so the sheaf axiom glues them uniquely to a section of $F'(W)$. This is natural in $W,s$, gives the desired morphism, and is unique by the same sheaf axiom. This proves full faithfulness.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Sheaf gluing on the pro-etale cover X and its double overlap; the cover was supplied in Step 1."
+   }
+  },
+  {
+   "text": "The product splitting of $F|_X$ and $F'|_X$ has identity fibre on $Q\\times Q'$, and the terminal splitting has identity fibre on the singleton. Uniqueness in Step 7 identifies them with the selected normalized splittings. This proves compatibility with finite products and the terminal object. For a finite ring $R_0$ and an $R_0$-module sheaf in $\\mathcal C$, its zero, addition, inverse and scalar multiplications are maps between finite products of these objects. Naturality identifies them with the actual operations on its finite fibre. Their descent permutations are consequently $R_0$-linear. For a map of finite coefficient rings $R_0\\to R_1$, restriction of scalars keeps these operations. Extension of scalars, including quotient reduction, is locally the finite module $R_1\\otimes_{R_0}Q$; the normalized comparison sends $b\\otimes q$ to $b\\otimes q$ on the chosen fibre. It is an isomorphism on $X$, hence on $U^\\circ$ by the cover, and commutes with descent since $g(b\\otimes q)=b\\otimes gq$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Finite algebraic operations applied to the normalized finite-fibre descent calculation; no inverse limit of coefficient sheaves."
+   }
+  },
+  {
+   "text": "For a pointed refinement of the residual cover or of an etale chart, use a common refinement through the fixed geometric point of the stratum. For different labelled parameter equations, choose compatible roots of their relating units, as required by the universal-residual-chart statement. It supplies the compatible maps of rings and parameter-root towers; only refinements with these induced maps are asserted in the item. Pull back the normalized splitting along that map of towers. Its fibre remains the identity under the pointed identification of fibres. Step 7 on the refined connected tower identifies it with that tower's normalized splitting. The CRT formula in Step 8 pulls back root by root; its group labels follow the induced root-rotation homomorphism. Thus the action restricts along that homomorphism, and the normalized descent arrows commute with refinement. The same uniqueness proves compatibility with compositions. When $r=0$, $H_n=H$, $X=U^\\circ$ and $G=1$; Steps 4–7 give constant finite sheaves directly, and all displayed arrows reduce to identities.",
+   "uses": [
+    "lem-sfb-snc-universal-residual-charts"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Naturality of pointed residual covers and compatible parameter-root maps, applied to the uniqueness of the finite-fibre normalization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-profinite-test-objects",
+  "def-trf-strict-normal-crossings-boundary",
+  "def-weil-pbc-finite-etale-category",
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-pbc-regular-system-of-parameters",
+  "lem-exc-tame-roots-product",
+  "lem-galois-constant-sheaf-sets-representable",
+  "lem-pc-crt-ideal-quotient-product",
+  "lem-sfb-pointed-finite-etale-limit-cover",
+  "lem-sfb-snc-tame-root-etale-extension",
+  "lem-sfb-snc-universal-residual-charts",
+  "lem-weil-pbc-base-change-nilpotent-thickening-idempotents",
+  "lem-weil-pbc-descend-finite",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-finite-data-descent",
+  "lem-weil-pbc-finite-composition",
+  "lem-weil-pbc-integral-over-henselian-pair",
+  "lem-weil-pbc-proetale-locally-classical-etale-cover",
+  "sk-thm-pe-classical-sheaves",
+  "thm-galois-lc-etale",
+  "thm-weil-pbc-finite-etale-lifting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "IX Proposition 2.1, pp.133–134, finite-cover input; agent assembly of henselian residual splitting and normalized descent, using Bhatt–Scholze §5.1 and the cited Stacks lemmas."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,10 +223,73 @@
    "results": "{\"t\": \"2026-10-21T14:59:25Z\", \"tool\": \"leansearch\", \"query\": \"Finite locally constant etale sheaves killed by the prime to p parameter root tower correspond to finite sets with tame inertia action\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CondensedSet.LocallyConstant.functorFullyFaithful\", \"CategoryTheory.Sheaf.isConstant_iff_mem_essImage\", \"LightCondensed.lanLightCondSet\", \"CompHausLike.LocallyConstant.functor_obj_val\", \"Condensed.lanSheafProfinite\", \"LightCondSet.mem_locallyConstant_essImage_of_isColimit_mapCocone\", \"CompHausLike.LocallyConstant.functorIso\", \"CategoryTheory.Sheaf.isConstant_iff_isIso_counit_app\"], \"digest\": \"fef6b993c0e4fb7f\"}",
    "date": "2026-10-21",
    "verdict": "no match: hits concern general affine limits, etale algebras, discrete condensed sheaves or lattice orders, not this geometric finite-cover assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "(ProEtale|pro.etale).*(IsFiniteLocallyConstant|finite.*constant)|(IsFiniteLocallyConstant).*(ProEtale|pro.etale)",
+   "results": "{\"t\": \"2026-10-21T16:00:04Z\", \"tool\": \"grep\", \"query\": \"(ProEtale|pro.etale).*(IsFiniteLocallyConstant|finite.*constant)|(IsFiniteLocallyConstant).*(ProEtale|pro.etale)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits give general etale presentations, number-field ramification or condensed constant functors; none states this scheme-theoretic tame-cover assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite locally constant set sheaves on the etale and pro etale sites are equivalent",
+   "results": "{\"t\": \"2026-10-21T16:00:04Z\", \"tool\": \"leansearch\", \"query\": \"Finite locally constant set sheaves on the etale and pro etale sites are equivalent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.sheafInducedTopologyEquivOfIsCoverDense\", \"CategoryTheory.Equivalence.sheafCongr\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.sheafEquiv\", \"CategoryTheory.Sheaf.isConstant_iff_of_equivalence\", \"CategoryTheory.Sheaf.isConstant_iff_mem_essImage\", \"CompHausLike.LocallyConstant.functorToPresheavesIso\", \"CondensedSet.LocallyConstant.functorFullyFaithful\", \"CategoryTheory.Sheaf.IsConstant.mk\"], \"digest\": \"af52cbbd7c56eabe\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits give general etale presentations, number-field ramification or condensed constant functors; none states this scheme-theoretic tame-cover assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocallyConstant\", \"Sheaf\"",
+   "results": "{\"t\": \"2026-10-21T16:00:04Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsLocallyConstant\\\", \\\"Sheaf\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits give general etale presentations, number-field ramification or condensed constant functors; none states this scheme-theoretic tame-cover assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite locally constant sheaves of sets on the pro etale site come uniquely from finite locally constant etale sheaves",
+   "results": "{\"t\": \"2026-10-21T16:00:05Z\", \"tool\": \"leanfinder\", \"query\": \"Finite locally constant sheaves of sets on the pro etale site come uniquely from finite locally constant etale sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondMod.LocallyConstant.instFaithfulSheafLightProfiniteCoherentTopologyTypeConstantSheaf\", \"Condensed.lanSheafProfinite\", \"LightCondSet.ofSheafLightProfinite\", \"LightProfinite.hasSheafify_type\", \"CondensedSet.ofSheafProfinite\", \"LightCondensed.ofSheafLightProfinite_val\", \"Condensed.ofSheafForgetProfinite\", \"LightCondensed.ofSheafForgetLightProfinite_val\"], \"digest\": \"6b3722c1cb1535ec\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits give general etale presentations, number-field ramification or condensed constant functors; none states this scheme-theoretic tame-cover assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "(Kummer|tame).*(finite.*etale|inertia|local.system)|(finite.*etale).*(Kummer|tame)",
+   "results": "{\"t\": \"2026-10-21T16:03:41Z\", \"tool\": \"grep\", \"query\": \"(Kummer|tame).*(finite.*etale|inertia|local.system)|(finite.*etale).*(Kummer|tame)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits give general etale presentations, number-field ramification or condensed constant functors; none states this scheme-theoretic tame-cover assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite tame sheaves on a universal residual henselian normal crossings neighborhood are trivialized by the parameter root tower",
+   "results": "{\"t\": \"2026-10-21T16:03:42Z\", \"tool\": \"leansearch\", \"query\": \"Finite tame sheaves on a universal residual henselian normal crossings neighborhood are trivialized by the parameter root tower\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.IsFiniteType\", \"HenselianLocalRing.casesOn\", \"SheafOfModules.IsFiniteType.casesOn\", \"SheafOfModules.IsFiniteType.mk\", \"SheafOfModules.isFinitePresentation\", \"SheafOfModules.localGeneratorsDataOfIsFiniteType\", \"Field.henselian\", \"instNontrivialCarrierStalkCommRingCatPresheafSmoothSheafCommRing\"], \"digest\": \"49ad8f19242765ad\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits give general etale presentations, number-field ramification or condensed constant functors; none states this scheme-theoretic tame-cover assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Kummer\", \"IsEquivalence\"",
+   "results": "{\"t\": \"2026-10-21T16:03:42Z\", \"tool\": \"loogle\", \"query\": \"\\\"Kummer\\\", \\\"IsEquivalence\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits give general etale presentations, number-field ramification or condensed constant functors; none states this scheme-theoretic tame-cover assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite tame local systems on a henselian normal crossing pair with universally covered residual stratum have fully faithful finite inertia fibre functor",
+   "results": "{\"t\": \"2026-10-21T16:03:44Z\", \"tool\": \"leanfinder\", \"query\": \"Finite tame local systems on a henselian normal crossing pair with universally covered residual stratum have fully faithful finite inertia fibre functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondMod.LocallyConstant.fullyFaithfulFunctor\", \"LightCondSet.LocallyConstant.functorFullyFaithful\", \"CondensedSet.LocallyConstant.functorFullyFaithful\", \"FintypeCat.toLightProfiniteFullyFaithful\", \"lightProfiniteToLightCondSetFullyFaithful\", \"CondensedMod.LocallyConstant.fullyFaithfulFunctor\", \"FintypeCat.toProfiniteFullyFaithful\", \"CategoryTheory.PreGaloisCategory.FiberFunctor.instFaithfulFintypeCat\"], \"digest\": \"bab2dfcebcfbcd4a\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits give general etale presentations, number-field ramification or condensed constant functors; none states this scheme-theoretic tame-cover assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally constant finite set sheaves descend from the pro etale topology to the etale topology by their finite permutation frame torsors",
+   "results": "{\"t\": \"2026-10-21T16:03:45Z\", \"tool\": \"leanfinder\", \"query\": \"Locally constant finite set sheaves descend from the pro etale topology to the etale topology by their finite permutation frame torsors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Condensed.isColimitLocallyConstantPresheaf_desc_apply\", \"Profinite.exists_locallyConstant_finite_aux\", \"LightCondSet.ofSheafLightProfinite\", \"LightCondensed.isColimitLocallyConstantPresheaf\", \"Profinite.exists_locallyConstant_finite_nonempty\", \"Condensed.isColimitLocallyConstantPresheaf\", \"Condensed.lanSheafProfinite\", \"CondensedSet.ofSheafProfinite\"], \"digest\": \"d5c7d28c4b1e72a7\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits give general etale presentations, number-field ramification or condensed constant functors; none states this scheme-theoretic tame-cover assertion"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-tame-root-tower-extension",
@@ -83,5 +313,85 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-snc-tame-finite-fibre-classification",
+  "worker": "stage1",
+  "group": "NZ",
+  "summary": "Split the finite-fibre assertion through one new finite-root etale extension input, the existing universal residual cover, explicit nilpotent/henselian lifting, the CRT torsor and normalized sheaf descent. The statement is unchanged. No new infinite-coefficient assertion and no Lean or compiler use. Repair of the refused landing: revalidated the revised universal-residual-charts statement, made the prime-to-p indexing and identity-chart specialization explicit in Step 1, and cited its qualified pointed overlap refinements in Step 12.",
+  "blueprint": "Current main-20261015 det-thm-sf-ctf-stability-direct-images, paragraph (3), open direct image via sk-prop-open-coefficients: finite tame input along the existing root-tower-extension ancestor chain. The inherited blueprint.from.node is null because that creation chain lacks an imported blueprint_kind ancestor; blueprint_refs.py ancestor returns None. Its exact inherited place and via are preserved.",
+  "tool_uses": [
+   {
+    "node": "def-sfb-profinite-test-objects",
+    "why": "Generic finite-cover, ring or sheaf comparison tool used in the explicitly numbered steps; no node of this unit states this general input. It supplies no replacement for the unit direct-image route."
+   },
+   {
+    "node": "def-weil-pbc-henselian-terminology",
+    "why": "Generic finite-cover, ring or sheaf comparison tool used in the explicitly numbered steps; no node of this unit states this general input. It supplies no replacement for the unit direct-image route."
+   },
+   {
+    "node": "lem-exc-tame-roots-product",
+    "why": "Generic finite-cover, ring or sheaf comparison tool used in the explicitly numbered steps; no node of this unit states this general input. It supplies no replacement for the unit direct-image route."
+   },
+   {
+    "node": "lem-galois-constant-sheaf-sets-representable",
+    "why": "Generic finite-cover, ring or sheaf comparison tool used in the explicitly numbered steps; no node of this unit states this general input. It supplies no replacement for the unit direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-base-change-nilpotent-thickening-idempotents",
+    "why": "Generic finite-cover, ring or sheaf comparison tool used in the explicitly numbered steps; no node of this unit states this general input. It supplies no replacement for the unit direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-descend-finite",
+    "why": "Generic finite-cover, ring or sheaf comparison tool used in the explicitly numbered steps; no node of this unit states this general input. It supplies no replacement for the unit direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-etale-finite-data-descent",
+    "why": "Generic finite-cover, ring or sheaf comparison tool used in the explicitly numbered steps; no node of this unit states this general input. It supplies no replacement for the unit direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-integral-over-henselian-pair",
+    "why": "Generic finite-cover, ring or sheaf comparison tool used in the explicitly numbered steps; no node of this unit states this general input. It supplies no replacement for the unit direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-locally-classical-etale-cover",
+    "why": "Generic finite-cover, ring or sheaf comparison tool used in the explicitly numbered steps; no node of this unit states this general input. It supplies no replacement for the unit direct-image route."
+   },
+   {
+    "node": "sk-thm-pe-classical-sheaves",
+    "why": "Generic finite-cover, ring or sheaf comparison tool used in the explicitly numbered steps; no node of this unit states this general input. It supplies no replacement for the unit direct-image route."
+   },
+   {
+    "node": "thm-galois-lc-etale",
+    "why": "Generic finite-cover, ring or sheaf comparison tool used in the explicitly numbered steps; no node of this unit states this general input. It supplies no replacement for the unit direct-image route."
+   },
+   {
+    "node": "thm-weil-pbc-finite-etale-lifting",
+    "why": "Generic finite-cover, ring or sheaf comparison tool used in the explicitly numbered steps; no node of this unit states this general input. It supplies no replacement for the unit direct-image route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-sfb-profinite-test-objects",
+  "def-weil-pbc-henselian-terminology",
+  "lem-exc-tame-roots-product",
+  "lem-galois-constant-sheaf-sets-representable",
+  "lem-weil-pbc-base-change-nilpotent-thickening-idempotents",
+  "lem-weil-pbc-descend-finite",
+  "lem-weil-pbc-etale-finite-data-descent",
+  "lem-weil-pbc-integral-over-henselian-pair",
+  "lem-weil-pbc-proetale-locally-classical-etale-cover",
+  "sk-thm-pe-classical-sheaves",
+  "thm-galois-lc-etale",
+  "thm-weil-pbc-finite-etale-lifting"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NZ-cb3a0ac0e",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-cb3a0ac0e (reviewer sub-agent of L); spot-checked: Re-delivery after a refused landing: lem-sfb-snc-universal-residual-charts had changed. Diffed against the earlier head ae172a82, whose FIX was lost. Here only Steps 1 and 12 differ from that head; they were rewritten to follow the revised residual-chart statement (prime-to-p levels by divisibility, identity chart, refinements through a fixed geometric point with compatible roots), and I checked both. Item statement unchanged; no re-split note; no SGA anywhere. Read ILO IX Prop 2.1(i)-(iii), printed pp.133-134. The new node avoids the SGA 1 Abhyankar route because its hypothesis is already the strict-local tower splitting. Route for its future split: finite level m, normalization, open etale locus, qc common n, gluing over the normal V_n. Steps 1-12 all checked. Step 4: descends to a stage S_a (finite-data descent, 01ZO) and splits using only the stated naturality of the pointed limit cover. Steps 5-6: H_n is free over H, H_n/JH_n=R[x]/(x^n) because t_i is in J, K^{r(n-1)+1}=0, two fully faithful liftings with the identity as proper scheme. Step 8: CRT with unit root differences; transitions a mod n -> a mod m. Step 9: cocycle order rho(hg)=rho(g)rho(h); a left action since the group is abelian. New node checked on r=0, empty P, unramified degree-p covers, one and two parameters, wild covers (excluded). It does not restate the item. Duplicate search (rg -L for abhyankar, tame, Kummer with SNC) found only single-divisor sbc nodes, invertible-order or log-Kummer per nodes, and residual charts: no duplicate. FIX (B2/E1, re-applied): the new node required the t_i to 'define the distinct components', but on the parent's etale charts V(t_i)=D_i x_Y V may be reducible, and the proof needs only the parameter condition. Restated as: V(t_1...t_r) is a reduced SNC boundary and the vanishing t_i are part of a regular system of parameters, V(t_i) possibly reducible. Item Step 3 now derives that condition from def-trf (C_{I(v)} regular of codimension |I(v)|), with def-trf-strict-normal-crossings-boundary and def-weil-pbc-regular-system-of-parameters added to its uses and proof_deps. Steps 1 and 12 kept as delivered. BATCH-5: lem-exc-tame-roots-product is the elementary lim mu_m = prod Z_q, and its trf node is a generic statement about cofiltered limits of finite sets. Residual charts and the new node reach only def-trf-strict-normal-crossings-boundary, a general definition already a stmt_dep of the item. None is part of the trace formula or Poincare duality; all accepted. Generic tool_uses accepted. Advisory: residual charts should state that its H-clauses hold for every chart with the listed properties.; 2 file(s) fixed by the reviewer"
  }
 }

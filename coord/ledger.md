@@ -23085,3 +23085,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:45 L: returned deliver/S3/Sheaf.AlgebraicGeometry.TorAmplitudeKFlatResolution (reviewer RETURN: (reviewer C-32078, head 320780216) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.To)
 - 16:45 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
 - 16:48 L: merged deliver/Q03/lem-sfb-root-tower-puncture-invariance (reviewer PASS; first push; new nodes: 0)
+- 16:49 L: merged deliver/NZ/lem-sfb-snc-tame-finite-fibre-classification (reviewer FIX; after a return; new nodes: 1)
