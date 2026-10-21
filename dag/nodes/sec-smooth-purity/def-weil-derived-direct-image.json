@@ -34,9 +34,62 @@
   "def-weil-rationalization-karoubi",
   "def-weil-algebraically-closed-coefficients"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The auxiliary completed structure map is the inverse-limit lift of the constant-section maps. Their naturality with respect to coefficient ring homomorphisms gives a map of the quotient inverse sequences. Ring-sheaf direct image preserves limits. Lift the resulting cone, then use the fully faithful forgetful functor from commutative ring sheaves to ring sheaves to retain commutativity. Joint monicity of the limit projections proves the stated uniqueness.",
+   "uses": [
+    "def-weil-completed-integral-coefficients",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Completed module direct image is additive because its action on morphisms is the original sectionwise linear map. The finite projection identity identifies the scalar actions in the two ordinary restriction/direct-image composites. Identity on sections defines inverse linear maps, natural in the site object and the module; faithfulness of sections proves uniqueness.",
+   "uses": [
+    "def-weil-proetale-module-direct-image",
+    "lem-weil-restriction-of-scalars-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the completed and finite module categories to their AsSmall pro-etale sites. Realize scalar restriction and the completed structural-map pushforward as ringed-topos module direct images, with their actual module-functor equations. Apply the resolution clause of derived pushforward composition and transport back along the module equivalences. Thus completed direct image sends a K-injective resolution of the restriction of a finite-coefficient K-injective complex to a quasi-isomorphism. No preservation of K-injectivity by scalar restriction, and no invertibility of the inverse image of the completed coefficient ring map, is assumed.",
+   "uses": [
+    "lem-weil-pbc-continuous-ringed-topos-module-direct-image",
+    "lem-weil-pbc-restriction-ringed-topos-module-direct-image",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-weil-pbc-ring-sheaf-change-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Write F for finite direct image, G for completed direct image, and P,Q for exact coefficient restriction at source and target. The preceding resolution property makes D(P) followed by RG a right derived functor of P followed by G: its unit is invertible on K-injective representatives by naturality at the chosen resolution map. RF followed by D(Q) is a right derived functor of F followed by Q because Q is exact. Derive the identity-on-sections ordinary comparison and apply uniqueness of right derived functors. Their universal unit equations and unit naturality at the resolution map give exactly the published normalization. Cancel the invertible resolution factors on every K-injective representative to prove uniqueness there; naturality and existence of K-injective representatives prove uniqueness on every derived object. The existing finite-image tower, chosen Roos triangle and adjunct projection definitions then remain unchanged.",
+   "uses": [
+    "lem-weil-pbc-kinjective-total-derived",
+    "lem-weil-restriction-of-scalars-exact",
+    "prop-pur-kinjective-resolutions-exist"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-completed-integral-coefficients",
+  "def-weil-proetale-inverse-image",
+  "def-weil-proetale-module-direct-image",
+  "lem-weil-restriction-of-scalars-exact",
+  "lem-weil-pbc-continuous-ringed-topos-module-direct-image",
+  "lem-weil-pbc-restriction-ringed-topos-module-direct-image",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-weil-pbc-kinjective-total-derived",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "F4",
+  "date": "2026-10-21",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0D6E and 0D6J for composition and unit normalization; sites-modules.tex Tag 03DA and sites.tex Tag 03CO for the sectionwise and limit constructions. Agent proof of the four auxiliary construction theorems; no change to the definition or its unit route."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -141,5 +194,15 @@
   "proof": [],
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
  },
- "lead_note": "Maintenance 2026-10-21 (N0): restore the finite/integral SfDerivedDirectImage ownership from before 35763188dc. The later common-stage/Weil construction, its adjunction proof dependencies and its existing review history are preserved under def-weil-common-stage-derived-direct-image. No statement or Lean source is changed by this ownership repair."
+ "lead_note": "Maintenance 2026-10-21 (N0): restore the finite/integral SfDerivedDirectImage ownership from before 35763188dc. The later common-stage/Weil construction, its adjunction proof dependencies and its existing review history are preserved under def-weil-common-stage-derived-direct-image. No statement or Lean source is changed by this ownership repair.",
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-f7254",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261021T101005-L-4184293",
+  "kind": "interface",
+  "note": "independent cc review: delivered SfDerivedDirectImage.lean (4 sorries closed) vs live clone and node def-weil-derived-direct-image; old statement typechecks against new theorem; axioms clean; 10 direct importers compiled against the delivered module"
+ }
 }
