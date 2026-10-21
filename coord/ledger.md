@@ -22365,3 +22365,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 12:04 L: merged deliver/J6/Sheaf.AlgebraicGeometry.FlatCurveDerivedStructureModel (stage 3; reviewer PASS; first push; landing 20261021T120421-L-3889374 (proof); batch 20261021T120309; modules 1; new nodes 0)
 - 12:04 L: merged deliver/K5/Sheaf.Paper.EtaleDerivedDirectImageCoherence (stage 3; reviewer PASS; first push; landing 20261021T120425-L-3891691 (proof); batch 20261021T120309; modules 1; new nodes 0)
 - 12:04 L: merged deliver/K8/Sheaf.Algebra.Homology.BoundedFreeFiniteSubcomplex (stage 3; reviewer PASS; first push; landing 20261021T120428-L-3893995 (proof); batch 20261021T120309; modules 1; new nodes 0)
+- 12:04 L: merged deliver/M1/Sheaf.Paper.FiniteFieldStratifiedPerfectModels (stage 3; reviewer PASS; first push; landing 20261021T120432-L-3895239 (proof); batch 20261021T120309; modules 1; new nodes 0)

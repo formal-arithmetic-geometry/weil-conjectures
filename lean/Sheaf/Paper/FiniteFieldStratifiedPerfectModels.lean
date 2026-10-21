@@ -20,18 +20,17 @@ public import Sheaf.CategoryTheory.DerivedCategory.PerfectRingComplexGeneral
 public import Sheaf.AlgebraicGeometry.ProEtaleFiniteModules
 public import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
 
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
+import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafEquivalence
+import WeilConjectures.ConstructibleSheaf.OpenClosed
+import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
+import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantModuleValues
+import WeilConjectures.SixFunctors.ProEtale.ConstructibleSheaf
+import Sheaf.AlgebraicGeometry.ProEtaleFiniteCoefficientDirectImage
 import WeilConjectures.ConstructibleSheaf.Refinement
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
-import Sheaf.SixFunctors.GeometricInverseImageConstantModule
 import Sheaf.AlgebraicGeometry.EtaleSiteBoundedConstantModels
 import Mathlib.Algebra.Module.Projective
 import Mathlib.LinearAlgebra.Basis.VectorSpace
-import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
-import Sheaf.CategoryTheory.ConstantLeftModuleInverseImage
-import Sheaf.AlgebraicGeometry.ProEtaleConstantRingMap
-import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
-import Mathlib.AlgebraicGeometry.Sites.Proetale
-import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 
 /-! # Stratified perfect constant models over a finite field
 
@@ -50,6 +49,119 @@ universe u
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry.Scheme
 
 namespace AlgebraicGeometry.ProEtale
+
+private theorem commonStratification
+    (X : Scheme.{u}) (k : Type (u + 1)) [CommRing k] [Finite k]
+    (F : ℤ → Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} k))
+    (hF : ∀ q, Scheme.IsConstructibleEtaleModuleSheaf (F q)) (s : Finset ℤ) :
+    ∃ S : Scheme.Stratification X, ∀ q ∈ s, ∀ i : Fin S.n,
+      Scheme.IsFiniteLocallyConstantSheaf
+        ((Etale.upperStar (ModuleCat.{u + 1} k) (S.immersion i)).obj (F q)) := by
+  classical
+  induction s using Finset.induction_on with
+  | empty =>
+      obtain ⟨S, _⟩ := hF 0
+      exact ⟨S, by simp⟩
+  | @insert q s hq ih =>
+      obtain ⟨S, hS⟩ := ih
+      obtain ⟨T, hT⟩ :=
+        (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf (F q)).mp (hF q)
+      refine ⟨S.inter T, ?_⟩
+      intro r hr i
+      rcases Finset.mem_insert.mp hr with rfl | hr
+      · exact (S.inter_refines_right T).isFiniteLocallyConstantSheaf_upperStar (F r) hT i
+      · exact (S.inter_refines_left T).isFiniteLocallyConstantSheaf_upperStar
+          (F r) (hS r hr) i
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem finiteLocalModels
+    {X : Scheme.{u}} (k : Type (u + 1)) [CommRing k] [Finite k]
+    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} k))
+    [Scheme.IsFiniteLocallyConstantSheaf F] (V : X.Etale) :
+    ∃ (I : Type (u + 1)) (U : I → X.Etale) (f : ∀ i, U i ⟶ V),
+      Sieve.ofArrows U f ∈ X.smallEtaleTopology V ∧
+      ∀ i, ∃ M : ModuleCat.{u + 1} k, Module.Finite k M ∧ Nonempty
+        (F.over (U i) ≅
+          (constantSheaf (X.smallEtaleTopology.over (U i)) (ModuleCat.{u + 1} k)).obj M) := by
+  classical
+  let A := ModuleCat.{u + 1} k
+  have : Scheme.IsFiniteLocallyConstantSheaf ((Etale.upperStar A V.hom).obj F) :=
+    Scheme.IsFiniteLocallyConstantSheaf.upperStar V.hom F
+  obtain ⟨d, hd⟩ := (Scheme.finite_locally_constant_module_values_iff
+    ((Etale.upperStar A V.hom).obj F)).1.mpr inferInstance
+  let U (i : ULift.{u + 1, u} d.cover.I₀) : X.Etale :=
+    Scheme.Etale.mk (d.cover.f i.down ≫ V.hom)
+  let f (i : ULift.{u + 1, u} d.cover.I₀) : U i ⟶ V :=
+    MorphismProperty.Over.homMk (d.cover.f i.down) rfl
+  refine ⟨_, U, f, ?_, ?_⟩
+  · apply (Scheme.ofArrows_mem_smallEtaleTopology_iff (f := f)).mpr
+    apply Set.eq_univ_of_forall
+    intro x
+    obtain ⟨i, y, hy⟩ := d.cover.exists_eq x
+    exact Set.mem_iUnion.mpr ⟨⟨i⟩, y, hy⟩
+  · intro i
+    obtain ⟨M, hM, ⟨e⟩⟩ := hd i.down
+    have := hM
+    refine ⟨M, Module.Finite.of_finite, ⟨?_⟩⟩
+    let W := d.cover.etalePrecoverageToEtale i.down
+    letI : (Scheme.Etale.overEquiv W).inverse.IsDenseSubsite
+        W.left.smallEtaleTopology (V.left.smallEtaleTopology.over W) :=
+      Scheme.Etale.overEquiv_inverse_isDenseSubsite W
+    let E := Scheme.Etale.overSheafEquiv (U i) A
+    let e' : (Etale.upperStar A (U i).hom).obj F ≅
+        (constantSheaf (U i).left.smallEtaleTopology A).obj M :=
+      (Etale.upperStarComp A (d.cover.f i.down) V.hom).app F ≪≫
+        (Scheme.overSheafEquivFunctorObjOverIso A W _).symm ≪≫
+        (Scheme.Etale.overSheafEquiv W A).functor.mapIso e ≪≫
+        ((Scheme.Etale.overEquiv W).constantSheafSheafCongrIso
+          (V.left.smallEtaleTopology.over W) W.left.smallEtaleTopology A
+          CategoryTheory.Over.mkIdTerminal).app M
+    exact E.functor.preimageIso
+      (Scheme.overSheafEquivFunctorObjOverIso A (U i) F ≪≫ e' ≪≫
+        (((Scheme.Etale.overEquiv (U i)).constantSheafSheafCongrIso
+          (X.smallEtaleTopology.over (U i)) (U i).left.smallEtaleTopology A
+          CategoryTheory.Over.mkIdTerminal).app M).symm)
+
+private noncomputable def coefficientComparisonPullbackIso
+    {X Y : Scheme.{u}} (f : X ⟶ Y) (k : Type (u + 1))
+    [CommRing k] [Finite k] [TopologicalSpace k] [DiscreteTopology k] :
+    finiteCoefficientComparison Y k ⋙ finiteCoefficientPullback Y k f ≅
+      Etale.upperStar (ModuleCat.{u + 1} k) f ⋙ finiteCoefficientComparison X k :=
+  (Functor.isoWhiskerLeft (comparisonUpperStar (ModuleCat.{u + 1} k) Y)
+    (Functor.isoWhiskerRight (finiteCoefficientRealization Y k).asEquivalence.unitIso.symm
+      (upperStar (ModuleCat.{u + 1} k) f ⋙ finiteCoefficientRealization X k))) ≪≫
+    Functor.isoWhiskerRight
+      (comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} k) f)
+      (finiteCoefficientRealization X k)
+
+private noncomputable def derivedCoefficientComparisonPullbackIso
+    {X Y : Scheme.{u}} (f : X ⟶ Y) (k : Type (u + 1))
+    [CommRing k] [Finite k] [TopologicalSpace k] [DiscreteTopology k] :
+    finiteCoefficientDerivedComparison Y k ⋙ finiteCoefficientDerivedPullback Y k f ≅
+      (Etale.upperStar (ModuleCat.{u + 1} k) f).mapDerivedCategory ⋙
+        finiteCoefficientDerivedComparison X k :=
+  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+    Functor.mapDerivedCategoryNatIso (coefficientComparisonPullbackIso f k) ≪≫
+      Functor.mapDerivedCategoryCompIso _ _
+
+private noncomputable def comparisonConstantComplexIso
+    (X : Scheme.{u}) (k : Type (u + 1)) [CommRing k] [Finite k]
+    [TopologicalSpace k] [DiscreteTopology k]
+    (P : CochainComplex (ModuleCat.{u + 1} k) ℤ) :
+    (finiteCoefficientDerivedComparison X k).obj
+      (DerivedCategory.Q.obj
+        (((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} k)).mapHomologicalComplex
+          (ComplexShape.up ℤ)).obj P)) ≅
+      (finiteCoefficientRealization X k).mapDerivedCategory.obj
+        (DerivedCategory.Q.obj
+          (((constantSheaf (Scheme.ProEt.topology X)
+            (ModuleCat.{u + 1} k)).mapHomologicalComplex (ComplexShape.up ℤ)).obj P)) :=
+  (Functor.mapDerivedCategoryCompIso _ _).app _ ≪≫
+    (finiteCoefficientRealization X k).mapDerivedCategory.mapIso
+      ((comparisonUpperStar (ModuleCat.{u + 1} k) X).mapDerivedCategoryFactors.app _ ≪≫
+        DerivedCategory.Q.mapIso ((Functor.mapHomologicalComplexCompIso
+          (comparisonUpperStarConstantSheafIso k X) (ComplexShape.up ℤ)).app P))
 
 /-- A bounded constructible etale complex over a finite field has, on an etale cover
 of each constructible locally closed stratum, an actual bounded finite-dimensional
@@ -121,6 +233,63 @@ theorem finite_field_stratified_perfect_models
                 (DerivedCategory.Q.obj
                   (((constantSheaf (Scheme.ProEt.topology (𝒰.X j))
                     (ModuleCat.{u + 1} k)).mapHomologicalComplex (ComplexShape.up ℤ)).obj P))) := by
-  sorry
+  classical
+  obtain ⟨a, b, hab, hvan⟩ := hbounded
+  let A := ModuleCat.{u + 1} k
+  let H (q : ℤ) := (DerivedCategory.homologyFunctor
+    (Sheaf X.smallEtaleTopology A) q).obj L
+  obtain ⟨S, hS⟩ := commonStratification X k H hconstructible (Finset.Icc a b)
+  let T : Scheme.FiniteLocallyClosedStratification X :=
+    { n := S.n
+      stratum := S.stratum
+      isLocallyClosed_stratum := S.isLocallyClosed_stratum
+      iUnion_stratum_eq_univ := S.iUnion_stratum_eq_univ
+      pairwise_disjoint_stratum := S.pairwise_disjoint_stratum
+      domain := S.domain
+      immersion := S.immersion
+      isImmersion := S.isImmersion
+      range_immersion := S.range_immersion }
+  refine ⟨T, S.isConstructible_stratum, ?_⟩
+  intro i
+  let F := Etale.upperStar A (S.immersion i)
+  let K := F.mapDerivedCategory.obj L
+  have hvanK (q : ℤ) (hq : q < a ∨ b < q) : IsZero
+      ((DerivedCategory.homologyFunctor (Sheaf (S.domain i).smallEtaleTopology A) q).obj K) :=
+    F.isZero_homologyFunctor_mapDerivedCategory_obj (hvan q hq)
+  have hlocal (q : ℤ) : Scheme.IsFiniteLocallyConstantSheaf
+      ((DerivedCategory.homologyFunctor (Sheaf (S.domain i).smallEtaleTopology A) q).obj K) := by
+    by_cases hq : q ∈ Finset.Icc a b
+    · have : Scheme.IsFiniteLocallyConstantSheaf
+          ((DerivedCategory.homologyFunctor (Sheaf X.smallEtaleTopology A) q ⋙ F).obj L) :=
+        hS q hq i
+      exact Scheme.IsFiniteLocallyConstantSheaf.of_iso
+        ((F.mapDerivedCategoryHomologyFunctorIso q).app L)
+    · have hz := hvanK q (by simpa only [Finset.mem_Icc, not_and_or, not_le] using hq)
+      exact Scheme.IsFiniteLocallyConstantSheaf.of_isZero hz
+  obtain ⟨𝒰, h𝒰⟩ := Etale.etale_site_bounded_constant_models (S.domain i) k K a b hab
+    hvanK (fun q V ↦ by
+      have := hlocal q
+      exact finiteLocalModels k _ V)
+  refine ⟨𝒰, fun j ↦ ?_⟩
+  obtain ⟨P, hfinite, hsupport, ⟨emodel⟩⟩ := h𝒰 j
+  have hge : P.IsStrictlyGE a :=
+    (CochainComplex.isStrictlyGE_iff P a).mpr (fun q hq ↦ hsupport q (.inl hq))
+  have hle : P.IsStrictlyLE b :=
+    (CochainComplex.isStrictlyLE_iff P b).mpr (fun q hq ↦ hsupport q (.inr hq))
+  have hfin (q : ℤ) : Module.Finite k (P.X q) := by
+    have := hfinite q
+    exact Module.Finite.of_finite
+  let e : (Etale.upperStar A (𝒰.f j ≫ S.immersion i)).mapDerivedCategory.obj L ≅
+      DerivedCategory.Q.obj
+        (((constantSheaf (𝒰.X j).smallEtaleTopology A).mapHomologicalComplex
+          (ComplexShape.up ℤ)).obj P) :=
+    (Functor.mapDerivedCategoryNatIso (Etale.upperStarComp A (𝒰.f j)
+      (S.immersion i))).app L ≪≫
+      (Functor.mapDerivedCategoryCompIso _ _).app L ≪≫ emodel
+  refine ⟨P, a, b, hge, hle, hfin, ?_, ⟨e⟩, ?_⟩
+  · exact ⟨P, a, b, hge, hle, fun q ↦ ⟨inferInstance, hfin q⟩, ⟨Iso.refl _⟩⟩
+  · exact ⟨(derivedCoefficientComparisonPullbackIso (𝒰.f j ≫ S.immersion i) k).app L ≪≫
+      (finiteCoefficientDerivedComparison (𝒰.X j) k).mapIso e ≪≫
+      comparisonConstantComplexIso (𝒰.X j) k P⟩
 
 end AlgebraicGeometry.ProEtale

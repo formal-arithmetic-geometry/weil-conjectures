@@ -25,103 +25,81 @@
  ],
  "proof": [
   {
-   "text": "Choose integers $a\\leq b$ such that $H^q(L)=0$ outside $[a,b]$. For each of the finitely many integers $q$ in this interval, constructibility supplies a finite stratification with constructible locally closed strata on which $H^q(L)$ is finite locally constant as a sheaf of $k$-modules. Repeatedly apply [lem-weil-pbc-constructible-stratification-intersection] to these stratifications. This gives one finite stratification $(i_s:S_s\\to X)_s$ refining them all, with constructible images. The refinement uses the actual fibre-product schemes, not an unsupported factorization through a stratum based only on its underlying image. The one-factor starting case is the chosen stratification for $q=a$; at each subsequent integer intersect with the next chosen stratification. Empty fibre-product strata may be retained, since their images are disjoint and empty.",
+   "text": "Choose the cohomological bounds a <= b from hbounded. For the finite set Finset.Icc a b, use commonStratification, a finite-set induction: choose a constructibility stratification in the empty case, and at an insertion intersect the previous stratification with the one for the new degree using Stratification.inter. Convert finite-value constructibility to the source finite-locally-constant predicate by isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf. Each intersection refines both factors, so Stratification.Refines.isFiniteLocallyConstantSheaf_upperStar retains all previous degrees and the new one. Keep the actual fibre-product domains of Stratification.inter.",
    "uses": [
-    "def-weil-pbc-bounded-derived-subcategories",
     "def-weil-pbc-etale-constructible-sheaf",
-    "lem-weil-pbc-constructible-stratification-intersection"
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+    "lem-weil-pbc-constructible-stratification-intersection",
+    "lemma-constructible-of-refines"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tags 095E (lemma-constructible-quasi-compact-quasi-separated) and 03RZ (lemma-constructible-abelian), common-partition argument"
-   }
+   "elementary": false
   },
   {
-   "text": "Fix a resulting stratum $i:S\\to X$. Exactness of etale constant-ring module inverse image [prop-weil-pbc-inverse-image-modules-exact] identifies $H^q(i^{-1}L)$ with $i^{-1}H^q(L)$: apply it to the kernels, images and quotients defining cohomology. Thus the same bounds $[a,b]$ hold. For each $q$ in this interval the refinement has a projection $p:S\\to Z$ to the original stratum for $H^q(L)$. Pull back its trivializing etale covering $\\{V_j\\to Z\\}$ to $\\{S\\times_Z V_j\\to S\\}$. On each member, pullback of the trivialized module is still the constant module with the same value, by [lem-sfb-geometric-inverse-image-constant-module]. Therefore $H^q(i^{-1}L)$ is locally constant with finite module models. This also holds on every etale object $W\\to S$, by base-changing the same covering to $W$. The zero cohomology sheaves outside $[a,b]$ have the constant zero model.",
+   "text": "On a stratum put F = Etale.upperStar (ModuleCat k) immersion and K = F.mapDerivedCategory.obj L. The exact upperStar API identifies homology with F applied to homology, by mapDerivedCategoryHomologyFunctorIso, and carries zero homology outside [a,b] to zero. Inside [a,b] the common-stratification property supplies finite local constancy; outside use IsFiniteLocallyConstantSheaf.of_isZero. For every etale object V, pull this finite locally constant sheaf to V and use finite_locally_constant_module_values_iff to obtain a finite-value trivializing cover. Compose its members with V -> S, lift the cover index to Type (u+1), and use the jointly-surjective characterization of covering sieves. The slice/small-site equivalences, their constantSheafSheafCongrIso and upperStarComp transport each constant-value isomorphism to the required localized S-site. This is finiteLocalModels; it uses actual morphisms, including on empty schemes.",
    "uses": [
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-sfb-geometric-inverse-image-constant-module",
-    "def-weil-pbc-etale-site"
+    "def-weil-pbc-inverse-image",
+    "lemma-constructible-pullback-locally-constant",
+    "lemma-constructible-pullback-finite",
+    "lem-weil-pbc-finite-locally-constant-module-values"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 0H7J (example-constant-sheaf); exact fixed-ring inverse image as in sites-modules.tex Tag 04JC"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lem-weil-pbc-etale-site-bounded-constant-models] to the scheme $S$, the finite commutative ring $B=k$ and $K=i^{-1}L$. Step 2 verifies both the uniform cohomology bounds and the local finite-generation hypothesis on every etale object. Obtain a jointly surjective etale covering $\\{v_j:U_j\\to S\\}$ and, for each $j$, an isomorphism $v_j^{-1}i^{-1}L\\simeq\\underline{P_j^\\bullet}_{\\mathrm{et}}$. Here $P_j^\\bullet$ is an actual complex of finite $k$-modules with terms zero outside $[a,b]$, and its sheaf differentials are induced by its module differentials. Every finite $k$-module is finite-dimensional: the finite list of all its elements spans it as a vector space. Hence these are the bounded finite-dimensional constant complex models asserted in the item.",
+   "text": "Apply etale_site_bounded_constant_models on each stratum to K, a, b, their order, the transported vanishing, and finiteLocalModels for each q and V. It returns an etale cover and actual cochain complexes P of finite k-modules, with zero terms outside [a,b], and derived constant-complex models for the successive inverse images. The derived upperStarComp isomorphism and mapDerivedCategoryCompIso identify the successive inverse image with inverse image along the composite cover-member/stratum morphism.",
    "uses": [
-    "lem-weil-pbc-etale-site-bounded-constant-models"
+    "lem-weil-pbc-etale-site-bounded-constant-models",
+    "def-weil-pbc-inverse-image"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 094G, lemma-locally-constant, strengthened bounded constant-model assertion in the proof"
-   }
+   "elementary": false
   },
   {
-   "text": "Each term $P_j^q$ is projective over $k$ by [lem-weil-pbc-vector-space-projective], and it is finitely generated by step 3. Since $P_j^q=0$ outside $[a,b]$, $P_j^\\bullet$ is already a bounded complex of finitely generated projective $k$-modules. Its derived object is therefore perfect by [def-pc-perfect-ring-complex]. The zero complex and zero terms satisfy the same criterion; no integral coefficient ring, lifting, or completeness enters this argument.",
+   "text": "Convert the zero-term assertions to P.IsStrictlyGE a and P.IsStrictlyLE b with the corresponding iff lemmas. Each finite underlying module is Module.Finite by Module.Finite.of_finite, and every vector space is free and projective. Thus P itself, the same bounds, these termwise properties and Iso.refl witness IsPerfectRingComplex of Q.obj P, with the standard localization universe explicitly retained.",
    "uses": [
     "lem-weil-pbc-vector-space-projective",
     "def-pc-perfect-ring-complex"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/fields.tex",
-    "place": "Tag 09FN, lemma-vector-space-is-free; following lemma-field-semi-simple proof explicitly notes projectivity"
-   }
+   "elementary": false
   },
   {
-   "text": "Let $h_j=i\\circ v_j:U_j\\to X$. Apply [lem-weil-pbc-comparison-pullback] to $i$ and $v_j$ to identify restriction of $\\nu_X^*L$ to $U_{j,\\mathrm{proet}}$ with $\\nu_{U_j}^*(v_j^{-1}i^{-1}L)$. These comparisons apply termwise and descend to derived categories because the fixed-ring inverse images are exact [lem-pe-constant-left-module-inverse-image]. The functor $\\nu^*$ in [def-weil-pbc-proetale-modules] is precisely that termwise module inverse image. In its finite commutative coefficient convention the pro-etale coefficient ring is identified with the constant ring sheaf, preserving constant sections, as stated in [prop-weil-pbc-proetale-constant-ring-map]. Thus all these comparisons have the coefficient ring required by the item.",
+   "text": "For h the composite cover-member/stratum morphism, cancel finiteCoefficientRealization followed by its inverse by the equivalence unit. Whisker comparisonUpperStarCompUpperStarIso with the realization functor. This gives coefficientComparisonPullbackIso, an isomorphism finiteCoefficientComparison X k followed by finiteCoefficientPullback X k h with Etale.upperStar h followed by finiteCoefficientComparison U k. Apply mapDerivedCategoryNatIso and the two mapDerivedCategoryCompIso maps to obtain derivedCoefficientComparisonPullbackIso. These are the existing exact fixed-ring inverse images and the recorded coefficient realization, not a newly chosen ringed inverse image.",
    "uses": [
     "lem-weil-pbc-comparison-pullback",
-    "lem-pe-constant-left-module-inverse-image",
     "def-weil-pbc-proetale-modules",
-    "prop-weil-pbc-proetale-constant-ring-map",
-    "def-weil-pbc-site-comparison-morphism"
+    "def-weil-pbc-proetale-operations"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 098T (lemma-morphism-big-small), the etale-to-pro-etale inclusion preceding lemma-describe-pullback-from-etale; fixed-ring exactness from sites.tex Tag 00YV"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply $\\nu_{U_j}^*$ to the isomorphism from step 3. By [lem-sfb-geometric-inverse-image-constant-module], naturally in every $k$-linear map, $\\nu_{U_j}^*\\underline{P_j^q}_{\\mathrm{et}}\\cong\\underline{P_j^q}_{\\mathrm{proet}}$. Naturality for $d^q:P_j^q\\to P_j^{q+1}$ gives commuting squares with the two constant differentials, so these isomorphisms form an isomorphism of complexes, not just of graded sheaves. In conjunction with step 5 this gives $(\\nu_X^*L)|_{U_j}\\simeq\\underline{P_j^\\bullet}_{\\mathrm{proet}}$ with exactly the perfect models of step 4. An etale covering is also a pro-etale covering by [lem-pur-etale-proetale-cover], so it gives the asserted local models on every stratum. On the empty scheme the assertion is vacuous; empty strata require no nonzero model.",
+   "text": "Apply finiteCoefficientDerivedComparison on U to the etale derived-model isomorphism. Factor it through comparisonUpperStar and finiteCoefficientRealization by mapDerivedCategoryCompIso. The exact comparison mapDerivedCategoryFactors identifies its value on Q of the constant complex with Q of the termwise comparison. Apply mapHomologicalComplexCompIso to the existing natural comparisonUpperStarConstantSheafIso; its naturality in every k-linear differential supplies an isomorphism of actual complexes with the same P on the pro-etale site. Finally apply Q and the realization. Composing with step 5 proves the second Nonempty clause while retaining P and the cover from step 3. No pro-etale-cover conversion is required because the conclusion records an etale cover.",
    "uses": [
-    "lem-sfb-geometric-inverse-image-constant-module",
-    "lem-pur-etale-proetale-cover"
+    "lem-weil-pbc-comparison-pullback",
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-proetale-modules"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 0H7J (example-constant-sheaf), functoriality of constant objects under geometric inverse image"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-bounded-derived-subcategories",
   "def-weil-pbc-etale-constructible-sheaf",
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
   "lem-weil-pbc-constructible-stratification-intersection",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "lem-sfb-geometric-inverse-image-constant-module",
-  "def-weil-pbc-etale-site",
+  "lemma-constructible-of-refines",
+  "def-weil-pbc-inverse-image",
+  "lemma-constructible-pullback-locally-constant",
+  "lemma-constructible-pullback-finite",
+  "lem-weil-pbc-finite-locally-constant-module-values",
   "lem-weil-pbc-etale-site-bounded-constant-models",
   "lem-weil-pbc-vector-space-projective",
   "def-pc-perfect-ring-complex",
   "lem-weil-pbc-comparison-pullback",
-  "lem-pe-constant-left-module-inverse-image",
   "def-weil-pbc-proetale-modules",
-  "prop-weil-pbc-proetale-constant-ring-map",
-  "def-weil-pbc-site-comparison-morphism",
-  "lem-pur-etale-proetale-cover"
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-constant-sheaf"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 094G, lemma-locally-constant, after a common finite constructible stratification (etale-cohomology.tex Tags 095E and 03RZ); constant inverse-image comparisons (sites.tex Tags 0H7J and 00YV). This supplies the finite-field residue step invoked in Bhatt-Scholze Proposition 6.6.11."
+  "place": "Tag 094G, lemma-locally-constant, proof; finite common stratification as in etale-cohomology.tex Tags 095E and 03RZ. Lean implementation reuses the existing source refinement, finite-value comparison and natural constant-sheaf/comparison APIs. The coefficient-realization cancellation follows its defining equivalence."
  },
  "mathlib_searches": [
   {
@@ -204,11 +182,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-pur-etale-proetale-cover",
-  "lem-sfb-geometric-inverse-image-constant-module",
-  "lem-pe-constant-left-module-inverse-image"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
@@ -235,5 +209,15 @@
   "result": "pass",
   "note": "First delivery of lem-weil-pbc-finite-field-stratified-perfect-models (N8 c68a3e3f). Clause-by-clause match: Noetherian = IsLocallyNoetherian+CompactSpace; k : Type (u+1) Field+Finite (universe forced by recorded IsConstructibleEtaleModuleSheaf; DiscreteTopology is the pro-étale coefficient convention); hbounded/hconstructible on DerivedCategory.homologyFunctor; conclusion: FiniteLocallyClosedStratification + Topology.IsConstructible strata, Cover.{u} etalePrecoverage per stratum, per member an actual P with IsStrictlyGE/LE, Module.Finite terms, IsPerfectRingComplex (standard localization explicit), Etale.upperStar(composite) L ≅ Q(constant P), and the same P models finiteCoefficientDerivedPullback∘finiteCoefficientDerivedComparison L via finiteCoefficientRealization: canonical maps only. Item changed only in lean + added landed stmt_dep def-weil-pbc-proetale-operations (allowed); lean.statement verbatim; dependency node files identical to live; no duplicate found; docstrings carry the sources and the 6 proof steps; no line over 100 chars. nt_compile --json: 3.5 s, clean. Advisories: Etale.upperStar owner def-weil-pbc-inverse-image not in stmt_deps; finiteCoefficientDerivedPullback not in def-weil-pbc-proetale-operations' declarations list."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-17286",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261021T120432-L-3895239",
+  "kind": "proof",
+  "note": "independent cc review: delivered FiniteFieldStratifiedPerfectModels.lean + node lem-weil-pbc-finite-field-stratified-perfect-models vs live clone, units sk-thm-properbasechange / sk-prop-pe-comparison-morphism, and the public import closure (ProEtaleFiniteModules still re-exports ProEtaleSiteComparison)"
+ }
 }
