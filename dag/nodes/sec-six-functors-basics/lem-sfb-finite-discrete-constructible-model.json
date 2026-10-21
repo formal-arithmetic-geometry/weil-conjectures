@@ -68,12 +68,11 @@
    }
   },
   {
-   "text": "Conversely assume (ii), and fix $q$. By step 2, finite values and finitely presented values over $T$ agree. If the classical condition is given only on the members $U_1,\\dots,U_n$ of a finite affine open cover, then for any affine open $V$ the pieces $V\\cap S\\cap(U_i\\setminus\\bigcup_{j<i}U_j)$, $S$ a stratum of $U_i$, form a finite partition of $V$ into locally closed subsets, which are constructible because $Z$ is Noetherian, and the restriction of a locally constant sheaf stays locally constant; so the condition holds on every affine open. The Noetherian globalization lemma, on the étale site of the Noetherian scheme $Z$, then turns the affine-local constructibility of $H^q(L)$ into one finite global constructible locally closed stratification. It applies to module-valued sheaves as well: a section of the constant scalar ring is locally a scalar in $T$, so its action is defined locally by that scalar and glues uniquely; restricting this action to constant scalars returns the original fixed-module sheaf. Therefore $H^q(L)$ satisfies the global source predicate in fixed-module constructible origin. The reverse implication of that equivalence shows that $\\nu_Z^*H^q(L)$ has a global finite stratification with finite constant local models on pro-étale covers. Inverse image is exact by finite-level site comparison, so exact cohomology comparison, applied to the termwise functor $D(\\nu_Z^*)$, identifies this sheaf with $H^q(D(\\nu_Z^*)L)$.",
+   "text": "Conversely assume (ii). Since Z is quasi-compact and locally Noetherian, it is Noetherian. Apply the existing source theorem Scheme.IsConstructibleSheaf.of_iSup_eq_top to H^q(L) and the cover by all affine opens. The hypothesis gives constructibility of each restriction, so this theorem provides a global finite stratification. On each stratum the etale sheaf is finite locally constant. Choose an etale cover trivializing it; discard empty members, so the finite-sheaf condition implies that every constant module value is finite. This etale cover is also pro-etale. Comparison inverse image commutes with these restrictions and takes constant sheaves to constant sheaves. Its existing exact functor API identifies its application to H^q(L) with H^q(D(nu_Z^*)Q(L)).",
    "uses": [
-    "lem-sfb-noetherian-global-constructibility",
-    "lem-weil-pbc-fixed-module-constructible-origin",
-    "prop-weil-pbc-site-comparison-finite-level",
-    "lem-weil-pbc-exact-functor-complex-cohomology"
+    "lem-sf-noetherian-constructible-open-local",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "prop-weil-pbc-site-comparison-finite-level"
    ],
    "elementary": false,
    "source": {
@@ -82,14 +81,15 @@
    }
   },
   {
-   "text": "Let $G$ be any ordinary pro-étale module sheaf with one of the finite-model stratifications just obtained. On each stratum and each member $U$ of its trivializing cover, write $G|_U\\cong\\underline P_U$ with $P$ finite. Restriction compatibility for the common encoding identifies $(E_ZG)|_U$ with $E_U(\\underline P_U)$, including the pulled-back coefficient identification. Sheafify the finite presentation of $P$ from step 2; the exact constant-module functor gives $\\underline T_U^m\\to\\underline T_U^n\\to\\underline P_U\\to0$. Applying the exact equivalence $E_U$ preserves this cokernel and the finite sums. Its image of the rank-one free module is the regular $T_U^c$-module: under the encoding's underlying-abelian-sheaf isomorphism, maps out of either object correspond naturally to global sections of the underlying sheaf, by evaluating a module map at $1$; these bijections identify the two rank-one representing objects. Hence $E_U(\\underline P_U)$ is a cokernel of $(T_U^c)^m\\to(T_U^c)^n$. By the definitions of finite presentation, local finite presentation and constructibility, $E_ZG$ is internally constructible, with the same finite stratification and covering families.",
+   "text": "Let $G$ be any ordinary pro-étale module sheaf with one of the finite-model stratifications just obtained. On each stratum and each member $U$ of its trivializing cover, write $G|_U\\cong\\underline P_U$ with $P$ finite. Restriction compatibility for the common encoding identifies $(E_ZG)|_U$ with $E_U(\\underline P_U)$, including the pulled-back coefficient identification. Sheafify the finite presentation of $P$ from step 2; the exact constant-module functor gives $\\underline T_U^m\\to\\underline T_U^n\\to\\underline P_U\\to0$. Applying the exact equivalence $E_U$ preserves this cokernel and the finite sums. Its image of the rank-one free module is the regular $T_U^c$-module: under the encoding's underlying-abelian-sheaf isomorphism, maps out of either object correspond naturally to global sections of the underlying sheaf, by evaluating a module map at $1$; these bijections identify the two rank-one representing objects. Hence $E_U(\\underline P_U)$ is a cokernel of $(T_U^c)^m\\to(T_U^c)^n$. By the definitions of finite presentation, local finite presentation and constructibility, $E_ZG$ is internally constructible, with the same finite stratification and covering families. In Lean the ordinary constant-sheaf functor preserves finite colimits, so its cokernel comparison suffices; no separate derived constant-module functor is used. The existing encoded finite-free isomorphism identifies finite free internal modules with constant finite sums of G of the regular scalar module. The scalar isomorphism G(R_regular) ≅ R is constructed by the natural hom-set equivalence given by evaluation at one and hG, followed by fully faithful coyoneda. Finite-presentation transport along coefficient isomorphisms uses the existing pullback module API.",
    "uses": [
     "def-weil-pbc-common-finite-discrete-encoding",
     "lem-weil-pbc-finite-discrete-restriction-encoding",
-    "def-sfb-site-derived-constant-module-functor",
     "def-sfb-finitely-presented-module",
     "def-sfb-locally-finitely-presented",
-    "def-sfb-constructible-module"
+    "def-sfb-constructible-module",
+    "lem-weil-pbc-finite-discrete-encoded-presentation",
+    "lem-weil-pbc-module-constructible-pullback"
    ],
    "elementary": true,
    "source": {
@@ -113,23 +113,24 @@
   "def-sfb-constructible-module",
   "def-sfb-finitely-presented-module",
   "def-sfb-locally-finitely-presented",
-  "def-sfb-site-derived-constant-module-functor",
   "def-weil-pbc-common-finite-discrete-encoding",
+  "lem-sf-noetherian-constructible-open-local",
   "lem-sfb-bounded-representative",
-  "lem-sfb-noetherian-global-constructibility",
   "lem-weil-pbc-exact-functor-complex-cohomology",
   "lem-weil-pbc-exact-functor-derived-factorization",
   "lem-weil-pbc-finite-discrete-constructible-encoding",
+  "lem-weil-pbc-finite-discrete-encoded-presentation",
   "lem-weil-pbc-finite-discrete-restriction-encoding",
   "lem-weil-pbc-fixed-module-bounded-constructible-origin",
   "lem-weil-pbc-fixed-module-constructible-origin",
+  "lem-weil-pbc-module-constructible-pullback",
   "prop-weil-pbc-site-comparison-finite-level",
   "sk-def-sfb-bounded-constructible"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "agent J3",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Tags 09AK and 09AL, with the already constructed common finite-discrete encoding and explicit finite-module/presentation arguments; affine-local to global passage: etale-cohomology.tex Tag 095E"
+  "place": "Tags 09AK and 09AL; existing source OpenCover theorem for globalization, finite module presentation and ordinary constant-sheaf cokernel comparison for the reverse internal encoding. Fully implemented in Lean, without new holes."
  },
  "mathlib_searches": [
   {
@@ -276,10 +277,8 @@
   ]
  },
  "tool_uses": [
-  "def-sfb-site-derived-constant-module-functor",
   "def-weil-pbc-common-finite-discrete-encoding",
   "lem-sfb-bounded-representative",
-  "lem-sfb-noetherian-global-constructibility",
   "lem-weil-pbc-exact-functor-complex-cohomology",
   "lem-weil-pbc-exact-functor-derived-factorization",
   "lem-weil-pbc-finite-discrete-constructible-encoding",
@@ -314,5 +313,15 @@
   "group": "Q12",
   "result": "pass",
   "note": "First S2 delivery after the Q51 S1 FIX merge; only the lean record and the new module changed vs side-live, and lean.statement is verbatim. Clause by clause: (i) boundedConstructible on condensedRingObj(continuousMapRingObj B) Z (general lfp sense, no Tor); the encoding is finiteDiscreteCoefficientEquivalence with the dependency's exact eR/G/hG inputs (same binders as the landed finiteDiscreteCoefficient_constructible); ν^* = comparisonUpperStar = left adjoint of proEtaleSiteComparisonModules; (ii) a strictly bounded L in Sheaf Z.smallEtaleTopology (ModuleCat (ULift B)) with Scheme.IsConstructibleSheaf of H^q(L) on every affine open (equivalent to the node's local condition for Noetherian Z), and Nonempty(K ≅ D(E)(D(ν^*)(Q L))). Hypotheses are only CompactSpace + IsLocallyNoetherian on Z and finite discrete on B. B : Type follows the encoding convention. Edge cases B=0, Z=∅, K=0, ℤ/4 are covered. Docstrings have the source and blueprint tag and follow all 7 steps; both report sections are present; proof is sorry only. nt_compile --json clean in 37.9 s at load 181. Advisory: IsConstructibleSheaf (def-constructible-constructible) and Etale.upperStar (def-weil-pbc-inverse-image) are owned by nodes outside stmt_deps; the cited sk-thm-pe-constructible-comparison has no original-site predicate; an S2 fix cannot change stmt_deps, so this is a maintainer note."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261021T161405-L-4161800",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
