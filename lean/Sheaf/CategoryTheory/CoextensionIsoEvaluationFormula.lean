@@ -5,11 +5,9 @@ Authors: Q50
 -/
 module
 
-public import WeilConjectures.CategoryTheory.RingObjects.RingPresheaf
 public import Mathlib.CategoryTheory.Monoidal.Mod
 public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalars
 public import WeilConjectures.CategoryTheory.ModuleObjects.MapMod
-import Mathlib.CategoryTheory.Adjunction.Basic
 import Mathlib.CategoryTheory.Adjunction.Unique
 
 /-! # Evaluation formula for coextension along an isomorphism
@@ -72,6 +70,34 @@ theorem coextendScalarsIsoComapInv_formula
         d ≫ coextendι φ N =
             MonoidalClosed.curry ((asIso φ).inv ▷ N.X ≫ γ[R,N.X]) →
           d = ((coextendScalarsIsoComapInv φ).inv.app N).hom := by
-  sorry
+  have hε : ((comapEquivalenceOfIsIso φ).counit.app N).hom = 𝟙 N.X := by
+    change 𝟙 N.X ≫ 𝟙 N.X ≫ 𝟙 N.X = 𝟙 N.X
+    simp
+  have he : ((coextendScalarsIsoComapInv φ).hom.app N).hom = coextendCounitHom φ N := by
+    have h := Adjunction.rightAdjointUniq_hom_app_counit
+      (restrictCoextendAdjunction φ) (comapEquivalenceOfIsIso φ).toAdjunction N
+    have h' := congrArg (fun f ↦ f.hom) h
+    change ((coextendScalarsIsoComapInv φ).hom.app N).hom ≫
+      ((comapEquivalenceOfIsIso φ).counit.app N).hom = _ at h'
+    erw [hε, Category.comp_id] at h'
+    simpa [restrictCoextendAdjunction, Adjunction.mkOfHomEquiv_counit_app,
+      coextendHomEquiv] using h'
+  have hd : ((coextendScalarsIsoComapInv φ).inv.app N).hom ≫ coextendι φ N =
+      MonoidalClosed.curry ((asIso φ).inv ▷ N.X ≫ γ[R,N.X]) := by
+    have h := Adjunction.homEquiv_symm_rightAdjointUniq_hom_app
+      (comapEquivalenceOfIsIso φ).toAdjunction (restrictCoextendAdjunction φ) N
+    rw [restrictCoextendAdjunction, Adjunction.mkOfHomEquiv_homEquiv] at h
+    have hi : (coextendScalarsIsoComapInv φ).inv.app N =
+        coextendHom φ ((comapEquivalenceOfIsIso φ).counit.app N) :=
+      ((coextendHomEquiv φ N _).apply_symm_apply _).symm.trans
+        (congrArg (coextendHomEquiv φ N _) h)
+    apply MonoidalClosed.uncurry_injective
+    erw [MonoidalClosed.uncurry_natural_left, uncurry_coextendι,
+      MonoidalClosed.uncurry_curry, hi, whiskerLeft_coextendHom_hom_coextendEv, hε,
+      Category.comp_id]
+    rfl
+  refine ⟨he, hd, ?_⟩
+  intro d h
+  exact (cancel_mono (coextendι φ N)).1 (h.trans hd.symm)
 
 end CategoryTheory.Mod
