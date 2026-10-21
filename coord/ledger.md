@@ -21328,3 +21328,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:46 L: returned deliver/NE/lem-weil-pbc-finite-field-stratified-perfect-models (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-pbc-finite-field-stratified-perfect-models: l)
 - 08:46 L: returned deliver/Q97/lem-zl-common-irreducibility-detecting-cover (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-zl-common-irreducibility-detecting-cover: lem-zl-c)
 - 08:46 L: returned deliver/NR/lem-sfb-grothendieck-sheafification (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-sfb-grothendieck-sheafification: lem-sfb-grothendi)
+- 08:46 L: returned deliver/NP/lem-sfb-kinjective-hom-scalar-telescope (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-sfb-kinjective-hom-scalar-telescope: lem-sfb-kinje)
