@@ -21884,3 +21884,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:25 L: returned deliver/Q91/lem-pur-coordinate-chart-finite-dimension-witness (reviewer RETURN: L: independent stage-2 immutable head cfbce1bdee09: H2: the delivery adds the theorem node lem-pur-smooth-pair-local-coo)
 - 09:25 L: merged deliver/NB/lem-weil-pbc-closed-immersion-from-composite (reviewer PASS; first push; new nodes: 0)
 - 09:25 L: returned deliver/Q107/lem-pur-etale-sum-right-adjoint-tensor (reviewer RETURN: L: independent stage-2 immutable head e72a9900089b: Sheaf.AlgebraicGeometry.EtaleSumRightAdjointTensor declares names th)
+- 09:25 L: returned deliver/NJ/lem-sf-derived-completed-tensor-bilinearity (reviewer RETURN: L: independent stage-2 immutable head e9f6c5282de0: H13/H4: the (B) record for lem-weil-pbc-ringed-koszul-completion-ref)
