@@ -83,10 +83,10 @@
    }
   },
   {
-   "text": "Since $P\\dashv S$, [lem-weil-pbc-left-adjoint-preserves-colimits] gives preservation of finite colimits. The abelian-category hypotheses from step 5 allow [lem-sfb-preserving-colimits-additive] to give additivity of $P$.",
+   "text": "By [lem-sfb-modobj-abelian], both module categories are abelian: step 5 supplies additive tensors and finite-colimit preservation by tensoring with $SB$ and $B$. By [lem-sfb-modobj-forget-left-exact], their forgetful functors $U_{SB}$ and $U_B$ preserve finite limits.",
    "uses": [
-    "lem-weil-pbc-left-adjoint-preserves-colimits",
-    "lem-sfb-preserving-colimits-additive"
+    "lem-sfb-modobj-abelian",
+    "lem-sfb-modobj-forget-left-exact"
    ],
    "elementary": false,
    "source": {
@@ -95,9 +95,34 @@
    }
   },
   {
-   "text": "Apply [det-prop-sfb-module-pullback-exact-lifted] with $\\mathcal R=SB$, $\\mathcal S=B$, $F=P$ and $G=P_B$. Steps 1, 5 and 6 verify exactness, abelianity, tensor hypotheses and additivity; step 3 gives its required forgetful equality. Hence $P_B$ is additive and exact, preserving finite limits and finite colimits.",
+   "text": "The functor $U_B$ reflects isomorphisms. Indeed, if a $B$-linear $f\\colon M\\to N$ has underlying inverse $g$, its linearity $f\\gamma_M=\\gamma_N(B\\otimes f)$ implies $g\\gamma_N=\\gamma_M(B\\otimes g)$ by composing on the left with $g$ and on the right with $B\\otimes g$. Thus $g$ is a module morphism and the same inverse identities hold in the module category.",
    "uses": [
-    "det-prop-sfb-module-pullback-exact-lifted"
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-module-lower-shriek/def-sfb-module-linear-open-lower-shriek.proof.md",
+    "place": "Proof, final exactness argument"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-conservative-left-exact-reflects-finite-limits] to $U_B$: step 6 supplies finite limits and their preservation, and step 7 supplies reflection of isomorphisms. Hence $U_B$ reflects finite limits. Step 3 identifies $U_B P_B=P U_{SB}$, which preserves finite limits by steps 1 and 6 (apply the two functors successively to a limit cone). Now [lem-sfb-finite-limit-preservation-cancellation] gives preservation of finite limits by $P_B$.",
+   "uses": [
+    "lem-sfb-conservative-left-exact-reflects-finite-limits",
+    "lem-sfb-finite-limit-preservation-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-module-lower-shriek/def-sfb-module-linear-open-lower-shriek.proof.md",
+    "place": "Proof, final exactness argument"
+   }
+  },
+  {
+   "text": "The lifted adjunction of step 4 and [lem-weil-pbc-left-adjoint-preserves-colimits] give finite-colimit preservation by $P_B$. Its source and target are abelian by step 6, so [lem-sfb-preserving-colimits-additive] gives additivity. Together with step 8 this proves exactness, in the sense of [def-galois-exact-functor].",
+   "uses": [
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "lem-sfb-preserving-colimits-additive",
+    "def-galois-exact-functor"
    ],
    "elementary": false,
    "source": {
@@ -117,14 +142,19 @@
   "def-weil-pbc-proetale-site",
   "lem-weil-pbc-site-sheaves-enough-injectives",
   "det-def-sfb-sheaf-tensor-closed",
+  "lem-sfb-modobj-abelian",
+  "lem-sfb-modobj-forget-left-exact",
+  "sk-def-sfb-module-objects",
+  "lem-sfb-conservative-left-exact-reflects-finite-limits",
+  "lem-sfb-finite-limit-preservation-cancellation",
   "lem-weil-pbc-left-adjoint-preserves-colimits",
   "lem-sfb-preserving-colimits-additive",
-  "det-prop-sfb-module-pullback-exact-lifted"
+  "def-galois-exact-functor"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-module-lower-shriek/def-sfb-module-linear-open-lower-shriek.proof.md",
-  "place": "Proof, assembled from the existing fine-grained projection-formula, linearization, adjunction, additivity and exact-lift nodes"
+  "place": "Proof, linearization and adjunction assembled from existing nodes; final exactness sentence expanded using two new general Mathlib finite-limit tools and the lifted left adjunction"
  },
  "mathlib_searches": [
   {
@@ -219,8 +249,8 @@
   "date": "2026-10-21",
   "item": "def-sfb-module-linear-open-lower-shriek",
   "worker": "stage1",
-  "summary": "Repair of the human-requested finer split: replaced the umbrella transport citation and inline functoriality/additivity arguments by the existing dedicated coherence, linearization, lifted-adjunction and Mathlib additivity nodes. Seven short assembly steps; statement unchanged. No new nodes: each proposed helper already exists, so reuse avoids duplicates. Retained all prior statement bindings, source data and search records.",
-  "blueprint": "Steps 1–4 realize the strong-monoidal pullback, coherent projection-formula linearization and lifted adjunction in the first sentence of the blueprint proof. Steps 5–7 realize its final exactness sentence, through the existing general exact-lift theorem.",
+  "summary": "Human-requested re-split with two NEW Mathlib leaves: conservative left exact functors reflect finite limits, and finite-limit preservation cancels through a reflecting functor. The final exact-lift umbrella is replaced by explicit verification of the forgetful functor hypotheses, an elementary inverse-linearity calculation, the two atomic limit tools, and colimit preservation from the already lifted adjunction. Statement unchanged; existing construction and adjunction nodes reused, avoiding duplicates.",
+  "blueprint": "Steps 1–4 realize the first blueprint sentence (projection-formula action and lifted adjunction). Steps 5–9 realize the final exactness sentence, with new leaf nodes exposing reflection and cancellation of finite limits.",
   "tool_uses": [
    {
     "node": "def-sfb-adjunction-projection-formula",
@@ -233,10 +263,6 @@
    {
     "node": "def-sfb-modobj-linearization-transport-adjunction",
     "why": "General lifted-adjunction theorem specializes to the unit adjunction P left adjoint to S."
-   },
-   {
-    "node": "det-prop-sfb-module-pullback-exact-lifted",
-    "why": "General exact-lift theorem gives precisely the unit exactness argument on underlying sheaves."
    },
    {
     "node": "lem-weil-pbc-site-sheaves-enough-injectives",
@@ -259,10 +285,10 @@
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-Q16-51f31ec8e",
-  "group": "Q16",
+  "reviewer": "NT-cc-Q06-1e7570ec1",
+  "group": "Q06",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-51f31ec8e (reviewer sub-agent of L); spot-checked: I read the full proof of the item, its unit, the main-20261015 blueprint statement and proof (node 1695), and every cited statement. The statement and stmt_deps are unchanged; only the proof, proof_deps, proof_origin and split_report changed. The human re-split note of 2026-10-21 (coord/repair-notes, 3442 chars) asks for new nodes. The delivery instead reduces the proof to 7 steps and 1757 characters (longest step 332), with no new nodes. Every old inline argument now cites an existing dedicated node. (1) Coherence of the canonical projection maps is def-sfb-adjunction-projection-formula. Its map P(SL⊗M)→L⊗PM, adjoint of μ^S∘(id⊗u), has the same direction as lem-sfb-open-projection-formula. (2) The action P(γ)∘π⁻¹, linearity of Pf and commutation with the forgetful functors are def-sfb-modobj-linearization. (3) P_B ⊣ mapMod(S) is def-sfb-modobj-linearization-transport-adjunction. (4) The old inline biproduct additivity argument is the Mathlib leaves lem-weil-pbc-left-adjoint-preserves-colimits (Stacks 0038) and lem-sfb-preserving-colimits-additive (rightExactFunctor_le_additiveFunctor). (5) Exactness comes from det-prop-sfb-module-pullback-exact-lifted. Its hypotheses all hold: abelian categories (sites small), additive and right-exact tensors from det-def-sfb-sheaf-tensor-closed, P exact (sk-def-sfb-finite-lower-shriek) and additive (step 6), and U∘P_B = P∘U from step 3. A new node for any of these would duplicate an existing node (B9/C5), so reuse is the correct answer to the note. The source coefficients stay Mod_{j^*Λ_X}, not Λ_U. j^* is strong monoidal by def-sfb-finite-upper-star-monoidal (Ab is closed symmetric Grothendieck). The cases U=∅, j=id and Λ=0 are consistent. The item is not in its own dependency closure (311 nodes), all cited ids exist and none is merged, proof_deps equals the union of uses, and there is no SGA. All six tool_uses are accepted: three are transport-unit definition nodes, which are notions, and three were already accepted on the base. Maintainer note: mark the repair note resolved by reuse of existing nodes; a check that requires ≥1 new node should not block this delivery. No fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q06-1e7570ec1 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement, the main-20261015 blueprint proof and the unit sk-def-sfb-module-lower-shriek. The item's statement, stmt_deps and metadata are unchanged against the live node; only proof, proof_deps, proof_origin and split_report changed. Compared step by step with the original 3442-character proof (Q01 snapshot) and with the Q16 7-step base: nothing was shortened or dropped. Coherence, the action laws, linearity, the forgetful equality and the adjunction are the statements of def-sfb-adjunction-projection-formula, def-sfb-modobj-linearization and def-sfb-modobj-linearization-transport-adjunction. The exact-lift umbrella is replaced by its ingredients. Step 6: lem-sfb-modobj-abelian and lem-sfb-modobj-forget-left-exact for both module categories, using step 5's additive and right-exact tensors. Step 7: an elementary inverse-linearity calculation (checked: g γ_N = γ_M(B⊗g)). Step 8: the two leaves, with U_B P_B = P U_SB preserving finite limits. Step 9: colimits from the lifted adjunction, additivity via rightExactFunctor_le_additiveFunctor, and exactness in the sense of def-galois-exact-functor. The proof is 2616 characters (longest step 449) and proof_deps equals the union of uses. New leaves: reflectsFiniteLimits_of_reflectsIsomorphisms (Mathlib/CategoryTheory/Limits/Preserves/Finite.lean:175-178) and preservesFiniteLimits_of_reflects_of_preserves (Finite.lean:163-165). Both are exact matches with the same hypotheses; I tested them on terminal objects (empty J), identities and equivalences, and the needed HasFiniteLimits hypothesis is kept. Neither restates a clause of the item, both cite only def-galois-finite-limits-colimits (no cycle), and a DAG-wide scan of mathlib_match declarations and statements found no duplicate. On route: modobj-abelian and forget-left-exact belong to sk-prop-sfb-module-category, which the blueprint proof cites. The tool_uses accepted on Q16 still apply, and no SGA is used. Advisory, accepted without a node: steps 8 and 9 use that abelian categories have finite limits and colimits, which is the Lean instance Abelian.hasFiniteLimits/hasFiniteColimits (Mathlib/CategoryTheory/Abelian/Basic.lean:571-575). Maintainer: top-level tool_uses still lists det-prop-sfb-module-pullback-exact-lifted, which the proof no longer cites; the split_report why-text for det-def-sfb-sheaf-tensor-closed still mentions the exact-lift theorem; the repair note can be closed, since the content was already spread to existing nodes by Q16 and these two leaves are the genuinely new atomic pieces. No fixes."
  },
  "chapter": "sec-six-functors-basics",
  "unit": "sk-def-sfb-module-lower-shriek",

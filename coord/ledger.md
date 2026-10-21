@@ -19819,3 +19819,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:28 L: merged deliver/NC/lem-sbc-ambient-operations-scalar-linearity (reviewer PASS; first push; new nodes: 0)
 - 03:29 L: merged deliver/Q18/lem-sfb-constructible-cocone-obj (reviewer PASS; after a return; new nodes: 1)
 - 03:29 L: merged deliver/NK/lem-sfb-adic-constructibility-predicate-comparison (reviewer PASS; first push; new nodes: 0)
+- 03:30 L: merged deliver/Q06/def-sfb-module-linear-open-lower-shriek (reviewer PASS; after a return; new nodes: 2)
