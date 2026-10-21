@@ -5,39 +5,12 @@ Authors: SHEAF group NG
 -/
 module
 
-public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-public import WeilConjectures.AlgebraicGeometry.DerivedCategories
-public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
-public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
-public import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
-public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-public import Sheaf.Paper.DualityPairing
-public import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
-public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Closed
 public import WeilConjectures.Compactification.NagataCompactification
-public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
 public import Sheaf.AlgebraicGeometry.EtaleDerivedTensorSymmetry
-public import WeilConjectures.SixFunctors.Etale.Derived.TensorHom
-public import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjection
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
-import Sheaf.AlgebraicGeometry.ProperProjectionFormula
-import Mathlib.Topology.Defs.Filter
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
-import WeilConjectures.SixFunctors.Etale.Derived.Tensor
-import Sheaf.Algebra.Homology.RingedInternalHomExactRestriction
-import WeilConjectures.Algebra.Homology.RhomGlobalSections
-import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comparison
-import Sheaf.AlgebraicGeometry.CompactifiableOverField
-import Mathlib.AlgebraicGeometry.Noetherian
-import Sheaf.Algebra.Homology.RhomGlobalSectionsOfUniverses
-import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
-import Sheaf.AlgebraicGeometry.UnboundedCompactSupportProperComposition
-import Sheaf.SixFunctors.TensorProjectionAdjunct
-import Sheaf.SmoothPurity.InternalAdjunctionEvaluation
+public import WeilConjectures.SixFunctors.Etale.Derived.DoubleDualProper
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Braided
 
 /-! # The double-dual morphism under proper direct image
 
@@ -64,16 +37,98 @@ pushed-forward evaluation pairing.
 
 set_option autoImplicit false
 
-universe a u
+universe u' u
 
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite
 open scoped CategoryTheory.Functor
 
+namespace CategoryTheory.MonoidalClosed
+
+-- These identities verify the normalizations before specialization to derived sheaves.
+private theorem doubleDual_eq_transpose
+    {C : Type*} [Category C] [MonoidalCategory C] [BraidedCategory C] [MonoidalClosed C]
+    (W K : C) :
+    toIhomIhom W K = (internalHomAdjunction₂.adj ((ihom K).obj W)).homEquiv K W
+      ((β_ ((ihom K).obj W) K).hom ≫
+        ((internalHomAdjunction₂.adj K).homEquiv _ _).symm (𝟙 _)) := by
+  rw [Adjunction.homEquiv_counit, CategoryTheory.Functor.map_id, Category.id_comp]
+  rfl
+
+private theorem product_eq_laxProduct
+    {C D : Type*} [Category C] [Category D] [MonoidalCategory C] [MonoidalCategory D]
+    {F : C ⥤ D} {G : D ⥤ C} (p : F ⊣ G) [F.OplaxMonoidal] (U V : D) :
+    letI := p.rightAdjointLaxMonoidal
+    p.homEquiv _ _ (Functor.OplaxMonoidal.δ F (G.obj U) (G.obj V) ≫
+      p.counit.app U ▷ F.obj (G.obj V)) ≫ G.map (U ◁ p.counit.app V) =
+        Functor.LaxMonoidal.μ G U V := by
+  let := p.rightAdjointLaxMonoidal
+  rw [← p.homEquiv_naturality_right, Adjunction.rightAdjointLaxMonoidal_μ]
+  congr 1
+  exact (Category.assoc _ _ _).trans
+    (congrArg (fun h ↦ Functor.OplaxMonoidal.δ F (G.obj U) (G.obj V) ≫ h)
+      (MonoidalCategory.tensorHom_def (p.counit.app U) (p.counit.app V)).symm)
+
+private theorem dualComparison_eq_curry
+    {C D : Type*} [Category C] [Category D] [MonoidalCategory C] [MonoidalCategory D]
+    [BraidedCategory C] [BraidedCategory D] [MonoidalClosed C] [MonoidalClosed D]
+    (G : C ⥤ D) [G.LaxBraided] {W : C} {W' : D} (e : G.obj W ⟶ W') (K : C) :
+    curry ((β_ (G.obj ((ihom K).obj W)) (G.obj K)).inv ≫
+      Functor.LaxMonoidal.μ G ((ihom K).obj W) K ≫
+      G.map ((β_ ((ihom K).obj W) K).hom ≫ (ihom.ev K).app W) ≫ e) =
+        dualComparison G e K := by
+  apply uncurry_injective
+  rw [uncurry_curry, G.map_comp]
+  simp only [Category.assoc]
+  rw [Functor.LaxBraided.braided_assoc, Iso.inv_hom_id_assoc]
+  rw [dualComparison, uncurry_natural_right, uncurry_eq,
+    Category.assoc, Functor.LaxMonoidal.ihomComparison_ev_assoc]
+
+private theorem dualComparison_naturality
+    {C D : Type*} [Category C] [Category D] [MonoidalCategory C] [MonoidalCategory D]
+    [BraidedCategory C] [BraidedCategory D] [MonoidalClosed C] [MonoidalClosed D]
+    (G : C ⥤ D) [G.LaxBraided] {W : C} {W' : D} (e : G.obj W ⟶ W')
+    {K L : C} (h : K ⟶ L) :
+    G.map ((pre h).app W) ≫ dualComparison G e K =
+      dualComparison G e L ≫ (pre (G.map h)).app W' := by
+  rw [dualComparison, dualComparison, ← Category.assoc,
+    Functor.LaxMonoidal.map_pre_app_comp_ihomComparison_app, Category.assoc,
+    pre_comm_ihom_map, Category.assoc]
+
+/-- Naturality, invertibility, and biduality compatibility of a traced dual comparison.
+Source: blueprint order 2123 (blueprint: lem-weil-delta-proper-pushforward). -/
+def TracedDualCompatibility
+    {C D : Type*} [Category C] [Category D] [MonoidalCategory C] [MonoidalCategory D]
+    [BraidedCategory C] [BraidedCategory D] [MonoidalClosed C] [MonoidalClosed D]
+    (G : C ⥤ D) [G.LaxBraided] {W : C} {W' : D} (t : G.obj W ⟶ W') : Prop :=
+  (∀ (K L : C) (h : K ⟶ L),
+    G.map ((pre h).app W) ≫ dualComparison G t K =
+      dualComparison G t L ≫ (pre (G.map h)).app W') ∧
+  (∀ K, IsIso (dualComparison G t K)) ∧
+  (∀ K, G.map (toIhomIhom W K) ≫ dualComparison G t ((ihom K).obj W) =
+    toIhomIhom W' (G.obj K) ≫ (pre (dualComparison G t K)).app W') ∧
+  (∀ K, IsIso (toIhomIhom W' (G.obj K)) → IsIso (G.map (toIhomIhom W K)))
+
+private theorem tracedDualCompatibility
+    {C D : Type*} [Category C] [Category D] [MonoidalCategory C] [MonoidalCategory D]
+    [BraidedCategory C] [BraidedCategory D] [MonoidalClosed C] [MonoidalClosed D]
+    (G : C ⥤ D) [G.LaxBraided] {W : C} {W' : D} (t : G.obj W ⟶ W')
+    (hθ : ∀ K, IsIso (dualComparison G t K)) : TracedDualCompatibility G t := by
+  refine ⟨fun _ _ h ↦ dualComparison_naturality G t h, hθ,
+    fun K ↦ map_toIhomIhom_comp_dualComparison G t K, ?_⟩
+  intro K hK
+  have := hθ K
+  have := hθ ((ihom K).obj W)
+  exact (isIso_map_toIhomIhom_iff G t K).2 hK
+
+end CategoryTheory.MonoidalClosed
+
 namespace AlgebraicGeometry.Etale
+
+attribute [local instance] derivedBraidedCategory
 
 section Evaluation
 
-variable (A : Type a) [Category.{u + 1} A] [Abelian A]
+variable (A : Type u') [Category.{u + 1} A] [Abelian A]
   [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A] [MonoidalPreadditive A]
   [SymmetricCategory A] [MonoidalClosed A] [Abelian.HasFunctorialFlatResolution A]
   (X : Scheme.{u})
@@ -94,9 +149,8 @@ Source: blueprint order 2123, third proof paragraph
 signed symmetry, and applies to every ambient object W and every unbounded K. -/
 noncomputable def ambientDoubleDualMap
     (W K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
-    K ⟶ (dualityDoubleFunctor (derivedHom A X) W).obj K :=
-  (derivedTensorHomAdjunction A (((derivedHom A X).obj (op K)).obj W)).homEquiv K W
-    (ambientDualEvaluation A X W K)
+    K ⟶ (ihom ((ihom K).obj W)).obj W :=
+  MonoidalClosed.toIhomIhom W K
 
 end Evaluation
 
@@ -182,7 +236,7 @@ noncomputable def properAmbientDualityTrace
 
 section Product
 
-variable (A : Type a) [Category.{u + 1} A] [Abelian A]
+variable (A : Type u') [Category.{u + 1} A] [Abelian A]
   [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A] [MonoidalPreadditive A]
   [SymmetricCategory A] [MonoidalClosed A] [Abelian.HasFunctorialFlatResolution A]
   [UpperStarPreservesFlat A] {X Y : Scheme.{u}} (f : X ⟶ Y)
@@ -202,6 +256,59 @@ noncomputable def ambientDirectImageProduct
 
 end Product
 
+section Comparison
+
+variable (A : Type u') [Category.{u + 1} A] [Abelian A]
+  [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A] [MonoidalPreadditive A]
+  [SymmetricCategory A] [MonoidalClosed A] [Abelian.HasFunctorialFlatResolution A]
+  [UpperStarPreservesFlat A] {X Y : Scheme.{u}} (f : X ⟶ Y)
+
+/-- The canonical internal-Hom comparison for direct image with a specified trace.
+Source: blueprint order 2123, pairing construction
+(blueprint: lem-weil-delta-proper-pushforward). -/
+noncomputable def ambientDirectImageDualComparison
+    {W : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
+    {W' : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)}
+    (t : (lowerStar A f).rightDerivedFunctor.obj W ⟶ W')
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    (lowerStar A f).rightDerivedFunctor.obj (((derivedHom A X).obj (op K)).obj W) ⟶
+      ((derivedHom A Y).obj (op ((lowerStar A f).rightDerivedFunctor.obj K))).obj W' :=
+  letI := leftDerivedUpperStarMonoidal A f
+  let p := derivedUpperStarLowerStarAdjunction A f
+  letI := p.rightAdjointLaxBraidedOfδ (leftDerivedUpperStar_map_braiding_hom_δ A f)
+  MonoidalClosed.dualComparison (lowerStar A f).rightDerivedFunctor t K
+
+/-- Compatibility for direct image with any specified dualizing trace.
+Source: blueprint order 2123 (blueprint: lem-weil-delta-proper-pushforward). -/
+def AmbientDirectImageDoubleDualCompatibility
+    {W : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
+    {W' : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)}
+    (t : (lowerStar A f).rightDerivedFunctor.obj W ⟶ W') : Prop :=
+  letI := leftDerivedUpperStarMonoidal A f
+  let p := derivedUpperStarLowerStarAdjunction A f
+  letI := p.rightAdjointLaxBraidedOfδ (leftDerivedUpperStar_map_braiding_hom_δ A f)
+  MonoidalClosed.TracedDualCompatibility (lowerStar A f).rightDerivedFunctor t
+
+private theorem ambientDirectImageDoubleDualCompatibility
+    [IsIso (rightDerivedLowerStarProjectionMap A f)]
+    {Q : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A) ⥤
+      _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
+    (q : (lowerStar A f).rightDerivedFunctor ⊣ Q)
+    {W : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
+    {W' : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)} (e : W ≅ Q.obj W') :
+    AmbientDirectImageDoubleDualCompatibility A f
+      ((lowerStar A f).rightDerivedFunctor.map e.hom ≫ q.counit.app W') := by
+  let := leftDerivedUpperStarMonoidal A f
+  let p := derivedUpperStarLowerStarAdjunction A f
+  let := p.rightAdjointLaxBraidedOfδ (leftDerivedUpperStar_map_braiding_hom_δ A f)
+  apply MonoidalClosed.tracedDualCompatibility
+  intro K
+  exact p.isIso_dualComparison_of_isIso_projection
+    (leftDerivedUpperStar_map_braiding_hom_δ A f) q e K
+    (fun T ↦ inferInstanceAs (IsIso (((rightDerivedLowerStarProjectionMap A f).app K).app T)))
+
+end Comparison
+
 /-- The ambient Verdier exchange, defined as the transpose of pushed-forward evaluation
 followed by trace. Source: blueprint order 2123, second proof paragraph
 (blueprint: lem-weil-delta-proper-pushforward). Its orientation is F DX to DY F. -/
@@ -214,17 +321,8 @@ noncomputable def properAmbientVerdierExchangeMap
         ((verdierDual (ModuleCat.{u + 1} Λ) (f ≫ g)).obj (op K)) ⟶
       (verdierDual (ModuleCat.{u + 1} Λ) g).obj
         (op ((lowerStar (ModuleCat.{u + 1} Λ) f).rightDerivedFunctor.obj K)) :=
-  (derivedTensorHomAdjunction (ModuleCat.{u + 1} Λ)
-    ((lowerStar (ModuleCat.{u + 1} Λ) f).rightDerivedFunctor.obj K)).homEquiv _ _
-    (((derivedTensorSymmetry (ModuleCat.{u + 1} Λ) Y).hom.app
-      ((lowerStar (ModuleCat.{u + 1} Λ) f).rightDerivedFunctor.obj K)).app
-        ((lowerStar (ModuleCat.{u + 1} Λ) f).rightDerivedFunctor.obj
-          ((verdierDual (ModuleCat.{u + 1} Λ) (f ≫ g)).obj (op K))) ≫
-      ambientDirectImageProduct (ModuleCat.{u + 1} Λ) f _ K ≫
-      (lowerStar (ModuleCat.{u + 1} Λ) f).rightDerivedFunctor.map
-        (ambientDualEvaluation (ModuleCat.{u + 1} Λ) X
-          (dualizingComplex (ModuleCat.{u + 1} Λ) (f ≫ g)) K) ≫
-      properAmbientDualityTrace Λ f g)
+  ambientDirectImageDualComparison (ModuleCat.{u + 1} Λ) f
+    (properAmbientDualityTrace Λ f g) K
 
 /-- Proper direct image carries the canonical double-dual arrow to the canonical
 one under its ambient exchange. Source: blueprint order 2123, final displayed comparison
@@ -237,32 +335,8 @@ def ProperAmbientDoubleDualCompatibility
     {X Y S : Scheme.{u}} (f : X ⟶ Y) [IsProper f] (g : Y ⟶ S)
     [HasCompactification g] [HasCompactification (f ≫ g)]
     [QuasiCompact (f ≫ g)] : Prop :=
-  (∀ (K L : DerivedCategoryModule Λ X) (h : K ⟶ L),
-    (lowerStar (ModuleCat.{u + 1} Λ) f).rightDerivedFunctor.map
-        ((verdierDual (ModuleCat.{u + 1} Λ) (f ≫ g)).map h.op) ≫
-        properAmbientVerdierExchangeMap Λ f g K =
-      properAmbientVerdierExchangeMap Λ f g L ≫
-        (verdierDual (ModuleCat.{u + 1} Λ) g).map
-          ((lowerStar (ModuleCat.{u + 1} Λ) f).rightDerivedFunctor.map h).op) ∧
-  (∀ K : DerivedCategoryModule Λ X, IsIso (properAmbientVerdierExchangeMap Λ f g K)) ∧
-  (∀ K : DerivedCategoryModule Λ X,
-    (lowerStar (ModuleCat.{u + 1} Λ) f).rightDerivedFunctor.map
-        (ambientDoubleDualMap (ModuleCat.{u + 1} Λ) X
-          (dualizingComplex (ModuleCat.{u + 1} Λ) (f ≫ g)) K) ≫
-        properAmbientVerdierExchangeMap Λ f g
-          ((verdierDual (ModuleCat.{u + 1} Λ) (f ≫ g)).obj (op K)) =
-      ambientDoubleDualMap (ModuleCat.{u + 1} Λ) Y
-          (dualizingComplex (ModuleCat.{u + 1} Λ) g)
-          ((lowerStar (ModuleCat.{u + 1} Λ) f).rightDerivedFunctor.obj K) ≫
-        (verdierDual (ModuleCat.{u + 1} Λ) g).map
-          (properAmbientVerdierExchangeMap Λ f g K).op) ∧
-  (∀ K : DerivedCategoryModule Λ X,
-    IsIso (ambientDoubleDualMap (ModuleCat.{u + 1} Λ) Y
-      (dualizingComplex (ModuleCat.{u + 1} Λ) g)
-      ((lowerStar (ModuleCat.{u + 1} Λ) f).rightDerivedFunctor.obj K)) →
-    IsIso ((lowerStar (ModuleCat.{u + 1} Λ) f).rightDerivedFunctor.map
-      (ambientDoubleDualMap (ModuleCat.{u + 1} Λ) X
-        (dualizingComplex (ModuleCat.{u + 1} Λ) (f ≫ g)) K)))
+  AmbientDirectImageDoubleDualCompatibility (ModuleCat.{u + 1} Λ) f
+    (properAmbientDualityTrace Λ f g)
 
 /-- The canonical ambient exchange for proper direct image identifies the two double-dual
 arrows on arbitrary complexes; invertibility of delta after direct image implies
@@ -270,33 +344,23 @@ invertibility of the direct image of delta. Source: blueprint order 2123
 (blueprint: lem-weil-delta-proper-pushforward).
 
 Proof:
-1. A finite-type scheme over the field is Noetherian, by pqf-lem-locnoeth-lft and finite
-   affine covers. The same holds for the proper parts of its compactifications. Use
-   thm-amb-etale-exceptional-adjoint for the three ambient right adjoints. Use the
-   unbounded proper/open compactification composition of
-   lem-sf-unbounded-compact-support-proper-composition, not bounded-below composition.
-2. Compose the adjunctions and take their canonical mate at the coefficient unit.
-   This gives f-times omega-Y = omega-X and the transported counit t used above.
-3. By lem-weil-pbc-ringed-internal-hom-exact-restriction and lem-pur-rhom-global-sections,
-   tensor-Hom adjunction applies to arbitrary complexes. By lem-weil-duality-pairing,
-   delta is the transpose of signed evaluation, with its double-evaluation equation.
-4. Define mu by the ordinary inverse-image counit and def-kun-projection-formula-map.
-   For a test Q, the chain of adjunctions and the invertible proper projection map of
-   lem-amb-proper-coproducts-projection identifies Hom(Q,F DXK) with Hom(Q,DY FK).
-   Tracing a test arrow through these bijections gives precisely the pairing
-   t composed with F(e_K) composed with mu. Thus its transpose is the canonical
-   exchange of prop-asd-internal-adjunction and is invertible.
-5. Counit naturality and lem-kun-inverse-image-monoidal give naturality of mu.
-   Transposing also proves mu composed with the signed symmetry equals the image
-   of the signed symmetry composed with mu, using lem-kun-tensor-sym.
-6. Transpose the two sides of the displayed square. By naturality of mu, the
-   double-evaluation identity and symmetry, both are b_K composed with symmetry,
-   where b_K = t F(e_K) mu. Tensor-Hom adjunction is injective, so the square commutes.
-7. The two exchange maps are invertible independently of biduality. The contravariant
-   DY preserves inverse pairs. Inverting DY(theta_K) identifies F DDXK with DDY FK,
-   and the square says this identification carries F(delta_K) to delta_(FK).
-   If the latter is invertible, so is F(delta_K). This does not assert that F reflects
-   isomorphisms. No constructible exceptional-adjoint or geometric biduality is used.
+1. Transport the exceptional adjunction across properAmbientShriekStarIso. The
+   canonical mate properAmbientDualizingIso identifies the two dualizing objects;
+   its inverse followed by the exceptional counit is properAmbientDualityTrace.
+2. Use the existing monoidal pullback and its compatibility with the descended
+   braiding. Its right adjoint is lax braided. The product is the projection map
+   followed by the ordinary counit, as verified by product_eq_laxProduct.
+3. The generic dual comparison is the transpose of pushed-forward signed evaluation,
+   by dualComparison_eq_curry. The double-dual normalization is verified before
+   specialization by doubleDual_eq_transpose. Thus the canonical closed-category
+   maps give the specified evaluation and exchange.
+4. The unbounded finite-coefficient proper projection theorem makes every projection
+   component invertible. Apply isIso_dualComparison_of_isIso_projection to the
+   transported exceptional adjunction and the inverse dualizing isomorphism.
+5. Naturality follows from the internal-Hom comparison and precomposition identities.
+   Apply map_toIhomIhom_comp_dualComparison for the uninverted double-dual square.
+   Apply isIso_map_toIhomIhom_iff using the comparisons at K and at its dual for the
+   final implication. No geometric biduality or reflection of isomorphisms is used.
 -/
 theorem proper_ambient_double_dual_compatibility
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
@@ -305,6 +369,15 @@ theorem proper_ambient_double_dual_compatibility
     (aY : Y ⟶ Spec (.of k))
     [IsSeparated aY] [LocallyOfFiniteType aY] [QuasiCompact aY] :
     ProperAmbientDoubleDualCompatibility Λ f aY := by
-  sorry
+  have := isIso_rightDerivedLowerStarProjectionMap_of_finite Λ f
+  change AmbientDirectImageDoubleDualCompatibility (ModuleCat.{u + 1} Λ) f
+    (properAmbientDualityTrace Λ f aY)
+  unfold properAmbientDualityTrace
+  exact ambientDirectImageDoubleDualCompatibility (ModuleCat.{u + 1} Λ) f
+    (Q := rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f)
+    (W := dualizingComplex (ModuleCat.{u + 1} Λ) (f ≫ aY))
+    (W' := dualizingComplex (ModuleCat.{u + 1} Λ) aY)
+    ((rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f).ofNatIsoLeft
+      (properAmbientShriekStarIso Λ f)) (properAmbientDualizingIso Λ f aY).symm
 
 end AlgebraicGeometry.Etale
