@@ -29,19 +29,6 @@ attribute [local irreducible] Scheme.Modules.tensorPullback
   schemeHomPullbackAdjunction
   CategoryTheory.Functor.rightDerivedFunctor CategoryTheory.Functor.rightDerivedFunctorUnit
   CategoryTheory.Adjunction.comp DerivedCategory.Qh
-private theorem mate_transpose
-    {C D : Type*} [Category* C] [Category* D]
-    {L₁ L₂ : C ⥤ D} {R₁ R₂ : D ⥤ C}
-    (a₁ : L₁ ⊣ R₁) (a₂ : L₂ ⊣ R₂) (α : L₂ ⟶ L₁)
-    {M : C} {K : D} (β : M ⟶ R₁.obj K) (γ : M ⟶ R₂.obj K)
-    (h : α.app M ≫ L₁.map β ≫ a₁.counit.app K =
-      L₂.map γ ≫ a₂.counit.app K) :
-    β ≫ (conjugateEquiv a₁ a₂ α).app K = γ := by
-  apply (a₂.homEquiv M K).symm.injective
-  simp only [Adjunction.homEquiv_symm_apply, Functor.map_comp, Category.assoc]
-  rw [conjugateEquiv_counit, ← Category.assoc, α.naturality, Category.assoc]
-  exact h
-
 private theorem mate_transpose_to
     {C D : Type*} [Category* C] [Category* D]
     {L₁ L₂ : C ⥤ D} {R₁ R₂ : D ⥤ C}
@@ -49,11 +36,11 @@ private theorem mate_transpose_to
     {M : C} {K : D} (β : M ⟶ R₁.obj K) (δ : L₂.obj M ⟶ K)
     (h : α.app M ≫ L₁.map β ≫ a₁.counit.app K = δ) :
     β ≫ (conjugateEquiv a₁ a₂ α).app K = a₂.homEquiv M K δ := by
-  apply mate_transpose a₁ a₂ α
-  have hδ : L₂.map ((a₂.homEquiv M K) δ) ≫ a₂.counit.app K = δ := by
-    simpa only [Adjunction.homEquiv_symm_apply] using
-      (a₂.homEquiv M K).symm_apply_apply δ
-  exact h.trans hδ.symm
+  apply (a₂.homEquiv M K).symm.injective
+  simp only [Equiv.symm_apply_apply, Adjunction.homEquiv_symm_apply,
+    Functor.map_comp, Category.assoc]
+  rw [conjugateEquiv_counit, ← Category.assoc, α.naturality, Category.assoc]
+  exact h
 
 variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
