@@ -12,18 +12,13 @@ public import Sheaf.AlgebraicGeometry.ProEtaleOperations
 public import Sheaf.AlgebraicGeometry.ProEtaleModuleStalkFunctor
 public import Sheaf.Paper.ProEtaleLocallyConstantSheafOfUniverses
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tensor
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
-import Sheaf.Paper.ProEtaleConstantModulePullbackHomology
-import Sheaf.SixFunctors.GeometricInverseImageConstantModule
-import Sheaf.Paper.ProEtaleBoundedConstructibleTriangulated
-import Sheaf.AlgebraicGeometry.ProEtaleConstantSheafStalk
+import Sheaf.Algebra.Homology.KFlatResolutionGeneral
+import Sheaf.Paper.RestrictedScalarCoefficientLocalConstancy
+import Sheaf.Paper.ProEtaleFiniteUnderlyingModels
+import Sheaf.Paper.ProEtaleFiniteActionLocalModels
 import Sheaf.Paper.ProEtaleRestrictedTensorFiniteLocalConstancy
-import Sheaf.Paper.RestrictionDerivedProducts
-import Sheaf.CategoryTheory.ConstantLeftModuleInverseImage
-import Sheaf.CategoryTheory.FiniteRingActionLocalConstancy
-import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
+import all Sheaf.Paper.ProEtaleBoundedConstructibleTriangulated
+import Mathlib.Algebra.Homology.SingleHomology
 
 /-! # Finite local models for restricted scalar-extension cohomology
 
@@ -87,34 +82,28 @@ Source: Stacks Project, Tags 094H and 093S; blueprint scalar-extension proof (2)
 (blueprint: lem-sp-restricted-scalar-cohomology-local-constancy).
 
 Proof:
-1. Choose a K-flat resolution of a representative of K (lem-pc-kflat-resolution).
-The cochain model of derived change of rings (lem-pur-derived-change-of-rings)
-computes K_B by tensoring this resolution with B_T, retaining the right B-action.
-Restricting scalars gives the usual derived tensor with Res(B_T)[0]
-(def-weil-derived-tensor, def-pc-sheaf-restrict-scalars).
-2. Exact constant-coefficient pullback commutes with cohomology and upper bounds
-(lem-pur-proetale-constant-module-pullback-homology). The second tensor input has
-only constant cohomology B in degree zero: use
-lem-sfb-geometric-inverse-image-constant-module and
-lem-pur-proetale-constant-coefficient-comparison. Its stalks are finite by
-lem-weil-proetale-constant-sheaf-stalk; zero cohomology has the zero model.
-3. Apply lem-pur-proetale-restricted-tensor-finite-local-constancy. It gives
-locally constant A-module cohomology with finite stalks after restriction.
-4. Exact scalar restriction commutes with cohomology
-(lem-weil-pbc-restriction-derived-products). Both coefficient pullbacks have the
-same underlying abelian inverse image (lem-pe-constant-left-module-inverse-image),
-using the canonical coefficient comparisons of step 2. Thus their underlying
-set sheaves are isomorphic; no flatness of B over A is required.
-5. Choose constant A-module models on a cover. On nonempty covering members,
-choose a geometric point: lem-weil-proetale-weakly-etale-localization and
-lem-weil-proetale-constant-sheaf-stalk identify the model with its finite stalk.
-Pointed neighbourhoods mapping to a covering member are cofinal by fibre products
-(def-weil-proetale-geometric-stalk). On empty members use the zero module.
-Pulling the cover back to each site object gives finite constant set models.
-6. Apply lem-sp-finite-ring-action-local-constancy with the finite ring B.
-Refine to make its finite operation tables constant; this yields finite B-module
-models and B-linear isomorphisms on localized ringed sites. Do this separately
-for each q, so neither a common cover nor a lower cohomological bound is required. -/
+1. Choose a cochain representative of K and a K-flat resolution P. Localization
+and quasi-isomorphism give Q(P) ≅ K. Compare the cohomology in the chosen source
+localization universe with ordinary cochain homology of P.
+2. The restricted coefficient complex L = Res(B_T)[0] has finite locally constant
+cohomology after arbitrary pullback, by the constant coefficient calculation in
+lem-sp-restricted-scalar-coefficient-local-constancy. It vanishes above degree zero.
+Transport the hypotheses on K to P. Exact coefficient pullback transports the bounds.
+3. Apply lem-pur-proetale-restricted-tensor-finite-local-constancy to P, L and the
+identity K-flat resolution of P. This gives local constancy over A_X and finite stalks.
+4. The K-flat counit, the underlying ordinary tensor comparison, and exactness of
+forgetting to abelian sheaves identify scalar-extension and tensor cohomology.
+Both coefficient pullbacks have the same underlying set inverse image. This is
+lem-sp-restricted-scalar-tensor-cohomology-comparison, with independent localization
+universes retained. Compose with the image of Q(P) ≅ K.
+5. Apply lem-sp-proetale-finite-underlying-models to the tensor cohomology. Finite
+stalks give finite local models, with empty covering members included; base change
+gives covering presieves on every site object. Transport these set models by step 4.
+6. Apply lem-sp-proetale-finite-action-local-models. The finite-operation theorem
+refines the B-action to finite constant B-module models. The constant-scalar
+comparison identifies restricted global constants with the required localized
+module construction. Every argument is for fixed q, so no common cover or lower
+cohomological bound is imposed. -/
 theorem restrictedScalarCohomology_finiteLocalModels
     {T X : Scheme.{u}} (a : X ⟶ T)
     {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B] (f : A →+* B)
@@ -143,6 +132,73 @@ theorem restrictedScalarCohomology_finiteLocalModels
               (ProEt.topology T)
               ((ULift.ringEquiv : ULift.{u + 1, u} B ≃+* B).symm.toRingHom.comp
                 (f.comp (ULift.ringEquiv : ULift.{u + 1, u} A ≃+* A).toRingHom))).obj K))) := by
-  sorry
+  classical
+  let 𝒜 := proEtaleRingModules T (proEtaleConstantRing T A)
+  let ℬ := proEtaleRingModules T (proEtaleConstantRing T B)
+  let D := Classical.choice
+    (SheafOfModules.nonempty_derivedChangeOfRingsCochainModel.{u + 1, u, u + 1, wA, wB}
+      (restrictedScalarRingMap T f))
+  change IsLocallyConstantProEtaleModuleSheafWithModelsOfUniverses.{u, u}
+    X B (fun M ↦ Finite M)
+      (proEtaleConstantModulePullback a B
+        ((DerivedCategory.homologyFunctor ℬ q).obj (D.T.obj K)))
+  let G := DerivedCategory.Q.objPreimage K
+  obtain ⟨P, p, hP, _hflat, hp, _hepi⟩ := CochainComplex.exists_isKFlatResolutionGeneral G
+  have := hp
+  let eK : DerivedCategory.Q.obj P ≅ K :=
+    asIso (DerivedCategory.Q.map p) ≪≫ DerivedCategory.Q.objObjPreimageIso K
+  let HK (j : ℤ) := (DerivedCategory.homologyFunctor 𝒜 j).obj K
+  let eH (j : ℤ) : P.homology j ≅ HK j :=
+    ((DerivedCategory.homologyFunctorFactors 𝒜 j).app P).symm ≪≫
+      (DerivedCategory.homologyFunctor 𝒜 j).mapIso eK
+  let L := restrictedScalarCoefficientComplex T f
+  have ht : IsLocallyConstantProEtaleModuleSheaf X A
+      (proEtaleConstantModulePullback a A (restrictedScalarTensorCohomology T f P hP q)) ∧
+      ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ X),
+        Finite (proEtaleGeometricModuleStalk x (proEtaleConstantRing X A)
+          (proEtaleConstantModulePullback a A
+            (restrictedScalarTensorCohomology T f P hP q))) := by
+    let := HasDerivedCategory.standard 𝒜
+    let e (j : ℤ) := (DerivedCategory.homologyFunctorFactors 𝒜 j).app P ≪≫ eH j
+    have hPb : ∃ b : ℤ, ∀ j : ℤ, b < j → IsZero
+        ((DerivedCategory.homologyFunctor 𝒜 j).obj (DerivedCategory.Q.obj P)) := by
+      obtain ⟨b, hb⟩ := hKb
+      exact ⟨b, fun j hj ↦ (hb j hj).of_iso (e j)⟩
+    have hLb : ∃ b : ℤ, ∀ j : ℤ, b < j → IsZero
+        ((DerivedCategory.homologyFunctor 𝒜 j).obj (DerivedCategory.Q.obj L)) := by
+      refine ⟨0, fun j hj ↦ ?_⟩
+      exact (HomologicalComplex.isZero_single_obj_homology (.up ℤ) 0 _ j
+        (ne_of_gt hj)).of_iso ((DerivedCategory.homologyFunctorFactors 𝒜 j).app L)
+    apply proEtale_restrictedTensor_finiteLocalConstancy a A P L P (𝟙 P)
+      (by infer_instance) hP
+      (proEtaleConstantModulePullback_boundedAbove a A P hPb)
+      (proEtaleConstantModulePullback_boundedAbove a A L hLb)
+    · intro j _
+      let e' := (proEtaleConstantModulePullbackFunctor a A).mapIso (e j)
+      obtain ⟨hl, hs⟩ := hK j
+      refine ⟨locallyConstant_of_iso X A e'.symm ?_, fun Ω _ _ x ↦ ?_⟩
+      · obtain ⟨I, U, g, hg, he⟩ := hl
+        exact ⟨I, U, g, hg, fun i ↦ ⟨(he i).choose, (he i).choose_spec.2⟩⟩
+      · let : Finite (proEtaleGeometricModuleStalk x (proEtaleConstantRing X A)
+          ((proEtaleConstantModulePullbackFunctor a A).obj (HK j))) := hs Ω x
+        exact finite_stalk_of_iso X A e'.symm x
+    · intro j _
+      exact restrictedScalarCoefficient_finiteLocalConstancy a f j
+  have hl : IsLocallyConstantProEtaleModuleSheafOfUniverses.{u, u} X A
+      (proEtaleConstantModulePullback a A (restrictedScalarTensorCohomology T f P hP q)) := by
+    obtain ⟨I, U, g, hg, he⟩ := ht.1
+    exact ⟨I, U, g, hg, fun i ↦ ⟨(he i).choose, trivial, (he i).choose_spec⟩⟩
+  have hsets := proEtale_finiteUnderlyingModels_of_locallyConstant X A _ hl ht.2
+  let V := sheafCompose (ProEt.topology X) (CategoryTheory.forget AddCommGrpCat.{u + 1})
+  let e := V.mapIso ((SheafOfModules.toSheaf _).mapIso
+    ((proEtaleConstantModulePullbackFunctor a B).mapIso
+      ((DerivedCategory.homologyFunctor ℬ q).mapIso (D.T.mapIso eK).symm))) ≪≫
+        (restrictedScalarTensorCohomologyComparison a f D P hP q).some
+  apply proEtale_finiteLocalModels_of_finiteUnderlying X B
+  intro U
+  obtain ⟨S, hS, hs⟩ := hsets U
+  refine ⟨S, hS, fun W g hg ↦ ?_⟩
+  obtain ⟨Z, hZ, ⟨eZ⟩⟩ := hs W g hg
+  exact ⟨Z, hZ, ⟨((ProEt.topology X).overPullback (Type (u + 1)) W).mapIso e ≪≫ eZ⟩⟩
 
 end AlgebraicGeometry.Scheme

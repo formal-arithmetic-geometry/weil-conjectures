@@ -21,104 +21,65 @@
  ],
  "proof": [
   {
-   "text": "Choose a cochain representative $C^\\bullet$ of $K$ and a K-flat resolution $P^\\bullet\\to C^\\bullet$ by [lem-pc-kflat-resolution]. Put $L^\\bullet=\\operatorname{Res}_{A_T\\to B_T}(B_T)[0]$. By [lem-pur-derived-change-of-rings], the complex $D^\\bullet=P^\\bullet\\otimes_{A_T}B_T$, with right-factor $B_T$-action, represents $K_B$ in $D(B_T)$. After restricting scalars, this is exactly the tensor complex computing $K\\otimes_{A_T}^{\\mathbf L}L^\\bullet$ by [def-weil-derived-tensor]: forgetting the right-factor action does not change any term or differential [def-pc-sheaf-restrict-scalars].",
+   "text": "Choose a cochain representative G of K and a K-flat quasi-isomorphism P→G. The localization gives Q(P)≅K. Its cohomology gives isomorphisms H^j(P)≅H^j(K) independently of the chosen localization universe. Use P itself as the first complex and its own K-flat resolution.",
    "uses": [
     "lem-pc-kflat-resolution",
-    "lem-pur-derived-change-of-rings",
-    "def-weil-derived-tensor",
-    "def-pc-sheaf-restrict-scalars"
+    "lem-pur-derived-change-of-rings"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YS (lemma-K-flat-resolution) and 06YY (lemma-derived-base-change); K-flat computation with the right-factor action"
-   }
+   "elementary": false
   },
   {
-   "text": "Let $b$ be an upper cohomological bound for $K$. By [lem-pur-proetale-constant-module-pullback-homology], the termwise pullback of $C^\\bullet$ has cohomology $a_A^*\\mathcal H^j(K)$ and vanishes for $j>b$. The same lemma applies to $L^\\bullet$, whose only possibly nonzero cohomology is the constant $A$-module sheaf with value $B$ in degree zero. Its pullback is the constant $A_X$-module with value $B$ by [lem-sfb-geometric-inverse-image-constant-module]; the canonical coefficient identification for the actual pullback is [lem-pur-proetale-constant-coefficient-comparison]. This is locally constant and its geometric stalks are $B$, hence finite, by [lem-weil-proetale-constant-sheaf-stalk]. The zero cohomology sheaves have zero constant models and finite zero stalks. Thus both inputs meet every bounded-above and local-constancy hypothesis of the restricted tensor lemma.",
+   "text": "Set L=Res(B_T)[0]. The coefficient-complex lemma gives locally constant pulled-back cohomology with finite stalks. Single-complex homology gives the upper bound zero. Transport the input hypotheses and bound from K to P. Exact coefficient pullback gives the required termwise bounds.",
    "uses": [
-    "lem-pur-proetale-constant-module-pullback-homology",
-    "lem-sfb-geometric-inverse-image-constant-module",
-    "lem-pur-proetale-constant-coefficient-comparison",
-    "lem-weil-proetale-constant-sheaf-stalk"
+    "lem-sp-restricted-scalar-coefficient-local-constancy",
+    "lem-pur-proetale-constant-module-pullback-homology"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 094H (lemma-locally-constant-tensor-product), input hypotheses; sites.tex Tags 0H7J and 00YV for constant-module inverse image"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lem-pur-proetale-restricted-tensor-finite-local-constancy] with the scheme morphism $a$, the finite ring $A$, the complexes $C^\\bullet,L^\\bullet$, and the chosen acyclic-tensor K-flat resolution $P^\\bullet\\to C^\\bullet$. Step 2 checks its upper bounds and the hypotheses for each nonzero input cohomology; for $C^\\bullet$ these are precisely the hypotheses on $K$. For every $q$, its conclusion and the computation in step 1 give local constancy as an $A_X$-module and finite geometric stalks for $F_q=a_A^*\\mathcal H^q(\\operatorname{Res}D^\\bullet)$.",
+   "text": "Apply the existing restricted tensor finite-local-constancy theorem to P,L and the identity resolution of P. Its conclusion is local constancy and finite stalks for the A-module pullback of each tensor cohomology sheaf.",
    "uses": [
     "lem-pur-proetale-restricted-tensor-finite-local-constancy"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 094H (lemma-locally-constant-tensor-product) and 07A4 (lemma-pullback-tensor-product), specialized to the second factor B_T[0]"
-   }
+   "elementary": false
   },
   {
-   "text": "Write $E_q=a_B^*\\mathcal H^q(K_B)$. We identify the underlying abelian sheaves of $E_q$ and $F_q$. Exact scalar restriction [lem-weil-pbc-restriction-derived-products] gives $\\mathcal H^q(\\operatorname{Res}D^\\bullet)=\\operatorname{Res}\\mathcal H^q(D^\\bullet)$: both are the kernel of the same differential modulo the image of the same preceding differential, with the action restricted. By [lem-pe-constant-left-module-inverse-image], forgetting scalars from either the $A$- or the $B$-module inverse image gives $a^{-1}_{\\operatorname{Ab}}$ of that same underlying abelian sheaf. These are the actual pullbacks used here because [lem-pur-proetale-constant-coefficient-comparison] makes both canonical maps $c_A^a,c_B^a$ invertible; tensoring along such an isomorphism merely identifies the coefficient ring. Together with step 1, this gives $|E_q|\\simeq|F_q|$ as sheaves of sets. This comparison requires no flatness of $B$ over $A$.",
+   "text": "The proved K-flat scalar/tensor cohomology comparison identifies its underlying set sheaf with the B-module pullback of scalar-extension cohomology. Compose with the image of Q(P)≅K under the chosen derived extension, cohomology and pullback functors.",
    "uses": [
-    "lem-weil-pbc-restriction-derived-products",
-    "lem-pe-constant-left-module-inverse-image",
-    "lem-pur-proetale-constant-coefficient-comparison"
+    "lem-sp-restricted-scalar-tensor-cohomology-comparison"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 00YV (proposition-functoriality-algebraic-structures-topoi), underlying abelian inverse image; exact scalar restriction on kernels and images"
-   }
+   "elementary": false
   },
   {
-   "text": "Choose a covering $\\{U_t\\to X\\}$ and constant $A$-module models $N_t$ for $F_q$ by [def-weil-proetale-locally-constant-sheaf]. If $U_t$ is nonempty, choose a geometric point $\\bar u$ of it. By [lem-weil-proetale-weakly-etale-localization] the localized site $X_{\\mathrm{proet}}/U_t$ with ring $A_X|_{U_t}$ is identified with $(U_t)_{\\mathrm{proet}}$ with ring $A_{U_t}$, so the constant module sheaf of $N_t$ on the localized site is the constant module sheaf of $N_t$ on $(U_t)_{\\mathrm{proet}}$ (the same sheafification, transported along the identification of sites), and pointed neighbourhoods of $\\bar u$ in the two sites correspond. The constant-module germ isomorphism [lem-weil-proetale-constant-sheaf-stalk] on $(U_t)_{\\mathrm{proet}}$ then identifies $N_t$ with the stalk there of $F_q|_{U_t}$, which is the stalk of $F_q$ at the composite point of $X$ and is finite by step 3. The restriction-stalk identification follows directly from [def-weil-proetale-geometric-stalk]: pointed neighbourhoods admitting a map to $U_t$ are cofinal, since any pointed neighbourhood can be refined by its fibre product with $U_t$. On an empty $U_t$ replace the model by the zero module. Thus every $N_t$ can be taken finite. Pulling this cover back to any object of the site gives the objectwise finite locally constant set condition. Step 4 gives that condition for $|E_q|$ as well.",
+   "text": "The finite-underlying-model lemma converts tensor cohomology local constancy and finite stalks into objectwise finite constant set models. Transport each model through the preceding isomorphism.",
    "uses": [
-    "lem-weil-proetale-weakly-etale-localization",
-    "def-weil-proetale-locally-constant-sheaf",
-    "lem-weil-proetale-constant-sheaf-stalk",
-    "def-weil-proetale-geometric-stalk"
+    "lem-sp-proetale-finite-underlying-models"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Definition 093Q (definition-locally-constant); finite local values from constant germs, with the empty covering member treated separately"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lem-sp-finite-ring-action-local-constancy] on the chosen small pro-étale site of $X$, to the finite commutative ring $\\Lambda=B$ and the $B_X$-module sheaf $E_q$. Step 5 supplies its hypothesis on the underlying set sheaf. Its conclusion, applied to the final object $X$, is a covering $\\{V_{q,t}\\to X\\}_t$ and finite $B$-modules $M_{q,t}$ with $E_q|_{V_{q,t}}\\simeq\\underline{M_{q,t}}$ as module sheaves on the localized sites. This is the stated conclusion. The argument is for a fixed arbitrary $q$, so it imposes no common cover over all degrees and no lower cohomological bound.",
+   "text": "Apply the finite-action/localized-model bridge to the actual B-module sheaf. This produces finite B-module models of precisely the required localized construction. The argument is for arbitrary fixed q, with no uniform cover or lower bound.",
    "uses": [
-    "lem-sp-finite-ring-action-local-constancy"
+    "lem-sp-proetale-finite-action-local-models"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 093S (lemma-morphism-locally-constant), finite-action refinement giving target-ring module models"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "lem-pc-kflat-resolution",
   "lem-pur-derived-change-of-rings",
-  "def-weil-derived-tensor",
-  "def-pc-sheaf-restrict-scalars",
+  "lem-sp-restricted-scalar-coefficient-local-constancy",
   "lem-pur-proetale-constant-module-pullback-homology",
-  "lem-sfb-geometric-inverse-image-constant-module",
-  "lem-pur-proetale-constant-coefficient-comparison",
-  "lem-weil-proetale-constant-sheaf-stalk",
   "lem-pur-proetale-restricted-tensor-finite-local-constancy",
-  "lem-weil-pbc-restriction-derived-products",
-  "lem-pe-constant-left-module-inverse-image",
-  "def-weil-proetale-locally-constant-sheaf",
-  "def-weil-proetale-geometric-stalk",
-  "lem-sp-finite-ring-action-local-constancy",
-  "lem-weil-proetale-weakly-etale-localization"
+  "lem-sp-restricted-scalar-tensor-cohomology-comparison",
+  "lem-sp-proetale-finite-underlying-models",
+  "lem-sp-proetale-finite-action-local-models"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 094H and 07A4 via the existing restricted-tensor lemma; sites.tex Tag 00YV for underlying inverse image and sites-modules.tex Tag 093S for the finite B-action refinement"
+  "place": "Tags 094H, 06YY and 06YU; sites-modules.tex Tag 093S",
+  "note": "G8 Lean proof keeps the original six-step tensor and finite-action route. Explicit proved bridges preserve independent localization universes and identify the two constant-module constructions on slices."
  },
  "mathlib_searches": [
   {
@@ -265,13 +226,7 @@
   "lem-pc-kflat-resolution",
   "lem-pur-derived-change-of-rings",
   "lem-pur-proetale-constant-module-pullback-homology",
-  "lem-sfb-geometric-inverse-image-constant-module",
-  "lem-pur-proetale-constant-coefficient-comparison",
-  "lem-weil-proetale-constant-sheaf-stalk",
-  "lem-pur-proetale-restricted-tensor-finite-local-constancy",
-  "lem-weil-pbc-restriction-derived-products",
-  "lem-pe-constant-left-module-inverse-image",
-  "lem-weil-proetale-weakly-etale-localization"
+  "lem-pur-proetale-restricted-tensor-finite-local-constancy"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -303,5 +258,15 @@
   "group": "Q48",
   "result": "pass",
   "note": "Re-delivery after the b6fbd77 RETURN (H13 F1/F2); both repaired as prescribed. All 10 stmt_dep records are byte-identical to live and the item node adds only its lean record. The universe-general constantCoefficientScalarExtensionOfUniverses is now in the item module and listed in declarations; NK's record is untouched. N5's def-weil-derived-cohomology-sheaves record is untouched and a lean.note on the item explains the direct use of homologyFunctor. Statement re-checked clause by clause: arbitrary a, finite comm rings, unital f, ordinary derived categories (wA/wB), bounded above via hKb, every-j local constancy plus finite geometric stalks, K_B via a canonical cochain-model .T (universal left-derived, K-flat counit iso, so not arbitrary), and for every q a cover with finite B-module models; no extra hypotheses. Edge cases checked: empty X, K=0, B=0, A=B, non-flat Z/4->F2, negative q. lean.statement is verbatim; sorry appears only as the theorem's proof; source/blueprint docstrings present with 6 proof steps. The -instance removal affects only Prop instances and is scoped to the theorem. nt_compile --json 32.0 s rc 0, no warnings. Advisory H9: private proof-plan imports are unused by the statement."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G8",
+  "result": "pass",
+  "landing": "20261021T151116-L-1132301",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

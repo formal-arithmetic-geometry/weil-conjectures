@@ -1,0 +1,149 @@
+{
+ "id": "lem-sp-restricted-scalar-tensor-cohomology-comparison",
+ "kind": "statement",
+ "title": "Underlying cohomology comparison for K-flat scalar extension",
+ "statement": "Let a:X→T be any scheme morphism, f:A→B any map of commutative rings, and P a K-flat cochain complex of intrinsic modules over the constant ring A_T [def-weil-pbc-proetale-site, def-weil-pbc-constant-sheaf, def-pc-kflat-complex]. Let D be any prescribed cochain universal model of derived extension along f, with independently chosen source and target localization universes [lem-pur-derived-change-of-rings]. Let L be the restricted regular B_T-module in degree zero, and compute the intrinsic tensor P tensor L using P itself [def-weil-derived-tensor]. For each integer q, the underlying set sheaves of a_B^* H^q(D.T(QP)) and a_A^* H^q(P tensor L) are isomorphic [def-weil-derived-cohomology-sheaves, def-weil-proetale-inverse-image]. No finiteness or boundedness is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY and 06YU; sites.tex Tag 00YV; sites-modules.tex Tags 03CY and 03DA"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-pc-kflat-complex",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-derived-tensor",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-proetale-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "The K-flat counit computes derived extension by the actual termwise ordinary extension. Its objects and maps are specified by the cochain model.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "def-pc-kflat-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The proved independent-coefficient underlying tensor comparison identifies the underlying abelian sheaf of extension of M with Res(B_T) tensor M, naturally in M. Compose its components with D.obj_eq; use D.map_eq for naturality. Symmetry exchanges the factors. The tensor-with-single-complex isomorphism identifies the resulting termwise tensor with the intrinsic total tensor P tensor L.",
+   "uses": [
+    "lem-pur-change-of-rings-tensor-comparison",
+    "lem-pur-derived-change-of-rings",
+    "def-weil-derived-tensor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the exact underlying-abelian-sheaf functors to the cochain comparison. Their homology comparison and the two localization/homology factorizations identify underlying cohomology. The source-derived universe is independent of the standard universe of the tensor, because both compare with ordinary cochain homology.",
+   "uses": [
+    "def-weil-derived-cohomology-sheaves"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For either coefficient ring the canonical coefficient map is invertible. The scalar-extension ring-isomorphism theorem identifies its final scalar extension with restriction along the inverse, preserving the underlying sheaf. Compare the original and independent-coefficient scalar-extension presheaves by the identity on pure tensors. The existing unit-normalized underlying-set inverse-image identification then identifies module pullback with set inverse image. Apply set inverse image to the preceding cohomology isomorphism and compose.",
+   "uses": [
+    "lem-pur-proetale-constant-coefficient-comparison",
+    "lem-weil-sheaf-scalar-extension-ring-iso",
+    "lem-pur-proetale-inverse-image-tensor-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-derived-change-of-rings",
+  "def-pc-kflat-complex",
+  "lem-pur-change-of-rings-tensor-comparison",
+  "def-weil-derived-tensor",
+  "def-weil-derived-cohomology-sheaves",
+  "lem-pur-proetale-constant-coefficient-comparison",
+  "lem-weil-sheaf-scalar-extension-ring-iso",
+  "lem-pur-proetale-inverse-image-tensor-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY and 06YU; sites.tex Tag 00YV; sites-modules.tex Tags 03CY and 03DA",
+  "note": "G8 proved Lean bridge in the assigned scalar-extension route; no statement or unit-route change."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Underlying cohomology sheaves of derived extension of scalars computed by a K flat complex agree with tensor with the restricted target ring",
+   "results": "8 hits: ModuleCat.extendRestrictScalarsAdj and restrictCoextendScalarsAdj (Mathlib.Algebra.Category.ModuleCat.ChangeOfRings), PresheafOfModules.restrictScalarsObj, SheafOfModules.restrictScalars and restrictScalars_obj_val (presheaf/sheaf ChangeOfRings), ModuleCat.preservesFiniteLimits_extendScalars_of_flat (Descent).",
+   "date": "2026-10-21",
+   "verdict": "No direct match: these are ordinary scalar restriction, finite generation, or constant-sheaf interfaces; none states the derived or pro-etale finite-model comparison. The proof uses the existing project interfaces and Mathlib component lemmas."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On the pro etale site finite stalks and locally constant module sheaves give finite constant set models on every slice",
+   "results": "8 hits, including CompHausLike.LocallyConstantModule.functor and condensed constant modules; no pro-etale finite-model or derived coefficient comparison theorem.",
+   "date": "2026-10-21",
+   "verdict": "No direct match. Reuse the existing library comparisons and finite-model theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mapBifunctorSingle₂Iso",
+   "results": "0 hits; external Mathlib index does not know the migrated source-library declaration.",
+   "date": "2026-10-21",
+   "verdict": "The project source WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle supplies the total-tensor/single comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "homologyFunctorSingleIso|constantCommuteCompose|isLocallyBijective_iff_isIso",
+   "results": "14 hits: Mathlib.Algebra.Homology.SingleHomology and Mathlib.CategoryTheory.Sites.ConstantSheaf/LocallyBijective.",
+   "date": "2026-10-21",
+   "verdict": "Use the single-complex, constant-forget, and local-bijection APIs; the specialized geometric and coefficient comparisons still require the proved library interfaces."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RestrictedScalarCohomologyLocalConstancy",
+  "date": "2026-10-21",
+  "group": "G8"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sp-scalar-extension",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sp-restricted-scalar-cohomology-local-constancy",
+   "place": "The original six-step proof: specialized coefficient, underlying cohomology, finite-model and finite-action comparisons.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RestrictedScalarTensorCohomologyComparison",
+  "file": "lean/Sheaf/Paper/RestrictedScalarTensorCohomologyComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.restrictedScalarTensorCohomologyComparison",
+  "statement": "theorem restrictedScalarTensorCohomologyComparison\n    {T X : Scheme.{u}} (a : X ⟶ T)\n    {A B : Type u} [CommRing A] [CommRing B] (f : A →+* B)\n    [HasDerivedCategory.{wA} (proEtaleRingModules T (proEtaleConstantRing T A))]\n    [HasDerivedCategory.{wB} (proEtaleRingModules T (proEtaleConstantRing T B))]\n    (D : SheafOfModules.DerivedChangeOfRingsCochainModel.{u + 1, u, u + 1, wA, wB}\n      (restrictedScalarRingMap T f))\n    (P : CochainComplex (proEtaleRingModules T (proEtaleConstantRing T A)) ℤ)\n    (hP : P.IsAcyclicTensorKFlat) (q : ℤ) :\n    Nonempty\n      (((sheafCompose (ProEt.topology X)\n        (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj\n        ((SheafOfModules.toSheaf _).obj\n          (proEtaleConstantModulePullback a B\n            ((DerivedCategory.homologyFunctor\n              (proEtaleRingModules T (proEtaleConstantRing T B)) q).obj\n                (D.T.obj (DerivedCategory.Q.obj P)))))) ≅\n      ((sheafCompose (ProEt.topology X)\n        (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj\n        ((SheafOfModules.toSheaf _).obj\n          (proEtaleConstantModulePullback a A\n            (restrictedScalarTensorCohomology T f P hP q)))))",
+  "branch": "sheaf-dag",
+  "by": "G8",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G8",
+  "result": "pass",
+  "landing": "20261021T151116-L-1132301",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G8",
+  "result": "pass",
+  "landing": "20261021T151116-L-1132301",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

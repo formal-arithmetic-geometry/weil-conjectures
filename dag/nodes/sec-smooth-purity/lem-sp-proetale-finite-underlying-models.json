@@ -1,0 +1,135 @@
+{
+ "id": "lem-sp-proetale-finite-underlying-models",
+ "kind": "statement",
+ "title": "Objectwise finite underlying set models from locally constant modules and finite stalks",
+ "statement": "Let X be a scheme, A a finite commutative ring, and F a sheaf of intrinsic A_X-modules [def-weil-pbc-proetale-site, def-weil-pbc-constant-sheaf, def-weil-sheaf-of-modules-category]. Assume F is locally constant and has finite geometric module stalks [def-weil-proetale-locally-constant-sheaf, def-weil-proetale-geometric-stalk]. Then for every object U of X_proet there is an actual pro-etale covering presieve S of U such that for every arrow V→U in S the underlying set sheaf F|V is isomorphic to the constant sheaf of a finite set Z_V on the slice site [def-pur-localized-ringed-site].",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Definition 093Q; finite local values from constant germs, Stacks Tags 099Y and 098K"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-proetale-locally-constant-sheaf",
+  "def-weil-proetale-geometric-stalk",
+  "def-pur-localized-ringed-site"
+ ],
+ "proof": [
+  {
+   "text": "Use the proved intrinsic/fixed coefficient comparison: local constancy and finite intrinsic geometric stalks give finite local fixed-module models, including empty covering members. The finiteModels_over comparison gives such models on slice sites of a cover of the final object.",
+   "uses": [
+    "lem-weil-pbc-proetale-constant-module-constructibility",
+    "lem-weil-pbc-proetale-finite-model-local-constancy"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pull this cover back along U→X. Stability under base change gives an actual covering presieve of U. Restriction of each model through Over.map is again the same constant fixed module, by constant-sheaf/slice comparison and functoriality of restriction.",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Forget modules to sets. Constant sheafification commutes with this forgetful functor; its finite module model has a finite underlying set. The coefficient encoding has exactly the original underlying additive sheaf, so this is the required underlying set model of F.",
+   "uses": [
+    "lem-weil-pbc-proetale-constant-module-encoding"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proetale-constant-module-constructibility",
+  "lem-weil-pbc-proetale-finite-model-local-constancy",
+  "def-pur-localized-ringed-site",
+  "def-weil-pbc-proetale-site",
+  "lem-weil-pbc-proetale-constant-module-encoding"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Definition 093Q; finite local values from constant germs, Stacks Tags 099Y and 098K",
+  "note": "G8 proved Lean bridge in the assigned scalar-extension route; no statement or unit-route change."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A locally constant module sheaf on the pro etale site with finite geometric stalks has finite constant underlying set models on every slice",
+   "results": "8 hits: CategoryTheory.Sheaf.IsConstant and constructors, isConstant_iff_mem_essImage (Mathlib.CategoryTheory.Sites.ConstantSheaf), LightCondensed.IsDiscrete, CondensedSet.LocallyConstant.functorFullyFaithful, SheafOfModules.IsFiniteType.mk.",
+   "date": "2026-10-21",
+   "verdict": "No direct match: these are ordinary scalar restriction, finite generation, or constant-sheaf interfaces; none states the derived or pro-etale finite-model comparison. The proof uses the existing project interfaces and Mathlib component lemmas."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On the pro etale site finite stalks and locally constant module sheaves give finite constant set models on every slice",
+   "results": "8 hits, including CompHausLike.LocallyConstantModule.functor and condensed constant modules; no pro-etale finite-model or derived coefficient comparison theorem.",
+   "date": "2026-10-21",
+   "verdict": "No direct match. Reuse the existing library comparisons and finite-model theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mapBifunctorSingle₂Iso",
+   "results": "0 hits; external Mathlib index does not know the migrated source-library declaration.",
+   "date": "2026-10-21",
+   "verdict": "The project source WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle supplies the total-tensor/single comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "homologyFunctorSingleIso|constantCommuteCompose|isLocallyBijective_iff_isIso",
+   "results": "14 hits: Mathlib.Algebra.Homology.SingleHomology and Mathlib.CategoryTheory.Sites.ConstantSheaf/LocallyBijective.",
+   "date": "2026-10-21",
+   "verdict": "Use the single-complex, constant-forget, and local-bijection APIs; the specialized geometric and coefficient comparisons still require the proved library interfaces."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RestrictedScalarCohomologyLocalConstancy",
+  "date": "2026-10-21",
+  "group": "G8"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sp-scalar-extension",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sp-restricted-scalar-cohomology-local-constancy",
+   "place": "The original six-step proof: specialized coefficient, underlying cohomology, finite-model and finite-action comparisons.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProEtaleFiniteUnderlyingModels",
+  "file": "lean/Sheaf/Paper/ProEtaleFiniteUnderlyingModels.lean",
+  "declaration": "AlgebraicGeometry.Scheme.proEtale_finiteUnderlyingModels_of_locallyConstant",
+  "statement": "theorem proEtale_finiteUnderlyingModels_of_locallyConstant\n    (X : Scheme.{u}) (A : Type u) [CommRing A] [Finite A]\n    (F : proEtaleRingModules X (proEtaleConstantRing X A))\n    (hF : IsLocallyConstantProEtaleModuleSheafOfUniverses.{u, u} X A F)\n    (hs : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ X),\n      Finite (proEtaleGeometricModuleStalk x (proEtaleConstantRing X A) F)) :\n    ∀ U : X.ProEt, ∃ S : Presieve U, S ∈ ProEt.precoverage X U ∧\n      ∀ (V : X.ProEt) (g : V ⟶ U), S g →\n        ∃ Z : Type (u + 1), Finite Z ∧ Nonempty\n          ((((sheafCompose (ProEt.topology X)\n            (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj\n              ((SheafOfModules.toSheaf _).obj F)).over V) ≅\n            (constantSheaf ((ProEt.topology X).over V) (Type (u + 1))).obj Z)",
+  "branch": "sheaf-dag",
+  "by": "G8",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G8",
+  "result": "pass",
+  "landing": "20261021T151116-L-1132301",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G8",
+  "result": "pass",
+  "landing": "20261021T151116-L-1132301",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
