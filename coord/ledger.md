@@ -23016,3 +23016,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:14 L: merged deliver/T6/Sheaf.CategoryTheory.RingedConstantTowerPushforwardNormalization (stage 3; reviewer PASS; first push; landing 20261021T161416-L-4166943 (proof); batch 20261021T161357; modules 1; new nodes 0)
 - 16:15 L: merged deliver/NC/lem-weil-point-derived-tensor-tower-coherence (stage 2; reviewer PASS; parallel immutable checks)
 - 16:15 L: merged deliver/NA/lem-sfb-tame-inertia-continuous-koszul (reviewer PASS; first push; new nodes: 3)
+- 16:16 L: returned deliver/NN/lem-sfb-lisse-lattice-potential-kummer-tameness (reviewer RETURN: C1 / route-pivot drop rule at Step 5, plus G1/G3/G4. This is the fourth delivery of this item, after NL 1f51eeaf, N5 68c)
