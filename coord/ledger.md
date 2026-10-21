@@ -19724,3 +19724,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:20 L: returned deliver/Q08/det-prop-sfb-cartesian-coefficients-twists (reviewer RETURN: re-split (the human, 2026-10-21): the purpose is to spread the work over new nodes other workers can take at once; 1 new)
 - 03:20 L: returned deliver/Q09/det-sf-comp-coherence-cocycle (reviewer RETURN: re-split (the human, 2026-10-21): the purpose is to spread the work over new nodes other workers can take at once; new n)
 - 03:20 L: returned deliver/Q36/det-sp-reduction-exceptional (reviewer RETURN: re-split (the human, 2026-10-21): the purpose is to spread the work over new nodes other workers can take at once; 5 new)
+- 03:20 L: returned deliver/Q37/det-sp-scalar-extension-functor (reviewer RETURN: re-split (the human, 2026-10-21): the purpose is to spread the work over new nodes other workers can take at once; 1 new)
