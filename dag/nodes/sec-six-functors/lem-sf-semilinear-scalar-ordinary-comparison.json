@@ -13,9 +13,164 @@
   "def-sp-varying-ring-proper-open-arrows",
   "def-weil-scheme-morphism-properties"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $c_n:C_{n+1}\\to C_n$ for the transition ring map, so $c_n\\phi_{n+1}=\\phi_n$. Restrict the scalar action on each $M_n$ along the constant-sheaf map induced by $\\phi_n$ and keep every underlying section map, including those of morphisms of systems. If $t_n$ is a transition, then $t_n(\\phi_{n+1}(b)m)=c_n(\\phi_{n+1}(b))t_n(m)=\\phi_n(b)t_n(m)$; the same equation holds for local sections of the constant ring sheaf. Thus the transitions become $B$-linear and give an object of $\\mathcal T_X$. Identities, composition and addition of morphisms are unchanged. These prescriptions determine the functor $\\rho_X^0$ on objects and morphisms.",
+   "uses": [
+    "def-pc-sheaf-restrict-scalars",
+    "lem-coef-semilinear-derived-sections",
+    "lem-cbc-strict-tower-proper-open-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CT (definition-presheaf-modules), 03D6 (definition-pushforward); elementary semilinearity calculation"
+   }
+  },
+  {
+   "text": "For later use, scalar restriction commutes with the specified module sheafification. Indeed, by [def-weil-presheaf-modules-sheafification] both $\\operatorname{Res}_{\\phi}(P^\\#)$ and $(\\operatorname{Res}_{\\phi}P)^\\#$ have underlying abelian sheaf $|P|^\\#$ and the same abelian sheafification unit. Their $B$-actions both extend the presheaf action $b\\cdot x=\\phi(b)x$ along this unit. Uniqueness of that extension in the cited statement makes the identity of the abelian sheaf $B$-linear. The comparison is natural and preserves the sheafification unit, again by uniqueness.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CY (lemma-sheafification-presheaf-modules); uniqueness of the action extending the presheaf action"
+   }
+  },
+  {
+   "text": "Kernels of module sheaves are sectionwise kernels, and cokernels are sheafifications of sectionwise cokernels [def-weil-sheaf-of-modules-category]. Changing the action does not change either sectionwise construction; step 2 identifies the resulting sheafifications and their quotient maps. Therefore restriction preserves kernels and cokernels at each level. The componentwise exactness assertion of [lem-coef-semilinear-derived-sections], also applied to the constant ring system $B$, implies that $\\rho_X^0$ is exact on systems. Its additivity was checked in step 1. Nothing here tensors with $C_n$, so no flatness hypothesis is used.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-coef-semilinear-derived-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DA (lemma-abelian), with componentwise exactness on the ringed sequence site"
+   }
+  },
+  {
+   "text": "By [def-sp-varying-ring-operations], the $n$-th direct image has sections $M_n(H\\times_Y X)$. The constant-$B$ direct image has this same formula. On both sides of $d_f^0$ the action of a local $B$-section is the original $C_n$-action through the same constant coefficient map $\\phi_n$; compatibility of the constant coefficient maps with base change gives equality of these actions. Identity on these sections respects restrictions, system transitions and morphisms. It defines the asserted natural isomorphism $d_f^0$, with identity inverse.",
+   "uses": [
+    "def-sp-varying-ring-operations",
+    "def-weil-pbc-proetale-operations",
+    "lem-cbc-strict-tower-proper-open-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D1 (lemma-pushforward-module), 03D6 (definition-pushforward); identity on the prescribed sections"
+   }
+  },
+  {
+   "text": "Use the ordinary levelwise inverse images of [lem-coef-semilinear-derived-sections]. In the identified-coefficient model of [def-weil-pbc-proetale-operations], $f^*M_n$ is the abelian inverse image $f^{-1}|M_n|$ with its transported action: $m\\otimes r\\mapsto c^{-1}(r)m$ identifies extension along the constant-ring isomorphism $c$. Let $L=f^{-1}$ on sheaves and $\\mu$ be the $C_n$-action of $M_n$. The two $B$-actions in the desired comparison are respectively $L(\\mu\\circ(\\phi_n\\times1))$ and $L\\mu\\circ(L\\phi_n\\times1)$, read through the finite-product comparison and the canonical constant-ring identifications. They agree by functoriality. Identity on $L|M_n|$ is consequently a $B$-linear isomorphism. Naturality of this construction in module maps gives compatibility with $L(t_n)$, so it assembles to $b_f^0$ on systems. The unit-preserving evaluation normalization in [def-sp-varying-ring-operations] identifies this model with the specified $f^*_{\\bullet}$, rather than an independently chosen left adjoint.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "def-weil-pbc-proetale-operations",
+    "def-sp-varying-ring-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D2 (lemma-pullback-module), 03D3 (lemma-adjoint-push-pull-modules), 03D7 (lemma-adjoint-pullback-pushforward-modules); transported actions"
+   }
+  },
+  {
+   "text": "Write $L_C=f^*_{\\bullet}$, $R_C=f_{*,\\bullet}$, $L_B=f_B^*$, $R_B=f_{*,B}$, and $\\rho_T=\\rho_T^0$. The module adjunction in [def-weil-pbc-proetale-operations] restricts the abelian-sheaf adjunction and has its unit and counit. The comparisons of steps 4-5 identify precisely these abelian maps, level by level. Thus, for every system $M$ on $Y$ and $N$ on $X$,\n$$R_B(b_M)\\circ d_{L_CM}\\circ\\rho_Y(\\eta^C_M)=\\eta^B_{\\rho_YM},\\qquad \\varepsilon^B_{\\rho_XN}\\circ L_B(d_N)=\\rho_X(\\varepsilon^C_N)\\circ b_{R_CN}^{-1}.$$\nThese are equalities of ordinary system maps since their components are the same abelian-sheaf unit and counit. In the mate formula of [def-weil-pbc-adjunction-mate], the mate of $b^{-1}$ is $R_B\\rho_X(\\varepsilon^C_N)\\circ R_B(b_{R_CN}^{-1})\\circ\\eta^B_{\\rho_YR_CN}$. Substitute the second displayed equation, then use naturality of $\\eta^B$ and the triangle identity $R_B\\varepsilon^B\\circ\\eta^BR_B=1$. The result is $d_N$. This proves both required adjunction compatibilities and the stated mate orientation.",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "def-sp-varying-ring-operations",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D7 (lemma-adjoint-pullback-pushforward-modules); unit and counit calculation of the mate"
+   }
+  },
+  {
+   "text": "The ordinary direct-image compositor of [def-sp-varying-ring-operations] is restriction along the canonical fibre-product pasting isomorphism on sections. Since $d^0$ is the identity on the same sections, it preserves that compositor and the identity normalization. For inverse-image composition, take adjoints: the transported compositor and the specified constant-$B$ compositor have the same direct-image comparison and the same composite unit by step 6. The adjunction bijection is injective, so the two inverse-image maps are equal. This also proves the corresponding identity assertion. These statements concern the actual ordinary compositors.",
+   "uses": [
+    "def-sp-varying-ring-operations",
+    "lem-cbc-strict-tower-proper-open-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D8 (lemma-push-pull-composition-modules); section formulas and injectivity of the adjunction bijection"
+   }
+  },
+  {
+   "text": "For an open $j$, [lem-pur-site-restriction-module-adjunction-exact] constructs $j_!$ as sheafification of the localized extension presheaf. In the explicit formula of [def-weil-extension-by-zero-presheaf], each section is a finite sum of elements from summands indexed by maps $H\\to U$. Scalar restriction keeps these same summands, restrictions and finite sums; the map sending each summand element to itself is $B$-linear, with the same inverse. Step 2 extends this presheaf comparison through sheafification, giving $a_j^0$ at each level. The comparison is natural in module maps, hence commutes with all system transitions and yields the isomorphism on systems. The open unit at $(H\\to U)$ is inclusion into the summand indexed by that map, followed by the sheafification unit. Both are preserved. For an ambient sheaf $G$, the counit sends a section of the summand $G|_U(H\\to U)=G(H)$ to that same section in $G(H)$; this map is also unchanged. Finally, the two ways to compare a composite of opens agree on each iterated summand, sending its element to the summand indexed by the composite; sheafification uniqueness gives equality. Thus the canonical open compositors and units are preserved.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "def-weil-extension-by-zero-presheaf",
+    "def-weil-presheaf-modules-sheafification",
+    "def-sp-varying-ring-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DI (lemma-extension-by-zero), 03DJ (lemma-extension-by-zero-exact), 03CY (lemma-sheafification-presheaf-modules); explicit summands and adjunction"
+   }
+  },
+  {
+   "text": "For a cartesian open square $(j,j',g,g_U)$, [def-sp-varying-ring-proper-open-arrows] defines $\\beta^{-1}:j'_!g_U^*\\to g^*j_!$ as the $j'_!\\dashv j'^*$ transpose of $g_U^*\\eta^j$ followed by the inverse-image square compositor. Steps 6-8 preserve that unit and the compositor, as well as the open-adjunction bijection (on a summand its inverse simply restricts the corresponding section map). The transported $\\beta^{-1}$ and the constant-$B$ $\\beta^{-1}$ therefore have the same transpose and are equal. Taking inverses gives preservation of $\\beta$. The invertibility used here is part of the cited proper/open-arrow definition and the constant-tower calculus; it is not inferred merely from the invertibility of a mate.",
+   "uses": [
+    "def-sp-varying-ring-proper-open-arrows",
+    "lem-cbc-strict-tower-proper-open-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DI (lemma-extension-by-zero); the specified open transpose; agent assembly following the intrinsic beta definition"
+   }
+  },
+  {
+   "text": "For the square in the statement, use the clopen lift $s:V\\to W\\times_T S$ supplied by [lem-cbc-strict-tower-proper-open-calculus]. In [def-sp-varying-ring-proper-open-arrows], the map $s_!\\to s_*$ is the mate of the inverse open unit. Steps 6 and 8 preserve its defining unit--counit word, so they preserve this map, its inverse for clopen $s$, and the projector $\\pi_s=(s_!\\to s_*)^{-1}s^*\\circ\\eta^s$. Equivalently it remains identity on $s(V)$ and zero on the complementary open component, as specified by the constant-tower calculus; restriction changes neither of these section maps. This establishes the clopen-projector comparison with the specified normalizations.",
+   "uses": [
+    "lem-cbc-strict-tower-proper-open-calculus",
+    "def-sp-varying-ring-proper-open-arrows"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DI (lemma-extension-by-zero), 0F7B (more-etale-lemma-shriek-proper-and-open), open case; intrinsic clopen projector word"
+   }
+  },
+  {
+   "text": "The ordinary $\\alpha_Q$ of [def-sp-varying-ring-proper-open-arrows] is exactly $\\beta_{i,p}$ followed by $b_!\\pi_s q^*$ and the open and inverse-image compositors. Substitute into this word the equalities proved in steps 7-10: its first factor becomes the constant-$B$ $\\beta$, its second becomes the constant-$B$ projector with the same whiskerings, and its last factors become the constant-$B$ compositors. Functoriality of $\\rho^0$ preserves their composite. The result is the intrinsic ordinary constant-$B$ $\\alpha_Q$ specified in [lem-cbc-strict-tower-proper-open-calculus]. This proves the final comparison for every quasi-compact proper/open square, without imposing a cartesian hypothesis on $Q$ or a flatness condition on any coefficient map.",
+   "uses": [
+    "def-sp-varying-ring-proper-open-arrows",
+    "lem-cbc-strict-tower-proper-open-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0F7B (more-etale-lemma-shriek-proper-and-open), open case; substitution into the intrinsic ordinary alpha word"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-sheaf-restrict-scalars",
+  "def-sp-varying-ring-operations",
+  "def-sp-varying-ring-proper-open-arrows",
+  "def-weil-extension-by-zero-presheaf",
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-sheaf-of-modules-category",
+  "lem-cbc-strict-tower-proper-open-calculus",
+  "lem-coef-semilinear-derived-sections",
+  "lem-pur-site-restriction-module-adjunction-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03CY, 03D2, 03D3, 03D6, 03D7, 03D8, 03DA, 03DI and 03DJ; explicit assembly on ordinary semilinear systems, preserving the specified units and intrinsic clopen alpha."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -51,10 +206,52 @@
    "results": "8 hits: SheafOfModules.restrictScalars_obj_val, SheafOfModules.restrictScalars, SheafOfModules.restrictScalars_map_val, PresheafOfModules.pushforward_obj_obj, PresheafOfModules.restrictScalarsCompToPresheaf, SheafOfModules.instAdditiveRestrictScalars, PresheafOfModules.restrictScalarsObj, PresheafOfModules.restrictScalars",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars.*(pullback|pushforward)|sheafify.*restrictScalars|restrictScalars.*sheafify",
+   "results": "{\"t\": \"2026-10-21T03:40:58Z\", \"tool\": \"grep\", \"query\": \"restrictScalars.*(pullback|pushforward)|sheafify.*restrictScalars|restrictScalars.*sheafify\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: fixed-ring scalar functors and sheafification ingredients only; no complete semilinear system comparison statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.restrictScalars",
+   "results": "{\"t\": \"2026-10-21T03:40:59Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules.restrictScalars\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"SheafOfModules.restrictScalars\", \"SheafOfModules.instAdditiveRestrictScalars\", \"SheafOfModules.restrictScalars_obj_val\", \"SheafOfModules.restrictScalars_map_val\"], \"digest\": \"e9c522decffc41f9\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: fixed-ring scalar functors and sheafification ingredients only; no complete semilinear system comparison statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A compatible map from a constant ring to an inverse ring system gives exact scalar restriction preserving sheaf pullback pushforward and open extension by zero",
+   "results": "{\"t\": \"2026-10-21T03:40:59Z\", \"tool\": \"leansearch\", \"query\": \"A compatible map from a constant ring to an inverse ring system gives exact scalar restriction preserving sheaf pullback pushforward and open extension by zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.pushforward_obj_map_apply'\", \"PresheafOfModules.pushforward_obj_map_apply\", \"PresheafOfModules.pushforward\", \"CategoryTheory.Presieve.FamilyOfElements.isCompatible_map_smul_aux\", \"PresheafOfModules.restrictScalars\", \"SheafOfModules.restrictScalars\", \"PresheafOfModules.restrictScalarsObj\", \"AlgebraicGeometry.StructureSheaf.toOpen_comp_comap_assoc\"], \"digest\": \"7b06bd6291407375\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: fixed-ring scalar functors and sheafification ingredients only; no complete semilinear system comparison statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheafification and geometric inverse image of module sheaves preserve underlying abelian groups under change of scalars",
+   "results": "{\"t\": \"2026-10-21T03:41:09Z\", \"tool\": \"leanfinder\", \"query\": \"Sheafification and geometric inverse image of module sheaves preserve underlying abelian groups under change of scalars\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom\", \"PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm\", \"PresheafOfModules.sheafifyHomEquiv'\", \"PresheafOfModules.toPresheaf_map_sheafificationHomEquiv\", \"PresheafOfModules.toPresheaf_map_sheafificationHomEquiv_def\", \"PresheafOfModules.sheafificationCompForgetCompToPresheaf\", \"PresheafOfModules.toPresheaf_map_toSheafify\", \"PresheafOfModules.Sheafify.map_smul_eq\"], \"digest\": \"17a77ca21e105343\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: fixed-ring scalar functors and sheafification ingredients only; no complete semilinear system comparison statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars on inverse systems of sheaves of modules commutes with geometric inverse image direct image and extension by zero preserving adjunction units",
+   "results": "{\"t\": \"2026-10-21T03:41:09Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction of scalars on inverse systems of sheaves of modules commutes with geometric inverse image direct image and extension by zero preserving adjunction units\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\", \"PresheafOfModules.restrictScalarsCompToPresheaf\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp\", \"SheafOfModules.pushforwardSections_unitHomEquiv\"], \"digest\": \"f8315fc5d4bdd20a\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: fixed-ring scalar functors and sheafification ingredients only; no complete semilinear system comparison statement"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars|sheafify|pushforward",
+   "results": "{\"t\": \"2026-10-21T03:41:15Z\", \"tool\": \"grep\", \"query\": \"restrictScalars|sheafify|pushforward\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\"], \"digest\": \"1e03b3d459ba7954\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: fixed-ring scalar functors and sheafification ingredients only; no complete semilinear system comparison statement"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sf-semilinear-proper-open-mate-pasting",
@@ -74,5 +271,79 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sf-semilinear-scalar-ordinary-comparison",
+  "worker": "stage1",
+  "summary": "Constructed scalar restriction on underlying sections and morphisms; checked componentwise exactness, the transported inverse-image actions, identity-on-sections direct image, both adjunction equations and the orientation of the mate. Used the explicit localized direct-sum/sheafification model for open extension and then preserved beta, the clopen projector and the ordinary alpha word. No new nodes and no statement change.",
+  "blueprint": "fix-prop-coherence.proof.md: the sentence that the maps are adjunction units and counits whose coefficient comparisons are proved, and the subsequent sentence that preserving units and counits makes mates satisfy the same equations. This item supplies their ordinary scalar-restriction normalization before deriving.",
+  "tool_uses": [
+   {
+    "node": "def-pc-sheaf-restrict-scalars",
+    "why": "The sectionwise scalar action is the definition needed to construct rho; this unit has no replacement definition."
+   },
+   {
+    "node": "def-sp-varying-ring-operations",
+    "why": "The item explicitly uses these specified ordinary geometric functors and their unit-preserving compositors."
+   },
+   {
+    "node": "def-sp-varying-ring-proper-open-arrows",
+    "why": "The item explicitly asks preservation of its intrinsic beta, clopen projector and ordinary alpha word."
+   },
+   {
+    "node": "def-weil-extension-by-zero-presheaf",
+    "why": "Its explicit summands and restrictions give the coefficient comparison and open unit/counit calculations."
+   },
+   {
+    "node": "def-weil-pbc-adjunction-mate",
+    "why": "The general unit--counit formula fixes and verifies the orientation of the mate d."
+   },
+   {
+    "node": "def-weil-pbc-proetale-operations",
+    "why": "The transported module action and underlying abelian adjunction identify the actual ordinary single-level unit and counit."
+   },
+   {
+    "node": "def-weil-presheaf-modules-sheafification",
+    "why": "The unique extension of a presheaf action to its abelian sheafification proves the coefficient-independence of this construction."
+   },
+   {
+    "node": "def-weil-sheaf-of-modules-category",
+    "why": "Its explicit sectionwise kernels and sheafified cokernels identify exactness under unchanged abelian sheaves."
+   },
+   {
+    "node": "lem-cbc-strict-tower-proper-open-calculus",
+    "why": "Its constant-B category, normalized open comparison and clopen alpha are the comparison target required by the item."
+   },
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "Its ordinary semilinear-system category, componentwise exactness and levelwise inverse-image model are the ambient tools, not its derived comparisons."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Its localized direct-sum and sheafification model constructs the ordinary open-extension comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-pc-sheaf-restrict-scalars",
+  "def-sp-varying-ring-operations",
+  "def-sp-varying-ring-proper-open-arrows",
+  "def-weil-extension-by-zero-presheaf",
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-sheaf-of-modules-category",
+  "lem-cbc-strict-tower-proper-open-calculus",
+  "lem-coef-semilinear-derived-sections",
+  "lem-pur-site-restriction-module-adjunction-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q42-768dc806e",
+  "group": "Q42",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-768dc806e (reviewer sub-agent of L); spot-checked: PASS, no changes. I read the item's 11 steps in full and every cited node statement. The delivery has 0 new nodes, and the statement, stmt_deps and blueprint are unchanged from base. Live and side-live still show the item unsplit, there is no repair note or re-split note, and it is not in a dropped list. No SGA is cited. No cycle: the item and its parent are absent from the dependency closure. Route: all three statements cited from other units are in units that sk-thm-sf-compatibility uses (sk-prop-sf-cbc, sk-prop-sf-biduality-general, sk-def-sf-operations); everything else cited is a definition. The declared tool_uses are accepted. Source checks: Stacks sites-modules 03CY (unique sheafified action, step 2 via def-weil-presheaf-modules-sheafification), 03DA (kernels and cokernels, step 3), 03D3/03D7 (module adjunction and transported action c^{-1}(r)m, steps 5-6), and 03DI at l.2058-2082 (the ⊕_φ G(V→U) presheaf, step 8). Blueprint fix-prop-coherence.proof.md (main-20261015): this item realizes its sentence on unit/counit coefficient comparisons. I recomputed the step-6 mate: mate(b^{-1}) = R_Bρ(ε^C)∘R_B(b^{-1})∘η^B reduces to d by the counit equation, naturality and the triangle identity, so the orientation is correct. Steps 7, 9 and 10 compare transposes using injectivity of the adjunction bijection, and the invertibility of β and s_!→s_* is taken from def-sp-varying-ring-proper-open-arrows. In step 8 I checked the open unit, the counit and the composite-open compositor summand by summand. Edge cases tested: zero ring, non-flat Z→Z/2, the constant identity system, an empty or full open, and a non-cartesian square where π_s is the identity on one clopen component and 0 on the other. Minor wording only: step 11 says the constant-B ordinary α is 'specified in lem-cbc', but lem-cbc states α on derived towers; the ordinary α is the same termwise word, as the constant case of def-sp. This is not a fault."
  }
 }
