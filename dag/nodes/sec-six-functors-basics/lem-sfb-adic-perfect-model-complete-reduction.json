@@ -18,9 +18,113 @@
   "def-weil-pbc-locally-derived-ringed-ideal-complete",
   "lem-pur-derived-change-of-rings"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each nonzero term $P^i$, choose generators and the resulting surjection $s_i:A^{r_i}\\to P^i$. Projectivity lifts $\\mathrm{id}_{P^i}$ to $u_i:P^i\\to A^{r_i}$ with $s_i u_i=1$. Thus $e_i=u_i s_i$ is an idempotent matrix and $P^i\\cong\\operatorname{im}(e_i)$. Constant sheaves preserve these splitting equations and finite sums: for finite sums this follows by applying exactness to split short exact sequences. Tensoring with $B$ gives $M^i\\cong\\operatorname{im}(e_i:B^{r_i}\\to B^{r_i})$. Limits of module sheaves are sectionwise. For every section object, a compatible family in the images of the reductions of $e_i$ is exactly a compatible family $x_n$ satisfying $e_i x_n=x_n$; this is equivalent to $e_i(\\lim x_n)=\\lim x_n$. Consequently the quotient projections induce a canonical isomorphism\n$$M^i\\cong\\varprojlim_{n\\geq1}\\underline{P^i/I^nP^i}.$$\nHere the level-$n$ image is $P^i/I^nP^i$ because the original splitting reduces modulo $I^n$. This argument is termwise and assumes no compatibility of chosen splittings with the differentials.",
+   "uses": [
+    "def-weil-pbc-projective-module",
+    "lem-weil-pbc-constant-module-section-properties",
+    "lem-weil-pbc-module-sheaves-limits-sectionwise"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 093J (lemma-constant-exact); finite-projective direct-summand calculation applied to the completion limit"
+   }
+  },
+  {
+   "text": "The Noetherian hypothesis makes $I$ finitely generated. Each sheaf $\\underline{P^i/I^nP^i}$ is killed by $I^n$. Apply the torsion-limit completeness theorem to the inverse-limit presentation in step 1: the bounded complex $M^\\bullet$, regarded as a complex of $\\underline A$-modules, is locally derived $I\\underline A$-complete. Its hypotheses allow an arbitrary scheme $T$, arbitrary transition maps, and infinite underlying residue sets. Restriction of scalars along $\\underline A\\to B$ preserves and reflects local derived completeness for the extended ideal. Apply that theorem to this $B$-complex and the ideal $I\\underline A$. It follows that $M^\\bullet$ is locally derived $IB$-complete, with exactly the internal-Hom-on-every-slice convention in the statement.",
+   "uses": [
+    "lem-weil-pbc-torsion-limit-sheaf-completeness",
+    "lem-weil-pbc-restriction-local-completeness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099Q (proposition-enough-weakly-contractibles), clauses (1),(4),(5); algebraization.tex Tag 099C (lemma-restriction-derived-complete)"
+   }
+  },
+  {
+   "text": "The canonical map from the constant ring to its completion has $B/IB\\cong\\underline{A/I}=\\underline k$, by the quotient clause of the constant-completion theorem, with the quotient induced by the first projection. Use this identification for the $B$-action on $\\underline k$. The coefficient theorem applies to every ideal of every commutative Noetherian $A$; it requires neither regularity nor a finite underlying quotient set.",
+   "uses": [
+    "lem-weil-pbc-constant-completion-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 093M (lemma-completion-flat), canonical quotient identification"
+   }
+  },
+  {
+   "text": "For a $B$-module sheaf $F$, tensor with $M^i$ is the image of the idempotent $e_i$ acting on $F^{r_i}$. This is an exact functor: for an exact sequence, kernels are computed in the ambient finite direct sums, and a section in the target image lifts locally to some $x$ and hence to $e_i x$ in the source image. Thus every $M^i$ is flat over $B$. Since the complex is zero above $b$, the bounded-above-flat theorem makes $M^\\bullet$ K-flat. Derived change of rings along $B\\to\\underline k$ is therefore computed by the ordinary complex $M^\\bullet\\otimes_B\\underline k$.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "lem-pc-bounded-above-flat-kflat-site",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YQ (lemma-bounded-flat-K-flat); derived change of rings computed on K-flat complexes"
+   }
+  },
+  {
+   "text": "In each degree the canonical tensor map sends $(b\\otimes p)\\otimes c$ to $\\overline b\\,c\\otimes\\overline p$ in $\\underline{P^i\\otimes_A k}$. It is an isomorphism for $P^i=A^{r_i}$ by step 3 and the tensor unit, and for $P^i$ by applying the splitting $u_i,s_i$ on both sides. Its inverse is the restriction of the inverse on those free modules to the images of the same idempotent. The formula is balanced over $A$ and $B$ and is natural in every $A$-linear map $P^i\\to P^{i+1}$: both orders send $(b\\otimes p)\\otimes c$ to $\\overline b\\,c\\otimes\\overline{d^i p}$. Hence these maps form the canonical chain isomorphism\n$$M^\\bullet\\otimes_B^L\\underline k\\simeq\\underline{P^\\bullet\\otimes_A k}.$$\nNo resolution of $k$ or of $A/I^n$ by finite projectives has been used.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "lem-weil-pbc-constant-module-section-properties"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 093J (lemma-constant-exact) and 093M (lemma-completion-flat), finite-summand tensor calculation"
+   }
+  },
+  {
+   "text": "Write $C^\\bullet=P^\\bullet\\otimes_A k$. Exactness of the constant-sheaf functor identifies the kernel of $\\underline{d^q}$ with $\\underline{\\ker d^q}$ and the image of $\\underline{d^{q-1}}$ with $\\underline{\\operatorname{im}d^{q-1}}$, and then identifies their quotient with $\\underline{H^q(C^\\bullet)}$. Each $C^q$ is a direct summand of $k^{r_q}$, so it is finite-dimensional. Its kernel and the quotient of that kernel by the image of the preceding differential are finite-dimensional $k$-vector spaces. This proves the asserted constant finite residue cohomology. Outside $[a,b]$ both $M^\\bullet$ and $C^\\bullet$ have zero terms, hence zero cohomology. If $a>b$ all terms are zero and the same argument applies.",
+   "uses": [
+    "lem-weil-pbc-constant-module-section-properties"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 093J (lemma-constant-exact), applied to cycles, boundaries and their quotient"
+   }
+  },
+  {
+   "text": "Let $U\\to T$ be any covering object, or indeed any object of $T_{\\mathrm{proét}}$. Weakly etale localization identifies $T_{\\mathrm{proét}}/U$ with $U_{\\mathrm{proét}}$ and identifies restricted constant ring sheaves with the corresponding constants on $U$. Sectionwise limits then identify $B|_U$ with $\\varprojlim_n\\underline{A/I^n}_U$, using the same projections. Restriction is exact, preserves K-flat complexes, and commutes with ordinary sheaf tensor. Thus the restricted complex is $(B|_U)\\otimes_A P^\\bullet$ and its derived residue is the restriction of the chain isomorphism in step 5; exactness identifies its cohomology with restriction of that in step 6. Apply steps 1–2 on the scheme $U$ to obtain completeness with respect to $I(B|_U)$. All their hypotheses still hold, since no hypothesis on $T$ beyond being a scheme was used. This proves every assertion on every covering slice with the restricted coefficient sheaf.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-weil-pbc-module-sheaves-limits-sectionwise",
+    "lem-sfb-ringed-site-restriction-kflat",
+    "lem-sfb-localized-site-tensor-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E8K (lemma-restriction-K-flat); sites-modules.tex Tags 03DH (section-localize), 03EL (lemma-tensor-product-pullback); repeat Tag 099Q on U"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-projective-module",
+  "lem-weil-pbc-constant-module-section-properties",
+  "lem-weil-pbc-module-sheaves-limits-sectionwise",
+  "lem-weil-pbc-torsion-limit-sheaf-completeness",
+  "lem-weil-pbc-restriction-local-completeness",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "def-pur-sheaf-tensor-product",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-sfb-ringed-site-restriction-kflat",
+  "lem-sfb-localized-site-tensor-restriction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099Q, together with sites-modules.tex Tags 093J, 093M and sites-cohomology.tex Tag 06YQ; explicit direct-summand calculations supplied here. Matches Bhatt–Scholze Proposition 6.6.11, reverse implication."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,10 +160,45 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Sheaf.IsConstant.mem_essImage\", \"module\": \"Mathlib.CategoryTheory.Sites.ConstantSheaf\", \"type\": \"∀ {C : Type u_1} {inst : CategoryTheory.Category.{v_1, u_1} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {D : Type u_2} {inst_1 : CategoryTheory.Category.{v_2, u_2} D} {inst_2 : CategoryTheory.HasWeakSheafify J D}\\n  {F : CategoryTheory.Sheaf J D} [self : CategoryTheory.Sheaf.IsConstant J F],\\n  (\", \"doc\": \"Any constant sheaf $F$ on a category $\\\\mathcal{C}$ with values in $\\\\mathcal{D}$, equipped with a Grothendieck topology $J$, is isomorphic to the image of some object in $\\\\mathcal{D}$ under the constan\"}\n  {\"name\": \"CategoryTheory.constantSheaf\", \"module\": \"Mathlib.CategoryTheory.Sites.ConstantSheaf\", \"type\": \": D ⥤ Sheaf J D\", \"doc\": \"The constant sheaf functor is constructed by composing the constant functor from the opposite category $\\\\mathcal{C}^\\\\text{op}$ to a category $\\\\mathcal{D}$ with the sheafification functor that turns pr\"}\n  {\"name\": \"CategoryTheory.Sheaf.isConstant_iff_isIso_counit_app\", \"module\": \"Mathlib.CategoryTheory.Sites.ConstantSheaf\", \"type\": \"[(constantSheaf J D).Faithful] [(constantSheaf J D).Full] (F : Sheaf J D) {T : C} (hT : IsTerminal T) :\\n  IsConstant J F ↔ (IsIso <| (constantSheafAdj J D hT).counit.app F)\", \"doc\": \"Given a Grothendieck topology $J$ on a category $\\\\mathcal{C}$ with a terminal object $T$, a sheaf $F$ with values in a category $\\\\mathcal{D}$ is constant if and only if the counit of the adjunction be\"}\n  {\"name\": \"CategoryTheory.Sheaf.isConstant_iff_mem_essImage\", \"module\": \"Mathlib.CategoryTheory.Sites.ConstantSheaf\", \"type\": \"{L : D ⥤ Sheaf J D} {T : C} (hT : IsTerminal T) (adj : L ⊣ (sheafSections J D).obj ⟨T⟩) (F : Sheaf J D) :\\n  IsConstant J F ↔ L.essImage F\", \"doc\": \"A sheaf $ F $ on a category $\\\\mathcal{C}$ with values in a category $\\\\mathcal{D}$, equipped with a Grothendieck topology $ J $, is constant if and only if $ F $ lies in the essential image of a functo\"}\n  {\"name\": \"CategoryTheory.Sheaf.IsConstant.recOn\", \"module\": \"Mathlib.CategoryTheory.Sites.ConstantSheaf\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {D : Type u_2} →\\n        [inst_1 : CategoryTheory.Category.{v_2, u_2} D] →\\n          [inst_2 : CategoryTheory.HasWeakSheafify J D] →\\n            {F : CategoryTheory.Sheaf J D} →\", \"doc\": \"Given a sheaf $ F $ on a category $\\\\mathcal{C}$ with values in $\\\\mathcal{D}$ under a Grothendieck topology $ J $, if $ F $ lies in the essential image of the constant sheaf functor, then any property \"}\n  {\"name\": \"CategoryTheory.Sheaf.IsConstant.mk\", \"module\": \"Mathlib.CategoryTheory.Sites.ConstantSheaf\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {D : Type u_2} [inst_1 : CategoryTheory.Category.{v_2, u_2} D] [inst_2 : CategoryTheory.HasWeakSheafify J D]\\n  {F : CategoryTheory.Sheaf J D}, (CategoryTheory.constantSheaf J D).essImage F → \", \"doc\": \"If a sheaf $ F $ on a category $\\\\mathcal{C}$ with values in a category $\\\\mathcal{D}$, equipped with a Grothendieck topology $ J $, lies in the essential image of the constant sheaf functor, then $ F $\"}\n  {\"name\": \"CategoryTheory.Sheaf.IsConstant.casesOn\", \"module\": \"Mathlib.CategoryTheory.Sites.ConstantSheaf\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {D : Type u_2} →\\n        [inst_1 : CategoryTheory.Category.{v_2, u_2} D] →\\n          [inst_2 : CategoryTheory.HasWeakSheafify J D] →\\n            {F : CategoryTheory.Sheaf J D} →\", \"doc\": \"Given a sheaf $ F $ on a category $\\\\mathcal{C}$ with values in $\\\\mathcal{D}$ under a Grothendieck topology $ J $, if $ F $ lies in the essential image of the constant sheaf functor, then any property \"}\n  {\"name\": \"CategoryTheory.Sheaf.IsConstant.rec\", \"module\": \"Mathlib.CategoryTheory.Sites.ConstantSheaf\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {D : Type u_2} →\\n        [inst_1 : CategoryTheory.Category.{v_2, u_2} D] →\\n          [inst_2 : CategoryTheory.HasWeakSheafify J D] →\\n            {F : CategoryTheory.Sheaf J D} →\", \"doc\": \"Given a sheaf $ F $ on a category $\\\\mathcal{C}$ with values in $\\\\mathcal{D}$ under a Grothendieck topology $ J $, if $ F $ lies in the essential image of the constant sheaf functor, then any property \"}",
    "date": "2026-10-21",
    "verdict": "no match: the printed hits give ordinary module completion, abstract triangulated categories, constant sheaves, or cohomological bounds; none states this ringed pro-étale comparison and locality assertion or specializes to it in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "(perfect|projective).*(sheaf.*complet|complet.*sheaf)|(residue.*cohomology.*constant)",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary algebraic adic completion, constant-sheaf membership, or ordinary projective complex results do not state the ringed pro-etale completeness and residue comparison of this item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Completed constant coefficient sheaves tensor perfect complexes derived completeness residue reduction",
+   "results": "8 hits: CategoryTheory.constantSheaf, CategoryTheory.Sheaf.isConstant_iff_isIso_counit_app, CategoryTheory.Sheaf.isConstant_iff_mem_essImage, CategoryTheory.Sheaf.isConstant_of_forget, CategoryTheory.Sheaf.mem_essImage_of_isConstant, CategoryTheory.Sheaf.IsConstant.mem_essImage, LightCondensed.IsDiscrete, CategoryTheory.Sheaf.IsConstant.rec",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary algebraic adic completion, constant-sheaf membership, or ordinary projective complex results do not state the ringed pro-etale completeness and residue comparison of this item."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"Perfect\"",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary algebraic adic completion, constant-sheaf membership, or ordinary projective complex results do not state the ringed pro-etale completeness and residue comparison of this item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded finite projective complex over a completed constant coefficient sheaf is derived complete and has constant residue cohomology",
+   "results": "8 hits: DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, CochainComplex.isKProjective_of_projective, CochainComplex.IsKProjective, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, CategoryTheory.ProjectiveResolution.instIsGECochainComplexOfNatInt, CategoryTheory.ProjectiveResolution.instProjectiveXIntCochainComplex, CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex, CochainComplex.IsKInjective",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary algebraic adic completion, constant-sheaf membership, or ordinary projective complex results do not state the ringed pro-etale completeness and residue comparison of this item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Perfect complexes over an adic completion are locally derived complete with finite dimensional residue cohomology",
+   "results": "8 hits: BDeRhamPlus, BDeRham, IsAdicComplete.toIsPrecomplete, instCommRingBDeRhamPlus, IsAdicComplete.henselianRing, AdicCompletion, IsAdicComplete, AdicCompletion.map_exact",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary algebraic adic completion, constant-sheaf membership, or ordinary projective complex results do not state the ringed pro-etale completeness and residue comparison of this item."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-adic-stratified-perfect",
@@ -79,5 +218,69 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-adic-perfect-model-complete-reduction",
+  "worker": "stage1",
+  "summary": "Q134: seven-step proof using only existing nodes. Finite-projective summands give torsion-limit presentations, hence completeness after scalar restriction; a K-flat model gives the canonical residue chain isomorphism, exact constants give finite residue cohomology, and slice localization gives all local assertions. No statement correction and no new node.",
+  "blueprint": "det-lem-integral-models-stacks, comparison with sk-prop-integral-criterion, via lem-sfb-integral-cohomological-adic-criterion and lem-sfb-adic-stratified-perfect: the reverse-implication perfect-model completeness and residue argument of Bhatt–Scholze Proposition 6.6.11.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-constant-module-section-properties",
+    "why": "Generic ringed-site or module-sheaf tool: Constant section properties. Used only in its stated generality for the local perfect-model calculation; no unit-specific geometric argument is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-torsion-limit-sheaf-completeness",
+    "why": "Generic ringed-site or module-sheaf tool: Completeness of inverse limits of power-torsion sheaves. Used only in its stated generality for the local perfect-model calculation; no unit-specific geometric argument is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-restriction-local-completeness",
+    "why": "Generic ringed-site or module-sheaf tool: Restriction of scalars preserves and reflects local derived completeness. Used only in its stated generality for the local perfect-model calculation; no unit-specific geometric argument is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-constant-completion-equivalence",
+    "why": "Generic ringed-site or module-sheaf tool: Constant-to-completed coefficients on derived-complete categories. Used only in its stated generality for the local perfect-model calculation; no unit-specific geometric argument is replaced."
+   },
+   {
+    "node": "lem-pc-bounded-above-flat-kflat-site",
+    "why": "Generic ringed-site or module-sheaf tool: Bounded-above flat complexes on a ringed site are K-flat. Used only in its stated generality for the local perfect-model calculation; no unit-specific geometric argument is replaced."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic ringed-site or module-sheaf tool: Derived change of rings along a morphism of sheaves of rings, computed by K-flat resolutions. Used only in its stated generality for the local perfect-model calculation; no unit-specific geometric argument is replaced."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Generic ringed-site or module-sheaf tool: The small pro-etale site of a weakly etale X-scheme is the localization of X_proet. Used only in its stated generality for the local perfect-model calculation; no unit-specific geometric argument is replaced."
+   },
+   {
+    "node": "lem-sfb-ringed-site-restriction-kflat",
+    "why": "Generic ringed-site or module-sheaf tool: Exact restriction and K-flat complexes on a localized ringed site. Used only in its stated generality for the local perfect-model calculation; no unit-specific geometric argument is replaced."
+   },
+   {
+    "node": "lem-sfb-localized-site-tensor-restriction",
+    "why": "Generic ringed-site or module-sheaf tool: Restriction to a localized site commutes with the sheaf tensor product. Used only in its stated generality for the local perfect-model calculation; no unit-specific geometric argument is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-constant-module-section-properties",
+  "lem-weil-pbc-torsion-limit-sheaf-completeness",
+  "lem-weil-pbc-restriction-local-completeness",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-sfb-ringed-site-restriction-kflat",
+  "lem-sfb-localized-site-tensor-restriction"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q134-e6ead4840",
+  "group": "Q134",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q134-e6ead4840 (reviewer sub-agent of L); spot-checked: I read the whole item. The 7-step split creates no new node and keeps the statement and stmt_deps unchanged. It matches the reverse direction of Bhatt–Scholze Prop 6.6.11 (via Lemma 6.5.8 and the residue of the constant model). Step checks: (1) a finite projective P^i is the image of an idempotent e_i, so M^i ≅ lim (P^i/I^n P^i)_T by sectionwise limits and exact constant sheaves. (2) lem-weil-pbc-torsion-limit-sheaf-completeness covers bounded complexes of such limits, and lem-weil-pbc-restriction-local-completeness (an iff with no hypotheses; its JB is the item's IB) gives locally derived IB-complete. (3) The quotient clause of the constant-completion equivalence at n=1 gives B/IB = k. (4) Summands of B^r are flat, the complex is bounded above so it is K-flat, and derived change of rings is computed on K-flat complexes, so no Tor hypothesis is needed. (5) The chain isomorphism holds degreewise through e_i and is natural in d. (6) The constant functor is exact and each term is a summand of k^r, so the cohomology is finite-dimensional and vanishes outside [a,b]. (7) Weakly étale localization, restriction commuting with tensor, and restriction preserving K-flat complexes give the slice case. Stacks tags 093J, 093M, 06YQ, 0E8K, 03EL, 099Q and 099C were checked in the tag table. Edge cases checked: Z_(p); k[e]/e^2 with I=(e); a field with I=0; the zero complex; an infinite residue field. The statement gives exactly what parent lem-sfb-adic-stratified-perfect uses in its steps 4 and 5. The nine generic module-sheaf tool_uses are accepted. Live and side-live still have the item unsplit. Maintainer note: the item's source.place, and also lem-pc-bounded-above-flat-kflat-site, cite Tag 06YS for lemma-bounded-flat-K-flat; the correct tag is 06YQ. Both are maintainer-owned fields, so I did not fix them."
  }
 }
