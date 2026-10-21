@@ -18,48 +18,122 @@
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
   "lem-weil-pbc-comparison-direct-image-canonical-mate"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [pqf-lem-proper-basic], $p$ is quasi-compact and quasi-separated. Set $N=B_{Y,\\mathrm{et}}$, regarded as a constant $A$-module in degree zero, and use [lem-sfb-geometric-inverse-image-constant-module] for the geometric inverse images $p_{\\mathrm{et}}^{-1}$ and $\\nu_T^*$: canonically $p_{\\mathrm{et}}^{-1}N=B_{Z,\\mathrm{et}}$ and $\\nu_T^*B_{T,\\mathrm{et}}=B_{T,\\mathrm{proet}}$. Thus the object $L=E_e\\otimes_A^Lp_{\\mathrm{et}}^{-1}N$ is $H_e$. Both $E_e$ and $L$ are bounded below by hypothesis. These are exactly the two boundedness assumptions in [lem-sfb-projection-comparison-etale-proetale]; no boundedness of a tensor of $Rp_*E_e$ is being inferred.",
+   "uses": [
+    "pqf-lem-proper-basic",
+    "lem-sfb-geometric-inverse-image-constant-module",
+    "lem-sfb-projection-comparison-etale-proetale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A6, lemma-morphism-comparison, hypotheses; constant objects: sites.tex Tags 0H7J and 00YV"
+   }
+  },
+  {
+   "text": "The finite additive group of $A$ has a positive exponent, so $A$ is a torsion ring. Apply [lem-kun-0f0g] to $p$, $E_e$, and $N=B_{Y,\\mathrm{et}}$. It says that the actual counit-defined projection arrow $\\pi_e:Rp_{\\mathrm{et},*}E_e\\otimes_A^LN\\to Rp_{\\mathrm{et},*}H_e$ is invertible. This theorem allows unbounded inputs and does not require $N$ to be flat or perfect. Its arrow is the arrow of [def-kun-projection-formula-map], rather than an unspecified isomorphism of the endpoints.",
+   "uses": [
+    "lem-kun-0f0g",
+    "def-kun-projection-formula-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F0G, lemma-projection-formula-proper-mod-n; named arrow from sites-cohomology.tex Tag 0B56"
+   }
+  },
+  {
+   "text": "Use the notation of [lem-sfb-projection-comparison-etale-proetale] with $K=E_e$, $N=B_{Y,\\mathrm{et}}$ and $L=H_e$: $F_T=\\nu_T^*$, $R_e=Rp_{\\mathrm{et},*}$, $R_p=Rp_{\\mathrm{proet},*}$, $a:F_Zp_{\\mathrm{et}}^{-1}\\simeq p_{\\mathrm{proet}}^{-1}F_Y$, $t_T:F_T(-\\otimes_A^L-)\\simeq F_T(-)\\otimes_A^LF_T(-)$, and $h=(1\\otimes a_N)t_{Z;E_e,p_{\\mathrm{et}}^{-1}N}$. Its equality is\n$$R_p(h)b_{H_e}F_Y(\\pi_e)=\\pi_p(b_{E_e}\\otimes1)t_{Y;R_eE_e,N}.$$\nHere $\\pi_p$ is precisely the ordinary $A$-linear pro-etale projection arrow at $(E,B_Y)$. The comparisons $b_{E_e},b_{H_e}$ are the counit-normalized mates of [lem-weil-pbc-comparison-direct-image-canonical-mate]. The comparisons $t_T$ are the canonical derived tensor isomorphisms of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Thus the displayed equality uses exactly the comparisons specified in the item.",
+   "uses": [
+    "lem-sfb-projection-comparison-etale-proetale",
+    "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E48, remark-compatible-with-diagram, specialized to the etale/pro-etale square; projection comparison node states the resulting named-map equation"
+   }
+  },
+  {
+   "text": "Solve the equation in step 3 by composing on the right with $t_{Y;R_eE_e,N}^{-1}(b_{E_e}^{-1}\\otimes1)$:\n$$\\pi_p=R_p(h)b_{H_e}F_Y(\\pi_e)t_{Y;R_eE_e,N}^{-1}(b_{E_e}^{-1}\\otimes1).$$\nEvery factor is invertible: $h$ is a composite of tensor and pullback isomorphisms, the two $b$'s are invertible at the bounded-below objects from step 1, and $\\pi_e$ is invertible by step 2. Functors and tensoring take an inverse to an inverse. Consequently $\\pi_p$ is invertible, with precisely this conjugation formula.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E48, remark-compatible-with-diagram; elementary rearrangement of the equation in step 3"
+   }
+  },
+  {
+   "text": "For the B-linear mate $\\chi_{p,E}$ specified in the statement, [lem-fix-proetale-scalar-mate-normalization] identifies its scalar restriction, using the canonical tensor and direct-image restriction identifications, with the same $\\pi_p$. Therefore the formula in step 4 is also the required formula for the scalar restriction of $\\chi_{p,E}$; in particular that restriction is invertible. Apply the conservativity assertion of [lem-weil-pbc-ring-sheaf-change-adjunction] with $R_T=A_T$, $S_T=B_T$ and their canonical constant-coefficient structural identifications. It reflects this isomorphism, proving that $\\chi_{p,E}$ itself is an isomorphism in $D(Y_{\\mathrm{proet}},B)$. The normalization has no flatness or boundedness hypothesis, and the only boundedness used above was that of $E_e,H_e$.",
+   "uses": [
+    "lem-fix-proetale-scalar-mate-normalization",
+    "lem-weil-pbc-ring-sheaf-change-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0B56, equation-projection-formula-map; Tags 0D6D, 0D6E and 07A6 for the coefficient restriction comparisons"
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-lem-proper-basic",
+  "lem-sfb-geometric-inverse-image-constant-module",
+  "lem-sfb-projection-comparison-etale-proetale",
+  "lem-kun-0f0g",
+  "def-kun-projection-formula-map",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-fix-proetale-scalar-mate-normalization",
+  "lem-weil-pbc-ring-sheaf-change-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0F0G specialized to the constant A-module B, assembled with the existing named-map projection-comparison and scalar-mate-normalization statements"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
    "query": "Proper pushforward commutes with derived scalar extension on bounded etale origin proetale sheaf complexes",
-   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pushforwardComp, SheafOfModules.pushforwardComp_hom_app_val_app, SheafOfModules.pushforwardNatTrans_app_val_app_apply, SheafOfModules.pushforwardNatIso_hom, SheafOfModules.pushforwardNatTrans_app_val_app, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, SheafOfModules.pushforwardComp_inv_app_val_app, SheafOfModules.pushforwardNatTrans_comp",
+   "results": "8 hits: SheafOfModules.pushforwardComp, SheafOfModules.pushforwardComp_hom_app_val_app, SheafOfModules.pushforward_assoc, SheafOfModules.pushforwardComp_inv_app_val_app, SheafOfModules.pushforward_map_val, SheafOfModules.pushforwardNatIso_hom, SheafOfModules.pushforwardNatIso, SheafOfModules.pushforwardNatTrans_app_val_app_apply",
    "date": "2026-10-21",
-   "verdict": "No match: hits concern underived sheaf pushforward, algebraic etale morphisms or unrelated proper projections; none proves the B-linear proper scalar mate invertible on bounded etale-origin pro-etale inputs."
+   "verdict": "No match: returned underived pushforward, coefficient adjunction, algebraic etale or unrelated projection declarations do not state the proper derived scalar-mate theorem on etale-origin pro-etale complexes."
   },
   {
    "tool": "leansearch",
    "query": "Proper projection formula with finite coefficients transported from etale to proetale sites is the scalar adjunction mate",
    "results": "8 hits: ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, PresheafOfModules.pullbackPushforwardAdjunction, CategoryTheory.Equivalence.transportSheafificationAdjunction, PresheafOfModules.instIsRightAdjointPushforward, ModuleCat.RestrictionCoextensionAdj.app', Algebra.FormallyEtale.of_restrictScalars, ModuleCat.RestrictionCoextensionAdj.counit'",
    "date": "2026-10-21",
-   "verdict": "No match: hits concern underived sheaf pushforward, algebraic etale morphisms or unrelated proper projections; none proves the B-linear proper scalar mate invertible on bounded etale-origin pro-etale inputs."
+   "verdict": "No match: returned underived pushforward, coefficient adjunction, algebraic etale or unrelated projection declarations do not state the proper derived scalar-mate theorem on etale-origin pro-etale complexes."
   },
   {
    "tool": "loogle",
    "query": "\"Proper\", \"projection\"",
    "results": "0 hits: ",
    "date": "2026-10-21",
-   "verdict": "No match: hits concern underived sheaf pushforward, algebraic etale morphisms or unrelated proper projections; none proves the B-linear proper scalar mate invertible on bounded etale-origin pro-etale inputs."
+   "verdict": "No match: returned underived pushforward, coefficient adjunction, algebraic etale or unrelated projection declarations do not state the proper derived scalar-mate theorem on etale-origin pro-etale complexes."
   },
   {
    "tool": "grep",
    "query": "[Pp]roper.*[Pp]rojection|[Pp]rojection.*[Pp]roper",
-   "results": "10 hits: Mathlib/CategoryTheory/Limits/Shapes/Pullback/Pasting.lean, Mathlib/CategoryTheory/Limits/Shapes/Pullback/Pasting.lean, Mathlib/AlgebraicTopology/DoldKan/Faces.lean, Mathlib/AlgebraicTopology/SimplicialSet/KanComplex.lean, Mathlib/Tactic/ClickSuggestions/FindPremises.lean, Mathlib/Geometry/Euclidean/Projection.lean, Mathlib/Geometry/Euclidean/Projection.lean, Mathlib/Geometry/Euclidean/Projection.lean",
+   "results": "10 hits: Mathlib/Geometry/Euclidean/Projection.lean, Mathlib/Geometry/Euclidean/Projection.lean, Mathlib/Geometry/Euclidean/Projection.lean, Mathlib/Geometry/Euclidean/SignedDist.lean, Mathlib/Tactic/ClickSuggestions/FindPremises.lean, Mathlib/AlgebraicTopology/SimplicialSet/KanComplex.lean, Mathlib/AlgebraicTopology/DoldKan/Faces.lean, Mathlib/CategoryTheory/MorphismProperty/Representable.lean",
    "date": "2026-10-21",
-   "verdict": "No match: hits concern underived sheaf pushforward, algebraic etale morphisms or unrelated proper projections; none proves the B-linear proper scalar mate invertible on bounded etale-origin pro-etale inputs."
+   "verdict": "No match: returned underived pushforward, coefficient adjunction, algebraic etale or unrelated projection declarations do not state the proper derived scalar-mate theorem on etale-origin pro-etale complexes."
   },
   {
    "tool": "leanfinder",
    "query": "Derived coefficient comparison for a proper scheme morphism is invertible on bounded etale origin complexes",
-   "results": "8 hits: AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.Scheme.instCategoryEtale",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.IsSmooth",
    "date": "2026-10-21",
-   "verdict": "No match: hits concern underived sheaf pushforward, algebraic etale morphisms or unrelated proper projections; none proves the B-linear proper scalar mate invertible on bounded etale-origin pro-etale inputs."
+   "verdict": "No match: returned underived pushforward, coefficient adjunction, algebraic etale or unrelated projection declarations do not state the proper derived scalar-mate theorem on etale-origin pro-etale complexes."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-fix-compact-support-coefficient-change",
@@ -77,5 +151,59 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-fix-proper-etale-origin-scalar-isomorphism",
+  "worker": "stage1",
+  "summary": "Kept the statement and all its hypotheses unchanged. Applied the existing torsion-ring proper projection formula to B as an A-module, specialized the existing exact etale/pro-etale projection-comparison equation, solved that equation for the pro-etale arrow, and used the existing B-linear scalar-mate normalization and conservative restriction. No new nodes, no flatness or perfectness assumptions, and no Lean changes or compilation.",
+  "blueprint": "Nearest blueprint ancestor lem-fix-compact-support-coefficient-change: the proper factor of the first-paragraph tensor comparison and the final site transport in the second paragraph. This split supplies the named proper scalar mate on the bounded etale witnesses used by the repaired parent; it does not alter the unit route.",
+  "tool_uses": [
+   {
+    "node": "pqf-lem-proper-basic",
+    "why": "Only its proper implies qcqs assertion is used to meet the comparison hypothesis; generic scheme-morphism tool."
+   },
+   {
+    "node": "lem-sfb-geometric-inverse-image-constant-module",
+    "why": "General constant-module pullback identifies the B coefficient sheaves for the site comparison and p; no unit-specific theorem supplies this identification."
+   },
+   {
+    "node": "lem-sfb-projection-comparison-etale-proetale",
+    "why": "Generic canonical projection-mate square for qcqs morphisms, with exactly the bounded-below E and tensor hypotheses; this is the required site transport, not a replacement of the proper projection route."
+   },
+   {
+    "node": "lem-kun-0f0g",
+    "why": "The existing proper torsion-coefficient projection theorem applies to the finite ring A and N=B without any Tor-dimension assumption."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "why": "Generic qcqs bounded-below direct-image comparison supplies invertibility and pins both comparisons to the specified counit mates."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic canonical ringed pullback/tensor isomorphism supplies the comparison factors in the named-map equation."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "why": "Generic exact coefficient restriction reflects derived isomorphisms and provides the specified direct-image identifications."
+   }
+  ]
+ },
+ "tool_uses": [
+  "pqf-lem-proper-basic",
+  "lem-sfb-geometric-inverse-image-constant-module",
+  "lem-sfb-projection-comparison-etale-proetale",
+  "lem-kun-0f0g",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-ring-sheaf-change-adjunction"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NU-ebd36b72a",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-ebd36b72a (reviewer sub-agent of L); spot-checked: I read the item and its five steps, the full statements of all ten cited nodes, Stacks 0F0G (etale-cohomology.tex lemma-projection-formula-proper-mod-n), and the step-source tags 09A6, 0E48, 0B56, 0D6D, 0D6E, 07A6, 0H7J and 00YV (each checked against tags/tags). I also read the unit (it has no steps) and the parent's step 2, which cites the item. The delivery has no new nodes, the statement is unchanged and not weakened, and no SGA is cited. Step 1: proper implies qcqs, and the constant-module lemma for the geometric morphisms p_et and nu_T gives L = H_e, so both D+ hypotheses of lem-sfb-projection-comparison-etale-proetale hold. Step 2: a finite ring is torsion, and lem-kun-0f0g has no boundedness or Tor condition, so it applies to N = B_Y and makes the named PF_f invertible. Step 3: the specialized equation matches the node's display in variables and direction. pi_p is the transpose alpha of ringed-projection-mate-exact, carried to B_{Y,proet} by naturality in P. Step 4: I checked the domains of each inverse, and every factor is invertible (b at E_e and H_e is invertible on D+). The step is correctly marked elementary. Step 5: lem-fix-proetale-scalar-mate-normalization identifies the restriction of chi with pi_p, and lem-weil-pbc-ring-sheaf-change-adjunction (R=A_T, S=B_T) says restriction reflects isomorphisms, so chi is an isomorphism. Every node works in the same ordinary uncompleted unbounded constant-coefficient derived categories. Edge cases: p = id, B = 0, E_e = 0 and A = B all hold. For A = Z/4, B = Z/2, E_e = Z/2, the module H_e is not in D+, so the hypothesis excludes this case as it should. Four other DAG nodes looked like possible duplicates (scalar-mate equation, etale-proper-projection-formula-finite, sp-finite-ring-compact-support-projection, finite-compact-support-scalar-transport); none states the item. A dependency BFS finds no cycle. I accept all seven declared tool_uses as generic black boxes. No fixes."
+ }
 }

@@ -20275,3 +20275,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 2026-10-21T04:10:47Z L: superseded stage-1 delivery Q11/lem-sp-chart-finite-ring-adjunction at b001e379c6860acf1f1197ff36baee7495502a80; current completion retained; packet archived at refs/superseded/Q11/lem-sp-chart-finite-ring-adjunction/b001e379c6860acf1f1197ff36baee7495502a80; stale return retired.
 - 04:10 L: returned deliver/Q10/lem-sfb-dc-upper-star-preserves (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-sfb-dc-upper-star-preserves: local changes on the )
 - 04:11 L: merged deliver/NV/lem-fix-reduction-open-etale-origin (reviewer PASS; first push; new nodes: 0)
+- 04:11 L: merged deliver/NU/lem-fix-proper-etale-origin-scalar-isomorphism (reviewer PASS; first push; new nodes: 0)
