@@ -23608,3 +23608,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 2026-10-21T20:03:30Z L: superseded stage-1 delivery NN/lem-sfb-proper-ultrametric-scalar-extension at 2eb61c8edba0bdaba17bf92bb56d470853db1b1b; current completion retained; packet archived at refs/superseded/NN/lem-sfb-proper-ultrametric-scalar-extension/2eb61c8edba0bdaba17bf92bb56d470853db1b1b; stale return retired.
 - 20:04 L: merged deliver/O2/lem-sfb-bounded-finite-evaluation-rectangle-replacement (reviewer PASS; first push; new nodes: 0)
 - 20:05 L: merged deliver/N6/lem-sfb-profinite-metric-function-quotients (reviewer PASS; first push; new nodes: 1)
+- 20:05 L: merged deliver/N5/lem-sfb-prime-to-ell-complete-scalar-integral (reviewer PASS; first push; new nodes: 2)

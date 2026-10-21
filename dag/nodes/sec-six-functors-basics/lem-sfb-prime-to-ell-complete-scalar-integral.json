@@ -11,9 +11,110 @@
   "def-weil-l-adic-numbers",
   "def-weil-size-convention"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each open normal subgroup $U$, the open cosets cover compact $K$, hence a finite subcover contains every coset; thus $Q_U=K/U$ is finite and nonempty. Let $D\\subseteq C(K,B)$ consist of the functions factoring through some $Q_U$. These are continuous because cosets are open. Intersecting two open normal subgroups gives another such subgroup, and both quotient maps factor through its quotient. Consequently pointwise sums and scalar multiples make $D$ a $B$-linear subspace; constant functions belong to it. Write $A_U(\\bar f)=|Q_U|^{-1}\\sum_{q\\in Q_U}\\bar f(q)$ for the proposed average of a function factoring through $Q_U$. The denominators are nonzero because $B$ contains the characteristic-zero field $\\mathbf Q_\\ell$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open-direct-image scalar tame-kernel input; agent analytic expansion: finite quotient functions and the candidate averaging formula. The blueprint provides the context, not this argument."
+   }
+  },
+  {
+   "text": "Suppose $V\\subseteq U$ are open normal subgroups. The map $Q_V\\to Q_U$ is onto and each fibre has $t=|U/V|$ points: choose a representative $a$ of a coset of $U$; the bijection $U/V\\to aU/V$ is $uV\\mapsto auV$. Partitioning the finite sum by these fibres gives $|Q_V|=t|Q_U|$ and\n$$|Q_V|^{-1}\\sum_{z\\in Q_V}\\bar f(z\\bmod U)=(t|Q_U|)^{-1}t\\sum_{q\\in Q_U}\\bar f(q)=A_U(\\bar f).$$\nFor two arbitrary choices $U_1,U_2$ through which the same function factors, apply this identity to $V=U_1\\cap U_2$. The descended functions on $Q_V$ agree since $K\\to Q_V$ is onto. Thus $A:D\\to B$ is well defined. Computing two functions on a common quotient proves additivity and $B$-homogeneity term by term.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open-direct-image scalar tame-kernel input; agent analytic expansion: independence under refinement of the finite quotient. The blueprint provides the context, not this argument."
+   }
+  },
+  {
+   "text": "For $n=|Q_U|$, the prime-to-$\\ell$ hypothesis gives $v_\\ell(n)=0$ directly from the valuation formula of [def-weil-l-adic-numbers]. Thus $|n|_B=|n|_\\ell=1$ by the isometric inclusion, and $|n^{-1}|_B=1$ by multiplicativity. Induction on the finite number of summands using the strong triangle inequality gives\n$$|A(f)|\\leq\\max_{q\\in Q_U}|\\bar f(q)|=\\|f\\|_\\infty.$$\nAlso $A(1)=n^{-1}n=1$. For $a\\in K$, normality of $U$ makes both $q\\mapsto aq$ and $q\\mapsto qa$ permutations of $Q_U$. Reindexing the finite sum proves $A(f(a\\cdot))=A(f)=A(f(\\cdot a))$. The norm identity uses only the definition of the valuation, rather than introducing a separate node for a prime-to-$\\ell$ integer.",
+   "uses": [
+    "def-weil-l-adic-numbers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open-direct-image scalar tame-kernel input; agent analytic expansion: contractivity, normalization and both finite-level translation identities. The blueprint provides the context, not this argument."
+   }
+  },
+  {
+   "text": "The open normal subgroups and their cosets are clopen: the complement of a coset is the union of all other open cosets. They separate distinct points by Hausdorffness and the assumed identity-neighbourhood basis. A connected subset containing two distinct points would therefore be separated by a clopen coset. Hence $K$ is totally disconnected. Given $f\\in C(K,B)$ and $\\epsilon>0$, apply [lem-sfb-profinite-finite-map-approximation] with $X=K$, $V=B$ and the open neighbourhood $S=\\{(b,c):|b-c|<\\epsilon/2\\}$ of the diagonal. Obtain continuous $g:K\\to\\operatorname{Fin}(n)$ and $h$ with $|f(x)-h(g(x))|<\\epsilon/2$. Put $d=h\\circ g$, which is continuous since the intermediate space is discrete. We next check explicitly that $d\\in D$, so that these approximations prove norm density.",
+   "uses": [
+    "lem-sfb-profinite-finite-map-approximation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open-direct-image scalar tame-kernel input; agent analytic expansion: apply finite-map approximation with an arbitrarily small norm error. The blueprint provides the context, not this argument."
+   }
+  },
+  {
+   "text": "For each $x\\in K$, the open fibre $g^{-1}(g(x))$ contains $xU_x$ for some open normal subgroup $U_x$, by the identity-neighbourhood basis translated by $x$. Choose a finite subcover $x_iU_{x_i}$ of $K$, and put $U=\\bigcap_iU_{x_i}$. If $y\\in x_iU_{x_i}$ and $u\\in U$, then $yu\\in x_iU_{x_i}$, so $g(yu)=g(y)$. Thus $g$, and therefore $d$, is constant on every coset $yU$, giving $d\\in D$. The pointwise approximation implies $\\|f-d\\|_\\infty\\leq\\epsilon/2<\\epsilon$. This proves density for every $f,\\epsilon$, without a countable basis or metrizability assumption on $K$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open-direct-image scalar tame-kernel input; agent analytic expansion: finite-subcover verification that the approximation descends to an open-normal quotient. The blueprint provides the context, not this argument."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-dense-subspace-contractive-extension] with scalar field $k=B$, normed space $E=C(K,B)$, complete target $F=B$, dense subspace $D$ from steps 1 and 4–5, and $u=A$ from steps 2–3. The supremum norm is the norm stipulated in the statement; its triangle inequality and scalar homogeneity follow pointwise from those in $B$. Completeness is required only for the target $B$, which is a hypothesis of the item. This produces a continuous $B$-linear extension $I_K$ with $|I_K(f)|\\leq\\|f\\|_\\infty$. Its agreement with $A$ gives the required formula on every $K/U$, in particular $I_K(1)=1$.",
+   "uses": [
+    "lem-sfb-dense-subspace-contractive-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open-direct-image scalar tame-kernel input; agent analytic expansion: extend the finite-quotient functional over complete scalars. The blueprint provides the context, not this argument."
+   }
+  },
+  {
+   "text": "Fix $a\\in K$. The maps $T_a^Lf(h)=f(ah)$ and $T_a^Rf(h)=f(ha)$ are $B$-linear isometries of $C(K,B)$: translations are continuous bijections with continuous inverse, and each supremum is over all of $K$. They preserve $D$, and step 3 shows that the continuous linear maps $I_K\\circ T_a^L$ and $I_K\\circ T_a^R$ both restrict to $A$ there. The uniqueness clause of [lem-sfb-dense-subspace-contractive-extension], applied to the same $D,A,E,F$, identifies both with $I_K$. This proves both translation identities on all continuous functions.",
+   "uses": [
+    "lem-sfb-dense-subspace-contractive-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open-direct-image scalar tame-kernel input; agent analytic expansion: translation invariance of the extended functional. The blueprint provides the context, not this argument."
+   }
+  },
+  {
+   "text": "Let $P$ be profinite and $f:P\\times K\\to B$ continuous. Define $J_P(f)(p)=I_K(f(p,-))$; each section $f(p,-)$ is continuous by restriction of $f$. To prove continuity fix $p_0\\in P$ and $\\epsilon>0$. The function $d(p,h)=f(p,h)-f(p_0,h)$ is continuous and $d(p_0,h)=0$. For each $h\\in K$, continuity gives product neighbourhoods $V_h$ of $p_0$ and $W_h$ of $h$ on which $|d|<\\epsilon/2$. Choose finitely many $W_{h_i}$ covering compact $K$, and take $V=\\bigcap_iV_{h_i}$. For $p\\in V$, every $h$ belongs to one of these $W_{h_i}$, so $\\|f(p,-)-f(p_0,-)\\|_\\infty\\leq\\epsilon/2$. By linearity and the bound from step 6,\n$$|J_P(f)(p)-J_P(f)(p_0)|\\leq\\|f(p,-)-f(p_0,-)\\|_\\infty\\leq\\epsilon/2<\\epsilon.$$\nThis is continuity at $p_0$. For $P=\\varnothing$ the assertion is vacuous. This finite-subcover argument checks the parameter topology directly; it assumes neither local compactness of $B$ nor metrizability of $P$ or $K$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open-direct-image scalar tame-kernel input; agent analytic expansion: continuity in every profinite parameter by an explicit product-neighbourhood argument. The blueprint provides the context, not this argument."
+   }
+  },
+  {
+   "text": "For $c\\in C(P,B)$, evaluate at $p$: $J_P(cf)(p)=I_K(c(p)f(p,-))=c(p)I_K(f(p,-))$. Likewise $J_P(f_1+f_2)(p)=J_P(f_1)(p)+J_P(f_2)(p)$ and $J_P(0)=0$, by the established $B$-linearity. The products and sums here are continuous by continuity of the field operations, and step 8 ensures the outputs lie in $C(P,B)$. Thus $J_P$ is $C(P,B)$-linear and commutes with finite sums, including the empty sum. For any continuous $u:P'\\to P$ the equality\n$$J_{P'}(f\\circ(u\\times\\mathrm{id}_K))(p')=I_K(f(u(p'),-))=(J_P(f)\\circ u)(p')$$\nholds by the defining evaluation formula. Precomposition preserves continuity because composites of continuous maps are continuous. Equality at every $p'$ proves naturality, also for an empty source. All function sets, finite quotients and their subspaces are taken inside the universes fixed by [def-weil-size-convention].",
+   "uses": [
+    "def-weil-size-convention"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open-direct-image scalar tame-kernel input; agent analytic expansion: parameterwise linearity, finite sums, precomposition and size. The blueprint provides the context, not this argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-l-adic-numbers",
+  "lem-sfb-profinite-finite-map-approximation",
+  "lem-sfb-dense-subspace-contractive-extension",
+  "def-weil-size-convention"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), scalar tame-kernel context. Finite-quotient averaging and parameter argument written by N5; finite approximation and dense-subspace extension are the exact Mathlib leaves cited in the steps. Exact nonarchimedean integration literature reference remains WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -131,10 +232,101 @@
    },
    "date": "2026-10-22",
    "verdict": "no match: inspected hits concern real-valued Haar integration, finite-group averaging, Mahler expansions, completion constructions or definitions of continuous cohomology; none states this parameterized nonarchimedean assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bounded nonarchimedean Haar integral on continuous complete p adic valued functions on a pro prime to p group",
+   "results": {
+    "t": "2026-10-21T19:55:07Z",
+    "tool": "leanfinder",
+    "query": "Bounded nonarchimedean Haar integral on continuous complete p adic valued functions on a pro prime to p group",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "mahler",
+     "PadicInt.mahlerTerm",
+     "PadicInt.hasSum_mahler",
+     "PadicInt.mahlerEquiv",
+     "PadicInt.continuousAddCharEquiv",
+     "PadicInt.mahlerSeries",
+     "PadicInt.continuous_addChar_of_value_at_one",
+     "PadicInt.addChar_of_value_at_one"
+    ],
+    "digest": "8ab9fa59247473e5"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the item: semantic hits are Mahler expansions or additive characters on the pro-ell group Z_ell; Loogle returns no hits; grep finds only the Bernoulli-number p-integrality predicate, not an integration operator. Earlier two item phrasings are retained from the imported node."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normalized p adic integration continuous functions on pro prime to p profinite groups with complete coefficient field",
+   "results": {
+    "t": "2026-10-21T19:55:06Z",
+    "tool": "leansearch",
+    "query": "Normalized p adic integration continuous functions on pro prime to p profinite groups with complete coefficient field",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "mahler",
+     "Padic",
+     "PadicInt.continuousAddCharEquiv_apply",
+     "PadicInt",
+     "PadicInt.continuous_addChar_of_value_at_one",
+     "PadicInt.hasSum_mahler",
+     "PadicInt.addChar_of_value_at_one",
+     "PadicInt.completeSpace"
+    ],
+    "digest": "8132c8e1d6e00428"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the item: semantic hits are Mahler expansions or additive characters on the pro-ell group Z_ell; Loogle returns no hits; grep finds only the Bernoulli-number p-integrality predicate, not an integration operator. Earlier two item phrasings are retained from the imported node."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"integral\", \"Nonarchimedean\"",
+   "results": {
+    "t": "2026-10-21T19:55:06Z",
+    "tool": "loogle",
+    "query": "\"integral\", \"Nonarchimedean\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the item: semantic hits are Mahler expansions or additive characters on the pro-ell group Z_ell; Loogle returns no hits; grep finds only the Bernoulli-number p-integrality predicate, not an integration operator. Earlier two item phrasings are retained from the imported node."
+  },
+  {
+   "tool": "grep",
+   "query": "(haar|Haar|integral).*(Padic|Nonarchimedean)|(Padic|Nonarchimedean).*(haar|Haar|integral)",
+   "results": {
+    "t": "2026-10-21T19:55:06Z",
+    "tool": "grep",
+    "query": "(haar|Haar|integral).*(Padic|Nonarchimedean)|(Padic|Nonarchimedean).*(haar|Haar|integral)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 4,
+    "note": "",
+    "top": [
+     "Mathlib/NumberTheory/Bernoulli.lean",
+     "Mathlib/NumberTheory/Bernoulli.lean",
+     "Mathlib/NumberTheory/Bernoulli.lean",
+     "Mathlib/NumberTheory/Bernoulli.lean"
+    ],
+    "digest": "bc5a654da96c87eb"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the item: semantic hits are Mahler expansions or additive characters on the pro-ell group Z_ell; Loogle returns no hits; grep finds only the Bernoulli-number p-integrality predicate, not an integration operator. Earlier two item phrasings are retained from the imported node."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-prime-to-ell-cochain-finite-quotient-descent",
@@ -160,5 +352,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-prime-to-ell-complete-scalar-integral",
+  "worker": "stage1",
+  "summary": "Constructed finite quotient averages, checked their compatibility by constant-size fibres, proved the ultrametric norm bound, and extended from the dense subspace of finite quotient functions using two new Mathlib leaves. Proved both translation identities by uniqueness and parameter continuity by a finite-subcover epsilon argument, then checked pointwise module linearity and naturality. Statement unchanged; no Lean written or compiler run.",
+  "blueprint": "The item has no imported ancestor: blueprint_refs.py ancestor reports None. Its inherited from.place locates the analytic scalar tame-kernel input of paragraph (3) of det-thm-sf-ctf-stability-direct-images. Steps 1–7 provide complete-scalar integration there; steps 8–9 provide the parameterwise operation. The blueprint supplies context, not a proof of this auxiliary assertion."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-N5-9432739e5",
+  "group": "N5",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-9432739e5 (reviewer sub-agent of L); spot-checked: The item's statement is unchanged and correct; I tested it on trivial K, finite K of order prime to ℓ and empty P/P'. The prime-to-ℓ hypothesis is needed: with ℓ | |Q| the denominator has norm > 1 and the bound fails. All nine steps check. Steps 1–2: finite index and constant fibre size t=|U/V| make the finite-quotient average A well defined. Step 3: def-weil-l-adic-numbers gives v_ℓ(n)=0, and the isometric inclusion gives |n|_B=1; translation invariance uses normality of U. Steps 4–5: K is shown totally disconnected explicitly; Mathlib exists_finite_approximation_of_mem_nhds_diagonal (DisjointCover.lean:140–141, read) is applied with S={|b−c|<ε/2}; finite-coset refinement then puts the approximant in D with error ≤ ε/2. Steps 6–7: the extension leaf applies with k=B, E=C(K,B), F=B; translation invariance follows from its uniqueness clause, which matches extendOfNorm_unique (any continuous linear g with g∘e=f, Extend.lean 180–216, read). Step 8 is a correct tube-lemma argument. Step 9 is pointwise. Both new nodes are exact or one-line Mathlib specializations, self-contained, with no proof and strictly generic. A duplicate search over dag/nodes (extendOfNorm, exists_finite_approximation, normalized integral/average, the proper-ultrametric Hahn–Banach node, the finite-subfield retraction, the coset-basis node) found no existing node stating either leaf or the item. No SGA source is used, there is no re-split note, and the item is not dropped. from.node null is inherited, and blueprint paragraph (3) gives only the open-direct-image context; the WANTED literature reference is reported honestly. No fixes."
  }
 }
