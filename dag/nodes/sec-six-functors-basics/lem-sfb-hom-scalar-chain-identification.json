@@ -16,68 +16,188 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-sfb-slice-scalar-hom-chain-adjunction] to the given $\\varphi$ and complexes. Its normalized slice adjunction supplies the actual chain isomorphisms $\\nu$ and $\\theta$, with the displayed generator formulas and input naturality, for unbounded product Hom complexes.",
+   "text": "Restrict the actual scalar-extension sheafification unit to every slice. Its underlying abelian presheaf map remains locally injective and locally surjective under the localization functor. Maps from that unit to a module sheaf descend uniquely by homEquivOfIsLocallyBijective. This applies directly to the scalar tensor presheaf; no separate tensor-localization isomorphism is needed.",
    "uses": [
-    "lem-sfb-slice-scalar-hom-chain-adjunction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03CZ (lemma-adjointness-tensor-restrict), agent assembly of extracted chain lemmas; sites-cohomology.tex Tag 0A8X (section-hom-complexes)."
-   }
-  },
-  {
-   "text": "Apply [lem-sfb-scalar-hom-chain-evaluation] to $P,J,N,q$. It supplies $\\alpha_S$ and the unique normalized $S$-linear chain map $\\sigma_q$, together with their input and $q$ naturality. Its formulas use the same product coordinates and local evaluation as the item.",
-   "uses": [
-    "lem-sfb-scalar-hom-chain-evaluation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03CZ (lemma-adjointness-tensor-restrict), agent assembly of extracted chain lemmas; sites-cohomology.tex Tag 0A8X (section-hom-complexes)."
-   }
-  },
-  {
-   "text": "For the strict square, evaluate on $s\\otimes f$, in degree $n$, coordinate $i$, at $p$. The formulas of [lem-sfb-slice-scalar-hom-chain-adjunction] and [lem-sfb-scalar-hom-chain-evaluation] give $s q(1\\otimes f^i(p))$ on the left and $q(s\\otimes f^i(p))$ on the right. They agree by $S$-linearity of $q$. Equality of all product coordinates [def-pur-hom-complex], then the tensor universal property [def-weil-pbc-module-tensor-product] and uniqueness through module sheafification [def-weil-presheaf-modules-sheafification], prove equality of chain maps. The evaluation is precisely product projection followed by evaluation at the identity of the slice [def-coef-hom-representative-evaluation]; no localization or replacement is involved.",
-   "uses": [
-    "lem-sfb-slice-scalar-hom-chain-adjunction",
-    "lem-sfb-scalar-hom-chain-evaluation",
-    "def-pur-hom-complex",
-    "def-weil-pbc-module-tensor-product",
+    "def-weil-sheaf-of-modules-category",
+    "def-pc-sheaf-restrict-scalars",
+    "def-pur-sheaf-tensor-product",
+    "def-pur-localized-ringed-site",
     "def-weil-presheaf-modules-sheafification",
-    "def-coef-hom-representative-evaluation"
+    "lem-sp-scalar-extension-binary-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DH (section-localize); Tag 03EL (lemma-tensor-product-pullback), applied to localization; Tag 03CY"
+   }
+  },
+  {
+   "text": "For module sheaves $A,B$ over any one of these slices, an $R$-linear sheaf map $h:A\\to UB$ gives the sectionwise $S$-linear presheaf map $s\\otimes x\\mapsto s h(x)$ by the ordinary module scalar-Hom bijection. Restrictions commute with it since $(s h(x))|_Z=s|_Z h(x|_Z)$. Sheafification therefore extends it uniquely to $EA\\to B$. Conversely $g:EA\\to B$ gives $x\\mapsto g(1\\otimes x)$. The composites are identities: on $A$ this is $1h(x)=h(x)$; on the tensor presheaf it is $s g(1\\otimes x)=g(s\\otimes x)$, and equality passes uniquely to its sheafification. This proves the normalized slice adjunction used below, including its inverse formula, directly from the cited module bijection and sheafification. Precomposition, postcomposition, and further restriction commute with both formulas by substitution.",
+   "uses": [
+    "lem-weil-pbc-scalar-extension-hom",
+    "def-weil-presheaf-modules-sheafification",
+    "def-pur-sheaf-tensor-product",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CZ (lemma-adjointness-tensor-restrict); Tag 03CY (lemma-sheafification-presheaf-modules)"
+   }
+  },
+  {
+   "text": "For each degree $i$, the $R$-sheaf $S\\otimes_R A^i$ and $UE(A^i)$ have the same underlying abelian sheaf: both are the abelian sheafification of $W\\mapsto S(W)\\otimes_{R(W)}A^i(W)$. Module sheafification supplies the actions extending those on this presheaf; after restriction the two $R$-actions coincide. The identity on that presheaf induces mutually inverse $R$-linear maps by uniqueness of sheafification. This is $\\nu_A^i$ and has the required value on generators. It commutes with the differential, since either composite sends $s\\otimes x$ to $s\\otimes d_Ax$, and is natural by the identical calculation with a map in place of $d_A$.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "def-pur-sheaf-tensor-product",
+    "def-pc-sheaf-restrict-scalars"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03CZ (lemma-adjointness-tensor-restrict), agent assembly of extracted chain lemmas; sites-cohomology.tex Tag 0A8X (section-hom-complexes)."
+    "place": "Tag 03CZ (lemma-adjointness-tensor-restrict); Tag 03CY (lemma-sheafification-presheaf-modules)"
    }
   },
   {
-   "text": "For any commuting coefficient square, the maps already supplied satisfy every normalization hypothesis of [lem-sfb-scalar-hom-chain-coefficient-coherence]. Apply its four chain equations to obtain coefficient compatibility of $\\nu,\\theta,\\alpha_S,\\sigma_q$, with its normalized iterated-extension identifications and restriction mate. Its arbitrary $w:BN\\to N'$ and compatible $q'$ cover semilinear target changes as well as scalar-extended targets, and its identity/composite compatibility covers coefficient towers. Combined with the input naturality in steps 1–2, this gives the last clause. None of the three lemmas requires flatness, boundedness or K-injectivity.",
+   "text": "Construct the normalized slice Hom equivalence explicitly by localHomRestrict and localTensorLift, prove its R-linearity and restriction compatibility, and obtain moduleTheta. Restriction of scalars preserves the actual Hom products because it is a right adjoint. The product-limit uniqueness isomorphism then assembles moduleTheta into gradedTheta; its projection equation gives the required evaluation formula. Extension is never asserted to preserve products.",
    "uses": [
-    "lem-sfb-scalar-hom-chain-coefficient-coherence"
+    "def-pur-hom-complex",
+    "def-pur-sheaf-hom",
+    "def-pur-localized-ringed-site",
+    "lem-weil-pbc-scalar-extension-hom",
+    "def-weil-presheaf-modules-sheafification",
+    "def-pc-sheaf-restrict-scalars",
+    "lem-sp-scalar-extension-binary-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A8X (section-hom-complexes), product terms; sites-modules.tex Tag 03CZ on slices"
+   }
+  },
+  {
+   "text": "For a homogeneous family $g$ of degree $n$, the $i$-coordinate of $\\theta(dg)$ evaluated at $p$ equals $d_N(g^i(1\\otimes p))-(-1)^n g^{i+1}(1\\otimes d_Pp)$, since $d_{EP}(1\\otimes p)=1\\otimes d_Pp$. This is exactly $(d\\theta(g))^i(p)$. Equality of all coordinate sheaf maps proves the chain equation. The inverse graded isomorphism consequently also commutes with differentials. Thus $\\theta$ is a chain isomorphism for unbounded complexes; no finite support condition on the family has been imposed.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A8X (section-hom-complexes), differential formula"
+   }
+  },
+  {
+   "text": "After constructing sigma by the adjunction as in step 7, define alpha as nu followed by restricted sigma for q=id, then theta, then postcomposition with nu inverse. On local pure sections the sigma and theta normalization equations show alpha(s tensor f)(x)=s tensor f(x). It is a chain map because it is a composite of chain maps.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-presheaf-modules-sheafification",
+    "def-pur-hom-complex",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A8X (section-hom-complexes), product projections and differential; sites-modules.tex Tags 03CY and 03EL"
+   }
+  },
+  {
+   "text": "Lift the explicitly constructed ordinary scalar adjunction termwise to complexes. Transpose the chain map Hom(P,A) to Hom(P,UN) given by postcomposition with the scalar unit of A followed by U(q), then compose with theta inverse. The inverse adjunction sends this to sigma. Its adjunction equation and theta evaluation prove the formula at two unit tensors; S-linearity of sigma and of each Hom coordinate supplies arbitrary s and t.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-pur-sheaf-hom",
+    "lem-weil-pbc-scalar-extension-hom",
+    "def-weil-presheaf-modules-sheafification",
+    "def-pur-sheaf-tensor-product",
+    "def-pc-sheaf-restrict-scalars",
+    "lem-weil-pbc-termwise-adjunction-homotopy"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03CZ (lemma-adjointness-tensor-restrict), agent assembly of extracted chain lemmas; sites-cohomology.tex Tag 0A8X (section-hom-complexes)."
+    "place": "Tag 03CZ (lemma-adjointness-tensor-restrict); Tag 03CY (lemma-sheafification-presheaf-modules)"
+   }
+  },
+  {
+   "text": "Sigma is a chain map by the preceding adjunction construction. Its uniqueness follows by applying the injective adjunction Hom equivalence, composing with theta, and using the actual product-Hom evaluation extensionality lemma. Both unit tensor evaluations are exactly the given normalization formula.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A8X (section-hom-complexes), differential; sites-modules.tex Tags 03CZ and 03CY"
+   }
+  },
+  {
+   "text": "Input naturality of sigma follows on unit tensors from homMap evaluation, scalar-extension map formulas, and the compatibility E(b);q'=q;w. In particular sigma_q is sigma_id followed by Hom(id,q). Substituting this identity and theta naturality into the definition of alpha cancels nu inverse with nu and proves the strict square by chain-map composition identities.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-coef-hom-representative-evaluation",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A8X (section-hom-complexes), product coordinates and componentwise composition; sites-modules.tex Tag 03CZ"
+   }
+  },
+  {
+   "text": "For chain maps $u:P'\\to P$, $v:J\\to J'$, $w:N\\to N'$ with $q'\\circ E v=w\\circ q$, the two functorial composites involving $\\sigma$ evaluate on $s\\otimes f$, $t\\otimes p'$ to $st q'(1\\otimes v f(u(p')))$ and $w(st q(1\\otimes f(u(p'))))$, respectively; these are equal by the displayed compatibility. The Hom action in the first variable is precomposition, so the direction of $u$ is contravariant. For $\\theta$, pre- and postcomposition commute with $g\\mapsto(p\\mapsto g(1\\otimes p))$ by direct substitution. For $\\nu$ and $\\alpha_S$ both naturality composites give respectively $s\\otimes v(x)$ and $s\\otimes v f(u(p'))$. The same generator-and-coordinate uniqueness arguments prove all these equalities as sheaf chain maps. Taking $u,v,w$ to be identities also proves naturality in $q$.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A8X (section-hom-complexes), componentwise functoriality; sites-modules.tex Tag 03CZ"
+   }
+  },
+  {
+   "text": "Use the proved scalarExtensionTowerIso twice and transport across the commuting coefficient equality to define the iterated-extension natural isomorphism. Construct the restriction mate by the ordinary scalar adjunction from z mapping to 1 tensor_b z; the commuting square proves its R-linearity and the adjunction proves its prescribed pure formula. Lift both maps termwise. The nu coefficient identity is cancellation in the definition of tensorComparison. For theta, alpha and sigma, use the scalar adjunctions and actual Hom product projections to reduce equality to nested unit tensors (and to the local tensor generators for alpha). Substitution of the proved normalized formulas makes both theta and alpha expressions identical. For sigma the two remaining expressions are exactly the given compatibility equation for q', evaluated on a nested unit tensor. No finiteness, flatness or boundedness is used. These equations are proved uniformly for arbitrary normalized Data and CoefficientSquare records, using the ordinary scalar-extension generator extensionality transported by obj_eq, and then specialized to the constructed records.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-presheaf-modules-sheafification",
+    "def-pur-hom-complex",
+    "def-pur-sheaf-tensor-product",
+    "lem-sp-scalar-extension-dual-tower-core",
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-sp-scalar-extension-binary-coherence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CZ (lemma-adjointness-tensor-restrict); Tag 03CY (lemma-sheafification-presheaf-modules)"
    }
   }
  ],
  "proof_deps": [
-  "lem-sfb-slice-scalar-hom-chain-adjunction",
-  "lem-sfb-scalar-hom-chain-evaluation",
-  "def-pur-hom-complex",
-  "def-weil-pbc-module-tensor-product",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-sheaf-restrict-scalars",
+  "def-pur-sheaf-tensor-product",
+  "def-pur-localized-ringed-site",
   "def-weil-presheaf-modules-sheafification",
+  "lem-weil-pbc-scalar-extension-hom",
+  "def-pur-hom-complex",
+  "def-pur-sheaf-hom",
+  "def-weil-pbc-module-tensor-product",
   "def-coef-hom-representative-evaluation",
-  "lem-sfb-scalar-hom-chain-coefficient-coherence"
+  "lem-sp-scalar-extension-binary-coherence",
+  "lem-sp-scalar-extension-dual-tower-core",
+  "lem-weil-pbc-termwise-adjunction-homotopy"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tag 03CZ (lemma-adjointness-tensor-restrict), with Tag 03CY and sites-cohomology.tex Tag 0A8X; explicit agent extension to unbounded product Hom complexes and strict normalized square."
+  "place": "Tags 03CZ and 03CY, with sites-cohomology.tex Tag 0A8X; Q1 constructs slice descent directly from local bijectivity, lifts the ordinary adjunction to complexes, and uses the existing scalar tower isomorphisms for coefficient compatibility."
  },
  "mathlib_searches": [
   {
@@ -202,9 +322,7 @@
   "blueprint": "Final paragraph of lem-sfb-dc-hom-preserves.proof.md, 'inverting ell and by descending to a finite extension E', via lem-sfb-dc-hom-filtered-colimit: strict unbounded scalar chain comparison and normalized evaluation underlying coefficient passage.",
   "tool_uses": []
  },
- "tool_uses": [
-  "lem-sfb-localized-site-tensor-restriction"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
@@ -250,5 +368,15 @@
   "result": "pass",
   "note": "Node copy changes only lean; lean.statement verbatim; 17 declarations match. Clause-by-clause: E pinned to changeOfRingsOfUniverses, U = Mathlib restrictScalars termwise, actual homComplex with the homComplexπ + identity-of-slice evaluation (= coefficientHomComponent convention); nu/theta/alpha pinned on generators over every V, sigma by SigmaFormula plus sigma_unique; strict square and input naturality (contravariant P, E b≫q'=q≫w) match the node. Coefficient squares: extensionIso and mate pinned on generators; recomputed the tensor_pure, theta, alpha and sigma coefficient equations on generators and all agree (mate well-defined via φ'a=bφ). No flatness/boundedness/K-injectivity; universes c,v,u independent and bound; edge cases (empty site, S=0, non-flat Z→Z/2, unbounded) admitted. H4: no existing declaration; ScalarDerivedPair is derived/single-universe. Only sorry is the main theorem; docstrings carry source, blueprint and all 11 steps. nt_compile --json: exit 0, no messages, 16.3 s. Advisories: CoefficientCompatibility.nu is definitional (content carried by tensor_pure); evaluate could call coefficientHomComponent; plain imports are proof-only."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261021T233757-L-860800",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }
