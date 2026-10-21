@@ -101,6 +101,73 @@ theorem rightDerivedFunctorOfQuasiIsoResolutions_linear
             (U.rightDerivedFunctorOfQuasiIsoResolutions enough).map f ≫
             (U.kInjectiveDerivedRepresentativeIso enough J qN).hom =
           DerivedCategory.Qh.map ((U.mapHomotopyCategory (.up ℤ)).map g))) := by
-  sorry
+  classical
+  let RF := U.rightDerivedFunctorOfQuasiIsoResolutions enough
+  let η := U.rightDerivedFunctorOfQuasiIsoResolutionsUnit enough
+  let π := HomotopyCategory.quotient A (.up ℤ)
+  let T := U.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh
+  have compute (M N : DerivedCategory A) (I J : CochainComplex A ℤ)
+      [I.IsKInjective] [J.IsKInjective]
+      (qM : M ≅ DerivedCategory.Qh.obj (π.obj I))
+      (qN : N ≅ DerivedCategory.Qh.obj (π.obj J))
+      (f : M ⟶ N) (g : π.obj I ⟶ π.obj J)
+      (hg : DerivedCategory.Qh.map g = qM.inv ≫ f ≫ qN.hom) :
+      (U.kInjectiveDerivedRepresentativeIso enough I qM).inv ≫ RF.map f ≫
+          (U.kInjectiveDerivedRepresentativeIso enough J qN).hom = T.map g := by
+    have := U.rightDerivedFunctorOfQuasiIsoResolutionsUnit_isIso enough I
+    have := U.rightDerivedFunctorOfQuasiIsoResolutionsUnit_isIso enough J
+    change (η.app (π.obj I) ≫ RF.map qM.inv) ≫ RF.map f ≫
+      RF.map qN.hom ≫ CategoryTheory.inv (η.app (π.obj J)) = _
+    calc
+      _ = η.app (π.obj I) ≫ RF.map (DerivedCategory.Qh.map g) ≫
+          CategoryTheory.inv (η.app (π.obj J)) := by
+        rw [hg]
+        simp only [RF.map_comp, Category.assoc]
+      _ = T.map g := by
+        have hn : T.map g ≫ η.app (π.obj J) =
+            η.app (π.obj I) ≫ RF.map (DerivedCategory.Qh.map g) := η.naturality g
+        rw [← Category.assoc, ← hn, Category.assoc, IsIso.hom_inv_id, Category.comp_id]
+  have reps (M : DerivedCategory A) :
+      ∃ (I : CochainComplex A ℤ) (_ : I.IsKInjective),
+        Nonempty (M ≅ DerivedCategory.Qh.obj (π.obj I)) := by
+    obtain ⟨I, s, hI, hs⟩ := enough (DerivedCategory.Q.objPreimage M)
+    have := hs
+    exact ⟨I, hI, ⟨(DerivedCategory.Q.objObjPreimageIso M).symm ≪≫
+      asIso (DerivedCategory.Q.map s) ≪≫
+      (DerivedCategory.quotientCompQhIso A).symm.app I⟩⟩
+  have additive : RF.Additive := by
+    constructor
+    intro M N f f'
+    obtain ⟨I, hI, ⟨qM⟩⟩ := reps M
+    obtain ⟨J, hJ, ⟨qN⟩⟩ := reps N
+    obtain ⟨g, hg⟩ := (CochainComplex.IsKInjective.Qh_map_bijective (π.obj I) J).surjective
+      (qM.inv ≫ f ≫ qN.hom)
+    obtain ⟨g', hg'⟩ := (CochainComplex.IsKInjective.Qh_map_bijective (π.obj I) J).surjective
+      (qM.inv ≫ f' ≫ qN.hom)
+    have hsum : DerivedCategory.Qh.map (g + g') = qM.inv ≫ (f + f') ≫ qN.hom := by
+      simp only [Functor.map_add, hg, hg', Preadditive.add_comp, Preadditive.comp_add]
+    apply (cancel_mono (U.kInjectiveDerivedRepresentativeIso enough J qN).hom).1
+    apply (cancel_epi (U.kInjectiveDerivedRepresentativeIso enough I qM).inv).1
+    rw [compute M N I J qM qN (f + f') (g + g') hsum,
+      Preadditive.add_comp, Preadditive.comp_add,
+      compute M N I J qM qN f g hg, compute M N I J qM qN f' g' hg', T.map_add]
+  have linear : RF.Linear R := by
+    constructor
+    intro M N f r
+    obtain ⟨I, hI, ⟨qM⟩⟩ := reps M
+    obtain ⟨J, hJ, ⟨qN⟩⟩ := reps N
+    obtain ⟨g, hg⟩ := (CochainComplex.IsKInjective.Qh_map_bijective (π.obj I) J).surjective
+      (qM.inv ≫ f ≫ qN.hom)
+    have hsmul : DerivedCategory.Qh.map (r • g) = qM.inv ≫ (r • f) ≫ qN.hom := by
+      simp only [Functor.map_smul, hg, Linear.smul_comp, Linear.comp_smul]
+    apply (cancel_mono (U.kInjectiveDerivedRepresentativeIso enough J qN).hom).1
+    apply (cancel_epi (U.kInjectiveDerivedRepresentativeIso enough I qM).inv).1
+    rw [compute M N I J qM qN (r • f) (r • g) hsmul,
+      Linear.smul_comp, Linear.comp_smul, compute M N I J qM qN f g hg, T.map_smul]
+  refine ⟨additive, linear, ?_⟩
+  intro M N I J hI hJ qM qN f
+  constructor
+  · exact (CochainComplex.IsKInjective.Qh_map_bijective (π.obj I) J).existsUnique _
+  · exact compute M N I J qM qN f
 
 end CategoryTheory.Functor
