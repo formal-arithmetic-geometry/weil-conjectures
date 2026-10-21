@@ -11,9 +11,112 @@
   "def-sp-abelian",
   "def-weil-abstract-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each $F\\in\\{J,P,Q,I\\}$ apply [lem-weil-pbc-exact-functor-derived-factorization]. All four functors are additive and preserve finite limits and finite colimits by hypothesis, so termwise $C(F)$ preserves quasi-isomorphisms and factors as $D(F)$ on the ordinary unbounded derived category. Write $q_T:C(\\mathcal A_T)\\to D(\\mathcal A_T)$ for localization and $a_{F,K}:D(F)(q_SK)\\xrightarrow{\\sim}q_TC(F)K$ for the factorization isomorphisms. Every derived object is represented by a complex as in [def-weil-abstract-derived-category]; no resolution or bound is introduced.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor, clauses (3)-(4); Definition 05RU, definition-unbounded-derived-category"
+   }
+  },
+  {
+   "text": "Use the specified exact-derived adjunction construction [def-weil-exact-derived-adjunction] for $J\\dashv P$ and $Q\\dashv I$. Here is the normalization explicitly. For an exact pair $F\\dashv G$ with unit $u$ and counit $v$, transposition degree by degree gives the cochain adjunction: the differential equation for a transposed map follows from naturality of $u,v$, and the inverse equations hold in each degree. The derived unit at $q_SK$ is the composite\n$$q_SK\\xrightarrow{q_S(C(u)_K)}q_SC(G)C(F)K\\xrightarrow{a_{G,C(F)K}^{-1}}D(G)q_TC(F)K\\xrightarrow{D(G)(a_{F,K}^{-1})}D(G)D(F)q_SK.$$\nThe derived counit at $q_TL$ is\n$$D(F)D(G)q_TL\\xrightarrow{D(F)(a_{G,L})}D(F)q_SC(G)L\\xrightarrow{a_{F,C(G)L}}q_TC(F)C(G)L\\xrightarrow{q_T(C(v)_L)}q_TL.$$\nThese extend uniquely to natural transformations by [lem-weil-pbc-localization-universal-property](2), with the exact termwise factorizations of step 1. Thus the maps are the localizations of the given maps, rather than newly chosen adjunction maps.",
+   "uses": [
+    "def-weil-exact-derived-adjunction",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VG, lemma-properties-left-localization; natural-transformation enhancement: Mathlib/CategoryTheory/Localization/Predicate.lean, liftNatTrans; explicit unit/counit formulas in Localization/Adjunction.lean, localization_unit_app and localization_counit_app"
+   }
+  },
+  {
+   "text": "Check the two triangle identities for the maps in step 2 after precomposition with $q_S$ or $q_T$. Under the $a_F,a_G$ identifications, the two composites become respectively $q_T(C(v)_{C(F)K}\\circ C(F)(C(u)_K))$ and $q_S(C(G)(C(v)_L)\\circ C(u)_{C(G)L})$. In each degree these are $v_{F(K^n)}\\circ F(u_{K^n})=1$ and $G(v_{L^n})\\circ u_{G(L^n)}=1$, the original triangle identities. Clause (3) of [lem-weil-pbc-localization-universal-property] implies equality with the identity transformations on the derived categories. Hence the actual localized maps satisfy both triangles for both adjunctions.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VG, lemma-properties-left-localization; natural-transformation extensionality in Mathlib/CategoryTheory/Localization/Predicate.lean, natTrans_ext; the two computations in Localization/Adjunction.lean, localization"
+   }
+  },
+  {
+   "text": "The open unit $1\\to PJ$ and closed counit $QI\\to1$ are isomorphisms on each object by assumption, so their termwise maps have inverse chain maps (the component inverses are natural). Their localized maps in step 2 are therefore isomorphisms. More formally, [lem-weil-pbc-localization-universal-property](2) lifts these transformations and their inverses and preserves both inverse equations. Likewise the specified zero functor identities $PI=0$ and $QJ=0$ give termwise natural isomorphisms $C(P)C(I)\\cong0$ and $C(Q)C(J)\\cong0$. The factorizations from step 1 make $D(P)D(I)$ and $D(Q)D(J)$ lifts of their localizations; clause (2) identifies them with the zero functors. Zero objects remain zero here because the localizations in [def-weil-abstract-derived-category] are additive and their zero complex represents zero. These arguments also show that the four induced functors preserve zero objects.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VG, lemma-properties-left-localization, functorial lifting and uniqueness; derived.tex Definition 05RU, definition-unbounded-derived-category"
+   }
+  },
+  {
+   "text": "For every integer $n$ and every $F\\in\\{J,P,Q,I\\}$, [lem-weil-pbc-exact-functor-complex-cohomology] supplies a natural isomorphism $H^n(C(F)K)\\cong F(H^n(K))$ on all cochain complexes. Combine it with $a_F$ and with $H^nq\\cong H^n$ from [def-weil-abstract-derived-category]. Both sides invert quasi-isomorphisms, and [lem-weil-pbc-localization-universal-property](2) therefore lifts this isomorphism to\n$$c_F^n:H^nD(F)\\xrightarrow{\\sim}F H^n.$$\nThis is natural for every derived morphism, since it is a lifted natural transformation, not merely an objectwise identification. It is only the existing cochain cohomology comparison descended through localization.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 010N, lemma-exact-functor; categories.tex Tag 04VG, lemma-properties-left-localization, with fully faithful precomposition as above"
+   }
+  },
+  {
+   "text": "Let $b:K\\to L$ be any derived morphism such that $D(P)b$ and $D(Q)b$ are invertible. Step 5 and naturality give that $P(H^n b)$ and $Q(H^n b)$ are invertible for every $n\\in\\mathbf Z$. Apply the assumed abelian localization sequence to the two objects $H^nK,H^nL$. Naturality of the actual open counit $JP\\to1$ and closed unit $1\\to IQ$ gives a commutative diagram of short exact rows with vertical maps\n$$JP(H^n b),\\quad H^n b,\\quad IQ(H^n b).$$\nThe outside maps are invertible since functors preserve inverses. By [lem-weil-pbc-short-five-lemma] the middle map is invertible. This holds for every integer $n$, so [lem-weil-pbc-unbounded-derived-iso-cohomology] gives that $b$ is invertible. This proves joint reflection without assuming either restriction is individually conservative and without applying a bounded-below criterion.",
+   "uses": [
+    "lem-weil-pbc-short-five-lemma",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 05QB, lemma-five-lemma, for the short exact rows; derived.tex Tag 05RT, lemma-acyclic, for detection on the unbounded derived category"
+   }
+  },
+  {
+   "text": "Abbreviate $\\bar P=D(P),\\bar Q=D(Q),\\bar I=D(I)$ and let $\\eta:1\\to\\bar I\\bar Q$, $\\epsilon:\\bar Q\\bar I\\to1$ be the closed maps already constructed. Suppose $\\bar PH=0$. Then $\\bar P(\\eta_H)$ is a map between zero objects, since $\\bar P\\bar I=0$ by step 4, and is thus invertible. The left triangle identity of step 3 reads $\\epsilon_{\\bar QH}\\circ\\bar Q(\\eta_H)=1_{\\bar QH}$. Since $\\epsilon$ is invertible by step 4, $\\bar Q(\\eta_H)=\\epsilon_{\\bar QH}^{-1}$ is invertible. Joint reflection from step 6 applied to the specific morphism $\\eta_H$ proves that the actual support unit $H\\to\\bar I\\bar QH$ is invertible.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
+    "place": "(2), exact open/closed adjunction route; elementary consequence of the preceding joint reflection and the closed triangle identity"
+   }
+  },
+  {
+   "text": "If $X,Y$ lie in the essential image of $\\bar I$, then $\\bar PX=\\bar PY=0$ by step 4, so $\\eta_X,\\eta_Y$ are invertible by step 7. For every $a:\\bar QX\\to\\bar QY$ define\n$$s(a)=\\eta_Y^{-1}\\circ\\bar I(a)\\circ\\eta_X:X\\to Y.$$\nFor $b:X\\to Y$, naturality $\\bar I\\bar Q(b)\\circ\\eta_X=\\eta_Y\\circ b$ gives $s(\\bar Qb)=b$. Conversely $\\bar Q\\eta_T=\\epsilon_{\\bar QT}^{-1}$ from step 7 and naturality $\\epsilon_{\\bar QY}\\circ\\bar Q\\bar I(a)=a\\circ\\epsilon_{\\bar QX}$ give\n$$\\bar Qs(a)=\\epsilon_{\\bar QY}\\circ\\bar Q\\bar I(a)\\circ\\epsilon_{\\bar QX}^{-1}=a.$$\nThus $s$ is an explicit inverse to the map on Hom sets induced by $\\bar Q$, which proves full faithfulness of restriction on the full essential-image subcategory. All arguments used arbitrary integer degrees or adjunction equations; none used injective resolutions, boundedness, or a recollement theorem.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
+    "place": "(2), exact open/closed adjunction route; explicit inverse on Hom sets using the previously established unit and counit"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "def-weil-abstract-derived-category",
+  "def-weil-exact-derived-adjunction",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-short-five-lemma",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
+  "place": "(2), expanded abstract exact open/closed localization argument; Stacks 015F, 010N, 05QB, 05RT and 04VG supply the cited general tools"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -49,10 +152,52 @@
    "results": "8 hits: DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.IsGE, DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE, DerivedCategory.IsLE, DerivedCategory.instIsGEObjSingleFunctor, DerivedCategory.isLE_Q_obj_iff",
    "date": "2026-10-21",
    "verdict": "no match: general exact-functor descent hits supply pieces, not support detection and the specified unbounded adjunction maps for this exact localization datum"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact open closed localization data on abelian categories give adjunctions and joint conservativity on unbounded derived categories",
+   "results": "8 hits: CategoryTheory.Functor.isHomological_of_localization, HasDerivedCategory.standard, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp, CategoryTheory.Adjunction.derived, CategoryTheory.Abelian.Ext.mapExactFunctor_hom",
+   "date": "2026-10-21",
+   "verdict": "no match for the complete item: results give exact-functor descent or localized adjunction ingredients, not all support and joint-detection conclusions"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"localization\"",
+   "results": "12 hits: CategoryTheory.Adjunction.isLocalization, CategoryTheory.Adjunction.isLocalization', CategoryTheory.Adjunction.localization, CategoryTheory.Adjunction.Localization.ε, CategoryTheory.Adjunction.Localization.η, CategoryTheory.Adjunction.Localization.η_app, CategoryTheory.Adjunction.Localization.ε_app, CategoryTheory.Adjunction.localization_counit_app",
+   "date": "2026-10-21",
+   "verdict": "no match for the complete item: results give exact-functor descent or localized adjunction ingredients, not all support and joint-detection conclusions"
+  },
+  {
+   "tool": "grep",
+   "query": "homologyFunctor.*(joint|reflect)|joint.*homology|mapDerivedCategory|def.*(homology|isIso)",
+   "results": "18 hits: Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean, Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean, Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean, Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean, Mathlib/Algebra/Homology/DerivedCategory/Basic.lean, Mathlib/Algebra/Homology/DerivedCategory/SmallShiftedHom.lean, Mathlib/Algebra/Homology/DerivedCategory/FullyFaithful.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean",
+   "date": "2026-10-21",
+   "verdict": "no match for the complete item: results give exact-functor descent or localized adjunction ingredients, not all support and joint-detection conclusions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact open closed adjunctions with short exact sequence induce support equivalence on unbounded derived categories",
+   "results": "8 hits: IsOpenMap.adjunction, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, CategoryTheory.Adjunction.derived, CategoryTheory.Adjunction.derived', Topology.IsInducing.adjunction, CategoryTheory.Adjunction.derived'_unit, CategoryTheory.Adjunction.derived'_counit, Module.support_of_exact",
+   "date": "2026-10-21",
+   "verdict": "no match for the complete item: results give exact-functor descent or localized adjunction ingredients, not all support and joint-detection conclusions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact abelian localization sequence with two complementary fully faithful adjoints gives conservative restriction functors on the unbounded derived category",
+   "results": "8 hits: CategoryTheory.Functor.isHomological_of_localization, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, HasDerivedCategory.standard, CategoryTheory.Functor.map_distinguished_exact, DerivedCategory.instEssSurjCochainComplexIntQ",
+   "date": "2026-10-21",
+   "verdict": "no match for the complete item: results give exact-functor descent or localized adjunction ingredients, not all support and joint-detection conclusions"
+  },
+  {
+   "tool": "grep",
+   "query": "jointly|openClosed|localization_unit_app|localization_counit_app",
+   "results": "3 hits: Mathlib/CategoryTheory/Localization/FiniteProducts.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean",
+   "date": "2026-10-21",
+   "verdict": "no match for the complete item: results give exact-functor descent or localized adjunction ingredients, not all support and joint-detection conclusions"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-prop-scalar-six-pullback",
@@ -69,5 +214,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-exact-open-closed-unbounded-calculus",
+  "worker": "stage1",
+  "summary": "Q50 preserved the full statement and all inherited provenance. Eight proof steps use existing exact-functor descent, specified localized adjunction, localization universal property, exact cohomology comparison, short five lemma and unbounded cohomology detection. Actual units/counits and triangle identities are tracked explicitly; joint reflection is proved on abelian cohomology rows, and the support unit and full faithfulness follow by explicit formulas. No new nodes.",
+  "blueprint": "det-prop-scalar-six-pullback proof (2): passage of exact open/closed adjunctions and the abelian localization sequence to ordinary unbounded derived categories; this is the abstract support-calculus tool extracted for that passage."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q50-20081fb05",
+  "group": "Q50",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q50-20081fb05 (reviewer sub-agent of L); spot-checked: I read the item and every cited node statement in full. The statement and stmt_deps are unchanged from base. The item is unsplit on live and side-live, is not dropped and has no repair note of its own; it was created by Q20 in the re-split of det-prop-scalar-six-pullback, and both citers' uses are still covered. Steps: (1) exact-functor factorization (mapDerivedCategoryFactors) gives D(F) and a_F. (2) I re-type-checked the explicit localized unit/counit composites; def-weil-exact-derived-adjunction plus clause (2) of the localization universal property lift them. (3) The triangle identities follow from the degreewise identities and clause (3) (natTrans_ext). (4) Invertible unit/counit and PI=0, QJ=0 lift through clause (2), and q is additive. (5) homologyFunctorIso with H^r∘q≅H^r, lifted, gives a natural c_F^n. (6) The rows are the assumed SES on H^nK and H^nL, which commute by naturality; the short five lemma (isIso₂_of_shortExact_of_isIso₁₃) and unbounded DerivedCategory.isIso_iff then give joint reflection without any boundedness. (7) The Q⊣I triangle orientation ε_{QH}∘Qη_H=1 is correct, so the support unit is invertible. (8) I verified the explicit Hom inverse s(a)=η_Y^{-1}I(a)η_X in both directions. Edge cases U=∅, Z=∅, and a product category with an unbounded complex all hold. Stacks tags 015F/04VG/010N/05QB/05RT/05RU and the Mathlib lines cited exist. Every cited statement is a Mathlib leaf or a definition, so there is no route issue and no cycle. No abstract duplicate exists in the DAG (lem-sf-detection is only a geometric specialization). 11 searches are recorded across leansearch, leanfinder, loogle and grep. No SGA. 0 new nodes, no fixes."
  }
 }
