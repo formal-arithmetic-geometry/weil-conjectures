@@ -13,11 +13,114 @@
   "def-pc-tensor-complex-sheaves",
   "def-pur-sheaf-tensor-product",
   "def-weil-abstract-derived-category",
-  "def-pc-kflat-complex"
+  "def-pc-kflat-complex",
+  "lem-sf-ringed-kflat-single-tensor-comparison"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For $i<-1$, the composite $d_P^{i+1}d_P^i$ is multiplication by $t^2=0$. At $i=-1$ or $i\\geq0$ one of the two differentials is zero. The scalar maps are restriction-compatible and $\\mathcal O$-linear by commutativity. Thus $P$ is a cochain complex. The displayed $Z_M$ and $M[0]$ are complexes because their differentials are zero.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-pc-cochain-complex-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Section 010V (section-complexes), cochain-complex definition; direct verification for the periodic complex"
+   }
+  },
+  {
+   "text": "For every object $U$, the balanced map $u_U:\\mathcal O(U)\\otimes_{\\mathcal O(U)}M(U)\\to M(U)$ sends $a\\otimes m$ to $am$, and $v_U(m)=1\\otimes m$. The equations $u_Uv_U(m)=m$ and $v_Uu_U(a\\otimes m)=1\\otimes am=a\\otimes m$ prove that they are inverse module maps. Both commute with restriction since restrictions respect multiplication and $1$. By the universal property of module sheafification, they induce inverse maps $\\mathcal O\\otimes_{\\mathcal O}M\\rightleftarrows M$: the composites are identities since this holds before sheafification. This constructs the unit isomorphism without assuming tensor sections are already a sheaf. The same argument shows $0\\otimes M=M\\otimes0=0$, since the presheaf tensor is zero on every object.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section 03EK (section-tensor-product) and Lemma 03CY (lemma-sheafification-presheaf-modules), explicit unit maps"
+   }
+  },
+  {
+   "text": "Put $T=\\operatorname{Tot}(P\\otimes_{\\mathcal O}M[0])$. Its degree-$n$ coproduct has only one possibly nonzero summand: $P^n\\otimes M$ at $(p,q)=(n,0)$. Indeed all other summands contain the zero term of $M[0]$. Projection to this summand, zero on the others, is inverse to its coproduct injection: check each composite on every injection. Thus $T^n\\cong P^n\\otimes M$, with no infinite-product or boundedness assertion needed. For $n\\leq0$ compose this projection with the unit map of step 2 to obtain $\\phi^n:T^n\\to M$; its inverse is the injection after $m\\mapsto1\\otimes m$. For $n>0$ both $T^n$ and $Z_M^n$ are zero. These give degreewise inverse graded maps $\\phi:T\\rightleftarrows Z_M:\\psi$.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Definition 012Z (definition-associated-simple-complex), single surviving bidegree calculation"
+   }
+  },
+  {
+   "text": "The second contribution $(-1)^p(1\\otimes d_{M[0]})$ to the total differential is zero in every bidegree. For $n<0$ the first contribution sends a local tensor $a\\otimes m$ to $(t_Ua)\\otimes m$; under the unit maps this becomes $t_Uam=a(t_Um)=0$, by the hypothesis on $M$. Since pure tensors generate the presheaf tensors and the maps extend uniquely to their sheafifications, this is equality of sheaf morphisms. For $n=0$ the target is zero, and for $n>0$ the source is zero. Hence every differential of $T$ becomes zero under $\\phi$. Both $\\phi$ and its degreewise inverse $\\psi$ commute with differentials, and their composites are identities in every degree. They are inverse cochain-complex isomorphisms.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification",
+    "def-pc-cochain-complex-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.proof.md",
+    "place": "The examples: the periodic Tor calculation, expanded as the signed differential and sheafification computation"
+   }
+  },
+  {
+   "text": "Let $f:M\\to N$ be an $\\mathcal O$-linear morphism between sheaves killed by $t$. The induced total map has the sole nonzero summand $1\\otimes f$ in degree $n\\leq0$. On a local pure tensor the two composites in the naturality square are $a\\otimes m\\mapsto af(m)$ and $a\\otimes m\\mapsto f(am)$; they agree by linearity. The inverse square is $1\\otimes f(m)=(1\\otimes f)(1\\otimes m)$. Uniqueness of sheafification extension proves these equations for sheaf maps, and all positive-degree squares are between zero objects. Thus the isomorphisms are natural in the claimed maps.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-pc-tensor-complex-sheaves",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.proof.md",
+    "place": "The examples: naturality of the generalized tensor calculation, checked on pure tensors"
+   }
+  },
+  {
+   "text": "For a zero-differential complex, $\\ker d^n$ is the entire term and $\\operatorname{im}d^{n-1}=0$, so $H^n(Z_M)=Z_M^n/0\\cong Z_M^n$. Apply the functor $H^n$ to the complex isomorphism just constructed. This gives $H^{-q}(T)\\cong M$ for all $q\\geq0$ (including $q=0$), and $H^n(T)=0$ for $n>0$. On the one-point site the same tensor and sheaf maps are ordinary module maps. The formulas also apply when $t=0$, $M=0$, or the ring sheaf is zero; no nonvanishing or annihilator equality was used.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.proof.md",
+    "place": "The examples: all nonnegative Tor degrees, including degree zero; elementary kernel/image computation"
+   }
+  },
+  {
+   "text": "Now suppose $\\varepsilon:P\\to E[0]$ is a K-flat resolution. By its definition $P$ is K-flat and $\\varepsilon$ is a quasi-isomorphism. Apply the ringed-site comparison $c_{P,M}$ of [lem-sf-ringed-kflat-single-tensor-comparison], which requires neither termwise flatness nor boundedness of $P$ nor flatness of $M$. It identifies $Q(P)\\otimes^{\\mathbf L}_{\\mathcal O}Q(M[0])$ with $Q(T_M(P))$, where $T_M(P)^n=P^n\\otimes M$ and its differential is $d_P^n\\otimes1$. Steps 3–4 identify this termwise tensor complex with $Z_M$. Since localization makes $Q(\\varepsilon)$ invertible, tensoring its inverse with $1$ identifies $Q(E[0])\\otimes^{\\mathbf L}_{\\mathcal O}Q(M[0])$ with $Q(P)\\otimes^{\\mathbf L}_{\\mathcal O}Q(M[0])$. Their composite is the asserted representation by $Z_M$, computed from the specified resolution.",
+   "uses": [
+    "def-pc-kflat-complex",
+    "lem-sf-ringed-kflat-single-tensor-comparison",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU (definition-derived-tor), K-flat construction immediately preceding the definition; degree-zero comparison of the cited node"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-cochain-complex-modules",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-abstract-derived-category",
+  "def-pc-kflat-complex",
+  "lem-sf-ringed-kflat-single-tensor-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.proof.md",
+  "place": "The examples: explicit chain-level expansion of the periodic Tor computation for arbitrary small ringed sites; K-flat interpretation from Stacks Tag 06YU"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -53,10 +156,59 @@
    "results": "; CochainComplex.cm5b.I_d, HomologicalComplex.tensor_unit_d₂, HomologicalComplex.instHasTensorTensorUnit_1, HomologicalComplex.instHasTensorTensorUnit, HomologicalComplex.instHasTensorXTensorUnit, CochainComplex.singleFunctor_obj_d, Rep.isZero_Tor_succ_of_projective, CochainComplex.HomComplex.δ_shape",
    "date": "2026-10-21",
    "verdict": "no match: generic total tensor, unit-complex and zero-differential infrastructure do not identify this unbounded periodic tensor with the specified zero-differential complex for arbitrary annihilated module sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "periodic|tensor.*single|single.*tensor",
+   "results": "OK 5 hit(s); ; Mathlib/Algebra/Homology/Monoidal.lean, Mathlib/Algebra/Homology/Monoidal.lean, Mathlib/Algebra/Homology/Monoidal.lean, Mathlib/Algebra/Homology/AlternatingConst.lean, Mathlib/Algebra/Homology/AlternatingConst.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: generic tensor-unit, alternating-complex and zero-tensor infrastructure does not state this normal form for an arbitrary annihilated module sheaf; inspected Monoidal.lean and AlternatingConst.lean"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor a periodic square zero scalar complex with an annihilated module sheaf to obtain a zero differential complex",
+   "results": "OK 8 hit(s); ; PiTensorProduct.zero_tprodCoeff, TensorProduct.zero_smul, TensorProduct.zero_tmul, CochainComplex.cochainComplex_d_succ_succ_zero, CategoryTheory.DifferentialObject.hasZeroObject, KaehlerDifferential.mulActionBaseChange_smul_zero, HomologicalComplex.zero, TensorProduct.tmul_zero",
+   "date": "2026-10-21",
+   "verdict": "no match: generic tensor-unit, alternating-complex and zero-tensor infrastructure does not state this normal form for an arbitrary annihilated module sheaf; inspected Monoidal.lean and AlternatingConst.lean"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.tensorObj, HomologicalComplex.singleFunctor",
+   "results": "OK 0 hit(s); loogle: unknown identifier 'HomologicalComplex.singleFunctor'; ",
+   "date": "2026-10-21",
+   "verdict": "no match: this pattern has an unknown identifier; not evidence of absence, replaced by the successful quoted-name Loogle query"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a sheaf of rings O and a scalar t killing M, tensoring the complex with O in each nonpositive degree and differential t with M in degree zero gives the zero differential complex of M in each nonpositive degree",
+   "results": "OK 8 hit(s); ; HomologicalComplex.tensor_unit_d₂, HomologicalComplex.unit_tensor_d₁, HomologicalComplex.tensorUnit, HomologicalComplex.instHasTensorTensorUnit_1, HomologicalComplex.HasGoodTensor₁₂, HomologicalComplex.instHasTensorTensorUnit, HomologicalComplex.mapBifunctor₂₃.ιOrZero_eq_zero, HomologicalComplex.mapBifunctor₁₂.ιOrZero_eq_zero",
+   "date": "2026-10-21",
+   "verdict": "no match: generic tensor-unit, alternating-complex and zero-tensor infrastructure does not state this normal form for an arbitrary annihilated module sheaf; inspected Monoidal.lean and AlternatingConst.lean"
+  },
+  {
+   "tool": "grep",
+   "query": "leftUnitor|tensor_unit_d|unit_tensor_d|single.*[Tt]ensor|[Tt]ensor.*single",
+   "results": "OK 5 hit(s); ; Mathlib/Algebra/Homology/Monoidal.lean, Mathlib/Algebra/Homology/Monoidal.lean, Mathlib/Algebra/Homology/Monoidal.lean, Mathlib/Algebra/Homology/Monoidal.lean, Mathlib/Algebra/Homology/Monoidal.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: generic tensor-unit, alternating-complex and zero-tensor infrastructure does not state this normal form for an arbitrary annihilated module sheaf; inspected Monoidal.lean and AlternatingConst.lean"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomologicalComplex\", \"tensor\"",
+   "results": "OK 12 hit(s); ; HomologicalComplex.tensorUnit, HomologicalComplex.HasGoodTensor₁₂, HomologicalComplex.HasGoodTensor₂₃, HomologicalComplex.tensorUnitIso, HomologicalComplex.HasTensor, HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX, HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X, HomologicalComplex.instHasTensorXTensorUnit_1",
+   "date": "2026-10-21",
+   "verdict": "no match: generic tensor-unit, alternating-complex and zero-tensor infrastructure does not state this normal form for an arbitrary annihilated module sheaf; inspected Monoidal.lean and AlternatingConst.lean"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The tensor product of a cochain complex with a module concentrated in degree zero is the degreewise tensor complex; if its scalar differential annihilates the module all differentials vanish",
+   "results": "OK 8 hit(s); ; HomologicalComplex.instHasTensorTensorUnit_1, HomologicalComplex.instHasTensorTensorUnit, HomologicalComplex.tensor_unit_d₂, HomologicalComplex.HasTensor, HomologicalComplex.instHasTensorXTensorUnit_1, HomologicalComplex.tensorUnit, HomologicalComplex.unit_tensor_d₁, HomologicalComplex.instHasTensorXTensorUnit",
+   "date": "2026-10-21",
+   "verdict": "no match: generic tensor-unit, alternating-complex and zero-tensor infrastructure does not state this normal form for an arbitrary annihilated module sheaf; inspected Monoidal.lean and AlternatingConst.lean"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-square-zero-periodic-tensor",
@@ -75,5 +227,64 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-periodic-tensor-normal-form",
+  "worker": "stage1",
+  "summary": "Verified the unchanged statement and supplied seven explicit steps: complex condition, presheaf unit maps and sheafification, single-summand total degrees, vanishing differential, naturality, cohomology and the conditional K-flat interpretation. Reused the existing general ringed-site comparison rather than a new lemma or a scheme-only tensor definition. No new nodes.",
+  "blueprint": "det-def-localizing-closure-ctf-equals-bc, proof paragraph The examples: the all-degree Tor computation after tensoring the periodic resolution, generalized as already stated in this item.",
+  "tool_uses": [
+   {
+    "node": "def-weil-sheaf-of-modules-category",
+    "why": "Definition of sheaves and linear maps; sectionwise restriction calculation needs the general ringed-site notion."
+   },
+   {
+    "node": "def-pc-cochain-complex-modules",
+    "why": "Definition of complexes and chain maps used to verify the explicit formulas."
+   },
+   {
+    "node": "def-pur-sheaf-tensor-product",
+    "why": "Sheaf tensor is the sheafification of the objectwise tensor, needed for the local formulas."
+   },
+   {
+    "node": "def-weil-presheaf-modules-sheafification",
+    "why": "Universal property extends the explicit inverse and naturality identities to sheaf maps."
+   },
+   {
+    "node": "def-pc-tensor-complex-sheaves",
+    "why": "Signed direct-sum total tensor formula; the unit has no competing total-tensor construction."
+   },
+   {
+    "node": "def-weil-abstract-derived-category",
+    "why": "Cohomology and localization definitions used in the final two steps."
+   },
+   {
+    "node": "def-pc-kflat-complex",
+    "why": "Definition of the supplied K-flat resolution, not an assertion of its existence."
+   },
+   {
+    "node": "lem-sf-ringed-kflat-single-tensor-comparison",
+    "why": "General K-flat comparison with a degree-zero second factor, valid on arbitrary small ringed sites and without termwise flatness; the unit supplies no such comparison theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-cochain-complex-modules",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-abstract-derived-category",
+  "def-pc-kflat-complex",
+  "lem-sf-ringed-kflat-single-tensor-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q36-16b4e0460",
+  "group": "Q36",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-16b4e0460 (reviewer sub-agent of L); spot-checked: Read the item in full, the full statements of all 8 cited nodes, the parent and its Q26 base steps 2/3/6, which this node now carries. The statement is unchanged from the Q43-created (PASSed) version. The only stmt_dep added is lem-sf-ringed-kflat-single-tensor-comparison, which gives meaning to the derived tensor 'computed using that resolution'. No new nodes, no cycle (closure computed), no SGA. Live and side-live are still unsplit and the item is not in route-pivot-dropped. Step checks. (1) d^{i+1}d^i=t^2=0 for i<-1, d^0=0 at i=-1, mult by t is O-linear. (2) The sectionwise unit maps a⊗m↦am and m↦1⊗m are inverse; extension through the sheafification universal property (def-weil-presheaf-modules-sheafification) checked, uniqueness argument included; 0⊗M=0. (3) Tot^n has a single summand P^n⊗M because M[0]^q=0 for q≠0; no infinite products are used. (4) The sign term multiplies d_{M[0]}=0; d_P⊗1 transports to m↦tm=0 since tM=0; for n=0 the target is zero. (5) Naturality: af(m)=f(am). (6) A zero-differential complex has H=term, so H^{-q}=M for q≥0 and 0 in positive degrees. (7) The comparison lemma's statement allows any K-flat P and any M on an essentially small site; its T_M(P) (terms P^q⊗M, differential d_P⊗1) equals Tot(P⊗M[0]); Q(ε) is invertible, so the direction is correct; marked non-elementary. Stacks sources verified via tags and .tex labels: 010V, 012Z, 03EK, 03CY, 06YU. Blueprint main-20261015 ctf-equals-bc 'The examples' l.37-42 (Z/ℓ² periodic Tor). Edge cases: Z/4 with t=2 and M=Z/2 gives Tor_q=Z/2; t=0 gives ⊕M[q], with the resolution clause correctly conditional; M=0, the zero ring, and q=0 at the -1→0 transition all check. No annihilator hypothesis is needed. Duplicate search over periodic, square-zero and unit-tensor nodes: the sibling resolution nodes, the cyclic-group resolution and the scheme-only or pro-étale-only K-flat representatives are other statements. Accepted tool use: lem-sf-ringed-kflat-single-tensor-comparison (unit sk-lem-sf-flat-model), a generic K-flat comparison that unit sk-def-localizing-closure does not supply; the other declared tool_uses are definitions. No fixes."
  }
 }

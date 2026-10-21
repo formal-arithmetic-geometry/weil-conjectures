@@ -20862,3 +20862,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:07 L: merged deliver/O3/lem-coef-closed-identity-open-hom-normalization (reviewer FIX; first push; new nodes: 0); claim not held by O3: not your claim
 - 08:07 L: merged deliver/NO/lem-sf-open-reduction-adjunction-transport (reviewer PASS; first push; new nodes: 0)
 - 08:07 L: merged deliver/Q129/def-fd-kernel (reviewer FIX; first push; new nodes: 0)
+- 08:07 L: merged deliver/Q36/lem-sfb-periodic-tensor-normal-form (reviewer PASS; first push; new nodes: 0)
