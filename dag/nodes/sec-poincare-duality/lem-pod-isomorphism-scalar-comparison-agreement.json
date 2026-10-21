@@ -1,0 +1,70 @@
+{
+ "id": "lem-pod-isomorphism-scalar-comparison-agreement",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-operations",
+   "place": "Proof sentence 1 ('The equivariant lifts of the operations ... are [lem-fix-weil-operations]'): the inverse automorphism squares for pullback, read at the algebraically closed coefficient level, need the scalar-extension comparison of the pullback along a scheme isomorphism to be one specified map; this node identifies the whole-system realization choice with the explicit tensor-and-completion choice.",
+   "via": [
+    "lem-pod-pullback-identities-scalar-extension",
+    "lem-pod-semilinear-field-operation-lifts"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Two specified scalar comparisons for pullback along a scheme isomorphism agree",
+ "statement": "Fix a prime $\\ell$ and finite extensions $E\\subset L$ of $\\mathbf Q_\\ell$ inside a fixed algebraic closure, with valuation rings $\\mathcal O_E\\subset\\mathcal O_L$ and chosen uniformizers [def-weil-l-adic-coefficient-extension]. Let $g:X\\to Y$ be an isomorphism of schemes on which $\\ell$ is invertible [def-weil-scheme-morphism-properties]. For $F\\in\\{E,L\\}$ and $W\\in\\{X,Y\\}$ let $D^b_c(W,\\mathcal O_F)$ be the derived-complete integral constructible category [def-weil-derived-complete-integral-detailed], let $Lg_F^*$ be the completed integral pullback [def-pur-integral-derived-operations], and let $T_W:D^b_c(W,\\mathcal O_E)\\to D^b_c(W,\\mathcal O_L)$ be integral scalar extension [def-weil-integral-scalar-extension].\n\nFor $K\\in D^b_c(Y,\\mathcal O_E)$ consider two isomorphisms $T_X(Lg_E^*K)\\xrightarrow{\\sim}Lg_L^*(T_YK)$:\n\n(i) the pullback scalar comparison $a_{g,K}=\\mu_{g,K}^{-1}\\circ\\lambda_{g,K}$ specified by the whole-system realization of [lem-trf-integral-pullback-comparison-realization], for the scheme map $f=g$ (built from the derived-limit counit of the entire quotient tower, levelwise derived change of rings and the identification $(g^*P_{E,n})\\otimes^L_{A_{E,n}}A_{L,n}\\cong g^*P_{L,n}$);\n\n(ii) the tensor-and-completion comparison $\\alpha_K=Lg_L^*(\\chi_{Y,K})\\circ[\\delta_P]\\circ\\chi_{X,Lg_E^*K}^{-1}$ specified in [lem-weil-specified-pullback-comparison-alpha], with $\\delta_P$ the cone map induced on both cone coordinates by the level maps $d_m$ and $\\chi$ the quotient-augmentation completion comparisons with zero shifted coordinate.\n\nThen $a_{g,K}=\\alpha_K$ in $D(X_{\\mathrm{proet}},\\mathcal O_L)$ [def-weil-abstract-derived-category], for every $K\\in D^b_c(Y,\\mathcal O_E)$. This is an equality of the two specified morphisms, not merely the existence of an isomorphism between their common source and target.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+  "place": "First paragraph: 'Pullback uses g_X^*f^*=f^*g_Y^*' and the inverse automorphism squares, read at the algebraically closed level of def-weil-derived-pullback-tensor-hom; the blueprint leaves implicit that the scalar-extension comparison of a pullback along an automorphism is one specified map. Agent-written normalization statement."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-derived-complete-integral-detailed",
+  "def-pur-integral-derived-operations",
+  "def-weil-integral-scalar-extension",
+  "lem-trf-integral-pullback-comparison-realization",
+  "lem-weil-specified-pullback-comparison-alpha",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "rg -ln \"extendScalars\" Mathlib/Algebra/Category/ModuleCat",
+   "results": "Descent.lean, ChangeOfRings.lean, EnoughInjectives.lean, Pseudofunctor.lean, Monoidal/Adjunction.lean (module categories over rings only)",
+   "date": "2026-10-21",
+   "verdict": "no match: no completed pro-etale coefficient pullback or its scalar comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"pullback.*extendScalars|extendScalars.*pullback\" Mathlib; rg -ln \"derivedCompletion|DerivedComplete|IsAdicComplete\" Mathlib/CategoryTheory Mathlib/Algebra/Category",
+   "results": "none",
+   "date": "2026-10-21",
+   "verdict": "no match: Mathlib has no derived-complete sheaf categories, hence no comparison of normalizations of their scalar-extension maps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "reviewer",
+  "item": "lem-pod-pullback-identities-scalar-extension",
+  "date": "2026-10-21",
+  "group": "Q18"
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-lem-finite",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}
