@@ -18,9 +18,120 @@
   "lem-weil-pbc-kflat-fixed-tensor-triangulated",
   "lem-pc-kflat-closure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First check that all iterated models used below are resolving. By [lem-pur-kflat-total-tensor-model], $T(E,F)$ is K-flat with flat terms for $E,F\\in\\mathcal P$. By [lem-weil-pbc-kflat-fixed-tensor-triangulated], every $E[a]$ is in $\\mathcal P$. By [lem-pc-kflat-closure], K-flat complexes and flat sheaves are closed under countable direct sums, hence finite sums (extend the finite family by zero objects). The same lemma puts every flat sheaf $P[0]$ in $\\mathcal P$. Apply the total-tensor model theorem to $P[0],Q[0]$: its degree-zero term $P\\otimes_{\\mathcal O}Q$ is flat, and all other terms are zero. The specified representative comparison $r$ therefore gives $P[0]\\otimes^LQ[0]\\cong(P\\otimes_{\\mathcal O}Q)[0]$.",
+   "uses": [
+    "lem-pur-kflat-total-tensor-model",
+    "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+    "lem-pc-kflat-closure",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0FPT (lemma-symmetric-monoidal-derived), details omitted there, using Tag 06YU (definition-derived-tor) and Tag 07A2 (lemma-tensor-product-K-flat); agent-written normalized localization argument."
+   }
+  },
+  {
+   "text": "Put $L=q|_{\\mathcal P}$ and let $W$ be the quasi-isomorphisms in $\\mathcal P$. The equivalence $W^{-1}\\mathcal P\\simeq D(\\mathcal O)$ of [lem-weil-pbc-site-derived-tensor-descent] makes $L$ a localization in the universal-property sense of [lem-weil-pbc-localization-universal-property]: factor through $\\mathcal P\\to W^{-1}\\mathcal P$ and compose with that equivalence; precomposition with an equivalence has a quasi-inverse given by precomposition with its inverse. For each finite set $J$, [lem-sfb-product-localization] now makes $L^J$ a localization, since $W$ contains identities. The natural-transformation clauses (2) and (3) of the universal-property node say exactly that precomposition with $L^J$ is full and faithful on functors $(D(\\mathcal O))^J\\to\\mathcal E$. In particular every natural transformation on the restrictions extends uniquely, and inverses extend to inverses by compatibility with identities and composition. This includes $J=\\varnothing$, when both products are terminal categories.",
+   "uses": [
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-weil-pbc-localization-universal-property",
+    "lem-sfb-product-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0FPT (lemma-symmetric-monoidal-derived), details omitted there, using Tag 06YU (definition-derived-tor) and Tag 07A2 (lemma-tensor-product-K-flat); agent-written normalized localization argument."
+   }
+  },
+  {
+   "text": "Use the natural chain isomorphisms of [lem-pur-total-tensor-signed-coherence]: $t^{\\rm Ch}_{a,b}$ multiplies the shifted bidegree $(p,q)$ by $(-1)^{bp}$, $\\alpha^{\\rm Ch}$ reassociates without a sign, and $\\sigma^{\\rm Ch}$ has sign $(-1)^{pq}$. Their inverses are given there as well. Localize these maps and insert $r$ and the localization shift comparisons of [def-weil-abstract-derived-category]. Naturality on $\\mathcal P$ follows from chain naturality: every homotopy-category morphism is a homotopy class of a chain map, and the given tensor and $r$ are natural on those homotopy classes by [lem-weil-pbc-site-derived-tensor-descent]. Step 1 ensures that shifted and iterated arguments of $r$ are in its stated domain. The next two steps spell out the resulting representative transformations before extending them by Step 2.",
+   "uses": [
+    "lem-pur-total-tensor-signed-coherence",
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0FPT (lemma-symmetric-monoidal-derived), details omitted there, using Tag 06YU (definition-derived-tor) and Tag 07A2 (lemma-tensor-product-K-flat); agent-written normalized localization argument."
+   }
+  },
+  {
+   "text": "For a resolving triple define comparisons, with composition read right to left,\n$$A_L=(r_{E,F}\\otimes^L1_{qG})\\circ r_{T(E,F),G},\\qquad A_R=(1_{qE}\\otimes^Lr_{F,G})\\circ r_{E,T(F,G)}.$$\nTheir targets are $(qE\\otimes^LqF)\\otimes^LqG$ and $qE\\otimes^L(qF\\otimes^LqG)$, respectively. Thus the representative associator is exactly\n$$A_R\\circ q(\\alpha^{\\rm Ch}_{E,F,G})\\circ A_L^{-1}.$$\nAll factors are natural isomorphisms by [lem-weil-pbc-site-derived-tensor-descent] and [lem-pur-total-tensor-signed-coherence]. Apply Step 2 for three variables to this transformation and its inverse. This constructs a derived natural isomorphism $\\alpha$ with precisely the required square; faithfulness makes it the unique such natural isomorphism.",
+   "uses": [
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-pur-total-tensor-signed-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0FPT (lemma-symmetric-monoidal-derived), details omitted there, using Tag 06YU (definition-derived-tor) and Tag 07A2 (lemma-tensor-product-K-flat); agent-written normalized localization argument."
+   }
+  },
+  {
+   "text": "Write $e_{E,a}:q(E[a])\\xrightarrow{\\sim}(qE)[a]$ for the fixed localization shift comparison of [def-weil-abstract-derived-category]. On resolving pairs form\n$$t_{a,b}=r_{E,F}[a+b]\\circ e_{T(E,F),a+b}\\circ q(t^{\\rm Ch}_{a,b})\\circ r_{E[a],F[b]}^{-1}\\circ(e_{E,a}^{-1}\\otimes^Le_{F,b}^{-1}),$$\nThis is a map $(qE)[a]\\otimes^L(qF)[b]\\to(qE\\otimes^LqF)[a+b]$. Similarly the representative symmetry is\n$$r_{F,E}\\circ q(\\sigma^{\\rm Ch}_{E,F})\\circ r_{E,F}^{-1}.$$\nThe comparisons $r$ are those of [lem-weil-pbc-site-derived-tensor-descent], and the chain maps and their inverses are those of [lem-pur-total-tensor-signed-coherence]. These formulas are natural isomorphisms between the restrictions of the desired derived functors. Step 2 for two variables extends each and its inverse uniquely. They give the asserted $t_{a,b}$ and $\\sigma$ with their fixed signs; uniqueness is relative to the displayed comparisons, as required.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-pur-total-tensor-signed-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0FPT (lemma-symmetric-monoidal-derived), details omitted there, using Tag 06YU (definition-derived-tor) and Tag 07A2 (lemma-tensor-product-K-flat); agent-written normalized localization argument."
+   }
+  },
+  {
+   "text": "For any two composites of the resulting natural transformations, restriction is compatible with composition and identities. By the faithfulness proved in Step 2, the composites agree if and only if their restrictions agree. Substituting the formulas in Steps 4 and 5 identifies those restrictions with the corresponding localized chain diagrams with all $r$ and shift comparisons inserted. This proves the asserted equality test, including ternary associativity and binary signed symmetry diagrams. It tests natural transformations, not unrelated isomorphisms between individual objects.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0FPT (lemma-symmetric-monoidal-derived), details omitted there, using Tag 06YU (definition-derived-tor) and Tag 07A2 (lemma-tensor-product-K-flat); agent-written normalized localization argument."
+   }
+  },
+  {
+   "text": "Fix any derived object $H$. The resolving localization equivalence of [lem-weil-pbc-site-derived-tensor-descent] provides $E\\in\\mathcal P$ and an isomorphism $u:qE\\xrightarrow{\\sim}H$. By [lem-weil-pbc-kflat-fixed-tensor-triangulated], the fixed tensor functors $-\\otimes^LqE$ and $qE\\otimes^L-$ are exact on the entire unbounded derived category. Exact functors are additive by [def-weil-triangulated-category]. Tensoring $u$ gives natural isomorphisms from these two functors to $-\\otimes^LH$ and $H\\otimes^L-$, respectively. Explicitly, for the first functor write $c_K=1_K\\otimes^Lu$. Naturality gives\n$$F_H(v)=c_L\\circ F_{qE}(v)\\circ c_K^{-1}\\quad(v:K\\to L).$$\nHence bilinearity of composition in the additive category $D(\\mathcal O)$ gives\n$$F_H(v+w)=c_L(F_{qE}(v)+F_{qE}(w))c_K^{-1}=F_H(v)+F_H(w).$$\nThe same calculation with $c_K=u\\otimes^L1_K$ proves additivity in the other variable. All maps $v,w$ here are arbitrary derived morphisms; no assertion that they are represented by chain maps between the chosen models is used.",
+   "uses": [
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0FPT (lemma-symmetric-monoidal-derived), details omitted there, using Tag 06YU (definition-derived-tor) and Tag 07A2 (lemma-tensor-product-K-flat); agent-written normalized localization argument."
+   }
+  },
+  {
+   "text": "To verify the stated biproduct diagrams explicitly, let $i_j:X_j\\to B$, $p_j:B\\to X_j$ be a binary biproduct in $D(\\mathcal O)$. They satisfy $p_ji_k=\\delta_{jk}$ and $i_1p_1+i_2p_2=1_B$. Each fixed tensor functor $F$ preserves compositions, identities and, by Step 7, sums and zero maps. The images therefore satisfy the same two identities. For maps $f_j:Y\\to F(X_j)$ the unique map to $F(B)$ is $F(i_1)f_1+F(i_2)f_2$, as follows by composing with the $F(p_j)$; uniqueness follows by multiplying by $\\sum_jF(i_j)F(p_j)=1$. Dually the unique map out of $F(B)$ with restrictions $g_j$ is $g_1F(p_1)+g_2F(p_2)$. Thus the actual images of the inclusions and projections are a biproduct diagram. Step 7 gives the displayed sum identities of the item. All resolving and exactness inputs used above allow complexes unbounded in both directions, so no extra boundedness or flatness hypothesis has entered.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0FPT (lemma-symmetric-monoidal-derived), details omitted there, using Tag 06YU (definition-derived-tor) and Tag 07A2 (lemma-tensor-product-K-flat); agent-written normalized localization argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-kflat-total-tensor-model",
+  "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+  "lem-pc-kflat-closure",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-sfb-product-localization",
+  "lem-pur-total-tensor-signed-coherence",
+  "def-weil-abstract-derived-category",
+  "def-weil-triangulated-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0FPT (lemma-symmetric-monoidal-derived), details omitted there, using Tag 06YU (definition-derived-tor) and Tag 07A2 (lemma-tensor-product-K-flat); agent-written normalized localization argument."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,10 +167,45 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Localization.Monoidal.tensorBifunctor\", \"module\": \"Mathlib/CategoryTheory/Localization/Monoidal/Basic\", \"type\": \"{C : Type u_1} →\\n  {D : Type u_2} →\\n    [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n      [inst_1 : CategoryTheory.Category.{v_2, u_2} D] →\\n        (L : CategoryTheory.Functor C D) →\\n          (W : CategoryTheory.MorphismProperty C) →\\n            [inst_2 : CategoryTheory.MonoidalCategory C] →\\n  \", \"doc\": \"The bifunctor structure of the tensor product in the localized monoidal category, constructed by lifting through the localization process to invert morphisms satisfying the monoidal property $W$. This\"}\n  {\"name\": \"CategoryTheory.Localization.Monoidal.tensorBifunctorIso\", \"module\": \"Mathlib/CategoryTheory/Localization/Monoidal/Basic\", \"type\": \"{C : Type u_1} →\\n  {D : Type u_2} →\\n    [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n      [inst_1 : CategoryTheory.Category.{v_2, u_2} D] →\\n        (L : CategoryTheory.Functor C D) →\\n          (W : CategoryTheory.MorphismProperty C) →\\n            [inst_2 : CategoryTheory.MonoidalCategory C] →\\n  \", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2, \\\\mathcal{E}$, localizations $L_1: \\\\mathcal{C}_1 \\\\to \\\\mathcal{D}_1$ and $L_2: \\\\mathcal{C}_2 \\\\to \\\\mathcal{D}_2$ with respect\"}\n  {\"name\": \"CategoryTheory.Localization.Monoidal.instBraidedCategoryLocalizedMonoidal\", \"module\": \"Mathlib/CategoryTheory/Localization/Monoidal/Braided\", \"type\": \"{C : Type u_1} →\\n  {D : Type u_2} →\\n    [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n      [inst_1 : CategoryTheory.Category.{v_2, u_2} D] →\\n        (L : CategoryTheory.Functor C D) →\\n          (W : CategoryTheory.MorphismProperty C) →\\n            [inst_2 : CategoryTheory.MonoidalCategory C] →\\n  \", \"doc\": \"The localized monoidal category obtained by inverting $W$-morphisms in a braided monoidal category inherits a canonical braided monoidal structure. This structure is constructed by lifting the origina\"}\n  {\"name\": \"CategoryTheory.Localization.Monoidal.tensor_comp_assoc\", \"module\": \"Mathlib/CategoryTheory/Localization/Monoidal/Basic\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] (L : CategoryTheory.Functor C D)\\n  (W : CategoryTheory.MorphismProperty C) [inst_2 : CategoryTheory.MonoidalCategory C] [inst_3 : W.IsMonoidal]\\n  [inst_4 : L.IsLocalization\", \"doc\": \"In a localized monoidal category $ D $ obtained by inverting $ W $-morphisms in a monoidal category $ C $, the composition of tensor products of morphisms satisfies associativity: for composable morph\"}\n  {\"name\": \"CategoryTheory.Localization.Monoidal.tensor_comp\", \"module\": \"Mathlib/CategoryTheory/Localization/Monoidal/Basic\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] (L : CategoryTheory.Functor C D)\\n  (W : CategoryTheory.MorphismProperty C) [inst_2 : CategoryTheory.MonoidalCategory C] [inst_3 : W.IsMonoidal]\\n  [inst_4 : L.IsLocalization\", \"doc\": \"In a localized monoidal category obtained by inverting $ W $-morphisms in a monoidal category $ \\\\mathcal{C} $, the tensor product of morphisms preserves composition. Specifically, for any morphisms $ \"}\n  {\"name\": \"CategoryTheory.Localization.Monoidal.instBraidedLocalizedMonoidalToMonoidalCategory\", \"module\": \"Mathlib/CategoryTheory/Localization/Monoidal/Braided\", \"type\": \"{C : Type u_1} →\\n  {D : Type u_2} →\\n    [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n      [inst_1 : CategoryTheory.Category.{v_2, u_2} D] →\\n        (L : CategoryTheory.Functor C D) →\\n          (W : CategoryTheory.MorphismProperty C) →\\n            [inst_2 : CategoryTheory.MonoidalCategory C] →\\n  \", \"doc\": \"The localized category $\\\\mathcal{D}$, obtained by inverting $W$-morphisms in a braided monoidal category $\\\\mathcal{C}$ via a functor $L$, inherits a canonical braided monoidal structure. This structur\"}\n  {\"name\": \"CategoryTheory.Localization.Monoidal.μ\", \"module\": \"Mathlib/CategoryTheory/Localization/Monoidal/Basic\", \"type\": \"{C : Type u_1} →\\n  {D : Type u_2} →\\n    [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n      [inst_1 : CategoryTheory.Category.{v_2, u_2} D] →\\n        (L : CategoryTheory.Functor C D) →\\n          (W : CategoryTheory.MorphismProperty C) →\\n            [inst_2 : CategoryTheory.MonoidalCategory C] →\\n  \", \"doc\": \"For objects $X$ and $Y$ in a monoidal category $\\\\mathcal{C}$ localized to $\\\\mathcal{D}$ via a functor $L$ inverting $W$-morphisms, the natural isomorphism $\\\\mu_{X,Y}$ establishes an equivalence betwee\"}\n  {\"name\": \"CategoryTheory.Localization.Monoidal.instSymmetricCategoryLocalizedMonoidal\", \"module\": \"Mathlib/CategoryTheory/Localization/Monoidal/Braided\", \"type\": \"{C : Type u_1} →\\n  {D : Type u_2} →\\n    [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n      [inst_1 : CategoryTheory.Category.{v_2, u_2} D] →\\n        (L : CategoryTheory.Functor C D) →\\n          (W : CategoryTheory.MorphismProperty C) →\\n            [inst_2 : CategoryTheory.MonoidalCategory C] →\\n  \", \"doc\": \"The localized monoidal category obtained by inverting $W$-morphisms in a braided monoidal category inherits a canonical symmetric monoidal structure. This structure is constructed by lifting the origi\"}",
    "date": "2026-10-21",
    "verdict": "No match for the full statement: generic monoidal localization and additive localization exist, but identifying their tensor, representative normalizations and signed shifts with the fixed sheaf K-flat presentation requires the resolving-model argument, not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "locali[sz].*[Aa]dditive|[Aa]dditive.*locali[sz]|[Ss]ymmetric.*[Dd]erived|[Dd]erived.*[Ss]ymmetric",
+   "results": "{\"t\": \"2026-10-21T08:14:40Z\", \"tool\": \"grep\", \"query\": \"locali[sz].*[Aa]dditive|[Aa]dditive.*locali[sz]|[Ss]ymmetric.*[Dd]erived|[Dd]erived.*[Ss]ymmetric\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Localization.lean\", \"Mathlib/CategoryTheory/Shift/Linear.lean\", \"Mathlib/CategoryTheory/Shift/Linear.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Basic.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Basic.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Basic.lean\", \"Mathlib/CategoryTheory/Localization/CalculusOfFractions/Preadditive.lean\", \"Mathlib/CategoryTheory/Localization/CalculusOfFractions/Preadditive.lean\"], \"digest\": \"70917290465fb937\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: generic localization/additivity/monoidal results do not identify the fixed ordinary module-sheaf K-flat tensor with all specified representative squares and shift signs in one line."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor product of sheaves with signed shift comparisons uniquely specified on flat resolutions",
+   "results": "{\"t\": \"2026-10-21T08:14:40Z\", \"tool\": \"leansearch\", \"query\": \"Derived tensor product of sheaves with signed shift comparisons uniquely specified on flat resolutions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier\", \"DerivedCategory.instAdditiveShiftFunctorInt\", \"PresheafOfModules.Derivation.noConfusionType\", \"PresheafOfModules.Derivation.noConfusion\", \"CommRingCat.Under.instPreservesLimitUnderWalkingParallelPairParallelPairTensorProdOfFlatCarrier\", \"DerivedCategory.singleFunctors\", \"DerivedCategory.instHasShiftInt\", \"PresheafOfModules.Derivation\"], \"digest\": \"e140b062c554d891\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: generic localization/additivity/monoidal results do not identify the fixed ordinary module-sheaf K-flat tensor with all specified representative squares and shift signs in one line."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Localization\", \"Additive\"",
+   "results": "{\"t\": \"2026-10-21T08:14:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"Localization\\\", \\\"Additive\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Localization.instPreadditiveLocalization\", \"CategoryTheory.Localization.instPreadditiveLocalization'\", \"CategoryTheory.Localization.preadditive\", \"CategoryTheory.Localization.instAdditiveLocalizationQ\", \"CategoryTheory.Localization.Preadditive.addCommGroup\", \"CategoryTheory.Localization.instAdditiveLocalization'Q'\", \"CategoryTheory.Localization.functor_additive\", \"CategoryTheory.Localization.Preadditive.addCommGroup'\"], \"digest\": \"ad29881ca2893f4c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: generic localization/additivity/monoidal results do not identify the fixed ordinary module-sheaf K-flat tensor with all specified representative squares and shift signs in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor of sheaves is separately additive with natural associativity symmetry and signed shift constraints determined on K-flat resolutions",
+   "results": "{\"t\": \"2026-10-21T08:14:50Z\", \"tool\": \"leanfinder\", \"query\": \"Derived tensor of sheaves is separately additive with natural associativity symmetry and signed shift constraints determined on K-flat resolutions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Tor'\", \"CategoryTheory.Tor'_obj_obj\", \"CategoryTheory.Tor\", \"CategoryTheory.Tor'_map_app\", \"CategoryTheory.Tor_map\", \"CategoryTheory.Tor_obj\", \"CategoryTheory.Tor'_obj_map\", \"CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors\"], \"digest\": \"a851d0e0e02bd944\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: generic localization/additivity/monoidal results do not identify the fixed ordinary module-sheaf K-flat tensor with all specified representative squares and shift signs in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization of monoidal categories using K-flat complexes is symmetric monoidal and tensor shift isomorphisms are normalized by chain representatives",
+   "results": "{\"t\": \"2026-10-21T08:15:30Z\", \"tool\": \"leanfinder\", \"query\": \"Localization of monoidal categories using K-flat complexes is symmetric monoidal and tensor shift isomorphisms are normalized by chain representatives\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Localization.Monoidal.instIsLocalizationLocalizedMonoidalToMonoidalCategory\", \"CategoryTheory.Localization.Monoidal.instIsLocalizationLocalizedMonoidalToMonoidalCategory_1\", \"CategoryTheory.Localization.Monoidal.tensorBifunctorIso\", \"CategoryTheory.Localization.Monoidal.μ\", \"CategoryTheory.LocalizedMonoidal\", \"CategoryTheory.Localization.Monoidal.instLiftingLocalizedMonoidalToMonoidalCategoryCompTensorRightObjFunctorFlipTensorBifunctor\", \"CategoryTheory.Localization.instCategoryLocalizedMonoidal\", \"CategoryTheory.Localization.Monoidal.isInvertedBy₂\"], \"digest\": \"a743f4057d637dfb\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: generic localization/additivity/monoidal results do not identify the fixed ordinary module-sheaf K-flat tensor with all specified representative squares and shift signs in one line."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-shifted-tensor-morphism-calculus",
@@ -79,5 +225,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-derived-tensor-additive-constraints",
+  "worker": "stage1",
+  "summary": "Q74: supplied the normalized resolving-localization proof in eight steps, reusing existing chain-sign, finite-product localization, model-closure and exact fixed-tensor nodes. No new nodes and no change to the statement. Verified every cited statement and documented all representative comparisons and arbitrary-morphism additivity.",
+  "blueprint": "lem-pur-frame-independence, current main-20261015 proof: Permutations (even-degree Kunneth symmetry), Unit multiples, Elementary shears. Steps 1-5 supply normalized tensor constraints; Step 6 gives equality detection; Steps 7-8 supply additive morphism calculus needed by the supported cup argument.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Generic resolving-class localization and the fixed tensor comparison r; the purity unit contains no replacement for this module-sheaf localization theorem."
+   },
+   {
+    "node": "lem-pur-kflat-total-tensor-model",
+    "why": "Generic closure of resolving models under total tensor, including flat terms, needed to type iterated representative comparisons."
+   },
+   {
+    "node": "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+    "why": "Generic shift stability and exactness of fixed K-flat tensor on the full derived category; used to obtain additivity for arbitrary derived maps."
+   },
+   {
+    "node": "lem-pc-kflat-closure",
+    "why": "Generic K-flat and flat direct-sum closure and flat degree-zero models; no purity-specific result supplies these facts."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-pur-kflat-total-tensor-model",
+  "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+  "lem-pc-kflat-closure"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q74-219a49ee1",
+  "group": "Q74",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q74-219a49ee1 (reviewer sub-agent of L); spot-checked: I read the item, its 8 steps and every cited statement in full. Shape: first split with no new nodes. Statement, stmt_deps, source, created and unit are unchanged. proof_deps equals the union of the step uses. No repair note, nothing dropped, no cycle (only citer is the parent shifted-tensor-morphism-calculus), no SGA. Source: Stacks sites-cohomology.tex:13136 (0FPT) gives the proof as 'Omitted', so proof_origin=agent is correct. Step 1: finite sums are countable sums padded with zeros; P[0] is bounded-above flat, hence in P; T(P[0],Q[0])=(P⊗Q)[0]. Step 2: L=q|_P is the localization P->W^{-1}P followed by the descent equivalence. product-localization gives L^J for finite J, which covers the ternary case the binary descent clause lacks. Fullness comes from universal-property (2) with phi=id, faithfulness from (3). Steps 3-5: I recomputed by hand that (-1)^{bp} is a chain map T(E[a],F[b])->T(E,F)[a+b]; both components match. The ends of t_{a,b}, A_R q(alpha) A_L^{-1} and sigma are correct, and a=b=0 reduces to the identity. Step 7: exact functors are additive by the text of def-weil-triangulated-category. The node gives exact functors identified with QA⊗^L-, and conjugating by 1⊗u carries additivity to any H on arbitrary derived maps. Step 8 is an elementary biproduct argument. Advisory: lem-sf-ringed-derived-closed-symmetric-monoidal overlaps in asserting symmetric monoidality, but it lacks the r-normalized uniqueness, t_{a,b}, J-variable full faithfulness and additivity, so it is not a duplicate. Tool_uses (site-derived-tensor-descent, kflat-fixed-tensor-triangulated, kflat-closure, kflat-total-tensor-model) are generic module-sheaf homological algebra and are accepted. No fixes."
  }
 }
