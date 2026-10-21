@@ -5,7 +5,8 @@ Authors: SHEAF group F3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
+public import WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMap
+public import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 public import Mathlib.FieldTheory.IsSepClosed

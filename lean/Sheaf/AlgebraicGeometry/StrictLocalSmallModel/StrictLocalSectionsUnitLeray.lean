@@ -6,7 +6,8 @@ Authors: Bin Wu
 
 module
 
-public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
+public import WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMap
+public import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension
 public import Sheaf.AlgebraicGeometry.StrictHenselizationSchemeSectionsExact
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence

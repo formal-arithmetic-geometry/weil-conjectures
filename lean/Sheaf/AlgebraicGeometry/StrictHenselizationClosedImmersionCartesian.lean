@@ -7,7 +7,8 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
-public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
+public import WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMap
+public import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension
 public import Sheaf.AlgebraicGeometry.StrictHenselizationClosedLift
 import Sheaf.AlgebraicGeometry.AffineStrictLocalRingComparison
 import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension

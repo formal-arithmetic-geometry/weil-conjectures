@@ -12,7 +12,8 @@ public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.RingTheory.KrullDimension.Basic
 public import Sheaf.AlgebraicGeometry.StrictHenselizationCanonicalMap
 public import Sheaf.AlgebraicGeometry.StrictHenselizationCompatibility
-public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
+public import WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMap
+public import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension
 
 import Sheaf.AlgebraicGeometry.AffineStrictLocalRingComparison
 import WeilConjectures.RingTheory.StrictHenselizationNoetherian

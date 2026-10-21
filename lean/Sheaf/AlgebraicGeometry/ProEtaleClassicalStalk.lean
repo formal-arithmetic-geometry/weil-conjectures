@@ -6,7 +6,8 @@ Authors: SHEAF groups NR and E4
 module
 
 public import Sheaf.AlgebraicGeometry.ProEtaleGeometricStalk
-public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
+public import WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMap
+public import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension
 import Sheaf.Paper.StrictHenselizationFunctoriality
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Reflective

@@ -6,7 +6,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.StrictHenselizationClosedLift
 public import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension
-public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
+public import WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMap
 import Mathlib.AlgebraicGeometry.Pullbacks
 public import WeilConjectures.AlgebraicGeometry.Morphisms.ProAffineEtale
 import Sheaf.AlgebraicGeometry.SmallStrictHenselizationIndEtale

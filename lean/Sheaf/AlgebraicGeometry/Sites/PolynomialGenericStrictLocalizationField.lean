@@ -5,7 +5,8 @@ Authors: SHEAF group C4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
+public import WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMap
+public import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension
 public import WeilConjectures.AlgebraicGeometry.Sites.SupportDimension
 public import WeilConjectures.ZetaSeries
 public import Mathlib.FieldTheory.IsSepClosed

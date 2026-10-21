@@ -5,7 +5,8 @@ Authors: SHEAF group Y2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
+public import WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMap
+public import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension
 public import Mathlib.AlgebraicGeometry.ResidueField
 
 /-! # Existence of the local strict-henselization map
@@ -83,7 +84,7 @@ private theorem fullPointedStrictHenselizationCone
   have hq (j : SmallModel.{v} (strictHenselizationNeighbourhoods s)) :
       c.π.app j ≫ (Q.obj j).1.hom = strictHenselizationStructuralMap s := by
     rw [hleg]
-    exact strictHenselizationStructuralMap_eq s j
+    exact ((exists_strictHenselizationStructuralMap s).choose_spec j)
   let c' := (Functor.Initial.extendCone (F := Q) (G := D)).obj c
   have hpoint (j : SmallModel.{v} (strictHenselizationNeighbourhoods s)) :
       p ≫ c.π.app j = (N.obj j).2.left := by

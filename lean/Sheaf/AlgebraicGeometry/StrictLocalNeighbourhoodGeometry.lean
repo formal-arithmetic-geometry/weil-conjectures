@@ -5,7 +5,8 @@ Authors: SHEAF group G2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
+public import WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMap
+public import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension
 public import Mathlib.CategoryTheory.Comma.Over.Pullback
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 

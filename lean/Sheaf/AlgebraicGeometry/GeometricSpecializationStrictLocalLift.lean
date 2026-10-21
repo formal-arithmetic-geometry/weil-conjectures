@@ -7,7 +7,8 @@ module
 
 public import Mathlib.AlgebraicGeometry.ResidueField
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
-public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
+public import WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMap
+public import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension
 import Sheaf.AlgebraicGeometry.SmallStrictHenselizationIndEtale
 import Sheaf.Paper.StrictHenselizationFunctoriality
 import WeilConjectures.RingTheory.ProEtale.IndWeaklyEtale

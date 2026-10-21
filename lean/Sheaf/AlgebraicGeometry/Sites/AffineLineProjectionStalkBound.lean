@@ -7,7 +7,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 public import Mathlib.AlgebraicGeometry.AffineSpace
-public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
+public import WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMap
+public import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension
 public import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselizationLocal
 public import WeilConjectures.AlgebraicGeometry.Sites.SupportDimension
 public import WeilConjectures.AlgebraicGeometry.Sites.TorsionCohomologicalDimension
@@ -31,6 +32,7 @@ proof steps 4--10.
 @[expose] public section
 
 set_option autoImplicit false
+set_option linter.privateModule false
 
 universe u
 

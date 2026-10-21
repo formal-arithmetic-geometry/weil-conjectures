@@ -42,7 +42,7 @@
    "elementary": true
   },
   {
-   "text": "Reuse the proved upstream existence theorem and structural map with these identical signatures. In the Sheaf compatibility wrapper, Classical.choose_spec gives strictHenselizationStructuralMap_eq. No identification of the separate strictLocalization scheme is required.",
+   "text": "Reuse the proved upstream existence theorem and structural map with their identical signatures. Consumers obtain the representative leg equation directly from Classical.choose_spec of exists_strictHenselizationStructuralMap. The redundant Sheaf compatibility wrapper is retired; no identification with strictLocalization is required.",
    "uses": [],
    "elementary": true
   }
@@ -53,7 +53,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 03Q9 proof, strict henselization structural map; Lean implementation by K2 on 2026-10-12 using cone naturality, ΓSpecIso_inv_naturality and cofiltered common predecessors. A3 on 2026-10-17 reuses the now-existing upstream implementation in WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMap and proves the Sheaf leg equation by choose_spec."
+  "place": "Tag 03Q9 proof, strict henselization structural map; Lean implementation by K2 on 2026-10-12 using cone naturality, ΓSpecIso_inv_naturality and cofiltered common predecessors. A3 on 2026-10-17 reuses the now-existing upstream implementation in WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMap and proves the Sheaf leg equation by choose_spec. M4 retirement repair on 2026-10-21 removes the redundant Sheaf leg-equation wrapper and substitutes its same choose_spec proof directly in consumers, preserving the upstream construction."
  },
  "mathlib_searches": [
   {
@@ -101,7 +101,7 @@
   "by": "A3",
   "date": "2026-10-17",
   "existing": true,
-  "note": "The current source already owns the identical existence theorem and common-composite structural map in WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMap. The Sheaf wrapper reexports that module instead of redeclaring either notion, and proves its compatibility equation by choose_spec. Unlike strictLocalizationToBase, this existing upstream map has exactly the recorded strictHenselizationScheme source."
+  "note": "The structural map and existence theorem are supplied by WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMap. The redundant Sheaf wrapper is retired; its small-cone leg equation is obtained in consumers by (exists_strictHenselizationStructuralMap s).choose_spec j. The distinct strictLocalization API is not substituted."
  },
  "reviewed": {
   "date": "2026-10-11",
@@ -120,14 +120,14 @@
   "note": "Checked source clauses, all dependencies, canonical maps, edge cases, signatures, records and pilot gates. Immutable module compiled cleanly through server-only scompile.py in 3.6 seconds. No repository or branch changes."
  },
  "reviewed_proof": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "A3",
+  "reviewer": "C-66112",
+  "group": "M4",
   "result": "pass",
-  "landing": "20261017T003413-L-3312155",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261021T162748-L-716953",
+  "kind": "interface",
+  "note": "independent cc review: Item module emptied and all 29 live importers plus 3 indirect users rewritten; delivered files diffed against the live clone (only the packet's lines differ) and the removed wrapper checked against its choose_spec term; node diff touches only proof/origin/note; 33 delivered modules and 4 second-level importers compile with exit 0"
  },
  "upstream_sync": {
   "commit": "ffb7b9060",

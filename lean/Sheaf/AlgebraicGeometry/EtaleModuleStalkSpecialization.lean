@@ -5,7 +5,8 @@ Authors: SHEAF group NB
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
+public import WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMap
+public import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 
@@ -90,7 +91,7 @@ theorem existsUnique_etaleModuleStalkSpecialization
         dsimp only [N]
         rw [Category.assoc, Category.assoc]
         exact congrArg (fun q : strictHenselizationScheme s ⟶ S ↦ t ≫ q)
-          (strictHenselizationStructuralMap_eq s j))
+          (((exists_strictHenselizationStructuralMap s).choose_spec j)))
   have hv {i j : SmallModel.{u} (strictHenselizationNeighbourhoods s)} (f : i ⟶ j) :
       (pointSmallEtale (t ≫ strictHenselizationStructuralMap s)).fiber.map
         ((AffineEtale.Spec S).map (N.map f).1) (v i) = v j := by

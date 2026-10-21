@@ -178,7 +178,7 @@ private theorem strict_pointed_hom_ext
       (strictHenselizationNeighbourhoods y)).inverse.obj j).1).hom
   have hc (j) : c j ≫ p j = strictHenselizationStructuralMap y := by
     simpa only [c, p, isoSpec_Spec_inv, Category.assoc] using!
-      strictHenselizationStructuralMap_eq y j
+      ((exists_strictHenselizationStructuralMap y).choose_spec j)
   obtain ⟨hl⟩ := (strictHenselization_properties y).2.2
   apply hl.hom_ext
   intro j

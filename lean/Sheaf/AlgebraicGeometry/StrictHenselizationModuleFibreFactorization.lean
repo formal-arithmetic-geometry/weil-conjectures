@@ -6,7 +6,8 @@ Authors: SHEAF group R2
 module
 
 public import WeilConjectures.AlgebraicGeometry.GeometricFibreExchangeGerms
-public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
+public import WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMap
+public import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension
 public import WeilConjectures.SixFunctors.BaseChange.GlobalSections
 import WeilConjectures.AlgebraicGeometry.GeometricFibreExchangeRepresentative
 import Sheaf.AlgebraicGeometry.StrictHenselizationClosedFiberComparison
@@ -76,7 +77,9 @@ private theorem pointedStrictHenselizationLift
   let := (strictHenselization_properties s).2.1
   let j := Classical.choice (IsCofiltered.nonempty (C :=
     SmallModel.{u} (strictHenselizationNeighbourhoods s)))
-  rw [← strictHenselizationStructuralMap_eq s j]
+  have hstruct := (exists_strictHenselizationStructuralMap s).choose_spec j
+  change _ = strictHenselizationStructuralMap s at hstruct
+  rw [← hstruct]
   exact (Category.assoc _ _ _).symm.trans
     ((congrArg
       (fun v ↦ v ≫ ((AffineEtale.Spec Y).obj (N.obj j).1).hom) (hpoint j)).trans

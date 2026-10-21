@@ -105,7 +105,7 @@ theorem existsUnique_localAcyclicityStrictMap
     (Scheme.strictHenselizationNeighbourhoods (x ≫ f))).inverse.obj j.unop.unop).1).hom
   have hc : c ≫ p = Scheme.strictHenselizationStructuralMap (x ≫ f) := by
     simpa only [c, p, Scheme.isoSpec_Spec_inv] using!
-      Scheme.strictHenselizationStructuralMap_eq (x ≫ f) j.unop.unop
+      ((Scheme.exists_strictHenselizationStructuralMap (x ≫ f)).choose_spec j.unop.unop)
   change h' ≫ c = Spec.map h ≫ c
   apply etalePointedMapRigidity ψX p
   · simpa only [Category.assoc, hc] using h'base.trans hbase.symm

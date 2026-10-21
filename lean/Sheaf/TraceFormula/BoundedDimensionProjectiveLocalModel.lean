@@ -12,7 +12,8 @@ public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Projective
 public import Sheaf.AlgebraicGeometry.StrictHenselizationCanonicalMap
-public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
+public import WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMap
+public import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension
 import Sheaf.AlgebraicGeometry.StrictHenselizationClosedLift
 import Sheaf.AlgebraicGeometry.FibreDimensionAfterBaseChange
 import Sheaf.AlgebraicGeometry.IndEtaleStrictLocalInvariance

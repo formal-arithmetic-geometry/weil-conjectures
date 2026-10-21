@@ -5,7 +5,8 @@ Authors: SHEAF group E1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
+public import WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMap
+public import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 public import WeilConjectures.SixFunctors.BaseChange.Square

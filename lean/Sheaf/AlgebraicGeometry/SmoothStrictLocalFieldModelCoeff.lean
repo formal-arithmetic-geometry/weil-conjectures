@@ -5,7 +5,8 @@ Authors: SHEAF group F4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
+public import WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMap
+public import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.RingTheory.Localization.FractionRing
 public import Mathlib.FieldTheory.IsSepClosed

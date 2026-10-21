@@ -6,7 +6,8 @@ Authors: SHEAF group M2
 module
 
 public import Sheaf.AlgebraicGeometry.PointedEtaleSectionCone
-public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
+public import WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMap
+public import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension
 
 /-! # The small strict-local model as a pointed section cone
 
@@ -42,7 +43,7 @@ noncomputable def strictLocalNeighbourhoodSection
       (𝟙 _)
       (by
         rw [Category.assoc, Category.id_comp]
-        exact Scheme.strictHenselizationStructuralMap_eq s j))
+        exact ((Scheme.exists_strictHenselizationStructuralMap s).choose_spec j)))
     (by
       change _ ≫ pullback.snd _ (Scheme.strictHenselizationStructuralMap s) = _
       simp

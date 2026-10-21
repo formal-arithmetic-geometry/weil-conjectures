@@ -5,7 +5,8 @@ Authors: SHEAF group P1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
+public import WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMap
+public import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension
 public import WeilConjectures.AlgebraicGeometry.Sites.Gm
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import WeilConjectures.AlgebraicGeometry.DescendAffine

@@ -119,7 +119,7 @@ private theorem allSchemeCone_over
   change ((affineSchemeCone s).π.app j ≫ k.1.left) ≫ n.1.hom = _
   have hw : k.1.left ≫ n.1.hom = ((affinePointedInclusion s).obj j).1.hom := k.1.w
   rw [Category.assoc, hw, affineSchemeCone_leg]
-  exact strictHenselizationStructuralMap_eq s j
+  exact ((exists_strictHenselizationStructuralMap s).choose_spec j)
 
 
 

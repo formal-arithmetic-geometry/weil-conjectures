@@ -5,7 +5,8 @@ Authors: SHEAF group R1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
+public import WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMap
+public import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension
 public import WeilConjectures.Mathlib.RingTheory.Henselian
 public import Mathlib.AlgebraicGeometry.ResidueField
 import Mathlib.FieldTheory.IsSepClosed
@@ -228,7 +229,9 @@ theorem strictHenselizationResidue
     let := hc
     obtain ⟨j⟩ := IsCofiltered.nonempty
       (C := SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods barY))
-    rw [← Scheme.strictHenselizationStructuralMap_eq barY j]
+    have hstruct := (Scheme.exists_strictHenselizationStructuralMap barY).choose_spec j
+    change _ = Scheme.strictHenselizationStructuralMap barY at hstruct
+    rw [← hstruct]
     rw [← Scheme.isoSpec_Spec_inv]
     simpa only [Category.assoc] using!
       (congrArg (fun f ↦ f ≫ ((Scheme.AffineEtale.Spec Y).obj
@@ -518,11 +521,11 @@ theorem strictHenselizationFunctoriality
   have hcS : ∀ a, cS a ≫ pS a = Scheme.strictHenselizationStructuralMap barS := by
     intro a
     simpa only [cS, pS, Scheme.isoSpec_Spec_inv] using!
-      Scheme.strictHenselizationStructuralMap_eq barS a
+      ((Scheme.exists_strictHenselizationStructuralMap barS).choose_spec a)
   have hcT : ∀ b, cT b ≫ pT b = Scheme.strictHenselizationStructuralMap barT := by
     intro b
     simpa only [cT, pT, Scheme.isoSpec_Spec_inv] using!
-      Scheme.strictHenselizationStructuralMap_eq barT b
+      ((Scheme.exists_strictHenselizationStructuralMap barT).choose_spec b)
   have hψS : ∀ a, Spec.map (CommRingCat.ofHom ψS) ≫ cS a =
       ((equivSmallModel.{v}
         (Scheme.strictHenselizationNeighbourhoods barS)).inverse.obj a).2.left := hσS

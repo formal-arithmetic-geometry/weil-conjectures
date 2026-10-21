@@ -5,7 +5,8 @@ Authors: SHEAF group F4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
+public import WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMap
+public import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.AlgebraicGeometry.FunctionField
 public import Mathlib.RingTheory.RegularLocalRing.Defs
@@ -154,7 +155,7 @@ private theorem smooth_chart_local_presentation
       change Spec.map g.appTop ≫ (Spec R).isoSpec.inv =
         (Spec (rep.obj j).1.left.unop).isoSpec.inv ≫ g at hh
       simpa only [isoSpec_Spec_inv] using hh
-    have hstr := strictHenselizationStructuralMap_eq s j
+    have hstr := ((exists_strictHenselizationStructuralMap s).choose_spec j)
     change Spec.map ((colimit.cocone (strictHenselizationAffineDiagram s)).ι.app (op j)) ≫
       Spec.map (ΓSpecIso (rep.obj j).1.left.unop).inv ≫ b.obj.1.hom =
       strictHenselizationStructuralMap s at hstr
