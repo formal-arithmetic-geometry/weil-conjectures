@@ -22,58 +22,58 @@
  ],
  "proof": [
   {
-   "text": "Use the ordinary inverse-image square of [sk-thm-pe-direct-image-comparison], with $I=f_{\\mathrm{proet}}^{-1}\\nu_Y^{-1}$, $J=\\nu_X^{-1}f_{\\mathrm{et}}^{-1}$ and their specified geometric isomorphism $\\theta$. The first assertion of [sk-thm-pe-direct-image-comparison] gives this square for every discrete coefficient ring, without its later qcqs hypothesis. Its module version $d_R^0$ ($R=A,B$) is the lift of this same $\\theta$, not a choice of unrelated isomorphisms for $A$ and $B$: [def-weil-pbc-site-comparison-morphism] describes the coefficient lift of $\\nu_Z^{-1}$ by applying the inverse image to the underlying sheaf, addition and each scalar endomorphism, so $p_R^0C_Y^{R,0}$, $C_X^{R,0}l_R^0$ and $d_R^0$ are the lifts $I_R,J_R,\\theta^R$ in [lem-sfb-geometric-two-iso-scalar-pairing], which we apply with $a:A\\to B$. Its constant-ring clause gives the coefficient-compatible module lifts $d_A^0,d_B^0$. Expand its scalar comparison equation along these two composites, using its expanded-composite clause and the inverse direction for $\\delta_Z^0$. The resulting ordinary equation is $$\\delta_{X,l_A^0N}^0\\circ E_X^p(d_{A,N}^0)\\circ c^{p,0}_{C_Y^{A,0}N}=C_X^{B,0}(c^{e,0}_N)\\circ d_{B,E_Y^eN}^0\\circ p_B^0(\\delta_{Y,N}^0).$$ This holds for every ordinary $A_Y$-module $N$, and termwise on complexes.",
+   "text": "Prove the ordinary restriction cube for the specified comparison inverse image and geometric inverse images. Write each restriction/pullback face as the conjugate of the sectionwise coextension/direct-image comparison, using the definitions in [def-weil-pbc-witness-compatibility] and [lem-sbc-canonical-restrict-scalars-functor-comparisons]. Write the site face as the conjugate of its direct-image square [sk-thm-pe-direct-image-comparison]. Conjugation is injective and exchanges composition and whiskering. Both conjugates agree sectionwise: the direct images are precomposition, coextension acts on values, and the site square is the same fiber-product isomorphism for both rings. This gives ordinary_restriction_cube, including the associators.",
    "uses": [
+    "def-weil-pbc-witness-compatibility",
+    "lem-sbc-canonical-restrict-scalars-functor-comparisons",
     "sk-thm-pe-direct-image-comparison",
-    "def-weil-pbc-site-comparison-morphism",
-    "lem-sfb-geometric-two-iso-scalar-pairing"
+    "def-weil-pbc-adjunction-mate"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EL, label lemma-tensor-product-pullback, proof: naturality of the balanced pairing. The compatibility with a specified geometric 2-isomorphism and its expanded composite presentations is the agent-formulated extraction of old proof steps 1–2."
-   }
+   "elementary": true
   },
   {
-   "text": "Represent $M$ by a complex $K$. Apply [lem-sfb-etale-proetale-cube-flat-model] to choose $P\\to K$ and its simultaneous representative identifications. Every intermediate complex is K-flat with flat terms, even after the nonflat coefficient map $a$. The six specified derived faces are thereby identified with exactly the six ordinary faces in Step 1 on this same $P$.",
+   "text": "Apply the exact derived-square pasting theorem Functor.mapDerivedCategorySquareIso_hom_app_comp to the two ordinary routes, using ordinary_restriction_cube as its hypothesis on the site-face route. On the other route use identity composition comparisons. Expand the derived triangle comparisons and cancel the invertible common composition comparison. This yields exact_restriction_cube. Conjugate by the published identifications of exact geometric inverse images with left derived inverse images, and use their naturality to cancel adjacent inverse factors. The definitions of the derived restriction faces and the ambient site face give precisely derived_restriction_cube. Only exact fixed-coefficient operations are localized; scalar extension is not assumed exact.",
    "uses": [
-    "lem-sfb-etale-proetale-cube-flat-model"
+    "def-weil-pbc-proetale-operations",
+    "sk-thm-pe-direct-image-comparison",
+    "def-weil-pbc-witness-compatibility",
+    "lem-sbc-canonical-restrict-scalars-functor-comparisons"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6D, label lemma-derived-pullback-composition, proof on one common flat-term K-flat representative; with labels lemma-K-flat-resolution, lemma-pullback-K-flat, lemma-derived-base-change, lemma-pullback-tensor-product. Simultaneous normalization of the six specified faces is the agent extraction of old proof steps 3–4."
-   }
+   "elementary": true
   },
   {
-   "text": "Apply Step 1 in each degree of $P$. Its naturality for the differential $P^n\\to P^{n+1}$ makes the two equal ordinary composites chain maps. Localize this equality and use the vertex identifications of Step 2. Adjacent inverse representative identifications cancel, giving the required equation at $Q_AP$. The coefficient is in degree zero and no homogeneous factors are permuted, so no additional sign occurs.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6D, lemma-derived-pullback-composition, proof on one common K-flat representative; Tag 07A4, lemma-pullback-tensor-product, representative normalization"
-   }
+   "text": "Use the four scalar-extension/restriction adjunctions on the etale and pro-etale sites of X and Y. The comparison reduction is the inverse mate of the restriction/comparison face by [def-weil-pbc-witness-compatibility]. The two reverse scalar/pullback comparisons are the inverse mates of the two restriction/pullback faces, the constant-coefficient specializations used in [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Apply the mates bijection to the two pasted scalar squares. Mate pasting [lem-weil-pbc-mate-pasting] and compatibility with whiskering turn their equality into derived_restriction_cube. Injectivity gives reverse_scalar_cube, without any direct-image isomorphism or boundedness assumption.",
+   "uses": [
+    "def-weil-pbc-witness-compatibility",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "def-weil-pbc-adjunction-mate",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": true
   },
   {
-   "text": "Let $F=p_BT_Y^pC_Y^A$ and $G=C_X^BT_X^el_A$, and denote the displayed left and right paths by $\\alpha,\\beta:F\\Rightarrow G$. All their factors are natural transformations by their definitions. For the isomorphism $u:\\mathsf Q_AP\\xrightarrow{\\sim}M$ induced by the resolution, naturality gives $\\alpha_M=G(u)\\alpha_{\\mathsf Q_AP}F(u)^{-1}$ and $\\beta_M=G(u)\\beta_{\\mathsf Q_AP}F(u)^{-1}$. Step 3 makes the middle factors equal. This proves exactly\n$$\\delta_{X,l_AM}\\circ T_X^p(d_{A,M})\\circ c^p_{C_Y^AM}=C_X^B(c^e_M)\\circ d_{B,T_Y^eM}\\circ p_B(\\delta_{Y,M}).$$\nBoth paths start at $F(M)$ and end at $G(M)$, so no extra identification of their endpoints is being assumed. The resolution and pullback statements used above apply to arbitrary complexes on the fixed small sites; no geometric finiteness, boundedness, or coefficient-flatness hypothesis has entered.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6D, lemma-derived-pullback-composition, passage from a K-flat representative to an arbitrary derived object"
-   }
+   "text": "The published pro-etale scalar comparison is the inverse of the reverse mate, whose invertibility is the existing scalarPullbackReverse_isIso specialization of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. The proved private normalization identity scalarPullbackEtaleIso_eq_fromMate identifies the published normalized etale scalar comparison [def-pur-etale-scalar-pullback-iso] with the inverse etale mate. Precompose reverse_scalar_cube with the pro-etale forward comparison and postcompose with the comparison inverse image of the etale forward comparison. Cancel both inverse pairs and reverse the resulting equality. This is exactly the stated six-face equation.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "def-pur-etale-scalar-pullback-iso"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-site-comparison-morphism",
-  "lem-sfb-etale-proetale-cube-flat-model",
-  "lem-sfb-geometric-two-iso-scalar-pairing",
+  "def-pur-etale-scalar-pullback-iso",
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-witness-compatibility",
+  "lem-sbc-canonical-restrict-scalars-functor-comparisons",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
   "sk-thm-pe-direct-image-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 0D6D, 06YS, 0G7E, 06YY and 07A4, with explicit naturality of the universal balanced pairing from sites-modules.tex Tags 03EK/03EL"
+  "place": "Tag 0D6D, canonical pullback composition; alternate proof from the published conjugate and inverse-mate definitions, using Mathlib mate pasting and the proved etale normalization identity."
  },
  "mathlib_searches": [
   {
@@ -213,13 +213,10 @@
   ]
  },
  "tool_uses": [
-  "lem-pc-kflat-resolution",
   "lem-pur-derived-change-of-rings",
   "lem-sfb-ringed-derived-monoidal-comparisons",
-  "lem-weil-pbc-ringed-topoi-derived-pullback",
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "sk-thm-pe-direct-image-comparison",
-  "lem-weil-pbc-canonical-ringed-tensor-comparison-construction"
+  "sk-thm-pe-direct-image-comparison"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -248,5 +245,15 @@
   "result": "pass",
   "note": "Item node changed only in lean, with a verbatim statement; all 11 stmt_dep nodes byte-identical to live; no new nodes. All six faces are published canonical declarations: c^e = Etale.scalarPullbackIso (def-pur recorded decl), d_R = directImageComparisonAmbientPullbackIso (localized unconditional inverse-image square), c^p = scalarPullbackProEtaleIso (inverse scalar mate), delta = pbcComparisonReduction (witness-compatibility mate, as in the sibling scalar-mate node). Both composites checked component-wise: same endpoints, node order, no casts. No qc/qs, boundedness or flatness assumptions; Type (u+1) coefficients as in the dependency interface. Edge cases (id, zero ring, empty scheme, non-flat a, unbounded M) covered. Imports = stmt_dep modules plus plain proof_dep imports; docstrings with source, blueprint tag and 5 steps; sorry only; lines <=100. nt_compile --json clean in 6.4 s. Advisories: (1) public import of EtaleProEtaleScalarMate, whose owner node has this item as a proof_dep, gives a stage-3 import cycle (declared under stages/2 s3 rule 7); the maintainer should split those helpers into a def-node module; (2) delta's owner def-weil-pbc-witness-compatibility is not a stmt_dep, consistent with the sibling scalar-mate node."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261021T111355-L-89424",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }
