@@ -35,7 +35,8 @@
   {
    "text": "For a degree $n$ local section $f=(f^p)_p$ of $X$, define $H(f)^p=h^{p+n}f^p$. This defines an $R$-linear degree $-1$ map of sheaves and commutes with restriction, component by component. Using the differential in [def-pur-hom-complex], $d_X(Hf)=d_Jhf+(-1)^n hf d_A$ and $H(d_Xf)=hd_Jf-(-1)^n hf d_A$. Adding gives $(d_XH+Hd_X)f=(d_Jh+hd_J)f=(a-b)f$. Postcomposition with $a$ is $t_1$, and postcomposition with $b=s_J$ is multiplication by $s$ on $X$, namely $t_2$. Thus $t_1-t_2=d_XH+Hd_X$. No interchange of a product with a colimit is used.",
    "uses": [
-    "def-pur-hom-complex"
+    "def-pur-hom-complex",
+    "lem-sc-hom-complex-projections"
    ],
    "elementary": true,
    "source": {
@@ -56,7 +57,7 @@
    }
   },
   {
-   "text": "Define $K^r:B^r\\to B^{r-1}$ by $K^re_n^r=-e_{n+1}^{r-1}H^r$, using the coproduct universal property in each degree. On every summand, $(d_BK+Kd_B)e_n=-e_{n+1}(t_1-t_2)=(u_1-u_2)e_n$, so $d_BK+Kd_B=u_1-u_2$. The triangular map $F:T_1\\to T_2$, $F^r(b,c)=(b+K^{r+1}c,c)$, is a chain map: its two differential composites have first coordinates $d_Bb+d_BKc+u_2c$ and $d_Bb+u_1c-Kd_Bc$, equal by that identity, and both have second coordinate $-d_Bc$. Its inverse is $(b,c)\\mapsto(b-Kc,c)$. Moreover $Fv_1e_n=v_2e_n$ identically for every $n$, including $n=0$. These are direct matrix and coproduct calculations with the displayed cone differential.",
+   "text": "In the derived category Q(t1)=Q(t2), since the transitions are homotopic. Use the same chosen coproduct B of copies of X for both telescope maps. The mapped coprojections Q(e_n) form a coproduct cocone by the telescope theorem. The formulas Q(e_n) Q(u_k)=Q(e_n)-Q(t_k) Q(e_(n+1)) and this coproduct universal property show Q(u1)=Q(u2). The two distinguished telescope triangles with first two vertices Q(B), Q(B) thus have identical first arrows. Complete the identity square on these vertices to an isomorphism of distinguished triangles (Mathlib Pretriangulated.isoTriangleOfIso₁₂). Its third component is the required isomorphism gamma; its second component is the identity. This uses the standard distinguished-triangle comparison instead of explicitly constructing the triangular cone map.",
    "uses": [
     "def-weil-abstract-derived-category",
     "def-weil-pbc-category-colimit"
@@ -68,7 +69,7 @@
    }
   },
   {
-   "text": "Because $p_1,p_2$ are quasi-isomorphisms and $F$ is a chain isomorphism, $\\gamma=Q(p_2)\\circ Q(F)\\circ Q(p_1)^{-1}$ is an isomorphism $Q(C_1)\\to Q(C_2)$. For each $n\\geq0$, step 3 gives $Q(p_1)^{-1}Q(j_n^{(1)})=Q(v_1e_n)$, and step 4 then gives $\\gamma Q(j_n^{(1)})=Q(p_2Fv_1e_n)=Q(p_2v_2e_n)=Q(j_n^{(2)})$. This proves the required normalization on every leg. All constructions use arbitrary integer degrees, so no boundedness or continuity hypothesis is needed.",
+   "text": "The second square of the triangle isomorphism gives Q(q1) followed by gamma = Q(q2), since its second component is the identity. Precompose with Q(e_n), and use e_n followed by q_k = j_n^(k) and functoriality of Q. This gives Q(j_n^(1)) followed by gamma = Q(j_n^(2)) for every natural number n, including zero. There is no boundedness or continuity assumption.",
    "uses": [
     "def-weil-abstract-derived-category"
    ],
@@ -84,13 +85,14 @@
   "def-weil-abstract-derived-category",
   "def-pur-kinjective-complex",
   "def-pur-hom-complex",
+  "lem-sc-hom-complex-projections",
   "lem-kun-complex-colimit-hocolim",
   "def-weil-pbc-category-colimit"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Tag 070I (lemma-K-injective) and Tag 0949 (lemma-colim-hocolim); explicit Hom differential and triangular cone calculation supplied by NP, using sites-cohomology.tex Tag 0A8X."
+  "place": "Tag 070I and Tag 0949, with sites-cohomology.tex Section 0A8X. H4: explicit Hom product-projection homotopy; compare the distinguished telescope triangles using Mathlib Pretriangulated.isoTriangleOfIso₁₂ and their preserved coproduct cocone."
  },
  "mathlib_searches": [
   {
@@ -392,5 +394,15 @@
   "group": "Q43",
   "result": "pass",
   "note": "Clause-by-clause check of KInjectiveHomScalarTelescope against the node: site/module universes max c v r, R CommRingCat sheaf via sheafCompose, AB5OfSize in the module universe (node hypothesis), I/η/hI identical to the DerivedInternalHomOfUniverses interface with no linearity, s ∈ sectionsSubring = Γ(R), X = homComplex A (I P), t1 = homComplexFunctor (op A).map (I.map (s•𝟙 P)), t2 = s•𝟙 X via canonical homLinear (sectionsSMul), Nonempty Homotopy t1 t2, Functor.ofSequence towers with colimits in complexes before Q, ∃ γ with Q(j_n^1) ≫ γ.hom = Q(j_n^2) ∀ n incl. 0. lean.statement matches the file verbatim, one sorry, universes bound, docstrings carry source and blueprint tag and all 5 proof steps; helper defs are real; no duplicate found; only the lean field differs from live; item not dropped. Edge cases s=0/1, zero ring, empty site, unbounded degrees OK. Advisory: Second reading by Q43 is an author self-reading (brief-stage2 l.188 asks for another worker), but it is substantive; this review supplies the independent reading. No fixes, no compile needed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261021T151123-L-1136553",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
