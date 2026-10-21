@@ -19817,3 +19817,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:27 L: merged deliver/O3/lem-sfb-internal-extension-inverse-image (reviewer PASS; first push; new nodes: 0)
 - 03:27 L: merged deliver/Q33/lem-sfb-scalar-unit-equality-detection (reviewer PASS; first push; new nodes: 0)
 - 03:28 L: merged deliver/NC/lem-sbc-ambient-operations-scalar-linearity (reviewer PASS; first push; new nodes: 0)
+- 03:29 L: merged deliver/Q18/lem-sfb-constructible-cocone-obj (reviewer PASS; after a return; new nodes: 1)
