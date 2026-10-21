@@ -63,10 +63,11 @@
    }
   },
   {
-   "text": "Curry $b$ on each total-tensor summand, using the product projections defining [def-pur-hom-complex]. For $x=w\\otimes z\\in S^n$, $n=r+s$, put $p(x)(y)=b(x\\otimes y)$ for homogeneous $y=e\\otimes h\\in G$. Since $b$ is a chain map, $d_Jp(x)(y)=p(d_Sx)(y)+(-1)^n p(x)(d_Gy)$, so $d_{\\operatorname{Hom}}p(x)=p(d_Sx)$. Thus $p$ is a chain map. Local bilinearity and sheafification give the sheaf-valued adjunct $\\bar p:C\\to\\mathcal Hom^\\bullet(G,J)$; degreewise constant/sections adjunction gives precisely the global chain map $p:S\\to\\operatorname{Hom}^\\bullet_P(G,J)$. The formulas are determined on every tensor summand and every Hom-product projection, so no finite-support assertion about Hom products is being assumed.",
+   "text": "Curry $b$ on each total-tensor summand, using the product projections defining [def-pur-hom-complex]. For $x=w\\otimes z\\in S^n$, $n=r+s$, put $p(x)(y)=b(x\\otimes y)$ for homogeneous $y=e\\otimes h\\in G$. Since $b$ is a chain map, $d_Jp(x)(y)=p(d_Sx)(y)+(-1)^n p(x)(d_Gy)$, so $d_{\\operatorname{Hom}}p(x)=p(d_Sx)$. Thus $p$ is a chain map. Local bilinearity and sheafification give the sheaf-valued adjunct $\\bar p:C\\to\\mathcal Hom^\\bullet(G,J)$; degreewise constant/sections adjunction gives precisely the global chain map $p:S\\to\\operatorname{Hom}^\\bullet_P(G,J)$. The formulas are determined on every tensor summand and every Hom-product projection, so no finite-support assertion about Hom products is being assumed. For the separate forward chain-evaluation clause, a map alpha:U→Hom(E,I) gives on each pair of degrees a bilinear presheaf map (w,e)↦alpha(w)(e). The strong monoidality of sheafification and the sheafification adjunction extend this to constant(U^r) tensor E^q→I^(q+r). The monoidal unit identity proves its required formula on constant pure sections and also gives an extensionality principle for such maps. Extend the maps by the native direct-sum tensor universal property. Expanding Mathlib HomComplex.δ_v in the chain-map equation for alpha gives d_I(alpha(w)(e))=alpha(dw)(e)+(-1)^r alpha(w)(d_E(e)). The native ιTensorObj_d formula identifies this with the total-tensor differential. This proves lifted_external_evaluation_chain_evaluation without boundedness, flatness or injectivity assumptions.",
    "uses": [
     "def-pur-hom-complex",
-    "def-kun-constant-projection-morphism"
+    "def-kun-constant-projection-morphism",
+    "def-pc-tensor-complex-sheaves"
    ],
    "elementary": true,
    "source": {
@@ -103,7 +104,7 @@
    }
   },
   {
-   "text": "Use the differentials in [def-pur-hom-complex] and [def-weil-abstract-derived-category]. If $f\\in\\operatorname{Hom}^n(B[1],I)$, then $\\theta^n(f)^p=(-1)^nf^{p-1}$ has degree $n-1$ as a map from $B$ to $I$. Both $d\\theta(f)$ and $\\theta(df)$ have component $(-1)^{n+1}d_If^{p-1}-f^p d_B$ at $B^p$. Hence $\\theta$ is a chain map. Its inverse sends $g\\in\\operatorname{Hom}(B,I)[-1]^n$ to the family $f^q=(-1)^ng^{q+1}$, so the two composites are identities. The calculation works for sheaf Hom as well as global Hom, respects restriction, and is natural in $B,I$. Since derived internal Hom is computed with precisely these Hom complexes into $I$ [def-pur-derived-internal-hom], its localization realizes the first-variable Hom shift; no boundedness of $B$ is used.",
+   "text": "For the ordinary global cochain complex defined in ExternalRHom, use Mathlib CochainComplex.HomComplex.Cochain.leftShiftLinearEquiv in degree n-1, with shift 1. Its inverse is leftUnshift, so it gives the degree-n map from Hom(B[1],I) to Hom(B,I)[-1]. The lemma δ_leftUnshift says that applying the unshifted Hom differential contributes the sign 1.negOnePow. This cancels the sign (-1).negOnePow in the differential of the shifted target. HomologicalComplex.Hom.isoOfComponents therefore assembles these linear equivalences into a chain isomorphism. The displayed leftUnshift normalization is definitional. This construction works for every pair B,I; the existing K-injectivity hypothesis is not needed for this chain-level clause. The identification with the derived first-variable shift remains the separate final clause and uses the normalized Hom models and derived internal Hom [def-pur-derived-internal-hom].",
    "uses": [
     "def-pur-hom-complex",
     "def-weil-abstract-derived-category",
@@ -160,7 +161,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 0A8X, 0A90, 0A96, 08J7, 08J9 and 07A2; representative normalization from existing DAG nodes and explicit sign/homotopy calculations. Blueprint ancestor lem-pur-kunneth-supported, proof paragraphs 1 and 3."
+  "place": "Tags 0A8X, 0A90, 0A96, 08J7, 08J9 and 07A2; representative normalization from existing DAG nodes and explicit sign/homotopy calculations. Blueprint ancestor lem-pur-kunneth-supported, proof paragraphs 1 and 3. V6 proves the chain Hom shift using Mathlib HomComplexShift.leftShiftLinearEquiv and δ_leftUnshift; the remaining clauses retain the recorded argument. V6 constructs the ordinary forward evaluation using monoidal sheafification, the tensor coproduct universal property, and the Hom differential."
  },
  "mathlib_searches": [
   {
@@ -333,5 +334,15 @@
   "group": "Q02",
   "result": "pass",
   "note": "Six sorry theorems; node record changed only in lean, statement verbatim; report has both sections. The main theorem matches every clause: all choices universal, homotopy lifts, T represents F, p pinned with the (-1)^{sq} sign, localization equals the choice-free transpose. Shift clauses: theta = leftUnshift, sign (-1)^n checked at a=1; eta = r.negOnePow; shifted alpha = alpha[-1] then theta inverse, evaluation t eta; same N, c, so same T, J, i; the derived-shift CommShift is fixed by its normalization equation. No extra hypotheses or universe restrictions; edge cases fine. Maintainer note: the item imports ExternalRHomConePairing, whose parent theorem cites the item, so stage 3 has an import cycle; the shared helpers should move to a def-node module (same note as on the two sibling deliveries). No compile, no file changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V6",
+  "result": "pass",
+  "landing": "20261021T134600-L-1378068",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
