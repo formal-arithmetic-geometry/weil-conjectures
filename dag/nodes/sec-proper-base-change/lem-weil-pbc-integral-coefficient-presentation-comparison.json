@@ -21,9 +21,175 @@
   "def-weil-derived-complete",
   "def-weil-derived-limit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The lift equivalence sends $(\\varpi.\\mathrm{up})^n$ to $\\varpi^n$, so $x-y\\in I^n$ iff $x.\\mathrm{down}-y.\\mathrm{down}\\in(\\varpi^n)$. Therefore $[x]\\mapsto[x.\\mathrm{down}].\\mathrm{up}$ is well defined; addition, multiplication and $1$ are preserved on representatives. The inverse sends $[a].\\mathrm{up}$ to $[a.\\mathrm{up}]$. These two formulas compose to the identity on every representative, and every quotient element has a representative, proving existence and uniqueness of $e_n$. If $b\\geq a\\geq1$, both composites from $P_b$ to $Q_a$ send $[x]$ to $[x.\\mathrm{down}].\\mathrm{up}$, with the last class taken modulo $\\varpi^a$. This proves every transition square, including identities.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Section 6.5, coefficient convention; agent quotient-representative calculation, matching IntegralStratifiedPerfectCharacterization.lean lines 672–710"
+   }
+  },
+  {
+   "text": "The absolute value fixed in the coefficient datum restricts to the $\\ell$-adic absolute value. Apply the integers-DVR theorem to this finite extension: $A$ is a DVR with finite residue field and $\\varpi$ generates its maximal ideal. The valued-DVR finite-quotients theorem then gives finiteness of $A/(\\varpi^n)$ for every positive $n$. Thus $Q_n$ and, by step 1, $P_n$ are finite commutative rings. Lifting changes neither their elements nor these finiteness properties.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension",
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-valued-dvr-finite-quotients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Section 6.8, finite extension coefficient convention; valuation-ring and finite-quotient facts supplied by the cited existing nodes"
+   }
+  },
+  {
+   "text": "Fix $n$. For any object $U$ of the small pro-etale site, a continuous function $|U|\\to P_n$ is constant on each connected component: a connected subset of a discrete space is a singleton. It therefore factors uniquely through $\\pi_0(|U|)$; the factor is continuous by the quotient topology. Conversely precomposing a continuous function on $\\pi_0(|U|)$ gives a continuous function on $|U|$. These inverse ring maps commute with restrictions and with postcomposition by every quotient ring map. The finite-constant-sections theorem identifies $\\underline{P_n}(U)$ with these continuous functions, sending each constant-presheaf element to its constant function. Hence the functions presheaf is already isomorphic to $\\underline{P_n}$; sheafifying gives exactly the specified $\\kappa_n$, not an arbitrary isomorphism. The same postcomposition calculation proves that all $\\kappa_n$ commute with transitions. Applying constant-sheaf functoriality to $e_n$ now gives $\\bar e_n=\\underline{e_n}\\kappa_n^{-1}$ and its inverse, with $\\bar e_aq^P_{b,a}=q^Q_{b,a}\\bar e_b$.",
+   "uses": [
+    "def-weil-pbc-proetale-site",
+    "def-weil-pbc-proetale-modules",
+    "def-weil-pbc-constant-sheaf",
+    "lem-pur-proetale-finite-constant-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 4.2.12, discrete-space assertion, printed p. 30; quotient-topology factorization written out here for arbitrary U"
+   }
+  },
+  {
+   "text": "Use the sectionwise inverse-limit description. For each $U$, send a compatible family $(z_n)_n\\in B_T^{\\mathrm{pbc}}(U)$ to $(\\bar e_n(z_n))_n$. It is compatible by the last identity in step 3. The inverse sends $(w_n)_n$ to $(\\bar e_n^{-1}(w_n))_n$. These maps preserve ring operations and restrictions coordinatewise and their composites are identities. They define $e_T$ with the required projection equations. Any other map satisfying those equations has the same value in every coordinate on every section, hence is equal to $e_T$. Set $R=B_T^{\\mathrm{pbc}}$, $S=B_T^{\\mathrm{det}}$, $R_n=(P_n)_T$, $S_n=(Q_n)_T$, $e=e_T$ and $b_n=\\bar e_n$ below. The normalization is $\\pi_n^S e=b_n\\pi_n^R$.",
+   "uses": [
+    "def-weil-pbc-adic-coefficient-datum",
+    "def-weil-completed-integral-coefficients",
+    "def-pur-sheaf-inverse-limit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CO (lemma-limits-colimits-abelian-sheaves) and 03DB (lemma-limits-colimits); coordinate calculation for the ring limits"
+   }
+  },
+  {
+   "text": "Apply ring-isomorphism tensor transport to $e:R\\simeq S$ on the fixed small site: $C=\\operatorname{Res}_e:\\operatorname{Mod}(S)\\to\\operatorname{Mod}(R)$ is an additive exact equivalence with inverse $\\operatorname{Res}_{e^{-1}}$. Indeed the two restrictions leave underlying abelian sheaves and maps unchanged, and the composite scalar actions are those through $e^{-1}e$ and $ee^{-1}$. Use the same result for each $b_n$ to obtain exact equivalences $C_n=\\operatorname{Res}_{b_n}:\\operatorname{Mod}(S_n)\\to\\operatorname{Mod}(R_n)$.",
+   "uses": [
+    "def-pc-sheaf-restrict-scalars",
+    "lem-sfb-ring-isomorphism-tensor-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YP (lemma-K-flat-quasi-isomorphism), ring-isomorphism specialization; explicit scalar action as in the cited transport node"
+   }
+  },
+  {
+   "text": "The exact-functor derived theorem applies to $C$, $C^{-1}$, $C_n$ and $C_n^{-1}$. Their termwise extensions are triangulated on the unbounded derived categories. The ordinary inverse natural isomorphisms extend termwise and descend through localization, so the derived functors are inverse equivalences. Exactness identifies $C(\\ker d/\\operatorname{im}d)$ with $\\ker C(d)/\\operatorname{im}C(d)$, and thus $H^i(D(C)K)\\simeq C(H^iK)$. An equivalence preserves and reflects the zero object, so every upper or lower cohomology bound, including any fixed interval, is preserved in both directions.",
+   "uses": [
+    "lem-sf-exact-functor-derived-triangulated",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor; inverse and cohomology calculation"
+   }
+  },
+  {
+   "text": "Choose a flat-term K-flat resolution $P\\to M$ over $S$. Ring-isomorphism tensor transport makes $C(P)$ flat-term K-flat over $R$. For every $n$ define the natural chain isomorphism\n$$\\alpha_n:C(P)\\otimes_R R_n\\longrightarrow C_n(P\\otimes_S S_n),\\qquad x\\otimes a\\longmapsto x\\otimes b_n(a).$$\nIt is balanced because $\\pi_n^S(e(r))=b_n(\\pi_n^R(r))$; its inverse is $x\\otimes z\\mapsto x\\otimes b_n^{-1}(z)$. Both composites fix pure tensors. These maps commute with restrictions and differentials and so induce maps on sheafified tensor complexes. They are natural in chain maps, since both orders send $x\\otimes a$ to $f(x)\\otimes b_n(a)$. Derived change of rings is computed by these K-flat models, giving\n$$D(C)M\\otimes_R^L R_n\\simeq D(C_n)(M\\otimes_S^L S_n).$$\nThe quasi-isomorphism and canonical resolution-comparison clauses of derived change of rings descend this natural chain isomorphism to the derived functors; consequently it is independent of the chosen resolution. No boundedness or flatness of $R\\to R_n$ is used.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-sfb-ring-isomorphism-tensor-transport",
+    "lem-pur-derived-change-of-rings",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution) and 06YT (lemma-derived-tor-quasi-isomorphism-other-side); agent balanced-tensor comparison"
+   }
+  },
+  {
+   "text": "The normalized derived coefficient-adjunction theorem applies to $R\\to R_n$ and $S\\to S_n$, without a flatness assumption. On the flat-term K-flat models its unit is $x\\mapsto x\\otimes1$. Restriction of the target of $\\alpha_n$ to $R$ is the same as first restricting along $S\\to S_n$ and then along $e$, since the projection square commutes. Now $\\alpha_n(x\\otimes1)=x\\otimes b_n(1)=x\\otimes1$, so $\\alpha_n$ intertwines these genuine adjunction units on K-flat objects. For arbitrary $M$, insert the inverse of $[P\\to M]$ and use naturality to obtain the same equation. This identifies precisely the maps $c_n=[\\gamma_n][P\\to M]^{-1}$ in the integral reduction tower; it does not replace an adjunction unit by an unspecified map.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "def-weil-integral-reduction-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A6 (lemma-adjoint), identity-topos scalar extension; derived.tex Tags 0FND and 09T5; unit normalization on K-flat models"
+   }
+  },
+  {
+   "text": "For the adjacent transitions write $q_n:R_{n+1}\\to R_n$ and $r_n:S_{n+1}\\to S_n$. The coefficient identity is $b_nq_n=r_nb_{n+1}$. Applying $\\alpha_n$ after $1\\otimes q_n$ sends $x\\otimes a$ to $x\\otimes b_n(q_n(a))$, whereas applying $1\\otimes r_n$ after $\\alpha_{n+1}$ gives $x\\otimes r_n(b_{n+1}(a))$; these coincide. For any $b\\geq a$ the identical computation uses $b_aq_{b,a}=r_{b,a}b_b$. For iterated reduction, both orders of the balancing normalization send $(x\\otimes a)\\otimes a'$ to $x\\otimes b_a(q_{b,a}(a)a')$. Thus the comparisons respect also the quotient normalization cocycle. All equations hold as maps of sheafified complexes before localization, hence in the derived categories. Together with step 8 they identify the entire inverse systems and their specified maps from $M$.",
+   "uses": [
+    "def-weil-pbc-adic-coefficient-datum",
+    "def-weil-integral-reduction-tower"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Section 6.5, finite quotient reductions; Proposition 3.5.1(1) and Definition 3.5.2, normalized quotient tower; explicit tensor formulas"
+   }
+  },
+  {
+   "text": "The countable-products-exact theorem applies to both commutative ring sheaves $R$ and $S$ on this small pro-etale site, for any scheme $T$. Therefore their module categories have exact countable products. Clause 2 of derived-limit existence supplies countable products in both unbounded derived categories, represented by termwise products. This verifies product existence for the reduction towers without assuming that $M$ is bounded, constructible or complete.",
+   "uses": [
+    "lem-weil-proetale-countable-products-exact",
+    "lem-weil-derived-limit-existence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Propositions 3.1.9, 3.2.3(1) and 4.2.8, exact countable products; derived product consequence as in the cited existence node"
+   }
+  },
+  {
+   "text": "An equivalence $F=D(C)$ preserves these products: with inverse $G$, the bijections $\\operatorname{Hom}(X,F(\\prod M_n))\\simeq\\operatorname{Hom}(GX,\\prod M_n)\\simeq\\prod_n\\operatorname{Hom}(GX,M_n)\\simeq\\prod_n\\operatorname{Hom}(X,FM_n)$ exhibit $F(\\prod M_n)$ as their product, with projections $F(\\mathrm{pr}_n)$. Insert the level comparisons from steps 7–9. The first arrow of the Roos diagram has components $c_n$, which agree by step 8. The second arrow has nth component $\\mathrm{pr}_n-t_n\\mathrm{pr}_{n+1}$. Additivity of $F$ and the transition identity of step 9 identify this component with the corresponding one for the transported tower. Product uniqueness makes both squares commute. Applying the inverse equivalence gives the converse identification. This proves compatibility of the stated product Roos diagrams, without asserting that either diagram extends to a distinguished triangle or asserting any completeness membership.",
+   "uses": [
+    "def-weil-derived-limit",
+    "def-weil-derived-complete"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Propositions 3.1.10–3.1.11, product Roos diagrams; projection computation in the convention 1-s of def-weil-derived-limit"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-valued-dvr-finite-quotients",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-constant-sheaf",
+  "lem-pur-proetale-finite-constant-sections",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-completed-integral-coefficients",
+  "def-pur-sheaf-inverse-limit",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-sfb-ring-isomorphism-tensor-transport",
+  "lem-sf-exact-functor-derived-triangulated",
+  "def-weil-abstract-derived-category",
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "def-pur-sheaf-tensor-product",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "def-weil-integral-reduction-tower",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-derived-limit-existence",
+  "def-weil-derived-limit",
+  "def-weil-derived-complete"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 6.5 coefficient convention and Lemma 4.2.12; explicit universe, inverse-limit, scalar and unit-normalization arguments, supplemented by the cited Stacks-derived tools. Proposition 6.8.11(3) is the parent application, not a proof of this comparison."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -73,10 +239,52 @@
    "results": "{\"t\": \"2026-10-21T06:49:28Z\", \"tool\": \"leanfinder\", \"query\": \"Finite integral coefficient quotient isomorphisms from lifted valuation rings determine a unique projection compatible isomorphism of completed pro-etale coefficient ring sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"BDeRhamPlus\", \"BDeRham\", \"PreTilt.mk_comp_untilt_eq_coeff_zero\", \"StandardEtalePair.homEquiv_symm_apply\", \"StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot\", \"StandardEtalePresentation.toPresentation_val\", \"StandardEtalePresentation.lift_bijective\", \"StandardEtalePresentation.mk.inj\"], \"digest\": \"1e7db3e27c8f6340\"}",
    "date": "2026-10-21",
    "verdict": "no match: Ideal.quotientEquiv supplies a single quotient isomorphism, not the normalized finite sheaf system, its completed limit comparison, and compatibility of the derived reduction units and Roos diagrams"
+  },
+  {
+   "tool": "grep",
+   "query": "quotientEquiv|isoOfNatIso|restrictScalarsEquivalence",
+   "results": "{\"t\": \"2026-10-21T08:11:50Z\", \"tool\": \"grep\", \"query\": \"quotientEquiv|isoOfNatIso|restrictScalarsEquivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/KummerDedekind.lean\", \"Mathlib/NumberTheory/KummerDedekind.lean\", \"Mathlib/Topology/Algebra/Module/FiniteDimension.lean\", \"Mathlib/Topology/Algebra/Module/FiniteDimension.lean\", \"Mathlib/NumberTheory/RamificationInertia/Basic.lean\", \"Mathlib/NumberTheory/RamificationInertia/Basic.lean\", \"Mathlib/NumberTheory/RamificationInertia/Basic.lean\", \"Mathlib/NumberTheory/RamificationInertia/Basic.lean\"], \"digest\": \"f389af5ba71d595e\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: returned declarations do not state the finite sheaf normalization, completed projection comparison, derived reduction units and Roos compatibility together; Ideal.quotientEquiv only supplies the elementary single-quotient step"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Isomorphisms of inverse systems of coefficient ring sheaves identify derived reduction adjunction units and product Roos maps",
+   "results": "{\"t\": \"2026-10-21T08:11:51Z\", \"tool\": \"leansearch\", \"query\": \"Isomorphisms of inverse systems of coefficient ring sheaves identify derived reduction adjunction units and product Roos maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.unitAsIsoOfIso\", \"SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal\", \"SheafOfModules.pushforwardNatIso_inv\", \"CategoryTheory.Equivalence.sheafCongrPrecoherent_unitIso_inv_app_val_app\", \"CompHausLike.LocallyConstant.instIsIsoFunctorTypeUnitSheafCoherentTopologyAdjunction\", \"CategoryTheory.Equivalence.sheafCongrPreregular_unitIso_inv_app_val_app\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquivUnitIso_inv_app_hom\"], \"digest\": \"5f4eb82d72913c2e\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: returned declarations do not state the finite sheaf normalization, completed projection comparison, derived reduction units and Roos compatibility together; Ideal.quotientEquiv only supplies the elementary single-quotient step"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.quotientEquiv, CategoryTheory.Limits.HasLimit.isoOfNatIso",
+   "results": "{\"t\": \"2026-10-21T08:11:51Z\", \"tool\": \"loogle\", \"query\": \"Ideal.quotientEquiv, CategoryTheory.Limits.HasLimit.isoOfNatIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: returned declarations do not state the finite sheaf normalization, completed projection comparison, derived reduction units and Roos compatibility together; Ideal.quotientEquiv only supplies the elementary single-quotient step"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projection compatible isomorphism of completed integral coefficient sheaves from lifted valuation ring quotients induces exact derived equivalences preserving reduction units and Roos diagrams",
+   "results": "{\"t\": \"2026-10-21T08:11:55Z\", \"tool\": \"leanfinder\", \"query\": \"Projection compatible isomorphism of completed integral coefficient sheaves from lifted valuation ring quotients induces exact derived equivalences preserving reduction units and Roos diagrams\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Profinite.NobelingProof.succ_exact\", \"BDeRhamPlus\", \"AdicCompletion.map_exact\", \"BDeRham\", \"AdicCompletion.transitionMap_comp_reduceModIdeal\", \"IsAdicComplete.ofAlgEquiv_comp_liftRingHom\", \"IsAdicComplete.StrictMono.of_lift\", \"IsAdicComplete.StrictMono.of_comp_lift\"], \"digest\": \"fed317f3d42aa93e\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: returned declarations do not state the finite sheaf normalization, completed projection comparison, derived reduction units and Roos compatibility together; Ideal.quotientEquiv only supplies the elementary single-quotient step"
+  },
+  {
+   "tool": "grep",
+   "query": "def quotientEquiv|quotientEquiv_mk",
+   "results": "{\"t\": \"2026-10-21T08:12:14Z\", \"tool\": \"grep\", \"query\": \"def quotientEquiv|quotientEquiv_mk\", \"sub\": \"RingTheory/Ideal/Quotient\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Ideal/Quotient/Operations.lean\", \"Mathlib/RingTheory/Ideal/Quotient/Operations.lean\", \"Mathlib/RingTheory/Ideal/Quotient/Operations.lean\", \"Mathlib/RingTheory/Ideal/Quotient/Operations.lean\"], \"digest\": \"8bc5b3c90d42faf2\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: returned declarations do not state the finite sheaf normalization, completed projection comparison, derived reduction units and Roos compatibility together; Ideal.quotientEquiv only supplies the elementary single-quotient step"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A ring isomorphism induces compatible quotient isomorphisms and an isomorphism of inverse limits of sheaves, preserving derived scalar extension and adjunction units",
+   "results": "{\"t\": \"2026-10-21T08:12:20Z\", \"tool\": \"leanfinder\", \"query\": \"A ring isomorphism induces compatible quotient isomorphisms and an isomorphism of inverse limits of sheaves, preserving derived scalar extension and adjunction units\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackIso\", \"SheafOfModules.pushforwardCongr\", \"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal\", \"SheafOfModules.freeFunctorCompPullbackIso\", \"SheafOfModules.pushforwardPushforwardAdj\", \"LightCondensed.freeForgetAdjunction\", \"CondensedMod.LocallyConstant.instIsIsoCondensedSetMapForgetAppCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor\"], \"digest\": \"8cb0cafec9bd33fa\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: returned declarations do not state the finite sheaf normalization, completed projection comparison, derived reduction units and Roos compatibility together; Ideal.quotientEquiv only supplies the elementary single-quotient step"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-pbc-integral-stratified-perfect-characterization",
@@ -97,5 +305,69 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-weil-pbc-integral-coefficient-presentation-comparison",
+  "worker": "stage1",
+  "summary": "No statement change and no new nodes. Proved the normalized quotient maps, finite constant/function comparison and completed inverse-limit isomorphism; used existing scalar/K-flat tools and checked the tensor, adjunction-unit, transition and Roos projection formulas explicitly. All cited statements were read; searches recorded; report carries the Q06 self-review.",
+  "blueprint": "thm-weil-pbc-finite-extension, integral coefficient convention in the first proof sentence (Choose an integral lattice for K), via integral-stratified-perfect-characterization and condensed-E realization: supplies only the normalized comparison needed before Proposition 6.8.11(3), leaving constructibility and completeness assertions to the parent.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "The coefficient valuation ring is a DVR with finite residue field; generic coefficient arithmetic, not a replacement for proper base change."
+   },
+   {
+    "node": "lem-weil-valued-dvr-finite-quotients",
+    "why": "Finiteness of each positive quotient is needed for the finite-constant-sections theorem; the unit contains no separate coefficient-arithmetic result."
+   },
+   {
+    "node": "lem-pur-proetale-finite-constant-sections",
+    "why": "Its normalized section isomorphisms identify constant and continuous-function finite coefficient sheaves on arbitrary schemes."
+   },
+   {
+    "node": "lem-sfb-ring-isomorphism-tensor-transport",
+    "why": "Exact scalar equivalence and preservation of flat and K-flat complexes for an arbitrary ring-sheaf isomorphism."
+   },
+   {
+    "node": "lem-sf-exact-functor-derived-triangulated",
+    "why": "Termwise descent of exact scalar equivalences to unbounded derived categories."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Existence of flat-term K-flat resolutions for the arbitrary unbounded module complex."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Computation and canonical resolution independence of finite derived reductions, for possibly nonflat quotient maps."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "The genuine unbounded scalar adjunction has the unit x mapped to x tensor 1 on a flat-term K-flat model."
+   },
+   {
+    "node": "lem-weil-proetale-countable-products-exact",
+    "why": "Exact countable products for module sheaves over either completed ring on an arbitrary small pro-etale site."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-valued-dvr-finite-quotients",
+  "lem-pur-proetale-finite-constant-sections",
+  "lem-sfb-ring-isomorphism-tensor-transport",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-weil-proetale-countable-products-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q06-6a3eb8d69",
+  "group": "Q06",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q06-6a3eb8d69 (reviewer sub-agent of L); spot-checked: Q06 6a3eb8d6 changes only the item and its report. The statement and stmt_deps are identical to live, there are no new nodes, and the item is unsplit and unreviewed on live, so no supersession; it was created 10-21, so it is not on the dropped list. proof_deps equals the union of the step uses, and a 470-node walk finds no cycle. Statement read against the definitions: P_n and Q_n against the l-adic coefficient extension (cl. 4); (P_n)_T is the explicit Cont(pi0) sheafification, so the adic-datum hypotheses are not needed. Source: Bhatt-Scholze section 6.5 and Lemma 4.2.12 (F_T, discrete T constant), read in the PDF. All 11 steps checked against the statements they cite. Step 1: the up/down ring iso carries I^n onto (varpi^n). Step 2: integers-dvr cl. 2-4 plus valued-dvr-finite-quotients cl. 2; nonarchimedean comes from the coefficient definition. Step 3: finite-constant-sections theta holds for any V; continuous maps to a discrete space factor through pi0 with the quotient topology, so the Cont(pi0) presheaf is already the sheaf underline(P_n) and kappa_n is the specified map; the qcqs clause of 4.2.12 is avoided. Step 4: sectionwise ring limits. Steps 5-6: ring-iso transport gives an exact equivalence; exact-functor-derived gives the derived equivalence and preserves bounds. Step 7: I checked the alpha_n balancing myself via pi^S_n e = b_n pi^R_n; resolution independence is derived-change-of-rings (2). Step 8: the adjunction unit is x->x tensor 1 on flat-term K-flat models with no flatness of phi, and the Res composition is correct; this gives c_n exactly. Step 9: transition squares and cocycle at chain level. Step 10: products-exact holds for any ring sheaf; derived-limit clause 2 only. Step 11: the equivalence preserves products, and the components of c and of 1-s agree; no triangle or completeness is claimed. Edge cases checked: T empty, M=0, unbounded M, non-qc or disconnected U, n=1. No duplicate found: def-coef-normalized-dvr-tower, completed-constant-sheaf-reduction, proetale-constant-ring-map and the cbc/pur Cont-functoriality nodes are not this comparison. Advisory only: completed-constant-sheaf-reduction's last sentence asserts the kappa identification. Accepted tool_uses (9, all generic black boxes): integers-dvr, valued-dvr-finite-quotients, finite-constant-sections, ring-iso transport, exact-functor-derived, kflat-resolution, derived-change-of-rings, coefficient-adjunction, countable-products-exact. No changes."
  }
 }
