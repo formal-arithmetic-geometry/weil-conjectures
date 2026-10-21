@@ -1,0 +1,129 @@
+{
+ "id": "lem-amb-vector-projective-frame-model",
+ "kind": "statement",
+ "title": "Normalized frame models of a vector-bundle projective completion",
+ "statement": "For every scheme S, rank parameter d, module F, presentation P [def-amb-vector-projective-presentation-data] and frame e of F on an affine V [def-asd-vector-bundle-zero-section], there are polynomial algebra coordinates q for P(V), a graded coefficient isomorphism g from the recorded relative projective-space local algebra [def-nagata-relative-projective-space], and a Proj isomorphism b. The coordinates send X_0 to t, X_{i+1} to x(e_i), preserve all degrees, commute with the structural maps over V, and identify the first standard open with D_+(t).",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tags 01OA, 01OB, 01OE and 01NG; projective bundles and their standard affine charts"
+ },
+ "stmt_deps": [
+  "def-amb-vector-projective-presentation-data",
+  "def-asd-vector-bundle-zero-section",
+  "def-nagata-relative-projective-space"
+ ],
+ "proof": [
+  {
+   "text": "Evaluate the frame on the actual standard free-module sections and transport from the restricted scheme to V. This gives a basis of F(V). Its product with the singleton basis of R gives a basis of R × F(V) with distinguished first vector (1,0). Apply the symmetric-algebra polynomial equivalence and the presentation equivalence. Degree one is the span of basis generators, and degree n is its nth power, proving the grading equivalence.",
+   "uses": [
+    "lem-weil-pbc-symmetric-algebra-free-module-polynomial",
+    "lem-weil-pbc-symmetric-algebra-graded",
+    "def-amb-vector-projective-presentation-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01OA, 01OB, 01OE and 01NG; projective bundles and their standard affine charts"
+   }
+  },
+  {
+   "text": "Use the canonical relative projective-space affine polynomial equivalence and the coefficient ring isomorphism V.topIso to produce g and its inverse. Proj.map composition and identity show their scheme maps are inverse. On the whole affine base the relative-Proj embedding is an isomorphism; compose to get b. Naturality of the degree-zero Proj map proves the equation over V, and the preimage of a Proj basic open proves the standard-open equation.",
+   "uses": [
+    "def-nagata-relative-projective-space",
+    "prop-nagata-relative-proj-functoriality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01OA, 01OB, 01OE and 01NG; projective bundles and their standard affine charts"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-amb-vector-projective-presentation-data",
+  "def-nagata-relative-projective-space",
+  "lem-weil-pbc-symmetric-algebra-free-module-polynomial",
+  "lem-weil-pbc-symmetric-algebra-graded",
+  "prop-nagata-relative-proj-functoriality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tags 01OA, 01OB, 01OE and 01NG; projective bundles and their standard affine charts"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The symmetric algebra of R times M dehomogenizes along the R generator to the symmetric algebra of M, naturally under restriction, and projective bundle frames identify homogeneous coordinates",
+   "results": "SymmetricAlgebra.induction, SymmetricAlgebra.lift and SymmetricAlgebra.ι (Mathlib.LinearAlgebra.SymmetricAlgebra.Basic); no dehomogenization or relative frame comparison theorem.",
+   "date": "2026-10-21",
+   "verdict": "no match; use the universal property and induction"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomogeneousLocalization.Away\"",
+   "results": "HomogeneousLocalization.Away.mk, Away.mk_surjective, Away.map, Away.map_mk, Away.map_comp (Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization).",
+   "date": "2026-10-21",
+   "verdict": "no match; these supply fractions and their functoriality, not the symmetric algebra comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "rg dehomogen|homogeneousLocalizationAwayXEquiv in Mathlib; rg equivMvPolynomial, homogeneousSubmodule_one_pow, sectionsLinearEquivOfOverIsoFree, preservesBinaryProducts in Mathlib and WeilConjectures",
+   "results": "Mathlib dehomogenization search: none. Mathlib.LinearAlgebra.SymmetricAlgebra.Basis.equivMvPolynomial and Mathlib.RingTheory.MvPolynomial.Homogeneous.homogeneousSubmodule_one_pow supply the frame algebra calculation. The project source has MvPolynomial.homogeneousLocalizationAwayXEquiv, only for polynomial generators, and the relative projective-space and projective-bundle interfaces.",
+   "date": "2026-10-21",
+   "verdict": "no match for the new scheme/presentation statements; reuse the listed algebra and category lemmas"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.VectorProjectiveCompletion",
+  "date": "2026-10-21",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-amb-vector-projective-completion",
+   "place": "Local symmetric algebra construction, dehomogenization and normalized projective frame charts in proof steps 1–4.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.VectorProjectiveFrameModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/VectorProjectiveFrameModel.lean",
+  "declaration": "AlgebraicGeometry.VectorProjectiveCompletion.exists_frameModel",
+  "declarations": [
+   "AlgebraicGeometry.VectorProjectiveCompletion.exists_frameModel"
+  ],
+  "statement": "theorem exists_frameModel (S : Scheme.{u}) (d : ℕ) (F : S.Modules) (P : Presentation S F) : ∀ (V : S.affineOpens) (e : VectorBundleZeroSection.Trivialization S d F V.1), ∃ q : MvPolynomial (Fin (d + 1)) Γ(S, V.1) ≃ₐ[Γ(S, V.1)] P.algebra.obj V, q (MvPolynomial.X 0) = t P V ∧ (∀ i : Fin d, q (MvPolynomial.X i.succ) = x P V (VectorBundleZeroSection.frameSection S d F V.1 e i)) ∧ (∀ (n : ℕ) (f : MvPolynomial (Fin (d + 1)) Γ(S, V.1)), q f ∈ P.algebra.grading V n ↔ f ∈ MvPolynomial.homogeneousSubmodule (Fin (d + 1)) Γ(S, V.1) n) ∧ ∃ (g : (RelativeProjectiveSpace.algebra V.1.toScheme d).sectionGrade (affineTop V) →+*ᵍ P.algebra.grading V) (hg : Function.Bijective g) (b : Proj (P.algebra.grading V) ≅ RelativeProjectiveSpace.scheme V.1.toScheme d), (∀ r : Γ(V.1.toScheme, ⊤), g ((RelativeProjectiveSpace.algebra V.1.toScheme d).algebra.obj.hom.hom.app (op ⊤) r) = algebraMap Γ(S, V.1) (P.algebra.obj V) (V.1.topIso.hom r)) ∧ (∀ i : Fin (d + 1), g (RelativeProjectiveSpace.coordinate V.1.toScheme d (affineTop V) i) = q (MvPolynomial.X i)) ∧ b.hom = Proj.map g (GradedRingHom.irrelevant_le_map_of_surjective hg.surjective) ≫ projectiveChart V d ∧ b.hom ≫ RelativeProjectiveSpace.π V.1.toScheme d = P.algebra.toOpen V ∧ b.hom ⁻¹ᵁ RelativeProjectiveSpace.standardOpen V.1.toScheme d 0 = Proj.basicOpen (P.algebra.grading V) (t P V)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-4f2f8",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261021T154030-L-2769114",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-4f2f8",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261021T154030-L-2769114",
+  "kind": "interface",
+  "note": "independent cc review: delivered item theorem vs live clone (byte-identical statement); 7 moved defs vs clone bodies (verbatim); new node lean records vs new modules; importer FiniteRingBundleSectionOrientation compiled against delivered modules; per-module #print axioms"
+ }
+}

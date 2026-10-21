@@ -1,0 +1,124 @@
+{
+ "id": "lem-amb-symmetric-algebra-dehomogenization",
+ "kind": "statement",
+ "title": "Symmetric-algebra dehomogenization at a distinguished summand",
+ "statement": "Let R be a commutative ring, M an R-module, B an R-algebra, e : Sym_R(R × M) ≃_R B, and G a graded R-algebra structure on B with G_n = range(e ∘ ι)^n [lem-weil-pbc-symmetric-algebra-graded]. Put t=e(ι(1,0)). There is a ring equivalence a : Sym_R M ≃ B_(t),0 [def-nagata-homogeneous-localization-degree-zero] sending ι(m) to e(ι(0,m))/t and fixing R. No freeness, nontriviality or Noetherian hypothesis is required.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tags 01OA, 01OB, 01OE and 01NG; projective bundles and their standard affine charts"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-symmetric-algebra-graded",
+  "def-nagata-homogeneous-localization-degree-zero"
+ ],
+ "proof": [
+  {
+   "text": "The degree-one fractions x(m)/t form an R-linear map. Extend this by the universal property to alpha : Sym_R M → B_(t),0. Evaluation ι(r,m) ↦ r+ι(m) sends t to one, so it extends to a ring map from the full localization, and restricts to beta from degree zero.",
+   "uses": [
+    "def-nagata-homogeneous-localization-degree-zero"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01OA, 01OB, 01OE and 01NG; projective bundles and their standard affine charts"
+   }
+  },
+  {
+   "text": "Symmetric algebra induction proves beta alpha fixes every element. Power-of-submodule induction on G_n proves alpha(eval(f)) has value f/t^n for f homogeneous of degree n. Every degree-zero fraction has this form, so alpha beta is the identity. Package the inverse ring homomorphisms as a ring equivalence, retaining both displayed formulas.",
+   "uses": [
+    "lem-weil-pbc-symmetric-algebra-graded",
+    "def-nagata-homogeneous-localization-degree-zero"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01OA, 01OB, 01OE and 01NG; projective bundles and their standard affine charts"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-homogeneous-localization-degree-zero",
+  "lem-weil-pbc-symmetric-algebra-graded"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tags 01OA, 01OB, 01OE and 01NG; projective bundles and their standard affine charts"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The symmetric algebra of R times M dehomogenizes along the R generator to the symmetric algebra of M, naturally under restriction, and projective bundle frames identify homogeneous coordinates",
+   "results": "SymmetricAlgebra.induction, SymmetricAlgebra.lift and SymmetricAlgebra.ι (Mathlib.LinearAlgebra.SymmetricAlgebra.Basic); no dehomogenization or relative frame comparison theorem.",
+   "date": "2026-10-21",
+   "verdict": "no match; use the universal property and induction"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomogeneousLocalization.Away\"",
+   "results": "HomogeneousLocalization.Away.mk, Away.mk_surjective, Away.map, Away.map_mk, Away.map_comp (Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization).",
+   "date": "2026-10-21",
+   "verdict": "no match; these supply fractions and their functoriality, not the symmetric algebra comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "rg dehomogen|homogeneousLocalizationAwayXEquiv in Mathlib; rg equivMvPolynomial, homogeneousSubmodule_one_pow, sectionsLinearEquivOfOverIsoFree, preservesBinaryProducts in Mathlib and WeilConjectures",
+   "results": "Mathlib dehomogenization search: none. Mathlib.LinearAlgebra.SymmetricAlgebra.Basis.equivMvPolynomial and Mathlib.RingTheory.MvPolynomial.Homogeneous.homogeneousSubmodule_one_pow supply the frame algebra calculation. The project source has MvPolynomial.homogeneousLocalizationAwayXEquiv, only for polynomial generators, and the relative projective-space and projective-bundle interfaces.",
+   "date": "2026-10-21",
+   "verdict": "no match for the new scheme/presentation statements; reuse the listed algebra and category lemmas"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.VectorProjectiveCompletion",
+  "date": "2026-10-21",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-amb-vector-projective-completion",
+   "place": "Local symmetric algebra construction, dehomogenization and normalized projective frame charts in proof steps 1–4.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SymmetricAlgebraDehomogenization",
+  "file": "lean/Sheaf/AlgebraicGeometry/SymmetricAlgebraDehomogenization.lean",
+  "declaration": "SymmetricAlgebra.exists_dehomogenization",
+  "declarations": [
+   "SymmetricAlgebra.exists_dehomogenization"
+  ],
+  "statement": "theorem exists_dehomogenization : ∃ a : SymmetricAlgebra R M ≃+* HomogeneousLocalization.Away G t, (∀ m : M, (a (ι R M m)).val = algebraMap B (Localization.Away t) (e (ι R (R × M) (0, m))) * IsLocalization.Away.invSelf t) ∧ (∀ r : R, a (algebraMap R (SymmetricAlgebra R M) r) = algebraMap R (HomogeneousLocalization.Away G t) r)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-21",
+  "note": "R : Type u, M : Type v, [CommRing R], [AddCommGroup M], [Module R M], {B : Type w}, [CommRing B], [Algebra R B], e : SymmetricAlgebra R (R × M) ≃ₐ[R] B, G : ℕ → Submodule R B, [GradedAlgebra G], hG : ∀ n, G n = (e.toLinearMap.comp (SymmetricAlgebra.ι R (R × M))).range ^ n; t denotes e (SymmetricAlgebra.ι R (R × M) (1, 0))."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-4f2f8",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261021T154030-L-2769114",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-4f2f8",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261021T154030-L-2769114",
+  "kind": "interface",
+  "note": "independent cc review: delivered item theorem vs live clone (byte-identical statement); 7 moved defs vs clone bodies (verbatim); new node lean records vs new modules; importer FiniteRingBundleSectionOrientation compiled against delivered modules; per-module #print axioms"
+ }
+}

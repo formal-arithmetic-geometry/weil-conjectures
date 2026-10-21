@@ -5,34 +5,19 @@ Authors: SHEAF group Q145
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.VectorBundleZeroSection
-public import Sheaf.AlgebraicGeometry.RelativeProjectiveSpace
-public import Sheaf.AlgebraicGeometry.QuasiCoherentSymmetricAlgebra
-public import WeilConjectures.AlgebraicGeometry.RelativeProj.Basic
-public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.Homogeneous.Maps
-public import WeilConjectures.Compactification.Refinement
-public import WeilConjectures.Compactification.RefinementCategory
-public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-public import Mathlib.RingTheory.MvPolynomial.Homogeneous
-import WeilConjectures.AlgebraicGeometry.RelativeProj.Functoriality
+public import Sheaf.AlgebraicGeometry.VectorProjectiveCompletionData
+import Sheaf.AlgebraicGeometry.VectorProjectivePresentation
+import Sheaf.AlgebraicGeometry.VectorProjectiveDehomogenization
+import Sheaf.AlgebraicGeometry.VectorProjectiveFrameModel
+import Mathlib.AlgebraicGeometry.Cover.Directed
+import Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion
 import WeilConjectures.AlgebraicGeometry.RelativeProj.Universal
-import Mathlib.LinearAlgebra.SymmetricAlgebra.Basis
-import WeilConjectures.LinearAlgebra.SymmetricAlgebra.Graded
-import Mathlib.AlgebraicGeometry.Gluing
-import Sheaf.AlgebraicGeometry.ProjectiveBundleTautologicalGeometry
-import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
+import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeRank
 
 /-! # Projective completion of a vector bundle
 
-Source: Stacks Project, Constructions, Tag 01OA (projective bundles), Tags 01OB,
-01OE and 01NG; blueprint `sec-smooth-purity/sk-prop-an`, the first sentence of
-`thm-amb-vector-bundle-purity.proof.md` (blueprint: lem-amb-vector-projective-completion).
-
-The affine presentation below specifies the actual symmetric algebra of O plus F,
-its symmetric grading and its restriction maps. No projective scheme or compactification
-is selected from an uncharacterized existence assertion. All witnesses, including the
-chart equivalences, are characterized in the theorem by their coefficients and generators.
--/
+Source: Stacks Tags 01OA, 01OB, 01OE, 01NG.
+(blueprint: lem-amb-vector-projective-completion). -/
 
 @[expose] public section
 
@@ -47,68 +32,82 @@ noncomputable section
 
 namespace AlgebraicGeometry.VectorProjectiveCompletion
 
-/-- Affine-basis presentation of Sym(O_S ⊕ F), with its symmetric grading and its
-actual restriction maps. A finite direct sum has section module R × F(V).
-Source: Stacks Tag 01OA (blueprint: lem-amb-vector-projective-completion). -/
-structure Presentation (S : Scheme.{u}) (F : S.Modules) where
-  algebra : S.GradedAlgebraData
-  equiv (V : S.affineOpens) :
-    SymmetricAlgebra Γ(S, V.1) (Γ(S, V.1) × F.val.obj (op V.1)) ≃ₐ[Γ(S, V.1)] algebra.obj V
-  grade_eq (V : S.affineOpens) (n : ℕ) :
-    algebra.grading V n =
-      ((LinearMap.range (SymmetricAlgebra.ι Γ(S, V.1)
-        (Γ(S, V.1) × F.val.obj (op V.1)))) ^ n).map (equiv V).toLinearMap
-  restriction (U V : S.affineOpens) (h : U.1 ≤ V.1)
-      (a : Γ(S, V.1)) (m : F.val.obj (op V.1)) :
-    algebra.res h (equiv V (SymmetricAlgebra.ι _ _ (a, m))) =
-      equiv U (SymmetricAlgebra.ι _ _
-        (S.presheaf.map (homOfLE h).op a, F.val.map (homOfLE h).op m))
+private def inverseAffineCover {X S : Scheme.{u}} (p : X ⟶ S) : X.OpenCover :=
+  X.openCoverOfIsOpenCover (fun V : S.affineOpens ↦ p ⁻¹ᵁ V.1) (by
+    change (⨆ V : S.affineOpens, p ⁻¹ᵁ V.1) = ⊤
+    rw [← Scheme.Hom.preimage_iSup, iSup_affineOpens_eq_top]
+    rfl)
+private instance inverseAffineCoverPreorder {X S : Scheme.{u}} (p : X ⟶ S) :
+    Preorder (inverseAffineCover p).I₀ := inferInstanceAs (Preorder S.affineOpens)
+private instance inverseAffineCoverDirected {X S : Scheme.{u}} (p : X ⟶ S) :
+    (inverseAffineCover p).LocallyDirected where
+  trans {V W} h := X.homOfLE (p.preimage_mono (leOfHom h))
+  trans_id V := by
+    apply (cancel_mono (p ⁻¹ᵁ V.1).ι).mp
+    change _ = 𝟙 _ ≫ _
+    simp
+  trans_comp h k := by apply (cancel_mono (p ⁻¹ᵁ _).ι).mp; simp
+  w h := by simp [inverseAffineCover]
+  directed {V W} z := by
+    let z₀ : X := (pullback.fst (p ⁻¹ᵁ V.1).ι (p ⁻¹ᵁ W.1).ι ≫ (p ⁻¹ᵁ V.1).ι) z
+    have hV : p z₀ ∈ V.1 := (pullback.fst (p ⁻¹ᵁ V.1).ι (p ⁻¹ᵁ W.1).ι z).2
+    have hW : p z₀ ∈ W.1 := by
+      dsimp only [z₀]
+      rw [pullback.condition]
+      exact (pullback.snd (p ⁻¹ᵁ V.1).ι (p ⁻¹ᵁ W.1).ι z).2
+    obtain ⟨U, hUV, hUW, hzU⟩ :=
+      Scheme.GradedAlgebraData.exists_affineOpens_le V W (p z₀) hV hW
+    refine ⟨U, homOfLE hUV, homOfLE hUW, ⟨z₀, hzU⟩, ?_⟩
+    apply (pullback.fst (p ⁻¹ᵁ V.1).ι (p ⁻¹ᵁ W.1).ι ≫
+      (p ⁻¹ᵁ V.1).ι).isOpenEmbedding.injective
+    change (pullback.lift (X.homOfLE (p.preimage_mono hUV))
+      (X.homOfLE (p.preimage_mono hUW)) _ ≫
+      pullback.fst (p ⁻¹ᵁ V.1).ι (p ⁻¹ᵁ W.1).ι ≫ (p ⁻¹ᵁ V.1).ι)
+        ⟨z₀, hzU⟩ = z₀
+    rw [pullback.lift_fst_assoc, Scheme.homOfLE_ι]
+    rfl
+  property_trans h := by infer_instance
 
-/-- The degree-one coordinate from the first summand, namely t = j(1,0).
-Source: Stacks Tag 01OA (blueprint: lem-amb-vector-projective-completion). -/
-def t {S : Scheme.{u}} {F : S.Modules} (P : Presentation S F) (V : S.affineOpens) :
-    P.algebra.obj V :=
-  P.equiv V (SymmetricAlgebra.ι _ _ (1, 0))
-
-/-- The degree-one coordinate from a section of F, namely x(m) = j(0,m).
-Source: Stacks Tag 01OA (blueprint: lem-amb-vector-projective-completion). -/
-def x {S : Scheme.{u}} {F : S.Modules} (P : Presentation S F) (V : S.affineOpens)
-    (m : F.val.obj (op V.1)) : P.algebra.obj V :=
-  P.equiv V (SymmetricAlgebra.ι _ _ (0, m))
-
-/-- D_+(t), formed from the canonical local Proj opens, over the affine basis of S.
-Source: Stacks Tags 01OA and 01NG (blueprint: lem-amb-vector-projective-completion). -/
-def chartOpen {S : Scheme.{u}} {F : S.Modules} (P : Presentation S F) :
-    P.algebra.relProj.Opens :=
-  ⨆ V : S.affineOpens,
-    (P.algebra.relProjι V).opensFunctor.obj (Proj.basicOpen (P.algebra.grading V) (t P V))
-
-/-- The whole affine open V, viewed as an affine open of its own scheme.
-Source: Stacks Tag 01OA (blueprint: lem-amb-vector-projective-completion). -/
-def affineTop {S : Scheme.{u}} (V : S.affineOpens) : V.1.toScheme.affineOpens :=
-  ⟨⊤, isAffineOpen_top V.1.toScheme⟩
-
-/-- The canonical local Proj embedding into the recorded relative projective space
-on an affine base. Its charts are RelativeProjectiveSpace.localChart.
-Source: Stacks Tags 01OA and 01NG (blueprint: lem-amb-vector-projective-completion). -/
-def projectiveChart {S : Scheme.{u}} (V : S.affineOpens) (d : ℕ) :
-    (RelativeProjectiveSpace.algebra V.1.toScheme d).localProj (affineTop V) ⟶
-      RelativeProjectiveSpace.scheme V.1.toScheme d :=
-  ((RelativeProjectiveSpace.construction V.1.toScheme d).restrictionIso (affineTop V)).inv ≫
-    (RelativeProjectiveSpace.π V.1.toScheme d ⁻¹ᵁ ⊤).ι
-
-/-- The local map from Spec Sym(F(V)) to the completion, induced by dehomogenization,
-then the recorded homogeneous-localization Proj chart and the relative Proj embedding.
-Source: Stacks Tag 01NG (blueprint: lem-amb-vector-projective-completion). -/
-def chartMap {S : Scheme.{u}} {F : S.Modules} (P : Presentation S F)
-    (ht : ∀ V : S.affineOpens, t P V ∈ P.algebra.grading V 1)
-    (a : ∀ V : S.affineOpens, SymmetricAlgebraSheaf.sections F (op V.1) ≃+*
-      HomogeneousLocalization.Away (P.algebra.grading V) (t P V))
-    (V : S.affineOpens) :
-    Spec (.of (SymmetricAlgebraSheaf.sections F (op V.1))) ⟶ P.algebra.relProj :=
-  Spec.map (CommRingCat.ofHom (a V).symm.toRingHom) ≫
-    Proj.awayι (P.algebra.grading V) (t P V) (ht V) Nat.one_pos ≫
-      P.algebra.relProjι V
+private theorem glue_affine_charts {X S Y : Scheme.{u}} (p : X ⟶ S) (r : Y ⟶ S)
+    (f : ∀ V : S.affineOpens, (p ⁻¹ᵁ V.1).toScheme ⟶ Y)
+    (hf : ∀ {U V : S.affineOpens} (h : U ≤ V),
+      X.homOfLE (p.preimage_mono h) ≫ f V = f U)
+    (hover : ∀ V : S.affineOpens, f V ≫ r = (p ⁻¹ᵁ V.1).ι ≫ p)
+    (hopen : ∀ V : S.affineOpens, IsOpenImmersion (f V)) :
+    ∃ j : X ⟶ Y, IsOpenImmersion j ∧ j ≫ r = p ∧
+      (∀ V : S.affineOpens, (p ⁻¹ᵁ V.1).ι ≫ j = f V) ∧
+      (∀ j' : X ⟶ Y, (∀ V : S.affineOpens, (p ⁻¹ᵁ V.1).ι ≫ j' = f V) → j' = j) := by
+  let C := inverseAffineCover p
+  let j := C.glueMorphismsOfLocallyDirected f (fun h ↦ hf (leOfHom h))
+  have hj (V : S.affineOpens) : (p ⁻¹ᵁ V.1).ι ≫ j = f V :=
+    C.map_glueMorphismsOfLocallyDirected f _ V
+  have hjr : j ≫ r = p := by
+    apply C.hom_ext
+    intro V
+    change (p ⁻¹ᵁ V.1).ι ≫ j ≫ r = (p ⁻¹ᵁ V.1).ι ≫ p
+    rw [← Category.assoc, hj, hover]
+  have hinj : Function.Injective j := by
+    intro x y hxy
+    have hbase : p x = p y := by
+      rw [← hjr]
+      simpa only [Scheme.Hom.comp_apply] using congrArg r hxy
+    obtain ⟨V, hV⟩ := Scheme.GradedAlgebraData.exists_affineOpens_mem (p x)
+    let xv : (p ⁻¹ᵁ V.1).toScheme := ⟨x, hV⟩
+    let yv : (p ⁻¹ᵁ V.1).toScheme := ⟨y, by change p y ∈ V.1; rw [← hbase]; exact hV⟩
+    have hfv : f V xv = f V yv := by
+      rw [← hj]
+      simpa only [Scheme.Hom.comp_apply, Scheme.Opens.ι_apply] using hxy
+    have := hopen V
+    exact congrArg Subtype.val ((f V).isOpenEmbedding.injective hfv)
+  refine ⟨j, IsOpenImmersion.of_openCover_source j C hinj ?_, hjr, hj, ?_⟩
+  · intro V
+    change IsOpenImmersion ((p ⁻¹ᵁ V.1).ι ≫ j)
+    rw [hj]
+    exact hopen V
+  · intro j' hj'
+    apply C.hom_ext
+    intro V
+    exact (hj' V).trans (hj V).symm
 
 /-- The projective completion of a constant finite rank vector bundle has its canonical
 frame-independent affine chart, is proper and Noetherian, and compactifies the bundle.
@@ -119,34 +118,28 @@ Source: Stacks Tags 01OA, 01OB, 01OE, 01NG; blueprint, vector-bundle purity, fir
 sentence (blueprint: lem-amb-vector-projective-completion).
 
 Proof:
-1. Form F' = O_S ⊕ F and its symmetric algebra, using
-lem-weil-pbc-quasi-coherent-symmetric-algebra. The symmetric grading of
-lem-weil-pbc-symmetric-algebra-graded is the power of the degree-one image. Restriction
-preserves generators and their products. Apply lemma-nagata-relative-proj-exists to this
-quasi-coherent graded algebra. On any affine frame, the basis-to-polynomial isomorphism
-lem-weil-pbc-symmetric-algebra-free-module-polynomial sends (1,0) to t and (0,e_i) to x_i.
-prop-nagata-relative-proj-functoriality identifies its Proj with the local projective space.
-2. In its t-chart define alpha: Sym(F(V)) → C_(t),0 by m ↦ x(m)/t and fixing scalars.
-The inverse sends a homogeneous fraction f(t,x)/t^n to f(1,y). Localization relations
-remain equal after setting t=1, so this is well-defined. The identities follow from
-homogeneity, f(t,x)/t^n = f(1,x/t).
-3. If e'_j = sum_i g_ij e_i then t'=t and x'_j=sum_i g_ij x_i, so division by t
-commutes with this same frame change. Restriction restricts only the coefficients.
-Use lem-weil-pbc-scheme-morphism-gluing on affine refinements of overlaps to glue these
-maps and their inverses. They lie over S, and give j with image D_+(t). The local chart
-characterization determines j uniquely.
-4. Apply lem-pur-projective-bundle-tautological-geometry to F', of rank d+1: the actual
-relative Proj projection r is proper. Then lem-weil-pbc-finite-type-over-noetherian makes
-its source Noetherian. The open chart E is Noetherian by
-lem-weil-pbc-noetherian-open-subscheme-noetherian. Its inclusion is quasi-compact;
-lem-weil-pbc-qc-open-immersion-finite-type and
-lem-sfb-finite-type-composition-base-change make pi finite type. Its diagonal is the
-base change of the closed diagonal of r; lem-weil-pbc-proper-fp-permanence makes it
-closed, so pi is separated.
-5. Package j and r as the recorded Compactification. At rank zero, the local ring is
-R[t], all Proj points lie in D_+(t), and its degree-zero localization is R. The bundle's
-local ring is also R. These structural isomorphisms glue, including for the empty base
-and zero ring; under them j and r are identities. -/
+1. The proved presentation construction applies the existing projective-bundle realization
+of O plus F. It transports its section equivalences to Sym(O(V) × F(V)), preserving
+restriction and grading, and supplies properness and the rank-zero structural isomorphism.
+2. The proved dehomogenization construction sends m to x(m)/t. Its inverse evaluates
+(t,x) at (1,y). Symmetric-algebra induction proves one inverse identity; induction on
+powers of the degree-one submodule proves the other. The equivalences fix scalars and
+commute with restriction on every affine open, without choosing a free frame.
+3. Separately, the proved frame construction transports the basis of F(V) to a basis of
+O(V) × F(V), with distinguished first vector (1,0). The polynomial equivalence preserves
+every homogeneous degree. The resulting inverse graded ring maps induce inverse Proj
+maps and identify the structural morphism and the first standard open.
+4. Compose the vector bundle affine charts with the dehomogenization charts. Their
+restriction equation glues them on the locally directed cover by inverse images of
+all affine base opens. Equality over S reduces injectivity to one chart, giving the
+open immersion. Cover extensionality proves uniqueness. The local image formula gives
+the precise global image; linearity gives the displayed change-of-frame equation.
+5. Properness over the Noetherian base makes the completion Noetherian. The open source
+is Noetherian, hence compact; standard morphism-property instances give finite type
+and separatedness. Package the factorization as the recorded compactification. At
+rank zero, the presentation projection is an isomorphism, and the vector bundle
+projection is locally an affine space on the empty index set, hence also an isomorphism.
+The factorization gives the required equation under these structural isomorphisms. -/
 theorem exists_projective_completion (S : Scheme.{u}) [IsNoetherian S]
     (d : ℕ) (F : S.Modules) [F.IsFiniteLocallyFreeOfRank d] :
     ∃ (P : Presentation S F)
@@ -218,6 +211,150 @@ theorem exists_projective_completion (S : Scheme.{u}) [IsNoetherian S]
             eE.hom = VectorBundleZeroSection.π S d F ∧
             eP.hom = P.algebra.relProjHom ∧
             c.i ≫ eqToHom hZ = eE.hom ≫ eP.inv) := by
-  sorry
+  classical
+  obtain ⟨P, hproper, hzero⟩ := exists_projectivePresentation S d F
+  obtain ⟨ht, a, hgen, hcoeff, hrest⟩ := exists_affineDehomogenization S F P
+  have hframe := exists_frameModel S d F P
+  have hscalar (V : S.affineOpens) (r : Γ(S, V.1)) :
+      (a V (algebraMap Γ(S, V.1) (SymmetricAlgebraSheaf.sections F (op V.1)) r)).val =
+        algebraMap (P.algebra.obj V) (Localization.Away (t P V))
+          (algebraMap Γ(S, V.1) (P.algebra.obj V) r) := by
+    rw [hcoeff, HomogeneousLocalization.val_algebraMap,
+      Localization.mk_one_eq_algebraMap]
+  have : IsProper P.algebra.relProjHom := hproper
+  have : IsLocallyNoetherian P.algebra.relProj :=
+    LocallyOfFiniteType.isLocallyNoetherian P.algebra.relProjHom
+  have : CompactSpace P.algebra.relProj :=
+    QuasiCompact.compactSpace_of_compactSpace P.algebra.relProjHom
+  have : IsNoetherian P.algebra.relProj := ⟨⟩
+  have hascalar (V : S.affineOpens) (r : Γ(S, V.1)) :
+      a V (algebraMap Γ(S, V.1) (SymmetricAlgebraSheaf.sections F (op V.1)) r) =
+        algebraMap Γ(S, V.1)
+          (HomogeneousLocalization.Away (P.algebra.grading V) (t P V)) r := by
+    apply HomogeneousLocalization.val_injective
+    rw [hscalar, HomogeneousLocalization.val_algebraMap,
+      Localization.mk_one_eq_algebraMap]
+  have hchartIso (V : S.affineOpens) : IsIso
+      (Spec.map (CommRingCat.ofHom (a V).symm.toRingHom)) := by
+    have : IsIso (CommRingCat.ofHom (a V).symm.toRingHom) :=
+      (ConcreteCategory.isIso_iff_bijective _).mpr (a V).symm.bijective
+    infer_instance
+  have hchartOpen (V : S.affineOpens) : IsOpenImmersion (chartMap P ht a V) := by
+    have := hchartIso V
+    unfold chartMap
+    infer_instance
+  have hchartOver (V : S.affineOpens) : chartMap P ht a V ≫ P.algebra.relProjHom =
+      Spec.map (CommRingCat.ofHom (algebraMap Γ(S, V.1)
+        (SymmetricAlgebraSheaf.sections F (op V.1)))) ≫ V.2.isoSpec.inv ≫ V.1.ι := by
+    simp only [chartMap, Category.assoc, P.algebra.relProjι_relProjHom]
+    change Spec.map _ ≫ Proj.awayι _ _ _ _ ≫
+      (Proj.toSpecOfAlgebra (P.algebra.grading V) ≫ V.2.isoSpec.inv) ≫ V.1.ι = _
+    rw [Category.assoc, Proj.awayι_toSpecOfAlgebra_assoc, ← Spec.map_comp_assoc]
+    congr 1
+    congr 1
+    apply CommRingCat.hom_ext
+    apply RingHom.ext
+    intro r
+    exact (a V).symm_apply_eq.mpr (hascalar V r).symm
+  let p := VectorBundleZeroSection.π S d F
+  let X := VectorBundleZeroSection.scheme S d F
+  let localMap (V : S.affineOpens) : (p ⁻¹ᵁ V.1).toScheme ⟶ P.algebra.relProj :=
+    VectorBundleZeroSection.affineChart S d F V ≫ chartMap P ht a V
+  have hlocal (V : S.affineOpens) : IsOpenImmersion (localMap V) := by
+    have := hchartOpen V
+    have := (VectorBundleZeroSection.affineChart_spec S d F V).1
+    dsimp only [localMap]
+    infer_instance
+  have hover (V : S.affineOpens) : localMap V ≫ P.algebra.relProjHom =
+      (p ⁻¹ᵁ V.1).ι ≫ p := by
+    dsimp only [localMap]
+    rw [Category.assoc, hchartOver]
+    simpa only [Category.assoc] using
+      congrArg (fun f ↦ f ≫ V.1.ι)
+        (VectorBundleZeroSection.affineChart_spec S d F V).2.1 |>.trans
+          (morphismRestrict_ι p V.1)
+  have hcompat {U V : S.affineOpens} (h : U ≤ V) :
+      X.homOfLE (p.preimage_mono h) ≫ localMap V = localMap U := by
+    have he := VectorBundleZeroSection.affineChart_naturality S d F U V h
+    simp only [Scheme.Hom.resLE_id] at he
+    dsimp only [localMap]
+    rw [← Category.assoc, he, Category.assoc, hrest U V h]
+  obtain ⟨j, hjopen, hjover, hj, hjunique⟩ :=
+    glue_affine_charts p P.algebra.relProjHom localMap hcompat hover hlocal
+  have : IsOpenImmersion j := hjopen
+  have : IsLocallyNoetherian X := isLocallyNoetherian_of_isOpenImmersion j
+  have : TopologicalSpace.NoetherianSpace X :=
+    j.isOpenEmbedding.isInducing.noetherianSpace
+  have : CompactSpace X := inferInstance
+  have : IsNoetherian X := ⟨⟩
+  have : IsSeparated p := by rw [← hjover]; infer_instance
+  have : LocallyOfFiniteType p := by rw [← hjover]; infer_instance
+  have : QuasiCompact p := inferInstance
+  have hchange (V : S.affineOpens)
+      (e e' : VectorBundleZeroSection.Trivialization S d F V.1)
+      (G : Matrix (Fin d) (Fin d) Γ(S, V.1))
+      (he : ∀ j : Fin d, VectorBundleZeroSection.frameSection S d F V.1 e' j =
+        ∑ i : Fin d, G i j • VectorBundleZeroSection.frameSection S d F V.1 e i)
+      (j : Fin d) :
+      a V (SymmetricAlgebra.ι _ _ (VectorBundleZeroSection.frameSection S d F V.1 e' j)) =
+        ∑ i : Fin d,
+          a V (algebraMap Γ(S, V.1) (SymmetricAlgebraSheaf.sections F (op V.1)) (G i j)) *
+            a V (SymmetricAlgebra.ι _ _
+              (VectorBundleZeroSection.frameSection S d F V.1 e i)) := by
+    rw [he, map_sum, map_sum]
+    apply Finset.sum_congr rfl
+    intro i _
+    rw [map_smul, Algebra.smul_def, map_mul]
+  let c : Compactification p :=
+    { Z := P.algebra.relProj
+      g := P.algebra.relProjHom
+      i := j
+      comm := hjover.symm
+      isProper := hproper
+      isOpenImmersion := hjopen }
+  have hrange : j.opensRange = chartOpen P := by
+    have hcover : (⨆ V : S.affineOpens, p ⁻¹ᵁ V.1) = ⊤ := by
+      rw [← Scheme.Hom.preimage_iSup, iSup_affineOpens_eq_top]
+      rfl
+    rw [← j.image_top_eq_opensRange, ← hcover, j.image_iSup]
+    unfold chartOpen
+    apply iSup_congr
+    intro V
+    have := hchartIso V
+    have := (VectorBundleZeroSection.affineChart_spec S d F V).1
+    rw [← Scheme.Opens.opensRange_ι (p ⁻¹ᵁ V.1),
+      ← Scheme.Hom.opensRange_comp]
+    simp only [hj V]
+    dsimp only [localMap, chartMap]
+    rw [Scheme.Hom.opensRange_comp_of_isIso,
+      Scheme.Hom.opensRange_comp_of_isIso, Scheme.Hom.opensRange_comp,
+      Proj.opensRange_awayι]
+  refine ⟨P, ht, a, inferInstance, hproper, hgen, hscalar, hframe, hrest, hchange,
+    inferInstance, inferInstance, inferInstance, inferInstance, c, rfl, ?_, ?_, ?_, ?_, ?_⟩
+  · simp [c]
+  · simpa [c] using hrange
+  · intro V
+    simpa [c, localMap] using (hj V).symm
+  · intro j' hj'
+    apply hjunique
+    intro V
+    exact (hj' V).symm
+  · intro hd
+    have : IsIso P.algebra.relProjHom := hzero hd
+    have : IsIso p := by
+      subst d
+      obtain ⟨I, U, hU, e⟩ :=
+        Scheme.Modules.IsFiniteLocallyFreeOfRank.exists_restrict_iso_free F (r := 0)
+      apply IsZariskiLocalAtTarget.of_iSup_eq_top
+        (P := MorphismProperty.isomorphisms Scheme) U hU
+      intro i
+      obtain ⟨hi, ho, _⟩ := VectorBundleZeroSection.trivializationMap_spec S 0 F (U i)
+        (e i).some
+      have := hi
+      rw [← ho]
+      infer_instance
+    refine ⟨asIso p, asIso P.algebra.relProjHom, rfl, rfl, ?_⟩
+    change j ≫ 𝟙 _ = p ≫ inv P.algebra.relProjHom
+    rw [Category.comp_id, ← hjover, Category.assoc, IsIso.hom_inv_id, Category.comp_id]
 
 end AlgebraicGeometry.VectorProjectiveCompletion

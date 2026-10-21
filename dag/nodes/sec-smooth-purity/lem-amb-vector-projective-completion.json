@@ -20,113 +20,51 @@
  ],
  "proof": [
   {
-   "text": "Put $F=\\mathcal O_S\\oplus\\mathcal E$. A frame of $\\mathcal E$ gives a frame $(1,e_1,\\ldots,e_d)$ of $F$, so $F$ is locally free of rank $d+1$, hence quasi-coherent by [def-amb-finite-locally-free-module]. Its symmetric algebra is quasi-coherent and its sections over an affine $V=\\operatorname{Spec}R$ are $\\operatorname{Sym}_R(F(V))$ by [lem-weil-pbc-quasi-coherent-symmetric-algebra]. Use the symmetric grading of [lem-weil-pbc-symmetric-algebra-graded]; restrictions preserve it because they send each degree-one generator to its restriction and preserve products. Therefore [lemma-nagata-relative-proj-exists] constructs $r:\\overline E=\\operatorname{Proj}_S\\operatorname{Sym}(F)\\to S$. On a trivializing affine $V$, [lem-weil-pbc-symmetric-algebra-free-module-polynomial] identifies its graded algebra with $R[t,x_1,\\ldots,x_d]$: each generator has degree one, so the algebra identification preserves degrees. The graded equivalence induces the Proj identification by [prop-nagata-relative-proj-functoriality](2), giving $r^{-1}(V)=\\mathbf P^d_V$. The affine restriction identifications commute with further restriction by [lemma-nagata-relative-proj-exists].",
+   "text": "Obtain the actual Sym(O plus F) presentation and proper relative Proj from [lem-amb-vector-projective-presentation]. Obtain its frame-independent affine dehomogenizations and scheme restriction equation from [lem-amb-vector-projective-dehomogenization], and its normalized local projective-space comparison from [lem-amb-vector-projective-frame-model]. Proper over the Noetherian base gives locally Noetherian and quasi-compact total space, hence Noetherian (Mathlib).",
    "uses": [
-    "def-amb-finite-locally-free-module",
-    "lem-weil-pbc-quasi-coherent-symmetric-algebra",
-    "lem-weil-pbc-symmetric-algebra-graded",
-    "lemma-nagata-relative-proj-exists",
-    "lem-weil-pbc-symmetric-algebra-free-module-polynomial",
-    "prop-nagata-relative-proj-functoriality"
+    "lem-amb-vector-projective-presentation",
+    "lem-amb-vector-projective-dehomogenization",
+    "lem-amb-vector-projective-frame-model"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Tag 01OA (section-projective-bundle), Tag 01OB (definition-projective-bundle), Tag 01OE (lemma-projective-space-bundle); symmetric algebra grading and local polynomial description"
-   }
+   "elementary": false
   },
   {
-   "text": "On a trivializing affine $V=\\operatorname{Spec}R$, [def-asd-vector-bundle-zero-section] identifies $E|_V$ with $\\operatorname{Spec}R[y_1,\\ldots,y_d]$. The standard-chart interface of [def-nagata-relative-projective-space] identifies $D_+(t)$ in the local model of Step 1 with $\\operatorname{Spec}C_{(t),0}$, where $C=R[t,x_1,\\ldots,x_d]$. Explicitly the $R$-algebra map $\\alpha:R[y_1,\\ldots,y_d]\\to C_{(t),0}$ sends $y_i$ to $x_i/t$. Define its inverse on a homogeneous fraction by $f(t,x)/t^m\\mapsto f(1,y)$ for $f$ homogeneous of degree $m$, using [def-nagata-homogeneous-localization-degree-zero]. This is well-defined: a localization relation $t^k(t^nf-t^mg)=0$ becomes $f(1,y)=g(1,y)$ on setting $t=1$. It respects sums and products, and $f(t,x)/t^m=f(1,x/t)$ shows the two composites are identities. The inverse of $\\operatorname{Spec}(\\alpha)$ gives $E|_V\\cong D_+(t)$, followed by its open inclusion. These maps are over $V$ because $\\alpha$ fixes $R$.",
+   "text": "Use the vector-bundle affine charts [def-asd-vector-bundle-zero-section] to view each Spec dehomogenization as a local map from E restricted to V into relative Proj. Scalar compatibility gives the equation over S, and both factors are open immersions. Restriction compatibility and the locally directed cover by inverse images of affine base opens glue these maps by Scheme.OpenCover.glueMorphismsOfLocallyDirected. Equality over S reduces global injectivity to injectivity in one affine piece, so IsOpenImmersion.of_openCover_source applies. This uses affine refinements of intersections, never their affineness. Uniqueness is cover.hom_ext.",
    "uses": [
     "def-asd-vector-bundle-zero-section",
-    "def-nagata-relative-projective-space",
-    "def-nagata-homogeneous-localization-degree-zero"
+    "def-nagata-relative-proj"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Tag 01NG (lemma-standard-covering-projective-space), explicit dehomogenization on the relative-Proj standard chart; no comparison with base-change projective space is invoked"
-   }
+   "elementary": false
   },
   {
-   "text": "Check agreement of these chart identifications. On an affine refinement of the overlap of two trivializing opens, write $e'_j=\\sum_i g_{ij}e_i$ with $G$ invertible. The summand $\\mathcal O_S$ is fixed, so $t'=t$, and the symmetric-algebra generator maps give $x'_j=\\sum_i g_{ij}x_i$. This is the same frame change as the vector-bundle coordinates $y'_j=\\sum_i g_{ij}y_i$ in [def-asd-vector-bundle-zero-section]. Consequently $x'_j/t=\\sum_i g_{ij}(x_i/t)$, so the two chart maps agree on each polynomial generator and on the base ring, hence agree. Their inverses agree too. Restriction to a smaller affine open simply restricts the coefficients in these equalities: the relative Proj restriction maps in [def-nagata-relative-proj] are the degree-zero homogeneous localization maps. Thus the opens $D_+(t)$ agree on overlaps and define an open $U\\subseteq\\overline E$. Apply [lem-weil-pbc-scheme-morphism-gluing] to glue the local maps $E|_V\\to U$ and their inverses $U|_V\\to E$. Their composites and their structural maps agree locally, so uniqueness in the same lemma gives inverse global isomorphisms $E\\cong U$ and $rj=\\pi$. This defines the canonical open immersion $j$ and proves restriction and frame compatibility. Intersections of affine opens have only been covered by affine refinements, never assumed affine.",
-   "uses": [
-    "def-asd-vector-bundle-zero-section",
-    "def-nagata-relative-proj",
-    "lem-weil-pbc-scheme-morphism-gluing"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Tag 01OA (section-projective-bundle) and section-relative-proj-via-glueing; explicit agent-written generator calculation for chart compatibility"
-   }
-  },
-  {
-   "text": "Put $F=\\mathcal O_S\\oplus\\mathcal E$ as in Step 1. It is locally free of rank $d+1$. Apply [lem-pur-projective-bundle-tautological-geometry] with $B=S$, $n=d$ and this $F$. Its properness assertion is for the actual relative Proj $\\operatorname{Proj}_S\\operatorname{Sym}^{\\bullet}F$, exactly the $r:\\overline E\\to S$ constructed in Step 1, so $r$ is proper. Proper includes finite type by [def-weil-proper-morphism]. Since the assumed base $S$ is Noetherian, [lem-weil-pbc-finite-type-over-noetherian] then makes $\\overline E$ Noetherian. No identification with the separately defined base-change projective space is needed.",
-   "uses": [
-    "lem-pur-projective-bundle-tautological-geometry",
-    "def-weil-proper-morphism",
-    "lem-weil-pbc-finite-type-over-noetherian"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 01OB (definition-projective-bundle), Tag 01OE (lemma-projective-space-bundle); Tag 01WC (lemma-locally-projective-proper), Tag 01W2 (lemma-proper-local-on-the-base), Tag 01T6 (lemma-finite-type-noetherian)"
-   }
-  },
-  {
-   "text": "Through the isomorphism $E\\cong U$, apply [lem-weil-pbc-noetherian-open-subscheme-noetherian] to the open $U\\subseteq\\overline E$ to obtain that $E$ is Noetherian. For every affine open $W\\subseteq\\overline E$, its preimage under $j$ is an open subscheme of the Noetherian scheme $E$, so the same lemma makes it quasi-compact. Thus $j$ is quasi-compact and [lem-weil-pbc-qc-open-immersion-finite-type] gives that $j$ is finite type. Both $j$ and $r$ are finite type, so [lem-sfb-finite-type-composition-base-change](1) makes $\\pi=rj$ finite type. The diagonal of $\\pi$ is the base change of the closed immersion $\\Delta_r:\\overline E\\to\\overline E\\times_S\\overline E$ to $E\\times_SE$: its inverse image is the diagonal copy of $E$, since $j$ identifies $E$ with the open subscheme $U$. Base change of a closed immersion is a closed immersion by [lem-weil-pbc-proper-fp-permanence](b). Hence $\\Delta_\\pi$ is closed and $\\pi$ is separated by [def-weil-proper-morphism].",
-   "uses": [
-    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-    "lem-weil-pbc-qc-open-immersion-finite-type",
-    "lem-sfb-finite-type-composition-base-change",
-    "lem-weil-pbc-proper-fp-permanence",
-    "def-weil-proper-morphism"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 01T5 (lemma-immersion-locally-finite-type), Tag 01T3 (lemma-composition-finite-type), Tag 01QR (lemma-base-change-closed-immersion); Properties Tags 01OW (lemma-locally-Noetherian), 01OZ (lemma-Noetherian-topology)"
-   }
-  },
-  {
-   "text": "The factorization $\\pi=rj$ with $j$ open and $r$ proper is a compactification by [def-weil-compactifications-refinements], using $S$ itself as the auxiliary base; $E$ and $S$ are finite type over that base by Step 5 and the identity map respectively. When $d=0$, the local homogeneous ring is $R[t]$ and its irrelevant ideal is $(t)$. Thus every point of $\\operatorname{Proj}R[t]$ lies in $D_+(t)$, and the chart from Step 2 has coordinate ring $R$ with structural map the identity. Likewise the rank-zero vector-bundle pieces have coordinate ring $R$. The local identities glue by [lem-weil-pbc-scheme-morphism-gluing], so $E=\\overline E=S$ under their canonical identifications and both $j$ and $r$ are identities. This includes the empty base and the zero ring.",
+   "text": "The source of the glued open immersion is locally Noetherian and has Noetherian topology as an embedded subspace of the completion. Thus it is Noetherian and compact. Mathlib gives quasi-compactness of the immersion, finite type of its composition with the proper map, and separatedness by composition. The image formula follows by expressing the source as the supremum of inverse images of affine base opens and using the opensRange formula for Proj.awayι. Package the factorization directly as a Compactification. Frame changes follow by linearity, map_sum and map_mul in the symmetric algebra.",
    "uses": [
     "def-weil-compactifications-refinements",
-    "lem-weil-pbc-scheme-morphism-gluing"
+    "def-asd-vector-bundle-zero-section"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Tag 01NG (lemma-standard-covering-projective-space), n=0; direct verification of the compactification definition"
-   }
+   "elementary": true
+  },
+  {
+   "text": "When d=0, the presentation theorem makes the completion projection an isomorphism. The vector bundle projection is an isomorphism locally by its recorded trivializationMap and the affine space on the empty index set; Mathlib target locality gives the global isomorphism. Their asIso values supply the exact structural isomorphisms, and the factorization implies the required equation for the compactification inclusion.",
+   "uses": [
+    "lem-amb-vector-projective-presentation",
+    "def-asd-vector-bundle-zero-section"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-amb-finite-locally-free-module",
   "def-asd-vector-bundle-zero-section",
-  "def-nagata-homogeneous-localization-degree-zero",
   "def-nagata-relative-proj",
-  "def-nagata-relative-projective-space",
   "def-weil-compactifications-refinements",
-  "def-weil-proper-morphism",
-  "lem-pur-projective-bundle-tautological-geometry",
-  "lem-sfb-finite-type-composition-base-change",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-  "lem-weil-pbc-proper-fp-permanence",
-  "lem-weil-pbc-qc-open-immersion-finite-type",
-  "lem-weil-pbc-quasi-coherent-symmetric-algebra",
-  "lem-weil-pbc-scheme-morphism-gluing",
-  "lem-weil-pbc-symmetric-algebra-free-module-polynomial",
-  "lem-weil-pbc-symmetric-algebra-graded",
-  "lemma-nagata-relative-proj-exists",
-  "prop-nagata-relative-proj-functoriality"
+  "lem-amb-vector-projective-dehomogenization",
+  "lem-amb-vector-projective-frame-model",
+  "lem-amb-vector-projective-presentation"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/constructions.tex",
-  "place": "Tags 01OA, 01OB, 01OE, 01NG; explicit chart gluing calculation, using Morphisms 01WC, 01W2, 01T6 and the cited existing DAG interfaces"
+  "place": "Tags 01OA, 01OB, 01OE, 01NG; explicit Lean construction on symmetric-algebra generators, locally directed chart gluing, Mathlib Noetherianity and morphism-property APIs."
  },
  "mathlib_searches": [
   {
@@ -274,19 +212,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-pbc-quasi-coherent-symmetric-algebra",
-  "lem-weil-pbc-symmetric-algebra-graded",
-  "lemma-nagata-relative-proj-exists",
-  "lem-weil-pbc-symmetric-algebra-free-module-polynomial",
-  "prop-nagata-relative-proj-functoriality",
-  "lem-weil-pbc-scheme-morphism-gluing",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-  "lem-weil-pbc-qc-open-immersion-finite-type",
-  "lem-sfb-finite-type-composition-base-change",
-  "lem-weil-pbc-proper-fp-permanence"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
@@ -299,20 +225,13 @@
   "module": "Sheaf.AlgebraicGeometry.VectorProjectiveCompletion",
   "declaration": "AlgebraicGeometry.VectorProjectiveCompletion.exists_projective_completion",
   "declarations": [
-   "AlgebraicGeometry.VectorProjectiveCompletion.Presentation",
-   "AlgebraicGeometry.VectorProjectiveCompletion.t",
-   "AlgebraicGeometry.VectorProjectiveCompletion.x",
-   "AlgebraicGeometry.VectorProjectiveCompletion.chartOpen",
-   "AlgebraicGeometry.VectorProjectiveCompletion.affineTop",
-   "AlgebraicGeometry.VectorProjectiveCompletion.projectiveChart",
-   "AlgebraicGeometry.VectorProjectiveCompletion.chartMap",
    "AlgebraicGeometry.VectorProjectiveCompletion.exists_projective_completion"
   ],
   "file": "lean/Sheaf/AlgebraicGeometry/VectorProjectiveCompletion.lean",
   "statement": "theorem exists_projective_completion (S : Scheme.{u}) [IsNoetherian S] (d : ℕ) (F : S.Modules) [F.IsFiniteLocallyFreeOfRank d] : ∃ (P : Presentation S F) (ht : ∀ V : S.affineOpens, t P V ∈ P.algebra.grading V 1) (a : ∀ V : S.affineOpens, SymmetricAlgebraSheaf.sections F (op V.1) ≃+* HomogeneousLocalization.Away (P.algebra.grading V) (t P V)), IsNoetherian P.algebra.relProj ∧ IsProper P.algebra.relProjHom ∧ (∀ (V : S.affineOpens) (m : F.val.obj (op V.1)), (a V (SymmetricAlgebra.ι _ _ m)).val = algebraMap (P.algebra.obj V) (Localization.Away (t P V)) (x P V m) * IsLocalization.Away.invSelf (t P V)) ∧ (∀ (V : S.affineOpens) (r : Γ(S, V.1)), (a V (algebraMap Γ(S, V.1) (SymmetricAlgebraSheaf.sections F (op V.1)) r)).val = algebraMap (P.algebra.obj V) (Localization.Away (t P V)) (algebraMap Γ(S, V.1) (P.algebra.obj V) r)) ∧ (∀ (V : S.affineOpens) (e : VectorBundleZeroSection.Trivialization S d F V.1), ∃ q : MvPolynomial (Fin (d + 1)) Γ(S, V.1) ≃ₐ[Γ(S, V.1)] P.algebra.obj V, q (MvPolynomial.X 0) = t P V ∧ (∀ i : Fin d, q (MvPolynomial.X i.succ) = x P V (VectorBundleZeroSection.frameSection S d F V.1 e i)) ∧ (∀ (n : ℕ) (f : MvPolynomial (Fin (d + 1)) Γ(S, V.1)), q f ∈ P.algebra.grading V n ↔ f ∈ MvPolynomial.homogeneousSubmodule (Fin (d + 1)) Γ(S, V.1) n) ∧ ∃ (g : (RelativeProjectiveSpace.algebra V.1.toScheme d).sectionGrade (affineTop V) →+*ᵍ P.algebra.grading V) (hg : Function.Bijective g) (b : Proj (P.algebra.grading V) ≅ RelativeProjectiveSpace.scheme V.1.toScheme d), (∀ r : Γ(V.1.toScheme, ⊤), g ((RelativeProjectiveSpace.algebra V.1.toScheme d).algebra.obj.hom.hom.app (op ⊤) r) = algebraMap Γ(S, V.1) (P.algebra.obj V) (V.1.topIso.hom r)) ∧ (∀ i : Fin (d + 1), g (RelativeProjectiveSpace.coordinate V.1.toScheme d (affineTop V) i) = q (MvPolynomial.X i)) ∧ b.hom = Proj.map g (GradedRingHom.irrelevant_le_map_of_surjective hg.surjective) ≫ projectiveChart V d ∧ b.hom ≫ RelativeProjectiveSpace.π V.1.toScheme d = P.algebra.toOpen V ∧ b.hom ⁻¹ᵁ RelativeProjectiveSpace.standardOpen V.1.toScheme d 0 = Proj.basicOpen (P.algebra.grading V) (t P V)) ∧ (∀ (U V : S.affineOpens) (h : U.1 ≤ V.1), Spec.map (CommRingCat.ofHom (SymmetricAlgebraSheaf.restriction F (homOfLE h).op)) ≫ chartMap P ht a V = chartMap P ht a U) ∧ (∀ (V : S.affineOpens) (e e' : VectorBundleZeroSection.Trivialization S d F V.1) (G : Matrix (Fin d) (Fin d) Γ(S, V.1)), (∀ j : Fin d, VectorBundleZeroSection.frameSection S d F V.1 e' j = ∑ i : Fin d, G i j • VectorBundleZeroSection.frameSection S d F V.1 e i) → ∀ j : Fin d, a V (SymmetricAlgebra.ι _ _ (VectorBundleZeroSection.frameSection S d F V.1 e' j)) = ∑ i : Fin d, a V (algebraMap Γ(S, V.1) (SymmetricAlgebraSheaf.sections F (op V.1)) (G i j)) * a V (SymmetricAlgebra.ι _ _ (VectorBundleZeroSection.frameSection S d F V.1 e i))) ∧ IsSeparated (VectorBundleZeroSection.π S d F) ∧ LocallyOfFiniteType (VectorBundleZeroSection.π S d F) ∧ QuasiCompact (VectorBundleZeroSection.π S d F) ∧ IsNoetherian (VectorBundleZeroSection.scheme S d F) ∧ ∃ c : Compactification (VectorBundleZeroSection.π S d F), ∃ hZ : c.Z = P.algebra.relProj, c.g = eqToHom hZ ≫ P.algebra.relProjHom ∧ (c.i ≫ eqToHom hZ).opensRange = chartOpen P ∧ (∀ V : S.affineOpens, VectorBundleZeroSection.affineChart S d F V ≫ chartMap P ht a V = ((VectorBundleZeroSection.π S d F) ⁻¹ᵁ V.1).ι ≫ c.i ≫ eqToHom hZ) ∧ (∀ j : VectorBundleZeroSection.scheme S d F ⟶ P.algebra.relProj, (∀ V : S.affineOpens, VectorBundleZeroSection.affineChart S d F V ≫ chartMap P ht a V = ((VectorBundleZeroSection.π S d F) ⁻¹ᵁ V.1).ι ≫ j) → j = c.i ≫ eqToHom hZ) ∧ (d = 0 → ∃ (eE : VectorBundleZeroSection.scheme S d F ≅ S) (eP : P.algebra.relProj ≅ S), eE.hom = VectorBundleZeroSection.π S d F ∧ eP.hom = P.algebra.relProjHom ∧ c.i ≫ eqToHom hZ = eE.hom ≫ eP.inv)",
-  "branch": "newtargets-dag",
-  "by": "Q145",
-  "date": "2026-10-17",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-21",
   "existing": false,
   "note": "Canonical affine-basis Sym(O_S ⊕ F) presentation, relative Proj, normalized local projective-space comparisons, dehomogenization chart and compatibility, compactification and structural rank-zero identity normalization. The theorem supplies all existence; no object is selected from an uncharacterized existence theorem."
  },
@@ -324,5 +243,15 @@
   "result": "pass",
   "note": "Read node, 9 stmt deps, Stacks constructions.tex 01OA/01OB/01NG, module and all exact upstream/side declarations (GradedAlgebraData, relProj, VectorBundleZeroSection incl. affineChart_spec IsIso, RelativeProjectiveSpace, Compactification). Every node clause is rendered: Noetherian S, constant rank d≥0, Sym(O⊕F) via a Presentation pinned up to unique iso (no duplicate notion found), relProj Noetherian and proper, t of degree 1, j = c.i≫eqToHom hZ with image the union of D_+(t), rj=π, uniqueness of j, local x_i↦x_i/t and P^d_V comparison via g/b, restriction and frame compatibility, π separated + finite type, E Noetherian, Compactification, explicit d=0 identity. Edge cases d=0, empty base, zero ring and universes are fine. Only the node's lean field changed; lean.statement verbatim; 8 declarations with source/blueprint docstrings; only sorry is the theorem proof; Worker report and Second reading present (second reading by the author). nt_compile --json on the snapshot: exit 0, no errors, ~18-20 s; a deliberate-error control exited 1. Minor non-blocking notes: frame-change clause on a V is formal; P.algebra is characterized rather than tied by name to SymmetricAlgebraSheaf; RelativeProjData-based P^d_V is bridged by an explicit iso."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-4f2f8",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261021T154030-L-2769114",
+  "kind": "interface",
+  "note": "independent cc review: delivered item theorem vs live clone (byte-identical statement); 7 moved defs vs clone bodies (verbatim); new node lean records vs new modules; importer FiniteRingBundleSectionOrientation compiled against delivered modules; per-module #print axioms"
+ }
 }

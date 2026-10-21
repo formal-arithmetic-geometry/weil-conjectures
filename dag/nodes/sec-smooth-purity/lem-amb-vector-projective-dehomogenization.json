@@ -1,0 +1,125 @@
+{
+ "id": "lem-amb-vector-projective-dehomogenization",
+ "kind": "statement",
+ "title": "Restriction-compatible dehomogenization of affine projective presentations",
+ "statement": "For every scheme S, module F and presentation P [def-amb-vector-projective-presentation-data], t is homogeneous of degree one and the affine section symmetric algebras Sym(F(V)) have dehomogenization equivalences a_V to the degree-zero localizations of P(V) at t. They send generators to x(m)/t and fix coefficients. Their Spec maps followed by the standard Proj chart and relative-Proj embedding commute with all inclusions of affine opens. No local freeness or Noetherian hypothesis is needed.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tags 01OA, 01OB, 01OE and 01NG; projective bundles and their standard affine charts"
+ },
+ "stmt_deps": [
+  "def-amb-vector-projective-presentation-data"
+ ],
+ "proof": [
+  {
+   "text": "Rewrite the presented grading as powers of range(e ∘ ι), and apply the symmetric-algebra dehomogenization theorem on every affine open. This supplies the generator formula and coefficient equality.",
+   "uses": [
+    "lem-amb-symmetric-algebra-dehomogenization",
+    "def-amb-vector-projective-presentation-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01OA, 01OB, 01OE and 01NG; projective bundles and their standard affine charts"
+   }
+  },
+  {
+   "text": "The prescribed restriction of the presentation carries t to t and x(m) to x(res(m)). Construct the homogeneous localization restriction map and check it on fractions with denominator t^n. The dehomogenization square commutes on scalars and generators and hence by symmetric algebra induction. Conjugate by the equivalences, apply Proj.awayι_comp_map, and then the relative-Proj cocone equation to obtain the scheme chart equality.",
+   "uses": [
+    "def-nagata-homogeneous-localization-degree-zero",
+    "prop-nagata-relative-proj-functoriality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01OA, 01OB, 01OE and 01NG; projective bundles and their standard affine charts"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-amb-vector-projective-presentation-data",
+  "def-nagata-homogeneous-localization-degree-zero",
+  "lem-amb-symmetric-algebra-dehomogenization",
+  "prop-nagata-relative-proj-functoriality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tags 01OA, 01OB, 01OE and 01NG; projective bundles and their standard affine charts"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The symmetric algebra of R times M dehomogenizes along the R generator to the symmetric algebra of M, naturally under restriction, and projective bundle frames identify homogeneous coordinates",
+   "results": "SymmetricAlgebra.induction, SymmetricAlgebra.lift and SymmetricAlgebra.ι (Mathlib.LinearAlgebra.SymmetricAlgebra.Basic); no dehomogenization or relative frame comparison theorem.",
+   "date": "2026-10-21",
+   "verdict": "no match; use the universal property and induction"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomogeneousLocalization.Away\"",
+   "results": "HomogeneousLocalization.Away.mk, Away.mk_surjective, Away.map, Away.map_mk, Away.map_comp (Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization).",
+   "date": "2026-10-21",
+   "verdict": "no match; these supply fractions and their functoriality, not the symmetric algebra comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "rg dehomogen|homogeneousLocalizationAwayXEquiv in Mathlib; rg equivMvPolynomial, homogeneousSubmodule_one_pow, sectionsLinearEquivOfOverIsoFree, preservesBinaryProducts in Mathlib and WeilConjectures",
+   "results": "Mathlib dehomogenization search: none. Mathlib.LinearAlgebra.SymmetricAlgebra.Basis.equivMvPolynomial and Mathlib.RingTheory.MvPolynomial.Homogeneous.homogeneousSubmodule_one_pow supply the frame algebra calculation. The project source has MvPolynomial.homogeneousLocalizationAwayXEquiv, only for polynomial generators, and the relative projective-space and projective-bundle interfaces.",
+   "date": "2026-10-21",
+   "verdict": "no match for the new scheme/presentation statements; reuse the listed algebra and category lemmas"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.VectorProjectiveCompletion",
+  "date": "2026-10-21",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-amb-vector-projective-completion",
+   "place": "Local symmetric algebra construction, dehomogenization and normalized projective frame charts in proof steps 1–4.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.VectorProjectiveDehomogenization",
+  "file": "lean/Sheaf/AlgebraicGeometry/VectorProjectiveDehomogenization.lean",
+  "declaration": "AlgebraicGeometry.VectorProjectiveCompletion.exists_affineDehomogenization",
+  "declarations": [
+   "AlgebraicGeometry.VectorProjectiveCompletion.exists_affineDehomogenization"
+  ],
+  "statement": "theorem exists_affineDehomogenization (S : Scheme.{u}) (F : S.Modules) (P : Presentation S F) : ∃ (ht : ∀ V : S.affineOpens, t P V ∈ P.algebra.grading V 1) (a : ∀ V : S.affineOpens, SymmetricAlgebraSheaf.sections F (op V.1) ≃+* HomogeneousLocalization.Away (P.algebra.grading V) (t P V)), (∀ (V : S.affineOpens) (m : F.val.obj (op V.1)), (a V (SymmetricAlgebra.ι _ _ m)).val = algebraMap (P.algebra.obj V) (Localization.Away (t P V)) (x P V m) * IsLocalization.Away.invSelf (t P V)) ∧ (∀ (V : S.affineOpens) (r : Γ(S, V.1)), a V (algebraMap Γ(S, V.1) (SymmetricAlgebraSheaf.sections F (op V.1)) r) = algebraMap Γ(S, V.1) (HomogeneousLocalization.Away (P.algebra.grading V) (t P V)) r) ∧ (∀ (U V : S.affineOpens) (h : U.1 ≤ V.1), Spec.map (CommRingCat.ofHom (SymmetricAlgebraSheaf.restriction F (homOfLE h).op)) ≫ chartMap P ht a V = chartMap P ht a U)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-4f2f8",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261021T154030-L-2769114",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-4f2f8",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261021T154030-L-2769114",
+  "kind": "interface",
+  "note": "independent cc review: delivered item theorem vs live clone (byte-identical statement); 7 moved defs vs clone bodies (verbatim); new node lean records vs new modules; importer FiniteRingBundleSectionOrientation compiled against delivered modules; per-module #print axioms"
+ }
+}
