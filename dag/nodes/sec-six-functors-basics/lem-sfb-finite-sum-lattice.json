@@ -12,9 +12,75 @@
  "stmt_deps": [
   "def-weil-l-adic-coefficient-extension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-weil-l-adic-extension-integers-dvr], $A$ is a discrete valuation ring and $E$ is its fraction field. Choose an $A$-basis $v_{j,1},\\ldots,v_{j,r}$ of each $\\Lambda_j$. Their finite union generates $\\Lambda$: expanding each summand in its basis expresses every element of the sum as an $A$-linear combination of this union. The submodule $\\Lambda\\subseteq E^r$ is torsion-free: if $0\\ne a\\in A$ and $ax=0$, multiply in $E^r$ by $a^{-1}$ to get $x=0$. Choose $j_0\\in J$. Since $\\Lambda_{j_0}\\subseteq\\Lambda$ and the $v_{j_0,i}$ form an $E$-basis, $\\Lambda$ spans $E^r$.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-trace.proof.md",
+    "place": "Local computation, second paragraph: finitely generated torsion-free module containing a full lattice"
+   }
+  },
+  {
+   "text": "Apply [lem-sc-dvr-fg-torsionfree-free] to $R=A$ and $M=\\Lambda$. Step 1 verifies both finite generation and torsion-freeness, and the coefficient ring is a DVR. Obtain a finite $A$-basis $b_1,\\ldots,b_n$ of $\\Lambda$.",
+   "uses": [
+    "lem-sc-dvr-fg-torsionfree-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-trace.proof.md",
+    "place": "Local computation, second paragraph: finitely generated torsion-free, hence free"
+   }
+  },
+  {
+   "text": "This $A$-basis is an $E$-basis of $E^r$. It spans because every element of $\\Lambda$ is an $A$-linear combination of the $b_i$, and Step 1 gives $E\\Lambda=E^r$. For independence, write any relation $\\sum_i c_i b_i=0$ with $c_i\\in E$ as $c_i=a_i/s_i$, where $a_i,s_i\\in A$ and $s_i\\ne0$, using the fraction-field assertion of [lem-weil-l-adic-extension-integers-dvr]. Put $s=\\prod_i s_i\\ne0$. Multiplication by $s$ gives an $A$-linear relation with coefficients $sc_i\\in A$. Independence over $A$ gives $sc_i=0$, hence $c_i=0$. By the equality of finite basis cardinalities in [def-weil-vector-space-dimension], this basis and the standard basis of $E^r$ have the same size, so $n=r$. Relabel the basis accordingly.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "def-weil-vector-space-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-trace.proof.md",
+    "place": "Local computation, second paragraph: spans E^r, hence a lattice of rank r; fraction-field and rank details expanded"
+   }
+  },
+  {
+   "text": "Let $N$ be either $\\Lambda$ or one of the $\\Lambda_j$, and let $b_1,\\ldots,b_r$ be any $A$-basis of $N$ that is also an $E$-basis of $E^r$. Consider the $E$-linear equivalence $B:E^r\\to E^r$, $B(x)=\\sum_i x_i b_i$. The field $E$ is complete for the absolute value in [def-weil-l-adic-coefficient-extension], and that norm is nontrivial because $|\\ell|_E=|\\ell|_\\ell=\\ell^{-1}<1$. The product topology on $E^r$ is Hausdorff and makes it a finite-dimensional topological $E$-vector space: operations are continuous coordinatewise. Thus [lem-weil-pbc-finite-dimensional-linear-homeomorphism] makes $B$ and $B^{-1}$ continuous.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension",
+    "lem-weil-pbc-finite-dimensional-linear-homeomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-trace.proof.md",
+    "place": "Local computation, second paragraph: basis identification with the valuation-ring power; topology made explicit"
+   }
+  },
+  {
+   "text": "The equality $B(A^r)=N$ is exactly the assertion that the chosen $b_i$ are an $A$-basis. Restrict the mutually inverse continuous maps from Step 4 to $A^r$ and $N$. They remain continuous for the induced topologies. The topology induced on $A^r\\subseteq E^r$ is precisely the product of the subspace topologies on $A\\subseteq E$: a basic product open restricts to $\\prod_i(U_i\\cap A)$, and every basic product open of $A^r$ has that form. On $N$ the induced topology is the topology specified in the statement. These restrictions are therefore the required mutually inverse homeomorphisms for every such basis, both for $\\Lambda$ and for each $\\Lambda_j$. When $r=0$, all modules are zero, the bases are empty, and these maps are maps between one-point spaces.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-trace.proof.md",
+    "place": "Local computation, second paragraph: free local model; restriction to subspaces and the rank-zero case expanded"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-sc-dvr-fg-torsionfree-free",
+  "def-weil-vector-space-dimension",
+  "def-weil-l-adic-coefficient-extension",
+  "lem-weil-pbc-finite-dimensional-linear-homeomorphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-trace.proof.md",
+  "place": "Local computation, second paragraph; algebraic argument follows the blueprint and Stacks Tag 0AUW, with denominator and subspace-topology details supplied by Q22"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,10 +116,45 @@
    "results": "[leanfinder] OK 8 hit(s); Zlattice.FG, ZLattice.FG, ZLattice.module_finite, ZLattice.module_free, NumberField.instRankOneValuedAdicCompletion, ZSpan.span_top, NumberField.Units.dirichletUnitTheorem.unitLattice_span_eq_top, instModuleFinite_of_discrete_submodule Submodule.IsLattice.sup in Algebra/Module/Lattice.lean:107 gives binary algebraic sums only; it does not supply the asserted subspace-topology basis homeomorphism. ZLattice results concern discrete Z-lattices, not valuation-ring lattices.",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite nonempty sum of full lattices over the valuation ring of a finite extension of Q_p is finite free of full rank and every lattice basis gives a homeomorphism with the valuation ring power",
+   "results": "8 hits: NumberField.mixedEmbedding.instDiscreteTopologySubtypeMixedSpaceMemSubmoduleIntIntegerLattice, NumberField.mixedEmbedding.instDiscreteTopologySubtypeMixedSpaceMemSubmoduleIntIdealLattice, NumberField.mixedEmbedding.euclidean.instDiscreteTopologySubtypeMixedSpaceMemSubmoduleIntIntegerLattice, NumberField.instRankOneValuedAdicCompletion, NumberField.mixedEmbedding.fractionalIdealLatticeBasis, Module.Basis.ofZLatticeBasis, NumberField.mixedEmbedding.span_latticeBasis, NumberField.mixedEmbedding.instIsZLatticeRealMixedSpaceIntegerLattice; ZLattice and number-field mixed-embedding results concern discrete integral lattices, rather than the subspace topology on a valuation-ring lattice; p-adic sum estimates do not assert freeness or homeomorphisms.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLattice\", \"sup\"",
+   "results": "1 hits: Submodule.IsLattice.sup; read Submodule.IsLattice.sup at Mathlib/Algebra/Module/Lattice.lean:107-109. It gives binary algebraic sums, not the finite-family and topological assertions together.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsLattice|free_of_finite_type_torsion_free|basisOfFiniteTypeTorsionFree",
+   "results": "8 hits: Mathlib/Algebra/Module/Lattice.lean, Mathlib/Algebra/Module/Lattice.lean, Mathlib/Algebra/Module/Lattice.lean, Mathlib/Algebra/Module/Lattice.lean, Mathlib/Algebra/Module/Lattice.lean, Mathlib/Algebra/Module/ZLattice/Basic.lean, Mathlib/Algebra/Module/PID.lean, Mathlib/Algebra/Module/PID.lean; read Mathlib/Algebra/Module/Lattice.lean:62-69 (definition), 107-109 (binary sum), 145-158 (basis extension), 172-176 (freeness). These are algebraic ingredients; no single exact or one-line specialization gives all the item.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite sums of full lattices in a p-adic vector space are free of full rank and have valuation ring basis coordinates that are homeomorphisms",
+   "results": "8 hits: padicNorm.sum_le', padicNorm.sum_le, Module.Basis.ofZLatticeBasis, padicValRat.lt_sum_of_lt, PadicInt.coe_sum, Module.Free.dfinsupp, padicValRat.sum_pos_of_pos, AdicCompletion.val_sum; ZLattice and number-field mixed-embedding results concern discrete integral lattices, rather than the subspace topology on a valuation-ring lattice; p-adic sum estimates do not assert freeness or homeomorphisms.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finitely generated spanning submodule of a finite dimensional vector space over a local field has a valuation ring basis that is also a field basis, and the basis coordinate map is a homeomorphism",
+   "results": "8 hits: Module.Basis.ofZLatticeBasis, Module.Basis.ofZLatticeBasis_comap, Module.Basis.ofZLatticeBasis_apply, NumberField.mixedEmbedding.fundamentalCone.completeBasis, Profinite.NobelingProof.GoodProducts.Basis, IsLocalRing.basisQuotient_apply, NumberField.Units.basisOfIsMaxRank, Module.Basis.extendOfIsLattice_apply; read its parent construction Module.Basis.extendOfIsLattice in Mathlib/Algebra/Module/Lattice.lean:145-158. It handles extension of a known basis of a known lattice, without the finite-sum construction or topology.",
+   "date": "2026-10-21",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "sk-lem-stratified-lattice",
@@ -68,5 +169,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-finite-sum-lattice",
+  "worker": "stage1",
+  "summary": "Q22 checked the current trace paragraph and Stacks Tag 0AUW(3), found no exact completed project attachment, and reused existing DVR, finite-free, basis-cardinality and topological-linear-equivalence nodes. The finite union of bases generates the sum; torsion-freeness, full span, denominator clearing and rank equality are explicit. The homeomorphism is the restriction of an ambient linear homeomorphism, with product/subspace topologies identified. No statement change and no new nodes.",
+  "blueprint": "Realizes sk-lem-stratified-lattice, Pushing down by the trace, specifically the sentence that the finite sum of constant lattices is finite free and spans E^r; supplies the topological basis identification required for continuous coefficient sheaves.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Generic coefficient-ring structure: O_E is a DVR and E its fraction field, needed for freeness and denominator clearing. The stratified-lattice unit supplies no replacement local-field structure theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-l-adic-extension-integers-dvr"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q22-8602dd7c3",
+  "group": "Q22",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-8602dd7c3 (reviewer sub-agent of L); spot-checked: Read in full. No new nodes; the statement, stmt_deps and blueprint are unchanged, and the delivery only adds a 5-step proof to a node that had none. No re-split note applies, the item is not in a dropped list, and there is no SGA. The statement is true, including r=0, |J|=1 and rank 1; nonemptiness and finiteness of J are needed. It matches the blueprint main-20261015 sk-lem-stratified-lattice-trace.proof.md, Local computation para 2. Stacks 0AUW(3) (more-algebra.tex:4954) is cited for freeness only. S1: lem-weil-l-adic-extension-integers-dvr clauses 1-2 give the fraction field and the DVR; generation by the finite union of bases, torsion-freeness in E^r and span via Λ_{j0} are correct. S2: lem-sc-dvr-fg-torsionfree-free; its hypotheses match def-sc-discrete-valuation-ring. S3: denominator clearing with s=∏s_i gives E-independence; n=r from the basis-cardinality clause of def-weil-vector-space-dimension. S4: E is complete by clause 1 of def-weil-l-adic-coefficient-extension and nontrivially normed since |ℓ|<1; lem-weil-pbc-finite-dimensional-linear-homeomorphism is applied to B:E^r→E^r. S5: elementary restriction; subspace of a product = product of subspaces, and B(A^r)=N. The tool use of the local-field DVR node is accepted. Duplicate search: lem-sfb-local-field-integral-basis, lem-weil-pbc-fg-fraction-submodule-lattice-presentation, the lattice-sheaf and matrix-neighborhood nodes, and lem-sfb-continuous-lattice-sum (the sheaf sibling) do not state this. Cosmetic: the report names citations.json and searches.jsonl, which are not in the delivery."
  }
 }
