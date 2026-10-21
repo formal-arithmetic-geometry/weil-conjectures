@@ -20731,3 +20731,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:34 L: returned deliver/Q16/lem-weil-pbc-constant-tower-pushforward-normalization (reviewer RETURN: L: independent stage-2 immutable head 32455721a4d0: file-only compilation failed: sandbox Sheaf.Stage2.Sandbox0 timeout )
 - 07:34 L: returned deliver/Q36/sk-lem-as-properties (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-as-properties: cited node def-fd-additive-chara)
 - 07:35 L: returned deliver/NZ/det-def-sfb-filtered-two-colimit-characterization (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED det-def-sfb-filtered-two-colimit-characterization: det)
+- 07:35 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
