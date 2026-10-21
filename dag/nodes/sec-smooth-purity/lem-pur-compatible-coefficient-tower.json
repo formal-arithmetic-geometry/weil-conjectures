@@ -14,7 +14,8 @@
   "def-weil-inverse-system",
   "def-weil-abstract-derived-category",
   "def-weil-linear-category",
-  "def-weil-linear-functor"
+  "def-weil-linear-functor",
+  "def-pur-sheaf-modules-hom-module"
  ],
  "proof": [
   {
@@ -266,5 +267,32 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-6d802feb0 (reviewer sub-agent of L); spot-checked: I read the whole item and all 9 steps. The statement is byte-identical to live side-live. The item is not dropped, has no repair note, and live still has it unsplit. There are no new nodes. Step 1: balancing and S-linearity follow from b_n r_{n+1}=r_n and b_n p_{n+1}=p_n. Step 2: lem-pc-sites-module-sheafification-interface (Stacks 03CY, l.815) gives the unique compatible action, which identifies the S-sheafification with Res_{p_n}(M⊗_R B_n); t_n is unique via the sheafification unit and pure tensors. Steps 3–6: the functoriality, additive tower, homotopy and shift arguments are correct and elementary; shifts use the Stacks 011G convention (−1)^a d, and coherence follows from (−1)^{a+b}=(−1)^a(−1)^b. Steps 7–8: the quasi-isomorphism clause for Res_{p_n} follows from U_S Res=U_{B_n}, exact forgetful functors (03DA) and reflection of isomorphisms. Step 9: k-linearity needs r_n(a_R)=p_n(a_S), which is exactly the hypothesis. Small cases tested: one-object site, zero objects, identity tower, ℤ→ℤ/2^n, nonflat B_n. The source agrees with the final scalar-extension paragraph of def-weil-rationalization-karoubi in main-20261015, and the citer lem-weil-integral-scalar-extension-well-defined uses exactly the item's clauses. Tool use accepted: lem-weil-pbc-module-sheaves-colimits-forgetful clause (1), the generic exactness of the forgetful functor. Advisory: the same-unit lem-pur-sheaf-ring-coefficient-ordinary-adjunction could replace it in step 7. No duplicate found; the adic restriction nodes are specialised and correctly not used."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.Paper.CompatibleCoefficientTower",
+  "declaration": "SheafOfModules.exists_compatibleCoefficientTower",
+  "declarations": [
+   "SheafOfModules.coefficientTensorRing",
+   "SheafOfModules.coefficientTensorLevel",
+   "SheafOfModules.coefficientTowerGenerator",
+   "SheafOfModules.coefficientTowerScalarLinear",
+   "SheafOfModules.CoefficientTowerIsLinear",
+   "SheafOfModules.exists_compatibleCoefficientTower"
+  ],
+  "file": "lean/Sheaf/Paper/CompatibleCoefficientTower.lean",
+  "statement": "theorem exists_compatibleCoefficientTower (b : ∀ n, B (n + 1) ⟶ B n) (hr : ∀ n, r (n + 1) ≫ b n = r n) (hp : ∀ n, p (n + 1) ≫ b n = p n) : ∃ V : ringedSiteModules.{u, u, vC, uC} (coefficientTensorRing R) ⥤ (ℕᵒᵖ ⥤ ringedSiteModules.{u, u, vC, uC} (coefficientTensorRing S)), ∃ e : ∀ (M : ringedSiteModules.{u, u, vC, uC} (coefficientTensorRing R)) (n : ℕ), (V.obj M).obj (op n) ≅ coefficientTensorLevel r p n M, ∃ (_hV : V.Additive), (∀ (M : ringedSiteModules.{u, u, vC, uC} (coefficientTensorRing R)) (n : ℕ), (∀ (U : Cᵒᵖ) (x : M.val.obj U) (z : (B (n + 1)).obj.obj U), (((e M (n + 1)).inv ≫ (V.obj M).map (homOfLE (Nat.le_succ n)).op ≫ (e M n).hom).val.app U) (coefficientTowerGenerator r p (n + 1) M U x z) = coefficientTowerGenerator r p n M U x (((b n).hom.app U) z)) ∧ (∀ t : coefficientTensorLevel r p (n + 1) M ⟶ coefficientTensorLevel r p n M, (∀ (U : Cᵒᵖ) (x : M.val.obj U) (z : (B (n + 1)).obj.obj U), t.val.app U (coefficientTowerGenerator r p (n + 1) M U x z) = coefficientTowerGenerator r p n M U x (((b n).hom.app U) z)) → t = (e M (n + 1)).inv ≫ (V.obj M).map (homOfLE (Nat.le_succ n)).op ≫ (e M n).hom)) ∧ (∀ (M N : ringedSiteModules.{u, u, vC, uC} (coefficientTensorRing R)) (f : M ⟶ N) (n : ℕ) (U : Cᵒᵖ) (x : M.val.obj U) (z : (B n).obj.obj U), (((e M n).inv ≫ (V.map f).app (op n) ≫ (e N n).hom).val.app U) (coefficientTowerGenerator r p n M U x z) = coefficientTowerGenerator r p n N U (f.val.app U x) z) ∧ (∀ (K L : CochainComplex (ringedSiteModules.{u, u, vC, uC} (coefficientTensorRing R)) ℤ) (f g : K ⟶ L), Homotopy f g → Nonempty (Homotopy ((V.mapHomologicalComplex (ComplexShape.up ℤ)).map f) ((V.mapHomologicalComplex (ComplexShape.up ℤ)).map g))) ∧ (∃ cs : (V.mapHomologicalComplex (ComplexShape.up ℤ)).CommShift ℤ, ∀ (K : CochainComplex (ringedSiteModules.{u, u, vC, uC} (coefficientTensorRing R)) ℤ) (a i : ℤ), ((cs.commShiftIso a).hom.app K).f i = 𝟙 _) ∧ (∀ (n : ℕ) (K L : CochainComplex (ringedSiteModules.{u, u, vC, uC} (coefficientTensorRing (B n))) ℤ) (f : K ⟶ L), QuasiIso (((restrictScalars.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).map (p n))).mapHomologicalComplex (ComplexShape.up ℤ)).map f) ↔ QuasiIso f) ∧ (∀ (k : Type uk) [CommRing k] (aR : k →+* RingCat.sectionsSubring (R.obj ⋙ forget₂ CommRingCat RingCat)) (aS : k →+* RingCat.sectionsSubring (S.obj ⋙ forget₂ CommRingCat RingCat)), (∀ (n : ℕ) (a : k) (U : Cᵒᵖ), ((r n).hom.app U) ((aR a).val U) = ((p n).hom.app U) ((aS a).val U)) → CoefficientTowerIsLinear V k aR aS)",
+  "branch": "newtargets-dag",
+  "by": "Q25",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The level isomorphisms normalize the functor to the actual change-of-rings modules. Transition uniqueness and the morphism formula are tested on images of presheaf pure tensors. The integer-shift comparison has identity components and is a morphism of towers. Scalar linearity uses the canonical global-sections action, restricted along the two supplied coefficient maps. The added statement dependency is the already-landed global Hom-module action node."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3f61df139",
+  "group": "Q25",
+  "result": "pass",
+  "note": "Snapshot module compiles clean with nt_compile --json (14.3 s, exit 0, no warnings). Each node clause matches: EssentiallySmall.{u} site with independent universes; hr/hp exactly as the node; levels are restrictScalars(p n) of the existing changeOfRings (def-pur-sheaf-tensor-product); generators are toSheafify images of presheaf pure tensors; adjacent transitions fixed by the generator formula plus uniqueness; V additive with V.map f = f⊗1 on generators; homotopies preserved; CommShift with identity components (tower naturality gives commutation with transitions); Res_{p_n} QuasiIso iff for unbounded complexes; k-linearity via homLinear restricted along aR/aS under r_n(aR a)=p_n(aS a). Edge cases (empty site, zero rings/modules, non-flat maps, negative shifts) not excluded. Added stmt_dep def-pur-sheaf-modules-hom-module is a landed definition node, allowed by brief l.140. No hollow defs; only sorry is the theorem; docstrings carry source places and all 9 steps; statement field verbatim. No duplicate found (only quotient/completed special cases); item not landed elsewhere, no repair note, not dropped. Advisory: unused public import Functor.OfSequence."
+ }
 }

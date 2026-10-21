@@ -1,0 +1,114 @@
+{
+ "id": "def-sfb-proetale-inverse-image-unit-section",
+ "kind": "definition",
+ "title": "Adjunction-unit inverse image of a pro-etale module section",
+ "status": "split",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes [def-pc-scheme], with small pro-étale sites [def-weil-pbc-proetale-site]. Use the canonical inverse and direct images and their adjunction [def-weil-proetale-inverse-image]. Let $R$ be a sheaf of commutative rings on $Y_{\\mathrm{proet}}$ and $M$ a sheaf of $R$-modules [def-weil-sheaf-of-modules-category]. For a site object $V\\to Y$ and a section $s\\in M(V)$, define its inverse-image unit section $f^{-1}s\\in(f^{-1}M)(X\\times_Y V)$ by evaluating the adjunction unit $\\eta_{f,M}:M\\to f_*f^{-1}M$ at $V$ and applying it to $s$. Here $f^{-1}M$ is the canonical module inverse image over $f^{-1}R$, and $(f_*N)(V)=N(X\\times_Y V)$. If a small model is used to construct the module adjunction, transport the section back to these original site objects; no additional choice of section or comparison is made.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-proetale-inverse-image",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03D2, lemma-pullback-module, and lemma-adjoint-push-pull-modules: the adjunction map G to f_*f^{-1}G; specialized to small pro-etale sites"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Continuous coefficient ring sheaves on the small pro-etale site and the adjunction-unit inverse image of a module section",
+   "results": "OK 8 hit(s): SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, SheafOfModules.pushforwardPushforwardAdj, CategoryTheory.Functor.sheafAdjunctionContinuous, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.unit, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, SheafOfModules.pullbackPushforwardAdjunction",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib specialization; reuse the already published project definitions."
+  },
+  {
+   "tool": "loogle",
+   "query": "latticeCoefficientSheaf, inverseSection",
+   "results": "OK 0 hit(s) | loogle: unknown identifier 'latticeCoefficientSheaf'",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib specialization; reuse the already published project definitions."
+  },
+  {
+   "tool": "grep",
+   "query": "latticeCoefficientSheaf|latticeModuleRing|latticeCoefficientIntegers|integralLatticeCoefficientMap|inverseSection",
+   "results": "OK 0 hit(s)",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib specialization; reuse the already published project definitions."
+  },
+  {
+   "tool": "rg",
+   "query": "Declaration-pattern search for latticeCoefficientSheaf, latticeModuleRing, latticeCoefficientIntegers, integralLatticeCoefficientMap, inverseSection in lean/WeilConjectures and lean/Sheaf",
+   "results": "No definition in WeilConjectures; exact declarations in Sheaf/Paper/LatticeSheafBasic.lean at 156, 178, 201, 209, and Sheaf/AlgebraicGeometry/ProEtaleInverseImageTensorComparison.lean at 75. Their complete signatures, bodies and docstrings were read.",
+   "date": "2026-10-21",
+   "verdict": "existing declarations; no new Lean code"
+  },
+  {
+   "tool": "DAG declaration-record search and blueprint_refs.py",
+   "query": "rg -l coefficient and inverseSection names dag/nodes; parse lean.declaration/declarations; blueprint_refs.py search latticeCoefficient; blueprint_refs.py search inverseSection",
+   "results": "Only the two statement nodes lem-weil-pbc-lattice-pair-image-classification and lem-pur-proetale-inverse-image-tensor-comparison record these declarations. Neither is a definition node. Each blueprint-name query returns 0 nodes.",
+   "date": "2026-10-21",
+   "verdict": "New definition records required by immutable-head review 8d1c775d8a63 H2."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-lattice-pullback",
+  "date": "2026-10-21",
+  "group": "Q28"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-stratified-lattice",
+   "place": "Pushing down by the trace: the canonical coefficient sheaves and unit sections used when restricting a lattice to a stratum",
+   "via": [
+    "lem-sfb-lattice-pullback"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-stratified-lattice",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleInverseImageTensorComparison",
+  "declaration": "AlgebraicGeometry.ProEtaleTensorComparison.inverseSection",
+  "declarations": [
+   "AlgebraicGeometry.ProEtaleTensorComparison.inverseSection"
+  ],
+  "statement": "def inverseSection {X Y : Scheme.{u}} (f : X ⟶ Y) {R : Rings Y}\n    (M : Modules R) (V : Y.ProEt) (s : M.val.obj (op V)) :\n    ((inverse f R).obj M).val.obj (op ((proEtaleBaseChange f).obj V))",
+  "branch": "sheaf-dag",
+  "by": "Q28",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Existing published definitions, with their real data, recorded independently of the theorem that happened to own their source module. No declaration is introduced or changed."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ebcc85b25",
+  "group": "Q28",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ebcc85b25",
+  "group": "Q28",
+  "result": "fix",
+  "note": "Re-delivery after the 8d1c775d H2 RETURN. Lean is byte-identical (sha ab849b91) to the version the earlier review found correct; re-checked H3 clause by clause, edge cases (g=id, rank 0, empty schemes, varying ranks) and universes; no hollow data, sorry only, docstrings and 5-step proof plan present. nt_compile --json clean in 40.7 s. stmt_deps: the two theorem nodes are replaced by new existing:true def nodes def-sfb-continuous-lattice-coefficients (LatticeSheafBasic) and def-sfb-proetale-inverse-image-unit-section (inverseSection); statements match the declarations; check_new_node and check_existing give no failures; no other def node owns these declarations; dependency records identical to side-live; item not dropped. FIX: removed the leading `noncomputable` from both new records' lean.statement (complete replacement JSONs in fixes/). Advisories: body helpers (latticeCoefficientPresheaf, isSheaf_latticeCoefficientPresheaf, latticeCoefficientSheafMap, Rings/Modules/inverse) are still listed only under their theorem-node owners; def-weil-pbc-continuous-integral-coefficients is still cited but unused."
+ }
+}

@@ -255,5 +255,33 @@
   "group": "O1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O1-bf0702427 (reviewer sub-agent of L); spot-checked: Zero-new-node split (5 steps); I read all five in full. Statement and stmt_deps are byte-identical to live, which is still unsplit, so no parallel group has split it. The item is not on the drop list and has no repair note; no cycle; no SGA. Source checked: det-sf-comp-coherence-cocycle.proof.md 'Refinement isomorphisms' (lines 13-18) is the identification Rp_*Rh_* = R(ph)_* this item serves. Stacks 0D6E (sites-cohomology 4011) gives only Rg_*Rf_* = R(gf)_*, so proof_origin=agent is right; 08BJ (derived 9857) matches lem-weil-pbc-right-adjoint-preserves-kinjective. Step 1: the lax-pushforward coherence lemma applies with F = -x_Z Y, G = -x_Y X and κ the fibre-product associator; with ψ=η_g, θ=η_f its composition hypothesis χ = η_gf is exactly lem-sfb-eta-comp, so the actual compositors (identity clause included) are identified. Step 2: det-prop-sfb-module-pullback-exact-main and the adjunction give K-injective preservation; the pd node gives D(E_T) and the resolution-compatible a_f. Step 3: with f_*I K-injective the identity resolution is allowed, so κ = [c^{-1}], in the direction the item states. Steps 4-5: lem-pur-ringed-derived-composition-cocycle (PASSed, read in full) is transported by conjugating with the a's; κ_int is defined by transport, and faithfulness of the equivalence finishes; both unit laws come out with the correct sides. Edge cases (identities, zero complex, empty scheme, non-flat finite coefficients) checked. Batch-5 flag lem-pd-section-derived-pushpull-normalization: accepted. It is a generic internal-vs-sectionwise module derived-category comparison for any scheme map and any commutative condensed ring, given by neither assumption. Its 649-node closure contains no sec-trace-formula, no sk-thm-trace-transport and no nt-* node, and its only pd-chapter nodes are itself and one definition. Four sfb nodes already cite it. Off-unit generic tools are listed in split_report.tool_uses for the maintainer to record. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ModuleDerivedCompositorCoherence",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.module_derived_compositor_coherence",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.moduleDerivedCompositor",
+   "AlgebraicGeometry.ProEtale.CondensedRing.moduleDerivedIdentity",
+   "AlgebraicGeometry.ProEtale.CondensedRing.moduleDerivedIteratedObjIso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.module_derived_compositor_normalization",
+   "AlgebraicGeometry.ProEtale.CondensedRing.module_derived_compositor_coherence",
+   "AlgebraicGeometry.ProEtale.CondensedRing.module_derived_identity_normalization",
+   "AlgebraicGeometry.ProEtale.CondensedRing.module_derived_compositor_units"
+  ],
+  "file": "lean/Sheaf/Paper/ModuleDerivedCompositorCoherence.lean",
+  "statement": "theorem module_derived_compositor_coherence (ℓ : ℕ) [Fact ℓ.Prime] (hΛ : IsLocalizingAdmissibleCoefficient ℓ Λ) {X Y Z W : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (h : Z ⟶ W) : moduleDerivedCompositor Λ (f ≫ g) h ≪≫ Functor.isoWhiskerRight (moduleDerivedCompositor Λ f g) (lowerStar Λ h).rightDerivedFunctor ≪≫ Functor.associator (lowerStar Λ f).rightDerivedFunctor (lowerStar Λ g).rightDerivedFunctor (lowerStar Λ h).rightDerivedFunctor = Functor.rightDerivedFunctorNatIso (lowerStarCongr Λ (Category.assoc f g h)) ≪≫ moduleDerivedCompositor Λ f (g ≫ h) ≪≫ Functor.isoWhiskerLeft (lowerStar Λ f).rightDerivedFunctor (moduleDerivedCompositor Λ g h)",
+  "branch": "sheaf-dag",
+  "by": "NH",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The primary theorem states associativity; companion theorems state the inverse-termwise-compositor normalization, identity normalization and both unit laws. Helper isomorphisms are real specializations of the existing total-right-derived universal construction and the existing ordinary module compositors, with no chosen arbitrary maps. The K-injective normalization uniquely identifies these comparisons with the ringed-topos comparison transported through sectionModuleEquivalence. The natural-language statement and all dependencies are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-849f14c11",
+  "group": "NH",
+  "result": "pass",
+  "note": "All node clauses (admissible Λ, unbounded D(Mod_{Λ_T}), κ: R(f≫g)≅Rf⋙Rg via rightDerivedFunctorCompIso' of the recorded lowerStarComp, inverse-termwise K-injective normalization, associativity with associator and lowerStarCongr assoc, identity comparison from lowerStarId with its K-injective formula, both unit laws) match the Lean with no extra hypotheses. Universes are the framework's (Scheme.{u}, Ab.{u+1}). Statement verbatim; 7 declarations present; node changes lean only; 9 dep records byte-identical to live; not dropped. nt_compile --json clean in 30.0 s. Advisory: live Q13 DerivedDirectImageOpenCoherence.directImageComposition duplicates moduleDerivedCompositor; shown definitionally equal (Iso.ext rfl) against a verbatim copy, since importing Q13's module times out at 60 s; it is theorem-owned and outside stmt_deps, so not reusable at S2. lowerStarId/lowerStarCongr are non-stmt_dep framework declarations (advisory)."
  }
 }

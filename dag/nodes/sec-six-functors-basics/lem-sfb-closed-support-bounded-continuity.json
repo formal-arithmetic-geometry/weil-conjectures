@@ -19,7 +19,8 @@
   "def-weil-open-immersion",
   "lem-weil-pbc-condensed-open-closed-recollement",
   "def-pc-cochain-complex-modules",
-  "def-sbc-standard-tstructure-derived-category"
+  "def-sbc-standard-tstructure-derived-category",
+  "def-sfb-condensed-closed-support-functor"
  ],
  "proof": [
   {
@@ -284,5 +285,24 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-0023ed3c6 (reviewer sub-agent of L); spot-checked: Read the item's 8 steps in full, with every cited statement. The statement is unchanged from side-live; the delivery has no new nodes, no cycle, and proof_deps equals the union of the step uses. The item is not dropped, not superseded and has no re-split note. Coefficients agree: an arbitrary commutative condensed Λ, B_T=p_T^*Λ as internal modules, the same as the condensed recollement. Steps 1 and 5 bridge to det-pe-bounded-continuity-direct-image's sectionwise R-modules through the identity-on-sheaves equivalence and Res along B_T→j_*B_U (the forgetful node), with the same K-injective resolutions. Step 3: a Noetherian space makes j quasi-compact, and an open immersion is a monomorphism, so j is quasi-separated; the D^{≥c} bounds come from the recollement's common-bound models and the left t-exactness of Ri^!. Step 4: τ_{≥c} as in Stacks 0118 (checked homology.tex l.3805). Steps 6–8: the support triangle, then lem-sf-derived-homology-long-exact (Mathlib δ = H(mor₃) plus shift iso, naturality `homologySequenceδ_naturality`), then exact i^* and exact filtered colimits. The four outer terms are isomorphisms by i^*/j^* exactness and colimit preservation plus step 5, and the five lemma finishes. Edge cases Z=∅, Z=T, T=∅, negative c and Λ=0 were checked. HRS (3.3)–(3.4) read; agent origin is correct; no SGA citation. No duplicate found by rg. The six declared tool_uses are generic black boxes and accepted."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.Paper.ClosedSupportBoundedContinuity",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.closedSupport_bounded_continuity",
+  "file": "lean/Sheaf/Paper/ClosedSupportBoundedContinuity.lean",
+  "statement": "theorem closedSupport_bounded_continuity (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] {T Z U : Scheme.{u}} [TopologicalSpace.NoetherianSpace T] (i : Z ⟶ T) [IsClosedImmersion i] (j : U ⟶ T) [IsOpenImmersion j] (_hij : Set.range j = (Set.range i)ᶜ) (c : ℤ) : (∀ (I : Type (u + 1)) [SmallCategory I] [IsFiltered I] (N : I ⥤ CochainComplex (supportModules Λ T) ℤ), (∀ t : I, (DerivedCategory.Q.obj (N.obj t)).IsGE c) → IsIso (DerivedCategory.Q.map (colimit.post N (CochainComplex.kInjectiveResolutionFunctor.{u + 1} (supportModules Λ T) ⋙ (closedSupport Λ i j).mapHomologicalComplex (ComplexShape.up ℤ))))) ∧ (∀ (I : Type (u + 1)) [SmallCategory I] [IsFiltered I] (V : I ⥤ CochainComplex (supportModules Λ U) ℤ), (∀ t : I, (DerivedCategory.Q.obj (V.obj t)).IsGE c) → IsIso (DerivedCategory.Q.map (colimit.post V (CochainComplex.kInjectiveResolutionFunctor.{u + 1} (supportModules Λ U) ⋙ (lowerStar Λ j).mapHomologicalComplex (ComplexShape.up ℤ))))) ∧ (∀ K : DerivedCategory (supportModules Λ T), K.IsGE c → ((closedSupport Λ i j).rightDerivedFunctor.obj K).IsGE c) ∧ (∀ K : DerivedCategory (supportModules Λ U), K.IsGE c → ((lowerStar Λ j).rightDerivedFunctor.obj K).IsGE c)",
+  "branch": "newtargets-dag",
+  "by": "ND",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The four conjuncts are the two original-cocone comparisons localized after termwise colimits of functorial K-injective representatives, and the two lower-bound preservation assertions. The added existing:true definition node def-sfb-condensed-closed-support-functor owns the unchanged canonical closedSupport kernel functor and supportModules abbreviation in Sheaf.AlgebraicGeometry.CondensedClosedSupportAdjunction. It replaces the theorem det-lem-formal-closed-support-adjunction as a statement dependency (H2 repair of b5d521be4a42). The recollement proof dependency already supplies the derived right-adjoint identification. The Lean file and mathematical statement are byte-identical to the returned delivery."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d456c1cba",
+  "group": "ND",
+  "result": "pass",
+  "note": "Re-delivery of b5d521be4a42 (H2 RETURN) is repaired: new existing:true definition node def-sfb-condensed-closed-support-functor owns supportModules…closedSupport_additive in the unchanged live module Sheaf.AlgebraicGeometry.CondensedClosedSupportAdjunction (all 8 declarations exist; statement verbatim from `def closedSupport`; Γ_{i,j}=supportKernel⋙supportPullback, not hollow; text matches Λ only MonObj, α^{-1}/η restriction, unit kernel; source sk-lem-formal-closed-support-adjunction.md read; 11 stmt_deps live definitions). Item stmt_deps now cite it instead of the theorem; item Lean byte-identical (sha f53a9dfd), statement verbatim; only stmt_deps/lean differ from live; all clauses/edge cases re-checked (NoetherianSpace only, complement orientation, Type (u+1) filtered, cohomological IsGE, colimit.post on K-injective models, D≥c for all c). nt_compile --json clean 41.3 s. Advisory: lowerStar owners (sk-def-sfb-module-pushforward-pullback/def-sfb-module-lower-star) are not item stmt_deps (inherited from stage-1); new def node could cite sk-def-sfb-module-pushforward-pullback."
+ }
 }

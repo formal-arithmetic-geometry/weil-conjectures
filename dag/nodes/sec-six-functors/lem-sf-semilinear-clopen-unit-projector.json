@@ -236,5 +236,52 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q39-7d8f7d1cb (reviewer sub-agent of L); spot-checked: I read the item, all six steps and the full statement of every cited node; the split adds no new nodes. Sources checked: Stacks 03DI (sites-modules.tex l.2058, extension by zero is left adjoint to restriction) and 015F(4) (derived.tex l.5884, every unbounded complex computes RF for an exact F). The item's t_s and pi_s agree with def-sp-varying-ring-proper-open-arrows: j_!->j_* is the mate of the inverse open unit, and pi_s is that inverse after the s^*-|s_* unit. The item is the statement node for the definition's clopen invertibility claim, and its (t_sP_s)pi_s=eta_s is exactly what the parent's mate-pasting step cites. Step 1: the clopen pieces H_U, H_C cover H in the fpqc sense because V meet H_U is clopen in V, hence quasi-compact; M(empty)=0 comes from the empty cover. Step 2: E-|P^0 holds with identity unit, so kappa:J^0=E is unique with P^0kappa u^0=1. One accepted implicit point: s^* is identified with restriction, which the operations definition gives through lem-pur-site-restriction-module-adjunction-exact. Step 3: q(x,y)=x, the transpose of kappa is (u^0)^{-1}, P^0pi^0=u^0 by the triangle identity, and c^*pi^0=0 because the target is M(empty)=0. Steps 4-5: E is exact, RE=D(E) by 015F, and kappa localizes by lem-sfb-exact-derived-natural-iso. With the localized units of def-weil-exact-derived-adjunction, t_s is the localized kappa and the identities localize. Step 6: naturality in C_bullet is componentwise on the product decomposition, since tensor and K-flatness split componentwise. Edge cases checked: U empty, U=X, X empty, nonflat Z/4->Z/2, unbounded complexes. All cited statements lie in the route of sk-thm-sf-compatibility; the two declared tool_uses are generic and accepted. No SGA is cited and there is no cycle. The fixed-coefficient and strict-tower clopen nodes do not state this varying-ring identity, so there is no duplicate. No changes."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SemilinearClopenUnitProjector",
+  "declaration": "AlgebraicGeometry.ProEtale.VaryingRing.semilinearClopen_unit_projector",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.VaryingRing.semilinearClopen_openUnit_isIso",
+   "AlgebraicGeometry.ProEtale.VaryingRing.clopenToDirect",
+   "AlgebraicGeometry.ProEtale.VaryingRing.clopenPi",
+   "AlgebraicGeometry.ProEtale.VaryingRing.semilinearClopen_push_colimits",
+   "AlgebraicGeometry.ProEtale.VaryingRing.semilinearClopen_pushColimits",
+   "AlgebraicGeometry.ProEtale.VaryingRing.semilinearClopen_unit_projector",
+   "AlgebraicGeometry.ProEtale.VaryingRing.clopenCoefficientMap",
+   "AlgebraicGeometry.ProEtale.VaryingRing.clopenCoefficientMap_commute",
+   "AlgebraicGeometry.ProEtale.VaryingRing.clopenCoefficientRestriction",
+   "AlgebraicGeometry.ProEtale.VaryingRing.clopenCoefficientRes",
+   "AlgebraicGeometry.ProEtale.VaryingRing.clopenCoefficientScalar",
+   "AlgebraicGeometry.ProEtale.VaryingRing.clopenCoefficientPush_existsUnique",
+   "AlgebraicGeometry.ProEtale.VaryingRing.clopenCoefficientPush",
+   "AlgebraicGeometry.ProEtale.VaryingRing.clopenCoefficientPullInv",
+   "AlgebraicGeometry.ProEtale.VaryingRing.clopenCoefficientPullInv_isIso",
+   "AlgebraicGeometry.ProEtale.VaryingRing.clopenCoefficientG",
+   "AlgebraicGeometry.ProEtale.VaryingRing.clopenCoefficientJInv",
+   "AlgebraicGeometry.ProEtale.VaryingRing.clopenCoefficientP",
+   "AlgebraicGeometry.ProEtale.VaryingRing.clopenCoefficientJInv_isIso",
+   "AlgebraicGeometry.ProEtale.VaryingRing.clopenCoefficientJ",
+   "AlgebraicGeometry.ProEtale.VaryingRing.clopenCoefficientP_isIso",
+   "AlgebraicGeometry.ProEtale.VaryingRing.clopenScalarG",
+   "AlgebraicGeometry.ProEtale.VaryingRing.clopenScalarJ",
+   "AlgebraicGeometry.ProEtale.VaryingRing.clopenScalarP",
+   "AlgebraicGeometry.ProEtale.VaryingRing.ClopenCoefficientNaturality",
+   "AlgebraicGeometry.ProEtale.VaryingRing.semilinearClopen_coefficient_naturality"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SemilinearClopenUnitProjector.lean",
+  "statement": "theorem semilinearClopen_unit_projector {U X C : Scheme.{u}} (s : U ⟶ X) (c : C ⟶ X) [IsOpenImmersion s] [IsClosedImmersion s] [IsOpenImmersion c] (hc : Set.range c = (Set.range s)ᶜ) : IsIso (clopenToDirect R φ s) ∧ clopenPi R φ s ≫ Functor.whiskerLeft (G R φ s) (clopenToDirect R φ s) = (adj R φ s).unit ∧ (∀ M : Derived R φ X, (G R φ s).map ((clopenPi R φ s).app M) = (jAdj R φ s).unit.app ((G R φ s).obj M)) ∧ (∀ M : Derived R φ X, (G R φ c).map ((clopenPi R φ s).app M) = 0) ∧ (∀ K : CochainComplex (Modules R φ U) ℤ, (clopenToDirect R φ s).app (DerivedCategory.Q.obj K) ≫ (push R φ s).rightDerivedFunctorIsoMapDerivedCategory.hom.app (DerivedCategory.Q.obj K) ≫ (push R φ s).mapDerivedCategoryFactors.hom.app K = (extension R φ s).mapDerivedCategoryFactors.hom.app K ≫ DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex (moduleOpenToP R φ s) (.up ℤ)).app K))",
+  "branch": "newtargets-dag",
+  "by": "Q10",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The unit/projector identities and representative normalization are in semilinearClopen_unit_projector; the final coefficient-naturality clause is semilinearClopen_coefficient_naturality. Helper declarations specialize the existing operations and scalar models; all postponed proofs belong to this node. No statement correction or dependency repair."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5fa86e8d9",
+  "group": "Q10",
+  "result": "pass",
+  "note": "Re-delivery of the PASSed head dcfc7e8e, which was returned at landing only for an overlay environment fault (TensorProduct.Basic). The Lean module is byte-identical; the item and dependency nodes differ only by an empty lean_audit field; the report only adds repair-retry sections. Re-checked: t_s=clopenToDirect is the P⊣S transpose of the inverse open unit (same formula as moduleOpenToP); π_s=clopenPi is the localized dependency modulePi, defined independently of t_s; the clauses IsIso t_s, π≫G◁t=η, G_s π=u_s G_s, G_c π=0 and the termwise moduleOpenToP normalization match the node. Coefficient naturality uses only canonical maps (∃!-pinned push comparison, its mates, ScalarData transposes); mate directions and square types checked. Universe inherited from the dependency; lean.statement verbatim; 26/26 declarations recorded; only lean differs from live; all proofs sorry. nt_compile --json clean, exit 0, 57.4 s at load ~203 (6.8 s earlier), so landing should be retried at lower load. Advisory: unused proof imports; superfluous IsClosedImmersion on openUnit_isIso; the parent SemilinearProperOpenMatePasting keeps a parallel openToS/pi (downstream, citing it would cycle)."
+ }
 }

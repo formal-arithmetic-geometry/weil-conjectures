@@ -309,5 +309,48 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-9bb9214a0 (reviewer sub-agent of L); spot-checked: First split, not a re-split: there is no repair note, the item is not dropped, and live and side-live both still have it unsplit. The statement is unchanged; two stmt_deps were added (colimit and sheafification), and the statement uses both. There are 0 new nodes and 10 steps of 9014 characters, each under 2000. Every proof_dep is on sk-prop-an's route and no cited node reaches the item, so there is no cycle. All Stacks labels are correct (00W2, 03CL, 03CO, 03CY, 0GMW, 00DK, 00D6, 00D7, 00WJ, 002W, 03CF) and no SGA is cited. Blueprint check: the main-20261015 'Integral twist' paragraph matches steps 1-4 and 'Rational and algebraic closure' matches steps 5-10. I read every step against the cited statements. Step 1 (cofinal reindexing) and step 2 (κ is an iso via the hypothesis a_i, not limit preservation) are correct. Step 3: every hypothesis of lem-pur-inverse-image-compatible-free-tower is met (composite ring transitions, a single common cover, compatible bases), and that lemma is strictly narrower than the item. Step 4 (semilinearity, naturality, independence of bases), step 6 (tensor model via 00DK and 0GMW with O=R a sheaf) and steps 8-10 (varying-ring filtered colimits via representative criteria, colim(P_i#)=(colim P_i)#, stage-pair product test) are correct. Edge cases checked: s=0, nilpotent or 1, singleton I, non-injective transitions, infinite covers. Two citation repairs (FIX). (1) Step 5 never identified T# with R[1/s]; I added def-weil-pbc-ringed-section-localization, a stmt_dep no step cited. (2) Step 7 re-derived inline what the existing route node lem-weil-pbc-localization-inverse-image-coherence states: f^{-1}(R[1/t])≅R'[1/t'] and f^{-1}(M[1/t])≅(f^{-1}M)[1/t'], compatible with a specified identification f^{-1}R≅S. Step 7 now cites it through step 6's tensor model and then transports along a_i and θ_i, keeping the stage-pair test and uniqueness and naturality on coprojections (1528 characters). proof_deps recomputed. The corrected item is in fixes/dag/nodes/sec-smooth-purity/. Advisory: lem-weil-pbc-localization-tensor carries a wrong 00DE label (should be 00DK), as the worker reported; the split_report tool_uses entries are all already on the route and are harmless.; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.Paper.PurAdicLineSystemBaseChange",
+  "declaration": "CategoryTheory.purAdicLineSystem_baseChange",
+  "declarations": [
+   "CategoryTheory.purAdicStride",
+   "CategoryTheory.PurAdicPairDiagram",
+   "CategoryTheory.PurAdicPairDiagram.rings",
+   "CategoryTheory.PurAdicPairDiagram.modules",
+   "CategoryTheory.PurAdicPairDiagram.act",
+   "CategoryTheory.purAdicModuleIso",
+   "CategoryTheory.PurAdicPairComparison",
+   "CategoryTheory.PurAdicLineLimits",
+   "CategoryTheory.PurAdicLineLocallyBased",
+   "CategoryTheory.purAdicPresentedModuleIso",
+   "CategoryTheory.PurAdicLocalization",
+   "CategoryTheory.PurAdicLocalization.ringsUnit",
+   "CategoryTheory.PurAdicLocalization.modulesUnit",
+   "CategoryTheory.PurAdicFilteredColimit",
+   "CategoryTheory.PurAdicFilteredColimit.ringsι",
+   "CategoryTheory.PurAdicFilteredColimit.modulesι",
+   "CategoryTheory.PurAdicCofinalRestriction",
+   "CategoryTheory.PurAdicIntegralNormalized",
+   "CategoryTheory.PurAdicLocalizationNormalized",
+   "CategoryTheory.PurAdicColimitComparison",
+   "CategoryTheory.PurAdicCoefficientComparison",
+   "CategoryTheory.purAdicLineSystem_baseChange"
+  ],
+  "file": "lean/Sheaf/Paper/PurAdicLineSystemBaseChange.lean",
+  "statement": "theorem purAdicLineSystem_baseChange {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D] [EssentiallySmall.{w} C] [EssentiallySmall.{w} D] [HasFiniteLimits C] [HasFiniteLimits D] (J : Precoverage C) (K : Precoverage D) (_hJ : J.IsSiteForCoverings) (_hK : K.IsSiteForCoverings) (U : C ⥤ D) [PreservesFiniteLimits U] (_hUcover : ∀ (X : C) (S : Presieve X), S ∈ J X → S.map U ∈ K (U.obj X)) [U.IsContinuous J.toGrothendieck K.toGrothendieck] (L : Sheaf J.toGrothendieck (Type w) ⥤ Sheaf K.toGrothendieck (Type w)) (_adj : L ⊣ U.sheafPushforwardContinuous (Type w) J.toGrothendieck K.toGrothendieck) [PreservesFiniteLimits L] [HasSheafify J.toGrothendieck AddCommGrpCat.{w}] [J.toGrothendieck.WEqualsLocallyBijective AddCommGrpCat.{w}] [HasSheafify J.toGrothendieck CommRingCat.{w}] [HasSheafify K.toGrothendieck AddCommGrpCat.{w}] [K.toGrothendieck.WEqualsLocallyBijective AddCommGrpCat.{w}] [HasSheafify K.toGrothendieck CommRingCat.{w}] (I : Type w) [PartialOrder I] [Nonempty I] [IsDirected I (· ≤ ·)] (e : I → ℕ) (_he : ∀ i : I, 1 ≤ e i) (A : PurAdicLineLimits.{w} J.toGrothendieck I e) (B : PurAdicLineLimits.{w} K.toGrothendieck I e) (c : PurAdicPairComparison L A.levels B.levels) (a : PurAdicCoefficientComparison L A B c) (_bases : PurAdicLineLocallyBased J A) (s : ∀ i : I, ((A.integral.R.obj i).obj ⋙ forget CommRingCat.{w}).sections) (s' : ∀ i : I, ((B.integral.R.obj i).obj ⋙ forget CommRingCat.{w}).sections) (_hs : ∀ {i j : I} (h : i ≤ j) (V : Cᵒᵖ), (A.integral.R.map (homOfLE h)).hom.app V ((s i).val V) = (s j).val V) (_hsection : ∀ i : I, IsInverseImageSection.{w, uC, vC, uD, vD} (a.integral i) (s i) (s' i)) : PurAdicCofinalRestriction A ∧ PurAdicCofinalRestriction B ∧ ∃ t : PurAdicPairComparison L A.integral B.integral, (∀ i : I, (t.a i).ringUnderlying = (a.integral i).ringUnderlying) ∧ PurAdicIntegralNormalized L A B c t ∧ (∀ (i : I) (f : L.obj (A.integral.modules.obj i) ⟶ B.integral.modules.obj i), (∀ n : ℕ, f ≫ (sheafCompose K.toGrothendieck (forget AddCommGrpCat.{w})).map ((B.pπ i).app (op n)) = L.map ((sheafCompose J.toGrothendieck (forget AddCommGrpCat.{w})).map ((A.pπ i).app (op n))) ≫ (purAdicModuleIso L A.levels B.levels (i, op n) (c.a _) (c.c _)).hom) → f = (purAdicModuleIso L A.integral B.integral i (t.a i) (t.c i)).hom) ∧ ∃ (Q : PurAdicLocalization A.integral s) (Q' : PurAdicLocalization B.integral s') (d : PurAdicPairComparison L Q.pairs Q'.pairs), PurAdicLocalizationNormalized L t Q Q' d ∧ (∀ d' : PurAdicPairComparison L Q.pairs Q'.pairs, PurAdicLocalizationNormalized L t Q Q' d' → ∀ i : I, (d'.a i).ringUnderlying = (d.a i).ringUnderlying ∧ purAdicModuleIso L Q.pairs Q'.pairs i (d'.a i) (d'.c i) = purAdicModuleIso L Q.pairs Q'.pairs i (d.a i) (d.c i)) ∧ ∃ (F : PurAdicFilteredColimit Q.pairs) (G : PurAdicFilteredColimit Q'.pairs) (z : PurAdicColimitComparison L d F G), ∀ z' : PurAdicColimitComparison L d F G, z'.a.ringUnderlying = z.a.ringUnderlying ∧ purAdicPresentedModuleIso F.M G.M F.identify G.identify z'.a z'.c = purAdicPresentedModuleIso F.M G.M F.identify G.identify z.a z.c",
+  "branch": "newtargets-dag",
+  "by": "Q19",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Ring/module pair diagrams, chosen universal cones and cocones, and normalized comparisons package exactly the item. Positive level n+1 is represented by n : ℕ; site object, morphism and coefficient universes remain independent. AlgebraicInverseImage fixes the transported operations. Localizations and filtered colimits are existential conclusions, not extra hypotheses; no datum is sorry."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5674d1ae8",
+  "group": "Q19",
+  "result": "pass",
+  "note": "Node unchanged except lean; lean.statement verbatim; all 22 declarations present; single sorry in the item theorem. Checked every hypothesis and conclusion against the node and source: sites/IsSiteForCoverings, L via adjunction to the continuous pushforward, I nonempty directed in Type w, strides e≥1 with n=level n+1, full ring towers with limits, a_{i,m}/a_i projection equations, levels pair diagram on I×ℕᵒᵖ tied to stride by subsequence, c pair comparison via graph-normalized AlgebraicInverseImage, one cover per i with compatible slice bases (t_n b_{n+1}=b_n ρ_n), M_i limits with projection_smul, compatible s_i and s'=a_i(Ls_i). Conclusions: cofinal restriction with inverse formula; θ normalized on projections and unique (basis independence), natural; localizations pinned to ringedLocalizationRingOfUniverses/scalarLocalization with units, d normalized and unique; filtered colimits with IsColimit and the [r_i][m_j]=[r_k m_k] formula; z normalized on coprojections and unique. No hollow defs, no free arrows; redundant but derivable hypotheses (PreservesFiniteLimits L, IsContinuous, integral_natural) are advisory; public import Functor.OfSequence is unused (advisory). Compile: the unchanged module timed out at 60 s four times at load ~210-243; a copy with genInjectivity/genSizeOfSpec/linters off compiled clean in 57.3 s; the gen-only copy also timed out, so no speed-up was shown and no FIX is given; worker recorded 29 s clean compiles and a passing dry run. Land at lower load."
+ }
 }

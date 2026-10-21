@@ -166,5 +166,23 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NE-d7ee75696 (reviewer sub-agent of L); spot-checked: I read the item and all five steps in full. The delivery is one commit with only the item and its report: no new nodes, no unit edits, statement unchanged. The base proof was empty (an imported statement-only node from the split of lemma-weil-pbc-perfect-projection-formula), so no re-split note applies. Statement checked: a complex supported in [a,b] whose terms Q(C^q[0]) lie in a strictly full S closed under 0, isomorphisms, shifts and third vertices has Q(C) in S. It is true, and the subcategory notion is defined inline. Small cases tested: a>b, a=b, a two-term complex with a nonzero differential, gaps of zero terms, negative degrees. Source checked: Stacks derived.tex Tag 0FCP = lemma-K-bounded-derived (tags line 19189, label at line 9077); the stupid-truncation triangles and induction are at about lines 9112-9128, and the item takes only the construction, not the K_0 claim. Step 1: T_n is a complex, T_a = C, T_{b+1} = 0, and the empty interval is handled. Step 2: i_n and p_n commute with the differentials at the cut, and every degreewise sequence is exact. Step 3: the hypotheses of lem-weil-pbc-complex-ses-triangle (abelian A, D(A), degreewise short exact sequence) are exactly met. Step 4: with (K[1])^r = K^{r+1}, E_n is isomorphic to C^n[0][-n], and Q commutes with shifts per the definition node. Step 5: two TR2 rotations give the triangle E_n, T_{n+1}[1], T_n[1]; the index range k <= b-a gives n in [a,b], and the endpoints are correct. Duplicate search over DAG statements (stupid truncation, triangulated/thick subcategory, generated, each/every term) found no duplicate; the existing stupid-truncation nodes are about décalage and filtrations. This also suits the parent's use for thick loci. No SGA is used. Minor: the report mentions citations.json and searches.jsonl, which are not in the commit. No fixes."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DerivedCategory.BoundedComplexTriangulatedDevissage",
+  "declaration": "CategoryTheory.bounded_complex_mem_triangulated",
+  "statement": "theorem bounded_complex_mem_triangulated {C : Type u} [Category.{v} C] [Abelian C] [HasDerivedCategory.{w} C] (S : ObjectProperty (DerivedCategory C)) [S.IsTriangulated] [S.IsClosedUnderIsomorphisms] (K : CochainComplex C ℤ) (a b : ℤ) (hK : ∀ q : ℤ, q < a ∨ b < q → IsZero (K.X q)) (hS : ∀ q : ℤ, a ≤ q → q ≤ b → S ((DerivedCategory.singleFunctor C 0).obj (K.X q))) : S (DerivedCategory.Q.obj K)",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-21",
+  "existing": false,
+  "file": "lean/Sheaf/CategoryTheory/DerivedCategory/BoundedComplexTriangulatedDevissage.lean"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4552f9327",
+  "group": "NH",
+  "result": "pass",
+  "note": "The item node only adds its lean record; one new module, CategoryTheory.bounded_complex_mem_triangulated, whose statement matches the file verbatim. H3: Abelian C / HasDerivedCategory.{w} with u, v, w independent; S has IsTriangulated (ContainsZero, ℤ-shift stability, middle-vertex closure up to isoClosure) plus IsClosedUnderIsomorphisms, equivalent to the node's third-vertex closure by rotation; hK is termwise IsZero outside [a,b] with no a≤b binder, so the empty interval is kept; hS uses singleFunctor C 0 = Q∘single 0; the conclusion is S (Q.obj K). No retract, flatness or cohomology assumptions. Source: Stacks 0FCP derived.tex:9077, stupid-truncation triangles plus induction, without the K0 claim; the docstring carries the node's 5 steps. H4: no public duplicate; a private bounded_mem in PerfectRingClassicalGenerator is ring-specific and assumes retracts (advisory). H9: the plain ShortExact import is the lean.module of proof dependency lem-weil-pbc-complex-ses-triangle, required by brief §104; longest line 89; a single sorry. nt_compile --json clean (3.8 s, exit 0)."
+ }
 }

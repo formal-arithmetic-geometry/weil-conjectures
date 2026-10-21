@@ -16,7 +16,11 @@
   "def-weil-sheaf-of-modules-category",
   "def-weil-abstract-derived-category",
   "def-weil-pbc-locally-derived-ringed-ideal-complete",
-  "lem-pur-derived-change-of-rings"
+  "lem-pur-derived-change-of-rings",
+  "def-sfb-constant-completion-coefficient-data",
+  "def-sfb-site-derived-constant-module-functor",
+  "def-weil-proetale-inverse-image",
+  "def-sfb-quotient-kernel-completeness"
  ],
  "proof": [
   {
@@ -283,5 +287,37 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q134-e6ead4840 (reviewer sub-agent of L); spot-checked: I read the whole item. The 7-step split creates no new node and keeps the statement and stmt_deps unchanged. It matches the reverse direction of Bhatt–Scholze Prop 6.6.11 (via Lemma 6.5.8 and the residue of the constant model). Step checks: (1) a finite projective P^i is the image of an idempotent e_i, so M^i ≅ lim (P^i/I^n P^i)_T by sectionwise limits and exact constant sheaves. (2) lem-weil-pbc-torsion-limit-sheaf-completeness covers bounded complexes of such limits, and lem-weil-pbc-restriction-local-completeness (an iff with no hypotheses; its JB is the item's IB) gives locally derived IB-complete. (3) The quotient clause of the constant-completion equivalence at n=1 gives B/IB = k. (4) Summands of B^r are flat, the complex is bounded above so it is K-flat, and derived change of rings is computed on K-flat complexes, so no Tor hypothesis is needed. (5) The chain isomorphism holds degreewise through e_i and is natural in d. (6) The constant functor is exact and each term is a summand of k^r, so the cohomology is finite-dimensional and vanishes outside [a,b]. (7) Weakly étale localization, restriction commuting with tensor, and restriction preserving K-flat complexes give the slice case. Stacks tags 093J, 093M, 06YQ, 0E8K, 03EL, 099Q and 099C were checked in the tag table. Edge cases checked: Z_(p); k[e]/e^2 with I=(e); a field with I=0; the zero complex; an infinite residue field. The statement gives exactly what parent lem-sfb-adic-stratified-perfect uses in its steps 4 and 5. The nine generic module-sheaf tool_uses are accepted. Live and side-live still have the item unsplit. Maintainer note: the item's source.place, and also lem-pc-bounded-above-flat-kflat-site, cite Tag 06YS for lemma-bounded-flat-K-flat; the correct tag is 06YQ. Both are maintainer-owned fields, so I did not fix them."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.Paper.AdicPerfectModelCompleteReduction",
+  "declaration": "AlgebraicGeometry.Scheme.adicPerfectModel_complete_reduction",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.AdicPerfectModel.constantComplex",
+   "AlgebraicGeometry.Scheme.AdicPerfectModel.model",
+   "AlgebraicGeometry.Scheme.AdicPerfectModel.algebraicResidue",
+   "AlgebraicGeometry.Scheme.AdicPerfectModel.constantResidue",
+   "AlgebraicGeometry.Scheme.AdicPerfectModel.overComplex",
+   "AlgebraicGeometry.Scheme.AdicPerfectModel.cohomology",
+   "AlgebraicGeometry.Scheme.AdicPerfectModel.constantSection",
+   "AlgebraicGeometry.Scheme.AdicPerfectModel.IsResidueComparison",
+   "AlgebraicGeometry.Scheme.AdicPerfectModel.IsSliceResidueComparison",
+   "AlgebraicGeometry.Scheme.AdicPerfectModel.HasCompleteResidueCalculation",
+   "AlgebraicGeometry.Scheme.adicPerfectModel_complete_reduction"
+  ],
+  "file": "lean/Sheaf/Paper/AdicPerfectModelCompleteReduction.lean",
+  "statement": "theorem adicPerfectModel_complete_reduction (T : Scheme.{u}) (A : Type (max v (u + 1))) [CommRing A] [IsNoetherianRing A] (I : Ideal A) (_hI : I.IsMaximal) (P : CochainComplex (ModuleCat.{max v (u + 1)} A) ℤ) (a b : ℤ) (_hbounded : ∀ q : ℤ, q < a ∨ b < q → IsZero (P.X q)) (_hP : ∀ q : ℤ, Module.Finite A (P.X q) ∧ Module.Projective A (P.X q)) : ∃ c : ((ConstantCompletion.change (ConstantCompletion.projection (coefficientProEtaleModelTopology.{u, v} T) A I 0)).mapHomologicalComplex (.up ℤ)).obj (model (coefficientProEtaleModelTopology.{u, v} T) I P) ≅ constantResidue (coefficientProEtaleModelTopology.{u, v} T) I P, IsResidueComparison (coefficientProEtaleModelTopology.{u, v} T) I P c.hom ∧ (∀ q : ℤ, Module.Finite (A ⧸ I ^ (0 + 1)) ((algebraicResidue I P).homology q)) ∧ HasCompleteResidueCalculation (ConstantCompletion.projection (coefficientProEtaleModelTopology.{u, v} T) A I 0) (model (coefficientProEtaleModelTopology.{u, v} T) I P) (constantResidue (coefficientProEtaleModelTopology.{u, v} T) I P) (fun q ↦ (commutativeSiteConstantModuleFunctor (coefficientProEtaleModelTopology.{u, v} T) (A ⧸ I ^ (0 + 1))).obj ((algebraicResidue I P).homology q)) a b c ∧ ∀ U : coefficientProEtaleSiteModel.{u, v} T, ∃ d : ((ConstantCompletion.change (((coefficientProEtaleModelTopology.{u, v} T).overPullback CommRingCat U).map (ConstantCompletion.projection (coefficientProEtaleModelTopology.{u, v} T) A I 0))).mapHomologicalComplex (.up ℤ)).obj ((overComplex (ConstantCompletion.completed (coefficientProEtaleModelTopology.{u, v} T) A I) U).obj (model (coefficientProEtaleModelTopology.{u, v} T) I P)) ≅ (overComplex (ConstantCompletion.finite (coefficientProEtaleModelTopology.{u, v} T) A I 0) U).obj (constantResidue (coefficientProEtaleModelTopology.{u, v} T) I P), IsSliceResidueComparison (coefficientProEtaleModelTopology.{u, v} T) I P U d.hom ∧ HasCompleteResidueCalculation (((coefficientProEtaleModelTopology.{u, v} T).overPullback CommRingCat U).map (ConstantCompletion.projection (coefficientProEtaleModelTopology.{u, v} T) A I 0)) ((overComplex (ConstantCompletion.completed (coefficientProEtaleModelTopology.{u, v} T) A I) U).obj (model (coefficientProEtaleModelTopology.{u, v} T) I P)) ((overComplex (ConstantCompletion.finite (coefficientProEtaleModelTopology.{u, v} T) A I 0) U).obj (constantResidue (coefficientProEtaleModelTopology.{u, v} T) I P)) (fun q ↦ (SheafOfModules.overFunctor (siteModuleRings (ConstantCompletion.finite (coefficientProEtaleModelTopology.{u, v} T) A I 0)) U).obj ((commutativeSiteConstantModuleFunctor (coefficientProEtaleModelTopology.{u, v} T) (A ⧸ I ^ (0 + 1))).obj ((algebraicResidue I P).homology q))) a b d",
+  "branch": "sheaf-dag",
+  "by": "NY",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The coefficient-sized AsSmall model is the same small pro-etale site, with independent scheme and coefficient universes. The recorded exact constant realization, ConstantCompletion inverse limit, ordinary change and universal derived counit are used directly. Local completeness is the recorded internal-Hom predicate at the actual residue-projection kernel, which is IB by the Noetherian quotient identification. The canonical global and slice chain isomorphisms are fixed by their local tensor-generator formulas. Helpers only name actual complexes, restrictions, sections and the clauses of this node; no chosen module data, arbitrary comparison map, finite residue set, regularity or quotient-perfectness assumption occurs."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2103561bd",
+  "group": "NY",
+  "result": "pass",
+  "note": "Re-delivery after the H2 RETURN of 83b51364: the Lean module is byte-identical (sha 646fb13e), and its clause-by-clause faithfulness was already confirmed. The item node changes only stmt_deps (plus refreshed lean_audit): theorem lem-weil-pbc-constant-completion-equivalence is replaced by the new existing:true def-sfb-constant-completion-coefficient-data (14 ConstantCompletion declarations, checked against side-live source; derivedExtension is a choice of the derived-change-of-rings data, not of equivalence/flat_and_quotients; signature verbatim; 7 stmt_deps present and bracketed; tags 093M/06YY OK) and by the landed def-sfb-quotient-kernel-completeness; the theorem stays in proof_deps. nt_compile --json is clean, exit 0, 45.3 s under load. Worker dry run OK. Advisory: coefficientProEtaleSiteModel/ModelTopology are not listed in def-weil-proetale-inverse-image's declarations; the source.place typo 06YS→06YQ remains."
+ }
 }

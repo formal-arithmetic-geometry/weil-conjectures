@@ -12,7 +12,9 @@
   "def-weil-size-convention",
   "def-weil-sheaf-of-modules-category",
   "def-pur-sheaf-tensor-product",
-  "def-weil-abstract-derived-category"
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-algebraic-inverse-image",
+  "def-weil-pbc-ringed-tensor-section-calculus"
  ],
  "proof": [
   {
@@ -208,5 +210,30 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q73-00f5070a3 (reviewer sub-agent of L); spot-checked: PASS, no fixes written. The delivery is one commit with no new nodes. The item statement is byte-identical to live side-live, and the item is not in route-pivot-dropped.txt. Live it is still unsplit, so no other group has superseded it. Its parent det-prop-scalar-six-pullback (Q20 re-split) cites it at step 8, and the item has no re-split note of its own. Source checked: blueprint main-20261015 det-prop-scalar-six-pullback.proof.md (3), last sentence (scalar associativity compatibility), supported by Stacks 03EK/03EL; no SGA is used. Step 1: lem-weil-pbc-algebraic-inverse-image-tensor-comparison is applied by its statement to the r-modules s_Y and M. The pure-pairing normalization chi F(p^Y)=p^X identifies the specified coequalizer comparison through the section-calculus uniqueness, and s_X-linearity follows by bilinear universality. Step 2: I re-derived the B and inner A balances for t_V and for its inverse, and both composites are identities; elementary. Step 3: injectivity via the adjunct f_*d after eta_D, which is C_Y-linear by eta naturality and the ringed-topos f_* action. The two extension/restriction units 1 tensor - and eta naturality give d = e; no points and no surjectivity of pure tensors are used. Step 4: both routes send F(w_Y) to u^X_AC. Route e goes through chi^BC at B tensor_A M, then E_BC(chi^AB), then t_X, and the generalized-triple check fixes the orientation. Step 5: naturality, then termwise on complexes by def-weil-abstract-derived-category; no signs. Edge cases checked: h=id, identity coefficient arrows, M=0, zero rings, the nonflat tower Z->Z/4->Z/2 on a point. Duplicate search (reassociation, scalar tower, extendScalarsComp, inverse-image tensor) found none; the closest hits were def-sfb-modobj-extend-restrict-adjunction, lem-sbc-pullback-comparison-comp and lem-sfb-pullback-from-point-comp-monoidal. Accepted tool_use: the off-unit lem-weil-pbc-algebraic-inverse-image-tensor-comparison, recorded in split_report only."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ScalarInverseImageTowerDiagram",
+  "declaration": "SheafOfModules.RingedTensor.scalar_inverseImage_tower_diagram",
+  "declarations": [
+   "SheafOfModules.RingedTensor.scalarPure",
+   "SheafOfModules.RingedTensor.IsScalarReassociation",
+   "SheafOfModules.RingedTensor.IsScalarInverseImageComparison",
+   "SheafOfModules.RingedTensor.scalar_inverseImage_tower_diagram"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ScalarInverseImageTowerDiagram.lean",
+  "statement": "theorem scalar_inverseImage_tower_diagram {SY SX : Type u} [SmallCategory SY] [SmallCategory SX] {JY : GrothendieckTopology SY} {JX : GrothendieckTopology SX} (F : Sheaf JY (Type u) ⥤ Sheaf JX (Type u)) (V : Sheaf JX (Type u) ⥤ Sheaf JY (Type u)) (_adj : F ⊣ V) [PreservesFiniteLimits F] {AY BY CY : Sheaf JY CommRingCat.{u}} {AX BX CX : Sheaf JX CommRingCat.{u}} (aY : AY ⟶ BY) (bY : BY ⟶ CY) (aX : AX ⟶ BX) (bX : BX ⟶ CX) (IA : AlgebraicInverseImage F AY AX) (IB : AlgebraicInverseImage F BY BX) (IC : AlgebraicInverseImage F CY CX) (_ha : F.map ((sheafCompose JY (CategoryTheory.forget CommRingCat)).map aY) ≫ IB.ringUnderlying.hom = IA.ringUnderlying.hom ≫ (sheafCompose JX (CategoryTheory.forget CommRingCat)).map aX) (_hb : F.map ((sheafCompose JY (CategoryTheory.forget CommRingCat)).map bY) ≫ IC.ringUnderlying.hom = IB.ringUnderlying.hom ≫ (sheafCompose JX (CategoryTheory.forget CommRingCat)).map bX) : ∃ (tY : tensorFunctor aY ⋙ tensorFunctor bY ≅ tensorFunctor (aY ≫ bY)) (tX : tensorFunctor aX ⋙ tensorFunctor bX ≅ tensorFunctor (aX ≫ bX)) (χAB : tensorFunctor aY ⋙ IB.modules ≅ IA.modules ⋙ tensorFunctor aX) (χBC : tensorFunctor bY ⋙ IC.modules ≅ IB.modules ⋙ tensorFunctor bX) (χAC : tensorFunctor (aY ≫ bY) ⋙ IC.modules ≅ IA.modules ⋙ tensorFunctor (aX ≫ bX)), IsScalarReassociation aY bY tY ∧ IsScalarReassociation aX bX tX ∧ IsScalarInverseImageComparison F IA IB aY aX χAB ∧ IsScalarInverseImageComparison F IB IC bY bX χBC ∧ IsScalarInverseImageComparison F IA IC (aY ≫ bY) (aX ≫ bX) χAC ∧ (Functor.whiskerRight tY.hom IC.modules ≫ χAC.hom = (Functor.associator (tensorFunctor aY) (tensorFunctor bY) IC.modules).hom ≫ Functor.whiskerLeft (tensorFunctor aY) χBC.hom ≫ (Functor.associator (tensorFunctor aY) IB.modules (tensorFunctor bX)).inv ≫ Functor.whiskerRight χAB.hom (tensorFunctor bX) ≫ (Functor.associator IA.modules (tensorFunctor aX) (tensorFunctor bX)).hom ≫ Functor.whiskerLeft IA.modules tX.hom) ∧ ∀ (K : CochainComplex (SheafOfModules.{u} (ringSheaf AY)) ℤ) (n : ℤ), IC.modules.map (tY.hom.app (K.X n)) ≫ χAC.hom.app (K.X n) = χBC.hom.app ((tensorFunctor aY).obj (K.X n)) ≫ (tensorFunctor bX).map (χAB.hom.app (K.X n)) ≫ tX.hom.app (IA.modules.obj (K.X n))",
+  "branch": "sheaf-dag",
+  "by": "N0",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The helper definitions specify the actual sheafified pure scalar pairing and normalization of the comparisons owned by this lemma. The isomorphisms in the conclusion are characterized on these balanced quotient maps; their existence is part of the conclusion, never an arbitrary comparison hypothesis."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-76f312644",
+  "group": "N0",
+  "result": "pass",
+  "note": "Identical re-delivery of 2ac69ad393 (module byte-identical; node records differ only in lean_audit). The previous landing return was a published-build fault (missing Mathlib oleans, now present). Clause-by-clause match: F⊣V + PreservesFiniteLimits on u-small sites; rings and maps pinned by AlgebraicInverseImage plus _ha/_hb; χ and t pinned uniquely by real pure-tensor formulas (scalarPure = sheafification unit on s⊗m); the square has the node's order and directions; the termwise clause covers all n∈ℤ. Added stmt_deps are landed proof_deps used in the signature; lean.statement verbatim; item not dropped, no repair note. Edge cases: id, identity arrows, M=0, zero rings, empty site, Z→Z/4→Z/2. nt_compile --json clean in 36.5 s. Advisory: unused RingedToposMorphism import, plain proof import, same-universe AlgebraicInverseImage."
+ }
 }

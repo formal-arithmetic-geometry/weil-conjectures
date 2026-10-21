@@ -195,5 +195,33 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-d286c576e (reviewer sub-agent of L); spot-checked: I read the whole delivery and changed nothing. The item statement matches the main-20261015 _section.md except for one replacement: [sk-def-sfb-finite-pushforward-pullback] becomes [def-sfb-finite-lower-star] and [def-sfb-finite-upper-star]. That replacement is correct. No DAG node with the old id exists (in the blueprint it is the topos-level unit, and its realized field is empty), and the two definition nodes define exactly the g_* and g^* on Sh(-_proet,A) that the item uses. The coefficient category is unchanged: Sh(X_proet,A), finite-coefficient layer A. This is not a target node and it has no base-change morphism. Steps 1-5 follow the blueprint's one proof paragraph. Step 1: Sh is Grothendieck by the new node; g_* is a right adjoint, so it is additive; lem-sfb-grothendieck-k-injective supplies K-injective resolutions; the right-derived clause of sk-def-sfb-derived-categories, read in its current statement, then gives Rg_*. Step 2: I recomputed the truncation tau_{>=a}; the step then uses three Mathlib leaves (enough injectives, bounded-below injective resolution, bounded-below injective implies K-injective), and g_*I stays bounded below, so R^+g_* is the restriction of Rg_*. Steps 3-5 cite the five component nodes of this unit for items 1, 2 and 3. Their hypotheses are the item's monoidal hypotheses, and the blueprint proof itself says 'Item k is [...]', so this is not a relabelling. The route is valid: lem-sfb-finite-upper-star-exact belongs to sk-def-sfb-finite-pushforward-pullback, which the unit reaches transitively, and the other off-unit nodes are Mathlib leaves. No tool_uses are needed and no SGA source is cited. tools/review_split.py passes on the snapshot. The new node lem-sfb-proetale-sheaves-grothendieck is statement-only and self-contained, and it is true: on a small site with a complete AB5 A, the plus construction gives an exact sheafification, and the sheafified a(h_U tensor G) give a generator. I tested it on the empty scheme and on A=0. It is smaller than the item and does not restate any clause of it. I searched the DAG for duplicates and found none: lem-weil-pbc-sheaf-tensor-closed needs a monoidal A, and the other candidates concern Ab, module sheaves or diagrams. The Mathlib candidate is correctly recorded as conditional: Sheaf.lean:72-85 requires HasSheafify, and Mathlib has no such instance for arbitrary Grothendieck A."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.OpenLowerShriek",
+  "declaration": "AlgebraicGeometry.ProEtale.derivedOpenImmersionLowerShriekUpperStarAdjunctionPlus",
+  "declarations": [
+   "CategoryTheory.Functor.rightDerivedFunctor",
+   "CategoryTheory.Functor.rightDerivedFunctorPlus",
+   "CategoryTheory.Functor.leftDerivedFunctor",
+   "AlgebraicGeometry.ProEtale.leftDerivedUpperStarIsoMapDerivedCategory",
+   "AlgebraicGeometry.ProEtale.derivedUpperStarLowerStarAdjunction",
+   "AlgebraicGeometry.ProEtale.derivedUpperStarLowerStarAdjunctionPlus",
+   "AlgebraicGeometry.ProEtale.derivedOpenImmersionLowerShriekUpperStarAdjunction",
+   "AlgebraicGeometry.ProEtale.derivedOpenImmersionLowerShriekUpperStarAdjunctionPlus"
+  ],
+  "statement": "noncomputable def ProEtale.derivedOpenImmersionLowerShriekUpperStarAdjunctionPlus :\n    D+((j)_!open[A]) ⊣ D+((j)^*[A])",
+  "branch": "slopmaster2",
+  "by": "Q85",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Existing finite-coefficient package, rather than a new definition: the primary module publicly imports UpperLowerStar, and its import closure exports the three generic derived-functor definitions and all five component declarations listed here. R(lowerStar A g) is defined for arbitrary Grothendieck abelian A, without monoidal hypotheses; its Plus version is computed on bounded below injective resolutions. The left-derived pullback is the generic K-flat construction. The additional assumptions are exactly MonoidalCategory, MonoidalPreadditive, SymmetricCategory, MonoidalClosed and Abelian.HasFunctorialFlatResolution on A. The five named components give clauses 1, 2 (unbounded and Plus), and 3 (unbounded and Plus). Sheaf values have Hom universe u+1 over Scheme.{u}, as in the recorded dependency interfaces. This is a statement attachment, not a claim of sorry-free proof closure."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2cdc73380",
+  "group": "Q85",
+  "result": "pass",
+  "note": "existing:true attachment to the finite-coefficient derived package (OpenLowerShriek + UpperLowerStar); the source front matter lists exactly the five component declarations; lean.statement verbatim at OpenLowerShriek.lean:80-81; hypotheses match exactly (Grothendieck A with Category.{u+1}, arbitrary g; R and R+ of lowerStar without monoidal hypotheses; Monoidal+MonoidalPreadditive+Symmetric+MonoidalClosed+HasFunctorialFlatResolution for L and clauses 1-3); clauses 1/2/2+/3/3+ checked by a scratch nt_compile --json probe with explicit types (clean, 16.9 s), axioms standard only (sorry-free); component declarations are the ones the lead attached to the pullback-iso/adjunction-plus/extension-by-zero(-plus) nodes, so no duplicate notion; only the item's lean field changed; no repair note."
+ }
 }

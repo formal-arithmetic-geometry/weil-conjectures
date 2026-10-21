@@ -20,7 +20,8 @@
   "lem-pe-internal-section-tensor-comparison",
   "def-sfb-finite-upper-star-monoidal",
   "def-sfb-module-upper-star",
-  "def-weil-pbc-canonical-ringed-tensor-comparison"
+  "def-weil-pbc-canonical-ringed-tensor-comparison",
+  "def-pd-proetale-section-module-functors"
  ],
  "proof": [
   {
@@ -255,5 +256,35 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q95-ff272e570 (reviewer sub-agent of L); spot-checked: Read the item, all 20 cited statements, the parent, the sibling citer, def-pd-proetale-section-module-functors and Stacks 03EL. The statement and stmt_deps are byte-identical to the side-live base, and the delivery has no new nodes. The item is not in the dropped list, has no repair note, has no earlier run, and closes no cycle (its only citer is lem-pd-section-derived-tensor-normalization). Step 2: checked against lean FiniteCoefficient/UpperLowerStar/Defs.lean:160 and Mathlib/CategoryTheory/Sites/Monoidal.lean:198. The actual lax structure of lowerStar is the counit transport of a∘r∘U, so lem-sfb-sheaf-pushforward-generator-comparison applies to it. Balancing ((ra)⊗b, a⊗(rb) ↦ c(r)(a⊗b)) and the uniqueness from lem-pd-ringed-direct-image-pairing-lax hold. Step 3: re-derived that the composite of Ext and mapMod structures equals the composite-adjunction mate: Φ_Ext(D) = m_Res(ins⊗ins)d̄ and G(d)v = m_G(v⊗v) give m_tot(u⊗u). Step 4: checked every hypothesis of lem-pd-monoidal-adjunction-equivalence-transport and lem-pd-ringed-tensor-adjunction-mate. Steps 5–6: inverse formulas, balancing (uses commutativity of S), associativity and both unit diagrams verified on generators; tested f=id, zero modules, zero ring, regular modules and the empty scheme. No duplicate found (def-pd-proetale-section-module-functors only defines the mates). Accepted all four declared tool_uses as generic. FIX: Step 1 derived the unit u_A = geometric insertion then 1⊗a without citing the composite module adjunction def-sfb-module-upper-lower-adjunction (only Step 3 did). I added one sentence and the citation to Step 1; proof_deps is unchanged.; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.Paper.SectionOrdinaryOplaxNormalization",
+  "declaration": "AlgebraicGeometry.ProEtale.ModuleRingedComparison.section_ordinary_oplax_normalization",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.normalizationInverseImage",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.normalizationInverseImageTensor",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.normalizationScalarTensor",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.normalizationInternalTensor",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.normalizationInternalTensorInv",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.normalizationInternalUnit",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.normalizationSectionTensor",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.normalizationSectionUnit",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.section_ordinary_oplax_normalization"
+  ],
+  "file": "lean/Sheaf/Paper/SectionOrdinaryOplaxNormalization.lean",
+  "statement": "theorem section_ordinary_oplax_normalization {X Y : Scheme.{u}} (f : X ⟶ Y) : (∀ M N : internalModules Λ Y, (equivalence Λ X).functor.map (normalizationInternalTensor Λ f M N) ≫ (ordinaryTensorComparison Λ X ((CondensedRing.upperStar Λ f).obj M) ((CondensedRing.upperStar Λ f).obj N)).hom ≫ ((pullComparison Λ f).hom.app M ⊗ₘ (pullComparison Λ f).hom.app N) = (pullComparison Λ f).hom.app (M ⊗ N) ≫ (pullback Λ f).map (ordinaryTensorComparison Λ Y M N).hom ≫ normalizationSectionTensor Λ f ((equivalence Λ Y).functor.obj M) ((equivalence Λ Y).functor.obj N)) ∧ ((equivalence Λ X).functor.map (normalizationInternalUnit Λ f) ≫ (ordinaryUnitComparison Λ X).hom = (pullComparison Λ f).hom.app (𝟙_ (internalModules Λ Y)) ≫ (pullback Λ f).map (ordinaryUnitComparison Λ Y).hom ≫ normalizationSectionUnit Λ f) ∧ (∀ (M N : internalModules Λ Y) (W : X.ProEtᵒᵖ) (s : (ring Λ X).obj.obj W) (m : ((normalizationInverseImage Λ f).obj M).X.obj.obj W) (n : ((normalizationInverseImage Λ f).obj N).X.obj.obj W), ((normalizationInternalTensor Λ f M N).hom.hom.app W) (normalizationScalarTensor Λ f (M ⊗ N) W s (normalizationInverseImageTensor Λ f M N W m n)) = internalPureTensor Λ X _ _ W (normalizationScalarTensor Λ f M W s m) (normalizationScalarTensor Λ f N W 1 n)) ∧ (∀ (M N : internalModules Λ Y) (W : X.ProEtᵒᵖ) (s t : (ring Λ X).obj.obj W) (m : ((normalizationInverseImage Λ f).obj M).X.obj.obj W) (n : ((normalizationInverseImage Λ f).obj N).X.obj.obj W), ((normalizationInternalTensorInv Λ f M N).hom.hom.app W) (internalPureTensor Λ X _ _ W (normalizationScalarTensor Λ f M W s m) (normalizationScalarTensor Λ f N W t n)) = normalizationScalarTensor Λ f (M ⊗ N) W (s * t) (normalizationInverseImageTensor Λ f M N W m n)) ∧ (∀ (W : X.ProEtᵒᵖ) (s : (ring Λ X).obj.obj W) (r : ((ProEtale.upperStar Ab.{u + 1} f).obj (condensedRingObj Λ Y)).obj.obj W), ((normalizationInternalUnit Λ f).hom.hom.app W) (normalizationScalarTensor Λ f (𝟙_ (internalModules Λ Y)) W s r) = s * (@id ((ring Λ X).obj.obj W) ((condensedPullbackHom Λ f).hom.app W r))) ∧ (∀ M N P : modules Λ Y, (pullback Λ f).map (α_ M N P).hom ≫ normalizationSectionTensor Λ f M (N ⊗ P) ≫ (pullback Λ f).obj M ◁ normalizationSectionTensor Λ f N P = normalizationSectionTensor Λ f (M ⊗ N) P ≫ normalizationSectionTensor Λ f M N ▷ (pullback Λ f).obj P ≫ (α_ _ _ _).hom) ∧ (∀ M : modules Λ Y, normalizationSectionTensor Λ f (𝟙_ (modules Λ Y)) M ≫ normalizationSectionUnit Λ f ▷ (pullback Λ f).obj M ≫ (λ_ _).hom = (pullback Λ f).map (λ_ M).hom) ∧ (∀ M : modules Λ Y, normalizationSectionTensor Λ f M (𝟙_ (modules Λ Y)) ≫ (pullback Λ f).obj M ◁ normalizationSectionUnit Λ f ≫ (ρ_ _).hom = (pullback Λ f).map (ρ_ M).hom)",
+  "branch": "newtargets-dag",
+  "by": "Q01",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Actual composite internal oplax structure, not a replacement adjunction. Gives transport to the specified section adjunction mate, both scalar-extension generator formulas on every source-site object, unit multiplication, and all three constraint diagrams. Helper generators use the existing mapMod tensorator and extendπ; normalized ordinary equivalence comparisons are reused from def-pd-proetale-section-module-functors."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dcc0499d6",
+  "group": "Q01",
+  "result": "pass",
+  "note": "Read the item, all stmt_dep Lean (SectionModuleOperationsData, ProEtaleSectionModuleFunctors pullOplax/pushLax/ordinary comparisons, CondensedRing.upperStar/monoidal_upperStar, CanonicalRingedTensorComparison) and Stacks 03EL. The actual composite internal δ/η is transported via pullComparison and the normalized ordinary comparisons to the pullOplax mate (non-tautological); forward formula on all local inverse-image sections, inverse via the strong μ, unit s·α_f(r). Only lean changed, plus the allowed landed stmt_dep def-pd-proetale-section-module-functors (no cycle); statement verbatim; docstrings OK; sorry only. nt_compile --json clean at 53.2 s (60 s limit, under load). Advisories: conjuncts 6–8 are oplax coherence fields (the node clause is itself redundant); CanonicalRingedTensorComparison is single-universe, so its normalization is stated directly and faithfully; two proof-only imports."
+ }
 }

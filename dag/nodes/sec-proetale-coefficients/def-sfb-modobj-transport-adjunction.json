@@ -260,5 +260,31 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NL-41bdb3f39 (reviewer sub-agent of L); spot-checked: Read the mathematics in full. All five steps and the coherence leaf agree with the current blueprint and cited Mathlib/Stacks sources; small-case checks pass, with no duplicate or dependency cycle. Completed omitted new-node metadata in fixes/dag/nodes/sec-proetale-coefficients/lem-sfb-monoidal-adjunction-unit-counit.json. Detailed checks are in review.md.; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "WeilConjectures.CategoryTheory.ModuleObjects.MapMod",
+  "declaration": "CategoryTheory.Adjunction.mapModAdjunction",
+  "declarations": [
+   "CategoryTheory.Adjunction.unitAlgHom",
+   "CategoryTheory.Adjunction.isMonHom_unitAlgHom",
+   "CategoryTheory.Adjunction.mapMod_homEquiv_smul_hom",
+   "CategoryTheory.Adjunction.mapMod_homEquiv_symm_smul_hom",
+   "CategoryTheory.Adjunction.mapModAdjunction"
+  ],
+  "statement": "def mapModAdjunction :\n    F.mapMod R ⊣ G.mapMod (F.obj R) ⋙ Mod.comap (adj.unitAlgHom R)",
+  "branch": "slopmaster2",
+  "by": "Q45",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Exact existing construction in the live upstream source, MapMod.lean:201-286. The only hypotheses are two arbitrary monoidal categories, F strong monoidal, G lax monoidal, adj : F ⊣ G with adj.IsMonoidal, and R a monoid object. unitAlgHom is literally adj.unit.app R; isMonHom_unitAlgHom uses the twice-transported monoid structure. mapModAdjunction has the exact functors in the node and its toFun/invFun use adj.homEquiv and its inverse on underlying maps. No module or duplicate definition is introduced. Repair of returned head fb0a10157ad7: the review override is a lean-record JSON object, not a whole existing-node JSON. The report includes the accepted override filename and payload; the sandbox review-fixes directory contains only accepted fix artifacts.",
+  "fixed_by": "NT-stage2-cc-de539549f"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-de539549f",
+  "group": "Q45",
+  "result": "fix",
+  "note": "Re-delivery of fb0a10157 (its FIX was refused only for the whole-node file format). existing:true attachment to CategoryTheory.Adjunction.mapModAdjunction (MapMod.lean:276; published = side-live). Matches the node: independent universes; hypotheses exactly F.Monoidal, G.LaxMonoidal, adj.IsMonoidal, MonObj R; unitAlgHom = adj.unit.app R (rfl) with the F-then-G transported monoid structure; functors mapMod(F) and Mod.comap(unit) after mapMod(G), using the recorded dependency declarations; hom bijection = adj.homEquiv on underlying maps (probe-proved). nt_compile probe clean in 13.7 s; axioms propext/choice/Quot.sound. No duplicate attachment, not dropped, report sections present. FIX: fixes/def-sfb-modobj-transport-adjunction.lean-record.json overrides only statement to 'def mapModAdjunction :\\n    F.mapMod R ⊣ G.mapMod (F.obj R) ⋙ Mod.comap (adj.unitAlgHom R)' (drops 'noncomputable'); locally refit_record gives no notes/refusals and check_existing gives ([],[])."
+ }
 }

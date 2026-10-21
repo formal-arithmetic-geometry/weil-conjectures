@@ -15,7 +15,11 @@
   "def-pur-localized-ringed-site",
   "def-weil-pbc-sites-and-cohomology",
   "def-weil-pbc-inverse-image",
-  "def-weil-proetale-inverse-image"
+  "def-weil-proetale-inverse-image",
+  "def-per-site-comparison-pullback-data",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "def-pe-proetale-object-restriction-comparison-data"
  ],
  "proof": [
   {
@@ -229,5 +233,23 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-897df58de (reviewer sub-agent of L); spot-checked: I read every step in full and found no faults. Delivery shape: one commit on db59bdc; no new nodes. The statement and stmt_deps are byte-identical to the live copy, where the item is still unsplit. The item is not on any dropped list and has no repair note, so the re-split rules do not apply; it cites no SGA. Step 1: the clause (2)/(3) composition and cancellation leaf, plus the covering and restriction definitions, give W_et = X_et/W; the elementary mark is justified. Step 2: the étale-to-weakly-étale inclusion of def-weil-pbc-site-comparison-morphism makes v an object of X_proet; clause (1) of lem-weil-proetale-weakly-etale-localization gives the pro-étale slice. Step 3: clause (1) of lem-weil-pbc-etale-inverse-image-restriction (abelian) and the abelian part of clause (1) of lem-sfb-proetale-object-inverse-image-restriction. I re-derived that (U→W→X,(str,id)) is initial in I_U because φ is a W-morphism, so no monomorphism is needed; this confirms the finite étale degree-2 case. Step 4: lem-weil-pbc-comparison-pullback with u=v gives c_F in the written direction. Each factor of the composite ρ_p^{-1}, c_F^{-1}, ν_W^{-1}ρ_e is typed and invertible. Sources checked: Stacks 03CE (sites.tex:6094), 00Y0, 09A5 (the ε^{-1}f_et^{-1}=f_proet^{-1}ε^{-1} display), 03S2, 02GN/02GW, 0951/094T. No cycle (closure of 236 nodes). Duplicate check: det-pe-injective-acyclicity-reduction clause 2 covers only injective I and affine W, so it is narrower and not a duplicate. I accept all four declared tool_uses: weakly-étale-localization, etale-inverse-image-restriction, proetale-object-inverse-image-restriction and comparison-pullback. The last two of these were already accepted on the parent in the same unit. Mathlib searches cover all three kinds."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ComparisonEtaleSliceAbelianPullback",
+  "declaration": "AlgebraicGeometry.ProEtale.comparison_etaleSlice_abelian_pullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/ComparisonEtaleSliceAbelianPullback.lean",
+  "statement": "theorem comparison_etaleSlice_abelian_pullback (X : Scheme.{u}) (W : X.Etale) : (∃ e : Over W ≌ W.left.Etale, e.inverse ⋙ Over.forget W = MorphismProperty.Over.map ⊤ W.prop ∧ (∀ T : W.left.Etale, HEq (e.inverse.obj T).hom.left T.hom) ∧ e.inverse.IsDenseSubsite W.left.smallEtaleTopology (X.smallEtaleTopology.over W)) ∧ (Scheme.ProEt.sliceEquiv X ((Scheme.toProEt X).obj W)).inverse.IsDenseSubsite (Scheme.ProEt.topology W.left) ((Scheme.ProEt.topology X).over ((Scheme.toProEt X).obj W)) ∧ ∃ (C : Scheme.ProEtaleObjectRestrictionComparison ((Scheme.toProEt X).obj W) AddCommGrpCat.{u + 1}) (tau : comparisonUpperStar AddCommGrpCat.{u + 1} X ⋙ localizationRestriction AddCommGrpCat.{u + 1} W.hom (inferInstance : WeaklyEtale W.hom) ≅ Etale.localizationRestriction AddCommGrpCat.{u + 1} W.hom W.prop ⋙ comparisonUpperStar AddCommGrpCat.{u + 1} W.left), ∀ F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}, tau.app F = (C.sheafIso.app ((comparisonUpperStar AddCommGrpCat.{u + 1} X).obj F)).symm ≪≫ ((supportSiteComparisonCoefficientPullbackIso AddCommGrpCat.{u + 1} W.hom).app F).symm ≪≫ (comparisonUpperStar AddCommGrpCat.{u + 1} W.left).mapIso ((Etale.upperStarIsoLocalizationRestriction AddCommGrpCat.{u + 1} W.hom W.prop).app F)",
+  "branch": "newtargets-dag",
+  "by": "NF",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8bfa4a7dd",
+  "group": "NF",
+  "result": "pass",
+  "note": "Re-delivery after RETURN aee04b74 makes exactly the requested H2 repair: comparisonCoefficientPullbackIso → supportSiteComparisonCoefficientPullbackIso (owned by landed def-per-site-comparison-pullback-data, existing:true), and stmt_dep lem-sfb-proetale-object-inverse-image-restriction → new def node def-pe-proetale-object-restriction-comparison-data (existing:true on the unchanged ProEtaleObjectInverseImageRestriction module, statement verbatim, both used decls listed, clauses (i)-(v) = structure fields, no inhabitance claim, no live competing owner). Statement, proof and proof_deps are unchanged; lean.statement matches the file verbatim. Mechanical finding judged: lem-weil-pbc-etale-inverse-image-restriction's record is the used def upperStarIsoLocalizationRestriction, and sliceEquiv needs clause (2) of lem-weil-proetale-weakly-etale-localization (weaklyEtale_slice in sliceTo), so both theorem stmt_deps are genuine → PASS on that point. Earlier accepted H3 pinning, u+1 universes, edge cases, sorry-only proof and docstrings are unchanged. nt_compile --json clean in 14.2 s."
+ }
 }

@@ -14,7 +14,8 @@
   "def-weil-pbc-constant-sheaf",
   "sk-def-sfb-module-objects",
   "sk-def-sfb-change-of-scalars",
-  "def-pur-localized-ringed-site"
+  "def-pur-localized-ringed-site",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
  ],
  "proof": [
   {
@@ -299,5 +300,51 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-04495181b (reviewer sub-agent of L); spot-checked: Read the item's 11 steps in full, every cited statement, and Stacks sites-modules.tex Tag 03CY/03EI (l.813-889). Statement is byte-identical to live/base. 0 new nodes. Live node still unsplit and no parallel delivery or LAND line, so not superseded. The item has no repair note of its own: it is a statement-only child of Q74's resolved re-split of the parent, so this is an ordinary split. Step 1: the internal action comes from strong monoidal sheafification (sk-def-sfb-sheaf-tensor 1); exact sheafification plus lem-sfb-modobj-cokernels give the internal cokernel; the 03CY factorization (lem-pc leaf) plus lem-cbc give the fixed-B version. Step 2: Ext_sigma hypotheses checked; T(B)=R; E preserves finite colimits. Step 3: matrix expansion with the t-normalization gives t_n F(q)=G(q)t_m without assuming E is B-linear. Steps 4-7: cokernel comparison, finite-basis lift through an ordinary surjection, naturality chain checked, presentation independence and uniqueness. Steps 8-11: the internal/section equivalence hypothesis is discharged by monoidal sheafification; restriction is finitely exact and constant restriction is natural; the localization equality holds by cancelling against the local cokernel projection, using that the supplied comparison preserves t; local models go both ways by full faithfulness. Tests: point site (Morita plus normalization forces E=Res_sigma, so theta is canonical), sigma an automorphism, B=0, m=0 or n=0, empty site, Z/n over Z. No duplicate (checked lem-sfb-proetale-fp-local-models-comparison, lem-pe-finite-coefficient-model-comparison, lem-sfb-local-model-cohomology-descent); no cycle; proof_deps equal the union of uses. All five declared tool_uses are accepted as generic coefficient tools. Advisory only: the step-9 'canonical balanced map' aside tacitly uses restriction-tensor compatibility, but the comparison is defined by presentations; the proof totals ~7.4k characters, mostly elementary. No SGA."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ScalarNormalizedConstantModels",
+  "declaration": "CategoryTheory.ScalarNormalizedConstantModels.exists_comparison",
+  "declarations": [
+   "CategoryTheory.ScalarNormalizedConstantModels.constantPresheaf",
+   "CategoryTheory.ScalarNormalizedConstantModels.constantInternalPresheaf",
+   "CategoryTheory.ScalarNormalizedConstantModels.constantPresheafBraided",
+   "CategoryTheory.ScalarNormalizedConstantModels.constantRing",
+   "CategoryTheory.ScalarNormalizedConstantModels.tensorLeftPreserves",
+   "CategoryTheory.ScalarNormalizedConstantModels.tensorRightPreserves",
+   "CategoryTheory.ScalarNormalizedConstantModels.constantInternalModule",
+   "CategoryTheory.ScalarNormalizedConstantModels.model",
+   "CategoryTheory.ScalarNormalizedConstantModels.constantElement",
+   "CategoryTheory.ScalarNormalizedConstantModels.modelGenerator",
+   "CategoryTheory.ScalarNormalizedConstantModels.scalarEndomorphism",
+   "CategoryTheory.ScalarNormalizedConstantModels.scalarNormalized",
+   "CategoryTheory.ScalarNormalizedConstantModels.comparisonCondition",
+   "CategoryTheory.ScalarNormalizedConstantModels.exists_comparison",
+   "CategoryTheory.ScalarNormalizedConstantModels.sectionRing",
+   "CategoryTheory.ScalarNormalizedConstantModels.restriction",
+   "CategoryTheory.ScalarNormalizedConstantModels.localComparison",
+   "CategoryTheory.ScalarNormalizedConstantModels.localCondition",
+   "CategoryTheory.ScalarNormalizedConstantModels.localComparison_properties",
+   "CategoryTheory.ScalarNormalizedConstantModels.presentationComparison",
+   "CategoryTheory.ScalarNormalizedConstantModels.localPresentationComparison",
+   "CategoryTheory.ScalarNormalizedConstantModels.constantRelocalization",
+   "CategoryTheory.ScalarNormalizedConstantModels.moduleRelocalization",
+   "CategoryTheory.ScalarNormalizedConstantModels.localComparison_coherent",
+   "CategoryTheory.ScalarNormalizedConstantModels.coverModels_iff"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ScalarNormalizedConstantModels.lean",
+  "statement": "theorem exists_comparison (ht : scalarNormalized (C := C) B J R σ E t) : ∃! θ : ∀ (P : ModuleCat.{u} B) (_ : Module.FinitePresentation B P), E.functor.obj ((model B J R σ).obj P) ≅ (constantSheaf J (ModuleCat.{u} B)).obj P, comparisonCondition B J R σ E t θ",
+  "branch": "newtargets-dag",
+  "by": "Q42",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The six theorem declarations are the existence/uniqueness, global and localized finite-presentation cokernels, local normalization/uniqueness, relocalization coherence, and cover-model equivalence clauses. Helpers construct the canonical constant module, internal extension, generators and restrictions with real data. Localization is expressed in the recorded sectionwise coordinates of internal modules; the underlying sheaves and maps are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-647bacf47",
+  "group": "Q42",
+  "result": "pass",
+  "note": "Changes only the item lean record (+ landed stmt_dep def-weil-pbc-internal-abelian-sheaf-module-equivalence, actually used) and the new module ScalarNormalizedConstantModels.lean; statement verbatim, 25 declarations all present, 6 sorry theorems only, no hollow defs; not superseded. All node clauses matched: site with independent universes (UnivLE), HasSheafify, Sheaf.monoidalCategory = sfbSheafTensorStructure.monoidal, CommMon constant ring + IsMonHom sigma, Mod, additive E, scalarNormalized = t E(sigma(b)) t^-1 = b, model = constantInternalModule ⋙ Mod.extendScalars, ∃! θ with naturality + generator normalization (equivalent to t_n on free modules), presentationComparison with real IsColimit cokernels, localComparison_properties (unique tU-normalized local comparison, true w/o EU additivity), localComparison_coherent, coverModels_iff. Edge cases m,n=0, P/B/R=0, empty site/cover checked. No existing H4 duplicate found. nt_compile --json clean in 50.3 s. Advisory: always-provable J.W.IsMonoidal instance hypothesis, global Sheaf.monoidalCategory attribute (precedent), proof-only imports near the 60 s limit."
+ }
 }

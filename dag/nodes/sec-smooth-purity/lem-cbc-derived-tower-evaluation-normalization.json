@@ -251,5 +251,33 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q19-b4f8f356b (reviewer sub-agent of L); spot-checked: I read the whole delivery. The statement and stmt_deps are byte-identical to the side-live node, which is still unsplit and was created by the NW re-split of lem-cbc-adic-pullback-presentation-transport (live PASS f59a23c1; its Step 4 cites this item). The item is not on the dropped list, has no repair note of its own, cites no SGA and is not Lean-closed. Source: Stacks derived.tex 06XN lemma-find-existence-computes (dual), read at the label. Its hypotheses (resolutions from P, F(s) invertible between P objects) are those of lem-pur-left-derived-from-kflat-class, which Step 2 supplies through lem-weil-pbc-diagram-kflat-replacements (J=N>=1^op and the one-object J; hypotheses small sites, commutative rings, (f,c)). I checked the typing of eps_{P_n} v_n = e'_n(tau_P) and of the transition identity. Step 4: I recomputed both counit naturality squares on K(T) and the cancellation of the invertible eps_{P'_n}. Step 5: the whiskering hypotheses hold with p=id, q=Q_T, P=S, the right calculus coming from lem-pc for the abelian Tow(A); the unary fullness and faithfulness via pi_1 and the diagonal is valid. Step 6: the inverse and uniqueness follow by faithfulness. Step 7: I recomputed the four-equality chain, with the middle equality being naturality of d' at tau_P and Step 1 giving d' = H(t). Step 8: faithfulness. Edge cases checked: a=b, zero tower, f=id, one-object J, non-flat c, unbounded complexes. No duplicate: I read the reduction-pullback-derived-tower, constant-tower-normalization, ringed-strict-tower-projection and strict-tower-alpha-single-evaluation candidates. I accept the three declared tool_uses (kflat replacements, left-derived-from-kflat-class, resolving-representative whiskering) as generic black-box tools. Advisories: Step 3 implicitly uses that Q'K(F) is triangulated (F additive); lem-sc-nattrans-from-resolving-class would also serve in Step 5. No fixes."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.Paper.DerivedTowerEvaluationNormalization",
+  "declaration": "CategoryTheory.DerivedTowerPullback.exists_unique_normalized_evaluation",
+  "declarations": [
+   "CategoryTheory.DerivedTowerPullback.Modules",
+   "CategoryTheory.DerivedTowerPullback.evaluationComplexIso",
+   "CategoryTheory.DerivedTowerPullback.derivedTransition",
+   "CategoryTheory.DerivedTowerPullback.Comparison",
+   "CategoryTheory.DerivedTowerPullback.IsNormalizedOn",
+   "CategoryTheory.DerivedTowerPullback.IsGoodTower",
+   "CategoryTheory.DerivedTowerPullback.exists_unique_normalized_evaluation"
+  ],
+  "file": "lean/Sheaf/Paper/DerivedTowerEvaluationNormalization.lean",
+  "statement": "theorem exists_unique_normalized_evaluation : ∃ v : ∀ n : ℕ, Comparison (A := (Modules R)) (B := (Modules S)) L Lt n, (∀ n : ℕ, IsNormalizedOn F L Lt ε τ (IsGoodTower R) n (v n)) ∧ (∀ (n : ℕ) (v' : Comparison (A := (Modules R)) (B := (Modules S)) L Lt n), IsNormalizedOn F L Lt ε τ (IsGoodTower R) n v' → v' = v n) ∧ ∀ (a b : ℕ) (h : a ≤ b) (M : DerivedCategory (ℕᵒᵖ ⥤ (Modules R))), (v b).hom.app M ≫ L.map ((derivedTransition (A := (Modules R)) a b h).app M) = (derivedTransition (A := (Modules S)) a b h).app (Lt.obj M) ≫ (v a).hom.app M",
+  "branch": "newtargets-dag",
+  "by": "NC",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Normalization is stated for arbitrary universal pairs, with pointwise uniqueness at each positive level and every composite transition. The displayed factors are the canonical exact-localization identifications. As in diagram_pullback_quasiIso, F is specified as an additive left adjoint to the induced module direct image; uniqueness identifies it with inverse image followed by extension of scalars. Helpers only spell out the degreewise identity, the localization of evaluation transitions, and the stated counit equation."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-50594ec2b",
+  "group": "NC",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: RingedToposMorphism orientation checked against its structure; F given as additive left adjoint of f.modules, same pattern as the landed diagram_pullback_quasiIso; arbitrary universal pairs (L,ε),(Lt,τ) via IsLeftDerivedFunctor over quasiIso; counit normalization typed with only mapDerivedCategoryFactors and the degreewise Iso.refl inserted; IsGoodTower = the dependency's IsAcyclicTensorKFlat + IsFlat; uniqueness per level against any natural iso; transition square for all a<=b including a=b and every derived tower, derivedTransition = liftNatTrans of the actual homOfLE transition. Index n = level n+1 as in def-weil-inverse-system. No extra assumptions or universe equalities, no hollow defs, only the main theorem is sorry, statement verbatim, docstrings carry Steps 1-8, lines <=100. Not on the dropped list. Node differs from side-live only in lean. No duplicate: existing derived-transition helpers are adjacent-only or coefficient-specific. nt_compile --json clean in 50.5 s (60 s limit). Advisories: compile time close to the limit; three imports used only by the future proof; second reading is an author self-check."
+ }
 }

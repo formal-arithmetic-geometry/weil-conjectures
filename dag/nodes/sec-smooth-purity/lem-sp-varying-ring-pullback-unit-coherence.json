@@ -320,5 +320,23 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-12163b236 (reviewer sub-agent of L); spot-checked: I read the item and all four cited statements in full, plus the unit and the parent citer. The delivery has zero new nodes and the statement is unchanged; the unit law is true for arbitrary rings and transitions, and I checked it on f=1_X, X empty and non-flat Z/4->Z/2. Step 1 (elementary): d=P(r) because both are restriction along the map V->V x_X X with projections (1_V, structure map), and fibre-product uniqueness makes these equal. This matches modulePComp/modulePId's section formulas (VaryingRingOperations.lean:820-980). Step 2: the composite-adjunction unit P(u_LA)eta_A fits def-weil-pbc-composite-adjunction. Two applications of the conjugate unit lemma give P(c)eta = d P(u)eta and S(e)u = r^-1, with the right directions (moduleGComp = leftAdjointCompIso.symm, gId = leftAdjointIdIso). Step 3 (elementary): I re-derived the cancellation, naturality of d plus d=P(r) gives eta, and uniqueness with delta=id gives e_L c = id. Step 4: only exact edges L, I, L_{f1_X} are localized. g and gId are D(c) or D(e) followed by the exact composition or identity comparison, matching Lean gComp/gId. lem-sp-exact-derived-transformation-pasting (same unit, unsplit, no cycle) states that unit equations pass to the derived category. Off-unit uses are Mathlib leaves, so no tool_uses are needed. No duplicates: lem-sfb-eta-id is condensed and lem-sp-varying-ring-open-unit-coherence is the open sibling. No SGA, no repair note, no fixes."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.VaryingRingPullbackUnitCoherence",
+  "declaration": "AlgebraicGeometry.ProEtale.VaryingRing.pullback_unit_coherence",
+  "file": "lean/Sheaf/AlgebraicGeometry/VaryingRingPullbackUnitCoherence.lean",
+  "statement": "theorem pullback_unit_coherence (R : ℕ → CommRingCat.{u + 1}) (φ : ∀ n : ℕ, R (n + 1) ⟶ R n) {X Y : Scheme.{u}} (f : X ⟶ Y) : ((moduleGComp R φ (𝟙 X) f).hom ≫ Functor.whiskerLeft (pull R φ f) (Adjunction.leftAdjointIdIso (moduleAdj R φ (𝟙 X)) (modulePId R φ X)).hom = (eqToIso (congrArg (pull R φ) (Category.id_comp f))).hom) ∧ ((gComp R φ (𝟙 X) f).hom ≫ Functor.whiskerLeft (G R φ f) (gId R φ X).hom = (eqToIso (congrArg (G R φ) (Category.id_comp f))).hom)",
+  "branch": "newtargets-dag",
+  "by": "Q25",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3d1d28b15",
+  "group": "Q25",
+  "result": "pass",
+  "note": "Item node differs from live only in lean; Lean file byte-identical to the earlier 737c45d5 delivery; no dependency modules delivered (the import repairs landed separately as maintenance commit ced1d098). Both conjuncts match the node: c=moduleGComp (𝟙 X) f forward, e=leftAdjointIdIso(moduleAdj (𝟙 X))(modulePId X) (the exact ordinary term inside gId), whiskerLeft on pull f / G f, right sides are eqToIso of Category.id_comp f for pull and G; arbitrary R, φ; dependency's universes; no evaluation or boundedness. Truth: live private moduleGComp_id_left/gComp_id_left in VaryingRingProperOpenPasting.lean have identical types and are proved without sorry; private downstream helpers, not an H4 duplicate. Docstrings carry source/blueprint and all 4 proof steps; lean.statement verbatim; stmt_deps complete; Worker report and Second reading sections present. nt_compile --json clean in 5.5 s. Advisory: Mates/Basic imports redundant; stage-3 proof can move here from the pasting helpers."
+ }
 }

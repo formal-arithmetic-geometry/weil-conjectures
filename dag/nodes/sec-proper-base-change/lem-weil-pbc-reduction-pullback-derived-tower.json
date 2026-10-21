@@ -18,7 +18,8 @@
   "def-pc-sheaf-restrict-scalars",
   "def-weil-pbc-ringed-tensor-section-calculus",
   "lem-weil-pbc-site-derived-tensor-descent",
-  "lem-weil-tower-category-levelwise-abelian"
+  "lem-weil-tower-category-levelwise-abelian",
+  "def-pur-cochain-tensor-coherence-data"
  ],
  "proof": [
   {
@@ -346,5 +347,44 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-ddcd83c1b (reviewer sub-agent of L); spot-checked: Read in full: the unchanged statement, all 10 steps, every cited node statement, and Stacks 03EL/03CZ/06YS/06YT/06YY/0G7E/07A4/06XN (labels checked against tags/tags). On side-live the item is still unsplit; this is a first split with no re-split note, no new nodes and no cycle. No existing node duplicates it: strict-tower-projection-morphism is about finite free towers and pur-cochain-pullback-tensor-coherence is chain-level only. Tool uses accepted (kflat-resolution, change-of-rings-kflat-quasi-iso, left-derived-from-kflat-class, derived-change-of-rings): generic black boxes off the unit. Checked: step 2 needs no flatness of Q_n; the step 3 resolving-class hypotheses; the step 6 mate direction, recomputed as Fm⊗Fq↦F(m⊗q), inverse to μ; step 7 strictness via naturality in N for t_n; step 8 localization through the descent equivalence W^{-1}P≃D(R) with uniqueness from (3); the step 9 augmentation cancellation; step 10 evaluation via single-level counits. Edge cases: identity f, constant tower Q_n=R, zero tower, Z→Z/p, unbounded K. Fault C1/C2 in step 4: it was marked elementary but used, with no node, that tensor products on the diagram site are levelwise and compatible with transitions. This is needed for K-flatness and flatness of ΔP and for identifying the change of rings at ΔP with a_T(P). FIX: the step now cites canonical-ringed-tensor-comparison-construction and its definition, applied to e_n, plus ringed-tensor-section-calculus (pure tensors commute with restrictions and determine maps); it adds that ΔP→ΔK is a K-flat resolution; elementary is set to false. Also restored stmt_dep lem-weil-tower-category-levelwise-abelian, which the statement's derived category of strict towers needs. proof_deps unchanged. 'F exact' is accepted as set-up data, the same wording the parent and sibling use.; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.Paper.ReductionPullbackDerivedTower",
+  "declaration": "CategoryTheory.StrictReduction.reductionPullbackDerivedTower",
+  "declarations": [
+   "CategoryTheory.StrictReduction.reduction",
+   "CategoryTheory.StrictReduction.augmentation",
+   "CategoryTheory.StrictReduction.reduction_additive",
+   "CategoryTheory.StrictReduction.termwise",
+   "CategoryTheory.StrictReduction.termwise_limits",
+   "CategoryTheory.StrictReduction.termwise_colimits",
+   "CategoryTheory.StrictReduction.constantSquare",
+   "CategoryTheory.StrictReduction.Model",
+   "CategoryTheory.StrictReduction.pulledUnit",
+   "CategoryTheory.StrictReduction.ordinaryComparison",
+   "CategoryTheory.StrictReduction.constantDerivedSquare",
+   "CategoryTheory.StrictReduction.IsNormalized",
+   "CategoryTheory.StrictReduction.evaluationCounit",
+   "CategoryTheory.StrictReduction.flatRepresentatives",
+   "CategoryTheory.StrictReduction.RingedModel",
+   "CategoryTheory.StrictReduction.IsInversePureNormalized",
+   "CategoryTheory.StrictReduction.reductionPullbackDerivedTower"
+  ],
+  "file": "lean/Sheaf/Paper/ReductionPullbackDerivedTower.lean",
+  "statement": "theorem reductionPullbackDerivedTower (f : RingedPullback R S) [IsIso f.coefficient] [PreservesFiniteLimits f.L] [PreservesFiniteColimits f.L] (k : Comparison f) (Q : CommMon (ℕᵒᵖ ⥤ Modules R)) : (∀ (M : Modules R) (n : ℕ), IsInversePureNormalized f k M (Q.X.obj (op n)) (k.mu M (Q.X.obj (op n))).inv) ∧ Nonempty (RingedModel Q.X (MonObj.one (X := Q.X))) ∧ Nonempty (RingedModel (Q.X ⋙ f.L) (pulledUnit f.L (moduleUnit f k) Q.X (MonObj.one (X := Q.X)))) ∧ ∀ (MY : RingedModel Q.X (MonObj.one (X := Q.X))) (MX : RingedModel (Q.X ⋙ f.L) (pulledUnit f.L (moduleUnit f k) Q.X (MonObj.one (X := Q.X)))), ∃ tau : MY.B ⋙ (termwise f.L).mapDerivedCategory ≅ f.L.mapDerivedCategory ⋙ MX.B, IsNormalized f.L Q.X (MonObj.one (X := Q.X)) (moduleUnit f k) (flatRepresentatives R) (flatRepresentatives S) MY MX k.mu k.naturality tau ∧ (∀ tau' : MY.B ⋙ (termwise f.L).mapDerivedCategory ≅ f.L.mapDerivedCategory ⋙ MX.B, IsNormalized f.L Q.X (MonObj.one (X := Q.X)) (moduleUnit f k) (flatRepresentatives R) (flatRepresentatives S) MY MX k.mu k.naturality tau' → tau' = tau) ∧ (∀ L : DerivedCategory (Modules R), (termwise f.L).mapDerivedCategory.map (MY.i.app L) ≫ tau.hom.app L = (constantDerivedSquare f.L).hom.app L ≫ MX.i.app (f.L.mapDerivedCategory.obj L)) ∧ (∀ n : ℕ, (MY.B ⋙ ((evaluation ℕᵒᵖ (Modules R)).obj (op n)).mapDerivedCategory).IsLeftDerivedFunctor (evaluationCounit Q.X (MonObj.one (X := Q.X)) (flatRepresentatives R) MY n) (HomologicalComplex.quasiIso (Modules R) (.up ℤ))) ∧ (∀ n : ℕ, (MX.B ⋙ ((evaluation ℕᵒᵖ (Modules S)).obj (op n)).mapDerivedCategory).IsLeftDerivedFunctor (evaluationCounit (Q.X ⋙ f.L) (pulledUnit f.L (moduleUnit f k) Q.X (MonObj.one (X := Q.X))) (flatRepresentatives S) MX n) (HomologicalComplex.quasiIso (Modules S) (.up ℤ)))",
+  "branch": "sheaf-dag",
+  "by": "NP",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The theorem uses the existing independently sized RingedPullback presentation and normalized Comparison from def-pur-cochain-tensor-coherence-data. CommMon in the strict tower category is exactly a strict tower of unital commutative algebra sheaves. The reductions are universal left-derived models with computing counits and normalized augmentations; existence is asserted before the comparison for every model. All additional declarations are concrete constructions or predicates for clauses of this node, with no extra unresolved theorem.",
+  "fixed_by": "NT-stage2-cc-c13665b21"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c13665b21",
+  "group": "NP",
+  "result": "fix",
+  "note": "Re-delivery byte-identical in Lean to 4d5a6e80 (FIX not landed: published-library overlay failure for Mathlib TensorProduct.Basic). Node differs from live only in lean/stmt_deps (+def-pur-cochain-tensor-coherence-data, landed, used for RingedPullback/Comparison/moduleUnit); statement verbatim. Re-checked: IsIso f.coefficient = specified ring iso; exactness is set-up data; CommMon tower; Model = IsLeftDerivedFunctor counit invertible on flat-term K-flat P with augmentation pinned; exists-unique tau via IsNormalized conjugation; inverse pure-tensor formula for k.mu; augmentation equation via constantDerivedSquare; evaluated counits universal. No hollow defs; docstrings with 10 steps. FIX (H9): drop unused public import Sheaf.CategoryTheory.RingedToposMorphism; fixes/ReductionPullbackDerivedTower.lean compiles clean (nt_compile --json exit 0, 50.8 s under load; 5.9 s previously)."
+ }
 }

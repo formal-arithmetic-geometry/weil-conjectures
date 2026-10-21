@@ -178,5 +178,23 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NQ-74e224ecd (reviewer sub-agent of L); spot-checked: Read the item, all cited statements, current blueprint sources, unit/chapter route, and master construction. All four steps are correctly typed and justified; inverse directions, module actions, naturality, and edge cases check out. No new nodes, duplicates, cycles, route departures, or repairs. Detailed checks are in review.md."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "WeilConjectures.CategoryTheory.ModuleObjects.ChangeOfScalarsSquare",
+  "declaration": "CategoryTheory.Mod.extendScalarsComapIsoOfIsIso",
+  "statement": "noncomputable def extendScalarsComapIsoOfIsIso :\n    extendScalars b ⋙ comap ψ ≅ comap φ ⋙ extendScalars a",
+  "branch": "slopmaster2",
+  "by": "Q87",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Existing upstream construction in section ExtendScalarsOfIsIso, with the four monoid objects, monoid morphisms, IsIso a and IsIso b, commutative-square equation, and the stated braided closed equalizer/coequalizer setting. Its composite is exactly the inverse-restriction comparison prescribed by the blueprint proof. No duplicate module is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b2c353e4a",
+  "group": "Q87",
+  "result": "pass",
+  "note": "Existing:true attachment of CategoryTheory.Mod.extendScalarsComapIsoOfIsIso (ChangeOfScalarsSquare.lean:120; blueprint lean field names it). All clauses match: braided closed, equalizers/coequalizers, tensor colimit preservation (PreservesColimitsOfSize.{0,0}, weaker), IsCommMonObj only on R,S, IsIso only a,b, sq : a ≫ ψ = φ ≫ b, extendScalars b ⋙ comap ψ ≅ comap φ ⋙ extendScalars a; Ext/Res = sk-def-sfb-change-of-scalars declarations; canonical body via leftAdjointUniq comparisons, not hollow; statement verbatim; single definition, no Mathlib match; not dropped. nt_compile probe hit 600 s under load (~28 queued); published olean contains the decl with no sorryAx and live modules use it. Advisory: upstream docstring says 'horizontal' for vertical a,b."
+ }
 }

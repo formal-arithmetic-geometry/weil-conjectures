@@ -255,5 +255,29 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q38-e91530380 (reviewer sub-agent of L); spot-checked: I read the full mathematics; nothing needs fixing. Shape: one commit with the item and the report, no new nodes, no Lean. Statement and stmt_deps are byte-identical to live, where the item is still unsplit (it was created by the Q49 mate-pasting re-split, and parent step 4 cites it). No re-split note applies. proof_deps equals the union of the step uses. Sources: Stacks 0F7F/0F7B/03DI/09AE/04VG exist, I read 0F7F at its label (fixed-ring γ cube), proof_origin is agent, no SGA. Blueprint: the fix-prop-coherence proof sentence exists in main-20261015. The statement matches the a_Q and β conventions of def-sp-varying-ring-proper-open-arrows; the β squares (i,h) and (k,a) are cartesian since U×_V V_1 = U_1. Edge cases checked: h=id, cartesian Q, refinement square, empty U, zero ring, non-flat transitions. Steps: (1) the geometric clopen clause of lem-cbc-strict-tower-proper-open-calculus has no cartesian or coefficient hypothesis, base change keeps the hypotheses by the three Mathlib leaves, and I re-checked clopenness independently. (2) The adjunct reduction to b_1^* is correct, with j_!⊣j^* by definition and the system adjunction in lem-coef-semilinear-derived-sections. (3) j'^*β=1 by the triangle identity. (4) I verified s^*π_s=u by hand using that ε is invertible for an open immersion, giving k^*α_Q=r^*u_i^{-1}. (5) Both words restrict to r_1^*c^*u_i^{-1}; compositor coherence is argued by mates of the unique direct-image comparisons, which is valid. (6) The target vanishes on T_1^c by s_!≅s_* and empty sections, then the disjoint pro-étale cover and separatedness give equality. (7) The localization universal property (2) lifts the degreewise equality, using no faithfulness of evaluation. Route: the three declared tool_uses are all on the transitive uses route of sk-thm-sf-compatibility, and the rest are definitions or Mathlib leaves. No cycle and no duplicate: the cbc node has the fixed-B γ cube and lem-sp-varying-ring-proper-open-pasting has no base change. Advisory: steps 4-6 recompute inline the sibling unsplit nodes lem-sf-semilinear-clopen-unit-projector and lem-sf-semilinear-compositor-coherence (ordinary form); this is acceptable."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SemilinearAlphaPullback",
+  "declaration": "AlgebraicGeometry.ProEtale.VaryingRing.alpha_baseChange",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.VaryingRing.alphaPullbackBeta",
+   "AlgebraicGeometry.ProEtale.VaryingRing.alphaPullbackSquareG",
+   "AlgebraicGeometry.ProEtale.VaryingRing.moduleAlpha_baseChange",
+   "AlgebraicGeometry.ProEtale.VaryingRing.alpha_baseChange"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SemilinearAlphaPullback.lean",
+  "statement": "theorem alpha_baseChange {U V W Z U₁ V₁ W₁ Z₁ : Scheme.{u}} (k : U ⟶ V) (i : W ⟶ Z) (r : U ⟶ W) (p : V ⟶ Z) (k₁ : U₁ ⟶ V₁) (i₁ : W₁ ⟶ Z₁) (r₁ : U₁ ⟶ W₁) (p₁ : V₁ ⟶ Z₁) (a : V₁ ⟶ V) (h : Z₁ ⟶ Z) (c : W₁ ⟶ W) (d : U₁ ⟶ U) [IsOpenImmersion k] [IsOpenImmersion i] [IsOpenImmersion k₁] [IsOpenImmersion i₁] [QuasiCompact k] [QuasiCompact i] [QuasiCompact k₁] [QuasiCompact i₁] [IsProper r] [IsProper p] [IsProper r₁] [IsProper p₁] (w : k ≫ p = r ≫ i) (w₁ : k₁ ≫ p₁ = r₁ ≫ i₁) (wk : d ≫ k = k₁ ≫ a) (wi : c ≫ i = i₁ ≫ h) (wp : a ≫ p = p₁ ≫ h) (wr : d ≫ r = r₁ ≫ c) (sk : IsPullback d k₁ k a) (si : IsPullback c i₁ i h) (sp : IsPullback a p₁ p h) (sr : IsPullback d r₁ r c) (M : Derived R φ W) : (G R φ p₁).map ((alphaPullbackBeta R φ c i₁ i h wi si).hom.app M) ≫ (alpha R φ k₁ r₁ p₁ i₁ w₁).app ((G R φ c).obj M) = (alphaPullbackSquareG R φ a p₁ p h wp).hom.app ((J R φ i).obj M) ≫ (G R φ a).map ((alpha R φ k r p i w).app M) ≫ (alphaPullbackBeta R φ d k₁ k a wk sk).hom.app ((G R φ r).obj M) ≫ (J R φ k₁).map ((alphaPullbackSquareG R φ d r₁ r c wr).inv.app M)",
+  "branch": "newtargets-dag",
+  "by": "Q03",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-39058d140",
+  "group": "Q03",
+  "result": "pass",
+  "note": "alpha_baseChange (+ ordinary moduleAlpha_baseChange) read clause by clause against the node and the live signatures of moduleBeta/moduleSquareG/moduleAlpha/alpha: both paths typecheck with correct orientations (square compositor G h⋙G p1≅G p⋙G a, inverse square G d∘G r→G r1∘G c, betas (c,i1,i,h) and (d,k1,k,a)); base change via four IsPullback faces (any fibre-product model, Q not cartesian); Q1 open/qc/proper instances follow from the faces, so not stronger; universes are the dependency's. Helpers alphaPullbackBeta/alphaPullbackSquareG localize the recorded ordinary moduleBeta/moduleSquareG like gComp/jComp/alpha (real data, docstrings OK); same shape as the reviewed StrictTower.alpha_baseChange; no varying-ring duplicate. Both theorems sorry, 7-step proof docstrings, statement verbatim, only lean field changed. nt_compile --json exit 0 in 45.7 s, no warnings. Advisory: plain imports all transitive via the public import; Second reading is an author self-audit but specific; 45.7 s compile margin."
+ }
 }

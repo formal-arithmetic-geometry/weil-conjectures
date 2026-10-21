@@ -109,5 +109,30 @@
   "group": "Q87",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q87-f2ce6fec1 (reviewer sub-agent of L); spot-checked: I read the item, the main-20261015 blueprint source pur7710-def-ind-etale-tests.md (order 1983), the unit sk-prop-sf-kunneth-ordinary, all 14 cited statements in full, and Stacks proetale.tex 097N (l.1210) and more-morphisms.tex 094X (l.19057). All three source sentences are matched hypothesis by hypothesis. (1) The factorization through an affine open and the small nonempty cofiltered limit of affine B_i, étale and of finite presentation (Stacks 01TP) over V, with affine transitions. lem-weil-pbc-spec-small-colimit-limit gives B ≅ Spec(colim over I^op of C_i); the limit over V equals the limit in schemes because the diagram is connected. (2) Weakly étale: R→colim C_i is ind-étale in the sense of def-weil-pbc-ind-etale-algebra, so det-pe-morphisms-etale-comparison clause 2 applies to B→V; clause 1 together with lem-weil-pbc-open-immersion-etale covers V→W; sk-lem-pe-weakly-etale-stability gives the composite. B is U-small up to isomorphism, so it is an object of the site. (3) Restriction is the uncompleted unbounded finite-coefficient Lu^* of def-weil-pbc-proetale-operations, with c_u from prop-weil-pbc-proetale-constant-ring-map (Λ finite discrete, u arbitrary; the proposition identifies its coefficient sheaf with the constant sheaf). The coefficient category is not changed. The blueprint's pur713-def-derived-pull exists in neither the blueprint nor the DAG, and the replacement matches the accepted pur713-def-pullback-comparison precedent. No hypothesis is added: no finite type, no separatedness, no ℓ-invertibility. Edge cases checked: one-object index, identity system, B empty, W empty, n=1, characteristic ℓ. There are no new nodes. Duplicate search (def-weil-pbc-ind-etale-basis, def-sfb-profinite-test-objects, def-exc-ind-etale-closed-lift) finds nothing equivalent, so same_as=[] is correct. All dependencies exist and are unmerged, and there is no cycle (274-node closure). No SGA is cited, no tool_uses are needed, and no changes were made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IndEtaleTests",
+  "declaration": "AlgebraicGeometry.Scheme.IsIndEtaleTest",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.IsIndEtaleTest",
+   "AlgebraicGeometry.Scheme.IsIndEtaleTest.weaklyEtale",
+   "AlgebraicGeometry.Scheme.IsIndEtaleTest.toProEt",
+   "AlgebraicGeometry.Scheme.indEtaleTestRestriction"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/IndEtaleTests.lean",
+  "statement": "def IsIndEtaleTest {B W : Scheme.{u}} (f : B ⟶ W) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q41",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The affine-open factorization uses the recorded proAffineEtale presentation predicate. Affine stages over an affine open are automatically of finite presentation when etale, and affine transitions are automatic. The weakly-etale membership clause is a named theorem; the site object retains the original morphism. Restriction applies the recorded ordinary derived constant-ring pullback to the positive-level coefficient-extension quotient."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fdb2a3e72",
+  "group": "Q41",
+  "result": "pass",
+  "note": "IndEtaleTests.lean compiles clean via nt_compile --json (6.3 s, exit 0); the worker's missing-olean compile failures have cleared. IsIndEtaleTest = affine-open factorization with proAffineEtale (MorphismProperty.pro of Etale ⊓ affine source; small nonempty cofiltered index; finite presentation and affine transitions automatic), matching node clause 1. weaklyEtale is the only sorry and its docstring carries the node's argument; toProEt keeps B and f. indEtaleTestRestriction is the recorded proEtaleConstantRingDerivedPullback on Padic.coefficientExtensionRing l E n with n≥1, using the canonical constant-ring comparison; no completion or ℓ-invertibility assumption. Only the lean field differs from live; the statement signature matches the file verbatim and all 4 declarations exist; no duplicate found. E : Type u follows the landed finite-coefficient convention. Edge cases checked: one-object index, B=∅, W=∅, non-affine W, n=1, characteristic ℓ. Advisory: EtaleComparison and WeaklyEtaleStability imports are used only in a docstring. Land as is."
  }
 }

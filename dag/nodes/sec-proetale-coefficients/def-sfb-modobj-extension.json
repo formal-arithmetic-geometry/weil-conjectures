@@ -304,5 +304,35 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q36-6b61fbf50 (reviewer sub-agent of L); spot-checked: Read the full item, report, four cited statements, current blueprint route, and Stacks 002A/002F. All ten steps check, including typed action descent, preserved-coequalizer cancellation, module laws, and functoriality. No duplicate, cycle, missing hypothesis, or repair found. Noncentral finite-monoid test passed. Detailed findings written to review.md."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalars",
+  "declaration": "CategoryTheory.Mod.extendScalars",
+  "declarations": [
+   "CategoryTheory.Bimod.ofMonHom",
+   "CategoryTheory.Mod.extendScalarsBimod",
+   "CategoryTheory.Mod.extendScalarsObj",
+   "CategoryTheory.Mod.extendScalarsObj_X",
+   "CategoryTheory.Mod.extendπ",
+   "CategoryTheory.Mod.isColimitExtendπ",
+   "CategoryTheory.Mod.whiskerLeft_extendπ_smul",
+   "CategoryTheory.Mod.extendScalarsMap",
+   "CategoryTheory.Mod.extendπ_extendScalarsMap",
+   "CategoryTheory.Mod.extendScalars"
+  ],
+  "statement": "noncomputable def extendScalars : Mod C R ⥤ Mod C S",
+  "branch": "slopmaster2",
+  "by": "NA",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Exact existing upstream definition, confirmed in the live source using scompile.py --source. The enclosing variables give an arbitrary braided monoidal category with coequalizers, preservation of small colimits by both tensor functors, monoid objects R and S, commutativity only of R, and a monoid morphism φ. Bimod.ofMonHom gives S its stated S-R actions; extendScalarsBimod uses the recorded Mod.toBimodObj. extendScalarsObj_X identifies the underlying object with precisely the displayed coequalizer; whiskerLeft_extendπ_smul characterizes its first-factor S-action, and extendπ_extendScalarsMap characterizes the induced map on morphisms. No new module or definition is needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7dd199d7d",
+  "group": "NA",
+  "result": "pass",
+  "note": "existing:true binding to CategoryTheory.Mod.extendScalars (ModuleObjects/ExtendScalars.lean). The only change vs live is the lean field. Clause check: braided, HasCoequalizers, PreservesColimitsOfSize.{0,0} for tensorLeft/tensorRight (weaker than the node's hypothesis), IsCommMonObj only on R, ofMonHom actions, toBimodObj from the recorded dependency, extendScalarsObj_X equals the node's coequalizer by rfl, whiskerLeft_extendπ_smul gives the first-factor action, extendπ_extendScalarsMap gives the map induced by S⊗f. Not hollow. Consistent with the landed parent sk-def-sfb-change-of-scalars (same declaration and statement). check_existing/check_record: no failures (noncomputable-prefix note is advisory). nt_compile scratch with #check of all 10 declarations plus the rfl coequalizer example: EXIT 0, 19.3 s."
+ }
 }

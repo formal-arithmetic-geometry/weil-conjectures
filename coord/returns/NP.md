@@ -52,20 +52,6 @@ The previous worker ended with: re-split (decision of the human, 2026-10-17): st
 Compiler messages and attribution:
 re-split (decision of the human, 2026-10-17): step 2 (2653 characters) is not elementary and hides lemmas; make each hidden argument a node of its own that the step cites; keep the statement unchanged. Start from the existing proof text of this node (it stays in the node file): keep its route and its other steps, and replace each long step by short steps that cite new nodes (or existing nodes/Mathlib leaves) for the arguments it now carries inline. The node's statement and its Lean record stay as they are; the new nodes go through stage 2 as usual. The stage-1 review rejects a non-elementary step longer than 2000 characters.
 
-## lem-weil-pbc-reduction-pullback-derived-tower (2026-10-21 04:07 UTC, branch head 4d5a6e80d5)
-
-L: independent stage-2 immutable head 4d5a6e80d5ef: file-only compilation failed: overlay WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Basic
-/home/ubuntu/weil-nt-overlay/snapshots/1551abdc811acbfebb1fd5e27f28a39d99b8e03de10f8cb0064bdbaaa4c00d58/lean/WeilConjectures/Mathlib/LinearAlgebra/TensorProduct/Basic.lean:6:0: error: unknown module prefix 'Mathlib'
-
-No directory 'Mathlib' or file 'Mathlib.olean' in the search path entries:
-/home/ubuntu/weil-conjectures-sheaf/lean/.lake/build/lib/lean
-/home/ubuntu/.elan/toolchains/leanprover--lean4---v4.33.1/lib/lean
-
-[0.1 s]
-SERVER CONFIRMATION
-Live published library is unavailable
-
-
 ## prop-weil-pbc-descent-functors (dedicated repair handoff; head 5594c555399d0cb43e1ad335295749d4273c5e2b)
 
 The previous worker ended with: re-split (decision of the human, 2026-10-21): the proof in words is 5328 characters, far too much work for one node. The purpose of this re-split is to SPREAD THE WORK so that many workers can start on it at once: cut the proof into new nodes, each a separate argument with its own self-contained statement, delivered statement-only (status unsplit, source, three kinds of Mathlib search, no proof steps: other workers write their proofs in parallel), cited by the step that uses it. This node keeps its statement; its proof becomes the short assembly of the new nodes, at most 3000 characters, and the delivery adds at least 1 new node(s), of comparable size, not one node that restates the whole. Do NOT shorten, summarise or blur the existing argument: every argument the old proof carries must reappear as a new node. A shorter text without the new nodes is the worst answer and is returned. Lean module: Sheaf.Paper.PbcDescentFunctors

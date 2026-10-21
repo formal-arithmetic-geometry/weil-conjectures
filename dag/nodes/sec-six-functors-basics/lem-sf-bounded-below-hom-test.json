@@ -226,5 +226,23 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q62-f1644fb49 (reviewer sub-agent of L); spot-checked: Read item lem-sf-bounded-below-hom-test (7 steps, 0 new nodes), all cited statements, the parent sk-prop-sf-rf-shriek-preservation step 4 and its unit, the main-20261015 proof paragraph, and Stacks 0949/090Z/0146/0149/0118 (labels checked). Against clones/live: statement, stmt_deps and blueprint unchanged; the item is still unsplit live; base mathlib_searches kept with 6 appended; proof_deps equals the union of step uses; not in the dropped list; no SGA. Step 1: σ_{≥-r}K subcomplexes per def-kun-truncations, each QE_r bounded below, the degreewise colimit is K. Step 2: lem-kun-complex-colimit-hocolim covers Mod(O) on a site with no boundedness, giving the coproduct Q(⊕E_r) and the triangle P -(1-s)-> P -> X -> P[1]. Its tool use is accepted (generic telescope node, unit sk-prop-sf-kunneth-ordinary). Step 3: TR3/TR2 composition-zero argument correct, rotated third arrow −u[1]. Step 4: coproduct universal property plus the shift autoequivalence give bijections on Hom(P,-) and Hom(P[1],-) from the hypotheses at n=0,1. Steps 5 and 6: surjectivity and injectivity chases checked line by line against clauses (i)/(ii) of lem-weil-pbc-hom-out-of-triangle-exact (Mathlib yoneda_exact₂/₃), including the rotated triangle. Step 7: two-sided inverse, elementary. Edge cases: K=0, zero ring, K unbounded below, B and G unbounded. Not a duplicate of lem-sf-localizing-hom-test (needs B,G in Loc(S)), lem-sc-compact-generator-ambient-thick, lem-weil-pbc-derived-plus-iso-on-cohomology or the coyoneda leaf. Fits the parent's use. No fixes."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DerivedCategory.BoundedBelowHomTest",
+  "declaration": "DerivedCategory.isIso_of_boundedBelow_hom_bijective",
+  "file": "lean/Sheaf/CategoryTheory/DerivedCategory/BoundedBelowHomTest.lean",
+  "statement": "theorem isIso_of_boundedBelow_hom_bijective {C : Type u} [SmallCategory C] (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{u}) [HasDerivedCategory.{w} (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))] {B G : DerivedCategory (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))} (α : B ⟶ G) (hα : ∀ H : DerivedCategory (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)), (∃ a : ℤ, ∀ q : ℤ, q < a → IsZero ((homologyFunctor _ q).obj H)) → ∀ n : ℤ, Function.Bijective (fun f : H⟦n⟧ ⟶ B ↦ f ≫ α)) : IsIso α",
+  "branch": "newtargets-dag",
+  "by": "Q22",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f7174f427",
+  "group": "Q22",
+  "result": "pass",
+  "note": "Snapshot module compiles clean via nt_compile --json (27.4 s, no warnings). Node identical to live apart from lean; not dropped; no repair note. Clause-by-clause match: small site, Sheaf J CommRingCat.{u} with ringedSiteModules (recorded dep), ordinary DerivedCategory with HasDerivedCategory.{w} (recorded dep), B/G unbounded, H bounded below as eventual vanishing of homologyFunctor q for q<a, bijective postcomposition Hom(H⟦n⟧,B)->Hom(H⟦n⟧,G) for every n:ℤ, conclusion IsIso α. pp.universes probe: module universe = u, only u and w, no hidden restriction. Edge cases (empty site, zero ring, zero H, unbounded B/G) allowed. Import control: removing Grp.FilteredColimits breaks the Abelian instance, so it is needed; proof-plan imports are non-public and acceptable. Single sorry; docstrings carry source place, blueprint id and all 7 proof steps; no duplicate in Mathlib or project; lean.statement verbatim; Worker report and Second reading sections present. Advisory only: report does not explain the FilteredColimits import."
+ }
 }

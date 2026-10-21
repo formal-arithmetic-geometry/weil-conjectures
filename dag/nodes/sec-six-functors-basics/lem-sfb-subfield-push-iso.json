@@ -225,5 +225,23 @@
   "landing": "20261021T061527-L-1786233",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.isIso_derivedPushHom_padicSubfieldRingObjMap",
+  "statement": "instance isIso_derivedPushHom_padicSubfieldRingObjMap {E F : FiniteIntermediateField ℓ}\n    (h : E ≤ F) : IsIso (derivedPushHom (Profinite.padicSubfieldRingObjMap ℓ h) f) :=",
+  "branch": "slopmaster2",
+  "by": "NO",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "The upstream WeilConjectures module contains this exact instance, with section variables (ℓ : ℕ) [Fact ℓ.Prime] and {X Y : Scheme.{u}} (f : X ⟶ Y). Its declaration states IsIso of the canonical derivedPushHom for Profinite.padicSubfieldRingObjMap ℓ h, exactly the finite E ≤ F coefficient-change comparison for every scheme morphism."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-547bd0020",
+  "group": "NO",
+  "result": "pass",
+  "note": "The delivery only adds an existing:true lean record for the upstream instance CondensedRing.isIso_derivedPushHom_padicSubfieldRingObjMap (Colimit/Compatibility.lean:171-172); the statement field is verbatim. Clauses match: Fact ℓ.Prime; E F : FiniteIntermediateField ℓ with h : E ≤ F; arbitrary f : X ⟶ Y in Scheme.{u} with no extra hypotheses; derivedPushHom = the def-sfb-derived-push-hom record; coefficientMap a X = padicSubfieldRingObjMap X ℓ h by rfl (the def-sfb-subfield-coefficient-map record); the flatness hypothesis is discharged by the lem-sfb-subfield-flat instance; IsIso = isomorphism. nt_compile --json probe clean in 50.3 s: #check, inferInstance for general, E=F and f=𝟙 X, rfl identification. No duplicate, not dropped, no repair note, report sections present. Advisory: a reviewed_proof (M4) already exists while the side and live text still shows sorry."
  }
 }

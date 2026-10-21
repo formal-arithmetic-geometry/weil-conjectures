@@ -151,5 +151,29 @@
  },
  "chapter": "sec-proetale-coefficients",
  "unit": "sk-def-sfb-condensed-ring",
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic",
+  "declaration": "Profinite.padicCondensedRing",
+  "declarations": [
+   "Profinite.padicCondensedRing",
+   "Profinite.padicIntCondensedRingToPadicCondensedRing",
+   "Profinite.continuousMapRingObj",
+   "Profinite.isCommMonObj_continuousMapRingObj"
+  ],
+  "statement": "abbrev padicCondensedRing :\n    Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1}",
+  "branch": "slopmaster2",
+  "by": "Q145",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Exact existing declaration in the live upstream EllAdic module, under (ℓ : ℕ) [Fact ℓ.Prime] and universe u. It is continuousMapRingSheaf ℚ_[ℓ], definitionally equal to the recorded continuousMapRingSheafOfUniverse.{u, 0} ℚ_[ℓ]. The existing padicIntCondensedRingToPadicCondensedRing is postcomposition with PadicInt.Coe.ringHom and continuous_subtype_val, definitionally equal to continuousMapRingSheafMapOfUniverse.{u, 0} for these arguments and the recorded padicIntCondensedRing source. The existing continuousMapRingObj and isCommMonObj_continuousMapRingObj supply the underlying commutative ring object. A clean server scratch-consumer compile verified the two sheaf identifications, map identification, commutativity instance, lifted section formula and pointwise inclusion formula. No new module or statement correction. The branch label slopmaster2 is the existing-WeilConjectures classification used by the delivery tools; the source read and compiled here is the live library."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d3eeb37ba",
+  "group": "Q145",
+  "result": "pass",
+  "note": "existing:true record for Profinite.padicCondensedRing (EllAdic); only the lean field changed vs live. Clause match: prime ℓ (Fact ℓ.Prime, includes 2), coherent site Profinite.{u}, sections ULift C(S,ℚ_[ℓ]) with the ℓ-adic norm topology, commutative ring object via continuousMapRingObj/isCommMonObj_continuousMapRingObj, inclusion = continuousMapRingSheafMap PadicInt.Coe.ringHom continuous_subtype_val from the recorded padicIntCondensedRing. Scratch nt_compile --json clean (31.2 s): rfl to continuousMapRingSheafOfUniverse.{u,0} for ℚ_ℓ and ℤ_ℓ, to continuousMapRingSheafMapOfUniverse.{u,0}, to continuousMapRingObjOfUniverse; upstream IsCommMonObj typechecks against continuousMapRingObjOfUniverseMonObj for sfbSheafTensorStructure; section and component formulas by rfl. Statement verbatim from abbrev; no extra assumptions; not dropped; no repair note. Advisory: no blueprint tag in upstream docstrings and branch label slopmaster2, both as in the landed sibling int record."
+ }
 }

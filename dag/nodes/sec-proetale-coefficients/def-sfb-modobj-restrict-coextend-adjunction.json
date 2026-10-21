@@ -285,5 +285,31 @@
  },
  "chapter": "sec-proetale-coefficients",
  "unit": "sk-def-sfb-change-of-scalars",
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalars",
+  "declaration": "CategoryTheory.Mod.restrictCoextendAdjunction",
+  "declarations": [
+   "CategoryTheory.Mod.coextendCounitHom",
+   "CategoryTheory.Mod.coextendCounit",
+   "CategoryTheory.Mod.coextendHom",
+   "CategoryTheory.Mod.coextendHomEquiv",
+   "CategoryTheory.Mod.whiskerLeft_coextendHom_hom_coextendEv",
+   "CategoryTheory.Mod.restrictCoextendAdjunction"
+  ],
+  "statement": "def restrictCoextendAdjunction : comap φ ⊣ coextendScalars φ",
+  "branch": "slopmaster2",
+  "by": "NG",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Exact existing upstream construction, ExtendScalars.lean lines 748–839. In the inherited arbitrary closed monoidal category with equalizers, with monoid objects R and S and a monoid morphism φ, coextendCounitHom evaluates at the unit; coextendCounit bundles its R-linearity. coextendHomEquiv has inverse g ↦ (comap φ).map g ≫ coextendCounit φ N and forward map coextendHom φ, whose uncurried evaluation is the S-action followed by f. restrictCoextendAdjunction uses exactly this equivalence and supplies both naturality laws. No braiding, commutativity, preadditivity, or coequalizer assumption is present in this section. No new module or duplicate definition is required."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-898573e00",
+  "group": "NG",
+  "result": "pass",
+  "note": "existing:true record for CategoryTheory.Mod.restrictCoextendAdjunction (ExtendScalars.lean 746-855, identical in side-live and published). Only the item lean field changed vs live; not dropped, no repair note. Context: MonoidalClosed + HasEqualizers, MonObj R S, IsMonHom φ, arbitrary universes; extension-section braided/commutative/coequalizer hypotheses are in a closed earlier namespace. Counit coextendCounitHom = λ⁻¹≫η▷≫coextendEv (eval at unit), R-linear as coextendCounit; the equivalence's invFun = comap.map g ≫ counit, toFun = coextendHom with S◁B(f)≫ev = γ≫f (m↦(s↦f(sm))); both naturality laws; mkOfHomEquiv. Deps comap/coextendScalars as recorded; statement verbatim; report sections present. nt_compile --json probe: #check of all 6 decls, counit.app = coextendCounit, homEquiv/symm = stated formulas, counit hom rfl = unit evaluation: EXIT 0, 16.4 s."
+ }
 }

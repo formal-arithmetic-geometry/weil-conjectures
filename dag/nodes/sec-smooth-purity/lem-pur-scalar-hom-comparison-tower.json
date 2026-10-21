@@ -14,7 +14,9 @@
   "lem-sf-ringed-derived-closed-symmetric-monoidal",
   "lem-pur-derived-change-of-rings",
   "lem-sfb-scalar-hom-tensor-coherence",
-  "def-pur-derived-internal-hom"
+  "def-pur-derived-internal-hom",
+  "def-sfb-scalar-hom-comparison-data",
+  "def-pur-coefficient-base-change-hom"
  ],
  "proof": [
   {
@@ -228,5 +230,23 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O1-43f2b50f4 (reviewer sub-agent of L); spot-checked: I read all 7 steps in full and redid each calculation. The verdict is PASS with no fixes. (1) The statement and stmt_deps are byte-identical to the unsplit node in the earlier parent runs O1__lem-pur-integral-operations-scalar-extension 3701cefb and bf31ebbf, so nothing was weakened. The delivery has no new nodes and touches no unit. (2) Step 1: using σ, the closed bijection of lem-sf-ringed-derived-closed-symmetric-monoidal gives the P⊗H convention. I re-derived the identity e'(1⊗H(f,g)) = g·e(f⊗1) from naturality in L and in M. Steps 2–4 (definition, naturality, two-stage uncurry K(e)t^K) and Step 6 (α-transport through α_P^{-1}: JP→KP and α_Q) all type-check and are correct. (3) I checked Steps 5 and 7 against the Lean record of lem-sfb-scalar-hom-tensor-coherence. ScalarInternalHomData.lean:384-395 fixes scalarHomExtensionComp as T_bT_a→T_{ba} and scalarHomExtensionId as T_id≅Id. With those directions, inverting the tensorators gives αt^K = t^{ba}(α⊗α) and u t = u⊗u. The identity clause comes out as H(u_P^{-1},u_Q)c^id = u_H. (4) Sources: Stacks 08J9 (lemma-internal-hom and equation-internal-hom, l.8844/8896) and 07A4 (l.3684), plus the main-20261015 ancestor def-weil-derived-pullback-tensor-hom, final paragraph. (5) There is no cycle: the closure of the deps is 345 nodes and does not contain the item. I accept both declared tool_uses: the closed adjunction, whose unit sk-prop-sf-biduality-general is in the unit's uses, and the coherence equations, which the item assumes explicitly. (6) Duplicates: the restriction-side nodes lem-sfb-closed-scalar-hom-comparison and lem-sfb-scalar-internal-hom-tower-coherence are about a different map. lem-coef-monoidal-square-hom-transport would give the tower clause only for strong symmetric monoidal functors with a monoidal h, and the item does not have those hypotheses. So it is not a one-line specialization; this is advisory only. Edge cases tested: identity legs, P=0, and Z→F_2→F_2. The item claims no invertibility and assumes no flatness."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.ScalarHomComparisonTower",
+  "declaration": "CategoryTheory.scalarHomComparisonTower",
+  "file": "lean/Sheaf/Algebra/Homology/ScalarHomComparisonTower.lean",
+  "statement": "theorem scalarHomComparisonTower (M : ScalarHomModels.{c, v, r, w} J) (μ : ∀ {R S : Sheaf J CommRingCat.{max c v r}} (a : R ⟶ S), ScalarHomTensorComparison M a) (htower : ∀ {R S V : Sheaf J CommRingCat.{max c v r}} (a : R ⟶ S) (b : S ⟶ V) (P Q : DerivedCategory (scalarModules J R)), (M.scalar b).derived.map ((μ a).iso.hom.app (P, Q)) ≫ (μ b).iso.hom.app ((M.scalar a).derived.obj P, (M.scalar a).derived.obj Q) ≫ (M.closed V).tensor.map (Prod.mkHom ((scalarHomExtensionComp M a b).hom.app P) ((scalarHomExtensionComp M a b).hom.app Q)) = (scalarHomExtensionComp M a b).hom.app ((M.closed R).tensor.obj (P, Q)) ≫ (μ (a ≫ b)).iso.hom.app (P, Q)) (hid : ∀ (R : Sheaf J CommRingCat.{max c v r}) (P Q : DerivedCategory (scalarModules J R)), (M.closed R).tensor.map (Prod.mkHom ((scalarHomExtensionId M R).inv.app P) ((scalarHomExtensionId M R).inv.app Q)) = (scalarHomExtensionId M R).inv.app ((M.closed R).tensor.obj (P, Q)) ≫ (μ (𝟙 R)).iso.hom.app (P, Q)) : (∀ {R S : Sheaf J CommRingCat.{max c v r}} (a : R ⟶ S) (P Q P' Q' : DerivedCategory (scalarModules J R)) (f : P' ⟶ P) (g : Q ⟶ Q'), (M.scalar a).derived.map ((derivedInternalHomOfUniverses.{c, v, r, w} J R).map (Prod.mkHom f.op g)) ≫ coefficientBaseChangeHom (M.closed R) (M.closed S) (M.scalar a).derived (μ a).iso P' Q' = coefficientBaseChangeHom (M.closed R) (M.closed S) (M.scalar a).derived (μ a).iso P Q ≫ (derivedInternalHomOfUniverses.{c, v, r, w} J S).map (Prod.mkHom ((M.scalar a).derived.map f).op ((M.scalar a).derived.map g))) ∧ (∀ {R S V : Sheaf J CommRingCat.{max c v r}} (a : R ⟶ S) (b : S ⟶ V) (P Q : DerivedCategory (scalarModules J R)), (M.scalar b).derived.map (coefficientBaseChangeHom (M.closed R) (M.closed S) (M.scalar a).derived (μ a).iso P Q) ≫ coefficientBaseChangeHom (M.closed S) (M.closed V) (M.scalar b).derived (μ b).iso ((M.scalar a).derived.obj P) ((M.scalar a).derived.obj Q) ≫ (derivedInternalHomOfUniverses.{c, v, r, w} J V).map (Prod.mkHom ((scalarHomExtensionComp M a b).inv.app P).op ((scalarHomExtensionComp M a b).hom.app Q)) = (scalarHomExtensionComp M a b).hom.app ((derivedInternalHomOfUniverses.{c, v, r, w} J R).obj (op P, Q)) ≫ coefficientBaseChangeHom (M.closed R) (M.closed V) (M.scalar (a ≫ b)).derived (μ (a ≫ b)).iso P Q) ∧ (∀ (R : Sheaf J CommRingCat.{max c v r}) (P Q : DerivedCategory (scalarModules J R)), coefficientBaseChangeHom (M.closed R) (M.closed R) (M.scalar (𝟙 R)).derived (μ (𝟙 R)).iso P Q ≫ (derivedInternalHomOfUniverses.{c, v, r, w} J R).map (Prod.mkHom ((scalarHomExtensionId M R).inv.app P).op ((scalarHomExtensionId M R).hom.app Q)) = (scalarHomExtensionId M R).hom.app ((derivedInternalHomOfUniverses.{c, v, r, w} J R).obj (op P, Q)))",
+  "branch": "sheaf-dag",
+  "by": "NY",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-82988eb08",
+  "group": "NY",
+  "result": "pass",
+  "note": "Re-delivery after RETURN e85e0a80: Lean module byte-identical (sha256 e5783100…), item node differs from live only in lean/stmt_deps; theorem stmt_dep lem-coef-derived-system-evaluation-calculus replaced by new existing:true def node def-pur-coefficient-base-change-hom owning WeilConjectures.coefficientBaseChangeHom (CoefDerivedSystemEvaluationCalculus.lean:195, explicit transpose of μ⁻¹ ≫ F(ev), no .choose); node statement matches body, lean.statement verbatim, stmt_dep def-coef-ringed-tensor-hom-model owns CoefficientClosedStructure, closure 208 nodes acyclic and not reaching the item, no other node owns the def, existing:true precedent def-coef-derived-system-calculus-data on the same module. Earlier H3 check (normalized μ, canonical α/u, htower/hid = scalarHomTensorCoherence, naturality/tower/identity variance, no extra hypotheses, edge cases) carries over. Report sections present; whole-proof sorry only; docstrings OK. nt_compile --json rc 0 (53.1 s, no errors or warnings)."
+ }
 }

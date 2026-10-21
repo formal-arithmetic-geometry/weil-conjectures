@@ -314,5 +314,38 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q126-11b15ac57 (reviewer sub-agent of L); spot-checked: Read the full mathematics of the item and of all 21 cited statements, plus Stacks 0E8I, 0GL1 (l.4578), 09AF (l.5076), 06YQ and 0G7E, the parent's Step 2, unit sk-thm-sf-compatibility and the blueprint Locality step. First split of a node created by the Q58 re-split; statement unchanged against the Q58 delivery; no new nodes; no cycle; no SGA. Types of the square and of the composition identity agree. Small cases checked: U empty, j=id, A=B, P=0, and nonflat Z/4->Z/2 (L=Z/2 has no bounded flat model and is correctly excluded; P tensor B is never assumed A-flat). Step 1: correct exact three-functor composite. Step 2: 06YQ plus 0G7E with the constant-ring identification. Step 3: kappa^e is inverse to t_j on generators, and c^{-1} is fixed as the d-s transpose of a.C(eta), so e_{j,B}=e_{j,A}. Step 4: I re-derived the rearranged equation of lem-sf-open-comparison-tensor-normalization at second module B_X; with delta=rho^{-1}, t=kappa^{-1}, e=c it is exactly the item's square, and B-linearity is shown at sheaf level. Step 5: degreewise on K-flat models; the equality lives in D(B) and is not reflected from D(A). Steps 6-7: generator calculation for the compositor, and the composition and identity clauses of the cited comparison and normalization lemmas. Not duplicates: lem-sf-comparison-open-tensor-coherence (A-linear only, no composition clauses), lem-sf-open-tensor-normalization, lem-coef-etale-open-tensor, lem-pur-finite-ring-site-tensor-transpose, det-sp-reduction-direct-image. Tool uses accepted as generic sheaf/site lemmas. FIX 1 (B3): T=-tensor^L_A B had no cited notion, and Step 2 relied on its computation by K-flat models without a citation. Added lem-pur-derived-change-of-rings (on route, split, no cycle) to the statement, stmt_deps, Step 2 text and uses, and proof_deps. Maintainer note: the source field of lem-pc-bounded-above-flat-kflat-site says 06YS but the lemma is 06YQ.; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.Paper.OpenScalarSiteCoherence",
+  "declaration": "AlgebraicGeometry.ProEtale.OpenScalarSite.scalar_site_square",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.OpenScalarSite.proRealization",
+   "AlgebraicGeometry.ProEtale.OpenScalarSite.restrictScalarsIso",
+   "AlgebraicGeometry.ProEtale.OpenScalarSite.scalarOpen",
+   "AlgebraicGeometry.ProEtale.OpenScalarSite.extensionComp",
+   "AlgebraicGeometry.ProEtale.OpenScalarSite.extensionId",
+   "AlgebraicGeometry.ProEtale.OpenScalarSite.extension_flat_kflat",
+   "AlgebraicGeometry.ProEtale.OpenScalarSite.scalar_site_square",
+   "AlgebraicGeometry.ProEtale.OpenScalarSite.etale_scalar_comp",
+   "AlgebraicGeometry.ProEtale.OpenScalarSite.etale_scalar_id",
+   "AlgebraicGeometry.ProEtale.OpenScalarSite.proetale_scalar_comp",
+   "AlgebraicGeometry.ProEtale.OpenScalarSite.proetale_scalar_id",
+   "AlgebraicGeometry.ProEtale.OpenScalarSite.site_comp",
+   "AlgebraicGeometry.ProEtale.OpenScalarSite.site_id"
+  ],
+  "file": "lean/Sheaf/Paper/OpenScalarSiteCoherence.lean",
+  "statement": "theorem scalar_site_square {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B] (φ : A →+* B) {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] (L : Etale.DerivedCategoryModule A U) (P : CochainComplex (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ) (hbounded : ∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (P.X n)) (hflat : ∀ n : ℤ, Etale.etaleFlat U A (P.X n)) (hrep : Nonempty ((DerivedCategory.Q.obj P) ≅ L)) : (pbcFixedScalarExtension (Scheme.ProEt.topology X) φ).map ((mapDerivedCategoryOpenImmersionLowerShriekComparisonUpperStarIso (ModuleCat.{u + 1} A) j).hom.app L) ≫ (scalarOpen φ j).hom.app ((comparisonUpperStar (ModuleCat.{u + 1} A) U).mapDerivedCategory.obj L) ≫ (openImmersionLowerShriek (ModuleCat.{u + 1} B) j).mapDerivedCategory.map ((pbcComparisonReduction U φ).hom.app L) = (pbcComparisonReduction X φ).hom.app ((Etale.openImmersionLowerShriek (ModuleCat.{u + 1} A) j).mapDerivedCategory.obj L) ≫ (comparisonUpperStar (ModuleCat.{u + 1} B) X).mapDerivedCategory.map ((Etale.openScalarExtension φ j).hom.app L) ≫ (mapDerivedCategoryOpenImmersionLowerShriekComparisonUpperStarIso (ModuleCat.{u + 1} B) j).hom.app ((Etale.scalarExtension φ U).obj L)",
+  "branch": "newtargets-dag",
+  "by": "Q38",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bdbb484ac",
+  "group": "Q38",
+  "result": "pass",
+  "note": "Clause-by-clause check of Sheaf.Paper.OpenScalarSiteCoherence against the node: open immersion, finite ring map in the recorded Type(u+1) convention, etale DerivedCategoryModule and pro-etale Sheaf(ProEt)(ModuleCat) derived categories matching the stmt_dep e/N interfaces. T = pbcFixedScalarExtension; N = comparisonUpperStar; δ = pbcComparisonReduction (canonical invertible mate, TN→NT). t_j = existing Etale.openScalarExtension and new scalarOpen (same leftAdjointUniq mate of the literal j^*Res=Res j^* identification). e = descent of the recorded openImmersionLowerShriekComparisonUpperStarIso. Bounded flat P / Nonempty(Q P≅L) hypotheses; 4-part flatness/K-flatness clause through recorded IsFlatOnSite/IsKFlatIndependentCoefficients realizations. Arrow directions in the displayed square and in the etale/pro-etale/site composition and identity laws verified. No hollow or arbitrary data, sorry only, docstrings with sources and blueprint, lean.statement verbatim, imports = dep modules, line width 100. Dependency records unchanged (only live lean_audit differs). Not in the dropped list. H4: OpenScalarExchange.openScalarIso is a different encoding and cannot type this square. nt_compile --json clean in 51.6 s (60 s limit; a landing timeout would be mechanical). Advisories: statement uses non-stmt_dep owner decls (witness-compatibility, coef-etale-open-comparison-data, proetale-constant-exact); δ and t_j must be identified with the ringed-topoi and slice-extension records in stage 3; extensionId duplicates upstream openImmersionLowerShriekIdIso; the second-reading section is the group's own re-reading."
+ }
 }

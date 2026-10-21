@@ -143,24 +143,25 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NS-d4569509c (reviewer sub-agent of L); spot-checked: The definition matches the blueprint and cited sources, with edge cases and target coefficient categories checked. Repair the ill-typed restriction by explicitly supplying the canonical identification iν^{-1}Λ_Y ≅ Λ_{Yν}; corrected whole JSON is in fixes/dag/nodes/sec-smooth-purity/def-weil-proetale-constructible-sheaf.json.; 1 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
-  "date": "2026-10-18",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-stage2-cc-1e6d6eda8",
-  "group": "N6",
+  "reviewer": "NT-stage2-cc-8dbf9a516",
+  "group": "Q150",
   "result": "pass",
-  "note": "Re-delivery fixes R1-R3. R1: new definition node def-sp-reduction-direct-image-comparison owns ReductionDirectImageComparison.lean; the four helpers moved unchanged (diffed), the existing gamma/openExtension/openScalarIso/openSquarePullbackModel are re-exported rather than copied, the node text states the full unit-preservation rule, the H12 fields pass, and the item no longer cites the exchange theorem nodes. R2: a real clause-by-clause second reading. R3: lean.notes keep the old shared declarations; the rebound IsConstructibleProEtaleModuleSheaf and Has(Finite)ProEtaleTorAmplitude are real and verbatim. Item: only lean and stmt_deps changed; theorem signatures unchanged and re-checked (hypotheses, Dctf for both endpoints, NatTrans naturality, alpha-cocycle orientation, edge cases, universes). Two sorry, no hollow definitions, docstrings and lines OK. nt_compile.py on both files: 6.1 s and 4.1 s, exit 0, no diagnostics. Observations only: openSquarePullbackModel_existsUnique (general A) is still a sorry under lem-trf-open-square-exchange, whose statement covers only A_{E,n}; the shared constructibility/Tor records keep switching encodings."
+  "note": "Clean nt_compile 14.3 s at load ~205. All node clauses match the Lean: actual O_E/ϖ^n→O_E/ϖ^m quotient map, intrinsic D^b_c hypothesis, Stacks 0651 Tor amplitude [a,b], ∃ Ke bounded constructible with α, four boundedness clauses, two [a,b] concentration clauses, two restricted-scalar boundedness clauses, FixedEtaleOriginWitness pinned by complex equality + HEq to canonical reductionComparison/openReductionComparison, ν_Z E_e ≅ j_! K. /tmp probe proved the witness and Nonempty clauses from the canonical maps (HEq consistent). No hollow defs, docstrings ok, only main theorem sorry, edge cases j=id/X=∅/m=n/non-flat allowed, no universe restriction. Advisories: (1) torAmplitudeIn and pbcFixedScalarExtension are owned by def-sf-categorical-proetale-tor-amplitude and def-weil-pbc-witness-compatibility, not in stmt_deps; (2) openReductionComparison takes a different canonical route than step 5, equal by mate coherence, for stage 3; (3) last clause is Nonempty although openOriginComparison is defined; (4) def-weil-proetale-constructible-sheaf superset record on ProEtaleFixedModuleConstructible keeps both decls (the repair asked of NX), live record unchanged since base, old ProEtaleConstructibleSheaf module no longer a primary lean.module (no sorry); (5) FiniteTorAmplitudeSites and five proof-plan imports unused in the statement, accepted under the plan-import convention."
  },
  "lean": {
-  "module": "Sheaf.Paper.ProEtaleConstructibleSheaf",
-  "declaration": "AlgebraicGeometry.Scheme.IsConstructibleProEtaleModuleSheaf",
+  "module": "Sheaf.Paper.ProEtaleFixedModuleConstructible",
+  "declaration": "AlgebraicGeometry.Scheme.IsConstructibleProEtaleFixedModuleSheaf",
   "declarations": [
-   "AlgebraicGeometry.Scheme.IsConstructibleProEtaleModuleSheaf"
+   "AlgebraicGeometry.Scheme.IsConstructibleProEtaleModuleSheaf",
+   "AlgebraicGeometry.Scheme.IsConstructibleProEtaleFixedModuleSheaf"
   ],
-  "statement": "def IsConstructibleProEtaleModuleSheaf\n    (Y : Scheme.{u}) (A : Type u) [CommRing A] [Finite A]\n    (F : proEtaleRingModules Y (proEtaleConstantRing Y A)) : Prop",
+  "statement": "def IsConstructibleProEtaleFixedModuleSheaf (Y : Scheme.{u})\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    (F : Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} A)) : Prop",
   "branch": "newtargets-dag",
-  "by": "N6",
-  "date": "2026-10-18",
+  "by": "Q150",
+  "date": "2026-10-21",
   "existing": true,
-  "note": "Section 1(B): the recorded fixed-ModuleCat predicate cannot be applied directly to the ordinary intrinsic constant-ring modules used by scalarExtensionFunctor and the recorded extension by zero. Rebind to the already-published exact intrinsic formulation: the same positive finite constructible locally closed partition, local constancy and finite geometric stalks, with the canonical constant-section pullback. This is an existing definition of precisely this node, not a new constructibility condition or an etale-origin assumption; the fixed-module predicate remains available in its own module. Compatibility: the old declarations AlgebraicGeometry.Scheme.IsConstructibleProEtaleFixedModuleSheaf remain available with their unchanged signatures in Sheaf.Paper.ProEtaleFixedModuleConstructible; neither that source module nor any existing consumer is edited or removed by this delivery."
+  "note": "Section 1(B): the recorded intrinsic ring-sheaf predicate cannot accept the fixed ModuleCat cohomology sheaves of this item. Reuse the already published exact fixed-module intrinsic predicate (positive finite constructible locally closed partition, local constancy and finite geometric stalks). Its module publicly imports the original intrinsic predicate, which is retained in declarations. No etale-origin hypothesis or second constructibility definition is introduced."
  }
 }

@@ -222,5 +222,40 @@
   "group": "NN",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-4a0a9bfc6 (reviewer sub-agent of L); spot-checked: I read the item, all 5 steps and every cited statement in full: the adjunction/exactness node, the 0038 colimit leaf, Tot (012Z), the ringed-slice tensor iso (0E8I), the sheaf tensor definition, 010N(c) and K-flat (06YN/06YS). I checked every Stacks tag against tags/tags and read 0E8I and sites-cohomology lemma-restriction-K-flat; the latter is the mirror argument. Step 1: j_! is a left adjoint, so it commutes with the countable sum in each degree, and ⊕θ_{p,q} gives Φ^n with the right types. Step 2: θ is natural in G along d_P and in F along d_C|_U, the sign (−1)^p is the same on both sides, and the check on coproduct injections is legitimate; naturality in chain maps follows the same way. Step 3: I recomputed both Koszul coefficients of the swap: (−1)^{ab} on dy⊗x and (−1)^{(a+1)b} on y⊗dx; τ²=1. Step 4: it puts the acyclic test complex FIRST, as the K-flat definition requires: j^*C is acyclic, so Tot(j^*C⊗P) is acyclic; then swap, j_! is exact, steps 1–2, swap back. Step 5: H^n(j_!f) ≅ j_!H^n(f) is an iso. Edge cases checked: P or C zero, R=0, degree-0 case equals 0E8I, sign at (1,1), unbounded complexes, non-constant ring. The delivery adds no new nodes, so D1/D2 cannot apply; proof_deps equals the union of the uses. Duplicate search found only analogues that are not this statement: étale sum or open extension with constant coefficients (lem-pur-etale-sum-*, lem-coef-etale-open-*, lem-pur-etale-open-derived-tensor), restriction K-flat, and derived scheme projection nodes. Live side node is still unsplit with an identical statement; the item is not dropped and has no repair note. Accepted tool_use: lem-weil-pbc-ringed-slice-extension-tensor, the generic ringed-site 0E8I projection formula; the unit has uses:[] and no in-unit ringed-site equivalent. No SGA. Advisory: step 5 reaches def-pc-quasi-iso-modules only through the K-flat definition. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.RingedOpenTotalTensorKFlat",
+  "declaration": "SheafOfModules.ringedOpen_totalTensor_kFlat",
+  "declarations": [
+   "SheafOfModules.ringedOpenExtension",
+   "SheafOfModules.ringedOpenRestriction",
+   "SheafOfModules.ringedOpenSheafTensorLeft",
+   "SheafOfModules.ringedOpenSheafTensorRight",
+   "SheafOfModules.ringedOpenExtensionOnComplexes",
+   "SheafOfModules.ringedOpenRestrictionOnComplexes",
+   "SheafOfModules.ringedOpenTensor",
+   "SheafOfModules.ringedOpenTensorZero",
+   "SheafOfModules.ringedOpenTensorObjZero",
+   "SheafOfModules.ringedOpenHasTotalTensor",
+   "SheafOfModules.ringedOpenTotalTensor",
+   "SheafOfModules.ringedOpenTensorι",
+   "SheafOfModules.ringedOpenTotalTensorMap",
+   "SheafOfModules.ringedOpenSheafComparison",
+   "SheafOfModules.ringedOpen_totalTensor_kFlat"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/RingedOpenTotalTensorKFlat.lean",
+  "statement": "theorem ringedOpen_totalTensor_kFlat : (∃ θ : ringedOpenSheafTensorLeft.{c, v, r} R U ≅ ringedOpenSheafTensorRight.{c, v, r} R U, ∃ Φ : ∀ (P : CochainComplex (SheafOfModules.{max c v r} (((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R).over U)) ℤ) (C : CochainComplex (SheafOfModules.{max c v r} ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R)) ℤ), (ringedOpenExtensionOnComplexes.{c, v, r} R U).obj (((ringedOpenTotalTensor.{max c v, v, r} (R.over U)).obj P).obj ((ringedOpenRestrictionOnComplexes.{c, v, r} R U).obj C)) ≅ ((ringedOpenTotalTensor.{c, v, r} R).obj ((ringedOpenExtensionOnComplexes.{c, v, r} R U).obj P)).obj C, (∀ P C (p q n : ℤ) (h : p + q = n), (ringedOpenExtension.{c, v, r} R U).map (ringedOpenTensorι.{max c v, v, r} (R.over U) P ((ringedOpenRestrictionOnComplexes.{c, v, r} R U).obj C) p q n h) ≫ (Φ P C).hom.f n = (ringedOpenSheafComparison.{c, v, r} R U θ (P.X p) (C.X q)).hom ≫ ringedOpenTensorι.{c, v, r} R ((ringedOpenExtensionOnComplexes.{c, v, r} R U).obj P) C p q n h) ∧ (∀ P P' C C' (a : P ⟶ P') (b : C ⟶ C'), (ringedOpenExtensionOnComplexes.{c, v, r} R U).map (ringedOpenTotalTensorMap.{max c v, v, r} (R.over U) a ((ringedOpenRestrictionOnComplexes.{c, v, r} R U).map b)) ≫ (Φ P' C').hom = (Φ P C).hom ≫ ringedOpenTotalTensorMap.{c, v, r} R ((ringedOpenExtensionOnComplexes.{c, v, r} R U).map a) b)) ∧ (∀ P : CochainComplex (SheafOfModules.{max c v r} (((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R).over U)) ℤ, CochainComplex.IsKFlatIndependentCoefficients (R := R.over U) P → CochainComplex.IsKFlatIndependentCoefficients (R := R) ((ringedOpenExtensionOnComplexes.{c, v, r} R U).obj P)) ∧ (∀ (P H : CochainComplex (SheafOfModules.{max c v r} (((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R).over U)) ℤ) (f : P ⟶ H), CochainComplex.IsKFlatResolutionIndependentCoefficients (R := R.over U) f → CochainComplex.IsKFlatResolutionIndependentCoefficients (R := R) ((ringedOpenExtensionOnComplexes.{c, v, r} R U).map f))",
+  "branch": "newtargets-dag",
+  "by": "Q151",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dbc150f81",
+  "group": "Q151",
+  "result": "pass",
+  "note": "Every node clause is rendered: Φ: j_!Tot(P⊗j*C) ≅ Tot(j_!P⊗C) is a chain iso built on CochainComplex.mapBifunctor of the recorded tensor; the (p,q) summand equation goes through θ (iso of the exact functors of ringedSlice_extension_tensor) transported by tensorObjIsoSheafification; naturality in both chain maps; IsKFlatIndependentCoefficients and IsKFlatResolutionIndependentCoefficients (QuasiIso ∧ K-flat) preserved by j_!. No extra hypotheses; site universes c and v stay independent, coefficients max c v r as in the dependencies. θ is existential but matches the dependency's own Nonempty interface (canonical construction is private, dependency node only says 'an isomorphism'); Φ is determined by θ; the only citer uses just the K-flat-resolution clause. Only the lean field of the node changes; dependency records identical to live; statement verbatim; declarations list exact; one sorry. No duplicate (RingedSiteRestrictionKFlat is the restriction mirror; IntegralOpenReductionComparison is a pro-étale special case). Clean nt_compile --json in 48.9 s of the 60 s limit under load (advisory: possible load timeout at landing)."
  }
 }

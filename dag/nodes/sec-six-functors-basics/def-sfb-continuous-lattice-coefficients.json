@@ -1,0 +1,116 @@
+{
+ "id": "def-sfb-continuous-lattice-coefficients",
+ "kind": "definition",
+ "title": "Continuous lattice coefficient sheaves and the integral inclusion",
+ "status": "split",
+ "statement": "For a scheme $X$ [def-pc-scheme], use its small pro-étale site [def-weil-pbc-proetale-site]. For a commutative topological ring $T$, let $T_X$ be the sheaf of commutative rings with sections $T_X(U)=C(|U|,T)$, the continuous functions with pointwise operations, and restrictions given by precomposition with the underlying continuous maps of site morphisms. In the universe encoding for $X:\\mathrm{Scheme}_{u}$ and $T:\\mathrm{Type}_{u}$ the section type is $\\mathrm{ULift}_{u+1}C(|U|,T)$. Write $T_X^{\\mathrm{ring}}$ for the same sheaf after forgetting commutativity. Now let $\\ell$ be prime and $E/\\mathbf Q_\\ell$ a finite extension with canonical absolute value and valuation ring [def-weil-l-adic-coefficient-extension]. Equip $E$ with that absolute-value topology, represented by $\\mathrm{WithAbs}(|\\cdot|_E)$, and let $A=\\{x\\in E:|x|_E\\leq1\\}$ have its subspace topology. The integral coefficient map $a_X:A_X\\to E_X$ is postcomposition with the actual inclusion $A\\hookrightarrow E$ on every site object.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-l-adic-coefficient-extension"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice.proof.md",
+  "place": "Pushing down by the trace: continuous integral and rational coefficient sheaves of the universal lattice; Bhatt--Scholze, Definition 6.8.1 and Proposition 6.8.4(6)"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Continuous coefficient ring sheaves on the small pro-etale site and the adjunction-unit inverse image of a module section",
+   "results": "OK 8 hit(s): SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, SheafOfModules.pushforwardPushforwardAdj, CategoryTheory.Functor.sheafAdjunctionContinuous, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.unit, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, SheafOfModules.pullbackPushforwardAdjunction",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib specialization; reuse the already published project definitions."
+  },
+  {
+   "tool": "loogle",
+   "query": "latticeCoefficientSheaf, inverseSection",
+   "results": "OK 0 hit(s) | loogle: unknown identifier 'latticeCoefficientSheaf'",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib specialization; reuse the already published project definitions."
+  },
+  {
+   "tool": "grep",
+   "query": "latticeCoefficientSheaf|latticeModuleRing|latticeCoefficientIntegers|integralLatticeCoefficientMap|inverseSection",
+   "results": "OK 0 hit(s)",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib specialization; reuse the already published project definitions."
+  },
+  {
+   "tool": "rg",
+   "query": "Declaration-pattern search for latticeCoefficientSheaf, latticeModuleRing, latticeCoefficientIntegers, integralLatticeCoefficientMap, inverseSection in lean/WeilConjectures and lean/Sheaf",
+   "results": "No definition in WeilConjectures; exact declarations in Sheaf/Paper/LatticeSheafBasic.lean at 156, 178, 201, 209, and Sheaf/AlgebraicGeometry/ProEtaleInverseImageTensorComparison.lean at 75. Their complete signatures, bodies and docstrings were read.",
+   "date": "2026-10-21",
+   "verdict": "existing declarations; no new Lean code"
+  },
+  {
+   "tool": "DAG declaration-record search and blueprint_refs.py",
+   "query": "rg -l coefficient and inverseSection names dag/nodes; parse lean.declaration/declarations; blueprint_refs.py search latticeCoefficient; blueprint_refs.py search inverseSection",
+   "results": "Only the two statement nodes lem-weil-pbc-lattice-pair-image-classification and lem-pur-proetale-inverse-image-tensor-comparison record these declarations. Neither is a definition node. Each blueprint-name query returns 0 nodes.",
+   "date": "2026-10-21",
+   "verdict": "New definition records required by immutable-head review 8d1c775d8a63 H2."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-lattice-pullback",
+  "date": "2026-10-21",
+  "group": "Q28"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-stratified-lattice",
+   "place": "Pushing down by the trace: the canonical coefficient sheaves and unit sections used when restricting a lattice to a stratum",
+   "via": [
+    "lem-sfb-lattice-pullback"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-stratified-lattice",
+ "lean": {
+  "module": "Sheaf.Paper.LatticeSheafBasic",
+  "declaration": "AlgebraicGeometry.ProEtale.latticeCoefficientSheaf",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.latticeCoefficientSheaf",
+   "AlgebraicGeometry.ProEtale.latticeModuleRing",
+   "AlgebraicGeometry.ProEtale.latticeCoefficientIntegers",
+   "AlgebraicGeometry.ProEtale.integralLatticeCoefficientMap"
+  ],
+  "statement": "def latticeCoefficientSheaf (X : Scheme.{u}) (T : Type u)\n    [TopologicalSpace T] [CommRing T] [IsTopologicalRing T] :\n    Sheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1}",
+  "branch": "sheaf-dag",
+  "by": "Q28",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Existing published definitions, with their real data, recorded independently of the theorem that happened to own their source module. No declaration is introduced or changed."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ebcc85b25",
+  "group": "Q28",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ebcc85b25",
+  "group": "Q28",
+  "result": "fix",
+  "note": "Re-delivery after the 8d1c775d H2 RETURN. Lean is byte-identical (sha ab849b91) to the version the earlier review found correct; re-checked H3 clause by clause, edge cases (g=id, rank 0, empty schemes, varying ranks) and universes; no hollow data, sorry only, docstrings and 5-step proof plan present. nt_compile --json clean in 40.7 s. stmt_deps: the two theorem nodes are replaced by new existing:true def nodes def-sfb-continuous-lattice-coefficients (LatticeSheafBasic) and def-sfb-proetale-inverse-image-unit-section (inverseSection); statements match the declarations; check_new_node and check_existing give no failures; no other def node owns these declarations; dependency records identical to side-live; item not dropped. FIX: removed the leading `noncomputable` from both new records' lean.statement (complete replacement JSONs in fixes/). Advisories: body helpers (latticeCoefficientPresheaf, isSheaf_latticeCoefficientPresheaf, latticeCoefficientSheafMap, Rings/Modules/inverse) are still listed only under their theorem-node owners; def-weil-pbc-continuous-integral-coefficients is still cited but unused."
+ }
+}

@@ -1,0 +1,125 @@
+{
+ "id": "def-sfb-constant-completion-coefficient-data",
+ "kind": "definition",
+ "title": "Constant completion coefficient objects and scalar-extension data",
+ "status": "split",
+ "statement": "Let $\\mathcal C$ be a small category with Grothendieck topology $J$, let $A$ be a commutative ring, and let $I\\subset A$ be an ideal. Write $\\underline R$ for the constant ring sheaf [def-weil-pbc-constant-sheaf]. Define $S_n=\\underline{A/I^{n+1}}$ for $n\\in\\mathbf N$, with the quotient transition maps, and $B=\\varprojlim_n S_n$ [def-pur-sheaf-inverse-limit]. Let $\\pi_n:B\\to S_n$ be its limit projections and $\\eta:\\underline A\\to B$ the limit lift of the quotient maps. For any commutative ring sheaf $\\mathcal O$, write $\\operatorname{Mod}(\\mathcal O)$ for its module-sheaf category [def-weil-sheaf-of-modules-category], $\\operatorname{Cx}(\\mathcal O)$ for its integer-indexed cochain complexes, and $Q_{\\mathcal O}:\\operatorname{Cx}(\\mathcal O)\\to D(\\mathcal O)$ for the standard derived localization [def-weil-abstract-derived-category]. For a ring-sheaf map $\\varphi:R\\to S$, let $\\operatorname{change}_\\varphi:\\operatorname{Mod}(R)\\to\\operatorname{Mod}(S)$ be ordinary sheafified scalar extension [def-pur-sheaf-tensor-product]. Its tensor-section insertion sends local sections $s\\in S(U)$ and $m\\in M(U)$ to the image of $s\\otimes m$ under the sheafification unit. Define $\\operatorname{DerivedExtension}(\\varphi)$ to be the data of a functor $F:D(R)\\to D(S)$ and a natural comparison $\\epsilon:Q_R F\\to\\operatorname{change}_\\varphi^{\\mathrm{Cx}}Q_S$ making $F$ a left derived functor and with $\\epsilon_P$ invertible for every K-flat complex $P$ [def-pc-kflat-complex]. Choose this universally specified derived pair supplied by [lem-pur-derived-change-of-rings], determined up to its unique comparison-preserving natural isomorphism, and denote its functor and comparison by $\\operatorname{extend}_\\varphi$ and $\\operatorname{extendComparison}_\\varphi$. These are coefficient constructions and their universal comparison data; no flatness, quotient identification or completeness assertion is imposed.",
+ "stmt_deps": [
+  "def-weil-pbc-constant-sheaf",
+  "def-pur-sheaf-inverse-limit",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pur-sheaf-tensor-product",
+  "lem-pur-derived-change-of-rings",
+  "def-pc-kflat-complex"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex; literature/stacks-project/sites-cohomology.tex",
+  "place": "sites-modules.tex, section Constant sheaves and Tag 093M (lemma-completion-flat), the definition of the inverse-limit coefficient sheaf and its canonical quotient maps; sites-cohomology.tex, Tag 06YY (lemma-derived-base-change), identity-topos scalar extension and its universal K-flat computation."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Constant ring sheaf adic inverse limit completion with canonical projections scalar extension and universal derived comparison",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AdicCompletion.mkₐ\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Algebra\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → (I : Ideal R) → AdicCompletion.AdicCauchySequence I R →ₐ[R] AdicCompletion I R\", \"doc\": \"Given commutative rings $ R $ and $ S $, an ideal $ I $ of $ R $, and an $ S $-algebra structure on $ R $, this constructs the canonical $ S $-algebra homomorphism from $ R $ to its $ I $-adic complet\"}\n  {\"name\": \"AdicCompletion.module\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Algebra\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      {M : Type u_3} →\\n        [inst_1 : AddCommGroup M] → [inst_2 : Module R M] → Module (AdicCompletion I R) (AdicCompletion I M)\", \"doc\": \"For a commutative ring $ R $, an ideal $ I $, and an $ R $-module $ M $, the $ I $-adic completion of $ M $ admits a scalar multiplication by the $ I $-adic completion of $ R $, making it a module ove\"}\n  {\"name\": \"IsAdicComplete.mk_comp_liftRingHom\", \"module\": \"Mathlib.RingTheory.AdicCompletion.RingHom\", \"type\": \"(n : ℕ) : (Ideal.Quotient.mk (I ^ n)).comp (liftRingHom I f hf) = f n\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $ of $ R $, and an $ I $-adically complete commutative ring $ S $, there exists a ring homomorphism $ R \\to S $ constructed by composing the inverse of the \"}\n  {\"name\": \"IsAdicComplete.StrictMono.of_comp_lift\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \": of I N ∘ₗ lift I ha f hf = AdicCompletion.lift I (extend ha f) (factorPow_comp_extend ha f hf)\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $, an $ R $-module $ M $ with additive commutative group structure, and a semiring $ S $ with compatible scalar actions on $ R $ and $ M $ satisfying the s\"}\n  {\"name\": \"AdicCompletion.instCommRing\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Algebra\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → (I : Ideal R) → CommRing (AdicCompletion I R)\", \"doc\": \"The $I$-adic completion of a commutative ring $R$ with respect to an ideal $I$ forms a commutative ring under component-wise operations induced by the inverse limit of the quotient rings $R/I^n$. The \"}\n  {\"name\": \"AdicCompletion.instAlgebra\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Algebra\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    [inst : CommRing R] → [inst_1 : CommRing S] → (I : Ideal R) → [Algebra S R] → Algebra S (AdicCompletion I R)\", \"doc\": \"Given commutative rings $ R $ and $ S $, an ideal $ I $ of $ R $, and an $ S $-algebra structure on $ R $, the $ I $-adic completion of $ R $ inherits a canonical $ S $-algebra structure. This structu\"}\n  {\"name\": \"AdicCompletion.val_smul\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \"[SMul S R] [SMul S M] [IsScalarTower S R M] (s : S) (f : AdicCompletion I M) : (s • f).val = s • f.val\", \"doc\": \"For any scalar $ s $ in a semiring $ S $ and any element $ f $ in the $ I $-adic completion of an $ R $-module $ M $, the scalar multiplication $ s \\\\bullet f $ acts component-wise on the inverse limit\"}\n  {\"name\": \"IsAdicComplete.of_liftRingHom\", \"module\": \"Mathlib.RingTheory.AdicCompletion.RingHom\", \"type\": \"(x : R) : of I S (liftRingHom I f hf x) = (AdicCompletion.liftRingHom I f hf x)\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $ of $ R $, and an $ I $-adically complete commutative ring $ S $, this constructs a ring homomorphism $ R \\to S $ by composing the inverse of the canonical\"}\n",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib match: the hits concern ordinary algebraic adic completion, not these sheafwise coefficient objects and normalized derived scalar-extension data. Reuse the existing project declarations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constant coefficient ring sheaves adic completion scalar extension of sheaf modules and derived extension of scalars comparison",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsAdicComplete.StrictMono.of_lift\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_5} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {a : ℕ → ℕ} (ha : StrictMono a)\\n  (f : (n : ℕ) → M →ₗ[R] N ⧸ I ^ a n • ⊤) (hf : ∀ {m : ℕ}, Submodule.factorPow I N ⋯ ∘ₗ f\", \"doc\": \"For natural numbers $ m \\\\leq n $, the composition of the canonical factor map $ M/I^nM \\\\to M/I^mM $ with the extension of a linear map $ f $ at level $ n $ equals the extension of $ f $ at level $ m $\"}\n  {\"name\": \"IsAdicComplete.StrictMono.of_comp_lift\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_5} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {a : ℕ → ℕ} (ha : StrictMono a)\\n  (f : (n : ℕ) → M →ₗ[R] N ⧸ I ^ a n • ⊤) (hf : ∀ {m : ℕ}, Submodule.factorPow I N ⋯ ∘ₗ f\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $, an $ R $-module $ M $ with additive commutative group structure, and a semiring $ S $ with compatible scalar actions on $ R $ and $ M $ satisfying the s\"}\n  {\"name\": \"AdicCompletion.instIsScalarTower_1\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Algebra\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_3} [inst_1 : AddCommGroup M] [inst_2 : Module R M],\\n  IsScalarTower R (AdicCompletion I R) (AdicCompletion I M)\", \"doc\": \"For a commutative ring $ R $, an ideal $ I $, and an $ R $-module $ M $ with additive commutative group structure, the scalar actions of $ R $ on the $ I $-adic completion of $ R $ and on the $ I $-ad\"}\n  {\"name\": \"AdicCompletion.instIsScalarTower\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {T : Type u_3} [inst : CommRing R] (I : Ideal R) (M : Type u_4)\\n  [inst_1 : AddCommGroup M] [inst_2 : Module R M] [inst_3 : SMul S T] [inst_4 : SMul S R] [inst_5 : SMul T R]\\n  [inst_6 : SMul S M] [inst_7 : SMul T M] [inst_8 : IsScalarTower S R M] [inst_9 : IsScalarTow\", \"doc\": \"Given a commutative ring $R$, an ideal $I$, an $R$-module $M$ with additive commutative group structure, and semirings $S$ and $T$ with compatible scalar actions on $R$ and $M$ satisfying the scalar t\"}\n  {\"name\": \"AdicCompletion.instModuleOfIsScalarTower\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    [inst : CommRing R] →\\n      (I : Ideal R) →\\n        (M : Type u_4) →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : Module R M] →\\n              [inst_3 : Semiring S] →\\n                [inst_4 : SMul S R] → [inst_5 : Module S M] → [IsScalarTower S \", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $, an $ R $-module $ M $ with additive commutative group structure, and a semiring $ S $ with compatible scalar actions on $ R $ and $ M $ satisfying the s\"}\n  {\"name\": \"AdicCompletion.module\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Algebra\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      {M : Type u_3} →\\n        [inst_1 : AddCommGroup M] → [inst_2 : Module R M] → Module (AdicCompletion I R) (AdicCompletion I M)\", \"doc\": \"For a commutative ring $ R $, an ideal $ I $, and an $ R $-module $ M $, the $ I $-adic completion of $ M $ admits a scalar multiplication by the $ I $-adic completion of $ R $, making it a module ove\"}\n  {\"name\": \"AdicCompletion.map_ext''_iff\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Functoriality\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {I : Ideal R} {M : Type u_2} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_3} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {f g : AdicCompletion I M →ₗ[R] N},\\n  f = g ↔ f ∘ₗ AdicCompletion.mk I M = g ∘ₗ AdicCompletion.mk I M\", \"doc\": \"Two $ R $-linear maps from the $ I $-adic completion of $ M $ to $ N $ are equal if and only if their compositions with the canonical $ R $-linear map from $ I $-adic Cauchy sequences to the completio\"}\n  {\"name\": \"AdicCompletion.map\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Functoriality\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      {M : Type u_2} →\\n        [inst_1 : AddCommGroup M] →\\n          [inst_2 : Module R M] →\\n            {N : Type u_3} →\\n              [inst_3 : AddCommGroup N] →\\n                [inst_4 : Module R N] → (M →ₗ[R] N) → AdicCompletion I M →ₗ\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $, $ R $-modules $ M $ and $ N $, and an $ R $-linear map $ f : M \\\\to N $, this function constructs the induced linear map between the $ I $-adic completio\"}\n",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib match: the hits concern ordinary algebraic adic completion, not these sheafwise coefficient objects and normalized derived scalar-extension data. Reuse the existing project declarations."
+  },
+  {
+   "tool": "grep",
+   "query": "ConstantCompletion|DerivedExtension|extendComparison",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib match: the hits concern ordinary algebraic adic completion, not these sheafwise coefficient objects and normalized derived scalar-extension data. Reuse the existing project declarations."
+  },
+  {
+   "tool": "grep",
+   "query": "Definition-node lean declarations beginning CategoryTheory.ConstantCompletion in dag/nodes; ConstantCompletion|DerivedExtension|extendComparison in lean/WeilConjectures and lean/Sheaf; tools/blueprint_refs.py search 'constant completion'",
+   "results": "The existing definition nodes record only kernelIdeal/IsComplete (def-sfb-quotient-kernel-completeness) and mapComplexSquare/mapComplexSquare_hom (def-sf-complex-functor-square). No definition node records finite, completed, projection, coefficientMap, Mod, Cx, D, Q, change, DerivedExtension, derivedExtension, extend, extendComparison or tensorSection. The exact definitions are in lean/Sheaf/Paper/ConstantCompletionEquivalence.lean; WeilConjectures has consumers of derived-extension notions but does not define this ConstantCompletion namespace. Blueprint search: 0 blueprint nodes match 'constant completion'.",
+   "date": "2026-10-21",
+   "verdict": "Add an existing:true definition-node record for the already published definitions, without adding a Lean module or duplicating any construction."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-adic-perfect-model-complete-reduction",
+  "date": "2026-10-21",
+  "group": "NY"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Proof, first sentence invoking sk-prop-integral-criterion: the constant and completed coefficients, projections, ordinary scalar extension and canonical derived residue comparison used in the reverse implication of Bhatt–Scholze Proposition 6.6.11.",
+   "via": [
+    "lem-sfb-adic-perfect-model-complete-reduction",
+    "lem-sfb-adic-stratified-perfect",
+    "lem-sfb-integral-cohomological-adic-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "module": "Sheaf.Paper.ConstantCompletionEquivalence",
+  "declaration": "CategoryTheory.ConstantCompletion.completed",
+  "declarations": [
+   "CategoryTheory.ConstantCompletion.finite",
+   "CategoryTheory.ConstantCompletion.completed",
+   "CategoryTheory.ConstantCompletion.projection",
+   "CategoryTheory.ConstantCompletion.coefficientMap",
+   "CategoryTheory.ConstantCompletion.Mod",
+   "CategoryTheory.ConstantCompletion.Cx",
+   "CategoryTheory.ConstantCompletion.D",
+   "CategoryTheory.ConstantCompletion.Q",
+   "CategoryTheory.ConstantCompletion.change",
+   "CategoryTheory.ConstantCompletion.DerivedExtension",
+   "CategoryTheory.ConstantCompletion.derivedExtension",
+   "CategoryTheory.ConstantCompletion.extend",
+   "CategoryTheory.ConstantCompletion.extendComparison",
+   "CategoryTheory.ConstantCompletion.tensorSection"
+  ],
+  "statement": "def completed : Sheaf J CommRingCat.{u}",
+  "branch": "sheaf-dag",
+  "by": "NY",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Existing published definitions, separately recorded as requested by the independent review of returned head 83b51364a1e0 (H2). None is chosen from equivalence or flat_and_quotients. derivedExtension uses the module-local derivedExtension_exists helper for a universally specified left derived pair, unique up to comparison-preserving natural isomorphism. Kernel completeness is recorded separately by def-sfb-quotient-kernel-completeness."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2103561bd",
+  "group": "NY",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2103561bd",
+  "group": "NY",
+  "result": "pass",
+  "note": "Re-delivery after the H2 RETURN of 83b51364: the Lean module is byte-identical (sha 646fb13e), and its clause-by-clause faithfulness was already confirmed. The item node changes only stmt_deps (plus refreshed lean_audit): theorem lem-weil-pbc-constant-completion-equivalence is replaced by the new existing:true def-sfb-constant-completion-coefficient-data (14 ConstantCompletion declarations, checked against side-live source; derivedExtension is a choice of the derived-change-of-rings data, not of equivalence/flat_and_quotients; signature verbatim; 7 stmt_deps present and bracketed; tags 093M/06YY OK) and by the landed def-sfb-quotient-kernel-completeness; the theorem stays in proof_deps. nt_compile --json is clean, exit 0, 45.3 s under load. Worker dry run OK. Advisory: coefficientProEtaleSiteModel/ModelTopology are not listed in def-weil-proetale-inverse-image's declarations; the source.place typo 06YS→06YQ remains."
+ }
+}

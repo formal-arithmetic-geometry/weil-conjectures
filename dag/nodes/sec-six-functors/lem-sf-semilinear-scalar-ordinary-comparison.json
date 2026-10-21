@@ -346,5 +346,35 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-768dc806e (reviewer sub-agent of L); spot-checked: PASS, no changes. I read the item's 11 steps in full and every cited node statement. The delivery has 0 new nodes, and the statement, stmt_deps and blueprint are unchanged from base. Live and side-live still show the item unsplit, there is no repair note or re-split note, and it is not in a dropped list. No SGA is cited. No cycle: the item and its parent are absent from the dependency closure. Route: all three statements cited from other units are in units that sk-thm-sf-compatibility uses (sk-prop-sf-cbc, sk-prop-sf-biduality-general, sk-def-sf-operations); everything else cited is a definition. The declared tool_uses are accepted. Source checks: Stacks sites-modules 03CY (unique sheafified action, step 2 via def-weil-presheaf-modules-sheafification), 03DA (kernels and cokernels, step 3), 03D3/03D7 (module adjunction and transported action c^{-1}(r)m, steps 5-6), and 03DI at l.2058-2082 (the ⊕_φ G(V→U) presheaf, step 8). Blueprint fix-prop-coherence.proof.md (main-20261015): this item realizes its sentence on unit/counit coefficient comparisons. I recomputed the step-6 mate: mate(b^{-1}) = R_Bρ(ε^C)∘R_B(b^{-1})∘η^B reduces to d by the counit equation, naturality and the triangle identity, so the orientation is correct. Steps 7, 9 and 10 compare transposes using injectivity of the adjunction bijection, and the invertibility of β and s_!→s_* is taken from def-sp-varying-ring-proper-open-arrows. In step 8 I checked the open unit, the counit and the composite-open compositor summand by summand. Edge cases tested: zero ring, non-flat Z→Z/2, the constant identity system, an empty or full open, and a non-cartesian square where π_s is the identity on one clopen component and 0 on the other. Minor wording only: step 11 says the constant-B ordinary α is 'specified in lem-cbc', but lem-cbc states α on derived towers; the ordinary α is the same termwise word, as the constant case of def-sp. This is not a fault."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SemilinearScalarOrdinaryComparison",
+  "declaration": "AlgebraicGeometry.ProEtale.VaryingRing.ordinaryScalarComparison",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.VaryingRing.ordinaryScalarMap",
+   "AlgebraicGeometry.ProEtale.VaryingRing.scalarTowerAdj",
+   "AlgebraicGeometry.ProEtale.VaryingRing.scalarTowerOpenAdj",
+   "AlgebraicGeometry.ProEtale.VaryingRing.scalarTowerSquare",
+   "AlgebraicGeometry.ProEtale.VaryingRing.scalarTowerOpenComp",
+   "AlgebraicGeometry.ProEtale.VaryingRing.scalarTowerOpen_congr",
+   "AlgebraicGeometry.ProEtale.VaryingRing.OrdinaryScalarComparison",
+   "AlgebraicGeometry.ProEtale.VaryingRing.ordinaryScalarComparison",
+   "AlgebraicGeometry.ProEtale.VaryingRing.ordinaryScalarComparison_unique"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SemilinearScalarOrdinaryComparison.lean",
+  "statement": "theorem ordinaryScalarComparison (hψ : ∀ n : ℕ, ψ (n + 1) ≫ φ n = ψ n) : Nonempty (OrdinaryScalarComparison R φ B ψ)",
+  "branch": "newtargets-dag",
+  "by": "Q15",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The theorem asserts existence of a simultaneous normalized ordinary package on the recorded actual categories. The package includes levelwise actual scalar restriction, original transitions, section-normalized direct image, adjunction equations, the specified mate orientation, open-unit normalization, and the complete constant-tower beta/projector/alpha words. No package is chosen into a definition."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f6aac9ef5",
+  "group": "Q15",
+  "result": "pass",
+  "note": "Clause-by-clause match of the node and lean.statement (verbatim). ρ is pinned by level + level_sections + transitions, and uniqueness is a separate theorem. b is pinned by the unit equation and d by d_sections; the HEq is provable because both sides reduce definitionally to M.val.obj (n, proEtaleBaseChange f H). Mate orientation checked. a/β/clopen/π/α are pinned by open_unit/beta_unit/clopen_unit/pi_eq/alpha_eq, matching the StrictTower derived betaInv/openToR/pi/alpha words at ordinary level. Preservation clauses for moduleBeta/modulePi/moduleAlpha are correctly oriented; quasi-compact proper/open binders, no cartesian or flatness hypothesis, universes as in the dependencies. All bodies are sorry; docstrings and source tags present; node diff is lean only; no existing package found. nt_compile timed out at 60 s under load ~210; lcompile.run(timeout=560) exit 0 clean (489 s wall, ~29 s CPU); the delivery's own scompile was 32 s and its dry run OK. Advisory: proof-only plain imports; ordinary tower β/π/α are pinned fields, not standalone defs; retry landing at lower load if it times out."
+ }
 }

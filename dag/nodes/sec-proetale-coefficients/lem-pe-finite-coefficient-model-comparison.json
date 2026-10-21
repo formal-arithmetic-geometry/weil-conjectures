@@ -269,5 +269,32 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-5301aceed (reviewer sub-agent of L); spot-checked: I read every step of the one-level split of lem-pe-finite-coefficient-model-comparison and found no fault, so I made no changes. Source: the blueprint main-20261015 proof sk-prop-integral-criterion-reductions.proof.md, paragraph (1)⇒(2), which relies on the 'classical finite-stalk theory' that this item makes explicit. Against the live side node, only the proof fields, split_report and the Mathlib searches changed; the statement and stmt_deps are unchanged. There are no new nodes, no cycle (closure of 735 nodes), no node from the dropped list and no SGA. The item comes from Q34's re-split of its parent; no re-split note targets the item itself. Step checks: (1) the coefficient equivalence is the canonical κ_T one, it keeps the underlying abelian sheaves, and lem-sfb-internal-module-operations-transport gives compatibility with pullback to strata and to covering objects. (2) Over a finite ring A, finitely presented is the same as finite as a set (A^P→P, finite kernel R, A^R→A^P); I tested A=0 and A=Z/4 with P=Z/2. (3) The scalar local model Λ_U⊗_{Λ(*)_U}P_U is just P_U, with explicit inverse maps. (4) lem-weil-pbc-proetale-finite-model-stalks gives finite geometric stalks on the same cover. (5) For the converse, discarding empty covering objects keeps an fpqc cover, and this clause is genuinely needed: the constant sheaf of an infinite module on an empty object is zero. On each remaining object a geometric point plus inverse-image-restriction, inverse-image-stalk and constant-sheaf-stalk show each P_i is finite, on the original cover. (6) Both definitions use the same stratifications; empty strata impose nothing. (7) The exact equivalence commutes with H^q and the inverse equivalence reflects vanishing, so the bounded constructible subcategories correspond with the same vanishing intervals. Duplicate search: the existing constructible comparisons (classicality, étale versus pro-étale, adic locally-finitely-presented versus local model, the curves case) do not state this one. The 6 declared tool uses are generic and accepted."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.Paper.FiniteCoefficientModelComparison",
+  "declaration": "AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary.finiteCoefficientModelComparison",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary.ordinaryFiniteStalks",
+   "AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary.ordinaryFiniteLocalCondition",
+   "AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary.ordinaryFiniteCoverModels",
+   "AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary.ordinaryIntrinsicBoundedConstructible",
+   "AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary.FiniteCoefficientModelComparison",
+   "AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary.finiteCoefficientModelComparison"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteCoefficientModelComparison.lean",
+  "statement": "theorem finiteCoefficientModelComparison [Finite A] [DiscreteTopology A] (X : Scheme.{u}) [IsNoetherian X] : ∃ e : Encoding A X, FiniteCoefficientModelComparison A X e",
+  "branch": "newtargets-dag",
+  "by": "Q03",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Uses the normalized Encoding and its actual ordinaryDerived from the recorded coefficient-equivalence dependency. The comparison record includes constructibility, all fixed strata, the existing scalar OnCover predicate, every ordinary localized-site trivialization in its full index universe after removing empty members, exact cohomological vanishing intervals, and the induced equivalence commuting with the ambient termwise derived functor. No Tor-amplitude restriction is imposed. The auxiliary predicates only spell out clauses of this comparison in the already-recorded intrinsic ordinary module category; no coefficient construction, pullback, stalk, or constructibility definition is duplicated."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ea5fb12ef",
+  "group": "Q03",
+  "result": "pass",
+  "note": "Clause by clause: Noetherian X, finite discrete commutative A (existing coefficient binders, nothing stronger); ∃ e : Encoding is not hollow (normalization pins ringIso uniquely, ordinary_functor pinned, ordinaryDerived = mapDerivedCategory); fields constructible/strata/covers/discardEmpty (I in u+1, empty members removed, P j finite only on nonempty members)/intervals/boundedConstructible/boundedEquivalence (pinned by ι) match the node and use the recorded HasFiniteConstantLocalModel, IsConstructibleProEtaleModuleSheaf, IsLocallyConstantProEtaleModuleSheaf and Scheme.Stratification (empty strata allowed, so 0<n convention OK). Edge cases A=0, Z/4, empty X, empty covers, negative degrees covered. Helpers non-hollow; no duplicate found. Only lean changed in the node; the 5 dep records are identical to current side. nt_compile --json: 24.6 s, exit 0, clean. Advisories: Encoding/Internal/Ordinary now owned by lem-sf-finite-discrete-normalized-encoding (K1) and reached via the stmt_dep's public re-export; three statement modules imported non-public (available transitively); second reading is the worker's disclosed self-check."
+ }
 }

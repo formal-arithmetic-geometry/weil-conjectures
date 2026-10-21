@@ -1,0 +1,109 @@
+{
+ "id": "def-pe-proetale-object-restriction-comparison-data",
+ "kind": "definition",
+ "title": "Canonical pro-étale object restriction comparison data",
+ "status": "split",
+ "statement": "Let $X$ be a scheme and $r:W\\to X$ an object of the small pro-étale site [def-weil-pbc-proetale-site], with schemes in universe $u$, site objects in $u+1$ and site morphisms in $u$. Let $D$ be a category with object universe $v$, morphism universe $u+1$, colimits of size $(u+1,u+1)$ and weak sheafification on $W_{\\mathrm{proét}}$ [def-weil-pbc-sheafification]. Write $R_r$ for sectionwise restriction to $W$, $R_rG(U\\to W)=G(U\\to W\\to X)$ [def-pur-localized-ringed-site], $u_r$ for base change, $L_r=(-)\\circ u_r^{\\mathrm{op}}$'s left adjoint (left Kan extension), and $r^{-1}G=(L_rG)^\\#$ [def-weil-proetale-inverse-image]. For $U\\to W$, define $q_{W,U}$ in the inverse-image index $\\mathcal I_U$ to be $(U\\to W\\to X,\\varphi_0)$, where $\\varphi_0:U\\to U\\times_X W$ is the pair $(\\mathrm{id}_U,\\mathrm{str})$, with this factor order for the chosen pullback. Define $\\mathrm{ProEtaleObjectRestrictionComparison}(W,D)$ to be the type of data consisting of: (i) a natural isomorphism $p:\\iota_W\\circ R_r\\cong L_r\\circ\\iota_X$, where $\\iota_X,\\iota_W$ forget the sheaf conditions; (ii) for every sheaf $G$ and object $U\\to W$, the component $p_G(U)$ equals the distinguished Kan coprojection indexed by $q_{W,U}$, namely the Kan unit at $U\\to X$ followed by the map along $\\varphi_0^{\\mathrm{op}}$; (iii) for every $G$, an assertion that the actual sheafification unit $L_rG\\to(L_rG)^\\#$ is invertible; (iv) a natural isomorphism $s:r^{-1}\\cong R_r$; and (v) the equation that the underlying presheaf map of $s_G^{-1}$ is $p_G$ followed by the sheafification unit, for every $G$. These definitions do not assert that the comparison-data type is inhabited.",
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-pur-localized-ringed-site",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-sheafification"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tags 00Y0 (definition-localize and ensuing sectionwise restriction formula), 03CE (lemma-localize-given-products), 00VC (presheaf inverse image) and 00WH (sheafification); pro-etale specialization at proetale.tex Tag 09A5."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "ProEtaleObjectRestrictionComparison|proEtaleObjectInverseImageIndexPoint|localizationRestriction AlgebraicGeometry/Sites",
+   "results": "0 hits",
+   "date": "2026-10-21",
+   "verdict": "No Mathlib match. Reuse the existing project structure and distinguished index point; no new Lean definition."
+  },
+  {
+   "tool": "leansearch",
+   "query": "canonical comparison data for proetale inverse image and restriction to a site object normalized by Kan coprojections and sheafification unit",
+   "results": "8 hits: CategoryTheory.isoSheafify_inv, CategoryTheory.GrothendieckTopology.isoSheafify_inv, CategoryTheory.GrothendieckTopology.sheafifyCompIso_inv_eq_sheafifyLift, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, CategoryTheory.Presheaf.sheafificationIsoImagePresheaf, CategoryTheory.Functor.sheafAdjunctionCocontinuous_unit_app_val, CategoryTheory.Equivalence.sheafCongr.inverse_map_val_app, CategoryTheory.GrothendieckTopology.Point.presheafToSheafCompSheafFiber",
+   "date": "2026-10-21",
+   "verdict": "No Mathlib match. Reuse the existing project structure and distinguished index point; no new Lean definition."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "proetale site object inverse image restriction comparison isomorphism Kan coprojection sheafification unit",
+   "results": "8 hits: CategoryTheory.GrothendieckTopology.plusCompIso_inv_eq_plusLift, CategoryTheory.sheafComposeIso_inv_fac, CategoryTheory.GrothendieckTopology.sheafifyCompIso_inv_eq_sheafifyLift, TopCat.Presheaf.whiskerIsoMapGenerateCocone_inv_hom, LightCondensed.isoLocallyConstantOfIsColimit_inv, AlgebraicGeometry.Scheme.restrictFunctorΓ, CategoryTheory.GrothendieckTopology.toPlus_comp_plusCompIso_inv, LightCondensed.lanPresheafExt_inv",
+   "date": "2026-10-21",
+   "verdict": "No Mathlib match. Reuse the existing project structure and distinguished index point; no new Lean definition."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l \"ProEtaleObjectRestrictionComparison|proEtaleObjectInverseImageIndexPoint|restriction comparison data|restriction comparison datum\" dag/nodes; rg -n \"ProEtaleObjectRestrictionComparison|proEtaleObjectInverseImageIndexPoint\" lean/WeilConjectures lean/Sheaf; python3 tools/blueprint_refs.py search ProEtaleObjectRestrictionComparison",
+   "results": "DAG hits: lem-sfb-proetale-object-inverse-image-restriction and lem-coef-infinity-small-colimit-generation (theorem nodes); no definition node. No WeilConjectures hits. Sheaf contains the definitions in ProEtaleObjectInverseImageRestriction.lean, lines 46 and 62. Blueprint search: 0 blueprint nodes match.",
+   "date": "2026-10-21",
+   "verdict": "Existing project definitions need a definition-node owner; reuse them with existing:true."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pe-comparison-etale-slice-abelian-pullback",
+  "date": "2026-10-21",
+  "group": "NF"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-prop-sf-comparison",
+   "place": "First paragraph of sk-prop-sf-comparison.proof.md, injective-acyclicity input; canonical pro-etale restriction identification in step 3 and its inverse in step 4 of lem-pe-comparison-etale-slice-abelian-pullback.",
+   "via": [
+    "lem-pe-comparison-etale-slice-abelian-pullback",
+    "lem-pe-comparison-injective-left-modules-acyclic"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-prop-sf-comparison",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleObjectInverseImageRestriction",
+  "declaration": "AlgebraicGeometry.Scheme.ProEtaleObjectRestrictionComparison",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.ProEtaleObjectRestrictionComparison",
+   "AlgebraicGeometry.Scheme.proEtaleObjectInverseImageIndexPoint"
+  ],
+  "statement": "structure ProEtaleObjectRestrictionComparison {X : Scheme.{u}} (W : X.ProEt)\n    (D : Type v) [Category.{u + 1} D] [HasColimitsOfSize.{u + 1, u + 1} D]\n    [HasWeakSheafify (ProEt.topology W.left) D]",
+  "branch": "newtargets-dag",
+  "by": "NF",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Owns the existing structure and its distinguished index-point construction as definitions only. The theorem lem-sfb-proetale-object-inverse-image-restriction asserts existence and properties; it remains a proof dependency of the consumer. No new module or duplicated definition."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8bfa4a7dd",
+  "group": "NF",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8bfa4a7dd",
+  "group": "NF",
+  "result": "pass",
+  "note": "Re-delivery after RETURN aee04b74 makes exactly the requested H2 repair: comparisonCoefficientPullbackIso → supportSiteComparisonCoefficientPullbackIso (owned by landed def-per-site-comparison-pullback-data, existing:true), and stmt_dep lem-sfb-proetale-object-inverse-image-restriction → new def node def-pe-proetale-object-restriction-comparison-data (existing:true on the unchanged ProEtaleObjectInverseImageRestriction module, statement verbatim, both used decls listed, clauses (i)-(v) = structure fields, no inhabitance claim, no live competing owner). Statement, proof and proof_deps are unchanged; lean.statement matches the file verbatim. Mechanical finding judged: lem-weil-pbc-etale-inverse-image-restriction's record is the used def upperStarIsoLocalizationRestriction, and sliceEquiv needs clause (2) of lem-weil-proetale-weakly-etale-localization (weaklyEtale_slice in sliceTo), so both theorem stmt_deps are genuine → PASS on that point. Earlier accepted H3 pinning, u+1 universes, edge cases, sorry-only proof and docstrings are unchanged. nt_compile --json clean in 14.2 s."
+ }
+}

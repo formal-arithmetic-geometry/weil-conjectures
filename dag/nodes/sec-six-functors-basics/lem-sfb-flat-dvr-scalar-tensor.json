@@ -15,7 +15,8 @@
   "lem-weil-pbc-site-derived-tensor-descent",
   "def-weil-pbc-sites-and-cohomology",
   "def-sc-finitely-presented-module",
-  "def-pur-sheaf-tensor-product"
+  "def-pur-sheaf-tensor-product",
+  "def-sfb-site-derived-constant-module-functor"
  ],
  "proof": [
   {
@@ -237,5 +238,30 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-7b1a67dd6 (reviewer sub-agent of L); spot-checked: I read the item, the 13 cited node statements, blueprint paragraph (2) of sk-lem-integral-models-operations.proof.md and Stacks 093J/03ER/03EK/06YQ/06YP/06YU/00PD (tags checked against tags/tags). The statement is byte-identical to the Q19-created base node and is true. The source sentence 'locally a finite sum of shifts' is false, as the report says (Z_ell, [A -ell-> A]). Step 1: Smith form from lem-sfb-dvr-matrix-smith-powers gives P as a finite sum of copies of A and A/pi^e. Step 2: T = R tensor (constant sheaf) is exact, by lem-weil-pbc-finite-type-constant-exact together with flatness defined as tensor-exactness. Step 3: pi^r stays injective on R by flatness, which gives the explicit two-term resolutions. Step 4: bounded flat complexes are K-flat (06YQ node), the K-flat descent lemma gives the derived tensor, and the K-flat quasi-iso lemma inverts the second augmentation (needed because Q_R is not flat). Step 5: I re-derived the kernel/cokernel of pi^r on A/pi^s for r>=s and r<s by cancellation. Step 6: finite block sums give cohomology in degrees -1 and 0 only. Edge cases checked: (1,1), (1,3), (3,1), zero and free summands, and flatness necessity (R=A/pi). No new nodes; proof_deps equals the union of step uses; searches recorded. lem-sfb-scalar-model-finite-flat-resolution gives only an unspecified two-term map, so it is not a duplicate (advisory only). All five declared tool_uses are generic and accepted. The item is still unsplit live, has no re-split note, and uses no SGA. No changes made."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.FlatDvrScalarTensor",
+  "declaration": "SheafOfModules.FlatDvrScalar.flat_dvr_scalar_tensor",
+  "declarations": [
+   "SheafOfModules.FlatDvrScalar.scalarExtension",
+   "SheafOfModules.FlatDvrScalar.cyclic",
+   "SheafOfModules.FlatDvrScalar.tensor",
+   "SheafOfModules.FlatDvrScalar.flat_dvr_scalar_tensor"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/FlatDvrScalarTensor.lean",
+  "statement": "theorem flat_dvr_scalar_tensor [IsDomain A] [IsDiscreteValuationRing A] (π : A) (_hπ : IsLocalRing.maximalIdeal A = Ideal.span {π}) (α : realizationRing J A ⟶ R) (_hflat : IsFlatOnSite.{u, v, max u v, max u v} (J := J) (R := realizationRing J A) ((restrictScalars.{max u v} ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).map α)).obj (unit ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R)))) (P Q : ModuleCat.{max u v} A) [Module.FinitePresentation A P] [Module.FinitePresentation A Q] : (∀ i : ℤ, i ≠ -1 → i ≠ 0 → IsZero ((DerivedCategory.homologyFunctor.{w, max u v, (max u v) + 1} _ i).obj (tensor J (scalarExtension J α P) (scalarExtension J α Q)))) ∧ (∀ i : ℤ, ∃ N : ModuleCat.{max u v} A, Module.FinitePresentation A N ∧ Nonempty ((DerivedCategory.homologyFunctor.{w, max u v, (max u v) + 1} _ i).obj (tensor J (scalarExtension J α P) (scalarExtension J α Q)) ≅ scalarExtension J α N)) ∧ (∀ r s : ℕ, 1 ≤ r → 1 ≤ s → Nonempty ((DerivedCategory.homologyFunctor.{w, max u v, (max u v) + 1} _ (-1)).obj (tensor J (cyclic J α π r) (cyclic J α π s)) ≅ cyclic J α π (min r s)) ∧ Nonempty ((DerivedCategory.homologyFunctor.{w, max u v, (max u v) + 1} _ 0).obj (tensor J (cyclic J α π r) (cyclic J α π s)) ≅ cyclic J α π (min r s))) ∧ Nonempty (tensor J (unit ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R)) (scalarExtension J α Q) ≅ (DerivedCategory.singleFunctor.{w, max u v, (max u v) + 1} _ 0).obj (scalarExtension J α Q)) ∧ Nonempty (tensor J (scalarExtension J α P) (unit ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R)) ≅ (DerivedCategory.singleFunctor.{w, max u v, (max u v) + 1} _ 0).obj (scalarExtension J α P))",
+  "branch": "sheaf-dag",
+  "by": "Q23",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The scalar models use the recorded commutativeSiteConstantModuleFunctor followed by changeOfRingsOfUniverses. The helper cyclic is the canonical scalar-quotient presentation of R/pi^n R; tensor uses exactly the recorded siteDerivedTensorIndependentCoefficients on degree-zero embeddings. Site object and Hom universes are independent; the coefficient universe contains both. HasSheafify supplies the existing abelian-category infrastructure and is available on every small site."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-579a568b4",
+  "group": "Q23",
+  "result": "pass",
+  "note": "Every clause matches the node: flatness over A_C (IsFlatOnSite of restrictScalars α R), finitely presented scalar P and Q, vanishing outside degrees -1 and 0, an ∃ finitely presented N model in every degree, cyclic H^-1 and H^0 ≅ min-exponent quotient for r,s≥1 (via T(A/π^n), canonically ≅ R/π^nR, Nonempty iso), free factor in both positions. A : Type (max u v) is fixed by the recorded realizationRing; HasSheafify binder is a Prop Mathlib supplies on every small site. Helpers have real data; the only sorry is the theorem; docstrings carry the source place, blueprint id and six-step proof; plain imports match proof_deps modules; statement field verbatim; the added stmt_dep def-sfb-site-derived-constant-module-functor is genuine and used. nt_compile --json: clean, 21.4 s. File byte-identical to 9abb3a3e, which was returned only for a missing-olean build fault that is now gone. Advisory: changeOfRingsOfUniverses is not listed in def-pur-sheaf-tensor-product lean.declarations."
+ }
 }

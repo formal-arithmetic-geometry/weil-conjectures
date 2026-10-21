@@ -16,7 +16,9 @@
   "def-weil-pbc-continuous-integral-coefficients",
   "def-weil-sheaf-of-modules-category",
   "def-weil-pbc-finite-etale-category",
-  "def-weil-proetale-inverse-image"
+  "def-weil-proetale-inverse-image",
+  "lem-weil-pbc-continuous-ring-functions-sheaf",
+  "def-sfb-continuous-coefficient-pullback-maps"
  ],
  "proof": [
   {
@@ -268,5 +270,43 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q21-1eab5276a (reviewer sub-agent of L); spot-checked: Every step is correct, so I'm returning FIX with one citation repair. Read: the item in full, the full statement of each cited node, the main-20261015 sk-lem-stratified-lattice proof ('Pushing down by the trace') and its -trace proof, and Stacks 04HN and 04TQ (03CE, 00Y0, 03EH, 098B and 09A5 resolve to their stated labels). Statement, stmt_deps and blueprint fields are identical to side-live, so no target is weakened. The item is still unsplit live, has no repair note and is not on any dropped list. tools/review_split.py passes: 0 new nodes, no cycle in the 331-node closure, no SGA. Step 1: clause (1) of the inverse-image restriction lemma is generic; at the initial pair the continuous c_r computes to the identity, so r^*L = L|_W. Step 2: 04HN local splitting plus the étale→pro-étale covering lemma, with no degree assumption. Step 3: the sheaf axiom on the sheets gives a product, the action is diagonal, and J=∅ gives zero. Step 4: the pointwise bijection argument was checked; the loci C_σ are open-closed, disjoint and cover W, and W=∅ when |J|≠|K|. Step 5: the map-gluing clause of lem-pe-set-sheaf-cover-descent holds over C/S with fibre products from weakly-étale base change; linearity and uniqueness follow by separatedness. Steps 6–7: the sheaf-image and finite-sum arguments are elementary. Cases tested: empty S and V, p=id, variable degree, the C/R double cover with an overlap permutation that varies, a non-surjective q, and ℓ dividing the degree. Duplicates checked: det-lem-stratified-lattice-trace (the lattice/lisse claim, not this construction), the étale-site trace nodes (different site and coefficients, no image clause) and the sfb lattice-sum nodes; none restates the item. FIX (C1, small): steps 3 and 4 used finite open-closed decompositions as pro-étale coverings without citing a covering node. Both steps now cite lem-pur-etale-proetale-cover (already in proof_deps), with one sentence added to each; nothing else changed. The split_report tool_uses are accepted. lem-sfb-proetale-object-inverse-image-restriction (unit sk-lem-proper-heart-bound) is used for its generic clause (1) only and should be recorded at the merge.; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteEtaleTraceImage",
+  "declaration": "AlgebraicGeometry.Scheme.finite_etale_trace_image",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.traceModelRing",
+   "AlgebraicGeometry.Scheme.traceContinuousRingMap",
+   "AlgebraicGeometry.Scheme.traceFieldRing",
+   "AlgebraicGeometry.Scheme.traceIntegerRing",
+   "AlgebraicGeometry.Scheme.traceIntegerToField",
+   "AlgebraicGeometry.Scheme.traceFieldRingMap",
+   "AlgebraicGeometry.Scheme.traceModulePullback",
+   "AlgebraicGeometry.Scheme.traceModuleDirectImage",
+   "AlgebraicGeometry.Scheme.TraceImageSplitting",
+   "AlgebraicGeometry.Scheme.traceImageSheetObject",
+   "AlgebraicGeometry.Scheme.traceImageSheetArrow",
+   "AlgebraicGeometry.Scheme.traceImageSheetRestriction",
+   "AlgebraicGeometry.Scheme.traceImageSheetUnit",
+   "AlgebraicGeometry.Scheme.TraceImageLocalSums",
+   "AlgebraicGeometry.Scheme.TraceImageLocalRepresentatives",
+   "AlgebraicGeometry.Scheme.TraceImageLocalSheetSum",
+   "AlgebraicGeometry.Scheme.finite_etale_trace_image"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteEtaleTraceImage.lean",
+  "statement": "theorem finite_etale_trace_image (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] {V S : Scheme.{u}} (p : V ⟶ S) [IsFinite p] [Etale p] (L : SheafOfModules.{u + 1} (traceFieldRing l E S)) (M : ((SheafOfModules.restrictScalars (traceIntegerToField l E V)).obj ((traceModulePullback l E p).obj L)).val.Submodule) (hM : Presheaf.IsSheaf (proEtaleModelTopology V) M.toPresheafOfModules.presheaf) : (∃! τ : (traceModuleDirectImage l E p).obj ((traceModulePullback l E p).obj L) ⟶ L, TraceImageLocalSums l E p L τ) ∧ ∀ τ : (traceModuleDirectImage l E p).obj ((traceModulePullback l E p).obj L) ⟶ L, TraceImageLocalSums l E p L τ → ∃ N : ((SheafOfModules.restrictScalars (traceIntegerToField l E S)).obj L).val.Submodule, Presheaf.IsSheaf (proEtaleModelTopology S) N.toPresheafOfModules.presheaf ∧ (∀ (B : S.ProEt) (s : L.val.obj (op (AsSmall.up.obj B))), s ∈ N.obj (op (AsSmall.up.obj B)) ↔ TraceImageLocalRepresentatives l E p L M τ B s) ∧ (∀ (U : S.ProEt) (_ : Etale U.hom) (J : Type u) [Fintype J] (σ : TraceImageSplitting p U J) (B : S.ProEt) (h : B ⟶ U) (s : L.val.obj (op (AsSmall.up.obj B))), s ∈ N.obj (op (AsSmall.up.obj B)) ↔ TraceImageLocalSheetSum l E p L M σ h s)",
+  "branch": "newtargets-dag",
+  "by": "NG",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Repair H2/H3: the existing coefficient maps are owned by def-sfb-continuous-coefficient-pullback-maps; continuousCoefficientSheaf genuinely uses its sheafhood theorem. Trace uniqueness is asserted among all maps satisfying the local sums, separately from the integral sheaf-image conclusion for every such map. Uses the existing equivalent AsSmall site and covering-sieve formulas, including empty splittings."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-14188bfd7",
+  "group": "NG",
+  "result": "fix",
+  "note": "Re-delivery after the 0e8accd4a547 RETURN. Lean delta: unused Paper.ContinuousIntegralCoefficients import removed; conclusion restated as (∃! τ, TraceImageLocalSums τ) ∧ ∀ τ, TraceImageLocalSums τ → ∃ N, ..., so H3 is fixed. H2 fixed: theorem stmt_dep lem-weil-pbc-continuous-coefficient-pullback-composition replaced by new def node def-sfb-continuous-coefficient-pullback-maps, existing:true on the unchanged ContinuousCoefficientPullback (DirectMap, Pullback, Map, integralRationalCoefficientMap). It covers every decl the item uses, no competing owner exists live, side-live or in other runs, and its body owners are in its stmt_deps. Mechanical finding: lem-weil-pbc-continuous-ring-functions-sheaf is genuine because continuousCoefficientSheaf packs continuousMapPresheafCommRing_isSheaf; PASS on that point. Item statement verbatim, 17 declarations match the file, one sorry, docstrings complete, not dropped. Splitting-datum advisory justified with explicit maps both ways. nt_compile timed out at 60 s (load 206); lcompile timeout=560 clean in 39.0 s. FIX: fixes/def-sfb-continuous-coefficient-pullback-maps.json trims `noncomputable` from lean.statement; check_existing now returns ([], [])."
+ }
 }

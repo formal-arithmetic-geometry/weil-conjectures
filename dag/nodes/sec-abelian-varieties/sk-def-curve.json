@@ -152,5 +152,30 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-56033643f (reviewer sub-agent of L); spot-checked: I read the item, the unit record and the three cited nodes in full; review.md has the details. The item statement is word for word the text of main-20261015 sec-abelian-varieties/sk-def-curve/_section.md, and nothing is weakened compared with master. The statement dependencies are def-sc-curves and def-sc-genus, and their blueprint_update texts match def-sc-curves.md and def-sc-genus.md in main-20261015 clause by clause. That covers a field k, separated finite type of dimension at most 1, smooth and proper, connected meaning nonempty, connected and of dimension 1, and genus as dim H^0(Omega^1) together with its equivalence to dim H^1(O). Step 1, which is correctly marked non-elementary, takes the equality g(C_k')=g(C) from the statement of lem-sc-genus-invariant (split, reviewed). I checked that statement against sec-curve-estimates/sk-prop-ext-invariance/lem-sc-genus-invariant.md in main-20261015: same hypotheses (proper smooth connected curve, k inside k' with both algebraically closed), and the Jacobian clause is set aside by conjunction elimination. That lemma measures genus as dim H^1(O). The statement of def-sc-genus itself equates this with dim H^0(Omega^1), by Stacks 0BS2 parts (5) and (6), so C3 and C4 are fine. The step's restriction to algebraically closed k is the right one, not a weakening: if k is not algebraically closed, H^0(O)=L can differ from k (for example P^1_L over k), and then the base change to k' is disconnected. The off-unit use of lem-sc-genus-invariant is declared in tool_uses and I accept it: it is the claim stated inside the definition, and no node of this unit (which cites no other units and has no proof steps) states it. Following both kinds of dependency from the cited nodes reaches 5,402 nodes and none of them is sk-def-curve, so there is no cycle. There are no new nodes, no duplicate or restated clause, and no SGA citation. This is not a target node, so the base-change and coefficient-category check does not apply. The unit's realized statement is [sk-def-curve] with steps []. Small cases: P^1, an elliptic curve, Spec k, the empty scheme, P^1 disjoint union P^1, and k=k'. I could not re-check the search log here. The report mentions a citations.json that is not in the delivery, which does no harm. I made no fixes."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CurveGenus",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.genus_baseChange_of_isAlgClosed",
+  "declarations": [
+   "AlgebraicGeometry.IsCurve",
+   "AlgebraicGeometry.IsConnectedCurve",
+   "AlgebraicGeometry.Scheme.Hom.genus",
+   "AlgebraicGeometry.Scheme.Hom.genus_baseChange_of_isAlgClosed"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/CurveGenus.lean",
+  "statement": "theorem Scheme.Hom.genus_baseChange_of_isAlgClosed {k K : Type u} [Field k] [Field K] [IsAlgClosed k] [IsAlgClosed K] [Algebra k K] {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f] [IsProper f] : (pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap k K)))).genus = f.genus",
+  "branch": "newtargets-dag",
+  "by": "Q84",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Mixed record: the three defining notions are reused verbatim from WeilConjectures.AlgebraicGeometry.Curve, as recorded by def-sc-curves and def-sc-genus. The new theorem states only this unit's final extension-invariance parenthetical, extracting the genus equality from lem-sc-genus-invariant without its extra Jacobian assertions. No definition is duplicated."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4f77c2f48",
+  "group": "Q84",
+  "result": "pass",
+  "note": "Node unchanged except lean; statement verbatim vs main-20261015 _section.md. Mixed record: upstream IsCurve/IsConnectedCurve/Scheme.Hom.genus (def-sc-curves, def-sc-genus) plus new theorem genus_baseChange_of_isAlgClosed, whose hypotheses are exactly those of genus_jacobian_invariant (lem-sc-genus-invariant) and whose conclusion is its first conjunct; no extra hypotheses; single universe u forced by the pullback in Scheme.{u}, same as the dependency. genus_baseChangeField has different hypotheses (SmoothOfRelativeDimension 1), so not an exact existing statement. Docstrings carry source place, blueprint id and proof step; lean.statement verbatim; lines <=100; proof sorry. nt_compile --json clean in 17.8 s. Advisory: plain GenusInvariant import unused until stage 3 (proof-plan import)."
+ }
 }

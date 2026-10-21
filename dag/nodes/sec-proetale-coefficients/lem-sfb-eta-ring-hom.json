@@ -236,5 +236,23 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q30-ece375d7b (reviewer sub-agent of L); spot-checked: Read the full mathematics and cited sources. All three steps are valid; coefficients and mate construction match master, with no cycle, missing dependency, or new duplicate. Accepted the transport tool use. Corrected only the stale split_report.summary claiming a unit file was included; review.md records source checks and edge cases.; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic",
+  "declaration": "AlgebraicGeometry.ProEtale.isMonHom_condensedPushforwardHom",
+  "statement": "instance isMonHom_condensedPushforwardHom : IsMonHom (condensedPushforwardHom Λ f)",
+  "branch": "slopmaster2",
+  "by": "Q77",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Exact existing declaration in the published upstream pro-etale ModuleObject.Basic framework, confirmed by scompile.py --source. Its section binds arbitrary Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}, [MonObj Λ], {X Y : Scheme.{u}}, and f : X ⟶ Y. condensedRingObj is the strong-monoidal pullback p_X^* Λ; condensedPushforwardHom is the adjunction unit followed by lowerStar.map of condensedPullbackHom. The target MonObj is Functor.monObjObj for the recorded laxMonoidal_lowerStar, and IsMonHom is exactly preservation of multiplication and unit. No commutativity, finiteness or morphism-property assumption is imposed. The branch label identifies the published WeilConjectures source root; no duplicate statement module is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-816e5f1db",
+  "group": "Q77",
+  "result": "pass",
+  "note": "existing:true binding to AlgebraicGeometry.ProEtale.isMonHom_condensedPushforwardHom (side ModuleObject/Basic.lean:608); only the lean field changes vs side-live. Statement verbatim. Λ arbitrary MonObj condensed ring, f arbitrary, Λ_X/Λ_Y = condensedRingObj (= coefficientRing dep), f^*/f_* = monoidal_upperStar/laxMonoidal_lowerStar (sole LaxMonoidal instance on lowerStar), target structure = monObjObj; probe proved the one/mul equations against explicit ε/μ of lowerStar; η = unitAlgHom ≫ lowerStar.map α = def-sfb-eta record. No extra hypotheses or universe restriction; axioms standard. nt_compile --json probe clean, 9.1 s. Consistent with the alpha-ring-hom precedent and the unit-level declarations list. No findings."
+ }
 }

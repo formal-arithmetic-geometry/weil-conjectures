@@ -272,5 +272,32 @@
  },
  "chapter": "sec-proetale-coefficients",
  "unit": "sk-def-sfb-transport",
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "WeilConjectures.CategoryTheory.ModuleObjects.ProjectionFormula",
+  "declaration": "CategoryTheory.Functor.ProjectionFormula.mapModLeft",
+  "declarations": [
+   "CategoryTheory.Functor.ProjectionFormula.smul",
+   "CategoryTheory.Functor.ProjectionFormula.modObj",
+   "CategoryTheory.Functor.ProjectionFormula.mapModLeft",
+   "CategoryTheory.Functor.ProjectionFormula.mapModLeft_obj_X",
+   "CategoryTheory.Functor.ProjectionFormula.mapModLeft_map_hom",
+   "CategoryTheory.Functor.ProjectionFormula.mapModLeft_obj_smul",
+   "CategoryTheory.Functor.ProjectionFormula.mapModLeft_comp_forget"
+  ],
+  "statement": "noncomputable def mapModLeft : Mod C (S.obj B) ⥤ Mod D B",
+  "branch": "slopmaster2",
+  "by": "Q147",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Exact existing upstream construction, ProjectionFormula.lean:215–282. In the enclosing context C and D are arbitrary monoidal categories with independent object and morphism universes, S : D ⥤ C has S.Monoidal, P : C ⥤ D, pf : S.ProjectionFormula P, and B : D has MonObj B. smul is (pf.iso B M).inv ≫ P.map γ[S.obj B,M]; modObj supplies the module laws. mapModLeft sends M to P.obj M.X with that action and f to P.map f.hom with its linearity proof. mapModLeft_comp_forget is the asserted equality of functors. No adjunction, symmetry, additivity, or exactness is assumed. The branch label slopmaster2 follows the existing WeilConjectures record convention; this module is present in the live project."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9c12f10e2",
+  "group": "Q147",
+  "result": "pass",
+  "note": "existing:true record of upstream CategoryTheory.Functor.ProjectionFormula.mapModLeft (side-live ProjectionFormula.lean 215–282); only the item's lean field changes, and the 4 dependency nodes are identical to live. Every clause matches: smul = (pf.iso B M).inv ≫ P.map γ, modObj gives the module laws, Mod.Hom.mk' gives B-linearity, mapModLeft is the functor, mapModLeft_comp_forget is a functor equality by rfl. The monoid on SB comes from Mathlib monObjObj (ε ≫ S.map η, μ ≫ S.map μ), checked by rfl. No extra assumptions (no adjunction, braiding, additivity or exactness; B noncommutative allowed; independent universes); the record correctly takes the general version, not Adjunction.mapModLeft. No duplicate record in the DAG. The two monoid dependencies are status mathlib with matching mathlib_match. nt_compile --json probe (#check of the 7 declarations and rfl checks of the action and monoid formulas) compiled clean, 5.1 s, exit 0."
+ }
 }

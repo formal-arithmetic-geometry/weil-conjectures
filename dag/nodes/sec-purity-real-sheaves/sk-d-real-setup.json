@@ -97,5 +97,34 @@
   "group": "NE",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NE-75c99ed23 (reviewer sub-agent of L); spot-checked: Read the item, unit/chapter route, current and master blueprint sources, all 17 dependency nodes and cited source locations, packet/report, and delivery-errors A–F. The sketch matches its source; dependencies cover every convention; edge cases, Frobenius/local q_x, base change, coefficient notation, duplicate sibling d-real-setup, searches, acyclicity, and route were checked. No new nodes, proof steps, repairs, SGA use, or tool_uses are present."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RealSheavesSetup",
+  "declaration": "RealSheaves.Setup",
+  "declarations": [
+   "RealSheaves.Setup",
+   "RealSheaves.Setup.q",
+   "RealSheaves.Setup.geometricCurve",
+   "RealSheaves.Setup.IsCurve",
+   "RealSheaves.Setup.closedPointDegree",
+   "RealSheaves.Setup.closedPointCardinality",
+   "RealSheaves.Setup.frobenius",
+   "RealSheaves.Setup.localFrobenius",
+   "RealSheaves.Setup.IsAffineOpen"
+  ],
+  "statement": "structure Setup",
+  "branch": "newtargets-dag",
+  "by": "Q39",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Reuse the published definition bundle attached to d-real-setup, the blueprint same_as twin: the sketch and expanded source files have identical mathematical text. Setup carries the fields and coefficient embedding; its q, geometricCurve, IsCurve, closedPointDegree, closedPointCardinality, frobenius, localFrobenius and IsAffineOpen declarations render every remaining convention. No new module or duplicate definition. The structure signature is verbatim up to where."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d857c0607",
+  "group": "Q39",
+  "result": "pass",
+  "note": "existing:true binding of sk-d-real-setup to RealSheaves.Setup bundle (Sheaf.Paper.RealSheavesSetup), owned by same_as twin d-real-setup (identical blueprint text, identical 17 stmt_deps, twin PASS by Q108). Only lean field + report changed vs live. Clause check: q=p^a with p prime, F_q via card_eq, IsAlgClosure k, ℓ≠p, Qbar/iota plain embedding, IsCurve (nonempty, separated, smooth, LOFT∧QC, pure dim 1, connected geometric base change), residueDegree e_x, q_x, geometric Frobenius = inverse arithmetic, local F_x without an extra finiteness assumption, IsAffineOpen over k₀ (equivalent for finite-type). Edge cases and universes ok; statement 'structure Setup' verbatim; no file key, as required for existing:true. nt_compile --json #check probe of all 9 declarations: exit 0, 30.7 s. Second-reading section uses the standard post-10-17 wording. No fixes."
  }
 }

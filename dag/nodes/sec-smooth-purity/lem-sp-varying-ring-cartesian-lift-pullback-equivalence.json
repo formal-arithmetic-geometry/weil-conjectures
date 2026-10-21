@@ -487,5 +487,29 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-b9df962de (reviewer sub-agent of L); spot-checked: I read the item and all four cited nodes in full; the delivery has no new nodes and the statement is byte-identical to base, where the item was unsplit with an empty proof. Step 1 checked: def-sp-varying-ring-operations gives inverse-image compositors that are isomorphisms (adjoint comparisons of the fibre-product direct-image compositor) plus the identity normalizations. u_X=e_X∘transport∘c_{t,s}^{-1}:HF→id and u_U:FH→id have the right sources and targets. Step 2: the cited Mathlib leaves lem-sf-quasi-inverse-hom-bijection and lem-trf-fully-faithful-ess-surj-equivalence apply correctly, but they are redundant because Stacks 001J (categories.tex:351) already gives the equivalence from step 1; advisory only. Step 3 is the correct two-uniqueness proof that the canonical lift (k,r):V→W×_T S of a cartesian square is an isomorphism (def-pc-fibre-product, Tag 08N0). Step 4 is substitution. Removing def-sp-varying-ring-proper-open-arrows from stmt_deps is correct: the statement uses no clopen projection or exchange arrow, the item has no lean record, and the citer proper-open-pasting uses only the unchanged statement. Source tags 0F7B, 001J, 02C3, 08N0 and 01JP match their labels; 0F7B is context only, and the Lean helpers pull_equivalence:1000 and lift_isIso:1019 exist. Edge cases checked: identity s, empty schemes, zero ring, non-flat transitions such as Z/4→Z/2. No duplicate: the pro-étale isomorphism inverse-image and finite-ring derived pullback-equivalence nodes cover different categories. Batch-5 flag: lem-trf-fully-faithful-ess-surj-equivalence is a generic category-theory Mathlib leaf (Functor.asEquivalence, Equivalence.lean:642) whose only stmt_dep is def-nagata-category and which has no proof deps, so it is not part of the trace-formula or Poincaré-duality proofs; accepted. No SGA citation, no tool_uses."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.VaryingRingCartesianLiftPullbackEquivalence",
+  "declaration": "AlgebraicGeometry.ProEtale.VaryingRing.cartesianLift_pull_isEquivalence",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.VaryingRing.pullIsoSourceComparison",
+   "AlgebraicGeometry.ProEtale.VaryingRing.pullIsoTargetComparison",
+   "AlgebraicGeometry.ProEtale.VaryingRing.cartesianLift_pull_isEquivalence"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/VaryingRingCartesianLiftPullbackEquivalence.lean",
+  "statement": "theorem cartesianLift_pull_isEquivalence {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S) (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i] [QuasiCompact k] [QuasiCompact i] [IsProper p] [IsProper r] (h : k ≫ p = r ≫ i) (hsq : IsPullback k r p i) : IsIso (pullback.lift k r h) ∧ (pull R φ (pullback.lift k r h)).IsEquivalence",
+  "branch": "newtargets-dag",
+  "by": "Q23",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Repair of return L at e91b66932cd7: imports all Sheaf.AlgebraicGeometry.VaryingRingProperOpenPasting and reuses its existing private pull_equivalence (R : ℕ → CommRingCat.{u + 1}) (φ : ∀ n : ℕ, R (n + 1) ⟶ R n) {U X : Scheme.{u}} (s : U ⟶ X) [IsIso s] : (pull R φ s).IsEquivalence; no duplicate isomorphism-equivalence theorem is declared."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c90a24f7d",
+  "group": "Q23",
+  "result": "pass",
+  "note": "Q23 c90a24f7: repairs L's H4 return by deleting pull_isEquivalence_of_isIso and importing the private pull_equivalence via import all VaryingRingProperOpenPasting, as L asked. H3 ok: arbitrary R/φ at the operations universes, Modules R φ; two real comparison defs matching node u_X/u_U (moduleGComp⁻¹, eqToIso along inv_hom_id/hom_inv_id, leftAdjointIdIso = gId identity piece); cartesianLift_pull_isEquivalence binds k r p i, qc open immersions k,i, proper p,r, h, IsPullback, and concludes IsIso (pullback.lift k r h) ∧ its pull is IsEquivalence. Edge cases (identity s, empty schemes, zero rings, non-flat transitions, single universe) admitted. Only the item's lean field changed vs side-live; statement verbatim; lines ≤97 chars; docstrings ok; one sorry theorem. nt_compile --json clean in 22.3 s (10.8 s without the import). Advisory: the import all is not used by any term yet (kept per L, serves stage 3) and points to the citer's module; stage 3 must not make the pasting module import this one."
+ }
 }

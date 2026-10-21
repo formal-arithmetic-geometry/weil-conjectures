@@ -270,5 +270,31 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-f025566ed (reviewer sub-agent of L); spot-checked: I read the item and all 7 steps in full, plus the statements of all 18 cited nodes, the unit sk-prop-sfb-finite-extension-compatibility and the parent lem-sfb-qlbar-flat. There are no new nodes and no repair note. The statement and stmt_deps are unchanged against live and side-live, where the item is still unsplit. There is no cycle: neither the item nor its parent is in the item's dependency closure. Step checks: (1) the restricted action on sections is φ_sec(r)n, which matches def-pc-sheaf-restrict-scalars. (2) Q⊣V is built by an explicit balanced map plus the unique factorization of def-weil-presheaf-modules-sheafification, with unit [1⊗m]. (3) Uniqueness of left adjoints (lem-weil-pbc-conjugate-iso-unit-equation) applied to the transported internal adjunction gives c with c[1⊗m]=[1⊗m], and B-linearity gives c[s⊗m]=[s⊗m], so the direction is correct. (4) VQ≅T because both are the sheafification of the same presheaf and the action extension is unique. (5) V preserves finite limits (sectionwise limits, lem-weil-pbc-module-sheaves-colimits-forgetful) and reflects isomorphisms (correct calculation), so it reflects finite limits. (6) Equivalence and natural-isomorphism invariance plus finite-limit cancellation give both directions. (7) T is a left adjoint, so right exact, and symmetry identifies it with the flatness functor. Small cases tested on the one-point site: Z→Q, Z→Z/2, R→0 and the identity. I accept both declared tool uses as generic. Maintainer note: lem-sfb-internal-section-scalar-adjunction (unsplit, created 2026-10-21 by Q20, unit sk-prop-scalar-six) already states the comparison E_S Ext ≅ Ext_sec E_R of steps 1–3. The report missed it, but the item proves it inline, so this is a parallel-creation overlap and only advisory. A second advisory: step 3 assumes coequalizers in Sh(C,Ab) without a citation. No fixes."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InternalScalarExtensionSectionTest",
+  "declaration": "CategoryTheory.InternalAbelianSheafModule.internalScalarExtension_section_test",
+  "declarations": [
+   "CategoryTheory.InternalAbelianSheafModule.scalarExtensionSectionEssentiallySmall",
+   "CategoryTheory.InternalAbelianSheafModule.scalarExtensionSectionLocalEquivalences",
+   "CategoryTheory.InternalAbelianSheafModule.scalarExtensionSectionModule",
+   "CategoryTheory.InternalAbelianSheafModule.scalarExtensionSectionTmul",
+   "CategoryTheory.InternalAbelianSheafModule.internalScalarExtension_section_test"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/InternalScalarExtensionSectionTest.lean",
+  "statement": "theorem internalScalarExtension_section_test : (∃ θ : Mod.extendScalars φ ⋙ Mod.comap φ ⋙ (sectionModuleEquivalence J R).functor ≅ (sectionModuleEquivalence J R).functor ⋙ tensorLeft (scalarExtensionSectionModule J φ), (∀ (M : Mod (Sheaf J AddCommGrpCat.{w}) R) (U : Cᵒᵖ) (s : S.obj.obj U) (m : M.X.obj.obj U), ((θ.hom.app M).val.app U) (((Mod.extendπ φ M).hom.app U) (((Functor.LaxMonoidal.μ (sheafToPresheaf J AddCommGrpCat.{w}) S M.X).app U) (s ⊗ₜ[ℤ] m))) = scalarExtensionSectionTmul J φ M U s m) ∧ (∀ {M N : Mod (Sheaf J AddCommGrpCat.{w}) R} (f : M ⟶ N), (sectionModuleEquivalence J R).functor.map ((Mod.comap φ).map ((Mod.extendScalars φ).map f)) ≫ θ.hom.app N = θ.hom.app M ≫ (tensorLeft (scalarExtensionSectionModule J φ)).map ((sectionModuleEquivalence J R).functor.map f))) ∧ (PreservesFiniteLimits (Mod.extendScalars φ) ↔ SheafOfModules.IsFlatOnSite (scalarExtensionSectionModule J φ))",
+  "branch": "newtargets-dag",
+  "by": "NO",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Uses the existing reconstructed section-ring and section-module equivalence. The sectionwise R-module underlying S is E_R(comap φ (regular S)), so its action is through the reconstructed section-ring map. The natural comparison is normalized explicitly on the internal coequalizer pure tensors and sheafified balanced section tensors. Small-site transport instances instantiate existing Mathlib theorems without additional size or local-equivalence assumptions."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-27d9f27ea",
+  "group": "NO",
+  "result": "pass",
+  "note": "Clause-by-clause match: UnivLE.{max uC vC,w}+HasSheafify+monoidal W+MonoidalClosed hypotheses (node-stipulated, site universes independent); φ monoid map of comm ring objects; E_R = recorded sectionModuleEquivalence; S_sec = E_R(Res_φ(regular S)), canonical (sections = S by rfl, action φ_sec(r)s via lax-μ naturality); ∃ natural iso Ext⋙Res⋙E_R ≅ E_R⋙tensorLeft S_sec with tensor = cochainModulesMonoidal (rfl probe), pure-tensor pin through extendπ and sheafification unit/tensorObjIsoSheafification, explicit 1⊗E_R(u) square; PreservesFiniteLimits(Ext) ↔ IsFlatOnSite S_sec. Edge cases (id, Z→Q, Z→Z/2, R→0, empty site) covered. Helper defs are real data; instances are Props with real proofs; only main theorem is sorry; docstrings have source/blueprint and 7 proof steps; statement verbatim; declarations match; node diff only lean; report has both sections. nt_compile --json clean 15.7 s. Advisory: global Sheaf.monoidalCategory/symmetricCategory attribute and exported Prop instances (precedent InternalSectionTensorComparison); proof-only imports; Q20 internal-section-scalar-adjunction overlap only."
+ }
 }

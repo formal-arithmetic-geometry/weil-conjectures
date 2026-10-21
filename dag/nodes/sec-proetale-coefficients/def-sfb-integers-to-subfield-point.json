@@ -134,5 +134,27 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q68-caa3be44b (reviewer sub-agent of L); spot-checked: Reviewed the item, both cited node statements, blueprint proof/source, chapter and unit route, edge cases, coefficient category, target source bindings, Mathlib searches, duplicates, and acyclicity. The single proof step is complete and correctly sourced; no repairs or new nodes are needed. Wrote review.md."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic",
+  "declaration": "Profinite.padicIntegersCondensedRingToPadicSubfieldCondensedRing",
+  "declarations": [
+   "Profinite.padicIntegersCondensedRingToPadicSubfieldCondensedRing",
+   "CategoryTheory.Sheaf.isMonHom_sheafCompose_map"
+  ],
+  "statement": "noncomputable def padicIntegersCondensedRingToPadicSubfieldCondensedRing :\n    padicIntegersCondensedRing.{u} ℓ E ⟶ padicSubfieldCondensedRing ℓ E",
+  "branch": "slopmaster2",
+  "by": "Q83",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Existing canonical condensed-ring inclusion, specialized to E.1 for E : PadicAlgCl.FiniteIntermediateField ℓ. Its parameters are (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)]. The formula is continuousMapRingSheafMap (PadicAlgCl.integers ℓ E).subtype continuous_subtype_val, with the norm restricted from PadicAlgCl ℓ. This existing construction is defined for every embedded subfield and hence for exactly the finite embedded fields in this node, with no extra data. Its underlying abelian-sheaf map is (sheafCompose _ (forget₂ RingCat Ab)).map of this inclusion; the publicly imported recorded CategoryTheory.Sheaf.isMonHom_sheafCompose_map gives the final tensor-ring-morphism clause. The same specialization is named AlgebraicGeometry.ProEtale.padicIntegersRingObjToContinuousMapRingObj in the larger rationalization module, whose unrelated import closure currently hits a missing published Localization.olean. This record imports the smaller owning module and reuses the exact same canonical construction; no module or definition is duplicated."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2d1ea986e",
+  "group": "Q83",
+  "result": "pass",
+  "note": "existing:true record only; no Lean module, and only the lean field changes. The primary declaration Profinite.padicIntegersCondensedRingToPadicSubfieldCondensedRing (EllAdic.lean:127-130) is the canonical postcomposition continuousMapRingSheafMap of 𝒪_E.subtype, with 𝒪_E and the topology restricted from PadicAlgCl. It holds for every embedded E, and the node's finite E is the E.1 specialization. Sheaf.isMonHom_sheafCompose_map gives the ring-object-morphism clause. Statement verbatim; universes match the dep binding. The existing padicIntegersRingObjToContinuousMapRingObj and padicIntegersToPadicSubfield (the citer's binding) are built from this map, so nothing is duplicated. Probe compile via nt_compile --json: both #checks pass and IsMonHom inferInstance for a FiniteIntermediateField; clean in 9.1 s. Edge cases E=Q_ℓ, ℓ=2 and empty S are fine. Only a stale line number in report.md (cosmetic)."
+ }
 }

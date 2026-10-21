@@ -1,0 +1,129 @@
+{
+ "id": "def-sfb-condensed-closed-support-functor",
+ "kind": "definition",
+ "title": "Canonical closed-support kernel functor for condensed module sheaves",
+ "status": "split",
+ "statement": "Let $\\Lambda$ be a condensed ring, not necessarily commutative [sk-def-sfb-condensed-ring]. For each scheme $S$ [def-pc-scheme], put $\\Lambda_S=p_S^*\\Lambda$ [sk-def-sfb-pulled-back-coefficients] and $\\mathcal M_S=\\operatorname{Mod}_{\\Lambda_S}(\\operatorname{Sh}(S_{\\mathrm{pro\\acute et}},\\mathrm{Ab}))$ [sk-def-sfb-module-objects] [def-weil-pbc-proetale-site]. For a scheme morphism $f:S\\to T$, use the abelian-sheaf inverse and direct images [def-weil-proetale-inverse-image], their transport to module objects [sk-def-sfb-transport], and the canonical coefficient isomorphism $\\alpha_f:f^*\\Lambda_T\\simeq\\Lambda_S$ and its mate $\\eta_f:\\Lambda_T\\to f_*\\Lambda_S$ [sk-def-sfb-coefficient-morphisms]. Define module inverse image by transporting along $f^*$ and restricting scalars along $\\alpha_f^{-1}$, and module direct image by transporting along $f_*$ and restricting along $\\eta_f$, using [sk-def-sfb-change-of-scalars]. Write $u_j:\\mathrm{id}\\to j_*j^*$ for the unit of their canonical module adjunction. For arbitrary scheme morphisms $i:Z\\to X$ and $j:U\\to X$, define $K_j(M)=\\ker(u_{j,M}:M\\to j_*j^*M)$ in $\\mathcal M_X$, its natural inclusion $\\kappa_M:K_j(M)\\to M$, and the additive functor\n$$\\Gamma_{i,j}:\\mathcal M_X\\longrightarrow\\mathcal M_Z,\\qquad \\Gamma_{i,j}(M)=i^*K_j(M).$$\nOn a module map $a:M\\to N$, $K_j(a)$ is the unique kernel map satisfying $\\kappa_N\\circ K_j(a)=a\\circ\\kappa_M$, using naturality of $u_j$, and $\\Gamma_{i,j}(a)=i^*K_j(a)$. In particular, for a closed immersion $i$ [def-weil-closed-immersion] with complementary open immersion $j$ [def-weil-open-immersion], this defines the closed-support functor $\\Gamma_Z(M)=i^*\\ker(M\\to j_*j^*M)$. The definition uses the actual unit and kernel, with no exceptional adjunction or derived identification chosen as data.",
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "def-pc-scheme",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "def-weil-pbc-proetale-site",
+  "def-weil-proetale-inverse-image",
+  "sk-def-sfb-transport",
+  "sk-def-sfb-coefficient-morphisms",
+  "sk-def-sfb-change-of-scalars",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/sk-lem-formal-closed-support-adjunction.md",
+  "place": "Opening formula Gamma_Z(M)=i^*ker(M -> j_*j^*M), generalized from finite coefficients; existing module definitions supportModules through closedSupport_additive."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "closedSupport|supportKernel|supportModules",
+   "results": "{\"t\": \"2026-10-21T04:11:07Z\", \"tool\": \"grep\", \"query\": \"closedSupport|supportKernel|supportModules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/Topology/LocallyFinsupp.lean\", \"Mathlib/Topology/LocallyFinsupp.lean\"], \"digest\": \"d722f3417224cf81\"}",
+   "date": "2026-10-21",
+   "verdict": "No Mathlib match: ordinary restriction/pushforward, condensed discrete modules, and locally-finite-support topology do not define the pro-etale closed-support kernel functor."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Closed support functor of pro etale module sheaves is inverse image of kernel of the unit to open direct image",
+   "results": "{\"t\": \"2026-10-21T04:11:07Z\", \"tool\": \"leansearch\", \"query\": \"Closed support functor of pro etale module sheaves is inverse image of kernel of the unit to open direct image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctor\", \"AlgebraicGeometry.Scheme.IdealSheafData.isClosed_supportSet\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app\", \"SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\", \"CategoryTheory.Functor.closedSieves\", \"CondensedSet.LocallyConstant.functorFullyFaithful\"], \"digest\": \"f8a713895b332923\"}",
+   "date": "2026-10-21",
+   "verdict": "No Mathlib match: ordinary restriction/pushforward, condensed discrete modules, and locally-finite-support topology do not define the pro-etale closed-support kernel functor."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical functor i inverse image of kernel of M to j pushforward j inverse image M for condensed module sheaves",
+   "results": "{\"t\": \"2026-10-21T04:11:08Z\", \"tool\": \"leanfinder\", \"query\": \"Canonical functor i inverse image of kernel of M to j pushforward j inverse image M for condensed module sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CompHausLike.LocallyConstantModule.functor\", \"CondensedMod.LocallyConstant.functor\", \"CondensedMod.LocallyConstant.functorToPresheaves\", \"CondensedMod.LocallyConstant.adjunction\", \"CondensedMod.ofSheafCompHaus\", \"LightCondMod.LocallyConstant.adjunction\", \"CondensedMod.ofSheafProfinite\", \"CondensedMod.LocallyConstant.instIsIsoCondensedSetMapForgetAppCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor\"], \"digest\": \"92f7b010ff21d233\"}",
+   "date": "2026-10-21",
+   "verdict": "No Mathlib match: ordinary restriction/pushforward, condensed discrete modules, and locally-finite-support topology do not define the pro-etale closed-support kernel functor."
+  },
+  {
+   "tool": "rg",
+   "query": "rg -n closedSupport|supportKernel|abbrev supportModules lean/WeilConjectures lean/Sheaf",
+   "results": "The exact existing declarations are in Sheaf.AlgebraicGeometry.CondensedClosedSupportAdjunction. Finite-coefficient localization, WeilComplex triangles and other support constructions are different notions. No construction is duplicated.",
+   "date": "2026-10-21",
+   "verdict": "Exact existing project definition found; bind it with existing: true."
+  },
+  {
+   "tool": "blueprint_refs.py and DAG declaration scan",
+   "query": "blueprint_refs.py search 'sections with support'; scan lean.declaration and lean.declarations for AlgebraicGeometry.ProEtale.CondensedRing.closedSupport",
+   "results": "Six blueprint matches: def-pur-support-cohomology; det-lem-formal-closed-support-derived; det-lem-formal-closed-support-sheaves; det-prop-closed-adjoint-constructible-support; det-prop-closed-adjoint-constructible-yoneda; sk-lem-formal-closed-support. Exact declaration occurs only among auxiliaries of theorem node det-lem-formal-closed-support-adjunction. def-exc-proetale-sections-with-support is restricted to finite discrete commutative coefficients and records sfIntrinsicClosedUpperShriek. No definition node owns the arbitrary-condensed-coefficient construction.",
+   "date": "2026-10-21",
+   "verdict": "New definition node is needed for the existing project construction, as explicitly requested by the returned review."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-closed-support-bounded-continuity",
+  "date": "2026-10-21",
+  "group": "ND"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-dc-hom-preserves",
+   "place": "Canonical closed-support construction required to state bounded-below support continuity, extracted from the bounded-continuity prerequisite of the coefficient-colimit argument.",
+   "via": [
+    "lem-sfb-closed-support-bounded-continuity",
+    "lem-sfb-constructible-internal-hom-continuity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-def-sfb-dc-restricted-functors",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CondensedClosedSupportAdjunction",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.closedSupport",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.supportModules",
+   "AlgebraicGeometry.ProEtale.CondensedRing.supportModules_grothendieck",
+   "AlgebraicGeometry.ProEtale.CondensedRing.supportPullback",
+   "AlgebraicGeometry.ProEtale.CondensedRing.supportPullback_additive",
+   "AlgebraicGeometry.ProEtale.CondensedRing.supportKernel",
+   "AlgebraicGeometry.ProEtale.CondensedRing.supportKernelι",
+   "AlgebraicGeometry.ProEtale.CondensedRing.closedSupport",
+   "AlgebraicGeometry.ProEtale.CondensedRing.closedSupport_additive"
+  ],
+  "statement": "def closedSupport {Z U X : Scheme.{u}} (i : Z ⟶ X) (j : U ⟶ X) :\n    supportModules Λ X ⥤ supportModules Λ Z",
+  "branch": "newtargets-dag",
+  "by": "ND",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Definition ownership repair requested by independent review of b5d521be4a42 (H2). These unchanged existing declarations construct the category, pullback, unit kernel and closed-support functor; closedSupport is literally supportKernel Λ j ⋙ supportPullback Λ i, with no .choose or theorem-selected data. The existing module and its docstrings are retained unchanged. The exceptional adjunction and derived triangle remain theorem-node properties, not statement prerequisites for this construction."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d456c1cba",
+  "group": "ND",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d456c1cba",
+  "group": "ND",
+  "result": "pass",
+  "note": "Re-delivery of b5d521be4a42 (H2 RETURN) is repaired: new existing:true definition node def-sfb-condensed-closed-support-functor owns supportModules…closedSupport_additive in the unchanged live module Sheaf.AlgebraicGeometry.CondensedClosedSupportAdjunction (all 8 declarations exist; statement verbatim from `def closedSupport`; Γ_{i,j}=supportKernel⋙supportPullback, not hollow; text matches Λ only MonObj, α^{-1}/η restriction, unit kernel; source sk-lem-formal-closed-support-adjunction.md read; 11 stmt_deps live definitions). Item stmt_deps now cite it instead of the theorem; item Lean byte-identical (sha f53a9dfd), statement verbatim; only stmt_deps/lean differ from live; all clauses/edge cases re-checked (NoetherianSpace only, complement orientation, Type (u+1) filtered, cohomological IsGE, colimit.post on K-injective models, D≥c for all c). nt_compile --json clean 41.3 s. Advisory: lowerStar owners (sk-def-sfb-module-pushforward-pullback/def-sfb-module-lower-star) are not item stmt_deps (inherited from stage-1); new def node could cite sk-def-sfb-module-pushforward-pullback."
+ }
+}

@@ -256,5 +256,37 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q35-625cfd040 (reviewer sub-agent of L); spot-checked: Read in full: the item's six steps, all eight cited statements, the parent lem-cbc-adic-pullback-presentation-transport (its Steps 5–6 use exactly the w_P/χ_r data), the main-20261015 lem-cbc-completed-extension-zero-comparison proof, and Stacks derived.tex lemma-find-existence-computes (06XN, dual part, l.5092). The delivery has 0 new nodes, leaves the statement unchanged, sets proof_deps to exactly the union of the step uses, cites no SGA, and has no re-split note. Hand checks: chi_r=tau_H L(Qr)^-1 has the right domain and codomain; naturality gives Q'G(r)chi_r=tau_R(P), hence the augmentation identity, and tau_R(P) is never inverted. The cocycle holds, and a strict comparison h with sh=r gives chi_s. Step 5's naturality uses B(f)tau=tau L(QΔf). In step 6, R(f) is a quasi-isomorphism by derived change of rings (1) plus levelwise tower cohomology, and B(f) is invertible by the diagram theorem because both ΔP and ΔP' are in the class. The hypotheses of the diagram theorem hold: J=N^op is small, the sites are small skeletons, the rings are commutative, and c_g is a ring map. The resolving-class hypotheses (1)/(2) hold and F=Q'G is exact; the fixed universal pair agrees with the theorem's up to counit-compatible iso. Edge cases checked: g=id, I=A, and non-K-flat R(P)_n with Z_l,(l). No duplicate of this computation exists in the DAG. Accepted the three generic tool_uses (left-derived-from-kflat-class, diagram-kflat-replacements, derived-change-of-rings)."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.Paper.StrictQuotientPullbackComputation",
+  "declaration": "AlgebraicGeometry.Scheme.strictQuotientPullbackComputation",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.CbcStrictKFlatRepresentative",
+   "AlgebraicGeometry.Scheme.cbcStrictReduction",
+   "AlgebraicGeometry.Scheme.cbcStrictDelta",
+   "AlgebraicGeometry.Scheme.cbcStrictAugmentation",
+   "AlgebraicGeometry.Scheme.cbcStrictPull",
+   "AlgebraicGeometry.Scheme.cbcStrictCounit",
+   "AlgebraicGeometry.Scheme.CbcStrictQuotientResolution",
+   "AlgebraicGeometry.Scheme.cbcStrictResolutionMap",
+   "AlgebraicGeometry.Scheme.cbcStrictPulledAugmentation",
+   "AlgebraicGeometry.Scheme.cbcStrictConstantMap",
+   "AlgebraicGeometry.Scheme.cbcStrictReductionMap",
+   "AlgebraicGeometry.Scheme.strictQuotientPullbackComputation"
+  ],
+  "file": "lean/Sheaf/Paper/StrictQuotientPullbackComputation.lean",
+  "statement": "theorem strictQuotientPullbackComputation (_hpair : LF.IsLeftDerivedFunctor τ (HomotopyCategory.quasiIso (pbcTowers Y (pbcAdicCompletion Y d)) (.up ℤ))) : ∃ (δ : ∀ P : CbcStrictKFlatRepresentative d Y, LF.obj (DerivedCategory.Q.obj ((cbcStrictDelta d Y).obj P.complex)) ≅ DerivedCategory.Q.obj ((cbcStrictPull d g).obj ((cbcStrictDelta d Y).obj P.complex))) (χ : ∀ (P : CbcStrictKFlatRepresentative d Y) (r : CbcStrictQuotientResolution d P), LF.obj (DerivedCategory.Q.obj ((cbcStrictReduction d Y).obj P.complex)) ≅ DerivedCategory.Q.obj ((cbcStrictPull d g).obj r.complex)), (∀ P : CbcStrictKFlatRepresentative d Y, (δ P).hom = cbcStrictCounit d g LF τ ((cbcStrictDelta d Y).obj P.complex)) ∧ (∀ (P : CbcStrictKFlatRepresentative d Y) (r : CbcStrictQuotientResolution d P), (χ P r).hom = cbcStrictResolutionMap d g LF τ P r) ∧ (∀ P : CbcStrictKFlatRepresentative d Y, ((completedTowerConstant d X).mapHomologicalComplex (.up ℤ)).obj (((completedModulePullback g d).mapHomologicalComplex (.up ℤ)).obj P.complex) = (cbcStrictPull d g).obj ((cbcStrictDelta d Y).obj P.complex)) ∧ (∀ (P : CbcStrictKFlatRepresentative d Y) (r : CbcStrictQuotientResolution d P), cbcStrictPulledAugmentation d g LF P (δ P) ≫ (χ P r).hom ≫ DerivedCategory.Q.map ((cbcStrictPull d g).map r.arrow) = DerivedCategory.Q.map ((cbcStrictPull d g).map (cbcStrictAugmentation d Y P.complex))) ∧ (∀ (P : CbcStrictKFlatRepresentative d Y) (r s : CbcStrictQuotientResolution d P), (cbcStrictPulledAugmentation d g LF P (δ P) ≫ (χ P r).hom) ≫ ((χ P r).symm ≪≫ χ P s).hom = cbcStrictPulledAugmentation d g LF P (δ P) ≫ (χ P s).hom) ∧ (∀ (P : CbcStrictKFlatRepresentative d Y) (r s t : CbcStrictQuotientResolution d P), ((χ P r).symm ≪≫ χ P s).hom ≫ ((χ P s).symm ≪≫ χ P t).hom = ((χ P r).symm ≪≫ χ P t).hom) ∧ (∀ (P : CbcStrictKFlatRepresentative d Y) (r : CbcStrictQuotientResolution d P), ((χ P r).symm ≪≫ χ P r).hom = 𝟙 _) ∧ (∀ (P P' : CbcStrictKFlatRepresentative d Y) (f : P.complex ⟶ P'.complex), cbcStrictPulledAugmentation d g LF P (δ P) ≫ cbcStrictReductionMap d LF f = cbcStrictConstantMap d g f ≫ cbcStrictPulledAugmentation d g LF P' (δ P')) ∧ (∀ (P P' : CbcStrictKFlatRepresentative d Y) (f : P.complex ⟶ P'.complex), QuasiIso f → ∃ (b : DerivedCategory.Q.obj ((cbcStrictPull d g).obj ((cbcStrictDelta d Y).obj P.complex)) ≅ DerivedCategory.Q.obj ((cbcStrictPull d g).obj ((cbcStrictDelta d Y).obj P'.complex))) (e : LF.obj (DerivedCategory.Q.obj ((cbcStrictReduction d Y).obj P.complex)) ≅ LF.obj (DerivedCategory.Q.obj ((cbcStrictReduction d Y).obj P'.complex))), b.hom = cbcStrictConstantMap d g f ∧ e.hom = cbcStrictReductionMap d LF f ∧ b.inv ≫ cbcStrictPulledAugmentation d g LF P (δ P) = cbcStrictPulledAugmentation d g LF P' (δ P') ≫ e.inv)",
+  "branch": "sheaf-dag",
+  "by": "NK",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cb2034211",
+  "group": "NK",
+  "result": "pass",
+  "note": "Read node, source place, the 7 stmt_deps' declarations (CompletedTowerPullback, AdicCoefficientDatum, BoundedConstructibleTower, K-flat modules) and the module. Every clause matches the node: chi_r = inv(LF(Qr)) ≫ tau_H pinned, w_P = delta.inv ≫ LF(Q a_P) with delta.hom = tau_{ΔP}, augmentation identity, comparison/cocycle/identity, naturality w_P≫D(f)=B(f)≫w_P', localization b.inv≫w_P = w_P'≫e.inv, G(ΔP)=ΔG(P). There are no extra hypotheses: the IsLeftDerivedFunctor pair is arbitrary and invertibility on the class is concluded. No K-flatness of R(P)_n and no lift of a_P is assumed. Universes are as recorded, with no IsFlat universe identification. Node changed only in lean, statement verbatim; no duplicate; helpers are real data; one sorry theorem; docstrings with six steps; no line >100. nt_compile --json: one 60 s timeout at load 217, then clean in 48.4 s. Advisories: conjunct 3 restates completedPullbackConstantComplex_eq (node states it); 3 proof-only plain imports; compile time near the limit, so retry landing at lower load if it times out."
+ }
 }

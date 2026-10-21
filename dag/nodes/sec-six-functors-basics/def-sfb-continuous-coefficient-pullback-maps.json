@@ -1,0 +1,124 @@
+{
+ "id": "def-sfb-continuous-coefficient-pullback-maps",
+ "kind": "definition",
+ "title": "Canonical continuous coefficient pullback and coefficient maps",
+ "status": "split",
+ "statement": "For schemes $X,Z$ [def-pc-scheme] use their small pro-etale sites and inverse-image/direct-image adjunction [def-weil-proetale-inverse-image]. For a topological commutative ring $T$, put $T_X(U)=C(|U|,T)$ [lem-weil-pbc-continuous-ring-functions-sheaf]. For a scheme morphism $h:Z\\to X$ define $\\rho_h:T_X\\to h_*T_Z$ by precomposition with $U\\times_X Z\\to U$, and define $c_h:h^{-1}T_X\\to T_Z$ to be its adjunct. For a continuous ring homomorphism $\\varphi:T\\to T\\prime$, define the coefficient map $T_X\\to T\\prime_X$ by postcomposition $s\\mapsto\\varphi\\circ s$. In particular for a prime $\\ell$ and a finite extension $E/\\mathbf Q_\\ell$ with its spectral topology and valuation ring $A=\\mathcal O_E$ [def-weil-l-adic-coefficient-extension], define $A_X\\to E_X$ by postcomposition with the actual inclusion $A\\hookrightarrow E$. The integral and rational coefficient types may be lifted into the common coefficient universe without changing their operations or topology.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-proetale-inverse-image",
+  "lem-weil-pbc-continuous-ring-functions-sheaf",
+  "def-weil-l-adic-coefficient-extension"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice.proof.md",
+  "place": "Pushing down by the trace: the continuous coefficient action in canonical pullback and the inclusion of integral in rational coefficients; canonical maps as in Bhatt--Scholze, Definition 6.8.1 and the paragraph before Definition 6.8.6"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Continuous coefficient sheaves on proetale schemes have canonical pullback by projection precomposition and coefficient maps by postcomposition",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.pullback\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": SheafOfModules.{v} S ⥤ SheafOfModules.{v} R\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"TopCat.Sheaf.pullback\", \"module\": \"Mathlib.Topology.Sheaves.Functors\", \"type\": \"(f : X ⟶ Y) : Y.Sheaf A ⥤ X.Sheaf A\", \"doc\": \"For a continuous map $ f: X \\to Y $ between topological spaces, the sheaf pullback functor $ f^* $ maps sheaves on $ Y $ to sheaves on $ X $ and is defined as the right adjoint to the sheaf pushforward\"}\n  {\"name\": \"SheafOfModules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": pullback.{v} φ ⊣ pushforward.{v} φ\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"CategoryTheory.Functor.sheafPullback\", \"module\": \"Mathlib.CategoryTheory.Sites.Pullback\", \"type\": \": Sheaf J A ⥤ Sheaf K A\", \"doc\": \"Given a continuous functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between sites with Grothendieck topologies $ J $ and $ K $, the sheaf pullback functor is defined as the left adjoint to the sheaf pushfo\"}\n  {\"name\": \"TopCat.Presheaf.stalkPullbackHom\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \"(f : X ⟶ Y) (F : Y.Presheaf C) (x : X) : F.stalk (f x) ⟶ ((pullback C f).obj F).stalk x\", \"doc\": \"Given a continuous map $f: X \\\\to Y$ between topological spaces, a presheaf $\\\\mathcal{F}$ on $Y$ with values in a category $\\\\mathcal{C}$, and a point $x \\\\in X$, this defines the canonical morphism from\"}\n  {\"name\": \"TopCat.Sheaf.pullbackPushforwardAdjunction\", \"module\": \"Mathlib.Topology.Sheaves.Functors\", \"type\": \"(f : X ⟶ Y) : pullback A f ⊣ pushforward A f\", \"doc\": \"For any continuous map $ f: X \\to Y $ between topological spaces, the sheaf pullback functor $ f^* $ (mapping sheaves on $ Y $ to sheaves on $ X $) is left adjoint to the sheaf pushforward functor $ f_\"}\n  {\"name\": \"SheafOfModules.instIsLeftAdjointPullback\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": (pullback.{v} φ).IsLeftAdjoint\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullback_assoc\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \":\\n  isoWhiskerLeft _ (pullbackComp.{v} ψ ψ') ≪≫\\n      pullbackComp.{v} (G := G ⋙ G') φ (ψ ≫ (G.sheafPushforwardContinuous RingCat.{u} K K').map ψ') =\\n    (associator _ _ _).symm ≪≫\\n      isoWhiskerRight (pullbackComp.{v} φ ψ) _ ≪≫\\n        pullbackComp.{v} (F := F ⋙ G) (φ ≫ (F.sheafPushforwardContinu\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ with Grothendieck topologies $J, K$, continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and ring sheaf m\"}\n",
+   "date": "2026-10-21",
+   "verdict": "building blocks only; use the existing project definitions"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"ContinuousMap\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsLocalHomCarrierStalkCommRingCatPresheafCoeContinuousMapCarrierCarrierHomTopCatBaseRingHomHomStalkMap\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (x : ↥X) : IsLocalHom (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x))\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.continuousMapPresheaf\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.ConstantSheaf\", \"type\": \" (T : Type v) [TopologicalSpace T] : CategoryTheory.Functor AlgebraicGeometry.Schemeᵒᵖ (Type (max v u))\", \"doc\": \"The yoneda embedding of `TopCat` precomposed with the forgetful functor from `Scheme`. This is the\\npresheaf `U ↦ C(U, T)`. For universe reasons, we implement it by hand.\"}\n  {\"name\": \"AlgebraicGeometry.isSheaf_fpqcTopology_continuousMapPresheaf\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.ConstantSheaf\", \"type\": \" (T : Type v) [TopologicalSpace T] : CategoryTheory.Presheaf.IsSheaf AlgebraicGeometry.Scheme.fpqcTopology (AlgebraicGeometry.continuousMapPresheaf T)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.isSheaf_zariskiTopology_continuousMapPresheaf\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.ConstantSheaf\", \"type\": \" (T : Type v) [TopologicalSpace T] : CategoryTheory.Presheaf.IsSheaf AlgebraicGeometry.Scheme.zariskiTopology (AlgebraicGeometry.continuousMapPresheaf T)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.continuousMapPresheafAb\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.ConstantSheaf\", \"type\": \" (A : Type v) [TopologicalSpace A] [AddCommGroup A] [IsTopologicalAddGroup A] : CategoryTheory.Functor AlgebraicGeometry.Schemeᵒᵖ Ab\", \"doc\": \"`continuousMapPresheaf` as a presheaf of abelian groups associated to a topological abelian\\ngroup.\"}\n  {\"name\": \"AlgebraicGeometry.isSheaf_fpqcTopology_continuousMapPresheafAb\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.ConstantSheaf\", \"type\": \" (A : Type v) [TopologicalSpace A] [AddCommGroup A] [IsTopologicalAddGroup A] : CategoryTheory.Presheaf.IsSheaf AlgebraicGeometry.Scheme.fpqcTopology (AlgebraicGeometry.continuousMapPresheafAb A)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.continuousMapPresheaf_obj\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.ConstantSheaf\", \"type\": \" (T : Type v) [TopologicalSpace T] (U : AlgebraicGeometry.Schemeᵒᵖ) : (AlgebraicGeometry.continuousMapPresheaf T).obj U = C(↥(Opposite.unop U), T)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.continuousMapPresheafEquivOfTotallyDisconnectedSpace\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.ConstantSheaf\", \"type\": \" (T : Type v) [TopologicalSpace T] [TotallyDisconnectedSpace T] (U : AlgebraicGeometry.Scheme) : (AlgebraicGeometry.continuousMapPresheaf T).obj (Opposite.op U) ≃ C(ConnectedComponents ↥U, T)\", \"doc\": \"`continuousMapPresheaf` is `U ↦ C(ConnectedComponents U, T)` if `T` is totally\\ndisconnected.\"}\n  {\"name\": \"AlgebraicGeometry.continuousMapPresheafIsoUlift\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.ConstantSheaf\", \"type\": \" (T : Type v) [TopologicalSpace T] : AlgebraicGeometry.continuousMapPresheaf T ≅ AlgebraicGeometry.Scheme.forgetToTop.op.comp (TopCat.uliftFunctor.op.comp (CategoryTheory.yoneda.obj ↧(ULift.{u_1, v} T)))\", \"doc\": \"`continuousMapPresheaf` is isomorphic to the composition of the forgetful\\nfunctor to `TopCat` and the yoneda embedding.\"}\n  {\"name\": \"AlgebraicGeometry.continuousMapPresheafAbForgetIso\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.ConstantSheaf\", \"type\": \" (A : Type v) [TopologicalSpace A] [AddCommGroup A] [IsTopologicalAddGroup A] : (AlgebraicGeometry.continuousMapPresheafAb A).comp (CategoryTheory.forget Ab) ≅ AlgebraicGeometry.continuousMapPresheaf A\", \"doc\": \"`continuousMapPresheafAb` viewed as a type valued sheaf is isomorphic to\\n`continuousMapPresheaf`.\"}\n  {\"name\": \"AlgebraicGeometry.continuousMapPresheaf_map\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.ConstantSheaf\", \"type\": \" (T : Type v) [TopologicalSpace T] {U V : AlgebraicGeometry.Schemeᵒᵖ} (f : U ⟶ V) : (AlgebraicGeometry.continuousMapPresheaf T).map f = TypeCat.ofHom fun g => g.comp (TopCat.Hom.hom f.unop.base)\", \"doc\": \"\"}\n  {\"name\": \"ContinuousMap.yonedaPresheaf'\", \"module\": \"Mathlib.Topology.Category.TopCat.Yoneda\", \"type\": \" (Y : Type w') [TopologicalSpace Y] : CategoryTheory.Functor TopCatᵒᵖ (Type (max w w'))\", \"doc\": \"A universe polymorphic Yoneda presheaf on `TopCat` given by continuous maps into a topological\\nspace `Y`.\"}\n",
+   "date": "2026-10-21",
+   "verdict": "building blocks only; use the existing project definitions"
+  },
+  {
+   "tool": "grep",
+   "query": "continuousCoefficientDirectMap|continuousCoefficientMap|integralRationalCoefficientMap",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-21",
+   "verdict": "building blocks only; use the existing project definitions"
+  },
+  {
+   "tool": "grep",
+   "query": "grep project: continuousCoefficientDirectMap|continuousCoefficientMap|integralRationalCoefficientMap",
+   "results": "/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/PurTwistCoefficientTensor.lean:337:private noncomputable def continuousCoefficientMap (S : Scheme.{u})\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/PurTwistCoefficientTensor.lean:365:      eR.hom ≫ continuousCoefficientMap S f continuous_of_discreteTopology := by\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/ContinuousCoefficientPullback.lean:30:noncomputable def continuousCoefficientDirectMap (T : Type (u + 1))\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/ContinuousCoefficientPullback.lean:67:    (continuousCoefficientDirectMap T h)\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/ContinuousCoefficientPullback.lean:116:  have hρ : continuousCoefficientDirectMap T (k ≫ h) =\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/ContinuousCoefficientPullback.lean:117:      continuousCoefficientDirectMap T h ≫\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/ContinuousCoefficientPullback.lean:119:          (continuousCoefficientDirectMap T k) ≫\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/ContinuousCoefficientPullback.lean:146:    (continuousCoefficientDirectMap T h) (continuousCoefficientDirectMap T k)\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/ContinuousCoefficientPullback.lean:151:noncomputable def continuousCoefficientMap {T S : Type (u + 1)}\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/ContinuousCoefficientPullback.lean:170:        (continuousCoefficientMap φ hφ X) ≫ continuousCoefficientPullback S h =\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/ContinuousCoefficientPullback.lean:171:      continuousCoefficientPullback T h ≫ continuousCoefficientMap φ hφ Z := by\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/ContinuousCoefficientPullback.lean:178:noncomputable def integralRationalCoefficientMap (l : ℕ) [Fact l.Prime]\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/ContinuousCoefficientPullback.lean:182:  exact continuousCoefficientMap\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/ContinuousCoefficientPullback.lean:187:theorem integralRationalCoefficientMap_normalized (l : ℕ) [Fact l.Prime]\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/ContinuousCoefficientPullback.lean:190:    integralRationalCoefficientNormalized l E X (integralRationalCoefficientMap l E X) := by\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/ContinuousCoefficientImmersionRestriction.lean:134:  · refine ⟨integralRationalCoefficientMap l E X, integralRationalCoefficientMap l E Z,\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/ContinuousCoefficientImmersionRestriction.lean:135:      integralRationalCoefficientMap_normalized l E X,\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/ContinuousCoefficientImmersionRestriction.lean:136:      integralRationalCoefficientMap_normalized l E Z, ?_⟩\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/ContinuousCoefficientLocalization.lean:77:    ((integralRationalCoefficientMap l E X).hom.app U).hom\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/ContinuousCoefficientCompletion.lean:117:    exact continuousCoefficientMap f.hom (continuous_of_discreteTopology) X\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/ContinuousCoefficientCompletion.lean:297:  exact @continuousCoefficientMap _ _ _ _ _ ⊥ _ _ φ\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/ContinuousCoefficientPullbackIso.lean:179:      continuousCoefficientConstantComparison X T ≫ continuousCoefficientMap φ hφ X := by\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/ContinuousCoefficientPullbackIso.lean:192:    (hfg : integralRationalCoefficientMap l E X ≫ f =\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/ContinuousCoefficientPullbackIso.lean:193:      integralRationalCoefficientMap l E X ≫ g) : f = g := by\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/ContinuousCoefficientPullbackIso.lean:215:        (integralRationalCoefficientMap l E X).hom.app U a := by\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/ContinuousCoefficientPullbackIso.lean:232:      integralRationalCoefficientMap l E X ≫ v = g := by\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/ContinuousCoefficientPullbackIso.lean:280:        (integralRationalCoefficientMap l E X).hom.app U a := by\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/ContinuousCoefficientPullbackIso.lean:285:  change v.hom.app U ((integralRationalCoefficientMap l E X).hom.app U a) = g.hom.app U a\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/ContinuousCoefficientPullbackIso.lean:332:  let aX := integralRationalCoefficientMap l E X\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/ContinuousCoefficientPullbackIso.lean:333:  let aZ := integralRationalCoefficientMap l E Z\n",
+   "date": "2026-10-21",
+   "verdict": "existing definitions in Sheaf.AlgebraicGeometry.ContinuousCoefficientPullback; no owning definition node"
+  },
+  {
+   "tool": "grep",
+   "query": "grep DAG: continuousCoefficientDirectMap|continuousCoefficientMap|integralRationalCoefficientMap",
+   "results": "No matching node owns these declaration names.",
+   "date": "2026-10-21",
+   "verdict": "no owning node"
+  },
+  {
+   "tool": "blueprint_refs",
+   "query": "search continuous-coefficient-pullback",
+   "results": "0 blueprint nodes match 'continuous-coefficient-pullback'\n",
+   "date": "2026-10-21",
+   "verdict": "no matching blueprint node"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-etale-trace-image",
+  "date": "2026-10-21",
+  "group": "NG"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-stratified-lattice",
+   "place": "Pushing down by the trace: the continuous coefficient action in canonical pullback and the inclusion of integral in rational coefficients; canonical maps as in Bhatt--Scholze, Definition 6.8.1 and the paragraph before Definition 6.8.6",
+   "via": [
+    "lem-sfb-finite-etale-trace-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-stratified-lattice",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ContinuousCoefficientPullback",
+  "declaration": "AlgebraicGeometry.Scheme.continuousCoefficientDirectMap",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.continuousCoefficientDirectMap",
+   "AlgebraicGeometry.Scheme.continuousCoefficientPullback",
+   "AlgebraicGeometry.Scheme.continuousCoefficientMap",
+   "AlgebraicGeometry.Scheme.integralRationalCoefficientMap"
+  ],
+  "statement": "def continuousCoefficientDirectMap (T : Type (u + 1))\n    [TopologicalSpace T] [CommRing T] [IsTopologicalRing T]\n    {Z X : Scheme.{u}} (h : Z ⟶ X) :\n    continuousCoefficientSheaf X T ⟶\n      (proEtaleSheafDirectImage h CommRingCat.{u + 1}).obj\n        (continuousCoefficientSheaf Z T)",
+  "branch": "newtargets-dag",
+  "by": "NG",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "H2 repair: ownership of the already published real definitions only. The composition and normalization theorems are not part of this definition node. No source module or definition is copied."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-14188bfd7",
+  "group": "NG",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-14188bfd7",
+  "group": "NG",
+  "result": "fix",
+  "note": "Re-delivery after the 0e8accd4a547 RETURN. Lean delta: unused Paper.ContinuousIntegralCoefficients import removed; conclusion restated as (∃! τ, TraceImageLocalSums τ) ∧ ∀ τ, TraceImageLocalSums τ → ∃ N, ..., so H3 is fixed. H2 fixed: theorem stmt_dep lem-weil-pbc-continuous-coefficient-pullback-composition replaced by new def node def-sfb-continuous-coefficient-pullback-maps, existing:true on the unchanged ContinuousCoefficientPullback (DirectMap, Pullback, Map, integralRationalCoefficientMap). It covers every decl the item uses, no competing owner exists live, side-live or in other runs, and its body owners are in its stmt_deps. Mechanical finding: lem-weil-pbc-continuous-ring-functions-sheaf is genuine because continuousCoefficientSheaf packs continuousMapPresheafCommRing_isSheaf; PASS on that point. Item statement verbatim, 17 declarations match the file, one sorry, docstrings complete, not dropped. Splitting-datum advisory justified with explicit maps both ways. nt_compile timed out at 60 s (load 206); lcompile timeout=560 clean in 39.0 s. FIX: fixes/def-sfb-continuous-coefficient-pullback-maps.json trims `noncomputable` from lean.statement; check_existing now returns ([], [])."
+ }
+}

@@ -204,5 +204,23 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q109-7186e0113 (reviewer sub-agent of L); spot-checked: I read the delivery in full; there are no new nodes and no fixes. The statement is byte-identical to side-live and the item is still unsplit in live and side-live, with no repair note and no parallel delivery, so this is a first split. Coefficient category: the item's g^*=Ext_alpha mapMod(g^*_Ab) from sk-def-sfb-module-pushforward-pullback is literally the f^*_int of lem-sfb-internal-module-operations-transport (def-sfb-module-upper-star). Its j_! is that lemma's j_{!,int} (sk-def-sfb-module-lower-shriek). Sectionwise B_{T'} tensor f^{-1}(-) is the same functor as the tensor pullback of def-weil-pbc-proetale-operations. Step 1 uses only the transport lemma's statement: E_{T'}f^*_int ≅ f^*_sec E_T, the alpha-induced ring isomorphisms and E_T j_{!,int} ≅ j_{!,sec} E_U. Step 2 meets every hypothesis of lem-sfb-proetale-identified-open-closed: arbitrary commutative ring sheaves, a closed immersion and a complementary quasi-compact open immersion, with no qcqs; its ringed dependency needs qcqs only for the colimit clause, which is not used. Step 3's unique-left-adjoint formulas a_N and b_N and the transpose check are correct. Steps 4 and 5 compose to j^*j_!M ≅ M and i^*j_!M ≅ 0 and lift through the fully faithful E_T. Both cited nodes are reviewed and neither reaches the item, so there is no cycle. Their other-unit use is declared in tool_uses as generic tools. Edge cases U empty, U=X (Z empty), M=0 and the zero ring all hold. Duplicate candidates are not duplicates: lem-exc-proetale-open-unit covers sectionwise modules and only the open clause, and lemma-openclosed-vanishing-lowershriek is étale abelian. The parent's Step 2 use, with reduced Z and quasi-compact j, fits the item's hypotheses. No SGA source is used."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.OpenModuleRestrictionIdentities",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.open_module_restriction_identities",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenModuleRestrictionIdentities.lean",
+  "statement": "theorem open_module_restriction_identities (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] {X U Z : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j] (i : Z ⟶ X) [IsClosedImmersion i] (hij : Set.range i = (Set.range j)ᶜ) : Nonempty (openImmersionLowerShriek Λ j ⋙ upperStar Λ j ≅ 𝟭 (Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1}) (condensedRingObj Λ U))) ∧ Nonempty (openImmersionLowerShriek Λ j ⋙ upperStar Λ i ≅ (Functor.const (Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1}) (condensedRingObj Λ U))).obj (0 : Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z)))",
+  "branch": "newtargets-dag",
+  "by": "Q17",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-232c314a2",
+  "group": "Q17",
+  "result": "pass",
+  "note": "Statement matches node: Λ condensed comm ring via framework binder, Mod over condensedRingObj, [IsOpenImmersion j][QuasiCompact j], [IsClosedImmersion i], Set.range i = (Set.range j)ᶜ, recorded upperStar (mapMod ⋙ extendScalars α) and openImmersionLowerShriek (comap α ⋙ linear j_!), conclusions Nonempty(j_!⋙j^* ≅ 𝟭) ∧ Nonempty(j_!⋙i^* ≅ const 0) = node's existence of natural isos; no extra hypotheses or universe restriction. Node differs from side-live only in lean; lean.statement verbatim; not dropped, no repair note, no parallel delivery. Proof deps imported non-public per brief. Docstrings carry source, blueprint tag and 5 proof steps; only the proof is sorry; lines <=100. nt_compile --json clean 14.6 s. Advisory: the public import ModuleObjects.Abelian is redundant (compiles without it). Item is on rework-hold for its proof import InternalModuleOperationsTransport (dispatcher matter, not a delivery fault)."
+ }
 }

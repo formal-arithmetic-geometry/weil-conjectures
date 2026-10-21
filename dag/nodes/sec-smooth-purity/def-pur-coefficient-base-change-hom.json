@@ -1,0 +1,116 @@
+{
+ "id": "def-pur-coefficient-base-change-hom",
+ "kind": "definition",
+ "title": "Evaluation-defined internal Hom comparison under coefficient base change",
+ "statement": "Let $A,B$ be categories, with internal-Hom bifunctors $H_A:A^{\\mathrm{op}}\\times A\\to A$ and $H_B:B^{\\mathrm{op}}\\times B\\to B$, equipped with closed tensor-Hom structures $S_A,S_B$ [def-coef-ringed-tensor-hom-model]. Let $F:A\\to B$ be a functor and $\\mu:F(X\\otimes_A Y)\\xrightarrow{\\sim}FX\\otimes_B FY$ a natural tensor comparison. For $P,Q\\in A$, define the coefficient base-change map $c^F_{P,Q}:F(H_A(P,Q))\\to H_B(FP,FQ)$ as the closed transpose, with respect to $S_B$, of $$F(H_A(P,Q))\\otimes_B FP\\xrightarrow{\\mu^{-1}_{H_A(P,Q),P}}F(H_A(P,Q)\\otimes_A P)\\xrightarrow{F(\\mathrm{ev}_{P,Q})}FQ.$$ The tensor, evaluation and transposition are those of the supplied closed structures. This definition imposes no invertibility assumption on $c^F_{P,Q}$.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08J9, equation-internal-hom and lemma-internal-hom; evaluation-transpose construction in lem-pur-scalar-hom-comparison-tower, definition of c and proof Step 2."
+ },
+ "stmt_deps": [
+  "def-coef-ringed-tensor-hom-model"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The internal Hom base change map for a tensor compatible functor is defined by transposing its image of evaluation",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Module.End.baseChangeHom_apply_apply\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Tower\", \"type\": \"∀ (R : Type u_1) (A : Type u_2) (M : Type u_4) [inst : CommSemiring R] [inst_1 : Semiring A] [inst_2 : Algebra R A]\\n  [inst_3 : AddCommMonoid M] [inst_4 : Module R M] (a : Module.End R M) (a_1 : TensorProduct R A M),\\n  ((Module.End.baseChangeHom R A M) a) a_1 =\\n    (TensorProduct.liftAux\\n        (↑R\", \"doc\": \"For a commutative semiring $ R $, semiring $ A $ with an $ R $-algebra structure, and an $ R $-module $ M $, the base change homomorphism $ \\\\operatorname{End}_R(M) \\\\to \\\\operatorname{End}_A(A \\\\otimes_R\"}\n  {\"name\": \"transpose_dualTensorHom\", \"module\": \"Mathlib.LinearAlgebra.Contraction\", \"type\": \"(f : Module.Dual R M) (m : M) :\\n  Dual.transpose (R := R) (dualTensorHom R M M (f ⊗ₜ m)) = dualTensorHom R _ _ (Dual.eval R M m ⊗ₜ f)\", \"doc\": \"For any element $ f $ in the dual module $ \\\\text{Dual}(R, M) $ and any element $ m \\\\in M $, the transpose of the linear map corresponding to the tensor product $ f \\\\otimes m $ is equal to the linear m\"}\n  {\"name\": \"LinearMap.baseChangeHom\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Tower\", \"type\": \": (M →ₗ[R] N) →ₗ[R] A ⊗[R] M →ₗ[A] A ⊗[R] N\", \"doc\": \"The linear map sending each $ R $-linear map $ f : M → N $ to its base change $ A ⊗_R M → A ⊗_R N $, defined by $ a ⊗ m ↦ a ⊗ f(m) $, and extended linearly. This constructs a homomorphism between the \"}\n  {\"name\": \"LinearMap.baseChange\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Tower\", \"type\": \"(f : M →ₗ[R] N) : A ⊗[R] M →ₗ[A] A ⊗[R] N\", \"doc\": \"Given an $ R $-linear map $ f : M → N $, this constructs the induced $ A $-linear map $ A ⊗_R M → A ⊗_R N $ by acting as the identity on $ A $ and applying $ f $ to the $ M $-component, resulting in $\"}\n  {\"name\": \"LinearMap.baseChangeHom_apply\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Tower\", \"type\": \"∀ (R : Type u_1) (A : Type u_2) (M : Type u_4) (N : Type u_5) [inst : CommSemiring R] [inst_1 : Semiring A]\\n  [inst_2 : Algebra R A] [inst_3 : AddCommMonoid M] [inst_4 : AddCommMonoid N] [inst_5 : Module R M]\\n  [inst_6 : Module R N] (f : M →ₗ[R] N), (LinearMap.baseChangeHom R A M N) f = LinearMap.ba\", \"doc\": \"For a commutative semiring $ R $, a semiring $ A $ with an $ R $-algebra structure, and $ R $-modules $ M $ and $ N $, the base change homomorphism sends each $ R $-linear map $ f : M \\\\to N $ to the $\"}\n  {\"name\": \"Module.End.baseChangeHom\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Tower\", \"type\": \": Module.End R M →ₐ[R] Module.End A (A ⊗[R] M)\", \"doc\": \"The algebra homomorphism from the endomorphism ring $\\\\mathrm{End}_R(M)$ to $\\\\mathrm{End}_A(A \\\\otimes_R M)$, sending each $R$-linear endomorphism $f : M \\\\to M$ to its base change $A \\\\otimes_R M \\\\to A \\\\\"}\n  {\"name\": \"LinearMap.rTensor_baseChange\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Tower\", \"type\": \"(φ : A →ₐ[R] B) (t : A ⊗[R] M) (f : M →ₗ[R] N) :\\n  (φ.toLinearMap.rTensor N) (f.baseChange A t) = (f.baseChange B) (φ.toLinearMap.rTensor M t)\", \"doc\": \"For an $ R $-algebra homomorphism $ \\\\varphi : A \\\\to B $, an $ R $-linear map $ f : M \\\\to N $, and an element $ t \\\\in A \\\\otimes_R M $, applying the right tensor product of $ \\\\varphi $ with $ N $ to the\"}\n  {\"name\": \"CategoryTheory.ihom.ev\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Basic\", \"type\": \": ihom A ⋙ tensorLeft A ⟶ 𝟭 C\", \"doc\": \"In a closed monoidal category $\\\\mathcal{C}$, for any object $A$, the evaluation morphism is the counit of the adjunction between the internal hom functor $[A, -]$ and the left tensoring functor $- \\\\ot\"}\n",
+   "date": "2026-10-21",
+   "verdict": "Existing project definition WeilConjectures.coefficientBaseChangeHom gives exactly this evaluation-transpose construction; Mathlib hits do not supply this general tensor-Hom comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transpose of inverse tensor comparison followed by functor applied to evaluation defines internal Hom comparison",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.expComparison_ev\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Closed/Functor\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u'} [inst_1 : CategoryTheory.Category.{v, u'} D]\\n  [inst_2 : CategoryTheory.CartesianMonoidalCategory C] [inst_3 : CategoryTheory.CartesianMonoidalCategory D]\\n  (F : CategoryTheory.Functor C D) [inst_4 : CategoryTheory.MonoidalClosed\", \"doc\": \"For a product-preserving functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ between closed monoidal categories and objects $A,B \\\\in \\\\mathcal{C}$, the evaluation morphism $\\\\text{ev}_{F(A),F(B)}$ composed with t\"}\n  {\"name\": \"CategoryTheory.expComparison\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Closed/Functor\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {D : Type u'} →\\n      [inst_1 : CategoryTheory.Category.{v, u'} D] →\\n        [inst_2 : CategoryTheory.CartesianMonoidalCategory C] →\\n          [inst_3 : CategoryTheory.CartesianMonoidalCategory D] →\\n            (F : CategoryTheory.Func\", \"doc\": \"Given a product-preserving functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between closed monoidal categories and an object $ A \\\\in \\\\mathcal{C} $, this establishes a natural equivalence between two constr\"}\n  {\"name\": \"CategoryTheory.coev_expComparison\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Closed/Functor\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u'} [inst_1 : CategoryTheory.Category.{v, u'} D]\\n  [inst_2 : CategoryTheory.CartesianMonoidalCategory C] [inst_3 : CategoryTheory.CartesianMonoidalCategory D]\\n  (F : CategoryTheory.Functor C D) [inst_4 : CategoryTheory.MonoidalClosed\", \"doc\": \"For a product-preserving functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ between closed monoidal categories and objects $A, B \\\\in \\\\mathcal{C}$, the composition of $F$ applied to the coevaluation map $\\\\eta_A\"}\n  {\"name\": \"CategoryTheory.MonoidalClosedFunctor.comparison_iso\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Closed/Functor\", \"type\": \"∀ {C : Type u} {inst : CategoryTheory.Category.{v, u} C} {D : Type u'} {inst_1 : CategoryTheory.Category.{v, u'} D}\\n  {inst_2 : CategoryTheory.CartesianMonoidalCategory C} {inst_3 : CategoryTheory.CartesianMonoidalCategory D}\\n  {F : CategoryTheory.Functor C D} {inst_4 : CategoryTheory.MonoidalClosed\", \"doc\": \"Given a product-preserving functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between closed monoidal categories and an object $ A \\\\in \\\\mathcal{C} $, the natural transformation arising from the adjunction $ \"}\n  {\"name\": \"CategoryTheory.uncurry_expComparison\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Closed/Functor\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u'} [inst_1 : CategoryTheory.Category.{v, u'} D]\\n  [inst_2 : CategoryTheory.CartesianMonoidalCategory C] [inst_3 : CategoryTheory.CartesianMonoidalCategory D]\\n  (F : CategoryTheory.Functor C D) [inst_4 : CategoryTheory.MonoidalClosed\", \"doc\": \"For a product-preserving functor $F$ between closed monoidal categories and an object $A$, the uncurried version of the natural transformation component of the exponential comparison at an object $B$ \"}\n  {\"name\": \"CategoryTheory.expComparison_whiskerLeft\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Closed/Functor\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u'} [inst_1 : CategoryTheory.Category.{v, u'} D]\\n  [inst_2 : CategoryTheory.CartesianMonoidalCategory C] [inst_3 : CategoryTheory.CartesianMonoidalCategory D]\\n  (F : CategoryTheory.Functor C D) [inst_4 : CategoryTheory.MonoidalClosed\", \"doc\": \"Given a product-preserving functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between closed monoidal categories and a morphism $ f: A' \\\\to A $ in $ \\\\mathcal{C} $, the exponential comparison equivalence $ \\\\t\"}\n  {\"name\": \"CategoryTheory.expComparison_iso_of_frobeniusMorphism_iso\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Closed/Functor\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u'} [inst_1 : CategoryTheory.Category.{v, u'} D]\\n  [inst_2 : CategoryTheory.CartesianMonoidalCategory C] [inst_3 : CategoryTheory.CartesianMonoidalCategory D]\\n  (F : CategoryTheory.Functor C D) {L : CategoryTheory.Functor D C} [inst_\", \"doc\": \"Let $\\\\mathcal{C}$ and $\\\\mathcal{D}$ be monoidal closed categories, and let $L: \\\\mathcal{D} \\\\to \\\\mathcal{C}$ be a functor that is left adjoint to a functor $F: \\\\mathcal{C} \\\\to \\\\mathcal{D}$. For an obje\"}\n  {\"name\": \"CategoryTheory.frobeniusMorphism_iso_of_expComparison_iso\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Closed/Functor\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u'} [inst_1 : CategoryTheory.Category.{v, u'} D]\\n  [inst_2 : CategoryTheory.CartesianMonoidalCategory C] [inst_3 : CategoryTheory.CartesianMonoidalCategory D]\\n  (F : CategoryTheory.Functor C D) {L : CategoryTheory.Functor D C} [inst_\", \"doc\": \"Let $\\\\mathcal{C}$ and $\\\\mathcal{D}$ be closed monoidal categories, and let $L: \\\\mathcal{D} \\\\to \\\\mathcal{C}$ and $F: \\\\mathcal{C} \\\\to \\\\mathcal{D}$ be a pair of adjoint functors, where $L$ is left adjoin\"}\n",
+   "date": "2026-10-21",
+   "verdict": "Existing project definition WeilConjectures.coefficientBaseChangeHom gives exactly this evaluation-transpose construction; Mathlib hits do not supply this general tensor-Hom comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "coefficientBaseChangeHom|ihomComparison|closedIhom",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory/Groupoid.lean\", \"line\": \"39\", \"text\": \"def closedIhom (F : D ⥤ C) : (D ⥤ C) ⥤ D ⥤ C :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory/Groupoid.lean\", \"line\": \"48\", \"text\": \"def closedUnit (F : D ⥤ C) : 𝟭 (D ⥤ C) ⟶ tensorLeft F ⋙ closedIhom F where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory/Groupoid.lean\", \"line\": \"54\", \"text\": \"      simp only [ihom.coev_naturality, closedIhom_obj_map, Monoidal.tensorObj_map]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory/Groupoid.lean\", \"line\": \"64\", \"text\": \"def closedCounit (F : D ⥤ C) : closedIhom F ⋙ tensorLeft F ⟶ 𝟭 (D ⥤ C) where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory/Groupoid.lean\", \"line\": \"70\", \"text\": \"      simp only [closedIhom_obj_map, pre_comm_ihom_map]\"}\n",
+   "date": "2026-10-21",
+   "verdict": "Existing project definition WeilConjectures.coefficientBaseChangeHom gives exactly this evaluation-transpose construction; Mathlib hits do not supply this general tensor-Hom comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n ^def coefficientBaseChangeHom|coefficientBaseChangeHom /home/ubuntu/weil-conjectures-sheaf-shared/lean/WeilConjectures /home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf",
+   "results": "/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/CoefDerivedSystemEvaluationCalculus.lean:195:def coefficientBaseChangeHom\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/CoefDerivedSystemEvaluationCalculus.lean:216:        (Prod.mkHom (f.op) (g))) ≫ coefficientBaseChangeHom SA SB F μ P' Q' =\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/CoefDerivedSystemEvaluationCalculus.lean:217:      coefficientBaseChangeHom SA SB F μ P Q ≫ HB.map\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/CoefDerivedSystemEvaluationCalculus.lean:221:    F.map (SA.transpose T P Q f) ≫ coefficientBaseChangeHom SA SB F μ P Q =\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/CoefDerivedSystemEvaluationCalculus.lean:225:    F.map (SA.composition P Q V) ≫ coefficientBaseChangeHom SA SB F μ P V =\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/CoefDerivedSystemEvaluationCalculus.lean:228:        (Prod.mkHom (coefficientBaseChangeHom SA SB F μ Q V)\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/CoefDerivedSystemEvaluationCalculus.lean:229:          (coefficientBaseChangeHom SA SB F μ P Q)) ≫\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/CoefDerivedSystemEvaluationCalculus.lean:243:    (coefficientBaseChangeHom SA SB F μ P (G.obj N) ≫\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/CoefDerivedSystemEvaluationCalculus.lean:819:  coefficientBaseChangeHom (S.finiteClosed m) (S.finiteClosed n)\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/CoefDerivedSystemEvaluationCalculus.lean:1124:        (coefficientBaseChangeHom integralClosed systemClosed reduction reductionTensor P Q) ≫\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/CoefDerivedSystemEvaluationCalculus.lean:1127:      coefficientBaseChangeHom integralClosed (finiteClosed n)\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/IntegralOperationsScalarComparisons.lean:616:  coefficientBaseChangeHom (scalarIntegralClosed l E W) (scalarIntegralClosed l L W)\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/IntegralOperationsScalarComparisons.lean:752:    F.map (HA.map (Prod.mkHom f.op g)) ≫ coefficientBaseChangeHom SA SB F μ P' Q' =\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/IntegralOperationsScalarComparisons.lean:753:      coefficientBaseChangeHom SA SB F μ P Q ≫\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/IntegralOperationsScalarComparisons.lean:772:      SB.tensor.map (Prod.mkHom (coefficientBaseChangeHom SA SB F μ U V) (𝟙 (F.obj U))) ≫\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/IntegralOperationsScalarComparisons.lean:775:    rw [← hu, coefficientBaseChangeHom, Equiv.symm_apply_apply]\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/IntegralOperationsScalarComparisons.lean:785:      (Prod.mkHom (coefficientBaseChangeHom SA SB F μ P Q) (𝟙 (F.obj P'))) ≫\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/IntegralOperationsScalarComparisons.lean:788:      SB.tensor.map (Prod.mkHom (coefficientBaseChangeHom SA SB F μ P Q) (𝟙 (F.obj P))) := by\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/FiniteCoefficientSiteHomArrow.lean:112:  coefficientBaseChangeHom (finiteHomEtaleClosed l E X n) (finiteIntrinsicClosed l E X n)\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/EtaleFiniteCoefficientHomArrow.lean:196:  coefficientBaseChangeHom (S.closed n) (S.closed m) (F h) (S.tensor h)\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/EtaleFiniteCoefficientHomArrow.lean:290:The body is the evaluation-defined `coefficientBaseChangeHom`; it does not\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/EtaleFiniteCoefficientHomArrow.lean:299:  coefficientBaseChangeHom (finiteHomEtaleClosed l E X n)\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/DerivedAutomorphismHomEvaluation.lean:498:  coefficientBaseChangeHom (pullbackTensorCalculus l E Y).systemClosed\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/DerivedAutomorphismHomEvaluation.lean:875:      coefficientBaseChangeHom (pullbackTensorCalculus l E X).integralClosed\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/DerivedAutomorphismHomEvaluation.lean:883:        (coefficientBaseChangeHom (pullbackTensorCalculus l E Y).integralClosed\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/FiniteCoefficientHomChange.lean:104:    SB.tensor.map (Prod.mkHom (coefficientBaseChangeHom SA SB F μ K M) (𝟙 (F.obj K))) ≫\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/FiniteCoefficientHomChange.lean:111:      v = coefficientBaseChangeHom SA SB F μ K M\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/FiniteCoefficientHomChange.lean:194:this is exactly coefficientBaseChangeHom and finiteIntrinsicReductionHom.\n",
+   "date": "2026-10-21",
+   "verdict": "The map is declared at Sheaf/Paper/CoefDerivedSystemEvaluationCalculus.lean:195; no definition node owns it. The theorem node lists it as a helper but its theorem conclusion is unused. Record the existing definition separately, as required by return L."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l coefficientBaseChangeHom|coefficient-base-change-hom /home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes",
+   "results": "/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-zeta-weil/lem-zl-specified-hom-scalar-evaluation.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-six-functors/lem-coef-derived-system-evaluation-calculus.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-six-functors/def-sf-finite-coefficient-site-hom-arrow.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-six-functors/thm-coef-finite-hom.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-six-functors/def-sf-finite-coefficient-site-scalar-arrow.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-six-functors/def-sf-finite-coefficient-site-chain-tensor.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-six-functors/def-sf-etale-finite-coefficient-hom-arrow.json\n",
+   "date": "2026-10-21",
+   "verdict": "The map is declared at Sheaf/Paper/CoefDerivedSystemEvaluationCalculus.lean:195; no definition node owns it. The theorem node lists it as a helper but its theorem conclusion is unused. Record the existing definition separately, as required by return L."
+  },
+  {
+   "tool": "blueprint_refs",
+   "query": "python3 tools/blueprint_refs.py search coefficientBaseChangeHom",
+   "results": "0 blueprint nodes match 'coefficientBaseChangeHom'\n",
+   "date": "2026-10-21",
+   "verdict": "The map is declared at Sheaf/Paper/CoefDerivedSystemEvaluationCalculus.lean:195; no definition node owns it. The theorem node lists it as a helper but its theorem conclusion is unused. Record the existing definition separately, as required by return L."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-scalar-hom-comparison-tower",
+  "date": "2026-10-21",
+  "group": "NY"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-pullback-tensor-hom",
+   "place": "Final paragraph on compatible finite reductions and the common-stage coefficient construction: the evaluation-defined internal-Hom scalar-extension comparison used in the coefficient-tower compatibility.",
+   "via": [
+    "lem-pur-scalar-hom-comparison-tower",
+    "lem-pur-integral-operations-scalar-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "module": "Sheaf.Paper.CoefDerivedSystemEvaluationCalculus",
+  "declaration": "WeilConjectures.coefficientBaseChangeHom",
+  "statement": "def coefficientBaseChangeHom\n    {A : Type a} {B : Type b} [Category.{v} A] [Category.{w} B]\n    {HA : Aᵒᵖ × A ⥤ A} {HB : Bᵒᵖ × B ⥤ B}\n    (SA : CoefficientClosedStructure HA) (SB : CoefficientClosedStructure HB)\n    (F : A ⥤ B) (μ : SA.tensor ⋙ F ≅ F.prod F ⋙ SB.tensor) (P Q : A) :\n    F.obj (HA.obj (op P, Q)) ⟶ HB.obj (op (F.obj P), F.obj Q)",
+  "branch": "sheaf-dag",
+  "by": "NY",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Existing explicit evaluation-transpose definition at line 195. This node records the definition alone; the coefficientDerivedSystemEvaluationCalculus theorem conclusion is not used. No duplicate module is introduced."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-82988eb08",
+  "group": "NY",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-82988eb08",
+  "group": "NY",
+  "result": "pass",
+  "note": "Re-delivery after RETURN e85e0a80: Lean module byte-identical (sha256 e5783100…), item node differs from live only in lean/stmt_deps; theorem stmt_dep lem-coef-derived-system-evaluation-calculus replaced by new existing:true def node def-pur-coefficient-base-change-hom owning WeilConjectures.coefficientBaseChangeHom (CoefDerivedSystemEvaluationCalculus.lean:195, explicit transpose of μ⁻¹ ≫ F(ev), no .choose); node statement matches body, lean.statement verbatim, stmt_dep def-coef-ringed-tensor-hom-model owns CoefficientClosedStructure, closure 208 nodes acyclic and not reaching the item, no other node owns the def, existing:true precedent def-coef-derived-system-calculus-data on the same module. Earlier H3 check (normalized μ, canonical α/u, htower/hid = scalarHomTensorCoherence, naturality/tower/identity variance, no extra hypotheses, edge cases) carries over. Report sections present; whole-proof sorry only; docstrings OK. nt_compile --json rc 0 (53.1 s, no errors or warnings)."
+ }
+}

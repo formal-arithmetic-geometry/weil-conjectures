@@ -16,7 +16,10 @@
   "def-weil-pbc-continuous-integral-coefficients",
   "def-weil-sheaf-of-modules-category",
   "def-pur-sheaf-tensor-product",
-  "def-weil-proetale-inverse-image"
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-continuous-constructible-module",
+  "def-sfb-continuous-lattice-coefficients",
+  "def-sfb-proetale-inverse-image-unit-section"
  ],
  "proof": [
   {
@@ -194,5 +197,29 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-b731a7044 (reviewer sub-agent of L); spot-checked: Read the item and all 5 steps in full, plus every cited statement: lem-sfb-alpha-iso, def-sfb-alpha/comp-iso, lem-sfb-coefficient-pullback-square, det-pe-topos-functoriality-inverse-image (1)(3)(4)(5), lem-sfb-proetale-object-inverse-image-restriction (1), lem-pur-proetale-inverse-image-tensor-comparison (1), def-pur-sheaf-tensor-product and def-weil-proetale-inverse-image. Sources checked at the cited places: Stacks sites-modules.tex Tag 03EL (line 3649) and §03EK, and the main-20261015 sk-lem-stratified-lattice proof, 'Pushing down by the trace' (lines 38-56). There is no SGA. The item is not in the side-live drop list, has no repair note (the 2026-10-21 re-split note is on the parent), and is still unsplit live. No new nodes; the statement is unchanged and true for any g (checked rank 0, empty schemes, g=id, rank 1 with multiplication by a power of the uniformiser, and varying ranks). Grep found no duplicate: the étale-only slice-transport and the continuous-lattice-intersection nodes state other things. One fault, C4/E4 in step 1: alpha-iso and the coefficient-pullback square are stated for the condensed pullbacks p_X^*Λ, but the step applies them to the statement's continuous sheaves C(|U|,A) and C(|U|,E) and to the canonical adjunct-of-precomposition coefficient map, with no bridge. FIX: step 1 now cites lem-weil-pbc-continuous-coefficient-realizations (as the parent's step 2 does; A and E are totally disconnected). It shows c_T∘F(ρ_X)=ρ_Y∘α^cond, because both are adjuncts of precomposition with Y[K]→X[K]→K and α is the composition isomorphism. So the continuous coefficient maps are ring isomorphisms and the square transports. proof_deps and split_report.tool_uses are extended; the realizations node's closure contains neither the item nor its parent, so there is no cycle. Steps 2-5 are correct: exactness on abelian sheaves, the cover by base change, restriction to site objects via clause (1) only, the finite-product calculation, σ from 03EL, and the adjoint identified via the pure-tensor normalisation. I accept the declared generic tool_uses.; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.Paper.LatticePullback",
+  "declaration": "AlgebraicGeometry.ProEtale.lattice_pullback",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.latticePullbackScalarUnit",
+   "AlgebraicGeometry.ProEtale.continuousLatticePullbackSection",
+   "AlgebraicGeometry.ProEtale.lattice_pullback"
+  ],
+  "file": "lean/Sheaf/Paper/LatticePullback.lean",
+  "statement": "theorem lattice_pullback (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] {X Y : Scheme.{u}} (g : Y ⟶ X) (L : ringedSiteModules.{u + 1} (latticeModuleRing X (WithAbs (Padic.coefficientExtensionAbsoluteValue l E)))) (M : ringedSiteModules.{u + 1} (latticeModuleRing X (latticeCoefficientIntegers l E))) [L.IsFiniteLocallyFree] [M.IsFiniteLocallyFree] (i : M ⟶ (SheafOfModules.restrictScalars ((sheafCompose (Scheme.ProEt.topology X) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map (integralLatticeCoefficientMap X l E))).obj L) [Mono i] (hi : ∃ phi : SheafOfModules.changeOfRings.{u, u + 1, u + 1} (integralLatticeCoefficientMap X l E) M ⟶ L, IsIso phi ∧ ∀ (V : X.ProEt) (m : M.val.obj (op V)), phi.val.app (op V) (latticePullbackScalarUnit (integralLatticeCoefficientMap X l E) M V m) = i.val.app (op V) m) : ∃! j : continuousModulePullback g (latticeCoefficientIntegers l E) M ⟶ (SheafOfModules.restrictScalars ((sheafCompose (Scheme.ProEt.topology Y) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map (integralLatticeCoefficientMap Y l E))).obj (continuousModulePullback g (WithAbs (Padic.coefficientExtensionAbsoluteValue l E)) L), (∀ (V : X.ProEt) (m : M.val.obj (op V)), j.val.app (op ((Scheme.proEtaleBaseChange g).obj V)) (continuousLatticePullbackSection g (latticeCoefficientIntegers l E) M V m) = continuousLatticePullbackSection g (WithAbs (Padic.coefficientExtensionAbsoluteValue l E)) L V (i.val.app (op V) m)) ∧ Mono j ∧ (continuousModulePullback g (latticeCoefficientIntegers l E) M).IsFiniteLocallyFree ∧ (continuousModulePullback g (WithAbs (Padic.coefficientExtensionAbsoluteValue l E)) L).IsFiniteLocallyFree ∧ ∃ beta : SheafOfModules.changeOfRings.{u, u + 1, u + 1} (integralLatticeCoefficientMap Y l E) (continuousModulePullback g (latticeCoefficientIntegers l E) M) ⟶ continuousModulePullback g (WithAbs (Padic.coefficientExtensionAbsoluteValue l E)) L, IsIso beta ∧ ∀ (V : Y.ProEt) (m : (continuousModulePullback g (latticeCoefficientIntegers l E) M).val.obj (op V)), beta.val.app (op V) (latticePullbackScalarUnit (integralLatticeCoefficientMap Y l E) (continuousModulePullback g (latticeCoefficientIntegers l E) M) V m) = j.val.app (op V) m",
+  "branch": "sheaf-dag",
+  "by": "Q28",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Uses already published continuous coefficients and canonical module pullback. The input rationalization and output adjoint are normalized on the actual sheafified 1-tensor sections; the pulled inclusion is uniquely normalized on inverse-image unit sections. H2 repair of immutable head 8d1c775d8a63: plain definitions are now cited through the two new existing:true definition nodes, rather than through theorem nodes. The tensor-comparison theorem remains in proof_deps; no Lean code or mathematical statement changes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ebcc85b25",
+  "group": "Q28",
+  "result": "fix",
+  "note": "Re-delivery after the 8d1c775d H2 RETURN. Lean is byte-identical (sha ab849b91) to the version the earlier review found correct; re-checked H3 clause by clause, edge cases (g=id, rank 0, empty schemes, varying ranks) and universes; no hollow data, sorry only, docstrings and 5-step proof plan present. nt_compile --json clean in 40.7 s. stmt_deps: the two theorem nodes are replaced by new existing:true def nodes def-sfb-continuous-lattice-coefficients (LatticeSheafBasic) and def-sfb-proetale-inverse-image-unit-section (inverseSection); statements match the declarations; check_new_node and check_existing give no failures; no other def node owns these declarations; dependency records identical to side-live; item not dropped. FIX: removed the leading `noncomputable` from both new records' lean.statement (complete replacement JSONs in fixes/). Advisories: body helpers (latticeCoefficientPresheaf, isSheaf_latticeCoefficientPresheaf, latticeCoefficientSheafMap, Rings/Modules/inverse) are still listed only under their theorem-node owners; def-weil-pbc-continuous-integral-coefficients is still cited but unused."
+ }
 }

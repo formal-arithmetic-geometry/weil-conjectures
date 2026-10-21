@@ -14,7 +14,9 @@
   "def-pc-kflat-complex",
   "def-weil-proetale-inverse-image",
   "def-weil-closed-immersion",
-  "def-weil-open-immersion"
+  "def-weil-open-immersion",
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-pbc-site-derived-tensor-descent"
  ],
  "proof": [
   {
@@ -240,5 +242,24 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-c64b9e8b8 (reviewer sub-agent of L); spot-checked: Read the item's four steps and all nine cited statements, plus the ancestor's Locality and Strata paragraphs (main-20261015 ctf-equals-bc.proof.md lines 18-30). No new nodes, no repair note, item not on the 2026-10-19 drop list, no SGA source. Step 1 is correct: f_proet is a geometric morphism via lem-weil-pbc-left-exact-site-inverse-image-tensor, so the module inverse image is exact (lem-trf-geometric-inverse-image-exact), and the termwise derived functor is a left derived functor, hence equal to Lu^*. Step 2 is correct: the ringed-topoi tensor pullback with S=u^{-1}R and the identity ring map gives u^*=u^{-1}. Step 3 is correct: the abelian clause of object inverse image = slice restriction, cover base change gives the CoversTop condition, then Sheaf.isIso_of_coversTop applied to F->0. Step 4 is correct: lem-exc-open-closed-detection (arbitrary R_X, j quasi-compact) is applied to F=H^q(K⊗^L M), with the bounds tested on i^{-1}M and j^{-1}M. Edge cases checked: empty X and empty cover, Z or U empty, c=d, F_ℓ over Z/ℓ². No cycle, and no duplicate (lem-sf-site-tor-interval-restriction is the converse direction). Batch-5 flag on lem-trf-geometric-inverse-image-exact accepted: it is generic exactness of inverse image along any geometric morphism, its closure contains only two general trf definitions (def-trf-geometric-morphism, def-trf-abelian-inverse-image-presentation), and the batch-5 targets already reach it without this item through weil-pbc nodes. lem-weil-pbc-site-pullback-abelian-exact could replace it, but that is optional. The worker-recorded tool_uses (8 generic tools) are accepted."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleTorIntervalLocalDetection",
+  "declaration": "AlgebraicGeometry.Scheme.proEtale_torInterval_local_detection",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleTorIntervalLocalDetection.lean",
+  "statement": "theorem proEtale_torInterval_local_detection (X : Scheme.{u}) (A : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) (K : DerivedCategory (proEtaleRingModules X A)) (c d : ℤ) (_hcd : c ≤ d) : (∀ (𝒱 : X.Cover.{u + 1} (Scheme.precoverage @WeaklyEtale)) (_ : QuasiCompactCover 𝒱.toPreZeroHypercover), (∀ t : 𝒱.I₀, ∀ (M : proEtaleRingModules (𝒱.X t) ((proEtaleSheafInverseImage (𝒱.f t) CommRingCat.{u + 1}).obj A)) (q : ℤ), q < c ∨ d < q → IsZero ((DerivedCategory.homologyFunctor _ q).obj ((SheafOfModules.siteDerivedTensorIndependentCoefficients (ProEt.topology (𝒱.X t)) ((proEtaleSheafInverseImage (𝒱.f t) CommRingCat.{u + 1}).obj A)).obj (((proEtaleRingDerivedPullback (𝒱.f t) A _ (Iso.refl _)).obj K), (DerivedCategory.singleFunctor _ 0).obj M)))) → ∀ (M : proEtaleRingModules X A) (q : ℤ), q < c ∨ d < q → IsZero ((DerivedCategory.homologyFunctor _ q).obj ((SheafOfModules.siteDerivedTensorIndependentCoefficients (ProEt.topology X) A).obj (K, (DerivedCategory.singleFunctor _ 0).obj M)))) ∧ (∀ (Z U : Scheme.{u}) (i : Z ⟶ X) (j : U ⟶ X) (_ : IsClosedImmersion i) (_ : IsOpenImmersion j) (_ : QuasiCompact j), Set.range j = (Set.range i)ᶜ → (∀ (M : proEtaleRingModules Z ((proEtaleSheafInverseImage i CommRingCat.{u + 1}).obj A)) (q : ℤ), q < c ∨ d < q → IsZero ((DerivedCategory.homologyFunctor _ q).obj ((SheafOfModules.siteDerivedTensorIndependentCoefficients (ProEt.topology Z) ((proEtaleSheafInverseImage i CommRingCat.{u + 1}).obj A)).obj (((proEtaleRingDerivedPullback i A _ (Iso.refl _)).obj K), (DerivedCategory.singleFunctor _ 0).obj M)))) → (∀ (M : proEtaleRingModules U ((proEtaleSheafInverseImage j CommRingCat.{u + 1}).obj A)) (q : ℤ), q < c ∨ d < q → IsZero ((DerivedCategory.homologyFunctor _ q).obj ((SheafOfModules.siteDerivedTensorIndependentCoefficients (ProEt.topology U) ((proEtaleSheafInverseImage j CommRingCat.{u + 1}).obj A)).obj (((proEtaleRingDerivedPullback j A _ (Iso.refl _)).obj K), (DerivedCategory.singleFunctor _ 0).obj M)))) → ∀ (M : proEtaleRingModules X A) (q : ℤ), q < c ∨ d < q → IsZero ((DerivedCategory.homologyFunctor _ q).obj ((SheafOfModules.siteDerivedTensorIndependentCoefficients (ProEt.topology X) A).obj (K, (DerivedCategory.singleFunctor _ 0).obj M))))",
+  "branch": "newtargets-dag",
+  "by": "Q87",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Both clauses, with arbitrary ring-sheaf coefficients and the fixed ordered interval. The explicit module tests use the recorded independent-coefficient K-flat tensor siteDerivedTensorIndependentCoefficients; pullback uses the actual inverse-image coefficient ring and its identity identification. No new notion, no boundedness or finite-cover hypothesis. The two added statement dependencies own the existing ringed derived pullback and resolving-class tensor localization used in the signature. This tensor is determined up to its uniquely compatible natural isomorphism by the natural K-flat representative comparison."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9ef7b9020",
+  "group": "Q87",
+  "result": "pass",
+  "note": "Both clauses (pro-etale cover; closed immersion with complementary quasi-compact open) match the node: arbitrary ring-sheaf coefficients, unbounded K, every-module degree-zero test in one fixed interval, inverse-image coefficient ring with identity identification. QuasiCompactCover is the Mathlib pro-etale cover condition, not a finiteness hypothesis. No extra hypotheses or universe restriction. Mechanical theorem-stmt_dep finding: siteDerivedTensorIndependentCoefficients is the .choose of lem-weil-pbc-site-derived-tensor-descent's existential conclusion, a constructed object, so PASS on that point. Dependency records are identical to live; the two added stmt_deps own declarations used in the signature. No duplicate: existing Tor-amplitude predicates cover only constant coefficients or a small model. Statement verbatim, docstrings with source and blueprint tag, proof sorry only. nt_compile --json clean (47.7 s). Advisory: the def-weil-pbc-proetale-operations record's declarations list omits proEtaleRingDerivedPullback and proEtaleRingModules."
+ }
 }

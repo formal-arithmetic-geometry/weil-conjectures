@@ -158,5 +158,27 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q19-a0945d1e0 (reviewer sub-agent of L); spot-checked: Read the item, the report, the main-20261015 blueprint unit, its proof and its detail files, the sk-def-localizing-closure blueprint, and the full statements of all cited nodes. The statement matches the blueprint word for word. 'Admissible' and the coefficient category D(Mod_{Lambda_X}) (unbounded, no derived completeness) come from sk-def-localizing-closure. Dropping sk-def-sf-operations from stmt_deps is correct. Step 1: clauses 1 and 2 of det-def-localizing-closure-existence, applied to X and to Y, give the ambient sums and the replete localizing intersection; the argument that the subcategories inherit coproducts is elementary and correct. Step 2: det-sf-determination-localizing is a strict generalization in the same unit, and its restricted-domain option, shift convention and minimality conclusion fit; only its statement is used. Fixed two small gaps: (1) Step 1 now cites def-weil-triangulated-subcategory for the fact that Loc(X) and Loc(Y) are triangulated categories; (2) Step 2 now shows that C_eta is iso-closed, sum-closed and triangle-closed in T, so the minimality in sk-def-localizing-closure gives Loc ⊆ C_eta whatever repleteness convention the lemma's 'smallest' carries. Step 2 cites sk-def-localizing-closure; proof_deps updated. No cycle (565-node closure excludes the item). No new nodes and no duplicates; the thick-envelope Lean and Mathlib candidates are insufficient for infinite sums. Edge cases checked: empty X, A=0, empty and infinite families. Accepted the declared tool use det-def-localizing-closure-existence, which is on the current blueprint route; the unit record is stale (master thick-generation statement) and was correctly reported for maintainer repair.; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.Paper.ConstructibleLocalizingDetermination",
+  "declaration": "AlgebraicGeometry.ProEtale.isIso_app_of_constructibleFiniteTor",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.localizingClosureProEtale_isTriangulated",
+   "AlgebraicGeometry.ProEtale.isIso_app_of_constructibleFiniteTor"
+  ],
+  "file": "lean/Sheaf/Paper/ConstructibleLocalizingDetermination.lean",
+  "statement": "theorem isIso_app_of_constructibleFiniteTor (ℓ : ℕ) [Fact ℓ.Prime] (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] (hΛ : IsLocalizingAdmissibleCoefficient ℓ Λ) (X Y : Scheme.{u}) (F₁ F₂ : (localizingClosureProEtale Λ X).FullSubcategory ⥤ (localizingClosureProEtale Λ Y).FullSubcategory) [F₁.CommShift ℤ] [F₂.CommShift ℤ] [F₁.IsTriangulated] [F₂.IsTriangulated] [∀ I : Type (u + 1), PreservesColimitsOfShape (Discrete I) F₁] [∀ I : Type (u + 1), PreservesColimitsOfShape (Discrete I) F₂] (η : F₁ ⟶ F₂) [NatTrans.CommShift η ℤ] (hη : ∀ K : (localizingClosureProEtale Λ X).FullSubcategory, (constantModelBoundedConstructible Λ X K.obj ∧ DerivedCategory.finiteTorAmplitude _ K.obj) → IsIso (η.app K)) : ∀ K : (localizingClosureProEtale Λ X).FullSubcategory, IsIso (η.app K)",
+  "branch": "newtargets-dag",
+  "by": "NR",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e23958da0",
+  "group": "NR",
+  "result": "pass",
+  "note": "isIso_app_of_constructibleFiniteTor matches sk-lem-sf-determination clause by clause: admissible Λ via IsLocalizingAdmissibleCoefficient; F₁,F₂ on localizingClosureProEtale X/Y full subcategories (restricted domain, inherited triangulations); exact = CommShift+IsTriangulated; sums = PreservesColimitsOfShape Discrete I for I : Type (u+1) (closure uses existing u+2-indexed coproducts, but the small-nonzero-support argument (UnboundedLocalizingPullback.preservesCoproducts_of_small) makes u+1 preservation sufficient, so the statement is true and general); η with NatTrans.CommShift; hypothesis on the exact Dctf predicate; conclusion iso on all of Loc. Helper instance is a projection of the proved localizingClosure_exists (Prop class, no diamond, no duplicate). Node differs from live only in lean; statement verbatim; ≤100 cols; single sorry. nt_compile --json rc 0 clean in 48.4 s. Advisories: docstring omits the u+2→u+1 sum reduction; LocalizingIsoLocus import unused in the statement (proof dependency); second reading by the same worker; compile time close to the 60 s limit."
+ }
 }
