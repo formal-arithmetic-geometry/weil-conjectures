@@ -20895,3 +20895,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:08 L: merged deliver/Q40/lem-pur-retracted-support-localization-comparison (reviewer PASS; after a return; new nodes: 7)
 - 08:08 L: merged deliver/Q63/lem-coef-tower-coaugmentation (reviewer PASS; after a return; new nodes: 2)
 - 08:08 L: merged deliver/Q43/lem-pc-regular-curve-divisor-calculus (reviewer FIX; first push; new nodes: 0)
+- 08:08 L: merged deliver/Q26/lem-sfb-equivariant-coequalizer-comparison (reviewer PASS; first push; new nodes: 0)

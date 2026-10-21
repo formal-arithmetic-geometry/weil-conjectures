@@ -12,9 +12,101 @@
   "sk-def-sfb-ring-object",
   "sk-def-sfb-module-objects"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "We will use only the uniqueness in the coequalizer property explicitly assumed in (1) and (3). If $e:Y\\to Z$ is any one of these coequalizers, of a pair $s,t:X\\rightrightarrows Y$, and $f,g:Z\\to T$ satisfy $fe=ge$, put $h=fe=ge$. Then $hs=fes=fet=ht$, and both $f$ and $g$ are factorizations of $h$ through $e$. Uniqueness gives $f=g$. This argument applies to $q_j,r_j,1_A\\otimes q_j,1_A\\otimes r_j$ with their respective parallel pairs.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 002A, definition-coequalizers: direct universal-property argument; equivariance and naturality refinement written by Q26"
+   }
+  },
+  {
+   "text": "Fix $j$. Since $q_ja_j=q_jb_j$, the coequalizer property of $r_j$ in (1), with $T=P_j$ and $h=q_j$, gives a unique $c_j:Q_j\\to P_j$ such that $c_jr_j=q_j$. Since $r_ja_j=r_jb_j$, the coequalizer property of $q_j$, with $T=Q_j$ and $h=r_j$, gives a unique $d_j:P_j\\to Q_j$ such that $d_jq_j=r_j$. These are morphisms in $\\mathcal D$ at this point; no action on $H_j$ was used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 002A, definition-coequalizers: direct universal-property argument; equivariance and naturality refinement written by Q26"
+   }
+  },
+  {
+   "text": "The two composites satisfy $(d_jc_j)r_j=d_jq_j=r_j=1_{Q_j}r_j$ and $(c_jd_j)q_j=c_jr_j=q_j=1_{P_j}q_j$. Applying the uniqueness argument in step 1 to $r_j$ and $q_j$, respectively, proves $d_jc_j=1_{Q_j}$ and $c_jd_j=1_{P_j}$. Thus the underlying morphisms are inverse isomorphisms.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 002A, definition-coequalizers: direct universal-property argument; equivariance and naturality refinement written by Q26"
+   }
+  },
+  {
+   "text": "To check the action equation for $c_j$, compute the following equality of morphisms $A\\otimes B_j\\to P_j$ using (2) and step 2:\n\\[\n(c_j\\delta^Q_j)(1_A\\otimes r_j)=c_jr_j\\beta_j=q_j\\beta_j=\\delta^P_j(1_A\\otimes q_j)=\\delta^P_j(1_A\\otimes c_j)(1_A\\otimes r_j).\n\\]\nThe last equality uses preservation of composition by the tensor bifunctor of [def-sfb-monoidal-category]. By (3), $1_A\\otimes r_j$ is a coequalizer, so step 1 gives $c_j\\delta^Q_j=\\delta^P_j(1_A\\otimes c_j)$. By clause 2 of [sk-def-sfb-module-objects], this makes $c_j$ an $A$-module morphism.",
+   "uses": [
+    "def-sfb-monoidal-category",
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 002A, definition-coequalizers: direct universal-property argument; equivariance and naturality refinement written by Q26"
+   }
+  },
+  {
+   "text": "For the inverse, (2) and step 2 give an equality of morphisms $A\\otimes B_j\\to Q_j$:\n\\[\n(d_j\\delta^P_j)(1_A\\otimes q_j)=d_jq_j\\beta_j=r_j\\beta_j=\\delta^Q_j(1_A\\otimes r_j)=\\delta^Q_j(1_A\\otimes d_j)(1_A\\otimes q_j).\n\\]\nHere the final equality again uses the tensor bifunctor law of [def-sfb-monoidal-category]. Hypothesis (3) and step 1 cancel $1_A\\otimes q_j$, giving $d_j\\delta^P_j=\\delta^Q_j(1_A\\otimes d_j)$. Clause 2 of [sk-def-sfb-module-objects] therefore makes $d_j$ an $A$-module morphism.",
+   "uses": [
+    "def-sfb-monoidal-category",
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 002A, definition-coequalizers: direct universal-property argument; equivariance and naturality refinement written by Q26"
+   }
+  },
+  {
+   "text": "For any $u:j\\to k$, naturality of the assumed transformations $q$ and $r$ and the defining equations of step 2 give\n\\[\n(P(u)c_j)r_j=P(u)q_j=q_kB(u)=c_kr_kB(u)=(c_kQ(u))r_j.\n\\]\nAll these composites have source $B_j$ and target $P_k$. Step 1 applied to $r_j$ proves $P(u)c_j=c_kQ(u)$. Since module morphisms are the underlying morphisms satisfying the action equation, with the same composition, as in [sk-def-sfb-module-objects], this equality is the naturality equation in the module category as well.",
+   "uses": [
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 002A, definition-coequalizers: direct universal-property argument; equivariance and naturality refinement written by Q26"
+   }
+  },
+  {
+   "text": "The inverse family is natural too: for $u:j\\to k$,\n\\[\n(Q(u)d_j)q_j=Q(u)r_j=r_kB(u)=d_kq_kB(u)=(d_kP(u))q_j.\n\\]\nStep 1 applied to $q_j$ proves $Q(u)d_j=d_kP(u)$. As in [sk-def-sfb-module-objects], the equality of these underlying module morphisms is precisely their equality in the module category.",
+   "uses": [
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 002A, definition-coequalizers: direct universal-property argument; equivariance and naturality refinement written by Q26"
+   }
+  },
+  {
+   "text": "Steps 4 and 6 assemble the components into a natural transformation $c:Q\\Rightarrow P$ of module-valued functors; steps 5 and 7 assemble $d:P\\Rightarrow Q$. Their composites are the identity transformations because their components are identities by step 3 and module morphisms have the underlying composition of [sk-def-sfb-module-objects]. Thus they form the required natural isomorphism. If $c'$ is any other such isomorphism, then $c'_jr_j=q_j=c_jr_j$ for every $j$, so step 1 gives $c'_j=c_j$; hence $c'=c$. The inverse equations give the asserted normalization of $d$. The construction and every check were at an object or an arrow of $J$: no colimit over $J$, smallness assumption on $J$, or module structure on $H_j$ was introduced.",
+   "uses": [
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 002A, definition-coequalizers: direct universal-property argument; equivariance and naturality refinement written by Q26"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-monoidal-category",
+  "sk-def-sfb-module-objects"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tag 002A, definition-coequalizers: direct universal-property argument; equivariance and naturality refinement written by Q26"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -59,10 +151,54 @@
    "date": "2026-10-21",
    "verdict": "no match: infrastructure for tensorators, ordinary modules or underlying coequalizers; not the stated internal-module diagram/comparison lemma",
    "subdirectory": "CategoryTheory/Monoidal"
+  },
+  {
+   "tool": "grep",
+   "query": "coequalizer|IsColimit|CreatesColimit|PreservesColimit",
+   "results": "{\"t\": \"2026-10-21T07:33:24Z\", \"tool\": \"grep\", \"query\": \"coequalizer|IsColimit|CreatesColimit|PreservesColimit\", \"sub\": \"CategoryTheory/Monoidal/Mod.lean\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: only underlying coequalizer comparison infrastructure or ordinary ring-module presentations; no natural comparison for internal module objects under the stated hypotheses",
+   "subdirectory": "CategoryTheory/Monoidal/Mod.lean"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical comparison between two coequalizers is a natural isomorphism of internal module objects if tensoring with the acting monoid preserves the coequalizer",
+   "results": "{\"t\": \"2026-10-21T07:33:25Z\", \"tool\": \"leansearch\", \"query\": \"The canonical comparison between two coequalizers is a natural isomorphism of internal module objects if tensoring with the acting monoid preserves the coequalizer\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.PreservesCoequalizer.iso\", \"CategoryTheory.Limits.PreservesCoequalizer.iso_hom\", \"CategoryTheory.Limits.coequalizerComparison\", \"CategoryTheory.Limits.instIsIsoCoequalizerComparison\", \"id_tensor_π_preserves_coequalizer_inv_desc\", \"id_tensor_π_preserves_coequalizer_inv_colimMap_desc\", \"π_tensor_id_preserves_coequalizer_inv_desc\", \"CategoryTheory.Limits.instIsIsoEqualizerComparison\"], \"digest\": \"36441ebb06c0ab97\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: only underlying coequalizer comparison infrastructure or ordinary ring-module presentations; no natural comparison for internal module objects under the stated hypotheses"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"coequalizer\", \"Mod_\"",
+   "results": "{\"t\": \"2026-10-21T07:33:25Z\", \"tool\": \"loogle\", \"query\": \"\\\"coequalizer\\\", \\\"Mod_\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: only underlying coequalizer comparison infrastructure or ordinary ring-module presentations; no natural comparison for internal module objects under the stated hypotheses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two coequalizers of the same parallel pair of maps of underlying internal module objects have a unique linear natural isomorphism when tensoring preserves the coequalizers",
+   "results": "{\"t\": \"2026-10-21T07:33:29Z\", \"tool\": \"leanfinder\", \"query\": \"Two coequalizers of the same parallel pair of maps of underlying internal module objects have a unique linear natural isomorphism when tensoring preserves the coequalizers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"id_tensor_π_preserves_coequalizer_inv_desc\", \"π_tensor_id_preserves_coequalizer_inv_desc\", \"π_tensor_id_preserves_coequalizer_inv_colimMap_desc\", \"id_tensor_π_preserves_coequalizer_inv_colimMap_desc\", \"ModuleCat.instHasCoequalizers\", \"Rep.coinvariantsTensor_hom_ext\", \"Rep.coinvariantsTensor_hom_ext_iff\", \"ModuleCat.instMonoidalLinear\"], \"digest\": \"0d21e830bb70c71a\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: only underlying coequalizer comparison infrastructure or ordinary ring-module presentations; no natural comparison for internal module objects under the stated hypotheses"
+  },
+  {
+   "tool": "grep",
+   "query": "coequalizer|IsColimit|CreatesColimit",
+   "results": "{\"t\": \"2026-10-21T07:33:42Z\", \"tool\": \"grep\", \"query\": \"coequalizer|IsColimit|CreatesColimit\", \"sub\": \"CategoryTheory/Monoidal\", \"ok\": true, \"n_hits\": 20, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Bimod.lean\", \"Mathlib/CategoryTheory/Monoidal/Bimod.lean\", \"Mathlib/CategoryTheory/Monoidal/Bimod.lean\", \"Mathlib/CategoryTheory/Monoidal/Bimod.lean\", \"Mathlib/CategoryTheory/Monoidal/Bimod.lean\", \"Mathlib/CategoryTheory/Monoidal/Limits/Colimits.lean\", \"Mathlib/CategoryTheory/Monoidal/Limits/Colimits.lean\", \"Mathlib/CategoryTheory/Monoidal/Limits/Colimits.lean\"], \"digest\": \"5854296a0060fbbb\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: only underlying coequalizer comparison infrastructure or ordinary ring-module presentations; no natural comparison for internal module objects under the stated hypotheses",
+   "subdirectory": "CategoryTheory/Monoidal"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Uniqueness of internal module quotient presentations as functors: factor through two common coequalizers, cancel tensor quotient maps to prove equivariance and cancel quotient maps to prove naturality",
+   "results": "{\"t\": \"2026-10-21T07:33:43Z\", \"tool\": \"leanfinder\", \"query\": \"Uniqueness of internal module quotient presentations as functors: factor through two common coequalizers, cancel tensor quotient maps to prove equivariance and cancel quotient maps to prove naturality\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Relations.Solution.IsPresentation.postcomp_uniq\", \"Module.Presentation.mk.inj\", \"CategoryTheory.Quotient.Linear.module\", \"CategoryTheory.Quotient.Linear.module'\", \"Module.Relations.Solution.IsPresentation.uniq\", \"Module.Relations.Solution.IsPresentationCore.mk.inj\", \"Module.Relations.Solution.ofQuotient_isPresentation\", \"Module.Presentation.CokernelData.mk.inj\"], \"digest\": \"8c81d564f3de81e0\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: only underlying coequalizer comparison infrastructure or ordinary ring-module presentations; no natural comparison for internal module objects under the stated hypotheses"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-internal-extension-inverse-image",
@@ -81,5 +217,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-equivariant-coequalizer-comparison",
+  "worker": "stage1",
+  "summary": "Preserved all hypotheses and conclusions. Expanded the direct universal-property proof into eight elementary steps: cancellation, the two factors, inverse identities, the two tensor/action calculations, the two naturality squares, and assembly/uniqueness. No new nodes: cancellation is proved from the coequalizer properties already in the statement. Searched the project, whole DAG, blueprint and Mathlib; no whole-item attachment or leaf was found.",
+  "blueprint": "Realizes the natural linear balancing-quotient comparison needed in the final sentence of lem-sfb-extend-to-qlbar-constructible.proof.md (tensoring local finite presentations on strata), through lem-sfb-internal-extension-inverse-image. The source sentence does not prove this generic refinement; its universal-property argument is explicitly agent-written.",
+  "tool_uses": [
+   {
+    "node": "sk-def-sfb-module-objects",
+    "why": "Uses only clause 2 defining internal module morphisms, their underlying composition and forgetful functor; this generic notion is required by the item itself and does not replace any unit-route step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sk-def-sfb-module-objects"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q26-3b5c7f3f5",
+  "group": "Q26",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q26-3b5c7f3f5 (reviewer sub-agent of L); spot-checked: Read the item's 8-step proof in full against Stacks categories.tex 002A (definition-coequalizers, lines 1153-1170, and the uniqueness paragraph after it), and read the complete statements of def-sfb-monoidal-category (bifunctor, which gives 1⊗(cr)=(1⊗c)(1⊗r)), sk-def-sfb-module-objects clause 2 (module morphisms are underlying maps with the action equation; composition as in D) and sk-def-sfb-ring-object (statement dependency only). The statement, stmt_deps and blueprint fields are unchanged from live and side-live, where the item is still unsplit. There is no repair note, and the item is not on the dropped or route-pivot lists. No SGA source. Step checks: step 1 derives cancellation from uniqueness for q_j, r_j, 1⊗q_j and 1⊗r_j. Step 2 builds c_j and d_j and their types are right. Step 3 gives both inverse identities. Steps 4 and 5 check both action chains A⊗B_j→P_j and A⊗B_j→Q_j and cancel the tensored quotient maps; that cancellation needs hypothesis (3), which is assumed. Steps 6 and 7 check both naturality squares using naturality of q and r. Step 8 assembles the isomorphism and proves uniqueness. Every elementary flag is justified. Edge cases: J empty, one-object J, a=b (c=q r^{-1}), noncommutative A and non-braided D; (3) is necessary. The parent lem-sfb-internal-extension-inverse-image applies the item with exactly hypotheses (1)-(3). The split adds no new nodes. I checked the DAG coequalizer hits (relative-tensor, extension-along-iso, quotient-formula, section-tensor comparison) and found no duplicate, so same_as=[] is correct. I accept the generic definition tool_use for sk-def-sfb-module-objects. No changes."
  }
 }
