@@ -21145,3 +21145,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:28 L: returned deliver/N7/lem-pe-scalar-cone-tensor-model (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-pe-scalar-cone-tensor-model: lem-pe-scalar-cone-te)
 - 08:29 L: returned deliver/NA/lem-weil-pbc-proetale-projection-formula-tensor-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-pbc-proetale-projection-formula-tensor-cohere)
 - 08:30 L: returned deliver/Q01/sk-def-perfect (reviewer RETURN: I read the item, the unit, the report, the main-20261015 sk-def-perfect and sk-def-ops sections, every stmt_dep statemen)
+- 08:30 L: returned deliver/NO/def-per-support-condition (reviewer RETURN: C4/C7, route lock. Definition-only split with no new nodes. Its D_X comes from lem-per-qbar-arbitrary-field-duality, whi)
