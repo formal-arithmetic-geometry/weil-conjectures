@@ -20,9 +20,101 @@
   "sk-def-sfb-derived-categories",
   "lem-pur-derived-change-of-rings"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $T_M=B\\otimes_R M$ for the sheafified tensor. In the coequalizer of [sk-def-sfb-change-of-scalars] the middle monoid is the tensor unit $R$ of $\\mathcal A$, not an additional coefficient ring. The two arrows $B\\otimes_R R\\otimes_R M\\rightrightarrows T_M$ send a local generator $b\\otimes r\\otimes m$ respectively to $b\\varphi(r)\\otimes m$ and $b\\otimes rm$. These are equal by the balancing relation in the sectionwise tensor over $R(U)$; sheafification therefore makes the arrows equal, by [def-pur-sheaf-tensor-product, def-weil-pbc-sheafification]. If $q_M:T_M\\to E_{\\mathrm{mon}}M$ is their coequalizer, the identity of $T_M$ equalizes them and gives a unique $e_M$ with $e_Mq_M=1$. Conversely $q_Me_Mq_M=q_M$, and uniqueness in the coequalizer property gives $q_Me_M=1$. Thus $e_M$ is an isomorphism and $e_Mq_M(b\\otimes m)=b\\otimes m$.",
+   "uses": [
+    "sk-def-sfb-change-of-scalars",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product; blueprint def-sfb-modobj-extension, coequalizer formula"
+   }
+  },
+  {
+   "text": "The action on the coequalizer in [sk-def-sfb-change-of-scalars] is induced by multiplication on the first factor. Hence, after precomposition with $B\\otimes_R q_M$, both sides of the $B$-linearity equation for $e_M$ send $b'\\otimes b\\otimes m$ to $b'b\\otimes m$. Equivalently $q_M$ and its inverse respect this action, by the same coequalizer uniqueness. For a module map $f:M\\to N$, both $e_NE_{\\mathrm{mon}}(f)q_M$ and $(1_B\\otimes f)e_Mq_M$ send $b\\otimes m$ to $b\\otimes f(m)$, so they agree and coequalizer uniqueness gives naturality. These computations define maps of the sectionwise tensor presheaves and then of their sheafifications [def-pur-sheaf-tensor-product]; they do not assert that arbitrary sheaf sections are global pure tensors. We have a natural $B$-linear isomorphism $e:E_{\\mathrm{mon}}\\xrightarrow{\\sim}E_{\\mathrm{sec}}$.",
+   "uses": [
+    "sk-def-sfb-change-of-scalars",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product; blueprint def-sfb-modobj-extension, induced maps and first-factor action"
+   }
+  },
+  {
+   "text": "For flat $M$, the additive functor $F_M=(-)\\otimes_R M$ is exact by [def-pc-flat-sheaf-modules]. By [lem-weil-pbc-exact-functor-complex-cohomology], $H^n(F_MK)\\cong F_M(H^nK)$ naturally in $K$. It follows that $F_M$ applied termwise preserves quasi-isomorphisms, and sends acyclic complexes to acyclic complexes. In the total tensor of [def-sfb-preserves-kflat-quasi-iso], $K\\otimes_R M[0]$ has just the summand $K^n\\otimes_R M$ in degree $n$, with differential $d_K\\otimes1$. The other order has just $M\\otimes_R K^n$ and differential $1\\otimes d_K$, since $(-1)^0=1$; the sectionwise flip $m\\otimes k\\mapsto k\\otimes m$ gives a chain isomorphism with $F_MK$ [def-pur-sheaf-tensor-product]. Thus tensoring with $M[0]$ on either side preserves every quasi-isomorphism. Tensoring any acyclic $K$ with $M[0]$ is acyclic as well. These are exactly the two required K-flat predicates [def-sfb-preserves-kflat-quasi-iso, def-pc-kflat-complex].",
+   "uses": [
+    "def-pc-flat-sheaf-modules",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "def-sfb-preserves-kflat-quasi-iso",
+    "def-pur-sheaf-tensor-product",
+    "def-pc-kflat-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 010N, lemma-exact-functor; sites-modules.tex Tag 03ER, definition-flat (3); sites-cohomology.tex Tag 06YQ, lemma-bounded-flat-K-flat, degree-zero case"
+   }
+  },
+  {
+   "text": "Apply [lem-pur-derived-change-of-rings] to $\\varphi:R\\to B$ on the given site. Its extension is written $(-)\\otimes_R B$; the sectionwise flip $m\\otimes b\\mapsto b\\otimes m$ identifies this with $E_{\\mathrm{sec}}$, respecting the $B$ action and the differentials [def-pur-sheaf-tensor-product]. Since $M[0]$ is K-flat in the acyclic-total-tensor sense, its identity is a K-flat resolution [def-pc-kflat-complex]. The canonical resolution comparison in [lem-pur-derived-change-of-rings] therefore says that the comparison counit at $M[0]$ is an isomorphism. Termwise scalar extension of $M[0]$ is $(E_{\\mathrm{sec}}M)[0]$, so this counit is precisely $c_{\\mathrm{sec},M}:LE_{\\mathrm{sec}}Q_R(M[0])\\to Q_B((E_{\\mathrm{sec}}M)[0])$. The cited theorem assumes no flatness of $B$.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "def-pur-sheaf-tensor-product",
+    "def-pc-kflat-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YY, lemma-derived-base-change, identity-topos change of rings; derived.tex Tag 06XN, lemma-find-existence-computes, identity K-flat resolution"
+   }
+  },
+  {
+   "text": "Let $\\varepsilon_{\\mathrm{mon}}$ and $\\varepsilon_{\\mathrm{sec}}$ be the given total-left-derived counits, and let $\\eta_K=Q_B(e_K)$, where $e_K$ applies $e$ termwise. Use the universal counit property spelled out in [def-sfb-left-derived-functor]: composition with $\\varepsilon_{\\mathrm{sec}}$ bijects transformations $V\\to LE_{\\mathrm{sec}}$ with transformations $VQ_R\\to Q_BE_{\\mathrm{sec}}$. Taking $V=LE_{\\mathrm{mon}}$ and $\\eta\\varepsilon_{\\mathrm{mon}}$ gives a unique transformation $a$ satisfying $\\varepsilon_{\\mathrm{sec}}(aQ_R)=\\eta\\varepsilon_{\\mathrm{mon}}$. Using $\\eta^{-1}\\varepsilon_{\\mathrm{sec}}$ and the other universal property gives $b$ in the reverse direction. Then $\\varepsilon_{\\mathrm{mon}}(baQ_R)=\\varepsilon_{\\mathrm{mon}}$ and $\\varepsilon_{\\mathrm{sec}}(abQ_R)=\\varepsilon_{\\mathrm{sec}}$; injectivity of the same bijections gives $ba=1$ and $ab=1$. Therefore $a=e^{\\mathbf L}$ is the unique counit-preserving natural isomorphism. This uses the total derived functors in the statement, not an exactness claim about scalar extension.",
+   "uses": [
+    "def-sfb-left-derived-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-categories/def-sfb-left-derived-functor.md",
+    "place": "Total left derived functor and its universal comparison counit; explicit universal-property argument written by Q42"
+   }
+  },
+  {
+   "text": "Evaluate the counit equation from Step 5 at $M[0]$. Termwise $e$ there is $e_M[0]$, so it gives exactly $c_{\\mathrm{sec},M}\\circ e^{\\mathbf L}_{Q_R(M[0])}=Q_B(e_M[0])\\circ c_{\\mathrm{mon},M}$. The left-hand factors and $Q_B(e_M[0])$ are isomorphisms by Steps 1, 4 and 5 and functoriality of $Q_B$ [def-weil-abstract-derived-category]. Consequently $c_{\\mathrm{mon},M}=Q_B(e_M[0])^{-1}c_{\\mathrm{sec},M}e^{\\mathbf L}_{Q_R(M[0])}$ is an isomorphism. For a map $f:M\\to N$ between flat sheaves, the maps $f[0]$ are chain maps; naturality of the two counits [def-sfb-left-derived-functor] and of $e,e^{\\mathbf L}$ gives the naturality squares for both degree-zero comparisons and the displayed equality. Flatness was used only for $M[0]$ (and $N[0]$ for this naturality assertion), with neither finite rank nor local freeness required.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-sfb-left-derived-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-categories/def-sfb-left-derived-functor.md",
+    "place": "Comparison counit, evaluated on a flat sheaf in degree zero; argument written by Q42"
+   }
+  }
+ ],
+ "proof_deps": [
+  "sk-def-sfb-change-of-scalars",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-sheafification",
+  "def-pc-flat-sheaf-modules",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "def-sfb-preserves-kflat-quasi-iso",
+  "def-pc-kflat-complex",
+  "lem-pur-derived-change-of-rings",
+  "def-sfb-left-derived-functor",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EK (section-tensor-product), 03ER (definition-flat); sites-cohomology.tex Tag 06YY and derived.tex Tag 06XN; blueprint module-object coequalizer and total-derived-counit conventions. Explicit convention comparison written by Q42."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -79,10 +171,59 @@
    "results": "{\"t\": \"2026-10-21T05:51:45Z\", \"tool\": \"grep\", \"query\": \"totalLeftDerivedCounit|preservesFiniteLimits_extendScalars_of_flat|sheafificationCompToSheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Localization.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean\", \"Mathlib/Algebra/Category/ModuleCat/Descent.lean\", \"Mathlib/Algebra/Category/ModuleCat/Descent.lean\"], \"digest\": \"e4e0eefe097a7baa\"}",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "totalLeftDerivedCounit|extendScalars|KFlat|kFlat",
+   "results": "{\"t\": \"2026-10-21T08:21:50Z\", \"tool\": \"grep\", \"query\": \"totalLeftDerivedCounit|extendScalars|KFlat|kFlat\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat sheaves in degree zero compute derived extension of scalars and natural isomorphisms of scalar extension preserve comparison counits",
+   "results": "{\"t\": \"2026-10-21T08:21:50Z\", \"tool\": \"leansearch\", \"query\": \"Flat sheaves in degree zero compute derived extension of scalars and natural isomorphisms of scalar extension preserve comparison counits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.RestrictionCoextensionAdj.counit'\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars\", \"ModuleCat.ExtendRestrictScalarsAdj.counit_app\", \"ModuleCat.restrictCoextendScalarsAdj\", \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map\", \"ModuleCat.extendScalars_id_comp\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars\", \"ModuleCat.ExtendRestrictScalarsAdj.counit\"], \"digest\": \"777024f3748e0de2\"}",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, \"tensor\"",
+   "results": "{\"t\": \"2026-10-21T08:21:51Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules, \\\"tensor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural isomorphism between extension of scalars for module objects over the tensor unit and sheafified tensor change of rings, compatible with derived counits on flat degree zero modules",
+   "results": "{\"t\": \"2026-10-21T08:21:51Z\", \"tool\": \"leanfinder\", \"query\": \"Natural isomorphism between extension of scalars for module objects over the tensor unit and sheafified tensor change of rings, compatible with derived counits on flat degree zero modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.sheafificationAdjunction\", \"PresheafOfModules.toPresheaf_map_sheafificationAdjunction_unit_app\", \"PresheafOfModules.sheafificationAdjunction_homEquiv_apply\", \"PresheafOfModules.sheafifyHomEquiv'\", \"PresheafOfModules.sheafificationHomEquiv\", \"PresheafOfModules.sheafifyHomEquiv\", \"PresheafOfModules.sheafificationCompToSheaf\", \"ModuleCat.extendRestrictScalarsAdj_unit_app_apply\"], \"digest\": \"0515963b6b705587\"}",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "totalLeftDerivedCounit|preservesFiniteLimits_extendScalars_of_flat",
+   "results": "{\"t\": \"2026-10-21T08:22:59Z\", \"tool\": \"grep\", \"query\": \"totalLeftDerivedCounit|preservesFiniteLimits_extendScalars_of_flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Descent.lean\", \"Mathlib/Algebra/Category/ModuleCat/Descent.lean\", \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\"], \"digest\": \"4a0e71e8b51bebdc\"}",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.totalLeftDerivedCounit",
+   "results": "{\"t\": \"2026-10-21T08:22:59Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.totalLeftDerivedCounit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.instIsLeftDerivedFunctorTotalLeftDerivedTotalLeftDerivedCounit\", \"CategoryTheory.Functor.totalLeftDerivedCounit\"], \"digest\": \"0224c7241de63bc6\"}",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact tensor functor sends quasi isomorphisms to quasi isomorphisms and a flat object concentrated in degree zero is K flat",
+   "results": "{\"t\": \"2026-10-21T08:23:00Z\", \"tool\": \"leanfinder\", \"query\": \"An exact tensor functor sends quasi isomorphisms to quasi isomorphisms and a flat object concentrated in degree zero is K flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"Module.Flat.rTensor_shortComplex_exact\", \"Module.Flat.lTensor_shortComplex_exact\", \"Module.Flat.iff_lTensor_exact'\", \"Module.Flat.iff_rTensor_exact'\", \"Module.Flat.iff_rTensor_exact\", \"Module.Flat.iff_lTensor_exact\"], \"digest\": \"af8774b04fab927d\"}",
+   "date": "2026-10-21",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-locally-free-derived-scalars",
@@ -101,5 +242,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-flat-single-scalar-conventions",
+  "worker": "stage1",
+  "summary": "Constructed the ordinary comparison explicitly from the equal balancing arrows over the unit monoid; proved both K-flat predicates directly using the existing exact-functor cohomology node; evaluated the ringed-site counit at the identity K-flat resolution and constructed the derived comparison by the counit universal property. Statement unchanged; no new nodes.",
+  "blueprint": "det-lem-integral-models-generators clause (3), derived reduction of the finite free lattice, via lem-sfb-locally-free-derived-scalars: identifies the two scalar conventions and their degree-zero comparison maps.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic change-of-rings theorem on any ringed site supplies the canonical comparison on a K-flat resolution. The integral-models unit needs this scalar-extension tool but does not prove its general ringed-site construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-derived-change-of-rings"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q42-04460e3f7",
+  "group": "Q42",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-04460e3f7 (reviewer sub-agent of L); spot-checked: Ordinary one-level split of lem-sfb-flat-single-scalar-conventions (created by Q31 as the old Step 4 of lem-sfb-locally-free-derived-scalars), with no new nodes. The item is unsplit in both live and side-live, is not on the drop list, has no repair note of its own, and the dependency closure has no cycle. Statement, stmt_deps, source and blueprint are unchanged, and proof_deps equals the union of the step uses. I checked all six steps against the cited statements. Step 1: in Mod(R) the two coequalizer arrows B⊗R⊗M⇉B⊗_RM are equal by balancing at presheaf level, so the coequalizer is split by the identity and e_M q_M=1 on pure tensors. Step 2: B-linearity and naturality follow from coequalizer uniqueness (B⊗q_M is an epimorphism because B⊗- is a left adjoint). Step 3: flat means exact tensoring (def-pc-flat-sheaf-modules), and the Mathlib leaf from Tag 010N (lem-weil-pbc-exact-functor-complex-cohomology) gives preservation of quasi-isomorphisms and of acyclicity. I verified the total-tensor signs for M[0] on both sides ((-1)^0, d_M=0), so both K-flat predicates (def-sfb-preserves-kflat-quasi-iso and def-pc-kflat-complex) hold. Step 4: clause (2) of lem-pur-derived-change-of-rings with the identity K-flat resolution makes the counit at M[0] an isomorphism, the flip to the B⊗- convention is B-linear, and B is arbitrary. Step 5: the derived comparison e^L is built from the universal property of def-sfb-left-derived-functor; I checked the arrows a and b and that ba=1 and ab=1 follow from uniqueness. Step 6: the displayed equation is the counit equation at M[0], c_mon is an isomorphism as a composite of isomorphisms, and naturality follows. Edge cases: M=0, B=0, φ=id, Z→Z/2 with M=Z or Z[1/2] all agree, and M=Z/2 is correctly excluded by flatness. Duplicate search over sk-def-sfb-change-of-scalars citers and K-flat degree-zero nodes (lem-sf-ringed-kflat-single-tensor-comparison, def-sfb-internal-scalar-tensor-comparison, lem-sfb-extend-scalars-kflat, def-sfb-left-derived-exact, lem-pc-bounded-above-flat-kflat-site) found none. Tool use lem-pur-derived-change-of-rings (unit sk-def-sf-operations) accepted as the generic ringed-site change of rings, with no unit step replaced. Stacks tags 03EK, 03ER, 06YQ, 06YY, 06XN and 010N are confirmed, no SGA is cited, and the coefficient categories Mod(R) and Mod(B) are matched exactly."
  }
 }
