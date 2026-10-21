@@ -21150,3 +21150,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:33 L: merged deliver/NL/lem-sfb-finite-open-direct-image-ctf (reviewer PASS; first push; new nodes: 0)
 - 08:33 L: merged deliver/Q68/lem-weil-finite-duality-locally-closed-comparison (reviewer PASS; after a return; new nodes: 4)
 - 08:34 L: merged deliver/Q138/lem-coef-derived-tower-counit-projections (reviewer PASS; first push; new nodes: 0)
+- 08:34 L: merged deliver/NI/lem-sf-strict-dvr-reduction-triangles (reviewer PASS; first push; new nodes: 0)

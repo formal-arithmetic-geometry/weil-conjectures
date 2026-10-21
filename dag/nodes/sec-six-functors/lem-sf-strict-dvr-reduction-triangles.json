@@ -22,9 +22,119 @@
   "lem-pur-derived-change-of-rings",
   "def-weil-triangulated-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a cochain complex $G$ and an isomorphism $e:Q(G)\\simeq K$, using the localization description in [def-weil-abstract-derived-category]. Apply [lem-pc-kflat-resolution] to the ringed site $(X_{\\mathrm{proet}},B)$ and $G$. This gives a quasi-isomorphism $f:P\\to G$ with $P$ K-flat and every $P^i$ flat. Fix this single $P$ and the isomorphism $e\\circ Q(f):Q(P)\\simeq K$ for the entire argument. The resolution theorem applies to any complex on a ringed site, so no boundedness or hypothesis on $X$ is needed.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YS, lemma-K-flat-resolution"
+   }
+  },
+  {
+   "text": "Write $A_m=R/(\\varpi^m)$. The coefficient datum [def-weil-l-adic-coefficient-extension] gives $R\\subset E$ and $\\varpi\\ne0$. For $n\\geq1$, define $v_n:A_1\\to A_{n+1}$ by $\\bar r\\mapsto\\overline{\\varpi^n r}$. Changing $r$ by $\\varpi s$ changes the image by $\\varpi^{n+1}s$, so the map is well defined. If $\\varpi^n r=\\varpi^{n+1}s$ in $R$, cancellation in the field $E$ gives $r=\\varpi s$, proving injectivity. The quotient $A_{n+1}\\to A_n$ is surjective, and its kernel consists exactly of the classes $\\overline{\\varpi^n r}$. Thus $0\\to A_1\\xrightarrow{v_n}A_{n+1}\\to A_n\\to0$ is an exact sequence of $R$-modules. If $a\\in A_{n+1}$, multiplication by $a$ on its source is through $A_{n+1}\\to A_1$, and $v_n((a\\bmod\\varpi)\\bar r)=a v_n(\\bar r)$, since both sides are $\\overline{\\varpi^n ar}$.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0942, lemma-bounded, proof (1): elementary DVR calculation identifying the successive kernel"
+   }
+  },
+  {
+   "text": "Apply the exact constant module functor of [def-sfb-site-derived-constant-module-functor] with coefficient ring $R$ to the sequence in step 2. By [def-sf-site-constant-module-functor], its objects have underlying constant abelian sheaves, and its arrows are the sheafifications of the actual coefficient maps. Hence the resulting arrows are $u_n:C_1\\to C_{n+1}$ and $q_n:C_{n+1}\\to C_n$, with an exact underlying sequence $0\\to C_1\\xrightarrow{u_n}C_{n+1}\\xrightarrow{q_n}C_n\\to0$. To read exactness in the underlying abelian sheaves, use [lem-weil-pbc-module-sheaves-colimits-forgetful], whose forgetful functor preserves kernels and cokernels. This use is on the small skeleton in the module universe prescribed for $X_{\\mathrm{proet}}$; it imposes no geometric restriction on $X$.",
+   "uses": [
+    "def-sfb-site-derived-constant-module-functor",
+    "def-sf-site-constant-module-functor",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 093J, lemma-constant-exact; Tag 03EI, lemma-sheafification-exact; Tags 03DA and 03DB, module forgetful exactness"
+   }
+  },
+  {
+   "text": "Give all three terms their $B$-actions via the projections. The $A_{n+1}$-linearity identity at the end of step 2 passes to constant module sheaves by the unique extension of the presheaf scalar action in [def-sf-site-constant-module-functor]. Thus $u_n$ is $C_{n+1}$-linear when $C_1$ has the action through $C_{n+1}\\to C_1$. By [def-pur-sheaf-inverse-limit], the projections satisfy $q_n\\pi_{n+1}=\\pi_n$ and $(C_{n+1}\\to C_1)\\pi_{n+1}=\\pi_1$. Therefore restricting those actions makes $u_n$ and $q_n$ $B$-linear, exactly by [def-pc-sheaf-restrict-scalars]. The sequence of step 3 is consequently short exact in $\\operatorname{Mod}(B)$: the kernel is the sectionwise kernel and the cokernel is the sheafified sectionwise cokernel, as specified in [def-weil-sheaf-of-modules-category]; its underlying sequence is already exact. Notice that $u_n$ is a module map, not a unital ring map.",
+   "uses": [
+    "def-sf-site-constant-module-functor",
+    "def-pur-sheaf-inverse-limit",
+    "def-pc-sheaf-restrict-scalars",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CY, lemma-sheafification-presheaf-modules; restriction of actions and coordinate identities of the inverse limit"
+   }
+  },
+  {
+   "text": "For each integer $i$, flatness of $P^i$ means precisely that $-\\otimes_B P^i$ is exact [def-pc-flat-sheaf-modules]. The symmetry isomorphisms of [lem-pc-sheaf-modules-tensor-closed] therefore make $P^i\\otimes_B-$ exact as well. Apply it to the $B$-module short exact sequence of step 4. This gives $0\\to P^i\\otimes_B C_1\\xrightarrow{1\\otimes u_n}P^i\\otimes_B C_{n+1}\\xrightarrow{1\\otimes q_n}P^i\\otimes_B C_n\\to0$. By the sheaf tensor construction [def-pur-sheaf-tensor-product], the differentials are $d_P^i\\otimes1$ and commute with these maps: both composites have value $d_P^i(p)\\otimes u_n(c)$, respectively $d_P^i(p)\\otimes q_n(c)$, on elementary tensors before sheafification. These are therefore actual chain maps and the displayed rows form the asserted degreewise short exact sequence of complexes. Flatness here is used over $B$, not over $C_n$.",
+   "uses": [
+    "def-pc-flat-sheaf-modules",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03ER, definition-flat, item (3); Tag 03EO, lemma-internal-hom-adjoint-tensor; Section Tag 03EK, section-tensor-product"
+   }
+  },
+  {
+   "text": "For each $n$, [lem-pur-derived-change-of-rings] applied to $\\pi_n:B\\to C_n$ and the fixed resolution $f:P\\to G$ computes $K\\otimes_B^{\\mathbf L}C_n$ by $P\\otimes_B C_n$. The comparison of [lem-pe-restricted-kflat-tensor-identification], specialized to $B\\xrightarrow{\\mathrm{id}}B\\xrightarrow{\\pi_n}C_n$, then gives the isomorphism $\\alpha_n:Q(P_n)\\xrightarrow{\\sim}K_n$, including the canonical localization comparison for restriction of scalars. Its scalar-swap map and inverse cancel, so it is precisely the scalar-last model $P\\otimes_B C_n$ used here. To check the transitions, apply [lem-sf-ringed-kflat-single-tensor-comparison] to $P$ and the $B$-linear map $q_n:C_{n+1}\\to C_n$. Its coefficient naturality says that $Q(1_P\\otimes q_n)$ corresponds to $1_{Q(P)}\\otimes_B^{\\mathbf L}q_n$. With the same $e\\circ Q(f)$ for every $n$, and the restricted change-of-rings comparisons just specified, this is the canonical quotient transition: $\\alpha_n Q(t_n)=\\bar t_n\\alpha_{n+1}$. Thus the identifications are simultaneous; no choices of separate resolutions at different levels occur.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "lem-pe-restricted-kflat-tensor-identification",
+    "lem-sf-ringed-kflat-single-tensor-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS, 06YT and 06YU, definition-derived-tor and its preceding construction; Tag 06YY, lemma-derived-base-change, identity underlying topos"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-complex-ses-triangle] in the abelian category $\\operatorname{Mod}(B)$ to the degreewise short exact sequence of step 5. It gives a distinguished triangle $Q(P_1)\\to Q(P_{n+1})\\xrightarrow{Q(t_n)}Q(P_n)\\to Q(P_1)[1]$ with the displayed second arrow, not an unspecified arrow between isomorphic objects. Replace its vertices by $K_1,K_{n+1},K_n$ using $\\alpha_1,\\alpha_{n+1},\\alpha_n$ from step 6 and the shifted $\\alpha_1$. Distinguishedness is preserved under isomorphisms of triangles by [def-weil-abstract-derived-category]. The second arrow becomes $\\alpha_n Q(t_n)\\alpha_{n+1}^{-1}=\\bar t_n$ by step 6, proving the claimed triangle. All constructions used only the ringed-site resolution, exact constant realization and flatness; they imposed none of the additional hypotheses excluded in the statement.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-triangle",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0152, lemma-derived-canonical-delta-functor"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "lem-pc-kflat-resolution",
+  "def-weil-l-adic-coefficient-extension",
+  "def-sfb-site-derived-constant-module-functor",
+  "def-sf-site-constant-module-functor",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "def-pur-sheaf-inverse-limit",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-flat-sheaf-modules",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "def-pur-sheaf-tensor-product",
+  "lem-pur-derived-change-of-rings",
+  "lem-pe-restricted-kflat-tensor-identification",
+  "lem-sf-ringed-kflat-single-tensor-comparison",
+  "lem-weil-pbc-complex-ses-triangle"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0942, lemma-bounded, proof (1), displayed ideal-quotient triangle, refined using 06YS and 06YU and elementary DVR cancellation; constant realization is sites-modules.tex Tag 093J, triangle passage is derived.tex Tag 0152."
+ },
  "mathlib_searches": [
   {
    "tool": "loogle",
@@ -74,10 +184,38 @@
    "results": "{\"t\": \"2026-10-21T06:17:34Z\", \"tool\": \"loogle\", \"query\": \"\\\"CochainComplex\\\", \\\"shortExact\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"CochainComplex.shortComplexTruncLE_shortExact\", \"CategoryTheory.ShortComplex.ShortExact.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoX₃CochainComplexMapSingleFunctorOfNatX₁\"], \"digest\": \"e3bcee977440d95b\"}",
    "date": "2026-10-21",
    "verdict": "no match: ordinary adic completion flatness and generic short-exact-sequence triangles do not construct the simultaneous completed-coefficient quotient tower and its residue kernel triangles"
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|kFlat|shortExact|distinguished",
+   "results": "{\"t\": \"2026-10-21T08:10:19Z\", \"tool\": \"grep\", \"query\": \"KFlat|kFlat|shortExact|distinguished\", \"sub\": \"Algebra/Homology/DerivedCategory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Basic.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Basic.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Basic.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Basic.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Basic.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean\"], \"digest\": \"3b7d8b2fd0a085c0\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits give tensor exactness for ordinary modules, adic-completion flatness or generic short-exact-sequence triangles; none states the simultaneous ringed-site coefficient model and its specified residue-kernel triangles"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A single flat K flat resolution computes a quotient coefficient tower and short exact residue triangles",
+   "results": "{\"t\": \"2026-10-21T08:10:20Z\", \"tool\": \"leansearch\", \"query\": \"A single flat K flat resolution computes a quotient coefficient tower and short exact residue triangles\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.rTensor_shortComplex_exact\", \"Module.Flat.tfae_equational_criterion\", \"Module.Flat.lTensor_shortComplex_exact\", \"Module.Flat.exists_factorization_of_comp_eq_zero_of_free\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"Module.Flat.mk\", \"Module.Flat.recOn\", \"Module.Flat.iff_lTensor_exact'\"], \"digest\": \"ac26cfadbbc280bf\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits give tensor exactness for ordinary modules, adic-completion flatness or generic short-exact-sequence triangles; none states the simultaneous ringed-site coefficient model and its specified residue-kernel triangles"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A K-flat complex of flat sheaves over a completed discrete valuation ring computes all quotient reductions with residue-kernel short exact sequences and distinguished triangles",
+   "results": "{\"t\": \"2026-10-21T08:10:24Z\", \"tool\": \"leanfinder\", \"query\": \"A K-flat complex of flat sheaves over a completed discrete valuation ring computes all quotient reductions with residue-kernel short exact sequences and distinguished triangles\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"localCohomology.diagram\", \"AdicCompletion.flat_of_isNoetherian\", \"AdicCompletion.map_exact\", \"Module.Flat.lTensor_shortComplex_exact\", \"Module.Flat.rTensor_shortComplex_exact\", \"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"Module.Flat.iff_lTensor_exact'\"], \"digest\": \"b657697610734942\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits give tensor exactness for ordinary modules, adic-completion flatness or generic short-exact-sequence triangles; none states the simultaneous ringed-site coefficient model and its specified residue-kernel triangles"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a ringed site tensor a flat term K flat representative with the short exact sequence from successive quotients by powers of a uniformizer",
+   "results": "{\"t\": \"2026-10-21T08:10:25Z\", \"tool\": \"leanfinder\", \"query\": \"For a ringed site tensor a flat term K flat representative with the short exact sequence from successive quotients by powers of a uniformizer\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.lTensor_shortComplex_exact\", \"Module.Flat.rTensor_shortComplex_exact\", \"AdicCompletion.flat_of_isNoetherian\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"Module.Flat.iff_rTensor_exact'\", \"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"Module.Flat.iff_lTensor_exact'\", \"Module.Flat.iff_rTensor_exact\"], \"digest\": \"ec993bf2273a6823\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits give tensor exactness for ordinary modules, adic-completion flatness or generic short-exact-sequence triangles; none states the simultaneous ringed-site coefficient model and its specified residue-kernel triangles"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sf-complete-residue-cohomology-bounds",
@@ -98,5 +236,59 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sf-strict-dvr-reduction-triangles",
+  "worker": "stage1",
+  "summary": "Split using existing generic nodes only. Wrote out the DVR kernel calculation, sheafification and B-linearity, then termwise tensor exactness. Used a single flat-term K-flat resolution and coefficient-natural comparisons to preserve the actual quotient transitions in the derived triangles. Statement retained verbatim; no new nodes.",
+  "blueprint": "Supports the evaluation-naturality sentence of lem-fix-weil-operations via lem-fix-constructible-tensor-completion, lem-fix-residue-lisse-projective-models and lem-sf-complete-residue-cohomology-bounds: realizes the latter residue-basis induction input by the explicit coefficient-kernel triangles. The unit and chapter route are unchanged. Whole-blueprint searches for simultaneous, residue kernel, quotient transition and K-flat resolution found no same-statement blueprint node.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic unbounded flat-term K-flat resolution on any ringed site; this unit supplies no resolution theorem."
+   },
+   {
+    "node": "def-sfb-site-derived-constant-module-functor",
+    "why": "Its statement explicitly gives exact constant module realization on any small site, used to sheafify the elementary DVR coefficient sequence."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Its exact underlying-abelian-sheaf forgetful functor reads the constant coefficient sequence as exact in underlying sheaves, without changing the unit route."
+   },
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "Generic symmetry of sheaf tensor changes the exact right tensor in the definition of flatness to the required left tensor."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic K-flat computation of derived extension along each actual projection B to C_n."
+   },
+   {
+    "node": "lem-pe-restricted-kflat-tensor-identification",
+    "why": "Generic scalar-restriction localization comparison and scalar-first/scalar-last computation for the same resolution; no node of this unit supplies that interface."
+   },
+   {
+    "node": "lem-sf-ringed-kflat-single-tensor-comparison",
+    "why": "Generic coefficient-map naturality of the K-flat single-module computation; it identifies the actual q_n chain map with the canonical quotient transition."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "def-sfb-site-derived-constant-module-functor",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-pur-derived-change-of-rings",
+  "lem-pe-restricted-kflat-tensor-identification",
+  "lem-sf-ringed-kflat-single-tensor-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NI-10682c4cc",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NI-10682c4cc (reviewer sub-agent of L); spot-checked: I read the item in full: the statement, 7 steps, the statements of all 16 proof_deps and 13 stmt_deps, and the source, Stacks 0942 lemma-bounded proof (1), whose triangle the item refines for C_n=(R/ϖ^n)_X without assuming C_n=B/ϖ^nB. The delivery adds no new nodes. Step 1: lem-pc-kflat-resolution applies to B=lim C_n, a sheaf of commutative rings. Step 2: the DVR kernel ϖ^n is checked by cancelling in R⊂E; tested at n=1, R=Z_ℓ (0→F_ℓ→Z/ℓ²→F_ℓ→0, non-split, and no splitting is used) and for ramified E. Step 3: the constant functor is exact by def-sfb-site-derived-constant-module-functor, read on underlying sheaves via the forgetful lemma (1), whose hypothesis holds on X_proet. Step 4: B-linearity follows from the π-coordinate identities and restriction of scalars. Step 5: the termwise SES uses only flatness of P^i, with the symmetry from tensor-closed. Step 6: the same P and e∘Q(f) are used at every n. lem-pur-derived-change-of-rings applies along the ring map π_n. The restricted-kflat identification with B→id B→π_n C_n gives α_n, and its Moreover clause with h=q_n gives the representative 1⊗q_n. Naturality of the single-tensor comparison c_{P,M} identifies Q(1⊗q_n) with 1⊗ᴸq_n. Step 7: the Mathlib leaf complex-ses-triangle (named first and second arrows), carried along the α's by TR1. Duplicates: rg -L found only lem-pe-successive-quotient-linear-triangle, which needs an injective t∈Γ(B) and quotients B/t^jB in the opposite orientation, so it is not this statement. Batch-5: lem-sf-ringed-kflat-single-tensor-comparison reaches lem-trf-site-functorial-flat-resolution, which only states that module sheaves have functorial flat resolutions. That is general homological algebra, not part of the trace-formula or Poincaré statements or their proofs, so I accept it. The 7 declared tool uses are all generic and accepted. No SGA source is used. Minor point, not a fault: the statement's 'canonical derived quotient transition' is pinned only through step 6's resolution-independent comparisons. No fixes."
  }
 }
