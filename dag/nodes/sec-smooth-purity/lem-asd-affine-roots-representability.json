@@ -19,106 +19,77 @@
  ],
  "proof": [
   {
-   "text": "Put $B=R[t]/(t^n-1)$ and let $q:R[t]\\to B$ be the quotient map. Its kernel is $(t^n-1)$, so $q(t)^n=1$. Under $B=\\Gamma(P,\\mathcal O_P)$ this says $x^n=1$. Since $n\\geq1$, $xx^{n-1}=x^{n-1}x=x^n=1$, so $x$ has the asserted inverse. Give $P$ its $V$-structure by the spectrum of the composite $R\\to R[t]\\xrightarrow q B$.",
+   "text": "Put $B=R[t]/(t^n-1)$ and let $q$ be the quotient map. Its kernel gives $q(t)^n=1$. The identification $B=\\Gamma(P,\\mathcal O_P)$ gives $x^n=1$, hence $xx^{n-1}=x^{n-1}x=1$ since $n\\geq1$. Give $P$ its structure map induced by $R\\to B$.",
    "uses": [
-    "def-weil-affine-spectrum",
-    "def-weil-pbc-algebra-hom-quotient"
+    "def-weil-pbc-algebra-hom-quotient",
+    "def-weil-affine-spectrum"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/groupoids.tex",
-    "place": "Tag 040M, example-roots-of-unity: the affine presentation and its universal coordinate"
+    "place": "Tag 040M, example-roots-of-unity, quotient presentation"
    }
   },
   {
-   "text": "Fix any structure morphism $s:U\\to V$, put $C=\\Gamma(U,\\mathcal O_U)$ and write $\\rho:R\\to C$ for $s^\\sharp$. The affine-target morphism lemma, applied to $B$ and to $R$, gives bijections between morphisms $U\\to P$ and ring maps $\\varphi:B\\to C$, and between morphisms $U\\to V$ and ring maps $R\\to C$. By the definition of composition of scheme morphisms, the composite $U\\to P\\to V$ induces $\\varphi\\circ(R\\to B)$. Thus it equals $s$ exactly when $\\varphi$ is an $R$-algebra homomorphism. This restricts the first bijection to $\\operatorname{Mor}_V(U,P)\\cong\\operatorname{Hom}_{R\\text{-alg}}(B,C)$. No affineness assumption on $U$ has been made.",
+   "text": "For any $s:U\\to V$ put $C=\\Gamma(U,\\mathcal O_U)$ and $\\rho=s^\\sharp$. The relative affine classification gives $\\operatorname{Mor}_V(U,P)\\cong\\operatorname{Hom}_{R\\text{-alg}}(B,C)$. Apply the polynomial quotient equivalence to $f=t^n-1$: its forward map is $\\varphi\\mapsto\\varphi(q(t))$, and its inverse is $q(\\sum_i r_it^i)\\mapsto\\sum_i\\rho(r_i)c^i$. Thus the composite is exactly $a\\mapsto a^\\sharp(x)$ and is bijective onto $\\{c\\in C:c^n=1\\}$. Such $c$ has inverse $c^{n-1}$, and a unit is determined by its underlying element, giving the asserted bijection with roots in $C^\\times$. No affineness of $U$ is used.",
    "uses": [
-    "lem-weil-pbc-morphism-into-affine-scheme",
-    "def-weil-pbc-algebra-hom-quotient"
+    "lem-asd-relative-affine-morphism-base-change",
+    "lem-asd-polynomial-quotient-hom-equivalence"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Tag 01I1, lemma-morphism-into-affine; applied to the presentation of Tag 040M"
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 040M, example-roots-of-unity, algebraic and relative affine functor of points"
    }
   },
   {
-   "text": "For $c\\in C$ define $E_c:R[t]\\to C$ by $E_c(\\sum_i r_it^i)=\\sum_i\\rho(r_i)c^i$. These are finite sums. This preserves addition and $1$, and the convolution formula for multiplication gives $E_c(fg)=\\sum_{i,j}\\rho(r_i)\\rho(s_j)c^{i+j}=E_c(f)E_c(g)$. It extends $\\rho$ and sends $t$ to $c$. Conversely any ring map extending $\\rho$ with $t\\mapsto c$ must have this formula, because each polynomial is the finite sum of its coefficient monomials. Hence it is the unique such map.",
+   "text": "For $h:U_1\\to U_2$ over $V$, the relative affine classification gives $(a\\circ h)^\\sharp(x)=h^\\sharp(a^\\sharp(x))$. Ring maps preserve powers, $1$, and the inverse $c^{n-1}$; hence the bijections are natural as maps to roots in units.",
    "uses": [
-    "def-weil-polynomial-ring"
+    "lem-asd-relative-affine-morphism-base-change"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/groupoids.tex",
-    "place": "Tag 040M, example-roots-of-unity: elementary evaluation calculation for the displayed polynomial ring"
+    "place": "Tag 040M, example-roots-of-unity, naturality"
    }
   },
   {
-   "text": "If $c^n=1$, then $E_c(t^n-1)=0$, and $\\varphi_c(q(f))=E_c(f)$ is well defined: when $q(f)=q(g)$ the difference $f-g$ lies in $(t^n-1)$, so it is $(t^n-1)h$ for a polynomial $h$, and its evaluation is zero. The quotient map is surjective, so this formula defines an $R$-algebra map and determines it uniquely. Conversely any $\\varphi:B\\to C$ gives $c=\\varphi(q(t))$ with $c^n=1$, and $\\varphi q=E_c$ by step 3, so $\\varphi=\\varphi_c$. Thus steps 2--4 give exactly $a\\mapsto a^\\sharp(x)$ as a bijection with $\\{c\\in C:c^n=1\\}$. Every such $c$ is a unit with inverse $c^{n-1}$, and a unit is determined by its underlying element; consequently this is the required bijection with the roots in $C^\\times$.",
+   "text": "Restrict to the small etale site. The roots sheaf is the kernel of the power map. The sectionwise kernel comparison, including its canonical inclusion, identifies a section with its unit $z$ satisfying $z^n=1$ and commutes with restrictions. In additive notation this is $nz=0$; removing ULift and Additive changes only notation. Therefore the natural bijections of steps 2--3 identify the two presheaves, with the kernel inclusion sending the image of $a$ to $a^\\sharp(x)$. Since the roots presheaf is a sheaf, the transported presheaf isomorphism is the claimed identification of sheaves.",
    "uses": [
-    "def-weil-pbc-algebra-hom-quotient"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/groupoids.tex",
-    "place": "Tag 040M, example-roots-of-unity: elementary quotient and inverse calculations establishing its functor of points"
-   }
-  },
-  {
-   "text": "For any morphism $b:U_1\\to U_2$ over $V$ and any $a:U_2\\to P$, the definition of composition gives $(a\\circ b)^\\sharp(x)=b^\\sharp(a^\\sharp(x))$. A ring homomorphism takes a unit with inverse $y$ to a unit with inverse the image of $y$, and preserves $n$-th powers. Thus this is equality of the roots on both sides, proving naturality in every morphism of $V$-schemes.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/groupoids.tex",
-    "place": "Tag 040M, example-roots-of-unity: functor of points, naturality by composition"
-   }
-  },
-  {
-   "text": "Restrict the natural bijections to the small etale site. Evaluation preserves the kernel defining the roots sheaf; PreservesKernel.iso followed by AddCommGrpCat.kernelIsoKer identifies its sections with the units killed by the nth-power map. Removing ULift and additive notation gives precisely the roots from the affine equivalence. The kernel inclusion normalizes this identification. Its naturality and step 5 give a natural isomorphism of the displayed presheaves. Since the right presheaf underlies the roots sheaf, this is also an identification of sheaves; no separate representable-sheaf lemma is required.",
-   "uses": [
-    "def-asd-etale-roots-of-unity"
+    "def-asd-etale-roots-of-unity",
+    "def-pur-abelian-sheaf-kernel"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 03PK, section-kummer, first paragraph, using Tag 03O3, lemma-representable-sheaf-fpqc"
+    "place": "Tag 03PK, section-kummer, first paragraph; sites-modules.tex Tag 03CO, lemma-limits-colimits-abelian-sheaves (2)"
    }
   },
   {
-   "text": "Let $v:V\\prime\\to V$ be arbitrary, let $P\\prime=V\\prime\\times_V P$, and write $p:P\\prime\\to P$ and $\\pi:P\\prime\\to V\\prime$ for its projections. For a $V\\prime$-scheme $s:U\\to V\\prime$, the fibre-product universal property makes $a\\mapsto p\\circ a$ a bijection $\\operatorname{Mor}_{V\\prime}(U,P\\prime)\\to\\operatorname{Mor}_V(U,P)$, where $U$ is given the $V$-structure $v\\circ s$: its inverse sends $b$ to the unique pair $(s,b)$. The projection equations prove that these maps are inverse and commute with precomposition. Composing with steps 2--5 gives the desired natural bijection, and its value is $(p\\circ a)^\\sharp(x)=a^\\sharp(p^\\sharp x)$. This does not require $V\\prime$ to be affine.",
+   "text": "For arbitrary $v:V\\prime\\to V$ use the base-change part of the relative affine classification with $Q=P$. Compose $E^v_U$ with the same polynomial quotient equivalence and the conversion from roots to units of step 2. This is a bijection with value $a^\\sharp(p^\\sharp x)$; its precomposition formula proves naturality. For the base change $a\\prime$ of $a$, that classification gives $E^v_{U\\prime}(a\\prime)=r^\\sharp\\circ E_U(a)$. Evaluating at $q(t)$ gives $(a\\prime)^\\sharp(p^\\sharp x)=r^\\sharp(a^\\sharp x)$, exactly the required compatibility. The classification allows nonaffine $V\\prime$ and imposes no flatness.",
    "uses": [
-    "def-pc-fibre-product"
+    "lem-asd-relative-affine-morphism-base-change",
+    "lem-asd-polynomial-quotient-hom-equivalence"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/groupoids.tex",
-    "place": "Tag 040M, example-roots-of-unity: base-change paragraph, expanded by the fibre-product universal property"
-   }
-  },
-  {
-   "text": "Finally let $a:U\\to P$ be over $V$, put $U\\prime=V\\prime\\times_V U$ with projection $r:U\\prime\\to U$, and let $a\\prime:U\\prime\\to P\\prime$ be its base change. The defining projection equation is $p\\circ a\\prime=a\\circ r$. Applying the maps on sections to $x$ gives $(a\\prime)^\\sharp(p^\\sharp x)=r^\\sharp(a^\\sharp x)$. This identifies the root of the base-changed morphism with the pullback of the original root, exactly as asserted.",
-   "uses": [
-    "def-pc-fibre-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/groupoids.tex",
-    "place": "Tag 040M, example-roots-of-unity: base-change functor of points and its projection formula"
+    "place": "Tag 040M, example-roots-of-unity, base-change paragraph"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-affine-spectrum",
   "def-weil-pbc-algebra-hom-quotient",
-  "lem-weil-pbc-morphism-into-affine-scheme",
-  "def-weil-polynomial-ring",
+  "def-weil-affine-spectrum",
+  "lem-asd-relative-affine-morphism-base-change",
+  "lem-asd-polynomial-quotient-hom-equivalence",
   "def-asd-etale-roots-of-unity",
-  "def-pc-fibre-product"
+  "def-pur-abelian-sheaf-kernel"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/groupoids.tex",
-  "place": "Tag 040M, example-roots-of-unity: explicit proof of the representability assertion and base-change paragraph, using Schemes Tag 01I1 and Etale Cohomology Tags 03PK and 03O3; Lean proof by M1 uses AdjoinRoot.lift and ringHom_ext, the Gamma-Spec adjunction, sectionwise kernel comparison, and Over.mapPullbackAdj, without a separate representable-sheaf argument"
+  "place": "Tag 040M, example-roots-of-unity and its base-change paragraph, assembled from the polynomial quotient and relative affine classification nodes; etale-cohomology.tex Tag 03PK and sites-modules.tex Tag 03CO for the roots kernel comparison"
  },
  "mathlib_searches": [
   {
@@ -235,32 +206,23 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "item": "lem-asd-affine-roots-representability",
   "worker": "stage1",
-  "summary": "Expanded every clause of the root-scheme representation using the existing affine-target morphism Mathlib leaf, explicit finite-sum evaluation and quotient descent, and the existing representable-etale-sheaf lemma. Naturality and arbitrary base change are checked on the universal coordinate. No statement change or new node; no Lean declaration in the project states the full item.",
-  "blueprint": "prop-asd-smooth-base-change, proof paragraph 2: ordinary inverse-image and twist base-change isomorphism, via lem-asd-etale-finite-twist-pullback; supplies the affine root representation used in that twist comparison.",
-  "tool_uses": [
-   {
-    "node": "lem-weil-pbc-morphism-into-affine-scheme",
-    "why": "Generic affine-target morphism classification used for arbitrary U; it is an existing Mathlib leaf, independent of the smooth/twist route."
-   },
-   {
-    "node": "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
-    "why": "Generic representable sheaf property on the small etale site, applied to P; the unit supplies no substitute and the node is already Lean-closed."
-   }
-  ]
+  "summary": "Human-requested re-split: extracted polynomial quotient evaluation/descent as a Mathlib leaf and relative affine classification with all coordinate/naturality/arbitrary-base-change identities as a separate unsplit statement. Reused the existing sectionwise sheaf-kernel Mathlib leaf rather than duplicate it. Preserved the item statement and all maintainer-owned metadata. The assembly retains the universal unit, roots-to-units conversion and all normalization formulas.",
+  "blueprint": "prop-asd-smooth-base-change proof paragraph 2, ordinary inverse-image and twist base-change isomorphism, via lem-asd-etale-finite-twist-pullback; same route and affine roots model, with its algebraic and relative affine arguments extracted.",
+  "tool_uses": []
  },
  "tool_uses": [
   "lem-weil-pbc-morphism-into-affine-scheme"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-Q143-ad9b209e2",
-  "group": "Q143",
+  "reviewer": "NT-cc-NF-b1e23e20b",
+  "group": "NF",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q143-ad9b209e2 (reviewer sub-agent of L); spot-checked: I read the delivery in full; review.md has the details. Shape: one commit with the item and the report. Statement, stmt_deps, blueprint, created and unit are byte-identical to the side and live DAGs, where the item is still unsplit. The seven original searches are kept unchanged, followed by six new ones. Sources: Stacks 040M (groupoids.tex l.417-453) and 03PK (etale-cohomology l.2819ff, using 03O3); 01I1, 03O3, 03PK and 040M match their labels in tags/tags. The item is 040M base-changed to Spec R. The source allows n=0, where the quotient is Z[x] and does not give units, so the item's n>=1 is necessary, not a weakening. Steps: step 1 (quotient and spectrum definitions) gives x^n=1 and the inverse x^{n-1}. Step 2 applies the affine-target Mathlib leaf to an arbitrary U and gets the R-algebra condition from composition on global sections. Steps 3-4 are evaluation and quotient descent, written out and elementary. Step 5 is naturality. Step 6 uses the representable-sheaf lemma for any T-scheme, which does not need P etale, so it holds in characteristic dividing n. Step 7 checks both directions of the fibre-product bijection for arbitrary V'. Step 8 checks the base-change morphism through the projection equation p∘(id×a)=a∘r, giving a'^#(p^#x)=r^#(a^#x). Small cases checked: n=1; Z with n=2 gives ±1; F_2[ε] with n=2 gives two roots; U empty; R=0. Duplicates: searched by tags, t^n-1 and represent+roots. def-sc-gm-ga, the pro-etale mu nodes and the sbc root-cover nodes are all different statements. There are no new nodes and no SGA. I accept both declared tool_uses, since one is a Mathlib leaf and the other is Lean-closed and generic. No fixes were made."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-b1e23e20b (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement, Stacks 040M (groupoids.tex l.418), the labels of 01I1, 01JP and 03CO, and AdjoinRoot.lean l.62 and l.307-342. Re-split note (human, 2026-10-21, released): at least 1 new node, parent proof at most 3000 characters, no shortening. The note was released after the Lean-closing landing, which is now judged on the merits (maintainer 10:58Z). Live is still at base; no other group landed a split, and neither new id exists. Old 8 steps (4248 chars) against the delivery (5 steps, 2293 chars): old step 2 (affine target restricted to over-V maps) plus steps 5, 7 and 8 (naturality, fibre-product bijection, p∘a'=a∘r projection formula) become the self-contained clauses of the new unsplit node lem-asd-relative-affine-morphism-base-change. Old steps 3-4 (evaluation, descent through the quotient, inverse equations) become the Mathlib leaf lem-asd-polynomial-quotient-hom-equivalence: liftAlgHom l.307, _mk l.322, _root l.326, aeval_algHom_eq_zero l.335, liftAlgHom_eq_algHom l.342, CommRing hypotheses only. The unit conversion stays in step 2 and the unit/power preservation in step 3. Old step 6 is now step 4, with a new citation of def-pur-abelian-sheaf-kernel (sectionwise kernel and canonical inclusion) that the old step lacked. No argument was dropped or blurred. Neither node restates the item: one is generic with no roots, the other has no schemes. Both statements are true; I tested f=0, f=1, C=0, U empty, B=0, and non-affine U and V'. Step 5 uses the R-algebra structure through v∘s; the final equation evaluated at q(t) gives (a')^♯p^♯x = r^♯a^♯x. Statement, stmt_deps and lean record are unchanged; proof_deps equals the union of the step uses. Blueprint from/via are consistent; all three search kinds are recorded. The rg -L duplicate search found no existing node with either statement. Route: same unit, plus definitions and leaves; no SGA. Note for the maintainer: the item's inherited tool_uses entry lem-weil-pbc-morphism-into-affine-scheme is no longer cited by the item. It is harmless, and the relative node's future proof will use it. No fixes."
  },
  "reviewed_lean": {
   "date": "2026-10-17",

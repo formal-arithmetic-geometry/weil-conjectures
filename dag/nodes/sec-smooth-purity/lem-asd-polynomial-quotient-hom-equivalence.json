@@ -1,0 +1,102 @@
+{
+ "id": "lem-asd-polynomial-quotient-hom-equivalence",
+ "kind": "statement",
+ "title": "Polynomial quotient algebra maps are evaluations at roots",
+ "statement": "Let $R$ and $C$ be commutative rings, let $\\rho:R\\to C$ give $C$ its $R$-algebra structure [def-weil-pbc-algebra-hom-quotient], and let $f\\in R[t]$ [def-weil-polynomial-ring]. Put $B=R[t]/(f)$ with quotient map $q$ and $\\alpha=q(t)$. For $g=\\sum_i r_it^i$, write $g_\\rho(c)=\\sum_i\\rho(r_i)c^i$, a finite sum. The map\n$$\\operatorname{Hom}_{R\\text{-alg}}(B,C)\\longrightarrow\\{c\\in C:f_\\rho(c)=0\\},\\qquad\\varphi\\longmapsto\\varphi(\\alpha)$$\nis bijective. Its inverse sends $c$ to the unique $R$-algebra homomorphism $\\varphi_c$ satisfying\n$$\\varphi_c(q(g))=g_\\rho(c)\\quad(g\\in R[t]).$$\nIn particular the finite-sum evaluation is independent of the representative of the class $q(g)$.",
+ "source": {
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 040M, example-roots-of-unity: polynomial quotient universal property underlying its functor-of-points assertion, stated for an arbitrary polynomial; Mathlib/RingTheory/AdjoinRoot.lean, liftAlgHom, liftAlgHom_mk, liftAlgHom_root, aeval_algHom_eq_zero, liftAlgHom_eq_algHom"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-polynomial-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An algebra homomorphism from R[X] modulo a polynomial f to a commutative R-algebra C is uniquely determined by a root of f in C",
+   "results": "8 hits: AdjoinRoot.algHom_ext, AdjoinRoot.algHom_ext_iff, AdjoinRoot.algHom_ext', AdjoinRoot.algHom_ext'_iff, IsAdjoinRoot.liftHom, AdjoinRoot.liftHom_eq_algHom, AdjoinRoot.liftAlgHom_eq_algHom, AdjoinRoot.liftHom",
+   "date": "2026-10-21",
+   "verdict": "match: local AdjoinRoot.liftAlgHom and its evaluation and inverse identities give one declaration per clause; AdjoinRoot.equiv alone has unnecessary field/domain hypotheses"
+  },
+  {
+   "tool": "grep",
+   "query": "equiv|liftHom|lift_root|lift_mk|lift_of",
+   "results": "5 hits: 46, 289, 290, 293, 296; directory Mathlib/RingTheory/AdjoinRoot.lean",
+   "date": "2026-10-21",
+   "verdict": "match: local AdjoinRoot.liftAlgHom and its evaluation and inverse identities give one declaration per clause; AdjoinRoot.equiv alone has unnecessary field/domain hypotheses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Algebra homomorphisms out of AdjoinRoot f are in bijection with elements at which f evaluates to zero",
+   "results": "8 hits: AdjoinRoot.aeval_algHom_eq_zero, IsAdjoinRoot.lift, IsAdjoinRoot.aeval_root, AdjoinRoot.lift, IsAdjoinRoot.liftHom_root, IsAdjoinRoot.liftHom, IsAdjoinRoot.map, AdjoinRoot.liftHom_root",
+   "date": "2026-10-21",
+   "verdict": "match: local AdjoinRoot.liftAlgHom and its evaluation and inverse identities give one declaration per clause; AdjoinRoot.equiv alone has unnecessary field/domain hypotheses"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AdjoinRoot\", \"equiv\"",
+   "results": "12 hits: AdjoinRoot.algEquivOfEq, AdjoinRoot.algEquivOfAssociated, AdjoinRoot.equiv, AdjoinRoot.algEquivOfEq_symm, AdjoinRoot.algEquivOfEq_root, AdjoinRoot.algEquivOfAssociated_root, AdjoinRoot.algEquivOfEq_toAlgHom, AdjoinRoot.algEquivOfAssociated_symm",
+   "date": "2026-10-21",
+   "verdict": "no direct match: AdjoinRoot.equiv requires a field source, domain target and f nonzero; use the general local liftAlgHom and inverse identities instead"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a commutative R algebra C, algebra homomorphisms from R[X] modulo f to C are equivalent to roots of f, with inverse sending the residue class of a polynomial sum a_i X^i to sum a_i c^i",
+   "results": "8 hits: IsAdjoinRoot.adjoinRootAlgEquiv_symm_apply_eq_mk, IsAdjoinRoot.adjoinRootAlgEquiv_apply_eq_map, IsAdjoinRoot.liftHom_aequiv, IsAdjoinRoot.adjoinRootAlgEquiv_symm_apply_root, IsAdjoinRoot.adjoinRootAlgEquiv_apply_root, IsAdjoinRoot.adjoinRootAlgEquiv_apply_mk, Polynomial.quotientSpanXSubCAlgEquiv_mk, IsAdjoinRoot.lift_aequiv",
+   "date": "2026-10-21",
+   "verdict": "no direct match among these hits: IsAdjoinRoot representation equivalences and the quotient by X-C x are different results; the other searches and local source give the arbitrary-polynomial quotient lift"
+  },
+  {
+   "tool": "grep",
+   "query": "^def liftHom|^lemma liftHom|^theorem liftHom|^theorem aeval_algHom_eq_zero|^theorem lift_mk|^lemma algHom_ext",
+   "results": "13 hits: Mathlib/RingTheory/Localization/FractionRing.lean, Mathlib/RingTheory/AdjoinRoot.lean, Mathlib/RingTheory/AdjoinRoot.lean, Mathlib/RingTheory/AdjoinRoot.lean, Mathlib/RingTheory/Localization/Defs.lean, Mathlib/RingTheory/Localization/Defs.lean, Mathlib/RingTheory/AdicCompletion/RingHom.lean, Mathlib/RingTheory/IsAdjoinRoot.lean; directory Mathlib/RingTheory",
+   "date": "2026-10-21",
+   "verdict": "match: local AdjoinRoot.liftAlgHom and its evaluation and inverse identities give one declaration per clause; AdjoinRoot.equiv alone has unnecessary field/domain hypotheses"
+  },
+  {
+   "tool": "grep",
+   "query": "^def liftAlgHom|^lemma liftAlgHom_mk|^lemma liftAlgHom_root|^theorem liftAlgHom_eq_algHom",
+   "results": "7 hits: Mathlib/RingTheory/AdjoinRoot.lean, Mathlib/RingTheory/AdjoinRoot.lean, Mathlib/RingTheory/AdjoinRoot.lean, Mathlib/RingTheory/AdjoinRoot.lean, Mathlib/RingTheory/AdicCompletion/Algebra.lean, Mathlib/RingTheory/AdicCompletion/RingHom.lean, Mathlib/RingTheory/PiTensorProduct.lean; directory Mathlib/RingTheory",
+   "date": "2026-10-21",
+   "verdict": "match: local AdjoinRoot.liftAlgHom and its evaluation and inverse identities give one declaration per clause; AdjoinRoot.equiv alone has unnecessary field/domain hypotheses"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AdjoinRoot.liftAlgHom\"",
+   "results": "5 hits: AdjoinRoot.liftAlgHom_eq_algHom, AdjoinRoot.liftAlgHom, AdjoinRoot.liftAlgHom_root, AdjoinRoot.liftAlgHom_of, AdjoinRoot.liftAlgHom_mk",
+   "date": "2026-10-21",
+   "verdict": "match: local AdjoinRoot.liftAlgHom and its evaluation and inverse identities give one declaration per clause; AdjoinRoot.equiv alone has unnecessary field/domain hypotheses"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AdjoinRoot.liftAlgHom",
+  "file": "Mathlib/RingTheory/AdjoinRoot.lean",
+  "line": 307,
+  "how": "specializes in one line: use AdjoinRoot.liftAlgHom f (Algebra.ofId R C) c hc (line 307) for the inverse; aeval_algHom_eq_zero (335) puts the forward map in the root subtype; liftAlgHom_root (326) and liftAlgHom_eq_algHom (342) are the inverse equations; liftAlgHom_mk (322) is the formula on every quotient class, with eval₂ the stated finite sum. These declarations assume only commutative rings and an R-algebra, not a domain, a field, f nonzero, or monicity."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-asd-affine-roots-representability",
+  "date": "2026-10-21",
+  "group": "NF"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "blueprint": {
+  "from": {
+   "node": "prop-asd-smooth-base-change",
+   "place": "Proof paragraph 2: \"the ordinary inverse-image and twist base-change isomorphism\"; Algebraic evaluation and descent through the polynomial quotient in the affine roots model used for finite-coefficient twists",
+   "via": [
+    "lem-asd-affine-roots-representability",
+    "lem-asd-etale-finite-twist-pullback"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
