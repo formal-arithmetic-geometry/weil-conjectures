@@ -8,11 +8,6 @@ module
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.TensorMappingCone
 public import Sheaf.Algebra.Homology.PreservesTotalTensorKFlatQuasiIso
 
-import Mathlib.Algebra.Homology.HomologySequence
-import Mathlib.Algebra.Homology.HomologySequenceLemmas
-import Mathlib.CategoryTheory.Abelian.DiagramLemmas.Four
-import Mathlib.CategoryTheory.Localization.Predicate
-
 /-!
 # The scalar-cone total-tensor model and its descent
 
@@ -93,6 +88,54 @@ theorem scalarCone_totalTensor_model (b : B) :
         (δ : tensorRight (Q.obj (scalarCone (A := A) b)) ≅ F),
         ∀ C : CochainComplex A ℤ,
           δ.hom.app (Q.obj C) ≫ η.hom.app C = θ.hom.app C := by
-  sorry
+  -- The upstream comparisons give a shorter route than the long-exact-sequence plan.
+  let Φ : tensorRight (scalarCone (A := A) b) ≅ scalarConeCochainFunctor (A := A) b :=
+    NatIso.ofComponents (fun C ↦ tensorScalarConeIso' C b)
+      (fun f ↦ tensorScalarConeIso'_hom_naturality f b)
+  let θ : Q ⋙ tensorRight (Q.obj (scalarCone (A := A) b)) ≅
+      scalarConeCochainFunctor (A := A) b ⋙ Q :=
+    NatIso.ofComponents (fun C ↦ tensorScalarConeIso C b)
+      (fun f ↦ tensorScalarConeIso_hom_naturality f b)
+  have hright {C D : CochainComplex A ℤ} (f : C ⟶ D) [QuasiIso f] :
+      QuasiIso (f ▷ scalarCone b) := by
+    apply (isIso_Q_map_iff_quasiIso A _).mp
+    have h : Q.map (f ▷ scalarCone b) =
+        inv (Functor.LaxMonoidal.μ Q C (scalarCone b)) ≫
+          (Q.map f ▷ Q.obj (scalarCone b)) ≫
+          Functor.LaxMonoidal.μ Q D (scalarCone b) := by
+      rw [IsIso.eq_inv_comp]
+      exact (Functor.LaxMonoidal.μ_natural_left Q f (scalarCone b)).symm
+    rw [h]
+    infer_instance
+  have hleft {C D : CochainComplex A ℤ} (f : C ⟶ D) [QuasiIso f] :
+      QuasiIso (scalarCone b ◁ f) := by
+    have := hright f
+    have h : scalarCone b ◁ f =
+        (β_ (scalarCone b) C).hom ≫ (f ▷ scalarCone b) ≫
+          (β_ (scalarCone b) D).inv := by
+      rw [← BraidedCategory.braiding_naturality_right_assoc]
+      simp
+    rw [h]
+    infer_instance
+  refine ⟨⟨?_, ?_⟩, Φ, θ, ?_, ?_,
+    tensorRight (Q.obj (scalarCone b)), θ, Iso.refl _, ?_⟩
+  · intro C D f hf
+    let _ : QuasiIso f := hf
+    exact hleft f
+  · intro C D f hf
+    let _ : QuasiIso f := hf
+    exact hright f
+  · intro C
+    rfl
+  · intro C D f hf
+    let _ : QuasiIso f := hf
+    have h : (scalarConeCochainFunctor (A := A) b ⋙ Q).map f =
+        inv (θ.hom.app C) ≫ (Q.map f ▷ Q.obj (scalarCone b)) ≫ θ.hom.app D := by
+      rw [IsIso.eq_inv_comp]
+      exact (θ.hom.naturality f).symm
+    rw [h]
+    infer_instance
+  · intro C
+    simp
 
 end DerivedCategory

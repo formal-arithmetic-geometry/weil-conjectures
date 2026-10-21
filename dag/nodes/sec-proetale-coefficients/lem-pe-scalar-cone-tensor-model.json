@@ -18,94 +18,68 @@
  ],
  "proof": [
   {
-   "text": "Use the cone convention of [def-weil-abstract-derived-category], ordering its summands as $C^n\\oplus C^{n+1}$. Thus $P_b^{-1}=\\mathbf1$, $P_b^0=\\mathbf1$, and its only differential is $b$. Additivity makes tensoring a zero object zero, so the total tensors of [def-sfb-preserves-kflat-quasi-iso] have just two nonzero summands in each degree. Via the unitors of [def-sfb-monoidal-category], order both as $C^n\\oplus C^{n+1}$. On the right tensor $T_R(C)=\\operatorname{Tot}(C\\otimes P_b)$ the differential is\n$$d_R^n(x,y)=(d_Cx+(-1)^{n+1}by,d_Cy).$$\nOn $T_L(C)=\\operatorname{Tot}(P_b\\otimes C)$ it is\n$$d_L^n(x,y)=(d_Cx+by,-d_Cy).$$\nThese are biproduct matrix formulas, with $(x,y)$ denoting the two inclusions, not elements of an arbitrary abelian category. The $B$-linearity assumption identifies the differential contributed by $P_b$ with the displayed scalar on $C$. Put $s_n=(-1)^{n+1}$. The maps $\\Phi_C^n=\\operatorname{diag}(1,s_n)$ satisfy $\\Phi_C^{n+1}d_R^n=d_L^n\\Phi_C^n$, since $s_{n+1}=-s_n$ and $s_n^2=1$. Their inverses are the same diagonal maps. The formula for $d_L$ is exactly the cone differential, so this constructs $\\Phi_C:T_R(C)\\xrightarrow{\\sim}\\operatorname{Cone}(b:C\\to C)$ and $\\Psi_C:T_L(C)\\xrightarrow{\\sim}\\operatorname{Cone}(b:C\\to C)$.",
+   "text": "Use the existing upstream tensorScalarConeIso' and its hom naturality to assemble Φ by NatIso.ofComponents. Similarly assemble θ from tensorScalarConeIso and tensorScalarConeIso_hom_naturality. The latter is, by definition, asIso(μ Q C P_b) followed by Q.mapIso(Φ_C), so the required equality for θ.hom.app is reflexive. Invertibility of μ is the upstream isIso_μ_scalarCone instance, obtained from kFlat_scalarCone and the derived monoidal computation. These are the existing scalar-cone and derived-tensor constructions, not new choices of cone data.",
    "uses": [
     "def-weil-abstract-derived-category",
-    "def-sfb-preserves-kflat-quasi-iso",
-    "def-sfb-monoidal-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/Monoidal/TensorMappingCone.lean",
-    "place": "scalarCone and tensorScalarConeIso', lines 55-57 and 102-116; degreewise sign calculation expanded using the item's cone convention"
-   }
-  },
-  {
-   "text": "For a chain map $f:C\\to C'$, $B$-linearity gives $f\\circ b_C=b_{C'}\\circ f$. Define $F_b(f)=\\operatorname{diag}(f^n,f^{n+1})$ between the cones. The differential matrices from [def-weil-abstract-derived-category] show this is a chain map; diagonal identities and compositions show that $F_b(C)=\\operatorname{Cone}(b_C)$ is a functor. The tensor-map formula of [def-sfb-preserves-kflat-quasi-iso], together with naturality of the unitors in [def-sfb-monoidal-category], identifies both $T_R(f)$ and $T_L(f)$ with the same diagonal matrix. This commutes with $\\operatorname{diag}(1,s_n)$ and with the identity. Consequently $\\Phi$ and $\\Psi$ are natural in all chain maps, including quasi-isomorphisms.",
-   "uses": [
-    "def-weil-abstract-derived-category",
-    "def-sfb-preserves-kflat-quasi-iso",
-    "def-sfb-monoidal-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/Monoidal/TensorMappingCone.lean",
-    "place": "tensorScalarConeIso'_hom_naturality, lines 118-134; diagonal formula and functoriality expanded"
-   }
-  },
-  {
-   "text": "For every $C$ there is a degreewise split short exact sequence of complexes $0\\to C\\to F_b(C)\\to C[1]\\to0$, with maps the first inclusion and second projection in the cone convention of [def-weil-abstract-derived-category]. The projection is a chain map because the shifted differential is $-d_C$. The diagonal cone map $F_b(f)$ makes these sequences into a morphism with other components $f$ and $f[1]$. Apply [lem-weil-pbc-complex-ses-homology-long-exact] and [lem-weil-pbc-complex-ses-long-exact-naturality]. For any integer $n$ they give a commutative five-term diagram with exact rows\n$$H^{n-1}(C[1])\\to H^n(C)\\to H^n(F_b(C))\\to H^n(C[1])\\to H^{n+1}(C),$$\nand the corresponding row for $C'$. If $f$ is a quasi-isomorphism, so is $f[1]$: kernels and images for the differential $-d_C$ are the same as for $d_C$ with indices shifted by one. Hence the first, second, fourth and fifth vertical maps are isomorphisms. By [lem-weil-pbc-five-lemma] the middle map $H^n(F_b(f))$ is an isomorphism. This holds for every $n$, proving that $F_b$ preserves quasi-isomorphisms.",
-   "uses": [
-    "def-weil-abstract-derived-category",
-    "lem-weil-pbc-complex-ses-homology-long-exact",
-    "lem-weil-pbc-complex-ses-long-exact-naturality",
-    "lem-weil-pbc-five-lemma"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 0117, lemma-long-exact-sequence-cochain, including functoriality; Tag 05QB, lemma-five-lemma"
-   }
-  },
-  {
-   "text": "For a quasi-isomorphism $f$, naturality from step 2 writes $T_R(f)=\\Phi_{C'}^{-1}F_b(f)\\Phi_C$ and $T_L(f)=\\Psi_{C'}^{-1}F_b(f)\\Psi_C$. Step 3 and functoriality of each cohomology functor show that both maps are quasi-isomorphisms: their cohomology maps are composites of three isomorphisms. Thus tensoring with $P_b$ on either side preserves every quasi-isomorphism. This is precisely the two-sided K-flatness definition of [def-sfb-preserves-kflat-quasi-iso]. No regularity of $b$, boundedness of $C$, or exactness of tensoring an arbitrary object is used.",
-   "uses": [
-    "def-sfb-preserves-kflat-quasi-iso"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/Monoidal/TensorMappingCone.lean",
-    "place": "kFlat_scalarCone, lines 65-76; its two-sided preservation content proved here directly from steps 1-3"
-   }
-  },
-  {
-   "text": "Apply [lem-sfb-derived-monoidal] to the given closed braided monoidal Grothendieck abelian category with additive tensor and functorial flat resolutions. It supplies the derived tensor, its canonical natural comparison $\\mu_{C,P_b}:QC\\otimes^{\\mathbf L}QP_b\\to Q T_R(C)$, and computation by replacing either argument by a K-flat resolution. In the second argument take the identity quasi-isomorphism $P_b\\to P_b$, whose source is K-flat by step 4. This computation says exactly that $\\mu_{C,P_b}$ is invertible, even when $C$ is unbounded and not K-flat. Compose it with $Q(\\Phi_C)$ to obtain $\\theta_C:QC\\otimes^{\\mathbf L}QP_b\\xrightarrow{\\sim}QF_b(C)$. Naturality of the comparison and step 2 give\n$$\\theta_{C'}\\circ(Qf\\otimes^{\\mathbf L}1)=QF_b(f)\\circ\\theta_C.$$\nThe composite is therefore the claimed isomorphism with the specified canonical comparison.",
-   "uses": [
+    "def-sfb-monoidal-category",
     "lem-sfb-derived-monoidal"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/Monoidal/TensorMappingCone.lean",
-    "place": "isIso_μ_scalarCone, lines 78-88, tensorScalarConeIso, lines 146-149, and its naturality, lines 151-158"
+    "place": "kFlat_scalarCone, isIso_μ_scalarCone, tensorScalarConeIso', tensorScalarConeIso'_hom_naturality, tensorScalarConeIso and tensorScalarConeIso_hom_naturality, lines 67–158"
    }
   },
   {
-   "text": "By step 3, $QF_b$ inverts quasi-isomorphisms, since the localization $Q$ of [def-weil-abstract-derived-category] sends them to isomorphisms. Apply clause (1) of [lem-weil-pbc-localization-universal-property] to obtain $\\overline F_b:D(\\mathcal A)\\to D(\\mathcal A)$ and a natural isomorphism $\\eta:\\overline F_b Q\\xrightarrow{\\sim}QF_b$. Put $H(X)=X\\otimes^{\\mathbf L}QP_b$. The natural isomorphism $\\eta^{-1}\\theta:HQ\\xrightarrow{\\sim}\\overline F_b Q$ from step 5 lifts by clause (2) of the same node to a natural isomorphism $H\\xrightarrow{\\sim}\\overline F_b$. Its components after precomposition with $Q$ are exactly $\\eta_C^{-1}\\theta_C$, so the resulting descent has the required compatibility with the displayed isomorphisms. This uses the fixed derived-localization universe, with no new indexing category.",
+   "text": "For a quasi-isomorphism f:C→D, Q(f) is invertible. Naturality of μ gives Q(f ▷ P_b) = μ(C,P_b)⁻¹ ≫ (Q(f) ▷ Q(P_b)) ≫ μ(D,P_b). All three factors are invertible by step 1 and functoriality. DerivedCategory.isIso_Q_map_iff_quasiIso therefore shows that f ▷ P_b is a quasi-isomorphism. Braiding naturality gives P_b ◁ f = β(P_b,C).hom ≫ (f ▷ P_b) ≫ β(P_b,D).inv. Quasi-isomorphisms contain isomorphisms and are closed under composition, so P_b ◁ f is also a quasi-isomorphism. The two whiskerings are definitionally the two HomologicalComplex.tensorHom maps in IsKFlatForTotalTensor, giving exactly its two conjuncts.",
    "uses": [
     "def-weil-abstract-derived-category",
-    "lem-weil-pbc-localization-universal-property"
+    "def-sfb-monoidal-category",
+    "def-sfb-preserves-kflat-quasi-iso",
+    "lem-sfb-derived-monoidal"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 04VG, lemma-properties-left-localization (3); natural-isomorphism lifting as stated in the cited node (Mathlib Localization.liftNatIso)"
+    "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/Monoidal/TensorMappingCone.lean",
+    "place": "isIso_μ_scalarCone, lines 79–88; naturality of the lax tensor comparison; Mathlib.Algebra.Homology.DerivedCategory.Basic, isIso_Q_map_iff_quasiIso; Mathlib.CategoryTheory.Monoidal.Braided.Basic, braiding_naturality_right"
+   }
+  },
+  {
+   "text": "For a quasi-isomorphism f:C→D, naturality of θ from step 1 gives (F_b ⋙ Q).map f = θ_C⁻¹ ≫ (Q(f) ▷ Q(P_b)) ≫ θ_D. Each factor is invertible, so F_b ⋙ Q inverts quasi-isomorphisms. This uses only the already constructed θ and that Q inverts quasi-isomorphisms; no long exact sequence or five lemma is needed.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-sfb-monoidal-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/Monoidal/TensorMappingCone.lean",
+    "place": "tensorScalarConeIso_hom_naturality, lines 152–158, and inversion of quasi-isomorphisms by derived localization"
+   }
+  },
+  {
+   "text": "Choose the descended functor explicitly as F = tensorRight(Q(P_b)), with η = θ and δ = Iso.refl F. The required compatibility reduces to the identity law 𝟙 ≫ θ_C = θ_C. Thus the existing derived right tensor functor already supplies the required descent; choosing a separate localization lift and then comparing it is unnecessary.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-sfb-monoidal-category",
+    "lem-sfb-derived-monoidal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/Monoidal/TensorMappingCone.lean",
+    "place": "tensorScalarConeIso and its naturality, lines 146–158; explicit witnesses for the descent conclusion"
    }
   }
  ],
  "proof_deps": [
   "def-weil-abstract-derived-category",
-  "def-sfb-preserves-kflat-quasi-iso",
   "def-sfb-monoidal-category",
-  "lem-weil-pbc-complex-ses-homology-long-exact",
-  "lem-weil-pbc-complex-ses-long-exact-naturality",
-  "lem-weil-pbc-five-lemma",
   "lem-sfb-derived-monoidal",
-  "lem-weil-pbc-localization-universal-property"
+  "def-sfb-preserves-kflat-quasi-iso"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/Monoidal/TensorMappingCone.lean",
-  "place": "Scalar-cone construction and naturality, lines 55-158, expanded by the explicit two-sided signed matrix calculation, Stacks Tags 0117 and 05QB, and localization Tag 04VG."
+  "place": "R4 Lean proof: assemble the existing natural scalar-cone comparisons, reflect invertibility through Q using naturality of the invertible μ, transport to the other tensor order by braiding, and take derived right tensoring itself as the descent."
  },
  "mathlib_searches": [
   {
@@ -309,5 +283,15 @@
   "result": "pass",
   "note": "Read node, 5 stmt_deps, source TensorMappingCone.lean, IsKFlatForTotalTensor, derived monoidal instances. All hypotheses (Grothendieck .{v}, closed braided MonoidalPreadditive, HasFunctorialFlatResolution, CommRing B with Linear+MonoidalLinear, universe r free) and clauses match: two-sided recorded K-flat predicate; natural Φ: tensorRight P_b ≅ cone functor; θ pinned to μ Q C P_b ≫ Q.map Φ (forces μ iso); IsInvertedBy; descent F,η,δ compatible with θ. Probe: tensorRight map = HomologicalComplex.tensorHom by rfl, Q lax structure = laxMonoidalQ from hasDerivedMonoidalCategory, upstream tensorScalarConeIso typechecks on the same objects. Helper scalarConeCochainFunctor has real data (mappingCone, diagonal maps), no existing equivalent. Docstrings/blueprint/6 steps present, only sorry in theorem, statement verbatim, node change only lean, item not landed elsewhere. nt_compile --json clean 4.4 s; broken control fails. Advisory: IsInvertedBy and descent clauses follow formally from θ, as in the node's 'Thus'."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261021T111534-L-261060",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }
