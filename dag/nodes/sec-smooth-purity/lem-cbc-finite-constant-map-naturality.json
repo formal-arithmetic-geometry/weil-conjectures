@@ -13,9 +13,56 @@
   "def-weil-pbc-proetale-modules",
   "def-weil-pbc-sheafification"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For $W=T,T'$, put $P_{B,W}(U)=\\operatorname{Cont}(\\pi_0(|U|),B)$ and write $a_{B,W}:P_{B,W}\\to B_W$ for the sheafification unit. Postcomposition $P_{\\phi,W}(s)=\\phi\\circ s$ is continuous because $B,C$ are discrete, preserves ring operations pointwise, and commutes with restrictions since $\\phi\\circ(s\\circ h)=(\\phi\\circ s)\\circ h$. By the defining universal property of its sheafified map, $\\phi_W a_{B,W}=a_{C,W}P_{\\phi,W}$. In particular, writing $\\eta_{B,W}(b)$ for a constant section, $\\phi_W(\\eta_{B,W}(b))=\\eta_{C,W}(\\phi(b))$ on every object.",
+   "uses": [
+    "def-weil-pbc-proetale-modules",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00WH, proposition-sheafification-adjoint; coefficient presheaves as specified in def-weil-pbc-proetale-modules"
+   }
+  },
+  {
+   "text": "Use the actual construction of $\\rho_B$ and $\\rho_C$ in prop-weil-pbc-proetale-constant-ring-map. On an object $U\\to T$ and $s\\in P_{B,T}(U)$, that construction glues the constant values $b$ over the open fibres of $s$, pulled back to $U\\times_TT'$. Applying $\\phi_{T'}$ to this glued section gives, on the fibre with value $b$, the constant section $\\phi(b)$ by Step 1. Applying $\\rho_C$ after $P_{\\phi,T}$ gives the identical constant section on each of these same pieces (a fibre of $\\phi\\circ s$ can be a union of several such pieces). Uniqueness of the gluing gives equality on $s$. Thus the two presheaf maps obtained by precomposing $g_*(\\phi_{T'})\\rho_B$ and $\\rho_C\\phi_T$ with $a_{B,T}$ agree. Their target $g_*C_{T'}$ is a sheaf by the stated direct-image functor. The uniqueness clause of sheafification therefore gives $g_*(\\phi_{T'})\\rho_B=\\rho_C\\phi_T$ as ring-sheaf morphisms.",
+   "uses": [
+    "prop-weil-pbc-proetale-constant-ring-map",
+    "def-weil-pbc-proetale-modules",
+    "def-weil-pbc-sheafification",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00WH, proposition-sheafification-adjoint; open-fibre gluing in the statement of prop-weil-pbc-proetale-constant-ring-map"
+   }
+  },
+  {
+   "text": "Write $L=g^{-1}$, $R=g_*$, with counit $\\varepsilon$. The adjoint formula in def-weil-proetale-inverse-image gives $c_{g,B}=\\varepsilon_{B_{T'}}L(\\rho_B)$. Counit naturality, Step 2 and functoriality give the explicit calculation $$\\begin{aligned}\\phi_{T'}c_{g,B}&=\\varepsilon_{C_{T'}}LR(\\phi_{T'})L(\\rho_B)\\\\&=\\varepsilon_{C_{T'}}L(R(\\phi_{T'})\\rho_B)\\\\&=\\varepsilon_{C_{T'}}L(\\rho_C\\phi_T)=c_{g,C}L(\\phi_T).\\end{aligned}$$ This is elementary naturality of the counit belonging to the specified adjunction. For the stated equivalence, the adjunct of $\\phi_{T'}c_{g,B}$ is $R(\\phi_{T'})\\rho_B$, by the formula $\\alpha\\mapsto R(\\alpha)\\eta$; the adjunct of $c_{g,C}L(\\phi_T)$ is $\\rho_C\\phi_T$, by naturality of the unit $\\eta$. Since the adjunction correspondence is a bijection, equality of either pair is equivalent to equality of the other.",
+   "uses": [
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A5, proetale-section-morphism (in proetale.tex); the ring-sheaf adjunction and counit formula specified in def-weil-proetale-inverse-image"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-sheafification",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "def-weil-proetale-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+  "place": "Coefficient naturality required by the completed-pullback reduction tower in the parent proof; explicit calculation from the existing coefficient-presheaf, sheafification, and inverse-image constructions (Stacks Tags 00WH and 09A5)."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,10 +98,52 @@
    "results": "[leanfinder] OK 8 hit(s); AlgebraicGeometry.LocallyRingedSpace.toΓSpecCApp_iff: ∀ (X : AlgebraicGeometry.LocallyRingedSpace) (r : ↑(AlgebraicGeometry.LocallyRingedSpace.Γ.obj (Opposite.op X)))\n  (f :\n    (AlgebraicGeometry.Spec.structureSheaf ↑(AlgebraicGeometry.LocallyRingedSpace.Γ.obj (Opposite.op X))).val.obj\n        (Opposite.op (PrimeSpectrum.basicOpen ; AlgebraicGeometry.LocallyRingedSpace.toΓSpecCApp_spec: ∀ (X : AlgebraicGeometry.LocallyRingedSpace) (r : ↑(AlgebraicGeometry.LocallyRingedSpace.Γ.obj (Opposite.op X))),\n  CategoryTheory.CategoryStruct.comp\n      (AlgebraicGeometry.StructureSheaf.toOpen (↑(AlgebraicGeometry.LocallyRingedSpace.Γ.obj (Opposite.op X)))\n        (PrimeSpec; AlgebraicGeometry.LocallyRingedSpace.toΓSpecSheafedSpace_app_spec: ∀ (X : AlgebraicGeometry.LocallyRingedSpace) (r : ↑(AlgebraicGeometry.LocallyRingedSpace.Γ.obj (Opposite.op X))),\n  CategoryTheory.CategoryStruct.comp\n      (AlgebraicGeometry.StructureSheaf.toOpen (↑(AlgebraicGeometry.LocallyRingedSpace.Γ.obj (Opposite.op X)))\n        (PrimeSpec; AlgebraicGeometry.ΓSpec.toOpen_comp_locallyRingedSpaceAdjunction_homEquiv_app: ∀ {X : AlgebraicGeometry.LocallyRingedSpace} {R : Type u} [inst : CommRing R]\n  (f : AlgebraicGeometry.LocallyRingedSpace.Γ.rightOp.obj X ⟶ Opposite.op { carrier := R, commRing := inst })\n  (U :\n    (TopologicalSpace.Opens\n        ↑↑(AlgebraicGeometry.Spec.toLocallyRingedSpace.ob; ModuleCat.Tilde.res_const: ∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R) (f : ↑M) (g : R)\n  (U : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R)) (hu : ∀ x ∈ U, g ∈ x.asIdeal.primeCompl)\n  (V : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R)) (hv : ∀ x ∈ V, g ∈ x.asId; AlgebraicGeometry.LocallyRingedSpace.toΓSpecCBasicOpens: (X : AlgebraicGeometry.LocallyRingedSpace) →\n  (CategoryTheory.inducedFunctor PrimeSpectrum.basicOpen).op.comp\n      (AlgebraicGeometry.Spec.structureSheaf ↑(AlgebraicGeometry.LocallyRingedSpace.Γ.obj (Opposite.op X))).val ⟶\n    (CategoryTheory.inducedFunctor PrimeSpectrum.basicO; AlgebraicGeometry.LocallyRingedSpace.toΓSpecSheafedSpace_app_spec_assoc: ∀ (X : AlgebraicGeometry.LocallyRingedSpace) (r : ↑(AlgebraicGeometry.LocallyRingedSpace.Γ.obj (Opposite.op X)))\n  {Z : CommRingCat}\n  (h :\n    ((TopCat.Presheaf.pushforward CommRingCat X.toΓSpecSheafedSpace.hom.base).obj X.presheaf).obj\n        (Opposite.op (PrimeSpectrum.basicO; AlgebraicGeometry.StructureSheaf.res_const: ∀ (R : Type u) [inst : CommRing R] (f g : R) (U : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R))\n  (hu : ∀ x ∈ U, g ∈ x.asIdeal.primeCompl) (V : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R))\n  (hv : ∀ x ∈ V, g ∈ x.asIdeal.primeCompl) (i : Oppo",
    "date": "2026-10-21",
    "verdict": "no match: generic categorical or ordinary-module hits do not state this ringed-site normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteCoefficient.*naturality|constantSheaf.*naturality|homEquiv_naturality",
+   "results": "25 hits; Mathlib/CategoryTheory/CodiscreteCategory.lean, Mathlib/CategoryTheory/CodiscreteCategory.lean, Mathlib/CategoryTheory/Generator/Sheaf.lean, Mathlib/CategoryTheory/Endofunctor/Algebra.lean, Mathlib/CategoryTheory/Endofunctor/Algebra.lean, Mathlib/CategoryTheory/Endofunctor/Algebra.lean, Mathlib/CategoryTheory/Endofunctor/Algebra.lean, Mathlib/CategoryTheory/Endofunctor/Algebra.lean; searched Mathlib/CategoryTheory",
+   "date": "2026-10-21",
+   "verdict": "no match: these are general sheafification/adjunction or ordinary-module/topological-space lemmas, not the specified pro-etale coefficient normalization; the open-fibre comparison still has to be checked"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback of constant ring sheaves commutes with changes of finite coefficient rings",
+   "results": "8 hits; TopCat.continuousFunctions.pullback, SheafOfModules.pullback, LocallyConstant.comapₗ, LocallyConstant.comapₐ, SheafOfModules.pullbackPushforwardAdjunction, LocallyConstant.comapRingHom_apply_apply, LocallyConstant.comapRingHom, SheafOfModules.pullbackObjFreeIso_hom_naturality",
+   "date": "2026-10-21",
+   "verdict": "no match: these are general sheafification/adjunction or ordinary-module/topological-space lemmas, not the specified pro-etale coefficient normalization; the open-fibre comparison still has to be checked"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, CategoryTheory.NatTrans",
+   "results": "0 hits; ",
+   "date": "2026-10-21",
+   "verdict": "no match: these are general sheafification/adjunction or ordinary-module/topological-space lemmas, not the specified pro-etale coefficient normalization; the open-fibre comparison still has to be checked"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical inverse image maps of finite constant ring sheaves are natural in the coefficient ring homomorphism",
+   "results": "8 hits; AlgebraicGeometry.StructureSheaf.comap_const, AlgebraicGeometry.Scheme.ΓSpecIso_inv_naturality_assoc, AlgebraicGeometry.Scheme.ΓSpecIso_inv_naturality, AlgebraicGeometry.StructureSheaf.toOpen_comp_comap_apply, AlgebraicGeometry.Spec_Γ_naturality_assoc, AlgebraicGeometry.StructureSheaf.toOpen_comp_comap, AlgebraicGeometry.StructureSheaf.comap, AlgebraicGeometry.StructureSheaf.res_const",
+   "date": "2026-10-21",
+   "verdict": "no match: these are general sheafification/adjunction or ordinary-module/topological-space lemmas, not the specified pro-etale coefficient normalization; the open-fibre comparison still has to be checked"
+  },
+  {
+   "tool": "grep",
+   "query": "constantSheaf.*[Nn]aturality|constantSheaf.*[Cc]om|[Cc]onstant.*[Ii]nverseImage",
+   "results": "13 hits; Mathlib/CategoryTheory/Sites/GlobalSections.lean, Mathlib/CategoryTheory/Sites/GlobalSections.lean, Mathlib/CategoryTheory/Sites/GlobalSections.lean, Mathlib/CategoryTheory/Sites/GlobalSections.lean, Mathlib/CategoryTheory/Sites/GlobalSections.lean, Mathlib/CategoryTheory/Sites/LocalSite.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean; searched Mathlib/CategoryTheory/Sites",
+   "date": "2026-10-21",
+   "verdict": "no match: these are general sheafification/adjunction or ordinary-module/topological-space lemmas, not the specified pro-etale coefficient normalization; the open-fibre comparison still has to be checked"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality in a ring homomorphism of the canonical map from inverse image of a sheafified constant presheaf to the constant sheaf on another site",
+   "results": "8 hits; CategoryTheory.GrothendieckTopology.toSheafify_naturality, CategoryTheory.GrothendieckTopology.toSheafify_naturality_assoc, CategoryTheory.toSheafify_naturality_assoc, CategoryTheory.toSheafify_naturality, PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom, PresheafOfModules.toPresheaf_map_sheafificationHomEquiv, PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm, PresheafOfModules.toPresheaf_map_sheafificationHomEquiv_def",
+   "date": "2026-10-21",
+   "verdict": "no match: these are general sheafification/adjunction or ordinary-module/topological-space lemmas, not the specified pro-etale coefficient normalization; the open-fibre comparison still has to be checked"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-cbc-adic-pullback-presentation-transport",
@@ -73,5 +162,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-cbc-finite-constant-map-naturality",
+  "worker": "stage1",
+  "summary": "Proved naturality without changing the statement and without new nodes: coefficient maps preserve constant sections; the specified open-fibre construction makes the direct-image square commute; the explicit unit/counit formulas identify the equivalent inverse-image square. Searched the project, DAG, blueprint and Mathlib, including a second semantic phrasing.",
+  "blueprint": "lem-cbc-completed-extension-zero-comparison.proof.md, first paragraph: completed pullback at finite reductions and its quotient-transition compatibilities, extracted through lem-cbc-adic-pullback-presentation-transport Step 1.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-proetale-constant-ring-map",
+    "why": "Uses its explicitly stated open-fibre construction of the constant-section morphism rho for the coefficient sheaves already fixed in this item; no theorem of sk-prop-sf-cbc supplies that construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-pbc-proetale-constant-ring-map"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q24-e429f3f7b",
+  "group": "Q24",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-e429f3f7b (reviewer sub-agent of L); spot-checked: Read all three steps, the four cited statements, the main-20261015 ancestor proof (lem-cbc-completed-extension-zero-comparison.proof.md) and the Stacks tags 00WH, 09A5 and 0H7J. The statement and stmt_deps are unchanged and true. Edge cases checked: zero ring, empty scheme, φ=id, the quotient Z/4→Z/2 (fibres merge) and the diagonal Z/2→Z/2×Z/2. Step 1: postcomposition defines a map of ring presheaves, and φ_W∘a_B=a_C∘P_φ by the universal property of sheafification. Step 2: I checked it piece by piece over the clopen pieces W_b×_T T', using the ρ that the prop's statement defines (not its proof); then I used that g_*C is a sheaf and that the extension through sheafification is unique. Step 3: I recomputed the counit-naturality chain, and the adjunct equivalence follows from unit naturality and bijectivity. I accept the declared tool use of prop-weil-pbc-proetale-constant-ring-map, because the unit sk-prop-sf-cbc has no steps. No SGA source, no cycle, no new nodes. The item is unsplit on live and side-live, is in no drop list and has no repair note. Advisory for the maintainer: the existing node lem-weil-pbc-profinite-coefficient-inverse-image (split, reviewed pass) states (t_n)_U c_{u,n+1}=c_{u,n}u^{-1}(t_n)_V for arbitrary finite-ring towers. With Q_1=C, Q_n=B and t_1=φ it specializes to this item, so the report's claim that no node states a varying-coefficient square missed it. That node proves the clause in one vague sentence and works with constant sheaves rather than the Cont(π0) model, so I keep this explicit split. Consider merging or recording same-content, so that stage 2 reuses one declaration."
  }
 }
