@@ -19,36 +19,18 @@
  ],
  "proof": [
   {
-   "text": "Write $F=i_*^{\\mathrm{et}}$ and $P=i_*^{\\mathrm{pro}}$. The ordinary adjunction $F\\dashv I$ is [lem-exc-closed-ambient]. By [thm-weil-pbc-site-comparison], the site-comparison unit $\\eta_H:H\\to U_PS_PH$ is an isomorphism. $I(\\eta_H)$ is an isomorphism $IH\\to IU_PS_PH$, so the latter ordinary etale object is bounded below as well. Functoriality therefore makes $\\alpha_H=S_ZI(\\eta_H)$ an isomorphism, with target $JS_PH=S_ZIU_PS_PH$ by [def-weil-exceptional-inverse-image]. Its source $S_ZIH$ is bounded below by exact derived pullback [def-sf-comparison-derived-pullback]. Consequently $JS_PH$ is also bounded below and has the etale-origin witness $(IH,\\alpha_H)$. Thus the relative Hom bijection stipulated in the item can be evaluated with source $JS_PH$, which is needed to define its counit. This only uses the stated hypothesis $IH\\in D^+$, not constructibility.",
+   "text": "Put $F=i_*^{\\mathrm{et}}$, $Q=i_*^{\\mathrm{pro}}$, and let $\\beta$ be the ordinary adjunction bijection. Apply [lem-coef-closed-identity-open-hom-normalization]: $\\alpha_H$ is invertible, $(IH,\\alpha_H)$ is a bounded-below etale-origin witness for $JS_PH$, and the specified relative bijection $\\Phi_{L,H}$ sends $g$ successively to $g\\delta_L$, $U_P(g\\delta_L)\\eta_{FL}$, its ordinary adjunct, and its $S_Z$-image. In particular the relative counit at $S_PH$ is defined.",
    "uses": [
-    "lem-exc-closed-ambient",
-    "thm-weil-pbc-site-comparison",
-    "def-weil-exceptional-inverse-image",
-    "def-sf-comparison-derived-pullback"
+    "lem-coef-closed-identity-open-hom-normalization"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/thm-sf-ambient-adjoint-class.proof.md",
-    "place": "Displayed Hom chain, bounded-below domains; construction of alpha in the extracted closed-immersion calculation"
+    "place": "Displayed four-factor Hom chain, specialized to the identity-open compactification; domain check and canonical-mate normalization extracted from lem-coef-site-closed-counit-transport, former steps 1 and 2 (agent-written extraction)."
    }
   },
   {
-   "text": "Let $\\beta_{L,N}:\\operatorname{Hom}(FL,N)\\to\\operatorname{Hom}(L,IN)$ denote the ordinary exceptional adjunction bijection. Unpack the transported bijection of [thm-sf-ambient-adjoint-class] with the identity etale-origin witness for $S_ZL$, as specified in [def-weil-exceptional-inverse-image]. For the identity-open compactification the open-extension comparison is the identity, so the canonical compact-support comparison of [lem-sf-class-compact-support-comparison] is the inverse of the named direct-image mate $\\delta_L$ of [lem-weil-pbc-comparison-direct-image-canonical-mate]. Thus the bijection is the following chain:\n$$\\begin{aligned}\n\\operatorname{Hom}(PS_ZL,S_PH)&\\longrightarrow\\operatorname{Hom}(S_PFL,S_PH)\\\\\ng&\\longmapsto g\\circ\\delta_L,\\\\\n\\operatorname{Hom}(S_PFL,S_PH)&\\longrightarrow\\operatorname{Hom}(FL,U_PS_PH)\\\\\na&\\longmapsto U_P(a)\\circ\\eta_{FL},\\\\\n\\operatorname{Hom}(FL,U_PS_PH)&\\xrightarrow{\\beta_{L,U_PS_PH}}\\operatorname{Hom}(L,IU_PS_PH)\\\\\nb&\\longmapsto\\beta_{L,U_PS_PH}(b),\\\\\n\\operatorname{Hom}(L,IU_PS_PH)&\\xrightarrow{S_Z}\\operatorname{Hom}(S_ZL,JS_PH).\n\\end{aligned}$$\nThe second arrow is the comparison adjunction and the last is full faithfulness [thm-weil-pbc-site-comparison]. Denote the composite by $\\Phi_L$. The ordinary adjoint identification with $I$ is the counit-compatible identification stipulated in the item. The assumed bounded-below domains are exactly those of these specified bijections.",
-   "uses": [
-    "thm-sf-ambient-adjoint-class",
-    "def-weil-exceptional-inverse-image",
-    "lem-sf-class-compact-support-comparison",
-    "lem-weil-pbc-comparison-direct-image-canonical-mate",
-    "thm-weil-pbc-site-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/thm-sf-ambient-adjoint-class.proof.md",
-    "place": "Displayed Hom chain: unpacking the specified transported adjunction at the identity-open compactification"
-   }
-  },
-  {
-   "text": "For $f:FL\\to H$ set $g=S_P(f)\\circ\\delta_L^{-1}$. The first arrow of Step 2 gives $g\\circ\\delta_L=S_P(f)$. Naturality of the unit of [thm-weil-pbc-site-comparison] gives\n$$U_PS_P(f)\\circ\\eta_{FL}=\\eta_H\\circ f.$$\nNaturality in the target of the ordinary adjunction [lem-exc-closed-ambient] gives\n$$\\beta_{L,U_PS_PH}(\\eta_H\\circ f)=I(\\eta_H)\\circ\\beta_{L,H}(f)=I(\\eta_H)\\circ\\widehat f.$$\nApplying $S_Z$ and functoriality, the last arrow of Step 2 gives\n$$\\Phi_L(S_P(f)\\circ\\delta_L^{-1})=S_Z(I(\\eta_H))\\circ S_Z(\\widehat f)=\\alpha_H\\circ S_Z(\\widehat f).$$\nThis proves the general adjunct formula by substitution in the defining Hom chain; no exceptional-counit identity is assumed in this calculation.",
+   "text": "For $f:FL\\to H$ set $g=S_P(f)\\delta_L^{-1}$. Then $g\\delta_L=S_P(f)$. Unit naturality [thm-weil-pbc-site-comparison] and target naturality of $F\\dashv I$ [lem-exc-closed-ambient] give\n$$U_PS_P(f)\\eta_{FL}=\\eta_H f,\\qquad\n\\beta_{L,U_PS_PH}(\\eta_H f)=I(\\eta_H)\\beta_{L,H}(f)=I(\\eta_H)\\widehat f.$$\nApply $S_Z$ to this last equality and use functoriality in the chain from Step 1:\n$$\\Phi_{L,H}(S_P(f)\\delta_L^{-1})=S_Z(I(\\eta_H))S_Z(\\widehat f)=\\alpha_H S_Z(\\widehat f).$$\nThis proves the general adjunct formula without assuming a transported-counit identity.",
    "uses": [
     "thm-weil-pbc-site-comparison",
     "lem-exc-closed-ambient"
@@ -56,11 +38,11 @@
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/thm-sf-ambient-adjoint-class.proof.md",
-    "place": "Displayed Hom chain, applied to the image of an ordinary etale morphism; explicit unit-naturality computation"
+    "place": "Displayed four-factor Hom chain, specialized to the identity-open compactification; domain check and canonical-mate normalization extracted from lem-coef-site-closed-counit-transport, former steps 1 and 2 (agent-written extraction)."
    }
   },
   {
-   "text": "Set $L=IH$ and $f=e_H$. The defining counit property of $F\\dashv I$ [lem-exc-closed-ambient] is $\\beta_{IH,H}(e_H)=1_{IH}$. Step 3 therefore gives\n$$\\Phi_{IH}(S_P(e_H)\\circ\\delta_{IH}^{-1})=\\alpha_H.$$\nBy definition, the relative counit $E=E_{S_PH}$ has transpose $1_{JS_PH}$ under the stipulated Hom bijection. It is defined because Step 1 supplies a bounded-below etale-origin witness for $JS_PH$. Naturality in the source of [thm-sf-ambient-adjoint-class], applied to $\\alpha_H:S_ZIH\\to JS_PH$, gives\n$$\\Phi_{IH}(E\\circ P(\\alpha_H))=1_{JS_PH}\\circ\\alpha_H=\\alpha_H.$$\nInjectivity of this Hom bijection identifies $E\\circ P(\\alpha_H)$ with $S_P(e_H)\\circ\\delta_{IH}^{-1}$. Precompose with $\\delta_{IH}$ and cancel its inverse to obtain\n$$E_{S_PH}\\circ i_*^{\\mathrm{pro}}(\\alpha_H)\\circ\\delta_{IH}=S_P(e_H).$$\nThe general formula was proved in Step 3, so both clauses follow.",
+   "text": "Take $L=IH$, $f=e_H$. The ordinary counit has $\\beta_{IH,H}(e_H)=1_{IH}$ by [lem-exc-closed-ambient], so Step 2 gives $\\Phi_{IH,H}(S_P(e_H)\\delta_{IH}^{-1})=\\alpha_H$. The relative counit $E=E_{S_PH}$ is the inverse image of $1_{JS_PH}$ under the stipulated relative Hom bijection. Its source is allowed by Step 1. Source naturality of [thm-sf-ambient-adjoint-class] applied to $\\alpha_H:S_ZIH\\to JS_PH$ gives\n$$\\Phi_{IH,H}(E\\circ Q(\\alpha_H))=1_{JS_PH}\\circ\\alpha_H=\\alpha_H.$$\nInjectivity identifies $E\\circ Q(\\alpha_H)=S_P(e_H)\\circ\\delta_{IH}^{-1}$. Precomposing with $\\delta_{IH}$ and cancelling its inverse yields\n$$E_{S_PH}\\circ i_*^{\\mathrm{pro}}(\\alpha_H)\\circ\\delta_{IH}=S_P(e_H).$$\nTogether with Step 2 this gives both clauses, using only the stated bounded-below hypotheses.",
    "uses": [
     "lem-exc-closed-ambient",
     "thm-sf-ambient-adjoint-class"
@@ -68,16 +50,13 @@
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/thm-sf-ambient-adjoint-class.proof.md",
-    "place": "Relative-adjunction naturality and counit specialization; extracted closed-immersion equation (*)"
+    "place": "Displayed four-factor Hom chain, specialized to the identity-open compactification; domain check and canonical-mate normalization extracted from lem-coef-site-closed-counit-transport, former steps 1 and 2 (agent-written extraction)."
    }
   }
  ],
  "proof_deps": [
-  "def-sf-comparison-derived-pullback",
-  "def-weil-exceptional-inverse-image",
+  "lem-coef-closed-identity-open-hom-normalization",
   "lem-exc-closed-ambient",
-  "lem-sf-class-compact-support-comparison",
-  "lem-weil-pbc-comparison-direct-image-canonical-mate",
   "thm-sf-ambient-adjoint-class",
   "thm-weil-pbc-site-comparison"
  ],
@@ -164,11 +143,11 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "item": "lem-coef-site-closed-counit-transport",
   "worker": "stage1",
-  "summary": "Retained the statement and four-step Hom-chain argument from the interrupted attempt. Made the ordinary etale bounded-below typing explicit using I(eta_H), reconciled search records with the retained Q20 log, and corrected the review of the identity-immersion test. The general adjunct formula is computed by unit and ordinary-adjunction naturality; source naturality and injectivity give the counit identity. No new nodes.",
-  "blueprint": "Realizes the closed-immersion step of lem-coef-finite-dualizing: the transported exceptional adjunct calculation and its specialization to equation (*).",
+  "summary": "Deliberate re-split requested by the human: extracted the bounded-below domain/witness and canonical identity-open Hom-chain normalization (former steps 1 and 2) into a new statement-only node. Retained all unit-naturality, ordinary-adjunction-naturality, relative source-naturality, counit and cancellation arguments explicitly in the assembly. Statement unchanged; one new unsplit node, no Mathlib leaves.",
+  "blueprint": "The closed-immersion counit calculation underlying equation (*) in lem-coef-finite-dualizing; the extracted node realizes the four-factor Hom chain of main-20261015 thm-sf-ambient-adjoint-class at the identity-open compactification.",
   "tool_uses": [
    {
     "node": "lem-exc-closed-ambient",
@@ -181,14 +160,6 @@
    {
     "node": "thm-sf-ambient-adjoint-class",
     "why": "The specified natural relative Hom bijections already fixed in the item, not an unbounded pro-etale adjunction or a replacement for the biduality route."
-   },
-   {
-    "node": "lem-sf-class-compact-support-comparison",
-    "why": "The canonical compact-support comparison used to unpack the stipulated transported Hom bijection at the identity-open compactification."
-   },
-   {
-    "node": "lem-weil-pbc-comparison-direct-image-canonical-mate",
-    "why": "The named natural direct-image comparison and its inverse, fixing the first map in that Hom chain."
    }
   ]
  },
@@ -200,12 +171,12 @@
   "lem-weil-pbc-comparison-direct-image-canonical-mate"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-Q20-1e3668495",
-  "group": "Q20",
+  "reviewer": "NT-cc-Q66-138f2af3d",
+  "group": "Q66",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-1e3668495 (reviewer sub-agent of L); spot-checked: I read all of it: the item, all 8 stmt_deps and 7 proof_deps, the proofs of thm-sf-ambient-adjoint-class (and its main-20261015 update) and lem-sf-class-compact-support-comparison, and the main-20261015 thm-sf-ambient-adjoint-class.proof.md Hom chain. Coefficients are ordinary constant R=O_E/ϖ^n modules on the small étale and pro-étale sites in every cited node; no condensed coefficients are substituted. c=(id,i) is a valid compactification, and J=S_Z I U_P is exactly R_c / Rf_n^! for it. δ is b_{i,L} of the canonical-mate lemma with the right direction. Step 1: the witness (IH,α_H) is correct, since I(η_H) iso puts IU_PS_PH in D^+. Step 2: the chain matches the bijection that def-weil-exceptional-inverse-image's statement pins down (compact-support comparison, comparison adjunction, β, full faithfulness). At identity-open, a^{-1}=δ_L. The id_!=id normalization is not cited, but it is elementary and matches the statement's notation. Steps 3 and 4: I recomputed them; unit naturality, target and source naturality, and injectivity give the general adjunct formula and (*). Small cases: Z=P gives the triangle identity ε∘S(η)=1; Z=∅ and H=0 are trivial. The hypothesis IH∈D^+ is redundant but harmless; nothing is weakened. No duplicate: lem-coef-fully-faithful-counit-descent, lem-sf-etale-proetale-exceptional-transport, lem-pur-finite-coefficient-adjoint-comparisons and prop-sf-closed-immersion-unit state different things. No cycle; the only citer is lem-coef-finite-dualizing step 12, which uses (*) verbatim. All five declared tool_uses are accepted as black-box inputs: lem-exc-closed-ambient, thm-weil-pbc-site-comparison, thm-sf-ambient-adjoint-class, lem-sf-class-compact-support-comparison, lem-weil-pbc-comparison-direct-image-canonical-mate. No fixes; review.md written."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q66-138f2af3d (reviewer sub-agent of L); spot-checked: Re-split note (≥1 new statement-only node, proof ≤3000 characters, nothing shortened) is fulfilled: 1 new node, and the item proof went from 3888 to 1814 characters with the statement and Lean record unchanged. Old steps 1–2 (D^+ domain and the (IH,α_H) witness; identity-open comparison = δ_L^{-1} and the 4-factor Hom chain) moved into the new unsplit node lem-coef-closed-identity-open-hom-normalization. Old steps 3–4 (unit and β naturality; β(e_H)=1, source naturality, injectivity, cancelling δ^{-1}) are kept equation for equation as item steps 2–3. The new node is true: its chain is exactly the one in main-20261015 thm-sf-ambient-adjoint-class.proof.md at c=(id,i), and the lem-sf-class comparison QS_ZL→S_PFL runs opposite to δ_L, so it equals δ_L^{-1}, matching the item's Lean δ. The node restates neither a parent clause nor the thm-sf statement, which gives existence only. Its stmt_deps cover every citation exactly. Small cases Z=∅, H=0 and Z=P all hold. No duplicate among the identity-open and canonical-mate nodes I checked. No cycle; the item's closure gains only the new node, so no new batch-5 flag. No SGA. Advisory: the item's node-level tool_uses still lists lem-sf-class-compact-support-comparison and the canonical-mate node, which are now reached only through the new node; the item stmt_dep def-weil-pbc-derived-categories is uncited in the statement, which predates this delivery."
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.SiteClosedCounitTransport",
