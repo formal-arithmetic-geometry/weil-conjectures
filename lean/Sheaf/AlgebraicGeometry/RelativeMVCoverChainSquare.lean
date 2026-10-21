@@ -17,8 +17,7 @@ set_option autoImplicit false
 universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
+
 set_option maxHeartbeats 800000 in
 -- Elaborating the resolved adjunction mates requires extra heartbeats.
 /-- Chain representatives for the unrestricted relative Mayer--Vietoris square.
@@ -79,7 +78,6 @@ theorem relativeMV_cover_chain_square
         e₂.hom ≫ biprod.map (b U).hom (b V).hom ∧
       DerivedCategory.Q.map (CochainComplex.mappingCone.map t t' α β hc) ≫ e₃'.hom =
         e₃.hom ≫ (b (U ⊓ V)).hom := by
-  dsimp only
   obtain ⟨A, B, A', B', t, t', α, β, H, e₁, e₂, e₃, e₁', e₂', e₃', hα, hβ, hγ⟩ :=
     relativeMV_direct_image_homotopy_comparison f f' g g' hpull K K' φ U V hcover
   obtain ⟨C, D, s, a, b, H', d₁, d₂, d₃, ha, hb, hc⟩ :=
@@ -88,13 +86,10 @@ theorem relativeMV_cover_chain_square
     CochainComplex.homotopy_square_cone_rectification s t' a b H'
   refine ⟨C, T, A', B', i, t', a, c, hcomm,
     d₁ ≪≫ e₁, r₂ ≪≫ d₂ ≪≫ e₂, r₃ ≪≫ d₃ ≪≫ e₃, e₁', e₂', e₃', ?_, ?_, ?_⟩
-  · rw [ha]
-    simp only [Iso.trans_hom, Category.assoc]
-    rw [hα]
-  · rw [hr₂, hb]
-    simp only [Iso.trans_hom, Category.assoc]
-    rw [hβ]
-  · rw [hr₃, hc]
-    simp only [Iso.trans_hom, Category.assoc]
-    rw [hγ]
+  · simpa only [Iso.trans_hom, Category.assoc, hα] using
+      congrArg (fun k ↦ k ≫ e₁'.hom) ha
+  · simpa only [Iso.trans_hom, Category.assoc, hb, hβ] using
+      congrArg (fun k ↦ k ≫ e₂'.hom) hr₂
+  · simpa only [Iso.trans_hom, Category.assoc, hc, hγ] using
+      congrArg (fun k ↦ k ≫ e₃'.hom) hr₃
 end AlgebraicGeometry
