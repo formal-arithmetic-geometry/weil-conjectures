@@ -1,0 +1,158 @@
+{
+ "id": "lem-pur-finite-free-quotient-roos-comparison",
+ "kind": "statement",
+ "title": "Finite free comparison of the actual quotient Roos complexes before localization",
+ "statement": "Let R → S be a morphism of sheaves of commutative rings on a site essentially small in the module universe, and E its ordinary scalar extension [lem-pur-derived-change-of-rings]. Suppose S is finite free as an R-module, including rank zero. Let t, v and u be global sections with u locally a unit and φ(t)=u v^e for an integer e≥1. Assume countable products of S-module sheaves are exact. Then E is exact. For every cochain complex P the canonical balanced quotient maps give a strict tower isomorphism E(P ⊗ R/t^(n+1)) ≅ (EP ⊗ S/v^(e(n+1)))_n. Its canonical product comparison induces an isomorphism δ between the actual signed Roos cones, with the two specified product coordinates, and arithmetic restriction gives a quasi-isomorphism a with block/selection coordinates. The two cone maps are natural for all cochain maps, and the balanced tower comparison sends the scalar extension of each quotient map to the corresponding target quotient map. All data are packaged in QuotientRoosExchange; no derived completion functor occurs.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS, 06YT and 0941; the indicated explicit steps of lem-pur-finite-free-completion-exchange."
+ },
+ "stmt_deps": [
+  "def-pur-principal-quotient-completion-model",
+  "lem-pur-derived-change-of-rings",
+  "lem-sp-strict-tower-arithmetic-restriction",
+  "def-pc-kflat-complex"
+ ],
+ "proof": [
+  {
+   "text": "Under restriction of scalars, E is tensor with the finite free R-module S. Its finite coordinates identify it naturally with a finite power of the identity. Faithful exact forgetting detects exactness and the invertibility of the canonical product comparison.",
+   "uses": [
+    "lem-sfb-finite-free-scalar-coordinates",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The equality φ(t)^n=u^n v^(en) identifies the quotient ideals. The balanced local tensor maps and their inverses on local quotient lifts give β. Changing a lift by v^(en) changes the tensor by zero. Check restrictions, chain differentials, transitions, quotient augmentations and input chain maps on local tensor generators.",
+   "uses": [
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the additive Roos comparison to E and β. Its product projections and cone coordinates are the required formulas for c and δ. The arithmetic selection/block square yields a, which is a quasi-isomorphism by arithmetic restriction and exact products. Every construction is natural for strict chain maps.",
+   "uses": [
+    "lem-pur-roos-additive-comparison",
+    "lem-sp-strict-tower-arithmetic-restriction",
+    "lem-weil-strict-roos-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-finite-free-scalar-coordinates",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "def-pur-sheaf-tensor-product",
+  "lem-pur-roos-additive-comparison",
+  "lem-sp-strict-tower-arithmetic-restriction",
+  "lem-weil-strict-roos-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Explicit refinement of the balanced quotient and resolving-class arguments in lem-pur-finite-free-completion-exchange."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite free extension of sheaves of rings commutes with derived inverse limits of principal quotient towers",
+   "results": "8 hits: SheafOfModules.ιFree_mapFree_inv, SheafOfModules.ιFree_mapFree_inv_assoc, SheafOfModules.mapFree, SheafOfModules.map_ιFree_mapFree_hom_assoc, SheafOfModules.Finite.hasFiniteLimits, CondensedMod.ofSheafProfinite, SheafOfModules.IsFinitePresentation, LightCondensed.free",
+   "date": "2026-10-21",
+   "verdict": "No direct match; general derived-functor and scalar-extension APIs are used in the proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLeftDerivedFunctor\", \"iso\"",
+   "results": "5 hits: CategoryTheory.Functor.isLeftDerivedFunctor_iff_isIso_leftDerivedLift, CategoryTheory.Functor.isLeftDerivedFunctor_iff_of_iso, CategoryTheory.Functor.isIso_of_isLeftDerivedFunctor_of_inverts, CategoryTheory.LocalizerMorphism.Derives.isLeftDerivedFunctor_of_isIso, CategoryTheory.LocalizerMorphism.Derives.isLeftDerivedFunctor_iff_isIso",
+   "date": "2026-10-21",
+   "verdict": "No direct match; general derived-functor and scalar-extension APIs are used in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "finiteFree.*[Cc]ompletion|[Cc]ompletion.*[Ee]xchange|[Qq]uotient.*[Ss]calar",
+   "results": "25 hits: Mathlib/NumberTheory/RamificationInertia/Inertia.lean, Mathlib/Topology/Algebra/ConstMulAction.lean, Mathlib/RingTheory/Derivation/ToSquareZero.lean, Mathlib/RingTheory/Derivation/ToSquareZero.lean, Mathlib/RingTheory/Derivation/ToSquareZero.lean, Mathlib/RingTheory/Derivation/ToSquareZero.lean, Mathlib/RingTheory/Derivation/ToSquareZero.lean, Mathlib/LinearAlgebra/FreeModule/Norm.lean",
+   "date": "2026-10-21",
+   "verdict": "No direct match; general derived-functor and scalar-extension APIs are used in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "quotientRoos|principalQuotient|roosF",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "No direct match; general derived-functor and scalar-extension APIs are used in the proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLeftDerivedFunctor\"",
+   "results": "12 hits: CategoryTheory.Functor.IsLeftDerivedFunctor, CategoryTheory.Functor.instIsLeftDerivedFunctorTotalLeftDerivedTotalLeftDerivedCounit, CategoryTheory.Functor.IsLeftDerivedFunctor.isRightKanExtension, CategoryTheory.Functor.IsLeftDerivedFunctor.mk, CategoryTheory.Functor.isLeftDerivedFunctor_iff_isRightKanExtension, CategoryTheory.Functor.isLeftDerivedFunctor_iff_isIso_leftDerivedLift, CategoryTheory.Functor.isLeftDerivedFunctor_iff_of_iso, CategoryTheory.Functor.instIsLeftDerivedFunctorCompCompInvAssociatorWhiskerRightOfIsRightAdjoint",
+   "date": "2026-10-21",
+   "verdict": "No direct match; general derived-functor and scalar-extension APIs are used in the proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Existence of the derived completion of a complex of module sheaves as Roos inverse limit of derived tensor products with principal quotients",
+   "results": "8 hits: localCohomology.diagram, localCohomology.ofDiagram, CondensedMod.ofSheafProfinite, instAbelianCondensedMod, LightCondMod.ofSheafLightProfinite, localCohomology, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, Ext",
+   "date": "2026-10-21",
+   "verdict": "No direct match; general derived-functor and scalar-extension APIs are used in the proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite free extension of sheaves of rings commutes with quotient tensor towers and their Roos cones",
+   "results": "8 hits: SheafOfModules.free, SheafOfModules.ιFree, SheafOfModules.freeFunctor_obj, SheafOfModules.freeFunctor, SheafOfModules.pullbackObjFreeIso.congr_simp, SheafOfModules.ιFree_mapFree_inv, SheafOfModules.map_ιFree_mapFree_hom, SheafOfModules.freeFunctorCompPullbackIso",
+   "date": "2026-10-21",
+   "verdict": "No direct match for this fixed unbounded quotient Roos or sheaf K-flat statement; only free modules, ordinary module flatness and general derived-functor ingredients."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.FiniteFreeCompletionExchange",
+  "date": "2026-10-21",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-finite-free-completion-exchange",
+   "place": "Steps 1--5 for the cochain comparison; steps 2, 4, 7 and 8 for existence of the completion model."
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.FiniteFreeQuotientRoosComparison",
+  "file": "lean/Sheaf/Algebra/Homology/FiniteFreeQuotientRoosComparison.lean",
+  "declaration": "CategoryTheory.PrincipalQuotientCompletion.finiteFreeQuotientRoosComparison",
+  "statement": "theorem finiteFreeQuotientRoosComparison\n    (F : SheafOfModules.DerivedChangeOfRingsCochainModel.{u, v, r, wR, wS} φ)\n    (hfree : ∃ d : ℕ, Nonempty\n      ((SheafOfModules.restrictScalars\n        ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).map φ)).obj\n          (SheafOfModules.unit (SheafOfModules.derivedChangeRingIndependentCoefficients J S)) ≅\n        ∐ (fun _ : Fin d ↦ SheafOfModules.unit\n          (SheafOfModules.derivedChangeRingIndependentCoefficients J R))))\n    (t : (SheafOfModules.unit\n      (SheafOfModules.derivedChangeRingIndependentCoefficients J R)).sections)\n    (vS : (SheafOfModules.unit\n      (SheafOfModules.derivedChangeRingIndependentCoefficients J S)).sections)\n    (uS : (SheafOfModules.unit\n      (SheafOfModules.derivedChangeRingIndependentCoefficients J S)).sections)\n    (hu : ∀ U : Cᵒᵖ, IsUnit (@id (S.obj.obj U) (uS.val U)))\n    (e : ℕ) (he : 1 ≤ e)\n    (hrelation : ∀ U : Cᵒᵖ,\n      φ.hom.app U (@id (R.obj.obj U) (t.val U)) =\n        (@id (S.obj.obj U) (uS.val U)) * (@id (S.obj.obj U) (vS.val U)) ^ e)\n    [HasExactLimitsOfShape (Discrete ℕ)\n      (ringedSiteModules.{r} (SheafOfModules.derivedChangeRingIndependentCoefficients J S))] :\n    Nonempty (QuotientRoosExchange F t vS e)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-21",
+  "declarations": [
+   "CategoryTheory.PrincipalQuotientCompletion.QuotientRoosExchange",
+   "CategoryTheory.PrincipalQuotientCompletion.finiteFreeQuotientRoosComparison"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261021T134323-L-840275",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261021T134323-L-840275",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
