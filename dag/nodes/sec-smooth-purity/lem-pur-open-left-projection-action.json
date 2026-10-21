@@ -12,9 +12,107 @@
   "def-sfb-strong-monoidal-functor",
   "lem-weil-pbc-adjunction-of-natural-bijection"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Since $J$ is a fully faithful left adjoint, its unit $u$ is a natural isomorphism [lem-sp-adjunction-unit-fully-faithful-left]; this is the invertibility used in writing $u:1_{\\mathcal D}\\xrightarrow{\\sim}QJ$. Write $r_N=u_N^{-1}$, $\\delta=\\delta^Q$ and $e=e_Q$. Naturality of the unit gives $r_{N'}\\circ QJ(t)=t\\circ r_N$ for every $t:N\\to N'$. Each factor defining $v$ is an isomorphism, so $v$ is an isomorphism. For $c:C\\to D$ and $m:M\\to N$, naturality of the two symmetries and of $\\gamma$ gives, by composing their naturality squares,\n$$J(Qc\\otimes m)\\circ v_{C,M}=v_{D,N}\\circ(c\\otimes Jm).$$\nThis proves naturality of the specified composite, without changing its normalization.",
+   "uses": [
+    "def-sfb-monoidal-category",
+    "lem-weil-pbc-adjunction-of-natural-bijection",
+    "lem-sp-adjunction-unit-fully-faithful-left"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037, definition-adjoint and the following unit paragraph; elementary composition of the naturality squares in the hypotheses."
+   }
+  },
+  {
+   "text": "Use the preceding naturality identity for $r$ with $t=\\beta_{M,QC}$. The given normalization of $\\gamma$, preservation of symmetry by $Q$, and naturality of symmetry give the explicit calculation\n$$\\begin{aligned}\nr_{QC\\otimes M}\\circ Q(v_{C,M})\n&=\\beta_{M,QC}\\circ r_{M\\otimes QC}\\circ Q(\\gamma_{M,C})\\circ Q(\\beta_{C,JM})\\\\\n&=\\beta_{M,QC}\\circ(r_M\\otimes1_{QC})\\circ\\delta_{JM,C}\\circ Q(\\beta_{C,JM})\\\\\n&=\\beta_{M,QC}\\circ(r_M\\otimes1_{QC})\\circ\\beta_{QC,QJM}\\circ\\delta_{C,JM}\\\\\n&=(1_{QC}\\otimes r_M)\\circ\\delta_{C,JM}.\n\\end{aligned}$$\nThe last equality uses $\\beta_{M,QC}\\circ\\beta_{QC,M}=1$ after moving $r_M$ through the swap. Denote this normalized map by $b_{C,M}$.",
+   "uses": [
+    "def-sfb-monoidal-category",
+    "def-sfb-strong-monoidal-functor",
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 0037 and 0FFL (definition-functor-monoidal-categories); agent calculation from the given symmetry and gamma normalization."
+   }
+  },
+  {
+   "text": "Here is the equality test needed below, with its entire argument. For $f,g:JA\\to Z$, equality $Qf=Qg$ implies $Qf\\circ u_A=Qg\\circ u_A$, hence $f=g$ by injectivity of the adjunction bijection $\\Psi(f)=Qf\\circ u_A$. If the common source $W$ is merely isomorphic to $JA$, precompose both maps with that isomorphism and use this same argument, then cancel it. In particular it applies to maps from $\\mathbf1\\otimes JM$ and from $(C\\otimes C')\\otimes JM$: the inverse of $v_{\\mathbf1,M}$ or of $v_{C\\otimes C',M}$ is the required isomorphism $JA\\to W$. Thus equality of their $Q$-images suffices. When their common target is $JN$, one may also postcompose those images with the invertible $r_N$.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037, definition-adjoint and the formula for the Hom bijection in the paragraph following it; elementary injectivity and isomorphism cancellation."
+   }
+  },
+  {
+   "text": "For the unit law, the normalization from Step 2 and naturality of $r$ give\n$$\\begin{aligned}\nr_M\\circ Q\\bigl(J(h^Q_M)\\circ v_{\\mathbf1,M}\\bigr)\n&=h^Q_M\\circ(1_{Q\\mathbf1}\\otimes r_M)\\circ\\delta_{\\mathbf1,JM}\\\\\n&=r_M\\circ\\lambda_{QJM}\\circ(e\\otimes1_{QJM})\\circ\\delta_{\\mathbf1,JM}\\\\\n&=r_M\\circ Q(\\lambda_{JM}).\n\\end{aligned}$$\nThe second line is naturality of $\\lambda$. The last line is exactly the inverse form of the strong monoidal left-unit axiom, obtained by cancelling its invertible structure maps. Apply Step 3 to the common source $\\mathbf1\\otimes JM$ and cancel $r_M$ to obtain the claimed equality in $\\mathcal C$.",
+   "uses": [
+    "def-sfb-monoidal-category",
+    "def-sfb-strong-monoidal-functor",
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 0FFK and 0FFL, definition-monoidal-category and definition-functor-monoidal-categories; Tag 0037 for unit naturality and the equality test."
+   }
+  },
+  {
+   "text": "Fix $C,C',M$ and put $T=QC\\otimes(QC'\\otimes M)$. For the left side $L=J(a^Q_{C,C',M})\\circ v_{C\\otimes C',M}$ of the associativity law, naturality of $r$ and Step 2 give\n$$\\begin{aligned}\nr_T\\circ Q(L)\n&=a^Q_{C,C',M}\\circ(1_{Q(C\\otimes C')}\\otimes r_M)\\circ\\delta_{C\\otimes C',JM}\\\\\n&=\\alpha_{QC,QC',M}\\circ(\\delta_{C,C'}\\otimes r_M)\\circ\\delta_{C\\otimes C',JM}.\n\\end{aligned}$$\nThe second line expands the specified $a^Q$ and uses preservation of composition by the tensor bifunctor. Call this last expression $E$.",
+   "uses": [
+    "def-sfb-monoidal-category",
+    "def-sfb-strong-monoidal-functor",
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 0037, 0FFK and 0FFL; elementary expansion of the specified action associator and restriction normalization."
+   }
+  },
+  {
+   "text": "Let $R=v_{C,QC'\\otimes M}\\circ(1_C\\otimes v_{C',M})\\circ\\alpha_{C,C',JM}$. Applying Step 2 to its first factor and then naturality of $\\delta$ to its second factor yields\n$$\\begin{aligned}\nr_T\\circ Q(R)\n&=(1_{QC}\\otimes r_{QC'\\otimes M})\\circ\\delta_{C,J(QC'\\otimes M)}\\circ Q(1_C\\otimes v_{C',M})\\circ Q(\\alpha_{C,C',JM})\\\\\n&=(1_{QC}\\otimes(r_{QC'\\otimes M}\\circ Q(v_{C',M})))\\circ\\delta_{C,C'\\otimes JM}\\circ Q(\\alpha_{C,C',JM})\\\\\n&=(1_{QC}\\otimes((1_{QC'}\\otimes r_M)\\circ\\delta_{C',JM}))\\circ\\delta_{C,C'\\otimes JM}\\circ Q(\\alpha_{C,C',JM}).\n\\end{aligned}$$\nThe final line applies Step 2 to $v_{C',M}$. Every displayed morphism has source $Q((C\\otimes C')\\otimes JM)$ and final target $T$.",
+   "uses": [
+    "def-sfb-monoidal-category",
+    "def-sfb-strong-monoidal-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 0FFK and 0FFL; elementary tensorator naturality and substitution of Step 2 twice."
+   }
+  },
+  {
+   "text": "The inverse form of the strong monoidal associativity axiom, at $C,C',JM$, is\n$$(1_{QC}\\otimes\\delta_{C',JM})\\circ\\delta_{C,C'\\otimes JM}\\circ Q(\\alpha_{C,C',JM})\n=\\alpha_{QC,QC',QJM}\\circ(\\delta_{C,C'}\\otimes1_{QJM})\\circ\\delta_{C\\otimes C',JM}.$$\nPostcompose this equation with $1_{QC}\\otimes(1_{QC'}\\otimes r_M)$. The left side becomes the last line of Step 6; naturality of $\\alpha$ makes the right side equal $E$ of Step 5. Hence $r_T\\circ Q(L)=r_T\\circ Q(R)$. Step 3, with source $(C\\otimes C')\\otimes JM$, gives $L=R$. This proves the required associativity for the originally specified $v$.",
+   "uses": [
+    "def-sfb-monoidal-category",
+    "def-sfb-strong-monoidal-functor",
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 0FFK, 0FFL and 0037; inverse monoidal associativity axiom, associator naturality and the proved equality test."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-monoidal-category",
+  "lem-weil-pbc-adjunction-of-natural-bijection",
+  "def-sfb-strong-monoidal-functor",
+  "lem-sp-adjunction-unit-fully-faithful-left"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/sk-prop-cohsm.proof.md",
+  "place": "(G13), first arrow, the projection formula: categorical coherence for its normalized open factor. The calculations use Stacks categories.tex Tags 0037, 0FFK and 0FFL; Tags 0GL1 and 0E8I motivate the given gamma, whose existence is a hypothesis here."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -50,10 +148,52 @@
    "results": "8 hits: CategoryTheory.Monoidal.Reflective.instIsIsoMapTensorHomAppUnit, CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_μ, CategoryTheory.Adjunction.rightAdjointLaxMonoidal_μ, CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app_assoc, CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ, CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor, CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ_assoc, CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app_assoc",
    "date": "2026-10-21",
    "verdict": "no match: open restriction/pushforward and monoidal-reflection facts do not give the normalized extension action laws"
+  },
+  {
+   "tool": "grep",
+   "query": "fullyFaithful.*(tensor|Monoidal)|unit_app_tensor_comp_map_δ|oplax.*[Aa]ction",
+   "results": "{\"t\": \"2026-10-21T08:19:50Z\", \"tool\": \"grep\", \"query\": \"fullyFaithful.*(tensor|Monoidal)|unit_app_tensor_comp_map_δ|oplax.*[Aa]ction\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Action/Monoidal.lean\", \"Mathlib/CategoryTheory/Action/Monoidal.lean\", \"Mathlib/CategoryTheory/Action/Monoidal.lean\", \"Mathlib/CategoryTheory/Monoidal/NaturalTransformation.lean\", \"Mathlib/CategoryTheory/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Functor.lean\"], \"digest\": \"c10fb6ad96b2f4e4\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the adjunction monoidal structure and reflective tensor lemmas do not state coherence for the specified normalized open action; inspected Functor.lean:1000–1040 and Braided/Reflection.lean:30–125"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.OplaxMonoidal, CategoryTheory.Adjunction",
+   "results": "{\"t\": \"2026-10-21T08:19:51Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.OplaxMonoidal, CategoryTheory.Adjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.leftAdjointOplaxMonoidal\", \"CategoryTheory.Adjunction.rightAdjointLaxMonoidal\", \"CategoryTheory.Adjunction.IsMonoidal\", \"CategoryTheory.Adjunction.laxMonoidalEquivOplaxMonoidal\", \"CategoryTheory.Adjunction.instIsMonoidal\", \"CategoryTheory.Adjunction.isMonoidal_comp\", \"CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_ε\", \"CategoryTheory.Adjunction.map_ε_comp_counit_app_unit\"], \"digest\": \"67b6939d9a4147b6\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the adjunction monoidal structure and reflective tensor lemmas do not state coherence for the specified normalized open action; inspected Functor.lean:1000–1040 and Braided/Reflection.lean:30–125"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero as a module functor over a monoidal category has unit and associativity from restriction normalization",
+   "results": "{\"t\": \"2026-10-21T08:19:51Z\", \"tool\": \"leansearch\", \"query\": \"Extension by zero as a module functor over a monoidal category has unit and associativity from restriction normalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.shiftFunctorZero\", \"ModuleCat.ExtendRestrictScalarsAdj.unit\", \"AddMonCat.adjoinZeroAdj\", \"ModuleCat.RestrictionCoextensionAdj.unit'\", \"PresheafOfModules.monoidalCategory\", \"CategoryTheory.Preadditive.commGrpEquivalence_functor_obj_grp_one\", \"CategoryTheory.Discrete.addMonoidalFunctor_ε\", \"CategoryTheory.shiftFunctorZero'\"], \"digest\": \"c9c72d5e216aaadd\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the adjunction monoidal structure and reflective tensor lemmas do not state coherence for the specified normalized open action; inspected Functor.lean:1000–1040 and Braided/Reflection.lean:30–125"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A normalized tensor comparison for a fully faithful left adjoint to a strong symmetric monoidal functor satisfies left module unit and associativity coherence",
+   "results": "{\"t\": \"2026-10-21T08:19:53Z\", \"tool\": \"leanfinder\", \"query\": \"A normalized tensor comparison for a fully faithful left adjoint to a strong symmetric monoidal functor satisfies left module unit and associativity coherence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Monoidal.Reflective.instIsIsoMapTensorHomAppUnit\", \"CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_μ\", \"CategoryTheory.Monoidal.InducingFunctorData.leftUnitor_eq\", \"CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ_assoc\", \"CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ\", \"CategoryTheory.unitOfTensorIsoUnit\", \"CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor_assoc\", \"CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalUnit\"], \"digest\": \"84aa38d4c8ed8066\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the adjunction monoidal structure and reflective tensor lemmas do not state coherence for the specified normalized open action; inspected Functor.lean:1000–1040 and Braided/Reflection.lean:30–125"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A coreflective tensor ideal inclusion has a module functor structure determined uniquely by its strong monoidal right adjoint",
+   "results": "{\"t\": \"2026-10-21T08:21:08Z\", \"tool\": \"leanfinder\", \"query\": \"A coreflective tensor ideal inclusion has a module functor structure determined uniquely by its strong monoidal right adjoint\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MonoidalLinear.ofFaithful\", \"CategoryTheory.Monoidal.Reflective.instIsIsoMapTensorHomAppUnit\", \"CategoryTheory.IsGrothendieckAbelian.instIsLeftAdjointModuleCatMulOppositeEndTensorObj\", \"CategoryTheory.Monoidal.Reflective.closed\", \"CategoryTheory.monoidalLinearOfFaithful\", \"CategoryTheory.Monoidal.Reflective.monoidalClosed\", \"CoalgCat.MonoidalCategory.inducingFunctorData\", \"CategoryTheory.Monoidal.Reflective.isIso_tfae\"], \"digest\": \"a6c37bb1c2876742\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the adjunction monoidal structure and reflective tensor lemmas do not state coherence for the specified normalized open action; inspected Functor.lean:1000–1040 and Braided/Reflection.lean:30–125"
+  },
+  {
+   "tool": "grep",
+   "query": "(coreflect|Coreflect|projectionFormula|ProjectionFormula)",
+   "results": "{\"t\": \"2026-10-21T08:21:08Z\", \"tool\": \"grep\", \"query\": \"(coreflect|Coreflect|projectionFormula|ProjectionFormula)\", \"sub\": \"CategoryTheory/Monoidal\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the adjunction monoidal structure and reflective tensor lemmas do not state coherence for the specified normalized open action; inspected Functor.lean:1000–1040 and Braided/Reflection.lean:30–125"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-projection-formula-coefficient-coherence",
@@ -72,5 +212,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-open-left-projection-action",
+  "worker": "stage1",
+  "summary": "Expanded the normalized open tensor comparison into seven elementary calculations: naturality, symmetry normalization, adjunction-based equality detection on objects isomorphic to J-images, unit, and the two restricted associativity expressions followed by the strong monoidal axiom. No change of statement or new node is needed. No global faithfulness of Q is assumed.",
+  "blueprint": "Current main-20261015 sk-prop-cohsm.proof.md (G13), first arrow, the projection formula; parent lem-pur-projection-formula-coefficient-coherence Step 1 open factor. Steps 1–2 identify its left comparison, Steps 3–7 establish its forward unit and coefficient associativity laws."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-N7-1bb441fa3",
+  "group": "N7",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-1bb441fa3 (reviewer sub-agent of L); spot-checked: I read the item's seven steps in full and checked each identity. Step 2's symmetry and normalization calculation is correct. Step 3's equality test does not assume Q is faithful: it works for maps out of 1⊗JM and (C⊗C')⊗JM because v is already invertible. Step 4's unit law is correct, using the inverted strong-monoidal left-unit axiom and naturality of λ. Steps 5–7 are correct: the inverted associativity axiom, postcomposed with 1⊗(1⊗r_M), gives E by naturality of α. Sources checked: Stacks 0037/0FFK/0FFL; 0GL1 (sites-cohomology.tex:4578) and 0E8I (sites-modules.tex:4051); blueprint main-20261015 sk-prop-cohsm (G13), the projection-formula arrow. No SGA is cited. The statement is identical to live, the live item is still unsplit, and there is no re-split note. There are no new nodes. The three cited statements say what the steps take from them. Edge cases tested: J=Q=Id; a non-faithful Q (pr1 from Vect×Vect, J(M)=(M,0)), where both laws hold; and a scaled γ, which breaks the normalization. One C1 fault: invertibility of the unit u, used as r=u^{-1} in every step, was not cited. FIX: Step 1 and proof_deps now cite the Mathlib leaf lem-sp-adjunction-unit-fully-faithful-left (Adjunction.unit_isIso_of_L_fully_faithful); it adds no cycle and no route departure. No tool_uses are needed.; 1 file(s) fixed by the reviewer"
  }
 }
