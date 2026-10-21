@@ -15,23 +15,16 @@ public import Mathlib.CategoryTheory.Shift.CommShift
 public import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 public import Mathlib.CategoryTheory.Limits.Shapes.ZeroObjects
 
+import Mathlib.CategoryTheory.Shift.Localization
+import Mathlib.CategoryTheory.Triangulated.Subcategory
 import Mathlib.Data.Fintype.Order
-import Mathlib.Algebra.Homology.DerivedCategory.Basic
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
-import Mathlib.Algebra.Homology.BifunctorShift
-import Sheaf.Algebra.Homology.KFlat
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Paper.AdicCoefficientDatum
-import Sheaf.Paper.IntrinsicCompletionCompleted
-import Mathlib.CategoryTheory.Triangulated.Functor
-import Sheaf.Paper.BoundedConstructibleComplete
-import Sheaf.Paper.PbcRationalCategory
-import Sheaf.CategoryTheory.ScalarLocalization
 
-import Sheaf.NumberTheory.Padics.IntegersLocalizationUniformizer
-import Mathlib.LinearAlgebra.TensorProduct.Basic
-import Mathlib.RingTheory.Localization.Away.Basic
-import Sheaf.Paper.PbcScalarExtension
+import WeilConjectures.CategoryTheory.DerivedCategory.Shift.ExactFunctor
+import all Sheaf.Paper.PbcScalarExtension
+import all Sheaf.Paper.PbcUniformCompleteTriangulated
+import Sheaf.Paper.PbcExactCompletionData
+import Sheaf.Paper.PbcUniformReductionCriterion
+import Sheaf.Paper.ConstructibleCoefficientHomologyTriangulated
 /-! # The actual common-stage additive structure and shift
 
 Source: blueprint `prop-weil-pbc-common-stage-calculus`.
@@ -54,11 +47,394 @@ tensor construction rather than supplied as an independent comparison.
 
 @[expose] public noncomputable section
 set_option autoImplicit false
+set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency.types true
 set_option linter.unusedSectionVars false
 universe c w u v
 open CategoryTheory
 open scoped ZeroObject
+namespace CategoryTheory.ScalarLocalization
+open CategoryTheory.Limits
+
+private theorem cscConjugateShift
+    {C D : Type*} [Category* C] [Category* D] [HasShift C ℤ] [HasShift D ℤ]
+    {L₁ L₂ : C ⥤ D} {R₁ R₂ : D ⥤ C}
+    [L₁.CommShift ℤ] [L₂.CommShift ℤ] [R₁.CommShift ℤ] [R₂.CommShift ℤ]
+    (a₁ : L₁ ⊣ R₁) (a₂ : L₂ ⊣ R₂) [a₁.CommShift ℤ] [a₂.CommShift ℤ]
+    (τ : R₁ ⟶ R₂) [NatTrans.CommShift τ ℤ] :
+    NatTrans.CommShift ((conjugateEquiv a₁ a₂).symm τ) ℤ := by
+  change NatTrans.CommShift
+    (L₂.leftUnitor.inv ≫
+      ((Functor.leftUnitor (𝟭 C ⋙ L₂)).inv ≫
+        Functor.whiskerRight a₁.unit (𝟭 C ⋙ L₂) ≫
+        (Functor.associator (L₁ ⋙ R₁) (𝟭 C) L₂).inv ≫
+        Functor.whiskerRight (Functor.associator L₁ R₁ (𝟭 C)).hom L₂ ≫
+        Functor.whiskerRight
+          (Functor.whiskerLeft L₁ (R₁.rightUnitor.hom ≫ τ ≫ R₂.leftUnitor.inv)) L₂ ≫
+        Functor.whiskerRight (Functor.associator L₁ (𝟭 D) R₂).inv L₂ ≫
+        (Functor.associator (L₁ ⋙ 𝟭 D) R₂ L₂).hom ≫
+        Functor.whiskerLeft (L₁ ⋙ 𝟭 D) a₂.counit ≫
+        (L₁ ⋙ 𝟭 D).rightUnitor.hom) ≫ L₁.rightUnitor.hom) ℤ
+  infer_instance
+
+private theorem cscAssocShift
+    {C₁ C₂ C₃ D₁ D₂ D₃ : Type*}
+    [Category* C₁] [Category* C₂] [Category* C₃]
+    [Category* D₁] [Category* D₂] [Category* D₃]
+    [HasShift C₁ ℤ] [HasShift C₂ ℤ] [HasShift C₃ ℤ]
+    [HasShift D₁ ℤ] [HasShift D₂ ℤ] [HasShift D₃ ℤ]
+    {F₁₂ : C₁ ⥤ C₂} {F₂₃ : C₂ ⥤ C₃} {F₁₃ : C₁ ⥤ C₃}
+    {G₁₂ : D₁ ⥤ D₂} {G₂₃ : D₂ ⥤ D₃} {G₁₃ : D₁ ⥤ D₃}
+    {I₁ : C₁ ⥤ D₁} {I₂ : C₂ ⥤ D₂} {I₃ : C₃ ⥤ D₃}
+    [F₁₂.CommShift ℤ] [F₂₃.CommShift ℤ] [F₁₃.CommShift ℤ]
+    [G₁₂.CommShift ℤ] [G₂₃.CommShift ℤ] [G₁₃.CommShift ℤ]
+    [I₁.CommShift ℤ] [I₂.CommShift ℤ] [I₃.CommShift ℤ] [I₃.Faithful]
+    (e₁₂ : F₁₂ ⋙ I₂ ≅ I₁ ⋙ G₁₂) (e₂₃ : F₂₃ ⋙ I₃ ≅ I₂ ⋙ G₂₃)
+    (e₁₃ : F₁₃ ⋙ I₃ ≅ I₁ ⋙ G₁₃)
+    [NatTrans.CommShift e₁₂.hom ℤ] [NatTrans.CommShift e₂₃.hom ℤ]
+    [NatTrans.CommShift e₁₃.hom ℤ]
+    (α : F₁₂ ⋙ F₂₃ ⟶ F₁₃) (β : G₁₂ ⋙ G₂₃ ⟶ G₁₃)
+    [NatTrans.CommShift β ℤ]
+    (h : Functor.whiskerRight α I₃ =
+      (Functor.associator _ _ _).hom ≫ Functor.whiskerLeft F₁₂ e₂₃.hom ≫
+        (Functor.associator _ _ _).inv ≫ Functor.whiskerRight e₁₂.hom G₂₃ ≫
+        (Functor.associator _ _ _).hom ≫ Functor.whiskerLeft I₁ β ≫ e₁₃.inv) :
+    NatTrans.CommShift α ℤ := by
+  have : NatTrans.CommShift (Functor.whiskerRight α I₃) ℤ := by
+    rw [h]
+    infer_instance
+  exact NatTrans.CommShift.of_whiskerRight α I₃
+
+private theorem cscAssocShiftOfWhiskerLeft
+    {C₁ C₂ C₃ D₁ D₂ D₃ : Type*}
+    [Category* C₁] [Category* C₂] [Category* C₃]
+    [Category* D₁] [Category* D₂] [Category* D₃]
+    [HasShift C₁ ℤ] [HasShift C₂ ℤ] [HasShift C₃ ℤ]
+    [HasShift D₁ ℤ] [HasShift D₂ ℤ] [HasShift D₃ ℤ]
+    {F₁₂ : C₁ ⥤ C₂} {F₂₃ : C₂ ⥤ C₃} {F₁₃ : C₁ ⥤ C₃}
+    {G₁₂ : D₁ ⥤ D₂} {G₂₃ : D₂ ⥤ D₃} {G₁₃ : D₁ ⥤ D₃}
+    {L₁ : C₁ ⥤ D₁} {L₂ : C₂ ⥤ D₂} {L₃ : C₃ ⥤ D₃}
+    [F₁₂.CommShift ℤ] [F₂₃.CommShift ℤ] [F₁₃.CommShift ℤ]
+    [G₁₂.CommShift ℤ] [G₂₃.CommShift ℤ] [G₁₃.CommShift ℤ]
+    [L₁.CommShift ℤ] [L₂.CommShift ℤ] [L₃.CommShift ℤ]
+    (e₁₂ : L₁ ⋙ G₁₂ ≅ F₁₂ ⋙ L₂) (e₂₃ : L₂ ⋙ G₂₃ ≅ F₂₃ ⋙ L₃)
+    (e₁₃ : L₁ ⋙ G₁₃ ≅ F₁₃ ⋙ L₃)
+    [NatTrans.CommShift e₁₂.hom ℤ] [NatTrans.CommShift e₂₃.hom ℤ]
+    [NatTrans.CommShift e₁₃.hom ℤ]
+    (α : F₁₂ ⋙ F₂₃ ⟶ F₁₃) (β : G₁₂ ⋙ G₂₃ ⟶ G₁₃)
+    [NatTrans.CommShift α ℤ]
+    (h : ∀ X, β.app (L₁.obj X) =
+      G₂₃.map (e₁₂.hom.app X) ≫ e₂₃.hom.app (F₁₂.obj X) ≫
+        L₃.map (α.app X) ≫ e₁₃.inv.app X)
+    (hL : ∀ X, ∃ (Y : C₁) (f : X ⟶ L₁.obj Y), IsIso (G₁₃.map f)) :
+    NatTrans.CommShift β ℤ := by
+  have he : Functor.whiskerLeft L₁ β =
+      (Functor.associator _ _ _).inv ≫ Functor.whiskerRight e₁₂.hom G₂₃ ≫
+        (Functor.associator _ _ _).hom ≫ Functor.whiskerLeft F₁₂ e₂₃.hom ≫
+        (Functor.associator _ _ _).inv ≫ Functor.whiskerRight α L₃ ≫ e₁₃.inv := by
+    ext X
+    simpa only [Functor.whiskerLeft_app, Functor.whiskerRight_app,
+      Functor.associator_hom_app, Functor.associator_inv_app, NatTrans.comp_app,
+      Category.id_comp, Category.comp_id] using h X
+  have : NatTrans.CommShift (Functor.whiskerLeft L₁ β) ℤ := by
+    rw [he]
+    infer_instance
+  exact NatTrans.CommShift.of_whiskerLeft β L₁ hL
+
+private theorem cscLiftAssocShift
+    {C₁ C₂ C₃ : Type*} [Category* C₁] [Category* C₂] [Category* C₃]
+    [HasShift C₁ ℤ] [HasShift C₂ ℤ] [HasShift C₃ ℤ]
+    (P₁ : ObjectProperty C₁) (P₂ : ObjectProperty C₂) (P₃ : ObjectProperty C₃)
+    [P₁.IsStableUnderShift ℤ] [P₂.IsStableUnderShift ℤ] [P₃.IsStableUnderShift ℤ]
+    (G₁₂ : C₁ ⥤ C₂) (G₂₃ : C₂ ⥤ C₃) (G₁₃ : C₁ ⥤ C₃)
+    [G₁₂.CommShift ℤ] [G₂₃.CommShift ℤ] [G₁₃.CommShift ℤ]
+    (h₁₂ : ∀ K : P₁.FullSubcategory, P₂ (G₁₂.obj K.obj))
+    (h₂₃ : ∀ K : P₂.FullSubcategory, P₃ (G₂₃.obj K.obj))
+    (h₁₃ : ∀ K : P₁.FullSubcategory, P₃ (G₁₃.obj K.obj)) :
+    let F₁₂ := P₂.lift (P₁.ι ⋙ G₁₂) h₁₂
+    let F₂₃ := P₃.lift (P₂.ι ⋙ G₂₃) h₂₃
+    let F₁₃ := P₃.lift (P₁.ι ⋙ G₁₃) h₁₃
+    letI : F₁₂.CommShift ℤ :=
+      Functor.CommShift.ofComp (F := F₁₂) (G := P₂.ι) (Iso.refl (P₁.ι ⋙ G₁₂)) ℤ
+    letI : F₂₃.CommShift ℤ :=
+      Functor.CommShift.ofComp (F := F₂₃) (G := P₃.ι) (Iso.refl (P₂.ι ⋙ G₂₃)) ℤ
+    letI : F₁₃.CommShift ℤ :=
+      Functor.CommShift.ofComp (F := F₁₃) (G := P₃.ι) (Iso.refl (P₁.ι ⋙ G₁₃)) ℤ
+    ∀ (α : F₁₂ ⋙ F₂₃ ⟶ F₁₃) (β : G₁₂ ⋙ G₂₃ ⟶ G₁₃),
+      NatTrans.CommShift β ℤ →
+      Functor.whiskerRight α P₃.ι = Functor.whiskerLeft P₁.ι β →
+        NatTrans.CommShift α ℤ := by
+  dsimp only
+  let F₁₂ := P₂.lift (P₁.ι ⋙ G₁₂) h₁₂
+  let F₂₃ := P₃.lift (P₂.ι ⋙ G₂₃) h₂₃
+  let F₁₃ := P₃.lift (P₁.ι ⋙ G₁₃) h₁₃
+  let : F₁₂.CommShift ℤ :=
+      Functor.CommShift.ofComp (F := F₁₂) (G := P₂.ι) (Iso.refl (P₁.ι ⋙ G₁₂)) ℤ
+  let : F₂₃.CommShift ℤ :=
+      Functor.CommShift.ofComp (F := F₂₃) (G := P₃.ι) (Iso.refl (P₂.ι ⋙ G₂₃)) ℤ
+  let : F₁₃.CommShift ℤ :=
+      Functor.CommShift.ofComp (F := F₁₃) (G := P₃.ι) (Iso.refl (P₁.ι ⋙ G₁₃)) ℤ
+  intro α β hβ H
+  have := hβ
+  let e₁₂ : F₁₂ ⋙ P₂.ι ≅ P₁.ι ⋙ G₁₂ := Iso.refl (P₁.ι ⋙ G₁₂)
+  let e₂₃ : F₂₃ ⋙ P₃.ι ≅ P₂.ι ⋙ G₂₃ := Iso.refl (P₂.ι ⋙ G₂₃)
+  let e₁₃ : F₁₃ ⋙ P₃.ι ≅ P₁.ι ⋙ G₁₃ := Iso.refl (P₁.ι ⋙ G₁₃)
+  have : NatTrans.CommShift e₁₂.hom ℤ :=
+    Functor.CommShift.ofComp_compatibility (F := F₁₂) (G := P₂.ι) e₁₂ ℤ
+  have : NatTrans.CommShift e₂₃.hom ℤ :=
+    Functor.CommShift.ofComp_compatibility (F := F₂₃) (G := P₃.ι) e₂₃ ℤ
+  have : NatTrans.CommShift e₁₃.hom ℤ :=
+    Functor.CommShift.ofComp_compatibility (F := F₁₃) (G := P₃.ι) e₁₃ ℤ
+  apply cscAssocShift e₁₂ e₂₃ e₁₃ α β
+  ext K
+  have hk := congrArg (fun η ↦ η.app K) H
+  simpa [e₁₂, e₂₃, e₁₃, F₁₂, F₂₃, F₁₃, ObjectProperty.lift,
+    ObjectProperty.ι, inducedFunctor] using hk
+
+
+
+
+
+private theorem cscLocalizedShift_exists
+    {C : Type*} [Category* C] [HasShift C ℤ]
+    {D : Type*} [Category* D] [HasShift D ℤ]
+    {E : Type*} [Category* E] [HasShift E ℤ]
+    (L : C ⥤ D) (W : MorphismProperty C) [L.IsLocalization W] [L.CommShift ℤ]
+    (B : C ⥤ E) [B.CommShift ℤ] (J : D ⥤ E) (e : L ⋙ J ≅ B) :
+    ∃! q : J.CommShift ℤ, (letI := q; NatTrans.CommShift e.hom ℤ) := by
+  let : Localization.Lifting L W B J := ⟨e⟩
+  let q := Functor.commShiftOfLocalization L W ℤ B J
+  have hq : letI := q; NatTrans.CommShift e.hom ℤ :=
+    NatTrans.commShift_iso_hom_of_localization L W ℤ B J
+  refine ⟨q, hq, ?_⟩
+  intro t ht
+  have square (s : J.CommShift ℤ) (hs : letI := s; NatTrans.CommShift e.hom ℤ)
+      (n : ℤ) (X : C) :
+      J.map ((L.commShiftIso n).hom.app X) ≫
+          (Functor.commShiftIso J (self := s) n).hom.app (L.obj X) ≫
+            (shiftFunctor E n).map (e.hom.app X) =
+        e.hom.app ((shiftFunctor C n).obj X) ≫ (B.commShiftIso n).hom.app X := by
+    let := s
+    have := hs
+    simpa only [Functor.commShiftIso_comp_hom_app, Category.assoc] using
+      NatTrans.shift_app_comm e.hom n X
+  apply AlgebraicGeometry.Scheme.pbcKanCommShift_ext t q
+  intro n
+  apply Iso.ext
+  apply Localization.natTrans_ext L W
+  intro X
+  apply (cancel_epi (J.map ((L.commShiftIso n).hom.app X))).mp
+  apply (cancel_mono ((shiftFunctor E n).map (e.hom.app X))).mp
+  simpa only [Category.assoc] using (square t ht n X).trans (square q hq n X).symm
+
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+
+private theorem tensor_eqToHom (R : Type*) [CommRing R] (C : Type*) [Category C]
+    [Preadditive C] [Linear R C] (p : R) {X Y : C} (h : X = Y) :
+    ((1 : Localization.Away p) ⊗ₜ[R] eqToHom h :
+      ScalarLocalization.mk (R := R) (p := p) X ⟶ ⟨Y⟩) =
+      eqToHom (congrArg (fun X ↦ ScalarLocalization.mk (R := R) (p := p) X) h) := by
+  subst Y
+  rfl
+
+private theorem hasShift_ext (C : Type*) [Category C] (s t : HasShift C ℤ)
+    (hF : ∀ n : ℤ, (letI := s; shiftFunctor C n) = (letI := t; shiftFunctor C n))
+    (hz : ∀ X : C, HEq (letI := s; (shiftFunctorZero C ℤ).hom.app X)
+      (letI := t; (shiftFunctorZero C ℤ).hom.app X))
+    (ha : ∀ (n m : ℤ) (X : C), HEq (letI := s; (shiftFunctorAdd C n m).hom.app X)
+      (letI := t; (shiftFunctorAdd C n m).hom.app X)) : s = t := by
+  cases s with
+  | mk sf sm =>
+    cases t with
+    | mk tf tm =>
+      have hf : sf = tf := Discrete.functor_ext hF
+      cases hf
+      have hz' : (letI : HasShift C ℤ := ⟨sf, sm⟩; shiftFunctorZero C ℤ) =
+          (letI : HasShift C ℤ := ⟨sf, tm⟩; shiftFunctorZero C ℤ) :=
+        Iso.ext (NatTrans.ext (funext (fun X ↦ eq_of_heq (hz X))))
+      have ha' (n m : ℤ) :
+          (letI : HasShift C ℤ := ⟨sf, sm⟩; shiftFunctorAdd C n m) =
+          (letI : HasShift C ℤ := ⟨sf, tm⟩; shiftFunctorAdd C n m) :=
+        Iso.ext (NatTrans.ext (funext (fun X ↦ eq_of_heq (ha n m X))))
+      congr 1
+      apply Functor.Monoidal.ext
+      · exact congrArg Iso.inv hz'
+      · funext a b
+        exact congrArg Iso.inv (ha' a.as b.as)
+      · exact congrArg Iso.hom hz'
+      · funext a b
+        exact congrArg Iso.hom (ha' a.as b.as)
+
+private def tensorShiftZero (R : Type*) [CommRing R] (C : Type*) [Category C]
+    [Preadditive C] [Linear R C] [HasShift C ℤ]
+    [∀ n : ℤ, (shiftFunctor C n).Additive]
+    [∀ n : ℤ, (shiftFunctor C n).Linear R] (p : R) :
+    map R C p (shiftFunctor C (0 : ℤ)) ≅ 𝟭 (ScalarLocalization R C p) :=
+  NatIso.ofComponents
+    (fun X ↦ (localization R C p).mapIso ((shiftFunctorZero C ℤ).app X.obj)) (by
+      intro X Y f
+      change composition R C p _ _ _
+          (1 ⊗ₜ[R] (shiftFunctorZero C ℤ).hom.app Y.obj) (mapHom R C p _ _ _ f) =
+        composition R C p _ _ _ f (1 ⊗ₜ[R] (shiftFunctorZero C ℤ).hom.app X.obj)
+      induction f using TensorProduct.induction_on with
+      | zero =>
+        simp only [map_zero]
+        rfl
+      | tmul a f =>
+        simp [mapHom, composition_tmul,
+          (shiftFunctorZero C ℤ).hom.naturality f]
+      | add f g hf hg => simp only [map_add, LinearMap.add_apply, hf, hg])
+
+private def tensorShiftAdd (R : Type*) [CommRing R] (C : Type*) [Category C]
+    [Preadditive C] [Linear R C] [HasShift C ℤ]
+    [∀ n : ℤ, (shiftFunctor C n).Additive]
+    [∀ n : ℤ, (shiftFunctor C n).Linear R] (p : R) (n m : ℤ) :
+    map R C p (shiftFunctor C (n + m)) ≅
+      map R C p (shiftFunctor C n) ⋙ map R C p (shiftFunctor C m) :=
+  NatIso.ofComponents
+    (fun X ↦ (localization R C p).mapIso ((shiftFunctorAdd C n m).app X.obj)) (by
+      intro X Y f
+      change composition R C p _ _ _
+          (1 ⊗ₜ[R] (shiftFunctorAdd C n m).hom.app Y.obj) (mapHom R C p _ _ _ f) =
+        composition R C p _ _ _ (mapHom R C p _ _ _ (mapHom R C p _ _ _ f))
+          (1 ⊗ₜ[R] (shiftFunctorAdd C n m).hom.app X.obj)
+      induction f using TensorProduct.induction_on with
+      | zero =>
+        simp only [map_zero]
+        rfl
+      | tmul a f =>
+        simp [mapHom, composition_tmul,
+          (shiftFunctorAdd C n m).hom.naturality f]
+      | add f g hf hg => simp only [map_add, LinearMap.add_apply, hf, hg])
+
+private def tensorShiftCore (R : Type*) [CommRing R] (C : Type*) [Category C]
+    [Preadditive C] [Linear R C] [HasShift C ℤ]
+    [∀ n : ℤ, (shiftFunctor C n).Additive]
+    [∀ n : ℤ, (shiftFunctor C n).Linear R] (p : R) :
+    ShiftMkCore (ScalarLocalization R C p) ℤ where
+  F n := map R C p (shiftFunctor C n)
+  zero := tensorShiftZero R C p
+  add := tensorShiftAdd R C p
+  assoc_hom_app a b c X := by
+    have h := congrArg (fun f ↦ (localization R C p).map f)
+      (shiftFunctorAdd_assoc_hom_app a b c X.obj)
+    simp only [shiftFunctorAdd', Iso.trans_hom, eqToIso.hom, NatTrans.comp_app,
+      eqToHom_app, Functor.map_comp, eqToHom_map] at h
+    simpa [tensorShiftAdd, map, mapHom, localization, shiftFunctorAdd',
+      Functor.map_comp, eqToHom_map, tensor_eqToHom, Category.assoc] using h
+  zero_add_hom_app n X := by
+    have h := congrArg (fun f ↦ (localization R C p).map f)
+      (shiftFunctorAdd_zero_add_hom_app n X.obj)
+    simp only [Functor.map_comp, eqToHom_map] at h
+    simpa [tensorShiftAdd, tensorShiftZero, map, mapHom, localization,
+      Functor.map_comp, eqToHom_map, tensor_eqToHom, Category.assoc] using h
+  add_zero_hom_app n X := by
+    have h := congrArg (fun f ↦ (localization R C p).map f)
+      (shiftFunctorAdd_add_zero_hom_app n X.obj)
+    simp only [Functor.map_comp, eqToHom_map] at h
+    simpa [tensorShiftAdd, tensorShiftZero, map, mapHom, localization,
+      Functor.map_comp, eqToHom_map, tensor_eqToHom, Category.assoc] using h
+
+private theorem tensorShift_exists (R : Type*) [CommRing R] (C : Type*) [Category C]
+    [Preadditive C] [Linear R C] [HasShift C ℤ]
+    [∀ n : ℤ, (shiftFunctor C n).Additive]
+    [∀ n : ℤ, (shiftFunctor C n).Linear R] (p : R) :
+    ∃! s : HasShift (ScalarLocalization R C p) ℤ,
+      (letI := s
+       (∀ n : ℤ, shiftFunctor (ScalarLocalization R C p) n = map R C p (shiftFunctor C n)) ∧
+       (∀ X : ScalarLocalization R C p,
+         HEq ((shiftFunctorZero (ScalarLocalization R C p) ℤ).hom.app X)
+           ((localization R C p).map ((shiftFunctorZero C ℤ).hom.app X.obj))) ∧
+       (∀ (n m : ℤ) (X : ScalarLocalization R C p),
+         HEq ((shiftFunctorAdd (ScalarLocalization R C p) n m).hom.app X)
+           ((localization R C p).map ((shiftFunctorAdd C n m).hom.app X.obj)))) := by
+  let s := hasShiftMk (ScalarLocalization R C p) ℤ (tensorShiftCore R C p)
+  refine ⟨s, ⟨fun _ ↦ rfl, fun _ ↦ HEq.rfl, fun _ _ _ ↦ HEq.rfl⟩, ?_⟩
+  intro t ht
+  apply hasShift_ext _ t s
+  · exact ht.1
+  · intro X
+    exact ht.2.1 X
+  · intro n m X
+    exact ht.2.2 n m X
+
+private theorem tensorLocalizationShift_exists
+    (R : Type*) [CommRing R] (C : Type*) [Category C]
+    [Preadditive C] [Linear R C] [HasShift C ℤ]
+    [∀ n : ℤ, (shiftFunctor C n).Additive]
+    [∀ n : ℤ, (shiftFunctor C n).Linear R] (p : R)
+    [s : HasShift (ScalarLocalization R C p) ℤ]
+    (hn : ∀ n : ℤ, shiftFunctor (ScalarLocalization R C p) n = map R C p (shiftFunctor C n))
+    (hz : ∀ X : ScalarLocalization R C p,
+      HEq ((shiftFunctorZero (ScalarLocalization R C p) ℤ).hom.app X)
+        ((localization R C p).map ((shiftFunctorZero C ℤ).hom.app X.obj)))
+    (ha : ∀ (n m : ℤ) (X : ScalarLocalization R C p),
+      HEq ((shiftFunctorAdd (ScalarLocalization R C p) n m).hom.app X)
+        ((localization R C p).map ((shiftFunctorAdd C n m).hom.app X.obj))) :
+    ∃! q : (localization R C p).CommShift ℤ,
+      (fun [_qInst : (localization R C p).CommShift ℤ] ↦ ∀ (n : ℤ) (X : C),
+        HEq (((localization R C p).commShiftIso n).hom.app X)
+          (𝟙 ((localization R C p).obj ((shiftFunctor C n).obj X)))) (_qInst := q) := by
+  have hs : s = hasShiftMk (ScalarLocalization R C p) ℤ (tensorShiftCore R C p) :=
+    hasShift_ext _ _ _ hn hz ha
+  subst s
+  let : HasShift (ScalarLocalization R C p) ℤ :=
+    hasShiftMk (ScalarLocalization R C p) ℤ (tensorShiftCore R C p)
+  let Q := localization R C p
+  let e (n : ℤ) : shiftFunctor C n ⋙ Q ≅ Q ⋙ shiftFunctor (ScalarLocalization R C p) n :=
+    NatIso.ofComponents (fun X ↦ Iso.refl _) (by
+      intro X Y f
+      change Q.map ((shiftFunctor C n).map f) ≫ 𝟙 _ =
+        𝟙 _ ≫ (map R C p (shiftFunctor C n)).map (Q.map f)
+      simp [Q, map, mapHom, localization])
+  let q : Q.CommShift ℤ :=
+    { commShiftIso := e
+      commShiftIso_zero := by
+        ext X
+        simp only [Functor.CommShift.isoZero_hom_app]
+        change 𝟙 _ = Q.map ((shiftFunctorZero C ℤ).hom.app X) ≫
+          Q.map ((shiftFunctorZero C ℤ).inv.app X)
+        simp only [← Q.map_comp, Iso.hom_inv_id_app, Q.map_id]
+      commShiftIso_add := by
+        intro n m
+        ext X
+        simp only [Functor.CommShift.isoAdd_hom_app]
+        change 𝟙 _ = Q.map ((shiftFunctorAdd C n m).hom.app X) ≫
+          𝟙 _ ≫ (map R C p (shiftFunctor C m)).map (𝟙 _) ≫
+            Q.map ((shiftFunctorAdd C n m).inv.app X)
+        rw [(map R C p (shiftFunctor C m)).map_id]
+        change 𝟙 _ = Q.map ((shiftFunctorAdd C n m).hom.app X) ≫
+          𝟙 (Q.obj ((shiftFunctor C n ⋙ shiftFunctor C m).obj X)) ≫
+            𝟙 (Q.obj ((shiftFunctor C n ⋙ shiftFunctor C m).obj X)) ≫
+              Q.map ((shiftFunctorAdd C n m).inv.app X)
+        simp only [Category.id_comp, ← Q.map_comp, Iso.hom_inv_id_app, Q.map_id] }
+  refine ⟨q, fun _ _ ↦ HEq.rfl, ?_⟩
+  intro t ht
+  cases t with
+  | mk ti tz ta =>
+    have he : ti = e := by
+      funext n
+      apply Iso.ext
+      apply NatTrans.ext
+      funext X
+      exact eq_of_heq (ht n X)
+    subst ti
+    rfl
+
+attribute [local irreducible] tensorShiftCore
+
+end CategoryTheory.ScalarLocalization
+
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+
+
+
 namespace AlgebraicGeometry.Scheme
+
+set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency.types true
 
 variable (l : ℕ) [Fact l.Prime] (Ω : Type c) [Field Ω] [Algebra (Padic l) Ω]
   [IsAlgClosure (Padic l) Ω]
@@ -66,6 +442,75 @@ variable {E F G : Padic.FiniteCoefficientFields l Ω}
 variable (T : Scheme.{u}) [IsNoetherian T]
   (hdim : ∃ m : ℕ, topologicalKrullDim T ≤ m)
   (hl : ∀ t : T, IsUnit (l : T.presheaf.stalk t))
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem cscIntegralTriangulated (l : ℕ) [Fact l.Prime]
+    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
+    (T : Scheme.{u}) [IsNoetherian T]
+    :
+    ObjectProperty.IsClosedUnderIsomorphisms.{u + 2, u + 2}
+      (C := PbcCompletedDerived T (pbcIntegralDatum l E))
+      (PbcIsBoundedConstructibleComplete T (pbcIntegralDatum l E)) ∧
+    ObjectProperty.IsTriangulated.{u + 2, u + 2}
+      (C := PbcCompletedDerived T (pbcIntegralDatum l E))
+      (PbcIsBoundedConstructibleComplete T (pbcIntegralDatum l E)) := by
+  let d := pbcIntegralDatum l E
+  obtain ⟨F, η, hAdd, hShift, hExact, hUnitShift, hComplete⟩ := pbcExactCompletionData T d
+  have := hAdd
+  let := hShift
+  have := hExact
+  have := hUnitShift
+  have hCompleteEq : PbcIsIntrinsicallyComplete T d = fun K ↦ IsIso (η.app K) := by
+    funext K
+    exact propext (hComplete K)
+  have hc : ObjectProperty.IsClosedUnderIsomorphisms (PbcIsIntrinsicallyComplete T d) ∧
+      ObjectProperty.IsTriangulated (PbcIsIntrinsicallyComplete T d) := by
+    rw [hCompleteEq]
+    exact exactUnitLocus F η
+  have := hc.1
+  have := hc.2
+  have hred (n : ℕ) : ∃ (_ : (pbcCompletedReduction T d n).CommShift ℤ),
+      (pbcCompletedReduction T d n).IsTriangulated :=
+    (reductionDerivedExistence T (pbcAdicProjection T d n)).choose_spec.choose_spec.2.1
+  let (n : ℕ) : (pbcCompletedReduction T d n).CommShift ℤ := (hred n).choose
+  let (n : ℕ) : (pbcCompletedReduction T d n).IsTriangulated := (hred n).choose_spec
+  let (n : ℕ) : (pbcDerivedRestrict (pbcLevelConstantComparison T d n).hom).CommShift ℤ := by
+    dsimp [pbcDerivedRestrict]
+    infer_instance
+  let (n : ℕ) : (pbcDerivedRestrict (pbcLevelConstantComparison T d n).hom).IsTriangulated := by
+    dsimp [pbcDerivedRestrict]
+    infer_instance
+  let : ∀ n : ℕ, (pbcConstantReduction T d n).CommShift ℤ := fun n ↦ by
+    dsimp [pbcConstantReduction]
+    infer_instance
+  let : ∀ n : ℕ, (pbcConstantReduction T d n).IsTriangulated := fun n ↦ by
+    dsimp [pbcConstantReduction]
+    infer_instance
+  let Q (n : ℕ) := DerivedCategory.homologyProperty
+    (@IsConstructibleProEtaleCoefficientModuleSheaf T (ProEtale.PbcQuotient d n) _
+      (d.quotientFinite n))
+  let (n : ℕ) : (Q n).IsClosedUnderIsomorphisms :=
+    (constructibleCoefficientHomology_isTriangulated T (ProEtale.PbcQuotient d n)).1
+  let (n : ℕ) : (Q n).IsTriangulated :=
+    (constructibleCoefficientHomology_isTriangulated T (ProEtale.PbcQuotient d n)).2
+  have hp := uniformProfileLocus
+    (fun n : ℕ ↦ DerivedCategory
+      (pbcModules T (adicLisseConstantRing T (ProEtale.PbcQuotient d n))))
+    (pbcConstantReduction T d) (fun _ ↦ DerivedCategory.TStructure.t) Q
+  change ObjectProperty.IsClosedUnderIsomorphisms (PbcUniformReductionProfile T d) ∧
+    ObjectProperty.IsTriangulated (PbcUniformReductionProfile T d) at hp
+  have := hp.1
+  have := hp.2
+  have hPredicate : PbcIsBoundedConstructibleComplete T d =
+      (PbcIsIntrinsicallyComplete T d ⊓ PbcUniformReductionProfile T d) := by
+    funext K
+    exact propext (and_congr_right (fun _ ↦ pbcUniformReductionCriterion l E T K))
+  change ObjectProperty.IsClosedUnderIsomorphisms (PbcIsBoundedConstructibleComplete T d) ∧
+    ObjectProperty.IsTriangulated (PbcIsBoundedConstructibleComplete T d)
+  rw [hPredicate]
+  exact ⟨inferInstance, inferInstance⟩
+
 
 /-- Signed reindexing preserves completion, bounded constructible reductions and
 compatible etale origins. Source: blueprint orders 1308--1309
@@ -77,7 +522,8 @@ The Koszul completion tower is shifted termwise, so its limit and unit shift too
 @[instance] theorem pbcIntegralStableShift (E : Padic.FiniteCoefficientFields l Ω) :
     ObjectProperty.IsStableUnderShift
       (PbcIsBoundedConstructibleComplete T (pbcStageDatum.{u} l Ω E)) ℤ := by
-  sorry
+  have := (cscIntegralTriangulated l (pbcFiniteField.{u} l Ω E) T).2
+  infer_instance
 
 /-- The inherited shift remains linear for the actual constant-section action.
 Source: blueprint order 1309 (blueprint: prop-weil-pbc-common-stage-calculus).
@@ -87,7 +533,13 @@ and restricts to the full integral subcategory. -/
 @[instance] theorem pbcIntegralShiftLinear (E : Padic.FiniteCoefficientFields l Ω) (n : ℤ) :
     (shiftFunctor (PbcBoundedConstructibleComplete T (pbcStageDatum.{u} l Ω E)) n).Linear
       (PbcIntegralRing l (pbcFiniteField.{u} l Ω E)) := by
-  sorry
+  let P : ObjectProperty (PbcCompletedDerived T (pbcStageDatum.{u} l Ω E)) :=
+    PbcIsBoundedConstructibleComplete T (pbcStageDatum.{u} l Ω E)
+  let R := PbcIntegralRing l (pbcFiniteField.{u} l Ω E)
+  have : (shiftFunctor P.FullSubcategory n ⋙ P.ι).Linear R :=
+    Functor.linear_of_iso R (P.ι.commShiftIso n).symm
+  refine ⟨fun f r ↦ P.ι.map_injective ?_⟩
+  simp only [Functor.map_smul]
 
 /-- The rational shift is fixed on tensor Homs, including its unit and addition
 comparisons. Source: blueprint orders 1308--1309
@@ -130,7 +582,10 @@ formulas and the component normalizations specify every part of HasShift uniquel
 theorem pbcRationalShift_exists (E : Padic.FiniteCoefficientFields l Ω) :
     ∃! s : HasShift (PbcRationalCategory T (pbcStageDatum.{u} l Ω E)
       (pbcStageUniformizer.{u} l Ω E)) ℤ, PbcRationalShiftNormalized l Ω T E s := by
-  sorry
+  exact ScalarLocalization.tensorShift_exists
+    (PbcIntegralRing l (pbcFiniteField.{u} l Ω E))
+    (PbcBoundedConstructibleComplete T (pbcStageDatum.{u} l Ω E))
+    (pbcStageUniformizer.{u} l Ω E)
 
 /-- The rational shift has actual signed-reindexing data, uniquely normalized on
 integral objects and tensor morphisms. Source: blueprint order 1309
@@ -148,6 +603,7 @@ Proof: its normalized Hom action is ScalarLocalization.map, whose mapHom is line
   rw [((pbcRationalShift_exists l Ω T E).exists.choose_spec).1 n]
   infer_instance
 
+set_option linter.unusedVariables false in
 /-- Localization commutes with shifts through the identity component comparison.
 Source: blueprint order 1309 (blueprint: prop-weil-pbc-common-stage-calculus).
 Proof: the normalized shift has the same objects and sends 1 tensor f to
@@ -165,7 +621,11 @@ theorem pbcRationalizationShift_exists (E : Padic.FiniteCoefficientFields l Ω) 
               (pbcStageUniformizer.{u} l Ω E)).obj
                 ((shiftFunctor (PbcBoundedConstructibleComplete T
                   (pbcStageDatum.{u} l Ω E)) n).obj K)))) (qInst := q) := by
-  sorry
+  have h := (pbcRationalShift_exists l Ω T E).exists.choose_spec
+  exact ScalarLocalization.tensorLocalizationShift_exists
+    (PbcIntegralRing l (pbcFiniteField.{u} l Ω E))
+    (PbcBoundedConstructibleComplete T (pbcStageDatum.{u} l Ω E))
+    (pbcStageUniformizer.{u} l Ω E) h.1 h.2.1 h.2.2
 
 /-- The normalized identity comparison with rationalization.
 Source: blueprint order 1309 (blueprint: prop-weil-pbc-common-stage-calculus). -/
@@ -197,6 +657,7 @@ instance pbcIntegralScalarCommShift (h : E ≤ F) :
       (PbcIsBoundedConstructibleComplete T (pbcStageDatum.{u} l Ω E)) ⋙
         pbcAmbientScalarExtension l Ω T h)) ℤ
 
+set_option linter.unusedVariables false in
 /-- The rational tensor shift comparison is fixed by the actual integral comparison.
 Source: blueprint order 1307 (blueprint: prop-weil-pbc-common-stage-calculus).
 Proof: localize the ambient tensor shift component on each integral object and
@@ -208,7 +669,18 @@ theorem pbcScalarShift_exists (h : E ≤ F) :
       (fun [qInst : (pbcScalarExtension l Ω T hdim hl h).CommShift ℤ] ↦
         NatTrans.CommShift (pbcScalarIntegralComparison l Ω T hdim hl h).hom ℤ)
           (qInst := q) := by
-  sorry
+  have hE := cscIntegralTriangulated l (pbcFiniteField.{u} l Ω E) T
+  have := hE.1
+  have := hE.2
+  let C := pbcIntegralStage l Ω T E
+  let R := PbcIntegralRing l (pbcFiniteField.{u} l Ω E)
+  let p := pbcStageUniformizer.{u} l Ω E
+  let Q := pbcStageLocalization l Ω T E
+  let W := Rationalization.W (Submonoid.powers p) C
+  have : Q.IsLocalization W := ScalarLocalization.pbcScalarLocalization_isLocalization R C p
+  exact ScalarLocalization.cscLocalizedShift_exists Q W
+    (pbcIntegralScalarExtension l Ω T hdim hl h ⋙ pbcStageLocalization l Ω T F)
+    (pbcScalarExtension l Ω T hdim hl h) (pbcScalarIntegralComparison l Ω T hdim hl h)
 
 /-- The specified sigma comparison for finite coefficient extension.
 Source: blueprint order 1307 (blueprint: prop-weil-pbc-common-stage-calculus). -/
@@ -216,6 +688,47 @@ instance pbcScalarCommShift (h : E ≤ F) :
     (pbcScalarExtension l Ω T hdim hl h).CommShift ℤ :=
   (pbcScalarShift_exists l Ω T hdim hl h).exists.choose
 
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+
+private theorem cscAmbientAssociatorShift (h : E ≤ F) (k : F ≤ G) :
+    NatTrans.CommShift (pbcAmbientScalarAssociator l Ω T h k).hom ℤ := by
+  have : (pbcDerivedScalarAdjunction (pbcCompletedScalarMap l Ω T h)).CommShift ℤ :=
+    Adjunction.commShift_of_rightAdjoint _ ℤ
+  have : (pbcDerivedScalarAdjunction (pbcCompletedScalarMap l Ω T k)).CommShift ℤ :=
+    Adjunction.commShift_of_rightAdjoint _ ℤ
+  have : (pbcDerivedScalarAdjunction
+      (pbcCompletedScalarMap l Ω T (h.trans k))).CommShift ℤ :=
+    Adjunction.commShift_of_rightAdjoint _ ℤ
+  have : NatTrans.CommShift (pbcDerivedRestrictComp (pbcCompletedScalarMap l Ω T h)
+      (pbcCompletedScalarMap l Ω T k) (pbcCompletedScalarMap l Ω T (h.trans k))
+      (pbcCompletedScalarMap_comp l Ω T h k)).hom ℤ := by
+    dsimp only [pbcDerivedRestrictComp, Iso.trans_hom, Iso.symm_hom]
+    infer_instance
+  exact ScalarLocalization.cscConjugateShift _ _ _
+
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
+private theorem cscIntegralAssociatorShift (h : E ≤ F) (k : F ≤ G) :
+    NatTrans.CommShift (pbcIntegralScalarAssociator l Ω T hdim hl h k).hom ℤ := by
+  exact ScalarLocalization.cscLiftAssocShift
+    (PbcIsBoundedConstructibleComplete T (pbcStageDatum.{u} l Ω E))
+    (PbcIsBoundedConstructibleComplete T (pbcStageDatum.{u} l Ω F))
+    (PbcIsBoundedConstructibleComplete T (pbcStageDatum.{u} l Ω G))
+    (pbcAmbientScalarExtension l Ω T h) (pbcAmbientScalarExtension l Ω T k)
+    (pbcAmbientScalarExtension l Ω T (h.trans k))
+    (pbcAmbientScalarExtension_preserves l Ω T h hdim hl)
+    (pbcAmbientScalarExtension_preserves l Ω T k hdim hl)
+    (pbcAmbientScalarExtension_preserves l Ω T (h.trans k) hdim hl)
+    (pbcIntegralScalarAssociator l Ω T hdim hl h k).hom
+    (pbcAmbientScalarAssociator l Ω T h k).hom (cscAmbientAssociatorShift l Ω T h k)
+    (pbcIntegralScalarAssociator_exists l Ω T hdim hl h k).exists.choose_spec
+
+
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
 /-- Tensor balancing commutes with the normalized sigma comparisons.
 Source: blueprint order 1307 (blueprint: prop-weil-pbc-common-stage-calculus).
 Proof: the ambient associator is the mate of identity-on-sections restriction
@@ -223,7 +736,27 @@ composition, which commutes with signed reindexing. Restrict and rationalize
 that equation; the normalizations of both comparisons preserve it. -/
 @[instance] theorem pbcScalarAssociatorCommShift (h : E ≤ F) (k : F ≤ G) :
     NatTrans.CommShift (pbcScalarAssociator l Ω T hdim hl h k).hom ℤ := by
-  sorry
+  have := cscIntegralAssociatorShift l Ω T hdim hl h k
+  have hcomp (E F : Padic.FiniteCoefficientFields l Ω) (h : E ≤ F) :
+      NatTrans.CommShift (pbcScalarIntegralComparison l Ω T hdim hl h).hom ℤ :=
+    (pbcScalarShift_exists l Ω T hdim hl h).exists.choose_spec
+  have := hcomp E F h
+  have := hcomp F G k
+  have := hcomp E G (h.trans k)
+  exact ScalarLocalization.cscAssocShiftOfWhiskerLeft
+    (pbcScalarIntegralComparison l Ω T hdim hl h)
+    (pbcScalarIntegralComparison l Ω T hdim hl k)
+    (pbcScalarIntegralComparison l Ω T hdim hl (h.trans k))
+    (pbcIntegralScalarAssociator l Ω T hdim hl h k).hom
+    (pbcScalarAssociator l Ω T hdim hl h k).hom
+    (pbcScalarAssociator_exists l Ω T hdim hl h k).exists.choose_spec
+    (fun X ↦ ⟨X.obj, 𝟙 _, by
+      change IsIso ((pbcScalarExtension l Ω T hdim hl (h.trans k)).map (𝟙 X))
+      rw [CategoryTheory.Functor.map_id]
+      infer_instance⟩)
+
+set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency.types true
 
 /-- The actual raw rational stages have finite biproducts and a zero object.
 Source: blueprint orders 1308--1309 (blueprint: prop-weil-pbc-common-stage-calculus).
@@ -235,9 +768,18 @@ Tensor these maps with one; the same five equations hold in the raw localization
 @[instance] theorem pbcStageFiniteBiproducts (E : Padic.FiniteCoefficientFields l Ω) :
     Limits.HasFiniteBiproducts (PbcRationalCategory T (pbcStageDatum.{u} l Ω E)
       (pbcStageUniformizer.{u} l Ω E)) := by
-  sorry
+  have h := cscIntegralTriangulated l (pbcFiniteField.{u} l Ω E) T
+  have := h.1
+  have := h.2
+  let Q := pbcRationalization T (pbcStageDatum.{u} l Ω E) (pbcStageUniformizer.{u} l Ω E)
+  have : Q.EssSurj := ⟨fun K ↦ ⟨K.obj, ⟨Iso.refl _⟩⟩⟩
+  have := Functor.hasFiniteProducts_of_additive_of_essSurj Q
+  exact Limits.HasFiniteBiproducts.of_hasFiniteProducts
 
 end AlgebraicGeometry.Scheme
+
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
 
 namespace CategoryTheory.StageSystem
 
@@ -549,7 +1091,22 @@ biproduct equations or its universal property, transport the finitely many arrow
 to one further stage. Additive transitions preserve finite biproducts, so the
 finite-stage equations give exactly the required pair-category equations. -/
 @[instance] theorem pbcPairFiniteBiproducts : Limits.HasFiniteBiproducts S.PairCategory := by
-  sorry
+  classical
+  constructor
+  intro n
+  constructor
+  intro X
+  obtain ⟨M, h⟩ := Finite.exists_le (fun a : Fin n ↦ (X a).stage)
+  have : (S.ι M).Additive := by
+    constructor
+    intro A B f g
+    simp only [ι_map_eq (le_refl M), Functor.map_add]
+    exact ((S.pairPreadditive_exists).exists.choose_spec _ _ M _ _ _ _).1
+  let Y : Fin n → C M := fun a ↦ (X a).toStage (h a)
+  have : Limits.HasProduct X := Limits.hasLimit_of_iso
+    (F := Discrete.functor Y ⋙ S.ι M)
+    (Discrete.natIso (fun a ↦ (S.isoToStage (X a.as) (h a.as)).symm))
+  exact Limits.HasBiproduct.of_hasProduct X
 end FiniteDiagrams
 
 end CategoryTheory.StageSystem
@@ -855,3 +1412,6 @@ theorem commonStageCalculus (l : ℕ) [Fact l.Prime] (Ω : Type c) [Field Ω]
   exact commonStageCalculus_generic (pbcScalarSystem l Ω T hdim hl)
 
 end AlgebraicGeometry.Scheme
+
+set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency.types true

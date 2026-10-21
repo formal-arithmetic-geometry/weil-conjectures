@@ -36,161 +36,115 @@
  ],
  "proof": [
   {
-   "text": "Use the scheme and coefficient hypotheses of [def-weil-pbc-finite-stage-pair-category]: $T$ is noetherian of finite dimension, $\\ell$ is invertible on $T$, and stages are finite intermediate extensions of the fixed algebraic closure of $\\mathbf Q_\\ell$. By [prop-weil-pbc-scalar-extension], each $T_{F/E}$ is exact. In [def-weil-triangulated-category], exact means additive between pre-triangulated categories; those categories are additive and have an additive invertible shift. Apply this also at $F=E$, where $T_{E/E}=1$. Thus every $\\mathcal C_E(T)$ has Hom abelian groups, bilinear composition, a zero object, binary biproducts, and additive inverse shifts. We use precisely these stated structures, the natural comparisons $\\sigma$, and the unit/pentagon and associator-shift coherence supplied by scalar extension.",
+   "text": "Reuse the existing exactUnitLocus and uniformProfileLocus theorems from [lem-weil-pbc-uniform-complete-triangulated] through a private import-all. The integral subcategory is the intersection of two triangulated object properties. The exact completion data in [lem-weil-pbc-exact-completion-data] identifies completeness with invertibility of the completion unit. Naturality and its shift compatibility show this property is closed under isomorphisms, shifts, zero objects and distinguished triangles. By [lem-weil-pbc-uniform-reduction-criterion], the uniform reduction condition is equivalent to a bounded cohomology interval together with constructibility of every reduced cohomology sheaf. Shift the interval by the negative of the shift degree; triangle closure follows from the bounded standard t-structure and [lem-weil-constructible-coefficient-homology-triangulated]. Thus the integral property is triangulated, without needing a dimension bound or invertibility of the prime for this closure argument. Its full inclusion gives additive, integral-ring-linear shifts.",
    "uses": [
-    "def-weil-pbc-finite-stage-pair-category",
-    "prop-weil-pbc-scalar-extension",
-    "def-weil-triangulated-category"
+    "lem-weil-pbc-exact-completion-data",
+    "lem-weil-pbc-uniform-reduction-criterion",
+    "lem-weil-constructible-coefficient-homology-triangulated",
+    "def-weil-triangulated-category",
+    "def-weil-pbc-uniform-reduction-profile",
+    "lem-weil-pbc-uniform-complete-triangulated"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-common-stage-calculus.proof.md",
-    "place": "Proof, finite-stage additive laws and exact transition functors"
-   }
+   "elementary": false
   },
   {
-   "text": "For transport write $A_X=a_{N,M,E,K}$, $A_Y=a_{N,M,F,L}$, $B_X=a_{P,N,E,K}$, $B_Y=a_{P,N,F,L}$, $C_X=a_{P,M,E,K}$, $C_Y=a_{P,M,F,L}$. Put $H=T_{N/M}$, $G=T_{P/N}$, $J=T_{P/M}$, and $b=a_{P,N,M}:GH\\xrightarrow{\\sim}J$. The pentagon in [prop-weil-pbc-scalar-extension] gives $B_XG(A_X)=C_Xb_{T_{M/E}K}$ and the analogous equation for $Y$. Naturality of $b$ gives $b_YGH(u)=J(u)b_X$. Substituting in the transport formula of [def-weil-pbc-finite-stage-pair-category] yields\n$$ (u_N)_P=B_YG(A_Y)GH(u)G(A_X)^{-1}B_X^{-1}=C_YJ(u)C_X^{-1}=u_P. $$\nThe unit equations give $u_M=u$. Exact functors are additive by [def-weil-triangulated-category], so each $T_{N/M}$ is additive. Distributivity of composition with fixed associators now gives $(u+v)_N=u_N+v_N$, $0_N=0$, and $(-u)_N=-u_N$.",
+   "text": "Extend each integral shift to raw tensor Hom modules by ScalarLocalization.map. Map the integral shift-zero and shift-add isomorphisms through localization. Their naturality is verified on pure tensors and extended by additivity. Applying localization to the integral shift coherence identities gives ShiftMkCore and hence HasShift. Equality of its functors and of every zero and addition component determines the entire monoidal shift structure, so the prescribed normalization has a unique solution.",
    "uses": [
     "def-weil-pbc-finite-stage-pair-category",
-    "prop-weil-pbc-scalar-extension",
-    "def-weil-triangulated-category"
+    "def-weil-abstract-derived-category",
+    "def-weil-linear-scalar-localization",
+    "def-weil-pbc-rational-category"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-common-stage-calculus.proof.md",
-    "place": "## Proof, transport cocycle and additivity"
-   }
+   "elementary": false
   },
   {
-   "text": "Reflexivity has witness $M$ since $u_M=u$, and symmetry follows by reversing the equality. If $(M,u)\\sim(N,v)$ at $P_1$ and $(N,v)\\sim(Q,w)$ at $P_2$, the finite compositum $P=P_1P_2$ exists by the directed-field data in [def-weil-pbc-finite-stage-pair-category]. Transporting both equalities and using step 2 gives $u_P=v_P=w_P$, which witnesses transitivity. No injectivity of the transport maps is assumed.",
-   "uses": [
-    "def-weil-pbc-finite-stage-pair-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-common-stage-calculus.proof.md",
-    "place": "## Proof, reflexivity, symmetry and transitivity"
-   }
-  },
-  {
-   "text": "For two composable arrows at $M$, the transported composite satisfies\n$$ v_Nu_N=a_ZT(v)a_Y^{-1}a_YT(u)a_X^{-1}=a_ZT(vu)a_X^{-1}=(vu)_N, $$\nand transport of an identity is an identity. If inputs are replaced by equivalent representatives, take the compositum of their equality witnesses and the two proposed operation fields; by step 2 the corresponding inputs coincide there. The displayed identity and additivity then make the outputs of addition, negation and composition coincide there. Thus the operations in [def-weil-pbc-finite-stage-pair-category] are independent of the field and representatives. All abelian-group, associativity, identity and bilinearity equations are verified by putting their finitely many representatives over one stage and applying the finite-stage laws established in step 1.",
+   "text": "The localization shift comparison has identity components. Naturality follows from the tensor Hom formula, and its unit and addition coherence are the localized integral identities. The component normalization determines this CommShift structure uniquely. For scalar extension use the canonical shift on derived restriction, its adjunction mate on ambient tensor extension, and reflection through the fully faithful integral inclusion. Reuse pbcScalarLocalization_isLocalization from [prop-weil-pbc-scalar-extension] to identify the raw tensor-Hom rationalization as a localization. Reuse its pbcKanCommShift_ext to compare shift structures degreewise. The integral/rational comparison then uniquely descends the scalar CommShift structure by the localization lifting API and natural-transformation extensionality.",
    "uses": [
     "def-weil-pbc-finite-stage-pair-category",
+    "def-weil-abstract-derived-category",
+    "def-weil-triangulated-category",
+    "def-weil-linear-scalar-localization",
+    "def-weil-pbc-rational-category",
     "prop-weil-pbc-scalar-extension"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-common-stage-calculus.proof.md",
-    "place": "## Proof, independence of common-stage operations and category laws"
-   }
+   "elementary": false
   },
   {
-   "text": "There is also a zero object and every binary biproduct, as required by [def-weil-additive-category]. Take $Z=(\\Ql,0)$. Scalar extension sends the zero identity to the zero identity, so every transport of $0$ is a zero object; every representative to or from $Z$ is therefore zero. For $X=(E,K)$ and $Y=(F,L)$ choose $M\\supseteq E,F$ and take $B=(M,T_{M/E}K\\oplus T_{M/F}L)$. Represent the four inclusions and projections at $M$ by the finite-stage ones. The equations $p_ii_j=\\delta_{ij}$ and $i_1p_1+i_2p_2=1$ hold at $M$, hence on classes by step 4; the identity of $X$ is represented there by the identity of $T_{M/E}K$, and likewise for $Y$. These prove that $B$ is a biproduct. Together with the Hom abelian groups and bilinear composition of step 4, this makes $\\mathcal P_T$ additive.",
+   "text": "The ambient scalar associator is the adjunction mate of derived restriction composition. The derived exact-functor composition and natural-isomorphism comparisons commute with shifts. Units, counits, whiskering, associators and unitors commute with shifts, so the mate does as well. Express the integral associator after its faithful inclusion by this ambient equation and the identity comparison squares; reflect shift compatibility. Express the rational associator after integral localization by its normalized component equation, a composition of the two scalar comparison squares, the localized integral associator and the inverse composite comparison. Every factor commutes with shifts; reflect along the object-surjective localization.",
    "uses": [
     "def-weil-pbc-finite-stage-pair-category",
-    "prop-weil-pbc-scalar-extension",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A triangulated integral full subcategory has finite biproducts. Its raw rationalization is additive and surjective on objects, so the additive essential-surjectivity theorem transports finite products to it. In a preadditive category these finite products give finite biproducts, including the empty biproduct and hence a zero object.",
+   "uses": [
+    "def-weil-pbc-finite-stage-pair-category",
+    "def-weil-triangulated-category",
     "def-weil-additive-category"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-common-stage-calculus.proof.md",
-    "place": "## Proof, zero object and binary biproducts"
-   }
+   "elementary": false
   },
   {
-   "text": "For $X=(E,K)$ and $N\\supseteq E$ construct $\\gamma_{N,X}:X\\to(N,T_{N/E}K)$ by the representative $(N,1_{T_{N/E}K})$; the same identity represents a map in the opposite direction. By the unit equations their composites are the two identity classes, so these maps are inverse. For $f=[M,u]:X\\to Y$ and $N\\supseteq M$, all three maps in $\\gamma_{N,Y}f\\gamma_{N,X}^{-1}$ are represented at $N$; the outer maps are identities and the middle map is $u_N$. Thus this conjugate is $j_N(u_N)$. This constructs the object identifications mentioned but not defined in the blueprint proof.",
+   "text": "Use the actual StageSystem of [def-weil-pbc-finite-stage-pair-category]. Its associator and unit identities give the transport cocycle, and additivity gives transport of sums and negatives. The representative equivalence relation is reflexive, symmetric and transitive by transporting finitely many equality witnesses to a common upper stage. The preadditive quotient construction already supplies representative-independent addition and composition and all their category laws.",
    "uses": [
     "def-weil-pbc-finite-stage-pair-category",
-    "prop-weil-pbc-scalar-extension"
+    "def-weil-additive-category"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-common-stage-calculus.proof.md",
-    "place": "## Proof, finite-diagram sentence, explicit object identifications"
-   }
+   "elementary": false
   },
   {
-   "text": "For a finite diagram take the compositum of the coefficient fields of its objects and the representative fields of its arrows, and use step 6 to replace every object by its isomorphic scalar extension at this field. By step 4 all specified composites are represented by the corresponding composites there. An asserted equality of parallel composites holds in $\\mathcal P_T$ if and only if its two representatives become equal at a further field, by the equivalence relation in [def-weil-pbc-finite-stage-pair-category]. Take the compositum of the witnesses for the finitely many asserted equalities. Step 2 preserves each witness equality at this common field, giving all equations simultaneously. The reverse implication uses that field as a witness for each equality. An empty diagram may use $\\Ql$. If just the list of equalities is empty, no witness extension is required: keep the field already containing the diagram's object and arrow fields. Representation of objects is through the displayed isomorphisms, not literal equality of pairs.",
+   "text": "For any finite family of pair objects choose one upper stage for their coefficient stages using directedness. Replace each pair object by its canonical isomorphic toStage object. The inclusion from this common stage is additive (by the representative addition formula), hence preserves its finite products. Transport this product along the object isomorphisms to obtain a product of the original pair objects. Their preadditive structure turns it into the required biproduct. This also treats the empty family.",
+   "uses": [
+    "def-weil-pbc-finite-stage-pair-category",
+    "def-weil-additive-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a finite graph choose one stage containing the stages of its objects and representatives of all its arrows. The toStage isomorphisms identify its arrows with the corresponding included common-stage maps. Each equality in a finite list has a further-stage witness by the quotient relation; directedness gives a common upper bound for all the witnesses. Conversely, a simultaneous common-stage equality gives each quotient equality. Empty lists need no additional witnesses.",
    "uses": [
     "def-weil-pbc-finite-stage-pair-category"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-common-stage-calculus.proof.md",
-    "place": "## Proof, finite diagrams and simultaneous equality detection"
-   }
+   "elementary": false
   },
   {
-   "text": "Write $s_X=\\sigma_{M/E,K}$, $s_Y=\\sigma_{M/F,L}$, $h_X=\\sigma_{N/M,T_{M/E}K}$, $h_Y=\\sigma_{N/M,T_{M/F}L}$, and let $A_X=a_{N,M,E,K}$ and $A'_X=a_{N,M,E,K[1]}$, with analogous notation for $Y$. Associator compatibility of the natural shift comparisons [prop-weil-pbc-scalar-extension] is\n$$ \\sigma_{N/E,K}A'_X=A_X[1]h_XT_{N/M}(s_X). $$\nNaturality gives $h_YT_{N/M}(u[1])=(T_{N/M}u)[1]h_X$. Insert both identities and the transport formula into $S_N(u_N)$, where $S_M(u)=s_Y^{-1}u[1]s_X$; the adjacent inverse comparisons cancel, leaving\n$$ S_N(u_N)=A'_YT_{N/M}(S_M(u))(A'_X)^{-1}. $$\nConsequently equivalent representatives give equivalent shifted representatives. At a common stage, $S_M(v)S_M(u)=S_M(vu)$ by cancellation of the middle $s_Ys_Y^{-1}$, $S_M(1)=1$, and $S_M(u+v)=S_M(u)+S_M(v)$ by the additive finite-stage shift of step 1. Thus the formula in the statement defines a well-defined additive endofunctor.",
+   "text": "The stage scalar comparisons and associator shift compatibility prove the representative shift formula respects transport. Naturality, cancellation of inverse shift comparisons and additivity show that it preserves identities, composition and sums. Descend this representative formula to the quotient for every integer shift.",
    "uses": [
     "def-weil-pbc-finite-stage-pair-category",
-    "prop-weil-pbc-scalar-extension"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-common-stage-calculus.proof.md",
-    "place": "## Proof, shift well-definedness, explicit compatibility calculation"
-   }
-  },
-  {
-   "text": "For inverse shifts use signed reindexing of complexes as in [def-weil-abstract-derived-category], so $K[-1][1]=K=K[1][-1]$ and similarly on chain maps. In the derived category these equations are read through the induced natural inverse identifications; all formulas below include them. Put $q_{M/E,K}=(\\sigma_{M/E,K[-1]})[-1]:(T_{M/E}K)[-1]\\to T_{M/E}(K[-1])$ and $\\tau_{M/E,K}=q_{M/E,K}^{-1}$. For $H=T_{N/M}$ put $A_X=a_{N,M,E,K}$ and $A_X^-=a_{N,M,E,K[-1]}$. The positive comparison equation of step 8 at $K[-1]$, shifted by $[-1]$, reads\n$$q_{N/E,K}A_X[-1]=A_X^-q_{N/M,(T_{M/E}(K[-1]))[1]}H(\\sigma_{M/E,K[-1]})[-1].$$\nNaturality of the $H$ comparison, applied to $\\sigma_{M/E,K[-1]}$, rewrites its last two factors as $H(q_{M/E,K})q_{N/M,T_{M/E}K}$. Consequently, inversion gives\n$$\\tau_{N/E,K}A_X^-=A_X[-1]\\tau_{N/M,T_{M/E}K}H(\\tau_{M/E,K}).$$\nThis derives negative-shift coherence from the cited positive-shift coherence, rather than presupposing it.",
-   "uses": [
-    "prop-weil-pbc-scalar-extension",
     "def-weil-abstract-derived-category"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-common-stage-calculus.proof.md",
-    "place": "Proof, inverse shift: definition and comparison coherence"
-   }
+   "elementary": false
   },
   {
-   "text": "For a representative $u:T_{M/E}K\\to T_{M/F}L$, define $R_M(u)=\\tau_{M/F,L}^{-1}u[-1]\\tau_{M/E,K}$. Naturality gives $\\tau_{N/M,T_{M/F}L}H(u[-1])=(Hu)[-1]\\tau_{N/M,T_{M/E}K}$. Write $D_X=\\tau_{N/M,T_{M/E}K}$ and similarly for $Y$. Substitute the last equation of step 9 into $R_N(u_N)$ and cancel:\n$$\\begin{aligned}\nR_N(u_N)&=A_Y^-H(\\tau_Y)^{-1}D_Y^{-1}(Hu)[-1]D_XH(\\tau_X)(A_X^-)^{-1}\\\\\n&=A_Y^-H(\\tau_Y^{-1}u[-1]\\tau_X)(A_X^-)^{-1}.\n\\end{aligned}$$\nThis is exactly transport of $R_M(u)$ between the negatively shifted endpoints. Equality witnesses therefore remain witnesses after shifting, so $R$ descends to classes. At one stage,\n$$R_M(v)R_M(u)=\\tau_Z^{-1}v[-1]\\tau_Y\\tau_Y^{-1}u[-1]\\tau_X=R_M(vu),$$\n$$R_M(1)=1,\\qquad R_M(u+v)=\\tau_Y^{-1}(u[-1]+v[-1])\\tau_X=R_M(u)+R_M(v).$$\nThe common-stage descent of step 4 proves that $[-1]$ is an additive endofunctor.",
+   "text": "Take the integral-stage shift-zero and shift-add components as quotient representatives, conjugating by scalar shift comparisons as required by the representative formula. Their naturality and coherence follow after transport to one stage from the finite-stage shift laws. ShiftMkCore supplies the coherent integer shift, hence the inverse shifts. The stage inclusion comparisons have identity representatives and satisfy the same unit and addition laws. Combine these facts with the finite-diagram, equality-detection and biproduct results to obtain commonStageCalculus.",
    "uses": [
     "def-weil-pbc-finite-stage-pair-category",
-    "prop-weil-pbc-scalar-extension"
+    "def-weil-abstract-derived-category",
+    "def-weil-additive-category"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-common-stage-calculus.proof.md",
-    "place": "Proof, inverse shift: representative independence and additive functor laws"
-   }
-  },
-  {
-   "text": "Write $S_M(u)=s_Y^{-1}u[1]s_X$ as in step 8, where $s_X=\\sigma_{M/E,K}$, and put $t_X=\\sigma_{M/E,K[-1]}$; use analogous notation for $Y$. The definition in step 9 gives $\\tau_{M/E,K[1]}=(s_X[-1])^{-1}$ and $\\tau_{M/E,K}[1]=t_X^{-1}$. Hence\n$$R_M(S_M(u))=s_Y[-1](s_Y[-1])^{-1}u\\,s_X[-1](s_X[-1])^{-1}=u,$$\n$$S_M(R_M(u))=t_Y^{-1}t_Y\\,u\\,t_X^{-1}t_X=u.$$\nThese equalities use the signed-reindexing inverse identifications of [def-weil-abstract-derived-category]. Represent their unit and counit at the coefficient field of each object. The displayed calculations at the representative stage of each arrow prove naturality; their triangle composites are the inverse-reindexing identities at that same stage. Thus $[1]$ and $[-1]$ are mutually inverse additive equivalences.",
-   "uses": [
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-common-stage-calculus.proof.md",
-    "place": "Proof, inverse shift: inverse functors and natural unit/counit"
-   }
-  },
-  {
-   "text": "Define $j_E(K)=(E,K)$ and $j_E(u)=[E,u]$. Step 4 proves that these preserve identities, composition and addition. With identity associators normalized, the associator-shift compatibility of [prop-weil-pbc-scalar-extension] at $E=M=N$ becomes $\\sigma_{E/E,K}=\\sigma_{E/E,K}^2$. Its invertibility gives $\\sigma_{E/E,K}=1$. The formula of step 8 at $M=E$ therefore yields $j_E(u)[1]=[E,u[1]]$ and the objects agree. This is the specified inclusion-shift comparison (or the same comparison with inverse-reindexing identifications when shifts are presented up to natural isomorphism).",
-   "uses": [
-    "def-weil-pbc-finite-stage-pair-category",
-    "prop-weil-pbc-scalar-extension"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-common-stage-calculus.proof.md",
-    "place": "Proof, finite-stage inclusions and their specified shift comparison"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-finite-stage-pair-category",
-  "prop-weil-pbc-scalar-extension",
+  "lem-weil-pbc-exact-completion-data",
+  "lem-weil-pbc-uniform-reduction-criterion",
+  "lem-weil-constructible-coefficient-homology-triangulated",
   "def-weil-triangulated-category",
-  "def-weil-additive-category",
-  "def-weil-abstract-derived-category"
+  "def-weil-pbc-uniform-reduction-profile",
+  "lem-weil-pbc-uniform-complete-triangulated",
+  "def-weil-pbc-finite-stage-pair-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-linear-scalar-localization",
+  "def-weil-pbc-rational-category",
+  "prop-weil-pbc-scalar-extension",
+  "def-weil-additive-category"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "B8",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-common-stage-calculus.proof.md",
-  "place": "Proof, expanded coherent common-stage calculations"
+  "place": "Actual normalized shift constructors, mate coherence, and common-stage product transport; proof completed 2026-10-21; repaired returned 3bc2f1e57 by reusing four existing private helpers through import all, without changing their owning modules"
  },
  "mathlib_searches": [
   {
@@ -404,44 +358,13 @@
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-21",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G6",
+  "group": "B8",
   "result": "pass",
-  "landing": "20261019T005300-L-2747823",
+  "landing": "20261021T110942-L-3837323",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.Scheme.commonStageCalculus",
-   "AlgebraicGeometry.Scheme.pbcIntegralShiftLinear",
-   "AlgebraicGeometry.Scheme.pbcIntegralStableShift",
-   "AlgebraicGeometry.Scheme.pbcRationalShiftAdditive",
-   "AlgebraicGeometry.Scheme.pbcRationalShift_exists",
-   "AlgebraicGeometry.Scheme.pbcRationalizationShift_exists",
-   "AlgebraicGeometry.Scheme.pbcScalarAssociatorCommShift",
-   "AlgebraicGeometry.Scheme.pbcScalarShift_exists",
-   "AlgebraicGeometry.Scheme.pbcStageFiniteBiproducts",
-   "CategoryTheory.StageSystem.pbcFiniteEqualities_detection",
-   "CategoryTheory.StageSystem.pbcFiniteGraph_representation",
-   "CategoryTheory.StageSystem.pbcPairFiniteBiproducts",
-   "CategoryTheory.StageSystem.pbcPairShiftAdd_naturality",
-   "CategoryTheory.StageSystem.pbcPairShiftZero_naturality",
-   "CategoryTheory.StageSystem.pbcPairShift_additive",
-   "CategoryTheory.StageSystem.pbcPairShift_laws",
-   "CategoryTheory.StageSystem.pbcPairZero_isZero",
-   "CategoryTheory.StageSystem.pbcStageInclusionShift_laws",
-   "CategoryTheory.StageSystem.pbcStageShift_coherence"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.Scheme.pbcIntegralShiftLinear",
-   "AlgebraicGeometry.Scheme.pbcIntegralStableShift",
-   "AlgebraicGeometry.Scheme.pbcRationalShift_exists",
-   "AlgebraicGeometry.Scheme.pbcRationalizationShift_exists",
-   "AlgebraicGeometry.Scheme.pbcScalarAssociatorCommShift",
-   "AlgebraicGeometry.Scheme.pbcScalarShift_exists",
-   "AlgebraicGeometry.Scheme.pbcStageFiniteBiproducts",
-   "CategoryTheory.StageSystem.pbcPairFiniteBiproducts"
-  ]
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
