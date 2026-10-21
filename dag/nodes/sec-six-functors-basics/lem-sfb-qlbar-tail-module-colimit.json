@@ -19,9 +19,71 @@
   "def-weil-sheaf-of-modules-category",
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $I$ for all finite intermediate fields of $\\Omega/\\mathbf Q_\\ell$. By [det-def-sfb-qlbar-condensed-subextensions], every finite compositum is finite. The field $E$ belongs to $I_E$, and for $F,G\\in I_E$ the compositum $FG$ belongs to $I_E$ and contains both. Thus $I_E$ is nonempty and directed. For every $H\\in I$, the finite compositum $EH$ is an object of $I_E$ containing $H$. All these fields form a set in the coefficient universe fixed in the statement, so both indexing posets are small.",
+   "uses": [
+    "det-def-sfb-qlbar-condensed-subextensions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sfb-finite-extension-compatibility/lem-sfb-qlbar-flat.proof.md",
+    "place": "First sentence: the filtered poset of finite extensions containing E."
+   }
+  },
+  {
+   "text": "Put $a_{H,K}:H_X\\to K_X$ for an inclusion $H\\subseteq K$. These maps are the functorial images of subfield inclusions by [def-sfb-subfield-coefficient-map] and [sk-def-sfb-pulled-back-coefficients], so $a_{H,H}=1$ and $a_{K,L}a_{H,K}=a_{H,L}$. By [lem-sfb-subfield-coefficient-map-comp], $q_Ka_{H,K}=q_H$. In particular for $F\\in I_E$, put $s_F=a_{E,F}$; then $a_{F,G}s_F=s_G$ and $q_Fs_F=q_E$. These are equalities of unital commutative ring-sheaf maps: [def-weil-pbc-internal-abelian-sheaf-module-equivalence] reconstructs the section rings and preserves the underlying sheaves identically. For a local scalar $r$ and section $x$, multiplicativity gives $a_{F,G}(s_F(r)x)=s_G(r)a_{F,G}(x)$ and $q_F(s_F(r)x)=q_E(r)q_F(x)$. Hence the transitions and the specified legs are $R$-linear for exactly the actions in the statement.",
+   "uses": [
+    "def-sfb-subfield-coefficient-map",
+    "sk-def-sfb-pulled-back-coefficients",
+    "lem-sfb-subfield-coefficient-map-comp",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sfb-finite-extension-compatibility/lem-sfb-qlbar-flat.proof.md",
+    "place": "First sentence: compatibility with the E_X-module structures."
+   }
+  },
+  {
+   "text": "The last isomorphism in [sk-prop-sfb-qlbar-colimit-x] identifies $B$, with its inclusion maps $q_H$ for $H\\in I$, as a colimit in commutative ring sheaves. We verify the same universal property after restriction to $I_E$, rather than choosing a new isomorphism. Let $t_F:F_X\\to A$ be a ring-sheaf cocone on $I_E$. For $H\\in I$ define $\\widetilde t_H=t_{EH}a_{H,EH}$. If $H\\subseteq K$, then $EH\\subseteq EK$; the cocone equation and composition from step 2 give $\\widetilde t_Ka_{H,K}=t_{EK}a_{H,EK}=t_{EH}a_{H,EH}=\\widetilde t_H$. Thus this is a cocone on $I$. The full colimit gives a unique ring-sheaf map $t:B\\to A$ with $tq_H=\\widetilde t_H$. For $F\\in I_E$, $EF=F$ and hence $tq_F=t_F$. Conversely any map $u:B\\to A$ with $uq_F=t_F$ on $I_E$ satisfies $uq_H=uq_{EH}a_{H,EH}=t_{EH}a_{H,EH}$ for every $H$, and full-colimit uniqueness gives $u=t$. This proves the tail colimit with the original $q_F$, by the definition in [def-weil-pbc-category-colimit].",
+   "uses": [
+    "sk-prop-sfb-qlbar-colimit-x",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sfb-finite-extension-compatibility/lem-sfb-qlbar-flat.proof.md",
+    "place": "First sentence: restricting the coefficient colimit to F containing E, with its given cocone."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-directed-ring-sheaf-module-colimit] on the chosen small pro-etale site, with $R=E_X$, $I=I_E$, $A_F=F_X$, $A=B$, $s_F=a_{E,F}$ and $s=q_E$. Step 1 checks the small nonempty directed index; step 2 checks compatibility of all scalar maps and legs as unital ring-sheaf maps; step 3 supplies the required commutative-ring-sheaf colimit. The lemma therefore makes $B$ a colimit in sheaves of $R$-modules with the very same maps $q_F$. Its explicit uniqueness assertion says that every compatible family of $R$-linear maps $F_X\\to M$ factors uniquely through these $q_F$. Consequently the comparison from any chosen module colimit to $B$ is the map characterized by these legs, as required.",
+   "uses": [
+    "lem-sfb-directed-ring-sheaf-module-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sfb-finite-extension-compatibility/lem-sfb-qlbar-flat.proof.md",
+    "place": "First sentence: passage from the ring-sheaf cocone to the E_X-module colimit."
+   }
+  }
+ ],
+ "proof_deps": [
+  "det-def-sfb-qlbar-condensed-subextensions",
+  "def-sfb-subfield-coefficient-map",
+  "sk-def-sfb-pulled-back-coefficients",
+  "lem-sfb-subfield-coefficient-map-comp",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "sk-prop-sfb-qlbar-colimit-x",
+  "def-weil-pbc-category-colimit",
+  "lem-sfb-directed-ring-sheaf-module-colimit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sfb-finite-extension-compatibility/lem-sfb-qlbar-flat.proof.md",
+  "place": "First sentence; explicit compositum reindexing of sk-prop-sfb-qlbar-colimit-x followed by the existing generic directed ring-sheaf/module comparison (Stacks Tag 03DB, sites-modules.tex, lemma-limits-colimits)."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -57,10 +119,45 @@
    "results": "8 hits: SheafOfModules.isColimitFreeCofan, PresheafOfModules.instHasColimitModuleCatCarrierObjOppositeRingCatCompEvaluationRestrictScalarsHomMap, PresheafOfModules.colimitCocone_pt, PresheafOfModules.isColimitColimitCocone, PresheafOfModules.colimitPresheafOfModules_obj, PresheafOfModules.colimitPresheafOfModules, PresheafOfModules.colimitCocone, PresheafOfModules.colimitPresheafOfModules_map",
    "date": "2026-10-21",
    "verdict": "no match: the p-adic field hits have no coefficient sheaf cocone; the module-sheaf hits give colimit existence or a free presentation, not the specified cofinal coefficient cocone as an E_X-module colimit"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The algebraic closure coefficient sheaf is the colimit of finite subextension sheaves containing a fixed finite extension in its module sheaf category",
+   "results": "8 hits: ModuleCat.tilde, ModuleCat.tildeInModuleCat, SheafOfModules.Presentation.isColimit, SheafOfModules.isColimitFreeCofan, CategoryTheory.PreGaloisCategory.PointedGaloisObject.isColimit, SheafOfModules.freeCofan, AlgebraicGeometry.Scheme.Modules.instHasColimits, PresheafOfModules.colimitCocone_pt",
+   "date": "2026-10-21",
+   "verdict": "no match: these hits give abstract module-sheaf colimits, free presentations, algebraic-closure fields or field embeddings, not the specified coefficient cocone on fields containing E"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, \"colimit\"",
+   "results": "7 hits: SheafOfModules.instHasColimitsOfSizeOfPresheafOfModulesObjFunctorOppositeRingCatIsSheaf, SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesObjFunctorOppositeRingCatIsSheaf, SheafOfModules.instPreservesColimitsOfSizeFreeFunctor, SheafOfModules.isColimitFreeCofan, SheafOfModules.instPreservesColimitsOfSize, SheafOfModules.instPreservesColimitsOfSize_1, SheafOfModules.Presentation.isColimit",
+   "date": "2026-10-21",
+   "verdict": "no match: these hits give abstract module-sheaf colimits, free presentations, algebraic-closure fields or field embeddings, not the specified coefficient cocone on fields containing E"
+  },
+  {
+   "tool": "grep",
+   "query": "padicAlgCl|padicSubfield|isColimit.*[Tt]ail",
+   "results": "5 hits: Mathlib/NumberTheory/Padics/Complex.lean, Mathlib/NumberTheory/Padics/Complex.lean, Mathlib/NumberTheory/Padics/Complex.lean, Mathlib/NumberTheory/Padics/Complex.lean, Mathlib/NumberTheory/Padics/Complex.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: these hits give abstract module-sheaf colimits, free presentations, algebraic-closure fields or field embeddings, not the specified coefficient cocone on fields containing E"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite subextensions of the p-adic algebraic closure containing E form a colimit of sheaves of E modules",
+   "results": "8 hits: SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat, PadicAlgCl, AlgebraicGeometry.Scheme.Modules.instHasColimits, SheafOfModules.instHasColimitsOfSizeOfPresheafOfModulesValRingCat, SheafOfModules.Presentation.isColimit, finiteExts, PresheafOfModules.Finite.hasFiniteColimits, SheafOfModules.isColimitFreeCofan",
+   "date": "2026-10-21",
+   "verdict": "no match: these hits give abstract module-sheaf colimits, free presentations, algebraic-closure fields or field embeddings, not the specified coefficient cocone on fields containing E"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restricting the finite intermediate fields of the p-adic algebraic closure to fields above E preserves the canonical colimit in E module sheaves",
+   "results": "8 hits: PadicAlgCl, Field.Emb.Cardinal.instInverseSystemWithTopToTypeOrdRankAlgHomSubtypeMemIntermediateFieldCoeOrderEmbeddingFiltrationAlgebraicClosureEmbFunctor, Field.Emb.Cardinal.embFunctor, Field.Emb.Cardinal.filtration_succ, PadicAlgCl.isAlgebraic, PadicComplex.instIsScalarTowerPadicPadicAlgCl, Field.Emb.Cardinal.directed_filtration, BDeRhamPlus",
+   "date": "2026-10-21",
+   "verdict": "no match: these hits give abstract module-sheaf colimits, free presentations, algebraic-closure fields or field embeddings, not the specified coefficient cocone on fields containing E"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-qlbar-flat",
@@ -77,5 +174,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-qlbar-tail-module-colimit",
+  "worker": "stage1",
+  "summary": "No statement change and no new nodes. Checked the live Lean for the exact module cocone; its all-subfield abelian colimit does not state this item. Gave the compositum-based cocone extension argument and cited the existing same-unit generic directed ring-sheaf/module colimit lemma. Verified sizes, scalar compatibility and the specified legs.",
+  "blueprint": "Realizes the first sentence of lem-sfb-qlbar-flat.proof.md: colim over F containing E, compatibly with E_X-module structures.",
+  "tool_uses": [
+   {
+    "node": "det-def-sfb-qlbar-condensed-subextensions",
+    "why": "Generic finite-compositum closure supplies common upper bounds; it does not replace the coefficient-change route."
+   },
+   {
+    "node": "sk-prop-sfb-qlbar-colimit-x",
+    "why": "The coefficient-ring colimit expressly used in the blueprint first sentence; only its last colimit clause is used, with the unchanged coefficient categories."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-def-sfb-qlbar-condensed-subextensions",
+  "sk-prop-sfb-qlbar-colimit-x"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q15-45c58536b",
+  "group": "Q15",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q15-45c58536b (reviewer sub-agent of L); spot-checked: I read the delivery in full and made no fixes. It is one commit that changes only the item and the report, with 0 new nodes. Statement, stmt_deps and blueprint are byte-identical to the Q28-fixed version, and the 5 earlier mathlib_searches are kept with 5 new ones appended. There is no cycle: none of the 8 proof_deps reaches the item. The item is not a re-split answer, and it cannot be on the 10-19 dropped list because it was created 10-21. Source: main-20261015 lem-sfb-qlbar-flat.proof.md, first sentence. The item states this colimit in Mod(E_X) with the legs q_F, which is what the parent lem-sfb-qlbar-flat step 2 needs. Step 1: I_E is nonempty and directed, and every H lies in EH, by clause 1 of det-def-sfb-qlbar-condensed-subextensions. Step 2: the maps a_{H,K} are functorial by def-sfb-subfield-coefficient-map and the functor in sk-def-sfb-pulled-back-coefficients; q_K a_{H,K}=q_H is exactly lem-sfb-subfield-coefficient-map-comp; R-linearity is elementary. Step 3: the extension t~_H=t_{EH}a_{H,EH} is a cocone because EH is contained in EK. Existence holds because EF=F, and uniqueness follows from the full colimit; I checked all three. It reads the last clause of sk-prop-sfb-qlbar-colimit-x as a ring colimit with legs q_E, which matches its 'canonical' wording and live isColimitPadicAlgClRingObjCocone. Step 4: lem-sfb-directed-ring-sheaf-module-colimit (same unit, reviewed PASS by Q149) gets every hypothesis it needs: a small site, I_E small, nonempty and directed, the compatible scalar maps s_F and q_E, and the ring colimit. Its conclusion with the same q_F is the item. Edge cases checked: E=Q_l, F=E, H incomparable with E, l=2, X empty, and I_E never empty. I accept both declared tool_uses (sk-prop-sfb-qlbar-colimit-x, which the blueprint sentence itself cites, and det-def-sfb-qlbar-condensed-subextensions, which is generic). The live Compatibility.lean:128 colimit is over all subfields in abelian sheaves, so it cannot be attached. Stacks 03DB is sites-modules.tex lemma-limits-colimits, l.1358. There is no SGA citation."
  }
 }
