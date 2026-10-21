@@ -139,6 +139,15 @@ def reconstruct (L : ∀ s, T s ⥤ D s) (η : ∀ s, 𝟭 (D s) ⟶ R s ⋙ L s
     A ⟶ (R s ⋙ B) ⋙ L t :=
   whiskerLeft A (η t) ≫ whiskerRight q (L t)
 
+private def wordComparison
+    (qEdge : ∀ {s t : S} (f : s ⟶ t), F f ⋙ R t ⟶ R s ⋙ G f) {s : S} :
+    ∀ {t : S} (W : Quiver.Path s t),
+    wordFunctor F W ⋙ R t ⟶ R s ⋙ wordFunctor G W
+  | _, .nil => 𝟙 (R s)
+  | _, .cons W f =>
+      whiskerLeft (wordFunctor F W) (qEdge f) ≫
+        whiskerRight (wordComparison qEdge W) (G f)
+
 /-- Supplied generator comparisons extend uniquely to words, and reconstruction respects
 concatenation, all binary parentheses, and arbitrary empty factors.
 Source: fix-lem-exchanges Proof Step 5, categorical prerequisite
@@ -198,6 +207,107 @@ theorem word_reconstruction_coherence
           (A.flattenIso F).hom ≫
             reconstruct R L η (A.functor F) (A.functor G)
               (Expression.comparison R F G qEdge A))) := by
-  sorry
+  let q {s t : S} (W : Quiver.Path s t) := wordComparison R F G qEdge W
+  have hnil (s : S) : q (.nil : Quiver.Path s s) = 𝟙 (R s) := rfl
+  have hcons {s t r : S} (W : Quiver.Path s t) (f : t ⟶ r) :
+      q (W.cons f) =
+        whiskerLeft (wordFunctor F W) (qEdge f) ≫ whiskerRight (q W) (G f) := rfl
+  have hedge {s t : S} (f : s ⟶ t) : q (Quiver.Hom.toPath f) = qEdge f := by
+    ext x
+    simp [Quiver.Hom.toPath, hcons, hnil, wordFunctor]
+  have hword : IsWordComparison R F G qEdge q := ⟨hnil, hedge, hcons⟩
+  -- Keep the prescribed concatenation isomorphisms explicit in the induction.
+  have hcomp {s t r : S} (W : Quiver.Path s t) (V : Quiver.Path t r) :
+      q (W.comp V) ≫ whiskerLeft (R s) (wordCompIso G W V).hom =
+        whiskerRight (wordCompIso F W V).hom (R r) ≫
+          whiskerLeft (wordFunctor F W) (q V) ≫ whiskerRight (q W) (wordFunctor G V) := by
+    induction V with
+    | nil =>
+        ext x
+        simp [wordCompIso, hnil, wordFunctor]
+    | @cons r r' V f ih =>
+        ext x
+        have hi := congrArg (fun α => α.app x) ih
+        simp only [NatTrans.comp_app, whiskerLeft_app, whiskerRight_app] at hi ⊢
+        simp only [Functor.comp_obj, Quiver.Path.comp_cons, wordFunctor, hcons,
+          NatTrans.comp_app, whiskerLeft_app, whiskerRight_app, wordCompIso,
+          Iso.trans_hom, isoWhiskerRight_hom, associator_hom_app, Category.comp_id,
+          Category.assoc, Functor.comp_map] at hi ⊢
+        have hn := (qEdge f).naturality ((wordCompIso F W V).hom.app x)
+        simp only [Functor.comp_map] at hn
+        rw [← Functor.map_comp, hi]
+        simp only [Functor.map_comp]
+        rw [← Category.assoc, ← hn, Category.assoc]
+        rfl
+  refine ⟨q, hword, ?_, ?_, hcomp, ?_, ?_⟩
+  · intro q' hq'
+    funext s t W
+    induction W with
+    | nil => exact (hq'.1 s).trans (hnil s).symm
+    | cons W f ih =>
+        exact (hq'.2.2 W f).trans
+          ((congrArg (fun a => whiskerLeft (wordFunctor F W) (qEdge f) ≫
+            whiskerRight a (G f)) ih).trans (hcons W f).symm)
+  · intro s t W x hx
+    have hi : E t ((wordFunctor F W).obj x) ∧ IsIso ((q W).app x) := by
+      induction W with
+      | nil =>
+          simpa [wordFunctor, hnil] using
+            And.intro hx (inferInstance : IsIso (𝟙 ((R s).obj x)))
+      | cons W f ih =>
+          have := hq f ((wordFunctor F W).obj x) ih.1
+          have := ih.2
+          refine ⟨hF f _ ih.1, ?_⟩
+          simpa only [hcons, NatTrans.comp_app, whiskerLeft_app, whiskerRight_app] using
+            (inferInstance : IsIso ((qEdge f).app ((wordFunctor F W).obj x) ≫
+              (G f).map ((q W).app x)))
+    refine ⟨hi.1, hi.2, ?_⟩
+    have := hη t _ hi.1
+    have := hi.2
+    dsimp [reconstruct]
+    infer_instance
+  · intro s
+    ext x
+    simp [reconstruct, hnil]
+  · intro s t A
+    have hflat : q A.flatten ≫ whiskerLeft (R s) (A.flattenIso G).hom =
+        whiskerRight (A.flattenIso F).hom (R t) ≫ Expression.comparison R F G qEdge A := by
+      induction A with
+      | empty s =>
+          ext x
+          simp [Expression.flatten, Expression.flattenIso, Expression.comparison, hnil]
+      | edge f =>
+          ext x
+          simp [Expression.flatten, Expression.flattenIso, Expression.comparison,
+            Quiver.Hom.toPath, hcons, hnil, wordFunctor]
+      | @comp s t r A B ihA ihB =>
+          ext x
+          have hc := congrArg (fun α => α.app x) (hcomp A.flatten B.flatten)
+          have ha := congrArg (fun α => α.app x) ihA
+          have hb := congrArg (fun α => α.app ((A.functor F).obj x)) ihB
+          simp only [NatTrans.comp_app, whiskerLeft_app, whiskerRight_app] at hc ha hb
+          simp only [Expression.flatten, Expression.flattenIso, Expression.comparison,
+            Iso.trans_hom, isoWhiskerRight_hom, isoWhiskerLeft_hom,
+            NatTrans.comp_app, whiskerLeft_app, whiskerRight_app, Functor.map_comp,
+            Functor.comp_obj, Category.assoc]
+          rw [reassoc_of% hc, ← Functor.map_comp_assoc, ha, Functor.map_comp_assoc]
+          -- Move the two flattening components through the comparison square.
+          have hn := (q B.flatten).naturality ((A.flattenIso F).hom.app x)
+          simp only [Functor.comp_map] at hn
+          rw [← reassoc_of% hn]
+          have hd := (B.flattenIso G).hom.naturality
+            ((Expression.comparison R F G qEdge A).app x)
+          simp only [Functor.comp_obj] at hd
+          rw [hd, reassoc_of% hb]
+    refine ⟨hflat, ?_⟩
+    ext x
+    -- Reconstruction follows by applying L and using naturality of the unit.
+    have hi := congrArg (fun α => (L t).map (α.app x)) hflat
+    simp only [NatTrans.comp_app, whiskerLeft_app, whiskerRight_app, Functor.map_comp] at hi
+    dsimp [reconstruct]
+    rw [Category.assoc, hi, ← Category.assoc]
+    have hn := (η t).naturality ((A.flattenIso F).hom.app x)
+    simp only [Functor.id_map, Functor.comp_map] at hn
+    rw [← hn, Category.assoc]
 
 end CategoryTheory.WordReconstruction

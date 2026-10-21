@@ -69,7 +69,7 @@
    }
   },
   {
-   "text": "Fix $W:s\\to t$ and induct on the length of $V:t\\to v$ to prove the concatenation equation at every $x\\in\\mathcal D_s$. When $V=\\varnothing_t$, its right side is $q_W(x)\\circ1_{R_tF_Wx}=q_W(x)$. For the induction step append $e:v\\to w$. Substitution of the induction hypothesis gives\n$$\\begin{aligned}\nq_{(eV)W}(x)\n&=G_e(q_{VW}(x))\\circ q_e(F_VF_Wx)\\\\\n&=G_eG_V(q_W(x))\\circ G_e(q_V(F_Wx))\\circ q_e(F_VF_Wx)\\\\\n&=G_{eV}(q_W(x))\\circ q_{eV}(F_Wx).\n\\end{aligned}$$\nOnly preservation of composition and associativity are used. Step 1 inserts the canonical functor identifications, giving $q_{VW}=(G_Vq_W)\\circ(q_VF_W)$ as a natural-transformation equality. This includes empty $W$, and is proved before using arbitrary binary expressions.",
+   "text": "Fix $W:s\\to t$ and induct on the length of $V:t\\to v$ to prove the concatenation equation at every $x\\in\\mathcal D_s$. When $V=\\varnothing_t$, its right side is $q_W(x)\\circ1_{R_tF_Wx}=q_W(x)$. For the induction step append $e:v\\to w$. Substitution of the induction hypothesis gives\n$$\\begin{aligned}\nq_{(eV)W}(x)\n&=G_e(q_{VW}(x))\\circ q_e(F_VF_Wx)\\\\\n&=G_eG_V(q_W(x))\\circ G_e(q_V(F_Wx))\\circ q_e(F_VF_Wx)\\\\\n&=G_{eV}(q_W(x))\\circ q_{eV}(F_Wx).\n\\end{aligned}$$\nOnly preservation of composition and associativity are used. Step 1 inserts the canonical functor identifications, giving $q_{VW}=(G_Vq_W)\\circ(q_VF_W)$ as a natural-transformation equality. This includes empty $W$, and is proved before using arbitrary binary expressions. In Lean we keep wordCompIso explicit. After evaluating at x, apply G_e to the inductive equation. Naturality of q_e at the component of wordCompIso for F moves this component across q_e; functoriality and associativity then give the required equation with the explicitly specified wordCompIso for G.",
    "uses": [
     "def-nagata-category"
    ],
@@ -80,7 +80,7 @@
    }
   },
   {
-   "text": "Induct on the binary expression $E$ to prove the first flattening equation. At an edge leaf or an empty-word leaf, it is the defining map and identity comparisons. Suppose $E=(E_2E_1)$, with flattened words $U:s\\to t$ and $V:t\\to v$. Under the identity-component flattenings of Step 1, the two induction hypotheses give $q_{E_1}(x)=q_U(x)$ and $q_{E_2}(y)=q_V(y)$ for every $x,y$ in their source categories. The functors $F_{E_1}$ and $F_U$ have the same object values, and $G_{E_2}$ and $G_V$ have the same action on morphisms. Therefore\n$$q_E(x)=G_{E_2}(q_{E_1}(x))\\circ q_{E_2}(F_{E_1}x)\n=G_V(q_U(x))\\circ q_V(F_Ux)=q_{VU}(x),$$\nwhere the last equality is Step 6. Restoring the flattening components yields $(d_ER_s)\\circ q_W=q_E\\circ R_t(c_E)$, for $W=VU$. Both child expressions are strictly smaller, even when one has no edges; hence identity insertions of arbitrary finite depth are covered. Equality of components is equality of the families defining natural transformations.",
+   "text": "Induct on the binary expression E. The empty case reduces to identities and the edge case to the singleton word equation. For E = comp A B, evaluate at x and expand the prescribed flattenIso. First use the concatenation equation for A.flatten and B.flatten. Combine the two consecutive images under G_{B.flatten} and apply the induction hypothesis for A. Naturality of q_{B.flatten} at the component of A.flattenIso F moves R(c_A) to the left. Naturality of (B.flattenIso G).hom at q_A(x) moves the remaining G_{B.flatten}(q_A(x)) through d_B. Now the induction hypothesis for B, evaluated at F_A(x), replaces q_{B.flatten}(F_A(x)) followed by d_B. Functoriality and associativity identify the result with the component of R(c_E) followed by q_E. Extensionality gives the natural-transformation equation. Both induction hypotheses are on strictly smaller expressions, including arbitrarily nested empty expressions.",
    "uses": [
     "def-nagata-category"
    ],
@@ -91,10 +91,9 @@
    }
   },
   {
-   "text": "Apply [lem-amb-natural-transformation-whisker-exchange] with its $F=F_W$, $G=F_E$, $H=1_{\\mathcal D_t}$, $K=L_tR_t$, $\\eta=c_E$ and $\\theta=\\eta_t$. It gives\n$$L_tR_t(c_E)\\circ(\\eta_tF_W)=(\\eta_tF_E)\\circ c_E.$$\nThe hypotheses are satisfied on the whole category: $c_E$ is natural by Step 1 and $\\eta_t$ is given natural; neither has to be inverted here. Apply $L_t$ to the first flattening equation of Step 7 and then compose with $\\eta_tF_W$. Functoriality and the displayed exchange law give\n$$\\begin{aligned}\nL_t(d_ER_s)\\circ a_W\n&=L_t(q_E)\\circ L_tR_t(c_E)\\circ(\\eta_tF_W)\\\\\n&=L_t(q_E)\\circ(\\eta_tF_E)\\circ c_E=a_E\\circ c_E.\n\\end{aligned}$$\nThus both equalities hold on all of $\\mathcal D_s$, before any restriction to $\\mathcal E_s$. They prove the claimed independence without assuming faithfulness of either functor.",
+   "text": "Apply L_t.map componentwise to the first flattening equation. Functoriality gives L_t(q_W(x)) followed by L_t(d_E(R_s(x))) equal to L_t(R_t(c_E(x))) followed by L_t(q_E(x)). Precompose with eta_t(F_W(x)). Naturality of eta_t at c_E(x) identifies eta_t(F_W(x)) followed by L_t(R_t(c_E(x))) with c_E(x) followed by eta_t(F_E(x)). Associativity now gives the asserted reconstruction flattening equation. Extensionality proves the equality on the whole source category. This uses NatTrans.naturality directly, without the separately named whiskering-exchange lemma; no faithfulness or invertibility is needed.",
    "uses": [
-    "def-nagata-category",
-    "lem-amb-natural-transformation-whisker-exchange"
+    "def-nagata-category"
    ],
    "elementary": true,
    "source": {
@@ -104,13 +103,12 @@
   }
  ],
  "proof_deps": [
-  "def-nagata-category",
-  "lem-amb-natural-transformation-whisker-exchange"
+  "def-nagata-category"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/fix-lem-exchanges.proof.md",
-  "place": "Step 5, compatibility with composition; agent-written componentwise categorical argument for the supplied generator maps."
+  "place": "Step 5, compatibility with composition; agent-written componentwise categorical argument for the supplied generator maps. Lean realization by S7: explicit word and expression induction; reconstruction uses the naturality square of eta directly."
  },
  "mathlib_searches": [
   {
@@ -366,5 +364,15 @@
   "group": "Q35",
   "result": "pass",
   "note": "Read the node, def-nagata-category, the whisker-exchange proof leaf, the module and report.md. The node changes only by its new lean record, and the lean.statement is verbatim in the file. Clause by clause the Lean matches the node in diagrammatic order: q_W existence and uniqueness via IsWordComparison (empty, singleton and recursion clauses, which are consistent), E-preservation and IsIso of q_W and a_W on E, concatenation with wordCompIso, a_empty = eta, and both flattening equations on all of D_s via Expression.comparison and flattenIso. The canonical isos are built only from Mathlib associators and unitors. Edge cases checked: empty S, no edges, empty E, empty words, singleton, three-edge bracketings. H4: the scheme-specific SfCbc words and ExactDerivedPasting (exact or derived functor words) are different notions, and Mathlib Paths.liftNatTrans does not match. Helpers carry explicit data; only sorry; docstrings and the 8 proof steps are present; universes are bound; no stronger assumptions. No recompile, since no file was changed. No findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S7",
+  "result": "pass",
+  "landing": "20261021T111618-L-410947",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
