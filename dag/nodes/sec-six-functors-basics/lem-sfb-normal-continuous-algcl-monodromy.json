@@ -25,9 +25,141 @@
   "def-weil-l-adic-numbers",
   "def-weil-algebraic-closure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First work at a geometric generic point $\\bar\\eta$. The Noetherian hypothesis gives the descending-chain condition on closed subsets by [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal]. Apply [lem-trf-normal-topologically-noetherian-components]: the normal scheme has finitely many disjoint clopen integral components. Since $X$ is nonempty and connected it has exactly one, so is integral. Write $k=\\mathcal O_{X,\\eta}$, choose $k^s$, and put $G_k=\\operatorname{Aut}_k(k^s)$. For $A=K$ or a complete normed field containing it, use [lem-weil-pbc-condensed-field-continuous-realization] to identify the specified pulled-back ring with $U\\mapsto C(|U|,A)$. This identification uses all continuous maps. A nonarchimedean field is totally disconnected: two distinct points are separated by complementary clopen balls of radius less than their distance.",
+   "uses": [
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "lem-trf-normal-topologically-noetherian-components",
+    "lem-weil-pbc-condensed-field-continuous-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Agent norm-topology extension of the framework of Lemmas 7.4.7 and 7.4.10, pp. 70–71"
+   }
+  },
+  {
+   "text": "Here is the generic restriction argument, including its use on morphisms. Choose an affine pro-etale covering trivializing two lisse modules $L,M$. On each covering object $U$ a map is a rectangular matrix over $R_A(U)$: its columns are the images of the standard basis maps, by the regular module universal property. The ring bijection of [lem-sfb-normal-generic-continuous-sections] extends each matrix of a generic morphism uniquely from $U_\\eta$ to $U$. On affine refinements of each overlap, injectivity of that same ring map makes the extended matrices agree with the transition matrices; the generic compatibility equation is therefore also the global one. Use morphism gluing in [lem-pe-set-sheaf-cover-descent] on underlying sheaves; addition and scalar linearity hold locally and hence globally. Thus restriction to $\\eta$ is fully faithful on lisse modules. If a generic map is invertible, extend its inverse too; uniqueness makes the two composites identities. Also, every nonempty affine trivializing object has nonempty generic fibre (otherwise the ring bijection would identify a nonzero constant $1$ with $0$). By [lem-sfb-field-separable-cech-coordinates], evaluation at any geometric generic point of this fibre compares its free rank with the dimension of $L$ over $k^s$. Consequently the rank is one fixed integer $n$ on the whole trivializing covering; $n=0$ is allowed.",
+   "uses": [
+    "lem-sfb-normal-generic-continuous-sections",
+    "lem-pe-set-sheaf-cover-descent",
+    "lem-sfb-field-separable-cech-coordinates",
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Agent norm-topology extension of the framework of Lemmas 7.4.7 and 7.4.10, pp. 70–71"
+   }
+  },
+  {
+   "text": "Pull $L|_\\eta$ to $\\operatorname{Spec}k^s$. By [lem-sfb-field-separable-cech-coordinates] choose a basis of its free rank $n$ module. Its descent isomorphism is a matrix $c\\in\\operatorname{GL}_n(C(G_k,K))$. Evaluate on $g\\in G_k$: $\\sigma_L(g)=c(g)$ has continuous entries and the Cech identity gives $\\sigma_L(gh)=\\sigma_L(g)\\sigma_L(h)$ and $\\sigma_L(1)=1$. A morphism between two such objects is a constant matrix $B$ over $K$ on $\\operatorname{Spec}k^s$, with descent equation $B\\sigma_L(g)=\\sigma_M(g)B$. Conversely these equations suffice for gluing the map, by [lem-pe-set-sheaf-cover-descent]. Changing the chosen basis conjugates the matrices, so one obtains a functor to representations, independently of a coordinate presentation up to the basis-change isomorphism. Coefficient extension changes every displayed matrix by the coefficient homomorphism, by the same Cech-coordinate node.",
+   "uses": [
+    "lem-sfb-field-separable-cech-coordinates",
+    "lem-pe-set-sheaf-cover-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Agent norm-topology extension of the framework of Lemmas 7.4.7 and 7.4.10, pp. 70–71"
+   }
+  },
+  {
+   "text": "Set $F=\\widehat K$ and let $\\iota:K\\hookrightarrow F$ be the isometric field map of [lem-sfb-normed-field-completion]. The nonarchimedean inequality holds on $F$ too, by taking limits in that inequality on the dense subfield $K$. For each $n$, $\\operatorname{GL}_n(F)$ satisfies the complete-group hypotheses of [lem-sfb-complete-group-torsor-monodromy]. Indeed the subgroups $1+\\{B:\\max_{ij}|B_{ij}|<r\\}$ for $0<r<1$ form a neighborhood basis of $1$; multiplication preserves this bound and the geometric series converges in the complete matrix ring to the inverse. A two-sided Cauchy net of invertible matrices has both its matrices and its inverses Cauchy entrywise: fix a sufficiently late matrix to bound the norms of the tail and its inverses, then multiply the small relative differences by these bounds. Their limits $a,b$ satisfy $ab=ba=1$, proving completeness for the two-sided uniformity. This also covers $n=0$, when the group is trivial.",
+   "uses": [
+    "lem-sfb-normed-field-completion",
+    "lem-sfb-complete-group-torsor-monodromy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Agent norm-topology extension of the framework of Lemmas 7.4.7 and 7.4.10, pp. 70–71"
+   }
+  },
+  {
+   "text": "Form $L_F=R_{F,X}\\otimes_{R_{K,X}}L$ along postcomposition by $\\iota$. Locally $R_F\\otimes_{R_K}R_K^n\\cong R_F^n$ by $a\\otimes(b_i)\\mapsto(a\\iota(b_i))$ with inverse $(a_i)\\mapsto\\sum_i a_i\\otimes e_i$; these are identities from the tensor relations. Hence $L_F$ is locally free of rank $n$. Its frame sheaf $P(U)=\\operatorname{Isom}_{R_{F,U}}(R_{F,U}^n,L_F|_U)$ is an $F_{\\operatorname{GL}_n(F)}$-torsor: in a local basis its sections and action are invertible continuous matrices and matrix multiplication. Apply [lem-sfb-complete-group-torsor-monodromy] at $\\bar\\eta$, with the frame $p$ induced by the generic $K$-basis over $k^s$, to obtain $\\tau_L:\\pi_1(X,\\bar\\eta)\\to\\operatorname{GL}_n(F)$. By the pointed pullback clause of [lem-sfb-complete-group-torsor-monodromy], the homomorphism of the pullback of $(P,p)$ to $\\operatorname{Spec}k$ is $\\tau_Lq$, where $q:G_k\\to\\pi_1(X,\\bar\\eta)$ is induced by $\\operatorname{Spec}k\\to X$. By its field clause it is the descent cocycle of the frame $p$ over $k^s$, and by the coefficient formula of [lem-sfb-field-separable-cech-coordinates] that cocycle is the entrywise image $\\iota\\sigma_L$ of the Step 3 cocycle. Hence $\\iota\\sigma_L=\\tau_Lq$.",
+   "uses": [
+    "sk-def-sfb-change-of-scalars",
+    "def-sfb-continuous-map-condensed-ring-map",
+    "lem-sfb-complete-group-torsor-monodromy",
+    "lem-sfb-field-separable-cech-coordinates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Agent norm-topology extension of the framework of Lemmas 7.4.7 and 7.4.10, pp. 70–71"
+   }
+  },
+  {
+   "text": "The continuous map $q:G_k\\to\\pi_1(X,\\bar\\eta)$ is surjective by [lem-dl-a1-normal-scheme-galois-inertia-presentation]. For $h\\in\\ker q$ the equality $\\iota\\sigma_L(h)=\\tau_L(qh)=1$ and injectivity of $\\iota$ give $\\sigma_L(h)=1$. It therefore factors uniquely as $\\sigma_L=\\rho_Lq$ with values in $\\operatorname{GL}_n(K)$. This factor is continuous: $G_k$ and $\\pi_1(X,\\bar\\eta)$ are profinite, so the continuous surjection $q$ is a quotient map (images of closed subsets are compact and hence closed in the Hausdorff target); each continuous coordinate of $\\sigma_L$ descends through this quotient. For maps, Step 3 and surjectivity of $q$ say exactly that their constant generic matrices intertwine $\\rho_L$ and $\\rho_M$. Together with Step 2 this proves that $L\\mapsto\\rho_L$ is $K$-linear and fully faithful. No completion-valued matrix is asserted to lie in $K$ without this surjectivity argument.",
+   "uses": [
+    "lem-dl-a1-normal-scheme-galois-inertia-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Agent norm-topology extension of the framework of Lemmas 7.4.7 and 7.4.10, pp. 70–71"
+   }
+  },
+  {
+   "text": "For essential surjectivity take $\\rho:\\pi_1(X,\\bar\\eta)\\to\\operatorname{GL}_n(K)$ continuous and let $H=\\rho(\\pi_1(X,\\bar\\eta))$ with its subspace topology. It is a compact Hausdorff topological group, and intersections with the small congruence subgroups of $\\operatorname{GL}_n(K)$ give an open-subgroup basis. Thus the compact case of [lem-sfb-complete-group-torsor-monodromy] gives a pointed $F_H$-torsor with monodromy $\\rho$ viewed as a map into $H$. On a covering trivializing this torsor, glue the free modules $R_K^n$ using the transition functions $H\\hookrightarrow\\operatorname{GL}_n(K)$. The cocycle identity for the torsor is exactly the matrix gluing identity. Effective sheaf descent and morphism gluing in [lem-pe-set-sheaf-cover-descent] glue the underlying sheaf, addition and $R_K$-action; the module identities hold on the covering and therefore globally. The resulting module is lisse by its local construction. After scalar extension to $F$, its frame torsor is the extension of the $H$-torsor along $H\\to\\operatorname{GL}_n(F)$, so naturality of torsor monodromy for this map and for the pointed pullback to $\\operatorname{Spec}k$, followed by the field clause of [lem-sfb-complete-group-torsor-monodromy], identifies its completed generic cocycle with $\\iota\\rho q$. The field-coordinate description and injectivity of $\\iota$ then identify its generic cocycle with $\\rho q$. The functor of Steps 3–6 therefore sends it to $\\rho$, proving essential surjectivity.",
+   "uses": [
+    "lem-sfb-complete-group-torsor-monodromy",
+    "lem-pe-set-sheaf-cover-descent",
+    "lem-sfb-field-separable-cech-coordinates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Agent norm-topology extension of the framework of Lemmas 7.4.7 and 7.4.10, pp. 70–71"
+   }
+  },
+  {
+   "text": "Choose a path between the finite fibre functors at $\\bar\\eta$ and at the prescribed point $\\bar x$ using the first paragraph of [lem-wf-fibre-functor-basepoint-transport]. It gives a topological group isomorphism $c_t:\\pi_1(X,\\bar\\eta)\\xrightarrow{\\sim}\\Pi$. Transport each $\\rho_L$ by $c_t^{-1}$, using the same path for every coefficient field. This gives the required equivalences $\\Phi_K$. The generic-coordinate description sends the regular module to the one-dimensional trivial representation and a finite sum to the direct sum, since its descent matrix is respectively $1$ and the block sum of the descent matrices. The zero module corresponds to $K^0$, and the constructions in Steps 3–7 use the unique empty matrices for rank zero. Identities, composition and sums of maps are the corresponding matrix operations, so these are $K$-linear equivalences.",
+   "uses": [
+    "lem-wf-fibre-functor-basepoint-transport"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Agent norm-topology extension of the framework of Lemmas 7.4.7 and 7.4.10, pp. 70–71"
+   }
+  },
+  {
+   "text": "Finally fix finite $E\\subseteq\\Omega$ and a lisse $R_{E,X}$-module $L$. On a local free chart its ordinary scalar extension is $R_{\\Omega}^n$, by $a\\otimes(b_i)\\mapsto(ab_i)$ and inverse $(a_i)\\mapsto\\sum_i a_i\\otimes e_i$. On an overlap its transition matrix is obtained from that of $L$ by entrywise inclusion $E\\hookrightarrow\\Omega$, because both maps send $a\\otimes v$ to $a$ times the image of $v$. Thus it is lisse. On the generic separable-closure chart [lem-sfb-field-separable-cech-coordinates] gives the canonical vector-space comparison $\\Omega\\otimes_E V\\cong V_\\Omega$, and its descent action is $a\\otimes v\\mapsto a\\otimes\\sigma_L(g)v$. Factoring through the same surjection $q$ and transporting by the same $c_t$ changes this to $a\\otimes v\\mapsto a\\otimes\\rho_L(g)v$, as required. For a morphism with generic matrix $B$ both comparison composites have matrix obtained by including the entries of $B$ in $\\Omega$, so the comparison is natural. This proves the scalar-extension isomorphism for the specified postcomposition coefficient map, without replacing all continuous functions by finite-subextension-valued ones.",
+   "uses": [
+    "lem-sfb-field-separable-cech-coordinates",
+    "sk-def-sfb-change-of-scalars",
+    "def-sfb-continuous-map-condensed-ring-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Agent norm-topology extension of the framework of Lemmas 7.4.7 and 7.4.10, pp. 70–71"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-trf-normal-topologically-noetherian-components",
+  "lem-weil-pbc-condensed-field-continuous-realization",
+  "lem-sfb-normal-generic-continuous-sections",
+  "lem-pe-set-sheaf-cover-descent",
+  "lem-sfb-field-separable-cech-coordinates",
+  "sk-def-sfb-module-objects",
+  "lem-sfb-normed-field-completion",
+  "lem-sfb-complete-group-torsor-monodromy",
+  "sk-def-sfb-change-of-scalars",
+  "def-sfb-continuous-map-condensed-ring-map",
+  "lem-dl-a1-normal-scheme-galois-inertia-presentation",
+  "lem-wf-fibre-functor-basepoint-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Norm-topology extension of Lemmas 7.4.7 and 7.4.10 via completion, generic coefficient detection, and the Noohi torsor argument; not an application of Remark 7.4.8 to the norm topology."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -63,10 +195,38 @@
    "results": "8 hits: Condensed.profiniteFree; Condensed.finFree; LocallyConstant.freeOfProfinite; LightCondMod.LocallyConstant.instFaithfulModuleCatSheafLightProfiniteCoherentTopologyConstantSheaf; CondensedMod.ofSheafProfinite; LightCondMod.LocallyConstant.instFullModuleCatSheafLightProfiniteCoherentTopologyConstantSheaf; LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit",
    "date": "2026-10-21",
    "verdict": "no match: the returned declarations do not classify these internal lisse modules or give their coefficient descent"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lisse finite locally free sheaves over a norm topological field on a normal scheme are continuous representations of the etale fundamental group",
+   "results": "8 hits: CategoryTheory.PreGaloisCategory.functorToContAction_obj_obj, CategoryTheory.PreGaloisCategory.IsFundamentalGroup.continuous_smul, CategoryTheory.PreGaloisCategory.instEssSurjContActionFintypeCatAutFunctorFunctorToContActionOfFiberFunctor, CategoryTheory.PreGaloisCategory.instIsEquivalenceContActionFintypeCatAutFunctorFunctorToContAction, CategoryTheory.PreGaloisCategory.instEssSurjContActionFintypeCatAutFunctorFunctorToContAction, CategoryTheory.PreGaloisCategory.functorToContAction, CategoryTheory.PreGaloisCategory.IsFundamentalGroup, CategoryTheory.PreGaloisCategory.exists_lift_of_continuous",
+   "date": "2026-10-21",
+   "verdict": "no match: these results do not state this geometric continuous-coefficient input"
+  },
+  {
+   "tool": "grep",
+   "query": "(proetale|pro.etale|lisse).*(monodromy|fundamental)|(monodromy|fundamental).*(proetale|pro.etale|lisse)",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: these results do not state this geometric continuous-coefficient input"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FundamentalGroup\", \"Continuous\"",
+   "results": "1 hits: CategoryTheory.PreGaloisCategory.IsFundamentalGroup.continuous_smul",
+   "date": "2026-10-21",
+   "verdict": "no match: these results do not state this geometric continuous-coefficient input"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite locally free continuous coefficient modules on the pro etale site of a connected normal scheme and continuous fundamental group representations",
+   "results": "8 hits: LocallyConstant.freeOfProfinite, Profinite.NobelingProof.Nobeling_aux, Condensed.lanSheafProfinite, ContinuousCohomology.I_obj_V_isModule, CondensedMod.LocallyConstant.fullyFaithfulFunctor, continuousCohomology, ContinuousCohomology.MultiInd.complex, CondensedMod.isDiscrete_tfae",
+   "date": "2026-10-21",
+   "verdict": "no match: these results do not state this geometric continuous-coefficient input"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-continuous-algcl-stratified-finite-models",
@@ -87,5 +247,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-normal-continuous-algcl-monodromy",
+  "worker": "stage1",
+  "summary": "Statement retained exactly. Proved generic restriction full faithfulness by continuous matrix extension; extracted generic K-monodromy, used complete-field frame torsors to kill the kernel of generic pi1, and descended along the profinite quotient. Constructed a lisse model from the compact image torsor and checked scalar extension entrywise. Four new nodes: three statement-only geometric inputs and one Mathlib completion leaf. The norm topology is never replaced by the colimit topology.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images proof paragraph (3), the all-continuous compatibility obligation: finite coefficient models on source strata before open-image finiteness; monodromy on the reduced normal refinements, before the compact-matrix finite-field argument. Realizes the normal-stratum monodromy and scalar-compatibility input in paragraph (3). The created.item chain has no imported blueprint ancestor: blueprint_refs.py ancestor returns None, so the inherited explicit place is retained.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-normal-topologically-noetherian-components",
+    "why": "Normal-component decomposition supplies integrality before generic restriction; a geometric tool, not a different direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-condensed-field-continuous-realization",
+    "why": "Identifies the pulled-back all-continuous ring with its actual continuous-function sheaf for arbitrary totally disconnected normed fields."
+   },
+   {
+    "node": "lem-dl-a1-normal-scheme-galois-inertia-presentation",
+    "why": "Only its continuous surjection from the absolute Galois group of the function field is used to descend the generic monodromy."
+   },
+   {
+    "node": "lem-pe-set-sheaf-cover-descent",
+    "why": "General effective descent and gluing of maps for sheaves on a small site, used to glue module operations and matrices."
+   },
+   {
+    "node": "lem-wf-fibre-functor-basepoint-transport",
+    "why": "Only the finite-fibre-functor path and its topological conjugation isomorphism are used, to move the base point; no adic coefficient-colimit assertion is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-normal-topologically-noetherian-components",
+  "lem-weil-pbc-condensed-field-continuous-realization",
+  "lem-dl-a1-normal-scheme-galois-inertia-presentation",
+  "lem-pe-set-sheaf-cover-descent",
+  "lem-wf-fibre-functor-basepoint-transport"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q54-620934561",
+  "group": "Q54",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q54-620934561 (reviewer sub-agent of L); spot-checked: Read the item, all four new nodes, every cited statement, and Bhatt–Scholze pp. 63–71 (Prop 7.1.5, Lemmas 7.4.1/7.4.3/7.4.7/7.4.10, Remark 7.4.8). The item's statement is identical to live. It is a first split: no repair note exists and the item is unsplit in both clones. No cycle. One fault (C4/E5), repaired: Steps 5 and 7 got ισ_L = τ_L∘q, and the generic cocycle ρq of the constructed module, from 'the pointed pullback clause and the coefficient formula of the Cech node'. But the torsor node never said what its homomorphism is over Spec k in terms of the Čech descent datum, and the Cech node does not mention torsors. Fix: lem-sfb-complete-group-torsor-monodromy gets a field clause. For X = Spec k, Π_x = G_k, the fibre is P(Spec k^s), and the homomorphism is c with pr2*p = pr1*p·c in C(G_k,G), using the Cech node's convention c(gh)=c(g)c(h). It also gets two stmt_deps, def-pd-separable-closure and lem-sfb-field-separable-cech-coordinates. Steps 5 and 7 of the item now say this explicitly. Everything else checks: Step 1 (DCC ⇒ 0357 components ⇒ integral); Step 2 (generic matrix extension and rank invariance); Step 3 (Čech descent and intertwiners); Step 4 (GL_n(K̂) has an open-subgroup basis and is Raikov complete, so it is Noohi by 7.1.5); Step 6 (0BTD surjectivity and quotient-map continuity); Step 7 (compact image, profinite H); Steps 8–9 (elementary flags justified). New nodes, tested on small cases: generic-sections (étale U: π0(U) ≅ |U_η| by normality, then the ind-étale limit, then BS 2.3.4 refinement; the nodal curve shows normality is needed) is true; Čech coordinates (Spec k^s is w-contractible) are true; the torsor node is BS 7.4.7's argument for Noohi groups on normal X, true, and not a duplicate of lem-a1-normal-proetale-monodromy (finite E only); the Mathlib completion leaf's lines were all verified. Batch-5 flags are all accepted. lem-trf-normal-topologically-noetherian-components is Stacks 0357, general topology. lem-dl-a1-normal-scheme-galois-inertia-presentation reaches the trace-formula chapter only through the definition def-weil-pbc-henselization-at-prime, and only surjectivity is used. lem-wf-fibre-functor-basepoint-transport reaches cor-galois-lisse-representations only through paragraphs 2–3; Step 8 uses paragraph 1 (0BND). No SGA citation.; 2 file(s) fixed by the reviewer"
  }
 }
