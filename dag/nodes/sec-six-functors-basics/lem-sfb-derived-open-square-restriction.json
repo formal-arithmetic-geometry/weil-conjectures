@@ -16,9 +16,146 @@
   "def-pc-fibre-product",
   "def-weil-open-immersion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For any map $f$ in the square, [sk-prop-sfb-cartesian-coefficients] identifies $f^{-1}\\Lambda_{\\mathrm{target}}$ with $\\Lambda_{\\mathrm{source}}$ and makes the module pullback exact. For $h=i,j$, [sk-def-sfb-module-lower-shriek] gives the exact module functor $h_!$ and its adjunction with $h^*$. Its underlying sheaf adjunction is the abelian open adjunction. By [lem-sfb-finite-extension-by-zero-fully-faithful], applied with $\\mathcal A=\\Ab$, the abelian unit is invertible. By [def-sfb-module-open-lower-shriek-adjunction] the module adjunction $h_!\\dashv h^*$ is the composite of $\\operatorname{Res}_{\\alpha_h}\\dashv\\operatorname{Coext}_{\\alpha_h}\\cong\\operatorname{Ext}_{\\alpha_h}$, whose unit is invertible because $\\alpha_h$ is a ring isomorphism, with the linearized adjunction $h^{\\mathrm{lin}}_!\\dashv\\operatorname{mapMod}(h^*_{\\Ab})$, whose unit has as underlying map the abelian unit. The latter is therefore an invertible module-linear map, and its inverse is module-linear (multiply the linearity equation on the two sides by the inverse). So the module unit is a composite of two isomorphisms. Consequently the actual units $1\\to i^*i_!$ and $1\\to j^*j_!$ are isomorphisms.",
+   "uses": [
+    "sk-prop-sfb-cartesian-coefficients",
+    "sk-def-sfb-module-lower-shriek",
+    "lem-sfb-finite-extension-by-zero-fully-faithful",
+    "def-sfb-module-open-lower-shriek-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09BN, lemma-open-immersion; module linearization as in sk-def-sfb-module-lower-shriek"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-termwise-adjunction-homotopy] to each $h_!\\dashv h^*$, $h=i,j$. Its unit and counit on complexes have degree-$q$ components the sheaf unit and counit. Both functors are exact, so [lem-weil-pbc-exact-functor-derived-factorization] gives their unbounded derived functors and their factorization through localization at quasi-isomorphisms. Apply [lem-sfb-adjunction-localization] to these two factorizations. This produces $D(h_!)\\dashv D(h^*)$, with unit and counit the localized termwise maps, under the specified composition identifications. In particular the units $\\eta_i,\\eta_j$ are invertible, because their termwise representatives from step 1 are invertible in every degree.",
+   "uses": [
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-sfb-adjunction-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VG, lemma-properties-left-localization; adjunction descent with its normalization as stated in lem-sfb-adjunction-localization"
+   }
+  },
+  {
+   "text": "Use [lem-sf-ring-sheaf-base-change-mates] with ambient scheme $\\overline Y$, ring object $B=\\Lambda_{\\overline Y}$, open immersion $i$, the reduced closed complement of $Y$ as closed immersion, and $g=r$; the qcqs hypotheses hold for the finite-type separated schemes here. Its open comparison is an isomorphism $r^{-1}i^{\\mathrm{sf}}_!N\\cong j^{\\mathrm{sf}}_!p^{\\mathrm{sq}}N$ for $i^{-1}B$-modules $N$, where, by [def-sf-proetale-ring-sheaf-operations], $r^{-1}$ and $p^{-1}$ are mapMod of the abelian inverse images, $h^{\\mathrm{sf}}_!$ is mapModLeft of the abelian open adjunction, and $p^{\\mathrm{sq}}$ is $p^{-1}$ followed by restriction of scalars through the square coefficient isomorphism $c:j^{-1}r^{-1}B\\cong p^{-1}i^{-1}B$, the component at $B$ of the inverse-image composition comparison for $rj=ip$. On the other side, [sk-def-sfb-module-pushforward-pullback] gives $r^*=\\operatorname{Ext}_{\\alpha_r}\\circ r^{-1}$ and $p^*=\\operatorname{Ext}_{\\alpha_p}\\circ p^{-1}$, and [sk-def-sfb-module-lower-shriek] gives $h_!=h^{\\mathrm{lin}}_!\\circ\\operatorname{Res}_{\\alpha_h}$, where $h^{\\mathrm{lin}}_!$ is the same linearization of $h^{\\Ab}_!$ as $h^{\\mathrm{sf}}_!$. All $\\alpha$'s are ring isomorphisms by [sk-prop-sfb-cartesian-coefficients], and $\\operatorname{Ext}_{\\alpha}\\cong\\operatorname{Res}_{\\alpha^{-1}}$ by [def-sfb-modobj-extension-along-iso]. Restriction of scalars along a ring isomorphism commutes with $h^{\\mathrm{lin}}_!$: both have underlying sheaf $h^{\\Ab}_!M$, and the actions agree since the projection-formula isomorphism of [sk-def-sfb-module-lower-shriek] is natural in the ring factor.",
+   "uses": [
+    "lem-sf-ring-sheaf-base-change-mates",
+    "def-sf-proetale-ring-sheaf-operations",
+    "sk-def-sfb-module-pushforward-pullback",
+    "sk-def-sfb-module-lower-shriek",
+    "sk-prop-sfb-cartesian-coefficients",
+    "def-sfb-modobj-extension-along-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-closed-unit/det-sf-open-closed-sequence-ring-sheaf.proof.md",
+    "place": "Proof (4), construction of the arbitrary-ring open base-change comparison; exact localization expanded here"
+   }
+  },
+  {
+   "text": "By step 3, for $T\\in\\Mod_{\\Lambda_Y}$ both $r^*i_!T$ and $j_!p^*T$ are identified, through the comparison of [lem-sf-ring-sheaf-base-change-mates], with $j^{\\Ab}_!p^{-1}T$, the $\\Lambda_U$-action on $p^{-1}T$ being obtained through the ring isomorphisms $\\varphi_1=\\alpha_j\\circ j^{-1}(\\alpha_r)\\circ c^{-1}$, resp. $\\varphi_2=\\alpha_p\\circ p^{-1}(\\alpha_i)$, from $p^{-1}i^{-1}\\Lambda_{\\overline Y}$ to $\\Lambda_U$. These agree. Indeed $\\alpha_f$ is built from the inverse-image composition comparisons ([sk-def-sfb-coefficient-morphisms]), $\\eta_f$ is its mate, and [lem-sfb-eta-comp] gives $\\eta_{rj}=c_{j,r}\\circ r_*(\\eta_j)\\circ\\eta_r$ and $\\eta_{ip}=c_{p,i}\\circ i_*(\\eta_p)\\circ\\eta_i$. Since $rj=ip$ is one morphism $U\\to\\overline Y$, these two composites are equal. Taking mates, and using that $c$ is the composite of the two inverse-image composition comparisons for $rj$ and $ip$, gives $\\varphi_1=\\varphi_2$. Hence the comparison is $\\Lambda_W$-linear, natural in $T$, and is an isomorphism $\\beta:r^*i_!\\xrightarrow{\\sim}j_!p^*$ of functors $\\Mod_{\\Lambda_Y}\\to\\Mod_{\\Lambda_W}$. Every factor is exact by step 1. Apply [lem-sfb-exact-derived-natural-iso] and [lem-sfb-exact-derived-composition] to obtain the natural isomorphism $D(r^*)D(i_!)\\cong D(j_!)D(p^*)$ on all unbounded objects, induced termwise by $\\beta$.",
+   "uses": [
+    "lem-sf-ring-sheaf-base-change-mates",
+    "sk-def-sfb-coefficient-morphisms",
+    "lem-sfb-eta-comp",
+    "lem-sfb-exact-derived-natural-iso",
+    "lem-sfb-exact-derived-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-closed-unit/det-sf-open-closed-sequence-ring-sheaf.proof.md",
+    "place": "Proof (4), construction of the arbitrary-ring open base-change comparison; exact localization expanded here"
+   }
+  },
+  {
+   "text": "For each scheme $V$ here, [lem-sfb-proetale-sheaves-grothendieck] with $\\mathcal A=\\Ab$ gives that $\\Sh(V_{\\mathrm{pro\\acute et}},\\Ab)$ is Grothendieck abelian. The closed additive symmetric monoidal tensor of [sk-def-sfb-sheaf-tensor] permits [lem-sfb-modobj-grothendieck] to apply to its commutative ring object $\\Lambda_V$. Thus the module category is Grothendieck abelian, so has unbounded K-injective resolutions by [sk-def-sfb-derived-categories]. By [sk-def-sfb-module-derived-pushpull] the adjunctions for $r$ and $p$ are $Lr^*\\dashv Rr_*$ and $Lp^*\\dashv Rp_*$, with $Rr_*,Rp_*$ the K-injective total derived functors. The exact-functor clause of [sk-def-sfb-derived-categories] identifies $Lr^*,Lp^*$ with $D(r^*),D(p^*)$, since step 1 established exactness. In the chain use the canonical adjunctions $D(r^*)\\dashv Rr_*$ and $D(p^*)\\dashv Rp_*$ of [lem-sp-canonical-right-derived-adjunction-shift] (exact additive left adjoints, K-injective resolutions in the target). Step 8 uses the same adjunctions. For fixed $B$ and arbitrary $T$, compose the Hom bijection of step 2 for $i$, the derived $r$-adjunction, precomposition with $\\beta_T^{-1}$ from step 4, the Hom bijection for $j$, and the derived $p$-adjunction. This gives exactly the five bijections in the statement, in that order. Denote their composite by $\\Phi_{T,B}:\\operatorname{Hom}(T,i^*Rr_*B)\\xrightarrow{\\sim}\\operatorname{Hom}(T,Rp_*j^*B)$. Each factor is natural in both variables, hence so is $\\Phi$.",
+   "uses": [
+    "sk-def-sfb-module-derived-pushpull",
+    "sk-def-sfb-derived-categories",
+    "lem-sfb-proetale-sheaves-grothendieck",
+    "sk-def-sfb-sheaf-tensor",
+    "lem-sfb-modobj-grothendieck",
+    "lem-sp-canonical-right-derived-adjunction-shift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/det-sf-comp-composition-interchange.proof.md",
+    "place": "Proof (2), first sentence: restriction commutes with derived direct image, with exact open adjunction and shift normalization."
+   }
+  },
+  {
+   "text": "Put $X_B=i^*Rr_*B$ and $Z_B=Rp_*j^*B$. Define $\\rho_B=\\Phi_{X_B,B}(1_{X_B})$ and $\\sigma_B=\\Phi^{-1}_{Z_B,B}(1_{Z_B})$. Naturality in $T$ gives $\\Phi_{T,B}(a)=\\rho_Ba$ and $\\Phi^{-1}_{T,B}(b)=\\sigma_Bb$. Applying these identities to $a=1_{X_B}$ and $b=1_{Z_B}$ yields $\\sigma_B\\rho_B=1_{X_B}$ and $\\rho_B\\sigma_B=1_{Z_B}$. Thus $\\rho_B$ is an isomorphism. Naturality in $B$ gives $\\rho_{B'}X(u)=Z(u)\\rho_B$ for every $u:B\\to B'$. The first displayed identity also proves the required characterization and uniqueness: any map inducing the same Hom chain equals $\\Phi_{X_B,B}(1_{X_B})$. This is the explicit representing-map argument, using only the bijections already constructed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/det-sf-comp-composition-interchange.proof.md",
+    "place": "Proof (2), first sentence: restriction commutes with derived direct image, with exact open adjunction and shift normalization."
+   }
+  },
+  {
+   "text": "The exact functors in steps 1--4 use the shifts of [lem-weil-pbc-exact-functor-derived-factorization]. On complexes their degree-$q$ shift comparisons are identities on the objects in degree $q+n$; additivity changes the shifted differential to $(-1)^nF(d)$. Therefore for any natural transformation $a$ of these additive functors, the maps $C(a)_{K[n]}$ and $C(a)_K[n]$ agree in every degree. Apply this to the open units, counits, and $\\beta$, and to the identity composition comparisons. The termwise adjunction formulas of [lem-weil-pbc-termwise-adjunction-homotopy] and the unit/counit formulas of [lem-sfb-adjunction-localization] show that their descended maps have the same shift squares. For $D(\\beta)$ and composition use the uniqueness with the termwise normalization in [lem-sfb-exact-derived-natural-iso] and [lem-sfb-exact-derived-composition]. This proves shift compatibility of $\\eta_i,\\eta_j$, the open adjunction bijections, and the middle base-change bijection, with the prescribed shifts.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-sfb-adjunction-localization",
+    "lem-sfb-exact-derived-natural-iso",
+    "lem-sfb-exact-derived-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/det-sf-comp-composition-interchange.proof.md",
+    "place": "Proof (2), first sentence: restriction commutes with derived direct image, with exact open adjunction and shift normalization."
+   }
+  },
+  {
+   "text": "For $r^*\\dashv r_*$ and $p^*\\dashv p_*$ use [lem-sp-canonical-right-derived-adjunction-shift]. Its hypotheses hold: the module functors are additive, the left adjoints are exact by step 1, and step 5 established the unbounded K-injective resolution hypotheses of [sk-def-sfb-derived-categories] for these module categories. The cited lemma preserves the canonical K-injective shift, and makes these derived adjunction units and counits shift-compatible. Hence the other two Hom bijections of step 5 commute with simultaneous shift of $T$ and $B$. Together with step 7 every factor of $\\Phi$ does. If $s_X:X_{B[n]}\\xrightarrow{\\sim}X_B[n]$ and $s_Z:Z_{B[n]}\\xrightarrow{\\sim}Z_B[n]$ are the canonical composite shifts, apply this compatibility to $1_{X_B}$ shifted by $n$. The defining equation of step 6 gives $s_Z\\rho_{B[n]}=\\rho_B[n]s_X$. This is the asserted shift square for $\\rho$. None of the constructions used a cohomological bound, constructibility, or properness of $r$.",
+   "uses": [
+    "lem-sp-canonical-right-derived-adjunction-shift",
+    "sk-def-sfb-derived-categories"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/det-sf-comp-composition-interchange.proof.md",
+    "place": "Proof (2), first sentence: restriction commutes with derived direct image, with exact open adjunction and shift normalization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "sk-prop-sfb-cartesian-coefficients",
+  "sk-def-sfb-module-lower-shriek",
+  "lem-sfb-finite-extension-by-zero-fully-faithful",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-sfb-adjunction-localization",
+  "lem-sf-ring-sheaf-base-change-mates",
+  "sk-def-sfb-module-pushforward-pullback",
+  "lem-sfb-exact-derived-natural-iso",
+  "lem-sfb-exact-derived-composition",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-sfb-derived-categories",
+  "lem-sfb-proetale-sheaves-grothendieck",
+  "sk-def-sfb-sheaf-tensor",
+  "lem-sfb-modobj-grothendieck",
+  "lem-sp-canonical-right-derived-adjunction-shift",
+  "def-sfb-module-open-lower-shriek-adjunction",
+  "def-sf-proetale-ring-sheaf-operations",
+  "def-sfb-modobj-extension-along-iso",
+  "sk-def-sfb-coefficient-morphisms",
+  "lem-sfb-eta-comp"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/det-sf-comp-composition-interchange.proof.md",
+  "place": "Proof (2), expanded by exact open adjunction descent, arbitrary-ring open base change, and the explicit representing-map argument; shift normalization uses the existing generic canonical derived-adjunction lemma."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,10 +191,45 @@
    "results": "8 hits; SheafOfModules.pushforwardSections, SheafOfModules.pushforward, AlgebraicGeometry.Scheme.Modules.pushforward_map_app, AlgebraicGeometry.Scheme.Modules.pushforward, AlgebraicGeometry.Scheme.Modules.pushforward_obj_obj, SheafOfModules.pushforward_map_val, PresheafOfModules.pushforward_obj_obj, AlgebraicGeometry.Scheme.Modules.pushforward_obj_presheaf_map",
    "date": "2026-10-21",
    "verdict": "no match: underived module, scheme, support or generic categorical facts; none states this unbounded pro-etale condensed-module assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "openImmersion|extensionByZero|lowerShriek",
+   "results": "0 hits: ; subdirectory CategoryTheory",
+   "date": "2026-10-21",
+   "verdict": "no match: underived scheme-module restriction or general derived-adjunction/localization tools; none supplies open base change for these unbounded condensed-module categories."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Open restriction commutes with unbounded derived pushforward of sheaves of modules",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictFunctor, AlgebraicGeometry.Scheme.Modules.restrict, AlgebraicGeometry.Scheme.Modules.restrict_obj, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrict_map, SheafOfModules.pushforward, ModuleCat.Tilde.toOpen_res",
+   "date": "2026-10-21",
+   "verdict": "no match: underived scheme-module restriction or general derived-adjunction/localization tools; none supplies open base change for these unbounded condensed-module categories."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor.mapDerivedCategory",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: underived scheme-module restriction or general derived-adjunction/localization tools; none supplies open base change for these unbounded condensed-module categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For unbounded derived categories of module sheaves over pulled back condensed coefficient rings, restriction to an open subscheme commutes with derived direct image",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.restrictFunctor, SheafOfModules.pullbackComp, SheafOfModules.pullbackPushforwardAdjunction",
+   "date": "2026-10-21",
+   "verdict": "no match: underived scheme-module restriction or general derived-adjunction/localization tools; none supplies open base change for these unbounded condensed-module categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The natural Hom bijections of derived adjunctions give open base change for arbitrary unbounded complexes using extension by zero",
+   "results": "8 hits: CategoryTheory.Adjunction.derived, CategoryTheory.Adjunction.derived', CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Adjunction.derived'_unit, CategoryTheory.Adjunction.derived'_counit, CategoryTheory.Adjunction.derived_counit, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory",
+   "date": "2026-10-21",
+   "verdict": "no match: underived scheme-module restriction or general derived-adjunction/localization tools; none supplies open base change for these unbounded condensed-module categories."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-sf-comp-composition-interchange",
@@ -74,5 +246,129 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-derived-open-square-restriction",
+  "worker": "stage1",
+  "summary": "Expanded the unbounded open-restriction claim into seven steps using existing DAG nodes only. Verified the linearized module units, descended their actual adjunctions, specialized arbitrary-ring open base change, wrote the full natural Hom chain and its representing isomorphism with explicit inverse, and checked canonical shifts without imposing boundedness or properness. No statement change and no new nodes.",
+  "blueprint": "Realizes the first sentence of Proof (2) of det-sf-comp-composition-interchange, including the added exact-open-unit and shift normalization requested by the parent split.",
+  "tool_uses": [
+   {
+    "node": "sk-prop-sfb-cartesian-coefficients",
+    "why": "Identifies inverse-image coefficient rings with the fixed condensed coefficients and gives exactness; needed before the open restriction argument, and not a replacement for a composition-law step."
+   },
+   {
+    "node": "sk-def-sfb-module-lower-shriek",
+    "why": "Supplies exact linear extension by zero and its underived module adjunction."
+   },
+   {
+    "node": "lem-sfb-finite-extension-by-zero-fully-faithful",
+    "why": "Used with values in Ab only to invert the underlying open unit; the module unit is then checked directly."
+   },
+   {
+    "node": "lem-weil-pbc-termwise-adjunction-homotopy",
+    "why": "Generic termwise adjunction and explicit unit/counit formulas needed for localization."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Generic exact derived factorization with its normalized shifts."
+   },
+   {
+    "node": "lem-sfb-adjunction-localization",
+    "why": "Generic adjunction descent with the actual unit and counit, rather than a new chosen adjunction."
+   },
+   {
+    "node": "lem-sf-ring-sheaf-base-change-mates",
+    "why": "Generic open extension comparison for arbitrary ring objects, specialized to pulled-back condensed coefficients; the bounded-constructible open base-change node does not cover this ambient unbounded input."
+   },
+   {
+    "node": "sk-def-sfb-module-pushforward-pullback",
+    "why": "Identifies the fixed module pullback and its coefficient transport with the inverse-image operations of the arbitrary-ring comparison."
+   },
+   {
+    "node": "lem-sfb-exact-derived-natural-iso",
+    "why": "Generic descent of the underived comparison as a termwise natural isomorphism."
+   },
+   {
+    "node": "lem-sfb-exact-derived-composition",
+    "why": "Generic composition identifications for exact termwise functors."
+   },
+   {
+    "node": "sk-def-sfb-module-derived-pushpull",
+    "why": "Supplies the total module derived adjunctions for r and p."
+   },
+   {
+    "node": "sk-def-sfb-derived-categories",
+    "why": "Supplies the ambient unbounded resolution formalism and exact-versus-derived identifications."
+   },
+   {
+    "node": "lem-sp-canonical-right-derived-adjunction-shift",
+    "why": "Generic exact-left-adjoint theorem for canonical K-injective shifts; avoids silently changing the fixed right-derived shift."
+   },
+   {
+    "node": "lem-sfb-proetale-sheaves-grothendieck",
+    "why": "Supplies the Grothendieck abelian property of the ambient abelian sheaf category, with values in Ab."
+   },
+   {
+    "node": "sk-def-sfb-sheaf-tensor",
+    "why": "Supplies the closed additive symmetric monoidal sheaf tensor used for module-object Grothendieckness."
+   },
+   {
+    "node": "lem-sfb-modobj-grothendieck",
+    "why": "Supplies the Grothendieck abelian property of the actual module-object categories, needed for unbounded K-injective resolutions."
+   },
+   {
+    "node": "def-sfb-module-open-lower-shriek-adjunction",
+    "why": "Specifies the module open adjunction as Res-Coext composed with the linearized adjunction; used only to see that the module unit is a composite of isomorphisms (reviewer repair)."
+   },
+   {
+    "node": "def-sf-proetale-ring-sheaf-operations",
+    "why": "Defines the operations in which the arbitrary-ring open comparison is stated; needed to translate it to the fixed pulled-back coefficients (reviewer repair)."
+   },
+   {
+    "node": "def-sfb-modobj-extension-along-iso",
+    "why": "Extension of scalars along a ring isomorphism is restriction along its inverse (reviewer repair)."
+   },
+   {
+    "node": "sk-def-sfb-coefficient-morphisms",
+    "why": "alpha_f and its mate eta_f, used in the coefficient coherence of step 4 (reviewer repair)."
+   },
+   {
+    "node": "lem-sfb-eta-comp",
+    "why": "Composition law for eta; gives equality of the two coefficient identifications at U for rj=ip (reviewer repair)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sk-prop-sfb-cartesian-coefficients",
+  "sk-def-sfb-module-lower-shriek",
+  "lem-sfb-finite-extension-by-zero-fully-faithful",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-sfb-adjunction-localization",
+  "lem-sf-ring-sheaf-base-change-mates",
+  "sk-def-sfb-module-pushforward-pullback",
+  "lem-sfb-exact-derived-natural-iso",
+  "lem-sfb-exact-derived-composition",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-sfb-derived-categories",
+  "lem-sp-canonical-right-derived-adjunction-shift",
+  "lem-sfb-proetale-sheaves-grothendieck",
+  "sk-def-sfb-sheaf-tensor",
+  "lem-sfb-modobj-grothendieck",
+  "def-sfb-module-open-lower-shriek-adjunction",
+  "def-sf-proetale-ring-sheaf-operations",
+  "def-sfb-modobj-extension-along-iso",
+  "sk-def-sfb-coefficient-morphisms",
+  "lem-sfb-eta-comp"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NX-f0fa947ad",
+  "group": "NX",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NX-f0fa947ad (reviewer sub-agent of L); spot-checked: Read the item and all 16 cited statements, plus the main-20261015 det-sf-comp-composition-interchange Proof (2); no new nodes, no SGA. The delivery builds rho from the Hom chain instead of the source's K-injective-preservation sentence; the route is valid and meets the parent's need (lambda_A = (Rp_* eta_j')^{-1} rho). Three repairable faults, fixed in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-derived-open-square-restriction.json. (1) E5, step 3: 'the square comparison identifies their actions; restriction through these ring isomorphisms is the same scalar transport' hid real content. The comparison of lem-sf-ring-sheaf-base-change-mates lives in def-sf-proetale-ring-sheaf-operations, over inverse-image rings with the square coefficient map c. The fix splits the step: step 3 translates via r^*=Ext_{alpha_r} r^{-1}, h_!=h^lin_! Res_{alpha_h}, and Ext_phi ~ Res_{phi^{-1}} (def-sfb-modobj-extension-along-iso). Step 4 proves the two ring isomorphisms p^{-1}i^{-1}Lambda -> Lambda_U agree (needed: Qbar_l has continuous automorphisms), using lem-sfb-eta-comp on rj=ip and the alpha/eta mate relation (sk-def-sfb-coefficient-morphisms). (2) C3/C4: the Hom chain used pushpull's Lr^* -| Rr_* transported to D(r^*), while the shift step proved compatibility for the canonical D(L) -| R(R) of lem-sp-canonical-right-derived-adjunction-shift; both now use the canonical adjunction, whose hypotheses hold. (3) Step 1: the module unit is Res/Coext(=Ext) composed with lin -| mapMod (def-sfb-module-open-lower-shriek-adjunction), not literally the abelian unit; restated. Steps renumbered 1-8, proof_deps equal to the union of the steps' uses, tool_uses extended. No cycle (closure of 3204 nodes). Edge cases checked: i=id, Y empty, zero objects, finite A and Qbar_l coefficients, negative shifts. Advisory: lem-sfb-derived-direct-image-open-coherence clause 2 gives an unnormalized j^*Rf_* ~ R(f_U)_* j_S^* for Lambda=E or Qbar_l only, so the item generalizes it and is not a duplicate.; 1 file(s) fixed by the reviewer"
  }
 }

@@ -19876,3 +19876,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:38 L: merged deliver/NG/lem-weil-pbc-ringed-projection-mate-exact (reviewer PASS; first push; new nodes: 2); claim not held by NG: not your claim
 - 03:38 L: merged deliver/Q02/lem-weil-pbc-ringed-slice-pullback-mate-normalization (reviewer PASS; first push; new nodes: 0)
 - 03:38 L: merged deliver/NV/lem-weil-pbc-finite-field-stratified-perfect-models (reviewer PASS; first push; new nodes: 0)
+- 03:38 L: merged deliver/NX/lem-sfb-derived-open-square-restriction (reviewer FIX; first push; new nodes: 0)
