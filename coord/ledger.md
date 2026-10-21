@@ -22521,3 +22521,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:25 L: returned deliver/N7/lem-pe-scalar-cone-tensor-model (reviewer RETURN: A7/B10: the item is superseded by a later stage-3 landing. The 2026-10-21 re-split note (live coord/repair-notes, mtime )
 - 13:25 L: returned deliver/Q42/lem-sfb-sheaf-pushforward-generator-comparison (reviewer RETURN: Superseded (A6/A7/B10). This is the third push with unchanged content, and the maths is sound. (1) The item is Lean-clos)
 - 13:26 L: merged deliver/NH/lem-pc-curve-local-scalar-principal-parts (stage 2; reviewer PASS; parallel immutable checks)
+- 13:26 L: returned deliver/Q130/lem-sp-semilinear-kflat-tower-model (reviewer RETURN: L: independent stage-2 immutable head 699f8168deb0: H2/theorem stmt_dep: the statement uses only plain definitions from )
