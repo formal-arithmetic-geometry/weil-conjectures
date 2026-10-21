@@ -21489,3 +21489,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:58 L: merged deliver/Q12/lem-pd-module-ringed-topos-derived-comparison (reviewer FIX; after a return; new nodes: 1)
 - 08:58 L: merged deliver/Q150/lem-fd-frobenius-fixed-pair-comparison (reviewer PASS; first push; new nodes: 0); claim not held by Q150: not your claim
 - 08:58 L: merged deliver/Q101/lem-sp-power-torsion-sheaf-limit-complete (reviewer PASS; first push; new nodes: 0)
+- 08:58 L: merged deliver/Q51/lem-sf-tensor-comparison-localization-descent (reviewer FIX; first push; new nodes: 1)
