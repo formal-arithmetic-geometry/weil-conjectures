@@ -54,6 +54,6 @@ The previous worker ended with: re-split (decision of the human, 2026-10-17): st
 Compiler messages and attribution:
 re-split (decision of the human, 2026-10-17): step 4 (2028 characters) is not elementary and hides lemmas; make each hidden argument a node of its own that the step cites; keep the statement unchanged. Start from the existing proof text of this node (it stays in the node file): keep its route and its other steps, and replace each long step by short steps that cite new nodes (or existing nodes/Mathlib leaves) for the arguments it now carries inline. The node's statement and its Lean record stay as they are; the new nodes go through stage 2 as usual. The stage-1 review rejects a non-elementary step longer than 2000 characters.
 
-## prop-weil-pbc-direct-image-limits (2026-10-21 03:21 UTC, branch head cbd8962c24)
+## prop-weil-pbc-direct-image-limits (2026-10-21 03:22 UTC, branch head cbd8962c24)
 
-re-split (the human, 2026-10-21): the purpose is to spread the work over new nodes other workers can take at once; new node(s) not cited by any step: lem-weil-pbc-tower-derived-evaluation-normalization. Every argument of the old proof becomes a new statement-only node the step cites; do not shorten or blur the argument.
+re-split (the human, 2026-10-21): every delivery made before the final requirement is returned and the re-split starts again. Follow the note of this item: spread the work over new statement-only nodes of comparable size, each cited by the step that uses it; the item's proof becomes their short assembly (at most 3000 characters); never shorten or blur an argument instead of making it a node.
