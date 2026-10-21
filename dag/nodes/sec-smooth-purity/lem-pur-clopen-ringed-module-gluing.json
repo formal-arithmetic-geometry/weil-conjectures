@@ -17,12 +17,12 @@
  ],
  "proof": [
   {
-   "text": "Put $\\mathcal C=X_{\\mathrm{proet}}$ and $U_i=U\\times_X X_i$ for a site object $U\\to X$. By [lem-weil-proetale-weakly-etale-localization], $X_{i,\\mathrm{proet}}$ is the localized site $\\mathcal C/X_i$, with its actual covering families; restriction of any ring or module sheaf is therefore evaluation on objects over $X_i$, as in [def-pur-localized-ringed-site]. Each $j_i$ and each $U_i\\to U$ is an open immersion (a pullback of an open subscheme is its inverse-image open subscheme), hence etale by [lem-weil-pbc-open-immersion-etale]. They cover by the hypothesis on the images, so [lem-pur-etale-proetale-cover] makes both $(X_i\\to X)_i$ and $(U_i\\to U)_i$ pro-etale coverings. The intersections $U_i\\times_U U_j$ are empty when $i\\ne j$ and are $U_i$ when $i=j$: maps into an open subscheme have at most one factorization, and disjoint opens have no common point. All objects, finite products of section sets, and localized sites remain within the fixed universes.",
+   "text": "Use the actual composition and base-change functors of the small pro-etale sites [def-weil-pbc-proetale-site], with module restriction as in [def-pur-localized-ringed-site]. The proved source lemmas AlgebraicGeometry.Scheme.ProEt.isContinuous_overMap, isCocontinuous_overMap and isContinuous_overPullback give their continuity properties. Base change the jointly surjective component family to each test object. The component inclusions are etale [lem-weil-pbc-open-immersion-etale], so the resulting family is a pro-etale covering [lem-pur-etale-proetale-cover]. On distinct components every object mapping into both is empty, since its structural map has image in two disjoint subsets. The diagonal composition/base-change unit is an isomorphism: its inverse is the first pullback projection, since an open immersion is mono.",
    "uses": [
-    "lem-weil-proetale-weakly-etale-localization",
     "def-pur-localized-ringed-site",
     "lem-weil-pbc-open-immersion-etale",
-    "lem-pur-etale-proetale-cover"
+    "lem-pur-etale-proetale-cover",
+    "def-weil-pbc-proetale-site"
    ],
    "elementary": false,
    "source": {
@@ -31,7 +31,7 @@
    }
   },
   {
-   "text": "The empty family covers the empty scheme: the covering condition of [def-weil-pbc-proetale-site] is vacuous there. The sheaf axiom for this cover says that every module sheaf has exactly one section over the empty object, hence its sections there are the zero module. The same argument for a sheaf of rings gives the one-element ring. Thus restrictions of two component sheaves to an off-diagonal overlap have a unique module isomorphism, while on a diagonal overlap use the identity. These maps satisfy the cocycle condition: either all three components agree, when it is the identity, or the triple intersection is empty, when every map is unique.",
+   "text": "The empty family covers an empty object of the small pro-etale site [def-weil-pbc-proetale-site]. The proved source theorem AlgebraicGeometry.Scheme.ProEt.isTerminalSectionsOfIsEmpty makes the sections of any module sheaf a terminal abelian group. Such a group is zero, so these sections are subsingleton [def-weil-sheaf-of-modules-category]. Matching conditions for sections over distinct components are therefore automatic.",
    "uses": [
     "def-weil-pbc-proetale-site",
     "def-weil-sheaf-of-modules-category"
@@ -54,14 +54,14 @@
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-site-module-sheaf-gluing] to the covering $(X_i\\to X)_i$, the ring sheaf $R$, and the overlap data in step 2. Here $X$ is terminal in $\\mathcal C$, so $\\mathcal C/X$ is canonically $\\mathcal C$. It gives an actual $R$-module sheaf $H$ and module isomorphisms $H|_{X_i}\\cong F_i$. For every $U$, the sheaf axiom for $(U_i\\to U)_i$ gives a bijection $H(U)\\to\\prod_i H(U_i)$: the off-diagonal matching conditions are vacuous by step 2, and the diagonal ones are identities. Compose with the local isomorphisms to obtain $H(U)\\cong\\prod_iF_i(U_i)$. These maps are $R(U)$-linear and commute with restriction because both restriction maps and the local isomorphisms do. Thus the prescribed presheaf $G(F_i)$ is isomorphic to the sheaf $H$ and is a sheaf. The auxiliary $H$ proves sheafness; it is not a choice in the definition of $G$.",
+   "text": "For each i, the base-change functor X_proet to (X_i)_proet is continuous. Pushforward of F_i along this functor, with the ring map R to the pushforward of R_i induced by the composition/base-change counit, is therefore an actual R-module sheaf. Define G as the explicit product presheaf of these sheaves. Its maps, actions and object data are componentwise constructions, not chosen witnesses. The concrete module products are limiting at every object, hence form a limit of module presheaves. Limits of sheaves are sheaves, so this same explicit presheaf is a module sheaf. This proves sheafness directly and does not use general effective descent [def-weil-sheaf-of-modules-category].",
    "uses": [
-    "lem-weil-pbc-site-module-sheaf-gluing"
+    "def-weil-sheaf-of-modules-category"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 04TR, lemma-glue-sheaves; compatible-tuples construction, with empty-overlap matching conditions written out"
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DB, limits of module sheaves; Mathlib PresheafOfModules.isSheaf_of_isLimit and continuous module pushforward; direct product construction replacing general descent"
    }
   },
   {
@@ -95,9 +95,8 @@
    }
   },
   {
-   "text": "For any constant coefficient ring $A$, clause (2) of [lem-weil-proetale-weakly-etale-localization] identifies $A_{X_i}$ with $r_iA_X$ as sheaves of rings by the map that is the identity on constant sections. These identifications are natural in homomorphisms $A\\to B$: the two composites out of the constant sheaf $A_{X_i}$ agree on the constant-presheaf sections, so agree by the universal property of sheafification [def-weil-pbc-sheafification], since $A_{X_i}$ is the sheafification of the constant presheaf [def-weil-pbc-constant-sheaf]. For $A=A_{E,n}$ this proves the finite-coefficient identification. Taking $A_{E,n+1}\\to A_{E,n}$, and their composites, proves compatibility with every transition map, with no choice of an isomorphism at different levels.",
+   "text": "For a constant commutative ring A, use the inverse of the sheafification compatibility isomorphism for the continuous and cocontinuous composition functor on the small pro-etale sites. After forgetting to rings this gives r_i(A_X) isomorphic to A_(X_i). The compatibility identity with the sheafification unit proves preservation of constant sections. Naturality of the sheafification compatibility proves naturality in every ring homomorphism A to B. Apply this to the finite quotient rings and their transition homomorphisms [def-weil-pbc-constant-sheaf, def-weil-pbc-sheafification]. No full localized-site equivalence is used.",
    "uses": [
-    "lem-weil-proetale-weakly-etale-localization",
     "def-weil-pbc-constant-sheaf",
     "def-weil-pbc-sheafification"
    ],
@@ -130,13 +129,11 @@
   }
  ],
  "proof_deps": [
-  "lem-weil-proetale-weakly-etale-localization",
   "def-pur-localized-ringed-site",
   "lem-weil-pbc-open-immersion-etale",
   "lem-pur-etale-proetale-cover",
   "def-weil-pbc-proetale-site",
   "def-weil-sheaf-of-modules-category",
-  "lem-weil-pbc-site-module-sheaf-gluing",
   "lem-galois-equivalence-preserves-limits",
   "def-weil-pbc-constant-sheaf",
   "def-weil-pbc-sheafification",
@@ -146,7 +143,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites.tex",
-  "place": "Tags 04TQ/04TR/04TS, finite-disjoint module expansion, including explicit comparisons, coefficient limits, and empty cases"
+  "place": "Tags 04TQ/04TR/04TS; Y9 explicit product of continuous base-change pushforwards, disjoint-cover section bijection, coordinate decomposition, constant-sheafification comparisons and inverse limits"
  },
  "mathlib_searches": [
   {
@@ -267,10 +264,8 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-proetale-weakly-etale-localization",
   "lem-weil-pbc-open-immersion-etale",
-  "lem-pur-etale-proetale-cover",
-  "lem-weil-pbc-site-module-sheaf-gluing"
+  "lem-pur-etale-proetale-cover"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -311,5 +306,15 @@
   "group": "N7",
   "result": "pass",
   "note": "Item record differs from live only by the lean field; statement verbatim in file. All node clauses matched: clopen cover hypotheses, Mathlib ProEt sites, R via RingCat plus hcomm, R_i via sheafPushforwardContinuous along Over.map, r via SheafOfModules.pushforward. Existential G with eta, epsilon, both triangle identities, additivity of r and G, finite limit/colimit preservation. Section equivalence sigma pins the product formula, scalar action, restrictions, morphisms, unit as restriction and counit as projection through the Over.mapPullbackAdj unit. e_i = s_i ⋙ G with r_i e_i ≅ 1, off-diagonal zero, bilimit bicone of r_i⋙e_i with pt 𝟭. Kernel/cokernel/ShortComplex detection, empty-component and empty-index equivalences with Discrete PUnit. Coefficient theorem pins finite isos by sheafification-unit constant sections and all n≤m transitions, completed isos by every limit.π and the integral constant-to-completion map; n encodes exponent n+1 per the recorded convention. Universes: site t+1/t, ring u free, modules max v w (t+1); w advisory only since I is Finite. Helpers are transparent Mathlib applications; no duplicate (the PurityFiniteSetting version is downstream and specialized); sorry'd additivity instance is part of the node. Docstrings have source and blueprint, proof steps given, sorry only, no pro-etale substitute, report sections present. No compile run (none changed; human 2026-10-21)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y9",
+  "result": "pass",
+  "landing": "20261021T134622-L-1405570",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
