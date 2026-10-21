@@ -18,7 +18,9 @@
   "def-sfb-lisse-coefficient-module",
   "def-weil-open-immersion",
   "def-sfb-module-open-lower-shriek",
-  "def-sfb-continuous-map-condensed-ring-map"
+  "def-sfb-continuous-map-condensed-ring-map",
+  "def-sfb-strict-local-kummer-tame-module",
+  "def-sfb-all-continuous-scalar-mate"
  ],
  "proof": [
   {
@@ -340,5 +342,47 @@
   "group": "NV",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-bed2112ec (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement and blueprint paragraph (3) of sk-thm-sf-ctf-stability-direct-images. Paragraph (3) has no tame calculation, and the item's agent route is inherited from the NF split. The statement and stmt_deps are byte-identical to the NF 26a608e0 copy, so no target was weakened. There is no repair note and no SGA citation. Steps 2-3: the recollement triangle on V (any commutative condensed ring; b quasi-compact; D^+) is pushed forward by Rj_* and i^*, using the exactness clause of derived-exchange with the identity square. Step 4: derived-composition-adjunction-normalization applies to the inflation chain 1→G_o→G_o×G_i with λ=id, which gives θ on K-injectives. Step 5: the condensed cover-restriction conservativity applies with X=S_J and Λ=C_F. Step 6: I checked the stratification order (the closure of S_J lies in the union of S_J' with J'⊇J) and the joint reflection from exact-open-closed-unbounded-calculus, which gives i^*B=0. Step 7: e_F=ε_c∘c_!(ρ^{-1}) is exactly the adjunct in the statement, and ε is iso by the triangle. Step 8: the scalar square is an explicit equation from ring-sheaf-change, the sheafified j_! presheaf and the open-restriction counit. Step 9: the edge cases are elementary. New nodes: condensed-product-action-inflation is true (modules over R[P] in a sheaf topos; invariants adjoint; (M^H)^G) and is not a duplicate of the abstract-group inflation nodes. partial-kummer-boundary-unit-model carries the geometric core but is not a restatement of the item: it has no j_! and no invertibility, and the item still needs the triangle, the stratum induction, the counit and the scalar arguments. I tested it on the J_o=∅ case and by Mayer-Vietoris on two-branch and three-branch cases. Its source side overlaps tame-stratum-kummer-descent, but its target side is new. The inherited all-continuous Ω risk sits in this node, as recorded for the parent splits. Batch-5 flags: def-trf-SNC is a definition already in the base stmt_deps; trf-slice-subtopos-site-presentation (via subterminal calculus) is general slice-site theory; pd-section-derived-pushpull-normalization (via derived-exchange) is generic derived-functor normalization. All three are outside the assumed statements, so I accepted them. The 14 tool_uses are already-split generic infrastructure, and I accepted them for the maintainer to record. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.TransverseTameOpenShriekExchange",
+  "declaration": "AlgebraicGeometry.ProEtale.TransverseTame.transverse_tame_open_shriek_exchange",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.TransverseTame.Modules",
+   "AlgebraicGeometry.ProEtale.TransverseTame.openUnit_isIso",
+   "AlgebraicGeometry.ProEtale.TransverseTame.restrictionComparison",
+   "AlgebraicGeometry.ProEtale.TransverseTame.restrictionComparison_isIso",
+   "AlgebraicGeometry.ProEtale.TransverseTame.exchange",
+   "AlgebraicGeometry.ProEtale.TransverseTame.exchange_naturality",
+   "AlgebraicGeometry.ProEtale.TransverseTame.Boundary",
+   "AlgebraicGeometry.ProEtale.TransverseTame.Boundary.complement",
+   "AlgebraicGeometry.ProEtale.TransverseTame.Boundary.outerOpen",
+   "AlgebraicGeometry.ProEtale.TransverseTame.Boundary.innerOpen",
+   "AlgebraicGeometry.ProEtale.TransverseTame.continuousCoefficients",
+   "AlgebraicGeometry.ProEtale.TransverseTame.scalarRestriction",
+   "AlgebraicGeometry.ProEtale.TransverseTame.directScalarMap",
+   "AlgebraicGeometry.ProEtale.TransverseTame.directScalarMap_isIso",
+   "AlgebraicGeometry.ProEtale.TransverseTame.shriekScalarIso",
+   "AlgebraicGeometry.ProEtale.TransverseTame.sourceScalarIso",
+   "AlgebraicGeometry.ProEtale.TransverseTame.targetScalarIso",
+   "AlgebraicGeometry.ProEtale.TransverseTame.scalarUnit",
+   "AlgebraicGeometry.ProEtale.TransverseTame.exchange_scalar",
+   "AlgebraicGeometry.ProEtale.TransverseTame.ExchangeAt",
+   "AlgebraicGeometry.ProEtale.TransverseTame.transverse_tame_open_shriek_exchange"
+  ],
+  "file": "lean/Sheaf/Paper/TransverseTameOpenShriekExchange.lean",
+  "statement": "theorem transverse_tame_open_shriek_exchange (p ℓ : ℕ) [Fact p.Prime] [Fact ℓ.Prime] (_hpℓ : p ≠ ℓ) (k : Type u) [Field k] [CharP k p] (E : PadicAlgCl.FiniteIntermediateField ℓ) (Y : Scheme.{u}) [Y.Over (Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] (_hY : IsRegularScheme Y) (B : Boundary Y) (W V O : Scheme.{u}) (b : W ⟶ V) (a : W ⟶ O) (j : V ⟶ Y) (c : O ⟶ Y) [IsOpenImmersion b] [IsOpenImmersion a] [IsOpenImmersion j] [IsOpenImmersion c] (_hW : Set.range (b ≫ j) = (B.complement : Set Y)) (_hV : Set.range j = (B.outerOpen : Set Y)) (_hO : Set.range c = (B.innerOpen : Set Y)) (sq : IsPullback b a j c) (L : Modules (continuousCoefficients E) W) (_hL : IsLisseCoefficientModule (continuousCoefficients E) L) (_htame : IsStrictLocalKummerTameModule p (continuousCoefficients E) B.divisor (b ≫ j) L) : ExchangeAt (continuousCoefficients E) sq L ∧ ExchangeAt (continuousCoefficients (PadicAlgCl ℓ)) sq ((Mod.extendScalars (coefficientMap (tameBoundaryScalarMap ℓ E) W)).obj L)",
+  "branch": "newtargets-dag",
+  "by": "N7",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The main theorem gives both coefficient instances and inner-boundary vanishing. exchange_naturality and exchange_scalar give the two functoriality clauses; scalarUnit is exactly the ordinary extension/restriction adjunction unit inserted in degree zero. The exchange is the adjunct of the inverse of restrictionComparison, which uses the published derived exchange and the actual open unit. directScalarMap is normalized by the ordinary comparison and right-derived units without assuming scalar flatness. Added two already landed definition dependencies; no definition is duplicated and no natural-language statement changed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ae45e646a",
+  "group": "N7",
+  "result": "pass",
+  "note": "Read item, all 13 stmt_dep records, the module, the report, and the live SNC/tame/scalar-mate/exchange/adjunction/change-of-coefficients sources. Boundary = the IsStrictNormalCrossingsBoundary witness verbatim plus an arbitrary outer Finset; the witness is forced to be the irreducible components, so no extra hypothesis. Coefficients are all-continuous continuousMapRingObj; tameBoundaryScalarMap is the subtype inclusion; L_Ω is the ordinary extendScalars. Tameness is the landed IsStrictLocalKummerTameModule on (D, b≫j). exchange is the c_!⊣c^* adjunct of inv(c^*≅Lc^* ≫ moduleObjectDerivedExchange ≫ Ra_*(Lb^*≅b^* ≫ inv open unit)): canonical, with true named isIso helpers. ExchangeAt = IsIso ∧ IsZero on c.closedComplement (the whole inner union), for E and Ω. exchange_naturality is stated for all derived maps; exchange_scalar for any μ gives the node's square with scalarUnit; directScalarMap is canonical with a true isIso (K-limp, no flatness). Edge cases n=0, empty parts and rank 0 are covered. lean.statement is verbatim; added stmt_deps are landed defs and used; NL statement unchanged; no hollow defs; 6 named sorry theorems with docstrings. No compile (no file changed)."
  }
 }
