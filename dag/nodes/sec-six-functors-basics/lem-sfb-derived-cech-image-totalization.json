@@ -14,7 +14,11 @@
   "def-pur-localized-ringed-site",
   "def-weil-abstract-derived-category",
   "def-sp-double-complex-total",
-  "def-pur-kinjective-complex"
+  "def-pur-kinjective-complex",
+  "def-sfb-coherent-cech-image-model",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-sp-injective-resolutions",
+  "def-sfb-element-site-localization"
  ],
  "proof": [
   {
@@ -310,5 +314,38 @@
   "group": "NZ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-c5e537e73 (reviewer sub-agent of L); spot-checked: I read the item in full: 8 steps, no new nodes, every cited statement, Stacks 03FC at sites-cohomology.tex:1816, and the Lean quasiIso_of_column_augmentation. The item is unsplit and unreviewed on live and side-live, so it is not superseded, and there is no re-split repair note. The displayed isomorphism and all original clauses are kept. The two appended sentences only make precise the existing 'compatible resolution' (coherent resolution model) and state that coefficient naturality is along the canonical comparisons T Rf_* -> Rf'_* T without claiming they are invertible. That is not a weakening: underived commutation cannot give invertibility, and the only citer (tame-stratum-kummer-descent, steps 4 and 7) gets that identification from another node. The statement is true (Cech descent for an epimorphism V->1 in a ringed topos). Edge cases checked: V=1 (constant nerve exact), split cover, K=0, degenerate topos, h=id. Step checks: (1) a bounded-below injective resolution is K-injective, and the total sign d_Cech+(-1)^n d_res matches def-sp-double-complex-total. (2) A topos slice is not a site object, so lem-trf-topos-localization-site-presentation is needed before 08FI-type restriction, and kinjective-total-derived gives the comparison. (3) Restriction preserves injectives via the exact left adjoint G; then 03FB, then presheaf-nerve acyclicity for V_A->1 with no covering hypothesis; degree 0 via local surjectivity and gluing; sectionwise exactness gives exactness of sheaves. (4) The Lean indexing (a: A->K.X 0, hypothesis on K.flip.X n) puts the Cech degree first, and the Mathlib sign (-1)^p on d2 matches. (5) Exact h^* is applied termwise over finite biproducts. (6) The triangle identity plus the derived-adjunction normalization equations. (7) Lift, naturality, Hom uniqueness, and the total-homotopy sign (-1)^n s are correct. (8) T is exact and the target J is K-injective, which is enough. Duplicate search found only narrower nodes (degreewise, etale open covers, weakly contractible hypercovers, Lambda-module holim). There is no SGA, all 11 Stacks tags exist with the stated labels, and the off-unit split statements are all declared in tool_uses and accepted as generic. Batch-5 flags: lem-trf-topos-localization-site-presentation is a Giraud/03CI/04GZ presentation whose closure has no trace-formula or Poincare content (only def-trf-geometric-morphism) and no assumption leaf; lem-trf-bounded-below-derived-adjunction is a generic derived adjunction (09T5) with a 14-node definitional closure. Both are outside the assumed statements, so both are accepted."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DerivedCechImageTotalization",
+  "declaration": "CategoryTheory.CoherentCechImageModel.derived_cech_image_totalization",
+  "declarations": [
+   "CategoryTheory.cechImage_moduleResolutions",
+   "CategoryTheory.cechImage_elementPullback_additive",
+   "CategoryTheory.coherentCechImageModel_nonempty",
+   "CategoryTheory.CoherentCechImageModel.resolutionComparison",
+   "CategoryTheory.CoherentCechImageModel.derived_cech_image_totalization",
+   "CategoryTheory.CoherentCechImageModel.column_comparison_isIso",
+   "CategoryTheory.CoherentCechImageModel.finite_total_comparison",
+   "CategoryTheory.CoherentCechImageModel.augmentation_resolution_naturality",
+   "CategoryTheory.CoherentCechImageModel.augmentation_refinement_naturality",
+   "CategoryTheory.CoherentCechImageModel.coefficientTotalMap",
+   "CategoryTheory.CoherentCechImageModel.augmentation_coefficient_naturality",
+   "CategoryTheory.CoherentCechImageModel.coefficient_derived_normalization",
+   "CategoryTheory.CoherentCechImageModel.total_map_eq_of_homotopy"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/DerivedCechImageTotalization.lean",
+  "statement": "theorem derived_cech_image_totalization (f : RingedToposMorphism R S) (h : RingedToposMorphism T S) [IsIso f.ringMap] [IsIso h.ringMap] (fInverse : ringedSiteModules.{u} S ⥤ ringedSiteModules.{u} R) [fInverse.Additive] [PreservesFiniteLimits fInverse] [PreservesFiniteColimits fInverse] (_fAdj : fInverse ⊣ f.modules) (H : ringedSiteModules.{u} S ⥤ ringedSiteModules.{u} T) [H.Additive] [PreservesFiniteLimits H] [PreservesFiniteColimits H] (_hAdj : H ⊣ h.modules) (_hR : ∀ (U : Cᵒᵖ) (a b : R.obj.obj U), a * b = b * a) (_hS : ∀ (U : Xᵒᵖ) (a b : S.obj.obj U), a * b = b * a) (_hT : ∀ (U : Bᵒᵖ) (a b : T.obj.obj U), a * b = b * a) (D : CoherentCechImageModel R) (V : Sheaf J (Type u)) [Epi (terminal.from V)] (M : ringedSiteModules.{u} R) (I : InjectiveResolution M) : ∃ (hI : CochainComplex.IsKInjective (I.cocomplex.extend ComplexShape.embeddingUpNat)) (a : ((f.modules ⋙ H).mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex ⟶ (D.bicomplex (f.modules ⋙ H) V I.cocomplex).X 0) (b : ((f.modules ⋙ H).mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex ⟶ (D.bicomplex (f.modules ⋙ H) V I.cocomplex).total (ComplexShape.up ℕ)) (e : H.mapDerivedCategory.obj (f.modules.rightDerivedFunctor.obj (DerivedCategory.Q.obj (((CochainComplex.single₀ _).obj M).extend ComplexShape.embeddingUpNat))) ≅ DerivedCategory.Q.obj (D.total (f.modules ⋙ H) V I.cocomplex)), (∀ q : ℕ, a.f q = (f.modules ⋙ H).map ((D.augmentation ((sheafCoverNerve V).obj (op (SimplexCategory.mk 0)))).app (I.cocomplex.X q))) ∧ (∀ q : ℕ, b.f q = a.f q ≫ (D.bicomplex (f.modules ⋙ H) V I.cocomplex).ιTotal (ComplexShape.up ℕ) 0 q q (zero_add q)) ∧ resolutionComparison f.modules H I hI ≫ DerivedCategory.Q.map ((I.cocomplex.mapExtendIso ComplexShape.embeddingUpNat (f.modules ⋙ H)).hom ≫ HomologicalComplex.extendMap b ComplexShape.embeddingUpNat) = e.hom",
+  "branch": "newtargets-dag",
+  "by": "NK",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-da00d9114",
+  "group": "NK",
+  "result": "pass",
+  "note": "Re-delivery of d2bb6cae H2/H12 RETURN. Lean byte-identical (diff -r snapshots); item statement byte-identical to side-live, only stmt_deps added def-sfb-element-site-localization. New def node existing:true on Sheaf.CategoryTheory.RingedSheafSliceConstruction (elementProjection/Topology/Ring/ModulePullback/Map/ModulePullbackOver, all plain defs at l.34-300, live=side-live by cmp); TeX matches the bodies (induced topology, p_A^*R, sectionwise pushforward with identity coefficient map, continuity as data), Stacks 0791/04IE/04J4 correct; stmt_deps own ringedSiteModules; covers every element* decl used by both delivered modules; no other def owner in side-live DAG; check_existing: no failures, only the noncomputable note (advisory). def-sfb-coherent-cech-image-model now cites the def node instead of lem-weil-pbc-ringed-sheaf-slice-adjunction; all stmt_deps of item and new nodes are definition nodes. Prior mathematical reading stands (e pinned to resolutionComparison ≫ Q(extendMap b), sign d_Cech+(-1)^n d_res, canonical naturalities, derived-category form). No compile (no file changed); worker 17.3 s/27.2 s clean, dry run 74eb826a246 passed."
  }
 }

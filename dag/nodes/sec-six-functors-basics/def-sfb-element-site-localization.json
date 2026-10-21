@@ -1,0 +1,123 @@
+{
+ "id": "def-sfb-element-site-localization",
+ "kind": "definition",
+ "title": "Element-site localization and canonical module restriction",
+ "status": "split",
+ "statement": "Let $C$ be a small category with Grothendieck topology $J$ [def-weil-pbc-sites-and-cohomology], and fix the common universe for its objects, morphisms, ring sections, set-sheaf sections and module fibres [def-weil-size-convention]. Let $R$ be a sheaf of rings and $A$ a sheaf of sets on $(C,J)$. The element site has underlying category $\\operatorname{El}(A)^{\\mathrm{op}}$, with objects $(U,s)$ for $s\\in A(U)$ and arrows induced by restriction in $A$. Its projection $p_A$ sends $(U,s)$ to $U$. Define its topology $J_A$ to be the induced Grothendieck topology $p_A.\\operatorname{inducedTopology}(J)$, and define $R_A=p_A^*R$ by precomposition with $p_A^{\\mathrm{op}}$. On module sheaves [def-weil-sheaf-of-modules-category], define the canonical restriction $j_A^*:\\operatorname{Mod}(R)\\to\\operatorname{Mod}(R_A)$ by precomposition along $p_A$ with identity coefficient map, so $(j_A^*M)(U,s)=M(U)$ and morphisms and restrictions are inherited sectionwise. A morphism of sheaves $b:B\\to A$ induces the element functor $p_b:\\operatorname{El}(B)^{\\mathrm{op}}\\to\\operatorname{El}(A)^{\\mathrm{op}}$, $(U,t)\\mapsto(U,b_U(t))$. Given continuity of $p_b$ for $J_B,J_A$, define $j_b^*:\\operatorname{Mod}(R_A)\\to\\operatorname{Mod}(R_B)$ by this same sectionwise restriction with identity coefficient map. These are the concrete element-site localization constructions, without an adjunction or equivalence assertion.",
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites.tex; literature/stacks-project/sites-modules.tex",
+  "place": "Tag 0791, lemma-localize-topos-site (element category and sectionwise restriction); Tag 04IE, lemma-localize-ringed-topos (restricted ring and modules); Tag 04J4, lemma-relocalize-ringed-topos (restriction along a map of sheaves)."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a sheaf A on a site, define the category of elements, induced topology, restricted ring sheaf and sectionwise module restriction functors",
+   "results": "8 hits: CategoryTheory.Sheaf.ΓRes, AlgebraicGeometry.Scheme.Modules.restrictFunctor, SheafOfModules.restrictScalars, SheafOfModules.sectionsFunctor, SheafOfModules.forgetToSheafModuleCat, AlgebraicGeometry.Scheme.Modules, SheafOfModules.noConfusionType, SheafOfModules.sectionsFunctor_obj. Mathlib has general restriction ingredients, but not the recorded element-site specialization.",
+   "date": "2026-10-21",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a sheaf A on a site, define the category of elements, induced topology, restricted ring sheaf and sectionwise module restriction functors",
+   "results": "8 hits: SheafOfModules.over, SheafOfModules, SheafOfModules.instCategory, SheafOfModules.QuasicoherentData.I, SheafOfModules.restrictScalars, SheafOfModules.forgetToSheafModuleCat, SheafOfModules.evaluation, SheafOfModules.sectionsFunctor. Mathlib has general restriction ingredients, but not the recorded element-site specialization.",
+   "date": "2026-10-21",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "elementTopology|elementRing|elementModulePullback|elementMap",
+   "results": "0 hits: . No Mathlib declarations with these names.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "elementTopology|elementRing|elementModulePullbackOver|def elementMap|def elementModulePullback in lean/WeilConjectures and lean/Sheaf",
+   "results": "No upstream WeilConjectures match; the six constructions already exist in Sheaf.CategoryTheory.RingedSheafSliceConstruction, at lines 33, 44, 61, 271, 291 and 300. Other Sheaf modules use them without redefining them. Reused with existing:true.",
+   "date": "2026-10-21",
+   "verdict": "exact existing project match"
+  },
+  {
+   "tool": "grep",
+   "query": "elementRing|elementModulePullback|elementTopology|elementMap|elementModulePullbackOver|element-site-localization in dag/nodes; blueprint_refs.py search \"element site localization\"",
+   "results": "Only statement nodes mention these definitions: their owning module is bound to lem-weil-pbc-element-module-extension-adjunction, with no definition node carrying these constructions. No def-sfb-element-site-localization exists. Blueprint search returned 0 matches; ancestor returned None.",
+   "date": "2026-10-21",
+   "verdict": "no existing definition node"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-derived-cech-image-totalization",
+  "date": "2026-10-21",
+  "group": "NK"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image: actual element-site ring and module restrictions used to form the coherent covering-nerve diagram and its derived totalization.",
+   "via": [
+    "lem-sfb-derived-cech-image-totalization",
+    "lem-sfb-tame-stratum-kummer-descent",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RingedSheafSliceConstruction",
+  "declaration": "CategoryTheory.elementModulePullback",
+  "declarations": [
+   "CategoryTheory.elementProjection",
+   "CategoryTheory.elementTopology",
+   "CategoryTheory.elementRing",
+   "CategoryTheory.elementModulePullback",
+   "CategoryTheory.elementMap",
+   "CategoryTheory.elementModulePullbackOver"
+  ],
+  "statement": "noncomputable def elementModulePullback {C : Type u} [SmallCategory C]\n    {J : GrothendieckTopology C} (R : Sheaf J RingCat.{u}) (A : Sheaf J (Type u)) :\n    ringedSiteModules R ⥤ ringedSiteModules (elementRing R A)",
+  "branch": "newtargets-dag",
+  "by": "NK",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Existing concrete constructions, read both locally and through scompile.py --source. This definition node owns only the element-site projection, topology, restricted ring and canonical restriction functors needed by the consumer; it does not use the adjunction theorem as a statement dependency. No Lean source is duplicated or changed."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-da00d9114",
+  "group": "NK",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-da00d9114",
+  "group": "NK",
+  "result": "pass",
+  "note": "Re-delivery of d2bb6cae H2/H12 RETURN. Lean byte-identical (diff -r snapshots); item statement byte-identical to side-live, only stmt_deps added def-sfb-element-site-localization. New def node existing:true on Sheaf.CategoryTheory.RingedSheafSliceConstruction (elementProjection/Topology/Ring/ModulePullback/Map/ModulePullbackOver, all plain defs at l.34-300, live=side-live by cmp); TeX matches the bodies (induced topology, p_A^*R, sectionwise pushforward with identity coefficient map, continuity as data), Stacks 0791/04IE/04J4 correct; stmt_deps own ringedSiteModules; covers every element* decl used by both delivered modules; no other def owner in side-live DAG; check_existing: no failures, only the noncomputable note (advisory). def-sfb-coherent-cech-image-model now cites the def node instead of lem-weil-pbc-ringed-sheaf-slice-adjunction; all stmt_deps of item and new nodes are definition nodes. Prior mathematical reading stands (e pinned to resolutionComparison ≫ Q(extendMap b), sign d_Cech+(-1)^n d_res, canonical naturalities, derived-category form). No compile (no file changed); worker 17.3 s/27.2 s clean, dry run 74eb826a246 passed."
+ }
+}
