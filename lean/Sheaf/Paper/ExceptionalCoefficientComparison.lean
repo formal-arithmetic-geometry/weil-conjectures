@@ -22,6 +22,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.KFlatAcyclic
 import Sheaf.SixFunctors.EtaleHomComparisonModels
 import Sheaf.CategoryTheory.DerivedTensorRightExact
 import Sheaf.SecSmoothPurity.ProperFiniteCoefficientExtension
+import WeilConjectures.SixFunctors.Etale.Derived.Stability.UpperShriek
 
 
 /-! # Exceptional coefficient comparisons
@@ -768,6 +769,94 @@ def BaseChangeCompatibility [Finite A] [Finite B] {X Y Y' : Scheme.{u}}
         (mateMap φ f K) ≫
       smoothExceptionalBaseChangeMap B f g ((scalarExtension φ Y).obj K)
 
+private def compactSupportNatTrans {X Y : Scheme.{u}} {f : X ⟶ Y}
+    (c : Compactification f) :
+    rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c ⋙
+        scalarExtension φ Y ⟶
+      scalarExtension φ X ⋙
+        rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} B) c :=
+  Functor.whiskerLeft
+      (openImmersionLowerShriek (ModuleCat.{u + 1} A) c.i).mapDerivedCategory
+      (scalarMate φ c.g) ≫
+    Functor.whiskerRight (openIso φ c.i).hom
+      (lowerStar (ModuleCat.{u + 1} B) c.g).rightDerivedFunctor
+
+private theorem compactSupport_isIso [Finite A] [Finite B]
+    {X Y : Scheme.{u}} [IsNoetherian Y] {f : X ⟶ Y}
+    (c : Compactification f) (M : DerivedCategoryModule A X) :
+    IsIso (compactSupportMap φ c M) := by
+  have : IsLocallyNoetherian c.Z := LocallyOfFiniteType.isLocallyNoetherian c.g
+  have : CompactSpace c.Z := QuasiCompact.compactSpace_of_compactSpace c.g
+  have : IsNoetherian c.Z := ⟨⟩
+  have := (properFiniteCoefficientExtension φ c.g).1
+    ((openImmersionLowerShriek (ModuleCat.{u + 1} A) c.i).mapDerivedCategory.obj M)
+  unfold compactSupportMap
+  infer_instance
+
+private def compactSupportIso [Finite A] [Finite B]
+    {X Y : Scheme.{u}} [IsNoetherian Y] {f : X ⟶ Y}
+    (c : Compactification f) :
+    rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c ⋙
+        scalarExtension φ Y ≅
+      scalarExtension φ X ⋙
+        rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} B) c := by
+  exact NatIso.ofComponents
+    (fun M ↦ @asIso _ _ _ _ (compactSupportMap φ c M) (compactSupport_isIso φ c M))
+    (fun a ↦ (compactSupportNatTrans φ c).naturality a)
+
+private theorem comparisonInverse_eq [Finite A] [Finite B]
+    {X Y : Scheme.{u}} [IsNoetherian Y] {f : X ⟶ Y}
+    (c : Compactification f) (M : DerivedCategoryModule A X) :
+    comparisonInverse φ c M = (compactSupportIso φ c).inv.app M := by
+  have := compactSupport_isIso φ c M
+  simp only [comparisonInverse, dif_pos this]
+  rfl
+
+private theorem mateMap_eq [Finite A] [Finite B]
+    {X Y : Scheme.{u}} [IsNoetherian Y] (f : X ⟶ Y) [HasCompactification f]
+    (K : DerivedCategoryModule A Y) :
+    mateMap φ f K =
+      (mateEquiv (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} A) f)
+        (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} B) f)
+        (TwoSquare.mk _ _ _ _
+          (compactSupportIso φ (HasCompactification.compactification f)).inv)).app K := by
+  apply ((rightDerivedUpperShriekAdjunction
+    (ModuleCat.{u + 1} B) f).homEquiv _ _).symm.injective
+  rw [mateMap, Equiv.symm_apply_apply, Adjunction.homEquiv_counit, mateEquiv_counit]
+  rw [comparisonInverse_eq]
+
+private theorem mate_cocycle_at
+    {C₁ D₁ C₂ D₂ C₃ D₃ : Type*}
+    [Category C₁] [Category D₁] [Category C₂] [Category D₂]
+    [Category C₃] [Category D₃]
+    {P₁ : C₁ ⥤ D₁} {R₁ : D₁ ⥤ C₁} {P₂ : C₂ ⥤ D₂} {R₂ : D₂ ⥤ C₂}
+    {P₃ : C₃ ⥤ D₃} {R₃ : D₃ ⥤ C₃}
+    (a₁ : P₁ ⊣ R₁) (a₂ : P₂ ⊣ R₂) (a₃ : P₃ ⊣ R₃)
+    {S : C₁ ⥤ C₂} {T : D₁ ⥤ D₂} {U : C₂ ⥤ C₃} {V : D₂ ⥤ D₃}
+    {W : C₁ ⥤ C₃} {Z : D₁ ⥤ D₃}
+    (α : TwoSquare S P₁ P₂ T) (β : TwoSquare U P₂ P₃ V)
+    (γ : TwoSquare W P₁ P₃ Z) (eX : S ⋙ U ≅ W) (eY : T ⋙ V ≅ Z)
+    (K : D₁)
+    (hc : P₃.map (eX.hom.app (R₁.obj K)) ≫ γ.app (R₁.obj K) =
+      β.app (S.obj (R₁.obj K)) ≫ V.map (α.app (R₁.obj K)) ≫
+        eY.hom.app (P₁.obj (R₁.obj K))) :
+    U.map ((mateEquiv a₁ a₂ α).app K) ≫
+        (mateEquiv a₂ a₃ β).app (T.obj K) ≫ R₃.map (eY.hom.app K) =
+      eX.hom.app (R₁.obj K) ≫ (mateEquiv a₁ a₃ γ).app K := by
+  apply (a₃.homEquiv _ _).symm.injective
+  simp only [Adjunction.homEquiv_counit, Functor.map_comp, Category.assoc]
+  rw [show P₃.map (R₃.map (eY.hom.app K)) ≫ a₃.counit.app _ =
+    a₃.counit.app _ ≫ eY.hom.app K from a₃.counit.naturality _]
+  slice_lhs 2 3 => rw [mateEquiv_counit]
+  slice_lhs 1 2 => exact β.naturality _
+  simp only [Functor.comp_map, Category.assoc]
+  slice_lhs 2 3 => rw [← V.map_comp, mateEquiv_counit, V.map_comp]
+  simp only [Category.assoc]
+  slice_lhs 3 4 => exact eY.hom.naturality (a₁.counit.app K)
+  slice_lhs 1 3 => exact hc.symm
+  rw [mateEquiv_counit]
+  exact Category.assoc _ _ _
+
 end ExceptionalCoefficients
 
 
@@ -804,7 +893,35 @@ theorem exceptional_domain_and_counit
         (scalarExtension (FiniteReduction.quotient l hmr) Y).map
           ((rightDerivedUpperShriekAdjunction
             (ModuleCat.{u + 1} (FiniteReduction.Coeff l r)) f).counit.app K)) := by
-  sorry
+  have _ := hb
+  have hUnit : IsUnit (l : Γ(Y, ⊤)) := by
+    apply Y.toRingedSpace.isUnit_of_isUnit_germ
+    intro y hy
+    simpa only [map_natCast] using hInvertible y
+  have hCoeff : ((l ^ r : ℕ) : FiniteReduction.Coeff.{u} l r) = 0 := by
+    apply ULift.ext
+    apply ULift.ext
+    exact ZMod.natCast_self (l ^ r)
+  have : HasInvertibleExponent (FiniteReduction.Coeff.{u} l r) Y :=
+    ⟨l ^ r, pow_pos (Fact.out : l.Prime).pos r, hCoeff, by
+      simpa only [Nat.cast_pow] using hUnit.pow r⟩
+  have hDomain (K : DerivedCategoryModule (FiniteReduction.Coeff l r) Y)
+      (hK : DerivedCategory.boundedConstructibleFiniteTor (FiniteReduction.Coeff l r) Y K) :
+      DerivedCategory.boundedConstructibleFiniteTor (FiniteReduction.Coeff l r) X
+        ((rightDerivedUpperShriek (ModuleCat.{u + 1} (FiniteReduction.Coeff l r)) f).obj K) := by
+    obtain ⟨a, b, ht⟩ := hK.2
+    have h := constructibleTorAmplitudeIn_rightDerivedUpperShriek_of_smoothOfRelativeDimension
+      (FiniteReduction.Coeff l r) f d a b
+      ⟨⟨hK.1, _root_.DerivedCategory.homologyConcentratedIn_of_torAmplitudeIn ht⟩, ht⟩
+    exact ⟨h.1.1, _, _, h.2⟩
+  refine ⟨hDomain, ?_⟩
+  intro K hK
+  refine ⟨ExceptionalCoefficients.compactSupportMap_isIso l r m d hmr hm hInvertible
+    (HasCompactification.compactification f) _ (hDomain K hK), ?_⟩
+  unfold ExceptionalCoefficients.mateMap
+  exact ((rightDerivedUpperShriekAdjunction
+    (ModuleCat.{u + 1} (FiniteReduction.Coeff l m)) f).homEquiv _ _).symm_apply_apply _
+
 
 /-- Naturality and the successive quotient cocycle for exceptional coefficient mates.
 Source: blueprint compatibility steps 4--5.
@@ -842,7 +959,61 @@ theorem exceptional_naturality_and_cocycle
       (ExceptionalCoefficients.quotientAssociator X l hmr hnm).hom.app
           ((rightDerivedUpperShriek (ModuleCat.{u + 1} (FiniteReduction.Coeff l r)) f).obj K) ≫
         ExceptionalCoefficients.mateMap (FiniteReduction.quotient l (hnm.trans hmr)) f K) := by
-  sorry
+  constructor
+  · intro K K' hK hK' h
+    have _ := hK
+    have _ := hK'
+    simp only [ExceptionalCoefficients.mateMap_eq]
+    exact (mateEquiv
+      (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} (FiniteReduction.Coeff l r)) f)
+      (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} (FiniteReduction.Coeff l m)) f)
+      (TwoSquare.mk _ _ _ _ (ExceptionalCoefficients.compactSupportIso
+        (FiniteReduction.quotient l hmr)
+        (HasCompactification.compactification f)).inv)).naturality h
+  · intro n hnm hn K hK
+    let c := HasCompactification.compactification f
+    let S := scalarExtension (FiniteReduction.quotient l hmr) X
+    let T := scalarExtension (FiniteReduction.quotient l hmr) Y
+    let U := scalarExtension (FiniteReduction.quotient l hnm) X
+    let V := scalarExtension (FiniteReduction.quotient l hnm) Y
+    let W := scalarExtension (FiniteReduction.quotient l (hnm.trans hmr)) X
+    let Z := scalarExtension (FiniteReduction.quotient l (hnm.trans hmr)) Y
+    let P₁ := rightDerivedLowerShriek (ModuleCat.{u + 1} (FiniteReduction.Coeff l r)) f
+    let P₂ := rightDerivedLowerShriek (ModuleCat.{u + 1} (FiniteReduction.Coeff l m)) f
+    let P₃ := rightDerivedLowerShriek (ModuleCat.{u + 1} (FiniteReduction.Coeff l n)) f
+    let R₁ := rightDerivedUpperShriek (ModuleCat.{u + 1} (FiniteReduction.Coeff l r)) f
+    let i₁₂ := ExceptionalCoefficients.compactSupportIso (FiniteReduction.quotient l hmr) c
+    let i₂₃ := ExceptionalCoefficients.compactSupportIso (FiniteReduction.quotient l hnm) c
+    let i₁₃ := ExceptionalCoefficients.compactSupportIso
+      (FiniteReduction.quotient l (hnm.trans hmr)) c
+    let eX := ExceptionalCoefficients.quotientAssociator X l hmr hnm
+    let eY := ExceptionalCoefficients.quotientAssociator Y l hmr hnm
+    let M := R₁.obj K
+    have hM := (exceptional_domain_and_counit l r m d hmr hm f hInvertible hb).1 K hK
+    have hcomp := hb r m n hmr hnm hn M hM
+    change eY.hom.app (P₁.obj M) ≫ i₁₃.hom.app M =
+      V.map (i₁₂.hom.app M) ≫ i₂₃.hom.app (S.obj M) ≫ P₃.map (eX.hom.app M) at hcomp
+    have hc : P₃.map (eX.hom.app M) ≫ i₁₃.inv.app M =
+        i₂₃.inv.app (S.obj M) ≫ V.map (i₁₂.inv.app M) ≫ eY.hom.app (P₁.obj M) := by
+      apply (cancel_epi (V.map (i₁₂.hom.app M) ≫ i₂₃.hom.app (S.obj M))).1
+      calc
+        _ = (eY.hom.app (P₁.obj M) ≫ i₁₃.hom.app M) ≫ i₁₃.inv.app M := by
+          rw [hcomp]
+          simp only [Category.assoc]
+        _ = eY.hom.app (P₁.obj M) := by
+          simp only [Category.assoc, Iso.hom_inv_id_app]
+          exact Category.comp_id _
+        _ = _ := by
+          simp only [Category.assoc, Iso.hom_inv_id_app_assoc,
+            ← V.map_comp_assoc, Iso.hom_inv_id_app, V.map_id, Category.id_comp]
+    have h := ExceptionalCoefficients.mate_cocycle_at
+      (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} (FiniteReduction.Coeff l r)) f)
+      (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} (FiniteReduction.Coeff l m)) f)
+      (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} (FiniteReduction.Coeff l n)) f)
+      (TwoSquare.mk S P₁ P₂ T i₁₂.inv) (TwoSquare.mk U P₂ P₃ V i₂₃.inv)
+      (TwoSquare.mk W P₁ P₃ Z i₁₃.inv) eX eY K hc
+    simpa only [ExceptionalCoefficients.mateMap_eq] using h
+
 
 /-- Tensor and Cartesian base-change compatibilities for exceptional coefficient mates.
 Source: blueprint compatibility steps 6--10.
