@@ -56,7 +56,7 @@
    }
   },
   {
-   "text": "Conversely assume $\\Phi$ faithful, and let $g,g':x\\to y$ in $\\mathcal C_k$ satisfy $\\Phi_k(g)=\\Phi_k(g')$. Normalization $T_{kk}=\\mathrm{Id}$ and $\\theta_{kk}=\\mathrm{id}$ in [det-def-sfb-filtered-two-colimit-model] makes $[k,g]$ and $[k,g']$ arrows $(k,x)\\to(k,y)$ whose images are $\\Phi_k(g),\\Phi_k(g')$. Faithfulness gives $[k,g]=[k,g']$. Clause (3) of [lem-weil-pbc-filtered-colimit-sets-elementwise], applied to the small filtered tail $J_{kk}$, gives $n\\ge k$ with $t_{kn}(g)=t_{kn}(g')$. Here the model formula is\n$$t_{kn}(g)=\\tau_{kkn,y}T_{kn}(g)\\tau_{kkn,x}^{-1}=T_{kn}(g),$$\nand the same formula holds for $g'$, since $\\tau_{kkn}$ is an identity by normalization. Thus $T_{kn}(g)=T_{kn}(g')$, precisely (Hom-inj) in [det-def-sfb-filtered-two-colimit-conditions].",
+   "text": "Conversely suppose the comparison is faithful. For g,g' : x → y in C_k with equal Phi_k-images, use representatives [k,T_kk(g)] and [k,T_kk(g')]. Naturality of theta_kk identifies their comparison images with Phi_k(g) and Phi_k(g'). Faithfulness gives equality of these classes. The model's homClass_eq_iff supplies a common later stage n where their homTransition images agree (both stage inequalities are propositionally equal). Naturality of tau_kkn identifies each transition of T_kk(g) with T_kn(g), and likewise for g'. Thus T_kn(g)=T_kn(g'), the Hom-inj condition. This uses the same diagonal-representative argument as the blueprint, with naturality replacing explicit transports through the normalization equalities.",
    "uses": [
     "det-def-sfb-filtered-two-colimit-model",
     "lem-weil-pbc-filtered-colimit-sets-elementwise",
@@ -69,11 +69,10 @@
    }
   },
   {
-   "text": "If the cocone is a filtered 2-colimit as defined in [det-def-sfb-filtered-two-colimit-conditions], steps 1–4 show that $\\Phi$ is essentially surjective and bijective on every Hom set. Apply [lem-trf-fully-faithful-ess-surj-equivalence] to $\\mathcal C_\\infty,\\mathcal D,\\Phi$ to obtain a quasi-inverse and natural isomorphisms; use a common sufficiently large universe for these ordinary categories. Conversely if $\\Phi$ is an equivalence, choose its quasi-inverse $G$ with $G\\Phi\\cong\\mathrm{id}$ and $\\Phi G\\cong\\mathrm{id}$. By [lem-sf-quasi-inverse-hom-bijection], its Hom maps are bijective, so it is full and faithful. Each object $d$ is isomorphic to $\\Phi(Gd)$ by the second natural isomorphism, so it is essentially surjective. Steps 1–4 give (Obj), (Hom-surj), and (Hom-inj); their conjunction is exactly the filtered 2-colimit predicate. This proves the final equivalence.",
+   "text": "Combine the first three equivalences. Mathlib Functor.IsEquivalence is the Prop structure with Faithful, Full and EssSurj fields, so supply these fields from the three cocone conditions. Conversely, project these fields from an IsEquivalence proof and use the three equivalences to form CategoryCocone.IsFilteredTwoColimit. Functor.asEquivalence realizes this categorical criterion by an actual quasi-inverse if desired; no separate quasi-inverse Hom-bijection lemma is needed.",
    "uses": [
     "det-def-sfb-filtered-two-colimit-conditions",
-    "lem-trf-fully-faithful-ess-surj-equivalence",
-    "lem-sf-quasi-inverse-hom-bijection"
+    "lem-trf-fully-faithful-ess-surj-equivalence"
    ],
    "elementary": false,
    "source": {
@@ -86,13 +85,12 @@
   "det-def-sfb-filtered-two-colimit-model",
   "det-def-sfb-filtered-two-colimit-conditions",
   "lem-weil-pbc-filtered-colimit-sets-elementwise",
-  "lem-trf-fully-faithful-ess-surj-equivalence",
-  "lem-sf-quasi-inverse-hom-bijection"
+  "lem-trf-fully-faithful-ess-surj-equivalence"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-characterization.proof.md",
-  "place": "All three numbered arguments and final sentence, with explicit citations of the filtered set-colimit and equivalence criteria (Stacks Tags 04AX and 02C3)."
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-characterization.md",
+  "place": "Blueprint proof steps 1–3 and final sentence, implemented by the model Hom-class API, Mathlib ColimitType representatives, NatIso.naturality_1, and Functor.IsEquivalence fields; diagonal representatives are T_kk(g)."
  },
  "mathlib_searches": [
   {
@@ -191,5 +189,15 @@
   "group": "NI",
   "result": "pass",
   "note": "Item theorem comparison_characterization matches the node: EssSurj<->EssSurjObj, Full<->HomSurj, Faithful<->HomInj, IsFilteredTwoColimit<->IsEquivalence, with the canonical comparison of the model; statement verbatim; Nonempty I is the Stacks directed convention; universes independent. The section 1(B) repair restores the model module deleted on live 2026-10-20 (only the lean field changes; the item is now reached via the TwoColimit target in queue.md). Its tau, normalization (HEq pins satisfiable, constant-system probe), cocycle and compatibility match the node; Hom sets are the actual ColimitType with universal property; composition, identity and comparison are real data; the 15 sorries are law theorems listed in lean.declarations. No name clash on live. nt_compile --json: model 1.8 s, item 1.2 s, clean. Maintainer note: re-creates a module deleted as dead."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261021T060942-L-1677914",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
