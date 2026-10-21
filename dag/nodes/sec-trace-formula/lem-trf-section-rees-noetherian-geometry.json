@@ -23,9 +23,194 @@
   "def-asd-compactifiable",
   "def-weil-etale-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply the existing centred-coordinate theorem to the given smooth separated finite-type map and closed section. Its hypotheses are exactly those here, including pure dimension $d$ and Noetherian $S$. It gives affine neighbourhoods of the section with $P=R[x_1,\\ldots,x_d]\\to B$ etale, $I=(x)B$, and $B/I=R$. It also gives local freeness of $\\mathcal E$ of rank $d$ and the canonical symmetric-to-associated-graded isomorphism, with the prescribed monomial formula. Use these actual ideal-class frames for the bundle throughout.",
+   "uses": [
+    "lem-trf-smooth-section-centred-coordinates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+    "place": "Local construction: centred coordinates and the Cartesian square of centres; Stacks 054L and 067U."
+   }
+  },
+  {
+   "text": "For an ambient affine $\\operatorname{Spec}B$ write $E=B[t,I/t]$. Restriction to a principal open $D(f)$ gives $E_f=B_f[t,I_f/t]$: its generators are $t$ and $(b/f^r)/t=(b/t)/f^r$, and both sides inject into $B_f[t,t^{-1}]$ (a Laurent polynomial localizes coefficientwise). Thus these are the associated module sheaves on the affine pieces, hence glue as a quasi-coherent algebra by the affine-local definition. The relative-spectrum theorem realizes their spectra as the corresponding opens of $D_sV$. The maps $B[t]\\to E$ similarly give the associated algebra sheaves on $\\operatorname{Spec}B[t]$, agreeing on overlaps; their relative spectra give the same affine pieces. Thus $D_sV\\to\\mathbf A^1_V$ is affine: over an ambient affine it is $\\operatorname{Spec}E\\to\\operatorname{Spec}B[t]$, and over a principal open in the latter its source is the spectrum of the same localization of $E$. Its composite with $\\mathbf A^1_V\\to\\mathbf A^1_S$ is $q$.",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-relative-spec",
+    "def-sbc-affine-space",
+    "pqf-def-coherent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01LX (lemma-spec-properties), affine construction and localization of the displayed extended Rees algebra."
+   }
+  },
+  {
+   "text": "Coefficient reduction $B\\to B/I$ on Laurent polynomials restricts to a surjection $E\\to(B/I)[t]$: a negative coefficient in degree $-m$ belongs to $I^m$, so vanishes modulo $I$, while the constants and $t$ generate the target. This gives the stated augmentation section over the closed centre, and $q\\sigma=1$ because $t$ is fixed and $gs=1$. After inverting $t$, one has $E[1/t]=B[t,t^{-1}]$, by the two inclusions of generators. Modulo $t-1$, every $b/t$ equals $b$, so evaluation gives $E/(t-1)\\cong B$, inverse to the constants. All these formulas commute with localization in $B$. They therefore identify the punctured pair with $(V,s)\\times_S\\mathbf G_{m,S}$ and the pair at $1$ with $(g,s)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+    "place": "Local construction, the coordinates $u_i=x_i/t$; direct affine computation of the augmentation and punctured and one fibres."
+   }
+  },
+  {
+   "text": "For each ambient affine apply the general extended-Rees associated-graded chart: $\\operatorname{gr}_I B\\xrightarrow{\\sim}E/(t)$ sends $[b]_m$ to $[bt^{-m}]$. Combine it with the symmetric-to-graded isomorphism from Step 1 and the conormal algebra's normalized affine descriptions. The formulas commute with restrictions: localizing sends both representatives to $b/f^r$ in the same degree, and multiplication is multiplication of representatives. Relative-Spec base change identifies quotienting by $t$ with the scheme fibre. These affine comparisons consequently glue to the canonical $t=0$ identification with $N_s$. The augmentation sends positive homogeneous degrees to zero and degree zero to itself, so the section becomes precisely $z$ and the structural map becomes $\\pi$.",
+   "uses": [
+    "lem-pur-rees-associated-graded-chart",
+    "lem-pur-conormal-graded-algebra",
+    "lem-weil-pbc-relative-spec-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 0630 (definition-conormal-sheaf), 0632 (equation-conormal-algebra-quotient), 0633 (lemma-affine-conormal-sheaf); extended-Rees representative calculation; Constructions 01LX."
+   }
+  },
+  {
+   "text": "For every centred affine etale chart in the statement, apply the existing etale-Rees-chart lemma with its $A=R$, $C=P$ and $R=B$. It gives $B[t,I/t]\\cong B\\otimes_P R[t,u_1,\\ldots,u_d]$ with $x_j\\mapsto tu_j$, and says the induced map to $\\operatorname{Spec}R[t,u]$ is etale and its projection to $\\operatorname{Spec}R[t]$ smooth of dimension $d$. This applies to every such chart, not just the chosen cover from Step 1.",
+   "uses": [
+    "lem-pur-dnc-etale-rees-chart"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+    "place": "Local construction: deformation of the zero section is affine space, with $x_j=tu_j$."
+   }
+  },
+  {
+   "text": "The chosen neighbourhoods from Step 1 cover $s(S)$. Outside that closed centre the ideal sheaf is the unit ideal. On any affine inside this complement, $1/t$ is then a generator of $B[t,I/t]$, hence $t$ is invertible there. Thus every point outside the punctured deformation lies over the centre and is in one of the centred deformation opens. These opens and the punctured deformation cover all of $D_sV$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+    "place": "Local construction: neighbourhoods of the section, completed by the punctured deformation."
+   }
+  },
+  {
+   "text": "On the centred opens smoothness and pure dimension $d$ were proved in Step 5. On the punctured open the projection is the base change of $g$ by $\\mathbf G_{m,S}\\to S$, so it is smooth of dimension $d$ by smooth relative-dimension permanence. Smoothness is local on these affine neighbourhoods, as in the affine-local smoothness definition, and fibre dimension at a point is unchanged on an open neighbourhood. The cover of Step 6 therefore proves that $q$ is smooth of pure relative dimension $d$.",
+   "uses": [
+    "lem-sbc-smooth-relative-dimension-permanence",
+    "def-sbc-smooth-morphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+    "place": "Local construction and punctured trivialization; Stacks 01VB and 02NK for the punctured projection."
+   }
+  },
+  {
+   "text": "The base change $\\mathbf A^1_V\\to\\mathbf A^1_S$ of $g$ is separated. The affine map $D_sV\\to\\mathbf A^1_V$ from Step 2 is separated by affine permanence, so their composite $q$ is separated by separated-composition permanence. Step 3 constructed $\\sigma$ as a section of this separated map. The section-of-separated theorem makes $\\sigma$ a closed immersion.",
+   "uses": [
+    "lem-pod-separated-finite-type-base-change",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-section-separated-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01KU (lemma-separated-permanence) and 01KT (lemma-section-immersion); Morphisms 01S7 (lemma-affine-separated)."
+   }
+  },
+  {
+   "text": "The affine-space projection $\\mathbf A^1_S\\to S$ is affine, hence quasi-compact, and locally finite type since over $\\operatorname{Spec}R$ its algebra is generated by $t$. It is therefore finite type. Hence $V$ and $\\mathbf A^1_S$ are Noetherian by finite-type-over-Noetherian, and $\\mathbf A^1_S$ is quasi-separated. The relative-spectrum map $D_sV\\to V$ is affine, hence quasi-compact; since $V$ is quasi-compact, its source $D_sV$ is quasi-compact by qcqs permanence (2). Now qcqs permanence (1) applied to $q$ makes $q$ quasi-compact. Step 7 makes it locally of finite presentation, so locally finite type: a finite polynomial presentation is in particular a finite generating set. Consequently $q$ is finite type, and finite-type-over-Noetherian applied over $\\mathbf A^1_S$ proves $D_sV$ Noetherian.",
+   "uses": [
+    "def-sbc-affine-space",
+    "lem-weil-pbc-affine-morphism-relative-spec",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-sbc-locally-finite-presentation",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01S7 (lemma-affine-separated), 01T6 (lemma-finite-type-noetherian), and definition-finite-type; Properties 01OY; Schemes 03GI."
+   }
+  },
+  {
+   "text": "Use the vector-bundle construction on the locally free $\\mathcal E$ of Step 1. It supplies affine $\\pi$ and trivializations $N_s|_U\\cong\\mathbf A^d_U$ with $z$ the zero section. The affine-space projections are smooth of dimension $d$; the same affine-local criterion as in Step 7 proves this for $\\pi$. The polynomial coordinate rings show that $\\pi$ is locally finite type, and affineness makes it quasi-compact and separated. Thus $\\pi$ is separated finite type. Finite-type-over-Noetherian makes $N_s$ Noetherian. These facts include $d=0$, when the bundle is $S$.",
+   "uses": [
+    "def-asd-vector-bundle-zero-section",
+    "sbc-lem-affine-space-smooth",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01LX (lemma-spec-properties), vector-bundle local polynomial charts; Morphisms 01S7 and 01T6."
+   }
+  },
+  {
+   "text": "Every open subscheme of the Noetherian schemes just obtained is Noetherian, so this includes all the indicated chart sources and their open restrictions. An inclusion of any such open into its ambient Noetherian scheme is quasi-compact by qcqs permanence (1) and etale by open-immersion etaleness, hence locally finite type and therefore finite type; it is separated directly from its diagonal, an isomorphism. All separated finite-type chart maps in the statement therefore have Noetherian ends. Their structural composites remain separated by composition permanence and locally finite type by the same permanence lemma (e); they are quasi-compact by qcqs permanence (1) because their sources are Noetherian and their targets quasi-separated. They are consequently finite type.",
+   "uses": [
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-open-immersion-etale",
+    "def-sbc-smooth-morphisms",
+    "lem-weil-pbc-proper-fp-permanence",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tags 01OW (lemma-locally-Noetherian), 01OZ (lemma-Noetherian-topology), 01OY; Schemes 03GI and 01KU; Morphisms 01T3."
+   }
+  },
+  {
+   "text": "A Noetherian target is quasi-compact by definition and quasi-separated by the locally-Noetherian theorem. Apply Nagata compactification to each separated finite-type map proved above: $q$, $\\pi$, the chart restrictions and chart maps, and their structural composites. Its statement gives an open immersion into a scheme proper over the target, which is exactly compactifiability as used here. Every application has a Noetherian, hence qcqs, target; no finite dimension or field hypothesis is imposed or used.",
+   "uses": [
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "thm-nagata-compactification",
+    "def-asd-compactifiable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-thm-nagata-compactification/thm-nagata-compactification.md",
+    "place": "Nagata compactification theorem, the consequence for every separated finite-type morphism to a qcqs scheme."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-smooth-section-centred-coordinates",
+  "lem-weil-pbc-affine-morphism-relative-spec",
+  "def-sbc-affine-space",
+  "pqf-def-coherent",
+  "lem-pur-rees-associated-graded-chart",
+  "lem-pur-conormal-graded-algebra",
+  "lem-weil-pbc-relative-spec-base-change",
+  "lem-pur-dnc-etale-rees-chart",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "def-sbc-smooth-morphisms",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-section-separated-closed-immersion",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism",
+  "def-asd-vector-bundle-zero-section",
+  "sbc-lem-affine-space-smooth",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-open-immersion-etale",
+  "thm-nagata-compactification",
+  "def-asd-compactifiable"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+  "place": "Local construction; affine Rees calculations and Noetherian/Nagata bookkeeping supplied explicitly using the cited Stacks tools."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -61,10 +246,52 @@
    "results": "[grep] OK 1 hit(s)\nMathlib/RingTheory/Perfectoid/FontaineTheta.lean:30: deformation-theoretic approach via the cotangent complex, as in",
    "date": "2026-10-21",
    "verdict": "no match: hits do not state the section-family assertion; general algebra, sheaf or mate infrastructure only"
+  },
+  {
+   "tool": "grep",
+   "query": "extendedRees|extended_rees|deformationSpace|deformation_space",
+   "results": "0 hits",
+   "date": "2026-10-21",
+   "verdict": "no match: no extended-Rees section deformation or complete geometric assertion among these results"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Deformation to the normal cone of a closed section of a smooth separated morphism",
+   "results": "AlgebraicGeometry.IsSmooth.casesOn; AlgebraicGeometry.IsSmooth.recOn; AlgebraicGeometry.IsSmooth.mk; AlgebraicGeometry.IsSeparated.mk; AlgebraicGeometry.IsSmooth; AlgebraicGeometry.IsSeparated.isSeparated_eq_diagonal_isClosedImmersion; AlgebraicGeometry.FormallyUnramified.casesOn; AlgebraicGeometry.FormallyUnramified.recOn",
+   "date": "2026-10-21",
+   "verdict": "no match: no extended-Rees section deformation or complete geometric assertion among these results"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.IsClosedImmersion",
+   "results": "0 hits; loogle: unknown identifier 'AlgebraicGeometry.IsSmoothOfRelativeDimension'",
+   "date": "2026-10-21",
+   "verdict": "unavailable: this Loogle query was rejected for an unknown identifier; a further quoted-name query was run"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extended Rees algebra deformation of a smooth section is smooth with normal bundle zero fibre",
+   "results": "Algebra.instSmoothOfIsStandardSmooth; AlgebraicGeometry.IsSmooth.exists_isStandardSmooth; AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth; RingHom.IsStandardSmooth.smooth; AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension; AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension; RingHom.Smooth.toAlgebra; Algebra.IsSmoothAt.exists_notMem_isStandardSmooth",
+   "date": "2026-10-21",
+   "verdict": "no match: no extended-Rees section deformation or complete geometric assertion among these results"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normal cone deformation extended Rees algebra smooth morphism separated compactification",
+   "results": "AlgebraicGeometry.IsSmooth.exists_isStandardSmooth; AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension; AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth; AlgebraicGeometry.IsSmoothOfRelativeDimension; AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension; AlgebraicGeometry.Scheme.Hom.normalization; AlgebraicGeometry.IsSmooth; AlgebraicGeometry.isSmooth_iff",
+   "date": "2026-10-21",
+   "verdict": "no match: no extended-Rees section deformation or complete geometric assertion among these results"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rees\"",
+   "results": "Lean.infoTreesCmd; Lean.Parser.discrTreeSimpKeyCmd; Std.DTreeMap.Internal.Impl.treeSize; Std.TreeSet.«term_~m_»; Std.TreeSet; Std.TreeSet.empty; Std.TreeSet.instBEq; Std.TreeSet.instEmptyCollection",
+   "date": "2026-10-21",
+   "verdict": "no match: no extended-Rees section deformation or complete geometric assertion among these results"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-finite-ring-section-deformation",
@@ -86,5 +313,109 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-trf-section-rees-noetherian-geometry",
+  "worker": "stage1",
+  "summary": "Reused the existing centred smooth-section coordinates, etale Rees chart and homogeneous associated-graded comparison; wrote the restriction, augmentation, cover, smoothness, separatedness, finite type, Noetherian and compactifiability arguments in twelve steps. Statement unchanged; no new nodes and no Lean edits. All cited statements read and normalized fibre maps checked.",
+  "blueprint": "lem-trf-local-term-locality proof (2), specialization to the normal cone in the contracting-correspondence argument, via the existing finite-ring-section-deformation chain; realizes Local construction and geometry of sk-thm-dnc with arbitrary Noetherian base rather than only finite-type field bases.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-affine-morphism-relative-spec",
+    "why": "Generic affine morphisms and quasi-coherent algebras (relative spectrum) used exactly through its statement for the Rees-family geometry; the trace-formula unit contains no replacement for this geometric/algebraic tool."
+   },
+   {
+    "node": "lem-pur-rees-associated-graded-chart",
+    "why": "Generic homogeneous chart for the extended rees zero fibre used exactly through its statement for the Rees-family geometry; the trace-formula unit contains no replacement for this geometric/algebraic tool."
+   },
+   {
+    "node": "lem-pur-conormal-graded-algebra",
+    "why": "Generic conormal graded algebra on a closed subscheme used exactly through its statement for the Rees-family geometry; the trace-formula unit contains no replacement for this geometric/algebraic tool."
+   },
+   {
+    "node": "lem-weil-pbc-relative-spec-base-change",
+    "why": "Generic relative spec commutes with base change used exactly through its statement for the Rees-family geometry; the trace-formula unit contains no replacement for this geometric/algebraic tool."
+   },
+   {
+    "node": "lem-pur-dnc-etale-rees-chart",
+    "why": "Generic étale deformation chart and its smooth projection used exactly through its statement for the Rees-family geometry; the trace-formula unit contains no replacement for this geometric/algebraic tool."
+   },
+   {
+    "node": "lem-sbc-smooth-relative-dimension-permanence",
+    "why": "Generic base change and composition of smooth morphisms of fixed relative dimension used exactly through its statement for the Rees-family geometry; the trace-formula unit contains no replacement for this geometric/algebraic tool."
+   },
+   {
+    "node": "lem-pod-separated-finite-type-base-change",
+    "why": "Generic separated finite-type morphisms are stable under base change used exactly through its statement for the Rees-family geometry; the trace-formula unit contains no replacement for this geometric/algebraic tool."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-permanence",
+    "why": "Generic base change, affineness of the source, and quasi-compactness and separatedness of affine morphisms used exactly through its statement for the Rees-family geometry; the trace-formula unit contains no replacement for this geometric/algebraic tool."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Generic permanence of proper, separated, finite type, finitely presented morphisms and of immersions used exactly through its statement for the Rees-family geometry; the trace-formula unit contains no replacement for this geometric/algebraic tool."
+   },
+   {
+    "node": "lem-weil-pbc-section-separated-closed-immersion",
+    "why": "Generic a section of a separated morphism is a closed immersion used exactly through its statement for the Rees-family geometry; the trace-formula unit contains no replacement for this geometric/algebraic tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic a scheme of finite type over a noetherian scheme is noetherian (stacks 01t6) used exactly through its statement for the Rees-family geometry; the trace-formula unit contains no replacement for this geometric/algebraic tool."
+   },
+   {
+    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "why": "Generic a locally noetherian scheme is quasi-separated (stacks 01oy) used exactly through its statement for the Rees-family geometry; the trace-formula unit contains no replacement for this geometric/algebraic tool."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Generic quasi-compactness and quasi-separatedness of morphisms between qcqs schemes; finite presentation is stable under base change used exactly through its statement for the Rees-family geometry; the trace-formula unit contains no replacement for this geometric/algebraic tool."
+   },
+   {
+    "node": "sbc-lem-affine-space-smooth",
+    "why": "Generic affine space is smooth used exactly through its statement for the Rees-family geometry; the trace-formula unit contains no replacement for this geometric/algebraic tool."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "why": "Generic an open subscheme of a noetherian scheme is noetherian used exactly through its statement for the Rees-family geometry; the trace-formula unit contains no replacement for this geometric/algebraic tool."
+   },
+   {
+    "node": "lem-weil-pbc-open-immersion-etale",
+    "why": "Generic an open immersion of schemes is etale used exactly through its statement for the Rees-family geometry; the trace-formula unit contains no replacement for this geometric/algebraic tool."
+   },
+   {
+    "node": "thm-nagata-compactification",
+    "why": "Generic nagata compactification, [stacks-project] used exactly through its statement for the Rees-family geometry; the trace-formula unit contains no replacement for this geometric/algebraic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-affine-morphism-relative-spec",
+  "lem-pur-rees-associated-graded-chart",
+  "lem-pur-conormal-graded-algebra",
+  "lem-weil-pbc-relative-spec-base-change",
+  "lem-pur-dnc-etale-rees-chart",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-section-separated-closed-immersion",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "sbc-lem-affine-space-smooth",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-open-immersion-etale",
+  "thm-nagata-compactification"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q128-27a24f1bd",
+  "group": "Q128",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q128-27a24f1bd (reviewer sub-agent of L); spot-checked: Read the item's 12 steps in full, every one of the 25 cited statements, and the sk-thm-dnc 'Local construction' source; the Stacks tags all resolve. Only proof-side fields changed; statement, stmt_deps and blueprint are identical to the Q58 base. No new nodes. The item is still unsplit live and not on the dropped list. All arguments of the parent's old Steps 3-4 are carried and written out more fully. Steps: (1) the centred-coordinate node gives the Zariski etale charts, the rank-d conormal and Sym≅gr. (2) The Rees algebra localizes, so it is a quasi-coherent algebra and D→A^1_V is affine. (3) Augmentation surjects because the degree -m coefficients lie in I^m; E[1/t]=B[t,t^-1]; E/(t-1)≅B, kernel re-derived. (4) Rees-associated-graded chart plus the conormal algebra and relative-Spec base change give the zero fibre (N_s,z), in the right direction. (5) Etale Rees chart with A=R, C=P, R=B. (6) Off the centre 1/t∈E, so charts plus the punctured part cover D. (7) Smoothness by permanence and locality. (8) q separated through the affine map to A^1_V; σ is a section of a separated map, hence closed. (9) Finite type and Noetherianity in a non-circular order. (10) Bundle facts. (11) Open subschemes. (12) Nagata via its qcqs clause. Tested the standard pair, d=0, components disjoint from the section, empty and nonreduced bases. Duplicate search over the DAG: the only overlaps are the l-adic/cohomological lem-pur-noetherian-etale-section-specialization and lem-per-etale-section-deformation-comparison, and the field-setting lem-pur-dnc-section-geometry/sk-lem-geometry; none states this lemma. No cycle; proof_deps equals the union of uses. 17 declared generic tool uses accepted. Advisory only: G_m and fibre product have no stmt_dep (inherited from Q58)."
  }
 }
