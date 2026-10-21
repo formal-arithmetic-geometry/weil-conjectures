@@ -1,0 +1,88 @@
+{
+ "id": "lem-pe-kflat-scalar-tower-realization",
+ "kind": "statement",
+ "title": "K-flat realization of the augmented derived scalar-extension tower",
+ "statement": "Let $C$ be a site small in the module universe, $R$ a sheaf of commutative rings, and $a_n:R\\to B_n$ and $b_n:B_{n+1}\\to B_n$ maps of sheaves of commutative rings for $n\\ge1$, with $b_na_{n+1}=a_n$ [def-weil-inverse-system]. Use sheaves of modules [def-weil-sheaf-of-modules-category] and their unbounded derived categories and localizations $Q_R,Q_{B_n}$ [def-weil-abstract-derived-category]. Write $F_n=-\\otimes_R^L B_n$, $G_n=-\\otimes_{B_{n+1}}^L B_n$ for K-flat derived scalar extension [lem-pur-derived-change-of-rings], and $r_n:D(B_n)\\to D(R)$, $j_n:D(B_n)\\to D(B_{n+1})$ for exact scalar restriction [def-pc-sheaf-restrict-scalars]. Give these functors the normalized derived tensor/restriction adjunctions $F_n\\dashv r_n$ and $G_n\\dashv j_n$ of [lem-pur-sheaf-ring-derived-coefficient-adjunction]; let $u_n:\\mathrm{id}\\to r_nF_n$ be their units. Let $\\alpha_n:G_nF_{n+1}\\xrightarrow{\\sim}F_n$ be the canonical scalar-composition comparison [lem-sfb-successive-derived-quotient-normalization]. For $K\\in D(R)$ let $\\delta_n(K):F_{n+1}K\\to j_nF_nK$ be the adjoint of $\\alpha_n(K)$. Define $d_n(K):r_{n+1}F_{n+1}K\\to r_nF_nK$ by applying $r_{n+1}$ to $\\delta_n(K)$ and using the identity-on-underlying-sheaves comparison $r_{n+1}j_n\\cong r_n$.\n\nLet $P$ be a K-flat $R$-complex with flat terms [def-pc-kflat-complex, def-pc-flat-sheaf-modules] and $e:Q_R(P)\\xrightarrow{\\sim}K$ an isomorphism. Put $T_n(P)=\\operatorname{Res}_{a_n}(P\\otimes_RB_n)$, using sheaf tensor [def-pur-sheaf-tensor-product], with strict maps $t_n(p\\otimes b)=p\\otimes b_n(b)$ and $c_n(p)=p\\otimes1$. The canonical K-flat computation comparisons, transported along $F_n(e^{-1})$ and then restricted, give isomorphisms\n$$\\epsilon_n:r_nF_nK\\xrightarrow{\\sim}Q_R(T_n(P))$$\nsatisfying\n$$\\epsilon_n\\circ u_n(K)\\circ e=Q_R(c_n),\\qquad\n\\epsilon_n\\circ d_n(K)=Q_R(t_n)\\circ\\epsilon_{n+1}.$$\nThese comparisons are natural for chain maps between flat-term K-flat representatives and respect every composite quotient transition. No flatness or surjectivity of $a_n$ or $b_n$, and no boundedness of $P$, is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YY, lemma-derived-base-change; Tag 0D6D, lemma-derived-pullback-composition. Agent refinement retaining the K-flat computation comparisons, derived adjunction units and quotient transition maps simultaneously."
+ },
+ "stmt_deps": [
+  "def-weil-inverse-system",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "lem-pur-derived-change-of-rings",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-sfb-successive-derived-quotient-normalization",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A K-flat complex of sheaves simultaneously computes a tower of derived scalar extensions, with comparison isomorphisms identifying the adjunction units and quotient transition maps with ordinary tensor maps.",
+   "results": "[leanfinder] OK 8 hit(s); ModuleCat.preservesFiniteLimits_extendScalars_of_flat ∀ {A B : Type u} [inst : CommRing A] [inst_1 : CommRing B] {f : A →+* B},\n  f.Flat → CategoryTheory.Limits.PreservesFiniteLimits (ModuleCat.extendScalars f); Module.Flat.rTensor_shortComplex_exact ∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R) [Module.Flat R ↑M] (C : CategoryTheory.ShortComplex (ModuleCat R)),\n  C.Exact → (C.map (CategoryTheory.MonoidalCategory.tensorRight M)).Exact; Module.Flat.lTensor_shortComplex_exact ∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R) [Module.Flat R ↑M] (C : CategoryTheory.ShortComplex (ModuleCat R)),\n  C.Exact → (C.map (CategoryTheory.MonoidalCategory.tensorLeft M)).Exact; Module.Flat.iff_rTensor_exact' ∀ {R : Type u} {M : Type v} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] [Small.{v', u} R],\n  Module.Flat R M ↔\n    ∀ ⦃N N' N'' : Type v'⦄ [inst_4 : AddCommGroup N] [inst_5 : AddCommGroup N'] [inst_6 : AddCommGroup N'']\n      [inst_7 : Module R N] [inst_8 : Module R N'] [inst_; Module.Flat.iff_lTensor_exact' ∀ {R : Type u} {M : Type v} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] [Small.{v', u} R],\n  Module.Flat R M ↔\n    ∀ ⦃N N' N'' : Type v'⦄ [inst_4 : AddCommGroup N] [inst_5 : AddCommGroup N'] [inst_6 : AddCommGroup N'']\n      [inst_7 : Module R N] [inst_8 : Module R N'] [inst_; Module.Flat.iff_rTensor_exact ∀ {R : Type u} {M : Type v} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M],\n  Module.Flat R M ↔\n    ∀ ⦃N N' N'' : Type (max u v)⦄ [inst_3 : AddCommGroup N] [inst_4 : AddCommGroup N'] [inst_5 : AddCommGroup N'']\n      [inst_6 : Module R N] [inst_7 : Module R N'] [inst_8 : Module ; Module.FaithfullyFlat.iff_exact_iff_lTensor_exact ∀ (R : Type u) (M : Type v) [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M],\n  Module.FaithfullyFlat R M ↔\n    ∀ {N1 : Type (max u v)} [inst_3 : AddCommGroup N1] [inst_4 : Module R N1] {N2 : Type (max u v)}\n      [inst_5 : AddCommGroup N2] [inst_6 : Module R N2] {N3 : Type (max u; Module.FaithfullyFlat.iff_exact_iff_rTensor_exact ∀ (R : Type u) (M : Type v) [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M],\n  Module.FaithfullyFlat R M ↔\n    ∀ {N1 : Type (max u v)} [inst_3 : AddCommGroup N1] [inst_4 : Module R N1] {N2 : Type (max u v)}\n      [inst_5 : AddCommGroup N2] [inst_6 : Module R N2] {N3 : Type (max u",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"derived\", \"unit\"",
+   "results": "[loogle] OK 12 hit(s); CategoryTheory.Functor.instIsLeftDerivedFunctorTotalLeftDerivedTotalLeftDerivedCounit  {C : Type u_1} {D : Type u_2} {H : Type u_3} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] [CategoryTheory.Category.{v_3, u_3} H] (F : CategoryTheory.Functor C H) (L : CategoryTheory.Functor C D) (W : CategoryTheory.MorphismProperty C) [L.IsLocalization W] [F.HasLeft; CategoryTheory.Functor.totalLeftDerivedCounit  {C : Type u_1} {D : Type u_2} {H : Type u_3} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] [CategoryTheory.Category.{v_3, u_3} H] (F : CategoryTheory.Functor C H) (L : CategoryTheory.Functor C D) (W : CategoryTheory.MorphismProperty C) [L.IsLocalization W] [F.HasLeft; CategoryTheory.Functor.instIsRightDerivedFunctorTotalRightDerivedTotalRightDerivedUnit  {C : Type u_1} {D : Type u_2} {H : Type u_3} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] [CategoryTheory.Category.{v_3, u_3} H] (F : CategoryTheory.Functor C H) (L : CategoryTheory.Functor C D) (W : CategoryTheory.MorphismProperty C) [L.IsLocalization W] [F.HasRigh; CategoryTheory.Functor.totalRightDerivedUnit  {C : Type u_1} {D : Type u_2} {H : Type u_3} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] [CategoryTheory.Category.{v_3, u_3} H] (F : CategoryTheory.Functor C H) (L : CategoryTheory.Functor C D) (W : CategoryTheory.MorphismProperty C) [L.IsLocalization W] [F.HasRigh; CategoryTheory.Functor.instIsRightDerivedFunctorPlusPlusRightDerivedFunctorPlusRightDerivedFunctorPlusUnithQuasiIso  {C : Type u_1} {D : Type u_2} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] [CategoryTheory.Abelian C] [CategoryTheory.Abelian D] [HasDerivedCategory C] [HasDerivedCategory D] (F : CategoryTheory.Functor C D) [F.Additive] [CategoryTheory.EnoughInjectives C] : F.right; CategoryTheory.Functor.instIsRightDerivedFunctorPlusPlusRightDerivedFunctorPlusRightDerivedFunctorPlusUnitQuasiIso  {C : Type u_1} {D : Type u_2} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] [CategoryTheory.Abelian C] [CategoryTheory.Abelian D] [HasDerivedCategory C] [HasDerivedCategory D] (F : CategoryTheory.Functor C D) [F.Additive] [CategoryTheory.EnoughInjectives C] : F.right; CategoryTheory.Functor.rightDerivedFunctorPlusUnith  {C : Type u_1} {D : Type u_2} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] [CategoryTheory.Abelian C] [CategoryTheory.Abelian D] [HasDerivedCategory C] [HasDerivedCategory D] (F : CategoryTheory.Functor C D) [F.Additive] [CategoryTheory.EnoughInjectives C] : F.mapHo; CategoryTheory.Functor.rightDerivedFunctorPlusUnit  {C : Type u_1} {D : Type u_2} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] [CategoryTheory.Abelian C] [CategoryTheory.Abelian D] [HasDerivedCategory C] [HasDerivedCategory D] (F : CategoryTheory.Functor C D) [F.Additive] [CategoryTheory.EnoughInjectives C] : F.mapCo; CategoryTheory.Functor.instCommShiftPlusPlusRightDerivedFunctorPlusUnithInt  {C : Type u_1} {D : Type u_2} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] [CategoryTheory.Abelian C] [CategoryTheory.Abelian D] [HasDerivedCategory C] [HasDerivedCategory D] (F : CategoryTheory.Functor C D) [F.Additive] [CategoryTheory.EnoughInjectives C] : Categor; CategoryTheory.Functor.instCommShiftPlusPlusRightDerivedFunctorPlusUnitInt  {C : Type u_1} {D : Type u_2} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] [CategoryTheory.Abelian C] [CategoryTheory.Abelian D] [HasDerivedCategory C] [HasDerivedCategory D] (F : CategoryTheory.Functor C D) [F.Additive] [CategoryTheory.EnoughInjectives C] : Categor; CategoryTheory.Functor.instIsIsoPlusAppPlusRightDerivedFunctorPlusUnitObjInjectiveObjectMapCochainComplexPlusι  {C : Type u_1} {D : Type u_2} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] [CategoryTheory.Abelian C] [CategoryTheory.Abelian D] [HasDerivedCategory C] [HasDerivedCategory D] (F : CategoryTheory.Functor C D) [F.Additive] [CategoryTheory.EnoughInjectives C] (K : Coch; CategoryTheory.Functor.rightDerivedFunctorPlusUnit_app  {C : Type u_1} {D : Type u_2} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] [CategoryTheory.Abelian C] [CategoryTheory.Abelian D] [HasDerivedCategory C] [HasDerivedCategory D] (F : CategoryTheory.Functor C D) [F.Additive] [CategoryTheory.EnoughInjectives C] (X : Coch",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "kFlat.*(unit|transition)|[Kk]Flat.*[Cc]omparison|derivedExtend.*[Cc]ompar",
+   "results": "[grep] OK 0 hit(s); ",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "K-flat representative comparison for derived extension of scalars of sheaf modules, compatible with units and transitions in an inverse system of ring sheaves.",
+   "results": "[leansearch] OK 8 hit(s); SheafOfModules.PullbackConstruction.adjunction : (forget S ⋙ PresheafOfModules.pullback.{v} φ.val ⋙ PresheafOfModules.sheafification (𝟙 R.val)) ⊣ pushforward.{v} φ; Algebra.FormallyUnramified.flat_of_restrictScalars [Module.Flat R M] : Module.Flat S M; RingHom.Flat {R : Type u} {S : Type v} [CommRing R] [CommRing S] (f : R →+* S) : Prop; RingHom.Flat.isStableUnderBaseChange : IsStableUnderBaseChange Flat; ModuleCat.preservesFiniteLimits_extendScalars_of_flat (hf : f.Flat) : PreservesFiniteLimits (extendScalars.{_, _, u} f); SheafOfModules.sheafificationCompPullback :\n  PresheafOfModules.sheafification (𝟙 S.val) ⋙ pullback.{v} φ ≅\n    PresheafOfModules.pullback.{v} φ.val ⋙ PresheafOfModules.sheafification (𝟙 R.val); SheafOfModules.pushforwardSections_unitHomEquiv {M : SheafOfModules.{u} R} (f : unit R ⟶ M) :\n  pushforwardSections φ (M.unitHomEquiv f) =\n    ((pushforward φ).obj M).unitHomEquiv (unitToPushforwardObjUnit φ ≫ (pushforward φ).map f); SheafOfModules.unitToPushforwardObjUnit : unit S ⟶ (pushforward.{u} φ).obj (unit R)",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the universal left derived functor comparison on K-flat complexes with respect to changing coefficient rings; compatibility with scalar extension adjunction units.",
+   "results": "[leanfinder] OK 8 hit(s); CategoryTheory.Functor.mapDerivedCategoryFactorsh {C₁ : Type u₁} →\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\n    [inst_1 : CategoryTheory.Abelian C₁] →\n      [inst_2 : HasDerivedCategory C₁] →\n        {C₂ : Type u₂} →\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\n            [inst_4 : CategoryTheory.Abelian C₂] →\n              [; CategoryTheory.Functor.leftDerivedNatTrans_comp ∀ {C : Type u_1} {D : Type u_3} {H : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\n  [inst_1 : CategoryTheory.Category.{v_3, u_3} D] [inst_2 : CategoryTheory.Category.{v_5, u_2} H]\n  (LF'' LF' LF : CategoryTheory.Functor D H) {F F' F'' : CategoryTheory.Functor C H} {L : CategoryTheory.Func; CategoryTheory.Functor.leftDerivedNatTrans_fac ∀ {C : Type u_1} {D : Type u_3} {H : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\n  [inst_1 : CategoryTheory.Category.{v_3, u_3} D] [inst_2 : CategoryTheory.Category.{v_5, u_2} H]\n  (LF' LF : CategoryTheory.Functor D H) {F F' : CategoryTheory.Functor C H} {L : CategoryTheory.Functor C D}\n; CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison {C₁ : Type u₁} →\n  {C₂ : Type u₂} →\n    {H : Type u₃} →\n      [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\n        [inst_1 : CategoryTheory.Category.{v₂, u₂} C₂] →\n          [inst_2 : CategoryTheory.Category.{v₃, u₃} H] →\n            {D₁ : Type u₄} →\n              {D₂ : Type u₅} →\n                ; CategoryTheory.Functor.leftDerivedNatTrans_app ∀ {C : Type u_1} {D : Type u_3} {H : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\n  [inst_1 : CategoryTheory.Category.{v_3, u_3} D] [inst_2 : CategoryTheory.Category.{v_5, u_2} H]\n  (LF' LF : CategoryTheory.Functor D H) {F F' : CategoryTheory.Functor C H} {L : CategoryTheory.Functor C D}\n; CategoryTheory.Functor.leftDerived_fac_app ∀ {C : Type u_3} {D : Type u_1} {H : Type u_2} [inst : CategoryTheory.Category.{v_1, u_3} C]\n  [inst_1 : CategoryTheory.Category.{v_3, u_1} D] [inst_2 : CategoryTheory.Category.{v_5, u_2} H]\n  (LF : CategoryTheory.Functor D H) {F : CategoryTheory.Functor C H} {L : CategoryTheory.Functor C D}\n  (α : ; CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app ∀ {C₁ : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C₁] [inst_1 : CategoryTheory.Abelian C₁]\n  [inst_2 : HasDerivedCategory C₁] {C₂ : Type u₂} [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂]\n  [inst_4 : CategoryTheory.Abelian C₂] [inst_5 : HasDerivedCategory C₂] (F : CategoryTheory.Functor C₁ C; CategoryTheory.Functor.leftDerivedNatTrans_fac_assoc ∀ {C : Type u_1} {D : Type u_3} {H : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\n  [inst_1 : CategoryTheory.Category.{v_3, u_3} D] [inst_2 : CategoryTheory.Category.{v_5, u_2} H]\n  (LF' LF : CategoryTheory.Functor D H) {F F' : CategoryTheory.Functor C H} {L : CategoryTheory.Functor C D}\n",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(kFlat|KFlat|K_flat|K-flat).*(scalar|unit|tower)|(scalar|unit|tower).*(kFlat|KFlat|K_flat|K-flat)",
+   "results": "[grep] OK 0 hit(s); ",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "sk-def-pe-derived-completion",
+  "date": "2026-10-21",
+  "group": "O4"
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-def-pe-derived-completion",
+ "blueprint": {
+  "from": {
+   "node": "sk-def-pe-derived-completion",
+   "place": "first display, the canonical map from K to its derived reductions; second paragraph, the canonical quotient transitions",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}

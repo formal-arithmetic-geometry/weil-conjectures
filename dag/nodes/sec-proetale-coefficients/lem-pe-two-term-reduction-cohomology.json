@@ -1,0 +1,92 @@
+{
+ "id": "lem-pe-two-term-reduction-cohomology",
+ "kind": "statement",
+ "title": "Cohomology and quotient maps of a two-term integral coefficient complex",
+ "statement": "Let $\\ell$ be a prime, $\\Omega$ an algebraically closed field, and $X=\\operatorname{Spec}\\Omega$. Work on a small skeleton of $X_{\\mathrm{proet}}$ in the coefficient universe [def-weil-pbc-proetale-site, def-weil-size-convention]. Let $p_X^*$ be the inverse image from the condensed point [sk-def-sfb-pullback-from-point], and put $R=p_X^*\\underline{\\mathbf Z_\\ell}$ and $B_n=p_X^*\\underline{\\mathbf Z/\\ell^n\\mathbf Z}$ for $n\\ge1$, with their quotient maps. The underlined rings are the continuous-function condensed rings, and these are the pulled-back coefficient rings [def-weil-l-adic-numbers, sk-def-sfb-condensed-ring, sk-def-sfb-pulled-back-coefficients]. Use the canonical finite discrete ring identifications of [lem-pe-condensed-point-discrete-constant-comparisons]. Let $k_X$ be the constant $\\mathbf F_\\ell$-module sheaf [def-weil-pbc-constant-sheaf], acted on by $B_n$ through reduction modulo $\\ell$. Use sheaf modules and sheaf tensor [def-weil-sheaf-of-modules-category, def-pur-sheaf-tensor-product].\n\nLet $P=[R\\xrightarrow{\\ell}R]$ in cochain degrees $-1,0$, zero elsewhere [def-pc-cochain-complex-modules], and $K=Q_R(P)$ in the unbounded derived category [def-weil-abstract-derived-category]. Then $P$ is K-flat [def-pc-kflat-complex], its derived reduction $K_n=K\\otimes_R^L B_n$ [lem-pur-derived-change-of-rings] is represented by $P_n=[B_n\\xrightarrow{\\ell}B_n]$, and the canonical quotient transition $K_{n+1}\\to K_n$ is represented by reduction in both terms. There are $B_n$-linear identifications\n$$H^{-1}(K_n)\\cong k_X,\\qquad H^0(K_n)\\cong k_X,\\qquad H^q(K_n)=0\\quad(q\\notin\\{-1,0\\}).$$\nThe first identification is the inverse of the map induced, before $p_X^*$, by $\\bar a\\mapsto\\ell^{n-1}a\\bmod\\ell^n$; the second is induced by reduction modulo $\\ell$. Under these identifications the transition on $H^{-1}$ is zero and the transition on $H^0$ is the identity. Moreover $k_X\\ne0$, and the canonical action map is an isomorphism\n$$H^{-1}(K_{n+1})\\otimes_{B_{n+1}}B_n\\xrightarrow{\\sim}k_X,$$\nwhere the left side uses sheaf tensor and its map to $k_X$ sends $x\\otimes b$ to $\\bar b x$ after the specified degree-minus-one identification. Thus the map from this tensor product to $H^{-1}(K_n)$ induced by the quotient transition is zero.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-pe-derived-completion/_section.md",
+  "place": "Final paragraph: cohomology need not form an ordinary normalized tower. Explicit two-term calculation extracted from the agent proof; K-flat reduction uses Stacks Tag 06YY, lemma-derived-base-change."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "sk-def-sfb-pullback-from-point",
+  "def-weil-l-adic-numbers",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-cochain-complex-modules",
+  "def-weil-abstract-derived-category",
+  "def-pc-kflat-complex",
+  "lem-pur-derived-change-of-rings",
+  "lem-pe-condensed-point-discrete-constant-comparisons"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For the two term complex Z_l to Z_l with differential multiplication by l, derived reduction modulo l power n has cohomology F_l in degrees minus one and zero; quotient transitions are zero on degree minus one and identity on degree zero.",
+   "results": "[leanfinder] OK 8 hit(s); groupCohomology {k G : Type u} → [inst : CommRing k] → [inst_1 : Group G] → Rep k G → ℕ → ModuleCat k; Rep.FiniteCyclicGroup.resolution_quasiIso ∀ (k : Type u) {G : Type u} [inst : CommRing k] [inst_1 : CommGroup G] [inst_2 : Fintype G] (g : G),\n  (∀ (x : G), x ∈ Subgroup.zpowers g) → QuasiIso (Rep.FiniteCyclicGroup.resolution.π k g); Rep.FiniteCyclicGroup.resolution.π_f ∀ (k : Type u) {G : Type u} [inst : CommRing k] [inst_1 : CommGroup G] [inst_2 : Fintype G] (g : G) (i : ℕ),\n  (Rep.FiniteCyclicGroup.resolution.π k g).f i =\n    if hi : i = 0 then\n      CategoryTheory.CategoryStruct.comp\n        ((HomologicalComplex.alternatingConst (Rep.leftRegular k G) ⋯ ⋯ ⋯).XIs; groupCohomologyIso {k G : Type u} →\n  [inst : CommRing k] →\n    [inst_1 : Group G] →\n      (A : Rep k G) →\n        (n : ℕ) →\n          (P : CategoryTheory.ProjectiveResolution (Rep.trivial k G k)) →\n            groupCohomology A n ≅ HomologicalComplex.homology (P.complex.linearYonedaObj k A) n; Rep.FiniteCyclicGroup.groupCohomologyIsoOdd {k G : Type u} →\n  [inst : CommRing k] →\n    [inst_1 : CommGroup G] →\n      [inst_2 : Fintype G] →\n        (A : Rep k G) →\n          (g : G) →\n            (∀ (x : G), x ∈ Subgroup.zpowers g) →\n              (i : ℕ) → Odd i → (groupCohomology A i ≅ (Rep.FiniteCyclicGroup.subCompNormHom A g).homology); Rep.FiniteCyclicGroup.groupCohomologyIsoEven {k G : Type u} →\n  [inst : CommRing k] →\n    [inst_1 : CommGroup G] →\n      [inst_2 : Fintype G] →\n        (A : Rep k G) →\n          (g : G) →\n            (∀ (x : G), x ∈ Subgroup.zpowers g) →\n              (i : ℕ) →\n                [h₀ : NeZero i] → Even i → (groupCohomology A i ≅ (Rep.FiniteCyclic; Rep.FiniteCyclicGroup.groupCohomologyπEven {k G : Type u} →\n  [inst : CommRing k] →\n    [inst_1 : CommGroup G] →\n      [Fintype G] →\n        (A : Rep k G) →\n          (g : G) →\n            (∀ (x : G), x ∈ Subgroup.zpowers g) →\n              (i : ℕ) →\n                [NeZero i] →\n                  Even i →\n                    (ModuleCat.of k ; Rep.FiniteCyclicGroup.homResolutionIso {k G : Type u} →\n  [inst : CommRing k] →\n    [inst_1 : CommGroup G] →\n      [inst_2 : Fintype G] →\n        (A : Rep k G) →\n          (g : G) →\n            (hg : ∀ (x : G), x ∈ Subgroup.zpowers g) →\n              (Rep.FiniteCyclicGroup.resolution k g hg).complex.linearYonedaObj k A ≅\n                ",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homology\", \"ZMod\"",
+   "results": "[loogle] OK 0 hit(s); ",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(ZMod|PadicInt).*(homology|Homology)|(homology|Homology).*(ZMod|PadicInt)",
+   "results": "[grep] OK 0 hit(s); ",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomology sheaves of the two term complex of constant Z mod l power n sheaves with differential multiplication by l, and its quotient transition maps.",
+   "results": "[leansearch] OK 8 hit(s); CategoryTheory.Sheaf.H (n : ℕ) : Type w'; groupCohomology.shortComplexH1 : ShortComplex (ModuleCat k); ContinuousCohomology.MultiInd.complex : CochainComplex (Action (TopModuleCat R) G ⥤ Action (TopModuleCat R) G) ℕ; CochainComplex.HomComplex : CochainComplex AddCommGrpCat ℤ; groupCohomology.shortComplexH2 : ShortComplex (ModuleCat k); ContinuousCohomology.MultiInd.d : ∀ n : ℕ, functor R G n ⟶ functor R G (n + 1); CochainComplex.HomComplex.CohomologyClass : Type v; CochainComplex.mappingCone.shiftIso (n : ℤ) : (mappingCone φ)⟦n⟧ ≅ mappingCone (φ⟦n⟧')",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The kernel of multiplication by a prime on Z mod prime power is the residue field, quotient reduction induces zero on that kernel, and scalar extension of that kernel to the preceding quotient is unchanged.",
+   "results": "[leanfinder] OK 8 hit(s); PadicInt.ker_toZModPow ∀ {p : ℕ} [hp_prime : Fact (Nat.Prime p)] (n : ℕ), RingHom.ker (PadicInt.toZModPow n) = Ideal.span {↑p ^ n}; PadicInt.toZMod_eq_residueField_comp_residue ∀ {p : ℕ} [hp_prime : Fact (Nat.Prime p)],\n  PadicInt.toZMod = PadicInt.residueField.toRingHom.comp (IsLocalRing.residue ℤ_[p]); PadicInt.ker_toZMod ∀ {p : ℕ} [hp_prime : Fact (Nat.Prime p)], RingHom.ker PadicInt.toZMod = IsLocalRing.maximalIdeal ℤ_[p]; PadicInt.residueField {p : ℕ} → [hp_prime : Fact (Nat.Prime p)] → IsLocalRing.ResidueField ℤ_[p] ≃+* ZMod p; RingOfIntegers.ZModXQuotSpanEquivQuotSpan_mk_apply ∀ {K : Type u_1} [inst : Field K] [inst_1 : NumberField K] {θ : NumberField.RingOfIntegers K} {p : ℕ}\n  [inst_2 : Fact (Nat.Prime p)] (hp : ¬p ∣ RingOfIntegers.exponent θ) (Q : Polynomial ℤ),\n  (RingOfIntegers.ZModXQuotSpanEquivQuotSpan hp)\n      ((Ideal.Quotient.mk (Ideal.span {Polynomial.map (Int.; RingOfIntegers.ZModXQuotSpanEquivQuotSpanPair {K : Type u_1} →\n  [inst : Field K] →\n    [NumberField K] →\n      {θ : NumberField.RingOfIntegers K} →\n        {p : ℕ} →\n          [inst_2 : Fact (Nat.Prime p)] →\n            ¬p ∣ RingOfIntegers.exponent θ →\n              {Q : Polynomial ℤ} →\n                Polynomial.map (Int.castRingHom (ZMod p)); RingOfIntegers.ZModXQuotSpanEquivQuotSpan {K : Type u_1} →\n  [inst : Field K] →\n    [NumberField K] →\n      {θ : NumberField.RingOfIntegers K} →\n        {p : ℕ} →\n          [inst_2 : Fact (Nat.Prime p)] →\n            ¬p ∣ RingOfIntegers.exponent θ →\n              Polynomial (ZMod p) ⧸ Ideal.span {Polynomial.map (Int.castRingHom (ZMod p)) (m; Ideal.quotientRangePowQuotSuccInclusionEquiv {R : Type u} →\n  [inst : CommRing R] →\n    {S : Type v} →\n      [inst_1 : CommRing S] →\n        (p : Ideal R) →\n          (P : Ideal S) →\n            [inst_2 : Algebra R S] →\n              [hfp : NeZero (Ideal.ramificationIdx (algebraMap R S) p P)] →\n                [IsDedekindDomain S] →\n          ",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(kernel|ker).*(prime_pow|primePow|pow_succ)|(prime_pow|primePow|pow_succ).*(kernel|ker)",
+   "results": "[grep] OK 0 hit(s); ",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "sk-def-pe-derived-completion",
+  "date": "2026-10-21",
+  "group": "O4"
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-def-pe-derived-completion",
+ "blueprint": {
+  "from": {
+   "node": "sk-def-pe-derived-completion",
+   "place": "final paragraph: the cohomology sheaves need not form a normalized tower under ordinary tensor product; explicit two-term witness",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}
