@@ -207,5 +207,36 @@
   "group": "Q17",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q17-3aa67483a (reviewer sub-agent of L); spot-checked: I read the item, the new node, the unit record and every cited node in full. The statement matches main-20261015 sk-d-real-weights clause by clause, with additions that only fix notation and nothing weakened; the unit has no steps, so realized={statement:[item],steps:[]} is right. Step 1 is correct: charpoly monic of degree n, factorization over Qlb, det F≠0 and det=(-1)^n chi(0) give nonzero alpha_j, reversal of the product gives P_x=prod(1-alpha_j T), and clause 3 of lem-weil-reciprocal-root-factorization (P(0)=1, degree n) gives the multiplicities. Step 2: conjugacy independence holds because the determinant does not depend on the basis. Step 3: reality equivalence via clause 3 over C applied to Q and its conjugate. Step 4: |iota(alpha)|>0 and q_x=q^{e_x}>1, so log q_x>0. Step 5: the stalk and local-operator convention of def-weil-punctual-weights, the same one def-wf-iota-real uses; its iota-isomorphism and mixed-filtration clauses are not used, and the zero-stalk case is handled. Small cases checked: rank 1 with alpha=1 and alpha=q_x, nonreal scalar, conjugate pair, Jordan block, e_x>1. New node def-wf-positive-real-logarithm is an exact Mathlib leaf: Real.log, log_of_pos, exp_log, log_exp and log_pos are at the claimed lines 44/50/59/75/188 of Log/Basic.lean. It is not a duplicate: rg -L found only def-weil-real-power, which uses log without defining it, and sk-d-real-log, the l-adic small logarithm. Tool use of lem-weil-reciprocal-root-factorization, a generic polynomial uniqueness lemma, is accepted. No cycle. Batch-5 flag on def-weil-punctual-weights reaching lem-weil-local-frobenius-conjugacy-class is accepted: that lemma only makes the local Frobenius eigenvalues well defined (definitional well-definedness), neither assumption gives it and it is no step of their proofs, and the batch-5 closure is unchanged with or without the citation, since about 80 other citers already reach it (e.g. thm-weil-deligne-purity). No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RealWeights",
+  "declaration": "RealSheaves.LocalWeights.localPolynomial",
+  "declarations": [
+   "RealSheaves.LocalWeights.localPolynomial",
+   "RealSheaves.LocalWeights.localEigenvalues",
+   "RealSheaves.LocalWeights.IsPunctuallyPure",
+   "RealSheaves.LocalWeights.HasWeightsAtMost",
+   "RealSheaves.LocalWeights.IsReal",
+   "RealSheaves.LocalWeights.local_spectral_data",
+   "RealSheaves.LocalWeights.isReal_iff_conjugation",
+   "RealSheaves.HasConstructibleWeightsAtMost",
+   "RealSheaves.constructible_purity_iff_logarithmic",
+   "RealSheaves.constructible_reality_iff_conjugation"
+  ],
+  "file": "lean/Sheaf/Paper/RealWeights.lean",
+  "statement": "def localPolynomial (x : C₀.finitePoints) : Polynomial E",
+  "branch": "sheaf-dag",
+  "by": "Q10",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The upstream WeilGroup definitions fix PadicAlgCl l and place V in the scheme universe. The generalized representation definitions allow the arbitrary chosen coefficient closure and independent vector-space universe in the node. They use the same recorded WeilGroup, local Frobenius, charpolyRev and charpoly.roots. Reuses the upstream generic frobeniusWeight without redefining it. Constructible purity reuses SfIsPunctuallyPureOfWeight through its logarithmic equivalence; the upper bound uses SfPunctualEigenvalue. Reality and the canonical local factor reuse the landed def-wf-iota-real interface unchanged. No change of statement, coefficient embedding, or mixed-filtration assumption."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fc1946693",
+  "group": "Q10",
+  "result": "pass",
+  "note": "Re-delivery after ded644f6 H13+H2 RETURN: dep module AdicLocalCharacteristicFactor and def-wf-iota-real record/edge removed; stmt_deps = live; RealWeights.lean byte-identical to returned head; only item lean record delivered (live lean null). Restored live AdicLocalCharacteristicFactor (Q106 record, not in rework.tsv) matches item's sfLocalCharacteristicFactor/SfIsReal usage. Clauses: charpolyRev P_x, charpoly.roots eigenvalues with multiplicity, reused upstream frobeniusWeight 2log|ια|/log q_x, ∀x∀α purity and ≤ bound, coefficientwise reality, multiset conjugation equivalence, inverse-root spectral data, constructible purity via existing SfIsPunctuallyPureOfWeight (log equivalence true: invertible stalk Frobenius, q_y≥2), new HasConstructibleWeightsAtMost over SfPunctualEigenvalue, SfIsReal reality equivalence. Edge cases rank 0/zero stalk/e_x>1/empty Y₀/universes u,v,w OK. Statement field verbatim; docstrings/blueprint tags/sorry proofs OK; no hollow defs. Advisories: def-wf-iota-real decls used without stmt_dep (edge dropped per return, acyclic); constructible clauses on sfCommonStageWeilSheaf not RealSheaves.ConstructibleWeilSheaf (node prescribes punctual-weights convention; no users of the latter); inherited [IsSeparated] on two decls harmless; unused plain imports. No compile run (no file changed)."
  }
 }
