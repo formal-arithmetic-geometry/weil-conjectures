@@ -18,9 +18,98 @@
   "def-weil-abstract-derived-category",
   "def-weil-derived-cohomology-sheaves"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $U:\\operatorname{Mod}(A_T)\\to\\operatorname{Ab}(T_{\\mathrm{et}})$ for the forgetful functor. Apply [lem-weil-pbc-module-sheaves-colimits-forgetful](1) to $\\mathcal O=A_T$ on the small etale site: $U$ is faithful and exact and preserves kernels and cokernels. Apply [lem-sp-exact-functor-preserves-homology](a)-(c) to $U$. Since an image is the kernel of the cokernel and a quotient is a cokernel, forgetting scalars also preserves images, quotients and cohomology, naturally in a complex. For ordinary $A$-modules the same identifications are literal: the kernel and image are the same additive subgroups with the restricted action, and a quotient has the same additive cosets with $a[m]=[am]$. In particular an exact sequence of $A$-modules can be checked after forgetting to abelian groups.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-sp-exact-functor-preserves-homology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DA (lemma-abelian); homology.tex Tag 010N (lemma-exact-functor)"
+   }
+  },
+  {
+   "text": "For a geometric point $\\bar t$, use the pointed-neighbourhood colimit of [def-weil-pbc-geometric-stalks]. If $a\\in A$ and $m\\in\\mathcal F(V)$, define $a[m]=[a_Vm]$, where $a_V\\in A_T(V)$ is the constant section coming from sheafification of the constant presheaf [def-weil-pbc-constant-sheaf]. Restriction compatibility in [def-weil-sheaf-of-modules-category] gives $(a_Vm)|_W=a_W(m|_W)$, so this rule respects the colimit relations. The module identities hold on representatives and hence on germs. For a module-sheaf morphism $f$, $s_{\\bar t}(f)(a[m])=[f(a_Vm)]=a[f(m)]$, so the stalk maps are $A$-linear. Addition of maps is also preserved on representatives. Forgetting this action gives exactly the stalk of $U\\mathcal F$, since both use the same germs and relations.",
+   "uses": [
+    "def-weil-pbc-geometric-stalks",
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Construction immediately before Tag 04EQ (lemma-stalk-exact-modules); etale-cohomology.tex Definition 040R (definition-stalk)"
+   }
+  },
+  {
+   "text": "Given a short exact sequence of $A_T$-module sheaves, step 1 makes its underlying abelian-sheaf sequence short exact. The abelian geometric stalk functor is exact by [prop-weil-pbc-geometric-stalks-exact]. Its resulting exact sequence of abelian groups is the underlying sequence of the $A$-linear stalk maps from step 2. The elementary kernel/image description for ordinary modules in step 1 therefore makes that sequence short exact in $\\operatorname{Mod}(A)$. Thus $s_{\\bar t}$ is additive and exact; no finiteness property of the ring, the scheme or the sheaves entered the argument.",
+   "uses": [
+    "prop-weil-pbc-geometric-stalks-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03PT (lemma-stalk-exact), clause (3); sites-modules.tex Tag 04EQ (lemma-stalk-exact-modules), clause (1)"
+   }
+  },
+  {
+   "text": "Let $C$ be any integer-indexed cochain complex of $A_T$-modules, with no boundedness assumption. Apply [lem-weil-pbc-exact-functor-complex-cohomology] with $F=s_{\\bar t}$, now an exact functor between abelian categories. In degree $i$, its comparison identifies the kernel of $s_{\\bar t}(d^i)$ with $s_{\\bar t}(\\ker d^i)$ and the image of $s_{\\bar t}(d^{i-1})$ with $s_{\\bar t}(\\operatorname{im}d^{i-1})$, compatibly with cycles and quotient projections. Taking the inverse of its natural comparison gives\n$$s_{\\bar t}(H^i(C))\\xrightarrow{\\sim}H^i(s_{\\bar t}C).$$\nIt is an isomorphism in $\\operatorname{Mod}(A)$, hence $A$-linear. This computation involves only the three consecutive terms in degrees $i-1,i,i+1$. If $f:C\\to C'$ is a quasi-isomorphism, naturality identifies $H^i(s_{\\bar t}f)$ with $s_{\\bar t}(H^i(f))$, which is invertible for every $i$. Thus the termwise stalk functor preserves quasi-isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 010N (lemma-exact-functor), applied to consecutive terms; derived.tex Tag 015F (lemma-right-derived-exact-functor)"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-exact-functor-derived-factorization] to $s_{\\bar t}$. It supplies a functor $D(s_{\\bar t})$ on the full unbounded derived categories and a natural identification $D(s_{\\bar t})(QC)\\cong Q(s_{\\bar t}C)$. Define $E_{\\bar t}=D(s_{\\bar t})(E)$. The representative description in [def-weil-derived-cohomology-sheaves] identifies $\\mathcal H^i(QC)$ with $H^i(C)$. Consequently step 4 gives the required comparison $(\\mathcal H^i(E))_{\\bar t}\\cong H^i(E_{\\bar t})$. This is natural on the derived category: both cohomology functors invert quasi-isomorphisms, and the naturality equation of step 4 for a quasi-isomorphism remains valid for its inverse, by composing with the two inverse maps. Morphisms in the localization are generated by complex maps and these inverses [def-weil-abstract-derived-category], so the same equation holds for every derived morphism. The comparison remains $A$-linear throughout.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-weil-derived-cohomology-sheaves",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F (lemma-right-derived-exact-functor), parts (3)-(4), and localization Definition 05RU"
+   }
+  },
+  {
+   "text": "Fix $i$ and put $\\mathcal F=\\mathcal H^i(E)$. If $\\mathcal F=0$, its stalks are zero and the comparison just constructed gives $H^i(E_{\\bar t})=0$ for every geometric point. Conversely, suppose these cohomology modules vanish. The comparison and step 2 show that every geometric stalk of the underlying abelian sheaf $U\\mathcal F$ vanishes. Apply [lemma-weil-pbc-geometric-stalk-conservative] to $0\\to U\\mathcal F$: every stalk map is an isomorphism, so $0\\to U\\mathcal F$ is an isomorphism. Hence $U\\mathcal F=0$. The faithfulness of $U$ in [lem-weil-pbc-module-sheaves-colimits-forgetful](1) now gives $\\mathrm{id}_{\\mathcal F}=0$, so $\\mathcal F$ is a zero object. This proves the equivalence for each integer $i$. On the empty scheme the stalk condition is vacuous and the same conservativity assertion still applies. No truncation or convergence argument has been used.",
+   "uses": [
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03PU (theorem-exactness-stalks); sites-cohomology.tex Tag 0DJJ (lemma-tor-amplitude-stalk), converse vanishing argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-sp-exact-functor-preserves-homology",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-abstract-derived-category",
+  "lemma-weil-pbc-geometric-stalk-conservative"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03PT (lemma-stalk-exact)(3) and 03PU (theorem-exactness-stalks), with the module-forgetful reduction of sites-modules.tex Tag 03DA (lemma-abelian) and Tag 04EQ (lemma-stalk-exact-modules), and termwise unbounded derivation of derived.tex Tag 015F (lemma-right-derived-exact-functor). The naturality and scalar-action details are written out."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -56,10 +145,45 @@
    "results": "{\"t\": \"2026-10-21T05:49:21Z\", \"tool\": \"leanfinder\", \"query\": \"Geometric stalks of unbounded complexes of etale sheaves of modules commute with cohomology and detect vanishing in each degree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Presheaf.app_injective_iff_stalkFunctor_map_injective\", \"TopCat.Presheaf.app_injective_of_stalkFunctor_map_injective\", \"DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective\", \"TopCat.Presheaf.isIso_of_stalkFunctor_map_iso\", \"TopCat.Presheaf.app_isIso_of_stalkFunctor_map_iso\", \"CochainComplex.isKInjective_of_injective\", \"TopCat.Presheaf.stalk_mono_of_mono\", \"CategoryTheory.Sheaf.H\"], \"digest\": \"34c2138a8360023d\"}",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafFiber.*homology|homology.*sheafFiber|stalk.*homology|homology.*stalk",
+   "results": "{\"t\": \"2026-10-21T07:34:38Z\", \"tool\": \"grep\", \"query\": \"sheafFiber.*homology|homology.*sheafFiber|stalk.*homology|homology.*stalk\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/Topology/Sheaves/Abelian.lean\", \"Mathlib/Topology/Sheaves/Abelian.lean\", \"Mathlib/Topology/Sheaves/Abelian.lean\", \"Mathlib/Topology/Sheaves/Abelian.lean\"], \"digest\": \"a5f19a7cdc823906\"}",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometric stalk cohomology detects zero cohomology sheaves of unbounded etale module complexes",
+   "results": "{\"t\": \"2026-10-21T07:34:39Z\", \"tool\": \"leansearch\", \"query\": \"Geometric stalk cohomology detects zero cohomology sheaves of unbounded etale module complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.Tilde.toOpen_germ_apply\", \"ModuleCat.Tilde.smul_stalk_no_nonzero_divisor\", \"CochainComplex.isZero_of_isStrictlyGE\", \"AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso\", \"ModuleCat.Tilde.toStalk\", \"ModuleCat.Tilde.stalkIso\", \"ModuleCat.Tilde.stalkToFiberLinearMap_germ\", \"ModuleCat.Tilde.instIsLocalizedModuleCarrierOfStalkTildeInModuleCatPrimeComplAsIdealHomToStalk\"], \"digest\": \"8664603af4b5be24\"}",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafFiber\", \"homology\"",
+   "results": "{\"t\": \"2026-10-21T07:34:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"sheafFiber\\\", \\\"homology\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric stalks of etale module sheaves are exact and commute with cohomology of unbounded complexes",
+   "results": "{\"t\": \"2026-10-21T07:34:40Z\", \"tool\": \"leanfinder\", \"query\": \"Geometric stalks of etale module sheaves are exact and commute with cohomology of unbounded complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.etaleLocus_eq_compl_support\", \"Algebra.Etale.formallyEtale\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact\", \"Algebra.basicOpen_subset_etaleLocus_iff\", \"AlgebraicGeometry.IsEtale.of_comp\", \"Algebra.FormallyEtale.localization_map\", \"Algebra.H1Cotangent.exact_map_δ\", \"Algebra.FormallyEtale.localization_base\"], \"digest\": \"724497c8e16b7588\"}",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact family of point fibre functors on module sheaves induces unbounded derived functors and detects vanishing of cohomology",
+   "results": "{\"t\": \"2026-10-21T07:34:56Z\", \"tool\": \"leanfinder\", \"query\": \"An exact family of point fibre functors on module sheaves induces unbounded derived functors and detects vanishing of cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\", \"Ext\", \"CategoryTheory.Sheaf.H\", \"CategoryTheory.Abelian.Ext.mapExactFunctor\", \"CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ\", \"CategoryTheory.Abelian.Ext.mapExactFunctor_zero\", \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"CategoryTheory.hasExt_of_hasDerivedCategory\"], \"digest\": \"13fd803fe6e2a3b8\"}",
+   "date": "2026-10-21",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sf-etale-stalk-tor-test",
@@ -78,5 +202,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sf-etale-module-stalk-cohomology-test",
+  "worker": "stage1",
+  "summary": "Proved the item in six steps without changing its statement or creating nodes: exact forgetting; scalar action on germs; module stalk exactness from abelian exactness; cohomology on arbitrary complexes; passage to the full derived localization with naturality; zero detection via underlying abelian stalk conservativity. Reused the existing generic exact-functor and module-sheaf lemmas, and checked their statements and sources.",
+  "blueprint": "Closed-support paragraph of sk-prop-sf-rf-shriek-preservation: the geometric-stalk cohomology/zero-detection input to the Tor interval, extracted as old step 1 of lem-sf-etale-stalk-tor-test. All six steps expand this input without changing the unit route. Whole-blueprint searches for geometric stalk and stalk/cohomology found no identical node.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Generic exactness and faithfulness of forgetting a ringed-site module action, for the underlying abelian-sheaf reduction; the unit has no such statement."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Generic detection of isomorphisms of abelian etale sheaves, applied to zero to the cohomology sheaf; the unit has no such detection statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lemma-weil-pbc-geometric-stalk-conservative"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q13-7ceed5ee9",
+  "group": "Q13",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-7ceed5ee9 (reviewer sub-agent of L); spot-checked: I read the whole item. This is the first split of a node Q18 created on 2026-10-21; it is not in route-pivot-dropped, has no re-split note of its own, and is still unsplit on live and side-live. The statement is unchanged and there are no new nodes. Sources checked: Stacks 03PT(3), 03PU, 03DA, 03DB, 04EQ, 0DJJ, 015F(3,4), 010N; all tags match their labels. The coefficient category D(Mod(A_T)) matches def-weil-pbc-derived-categories and the parent lem-sf-etale-stalk-tor-test, which uses the item for the stalk comparison and zero detection on unbounded D. Step checks: step 1 uses forgetful (1) on the étale site and the exact-functor homology leaf. Step 2 is genuinely elementary: the germ action via constant sections a_V, made well defined by semilinear restriction. Step 3 checks module exactness on underlying groups through the abelian stalk-exact leaf. Step 4 uses the unbounded complex-cohomology leaf, so quasi-isomorphisms are preserved degree by degree. Step 5 uses the unbounded derived factorization, with naturality via inverses in the localization. Step 6 applies abelian conservativity to 0→U𝓕 and then faithfulness of U; it never uses the D⁺-only derived conservativity. Edge cases checked: A=0, T empty, an unbounded complex with zero differentials, a single degree, and Z/4 with ×2. I accept the tool_uses (generic forgetful and conservativity). Maintainer note: steps 1–4 repeat the statement of lem-sfb-etale-stalk-constant-complex-exactness (N9, other unit, created the same day, unsplit), so the overlap should share one Lean declaration. That is not a duplicate node, since the item adds the derived comparison and zero detection. No changes."
  }
 }
