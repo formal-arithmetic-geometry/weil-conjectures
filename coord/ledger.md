@@ -23054,3 +23054,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:34 L: merged deliver/Q19/lem-pod-fixed-pair-truncation-cohomology (stage 2; reviewer PASS; parallel immutable checks)
 - 2026-10-21T16:35:14Z L: superseded stage-1 delivery NF/lem-sfb-pointed-finite-etale-limit-cover at b47eda59ce252a6a49e04e1db890a4ffa22424db; current completion retained; packet archived at refs/superseded/NF/lem-sfb-pointed-finite-etale-limit-cover/b47eda59ce252a6a49e04e1db890a4ffa22424db; stale return retired.
 - 16:35 L: returned deliver/NL/lem-sfb-internal-action-site-presentation (reviewer RETURN: L: independent stage-2 immutable head 41e7bb27ba35: H3: isSiteForCoverings ((precoverage K J).IsSiteForCoverings) is fal)
+- 16:36 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
