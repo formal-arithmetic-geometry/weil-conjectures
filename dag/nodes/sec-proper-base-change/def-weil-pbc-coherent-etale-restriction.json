@@ -20,9 +20,46 @@
   "document": "literature/stacks-project/etale-cohomology.tex",
   "place": "Tag 03Q8, lemma-higher-direct-images; coefficient restriction and the canonical local class."
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For arbitrary tensor-pullback adjunctions, apply Mathlib Adjunction.leftAdjointCompIso_assoc to the sectionwise pushforwardComp isomorphisms. Their coherence is checked on every section, where all comparison components are identities. Evaluate the resulting equality at the whole scheme. Naturality of the tensor adjunction unit then gives the square between tensorSectionsComp(w,j).hom and the tensor-section restriction along every morphism over Y; eliminate its structure-map equality to account for the transports. These are fully proved private helpers in the item module.",
+   "uses": [
+    "lem-sc-left-adjoint-composition-iso-associativity",
+    "lem-sc-etale-qcoherent-presheaf-functorial",
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Take the component isomorphism on global sections induced by tensorSectionsComp(w,j). Apply the additive ULift functor to its maps and the naturality square from step 1. NatIso.ofComponents gives the isomorphism from the lifted tensor-section sheaf of j*F to localizationRestriction of the lifted tensor-section sheaf of F. Lift it through the fully faithful sheaf-to-presheaf functor. Compose its inverse with upperStarIsoLocalizationRestriction to obtain the required inverse-image isomorphism. Its formula follows from cancellation of the inverse-image/restriction isomorphism.",
+   "uses": [
+    "def-sc-etale-qcoherent-module",
+    "def-pbc-canonical-coherent-etale-comparison",
+    "lem-weil-pbc-etale-inverse-image-restriction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "If another isomorphism has the prescribed formula, precompose its forward map with the inverse of upperStarIsoLocalizationRestriction. At every etale object, every lifted section is ULift.up of a tensor section, so the prescribed formulas give equality on all elements. Concrete, natural-transformation and sheaf extensionality give equality of forward morphisms; cancel the restriction isomorphism and apply isomorphism extensionality. The existing definition therefore still selects the unique normalized isomorphism.",
+   "uses": [
+    "lem-weil-pbc-etale-inverse-image-restriction"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-left-adjoint-composition-iso-associativity",
+  "lem-sc-etale-qcoherent-presheaf-functorial",
+  "lem-pc-module-pullback-adjunction",
+  "def-sc-etale-qcoherent-module",
+  "def-pbc-canonical-coherent-etale-comparison",
+  "lem-weil-pbc-etale-inverse-image-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/descent.tex; literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03DR, 03DU and 03Q8; explicit tensor-adjunction coherence and uniqueness argument, following the declaration docstring."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -132,5 +169,15 @@
   "group": "NN",
   "result": "pass",
   "note": "Re-delivery of f860f10c. The commit changes only the item record, 7 new def nodes and 6 modules; no dependency record is touched, so the H13 rebinds are gone. The helpers are owned by def-weil-pbc-etale-cohomology-presentation, def-weil-pbc-derived-ext-evaluation, def-weil-pbc-coherent-etale-restriction and def-weil-pbc-tensor-pullback-ordinary-comparison (leftAdjointUniq iso plus qcoh instance), plus existing:true def-weil-pbc-abelian-higher-image-class and def-weil-pbc-etale-tensor-sections-restriction (signatures match live). The H2 owners are now cited. H3: every clause matches: qc+separated f only, qcoh G/E, q in N, e linear and natural for all affine arrows, ULift u+1, action pinned on all local classes independently of Phi, Phi linear on all V, both affine and raw normalizations; c^q is the exists-unique normalized comparison, which is the comparison-pullback family by that node's proof step 1. Mechanical finding: normalized-comparison-exists (Classical.choose of exists-unique) and module-pullback-quasi-coherent (qcoh conclusion needed for typing) are genuine, PASS on point. Statements are verbatim, declarations complete, no hollow data, no collisions, nothing dropped. Advisory: base-era plain abbrev abelianHigherDirectImageRawPresheaf sits in a theorem module. No file changed, so no compile run; the report records clean scompile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261021T130125-L-2545050",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
