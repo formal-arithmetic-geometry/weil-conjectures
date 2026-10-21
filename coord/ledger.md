@@ -20434,3 +20434,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:32 L: merged deliver/NS/lem-pur-etale-finite-tor-direct-image-coefficients (reviewer FIX; first push; new nodes: 0)
 - 06:32 L: merged deliver/Q60/lem-sfb-finite-proper-classical-coproducts (reviewer FIX; after a return; new nodes: 3)
 - 06:32 L: merged deliver/Q61/lem-sfb-derived-direct-image-open-coherence (reviewer PASS; after a return; new nodes: 2)
+- 06:32 L: merged deliver/Q22/lem-sfb-finite-upper-star-braided (reviewer PASS; after a return; new nodes: 2)

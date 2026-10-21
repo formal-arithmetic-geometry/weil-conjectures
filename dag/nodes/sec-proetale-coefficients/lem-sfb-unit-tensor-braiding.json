@@ -1,0 +1,72 @@
+{
+ "id": "lem-sfb-unit-tensor-braiding",
+ "kind": "statement",
+ "title": "Braiding equivariance of the unit-tensor composite",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be monoidal categories [def-sfb-monoidal-category] with braidings $\\beta^{\\mathcal C},\\beta^{\\mathcal D}$, meaning natural isomorphisms $X\\otimes Y\\to Y\\otimes X$ satisfying the two hexagon identities. Let $R:\\mathcal D\\to\\mathcal C$ be a functor equipped with a lax monoidal structure: a unit map $\\mathbf1_{\\mathcal C}\\to R\\mathbf1_{\\mathcal D}$ and natural maps $m_{P,Q}:RP\\otimes RQ\\to R(P\\otimes Q)$ satisfying the associativity and unit coherence diagrams. Assume its braided identity\n$$R(\\beta^{\\mathcal D}_{P,Q})\\circ m_{P,Q}=m_{Q,P}\\circ\\beta^{\\mathcal C}_{RP,RQ}$$\nfor all $P,Q\\in\\mathcal D$. For arbitrary objects $X,Y\\in\\mathcal C$, $P,Q\\in\\mathcal D$ and arrows $u:X\\to RP$, $v:Y\\to RQ$, put\n$$a=m_{P,Q}\\circ(u\\otimes v):X\\otimes Y\\to R(P\\otimes Q),\\qquad b=m_{Q,P}\\circ(v\\otimes u):Y\\otimes X\\to R(Q\\otimes P).$$\nThen the following equality of maps $X\\otimes Y\\to R(Q\\otimes P)$ holds:\n$$R(\\beta^{\\mathcal D}_{P,Q})\\circ a=b\\circ\\beta^{\\mathcal C}_{X,Y}.$$\nIn particular this applies to $P=LX$, $Q=LY$, $u=\\eta_X$, $v=\\eta_Y$ for any adjunction $L:\\mathcal C\\rightleftarrows\\mathcal D:R$ with unit $\\eta:\\mathrm{id}_{\\mathcal C}\\to RL$ (natural Hom bijections $\\Phi_{X,V}:\\operatorname{Hom}_{\\mathcal D}(LX,V)\\cong\\operatorname{Hom}_{\\mathcal C}(X,RV)$ and $\\eta_X=\\Phi_{X,LX}(\\mathrm{id}_{LX})$).",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-finite-pushforward-pullback/lem-sfb-finite-upper-star-braided.proof.md",
+  "place": "proof, first paragraph: the composite of the tensor of the adjunction units with the lax tensor map commutes with the braiding; existing split steps 1 and 2"
+ },
+ "stmt_deps": [
+  "def-sfb-monoidal-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A lax braided functor R and arrows u X from X to R L X make m composed with u tensor u commute with braidings",
+   "results": "8 hit(s): CategoryTheory.Functor.LaxBraided.braided, CategoryTheory.Functor.LaxBraided, CategoryTheory.Functor.LaxBraided.braided_assoc, CategoryTheory.LaxBraidedFunctor.laxBraided, CategoryTheory.LaxBraidedFunctor.homMk, CategoryTheory.LaxBraidedFunctor, CategoryTheory.Functor.Braided, CategoryTheory.Functor.Braided.toLaxBraided",
+   "date": "2026-10-21",
+   "verdict": "no match for the composite statement: Functor.LaxBraided.braided supplies only the equation before precomposition; BraidedCategory.braiding_naturality supplies the separate naturality square. Their combination is the extracted task required by the human re-split."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.LaxBraided, CategoryTheory.NatTrans",
+   "results": "0 hit(s): ",
+   "date": "2026-10-21",
+   "verdict": "no match for the composite statement: Functor.LaxBraided.braided supplies only the equation before precomposition; BraidedCategory.braiding_naturality supplies the separate naturality square. Their combination is the extracted task required by the human re-split."
+  },
+  {
+   "tool": "grep",
+   "query": "braiding_naturality|LaxBraided.braided",
+   "results": "9 hit(s): Mathlib/CategoryTheory/Monoidal/Braided/Reflection.lean, Mathlib/CategoryTheory/Monoidal/Braided/Reflection.lean, Mathlib/CategoryTheory/Monoidal/Braided/Multifunctor.lean, Mathlib/CategoryTheory/Monoidal/Braided/Multifunctor.lean, Mathlib/CategoryTheory/Monoidal/Braided/Basic.lean, Mathlib/CategoryTheory/Monoidal/Braided/Basic.lean, Mathlib/CategoryTheory/Monoidal/Braided/Basic.lean, Mathlib/CategoryTheory/Monoidal/Braided/Basic.lean",
+   "date": "2026-10-21",
+   "verdict": "no match for the composite statement: Functor.LaxBraided.braided supplies only the equation before precomposition; BraidedCategory.braiding_naturality supplies the separate naturality square. Their combination is the extracted task required by the human re-split."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a lax braided functor tensor comparison precomposed with two unit maps commutes with braiding",
+   "results": "8 hit(s): CategoryTheory.Functor.LaxBraided.braided, CategoryTheory.Functor.LaxBraided.braided_assoc, CategoryTheory.MonoidalCategory.tensorμ_comp_μ_tensorHom_μ_comp_μ_assoc, CategoryTheory.Functor.LaxBraided.toLaxMonoidal, CategoryTheory.Functor.Braided.braided, CategoryTheory.Functor.LaxBraided, CategoryTheory.LaxBraidedFunctor.laxBraided, CategoryTheory.Functor.comp_mapCommMon_one",
+   "date": "2026-10-21",
+   "verdict": "no match for the composite statement: Functor.LaxBraided.braided supplies only the equation before precomposition; BraidedCategory.braiding_naturality supplies the separate naturality square. Their combination is the extracted task required by the human re-split."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A lax braided functor preserves a braiding square after tensoring two arbitrary morphisms into its images",
+   "results": "8 hit(s): CategoryTheory.Functor.LaxBraided.braided, CategoryTheory.Functor.Braided.braided, CategoryTheory.Functor.map_braiding, CategoryTheory.Functor.LaxBraided.braided_assoc, CategoryTheory.Functor.map_braiding_assoc, CategoryTheory.Functor.LaxBraided, CategoryTheory.LaxBraidedFunctor.laxBraided, CategoryTheory.LaxBraidedFunctor",
+   "date": "2026-10-21",
+   "verdict": "no match for the composite statement: Functor.LaxBraided.braided supplies only the equation before precomposition; BraidedCategory.braiding_naturality supplies the separate naturality square. Their combination is the extracted task required by the human re-split."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-upper-star-braided",
+  "date": "2026-10-21",
+  "group": "Q22"
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-def-sfb-finite-pushforward-pullback",
+ "blueprint": {
+  "from": {
+   "node": "lem-sfb-finite-upper-star-braided",
+   "place": "proof, first paragraph: the composite of the tensor of the adjunction units with the lax tensor map commutes with the braiding; existing split steps 1 and 2",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}

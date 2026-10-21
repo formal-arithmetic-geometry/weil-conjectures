@@ -18,63 +18,65 @@
  ],
  "proof": [
   {
-   "text": "Write $L=g^*$, $R=g_*$, $\\mathcal C=\\Sh(Y_{\\mathrm{proét}},\\mathcal A)$ and $\\mathcal D=\\Sh(Z_{\\mathrm{proét}},\\mathcal A)$; these are symmetric monoidal under the hypotheses inherited from [def-sfb-finite-upper-star-monoidal]. Let $\\Phi_{H,K}\\colon\\Hom(LH,K)\\cong\\Hom(H,RK)$ be the natural adjunction bijection of [def-sfb-finite-upper-lower-star-adjunction], with unit $\\eta_H=\\Phi_{H,LH}(\\mathrm{id}_{LH})$. Denote the lax tensor map of [def-sfb-finite-lower-star-lax-monoidal] by $m_{P,Q}\\colon RP\\otimes RQ\\to R(P\\otimes Q)$. Unpacking the mate structure specified in [def-sfb-finite-upper-star-monoidal], put\n$$a_{F,G}:=m_{LF,LG}\\circ(\\eta_F\\otimes\\eta_G)\\colon F\\otimes G\\longrightarrow R(LF\\otimes LG),\\qquad \\delta_{F,G}:=\\Phi_{F\\otimes G,LF\\otimes LG}^{-1}(a_{F,G}).$$\nThese $\\delta$ are precisely the invertible oplax tensor maps of the specified strong monoidal structure; write $\\gamma_{F,G}=\\delta_{F,G}^{-1}$ for its lax tensor maps.",
+   "text": "Put $L=g^*$, $R=g_*$, $\\mathcal C=\\Sh(Y_{\\mathrm{proét}},\\mathcal A)$ and $\\mathcal D=\\Sh(Z_{\\mathrm{proét}},\\mathcal A)$. Use the natural bijection $\\Phi$ and unit $\\eta$ of [def-sfb-finite-upper-lower-star-adjunction] and lax tensor map $m$ of [def-sfb-finite-lower-star-lax-monoidal]. For $F,G\\in\\mathcal C$ put $a_{F,G}=m_{LF,LG}\\circ(\\eta_F\\otimes\\eta_G)$. By [def-sfb-finite-upper-star-monoidal], $\\delta_{F,G}=\\Phi^{-1}(a_{F,G})$ is the specified invertible oplax comparison; put $\\gamma_{F,G}=\\delta_{F,G}^{-1}$. Apply [lem-sfb-unit-tensor-braiding] with $X=F,Y=G,P=LF,Q=LG,u=\\eta_F,v=\\eta_G$. Its braided hypothesis is supplied by the lax symmetry compatibility of $R$. It gives $R(\\beta^{\\mathcal D}_{LF,LG})\\circ a_{F,G}=a_{G,F}\\circ\\beta^{\\mathcal C}_{F,G}$.",
    "uses": [
+    "def-sfb-finite-upper-lower-star-adjunction",
+    "def-sfb-finite-lower-star-lax-monoidal",
     "def-sfb-finite-upper-star-monoidal",
-    "def-sfb-finite-upper-lower-star-adjunction",
-    "def-sfb-finite-lower-star-lax-monoidal"
+    "lem-sfb-unit-tensor-braiding"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-finite-pushforward-pullback/lem-sfb-finite-upper-star-braided.proof.md",
-    "place": "proof, first paragraph and displayed braiding identity"
+    "place": "first paragraph, composite and braiding calculation"
    }
   },
   {
-   "text": "For $F,G\\in\\mathcal C$, expand $a_{F,G}$ and use the symmetry compatibility of the lax functor $R$ in [def-sfb-finite-lower-star-lax-monoidal], followed by naturality of the symmetry for $\\eta_F$ and $\\eta_G$:\n$$\\begin{aligned}\nR(\\beta^{\\mathcal D}_{LF,LG})\\circ a_{F,G}\n&=m_{LG,LF}\\circ\\beta^{\\mathcal C}_{RLF,RLG}\\circ(\\eta_F\\otimes\\eta_G)\\\\\n&=m_{LG,LF}\\circ(\\eta_G\\otimes\\eta_F)\\circ\\beta^{\\mathcal C}_{F,G}\n=a_{G,F}\\circ\\beta^{\\mathcal C}_{F,G}.\n\\end{aligned}$$\nAll these maps have source $F\\otimes G$ and target $R(LG\\otimes LF)$; the two equalities are respectively the defining braided-functor equation for $R$ and the defining naturality square of $\\beta^{\\mathcal C}$.",
+   "text": "Apply [lem-sfb-adjunction-transpose-square] with $X'=F\\otimes G$, $X=G\\otimes F$, $Y=LF\\otimes LG$, $Y'=LG\\otimes LF$, $f=\\beta^{\\mathcal C}_{F,G}$, $s=a_{G,F}$, $t=a_{F,G}$ and $k=\\beta^{\\mathcal D}_{LF,LG}$. Step 1 is its right-hand equality (with the sides exchanged). Its left-hand equality therefore gives $\\delta_{G,F}\\circ L(\\beta^{\\mathcal C}_{F,G})=\\beta^{\\mathcal D}_{LF,LG}\\circ\\delta_{F,G}$.",
    "uses": [
-    "def-sfb-finite-lower-star-lax-monoidal"
+    "lem-sfb-adjunction-transpose-square"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-finite-pushforward-pullback/lem-sfb-finite-upper-star-braided.proof.md",
-    "place": "proof, first paragraph and displayed braiding identity"
+    "place": "first paragraph, transposing back and displayed identity"
    }
   },
   {
-   "text": "Apply the naturality in both variables of the Hom bijection in [def-sfb-finite-upper-lower-star-adjunction]. The transpose of $\\beta^{\\mathcal D}_{LF,LG}\\circ\\delta_{F,G}$ is $R(\\beta^{\\mathcal D}_{LF,LG})\\circ a_{F,G}$, while the transpose of $\\delta_{G,F}\\circ L(\\beta^{\\mathcal C}_{F,G})$ is $a_{G,F}\\circ\\beta^{\\mathcal C}_{F,G}$. Step 2 identifies these transposes, so injectivity of $\\Phi$ gives\n$$\\beta^{\\mathcal D}_{LF,LG}\\circ\\delta_{F,G}=\\delta_{G,F}\\circ L(\\beta^{\\mathcal C}_{F,G}).$$\nCompose on the left with $\\gamma_{G,F}$ and on the right with $\\gamma_{F,G}$. The inverse identities for the structure of [def-sfb-finite-upper-star-monoidal] give\n$$L(\\beta^{\\mathcal C}_{F,G})\\circ\\gamma_{F,G}=\\gamma_{G,F}\\circ\\beta^{\\mathcal D}_{LF,LG}.$$\nThis is the required compatibility of the already strong monoidal functor $L$ with the symmetries.",
+   "text": "Compose this identity on the left with $\\gamma_{G,F}$ and on the right with $\\gamma_{F,G}$. Cancelling inverse pairs, as allowed by [def-sfb-finite-upper-star-monoidal], gives $L(\\beta^{\\mathcal C}_{F,G})\\circ\\gamma_{F,G}=\\gamma_{G,F}\\circ\\beta^{\\mathcal D}_{LF,LG}$. This is the symmetry compatibility of the specified strong monoidal structure on $L$.",
    "uses": [
-    "def-sfb-finite-upper-lower-star-adjunction",
     "def-sfb-finite-upper-star-monoidal"
    ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-finite-pushforward-pullback/lem-sfb-finite-upper-star-braided.proof.md",
-    "place": "proof, transposing the displayed equality and final paragraph"
+    "place": "final paragraph, inversion of delta"
    }
   },
   {
-   "text": "For a commutative ring object $(B,\\rho,e)$ of $\\mathcal C$, apply [det-def-sfb-ring-object-transport], clauses 1 and 2, to the strong monoidal functor $L$ with lax comparison $\\gamma$ and lax unit map $j\\colon\\mathbf 1_{\\mathcal D}\\to L\\mathbf 1_{\\mathcal C}$, the inverse of its oplax unit comparison from step 1. Clause 1 gives the ring object $LB$ with multiplication $\\rho_L=L(\\rho)\\circ\\gamma_{B,B}$ and unit $e_L=L(e)\\circ j\\colon\\mathbf 1_{\\mathcal D}\\to LB$. Clause 2 applies because step 3 proves its braided-functor hypothesis. Explicitly,\n$$\\rho_L\\circ\\beta^{\\mathcal D}_{LB,LB}=L(\\rho)\\circ L(\\beta^{\\mathcal C}_{B,B})\\circ\\gamma_{B,B}=L(\\rho\\circ\\beta^{\\mathcal C}_{B,B})\\circ\\gamma_{B,B}=\\rho_L,$$\nusing $\\rho\\circ\\beta^{\\mathcal C}_{B,B}=\\rho$. Thus the transported ring object is commutative, including the final clause of the statement.",
+   "text": "For a commutative ring object $(B,\\rho,e)$, [det-def-sfb-ring-object-transport], clauses 1 and 2, gives the ring object $LB$ with multiplication $\\rho_L=L(\\rho)\\circ\\gamma_{B,B}$ and unit $e_L=L(e)\\circ j$, where $j:\\mathbf1_{\\mathcal D}\\to L\\mathbf1_{\\mathcal C}$ is the inverse oplax unit comparison. The braided hypothesis is step 3. Explicitly, $\\rho_L\\circ\\beta^{\\mathcal D}_{LB,LB}=L(\\rho)\\circ L(\\beta^{\\mathcal C}_{B,B})\\circ\\gamma_{B,B}=L(\\rho\\circ\\beta^{\\mathcal C}_{B,B})\\circ\\gamma_{B,B}=\\rho_L$, since $\\rho\\circ\\beta^{\\mathcal C}_{B,B}=\\rho$. Thus the transported ring object is commutative.",
    "uses": [
     "det-def-sfb-ring-object-transport"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-ring-object/det-def-sfb-ring-object-transport.md",
-    "place": "clauses 1 and 2, applied to the final sentence of lem-sfb-finite-upper-star-braided"
+    "place": "clauses 1 and 2, for the final sentence of the item"
    }
   }
  ],
  "proof_deps": [
-  "def-sfb-finite-upper-star-monoidal",
   "def-sfb-finite-upper-lower-star-adjunction",
   "def-sfb-finite-lower-star-lax-monoidal",
+  "def-sfb-finite-upper-star-monoidal",
+  "lem-sfb-unit-tensor-braiding",
+  "lem-sfb-adjunction-transpose-square",
   "det-def-sfb-ring-object-transport"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-finite-pushforward-pullback/lem-sfb-finite-upper-star-braided.proof.md",
-  "place": "entire mate-braiding proof, expanded by naturality of the adjunction bijection; ring-object consequence from det-def-sfb-ring-object-transport clauses 1 and 2"
+  "place": "entire mate-braiding calculation, extracted into unit-tensor equivariance and the adjunction square theorem; final ring-object consequence from det-def-sfb-ring-object-transport clauses 1 and 2"
  },
  "mathlib_searches": [
   {
@@ -193,15 +195,15 @@
  "chapter": "sec-proetale-coefficients",
  "unit": "sk-def-sfb-finite-pushforward-pullback",
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-21",
   "item": "lem-sfb-finite-upper-star-braided",
   "worker": "stage1",
-  "summary": "Preserved the statement and its arbitrary scheme morphism. Ruled out attachment: the slopmaster2 declaration of the same name assumes WeaklyEtale g. Expanded the mate calculation into explicit equal transposes and inversion of tensor comparisons; supplied the ring-object consequence through the existing transport statement. Added the ring-object definition dependency, recorded thirteen actual Mathlib searches, and created no nodes. Second reading makes the transported unit explicit and independently rechecks the source, all four steps, and Mathlib candidates.",
-  "blueprint": "Steps 1-3 realize both paragraphs of lem-sfb-finite-upper-star-braided.proof.md: the specified mate, symmetry/naturality calculation, equality after transposition, and inversion of delta. Step 4 realizes the statement's final commutative-ring-object sentence. This retains the monoidal functoriality route of sk-def-sfb-finite-pushforward-pullback, proof, final paragraph.",
+  "summary": "Human-requested re-split: preserved the statement and all previous metadata; extracted the unit-tensor braiding calculation as a general statement-only task, and transposition as an exact Mathlib square-equivalence leaf. The item assembles these, inverts the comparisons and transports commutative ring objects. All previous argument is retained either in the new statement obligations, the assembly, or the detailed report; actual searches are logged.",
+  "blueprint": "New unit-tensor lemma realizes the first paragraph through the braiding compatibility of the composite (old steps 1-2). New adjunction-square leaf realizes transposition and the displayed identity (old step 3 first half). Item step 3 retains inversion (old step 3 second half), and step 4 retains the ring-object consequence (old step 4).",
   "tool_uses": [
    {
     "node": "det-def-sfb-ring-object-transport",
-    "why": "Step 4 uses its generic monoid-object transport and commutativity clauses after steps 1–3 prove braidedness by the unit’s own mate route; this unit has no separate generic ring-object transport statement."
+    "why": "Generic clauses 1 and 2 transport a ring object and preserve commutativity after the unit mate route proves braidedness; this unit has no separate ring-object transport statement."
    }
   ]
  },
@@ -209,12 +211,12 @@
   "det-def-sfb-ring-object-transport"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-Codex-Q52-666e621ff",
-  "group": "Q52",
+  "reviewer": "NT-cc-Q22-a93692252",
+  "group": "Q22",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q52-666e621ff (reviewer sub-agent of L); spot-checked: Read the complete item, report, cited statements and current-blueprint sources. Verified all four mate-braiding and ring-transport steps, arbitrary-morphism hypotheses, coefficient tensor, and edge cases. No duplicate replacement, missing dependency, or cycle found. Accepted ring-object transport tool use; no DAG fixes needed. Detailed checks are in review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-a93692252 (reviewer sub-agent of L); spot-checked: Re-split note (human, 2026-10-21) is fulfilled. Base = live node (4 steps, 3331 chars); only proof, proof_deps, proof_origin and split_report changed; statement, stmt_deps, lean, reviewed and tool_uses are byte-identical. Old step 2 (R(β)∘m∘(η⊗η)=m∘(η⊗η)∘β) is now new unsplit lem-sfb-unit-tensor-braiding. It is general in u,v, true by LaxBraided.braided + braiding_naturality (Braided/Basic.lean:121), self-contained, and not a duplicate: grep of the DAG finds only the naturality leaf, the point analogue and the derived symmetry nodes. Old step 3, first half (transpose + injectivity), is now Mathlib leaf lem-sfb-adjunction-transpose-square: exact match with homEquiv_naturality_right_square_iff, Adjunction/Basic.lean:270-276, s=g, t=h; I checked the types. The rest stays in the item: step 3 is the elementary δ/γ cancellation, step 4 is clauses 1-2 of det-def-sfb-ring-object-transport (the tool use was already accepted on the base). The item is 2131 chars, longest step 770. Typing checked: step 1 sets X=F, Y=G, P=LF, Q=LG, u=η_F, v=η_G; step 2 sets X'=F⊗G, X=G⊗F, Y=LF⊗LG, Y'=LG⊗LF, f=β^C, s=a_{G,F}, t=a_{F,G}, k=β^D, and yields the blueprint display δ_{G,F}L(β)=βδ_{F,G}. Route = blueprint proof of the unit sk-def-sfb-finite-pushforward-pullback; no SGA; no cycle; coefficient category and arbitrary g unchanged; target not weakened. Maintainer note (B10): the item is already Lean-closed by AlgebraicGeometry.ProEtale.laxBraided_upperStar (existing:true, reviewed_lean pass); it was re-split only on the human's explicit note. The maintainer should decide whether the new unsplit node should join the queue. No fixes."
  },
  "lean": {
   "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Monoidal",
