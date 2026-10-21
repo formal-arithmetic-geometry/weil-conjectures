@@ -20,22 +20,41 @@
  ],
  "proof": [
   {
-   "text": "The setting [sk-def-sfb-dc-setting] makes $X$ and $U$ finite type over the field $k$. The field has only the ideals $0$ and $k$, hence is Noetherian, and its one-point spectrum is quasi-compact. Applying [lem-weil-pbc-finite-type-over-noetherian] to the structure morphisms shows that $X$ and $U$ are Noetherian. In particular their underlying spaces are Noetherian, as also recalled explicitly for finite-type schemes over a field in [def-weil-constructible-subset]. Every subset of such a space is retrocompact. Since the whole space is quasi-compact, taking it as the quasi-compact open in the definition of retrocompactness shows that every subset is quasi-compact. In particular, the inverse image of every affine open under the absolute diagonal of either scheme is quasi-compact, so both $X$ and $U$ are quasi-separated by [def-weil-quasi-separated-morphism]. Thus both schemes are qcqs. Consequently the open $U$ is retrocompact in $X$ and $j$ is quasi-compact. Apply [lem-weil-pbc-reduced-induced-closed-subscheme] to the closed subset $X\\setminus U$ to obtain its reduced induced closed subscheme $i:Z\\hookrightarrow X$. These facts verify the geometric hypotheses of the ringed open/closed lemma used below.",
+   "text": "By [sk-def-sfb-dc-setting], $X$ is finite type over $k$. Its space is Noetherian, so every open is retrocompact [def-weil-constructible-subset]; hence $j$ is quasi-compact. Take the reduced closed complement $i:Z\\hookrightarrow X$ using [lem-weil-pbc-reduced-induced-closed-subscheme]. For any constructible $M$ on $U$, choose strata $s_a:U_a\\to U$ from [def-sfb-constructible-module]. Each $s_a$ is closed in an open of $U$, which is open in $X$ [def-weil-closed-immersion]. Thus $js_a$ and $i$ give a finite locally closed partition of $X$ [def-constructible-stratification].",
    "uses": [
     "sk-def-sfb-dc-setting",
-    "lem-weil-pbc-finite-type-over-noetherian",
     "def-weil-constructible-subset",
     "lem-weil-pbc-reduced-induced-closed-subscheme",
-    "def-weil-quasi-separated-morphism"
+    "def-sfb-constructible-module",
+    "def-weil-closed-immersion",
+    "def-constructible-stratification"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 01T6, lemma-finite-type-noetherian; topology.tex Tag 005L, lemma-constructible-Noetherian-space; schemes.tex Tags 01J3/01J4, lemma-reduced-closed-subscheme and definition-reduced-induced-scheme"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/lem-sfb-dc-open-lower-shriek-preserves.proof.md",
+    "place": "Proof, finite stratification and reduced closed complement"
    }
   },
   {
-   "text": "The module functor $j_!$ is additive and exact by [def-sfb-module-open-lower-shriek]. Represent $K$ by a cochain complex $C$; the exact-functor clause of [sk-def-sfb-derived-categories] computes $D(j_!)K$ by the termwise complex $j_!C$. Apply [lem-weil-pbc-exact-functor-complex-cohomology] to $j_!$ in each degree to obtain $H^q(D(j_!)K)\\cong j_!H^q(K)$. Choose $a\\leq b$ with $H^q(K)=0$ for $q\\notin[a,b]$, as supplied by [sk-def-sfb-bounded-constructible]. An additive functor sends a zero object to a zero object: the identity on its image is the image of the zero identity, hence zero. Therefore $H^q(D(j_!)K)=0$ for the same degrees; the cohomological bound is unchanged.",
+   "text": "For $g:T\\to X$, put $P_g=\\operatorname{mapMod}(g^*_{\\Ab})$. By [sk-def-sfb-coefficient-morphisms] and [sk-def-sfb-module-pushforward-pullback], $g^*=\\operatorname{Ext}_{\\alpha_g}P_g$ with $\\alpha_g$ invertible. Thus [lem-sfb-lfp-scalar-isomorphism] identifies local finite presentation of $P_gN$ and $g^*N$, also for maps into $U$. Apply this first to $s_a^*M$. By [lem-sfb-open-module-restriction-identities] and [def-sfb-module-upper-star-comp], $(js_a)^*j_!M\\cong s_a^*M$ and $i^*j_!M\\cong0$. Apply the scalar lemma in reverse to $js_a$ and $i$. The original local presentations therefore work on the old strata. On $Z$, zero has the rank-zero cokernel presentation on the identity cover [def-sfb-finitely-presented-module, def-sfb-locally-finitely-presented]. Composing presentation isomorphisms with the displayed module isomorphisms proves constructibility on the partition of step 1 [def-sfb-constructible-module].",
+   "uses": [
+    "sk-def-sfb-coefficient-morphisms",
+    "sk-def-sfb-module-pushforward-pullback",
+    "lem-sfb-lfp-scalar-isomorphism",
+    "lem-sfb-open-module-restriction-identities",
+    "def-sfb-module-upper-star-comp",
+    "def-sfb-finitely-presented-module",
+    "def-sfb-locally-finitely-presented",
+    "def-sfb-constructible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/lem-sfb-dc-open-lower-shriek-preserves.proof.md",
+    "place": "Proof, restrictions on original strata and zero on the complement"
+   }
+  },
+  {
+   "text": "The additive exact functor $j_!$ [def-sfb-module-open-lower-shriek] acts termwise on complexes [sk-def-sfb-derived-categories]. Thus [lem-weil-pbc-exact-functor-complex-cohomology] gives $H^q(D(j_!)K)\\cong j_!H^q(K)$. An additive functor sends zero to zero (the image identity is zero). The finite cohomological interval of $K$ [sk-def-sfb-bounded-constructible] therefore also bounds $D(j_!)K$.",
    "uses": [
     "def-sfb-module-open-lower-shriek",
     "sk-def-sfb-derived-categories",
@@ -44,77 +63,12 @@
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 010N, lemma-exact-functor, applied to cycles, boundaries and their quotient; blueprint proof first two sentences"
-   }
-  },
-  {
-   "text": "Fix a constructible $\\Lambda_U$-module $M$ in the sense used by [sk-def-sfb-bounded-constructible]. By [def-sfb-constructible-module], choose a finite locally closed stratification $s_a:U_a\\to U$ such that the restrictions of $M$ are locally finitely presented over the corresponding pulled-back rings. By the definition of immersion in [def-weil-closed-immersion], each $s_a$ is closed in an open subscheme of $U$. This subscheme is also open in $X$, so $r_a=j\\circ s_a:U_a\\to X$ is an immersion. On underlying spaces, write $U_a=V_a\\cap F_a$ with $V_a$ open in $U$ and $F_a$ closed in $U$, and choose a closed $C_a\\subseteq X$ with $F_a=U\\cap C_a$. Then $U_a=V_a\\cap C_a$ is locally closed in $X$. Together with $Z$ from step 1, these pieces give a finite disjoint locally closed partition of $X$ as in [def-constructible-stratification]. Every piece is constructible by the Noetherian clause of [def-weil-constructible-subset]. Empty pieces can be omitted.",
-   "uses": [
-    "sk-def-sfb-bounded-constructible",
-    "def-sfb-constructible-module",
-    "def-weil-closed-immersion",
-    "def-constructible-stratification",
-    "def-weil-constructible-subset"
-   ],
-   "elementary": true,
-   "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/lem-sfb-dc-open-lower-shriek-preserves.proof.md",
-    "place": "Proof, finite stratification and reduced closed complement; topology.tex Tag 005L, lemma-constructible-Noetherian-space"
+    "place": "Proof, first two sentences: exactness and cohomology"
    }
   },
   {
-   "text": "Use [lem-weil-pbc-proetale-ringed-open-closed] for $A=\\Lambda_X$ and the complementary immersions of step 1. By [sk-def-sfb-ring-object], the sheaf tensor product is the sheafification of the sectionwise tensor product. A map from it to a sheaf is equivalently a compatible family of sectionwise bilinear maps. Thus the ring multiplication and the action of [sk-def-sfb-module-objects] are precisely the sectionwise multiplication and actions of [def-weil-sheaf-of-modules-category], in both directions, with the same action-preserving morphisms. For $g\\in\\{j,i\\}$ with source $T$, the inverse image $g^{-1}$ of [def-weil-proetale-inverse-image] used in the ringed lemma and the pullback $g^*_{\\Ab}$ of [def-sfb-finite-upper-star] are both the sheafification of the presheaf $T'\\mapsto\\varinjlim\\mathcal F(V)$ over the same category of pairs $(V,\\,T'\\to T\\times_XV)$ (the left Kan extension along the opposite of the base-change functor), so the canonical comparison of these colimits is an isomorphism $g^{-1}\\cong g^*_{\\Ab}$. It is compatible with sectionwise ring and module operations, so it identifies $g^{-1}A$ with the ring object $g^*_{\\Ab}\\Lambda_X$ and $g^{-1}$ on modules with $\\operatorname{mapMod}(g^*_{\\Ab})$. The coefficient comparison $\\alpha_g:g^*_{\\Ab}\\Lambda_X\\to\\Lambda_T$ is an isomorphism of ring objects for every condensed $\\Lambda$ by [sk-def-sfb-coefficient-morphisms], as also used in [sk-def-sfb-module-pushforward-pullback]. These identifications are used in step 5.",
-   "uses": [
-    "lem-weil-pbc-proetale-ringed-open-closed",
-    "sk-def-sfb-ring-object",
-    "sk-def-sfb-module-objects",
-    "def-weil-sheaf-of-modules-category",
-    "def-weil-proetale-inverse-image",
-    "def-sfb-finite-upper-star",
-    "sk-def-sfb-coefficient-morphisms",
-    "sk-def-sfb-module-pushforward-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tags 09BN (lemma-open-immersion), 09AG (lemma-jshriek-zero), 09AH (lemma-ses-associated-to-open); ringed-site linearization: sites-modules.tex Tags 03DI and 03DJ; blueprint proof last three sentences"
-   }
-  },
-  {
-   "text": "Keep the notation of step 4. By clause 5 of [sk-def-sfb-change-of-scalars], extending along the isomorphism $\\alpha_g$ identifies the inverse-image module category with our coefficient module category. Under these identifications the right adjoint $j^{-1}$ of [lem-weil-pbc-proetale-ringed-open-closed] becomes $\\operatorname{Ext}_{\\alpha_j}\\circ\\operatorname{mapMod}(j^*_{\\Ab})$, the module pullback $j^*$ of [sk-def-sfb-module-pushforward-pullback], and likewise for $i$. The $j_!$ of that lemma and the $j_!$ of [sk-def-sfb-module-lower-shriek] are both left adjoint to that functor. Apply [lem-weil-pbc-conjugate-iso-unit-equation] with the identity isomorphism of these right adjoints: the two left adjoints are naturally isomorphic. Its restriction identities $j^{-1}j_!\\cong\\mathrm{id}$ and $i^{-1}j_!=0$ therefore give $j^*j_!M\\cong M$ and $i^*j_!M\\cong0$ in the coefficient module categories.",
-   "uses": [
-    "lem-weil-pbc-proetale-ringed-open-closed",
-    "sk-def-sfb-module-pushforward-pullback",
-    "sk-def-sfb-change-of-scalars",
-    "sk-def-sfb-module-lower-shriek",
-    "lem-weil-pbc-conjugate-iso-unit-equation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tags 09BN (lemma-open-immersion), 09AG (lemma-jshriek-zero), 09AH (lemma-ses-associated-to-open); ringed-site linearization: sites-modules.tex Tags 03DI and 03DJ; blueprint proof last three sentences"
-   }
-  },
-  {
-   "text": "The composition isomorphism of [def-sfb-module-upper-star-comp] and step 5 give $r_a^*j_!M\\cong s_a^*j^*j_!M\\cong s_a^*M$. To compare with [def-sfb-constructible-module], use the invertible coefficient maps of [sk-def-sfb-coefficient-morphisms] entering the pullbacks of [sk-def-sfb-module-pushforward-pullback] and clause 5 of [sk-def-sfb-change-of-scalars]. Relabelling an action along a ring isomorphism $R\\cong S$ and its inverse are mutually inverse functors; they take $R^n$ to $S^n$. They also preserve a cokernel: its factorization property is unchanged under the inverse bijections on module morphisms. Thus a presentation $R^m\\to R^n\\to N\\to0$ becomes one over $S$ with the same finite $m,n$, in either direction. Apply this to the presentations on the very same pro-étale covers supplied on $U_a$ in step 3, using [def-sfb-locally-finitely-presented] and [def-sfb-finitely-presented-module]. Composing the presentation isomorphism with the displayed restriction isomorphism gives the required local presentations of $j_!M$ on $U_a$. On $Z$ its restriction is zero by step 5; for its pulled-back ring $R$, the identity cover and $R^0\\to R^0$ present zero. The partition of step 3 consequently witnesses constructibility of $j_!M$ in [def-sfb-constructible-module]. No scalar-constant matrix condition is used.",
-   "uses": [
-    "def-sfb-module-upper-star-comp",
-    "def-sfb-constructible-module",
-    "sk-def-sfb-coefficient-morphisms",
-    "sk-def-sfb-module-pushforward-pullback",
-    "sk-def-sfb-change-of-scalars",
-    "def-sfb-locally-finitely-presented",
-    "def-sfb-finitely-presented-module"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/lem-sfb-dc-open-lower-shriek-preserves.proof.md",
-    "place": "Proof, restrictions to the original strata and reduced closed complement; local finite presentations as in the current bounded-constructible definition"
-   }
-  },
-  {
-   "text": "For every $q$, the module $M=H^q(K)$ is constructible by [sk-def-sfb-bounded-constructible]. Step 6 proves $j_!H^q(K)$ constructible, and step 2 identifies it with $H^q(D(j_!)K)$. In [def-sfb-constructible-module], constructibility is unchanged by an isomorphism: use the same stratification and covers and compose each presentation isomorphism with its restriction. Step 2 supplies the finite cohomological interval. These are precisely the two conditions of [sk-def-sfb-bounded-constructible]. Empty $U$, empty $Z$, $K=0$, and the zero coefficient ring cause no exception: omit empty pieces and use the zero presentation on the remaining zero restrictions.",
+   "text": "Each $H^q(K)$ is constructible [sk-def-sfb-bounded-constructible], so step 2 applies. The cohomology isomorphism of step 3 preserves constructibility: in [def-sfb-constructible-module] use the same strata and covers and compose the presentation isomorphisms. Together with the same finite interval this is exactly bounded constructibility. Empty strata may be omitted; ranks zero handle zero modules and the zero ring.",
    "uses": [
     "sk-def-sfb-bounded-constructible",
     "def-sfb-constructible-module"
@@ -122,42 +76,33 @@
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/lem-sfb-dc-open-lower-shriek-preserves.proof.md",
-    "place": "Proof, boundedness and final conclusion"
+    "place": "Proof, final conclusion"
    }
   }
  ],
  "proof_deps": [
   "sk-def-sfb-dc-setting",
-  "lem-weil-pbc-finite-type-over-noetherian",
   "def-weil-constructible-subset",
   "lem-weil-pbc-reduced-induced-closed-subscheme",
-  "def-weil-quasi-separated-morphism",
-  "def-sfb-module-open-lower-shriek",
-  "sk-def-sfb-derived-categories",
-  "lem-weil-pbc-exact-functor-complex-cohomology",
-  "sk-def-sfb-bounded-constructible",
   "def-sfb-constructible-module",
   "def-weil-closed-immersion",
   "def-constructible-stratification",
-  "lem-weil-pbc-proetale-ringed-open-closed",
-  "sk-def-sfb-ring-object",
-  "sk-def-sfb-module-objects",
-  "def-weil-sheaf-of-modules-category",
-  "def-weil-proetale-inverse-image",
-  "def-sfb-finite-upper-star",
   "sk-def-sfb-coefficient-morphisms",
   "sk-def-sfb-module-pushforward-pullback",
-  "sk-def-sfb-change-of-scalars",
-  "sk-def-sfb-module-lower-shriek",
-  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-sfb-lfp-scalar-isomorphism",
+  "lem-sfb-open-module-restriction-identities",
   "def-sfb-module-upper-star-comp",
+  "def-sfb-finitely-presented-module",
   "def-sfb-locally-finitely-presented",
-  "def-sfb-finitely-presented-module"
+  "def-sfb-module-open-lower-shriek",
+  "sk-def-sfb-derived-categories",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "sk-def-sfb-bounded-constructible"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/lem-sfb-dc-open-lower-shriek-preserves.proof.md",
-  "place": "Entire proof, expanded using Stacks Tags 01T6, 005L, 01J3, 010N, 09BN, 09AG, 09AH and 03DI/03DJ; preserves the supplied exactness and stratification route"
+  "place": "Exactness/cohomology and enlarged stratification route; finer split requested by the human on 2026-10-21. Coefficient restriction identities and scalar-isomorphism local presentations are separate proved nodes."
  },
  "mathlib_searches": [
   {
@@ -277,23 +222,15 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "item": "lem-sfb-dc-open-lower-shriek-preserves",
   "worker": "stage1",
-  "summary": "Repair the long-step return while retaining the exactness and enlarged-stratification route. Replace the inline adjoint uniqueness argument by the existing Mathlib leaf lem-weil-pbc-conjugate-iso-unit-equation, and cite the existing scalar-change equivalence for ring identification. Correct the stale inference from current bounded constructibility to scalar-constant local models: the strata now retain general local finite presentations, exactly as required by def-sfb-constructible-module. The statement and Lean audit are unchanged. No new nodes.",
-  "blueprint": "Main-20261015 proof: steps 1 and 3 realize the enlarged stratification; step 2 realizes exactness and boundedness; steps 4 and 5 identify the coefficient categories and inverse images (citing the definitions) and use existing nodes for the ringed restriction identities and uniqueness comparison; step 6 retains the original local finite presentations and supplies zero on the complement; step 7 concludes. All steps have fewer than 2000 characters.",
+  "summary": "Keep the statement unchanged and shorten the returned 7227-character proof to an assembly of the enlarged stratification, two new lower-level lemmas, exactness/cohomology, and the defining bounded-constructible conditions. In accordance with the clarified human route note, both new lemmas are delivered statement-only with status unsplit, empty proof and proof_deps, null proof_origin, sources and five retained logged Mathlib searches each. Their earlier proof notes are preserved only in the report for the next stage-1 workers. No Lean or library metadata is changed.",
+  "blueprint": "The main-20261015 proof is realized by step 1 (enlarge the finite stratification by the reduced closed complement), step 2 (open/closed restriction calculations and scalar identification, now cited as new statement-only nodes), step 3 (exactness, cohomology comparison, and the same bounded interval), and step 4 (the defining bounded-constructible conclusion).",
   "tool_uses": [
    {
-    "node": "lem-weil-pbc-finite-type-over-noetherian",
-    "why": "Generic finite-type geometry verifies the Noetherian hypotheses of the given stratification route; no preservation result is substituted."
-   },
-   {
     "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
-    "why": "Generic construction of the reduced closed complement explicitly chosen in the blueprint proof."
-   },
-   {
-    "node": "lem-weil-pbc-proetale-ringed-open-closed",
-    "why": "Generic arbitrary-ringed pro-etale restriction identities j^*j_!=id and i^*j_!=0, used to fill precisely the restriction calculations in the unit route."
+    "why": "Generic construction of the reduced closed complement in the blueprint stratification argument."
    }
   ]
  },
@@ -303,12 +240,12 @@
   "lem-weil-pbc-proetale-ringed-open-closed"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-Q111-088ae8f87",
-  "group": "Q111",
+  "reviewer": "NT-cc-Q24-ac53607ce",
+  "group": "Q24",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q111-088ae8f87 (reviewer sub-agent of L); spot-checked: FIX for 088ae8f87a93. I read the item, all 26 cited nodes, the main-20261015 item and proof, the unit, chapter and derived-factorization unit, the master declaration (BoundedConstructible.lean:228-235; its body is sorry, so it is not an attachment) and the Stacks tags 01T6, 005L, 010N, 01J3, 09BN, 09AG, 09AH, 03DI and 03DJ. Statement: the same as the blueprint and master. Λ is general, U and X are finite type and separated over k, and the constructibility predicate is the general local-finite-presentation one. Replacing the citation of the missing derived-factorization node with sk-def-sfb-derived-categories leaves D(j_!) unchanged. Steps: Noetherian and qcqs geometry, exactness and boundedness, the enlarged stratification, the ringed restriction identities j^*j_!≅id and i^*j_!=0, local presentations on the same covers with zero on Z, and the conclusion all check. Edge cases U=∅, U=X, X=∅, K=0, Λ=0, non-reduced X and disconnected X need no extra hypothesis. There are no new nodes and no cycle through the item. lem-weil-pbc-module-constructible-extension-zero overlaps the sheaf-level argument but belongs to another unit and another coefficient formalisation, so keeping the inline argument is right. Accepted tool_uses: lem-weil-pbc-finite-type-over-noetherian, lem-weil-pbc-reduced-induced-closed-subscheme, lem-weil-pbc-proetale-ringed-open-closed. Fixes in the corrected item file: (1) α_g invertibility for every condensed Λ now cites sk-def-sfb-coefficient-morphisms, not only a side remark in an unsplit definition; (2) the identification of the ringed lemma's g^{-1} with g^*_Ab is now stated and cites def-weil-proetale-inverse-image and def-sfb-finite-upper-star (the same sheafified colimit over the same index category); (3) the old step 4, which would have gone over 2000 characters, is split into steps 4 and 5 with later step references renumbered, the stale qcqs remark in step 1 is removed and split_report.blueprint is updated. Statement, stmt_deps, blueprint, lean_audit, searches and tool_uses are unchanged; proof_deps is the union of the steps' uses.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-ac53607ce (reviewer sub-agent of L); spot-checked: Human re-split (repair note 2026-10-21) done as ordered. Statement unchanged and byte-identical to live and to the main-20261015 blueprint statement. Proof is a 4-step, 2311-char assembly; proof_deps equals the union of uses. Two new statement-only unsplit nodes of comparable size, each with grep, leansearch, loogle and leanfinder searches. (1) lem-sfb-open-module-restriction-identities: j^*j_!M≅M and i^*j_!M≅0 for the α-twisted pullbacks over any commutative condensed Λ, j quasi-compact. True by Stacks proetale 09BN/09AH (09AG), lem-weil-pbc-proetale-ringed-open-closed, and clause 5 Ext_αRes_α≅id. It carries old steps 4–5. Not a duplicate of the ringed, internal-transport, det-sf-open-closed or derived support-localization nodes; overlap noted for the maintainer. (2) lem-sfb-lfp-scalar-isomorphism: Res_φ/Ext_φ along a ring-object isomorphism preserves and reflects local finite presentation on the same covers and ranks. True by clause 5 plus the comap/mapMod square. It carries old step 6. Not a duplicate of the global, one-way lem-sfb-internal-scalar-extension-finite-presentation. Assembly checks: step 1 gets X Noetherian and every subset retrocompact (def-weil-constructible-subset), so j is quasi-compact; reduced complement; immersion strata closed-in-open give the stratification. Step 2 uses α_g invertible (coefficient-morphisms) and g^*=Ext_α mapMod, so the scalar lemma links the mapMod form in def-sfb-constructible-module to g^*; chain (js_a)^*j_!M≅s_a^*M via upper-star-comp plus the restriction node; zero on Z via R^0→R^0. Step 3: exact j_!, termwise D(F), cohomology leaf, same interval. Step 4 elementary. Edge cases U=∅, U=X, K=0, Λ=0, non-reduced X all fine. No cycle; all cited ids exist and are unmerged; blueprint from/same_as correct; no SGA. Accepted tool_use: lem-weil-pbc-reduced-induced-closed-subscheme (generic reduced complement). No fixes."
  },
  "chapter": "sec-six-functors-basics",
  "unit": "sk-def-sfb-dc-restricted-functors",

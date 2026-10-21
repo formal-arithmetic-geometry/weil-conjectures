@@ -19785,3 +19785,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:22 L: returned deliver/Q46/sk-lem-stratified-lattice (reviewer RETURN: re-split (the human, 2026-10-21): every delivery made before the final requirement is returned and the re-split starts a)
 - 03:22 L: returned deliver/Q13/sk-prop-sf-rf-shriek-preservation (reviewer RETURN: re-split (the human, 2026-10-21): every delivery made before the final requirement is returned and the re-split starts a)
 - 03:23 L: merged deliver/Q62/lem-sfb-constructible-cocone-hom-surj (reviewer PASS; after a return; new nodes: 2)
+- 03:23 L: merged deliver/Q24/lem-sfb-dc-open-lower-shriek-preserves (reviewer PASS; after a return; new nodes: 2)
