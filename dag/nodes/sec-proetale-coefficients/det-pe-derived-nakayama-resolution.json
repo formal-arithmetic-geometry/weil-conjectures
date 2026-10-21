@@ -24,125 +24,113 @@
  ],
  "proof": [
   {
-   "text": "Put $A=\\mathcal O_E$, $a=\\pi_E$ and $B_r=A/a^rA$. The absolute-value/subspace topology is that of [sk-def-sfb-condensed-ring]. By [lem-weil-l-adic-extension-integers-dvr], $A$ is a subring of $E$, $a\\ne0$, and $0<|a|<1$. In particular multiplication by $a^r$ is injective, and division by $a^r$ on $a^rA$ is continuous: it is restriction of multiplication by the fixed element $a^{-r}$ of the topological field $E$, with values in the subspace $A$. The ordinary augmented complex $[A\\xrightarrow{a^r}A]\\to B_r[0]$ is a finite free resolution, and $B_r$ is a finite set, by [lem-weil-pbc-standard-quotients-perfect]. The quotient topology on $B_r$ is discrete. Indeed, if $|x|<|a|^r$, then $|x/a^r|<1$, so $x\\in a^rA$; hence $a^rA$ contains a neighbourhood of zero and is open (translate that neighbourhood at each of its points). Every coset is open, which is the assertion of discreteness. These observations hold for every $r\\ge1$.",
+   "text": "Put $A=\\mathcal O_E$, $a=\\pi_E$, $B_r=A/a^rA$. By [lem-weil-l-adic-extension-integers-dvr] and [lem-weil-pbc-standard-quotients-perfect], $a\\ne0$ and $B_r$ is finite. Since $|x|<|a|^r$ implies $x/a^r\\in A$, the ideal $a^rA$ is open, so $B_r$ is discrete. Division is restriction of the continuous map $x\\mapsto a^{-r}x$ in $E$. Apply [lem-pe-profinite-sections-finite-quotient] to get the condensed short exact sequence.",
    "uses": [
-    "sk-def-sfb-condensed-ring",
     "lem-weil-l-adic-extension-integers-dvr",
-    "lem-weil-pbc-standard-quotients-perfect"
+    "lem-weil-pbc-standard-quotients-perfect",
+    "lem-pe-profinite-sections-finite-quotient"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-resolution.proof.md",
-    "place": "On the point: topology, injectivity and finite quotients"
+    "place": "On the point"
    }
   },
   {
-   "text": "For every profinite set $S$, [sk-def-sfb-condensed-ring] identifies sections of $\\underline A$ and $\\underline{B_r}$ with $C(S,A)$ and $C(S,B_r)$. Multiplication by $a^r$ is injective on sections. If $f:S\\to A$ reduces to zero, the quotient $s\\mapsto a^{-r}f(s)$ is continuous by step 1 and is the unique section mapping to $f$. Given $g:S\\to B_r$, choose a lift $b_t\\in A$ of each of its finitely many values $t$; its fibres are open and closed, and the function equal to $b_t$ on $g^{-1}(t)$ is a continuous lift. Thus the section sequence is short exact for every $S$, including the empty set. It follows that $0\\to\\underline A\\xrightarrow{a^r}\\underline A\\to\\underline{B_r}\\to0$ is short exact as abelian sheaves: kernels are sectionwise and the cokernel is the sheafification of the sectionwise cokernel, by [lem-weil-pbc-sheafification-exact]. All maps are $\\underline A$-linear for pointwise operations.",
-   "uses": [
-    "sk-def-sfb-condensed-ring",
-    "lem-weil-pbc-sheafification-exact"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-resolution.proof.md",
-    "place": "On the point: the three sectionwise exactness checks"
-   }
-  },
-  {
-   "text": "Here is the precise exact-pullback input, replacing the nonexistent imported module-exactness citation. Use small site models in a universe below that of the coefficient sheaves. In [sk-def-sfb-pullback-from-point], $u:*_{\\mathrm{proet}}\\to(\\operatorname{Spec}\\mathbf Z)_{\\mathrm{proet}}$ preserves finite limits and coverings, and $p_X^*=\\pi_X^*p^*$, where $p^*$ is sheafified left Kan extension along $u^{op}$. Profinite sets have finite limits (the closed inverse-image subsets giving finite products and equalizers), so [lem-weil-pbc-left-exact-site-inverse-image-tensor], Tag 00X6, applies to $u$ and makes $p^*$ exact on abelian sheaves. The other factor $\\pi_X^*$ is exact by [lem-sfb-finite-upper-star-exact]. Hence $p_X^*$ preserves the short exact sequence of step 2. Its strong monoidal structure transports the scalar actions, and [sk-def-sfb-pulled-back-coefficients] identifies the resulting ring and quotient with $R=A_X$ and $B_{r,X}$. The maps remain multiplication by $a^r$ and reduction, since their scalar-action diagrams are the images of the original diagrams under this monoidal functor. For these essentially small sites, [lem-weil-pbc-sheaf-tensor-closed], applied to abelian groups, supplies exact sheafification and its strong symmetric monoidal structure, including tensor stability of its local equivalences; thus the sheafification hypotheses of the following equivalence hold. Internal modules may be read as sectionwise module sheaves via [def-weil-pbc-internal-abelian-sheaf-module-equivalence], with underlying sheaves unchanged; [def-weil-sheaf-of-modules-category] computes their kernels sectionwise and cokernels by sheafification. Thus underlying abelian exactness proves exactly the asserted short exact sequence of $R$-modules. No constant/completed coefficient identification or invertibility of $\\ell$ on $X$ is used.",
+   "text": "Use small site models in a larger coefficient universe. By [sk-def-sfb-pullback-from-point], the profinite functor preserves finite limits and coverings. Thus [lem-weil-pbc-left-exact-site-inverse-image-tensor] and [lem-sfb-finite-upper-star-exact] make $p_X^*$ additive exact. Its module transport commutes with forgetful functors by [def-sfb-modobj-transport], hence is exact by [det-prop-sfb-module-pullback-exact-lifted]. Here tensor preserves colimits by [lem-weil-pbc-sheaf-tensor-closed]. By [sk-def-sfb-pulled-back-coefficients], the resulting sequence is the asserted one over $R=A_X$, with its multiplication and reduction maps.",
    "uses": [
     "sk-def-sfb-pullback-from-point",
     "lem-weil-pbc-left-exact-site-inverse-image-tensor",
     "lem-sfb-finite-upper-star-exact",
-    "sk-def-sfb-pulled-back-coefficients",
-    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
-    "def-weil-sheaf-of-modules-category",
-    "lem-weil-pbc-sheaf-tensor-closed"
+    "def-sfb-modobj-transport",
+    "det-prop-sfb-module-pullback-exact-lifted",
+    "lem-weil-pbc-sheaf-tensor-closed",
+    "sk-def-sfb-pulled-back-coefficients"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-resolution.proof.md",
-    "place": "On X: exact inverse image and transported coefficient actions"
+    "place": "On X: exact module pullback"
    }
   },
   {
-   "text": "Let $P_r$ be the complex with $R$ in degrees $-1,0$, differential $a^r$, and augmentation the reduction $R\\to B_{r,X}$ in degree zero. Step 3 says $H^{-1}(P_r)=0$, $H^0(P_r)=B_{r,X}$, and all its other cohomology sheaves vanish, so its augmentation is a quasi-isomorphism. Its terms are free of rank one, and are flat: $R\\otimes_R M\\to M$, $b\\otimes m\\mapsto bm$, has inverse $m\\mapsto1\\otimes m$, hence tensor by $R$ is the identity functor and is exact, as required by [def-pc-flat-sheaf-modules]. Apply [lem-weil-pbc-independent-bounded-flat-kflat], Tag 06YQ, to this bounded-above flat complex on the essentially small pro-etale site. It is K-flat. This establishes the actual sheaf resolution rather than treating the ordinary $A$-module resolution as a sheaf theorem.",
+   "text": "The free abelian cover $\\bigoplus_{x\\in M}\\mathbf Z\\to M$, $e_x\\mapsto x$, is functorial and epic; its terms are flat by [lem-weil-pbc-flat-coproduct], since tensoring with $\\mathbf Z$ is the identity. By [lem-sfb-sheaf-functorial-flat-resolution], abelian sheaves have functorial flat covers. Their closed Grothendieck structure is step 2's sheaf-tensor theorem. By [lem-sfb-modobj-grothendieck], [def-sfb-modobj-internal-hom] and [lem-sfb-modobj-flat-resolutions], the same hypotheses hold for $R$-modules.",
    "uses": [
-    "def-pc-flat-sheaf-modules",
-    "lem-weil-pbc-independent-bounded-flat-kflat"
+    "lem-weil-pbc-flat-coproduct",
+    "lem-sfb-sheaf-functorial-flat-resolution",
+    "lem-sfb-modobj-grothendieck",
+    "def-sfb-modobj-internal-hom",
+    "lem-sfb-modobj-flat-resolutions"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-resolution.proof.md",
-    "place": "On X: the augmented rank-one free resolution is K-flat"
+    "place": "On X: hypotheses for unbounded derived tensor"
    }
   },
   {
-   "text": "Use the layer-B notation of [sk-def-sfb-derived-categories]: $D(X_{\\mathrm{proét}},\\mathcal O_E)=D(\\Mod_{\\mathcal O_{E,X}})$ for the pulled-back condensed ring, rather than the constant-ring notation in the site definition. For an arbitrary, possibly unbounded $K$, choose a K-flat flat-term representative $C$ by [lem-pc-kflat-resolution]. The two-variable model and descent statement [lem-weil-pbc-site-derived-tensor-descent] computes $P_r\\otimes_R^{\\mathbf L}K$ by $\\operatorname{Tot}(P_r\\otimes_R C)$. Since $P_r\\simeq B_{r,X}[0]$, the model for $K_r=K\\otimes_R^{\\mathbf L}B_{r,X}$ is $\\operatorname{Tot}(C\\otimes_RP_r)$. The interchange $x\\otimes y\\mapsto(-1)^{pq}y\\otimes x$ for $x\\in C^p$, $y\\in P_r^q$ is a chain isomorphism from this complex to $\\operatorname{Tot}(P_r\\otimes_RC)$: it is balanced because $R$ is commutative, and substituting in the total differential gives the same signs on both sides. Its inverse is the same signed interchange. Thus the latter complex computes precisely $K_r$. The degree-$q$ term is $C^q\\oplus C^{q+1}$ after the unit identifications $R\\otimes_R C^j=C^j$; the differential is $(x,y)\\mapsto(d_Cx+a^ry,-d_Cy)$, directly from [def-pc-tensor-complex-sheaves], because the first-factor degree of the second summand is $-1$. This is the cone differential of [def-weil-abstract-derived-category] for $a^r:C\\to C$. The identification commutes with every chain map $C\\to C'$: it is the identity on these two summands. The tensor-model descent and uniqueness in [lem-weil-pbc-site-derived-tensor-descent] therefore extend these identifications to a natural isomorphism in $K$; the cone here means this fixed two-term tensor/cone model, not a choice of a cone made separately for each morphism in a triangulated category.",
+   "text": "In this module category use [def-sfb-derived-tensor-modules]. Constant scalars give an $A$-linear structure; balancing gives $b(f\\otimes g)=(bf)\\otimes g=f\\otimes(bg)$. Apply [lem-pe-scalar-cone-tensor-model] to $b=a^r$. The augmentation $P_b=[R\\xrightarrow{b}R]\\to B_{r,X}[0]$ is a quasi-isomorphism by step 2. Substitution gives $K_r\\cong\\operatorname{Cone}(a^r:K\\to K)$ naturally in $K$.",
    "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "def-pc-tensor-complex-sheaves",
-    "def-weil-abstract-derived-category",
-    "sk-def-sfb-derived-categories"
+    "def-sfb-derived-tensor-modules",
+    "lem-pe-scalar-cone-tensor-model"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-resolution.proof.md",
-    "place": "On X: compute the derived reduction and its natural cone model"
+    "place": "On X: two-term resolution and natural cone"
    }
   },
   {
-   "text": "For $m,n\\ge1$ consider $i:B_m\\to B_{n+m}$, $[x]\\mapsto[a^nx]$, and $q:B_{n+m}\\to B_n$, $[y]\\mapsto[y]$. These are $A$-linear. Changing $x$ by $a^mz$ changes $a^nx$ by $a^{n+m}z$, so $i$ is well defined. If $a^nx=a^{n+m}z$ in $A\\subset E$, cancel the nonzero $a^n$ to get $x=a^mz$, proving injectivity. The kernel of $q$ consists exactly of classes $[a^nx]$, and $q$ is surjective by choosing a representative in $A$. This gives $0\\to B_m\\xrightarrow{i}B_{n+m}\\xrightarrow{q}B_n\\to0$. For a profinite $S$, a continuous function into any of these finite discrete rings is locally constant. A function to $B_n$ lifts along $q$ by choosing one value above each value of the function; a function to $B_{n+m}$ in its kernel has a unique locally constant preimage under $i$, since the image is finite discrete. Hence the condensed sequence is sectionwise short exact just as in step 2. Applying the exact $p_X^*$ established in step 3 gives $0\\to B_{m,X}\\xrightarrow{i_X}B_{n+m,X}\\xrightarrow{q_X}B_{n,X}\\to0$. This computation uses only cancellation and the finite discrete topology already proved; it does not invoke a separate quotient-power lemma.",
-   "uses": [],
+   "text": "For $m,n\\ge1$, define $i:B_m\\to B_{n+m}$ by $[x]\\mapsto[a^nx]$ and $q:B_{n+m}\\to B_n$ by reduction. Changing $x$ by $a^mz$ changes $i(x)$ by $a^{n+m}z$; cancellation of $a^n\\ne0$ proves injectivity. Representatives give $\\ker q=\\operatorname{im}i$ and surjectivity. All rings are finite discrete. Apply [lem-pe-profinite-sections-finite-quotient], then step 2, to obtain the short exact $R$-module sequence on $X$.",
+   "uses": [
+    "lem-pe-profinite-sections-finite-quotient"
+   ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-resolution.proof.md",
-    "place": "Triangles: explicit quotient-power maps, kernel and surjectivity"
+    "place": "Triangles: quotient-power sequence"
    }
   },
   {
-   "text": "Place the last sequence of step 6 in degree zero. By [lem-weil-pbc-complex-ses-triangle], Tag 0152, it gives a distinguished triangle $B_{m,X}\\to B_{n+m,X}\\to B_{n,X}\\to B_{m,X}[1]$ in $D(R)$. Tensor by $K$ preserves this triangle: choose the K-flat representative of step 5 and apply [lem-sc-source-kflat-tensor-left-triangulated] to the abelian monoidal category of $R$-modules, with its sheaf relative tensor and K-flat derived tensor model from [def-sfb-derived-tensor-modules] and [lem-weil-pbc-site-derived-tensor-descent]. The required flat-term resolving localization is exactly the equivalence in the latter statement, so no boundedness of $K$ or enough-projectives hypothesis is needed. The three vertices identify with $K_m,K_{n+m},K_n$, and the two arrows are $1_K\\otimes^{\\mathbf L}i_X$ and $1_K\\otimes^{\\mathbf L}q_X$. Thus the notation $\\pi_E^n$ on the first arrow means the map induced by $[x]\\mapsto[\\pi_E^nx]$ between the two different coefficient quotients. Restrict to $1\\le m\\le n$ as in the statement and then put $m=1$ to obtain the final displayed triangle.",
+   "text": "By [lem-weil-pbc-complex-ses-triangle], step 5 gives a distinguished triangle. The K-flat left derivability structure exists by [lem-sfb-kflat-derivability] with step 3's hypotheses. Thus [lem-sc-source-kflat-tensor-left-triangulated] permits tensoring by arbitrary $K$. The vertices become $K_m,K_{n+m},K_n$; the first arrow is induced by $i$, namely the stated $\\pi_E^n$. Restrict to $1\\le m\\le n$, then set $m=1$.",
    "uses": [
     "lem-weil-pbc-complex-ses-triangle",
-    "lem-sc-source-kflat-tensor-left-triangulated",
-    "def-sfb-derived-tensor-modules",
-    "lem-weil-pbc-site-derived-tensor-descent"
+    "lem-sfb-kflat-derivability",
+    "lem-sc-source-kflat-tensor-left-triangulated"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-resolution.proof.md",
-    "place": "Triangles: the short-exact-sequence triangle and exact derived tensor"
+    "place": "Triangles: derived tensor and m=1"
    }
   }
  ],
  "proof_deps": [
-  "sk-def-sfb-condensed-ring",
   "lem-weil-l-adic-extension-integers-dvr",
   "lem-weil-pbc-standard-quotients-perfect",
-  "lem-weil-pbc-sheafification-exact",
+  "lem-pe-profinite-sections-finite-quotient",
   "sk-def-sfb-pullback-from-point",
   "lem-weil-pbc-left-exact-site-inverse-image-tensor",
   "lem-sfb-finite-upper-star-exact",
-  "sk-def-sfb-pulled-back-coefficients",
-  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
-  "def-weil-sheaf-of-modules-category",
+  "def-sfb-modobj-transport",
+  "det-prop-sfb-module-pullback-exact-lifted",
   "lem-weil-pbc-sheaf-tensor-closed",
-  "def-pc-flat-sheaf-modules",
-  "lem-weil-pbc-independent-bounded-flat-kflat",
-  "lem-pc-kflat-resolution",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "def-pc-tensor-complex-sheaves",
-  "def-weil-abstract-derived-category",
-  "lem-weil-pbc-complex-ses-triangle",
-  "lem-sc-source-kflat-tensor-left-triangulated",
+  "sk-def-sfb-pulled-back-coefficients",
+  "lem-weil-pbc-flat-coproduct",
+  "lem-sfb-sheaf-functorial-flat-resolution",
+  "lem-sfb-modobj-grothendieck",
+  "def-sfb-modobj-internal-hom",
+  "lem-sfb-modobj-flat-resolutions",
   "def-sfb-derived-tensor-modules",
-  "sk-def-sfb-derived-categories"
+  "lem-pe-scalar-cone-tensor-model",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-sfb-kflat-derivability",
+  "lem-sc-source-kflat-tensor-left-triangulated"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-resolution.proof.md",
-  "place": "All three blueprint proof paragraphs, expanded with Stacks Tags 00X6, 06YQ, 06YS, 06YU and 0152"
+  "place": "Finer repair of On the point, On X, and Triangles: general continuous-section exactness and scalar-cone tensor calculation are statement-only helper nodes; exact module transport reuses the existing lifted-exactness node."
  },
  "mathlib_searches": [
   {
@@ -200,55 +188,83 @@
  "chapter": "sec-proetale-coefficients",
  "unit": "sk-lem-pe-derived-nakayama",
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-21",
   "item": "det-pe-derived-nakayama-resolution",
   "worker": "stage1",
-  "summary": "Preserved the full statement and all imported metadata. Expanded the three blueprint paragraphs into seven steps. Replaced a nonexistent module-exactness citation by exact abelian inverse image with explicit transported scalar actions, distinguished the ordinary-module resolution from the sheaf resolution, supplied generic K-flat and derived triangle inputs, and made the finite-quotient maps and natural cone model explicit. All supporting statements already exist; no new nodes or attachment.",
-  "blueprint": "On the point is realized by steps 1-2; On X by steps 3-5; Triangles by steps 6-7. The unit route is unchanged.",
+  "summary": "Human-requested re-split, with statement unchanged. Two new statement-only nodes isolate continuous-section exactness with prescribed topological kernel and the natural K-flat scalar-cone tensor model. The retained attempted module-transport helper duplicated det-prop-sfb-module-pullback-exact-lifted, and the point-pullback specialization is now assembled directly from existing nodes. Six short parent steps retain the point/pullback/resolution/triangle route.",
+  "blueprint": "On the point is step 1; On X is steps 2-4; Triangles is steps 5-6. The new helpers serve continuous lifting/division and the tensor/cone comparison; no unit or target statement is changed.",
   "tool_uses": [
    {
     "node": "lem-weil-l-adic-extension-integers-dvr",
-    "why": "Supplies the standard finite local-field valuation facts used on the point; the unit presupposes its coefficient ring and has no replacement valuation theorem."
+    "why": "Finite local-field valuation facts needed for the topology of the coefficient ring; no unit-local valuation theorem is available."
    },
    {
     "node": "lem-weil-pbc-standard-quotients-perfect",
-    "why": "Explicit unit-route citation: the ordinary augmented free resolution supplies injectivity and finite quotient sets; no coefficient-category identification is taken from it."
+    "why": "The unit expressly cites this ordinary coefficient result; only nonzero uniformizer and finite quotient data are taken from it."
    },
    {
-    "node": "lem-weil-pbc-sheafification-exact",
-    "why": "Generic sheaf kernel/cokernel and exact sheafification facts for the pointwise exactness argument."
+    "node": "sk-def-sfb-pullback-from-point",
+    "why": "Definition and finite-limit/covering hypotheses of the prescribed point-pullback functor."
    },
    {
     "node": "lem-weil-pbc-left-exact-site-inverse-image-tensor",
-    "why": "Generic exact inverse-image theorem used for the blueprint-prescribed pullback from the point; replaces the missing imported citation without changing the route."
+    "why": "Generic site inverse-image exactness used for the unit-prescribed profinite-point functor."
    },
    {
     "node": "lem-sfb-finite-upper-star-exact",
-    "why": "Exactness of the scheme inverse-image factor in the prescribed composite p_X^*."
+    "why": "Exactness of the scheme inverse-image factor in the unit-prescribed p_X pullback."
    },
    {
-    "node": "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
-    "why": "Generic underlying-sheaf-preserving module equivalence, to apply the ringed-site K-flat tools to the same module objects."
+    "node": "def-sfb-modobj-transport",
+    "why": "Action formula and forgetful-functor commutation for the unit-prescribed module pullback."
    },
    {
-    "node": "lem-weil-pbc-independent-bounded-flat-kflat",
-    "why": "Generic bounded-flat K-flatness for the rank-one sheaf resolution."
-   },
-   {
-    "node": "lem-pc-kflat-resolution",
-    "why": "Generic ringed-site K-flat resolution existence for unbounded K; no assertion special to schemes or quasi-coherent modules is used."
-   },
-   {
-    "node": "lem-weil-pbc-site-derived-tensor-descent",
-    "why": "Generic two-variable ringed-site tensor models and natural descent; no node of the unit supplies this construction."
-   },
-   {
-    "node": "lem-sc-source-kflat-tensor-left-triangulated",
-    "why": "Generic abelian-monoidal K-flat tensor exactness used to apply the unit-prescribed triangulated tensor functor; this is not the scheme-only tensor theorem."
+    "node": "det-prop-sfb-module-pullback-exact-lifted",
+    "why": "Generic lifting of exactness to internal modules; avoids creating a duplicate transport lemma."
    },
    {
     "node": "lem-weil-pbc-sheaf-tensor-closed",
-    "why": "Generic exact and monoidal abelian sheafification theorem verifying the module-equivalence hypotheses on the small pro-etale sites."
+    "why": "Generic Grothendieck, closed tensor and colimit hypotheses for sheaves, without changing coefficient categories."
+   },
+   {
+    "node": "sk-def-sfb-pulled-back-coefficients",
+    "why": "Identifies the actual pulled-back rings and maps, rather than constant/completed coefficients."
+   },
+   {
+    "node": "lem-weil-pbc-flat-coproduct",
+    "why": "Generic flat coproduct fact verifying the free abelian cover."
+   },
+   {
+    "node": "lem-sfb-sheaf-functorial-flat-resolution",
+    "why": "Generic inheritance of flat covers by sheaf categories."
+   },
+   {
+    "node": "lem-sfb-modobj-grothendieck",
+    "why": "Generic inheritance of the Grothendieck abelian structure by internal modules."
+   },
+   {
+    "node": "def-sfb-modobj-internal-hom",
+    "why": "Relative tensor closedness supplies its colimit-preserving hypotheses."
+   },
+   {
+    "node": "lem-sfb-modobj-flat-resolutions",
+    "why": "Generic inheritance of flat covers by internal modules."
+   },
+   {
+    "node": "def-sfb-derived-tensor-modules",
+    "why": "Specifies the relative module-object derived tensor used in the unit."
+   },
+   {
+    "node": "lem-weil-pbc-complex-ses-triangle",
+    "why": "Generic exact-sequence-to-distinguished-triangle theorem."
+   },
+   {
+    "node": "lem-sfb-kflat-derivability",
+    "why": "Generic unbounded K-flat left derivability needed to tensor triangles."
+   },
+   {
+    "node": "lem-sc-source-kflat-tensor-left-triangulated",
+    "why": "Generic derived tensor exactness for the unit-prescribed triangulated tensor step."
    }
   ]
  },
@@ -263,15 +279,27 @@
   "lem-pc-kflat-resolution",
   "lem-weil-pbc-site-derived-tensor-descent",
   "lem-sc-source-kflat-tensor-left-triangulated",
-  "lem-weil-pbc-sheaf-tensor-closed"
+  "lem-weil-pbc-sheaf-tensor-closed",
+  "sk-def-sfb-pullback-from-point",
+  "def-sfb-modobj-transport",
+  "det-prop-sfb-module-pullback-exact-lifted",
+  "sk-def-sfb-pulled-back-coefficients",
+  "lem-weil-pbc-flat-coproduct",
+  "lem-sfb-sheaf-functorial-flat-resolution",
+  "lem-sfb-modobj-grothendieck",
+  "def-sfb-modobj-internal-hom",
+  "lem-sfb-modobj-flat-resolutions",
+  "def-sfb-derived-tensor-modules",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-sfb-kflat-derivability"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-Codex-Q56-add9f73e4",
-  "group": "Q56",
+  "reviewer": "NT-cc-O3-acd38f7eb",
+  "group": "O3",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q56-add9f73e4 (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, sources, and route; checked all seven steps, tensor signs, quotient maps, and edge cases. Repaired one missing coefficient-category citation by adding sk-def-sfb-derived-categories. Statement unchanged. Corrected JSON and detailed review.md written; no new nodes or target weakening.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O3-acd38f7eb (reviewer sub-agent of L); spot-checked: This delivery answers the human's 2026-10-21 re-split note. It is not dropped and uses no SGA. Statement, stmt_deps and Lean/reviewed metadata are byte-identical to live; only proof, proof_deps, proof_origin and split_report change. The item and both new node JSONs are byte-identical to head 03345003a, which was superseded before landing (not returned), so A6 does not apply; I reviewed it independently. The old proof (8458 chars, 7 steps) becomes a 2786-char, 6-step assembly. Old step 2 (sections exactness) became lem-pe-profinite-sections-finite-quotient. Old steps 4-5 (K-flat P_r, signed interchange, cone differential, naturality, descent) became lem-pe-scalar-cone-tensor-model. Old step 3 is now cited through existing nodes: 00X6 site inverse image, upper-star exact, def-sfb-modobj-transport and det-prop-sfb-module-pullback-exact-lifted, whose hypotheses (right-exact R⊗− from sheaf-tensor-closed, U∘G=F∘U) I checked. The arithmetic of old steps 1 and 6 stays explicit, and old step 7 is now step 6. Nothing was blurred, and neither node restates an item clause. New step 3 checks the ambient hypotheses (free-abelian flat cover, sheaf/module inheritance, closedness). Sections node: kernel via the homeomorphism onto ker g, lifts over the finite discrete T2, sectionwise exactness implies condensed exactness. Tested with S empty or a point, T2=0; the homeomorphism hypothesis is necessary. Its use in step 1 is valid (|x|<|a|^r makes a^rA open, division continuous), and in step 5 because all three rings are finite discrete. Scalar node, checked by hand: Tot(C⊗P_b)^n=C^n⊕C^{n+1} with d(y,x)=(dy+(−1)^{n+1}bx,dx), and φ(y,x)=(y,(−1)^{n+1}x) gives a natural iso to the cone of def-weil-abstract-derived-category. K-flatness follows from unit plus cone, with no regularity needed; tested b=0 and b=1. The node matches the sorry-free TensorMappingCone.lean:37-158. Duplicate checks: finite-integral-condensed-resolution (constructed O^r only), pur constant two-term, pod module cones, pe-principal-reduction-cone-calculus (specific O_{E,X} tower model, not the abstract tensor-unit fact); none duplicates either node. All 18 off-unit tool_uses are declared and accepted. No fixes. Notes: attach the TensorMappingCone declarations at stage 2. The sibling O2 node lem-pe-principal-reduction-cone-calculus restates this item's natural-cone clause; there is no cycle, but its prover should cite this item."
  },
  "lean_audit": {
   "master": {

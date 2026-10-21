@@ -19847,3 +19847,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:36 L: merged deliver/NB/lem-pe-completion-triangle-comparison (reviewer PASS; first push; new nodes: 0); claim not held by NB: not your claim
 - 03:36 L: merged deliver/NJ/lem-weil-pbc-comparison-injective-acyclicity (reviewer PASS; after a return; new nodes: 3)
 - 03:36 L: merged deliver/NR/lem-pe-principal-reduction-cone-calculus (reviewer PASS; first push; new nodes: 0); claim not held by NR: not your claim
+- 03:36 L: merged deliver/O3/det-pe-derived-nakayama-resolution (reviewer PASS; after a return; new nodes: 2)
