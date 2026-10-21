@@ -108,7 +108,36 @@ theorem unit_condition (P : CochainComplex (integralTowerModules l E T) ℤ) :
           towerTransitionEndomorphism
             (K := fun n : ℕ ↦ ((tensorTower l E T).obj P).obj (op n))
             (fun n ↦ ((tensorTower l E T).obj P).map (homOfLE n.le_succ).op)) = 0 := by
-  sorry
+  let : EssentiallySmall.{max u (t + 1)} T.ProEt :=
+    essentiallySmallSelf.{u} _
+  let : (AlgebraicGeometry.Scheme.ProEt.topology T).HasSheafCompose
+      (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)}) :=
+    hasSheafComposeEssentiallySmallSite _ CommRingCat.{max u (t + 1)}
+      RingCat.{max u (t + 1)} (forget₂ _ _)
+  let := integralCoefficientAbSheafify.{t, u} T
+  let := integralCoefficientAbLocallyBijective.{t, u} T
+  let := integralOperationsCountableProducts.{t, u} l E T
+  let := SheafOfModules.isMonoidal_W_independentCoefficients
+    (completedIntegralCommRingSheafUnrestricted l E T)
+  let := SheafOfModules.monoidalCategory
+    (completedIntegralCommRingSheafUnrestricted l E T)
+  let := SheafOfModules.preservesZeroMorphisms_curriedTensor_independentCoefficients
+    (completedIntegralCommRingSheafUnrestricted l E T)
+  let := SheafOfModules.preservesZeroMorphisms_curriedTensor_obj_independentCoefficients
+    (completedIntegralCommRingSheafUnrestricted l E T)
+  have h : (Pi.lift (koszulRepresentativeAugmentation
+      (completedIntegralCommRingSheafUnrestricted l E T) P (uniformizer l E T)) :
+      P ⟶ ∏ᶜ fun n : ℕ ↦ ((tensorTower l E T).obj P).obj (op n)) ≫
+      towerTransitionEndomorphism
+        (K := fun n : ℕ ↦ ((tensorTower l E T).obj P).obj (op n))
+        (fun n ↦ ((tensorTower l E T).obj P).map (homOfLE n.le_succ).op) = 0 := by
+    apply Pi.hom_ext
+    intro n
+    simpa [towerTransitionEndomorphism, towerProductShift, Category.assoc] using
+      sub_eq_zero.mpr (koszulRepresentativeAugmentation_naturality.{t + 1, t, max u (t + 1)}
+        (completedIntegralCommRingSheafUnrestricted l E T) P (uniformizer l E T) n)
+  rw [h]
+  simp
 
 /-- The completion unit is the specified strict augmentation with zero Roos homotopy.
 Source: sk-lem-sp-tower, power-torsion calculation
