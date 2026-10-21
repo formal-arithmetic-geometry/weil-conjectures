@@ -3,8 +3,9 @@
  "unit": "sk-thm-sf-verdier-exchange",
  "proof": [
   {
-   "text": "Apply [lem-pe-internal-section-tensor-comparison] to each $R_T$: it supplies the normalized exact symmetric monoidal equivalence, flatness and K-flatness reflection, and total-complex comparison. Additivity and ordinary pull-push and open-adjunction identifications are [lem-sfb-internal-module-operations-transport].",
+   "text": "The small-site convention and [sk-def-sfb-sheaf-tensor](1–2) supply sheafification, its monoidal local equivalences and the closed sheafified tensor. Apply [lem-pe-internal-section-tensor-comparison] to each $R_T$: it supplies the normalized exact symmetric monoidal equivalence, flatness and K-flatness reflection, and total-complex comparison. Additivity and ordinary pull-push and open-adjunction identifications are [lem-sfb-internal-module-operations-transport].",
    "uses": [
+    "sk-def-sfb-sheaf-tensor",
     "lem-pe-internal-section-tensor-comparison",
     "lem-sfb-internal-module-operations-transport"
    ],
@@ -26,8 +27,9 @@
    }
   },
   {
-   "text": "Apply [lem-pd-section-derived-tensor-normalization]. It identifies K-flat derived tensors and units and the specified natural transformations $\\delta_f$ and $\\mu_f=\\delta_f^{-1}$.",
+   "text": "First [lem-pd-section-ordinary-oplax-normalization] identifies the actual ordinary oplax mate with the normalized ringed map: $s\\otimes(m\\otimes n)\\mapsto(s\\otimes m)\\otimes(1\\otimes n)$, with inverse $(s\\otimes m)\\otimes(t\\otimes n)\\mapsto st\\otimes(m\\otimes n)$. With this normalization and the derived operation comparisons of Step 2, apply [lem-pd-section-derived-tensor-normalization]. It identifies K-flat derived tensors, their units and the actual natural transformations $\\delta_f$ and $\\mu_f=\\delta_f^{-1}$.",
    "uses": [
+    "lem-pd-section-ordinary-oplax-normalization",
     "lem-pd-section-derived-tensor-normalization"
    ],
    "elementary": false,
@@ -48,37 +50,26 @@
    }
   },
   {
-   "text": "For an open $j$, [lem-sfb-internal-module-operations-transport] identifies the ordinary extension and its adjunction. The coefficient isomorphism $\\alpha_j$ [sk-def-sfb-coefficient-morphisms] identifies the restricted ring with $R_U$. Both operations are exact by [sk-def-sfb-module-lower-shriek, lem-pur-site-restriction-module-adjunction-exact], using only Part (1) of [lem-weil-proetale-weakly-etale-localization]. The termwise unit and counit are those of [lem-weil-pbc-termwise-adjunction-homotopy]. Exactness gives their derived factorizations [lem-weil-pbc-exact-functor-derived-factorization]. Localize these transformations by [lem-weil-pbc-localization-universal-property](2): it preserves composition and identities, so the same triangle identities and comparison squares hold. Thus the derived open adjunctions agree. The open projection is the composite $\\varepsilon_{eK\\otimes L}\\,e(\\mu_{eK,L})\\,e(\\eta_K\\otimes1)$, $e=D(j_!)$; its three factors have been identified here and in Step 3, so their composite agrees.",
+   "text": "For an open $j$, apply [lem-pd-section-derived-open-adjunction-normalization]. It identifies extension by zero, the canonical derived open Hom bijection, unit and counit under the fixed section and pullback comparisons. With $e=D(j_!)$, the adjoint-of-unit open projection is $\\varepsilon_{eK\\otimes L}\\,e(\\mu_{eK,L})\\,e(\\eta_K\\otimes1)$. The cited comparison identifies $e,\\eta,\\varepsilon$, and Step 3 identifies the tensor and actual $\\mu_j$; hence it identifies each factor and their composite.",
    "uses": [
-    "lem-sfb-internal-module-operations-transport",
-    "sk-def-sfb-module-lower-shriek",
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "lem-weil-proetale-weakly-etale-localization",
-    "lem-weil-pbc-termwise-adjunction-homotopy",
-    "lem-weil-pbc-exact-functor-derived-factorization",
-    "sk-def-sfb-coefficient-morphisms",
-    "lem-weil-pbc-localization-universal-property"
+    "lem-pd-section-derived-open-adjunction-normalization"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 03DI, lemma-extension-by-zero; 03DJ, lemma-extension-by-zero-exact"
+    "place": "Tags 03DI, lemma-extension-by-zero (summand action and adjunction Hom bijection), and 03DJ, lemma-extension-by-zero-exact; original Step 9 of lem-pd-module-ringed-topos-derived-comparison, including exact termwise localization of the specified open adjunctions."
    }
   }
  ],
  "proof_deps": [
+  "lem-pd-section-derived-open-adjunction-normalization",
   "lem-pd-section-derived-pushpull-normalization",
   "lem-pd-section-derived-tensor-normalization",
+  "lem-pd-section-ordinary-oplax-normalization",
   "lem-pe-internal-section-tensor-comparison",
-  "lem-pur-site-restriction-module-adjunction-exact",
   "lem-sfb-internal-module-operations-transport",
-  "lem-weil-pbc-exact-functor-derived-factorization",
-  "lem-weil-pbc-localization-universal-property",
   "lem-weil-pbc-ringed-projection-mate-exact",
-  "lem-weil-pbc-termwise-adjunction-homotopy",
-  "lem-weil-proetale-weakly-etale-localization",
-  "sk-def-sfb-coefficient-morphisms",
-  "sk-def-sfb-module-lower-shriek"
+  "sk-def-sfb-sheaf-tensor"
  ],
  "proof_origin": {
   "by": "agent",
@@ -244,16 +235,12 @@
   "date": "2026-10-21",
   "item": "lem-pd-module-ringed-topos-derived-comparison",
   "worker": "stage1",
-  "summary": "Repaired the returned coarse split by retaining its short assembly and extracting three strictly smaller normalization statements as new unsplit nodes, following the latest human route note of 2026-10-21. The parent statement is unchanged; the previous helper arguments are preserved only in report notes for their future workers. Checked every parent citation against its statement and retained the actual logged Mathlib searches.",
-  "blueprint": "The seeded target nt-target-poincare-isiso, Step 2, requires the canonical module/ringed-topos comparison for the open projection and Verdier-exchange argument. Steps 1–7 prove the tensor and functor comparisons; Step 8 identifies the proper projection mate and Step 9 the open adjunction and its named projection composite. The existing unit and null imported ancestor are retained.",
+  "summary": "Repair of Q12 return G1/A6/D: kept the live N6 normalization children and accepted assembly Steps 1–4, and extracted the remaining original Step 9 as the new statement-only lem-pd-section-derived-open-adjunction-normalization. Parent Step 5 now cites its scalar-action and canonical derived-adjunction comparison, and only assembles the open projection from the identified unit, counit and actual tensor arrow. Parent statement and statement dependencies are unchanged. All original arguments are allocated in report.md and original-proof-notes.md; actual Mathlib searches and verbatim citations are recorded.",
+  "blueprint": "Seeded target nt-target-poincare-isiso, Step 2 of its Verdier-exchange argument: canonical open projection and module-object comparison. The maintained target points to sk-thm-sf-verdier-exchange through sk-thm-sf-tensor-hom and sk-thm-sf-global-duality; its created.item chain has no imported ancestor. Original Steps 1–8 remain allocated to the existing tensor/operation interfaces and live pushpull/ordinary-oplax/derived-tensor children. Original Step 9 is now an independently available derived-open-adjunction node, with the final projection composite assembled in parent Step 5.",
   "tool_uses": [
    {
     "node": "lem-pe-internal-section-tensor-comparison",
     "why": "Generic Relative tensor and K-flatness under the internal-to-sectionwise module equivalence supplies the stated tensor, adjunction, exact-localization or ringed-site comparison; the unit geometric route is unchanged."
-   },
-   {
-    "node": "lem-pur-site-restriction-module-adjunction-exact",
-    "why": "Generic Restriction and extension by zero for modules on a localized site supplies the stated tensor, adjunction, exact-localization or ringed-site comparison; the unit geometric route is unchanged."
    },
    {
     "node": "lem-sfb-internal-module-operations-transport",
@@ -262,14 +249,6 @@
    {
     "node": "lem-weil-pbc-ringed-projection-mate-exact",
     "why": "Generic Exactness data for the ringed-topos projection mate supplies the stated tensor, adjunction, exact-localization or ringed-site comparison; the unit geometric route is unchanged."
-   },
-   {
-    "node": "lem-weil-pbc-termwise-adjunction-homotopy",
-    "why": "Generic An adjunction of additive functors induces an adjunction on the homotopy categories of complexes, termwise supplies the stated tensor, adjunction, exact-localization or ringed-site comparison; the unit geometric route is unchanged."
-   },
-   {
-    "node": "lem-weil-proetale-weakly-etale-localization",
-    "why": "Generic The small pro-etale site of a weakly etale X-scheme is the localization of X_proet supplies the stated tensor, adjunction, exact-localization or ringed-site comparison; the unit geometric route is unchanged."
    }
   ]
  },
@@ -293,10 +272,10 @@
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-N6-4c9660324",
-  "group": "N6",
+  "reviewer": "NT-cc-Q12-764bfdc36",
+  "group": "Q12",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-4c9660324 (reviewer sub-agent of L); spot-checked: PASS, no fixes. Statement and stmt_deps unchanged from live. Proof is a 5-step assembly of 2126 chars, following the human re-split note of 2026-10-21. New nodes: 3 statement-only unsplit (pushpull, ordinary oplax, derived tensor), each self-contained with a Stacks tag source, all three search kinds (Loogle 'unavailable' honestly recorded) and blueprint.from null as for the item. Old 9-step argument fully redistributed: old 1-2 to existing lem-pe-internal-section-tensor-comparison and lem-sfb-internal-module-operations-transport (their statements give exact, symmetric monoidal, Tot, flat/K-flat, additive, ordinary adjunctions); old 3-5 to pushpull; old 6 to oplax; old 7 to tensor; old 8-9 to Steps 4-5. Step 4 (equal adjuncts via projection-mate-exact) is genuinely elementary. Step 5 checks out: j_! exactness/adjunction from sk-def-sfb-module-lower-shriek and pur site restriction; only Part (1) of the weakly-etale localization; alpha_j ring iso; termwise adjunction, exact factorization, localization universal property (2). Lj^* form fixed by def-pd-section-derived-realization. Oplax formulas tested: identity case, both composites, R'- and S-balancing, zero ring. Sources read: 07A4, 07A6, 0FPI, 0G7E, 03EL, 09T5; 08BJ, 0B56, 03DI, 03DJ labels checked. No duplicate among the nodes citing the internal/section equivalence; the def-sfb-internal-section-derived-tensor-comparison definition and the RHom comparison lemma differ. Batch 5: item reached via det-thm-sf-pf-adic-projection (projection formula, not PD). Closure diff with old vs new proof adds only the three children. They are generic comparisons of two module realizations on one site, not stated by nt-assume-trace-formula or nt-assume-poincare-duality and not steps of their proofs, so accepted. All 6 declared tool_uses accepted. Advisory: the tensor child keeps the pushpull and oplax lemma nodes in stmt_deps (oplax there only to stay reachable), which may be a trap at stage 2; better source is def-pd-section-derived-realization."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-764bfdc36 (reviewer sub-agent of L); spot-checked: I read the item, the new node, every cited statement, Stacks 03DI/03DJ (sites-modules.tex lines 2058 and 2160), the re-split note and the earlier reviews (N6 4c96/353b, Q03 242c, Q12 8c85). The delivery fixes the Q12 8c85 RETURN (G1/A6/D) exactly as that RETURN asked. Compared with live, only proof, proof_deps and split_report change; the statement and stmt_deps are byte-identical. Old step 9, the open-immersion argument (1604 chars), is now the statement-only node lem-pd-section-derived-open-adjunction-normalization. Step 5 keeps only the elementary composite ε∘e(μ_j)∘e(η⊗1). Allocation of the old proof: steps 1–2 → existing nodes plus sk-def-sfb-sheaf-tensor(1–2); 3–5 → pushpull child; 6 → oplax child (cited directly; I checked both composites by S-balancing); 7 → tensor child; 8 → elementary Step 4. The proof is 2085 chars in 5 steps, and with the N6 children the item has 4 split children. The dropped proof_deps each still have more than 120 citers. The new node is true. The 03DI action is α_j(r|_U)m, with α_j a ring iso. The ordinary comparison is mate-normalized, both sides are exact, and localization preserves units and counits. The pushpull b is stated for any morphism of schemes, so it applies to j. Both sides of the h_sec/h_int equation have the same type. Edge cases U=∅, U=X and Λ=0 hold. Its ordinary paragraph overlaps lem-sfb-internal-module-operations-transport, which is advisory only, since the substance is the derived comparison. It does not re-generalize the landed children. One fault, fixed: the statement used the identification X_proet/U ≅ U_proet without citing anything. It now cites Part (1) of lem-weil-proetale-weakly-etale-localization, which is also added to stmt_deps. Batch-5 flags: the open-adjunction node and ordinary-oplax are generic comparisons of module operations, not statements or proof steps of the trace formula or Poincaré duality. Oplax was already in the closure through the tensor child's stmt_deps, and the item reaches batch 5 through six-functors-basics citers. Both flags accepted. No SGA is cited. tool_uses are unchanged.; 1 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
   "date": "2026-10-18",
