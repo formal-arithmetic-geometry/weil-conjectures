@@ -22139,3 +22139,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 10:15 L: merged deliver/NU/lem-weil-pbc-strict-quotient-scalar-balancing (stage 2; reviewer PASS; parallel immutable checks)
 - 10:15 L: merged deliver/Q102/lem-a1-integral-stratum-chart-restrictions (stage 2; reviewer PASS; parallel immutable checks)
 - 10:16 L: merged deliver/Q128/lem-sp-koszul-roos-projection-comparison (stage 2; reviewer PASS; parallel immutable checks)
+- 10:43 L: returned deliver/Q81/lem-a1-point-realization-standard-cohomology (reviewer RETURN: (the landing tools, head c47297bde) the delivery did not land: (merge queue) your landing 20261021T100201-Q81-2691809-17)
