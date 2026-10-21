@@ -1,0 +1,112 @@
+{
+ "id": "lem-pur-proetale-open-cover-comparison-descent",
+ "kind": "statement",
+ "title": "Open cover detection and descent of etale origin",
+ "statement": "Let X be a scheme and (U_i) any open cover of X [def-weil-pbc-proetale-site]. For fixed module-valued pro-etale sheaves, restriction to all U_i jointly detects zero sheaves and zero derived objects. Write nu_X^* and R nu_X,* for the ordinary etale/pro-etale comparison [def-weil-pbc-site-comparison-morphism]. If R is a complex of pro-etale module sheaves, R nu_X,* R is bounded below, and each restriction R|U_i is isomorphic to nu_U_i^* N_i for some etale complex N_i, then the actual comparison counit nu_X^* R nu_X,* R -> R is invertible. These are the existing source-library open-cover theorems; no boundedness of R or constructibility assumption is imposed.",
+ "source": {
+  "document": "lean/WeilConjectures/SixFunctors/ProEtale/FiniteCoefficient/Derived/OpenCover.lean",
+  "place": "Conservative section, lines 56-91, and Gluing section, isIso_derivedComparisonAdjunction_counit_app_of_openCover; Stacks proetale.tex lemma-compare-derived and open locality of sheaf isomorphisms."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-pbc-bounded-derived-subcategories"
+ ],
+ "proof": [
+  {
+   "text": "The open family belongs to the pro-etale precoverage. On every site object its base changes give a covering sieve. A map invertible on all restrictions is therefore invertible. Apply this to a zero map into the zero sheaf; apply homology to deduce zero detection for derived objects. This is the existing proved Conservative section.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Take the cone C of the comparison counit. The bounded-below comparison unit is invertible, so R nu_* C is zero. On each open, maps from complexes of etale origin to C vanish by the open extension-by-zero adjunction and its compatibility with comparison. In the restricted counit triangle both first terms have etale origin. Its second arrow and its shift vanish, forcing C|U_i to be zero. The preceding cover detection makes C zero; hence the actual counit is invertible. This is the existing proved Gluing section.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "existing Lean proof",
+  "document": "lean/WeilConjectures/SixFunctors/ProEtale/FiniteCoefficient/Derived/OpenCover.lean",
+  "place": "Open-cover conservativity and comparison-counit cone argument, read without alteration."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Constructibility of sheaves descends on finite Zariski open covers and etale origin descends on open covers",
+   "results": "8 hits: generic topological sheaves, Zariski precoverage and local morphism properties; no etale/pro-etale comparison theorem.",
+   "date": "2026-10-21",
+   "verdict": "Use existing source theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bounded constructible complexes descend along a finite Zariski open covering",
+   "results": "8 hits: locality of constructible subsets and local scheme morphism properties; no sheaf comparison theorem.",
+   "date": "2026-10-21",
+   "verdict": "Use existing source theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*(cover|open)|Constructible.*(Cover|Open); rg isIso_derivedComparisonAdjunction_counit_app_of_openCover and isZero_of_forall_isZero_upperStar_obj in project sources and DAG",
+   "results": "Mathlib has constructible subset topology, not this comparison. Source Derived/OpenCover.lean contains the exact proved theorems. No DAG attachment to this module was found. Blueprint searches for constructible open covering and etale origin found no duplicate of these open descent tools.",
+   "date": "2026-10-21",
+   "verdict": "Attach existing source declarations; add no Lean statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurityFiniteOpenIntervalDescent",
+  "date": "2026-10-21",
+  "group": "H4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-general-admissibility",
+   "place": "Step 4: vanishing and constructibility are local on the site; fixed-module open descent tool.",
+   "via": [
+    "lem-pur-finite-open-interval-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.OpenCover",
+  "declaration": "AlgebraicGeometry.ProEtale.isIso_derivedComparisonAdjunction_counit_app_of_openCover",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.isIso_derivedComparisonAdjunction_counit_app_of_openCover",
+   "AlgebraicGeometry.ProEtale.isZero_of_forall_isZero_upperStar_obj",
+   "AlgebraicGeometry.ProEtale.isZero_of_forall_isZero_mapDerivedCategory_upperStar"
+  ],
+  "statement": "theorem isIso_derivedComparisonAdjunction_counit_app_of_openCover\n    (R : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A))\n    (hR : _root_.DerivedCategory.TStructure.t.plus ((R(ν_*(X)[A])).obj R))\n    (h : ∀ i, ∃ N : _root_.DerivedCategory (Sheaf (U i : Scheme.{u}).smallEtaleTopology A),\n      Nonempty (D(((U i).ι)^*[A]).obj R ≅ D(ν^*(U i)[A]).obj N)) :\n    IsIso ((derivedComparisonAdjunction A X).counit.app R)",
+  "branch": "sheaf-dag",
+  "by": "H4",
+  "date": "2026-10-21",
+  "note": "Existing proved source tools, specialized to ModuleCat (ULift A). No source declaration or import is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261021T171806-L-3139926",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261021T171806-L-3139926",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
