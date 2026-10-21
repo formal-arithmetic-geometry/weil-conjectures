@@ -21019,3 +21019,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:12 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
 - 08:12 L: returned deliver/Q37/det-picard-rr-duality (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED det-picard-rr-duality: cited node lem-pc-regular-curve)
 - 08:13 L: returned deliver/NN/lem-sf-open-quotient-koszul-completeness (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-sf-open-quotient-koszul-completeness: cited node l)
+- 08:13 L: returned deliver/Q48/lem-sp-restricted-scalar-cohomology-local-constancy (reviewer RETURN: L: independent stage-2 immutable head b6fbd77f9cd8: H13 x2. The item statement matches the node (all hypotheses and clau)
