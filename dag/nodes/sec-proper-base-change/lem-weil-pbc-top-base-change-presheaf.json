@@ -25,9 +25,107 @@
   "def-weil-pbc-module-cohomology-fmap",
   "lem-pc-module-pullback-identity-composition"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $G=v^*F$, $D=Rf_{T,*}(G[0])$, and let $\\nu:F[0]\\to Rv_*(G[0])$ be the ordinary unit $F\\to v_*G$ followed by the right-derived comparison. Let $A:C\\to Rg_*D$ be $Rf_*(\\nu)$ followed by the canonical direct-image composition comparisons for $fv=gf_T$. The definition of the derived base-change mate says that its adjunct before the comparison $c_v$ is $Rf_*$ of the derived unit at $F[0]$. Naturality of adjunction in the target says that following this mate by $Rf_{T,*}(c_v)$ replaces that unit by $Rv_*(c_v)$ after the unit. By the specified transpose normalization of $c_v$, this composite is precisely $\\nu$. Therefore $A$ is the derived adjunct of the specified $\\delta_g$. This identifies the actual morphism, without assuming it invertible.",
+   "uses": [
+    "def-pc-derived-module-base-change-map",
+    "def-pc-derived-base-change-map",
+    "lem-pc-ringed-spaces-derived-adjoint",
+    "lem-pc-module-pullback-adjunction",
+    "lem-pc-derived-direct-image-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08HY, remark-base-change; the unit description of its mate, and the normalized comparison in def-pc-derived-module-base-change-map"
+   }
+  },
+  {
+   "text": "For an object $E$ write $\\Theta^E$ for its canonical local-hypercohomology class map. The natural sheafification theorem and the local derived-sections comparison give an edge $e:H^q(Rg_*D)\\to g_*H^qD$: sheafify $H^q(V,Rg_*D)\\xrightarrow{\\lambda_g}H^q(W,D)\\xrightarrow{\\Theta^D_W}\\Gamma(W,H^qD)$. The latter presheaf is a sheaf, so its factorization through sheafification gives $\\Gamma(V,e)\\Theta^{Rg_*D}_V=\\Theta^D_W\\lambda_g$. All these maps are $\\mathcal O_S(V)$-linear on the section complexes, so the factorization is a module-sheaf morphism. Apply the top-adjunct edge lemma to $d=\\delta_g$, $K=D$, $C=Rf_*F[0]$. The stated vanishing gives $C\\in D^{\\le q}$; $D$ is bounded below: choose a bounded below injective resolution of $G[0]$, which is K-injective by the cited resolution theorem; its termwise direct image is still bounded below and represents $D$. Its conclusion gives $a_g^q=eH^q(A)$, with exactly the $\\kappa_{g,C}$ fixed in the item.",
+   "uses": [
+    "lem-pc-ringed-space-sheafification-cohomology",
+    "lem-trf-unbounded-direct-image-section-presheaf",
+    "def-weil-presheaf-modules-sheafification",
+    "def-pc-ringed-spaces-derived-direct-image",
+    "lem-weil-pbc-derived-adjunction-top-edge",
+    "lem-weil-pbc-derived-pullback-top-cohomology",
+    "lem-sc-bounded-below-injective-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0BKJ, lemma-sheafification-cohomology; the new top-adjunct lemma records the additional agent adjunction argument"
+   }
+  },
+  {
+   "text": "Compute the local cohomology action of $A$. Choose injective resolutions $F\\to I$, $G\\to J$, a bounded below injective replacement $\\ell:v_*J\\to L$, and an augmented lift $\\beta:I\\to L$ of $F\\to v_*G\\to v_*J\\to L$, as in the definition of the module cohomology map. Its independence-of-choices theorem permits these common global choices and their restrictions. Restriction to $U$ and $U'$ preserves these injective resolutions, their augmentations and the quasi-isomorphism $\\ell$. The section quasi-isomorphism lemma applied to $v_V$ gives that $\\Gamma(U,\\ell):\\Gamma(U',J)\\to\\Gamma(U,L)$ is a quasi-isomorphism. The definition of the cohomology map for the restricted unit therefore gives\n$$v_V^*=H^q\\Gamma(U,\\ell)^{-1}H^q\\Gamma(U,\\beta).$$\nThe normalized derived composition theorem represents the comparison $R(fv)_*G\\to Rf_*Rv_*G$ by $f_*\\ell$. In particular $f_*\\ell$ is a quasi-isomorphism; $A$ is represented by the roof $f_*I\\xrightarrow{f_*\\beta}f_*L\\xleftarrow{f_*\\ell}f_*v_*J=g_*f_{T,*}J$. Evaluating this roof on $V$, and using the canonical local derived-sections comparisons on its two ends, gives exactly the same formula above. Thus\n$$\\lambda_{f_T,W}\\lambda_{g,V}H^q(V,A)=v_V^*\\lambda_{f,V}.$$\nThe restrictions of the coefficient unit have values $F(Z)\\to G(v^{-1}Z)$, so its coefficient is $G|_{U'}$ under the stated pullback composition identification.",
+   "uses": [
+    "def-weil-pbc-module-cohomology-fmap",
+    "lem-weil-pbc-module-open-restriction-injectives",
+    "lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-trf-unbounded-direct-image-section-presheaf",
+    "lem-pc-module-pullback-identity-composition",
+    "lem-weil-pbc-module-cohomology-fmap-functorial",
+    "lem-weil-pbc-bounded-below-injectives-kinjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 01FB, remark-explain-arrow, the displayed resolution roof; canonical composition on injective representatives"
+   }
+  },
+  {
+   "text": "The local-class maps in this calculation are the particular $\\theta$ maps of the item. Indeed, on an injective resolution $I$, a class $[s]\\in H^q(U,F)$ first becomes a class on $V$ of $f_*I$, then its image in the cohomology sheaf is the section defined by the same cocycle $s$. This is the stated formula for $\\theta_V$, so $\\Theta^C_V=\\theta_V\\lambda_{f,V}$. The identical calculation with $J$ gives $\\Theta^D_W=\\theta'_W\\lambda_{f_T,W}$. Naturality of the sheafification class map for the derived morphism $A$ gives\n$$\\Gamma(V,H^qA)\\Theta^C_V=\\Theta^{Rg_*D}_VH^q(V,A).$$\nThese are equalities for the specified maps, since both sides send a cocycle to its class after the resolution comparison; they do not require $\\theta$ to be an isomorphism on sections.",
+   "uses": [
+    "lem-weil-pbc-higher-direct-image-presheaf",
+    "lem-pc-ringed-space-sheafification-cohomology",
+    "lem-trf-unbounded-direct-image-section-presheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 01E4, lemma-describe-higher-direct-images, cocycle formula; Tag 0BKJ, lemma-sheafification-cohomology, naturality"
+   }
+  },
+  {
+   "text": "Using $a_g^q=eH^q(A)$, the naturality equality and the defining equation of $e$, the composite $\\Gamma(V,a_g^q)\\theta_V$ is\n$$\\theta'_W\\lambda_{f_T,W}\\lambda_{g,V}H^q(V,A)\\lambda_{f,V}^{-1}.$$\nStep 3 identifies its last four factors with $v_V^*$. This proves $\\Gamma(V,a_g^q)\\theta_V=\\theta'_Wv_V^*$ for every open $V$. Only the top-degree adjunction comparison used the upper bound $q$; none of the local cocycle calculations used affineness, flatness, quasi-coherence, or invertibility of base change.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 01E4, lemma-describe-higher-direct-images; substitution of the established equalities"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-module-base-change-map",
+  "def-pc-derived-base-change-map",
+  "lem-pc-ringed-spaces-derived-adjoint",
+  "lem-pc-module-pullback-adjunction",
+  "lem-pc-derived-direct-image-composition",
+  "lem-pc-ringed-space-sheafification-cohomology",
+  "lem-trf-unbounded-direct-image-section-presheaf",
+  "def-weil-presheaf-modules-sheafification",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "lem-weil-pbc-derived-adjunction-top-edge",
+  "lem-weil-pbc-derived-pullback-top-cohomology",
+  "lem-sc-bounded-below-injective-resolution",
+  "def-weil-pbc-module-cohomology-fmap",
+  "lem-weil-pbc-module-open-restriction-injectives",
+  "lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-pc-module-pullback-identity-composition",
+  "lem-weil-pbc-module-cohomology-fmap-functorial",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "lem-weil-pbc-higher-direct-image-presheaf"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 01E4 and 01FB for the local cocycle computation; Tag 08HY for the normalized derived mate; the additional top-adjunct comparison is isolated as a new statement."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -63,10 +161,38 @@
    "results": "no hits",
    "date": "2026-10-21",
    "verdict": "no match: no declaration found"
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange.*(rightDerived|[Cc]ohomology)|rightDerived.*baseChange|sheafif.*[Cc]ohomology|[Cc]ohomology.*sheafif",
+   "results": "no hits",
+   "date": "2026-10-21",
+   "verdict": "no match: no declaration found"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived module base change on highest cohomology sheaf is compatible with local cohomology pullback",
+   "results": "SheafOfModules.sheafificationCompPullback, Module.rankAtStalk_baseChange, KaehlerDifferential.tensorKaehlerEquivBase, Submodule.baseChange_top, LieSubmodule.baseChange_top, LinearMap.liftBaseChange_tmul, IsBaseChange.dual, IsBaseChange.toDualBaseChange",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary adjunctions, triangulated adjunctions, truncation functors and the general construction Adjunction.derived do not state the normalized equality on top cohomology"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"baseChange\"",
+   "results": "CategoryTheory.Precoverage.isSheaf_toGrothendieck_iff_of_isStableUnderBaseChange_of_small, CategoryTheory.Precoverage.isSheaf_toGrothendieck_iff_of_isStableUnderBaseChange",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary adjunctions, triangulated adjunctions, truncation functors and the general construction Adjunction.derived do not state the normalized equality on top cohomology"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Top cohomology of derived pullback base change agrees with pullback on cohomology presheaf classes",
+   "results": "TopCat.Sheaf.pullbackIso, SheafOfModules.pullbackIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackComp, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullbackObjFreeIso_hom_naturality",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary adjunctions, triangulated adjunctions, truncation functors and the general construction Adjunction.derived do not state the normalized equality on top cohomology"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-pbc-coherent-affine-base-change-edge-naturality",
@@ -91,5 +217,79 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-weil-pbc-top-base-change-presheaf",
+  "worker": "stage1",
+  "summary": "Identify the normalized derived adjunct with the ordinary module unit on injective-resolution roofs. Isolate only the nontrivial top-cohomology adjunction comparison; use existing local derived-sections and natural sheafification nodes for the remaining cocycle calculation. No statement change or flatness/affineness assumption.",
+  "blueprint": "Serves the inherited affine coherent edge naturality branch below thm-weil-pbc-direct-image-finiteness-proper. The current main-20261015 ancestor states FIN without a proof; the present local module lemma supplies the explicit derived-map identification at the inherited place, not a new finiteness route.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-ringed-spaces-derived-adjoint",
+    "why": "Generic derived pullback is left adjoint to derived direct image used to compute the fixed module derived mate and its local cocycle classes; no replacement of the proper-base-change unit route."
+   },
+   {
+    "node": "lem-pc-module-pullback-adjunction",
+    "why": "Generic the tensor-formula pullback of modules is left adjoint to pushforward used to compute the fixed module derived mate and its local cocycle classes; no replacement of the proper-base-change unit route."
+   },
+   {
+    "node": "lem-pc-derived-direct-image-composition",
+    "why": "Generic composition of derived direct images used to compute the fixed module derived mate and its local cocycle classes; no replacement of the proper-base-change unit route."
+   },
+   {
+    "node": "lem-pc-ringed-space-sheafification-cohomology",
+    "why": "Generic cohomology over opens sheafifies to the cohomology sheaf used to compute the fixed module derived mate and its local cocycle classes; no replacement of the proper-base-change unit route."
+   },
+   {
+    "node": "lem-trf-unbounded-direct-image-section-presheaf",
+    "why": "Generic unbounded derived direct-image cohomology as sheafified local hypercohomology used to compute the fixed module derived mate and its local cocycle classes; no replacement of the proper-base-change unit route."
+   },
+   {
+    "node": "lem-sc-bounded-below-injective-resolution",
+    "why": "Generic bounded-below complexes admit bounded-below k-injective resolutions used to compute the fixed module derived mate and its local cocycle classes; no replacement of the proper-base-change unit route."
+   },
+   {
+    "node": "lem-weil-pbc-module-open-restriction-injectives",
+    "why": "Generic restriction of modules to an open subscheme is exact and preserves injectives; direct image along the open immersion preserves injectives used to compute the fixed module derived mate and its local cocycle classes; no replacement of the proper-base-change unit route."
+   },
+   {
+    "node": "lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso",
+    "why": "Generic global sections of a resolution of the direct image of injectives is a quasi-isomorphism used to compute the fixed module derived mate and its local cocycle classes; no replacement of the proper-base-change unit route."
+   },
+   {
+    "node": "lem-pc-module-pullback-identity-composition",
+    "why": "Generic identity and composition for tensor-formula module pullback used to compute the fixed module derived mate and its local cocycle classes; no replacement of the proper-base-change unit route."
+   },
+   {
+    "node": "lem-weil-pbc-module-cohomology-fmap-functorial",
+    "why": "Generic functoriality of the maps on cohomology induced by f-maps used to compute the fixed module derived mate and its local cocycle classes; no replacement of the proper-base-change unit route."
+   },
+   {
+    "node": "lem-weil-pbc-higher-direct-image-presheaf",
+    "why": "Generic higher direct images of modules as sheafified cohomology of preimages; stalks used to compute the fixed module derived mate and its local cocycle classes; no replacement of the proper-base-change unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-ringed-spaces-derived-adjoint",
+  "lem-pc-module-pullback-adjunction",
+  "lem-pc-derived-direct-image-composition",
+  "lem-pc-ringed-space-sheafification-cohomology",
+  "lem-trf-unbounded-direct-image-section-presheaf",
+  "lem-sc-bounded-below-injective-resolution",
+  "lem-weil-pbc-module-open-restriction-injectives",
+  "lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso",
+  "lem-pc-module-pullback-identity-composition",
+  "lem-weil-pbc-module-cohomology-fmap-functorial",
+  "lem-weil-pbc-higher-direct-image-presheaf"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NP-7b08a3f35",
+  "group": "NP",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-7b08a3f35 (reviewer sub-agent of L); spot-checked: PASS. I read in full the item lem-weil-pbc-top-base-change-presheaf, the new node lem-weil-pbc-derived-adjunction-top-edge, every cited statement and the Stacks sources 01E4, 01FB, 08HY, 0BKJ and 0D5X. The item's statement is byte-identical to the base copy, and the item is still unsplit there, so no other group has superseded it. It is not a re-split item: its base proof was empty. Step 1: the adjunct of δ_g is comp∘Rf_*(ν), because c_v is normalized as the transpose of the ordinary unit. Advisory: def-pc-derived-base-change-map is worded for D_QCoh, but the module-map node already applies it to arbitrary modules and nothing uses quasi-coherence. Step 2: C is in D^{≤q} by the hypothesis and D is bounded below through a bounded-below injective resolution; a_g^q = e∘H^q(A) is exactly the ordinary adjoint of b_g^q. Step 3: the roof matches the definition of the module cohomology map. Open restriction preserves the resolutions, Γ(U,ℓ) is a quasi-isomorphism by the pushforward-injectives lemma, and the composition class is f_*ℓ by its stated normalization. The step never needs f_*I to be K-injective. Its local comparisons use the evident resolution maps, which lem-trf's canonical statement pins; I accept this at stage-1 level. Step 4: θ is pinned by its explicit cocycle formula, and naturality of Θ comes from the germ clause. Step 5: I recomputed the cancellation chain. Edge cases checked: q=0 (classical f_* base change on sections), g=id, non-flat g, empty V. New node: statement only, self-contained, with four kinds of Mathlib search recorded. It is true by my proof sketch: truncate K to D^{≥q}, Hom from D^{≤q} to D^{≥q} reduces to H^q, then apply the shifted single-module transpose and e∘H^q(u)=id. It is strictly smaller than the item, not a restatement, and has no duplicate after a DAG grep. Batch-5 flag on lem-trf-unbounded-direct-image-section-presheaf (cited by both nodes): accepted. It is Stacks 0D5X, generic local Leray for ringed spaces, not a step of the trace formula or Poincaré duality. Its closure has no other trace-formula or Poincaré-duality node and no assumption leaf. It is already in the batch-5 closure through lem-trf-derived-basis-local-ext-sheaf, and the delivery adds only the new node to that closure. I accept the 11 declared tool uses. Tooling notes: coord/dag-sync.md is missing from the snapshot, and the snapshot's dagsnap e3ececac was garbage-collected during the review, so I did the closure checks on dagsnap 3eb42cc9 with the two delivered files overlaid. No changes."
  }
 }
