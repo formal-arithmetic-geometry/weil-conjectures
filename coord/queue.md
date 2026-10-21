@@ -1,8 +1,8 @@
 # Work queue
 
-78 items; claim with `tools/claim.py next <group> [--stage N]`.
+75 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Rework: quarantined by the upstream sync (12 clusters, 363 modules)
+## Rework: quarantined by the upstream sync (10 clusters, 363 modules)
 
 Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.tsv). One item per cluster: its root (a quarantined module importing no other quarantined one) and the quarantined modules importing it; fix the root, then the dependents as far as possible, deliver every module that compiles.
 
@@ -15,9 +15,7 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 | `Sheaf.AlgebraicGeometry.PicardAffineStructureProjectiveRepresentation` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.PicardH1CommonMinimalModel` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.Paper.CoefficientExchangeFromComparisons` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
-| `WeilConjectures.TraceFormula.WeilTrace` | 1 |  | error: WeilConjectures/TraceFormula/WeilTrace.lean: bad import 'WeilConjectures.TraceFormula.Main' |
 | `Sheaf.AlgebraicGeometry.DerivedPullbackTensorSuccessiveNormalization` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
-| `Sheaf.AlgebraicGeometry.EllAdicBoundedConstructibleProperAdjoint` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.MixedAffineSectionsPullbackUnitNormalization` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.PerfectHomOpenMateResolutionNormalization` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 
@@ -50,7 +48,7 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 
 Not open yet: 372 nodes that below a finished node, not needed, 94 nodes that wait for a statement dependency (bottom-up), 6 nodes that wait for stage 1 (statement downstream not grounded).
 
-## Stage 3: modules to prove (45)
+## Stage 3: modules to prove (44)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -64,26 +62,25 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible` | 2 | 2 | proof | route |
 | `Sheaf.Paper.ConstantCompletionEquivalence` | 5 | 10 | proof | route |
 | `Sheaf.Paper.LevelwiseAdicTruncations` | 6 | 5 | proof | route |
-| `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimit` | 5 | 5 | proof | 1 |
+| `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimit` | - | 5 | proof | 1 |
 | `Sheaf.Paper.PerfectProjectionFormula` | 3 | 3 | proof | 2 |
 | `Sheaf.Paper.ProjectionMateExact` | 3 | 1 | proof | 2 |
-| `Sheaf.Paper.PbcDescentFunctors` | 9 | 1 | proof | 2 |
-| `Sheaf.Paper.PbcScalarExtension` | 9 | 16 | proof | 2 |
 | `Sheaf.Paper.CompletedCoefficientPushforwardComparison` | - | 1 | proof | 2 |
+| `Sheaf.Paper.PbcDescentFunctors` | - | 1 | proof | 2 |
+| `Sheaf.Paper.PbcScalarExtension` | - | 16 | proof | 2 |
 | `Sheaf.Paper.RingedProjectionRestriction` | 4 | 1 | proof | 3 |
-| `Sheaf.Paper.FiniteFreeCompletedScalarComparison` | 6 | 2 | proof | 3 |
-| `Sheaf.Algebra.Homology.KFlatFixedTensorTriangulated` | 10 | 1 | proof | 3 |
-| `Sheaf.Paper.SbcCompletedOperations` | 10 | 15 | proof | 3 |
+| `Sheaf.Algebra.Homology.KFlatFixedTensorTriangulated` | - | 1 | proof | 3 |
+| `Sheaf.Paper.FiniteFreeCompletedScalarComparison` | - | 5 | proof | 3 |
 | `Sheaf.Paper.KFlatScalarComparisonNormalization` | - | 3 | proof | 3 |
 | `Sheaf.Paper.PullbackTensorCanonicalShiftUnit` | - | 1 | proof | 3 |
 | `Sheaf.Paper.RoosIntrinsicCompletenessEquivalence` | - | 1 | proof | 3 |
-| `Sheaf.Paper.CompletedPullbackReduction` | 7 | 4 | proof | 4 |
-| `Sheaf.Paper.IntegralOperationsWellDefined` | 7 | 2 | proof | 4 |
+| `Sheaf.Paper.SbcCompletedOperations` | - | 15 | proof | 3 |
 | `Sheaf.Algebra.Homology.DerivedTensorShiftDescent` | - | 1 | proof | 4 |
 | `Sheaf.Algebra.Homology.TotalTensorHomotopyConeSigns` | - | 1 | proof | 4 |
+| `Sheaf.Paper.CompletedPullbackReduction` | - | 4 | proof | 4 |
 | `Sheaf.Paper.FiniteFreeQuotientCompletion` | - | 1 | proof | 4 |
-| `Sheaf.Paper.CompletedOpenExchangeTransport` | 6 | 1 | proof | 5 |
-| `Sheaf.Algebra.Homology.RingedSliceNormalizedComparisons` | 11 | 1 | proof | 5 |
+| `Sheaf.Algebra.Homology.RingedSliceNormalizedComparisons` | - | 1 | proof | 5 |
+| `Sheaf.Paper.CompletedOpenExchangeTransport` | - | 1 | proof | 5 |
 | `Sheaf.Paper.PulledReductionNormalizationComparison` | - | 1 | proof | 5 |
 | `Sheaf.Paper.PulledReductionStrictTowerComparison` | - | 1 | proof | 5 |
 | `Sheaf.Paper.SiteDerivedTensorRestriction` | - | 1 | proof | 5 |
