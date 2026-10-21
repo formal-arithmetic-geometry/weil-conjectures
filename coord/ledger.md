@@ -23175,3 +23175,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:22 L: merged deliver/NJ/lem-sfb-profinite-constant-derived-functions (reviewer FIX; first push; new nodes: 1)
 - 17:22 L: merged deliver/N8/lem-sfb-qlbar-internal-hom-coefficient-comparison (stage 2; reviewer PASS; parallel immutable checks)
 - 2026-10-21T17:23:34Z L: superseded stage-1 delivery Q07/lem-sfb-condensed-derived-invariant-bar at 73f8d02a423cfbd2cbea8c69b4e17861c8063e14; current completion retained; packet archived at refs/superseded/Q07/lem-sfb-condensed-derived-invariant-bar/73f8d02a423cfbd2cbea8c69b4e17861c8063e14; stale return retired.
+- 17:23 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
