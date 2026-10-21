@@ -19,65 +19,99 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-sfb-coefficient-diagram-regular-scalars] with $P=p_U^*$, $Q=p_V^*$, $F=h^{-1}$ and $c:Fp_U^*\\cong p_V^*$. The pulled-back ring structures and the monoidal point-composition comparison give precisely this diagram; its component at $\\Lambda$ is the ring isomorphism $\\alpha_h$. Thus $R=\\Lambda_U$, $T=h^{-1}\\Lambda_U$, $S=\\Lambda_V$ are commutative (for $T$ also use its ring isomorphism to $S$). Tensor on abelian sheaves preserves colimits and their abelian category has coequalizers, so the tensor hypotheses hold. A scalar $a\\in\\Lambda(*)$ is a map from the tensor unit to $\\Lambda$; its transported sections are exactly the canonical scalar maps defining $A_U,A_V$. The lemma supplies the specified regular comparison $e_1$ and $e_1h^*(t_{a,U})=t_{a,V}e_1$ for every entry.",
+   "text": "Let d:1→Λ be the condensed section obtained from the scalar a:ℤ→Λ(*) by the constant-sheaf adjunction counit. Expanding scalarSection shows scalarSection_W(a)=ε(p_W*) p_W*(d). For P=p_W*, the identity on PΛ identifies the transported regular module with regular(PΛ). Regular_hom_ext and one_comp_regularLift then identify P applied to multiplication by d with the regular endomorphism defined by scalarSection_W(a). Naturality of upperStarFromPointComp h at this condensed regular endomorphism gives F(t_a,U) α=α t_a,V. This uses the same canonical scalar a on both schemes. Explicit source and target object arguments in the naturality application keep Lean from unfolding the composite geometric pullback functors.",
    "uses": [
-    "lem-sfb-coefficient-diagram-regular-scalars",
+    "det-def-sfb-constructible-local-model",
     "sk-def-sfb-pulled-back-coefficients",
     "sk-def-sfb-pullback-from-point-comp",
-    "sk-def-sfb-coefficient-morphisms",
-    "sk-def-sfb-sheaf-tensor",
-    "det-def-sfb-constructible-local-model"
+    "sk-def-sfb-coefficient-morphisms"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point-comp/_section.md",
-    "place": "Monoidal point-composition comparison; the extracted coefficient-diagram lemma applied to the canonical scalar maps"
+    "place": "The monoidal natural isomorphism; naturality at multiplication by a section, using the transported coefficient-ring structure"
    }
   },
   {
-   "text": "Write $H=h^*=\\operatorname{Ext}_{\\alpha_h}\\circ\\operatorname{mapMod}(h^{-1})$. Its module adjunction and [lem-weil-pbc-left-adjoint-preserves-colimits] show that it preserves finite colimits. Only finite discrete indexing categories and the parallel-pair category are used. The module categories and their finite free objects are the abelian module categories of [def-sfb-finitely-presented-module]. Consequently [lem-sfb-finite-colimit-matrix-cokernels] applies with $X=\\Lambda_U$, $Y=\\Lambda_V$ and the regular comparison from step 1. Its $E_r$ are the required finite-coproduct extensions $e_r$, including $r=0$.",
+   "text": "The identity on FΛ_U identifies the transported regular module with regular(FΛ_U). Identify this identity morphism with mapModUnitIso.inv by composing with mapModUnitIso.hom and canceling that isomorphism; no unfolding of a chosen inverse is required. The existing regularExtensionIso along α identifies its extension of scalars with regular Λ_V. Their composite is exactly the unchanged scalarMatrixRegularPullbackIso. The extension comparison is already constructed and proved by the extension–restriction adjunction and the universal property of the regular module; no separate mixed-bimodule right-unitor argument is needed here. The sheaf tensor structure supplies the ambient hypotheses.",
    "uses": [
     "sk-def-sfb-module-pushforward-pullback",
-    "lem-weil-pbc-left-adjoint-preserves-colimits",
-    "def-sfb-finitely-presented-module",
-    "lem-sfb-finite-colimit-matrix-cokernels"
+    "def-sfb-modobj-transport",
+    "sk-def-sfb-sheaf-tensor",
+    "sk-def-sfb-coefficient-morphisms",
+    "lem-weil-pbc-regular-extension-comparison"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 0038, lemma-adjoint-exact (1); finite diagrams, then the extracted categorical comparison"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/lem-sfb-dc-upper-star-preserves.proof.md",
+    "place": "Last sentence, finite free modules; regular-module case supplied by the existing mixed-bimodule right-unitor node"
    }
   },
   {
-   "text": "For each $i<n,j<m$, take $p_{ij}=t_{a_{ij},U}$ and $q_{ij}=t_{a_{ij},V}$. Step 1 supplies the entrywise-intertwining hypothesis of [lem-sfb-finite-colimit-matrix-cokernels]. By the definition of $A_U,A_V$ these are their entries. The lemma gives $e_nH(A_U)=A_Ve_m$ and the cokernel isomorphism $u$ with $uH(q_U)=q_Ve_n$. This is exactly the demanded projection compatibility. Its conclusion includes $m=0$, $n=0$ and both ranks zero.",
+   "text": "Use the existing preservesFiniteColimits_upperStar and upperStar_additive instances of the module pullback. The functor mapBiproduct followed by biproduct.mapIso of the regular comparison is exactly the unchanged scalarMatrixFreePullbackIso. The canonical mapBiproduct injection/projection identities and the biproduct.map identities describe this comparison for every finite rank, including zero.",
    "uses": [
-    "lem-sfb-finite-colimit-matrix-cokernels",
-    "det-def-sfb-constructible-local-model",
+    "sk-def-sfb-module-pushforward-pullback",
     "def-sfb-finitely-presented-module"
    ],
    "elementary": false,
    "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0038, lemma-adjoint-exact (1), lines 3472 ff.; finite discrete diagrams and the parallel-pair diagram"
+   }
+  },
+  {
+   "text": "Let e identify the transported regular module with the regular module over FΛ_U, using the identity underlying morphism. Conjugate mapMod(F)(t_a,U) by e to get a regular endomorphism p. Because both e and its inverse have identity underlying maps, the equation p.hom α=α t_a,V.hom is precisely the naturality square of step 1. Apply regularExtensionIso_naturality to p and t_a,V, precompose by the extended e.hom, and cancel the adjacent extended e.hom and e.inv. The result is scalarRegular_pullback for the unchanged canonical regular comparison.",
+   "uses": [
+    "def-sfb-modobj-extension",
+    "def-sfb-modobj-transport",
+    "lem-weil-pbc-regular-extension-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/def-sfb-modobj-extension.md",
+    "place": "The map induced by tensoring a morphism; explicit calculation using steps 1 and 2"
+   }
+  },
+  {
+   "text": "Conjugate the pulled-back scalarMatrix by the finite-free comparisons. Apply biproduct.hom_ext' to the input injections and biproduct.hom_ext to the output projections. The mapBiproduct and biproduct.map identities reduce each entry to the scalarRegular_pullback identity of step 4. Cancel the inverse regular comparison to identify the entries. Cancel the inverse finite-free comparison to obtain the required square. The same universal properties cover empty source or target ranks.",
+   "uses": [
+    "def-sfb-finitely-presented-module"
+   ],
+   "elementary": true,
+   "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-proper-base-change-unbounded/sk-prop-proper-base-change-unbounded-pullback.proof.md",
-    "place": "Constructible complexes, local coefficient models: assemble the scalar and finite-presentation comparisons"
+    "place": "'Constructible complexes', local coefficient models on strata: entrywise calculation, filling the omitted scalar-matrix argument"
+   }
+  },
+  {
+   "text": "Use PreservesCokernel.iso for module pullback, which preserves finite colimits and zero morphisms, to identify the pullback of the source cokernel with the cokernel of the pulled-back matrix. Compose with cokernel.mapIso induced by the matrix square and the two finite-free comparisons. The two canonical cokernel projection identities, PreservesCokernel.π_iso_hom and cokernel.π_map, give precisely the required compatibility.",
+   "uses": [
+    "def-sfb-finitely-presented-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-proper-base-change-unbounded/sk-prop-proper-base-change-unbounded-pullback.proof.md",
+    "place": "'Constructible complexes', local coefficient models on strata: cokernel universal property after the finite scalar-matrix comparison"
    }
   }
  ],
  "proof_deps": [
-  "lem-sfb-coefficient-diagram-regular-scalars",
+  "det-def-sfb-constructible-local-model",
   "sk-def-sfb-pulled-back-coefficients",
   "sk-def-sfb-pullback-from-point-comp",
   "sk-def-sfb-coefficient-morphisms",
-  "sk-def-sfb-sheaf-tensor",
-  "det-def-sfb-constructible-local-model",
   "sk-def-sfb-module-pushforward-pullback",
-  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "def-sfb-modobj-transport",
+  "sk-def-sfb-sheaf-tensor",
+  "lem-weil-pbc-regular-extension-comparison",
   "def-sfb-finitely-presented-module",
-  "lem-sfb-finite-colimit-matrix-cokernels"
+  "def-sfb-modobj-extension"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-proper-base-change-unbounded/sk-prop-proper-base-change-unbounded-pullback.proof.md",
-  "place": "Constructible complexes: explicit assembly of the coefficient-diagram regular-scalar lemma and the finite-colimit matrix/cokernel transport lemma; the extracted arguments retain old steps 1–6"
+  "place": "Paragraph 'Constructible complexes', 'via the local coefficient models on strata'; explicit naturality and universal-property argument using the cited existing nodes and Stacks Tag 0038",
+  "note": "F3 formalization: the six steps are implemented using naturality at the condensed scalar endomorphism, regular-module extensionality and the proved RegularExtensionComparison API, followed by the standard biproduct and preserved-cokernel comparisons. The unit route and all public statements and constructions are unchanged."
  },
  "mathlib_searches": [
   {
@@ -232,5 +266,15 @@
   "result": "pass",
   "note": "All node clauses match the Lean: arbitrary h:V→U, commutative condensed Λ, upperStar = mapMod⋙extendScalars(condensedPullbackHom), A_U/A_V from the same entries via the canonical scalarSection, e_r = mapBiproduct ≪≫ biproduct.mapIso of the canonical regular comparison (mapModUnitIso.symm then regularExtensionIso), the matrix square, and a cokernel iso that the projection equation fixes uniquely since pullback is a left adjoint. Edge cases m=0, n=0, zero matrix, zero ring, empty scheme and h=id are covered; no extra hypotheses or universe restriction. No duplicate in side-live or Mathlib. Helper definitions are canonical, the only proof is a sorry in the main theorem, docstrings and blueprint ids are present, lines are at most 100 characters, the statement field is verbatim, and the plain imports are stated proof-dependency modules as rule 7 requires. nt_compile --json is clean in 3.8 s. Advisory: def-sfb-finitely-presented-module and def-pc-scheme have no lean record."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261021T100953-L-4180815",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }
