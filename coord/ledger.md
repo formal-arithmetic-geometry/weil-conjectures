@@ -21037,3 +21037,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:15 L: merged deliver/NR/lem-pur-etale-closed-chart-exceptional-preservation (reviewer FIX; first push; new nodes: 0)
 - 08:15 L: merged deliver/NZ/lem-pur-inverse-image-tensor-adjoint-test (reviewer PASS; first push; new nodes: 0)
 - 08:15 L: merged deliver/N5/lem-pur-completed-operation-tower-substitution (reviewer PASS; after a return; new nodes: 6)
+- 08:15 L: merged deliver/Q15/lem-trf-site-balanced-tensor-chain (reviewer PASS; first push; new nodes: 0)

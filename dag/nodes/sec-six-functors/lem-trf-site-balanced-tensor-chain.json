@@ -15,9 +15,118 @@
   "def-weil-abstract-derived-category",
   "def-pc-tensor-complex-sheaves"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First work with an arbitrary $R$-module sheaf $M$. Write $T_0(V)=M(V)\\otimes_{R(V)}N(V)$ and $E_0(V)=M(V)\\otimes_{R(V)}S(V)$, with the tensor restriction maps, and write $\\eta$ for each sheafification unit. Give $T_0(V)$ the $S(V)$-action $s(x\\otimes n)=x\\otimes sn$. This respects the $R(V)$-balancing relation since $\\varphi(r)sn=s\\varphi(r)n$; the unit, product and additive action laws follow on pure tensors and hence on their sums. Restrictions respect this action since $\\operatorname{res}(sn)=\\operatorname{res}(s)\\operatorname{res}(n)$. Thus $T_0$ is an $S$-module presheaf. Its $S$-module sheafification $H=T_0^\\#$ has underlying abelian sheaf equal to the abelian sheafification of $T_0$. After restricting to $R$, its action extends the original $R$-action on $T_0$, so uniqueness of the action in module sheafification identifies $UH$ with the actual $M\\otimes_R UN$. Likewise $E=E_0^\\#$ is the actual $M\\otimes_R S$, with $S$ acting on the second factor. These constructions define the required action through $N$, without any assertion that tensor sections are sectionwise tensor products.",
+   "uses": [
+    "def-pur-presheaf-tensor-product",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK (section-tensor-product), sectionwise tensor and scalar extension; Tag 03CY (lemma-sheafification-presheaf-modules), unique sheafified action"
+   }
+  },
+  {
+   "text": "Set $K=E\\otimes_S N$. On each object $V$ define $T_0(V)\\to K(V)$ by $x\\otimes n\\mapsto\\tau_S(\\eta(x\\otimes1),n)$, where $\\tau_S$ is the pure-tensor map into the sheaf tensor. For $r\\in R(V)$, the two balanced expressions agree because $\\eta(rx\\otimes1)=\\varphi(r)\\eta(x\\otimes1)$ and $\\tau_S(\\varphi(r)e,n)=\\tau_S(e,\\varphi(r)n)$. The map is $S(V)$-linear for the action of step 1, since $\\tau_S(e,sn)=s\\tau_S(e,n)$. It commutes with restrictions: both orders take $x\\otimes n$ to $\\tau_S(\\eta(\\operatorname{res}(x)\\otimes1),\\operatorname{res}(n))$. The module sheafification universal property therefore gives an $S$-linear sheaf map $a_{M,N}:H\\to K$. Restricting scalars gives the desired forward map on modules with its stated normalization.",
+   "uses": [
+    "def-pur-presheaf-tensor-product",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK (section-tensor-product), tensor balancing and units; Tag 03CY (lemma-sheafification-presheaf-modules), factorization through sheafification"
+   }
+  },
+  {
+   "text": "Define a presheaf pairing $E_0\\times N\\to H$ by $\\beta_V(x\\otimes s,n)=\\eta(x\\otimes sn)$. It is well defined in $x\\otimes s$ because $\\eta(rx\\otimes sn)=\\eta(x\\otimes\\varphi(r)sn)$; it is additive in each input. It is $S(V)$-linear in each input because multiplying $s$ or $n$ by $t$ gives $\\eta(x\\otimes tsn)=t\\eta(x\\otimes sn)$, using commutativity of $S(V)$. It is natural in $V$: restricting this expression gives $\\eta(\\operatorname{res}(x)\\otimes\\operatorname{res}(s)\\operatorname{res}(n))$. Apply the bilinear sheafification extension theorem with ring $\\mathcal O=S$, presheaves $\\mathcal F=E_0$, $\\mathcal G=N$, and target $\\mathcal H=H$. Here $S^\\#=S$ and $N^\\#=N$ by their sheafification universal properties. This supplies an $S$-bilinear sheaf pairing $E\\times N\\to H$. The sheaf tensor universal property then gives an $S$-linear sheaf map $b_{M,N}:K\\to H$, with $b_{M,N}(\\tau_S(\\eta(x\\otimes s),n))=\\eta(x\\otimes sn)$. This is the asserted inverse formula after restriction to $R$.",
+   "uses": [
+    "lem-pc-sites-module-sheafification-bilinear-extension",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0GMW (lemma-sheafification-tensor), bilinear-extension hint; Tag 03EK (section-tensor-product), displayed bilinear universal property"
+   }
+  },
+  {
+   "text": "The composite $b_{M,N}a_{M,N}$ takes $\\eta(x\\otimes n)$ to $\\eta(x\\otimes1n)=\\eta(x\\otimes n)$. Pure tensors generate each module $T_0(V)$, so equality on these tensors and the module sheafification universal property give $ba=1_H$. To show $ab=1_K$, the tensor universal property reduces the claim to equality of $S$-bilinear maps $E\\times N\\to K$. By uniqueness in bilinear sheafification extension, it suffices to compare them on $E_0\\times N$. On $(x\\otimes s,n)$ the composite gives $\\tau_S(\\eta(x\\otimes1),sn)=\\tau_S(s\\eta(x\\otimes1),n)=\\tau_S(\\eta(x\\otimes s),n)$, as required. Additivity covers general elements of $E_0(V)$. Thus both maps are inverse $S$-linear sheaf morphisms; scalar restriction gives inverse $R$-linear sheaf morphisms as well. The same uniqueness arguments show that the stated generator formulas characterize them.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "lem-pc-sites-module-sheafification-bilinear-extension",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CY (lemma-sheafification-presheaf-modules), uniqueness; Tag 0GMW (lemma-sheafification-tensor), bilinear-extension hint; Tag 03EK (section-tensor-product), bilinear universal property"
+   }
+  },
+  {
+   "text": "Let $u:M\\to M'$ be $R$-linear and $v:N\\to N'$ be $S$-linear. The sectionwise tensor maps $u\\otimes v$ and $u\\otimes1_S$ respect restrictions and sheafify. Both composites in the forward naturality square, evaluated on $\\eta(x\\otimes n)$, are $\\tau_S(\\eta(u(x)\\otimes1),v(n))$. Equality on pure tensors extends to $T_0(V)$ by additivity, and then to $H$ by uniqueness of sheafification. This proves simultaneous naturality of $a$ for arbitrary module maps $u,v$, with no requirement that $u$ be a differential or a component of a chain map. Naturality of $b$ follows by composing this equality with the inverse maps from step 4.",
+   "uses": [
+    "def-pur-presheaf-tensor-product",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK (section-tensor-product), functorial sectionwise tensor; Tag 03CY (lemma-sheafification-presheaf-modules), uniqueness"
+   }
+  },
+  {
+   "text": "Now let $M=P^i$ for every integer $i$. In degree $i$ the direct-sum total tensor with $N[0]$ has only the possibly nonzero summand $(i,0)$. Indeed tensor with a zero object is zero: the sheaf tensor universal property identifies maps from $F\\otimes0$ to any sheaf with the unique bilinear pairing $F\\times0\\to H$. The coproduct inclusion and projection for $(i,0)$ are therefore inverse (on all other summands there is only the zero map). Thus the left total has terms $P^i\\otimes_R UN$ and differential $d_P^i\\otimes1_N$; the right total has terms $(P^i\\otimes_R S)\\otimes_S N$ and differential $(d_P^i\\otimes1_S)\\otimes1_N$. The signed second differential vanishes because $d_{N[0]}=0$. Step 5 with $u=d_P^i$, $v=1_N$ says exactly that the maps $a_{P^i,N}$ commute with these differentials. Their inverses commute too, so they form a chain isomorphism. With $u=f^i$ and arbitrary $v$, step 5 gives simultaneous naturality for every chain map $f:P\\to P'$ and $S$-linear map $N\\to N'$. No sum has more than one nonzero term, regardless of the bounds of $P$.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 012Z (definition-associated-simple-complex), signed direct-sum total; cochain complex and N[0] conventions preceding Tag 0113 (definition-homotopy-equivalent-cochain)"
+   }
+  },
+  {
+   "text": "Explicitly, a homotopy $h:f\\simeq g$ has $R$-linear maps $h^i:P^i\\to P'^{i-1}$ with $f^i-g^i=d_{P'}^{i-1}h^i+h^{i+1}d_P^i$. On the left total define $H^i=h^i\\otimes1_N$; on the right define $H_S^i=(h^i\\otimes1_S)\\otimes1_N$. On a generator $x\\otimes n$ the identity $F(f)-F(g)=dH+Hd$ is exactly $(f^i(x)-g^i(x))\\otimes n=(d_{P'}^{i-1}h^i(x)+h^{i+1}d_P^i(x))\\otimes n$. Additivity and sheafification uniqueness prove the identity as a sheaf map. On right-hand nested generators the same equation reads $((f^i(x)-g^i(x))\\otimes s)\\otimes n=((d_{P'}^{i-1}h^i(x)+h^{i+1}d_P^i(x))\\otimes s)\\otimes n$; tensor and bilinear-extension uniqueness extend it to all sections. Step 5 applied to the module map $h^i$ yields $a_{P'^{i-1},N}H^i=U(H_S^i)a_{P^i,N}$, and its version with $v:N\\to N'$ gives the same compatibility with a change of $N$. Thus the tensor functors preserve homotopies and the natural isomorphism descends to chain maps modulo homotopy. The constructions and identities used only tensor relations and universal properties, so impose no flatness or K-flatness condition.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-pc-sites-module-sheafification-bilinear-extension",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Cochain homotopy equation preceding Tag 0113 (definition-homotopy-equivalent-cochain); Tag 012Z (definition-associated-simple-complex), second differential zero"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-presheaf-tensor-product",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-pc-sites-module-sheafification-bilinear-extension",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EK (section-tensor-product), Tag 03CY (lemma-sheafification-presheaf-modules) and Tag 0GMW (lemma-sheafification-tensor): explicit balanced-map construction; degreewise and homotopy verification using homology.tex Tag 012Z and the cochain homotopy equation preceding Tag 0113."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -46,10 +155,52 @@
    "results": "Algebra.TensorProduct.assoc; ModuleCat.extendScalars_assoc; TensorProduct.AlgebraTensorModule.distribBaseChange; ModuleCat.extendScalars_assoc'; TensorProduct.AlgebraTensorModule.assoc; PresheafOfModules.Sheafify.mul_smul; ModuleCat.extendScalars_assoc_assoc; IsLocalization.moduleLid",
    "date": "2026-10-21",
    "verdict": "no match: ordinary module/presheaf tensor, free pullback or scalar-action results do not give the normalized sheaf chain comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*[Rr]estrict|[Rr]estrict.*tensor",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Descent.lean; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: these results provide free pullback, restriction of scalars, ordinary modules, presheaf tensors or individual monoidal maps, not the normalized balanced sheaf chain isomorphism and its homotopy compatibility."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension of scalars and restriction of scalars balanced tensor isomorphism for cochain complexes of sheaves of modules",
+   "results": "ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply; PresheafOfModules.restrictScalarsObj; LinearMap.restrictScalars₁₂; LinearMap.extendScalarsOfIsLocalizationEquiv; SheafOfModules.restrictScalars; ModuleCat.ExtendRestrictScalarsAdj.homEquiv; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars; RestrictScalars.addEquiv",
+   "date": "2026-10-21",
+   "verdict": "no match: these results provide free pullback, restriction of scalars, ordinary modules, presheaf tensors or individual monoidal maps, not the normalized balanced sheaf chain isomorphism and its homotopy compatibility."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a ring sheaf morphism R to S on a site, the isomorphism between P tensor_R restriction N[0] and restriction of (P tensor_R S) tensor_S N[0] is natural in complexes and chain homotopies",
+   "results": "SheafOfModules.pullbackObjFreeIso_hom_naturality; SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; PresheafOfModules.Monoidal.tensorObjMap; HomologicalComplex.ιTensorObj; PresheafOfModules.Monoidal.tensorObj; HomologicalComplex.rightUnitor'_inv_comm",
+   "date": "2026-10-21",
+   "verdict": "no match: these results provide free pullback, restriction of scalars, ordinary modules, presheaf tensors or individual monoidal maps, not the normalized balanced sheaf chain isomorphism and its homotopy compatibility."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tensor\", \"restrictScalars\"",
+   "results": "TensorProduct.AlgebraTensorModule.restrictScalars_curry; TensorProduct.AlgebraTensorModule.restrictScalars_lTensor; TensorProduct.AlgebraTensorModule.restrictScalars_rTensor; Algebra.TensorProduct.restrictScalars_lift; Algebra.TensorProduct.map_restrictScalars_comp_includeRight",
+   "date": "2026-10-21",
+   "verdict": "no match: these results provide free pullback, restriction of scalars, ordinary modules, presheaf tensors or individual monoidal maps, not the normalized balanced sheaf chain isomorphism and its homotopy compatibility."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheafified balanced tensor cancellation, (M tensor_R S) tensor_S N is M tensor_R N, compatibility with the scalar action and sheafification unit",
+   "results": "PresheafOfModules.Sheafify.mul_smul; IsLocalizedModule.map_lTensor; PresheafOfModules.Monoidal.tensorObj; PresheafOfModules.Sheafify.one_smul; CategoryTheory.Sheaf.monoidalCategory; PresheafOfModules.Sheafify.add_smul; SheafOfModules.map_ιFree_mapFree_hom_assoc; PresheafOfModules.Sheafify.map_smul_eq",
+   "date": "2026-10-21",
+   "verdict": "no match: these results provide free pullback, restriction of scalars, ordinary modules, presheaf tensors or individual monoidal maps, not the normalized balanced sheaf chain isomorphism and its homotopy compatibility."
+  },
+  {
+   "tool": "grep",
+   "query": "assoc|distribBaseChange|restrictScalars",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: these results provide free pullback, restriction of scalars, ordinary modules, presheaf tensors or individual monoidal maps, not the normalized balanced sheaf chain isomorphism and its homotopy compatibility."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-site-derived-tensor-restriction",
@@ -68,5 +219,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-trf-site-balanced-tensor-chain",
+  "worker": "stage1",
+  "summary": "Constructed the action through N using module sheafification, descended both normalized maps with existing universal-property nodes, proved both inverse identities, and checked simultaneous module naturality, signed total differentials and the explicit homotopy equation. No new nodes; no flatness hypotheses and no identification of tensor sections with sectionwise tensors.",
+  "blueprint": "Realizes lem-trf-ordinary-kunneth proof Step 2, coefficient transport: the equality P tensor_A Q = (P tensor_A kappa) tensor_kappa Q, by a normalized sheaf chain isomorphism, including the naturality needed for homotopy passage.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-sites-module-sheafification-bilinear-extension",
+    "why": "Generic extension and uniqueness of bilinear maps through module sheafification, applied with O=S to E_0 and N; the Kunneth unit supplies no module-sheafification universal property."
+   },
+   {
+    "node": "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "why": "Generic universal property converting an S-bilinear sheaf pairing to an S-linear tensor map and detecting equality; no node of the Kunneth unit states this property."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-sites-module-sheafification-bilinear-extension",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q15-cf649df25",
+  "group": "Q15",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q15-cf649df25 (reviewer sub-agent of L); spot-checked: I read the item in full. The delivery has 0 new nodes, and the statement and stmt_deps are unchanged. The item is still unsplit in live and side-live, and it has no repair note. Proof: step 1 builds the S-action on T_0, which respects the R-balancing because S(V) is commutative; the uniqueness clause of def-weil-presheaf-modules-sheafification then identifies UH with M⊗_R UN. Step 2 builds a(x⊗n)=τ(η(x⊗1),n), which is balanced via η(rx⊗1)=φ(r)η(x⊗1), and gets it from the factorisation property. Step 3 builds b from β(x⊗s,n)=η(x⊗sn). I checked β is R-balanced and S-bilinear and that every hypothesis of lem-pc-sites-module-sheafification-bilinear-extension holds (O=S presheaf with S^#=S, N^#≅N, H an S-module sheaf); lem-pc-sites-sheaf-tensor-bilinear-universal then gives b. Step 4: ba=1 on generators, and ab=1 because the bilinear maps are determined on E_0×N; the identity τ(η(x⊗1),sn)=τ(η(x⊗s),n) holds. Step 5: naturality for any R-linear u and S-linear v. Step 6: F⊗0=0 by the bilinear universal property, so each degree has only the (i,0) summand and the sign term vanishes; the a's form a chain isomorphism with no boundedness assumption. Step 7: the homotopy h⊗1 needs no Koszul sign, and compatibility with a is step 5 applied to u=h^i. Edge cases M=0, N=0, φ=id, S=0, unbounded P all hold. The Stacks places check out against the tags file: 03EK (sites-modules l.3551), 0GMW (l.3606), 03CY (l.815), and homology 012Z/0113. The blueprint place, main-20261015 lem-trf-ordinary-kunneth Step 2 (l.64-68), is correct. No SGA is cited. The cancellation nodes (lem-pur-change-of-rings-tensor-cancellation, lem-sfb-scalar-tensor-cancellation-independent) only state that an unnormalised module isomorphism exists, so they are not duplicates. I accept both declared tool uses of the generic lem-pc universal properties. No fixes."
  }
 }
