@@ -15,7 +15,7 @@
  ],
  "proof": [
   {
-   "text": "Choose an algebraic closure $\\Omega/k$ by [def-weil-algebraic-closure]. The final clause of [lem-pc-kbar-pure-insep] says that $\\Omega/k$ is purely inseparable because $k$ is separably closed. This is the characteristic-independent purely inseparable assertion; in characteristic zero the extension is trivial. Put $A_\\Omega=A\\otimes_k\\Omega$, $B_\\Omega=B\\otimes_k\\Omega$ and $T=(A\\otimes_kB)\\otimes_k\\Omega$.",
+   "text": "Choose the algebraic closure Ω of k by [def-weil-algebraic-closure]. By [lem-pc-kbar-pure-insep], Ω/k is purely inseparable, in every characteristic. Set AΩ = Ω ⊗[k] A, BΩ = Ω ⊗[k] B, R = AΩ/nilradical(AΩ), and S = BΩ/nilradical(BΩ).",
    "uses": [
     "def-weil-algebraic-closure",
     "lem-pc-kbar-pure-insep"
@@ -23,23 +23,43 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00I7, lemma-separably-closed-irreducible, first paragraph: pass to the algebraically closed purely inseparable extension; its algebraic closure can be used in place of its perfect closure."
+    "place": "Tag 00I7, first paragraph."
    }
   },
   {
-   "text": "For each of the three commutative $k$-algebras $C=A,B,A\\otimes_kB$, apply [lem-pc-homeo-pure-insep] to the $k$-scheme $\\operatorname{Spec}C$ and the purely inseparable extension $\\Omega/k$ from Step 1. By [lem-weil-pbc-fibre-product-affine-spectra] its base change is $\\operatorname{Spec}(C\\otimes_k\\Omega)$, with the prescribed projection. Thus $\\operatorname{Spec}A_\\Omega$ and $\\operatorname{Spec}B_\\Omega$ are irreducible, and $\\operatorname{Spec}T$ is homeomorphic to $\\operatorname{Spec}(A\\otimes_kB)$. A homeomorphism preserves nonemptiness and the condition that two nonempty open subsets meet, hence preserves irreducibility.",
-   "uses": [
-    "lem-pc-homeo-pure-insep",
-    "lem-weil-pbc-fibre-product-affine-spectra"
-   ],
-   "elementary": false,
+   "text": "For each k-algebra C = A, B, A ⊗[k] B, apply the affine Mathlib theorem PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable k Ω C. Composing with tensor commutation identifies Spec(Ω ⊗[k] C) with Spec C. Homeomorph.irreducibleSpace_iff transports irreducibility. This uses the affine theorem directly, with no scheme fibre-product construction.",
+   "uses": [],
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00I7, first paragraph, maps induced by the purely inseparable extension (Tag 0BRA, lemma-p-ring-map); affine base-change identification Tag 01I4."
+    "place": "Tag 00I7, first paragraph, using the affine homeomorphism of Tag 0BRA."
    }
   },
   {
-   "text": "Identify $T$ with $V=A_\\Omega\\otimes_\\Omega B_\\Omega$ as follows. Send $(a\\otimes\\lambda)\\otimes(b\\otimes\\mu)$ to $(a\\otimes b)\\otimes\\lambda\\mu$; the inverse sends $(a\\otimes b)\\otimes\\nu$ to $(a\\otimes\\nu)\\otimes(b\\otimes1)$. These formulas are balanced in each tensor variable and commute with the scalar actions. The tensor universal property and generation by pure tensors [def-weil-pbc-module-tensor-product] extend them to linear maps. The multiplication rule and universal property of [lem-weil-pbc-algebra-tensor-pushout-universal-property] show they are unital ring homomorphisms. Their composites are the identity on pure tensors: in the second composite move $\\mu$ from the first factor to the second using the balancing over $\\Omega$. Hence they are inverse.",
+   "text": "Apply [lem-zl-spectrum-irreducible-nilradical-prime] to AΩ and BΩ. Their nilradicals are prime, so the quotient-domain instance gives IsDomain R and IsDomain S, including nontriviality.",
+   "uses": [
+    "lem-zl-spectrum-irreducible-nilradical-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00I7, second paragraph."
+   }
+  },
+  {
+   "text": "For any ring C and ideal I ≤ nilradical C, the quotient map is surjective and its kernel is I. Thus [lem-pur-all-element-powers-spectrum-homeomorphism], with exponent 1 for every target element, gives a homeomorphism Spec C ≃ Spec(C/I). For any two k-algebras D,E, let I be the extension of nilradical E along includeRight : E → D ⊗[k] E. Ideal.map_le_iff_le_comap and preservation of nilpotence under ring maps give I ≤ nilradical(D ⊗[k] E). Algebra.TensorProduct.tensorQuotientEquiv identifies its quotient with D ⊗[k] (E/nilradical E). Consequently reducing the right factor preserves the tensor spectrum; commute to reduce the left factor as well. This sequential quotient construction avoids constructing a combined quotient kernel.",
+   "uses": [
+    "lem-pur-all-element-powers-spectrum-homeomorphism",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00I7, second paragraph; elementary tensor-quotient presentation."
+   }
+  },
+  {
+   "text": "Use Algebra.TensorProduct.cancelBaseChange and Algebra.TensorProduct.assoc to identify AΩ ⊗[Ω] BΩ with Ω ⊗[k] (A ⊗[k] B). Compose the ring-equivalence spectrum homeomorphism, the purely inseparable homeomorphism of Step 2 and the two reduction homeomorphisms of Step 4. This gives Spec(A ⊗[k] B) ≃ Spec(R ⊗[Ω] S).",
    "uses": [
     "def-weil-pbc-module-tensor-product",
     "lem-weil-pbc-algebra-tensor-pushout-universal-property"
@@ -47,43 +67,11 @@
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00I7, first paragraph, displayed tensor base-change identification, with both maps written out."
+    "place": "Tag 00I7, first displayed base-change identification and second-paragraph reduction."
    }
   },
   {
-   "text": "Write $N_C$ for the ideal of nilpotent elements of a commutative ring $C$. Apply [lem-zl-spectrum-irreducible-nilradical-prime] to $A_\\Omega$ and $B_\\Omega$, whose spectra are irreducible by Step 2: their nilradicals are proper prime ideals. Consequently $R=A_\\Omega/N_{A_\\Omega}$ and $S=B_\\Omega/N_{B_\\Omega}$ are nonzero domains. Indeed $\\bar x\\bar y=0$ means $xy$ lies in the corresponding prime ideal, hence $\\bar x=0$ or $\\bar y=0$; properness gives $1\\ne0$. They remain commutative unital $\\Omega$-algebras through the quotient structure maps.",
-   "uses": [
-    "lem-zl-spectrum-irreducible-nilradical-prime"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00I7, second paragraph: replace the two algebras by their reductions; Tag 00ES(2), lemma-irreducible."
-   }
-  },
-  {
-   "text": "Let $U=R\\otimes_\\Omega S$. The quotient maps induce the surjective ring homomorphism $q:V\\to U$, $a\\otimes b\\mapsto\\bar a\\otimes\\bar b$, by [lem-weil-pbc-algebra-tensor-pushout-universal-property]. It is surjective since every pure tensor lifts and pure tensors generate [def-weil-pbc-module-tensor-product]. Let $J$ be the ideal of $V$ generated by $a\\otimes1$ for $a\\in N_{A_\\Omega}$ and $1\\otimes b$ for $b\\in N_{B_\\Omega}$. These generators map to zero. Conversely, $\\bar a\\otimes\\bar b\\mapsto(a\\otimes b)+J$ is independent of the representatives, since changing either representative changes the result by an element of $J$. The same tensor universal property makes this a ring map $U\\to V/J$, inverse to the induced map $V/J\\to U$ on pure tensors. Therefore $\\ker q=J$.",
-   "uses": [
-    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
-    "def-weil-pbc-module-tensor-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00I7, second paragraph, reduction of the factors; elementary tensor-quotient presentation spelling out that reduction."
-   }
-  },
-  {
-   "text": "Every element of $J$ is nilpotent. Each displayed generator $a\\otimes1$ or $1\\otimes b$ is nilpotent by taking the same power as for $a$ or $b$. Write any $z\\in J$ as a finite sum $z=\\sum_{i=1}^r t_i g_i$ with such generators $g_i$, and choose $e_i\\ge1$ with $g_i^{e_i}=0$. In the expansion of $z^{1+\\sum_i(e_i-1)}$, every monomial contains at least $e_i$ occurrences of some $g_i$, so vanishes. For the empty sum $z=0$. Thus $\\ker q=J$ consists of nilpotent elements. This uses only finitely many generators for each individual element, and does not assert that either nilradical or $J$ has a uniform nilpotence exponent.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00I7, second paragraph, justification that passing to reductions does not change the prime spectrum: explicit nil-kernel calculation."
-   }
-  },
-  {
-   "text": "The nonzero $\\Omega$-vector spaces $R,S$ of Step 4 have nonzero tensor product $U$ by [lem-pur-field-vector-space-tensor-nontrivial]. Suppose $U$ had a nonzero zero-divisor. Clause (2) of [lem-weil-pbc-tensor-finite-type-limit] supplies finitely generated $\\Omega$-subalgebras $R\\prime\\subseteq R$ and $S\\prime\\subseteq S$ whose tensor product has a nonzero zero-divisor. These are nonzero domains: they are unital subrings of the domains $R,S$. Since $\\Omega$ is algebraically closed and $S\\prime$ is finitely generated over $\\Omega$, [lem-weil-pbc-algclosed-finite-type-tensor-domain] applies with base $\\Omega$, left algebra $R\\prime$ and right algebra $S\\prime$, and says their tensor product is a domain, a contradiction. Thus $U$ is a nonzero ring without nonzero zero-divisors, hence a domain. No finite-generation assumption on $R$ or $S$ was used.",
+   "text": "The nonzero Ω-vector spaces R,S have nonzero tensor product U by [lem-pur-field-vector-space-tensor-nontrivial]. If x,y are nonzero elements of U with xy=0, clause (2) of [lem-weil-pbc-tensor-finite-type-limit] supplies finite-type Ω-subalgebras R′, S′ and nonzero x′,y′ in R′ ⊗[Ω] S′ with x′y′=0. The subalgebras inherit domain structures from R,S. Apply [lem-weil-pbc-algclosed-finite-type-tensor-domain] to R′,S′ to contradict that product. Thus U has no zero divisors and is nontrivial, hence is a domain.",
    "uses": [
     "lem-pur-field-vector-space-tensor-nontrivial",
     "lem-weil-pbc-tensor-finite-type-limit",
@@ -92,29 +80,28 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00I7, second paragraph, finite-type reduction using Tag 00I3(2), lemma-limit-argument; final paragraph supplied by the existing algebraically closed finite-type tensor-domain theorem. The separate perfect-reduced theorem is unnecessary when zero-divisors are excluded directly."
+    "place": "Tag 00I7, second and final paragraphs, using Tag 00I3(2)."
    }
   },
   {
-   "text": "Since $U$ is a domain, its zero ideal is prime and its only nilpotent element is zero. Therefore the nilradical of $V$ is exactly $\\ker q$: one inclusion follows by applying $q$ to a nilpotent element, and the other is Step 6. This kernel is proper since $q(1)=1\\ne0$ in $U$; if $xy\\in\\ker q$, then $q(x)q(y)=0$, hence $q(x)=0$ or $q(y)=0$. Thus the nilradical of $V$ is prime. By [lem-zl-spectrum-irreducible-nilradical-prime], $\\operatorname{Spec}V$ is irreducible, including nonempty. The isomorphism $T\\cong V$ of Step 3 and the homeomorphism of Step 2 give irreducibility of $\\operatorname{Spec}(A\\otimes_kB)$, as required.",
+   "text": "A domain has prime zero ideal and irreducible prime spectrum, by the domain instance of [lem-zl-spectrum-irreducible-nilradical-prime]. Transport the irreducibility of Spec U through the homeomorphism of Step 5. The underlying space of Spec(CommRingCat.of C) is definitionally PrimeSpectrum C, so this proves the stated scheme-spectrum conclusion.",
    "uses": [
     "lem-zl-spectrum-irreducible-nilradical-prime"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00I7, conclusion after the reduction; Tag 00ES(2), lemma-irreducible, for the final irreducibility criterion."
+    "place": "Tag 00I7, conclusion."
    }
   }
  ],
  "proof_deps": [
   "def-weil-algebraic-closure",
   "lem-pc-kbar-pure-insep",
-  "lem-pc-homeo-pure-insep",
-  "lem-weil-pbc-fibre-product-affine-spectra",
-  "def-weil-pbc-module-tensor-product",
-  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
   "lem-zl-spectrum-irreducible-nilradical-prime",
+  "lem-pur-all-element-powers-spectrum-homeomorphism",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "def-weil-pbc-module-tensor-product",
   "lem-pur-field-vector-space-tensor-nontrivial",
   "lem-weil-pbc-tensor-finite-type-limit",
   "lem-weil-pbc-algclosed-finite-type-tensor-domain"
@@ -122,7 +109,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Tag 00I7, lemma-separably-closed-irreducible. Follows its purely inseparable scalar extension, reduction of the factors, and finite-type reduction. The existing algebraically closed finite-type tensor-domain theorem supplies the final paragraph; excluding zero-divisors directly avoids the redundant perfect-reduced intermediate theorem. Quotient maps and nil-kernel argument are expanded."
+  "place": "Tag 00I7, lemma-separably-closed-irreducible; M9 Lean proof follows the purely inseparable scalar extension, reduction of factors, and finite-type zero-divisor reduction. Mathlib affine spectrum homeomorphisms replace scheme fibre products, and successive tensor-quotient equivalences replace the combined nil-kernel calculation. Private proved helper patterns are adapted from WeilConjectures.FieldTheory.SepClosedTensorReduction."
  },
  "mathlib_searches": [
   {
@@ -239,7 +226,6 @@
   ]
  },
  "tool_uses": [
-  "lem-pc-homeo-pure-insep",
   "lem-weil-pbc-tensor-finite-type-limit"
  ],
  "reviewed": {
@@ -268,5 +254,15 @@
   "date": "2026-10-17",
   "existing": false
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M9",
+  "result": "pass",
+  "landing": "20261021T111352-L-86083",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }
