@@ -19,11 +19,179 @@
   "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
   "def-pc-kflat-complex",
   "lem-pc-kflat-resolution",
-  "def-pur-kinjective-complex"
+  "def-pur-kinjective-complex",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-sheaf-restrict-scalars"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the sheaf equivalence of [lem-weil-pbc-diagram-site-realization] for $J=\\mathbf N_{\\ge1}^{\\mathrm{op}}$. The diagram of quotient ring sheaves gives $B(n,U)=\\underline{A_n}_T(U)$ on this site: its restrictions in the index direction are the actual quotient maps. The sheaf condition is vertical, hence holds because each $\\underline{A_n}_T$ is a sheaf. Unpack [def-weil-sheaf-of-modules-category] for this ring. Restriction to the $n$th slice gives an $\\underline{A_n}_T$-module $M_n$; the horizontal restrictions give exactly the required semilinear transitions. Conversely these data define $M(n,U)=M_n(U)$, with restriction along a horizontal-vertical composite the composite of the supplied transition and vertical restriction. Their commuting square and cocycle give the functor laws. These constructions are inverse on objects and maps. Restricting along $\\Delta\\underline A_T\\to B$ leaves all section groups and transitions unchanged, as in [def-pc-sheaf-restrict-scalars].",
+   "uses": [
+    "lem-weil-pbc-diagram-site-realization",
+    "def-weil-sheaf-of-modules-category",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0940 (section-derived-limits), sequence site; sites-modules.tex Tags 03CW (definition-sheaf-modules) and 03CS (restriction of scalars). Explicit varying-ring unpacking of the product-site equivalence."
+   }
+  },
+  {
+   "text": "Sheafification on the vertical site is componentwise. Indeed, sheafify each slice of a presheaf module using [def-weil-presheaf-modules-sheafification]; each transition extends uniquely to these sheafifications. Uniqueness gives all transition identities. Maps from this system to any sheaf system correspond, slice by slice, to maps from the original presheaf system, so this is the sheafification universal property. Now [def-pur-sheaf-tensor-product] computes a sheaf tensor by sheafifying sectionwise tensors. Its $n$th slice is therefore the ordinary tensor on $T$, with transition on pure tensors $x\\otimes y\\mapsto t(x)\\otimes t(y)$. Direct sums are componentwise as well: maps out of their componentwise sums are precisely families of system maps out of the summands. Consequently evaluation commutes with the direct-sum total tensor and its signed differential in [def-pc-tensor-complex-sheaves]. These identifications send all local pure tensors to themselves.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "def-pur-sheaf-tensor-product",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CY (lemma-sheafification-presheaf-modules) and 03EK (section-tensor-product); vertical-site universal-property calculation; sites-cohomology.tex Tag 06YL (section-flat)."
+   }
+  },
+  {
+   "text": "For a system map $f:M\\to N$, [def-weil-sheaf-of-modules-category] gives its kernel as sectionwise kernels and its cokernel as the sheafification of sectionwise cokernels. Step 2 makes these precisely $(\\ker f_n)_n$ and $(\\operatorname{coker}f_n)_n$ with the induced semilinear transitions. Thus cohomology is componentwise. Restriction $U$ preserves these objects and is exact. It reflects isomorphisms of module sheaves: the inverse of a bijective underlying module map is module-linear, and the component inverses commute with the transitions. Exactness of constant-ring tower evaluation is also [lem-weil-tower-category-levelwise-abelian]. By [lem-weil-pbc-exact-functor-derived-factorization], $U$ and $\\Delta$ induce exact derived functors represented termwise.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-tower-category-levelwise-abelian",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DA (lemma-abelian), followed by homology.tex Tag 02MZ (lemma-inverse-systems-abelian); derived.tex localization of an exact functor."
+   }
+  },
+  {
+   "text": "The derived $U$ is conservative, not merely conservative on strict maps. By [lem-pc-quasi-isomorphisms-multiplicative-system] and [lem-pc-left-localization-fraction-representation], write any derived morphism as $\\alpha=[s]^{-1}[f]$ with $s:Y\\to Z$ a quasi-isomorphism and $f:X\\to Z$ a map of complexes. If $U\\alpha$ is invertible, then $[Uf]$ is invertible. Applying the cohomology functors of [def-weil-abstract-derived-category] makes every $H^q(Uf)=U(H^q f)$ invertible. The abelian conservativity from Step 3 makes every $H^q f$ invertible. Hence $f$ is a quasi-isomorphism and $\\alpha$ is invertible. This proves clause (1) on the ordinary unbounded derived categories.",
+   "uses": [
+    "lem-pc-quasi-isomorphisms-multiplicative-system",
+    "lem-pc-left-localization-fraction-representation",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RT (lemma-acyclic), calculus of fractions; categories.tex Tag 04VE (lemma-morphisms-left-localization)."
+   }
+  },
+  {
+   "text": "Choose a single flat-term K-flat representative $Q\\to V$ by [lem-pc-kflat-resolution]. The diagonal is K-flat on the constant-ring diagram site: for every acyclic tower complex $E$, Step 3 makes each $E_n$ acyclic, while Step 2 identifies $(E\\otimes\\Delta Q)_n$ with $E_n\\otimes Q$. Each is acyclic by [def-pc-kflat-complex], so the tower tensor is acyclic. Its terms are flat too: tensoring with $\\Delta Q^q$ is componentwise tensoring with the flat sheaf $Q^q$ and thus preserves short exact sequences. Moreover $\\Delta Q\\to\\Delta V$ is a quasi-isomorphism by componentwise cohomology. This checks the resolving representative on the whole diagram site, rather than choosing unrelated representatives at different levels.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "def-pc-kflat-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution) and 06YN (definition-K-flat), applied using the componentwise calculations in Steps 2-3."
+   }
+  },
+  {
+   "text": "Apply [lem-pur-derived-change-of-rings] on the small diagram site to $\\Delta\\underline A_T\\to B_T$ and the K-flat representative $\\Delta Q$. It represents $S_T\\Delta V$ by $(\\Delta Q)\\otimes_{\\Delta\\underline A_T}B_T$. Step 2 identifies this complex with $X_Q=(Q\\otimes_A\\underline{A_n}_T)_n$, with transitions $1_Q\\otimes(\\underline{A_{n+1}}_T\\to\\underline{A_n}_T)$. The quotient augmentation is the natural chain map $i_Q:\\Delta Q\\to UX_Q$, $x\\mapsto x\\otimes1$. The compatibility equation is $(1\\otimes q_{n+1,n})(x\\otimes1)=x\\otimes1$; hence this is a strict map of towers, and localization gives $i_V$. Quasi-isomorphism invariance between K-flat representatives, including its canonical comparison, is part (1)-(2) of the cited change-of-rings theorem. This proves clause (2).",
+   "uses": [
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YT (lemma-derived-tor-quasi-isomorphism-other-side) and 06YY (lemma-derived-base-change), for identity geometric morphism and change of rings."
+   }
+  },
+  {
+   "text": "For completeness, the preservation assertion in clause (3) is an explicit null-homotopy calculation. If $E$ is an acyclic tower complex and $f:E\\to\\Delta J$ a chain map with $J$ K-injective, then $f_n=f_1p_{n1}$, where $p_{n1}:E_n\\to E_1$ is the transition composite (identity for $n=1$). Componentwise exactness makes $E_1$ acyclic. By [def-pur-kinjective-complex], choose $h^q:E_1^q\\to J^{q-1}$ with $f_1=dh+hd$. Set $h_n^q=h^q p_{n1}^q$. The equations $p_{n1}=p_{m1}p_{nm}$ for $n\\ge m$ show this is a tower homotopy, and $dh_n+h_nd=(dh+hd)p_{n1}=f_n$. Thus $\\Delta J$ is K-injective. Equivalently, $\\operatorname{ev}_1\\dashv\\Delta$, the adjunction given by $f\\mapsto f_1$ and $g\\mapsto(gp_{n1})_n$, has exact left adjoint.",
+   "uses": [
+    "def-pur-kinjective-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070H (definition-K-injective); explicit instance of Tag 08BJ (lemma-adjoint-preserve-K-injectives), with the adjunction and null-homotopy written out."
+   }
+  },
+  {
+   "text": "For any complex $J$, $J$ with identity projections is the literal limit of $\\Delta J$: a compatible family of maps to $J$ has all its components equal, since every pair of levels has a common higher level. Thus the limit cone is represented by $J$ itself. Choose a K-injective representative $V\\to J$ by [prop-pur-kinjective-resolutions-exist]. Step 7 and [lem-weil-pbc-ringed-strict-tower-homotopy-limit] compute $\\mathcal L_T\\Delta V$ by $\\lim\\Delta J=J$. The resulting $\\ell_V$ is the identity on this representative. Its inverse is the canonical constant-cone map. These identifications are natural on K-injective representatives, and [lem-weil-pbc-kinjective-hom-derived] identifies every derived map between such representatives with its homotopy class. Hence $\\ell$ is a canonical natural isomorphism on $D_T$, proving clause (3).",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0940 (section-derived-limits) and Tag 0941 (lemma-derived-limit-is-ok); injectives.tex Tag 079P (theorem-K-injective-embedding-grothendieck); derived.tex Tag 070I (lemma-K-injective)."
+   }
+  },
+  {
+   "text": "By Step 6, $U_T\\mathcal R_TV$ is one strict tower presenting all the derived tensors $V\\otimes_A^L\\underline{A_n}_T$, with their actual quotient transitions. Its total derived limit is the functor of [lem-sp-completed-pullback-adjunction], namely the completion reflector $C_T$. This yields the canonical comparison $\\mathcal L_TU_T\\mathcal R_T\\cong C_T$, interpreted with the full-subcategory inclusion when necessary. Both sides use the same strict quotient complex $UX_Q$ and the same total right derived inverse limit of [lem-weil-pbc-ringed-strict-tower-homotopy-limit]; this comparison does not replace a strict tower by an independently chosen diagram in $D_T$.",
+   "uses": [
+    "lem-sp-completed-pullback-adjunction",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099M (lemma-naive-completion); Tag 099N (lemma-pushforward-Noetherian-case), completion reflector; sites-cohomology.tex Tag 0941."
+   }
+  },
+  {
+   "text": "Identify the entire augmented map on a representative. Write $a:UX_Q\\to I$ for a K-injective tower resolution and $j:Q\\to J$ for a K-injective resolution, supplied by [prop-pur-kinjective-resolutions-exist]. The map $ai_Q:\\Delta Q\\to I$ corresponds to a chain map $k:Q\\to\\lim I$ with projections $k_n=a_n(x\\mapsto x\\otimes1)$. Because $\\Delta J$ and $I$ are K-injective, [lem-weil-pbc-kinjective-hom-derived] represents $[ai_Q][\\Delta j]^{-1}$ by a chain map $b:\\Delta J\\to I$, with $b\\Delta j$ homotopic to $ai_Q$. Taking the literal limit carries a tower homotopy to a homotopy (apply the limit to its degree maps). Since $\\lim\\Delta J=J$, this says $(\\lim b)j$ is homotopic to $k$. The derived-limit computation of [lem-weil-pbc-ringed-strict-tower-homotopy-limit] therefore identifies $[k]$ with $\\mathcal L_T(i_V)\\ell_V^{-1}$, after the comparison $[Q]\\cong V$. This verifies a derived morphism, rather than only its projections after evaluation.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941 (lemma-derived-limit-is-ok), total derived inverse limit computed on K-injectives; derived.tex Tag 070I (lemma-K-injective), full faithfulness on morphisms into K-injectives. Explicit augmentation calculation."
+   }
+  },
+  {
+   "text": "Since $A$ is Noetherian, choose finitely many generators of $I$ using [def-weil-pbc-noetherian-ring]. Apply [lem-weil-pbc-constant-completion-equivalence] with coefficient sheaf $\\underline A_T$. Its final paragraph identifies Koszul completion with the quotient-tower completion, respecting the units: the canonical quotient-tower map is the completion unit. On $Q$ that canonical map is precisely the augmentation $x\\mapsto x\\otimes1$ into the quotient system, followed by its K-injective total-limit comparison; Step 10 computes it as $[k]$. Under the reflector identification of Step 9 it is therefore $\\eta_{T,V}$, giving $\\mathcal L_T(i_V)\\ell_V^{-1}=\\eta_{T,V}$. For a chain map $c:Q\\to Q'$ the strict equation $(c\\otimes1)(x\\otimes1)=c(x)\\otimes1$ proves the naturality square before taking derived limits. The canonical K-flat comparisons of Step 6 and [lem-weil-pbc-localization-universal-property] descend this square and the comparison of Step 9 to every derived morphism. Thus clause (4) and its natural-transformation assertion hold.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099M (lemma-naive-completion); algebraization.tex Tag 0A0E (lemma-derived-completion-koszul), augmentation-compatible completion; categories.tex localization universal property."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-kflat-complex",
+  "def-pc-sheaf-restrict-scalars",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-kinjective-complex",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-sheaf-of-modules-category",
+  "lem-pc-kflat-resolution",
+  "lem-pc-left-localization-fraction-representation",
+  "lem-pc-quasi-isomorphisms-multiplicative-system",
+  "lem-pur-derived-change-of-rings",
+  "lem-sp-completed-pullback-adjunction",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-diagram-site-realization",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-tower-category-levelwise-abelian",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Strict quotient-system and diagonal normalization assembled from Tags 0940/0941; K-flat resolution and change of rings from 06YS/06YT/06YY, K-injective definition and comparison from derived.tex 070H/070I; completion unit from proetale.tex 099M and algebraization.tex 0A0E via the existing constant-completion-equivalence node. The combined normalization is agent-formulated."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -59,10 +227,45 @@
    "results": "none; service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
    "date": "2026-10-21",
    "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "([Kk]Injective.*[Cc]onstant|[Cc]onstant.*[Kk]Injective|quotient.*[Kk][Ff]lat)",
+   "results": "none",
+   "date": "2026-10-21",
+   "verdict": "no match: hits give ordinary adic completion, general derived-category foundations, bounded-below injectivity or ordinary injective preservation, not the strict quotient-site model with both normalizations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived completion of sheaves is the derived inverse limit of the quotient tensor tower and its unit is the quotient augmentation",
+   "results": "AdicCompletion; HasDerivedCategory; HasDerivedCategory.standard; DerivedCategory.quotientCompQhIso; CategoryTheory.Sheaf.isColimitSheafifyCocone; SheafOfModules.hasLimit; SheafOfModules.hasLimitsOfShape; derivationQuotKerSq",
+   "date": "2026-10-21",
+   "verdict": "no match: hits give ordinary adic completion, general derived-category foundations, bounded-below injectivity or ordinary injective preservation, not the strict quotient-site model with both normalizations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.IsKInjective, CategoryTheory.Functor.const",
+   "results": "none",
+   "date": "2026-10-21",
+   "verdict": "no match: hits give ordinary adic completion, general derived-category foundations, bounded-below injectivity or ordinary injective preservation, not the strict quotient-site model with both normalizations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constant inverse sequences of sheaf complexes preserve K injectives and strict quotient tensor towers compute derived completion with its unit",
+   "results": "CochainComplex.isKInjective_of_injective; CochainComplex.IsKInjective.Qh_map_bijective; CochainComplex.cm5b.instInjectiveXIntI; CochainComplex.cm5b.I_X; DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective; localCohomology.diagram; CochainComplex.cm5b.I; LightCondensed.instIsGrothendieckAbelianLightCondMod",
+   "date": "2026-10-21",
+   "verdict": "no match: hits give ordinary adic completion, general derived-category foundations, bounded-below injectivity or ordinary injective preservation, not the strict quotient-site model with both normalizations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The diagonal functor from an abelian category to inverse sequences is right adjoint to evaluation at the terminal index and preserves K injective complexes",
+   "results": "CategoryTheory.IsGrothendieckAbelian.GabrielPopescu.preservesInjectiveObjects; CategoryTheory.Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms; CategoryTheory.abelianOfAdjunction; CategoryTheory.Adjunction.mapInjectivePresentation; CategoryTheory.preservesHomology_preadditiveYonedaObj_of_injective; CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ; CategoryTheory.Abelian.isoModSerre_kernel_eq_isLocal_of_rightAdjoint; CategoryTheory.Injective.injective_of_adjoint",
+   "date": "2026-10-21",
+   "verdict": "no match: hits give ordinary adic completion, general derived-category foundations, bounded-below injectivity or ordinary injective preservation, not the strict quotient-site model with both normalizations."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-compact-support-completed-projection-coherence",
@@ -83,5 +286,89 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-strict-quotient-diagonal-normalization",
+  "worker": "stage1",
+  "summary": "Eleven steps prove the strict semilinear model, componentwise sheafification/tensor and exact conservative restriction, use one diagonal K-flat resolution, give an explicit level-1 null-homotopy proving preservation of K-injectives, and identify the full completion-unit morphism on K-injective limits. Reuses existing nodes only; no statement change or new node.",
+  "blueprint": "Realizes the inherited thm-pur-rational-and-qbar-purity Qbar-stage coefficient-extension independence through lem-pur-adic-purity-scalar-naturality and lem-pur-compact-support-integral-coefficient-comparison; supplies Step 2 of lem-pur-compact-support-completed-projection-coherence (strict reduction model and unit normalization), refining old steps 3-4.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic unbounded ringed-site K-flat resolution supplies one common representative."
+   },
+   {
+    "node": "lem-pc-left-localization-fraction-representation",
+    "why": "Generic Mathlib fraction representation is used solely for derived conservativity."
+   },
+   {
+    "node": "lem-pc-quasi-isomorphisms-multiplicative-system",
+    "why": "Generic calculus of fractions is used to prove derived conservativity of restriction."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic change of rings on the sequence site computes derived quotient tensor from the diagonal K-flat representative."
+   },
+   {
+    "node": "lem-sp-completed-pullback-adjunction",
+    "why": "The existing general completion-reflector theorem identifies the underlying quotient-limit functor for arbitrary input V; it supplies completion theory used by this coefficient-coherence auxiliary."
+   },
+   {
+    "node": "lem-weil-pbc-constant-completion-equivalence",
+    "why": "Generic Noetherian constant-coefficient completion theorem explicitly identifies the quotient limit and its unit; no unit statement of this item gives that completion theorem."
+   },
+   {
+    "node": "lem-weil-pbc-diagram-site-realization",
+    "why": "Generic small-site diagram equivalence supplies the ambient sequence site; it does not replace any six-functor compatibility argument."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Generic localization of an exact functor supplies termwise derived restriction and diagonal."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Generic Hom comparison permits actual chain representatives into K-injectives, including the augmentation normalization."
+   },
+   {
+    "node": "lem-weil-pbc-localization-universal-property",
+    "why": "Generic localization natural-transformation descent supplies naturality for all derived maps."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "why": "Generic strict-tower total right derived limit computes the displayed constant and quotient towers."
+   },
+   {
+    "node": "lem-weil-tower-category-levelwise-abelian",
+    "why": "Generic exactness of constant-ring tower evaluation is used in Steps 3 and 7, not a replacement route for coefficient coherence."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic small-ringed-site K-injective resolutions supply the models for the inverse limit and its map."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "lem-pc-left-localization-fraction-representation",
+  "lem-pc-quasi-isomorphisms-multiplicative-system",
+  "lem-pur-derived-change-of-rings",
+  "lem-sp-completed-pullback-adjunction",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-diagram-site-realization",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-tower-category-levelwise-abelian",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q80-cadf7493d",
+  "group": "Q80",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q80-cadf7493d (reviewer sub-agent of L); spot-checked: I read the item, its 11 steps and all 22 cited statements in full. The delivery adds no new nodes. The statement is byte-identical to the one in Q75's FIX, which created this item; the three added stmt_deps (sheaf tensor, flat module, restriction of scalars) are notions the statement uses. proof_deps equals the union of the step uses, and there is no cycle (item absent from its 1032-node closure). The four off-unit generic split nodes (K-flat resolution, diagram site, strict-tower R lim, constant completion equivalence) are declared as tool uses, and I accept them. Source checks: Stacks 0941 computes R lim by K-injective termwise limit and uses 08BJ for evaluation; 099M with 0A0E gives the completion reflector; 21 tags match their labels; no SGA source is used. Steps: 1-2 the vertical sheaf condition holds because J^op is a poset, and sheafification and tensor are componentwise; 3 kernels and cokernels are componentwise and U reflects isomorphisms; 4 derived conservativity is proved through a left fraction in K(Mod B), correctly; 5 ΔQ is K-flat with flat terms; 6 lem-pur-derived-change-of-rings gives X_Q=(Q⊗A_n) with the augmentation x↦x⊗1; 7 Δ preserves K-injectives by an explicit homotopy h_n=h p_{n1}, using ev_1 ⊣ Δ with 1 terminal; 8 lim ΔJ=J defines ℓ, natural by Hom into K-injectives; 9 LUR=C uses the same strict model; 10 types checked, [k]=R lim(i_V)ℓ^{-1}; 11 the constant-completion node's unit-respecting Koszul/quotient identification gives η, and naturality follows from the localization universal property. Edge cases I=0, I=A, A=Z with I=(p), V=0 and unbounded V all hold. Duplicate candidates are not duplicates: lem-trf-completion-unit-strict-quotient-model is pro-étale/Roos, lem-weil-pbc-completed-quotient-unit-normalization concerns an adic datum, lem-weil-pbc-constant-tower-pushforward-normalization involves a direct image, lem-coef-derived-tower-counit-projections only gives the counit projections. Advisory only: step 1's source calls 03CS 'restriction of scalars', but 03CS is section-presheaves-modules."
  }
 }
