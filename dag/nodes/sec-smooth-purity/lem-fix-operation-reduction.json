@@ -26,204 +26,145 @@
  ],
  "proof": [
   {
-   "text": "Use the small pro-etale coefficient sites and operations of [def-weil-derived-pullback-tensor-hom], and write $F_{A,B}=-\\otimes_A^LB$ for coefficient extension. For finite $A\\to B$, [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] applied to the identity topos gives $F_{A,B}(M\\otimes_A^LN)\\cong F_{A,B}M\\otimes_B^LF_{A,B}N$. For pullback apply the same K-flat construction to the commuting square of coefficient ring maps on $X$ and $Y$: both $Lf_B^*F_{A,B}K$ and $F_{A,B}Lf_A^*K$ are represented by $B_X\\otimes_{f^{-1}A_Y}f^{-1}P$ for a flat-term K-flat replacement $P$ of $K$. The derived tensor-pullback lemma ensures these pullbacks are K-flat, so these are comparisons of derived functors, not merely underived tensor expressions. The two routes through a threefold coefficient extension send $((x\\otimes a)\\otimes b)$ to $x\\otimes ab$; the tensor comparison sends $(x\\otimes a)\\otimes(y\\otimes b)$ to $(x\\otimes y)\\otimes ab$. These formulas prove the associativity and unit identities and descend through quasi-isomorphisms. At integral level the operations are completed pullback and completed tensor, so one cannot simply omit completion: clauses (1) and (2) of [lem-pur-integral-operations-preserve-constructible] supply their canonical reduction isomorphisms. Their quotient-level maps are the same tensor formulas just written, so their associativity and units have those formulas after reduction as well.",
+   "text": "For finite ring changes use ringed derived monoidality. For completed pullback and tensor use integral preservation, then the strict coherence and substitution theorems: the specified associators and units are limits of the coefficient tensor maps, not identities inferred from individual reductions.",
    "uses": [
-    "def-weil-derived-pullback-tensor-hom",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-pur-integral-operations-preserve-constructible"
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-pur-integral-operations-preserve-constructible",
+    "lem-pur-integral-coherence-tower",
+    "lem-pur-completed-operation-tower-substitution"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YY (lemma-derived-base-change), 07A4 (lemma-pullback-tensor-product), 0G7E (lemma-pullback-K-flat); blueprint paragraph 1"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
+    "place": "paragraph 1 and original step 1"
    }
   },
   {
-   "text": "For finite $A=A_{E,n}\\to B=A_{E,m}$ let $K$ be site-perfect [def-weil-site-perfect-complex]. The ringed-site duality theorem [lem-sfb-ringed-site-perfect-duality] gives $R\\mathcal Hom_A(K,L)=K^\\vee\\otimes_A^L L$ for arbitrary $L$, with its evaluation-defined map, and makes $K^\\vee$ perfect. Locally represent $K$ by a bounded complex $P$ of finite-projective sheaves. The canonical map $P^\\vee\\otimes_A B\\to(P\\otimes_A B)^\\vee$ is a chain isomorphism: for $P^i=A^r$ it is the identity on $B^r$, and for a summand it is the restriction of that identity along the tensor of its splitting. Only finitely many degrees occur, and precomposition with the differential gives the same dual differential on both sides. Apply the tensor comparison of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] and the duality theorem over $A$ and $B$ to obtain\n$$F R\\mathcal Hom_A(K,L)\\cong F(K^\\vee)\\otimes_B^L FL\\cong(FK)^\\vee\\otimes_B^L FL\\cong R\\mathcal Hom_B(FK,FL).$$\nThe local map is the transpose of reduced evaluation: on each term it sends $h\\otimes b,p\\otimes c$ to $h(p)\\otimes bc$, with the same total-complex signs. By [lem-weil-pbc-ringed-internal-hom-exact-restriction] this is the restriction of the global comparison; the local-isomorphism criterion of [lem-weil-pbc-ringed-projection-restriction], for the identity morphism, proves it invertible globally. No finite-Tor hypothesis on $L$ is used. The perfectness of the coefficient dual of a perfect point complex is also the duality theorem's first conclusion.",
+   "text": "Apply perfect-source scalar Hom to finite quotients, with arbitrary second variable; perfect duality also makes the point dual perfect. Apply the ambient integral Hom theorem on its stated integral domains, without imposing perfectness on the first variable. All these maps are evaluation transposes.",
    "uses": [
-    "def-weil-site-perfect-complex",
+    "lem-fix-site-perfect-scalar-hom",
     "lem-sfb-ringed-site-perfect-duality",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-    "lem-weil-pbc-ringed-projection-restriction"
+    "lem-coef-integral-hom-reduction"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 08JJ (lemma-dual-perfect-complex), 08JB (lemma-restriction-RHom-to-U); blueprint paragraph 1; finite-projective dual comparison by tensoring a splitting"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
+    "place": "paragraphs 1-2 and original steps 2-3"
    }
   },
   {
-   "text": "For integral coefficients the first variable need not be perfect. The finite free resolution $[\\mathcal O_E\\xrightarrow{\\varpi_E^n}\\mathcal O_E]$ is supplied by [lem-weil-pbc-standard-quotients-perfect]. By [lem-weil-l-adic-extension-integers-dvr], $\\mathcal O_E$ is a principal ideal domain, hence Noetherian since every ideal is finitely generated. Apply [lem-weil-pbc-completed-constant-sheaf-reduction] to obtain the actual resolution $[R\\xrightarrow{\\varpi_E^n}R]$ of $B=(A_{E,n})_W$ over $R=\\widehat{\\mathcal O}_{E,W}$; ring-module perfectness alone would not identify these sheaves. The ambient comparison theorem [lem-coef-integral-hom-reduction] now gives $R\\mathcal Hom_R(K,L)\\otimes_R^LB\\xrightarrow{\\sim}R\\mathcal Hom_B(K_n,L_n)$ for arbitrary $K,L$, and says that this very map is the transpose of reduced evaluation. It also gives completeness of the integral Hom when $L$ is complete. Restrict this ambient assertion to exactly those integral pairs for which the Hom belongs to the stated constructible category. In the two-term description, commuting Hom in the second variable with this finite cone accounts for the first isomorphism of the blueprint, and extension-restriction adjunction accounts for the second. The cited ambient theorem provides both assertions together with their specified evaluation normalization; no general finite-level Hom comparison is being inferred without the site-perfect hypothesis of step 2.",
+   "text": "The direct-image constructibility theorem gives its canonical reduction isomorphism and uniform bound. The DVR theorem makes the coefficient ring Noetherian; standard perfect quotients and the projection map identify this with ordinary completed-ring direct image through the strict derived-limit theorem.",
    "uses": [
+    "lem-sf-integral-direct-image-constructible",
     "lem-weil-pbc-standard-quotients-perfect",
-    "lem-weil-pbc-completed-constant-sheaf-reduction",
-    "lem-coef-integral-hom-reduction",
+    "lemma-weil-pbc-perfect-projection-formula",
+    "prop-weil-pbc-direct-image-limits",
     "lem-weil-l-adic-extension-integers-dvr"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 093M (lemma-completion-flat), with blueprint paragraph 2 and the evaluation-defined ambient comparison of lem-coef-integral-hom-reduction"
-   }
-  },
-  {
-   "text": "For ordinary direct image apply [lemma-weil-pbc-perfect-projection-formula] to $P_n=(A_{E,n})_Y$, which is site-perfect over the completed coefficient sheaf by the two-term resolution in step 3. Its specified projection map is an isomorphism $(Rf_*K)\\otimes^L P_n\\to Rf_*K_n$, and the theorem gives its compatibility with quotient maps. [prop-weil-pbc-direct-image-limits] identifies ordinary direct image of a complete object with the derived limit of its finite-level images, including the completion map and the Roos transition operator $1-s$. Thus it identifies this object with the integral direct image actually defined in [def-weil-derived-direct-image]. On the stated finite-type bounded constructible domains, [lem-sf-integral-direct-image-constructible] explicitly says that the comparison from that definition is an isomorphism and that the images are bounded constructible, with a uniform cohomological bound independent of $n$. These are complementary assertions: the projection formula fixes the map, the limit theorem fixes the completed realization, and the constructibility theorem fixes its bounded domain.",
-   "uses": [
-    "lemma-weil-pbc-perfect-projection-formula",
-    "prop-weil-pbc-direct-image-limits",
-    "def-weil-derived-direct-image",
-    "lem-sf-integral-direct-image-constructible"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 099N (lemma-pushforward-Noetherian-case); Bhatt--Scholze Lemmas 6.5.9, 6.5.11 and 6.7.2; blueprint paragraph 2, ordinary direct image"
-   }
-  },
-  {
-   "text": "Choose the single compactification $f=pj$ used in [def-weil-integral-rational-qbar-compact-support], with $j:X\\hookrightarrow\\overline X$ quasi-compact open and $p$ proper. The compactification schemes are finite type over the base field: p is proper, hence finite type, and finite-type morphisms compose by adjoining the two finite sets of algebra generators. A field is Noetherian because its only ideals are zero and the unit ideal. Thus [lem-weil-pbc-finite-type-over-noetherian] makes the compactification schemes Noetherian, and [lem-weil-pbc-noetherian-open-subscheme-noetherian] makes all their opens and intersections quasi-compact. This verifies the quasi-compactness of j and the constructibility of the strata used in step 6. Work over the completed coefficient sheaf on $\\overline X$ and its restriction to $X$. Extension by zero $J=j_!$ is exact and left adjoint to restriction by [lem-weil-pbc-proetale-ringed-open-closed]; the coefficient restrictions are canonical by [lem-weil-pbc-profinite-coefficient-inverse-image]. The tensor identity [lem-weil-pbc-ringed-slice-extension-tensor], using the open-slice identification [lem-weil-proetale-weakly-etale-localization], gives $J(Q\\otimes j^{-1}C)\\cong JQ\\otimes C$. The same formula holds for total tensor complexes because J preserves their direct sums by [lem-weil-pbc-left-adjoint-preserves-colimits]. For a K-flat representative $Q$ of $K$ supplied by [lem-pc-kflat-resolution], $JQ$ is K-flat: for acyclic $C$, exact restriction makes $j^{-1}C$ acyclic by [lem-weil-pbc-proetale-immersion-limit-preservation], then $Q\\otimes j^{-1}C$ is acyclic and exact $J$ preserves that. Applying the tensor identity to each finite coefficient quotient therefore gives $(JK)_n\\cong j_!K_n$. It respects the quotient maps because on these representatives the transition is $1\\otimes(A_{E,n+1}\\to A_{E,n})$ on both sides. It respects the maps from $JK$ because both send a local section to its tensor with $1$.",
-   "uses": [
-    "def-weil-integral-rational-qbar-compact-support",
-    "lem-weil-pbc-proetale-ringed-open-closed",
-    "lem-weil-pbc-profinite-coefficient-inverse-image",
-    "lem-weil-pbc-ringed-slice-extension-tensor",
-    "lem-weil-proetale-weakly-etale-localization",
-    "lem-pc-kflat-resolution",
-    "lem-weil-pbc-proetale-immersion-limit-preservation",
-    "lem-weil-pbc-left-adjoint-preserves-colimits",
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-weil-pbc-noetherian-open-subscheme-noetherian"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 0E8I (lemma-j-shriek-and-tensor); blueprint paragraph 2, extension-by-zero factor"
-   }
-  },
-  {
-   "text": "The completeness assertion of [lem-cbc-completed-extension-zero-comparison], applied to the identity cartesian square for this quasi-compact $j$, says that $JK$ is derived complete. Moreover $JK$ is integral constructible: by step 5 its reductions are $j_!K_n$; exactness of $j_!$ identifies their cohomology with extension by zero of the cohomology of $K_n$. Add the closed complement to any finite stratification witnessing finite-torsion constructibility [def-weil-finite-torsion-constructibility]. On the old strata the sheaf is unchanged and on the new stratum it is zero; all these strata are constructible in the Noetherian compactification. The same uniform cohomological interval works since $j_!$ is exact. This verifies all the conditions in [def-weil-derived-complete-integral-detailed]. Step 4 applied to $p$ and $JK$ now identifies the reductions of $Rp_*JK$ with $Rp_{*,n}j_!K_n=Rf_{!,n}K_n$. The integral compact-support definition is the derived limit of precisely this tower. The transition identifications in step 5 and the tower naturality in [prop-weil-pbc-direct-image-limits] identify its comparison with the reduction of $Rp_*JK$, not just with an abstract isomorphism between these objects. This proves $(Rf_!K)_n\\cong Rf_{!,n}K_n$.",
-   "uses": [
-    "lem-cbc-completed-extension-zero-comparison",
-    "def-weil-finite-torsion-constructibility",
-    "def-weil-derived-complete-integral-detailed",
-    "def-weil-integral-rational-qbar-compact-support",
-    "prop-weil-pbc-direct-image-limits"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemmas 6.1.13, 6.7.2; Definition 6.7.6 and Lemma 6.7.7; blueprint paragraph 2, completed compact support"
-   }
-  },
-  {
-   "text": "For $1\\leq m\\leq n$, the finite-level compact-support comparison is exactly [lem-fix-compact-support-coefficient-change]: its hypotheses require the separated finite-type morphism in the finite-field datum and a bounded constructible finite-Tor input. Its statement includes successive reduction, pullback and the counits defining the projection map, so this citation proves those clauses for the specified comparison. For exceptional right adjoints the item makes a conditional assertion only: in [def-weil-exceptional-adjoint-admissibility], admissibility at $\\mathcal O_E,E,\\overline{\\mathbf Q}_\\ell$ explicitly requires the finite-reduction and scalar-extension maps of the right adjoints to be isomorphisms. Invoke precisely that requirement whenever such an adjoint is used. Finite-stage admissibility alone has no coefficient-isomorphism clause and is not being used to deduce one. The units and counits mentioned below are those of the chosen adjunctions; no ambient right adjoint is asserted for a morphism for which the admissibility conditions fail.",
-   "uses": [
-    "lem-fix-compact-support-coefficient-change",
-    "def-weil-exceptional-adjoint-admissibility"
-   ],
-   "elementary": false,
-   "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
-    "place": "paragraph 2, finite compact-support change and admissibility qualification"
+    "place": "paragraph 2 and original step 4"
    }
   },
   {
-   "text": "For finite $E\\subset L$, use the completed pullback/tensor/Hom comparisons and tower laws of [lem-pur-integral-operations-scalar-extension]. By [lem-weil-finite-free-completed-scalar-comparison], scalar extension is ordinary tensor by $S_W=\\widehat{\\mathcal O}_{L,W}$, finite free over $R_W=\\widehat{\\mathcal O}_{E,W}$. Step 5's coefficient inverse-image identifications give compatible ringed squares. Apply [lem-weil-pbc-flat-ringed-diagram-restriction] with terminal index category: finite freeness implies flatness, and its restriction/direct-image comparison identifies the coefficient target, including adjuncts. Apply [lemma-weil-pbc-perfect-projection-formula] with the site-perfect object $S_Y$ to get the direct-image scalar isomorphism. Naturality for multiplication by sections makes it $S_Y$-linear. The evaluation-defined scalar-Hom isomorphism for arbitrary variables is [lem-sf-ringed-finite-free-hom-base-change]; its finite-free hypothesis was just verified, and its transpose is exactly scalar extension of evaluation. For compact support combine the proper-factor comparison with step 5's open tensor comparison. In the strict-tower triangle of [lem-weil-pbc-ringed-strict-tower-homotopy-limit], finite-free tensor commutes with derived products and cones: in a basis it is a finite sum of identity functors. The scalar-comparison lemma identifies this realization with the defined integral scalar extension. For $R\\to S\\to T$, the tensor and Hom maps send $x\\otimes s\\otimes t$ to $x\\otimes st$ and $h\\otimes s\\otimes t$ to $(p\\otimes u\\mapsto h(p)\\otimes stu)$. Direct-image composites are mates of the same pullback map, hence equal by [def-weil-pbc-adjunction-mate]; the product-cone construction gives compact-support equality. With $S=R$ all formulas are identities.",
+   "text": "Apply the completed compactification realization to the chosen proper/open factorization. It supplies the actual strict-tower identification and projection normalization on the bounded constructible domain. Between finite quotients use finite compact-support coefficient change on its finite-Tor domain.",
    "uses": [
-    "lem-pur-integral-operations-scalar-extension",
-    "lem-weil-finite-free-completed-scalar-comparison",
-    "lem-weil-pbc-profinite-coefficient-inverse-image",
-    "lem-weil-pbc-flat-ringed-diagram-restriction",
-    "lemma-weil-pbc-perfect-projection-formula",
-    "lem-sf-ringed-finite-free-hom-base-change",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "def-weil-pbc-adjunction-mate"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08J9 (lemma-internal-hom), with the evaluation-normalized finite-free specialization lem-sf-ringed-finite-free-hom-base-change; Tag 0A07 (lemma-Rf-commutes-with-Rlim); blueprint paragraph 3; flat coefficient restriction uses derived.tex Tags 0FND and 0DVC"
-   }
-  },
-  {
-   "text": "Rationalization [def-weil-rationalization-karoubi] leaves objects unchanged and replaces each integral Hom group by its tensor product with $E$. The operations [def-weil-derived-pullback-tensor-hom] are defined there by linear extension of the integral operations, and direct image and compact support are likewise rationalized in [def-weil-derived-direct-image, def-weil-integral-rational-qbar-compact-support]. A commuting integral comparison square remains commuting after this linear extension: expand a morphism as a finite sum of $u_i\\otimes a_i$, apply linearity to each summand, and use the integral square for $u_i$. Inverses remain inverses. At the algebraic-closure stage [def-weil-algebraically-closed-coefficients], represent the finitely many objects and maps of a comparison diagram over one common finite extension. The integral scalar comparisons of step 8 and the exact transition functors [lem-weil-scalar-extension-exact-triangulated] give the diagrams at that stage. After enlarging the field their diagrams agree by the identity and tower laws of step 8. Thus they give well-defined comparison maps on the common-stage category, and any equality follows from the equality at that common stage. This is transport in the prescribed localized and common-stage categories, not an identification with discrete constant-field sheaf categories.",
-   "uses": [
-    "def-weil-rationalization-karoubi",
-    "def-weil-derived-pullback-tensor-hom",
-    "def-weil-derived-direct-image",
-    "def-weil-integral-rational-qbar-compact-support",
-    "def-weil-algebraically-closed-coefficients",
-    "lem-weil-scalar-extension-exact-triangulated"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
-    "place": "paragraph 3, rationalization and common-stage construction"
-   }
-  },
-  {
-   "text": "Write $F_X,F_Y$ for coefficient extension, $L_A\\dashv R_A$, $L_B\\dashv R_B$ for pullback/direct image, and $a:L_BF_Y\\xrightarrow{\\sim}F_XL_A$ for step 1. Define $b:F_YR_A\\to R_BF_X$ by [def-weil-pbc-adjunction-mate]. Its transpose gives the counit equation\n$$\\varepsilon_B F_X\\circ L_B b=F_X\\varepsilon_A\\circ aR_A.$$\nThe inverse-mate formula, naturality and the two triangle identities give\n$$R_Ba\\circ\\eta_B F_Y=bL_A\\circ F_Y\\eta_A.$$\nThe projection comparison is this transpose [lem-weil-pbc-ringed-projection-mate-exact], with step 1's tensor constraint. The finite compact-support counit equation is included in [lem-fix-compact-support-coefficient-change]. For Hom the equation is\n$$\\operatorname{ev}_B\\circ(c\\otimes1)=F(\\operatorname{ev}_A)\\circ\\mu^{-1},$$\nwith $\\mu$ the tensor comparison. Step 2's dual evaluation calculation, [lem-coef-integral-hom-reduction], and [lem-sf-ringed-finite-free-hom-base-change] give this equation for finite site-perfect, integral and scalar comparisons respectively. Applying the adjunction bijection shows compatibility with tensor-Hom transposes. Thus transposing either route in a projection or exchange square gives the same composite of evaluation, reassociation and counit. The displayed unit equation handles units. For successive coefficient changes both transposes have the same tensor formula, so injectivity of the adjunction bijection gives equality. Exceptional comparisons use their mates and the explicit admissibility isomorphism assumption of step 7; invertibility is not inferred merely by taking a mate. Step 9 carries these equations to rational and common-stage coefficients. These are equalities of the specified maps.",
-   "uses": [
-    "def-weil-pbc-adjunction-mate",
-    "lem-weil-pbc-ringed-projection-mate-exact",
-    "lem-coef-integral-hom-reduction",
-    "lem-sf-ringed-finite-free-hom-base-change",
+    "lem-fix-compactification-completed-realization",
     "lem-fix-compact-support-coefficient-change"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
-    "place": "all paragraphs, evaluation and final sentence on associativity/units/counits; explicit mate identities"
+    "place": "paragraph 2 and original steps 5-7"
+   }
+  },
+  {
+   "text": "For finite field extensions, finite-free completed scalar comparison verifies the hypotheses for direct-image coherence and arbitrary-variable scalar Hom. Integral pullback/tensor scalar comparison and normalized open tensor give the other comparisons. Scalar-completion associator normalization for the explicit rho-coefficient maps and termwise product-cone functors transports their identity and tower equations to the prescribed scalar functors; internal-Hom comparison composition fixes the successive Hom maps. The two open tower routes restrict to the identity and agree by full faithfulness. Step 4 then identifies the proper/open composite with defined compact support.",
+   "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-sp-finite-free-direct-image-coherence",
+    "lem-sf-ringed-finite-free-hom-base-change",
+    "lem-pur-integral-operations-scalar-extension",
+    "lem-sf-open-tensor-normalization",
+    "lem-fix-scalar-completion-associator",
+    "lem-fix-internal-hom-comparison-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
+    "place": "paragraph 3 and original step 8"
+   }
+  },
+  {
+   "text": "The mate counit and unit equations, applied to these tensor-coherent comparisons, give the specified projection and exchange squares. The compactification lemma fixes the completed compact-support projection realization. Exceptional comparisons are used only with the isomorphism requirements of admissibility. No invertibility is inferred merely from taking a mate.",
+   "uses": [
+    "lem-amb-mate-unit-counit",
+    "lem-pur-mate-unit-compatibility",
+    "lem-sp-categorical-projection-mate-square",
+    "lem-weil-pbc-coefficient-exchange-mates",
+    "lem-fix-compactification-completed-realization",
+    "def-weil-exceptional-adjoint-admissibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
+    "place": "all paragraphs and original steps 7 and 10"
+   }
+  },
+  {
+   "text": "Rationalization [def-weil-rationalization-karoubi] is raw localization at $\\varpi_E$. Apply [lem-pur-semilinear-scalar-localization] to the exact integral functors and comparisons of steps 1-6, with $\\phi=\\mathrm{id}$, and $\\phi:\\mathcal O_E\\to\\mathcal O_L$ for scalar comparisons: they extend uniquely, inverses stay inverses, and unit, associator, counit and square equations persist. The transitions of [def-weil-algebraically-closed-coefficients] are exact [lem-weil-scalar-extension-exact-triangulated], composed by [lem-weil-scalar-extension-composition], the rationalized integral composition maps of step 5's tower laws. Each finite diagram lives over one field and equality is detected after enlargement, so the equations hold there.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "lem-pur-semilinear-scalar-localization",
+    "def-weil-algebraically-closed-coefficients",
+    "lem-weil-scalar-extension-exact-triangulated",
+    "lem-weil-scalar-extension-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
+    "place": "paragraph 3 and original step 9"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-derived-pullback-tensor-hom",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-pur-integral-operations-preserve-constructible",
-  "def-weil-site-perfect-complex",
-  "lem-sfb-ringed-site-perfect-duality",
-  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-  "lem-weil-pbc-ringed-projection-restriction",
-  "lem-weil-pbc-standard-quotients-perfect",
-  "lem-weil-pbc-completed-constant-sheaf-reduction",
-  "lem-coef-integral-hom-reduction",
-  "lem-weil-l-adic-extension-integers-dvr",
-  "lemma-weil-pbc-perfect-projection-formula",
-  "prop-weil-pbc-direct-image-limits",
-  "def-weil-derived-direct-image",
-  "lem-sf-integral-direct-image-constructible",
-  "def-weil-integral-rational-qbar-compact-support",
-  "lem-weil-pbc-proetale-ringed-open-closed",
-  "lem-weil-pbc-profinite-coefficient-inverse-image",
-  "lem-weil-pbc-ringed-slice-extension-tensor",
-  "lem-weil-proetale-weakly-etale-localization",
-  "lem-pc-kflat-resolution",
-  "lem-weil-pbc-proetale-immersion-limit-preservation",
-  "lem-weil-pbc-left-adjoint-preserves-colimits",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-  "lem-cbc-completed-extension-zero-comparison",
-  "def-weil-finite-torsion-constructibility",
-  "def-weil-derived-complete-integral-detailed",
-  "lem-fix-compact-support-coefficient-change",
-  "def-weil-exceptional-adjoint-admissibility",
-  "lem-pur-integral-operations-scalar-extension",
-  "lem-weil-finite-free-completed-scalar-comparison",
-  "lem-weil-pbc-flat-ringed-diagram-restriction",
-  "lem-sf-ringed-finite-free-hom-base-change",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "def-weil-pbc-adjunction-mate",
-  "def-weil-rationalization-karoubi",
   "def-weil-algebraically-closed-coefficients",
+  "def-weil-exceptional-adjoint-admissibility",
+  "def-weil-rationalization-karoubi",
+  "lem-amb-mate-unit-counit",
+  "lem-coef-integral-hom-reduction",
+  "lem-fix-compact-support-coefficient-change",
+  "lem-fix-compactification-completed-realization",
+  "lem-fix-internal-hom-comparison-composition",
+  "lem-fix-scalar-completion-associator",
+  "lem-fix-site-perfect-scalar-hom",
+  "lem-pur-completed-operation-tower-substitution",
+  "lem-pur-integral-coherence-tower",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-pur-integral-operations-scalar-extension",
+  "lem-pur-mate-unit-compatibility",
+  "lem-pur-semilinear-scalar-localization",
+  "lem-sf-integral-direct-image-constructible",
+  "lem-sf-open-tensor-normalization",
+  "lem-sf-ringed-finite-free-hom-base-change",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-sfb-ringed-site-perfect-duality",
+  "lem-sp-categorical-projection-mate-square",
+  "lem-sp-finite-free-direct-image-coherence",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-coefficient-exchange-mates",
+  "lem-weil-pbc-standard-quotients-perfect",
+  "lem-weil-scalar-extension-composition",
   "lem-weil-scalar-extension-exact-triangulated",
-  "lem-weil-pbc-ringed-projection-mate-exact"
+  "lemma-weil-pbc-perfect-projection-formula",
+  "prop-weil-pbc-direct-image-limits"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
-  "place": "Three blueprint proof paragraphs, expanded into ten steps with ringed-site tensor/Hom tools and explicit completed-coefficient and adjunction-map checks"
+  "place": "Human-requested finer split: original ten arguments assembled from four new statement-only nodes and the existing detailed technical lemmas."
  },
  "mathlib_searches": [
   {
@@ -354,15 +295,15 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sf-pf-reduction",
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "item": "lem-fix-operation-reduction",
   "worker": "stage1",
-  "summary": "Audited the unchanged imported statement against current main-20261015, searched both read-only Lean sources and Mathlib, and expanded the three source proof paragraphs into ten steps using existing nodes only. Replaced definition-only justifications by explicit completed-operation, Hom-model, quotient-sheaf, direct-image and finite-free scalar tools; separated bounded-domain checks from existence of ambient comparisons; and displayed evaluation and both mate identities. No new node, attachment or statement correction. The resumed audit removes an unnecessary finite-Tor condition on the finite-level Hom second variable by an explicit finite-filtration argument. Second reading specifies the finite filtration and local sheaf lifting in step 2, and adds the finite-free K-injective Hom calculation and mate tower equations in step 8 to justify scalar evaluation normalization and the maps used in step 9. Repair reading on 2026-10-17 replaces the long step-2 perfect-Hom argument, the step-8 finite-free Hom and restriction arguments by existing ringed-site lemmas, and abbreviates the mate calculation. The statement and all maintainer metadata are unchanged; this is a stage-1 delivery, not the stage-2 Lean delivery requested in the mismatched return.",
-  "blueprint": "Current main-20261015 paragraph 1: steps 1-2; paragraph 2: steps 3-7; paragraph 3: steps 8-10. The unit projection-formula route is retained and the final coherence assertion is realized by the explicit evaluation/mate equations of step 10.",
+  "summary": "Repair of the explicit four-child re-split: four new statement-only nodes, including one project-proof attachment candidate; preserved statement and all maintainer metadata. The short assembly cites completed compactification realization, scalar-completion associator normalization, perfect-source scalar Hom and the internal-Hom composition identity. Existing technical nodes retain every other argument. Landing-return repair: reread the current integral scalar-extension definition and made its rho maps, strict transitions, termwise cone and resolution-independent functor explicit in the scalar-associator child; refreshed citation evidence against the current DAG. Review FIX (re-applied from the earlier FIX of head 54f95747, lost at landing): step 7 transports through def-weil-rationalization-karoubi, lem-pur-semilinear-scalar-localization, def-weil-algebraically-closed-coefficients, lem-weil-scalar-extension-exact-triangulated and lem-weil-scalar-extension-composition instead of the PBC-category nodes prop-weil-pbc-rational-transport and prop-weil-pbc-common-stage-calculus.",
+  "blueprint": "Paragraph 1: step 1 and perfect-source Hom child. Paragraph 2: steps 2-4 and completed compactification realization child. Paragraph 3: scalar completion associator and closed-comparison composition children, then steps 5-7. Original steps 1-10 are mapped individually in report.md.",
   "tool_uses": [
    {
-    "node": "lem-cbc-completed-extension-zero-comparison",
-    "why": "Only completeness of extension by zero (identity square), needed before applying integral direct image."
+    "node": "lem-amb-mate-unit-counit",
+    "why": "Generic categorical counit equation for an adjunction mate."
    },
    {
     "node": "lem-coef-integral-hom-reduction",
@@ -373,8 +314,12 @@
     "why": "The canonical finite-level compact-support coefficient comparison, with the stated finite-Tor domain and projection counits."
    },
    {
-    "node": "lem-pc-kflat-resolution",
-    "why": "Existence of the K-flat representative used to derive the open tensor calculation."
+    "node": "lem-pur-completed-operation-tower-substitution",
+    "why": "Identification of completed tensor/pullback expressions and their structural maps with total limits of normalized systems."
+   },
+   {
+    "node": "lem-pur-integral-coherence-tower",
+    "why": "Strict quotient-tower tensor/pullback structural equations, including the actual completed associators."
    },
    {
     "node": "lem-pur-integral-operations-preserve-constructible",
@@ -385,96 +330,68 @@
     "why": "Generic integral scalar comparison for pullback, completed tensor and Hom."
    },
    {
+    "node": "lem-pur-mate-unit-compatibility",
+    "why": "Generic categorical unit equation for the same mate."
+   },
+   {
     "node": "lem-sf-integral-direct-image-constructible",
     "why": "Checks the stated bounded constructible domain and the specified reduction of tower-defined direct image."
    },
    {
-    "node": "lem-weil-finite-free-completed-scalar-comparison",
-    "why": "Finite freeness of completed coefficient extension and its comparison with strict-tower scalar extension."
-   },
-   {
-    "node": "lem-weil-pbc-completed-constant-sheaf-reduction",
-    "why": "Identifies that resolution over the completed coefficient sheaf, not the discrete constant ring."
-   },
-   {
-    "node": "lem-weil-pbc-proetale-immersion-limit-preservation",
-    "why": "Exactness of open restriction supplies the K-flat acyclic test."
-   },
-   {
-    "node": "lem-weil-pbc-proetale-ringed-open-closed",
-    "why": "Exactness and adjunction for extension by zero on a ringed pro-etale site."
-   },
-   {
-    "node": "lem-weil-pbc-profinite-coefficient-inverse-image",
-    "why": "Identifies restricted completed coefficient rings and the quotient projections."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-    "why": "Restriction of derived Hom to the site-perfect covering."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-projection-mate-exact",
-    "why": "Derived adjunction and evaluation-normalized projection maps, used to prove the two adjunction identities."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-projection-restriction",
-    "why": "Only its local-isomorphism criterion, specialized to the identity morphism."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-slice-extension-tensor",
-    "why": "Tensor formula for extension by zero, needed to construct its coefficient comparison."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "why": "Exact product-cone realization of the strict towers in the scalar comparison."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "why": "Generic ringed-topos derived tensor and K-flat pullback theorem; supplies finite coefficient pullback/tensor comparisons."
-   },
-   {
-    "node": "lem-weil-pbc-standard-quotients-perfect",
-    "why": "The two-term free resolution of the coefficient quotient over O_E."
-   },
-   {
-    "node": "lem-weil-proetale-weakly-etale-localization",
-    "why": "Identifies the open coefficient site with the slice site for the tensor formula."
-   },
-   {
-    "node": "lemma-weil-pbc-perfect-projection-formula",
-    "why": "Ordinary projection comparison for site-perfect coefficient objects, used for quotients and finite free coefficient extension."
-   },
-   {
-    "node": "prop-weil-pbc-direct-image-limits",
-    "why": "Compatibility with the actual complete direct-image tower and completion maps."
-   },
-   {
-    "node": "lem-weil-pbc-left-adjoint-preserves-colimits",
-    "why": "Extension by zero preserves the direct sums in total tensor complexes because it is a left adjoint."
-   },
-   {
-    "node": "lem-weil-l-adic-extension-integers-dvr",
-    "why": "The DVR statement makes O_E Noetherian, as required by the completed coefficient quotient theorem."
-   },
-   {
-    "node": "lem-weil-pbc-finite-type-over-noetherian",
-    "why": "The compactification schemes are Noetherian in the finite-type field domain."
-   },
-   {
-    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-    "why": "Quasi-compactness of the chosen open immersion and of open intersections gives the stated constructible open-complement domains."
-   },
-   {
-    "node": "lem-sfb-ringed-site-perfect-duality",
-    "why": "Ringed-site perfect duality replaces the long bounded finite-projective Hom argument; its statement includes perfect duals and the evaluation-defined tensor-Hom isomorphism."
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "Arbitrary ring-sheaf open tensor and base-change comparisons, also on strict systems."
    },
    {
     "node": "lem-sf-ringed-finite-free-hom-base-change",
     "why": "Finite-free ringed coefficient change of arbitrary-variable internal Hom with its actual evaluation normalization; replaces the long inline K-injective comparison."
    },
    {
-    "node": "lem-weil-pbc-flat-ringed-diagram-restriction",
-    "why": "Terminal-diagram specialization identifies restriction and derived geometric direct image, preserving adjuncts; finite freeness verifies its flatness assumption."
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic unbounded ringed-topos monoidal and composition coherence; replaces the explicit K-flat tensor reassociation argument."
+   },
+   {
+    "node": "lem-sfb-ringed-site-perfect-duality",
+    "why": "Generic perfect duality, including perfectness of the dual at a point."
+   },
+   {
+    "node": "lem-sp-categorical-projection-mate-square",
+    "why": "Generic categorical projection-square identity, with tensor-coherent hypotheses supplied by step 1."
+   },
+   {
+    "node": "lem-sp-finite-free-direct-image-coherence",
+    "why": "Generic finite-free ring-sheaf direct-image comparison and its tower identities."
+   },
+   {
+    "node": "lem-weil-finite-free-completed-scalar-comparison",
+    "why": "Finite freeness of completed coefficient extension and its comparison with strict-tower scalar extension."
+   },
+   {
+    "node": "lem-weil-pbc-coefficient-exchange-mates",
+    "why": "Generic categorical exchange-cube coherence, with pullback cube supplied by step 1."
+   },
+   {
+    "node": "lem-weil-pbc-standard-quotients-perfect",
+    "why": "Two-term finite-free resolution verifying the perfect coefficient hypothesis of the projection and direct-image-limit tools."
+   },
+   {
+    "node": "lemma-weil-pbc-perfect-projection-formula",
+    "why": "Specifies ordinary direct-image quotient comparison as the actual projection morphism."
+   },
+   {
+    "node": "prop-weil-pbc-direct-image-limits",
+    "why": "Compatibility with the actual complete direct-image tower and completion maps."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Verifies the Noetherian valuation-ring hypothesis of the adic projection and strict direct-image-limit tools."
+   },
+   {
+    "node": "lem-pur-semilinear-scalar-localization",
+    "why": "Generic unique linear/semilinear extension of integral functors, transformations and their equations to raw scalar localizations (the rationalization of def-weil-rationalization-karoubi)."
+   },
+   {
+    "node": "lem-weil-scalar-extension-composition",
+    "why": "Composition isomorphisms of the rational scalar-extension transition functors used by the common-stage category of def-weil-algebraically-closed-coefficients."
    }
   ]
  },
@@ -508,15 +425,26 @@
   "lem-weil-pbc-noetherian-open-subscheme-noetherian",
   "lem-sfb-ringed-site-perfect-duality",
   "lem-sf-ringed-finite-free-hom-base-change",
-  "lem-weil-pbc-flat-ringed-diagram-restriction"
+  "lem-weil-pbc-flat-ringed-diagram-restriction",
+  "lem-amb-mate-unit-counit",
+  "lem-pur-completed-operation-tower-substitution",
+  "lem-pur-integral-coherence-tower",
+  "lem-pur-mate-unit-compatibility",
+  "lem-sf-open-tensor-normalization",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-sp-categorical-projection-mate-square",
+  "lem-sp-finite-free-direct-image-coherence",
+  "lem-weil-pbc-coefficient-exchange-mates",
+  "lem-pur-semilinear-scalar-localization",
+  "lem-weil-scalar-extension-composition"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-Codex-Q121-0e0127b6b",
-  "group": "Q121",
+  "reviewer": "NT-cc-NY-92eb92a35",
+  "group": "NY",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q121-0e0127b6b (reviewer sub-agent of L); spot-checked: Read all ten proof steps and 42 dependency statements; checked current blueprint, cited Stacks/Bhatt–Scholze passages, and archived master target interfaces. Hypotheses, evaluation/mate coherence, and edge cases pass. No cycles, duplicates, new nodes, or repairs. Accepted all 29 declared tool uses. Detailed findings are in review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-92eb92a35 (reviewer sub-agent of L); spot-checked: I read the human re-split note (at least 4 new nodes, at most 3000 characters, nothing shortened), the base proof on side-live (10 steps, 14616 characters), the blueprint main-20261015 proof, the item, all 4 new nodes, the report and the statements of all 29 cited nodes. The statement and stmt_deps are byte-identical to the live node. The item is not in the dropped list and nothing cites SGA. Compared with the earlier head 54f95747 (review FIX), this head changes only the scalar-associator child (ρ_n, T_n and Cone(1-s)[-1] made explicit) and step 5's wording, and it has lost that FIX: step 7 again cites prop-weil-pbc-rational-transport and prop-weil-pbc-common-stage-calculus. Those are stated for def-weil-pbc-rational-category and P_T (noetherian finite-dimensional T, def-weil-pbc-bounded-constructible-complete), not for the item's own def-weil-rationalization-karoubi and def-weil-algebraically-closed-coefficients on any scheme. The step also drops lem-weil-scalar-extension-exact-triangulated, which blueprint paragraph 3 cites (C4/C7). FIX: step 7 now cites def-weil-rationalization-karoubi, lem-pur-semilinear-scalar-localization (φ(ϖ_E) is invertible in O_L[1/ϖ_L]), def-weil-algebraically-closed-coefficients, lem-weil-scalar-extension-exact-triangulated and lem-weil-scalar-extension-composition. proof_deps and tool_uses are aligned, the proof is 2994 characters, there is no cycle, and step 5's landing repair is kept. Steps 1-6 hold. Step 1 uses ringed monoidal comparisons on the identity topos and the strict coherence/substitution nodes. Step 2 uses the site-perfect child, perfect duality and integral Hom reduction (arbitrary K). Step 3: the DVR node supplies the adic-datum hypotheses of the projection formula and of direct-image limits (Stacks 0A07). Step 5: finite-free S≅R^d is the hypothesis of the coherence and Hom nodes. Step 6: the mate unit/counit nodes state old step 10's equations, and admissibility is used only for its isomorphism clause. New nodes: (1) site-perfect scalar Hom is true by Stacks 08JJ/08JB. I tested P=0, R→0, the nonflat map Z/ℓ²→Z/ℓ and unbounded Q. It is not finite-free-hom-base-change. (2) The compactification realization matches the tower of def-weil-integral-rational-qbar-compact-support, with j quasi-compact, p proper and no finite-Tor bound. It is not the finite-Tor system-realization node. (3) The scalar associator χ-equation types correctly because C_{L/E}K is complete. E=L=M gives the unit map, and ρ_n is well typed in ramified towers. (4) The Hom-composition identity checks by transposing with μ^G naturality. Its overlap with lem-pur-scalar-hom-comparison-tower is advisory only. Every old step maps to a new node or to an existing node whose statement says it. Corrected file: fixes/dag/nodes/sec-smooth-purity/lem-fix-operation-reduction.json.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.Paper.BasicOperationsCoefficientReduction",
