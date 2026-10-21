@@ -36,10 +36,12 @@
    }
   },
   {
-   "text": "For each $n\\geq1$, [lem-pe-constant-left-module-inverse-image] canonically identifies $g^{-1}(R/\\pi^n)_X$ with $(R/\\pi^n)_S$. The reduction maps agree under these identifications: a constant scalar $a\\bmod\\pi^{n+1}$ maps to the constant scalar $a\\bmod\\pi^n$ on both sites. By [lem-weil-pbc-proetale-immersion-limit-preservation], $g^{-1}$ preserves this small countable inverse limit. Thus the map characterized by the quotient projections is the ring-sheaf isomorphism $c_g:g^{-1}B_X\\simeq B_S$; it respects addition and multiplication because each quotient projection does. The same lemma, with this $c_g$, makes $g^*$ exact. By [lem-pur-site-restriction-module-adjunction-exact], $j_U^*$ is exact for every site object $U$, so their composite $F=j_U^*g^*$ is exact.",
+   "text": "Form the coefficient ring tower Q_n=R/I^(n+1) before taking constant sheaves. Its terms are finite by finite_coefficientExtensionRing, since I=(pi). NatTrans.ofOpSequence with identity components identifies Q followed by the constant-sheaf functor with adicLisseRingSystem. Apply lem-weil-pbc-proetale-finite-tower-limit to this diagram. The component maps proEtaleConstantInverseImageMap are isomorphisms and commute with transitions by lem-weil-pbc-profinite-coefficient-inverse-image. Their induced limit isomorphism, composed with preservesLimitIso, is c. The two limit projection identities give exactly the required formula. The already proved proEtaleRingModulePullback exactness instances of the operations construction and lem-pur-site-restriction-module-adjunction-exact make the localized model restriction additive and exact.",
    "uses": [
-    "lem-pe-constant-left-module-inverse-image",
-    "lem-weil-pbc-proetale-immersion-limit-preservation",
+    "def-weil-l-adic-coefficient-extension",
+    "lem-weil-pbc-proetale-finite-tower-limit",
+    "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "def-weil-pbc-proetale-operations",
     "lem-pur-site-restriction-module-adjunction-exact"
    ],
    "elementary": false,
@@ -49,10 +51,11 @@
    }
   },
   {
-   "text": "By clause (1) of [lem-weil-pbc-constant-module-section-properties], taking the constant $R$-module sheaf preserves short exact sequences (even after taking sections on every object). Apply [lem-weil-pbc-completed-constant-algebra-flat-quotients] on $S$ with $A=R$, $I=(\\pi)$, and with its specified presentation equal to $B_S$ itself. Its tower indexed by $n\\geq0$ is the same tower $(R/\\pi^{n+1})_S$ as the one here indexed by positive integers. The canonical $R_S\\to B_S$ has precisely the required reduction composites, so that lemma supplies exact scalar extension to $B_S$-modules. Composing it with constant realization and the exact restriction of step 2 proves that $T_U:M\\mapsto j_U^*(B_S\\otimes_{R_S}M_S)$ is exact.",
+   "text": "Constant module realization is additive by CompletedConstantReduction.constant_additive and preserves finite limits and finite colimits by the existing CompletedConstantReduction.constant_exact theorem of [lem-weil-pbc-completed-constant-sheaf-reduction], now public. Apply [lem-weil-pbc-completed-constant-algebra-flat-quotients] with the completed ring itself, its identity presentation and CompletedConstantReduction.base. The base_exists projection formula verifies the hypothesis. exactFunctor_iff supplies finite-limit and finite-colimit preservation for scalar extension. Compose these functors with exact slice restriction.",
    "uses": [
-    "lem-weil-pbc-constant-module-section-properties",
-    "lem-weil-pbc-completed-constant-algebra-flat-quotients"
+    "lem-weil-pbc-completed-constant-sheaf-reduction",
+    "lem-weil-pbc-completed-constant-algebra-flat-quotients",
+    "lem-pur-site-restriction-module-adjunction-exact"
    ],
    "elementary": false,
    "source": {
@@ -88,10 +91,12 @@
  "proof_deps": [
   "lem-weil-l-adic-extension-integers-dvr",
   "lem-weil-pbc-pid-noetherian-normal",
-  "lem-pe-constant-left-module-inverse-image",
-  "lem-weil-pbc-proetale-immersion-limit-preservation",
+  "def-weil-l-adic-coefficient-extension",
+  "lem-weil-pbc-proetale-finite-tower-limit",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "def-weil-pbc-proetale-operations",
   "lem-pur-site-restriction-module-adjunction-exact",
-  "lem-weil-pbc-constant-module-section-properties",
+  "lem-weil-pbc-completed-constant-sheaf-reduction",
   "lem-weil-pbc-completed-constant-algebra-flat-quotients",
   "lem-weil-pbc-exact-functor-derived-factorization",
   "lem-weil-pbc-exact-functor-complex-cohomology",
@@ -101,7 +106,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Details of Proposition 6.8.11(3), final sentence invoking Proposition 6.6.11, supplied from the explicitly cited exactness, completion-flatness and Noetherian-module statements."
+  "place": "Details of Proposition 6.8.11(3), final sentence invoking Proposition 6.6.11, supplied from the explicitly cited exactness, completion-flatness and Noetherian-module statements. A8 stage-3 implementation: use the existing finite constant tower comparison for c; exact pullback instances and the existing CompletedConstantReduction.constant_exact theorem replace the more general immersion-limit and section-properties route."
  },
  "mathlib_searches": [
   {
@@ -259,10 +264,7 @@
  },
  "tool_uses": [
   "lem-weil-l-adic-extension-integers-dvr",
-  "lem-pe-constant-left-module-inverse-image",
-  "lem-weil-pbc-proetale-immersion-limit-preservation",
   "lem-pur-site-restriction-module-adjunction-exact",
-  "lem-weil-pbc-constant-module-section-properties",
   "lem-weil-pbc-completed-constant-algebra-flat-quotients"
  ],
  "reviewed": {
@@ -298,5 +300,15 @@
   "group": "Q84",
   "result": "fix",
   "note": "Statement matches the node clause by clause. c is pinned uniquely by every quotient projection through the canonical proEtaleConstantInverseImageMap. g^* is proEtaleRingModulePullback along c, j_U^* is overFunctor, and T_U is constant sheaf, then changeOfRings along CompletedConstantReduction.base (pinned by its ∃!), then restriction. Exactness is only in the conclusion and is true (093J/093M). K is unbounded; P is bounded with finite projective terms. FinitePresentation of H^q(P) for every q, and IsIso of the explicit composite of the comparison maps with H^q(α) (directions checked). Universes are not forced equal; E in Type (u+1) is the coefficient universe. Edge cases checked: empty S or U, P=0, torsion, negative q, g=id. Node diff vs live: only the new lean key. Statement verbatim; sorry only; docstrings present. Compiles via nt_compile --json: delivered 28.4 s clean, fixed 22.4 s clean. FIX (mechanical): H9, dropped six unused plain WeilConjectures imports added only to force artifact builds; added the missing proof-dep import Sheaf.Paper.CompletedConstantAlgebraFlatQuotients. fixes/LocalIntegralPerfectModelCohomology.lean is a complete replacement with the statement unchanged and no record change. Advisory: statement declarations owned by nodes outside stmt_deps (adic-lisse-module, adic-coefficient-datum, proetale-operations, completed-constant-sheaf-reduction .choose)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A8",
+  "result": "pass",
+  "landing": "20261021T120317-L-3749629",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
