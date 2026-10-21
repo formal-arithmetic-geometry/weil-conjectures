@@ -22002,3 +22002,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:51 L: merged deliver/Q15/lem-weil-pbc-proetale-closed-underived-projection (stage 2; reviewer PASS; parallel immutable checks)
 - 09:51 L: returned deliver/Q27/lem-weil-coefficient-complex-rationalization (reviewer RETURN: L: independent stage-2 immutable head 0ab0d85152f0: H12/H4: the new def node def-weil-coefficient-integer-inclusion (exi)
 - 09:51 L: returned deliver/R1/Sheaf.Paper.FiniteFieldDerivedTensorSummand (reviewer RETURN: (reviewer C-a536b, head a536bb87b) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.FiniteFieldDer)
+- 09:53 L: merged deliver/NC/lem-pur-tower-limit-transpose-normalization (stage 2; reviewer PASS; parallel immutable checks)

@@ -17,7 +17,9 @@
   "lem-weil-pbc-ringed-projection-mate-exact",
   "lem-weil-pbc-diagram-site-realization",
   "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "lem-weil-ringed-tower-pushforward-limit-comparison"
+  "lem-weil-ringed-tower-pushforward-limit-comparison",
+  "def-pur-constant-module-inverse-image-lift",
+  "def-pur-tower-derived-localization-comparisons"
  ],
  "proof": [
   {
@@ -303,5 +305,40 @@
   "group": "Q81",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q81-f69ac1d46 (reviewer sub-agent of L); spot-checked: Read the item's statement and all 7 steps, the statements of all 12 cited nodes plus the 9 stmt_deps, and Stacks 0A07 (sites-cohomology.tex line 5150), 07A6 and 09T5. The statement and stmt_deps are identical to Q75's creation of the item. Live is unsplit, and there is no repair note or dropped entry for the item. No new nodes. The 12 off-unit citations are generic tools, declared in tool_uses and accepted. Step 2: 1 is terminal in N_{>=1}^op, so ev_1 ⊣ Delta; Delta and lim then preserve K-injectives, and Rlim Delta QH = QH with identity unit. Step 3: the diagram-site realization gives tower K-injective resolutions; U and U^J preserve K-injectives; a_V is represented by the canonical a_H^0 with pi_n a_H^0 = U(pi_n), as the comparison node specifies. Step 5: I checked the chain computation, pi_n d' = eps_{H_n} F(U(pi_n)(a^0)^{-1} c) = t_n, with uniqueness only for limits of complexes. Step 6: k = b^sharp j substitution checked. Small cases checked: A=0, u=id, constant towers (consistent with lem-weil-pbc-constant-tower-pushforward-normalization), b = counit. FIX (C1): step 4 asserted without a node that the homotopy bijections compute the canonical derived adjunction. It now cites the Mathlib leaf lem-sc-derived-adjunction-from-underived (derived counit G'(beta)∘eps' = alpha∘Q(eps^0)), writes out the deduction at K-injective targets, and adds the leaf to proof_deps. A Mathlib leaf adds no cycle. Maintainer note: lem-sfb-derived-composition-adjunction-normalization, applied twice, is a generic route to the same result, and lem-coef-derived-tower-counit-projections overlaps the Delta ⊣ Rlim part. Neither is a duplicate of the item.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.TowerLimitTransposeNormalization",
+  "declaration": "CategoryTheory.TowerLimitTransposeNormalization.tower_limit_transpose_normalization",
+  "declarations": [
+   "CategoryTheory.TowerLimitTransposeNormalization.towerLimit",
+   "CategoryTheory.TowerLimitTransposeNormalization.towerLimitAdditive",
+   "CategoryTheory.TowerLimitTransposeNormalization.limitAdjunction",
+   "CategoryTheory.TowerLimitTransposeNormalization.ConstantUnitNormalization",
+   "CategoryTheory.TowerLimitTransposeNormalization.inverseAdditive",
+   "CategoryTheory.TowerLimitTransposeNormalization.inverseFiniteLimits",
+   "CategoryTheory.TowerLimitTransposeNormalization.inverseFiniteColimits",
+   "CategoryTheory.TowerLimitTransposeNormalization.directLimits",
+   "CategoryTheory.TowerLimitTransposeNormalization.directAdditive",
+   "CategoryTheory.TowerLimitTransposeNormalization.towerDirect",
+   "CategoryTheory.TowerLimitTransposeNormalization.towerInverse",
+   "CategoryTheory.TowerLimitTransposeNormalization.moduleAdjunction",
+   "CategoryTheory.TowerLimitTransposeNormalization.towerAdjunction",
+   "CategoryTheory.TowerLimitTransposeNormalization.tower_limit_transpose_normalization"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/TowerLimitTransposeNormalization.lean",
+  "statement": "theorem tower_limit_transpose_normalization [IsNoetherianRing A] (_I : Ideal A) : ∃ a : (towerLimit (Modules K A)).rightDerivedFunctor ⋙ d.moduleDirect.rightDerivedFunctor ≅ (towerDirect d).rightDerivedFunctor ⋙ (towerLimit (Modules J A)).rightDerivedFunctor, (∀ H : CochainComplex (ℕᵒᵖ ⥤ Modules K A) ℤ, UnboundedExactTower.cochainUnit d.moduleDirect (((towerLimit (Modules K A)).mapHomologicalComplex (.up ℤ)).obj H) ≫ d.moduleDirect.rightDerivedFunctor.map (UnboundedExactTower.cochainUnit (towerLimit (Modules K A)) H) ≫ a.hom.app (DerivedCategory.Q.obj H) = DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex (preservesLimitNatIso d.moduleDirect (J := ℕᵒᵖ)).hom (.up ℤ)).app H) ≫ UnboundedExactTower.cochainUnit (towerLimit (Modules J A)) (((towerDirect d).mapHomologicalComplex (.up ℤ)).obj H) ≫ (towerLimit (Modules J A)).rightDerivedFunctor.map (UnboundedExactTower.cochainUnit (towerDirect d) H)) ∧ IsIso (limitAdjunction (Modules J A)).unit ∧ IsIso (limitAdjunction (Modules K A)).unit ∧ ConstantUnitNormalization (Modules J A) ∧ ConstantUnitNormalization (Modules K A) ∧ (∀ (M : DerivedCategory.{w} (Modules J A)) (V : DerivedCategory.{w} (ℕᵒᵖ ⥤ Modules K A)) (c : M ⟶ (towerLimit (Modules J A)).rightDerivedFunctor.obj ((towerDirect d).rightDerivedFunctor.obj V)), (limitAdjunction (Modules K A)).homEquiv (d.moduleFunctor.mapDerivedCategory.obj M) V ((UnboundedExactTower.constantInterchange d.moduleFunctor).inv.app M ≫ ((towerAdjunction d).homEquiv ((Functor.const ℕᵒᵖ : Modules J A ⥤ _).mapDerivedCategory.obj M) V).symm (((limitAdjunction (Modules J A)).homEquiv M ((towerDirect d).rightDerivedFunctor.obj V)).symm c)) = ((moduleAdjunction d).homEquiv M ((towerLimit (Modules K A)).rightDerivedFunctor.obj V)).symm (c ≫ a.inv.app V)) ∧ (∀ (M : DerivedCategory.{w} (Modules J A)) (Z : DerivedCategory.{w} (ℕᵒᵖ ⥤ Modules J A)) (V : DerivedCategory.{w} (ℕᵒᵖ ⥤ Modules K A)) (b : (towerInverse d).mapDerivedCategory.obj Z ⟶ V) (j : (Functor.const ℕᵒᵖ : Modules J A ⥤ _).mapDerivedCategory.obj M ⟶ Z), (moduleAdjunction d).homEquiv M ((towerLimit (Modules K A)).rightDerivedFunctor.obj V) ((limitAdjunction (Modules K A)).homEquiv (d.moduleFunctor.mapDerivedCategory.obj M) V ((UnboundedExactTower.constantInterchange d.moduleFunctor).inv.app M ≫ (towerInverse d).mapDerivedCategory.map j ≫ b)) = (limitAdjunction (Modules J A)).unit.app M ≫ (towerLimit (Modules J A)).rightDerivedFunctor.map j ≫ (towerLimit (Modules J A)).rightDerivedFunctor.map ((towerAdjunction d).homEquiv Z V b) ≫ a.inv.app V)",
+  "branch": "newtargets-dag",
+  "by": "NC",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Canonical exact and K-injective localization constructions throughout. The comparison is fixed by the common-underived-composite equation, in the normalization of ringedTowerPushforwardLimitComparison; all Hom equalities use the actual canonical derived adjunctions. Definition nodes def-pur-constant-module-inverse-image-lift and def-pur-tower-derived-localization-comparisons own the unchanged published constant-module lift and the canonical constant-interchange/cochain-unit definitions; no theorem conclusion is added as a statement dependency."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a44a71a71",
+  "group": "NC",
+  "result": "pass",
+  "note": "Re-delivery of the 2697b770 H2 RETURN. The Lean differs only in imports (earlier import advisory addressed); the theorem signature and mathematics are identical to the head accepted in full. The two theorem stmt_deps are replaced by def-pur-constant-module-inverse-image-lift (existing:true, ConstantLeftModuleInverseImageLift + 9 helpers, every field matched with the TeX) and def-pur-tower-derived-localization-comparisons (existing:true, constantInterchange 3-factor and cochainUnit 4-arrow composites matched with the live source). check_existing and check_new_node are clean on both, there is no cycle and no competing definition owner, and the TeX citations equal the stmt_deps. No compile was run (no file changed); the worker reports a clean compile in 19.2/19.8 s. Advisory: the second readings are the author's own passes."
  }
 }

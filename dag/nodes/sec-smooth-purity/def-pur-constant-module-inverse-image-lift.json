@@ -1,0 +1,112 @@
+{
+ "id": "def-pur-constant-module-inverse-image-lift",
+ "kind": "definition",
+ "title": "Normalized constant left-module inverse-image lift",
+ "status": "split",
+ "statement": "Let $(C,J)$ and $(D,K)$ be small sites [def-weil-pbc-sites-and-cohomology], with universes as in [def-weil-size-convention], and let $\\Lambda$ be a unital ring, not necessarily commutative. Write $\\Lambda_J,\\Lambda_K$ for its sheafified constant ring sheaves [def-weil-pbc-constant-sheaf], and $\\operatorname{Modules}(J,\\Lambda)=\\operatorname{Mod}(\\Lambda_J)$ and similarly for $K$ [def-weil-sheaf-of-modules-category]. Let $L:\\operatorname{Sh}(J,\\mathrm{Set})\\rightleftarrows\\operatorname{Sh}(K,\\mathrm{Set}):R$ be a specified adjunction, with $L$ preserving finite limits. A normalized constant-left-module inverse-image lift of this adjunction is the following datum. It contains an isomorphism $c:L(\\underline\\Lambda_J)\\cong |\\Lambda_K|$ and an isomorphism $p:L(\\underline{*}_J)\\cong\\underline{*}_K$. After the canonical constant-sheaf/forgetful identifications, $c$ carries the ring addition and multiplication transported by $L$ and its inverse binary-product comparison to those on $\\Lambda_K$, and for each $r\\in\\Lambda$ it satisfies $c\\circ L(\\underline r)=\\underline r\\circ p$. It contains functors $F:\\operatorname{Modules}(J,\\Lambda)\\to\\operatorname{Modules}(K,\\Lambda)$ and $G$ in the opposite direction, an adjunction $F\\dashv G$, additivity of $F$, and preservation of finite limits and finite colimits by $F$. It also contains functors $B:\\operatorname{Ab}(J)\\to\\operatorname{Ab}(K)$ and $B'$ in the opposite direction, an adjunction $B\\dashv B'$, and natural underlying-set identifications $|B(-)|\\cong L(|-|)$ and $|B'(-)|\\cong R(|-|)$. The first identification carries the addition transported by $L$ and the inverse binary-product comparison to addition on $B(-)$. Forgetting these identifications carries the unit of $B\\dashv B'$ to the given unit of $L\\dashv R$. Finally, writing $V_J,V_K$ for forgetting scalars to abelian sheaves, the datum contains natural isomorphisms $V_KF\\cong BV_J$ and $V_JG\\cong B'V_K$, and a natural set isomorphism $|F(-)|\\cong L(|-|)$ equal to the composite of the first of these with the underlying-set identification of $B$. Under $V_KF\\cong BV_J$, multiplication by every constant scalar $r$ on $F(M)$ agrees with applying $B$ to multiplication by $r$ on $M$. Under the two scalar-forgetting isomorphisms the unit of $F\\dashv G$ agrees with that of $B\\dashv B'$. Sectionwise addition, multiplication, and scalar multiplication in these conditions mean the actual operations on the displayed sheaves. This defines a type of normalized lifts, without asserting that this type is inhabited.",
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-size-convention",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 00YV, proposition-functoriality-algebraic-structures-topoi, (2), (5), (6) and the fixed-ring scalar-endomorphism paragraph; the normalized lift datum in ConstantLeftModuleTransport.lean lines 41-226."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Normalized constant ring module inverse image lift of a geometric morphism with transported addition scalar action and adjunction unit",
+   "results": "SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit; PresheafOfModules.pullbackPushforwardAdjunction; LocalizedModule.lift'; SheafOfModules.PullbackConstruction.adjunction; Mathlib.Tactic.Ring.CSLift.lift; Mathlib.Tactic.Ring.CSLift.mk; Mathlib.Tactic.Ring.CSLiftVal.mk; PresheafOfModules.unit",
+   "date": "2026-10-21",
+   "verdict": "Existing project definitions reused; Mathlib hits supply general ingredients rather than this normalized interface."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized constant ring module inverse image lift of a geometric morphism with transported addition scalar action and adjunction unit",
+   "results": "AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap; AlgebraicGeometry.Scheme.Hom.normalizationDiagram; AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage; SheafOfModules.unitToPushforwardObjUnit; AlgebraicGeometry.ΓSpec.toOpen_comp_locallyRingedSpaceAdjunction_homEquiv_app; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; AlgebraicGeometry.ΓSpecIso_inv_ΓSpec_adjunction_homEquiv; AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app",
+   "date": "2026-10-21",
+   "verdict": "Existing project definitions reused; Mathlib hits supply general ingredients rather than this normalized interface."
+  },
+  {
+   "tool": "grep",
+   "query": "ConstantLeftModuleInverseImageLift|constantInterchange|cochainUnit",
+   "results": "none",
+   "date": "2026-10-21",
+   "verdict": "Existing project definitions reused; Mathlib hits supply general ingredients rather than this normalized interface."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-tower-limit-transpose-normalization",
+  "date": "2026-10-21",
+  "group": "NC"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Imported Proof Step 2 (Qbar-stage), independence of finite coefficient extension; unit sk-thm-purity-transport Step 3, transitivity in coefficient extensions; auxiliary for integral coefficient comparison proof step 9 (completion unit and tower counits); (old proof step 5). Definition interface needed to state the common-derived-limit normalization and its Hom transposes.",
+   "via": [
+    "lem-pur-tower-limit-transpose-normalization",
+    "lem-pur-compact-support-completed-projection-coherence",
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "lem-pur-adic-purity-scalar-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ConstantLeftModuleTransport",
+  "declaration": "CategoryTheory.ConstantLeftModuleInverseImageLift",
+  "declarations": [
+   "CategoryTheory.ConstantLeftModuleInverseImage.Modules",
+   "CategoryTheory.ConstantLeftModuleInverseImage.V",
+   "CategoryTheory.ConstantLeftModuleInverseImage.U",
+   "CategoryTheory.ConstantLeftModuleInverseImage.W",
+   "CategoryTheory.ConstantLeftModuleInverseImage.IsAddition",
+   "CategoryTheory.ConstantLeftModuleInverseImage.IsScalar",
+   "CategoryTheory.ConstantLeftModuleInverseImage.CoeffSet",
+   "CategoryTheory.ConstantLeftModuleInverseImage.IsRingAdd",
+   "CategoryTheory.ConstantLeftModuleInverseImage.IsRingMul",
+   "CategoryTheory.ConstantLeftModuleInverseImageLift"
+  ],
+  "statement": "structure ConstantLeftModuleInverseImageLift\n    {C D : Type u} [SmallCategory C] [SmallCategory D]\n    (J : GrothendieckTopology C) (K : GrothendieckTopology D)\n    (Λ : Type u) [Ring Λ] [HasWeakSheafify J RingCat.{u}]\n    [HasWeakSheafify K RingCat.{u}]\n    (L : Sheaf J (Type u) ⥤ Sheaf K (Type u))\n    (R : Sheaf K (Type u) ⥤ Sheaf J (Type u))\n    (adj : L ⊣ R) (hL : PreservesFiniteLimits L)",
+  "branch": "newtargets-dag",
+  "by": "NC",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Definition ownership repair requested in the return of immutable head 2697b770ba8c. These unchanged live definitions previously appeared only among helper declarations of a theorem node. No source module or theorem conclusion is redefined."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a44a71a71",
+  "group": "NC",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a44a71a71",
+  "group": "NC",
+  "result": "pass",
+  "note": "Re-delivery of the 2697b770 H2 RETURN. The Lean differs only in imports (earlier import advisory addressed); the theorem signature and mathematics are identical to the head accepted in full. The two theorem stmt_deps are replaced by def-pur-constant-module-inverse-image-lift (existing:true, ConstantLeftModuleInverseImageLift + 9 helpers, every field matched with the TeX) and def-pur-tower-derived-localization-comparisons (existing:true, constantInterchange 3-factor and cochainUnit 4-arrow composites matched with the live source). check_existing and check_new_node are clean on both, there is no cycle and no competing definition owner, and the TeX citations equal the stmt_deps. No compile was run (no file changed); the worker reports a clean compile in 19.2/19.8 s. Advisory: the second readings are the author's own passes."
+ }
+}

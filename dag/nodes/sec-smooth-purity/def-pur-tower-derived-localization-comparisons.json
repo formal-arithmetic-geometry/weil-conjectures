@@ -1,0 +1,105 @@
+{
+ "id": "def-pur-tower-derived-localization-comparisons",
+ "kind": "definition",
+ "title": "Canonical constant-tower interchange and cochain localization unit",
+ "status": "split",
+ "statement": "Let $A,B$ be abelian categories [def-sp-abelian], with ordinary unbounded derived categories and localization functors $Q_A,Q_B$ [def-weil-abstract-derived-category], in independently chosen localization universes. Put $T=\\mathbf N_{\\geq1}^{\\mathrm{op}}$, let $\\operatorname{Tow}(A)=\\operatorname{Fun}(T,A)$ and similarly for $B$ [def-weil-inverse-system], and let $\\Delta_A,\\Delta_B$ be the constant-tower functors. For an additive exact functor $F:B\\to A$ [def-sp-left-exact-additive], assuming these four derived categories exist, define the constant interchange\n$$D(F^{\\operatorname{Tow}})\\circ D(\\Delta_B)\\xrightarrow{\\sim}D(\\Delta_A)\\circ D(F)$$\nto be the composite of the inverse exact-derived composition comparison for $(\\Delta_B,F^{\\operatorname{Tow}})$, the exact localization of the identity-component ordinary isomorphism $F^{\\operatorname{Tow}}\\circ\\Delta_B\\cong\\Delta_A\\circ F$, and the exact-derived composition comparison for $(F,\\Delta_A)$. Here $F^{\\operatorname{Tow}}$ applies $F$ levelwise, and $D$ of an exact functor means its canonical localization. For an additive functor $G:A\\to B$, assuming $A$ has K-injective resolutions, use the canonical total right derived functor $RG$ and its homotopy-level universal unit [def-sfb-right-derived-functor]. Define its cochain unit at every complex $I$ as the actual composite\n$$Q_B(GI)\\longrightarrow Q^h_B(q_B(GI))\\longrightarrow Q^h_B(G_K(q_A I))\\longrightarrow RG(Q^h_A(q_A I))\\longrightarrow RG(Q_A I).$$\nHere $q_A,q_B$ are the quotients from complexes to homotopy categories and $Q^h_A,Q^h_B$ their derived localizations; the first arrow is the inverse quotient/localization factorization isomorphism, the second is $Q^h_B$ applied to the inverse factorization of the degreewise functor through homotopy, the third is the homotopy-level unit of $RG$, and the last is $RG$ applied to the quotient/localization factorization isomorphism. These are definitions of specified maps, without an assertion about their compatibility with adjunction transposes.",
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category",
+  "def-weil-inverse-system",
+  "def-sp-left-exact-additive",
+  "def-sfb-right-derived-functor"
+ ],
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 015F and 0DVC for exact localization, Tag 070K (lemma-enough-K-injectives-implies) for the total right-derived unit; canonical localization composites in UnboundedExactAdjunctionSquare.lean lines 102-149; applied to Stacks Cohomology on Sites 0A07, first proof."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical cochain unit of total right derived functor and derived constant diagram exact functor interchange",
+   "results": "CategoryTheory.Functor.totalRightDerivedUnit; CategoryTheory.Functor.rightDerived; CategoryTheory.Functor.totalRightDerived; CategoryTheory.Functor.totalLeftDerived; CategoryTheory.Functor.totalLeftDerivedCounit; CategoryTheory.Functor.rightDerived_map_eq; CategoryTheory.Functor.instIsRightDerivedFunctorTotalRightDerivedTotalRightDerivedUnit; CategoryTheory.Functor.rightDerivedToHomotopyCategory",
+   "date": "2026-10-21",
+   "verdict": "Existing project definitions reused; Mathlib hits supply general ingredients rather than this normalized interface."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical cochain unit of total right derived functor and derived constant diagram exact functor interchange",
+   "results": "CategoryTheory.Functor.instIsRightDerivedFunctorTotalRightDerivedTotalRightDerivedUnit; DerivedCategory.singleFunctorIsoCompQ; CategoryTheory.Functor.toRightDerivedZero; CategoryTheory.Functor.mapDerivedCategorySingleFunctor; CategoryTheory.Functor.mapDerivedCategoryFactorsh; CategoryTheory.Functor.mapDerivedCategoryFactors; CategoryTheory.Functor.rightDerivedZeroIsoSelf_hom_inv_id_app; CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_assoc",
+   "date": "2026-10-21",
+   "verdict": "Existing project definitions reused; Mathlib hits supply general ingredients rather than this normalized interface."
+  },
+  {
+   "tool": "grep",
+   "query": "ConstantLeftModuleInverseImageLift|constantInterchange|cochainUnit",
+   "results": "none",
+   "date": "2026-10-21",
+   "verdict": "Existing project definitions reused; Mathlib hits supply general ingredients rather than this normalized interface."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-tower-limit-transpose-normalization",
+  "date": "2026-10-21",
+  "group": "NC"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Imported Proof Step 2 (Qbar-stage), independence of finite coefficient extension; unit sk-thm-purity-transport Step 3, transitivity in coefficient extensions; auxiliary for integral coefficient comparison proof step 9 (completion unit and tower counits); (old proof step 5). Definition interface needed to state the common-derived-limit normalization and its Hom transposes.",
+   "via": [
+    "lem-pur-tower-limit-transpose-normalization",
+    "lem-pur-compact-support-completed-projection-coherence",
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "lem-pur-adic-purity-scalar-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.UnboundedExactAdjunctionSquare",
+  "declaration": "CategoryTheory.UnboundedExactTower.constantInterchange",
+  "declarations": [
+   "CategoryTheory.UnboundedExactTower.constantInterchange",
+   "CategoryTheory.UnboundedExactTower.cochainUnit"
+  ],
+  "statement": "def constantInterchange :\n    (Functor.const ℕᵒᵖ : B ⥤ _).mapDerivedCategory ⋙\n        ((Functor.whiskeringRight ℕᵒᵖ B A).obj F).mapDerivedCategory ≅\n      F.mapDerivedCategory ⋙ (Functor.const ℕᵒᵖ : A ⥤ _).mapDerivedCategory",
+  "branch": "newtargets-dag",
+  "by": "NC",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Definition ownership repair requested in the return of immutable head 2697b770ba8c. These unchanged live definitions previously appeared only among helper declarations of a theorem node. No source module or theorem conclusion is redefined."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a44a71a71",
+  "group": "NC",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a44a71a71",
+  "group": "NC",
+  "result": "pass",
+  "note": "Re-delivery of the 2697b770 H2 RETURN. The Lean differs only in imports (earlier import advisory addressed); the theorem signature and mathematics are identical to the head accepted in full. The two theorem stmt_deps are replaced by def-pur-constant-module-inverse-image-lift (existing:true, ConstantLeftModuleInverseImageLift + 9 helpers, every field matched with the TeX) and def-pur-tower-derived-localization-comparisons (existing:true, constantInterchange 3-factor and cochainUnit 4-arrow composites matched with the live source). check_existing and check_new_node are clean on both, there is no cycle and no competing definition owner, and the TeX citations equal the stmt_deps. No compile was run (no file changed); the worker reports a clean compile in 19.2/19.8 s. Advisory: the second readings are the author's own passes."
+ }
+}
