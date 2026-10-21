@@ -24,157 +24,88 @@
  ],
  "proof": [
   {
-   "text": "All inverse images here are exact on constant-$A$ modules: use [lem-sf-comparison-pullback-exact] for $C_T$, [prop-weil-pbc-inverse-image-modules-exact] for etale restriction, and [def-weil-pbc-proetale-operations] with [prop-weil-pbc-proetale-constant-ring-map] for pro-etale restriction. The latter definition identifies the module pullback with exact abelian inverse image when the coefficient map is invertible. Both open extensions are exact by [lem-weil-pbc-extension-by-zero-exact] and [lem-weil-extension-by-zero-exact]. By [lem-weil-pbc-exact-functor-derived-factorization], all edges in the open comparison squares preserve quasi-isomorphisms and descend canonically. Their termwise localization is the functor intended in the statement, with its canonical exact-composition identifications; in particular this applies on unbounded complexes.",
+   "text": "Use the canonical ordinary open unit equation of openComparison_unit_normalization. Compose its equality with restriction of the inverse extension comparison to obtain the unit-mate equation for the inverse extension comparison and the specified restriction comparison.",
    "uses": [
-    "lem-sf-comparison-pullback-exact",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "def-weil-pbc-proetale-operations",
-    "prop-weil-pbc-proetale-constant-ring-map",
-    "lem-weil-pbc-extension-by-zero-exact",
-    "lem-weil-extension-by-zero-exact",
+    "lem-sf-open-comparison-unit-normalization",
+    "lem-weil-pbc-extension-by-zero-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Localize the two ordinary open adjunctions using exactDerivedAdjunction. Its unit formula gives the normalized Hom formula exact_hom_fac on cochain representatives. The composition and natural-isomorphism factorization equations give exactSquare_fac for the canonical restriction square. Apply derivedMate_comparison to these formulas and the degreewise ordinary unit-mate equation. Cancel the invertible target factorization and use localization natural-transformation extensionality to identify the actual derived inverse extension comparison as the inverse mate of the actual derived restriction comparison. Mathlib unit_mateEquiv_symm and mateEquiv_counit_symm, followed by cancellation of the inverse extension comparison, give both asserted open equations.",
+   "uses": [
+    "def-weil-exact-derived-adjunction",
+    "lem-pur-derived-mate-comparison",
+    "def-weil-pbc-adjunction-mate",
     "lem-weil-pbc-exact-functor-derived-factorization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 04JC (lemma-flat-pullback-exact), 03DJ (lemma-extension-by-zero-exact); constant-ring identifications as in the cited nodes"
-   }
+   "elementary": false
   },
   {
-   "text": "First work on sheaves, writing $E=j_{e,!}$, $r=j_e^*$, $J=j_{p,!}$, $s=j_p^*$ and $o=o_j$. The comparison $o$ is the canonical one, so [lem-sf-open-comparison-unit-normalization] gives\n$$s(o_F)a_{EF}C_U(\\eta^e_F)=\\eta^p_{C_UF}.$$\nThe $a$ in that node is precisely the canonical pullback comparison of the statement, not an independently chosen identification. This is the required open unit equation before localization.",
-   "uses": [
-    "lem-sf-open-comparison-unit-normalization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09AF, lemma-jshriek-comparison, common-right-adjoint proof; unit normalization as recorded by the cited refinement"
-   }
-  },
-  {
-   "text": "Derive the sheaf counit equation explicitly. The open adjunctions are [lem-weil-pbc-extension-by-zero-adjunction] and [lem-weil-extension-by-zero-adjunction]. Put\n$$y=C_X(e^e_M)o_{rM}^{-1}:JC_UrM\\longrightarrow C_XM.$$\nIts $J\\dashv s$ transpose, using the preceding unit equation at $F=rM$, is\n$$s(y)\\eta^p_{C_UrM}=s(C_Xe^e_M)a_{ErM}C_U(\\eta^e_{rM})\n=a_M C_U(r(e^e_M)\\eta^e_{rM})=a_M.$$\nThe middle equality is naturality of $a$; the last is the etale triangle identity. The inverse-transpose formula therefore gives $y=e^p_{C_XM}J(a_M)$. Compose with $o_{rM}$ on the right to obtain exactly the asserted counit equation on sheaves.",
-   "uses": [
-    "lem-weil-pbc-extension-by-zero-adjunction",
-    "lem-weil-extension-by-zero-adjunction"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09AF, lemma-jshriek-comparison; elementary transpose calculation from the preceding unit equation and the two specified open adjunctions"
-   }
-  },
-  {
-   "text": "Use [def-weil-exact-derived-adjunction] for the exact open adjunctions: their derived units and counits are the localized termwise sheaf units and counits. Apply [lem-sp-exact-derived-transformation-pasting] to the two sheaf equalities of Steps 2 and 3, with the exact functors of Step 1. Its cells need not be invertible, so it applies to units and counits as well as to $a,o$. It gives both displayed open equations, for all unbounded $L,M$, with exactly the specified termwise $a_j,o_j$ and their canonical composition identifications.",
-   "uses": [
-    "def-weil-exact-derived-adjunction",
-    "lem-sp-exact-derived-transformation-pasting"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 015F, lemma-right-derived-exact-functor; localization of adjunction transformations and their finite pasting equations"
-   }
-  },
-  {
-   "text": "The etale open unit is invertible by [lem-weil-pbc-extension-by-zero-unit-iso]. This abelian-sheaf statement applies to the underlying abelian sheaves of constant-$A$ modules: the extension presheaf and its adjunction maps are the same after forgetting the $A$-action [def-weil-pbc-extension-by-zero]. An inverse to an $A$-linear bijection is $A$-linear, since $f(ax)=af(x)$ implies $f^{-1}(ay)=af^{-1}(y)$. The termwise inverse is a chain map by naturality, and localizes to the inverse derived unit. The open unit equation of Step 4, whose other factors are invertible, also makes the pro-etale unit at $C_UL$ invertible. It says precisely that $j_p^*(o_{j,L})$, identified on its source by $a_{j,j_{e,!}L}$ and these units, is the identity of $C_UL$.",
+   "text": "The ordinary open units are isomorphisms by full faithfulness of extension by zero. Exact localization takes their inverses and the canonical composition isomorphisms to an isomorphism from the composite derived extension/restriction to the identity. The localized adjunction therefore has fully faithful left adjoint, and its actual unit is invertible. Apply this to both sites, including the comparison image on the pro-etale side.",
    "uses": [
     "lem-weil-pbc-extension-by-zero-unit-iso",
-    "def-weil-pbc-extension-by-zero"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0F70, lemma-jshriek-open; module version is the same canonical map with its coefficient action"
-   }
-  },
-  {
-   "text": "For a closed $h:Z\\hookrightarrow X$, its complementary open immersion $v$ is quasi-compact. Indeed, for every quasi-compact open $V\\subset X$, the inverse image $V\\cap(X\\setminus Z)$ is an open subscheme of the Noetherian scheme $X$, hence is quasi-compact by [lem-weil-pbc-noetherian-open-subscheme-noetherian]. Apply [lem-exc-proetale-closed-exact] to obtain exactness of $h_{p,*}$; the quasi-compactness just checked is its essential hypothesis. On the etale site [lem-trf-oriented-closed-base-localization] identifies $Z_e$ with the closed complement and states exactness and invertibility of the module counit for its direct image. Thus $h_{e,*}$ is exact too. The pro-etale sheaf counit is invertible by [lem-exc-proetale-closed-fully-faithful]. These facts concern all constant-$A$ module sheaves, without constructibility assumptions. Also $h$ is separated and universally closed by [lem-weil-pbc-closed-immersion-integral-separated-uc], hence quasi-compact by [lem-weil-pbc-universally-closed-quasi-compact] and quasi-separated by [lem-pc-separated-quasi-separated]. This verifies the hypotheses of the named direct-image mate comparison used in Step 8.",
-   "uses": [
-    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-    "lem-exc-proetale-closed-exact",
-    "lem-trf-oriented-closed-base-localization",
-    "lem-exc-proetale-closed-fully-faithful",
-    "lem-weil-pbc-closed-immersion-integral-separated-uc",
-    "lem-weil-pbc-universally-closed-quasi-compact",
-    "lem-pc-separated-quasi-separated"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09BM, lemma-closed-immersion-complement-retrocompact-exact; Tag 09AA, lemma-closed-immersion; etale closed complement: Tag 04CA and sites-modules.tex Tag 08M3"
-   }
-  },
-  {
-   "text": "By [lem-weil-pbc-exact-functor-derived-functor], the right derived functors of the two now-exact closed direct images are their termwise localizations, with the canonical universal derived comparisons. Their derived adjunctions agree, under these comparisons, with [def-weil-exact-derived-adjunction]. To check the normalization, use the canonical Hom formula of [lem-pc-pre-derived-adjoint-functors-general] for $F=h_{\\tau,*}$ and $G=h_\\tau^*$. Both are exact. Every quasi-isomorphism $s:K\\to I$ is sent to an isomorphism, so $QF(s)^{-1}$ gives the representing cocone for $RF(K)=QF(K)$; likewise $QG(t)^{-1}$ gives the representing cone for $LG(M)=QG(M)$. These diagrams are isomorphic to constant diagrams, verifying essential constancy. For $s=t=1$, the cited formula identifies the transpose of $Qf$ with $Q(f^\\sharp)$; for all other fraction representatives it is the same formula with the inverse images of $s,t$ inserted. The localized ordinary adjunction has this formula too, so uniqueness in that node identifies the Hom bijections. Consequently the canonical derived closed counits are precisely the localized ordinary counits, rather than counits of arbitrarily chosen isomorphic adjunctions.",
-   "uses": [
-    "lem-weil-pbc-exact-functor-derived-functor",
     "def-weil-exact-derived-adjunction",
-    "lem-pc-pre-derived-adjoint-functors-general"
+    "lem-sfb-finite-extension-by-zero-fully-faithful"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 015F, lemma-right-derived-exact-functor; Tag 0FND, lemma-pre-derived-adjoint-functors-general, fraction formula specialized to two exact functors"
-   }
+   "elementary": true
   },
   {
-   "text": "On sheaves, the defining transpose formula for $\\delta_h^0$ gives\n$$\\varepsilon^p_{h,C_ZF}h_p^*(\\delta^0_{h,F})a_{h,h_{e,*}F}=C_Z(\\varepsilon^e_{h,F});$$\nthis is the inverse-transpose identity of [def-weil-pbc-adjunction-mate]. All functors in this equality are exact by Steps 1 and 6. Therefore [lem-sp-exact-derived-transformation-pasting], together with the counit identification of Step 7, gives the same equation on $D^+$ for the termwise descent $D(\\delta_h^0)$. On the other hand [lem-weil-pbc-comparison-direct-image-canonical-mate] defines $\\delta_h$ as the transpose of $C_Z(\\varepsilon^e_h)a_h^{-1}$ and supplies the same equation. Both maps therefore have the same transpose under $h_p^*\\dashv Rh_{p,*}$, so the bijectivity in [def-weil-pbc-adjunction-mate] gives $D(\\delta_h^0)=\\delta_h$. The closed-immersion instance of the named comparison is exactly the one fixed in the statement; its isomorphism assertion now also shows that this particular localized mate is invertible.",
+   "text": "A closed immersion is finite, so its etale direct image preserves finite colimits by the existing finite-morphism exactness theorem. For pro-etale direct image take the open subscheme complementary to its closed range. Its inclusion is quasi-compact because the target is Noetherian. Its range is the complement of the closed range, so preservesFiniteColimits_lowerStar_of_isCompl applies. These arguments use all module sheaves, without constructibility hypotheses.",
    "uses": [
-    "def-weil-pbc-adjunction-mate",
-    "lem-sp-exact-derived-transformation-pasting",
-    "lem-weil-pbc-comparison-direct-image-canonical-mate"
+    "lemma-weil-pbc-finite-direct-image-exact",
+    "lem-exc-proetale-closed-exact",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-closed-immersion-integral-separated-uc"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 0B65, lemma-transformation-between-functors-and-adjoints; derived.tex Tag 015F for passage of the sheaf transpose equation to exact derived functors"
-   }
+   "elementary": false
   },
   {
-   "text": "The closed sheaf counits in Step 6 are natural isomorphisms. Their termwise inverses are chain maps and remain inverse after localization, so Step 7 makes both closed derived counits invertible. The equation of Step 8 consequently reads\n$$\\varepsilon^p_{h,C_ZL}\\,h_p^*(\\delta_{h,L})\\,a_{h,h_{e,*}L}\\,(C_Z\\varepsilon^e_{h,L})^{-1}=1_{C_ZL},$$\nwhich is exactly the stated closed restriction normalization. The analogous open normalization was proved in Step 5. Finally [lem-weil-pbc-comparison-pullback] supplies identity and composite compatibility of the canonical sheaf pullback comparisons. [lem-sp-exact-derived-transformation-pasting] carries those equations with their compositors to the derived comparisons. Thus all restrictions above use the canonical composition identifications as asserted, including identity and empty immersions.",
+   "text": "Apply the inverse counit formula for mates to the ordinary direct-image comparison. Its definition is an iterated mate of the sectionwise direct-image comparison. The iterated_mateEquiv_conjugateEquiv_symm identity identifies the inverse mate with the specified canonical pullback comparison. Rewriting the adjunction Hom equivalence gives the asserted ordinary transpose formula.",
    "uses": [
-    "lem-weil-pbc-comparison-pullback",
-    "lem-sp-exact-derived-transformation-pasting"
+    "def-weil-pbc-adjunction-mate"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 015F, exact localization of the canonical restriction maps; cancellation of the invertible counits and preservation of the composition equations"
-   }
+   "elementary": true
+  },
+  {
+   "text": "Since both closed direct images are exact, their canonical right-derived-to-termwise isomorphisms satisfy the universal unit factorization. For the specified right-derived base-change transformation, apply localization extensionality on bounded-below homotopy representatives. Precompose with the invertible image of the right-derived unit and use rightDerivedFunctorPlusBaseChange_fac. Postcompose with the two exact-functor factorizations; naturality and the canonical exact-composition and natural-isomorphism factorization equations reduce both sides to the same localized sheaf comparison. This proves the first closed equality for the actual specified maps.",
+   "uses": [
+    "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The second closed equality is exactly fixedComparisonDirectImageMatePlus_counit, specialized to the closed immersion, which is quasi-compact and quasi-separated. The ordinary closed counits are invertible by full faithfulness on both sites. Their termwise counits remain invertible on homotopy categories and bounded-below subcategories. The equation derivedPlus_counit_app_fac and invertibility of the right-derived unit for an exact functor show that each derived counit is invertible on the image of Qh. Essential surjectivity of Qh extends this to every object. The recorded derived adjunction equals derivedPlus by derivedAdjunctionPlus_eq_derivedPlus.",
+   "uses": [
+    "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "lem-exc-proetale-closed-fully-faithful",
+    "prop-openclosed-lowerstar-fully-faithful"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sf-comparison-pullback-exact",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "def-weil-pbc-proetale-operations",
-  "prop-weil-pbc-proetale-constant-ring-map",
-  "lem-weil-pbc-extension-by-zero-exact",
-  "lem-weil-extension-by-zero-exact",
-  "lem-weil-pbc-exact-functor-derived-factorization",
   "lem-sf-open-comparison-unit-normalization",
   "lem-weil-pbc-extension-by-zero-adjunction",
-  "lem-weil-extension-by-zero-adjunction",
   "def-weil-exact-derived-adjunction",
-  "lem-sp-exact-derived-transformation-pasting",
-  "lem-weil-pbc-extension-by-zero-unit-iso",
-  "def-weil-pbc-extension-by-zero",
-  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-  "lem-exc-proetale-closed-exact",
-  "lem-trf-oriented-closed-base-localization",
-  "lem-exc-proetale-closed-fully-faithful",
-  "lem-weil-pbc-closed-immersion-integral-separated-uc",
-  "lem-weil-pbc-universally-closed-quasi-compact",
-  "lem-pc-separated-quasi-separated",
-  "lem-weil-pbc-exact-functor-derived-functor",
-  "lem-pc-pre-derived-adjoint-functors-general",
+  "lem-pur-derived-mate-comparison",
   "def-weil-pbc-adjunction-mate",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-extension-by-zero-unit-iso",
+  "lem-sfb-finite-extension-by-zero-fully-faithful",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "lem-exc-proetale-closed-exact",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-closed-immersion-integral-separated-uc",
   "lem-weil-pbc-comparison-direct-image-canonical-mate",
-  "lem-weil-pbc-comparison-pullback"
+  "lem-exc-proetale-closed-fully-faithful",
+  "prop-openclosed-lowerstar-fully-faithful"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-weil-finite-duality-site-comparison.proof.md",
-  "place": "Second proof paragraph, locally closed comparison; explicit open transpose calculation and exact-localization proof of the closed counit mate, using Stacks 09AF, 09BM, 09AA, 04CA, 015F and 0FND."
+  "place": "Second proof paragraph, open/closed comparison. D5 proof uses normalized cochain mate comparison, finite etale direct-image exactness, the quasi-compact pro-etale open complement, and canonical bounded-below right-derived factorization equations."
  },
  "mathlib_searches": [
   {
@@ -443,5 +374,15 @@
   "group": "Q38",
   "result": "pass",
   "note": "Read node (only the lean field is new vs live), all 13 stmt_dep records and the used declarations in side-live, and the source place. Open: a_j/o_j localize the recorded canonical isos; units/counits are exactDerivedAdjunction of the ordinary j_!⊣j^* adjunctions; both equations hold for all unbounded inputs in the correct order, mirroring openComparison_unit_normalization; the unit IsIso clauses render 'restriction of o_j is the identity'. Closed: exactness of both direct images; delta^0 = lowerStarComparisonUpperStarBaseChange with transpose via comparisonUpperStarCompUpperStarIso.hom = a^-1; termwise descent equals fixedComparisonDirectImageMatePlus under the rightDerivedUnique identifications; counit equation (= the dep theorem, a recall in the node) and both counits IsIso. Noetherian = IsLocallyNoetherian + CompactSpace; A : Type (u+1) as in all deps; statement verbatim; all bodies sorry; docstrings ok; real pro-etale site. Advisories: fixed-scalar ProEtale.openImmersionLowerShriek is not listed in the def-weil-extension-by-zero record (sfIntrinsicExtensionByZero is its transport); exactDerivedAdjunction owner is only a proof_dep; the etale closed exactness restates the proved Etale.preservesFiniteColimits_lowerStar_of_isIntegralHom; possibly unused proof imports. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D5",
+  "result": "pass",
+  "landing": "20261021T152303-L-1846132",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

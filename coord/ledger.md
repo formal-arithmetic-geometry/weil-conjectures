@@ -22912,3 +22912,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:20 L: merged deliver/N6/lem-sfb-partial-kummer-boundary-unit-model (reviewer FIX; after a return; new nodes: 4)
 - 15:20 L: merged deliver/N7/lem-sfb-transverse-tame-open-shriek-exchange (stage 2; reviewer PASS; parallel immutable checks)
 - 15:21 L: returned deliver/NP/lem-sfb-complete-group-forgetful-automorphisms (reviewer RETURN: L: independent stage-2 immutable head f08623fc3d88: H2 theorem stmt_dep: the statement's ≃ₜ* on Aut(openOrbitForget G) a)
+- 15:23 L: merged deliver/D5/Sheaf.AlgebraicGeometry.DerivedImmersionComparisonNormalization (stage 3; reviewer PASS; first push; landing 20261021T152303-L-1846132 (interface); batch 20261021T152302; modules 1; new nodes 0; change records: coord/changes/d5-derived-immersion-normalization-proof-commands.md)
