@@ -23600,3 +23600,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:00 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
 - 20:01 L: merged deliver/O4/lem-sfb-norm-one-finite-subfield-projection (reviewer FIX; first push; new nodes: 0)
 - 20:01 L: merged deliver/NP/lem-sfb-geometric-condensed-finite-scalar-model (stage 2; reviewer PASS; parallel immutable checks)
+- 2026-10-21T20:02:39Z L: superseded stage-1 delivery NR/lem-sfb-algcl-countable-closed-finite-cover at f263d4349c95de14138e9f17f10002db2a3653db; current completion retained; packet archived at refs/superseded/NR/lem-sfb-algcl-countable-closed-finite-cover/f263d4349c95de14138e9f17f10002db2a3653db; stale return retired.
