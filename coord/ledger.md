@@ -20758,3 +20758,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:40 L: returned deliver/NZ/lem-sfb-kflat-scalar-comparison-normalization (reviewer RETURN: L: independent stage-2 immutable head c8ca66406d02: H3: the node's composition clause θ_gf=(f_B^*θ_g)∘(θ_f g_A^*), with )
 - 07:40 L: returned deliver/Q11/lem-fix-proetale-scalar-mate-normalization (reviewer RETURN: L: independent stage-2 immutable head c9154b16100b: file-only compilation failed: sandbox Sheaf.Stage2.Sandbox0 timeout )
 - 07:40 L: returned deliver/Q05/lem-sfb-hom-kflat-chain-transpose (reviewer RETURN: L: independent stage-2 immutable head cd2471432eb0: file-only compilation failed: sandbox Sheaf.Stage2.Sandbox0 timeout )
+- 07:40 L: returned deliver/NM/lem-weil-pbc-perfect-strata-uniform-reductions (reviewer RETURN: L: independent stage-2 immutable head e3263ad8c90b: Substance correct: every hypothesis and clause matches the node and )
