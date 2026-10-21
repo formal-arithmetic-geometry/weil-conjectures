@@ -25,106 +25,59 @@
  ],
  "proof": [
   {
-   "text": "Choose $a$ with $H^i(L)=0$ for $i<a$ and a complex $M$ representing $L$. Replace $M$ by $P$: put $P^i=0$ for $i<a$, $P^a=\\operatorname{coker}(d_M^{a-1})$, and $P^i=M^i$ for $i>a$, with the induced differential. The quotient map $M\\to P$ induces the identity on cohomology in degrees at least $a$ and maps zero to zero below $a$; it is a quasi-isomorphism. Thus the constant sequence $P\\xrightarrow{s}P\\xrightarrow{s}\\cdots$ has one termwise lower bound, as required by the continuity hypothesis.",
+   "text": "Choose $a$ with $H^i(L)=0$ for $i<a$ and a representative $M$. Put $P^i=0$ for $i<a$, $P^a=\\operatorname{coker}d_M^{a-1}$ and $P^i=M^i$ for $i>a$, with induced differential. The quotient $M\\to P$ is a quasi-isomorphism: cohomology agrees in degrees at least $a$, and both vanish below $a$. Hence $(P,s)$ has a common termwise lower bound.",
    "uses": [
     "def-weil-abstract-derived-category"
    ],
    "elementary": true,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.8.12 and Proposition 6.8.14(2), pp. 61–62; agent expansion of the bounded-below representative used in the conditional argument"
+    "place": "Lemma 6.8.12 and Proposition 6.8.14(2), pp. 61–62: formal localization argument extracted from the returned small-coefficient proof, step 7. The conditional internal-sheaf comparison is an agent formulation, not the global direct-sum lemma itself."
    }
   },
   {
-   "text": "Write $E(M)=S\\otimes_R M$ and let $U_0$ be restriction of scalars. Scalar localization is exact by the cited exactness theorem; $U_0$ is exact by the cited coefficient adjunction. Applying them termwise gives $F:D(R)\\to D(S)$ and $U:D(S)\\to D(R)$. Identify $F$ with $S\\otimes_R^{\\mathbf L}-$: the K-flat formula for derived change of rings and exactness identify both on a resolution $Q\\to M$, since $E(Q)\\to E(M)$ is a quasi-isomorphism. The normalized derived coefficient adjunction gives $F\\dashv U$, with unit $\\eta_A:A\\to UFA$ induced by $x\\mapsto1\\otimes x$.",
+   "text": "Write $F=S\\otimes_R^{\\mathbf L}-$ and $U$ for restriction. The derived-localization reflection lemma identifies them with exact termwise extension $E$ and restriction $U_0$, with unit $\\eta:x\\mapsto1\\otimes x$, and gives the scalar-unit Hom-bijection. Apply the complex-colimit theorem with coefficient ring $\\mathbf Z[T]$, $T\\mapsto s$: for every complex $B$, its scalar colimit is $U_0E(B)$ with $n$th leg $U(s^{-n})\\eta_{QB}$. Exact filtered colimits preserve quasi-isomorphisms, since cohomology is kernel modulo image; these identifications therefore apply to the stipulated representatives, even if $B$ is unbounded.",
    "uses": [
-    "lem-weil-pbc-scalar-localization-sheaf-exact",
-    "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
-    "lem-pur-derived-change-of-rings",
-    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YY (lemma-derived-base-change) and Tag 07A6 (lemma-adjoint); localization exactness from sites-modules.tex Tag 03ET (lemma-flatness-sheafification)"
-   }
-  },
-  {
-   "text": "For any complex $N$ of $S$-modules, multiplication $EU_0N\\to N$, $b\\otimes x\\mapsto bx$, is inverse to $x\\mapsto1\\otimes x$: locally $s^{-n}\\otimes x=1\\otimes s^{-n}x$, by multiplying by the invertible $s^n$ and balancing. These equalities sheafify and commute with differentials. The normalized derived counit $\\varepsilon_N:FUN\\to N$ is therefore an isomorphism. Consequently precomposition with $\\eta_A$ bijects maps $UFA\\to UN$ with maps $A\\to UN$: its inverse sends $h$ to $U\\varepsilon_N\\circ UF(h)$. To check uniqueness directly, $UF\\eta_A=\\eta_{UFA}$ since both are inverse to $U\\varepsilon_{FA}$; naturality of $\\eta$ and $U\\varepsilon_N\\circ\\eta_{UN}=1$ give $q=U\\varepsilon_N\\circ UF(q\\circ\\eta_A)$ for every $q:UFA\\to UN$.",
-   "uses": [
-    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
-    "def-weil-pbc-ringed-section-localization"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A6 (lemma-adjoint), normalization; elementary localization multiplication and the two adjunction triangle identities"
-   }
-  },
-  {
-   "text": "Apply the complex-colimit theorem with coefficient ring $\\mathbf Z[T]$, $t=T$, acting through the global section $s$. For every complex $B$, without a lower-bound assumption, it identifies the termwise colimit of $B\\xrightarrow{s}B\\to\\cdots$ with $U_0E(B)$; its $n$th leg represents $U(s^{-n})\\eta_{QB}$. Exactness of filtered colimits implies that they preserve quasi-isomorphisms (cohomology is kernel modulo image), so the same identifications hold for the functorial representatives stipulated in the statement. In particular they apply both to $P$ and to a representative of $H_R(K,L)$, even when that internal Hom is unbounded below.",
-   "uses": [
-    "lem-weil-pbc-scalar-localization-complex-colimit",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03CY (lemma-sheafification-presheaf-modules), Tag 03DB (lemma-limits-colimits) and Section 03EK; complex-colimit telescope and its normalized legs"
-   }
-  },
-  {
-   "text": "Represent $K$ by $\\mathcal L$ and put $X=\\mathcal Hom^\\bullet(\\mathcal L,I(P))$, the Hom-complex defining $H_R(K,L)$ with the fixed functorial K-injective resolution $i:P\\to I(P)$. Applying $H_R(K,-)$ to the scalar tower on $P$ gives the tower $X\\xrightarrow{t_1}X\\to\\cdots$ with $t_1=\\mathcal Hom^\\bullet(\\mathcal L,I(s))$; the scalar tower on $X$ has $t_2=s$, and postcomposition by $s$ is multiplication by $s$ on every component, $s\\varphi=s\\circ\\varphi$. The maps $I(s)$ and $s_{I(P)}$ satisfy $Q(I(s))Q(i)=Q(i)Q(s_P)=Q(s_{I(P)})Q(i)$ with $Q(i)$ invertible, so they agree in $D(R)$ and, $I(P)$ being K-injective, are homotopic by the cited bijection $\\operatorname{Hom}_K\\to\\operatorname{Hom}_D$; postcomposing a homotopy $h$ gives $t_1-t_2=dh'+h'd$ on $X$. Each termwise sequential colimit is the cokernel of the termwise monomorphism $f_k=1-\\sigma_{t_k}:\\bigoplus_nX\\to\\bigoplus_nX$ ($\\iota_n\\mapsto\\iota_n-\\iota_{n+1}t_k$), with the $n$th leg induced by $\\iota_n$. Since $f_1-f_2=dH+Hd$ for $H=-\\sigma_{h'}$, the map $(x,y)\\mapsto(x,y+Hx)$ is an isomorphism of mapping cones $\\operatorname{cone}(f_1)\\cong\\operatorname{cone}(f_2)$ which is the identity on the second summand; and $(x,y)\\mapsto[y]$, $\\operatorname{cone}(f_k)\\to\\operatorname{coker}f_k$, is a quasi-isomorphism because its kernel is isomorphic to $\\operatorname{cone}(1_{\\bigoplus X})$, which is contractible. Hence the colimits of the two towers are isomorphic in $D(R)$ compatibly with every leg. Apply precisely the assumed sequential-continuity comparison to the bounded-below input tower $(P,s)$ of step 1, and step 4 to the tower $(X,s)$ and to $(P,s)$. This gives an isomorphism $\\beta:UFH_R(K,L)\\xrightarrow{\\sim}H_R(K,UFL)$. Its composite with $\\eta_{H_R(K,L)}$ is $H_R(K,\\eta_L)$, because the continuity comparison is induced by evaluation, the leg-compatible isomorphism above preserves the zeroth leg, and the zeroth colimit leg is the unit. No lower bound on $H_R(K,L)$ has been used.",
-   "uses": [
-    "def-pur-derived-internal-hom",
-    "def-weil-pbc-category-colimit",
-    "def-pur-kinjective-complex",
-    "lem-sc-kinjective-quasi-iso-comparison",
-    "lem-pur-kinjective-cone-contractible"
+    "lem-sfb-derived-scalar-localization-reflection",
+    "lem-weil-pbc-scalar-localization-complex-colimit"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.8.12 and Proposition 6.8.14(2), pp. 61–62; agent conditional specialization, using the stated internal-sheaf continuity hypothesis rather than global Hom continuity"
+    "place": "Lemma 6.8.12 and Proposition 6.8.14(2), pp. 61–62: formal localization argument extracted from the returned small-coefficient proof, step 7. The conditional internal-sheaf comparison is an agent formulation, not the global direct-sum lemma itself."
    }
   },
   {
-   "text": "Let $\\chi:FH_R(K,L)\\to H_S(FK,FL)$ be the canonical evaluation-transpose map in the statement, and let $\\alpha:UH_S(FK,FL)\\xrightarrow{\\sim}H_R(K,UFL)$ be the cited evaluation-normalized scalar-Hom isomorphism. Their normalization gives $(\\alpha\\circ U\\chi)\\circ\\eta_{H_R(K,L)}=H_R(K,\\eta_L)$: transposing either side gives evaluation $K\\otimes_R^{\\mathbf L}H_R(K,L)\\to L$ followed by $\\eta_L$, since $\\chi$ is the transpose of extended evaluation and $\\alpha$ uses the scalar unit on $K$. The target is isomorphic via $\\alpha$ to $UN$ for $N=H_S(FK,FL)$. The uniqueness proved in step 3 therefore gives $\\alpha\\circ U\\chi=\\beta$. This establishes equality of the actual derived maps, not just their values on the individual telescope legs.",
+   "text": "Represent $K$ by $A$ and put $X=\\mathcal Hom^\\bullet(A,I(P))$, representing $H_R(K,L)$. The K-injective Hom scalar-telescope lemma identifies the colimit of $(X,\\mathcal Hom(A,I(s)))$ with that of $(X,s)$, preserving every leg. Compose its inverse with the assumed continuity isomorphism for the bounded-below input tower $(P,s)$ and the two scalar-colimit identifications of step 2. This yields $\\beta:UFH_R(K,L)\\xrightarrow{\\sim}H_R(K,UFL)$ with $\\beta\\eta_{H_R(K,L)}=H_R(K,\\eta_L)$, because continuity is evaluation-induced and all identifications preserve the zeroth leg. No lower bound on $X$ is used.",
+   "uses": [
+    "lem-sfb-kinjective-hom-scalar-telescope",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.12 and Proposition 6.8.14(2), pp. 61–62: formal localization argument extracted from the returned small-coefficient proof, step 7. The conditional internal-sheaf comparison is an agent formulation, not the global direct-sum lemma itself."
+   }
+  },
+  {
+   "text": "Let $\\chi:FH_R(K,L)\\to H_S(FK,FL)$ be the stated evaluation-transpose map and $\\alpha:UH_S(FK,FL)\\cong H_R(K,UFL)$ the scalar-Hom adjunction isomorphism. Their evaluation normalization gives $(\\alpha U\\chi)\\eta=H_R(K,\\eta_L)$: both transposes are evaluation followed by $\\eta_L$. The target is isomorphic to $UN$ for $N=H_S(FK,FL)$, so scalar-unit uniqueness gives $\\alpha U\\chi=\\beta$. Thus $U\\chi$ is invertible, and conservativity of $U$ makes $\\chi$ invertible. This also identifies its restriction with sequential continuity. Naturality in $L$ and contravariant naturality in eligible $K$ follow from functorial evaluation, scalar extension, transposition and $\\alpha$.",
    "uses": [
     "lem-sfb-dc-hom-scalar-adjunction",
-    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 07A6 (lemma-adjoint) and 08J9 (lemma-internal-hom); agent application of evaluation normalization and scalar-unit uniqueness"
-   }
-  },
-  {
-   "text": "Since $\\alpha$ and $\\beta$ are isomorphisms, so is $U\\chi$. The conservativity assertion of the scalar-Hom adjunction node implies that $\\chi$ is an isomorphism in $D(S)$. Step 6 also identifies its restriction with the asserted sequential-continuity isomorphism. Naturality in $L$ and contravariant naturality in $K$ (among objects satisfying the displayed continuity assumption) follow from the functorial evaluation map defining $\\chi$ and the natural isomorphism $\\alpha$; the representative and colimit choices do not alter this canonical map.",
-   "uses": [
-    "lem-sfb-dc-hom-scalar-adjunction"
+    "lem-sfb-derived-scalar-localization-reflection"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A6 (lemma-adjoint), Tag 08J9 (lemma-internal-hom); conservativity as stated in lem-sfb-dc-hom-scalar-adjunction"
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.12 and Proposition 6.8.14(2), pp. 61–62: formal localization argument extracted from the returned small-coefficient proof, step 7. The conditional internal-sheaf comparison is an agent formulation, not the global direct-sum lemma itself."
    }
   }
  ],
  "proof_deps": [
   "def-weil-abstract-derived-category",
-  "lem-weil-pbc-scalar-localization-sheaf-exact",
-  "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
-  "lem-pur-derived-change-of-rings",
-  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
-  "def-weil-pbc-ringed-section-localization",
+  "lem-sfb-derived-scalar-localization-reflection",
   "lem-weil-pbc-scalar-localization-complex-colimit",
+  "lem-sfb-kinjective-hom-scalar-telescope",
   "def-pur-derived-internal-hom",
-  "def-weil-pbc-category-colimit",
-  "def-pur-kinjective-complex",
-  "lem-sc-kinjective-quasi-iso-comparison",
-  "lem-pur-kinjective-cone-contractible",
   "lem-sfb-dc-hom-scalar-adjunction"
  ],
  "proof_origin": {
@@ -366,28 +319,12 @@
   "date": "2026-10-21",
   "item": "lem-sfb-internal-hom-localization-comparison",
   "worker": "stage1",
-  "summary": "Preserved the conditional statement. Reused existing exact scalar-localization, all-complex telescope, and evaluation-normalized scalar-Hom adjunction nodes. Wrote the good truncation and idempotent localization-counit arguments explicitly; applied continuity only to the bounded-below input tower, and used scalar-unit uniqueness to identify the actual canonical map. No new nodes.",
+  "summary": "Re-split the reviewed 5691-character proof without changing the statement or Lean attachment. Two independent statement-only nodes carry the derived-localization reflection (old steps 2–3) and the complete non-linear K-injective scalar-telescope comparison (old step 5 before continuity). The parent is a short assembly; the complete original arguments are retained verbatim in report.md with a step-to-node coverage map.",
   "blueprint": "The item has no imported blueprint ancestor (blueprint_refs ancestor returns None). It realizes the scalar-localization step extracted from lem-sfb-dc-hom-small-coefficients, rational finite-extension passage, inside the current restricted-functors unit.",
   "tool_uses": [
    {
-    "node": "lem-weil-pbc-scalar-localization-sheaf-exact",
-    "why": "Generic ringed-site scalar-extension or telescope tool used exactly as stated; it supplies the formal localization input without replacing the restricted-functors unit route."
-   },
-   {
-    "node": "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
-    "why": "Generic ringed-site scalar-extension or telescope tool used exactly as stated; it supplies the formal localization input without replacing the restricted-functors unit route."
-   },
-   {
-    "node": "lem-pur-derived-change-of-rings",
-    "why": "Generic ringed-site scalar-extension or telescope tool used exactly as stated; it supplies the formal localization input without replacing the restricted-functors unit route."
-   },
-   {
-    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
-    "why": "Generic ringed-site scalar-extension or telescope tool used exactly as stated; it supplies the formal localization input without replacing the restricted-functors unit route."
-   },
-   {
     "node": "lem-weil-pbc-scalar-localization-complex-colimit",
-    "why": "Generic ringed-site scalar-extension or telescope tool used exactly as stated; it supplies the formal localization input without replacing the restricted-functors unit route."
+    "why": "Generic all-complex scalar-telescope tool with normalized fraction legs; the restricted-functors unit has no such complex-level formula."
    }
   ]
  },
@@ -401,10 +338,10 @@
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-Q112-51336a04d",
-  "group": "Q112",
+  "reviewer": "NT-cc-Q37-0b2ad3eef",
+  "group": "Q37",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q112-51336a04d (reviewer sub-agent of L); spot-checked: FIX: I read the item in full; it has no new nodes and its statement is identical to the base. Steps 1–4 and 6–7 are correct against the cited statements: (1) quotient truncation P^a = coker d^{a-1} is a quasi-isomorphism; (2) exact E and Res, so termwise F ≅ Lφ*; (3) the counit is an iso, and the triangle-identity uniqueness argument checks out; (4) complex-colimit with A = Z[T], T ↦ s; (6) α∘Uχ∘η = H(K,η_L); (7) conservativity of U. One E5/C2 fault, in step 5: H_R = Hom^•(L, I(−)) uses a fixed functorial K-injective resolution I, which is not R-linear. So the tower obtained from H_R(K,−) has transitions Hom(L, I(s)), not s, and step 5 equated the two towers at chain level. I repaired step 5: I(s) and s agree in D(R), so they are homotopic (lem-sc-kinjective-quasi-iso-comparison, I(P) K-injective). Each colimit is coker(1−σ_t). The cone isomorphism (x,y) ↦ (x, y+Hx) is the identity on the target summand, and cone(f) → coker(f) is a quasi-isomorphism because its kernel is cone(id) (lem-pur-kinjective-cone-contractible). Together these give an isomorphism of the two colimits compatible with every leg, so β∘η = H(K,η_L) holds. The step is now marked non-elementary and proof_deps is updated. I accept the 5 declared tool_uses (the generic ringed-site scalar-change and telescope nodes of the pbc and sf-operations units). There is no cycle (closure 395 nodes), and the duplicate candidates I read (local telescope dual, local Hom tower criterion, ringed localization RHom orthogonality, étale internal-Hom localization) state different things. Source checked: Bhatt–Scholze 6.8.12/6.8.14/6.8.15 (pp. 61–62) only motivate the item, so it is correctly marked agent-written. Edge cases s=0, s a unit, s nilpotent, K=0, L=0, one-point site with Z and s=p all hold.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-0b2ad3eef (reviewer sub-agent of L); spot-checked: Re-split note checked (coord/repair-notes, human 2026-10-21: at least 1 new node, assembly at most 3000 characters): delivered 2240 characters, 2 statement-only nodes of comparable size, item statement/stmt_deps/lean byte-equal to live, no supersession (live still has the Q112 7-step proof). Coverage against the Q112-landed proof: old steps 2–3 become lem-sfb-derived-scalar-localization-reflection; old step 5, including Q112's homotopy/cone FIX, becomes lem-sfb-kinjective-hom-scalar-telescope, whose statement demands the homotopy and a γ compatible with every leg; old steps 1, 4, 6–7 remain short assembly citing existing nodes. Nothing dropped and neither node restates the item. Steps verified: (1) coker truncation is a quasi-isomorphism; (2) complex-colimit hypotheses are supplied by the reflection node, and filtered colimits preserve quasi-isomorphisms; (3) β = complex-colimit iso ∘ γ⁻¹ ∘ continuity, with the zeroth leg giving β∘η = H(K,η_L); (4) α∘Uχ = β by the unit bijection, then conservativity. New nodes are true: S⊗_R S≅S gives an invertible counit and fully faithful U, with UFη = ηUF; I(s)≃s in D plus K-injectivity (Stacks 070I) gives the homotopy, the cone map (x,y)↦(x,y+Hx) checked including signs fixes every leg, and coker of 1−σ is a quasi-isomorphism to the cone. Edge cases s=0, nilpotent, unit; A=0, P=0; empty site; Z with s=p. B1–B7 hold and searches are of all three kinds; sources 03ET and 070I read at sites-modules.tex:4293 and derived.tex:9632; Bhatt–Scholze 6.8.12/6.8.14/6.8.15 only motivate the item. No duplicates among about 10 candidates, no cycle (closure 387 nodes), not on the dropped list. Accepted tool_use: lem-weil-pbc-scalar-localization-complex-colimit. Maintainer notes: the node-level tool_uses still lists 4 nodes the steps no longer cite; the snapshot's dagsnap cache had been pruned, so the other chapters were read from clones/live."
  },
  "lean": {
   "module": "Sheaf.Algebra.Homology.InternalHomLocalizationComparison",
