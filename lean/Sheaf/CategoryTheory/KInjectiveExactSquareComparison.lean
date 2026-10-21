@@ -102,6 +102,25 @@ noncomputable def delta (J : CochainComplex A' ℤ)
   letI := ha
   inv (leftUnit H' H r s h RH' η' J) ≫ rightUnit H r RH η J
 
+private theorem unit_isIso
+    {C : Type uA} {D : Type uB} [Category.{vA} C] [Category.{vB} D]
+    [Abelian C] [Abelian D] [HasDerivedCategory.{wA} C] [HasDerivedCategory.{wB} D]
+    (F : C ⥤ D) [F.Additive]
+    (enough : ∀ K : CochainComplex C ℤ,
+      ∃ (J : CochainComplex C ℤ) (f : K ⟶ J), J.IsKInjective ∧ QuasiIso f)
+    (RF : DerivedCategory C ⥤ DerivedCategory D)
+    (θ : F.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh ⟶ DerivedCategory.Qh ⋙ RF)
+    (universal : ∀ G : DerivedCategory C ⥤ DerivedCategory D,
+      Function.Bijective (fun α : RF ⟶ G ↦ θ ≫ Functor.whiskerLeft DerivedCategory.Qh α))
+    (J : CochainComplex C ℤ) [J.IsKInjective] :
+    IsIso (θ.app ((HomotopyCategory.quotient C (.up ℤ)).obj J)) := by
+  -- Transfer invertibility from the canonical universal pair to the given pair.
+  obtain ⟨e, he, _⟩ := F.rightDerivedFunctorOfQuasiIsoResolutions_unique enough RF θ universal
+  have := F.rightDerivedFunctorOfQuasiIsoResolutionsUnit_isIso enough J
+  rw [← he]
+  dsimp only [NatTrans.comp_app, Functor.whiskerLeft_app]
+  infer_instance
+
 /-- An exact strictly commuting square preserving K-injectives has a unique comparison
 normalized only on K-injectives, natural on homotopy classes and independent of resolutions.
 Source: Stacks Project, Derived Categories, Tags 070I, 070Y and 070K; exact-square extraction
@@ -173,6 +192,150 @@ theorem existsUnique_normalized
           (RH' ⋙ s.mapDerivedCategory).map v.hom ≫
             delta H' H r s h RH' RH η' η J' (ha J' hJ') ≫
               (r.mapDerivedCategory ⋙ RH).map v.inv) := by
-  sorry
+  classical
+  let π := HomotopyCategory.quotient A' (.up ℤ)
+  let Q : HomotopyCategory A' (.up ℤ) ⥤ DerivedCategory A' := DerivedCategory.Qh
+  let F := RH' ⋙ s.mapDerivedCategory
+  let G := r.mapDerivedCategory ⋙ RH
+  -- Package the normalization arrows as natural transformations before cancellation.
+  let a : r.mapHomotopyCategory (.up ℤ) ⋙
+      H.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh ⟶ Q ⋙ F :=
+    Functor.whiskerRight (sourceIso H' H r s h).hom DerivedCategory.Qh ≫
+      (Functor.associator _ _ _).hom ≫
+      Functor.whiskerLeft (H'.mapHomotopyCategory (.up ℤ)) s.mapDerivedCategoryFactorsh.inv ≫
+      (Functor.associator _ _ _).inv ≫ Functor.whiskerRight η' s.mapDerivedCategory ≫
+      (Functor.associator _ _ _).hom
+  let b : r.mapHomotopyCategory (.up ℤ) ⋙
+      H.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh ⟶ Q ⋙ G :=
+    Functor.whiskerLeft (r.mapHomotopyCategory (.up ℤ)) η ≫
+      (Functor.associator _ _ _).inv ≫
+      Functor.whiskerRight r.mapDerivedCategoryFactorsh.inv RH ≫
+      (Functor.associator _ _ _).hom
+  have ha (J : CochainComplex A' ℤ) (hJ : J.IsKInjective) :
+      IsIso (leftUnit H' H r s h RH' η' J) := by
+    have := unit_isIso H' enough' RH' η' universal' J
+    unfold leftUnit
+    infer_instance
+  have hb (J : CochainComplex A' ℤ) (hJ : J.IsKInjective) :
+      IsIso (rightUnit H r RH η J) := by
+    have := preserves J hJ
+    have hunit := unit_isIso H enough RH η universal
+      ((r.mapHomologicalComplex (.up ℤ)).obj J)
+    have : IsIso (η.app ((r.mapHomotopyCategory (.up ℤ)).obj (π.obj J))) :=
+      (NatTrans.isIso_app_iff_of_iso η
+        ((r.mapHomotopyCategoryFactors (.up ℤ)).app J)).mpr hunit
+    unfold rightUnit
+    infer_instance
+  have a_app (J : CochainComplex A' ℤ) :
+      a.app (π.obj J) = leftUnit H' H r s h RH' η' J := by
+    simp [a, leftUnit, π]
+  have b_app (J : CochainComplex A' ℤ) :
+      b.app (π.obj J) = rightUnit H r RH η J := by
+    simp [b, rightUnit, π]
+  have ha' (J : CochainComplex A' ℤ) (hJ : J.IsKInjective) :
+      IsIso (a.app (π.obj J)) := by rw [a_app]; exact ha J hJ
+  have hb' (J : CochainComplex A' ℤ) (hJ : J.IsKInjective) :
+      IsIso (b.app (π.obj J)) := by rw [b_app]; exact hb J hJ
+  let d (J : CochainComplex A' ℤ) (hJ : J.IsKInjective) :
+      F.obj (Q.obj (π.obj J)) ⟶ G.obj (Q.obj (π.obj J)) :=
+    letI := ha' J hJ
+    inv (a.app (π.obj J)) ≫ b.app (π.obj J)
+  have hd (J : CochainComplex A' ℤ) (hJ : J.IsKInjective) :
+      d J hJ = delta H' H r s h RH' RH η' η J (ha J hJ) := by
+    have := ha' J hJ
+    have := ha J hJ
+    dsimp only [d, delta]
+    congr 1
+    · apply IsIso.inv_eq_inv.mpr
+      exact a_app J
+    · exact b_app J
+  have dn (J J' : CochainComplex A' ℤ) (hJ : J.IsKInjective) (hJ' : J'.IsKInjective)
+      (f : π.obj J ⟶ π.obj J') :
+      F.map (Q.map f) ≫ d J' hJ' = d J hJ ≫ G.map (Q.map f) := by
+    have := ha' J hJ
+    have := ha' J' hJ'
+    apply (cancel_epi (a.app (π.obj J))).1
+    change a.app (π.obj J) ≫ (F.map (Q.map f) ≫
+      (inv (a.app (π.obj J')) ≫ b.app (π.obj J'))) =
+        a.app (π.obj J) ≫ ((inv (a.app (π.obj J)) ≫ b.app (π.obj J)) ≫
+          G.map (Q.map f))
+    have an := a.naturality f
+    dsimp only [Functor.comp_map] at an
+    rw [← Category.assoc, ← an]
+    simp only [Category.assoc, IsIso.hom_inv_id_assoc]
+    exact b.naturality f
+  -- Every derived morphism into a K-injective is the image of a homotopy class.
+  have dn' (J J' : CochainComplex A' ℤ) (hJ : J.IsKInjective) (hJ' : J'.IsKInjective)
+      (f : Q.obj (π.obj J) ⟶ Q.obj (π.obj J')) :
+      F.map f ≫ d J' hJ' = d J hJ ≫ G.map f := by
+    obtain ⟨g, rfl⟩ := (CochainComplex.IsKInjective.Qh_map_bijective (π.obj J) J').surjective f
+    exact dn J J' hJ hJ' g
+  -- Resolve a representative of each derived object, using arbitrary quasi-isomorphisms.
+  choose J f hJ hf using enough'
+  let j (X : DerivedCategory A') := J (DerivedCategory.Q.objPreimage X)
+  have hj (X : DerivedCategory A') : (j X).IsKInjective := hJ _
+  have hq (K : CochainComplex A' ℤ) : IsIso (DerivedCategory.Q.map (f K)) := by
+    have := hf K
+    infer_instance
+  let e (X : DerivedCategory A') : X ≅ Q.obj (π.obj (j X)) :=
+    (DerivedCategory.Q.objObjPreimageIso X).symm ≪≫
+      asIso (DerivedCategory.Q.map (f (DerivedCategory.Q.objPreimage X))) ≪≫
+      (DerivedCategory.quotientCompQhIso A').symm.app (j X)
+  -- Conjugate the comparison on replacements, then descend its naturality.
+  let c (X : DerivedCategory A') : F.obj X ⟶ G.obj X :=
+    F.map (e X).hom ≫ d (j X) (hj X) ≫ G.map (e X).inv
+  have cn {X Y : DerivedCategory A'} (f : X ⟶ Y) :
+      F.map f ≫ c Y = c X ≫ G.map f := by
+    have ht := dn' (j X) (j Y) (hj X) (hj Y) ((e X).inv ≫ f ≫ (e Y).hom)
+    have ht' := congrArg
+      (fun t ↦ F.map (e X).hom ≫ t ≫ G.map (e Y).inv) ht
+    simpa only [c, Functor.map_comp, Category.assoc,
+      Iso.map_hom_inv_id_assoc, Iso.map_inv_hom_id_assoc,
+      Iso.map_hom_inv_id, Category.comp_id] using ht'
+  have ci (X : DerivedCategory A') : IsIso (c X) := by
+    have := ha' (j X) (hj X)
+    have := hb' (j X) (hj X)
+    dsimp only [c, d]
+    infer_instance
+  let β : F ≅ G := NatIso.ofComponents (fun X ↦ asIso (c X)) (fun f ↦ cn f)
+  -- Compare the chosen replacement with any other one; this also proves independence.
+  have formula (X : DerivedCategory A') (J : CochainComplex A' ℤ) (hJ : J.IsKInjective)
+      (u : X ≅ Q.obj (π.obj J)) :
+      β.hom.app X = F.map u.hom ≫ d J hJ ≫ G.map u.inv := by
+    have ht := dn' (j X) J (hj X) hJ ((e X).inv ≫ u.hom)
+    have ht' := congrArg (fun t ↦ F.map (e X).hom ≫ t ≫ G.map u.inv) ht
+    change c X = _
+    simpa only [c, Functor.map_comp, Category.assoc,
+      Iso.map_hom_inv_id_assoc, Iso.map_inv_hom_id_assoc,
+      Iso.map_hom_inv_id, Category.comp_id] using ht'.symm
+  have atJ (J : CochainComplex A' ℤ) (hJ : J.IsKInjective) :
+      β.hom.app (Q.obj (π.obj J)) = d J hJ := by
+    simpa using formula (Q.obj (π.obj J)) J hJ (Iso.refl _)
+  refine ⟨ha, hb, β, ?_, ?_, ?_, ?_, ?_⟩
+  · intro J hJ
+    have := ha' J hJ
+    rw [atJ J hJ, ← a_app, ← b_app]
+    exact IsIso.hom_inv_id_assoc _ _
+  · intro γ hγ
+    apply Iso.ext
+    apply NatTrans.ext
+    funext X
+    have heq : γ.hom.app (Q.obj (π.obj (j X))) = β.hom.app (Q.obj (π.obj (j X))) := by
+      have := ha (j X) (hj X)
+      apply (cancel_epi (leftUnit H' H r s h RH' η' (j X))).1
+      rw [hγ (j X) (hj X), atJ (j X) (hj X), ← b_app, ← a_app]
+      have := ha' (j X) (hj X)
+      change _ = a.app (π.obj (j X)) ≫ (inv (a.app (π.obj (j X))) ≫ _)
+      simp
+    apply (cancel_mono (G.map (e X).hom)).1
+    rw [← γ.hom.naturality, ← β.hom.naturality, heq]
+  · intro J J' hJ hJ' f
+    rw [← hd J hJ, ← hd J' hJ']
+    exact dn J J' hJ hJ' f
+  · intro X J hJ u
+    rw [← hd J hJ]
+    exact formula X J hJ u
+  · intro X J J' hJ hJ' u v
+    rw [← hd J hJ, ← hd J' hJ', ← formula X J hJ u, ← formula X J' hJ' v]
 
 end CategoryTheory.KInjectiveExactSquare
