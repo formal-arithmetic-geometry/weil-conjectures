@@ -165,6 +165,38 @@
     "document": "literature/stacks-project/more-etale.tex",
     "place": "Tag 0GL6, remark-Rf-lower-shriek-change-of-rings, proper/open construction"
    }
+  },
+  {
+   "text": "For tensorIso_existsUnique use the already proved etaleHomTensorComparison_existsUnique, whose binary comparison is natural and normalized on flat-term K-flat pairs. Package its inverses as a natural isomorphism on the product category. The scalar cochain representatives are a natural transformation: apply the scalar derived adjunction to the ordinary cochain unit followed by the exact-restriction localization comparison. For arbitrary cochain P,Q choose flat-term K-flat resolutions Pprime -> P and Qprime -> Q. The two sides of TensorNormalizationAux are components of natural transformations of cochain pairs. The source maps of these resolutions are invertible after localization and derived tensor. Cancel their composite and use the known normalization at Pprime,Qprime. Uniqueness follows by restricting any all-complex-normalized comparison to the flat-term K-flat pairs and invoking the existing binary uniqueness theorem.",
+   "uses": [
+    "lem-coef-etale-tensor-model-comparison",
+    "lem-derived-right-exact-tensor-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YY and 07A4; K-flat representative normalization"
+   }
+  },
+  {
+   "text": "For siteTensorIso_existsUnique the new generic SiteTensorNormalizationAux is exactly TensorNormalizationAux on small-etale sheaves, with derivedTensor constants in its argument type. TensorNormalization specializes this generic predicate. Thus the normalized chosen isomorphism has literally the site tensor type: use reflexive heterogeneous equality for existence and eq_of_heq for uniqueness. This representation avoids repeated comparison of nested sheafification proofs; the all-complex normalization equation and the canonical comparison are unchanged.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YY and 07A4; K-flat representative normalization"
+   }
+  },
+  {
+   "text": "For unitIso_existsUnique the unit complex is K-flat, so the scalar cochain representative is invertible by the exact-right-adjoint K-flat representative theorem. Ordinary scalar extension preserves K-flat quasi-isomorphisms because, after faithful exact restriction, it is tensoring with the constant coefficient sheaf; tensoring an acyclic K-flat complex is acyclic. The localization unit comparison is invertible, as is ordinary scalar extension of the unit. Compose these three isomorphisms and the inverse target localization unit comparison. Its hom satisfies UnitNormalizationAux by cancellation, and cancellation also proves uniqueness.",
+   "uses": [
+    "lem-sfb-exact-right-adjoint-kflat-representative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YY and 07A4; K-flat representative normalization"
+   }
   }
  ],
  "proof_deps": [
@@ -188,12 +220,15 @@
   "prop-asd-smooth-base-change",
   "prop-weil-pbc-inverse-image-modules-exact",
   "thm-amb-etale-exceptional-adjoint",
-  "thm-asd-smooth-tensor"
+  "thm-asd-smooth-tensor",
+  "lem-coef-etale-tensor-model-comparison",
+  "lem-derived-right-exact-tensor-comparison",
+  "lem-sfb-exact-right-adjoint-kflat-representative"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-compatibilities.proof.md",
-  "place": "Original main-theorem plan retained. S4 proves compactSupportMap_isIso by the existing properFiniteCoefficientExtension theorem (Stacks 0GL6) and openIso; the remaining four proof holes are unchanged."
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "B3 proves the tensor, site tensor transport and unit normalization auxiliary theorems by the recorded arguments. The main exceptional_coefficient_comparison theorem and its ten-step plan remain unchanged, as does the previously proved compactSupportMap_isIso."
  },
  "mathlib_searches": [
   {
@@ -414,6 +449,7 @@
    "AlgebraicGeometry.Etale.ExceptionalCoefficients.ordinaryIsLeftAdjoint",
    "AlgebraicGeometry.Etale.ExceptionalCoefficients.ordinaryOplax",
    "AlgebraicGeometry.Etale.ExceptionalCoefficients.TensorNormalizationAux",
+   "AlgebraicGeometry.Etale.ExceptionalCoefficients.SiteTensorNormalizationAux",
    "AlgebraicGeometry.Etale.ExceptionalCoefficients.TensorNormalization",
    "AlgebraicGeometry.Etale.ExceptionalCoefficients.tensorIso_existsUnique",
    "AlgebraicGeometry.Etale.ExceptionalCoefficients.siteTensorIso_existsUnique",
@@ -436,7 +472,7 @@
   "by": "Q71",
   "date": "2026-10-17",
   "existing": false,
-  "note": "Returned head 9e310850b83b repaired: uses the published scalar functors, actual proper/open counit comparisons, and canonical representative-normalized tensor/unit identifications. The conclusion includes exceptional-domain preservation, the counit equation, naturality, the third quotient index and both associators, smooth tensor compatibility and the Cartesian base-change square. Owning-node helpers specify the canonical identifications already required by this statement; no arbitrary functor, map or isomorphism datum is assumed. Reviewer fix (H4): the module's own scalar/pullback comparison (pullbackMap, pullbackMap_isIso, pullbackIso) and proper coefficient map (properMap) were second definitions of the recorded AlgebraicGeometry.Etale.scalarPullbackIso and AlgebraicGeometry.Etale.scalarMate of lem-pur-etale-scalar-mate-projection (Sheaf.Paper.PurEtaleScalarMateProjection, landed before this delivery; same categories, the K-flat-normalized canonical tensor/pullback identification and exactly the transpose of the scalar-extended proper counit). They are removed; compactSupportMap uses scalarMate at the open extension, and tensorDomainMap and BaseChangeCompatibility use scalarPullbackIso.inv. The main statement is unchanged.",
+  "note": "Returned head 9e310850b83b repaired: uses the published scalar functors, actual proper/open counit comparisons, and canonical representative-normalized tensor/unit identifications. The conclusion includes exceptional-domain preservation, the counit equation, naturality, the third quotient index and both associators, smooth tensor compatibility and the Cartesian base-change square. Owning-node helpers specify the canonical identifications already required by this statement; no arbitrary functor, map or isomorphism datum is assumed. Reviewer fix (H4): the module's own scalar/pullback comparison (pullbackMap, pullbackMap_isIso, pullbackIso) and proper coefficient map (properMap) were second definitions of the recorded AlgebraicGeometry.Etale.scalarPullbackIso and AlgebraicGeometry.Etale.scalarMate of lem-pur-etale-scalar-mate-projection (Sheaf.Paper.PurEtaleScalarMateProjection, landed before this delivery; same categories, the K-flat-normalized canonical tensor/pullback identification and exactly the transpose of the scalar-extended proper counit). They are removed; compactSupportMap uses scalarMate at the open extension, and tensorDomainMap and BaseChangeCompatibility use scalarPullbackIso.inv. The main statement is unchanged. B3: adds the generic SiteTensorNormalizationAux wrapper, definitionally the same all-complex normalization equation, to share site tensor constants in specialized types; proves tensorIso_existsUnique, siteTensorIso_existsUnique and unitIso_existsUnique. No target or mathematical statement changes.",
   "fixed_by": "NT-stage2-cc-c1df27a3b"
  },
  "reviewed_lean": {
@@ -448,12 +484,12 @@
   "note": "Read node, 10 proof steps, source compatibilities.proof.md (2)-(3), module, report, prior return review, and dependency declarations. All hypotheses (prime l, 1<=m<=r, IsNoetherian X/Y, smooth of rel. dim d, separated, finite type, HasCompactification, l invertible on Y, cocycle hb with both associators) and all six conclusions (domain preservation, IsIso b at G_A K plus counit equation defining c, naturality, three-level quotient cocycle, tensor compatibility via recorded smoothTensorDualityMap, Cartesian base change via recorded smoothExceptionalBaseChangeMap) match the node. Statement field verbatim; no hollow def; all theorems sorry; docstrings complete; ordinary-etale; added stmt_deps are landed and acyclic. Zero fallback of comparisonInverse is never used where the theorem asserts something. H4 fixed: pullbackMap/pullbackMap_isIso/pullbackIso/properMap duplicated the recorded scalarPullbackIso/scalarMate (lem-pur-etale-scalar-mate-projection, landed 22:35, before delivery 23:23); removed and replaced (compactSupportMap uses scalarMate; tensorDomainMap/BaseChangeCompatibility use scalarPullbackIso.inv); main statement unchanged. nt_compile: delivered 37.3 s clean; fixed module 37.4 s clean (PurEtaleScalarMateProjection timed out once at load ~208, then 52.3 s OK); HEq probe timed out, argued by definition. Fixes: module, lean-record.json (22 declarations, note), report with Maintainer review fix section."
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-21",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S4",
+  "group": "B3",
   "result": "pass",
-  "landing": "20261019T005421-L-2766819",
+  "landing": "20261021T020055-L-2581770",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
