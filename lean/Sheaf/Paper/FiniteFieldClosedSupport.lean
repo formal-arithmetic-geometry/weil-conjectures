@@ -10,7 +10,7 @@ public import Sheaf.Paper.ProEtaleConstructibleSheaf
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
-import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.ClosedImmersion
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.ClosedImmersion
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.ClosedImmersion
 import Sheaf.AlgebraicGeometry.ProEtalePullbackLocallyConstant
 import Sheaf.AlgebraicGeometry.ProEtaleClosedSupportTriangle

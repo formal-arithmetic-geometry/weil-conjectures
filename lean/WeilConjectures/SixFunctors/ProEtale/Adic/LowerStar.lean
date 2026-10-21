@@ -21,10 +21,6 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.Constructible
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Extension
 public import WeilConjectures.SixFunctors.ProEtale.Adic.MayerVietoris
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Module
-import Sheaf.AlgebraicGeometry.AdicClosedImmersionFiniteness
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
-import WeilConjectures.Compactification.Affine
-import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
 
 /-!
 # Finiteness for the pushforward of constructible `ℓ`-adic sheaves

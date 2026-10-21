@@ -102,14 +102,14 @@
  "unit": "sk-thm-picard-semicon",
  "lean": {
   "existing": true,
-  "module": "WeilConjectures.AlgebraicGeometry.StalkComparisonPullbackNaturality",
-  "file": "lean/WeilConjectures/AlgebraicGeometry/StalkComparisonPullbackNaturality.lean",
+  "module": "Sheaf.AlgebraicGeometry.StalkComparisonPullbackNaturality",
+  "file": "lean/Sheaf/AlgebraicGeometry/StalkComparisonPullbackNaturality.lean",
   "declaration": "AlgebraicGeometry.SingleComplexBaseChange.comparisonIntoPullback_naturality",
   "declarations": [
    "AlgebraicGeometry.SingleComplexBaseChange.comparisonIntoPullback",
    "AlgebraicGeometry.SingleComplexBaseChange.comparisonIntoPullback_naturality"
   ],
-  "statement": "theorem comparisonIntoPullback_naturality (z : X')\n    (P Q : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n    (hP : P.IsKFlatTensor) (hQ : Q.IsKFlatTensor)\n    (hcP : IsIso ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)))\n    (hcQ : IsIso ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj Q)))\n    (a : DerivedCategory.Q.obj P ≅ DerivedCategory.Q.obj Q) (i : ℤ) :\n    letI := leftAlgebra f g' z\n    letI := rightAlgebra f f' g g' sq z\n    letI := (tensorMap f f' g g' sq z).toAlgebra\n    letI := HasDerivedCategory.standard (ModuleCat.{u} (R f g' z))\n    letI := HasDerivedCategory.standard (ModuleCat.{u} (B f' z))\n    ∀ e : (cohomologyModel f f' g g' sq z P).cohomology i ≅\n        (cohomologyModel f f' g g' sq z Q).cohomology i,\n      (ModuleCat.restrictScalars.{u} Algebra.TensorProduct.includeRight.toRingHom).map e.hom =\n        (comparisonSourceUnderlyingIso f f' g g' sq z P Q a i).hom →\n      comparisonIntoPullback f f' g g' sq z P hcP i ≫\n        (comparisonStalkCohomology X' z i).map ((derivedPullback g').map a.hom) =\n      (ModuleCat.extendScalars.{u, u, u}\n        (algebraMap (A g' z ⊗[R f g' z] B f' z) (C z))).map e.hom ≫\n        comparisonIntoPullback f f' g g' sq z Q hcQ i",
+  "statement": "theorem comparisonIntoPullback_naturality (z : X') (P Q : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) (hP : P.IsAcyclicTensorKFlat) (hQ : Q.IsAcyclicTensorKFlat) (hcP : IsIso ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P))) (hcQ : IsIso ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj Q))) (a : DerivedCategory.Q.obj P ≅ DerivedCategory.Q.obj Q) (i : ℤ) : letI := leftAlgebra f g' z letI := rightAlgebra f f' g g' sq z letI := (tensorMap f f' g g' sq z).toAlgebra letI := HasDerivedCategory.standard (ModuleCat.{u} (R f g' z)) letI := HasDerivedCategory.standard (ModuleCat.{u} (B f' z)) ∀ e : (cohomologyModel f f' g g' sq z P).cohomology i ≅ (cohomologyModel f f' g g' sq z Q).cohomology i, (ModuleCat.restrictScalars.{u} Algebra.TensorProduct.includeRight.toRingHom).map e.hom = (comparisonSourceUnderlyingIso f f' g g' sq z P Q a i).hom → comparisonIntoPullback f f' g g' sq z P hcP i ≫ (comparisonStalkCohomology X' z i).map ((derivedPullback g').map a.hom) = (ModuleCat.extendScalars.{u, u, u} (algebraMap (A g' z ⊗[R f g' z] B f' z) (C z))).map e.hom ≫ comparisonIntoPullback f f' g g' sq z Q hcQ i",
   "branch": "sheaf-dag",
   "by": "S1",
   "date": "2026-10-21",

@@ -16,17 +16,6 @@ public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.Exact
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStar
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Injective
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
-import Sheaf.AlgebraicGeometry.AffineComparisonInjectiveDerivedVanishing
-import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
-import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
-import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
-import Sheaf.CategoryTheory.ModuleAbelianEvaluationComparison
-import Sheaf.CategoryTheory.RingedSiteModules
-import Sheaf.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
-import Sheaf.CategoryTheory.Sites.CohomologyOverObjectLocalization
-import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
-import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-!
 # Acyclicity for pro-étale direct images on the affine pro-étale basis

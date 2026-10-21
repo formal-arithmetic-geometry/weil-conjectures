@@ -7,19 +7,6 @@ module
 
 public import WeilConjectures.WeilSheaf.LowerShriek
 public import WeilConjectures.WeilSheaf.ProperCohomology.LowerShriek
-import Sheaf.AlgebraicGeometry.CompactSupportFiniteTorsion
-import Sheaf.AlgebraicGeometry.FiniteTypeFibreDimensionBound
-import Sheaf.AlgebraicGeometry.ProperCoincidenceNormalized
-import Sheaf.Paper.CoefficientFrobenius
-import Sheaf.Paper.CompactSupportDirectImageTriangulated
-import Sheaf.Paper.CompactificationCoherence
-import WeilConjectures.AlgebraicGeometry.DimensionPreservedFieldExtension
-import WeilConjectures.CategoryTheory.Monoidal.Closed.InvertibleDualizing
-import WeilConjectures.Compactification.NagataCompactification
-import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
-import WeilConjectures.SixFunctors.Etale.Derived.IntegralCoefficients
-import Sheaf.AlgebraicGeometry.BoundedBelowDerivedSmoothBaseChange
 
 /-!
 # Functoriality of the direct image with compact support of Weil complexes

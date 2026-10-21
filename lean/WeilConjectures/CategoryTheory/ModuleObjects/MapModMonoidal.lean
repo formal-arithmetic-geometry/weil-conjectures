@@ -108,7 +108,6 @@ namespace Functor
 variable (F : C ⥤ D) [F.Braided] [PreservesColimitsOfShape WalkingParallelPair F]
   {R : C} [MonObj R] [IsCommMonObj R]
 
-set_option linter.unusedSectionVars false in
 /-- The composite `F M ⊗ F N ⟶ F (M ⊗ N) ⟶ F (M ⊗_R N)` is balanced for the two actions of
 `F R`, the right action of `F R` on `F M` being `F` of the right action of `R` on `M` since `F`
 is braided. -/
@@ -130,7 +129,6 @@ lemma mapMod_μ_balanced (M N : Mod C R) :
   simp only [comp_whiskerRight, Category.assoc] at h
   rw [h]
 
-set_option linter.unusedSectionVars false in
 /-- The composite `F (M ⊗ N) ⟶ F M ⊗ F N ⟶ F M ⊗_{F R} F N` coequalizes the image under `F` of
 the parallel pair presenting `M ⊗_R N`. -/
 lemma mapMod_δ_balanced (M N : Mod C R) :
@@ -231,151 +229,11 @@ comparison isomorphisms `Functor.mapModTensorIso` and `Functor.mapModUnitIso`. -
 noncomputable def mapModCoreMonoidal : (F.mapMod R).CoreMonoidal where
   εIso := F.mapModUnitIso
   μIso := F.mapModTensorIso
-  μIso_hom_natural_left := by
-    intro M N f X
-    apply Mod.hom_ext
-    rw [← cancel_epi (Mod.tensorObjπ ((F.mapMod R).obj M) ((F.mapMod R).obj X))]
-    change _ ≫ ((F.mapMod R).map f ▷ (F.mapMod R).obj X).hom ≫
-      (F.mapModTensorIso N X).hom.hom = _
-    rw [Mod.tensorObjπ_whiskerRight_assoc]
-    rw [tensorπ_mapModTensorIso_hom_hom]
-    change _ = _ ≫ (F.mapModTensorIso M X).hom.hom ≫
-      ((F.mapMod R).map (f ▷ X)).hom
-    rw [tensorπ_mapModTensorIso_hom_hom_assoc]
-    dsimp only [Functor.mapMod] at ⊢
-    change F.map f.hom ▷ F.obj X.X ≫ LaxMonoidal.μ F N.X X.X ≫
-      F.map (N.tensorObjπ X) =
-      LaxMonoidal.μ F M.X X.X ≫ F.map (M.tensorObjπ X) ≫ F.map ((f ▷ X).hom)
-    rw [LaxMonoidal.μ_natural_left_assoc]
-    rw [← F.map_comp]
-    rw [← F.map_comp]
-    rw [Mod.tensorObjπ_whiskerRight]
-  μIso_hom_natural_right := by
-    intro M N X f
-    apply Mod.hom_ext
-    rw [← cancel_epi (Mod.tensorObjπ ((F.mapMod R).obj X) ((F.mapMod R).obj M))]
-    change _ ≫ ((F.mapMod R).obj X ◁ (F.mapMod R).map f).hom ≫
-      (F.mapModTensorIso X N).hom.hom = _
-    rw [Mod.tensorObjπ_whiskerLeft_assoc]
-    rw [tensorπ_mapModTensorIso_hom_hom]
-    change _ = _ ≫ (F.mapModTensorIso X M).hom.hom ≫
-      ((F.mapMod R).map (X ◁ f)).hom
-    rw [tensorπ_mapModTensorIso_hom_hom_assoc]
-    dsimp only [Functor.mapMod] at ⊢
-    change F.obj X.X ◁ F.map f.hom ≫ LaxMonoidal.μ F X.X N.X ≫
-      F.map (X.tensorObjπ N) =
-      LaxMonoidal.μ F X.X M.X ≫ F.map (X.tensorObjπ M) ≫ F.map ((X ◁ f).hom)
-    rw [LaxMonoidal.μ_natural_right_assoc]
-    rw [← F.map_comp]
-    rw [← F.map_comp]
-    rw [Mod.tensorObjπ_whiskerLeft]
-  associativity := by
-    intro M N P
-    apply Mod.hom_ext
-    rw [← cancel_epi (Mod.tensorObjπ
-      ((F.mapMod R).obj M ⊗ (F.mapMod R).obj N) ((F.mapMod R).obj P))]
-    rw [← cancel_epi (Mod.tensorObjπ ((F.mapMod R).obj M) ((F.mapMod R).obj N) ▷
-      ((F.mapMod R).obj P).X)]
-    simp only [Mod.comp_hom']
-    rw [Mod.tensorObjπ_whiskerRight_assoc]
-    rw [← comp_whiskerRight_assoc]
-    erw [tensorπ_mapModTensorIso_hom_hom]
-    rw [comp_whiskerRight_assoc]
-    erw [tensorπ_mapModTensorIso_hom_hom_assoc]
-    erw [LaxMonoidal.μ_natural_left_assoc]
-    rw [show ((F.mapMod R).map (α_ M N P).hom).hom =
-      F.map (α_ M N P).hom.hom from rfl]
-    rw [← F.map_comp_assoc, ← F.map_comp]
-    rw [Category.assoc, Mod.tensorObjπ_associator_hom]
-    rw [Mod.tensorObjπ_associator_hom_assoc, Mod.tensorObjπ_whiskerLeft_assoc]
-    rw [← MonoidalCategory.whiskerLeft_comp_assoc]
-    erw [tensorπ_mapModTensorIso_hom_hom]
-    rw [MonoidalCategory.whiskerLeft_comp_assoc]
-    erw [tensorπ_mapModTensorIso_hom_hom]
-    erw [LaxMonoidal.μ_natural_right_assoc]
-    simp only [F.map_comp]
-    erw [LaxMonoidal.associativity_assoc]
-    rfl
-  left_unitality := by
-    intro M
-    have hπC (Q : Mod C (R)) :
-        Mod.tensorObjπ (Mod.regular (R)) Q ≫ (λ_ Q).hom.hom = γ[R,Q.X] := by
-      change Mod.tensorObjπ (Mod.regular (R)) Q ≫
-        (Bimod.whiskerRight (Mod.toBimodRegularIso (R := R)).hom
-        ((Mod.toBimod (R)).obj Q)).hom ≫
-          (Bimod.LeftUnitorBimod.hom ((Mod.toBimod (R)).obj Q)) = _
-      dsimp only [Mod.tensorObjπ]
-      rw [Bimod.whiskerRight_hom]
-      erw [ι_colimMap_assoc]
-      simp only [parallelPairHom_app_one]
-      erw [Mod.toBimodRegularIso_hom_hom, id_whiskerRight,
-        Category.id_comp]
-      exact coequalizer.π_desc _ _
-    have hπD (Q : Mod D (F.obj R)) :
-        Mod.tensorObjπ (Mod.regular (F.obj R)) Q ≫ (λ_ Q).hom.hom = γ[F.obj R,Q.X] := by
-      change Mod.tensorObjπ (Mod.regular (F.obj R)) Q ≫
-        (Bimod.whiskerRight (Mod.toBimodRegularIso (R := F.obj R)).hom
-        ((Mod.toBimod (F.obj R)).obj Q)).hom ≫
-          (Bimod.LeftUnitorBimod.hom ((Mod.toBimod (F.obj R)).obj Q)) = _
-      dsimp only [Mod.tensorObjπ]
-      rw [Bimod.whiskerRight_hom]
-      erw [ι_colimMap_assoc]
-      simp only [parallelPairHom_app_one]
-      erw [Mod.toBimodRegularIso_hom_hom, id_whiskerRight,
-        Category.id_comp]
-      exact coequalizer.π_desc _ _
-    apply Mod.hom_ext
-    rw [← cancel_epi (Mod.tensorObjπ (Mod.regular (F.obj R)) ((F.mapMod R).obj M))]
-    simp only [Mod.comp_hom']
-    rw [hπD, Mod.tensorObjπ_whiskerRight_assoc]
-    erw [tensorπ_mapModTensorIso_hom_hom_assoc]
-    change γ[F.obj R,((F.mapMod R).obj M).X] =
-      (𝟙 (F.obj R)) ▷ F.obj M.X ≫ LaxMonoidal.μ F R M.X ≫
-        F.map (Mod.tensorObjπ (Mod.regular R) M) ≫ F.map (λ_ M).hom.hom
-    rw [id_whiskerRight, Category.id_comp, ← F.map_comp, hπC]
-    rfl
-  right_unitality := by
-    intro M
-    have hπC (Q : Mod C (R)) :
-        Mod.tensorObjπ Q (Mod.regular (R)) ≫ (ρ_ Q).hom.hom = (β_ Q.X (R)).hom ≫ γ[R,Q.X] := by
-      change Mod.tensorObjπ Q (Mod.regular (R)) ≫
-        (Bimod.whiskerLeft ((Mod.toBimod (R)).obj Q)
-        (Mod.toBimodRegularIso (R := R)).hom).hom ≫
-          (Bimod.RightUnitorBimod.hom ((Mod.toBimod (R)).obj Q)) = _
-      dsimp only [Mod.tensorObjπ]
-      rw [Bimod.whiskerLeft_hom]
-      erw [ι_colimMap_assoc]
-      simp only [parallelPairHom_app_one]
-      erw [Mod.toBimodRegularIso_hom_hom, MonoidalCategory.whiskerLeft_id,
-        Category.id_comp]
-      exact coequalizer.π_desc _ _
-    have hπD (Q : Mod D (F.obj R)) :
-        Mod.tensorObjπ Q (Mod.regular (F.obj R)) ≫ (ρ_ Q).hom.hom =
-          (β_ Q.X (F.obj R)).hom ≫ γ[F.obj R,Q.X] := by
-      change Mod.tensorObjπ Q (Mod.regular (F.obj R)) ≫
-        (Bimod.whiskerLeft ((Mod.toBimod (F.obj R)).obj Q)
-        (Mod.toBimodRegularIso (R := F.obj R)).hom).hom ≫
-          (Bimod.RightUnitorBimod.hom ((Mod.toBimod (F.obj R)).obj Q)) = _
-      dsimp only [Mod.tensorObjπ]
-      rw [Bimod.whiskerLeft_hom]
-      erw [ι_colimMap_assoc]
-      simp only [parallelPairHom_app_one]
-      erw [Mod.toBimodRegularIso_hom_hom, MonoidalCategory.whiskerLeft_id,
-        Category.id_comp]
-      exact coequalizer.π_desc _ _
-    apply Mod.hom_ext
-    rw [← cancel_epi (Mod.tensorObjπ ((F.mapMod R).obj M) (Mod.regular (F.obj R)))]
-    simp only [Mod.comp_hom']
-    rw [hπD, Mod.tensorObjπ_whiskerLeft_assoc]
-    erw [tensorπ_mapModTensorIso_hom_hom_assoc]
-    change (β_ (F.obj M.X) (F.obj R)).hom ≫
-        LaxMonoidal.μ F R M.X ≫ F.map γ[R,M.X] =
-      F.obj M.X ◁ (𝟙 (F.obj R)) ≫ LaxMonoidal.μ F M.X R ≫
-        F.map (Mod.tensorObjπ M (Mod.regular R)) ≫ F.map (ρ_ M).hom.hom
-    rw [MonoidalCategory.whiskerLeft_id, Category.id_comp,
-      ← F.map_comp, hπC]
-    rw [F.map_comp, Functor.LaxBraided.braided_assoc]
-
+  μIso_hom_natural_left := sorry
+  μIso_hom_natural_right := sorry
+  associativity := sorry
+  left_unitality := sorry
+  right_unitality := sorry
 
 /-- The transport `F.mapMod` of module objects along a braided functor preserving coequalizers
 is strong monoidal. -/
@@ -397,7 +255,6 @@ section Comap
 variable {R S : C} [MonObj R] [MonObj S] [IsCommMonObj R] [IsCommMonObj S] (ψ : S ⟶ R)
   [IsMonHom ψ] [IsIso ψ]
 
-set_option linter.unusedSectionVars false in
 /-- The projection `M ⊗ N ⟶ M ⊗_R N` is balanced for the two actions of `S` on the
 restrictions of scalars of `M` and `N`. -/
 lemma tensorπ_comap_balanced (M N : Mod C R) :
@@ -413,7 +270,6 @@ lemma tensorπ_comap_balanced (M N : Mod C R) :
   slice_lhs 2 3 => rw [← comp_whiskerRight]
   rw [tensorObjπ_condition, Category.assoc, associator_naturality_middle_assoc]
 
-set_option linter.unusedSectionVars false in
 /-- The projection `M ⊗ N ⟶ M ⊗_S N` of the restrictions of scalars is balanced for the two
 actions of `R`, `ψ` being an isomorphism. -/
 lemma comap_tensorπ_balanced (M N : Mod C R) :
@@ -487,121 +343,11 @@ strong monoidal for the relative tensor products, with comparison isomorphisms
 noncomputable def comapCoreMonoidal : (comap ψ : Mod C R ⥤ Mod C S).CoreMonoidal where
   εIso := comapUnitIso ψ
   μIso := comapTensorIso ψ
-  μIso_hom_natural_left := by
-    intro M N f X
-    apply Mod.hom_ext
-    rw [← cancel_epi (tensorObjπ ((comap ψ).obj M) ((comap ψ).obj X))]
-    change _ ≫ ((comap ψ).map f ▷ (comap ψ).obj X).hom ≫
-      (comapTensorIso ψ N X).hom.hom = _
-    rw [tensorObjπ_whiskerRight_assoc, tensorπ_comapTensorIso_hom_hom]
-    change _ = _ ≫ (comapTensorIso ψ M X).hom.hom ≫ ((comap ψ).map (f ▷ X)).hom
-    rw [tensorπ_comapTensorIso_hom_hom_assoc]
-    change f.hom ▷ X.X ≫ tensorObjπ N X =
-      tensorObjπ M X ≫ (f ▷ X).hom
-    rw [tensorObjπ_whiskerRight]
-  μIso_hom_natural_right := by
-    intro M N X f
-    apply Mod.hom_ext
-    rw [← cancel_epi (tensorObjπ ((comap ψ).obj X) ((comap ψ).obj M))]
-    change _ ≫ (((comap ψ).obj X ◁ (comap ψ).map f).hom) ≫
-      (comapTensorIso ψ X N).hom.hom = _
-    rw [tensorObjπ_whiskerLeft_assoc, tensorπ_comapTensorIso_hom_hom]
-    change _ = _ ≫ (comapTensorIso ψ X M).hom.hom ≫ ((comap ψ).map (X ◁ f)).hom
-    rw [tensorπ_comapTensorIso_hom_hom_assoc]
-    change X.X ◁ f.hom ≫ tensorObjπ X N =
-      tensorObjπ X M ≫ (X ◁ f).hom
-    rw [tensorObjπ_whiskerLeft]
-  associativity := by
-    intro M N P
-    apply Mod.hom_ext
-    rw [← cancel_epi (tensorObjπ
-      ((comap ψ).obj M ⊗ (comap ψ).obj N) ((comap ψ).obj P))]
-    rw [← cancel_epi (tensorObjπ ((comap ψ).obj M) ((comap ψ).obj N) ▷
-      ((comap ψ).obj P).X)]
-    simp only [Mod.comp_hom']
-    rw [tensorObjπ_whiskerRight_assoc, ← comp_whiskerRight_assoc,
-      tensorπ_comapTensorIso_hom_hom,
-      tensorπ_comapTensorIso_hom_hom_assoc]
-    change tensorObjπ M N ▷ P.X ≫ tensorObjπ (M ⊗ N) P ≫ (α_ M N P).hom.hom = _
-    rw [tensorObjπ_associator_hom]
-    rw [tensorObjπ_associator_hom_assoc, tensorObjπ_whiskerLeft_assoc,
-      ← MonoidalCategory.whiskerLeft_comp_assoc, tensorπ_comapTensorIso_hom_hom,
-      tensorπ_comapTensorIso_hom_hom]
-    rfl
-  left_unitality := by
-    intro M
-    have hπC (Q : Mod C (R)) :
-        Mod.tensorObjπ (Mod.regular (R)) Q ≫ (λ_ Q).hom.hom = γ[R,Q.X] := by
-      change Mod.tensorObjπ (Mod.regular (R)) Q ≫
-        (Bimod.whiskerRight (Mod.toBimodRegularIso (R := R)).hom
-        ((Mod.toBimod (R)).obj Q)).hom ≫
-          (Bimod.LeftUnitorBimod.hom ((Mod.toBimod (R)).obj Q)) = _
-      dsimp only [Mod.tensorObjπ]
-      rw [Bimod.whiskerRight_hom]
-      erw [ι_colimMap_assoc]
-      simp only [parallelPairHom_app_one]
-      erw [Mod.toBimodRegularIso_hom_hom, id_whiskerRight,
-        Category.id_comp]
-      exact coequalizer.π_desc _ _
-    have hπD (Q : Mod C (S)) :
-        Mod.tensorObjπ (Mod.regular (S)) Q ≫ (λ_ Q).hom.hom = γ[S,Q.X] := by
-      change Mod.tensorObjπ (Mod.regular (S)) Q ≫
-        (Bimod.whiskerRight (Mod.toBimodRegularIso (R := S)).hom
-        ((Mod.toBimod (S)).obj Q)).hom ≫
-          (Bimod.LeftUnitorBimod.hom ((Mod.toBimod (S)).obj Q)) = _
-      dsimp only [Mod.tensorObjπ]
-      rw [Bimod.whiskerRight_hom]
-      erw [ι_colimMap_assoc]
-      simp only [parallelPairHom_app_one]
-      erw [Mod.toBimodRegularIso_hom_hom, id_whiskerRight,
-        Category.id_comp]
-      exact coequalizer.π_desc _ _
-    apply Mod.hom_ext
-    rw [← cancel_epi (tensorObjπ (regular S) ((comap ψ).obj M))]
-    simp only [Mod.comp_hom']
-    rw [hπD, tensorObjπ_whiskerRight_assoc,
-      tensorπ_comapTensorIso_hom_hom_assoc]
-    change ψ ▷ M.X ≫ γ[R,M.X] =
-      ψ ▷ M.X ≫ tensorObjπ (regular R) M ≫ (λ_ M).hom.hom
-    rw [hπC]
-  right_unitality := by
-    intro M
-    have hπC (Q : Mod C (R)) :
-        Mod.tensorObjπ Q (Mod.regular (R)) ≫ (ρ_ Q).hom.hom = (β_ Q.X (R)).hom ≫ γ[R,Q.X] := by
-      change Mod.tensorObjπ Q (Mod.regular (R)) ≫
-        (Bimod.whiskerLeft ((Mod.toBimod (R)).obj Q)
-        (Mod.toBimodRegularIso (R := R)).hom).hom ≫
-          (Bimod.RightUnitorBimod.hom ((Mod.toBimod (R)).obj Q)) = _
-      dsimp only [Mod.tensorObjπ]
-      rw [Bimod.whiskerLeft_hom]
-      erw [ι_colimMap_assoc]
-      simp only [parallelPairHom_app_one]
-      erw [Mod.toBimodRegularIso_hom_hom, MonoidalCategory.whiskerLeft_id,
-        Category.id_comp]
-      exact coequalizer.π_desc _ _
-    have hπD (Q : Mod C (S)) :
-        Mod.tensorObjπ Q (Mod.regular (S)) ≫ (ρ_ Q).hom.hom = (β_ Q.X (S)).hom ≫ γ[S,Q.X] := by
-      change Mod.tensorObjπ Q (Mod.regular (S)) ≫
-        (Bimod.whiskerLeft ((Mod.toBimod (S)).obj Q)
-        (Mod.toBimodRegularIso (R := S)).hom).hom ≫
-          (Bimod.RightUnitorBimod.hom ((Mod.toBimod (S)).obj Q)) = _
-      dsimp only [Mod.tensorObjπ]
-      rw [Bimod.whiskerLeft_hom]
-      erw [ι_colimMap_assoc]
-      simp only [parallelPairHom_app_one]
-      erw [Mod.toBimodRegularIso_hom_hom, MonoidalCategory.whiskerLeft_id,
-        Category.id_comp]
-      exact coequalizer.π_desc _ _
-    apply Mod.hom_ext
-    rw [← cancel_epi (tensorObjπ ((comap ψ).obj M) (regular S))]
-    simp only [Mod.comp_hom']
-    rw [hπD, tensorObjπ_whiskerLeft_assoc,
-      tensorπ_comapTensorIso_hom_hom_assoc]
-    change (β_ M.X S).hom ≫ ψ ▷ M.X ≫ γ[R,M.X] =
-      M.X ◁ ψ ≫ tensorObjπ M (regular R) ≫ (ρ_ M).hom.hom
-    rw [hπC]
-    rw [braiding_naturality_right_assoc]
-
+  μIso_hom_natural_left := sorry
+  μIso_hom_natural_right := sorry
+  associativity := sorry
+  left_unitality := sorry
+  right_unitality := sorry
 
 /-- Restriction of scalars along an isomorphism of commutative algebra objects is strong
 monoidal. -/

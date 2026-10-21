@@ -13,22 +13,6 @@ public import WeilConjectures.DeligneLaumon.Reduction.RealCurve
 public import WeilConjectures.DeligneLaumon.Reduction.TraceReality
 public import WeilConjectures.WeilSheaf.LisseLocus
 public import WeilConjectures.WeilSheaf.UpperStarPointwise
-import Sheaf.AlgebraicGeometry.ClosedPointField
-import Sheaf.AlgebraicGeometry.FiniteFieldClosedSubschemeDescent
-import Sheaf.AlgebraicGeometry.FundamentalGroup.FiberEquivalence
-import WeilConjectures.AlgebraicGeometry.FundamentalGroup.OpenSubgroups
-import Sheaf.AlgebraicGeometry.ProEtaleIntegralCoefficientLimit
-import Sheaf.CategoryTheory.Galois.GaloisTransitive
-import Sheaf.DeligneLaumon.SmoothAffineFrontierStratification
-import Sheaf.Paper.EtaleWeilFundamentalRepresentation
-import Sheaf.Paper.LisseIntegralSmallCoefficients
-import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Connected
-import WeilConjectures.DeligneLaumon.Reduction.FormalSteps
-import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Purity
-import WeilConjectures.Mathlib.LinearAlgebra.Eigenspace.Triangularizable
-import WeilConjectures.RepresentationTheory.Clifford
-import WeilConjectures.RepresentationTheory.FiniteMatrixWitness
-import WeilConjectures.RingTheory.SmoothPushoutFilteredColimitStage
 
 /-!
 # Real Weil sheaves on an arbitrary base are mixed
