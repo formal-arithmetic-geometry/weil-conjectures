@@ -23,9 +23,139 @@
   "def-weil-proetale-tor-amplitude",
   "def-weil-derived-cohomology-sheaves"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each $j$, take a trivializing covering from the definition of locally constant. Intersect the finitely many coverings by successive fibre products over $T$; the base-change and composition axioms for coverings give one common trivializing covering. On each member every $F_j$ is a constant finite-dimensional $k$-module sheaf. Apply the finite-affine-refinement clause of [sk-def-pe-site] to the affine target $T$: obtain a finite covering $\\{V_\\alpha\\to T\\}_{\\alpha\\in A}$ with all $V_\\alpha$ affine, each mapping to one member of the common covering. Restrict the trivializations along these site arrows: by [lem-pe-constant-module-restriction-universes] a sheaf isomorphic to the localized constant module sheaf with model $M$ over a site object stays isomorphic to the localized constant module sheaf with the same model $M$ after restriction along any arrow $W\\to U$; the constant coefficient rings are identified by [lem-weil-proetale-weakly-etale-localization]. If $J$ is empty use the identity covering of $T$.",
+   "uses": [
+    "def-weil-proetale-locally-constant-sheaf",
+    "sk-def-pe-site",
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-pe-constant-module-restriction-universes"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 098B/098D, finite affine refinement; Tag 09C3, lemma-local-structure-constructible-complex, base-case finite disjoint trivialization"
+   }
+  },
+  {
+   "text": "Form $P=\\coprod_{\\alpha\\in A}V_\\alpha$ and $p:P\\to T$. The finite-coproduct theorem puts $P$ in $T_{\\mathrm{proet}}$ and identifies its represented sheaf with the sheaf coproduct of the $h_{V_\\alpha}$. The map $h_P\\to h_T$ is locally surjective: for a map $W\\to T$, pull back the covering of step 1; on $W\\times_TV_\\alpha$ the map to $P$ gives the required lift of that section. It is therefore an epimorphism by [lem-weil-pbc-site-sheaf-sets-epi-locally-surjective]. By the hypothesis on evaluation at $T$, the identity in $h_T(T)$ lifts to $h_P(T)$. Subcanonicity and Yoneda identify this lift with a scheme map $s:T\\to P$ satisfying $ps=1_T$. Put $U_\\alpha=s^{-1}(V_\\alpha)$. The coprojections have pairwise disjoint clopen images covering $P$, so the $U_\\alpha$ are pairwise disjoint clopens covering $T$. The open-factorization lemma supplies $s_\\alpha:U_\\alpha\\to V_\\alpha$ with $(V_\\alpha\\to T)s_\\alpha=(U_\\alpha\\to T)$. Since $s_\\alpha$ is an arrow of $T_{\\mathrm{proet}}$, pull back the trivializations of step 1 along it by [lem-pe-constant-module-restriction-universes] and choose a finite basis of each module model: $F_j|_{U_\\alpha}\\cong k_{U_\\alpha}^{\\oplus r_{\\alpha j}}$. Discard empty pieces. Each remaining piece is quasi-compact since it is closed in the quasi-compact affine $T$. If $T$ is empty discard all pieces.",
+   "uses": [
+    "lem-weil-pbc-proetale-finite-coproduct-evaluation",
+    "lem-weil-pbc-proetale-subcanonical",
+    "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+    "lem-galois-yoneda-hom-bijection",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-pe-constant-module-restriction-universes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 098F, lemma-w-contractible-proetale-cover, section and inverse-image partition argument; categorical section obtained as in sites.tex Tag 090K, lemma-w-contractible"
+   }
+  },
+  {
+   "text": "Fix a resulting clopen $U$ and write $Z=T\\setminus U$. For a sheaf of sets $F$ on $U_{\\mathrm{proet}}$, define $\\widetilde F(V)=F(V\\times_TU)$ on $T_{\\mathrm{proet}}$. This is a sheaf because pulling a covering back to $U$ gives a covering. If $F\\to G$ is an epimorphism and $g\\in\\widetilde G(V)$, the local-surjectivity criterion gives a covering of $V\\times_TU$ on which $g$ lifts; together with $V\\times_TZ$ this is a covering of $V$. Over the latter piece both extended sheaves have the singleton value at the empty scheme, so there is a lift there too. Thus $\\widetilde F\\to\\widetilde G$ is an epimorphism. Evaluation at $T$ is surjective on this map by hypothesis, and its map on sections is exactly $F(U)\\to G(U)$. This proves the required evaluation property on $U$ using only the local-surjectivity criterion and localized-site definitions.",
+   "uses": [
+    "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+    "lem-weil-proetale-weakly-etale-localization",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00WN, lemma-mono-epi-sheaves, and 00Y0/03EH, localization and relocalization; elementary clopen extension argument"
+   }
+  },
+  {
+   "text": "For any commutative ring sheaf $C$ on $U_{\\mathrm{proet}}$, apply [lem-weil-pbc-proetale-weakly-contractible-evaluation-exact] using step 3: evaluation preserves homology and hence exact sequences of $C$-module sheaves. A $C$-linear map $C^{\\oplus r}\\to H$ is specified by the images of its $r$ global basis sections, i.e. by an element of $H(U)^r$; conversely these sections define the map by $C$-linear combinations on every object. For an epimorphism $G\\to H$, exact evaluation lifts each of these finitely many sections to $G(U)$ and hence lifts the given map. This proves projectivity, including $r=0$.",
+   "uses": [
+    "lem-weil-pbc-proetale-weakly-contractible-evaluation-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0946, lemma-w-contractible, part (1), followed by the finite-free basis argument"
+   }
+  },
+  {
+   "text": "For each $n$, localized restriction identifies $(R/\\varpi^n)_T|_U$ with $(R/\\varpi^n)_U$, by the isomorphism that fixes all constant sections. The sectionwise inverse-limit formula of [def-pur-sheaf-inverse-limit] consequently gives $B_T|_U\\cong B_U$: at an object $V\\to U$ both sides are the compatible tuples of sections of $(R/\\varpi^n)$ on $V$. This is an isomorphism of ring sheaves since all operations are componentwise. Its composite with the $n$th quotient projection is the restriction of $B_T\\to R_{n,T}$, and it identifies the quotient transitions because each is induced by $R/\\varpi^{n+1}\\to R/\\varpi^n$ and the constant-section comparisons are natural.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "def-pur-sheaf-inverse-limit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00Y0, localized restriction; sectionwise ring limits as in the coefficient construction used by proetale.tex Tag 09C3"
+   }
+  },
+  {
+   "text": "Apply [lem-pur-clopen-ringed-module-gluing] and [lem-pur-finite-product-derived-tensor-calculus] to the finite partition and to the arbitrary ring sheaf $B_T$. They give exact ordinary restriction $r_U$ and its termwise triangulated functor on unbounded derived categories, as well as the natural scalar-extension comparisons. With step 5 these read $r_U(M\\otimes^L_{B_T}R_{n,T})\\cong r_UM\\otimes^L_{B_U}R_{n,U}$. For $n=1$ the same statement identifies the residue-field reduction. Naturality in coefficient maps identifies all quotient transition maps. Compatibility with the tensor unit identifies the canonical maps from $M$: the unit $B_T\\to R_{n,T}$ restricts to $B_U\\to R_{n,U}$, so tensoring it with the identity of $M$ gives precisely the corresponding local quotient projection. Forgetting the quotient-ring action simply keeps the same underlying complex and the action through this ring map; restriction therefore also commutes with the specified restriction of scalars. Only the arbitrary-ring clauses of the cited nodes are used; no invertibility of $\\ell$ on $T$ is assumed.",
+   "uses": [
+    "lem-pur-clopen-ringed-module-gluing",
+    "lem-pur-finite-product-derived-tensor-calculus",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, exact functors on unbounded derived categories; sites-cohomology.tex Tags 06YS/06YU, K-flat tensor, as packaged by the cited finite-clopen calculus"
+   }
+  },
+  {
+   "text": "Under the derived equivalence $D(B_T)\\simeq\\prod_iD(B_{U_i})$ of [lem-pur-finite-product-derived-tensor-calculus], let $e_U$ insert a complex in the $U$ coordinate and zero elsewhere. The product-category Hom formula and the restriction/insertion identities give $\\operatorname{Hom}(e_UA,K)=\\operatorname{Hom}(A,r_UK)$. Hence, if $P=\\prod_nK_n$, then $\\operatorname{Hom}(A,r_UP)=\\operatorname{Hom}(e_UA,P)=\\prod_n\\operatorname{Hom}(e_UA,K_n)=\\prod_n\\operatorname{Hom}(A,r_UK_n)$, naturally in $A$. Thus $r_UP$ with the restricted projections is the required product in the local derived category. Apply the triangulated functor $r_U$ to the Roos triangle that witnesses quotient-tower completeness of $M$. The middle arrow is still $1-s$, since its $n$th projection is the restriction of $\\mathrm{pr}_n-t_n\\mathrm{pr}_{n+1}$. By [def-weil-derived-limit] the resulting triangle exhibits $r_UM$ as a derived limit of the restricted tower, with the restricted canonical quotient projections. Step 6 identifies this tower, its transitions and augmentation with the quotient-reduction tower of $r_UM$. This proves preservation of completeness and commutation with derived limits in the specified Roos-triangle sense.",
+   "uses": [
+    "lem-pur-finite-product-derived-tensor-calculus",
+    "def-weil-derived-limit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08TC, definition-derived-limit; elementary product-universal-property argument under the cited clopen derived equivalence"
+   }
+  },
+  {
+   "text": "By step 6, the reduction of $M|_U$ is $M_1|_U$. Every object $V\\to U$ of $U_{\\mathrm{proet}}$ is also an object over $T$, and the localized-site equivalence and relocalization identify $(M_1|_U)|_V$ with $M_1|_V$, including its constant coefficient ring $k_V$. For every degree-zero $k_V$-module sheaf $L$, its tensor with this identified complex has the vanishing outside $[a,b]$ required by the original hypothesis for the object $V\\to T$. This is exactly the local Tor-amplitude assertion, with the same bounds. The empty scheme has only the zero module category, so the empty partition and the assertions there are valid.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "def-pur-localized-ringed-site",
+    "def-weil-proetale-tor-amplitude"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09C3, restriction of local models; elementary relocalization and Tor-amplitude definition"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proetale-locally-constant-sheaf",
+  "sk-def-pe-site",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-pe-constant-module-restriction-universes",
+  "lem-weil-pbc-proetale-finite-coproduct-evaluation",
+  "lem-weil-pbc-proetale-subcanonical",
+  "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+  "lem-galois-yoneda-hom-bijection",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "def-pur-localized-ringed-site",
+  "lem-weil-pbc-proetale-weakly-contractible-evaluation-exact",
+  "def-pur-sheaf-inverse-limit",
+  "lem-pur-clopen-ringed-module-gluing",
+  "lem-pur-finite-product-derived-tensor-calculus",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-derived-limit",
+  "def-weil-proetale-tor-amplitude"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C3 base-case decomposition and Tag 098F section/partition argument, expanded for categorical weak contractibility; derived compatibility uses existing finite-clopen calculus and Tag 08TC."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -61,10 +191,45 @@
    "results": "8 hits: AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.exists_app_map_eq_map_of_isLimit, AlgebraicGeometry.exists_appTop_π_eq_of_isAffine_of_isLimit, AlgebraicGeometry.exists_map_eq_top, Profinite.exists_isClopen_of_cofiltered",
    "date": "2026-10-21",
    "verdict": "no match: condensed locally constant functors and affine/profinite limit lemmas do not give this finite clopen trivialization with categorical weak contractibility and complete restriction."
+  },
+  {
+   "tool": "grep",
+   "query": "weakly.?contractible|clopen.*(sheaf|constant)|locallyConstant.*partition",
+   "results": "0 hits:  (Mathlib/CategoryTheory/Sites)",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern condensed/profinite objects, functions or affine limit sections, not this pro-etale clopen localization theorem; inspected the closest source statements."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Locally constant finite dimensional module sheaves trivialize on finite clopen partitions of affine weakly contractible schemes",
+   "results": "8 hits: LocallyConstant, AlgebraicGeometry.Scheme.Modules, LocallyConstant.instModule, CondensedMod.LocallyConstant.functorIsoDiscreteAux₁, CondensedSet.LocallyConstant.functorFullyFaithful, LightCondensed.IsDiscrete, LightCondensed.lanLightCondSet, ModuleCat.Tilde.exists_const",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern condensed/profinite objects, functions or affine limit sections, not this pro-etale clopen localization theorem; inspected the closest source statements."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"WeaklyContractible\"",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern condensed/profinite objects, functions or affine limit sections, not this pro-etale clopen localization theorem; inspected the closest source statements."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite locally constant sheaves on a weakly contractible affine scheme admit a common finite clopen trivialization and clopen restriction preserves derived quotient tower completeness",
+   "results": "8 hits: CompHausLike.LocallyConstant.counit_app_val, Profinite.exists_locallyConstant_finite_aux, CompHausLike.LocallyConstantModule.functor, Profinite.exists_locallyConstant_fin_two, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, Profinite.exists_locallyConstant_finite_nonempty, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, LightCondensed.isColimitLocallyConstantPresheaf",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern condensed/profinite objects, functions or affine limit sections, not this pro-etale clopen localization theorem; inspected the closest source statements."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A projective terminal representable on the proetale site splits every covering and gives finite disjoint open refinements; restriction to a clopen factor preserves tensor products and homotopy inverse limits",
+   "results": "8 hits: Profinite.projectivePresentation, LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition', LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', Profinite.instEnoughProjectives",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern condensed/profinite objects, functions or affine limit sections, not this pro-etale clopen localization theorem; inspected the closest source statements."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-fix-residue-lisse-projective-models",
@@ -84,5 +249,69 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sf-clopen-lisse-complete-localization",
+  "worker": "stage1",
+  "summary": "Proved all clauses in eight explicit steps using existing nodes only. Derived a split affine cover from categorical evaluation, inherited weak contractibility by clopen extension, and transported the supplied Roos triangle through the general finite-clopen derived equivalence. No statement correction and no new nodes.",
+  "blueprint": "Proof, paragraph beginning \"For an admissible exceptional adjoint\", sentence \"Evaluation is natural in the two Weil maps and their inverses, so its square commutes\": local projective models used to compare ordinary tensor evaluation with integral completed tensor. Extracted local-model argument: Simultaneous clopen lisse trivialization and complete restriction; old parent steps 2-3. Steps 1-4 realize the local trivialization/projective-model preparation (parent old steps 2-3); steps 5-8 justify coefficient, quotient-tower and Tor-bound restriction needed for the same local-model evaluation comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-clopen-ringed-module-gluing",
+    "why": "General finite-clopen equivalence for arbitrary ring sheaves, used only for exact ordinary restriction; the unit has no gluing statement."
+   },
+   {
+    "node": "lem-pur-finite-product-derived-tensor-calculus",
+    "why": "General finite-clopen derived equivalence, insertion identities and natural derived scalar-extension comparison; used as categorical tools for the local models, without changing the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-weakly-contractible-evaluation-exact",
+    "why": "General evaluation/homology theorem under exactly the categorical epimorphism hypothesis; supplies exact evaluation in step 4."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Identifies the small site of each open with the slice and its constant coefficients; a site-localization tool, not a replacement route."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+    "why": "General epi/local-surjectivity criterion for sets, used to split the finite cover and to extend an epimorphism across a clopen complement."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-subcanonical",
+    "why": "Representability as actual sheaves, needed to turn the lifted identity into a scheme section."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-finite-coproduct-evaluation",
+    "why": "Finite affine coproduct exists in the pro-etale site and represents the sheaf coproduct; needed to obtain one scheme section."
+   },
+   {
+    "node": "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "why": "Universal property of an open subscheme, to restrict the scheme section to each selected covering member."
+   },
+   {
+    "node": "lem-pe-constant-module-restriction-universes",
+    "why": "Restriction of a localized constant module sheaf along a site arrow keeps the same model; used in steps 1-2 to move the finite-dimensional local models to the affine refinement and to the clopen pieces; the unit has no such statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-clopen-ringed-module-gluing",
+  "lem-pur-finite-product-derived-tensor-calculus",
+  "lem-weil-pbc-proetale-weakly-contractible-evaluation-exact",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+  "lem-weil-pbc-proetale-subcanonical",
+  "lem-weil-pbc-proetale-finite-coproduct-evaluation",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "lem-pe-constant-module-restriction-universes"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q03-94f9c7825",
+  "group": "Q03",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-94f9c7825 (reviewer sub-agent of L); spot-checked: I read the item (8 steps, no new nodes; statement and stmt_deps identical to live, where the item is still unsplit; not in the dropped list; no repair note; no SGA) against Stacks 098F (l. 2781-2807, section sigma and Zariski partition) and the 09C3 base case (finite disjoint affine-open decomposition). I also read every cited statement.\n\nChecks:\n- Step 2: the finite-coproduct node (V_alpha affine so qcqs, I finite), the local-surjectivity epi criterion, subcanonicity and Yoneda give s with ps=1. The scheme-coproduct node gives disjoint clopen images, and the open factorization applies to s on U_alpha.\n- Step 3: the clopen extension F~(V)=F(V x_T U) is correct; on the complement piece V x_T Z both sheaves take the value at the empty scheme, a singleton.\n- Step 4: the evaluation-exact node applies with W=U terminal, and Hom(C^r,H)=H(U)^r.\n- Step 5: the sectionwise ring inverse limit.\n- Step 6: only the arbitrary-R paragraphs of lem-pur-clopen-ringed-module-gluing and lem-pur-finite-product-derived-tensor-calculus are used (ell-invertibility belongs only to the unused constant-coefficient clause). The scalar-extension comparison is natural in coefficient maps.\n- Step 7: the Roos-triangle definition with the product presupposed; r_U preserves products through the equivalence, and pr_n r_U(1-s) = pr_n - r_U f_n pr_{n+1}.\n- Step 8: relocalization plus a hypothesis quantified over all site objects and all k_V-modules L.\n- Edge cases: empty T, empty J, rank 0, differing ranks, zero ring, ell not invertible all hold. No cycle in a 261-node closure.\n\nFault (C4), steps 1-2: restricting the constant module local models along site arrows was attributed to lem-weil-proetale-weakly-etale-localization. That node only identifies the constant ring sheaf (clause 2).\n\nFIX: cite the existing lem-pe-constant-module-restriction-universes (the same model M persists under restriction along any arrow W->U) in steps 1 and 2. I recomputed proof_deps and declared it in split_report.tool_uses. All other tool_uses are accepted as site-generic tools, since unit sk-rem-sf-pf-done is a stepless assembly remark.; 1 file(s) fixed by the reviewer"
  }
 }

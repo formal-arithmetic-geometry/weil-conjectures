@@ -21491,3 +21491,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:58 L: merged deliver/Q101/lem-sp-power-torsion-sheaf-limit-complete (reviewer PASS; first push; new nodes: 0)
 - 08:58 L: merged deliver/Q51/lem-sf-tensor-comparison-localization-descent (reviewer FIX; first push; new nodes: 1)
 - 08:58 L: merged deliver/Q102/lem-sp-semilinear-kflat-tower-model (reviewer FIX; first push; new nodes: 0)
+- 08:58 L: merged deliver/Q03/lem-sf-clopen-lisse-complete-localization (reviewer FIX; first push; new nodes: 0)
