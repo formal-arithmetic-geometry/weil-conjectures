@@ -17,9 +17,117 @@
   "def-sfb-preserves-kflat-quasi-iso",
   "lem-weil-pbc-total-tensor-integer-shifts"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $Q$ for localization from complexes and $T$ for the specified Layer-B derived tensor. The particular case in [def-sfb-derived-tensor-modules] identifies this structure on $D(C)$ with the structure of [lem-sfb-derived-monoidal] for relative tensor. Thus its K-flat computation applies on either side, without assuming a module itself flat. For a quasi-isomorphism $p:P\\to S_0N$ with $P$ K-flat and any complex $A$, it supplies the natural representative isomorphism $e_{A,p}:Q\\operatorname{Tot}(A\\otimes_R P)\\xrightarrow{\\sim}T(QA,N[0])$. The lax monoidal structure of $Q$ supplies the multiplication $m_{A,P}:T(QA,QP)\\to Q\\operatorname{Tot}(A\\otimes_R P)$, natural in both complexes; the K-flat computation says it is invertible when either argument is K-flat. Write $\\mu_{A,P}=m_{A,P}^{-1}:Q\\operatorname{Tot}(A\\otimes_R P)\\to T(QA,QP)$ for such pairs, again natural. Explicitly $e_{A,p}$ is $\\mu_{A,P}$ followed by $T(1,Qp)$. For $A=S_qM=S_0M[-q]$, localization commutes with shift, so its target is $T(M[0][-q],N[0])$.",
+   "uses": [
+    "def-sfb-derived-tensor-modules",
+    "lem-sfb-derived-monoidal",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-tensor-hom/lem-sfb-derived-monoidal.md",
+    "place": "K-flat computation in either argument and lax localization; Layer-B specialization in def-sfb-derived-tensor-modules"
+   }
+  },
+  {
+   "text": "Use the total tensor differential in [def-sfb-preserves-kflat-quasi-iso]. In total degree $r$, a summand $S_qM^i\\otimes_R P^j$ is zero unless $i=q$, since the tensor bifunctor is additive and hence sends zero objects to zero objects. The coproduct therefore identifies with its single possibly nonzero summand $M\\otimes_R P^{r-q}$. The first part $d_{S_qM}\\otimes1$ of the differential is zero, and the second part is $(-1)^q(1_M\\otimes d_P^{r-q})$. These statements also hold for unbounded $P$: each total degree still has just one possibly nonzero summand.",
+   "uses": [
+    "def-sfb-preserves-kflat-quasi-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FNG (section-sign-rules), total tensor Leibniz differential"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-total-tensor-integer-shifts] to the additive bifunctor $-\\otimes_R-$, first complex $S_0M$, second complex $P$, and integer $-q$. Since $S_0M[-q]=S_qM$, it gives $c_{M,P}:\\operatorname{Tot}(S_qM\\otimes_R P)\\xrightarrow{\\sim}\\operatorname{Tot}(S_0M\\otimes_R P)[-q]$. The cited first-variable comparison is unsigned on every summand. Under step 2 its degree-$r$ map is therefore the identity on $M\\otimes_R P^{r-q}$. On the target the differential is $(-1)^{-q}(1_M\\otimes d_P^{r-q})$, equal to the source differential because $(-1)^{-q}=(-1)^q$. This identifies the requested comparison with exactly $s^1_{-q}$, with no choice of a sign convention.",
+   "uses": [
+    "lem-weil-pbc-total-tensor-integer-shifts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FNH (item-shift-tensor), first-factor shift, second shift zero"
+   }
+  },
+  {
+   "text": "For a module map $f:M\\to M'$ and a chain map $h:P\\to P'$, the map in degree $r$ under step 2 is $f\\otimes_R h^{r-q}$, by the tensor-of-maps formula in [def-sfb-preserves-kflat-quasi-iso]. Both paths around the square with $c_{M,P}$ and $c_{M',P'}$ are this same morphism, because the horizontal comparisons are identities on the surviving summand. Thus the chain comparison is natural for every such pair of maps, including maps of K-flat resolutions and maps lying over a map $N\\to N'$.",
+   "uses": [
+    "def-sfb-preserves-kflat-quasi-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FNH (item-shift-tensor), unsigned first-variable comparison and functoriality"
+   }
+  },
+  {
+   "text": "To check independence under the canonical representative isomorphisms, fix a K-flat resolution $u:U\\to S_0M$, available in the K-flat computation of [lem-sfb-derived-monoidal]. The complex $U[-q]$ is K-flat: the comparisons in [lem-weil-pbc-total-tensor-integer-shifts] identify $U[-q]\\otimes_R-$ with $(U\\otimes_R-)[-q]$ and $-\\otimes_R U[-q]$ with $(-\\otimes_R U)[-q]$. The unshifted functors preserve quasi-isomorphisms by [def-sfb-preserves-kflat-quasi-iso], and shifts preserve them by [lem-sp-derived-cohomology-shift]. Also $u[-q]$ is a quasi-isomorphism. For $i=0,q$ write $U_i=U$ or $U[-q]$ and $u_i=u$ or $u[-q]$. For any $p:P\\to S_0N$ as above, both arrows of the span $\\operatorname{Tot}(S_iM\\otimes_R P)\\leftarrow\\operatorname{Tot}(U_i\\otimes_R P)\\to\\operatorname{Tot}(U_i\\otimes_R S_0N)$ are quasi-isomorphisms: the left tensors $u_i$ with the K-flat $P$, and the right tensors $p$ with the K-flat $U_i$.",
+   "uses": [
+    "lem-sfb-derived-monoidal",
+    "lem-weil-pbc-total-tensor-integer-shifts",
+    "def-sfb-preserves-kflat-quasi-iso",
+    "lem-sp-derived-cohomology-shift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-tensor-hom/lem-sfb-derived-monoidal.md",
+    "place": "Either-variable K-flat computation; shift stability using Stacks 0FNH and Homology 011H"
+   }
+  },
+  {
+   "text": "By naturality of the lax localization multiplication of [lem-sfb-derived-monoidal], hence of its inverse $\\mu$ on the pairs of step 1 (each pair below has a K-flat argument), the span of step 5, after applying $Q$, gives exactly $e_{S_iM,p}$ followed by the inverse of the representative identification computed using $U_i\\to S_iM$. Indeed both composites from $Q\\operatorname{Tot}(U_i\\otimes_R P)$ to $T(QS_iM,N[0])$ are $T(Qu_i,Qp)\\circ\\mu_{U_i,P}$. Naturality of $s^1_{-q}$, as stated in [lem-weil-pbc-total-tensor-integer-shifts], makes the comparisons $c$ commute with both arrows of these spans (for the left arrow use its naturality in the first complex). The resulting comparison between derived tensor objects is consequently the one computed from $\\operatorname{Tot}(U[-q]\\otimes_R S_0N)\\cong\\operatorname{Tot}(U\\otimes_R S_0N)[-q]$. It does not involve $P$ or $p$. This proves independence for any two resolutions, even when no chain map between them is specified.",
+   "uses": [
+    "lem-sfb-derived-monoidal",
+    "lem-weil-pbc-total-tensor-integer-shifts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-tensor-hom/lem-sfb-derived-monoidal.md",
+    "place": "Lax localization and either-variable K-flat computation; naturality of Stacks 0FNH"
+   }
+  },
+  {
+   "text": "For the fixed K-flat $U$, both functors $\\operatorname{Tot}(U[-q]\\otimes_R-)$ and $\\operatorname{Tot}(U\\otimes_R-)[-q]$ preserve quasi-isomorphisms, as checked in step 5. Their natural comparison descends uniquely through $Q$ by [lem-weil-pbc-localization-universal-property]. Thus the comparison computed in step 6 is natural in $N[0]$, including maps not presented by a map between the two selected resolutions. For a map $M\\to M'$, choose a single K-flat resolution of $S_0N$ for both modules. Step 4 and the naturality of $e$ give the naturality square in $M$; step 6 shows it is the same square for every other resolution. Hence the derived comparison is natural in both $M,N$.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-tensor-hom/lem-sfb-derived-monoidal.md",
+    "place": "Descent of the natural total-tensor comparison through localization; formal use of either-variable K-flat computation"
+   }
+  },
+  {
+   "text": "Apply the cohomology functor $H^r$ of [def-weil-abstract-derived-category] to this derived comparison, then apply [lem-sp-derived-cohomology-shift] with $k=-q$, $a=r$, $a'=r-q$. The result is $H^r(T(M[0][-q],N[0]))\\cong H^{r-q}(T(M[0],N[0]))$. The cited cohomology-shift identification is natural, so steps 6 and 7 give both the claimed naturality and independence under canonical representative comparisons. The construction used arbitrary integers throughout and only the K-flatness of the resolutions, so it imposes no sign restriction on $q,r$ and no flatness on $M,N$.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-sp-derived-cohomology-shift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tags 011G (definition-shift-cochain), 011H (definition-cohomology-shift), and following functoriality paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-derived-tensor-modules",
+  "lem-sfb-derived-monoidal",
+  "def-weil-abstract-derived-category",
+  "def-sfb-preserves-kflat-quasi-iso",
+  "lem-weil-pbc-total-tensor-integer-shifts",
+  "lem-sp-derived-cohomology-shift",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.proof.md",
+  "place": "Complexes paragraph: explicit shifted-heart tensor calculation, using the published Layer-B K-flat computation and Stacks 0FNH, 011G, 011H"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -69,10 +177,52 @@
    "results": "[leansearch] OK 8 hit(s); ModuleCat.projectiveResolution, Module.Flat.rTensor_shortComplex_exact, Module.Flat.rTensor_exact, Module.Flat.lTensor_exact, Module.Flat.iff_rTensor_exact, Module.Flat.tfae_equational_criterion, CategoryTheory.ProjectiveResolution.fromLeftDerivedZero', Module.Flat.lTensor_shortComplex_exact",
    "date": "2026-10-21",
    "verdict": "no match: projective resolutions of ordinary modules and flat ordinary tensor exactness do not state the internal-module K-flat representative and cohomology comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "single.*tensor|tensor.*single|homology.*commShift|commShift.*homology",
+   "results": "OK: 4 hits; Mathlib/Algebra/Homology/Monoidal.lean, Mathlib/Algebra/Homology/Monoidal.lean, Mathlib/Algebra/Homology/Monoidal.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShiftSequence.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: returned Tor/Ext, ordinary tensor or generic shift declarations do not state the Layer-B relative K-flat representative, naturality and resolution-independence clauses together"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative derived tensor with a shifted module object computed by one K-flat replacement has cohomology equal to the shifted cohomology of the unshifted derived tensor",
+   "results": "OK: 8 hits; CochainComplex.HomComplex.Cochain.leftShiftLinearEquiv, CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt, CochainComplex.isKInjective_shift_iff, CochainComplex.HomComplex.Cochain.rightUnshift_v, HomotopyCategory.homologyShiftIso_hom_app, CochainComplex.isKProjective_shift_iff, CochainComplex.HomComplex.Cochain.shift, CochainComplex.HomComplex.Cocycle.rightUnshift.congr_simp",
+   "date": "2026-10-21",
+   "verdict": "no match: returned Tor/Ext, ordinary tensor or generic shift declarations do not state the Layer-B relative K-flat representative, naturality and resolution-independence clauses together"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"single\", \"tensor\", \"homology\"",
+   "results": "OK: 1 hits; groupHomology.H1ToTensorOfIsTrivial_H1π_single",
+   "date": "2026-10-21",
+   "verdict": "no match: returned Tor/Ext, ordinary tensor or generic shift declarations do not state the Layer-B relative K-flat representative, naturality and resolution-independence clauses together"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For internal modules over a ring object in sheaves, derive relative tensor using a K-flat resolution of the second variable and commute a single-degree first complex with any integer shift, including cohomology and resolution independence",
+   "results": "OK: 8 hits; HomologicalComplex.HasGoodTensor₁₂, CategoryTheory.Tor', CategoryTheory.Tor, CategoryTheory.Tor'_obj_obj, CategoryTheory.Tor'_map_app, CategoryTheory.Tor_obj, Module.Flat.rTensor_shortComplex_exact, CategoryTheory.Tor'_obj_map",
+   "date": "2026-10-21",
+   "verdict": "no match: returned Tor/Ext, ordinary tensor or generic shift declarations do not state the Layer-B relative K-flat representative, naturality and resolution-independence clauses together"
+  },
+  {
+   "tool": "grep",
+   "query": "map₂CochainComplex.*[Ss]hift|shift.*map₂CochainComplex|homologyFunctor.*[Ss]hift|homologyShiftIso",
+   "results": "OK: 23 hits; Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean, Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean, Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean, Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: returned Tor/Ext, ordinary tensor or generic shift declarations do not state the Layer-B relative K-flat representative, naturality and resolution-independence clauses together"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology in degree r of the derived tensor of a degree q single complex and a degree zero single complex equals degree r-q cohomology of their degree zero derived tensor, naturally in both module objects",
+   "results": "OK: 8 hits; CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_symm_mk_hom, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_symm_mk_hom, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass, Rep.torIso, CategoryTheory.ProjectiveResolution.extAddEquivCohomologyClass, CategoryTheory.ProjectiveResolution.extAddEquivCohomologyClass_symm_apply, groupCohomologyIsoExt, CategoryTheory.InjectiveResolution.extAddEquivCohomologyClass_symm_apply",
+   "date": "2026-10-21",
+   "verdict": "no match: returned Tor/Ext, ordinary tensor or generic shift declarations do not state the Layer-B relative K-flat representative, naturality and resolution-independence clauses together"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-cohomology-tor-interval",
@@ -91,5 +241,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-relative-single-tensor-cohomology",
+  "worker": "stage1",
+  "summary": "Expanded the arbitrary-degree single-complex calculation into explicit representative, differential, signed shift, naturality, common first-resolution independence, localization descent, and cohomology steps. Reused all generic tools; no new nodes and no statement changes.",
+  "blueprint": "The Complexes paragraph of det-def-localizing-closure-ctf-equals-bc uses H^b(K)[-b] in its truncation triangle. Steps 1–8 justify the shift of its relative derived tensor and cohomology for arbitrary q, with q=b as that application.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-derived-monoidal",
+    "why": "Generic either-variable K-flat computation and lax localization for the exact relative monoidal structure specified by def-sfb-derived-tensor-modules; these structural tools do not replace the localizing-closure truncation route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-derived-monoidal"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-N0-e327aa448",
+  "group": "N0",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N0-e327aa448 (reviewer sub-agent of L); spot-checked: Read the item's 8 steps in full and every cited statement: def-sfb-derived-tensor-modules, lem-sfb-derived-monoidal (including proof steps 2, 4 and 5), def-weil-abstract-derived-category, def-sfb-preserves-kflat-quasi-iso, lem-weil-pbc-total-tensor-integer-shifts, lem-sp-derived-cohomology-shift and lem-weil-pbc-localization-universal-property. Sources: blueprint main-20261015 ctf-equals-bc.proof.md l.31-35, whose truncation term H^b(K)[-b] gives q=b and the shift r-q; Stacks 0FNH (more-algebra.tex l.18385), sign (-1)^{pb}, so a shift in the first factor alone is unsigned. Statement and stmt_deps are byte-identical to the base node NS 57b6 created. There are no new nodes, no re-split note applies, and no SGA source is cited. The coefficient category stays Layer B Mod(Λ_X) with the relative tensor. The tool_use of lem-sfb-derived-monoidal is accepted as generic structure; the other cited nodes are definitions or Mathlib leaves. Hand checks: Tot(S_qM⊗P)^r = M⊗P^{r-q} with differential (-1)^q(1⊗d). s^1_n is unsigned: both differentials are (-1)^n T(d,1)+(-1)^p T(1,d). U[-q] is K-flat via s^1, s^2 and the fact that shifts preserve quasi-isomorphisms. In step 6 both composites equal T(Qu_i,1)T(1,Qp)μ_{U_i,P}, so the comparison is independent of P and of U. The descent hypotheses in step 7 hold, and step 8 uses k=-q, a=r, a'=r-q. Edge cases q=0, q=±1, M=0 or N=0, r<0, unbounded P and characteristic 2 all pass. Duplicates: lem-weil-proetale-tor-interval-shift (constant ring A_Y) and lem-weil-pbc-derived-tensor-shift-descent (a sheaf of rings) are other categories, and no Layer-B duplicate exists. FIX (C4, one fault): step 1 called μ: Q Tot(A⊗P) → T(QA,QP) the lax localization tensorator, but the lax multiplication of lem-sfb-derived-monoidal goes T(QA,QP) → Q Tot(A⊗P). Steps 1 and 6 now take μ to be the inverse of that multiplication, on pairs with a K-flat argument. No other change.; 1 file(s) fixed by the reviewer"
  }
 }

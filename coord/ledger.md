@@ -22719,3 +22719,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:57 L: merged deliver/NJ/lem-a1-roos-intrinsic-unit-comparison (stage 2; reviewer PASS; parallel immutable checks)
 - 13:57 L: returned deliver/Q85/lem-weil-integral-twist-scalar-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-integral-twist-scalar-coherence: lem-weil-int)
 - 13:58 L: merged deliver/NF/lem-sf-derived-completed-tensor-bilinearity (stage 2; reviewer PASS; parallel immutable checks)
+- 13:59 L: merged deliver/N0/lem-sfb-relative-single-tensor-cohomology (reviewer FIX; first push; new nodes: 0)
