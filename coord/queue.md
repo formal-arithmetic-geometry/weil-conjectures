@@ -1,23 +1,22 @@
 # Work queue
 
-74 items; claim with `tools/claim.py next <group> [--stage N]`.
+68 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Rework: quarantined by the upstream sync (10 clusters, 363 modules)
+## Rework: quarantined by the upstream sync (9 clusters, 360 modules)
 
 Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.tsv). One item per cluster: its root (a quarantined module importing no other quarantined one) and the quarantined modules importing it; fix the root, then the dependents as far as possible, deliver every module that compiles.
 
 | item (root) | modules | other roots | cause of the root |
 |---|---|---|---|
-| `Sheaf.AlgebraicGeometry.LocalAcyclicityClosedFibreStalks` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
-| `Sheaf.AlgebraicGeometry.PerfectOverlapTailProjectionComponent` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
-| `Sheaf.AlgebraicGeometry.PicardDerivedFibreResidueModelData` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
+| `Sheaf.Paper.ProperIndConstructibleBoundedBelow` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
+| `Sheaf.AlgebraicGeometry.TensorCounitOneKFlatCoordinates` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
+| `Sheaf.AlgebraicGeometry.PicardSingleRankUnrestrictedPerfectChart` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
+| `Sheaf.AlgebraicGeometry.ProperFlatDirectImagePerfectChart` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.PicardRankMatchDerivedTruncationData` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
-| `Sheaf.AlgebraicGeometry.PicardAffineStructureProjectiveRepresentation` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
-| `Sheaf.AlgebraicGeometry.PicardH1CommonMinimalModel` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.Paper.CoefficientExchangeFromComparisons` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
-| `Sheaf.AlgebraicGeometry.DerivedPullbackTensorSuccessiveNormalization` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
-| `Sheaf.AlgebraicGeometry.MixedAffineSectionsPullbackUnitNormalization` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
-| `Sheaf.AlgebraicGeometry.PerfectHomOpenMateResolutionNormalization` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
+| `Sheaf.AlgebraicGeometry.ProjectiveLineAbelianOriginalStalkTotalExchange` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
+| `Sheaf.AlgebraicGeometry.TensorCoordinateIdentifications` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
+| `Sheaf.Paper.ProjectionCoefficientTensorTotal` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 
 Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 52, stage 3 1 items.
 
@@ -32,7 +31,7 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-norm-completion-positive-cohomology-mono` | 4014 | none |
 | `def-per-support-condition` | - | none |
 
-## Stage 2: nodes to state (8)
+## Stage 2: nodes to state (7)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -41,13 +40,12 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-pe-internal-module-sectionwise-short-exact` | 1 | state | 0 |
 | `lem-sfb-constructible-normed-geometric-fibres` | 1 | state | 0 |
 | `lem-sfb-countable-endomorphism-module-reconstruction` | 1 | state | 0 |
-| `lem-sfb-finite-ultrametric-best-approximation` | 1 | state | 0 |
 | `lem-sfb-uncountable-almost-disjoint-family` | 1 | state | 0 |
 | `thm-pur-vector-bundle-thom` | 1 | state | 0 |
 
-Not open yet: 372 nodes that below a finished node, not needed, 92 nodes that wait for a statement dependency (bottom-up), 5 nodes that wait for stage 1 (statement downstream not grounded).
+Not open yet: 371 nodes that below a finished node, not needed, 92 nodes that wait for a statement dependency (bottom-up), 5 nodes that wait for stage 1 (statement downstream not grounded).
 
-## Stage 3: modules to prove (44)
+## Stage 3: modules to prove (41)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -56,12 +54,11 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.AlgebraicGeometry.EtaleCompactSupportGraphGeometricBaseChange` | 9 | 1 | repair | route |
 | `Sheaf.Paper.RingedTopoiCanonicalTensorPullback` | 4 | 1 | repair | route |
 | `Sheaf.Algebra.Homology.ScalarHomTensorCoherence` | 6 | 1 | repair | route |
-| `Sheaf.Paper.DerivedInternalHomFilteredColimit` | 3 | 2 | repair | route |
+| `Sheaf.Paper.DerivedInternalHomFilteredColimit` | 3 | 0 | repair | route |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility` | 3 | 1 | disputed | route |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible` | 2 | 2 | proof | route |
 | `Sheaf.Paper.ConstantCompletionEquivalence` | 5 | 10 | proof | route |
 | `Sheaf.Paper.LevelwiseAdicTruncations` | 6 | 5 | proof | route |
-| `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimit` | - | 5 | proof | 1 |
 | `Sheaf.Paper.PerfectProjectionFormula` | 3 | 3 | proof | 2 |
 | `Sheaf.Paper.ProjectionMateExact` | 3 | 1 | proof | 2 |
 | `Sheaf.Paper.CompletedCoefficientPushforwardComparison` | - | 1 | proof | 2 |
@@ -70,9 +67,8 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.RingedProjectionRestriction` | 4 | 1 | proof | 3 |
 | `Sheaf.Algebra.Homology.KFlatFixedTensorTriangulated` | - | 1 | proof | 3 |
 | `Sheaf.Paper.FiniteFreeCompletedScalarComparison` | - | 5 | proof | 3 |
-| `Sheaf.Paper.KFlatScalarComparisonNormalization` | - | 3 | proof | 3 |
+| `Sheaf.Paper.KFlatScalarComparisonNormalization` | - | 1 | proof | 3 |
 | `Sheaf.Paper.PullbackTensorCanonicalShiftUnit` | - | 1 | proof | 3 |
-| `Sheaf.Paper.RoosIntrinsicCompletenessEquivalence` | - | 1 | proof | 3 |
 | `Sheaf.Paper.SbcCompletedOperations` | - | 15 | proof | 3 |
 | `Sheaf.Algebra.Homology.DerivedTensorShiftDescent` | - | 1 | proof | 4 |
 | `Sheaf.Algebra.Homology.TotalTensorHomotopyConeSigns` | - | 1 | proof | 4 |
@@ -91,7 +87,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.NormalizedFiniteComparisonExistence` | - | 1 | proof | 7 |
 | `Sheaf.AlgebraicGeometry.PrimeCurveArtinSchreierKernel` | - | 1 | proof | 15 |
 | `Sheaf.AlgebraicGeometry.SmoothCurveEtaleStructureDirectImages` | - | 1 | proof | 16 |
-| `Sheaf.AlgebraicGeometry.SmoothLocalAcyclicity` | - | 1 | proof | 16 |
 | `Sheaf.AlgebraicGeometry.AffineCohomologyEtaleModuleRealization` | - | 1 | proof | 17 |
 | `Sheaf.AlgebraicGeometry.CoherentAffineBaseChangeEdge` | - | 1 | proof | 17 |
 | `Sheaf.AlgebraicGeometry.RawRestrictedClassNormalization` | - | 1 | proof | 18 |
