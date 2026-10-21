@@ -20577,3 +20577,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:13 L: merged deliver/Q70/lem-sp-restricted-scalar-cohomology-local-constancy (reviewer FIX; first push; new nodes: 0); claim not held by Q70: not your claim
 - 07:13 L: merged deliver/Q46/lem-pur-line-unbounded-derived-tensor (reviewer PASS; first push; new nodes: 0)
 - 07:13 L: merged deliver/Q77/lem-pur-ringed-derived-pullback-linear (reviewer PASS; first push; new nodes: 0)
+- 07:13 L: merged deliver/Q45/lem-pur-integral-line-reduction-restriction (reviewer PASS; first push; new nodes: 0)
