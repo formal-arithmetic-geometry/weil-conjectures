@@ -1,6 +1,6 @@
 # Work queue
 
-133 items; claim with `tools/claim.py next <group> [--stage N]`.
+132 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Rework: quarantined by the upstream sync (12 clusters, 708 modules)
 
@@ -23,32 +23,30 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 
 Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 63, stage 3 2 items.
 
-## Stage 1: nodes to split (20)
+## Stage 1: nodes to split (18)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `lem-sfb-qcqs-proper-serre-heart-bound` | 2007 | none |
-| `sk-thm-groth-ss` | 2015 | none |
-| `sk-thm-acyclicity` | 3014 | none |
 | `lem-sfb-lisse-lattice-potential-kummer-tameness` | 4010 | none |
 | `lem-sfb-gabber-global-snc-alteration` | 4011 | none |
 | `lem-sfb-norm-algcl-internal-hom-base-change` | 4012 | none |
-| `lem-sfb-geometric-condensed-finite-scalar-model` | 4013 | none |
 | `lem-sfb-normed-scalar-profinite-hom-acyclic` | 4013 | none |
 | `lem-sfb-prime-to-ell-cochain-finite-quotient-descent` | 4013 | none |
 | `lem-sfb-profinite-algcl-derived-invariants-comparison` | 4013 | none |
 | `lem-sfb-ramified-cartier-supported-purity` | 4013 | none |
 | `lem-sfb-torsion-acyclic-norm-coefficient-test` | 4013 | none |
 | `lem-sfb-equivariant-resolution-bar-normalization` | 4014 | none |
+| `lem-sfb-field-action-derived-section-transport` | 4014 | none |
 | `lem-sfb-field-profinite-galois-site` | 4014 | none |
-| `lem-sfb-integral-cubical-chain-diagonal` | 4014 | none |
 | `lem-sfb-internal-bar-roof-adjunction` | 4014 | none |
 | `lem-sfb-internal-inflation-graded-cup` | 4014 | none |
 | `lem-sfb-polynomial-translation-acyclic` | 4014 | none |
-| `lem-sfb-product-chain-proper-interval-homology` | 4014 | none |
+| `lem-sfb-supported-lattice-norm-projection` | 4014 | none |
+| `lem-sfb-poset-augmented-chain-prism` | 4015 | none |
 | `def-per-support-condition` | - | none |
 
-## Stage 2: nodes to state (32)
+## Stage 2: nodes to state (33)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -58,8 +56,8 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-condensed-derived-restriction-calculus` | 1 | state | 8 |
 | `det-prop-diagonal-tower-coefficients` | 1 | state | 2 |
 | `lem-sf-open-external-tensor-normalization` | 1 | state | 2 |
+| `lem-sfb-condensed-galois-global-descent` | 1 | state | 2 |
 | `lem-sf-open-tensor-quotient-augmentation` | 1 | state | 1 |
-| `lem-sfb-condensed-galois-global-descent` | 1 | state | 1 |
 | `lem-sfb-root-tower-boundary-acyclicity` | 1 | state | 1 |
 | `lem-a1-finite-pullback-strict-tower-comparison` | 1 | state | 0 |
 | `lem-coef-compact-support-normalized-realization` | 1 | state | 0 |
@@ -70,22 +68,23 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-pur-finite-site-counit-projection-transport` | 1 | state | 0 |
 | `lem-sfb-action-topos-geometric-restriction` | 1 | state | 0 |
 | `lem-sfb-acyclic-hypercover-pullback-normalization` | 1 | state | 0 |
-| `lem-sfb-cech-localization-unit-totalization` | 1 | state | 0 |
 | `lem-sfb-closed-test-derived-exchange-model` | 1 | state | 0 |
 | `lem-sfb-condensed-split-coset-induction` | 1 | state | 0 |
 | `lem-sfb-derived-invariants-normal-subgroup-comparison` | 1 | state | 0 |
+| `lem-sfb-integral-cubical-chain-diagonal` | 1 | state | 0 |
 | `lem-sfb-polynomial-derived-bar-comparison` | 1 | state | 0 |
 | `lem-sfb-prime-to-ell-derived-invariants-reduction` | 1 | state | 0 |
+| `lem-sfb-product-chain-proper-interval-homology` | 1 | state | 0 |
 | `lem-sfb-rational-polynomial-bar-contraction` | 1 | state | 0 |
-| `lem-sfb-root-coordinate-supported-vanishing` | 1 | state | 0 |
 | `lem-sfb-snc-finite-root-face-regular` | 1 | state | 0 |
 | `lem-sfb-snc-tame-finite-fibre-classification` | 1 | state | 0 |
 | `lem-sfb-tame-stratum-kummer-descent` | 1 | state | 0 |
 | `lem-sfb-wcontractible-component-derived-hom` | 1 | state | 0 |
 | `lem-zl-constant-geometric-stalk-unit` | 1 | state | 0 |
+| `sk-thm-acyclicity` | 1 | state | 0 |
 | `lem-sfb-profinite-constant-derived-functions` | 2 | state | 0 |
 
-Not open yet: 372 nodes that below a finished node, not needed, 106 nodes that wait for a statement dependency (bottom-up), 19 nodes that wait for stage 1 (statement downstream not grounded).
+Not open yet: 373 nodes that below a finished node, not needed, 107 nodes that wait for a statement dependency (bottom-up), 17 nodes that wait for stage 1 (statement downstream not grounded).
 
 ## Stage 3: modules to prove (62)
 
