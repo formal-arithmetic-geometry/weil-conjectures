@@ -10,9 +10,65 @@
  "stmt_deps": [
   "def-weil-pbc-adjunction-mate"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $A\\in\\mathcal A$. The unit formula for the Hom bijection in [lem-weil-pbc-adjunction-of-natural-bijection] gives $\\mathsf T_0(1_{FA})=\\eta^0_A$ and $\\mathsf T_D(\\alpha_A)=\\eta_{q_AA};R(\\alpha_A)$. Apply the assumed global Hom normalization with $I=FA$ and $h=1_{FA}$; since $q_B(1_{FA})=1_{q_BFA}$, it yields\n$$\\eta_{q_AA};R(\\alpha_A)=q_A(\\eta^0_A);\\iota_{FA}.\\tag{1}$$",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037 (definition-adjoint), following paragraph: unit and the equivalent descriptions (1) and (2) of corresponding morphisms; agent-written substitution and naturality calculation."
+   }
+  },
+  {
+   "text": "Put $c_A=\\theta_{q_AA};s(\\alpha_A);\\zeta_{FA}$, a morphism $L_v(r(q_AA))\\to q_{B_v}(s_0FA)$. Expand its transpose using the unit formula in [lem-weil-pbc-adjunction-of-natural-bijection] and the functor law for $R_v$, and substitute the assumed unit square at $X=q_AA$:\n$$\\mathsf T_v(c_A)=\\eta_{v,r(q_AA)};R_v(\\theta_{q_AA});R_v(s(\\alpha_A));R_v(\\zeta_{FA})=r(\\eta_{q_AA});\\beta_{L(q_AA)};R_v(s(\\alpha_A));R_v(\\zeta_{FA}).$$",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037 (definition-adjoint), following paragraph: unit and the equivalent descriptions (1) and (2) of corresponding morphisms; agent-written substitution and naturality calculation."
+   }
+  },
+  {
+   "text": "Naturality of $\\beta:rR\\to R_vs$ at the morphism $\\alpha_A:L(q_AA)\\to q_B(FA)$ is exactly\n$$\\beta_{L(q_AA)};R_v(s(\\alpha_A))=r(R(\\alpha_A));\\beta_{q_B(FA)}.$$\nSubstitute this into Step 2 and combine the first two factors using the functor law for $r$:\n$$\\mathsf T_v(c_A)=r(\\eta_{q_AA};R(\\alpha_A));\\beta_{q_B(FA)};R_v(\\zeta_{FA}).$$",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037 (definition-adjoint), following paragraph: unit and the equivalent descriptions (1) and (2) of corresponding morphisms; agent-written substitution and naturality calculation."
+   }
+  },
+  {
+   "text": "Substitute (1) in Step 3, expand $r$ of a composite, and use the assumed right augmentation square at $I=FA$. Associativity gives\n$$\\mathsf T_v(c_A)=r(q_A(\\eta^0_A));r(\\iota_{FA});\\beta_{q_B(FA)};R_v(\\zeta_{FA})=r(q_A(\\eta^0_A));\\rho_{GFA};q_{A_v}(\\tau_{FA});\\iota_{v,s_0FA}.$$",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037 (definition-adjoint), following paragraph: unit and the equivalent descriptions (1) and (2) of corresponding morphisms; agent-written substitution and naturality calculation."
+   }
+  },
+  {
+   "text": "Naturality of the forward map of $\\rho:rq_A\\cong q_{A_v}r_0$ at $\\eta^0_A:A\\to GFA$ says\n$$r(q_A(\\eta^0_A));\\rho_{GFA}=\\rho_A;q_{A_v}(r_0(\\eta^0_A)).$$\nReplace these two factors in Step 4 and combine the next two factors by functoriality of $q_{A_v}$. This gives\n$$\\mathsf T_v(c_A)=\\rho_A;q_{A_v}(r_0(\\eta^0_A);\\tau_{FA});\\iota_{v,s_0FA},$$\nthe required equality in $\\operatorname{Hom}_{\\mathcal E_v}(r(q_AA),R_v(q_{B_v}(s_0FA)))$. The calculation uses no inverse of any comparison map.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037 (definition-adjoint), following paragraph: unit and the equivalent descriptions (1) and (2) of corresponding morphisms; agent-written substitution and naturality calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-adjunction-of-natural-bijection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tag 0037 (definition-adjoint), following paragraph: unit and the equivalent descriptions (1) and (2) of corresponding morphisms; agent-written substitution and naturality calculation."
+ },
  "mathlib_searches": [
   {
    "tool": "loogle",
@@ -55,10 +111,45 @@
    "results": "8 hits: CategoryTheory.Adjunction.Localization.η_app, CategoryTheory.Adjunction.Localization.ε_app, CategoryTheory.Adjunction.Localization.η, CategoryTheory.Adjunction.localization_unit_app, CategoryTheory.Adjunction.derivedε_fac_app, CategoryTheory.Adjunction.derivedη_fac_app, CategoryTheory.Adjunction.Localization.ε, CategoryTheory.Adjunction.derivedε_fac_app_assoc",
    "date": "2026-10-21",
    "verdict": "no match: derivedη_fac_app supplies only the global unit identity, and unit_mateEquiv only the derived square unit identity; neither states their normalized transpose composite through rho, zeta and the noninvertible right-derived augmentations."
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv_unit|derivedη_fac_app|unit_mateEquiv",
+   "results": "25 hits: Mathlib/CategoryTheory/Adjunction/AdjointFunctorTheorems.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: homEquiv_unit gives the single-adjunction unit expression, and mateEquiv_square gives pasting of mates, not this normalized formula with arbitrary augmentations. The existing Mathlib leaf lem-weil-pbc-adjunction-of-natural-bijection supplies the unit expression used in Steps 1 and 2."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_unit",
+   "results": "1 hits: CategoryTheory.Adjunction.homEquiv_unit",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: homEquiv_unit gives the single-adjunction unit expression, and mateEquiv_square gives pasting of mates, not this normalized formula with arbitrary augmentations. The existing Mathlib leaf lem-weil-pbc-adjunction-of-natural-bijection supplies the unit expression used in Steps 1 and 2."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An adjunction square transpose formula from a normalized Hom bijection and compatible unit and right comparison squares",
+   "results": "8 hits: CategoryTheory.Adjunction.CoreHomEquivUnitCounit.mk, CategoryTheory.Adjunction.CoreHomEquivUnitCounit.mk.congr_simp, CategoryTheory.Adjunction.mk', CategoryTheory.Adjunction.mkOfHomEquiv, CategoryTheory.Adjunction.homEquiv, CategoryTheory.Adjunction.homEquiv_naturality_right_square_iff, CategoryTheory.Adjunction.CoreHomEquivUnitCounit.homEquiv_unit, CategoryTheory.Adjunction.homEquiv_naturality_right_square",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: homEquiv_unit gives the single-adjunction unit expression, and mateEquiv_square gives pasting of mates, not this normalized formula with arbitrary augmentations. The existing Mathlib leaf lem-weil-pbc-adjunction-of-natural-bijection supplies the unit expression used in Steps 1 and 2."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given three adjunctions and natural transformations alpha iota theta beta rho zeta, compute the transpose of theta followed by s alpha and zeta from global Hom normalization, a unit compatibility square, and a right adjoint augmentation square.",
+   "results": "8 hits: CategoryTheory.Adjunction.leftAdjointCompNatTrans_app, CategoryTheory.Adjunction.leftAdjointCompNatTrans₀₁₃_eq_conjugateEquiv_symm, CategoryTheory.mateEquiv_apply, CategoryTheory.Adjunction.leftAdjointCompNatTrans₀₂₃_eq_conjugateEquiv_symm, CategoryTheory.mateEquiv_square, CategoryTheory.mateEquiv, CategoryTheory.Adjunction.Triple.leftToRight, CategoryTheory.Adjunction.Triple.rightToLeft_app_adj₂_unit_app",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: homEquiv_unit gives the single-adjunction unit expression, and mateEquiv_square gives pasting of mates, not this normalized formula with arbitrary augmentations. The existing Mathlib leaf lem-weil-pbc-adjunction-of-natural-bijection supplies the unit expression used in Steps 1 and 2."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The transpose of theta_X followed by s(alpha_A) is r of the transpose of alpha_A followed by beta, when eta_v then R_v theta equals r eta then beta. Rewrite the result using compatible augmentation and factorization isomorphisms.",
+   "results": "8 hits: AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand_assoc, AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand₀_assoc, CategoryTheory.MorphismProperty.FunctorialFactorizationData.i_mapZ_assoc, CategoryTheory.MorphismProperty.FunctorialFactorizationData.mapZ_comp_assoc, CategoryTheory.SimplicialObject.Augmented.w₀, SimplicialObject.Splitting.IndexSet.fac_pull, CategoryTheory.MorphismProperty.FunctorialFactorizationData.mapZ_p_assoc, CategoryTheory.Factorisation.Hom.ι_h",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: homEquiv_unit gives the single-adjunction unit expression, and mateEquiv_square gives pasting of mates, not this normalized formula with arbitrary augmentations. The existing Mathlib leaf lem-weil-pbc-adjunction-of-natural-bijection supplies the unit expression used in Steps 1 and 2."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-pbc-ringed-slice-pullback-mate-normalization",
@@ -78,5 +169,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-weil-pbc-normalized-adjunction-square-transpose",
+  "worker": "stage1",
+  "summary": "Q22: retained the statement unchanged; gave the full five-step transpose calculation using the existing adjunction-unit Mathlib leaf, the three assumed normalization identities and naturality of beta and rho. No new nodes and no geometric hypotheses. Searched the upstream source, whole DAG, blueprint and Mathlib; no exact upstream attachment or Mathlib match for the complete item.",
+  "blueprint": "Detailed form, 'Hence it contains every perfect complex': identification of the derived slice comparisons with the base change map of the ringed localization square, used in the ringed-site localization argument behind the first locality sentence of Stacks 0944. Supporting calculation: old Steps 4–5, global unit normalization and local transpose of the pullback comparison followed by the global model comparison. The five steps supply the global unit normalization and local transpose calculation required by Step 4 of lem-weil-pbc-ringed-slice-pullback-mate-normalization.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-adjunction-of-natural-bijection",
+    "why": "Its explicit Hom-unit formula is used for the three given adjunctions; it is an existing Mathlib leaf, a generic categorical tool, and does not replace any geometric step of the unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-adjunction-of-natural-bijection"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q22-44c6af2ff",
+  "group": "Q22",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-44c6af2ff (reviewer sub-agent of L); spot-checked: Read the item (statement unchanged, 5 steps, 0 new nodes) in full against the cited lem-weil-pbc-adjunction-of-natural-bijection (Mathlib mkOfHomEquiv/homEquiv_unit; Psi(a)=G(a)∘eta) and Stacks categories.tex 0037 (definition-adjoint l.3344, description (1) l.3378). Typing checked for all three hypotheses and the conclusion. Step 1: T_0(1)=eta^0 and T_D(alpha_A)=eta;R(alpha_A), and the normalization at h=1_FA gives (1). Step 2: the unit square at X=q_A A. Step 3: naturality of beta at alpha_A. Step 4: (1) plus the augmentation square at I=FA, with the correct component rho_{GFA}. Step 5: naturality of rho at eta^0_A. Steps 3-5 are genuinely elementary, and no inverse or faithfulness is used. Small cases: all identities give transpose(id)=unit; scalar comparisons give ab=ba with a=0 allowed; empty A is vacuous. The hypotheses match exactly what parent ringed-slice-pullback-mate-normalization Steps 2 and 4 supply and use. No duplicate in the DAG (closest: kun-derived-adjoint-square-comparison, pur-supported-hom-adjunction-transpose, sfb-equivalence-square-inverse-mate-coherence, all different results). The item and its citer are not in route-pivot-dropped, and the live node is still unsplit. No SGA cited. Accepted tool_use: the sk-def-exchange Mathlib leaf for the generic unit formula."
  }
 }
