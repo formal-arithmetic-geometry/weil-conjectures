@@ -595,6 +595,112 @@ private theorem coefficientDerivedCoproducts (Λ : Sheaf
   exact CategoryTheory.derived_hasCoproducts
 
 
+private theorem centralUnitCopower_iff
+    {A B A' B' : Type*} [Category A] [Category B] [Category A'] [Category B']
+    {L : A ⥤ B} {U : B ⥤ A} (adj : L ⊣ U)
+    {L' : A' ⥤ B'} {U' : B' ⥤ A'} (adj' : L' ⊣ U')
+    {G : A ⥤ A'} {G' : B ⥤ B'} [U'.ReflectsIsomorphisms]
+    (β : G ⋙ L' ⟶ L ⋙ G') (hκ : IsIso (mateEquiv adj adj' β))
+    (M : A) (I : Type*) [HasCoproduct (fun _ : I ↦ M)]
+    [HasCoproduct (fun _ : I ↦ G.obj M)]
+    (τ : I → CatCenter B) (τ' : I → CatCenter B')
+    (hs : ∀ i K, G'.map ((τ i).app K) = (τ' i).app (G'.obj K))
+    (hC : IsIso (Sigma.desc (f := fun _ : I ↦ M) fun i ↦
+      adj.unit.app M ≫ U.map ((τ i).app (L.obj M))))
+    (hD : IsIso (Sigma.desc (f := fun _ : I ↦ G.obj M) fun i ↦
+      adj'.unit.app (G.obj M) ≫
+        U'.map ((τ' i).app (L'.obj (G.obj M)))))
+    : IsIso (β.app M) ↔
+      IsIso (Sigma.desc fun i : I ↦ G.map (Sigma.ι (fun _ : I ↦ M) i)) := by
+  have := hC
+  have := hD
+  apply Adjunction.isIso_iff_unitCoproductComparison adj adj' β hκ M I
+    (fun i ↦ (τ i).app _) (fun i ↦ (τ' i).app _)
+  intro i
+  exact ((τ' i).naturality (β.app M)).symm.trans
+    (congrArg (fun g ↦ β.app M ≫ g) (hs i (L.obj M))).symm
+
+set_option maxHeartbeats 400000 in
+-- The comparison elaborates derived adjunctions in several internal module categories.
+/-- The scalar-basis argument for an arbitrary copower, with its continuity input explicit. -/
+private theorem push_of_pointCopower_iff_continuity
+    {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (R S : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj R] [MonObj S] [IsCommMonObj R] [IsCommMonObj S]
+    (a : R ⟶ S) [IsMonHom a]
+    [∀ Z : Scheme.{u}, PreservesFiniteLimits (Mod.extendScalars (coefficientMap a Z))]
+    (I : Type (u + 1))
+    [HasCoproducts.{u + 1} (Mod (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) R)]
+    (e : (∐ fun _ : I ↦ Mod.regular R) ≅ (Mod.comap a).obj (Mod.regular S))
+    : IsIso (derivedPushHom a f) ↔
+      ∀ M : DerivedCategory
+        (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj R X)),
+      let := coefficientDerivedCoproducts R X
+      let := coefficientDerivedCoproducts R Y
+      IsIso (sigmaComparison R((f)_*⟦R⟧) (fun _ : I ↦ M)) := by
+  classical
+  obtain ⟨b, hb, hflat, hunit⟩ := scheme_basis_from_point R S a I e
+  have hderived (Z : Scheme.{u})
+      (M : DerivedCategory (Mod (Sheaf (ProEt.topology Z) Ab.{u + 1})
+        (condensedRingObj R Z))) [HasCoproduct (fun _ : I ↦ M)] :
+      IsIso (Sigma.desc fun i ↦ Mod.qbar_scalarUnitLeg
+        (coefficientMap a Z) (b Z i) M) := by
+    let : HasColimitsOfSize.{u + 1, u + 1}
+        (Mod (Sheaf (ProEt.topology Z) Ab.{u + 1}) (condensedRingObj R Z)) :=
+      IsGrothendieckAbelian.hasColimits _
+    let : HasCoproducts.{u + 1}
+        (Mod (Sheaf (ProEt.topology Z) Ab.{u + 1}) (condensedRingObj R Z)) :=
+      fun J ↦ HasColimitsOfShape.of_small.{u + 1, u + 1} _ (Discrete J)
+    exact qbar_isIso_unit _ (b Z) (fun N ↦ hunit Z N) M
+  let := coefficientDerivedCoproducts R X
+  let := coefficientDerivedCoproducts R Y
+  have hcomp (M : DerivedCategory
+      (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj R X))) :
+      IsIso ((derivedPushHom a f).app M) ↔
+        IsIso (sigmaComparison R((f)_*⟦R⟧) (fun _ : I ↦ M)) := by
+    have : HasCoproduct (fun _ : I ↦ M) :=
+      (coefficientDerivedCoproducts R X I).has_colimit _
+    have : HasCoproduct (fun _ : I ↦ R((f)_*⟦R⟧).obj M) :=
+      (coefficientDerivedCoproducts R Y I).has_colimit _
+    have : (Mod.comap (D := Sheaf (ProEt.topology Y) Ab.{u + 1})
+        (coefficientMap a Y)).ReflectsIsomorphisms :=
+      Mod.restrictionReflectsIsomorphisms _
+    have : (Mod.comap (D := Sheaf (ProEt.topology Y) Ab.{u + 1})
+        (coefficientMap a
+          Y)).mapDerivedCategory.ReflectsIsomorphisms := reflectsDerivedIsomorphisms _
+    have hκ : IsIso (mateEquiv
+        (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap
+          a X))
+        (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap
+          a Y))
+        (derivedPushHom a f)) := by
+      unfold derivedPushHom
+      exact Adjunction.isIso_mate_pushHomOfComapIso _ _ _
+    refine centralUnitCopower_iff
+      (G := R((f)_*⟦R⟧))
+      (G' := R((f)_*⟦S⟧))
+      (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap
+        a X))
+      (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap
+        a Y))
+      (derivedPushHom a f) hκ M I
+      (fun i ↦ qbar_derivedCenter (Mod.qbar_scalarNatEndo (b X i)))
+      (fun i ↦ qbar_derivedCenter (Mod.qbar_scalarNatEndo (b Y i))) ?_ ?_ ?_
+    · intro i K
+      exact qbar_lowerStar_derivedScalarEndo_of_eq f (b X i) (b Y i) (hb f i) K
+    · simpa only [Mod.qbar_scalarUnitLeg_eq] using hderived X M
+    · simpa only [Mod.qbar_scalarUnitLeg_eq] using
+        hderived Y (R((f)_*⟦R⟧).obj M)
+  constructor
+  · intro h M
+    have := h
+    exact (hcomp M).1 (NatIso.isIso_app_of_isIso _ M)
+  · intro h
+    have (M : DerivedCategory
+        (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj R X))) :
+        IsIso ((derivedPushHom a f).app M) := (hcomp M).2 (h M)
+    exact NatIso.isIso_of_isIso_app _
+
 /-! ### (Push) and (Shriek) -/
 
 section Push
@@ -693,10 +799,10 @@ instance isIso_derivedPushHom_padicSubfieldRingObjMap {E F : FiniteIntermediateF
   exact finitePush_of_pointCopower f _ _
     (Profinite.padicSubfieldRingObjMap ℓ h) I e
 
--- The proposed all-unbounded proof needs ambient copower continuity. The bounded-below
--- theorem does not supply it, and the ambient exceptional-adjoint justification fails in
--- general (see AmbientCounterexampleCoproducts.lean). No counterexample for this precise
--- internal-coefficient statement is claimed; retain the original obligation unchanged.
+-- STATEMENT-DISPUTED: the mate criterion makes this force infinite copower continuity,
+-- hence countable coproduct continuity. The generic-point counterexample extends to
+-- internal E_X-modules via scalar action (r * s)(t) = r|_t * s(t) on coevaluation.
+-- See the B5 report for the ringed argument and its remaining formalization checks.
 /-- **(Push)** is an isomorphism for `E ⊆ ℚ̄_ℓ` and `f` *proper*, on all unbounded objects: `Rf_*`
 then admits a right adjoint `Rf^!`, hence commutes with the coproducts through which the derived
 extension of scalars along the flat `E_X ⟶ ℚ̄_ℓ,X` is computed. See the module docstring. -/
