@@ -5,175 +5,114 @@
  "unit": "sk-lem-sf-mate",
  "proof": [
   {
-   "text": "The coefficient construction supplies the finite rings $A_n=\\mathcal O_E/(t^n)$, their quotient maps, and the completed sheaves $R_W=\\varprojlim_n(A_n)_W$ on the chosen small pro-etale sites. The site and module-category definitions give ordinary unbounded derived categories. The map $\\underline A_W\\to R_W$ and each projection $R_W\\to(A_n)_W$ define restriction-of-scalars functors; restriction leaves the underlying sheaf and maps unchanged. The completed-pullback datum gives the structural map $f^{-1}R_Y\\to R_X$ and identifies inverse images of the constant and finite quotient sheaves, so the symbols $U_W$, $V_{W,n}$ and the reduction maps in the statement have the asserted types.",
+   "text": "The coefficient and pullback definitions give $\\underline A_W\\to R_W\\to(A_n)_W$. Restriction is exact on the unchanged underlying abelian sheaves, so exact-functor factorization makes it termwise on $D$. Comparing the two ringed-topos factorizations gives $U_YF_R\\cong F_AU_X$ and $F_RV_{X,n}\\cong V_{Y,n}F_n$, with the prescribed K-injective normalization.",
    "uses": [
     "def-weil-l-adic-coefficient-extension",
-    "def-weil-pbc-proetale-site",
     "def-weil-completed-integral-coefficients",
     "def-weil-pbc-constant-sheaf",
     "def-weil-pbc-completed-pullback",
-    "def-weil-sheaf-of-modules-category",
-    "def-weil-abstract-derived-category",
-    "def-pc-sheaf-restrict-scalars"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-mate/fix-prop-adjunctions.proof.md",
-    "place": "Step 1, integral derived adjunction: coefficient and site setup"
-   }
-  },
-  {
-   "text": "Regard the maps $\\underline A_Y\\to R_Y$ and $R_Y\\to(A_n)_Y$ as coefficient changes on the identity underlying topos. The two factorizations of the same morphism of ringed topoi (first change coefficients and then apply $f$, or first apply $f$ and then change coefficients) are covered by the canonical K-injective composition comparison of [lem-weil-pbc-ringed-topoi-derived-pushforward-composition]. Its naturality gives the displayed isomorphisms $U_YF_R\\cong F_AU_X$ and $F_RV_{X,n}\\cong V_{Y,n}F_n$. The comparison is normalized by the resolution map in that node, so it is the canonical one rather than an arbitrary isomorphism. Exactness of each restriction-of-scalars functor follows directly from its unchanged underlying abelian sheaf, hence the termwise restrictions used here define functors on the unbounded derived categories.",
-   "uses": [
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
     "def-pc-sheaf-restrict-scalars",
-    "def-weil-sheaf-of-modules-category",
-    "def-weil-abstract-derived-category",
-    "lem-weil-pbc-exact-functor-derived-factorization"
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6E, lemma-derived-pushforward-composition, applied to the two coefficient factorizations"
+    "place": "Tag 0D6E, lemma-derived-pushforward-composition; associativity and identity normalization extracted by the total-derived universal property"
    }
   },
   {
-   "text": "For $m\\ge n$, the finite-ring comparison of [lem-weil-proetale-direct-image-restriction-of-scalars] is the comparison from Step 2 for $A_m\\to A_n$: both have the stated value on a K-injective complex and its restricted resolution. Coherence follows from the universal property in [lem-weil-pbc-kinjective-total-derived], not from objectwise naturality alone. For three coefficient restrictions, the two composites of derived comparisons, precomposed with the common underived-to-derived transformation, are both the transformation induced by the same termwise composite of ring maps. Injectivity of the universal-property bijection makes those composites equal. The same argument with an identity restriction gives the unit law. Thus every finite quotient square, and every successive-restriction triangle, commutes.",
+   "text": "Apply the ringed derived-composition cocycle to successive identity-topos coefficient changes. It gives the quotient and unit coherence. For $A_m\\to A_n$ the resolution formula is the finite-restriction comparison, so its normalization agrees.",
    "uses": [
-    "lem-weil-proetale-direct-image-restriction-of-scalars",
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-    "lem-weil-pbc-kinjective-total-derived"
+    "lem-pur-ringed-derived-composition-cocycle",
+    "lem-weil-proetale-direct-image-restriction-of-scalars"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6E, lemma-derived-pushforward-composition; coherence by the universal property of total derived functors"
+    "place": "Tag 0D6E, lemma-derived-pushforward-composition; associativity and identity normalization extracted by the total-derived universal property"
    }
   },
   {
-   "text": "Check the coefficient hypotheses once. By [lem-weil-l-adic-extension-integers-dvr], $A$ is a principal ideal domain, hence Noetherian, and $t$ is a nonzero nonunit. The residue field is finite; [lem-weil-valued-dvr-finite-quotients] gives finiteness of every $A_n$ and surjectivity of its quotient maps. In particular $A/(t)$ is additive torsion. The exact sequence $0\\to A\\xrightarrow{t^n}A\\to A_n\\to0$ is a finite free resolution, verifying perfection. Also $A\\cong\\varprojlim A_n$: lifts $a_n\\in A$ of a compatible family satisfy $a_{n+1}-a_n\\in t^nA$, so are Cauchy and converge by [lem-weil-l-adic-extension-complete]. Their limit is in the closed valuation ball $A$ and gives every prescribed residue; uniqueness follows since $\\bigcap_n t^nA=0$ by the valuation. These verify the coefficient hypotheses of both the adic-datum proposition and the coefficient-system lemma used below.",
+   "text": "By [lem-weil-l-adic-extension-integers-dvr], $A$ is a principal ideal domain, hence Noetherian, and the uniformizer $t$ is a nonzero nonunit, hence a non-zero-divisor of the domain $A$. By [lem-weil-valued-dvr-finite-quotients] every $A_n$ is finite and each $A_{n+1}\\to A_n$ is surjective, so every $A_m\\to A_n$ ($m\\geq n$) is surjective; the finite group $A/(t)$ is additive torsion. Since $t^n$ is a non-zero-divisor, $0\\to A\\xrightarrow{t^n}A\\to A_n\\to0$ is a length-one resolution by finite free $A$-modules, so $A_n$ is perfect [def-pc-perfect-ring-complex]. Clause 1 of [lem-sfb-integers-profinite-tower] says the canonical map $A\\to\\varprojlim_nA_n$ is a ring isomorphism. These are the coefficient-ring hypotheses of [def-weil-pbc-adic-coefficient-datum] for $I=(t)$ and the hypotheses on $(O,\\lambda)=(A,t)$ of the coefficient-system evaluation theorem, so both the adic direct-image theorem and that theorem apply.",
    "uses": [
+    "def-weil-l-adic-coefficient-extension",
     "lem-weil-l-adic-extension-integers-dvr",
     "lem-weil-valued-dvr-finite-quotients",
-    "lem-weil-l-adic-extension-complete",
-    "def-weil-l-adic-coefficient-extension",
+    "def-pc-perfect-ring-complex",
+    "lem-sfb-integers-profinite-tower",
     "def-weil-pbc-adic-coefficient-datum"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 099N, lemma-pushforward-Noetherian-case: verification of the Noetherian coefficient specialization"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-comp-category/def-weil-finite-field-fiber.md",
+    "place": "Coefficient convention for finite extensions of the l-adic field; the coefficient hypotheses of Stacks proetale.tex lemma-pushforward-Noetherian-case (Tag 099N) checked from the cited local-field statements"
    }
   },
   {
-   "text": "Let $J=\\mathbf N_{\\ge1}^{\\mathrm{op}}$. The small diagram site of [lem-weil-pbc-diagram-site-realization] realizes sheaves on the tower topos as $J$-diagrams. A module over its ring object $B_W=((A_n)_W)_n$ is precisely a family of modules with quotient-linear transitions: the action and module axioms are componentwise. Restriction along the ring map from the constant diagram $R_W$ to $B_W$ is exact and sends $M_\\bullet$ to the strict $R_W$-tower $(V_{W,n}M_n)_n$. Apply the ringed-topos composition comparison of Step 2 on these diagram topoi, to the two factorizations of this restriction and levelwise $f_*$. This yields an isomorphism of derived strict-tower functors. The evaluation identifications in [lem-pur-coefficient-system-derived-comparison] and [lem-weil-ringed-tower-pushforward-limit-comparison] identify its evaluations with $F_RV_{X,n}\\cong V_{Y,n}F_n$. Their normalization is the K-injective comparison already fixed. Step 3 gives the restriction coherence. This constructs the comparison before evaluation, so it includes the strict diagram assertion of the item.",
+   "text": "Use the diagram restriction lemma with $J=\\mathbf N_{\\geq1}^{op}$, $S_W=R_W$ and $B_W=((A_n)_W)_n$. This gives the strict comparison before evaluation. The system and fixed-ring tower evaluation theorems identify its levels with Step 1; their normalized derived-composition formulas and Step 2 identify quotient transitions too.",
    "uses": [
-    "lem-weil-pbc-diagram-site-realization",
-    "def-weil-sheaf-of-modules-category",
-    "def-pc-sheaf-restrict-scalars",
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-pur-diagram-ring-restriction-pushforward",
     "lem-pur-coefficient-system-derived-comparison",
     "lem-weil-ringed-tower-pushforward-limit-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0A07, lemma-Rf-commutes-with-Rlim, first proof on the tower-site square; Tag 0D6E for the coefficient square"
+    "place": "Tag 0D6E, lemma-derived-pushforward-composition, on the small diagram sites of lem-weil-pbc-diagram-site-realization"
    }
   },
   {
-   "text": "Choose the reduction tower on a single flat-term K-flat representative as in [def-weil-integral-reduction-tower]. It is the strict quotient tower of [def-weil-pbc-adic-coefficient-datum]. There is a small distinction between completeness conventions to resolve. The condition of [def-weil-derived-complete] supplies a Roos triangle, hence an isomorphism of $K$ with the derived inverse limit of its quotient tower, using the Roos triangle of [lem-weil-pbc-ringed-strict-tower-homotopy-limit]. It does not itself choose the canonical completion morphism. By [lem-weil-pbc-constant-completion-equivalence], that quotient-limit object is the Koszul completion of $K$. By [lem-weil-pbc-ringed-koszul-completion-reflector], it is locally derived complete. Thus $K$, being isomorphic to it, is locally derived complete as well. The same reflector lemma now makes its canonical Koszul unit invertible; the unit-compatible comparison in [lem-weil-pbc-constant-completion-equivalence] makes the canonical quotient-tower unit invertible. Thus $K$ is locally derived $t$-complete and its functorial Koszul unit $\\kappa_K$ is invertible, without selecting an arbitrary cone isomorphism; Step 7 compares this with the explicit model of the next proposition.",
+   "text": "For a derived-complete $K$, the Roos/intrinsic equivalence makes its specified intrinsic unit invertible. Use the strict reduction tower on the chosen flat-term K-flat representative.",
    "uses": [
-    "def-weil-integral-reduction-tower",
-    "def-weil-pbc-adic-coefficient-datum",
-    "def-weil-derived-complete",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "lem-weil-pbc-constant-completion-equivalence",
-    "lem-weil-pbc-ringed-koszul-completion-reflector"
+    "lem-pur-roos-intrinsic-completeness-equivalence",
+    "def-weil-integral-reduction-tower"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tags 099L and 099M, section-derived-completion-noetherian and lemma-naive-completion; algebraization.tex Tag 0A0E, lemma-derived-completion-koszul"
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0A0E, lemma-derived-completion-koszul; completion-reflector consequence and comparison with the explicit completed-coefficient unit"
    }
   },
   {
-   "text": "The hypothesis of [prop-weil-pbc-direct-image-limits] is invertibility of the unit $\\eta_K:C\\to F(C)$ of [def-weil-pbc-intrinsic-completion] ($r=1$, $a_1=t$), built on the explicit product-fibre model; that proposition reads it through [prop-weil-pbc-koszul-reconstruction], whose unit $\\kappa_K$ uses the functorial $R\\lim$ of [lem-weil-pbc-ringed-strict-tower-homotopy-limit], as in Step 6. Invertibility does not depend on the model. Put $X_m=C\\otimes Q_m$ and let $Z_m$ be the mapping cone of $1\\otimes\\iota_m:C\\to X_m$, a strict tower. On a constant tower $\\Delta C$ the map $1-s$ on $\\prod_mC^i$ is surjective ($x_1=0$, $x_{m+1}=x_m-y_m$) with kernel the constant sequences, so $C\\to F(\\Delta C)$ and $C\\to R\\lim\\Delta C$ are isomorphisms (the latter because the Roos triangle of $\\Delta C$ splits); $\\eta_K$ and $\\kappa_K$ are these followed by the two models applied to $\\Delta C\\to X_\\bullet$. Both models commute with cones: $F$ is termwise products and a mapping fibre, and $R\\lim$ is exact. Hence $\\operatorname{cone}(\\eta_K)\\cong F(Z_\\bullet)$ and $\\operatorname{cone}(\\kappa_K)\\cong R\\lim Z_\\bullet$, and both are derived limits of $(Z_m)$ [def-weil-derived-limit]: the first because termwise products of complexes are derived products [lem-weil-proetale-countable-products-exact, lem-weil-derived-limit-products-core], the second by its Roos triangle. Two derived limits of one system are isomorphic (TR3 and the five lemma), so $\\eta_K$ is invertible iff $\\kappa_K$ is. Conversely, if $\\kappa_K$ is invertible then so is $\\operatorname{comp}_K=c_K\\circ\\kappa_K$ [prop-weil-pbc-koszul-reconstruction]; its components into $\\prod_nK_n$ are the $c_n$, so transporting the Roos triangle of $R\\lim K_\\bullet$ along it gives the triangle of [def-weil-derived-complete]. So the two conventions agree on $X$ and on $Y$.",
+   "text": "The profinite coefficient inverse-image theorem identifies the coefficient sheaves and structural maps required by the adic direct-image proposition. Apply that proposition with $I=(t)$: it preserves intrinsic completeness and gives the canonical completion composite. The equivalence in Step 5, now on $Y$, gives the Roos-triangle completeness convention. Composing that reconstruction with Step 4 yields $F_RK\\cong R\\lim_nV_{Y,n}F_nK_n$. The tower-limit theorem identifies its $n$th projection with $F_R$ of the quotient unit followed by Step 1. Finally the constant/completed equivalence identifies reductions, limits and units; applying it to Step 1 on complete objects gives the asserted transported constant-$A$ direct image.",
    "uses": [
-    "def-weil-pbc-intrinsic-completion",
-    "prop-weil-pbc-koszul-reconstruction",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "def-weil-derived-limit",
-    "lem-weil-proetale-countable-products-exact",
-    "lem-weil-derived-limit-products-core",
-    "def-weil-derived-complete"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 08TC, definition-derived-limit, and Tag 07KC, lemma-products; algebraization.tex Tag 0A0E, lemma-derived-completion-koszul"
-   }
-  },
-  {
-   "text": "Apply [prop-weil-pbc-direct-image-limits] to $I=(t)$, using the adic hypotheses verified in Step 4 and intrinsic completeness verified in Steps 6 and 7; its coefficient sheaves $(P_n)_T$, sheafified from $\\operatorname{Cont}(\\pi_0,P_n)$, are the constant sheaves $(A_n)_T$ by the equivalent description in [lem-weil-pbc-profinite-coefficient-inverse-image]. Its required coefficient identification $f^{-1}R_Y\\cong R_X$ is [lem-weil-pbc-profinite-coefficient-inverse-image], applied to the finite ring tower $A_n$; its projection formulas show that this is the structural map in the item. The proposition states preservation of intrinsic completeness, the finite projection formulas commuting with quotient maps, and the canonical completion composite. Step 7, applied on $Y$, converts that completeness to the convention of the item. Combining the proposition's completion composite with the strict coefficient comparison of Step 5 gives\n$$F_RK\\xrightarrow{\\sim}R\\varprojlim_n V_{Y,n}F_nK_n.$$\nThe projection compatibility of [lem-weil-ringed-tower-pushforward-limit-comparison] says that its $n$th projection is $F_R$ of the quotient unit $K\\to V_{X,n}K_n$, followed by the normalized coefficient comparison. Thus this is the specified canonical isomorphism, including its strict-tower interpretation.",
-   "uses": [
-    "prop-weil-pbc-direct-image-limits",
     "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "prop-weil-pbc-direct-image-limits",
+    "lem-pur-roos-intrinsic-completeness-equivalence",
     "lem-weil-ringed-tower-pushforward-limit-comparison",
-    "lem-weil-pbc-constant-completion-equivalence",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "def-weil-derived-complete"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 099N, lemma-pushforward-Noetherian-case (1),(4); sites-cohomology.tex Tag 0A07, lemma-Rf-commutes-with-Rlim"
-   }
-  },
-  {
-   "text": "Finally, [lem-weil-pbc-constant-completion-equivalence] identifies derived-complete modules over the completed coefficient sheaf with derived-complete modules over the constant coefficient sheaf, identifies all finite reductions and their transition maps, and identifies the corresponding derived limits. Using the completeness of $F_RK$ from Step 8, applying its natural restriction comparison to the first isomorphism of Step 2 yields $U_YF_RK\\cong F_AU_XK$ inside those equivalences. Hence the completed direct image and the constant-$A$ direct image are the same transported functor, with the displayed tower comparison and its normalization.",
-   "uses": [
     "lem-weil-pbc-constant-completion-equivalence"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-mate/fix-prop-adjunctions.proof.md",
-    "place": "Step 1, transport through constant-coefficient completion equivalence"
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099N, lemma-pushforward-Noetherian-case (1),(4), with normalized strict-tower comparison"
    }
   }
  ],
  "proof_deps": [
+  "def-pc-perfect-ring-complex",
   "def-pc-sheaf-restrict-scalars",
-  "def-weil-abstract-derived-category",
   "def-weil-completed-integral-coefficients",
-  "def-weil-derived-complete",
-  "def-weil-derived-limit",
   "def-weil-integral-reduction-tower",
   "def-weil-l-adic-coefficient-extension",
   "def-weil-pbc-adic-coefficient-datum",
   "def-weil-pbc-completed-pullback",
   "def-weil-pbc-constant-sheaf",
-  "def-weil-pbc-intrinsic-completion",
-  "def-weil-pbc-proetale-site",
-  "def-weil-sheaf-of-modules-category",
   "lem-pur-coefficient-system-derived-comparison",
-  "lem-weil-derived-limit-products-core",
-  "lem-weil-l-adic-extension-complete",
+  "lem-pur-diagram-ring-restriction-pushforward",
+  "lem-pur-ringed-derived-composition-cocycle",
+  "lem-pur-roos-intrinsic-completeness-equivalence",
+  "lem-sfb-integers-profinite-tower",
   "lem-weil-l-adic-extension-integers-dvr",
   "lem-weil-pbc-constant-completion-equivalence",
-  "lem-weil-pbc-diagram-site-realization",
   "lem-weil-pbc-exact-functor-derived-factorization",
-  "lem-weil-pbc-kinjective-total-derived",
   "lem-weil-pbc-profinite-coefficient-inverse-image",
-  "lem-weil-pbc-ringed-koszul-completion-reflector",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
   "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-  "lem-weil-proetale-countable-products-exact",
   "lem-weil-proetale-direct-image-restriction-of-scalars",
   "lem-weil-ringed-tower-pushforward-limit-comparison",
   "lem-weil-valued-dvr-finite-quotients",
-  "prop-weil-pbc-direct-image-limits",
-  "prop-weil-pbc-koszul-reconstruction"
+  "prop-weil-pbc-direct-image-limits"
  ],
  "proof_origin": {
   "by": "agent",
@@ -263,79 +202,19 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "item": "lem-pur-completed-coefficient-pushforward-comparison",
   "worker": "stage1",
-  "summary": "Retained the statement and the earlier searches; repaired the saved split into eight steps. Added explicit universal-property coherence and a ringed-diagram comparison, verified every adic hypothesis, and bridged Roos completeness to the canonical completion unit using existing reflector lemmas. No new nodes were needed. Rebuilt the malformed citation file with a substantive verbatim quote for every step dependency. Maintainer reader (Q150 review): added Step 7 comparing the explicit product-fibre Koszul model of def-weil-pbc-intrinsic-completion with the functorial R lim model and proving the converse completeness direction; renumbered the last two steps.",
-  "blueprint": "Serves the ordinary derived adjunction of fix-prop-adjunctions proof Step 1 by identifying its completed-coefficient right adjoint and strict quotient tower. The current main-20261015 proof does not itself spell out this integral comparison; the detailed argument follows the Stacks ringed-topos and completion sources.",
+  "summary": "Repair of the explicit 2026-10-21 re-split return and clarified route note: statement and statement dependencies unchanged. Replaced the 9339-character proof by a 2071-character assembly citing three new statement-only unsplit lemmas (reviewer FIX: the local-field coefficient package was folded into Step 3 citing lem-sfb-integers-profinite-tower clause 1 and the local-field DVR lemmas, and its node dropped). Their retained proof arguments are in report.md for subsequent stage-1 workers. Reused the existing explicit-fibre/strict-limit unit comparison. Preserved searches, sources, blueprint and maintainer Lean/review metadata.",
+  "blueprint": "The integral right-adjoint identification in fix-prop-adjunctions proof Step 1; the three new nodes separate coefficient coherence, strict-diagram restriction and the completeness-convention bridge; Step 3 checks the coefficient hypotheses from existing local-field nodes.",
   "tool_uses": [
    {
-    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-    "why": "Generic composition of K-injective derived direct images supplies the two coefficient-square comparisons; the mate-calculus unit does not state this ringed-topos tool."
-   },
-   {
-    "node": "lem-weil-pbc-exact-functor-derived-factorization",
-    "why": "Generic exact-functor descent identifies derived coefficient restriction with the termwise functor; the unit does not give exact-functor localization."
-   },
-   {
-    "node": "lem-weil-proetale-direct-image-restriction-of-scalars",
-    "why": "The finite-ring tool fixes the normalization at A_m to A_n; it does not replace the completed-coefficient comparison being proved."
-   },
-   {
-    "node": "lem-weil-pbc-kinjective-total-derived",
-    "why": "Its universal-property bijection proves equality of successive coefficient comparisons; the unit does not state this total-derived universal property."
+    "node": "lem-sfb-integers-profinite-tower",
+    "why": "Step 3 takes clause 1 (O_E -> lim O_E/pi^n is a ring isomorphism) as a generic local-field fact; no node of sk-lem-sf-mate states it"
    },
    {
     "node": "lem-weil-l-adic-extension-integers-dvr",
-    "why": "The coefficient-ring tool verifies the Noetherian, nonzero-uniformizer and finite-residue hypotheses; the unit does not establish local-field algebra."
-   },
-   {
-    "node": "lem-weil-valued-dvr-finite-quotients",
-    "why": "The valued-DVR tool verifies finiteness of every A_n and surjectivity of quotient transitions; this is a coefficient hypothesis rather than the unit route."
-   },
-   {
-    "node": "lem-weil-l-adic-extension-complete",
-    "why": "Finite-extension metric completeness verifies A is complete before the coefficient-system theorem is applied; the unit has no local-field completeness result."
-   },
-   {
-    "node": "lem-weil-pbc-diagram-site-realization",
-    "why": "Generic realization of small diagrams as sheaves permits application of ringed-topos composition to the strict coefficient tower; the unit does not realize diagram sites."
-   },
-   {
-    "node": "lem-pur-coefficient-system-derived-comparison",
-    "why": "Only the unbounded evaluation comparison of the strict finite-coefficient pushforward is used; the later descent and full-faithfulness clauses are unused."
-   },
-   {
-    "node": "lem-weil-ringed-tower-pushforward-limit-comparison",
-    "why": "Generic strict-tower direct-image and derived-limit comparison supplies evaluation and projection compatibility, absent from the unit statement."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "why": "Its Roos triangle for the functorial strict derived limit identifies the limit object in the imported completeness convention; the unit does not state this tower tool."
-   },
-   {
-    "node": "lem-weil-pbc-constant-completion-equivalence",
-    "why": "Its generic coefficient equivalence identifies Koszul and quotient completions with their units and transports the final direct image; this is precisely a coefficient foundation tool."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-koszul-completion-reflector",
-    "why": "The general reflector theorem turns an isomorphism with the completion object into invertibility of the canonical unit; this resolves the Roos/canonical distinction without changing the route."
-   },
-   {
-    "node": "prop-weil-pbc-direct-image-limits",
-    "why": "The generic adic proposition supplies completeness preservation and the normalized strict reconstruction after all its hypotheses are verified; the item adds coefficient-change coherence."
-   },
-   {
-    "node": "lem-weil-pbc-profinite-coefficient-inverse-image",
-    "why": "The generic finite-ring-tower inverse-image comparison verifies the precise coefficient identification required by the adic direct-image proposition."
-   },
-   {
-    "node": "prop-weil-pbc-koszul-reconstruction",
-    "why": "Its identity comp_K = c_K kappa_K is the identification the adic direct-image proposition names for its completeness hypothesis; the mate unit has no completion theory."
-   },
-   {
-    "node": "lem-weil-derived-limit-products-core",
-    "why": "Termwise products of complexes represent derived products, so the explicit product-fibre model is a derived limit; generic triangulated tool absent from the unit."
+    "why": "Step 3 takes the DVR/PID property and the uniformizer as generic local-field facts; already an accepted tool use of this item"
    }
   ]
  },
@@ -356,15 +235,16 @@
   "prop-weil-pbc-direct-image-limits",
   "lem-weil-pbc-profinite-coefficient-inverse-image",
   "prop-weil-pbc-koszul-reconstruction",
-  "lem-weil-derived-limit-products-core"
+  "lem-weil-derived-limit-products-core",
+  "lem-sfb-integers-profinite-tower"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-Q150-8d0378337",
-  "group": "Q150",
+  "reviewer": "NT-cc-NS-17315f108",
+  "group": "NS",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q150-8d0378337 (reviewer sub-agent of L); spot-checked: Read in full: the item; all 26 original proof dependencies, plus the 5 my repair adds; Stacks 0D6E (sites-cohomology l.4011), 0A07 (l.5150, tower-topos proof), 099N (proetale l.4336, (1),(4)); blueprint main-20261015 fix-prop-adjunctions Step 1; the parent's Step 2 use. The statement, stmt_deps, source and blueprint are unchanged from the base. There are no new nodes and no SGA. The completed sheaf R, the constant sheaf A and the finite sheaves A_n stay separate; Step 9 identifies them only on complete objects through lem-weil-pbc-constant-completion-equivalence. Steps 1-5 and 8-9 check out: both factorizations give the same ringed morphism, restriction is exact and termwise, the finite-ring normalization agrees with the kappa normalization, coherence follows from the eta universal property, the DVR, finite, perfect and complete hypotheses all hold for I=(t), and the diagram-topos comparison uses only the evaluation clauses. One E5/C4 fault, repaired. Old Step 6 claimed K satisfies 'precisely the intrinsic completeness hypothesis' of prop-weil-pbc-direct-image-limits. It did not cite def-weil-pbc-intrinsic-completion, whose unit is built on the explicit product-fibre model, and did not relate that unit to the functorial-Rlim Koszul unit it actually proved invertible. Old Step 7 also used Step 6 for the converse direction (intrinsic implies the Roos convention), which Step 6 had not argued. Fix: a new Step 7, under 2000 characters, shows that eta_K is invertible exactly when kappa_K is. Both cones are derived limits of the same cone tower Z_m, using def-weil-derived-limit, lem-weil-proetale-countable-products-exact and lem-weil-derived-limit-products-core, and two derived limits of one system are isomorphic. It proves the converse by comp_K = c_K kappa_K from prop-weil-pbc-koszul-reconstruction. Old Steps 7 and 8 are renumbered, Step 8 notes that the Cont-sheafified (P_n)_T are the constant sheaves (profinite lemma), and proof_deps is again the union of the uses (31 ids, no cycle). Accepted tool_uses: all 15 declared generic foundations, plus prop-weil-pbc-koszul-reconstruction and lem-weil-derived-limit-products-core.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-17315f108 (reviewer sub-agent of L); spot-checked: I read the item, all 4 new nodes and every cited statement in full, plus the 2026-10-21 human re-split note, fix-prop-adjunctions Steps 1 and 3 in blueprint main-20261015, and Stacks 0D6E (sites-cohomology l.4011), 0A0E (algebraization l.1091), 099N and 0A07; each tag matches its label. Statement and stmt_deps are byte-identical to the base. No SGA, no cycles. Re-split note answered. Proof is 2767 characters after the fix, every step under 1000.\n\nOne fault, fixed (C1/C5): the new node lem-pur-local-field-adic-hypotheses repeats existing results. Its main clause (the canonical map O_E -> lim O_E/t^n is an isomorphism) is already clause 1 of lem-sfb-integers-profinite-tower (split, reviewed pass). The rest takes a few lines from the DVR and finite-quotient lemmas: Noetherian, t a non-zero-divisor, A_n finite and perfect via 0->A->A->A_n->0, A/(t) torsion. I rewrote Step 3 to cite lem-weil-l-adic-extension-integers-dvr, lem-weil-valued-dvr-finite-quotients, def-pc-perfect-ring-complex, lem-sfb-integers-profinite-tower and def-weil-pbc-adic-coefficient-datum, and dropped the node. lem-sfb-integers-profinite-tower is declared in split_report.tool_uses.\n\nOne small B3 clarification: in lem-pur-roos-intrinsic-completeness-equivalence, (ii) now defines R_U[1/b] as the sheafified sectionwise localization on the slice.\n\nThe other steps check out:\n- Step 1: the two factorizations are the same ringed morphism.\n- Step 2: kappa normalization equals the finite-restriction formula; checked by hand on K-injectives.\n- Step 4: the diagram comparison exists before evaluation; the system and tower evaluation hypotheses are covered by Step 3.\n- Step 6: hypotheses of prop-weil-pbc-direct-image-limits and of the profinite inverse image hold; R, constant A and A_n are kept apart.\n\nThe remaining new nodes are true and not duplicates:\n- Cocycle node: generalizes lem-sfb-derived-direct-image-open-coherence (1), which covers only condensed E/Qbar coefficients on k-schemes.\n- Diagram node: lem-weil-pbc-flat-ringed-diagram-restriction needs flat, J-constant rings; here A_n is not flat over R and B varies with J.\n- Roos node: (i)=>(ii) via c_K and the reflector, (ii)<=>(iii) by the reflector, (iii)<=>(v) by c_K kappa_K = comp_K, (v)=>(i) by transport, (iii)<=>(iv) because countable products are exact. Tested on K=0 and on K!=0 with t invertible.\n\nAdvisory: Step 4's identification of the evaluated comparison with Step 1 rests on the total-derived universal property; the worker on the diagram node should spell it out.; 2 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
   "date": "2026-10-17",
