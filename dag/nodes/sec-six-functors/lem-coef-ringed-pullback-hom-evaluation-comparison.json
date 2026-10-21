@@ -14,9 +14,127 @@
   "def-pc-tensor-complex-sheaves",
   "def-pur-hom-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $F=Lf^*$, $H_A=R\\mathcal Hom_A$, $H_B=R\\mathcal Hom_B$, and write $e^A_{P,Q}:H_A(P,Q)\\otimes P\\to Q$ and $e^B$ for evaluation. The ringed-topos pullback theorem supplies the functor $F$ on the unbounded categories. The tensor-pullback theorem supplies a natural isomorphism $c_{X,Y}:FX\\otimes FY\\to F(X\\otimes Y)$, the inverse of its displayed comparison. The closed-structure theorem supplies natural bijections $\\operatorname{tr}_A:\\operatorname{Hom}(X\\otimes P,Q)\\cong\\operatorname{Hom}(X,H_A(P,Q))$ and $\\operatorname{tr}_B$, with inverse $u\\mapsto e(u\\otimes1)$. All later equalities are equalities in these derived categories.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YY, 07A4 and 08J9; setup of the evaluation mate."
+   }
+  },
+  {
+   "text": "The comparison $c$ respects the fixed tensor associators. The normalized adjoint-lift theorem supplies the scalar-extension edge for $f$ between the two canonical site presentations. Its universal derived functor is identified with $F$ by the adjunction-compatible derived comparison; transport the edge along that identification. Apply the existing canonical derived tensor-lift theorem to this edge. Here the presentations use the fixed native derived tensor, and their representative isomorphisms are the canonical simultaneous K-flat comparisons: the derived tensor-Hom adjunction theorem identifies these with the same tensor and closed structure used in step 1. Thus the representative-equality hypothesis of the lift theorem is equality with the chosen comparisons, not an additional assumption on $f$. In the notation of that theorem its inverse tensorator is $c^{-1}$, so $c$ is its tensorator. In particular, suppressing only the displayed canonical associators, $c_{X\\otimes Y,Z}(c_{X,Y}\\otimes1)=c_{X,Y\\otimes Z}(1\\otimes c_{Y,Z})$. This is the coherence used below; no preservation of internal Hom is part of this citation.",
+   "uses": [
+    "lem-sfb-ringed-derived-adjoint-lift",
+    "lem-sfb-ringed-derived-tensor-lift",
+    "def-sfb-ringed-derived-comparison-data",
+    "lem-sf-ringed-derived-tensor-hom-adjunction",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 and 0FPT, canonical monoidal lift of the signed K-flat tensor comparison; apply the existing derived coherence lemma."
+   }
+  },
+  {
+   "text": "Define $v_{P,Q}=F(e^A_{P,Q})c_{H_A(P,Q),P}$ and $\\beta_{P,Q}=\\operatorname{tr}_B(v_{P,Q})$. The inverse-transposition formula gives the exact evaluation equation $e^B_{FP,FQ}(\\beta_{P,Q}\\otimes1_{FP})=F(e^A_{P,Q})c_{H_A(P,Q),P}$. It also shows that this equation determines $\\beta_{P,Q}$ uniquely. This constructs the comparison with exactly the orientation required in the statement.",
+   "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J9; definition of beta by the closed adjunction and its inverse formula."
+   }
+  },
+  {
+   "text": "For $a:P'\\to P$ and $b:Q\\to Q'$, compare $\\beta_{P',Q'}F(H_A(a,b))$ and $H_B(Fa,Fb)\\beta_{P,Q}$. Their transposes have domain $F H_A(P,Q)\\otimes FP'$. Substitute the evaluation equation of step 3 into both. Naturality of $c$ and the naturality of the closed adjunction in its tensor parameter and target make each transpose equal to $F\\bigl(b\\,e^A_{P,Q}(1\\otimes a)\\bigr)c_{H_A(P,Q),P'}$. Injectivity of $\\operatorname{tr}_B$ gives the desired equality, including the contravariant first variable.",
+   "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08J9 and 07A4; direct naturality computation for evaluation mates."
+   }
+  },
+  {
+   "text": "Let $t:X\\otimes P\\to Q$ be any derived morphism, and put $\\widehat t=\\operatorname{tr}_A(t)$. Then $\\beta_{P,Q}F(\\widehat t)=\\operatorname{tr}_B(F(t)c_{X,P})$. Indeed, the inverse transpose of its left side is $F(e^A)c_{H_A(P,Q),P}(F\\widehat t\\otimes1)=F\\bigl(e^A(\\widehat t\\otimes1)\\bigr)c_{X,P}=F(t)c_{X,P}$, by naturality of $c$. The inverse transpose of its right side is the same morphism. This gives preservation of transposition for every parameter object $X$, without asserting that beta is invertible.",
+   "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08J9 and 07A4; explicit transposition identity."
+   }
+  },
+  {
+   "text": "For $P,Q,T\\in D(A)$ define internal composition $m_A:H_A(Q,T)\\otimes H_A(P,Q)\\to H_A(P,T)$ as the transpose of $e^A_{Q,T}(1\\otimes e^A_{P,Q})\\alpha$, where $\\alpha:(H_A(Q,T)\\otimes H_A(P,Q))\\otimes P\\to H_A(Q,T)\\otimes(H_A(P,Q)\\otimes P)$. Define $m_B$ in the same way. This is precisely internal composition for the fixed closed structure: it is determined by the equation $e^A_{P,T}(m_A\\otimes1_P)=e^A_{Q,T}(1\\otimes e^A_{P,Q})\\alpha$, and similarly for $B$. The closed adjunction makes this a definition and the displayed equation its inverse-transpose formula.",
+   "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A98 (lemma-internal-hom-composition) and Tag 08J9; composition as the transpose of iterated evaluation."
+   }
+  },
+  {
+   "text": "Set $U=H_A(Q,T)$ and $V=H_A(P,Q)$. The composition identity is $\\beta_{P,T}F(m_A)c_{U,V}=m_B(\\beta_{Q,T}\\otimes\\beta_{P,Q})$. Untranspose both sides against $FP$. By step 3, the left side becomes $F(e^A_{P,T})c_{H_A(P,T),P}(F m_A\\otimes1)(c_{U,V}\\otimes1)$. Naturality of $c$, the equation of step 6, and the associativity equation of step 2 rewrite this as the following explicit composite: $F(e^A_{Q,T})c_{U,Q}(1_{FU}\\otimes F(e^A_{P,Q}))(1_{FU}\\otimes c_{V,P})\\alpha_B$. For the right side, step 6 first gives $e^B_{FQ,FT}(\\beta_{Q,T}\\otimes(e^B_{FP,FQ}(\\beta_{P,Q}\\otimes1)))\\alpha_B$. Substituting step 3 for each of the two evaluations gives exactly that same explicit composite. The two transposes are equal, hence the required composition identity follows by the closed bijection.",
+   "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08J9 and 0A98; two substitutions of the defining evaluation equation, with canonical tensor associativity from step 2."
+   }
+  },
+  {
+   "text": "The representative convention has no extra sign beyond those in the two complexes. For a homogeneous Hom section $h$ of degree $r$ and section $x$ of degree $p$, evaluation is $h\\otimes x\\mapsto h(x)$. Its chain-map equation is $(dh)(x)+(-1)^r h(dx)=d(h(x))$, since $dh=d h-(-1)^r h d$. For homogeneous composable Hom sections $g,h$ of degrees $s,r$, composition is $g\\otimes h\\mapsto gh$, and $d(gh)=(dg)h+(-1)^s g(dh)$ by expanding the same Hom differential. These calculations hold on every summand of the direct-sum total tensor and every Hom product projection. The recorded derived tensor-Hom adjunction supplies the componentwise uncurrying equation on the fixed K-flat/Hom representatives, so this evaluation is the evaluation of the closed structure used above. K-flat resolutions of the Hom factors allow their ordinary evaluation and composition maps to represent the corresponding derived tensor maps; the defined derived Hom is independent of its representative. Thus the formulas compute the representative evaluation and the iterated evaluation defining $m$, and all equations in steps 3–7 concern actual derived morphisms. No flatness of the coefficient map, boundedness of $P,Q$, or inverse to beta has been used.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-pc-tensor-complex-sheaves",
+    "lem-sf-ringed-derived-tensor-hom-adjunction",
+    "lem-pc-kflat-resolution",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0A8X (section-hom-complexes), 0A90 (lemma-compose), 08J9 and 0A98; expansion of the signed differentials on representative evaluation and composition."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-sfb-ringed-derived-adjoint-lift",
+  "lem-sfb-ringed-derived-tensor-lift",
+  "def-sfb-ringed-derived-comparison-data",
+  "lem-sf-ringed-derived-tensor-hom-adjunction",
+  "def-pur-hom-complex",
+  "def-pc-tensor-complex-sheaves",
+  "lem-pc-kflat-resolution",
+  "def-pur-derived-internal-hom"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 (lemma-pullback-tensor-product), 08J9 (lemma-internal-hom), 0A98 (lemma-internal-hom-composition); explicit agent calculation of evaluation mates. The compatibility identities are written out by the worker, not quoted as assertions of these tags."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -59,10 +177,45 @@
    "results": "[loogle] OK 10 hit(s)\n  {\"name\": \"CategoryTheory.expComparison\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Functor\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {D : Type u'} [CategoryTheory.Category.{v, u'} D] [CategoryTheory.CartesianMonoidalCategory C] [CategoryTheory.CartesianMonoidalCategory D] (F : CategoryTheory.Functor C D) [CategoryTheory.MonoidalClosed C] [CategoryTheory.MonoidalClosed D] [CategoryT\", \"doc\": \"The exponential comparison map.\\n`F` is a Cartesian closed functor if this is an iso for all `A`.\"}\n  {\"name\": \"CategoryTheory.MonoidalClosedFunctor.comparison_iso\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Functor\", \"type\": \" {C : Type u} {inst✝ : CategoryTheory.Category.{v, u} C} {D : Type u'} {inst✝¹ : CategoryTheory.Category.{v, u'} D} {inst✝² : CategoryTheory.CartesianMonoidalCategory C} {inst✝³ : CategoryTheory.CartesianMonoidalCategory D} {F : CategoryTheory.Functor C D} {inst✝⁴ : CategoryTheory.MonoidalClosed C} \", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.MonoidalClosedFunctor.mk\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Functor\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {D : Type u'} [CategoryTheory.Category.{v, u'} D] [CategoryTheory.CartesianMonoidalCategory C] [CategoryTheory.CartesianMonoidalCategory D] {F : CategoryTheory.Functor C D} [CategoryTheory.MonoidalClosed C] [CategoryTheory.MonoidalClosed D] [CategoryT\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.expComparison_iso_of_frobeniusMorphism_iso\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Functor\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {D : Type u'} [CategoryTheory.Category.{v, u'} D] [CategoryTheory.CartesianMonoidalCategory C] [CategoryTheory.CartesianMonoidalCategory D] (F : CategoryTheory.Functor C D) {L : CategoryTheory.Functor D C} [CategoryTheory.MonoidalClosed C] [CategoryTh\", \"doc\": \"If the Frobenius morphism at `A` is an isomorphism, then the exponential comparison transformation\\n(at `A`) is an isomorphism.\"}\n  {\"name\": \"CategoryTheory.frobeniusMorphism_iso_of_expComparison_iso\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Functor\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {D : Type u'} [CategoryTheory.Category.{v, u'} D] [CategoryTheory.CartesianMonoidalCategory C] [CategoryTheory.CartesianMonoidalCategory D] (F : CategoryTheory.Functor C D) {L : CategoryTheory.Functor D C} [CategoryTheory.MonoidalClosed C] [CategoryTh\", \"doc\": \"If the exponential comparison transformation (at `A`) is an isomorphism, then the Frobenius morphism\\nat `A` is an isomorphism.\"}\n  {\"name\": \"CategoryTheory.expComparison_whiskerLeft\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Functor\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {D : Type u'} [CategoryTheory.Category.{v, u'} D] [CategoryTheory.CartesianMonoidalCategory C] [CategoryTheory.CartesianMonoidalCategory D] (F : CategoryTheory.Functor C D) [CategoryTheory.MonoidalClosed C] [CategoryTheory.MonoidalClosed D] [CategoryT\", \"doc\": \"The exponential comparison map is natural in `A`.\"}\n  {\"name\": \"CategoryTheory.uncurry_expComparison\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Functor\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {D : Type u'} [CategoryTheory.Category.{v, u'} D] [CategoryTheory.CartesianMonoidalCategory C] [CategoryTheory.CartesianMonoidalCategory D] (F : CategoryTheory.Functor C D) [CategoryTheory.MonoidalClosed C] [CategoryTheory.MonoidalClosed D] [CategoryT\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.coev_expComparison\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Functor\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {D : Type u'} [CategoryTheory.Category.{v, u'} D] [CategoryTheory.CartesianMonoidalCategory C] [CategoryTheory.CartesianMonoidalCategory D] (F : CategoryTheory.Functor C D) [CategoryTheory.MonoidalClosed C] [CategoryTheory.MonoidalClosed D] [CategoryT\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.expComparison_ev\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Functor\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {D : Type u'} [CategoryTheory.Category.{v, u'} D] [CategoryTheory.CartesianMonoidalCategory C] [CategoryTheory.CartesianMonoidalCategory D] (F : CategoryTheory.Functor C D) [CategoryTheory.MonoidalClosed C] [CategoryTheory.MonoidalClosed D] [CategoryT\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.frobeniusMorphism_mate\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Functor\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {D : Type u'} [CategoryTheory.Category.{v, u'} D] [CategoryTheory.CartesianMonoidalCategory C] [CategoryTheory.CartesianMonoidalCategory D] (F : CategoryTheory.Functor C D) {L : CategoryTheory.Functor D C} [CategoryTheory.MonoidalClosed C] [CategoryTh\", \"doc\": \"\"}",
    "date": "2026-10-21",
    "verdict": "no match: expComparison requires CartesianMonoidalCategory; sheaf-module derived tensor is not cartesian, and underived pullback comparisons do not state the derived evaluation/composition identities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "strong monoidal functor internal Hom comparison evaluation transposition composition",
+   "results": "CategoryTheory.expComparison_ev, coev_expComparison, MonoidalClosedFunctor.comparison_iso, expComparison; MonoidalClosed.compTranspose and ihom.ev_naturality.",
+   "date": "2026-10-21",
+   "verdict": "no match: the functor comparisons require CartesianMonoidalCategory; the remaining hits are internal closed-category operations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed.curry, CategoryTheory.Functor",
+   "results": "CategoryTheory.MonoidalClosed.ofEquiv_curry_def; DayConvolutionInternalHom.coev_app_π and its assoc variant; LightCondensed.ihomPoints_symm_apply.",
+   "date": "2026-10-21",
+   "verdict": "no match: the transfer theorem assumes a monoidal equivalence and does not provide the comparison for arbitrary derived pullback."
+  },
+  {
+   "tool": "grep",
+   "query": "expComparison|internalHom.*[Cc]omparison|[Cc]losed.*[Ff]unctor",
+   "results": "23 hits under CategoryTheory/Monoidal; inspected Closed/Functor.lean lines 46-106: expComparison and evaluation formula are under CartesianMonoidalCategory hypotheses.",
+   "date": "2026-10-21",
+   "verdict": "no match: Cartesian closed functor comparison cannot specialize to the module tensor structure."
+  },
+  {
+   "tool": "leansearch",
+   "query": "strong monoidal functor preserves evaluation internal Hom composition comparison",
+   "results": "CategoryTheory.Functor.Monoidal.ofBifunctor, expComparison_ev, exp.ev, uncurry_expComparison, ihom.ev_naturality_assoc, ihom.ev, expComparison, Functor.homObjEquiv.",
+   "date": "2026-10-21",
+   "verdict": "no match: constructors for monoidal structures and cartesian exponential comparison do not state the derived comparison with composition compatibility."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived inverse image ringed topos RHom comparison map compatible with composition and evaluation",
+   "results": "SheafOfModules.pushforwardComp_inv_app_val_app, conjugateEquiv_pullbackComp_inv; LocallyRingedSpace.IsOpenImmersion.invApp_app and assoc; LightCondensed.ihomPoints_symm_comp; Sheaf.ΓHomEquiv_naturality_left_symm; IsOpenImmersion.inv_naturality and assoc.",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary sheaf and locally ringed space comparisons, not the unbounded derived internal-Hom comparison."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-derived-system-evaluation-calculus",
@@ -82,5 +235,69 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-coef-ringed-pullback-hom-evaluation-comparison",
+  "worker": "stage1",
+  "summary": "Constructed beta by evaluation transposition; proved naturality, arbitrary-parameter transposition and internal composition identities explicitly. Reused the existing canonical derived tensor-lift and representative adjunction results; created no nodes. Checked signed representative formulas and repaired doubled TeX escaping without changing the mathematical statement.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint, proof paragraph beginning For K: the first and last derived mapping-complex comparisons, via lem-coef-derived-system-evaluation-calculus. This item supplies their single ringed-pullback evaluation comparison; no coefficient-system realization or arbitrary-input invertibility is asserted.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "why": "Provides the unbounded ringed-topos left derived pullback; the unit does not construct it."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Provides its canonical natural tensor comparison; used only as a generic ringed-topos tool."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-tensor-lift",
+    "why": "Provides associativity coherence of that same canonical comparison, needed to compare iterated evaluations."
+   },
+   {
+    "node": "def-sfb-ringed-derived-comparison-data",
+    "why": "Defines the recorded site presentations and normalized comparison hypotheses of the preceding coherence theorem."
+   },
+   {
+    "node": "def-pur-hom-complex",
+    "why": "Fixes the product Hom differential in the representative sign calculation."
+   },
+   {
+    "node": "def-pc-tensor-complex-sheaves",
+    "why": "Fixes the signed direct-sum total tensor differential."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Supplies flat-term K-flat representatives for Hom factors used in derived evaluation and composition."
+   },
+   {
+    "node": "def-pur-derived-internal-hom",
+    "why": "Fixes the K-injective Hom model and its representative independence."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-adjoint-lift",
+    "why": "Supplies the actual normalized scalar-extension edge of the given ringed-topos morphism, so the monoidal-lift theorem is applied with all its input data, rather than treating a witness definition as an existence theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sfb-ringed-derived-tensor-lift",
+  "def-sfb-ringed-derived-comparison-data",
+  "def-pur-hom-complex",
+  "def-pc-tensor-complex-sheaves",
+  "lem-pc-kflat-resolution",
+  "def-pur-derived-internal-hom",
+  "lem-sfb-ringed-derived-adjoint-lift"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q03-9e7b0996f",
+  "group": "Q03",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-9e7b0996f (reviewer sub-agent of L); spot-checked: I read the whole item. The statement is byte-identical to the NZ-created node and to live (live is still unsplit, so not superseded); stmt_deps equal live; there are no new nodes. Stacks tags checked in sites-cohomology.tex via tags/tags: 07A4, 08J9 (l.8896), 0A98 (l.8998), 0A8X, 0A90, 06YY and 0FPT are all correct. The blueprint route (prop-coef-integral-exceptional-adjoint, proof paragraph 2, first and last derived Hom comparisons) is consistent. Orientation of f against derived-pullback/tensor-pullback (u^{-1}R→S, u^{-1} left exact) matches, and the coefficient categories are plain unbounded D(A), D(B) throughout. Steps 3-7 recomputed: the evaluation equation; naturality, including the contravariant variable via e(H(a,b)⊗1)=b e(1⊗a); transposition for arbitrary X; composition, where both untransposes reduce to F(e_{Q,T})c_{U,Q}(1⊗F e_{P,Q})(1⊗c_{V,P})α_B (step 7 uses naturality of α tacitly, which is elementary). Step 2: associativity of c comes from the CoreMonoidal structure of lem-sfb-ringed-derived-tensor-lift, whose μIso.inv is the canonical tensorComparison; I read the Lean source of TensorLift and Site, which record the closed-symmetric-monoidal witnesses. The adjoint-lift supplies the edge, and hY/hX hold for the sites' own models. Step 8 signs checked against def-pur-hom-complex and def-pc-tensor-complex-sheaves for both evaluation and composition. No cycle (closure of 433 nodes); every cited node exists, is unmerged and reviewed. Off-unit statements (pbc derived and tensor pullback, sfb adjoint and tensor lift, pc K-flat resolution) are declared in tool_uses; I accept them as generic tools. Duplicate search over dag/nodes (closed-adjunction-naturality, enriched-isomorphism, parameter-composition, square-hom-transport, thm-trf-internal-hom-pullback, def-per-etale-hom-pullback-comparison, lem-sf-etale-hom-complex-pullback, self-enrichment base change) found only different results. Edge cases checked: f=id, zero inputs, Z→Z/2 on a point with β not invertible, odd degrees. No fixes written."
+ }
 }
