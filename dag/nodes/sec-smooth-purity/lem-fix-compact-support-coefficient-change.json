@@ -106,6 +106,37 @@
     "document": "literature/stacks-project/more-etale.tex",
     "place": "Tags 0GL5, lemma-projection-formula-Rf-lower-shriek, and 0GL6, remark-Rf-lower-shriek-change-of-rings; assembly through the fixed compactification"
    }
+  },
+  {
+   "text": "Ordinary-etale auxiliary domain calculation: finite Tor amplitude applied to the degree-zero constant B-module gives vanishing below the Tor lower bound. The scalar/tensor isomorphism identifies this tensor with restriction of scalar extension. Exact scalar restriction reflects homology vanishing, so the chosen scalar extension belongs to D+. Its scalar adjunction unit gives nonempty_coefficientTensorModel_of_finiteTor. No flat-model construction is required.",
+   "uses": [
+    "def-weil-finite-tor-amplitude",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For origin_of_etale_finiteTor, use the same bounded-below etale scalar extension. The B-linear scalar/site comparison pbcComparisonReduction and the given etale-origin isomorphism identify its realization with scalar extension of the pro-etale input. Both that unit and the supplied model are universal, so the uniquely induced comparison is invertible. Transport plusEtaleOrigin along this isomorphism.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "def-weil-pbc-witness-compatibility"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the ordinary-etale compactSupportCoefficientComparisonPlus_isIso, first transport the universal tensor arrow through open extension. The open-unit mate equation gives the exact restriction/open comparison. Applying the exact derived mate theorem and composing the two open-adjunction Hom equivalences, the pullback/restriction isomorphism and the universal tensor bijection proves that the open-image arrow is universal on the ambient derived category. Normalize its D+ comparison using the exact derived composition and natural-isomorphism compatibilities.",
+   "uses": [
+    "lem-weil-pbc-extension-by-zero-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the proper-factor universal-arrow lemma to the open-image arrow. Expanding the compactification functor and its specified restriction comparison gives precisely compact-support direct image of the input unit followed by compactSupportCoefficientRestrictionPlus. Hence this arrow is universal. The comparison defined by transposing through the target model preserves its unit. Uniqueness of two universal arrows makes the ambient comparison invertible; the fully faithful D+ inclusion reflects invertibility.",
+   "uses": [
+    "lem-fix-etale-proper-coefficient-tensor-unit",
+    "def-compact-support-direct-image-detailed"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
@@ -126,12 +157,17 @@
   "lem-fix-site-open-exchange",
   "def-cbc-exchange-map",
   "thm-cbc-finite-level-proetale",
-  "lem-weil-pbc-ringed-exchange-tensor-coherence"
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "def-weil-finite-tor-amplitude",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-pbc-witness-compatibility",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-fix-etale-proper-coefficient-tensor-unit"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Repair of original compactification proof using Stacks Tags 0GL1, 0GL5, 0GL6, 0F0G, 0E48 and the existing scalar-mate and site-transport statements"
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Keep the existing pro-etale six-step route unchanged. Ordinary-etale supplement: Tags 0GL5 and 0GL6 (proper/open compact-support assembly); sites-cohomology.tex Tags 06YY and 07A6 (finite-Tor scalar boundedness and universal scalar adjunction); canonical site comparison from WitnessCompatibility."
  },
  "mathlib_searches": [
   {
@@ -343,24 +379,13 @@
   ]
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "C-9ce3a",
-  "group": "F8",
+  "reviewer": "COMPILER",
+  "group": "F1",
   "result": "pass",
-  "landing": "20261019T002604-L-2156863",
-  "kind": "proof",
-  "note": "independent cc review: delivered EtaleCompactSupportCoefficientChange.lean vs clones/live (only 26 plain imports removed + coefficientRestrictionOpenMap_isIso proved); flagged module ProEtaleSiteComparisonFiniteLevel vs dag/units (realizes a step of sk-prop-pe-comparison-morphism, not the item's unit sk-prop-sf-trace-perfectness whose realized is empty); axioms clean; item + 7 direct importers compiled",
-  "sorry_before": [
-   "AlgebraicGeometry.Etale.coefficientRestrictionOpenMap_isIso",
-   "AlgebraicGeometry.Etale.compactSupportCoefficientComparisonPlus_isIso",
-   "AlgebraicGeometry.Etale.nonempty_coefficientTensorModel_of_finiteTor",
-   "AlgebraicGeometry.ProEtale.CoefficientTensorModel.origin_of_etale_finiteTor"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.Etale.compactSupportCoefficientComparisonPlus_isIso",
-   "AlgebraicGeometry.Etale.nonempty_coefficientTensorModel_of_finiteTor",
-   "AlgebraicGeometry.ProEtale.CoefficientTensorModel.origin_of_etale_finiteTor"
-  ]
+  "landing": "20261021T214750-L-1849788",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

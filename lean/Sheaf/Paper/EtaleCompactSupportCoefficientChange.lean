@@ -10,32 +10,10 @@ public import Sheaf.Paper.FiniteTorAmplitudeSites
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleEssentiallySmall
 public import WeilConjectures.SixFunctors.BaseChange.RestrictScalars
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComposition
-import WeilConjectures.Algebra.Homology.ChangeOfRingsTensorComparison
-import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.AlgebraicGeometry.FixSiteOpenExchange
-import Sheaf.AlgebraicGeometry.FixedComparisonDirectImageMate
-import Sheaf.AlgebraicGeometry.ProEtaleDerivedExtensionZeroBaseChange
-import Sheaf.AlgebraicGeometry.ProEtaleExtensionZero
-import Sheaf.AlgebraicGeometry.ProEtaleExtensionZeroComparison
-import Sheaf.AlgebraicGeometry.ProEtaleRingSheafChangeAdjunction
 import Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonFiniteLevel
-import Sheaf.AlgebraicGeometry.SfIntrinsicCompactSupport
-import Sheaf.Paper.CanonicalFiniteLevelCompactSupportBaseChange
-import Sheaf.Paper.CondensedAmbientExchange
-import Sheaf.Paper.ExchangeProjectionSuppliedDomains
-import Sheaf.Paper.ProEtaleConstructibleOrigin
-import Sheaf.Paper.ProjectionMateExact
-import Sheaf.Paper.RingedExchangeTensorCoherence
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
-import Sheaf.SecSmoothPurity.DirectImageScalarExchange
-import Sheaf.SecSmoothPurity.IntrinsicCompactSupportRestriction
-import Sheaf.SecSmoothPurity.OpenScalarExchange
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekPlusBaseChange
-import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-import WeilConjectures.SixFunctors.ProEtale.BaseChange.SmoothBaseChange
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.OpenLowerShriekProj
+import Sheaf.Paper.EtaleDerivedScalarTensor
+import Sheaf.Paper.EtaleProperCoefficientTensorUnit
+import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
 /-! # Ordinary-etale coefficient comparison for compact support
 
@@ -160,6 +138,18 @@ structure CoefficientTensorModel
   unit : K ⟶ (Sheaf.restrictScalars T.smallEtaleTopology φ).mapDerivedCategoryPlus.obj obj
   universal : Sheaf.IsDerivedBaseChange unit.hom
 
+set_option backward.isDefEq.respectTransparency false in
+private theorem scalarExtension_plus_of_finiteTor
+    {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B) (T : Scheme.{u})
+    (K : DerivedCategoryModule A T) (a b : ℤ)
+    (hK : DerivedCategory.hasTorAmplitudeIn A T a b K) :
+    _root_.DerivedCategory.TStructure.t.plus ((scalarExtension φ T).obj K) := by
+  refine ⟨a, (_root_.DerivedCategory.isGE_iff _ a).mpr fun q hq ↦ ?_⟩
+  apply Functor.isZero_homologyFunctor_of_isZero_homologyFunctor_mapDerivedCategory_obj
+    (Sheaf.restrictScalars T.smallEtaleTopology φ)
+  exact (hK (scalarCoefficientSheaf φ T) q (Or.inl hq)).of_iso
+    ((_root_.DerivedCategory.homologyFunctor _ q).mapIso ((scalarTensorIso φ T).app K))
+
 /-- Scalar extension of a morphism, uniquely specified by the universal arrows.
 Source: Stacks Tag 07A6 (blueprint: lem-fix-compact-support-coefficient-change). -/
 def CoefficientTensorModel.map
@@ -186,6 +176,101 @@ def compactSupportCoefficientComparisonPlus
     (((rightDerivedLowerShriekOfCompactificationPlus (ModuleCat.{u + 1} A) c).map M.unit ≫
       (compactSupportCoefficientRestrictionPlus φ c).hom.app M.obj).hom))
 
+set_option backward.isDefEq.respectTransparency false in
+private theorem universal_open_transport
+    {CA DA CB DB : Type*} [Category CA] [Category DA] [Category CB] [Category DB]
+    {JA : CA ⥤ DA} {RA : DA ⥤ CA} {JB : CB ⥤ DB} {RB : DB ⥤ CB}
+    (adjA : JA ⊣ RA) (adjB : JB ⊣ RB) (UX : CB ⥤ CA) (UZ : DB ⥤ DA)
+    (c : UX ⋙ JA ≅ JB ⋙ UZ) (t : RB ⋙ UX ≅ UZ ⋙ RA)
+    (hc : ∀ M, adjA.unit.app (UX.obj M) ≫ RA.map (c.hom.app M) =
+      UX.map (adjB.unit.app M) ≫ t.hom.app (JB.obj M))
+    {K : CA} {M : CB} (η : K ⟶ UX.obj M)
+    (hη : ∀ N, Function.Bijective fun g : M ⟶ N ↦ η ≫ UX.map g) (N : DB) :
+    Function.Bijective fun g : JB.obj M ⟶ N ↦
+      JA.map η ≫ c.hom.app M ≫ UZ.map g := by
+  have h := (adjA.homEquiv K (UZ.obj N)).symm.bijective.comp
+    (((t.app N).homToEquiv (Z := K)).bijective.comp
+      ((hη (RB.obj N)).comp (adjB.homEquiv M N).bijective))
+  convert h using 1
+  funext g
+  change JA.map η ≫ c.hom.app M ≫ UZ.map g =
+    (adjA.homEquiv K (UZ.obj N)).symm
+      ((η ≫ UX.map ((adjB.homEquiv M N) g)) ≫ (t.app N).hom)
+  apply (adjA.homEquiv K (UZ.obj N)).injective
+  rw [Equiv.apply_symm_apply]
+  simp only [Adjunction.homEquiv_unit, Functor.map_comp, Category.assoc]
+  rw [← reassoc_of% (adjA.unit.naturality η), reassoc_of% hc M]
+  have hn := t.hom.naturality g
+  dsimp only [Functor.comp_map] at hn
+  rw [← hn]
+  rfl
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem openTensorUnit_universal
+    {A B : Type (u + 1)} [CommRing A] [CommRing B] {φ : A →+* B}
+    {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j]
+    {K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))}
+    (M : CoefficientTensorModel φ X K) :
+    Sheaf.IsDerivedBaseChange
+      (((openImmersionLowerShriek (ModuleCat.{u + 1} A) j).mapDerivedCategoryPlus.map M.unit ≫
+        (coefficientRestrictionOpenPlus φ j).hom.app M.obj).hom) := by
+  have := coefficientRestrictionOpenMap_isIso φ j
+  let β := asIso (coefficientRestrictionOpenMap φ j)
+  let τ := (asIso (upperStarRestrictScalars φ j).natTrans).symm
+  have hc (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)) :
+      (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) j).unit.app
+          ((Sheaf.restrictScalars X.smallEtaleTopology φ).obj F) ≫
+        (upperStar (ModuleCat.{u + 1} A) j).map (β.hom.app F) =
+      (Sheaf.restrictScalars X.smallEtaleTopology φ).map
+          ((openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} B) j).unit.app F) ≫
+        τ.hom.app ((openImmersionLowerShriek (ModuleCat.{u + 1} B) j).obj F) := by
+    exact (unit_mateEquiv_symm
+      (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} B) j)
+      (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) j) τ.hom F).symm
+  have hd := Adjunction.mapDerivedCategoryAdjunction_mate
+    (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} B) j)
+    (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) j) τ β hc
+  intro N
+  have h := universal_open_transport
+    (derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) j)
+    (derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} B) j)
+    (Sheaf.derivedRestrictScalars X.smallEtaleTopology φ)
+    (Sheaf.derivedRestrictScalars Z.smallEtaleTopology φ)
+    (Functor.mapDerivedCategorySquareIso β) (Functor.mapDerivedCategorySquareIso τ)
+    hd M.unit.hom M.universal N
+  have he : _root_.DerivedCategory.Plus.ι.map
+      ((coefficientRestrictionOpenPlus φ j).hom.app M.obj) =
+      (Functor.mapDerivedCategorySquareIso β).hom.app M.obj.obj := by
+    have hcomp : _root_.DerivedCategory.Plus.ι.mapIso
+        (((Sheaf.restrictScalars X.smallEtaleTopology φ).mapDerivedCategoryPlusCompIso
+          (openImmersionLowerShriek (ModuleCat.{u + 1} A) j)).app M.obj) =
+        (((Sheaf.restrictScalars X.smallEtaleTopology φ).mapDerivedCategoryCompIso
+          (openImmersionLowerShriek (ModuleCat.{u + 1} A) j)).app M.obj.obj) := by
+      apply Iso.ext
+      exact Functor.ι_map_mapDerivedCategoryPlusCompIso_hom_app _ _ _
+    simp only [coefficientRestrictionOpenPlus, Iso.trans_hom, Iso.symm_hom,
+      NatTrans.comp_app, Functor.map_comp]
+    have hinv := congrArg Iso.inv hcomp
+    change _root_.DerivedCategory.Plus.ι.map
+        (((Sheaf.restrictScalars X.smallEtaleTopology φ).mapDerivedCategoryPlusCompIso
+          (openImmersionLowerShriek (ModuleCat.{u + 1} A) j)).inv.app M.obj) =
+        (((Sheaf.restrictScalars X.smallEtaleTopology φ).mapDerivedCategoryCompIso
+          (openImmersionLowerShriek (ModuleCat.{u + 1} A) j)).inv.app M.obj.obj) at hinv
+    rw [hinv]
+    simp only [Functor.ι_map_mapDerivedCategoryPlusCompIso_hom_app,
+      Functor.ι_map_mapDerivedCategoryPlusNatIso_hom_app]
+    rfl
+  change Function.Bijective fun g ↦
+    ((openImmersionLowerShriek (ModuleCat.{u + 1} A) j).mapDerivedCategory.map M.unit.hom ≫
+      _root_.DerivedCategory.Plus.ι.map
+        ((coefficientRestrictionOpenPlus φ j).hom.app M.obj)) ≫
+      (Sheaf.derivedRestrictScalars Z.smallEtaleTopology φ).map g
+  rw [he]
+  convert h using 1
+  funext g
+  exact Category.assoc _ _ _
+
+set_option backward.isDefEq.respectTransparency false in
 /-- The canonical ordinary-etale coefficient comparison is invertible for finite rings.
 Source: Stacks Tags 0GL5 and 0GL6
 (blueprint: lem-fix-compact-support-coefficient-change).
@@ -205,15 +290,41 @@ theorem compactSupportCoefficientComparisonPlus_isIso
     (N : CoefficientTensorModel φ Y
       ((rightDerivedLowerShriekOfCompactificationPlus (ModuleCat.{u + 1} A) c).obj K)) :
     IsIso (compactSupportCoefficientComparisonPlus c M N) := by
-  sorry
+  let η := (openImmersionLowerShriek (ModuleCat.{u + 1} A)
+    c.i).mapDerivedCategoryPlus.map M.unit ≫
+      (coefficientRestrictionOpenPlus φ c.i).hom.app M.obj
+  have hη : Sheaf.IsDerivedBaseChange η.hom := openTensorUnit_universal c.i M
+  have hp := properCoefficientTensorUnit_universal φ c.g η hη
+  have htarget : Sheaf.IsDerivedBaseChange
+      (((rightDerivedLowerShriekOfCompactificationPlus (ModuleCat.{u + 1} A) c).map M.unit ≫
+        (compactSupportCoefficientRestrictionPlus φ c).hom.app M.obj).hom) := by
+    simpa only [η, compactSupportCoefficientRestrictionPlus,
+      rightDerivedLowerShriekOfCompactificationPlus,
+      Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+      Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom,
+      Functor.whiskerRight_app, Functor.whiskerLeft_app,
+      Functor.associator_hom_app, Functor.associator_inv_app,
+      Category.id_comp, Category.comp_id, Functor.map_comp,
+      Functor.comp_map, Category.assoc] using hp
+  have hfac := (Equiv.ofBijective _ (N.universal _)).apply_symm_apply
+    (((rightDerivedLowerShriekOfCompactificationPlus (ModuleCat.{u + 1} A) c).map M.unit ≫
+      (compactSupportCoefficientRestrictionPlus φ c).hom.app M.obj).hom)
+  have : IsIso (_root_.DerivedCategory.Plus.ι.map
+      (compactSupportCoefficientComparisonPlus c M N)) :=
+    N.universal.isIso htarget (compactSupportCoefficientComparisonPlus c M N).hom hfac
+  exact isIso_of_reflects_iso (compactSupportCoefficientComparisonPlus c M N)
+    _root_.DerivedCategory.Plus.ι
 
+set_option backward.isDefEq.respectTransparency false in
 /-- Finite Tor amplitude ensures that reduction has a bounded tensor presentation;
 no flatness of the coefficient map is assumed. Source: Stacks Tags 06YY and 0GL6
 (blueprint: lem-fix-compact-support-coefficient-change).
-Proof: use lem-sf-flat-model on the bounded constructible finite-Tor input and tensor
-its bounded flat representative termwise. The result stays bounded, even for a
-nonflat quotient. K-flat localization gives the unit, which satisfies the ambient
-universal property by lem-pur-derived-change-of-rings and its tensor adjunction. -/
+Proof: apply the finite-Tor interval to the constant sheaf B in degree zero.
+The scalar/tensor isomorphism identifies its tensor with restriction of the chosen
+scalar extension. Exact scalar restriction detects vanishing of homology, so the
+scalar extension is bounded below. Package it in D+ with the scalar adjunction
+unit. Its universal bijection is precisely the adjunction Hom equivalence. This
+argument permits nonflat quotients and needs no choice of a flat representative. -/
 theorem nonempty_coefficientTensorModel_of_finiteTor
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (m n : ℕ) (hn : 1 ≤ n) (hmn : n ≤ m)
@@ -225,23 +336,71 @@ theorem nonempty_coefficientTensorModel_of_finiteTor
       (RingHom.ulift.{u + 1, u + 1} (Ideal.Quotient.factor
         (S := Padic.coefficientExtensionIdeal l E m)
         (T := Padic.coefficientExtensionIdeal l E n) (Ideal.pow_le_pow_right hmn))) T K) := by
-  sorry
+  let φ := RingHom.ulift.{u + 1, u + 1, u, u} (Ideal.Quotient.factor
+    (S := Padic.coefficientExtensionIdeal l E m)
+    (T := Padic.coefficientExtensionIdeal l E n) (Ideal.pow_le_pow_right hmn))
+  obtain ⟨a, b, _, ht⟩ := _hK.2
+  let ad := Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars T.smallEtaleTopology φ)
+  let L : DerivedCategory.Plus (Sheaf T.smallEtaleTopology
+      (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing l E n)))) :=
+    ⟨(scalarExtension φ T).obj K.obj,
+      scalarExtension_plus_of_finiteTor φ T K.obj a b ht⟩
+  refine ⟨⟨L, ObjectProperty.homMk (ad.unit.app K.obj), ?_⟩⟩
+  intro N
+  convert (ad.homEquiv K.obj N).bijective using 1
+  funext g
+  exact (ad.homEquiv_unit K.obj N g).symm
 
 end AlgebraicGeometry.Etale
 
 namespace AlgebraicGeometry.ProEtale
 
+private local instance fixedSmall (T : Scheme.{u}) : EssentiallySmall.{u + 1} T.ProEt :=
+  essentiallySmallSelf.{0, u, u + 1} _
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem tensorModel_origin_of_scalar_plus
+    {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
+    {T : Scheme.{u}}
+    (K₀ : DerivedCategory.Plus (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)))
+    (h : _root_.DerivedCategory.TStructure.t.plus ((Etale.scalarExtension φ T).obj K₀.obj))
+    {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} A))}
+    (e : (comparisonUpperStar (ModuleCat.{u + 1} A) T).mapDerivedCategory.obj K₀.obj ≅ K)
+    (M : CoefficientTensorModel φ T K) :
+    DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} B) T M.obj := by
+  let := pbcRestriction_isRightAdjoint.{u} (Scheme.ProEt.topology T) φ
+  let U := Sheaf.derivedRestrictScalars.{u} (Scheme.ProEt.topology T) φ
+  let S := pbcFixedScalarExtension.{u} (Scheme.ProEt.topology T) φ
+  let ad : S ⊣ U := Adjunction.ofIsRightAdjoint U
+  have hu : Sheaf.IsDerivedBaseChange.{u} (J := Scheme.ProEt.topology T)
+      (f := φ) (ad.unit.app K) := by
+    intro N
+    convert (ad.homEquiv K N).bijective using 1
+    funext g
+    exact (ad.homEquiv_unit K N g).symm
+  let g := (ad.homEquiv K M.obj).symm M.unit
+  have hg : ad.unit.app K ≫ U.map g = M.unit := by
+    change ad.homEquiv K M.obj g = M.unit
+    exact Equiv.apply_symm_apply _ _
+  have : IsIso g := Sheaf.IsDerivedBaseChange.isIso.{u} hu M.universal g hg
+  let i : (comparisonUpperStar (ModuleCat.{u + 1} B) T).mapDerivedCategory.obj
+      ((Etale.scalarExtension φ T).obj K₀.obj) ≅ M.obj :=
+    (pbcComparisonReduction.{u} T φ).symm.app K₀.obj ≪≫ S.mapIso e ≪≫ asIso g
+  exact (DerivedCategory.plusEtaleOrigin _ T).prop_of_iso i
+    (DerivedCategory.plusEtaleOrigin_mapDerivedCategory_obj h)
+
+set_option backward.isDefEq.respectTransparency false in
 /-- A universal tensor of a finite-Tor ordinary-etale realization remains bounded
 below of etale origin, including for nonflat finite reduction.
 Source: Stacks Tags 06YY and 0GL6
 (blueprint: lem-fix-compact-support-coefficient-change).
-Proof: choose a bounded flat representative of K₀ by lem-sf-flat-model. Its termwise
-coefficient reduction stays bounded and flat (lem-sf-reduction-flat-model). Exact
-comparison inverse image commutes with this tensor, by the representative-normalized
-ringed-topos tensor comparison. Thus its comparison pullback presents the derived
-scalar extension of K. The universal-arrow bijection identifies every presentation
-M with that bounded-below etale realization. This is the domain calculation of
-lem-sf-compact-coefficient-composition, proof step 2, without exceptional adjunctions. -/
+Proof: the finite-Tor interval and the scalar/tensor isomorphism make the chosen
+ordinary-etale scalar extension bounded below. The canonical B-linear comparison
+of scalar extension with site inverse image carries its realization to the chosen
+pro-etale scalar extension of K, using the given origin isomorphism. The scalar
+adjunction unit is universal. The unique map from that presentation to M preserves
+the unit and is invertible by the two universal properties. Transporting the
+bounded-below origin along the resulting isomorphism proves the claim. -/
 theorem CoefficientTensorModel.origin_of_etale_finiteTor
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (m n : ℕ) (hn : 1 ≤ n) (hmn : n ≤ m)
@@ -259,6 +418,8 @@ theorem CoefficientTensorModel.origin_of_etale_finiteTor
         (T := Padic.coefficientExtensionIdeal l E n) (Ideal.pow_le_pow_right hmn))) T K) :
     DerivedCategory.plusEtaleOrigin
       (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing l E n))) T M.obj := by
-  sorry
+  obtain ⟨a, b, _, ht⟩ := _hK₀.2
+  exact tensorModel_origin_of_scalar_plus _ K₀
+    (Etale.scalarExtension_plus_of_finiteTor _ T K₀.obj a b ht) _e M
 
 end AlgebraicGeometry.ProEtale
