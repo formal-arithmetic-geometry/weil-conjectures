@@ -15,8 +15,10 @@
  ],
  "proof": [
   {
-   "text": "Fix a profinite set $S$. Write $\\alpha_i:A\\to T_i$ for the given continuous ring maps. Addition and scalar multiplication on $C(S,T_i)$ are pointwise: $(a\\cdot u)(s)=\\alpha_i(a(s))u(s)$. These functions are continuous by continuity of $\\alpha_i$, addition and multiplication; the module axioms hold at every $s$. Define $F_S(u)=f\\circ u$ and $G_S(v)=g\\circ v$. Continuity follows by composition, and $A$-linearity pointwise gives $F_S(a\\cdot u)(s)=\\alpha_1(a(s))f(u(s))$ and $G_S(a\\cdot v)(s)=\\alpha_2(a(s))g(v(s))$. Thus both are $C(S,A)$-linear.",
-   "uses": [],
+   "text": "Fix a profinite set $S$ and write $\\alpha_i:A\\to T_i$ for the scalar maps. The scalar action is continuous by continuity of the scalar maps and multiplication. Use the continuous-section module objects of [def-sfb-continuous-sections-module], whose sections have pointwise action $(a\\cdot u)(s)=\\alpha_i(a(s))u(s)$. Set $F_S(u)=f\\circ u$ and $G_S(v)=g\\circ v$. Continuity follows by composition. The pointwise equalities $f(u+v)=f(u)+f(v)$ and $f(\\alpha_0(a)u)=\\alpha_1(a)f(u)$, and the same equalities for $g$, make these maps $C(S,A)$-linear. The module axioms hold by evaluation, using the ring and algebra axioms.",
+   "uses": [
+    "def-sfb-continuous-sections-module"
+   ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-resolution.proof.md",
@@ -51,11 +53,12 @@
    }
   },
   {
-   "text": "Define the postcomposition morphisms of internal modules on the specified continuous-function sheaves. Their components are the universe-lifted pointwise linear maps of step 1. Naturality is associativity of composition. For action compatibility, use the tensor-sheafification comparison to test on elementary section tensors; the equality is exactly A-linearity of f and g at each point. Step 2 gives the zero composite of the internal morphisms.",
+   "text": "The maps $F_S,G_S$ commute with precomposition, hence give abelian-sheaf maps. By [sk-def-sfb-sheaf-tensor], the source of an action is the sheafification of the objectwise tensor presheaf. By [def-weil-pbc-sheafification], maps to the target sheaf correspond uniquely to maps from that presheaf. Additive maps from a tensor product agree if they agree on pure tensors. On $a\\otimes u$, action compatibility is $f(\\alpha_0(a(s))u(s))=\\alpha_1(a(s))f(u(s))$ at each $s$, and similarly for $g$. Thus [sk-def-sfb-module-objects] gives internal maps on [def-sfb-continuous-sections-module]. Their composite is zero by step 2, since underlying maps agree on all sections.",
    "uses": [
-    "sk-def-sfb-condensed-ring",
+    "sk-def-sfb-sheaf-tensor",
     "sk-def-sfb-module-objects",
-    "sk-def-sfb-sheaf-tensor"
+    "def-sfb-continuous-sections-module",
+    "def-weil-pbc-sheafification"
    ],
    "elementary": false,
    "source": {
@@ -64,11 +67,9 @@
    }
   },
   {
-   "text": "Forget the internal module structures to abelian sheaves, then to abelian presheaves. Steps 2--4 show that every evaluation is short exact, and evaluations jointly detect presheaf exactness, monomorphisms and epimorphisms. Exact abelian sheafification sends this presheaf short exact sequence to a sheaf short exact sequence; the canonical sheafification isomorphism identifies its terms and arrows with the underlying abelian sheaf sequence. Tensoring by the scalar ring object preserves finite colimits by closedness, so the category of internal modules is abelian by lem-sfb-modobj-abelian. Its forgetful functor to abelian sheaves is faithful and preserves zero morphisms. A faithful functor between abelian categories reflects short exactness, giving the desired condensed-module conclusion with the same prescribed arrows.",
+   "text": "Take profinite sets in universe $u$ and coefficient groups in $u+1$, so the profinite site is essentially small relative to these groups. The underlying section groups of our internal modules are $C(S,T_i)$, with the same arrows as steps 1--4. Those steps verify every evaluated sequence is short exact. Apply [lem-pe-internal-module-sectionwise-short-exact] to the internal maps of step 5. It gives short exactness in condensed $\\underline A$-modules with precisely the prescribed postcomposition arrows.",
    "uses": [
-    "lem-weil-pbc-sheaf-tensor-closed",
-    "sk-def-sfb-sheaf-tensor",
-    "lem-sfb-modobj-abelian"
+    "lem-pe-internal-module-sectionwise-short-exact"
    ],
    "elementary": false,
    "source": {
@@ -78,16 +79,16 @@
   }
  ],
  "proof_deps": [
-  "sk-def-sfb-condensed-ring",
-  "sk-def-sfb-module-objects",
+  "def-sfb-continuous-sections-module",
   "sk-def-sfb-sheaf-tensor",
-  "lem-weil-pbc-sheaf-tensor-closed",
-  "lem-sfb-modobj-abelian"
+  "sk-def-sfb-module-objects",
+  "def-weil-pbc-sheafification",
+  "lem-pe-internal-module-sectionwise-short-exact"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-resolution.proof.md",
-  "place": "On the point and Triangles; retain the continuous-kernel and discrete lifting argument, then use exact abelian sheafification and faithfulness of the internal-module forgetful functor instead of the section-module equivalence."
+  "place": "On the point and Triangles; follow the landed Lean sectionsLinear/sectionsMap construction, continuous-kernel division and discrete lifting, then extract its exact abelian sheafification and module-forgetful-functor passage as a separate statement-only node."
  },
  "mathlib_searches": [
   {
@@ -210,32 +211,24 @@
   "date": "2026-10-21",
   "item": "lem-pe-profinite-sections-finite-quotient",
   "worker": "stage1",
-  "summary": "Expanded the continuous-kernel and discrete-value lifting argument into four elementary sectionwise steps and two cited sheaf/module-category steps. No statement change and no new nodes. Checked the full item against project Lean and searched Mathlib in two phrasings; available results cover cancellation, quotient descent, or special Nobeling sequences only. Reused existing general sheaf/module nodes and verified every cited statement and its hypotheses.",
-  "blueprint": "Realizes det-pe-derived-nakayama-resolution, On the point: injectivity, continuous division through the topological kernel, lifting finite discrete values, and the passage to condensed-module exactness; reusable for Triangles.",
+  "summary": "Rebased the retained O4 re-split onto the current read-clone node, preserving its statement and all completed Lean/review metadata. Extract the generic sectionwise-to-internal-module short-exactness passage as one statement-only lemma. Retain pointwise module construction, injectivity, continuous division through the kernel, discrete lifting, and the explicit sheafification/pure-tensor argument constructing the internal arrows. Re-read all current cited statements and reused the seven logged searches for the unchanged new lemma.",
+  "blueprint": "Realizes det-pe-derived-nakayama-resolution, On the point: pointwise linearity, injectivity, division through the topological kernel, discrete value lifting and its last condensed-exactness sentence. The new node carries only the last passage; Triangles reuses the same argument.",
   "tool_uses": [
    {
-    "node": "sk-def-sfb-condensed-ring",
-    "why": "Defines the profinite site and the continuous-function sheaves used in the conclusion."
-   },
-   {
-    "node": "def-weil-sheaf-of-modules-category",
-    "why": "Generic sheaf-module kernel and cokernel formulas; no node of the Nakayama unit supplies these category foundations."
+    "node": "def-sfb-continuous-sections-module",
+    "why": "The existing restricted regular module construction and pointwise section/action formulas; no new definition or section-module equivalence."
    },
    {
     "node": "sk-def-sfb-sheaf-tensor",
-    "why": "Specifies the tensor and universe convention on the profinite site, needed for the internal module comparison."
-   },
-   {
-    "node": "lem-weil-pbc-sheaf-tensor-closed",
-    "why": "Generic abelian sheafification and monoidal-local-equivalence theorem verifies the hypotheses of the internal/sectionwise comparison."
-   },
-   {
-    "node": "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
-    "why": "Generic equivalence retaining section groups and restrictions identifies the module objects with the sectionwise module sheaves."
+    "why": "The generic sheafified tensor and strong monoidal sheafification used to test action compatibility on section tensors."
    },
    {
     "node": "sk-def-sfb-module-objects",
-    "why": "Defines the module objects explicitly required by the statement."
+    "why": "Internal morphisms are action-compatible abelian-sheaf maps, exactly as required by the conclusion."
+   },
+   {
+    "node": "def-weil-pbc-sheafification",
+    "why": "Its sheafification universal property tests equality of the two internal action maps after the objectwise tensor presheaf map; this is generic sheaf infrastructure."
    }
   ]
  },
@@ -243,15 +236,17 @@
   "sk-def-sfb-condensed-ring",
   "sk-def-sfb-sheaf-tensor",
   "lem-weil-pbc-sheaf-tensor-closed",
-  "sk-def-sfb-module-objects"
+  "sk-def-sfb-module-objects",
+  "def-sfb-continuous-sections-module",
+  "def-weil-pbc-sheafification"
  ],
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-N5-e0aea6a2d",
-  "group": "N5",
+  "reviewer": "NT-cc-O4-b083c69cb",
+  "group": "O4",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-e0aea6a2d (reviewer sub-agent of L); spot-checked: I read the item in full; the delivery adds no new nodes. The statement is unchanged and correctly generalizes the 'On the point' paragraph of sk-lem-pe-derived-nakayama-resolution.proof.md (lines 5-13), which 'Triangles' (lines 24-31) reuses: injectivity, continuous division through the topological kernel, and lifting the values of the finite discrete quotient. Steps 1-4 are elementary and correct. The homeomorphism onto ker g is used only in step 3, and it is necessary: discrete Z_p mapping to p-adic Z_p with T2=0 fails without it. Discreteness of T2 is used in step 4. I read the statements of all six cited nodes. Step 5 matches them: sheaves of continuous functions; lem-weil-pbc-sheaf-tensor-closed supplies the hypothesis of def-weil-pbc-internal-abelian-sheaf-module-equivalence, which preserves sections and restrictions; and with a larger coefficient universe the site is essentially small. Step 6 uses the sectionwise kernel and the sheafified cokernel from def-weil-sheaf-of-modules-category, then transports across the equivalence. Both citations in the parent det-pe-derived-nakayama-resolution meet every hypothesis: T2 is O_E/a^r with a^rA open, or the finite quotients B_m, B_{n+m}, B_n. Edge cases checked: S empty, S a point, T2=0. I found no duplicate in the DAG and no cycle. Mathlib was searched with all four tools. The six declared tool_uses are definitions or generic sheaf foundations, so I accept them. No SGA is used. No fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O4-b083c69cb (reviewer sub-agent of L); spot-checked: FIX: one fault (B3/C4) in the new node, repaired. I read the item, the new node, every cited statement (continuous-sections-module, sheaf-tensor, module-objects, sheafification, ring-object, exact-sequence, condensed-ring, modobj-abelian, modobj-forget-faithful), the blueprint main-20261015 sk-lem-pe-derived-nakayama-resolution.proof.md (lines 5-13 'On the point' and 24-31 'Triangles'), the released re-split note, and the side-live base (6 steps, 2965 chars). This is the 12th push. The new node lem-pe-internal-module-sectionwise-short-exact is byte-identical to the 474dff2c push (sha 1d6b260f). The item adds only one sentence to step 1 (module axioms by evaluation); its statement and Lean/review records are unchanged. Re-split note met: 1 new node, proof 2931 chars. Base steps 2-4 are word for word. Base step 1 now cites def-sfb-continuous-sections-module, whose continuous-scalar hypothesis holds. Base step 5 is more explicit: by the sheafification universal property, maps out of the sheafified tensor are tested on pure tensors, and the action equation is A-linearity of f. Base step 6 (presheaf evaluation, exact sheafification, abelian Mod_R, faithful reflection) moved whole into the new node. Steps 1-4 are one-line elementary facts, so they correctly stay as steps. Hypotheses: the homeomorphism onto ker g is needed in step 3 (discrete Z_p to p-adic Z_p with T2=0 fails without it); discreteness of T2 is used in step 4. Item edge cases checked: S empty, S a point, T2=0, f=id. The new node is true via objectwise kernels/cokernels, exact sheafification, R⊗- right exact by closedness, and Mathlib ShortExact.reflects_shortExact_of_faithful (Abelian/ShortExact.lean:30). It is one-directional. Tested on R=0, zero modules, the empty site, 0→M→M→0→0 and identity-only coverings. It is statement-only and self-contained, has 7 logged searches, and is not a clause of the parent. It does not duplicate jointly-reflect-short-exact (which needs exact functors), presheaf-evaluation-exact or sheafification-exact (rg -L scan). Fault: the conclusion is short exactness 'in the abelian category Mod_R(B)' in the sense of def-weil-pbc-exact-sequence, but no stmt_dep gives that this category is abelian; the lem-sfb-modobj-abelian citation of base step 6 was dropped in the move. The fix fixes/dag/nodes/sec-proetale-coefficients/lem-pe-internal-module-sectionwise-short-exact.json cites it in the statement (its hypotheses hold by clause 2 of sk-def-sfb-sheaf-tensor) and adds it to stmt_deps. It changes only statement and stmt_deps and is identical to the 474dff2c fix. The item needs no change. Accepted tool_uses: the definitions continuous-sections-module, sheaf-tensor, module-objects and sheafification. No SGA, no cycle, the item is not dropped and its statement is not weakened. Maintainer: the item is Lean-closed and every fix since 08:20Z has been lost at promotion or landing. Land this head with its fix, or retire the note.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.Topology.ProfiniteSectionsFiniteQuotient",

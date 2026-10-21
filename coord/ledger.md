@@ -22937,3 +22937,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:33 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
 - 15:33 L: returned deliver/NY/def-per-support-condition (reviewer RETURN: I read the master order-2738 source, the delivered item, the report and the statements of every cited node. The STATEMEN)
 - 15:33 L: merged deliver/NZ/lem-sfb-continuous-algcl-open-finiteness (stage 2; reviewer PASS; parallel immutable checks)
+- 15:35 L: merged deliver/O4/lem-pe-profinite-sections-finite-quotient (reviewer FIX; after a return; new nodes: 1)
