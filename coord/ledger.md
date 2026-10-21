@@ -19881,3 +19881,8 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:38 L: merged deliver/NM/lem-weil-pbc-ringed-slice-comparisons-shift (reviewer PASS; first push; new nodes: 0)
 - 2026-10-21T03:38:38Z L: superseded stage-1 delivery Q18/lem-pe-completion-triangle-comparison at 0421aa63473fba22b99a448cc093831ca7a0d4a4; current completion retained; packet archived at refs/superseded/Q18/lem-pe-completion-triangle-comparison/0421aa63473fba22b99a448cc093831ca7a0d4a4; stale return retired.
 - 2026-10-21T03:38:39Z L: superseded stage-1 delivery Q38/det-thm-sfb-proper-base-change-finite at ae28f688b4dff8bc6cc4908503e6321f3cbb5482; current completion retained; packet archived at refs/superseded/Q38/det-thm-sfb-proper-base-change-finite/ae28f688b4dff8bc6cc4908503e6321f3cbb5482; stale return retired.
+- 03:38 L: merged deliver/Q139/lem-sfb-condensed-subfield-basis (stage 2; reviewer PASS; parallel immutable checks)
+- 03:38 L: merged deliver/Q36/lem-sfb-monoidal-finite-free-transport (stage 2; reviewer FIX; parallel immutable checks)
+- 03:38 L: merged deliver/Q140/lem-sfb-internal-scalar-extension-finite-presentation (stage 2; reviewer PASS; parallel immutable checks)
+- 03:38 L: merged deliver/Q46/lem-sfb-sheaf-pushforward-generator-comparison (stage 2; reviewer PASS; parallel immutable checks)
+- 03:38 L: merged deliver/NA/lem-sfb-internal-extension-inverse-image (stage 2; reviewer PASS; parallel immutable checks)

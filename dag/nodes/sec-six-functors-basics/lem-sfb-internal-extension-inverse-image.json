@@ -220,5 +220,24 @@
   "group": "O3",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O3-0f0d2d9a1 (reviewer sub-agent of L); spot-checked: PASS, no changes. The delivery is a one-level split of lem-sfb-internal-extension-inverse-image with no new nodes and the statement unchanged. There is no repair note for this item, it is not on a dropped list, and no SGA is used. The blueprint source (the final clause of lem-sfb-extend-to-qlbar-constructible.proof.md: tensoring local finite presentations on strata) needs this comparison, and the actual rings F(R),F(S) are used. I read every cited statement and recomputed each step. Step 1: the hypotheses of Ext in change-of-scalars (2) hold on Z (braided, coequalizers, tensor preserving colimits, F(R) commutative by the braided lemma). Step 2: F(q) is a coequalizer, by the Hom-chain through the g^*⊣g_* adjunction, natural in the first variable. Step 3: F(a)t1=t0a' (naturality) and F(b)t1=t0b' (associativity axiom and the transported action) both hold, so F(q)t0 and q' coequalize the same pair and give inverse maps c,d. Step 4: linearity, by cancelling the epi 1⊗q', which is a coequalizer by sheaf-tensor (2); I checked δ(1⊗F(q)t0)=F(q)t0(μ⊗1)α^{-1}. Step 5: naturality, both sides equal F(q_N)μ_{S,N}(1⊗Fu) after q'_M. Edge cases checked: identity g and φ, zero module or ring, non-flat Z→Z/2. No duplicate: def-sfb-pull-iso is a condensed coefficient change, def-sfb-module-upper-star only uses Ext∘mapMod, and the restricted-transport and finite-free transport lemmas differ. I accept the tool_use of lem-sfb-finite-upper-star-braided; it is already in stmt_deps and needed for the commutativity of F(R)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.InternalExtensionInverseImage",
+  "declaration": "AlgebraicGeometry.ProEtale.internal_extension_inverse_image",
+  "file": "lean/Sheaf/AlgebraicGeometry/InternalExtensionInverseImage.lean",
+  "statement": "theorem internal_extension_inverse_image {Z X : Scheme.{u}} (g : Z ⟶ X) (R S : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj R] [MonObj S] [IsCommMonObj R] [IsCommMonObj S] (φ : R ⟶ S) [IsMonHom φ] : Nonempty (Mod.extendScalars φ ⋙ (upperStar Ab.{u + 1} g).mapMod S ≅ (upperStar Ab.{u + 1} g).mapMod R ⋙ Mod.extendScalars ((upperStar Ab.{u + 1} g).map φ))",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The natural isomorphism is stated using the recorded internal module transport and balancing-coequalizer extension, over the actual upperStar images of both arbitrary commutative ring objects. Its components give the displayed object formula. Exact comparisons found in BoundedConstructibleExtendScalars and TateTwistOneLocalLine are private helpers, not externally usable declarations; no second construction of inverse image, tensor or scalar extension is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b2ca99830",
+  "group": "NA",
+  "result": "pass",
+  "note": "Statement matches the node clause by clause: g arbitrary; R,S arbitrary commutative MonObj on Sheaf(ProEt X, Ab.{u+1}); IsMonHom φ; F = upperStar with recorded monoidal_upperStar/laxBraided_upperStar; mapMod; Mod.extendScalars φ and extendScalars (F.map φ) over the actual F(R),F(S); orientation correct, component at M = object formula. Monoidal instance found (sheafMonoidalCategory) is rfl-equal to Sheaf.monoidalCategory = sfbSheafTensorStructure.monoidal. Nonempty(natural iso) accepted: the node says 'there is a natural isomorphism', not canonical, and the only citer (lem-sfb-extend-to-qlbar-constructible) uses only iso invariance of finite presentation. The same comparison exists only as private helpers (pullbackExtendScalarsIso in BoundedConstructibleExtendScalars, pullExtendIso in TateTwistOneLocalLine), not citable → no H4. Statement record verbatim, docstrings have source, blueprint id and the 5 proof steps, lines ≤87, sorry only. nt_compile --json clean 4.7 s. Advisory: plain import Sheaf.CategoryTheory.SheafTensor is not needed (compiles without it, not in the transitive closure) but harmless as a stmt_dep module; the RingPresheaf import is needed. Stage 3 can reuse the private pullbackExtendScalarsIso construction."
  }
 }

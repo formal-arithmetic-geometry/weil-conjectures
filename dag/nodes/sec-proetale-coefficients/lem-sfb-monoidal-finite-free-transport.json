@@ -208,5 +208,24 @@
   "group": "NO",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-80e14f5ee (reviewer sub-agent of L); spot-checked: I read the item in full. The delivery creates no new nodes. I checked it against lem-sfb-subfield-flat.proof.md sentence 3 (main-20261015) and unit sk-prop-sfb-cartesian-coefficients clause 2. The statement change is justified: 'commutative ring object' in an unbraided monoidal category is ill-typed (sk-def-sfb-ring-object defines commutativity only when the category is braided), and dropping it strengthens the item without weakening any conclusion. The sole citer, lem-sfb-subfield-flat step 2, supplies exactly the stated hypotheses: strong monoidal, additive, finite biproducts and tensor additive. It uses only the isomorphism F_X≅E_X^n and the coordinate maps, so it stays valid. Step 3 takes from def-sfb-modobj-transport only what its statement says: the transported multiplication and action, and that P of a linear map is linear. Strong monoidal gives the needed lax structure. I checked steps 1, 2 and 4–6 by hand: the componentwise action's unit and associativity laws, linearity of ι_i (which uses id⊗0=0 from tensor additivity), the Kronecker and sum identities after applying P, linearity of finite sums, αβ=id and βα=id, and both coordinate formulas. Rank 0 (P(M) is zero) and rank 1 with P=id also check out. All proof_deps are definitions, so there is no route issue, no tool_uses and no cycle. Grep of dag/nodes and the blueprint for mapMod, finite free and biproduct found no duplicate; lem-sfb-modobj-abelian needs an abelian ambient category. No SGA is cited. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.MonoidalFiniteFreeTransport",
+  "declaration": "CategoryTheory.Functor.monoidalFiniteFreeTransport",
+  "file": "lean/Sheaf/CategoryTheory/MonoidalFiniteFreeTransport.lean",
+  "statement": "theorem monoidalFiniteFreeTransport {C : Type u₁} [Category.{v₁} C] [Preadditive C] [MonoidalCategory C] [HasFiniteBiproducts C] [MonoidalPreadditive C] {D : Type u₂} [Category.{v₂} D] [Preadditive D] [MonoidalCategory D] [HasFiniteBiproducts D] [MonoidalPreadditive D] (P : C ⥤ D) [P.Additive] [P.Monoidal] (R : C) [MonObj R] (M : Mod C R) (n : ℕ) (θ : (⨁ fun _ : Fin n => Mod.regular R) ≅ M) : ∃ α : (⨁ fun _ : Fin n => Mod.regular (P.obj R)) ≅ (P.mapMod R).obj M, (∀ i : Fin n, (biproduct.ι (fun _ : Fin n => Mod.regular (P.obj R)) i).hom ≫ α.hom.hom = P.map ((biproduct.ι (fun _ : Fin n => Mod.regular R) i).hom ≫ θ.hom.hom)) ∧ (∀ i : Fin n, α.inv.hom ≫ (biproduct.π (fun _ : Fin n => Mod.regular (P.obj R)) i).hom = P.map (θ.inv.hom ≫ (biproduct.π (fun _ : Fin n => Mod.regular R) i).hom)) ∧ (∀ i j : Fin n, P.map ((biproduct.ι (fun _ : Fin n => Mod.regular R) j).hom ≫ θ.hom.hom) ≫ P.map (θ.inv.hom ≫ (biproduct.π (fun _ : Fin n => Mod.regular R) i).hom) = if i = j then 𝟙 (P.obj R) else 0) ∧ (∑ i : Fin n, P.map (θ.inv.hom ≫ (biproduct.π (fun _ : Fin n => Mod.regular R) i).hom) ≫ P.map ((biproduct.ι (fun _ : Fin n => Mod.regular R) i).hom ≫ θ.hom.hom)) = 𝟙 (P.obj M.X)",
+  "branch": "newtargets-dag",
+  "by": "Q36",
+  "date": "2026-10-21",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-4b5c46a66"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4b5c46a66",
+  "group": "Q36",
+  "result": "fix",
+  "note": "Statement matches node clause by clause: C,D preadditive monoidal with HasFiniteBiproducts+MonoidalPreadditive, P Additive+Monoidal, arbitrary MonObj R, M : Mod C R, n:ℕ, θ iso of ⨁ regular in Mod; α : ⨁ regular(P R) ≅ mapMod M with α ι'_i = P(θι_i), π'_i α⁻¹ = P(π_i θ⁻¹), plus correct transported Kronecker/sum identities. n=0, zero ring, noncommutative R and universes all covered. mapMod/Obj instance consistent with def-sfb-modobj-transport; ModuleObjects.Abelian biproduct instance needs no Abelian. No public duplicate (side helpers private and need Abelian/closed). Docstrings, sorry-only, verbatim lean.statement, report sections OK. FIX (H9): global `attribute [instance] hasBinaryBiproducts_of_finite_biproducts` leaks to importers; made it [local instance] as Mathlib does; statement unchanged; report paragraph updated. nt_compile --json: delivered 4.8 s clean, fixed 3.6 s clean."
  }
 }

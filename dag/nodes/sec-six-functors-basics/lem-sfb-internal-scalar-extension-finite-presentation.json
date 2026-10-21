@@ -255,5 +255,23 @@
   "group": "N7",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-495bf1569 (reviewer sub-agent of L); spot-checked: I read the whole item and all 13 cited nodes. There are no new nodes. The statement is unchanged and true. It is the second sentence of main-20261015 lem-sfb-extend-subfield-constructible.proof.md (tensoring a local finite presentation, by right exactness), and it fits the parent's uses in steps 2 and 3 (commutative ring objects E_U, F_U and the coefficient isomorphisms). Small cases tested: m=0, n=0, f=0, S=0, and the non-flat Z→Z/2 with M=Z/2, which gives the zero map on Z/2 with cokernel Z/2. Step 1: the V-small pro-étale skeleton and Ab at universe V meet the hypotheses of lem-sfb-grothendieck-sheafification, so Sh is abelian. Additivity of the tensor follows from its preserving colimits. lem-sfb-modobj-abelian then applies to R and to S, which discharges the hypotheses of def-sfb-modobj-extension and of the mixed unitor. Step 3: at M=R the two coequalizer arrows of def-sfb-modobj-extension are exactly P⊗_R R in lem-sfb-mixed-bimodule-right-unitor with P=S and ρ=μ_S(S⊗φ). That node is the Mathlib leaf Bimod.rightUnitorBimod (Bimod.lean:764), which takes distinct monoids X and Y, so this is correct. Steps 4 and 5: lem-sfb-modobj-extension-right-exact preserves the initial object (so F sends zero morphisms to zero), finite coproducts and the coequalizer of (f,0). The conjugation by e_m and e_n is written out with existence and uniqueness. Steps 2 and 6 are genuinely elementary. No flatness, left exactness or SGA is used, and nothing is circular. I accept the three declared tool uses (grothendieck-sheafification, modobj-abelian, extension-right-exact) as generic black boxes. Maintainer note: lem-sfb-internal-extension-finite-presentation (unsplit) states the same result. Q26 created it the same day for lem-sfb-extend-to-qlbar-constructible, and its review finished at 11:16, after this item's Q53 review at 11:13. Under the stages/1-dag §2 rule the later node should be merged into this item and its citer repointed. Its 'more precisely' clause (Ext R^k≅S^k, coker of the conjugate of Ext f) is proved in steps 3–5 here but is not part of this item's statement; the merge should check whether the citer uses it."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.BoundedConstructibleExtendScalars",
+  "declaration": "AlgebraicGeometry.ProEtale.fp_extend",
+  "statement": "lemma fp_extend {M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R} (h : Mod.IsFinitelyPresented R M) : Mod.IsFinitelyPresented S ((Mod.extendScalars φ).obj M)",
+  "branch": "newtargets-dag",
+  "by": "Q140",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Existing public lemma, confirmed in the live server source by scompile.py --source. Its section parameters are arbitrary X : Scheme.{u}, R S : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}, MonObj R, MonObj S, IsCommMonObj R, φ : R ⟶ S, IsMonHom φ. The surrounding omit [IsCommMonObj S] removes only commutativity of S; the node is its immediate specialization to commutative S, permitted by the existing-more-general-theorem ruling in coord/STATE.md (2026-10-11 14:36 UTC). The conclusion uses exactly the recorded Mod.IsFinitelyPresented and Mod.extendScalars notions. No flatness or exactness assumption occurs; the later bounded-constructible theorem has an extra hypothesis that fp_extend does not inherit."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-63904f3e8",
+  "group": "Q140",
+  "result": "pass",
+  "note": "Lean-only existing:true binding to the fully proved AlgebraicGeometry.ProEtale.fp_extend (Sheaf.AlgebraicGeometry.BoundedConstructibleExtendScalars:102-107). Only the item's lean field differs from side-live. Clauses match: X any Scheme.{u}; site Scheme.ProEt with Ab.{u+1}; tensor instance equals the recorded sfbSheafTensorStructure tensor by rfl (probe); R, S MonObj with R commutative; S's commutativity is omitted, a harmless generalisation; φ IsMonHom; Mod.IsFinitelyPresented is exactly def-sfb-finitely-presented-module (Fin-n biproducts of the regular module, cokernel in Mod); conclusion via the recorded Mod.extendScalars; no flatness or finite-limit hypothesis. Edge cases m=0, n=0, zero rings, φ=𝟙, non-flat ℤ→ℤ/2 covered. Axioms: propext, Classical.choice, Quot.sound only. nt_compile --json probe of the node's exact hypotheses closed by fp_extend R S φ h: clean, 4.0 s. Advisories: stmt_dep def-sfb-finitely-presented-module has lean:null (its upstream audit names the Mod.IsFinitelyPresented used here); unsplit duplicate lem-sfb-internal-extension-finite-presentation should be merged into this item."
  }
 }

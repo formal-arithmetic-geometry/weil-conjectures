@@ -204,5 +204,34 @@
   "group": "NN",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-0625a3754 (reviewer sub-agent of L); spot-checked: I read the item, its 4 steps, all 4 cited statements and the blueprint source (main-20261015 lem-sfb-pushforward-comp-monoidal.proof.md, second sentence). The delivery adds no new nodes. The statement is retained and matches its unique citer, parent step 1. There is no repair or re-split note, no SGA, and no cycle: the generator node's proof_deps do not lead back to the item. Step 1: the mate tensor rightAdjointLaxMonoidal is U((ε⊗ε)δ)η, δ=a(η⊗η), and the triangle identities give m=η=t; the unit is Φ(1)=η_1=u. δ=a(η⊗η) is the canonical comparison of lem-sfb-braided-sheaf-tensor-generators, constructed so in its step 7; I accept reading it from 'canonical' as a definitional unpacking. Step 2: the transport along ε_C R is checked. U(ε^{-1})=η_P, so ε^{-1}⊗ε^{-1}=δ cancels μ^{a_C}, giving μ_R=ε_H a_C(r t_D), and the unit gives e_R=ε a_C(r u_D). Types are checked. Step 3: U(ε a(w))η=w by naturality and the triangle identity gives both equations. Step 4: the Hom bijections give uniqueness. Edge cases tested: E=id, a=U=id, A=0, and Ab with a non-trivial topology, where nothing evaluates the sheaf tensor. Uses outside the unit are of Mathlib leaves only, so they are automatic. No duplicates found by a DAG scan."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SheafPushforwardGeneratorComparison",
+  "declaration": "CategoryTheory.Sheaf.generatorRestriction_comparison",
+  "declarations": [
+   "CategoryTheory.Sheaf.BraidedTensorGenerators.tensorGenerator",
+   "CategoryTheory.Sheaf.BraidedTensorGenerators.unitGenerator",
+   "CategoryTheory.Sheaf.generatorRestriction",
+   "CategoryTheory.Sheaf.generatorRestrictionCounitIso",
+   "CategoryTheory.Sheaf.generatorRestrictionLaxMonoidal",
+   "CategoryTheory.Sheaf.generatorRestrictionTensorComparison",
+   "CategoryTheory.Sheaf.generatorRestrictionUnitComparison",
+   "CategoryTheory.Sheaf.generatorRestriction_comparison"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SheafPushforwardGeneratorComparison.lean",
+  "statement": "theorem generatorRestriction_comparison (TC : BraidedTensorGenerators J A) (TD : BraidedTensorGenerators K A) (E : C ⥤ D) (hE : ∀ F : Sheaf K A, Presheaf.IsSheaf J (E.op ⋙ F.obj)) : (∀ F G : Sheaf K A, TC.tensorGenerator ((generatorRestriction E hE).obj F) ((generatorRestriction E hE).obj G) ≫ (generatorRestrictionTensorComparison TC TD E hE F G).hom = Functor.whiskerLeft E.op (TD.tensorGenerator F G) ∧ ∀ h : TC.monoidal.tensorObj ((generatorRestriction E hE).obj F) ((generatorRestriction E hE).obj G) ⟶ (generatorRestriction E hE).obj (TD.monoidal.tensorObj F G), TC.tensorGenerator ((generatorRestriction E hE).obj F) ((generatorRestriction E hE).obj G) ≫ h.hom = Functor.whiskerLeft E.op (TD.tensorGenerator F G) → h = generatorRestrictionTensorComparison TC TD E hE F G) ∧ (TC.unitGenerator ≫ (generatorRestrictionUnitComparison TC TD E hE).hom = Functor.whiskerLeft E.op TD.unitGenerator ∧ ∀ h : TC.monoidal.tensorUnit ⟶ (generatorRestriction E hE).obj TD.monoidal.tensorUnit, TC.unitGenerator ≫ h.hom = Functor.whiskerLeft E.op TD.unitGenerator → h = generatorRestrictionUnitComparison TC TD E hE)",
+  "branch": "newtargets-dag",
+  "by": "Q46",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Uses the prescribed BraidedTensorGenerators packages on both sites. All helper maps are constructed: actual sheafification units cast along the prescribed object equalities, coefficient-sheaf restriction, its counit iso, and the composite lax structure using rightAdjointLaxMonoidal followed by LaxMonoidal.transport. The theorem gives both generator equations and uniqueness of both sheaf extensions; no evaluation/tensor preservation assumption or type-valued continuity is added."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-82097e330",
+  "group": "Q46",
+  "result": "pass",
+  "note": "Single new module SheafPushforwardGeneratorComparison; node differs from side-live only in lean; deps byte-identical, stmt_deps unchanged. Clauses match: Type w sites with Category.{w}, closed braided Grothendieck A with free uA and no symmetry, TC/TD BraidedTensorGenerators packages (pinned, reviewed), generators = toSheafify cast by the package's eqToHom, hE exactly A-sheaf preservation (no IsContinuous), R = ObjectProperty.lift of the whiskering (U_C R = r U_D defeq), lax = LaxMonoidal.transport along isoWhiskerLeft R (asIso counit_C) of U_D rightAdjointLaxMonoidal ⋙ pointwise r ⋙ TC sheafification. pp.explicit probe confirms TC/TD instances, no Mathlib Sheaf.monoidalCategory. Both equations in diagrammatic order plus the unique-extension clauses (node's equivalent form, not stronger). Only the theorem is sorry; docstrings with source/blueprint/4 steps; statement verbatim; 8 declarations present; no name clash in side-live. nt_compile --json clean 2.8 s; error-injected control confirms a real compile. Advisory: SiteCoveringAxioms import unused in the signatures."
  }
 }

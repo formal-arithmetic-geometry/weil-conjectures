@@ -192,5 +192,23 @@
   "group": "NL",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-a41aa3c40 (reviewer sub-agent of L); spot-checked: I read the item in full against main-20261015 lem-sfb-subfield-flat.proof.md, first two sentences. The delivery has no new nodes, and the statement, stmt_deps and blueprint fields are byte-identical to the version Q43 created. Step 1 is coordinate continuity: the Mathlib leaf lem-sfb-finite-dimensional-linear-map-continuous (FiniteDimension.lean:283, hypotheses checked) applies over Q_ell, which is complete with |ell| = 1/ell. The topologies are metric and restricted from Qbar_ell, and E-linear maps are Q_ell-linear. Step 2: beta is continuous and the two inverse identities hold. Step 3: by the section description of sk-def-sfb-condensed-ring, beta_S and c_S are natural and inverse. Step 4: the internal actions come from the sheafification universal property, and unit and associativity follow from strong monoidality in sk-def-sfb-sheaf-tensor 1. Step 5: linearity on pure tensors extends by uniqueness. Edge cases checked: E=F, a basis (b), S empty, a one-point S; no integral basis is assumed. Not a duplicate: det-prop-sfb-cartesian-coefficients-finite-free is the O_E-basis analogue and would be circular to cite; lem-weil-pbc-finite-dimensional-linear-homeomorphism is an alternative, not required. The route uses only definitions and Mathlib leaves, so no tool_uses entry is needed; no SGA; no cycle; proof_deps equals the union of the uses. The item has no repair note and is not dropped. Advisory for the maintainer: the total proof is 3588 characters, above the parent re-split note's aim of well under 3000, but every step is under 1000 characters and the content is bookkeeping."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.CondensedSubfieldBasis",
+  "declaration": "Profinite.exists_condensedSubfieldBasisIso",
+  "file": "lean/Sheaf/FieldTheory/CondensedSubfieldBasis.lean",
+  "statement": "theorem exists_condensedSubfieldBasisIso (ℓ : ℕ) [Fact ℓ.Prime] (E F : PadicAlgCl.FiniteIntermediateField ℓ) [Algebra E F] [IsScalarTower E F (PadicAlgCl ℓ)] (n : ℕ) (b : Module.Basis (Fin n) E F) : ∃ c : F ≃ₜ (Fin n → E), (∀ (s : F) (i : Fin n), c s i = b.coord i s) ∧ (∀ a : Fin n → E, c.symm a = ∑ i, algebraMap E F (a i) * b i) ∧ ∃ (hι : Continuous (algebraMap E F)) (e : (Mod.comap ((sheafCompose (coherentTopology Profinite.{u}) (forget₂ RingCat.{u + 1} Ab.{u + 1})).map (continuousMapRingSheafMap (algebraMap E F) hι))).obj (Mod.regular (continuousMapRingObj F)) ≅ Mod.finiteFree (continuousMapRingObj E) n), (∀ (S : Profinite.{u}) (i : Fin n) (f : C(S, F)) (x : S), (((e.hom ≫ biproduct.π (fun _ : Fin n ↦ Mod.regular (continuousMapRingObj E)) i).hom.hom.app (op S) (ULift.up f)).down x) = b.coord i (f x)) ∧ (∀ (S : Profinite.{u}) (f : Fin n → C(S, E)) (x : S), ((e.inv.hom.hom.app (op S) (∑ i, (biproduct.ι (fun _ : Fin n ↦ Mod.regular (continuousMapRingObj E)) i).hom.hom.app (op S) (ULift.up (f i)))).down x) = ∑ i, algebraMap E F (f i x) * b i)",
+  "branch": "newtargets-dag",
+  "by": "Q139",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-02c7149d6",
+  "group": "Q139",
+  "result": "pass",
+  "note": "Node vs Lean checked clause by clause. ℓ prime. E,F are PadicAlgCl.FiniteIntermediateField: finite subextensions of Q̄_ℓ with the restricted topology. E⊆F via Algebra+IsScalarTower, which forces the inclusion; any h:E≤F supplies both, and the map equals padicSubfieldRingObjMap ℓ h by rfl (probe compiled rc 0). Module.Basis (Fin n) E F with b.coord. c : F≃ₜ(Fin n→E) is pinned to the coordinates, and its inverse to the basis sum. Coordinate continuity is a conclusion, not a hypothesis. e : Mod.comap(F̲ regular) ≅ Mod.finiteFree E̲ n, with e.hom pinned via biproduct projections and e.inv pinned on every section via biproduct injections, at every profinite S. Same shape as the private continuousBasisSheafIso template. Edge cases n=0, E=F, empty S, one-point S, ℓ=2 and universe u are fine. No duplicate: only private template helpers; point-basis and O_E bases are other notions. lean.statement is verbatim; the only proof is sorry; docstrings carry the source place, blueprint tag and five steps; the report has both sections; the node is otherwise unchanged vs side-live. nt_compile --json rc 0 (17.1 s / 14.5 s), clean. Advisory: two transitively redundant public imports."
  }
 }

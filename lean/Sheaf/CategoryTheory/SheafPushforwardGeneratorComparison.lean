@@ -1,0 +1,162 @@
+/-
+Copyright (c) 2026 The SHEAF contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: SHEAF group Q46
+-/
+module
+
+public import Mathlib.CategoryTheory.Monoidal.Functor
+public import Mathlib.CategoryTheory.Sites.Sheafification
+public import Sheaf.CategoryTheory.SiteCoveringAxioms
+public import Sheaf.CategoryTheory.BraidedSheafTensorGenerators
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Functor
+
+/-!
+# The transported sheaf restriction maps on sheafification generators
+
+Source: blueprint `sec-proetale-coefficients`,
+`sk-def-sfb-module-pushforward-pullback/lem-sfb-pushforward-comp-monoidal.proof.md`,
+second sentence (blueprint: lem-sfb-sheaf-pushforward-generator-comparison).
+
+The restriction only assumes preservation of sheaves with the given coefficients.
+Its lax structure is constructed using adjunction mates and counit transport.
+-/
+
+@[expose] public section
+
+set_option autoImplicit false
+
+universe w uA
+
+open CategoryTheory CategoryTheory.MonoidalCategory
+
+namespace CategoryTheory.Sheaf
+
+variable {C D : Type w} [Category.{w} C] [Category.{w} D]
+  {J : GrothendieckTopology C} {K : GrothendieckTopology D}
+  {A : Type uA} [Category.{w} A] [Abelian A] [IsGrothendieckAbelian.{w} A]
+  [MonoidalCategory A] [MonoidalClosed A] [BraidedCategory A]
+  [HasWeakSheafify J A] [HasWeakSheafify K A]
+
+/-- The actual tensor sheafification unit, transported along the prescribed object
+identity. Source: blueprint pushforward-composition proof, second sentence
+(blueprint: lem-sfb-sheaf-pushforward-generator-comparison). -/
+noncomputable def BraidedTensorGenerators.tensorGenerator
+    (T : BraidedTensorGenerators J A) (F G : Sheaf J A) :
+    F.obj ⊗ G.obj ⟶ (T.monoidal.tensorObj F G).obj :=
+  toSheafify J (F.obj ⊗ G.obj) ≫
+    (eqToHom (T.tensorObj_eq F G).symm).hom
+
+/-- The actual unit sheafification unit, transported along the prescribed object
+identity. Source: blueprint pushforward-composition proof, second sentence
+(blueprint: lem-sfb-sheaf-pushforward-generator-comparison). -/
+noncomputable def BraidedTensorGenerators.unitGenerator
+    (T : BraidedTensorGenerators J A) :
+    𝟙_ (Cᵒᵖ ⥤ A) ⟶ T.monoidal.tensorUnit.obj :=
+  toSheafify J (𝟙_ (Cᵒᵖ ⥤ A)) ≫ (eqToHom T.tensorUnit_eq.symm).hom
+
+/-- Restriction on the full subcategory of sheaves when precomposition preserves
+these sheaves. Source: blueprint pushforward-composition proof, second sentence
+(blueprint: lem-sfb-sheaf-pushforward-generator-comparison). -/
+def generatorRestriction (E : C ⥤ D)
+    (hE : ∀ F : Sheaf K A, Presheaf.IsSheaf J (E.op ⋙ F.obj)) :
+    Sheaf K A ⥤ Sheaf J A :=
+  ObjectProperty.lift _
+    (sheafToPresheaf K A ⋙ (Functor.whiskeringLeft _ _ A).obj E.op) hE
+
+/-- The composite inclusion, restriction and sheafification is identified with
+restriction by the sheafification counit. Source: blueprint pushforward-composition
+proof, second sentence (blueprint: lem-sfb-sheaf-pushforward-generator-comparison). -/
+noncomputable def generatorRestrictionCounitIso (E : C ⥤ D)
+    (hE : ∀ F : Sheaf K A, Presheaf.IsSheaf J (E.op ⋙ F.obj)) :
+    sheafToPresheaf K A ⋙ (Functor.whiskeringLeft _ _ A).obj E.op ⋙
+      presheafToSheaf J A ≅ generatorRestriction E hE :=
+  Functor.isoWhiskerLeft (generatorRestriction E hE)
+      (asIso (sheafificationAdjunction J A).counit) ≪≫
+    (generatorRestriction E hE).rightUnitor
+
+/-- The specified lax structure: inclusion has the adjunction-mate structure,
+restriction the pointwise strong structure, and sheafification its prescribed
+strong structure; transport their composite along the counit isomorphism.
+Source: blueprint pushforward-composition proof, second sentence
+(blueprint: lem-sfb-sheaf-pushforward-generator-comparison). -/
+@[instance_reducible]
+noncomputable def generatorRestrictionLaxMonoidal
+    (TC : BraidedTensorGenerators J A) (TD : BraidedTensorGenerators K A)
+    (E : C ⥤ D) (hE : ∀ F : Sheaf K A, Presheaf.IsSheaf J (E.op ⋙ F.obj)) :
+    @Functor.LaxMonoidal (Sheaf K A) _ TD.monoidal (Sheaf J A) _ TC.monoidal
+      (generatorRestriction E hE) := by
+  letI := TC.monoidal
+  letI := TD.monoidal
+  letI := TC.sheafification.toMonoidal
+  letI := TD.sheafification.toMonoidal
+  letI := (sheafificationAdjunction K A).rightAdjointLaxMonoidal
+  exact Functor.LaxMonoidal.transport (generatorRestrictionCounitIso E hE)
+
+/-- Tensor comparison of the specified counit-transported lax restriction.
+Source: blueprint pushforward-composition proof, second sentence
+(blueprint: lem-sfb-sheaf-pushforward-generator-comparison). -/
+noncomputable def generatorRestrictionTensorComparison
+    (TC : BraidedTensorGenerators J A) (TD : BraidedTensorGenerators K A)
+    (E : C ⥤ D) (hE : ∀ F : Sheaf K A, Presheaf.IsSheaf J (E.op ⋙ F.obj))
+    (F G : Sheaf K A) :
+    TC.monoidal.tensorObj ((generatorRestriction E hE).obj F)
+      ((generatorRestriction E hE).obj G) ⟶
+        (generatorRestriction E hE).obj (TD.monoidal.tensorObj F G) :=
+  @Functor.LaxMonoidal.μ (Sheaf K A) _ TD.monoidal (Sheaf J A) _ TC.monoidal
+    (generatorRestriction E hE) (generatorRestrictionLaxMonoidal TC TD E hE) F G
+
+/-- Unit comparison of the specified counit-transported lax restriction.
+Source: blueprint pushforward-composition proof, second sentence
+(blueprint: lem-sfb-sheaf-pushforward-generator-comparison). -/
+noncomputable def generatorRestrictionUnitComparison
+    (TC : BraidedTensorGenerators J A) (TD : BraidedTensorGenerators K A)
+    (E : C ⥤ D) (hE : ∀ F : Sheaf K A, Presheaf.IsSheaf J (E.op ⋙ F.obj)) :
+    TC.monoidal.tensorUnit ⟶ (generatorRestriction E hE).obj TD.monoidal.tensorUnit :=
+  @Functor.LaxMonoidal.ε (Sheaf K A) _ TD.monoidal (Sheaf J A) _ TC.monoidal
+    (generatorRestriction E hE) (generatorRestrictionLaxMonoidal TC TD E hE)
+
+/-- The transported tensor and unit comparisons extend the restricted actual
+sheafification generators, uniquely. Source: blueprint pushforward-composition
+proof, second sentence (blueprint: lem-sfb-sheaf-pushforward-generator-comparison).
+
+Proof. 1. Expand the adjunction-mate tensor of inclusion as the adjoint of the
+inverse sheafification tensorator followed by the tensor of counits. The generator
+package identifies that inverse tensorator with sheafification of the tensor of
+units; the triangle identities reduce the mate to the actual tensor generator.
+The unit mate similarly equals the unit generator (`lem-sfb-monoidal-adjunction-mates`,
+`lem-sfb-braided-sheaf-tensor-generators`, `def-weil-pbc-sheafification`).
+2. Expand composite lax comparisons and counit transport. The inverse counits
+on the inputs become the adjunction units under inclusion. Their tensor cancels
+the strong sheafification tensorator, leaving the extension `ε_H a(v)`
+(in right-to-left notation), where `v` is the restricted tensor generator.
+The unit comparison gives the same extension formula for the unit generator.
+3. Naturality of the sheafification unit and the triangle identity say that this
+extension precomposed with the actual unit is `v`, giving both displayed equations.
+4. Apply the two generator Hom bijections on the source site to get uniqueness
+of both extensions. All equalities are in presheaf Hom sets; evaluation is never
+asserted to preserve sheaf tensor products. -/
+theorem generatorRestriction_comparison
+    (TC : BraidedTensorGenerators J A) (TD : BraidedTensorGenerators K A)
+    (E : C ⥤ D) (hE : ∀ F : Sheaf K A, Presheaf.IsSheaf J (E.op ⋙ F.obj)) :
+    (∀ F G : Sheaf K A,
+      TC.tensorGenerator ((generatorRestriction E hE).obj F)
+          ((generatorRestriction E hE).obj G) ≫
+        (generatorRestrictionTensorComparison TC TD E hE F G).hom =
+          Functor.whiskerLeft E.op (TD.tensorGenerator F G) ∧
+      ∀ h : TC.monoidal.tensorObj ((generatorRestriction E hE).obj F)
+          ((generatorRestriction E hE).obj G) ⟶
+            (generatorRestriction E hE).obj (TD.monoidal.tensorObj F G),
+        TC.tensorGenerator ((generatorRestriction E hE).obj F)
+            ((generatorRestriction E hE).obj G) ≫ h.hom =
+          Functor.whiskerLeft E.op (TD.tensorGenerator F G) →
+        h = generatorRestrictionTensorComparison TC TD E hE F G) ∧
+    (TC.unitGenerator ≫ (generatorRestrictionUnitComparison TC TD E hE).hom =
+        Functor.whiskerLeft E.op TD.unitGenerator ∧
+      ∀ h : TC.monoidal.tensorUnit ⟶
+          (generatorRestriction E hE).obj TD.monoidal.tensorUnit,
+        TC.unitGenerator ≫ h.hom = Functor.whiskerLeft E.op TD.unitGenerator →
+          h = generatorRestrictionUnitComparison TC TD E hE) := by
+  sorry
+
+end CategoryTheory.Sheaf
