@@ -23214,3 +23214,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:37 L: merged deliver/NY/lem-sfb-root-tower-puncture-invariance (stage 2; reviewer PASS; parallel immutable checks)
 - 17:37 L: returned deliver/F5/Sheaf.Paper.CompletedOperationTowerSubstitution (reviewer RETURN: (reviewer C-d7fca, head d7fca5d6c) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.CompletedOpera)
 - 17:39 L: merged deliver/NW/lem-sfb-lattice-supported-hom-finite-comparison (stage 2; reviewer PASS; parallel immutable checks)
+- 17:41 L: merged deliver/Q04/lem-sfb-condensed-derived-restriction-calculus (reviewer FIX; first push; new nodes: 1)

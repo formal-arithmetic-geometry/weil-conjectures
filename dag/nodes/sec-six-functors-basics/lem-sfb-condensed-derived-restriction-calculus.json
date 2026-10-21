@@ -15,9 +15,203 @@
   "def-weil-size-convention",
   "def-sp-grothendieck-abelian"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work in one coefficient universe containing the small profinite site and the section sets $C(S,J)$ for the groups used. The presheaf $\\underline J$ is a group sheaf: maps into $J$ descend along finite jointly surjective maps of profinite spaces because their finite disjoint union is a surjection between compact Hausdorff spaces. It is closed (compact subsets have compact, hence closed, images), hence is a quotient map; therefore the descended functions are continuous. Convert internal modules to sectionwise ring-sheaf modules. Apply the action-site presentation with $K=\\underline J$. It identifies $\\mathcal A_R(J)$ with module sheaves on the small ringed site $C_K$, creates kernels and sheafified cokernels on the underlying site, and detects zero objects. Consequently it creates exactness. The small ringed-site Grothendieck theorem applies to $R_K$, and also to the base ring sheaf $R$; no profiniteness of $J$ is required here.",
+   "uses": [
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "lem-sfb-internal-action-site-presentation",
+    "lem-pur-ringed-site-grothendieck-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A5, section-unbounded; Modules on Sites Tags 03DA and 03DB; action-site specialization"
+   }
+  },
+  {
+   "text": "Write $T_J$ for trivial inflation. Define $\\Gamma_JM(S)$ to consist of the sections fixed after every $V\\to S$. This is an $R(S)$-submodule stable under restriction. It is a sheaf: glued sections remain fixed since the equality $g\\cdot m|_V=m|_V$ can be checked on the base changes of a covering of $S$. An equivariant $h:T_JA\\to M$ lands in this subsheaf, since $g h(a|_V)=h(a|_V)$; conversely composition with its inclusion is equivariant. These two operations are inverse and natural, proving the specified adjunction and its normalization. Trivial inflation and group restriction leave the underlying modules and maps unchanged, hence are additive and exact by step 1. Scalar restriction does the same to underlying abelian sheaves and their kernels and sheafified cokernels, hence is also exact. This constructs the datum of [def-sfb-condensed-action-module], rather than assuming its existence.",
+   "uses": [
+    "def-sfb-condensed-action-module",
+    "lem-sfb-internal-action-site-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent expansion of the internal derived-restriction input"
+   }
+  },
+  {
+   "text": "Apply the bounded-below injective-resolution theorem on $C_K$ and the Grothendieck K-injective existence theorem. Thus equivariant injective resolutions compute $F_J:=R\\Gamma_J$ on bounded-below objects, and K-injective resolutions compute it on all ordinary derived objects. Termwise invariants preserve sums of maps and homotopies, so their descent on K-injective representatives is additive; the right-derived-functor theorem makes $F_J$ triangulated. Exact $T_J,u^*,s$ descend termwise with the canonical signed shifts. The canonical derived adjunction is $D(T_J)\\dashv F_J$; denote its unit and counit by $\\eta_J,\\varepsilon_J$. It is the adjunction of the original fixed-section Hom bijections, not a newly chosen adjunction on isomorphic functors. Its unit and counit commute with the canonical K-injective shifts.",
+   "uses": [
+    "lem-sc-bounded-below-injective-resolution",
+    "lem-sfb-grothendieck-k-injective",
+    "def-sfb-right-derived-functor",
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-pc-derived-adjoint-functors",
+    "lem-sp-canonical-right-derived-adjunction-shift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 05TI, 070K, 09T5, 0A8D; injectives.tex Tag 079P"
+   }
+  },
+  {
+   "text": "For $u:H\\to J$ use the geometric restriction $q_u$ and projections $p_J,p_H$ of [lem-sfb-action-topos-geometric-restriction]. In the derived categories put $U=D(u^*)$, $L_J=D(T_J)$ and $L_H=D(T_H)$, so $UL_J=L_H$ with the specified localization comparisons. Define\n$$b_{u,N}=F_H(U\\varepsilon_{J,N})\\circ\\eta_{H,F_JN}:F_JN\\longrightarrow F_HUN.$$\nIts transpose under $L_H\\dashv F_H$ is $U\\varepsilon_{J,N}$. It is natural by naturality of the unit and counit. In the underived adjunction the very same transpose is the inclusion $\\Gamma_JN\\hookrightarrow\\Gamma_Hu^*N$. On $D^+$: bounded-below injective resolutions are K-injective [lem-sc-bounded-below-injective-resolution], so $F_J,F_H$ preserve $D^+$ and, with their units (invertible on these resolutions), restrict to bounded-below right derived functors, identified with $\\mathbf R\\Gamma_J,\\mathbf R\\Gamma_H$ compatibly with the comparison units $\\alpha$ by clause (3) of [lem-weil-pbc-right-derived-plus-injective]. At a bounded-below injective $P$ the counit of $L_J\\dashv F_J$ is the class of the termwise counit $T_J\\Gamma_JP\\to P$ (step 3), which is the counit identity of [lem-trf-bounded-below-derived-adjunction]; as $\\alpha_P$ is invertible and every object of $D^+$ is such a $QP$, the restricted adjunctions are the canonical bounded-below ones. Apply [lem-trf-bounded-below-derived-mate-model] with $L=T_J$, $R=\\Gamma_J$, $L'=T_H$, $R'=\\Gamma_H$, $G=\\mathrm{id}$, $H=u^*$ and $\\sigma$ the identity $T_H=u^*T_J$; its underived mate is the inclusion. The canonical bounded-below derived-mate comparison says precisely that the displayed mate is induced by that inclusion and the two derived-functor units; equivalently, resolving $N\\to I$ and $u^*N\\to J'$, it is $\\Gamma_JI\\to\\Gamma_Hu^*I\\to\\Gamma_HJ'$. On arbitrary complexes the mate formula gives the total derived restriction with this normalization, using the canonical derived adjunctions.",
+   "uses": [
+    "lem-sfb-action-topos-geometric-restriction",
+    "lem-trf-bounded-below-derived-mate-model",
+    "lem-pc-derived-adjoint-functors",
+    "lem-sc-bounded-below-injective-resolution",
+    "lem-weil-pbc-right-derived-plus-injective",
+    "lem-trf-bounded-below-derived-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 09T5 and the canonical derived-mate construction; bounded-below normalization from lem-trf-bounded-below-derived-mate-model"
+   }
+  },
+  {
+   "text": "The expression for $b_u$ is a composite of whiskered units and counits of exact-left derived adjunctions. They commute with the fixed integer shifts by [lem-sp-canonical-right-derived-adjunction-shift], and this property survives composition and whiskering. Given a triangle $A\\to B\\to C\\xrightarrow{\\delta}A[1]$, naturality at all four arrows, followed by the shift equation at the last one, gives a morphism of the two image triangles; in particular $b_{A}[1]F_J(\\delta)=F_HU(\\delta)b_C$ after the canonical shift identifications. For a module $M$, left exactness gives $H^0(\\Gamma_JI)=\\Gamma_JM$ from $0\\to M\\to I^0\\to I^1$, so the resolution formula in step 4 is the invariant inclusion in degree zero. For $u=\\mathrm{id}$ and trivial groups, its transpose is the identity-adjunction counit, and the triangle identity gives $b_u=1$.",
+   "uses": [
+    "lem-sp-canonical-right-derived-adjunction-shift",
+    "lem-weil-pbc-commshift-nattrans-comp-whisker",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0A8D (canonical adjoint shift); elementary last-arrow and degree-zero checks"
+   }
+  },
+  {
+   "text": "For $\\varphi:R\\to R'$ write $s_0$ for scalar restriction on base modules, $s_J$ for scalar restriction on $J$-actions, and $E_0,E_J$ for their derived left adjoints (derived scalar extension). These are ringed-topos operations on the identity underlying topoi. The commuting square of ringed morphisms in [lem-sfb-action-topos-geometric-restriction] gives the canonical monoidal comparison\n$$E_JL_J^R\\cong L_J^{R'}E_0.$$\nTake its conjugate under the composite derived adjunctions to obtain\n$$d_J:F_J^R s_J\\xrightarrow{\\sim}s_0F_J^{R'}.$$\nThe ringed derived-composition theorem supplies this conjugate and its computation-unit normalization even though $s_J$ need not preserve injectives. In degree zero its two underived right adjoints agree as the same fixed-section submodule: $\\Gamma_{R,J}s_J=s_0\\Gamma_{R',J}$. For $f:N\\to s_JN'$ define $c_J=d_{J,N'}\\circ F_J^R(f)$. This construction uses derived extension of scalars, so places no flatness assumption on $\\varphi$. The scalar pullback-composition comparison is degreewise on flat-term K-flat representatives and hence commutes with their signed shifts. The scalar derived adjunctions have shift-compatible units and counits by [lem-weil-pbc-derived-adjunction-shift]. Expressing $d_J$ by these units, comparison and counits therefore also makes it shift compatible, and thus a morphism on image triangles.",
+   "uses": [
+    "lem-sfb-action-topos-geometric-restriction",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-weil-pbc-derived-adjunction-shift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0D6D, 0D6E, 07A6 and 0FPI, applied to the identity coefficient morphisms and p_J"
+   }
+  },
+  {
+   "text": "Here is the coefficient/restriction equality, retaining its actual arrows. For every $X\\in D(R)$ the scalar and trivial-inflation adjunctions identify\n$$\\operatorname{Hom}(X,s_0F_H^{R'}U'N')=\\operatorname{Hom}(L_H^RX,s_HU'N'),$$\nwhere the right-hand category is that of derived $R$-linear $H$-actions and $U'=D(u^*)$ for $R'$-actions. This identification uses $E_HL_H^R=L_H^{R'}E_0$ and $E_H\\dashv s_H$. Take $X=F_J^RN$. Transpose each of the two proposed composites using this bijection. The defining counit equation for $d_H$ or $d_J$, followed by that for $b_u$, turns both into the same morphism\n$$L_H^RF_J^RN=UL_J^RF_J^RN\\xrightarrow{U\\varepsilon^R_{J,N}}UN\\xrightarrow{U(f)}Us_JN'=s_HU'N'.$$\nThis is also the mate-pasting identity for the commuting scalar and group squares. Injectivity of the Hom bijection proves $c_Hb_u(N)=s_0(b_u(N'))c_J$. The argument takes place in the derived category, prior to taking cohomology.",
+   "uses": [
+    "lem-weil-pbc-mate-pasting",
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0E46, 0E47 and 0FPI; the written transposition verifies the particular square"
+   }
+  },
+  {
+   "text": "The base module category and the action-site module category have the ordinary K-flat derived symmetric monoidal structures of [lem-sf-ringed-derived-closed-symmetric-monoidal]. By [lem-sfb-ringed-derived-monoidal-comparisons], $L_J$ is strong monoidal, with the actual diagonal-action tensor comparison, and all scalar and group pullback comparisons above are monoidal. Transfer the inverse tensor comparison across $L_J\\dashv F_J$. This gives the lax pairing $\\mu_J:F_JA\\otimes_R^{\\mathbf L}F_JB\\to F_J(A\\otimes_R^{\\mathbf L}B)$ and unit $e_J:R[0]\\to F_JR[0]$. Its transpose is the tensor of counits\n$$L_J(F_JA\\otimes^{\\mathbf L}F_JB)\\cong L_JF_JA\\otimes^{\\mathbf L}L_JF_JB\\xrightarrow{\\varepsilon_{J,A}\\otimes\\varepsilon_{J,B}}A\\otimes^{\\mathbf L}B.$$\nThe mate theorem gives the associativity and both unit identities, and the monoidal-unit/counit theorem gives their compatibility with the actual adjunction. Apply $F_J$ to the regular-ring multiplication and compose with $\\mu_J$: this is the asserted unital derived cup product on $C_R(J)$.",
+   "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-sfb-monoidal-adjunction-mates",
+    "lem-sfb-monoidal-adjunction-unit-counit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0FPT, 07A4 and 07A6; lax structure obtained by the explicit tensor-of-counits transpose"
+   }
+  },
+  {
+   "text": "Group restriction preserves this pairing. Indeed transpose the two maps from $F_JA\\otimes^{\\mathbf L}F_JB$ to $F_HU(A\\otimes^{\\mathbf L}B)$ under $L_H\\dashv F_H$. The path through $b_{u,A\\otimes B}\\mu_J$ and the path through $\\mu_H(b_{u,A}\\otimes b_{u,B})$ both become $U(\\varepsilon_{J,A}\\otimes\\varepsilon_{J,B})$, using $UL_J=L_H$ and the monoidal comparison for $U$. The unit equation follows by the same transpose with the regular ring. This proves the binary-product and unit equations for $b_u$ on $C_R(J)$, with the specified multiplication, rather than only equality on cohomology.",
+   "uses": [
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-sfb-monoidal-adjunction-unit-counit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4 and the tensor-of-counits transpose of step 8"
+   }
+  },
+  {
+   "text": "For coefficient change use the strong monoidal scalar extensions $E_0,E_J$ and their lax right adjoints $s_0,s_J$. The comparison $E_JL_J^R\\cong L_J^{R'}E_0$ is monoidal, and its conjugate $d_J$ is compatible with the lax pairings: expand its definition as a unit, the inverse monoidal left comparison, and a counit. Units and counits are monoidal by [lem-sfb-monoidal-adjunction-unit-counit]; composing their tensor and unit equations therefore gives those for $d_J$. The regular-ring map $R[0]\\to s_JR'[0]$ is an algebra map, since on pure tensors $\\varphi(xy)=\\varphi(x)\\varphi(y)$ and $\\varphi(1)=1$. Thus $c_J=d_JF_J(\\varphi)$ is an algebra map to $s_0C_{R'}(J)$, equipped with the lax scalar-restriction product. Binary product compatibility gives compatibility with every ordered finite cup product by induction on its length; length zero is the unit case. Nothing permutes the factors, so the usual graded signs are retained.",
+   "uses": [
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-sfb-monoidal-adjunction-mates",
+    "lem-sfb-monoidal-adjunction-unit-counit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4, 0D6D and 0FPI; monoidal conjugate expanded through its unit and counit"
+   }
+  },
+  {
+   "text": "For an additive sheaf-group map $a:\\underline J\\to(R,+)$ define $E_a=R\\oplus R$ with $j(x,y)=(x+a(j)y,y)$. The action equation follows from $a(jk)=a(j)+a(k)$; the inverse uses $-a(j)$. The maps $i(x)=(x,0)$ and $p(x,y)=y$ are equivariant with trivial action at the endpoints. Their underlying split exact sequence is therefore exact in the action category by step 1. Use the canonical short-exact-sequence triangle of [lem-weil-pbc-complex-ses-triangle]. Let $\\partial_a:R[0]\\to R[1]$ be its derived connecting arrow. Define\n$$[a]=\\bigl(F_J(\\partial_a)\\circ e_J\\bigr)[-1]:R[-1]\\to C_R(J),$$\nusing the canonical shift comparison. This is exactly the connecting class evaluated at $1$. For its inhomogeneous degree-one representative take the underlying splitting $t(y)=(0,y)$. Its equivariance defect is $jt(1)-t(1)=(a(j),0)$, giving the prescribed positive cocycle $a$. This computes the extension's cocycle; it makes no assertion that underived continuous cochains compute the derived functor.",
+   "uses": [
+    "lem-sfb-internal-action-site-presentation",
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-weil-pbc-complex-ses-triangle"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-formulated degree-one restriction input; explicit split-extension construction"
+   }
+  },
+  {
+   "text": "Restriction sends this exact sequence literally to $E_{a\\circ u}$, with the same inclusion, projection and splitting. Exact functor/short-exact-sequence triangle compatibility identifies its boundary with the restricted boundary. Apply the morphism of derived triangles from step 5: its connecting square and the unit equation give $b_u[a]=[a\\circ u]$. For scalar change the map of exact sequences has endpoint maps $\\varphi$ and middle map $(x,y)\\mapsto(\\varphi(x),\\varphi(y))$. Equivariance holds because $\\varphi(x+a(j)y)=\\varphi(x)+\\varphi(a(j))\\varphi(y)$; its target is $s_JE_{\\varphi\\circ a}$. Apply the triangulated functors and the canonical scalar comparison of step 6 to this diagram. The connecting square gives $c_J[a]=[\\varphi\\circ a]$, since its quotient map takes $1$ to $1$. Together with steps 9 and 10 this proves the asserted identities for all ordered products of the classes, including the empty product. For $a=0$ the splitting is equivariant and the class is zero; trivial groups and the zero ring give the same formulas.",
+   "uses": [
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-weil-pbc-complex-ses-triangle",
+    "lem-weil-pbc-exact-functor-ses-triangle-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), explicit restriction and scalar maps of the unipotent extensions, with their connecting squares"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-sfb-internal-action-site-presentation",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "def-sfb-condensed-action-module",
+  "lem-sc-bounded-below-injective-resolution",
+  "lem-sfb-grothendieck-k-injective",
+  "def-sfb-right-derived-functor",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-pc-derived-adjoint-functors",
+  "lem-sp-canonical-right-derived-adjunction-shift",
+  "lem-sfb-action-topos-geometric-restriction",
+  "lem-trf-bounded-below-derived-mate-model",
+  "lem-weil-pbc-commshift-nattrans-comp-whisker",
+  "lem-weil-pbc-mate-pasting",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-derived-adjunction-shift",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-sfb-monoidal-adjunction-mates",
+  "lem-sfb-monoidal-adjunction-unit-counit",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-weil-pbc-exact-functor-ses-triangle-image",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "lem-trf-bounded-below-derived-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), formal derived-restriction infrastructure; agent proof using the cited Stacks construction and existing action-site theorem, not an assertion in Bhatt-Scholze section 4.3."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,10 +247,38 @@
    "results": "[leanfinder] OK 8 hit(s); Rep.indToCoindAux_comm, Rep.resIndAdjunction_homEquiv_apply, Rep.coindResAdjunction_homEquiv_apply, Rep.resIndAdjunction_unit_app, Rep.invariantsAdjunction_homEquiv_apply_hom, Rep.resIndAdjunction_homEquiv_symm_apply, Rep.coindResAdjunction_homEquiv_symm_apply, Rep.invariantsAdjunction_homEquiv_symm_apply_hom",
    "date": "2026-10-22",
    "verdict": "no match: the hits give ordinary Rep restriction, sheaf-section naturality or general derived shift machinery, not internal condensed-group action categories and the normalized restriction/cup/scalar calculus"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived invariants of internal condensed group actions restriction and coefficient change preserve connecting classes and cup products",
+   "results": "8 hits: groupCohomology.H1InfRes_X₃, groupCohomology.H1InfRes, groupCohomology.H1InfRes_X₂, groupCohomology.H1InfRes_f, groupCohomology.H1InfRes_X₁, groupCohomology.H1InfRes_g, groupCohomology.H1InfRes_exact, groupCohomology.mapShortComplexH1_comp",
+   "date": "2026-10-21",
+   "verdict": "no match: discrete group cohomology and topological-module cochains do not state the internal condensed-ring theorem; generic derived-shift facts are cited via existing nodes"
+  },
+  {
+   "tool": "grep",
+   "query": "(condensed|Condensed).*(invariant|groupCohomology|rightDerived)|(invariant|groupCohomology).*(condensed|Condensed)",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: discrete group cohomology and topological-module cochains do not state the internal condensed-ring theorem; generic derived-shift facts are cited via existing nodes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived fixed point functors in internal condensed modules restriction along a group homomorphism and change of coefficient ring commute",
+   "results": "8 hits: groupCohomology.resNatTrans, ContinuousCohomology.homogeneousCochains, ContinuousCohomology.invariants, Condensed.free, groupHomology.coresNatTrans, ContAction.resComp, LightCondensed.ihomPoints, CondensedMod.hom_naturality_apply",
+   "date": "2026-10-21",
+   "verdict": "no match: discrete group cohomology and topological-module cochains do not state the internal condensed-ring theorem; generic derived-shift facts are cited via existing nodes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"CommShift\"",
+   "results": "12 hits: CategoryTheory.Functor.IsRightDerivedFunctor.instCommShiftTotalRightDerived, CategoryTheory.Functor.IsRightDerivedFunctor.commShift, CategoryTheory.Functor.IsRightDerivedFunctor.natTrans_commShift, CategoryTheory.NatTrans.CommShift.rightDerivedNatTrans, CategoryTheory.NatTrans.CommShift.of_isRightDerivedFunctor, CategoryTheory.Functor.IsRightDerivedFunctor.comp_map_commShiftIso_hom_app, CategoryTheory.Functor.IsRightDerivedFunctor.comp_map_commShiftIso_hom_app_assoc, CategoryTheory.Functor.instCommShiftPlusRightDerivedFunctorPlusInt",
+   "date": "2026-10-21",
+   "verdict": "no match: discrete group cohomology and topological-module cochains do not state the internal condensed-ring theorem; generic derived-shift facts are cited via existing nodes"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-dense-lattice-derived-invariants-comparison",
@@ -80,5 +302,104 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-condensed-derived-restriction-calculus",
+  "worker": "stage1",
+  "summary": "Split the unchanged statement through the existing action-site presentation, canonical derived adjunctions and monoidal mates; one new statement-only node supplies geometric restriction for sheaves of groups. Explicitly computed the coefficient square and the positive unipotent extension class, without assuming scalar restriction preserves injectives or any continuous-cochain acyclicity.",
+  "blueprint": "Paragraph (3) of det-thm-sf-ctf-stability-direct-images: internal invariants and restriction infrastructure used by the dense-lattice input; no blueprint node states this auxiliary theorem. The inherited nearest blueprint ancestor is null, as blueprint_refs.py ancestor reports.",
+  "tool_uses": [
+   {
+    "node": "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "why": "Generic Internal abelian module sheaves as sectionwise module sheaves supplies the explicitly cited categorical/resolution input; the unit has no replacement theorem for this formal tool."
+   },
+   {
+    "node": "lem-pur-ringed-site-grothendieck-abelian",
+    "why": "Generic Sheaves of modules on a small ringed site are Grothendieck abelian supplies the explicitly cited categorical/resolution input; the unit has no replacement theorem for this formal tool."
+   },
+   {
+    "node": "lem-sc-bounded-below-injective-resolution",
+    "why": "Generic Bounded-below complexes admit bounded-below K-injective resolutions supplies the explicitly cited categorical/resolution input; the unit has no replacement theorem for this formal tool."
+   },
+   {
+    "node": "lem-sfb-grothendieck-k-injective",
+    "why": "Generic Grothendieck abelian categories have K-injective resolutions supplies the explicitly cited categorical/resolution input; the unit has no replacement theorem for this formal tool."
+   },
+   {
+    "node": "def-sfb-right-derived-functor",
+    "why": "Generic Right derived functor on the unbounded derived category supplies the explicitly cited categorical/resolution input; the unit has no replacement theorem for this formal tool."
+   },
+   {
+    "node": "lem-pc-right-derived-functor-triangulated",
+    "why": "Generic The unbounded right derived functor is triangulated supplies the explicitly cited categorical/resolution input; the unit has no replacement theorem for this formal tool."
+   },
+   {
+    "node": "lem-pc-derived-adjoint-functors",
+    "why": "Generic Derived functors of adjoint functors are adjoint supplies the explicitly cited categorical/resolution input; the unit has no replacement theorem for this formal tool."
+   },
+   {
+    "node": "lem-sp-canonical-right-derived-adjunction-shift",
+    "why": "Generic Canonical unbounded right-derived adjunctions commute with canonical shifts supplies the explicitly cited categorical/resolution input; the unit has no replacement theorem for this formal tool."
+   },
+   {
+    "node": "lem-trf-bounded-below-derived-mate-model",
+    "why": "Generic Bounded-below derived mates are computed by underived mates and comparison units supplies the explicitly cited categorical/resolution input; the unit has no replacement theorem for this formal tool."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic Monoidal and adjunction normalization of derived ringed-topos comparisons supplies the explicitly cited categorical/resolution input; the unit has no replacement theorem for this formal tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Generic Canonical composition comparison for unbounded ringed-topos direct images supplies the explicitly cited categorical/resolution input; the unit has no replacement theorem for this formal tool."
+   },
+   {
+    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "why": "Generic The derived category of a ringed site is closed symmetric monoidal supplies the explicitly cited categorical/resolution input; the unit has no replacement theorem for this formal tool."
+   },
+   {
+    "node": "lem-weil-pbc-derived-adjunction-shift",
+    "why": "Generic canonical ringed-topos derived adjunction shifts control scalar extension even for a nonflat ring map; the unit has no substitute."
+   },
+   {
+    "node": "lem-weil-pbc-complex-ses-triangle",
+    "why": "The generic canonical triangle of an exact sequence and its naturality/exact-functor compatibility fix the extension-class boundaries; this is a formal tool, not a different unit route."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-ses-triangle-image",
+    "why": "The generic canonical triangle of an exact sequence and its naturality/exact-functor compatibility fix the extension-class boundaries; this is a formal tool, not a different unit route."
+   },
+   {
+    "node": "lem-trf-bounded-below-derived-adjunction",
+    "why": "Generic (Lean-closed derivedPlus) canonical bounded-below derived adjunction with its unit/counit identities; needed to identify the restricted K-injective adjunction with the one in the mate-model node; no node of the unit gives it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-sc-bounded-below-injective-resolution",
+  "lem-sfb-grothendieck-k-injective",
+  "def-sfb-right-derived-functor",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-pc-derived-adjoint-functors",
+  "lem-sp-canonical-right-derived-adjunction-shift",
+  "lem-trf-bounded-below-derived-mate-model",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-weil-pbc-derived-adjunction-shift",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-weil-pbc-exact-functor-ses-triangle-image",
+  "lem-trf-bounded-below-derived-adjunction"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q04-aec3c3378",
+  "group": "Q04",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q04-aec3c3378 (reviewer sub-agent of L); spot-checked: Read in full: the item, its 12 steps and every cited statement; the new node lem-sfb-action-topos-geometric-restriction; and the main-20261015 direct-images proof paragraph (3). That paragraph is only about proper/open direct images, so the agent-origin label and the WANTED lines are correct. The item statement is unchanged and not weakened: J is any topological group, R any commutative condensed ring, there is no flatness assumption, and the degree-one normalization is the positive one. No SGA source is cited. This is a first delivery, so no re-split note applies.\n\nBatch-5 flag: lem-trf-bounded-below-derived-mate-model is accepted. It is a generic bounded-below derived-mate comparison. Its closure has 18 nodes; the only other sec-trace-formula node is lem-trf-bounded-below-derived-adjunction, a generic derivedPlus adjunction that is Lean-closed. No thm-trf, Poincaré or nt- node is reachable, so it is neither an assumed statement nor part of a proof of one.\n\nSteps checked:\n- 1: C(S,J) is a sheaf because a closed surjection of compact Hausdorff spaces is a quotient map. The action-site presentation gives a Grothendieck category and creates exactness.\n- 2: the invariant subsheaf and both transposes are elementary.\n- 6–7: d_J is the conjugate of the composite iso P_{h_J}P_{p_J} ≅ P_{p'_J}P_{h_0}, so it is an iso and uses no flatness. Both coefficient-square composites transpose to U(f)∘Uε_J.\n- 8–10: the lax pairing comes from monoidal mates, with monoidal unit and counit, and the result is an algebra map.\n- 11–12: E_a is a valid action since a(jk) = a(j)+a(k), with defect (a(j),0). Naturality of the triangle gives b_u[a] = [a∘u] and c_J[a] = [φ∘a].\n\nThe new node is true. The right adjoint of restriction is coinduction, p_K^{-1} is trivial action with invariants as right adjoint, and the module pullbacks are the identity on underlying modules. I tested trivial K, θ = id, L = 1 and the zero ring. It is self-contained. It is not a duplicate: I compared it with internal-action-site-presentation (module level only), product-action-inflation, geometric-module-transport and the exc/sc representation nodes. It does not restate a clause of the item.\n\nFIX (C4/E1), step 4: the mate-model node is stated for the bounded-below adjunctions, but the item's F_J is the unbounded K-injective functor. I added the bridge: F_J preserves D^+; its restriction is the bounded-below derived functor compatibly with the units α (clause 3 of lem-weil-pbc-right-derived-plus-injective); and the counit on bounded-below injectives is the termwise counit, which is the counit identity of lem-trf-bounded-below-derived-adjunction. I also wrote out how the mate-model node is applied (L = T_J, R = Γ_J, G = id, H = u*, σ = id). Added to uses and proof_deps: lem-sc-bounded-below-injective-resolution, lem-weil-pbc-right-derived-plus-injective, lem-trf-bounded-below-derived-adjunction (also added as a tool use). All other declared tool uses are generic and accepted.; 1 file(s) fixed by the reviewer"
  }
 }
