@@ -11,9 +11,68 @@
   "def-weil-l-adic-coefficient-extension",
   "sk-def-sfb-condensed-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Define $e(q)=\\iota(q)$, with codomain restricted to $E_0=\\operatorname{im}(\\iota)$. It preserves $0,1,+,\\cdot$ because $\\iota$ is a ring embedding. For $x\\in E_0$, membership in this image gives a $q\\in\\mathbf Q_\\ell$ with $\\iota(q)=x$, and injectivity of $\\iota$ makes $q$ unique. Define $r(x)=q$. Then $r(e(q))=q$ and $e(r(x))=x$. Applying $e$ to $r(x+y)$ and $r(x)+r(y)$ gives $x+y$ in both cases, so injectivity gives equality; the same calculation proves preservation of multiplication, zero and one. Thus $e$ and $r$ are inverse ring homomorphisms.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/det-existence-localizing.proof.md",
+    "place": "Opening paragraph: the Z_l and Q_l cases are O_E and E with E=Q_l; explicit elementary verification of the structural-image identifications."
+   }
+  },
+  {
+   "text": "The subspace norm and the hypothesis that the norm of $\\Omega$ extends the base norm give $\\lVert e(q)\\rVert=\\lVert\\iota(q)\\rVert=\\lVert q\\rVert$. Consequently $d(e(q),e(q'))=\\lVert\\iota(q-q')\\rVert=\\lVert q-q'\\rVert=d(q,q')$. Substituting $q=r(x)$ and $q'=r(x')$ gives $d(r(x),r(x'))=d(x,x')$. Thus $e$ and $r$ are isometries. They are continuous: for every $\\epsilon>0$, choose $\\delta=\\epsilon$ in the definition of continuity, and use these distance equalities.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/det-existence-localizing.proof.md",
+    "place": "Opening paragraph: the Z_l and Q_l cases are O_E and E with E=Q_l; explicit elementary verification of the structural-image identifications."
+   }
+  },
+  {
+   "text": "The ring of integers in [def-weil-l-adic-coefficient-extension] is the unit ball; here the item specifies its norm to be the restricted norm. Norm preservation gives $\\lVert q\\rVert\\le1$ if and only if $\\lVert e(q)\\rVert\\le1$. Hence restrict $e$ to $e^\\circ:\\mathbf Z_\\ell\\to\\mathcal O_{E_0}$ and $r$ to $r^\\circ:\\mathcal O_{E_0}\\to\\mathbf Z_\\ell$. Their inverse identities and ring identities are the identities of step 1 restricted to the subrings. Their distances are unchanged by passing to the subspace metrics, so the equalities of step 2 show that both restrictions are isometries and continuous. This proves the asserted integral isometric ring isomorphism.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/det-existence-localizing.proof.md",
+    "place": "Opening paragraph: the Z_l and Q_l cases are O_E and E with E=Q_l; explicit elementary verification of the structural-image identifications."
+   }
+  },
+  {
+   "text": "Use the continuous-ring-map construction of [sk-def-sfb-condensed-ring] on each of $e,r,e^\\circ,r^\\circ$. For a profinite set $S$, the resulting maps are $a\\mapsto e\\circ a$, $b\\mapsto r\\circ b$ and their integral versions. These are continuous functions because the scalar maps are continuous. Pointwise, $e(a+a')=e(a)+e(a')$, $e(aa')=e(a)e(a')$, $e(1)=1$, and the analogous identities hold for the other three scalar maps; hence the section maps preserve the ring operations. Moreover $r\\circ(e\\circ a)=a$ and $e\\circ(r\\circ b)=b$, with the identical formulas for $r^\\circ,e^\\circ$. Thus the two pairs of condensed ring morphisms are inverse. Their underlying abelian-sheaf morphisms preserve multiplication and unit by these same pointwise identities, so they are the asserted isomorphisms of commutative ring objects.",
+   "uses": [
+    "sk-def-sfb-condensed-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/det-existence-localizing.proof.md",
+    "place": "Opening paragraph: the Z_l and Q_l cases are O_E and E with E=Q_l; explicit elementary verification of the structural-image identifications."
+   }
+  },
+  {
+   "text": "Restriction in [sk-def-sfb-condensed-ring] is precomposition. For a continuous $u:T\\to S$ and $a:S\\to\\mathbf Q_\\ell$, both $(e\\circ a)\\circ u$ and $e\\circ(a\\circ u)$ send $t$ to $e(a(u(t)))$. Replacing $e$ by $r,e^\\circ,r^\\circ$ proves the required naturality also for both inverses. Finally let $j:\\mathbf Z_\\ell\\to\\mathbf Q_\\ell$ and $j_0:\\mathcal O_{E_0}\\to E_0$ be the inclusions. For $z\\in\\mathbf Z_\\ell$, $j_0(e^\\circ(z))=\\iota(z)=e(j(z))$, by the definition as a restriction. Postcomposing a section $a:S\\to\\mathbf Z_\\ell$ gives $j_0\\circ e^\\circ\\circ a=e\\circ j\\circ a$, proving the stated compatibility of the integral and rational condensed isomorphisms.",
+   "uses": [
+    "sk-def-sfb-condensed-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/det-existence-localizing.proof.md",
+    "place": "Opening paragraph: the Z_l and Q_l cases are O_E and E with E=Q_l; explicit elementary verification of the structural-image identifications."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sfb-condensed-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/det-existence-localizing.proof.md",
+  "place": "Opening paragraph: the Z_l and Q_l cases are O_E and E with E=Q_l; explicit elementary verification of the structural-image identifications."
+ },
  "mathlib_searches": [
   {
    "tool": "loogle",
@@ -56,10 +115,52 @@
    "results": "{\"t\": \"2026-10-21T03:29:55Z\", \"tool\": \"leanfinder\", \"query\": \"The p-adic rational and integral coefficient condensed rings agree with the condensations of the minimal finite subextension and its ring of integers in a fixed algebraic closure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PadicAlgCl\", \"PadicAlgCl.coe_eq\", \"PadicAlgCl.instCoePadic\", \"PadicComplex.coe_eq\", \"PadicComplexInt.integers\", \"PadicComplex.instAlgebraPadic\", \"PadicInt.algebra\", \"PadicAlgCl.isAlgebraic\"], \"digest\": \"0ec54baf41f717f5\"}",
    "date": "2026-10-21",
    "verdict": "No match for the full statement. botEquiv and norm_extends give scalar ingredients; the unit-ball restriction and the natural condensed ring-object identifications still require construction. WithVal concerns the completion of a valued rational field, not this bottom intermediate field."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The bottom intermediate field of a normed field extension is isometrically ring isomorphic to the base field and this induces compatible condensed ring isomorphisms on the field and its unit ball",
+   "results": "{\"t\": \"2026-10-21T03:49:20Z\", \"tool\": \"leanfinder\", \"query\": \"The bottom intermediate field of a normed field extension is isometrically ring isomorphic to the base field and this induces compatible condensed ring isomorphisms on the field and its unit ball\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IntermediateField.botEquiv\", \"IntermediateField.botEquiv_def\", \"IntermediateField.botEquiv_symm\", \"IntermediateField.coe_algebraMap_over_bot\", \"IntermediateField.topEquiv_apply\", \"IntermediateField.topEquiv\", \"IntermediateField.topEquiv_symm_apply_coe\", \"Subfield.topEquiv\"], \"digest\": \"e2fbdfd03a81a225\"}",
+   "date": "2026-10-21",
+   "verdict": "No match for the full item. IntermediateField.botEquiv (Adjoin/Defs.lean:207) and PadicAlgCl.norm_extends (Complex.lean:81) supply scalar ingredients, while the unit-ball restriction, ring-object realization and compatibility square require the explicit argument given here. TopCat.commRingYoneda concerns TopCat-valued presheaves and does not state these coefficient identifications. Padic.withValRingEquiv concerns a valuation completion, not the structural-image subfield."
+  },
+  {
+   "tool": "grep",
+   "query": "botEquiv|norm_extends|continuousMapRingObj",
+   "results": "{\"t\": \"2026-10-21T03:49:35Z\", \"tool\": \"grep\", \"query\": \"botEquiv|norm_extends|continuousMapRingObj\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Algebra/Subalgebra/Lattice.lean\", \"Mathlib/Algebra/Algebra/Subalgebra/Lattice.lean\", \"Mathlib/Algebra/Algebra/Subalgebra/Lattice.lean\", \"Mathlib/NumberTheory/NumberField/InfinitePlace/TotallyRealComplex.lean\", \"Mathlib/Topology/Homeomorph/Quotient.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Homotopy.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Homotopy.lean\", \"Mathlib/NumberTheory/Padics/Complex.lean\"], \"digest\": \"e04d6c972189671b\"}",
+   "date": "2026-10-21",
+   "verdict": "No match for the full item. IntermediateField.botEquiv (Adjoin/Defs.lean:207) and PadicAlgCl.norm_extends (Complex.lean:81) supply scalar ingredients, while the unit-ball restriction, ring-object realization and compatibility square require the explicit argument given here. TopCat.commRingYoneda concerns TopCat-valued presheaves and does not state these coefficient identifications. Padic.withValRingEquiv concerns a valuation completion, not the structural-image subfield."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Condensation sends a continuous ring isomorphism with continuous inverse to an isomorphism of condensed rings via postcomposition on continuous functions",
+   "results": "{\"t\": \"2026-10-21T03:49:35Z\", \"tool\": \"leansearch\", \"query\": \"Condensation sends a continuous ring isomorphism with continuous inverse to an isomorphism of condensed rings via postcomposition on continuous functions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CommRingCat.HomTopology.precompHomeomorph\", \"TopCat.continuousFunctions.map\", \"TopCat.commRingYoneda\", \"CondensedMod.LocallyConstant.functorIsoDiscrete\", \"RingHom.compLeftContinuous\", \"UniformSpace.Completion.coe_mapRingHom\", \"CondensedSet.fullyFaithfulCompactlyGeneratedToCondensedSet\", \"CondensedMod.LocallyConstant.functorIsoDiscreteAux₁\"], \"digest\": \"db9029f7332ab23d\"}",
+   "date": "2026-10-21",
+   "verdict": "No match for the full item. IntermediateField.botEquiv (Adjoin/Defs.lean:207) and PadicAlgCl.norm_extends (Complex.lean:81) supply scalar ingredients, while the unit-ball restriction, ring-object realization and compatibility square require the explicit argument given here. TopCat.commRingYoneda concerns TopCat-valued presheaves and does not state these coefficient identifications. Padic.withValRingEquiv concerns a valuation completion, not the structural-image subfield."
+  },
+  {
+   "tool": "loogle",
+   "query": "IntermediateField.botEquiv, PadicAlgCl.norm_extends",
+   "results": "{\"t\": \"2026-10-21T03:49:35Z\", \"tool\": \"loogle\", \"query\": \"IntermediateField.botEquiv, PadicAlgCl.norm_extends\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "No match for the full item. IntermediateField.botEquiv (Adjoin/Defs.lean:207) and PadicAlgCl.norm_extends (Complex.lean:81) supply scalar ingredients, while the unit-ball restriction, ring-object realization and compatibility square require the explicit argument given here. TopCat.commRingYoneda concerns TopCat-valued presheaves and does not state these coefficient identifications. Padic.withValRingEquiv concerns a valuation completion, not the structural-image subfield."
+  },
+  {
+   "tool": "grep",
+   "query": "condens|continuousMap|integers",
+   "results": "{\"t\": \"2026-10-21T03:49:43Z\", \"tool\": \"grep\", \"query\": \"condens|continuousMap|integers\", \"sub\": \"NumberTheory/Padics\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/Padics/PadicVal/Basic.lean\", \"Mathlib/NumberTheory/Padics/PadicNorm.lean\", \"Mathlib/NumberTheory/Padics/Complex.lean\", \"Mathlib/NumberTheory/Padics/Complex.lean\", \"Mathlib/NumberTheory/Padics/Complex.lean\", \"Mathlib/NumberTheory/Padics/Complex.lean\", \"Mathlib/NumberTheory/Padics/Complex.lean\", \"Mathlib/NumberTheory/Padics/RingHoms.lean\"], \"digest\": \"64def0b0a6f3880e\"}",
+   "date": "2026-10-21",
+   "verdict": "No match for the full item. IntermediateField.botEquiv (Adjoin/Defs.lean:207) and PadicAlgCl.norm_extends (Complex.lean:81) supply scalar ingredients, while the unit-ball restriction, ring-object realization and compatibility square require the explicit argument given here. TopCat.commRingYoneda concerns TopCat-valued presheaves and does not state these coefficient identifications. Padic.withValRingEquiv concerns a valuation completion, not the structural-image subfield."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical p-adic scalar embeddings identify Q_p with the minimal finite subextension and Z_p with its integers, compatibly with continuous-map condensed ring objects",
+   "results": "{\"t\": \"2026-10-21T03:49:44Z\", \"tool\": \"leanfinder\", \"query\": \"Canonical p-adic scalar embeddings identify Q_p with the minimal finite subextension and Z_p with its integers, compatibly with continuous-map condensed ring objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PadicAlgCl.instCoePadic\", \"PadicAlgCl.coe_eq\", \"PadicInt.instCoePadic\", \"PadicInt.Coe.ringHom\", \"PadicAlgCl\", \"Padic.withValRingEquiv\", \"PadicInt.coe_adicCompletionIntegersEquiv_apply\", \"PadicComplex\"], \"digest\": \"ad564d74a2d97ae1\"}",
+   "date": "2026-10-21",
+   "verdict": "No match for the full item. IntermediateField.botEquiv (Adjoin/Defs.lean:207) and PadicAlgCl.norm_extends (Complex.lean:81) supply scalar ingredients, while the unit-ball restriction, ring-object realization and compatibility square require the explicit argument given here. TopCat.commRingYoneda concerns TopCat-valued presheaves and does not state these coefficient identifications. Padic.withValRingEquiv concerns a valuation completion, not the structural-image subfield."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "sk-thm-existence",
@@ -76,5 +177,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-base-coefficient-condensed-identification",
+  "worker": "stage1",
+  "summary": "Constructed the structural-image ring equivalence and its inverse, proved norm and distance preservation directly, restricted them to the unit balls, and verified the condensed ring-object inverse identities, restriction naturality and inclusion square pointwise. All steps are elementary from the hypotheses and the two existing definition nodes; no auxiliary node is needed. Preserved the statement, source, imported search history and blueprint ancestry. No project declaration covers all clauses.",
+  "blueprint": "Realizes the introductory Z_l=O_E and Q_l=E specialization for E=Q_l in det-existence-localizing.proof.md and the reduction to A, O_E, E, Qlb at the start of det-existence-restriction.proof.md.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NU-05c4f3754",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-05c4f3754 (reviewer sub-agent of L); spot-checked: I read the item and its 5 steps in full. The delivery creates no new nodes and leaves the statement, stmt_deps and source unchanged. The item is still unsplit live, is not on the 10-19 dropped list and has no repair note. Source: main-20261015 det-existence-localizing.proof.md, first sentence ('the cases Z_l and Q_l are the cases O_E and E with E=Q_l'), and the opening of det-existence-restriction.proof.md. The item makes this specialization precise, and parent sk-thm-existence step 11 uses it exactly as stated. Step 1: image restriction of the ring embedding, with the inverse from image membership and injectivity. Step 2: the norm-extension hypothesis gives isometry and continuity (delta = epsilon), and the norm topology is the l-adic and subspace topology that sk-def-sfb-condensed-ring prescribes. Step 3: only the unit-ball formula of def-weil-l-adic-coefficient-extension clause 2 is used, with no DVR, uniformizer or uniqueness clause. Steps 4-5: functorial postcomposition and precomposition restriction of sk-def-sfb-condensed-ring. Inverse identities, naturality for all four scalar maps and the inclusion square j0∘e° = e∘j are checked pointwise, so there is no 'transports' gap (E5). All steps are genuinely elementary (C1/C2), and the citations say what the steps use (C3/C4). Edge cases: q = 0, 1; norm exactly 1 versus l^-1; S = point; S = empty. I grepped the DAG for E_0, 'bottom finite', 'isometric ring isomorphism' and botEquiv: the only other occurrences are inline proof text, e.g. det-brown-hypotheses-generation step 1, and no statement node duplicates the item. No SGA citation, no tool_uses, no fixes."
  }
 }
