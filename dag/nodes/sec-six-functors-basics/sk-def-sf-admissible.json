@@ -3,27 +3,86 @@
  "blueprint": {
   "is": "sk-def-sf-admissible",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Admissibility datum: an explicit hypothesis",
- "statement": "Let $f:X\\to Y$ be separated of finite type with a chosen compactification\n$X\\xrightarrow{j}\\overline X\\xrightarrow{p}Y$. Two data of different\nstrength are distinguished by name.\n\n- **(1)** *The ambient exceptional right adjoint datum.* Say that $f$\n*carries the ambient exceptional right adjoint datum at $A$* (for short:\n*the ambient datum*) when $\\operatorname{FullCD}(p,A;c)$ holds for some\n$c$ (that is, the higher direct images of $p$, and of all its base changes\nalong objects of the pro-étale site of $Y$, vanish in degrees $>c$ on\n*every* pro-étale sheaf of $A$-modules). By Brown representability this\nbound makes $Rf_{!,n}$ preserve coproducts, so that $Rf_{!,n}$ has a right\nadjoint $Rf_n^{\\times}$ on the unbounded derived categories of the small\npro-étale sites.\n- **(2)–(3)** *The preservation clauses.* Every right adjoint\n$Rf_n^{\\times}$ of $Rf_{!,n}$ carries $D^b_c(Y,A)$ into $D^b_c(X,A)$ and\neach constructible interval $D_c^{[a,b]}(Y,A)$ into\n$D_c^{[a+c_f^-,b+c_f^+]}(X,A)$ for some integers $c_f^\\pm$ independent of\n$a,b$ (2), and carries $\\Dctf(Y,A)$ into $\\Dctf(X,A)$ (3).\n\nSay that $f$ is *exceptional-adjoint admissible at $A$* (for short:\n*carries the admissibility datum*) when (1), (2) and (3) all hold.\n\nThe admissibility datum is strictly stronger than the ambient datum (1): it is\n(3) that makes the restriction $Rf^{\\times}|_{\\Dctf}$ of the ambient functor a\nfunctor of the small categories, and when (1)–(3) hold that restriction\ncoincides, by uniqueness of adjoints, with the constructible exceptional\nadjoint $Rf^!$ of [sk-def-sf-operations] (vi). Both data are *assumptions*,\nnot properties that hold in general.\n\n*Warning: the ambient datum is not satisfied in general.* Its\n$\\operatorname{FullCD}$ clause quantifies over *every* pro-étale sheaf\nof $A$-modules, and this fails for the structure morphism $p$ of an elliptic\ncurve $E$ over $\\overline{\\mathbf F}_p$ with $A=\\mathbf F_r$, $r\\ne p$: there is\na pro-étale $A$-module sheaf (not of étale origin) with nonzero cohomology in\nevery degree $n\\ge1$, $Rp_*$ does not preserve the coproduct of its shifts, and\nno right adjoint of $Rp_!=Rp_*$ exists on $D(E_{\\Proet},A)$ or on\n$D^+(E_{\\Proet},A)$ ([sk-rem-sf-fullcd-scope]). Hence neither (1) nor the\nadmissibility datum may be presupposed for the structure morphism of a\nsmooth proper variety. For the constructible exceptional adjoint $Rf^!$ of\n[sk-def-sf-operations] (vi), by contrast, the analogues of all three clauses\nare theorems for every separated finite-type morphism of finite-type\n$k$-schemes: the adjunction on $\\Dctf$, with compatible units and counits\n([thm-sf-ambient-adjoint-class]), and the two preservation clauses with explicit\nconstants ([thm-sf-preservation-class],\n[thm-sf-ctf-stability] (v)).",
+ "statement": "Use the finite coefficient stage of [def-weil-l-adic-coefficient-extension]: fix distinct primes $p_0,\\ell$, an algebraic closure $k$ of a finite field of characteristic $p_0$ [def-weil-finite-field-fiber], a finite extension $E/\\mathbf Q_\\ell$, a uniformizer $\\varpi_E$ of its valuation ring, and $n\\geq1$. Put $A=A_{E,n}=\\mathcal O_E/\\varpi_E^n$. Let $f:X\\to Y$ be a separated finite-type morphism of finite-type $k$-schemes, with the meanings of finite type and separatedness in [def-weil-finite-type-morphism, def-weil-proper-morphism]. Fix a compactification $X\\xrightarrow{j}\\overline X\\xrightarrow{p}Y$ [def-weil-compactifications-refinements].\n\nFor any scheme $T$, write $D_T=D(T_{\\mathrm{proet}},A)$ for the ordinary unbounded derived category of sheaves of modules over the constant sheaf of rings $A_T$ on the small pro-etale site [def-weil-pbc-proetale-site]. Cohomology sheaves $\\mathcal H^r$ have the meaning of [def-weil-derived-cohomology-sheaves], and $Rp_*$ is the total derived direct image [def-weil-derived-direct-image]. Define $F=Rf_{!,n}=Rp_*j_!:D_X\\to D_Y$ using the chosen compactification [def-compact-support-direct-image-detailed].\n\nDefine the following conditions.\n\n1. The *ambient exceptional right adjoint datum at $A$* is the condition that $\\operatorname{FullCD}(p,A;c)$ [def-weil-full-cohomological-dimension] holds for the proper morphism $p:\\overline X\\to Y$, over the base $S=\\operatorname{Spec}k$, for some integer $c\\geq0$. That is, the cohomology sheaves $\\mathcal H^r$ in degrees $r>c$ of the derived direct images of $p$, and of all its base changes $p_V:\\overline X\\times_YV\\to V$ along objects $V\\to Y$ of $Y_{\\mathrm{proet}}$, vanish on the pro-etale $A$-module sheaves exactly as quantified in that definition. The condition ranges over every pro-etale sheaf of $A$-modules, with no constructibility or etale-origin restriction, and imposes no finite-type condition on $V$.\n2. Every right adjoint $G:D_Y\\to D_X$ of $F$ carries $D^b_c(Y,A)$ into $D^b_c(X,A)$, and there are signed integers $c_f^-,c_f^+\\in\\mathbf Z$, independent of $a,b$, such that for every such $G$ and every $a\\leq b$,\n$$\n L\\in D_c^{[a,b]}(Y,A)\\ \\Longrightarrow\\ G(L)\\in D_c^{[a+c_f^-,b+c_f^+]}(X,A).\n$$\nHere bounded constructibility and constructible cohomological intervals are those of [def-weil-finite-torsion-constructibility, def-weil-constructible-intervals]. The displayed membership means bounded constructibility together with vanishing outside the indicated integer interval, also when that interval is empty. A right adjoint means natural bijections $\\operatorname{Hom}_{D_Y}(F(K),L)\\cong\\operatorname{Hom}_{D_X}(K,G(L))$ for all $K\\in D_X,L\\in D_Y$.\n3. Every right adjoint $G$ as in (2) carries $D^b_{ctf}(Y,A)$ into $D^b_{ctf}(X,A)$, where $D^b_{ctf}$ is the full subcategory of bounded constructible complexes having finite Tor amplitude [def-weil-finite-tor-amplitude].\n\nSay that $f$, with its chosen compactification, is *exceptional-adjoint admissible at $A$*, or *carries the admissibility datum*, when (1), (2), and (3) all hold. The ambient datum names (1) alone; admissibility additionally requires (2) and (3). Neither condition is imposed as an automatic hypothesis on morphisms. This definition concerns the finite coefficient stage $A$, not a definition of an ambient right adjoint at integral or rational coefficients.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sf-admissible/_section.md",
   "place": "node sk-def-sf-admissible, order 1702"
  },
  "stmt_deps": [
-  "sk-def-sf-operations",
-  "thm-sf-ambient-adjoint-class",
-  "thm-sf-preservation-class",
-  "thm-sf-ctf-stability"
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-compactifications-refinements",
+  "def-weil-pbc-proetale-site",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-derived-direct-image",
+  "def-compact-support-direct-image-detailed",
+  "def-weil-full-cohomological-dimension",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-constructible-intervals",
+  "def-weil-finite-tor-amplitude"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "HasAmbientExceptionalRightAdjoint|IsExceptionalAdjointAdmissible|FullCD|constructibleFiniteTor",
+   "results": "No hits in the pinned Mathlib source for the four exceptional-adjoint/full-dimension/finite-Tor names.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exceptional inverse image of pro-etale sheaves has uniform bounded constructible cohomological amplitude and preserves finite Tor dimension",
+   "results": "Returned sheafPullbackConstruction.preservesFiniteLimits and its instance, two sheafCongr inverse-map component lemmas, FormallyEtale tensor-product stability, module sheafification finite limits, IsEtale base-change stability, and sheafToPresheaf finite limits. None defines the full cohomological bound or exceptional-adjoint admissibility.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CohomologicalDimension\"",
+   "results": "No hits for the cohomological-dimension name substring.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Define exceptional adjoint admissibility for a separated finite type scheme morphism: uniform cohomological dimension on all pro-etale sheaves and preservation of bounded constructible intervals and finite Tor amplitude by every right adjoint",
+   "results": "Returned Scheme.Etale, Scheme.Modules.instIsRightAdjointPushforward, IsEtale, FormallyUnramified, IsFinite, Flat, LocallyQuasiFinite, and LocallyOfFinitePresentation. Read the candidate pushforward instance in Mathlib/AlgebraicGeometry/Modules/Sheaf.lean:189-199: it is the underived structure-sheaf pushforward being a right adjoint, not a right adjoint to exceptional direct image.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Uniform cohomological dimension of a proper map on all sheaves after base change, with right adjoint preserving constructibility and finite Tor amplitude",
+   "results": "Returned two module-sheaf pushforward right-adjoint instances, sheafPushforwardCocontinuous, a continuous sheaf-pushforward right-adjoint instance, sheafAdjunctionCocontinuous, two coherent-topology sheaf-composition lemmas, and Condensed.lanSheafProfinite. Read Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:160-163: the pushforward composition instance concerns underived module sheaves and asserts no exceptional-adjoint preservation conditions.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "instance.*IsRightAdjoint|pullbackPushforwardAdjunction",
+   "results": "Logged grep in AlgebraicGeometry/Modules: Sheaf.lean:69,189,190,198,199 locate the sheafification and ordinary pullback/pushforward adjunctions. Read 189-199; these are not an exceptional right adjoint to derived compact support.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "instance.*IsRightAdjoint|pushforwardComp",
+   "results": "Logged grep in Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean: The raw single-file rg output was parsed as file/line fragments by the search wrapper; the displayed positions 100,133,163,174,181 concern ordinary module-sheaf pushforward and its composition. Read 160-163; no cohomological-dimension or constructibility assertion.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -48,5 +107,20 @@
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
  "unit": "sk-def-sf-admissible",
- "lean_audit": {}
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "sk-def-sf-admissible",
+  "worker": "stage1",
+  "summary": "Audited the finite-stage definition against the main-20261015 unit and all thirteen underlying definition statements. Made the inherited finite coefficient context explicit, preserved all three defining conditions, and cites the FullCD definition for clause (1). Reused existing notions with no new nodes. In accordance with stages/1-dag.md, claims inside definitions, moved the Brown-existence explanation, Yoneda comparison and counterexample warning to the report with their existing supporting nodes and source places; none is an extra defining condition. No exact upstream attachment or Mathlib match exists. The stale unit record and stronger older ambient/refinement definitions are distinguished in the report. Maintainer-reader fix (Q46, 2026-10-21): clause (1) now cites def-weil-full-cohomological-dimension instead of an inline restatement; the inline arbitrary-sheaf quantifier is equivalent to that node's pulled-back one, because X̄×_YV is weakly etale over X̄, its pro-etale site is the localization of X̄_proet, and every sheaf G there is g_V^*(g_{V!}G). D_T now cites def-weil-pbc-proetale-site, the category used by every other cited node; def-pc-fibre-product dropped as unused.",
+  "blueprint": "main-20261015 sk-def-sf-admissible/_section.md: clauses (1), (2), (3), and the paragraph defining their conjunction. Nondefining paragraphs beginning By Brown representability, The admissibility datum, and Warning are preserved and audited in report.md. No unit proof steps exist."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q46-2655e1f5d",
+  "group": "Q46",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q46-2655e1f5d (reviewer sub-agent of L); spot-checked: Read the main-20261015 source sk-def-sf-admissible/_section.md (order 1702), the base item (imported, source text verbatim, in_cycle via sk-def-sf-operations), all 13 delivered stmt_deps, def-weil-full-cohomological-dimension, def-weil-exceptional-adjoint-admissibility, def-weil-ambient-exceptional-adjoint, lem-sp-fullcd-ambient-adjoint, thm-sf-ambient-adjoint-class, and upstream ExceptionalAdjoint.lean:100-200. Preliminary checks: item not dropped, no repair note, not superseded (still imported on side-live; parallel NO delivery not landed), no SGA citation. The delivered definition is faithful. The setting (k=F̄_q, ℓ≠p0, A=A_{E,n}) comes from the chapter and the detailed definitions. Clause (1) is FullCD only, as in main-20261015: Brown existence is a consequence, and refinement compatibility is no longer required. Clauses (2) and (3) keep every right adjoint, signed c± independent of a,b, D^b_c, intervals and D^b_ctf, all in D(T_proet,A). ∃c∀G versus ∀G∃c does not matter because adjoints are unique up to isomorphism. Moving the exposition to the report is acceptable: Brown existence is lem-sp-fullcd-ambient-adjoint, the comparison is thm-sf-ambient-adjoint-class (2) plus Yoneda, and the warning is a remark. The cycle is gone (closure recomputed). def-weil-exceptional-adjoint-admissibility adds refinement data, so it is not a duplicate. Fixes: (1) B3/C5: clause (1) wrote FullCD inline because the worker claimed a 'genuine quantifier mismatch' with def-weil-full-cohomological-dimension (pulled-back g_V^*F versus arbitrary G on X̄×_YV). The two are equivalent: X̄_V is weakly étale over X̄, so (X̄_V)_proet is the localization and g_V^*g_{V!}G≅G. Upstream HasUniformCohomologicalDimensionLE says it is that node. Clause (1) now cites the node over S=Spec k (its hypotheses checked); unused def-pc-fibre-product removed. (2) E6: D_T cited def-weil-pbc-proetale-modules, while every other cited node uses the categories of def-weil-pbc-proetale-site; now cites the latter. split_report summary updated. Maintainer notes: the report's mismatch paragraph is wrong. The unit record is still master-era. The snapshot's dagsnap e3ececac was deleted mid-review (dangling chapter links); the checks were finished on side-live.; 1 file(s) fixed by the reviewer"
+ }
 }
