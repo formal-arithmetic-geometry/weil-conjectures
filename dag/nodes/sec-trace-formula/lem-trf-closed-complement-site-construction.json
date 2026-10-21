@@ -46,9 +46,9 @@
    }
   },
   {
-   "text": "For a $J$-sheaf $G$, [lem-weil-pbc-site-sheaf-sets-limits-sectionwise] computes $F\\times G$ sectionwise. At $W$ the projection is $\\operatorname{Hom}(W,U)\\times G(W)\\to\\operatorname{Hom}(W,U)$. If there is no map $W\\to U$ this is the bijection $\\varnothing\\to\\varnothing$; otherwise the Hom set is a singleton, so it is bijective exactly when $G(W)$ is a singleton. A pointwise bijective natural transformation has a natural inverse, by inverting its component bijections and their naturality equations. Thus $F\\times G\\to F$ is invertible exactly when $G(W)$ is a singleton for every $W$ admitting a map to $U$. This is equivalent to requiring $G(U\\times_XV)$ to be a singleton for every $V$: one direction uses its projection to $U$; for the other, if $W\\to U$ exists, the first projection $U\\times_XW\\to W$ has inverse given by that map and $1_W$. The composites are identities by uniqueness of maps to $U$. The use of $F=h_U$ here is legitimate because the original topology is subcanonical.",
+   "text": "For a J-sheaf G, the projection h_U × G → h_U is invertible exactly when G(W) is a singleton for every W admitting a map to U. Prove this by Yoneda and the product universal property: if the projection is invertible, compose a morphism h_W → h_U with its inverse and the second projection to obtain the unique map h_W → G. Conversely choose the unique section on each W mapping to U; uniqueness proves naturality and gives h_U → G. Pair this with the identity of h_U to construct the inverse of the projection; the second inverse identity follows componentwise from uniqueness. No choice of a sectionwise product model is needed.",
    "uses": [
-    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
+    "def-weil-pbc-topos"
    ],
    "elementary": false,
    "source": {
@@ -79,9 +79,9 @@
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction] to the identity functor $u:(\\mathcal C,J)\\to(\\mathcal C,J_c)$, with sets as values. Its continuity hypothesis is exactly what step 3 proved, and step 3 also supplies covering-family sites of the kind its statement requires; both are small and have all covering pullbacks. The cited theorem supplies a left adjoint $L$ to $I$, with $LG=(u_pG)^{\\#_c}$. In its formula for $(u_pG)(W)$, the category $\\mathcal I_W$ has the initial object $(W,1_W)$, with its unique arrow to $(V,\\phi:W\\to V)$ equal to $\\phi$. Thus its opposite has that object terminal. Explicitly the colimit identifies the class of $s\\in G(V)$ at $(V,\\phi)$ with $G(\\phi)(s)\\in G(W)$; the cocone maps are these restrictions, and any cocone is uniquely determined by its component at $(W,1_W)$. This proves $u_pG\\cong G$, naturally in $G,W$, so we may take $LG=G^{\\#_c}$ on underlying presheaves, with the sheafification adjunction supplied by the cited theorem.",
+   "text": "Let I be the fully faithful identity-on-presheaves inclusion constructed in step 3, and let L be the composite of the inclusion Sh(C,J) → PSh(C) and J_c-sheafification. Restrict the sheafification adjunction [def-weil-pbc-sheafification] along the fully faithful inclusion Sh(C,J) → PSh(C). Both comparison isomorphisms are identity isomorphisms, since I does not change presheaves or their maps. Mathlib Adjunction.restrictFullyFaithful therefore supplies L ⊣ I directly, without a left Kan extension.",
    "uses": [
-    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction"
+    "def-weil-pbc-sheafification"
    ],
    "elementary": false,
    "source": {
@@ -106,15 +106,15 @@
  ],
  "proof_deps": [
   "def-trf-geometric-morphism",
+  "def-weil-pbc-sheafification",
   "def-weil-pbc-topos",
-  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
   "lem-weil-pbc-sheafification-sets-exact",
   "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites.tex",
-  "place": "Tag 08LY (lemma-closed-subtopos): its modified topology and essential-image proof, with the omitted gluing argument written out in step 6 and the site axioms verified directly for arbitrary sieve topologies. The adjunction and its left exactness use the existing 00WX/00WJ/00W2 Mathlib leaves."
+  "place": "Tag 08LY (lemma-closed-subtopos): modified topology, empty-cover and matching-family gluing arguments implemented directly. The projection criterion uses Yoneda and the binary-product universal property. The geometric embedding is obtained by restricting the sheafification adjunction (Mathlib Adjunction.restrictFullyFaithful); left exactness uses the existing sectionwise-limit and exact-sheafification Mathlib leaves. Lean proof written by Q2, 2026-10-21."
  },
  "mathlib_searches": [
   {
@@ -291,5 +291,15 @@
   "date": "2026-10-17",
   "existing": false
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261021T111440-L-144293",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }
