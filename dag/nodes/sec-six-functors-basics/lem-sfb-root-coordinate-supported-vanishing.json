@@ -18,9 +18,99 @@
   "def-trf-strict-normal-crossings-boundary",
   "det-lem-formal-closed-support-adjunction"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $B=\\Gamma(V,\\mathcal O_V)$ and first form the tower over $V$ itself. Fix $J,a$ as in the statement and set\n$$B_n=B[x_{1,n},\\ldots,x_{r,n}]/(x_{b,n}^n-t_b)_b,\\quad X_n=\\operatorname{Spec}(B_n[1/\\prod_{b\\in J}t_b]).$$\nThe index is the positive integers prime to $p$, ordered by divisibility, with least element $1$. For $n\\mid m$, put $e=m/n$. As a $B_n$-algebra, $B_m$ is obtained by adjoining $y_b$ satisfying $y_b^e=x_{b,n}$; eliminate the old variables to check this presentation. Repeated monic division [lem-weil-pbc-monic-quotient-free] gives the basis $\\prod_b y_b^{d_b}$, $0\\leq d_b<e$, so the transition is finite free, also after the indicated localization; in the same way $B_n$ is free over $B$. Since $n$ is prime to $p$ it is a unit in the $k$-algebra $B$, so $B_n$ is regular [lem-sfb-snc-finite-root-regular-ring], and so is its localization $X_n$ [lem-weil-pbc-localization-of-regular-ring]. The ring of $D_n=V(x_{a,n})$ is the same localization of $B_n/(x_{a,n})$, which is regular by the face $J=\\{a\\}$ of [lem-sfb-snc-finite-root-face-regular]; hence $D_n$ is regular. The intersections $V(t_a,t_b)$ may be reducible or empty, so the root-ring lemma is not applied to $V(t_a)$ directly. The boundary ideal $(t_1\\cdots t_r)$ is effective Cartier [def-trf-strict-normal-crossings-boundary], so the product, and hence its factor $t_a$, is a nonzerodivisor on $B$. By freeness $t_a$ stays a nonzerodivisor on $B_n$ and after localization, and so does $x_{a,n}$, which divides $t_a=x_{a,n}^n$. Thus $D_n$ is regular Cartier. The empty divisor case causes no exception.",
+   "uses": [
+    "lem-weil-pbc-monic-quotient-free",
+    "lem-sfb-snc-finite-root-regular-ring",
+    "lem-weil-pbc-localization-of-regular-ring",
+    "lem-sfb-snc-finite-root-face-regular",
+    "def-trf-strict-normal-crossings-boundary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent expansion: the finite root stages and their regular coordinate divisors"
+   }
+  },
+  {
+   "text": "Fix $s\\geq1$ and $A_s=\\mathbf Z/\\ell^s\\mathbf Z$. On $X_n$ let $j_n:X_n-D_n\\hookrightarrow X_n$ and put $K_n=\\operatorname{fib}(A_{s,X_n}\\to Rj_{n,*}A_s)$. The finite supported Cartier purity statement [lem-sfb-ramified-cartier-supported-purity] identifies $K_n$ with $i_{n,*}A_{s,D_n}(-1)[-2]$. All schemes here are regular Noetherian affines, the immersion has codimension one, and $\\ell$ is invertible since $\\ell\\ne p$. In particular $H^qK_n=0$ for $q\\ne2$. The generator of $D_n$ pulls back to $x_{a,m}^{m/n}$. Apply [lem-sfb-ramified-cartier-supported-purity] with $f=x_{a,n}$ and $g=x_{a,m}$: the transition on $H^2K_n$ is exactly $m/n$ times the Tate-line exchange. There is no assertion that the scheme-theoretic pullback $V(x_{a,m}^{m/n})$ equals the reduced divisor $D_m$. For $m=n\\ell^s$ that transition is zero. This $m$ is an allowed index because $p\\ne\\ell$.",
+   "uses": [
+    "lem-sfb-ramified-cartier-supported-purity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "The supported finite-stage purity class and its ramification factor"
+   }
+  },
+  {
+   "text": "Let $X=\\varprojlim_n X_n$ and $W=X[1/t_a]$, with $j:W\\hookrightarrow X$. The opens $X_n-D_n=X_n[1/t_a]$ form an inverse system with affine transitions and limit $W$. Apply [lem-kun-0eym] to these principal open immersions, with the constant sheaves $A_s$ and identity coefficient transitions. It identifies all $R^qj_*$ with the filtered colimits of the pulled-back finite-stage higher images, with precisely the exchange maps used in step 2. The same assertion for the identity maps identifies the constant sheaves. Taking the long exact sequences of the fibres and using exactness of filtered colimits of sheaves [lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact] therefore computes every cohomology sheaf of $\\operatorname{fib}(A_{s,X}\\to Rj_*A_s)$ as the colimit of the pulled-back $H^qK_n$. All these colimits are zero: only degree two can occur, and every degree-two section is killed at $n\\ell^s$. Consequently the actual unit $A_{s,X}[0]\\to Rj_*j^*A_{s,X}[0]$ is an isomorphism in the etale derived category, for every $s$.",
+   "uses": [
+    "lem-kun-0eym",
+    "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0EYM (lemma-relative-colimit-general): continuity for the principal opens and their actual units"
+   }
+  },
+  {
+   "text": "Apply [sk-thm-pe-direct-image-comparison] to the quasi-compact quasi-separated principal open $j$ and the bounded-below etale object $A_s[0]$. Its comparison is compatible with the adjunction unit. Thus the unit just proved invertible pulls to the actual unit $A_{s,X}[0]\\to Rj_*j^*A_{s,X}[0]$ on the pro-etale site. This passage concerns the discrete finite ring $A_s$ only. It holds for this possibly non-Noetherian limit $X$, since the comparison node assumes arbitrary schemes and only requires $j$ to be qcqs.",
+   "uses": [
+    "sk-thm-pe-direct-image-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent expansion: the finite discrete comparison before changing the topology of the coefficients"
+   }
+  },
+  {
+   "text": "The inverse system $(X_n)$ satisfies [lem-sfb-torsion-acyclic-norm-coefficient-test]: its schemes are regular affine and finite type over $k$, its transitions are finite locally free by step 1, and $f_0=t_a$ is a nonzerodivisor at every stage. Step 4 supplies the finite-torsion open-unit hypothesis at its limit for every $s\\geq1$. Base change of $U\\to V$ along $X\\to V$ gives an affine pro-etale map $X'=X\\times_VU\\to X$ by [sk-lem-pe-weakly-etale-stability]. The presentations identify $X'$ with the $T_J$ of the item, and $W\\times_X X'$ with $T_{J\\cup\\{a\\}}$; localization commutes with the displayed root-ring colimits. The supplied $\\mathcal N|_{T_J}$ is lisse because restricting a finite-free local trivialization remains finite free. The coefficient criterion, applied separately to the actual $F=E$ or $F=\\Omega$, gives the unit isomorphism\n$$\\mathcal N|_{T_J}[0]\\xrightarrow{\\sim}Re_*e^*\\mathcal N|_{T_J}[0].$$\nThis step uses the norm-coefficient criterion as an unsplit analytical input; it does not deduce completeness of $\\Omega$ or finite-field descent from step 4.",
+   "uses": [
+    "lem-sfb-torsion-acyclic-norm-coefficient-test",
+    "sk-lem-pe-weakly-etale-stability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent expansion: apply the explicitly norm-topological coefficient criterion to the pro-etale base change and the supplied lisse module"
+   }
+  },
+  {
+   "text": "For the closed immersion $d=d_{a,J}$ with complementary principal affine open $e$, [det-lem-formal-closed-support-adjunction] gives\n$$R\\underline\\Gamma_{D_{a,J}}(\\mathcal N|_{T_J}[0])\\cong d^*\\operatorname{fib}(\\mathcal N|_{T_J}[0]\\to Re_*e^*\\mathcal N|_{T_J}[0]).$$\nThe actual unit on the right is an isomorphism by step 5, so its fibre and its exact inverse image are zero. This proves the asserted zero object in $D(D_{a,J},C_F)$. For an empty divisor $e$ is the identity and the same formula gives zero immediately; a rank-zero module is zero throughout. When $r=0$ no allowed $a,J$ exists, so the assertion is vacuous.",
+   "uses": [
+    "det-lem-formal-closed-support-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent expansion: the formal fibre formula gives supported vanishing from the actual open unit"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-strict-normal-crossings-boundary",
+  "det-lem-formal-closed-support-adjunction",
+  "lem-kun-0eym",
+  "lem-sfb-ramified-cartier-supported-purity",
+  "lem-sfb-snc-finite-root-face-regular",
+  "lem-sfb-snc-finite-root-regular-ring",
+  "lem-sfb-torsion-acyclic-norm-coefficient-test",
+  "lem-weil-pbc-localization-of-regular-ring",
+  "lem-weil-pbc-monic-quotient-free",
+  "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
+  "sk-lem-pe-weakly-etale-stability",
+  "sk-thm-pe-direct-image-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), agent expansion using ILO finite Cartier purity and Stacks 0EYM; the norm-topological criterion is an explicit unsplit WANTED input."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -77,10 +167,45 @@
    "results": "8 hits: CochainComplex.isZero_of_isStrictlyGE, CochainComplex.isStrictlyGE_iff, CochainComplex.IsStrictlyGE, groupCohomology.H0Iso, RootPairing.GeckConstruction.lie_h_h, groupCohomology.H0IsoOfIsTrivial, groupCohomology.H1ofAutOnUnitsUnique, AlgebraicGeometry.Scheme.IdealSheafData.coe_support_vanishingIdeal",
    "date": "2026-10-21",
    "verdict": "no match: the hits concern perfectoid completions, ordinary support or unrelated cochain complexes, not this pro-etale supported derived object"
+  },
+  {
+   "tool": "grep",
+   "query": "(Kummer|kummer|rootTower).*(support|cohomology)|(support|cohomology).*(Kummer|kummer|rootTower)",
+   "results": "0 hits: ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-21",
+   "verdict": "no match: no declaration proves the root-tower supported derived object with the stated all-continuous coefficients"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomology of the complement of a normal crossings divisor on an infinite tame root tower",
+   "results": "8 hits: ContinuousCohomology.MultiInd.complex, IsUnramifiedAtInfinitePlaces.casesOn, groupCohomology, CochainComplex.HomComplex.CohomologyClass, CochainComplex.HomComplex.instAddCommGroupCohomologyClass, CochainComplex.HomComplex.CohomologyClass.mk, Ring.instIsScalarTowerNormalClosure, TopologicalSpace.CompactOpens.coe_compl; digest 7b46ff6625103e19",
+   "date": "2026-10-21",
+   "verdict": "no match: no declaration proves the root-tower supported derived object with the stated all-continuous coefficients"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Kummer\", \"Sheaf\"",
+   "results": "0 hits: ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-21",
+   "verdict": "no match: no declaration proves the root-tower supported derived object with the stated all-continuous coefficients"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived local cohomology with support vanishes after adjoining all prime to p roots of a regular parameter with continuous l adic coefficients",
+   "results": "8 hits: BDeRhamPlus, BDeRham, localCohomology.ofSelfLERadical, localCohomology, localCohomology.isoSelfLERadical, instCommRingBDeRhamPlus, localCohomology.ofDiagram, localCohomology.idealPowersToSelfLERadical; digest 2f6dc697a2586c77",
+   "date": "2026-10-21",
+   "verdict": "no match: no declaration proves the root-tower supported derived object with the stated all-continuous coefficients"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local cohomology of a lisse sheaf is zero on a prime to characteristic parameter root tower after inverting one coordinate",
+   "results": "8 hits: localCohomology.ofSelfLERadical, localCohomology, localCohomology.ofDiagram, localCohomology.isoSelfLERadical, BDeRham, BDeRhamPlus, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top; digest bd31cab661cc59b3",
+   "date": "2026-10-21",
+   "verdict": "no match: no declaration proves the root-tower supported derived object with the stated all-continuous coefficients"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-root-tower-boundary-acyclicity",
@@ -104,5 +229,64 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-root-coordinate-supported-vanishing",
+  "worker": "stage1",
+  "summary": "Statement retained. The proof constructs the regular finite root stages, computes the ramified finite-torsion support transitions, kills them at index n ell^s, uses 0EYM and the discrete site comparison, then invokes a separate general norm-topological coefficient test and the actual support fibre formula. Two new statement-only obligations; no Mathlib leaves. The ancestor tool reports None for the inherited created.item chain; the null ancestor is retained and the explicit direct-image blueprint paragraph is recorded in place/source. The noncomplete norm-Omega coefficient test remains WANTED, with no completion or finite-union substitute. Reviewer FIX (NV maintainer reader, 2026-10-22): step 1 no longer applies the root-ring lemma to V(t_a), whose induced branches V(t_a,t_b) can be reducible or empty; it cites the new statement-only face-regularity node, the localization lemma for X_n, and gets the nonzerodivisor property from freeness.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof paragraph (3), open direct images: the single-coordinate unpunctured/punctured root-tower unit used by boundary acyclicity. No change to the chapter or unit route.",
+  "tool_uses": [
+   {
+    "node": "def-trf-strict-normal-crossings-boundary",
+    "why": "Generic Strict normal crossings boundary predicate used only for the finite-root, finite-coefficient or formal-support calculation; no all-continuous root-tower assertion is taken from this off-unit tool."
+   },
+   {
+    "node": "det-lem-formal-closed-support-adjunction",
+    "why": "Generic Sections with closed support: adjunction and fiber triangle for all coefficients used only for the finite-root, finite-coefficient or formal-support calculation; no all-continuous root-tower assertion is taken from this off-unit tool."
+   },
+   {
+    "node": "lem-kun-0eym",
+    "why": "Generic Relative higher direct image continuity with varying base used only for the finite-root, finite-coefficient or formal-support calculation; no all-continuous root-tower assertion is taken from this off-unit tool."
+   },
+   {
+    "node": "lem-weil-pbc-monic-quotient-free",
+    "why": "Generic The quotient of a polynomial ring by a monic polynomial is free with the power basis used only for the finite-root, finite-coefficient or formal-support calculation; no all-continuous root-tower assertion is taken from this off-unit tool."
+   },
+   {
+    "node": "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
+    "why": "Generic Filtered colimits of abelian sheaves on a site are exact used only for the finite-root, finite-coefficient or formal-support calculation; no all-continuous root-tower assertion is taken from this off-unit tool."
+   },
+   {
+    "node": "sk-lem-pe-weakly-etale-stability",
+    "why": "Generic Stability used only for the finite-root, finite-coefficient or formal-support calculation; no all-continuous root-tower assertion is taken from this off-unit tool."
+   },
+   {
+    "node": "sk-thm-pe-direct-image-comparison",
+    "why": "Generic Direct-image comparison used only for the finite-root, finite-coefficient or formal-support calculation; no all-continuous root-tower assertion is taken from this off-unit tool."
+   },
+   {
+    "node": "lem-weil-pbc-localization-of-regular-ring",
+    "why": "Generic commutative algebra: a localization of a regular ring is regular, used only to pass from the finite root algebra B_n to its localization X_n at the branches in J; no node of the unit states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-trf-strict-normal-crossings-boundary",
+  "det-lem-formal-closed-support-adjunction",
+  "lem-kun-0eym",
+  "lem-weil-pbc-monic-quotient-free",
+  "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
+  "sk-lem-pe-weakly-etale-stability",
+  "sk-thm-pe-direct-image-comparison",
+  "lem-weil-pbc-localization-of-regular-ring"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NV-3708abe0b",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-3708abe0b (reviewer sub-agent of L); spot-checked: Read in full: the item, both new nodes, every cited statement, the parent boundary-acyclicity and sibling puncture-invariance uses, blueprint main-20261015 direct-images ¶(3) (context only; agent origin and null from.node are correct), and ILO XVI Thm 3.1.1, §2.1/Def 2.1.1 and Cor 3.1.3. No SGA cited. One fault, E1/C4 in step 1: regularity of D_n=V(x_{a,n}) applied lem-sfb-snc-finite-root-regular-ring to V(t_a) with the restricted t_b. That lemma needs pairwise distinct integral branches, but V(t_a,t_b) can be reducible or empty (a line meeting a conic in 2 points). The needed J-face case appears only inside that lemma's proof (its B_{J,K} induction). Step 1 also skipped the J-localization and left the nonzerodivisor claim unjustified. FIX: new statement-only node lem-sfb-snc-finite-root-face-regular (C_n/(x_j)_{j∈J} is regular; true; same ILO IX 2.1 / Stacks 0BIA source; DAG and Mathlib searched, no duplicate). Step 1 now cites it plus lem-weil-pbc-localization-of-regular-ring (declared tool_use), and gets the nonzerodivisor property from freeness. Steps 2-6 checked: purity-node hypotheses hold; the multiplier m/n=ℓ^s kills A_s at index nℓ^s, which is prime to p; the 0EYM hypotheses hold (qcqs principal opens, affine transitions, the exchange maps are the same θ) and filtered colimits are exact, so the fibre is 0; the pe site comparison applies to D^+ and is compatible with units; X×_VU=T_J and W×_XX'=T_{J∪a}; clause 4 of det-lem formal-closed-support. New purity node: true (unique factorization of c_{D,A}, ILO XVI 3.1.1, additivity gives the factor e). It is needed: every per Gysin/purity node reaches the item, a cycle I verified mechanically. New coefficient criterion: true for E (R lim plus coherent colimits). For Ω the cone of the unit is uniquely ℓ-divisible, so this is a genuine analytic node. A Baire test (G=Z_p, degree 2) found no counterexample; higher degrees remain the risk. It is not a relabel of the item. Accepted as WANTED, like the earlier norm-Ω nodes. Batch-5: lem-asd-ordinary-supported-kummer→lem-pod-etale-stalk-tensor-scalar is a generic stalk/tensor lemma, not a Poincaré-duality step, so accepted; def-trf-SNC is a general definition and already a stmt_dep, so accepted. Declared tool uses accepted. Fixes: fixes/dag/nodes/sec-six-functors-basics/{lem-sfb-root-coordinate-supported-vanishing,lem-sfb-snc-finite-root-face-regular}.json; review.md.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
  }
 }
