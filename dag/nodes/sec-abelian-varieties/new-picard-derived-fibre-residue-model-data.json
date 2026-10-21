@@ -19,22 +19,40 @@
  },
  "proof": [
   {
-   "text": "Prove perfectness of the source and every target by perfect derived direct-image base change, choose finite-free residue models, intersect their affine neighbourhoods, and restrict the models and localization isomorphisms. The evaluation kernel is prime on the resulting affine open. The Lean perfectness input now comes directly from properFlat_single_derivedDirectImage_perfect, with the existing finitely presented relatively flat coefficient and the supplied derived localizations. No base-change conclusion of the retired combined theorem is required for this step.",
+   "text": "Use properFlat_single_derivedDirectImage_perfect for the base changes of f and each fi. Identify tensor pullback with the ordinary left adjoint using uniqueness of adjoints, so the pulled-back coefficients remain invertible. Invertibility supplies finite presentation and flatness over the flat structural maps. This gives IsPerfect for the source E and each Ei.",
    "uses": [
-    "lem-pc-proper-flat-single-derived-direct-image-perfect",
-    "lem-sc-perfect-finite-free-residue-model"
+    "lem-pc-proper-flat-single-derived-direct-image-perfect"
    ],
    "elementary": false
+  },
+  {
+   "text": "At w, the definition of IsPerfect gives a strictly perfect local representative for E and every Ei. Intersect the source neighbourhood with the finite intersection indexed by Fin n, and choose an affine neighbourhood U of w inside the result using the affine basis. For n = 0 the indexed intersection is top, so the same construction works.",
+   "uses": [
+    "def-pc-perfect-complex"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Restrict each complex to U by overMap. Restriction preserves zero objects, finite coproducts of the unit and the maps splitting each term off a finite free module, so the restricted complexes remain strictly perfect with their original degree bounds. The natural overFunctorMap, mapDerivedCategoryCompIso and mapDerivedCategoryFactors isomorphisms transport all representing isomorphisms to U; the private restriction helpers prove these facts directly.",
+   "uses": [
+    "def-pc-perfect-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take p to be the kernel of evaluation into the residue field at w. Mathlib RingHom.ker_isPrime proves primality directly because the codomain is a field. Combine this with the affine-open witness, the restricted complexes and their representing isomorphisms.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-proper-flat-single-derived-direct-image-perfect",
-  "lem-sc-perfect-finite-free-residue-model"
+  "def-pc-perfect-complex",
+  "lem-pc-proper-flat-single-derived-direct-image-perfect"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "Stacks Project",
-  "place": "Tags 0B91(2), 0A1H and 0A1D; B3 retirement adaptation uses the existing perfectness-only and canonical module base-change declarations, without changing the statement."
+  "document": "Stacks Project; existing Lean library; Mathlib",
+  "place": "Tags 0B91(2), 08CM and 08CR; direct finite-intersection refinement of local strictly-perfect models, with Mathlib RingHom.ker_isPrime. N4 restores the quarantined proof and fixes the overFunctor coefficient universe."
  },
  "mathlib_searches": [
   {
@@ -90,14 +108,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "C-7a630",
-  "group": "B3",
+  "reviewer": "COMPILER",
+  "group": "N4",
   "result": "pass",
-  "landing": "20261017T041407-L-2535241",
-  "kind": "interface",
-  "note": "independent cc review: retired item vs coord/repairs.txt line 14; 9 adapted modules vs their originals (bodies/imports only) and against existing replacement declarations (properFlat_single_derivedDirectImage_perfect, exists_isIso_canonicalModuleBaseChange_of_isFlatOver, affine canonical lemmas + schemeDerived_isIso_of_openRestriction); 10 delivered + 13 direct importers compiled clean; caller nodes vs Lean proofs"
+  "landing": "20261021T225202-L-3790730",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "lean_audit": {}
 }
