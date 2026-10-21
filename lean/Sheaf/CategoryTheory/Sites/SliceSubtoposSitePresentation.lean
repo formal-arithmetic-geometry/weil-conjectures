@@ -8,7 +8,6 @@ module
 public import Sheaf.CategoryTheory.Sites.GeometricMorphism
 public import Sheaf.CategoryTheory.Sites.GrothendieckTopos
 public import Mathlib.CategoryTheory.Sites.Over
-import Sheaf.CategoryTheory.SiteCoveringAxioms
 import Mathlib.CategoryTheory.Sites.Limits
 
 /-!
@@ -95,6 +94,41 @@ theorem slice_subtopos_site_presentation
           (G.obj.map (Over.homMk (U := Over.mk t)
             (V := Over.mk (Limits.prod.snd : Limits.prod W U ⟶ U))
             (Limits.prod.lift (𝟙 W) t)).op) := by
-  sorry
+  let v : C ⥤ Over U :=
+    { obj := fun V ↦ Over.mk (Limits.prod.snd : Limits.prod V U ⟶ U)
+      map := fun q ↦ Over.homMk (Limits.prod.map q (𝟙 U))
+      map_id := by intro V; ext; simp
+      map_comp := by intro V V' V'' q r; ext; simp }
+  let adj : Over.forget U ⊣ v :=
+    { unit :=
+        { app := fun W ↦ Over.homMk (Limits.prod.lift (𝟙 W.left) W.hom)
+          naturality := by intro W W' q; ext; simp [v, Over.w q] }
+      counit :=
+        { app := fun V ↦ Limits.prod.fst
+          naturality := by intro V V' q; simp [v] }
+      left_triangle_components := by intro W; simp
+      right_triangle_components := by intro V; ext; simp [v] }
+  let : v.IsContinuous J (J.over U) :=
+    adj.isContinuous_of_isCocontinuous (J.over U) J
+  let j : GeometricMorphism (Sheaf (J.over U) (Type (max u w)))
+      (Sheaf J (Type (max u w))) :=
+    { inverse := J.overPullback (Type (max u w)) U
+      direct := v.sheafPushforwardContinuous (Type (max u w)) J (J.over U)
+      adj := adj.sheafPushforwardContinuous (E := Type (max u w)) (J.over U) J
+      leftExact := by
+        have : PreservesFiniteLimits
+            (J.overPullback (Type (max u w)) U ⋙
+              sheafToPresheaf (J.over U) (Type (max u w))) := by
+          change PreservesFiniteLimits
+            (sheafToPresheaf J (Type (max u w)) ⋙
+              (Functor.whiskeringLeft (Over U)ᵒᵖ Cᵒᵖ (Type (max u w))).obj (Over.forget U).op)
+          infer_instance
+        exact preservesFiniteLimits_of_reflects_of_preserves _
+          (sheafToPresheaf (J.over U) (Type (max u w))) }
+  refine ⟨j, rfl, ?_, ?_, ?_, ?_⟩
+  · intro G V; rfl
+  · intro G V V' q; rfl
+  · intro G G' f V; rfl
+  · intro G W t; rfl
 
 end CategoryTheory
