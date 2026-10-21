@@ -17,9 +17,71 @@
   "sk-def-sfb-module-objects",
   "def-sfb-locally-finitely-presented"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $\\varphi:E_X\\to F_X$ be [def-sfb-subfield-coefficient-map]. Put $R=f^{-1}E_X$, $S=f^{-1}F_X$, $\\psi=f^{-1}\\varphi$, $N=f^\\natural_{E_X}M$ and $P=f^\\natural_{F_X}(G_XM)$. The ring objects $E_X,F_X$ are commutative: $\\underline E,\\underline F$ are commutative condensed rings [def-sfb-padic-subfield-condensed-ring], and pulling back from the point preserves commutativity [sk-def-sfb-pulled-back-coefficients]; $\\varphi$ is a morphism of ring objects. Apply [lem-sfb-internal-extension-inverse-image] to $f$, $E_X$, $F_X$ and $\\varphi$. It supplies an $S$-linear isomorphism $\\theta:P\\cong S\\otimes_R N$. Its statement also supplies the commutative ring objects $R,S$ and their morphism $\\psi$; these are the actual inverse-image rings.",
+   "uses": [
+    "def-sfb-subfield-coefficient-map",
+    "def-sfb-padic-subfield-condensed-ring",
+    "sk-def-sfb-pulled-back-coefficients",
+    "lem-sfb-internal-extension-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-extend-subfield-constructible.proof.md",
+    "place": "Second sentence, tensoring local finite presentations: first commute scalar extension with the raw pullback to Z."
+   }
+  },
+  {
+   "text": "Fix any covering family $\\{u_i:U_i\\to Z\\}$ witnessing local finite presentation of $N$ in [def-sfb-locally-finitely-presented]. For each $i$, put $R_i=u_i^{-1}R$, $S_i=u_i^{-1}S$, $\\psi_i=u_i^{-1}\\psi$ and $N_i=u_i^\\natural N$. The cover hypothesis says that $N_i$ is finitely presented over $R_i$. Apply [lem-sfb-internal-extension-inverse-image] again, now to $u_i$, $R$, $S$ and $\\psi$. Composing its comparison with the image of $\\theta$ under the module-transport functor gives an $S_i$-linear isomorphism\n\\[\nu_i^\\natural P\\cong S_i\\otimes_{R_i}N_i.\n\\]\nHere $u_i^\\natural$ denotes raw module pullback for the relevant ring. The comparison supplies commutativity of $R_i,S_i$, without identifying them with coefficient rings from a point.",
+   "uses": [
+    "def-sfb-locally-finitely-presented",
+    "lem-sfb-internal-extension-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-extend-subfield-constructible.proof.md",
+    "place": "Second sentence, same local presentation: commute extension with raw pullback to each member of the original presentation cover."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-internal-extension-finite-presentation] on the scheme $U_i$, to the ring morphism $\\psi_i:R_i\\to S_i$ and the finitely presented $R_i$-module $N_i$. For a presentation $N_i\\cong\\operatorname{coker}(a_i:R_i^{m_i}\\to R_i^{n_i})$, it gives\n\\[\nS_i\\otimes_{R_i}N_i\\cong\\operatorname{coker}(a_{i,S}:S_i^{m_i}\\to S_i^{n_i}),\n\\]\nwhere $a_{i,S}$ is obtained by applying scalar extension to $a_i$ and conjugating by its finite-free isomorphisms. The ranks remain the same finite integers; the lemma assumes no flatness.",
+   "uses": [
+    "lem-sfb-internal-extension-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-extend-subfield-constructible.proof.md",
+    "place": "Second sentence, tensoring the local finite-free presentation and retaining its finite ranks."
+   }
+  },
+  {
+   "text": "Compose the isomorphisms in steps 2 and 3. They express $u_i^\\natural P$ as the cokernel of $a_{i,S}$, so it is finitely presented by [def-sfb-finitely-presented-module]. This holds for every member of the fixed cover, which therefore witnesses that $P$ is locally finitely presented by [def-sfb-locally-finitely-presented]. The cover was arbitrary among the covers witnessing the hypothesis, so every such cover works. Neither its members nor its indexing family were replaced.",
+   "uses": [
+    "def-sfb-finitely-presented-module",
+    "def-sfb-locally-finitely-presented"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-extend-subfield-constructible.proof.md",
+    "place": "Second sentence, concluding local finite presentation on the same cover (and hence on the same strata when the parent applies this lemma)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-subfield-coefficient-map",
+  "lem-sfb-internal-extension-inverse-image",
+  "def-sfb-locally-finitely-presented",
+  "lem-sfb-internal-extension-finite-presentation",
+  "def-sfb-finitely-presented-module",
+  "def-sfb-padic-subfield-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-extend-subfield-constructible.proof.md",
+  "place": "Second sentence, expanded using the existing internal inverse-image comparison twice and the internal finite-presentation lemma; no coefficient-ring identification is needed."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -62,10 +124,53 @@
    "results": "4 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean; directory Mathlib/Algebra",
    "date": "2026-10-21",
    "verdict": "no match: ordinary modules or SheafOfModules presentations do not identify the internal module-object encoding, raw scheme pullback and the same pro-etale presentation covers"
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalars.*(Presentation|FinitePresentation)|[Pp]resentation.*extendScalars",
+   "results": "6 hits: Mathlib/RingTheory/Regular/LinearMap.lean, Mathlib/Algebra/Module/FinitePresentation.lean, Mathlib/Algebra/Module/FinitePresentation.lean, Mathlib/Algebra/Module/FinitePresentation.lean, Mathlib/Algebra/Module/FinitePresentation.lean, Mathlib/Algebra/Module/FinitePresentation.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: the results concern ordinary modules, scheme morphisms, or SheafOfModules presentations, not raw inverse image and same-cover local finite presentation for internal module objects; SheafOfModules.Presentation.map requires an encoding comparison and functor hypotheses beyond one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension of scalars preserves local finite presentations after inverse image of sheaves of modules",
+   "results": "8 hits: instFinitePresentationTensorProduct, AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange, PresheafOfModules.pullback, Module.FinitePresentation.isLocalizedModule_mapExtendScalars, ModuleCat.preservesFiniteLimits_extendScalars_of_flat, PresheafOfModules.pullbackPushforwardAdjunction, ModuleCat.extendRestrictScalarsAdj, LinearMap.extendScalarsOfIsLocalization_apply",
+   "date": "2026-10-21",
+   "verdict": "no match: the results concern ordinary modules, scheme morphisms, or SheafOfModules presentations, not raw inverse image and same-cover local finite presentation for internal module objects; SheafOfModules.Presentation.map requires an encoding comparison and functor hypotheses beyond one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extendScalars\", \"Presentation\"",
+   "results": "4 hits: Module.FinitePresentation.isLocalizedModule_mapExtendScalars, Module.FinitePresentation.linearEquivMapExtendScalars, Module.FinitePresentation.linearEquivMapExtendScalars_apply, Module.FinitePresentation.linearEquivMapExtendScalars_symm_apply",
+   "date": "2026-10-21",
+   "verdict": "no match: the results concern ordinary modules, scheme morphisms, or SheafOfModules presentations, not raw inverse image and same-cover local finite presentation for internal module objects; SheafOfModules.Presentation.map requires an encoding comparison and functor hypotheses beyond one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Raw inverse image of internal module objects commutes with extension of scalars and preserves a given local finite presentation cover",
+   "results": "8 hits: SheafOfModules.Presentation.map_generators_I, SheafOfModules.Presentation.map_relations_I, SheafOfModules.Presentation.map, SheafOfModules.Presentation.mapGenerators, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, Module.FinitePresentation.linearEquivMapExtendScalars_symm_apply, SheafOfModules.Presentation.mapRelations, Module.FinitePresentation.exists_lift_equiv_of_isLocalizedModule",
+   "date": "2026-10-21",
+   "verdict": "no match: the results concern ordinary modules, scheme morphisms, or SheafOfModules presentations, not raw inverse image and same-cover local finite presentation for internal module objects; SheafOfModules.Presentation.map requires an encoding comparison and functor hypotheses beyond one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "def Presentation.map|class IsFinitePresentation|instFinitePresentationTensorProduct|locally.*present.*scalar",
+   "results": "4 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: the results concern ordinary modules, scheme morphisms, or SheafOfModules presentations, not raw inverse image and same-cover local finite presentation for internal module objects; SheafOfModules.Presentation.map requires an encoding comparison and functor hypotheses beyond one-line specialization",
+   "subdirectory": "Algebra"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finitely presented internal module over a sheaf of rings remains locally finitely presented on the same cover after base change of the coefficient ring",
+   "results": "8 hits: SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation, SheafOfModules.isFinitePresentation, SheafOfModules.instIsFiniteTypeOfIsFinitePresentation, SheafOfModules.quasicoherentDataOfIsFinitePresentation, SheafOfModules.IsFinitePresentation, SheafOfModules.IsFinitePresentation.exists_quasicoherentData, SheafOfModules.instIsQuasicoherentOfIsFinitePresentation",
+   "date": "2026-10-21",
+   "verdict": "no match: the results concern ordinary modules, scheme morphisms, or SheafOfModules presentations, not raw inverse image and same-cover local finite presentation for internal module objects; SheafOfModules.Presentation.map requires an encoding comparison and functor hypotheses beyond one-line specialization"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-extend-subfield-constructible",
@@ -82,5 +187,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-subfield-extension-local-presentation",
+  "worker": "stage1",
+  "summary": "Statement and all eight statement dependencies retained unchanged. The proof uses the existing internal scalar-extension/inverse-image comparison first for f and then for each member of an arbitrary witnessing cover, followed by the existing finite-free presentation theorem. The same cover and presentation ranks are retained. No new nodes, no Lean edits or compiles, and no extra hypotheses.",
+  "blueprint": "Realizes the second sentence of lem-sfb-extend-subfield-constructible.proof.md, the tensoring-local-presentations clause of unit step 9: steps 1 and 2 supply the raw-pullback comparisons, step 3 tensors the finite-free presentation, and step 4 keeps the original covering family. The parent applies this to each stratum."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q44-47b95eb0d",
+  "group": "Q44",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-47b95eb0d (reviewer sub-agent of L); spot-checked: Read the whole 4-step split, adds no new nodes; statement, stmt_deps and provenance unchanged against the side-live base. Not in the drop list, no repair note, side-live item still unsplit, no SGA. It realizes the second sentence of main-20261015 lem-sfb-extend-subfield-constructible.proof.md ('tensoring a local finite presentation … on the same stratification'). Steps: (1) and (2) apply lem-sfb-internal-extension-inverse-image first to f with E_X→F_X, then to each cover member u_i with R=f^{-1}E_X and S=f^{-1}F_X; mapMod(u_i^*) of θ is an S_i-linear iso, and the rings match the u_i^*R in def-sfb-locally-finitely-presented, so no coefficient identification is hidden. (3) lem-sfb-internal-extension-finite-presentation applies on U_i without flatness, giving coker(a_{i,S}). (4) Elementary: the same cover, which was arbitrary, witnesses the conclusion. Edge cases E=F, f=id, empty Z, zero modules and infinite covers are fine; neither lemma needs qcqs. Same route as sibling lem-sfb-extend-to-qlbar-constructible step 2. The overlap between lem-sfb-internal-scalar-extension-finite-presentation and the stronger lemma predates this delivery; the stronger one is cited. One repair: step 1 did not check that E_X and F_X are commutative, which the inverse-image lemma requires. Added this, citing def-sfb-padic-subfield-condensed-ring and sk-def-sfb-pulled-back-coefficients (uses and proof_deps updated), in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-subfield-extension-local-presentation.json.; 1 file(s) fixed by the reviewer"
  }
 }
