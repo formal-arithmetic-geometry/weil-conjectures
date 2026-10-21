@@ -234,7 +234,8 @@ theorem etaleOriginProperOpenInterchange (A : Type u) [CommRing A] [Finite A]
     have hgamma : ae.homEquiv _ _ ((etaleOriginOpenEtaleInterchange A p i).hom.app K.obj) =
         le.inv.app K.obj := by
       have hg := hge K.obj
-      rw [etaleOriginOpenEtaleInterchange, Etale.properOpenCoefficientInterchange, hg]
+      rw [etaleOriginOpenEtaleInterchange,
+        Etale.properOpenCoefficientInterchange_eq_recorded, hg]
       exact (ae.homEquiv _ _).apply_symm_apply (le.inv.app K.obj)
     have ht := open_mate_transport ae adj
       (etaleOriginOpenExtensionComparison A i)
