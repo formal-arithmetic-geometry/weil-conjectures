@@ -23598,3 +23598,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:59 L: merged deliver/NN/lem-sfb-ordered-join-partial-contraction (reviewer PASS; first push; new nodes: 0)
 - 2026-10-21T19:59:41Z L: superseded stage-1 delivery NX/lem-trf-point-system-transport-descent at 2843677b72db9fd786b60f02fa3c16346f287ec9; current completion retained; packet archived at refs/superseded/NX/lem-trf-point-system-transport-descent/2843677b72db9fd786b60f02fa3c16346f287ec9; stale return retired.
 - 20:00 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
+- 20:01 L: merged deliver/O4/lem-sfb-norm-one-finite-subfield-projection (reviewer FIX; first push; new nodes: 0)
