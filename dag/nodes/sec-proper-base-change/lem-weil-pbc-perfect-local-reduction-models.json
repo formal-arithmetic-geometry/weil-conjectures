@@ -1,0 +1,164 @@
+{
+ "id": "lem-weil-pbc-perfect-local-reduction-models",
+ "kind": "statement",
+ "title": "Cohomology bounds and finite constant models from one perfect chart",
+ "statement": "Let $g:Y\\to X$ be an immersion of schemes [def-pc-scheme], $(A,I)$ an adic coefficient datum [def-weil-pbc-adic-coefficient-datum], $K\\in D(\\operatorname{Mod}(B_X))$ over the completed coefficient sheaf $B_X$ [def-weil-pbc-bounded-constructible-tower, def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category], and $U\\in Y_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site]. Suppose the restriction to $U$ of $g^*K$ is isomorphic to that of $g^*(B_X\\otimes_{\\underline A}^L\\underline P)$ for a perfect $A$-complex $P$ [def-pc-perfect-ring-complex, def-weil-pbc-completed-constant-complex-base, def-weil-pbc-ringed-site-derived-restriction, def-weil-proetale-inverse-image, def-weil-pbc-integral-stratified-perfect-models]. Then there exist integers $a\\le b$ such that the restrictions to $U$ of $g^*\\mathcal H^q(K)$ and of $g^*\\operatorname{Res}_{j_n}\\mathcal H^q(K\\otimes_{B_X}^LR_n)$ vanish for every $q\\notin[a,b]$ and every $n\\ge0$ [def-weil-derived-cohomology-sheaves]. Here $R_n$ and $j_n:\\underline{A/I^{n+1}}\\simeq R_n$ are the specified quotient coefficients and constant comparison. For every $n,q$ there is a finite $A/I^{n+1}$-module $M$ and an isomorphism on the same $U$ between the latter cohomology restriction and the restriction of $g^*\\underline M$.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.8(1); Lemma 6.6.10(1); Proposition 6.6.11, reverse implication, local perfect models"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-weil-pbc-completed-constant-complex-base",
+  "def-weil-pbc-integral-stratified-perfect-models",
+  "def-weil-pbc-ringed-site-derived-restriction",
+  "def-weil-proetale-inverse-image",
+  "def-pc-perfect-ring-complex",
+  "def-weil-derived-cohomology-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "Choose a bounded finite-projective representative C of the perfect complex P. Exact constant realization transports its derived isomorphism to the chosen representative used in the hypothesis. The constant C is K-flat by projective flatness and bounded-above flatness; the universal extension counit identifies the completed model with the termwise extension complex.",
+   "uses": [
+    "def-pc-perfect-ring-complex",
+    "def-weil-pbc-completed-constant-complex-base",
+    "lem-sfb-constant-module-flat",
+    "lem-weil-pbc-independent-bounded-flat-kflat",
+    "def-weil-pbc-bounded-constructible-tower"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the chart tensor comparison for every n. It identifies the normalized finite reduction on the original chart with the constant quotient tensor complex. Exact geometric inverse image and exact slice restriction commute with derived homology; the ring-isomorphism scalar comparison identifies the identity-coefficient pullback with module inverse image.",
+   "uses": [
+    "lem-weil-pbc-perfect-chart-tensor-comparison",
+    "lem-weil-pbc-local-derived-restriction-comparisons",
+    "def-weil-pbc-ringed-derived-restriction",
+    "lem-sf-site-perfect-restriction-exact",
+    "lem-weil-sheaf-scalar-extension-ring-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Enlarge the support bounds of C to contain zero. Constants, scalar extension, and quotient tensor preserve zero terms, so the completed and all quotient tensor complexes vanish in every degree outside that same interval. A zero term gives zero homology in that degree; transport this along the preceding isomorphisms.",
+   "uses": [
+    "def-weil-pbc-completed-constant-complex-base",
+    "def-weil-pbc-bounded-constructible-tower"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Exact constants commute with homology. A quotient tensor term is finitely generated over the finite quotient ring, hence is a finite set. Its cycles embed into that finite term and its homology is a quotient of the cycles, so the homology module is finite. Its constant realization is the required model, by the homology comparisons.",
+   "uses": [
+    "def-weil-pbc-adic-coefficient-datum",
+    "def-weil-pbc-completed-constant-complex-base"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-ring-complex",
+  "def-weil-pbc-completed-constant-complex-base",
+  "lem-sfb-constant-module-flat",
+  "lem-weil-pbc-independent-bounded-flat-kflat",
+  "def-weil-pbc-bounded-constructible-tower",
+  "lem-weil-pbc-perfect-chart-tensor-comparison",
+  "lem-weil-pbc-local-derived-restriction-comparisons",
+  "def-weil-pbc-ringed-derived-restriction",
+  "lem-sf-site-perfect-restriction-exact",
+  "lem-weil-sheaf-scalar-extension-ring-iso",
+  "def-weil-pbc-adic-coefficient-datum"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.8(1); Lemma 6.6.10(1); Proposition 6.6.11, reverse implication, local perfect models; explicit scalar-adjunction and exact-homology calculation, B2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived reduction of a completed constant bounded finite projective complex on a ringed site is the constant quotient tensor complex, and commutes with restriction to a slice",
+   "results": "8 hits on generic Tor, projective resolutions, and light condensed objects; no matching pro-etale coefficient comparison",
+   "verdict": "No direct match; use the existing scalar adjunction and constant tensor comparison.",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Module.Flat\", \"Projective\"",
+   "results": "Module.Flat.of_projective; Module.Flat.projective_of_finitePresentation",
+   "verdict": "Projective implies flat; used through isFlatOnSite_constantModule and the bounded-flat K-flat theorem.",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*(flat|Flat)|kFlat_of_isStrictlyLE",
+   "results": "Three unrelated scheme constant-free/flat declarations",
+   "verdict": "No matching local reduction theorem. Existing constant-module flatness and independent-coefficient K-flat declarations suffice.",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived reduction of a completed constant bounded finite projective complex on a ringed site is the constant quotient tensor complex and commutes with restriction to a slice",
+   "results": "8 hits: DerivedCategory.right_fac_of_isStrictlyLE; HomologicalComplex.pOpcycles_restrictionOpcyclesIso_hom; AlgebraicGeometry.StructureSheaf.res_const; DerivedCategory; CategoryTheory.Functor.mapDerivedCategoryFactors; HasExt small localized shifted Hom; DerivedCategory.quotientCompQhIso; DerivedCategory localization instance",
+   "verdict": "No direct coefficient-reduction theorem. mapDerivedCategoryFactors is used in the exact restriction and constant-realization comparisons.",
+   "date": "2026-10-21"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PerfectStrataUniformReductions",
+  "date": "2026-10-21",
+  "group": "B2"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Proof, first sentence: \"Choose an integral lattice for K\"; Bhatt--Scholze Proposition 6.6.11 reverse implication, perfect-model finite reductions and bounds",
+   "via": [
+    "lem-weil-pbc-perfect-strata-uniform-reductions",
+    "lem-weil-pbc-integral-stratified-perfect-characterization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PerfectLocalReductionModels",
+  "file": "lean/Sheaf/Paper/PerfectLocalReductionModels.lean",
+  "declaration": "AlgebraicGeometry.Scheme.perfect_local_reduction_models",
+  "statement": "theorem perfect_local_reduction_models\n    {X Y : Scheme.{u}} (g : Y ⟶ X) [IsImmersion g]\n    {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)\n    (K : d.derived X) (U : Y.ProEt)\n    (P : @DerivedCategory (ModuleCat.{u + 1} A) _ _ (HasDerivedCategory.standard _))\n    (hP : @DerivedCategory.IsPerfectRingComplex A _ (HasDerivedCategory.standard _) P)\n    (e : Nonempty (integralLocalDerived g (d.completedRing X) U K ≅\n      integralLocalDerived g (d.completedRing X) U\n        ((pbcDerivedExtend (CompletedConstantReduction.base X d.ideal ≫\n          (pbcCompletedComparison X d).hom)).obj\n            (DerivedCategory.Q.obj ((CompletedConstantReduction.constantComplex X A).obj\n              ((@DerivedCategory.Q (ModuleCat.{u + 1} A) _ _\n                (HasDerivedCategory.standard _)).objPreimage P)))))) :\n    ∃ a b : ℤ, a ≤ b ∧\n      (∀ q : ℤ, q < a ∨ b < q →\n        IsZero ((SheafOfModules.overFunctor _ U).obj\n          ((proEtaleModuleInverseImage g (d.completedRing X)).obj\n            ((DerivedCategory.homologyFunctor _ q).obj K)))) ∧\n      (∀ n q, q < a ∨ b < q →\n        IsZero ((SheafOfModules.overFunctor _ U).obj\n          ((proEtaleModuleInverseImage g\n            (adicLisseConstantRing X (A ⧸ d.ideal ^ (n + 1)))).obj\n              ((pbcRestrict (pbcLevelConstantComparison X d n).hom).obj\n                ((DerivedCategory.homologyFunctor _ q).obj ((d.reduction X n).obj K)))))) ∧\n      ∀ n q, ∃ M : ModuleCat.{u + 1} (A ⧸ d.ideal ^ (n + 1)), Finite M ∧\n        Nonempty ((SheafOfModules.overFunctor _ U).obj\n          ((proEtaleModuleInverseImage g\n            (adicLisseConstantRing X (A ⧸ d.ideal ^ (n + 1)))).obj\n              ((pbcRestrict (pbcLevelConstantComparison X d n).hom).obj\n                ((DerivedCategory.homologyFunctor _ q).obj ((d.reduction X n).obj K)))) ≅\n          (SheafOfModules.overFunctor _ U).obj\n            ((proEtaleModuleInverseImage g\n              (adicLisseConstantRing X (A ⧸ d.ideal ^ (n + 1)))).obj\n                ((adicLisseConstantModules X (A ⧸ d.ideal ^ (n + 1))).obj M)))",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261021T155739-L-3432110",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261021T155739-L-3432110",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

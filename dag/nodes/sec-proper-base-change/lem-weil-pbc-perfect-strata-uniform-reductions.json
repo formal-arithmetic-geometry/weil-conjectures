@@ -27,128 +27,56 @@
  ],
  "proof": [
   {
-   "text": "For each original covering member $U\\to S_\\alpha$, choose a bounded finite-projective representative $P_U^\\bullet$ of its perfect scalar model, with terms zero outside $[a_U,b_U]$. A finite generating set gives a surjection $A^{r}\\to P_U^j$, which splits by projectivity. Applying constants and then extension to $B_U$ preserves the two splitting maps and their identity composite. Thus $\\underline{P_U^j}$ and $B_U\\otimes_{\\underline A}\\underline{P_U^j}$ are retracts of finite free sheaves over their respective coefficient rings. Tensoring with such a retract preserves injections, because tensor with the finite free sheaf is a finite direct sum of the identity. Both bounded complexes are K-flat by [lem-pc-bounded-above-flat-kflat-site]. Consequently the local model $B_U\\otimes_A^LP_U$ is represented by $M_U^\\bullet=B_U\\otimes_{\\underline A}\\underline{P_U^\\bullet}$, zero outside the same interval. In particular its cohomology vanishes outside that interval.",
+   "text": "Apply the local reduction models lemma independently to each original covering member. Choose its local interval and its finite constant cohomology models. This retains every original covering member and gives the same interval for the completed complex and every normalized finite reduction.",
    "uses": [
-    "def-pc-perfect-ring-complex",
-    "def-weil-pbc-projective-module",
-    "def-pur-sheaf-tensor-product",
-    "lem-pc-bounded-above-flat-kflat-site",
-    "lem-pur-derived-change-of-rings"
+    "lem-weil-pbc-perfect-local-reduction-models"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YS, lemma-bounded-flat-K-flat; Tags 06YT and 06YU, computation of derived change of rings by K-flat representatives"
-   }
+   "elementary": false
   },
   {
-   "text": "Write $R_n=(A/I^n)_X$ and $K_n=K\\otimes^L_{B_X}R_n$. Apply [lem-weil-pbc-stratum-completion-unit-restriction] to each composite $U\\to S_\\alpha\\to X$. Its coefficient identifications give $B_X|_U\\cong B_U$ and $R_n|_U\\cong(A/I^n)_U$ and identify $K_n|_U$ with $(K|_U)\\otimes^L_{B_U}(A/I^n)_U$. Use the given local-model isomorphism for $K|_U$. The same cited statement makes these inverse images exact on modules. Therefore they commute with cohomology: apply exactness to the kernels of differentials and to the quotients of those kernels by images. These comparisons apply to both $K$ and every $K_n$; none uses a completion unit or a completeness assertion.",
+   "text": "Each locally closed stratum is Noetherian and quasi-compact. The covering sieve of its terminal object has a finite quasi-compact refinement. Every chosen arrow factors through an original covering member. Choose the refinements once for all reduction indices. On the finite sum of these index sets put a₀=−Σ|aᵢ| and b₀=Σ|bᵢ|; then a₀≤0≤b₀ and every selected local interval lies inside [a₀,b₀]. The empty family gives [0,0].",
    "uses": [
-    "lem-weil-pbc-stratum-completion-unit-restriction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.5.8(1), coefficient restriction and derived quotient restriction; Proposition 6.6.11, reverse implication"
-   }
-  },
-  {
-   "text": "Compute the last tensor using the $B_U$-K-flat complex $M_U^\\bullet$ of step 1, by [lem-pur-derived-change-of-rings]. In degree $j$ the balancing map is $(b\\otimes p)\\otimes\\bar a\\mapsto p\\otimes\\pi_n(b)\\bar a$. It gives $M_U^j\\otimes_{B_U}(A/I^n)_U\\cong\\underline{P_U^j\\otimes_A A/I^n}$. To check invertibility, first take $P_U^j=A^r$, where this is the identity on $(A/I^n)_U^r$, and then apply the splitting maps of step 1. The formula commutes with every differential, since those maps are $A$-linear. Hence $K_n|_U\\simeq\\underline{P_U^\\bullet\\otimes_A A/I^n}$ for every $n\\geq1$. All these complexes have terms zero outside $[a_U,b_U]$; deriving reduction introduces no additional degrees.",
-   "uses": [
-    "lem-pur-derived-change-of-rings",
-    "def-pur-sheaf-tensor-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YT and 06YU, K-flat computation of change of rings; finite-free calculation and retracts"
-   }
-  },
-  {
-   "text": "By [lem-weil-pbc-finite-type-constant-exact], constant module sheafification preserves kernels and cokernels. Applying it to the differentials and their image factorizations in the complex of step 3 gives $\\mathcal H^q(K_n)|_U\\cong\\underline{H^q(P_U^\\bullet\\otimes_A A/I^n)}$. Each term $P_U^j\\otimes_A A/I^n$ is a retract of $(A/I^n)^r$. The coefficient datum makes $A/I^n$ a finite set, so this term is a finite set. Its submodule of cycles and the quotient by boundaries are finite sets as well, hence finitely generated $A/I^n$-modules (the entire finite set is a generating set). These are constant finite models on every original covering member, for every $n,q$.",
-   "uses": [
-    "lem-weil-pbc-finite-type-constant-exact",
-    "def-weil-pbc-adic-coefficient-datum"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 093J, lemma-constant-exact; coefficient finiteness assumed in def-weil-pbc-adic-coefficient-datum"
-   }
-  },
-  {
-   "text": "Apply [lem-sfb-stratified-local-cohomological-bounds] to $K$, the given finite stratification, its given covers, and the intervals $[a_U,b_U]$ from step 1. Keep the finitely many quasi-compact open subschemes $W$ selected from the covering members by that statement; their composites $W\\to S_\\alpha$ are jointly surjective onto each stratum. They form a pro-etale covering of $S_\\alpha$ [def-weil-pbc-proetale-covering]. Indeed, an open immersion is weakly etale, and weakly etale maps compose [lem-weil-pbc-ind-etale-stability]. The space $|X|$ is Noetherian (the argument of step 6 from [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal]), so every subset of $|S_\\alpha|\\cong|X_\\alpha|\\subseteq|X|$ is quasi-compact and $S_\\alpha$ is quasi-separated. Hence each $W\\to S_\\alpha$ is quasi-compact [lem-weil-pbc-qcqs-morphism-permanence]. For an affine open $V\\subseteq S_\\alpha$, each preimage of $V$ in a selected $W$ is then a finite union of affine opens. By joint surjectivity, the images of these finitely many affine opens are exactly $V$. Let $a$ be the minimum of the lower bounds and $b$ the maximum of the upper bounds of the selected original members. The cited statement gives $\\mathcal H^q(K)=0$ outside $[a,b]$. For every $n$, step 3 gives exactly the same bounds for $K_n$ on these same selected opens. For a fixed $q\\notin[a,b]$, their exact restrictions of $\\mathcal H^q(K_n)$ are zero. Apply [lem-weil-pbc-noetherian-stratum-detection] with these selected coverings to this abelian sheaf to obtain $\\mathcal H^q(K_n)=0$. The selected family and $a,b$ were chosen before $n$, so this holds simultaneously for all $n\\geq1$. If the selected family is empty, $X$ is empty and use $[0,0]$.",
-   "uses": [
-    "lem-sfb-stratified-local-cohomological-bounds",
-    "lem-weil-pbc-noetherian-stratum-detection",
-    "def-weil-pbc-proetale-covering",
-    "lem-weil-pbc-ind-etale-stability",
-    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
-    "lem-weil-pbc-qcqs-morphism-permanence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.6.10(1) and Proposition 6.6.11, reverse implication: finite-cover boundedness and stratified detection"
-   }
-  },
-  {
-   "text": "The minimal-closed-subset assertion of [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal] implies the descending-chain condition for closed subsets of $|X|$: the family of members of any strictly descending infinite chain would have no minimal element. Thus $|X|$ is Noetherian. The Noetherian clause of [def-weil-constructible-subset] makes every locally closed stratum of the given finite stratification constructible. Step 4 supplies on each such stratum a covering by constant finite $A/I^n$-module models for $\\mathcal H^q(K_n)$; step 7 gives finite geometric stalks. These are precisely the clauses of [def-weil-proetale-constructible-sheaf]. On the empty scheme a partition with one empty stratum supplies its convention $N\\geq1$. This proves intrinsic constructibility for all $n,q$ and retains the given covers as the local models asserted in the item.",
-   "uses": [
-    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
-    "def-weil-constructible-subset",
     "def-constructible-stratification",
-    "def-weil-proetale-constructible-sheaf"
+    "lem-sfb-proetale-tor-local-global"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/topology.tex",
-    "place": "Tag 005L, lemma-constructible-Noetherian-space; proetale.tex Tag 09AJ, definition-constructible"
-   }
+   "elementary": true
   },
   {
-   "text": "Fix a stratum $S=S_\\alpha$, put $F=\\mathcal H^q(K_n)|_S$, and let $\\bar y:\\operatorname{Spec}\\Omega\\to S$ be a geometric point over $y$. The given cover is jointly surjective [def-weil-pbc-fpqc-covering], so some member $U\\to S$ has a point $u$ over $y$. As $\\kappa(u)\\otimes_{\\kappa(y)}\\Omega\\neq0$, its spectrum maps to $Z=U\\times_S\\operatorname{Spec}\\Omega$, so $Z$ is nonempty. $Z$ is weakly etale over $\\operatorname{Spec}\\Omega$ by base change [lem-weil-pbc-ind-etale-stability]. Thus [lem-fix-weakly-etale-algclosed-section] gives a section, hence a lift $\\bar u:\\operatorname{Spec}\\Omega\\to U$ of $\\bar y$. Pointed neighbourhoods of $\\bar y$ that factor through $(U,\\bar u)$ are cofinal in those of [def-weil-proetale-geometric-stalk]: $(V,\\bar v)$ is refined by $(V\\times_SU,(\\bar v,\\bar u))$, weakly etale over $S$ by the same stability. Hence $F_{\\bar y}$ equals the stalk at $\\bar u$ of $F|_U\\cong\\underline{H^q(P_U^\\bullet\\otimes_AA/I^n)}$ (step 4). By [lem-weil-proetale-constant-sheaf-stalk], this stalk is the finite module $H^q(P_U^\\bullet\\otimes_AA/I^n)$. So every geometric stalk of $F$ is finite.",
+   "text": "Exact restriction to a refining arrow preserves local zero objects. Descent along the finite covering sieve gives zero on every stratum. The underlying-abelian comparison identifies module inverse image with abelian inverse image; the strata jointly cover X, so the abelian detection lemma gives global vanishing. Faithfulness of the underlying-abelian functor gives module vanishing. Apply simultaneously to completed homology and every normalized reduction. Restriction of scalar action leaves the underlying abelian sheaf unchanged, so this also proves raw finite-level vanishing.",
    "uses": [
-    "def-weil-pbc-fpqc-covering",
-    "lem-weil-pbc-ind-etale-stability",
-    "lem-fix-weakly-etale-algclosed-section",
-    "def-weil-proetale-geometric-stalk",
-    "lem-weil-proetale-constant-sheaf-stalk"
+    "lem-sf-site-perfect-restriction-exact",
+    "lem-sf-site-perfect-overmap-exact",
+    "lem-sf-site-perfect-overmap-comp",
+    "lem-weil-pbc-proetale-module-inverse-image-comparison",
+    "lem-weil-pbc-proetale-abelian-closed-support"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.6.11, reverse implication (locally constant with finite values); stalks along a lift of the geometric point to a covering member"
-   }
+   "elementary": false
+  },
+  {
+   "text": "On each stratum, the original covering sieve and its finite constant models give relative finite lisseness by the intrinsic coefficient finite-sieve equivalence. The given stratification is constructible on the Noetherian space. The coefficient constructibility equivalence therefore gives intrinsic constructibility of every normalized cohomology sheaf. The actual finite models on every original chart are exactly the models already supplied by the local lemma.",
+   "uses": [
+    "lem-weil-constructible-coefficient-serre",
+    "def-constructible-stratification",
+    "lem-weil-pbc-perfect-local-reduction-models"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-perfect-ring-complex",
-  "def-weil-pbc-projective-module",
-  "def-pur-sheaf-tensor-product",
-  "lem-pc-bounded-above-flat-kflat-site",
-  "lem-pur-derived-change-of-rings",
-  "lem-weil-pbc-stratum-completion-unit-restriction",
-  "lem-weil-pbc-finite-type-constant-exact",
-  "def-weil-pbc-adic-coefficient-datum",
-  "lem-sfb-stratified-local-cohomological-bounds",
-  "lem-weil-pbc-noetherian-stratum-detection",
-  "def-weil-pbc-proetale-covering",
-  "lem-weil-pbc-ind-etale-stability",
-  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
-  "lem-weil-pbc-qcqs-morphism-permanence",
-  "def-weil-constructible-subset",
+  "lem-weil-pbc-perfect-local-reduction-models",
   "def-constructible-stratification",
-  "def-weil-proetale-constructible-sheaf",
-  "def-weil-pbc-fpqc-covering",
-  "lem-fix-weakly-etale-algclosed-section",
-  "def-weil-proetale-geometric-stalk",
-  "lem-weil-proetale-constant-sheaf-stalk"
+  "lem-sfb-proetale-tor-local-global",
+  "lem-sf-site-perfect-restriction-exact",
+  "lem-sf-site-perfect-overmap-exact",
+  "lem-sf-site-perfect-overmap-comp",
+  "lem-weil-pbc-proetale-module-inverse-image-comparison",
+  "lem-weil-pbc-proetale-abelian-closed-support",
+  "lem-weil-constructible-coefficient-serre"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Proposition 6.6.11, reverse implication, finite-model portion; Lemma 6.6.10(1); explicit extension to arbitrary Noetherian adic coefficient data, using the cited Stacks K-flat and exact-constants results"
+  "place": "Proposition 6.6.11 reverse implication and Lemma 6.6.10(1); B2: fixed finite sieve refinement, simultaneous bounds, intrinsic coefficient constructibility without the geometric-stalk detour"
  },
  "mathlib_searches": [
   {
@@ -274,13 +202,6 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-pc-bounded-above-flat-kflat-site",
-  "lem-pur-derived-change-of-rings",
-  "lem-sfb-stratified-local-cohomological-bounds",
-  "lem-fix-weakly-etale-algclosed-section",
-  "lem-weil-proetale-constant-sheaf-stalk"
- ],
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
@@ -310,5 +231,15 @@
   "group": "NM",
   "result": "pass",
   "note": "Re-delivery of RETURNed e3263ad8: Lean byte-identical (sha af96df88), substance re-read vs node and BS 6.6.10(1)/6.6.11 (hypotheses, uniform a<=b before forall n, constructibility, finite constant models on original covers, edge cases X empty / I=A / n index shift, universes) OK. R1/R2 fixed: def-weil-derived-cohomology-sheaves and def-weil-proetale-constructible-sheaf records equal live, all dep nodes equal live. R3 fixed: new existing:true def-weil-pbc-completed-constant-complex-base on unchanged CompletedConstantSheafReduction (base = choose of proved exists-unique base_exists, constantComplex = mapHomologicalComplex of constant modules), statement verbatim, Stacks 093J/093M labels verified, check_existing and check_new_node clean. stmt_deps adds only def nodes. nt_compile --json clean 17.6 s. Report has Worker report and Second reading by NM. Advisory: overFunctor owner def-pur-localized-ringed-site not cited; proof-only plain imports."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261021T155739-L-3432110",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

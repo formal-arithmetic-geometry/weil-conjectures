@@ -22984,3 +22984,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:55 L: merged deliver/NP/lem-sfb-condensed-product-bar-comparison (reviewer PASS; first push; new nodes: 1)
 - 15:55 L: merged deliver/P6/Sheaf.Paper.ExtensionZeroStratifiedPerfect (stage 3; reviewer PASS; first push; landing 20261021T155522-L-3343981 (proof); batch 20261021T155519; modules 1; new nodes 0; change records: coord/changes/P6-extension-zero-stratification-upstream-name.md)
 - 15:55 L: merged deliver/X7/Sheaf.Paper.ConstantCoefficientScalarNormalization (stage 3; reviewer PASS; first push; landing 20261021T155525-L-3346041 (proof); batch 20261021T155519; modules 1; new nodes 0)
+- 15:57 L: merged deliver/B2/Sheaf.Paper.PerfectStrataUniformReductions (stage 3; reviewer PASS; first push; landing 20261021T155739-L-3432110 (interface); batch 20261021T155738; modules 3; new nodes 2)
