@@ -21416,3 +21416,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:53 L: merged deliver/Q106/lem-pur-injective-tower-roos-shifts (reviewer PASS; first push; new nodes: 0)
 - 08:53 L: merged deliver/Q09/lem-weil-pbc-local-derived-restriction-comparisons (reviewer FIX; first push; new nodes: 0)
 - 08:53 L: merged deliver/Q145/lem-per-rational-stratum-integral-models (reviewer PASS; first push; new nodes: 0); claim not held by Q145: not your claim
+- 08:53 L: merged deliver/Q128/lem-trf-point-system-transport-descent (reviewer PASS; first push; new nodes: 0); claim not held by Q128: not your claim
