@@ -23095,3 +23095,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:56 L: returned deliver/M2/Sheaf.Paper.IntegralDirectImageTower (reviewer RETURN: (reviewer C-a6c03, head a6c03114a) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.IntegralDirect)
 - 16:57 L: merged deliver/NL/lem-sfb-internal-action-site-presentation (stage 2; reviewer PASS; parallel immutable checks)
 - 16:57 L: returned deliver/NS/lem-sfb-integral-ambient-tower-comparison (reviewer RETURN: L: independent stage-2 immutable head bb1634ad558b: H13: delivery rebinds def-weil-derived-complete's record (Q21 Derive)
+- 16:57 L: returned deliver/P2/Sheaf.AlgebraicGeometry.RawModuleScalarPullbackComparison (reviewer RETURN: (the landing tools, head 9c8dbd89f) the delivery did not land: (d) user Sheaf.Paper.ConcentratedSupportEtaleTransfer (me)
