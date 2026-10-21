@@ -21129,3 +21129,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:20 L: returned deliver/O4/lem-pe-profinite-sections-finite-quotient (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-pe-profinite-sections-finite-quotient: lem-pe-prof)
 - 08:20 L: returned deliver/NB/lem-weil-pbc-projection-mate-square-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-pbc-projection-mate-square-coherence: lem-wei)
 - 08:20 L: returned deliver/Q21/lem-sfb-qcqs-proper-constructible-closed-base-change (reviewer RETURN: E7 and C4 (the latter at the citer). The delivery changes the item's statement at Q̄_ℓ. The base statement used the [sk-)
+- 08:20 L: returned deliver/NQ/lem-cbc-ringed-open-extension-products (reviewer RETURN: Superseded (A7/B10; brief-stage1 l.103: live finished nodes win, never split one). This is NQ's second push of the same )
