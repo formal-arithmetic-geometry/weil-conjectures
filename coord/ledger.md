@@ -24040,3 +24040,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:54 L: returned deliver/NM/lem-sfb-tame-snc-quotient-resolution (reviewer RETURN: C1/F + C5/B9 + G4. The item is live and not itself dropped. NB 74c9 created it to carry ILO X 1.1, VIII 3.4.9 and the fi)
 - 23:54 L: merged deliver/NH/def-pur-affine-space-comparison (stage 2; reviewer PASS; parallel immutable checks)
 - 23:54 L: merged deliver/NB/lem-sfb-gabber-global-snc-alteration (stage 2; reviewer PASS; parallel immutable checks)
+- 23:55 L: returned deliver/NI/lem-sfb-equivariant-smooth-galois-model (reviewer RETURN: C1/F + G4. The item is live. It is not on side-live route-pivot-dropped.txt, it was created by the FIXed parent split NB)
