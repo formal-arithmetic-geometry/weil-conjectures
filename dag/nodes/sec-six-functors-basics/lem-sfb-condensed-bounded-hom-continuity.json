@@ -12,9 +12,69 @@
   "def-sfb-dcons-subfield",
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix the diagram and cocone in the statement. For an ambient derived object $C$, let $P(C)$ mean that the displayed comparison is an isomorphism for every integer shift, with $K$ replaced by $C$. Apply the general, first part of [det-lem-constructible-ext-continuity-devissage] with $\\Lambda=\\underline E$, $K_i^\\bullet=N_i^\\bullet$ and $K^\\bullet=c.\\mathrm{pt}$. It says that $P$ is closed under shifts, isomorphisms and extensions. This part holds for every scheme; the additional locally Noetherian hypothesis in that node belongs only to its final constructible specialization, which is not used here. The supplied termwise colimit cocone can serve as the colimit in that statement. Equivalently, the universal property gives the unique isomorphism from any chosen termwise colimit to $c.\\mathrm{pt}$ commuting with all legs; the isomorphisms in each degree commute with differentials because both composites agree on every colimit leg. Hence this identification preserves precisely the canonical Hom comparison, by [def-weil-pbc-category-colimit].",
+   "uses": [
+    "det-lem-constructible-ext-continuity-devissage",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-constructible-cocone-hom-surj.proof.md",
+    "place": "Paragraph 2: uniformly bounded-below Hom continuity and finite cone devissage"
+   }
+  },
+  {
+   "text": "By [def-sfb-dcons-subfield] and [sk-def-sfb-bounded-constructible], each cohomology module $H^q(K)$ is constructible in the specified locally finitely presented ring-object sense, and the cohomology of $K$ vanishes outside a finite interval. Apply [lem-weil-pbc-condensed-sheaf-ext-continuity] to $T=X$, the same finite field $E\\subseteq\\Omega$, $M=H^q(K)$, and the given diagram $N$. Its coefficient ring is exactly $p_X^*C(-,E)=E_X$, and its constructibility condition is exactly the one just specified. Its topological Noetherian and smallness hypotheses hold by assumption; its common termwise lower bound is the given $a$. It concludes $P(H^q(K)[0])$ for every $q$. Neither the cohomology nor the terms of $N_i$ need to be constructible. In particular every shifted cohomology object of $K$ satisfies $P$ by step 1.",
+   "uses": [
+    "def-sfb-dcons-subfield",
+    "sk-def-sfb-bounded-constructible",
+    "lem-weil-pbc-condensed-sheaf-ext-continuity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-constructible-cocone-hom-surj.proof.md",
+    "place": "Paragraph 2: uniformly bounded-below Hom continuity and finite cone devissage"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-bounded-cohomology-cone-witness] in the abelian category of $E_X$-modules to the bounded object $K$. Obtain its finite list $F_0,\\ldots,F_t$ ending in $F_t=K$. Prove $P(F_r)$ by induction on $r$. In the shifted-cohomology alternative this follows from step 2 and invariance under isomorphisms. In the other alternative there are $i,j<r$ and a distinguished triangle $F_i\\to F_j\\to F_r[s]\\to F_i[1]$. Rotate this triangle using (TR2) of [def-weil-triangulated-category], obtaining $F_j\\to F_r[s]\\to F_i[1]\\to F_j[1]$. The induction hypothesis and closure under shifts give $P(F_j)$ and $P(F_i[1])$. The extension closure in the first part of [det-lem-constructible-ext-continuity-devissage] now gives $P(F_r[s])$; shift by $-s$ to get $P(F_r)$. This finite induction establishes $P(K)$. It also covers the zero object, since all its Hom groups are zero.",
+   "uses": [
+    "lem-sfb-bounded-cohomology-cone-witness",
+    "def-weil-triangulated-category",
+    "det-lem-constructible-ext-continuity-devissage"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08J5, remark-truncation-distinguished-triangle (finite cohomology triangles), combined with the finite cone witness and the formal continuity closure"
+   }
+  },
+  {
+   "text": "Unpack $P(K)$ at the requested integer $n$. Throughout the argument its comparison was induced by the fixed shifted cocone legs, so its value on the class represented by $u_i$ is $Q(c.\\iota_i)[n]\\circ u_i$. Thus it is the displayed map and is an isomorphism of abelian groups. All colimits used for the targets were termwise module colimits, and the source colimits were in abelian groups.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-constructible-cocone-hom-surj.proof.md",
+    "place": "Paragraph 2: uniformly bounded-below Hom continuity and finite cone devissage"
+   }
+  }
+ ],
+ "proof_deps": [
+  "det-lem-constructible-ext-continuity-devissage",
+  "def-weil-pbc-category-colimit",
+  "def-sfb-dcons-subfield",
+  "sk-def-sfb-bounded-constructible",
+  "lem-weil-pbc-condensed-sheaf-ext-continuity",
+  "lem-sfb-bounded-cohomology-cone-witness",
+  "def-weil-triangulated-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-constructible-cocone-hom-surj.proof.md",
+  "place": "Paragraph 2: the sheaf base case and five-lemma/finite-cone devissage, expanded using existing DAG nodes; finite truncations follow Stacks Tag 08J5"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,10 +111,31 @@
    "results": "HomologicalComplex.isColimitCoconeOfHasColimitEval; DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE; DerivedCategory.IsGE; DerivedCategory.IsLE; DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE; DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE; DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE; DerivedCategory.instIsLEObjSingleFunctor",
    "date": "2026-10-21",
    "verdict": "no match: the hits give general colimit constructions or degree-support facts, not bounded constructible condensed Hom continuity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hom from bounded constructible condensed sheaves commutes with filtered colimits of uniformly bounded below complexes",
+   "results": "HomologicalComplex.instHasFilteredColimitsOfSize; instPreservesHomologyFunctorAddCommGrpCatColim; Condensed.hasExactColimitsOfShape; HomologicalComplex.ab5OfSize; AddGrpCat.FilteredColimits.colimitCoconeIsColimit; instHasColimitsOfShapeCondensedOfHasWeakSheafifyCompHausCoherentTopology; instHasFiniteColimitsCondensedOfHasWeakSheafifyCompHausCoherentTopology; AddCommGrpCat.FilteredColimits.colimitCoconeIsColimit",
+   "date": "2026-10-21",
+   "verdict": "no match: general colimit, AB5 or derived degree-support declarations do not state constructible condensed Hom continuity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hom from a bounded constructible complex of condensed module sheaves commutes with filtered colimits of uniformly bounded below complexes",
+   "results": "Condensed.instAB5CondensedMod; instHasColimitsCondensedMod; Condensed.instAB4CondensedMod; LightCondensed.instIsGrothendieckAbelianLightCondMod; CondensedMod.hom_naturality_apply; instAbelianCondensedMod; Condensed.profiniteSolid; CondensedMod.IsSolid",
+   "date": "2026-10-21",
+   "verdict": "no match: general colimit, AB5 or derived degree-support declarations do not state constructible condensed Hom continuity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The property that all shifted Hom groups commute with a fixed cocone is closed under finite Postnikov towers in a derived category",
+   "results": "DerivedCategory.IsGE; DerivedCategory.IsLE; DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE; DerivedCategory.instIsGEObjSingleFunctor; DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE; DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE; DerivedCategory.TStructure.t; CategoryTheory.HasExt.hasSmallLocalizedShiftedHom_of_isLE_of_isGE",
+   "date": "2026-10-21",
+   "verdict": "no match: general colimit, AB5 or derived degree-support declarations do not state constructible condensed Hom continuity"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-constructible-cocone-hom-surj",
@@ -71,5 +152,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-condensed-bounded-hom-continuity",
+  "worker": "stage1",
+  "summary": "Expanded the inherited empty proof into the existing sheaf-continuity base case and a finite induction on the bounded-cohomology cone witness. Reused the general closure result without its stronger locally Noetherian constructible specialization. Preserved the statement, coefficient category, uniform termwise lower bound, canonical comparison, source and inherited search records. No new nodes or Mathlib leaves.",
+  "blueprint": "Realizes paragraph 2 of lem-sfb-constructible-cocone-hom-surj.proof.md, from the sentence beginning Since X is Noetherian through for such modules, and hence for K (five lemma). This is the finite derived-Hom continuity argument in unit sk-thm-sfb-qlbar-two-colimit, part (2) and final cocone paragraph. The existing precise blueprint.from.place is retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-condensed-sheaf-ext-continuity",
+    "why": "The sheaf base case has the exact topologically Noetherian, locally finitely presented condensed-module hypotheses; sk-lem-constructible-ext-continuity assumes locally Noetherian X and cannot replace it."
+   },
+   {
+    "node": "det-lem-constructible-ext-continuity-devissage",
+    "why": "Only the first, purely formal closure statement for any scheme is used as a generic tool, not the final stronger constructible specialization."
+   },
+   {
+    "node": "lem-sfb-bounded-cohomology-cone-witness",
+    "why": "Generic finite cone construction of a bounded derived object from its cohomology; no geometric hypotheses or alternate coefficient-descent route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-condensed-sheaf-ext-continuity",
+  "det-lem-constructible-ext-continuity-devissage",
+  "lem-sfb-bounded-cohomology-cone-witness"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q104-6652d5380",
+  "group": "Q104",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q104-6652d5380 (reviewer sub-agent of L); spot-checked: I read the item in full. It has no new nodes, and its statement, stmt_deps and blueprint fields are byte-identical to Q62's copy; the empty proof was filled with 4 steps. The proof realizes paragraph 2 of lem-sfb-constructible-cocone-hom-surj.proof.md (main-20261015), in which sheaf continuity is extended to K by the five lemma. The argument matches the parent's old steps 2-3 on the NP base. Step 1: the first part of det-lem-constructible-ext-continuity-devissage holds on any scheme, with no lower bound and no Noetherian hypothesis, and gives closure under shifts, isomorphisms and extensions; identifying the arbitrary termwise cocone with the chosen colimit is correct. Step 2: lem-weil-pbc-condensed-sheaf-ext-continuity has exactly the item's hypotheses (topologically Noetherian X, finite E, common termwise lower bound a). Its constructibility condition matches def-sfb-constructible-module + def-sfb-locally-finitely-presented + def-sfb-finitely-presented-module, and its coefficient ring p_X^*C(-,E) is the same construction as sk-def-sfb-pullback-from-point. Step 3: the cone witness applies to Mod_{E_X}; the (TR2) rotation F_j->F_r[n]->F_i[1]->F_j[1] is correct and the strong induction is properly set up. Step 4 is elementary. I found no cycle in the 3355-node closure and no SGA. Tool use accepted: lem-weil-pbc-condensed-sheaf-ext-continuity, which is off-route, but the route node sk-lem-constructible-ext-continuity needs locally Noetherian, quasi-compact X, so citing it would add a hypothesis (E1). det-lem and the cone witness are on the route through sk-lem-constructible-ext-continuity and sk-cor-coefficient-heart-ii. Edge cases checked: K=0, K=M[0], two cohomology sheaves, empty X, unbounded-above N_i. Advisory only: the step does not say that the module colimit equals the sheaf colimit, which is one standard line."
  }
 }
