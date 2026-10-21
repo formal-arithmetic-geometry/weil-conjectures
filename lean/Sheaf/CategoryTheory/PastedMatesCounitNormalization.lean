@@ -57,6 +57,12 @@ theorem pasted_mates_counit_normalization
       (mateEquiv adj₁ adj₂ α₂).app (H₁.obj J) ≫ R₂.map t) ≫ adj₂.counit.app K =
       L₂.map b ≫ α₂.app (G₁.obj (R₀.obj J)) ≫ H₂.map (α₁.app (R₀.obj J)) ≫
         H₂.map (H₁.map (adj₀.counit.app J)) ≫ t := by
-  sorry
+  simp only [Functor.map_comp, Category.assoc]
+  erw [adj₂.counit_naturality,
+    reassoc_of% (mateEquiv_counit adj₁ adj₂ α₂ (H₁.obj J))]
+  have h := α₂.naturality ((mateEquiv adj₀ adj₁ α₁).app J)
+  simp only [Functor.comp_map] at h
+  erw [reassoc_of% h, ← H₂.map_comp_assoc, mateEquiv_counit adj₀ adj₁ α₁ J]
+  simp only [Functor.map_comp, Category.assoc]
 
 end CategoryTheory
