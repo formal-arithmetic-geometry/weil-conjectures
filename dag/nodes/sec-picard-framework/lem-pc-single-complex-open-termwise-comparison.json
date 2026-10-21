@@ -118,14 +118,15 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-semicon",
  "lean": {
-  "existing": false,
+  "existing": true,
   "module": "Sheaf.AlgebraicGeometry.SingleComplexOpenTermwiseComparison",
   "file": "lean/Sheaf/AlgebraicGeometry/SingleComplexOpenTermwiseComparison.lean",
   "declaration": "AlgebraicGeometry.exists_singleComplexOpen_termwise_comparison",
   "statement": "theorem exists_singleComplexOpen_termwise_comparison [∀ Y : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] {X X' S S' : Scheme.{u}} (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X) (sq : IsPullback g' f' f g) (V : S.Opens) (V' : S'.Opens) (hV' : V' ≤ g ⁻¹ᵁ V) (j : (f' ⁻¹ᵁ V').toScheme ⟶ (f ⁻¹ᵁ V).toScheme) (hj : j ≫ (f ⁻¹ᵁ V).ι = (f' ⁻¹ᵁ V').ι ≫ g') (sq₀ : IsPullback j (f' ∣_ V') (f ∣_ V) (g.resLE V V' hV')) (P : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) (hP : P.IsAcyclicTensorKFlat) (hcP : IsIso ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P))) (z : (f' ⁻¹ᵁ V').toScheme) (i : ℤ) : letI : (schemeOpenRestriction X (f ⁻¹ᵁ V)).Additive := schemeOpenRestriction_additive X (f ⁻¹ᵁ V) letI : (schemeOpenRestriction X (f ⁻¹ᵁ V)).PreservesZeroMorphisms := Functor.preservesZeroMorphisms_of_additive _ let K := DerivedCategory.Q.obj P let Q := ((schemeOpenRestriction X (f ⁻¹ᵁ V)).mapHomologicalComplex (.up ℤ)).obj P let a : DerivedCategory.Q.obj Q ≅ (schemeOpenRestriction X (f ⁻¹ᵁ V)).mapDerivedCategory.obj K := (schemeOpenRestriction X (f ⁻¹ᵁ V)).mapDerivedCategoryFactors.symm.app P let F₀ := forget₂ (ModuleCat.{u} ((f' ⁻¹ᵁ V').toScheme.presheaf.stalk z)) AddCommGrpCat.{u} let F := forget₂ (ModuleCat.{u} (X'.presheaf.stalk z.val)) AddCommGrpCat.{u} let H₀ := comparisonStalkCohomology (f' ⁻¹ᵁ V').toScheme z i let H := comparisonStalkCohomology X' z.val i let θ := singleComplexRestrictedCoefficient g' K ((derivedPullback g').obj K) (𝟙 _) (f ⁻¹ᵁ V) (f' ⁻¹ᵁ V') j hj ∃ (_hP₀ : CochainComplex.IsAcyclicTensorKFlat (R := (f ⁻¹ᵁ V).toScheme.sheaf) Q), ∃ (hcP₀ : IsIso ((counit j).app ((HomotopyCategory.quotient _ (.up ℤ)).obj Q))), let ν := openDerivedAdditiveStalkIso X' (f' ⁻¹ᵁ V') z i ∃ l : F₀.obj ((Arrow.mk (comparisonIntoPullback (f ∣_ V) (f' ∣_ V') (g.resLE V V' hV') j sq₀ z Q hcP₀ i)).left) ≅ F.obj ((Arrow.mk (comparisonIntoPullback f f' g g' sq z.val P hcP i)).left), F₀.map (comparisonIntoPullback (f ∣_ V) (f' ∣_ V') (g.resLE V V' hV') j sq₀ z Q hcP₀ i ≫ H₀.map ((derivedPullback j).map a.hom ≫ θ)) ≫ ν.hom.app ((derivedPullback g').obj K) = l.hom ≫ F.map (comparisonIntoPullback f f' g g' sq z.val P hcP i)",
   "branch": "sheaf-dag",
-  "by": "B3",
-  "date": "2026-10-13"
+  "by": "X8",
+  "date": "2026-10-21",
+  "note": "X8: restore the quarantined historical Sheaf path as a public re-export of the adopted proved WeilConjectures.AlgebraicGeometry.SingleComplexOpenTermwiseComparison. The public theorem is supplied by that source module; its IsKFlatTensor predicate is definitionally equal to the historical IsAcyclicTensorKFlat predicate. All original public imports remain. Mathematical statement, parent dependencies and proof route are unchanged."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -138,14 +139,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "Q3",
+  "reviewer": "C-b477e",
+  "group": "X8",
   "result": "pass",
-  "landing": "20261013T165649-L-1810710",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261021T171859-L-3173551",
+  "kind": "proof",
+  "note": "independent cc review: archived quarantine signature of exists_singleComplexOpen_termwise_comparison vs the re-exported WeilConjectures theorem (diff: IsAcyclicTensorKFlat↔IsKFlatTensor, identical def bodies; scratch probe applying it at the archived signature compiled 10.4 s, axioms clean); node diff vs live (lean record only)"
  },
  "lean_audit": {}
 }
