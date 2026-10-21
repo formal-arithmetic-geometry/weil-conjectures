@@ -381,6 +381,10 @@ Proof plan (the ten steps of the node):
     the localized functor with this shift structure is additive and exact. -/
 theorem principalReductionConeData :
     ∃ data : PrincipalReductionConeData l E X, data.IsCanonical l E X := by
-  sorry
+  obtain ⟨d, hd, D, hobj, χ, T, j, sD, sF, κ, Φ, h⟩ :=
+    principal_reduction_cone_calculus l E X
+  refine ⟨⟨d, D, hobj, χ, T, j⟩, ?_⟩
+  intro S a s
+  exact ⟨hd S a s, sD, sF, κ, Φ, h⟩
 
 end AlgebraicGeometry.ProEtale.PrincipalReduction
