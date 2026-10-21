@@ -12,9 +12,120 @@
   "def-weil-etale-morphism",
   "def-weil-pbc-module-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Enumerate the finitely many primes $\\mathfrak r_i$ of $D$ over $\\mathfrak p$. Apply [lem-dl-a1-normal-finite-aut-separable-subfield] to each normal algebraic extension $E_i=\\kappa(\\mathfrak r_i)$ of $k=\\kappa(\\mathfrak p)$: its separable subfield $F_i$ is finite-dimensional. By [lem-weil-pbc-separable-first-purely-inseparable], $F_i/k$ is separable and $E_i/F_i$ is purely inseparable. This uses no finiteness of the full fields $E_i/k$.",
+   "uses": [
+    "lem-dl-a1-normal-finite-aut-separable-subfield",
+    "lem-weil-pbc-separable-first-purely-inseparable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0BSR, hypothesis (2), and pione.tex Tag 0BST, second reduction paragraph; field-theoretic justification by fields.tex Tags 0BME, 0BR4, 09HJ, 030K"
+   }
+  },
+  {
+   "text": "Apply [lem-dl-a1-integral-finite-residue-model] to these subfields. Obtain $A\\to C\\subseteq D$ finite over $A$, with $D$ integral over $C$, such that contraction is a bijection on primes above $\\mathfrak p$. For $\\mathfrak s_i=C\\cap\\mathfrak r_i$, put $L_i=\\kappa(\\mathfrak s_i)$. The same cited statement gives $[L_i:k]<\\infty$ and pure inseparability of $E_i/L_i$. Thus $\\operatorname{Spec}C\\to\\operatorname{Spec}A$ satisfies both finite-fibre and finite-dimensional-residue hypotheses of the existing integral-fibre splitting theorem.",
+   "uses": [
+    "lem-dl-a1-integral-finite-residue-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0BSR, first proof, construction of the finite intermediate algebra"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-integral-fibre-etale-splitting] to $\\operatorname{Spec}C\\to\\operatorname{Spec}A$ and $\\mathfrak p$. The affine etale neighbourhood has coordinate algebra $B$ and a prime $\\mathfrak p'$ over $\\mathfrak p$. The theorem gives a finite clopen affine partition of $\\operatorname{Spec}(B\\otimes_A C)$; write its factors as $C_j$. Each has a single fibre prime $\\mathfrak t_j$ over $\\mathfrak p'$ and $\\kappa(\\mathfrak t_j)/\\kappa(\\mathfrak p')$ purely inseparable. Here the affine-spectrum and integral-morphism conventions identify a finite ring map with the corresponding finite, hence integral, affine morphism. The tensor-product identification of this affine pullback, with both projections, is [lem-weil-pbc-fibre-product-affine-spectra].",
+   "uses": [
+    "lem-weil-pbc-integral-fibre-etale-splitting",
+    "def-weil-affine-spectrum",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0BSR, first proof, applying finite-algebra etale splitting to S-prime"
+   }
+  },
+  {
+   "text": "Set $D'=B\\otimes_A D$. It is integral over $B$ by [lem-weil-pbc-integral-base-change]. By [lem-weil-pbc-spec-clopen-idempotent], the clopen pieces correspond to idempotents. Disjointness makes their pairwise products zero, since those products are idempotents with empty distinguished open; their sum is then idempotent with distinguished open the whole spectrum, so equals $1$ by uniqueness. If $e_j\\in B\\otimes_A C$ are the idempotents of the finite clopen partition, map them to $D'$ and put $D_j=e_jD'$ (with identity $e_j$). Orthogonality and $\\sum e_j=1$ give the explicit inverse ring homomorphisms $x\\mapsto(e_jx)_j$ and $(x_j)_j\\mapsto\\sum x_j$. They are $B$-linear, so $D'\\cong\\prod_jD_j$ as $B$-algebras. Each factor is the quotient $D'/(1-e_j)$; mapping a monic integral equation into this quotient shows that $D_j$ is integral over $B$.",
+   "uses": [
+    "lem-weil-pbc-integral-base-change",
+    "lem-weil-pbc-spec-clopen-idempotent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0BSR, first proof, final sentence: pull the finite-model product decomposition back to S; explicit orthogonal-idempotent calculation"
+   }
+  },
+  {
+   "text": "Fix $j$ and let $\\mathfrak s_i$ be the image in $\\operatorname{Spec}C$ of $\\mathfrak t_j$. By the fibre bijection of [lem-dl-a1-integral-finite-residue-model], exactly one original fibre prime maps to it, namely $\\mathfrak r_i$. By [lem-weil-pbc-fibre-product-affine-spectra] over $C$, with $(B\\otimes_AC)\\otimes_CD\\cong B\\otimes_AD$, $\\operatorname{Spec}D'=\\operatorname{Spec}(B\\otimes_AC)\\times_{\\operatorname{Spec}C}\\operatorname{Spec}D$, and $\\operatorname{Spec}D_j$ is the part over $V_j$; so a prime of $D_j$ over $\\mathfrak p'$ lies over $\\mathfrak t_j$ and over a prime of $D$ above $\\mathfrak s_i$, which is $\\mathfrak r_i$. By [lem-weil-pbc-fibre-product-points], the primes of $D_j$ above $\\mathfrak p'$ correspond to primes of $E_i\\otimes_{L_i}\\kappa(\\mathfrak t_j)$. This tensor ring is nontrivial by [lem-weil-common-extension-fields-tensor-nontrivial] and has a maximal, hence prime, ideal by [lem-weil-common-extension-fields-maximal-ideal]. For uniqueness, $\\operatorname{Spec}E_i\\to\\operatorname{Spec}L_i$ is radicial: it is a one-point map and $E_i/L_i$ is purely inseparable. The equivalence in [def-weil-radicial-morphism] makes it universally injective, so its pullback to $\\operatorname{Spec}\\kappa(\\mathfrak t_j)$ is injective on points. Thus the tensor ring has exactly one prime, and $D_j$ has exactly one prime $\\mathfrak q_j$ over $\\mathfrak p'$.",
+   "uses": [
+    "lem-dl-a1-integral-finite-residue-model",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-fibre-product-points",
+    "lem-weil-common-extension-fields-tensor-nontrivial",
+    "lem-weil-common-extension-fields-maximal-ideal",
+    "def-weil-radicial-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0BSR, first proof, preservation of singleton fibres when pulling back from S-prime; schemes.tex Tag 01JT and morphisms.tex Tag 01S4"
+   }
+  },
+  {
+   "text": "The pullback of the field-spectrum map in the previous step is itself universally injective: any further base change is a base change of the same original map, by associativity of fibre products. By the converse equivalence in [def-weil-radicial-morphism], it is radicial, so its unique point has residue field purely inseparable over $\\kappa(\\mathfrak t_j)$. By [lem-weil-pbc-fibre-product-point-residue-field], that residue field is $\\kappa(\\mathfrak q_j)$ with the indicated field maps. Together with $\\kappa(\\mathfrak t_j)/\\kappa(\\mathfrak p')$ from step 3, this gives $\\kappa(\\mathfrak q_j)/\\kappa(\\mathfrak p')$ purely inseparable: in characteristic $p>0$, if $a^{p^u}=b$ is in the intermediate field and $b^{p^v}$ is in the base, then $a^{p^{u+v}}$ is in the base; in characteristic zero both field maps are isomorphisms.",
+   "uses": [
+    "def-weil-radicial-morphism",
+    "lem-weil-pbc-fibre-product-point-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0BSR, first proof, final residue-field assertion; schemes.tex Tag 01JT and morphisms.tex Tag 01S4; exponent computation written explicitly"
+   }
+  },
+  {
+   "text": "Finally lift the prescribed $\\mathfrak q$, rather than just an unspecified fibre prime. The ring $\\kappa(\\mathfrak q)\\otimes_{\\kappa(\\mathfrak p)}\\kappa(\\mathfrak p')$ is nontrivial by [lem-weil-common-extension-fields-tensor-nontrivial], and [lem-weil-common-extension-fields-maximal-ideal] supplies a prime. Since $\\operatorname{Spec}D'=\\operatorname{Spec}D\\times_{\\operatorname{Spec}A}\\operatorname{Spec}B$ by [lem-weil-pbc-fibre-product-affine-spectra], the correspondence [lem-weil-pbc-fibre-product-points] gives a prime $\\mathfrak q'$ of $D'$ contracting to $\\mathfrak q$ and $\\mathfrak p'$. A prime of a finite product contains all but exactly one of its factor idempotents: at most one survives because they are orthogonal, and at least one survives because their sum is $1$. Consequently $\\mathfrak q'$ belongs to one factor. In particular the product has at least one factor. Permute the factors so this is $D_1$; step 5 makes its fibre prime $\\mathfrak q_1$. This supplies every prescribed clause.",
+   "uses": [
+    "lem-weil-common-extension-fields-tensor-nontrivial",
+    "lem-weil-common-extension-fields-maximal-ideal",
+    "lem-weil-pbc-fibre-product-points",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0BSR and pione.tex Tag 0BST, second reduction paragraph, choice of the prime after etale localization; schemes.tex Tag 01JT"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-dl-a1-normal-finite-aut-separable-subfield",
+  "lem-weil-pbc-separable-first-purely-inseparable",
+  "lem-dl-a1-integral-finite-residue-model",
+  "lem-weil-pbc-integral-fibre-etale-splitting",
+  "def-weil-affine-spectrum",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-integral-base-change",
+  "lem-weil-pbc-spec-clopen-idempotent",
+  "lem-weil-pbc-fibre-product-points",
+  "lem-weil-common-extension-fields-tensor-nontrivial",
+  "lem-weil-common-extension-fields-maximal-ideal",
+  "def-weil-radicial-morphism",
+  "lem-weil-pbc-fibre-product-point-residue-field"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0BSR, first proof, the finite-intermediate-algebra route; the finite-residue version already in the DAG is reused. The normal-finite-automorphism inference from pione.tex Tag 0BST and the chosen-prime lift are made explicit."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -50,10 +161,31 @@
    "results": "8 hits: Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime, Algebra.FormallyEtale.iff_exists_algEquiv_prod, Algebra.Etale.iff_exists_algEquiv_prod, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, Algebra.FormallyEtale.of_isSeparable_aux, Algebra.FormallyUnramified.of_map_maximalIdeal, Algebra.instIsSeparableResidueFieldOfFormallyUnramified, Algebra.isUnramifiedAt_iff_map_eq.  The hits split a module-finite algebra near a prime or classify etale algebras over a field. The present theorem concerns arbitrary integral algebras, permits infinite purely inseparable residue extensions, and controls all fibre factors after one etale neighbourhood. Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq requires Module.Finite and is only a candidate ingredient.",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An integral algebra with finitely many primes over a prime and normal residue extensions with finite automorphism groups splits etale locally",
+   "results": "{\"t\": \"2026-10-21T10:20:57Z\", \"tool\": \"leanfinder\", \"query\": \"An integral algebra with finitely many primes over a prime and normal residue extensions with finite automorphism groups splits etale locally\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\", \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"Algebra.etaleLocus\", \"Algebra.Etale.iff_exists_algEquiv_prod\", \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"Algebra.exists_etale_of_isEtaleAt\", \"Algebra.Etale\", \"Algebra.IsEtaleAt\"], \"digest\": \"76a3d8608a37338f\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: returned finite-algebra etale splitting and separable-field results do not cover arbitrary integral algebras with potentially infinite purely inseparable residue extensions."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Etale, Algebra.IsIntegral",
+   "results": "{\"t\": \"2026-10-21T10:20:57Z\", \"tool\": \"loogle\", \"query\": \"Algebra.Etale, Algebra.IsIntegral\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: returned finite-algebra etale splitting and separable-field results do not cover arbitrary integral algebras with potentially infinite purely inseparable residue extensions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Split finite fibres of arbitrary integral algebras into singleton purely inseparable fibres after etale base change",
+   "results": "{\"t\": \"2026-10-21T10:20:57Z\", \"tool\": \"leansearch\", \"query\": \"Split finite fibres of arbitrary integral algebras into singleton purely inseparable fibres after etale base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsSeparable.finInsepDegree_eq\", \"IsPurelyInseparable.mk\", \"IsPurelyInseparable.isIntegral\", \"IsPurelyInseparable.casesOn\", \"IsPurelyInseparable.isAlgebraic\", \"Algebra.FormallyEtale.of_isSeparable_aux\", \"isPurelyInseparable_iff\", \"IsPurelyInseparable.inseparable'\"], \"digest\": \"92eff4d996e83400\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: returned finite-algebra etale splitting and separable-field results do not cover arbitrary integral algebras with potentially infinite purely inseparable residue extensions."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-dl-a1-finite-group-inertia-invariants-etale",
@@ -74,5 +206,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-dl-a1-integral-normal-residue-etale-splitting",
+  "worker": "stage1",
+  "summary": "Preserved the arbitrary-integral-algebra statement. Split through finite separable residue subfields, a finite intermediate residue model, the existing finite-residue integral splitting theorem, and explicit pullback/idempotent and marked-prime arguments. Created two statement-only non-Mathlib inputs after source, DAG, blueprint and logged Mathlib searches. Checked all cited statements and infinite purely inseparable and nonreduced cases.",
+  "blueprint": "Second paragraph of rem-dl-a1-conventions: boundary stalks are inertia invariants and lisse extension is equivalent to trivial inertia; finite-quotient etale localization in Tag 0BST, second reduction paragraph.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-integral-fibre-etale-splitting",
+    "why": "Generic etale splitting theorem for an integral affine morphism with finite fibre and finite-dimensional residue fields, applied only to the finite intermediate algebra C. The conventions unit has no algebraic splitting theorem."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-point-residue-field",
+    "why": "Generic residue-field identification for a point of a fibre product; the conventions unit has no substitute."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-integral-fibre-etale-splitting",
+  "lem-weil-pbc-fibre-product-point-residue-field"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NO-eaf70dd49",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-eaf70dd49 (reviewer sub-agent of L); spot-checked: The mathematics of the split and of both new nodes is sound and was read in full. Checks: the base item is unsplit in clones/live and side-live, there is no repair note, and neither the item nor any cited node is dropped. No SGA is cited. There is no cycle (the closure of the generic splitting theorem does not contain the item). The item's hypotheses match Stacks 0BSR hypothesis (2) as applied in pione 0BST's second paragraph (algebraic, normal, finite automorphism group). The existing node lem-weil-pbc-integral-fibre-etale-splitting needs finite residue fields, so the reduction through a module-finite C follows the S' step of 0BSR's first proof. New node normal-finite-aut-separable-subfield is true: embeddings extend to automorphisms, so [L:k] <= |Aut|. Tests: an infinite purely inseparable E gives E_s = k; F_p-bar is excluded by the infinite Aut; without normality it fails for Q(2^{1/3^n}), and normality is assumed. Not a duplicate of the Artin, fixed-field or normal-purely-inseparable nodes. New node integral-finite-residue-model is true: C is built from numerator/denominator lifts plus separating elements (incomparability); lying-over gives the fibre bijection; Frac(C/s_i) is finite over k and purely inseparable under E_i. Tests: t=0, non-injective A->D, char 0. It is strictly smaller than the item. Steps 1-4 and 6 check against the cited statements. Step 4 idempotent orthogonality and sum one is genuinely elementary. Step 5 radicial => universally injective gives one prime per factor; step 6 gives pure inseparability by exponent transitivity; step 7 lifts q via the nontrivial tensor and n>=1 follows. FIX (C1): steps 5 and 7 used Spec D' = Spec(B(x)C) x_{Spec C} Spec D and Spec D x_A Spec B without citing lem-weil-pbc-fibre-product-affine-spectra. Added the citation to both steps and a sentence to step 5 locating the primes of D_j over t_j and r_i. The statement is unchanged. Accepted tool_uses: the generic pbc integral splitting theorem applied to finite C, and the fibre-product residue-field identification.; 1 file(s) fixed by the reviewer"
  }
 }
