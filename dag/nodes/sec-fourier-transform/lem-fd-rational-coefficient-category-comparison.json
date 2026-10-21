@@ -30,184 +30,72 @@
  ],
  "proof": [
   {
-   "text": "For each finite $E$, apply the integral characterization to $T$: its noetherian, finite-dimensional and invertibility hypotheses are exactly those assumed here. Both integral categories are the same full subcategory of $D(\\widehat{\\mathcal O}_{E,T})$, with the same reduction functors, not merely categories with equivalent lists of objects. The identity therefore gives mutually inverse $\\mathcal O_E$-linear functors on objects and all ambient derived morphisms. Shifts and distinguished triangles are inherited from that ambient derived category; the characterization's closure under shifts and cones makes this identification exact in both directions.",
+   "text": "Apply the integral-identity/raw-rationalization lemma for every allowed $T$ and finite $E$. Its equivalences fix exactly the common integral objects, reductions and pure-tensor morphisms required here, and are exact in both directions. Thus they give the prescribed $I_{T,E}$ and $J_{T,E}$, with no added retracts.",
    "uses": [
-    "lem-weil-pbc-integral-stratified-perfect-characterization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.6.11 and Proposition 6.8.11(3); applied through the stated integral characterization"
-   }
-  },
-  {
-   "text": "Use the raw Hom descriptions in the two rationalization definitions. Set $J_{T,E}K=K$ and $J_{T,E}(u\\otimes e)=u\\otimes e$. The balancing relation $(au)\\otimes e=u\\otimes ae$ is the same on both sides. Composition is $(v\\otimes b)(u\\otimes e)=(vu)\\otimes be$, so this assignment preserves composition and identities and is $E$-linear. Its inverse has exactly the same formulas. Both shifts come from the common integral shift. By the scalar-localization triangulation theorem, both sets of distinguished triangles consist of triangles isomorphic to images of the same integral distinguished triangles. Thus $J_{T,E}$ and its inverse are exact; no retract is added.",
-   "uses": [
-    "def-weil-rationalization-karoubi",
-    "def-weil-pbc-rational-category",
-    "lem-weil-linear-scalar-localization-triangulated"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
-    "place": "Final sentence; explicit comparison of the two coefficient conventions"
-   }
-  },
-  {
-   "text": "Put $R_F=\\widehat{\\mathcal O}_{F,T}$. Framework scalar extension is the strict quotient-tower completion of $K\\otimes^L_{R_E}R_L$, whereas PBC scalar extension is ordinary completed-ring change of coefficients. The common integral objects are derived complete by step 1, so the specified map $\\chi_{L/E,K}$ is invertible. Define $j_{T,L/E,K}$ as its inverse, followed by rationalization. Naturality of $\\chi$ gives naturality on every integral derived arrow. Tensoring the naturality equation with $e\\in E$ and adding proves it for every rational arrow. The quotient-map definition of $\\chi$ commutes with shifts: shifting the quotient complexes and the product-cone map shifts both its quotient component and its zero component. Hence $j$ respects the exact-functor shift comparisons. For $L=E$, $\\chi$ is the completeness unit, so its inverse followed by the multiplication identification gives precisely the normalized identity transition.",
-   "uses": [
-    "def-weil-rationalization-karoubi",
-    "prop-weil-pbc-scalar-extension",
-    "lem-weil-finite-free-completed-scalar-comparison"
+    "lem-fd-integral-identity-rational-equivalence"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
-    "place": "Final sentence; explicit comparison of the two coefficient conventions"
+    "place": "old proof steps 1–2: common integral identity and exact raw rationalization"
    }
   },
   {
-   "text": "Write $S_{L/E}$ and $P_{L/E}$ for the framework and PBC transitions. The specified framework associator is the ordinary tensor associator conjugated by the completion maps $\\chi$; this normalization is explicitly part of the pullback-realization lemma, while PBC uses tensor balancing. Consequently, for $E\\subset L\\subset M$, their components obey\n$$a^p_{M,L,E}\\,P_{M/L}(j_{L/E})\\,j_{M/L,S_{L/E}K}=j_{M/E}\\,J_{T,M}(a^s_{M,L,E}).$$\nIndeed substitute $j=\\chi^{-1}$ and the conjugated formula for $a^s$: every adjacent $\\chi\\chi^{-1}$ cancels, using naturality to move a coefficient-change arrow across $\\chi$. The remaining map on an ordinary tensor representative is $((x\\otimes b)\\otimes c)\\mapsto x\\otimes bc$ on either side. The two unit cases give $x\\otimes1\\mapsto x$; for four fields both composites give $(((x\\otimes b)\\otimes c)\\otimes d)\\mapsto x\\otimes bcd$. This proves the unit, three-field cocycle and further associativity equations for the specified maps, and rationalization preserves these equations.",
+   "text": "Apply the completion-inverse coherence lemma to these identity equivalences. It gives $j_{T,L/E}=\\chi_{L/E}^{-1}[1/\\varpi_L]$, with the specified chain-map lift, shifts, units and scalar cocycle. The equivalences of the preceding step satisfy its identity-on-tensors hypotheses, so these are the requested scalar comparisons rather than unspecified isomorphisms.",
    "uses": [
-    "lem-weil-scalar-extension-composition",
-    "prop-weil-pbc-scalar-extension",
-    "lem-weil-finite-free-completed-scalar-comparison",
-    "lem-trf-integral-pullback-comparison-realization"
+    "lem-fd-completion-inverse-scalar-coherence"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
-    "place": "Final sentence; explicit comparison of the two coefficient conventions"
+    "place": "old proof steps 3–4: completion-inverse scalar comparison and cocycle"
    }
   },
   {
-   "text": "For objects $(E,K),(F,H)$ and a common field $L$, send $u:S_{L/E}K\\to S_{L/F}H$ to\n$$\\Phi_L(u)=j_{L/F,H}\\,J_{T,L}(u)\\,j_{L/E,K}^{-1}.$$\nThis is a bijection of Hom groups, with inverse obtained by applying $J_{T,L}^{-1}$ to $j_{L/F,H}^{-1}v j_{L/E,K}$. For $L\\subset M$, transition in either pair category is $u\\mapsto a_{M,L,F}\\,T_{M/L}(u)\\,a_{M,L,E}^{-1}$. Substitution of the equation in step 4 at the source and target, followed by naturality of $j_{M/L}$, gives $\\Phi_M(u_M)=(\\Phi_Lu)_M$. Thus $\\Phi$ and its inverse preserve eventual equality of representatives and define inverse maps on the displayed Hom colimits. They preserve sums. At one common stage the middle factors $j^{-1}j$ cancel in $\\Phi(v)\\Phi(u)$, giving $\\Phi(vu)$, and $\\Phi(1)=1$. This defines $J_T$ on arrows and proves it fully faithful.",
+   "text": "Apply the whole-tower integral pullback lemma simultaneously to the identity equivalences and completion inverses just chosen. It gives the finite comparisons from the identity of the entire reduction tower, their normalized ambient lifts, and the integral unit, composition and mixed scalar equations. Its hypotheses hold at every scheme isomorphism because both source and target are allowed schemes. Fix the supplied simultaneous whole-diagram realization data.",
    "uses": [
-    "def-weil-algebraically-closed-coefficients",
-    "def-weil-pbc-finite-stage-pair-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
-    "place": "Final sentence; explicit comparison of the two coefficient conventions"
-   }
-  },
-  {
-   "text": "Every PBC pair $(E,H)$ is the image of $(E,J_{T,E}^{-1}H)$, so $J_T$ is an equivalence. It commutes with finite-stage inclusions by the unit case of step 4. If $\\alpha\\in\\Qlb$, choose a common finite stage containing $\\alpha$ and the arrow's stage. The map $\\Phi$ is linear over that field, so $\\Phi(\\alpha u)=\\alpha\\Phi(u)$; hence $J_T$ is $\\Qlb$-linear. The shift compatibility of $j$ identifies the shifted common-stage arrow formulas. A common-stage distinguished triangle is sent, by the conjugating isomorphisms $j$ at its vertices, to the image of its $J_{T,L}$-triangle. Step 2 makes that triangle distinguished. The inverse has the same property. The definition of distinguished triangles therefore makes $J_T$ exact in both directions, with the prescribed shifts and common-stage cones. All constructions used only the objects $(E,K)$ already present.",
-   "uses": [
-    "def-weil-algebraically-closed-coefficients",
-    "def-weil-pbc-qbar-category",
-    "def-weil-pbc-common-stage-cones"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
-    "place": "Final sentence; explicit comparison of the two coefficient conventions"
-   }
-  },
-  {
-   "text": "For a scheme isomorphism $h:U\\to T$ choose one flat-term K-flat representative $P$ of a common integral object $K$. In both definitions of completed pullback the strict tower is\n$$Q_n=\\operatorname{Res}_n h_n^*(P\\otimes_{R_E}(A_{E,n})_T),$$\nwith the actual quotient transition maps. The framework realizes this tower by its product cone, while PBC realizes it by derived inverse limit. Use the realization identification in the integral comparison lemma to identify these models. More explicitly, for a K-injective tower replacement $Q\\to I$, the Roos comparison is $\\lim I\\to\\operatorname{Cone}(1-s_I)[-1]$, $z\\mapsto(0,z)$. Exact countable products make the cone map from $Q$ to $I$ a quasi-isomorphism. Their zigzag identifies the two realizations of the identity map of the entire tower, naturally for tower arrows; it does not infer equality from equality of individual reductions. The K-injective existence theorem applies to the small ringed tower site, and supplies enough injectives also on the underlying site. The integral well-definedness theorem identifies this construction independently of the K-flat representative, so the natural tower comparison descends to derived morphisms. This constructs an integral comparison $b_{h,E}:J_{U,E}F^s_{h,E}\\to F^p_{h,E}J_{T,E}$. The framework preservation theorem and step 1 show both objects lie in the common integral constructible subcategory, so the comparison restricts there.",
-   "uses": [
-    "def-weil-derived-pullback-tensor-hom",
-    "def-weil-pbc-completed-pullback",
-    "lem-trf-integral-pullback-comparison-realization",
-    "lem-weil-derived-limit-roos-complex",
-    "lem-weil-proetale-countable-products-exact",
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-pur-integral-operations-preserve-constructible",
-    "lem-pc-kflat-resolution",
-    "lem-pur-integral-operations-well-defined"
+    "lem-fd-whole-tower-integral-pullback-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
-    "place": "Final sentence; explicit comparison of the two coefficient conventions"
+    "place": "old proof steps 7–8: identity on entire quotient towers and normalized integral coherence"
    }
   },
   {
-   "text": "For identity and composable scheme isomorphisms use the simultaneous quotient diagrams and their tower counits specified in the integral realization lemma. On the common finite tower the comparison $b$ is the identity. Thus the two routes around the composition square apply the same termwise module-pullback composition map and the same counit of the whole strict tower. Realizing this equality gives the composition equation for $b$; the identity case uses the identity tower map. For coefficient extension $E\\subset L$, the same lemma specifies both iterated identifications by the tower counit, coefficient quotient actions and tensor associators. The map $\\chi$ used in step 3 is its specified quotient-map completion unit (zero shifted-product component). PBC uses ordinary tensor balancing and the same quotient actions. Inserting $\\chi^{-1}$ on the framework scalar side therefore cancels its completion unit, and both resulting diagrams use the same coefficient action and pullback map on each simultaneous quotient complex. This is an equality of whole derived quotient diagrams, including their counits, before realization. The realization lemma's composition/scalar and successive-extension equations, together with the PBC scalar comparison, give the corresponding mixed squares for $b$ and $j$, as well as their unit and shift compatibilities.",
+   "text": "Apply common-stage comparison descent to the finite equivalences and scalar cocycle from steps 1–2. It gives the exact $\\Omega$-linear $J_T$ and precisely the displayed conjugation formula on Hom colimits, preserving finite inclusions, shifts and common-stage triangles. Apply its transformation assertion to the finite pullback comparisons of step 3: their mixed square is its hypothesis. The resulting $b_h$ retains all finite identity/composition/scalar equations. Together with their fixed integral lifts these are the coefficient and simultaneous pullback data of the statement.",
    "uses": [
-    "lem-trf-integral-pullback-comparison-realization",
-    "lem-weil-finite-free-completed-scalar-comparison",
-    "prop-weil-pbc-scalar-extension"
+    "lem-fd-common-stage-comparison-descent"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
-    "place": "Final sentence; explicit comparison of the two coefficient conventions"
+    "place": "old proof steps 5–6 and 9: common-stage Hom descent, exactness, and pullback transformation descent"
    }
   },
   {
-   "text": "Rationalize $b_{h,E}$: its integral naturality equation remains true after tensoring by $e\\in E$ and adding, exactly as in step 3. For a common-stage arrow $u$, both composites in the naturality square for the induced $b_h:J_UF^s_h\\to F^p_hJ_T$ are the class of $F^p_{h,L}(\\Phi_Lu)$ with the scalar comparison at the source and its inverse at the target. To see this, substitute the pullback arrow formula from the framework definition and $\\Phi_L$ from step 5; apply the mixed square of step 8 to move $b$ past each scalar comparison. The adjacent inverse comparison factors then cancel. Eventual equality is respected by step 5, so this gives a natural isomorphism on the common-stage categories. The identity, composition and scalar equations from step 8 survive rationalization and passage to classes. This proves the asserted compatibility at every finite stage and on $\\Qlb$.",
+   "text": "For a separated finite-type $X_0/k_0$, apply the geometric-fibre/fixed-pair lemma to this simultaneous datum. It verifies the three scheme hypotheses on $X$, applies the comparisons to the scheme automorphism $g_X$ without imposing $k$-linearity, and identifies the finite and common-stage Weil pairs by $(K,\\theta)\\mapsto(JK,J(\\theta)b_K^{-1})$, with arrow map $J$. Its intertwining and finite-inclusion assertions give the final clause.",
    "uses": [
-    "def-weil-derived-pullback-tensor-hom",
-    "prop-weil-pbc-scalar-extension",
-    "def-weil-algebraically-closed-coefficients",
-    "def-weil-pbc-qbar-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
-    "place": "Final sentence; explicit comparison of the two coefficient conventions"
-   }
-  },
-  {
-   "text": "For the final specialization $X=X_0\\times_{k_0}k$, a finite affine finite-type cover of $X_0$ base changes to a finite affine cover whose algebras are finite type over $k$: the images of the original generators still generate after tensoring with $k$. Thus $X$ is finite type over the field $k$. A field has only the ideals $0$ and the unit ideal, so $\\operatorname{Spec}k$ is Noetherian; the finite-type-over-Noetherian lemma makes $X$ Noetherian, and the finite-type dimension lemma gives finite dimension. The image of the nonzero element $\\ell$ of $k$ is a unit in every local ring, since $\\ell\\ne p$. Finally $g_X$ is the scheme automorphism of the Frobenius definition, with the displayed inverse. Apply step 9 to this isomorphism. Nothing requires it to be a $k$-morphism.",
-   "uses": [
-    "def-weil-finite-type-morphism",
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-kun-dimension-finite-type",
-    "def-weil-frobenius-detailed"
+    "lem-fd-frobenius-fixed-pair-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
-    "place": "Final sentence; explicit comparison of the two coefficient conventions"
-   }
-  },
-  {
-   "text": "Write $F_s=Lg_X^{*,s}$, $F_p=Lg_X^{*,p}$ and $b:J_XF_s\\to F_pJ_X$ for the comparison. Send a Weil pair $(K,\\theta:F_sK\\xrightarrow{\\sim}K)$ to $(J_XK,J_X(\\theta)b_K^{-1})$ and an arrow $u$ to $J_X(u)$. Naturality says $F_p(J_Xu)b_K=b_HJ_X(F_su)$. It follows by multiplication by $b_K^{-1}$ that the intertwining equation $u\\theta=\\theta'F_su$ is equivalent, by full faithfulness of $J_X$, to the intertwining equation for its image. Hence the pair functor is fully faithful. Given a PBC pair $(J_XK,\\psi)$, the unique preimage of $\\psi b_K$ under the Hom bijection is an isomorphism $\\theta:F_sK\\to K$ (lift its inverse as well); its image pair is the given pair. Every PBC underlying object has this form by step 6. Thus the functor is essentially surjective too. The construction at a finite stage uses $b_{g_X,E}$, and step 9 identifies it with the common-stage construction, proving the last compatibility clause.",
-   "uses": [
-    "def-weil-weil-sheaf-complex"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
-    "place": "Final sentence; explicit comparison of the two coefficient conventions"
+    "place": "old proof steps 10–11: geometric-fibre hypotheses and fixed-pair transport"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-integral-stratified-perfect-characterization",
-  "def-weil-rationalization-karoubi",
-  "def-weil-pbc-rational-category",
-  "lem-weil-linear-scalar-localization-triangulated",
-  "prop-weil-pbc-scalar-extension",
-  "lem-weil-finite-free-completed-scalar-comparison",
-  "lem-weil-scalar-extension-composition",
-  "lem-trf-integral-pullback-comparison-realization",
-  "def-weil-algebraically-closed-coefficients",
-  "def-weil-pbc-finite-stage-pair-category",
-  "def-weil-pbc-qbar-category",
-  "def-weil-pbc-common-stage-cones",
-  "def-weil-derived-pullback-tensor-hom",
-  "def-weil-pbc-completed-pullback",
-  "lem-weil-derived-limit-roos-complex",
-  "lem-weil-proetale-countable-products-exact",
-  "prop-pur-kinjective-resolutions-exist",
-  "lem-pur-integral-operations-preserve-constructible",
-  "lem-pc-kflat-resolution",
-  "lem-pur-integral-operations-well-defined",
-  "def-weil-finite-type-morphism",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-kun-dimension-finite-type",
-  "def-weil-frobenius-detailed",
-  "def-weil-weil-sheaf-complex"
+  "lem-fd-integral-identity-rational-equivalence",
+  "lem-fd-completion-inverse-scalar-coherence",
+  "lem-fd-whole-tower-integral-pullback-comparison",
+  "lem-fd-common-stage-comparison-descent",
+  "lem-fd-frobenius-fixed-pair-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
-  "place": "Final sentence; explicit comparison argument using the existing integral, scalar and strict-tower results; not a verbatim theorem of the blueprint"
+  "place": "Final sentence; assembly of five extracted comparison lemmas"
  },
  "mathlib_searches": [
   {
@@ -301,69 +189,12 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-21",
   "item": "lem-fd-rational-coefficient-category-comparison",
   "worker": "stage1",
-  "summary": "Identifies the integral full categories, writes the raw localization functor and the chi-inverse scalar cocycle, constructs inverse common-stage Hom maps, compares whole strict pullback towers with normalized counits, checks geometric-Frobenius hypotheses and explicitly transports fixed pairs. No new nodes; statement unchanged.",
-  "blueprint": "Realizes the final sentence of def-fd-trace-function: interpreting framework local Frobenius operators in the PBC Qbar coefficient category. This is an auxiliary comparison, not the key statement of sk-def-trace, so its unit record is unchanged.",
-  "tool_uses": [
-   {
-    "node": "lem-weil-pbc-integral-stratified-perfect-characterization",
-    "why": "Identifies the two integral full subcategories with their reductions; the trace-definition unit supplies no integral coefficient-category characterization."
-   },
-   {
-    "node": "lem-weil-linear-scalar-localization-triangulated",
-    "why": "Generic scalar-localization triangulation identifies the distinguished triangles used by both rationalizations."
-   },
-   {
-    "node": "prop-weil-pbc-scalar-extension",
-    "why": "Supplies the PBC ordinary coefficient transitions, associators, shifts and coherent pullback comparisons being compared, not a replacement for a trace-function argument."
-   },
-   {
-    "node": "lem-weil-finite-free-completed-scalar-comparison",
-    "why": "Supplies the specified invertible quotient-map completion unit whose inverse defines the transition comparison."
-   },
-   {
-    "node": "lem-weil-scalar-extension-composition",
-    "why": "Supplies the framework scalar composition isomorphisms."
-   },
-   {
-    "node": "lem-trf-integral-pullback-comparison-realization",
-    "why": "Supplies normalized whole-tower realizations, counits, composition/scalar equations and the conjugated scalar-associator normalization."
-   },
-   {
-    "node": "lem-weil-derived-limit-roos-complex",
-    "why": "Generic explicit map from inverse limit of a K-injective tower to its product cone identifies realization models."
-   },
-   {
-    "node": "lem-weil-proetale-countable-products-exact",
-    "why": "Exact countable module-sheaf products carry a tower replacement to a quasi-isomorphism of product cones."
-   },
-   {
-    "node": "prop-pur-kinjective-resolutions-exist",
-    "why": "Small ringed-site K-injective replacements and enough injectives justify the normalized Roos comparison on the tower site."
-   },
-   {
-    "node": "lem-pur-integral-operations-preserve-constructible",
-    "why": "Ensures the common completed pullback lies in the integral constructible category."
-   },
-   {
-    "node": "lem-pc-kflat-resolution",
-    "why": "Supplies the flat-term K-flat representative used to form the common strict quotient tower."
-   },
-   {
-    "node": "lem-pur-integral-operations-well-defined",
-    "why": "Supplies descent and resolution independence of the explicit framework product-cone pullback, so the common-tower comparison is natural on derived morphisms."
-   },
-   {
-    "node": "lem-weil-pbc-finite-type-over-noetherian",
-    "why": "Checks the Noetherian hypothesis when specializing the comparison to geometric Frobenius."
-   },
-   {
-    "node": "lem-kun-dimension-finite-type",
-    "why": "Checks the finite-dimensional hypothesis for the finite-type geometric fibre."
-   }
-  ]
+  "summary": "Repair of the 2026-10-21 long-proof return: five new statement-only unsplit nodes distribute all eleven original arguments; parent statement and Lean record unchanged. Full original proof, citations and task allocation retained in report.md. Parent assembly has 2161 characters.",
+  "blueprint": "Final sentence of def-fd-trace-function. New arguments realize respectively old steps 1–2, 3–4, 7–8, 5–6/9, and 10–11, below the unchanged trace unit.",
+  "tool_uses": []
  },
  "tool_uses": [
   "lem-weil-pbc-integral-stratified-perfect-characterization",
@@ -382,12 +213,12 @@
   "lem-kun-dimension-finite-type"
  ],
  "reviewed": {
-  "date": "2026-10-18",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-Q05-5c613fd4a",
-  "group": "Q05",
+  "reviewer": "NT-cc-Q114-465cde5a3",
+  "group": "Q114",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-5c613fd4a (reviewer sub-agent of L); spot-checked: I read the whole item. It has 11 steps and creates 0 new nodes. I read all 27 cited statements (including blueprint_update texts), the unit sk-def-trace, and the main-20261015 def-fd-trace-function final sentence. I also read Bhatt–Scholze 6.6.11, 6.8.2(1) and 6.8.11(3). No SGA source is used. Step 1: the integral characterization's hypotheses (noetherian, finite-dimensional, ℓ invertible) match the item's, and the characterization identifies the framework integral category and the PBC one inside the same D(Ô_{E,T}). Step 2: both raw rationalizations are Hom⊗E with no Karoubi envelope; triangles come from lem-weil-linear-scalar-localization-triangulated. Step 3: χ goes from the ordinary PBC extension to the strict-tower framework extension, so j=χ^{-1} has the right direction; shift compatibility holds because χ has zero shifted component. Step 4: I recomputed the cocycle with a^s = χ∘α∘C(χ)^{-1}∘χ^{-1}; the domains and the equality both check. That normalization is taken from the statement of lem-trf-integral-pullback-comparison-realization, and it matches what the composition lemma constructs. Steps 5-6: Φ_M(u_M)=(Φ_L u)_M via step 4 and naturality of j; composition and identity cancel; the cone and shift comparison works with the j[1] vertex isomorphisms; Qlb-linearity is checked at a common stage. Step 7: one strict tower f^*(P⊗A_{E,n}) serves both definitions; the Roos lemma, exact products and K-injective tower replacement identify the cone and Rlim models; preservation of constructibility puts the value in D^b_c. Steps 8-9: compatibility with the composition and scalar comparisons normalized by the realization lemma, as the item statement prescribes; the mixed square cancels χ. Step 10: X is finite type over k, hence noetherian and finite-dimensional; ℓ is a unit; g_X is a scheme automorphism and need not be k-linear. Step 11: the Weil-pair transport J(θ)b^{-1} is well-typed and gives a fully faithful, essentially surjective functor. Small cases checked: E=L=M, a torsion object, the empty scheme, Spec k_0, and two-field representatives. I found no duplicate node and no cycle. All 14 declared tool_uses are accepted as generic. Remarks, not faults: the framework associator formula is fixed only in the realization lemma's statement, and the PBC pullback/scalar comparisons are normalized by the item's own statement clause. No fixes were made."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q114-465cde5a3 (reviewer sub-agent of L); spot-checked: FIX: the re-split note of 2026-10-21 is fulfilled and the mathematics is sound; I repaired two mechanical B-faults in the five new nodes. Shape: compared with the live base, the item's statement, stmt_deps, Lean record and blueprint are byte-identical; only the proof changed. The proof went from 11 steps and 10320 chars to 5 steps and 2161 chars, each step citing one new statement-only node (unsplit, five recorded searches each). The old steps are allocated as follows, with comparable sizes: 1–2 (1319 chars) to integral-identity, 3–4 (1959) to completion-inverse, 7–8 (2791) to whole-tower, 5–6 and 9 (2555) to common-stage descent, 10–11 (1696) to frobenius-fixed-pair. All 11 old texts are verbatim in the report, and each old claim has a carrier in a child statement. None of the 25 dropped proof_deps is orphaned. Maths: (1) j=χ^{-1}[1/ϖ] has the right direction (χ goes from ordinary to strict-tower extension), and the cocycle type-checks from J_M S S K to P_{M/E}J_E K. (2) The unit, composition and mixed-square equations of the whole-tower node type-check, and the inverse of b matches the PBC→SF orientation of def-fd-finite-pullback-comparison-datum. (3) In the common-stage node the conjugation formula has the correct domain and codomain, Ω-linearity holds at a common stage, and essential surjectivity holds up to the isomorphism J J^{-1}. (4) Frobenius node: ψ=J(θ)b_K^{-1}; naturality of b shows the intertwining equation holds exactly when its J-image does; X is noetherian and finite-dimensional (Stacks 01T6, lem-kun-dimension-finite-type), ℓ is a unit, and g_X is not k-linear, matching def-weil-frobenius-detailed. (5) Steps 1–4 supply every field of def-fd-pullback-comparison-datum used in step 5. I read lem-trf-integral-pullback-comparison-realization in full: it does pin the χ-conjugated associator. Edge cases tested: empty T, E=L=M, torsion objects, scalars outside the arrow's stage, and a pair whose underlying object is only isomorphic to JK. Duplicates: lem-sbc-coherent-pair-functor-descent gives only additive descent and def-sf-projection-weil-coefficient-comparison is the data structure, so neither duplicates a child. Repairs: (B4) all five statements stored `$\\ell\\ne p$` with a single backslash, which decodes to a newline and garbles ℓ≠p; fixed. (B2/B3) children 2–5 used 'noetherian finite-dimensional, ℓ invertible' and 'allowed scheme' without the defining citation; I added 'in the sense of [lem-weil-pbc-integral-stratified-perfect-characterization]' and put that node in their stmt_deps (no cycle). The whole corrected files are in fixes/dag/nodes/sec-fourier-transform/. Maintainer notes: the item's node-level tool_uses still lists the 14 old tools, which are now stale. The snapshot's symlinks into the DAG snapshot were dangling, so I read the cited statements from clones/side-live. No SGA source is used.; 5 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.Paper.RationalCoefficientCategoryComparison",

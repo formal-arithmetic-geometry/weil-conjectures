@@ -1,0 +1,82 @@
+{
+ "id": "lem-fd-completion-inverse-scalar-coherence",
+ "kind": "statement",
+ "title": "Coherence of the specified completion-inverse scalar comparisons",
+ "statement": "Fix a finite-field datum $(p,a,q,k_0,k)$ [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, and an algebraic closure $\\Omega/\\mathbf Q_\\ell$. Let $T$ be a noetherian finite-dimensional scheme with $\\ell$ invertible, in the sense of [lem-weil-pbc-integral-stratified-perfect-characterization]; such schemes are called allowed. For each finite $E\\subset\\Omega$ over $\\mathbf Q_\\ell$, use the framework integral category and raw rationalization $\\mathcal C_E^s(T)$ of [def-weil-rationalization-karoubi] and the PBC integral category and raw rationalization $\\mathcal C_E^p(T)$ of [def-weil-pbc-rational-category].\nSuppose $I_{T,E}$ and $J_{T,E}$ are the exact integral identity and its raw rationalization, with $J_{T,E}(u\\otimes x)=u\\otimes x$. Write $S_{L/E}$ for the framework scalar extension [def-weil-rationalization-karoubi] with associator $a^s$ [lem-weil-scalar-extension-composition], and $P_{L/E}$ for PBC scalar extension with associator $a^p$ [prop-weil-pbc-scalar-extension]. Use the framework associator normalized by conjugating ordinary tensor associativity by the quotient completion maps, as in [lem-trf-integral-pullback-comparison-realization]. For every $E\\subseteq L$, the specified map $\\chi_{L/E}$ [lem-weil-finite-free-completed-scalar-comparison] restricts to an integral natural isomorphism from ordinary PBC coefficient extension to framework strict-tower extension, after the identity identifications $I$. Its ordinary tensor transport is fixed on tensor generators, its completion chain has the actual quotient-map coordinates and zero shifted-product coordinate, and its localization is the specified integral scalar lift of [def-fd-coefficient-comparison-datum].\nIts inverse rationalizes to an exact natural isomorphism\n$$j_{T,L/E}:J_{T,L}S_{L/E}\\xrightarrow{\\sim}P_{L/E}J_{T,E}.$$\nThese comparisons commute with the specified shift maps, have the normalized identity-extension value, and for $E\\subseteq L\\subseteq M$ satisfy\n$$a^p_{M,L,E}\\circ P_{M/L}(j_{T,L/E})\\circ j_{T,M/L,S_{L/E}K}=j_{T,M/E}\\circ J_{T,M}(a^s_{M,L,E}).$$\nThey satisfy the unit equations and the four-field associativity compatibility for the specified scalar associators, including repeated fields.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+  "place": "Final sentence; explicit auxiliary subclaim extracted from lem-fd-rational-coefficient-category-comparison, old proof steps 3–4: completion-inverse scalar comparison and cocycle (agent-written argument retained verbatim in the delivery report)"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-rationalization-karoubi",
+  "def-weil-pbc-rational-category",
+  "lem-weil-scalar-extension-composition",
+  "prop-weil-pbc-scalar-extension",
+  "lem-trf-integral-pullback-comparison-realization",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "def-fd-coefficient-comparison-datum",
+  "lem-weil-pbc-integral-stratified-perfect-characterization"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The inverses of canonical finite free completed coefficient extension maps give coherent scalar transition isomorphisms with unit cocycle shift and associativity equations",
+   "results": "[leanfinder] OK 8 hit(s); SheafOfModules.ιFree_mapFree_inv; Algebra.Generators.CotangentSpace.compEquiv_symm_zero; AdicCompletion.sumInv_comp_sum; AdicCompletion.sumEquivOfFintype_symm_apply; Algebra.Generators.CotangentSpace.compEquiv_symm_inr; AdicCompletion.transitionMap_comp_eval_apply; AdicCompletion.sumInv_apply; AdicCompletion.sum_comp_sumInv",
+   "date": "2026-10-21",
+   "verdict": "no match: adic module completion and monoidal associator naturality do not state the specified derived quotient-completion comparison cocycle"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalCategory.associator_naturality",
+   "results": "[loogle] OK 1 hit(s); CategoryTheory.MonoidalCategory.associator_naturality",
+   "date": "2026-10-21",
+   "verdict": "no match: adic module completion and monoidal associator naturality do not state the specified derived quotient-completion comparison cocycle"
+  },
+  {
+   "tool": "grep",
+   "query": "completed.*scalar|scalar.*completion|completion.*associator|associator.*completion",
+   "results": "[grep] OK 25 hit(s); Mathlib/NumberTheory/NumberField/Completion/FinitePlace.lean:493     [IsScalarTower K (v.adicCompletion K) (w.adicCompletion L)]; Mathlib/NumberTheory/NumberField/Completion/LiesOverInstances.lean:47 scoped instance : IsScalarTower K v.Completion w.Completion :=; Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean:339 variable [Algebra v.Completion w.Completion] [IsScalarTower K v.Completion w.Completion]; Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean:344   (IsScalarTower.algebraMap_apply (WithAbs v.1) v.Completion w.Completion x).symm.trans; Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean:355 variable [Algebra v.Completion w.Completion] [IsScalarTower K v.Completion w.Completion]; Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean:358 such that `IsScalarTower K v.Completion w.Completion`.; Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean:413 variable [Algebra v.Completion w.Completion] [IsScalarTower K v.Completion w.Completion]; Mathlib/Topology/Algebra/UniformMulAction.lean:209     [UniformContinuousConstSMul N X] [IsScalarTower M N X] : IsScalarTower M N (Completion X) :=; Mathlib/Topology/Algebra/UniformMulAction.lean:227 instance [SMul Mᵐᵒᵖ X] [IsCentralScalar M X] : IsCentralScalar M (Completion X) :=; Mathlib/NumberTheory/LSeries/ZMod.lean:320 The completed L-function of a function `ZMod 1 → ℂ` is a scalar multiple of the completed Riemann; Mathlib/RingTheory/AdicCompletion/Completeness.lean:161   rw [← restrictScalars_top R (AdicCompletion I R) (AdicCompletion I M),; Mathlib/RingTheory/AdicCompletion/Completeness.lean:162     ← restrictScalars_image_smul_eq (R := AdicCompletion I R),; Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean:95       (TensorProduct.piScalarRight R (AdicCompletion I R) (AdicCompletion I R) ι).toLinearMap := by; Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean:120       (TensorProduct.piScalarRight R (AdicCompletion I R) (AdicCompletion I R) ι).toLinearMap := by; Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean:129   letI g := (TensorProduct.piScalarRight R (AdicCompletion I R) (AdicCompletion I R) ι).symm; Mathlib/RingTheory/AdicCompletion/Basic.lean:287 instance instSMul [SMul S R] [SMul S M] [IsScalarTower S R M] : SMul S (AdicCompletion I M) where; Mathlib/RingTheory/AdicCompletion/Basic.lean:307 lemma val_smul [SMul S R] [SMul S M] [IsScalarTower S R M] (s : S) (f : AdicCompletion I M) :; Mathlib/RingTheory/AdicCompletion/Basic.lean:310 lemma val_smul_apply [SMul S R] [SMul S M] [IsScalarTower S R M] (s : S) (f : AdicCompletion I M); Mathlib/RingTheory/AdicCompletion/Basic.lean:331     IsScalarTower S T (AdicCompletion I M) where; Mathlib/RingTheory/AdicCompletion/Basic.lean:341     IsCentralScalar S (AdicCompletion I M) where; Mathlib/RingTheory/AdicCompletion/Algebra.lean:337 instance : IsScalarTower R (AdicCompletion I R) (AdicCompletion I M) where; Mathlib/RingTheory/AdicCompletion/RingHom.lean:112   ((ofAlgEquiv I).symm.toAlgHom.restrictScalars R).comp (AdicCompletion.liftAlgHom I f hf); Mathlib/RingTheory/DedekindDomain/AdicValuation.lean:862     IsScalarTower S₀ S ((v.valuation K).Completion) :=; Mathlib/RingTheory/DedekindDomain/AdicValuation.lean:868     IsScalarTower S₀ S (v.adicCompletion K) :=; Mathlib/RingTheory/DedekindDomain/AdicValuation.lean:872       IsScalarTower.algebraMap_apply S₀ S ((v.valuation K).Completion)]",
+   "date": "2026-10-21",
+   "verdict": "no match: adic module completion and monoidal associator naturality do not state the specified derived quotient-completion comparison cocycle"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived completion comparison inverse conjugates scalar extension associators coherently for finite l adic field extensions",
+   "results": "[leansearch] OK 8 hit(s); AdicCompletion.congr_symm_apply; AdicCompletion.instIsCentralScalar; UniformSpace.Completion.hatInv; IsAdicComplete.StrictMono.of_comp_lift; AdicCompletion.instModuleOfIsScalarTower; AdicCompletion.module; AdicCompletion.instIsScalarTower; AdicCompletion.instModuleOfIsScalarTower.congr_simp",
+   "date": "2026-10-21",
+   "verdict": "no match: adic module completion and monoidal associator naturality do not state the specified derived quotient-completion comparison cocycle"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ordinary tensor versus completed quotient tower scalar extension comparison inverse satisfies three field cocycle",
+   "results": "[leanfinder] OK 8 hit(s); Algebra.Extension.tensorCotangentInvFun; Algebra.Extension.tensorH1Cotangent; Algebra.Extension.tensorCotangentInvFun_smul_mk; Algebra.Extension.tensorCotangent; Algebra.Generators.CotangentSpace.compEquiv_symm_zero; rTensor.inverse_apply; Algebra.Generators.CotangentSpace.compEquiv_symm_inr; Algebra.TensorProduct.cancelBaseChange_symm_tmul",
+   "date": "2026-10-21",
+   "verdict": "no match: adic module completion and monoidal associator naturality do not state the specified derived quotient-completion comparison cocycle"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-fd-rational-coefficient-category-comparison",
+  "date": "2026-10-21",
+  "group": "Q114"
+ },
+ "chapter": "sec-fourier-transform",
+ "unit": "sk-def-trace",
+ "blueprint": {
+  "from": {
+   "node": "def-fd-trace-function",
+   "place": "Final sentence assigning the local Frobenius operator to the PBC Qbar coefficient category; old proof steps 3–4: completion-inverse scalar comparison and cocycle",
+   "via": [
+    "lem-fd-rational-coefficient-category-comparison"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

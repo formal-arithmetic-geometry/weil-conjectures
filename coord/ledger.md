@@ -20909,3 +20909,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:08 L: merged deliver/NN/lem-weil-pbc-finite-free-strict-tower-transport (reviewer FIX; first push; new nodes: 0)
 - 08:08 L: merged deliver/Q39/lem-sfb-termwise-strong-monoidal (reviewer PASS; first push; new nodes: 0)
 - 08:08 L: merged deliver/Q96/lem-trf-point-transport-composition (reviewer FIX; after a return; new nodes: 2)
+- 08:08 L: merged deliver/Q114/lem-fd-rational-coefficient-category-comparison (reviewer FIX; after a return; new nodes: 5)
