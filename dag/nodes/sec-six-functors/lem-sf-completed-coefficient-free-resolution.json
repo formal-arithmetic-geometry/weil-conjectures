@@ -20,9 +20,98 @@
   "lem-pur-derived-change-of-rings",
   "def-pc-kflat-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\underline R$ for the constant coefficient ring sheaf. By [lem-weil-l-adic-extension-integers-dvr], $R$ is a domain and a principal ideal ring, and $\\varpi\\ne0$. Thus every ideal is finitely generated, so $R$ is Noetherian, and multiplication by $\\varpi^n$ is injective for every $n\\ge1$. The module sequence $0\\to R\\xrightarrow{\\varpi^n}R\\to R/\\varpi^n\\to0$ is exact: its quotient has exactly the kernel $\\varpi^nR$. Apply clause (1) of [lem-weil-pbc-constant-module-section-properties] on each site object. This gives $0\\to\\underline R\\xrightarrow{\\varpi^n}\\underline R\\to R_{n,T}\\to0$; the same clause applied to the surjections $R/\\varpi^{n+1}\\to R/\\varpi^n$ shows that the constant-sheaf transition maps are surjective on sections, hence epimorphisms.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-pbc-constant-module-section-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 093J, lemma-constant-exact; regular-uniformizer specialization using the cited DVR statement"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-completed-constant-sheaf-reduction] with $A=R$ and $I=(\\varpi)$. Its hypotheses hold by step 1, and its $B$ is exactly $B_T$. Flatness makes tensoring the exact sequence of step 1 with $B_T$ exact. The tensor-unit identification sends its first map to multiplication by $\\varpi^n$. The lemma's canonical reduction isomorphism identifies its last term $B_T\\otimes_{\\underline R}R_{n,T}$ with $R_{n,T}$: flatness identifies ordinary and derived tensor, and the reduction sends $b\\otimes\\bar r$ to $q_n(b)\\bar r$, where $q_n:B_T\\to R_{n,T}$ is the specified projection. We obtain $0\\to B_T\\xrightarrow{\\varpi^n}B_T\\xrightarrow{q_n}R_{n,T}\\to0$. Consequently $P_n=[B_T\\xrightarrow{\\varpi^n}B_T]$, in degrees $-1,0$, has zero cohomology in degree $-1$ and $R_{n,T}$ in degree $0$; its actual augmentation $\\epsilon_n$ is a quasi-isomorphism.",
+   "uses": [
+    "lem-weil-pbc-completed-constant-sheaf-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 093M, lemma-completion-flat, applied to all powers of the principal ideal"
+   }
+  },
+  {
+   "text": "The sheaf $B_T$ is flat as a module over itself because tensoring with it is the identity functor. Thus $P_n$ is a bounded-above complex of flat $B_T$-modules, and [lem-pc-bounded-above-flat-kflat-site] makes it K-flat. The same argument applies to $B_T^{\\oplus r}$ concentrated in any one degree: its tensor functor is a finite direct sum of copies of the identity, so its terms are flat.",
+   "uses": [
+    "lem-pc-bounded-above-flat-kflat-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YQ, lemma-bounded-flat-K-flat (the cited node gives this statement although its source metadata says 06YS)"
+   }
+  },
+  {
+   "text": "First take $F=B_T^{\\oplus r}$ in degree $0$. Its K-flat model from step 3 computes scalar extension by [lem-pur-derived-change-of-rings], giving $F\\otimes^L_{B_T}R_{n,T}=R_{n,T}^{\\oplus r}$ with the quotient projection on every coordinate. These identifications commute with the quotient transitions because they send $b e_j\\otimes\\bar a$ to $q_n(b)\\bar a\\,e_j$. Regard this tower as a tower of $B_T$-modules. Its transitions are epimorphisms by step 1, so [lem-weil-proetale-surjective-tower-derived-limit] identifies its derived limit with its ordinary limit, with the actual projections. This ordinary limit is $B_T^{\\oplus r}$: a compatible family of $r$-tuples is exactly $r$ compatible families, each in $\\lim_n R_{n,T}=B_T$. This proves the required quotient-tower completeness. For a free cell in degree $d$, the identical calculation shifts the Roos triangle by $[-d]$; shifts preserve distinguished triangles and products, the latter because shifting is an equivalence. Hence its derived limit is $B_T^{\\oplus r}[-d]$, with precisely the shifted quotient projections. The argument includes $r=0$.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-proetale-surjective-tower-derived-limit",
+    "def-weil-derived-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Propositions 3.1.9-3.1.10, pp. 17-18, with 3.2.3(1) and 4.2.8; finite coordinates and shifts of the Roos triangle"
+   }
+  },
+  {
+   "text": "For arbitrary, possibly unbounded $M$, choose a representative and a K-flat resolution $Q\\to M$ with flat terms using [lem-pc-kflat-resolution]. By [lem-pur-derived-change-of-rings], $Q\\otimes_{B_T}R_{n,T}$ represents $M\\otimes^L_{B_T}R_{n,T}$ in $D(R_{n,T})$. After restriction this is the same underlying complex of $B_T$-modules. Since $Q$ is K-flat, tensoring with $Q$ preserves every quasi-isomorphism by [lem-weil-pbc-total-tensor-homotopy-cone-signs]. In particular $\\operatorname{Tot}(Q\\otimes_{B_T}P_n)\\xrightarrow{1\\otimes\\epsilon_n}Q\\otimes_{B_T}R_{n,T}$ is a quasi-isomorphism. This identifies the former complex with the scalar restriction of the derived reduction. The composite $Q\\to\\operatorname{Tot}(Q\\otimes P_n)\\to Q\\otimes R_{n,T}$, using inclusion of the degree-zero term of $P_n$, sends $x$ to $x\\otimes1$. It is exactly the canonical scalar-extension map, since $\\epsilon_n$ in degree zero is $q_n$.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-pbc-total-tensor-homotopy-cone-signs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 06YP (lemma-K-flat-quasi-isomorphism); derived change of rings via K-flat models"
+   }
+  },
+  {
+   "text": "With the cone convention of [def-weil-abstract-derived-category], $P_n=\\operatorname{Cone}(\\varpi^n:B_T[0]\\to B_T[0])$. Apply [lem-pc-tensor-mapping-cone-iso] to $Q$ and this map. Tensor-unit identifications give $\\operatorname{Tot}(Q\\otimes P_n)\\cong\\operatorname{Cone}(\\varpi^n:Q\\to Q)$, compatibly with inclusion of the second $Q$. Its cone triangle is distinguished by the definition of the derived triangulation. Substituting the quasi-isomorphism of step 5 into this triangle gives $M\\xrightarrow{\\varpi^n}M\\to\\operatorname{Res}(M\\otimes^L_{B_T}R_{n,T})\\to M[1]$. The inclusion compatibility and the formula $x\\mapsto x\\otimes1$ in step 5 identify the middle arrow with the map induced by $q_n$, not just an unspecified morphism with isomorphic target. No boundedness of $Q$ or $M$ was used.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-pc-tensor-mapping-cone-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YM, lemma-derived-tor-exact, and derived.tex remark-double-complex-as-tensor-product-of, cone triangles and derived triangulation; the cited tensor-cone node supplies the explicit inclusion-compatible comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-constant-module-section-properties",
+  "lem-weil-pbc-completed-constant-sheaf-reduction",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-proetale-surjective-tower-derived-limit",
+  "def-weil-derived-limit",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-total-tensor-homotopy-cone-signs",
+  "def-weil-abstract-derived-category",
+  "lem-pc-tensor-mapping-cone-iso"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 093J and 093M; combined with sites-cohomology.tex Tags 06YQ, 06YS, 06YP and 06YM and Bhatt-Scholze Proposition 3.1.10. Specialized supporting calculation for proetale.tex Tag 09C3."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,10 +147,45 @@
    "results": "8 hits: BDeRhamPlus, BDeRham, instCommRingBDeRhamPlus, PreTilt.exists_smodEq_untiltAux, Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq, IsAdicComplete.henselianRing, Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete, WittVector.isAdicCompleteIdealSpanP",
    "date": "2026-10-21",
    "verdict": "no match: period rings, ordinary module adic completeness and formal-smooth lifting do not state the completed pro-etale quotient resolution, free-cell derived completeness and reduction triangle together."
+  },
+  {
+   "tool": "grep",
+   "query": "completed.*constant|uniformizer|derived.?complet",
+   "results": "0 hits:  (Mathlib/CategoryTheory/Sites)",
+   "date": "2026-10-21",
+   "verdict": "no match: no completed constant, uniformizer or derived-completeness declarations in Mathlib/CategoryTheory/Sites."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor reduction over a completed proetale coefficient sheaf is the cone of multiplication by a uniformizer power",
+   "results": "8 hits: CategoryTheory.Sheaf.coneΓ, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProduct_tmul, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, AdicCompletion.ofTensorProduct, Algebra.FormallyEtale.instTensorProduct",
+   "date": "2026-10-21",
+   "verdict": "no match: period rings, ordinary module adic completion and its finite-module tensor formula do not state the pro-etale sheaf quotient resolution, derived free-cell completeness and unbounded reduction triangle."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, \"complete\"",
+   "results": "1 hits: SheafOfModules.Submodule.instCompleteLattice",
+   "date": "2026-10-21",
+   "verdict": "no match: the hit is the complete lattice of submodule sheaves, not adic derived completeness."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A completed constant coefficient ring sheaf modulo a uniformizer power has a two term free resolution and its finite free sheaves are derived complete",
+   "results": "8 hits: BDeRhamPlus, BDeRham, instCommRingBDeRhamPlus, IsAdicComplete, AdicCompletion, IsAdicComplete.henselianRing, AdicCompletion.module, IsAdicComplete.toIsPrecomplete",
+   "date": "2026-10-21",
+   "verdict": "no match: period rings, ordinary module adic completion and its finite-module tensor formula do not state the pro-etale sheaf quotient resolution, derived free-cell completeness and unbounded reduction triangle."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An inverse limit of constant finite quotient ring sheaves is derived complete and tensor modulo a regular element is its multiplication cone",
+   "results": "8 hits: BDeRhamPlus, AdicCompletion.ofTensorProduct_tmul, AdicCompletion.ofTensorProduct_bijective_of_pi_of_fintype, localCohomology, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, instCommRingBDeRhamPlus",
+   "date": "2026-10-21",
+   "verdict": "no match: period rings, ordinary module adic completion and its finite-module tensor formula do not state the pro-etale sheaf quotient resolution, derived free-cell completeness and unbounded reduction triangle."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-fix-residue-lisse-projective-models",
@@ -81,5 +205,69 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sf-completed-coefficient-free-resolution",
+  "worker": "stage1",
+  "summary": "Six-step proof by the regular-uniformizer constant sequence, flat completed scalar extension, bounded free K-flatness, a surjective quotient Roos tower, and an unbounded K-flat tensor-cone computation. All ingredients already have nodes: no new nodes or Mathlib leaves. The statement is unchanged, and the actual quotient and canonical reduction arrows are tracked.",
+  "blueprint": "Realizes the completed-free-cell and quotient-resolution subargument of the local projective models used below lem-fix-weil-operations, proof paragraph beginning \"For an admissible exceptional adjoint\", sentence \"Evaluation is natural in the two Weil maps and their inverses, so its square commutes\"; these are the old parent local-model steps 1 and 5 named in this item's blueprint.from.place.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Generic coefficient-ring fact: R is a Noetherian domain and a uniformizer is nonzero; the unit contains no coefficient-algebra replacement."
+   },
+   {
+    "node": "lem-weil-pbc-constant-module-section-properties",
+    "why": "Exactness of constant module sheaves on each object gives the regular-element sequence and quotient-transition epimorphisms."
+   },
+   {
+    "node": "lem-weil-pbc-completed-constant-sheaf-reduction",
+    "why": "Flatness of the completed constant algebra and its actual quotient identification; this is the coefficient lemma underlying the fixed local-model route."
+   },
+   {
+    "node": "lem-pc-bounded-above-flat-kflat-site",
+    "why": "Generic ringed-site K-flatness criterion applied to two-term free complexes and free cells."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Computes unbounded scalar extension on K-flat models without changing coefficient categories."
+   },
+   {
+    "node": "lem-weil-proetale-surjective-tower-derived-limit",
+    "why": "Generic pro-etale surjective-tower theorem, used only for the tower of degree-zero quotient sheaves."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic existence of an unbounded K-flat resolution with flat terms."
+   },
+   {
+    "node": "lem-weil-pbc-total-tensor-homotopy-cone-signs",
+    "why": "K-flat tensor preserves quasi-isomorphisms with arbitrary endpoints; needed because the quotient sheaf itself need not be K-flat."
+   },
+   {
+    "node": "lem-pc-tensor-mapping-cone-iso",
+    "why": "Generic ringed-site tensor-cone comparison, including the inclusion compatibility fixing the reduction arrow."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-constant-module-section-properties",
+  "lem-weil-pbc-completed-constant-sheaf-reduction",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-proetale-surjective-tower-derived-limit",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-total-tensor-homotopy-cone-signs",
+  "lem-pc-tensor-mapping-cone-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q09-256dc309f",
+  "group": "Q09",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-256dc309f (reviewer sub-agent of L); spot-checked: PASS with no changes; review.md is written. The delivery is one commit with 0 new nodes, and the item statement and stmt_deps are identical to side-live. The item is still unsplit in live and side-live, is not in the dropped list and has no repair note. Mechanical checks: proof_deps equals the union of the step uses, no cited id is missing or merged, there is no cycle (1028-node closure checked) and no SGA source is cited. Step 1: the DVR node (PID, so Noetherian; ϖ≠0) and clause (1) of the constant-module section lemma give the exact uniformizer sequence and epimorphic transitions; Stacks 093J states presheaf exactness on any site. Step 2: the completed-constant reduction lemma applies with A=R and I=(ϖ), and its B is literally B_T; flatness gives the exact sequence 0→B→B→R_n→0 with third arrow q_n. Step 3: the item's bounded complexes have flat terms, so they are K-flat; this is 06YQ, and the report's note that the cited node's tag is wrongly given as 06YS is correct. Step 4: the surjective-tower lemma for the ring sheaf B_T gives a Roos triangle with the actual projections. The shift by [-d] is handled up to a sign flip on δ, which the derived-limit definition allows, and r=0 is included. Step 5: the item uses the K-flat factor clause of the total-tensor node, which allows arbitrary endpoints; this is needed because R_n is not K-flat. Step 6: Cone(ϖ^n: B[0]→B[0]) equals P_n under the cone convention, and the inclusion-compatible tensor-cone iso makes the middle arrow exactly x↦x⊗1. Small cases checked: n=1, r=0, empty T, and M=R_1 (H^{-1} consistent). The 9 off-unit tool_uses are generic tools (the unit has uses []) and are accepted. Nearby candidates lem-coef-normalized-dvr-adic-cone-model and lem-coef-tower-coaugmentation are not duplicates."
  }
 }
