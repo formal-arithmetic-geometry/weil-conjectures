@@ -10,15 +10,11 @@ public import Sheaf.AlgebraicGeometry.FrobeniusDetailed
 public import Sheaf.AlgebraicGeometry.FrobeniusTrivializationPullback
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
-import Sheaf.AlgebraicGeometry.ProEtaleCanonicalPullbackComposition
+import Sheaf.AlgebraicGeometry.FactorizedProEtalePullbackPasting
 import Sheaf.AlgebraicGeometry.AbsoluteFrobeniusUniversalHomeomorphism
 public import WeilConjectures.AlgebraicGeometry.UniversalHomeomorphismInvariance
 import Sheaf.SixFunctors.FrobeniusSquareCartesian
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
 import Sheaf.Paper.IntegralFinitePullbackComposition
-import WeilConjectures.AlgebraicGeometry.AbsoluteFrobenius
-import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 
 /-!
 # Scheme and geometric Frobenius of a purity datum
@@ -204,6 +200,106 @@ def frobeniusOrdinaryComposition (P : PurityFiniteSetting.{u})
   (absoluteFrobenius_proEtale_trivialization_pullback
     P.field.p P.field.prime P.Ring).choose_spec.2.choose f g
 
+attribute [local irreducible] proEtaleRingModuleAdjunction
+  proEtaleRingModulePullback proEtaleRingModulePullbackObj proEtaleRingModulePullbackMap
+
+set_option backward.isDefEq.respectTransparency false in
+/-- The adjunction unit fixes the ordinary compositor and hence its derived descent. -/
+private theorem frobeniusComposition_normalized (P : PurityFiniteSetting.{u})
+    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
+    proEtaleFrobeniusDerivedComp P.Ring f g (P.frobeniusOrdinaryComposition f g) =
+      (proEtaleConstantRingPullbackComposition f g P.Ring).symm := by
+  let : Finite P.Ring := Padic.finite_coefficientExtensionRing
+    P.coefficients.l P.extension P.level P.level_pos
+  obtain ⟨a, ha, hd⟩ := proEtaleConstantRingPullbackComposition_ordinary f g P.Ring
+  have hc := (absoluteFrobenius_proEtale_trivialization_pullback
+    P.field.p P.field.prime P.Ring).choose_spec.2.choose_spec.1
+  have he : P.frobeniusOrdinaryComposition f g = a := by
+    apply Iso.ext
+    apply NatTrans.ext
+    funext M
+    apply ((proEtaleConstantRingAdjunction P.Ring (f ≫ g)).homEquiv _ _).injective
+    rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit]
+    have q := unit_conjugateEquiv
+      ((proEtaleConstantRingAdjunction P.Ring g).comp
+        (proEtaleConstantRingAdjunction P.Ring f))
+      (proEtaleConstantRingAdjunction P.Ring (f ≫ g))
+      (P.frobeniusOrdinaryComposition f g).hom M
+    rw [← q]
+    apply SheafOfModules.hom_ext
+    apply PresheafOfModules.hom_ext
+    intro V
+    ext m
+    have h := hc X Y Z f g
+      ((proEtaleConstantRingPullback P.Ring g ⋙
+        proEtaleConstantRingPullback P.Ring f).obj M) V.unop
+      ((((proEtaleConstantRingAdjunction P.Ring g).comp
+        (proEtaleConstantRingAdjunction P.Ring f)).unit.app M).val.app V m)
+    rw [Adjunction.comp_unit_app] at h
+    exact h.trans (ha M V.unop m).symm
+  rw [he]
+  exact hd
+
+/-- Transport the published pasting equation through the two factorization equalities. -/
+private theorem factorized_pasting
+    {X Y : Scheme.{u}} (u : X ⟶ Y) (rX sX tX : X ⟶ X) (rY sY tY : Y ⟶ Y)
+    (er : u ≫ rY = rX ≫ u) (es : u ≫ sY = sX ≫ u)
+    (et : u ≫ tY = tX ≫ u) (hx : tX = rX ≫ sX) (hy : tY = rY ≫ sY)
+    (A : Type u) [CommRing A] [Finite A] :
+    (Functor.isoWhiskerRight
+        (eqToIso (congrArg (proEtaleConstantRingDerivedPullback A) hy) ≪≫
+          (proEtaleConstantRingPullbackComposition rY sY A).symm)
+        (proEtaleConstantRingDerivedPullback A u) ≪≫
+      Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft (proEtaleConstantRingDerivedPullback A sY)
+        (proEtalePastingDerivedSquare u rX rY er A) ≪≫
+      (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight (proEtalePastingDerivedSquare u sX sY es A)
+        (proEtaleConstantRingDerivedPullback A rX) ≪≫
+      Functor.associator _ _ _).hom =
+    (proEtalePastingDerivedSquare u tX tY et A ≪≫
+      Functor.isoWhiskerLeft (proEtaleConstantRingDerivedPullback A u)
+        (eqToIso (congrArg (proEtaleConstantRingDerivedPullback A) hx) ≪≫
+          (proEtaleConstantRingPullbackComposition rX sX A).symm)).hom := by
+  subst tX
+  subst tY
+  simpa only [proEtalePastingDerivedLeft, proEtalePastingDerivedRight,
+    eqToIso_refl, Iso.refl_trans] using
+    proEtaleFactorizedPullback_pasting u rX sX rY sY er es et A
+
+set_option backward.isDefEq.respectTransparency false in
+/-- Postcompose pasting with the trivialization, then use its two naturality squares. -/
+private theorem factorized_naturality
+    {C D : Type*} [Category C] [Category D] (L : C ⥤ D)
+    (RX SX TX : D ⥤ D) (RY SY TY : C ⥤ C)
+    (dX : TX ≅ SX ⋙ RX) (dY : TY ≅ SY ⋙ RY)
+    (cR : RY ⋙ L ≅ L ⋙ RX) (cS : SY ⋙ L ≅ L ⋙ SX)
+    (cT : TY ⋙ L ≅ L ⋙ TX) (τX : RX ≅ 𝟭 D) (τY : RY ≅ 𝟭 C)
+    (hτ : cR.hom ≫ Functor.whiskerLeft L τX.hom ≫ (Functor.rightUnitor L).hom =
+      Functor.whiskerRight τY.hom L ≫ (Functor.leftUnitor L).hom)
+    (hp : (Functor.isoWhiskerRight dY L ≪≫ Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft SY cR ≪≫ (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight cS RX ≪≫ Functor.associator _ _ _).hom =
+      (cT ≪≫ Functor.isoWhiskerLeft L dX).hom) :
+    Functor.whiskerRight
+        (dY ≪≫ Functor.isoWhiskerLeft SY τY ≪≫ Functor.rightUnitor SY).hom L ≫
+      cS.hom =
+    cT.hom ≫ Functor.whiskerLeft L
+      (dX ≪≫ Functor.isoWhiskerLeft SX τX ≪≫ Functor.rightUnitor SX).hom := by
+  apply NatTrans.ext
+  funext M
+  have ht := NatTrans.congr_app hτ (SY.obj M)
+  have hh := NatTrans.congr_app hp M
+  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
+    Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    Functor.associator_hom_app, Functor.associator_inv_app,
+    Functor.rightUnitor_hom_app, Functor.leftUnitor_hom_app,
+    Functor.map_comp,
+    Category.comp_id, Category.id_comp, Category.assoc] at ht hh ⊢
+  rw [← reassoc_of% hh, reassoc_of% (τX.hom.naturality (cS.hom.app M)),
+    reassoc_of% ht]
+  simp
+
 /-- Exact descent of the normalized ordinary comparison, with the canonical derived
 composition identification of the dependency. Source: blueprint order 2579; Stacks 0D6D
 (blueprint: def-pur-scheme-geometric-frobenius). -/
@@ -355,6 +451,9 @@ def frobeniusSchemeSquareComparison (P : PurityFiniteSetting.{u})
     (P.schemeGeometricFrobenius_squares X₀ Y₀ f₀ d).2.2.2.2.1.symm) ≪≫
   P.frobeniusDerivedComposition (P.frobeniusSchemeMap X₀) (P.frobeniusMap f₀)
 
+set_option maxHeartbeats 800000 in
+-- Normalizing the chosen compositors elaborates dependent derived-functor transports.
+set_option backward.isDefEq.respectTransparency false in
 /-- The two paths c_g after Lf*kappa_Y and kappa_X Lf* after c_Phi agree.
 Source: blueprint order 2579, final displayed equality of natural transformations
 (blueprint: def-pur-scheme-geometric-frobenius).
@@ -383,6 +482,50 @@ theorem schemeGeometricFrobenius_naturality (P : PurityFiniteSetting.{u})
     (P.frobeniusSchemeSquareComparison X₀ Y₀ f₀ d).hom ≫
       Functor.whiskerLeft (proEtaleConstantRingDerivedPullback P.Ring (P.frobeniusMap f₀))
         (P.schemeGeometricFrobeniusComparison X₀).hom := by
-  sorry
+  let : Finite P.Ring := Padic.finite_coefficientExtensionRing
+    P.coefficients.l P.extension P.level P.level_pos
+  let hchar (T₀ : Over (Spec (CommRingCat.of P.field.k₀))) :
+      (P.frobeniusFiber T₀).left.IsCharacteristic P.field.p :=
+    ⟨P.field.prime, natCast_eq_zero_of_natCast_top_eq_zero
+      (P.field.model_characteristic (pullback.fst T₀.hom
+        (Spec.map (CommRingCat.ofHom (algebraMap P.field.k₀ P.field.k))) ≫ T₀.hom))⟩
+  obtain ⟨w, hw⟩ := (absoluteFrobenius_proEtale_trivialization_pullback
+    P.field.p P.field.prime P.Ring).choose_spec.2.choose_spec.2.choose_spec.2.1
+      (P.frobeniusFiber X₀).left (P.frobeniusFiber Y₀).left
+      (hchar X₀) (hchar Y₀) (P.frobeniusMap f₀) P.field.a
+  change (P.frobeniusDerivedComposition (P.frobeniusMap f₀)
+      (P.frobeniusAbsoluteMap Y₀)).inv ≫
+    eqToHom (congrArg (proEtaleConstantRingDerivedPullback P.Ring) w.symm) ≫
+    (P.frobeniusDerivedComposition (P.frobeniusAbsoluteMap X₀)
+      (P.frobeniusMap f₀)).hom ≫
+    Functor.whiskerLeft (proEtaleConstantRingDerivedPullback P.Ring (P.frobeniusMap f₀))
+      (P.frobeniusAbsoluteTrivialization X₀).hom ≫ (Functor.rightUnitor _).hom =
+    Functor.whiskerRight (P.frobeniusAbsoluteTrivialization Y₀).hom
+      (proEtaleConstantRingDerivedPullback P.Ring (P.frobeniusMap f₀)) ≫
+      (Functor.leftUnitor _).hom at hw
+  simp only [frobeniusDerivedComposition, frobeniusComposition_normalized,
+    Iso.symm_hom, Iso.symm_inv] at hw
+  have hs := P.schemeGeometricFrobenius_squares X₀ Y₀ f₀ d
+  have hp := factorized_pasting (P.frobeniusMap f₀)
+    (P.frobeniusAbsoluteMap X₀) (P.frobeniusGaloisMap X₀) (P.frobeniusSchemeMap X₀)
+    (P.frobeniusAbsoluteMap Y₀) (P.frobeniusGaloisMap Y₀) (P.frobeniusSchemeMap Y₀)
+    w.symm hs.2.2.2.1.symm hs.2.2.2.2.1.symm
+    (P.schemeGeometricFrobenius_factorization X₀).2.2
+    (P.schemeGeometricFrobenius_factorization Y₀).2.2 P.Ring
+  have hh := factorized_naturality
+    (proEtaleConstantRingDerivedPullback P.Ring (P.frobeniusMap f₀))
+    (proEtaleConstantRingDerivedPullback P.Ring (P.frobeniusAbsoluteMap X₀))
+    (proEtaleConstantRingDerivedPullback P.Ring (P.frobeniusGaloisMap X₀))
+    (proEtaleConstantRingDerivedPullback P.Ring (P.frobeniusSchemeMap X₀))
+    (proEtaleConstantRingDerivedPullback P.Ring (P.frobeniusAbsoluteMap Y₀))
+    (proEtaleConstantRingDerivedPullback P.Ring (P.frobeniusGaloisMap Y₀))
+    (proEtaleConstantRingDerivedPullback P.Ring (P.frobeniusSchemeMap Y₀))
+    _ _ _ _ _ (P.frobeniusAbsoluteTrivialization X₀) (P.frobeniusAbsoluteTrivialization Y₀)
+    (by simpa only [proEtalePastingDerivedSquare, Iso.trans_hom, Iso.symm_hom,
+      eqToIso.hom, Category.assoc] using hw) hp
+  simpa only [schemeGeometricFrobeniusComparison, frobeniusGaloisSquareComparison,
+    frobeniusSchemeSquareComparison, frobeniusDerivedComposition,
+    frobeniusComposition_normalized, Iso.symm_symm_eq, proEtalePastingDerivedSquare,
+    Iso.trans_assoc] using hh
 
 end WeilConjectures.PurityFiniteSetting
