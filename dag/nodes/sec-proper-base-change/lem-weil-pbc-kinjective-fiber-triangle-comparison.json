@@ -13,9 +13,142 @@
   "def-weil-pbc-additive-functor",
   "lem-weil-pbc-kinjective-total-derived"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use composition notation $ab=a\\circ b$. Additivity [def-weil-pbc-additive-functor] implies $G(0)=0$, $G(-v)=-G(v)$ and preservation of the biproduct identities: the images of the inclusions and projections satisfy $p_i i_j=\\delta_{ij}$ and $i_1p_1+i_2p_2=1$. They therefore give the canonical isomorphism $G(A\\oplus B)\\cong GA\\oplus GB$, natural in both variables. Termwise $G$ consequently commutes with shifts, sends $d^2=0$ to $(Gd)^2=0$, and sends a chain homotopy $f-g=dh+hd$ to $Gf-Gg=(Gd)(Gh)+(Gh)(Gd)$. Likewise, for a chain map $f:K\\to L$ the biproduct comparison carries $G(C(f))^r=G(L^r\\oplus K^{r+1})$ to $GL^r\\oplus GK^{r+1}$ and the differential matrix $\\begin{pmatrix}d_L&f\\\\0&-d_K\\end{pmatrix}$ to $\\begin{pmatrix}Gd_L&Gf\\\\0&-Gd_K\\end{pmatrix}$, i.e. $G(C(f))\\cong C(Gf)$ compatibly with $G(i)$, $G(p)$ (cone convention of [def-weil-abstract-derived-category]). Hence $Q_{\\mathcal B}\\circ G$ on homotopy categories commutes with shifts and sends cone triangles to cone triangles, so it is the exact functor out of $K(\\mathcal A)$ to which [lem-weil-pbc-kinjective-total-derived] applies to give $\\mathcal G=RG$ and $\\eta$. These observations justify all termwise shift identifications and the induced homotopy-category functor used below.",
+   "uses": [
+    "def-weil-pbc-additive-functor",
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-kinjective-total-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070K, lemma-enough-K-injectives-implies: termwise additive functor; elementary biproduct and homotopy identities"
+   }
+  },
+  {
+   "text": "We verify the cone-closure instance needed here directly from the definition of K-injectivity, rather than presupposing it. For an acyclic complex $N$ and a chain map $f=(a,b):N\\to H$, the second component is a chain map $b:N\\to P$. Since $P$ is K-injective, take $s^r:N^r\\to P^{r-1}$ with $b=ds+sd_N$. The first component of the chain-map equation is $-da-ub=ad_N$. Hence $-d(a+us)=(a+us)d_N$: the residual $a+us$ is a chain map $N\\to P[-1]$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 090X, lemma-triangle-K-injective; explicit two-component null-homotopy, first component reduction"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-kinjective-shift], $P[-1]$ is K-injective. Thus there is $t^r:N^r\\to P^{r-2}$ with $a+us=-dt+td_N$. The degree $-1$ map $(t,s):N\\to H$ satisfies\n$$d_H(t,s)+(t,s)d_N=(-dt-us+td_N,ds+sd_N)=(a,b).$$\nThis proves $H$ K-injective. Repeating exactly these two component equations with $P',u'$ proves $H'$ K-injective. The hypothesis that $G$ preserves K-injectives now proves $G(H)$ K-injective; no exactness of $G$ was used.",
+   "uses": [
+    "lem-weil-pbc-kinjective-shift"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 090X, lemma-triangle-K-injective; explicit two-component null-homotopy, completion; Tag 070H, definition-K-injective and following shift remark"
+   }
+  },
+  {
+   "text": "For a K-injective complex $I$ put $s_I=\\eta_I[1]\\eta_{I[1]}^{-1}:\\mathcal G(Q(I[1]))\\to(\\mathcal G(QI))[1]$, using [lem-weil-pbc-kinjective-total-derived] and [lem-weil-pbc-kinjective-shift] for invertibility of both units. For any chain map $v:I\\to J$ between K-injectives, naturality of $\\eta$ at $v$ and $v[1]$, together with $G(v[1])=(Gv)[1]$, gives\n$$s_J\\mathcal G(Q(v[1]))=\\mathcal G(Qv)[1]s_I.$$\nIndeed replace $\\eta_{J[1]}^{-1}\\mathcal G(Q(v[1]))$ by $Q(G(v[1]))\\eta_{I[1]}^{-1}$, and then use $\\eta_JQ(Gv)=\\mathcal G(Qv)\\eta_I$. Thus $s$ is natural on the K-injective homotopy category.",
+   "uses": [
+    "lem-weil-pbc-kinjective-total-derived",
+    "lem-weil-pbc-kinjective-shift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070K/070Y, lemma-enough-K-injectives-implies and lemma-K-injective-defined; Tag 05SU, lemma-derived-shift, explicit unit-normalized formula on computing objects"
+   }
+  },
+  {
+   "text": "Every derived morphism $a:QI\\to QJ$ between K-injective representatives has the form $Qv$ for a chain map modulo homotopy, by [lem-weil-pbc-kinjective-hom-derived]. Step 1 shows that the computations in step 4 depend only on this homotopy class. Consequently its naturality equality holds for every such $a$, not merely for a chosen chain map; if $a$ is invertible it also holds for its inverse. For each $Z\\in D(\\mathcal A)$ choose a K-injective $I_Z$ and an isomorphism $e_Z:Z\\xrightarrow{\\sim}QI_Z$. Such choices exist by the resolution hypothesis and essential surjectivity of the localization [def-weil-abstract-derived-category]. Define\n$$\\sigma_Z=(\\mathcal G(e_Z)[1])^{-1}s_{I_Z}\\mathcal G(e_Z[1]).$$",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I, lemma-K-injective, Hom bijection; Tag 05SU, lemma-derived-shift: construction on arbitrary derived objects"
+   }
+  },
+  {
+   "text": "For a second choice $e'_Z:Z\\to QJ_Z$, apply step 5 to $e'_Ze_Z^{-1}$ and cancel its image under $\\mathcal G$ to obtain exactly the same $\\sigma_Z$. For any $a:Z\\to W$, apply that step to $e_Wae_Z^{-1}$; substituting the displayed formula gives\n$$\\sigma_W\\mathcal G(a[1])=\\mathcal G(a)[1]\\sigma_Z.$$\nEvery factor defining $\\sigma_Z$ is invertible. This proves a natural shift isomorphism on the whole derived category, independent of representatives and resolutions. In particular at $QI$ with $I$ K-injective one may choose $e=1$, so $\\sigma_{QI}=s_I$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05SU, lemma-derived-shift: explicit independence and naturality calculations from the preceding Hom bijection"
+   }
+  },
+  {
+   "text": "For an arbitrary complex $K$, choose its given quasi-isomorphism $i:K\\to I$ to a K-injective. Since $Qi$ is invertible, step 6 gives\n$$\\sigma_{QK}=(\\mathcal G(Qi)[1])^{-1}\\eta_I[1]\\eta_{I[1]}^{-1}\\mathcal G(Q(i[1])).$$\nNaturality of $\\eta$ first at $i[1]$ and then at $i$ yields\n$$\\sigma_{QK}\\eta_{K[1]}=(\\mathcal G(Qi)[1])^{-1}\\eta_I[1]Q(Gi)[1]=\\eta_K[1].$$\nHere only the units at $I,I[1]$ were inverted, as justified in step 4; $Q$ inverts $i$ by [def-weil-abstract-derived-category]. If another natural shift isomorphism obeys the asserted normalization, evaluating it at K-injective $I$ forces $s_I$ by cancellation of $\\eta_{I[1]}$ [lem-weil-pbc-kinjective-total-derived]. Naturality at $e_Z$ then forces the formula of step 5 at every $Z$. This proves existence, normalization for every $K$, and uniqueness.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-kinjective-total-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 05SU and 070Y, lemma-derived-shift and lemma-K-injective-defined; calculation of the unit equation and uniqueness"
+   }
+  },
+  {
+   "text": "The cone convention of [def-weil-abstract-derived-category] gives $C(u)^r=P^r\\oplus P^{r+1}$, differential $(y,x)\\mapsto(dy+ux,-dx)$ and distinguished triangle $QP\\xrightarrow{Qu}QP\\xrightarrow{Qi}QC(u)\\xrightarrow{-Qp}QP[1]$. Its inverse rotation, by (TR2) in [def-weil-triangulated-category], is precisely $QH\\xrightarrow{Qr}QP\\xrightarrow{Qu}QP\\xrightarrow{Qb}QH[1]$: the inverse-rotation first map is $-(-p)[-1]=p[-1]=r$, and $b=i$ after $H[1]=C(u)$. Shifting the differential by $-1$ gives $d_H(y,x)=(-dy-ux,dx)$. The same calculation with primes proves the target triangle distinguished and verifies all signs of $r',u',b'$.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Cone definition and Tag 014Q, definition-distinguished-triangle; inverse rotation with Tag 0145, definition-triangulated-category"
+   }
+  },
+  {
+   "text": "Use the biproduct comparison of step 1 and define $\\theta^r=\\operatorname{diag}(c^{r-1},c^r)$. It is invertible with inverse $\\operatorname{diag}((c^{r-1})^{-1},(c^r)^{-1})$. The chain-map equation is the explicit equality\n$$d_{H'}(cy,cx)=(-d'cy-u'cx,d'cx)=(-cG(d)y-cG(u)x,cG(d)x)=\\theta G(d_H)(y,x),$$\nusing that $c$ is a chain map and $cG(u)=u'c$. Projection and inclusion give\n$$r'\\theta(y,x)=cx=cG(r)(y,x),\\qquad \\theta[1]G(b)(z)=(cz,0)=b'c(z).$$\nThus all the claimed chain isomorphisms and chain-level squares are established directly, including the connecting square.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 090X, lemma-triangle-K-injective, cone coordinates; elementary diagonal comparison and projection/inclusion computations"
+   }
+  },
+  {
+   "text": "The units at $P,H,H[1]$ are invertible by [lem-weil-pbc-kinjective-total-derived], step 3 and [lem-weil-pbc-kinjective-shift]. Define $\\bar c=Q(c)\\eta_P^{-1}$ and $\\Theta=Q(\\theta)\\eta_H^{-1}$. Naturality of $\\eta$ at $r$ and $u$, followed by the chain squares of step 9, gives\n$$\\bar c\\mathcal G(Qr)=Q(r')\\Theta,\\qquad \\bar c\\mathcal G(Qu)=Q(u')\\bar c.$$\nFor the last arrow write out every factor, using the normalization from step 7 and naturality at $b:P\\to H[1]$:\n$$\\begin{aligned}\n\\Theta[1]\\sigma_{QH}\\mathcal G(Qb)\n&=Q(\\theta)[1]\\eta_H^{-1}[1]\\sigma_{QH}\\mathcal G(Qb)\\\\\n&=Q(\\theta)[1]\\eta_{H[1]}^{-1}\\mathcal G(Qb)\\\\\n&=Q(\\theta)[1]Q(Gb)\\eta_P^{-1}\\\\\n&=Q(b')Q(c)\\eta_P^{-1}=Q(b')\\bar c.\n\\end{aligned}$$\nAll three components are isomorphisms. Hence these equations give the asserted isomorphism of triangles. Its target is distinguished by step 8, so its source is distinguished by (TR1) [def-weil-triangulated-category].",
+   "uses": [
+    "lem-weil-pbc-kinjective-total-derived",
+    "lem-weil-pbc-kinjective-shift",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070K/070Y and 05SU; explicit connecting-square computation; Tag 0145, isomorphism invariance of distinguished triangles"
+   }
+  },
+  {
+   "text": "To check the final naturality clause, let $v:P\\to\\widetilde P$ and $v':P'\\to\\widetilde P'$ be commuting maps of endomorphism diagrams, with $v'c=\\widetilde c\\,G(v)$. Their induced maps on fibres are $h(y,x)=(vy,vx)$ and $h'(y,x)=(v'y,v'x)$. Computing coordinates gives\n$$h'\\theta(y,x)=(v'cy,v'cx)=(\\widetilde c\\,G(v)y,\\widetilde c\\,G(v)x)=\\widetilde\\theta\\,G(h)(y,x).$$\nThe same projection and inclusion equations show commutation with $r,u,b$. Naturality of $\\eta$ then gives $Q(h')\\Theta=\\widetilde\\Theta\\mathcal G(Qh)$ and $Q(v')\\bar c=\\overline{\\widetilde c}\\,\\mathcal G(Qv)$; naturality of $\\sigma$ was proved in step 6. These are exactly the naturality squares of the triangle comparisons.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 090X, explicit fibre coordinate model; naturality calculations for the unit-normalized comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-additive-functor",
+  "def-weil-triangulated-category",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-kinjective-shift",
+  "lem-weil-pbc-kinjective-total-derived"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 090X (lemma-triangle-K-injective), 070I (lemma-K-injective), 070K/070Y and 05SU. Explicit null-homotopy, extension of the unit-normalized shift from K-injectives, and all three triangle squares supplied by NM; 05SU itself omits its proof."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -58,10 +191,52 @@
    "results": "{\"top\": [\"CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt\", \"CategoryTheory.Functor.instIsRightDerivedFunctorTotalRightDerivedTotalRightDerivedUnit\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"CategoryTheory.Functor.rightDerived_map_eq\", \"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors\", \"CategoryTheory.Functor.toRightDerivedZero\"], \"n_hits\": 8, \"note\": \"\"}",
    "date": "2026-10-21",
    "verdict": "no match: ordinary cone triangle comparisons do not supply the unit-normalized shift for an unbounded right derived functor; exact-functor descent requires exactness of G"
+  },
+  {
+   "tool": "grep",
+   "query": "IsKInjective|isKInjective",
+   "results": "{\"top\": [\"42\", \"48\", \"49\", \"51\", \"53\"], \"n_hits\": 5, \"note\": \"\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the full unit-normalized unbounded derived mapping-fibre comparison is not stated by the hits; ordinary mappingCone.mapTriangleIso concerns termwise cones, while mapDerivedCategory shift instances require exactness. K-injective cone closure is proved by the explicit null-homotopy in steps 2-3."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The mapping cone of a morphism of K-injective complexes is K-injective",
+   "results": "{\"top\": [\"CochainComplex.mappingCone\", \"CochainComplex.IsKInjective\", \"CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex\", \"CochainComplex.mappingCone.liftCochain\", \"CochainComplex.isKInjective_of_iso\", \"CochainComplex.isKInjective_of_injective\", \"CochainComplex.mappingCone.desc_f\", \"CochainComplex.mappingCone.map_id\"], \"n_hits\": 8, \"note\": \"\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the full unit-normalized unbounded derived mapping-fibre comparison is not stated by the hits; ordinary mappingCone.mapTriangleIso concerns termwise cones, while mapDerivedCategory shift instances require exactness. K-injective cone closure is proved by the explicit null-homotopy in steps 2-3."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCone.mapTriangleIso",
+   "results": "{\"top\": [\"CochainComplex.mappingCone.mapTriangleIso\"], \"n_hits\": 1, \"note\": \"\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the full unit-normalized unbounded derived mapping-fibre comparison is not stated by the hits; ordinary mappingCone.mapTriangleIso concerns termwise cones, while mapDerivedCategory shift instances require exactness. K-injective cone closure is proved by the explicit null-homotopy in steps 2-3."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The right derived functor of an additive functor has a unique shift isomorphism compatible with its universal unit and maps K-injective mapping fibre triangles with their connecting maps",
+   "results": "{\"top\": [\"CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh\", \"CategoryTheory.Functor.mapDerivedCategorySingleFunctor\", \"CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors\", \"CategoryTheory.Functor.instCommShiftHomotopyCategoryIntUpDerivedCategoryHomMapDerivedCategoryFactorsh\", \"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"CategoryTheory.Functor.mapDerivedCategory\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\"], \"n_hits\": 8, \"note\": \"\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the full unit-normalized unbounded derived mapping-fibre comparison is not stated by the hits; ordinary mappingCone.mapTriangleIso concerns termwise cones, while mapDerivedCategory shift instances require exactness. K-injective cone closure is proved by the explicit null-homotopy in steps 2-3."
+  },
+  {
+   "tool": "grep",
+   "query": "totalRightDerivedUnit|IsRightDerivedFunctor|commShift",
+   "results": "{\"top\": [\"Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean\"], \"n_hits\": 14, \"note\": \"\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the full unit-normalized unbounded derived mapping-fibre comparison is not stated by the hits; ordinary mappingCone.mapTriangleIso concerns termwise cones, while mapDerivedCategory shift instances require exactness. K-injective cone closure is proved by the explicit null-homotopy in steps 2-3."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A universal total right derived functor commutes with suspension with a unit compatible shift isomorphism and identifies rotated mapping cone triangles on K injective objects",
+   "results": "{\"top\": [\"CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh\", \"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"CochainComplex.mappingCone.mapTrianglehIso\", \"CategoryTheory.Functor.instCommShiftHomotopyCategoryIntUpDerivedCategoryHomMapDerivedCategoryFactorsh\", \"CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors\", \"CategoryTheory.Functor.mapDerivedCategorySingleFunctor\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\"], \"n_hits\": 8, \"note\": \"\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the full unit-normalized unbounded derived mapping-fibre comparison is not stated by the hits; ordinary mappingCone.mapTriangleIso concerns termwise cones, while mapDerivedCategory shift instances require exactness. K-injective cone closure is proved by the explicit null-homotopy in steps 2-3."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-pbc-direct-image-roos-normalization",
@@ -80,5 +255,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-weil-pbc-kinjective-fiber-triangle-comparison",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Proved K-injective fibre closure by two explicit null-homotopy component equations; built and uniquely normalized the shift using the existing Hom bijection and derived units; checked inverse-rotation signs, diagonal chain map, every triangle square and naturality. Reused six existing nodes and created none. No exactness of G or enough K-injectives in B was added.",
+  "blueprint": "Realizes prop-weil-pbc-direct-image-limits, current main-20261015 proof paragraph beginning Applying Rf_* to the canonical Roos triangle: the triangle comparison, its normalized shift and connecting map. Item blueprint.from records the intermediate direct-image-roos-normalization split. This is below the fixed unit/chapter route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NM-7ea3098d1",
+  "group": "NM",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-7ea3098d1 (reviewer sub-agent of L); spot-checked: Read the item's full statement and all 11 steps, every cited node's statement, and Stacks derived.tex 090X (l.9674) and 05SU (l.4657). 05SU's proof is 'Omitted', so the agent-written shift construction in steps 4-7 is correct as the proof origin. Statement and stmt_deps are unchanged from live (live is unsplit). There are no new nodes, no repair note and no dropped-list entry. The only citer is roos-normalization step 2, and the statement still gives everything it uses. Recomputed checks: d_H^2=0; the homotopy (t,s) proving H K-injective (steps 2-3, with P[-1] K-injective by the shift lemma); naturality of s_I=eta_I[1]eta_{I[1]}^{-1}; independence of choices, normalization and uniqueness of sigma (steps 5-7, using the hom-derived bijection, with no enough-injectives assumption on B); the inverse-rotation signs r=p[-1] and b=i with H[1]=C(u) literally (step 8, TR2 iff); the diagonal theta (step 9); all three triangle squares including the connecting square (step 10); and naturality (step 11). Small cases tested: P=0, u=0, u=id, G=0, G=id with c=id. No duplicate in the DAG: 05su-pur concerns LF without the normalization, and derived-direct-image-triangulated needs D^+ and enough injectives. FIX (E1/C4-type): the statement applies lem-weil-pbc-kinjective-total-derived, which requires an exact functor out of K(A), but step 1 showed only shifts and homotopies. Step 1 now shows G(C(f)) is isomorphic to C(Gf) via the biproduct matrices, so Q_B∘G is exact. Its uses gain def-weil-abstract-derived-category and lem-weil-pbc-kinjective-total-derived, and it is now marked elementary:false; proof_deps is unchanged.; 1 file(s) fixed by the reviewer"
  }
 }
