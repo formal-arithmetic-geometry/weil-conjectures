@@ -3,7 +3,9 @@
  "blueprint": {
   "is": "sk-def-cohfamily",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "def-weil-smooth-proper-cohomological-family"
+  ]
  },
  "kind": "definition",
  "title": "The smooth-proper cohomological family",
@@ -12,13 +14,62 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-def-cohfamily/_section.md",
   "place": "node sk-def-cohfamily, order 3199"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-geometric-hypotheses",
+  "def-weil-smooth-proper-cohomological-family",
+  "def-weil-ordinary-compact-cohomology",
+  "def-weil-frobenius-detailed",
+  "def-weil-global-geometric-frobenius",
+  "prop-cohomological-finiteness",
+  "def-weil-reverse-characteristic-polynomial",
+  "def-weil-characteristic-polynomial",
+  "def-weil-vector-space-scalar-extension",
+  "def-weil-polynomial-root",
+  "def-weil-field-extension-isomorphism"
+ ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "frobenius.*[Cc]ohomology|cohomology.*[Ff]robenius|[Ee]llAdicCohomology",
+   "results": "Four hits, all Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean:28,75,78,83. Read lines 45-85: ellAdicSheaf has coefficients Z_l; EllAdicCohomology (line 75) defines its cohomology groups, without the Q_l coefficient family and geometric Frobenius operators or determinant polynomials.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "smooth proper cohomology family H^i X Q_l geometric Frobenius eigenvalues",
+   "results": "Eight hits: AlgebraicGeometry.IsSmooth and its eliminators; IsProper and its constructor/restriction; Algebra.FormallySmooth.subsingleton_h1Cotangent; IsEtale.instIsSmooth. These only supply geometric hypotheses or an unrelated cotangent homology fact.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Frobenius\"",
+   "results": "Twelve hits on frobenius, iterateFrobenius, LinearMap.frobenius and related characteristic-p ring Frobenius definitions and formulas in Mathlib.Algebra.CharP. No cohomological family.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "smooth proper scheme over finite field cohomology over Q_l with geometric Frobenius determinant polynomial",
+   "results": "Eight hits: FiniteField.minpoly_frobeniusAlgHom and finite-field Frobenius algebra maps; arithFrobAt and IsArithFrobAt; WittVector.StandardOneDimIsocrystal; groupCohomology.Hilbert90.aux. These concern different operators and coefficient categories, not the smooth-proper Q_l cohomological family.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "etale cohomology l-adic rational coefficients geometric Frobenius characteristic polynomial",
+   "results": "Eight hits: WittVector.StandardOneDimIsocrystal, Isocrystal, frobeniusRotationCoeff, their instances/classification and arithmetic Frobenius at prime ideals. No rational l-adic cohomology with geometric Frobenius.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -46,5 +97,20 @@
  ],
  "chapter": "sec-zeta-weil",
  "unit": "sk-def-cohfamily",
- "lean_audit": {}
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "sk-def-cohfamily",
+  "worker": "stage1",
+  "summary": "Kept the current main-20261015 statement verbatim. This is a definition, so its split names existing notions rather than inventing proof steps. Reused the detailed smooth-proper cohomological-family definition and the finite-field, geometric, ordinary-cohomology, geometric-Frobenius, finite-dimensionality, reverse-characteristic-polynomial, characteristic-polynomial, scalar-extension, polynomial-root and field-isomorphism nodes. The eigenvalue clause fixes roots in the chosen algebraic closure after extension of scalars; it does not identify Q_l and Q_l-bar cohomology. The integral factors remain only a forward pointer. Searched the whole DAG/blueprint and live Lean; the live polynomial definition is over PadicAlgCl l, so is not an exact attachment. Five Mathlib searches of four kinds found no match. No new nodes.",
+  "blueprint": "Realizes the definition in main-20261015 sec-zeta-weil/sk-def-cohfamily/_section.md: displayed V, F, P family; algebraic-closure eigenvalue convention; later integral-factor notation as a nondependency. The companion def-weil-smooth-proper-cohomological-family supplies the same underlying family; its additional polynomial coefficient assertions are not added to this item."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-O1-e200eef04",
+  "group": "O1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O1-e200eef04 (reviewer sub-agent of L); spot-checked: I read the full delivery against main-20261015 sec-zeta-weil/sk-def-cohfamily/_section.md (order 3199) and its companion def-weil-smooth-proper-cohomological-family.md. The item statement is byte-for-byte the current source. As a definition it has no proof, no proof_deps and a null origin. There are no new nodes, and the unit changes only realized.statement=[item], steps=[] and realized_by. Each of the 12 stmt_deps defines the notion it is cited for: finite-field-fiber gives k_0, k, ℓ, Q_ℓ and Q̄_ℓ; geometric-hypotheses gives smooth, proper, geometrically connected (which includes nonempty) and pure dimension d on the geometric fibre; ordinary-compact-cohomology gives H^i(X,Q_ℓ) at stage E=Q_ℓ, with the canonical Weil structure through its constant-weil-structure dep; frobenius-detailed gives g_Y=id×Spec(φ_q^{-1}); global-geometric-frobenius gives H^i(F); the companion family node gives the same V, F and P and does not cite the item; reverse-charpoly gives det(1−TF), kept apart from charpoly det(T−F); and scalar-extension, polynomial-root and field-iso cover the eigenvalue and ι clause. The Q̄_ℓ step extends scalars of the vector space only and does not silently identify the coefficient categories. There is no cycle, and sk-thm-intfactors stays a forward pointer. Small cases are correct: Spec k_0 gives P_0=1−T with eigenvalue 1; P^1 gives P_1=1 and P_2=1−qT; an elliptic curve has eigenvalues not in Q_ℓ, which is why the source extends scalars. Batch 5: prop-cohomological-finiteness is accepted. It gives finite dimension, vanishing, invertible Frobenius and H^0, which nt-assume-trace-formula's scope names as a hypothesis, and nt-assume-poincare-duality does not give it. Its closure contains generic pod/trf lemmas only and no thm-trf or thm-pod node. The blueprint companion also uses it. def-weil-smooth-proper-cohomological-family is a definition and reaches the PD chapter only through that node. The batch-5 closure computed with and without the item differs only by the item itself. The Mathlib searches are of four kinds, and correctly no Lean is attached (the PadicAlgCl coefficient mismatch). Remaining remarks are minor: the report names citations.json and searches.jsonl, which are not in the commit."
+ }
 }
