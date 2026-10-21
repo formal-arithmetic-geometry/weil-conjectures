@@ -3,39 +3,157 @@
  "blueprint": {
   "is": "lem-wf-tensor-weil",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Tensor product of Weil complexes",
- "statement": "The construction of [def-wf-tensor-product] restricts to an exact\nbifunctor\n\n$$\n-\\otimes^L_E-:\\mathrm{WeilD}(X_0,E)\\times\\mathrm{WeilD}(X_0,E)\n\\longrightarrow\\mathrm{WeilD}(X_0,E).\n$$",
+ "statement": "Fix $X_0,E$, $X$, $\\mathcal C_E=D^b_c(X,E)$ and geometric Frobenius pullback $P=\\Phi_X^*$ as in [def-wf-weil-category]. Thus $X_0$ is separated of finite type over $\\mathbf F_q$, $E/\\mathbf Q_\\ell$ is finite with $\\ell\\nmid q$, and $\\mathcal C_E$ is the raw rationalization of the compatible uniform integral category. The construction of [def-wf-tensor-product] defines a bifunctor\n$$-\\otimes_E^{\\mathbf L}-:\\mathrm{WeilD}(X_0,E)\\times\\mathrm{WeilD}(X_0,E)\\longrightarrow\\mathrm{WeilD}(X_0,E).$$\nIts underlying object is $K\\otimes_E^{\\mathbf L}L$, its Frobenius is $(\\varphi_K\\otimes_E^{\\mathbf L}\\varphi_L)\\circ\\mu_{K,L}$ in the notation of that definition, and on commuting morphisms it sends $(u,v)$ to $u\\otimes_E^{\\mathbf L}v$.\n\nExactness means the following precise underlying assertion: for every fixed $L\\in\\mathcal C_E$, the functors $K\\mapsto K\\otimes_E^{\\mathbf L}L$ and $K\\mapsto L\\otimes_E^{\\mathbf L}K$ on $\\mathcal C_E$ commute with shifts and carry distinguished triangles to distinguished triangles. Here $\\mathcal C_E$ has the triangulation induced from the integral full subcategory [lem-weil-pbc-uniform-complete-triangulated] by raw scalar localization [lem-weil-linear-scalar-localization-triangulated]. This asserts exactness of the underlying tensor functors, without imposing a triangulated structure on the fixed-pair category of [def-wf-weil-category].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-p-cyclotomic/lem-wf-tensor-weil.md",
   "place": "node lem-wf-tensor-weil, order 2569"
  },
  "stmt_deps": [
   "def-wf-tensor-product",
-  "def-wf-weil-category"
+  "def-wf-weil-category",
+  "lem-weil-pbc-uniform-complete-triangulated",
+  "lem-weil-linear-scalar-localization-triangulated"
  ],
  "proof": [
   {
-   "text": "For Weil complexes $(K,\\varphi_K)$, $(L,\\varphi_L)$, the arrow\n$\\varphi_K\\otimes\\varphi_L$ is the tensor of the two Frobenius\nisomorphisms, hence an isomorphism satisfying the Weil-cocycle\ncondition by the functoriality of the construction of\n[def-wf-tensor-product]; the bifunctoriality is that of the\nambient derived tensor.",
+   "text": "Put $A=\\mathcal O_E$, choose $\\varpi$, and put $B=\\varprojlim_n(A/\\varpi^n)_X$. In [def-weil-pbc-rational-category] every object of $\\mathcal C_E$ has an integral representative in the compatible uniform category. For representatives $M,N$, apply [lem-ag-uniform-complete-tensor] to $X$: the scheme hypotheses are exactly those required in [def-wf-weil-category], whose $\\mathcal C_E$ is this rationalization. It gives $\\Lambda(M\\otimes_B^{\\mathbf L}N)$ in the same integral category. By the object and morphism conventions of [def-wf-tensor-product], its rationalization is precisely $K\\otimes_E^{\\mathbf L}L$. Thus the ambient tensor bifunctor takes $\\mathcal C_E\\times\\mathcal C_E$ into $\\mathcal C_E$; this is a restriction on objects, not a change of coefficient models.",
    "uses": [
+    "lem-ag-uniform-complete-tensor",
+    "def-weil-pbc-rational-category",
+    "def-wf-weil-category",
     "def-wf-tensor-product"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-algebraic-groups-lie-algebras/sk-p-cyclotomic/lem-wf-tensor-weil.proof.md",
+    "place": "Proof, Frobenius isomorphisms and ambient tensor bifunctor; closure and underlying exactness made explicit"
+   }
+  },
+  {
+   "text": "Write $T(K,L)=K\\otimes_E^{\\mathbf L}L$. The comparison $\\mu_{K,L}:PT(K,L)\\xrightarrow{\\sim}T(PK,PL)$ is the one constructed in [def-wf-tensor-product]. It is natural simultaneously in both variables. Indeed [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] gives naturality of the ordinary comparison on flat-term K-flat models. The coefficient identifications and Koszul tower maps in the definition commute with every map of such models, and the completion unit and completion functor are natural by [lem-weil-pbc-ringed-koszul-completion-reflector]. The uniqueness of descent in [lem-weil-pbc-site-derived-tensor-descent] extends the equality from K-flat models to derived morphisms. Rationalization extends it to fractions by the definition's bilinear rule. In particular, for $u:K\\to K'$ and $v:L\\to L'$,\n$$\\mu_{K',L'}\\circ P(T(u,v))=T(Pu,Pv)\\circ\\mu_{K,L}.$$",
+   "uses": [
+    "def-wf-tensor-product",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-algebraic-groups-lie-algebras/sk-p-cyclotomic/lem-wf-tensor-weil.proof.md",
+    "place": "Proof, Frobenius isomorphisms and ambient tensor bifunctor; closure and underlying exactness made explicit"
+   }
+  },
+  {
+   "text": "For Weil pairs define $\\theta_{K,L}=T(\\varphi_K,\\varphi_L)\\circ\\mu_{K,L}$, exactly as in [def-wf-tensor-product]. Its inverse is $\\mu_{K,L}^{-1}\\circ T(\\varphi_K^{-1},\\varphi_L^{-1})$: both composites are identities by bifunctoriality. With step 1, this is an object of [def-wf-weil-category]. That category asks for one invertible map $PK\\to K$; it has no additional independent cocycle datum. Iterates, if desired, are the successive pullbacks and composites of this map, with the recursion determining them.",
+   "uses": [
+    "def-wf-tensor-product",
+    "def-wf-weil-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-algebraic-groups-lie-algebras/sk-p-cyclotomic/lem-wf-tensor-weil.proof.md",
+    "place": "Proof, Frobenius isomorphisms and ambient tensor bifunctor; closure and underlying exactness made explicit"
+   }
+  },
+  {
+   "text": "Let $u:(K,\\varphi_K)\\to(K',\\varphi_{K'})$ and $v:(L,\\varphi_L)\\to(L',\\varphi_{L'})$ be commuting Weil morphisms. By their defining equations in [def-wf-weil-category], bifunctoriality, and the naturality identity of step 2,\n$$\\begin{aligned}\nT(u,v)\\circ\\theta_{K,L}\n&=T(u\\varphi_K,v\\varphi_L)\\circ\\mu_{K,L}\\\\\n&=T(\\varphi_{K'}Pu,\\varphi_{L'}Pv)\\circ\\mu_{K,L}\\\\\n&=T(\\varphi_{K'},\\varphi_{L'})\\circ\\mu_{K',L'}\\circ P(T(u,v))\\\\\n&=\\theta_{K',L'}\\circ P(T(u,v)).\n\\end{aligned}$$\nHence $T(u,v)$ is the required Weil morphism. Tensor preserves the pair of identity arrows and the composition of pairs because the ambient operation in [def-wf-tensor-product] is a bifunctor. Equality of Weil morphisms is equality of their underlying arrows. These identities establish the asserted bifunctor and its stated formulas.",
+   "uses": [
+    "def-wf-tensor-product",
+    "def-wf-weil-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-algebraic-groups-lie-algebras/sk-p-cyclotomic/lem-wf-tensor-weil.proof.md",
+    "place": "Proof, Frobenius isomorphisms and ambient tensor bifunctor; closure and underlying exactness made explicit"
+   }
+  },
+  {
+   "text": "For an integral representative $N$, choose a flat-term K-flat model using [lem-pc-kflat-resolution]. By [lem-weil-pbc-kflat-fixed-tensor-triangulated], ordinary derived tensor with $N$ in either position is exact on $D(B)$, including its shift comparison and connecting maps. Applying [lem-sfb-ringed-complete-triangulated] with the single global section $\\varpi$ shows that its composite with the precise Koszul completion $\\Lambda$ in [def-wf-tensor-product] is exact. Step 1 gives closure on the compatible uniform full subcategory; its distinguished triangles and shifts are inherited by [lem-weil-pbc-uniform-complete-triangulated]. Therefore the completed tensor restricts to an exact functor on that integral subcategory in each variable. Finally [lem-weil-linear-scalar-localization-triangulated] says that distinguished triangles of the raw rationalization are isomorphic to localized integral distinguished triangles. The tensor sends localized integral arrows by the fraction rule of [def-wf-tensor-product]; hence it sends each such triangle, and every triangle isomorphic to it, to a distinguished triangle. The localized shift comparisons give its commutation with shifts. This proves precisely the stated exactness on $\\mathcal C_E$.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+    "lem-sfb-ringed-complete-triangulated",
+    "def-wf-tensor-product",
+    "lem-weil-pbc-uniform-complete-triangulated",
+    "lem-weil-linear-scalar-localization-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-algebraic-groups-lie-algebras/sk-p-cyclotomic/lem-wf-tensor-weil.proof.md",
+    "place": "Proof, Frobenius isomorphisms and ambient tensor bifunctor; closure and underlying exactness made explicit"
+   }
   }
  ],
  "proof_deps": [
-  "def-wf-tensor-product"
+  "lem-ag-uniform-complete-tensor",
+  "def-weil-pbc-rational-category",
+  "def-wf-weil-category",
+  "def-wf-tensor-product",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-ringed-koszul-completion-reflector",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+  "lem-sfb-ringed-complete-triangulated",
+  "lem-weil-pbc-uniform-complete-triangulated",
+  "lem-weil-linear-scalar-localization-triangulated"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-p-cyclotomic/lem-wf-tensor-weil.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-algebraic-groups-lie-algebras/sk-p-cyclotomic/lem-wf-tensor-weil.proof.md",
+  "place": "Proof, Frobenius isomorphisms and ambient tensor bifunctor; closure and underlying exactness made explicit"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived completed tensor of bounded constructible adic complexes with Frobenius isomorphisms is a bifunctor exact in each underlying derived variable",
+   "results": "8 hits; HomologicalComplex.HasGoodTensor₂₃, HomologicalComplex.HasGoodTensor₁₂, AdicCompletion.tensor_map_id_left_eq_map, HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX, HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X, CategoryTheory.Tor'_obj_obj, CategoryTheory.Tor_obj, CategoryTheory.Tor'. Read the returned types. These are ordinary module completion, ordinary/condensed tensor, endofunctor algebras or generic triangulated functors; none supplies the compatible uniform adic coefficient category and its tensor restriction.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "WeilComplex|WeilD|wfTensor|completedTensor",
+   "results": "0 hits; . Read the returned types. These are ordinary module completion, ordinary/condensed tensor, endofunctor algebras or generic triangulated functors; none supplies the compatible uniform adic coefficient category and its tensor restriction.",
+   "date": "2026-10-21",
+   "verdict": "no match",
+   "subdirectory": "CategoryTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor product of rational adic Weil complexes is functorial and preserves underlying distinguished triangles in each variable",
+   "results": "8 hits; HomologicalComplex.tensorObj, CategoryTheory.Functor.IsTriangulated.mk, HomologicalComplex.tensorHom, HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory, CategoryTheory.Functor.IsTriangulated, CategoryTheory.Functor.IsTriangulated.instComp, CategoryTheory.Functor.IsHomological.mk, HomologicalComplex.HasTensor. Read the returned types. These are ordinary module completion, ordinary/condensed tensor, endofunctor algebras or generic triangulated functors; none supplies the compatible uniform adic coefficient category and its tensor restriction.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Endofunctor.Algebra, CategoryTheory.Functor",
+   "results": "12 hits; CategoryTheory.Endofunctor.Algebra, CategoryTheory.Endofunctor.Algebra.a, CategoryTheory.Endofunctor.Algebra.instCategory, CategoryTheory.Endofunctor.Algebra.instCategoryStruct, CategoryTheory.Endofunctor.Algebra.Hom, CategoryTheory.Endofunctor.Algebra.Hom.id, CategoryTheory.Endofunctor.Algebra.forget, CategoryTheory.Endofunctor.Algebra.Hom.instInhabited. Read the returned types. These are ordinary module completion, ordinary/condensed tensor, endofunctor algebras or generic triangulated functors; none supplies the compatible uniform adic coefficient category and its tensor restriction.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Frobenius compatible monoidal derived tensor functor induces a bifunctor on fixed pairs whose underlying functors preserve triangles",
+   "results": "8 hits; HomologicalComplex.Monoidal.inducingFunctorData, CategoryTheory.Localization.Monoidal.tensorBifunctor, CategoryTheory.Localization.Monoidal.lifting₂CurriedTensorPre, CategoryTheory.Localization.Monoidal.lifting₂CurriedTensorPost, CategoryTheory.Localization.Monoidal.tensorBifunctorIso, CategoryTheory.Functor.instIsHomologicalCompOfIsTriangulated, CategoryTheory.Tor', CategoryTheory.Localization.Monoidal.functorCoreMonoidalOfComp. Read the returned types. These are ordinary module completion, ordinary/condensed tensor, endofunctor algebras or generic triangulated functors; none supplies the compatible uniform adic coefficient category and its tensor restriction.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closure of derived complete integral constructible sheaves under derived tensor product on a noetherian scheme, including common local adic lisse models across all finite quotients",
+   "results": "8 hits; LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, LightCondensed.instMonoidalCategoryLightCondMod, AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian, LightCondensed.instIsGrothendieckAbelianLightCondMod. Read the returned types. These are ordinary module completion, ordinary/condensed tensor, endofunctor algebras or generic triangulated functors; none supplies the compatible uniform adic coefficient category and its tensor restriction.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -50,5 +168,64 @@
  "proof_split_by": "paragraphs",
  "lean_audit": {},
  "chapter": "sec-algebraic-groups-lie-algebras",
- "unit": "sk-p-cyclotomic"
+ "unit": "sk-p-cyclotomic",
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-wf-tensor-weil",
+  "worker": "stage1",
+  "summary": "Made the omitted compatible-uniform constructible tensor restriction an explicitly searched, statement-only underlying lemma. Wrote naturality, invertibility, the complete commuting-morphism equation and bifunctor laws. Reused the existing exact K-flat tensor, exact Koszul completion and raw scalar triangulation statements for exactness. STATEMENT-DISPUTED: the imported unqualified exact bifunctor has no triangulated target structure in the current fixed-pair definition; exactness is now explicitly the underlying derived assertion, as in the upstream tensor docstring, without identifying finite-coefficient or condensed models. No extra cocycle hypothesis is imposed.",
+  "blueprint": "Realizes both clauses of the current main-20261015 proof: tensor of Frobenius isomorphisms (steps 2-3), ambient bifunctoriality on commuting arrows (step 4); fills its omitted constructible restriction (step 1) and exactness argument (step 5). The item is recorded-in-advance material placed under the cyclotomic unit; it does not replace the unit's distinct cyclotomic theorem or its proof.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic underlying coefficient, derived tensor, completion, or localization tool; the cyclotomic unit contains no such statement. It is used as stated without replacing its cyclotomic proof."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "why": "Generic underlying coefficient, derived tensor, completion, or localization tool; the cyclotomic unit contains no such statement. It is used as stated without replacing its cyclotomic proof."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Generic underlying coefficient, derived tensor, completion, or localization tool; the cyclotomic unit contains no such statement. It is used as stated without replacing its cyclotomic proof."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic underlying coefficient, derived tensor, completion, or localization tool; the cyclotomic unit contains no such statement. It is used as stated without replacing its cyclotomic proof."
+   },
+   {
+    "node": "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+    "why": "Generic underlying coefficient, derived tensor, completion, or localization tool; the cyclotomic unit contains no such statement. It is used as stated without replacing its cyclotomic proof."
+   },
+   {
+    "node": "lem-sfb-ringed-complete-triangulated",
+    "why": "Generic underlying coefficient, derived tensor, completion, or localization tool; the cyclotomic unit contains no such statement. It is used as stated without replacing its cyclotomic proof."
+   },
+   {
+    "node": "lem-weil-pbc-uniform-complete-triangulated",
+    "why": "Generic underlying coefficient, derived tensor, completion, or localization tool; the cyclotomic unit contains no such statement. It is used as stated without replacing its cyclotomic proof."
+   },
+   {
+    "node": "lem-weil-linear-scalar-localization-triangulated",
+    "why": "Generic underlying coefficient, derived tensor, completion, or localization tool; the cyclotomic unit contains no such statement. It is used as stated without replacing its cyclotomic proof."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-ringed-koszul-completion-reflector",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+  "lem-sfb-ringed-complete-triangulated",
+  "lem-weil-pbc-uniform-complete-triangulated",
+  "lem-weil-linear-scalar-localization-triangulated"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q08-c64d52714",
+  "group": "Q08",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q08-c64d52714 (reviewer sub-agent of L); spot-checked: Read in full: the item, the new node lem-ag-uniform-complete-tensor and the statements of all 13 cited nodes, plus the master and main-20261015 blueprint (identical), unit sk-p-cyclotomic and Bhatt-Scholze 6.5.1-6.5.5 (pp. 49-50). Status: first delivery; live and side still show the item as imported; no repair note; nothing dropped; no cycle; new id is unique; no SGA cited. Statement: 'exact bifunctor' is now spelled out as exactness of the underlying C_E functors in each variable. I accept this: def-wf-weil-category says explicitly that the pair category has no triangulated structure, and nothing is dropped. The Frobenius (phi_K⊗phi_L)∘mu matches def-wf-tensor-product, and the citers internal-hom-weil and tate-twist use only the bifunctor. Step 1: X is noetherian and finite-dimensional with ell invertible, and rational objects are the integral ones, so the new node gives closure. Step 2: naturality of mu in the direction PT→T(P,P) follows from the ringed-topoi pullback lemma's simultaneous naturality, naturality of the reflector and descent uniqueness. Steps 3-4: I checked the inverse and the commuting-morphism chain line by line. Step 5: K-flat fixed tensor exact, Koszul Lambda exact (r=1), restriction to the uniform triangulated subcategory, then scalar localization, which gives F_E∘Q=Q∘F. New node: statement-only, self-contained, three kinds of search. I tested it on the geometric point (perfect complexes), A/varpi⊗A/varpi = A/varpi ⊕ A/varpi[1], and the empty scheme; uniform bounds hold through finite free models over the DVR. It is not a duplicate: det-lem-int-tensor-product, det-lem-integral-models-operations and lem-pur-integral-operations-preserve-constructible use other categories with no comparison node, and none of the ~55 nodes on def-weil-pbc-bounded-constructible-complete states tensor closure. I accept all 8 generic tool_uses. No changes."
+ }
 }
