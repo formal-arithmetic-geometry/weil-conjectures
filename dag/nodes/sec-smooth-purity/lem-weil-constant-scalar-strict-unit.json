@@ -18,11 +18,107 @@
   "def-weil-integral-derived-reduction",
   "def-weil-sheaf-of-modules-category",
   "def-weil-abstract-derived-category",
-  "def-weil-integral-reduction-tower"
+  "def-weil-integral-reduction-tower",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-tensor-complex-sheaves"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For any sheaf $M$ of $R_E$-modules, sectionwise multiplication $M(V)\\otimes_{R_E(V)}R_E(V)\\to M(V)$ has inverse $x\\mapsto x\\otimes1$: the balancing relation gives $x\\otimes r=rx\\otimes1$. These inverses commute with restriction. Thus the presheaf tensor is already isomorphic to the sheaf $M$, and sheafification gives $M\\otimes_{R_E}R_E\\cong M$, naturally in $M$. Tensoring with $R_E$ is consequently the identity functor and is exact, so $R_E$ is flat by the definition of flatness. Tensoring with the zero sheaf is zero (every elementary tensor has zero second factor), hence zero is flat as well. For any acyclic complex $F$, the degree-$n$ direct-sum total tensor with $P=R_E[0]$ has just the summand $F^n\\otimes_{R_E}R_E\\cong F^n$; its differential is $d_F^n$ because $d_P=0$. It is therefore isomorphic to $F$ as a complex, hence acyclic. This proves K-flatness directly from its definition and proves that every term of $P$ is flat.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-pc-flat-sheaf-modules",
+    "def-pc-tensor-complex-sheaves",
+    "def-pc-kflat-complex",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, sites-modules-section-tensor-product; Definition 03ER, sites-modules-definition-flat; sites-cohomology Definition 06YN, sites-cohomology-definition-K-flat; direct unit calculation"
+   }
+  },
+  {
+   "text": "Write $S_m=(A_{L,m})_Y$. The balanced map $R_E(V)\\otimes_{R_E(V)}S_m(V)\\to S_m(V)$ sends $r\\otimes z$ to $\\rho_m(r)z$. Its inverse sends $z$ to $1\\otimes z$: their composites are the identity since $1\\otimes\\rho_m(r)z=r\\otimes z$ and $\\rho_m(1)z=z$. Both maps are $S_m(V)$-linear and commute with restrictions. Thus they are inverse presheaf morphisms and induce inverse morphisms after sheafification, giving $u_m$ and its stated inverse. All complexes in this calculation are concentrated in degree zero, so these maps commute with differentials. Step 1 permits the identity K-flat resolution of $P$. The definition of scalar extension along $\\rho_m$ then says exactly that this termwise tensor computes $R_E[0]\\otimes^L_{\\mathcal O_E}A_{L,m}$; the base ring for the tensor is the completed sheaf $R_E$, as stipulated in that definition.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-integral-scalar-extension",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, sites-modules-section-tensor-product; unit calculation; scalar extension uses Bhatt-Scholze Definition 3.5.2 notation"
+   }
+  },
+  {
+   "text": "Let $a_m:S_{m+1}\\to S_m$ be reduction. The coefficient maps obey $a_m\\rho_{m+1}=\\rho_m$ and $a_m\\pi^L_{m+1}=\\pi^L_m$. On elementary tensors,\n$$a_m\\bigl(u_{m+1}(r\\otimes z)\\bigr)=a_m(\\rho_{m+1}(r)z)=\\rho_m(r)a_m(z)=u_m(r\\otimes a_m(z)).$$\nEquality on elementary tensors gives equality of the presheaf maps, hence equality of the sheafified maps; this proves transition compatibility of $u_m$, and therefore of their inverses. When $L=E$, the derived-reduction definition uses the same tensor along $\\pi^E_m$. In the reduction-tower formula $c_m=[\\gamma_m]\\circ[q]^{-1}$ choose $q=\\mathrm{id}_P$. Then $u_m\\gamma_m(r)=u_m(r\\otimes1)=\\pi^E_m(r)$, as sheaf morphisms and hence also after localization to the derived category.",
+   "uses": [
+    "def-weil-integral-scalar-extension",
+    "def-weil-integral-derived-reduction",
+    "def-weil-integral-reduction-tower"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sf-admissible/def-weil-ordinary-compact-cohomology.md",
+    "place": "Coefficient-object paragraph; direct reduction calculation with the models of the cited definitions"
+   }
+  },
+  {
+   "text": "For every $m$ define $h_m:R_L\\to T_m^0$ by $h_m(s)=1\\otimes\\pi^L_m(s)$, using the inverse $u_m^{-1}$ of Step 2. This is a sheaf morphism: it commutes with restriction, is additive, and for $b,s\\in R_L(V)$ satisfies\n$$h_m(bs)=1\\otimes\\pi^L_m(b)\\pi^L_m(s)=b\\cdot(1\\otimes\\pi^L_m(s))=b\\cdot h_m(s),$$\nwhere the target action is restriction along $\\pi^L_m$. Thus it is $R_L$-linear. From Step 3, $t_mh_{m+1}(s)=1\\otimes a_m\\pi^L_{m+1}(s)=h_m(s)$. The tuple $h(s)=(h_m(s))_m$ defines a sheaf map to $B^0$: tuples restrict coordinatewise and glue uniquely coordinatewise because each factor is a sheaf. Its coordinates show $(1-s)h=0$. This uses no exactness or surjectivity of products.",
+   "uses": [
+    "def-weil-integral-scalar-extension",
+    "def-weil-completed-integral-coefficients",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sf-admissible/def-weil-ordinary-compact-cohomology.md",
+    "place": "Coefficient-object paragraph; explicit compatible quotient-coordinate map to the scalar tower"
+   }
+  },
+  {
+   "text": "Put $D=1-s$. Every $T_m$ and hence $B$ is concentrated in degree zero. Unpack the strict mapping cocone $C=\\operatorname{Cone}(D)[-1]$: in its normalized $(\\mathrm{fst},\\mathrm{snd})$ coordinates, $C^n=B^n\\oplus B^{n-1}$ and its differential is $(x,y)\\mapsto(d_Bx,Dx-d_By)$. Here the usual cone differential and the minus sign of the shift give this formula after the sign in the strict first projection is included. In particular $C^0=B^0\\oplus0$, $C^1=0\\oplus B^0$, all other terms vanish, and $d_C^0(x,0)=(0,Dx)$. Define $\\eta^0(s)=(h(s),0)$ in these coordinates and $\\eta^n=0$ for $n\\ne0$. Step 4 gives $d_C^0\\eta^0(s)=(0,Dh(s))=0$. Every other chain-map equation has a zero source term or zero source differential, so also holds. This is the required $R_L$-linear chain map in the strict complex, with the stated first coordinates and zero second component, before localization.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sf-admissible/def-weil-ordinary-compact-cohomology.md",
+    "place": "Coefficient-object paragraph; strict cone normalization, using the cone and signed-shift formulas in the cited definition"
+   }
+  },
+  {
+   "text": "Suppose $\\eta'$ is another map satisfying the coordinates. In degree zero the product coordinates of $\\mathrm{fst}\\eta'$ equal all $h_m$, so $\\mathrm{fst}\\eta'=h$ there. Its second coordinate is zero by hypothesis. A map into the graded direct sum underlying the cone is determined by these two coordinates, hence $\\eta'^0=\\eta^0$. All source terms in other degrees are zero, so their components are the unique zero maps. This proves equality of the chain maps. Finally suppose only the unit-section condition is imposed. For every object $V$ and every $b\\in R_L(V)$, $R_L(V)$-linearity gives\n$$(\\mathrm{fst}\\eta')_m(b)=b\\cdot(\\mathrm{fst}\\eta')_m(1)=b\\cdot(1\\otimes1)=1\\otimes\\pi^L_m(b).$$\nThus the unit condition implies the full condition, and the converse is its specialization at $b=1$. This also covers the zero ring of sections, where $1=0$.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sf-admissible/def-weil-ordinary-compact-cohomology.md",
+    "place": "Coefficient-object paragraph; uniqueness of the strict zero-second-component lift and regular-module unit normalization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-kflat-complex",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-integral-scalar-extension",
+  "def-weil-integral-derived-reduction",
+  "def-weil-integral-reduction-tower",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sf-admissible/def-weil-ordinary-compact-cohomology.md",
+  "place": "Coefficient-object paragraph, regular-module unit calculation and strict cone normalization; background Bhatt-Scholze Definition 3.5.2 and Lemma 6.8.2(1)"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -72,10 +168,59 @@
    "results": "msearch.py: OK, 8 hits; AdicCompletion.map_ext''_iff, AdicCompletion.mkₐ, AdicCompletion.evalOneₐ, AlgebraicTopology.normalizedMooreComplex_obj, UniformSpace.Completion.coe_mapRingHom, AdicCompletion.mk, ModuleCat.smulShortComplex_g, UniformSpace.Completion.mapRingHom_apply",
    "date": "2026-10-21",
    "verdict": "no match: ordinary module adic completion or general cocone constructors do not identify the regular completed ring sheaf scalar tower and its uniquely normalized strict map"
+  },
+  {
+   "tool": "grep",
+   "query": "mappingCocone|def lift|hom_ext",
+   "results": "msearch.py: OK, 5 hits; 16, 33, 36, 42, 43; Mathlib/Algebra/Homology/HomotopyCategory/MappingCocone.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: general mapping-cocone constructors and ordinary module facts do not state the completed sheaf scalar tower normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A unique chain map from a ring sheaf in degree zero into the mapping cocone of one minus shift on its quotient tower with prescribed coordinates",
+   "results": "msearch.py: OK, 8 hits; CochainComplex.HomComplex.Cocycle.homOf, ChainComplex.mkHom, CochainComplex.fromSingle₀Equiv, CochainComplex.toSingle₀Equiv_apply, ChainComplex.toSingle₀Equiv, CochainComplex.mappingCone.liftCochain, ChainComplex.fromSingle₀Equiv, CochainComplex.mkHom_f_0",
+   "date": "2026-10-21",
+   "verdict": "no match: general mapping-cocone constructors and ordinary module facts do not state the completed sheaf scalar tower normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCocone.lift",
+   "results": "msearch.py: OK, 8 hits; CochainComplex.mappingCocone.ofHom_lift, CochainComplex.mappingCocone.lift, CochainComplex.mappingCocone.lift_fst, CochainComplex.mappingCocone.lift_f_snd_v, CochainComplex.mappingCocone.lift_f_fst_f, CochainComplex.mappingCocone.lift_f_snd_v_assoc, CochainComplex.mappingCocone.lift_f_fst_f_assoc, CochainComplex.mappingCocone.lift_fst_assoc",
+   "date": "2026-10-21",
+   "verdict": "no match: general mapping-cocone constructors and ordinary module facts do not state the completed sheaf scalar tower normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The regular sheaf of rings concentrated in degree zero is K-flat, and its scalar quotient tower admits a unique strict mapping cocone map determined by quotient coordinates and zero shifted component",
+   "results": "msearch.py: OK, 8 hits; Algebra.Smooth.flat, SheafOfModules.Presentation.map, SheafOfModules.Presentation.isColimit, Module.flat_of_isLocalized_span, localCohomology.diagram, Module.flat_of_isLocalized_maximal, localCohomology.ofDiagram, Module.Flat.of_forall_exists_factorization",
+   "date": "2026-10-21",
+   "verdict": "no match: general mapping-cocone constructors and ordinary module facts do not state the completed sheaf scalar tower normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|K-flat|completedScalar|Roos",
+   "results": "msearch.py: OK, 0 hits; ; Mathlib/Algebra/Category/ModuleCat",
+   "date": "2026-10-21",
+   "verdict": "no match: general mapping-cocone constructors and ordinary module facts do not state the completed sheaf scalar tower normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, \"tensor\"",
+   "results": "msearch.py: OK, 0 hits; ",
+   "date": "2026-10-21",
+   "verdict": "no match: general mapping-cocone constructors and ordinary module facts do not state the completed sheaf scalar tower normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible quotient projections from a completed ring define a unique morphism to a Roos two-term complex with zero homotopy component",
+   "results": "msearch.py: OK, 8 hits; instQFactorsThroughHomotopyDown, ComplexShape.QFactorsThroughHomotopy_of_exists_prev, ComplexShape.QFactorsThroughHomotopy, CategoryTheory.ProjectiveResolution.liftHomotopyZeroOne, CategoryTheory.ProjectiveResolution.liftHomotopyZeroZero, HomologicalComplex.homotopyCofiber.desc_f', HomologicalComplex.homotopyCofiber.ext_to_X, HomologicalComplex.homotopyCofiber.desc",
+   "date": "2026-10-21",
+   "verdict": "no match: general mapping-cocone constructors and ordinary module facts do not state the completed sheaf scalar tower normalization"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-constant-coefficient-objects-constructible",
@@ -94,5 +239,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-weil-constant-scalar-strict-unit",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Proved the regular sheaf tensor identities and K-flatness directly, computed finite scalar units and reductions, constructed the compatible coordinate map and strict cone lift, and verified uniqueness including the unit-only formulation. No new nodes: every step is an explicit elementary calculation from the cited definitions. No exactness of products, quasi-isomorphism, completeness or constructibility assertion is used.",
+  "blueprint": "Realizes the completed coefficient sheaf and scalar-extension phrase in the coefficient-object paragraph of def-weil-ordinary-compact-cohomology, current snapshot order 1869; strict normalization extracted by parent lem-weil-constant-coefficient-objects-constructible. No unit or chapter route is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NP-2934a05d7",
+  "group": "NP",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-2934a05d7 (reviewer sub-agent of L); spot-checked: I read the item in full: statement unchanged, 6 elementary steps, 0 new nodes. Its only additions to stmt_deps are the flatness and total-tensor definitions, which the statement uses. The 2026-10-21 re-split note is on the parent (lem-weil-constant-coefficient-objects-constructible, merged as a FIX), not on this item. The item is not on the dropped list, cites no SGA and has no cycle (its citers are the parent and lem-weil-constant-scalar-unit-quasi-isomorphism). Step 1: R_E[0] is K-flat with flat terms. M⊗R_E≅M by balancing plus the sheafification universal property, and Tot(F⊗P)^n=F^n⊗R_E with differential d_F⊗1, which is acyclic. Step 2: u_m and 1⊗z are inverse by 1⊗ρ_m(r)z=r⊗z. With q=id this is the K-flat flat-term model that def-weil-integral-scalar-extension asks for. Step 3: a_mρ_{m+1}=ρ_m holds. For L=E, ρ_m=π^E_m and the reduction tower gives c_m=[γ_m][q]^{-1}, so u_mγ_m=π^E_m. Step 4: h_m=u_m^{-1}π^L_m is R_L-linear, t_mh_{m+1}=h_m, and the product is taken sectionwise, so (1-s)h=0. Step 5: I recomputed Cone(D)[-1] from the cone and shift formulas in def-weil-abstract-derived-category; in normalized coordinates the differential is (dx,Dx-dy), after the minus sign in Mathlib's MappingCocone fst (l.43). Mathlib's lift (l.282) with β=0 needs exactly Dh=0. Step 6: uniqueness follows from the two coordinates and the zero terms in other degrees, and the unit-section version follows by R_L(V)-linearity, including the case 1=0. Bhatt–Scholze Def. 3.5.2 (p.24) and Lemma 6.8.2(1) (pp.58-59) match, and are background only. In the K-flat DAG scan, no node states this result; lem-pc-bounded-above-flat-kflat-site is generic and is not needed. No fixes."
  }
 }
