@@ -1,0 +1,134 @@
+{
+ "id": "def-amb-cartier-kummer-data",
+ "kind": "definition",
+ "title": "Normalized Cartier Kummer family interfaces",
+ "statement": "For a prime l and a finite extension E of Q_l, use the finite quotient coefficients and the published pro-etale Tate sheaves of [def-coefficient-twists-detailed, def-amb-proetale-supported-coefficient-reduction]. Define CartierEtaleKummerFamily to be the supported degree-two etale Ext arrows for every positive annihilating exponent and every Cartier immersion. Its normalization is SupportedKummerBoundary [def-asd-ordinary-supported-kummer-boundary]; its reduction is SupportedKummerScalar [def-asd-ordinary-supported-kummer-scalar]. CartierKummerRealization compares such a family to CartierKummerFamily by an invertible supported-source comparison preserving the constant quotient and a root-projection-normalized finite Tate site comparison [def-amb-finite-tate-site-comparison-data]. CartierKummerChern requires the ordinary integral Kummer Chern equation and its transported forgetting-support equation. CartierKummerBaseChange requires the supported-constant and root-normalized Tate comparison square for every Cartier-preserving pullback. These are the unchanged definitions formerly in lem-amb-cartier-kummer-map, with all their universes and quantifiers retained.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/lem-amb-cartier-kummer-map.proof.md",
+  "place": "Statement interfaces for paragraphs 1--4 and the final scalar-extension paragraph; extracted unchanged from the existing Lean module."
+ },
+ "stmt_deps": [
+  "def-coefficient-twists-detailed",
+  "def-pc-divisor-line-bundle",
+  "def-weil-pbc-proetale-modules",
+  "def-sf-comparison-derived-pullback",
+  "def-kun-derived-tensor",
+  "def-asd-ordinary-supported-kummer-system",
+  "def-asd-ordinary-supported-kummer-boundary",
+  "def-asd-ordinary-supported-kummer-scalar",
+  "def-weil-proetale-inverse-image",
+  "def-amb-finite-tate-site-comparison-data",
+  "def-pur-proetale-constant-module-unit",
+  "def-amb-proetale-supported-coefficient-reduction"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/lem-amb-cartier-kummer-map.proof.md",
+  "place": "Definition-only extraction of the existing interfaces; no mathematical definition changes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A uniquely normalized supported relative Kummer boundary descends to a unique pro etale Tate class independently of the killing exponent",
+   "results": "Eight hits concerning StandardEtalePair and ordinary etale constructions; none provides the supported Ext/Tate comparison.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Ext\", \"map\"",
+   "results": "Twelve results about Std map containers; no normalized Cartier boundary transport.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Kummer.*(pullback|scalar|boundary)|Tate.*comparison",
+   "results": "One unrelated FourierMotzkin result from msearch; local rg finds the ordinary Kummer boundary and finite Tate descent interfaces, but not their simultaneous Cartier transport.",
+   "date": "2026-10-21",
+   "verdict": "no matching Mathlib theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A normalized supported Cartier Kummer boundary descends to a finite proetale Tate sheaf and is natural under coefficient reduction and pullback",
+   "results": "Eight hits: Scheme.Hom.normalizationDesc, SheafOfModules.pullbackObjFreeIso_hom_naturality, pushforwardNatTrans_app_val_app_apply, freeFunctorCompPullbackIso, Scheme.Hom.toNormalization, sheafificationCompPullback, Condensed.lanSheafProfinite, pullbackObjFreeIso. These give ordinary pullback/sheafification APIs or scheme normalization, not the normalized supported Cartier Ext/Tate transport.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CartierKummerMap",
+  "date": "2026-10-21",
+  "group": "Q3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-amb-cartier-kummer-map",
+   "place": "Statement and its normalized comparison interfaces",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CartierKummerData",
+  "file": "lean/Sheaf/AlgebraicGeometry/CartierKummerData.lean",
+  "declaration": "AlgebraicGeometry.Etale.CartierEtaleKummerFamily",
+  "declarations": [
+   "AlgebraicGeometry.Etale.cartierAbelianEtale",
+   "AlgebraicGeometry.Etale.cartierAbelianGroups",
+   "AlgebraicGeometry.Etale.cartierHasExtAbelian",
+   "AlgebraicGeometry.Etale.cartierHasSheafifyAbelian",
+   "AlgebraicGeometry.Etale.cartierHasWeakSheafifyEtale",
+   "AlgebraicGeometry.Etale.cartierHasSheafifyEtale",
+   "AlgebraicGeometry.Etale.cartierHasExtEtale",
+   "AlgebraicGeometry.Etale.cartierConstantComparison",
+   "AlgebraicGeometry.Etale.CartierEtaleKummerFamily",
+   "AlgebraicGeometry.Etale.CartierEtaleKummerNormalization",
+   "AlgebraicGeometry.Etale.CartierEtaleKummerReduction",
+   "AlgebraicGeometry.Etale.CartierKummerRealization",
+   "AlgebraicGeometry.Etale.CartierKummerBaseChange",
+   "AlgebraicGeometry.Etale.CartierKummerChern"
+  ],
+  "statement": "def CartierEtaleKummerFamily : Type (u + 1)",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-21"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-ee41a",
+  "group": "Q3",
+  "result": "fix",
+  "landing": "20261021T154041-L-2777332",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-ee41a",
+  "group": "Q3",
+  "result": "fix",
+  "landing": "20261021T154041-L-2777332",
+  "kind": "interface",
+  "note": "independent cc review: delivered CartierKummerData/Map/Descent/Naturality vs clones/live CartierKummerMap (moved block identical apart from docstring node ids; item statement byte-identical); importer FiniteTypeCoordinateSupportOrientation compiled against the delivered modules (37.4 s, clean); axioms of cartier_kummer_map = std + sorryAx from the two new sorried nodes"
+ }
+}

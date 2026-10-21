@@ -1,0 +1,141 @@
+{
+ "id": "lem-amb-cartier-kummer-descent",
+ "kind": "statement",
+ "title": "Descent and exponent independence of Cartier Kummer boundaries",
+ "statement": "Fix a prime l, a finite extension E/Q_l and the families and normalizations of [def-amb-cartier-kummer-data]. Assume every positive quotient coefficient A_(E,n+1) is killed by some l^(r+1). For every ordinary etale Kummer family κ satisfying CartierEtaleKummerNormalization, there is exactly one family c with the published pro-etale Tate-line target satisfying CartierKummerRealization κ c simultaneously for every annihilating exponent. This asserts descent, exponent independence and uniqueness of the arrows only; it asserts neither coefficient-reduction compatibility, scheme-pullback compatibility nor a Chern equation.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/lem-amb-cartier-kummer-map.proof.md",
+  "place": "Final scalar-extension sentence of paragraph 4; expanded existing proof steps 8--11 and the comparison-uniqueness portion of step 13."
+ },
+ "stmt_deps": [
+  "def-amb-cartier-kummer-data"
+ ],
+ "proof": [
+  {
+   "text": "For each coefficient level choose an annihilating exponent. Exact comparison and the open-closed quotient give an invertible supported-source mate preserving the constant quotient. Finite Tate descent supplies the comparison with the published Tate sheaf. Transport κ by these two isomorphisms to construct c.",
+   "uses": [
+    "lem-amb-finite-tate-site-descent",
+    "lem-cbc-proetale-extension-zero-comparison",
+    "lem-sf-proetale-open-closed-sequence",
+    "def-sf-comparison-derived-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For two exponents use their maximum. The diagram of Kummer sequences has identity on the right G_m and the intervening power on the middle G_m and roots. Naturality identifies the relative boundaries and hence their unique supported Ext representatives. Successive scalar extension agrees with direct scalar extension. The root identity p_r=p_(s,r)p_s and the transition square in finite Tate descent show that the two transported arrows agree. This is also the exponent comparison already supplied by the ordinary pro-etale Cartier class.",
+   "uses": [
+    "sk-lem-geo-cartier",
+    "lem-amb-finite-tate-site-descent",
+    "lem-amb-kummer-any-base"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The supported quotient unit is epic, so normalization fixes the source isomorphism. The Tate comparison is fixed on local pure root tensors: locally refine a root-trivializing etale object by the pro-etale tower of compatible roots. The tensor sheafification universal property fixes the comparison on that cover and then globally. Cancel the source isomorphism in the realization equation; function extensionality proves uniqueness. Empty divisors, empty schemes and the zero coefficient ring obey the same equations.",
+   "uses": [
+    "lem-amb-finite-tate-site-descent"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-amb-finite-tate-site-descent",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-sf-proetale-open-closed-sequence",
+  "def-sf-comparison-derived-pullback",
+  "sk-lem-geo-cartier",
+  "lem-amb-kummer-any-base"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/lem-amb-cartier-kummer-map.proof.md",
+  "place": "Final scalar-extension sentence of paragraph 4; expanded existing proof steps 8--11 and the comparison-uniqueness portion of step 13."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A uniquely normalized supported relative Kummer boundary descends to a unique pro etale Tate class independently of the killing exponent",
+   "results": "Eight hits concerning StandardEtalePair and ordinary etale constructions; none provides the supported Ext/Tate comparison.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Ext\", \"map\"",
+   "results": "Twelve results about Std map containers; no normalized Cartier boundary transport.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Kummer.*(pullback|scalar|boundary)|Tate.*comparison",
+   "results": "One unrelated FourierMotzkin result from msearch; local rg finds the ordinary Kummer boundary and finite Tate descent interfaces, but not their simultaneous Cartier transport.",
+   "date": "2026-10-21",
+   "verdict": "no matching Mathlib theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A normalized supported Cartier Kummer boundary descends to a finite proetale Tate sheaf and is natural under coefficient reduction and pullback",
+   "results": "Eight hits: Scheme.Hom.normalizationDesc, SheafOfModules.pullbackObjFreeIso_hom_naturality, pushforwardNatTrans_app_val_app_apply, freeFunctorCompPullbackIso, Scheme.Hom.toNormalization, sheafificationCompPullback, Condensed.lanSheafProfinite, pullbackObjFreeIso. These give ordinary pullback/sheafification APIs or scheme normalization, not the normalized supported Cartier Ext/Tate transport.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CartierKummerMap",
+  "date": "2026-10-21",
+  "group": "Q3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-amb-cartier-kummer-map",
+   "place": "Final scalar-extension sentence of paragraph 4; expanded existing proof steps 8--11 and the comparison-uniqueness portion of step 13.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CartierKummerDescent",
+  "file": "lean/Sheaf/AlgebraicGeometry/CartierKummerDescent.lean",
+  "declaration": "AlgebraicGeometry.Etale.cartier_kummer_descent",
+  "statement": "theorem cartier_kummer_descent\n    (hkill : ∀ n : ℕ, ∃ r : ℕ,\n      ((l ^ (r + 1) : ℕ) : finiteTateCoefficient l E n) = 0)\n    (κ : CartierEtaleKummerFamily l E)\n    (hκ : CartierEtaleKummerNormalization l E κ) :\n    ∃! c : CartierKummerFamily l E, CartierKummerRealization l E κ c",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-21"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-ee41a",
+  "group": "Q3",
+  "result": "fix",
+  "landing": "20261021T154041-L-2777332",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-ee41a",
+  "group": "Q3",
+  "result": "fix",
+  "landing": "20261021T154041-L-2777332",
+  "kind": "interface",
+  "note": "independent cc review: delivered CartierKummerData/Map/Descent/Naturality vs clones/live CartierKummerMap (moved block identical apart from docstring node ids; item statement byte-identical); importer FiniteTypeCoordinateSupportOrientation compiled against the delivered modules (37.4 s, clean); axioms of cartier_kummer_map = std + sorryAx from the two new sorried nodes"
+ }
+}
