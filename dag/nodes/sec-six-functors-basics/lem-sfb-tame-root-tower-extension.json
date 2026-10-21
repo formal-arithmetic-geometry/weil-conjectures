@@ -17,7 +17,11 @@
   "def-trf-strict-normal-crossings-boundary",
   "def-sfb-lisse-coefficient-module",
   "def-sc-ring-strict-henselization",
-  "def-sfb-profinite-test-objects"
+  "def-sfb-profinite-test-objects",
+  "def-sfb-full-parameter-root-tower",
+  "def-sfb-profinite-coefficient-linearization",
+  "def-sfb-strict-local-kummer-tame-module",
+  "def-sfb-norm-continuous-monodromy-data"
  ],
  "proof": [
   {
@@ -327,5 +331,53 @@
   "group": "Q04",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q04-ad2555d6e (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement, delivery-errors A–F and blueprint main-20261015 sk-thm-sf-ctf-stability-direct-images paragraph (3). The statement and stmt_deps are byte-identical to the NU 81f850b7 creation, so nothing is weakened, and the parent tame-stratum-kummer-descent steps 1/3/8 are still served. There is no re-split note and no SGA citation. NEW NODES: (1) lem-sfb-snc-universal-residual-charts is true. B^h is Noetherian (0AGV) and an ind-étale colimit over regular B, so it is regular, and connected because (B^h,JB^h) is henselian with B/J connected. The finite étale lifts with connected special fibre are normal domains, so H is a domain and U° is connected. H_n is regular at the boundary because t_i are regular parameters, and Spec H_n is connected because the pair is henselian with special fibre (H/JH)[x]/x^n. Primitive ζ_n come from μ_n covers of S_V and Hensel, and their differences are units since ∏(1−ζ^c)=n. (2) lem-sfb-snc-tame-finite-fibre-classification is the Grothendieck–Murre tame π1 over a henselian SNC neighbourhood with simply connected residual stratum. It holds by Abhyankar at strict-local points, then purity on regular H_n, then 09ZS splitting over S_U. I tested both on one branch of A^1 at 0 (strictly henselian DVR, tame π1=Ẑ'(1)), on two branches at the origin of A^2, and on r=0, rank 0 and an empty stratum. The finite node excludes infinite coefficients and limits, so it does not restate the item (D1/D2). None of the 8 candidate duplicates I checked (per-snc-root-punctured-torsor-splitting, per-snc-parameter-root-quotient, sbc-strict-hensel-root-finite-etale-model, root-tower-lisse-morphism-extension, root-tower-boundary-acyclicity, pointed-finite-etale-limit-cover, dl-a1-henselian-global-inertia-comparison, pbc henselization family) states either node. STEPS: Step 2: the a1 integral-model hypotheses hold on W (Noetherian, separated, normal, ℓ invertible since char p≠ℓ). Step 3: the punctured strict-local tower Z is a connected qcqs pro-étale object of W, the lattice sheaf is the constant GL_d(E)/GL_d(A), and the totally-disconnected realization gives C(π0 Z,S)=S, so N|_Z≅A^d and integral tameness follows from rational tameness. Step 4: one U serves all n, and the reduction clause gives Q_{n+1}/ϖ^n≅Q_n. Step 5: the hypotheses of pod-adic-limit (1) are met, basis lifting works, and ρ is continuous. Step 6: the comaximal CRT argument is a correct elementary step. Step 7: slice restriction preserves limits, so N≅lim F_n gives L|_{T°}≅E^d with descent ρ. Steps 8–10: the root-to-zero map preserves the equations since t_i∈J, and the I=∅, rank-0 and empty cases are handled. BATCH 5: def-trf-strict-normal-crossings-boundary is a general definition. lem-a1-normal-completed-integral-model reaches lem-pod-profinite-stable-lattice, which is generic stable-lattice theory. lem-pod-adic-limit-finite-modules is pure O_E commutative algebra. None is a step of Poincaré duality or the trace formula, so all three are accepted. I accept the 10 generic tool_uses (listed in review.md). Advisory B3: connected, qcqs, finite étale and continuous G-sets are uncited in the new nodes' stmt_deps. I changed no files."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.TameRootTowerExtension",
+  "declaration": "AlgebraicGeometry.ProEtale.tame_root_tower_extension",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.tameBoundaryOpen",
+   "AlgebraicGeometry.ProEtale.TameRootExtensionChart",
+   "AlgebraicGeometry.ProEtale.TameRootExtensionChart.toBase",
+   "AlgebraicGeometry.ProEtale.TameRootExtensionChart.parameters",
+   "AlgebraicGeometry.ProEtale.TameRootExtensionChart.tower",
+   "AlgebraicGeometry.ProEtale.TameRootExtensionChart.towerMap",
+   "AlgebraicGeometry.ProEtale.TameRootExtensionChart.boundary",
+   "AlgebraicGeometry.ProEtale.TameRootExtensionChart.boundaryToBase",
+   "AlgebraicGeometry.ProEtale.TameRootExtensionChart.boundaryToStratum",
+   "AlgebraicGeometry.ProEtale.TameRootExtensionChart.punctured",
+   "AlgebraicGeometry.ProEtale.TameRootExtensionChart.openInclusion",
+   "AlgebraicGeometry.ProEtale.TameRootExtensionChart.toOpen",
+   "AlgebraicGeometry.ProEtale.tameCoefficientRealization",
+   "AlgebraicGeometry.ProEtale.TameRootRepresentation",
+   "AlgebraicGeometry.ProEtale.TameRootExtensionChart.puncturedBase",
+   "AlgebraicGeometry.ProEtale.TameRootExtensionChart.toPuncturedBase",
+   "AlgebraicGeometry.ProEtale.tameRootTorsorComparison",
+   "AlgebraicGeometry.ProEtale.IsTameRootEquivariantIso",
+   "AlgebraicGeometry.ProEtale.tameRootBoundaryMatrix",
+   "AlgebraicGeometry.ProEtale.TameRootChartGeometry",
+   "AlgebraicGeometry.ProEtale.TameRootChartExtensionBase",
+   "AlgebraicGeometry.ProEtale.TameRootBoundaryModuleData",
+   "AlgebraicGeometry.ProEtale.TameRootBoundaryData",
+   "AlgebraicGeometry.ProEtale.TameRootChartExtension",
+   "AlgebraicGeometry.ProEtale.TameRootChartExtension.Restricts",
+   "AlgebraicGeometry.ProEtale.TameRootTowerExtensionConclusion",
+   "AlgebraicGeometry.ProEtale.tame_root_tower_extension"
+  ],
+  "file": "lean/Sheaf/Paper/TameRootTowerExtension.lean",
+  "statement": "theorem tame_root_tower_extension (p ℓ : ℕ) [Fact p.Prime] [Fact ℓ.Prime] (hpℓ : p ≠ ℓ) (k : Type u) [Field k] [CharP k p] (E : Type u) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] (Ω : Type u) [NormedField Ω] [NormedAlgebra E Ω] [IsAlgClosure E Ω] (Y : Scheme.{u}) (f : Y ⟶ Spec (.of k)) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (hY : IsRegularScheme Y) (A : Type u) [Finite A] (D : Y.IdealSheafData) (C : A → Y.IdealSheafData) (hD : IsStrictNormalCrossingsBoundary D) (hinj : Function.Injective (fun a ↦ (C a).support)) (hcomp : ∀ a, IsIntegral (C a).subscheme ∧ IsRegularScheme (C a).subscheme) (hunion : D.support = ⨆ a, (C a).support) (hcross : ∀ J : Finset A, ∀ z : (⨆ a ∈ J, C a).subscheme, IsRegularScheme ((⨆ a ∈ J, C a).subscheme) ∧ ringKrullDim (Y.presheaf.stalk ((⨆ a ∈ J, C a).subschemeι z)) = ringKrullDim ((⨆ a ∈ J, C a).subscheme.presheaf.stalk z) + (J.card : ℕ)) (L : Mod (Sheaf (Scheme.ProEt.topology (tameBoundaryOpen D).toScheme) Ab.{u + 1}) (condensedRingObj (normContinuousRing E).X (tameBoundaryOpen D).toScheme)) (hL : IsLisseCoefficientModule (normContinuousRing E).X L) (htame : IsStrictLocalKummerTameModule p (normContinuousRing E).X D (tameBoundaryOpen D).ι L) (I : Finset A) : TameRootTowerExtensionConclusion p ℓ E D C L I",
+  "branch": "newtargets-dag",
+  "by": "O4",
+  "date": "2026-10-21",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-97edfabcd"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-97edfabcd",
+  "group": "O4",
+  "result": "fix",
+  "note": "Read the item node, the source place, all three delivered modules (item plus new defs FullParameterRootTower and ProfiniteCoefficientLinearization), report.md (Worker report and Second reading by O4 present) and the dependency declarations (IsStrictNormalCrossingsBoundary, tameRootAlgebra/TameRootOrder/IsStrictLocalKummerTameModule, sncStratumOpen/Ideal). Hypotheses match the node and SNC definition exactly. Stratum, tower, deck group, characters, rotation-pinned action, torsor, cover, extension, linearization, restriction equivariance, boundary map and representation matrix are all canonical and pinned. The 4 added stmt_deps are correct. FINDING (H3/edge case): TameRootChartExtension.Restricts quantifies over all refinement charts including the empty one, where ParameterRootCharacters.primitive would require IsPrimitiveRoot 0 n in the zero ring (false for n>=2), so the theorem was false whenever S_I is nonempty. FIX: fixes/TameRootTowerExtension.lean adds `Nonempty c'.U ->` to Restricts with a docstring note. Theorem signature and lean.statement are unchanged. Compiled once with nt_compile --json, siblings as overlay: exit 0, no warnings (7.4/5.0/23.1 s)."
  }
 }

@@ -1,0 +1,128 @@
+{
+ "id": "def-sfb-profinite-coefficient-linearization",
+ "kind": "definition",
+ "title": "Continuous profinite equivariance for coefficient modules",
+ "status": "split",
+ "statement": "Let $G$ be a profinite group and $X$ a scheme. Write $X[P]$ for its canonical profinite parameter scheme [def-sfb-profinite-test-objects]. A continuous action is a morphism $a:X[G]\\to X$ whose restrictions to all continuous parameter families $g:P\\to G$ obey the unit and multiplication laws. Let $\\Lambda$ be a commutative condensed ring and $M$ an internal $\\Lambda_X$-module [sk-def-sfb-module-objects], [sk-def-sfb-pulled-back-coefficients]. A continuous linearization is an isomorphism $a^*M\\simeq\\mathrm{pr}^*M$, with the unit and cocycle equations on every scheme mapping to $X[G]$ and on composable pairs of such maps, using the actual canonical composition comparisons for inverse image. For an equivariant scheme map the linearization restricts using those comparisons. For a module pulled back from a quotient, its deck linearization is the one induced by equality of the two maps to the quotient. The canonical regular and finite-free pullback comparisons give the matrices of an action in a chosen finite basis, evaluated through the actual continuous coefficient realization [def-sfb-continuous-map-condensed-ring], [lem-sfb-continuous-ring-universe-realization], [lem-sfb-integral-continuous-presentation-matrix].",
+ "stmt_deps": [
+  "def-sfb-profinite-test-objects",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-sfb-continuous-map-condensed-ring",
+  "lem-sfb-continuous-ring-universe-realization",
+  "lem-sfb-integral-continuous-presentation-matrix"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct image: agent expansion of the tame-boundary Kummer calculation; agent-formulated extension input. WANTED: all-continuous equivariant extension theorem, not asserted to follow from finite-coefficient descent."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Continuous equivariant sheaf of modules on a scheme acted on by a profinite group is an isomorphism on the action groupoid satisfying the cocycle condition",
+   "results": "{\"t\": \"2026-10-21T15:59:19Z\", \"tool\": \"leansearch\", \"query\": \"Continuous equivariant sheaf of modules on a scheme acted on by a profinite group is an isomorphism on the action groupoid satisfying the cocycle condition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"groupCohomology.cocycles₁\", \"CondensedMod.isDiscrete_tfae\", \"smoothSheafCommGroup\", \"ContinuousCohomology.I_obj_V_isModule\", \"continuousCohomology\", \"CondensedMod.ofSheafProfinite\", \"AlgebraicGeometry.Scheme.Modules.instIsIsoAbApp\", \"groupCohomology.cocyclesIso₀\"], \"digest\": \"9ac28425ae6111de\"}",
+   "date": "2026-10-21",
+   "verdict": "No existing exact deck-character/action-linearization interface. Existing tameRootAlgebra and IsStrictLocalKummerTameModule are reused, not redefined."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Continuous profinite group equivariant internal module on a scheme",
+   "results": "{\"t\": \"2026-10-21T15:58:04Z\", \"tool\": \"leanfinder\", \"query\": \"Continuous profinite group equivariant internal module on a scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CondensedMod\", \"ContinuousCohomology.I_obj_V_isModule\", \"Condensed.profiniteFree\", \"CondensedMod.ofSheafProfinite\", \"LightCondMod\", \"LightCondMod.LocallyConstant.functorToPresheaves\", \"CompHausLike.LocallyConstantModule.functorToPresheaves_obj_obj_isModule\", \"ContinuousCohomology.I\"], \"digest\": \"a78866da912c3d8d\"}",
+   "date": "2026-10-21",
+   "verdict": "No existing exact deck-character/action-linearization interface. Existing tameRootAlgebra and IsStrictLocalKummerTameModule are reused, not redefined."
+  },
+  {
+   "tool": "grep",
+   "query": "fullParameterRoot|ParameterRootTower|ProfiniteEquivariant",
+   "results": "{\"t\": \"2026-10-21T15:59:19Z\", \"tool\": \"grep\", \"query\": \"fullParameterRoot|ParameterRootTower|ProfiniteEquivariant\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "No existing exact deck-character/action-linearization interface. Existing tameRootAlgebra and IsStrictLocalKummerTameModule are reused, not redefined."
+  },
+  {
+   "tool": "grep",
+   "query": "ParameterRootCharacters|ProfiniteCoefficientLinearization|coefficientLinearizationRestriction in dag/nodes, lean/WeilConjectures, lean/Sheaf; blueprint_refs.py search parameter root tower / equivariant module",
+   "results": "No exact matching deck-character or continuous linearization interface. SNCUniversalResidualCharts imports StrictLocalKummerTameModule, whose actual root algebra and tame predicate are reused.",
+   "date": "2026-10-21",
+   "verdict": "The added data interface is missing; use the existing algebra and tameness."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-tame-root-tower-extension",
+  "date": "2026-10-21",
+  "group": "O4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image: agent expansion of the tame-boundary Kummer calculation; agent-formulated extension input. WANTED: all-continuous equivariant extension theorem, not asserted to follow from finite-coefficient descent.",
+   "via": [
+    "lem-sfb-tame-root-tower-extension",
+    "lem-sfb-tame-stratum-kummer-descent",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.Paper.ProfiniteCoefficientLinearization",
+  "declaration": "AlgebraicGeometry.ProEtale.ProfiniteCoefficientLinearization",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.coefficientParameter",
+   "AlgebraicGeometry.ProEtale.coefficientParameterProjection",
+   "AlgebraicGeometry.ProEtale.coefficientActionFamily",
+   "AlgebraicGeometry.ProEtale.coefficientActionLift",
+   "AlgebraicGeometry.ProEtale.ProfiniteCoefficientAction",
+   "AlgebraicGeometry.ProEtale.coefficientIsoPull",
+   "AlgebraicGeometry.ProEtale.ProfiniteCoefficientLinearization",
+   "AlgebraicGeometry.ProEtale.coefficientRegularPullbackIso",
+   "AlgebraicGeometry.ProEtale.coefficientFreePullbackIso",
+   "AlgebraicGeometry.ProEtale.coefficientParameterMap",
+   "AlgebraicGeometry.ProEtale.coefficientParameterProjectionCommutes",
+   "AlgebraicGeometry.ProEtale.coefficientLinearizationRestriction",
+   "AlgebraicGeometry.ProEtale.coefficientDeckDescent",
+   "AlgebraicGeometry.ProEtale.coefficientConjugateFreeEnd",
+   "AlgebraicGeometry.ProEtale.coefficientFreeMatrix"
+  ],
+  "file": "lean/Sheaf/Paper/ProfiniteCoefficientLinearization.lean",
+  "statement": "structure ProfiniteCoefficientLinearization (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] {X : Scheme.{u}} {G : Profinite.{u}} [Group G] [IsTopologicalGroup G] (a : ProfiniteCoefficientAction X G) (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))",
+  "branch": "newtargets-dag",
+  "by": "O4",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-97edfabcd",
+  "group": "O4",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-97edfabcd",
+  "group": "O4",
+  "result": "fix",
+  "note": "Read the item node, the source place, all three delivered modules (item plus new defs FullParameterRootTower and ProfiniteCoefficientLinearization), report.md (Worker report and Second reading by O4 present) and the dependency declarations (IsStrictNormalCrossingsBoundary, tameRootAlgebra/TameRootOrder/IsStrictLocalKummerTameModule, sncStratumOpen/Ideal). Hypotheses match the node and SNC definition exactly. Stratum, tower, deck group, characters, rotation-pinned action, torsor, cover, extension, linearization, restriction equivariance, boundary map and representation matrix are all canonical and pinned. The 4 added stmt_deps are correct. FINDING (H3/edge case): TameRootChartExtension.Restricts quantifies over all refinement charts including the empty one, where ParameterRootCharacters.primitive would require IsPrimitiveRoot 0 n in the zero ring (false for n>=2), so the theorem was false whenever S_I is nonempty. FIX: fixes/TameRootTowerExtension.lean adds `Nonempty c'.U ->` to Restricts with a docstring note. Theorem signature and lean.statement are unchanged. Compiled once with nt_compile --json, siblings as overlay: exit 0, no warnings (7.4/5.0/23.1 s)."
+ }
+}
