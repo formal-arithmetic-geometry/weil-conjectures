@@ -23240,3 +23240,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:50 L: merged deliver/NN/lem-sfb-tame-inertia-continuous-koszul (stage 2; reviewer PASS; parallel immutable checks)
 - 17:50 L: merged deliver/NL/lem-sfb-derived-invariants-normal-subgroup-comparison (reviewer PASS; first push; new nodes: 1)
 - 17:51 L: merged deliver/NY/lem-sfb-filtered-colimit-strictly-henselian-local (reviewer PASS; first push; new nodes: 0)
+- 2026-10-21T17:51:43Z L: superseded stage-1 delivery NV/lem-sfb-lattice-supported-hom-finite-comparison at bcf10ff66dc16e1484359477854853a7693de2ed; current completion retained; packet archived at refs/superseded/NV/lem-sfb-lattice-supported-hom-finite-comparison/bcf10ff66dc16e1484359477854853a7693de2ed; stale return retired.
