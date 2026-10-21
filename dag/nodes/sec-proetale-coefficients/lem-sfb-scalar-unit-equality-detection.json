@@ -11,9 +11,63 @@
   "def-weil-preadditive-category",
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $t_i:B\\to UFB$ for the cocone legs and $q_i:\\operatorname{Hom}(K,B)\\to\\operatorname{Hom}(K,UFB)$ for $h\\mapsto t_i\\circ h$. Naturality of the given unit, applied to $f$ and $g$, gives $\\eta_B\\circ f=UF(f)\\circ\\eta_K=UF(g)\\circ\\eta_K=\\eta_B\\circ g$, since $F(f)=F(g)$. As $t_0=\\eta_B$, this is $q_0(f)=q_0(g)$. This is substitution in the defining naturality square; neither functor is assumed additive.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037, definition-adjoint and the following paragraph: the adjunction maps form natural transformations; applied to the blueprint Full faithfulness paragraph"
+   }
+  },
+  {
+   "text": "Let $H_i=\\operatorname{Hom}(K,B)$ at every index, with each successor map multiplication by $a$. By preadditivity, the $H_i$ and $\\operatorname{Hom}(K,UFB)$ are abelian groups, and the $q_i$ are homomorphisms: $q_i(h+h\\prime)=t_i\\circ(h+h\\prime)=q_i(h)+q_i(h\\prime)$. The cocone identity for $t$ gives $q_{i+1}(ah)=q_i(h)$. The hypothesis is precisely that these $q_i$ form a colimit cocone in abelian groups. The small ordered category $\\mathbf N$ is filtered: it is nonempty, two indices have upper bound their maximum, and parallel arrows are equal. Apply [lem-weil-pbc-abelian-groups-forget-filtered-colimits] to obtain a colimit cocone of underlying sets, with the same vertex and the same maps $q_i$. Choose a universe containing the two Hom groups and the small index category.",
+   "uses": [
+    "def-weil-preadditive-category",
+    "def-weil-pbc-category-colimit",
+    "lem-weil-pbc-abelian-groups-forget-filtered-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-sfb-rationalization-comparison/thm-sfb-extend-scalars-localization.proof.md",
+    "place": "Full faithfulness, the displayed Hom-colimit comparison: passage from its assumed abelian-group colimit to the underlying-set colimit; the cited preservation leaf supplies this step"
+   }
+  },
+  {
+   "text": "Apply clause (3) of [lem-weil-pbc-filtered-colimit-sets-elementwise] to this underlying-set colimit and to the two elements $f,g\\in H_0$. The equality $q_0(f)=q_0(g)$ from step 1 gives an index $n$ and the unique arrow $0\\to n$ for which $H(0\\to n)(f)=H(0\\to n)(g)$. This uses the same-index equality clause; no surjectivity or injectivity of a particular cocone leg is assumed.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04AX, section-directed-colimits, description of the equivalence relation after Definition 002V; equality at a common stage, applied at index zero"
+   }
+  },
+  {
+   "text": "For every $h\\in\\operatorname{Hom}(K,B)$, induction on $n$ computes $H(0\\to n)(h)=a^n h$: for $n=0$ the transition is the identity and $a^0h=1h=h$; for $n+1$ functoriality of the sequence and its specified successor map give $H(0\\to n+1)(h)=aH(0\\to n)(h)=a(a^n h)=a^{n+1}h$. The scalar identity follows by distributing the finite repeated sums in the abelian Hom group. Substitution in step 3 gives $a^n f=a^n g$ for the index $n\\geq0$ found there. This induction also covers $a=0$ (including $n=0$) and $a=1$.",
+   "uses": [
+    "def-weil-preadditive-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-sfb-rationalization-comparison/thm-sfb-extend-scalars-localization.proof.md",
+    "place": "Full faithfulness: finite-stage equality for the repeated scalar diagram, expanded by induction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-preadditive-category",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-abelian-groups-forget-filtered-colimits",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-sfb-rationalization-comparison/thm-sfb-extend-scalars-localization.proof.md",
+  "place": "Full faithfulness: elementary unit-naturality calculation and finite-stage equality, expanded using Stacks Tags 0037 and 04AX and existing Mathlib leaves"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -49,10 +103,45 @@
    "results": "4 hits: Mathlib/Tactic/Module.lean, Mathlib/CategoryTheory/Limits/ConcreteCategory/Basic.lean, Mathlib/CategoryTheory/Limits/ConcreteCategory/Basic.lean, Mathlib/CategoryTheory/Limits/ConcreteCategory/Basic.lean",
    "date": "2026-10-21",
    "verdict": "no match: the hits supply only individual ingredients, not the stated comparison or criterion"
+  },
+  {
+   "tool": "grep",
+   "query": "isColimit_exists_of_rep_eq|isColimit_eq_iff|unit_naturality",
+   "results": "25 hits: Mathlib/CategoryTheory/Localization/CalculusOfFractions/OfAdjunction.lean, Mathlib/CategoryTheory/Localization/CalculusOfFractions/OfAdjunction.lean, Mathlib/CategoryTheory/Preadditive/Injective/Basic.lean, Mathlib/CategoryTheory/Sites/Point/OfIsCofiltered.lean, Mathlib/CategoryTheory/Preadditive/Projective/Basic.lean, Mathlib/CategoryTheory/Limits/Preserves/Shapes/Zero.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean. Subdirectory searched: CategoryTheory",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: results concern adjunctions or filtered-colimit equality separately; the finite-stage ingredients are existing Mathlib leaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equality under a left adjoint is detected by a finite scalar power if the unit is a sequential colimit preserved by Hom",
+   "results": "8 hits: CategoryTheory.Adjunction.ext_iff, CategoryTheory.Adjunction.ext, CategoryTheory.LiftRightAdjoint.unitEqualises, LowerAdjoint.ext_iff, CategoryTheory.Functor.instPreservesColimitsOfSizeOfIsLeftAdjoint, CategoryTheory.Limits.IsColimit.ofLeftAdjoint, CategoryTheory.Adjunction.unit_mono_of_L_faithful, CategoryTheory.Adjunction.unit_leftAdjointUniq_hom",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: results concern adjunctions or filtered-colimit equality separately; the finite-stage ingredients are existing Mathlib leaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.unit, CategoryTheory.Limits.IsColimit",
+   "results": "0 hits: none",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: results concern adjunctions or filtered-colimit equality separately; the finite-stage ingredients are existing Mathlib leaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An adjunction unit which is a scalar telescope detects equality after multiplication by a power when Hom preserves its colimit",
+   "results": "8 hits: CategoryTheory.Adjunction.CommShift.compatibilityUnit_unique_right, CategoryTheory.Adjunction.CommShift.compatibilityUnit_unique_left, CategoryTheory.Limits.colimConstAdj, CategoryTheory.Functor.leftAdjointObjIsDefined_colimit, CategoryTheory.isLeftAdjoint_of_preservesColimits_of_isSeparating, CategoryTheory.OrthogonalReflection.isRightAdjoint_ι, CategoryTheory.Functor.leftAdjointObjIsDefined_of_isColimit, CategoryTheory.Adjunction.unit_comp_map_eq_iff",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: results concern adjunctions or filtered-colimit equality separately; the finite-stage ingredients are existing Mathlib leaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two elements of the same stage of a filtered colimit have equal images if and only if they become equal at a later stage",
+   "results": "8 hits: CategoryTheory.Functor.ιColimitType_eq_iff_of_isFiltered', CategoryTheory.Functor.ιColimitType_eq_iff_of_isFiltered, CategoryTheory.Limits.Types.FilteredColimit.isColimit_eq_iff', CategoryTheory.Limits.Types.FilteredColimit.colimit_eq_iff_aux, CategoryTheory.Limits.Types.FilteredColimit.colimit_eq_iff, CategoryTheory.Limits.Types.FilteredColimit.isColimit_eq_iff, CategoryTheory.Limits.Concrete.colimit_rep_eq_iff_exists, CategoryTheory.Limits.Types.FilteredColimit.Rel",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: results concern adjunctions or filtered-colimit equality separately; the finite-stage ingredients are existing Mathlib leaves"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "thm-sfb-extend-scalars-localization",
@@ -64,10 +153,25 @@
  "blueprint": {
   "from": {
    "node": "thm-sfb-extend-scalars-localization",
-   "place": "Full faithfulness: equality detection from the scalar localization unit telescope",
+   "place": "Full faithfulness of the induced functor: the adjunction Hom identification and the displayed sequential Hom-colimit comparison, restricted to equality detection",
    "via": []
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-scalar-unit-equality-detection",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Split equality detection into unit naturality, forgetting the assumed abelian-group colimit, same-stage eventual equality in its underlying-set colimit, and an explicit scalar-power induction. Reused two existing Mathlib leaves; no new nodes, no attachment, and no additivity hypothesis on F or U.",
+  "blueprint": "thm-sfb-extend-scalars-localization.proof.md, Full faithfulness: expands the equality-detection consequence of the adjunction and the displayed sequential Hom-colimit comparison. It assumes the comparison exactly as the item does, without asserting compactness or supplying a different route."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q33-76666f7d3",
+  "group": "Q33",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q33-76666f7d3 (reviewer sub-agent of L); spot-checked: I read the item, all 4 steps and every cited statement in full: def-weil-preadditive-category, def-weil-pbc-category-colimit, lem-weil-pbc-abelian-groups-forget-filtered-colimits and lem-weil-pbc-filtered-colimit-sets-elementwise. For clause (3) of the last one I checked the Mathlib source, Types.FilteredColimit.isColimit_eq_iff' at Types/Filtered.lean:153. I read the source place, main-20261015 thm-sfb-extend-scalars-localization.proof.md, Full faithfulness. The item states the equality-detection half of that paragraph, with the Hom colimit as an explicit hypothesis. The parent's step 3 supplies it through lem-sfb-integral-localization-hom-colimit and the telescope's zeroth leg = unit, so the citer's use matches the statement. Step 1: unit naturality gives η_B f = η_B g, and no additivity of F or U is used. Step 2: bilinearity makes q_i homomorphisms with q_{i+1}(ah) = q_i(h). ℕ is filtered, and the step forgets Ab→Set by the cited leaf; the universe is handled by a small copy of ℕ. Step 3: the same-index clause (3) gives 0→n. Step 4: induction gives H(0→n) = a^n. Edge cases are fine: a=0, a=1, torsion Hom groups, zero Hom groups. I also checked the statement on a model with Ab and -⊗ℚ. There are no new nodes. A DAG rg search found no duplicate: the legs, integral-denominators, modules-criterion and module-colimit nodes are different statements. The two off-unit citations are Mathlib leaves, so no tool_uses is needed. No SGA is cited. There is no re-split note for this item and it is not in any dropped list. No fixes."
  }
 }

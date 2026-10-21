@@ -19815,3 +19815,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:26 L: merged deliver/Q38/det-thm-sfb-proper-base-change-finite (reviewer FIX; after a return; new nodes: 2)
 - 03:26 L: merged deliver/NI/prop-weil-pbc-direct-image-limits (reviewer FIX; after a return; new nodes: 5)
 - 03:27 L: merged deliver/O3/lem-sfb-internal-extension-inverse-image (reviewer PASS; first push; new nodes: 0)
+- 03:27 L: merged deliver/Q33/lem-sfb-scalar-unit-equality-detection (reviewer PASS; first push; new nodes: 0)
