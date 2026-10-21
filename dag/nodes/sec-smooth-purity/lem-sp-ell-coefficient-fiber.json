@@ -11,7 +11,8 @@
   "sk-def-sp-coefficient-towers",
   "def-weil-abstract-derived-category",
   "def-pc-tensor-complex-sheaves",
-  "def-pc-kflat-complex"
+  "def-pc-kflat-complex",
+  "def-pur-principal-koszul-quotient-towers"
  ],
  "proof": [
   {
@@ -385,5 +386,49 @@
   "group": "Q97",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q97-cb57bf108 (reviewer sub-agent of L); spot-checked: I read the item in full: 8 steps, no new nodes, statement unchanged from the base and still unsplit on live and side-live. I also read the statement of every cited node, the sk-lem-sp-tower unit and its main-20261015 proof (first paragraph: H^0=H^-1=O/ℓ^m, transitions are powers of ℓ). The mathematics is correct. Steps 2–3: scalar regularity via lem-pod gives the sectionwise kernel π^jR together with the divisibility lemma; local surjectivity via the sheafification-sections lemma then gives R/ℓ^nR=B_n. Step 4: with the cone convention of def-weil-abstract-derived-category, Cone(ℓ^m:R[0]→R[0]) is exactly [R→R] in degrees −1,0, and K-flatness follows from the tensor-cone two-out-of-three lemma. Steps 6–8: I recomputed Cone(ε)[−1] = B_n --ℓ^m--> B_n --(−red)--> B_m and the chain identity ℓ^{n'-m}x ≡ ℓ^{n-m}(ℓ^{n'-n}x) mod ℓ^n. I tested Z_ℓ with n=m=1, n=m, n'−n≥m (transition zero), ramified E and empty T. Batch-5 citation lem-pod-completed-integral-scalar-regular: it is injectivity of π^m on lim(O/π^n)_T, pure coefficient algebra, and its 104-node closure contains no trace-formula, Poincaré-duality or assumption node, so it is genuinely outside the assumed statements; accepted. I accepted all seven declared tool uses as generic algebra. No duplicate, no cycle, no SGA. The one fix (E1, minor): step 1 applied lem-weil-valued-dvr-finite-quotients without the required nonarchimedean hypothesis. It now cites clause 1 of def-weil-l-adic-coefficient-extension, which is added to the step's uses and to proof_deps; the corrected file is fixes/dag/nodes/sec-smooth-purity/lem-sp-ell-coefficient-fiber.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.EllCoefficientFiber",
+  "declaration": "AlgebraicGeometry.ProEtale.sp_ell_coefficient_fiber",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.spCoefficientModulesAbelian",
+   "AlgebraicGeometry.ProEtale.spCompletedEllProjection",
+   "AlgebraicGeometry.ProEtale.spRingModuleMap",
+   "AlgebraicGeometry.ProEtale.spCompletedEllModule",
+   "AlgebraicGeometry.ProEtale.spCompletedPiModule",
+   "AlgebraicGeometry.ProEtale.spCompletedScalar",
+   "AlgebraicGeometry.ProEtale.sp_completed_coefficients_regular",
+   "AlgebraicGeometry.ProEtale.spCompletedQuotientTensor",
+   "AlgebraicGeometry.ProEtale.sp_ell_coefficient_tensor",
+   "AlgebraicGeometry.ProEtale.spLevelReduction",
+   "AlgebraicGeometry.ProEtale.spRelativeCoefficient",
+   "AlgebraicGeometry.ProEtale.spRestrictionModuleMap",
+   "AlgebraicGeometry.ProEtale.spRelativeReduction",
+   "AlgebraicGeometry.ProEtale.spRelativeKoszulArrow",
+   "AlgebraicGeometry.ProEtale.spRelativeKoszul",
+   "AlgebraicGeometry.ProEtale.spRelativeKoszulLeft",
+   "AlgebraicGeometry.ProEtale.spRelativeKoszulRight",
+   "AlgebraicGeometry.ProEtale.spRelativeFiber",
+   "AlgebraicGeometry.ProEtale.spRelativeFiberLeft",
+   "AlgebraicGeometry.ProEtale.spRelativeFiberMiddle",
+   "AlgebraicGeometry.ProEtale.spRelativeFiberRight",
+   "AlgebraicGeometry.ProEtale.SpRelativeFiberComparison",
+   "AlgebraicGeometry.ProEtale.sp_ell_coefficient_fiber"
+  ],
+  "file": "lean/Sheaf/Paper/EllCoefficientFiber.lean",
+  "statement": "theorem sp_ell_coefficient_fiber (N n m : ℕ) (hn : n ≤ N) (hm : m ≤ n) : ∃ (ε : spRelativeKoszul l E T N n m hn ⟶ (CochainComplex.singleFunctor _ 0).obj (spRelativeCoefficient l E T N m (hm.trans hn))) (a : spRelativeCoefficient l E T N m (hm.trans hn) ⟶ spRelativeCoefficient l E T N n hn) (i : (CochainComplex.singleFunctor _ (-1)).obj (spRelativeCoefficient l E T N m (hm.trans hn)) ⟶ spRelativeFiber l E T N n m hn hm ε), SpRelativeFiberComparison l E T N n m hn hm ε a i ∧ Nonempty ((spRelativeKoszul l E T N n m hn).homology (-1) ≅ image (l ^ (n - m) • 𝟙 (spRelativeCoefficient l E T N n hn))) ∧ Nonempty (image (l ^ (n - m) • 𝟙 (spRelativeCoefficient l E T N n hn)) ≅ spRelativeCoefficient l E T N m (hm.trans hn)) ∧ Nonempty ((spRelativeKoszul l E T N n m hn).homology 0 ≅ spRelativeCoefficient l E T N m (hm.trans hn)) ∧ ∀ (n' : ℕ) (hn' : n' ≤ N) (h : n ≤ n') (ε' : spRelativeKoszul l E T N n' m hn' ⟶ (CochainComplex.singleFunctor _ 0).obj (spRelativeCoefficient l E T N m ((hm.trans h).trans hn'))) (a' : spRelativeCoefficient l E T N m ((hm.trans h).trans hn') ⟶ spRelativeCoefficient l E T N n' hn') (i' : (CochainComplex.singleFunctor _ (-1)).obj (spRelativeCoefficient l E T N m ((hm.trans h).trans hn')) ⟶ spRelativeFiber l E T N n' m hn' (hm.trans h) ε'), SpRelativeFiberComparison l E T N n' m hn' (hm.trans h) ε' a' i' → ∃ r : spRelativeFiber l E T N n' m hn' (hm.trans h) ε' ⟶ spRelativeFiber l E T N n m hn hm ε, r.f (-1) ≫ spRelativeFiberLeft l E T N n m hn hm ε = spRelativeFiberLeft l E T N n' m hn' (hm.trans h) ε' ≫ spRelativeReduction l E T N n' n hn' h ∧ r.f 0 ≫ spRelativeFiberMiddle l E T N n m hn hm ε = spRelativeFiberMiddle l E T N n' m hn' (hm.trans h) ε' ≫ spRelativeReduction l E T N n' n hn' h ∧ r.f 1 ≫ spRelativeFiberRight l E T N n m hn hm ε = spRelativeFiberRight l E T N n' m hn' (hm.trans h) ε' ∧ i' ≫ r = (l ^ (n' - n) • 𝟙 _) ≫ i",
+  "branch": "sheaf-dag",
+  "by": "Q53",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The regularity/quotient/resolution clauses are sp_completed_coefficients_regular; sp_ell_coefficient_tensor identifies the actual total tensor model; sp_ell_coefficient_fiber gives the normalized fiber quasi-isomorphism, both cohomology objects and its chain-level transition square. Natural indices stand for positive exponent index+1. The arbitrary common upper coefficient level expresses restriction of scalars without identifying independent site and field universes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ba297142d",
+  "group": "Q53",
+  "result": "pass",
+  "note": "Statement matches the node clause by clause, with Lean level n standing for paper level n+1. epsilon (inr ≫ ε = reduction), a (red ≫ a = ℓ^(n−m)) and i (degree −1 coordinate = a, QuasiIso) are uniquely determined. The transition r is forced to the coordinate reduction (red, red, id) and satisfies i' ≫ r = ℓ^(n'−n) ≫ i. The quotient isos are tied to the actual projections (sp_completed_coefficient_limit is ∃!). Both K-flat resolutions are stated with IsKFlatResolutionIndependentCoefficients. Statement field verbatim; all 23 declarations present. Added stmt_dep def-pur-principal-koszul-quotient-towers is a definition node, used, no cycle. Edge cases n=m, n'=n, empty T, ramified E, independent universes covered. Citers use only the pinned parts. Advisory: Nonempty-only H^{-1}/H^0/tensor clauses (implied, unused by citers); global priority-2000 Abelian instance; four proof-only imports; R/O/π owner nodes not in stmt_deps but exposed through sk-def-sp-coefficient-towers. No change, no compile."
  }
 }

@@ -22149,3 +22149,5 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:45 L: batch 20261021T100250 dependency take-out
 - 2026-10-21T10:52:32Z L: superseded stage-1 delivery Q32/lem-sfb-monoidal-finite-free-transport at 424048e07679162550cbc3a71eae10e44a713f1a; current completion retained; packet archived at refs/superseded/Q32/lem-sfb-monoidal-finite-free-transport/424048e07679162550cbc3a71eae10e44a713f1a; stale return retired.
 - 11:06 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
+- 11:06 L: merged deliver/Q57/lem-pur-signed-line-scalar-pullback-square (stage 2; reviewer PASS; parallel immutable checks)
+- 11:06 L: merged deliver/Q53/lem-sp-ell-coefficient-fiber (stage 2; reviewer PASS; parallel immutable checks)
