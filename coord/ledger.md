@@ -19670,3 +19670,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:05 L: returned deliver/N5/lem-sfb-etale-proetale-scalar-mate (reviewer RETURN: G1/D: the human's repair note coord/repair-notes/lem-sfb-etale-proetale-scalar-mate.json (2026-10-21, released before th)
 - 03:05 L: merged deliver/NH/lemma-weil-pbc-perfect-projection-formula (reviewer FIX; after a return; new nodes: 0)
 - 03:06 L: merged deliver/Q22/det-thm-sfb-proper-base-change-integral (reviewer FIX; after a return; new nodes: 0)
+- 03:07 L: returned deliver/Q20/det-prop-scalar-six-pullback (reviewer RETURN: A6/D: the human's re-split note was not carried out. coord/repair-notes/det-prop-scalar-six-pullback.json (L, human deci)
