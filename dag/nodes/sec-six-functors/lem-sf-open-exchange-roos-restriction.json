@@ -30,7 +30,12 @@
   "lem-sf-integral-open-reduction-comparison",
   "lem-cbc-completed-extension-zero-comparison",
   "lem-weil-pbc-proetale-derived-pullback-composition",
-  "def-sf-pull-completion-comparison"
+  "def-sf-pull-completion-comparison",
+  "def-sf-completed-open-strict-mate-data",
+  "def-a1-integral-completed-pullback-interfaces",
+  "def-weil-pbc-bounded-constructible-complete",
+  "def-sf-strict-roos-coordinate-interface",
+  "def-pur-completed-rlim-functor"
  ],
  "proof": [
   {
@@ -422,5 +427,42 @@
   "group": "Q139",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q139-5d5d97d08 (reviewer sub-agent of L); spot-checked: I read the whole delivery: one commit, item JSON plus report, 0 new nodes, statement byte-identical to live and side-live, no fixes. The item has no repair note of its own (created 2026-10-21 by Q100's re-split of lem-sf-pf-open-factor-coherence), so the re-split rule does not bind it. Every argument of the parent's old steps 10-11 (read from the Q24 snapshot) reappears here expanded. A DAG walk from all stmt_deps and proof_deps finds no cycle. On route, the two same-unit nodes are open-roos-unit-adjunction and pull-completion-comparison, the right-adjoint fact is a Mathlib leaf, and every other cited node is a generic interface declared in tool_uses (cbc exact-product strict limit, finite open exchange, K-flat representatives, completed pullback); I accept them. Sources read: Stacks proetale.tex 099N (2),(5) at l.4336, 09BN at l.5117, 09BP at l.5185, and sites-cohomology 0D6D; blueprint prop-sf-pf-coherence proof l.21-25. Step by step: 1 checked the adic datum, quasi-compactness and Roos<->eta<->intrinsic completeness. 2 checked the hypotheses of exact-product-strict-limit for j'_! (j' quasi-compact as a base change of j over a Noetherian X) and for j'^* (right adjoint). 3 checked K-flat P, j_!P, r_j (l invertible) and the strict b_K; its components are the same beta_B as finite-open-exchange-scalars. 4 I re-derived the adjunct algebra: j'^*d.u'=alpha^{-1} gives (u')^{-1}.j'^*b=alpha. 5 Beta=lambda^{-1}.Rlim(b) follows from the resolving-image-tower clause, in the right direction. 6 I verified that the composite of rho and j'^*lambda is theta^{-1}(phi'.F'phi)theta, which is the identity after u' on both signed summands, compatible with d(x,y)=(dx,(1-s)x-dy) and with the (gamma,0) augmentation. 7 Naturality of rho plus substitution gives L(alpha)rho=Theta. 8 and 9 give the strict augmentation equality, then c_H.j'^*v_h=v_a.delta_H via the augmentation clause and adic-pullback-presentation-transport, with no invertibility of c_g assumed. Edge cases checked: U empty, j=id, K=0, constant towers. Advisories only: step 8 composes the immersion comparison with theta without naming the composite, and the proof is 8.8k characters with 0 new nodes, which is not a fault without a re-split note."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.OpenExchangeRoosRestriction",
+  "declaration": "WeilConjectures.OpenExchangeRoos.openExchangeRoosRestriction",
+  "declarations": [
+   "WeilConjectures.OpenExchangeRoos.towerComplex",
+   "WeilConjectures.OpenExchangeRoos.SignedComparison",
+   "WeilConjectures.OpenExchangeRoos.generators",
+   "WeilConjectures.OpenExchangeRoos.generators_span",
+   "WeilConjectures.OpenExchangeRoos.complete",
+   "WeilConjectures.OpenExchangeRoos.openUnit",
+   "WeilConjectures.OpenExchangeRoos.Square",
+   "WeilConjectures.OpenExchangeRoos.SquareUnit",
+   "WeilConjectures.OpenExchangeRoos.finite_restriction",
+   "WeilConjectures.OpenExchangeRoos.product_restriction",
+   "WeilConjectures.OpenExchangeRoos.roos_restriction",
+   "WeilConjectures.OpenExchangeRoos.constantOpenAdjunction",
+   "WeilConjectures.OpenExchangeRoos.limit_restriction",
+   "WeilConjectures.OpenExchangeRoos.finiteOpenQC",
+   "WeilConjectures.OpenExchangeRoos.Assertion",
+   "WeilConjectures.OpenExchangeRoos.openExchangeRoosRestriction"
+  ],
+  "file": "lean/Sheaf/SixFunctors/OpenExchangeRoosRestriction.lean",
+  "statement": "theorem openExchangeRoosRestriction (F : FiniteFieldDatum.{u}) (_hl : l ≠ F.p) (U' U X' X : Over (Spec (.of F.k))) [LocallyOfFiniteType U'.hom] [QuasiCompact U'.hom] [LocallyOfFiniteType U.hom] [QuasiCompact U.hom] [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] (a : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (h : X' ⟶ X) [IsOpenImmersion j.left] [IsOpenImmersion j'.left] (sq : OpenImmersionSquare a.left j'.left j.left h.left) : Assertion l E a.left j'.left j.left h.left (qc := finiteOpenQC F U X j) sq",
+  "branch": "newtargets-dag",
+  "by": "Q21",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The canonical completed exchange is retained with its published fixed strict endpoints. Assertion includes completeness, the ordered Rlim exchange, restriction, and the actual completion-unit square. The other theorem declarations state the simultaneous finite, product-projection, signed-Roos and derived-limit normalization clauses of this same node. Only coefficient presentation is transported, by the projection-normalized published isomorphism. No constructibility, boundedness, Tor-amplitude, evaluation-faithfulness or coefficient-inverse-image hypothesis is added. Returned H2 repaired by existing:true definition-node ownership of cbcOpenMate data and strictRoos coordinates, the live integral-completed-pullback interface node, and the completedRlim definition node. The strict-mate and strict-Roos comparison theorems occur only in proof_deps."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-61909ea54",
+  "group": "Q21",
+  "result": "pass",
+  "note": "Re-delivery after the H2 RETURN of cab34a758f38. Lean file byte-identical to that head, whose mathematics was reviewed sound; I re-read Assertion and the main theorem and agree (no added hypotheses: QC(j) from finiteOpenQC, QC(j') from cbcOpenMateQC; Beta = lambda^-1 o Rlim(b) in order; Theta is ∃!-pinned by SquareUnit on the actual ordinaryToCompleted units and cbcSquarePull; j'^*Beta = Theta via asIso of the actual open units; edge cases U empty, j = id, K = 0, n = 0; single universe u). Item record vs live: only stmt_deps and lean differ; statement, proof and proof_deps identical. stmt_deps: the three theorem nodes are replaced by new existing:true def-sf-completed-open-strict-mate-data (12 plain cbcOpenMate* defs, no .choose; prose matches the composites) and def-sf-strict-roos-coordinate-interface (5 plain strictRoos* defs; (y,x) coordinate order matches), plus live def-a1-integral-completed-pullback-interfaces and def-pur-completed-rlim-functor (snapshot copies byte-identical to side-live). New ids absent live; no other def owner; no cycle; not route-pivot-dropped; tags 03DI and 08TC verified; H12 fields present. No compile (policy), no fixes. Advisories: base-era plain declarations from non-stmt_dep nodes (cbcDerivedOpenAdjunction, cbcRealization*, integralOperationsRoosMap, StrictTower operations); strictRoos* is a second published interface beside def-weil-strict-roos-model (roosF), pre-existing."
  }
 }

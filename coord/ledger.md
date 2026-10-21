@@ -23022,3 +23022,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:18 L: returned deliver/NF/lem-sfb-gabber-global-snc-alteration (reviewer RETURN: C1/F (route pivot, working around the drop check) and B5. The item is live: it is not in the 2026-10-19 drop section, an)
 - 16:19 L: returned deliver/Q85/lem-weil-integral-twist-scalar-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-integral-twist-scalar-coherence: lem-weil-int)
 - 16:19 L: merged deliver/NJ/lem-sfb-supported-finite-stage-topology-defect (reviewer FIX; first push; new nodes: 2)
+- 16:19 L: merged deliver/Q21/lem-sf-open-exchange-roos-restriction (stage 2; reviewer PASS; parallel immutable checks)
