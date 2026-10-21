@@ -26,9 +26,124 @@
   "def-weil-pbc-proetale-operations",
   "prop-weil-pbc-comparison-direct-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each $W=X,Y$ and $s=\\mathrm{et},\\mathrm{proet}$, put $\\mathcal A_{W,s}=\\operatorname{Mod}(B_W)$. The chosen site is small in the coefficient universe and $B_W$ is a sheaf of commutative rings. Apply [prop-pur-kinjective-resolutions-exist] to this ringed site: $\\mathcal A_{W,s}$ is Grothendieck abelian and every complex has a K-injective resolution. By [lem-sp-grothendieck-enough-injectives] it also has enough ordinary injectives. These statements apply to the intrinsic module category, without replacing it by a category of externally valued sheaves.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-sp-grothendieck-enough-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A5, section-unbounded, opening paragraph; injectives.tex Tags 079H and 079P"
+   }
+  },
+  {
+   "text": "Write $F_s=f_{s,*}$. Its section formula and ring action are [def-weil-pbc-direct-image] for the etale site and [def-weil-proetale-module-direct-image] for the pro-etale site. Addition of maps is componentwise, so $F_s$ is additive. Kernels and finite products of module sheaves are sectionwise [def-weil-sheaf-of-modules-category]; evaluating them at $V\\times_Y X$ and restricting scalars along $B_Y(V)\\to B_X(V\\times_Y X)$ preserves those kernels and products. Thus $F_s$ is left exact on both intrinsic module categories.",
+   "uses": [
+    "def-weil-pbc-direct-image",
+    "def-weil-proetale-module-direct-image",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 071J, section-derived-functors, module direct image; sites-modules.tex Tag 03D6, definition-pushforward"
+   }
+  },
+  {
+   "text": "Apply $F_s$ degreewise. Additivity preserves the equations defining chain homotopies, shifts, and the differential of a mapping cone: $F_s(C\\oplus A[1])=F_s(C)\\oplus F_s(A)[1]$, with the same differential matrix. Hence it induces an exact functor $K(\\mathcal A_{X,s})\\to K(\\mathcal A_{Y,s})$, and composition with derived localization gives an exact functor to $D(\\mathcal A_{Y,s})$. The K-injective existence proved in step 1 is precisely the hypothesis of [lem-weil-pbc-kinjective-total-derived]. Applying it gives the total right derived functor $RF_s$ with its unit, in the sense of [def-sfb-right-derived-functor]. Its unit at a K-injective $I$ is invertible. For a resolution $C\\to I$, applying $RF_s$ to $QC\\cong QI$ therefore gives $RF_s(QC)\\cong Q(F_s I)$, as asserted.",
+   "uses": [
+    "lem-weil-pbc-kinjective-total-derived",
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070K (lemma-enough-K-injectives-implies) and 070Y (lemma-K-injective-defined); sites-cohomology.tex Tag 07A5"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-dplus-injective-representative], every object $M\\in D^+(\\mathcal A_{X,s})$ is $QJ$ up to isomorphism for a bounded-below complex of injectives $J$, and $J$ is K-injective. Step 3 then computes $RF_sM$ by $Q(F_sJ)$. Since $F_s(0)=0$, this complex is bounded below, so $RF_s$ restricts to $D^+$. Apply [lem-weil-pbc-right-derived-plus-injective] to the additive $F_s$ and the enough-injectives category of step 1. It gives the usual bounded-below functor $R^+F_s$, whose unit at $J$ is invertible and whose value at $Q^+J$ is $Q^+(F_sJ)$. Thus both constructions are computed on the same $J$. This is the bounded-below etale direct image of [def-weil-pbc-direct-image]; for the ordinary pro-etale operation of [def-weil-pbc-proetale-operations] it specifies its bounded-below restriction.",
+   "uses": [
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-weil-pbc-right-derived-plus-injective",
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 013K, lemma-injective-resolutions-exist; Tag 070J, lemma-bounded-below-injectives-K-injective; Tags 05TI, lemma-enough-injectives-right-derived, and 05TH, lemma-injective-acyclic; sites-cohomology.tex Tag 071J"
+   }
+  },
+  {
+   "text": "The identifications in step 4 are natural and normalized by the units. For a morphism represented by bounded-below injective complexes $J,J'$, [lem-weil-pbc-kinjective-hom-derived] gives a unique homotopy class $h:J\\to J'$ representing it. Naturality of the invertible units [lem-weil-pbc-kinjective-total-derived, lem-weil-pbc-right-derived-plus-injective] identifies both images with $Q(F_sh)$. Changing the injective models uses a homotopy equivalence, whose image under the additive $F_s$ is again a homotopy equivalence. At $QJ$ define $\\theta_{QJ}=\\alpha_J\\eta_J^{-1}$, where $\\eta,\\alpha$ are the full and bounded-below units and inclusions into the full categories are understood. The preceding naturality makes these components independent of models and natural on $D^+$. For a bounded-below complex $C$, [lem-sc-bounded-below-injective-resolution-existence] supplies a quasi-isomorphism $s:C\\to J$ with bounded-below injective target. Explicitly,\n$$\\theta_{QC}=R^+F_s(Q^+s)^{-1}\\alpha_J\\eta_J^{-1}RF_s(Qs).$$\nNaturality of the two units gives $RF_s(Qs)\\eta_C=\\eta_JQ(F_ss)$ and $R^+F_s(Q^+s)\\alpha_C=\\alpha_JQ(F_ss)$. Substitution into the formula yields $\\theta_{QC}\\eta_C=\\alpha_C$. This proves compatibility with the derived-functor units.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-kinjective-total-derived",
+    "lem-weil-pbc-right-derived-plus-injective",
+    "lem-sc-bounded-below-injective-resolution-existence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070I, lemma-K-injective, and 070K, lemma-enough-K-injectives-implies; Tag 013K, lemma-injective-resolutions-exist"
+   }
+  },
+  {
+   "text": "For $W=X,Y$, [def-weil-pbc-site-comparison-morphism] gives the geometric morphism $\\nu_W$ and the sectionwise right adjoint: $(\\nu_{W,*}N)(U)=N(u_WU)$. Its fixed-$B$ action and its intrinsic constant-ring module action agree: for a constant scalar $b$ both act by the same endomorphism $b:N(u_WU)\\to N(u_WU)$; the ring map from $B_W$ is determined by these constant sections by sheafification. The intrinsic constant-section presentation in [lem-pe-coefficient-comparison-data] uses this ring map. The constant-ring inverse-image construction and its exactness are [lem-pe-constant-left-module-inverse-image], and [lem-weil-pbc-module-inverse-image-unit-comparison] supplies its normalized module-pullback unit. Both inverse-image presentations are therefore left adjoint to this same module right adjoint. Explicitly, if $L\\dashv R$ and $L\\prime\\dashv R$ are these presentations, define $a_M:LM\\to L\\prime M$ to be the adjunct of $\\eta\\prime_M:M\\to RL\\prime M$ under the first adjunction; define $b_M$ in the reverse way from $\\eta_M$. The adjunction bijections give $R(a_M)\\eta_M=\\eta\\prime_M$ and $R(b_M)\\eta\\prime_M=\\eta_M$, so $b_Ma_M$ and $a_Mb_M$ correspond to the respective units and are identities. The adjunct formulas also prove naturality. This is the canonical, unit-preserving isomorphism of inverse images required in the statement.",
+   "uses": [
+    "def-weil-pbc-site-comparison-morphism",
+    "lem-pe-coefficient-comparison-data",
+    "lem-pe-constant-left-module-inverse-image",
+    "lem-weil-pbc-module-inverse-image-unit-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D2 (lemma-pullback-module) and 03D3 (lemma-adjoint-push-pull-modules); sites.tex Tag 00YV, proposition-functoriality-algebraic-structures-topoi"
+   }
+  },
+  {
+   "text": "The exact intrinsic $\\nu_W^*$ descends termwise through localization and commutes with cohomology by [lem-pe-coefficient-comparison-derived-functor]. Thus it preserves $D^+$, and the natural isomorphism of step 6 descends termwise as well. Since $f$ is qcqs and $G\\in D^+(X_{\\mathrm{et}},B)$, [prop-weil-pbc-comparison-direct-image], with $u=f$, $\\Lambda=B$, and $L=G$, supplies $c_G:\\nu_Y^*R^+F_{\\mathrm{et}}G\\xrightarrow{\\sim}R^+F_{\\mathrm{proet}}\\nu_X^*G$. Let $\\theta_s:RF_s|_{D^+}\\xrightarrow{\\sim}R^+F_s$ denote the identification of steps 4-5, with inclusions into the full categories understood. The required arrow is exactly the composite $\\theta_{\\mathrm{proet},\\nu_X^*G}^{-1}\\circ c_G\\circ\\nu_Y^*(\\theta_{\\mathrm{et},G})$, using the inverse-image identification of step 6. Each factor is natural and invertible, so the composite is a natural isomorphism. This formula also proves that it is the specified bounded-below comparison after inclusion, with its direct-image units unchanged by step 5. Only bounded-below inputs were used; no extension to unbounded-below etale inputs follows.",
+   "uses": [
+    "lem-pe-coefficient-comparison-derived-functor",
+    "prop-weil-pbc-comparison-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 5.4.3 and Remark 5.4.4, printed p. 39; compare Stacks proetale.tex Tag 099R, lemma-morphism-comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-sp-grothendieck-enough-injectives",
+  "def-weil-pbc-direct-image",
+  "def-weil-proetale-module-direct-image",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-kinjective-total-derived",
+  "def-sfb-right-derived-functor",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-sc-bounded-below-injective-resolution-existence",
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-pe-coefficient-comparison-data",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-weil-pbc-module-inverse-image-unit-comparison",
+  "lem-pe-coefficient-comparison-derived-functor",
+  "prop-weil-pbc-comparison-direct-image"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A5 and 071J; derived.tex Tags 070I, 070J, 070K and 013K; sites-modules.tex Tags 03D2 and 03D3; Bhatt-Scholze Lemma 5.4.3"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -78,10 +193,52 @@
    "results": "{\"t\": \"2026-10-21T05:49:18Z\", \"tool\": \"leanfinder\", \"query\": \"Total right derived functor of module direct image on a ringed site restricts to the bounded below derived functor computed by bounded below injective resolutions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.rightDerived\", \"CategoryTheory.Functor.toRightDerivedZero\", \"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh\", \"CategoryTheory.Functor.instIsRightDerivedFunctorTotalRightDerivedTotalRightDerivedUnit\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory\", \"CategoryTheory.Functor.mapDerivedCategory\"], \"digest\": \"4050d806f40a9d33\"}",
    "date": "2026-10-21",
    "verdict": "no match: general derived-functor or sheaf-pushforward infrastructure only; no intrinsic etale/pro-etale comparison with the full K-injective construction and its bounded-below normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Total right derived direct image for intrinsic constant ring module sheaves on etale and pro etale sites agrees with bounded below derived direct image and its comparison",
+   "results": "{\"t\": \"2026-10-21T08:09:44Z\", \"tool\": \"leanfinder\", \"query\": \"Total right derived direct image for intrinsic constant ring module sheaves on etale and pro etale sites agrees with bounded below derived direct image and its comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pushforwardPushforwardAdj\", \"LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat\", \"SheafOfModules.pushforwardNatIso\", \"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh\", \"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"CategoryTheory.LocalizerMorphism.instIsIsoFunctorRightDerivedFunctorComparison\", \"SheafOfModules.bijective_pushforwardSections\"], \"digest\": \"ee88980c10fa40a4\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits give general derived functors or underived module pushforward, not the intrinsic etale/pro-etale comparison and both unit-normalized restrictions"
+  },
+  {
+   "tool": "grep",
+   "query": "pro[Ee]tale|proetale",
+   "results": "{\"t\": \"2026-10-21T08:09:55Z\", \"tool\": \"grep\", \"query\": \"pro[Ee]tale|proetale\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\", \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\", \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\"], \"digest\": \"72abfb007d5a831c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits give general derived functors or underived module pushforward, not the intrinsic etale/pro-etale comparison and both unit-normalized restrictions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bounded below injective resolution computes the total right derived module pushforward and the etale to pro etale comparison",
+   "results": "{\"t\": \"2026-10-21T08:09:56Z\", \"tool\": \"leansearch\", \"query\": \"A bounded below injective resolution computes the total right derived module pushforward and the etale to pro etale comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.rightDerived_map_eq\", \"CategoryTheory.InjectiveResolution.toRightDerivedZero_eq\", \"CategoryTheory.injectiveResolutions\", \"CategoryTheory.InjectiveResolution.rightDerived_app_eq\", \"CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc\", \"CategoryTheory.InjectiveResolution.of_def\", \"CategoryTheory.InjectiveResolution.of\", \"CategoryTheory.InjectiveResolution.isoRightDerivedObj\"], \"digest\": \"b338ee997461966a\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits give general derived functors or underived module pushforward, not the intrinsic etale/pro-etale comparison and both unit-normalized restrictions"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedFunctorPlus\"",
+   "results": "{\"t\": \"2026-10-21T08:09:56Z\", \"tool\": \"loogle\", \"query\": \"\\\"rightDerivedFunctorPlus\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.rightDerivedFunctorPlus\", \"CategoryTheory.Functor.instCommShiftPlusRightDerivedFunctorPlusInt\", \"CategoryTheory.Functor.instIsRightDerivedFunctorPlusPlusRightDerivedFunctorPlusRightDerivedFunctorPlusUnithQuasiIso\", \"CategoryTheory.NatTrans.instCommShiftPlusRightDerivedFunctorPlusInt\", \"CategoryTheory.Functor.instIsRightDerivedFunctorPlusPlusRightDerivedFunctorPlusRightDerivedFunctorPlusUnitQuasiIso\", \"CategoryTheory.NatTrans.rightDerivedFunctorPlus\", \"CategoryTheory.Functor.rightDerivedFunctorPlusUnith\", \"CategoryTheory.NatTrans.rightDerivedFunctorPlus_id\"], \"digest\": \"e926f1f25430fcf1\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits give general derived functors or underived module pushforward, not the intrinsic etale/pro-etale comparison and both unit-normalized restrictions"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctorPlus|isKInjective_of_injective",
+   "results": "{\"t\": \"2026-10-21T08:10:11Z\", \"tool\": \"grep\", \"query\": \"rightDerivedFunctorPlus|isKInjective_of_injective\", \"sub\": \"Algebra/Homology/DerivedCategory\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean\"], \"digest\": \"46282db58dc70624\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits give general derived functors or underived module pushforward, not the intrinsic etale/pro-etale comparison and both unit-normalized restrictions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A K injective resolution computes an unbounded total right derived functor and the canonical restriction to the bounded below derived category preserves the derived functor unit",
+   "results": "{\"t\": \"2026-10-21T08:10:12Z\", \"tool\": \"leanfinder\", \"query\": \"A K injective resolution computes an unbounded total right derived functor and the canonical restriction to the bounded below derived category preserves the derived functor unit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.rightDerived_map_eq\", \"CategoryTheory.InjectiveResolution.toRightDerivedZero_eq\", \"CategoryTheory.InjectiveResolution.rightDerived_app_eq\", \"CategoryTheory.InjectiveResolution.toRightDerivedZero'\", \"CategoryTheory.Functor.toRightDerivedZero\", \"CategoryTheory.InjectiveResolution.isoRightDerivedObj\", \"CategoryTheory.Functor.instIsRightDerivedFunctorTotalRightDerivedTotalRightDerivedUnit\", \"CategoryTheory.Functor.rightDerived\"], \"digest\": \"67d523e95d1a7117\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits give general derived functors or underived module pushforward, not the intrinsic etale/pro-etale comparison and both unit-normalized restrictions"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-finite-field-proetale-direct-image",
@@ -101,5 +258,59 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-ordinary-proetale-direct-image-plus-comparison",
+  "worker": "stage1",
+  "summary": "Seven steps reuse the existing arbitrary-ringed-site K-injective existence, total-derived and bounded-below injective computation nodes. The same injective models give a natural identification with an explicit unit equation; the common module right adjoint identifies inverse-image presentations, and conjugation of the existing bounded-below comparison gives exactly the requested full-category arrow. No statement change, new node, or Mathlib leaf. Repair of returned head ae9a1446d52: compared the retained split and all 21 citation quotations with the current live DAG. All cited statements and the item statement agree. Removed five now-Mathlib theorem citations from the off-unit tool declarations, updated the bounded-below source places, and made the unit-normalized comparison component explicit in step 5. Delivery is rebuilt by deliver.py on current origin/sheaf-dag.",
+  "blueprint": "Nearest ancestor lem-sfb-dc-hom-preserves: the finite-coefficient internal-Hom finiteness sentence after the reduction-modulo-varpi display, realized through lem-sfb-finite-field-internal-hom-finiteness and lem-sfb-finite-field-proetale-direct-image. This item supplies the ordinary direct-image and bounded-below normalization input singled out in its inherited blueprint.from.place.",
+  "tool_uses": [
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "General small ringed-site module K-injective existence, for the actual intrinsic coefficient categories. No node of this restricted-functor unit replaces this general input."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-total-derived",
+    "why": "Abstract total right derived existence and invertibility of the unit on K-injectives. No node of this restricted-functor unit replaces this general input."
+   },
+   {
+    "node": "lem-pe-constant-left-module-inverse-image",
+    "why": "General constant-ring inverse image and exactness for the comparison geometric morphism. No node of this restricted-functor unit replaces this general input."
+   },
+   {
+    "node": "lem-weil-pbc-module-inverse-image-unit-comparison",
+    "why": "Normalized identification of intrinsic module-pullback and abelian inverse-image units. No node of this restricted-functor unit replaces this general input."
+   },
+   {
+    "node": "lem-pe-coefficient-comparison-data",
+    "why": "Existing intrinsic constant-section comparison presentation. No node of this restricted-functor unit replaces this general input."
+   },
+   {
+    "node": "lem-pe-coefficient-comparison-derived-functor",
+    "why": "Termwise comparison inverse image descends to the full derived category and commutes with cohomology. No node of this restricted-functor unit replaces this general input."
+   },
+   {
+    "node": "prop-weil-pbc-comparison-direct-image",
+    "why": "The existing bounded-below qcqs comparison, retained as this item expressly requires; the item proves its ordinary full-derived normalization. No node of this restricted-functor unit replaces this general input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-weil-pbc-module-inverse-image-unit-comparison",
+  "lem-pe-coefficient-comparison-data",
+  "lem-pe-coefficient-comparison-derived-functor",
+  "prop-weil-pbc-comparison-direct-image"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NQ-38a064022",
+  "group": "NQ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NQ-38a064022 (reviewer sub-agent of L); spot-checked: I read the item in full: 7 steps, no new nodes. This is a re-delivery after the landing refusal at returns/NQ.md:60. The earlier head ae9a1446d52 was PASSed; the landing refused it as a side completion that was never promoted, not for a mathematical fault. Live and side-live both still show the item unsplit, so no parallel group has split it. There is no repair note. Neither the item nor any cite is on route-pivot-dropped.txt, and no SGA source is cited. Diff against the PASSed head: (1) Step 4 adds Stacks 05TI and 05TH. Both tags and labels are correct (derived.tex:6980 and :6948). (2) Step 5 now writes the component out as theta_QC = R+F(Q+s)^-1 alpha_J eta_J^-1 RF(Qs). I checked the algebra: the two unit-naturality identities give theta_QC eta_C = alpha_C. eta_J is invertible because J is K-injective (dplus-injective-representative(2) and kinjective-total-derived), and alpha_J is invertible by right-derived-plus-injective(2). Independence of the model comes from kinjective-hom-derived. (3) Five tool_uses that are now Mathlib leaves were removed but stay cited in the proof; I accept the remaining 7 as generic. Everything else is byte-identical, and all 27 cited statements are unchanged from the earlier snapshot. The cite closure (1102 nodes) does not contain the item, so there is no cycle. I re-read steps 1-4 and 6-7 against the current statements: ringed-site K-injectives and enough injectives; additive, left-exact direct images; the RF of def-sfb; the étale R+ is exactly def-weil-pbc-direct-image; the pro-étale Ru_* of def-weil-pbc-proetale-operations matches RF through the canonical K-injective isomorphism; the two inverse-image presentations are left adjoints of the same sectionwise nu_*, so the adjunct isomorphism is unit-preserving; the composite theta_proet^-1 c_G nu*(theta_et) has the right direction and lands in D(Y_proet,B), with u=f qcqs, Lambda=B finite and L=G in D+. Source: Bhatt-Scholze Lemma 5.4.3 (D+, qcqs) and Remark 5.4.4 (unbounded case fails) match the item's scope exactly, and the target is not weakened. Edge cases B=0, empty scheme, f=id and a sheaf in degree n all hold. Not a duplicate of the canonical-mate node. Maintainer note: this head may hit the same side-completion landing condition."
  }
 }

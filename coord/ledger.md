@@ -21642,3 +21642,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 2026-10-21T09:05:46Z L: superseded stage-1 delivery Q30/lem-pur-dualizing-unit-composite at 998e822bd97fc83a997d2ba6e6dbc35d5eb276c8; current completion retained; packet archived at refs/superseded/Q30/lem-pur-dualizing-unit-composite/998e822bd97fc83a997d2ba6e6dbc35d5eb276c8; stale return retired.
 - 2026-10-21T09:06:25Z L: superseded stage-1 delivery Q75/lem-sf-package-verdier-coefficient-realization at f8d8b3f7be78fe896120ee7731e38698722cf18b; current completion retained; packet archived at refs/superseded/Q75/lem-sf-package-verdier-coefficient-realization/f8d8b3f7be78fe896120ee7731e38698722cf18b; stale return retired.
 - 09:08 L: merged deliver/Q56/lem-pur-normalized-scalar-comparison-realization (reviewer PASS; first push; new nodes: 0)
+- 09:08 L: merged deliver/NQ/lem-sfb-ordinary-proetale-direct-image-plus-comparison (reviewer PASS; after a return; new nodes: 0)
