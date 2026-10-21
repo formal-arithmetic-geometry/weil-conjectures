@@ -8,13 +8,96 @@
   "place": "Tag 099K, lemma-pushforward-derived-complete-adjoint, final Hom bijection; abstract scalar and unit/counit refinement, agent supplied"
  },
  "stmt_deps": [
+  "def-weil-additive-category",
   "def-weil-linear-category",
   "def-weil-linear-functor",
-  "def-weil-pbc-composite-adjunction"
+  "lem-weil-pbc-adjunction-of-natural-bijection"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "All compositions below are read right to left. Full subcategories have the ambient Hom modules and composition. The functor $P$ sends $M$ to $C_{\\mathcal B}(LM)$ and $a$ to $C_{\\mathcal B}(L(a))$; it lands in $\\mathcal B_c$ by hypothesis. The functor $D$ sends $N$ to $RN$ and $b$ to $R(b)$; it lands in $\\mathcal A_c$ by the assumed preservation by $R$. Functoriality is inherited from the ambient functors. By [def-weil-linear-functor], their maps on morphisms satisfy $P(a+a')=P(a)+P(a')$, $P(ra)=rP(a)$, $D(b+b')=D(b)+D(b')$ and $D(rb)=rD(b)$. Thus both restricted functors are additive and $A$-linear.",
+   "uses": [
+    "def-weil-linear-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 099K, lemma-pushforward-derived-complete-adjoint, final Hom bijection; explicit abstract calculation supplied by the worker"
+   }
+  },
+  {
+   "text": "For $M\\in\\mathcal A_c$ and $N\\in\\mathcal B_c$, put $q_{M,N}(t)=t\\circ\\kappa_{LM}$. Fullness identifies its domain with $\\operatorname{Hom}_{\\mathcal B}(C_{\\mathcal B}(LM),N)$. The assumed universal property, with $X=LM$ and complete target $Y=N$, says precisely that $q_{M,N}$ is bijective; it does not require $LM$ to be complete. Bilinearity of composition [def-weil-linear-category] gives $q(t+t')=q(t)+q(t')$ and $q(rt)=rq(t)$. Its inverse is linear as well: applying the injective map $q$ to the proposed additivity or scalar equation for $q^{-1}$ gives the corresponding already proved equation for $q$.",
+   "uses": [
+    "def-weil-linear-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 099K, lemma-pushforward-derived-complete-adjoint, final Hom bijection; explicit abstract calculation supplied by the worker"
+   }
+  },
+  {
+   "text": "Write $h_{X,Y}$ for the specified ordinary adjunction bijection. Its unit formula [lem-weil-pbc-adjunction-of-natural-bijection] is $h_{X,Y}(s)=R(s)\\circ\\eta_X$. Consequently $h(s+s')=h(s)+h(s')$ and $h(rs)=rh(s)$, by the linearity of $R$ [def-weil-linear-functor] and bilinearity of composition [def-weil-linear-category]. It is bijective by the given adjunction, and its inverse is linear by applying its injectivity to the two linearity equations. The same adjunction convention gives naturality in both variables and $h^{-1}_{RN,N}(1_{RN})=\\varepsilon_N$.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection",
+    "def-weil-linear-functor",
+    "def-weil-linear-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 099K, lemma-pushforward-derived-complete-adjoint, final Hom bijection; explicit abstract calculation supplied by the worker"
+   }
+  },
+  {
+   "text": "Define $\\Phi_{M,N}=h_{M,N}\\circ q_{M,N}$, using fullness and $DN=RN$ to identify the target Hom set. Steps 2 and 3 make it an $A$-linear bijection. For $a:M'\\to M$, $b:N\\to N'$ and $t:PM\\to N$, naturality of $\\kappa$ gives $P(a)\\circ\\kappa_{LM'}=\\kappa_{LM}\\circ L(a)$, whence $$q_{M',N'}(b\\circ t\\circ P(a))=b\\circ q_{M,N}(t)\\circ L(a).$$ Apply the two naturality laws for $h$ from step 3 to obtain $$\\Phi_{M',N'}(b\\circ t\\circ P(a))=D(b)\\circ\\Phi_{M,N}(t)\\circ a.$$ This is naturality in both variables, including each separately by setting the other arrow equal to an identity.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 099K, lemma-pushforward-derived-complete-adjoint, final Hom bijection; explicit abstract calculation supplied by the worker"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-adjunction-of-natural-bijection] with $F=P$, $G=D$ and the natural bijections $\\Psi=\\Phi$ constructed in step 4. Its hypotheses are exactly the two naturality identities just proved and bijectivity from steps 2 and 3. It produces $P\\dashv D$ with precisely this Hom bijection, natural unit $\\eta^c_M=\\Phi_{M,PM}(1_{PM})$ and natural counit $\\varepsilon^c_N=\\Phi_{DN,N}^{-1}(1_{DN})$, and both triangle identities. Thus this application fixes the adjunction by the displayed composite bijection.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037, definition-adjoint, natural Hom bijections and the following unit/counit formulas; explicit specialization to the supplied reflector"
+   }
+  },
+  {
+   "text": "Evaluate the unit formula of step 5. Since $q_{M,PM}(1_{PM})=\\kappa_{LM}$, the ordinary adjunct formula of step 3 gives $$\\eta^c_M=h_{M,PM}(\\kappa_{LM})=R(\\kappa_{LM})\\circ\\eta_M.$$ Its target is $R(C_{\\mathcal B}(LM))=DPM$, which lies in $\\mathcal A_c$ by the preservation hypothesis. Fullness makes this equality an equality of the required ambient morphisms.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 099K, lemma-pushforward-derived-complete-adjoint, final Hom bijection; explicit abstract calculation supplied by the worker"
+   }
+  },
+  {
+   "text": "For the counit, step 5 says $h_{RN,N}(q_{DN,N}(\\varepsilon^c_N))=1_{RN}$. Applying $h_{RN,N}^{-1}$ and the ordinary counit identity from step 3 gives $$\\varepsilon^c_N\\circ\\kappa_{LRN}=q_{DN,N}(\\varepsilon^c_N)=\\varepsilon_N.$$ Here $RN\\in\\mathcal A_c$ by hypothesis, and $N\\in\\mathcal B_c$ ensures the bijection defining $q_{DN,N}$ exists. Its injectivity also shows that this equation characterizes the counit uniquely. For every $t:PM\\to N$, the defining equality $\\Phi_{M,N}(t)=h_{M,N}(t\\circ\\kappa_{LM})$ is exactly the asserted agreement of ordinary and completed adjuncts. No inverse of $\\kappa_{LM}$ has been used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 099K, lemma-pushforward-derived-complete-adjoint, final Hom bijection; explicit abstract calculation supplied by the worker"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-linear-category",
+  "def-weil-linear-functor",
+  "lem-weil-pbc-adjunction-of-natural-bijection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 099K, lemma-pushforward-derived-complete-adjoint, final Hom bijection; the abstract A-linear calculation and explicit normalizations are supplied here using Tag 0037"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,10 +133,45 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.localization_unit_app\", \"module\": \"Mathlib.CategoryTheory.Localization.Adjunction\", \"type\": \"(X₁ : C₁) :\\n  (adj.localization L₁ W₁ L₂ W₂ G' F').unit.app (L₁.obj X₁) =\\n    L₁.map (adj.unit.app X₁) ≫\\n      (CatCommSq.iso F L₂ L₁ F').hom.app (G.obj X₁) ≫ F'.map ((CatCommSq.iso G L₁ L₂ G').hom.app X₁)\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$, and localization functors $L_1: \\\\mathcal{C}_1 \\\\to \\\\mathcal{D}_1$, $L_2: \\\\mathcal{C}_2 \\\\to\"}\n  {\"name\": \"CategoryTheory.Adjunction.localization_counit_app\", \"module\": \"Mathlib.CategoryTheory.Localization.Adjunction\", \"type\": \"(X₂ : C₂) :\\n  (adj.localization L₁ W₁ L₂ W₂ G' F').counit.app (L₂.obj X₂) =\\n    G'.map ((CatCommSq.iso F L₂ L₁ F').inv.app X₂) ≫\\n      (CatCommSq.iso G L₁ L₂ G').inv.app (F.obj X₂) ≫ L₂.map (adj.counit.app X₂)\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$, and localization functors $L_1: \\\\mathcal{C}_1 \\\\to \\\\mathcal{D}_1$, $L_2: \\\\mathcal{C}_2 \\\\to\"}\n  {\"name\": \"CategoryTheory.reflectorAdjunction\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Reflective\", \"type\": \"[Reflective i] : reflector i ⊣ i\", \"doc\": \"For a reflective functor $ i : D \\\\to C $, the adjunction between its reflector functor $ L : C \\\\to D $ and $ i $, where $ L $ is left adjoint to $ i $.\"}\n  {\"name\": \"CategoryTheory.Adjunction.derived'\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.Adjunction\", \"type\": \"{C₁ : Type u_1} →\\n  {C₂ : Type u_2} →\\n    {D₁ : Type u_3} →\\n      {D₂ : Type u_4} →\\n        [inst : CategoryTheory.Category.{v_1, u_1} C₁] →\\n          [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] →\\n            [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁] →\\n              [inst_3 : CategoryThe\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$ between $\\\\mathcal{C}_1$ and $\\\\mathcal{C}_2$, and localization functors $L_1: \\\\mathcal{C}_1\"}\n  {\"name\": \"CategoryTheory.Adjunction.Localization.η_app\", \"module\": \"Mathlib.CategoryTheory.Localization.Adjunction\", \"type\": \"(X₂ : C₂) :\\n  (η adj L₁ L₂ W₂ G' F').app (L₂.obj X₂) =\\n    G'.map ((CatCommSq.iso F L₂ L₁ F').inv.app X₂) ≫\\n      (CatCommSq.iso G L₁ L₂ G').inv.app (F.obj X₂) ≫ L₂.map (adj.counit.app X₂)\", \"doc\": \"The component of the unit natural transformation $\\\\eta: F' \\\\circ G' \\\\Rightarrow \\\\text{id}_{D_2}$ at an object $X_2 \\\\in C_2$ is given by the composition $G'(\\\\text{inv}(\\\\text{CatCommSq.iso}_{F,L_2})) \\\\c\"}\n  {\"name\": \"CategoryTheory.Adjunction.derived\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.Adjunction\", \"type\": \"[G'.IsLeftDerivedFunctor α W₁] [F'.IsRightDerivedFunctor β W₂]\\n  [(G' ⋙ F').IsLeftDerivedFunctor ((Functor.associator _ _ _).inv ≫ whiskerRight α F') W₁]\\n  [(F' ⋙ G').IsRightDerivedFunctor (whiskerRight β G' ≫ (Functor.associator _ _ _).hom) W₂] : G' ⊣ F'\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$ between $\\\\mathcal{C}_1$ and $\\\\mathcal{C}_2$, and localization functors $L_1: \\\\mathcal{C}_1\"}\n  {\"name\": \"CategoryTheory.unit_obj_eq_map_unit\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Reflective\", \"type\": \"[Reflective i] (X : C) :\\n  (reflectorAdjunction i).unit.app (i.obj ((reflector i).obj X)) =\\n    i.map ((reflector i).map ((reflectorAdjunction i).unit.app X))\", \"doc\": \"For a reflective functor $ i : D \\\\to C $ with reflector $ L : C \\\\to D $, the unit $ \\\\eta $ of the adjunction $ L \\\\dashv i $ satisfies $ \\\\eta_{i(L(X))} = i(L(\\\\eta_X)) $ for every object $ X $ in $ C $.\"}\n  {\"name\": \"CategoryTheory.reflector\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Reflective\", \"type\": \"[Reflective i] : C ⥤ D\", \"doc\": \"Given categories $ C $ and $ D $, and a reflective functor $ i : D \\to C $, this defines the left adjoint functor $ L : C \\to D $ associated to $ i $, constructed from the reflective structure data.\"}",
    "date": "2026-10-21",
    "verdict": "no match: Adjunction.restrictFullyFaithful assumes an isomorphism between the ambient left adjoint and the proposed restricted left adjoint. Here L need not preserve complete objects and the map L M to C L M need not be invertible. Composing with the reflector and restricting gives a construction, but proving its stated noninvertible-unit formulas and A-linear Hom bijection requires the separate reflector calculation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An adjunction restricted to reflective full subcategories has left adjoint reflector composed with left adjoint and unit R kappa composed with eta",
+   "results": "8 hits: CategoryTheory.unit_obj_eq_map_unit, unitCompPartialBijectiveAux, Reflective.adj, reflectorAdjunction, LiftLeftAdjoint.instIsReflexivePairMapAppCounitOtherMap, unitCompPartialBijective_symm_apply, unitCompPartialBijectiveAux_symm_apply, unitCompPartialBijective.",
+   "date": "2026-10-21",
+   "verdict": "no match for the entire item: Reflective.adj and reflectorAdjunction give a reflection only; restrictFullyFaithful requires a left-functor commuting isomorphism, whereas kappa at LM need not be invertible. The item needs the written composition of Hom bijections and its scalar and normalization calculations. The generic adjunction constructor is reused as existing node lem-weil-pbc-adjunction-of-natural-bijection."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Reflective",
+   "results": "3 hits: CategoryTheory.reflectorAdjunction, CategoryTheory.Reflective.adj, CategoryTheory.Reflective.mk.",
+   "date": "2026-10-21",
+   "verdict": "no match for the entire item: Reflective.adj and reflectorAdjunction give a reflection only; restrictFullyFaithful requires a left-functor commuting isomorphism, whereas kappa at LM need not be invertible. The item needs the written composition of Hom bijections and its scalar and normalization calculations. The generic adjunction constructor is reused as existing node lem-weil-pbc-adjunction-of-natural-bijection."
+  },
+  {
+   "tool": "grep",
+   "query": "ofNaturalEquiv|restrictFullyFaithful|homEquiv_unit|homEquiv_counit",
+   "results": "25 hits in CategoryTheory/Adjunction, including Restrict.lean:42 restrictFullyFaithful, :63 map_restrictFullyFaithful_unit_app; Basic.lean:181 homEquiv_unit, :182 homEquiv_counit. Read Restrict.lean:32-88 and Basic.lean:95-180, 340-365, 425-460. The generic constructor mkOfHomEquiv at line 436 is the existing DAG leaf.",
+   "date": "2026-10-21",
+   "verdict": "no match for the entire item: Reflective.adj and reflectorAdjunction give a reflection only; restrictFullyFaithful requires a left-functor commuting isomorphism, whereas kappa at LM need not be invertible. The item needs the written composition of Hom bijections and its scalar and normalization calculations. The generic adjunction constructor is reused as existing node lem-weil-pbc-adjunction-of-natural-bijection."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adjunction on reflective subcategories using completion followed by a left adjoint and explicit unit counit formulas",
+   "results": "8 hits: CategoryTheory.Reflective.adj, Adjunction.mk, reflectorAdjunction, reflector, Reflective.noConfusion, Adjunction.CoreUnitCounit.mk, coreflectorAdjunction, Reflective.L.",
+   "date": "2026-10-21",
+   "verdict": "no match for the entire item: Reflective.adj and reflectorAdjunction give a reflection only; restrictFullyFaithful requires a left-functor commuting isomorphism, whereas kappa at LM need not be invertible. The item needs the written composition of Hom bijections and its scalar and normalization calculations. The generic adjunction constructor is reused as existing node lem-weil-pbc-adjunction-of-natural-bijection."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compose a left adjoint with a reflector and restrict its right adjoint to local objects to obtain an adjunction with specified Hom equivalence",
+   "results": "8 hits: CategoryTheory.Adjunction.localization, LiftRightAdjoint.constructRightAdjointEquiv, Localization.LeftBousfield.isLocalization, LiftLeftAdjoint.constructLeftAdjointEquiv_apply, Adjunction.isLocalization_rightAdjoint', Adjunction.isLocalization_leftAdjoint', Adjunction.isLocalization_rightAdjoint, Adjunction.restrictFullyFaithful.",
+   "date": "2026-10-21",
+   "verdict": "no match for the entire item: Reflective.adj and reflectorAdjunction give a reflection only; restrictFullyFaithful requires a left-functor commuting isomorphism, whereas kappa at LM need not be invertible. The item needs the written composition of Hom bijections and its scalar and normalization calculations. The generic adjunction constructor is reused as existing node lem-weil-pbc-adjunction-of-natural-bijection."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sbc-completed-operations-linear-natural-exchange",
@@ -72,5 +190,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sbc-reflector-adjunction-unit-formulas",
+  "worker": "stage1",
+  "summary": "Expanded the supplied reflective Hom bijection into seven explicit steps: well-defined linear restrictions, linear reflection bijections, linear ordinary adjuncts, both naturality laws, the existing Mathlib adjunction constructor, and the two normalization formulas. Reused the existing general natural-bijection node; no new node and no statement change. Replaced the irrelevant composite-adjunction statement dependency by the actual adjunction convention and added the additive-category notion.",
+  "blueprint": "Realizes the integral completed-adjunction ingredient below the central localization sentence of sbc-thm-e-coefficient-smooth-base-change (main-20261015 proof), through step 2 of lem-sbc-completed-operations-linear-natural-exchange; the reflected Hom bijection and both unit/counit normalizations are explicit.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-O4-4af4646a7",
+  "group": "O4",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O4-4af4646a7 (reviewer sub-agent of L); spot-checked: I read the item and all seven steps in full. The delivery is one commit on f004098 with two files (item and report) and no new nodes. Only split-owned fields changed; the statement, source, blueprint, unit and chapter are byte-identical to side-live, where the item is still unsplit (no supersession, no repair note). Source checked: Stacks 099K (algebraization.tex:1480-1500), whose Hom chain Hom(K,Rf_*M)=Hom(Lf^*K,M)=Hom(Lf^*_comp K,M) is exactly what the item abstracts, and Tag 0037 for the unit/counit convention; proof_origin is agent. Each cited statement says what its step takes from it: def-weil-linear-category (bilinear composition), def-weil-linear-functor, and lem-weil-pbc-adjunction-of-natural-bijection. For the last I checked Mathlib CoreHomEquiv (Basic.lean:351), mkOfHomEquiv (436-451), mkOfHomEquiv_homEquiv (453) and homEquiv_unit/homEquiv_counit (180-181). I re-derived the step-4 naturality from κ_{LM}L(a)=P(a)κ_{LM'}, the unit η^c=h(κ_{LM})=R(κ_{LM})η, and the counit ε^cκ_{LRN}=h^{-1}(1)=ε. Membership RN∈A_c and N∈B_c is checked where it is needed, and no κ^{-1} is used. The hypotheses are consistent: objects of B_c have invertible κ. Edge cases tested: C=id; L=R=id with one reflective subcategory; B_c=0; A=0. Duplicate search over dag/nodes (reflector, 099K, restrictFullyFaithful, adjunction definitions) found only the sibling mate and compositor nodes and the concrete lem-sp-completed-pullback-adjunction, so there is no duplicate, and no Mathlib leaf covers the normalized linear statement. Replacing the stmt_dep def-weil-pbc-composite-adjunction with the adjunction leaf, and adding def-weil-additive-category, are both correct. No SGA is cited, there is no cycle, all cited nodes are definitions or Mathlib leaves, and no tool_uses are needed."
  }
 }
