@@ -22523,3 +22523,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:26 L: merged deliver/NH/lem-pc-curve-local-scalar-principal-parts (stage 2; reviewer PASS; parallel immutable checks)
 - 13:26 L: returned deliver/Q130/lem-sp-semilinear-kflat-tower-model (reviewer RETURN: L: independent stage-2 immutable head 699f8168deb0: H2/theorem stmt_dep: the statement uses only plain definitions from )
 - 13:26 L: returned deliver/Q70/lem-trf-section-coordinate-counit-normalization (reviewer RETURN: L: independent stage-2 immutable head 8129faf75aff: Read the node, the stmt_dep records, report.md, the module and the e)
+- 13:26 L: returned deliver/Q04/lem-a1-finite-pullback-strict-tower-comparison (reviewer RETURN: L: independent stage-2 immutable head ff0c7f741df5: H2/H7 (mechanical finding confirmed): the delivery adds theorem node)
