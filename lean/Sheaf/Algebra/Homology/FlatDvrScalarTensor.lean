@@ -16,11 +16,9 @@ public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.Algebra.Module.FinitePresentation
 public import Mathlib.RingTheory.DiscreteValuationRing.Basic
 public import Mathlib.RingTheory.Ideal.Quotient.Defs
-import Mathlib.Algebra.Homology.BifunctorShift
-import Sheaf.LinearAlgebra.DvrMatrixSmithPowers
-import Sheaf.CategoryTheory.FiniteTypeConstantExact
-import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
-import Sheaf.Algebra.Homology.KFlatTensorPreservesQuasiIsoIndependentCoefficients
+import Sheaf.Algebra.Homology.DvrScalarTor
+import Sheaf.Algebra.Homology.FlatScalarTorComparison
+import Sheaf.Algebra.Homology.FlatScalarTensorUnits
 
 /-! # Derived tensor of finite scalar models over a flat DVR algebra sheaf
 
@@ -148,6 +146,53 @@ theorem flat_dvr_scalar_tensor [IsDomain A] [IsDiscreteValuationRing A]
       (unit ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R)) ≅
         (DerivedCategory.singleFunctor.{w, max u v, (max u v) + 1} _ 0).obj
           (scalarExtension J α P)) := by
-  sorry
+  let : Zero (SheafOfModules.{max u v}
+    ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) := HasZeroObject.zero' _
+  -- Compute the scalar Tor first, then transport its cohomology through realization.
+  let F := flatScalarRealization J α
+  have hcompare := flat_scalar_tor_comparison J α _hflat
+  have hobj (M : ModuleCat.{max u v} A) : F.obj M = scalarExtension J α M := rfl
+  have compare (M N : ModuleCat.{max u v} A) (i : ℤ) :
+      Nonempty ((DerivedCategory.homologyFunctor _ i).obj
+        (tensor J (scalarExtension J α M) (scalarExtension J α N)) ≅
+        if i ≤ 0 then F.obj (((Tor' (ModuleCat.{max u v} A) (-i).toNat).obj M).obj N)
+          else 0) := by
+    simpa only [tensor, scalarExtension, F, flatScalarRealization,
+      flatScalarExtension, Functor.comp_obj] using hcompare M N i
+  obtain ⟨hhigh, hfinite, hcyclic⟩ := ModuleCat.dvr_scalar_tor π _hπ P Q
+  refine ⟨?_, ?_, ?_, ?_, ?_⟩
+  · intro i hi₁ hi₀
+    obtain ⟨e⟩ := compare P Q i
+    by_cases hi : i ≤ 0
+    · have hn : 2 ≤ (-i).toNat := by omega
+      rw [if_pos hi] at e
+      exact (F.map_isZero (hhigh _ hn)).of_iso e
+    · rw [if_neg hi] at e
+      exact (isZero_zero _).of_iso e
+  · intro i
+    obtain ⟨e⟩ := compare P Q i
+    by_cases hi : i ≤ 0
+    · rw [if_pos hi] at e
+      let N := ((Tor' (ModuleCat.{max u v} A) (-i).toNat).obj P).obj Q
+      exact ⟨N, hfinite _, ⟨e ≪≫ eqToIso (hobj N)⟩⟩
+    · rw [if_neg hi] at e
+      let N : ModuleCat.{max u v} A := ModuleCat.of A (Fin 0 → A)
+      have hz : IsZero N := ModuleCat.isZero_iff_subsingleton.mpr inferInstance
+      refine ⟨N, inferInstance, ⟨e ≪≫ ?_ ≪≫ eqToIso (hobj N)⟩⟩
+      exact (F.map_isZero hz).isoZero.symm
+  · intro r s hr hs
+    let M := ModuleCat.of A (A ⧸ Ideal.span {π ^ r})
+    let N := ModuleCat.of A (A ⧸ Ideal.span {π ^ s})
+    constructor
+    · obtain ⟨e⟩ := compare M N (-1)
+      have h := (hcyclic r s hr hs 1 (by omega)).some
+      simp only [neg_neg, Int.toNat_one, show (-1 : ℤ) ≤ 0 by omega, ↓reduceIte] at e
+      exact ⟨e ≪≫ F.mapIso h ≪≫ eqToIso (hobj _)⟩
+    · obtain ⟨e⟩ := compare M N 0
+      have h := (hcyclic r s hr hs 0 (by omega)).some
+      simp only [neg_zero, Int.toNat_zero, le_refl, ↓reduceIte] at e
+      exact ⟨e ≪≫ F.mapIso h ≪≫ eqToIso (hobj _)⟩
+  · exact (flat_scalar_tensor_units J R (scalarExtension J α Q)).1
+  · exact (flat_scalar_tensor_units J R (scalarExtension J α P)).2
 
 end SheafOfModules.FlatDvrScalar

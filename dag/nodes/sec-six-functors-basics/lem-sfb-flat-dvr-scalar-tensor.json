@@ -20,95 +20,38 @@
  ],
  "proof": [
   {
-   "text": "Choose a finite presentation $A^m\\xrightarrow{F}A^n\\to P\\to0$ using [def-sc-finitely-presented-module]. Apply [lem-sfb-dvr-matrix-smith-powers] to $F$. The invertible changes of bases identify its cokernel with the cokernel of the rectangular diagonal matrix: there is one $A/(\\pi^{e_i})$ for each nonzero pivot and one $A$ for each unused target coordinate. Pivots with $e_i=0$ give zero summands and are discarded. Thus $P$ is a finite direct sum of copies of $A$ and $A/(\\pi^r)$ with $r\\ge1$. Apply the same argument to $Q$. Zero-dimensional presentations and empty sums are allowed.",
+   "text": "Apply the exact scalar Tor comparison to the canonical scalar models. This identifies H^i of their derived tensor with the scalar realization of Tor_{-i}, with zero in positive degrees.",
    "uses": [
-    "def-sc-finitely-presented-module",
-    "lem-sfb-dvr-matrix-smith-powers"
+    "lem-sfb-flat-scalar-tor-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-operations.proof.md",
-    "place": "paragraph (2), scalar finite-model tensor calculation; scalar Smith reduction using the existing DVR matrix theorem"
-   }
+   "elementary": false
   },
   {
-   "text": "Write $T(M)=R\\otimes_{A_{\\mathcal C}}\\underline M$. Constant realization preserves kernels and cokernels by [lem-weil-pbc-finite-type-constant-exact]. Tensoring with $R$ is exact by the stated flatness hypothesis, whose definition is precisely exactness of this tensor functor [def-pc-flat-sheaf-modules]. Hence $T$ preserves kernels, cokernels and finite direct sums. These computations are also computations of $R$-modules: the induced $R$-action preserves each kernel and descends to each cokernel. The tensor unit map $r\\otimes a\\mapsto ar$, with inverse $r\\mapsto r\\otimes1$, gives $T(A)=R$. Applying $T$ to the scalar cokernel of multiplication by $\\pi^r$ gives $T(A/(\\pi^r))=R/\\pi^rR$. The tensor maps here and below are the sheafified balanced maps of [def-pur-sheaf-tensor-product].",
+   "text": "The DVR Tor calculation gives vanishing above degree one, finite presentation in every degree, and both cyclic Tor degrees equal to the minimum-exponent scalar quotient. Map the cyclic isomorphisms through the specified realization functor. Positive degrees use the zero scalar module.",
    "uses": [
-    "lem-weil-pbc-finite-type-constant-exact",
-    "def-pc-flat-sheaf-modules",
-    "def-pur-sheaf-tensor-product"
+    "lem-sfb-dvr-scalar-tor",
+    "def-sfb-flat-scalar-realization"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 093J, lemma-constant-exact; Tag 03ER, definition-flat (3); Section 03EK, section-tensor-product"
-   }
+   "elementary": true
   },
   {
-   "text": "For $r\\ge1$, $A$ is a domain and $\\pi\\ne0$ by [def-sc-discrete-valuation-ring], so $0\\to A\\xrightarrow{\\pi^r}A\\to A/(\\pi^r)\\to0$ is exact. Step 2 sends this to $0\\to R\\xrightarrow{\\pi^r}R\\to R/\\pi^rR\\to0$. Put $C_r=[R\\xrightarrow{\\pi^r}R]$ in degrees $-1,0$, with quotient augmentation to $(R/\\pi^rR)[0]$. Its kernel and cokernel show directly that this augmentation is a quasi-isomorphism. The free summand has resolution $R[0]$. Taking finite sums of these augmented complexes gives bounded finite free resolutions $C_P\\to P_R[0]$ and $C_Q\\to Q_R[0]$ for the decompositions in Step 1.",
+   "text": "Apply the proved degree-zero unit comparisons to the two displayed scalar sheaves. These are the last two clauses, without any flatness hypothesis on the second factor.",
    "uses": [
-    "def-sc-discrete-valuation-ring"
+    "lem-sfb-flat-scalar-tensor-units"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00PD, lemma-characterize-dvr; elementary domain cancellation and exact scalar extension from Step 2"
-   }
-  },
-  {
-   "text": "Tensoring with a finite free $R$-module is a finite coordinate sum of the identity functor, so every term of $C_P$ and $C_Q$ is flat. They are K-flat by [lem-pc-bounded-above-flat-kflat-site]. The K-flat comparison in [lem-weil-pbc-site-derived-tensor-descent] therefore identifies $P_R\\otimes_R^{\\mathbf L}Q_R$ with $\\operatorname{Tot}(C_P\\otimes_R C_Q)$. Apply [lem-pur-kflat-tensor-quasiiso-independent] to the augmentation $C_Q\\to Q_R[0]$ and the K-flat complex $C_P$. Interchanging the factors by $x\\otimes y\\mapsto(-1)^{pq}y\\otimes x$ in bidegree $(p,q)$ gives the required orientation of that cited theorem. Thus the total complex maps by a quasi-isomorphism to $\\operatorname{Tot}(C_P\\otimes_R Q_R[0])$. Its degree $i$ is $C_P^i\\otimes_R Q_R$ and its differential is $d_{C_P}\\otimes1$ [def-pc-tensor-complex-sheaves]. In particular a cyclic pair is computed by $[R/\\pi^sR\\xrightarrow{\\pi^r}R/\\pi^sR]$ in degrees $-1,0$.",
-   "uses": [
-    "lem-pc-bounded-above-flat-kflat-site",
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "lem-pur-kflat-tensor-quasiiso-independent",
-    "def-pc-tensor-complex-sheaves"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YQ, lemma-bounded-flat-K-flat; Tag 06YP, lemma-K-flat-quasi-isomorphism; Tag 06YU, definition-derived-tor and preceding construction"
-   }
-  },
-  {
-   "text": "Compute the scalar kernel and cokernel of $\\pi^r$ on $A/(\\pi^s)$. If $r\\ge s$, this map is zero, so both are $A/(\\pi^s)$. If $r<s$, the cokernel is $A/(\\pi^r)$, and multiplication by $\\pi^{s-r}$ gives an isomorphism $A/(\\pi^r)\\to\\ker(\\pi^r:A/(\\pi^s)\\to A/(\\pi^s))$. Indeed $\\pi^r a=\\pi^s b$ implies $a=\\pi^{s-r}b$ by cancellation in the domain $A$, and $\\pi^{s-r}b\\in\\pi^sA$ holds exactly when $b\\in\\pi^rA$, again by cancellation. Apply the exact functor $T$ of Step 2 to these kernel and cokernel identifications. The cyclic complex of Step 4 therefore has $H^{-1}\\cong H^0\\cong T(A/(\\pi^{\\min(r,s)}))=R/\\pi^{\\min(r,s)}R$, and has no other cohomology.",
-   "uses": [
-    "def-sc-discrete-valuation-ring"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00PD, lemma-characterize-dvr; elementary quotient and cancellation calculation"
-   }
-  },
-  {
-   "text": "The finite coordinate maps $((x_i)_i,y)\\mapsto(x_i\\otimes y)_i$ and the inclusions of each coordinate give inverse balanced-tensor maps, so the complex in Step 4 is the finite sum of the complexes for the pairs of summands in Step 1 [def-pur-sheaf-tensor-product, def-pc-tensor-complex-sheaves]. For a free left summand its complex is $Q_R[0]$ by $r\\otimes q\\mapsto rq$. For a cyclic left summand and a free right summand it is $C_r$, whose only cohomology is $R/\\pi^rR$ in degree zero by Step 3. For two cyclic summands use Step 5. Kernels and cokernels of a finite block diagonal map are their coordinate sums, so cohomology is the finite sum of these computed sheaves. In degree $-1$ take the corresponding finite sum of $A/(\\pi^{\\min(r,s)})$; in degree $0$ take the scalar modules from all free/free, free/cyclic, cyclic/free and cyclic/cyclic pairs. These scalar modules are finitely presented: use one generator with relation $\\pi^t$ for each cyclic term, one generator with no relation for each free term, and combine these finitely many presentations. Step 2 identifies each resulting sheaf with $T(N)$. Every block vanishes in degrees outside $[-1,0]$, proving every clause, including the free-summand assertion.",
-   "uses": [
-    "def-pur-sheaf-tensor-product",
-    "def-pc-tensor-complex-sheaves"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-operations.proof.md",
-    "place": "paragraph (2), assemble the explicit scalar cyclic and free tensor calculations; finite sums only"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-sc-finitely-presented-module",
-  "lem-sfb-dvr-matrix-smith-powers",
-  "lem-weil-pbc-finite-type-constant-exact",
-  "def-pc-flat-sheaf-modules",
-  "def-pur-sheaf-tensor-product",
-  "def-sc-discrete-valuation-ring",
-  "lem-pc-bounded-above-flat-kflat-site",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "lem-pur-kflat-tensor-quasiiso-independent",
-  "def-pc-tensor-complex-sheaves"
+  "lem-sfb-flat-scalar-tor-comparison",
+  "lem-sfb-dvr-scalar-tor",
+  "def-sfb-flat-scalar-realization",
+  "lem-sfb-flat-scalar-tensor-units"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-operations.proof.md",
-  "place": "paragraph (2): explicit finite scalar-model tensor calculation, using Stacks Tags 093J, 03ER, 06YQ, 06YP and 06YU; replaces the false finite-free-complex splitting sentence"
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YQ, 06YP and 06YU: compute the tensor from scalar projective resolutions, then use ordinary scalar DVR Tor; blueprint paragraph (2) is unchanged."
  },
  "mathlib_searches": [
   {
@@ -224,9 +167,6 @@
   ]
  },
  "tool_uses": [
-  "lem-sfb-dvr-matrix-smith-powers",
-  "lem-weil-pbc-finite-type-constant-exact",
-  "lem-pc-bounded-above-flat-kflat-site",
   "lem-weil-pbc-site-derived-tensor-descent",
   "lem-pur-kflat-tensor-quasiiso-independent"
  ],
@@ -263,5 +203,15 @@
   "group": "Q23",
   "result": "pass",
   "note": "Every clause matches the node: flatness over A_C (IsFlatOnSite of restrictScalars α R), finitely presented scalar P and Q, vanishing outside degrees -1 and 0, an ∃ finitely presented N model in every degree, cyclic H^-1 and H^0 ≅ min-exponent quotient for r,s≥1 (via T(A/π^n), canonically ≅ R/π^nR, Nonempty iso), free factor in both positions. A : Type (max u v) is fixed by the recorded realizationRing; HasSheafify binder is a Prop Mathlib supplies on every small site. Helpers have real data; the only sorry is the theorem; docstrings carry the source place, blueprint id and six-step proof; plain imports match proof_deps modules; statement field verbatim; the added stmt_dep def-sfb-site-derived-constant-module-functor is genuine and used. nt_compile --json: clean, 21.4 s. File byte-identical to 9abb3a3e, which was returned only for a missing-olean build fault that is now gone. Advisory: changeOfRingsOfUniverses is not listed in def-pur-sheaf-tensor-product lean.declarations."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261021T111105-L-4071961",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

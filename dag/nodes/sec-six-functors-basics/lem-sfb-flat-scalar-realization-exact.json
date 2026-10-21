@@ -1,0 +1,117 @@
+{
+ "id": "lem-sfb-flat-scalar-realization-exact",
+ "kind": "statement",
+ "title": "Exactness of canonical flat scalar realization",
+ "statement": "In the setting of [def-sfb-flat-scalar-realization], if R is flat over the constant ring sheaf in the sense of [def-pc-flat-sheaf-modules], the specified realization functor F preserves finite limits and finite colimits.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 093J (constant exactness), 03ER(3) (flatness) and 03EK (tensor product)"
+ },
+ "stmt_deps": [
+  "def-sfb-flat-scalar-realization",
+  "def-pc-flat-sheaf-modules"
+ ],
+ "proof": [
+  {
+   "text": "After forgetting module structure, extension is naturally tensor with the restricted target ring. Sheafify the sectionwise tensor symmetry to construct this natural isomorphism.",
+   "uses": [
+    "def-sfb-flat-scalar-realization",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Flatness makes the latter tensor functor exact. Forgetting to abelian sheaves reflects finite limits and finite colimits, so extension is exact. Compose with exact constant realization.",
+   "uses": [
+    "def-pc-flat-sheaf-modules",
+    "def-sfb-site-derived-constant-module-functor"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-flat-scalar-realization",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-flat-sheaf-modules",
+  "def-sfb-site-derived-constant-module-functor"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 093J (constant exactness), 03ER(3) (flatness) and 03EK (tensor product)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The additive functor from modules to module sheaves given by constant sheafification followed by sheafified scalar extension",
+   "results": "constantSheaf, PresheafOfModules.sheafification and restrictScalars; no specified composite",
+   "date": "2026-10-21",
+   "verdict": "no direct match; combine existing API"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical constant module realization followed by extension of scalars to a ring sheaf is additive",
+   "results": "toSheaf additive, restrictScalars additive, evaluation; no composite",
+   "date": "2026-10-21",
+   "verdict": "no direct match; combine existing API"
+  },
+  {
+   "tool": "grep",
+   "query": "rg constant and exact in SiteDerivedConstantModuleFunctor, CommutativeSiteDerivedConstantModuleFunctor and FlatRestrictionExactLeftAdjoint",
+   "results": "The constant functor is already exact. The latter constructs an unspecified adjoint in equal universes; its proof supplies the underlying tensor comparison used here.",
+   "date": "2026-10-21",
+   "verdict": "no direct match; combine existing API"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.FlatDvrScalarTensor",
+  "date": "2026-10-21",
+  "group": "F6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-operations",
+   "place": "paragraph (2): scalar finite-model derived tensor calculation",
+   "via": [
+    "lem-sfb-flat-dvr-scalar-tensor"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.FlatScalarRealizationExact",
+  "file": "lean/Sheaf/Algebra/Homology/FlatScalarRealizationExact.lean",
+  "declaration": "SheafOfModules.flatScalarRealization_exact",
+  "statement": "theorem flatScalarRealization_exact (hflat : IsFlatOnSite (J := J) (R := realizationRing J A) ((restrictScalars ((sheafCompose J (forget₂ CommRingCat RingCat)).map α)).obj (unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)))) : PreservesFiniteLimits (flatScalarRealization J α) ∧ PreservesFiniteColimits (flatScalarRealization J α)",
+  "branch": "sheaf-dag",
+  "by": "F6",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261021T111105-L-4071961",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261021T111105-L-4071961",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
