@@ -11,11 +11,89 @@
   "sk-def-sfb-sheaf-tensor",
   "sk-def-sfb-ring-object",
   "def-sfb-finitely-presented-module",
-  "sk-def-sfb-change-of-scalars"
+  "sk-def-sfb-change-of-scalars",
+  "sk-def-sfb-module-objects"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $\\mathcal C=\\Sh(X_{\\mathrm{proét}},\\Ab)$ and $E=\\operatorname{Ext}_\\varphi$. The abelianness assertion of [lem-sfb-grothendieck-sheafification], applied to the small pro-étale site with coefficients $\\Ab$, makes $\\mathcal C$ abelian. By [sk-def-sfb-sheaf-tensor], both tensor functors preserve colimits; by [lem-sfb-preserving-colimits-additive] they are additive. In particular $R\\otimes-$ and $S\\otimes-$ preserve finite colimits, so [lem-sfb-modobj-abelian] makes both module categories abelian. The hypotheses of [def-sfb-modobj-extension] hold: the category is symmetric, it has coequalizers, both tensor functors preserve colimits, and $R$ is commutative. Thus $E$ is the stated balanced-tensor functor. By [lem-sfb-modobj-extension-right-exact] it preserves finite colimits; applying [lem-sfb-preserving-colimits-additive] to these module categories also shows $E(0_{A,B})=0_{E(A),E(B)}$.",
+   "uses": [
+    "lem-sfb-grothendieck-sheafification",
+    "sk-def-sfb-sheaf-tensor",
+    "lem-sfb-preserving-colimits-additive",
+    "lem-sfb-modobj-abelian",
+    "def-sfb-modobj-extension",
+    "lem-sfb-modobj-extension-right-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-extend-to-qlbar-constructible.proof.md",
+    "place": "Final clause, verifying the hypotheses for the finite-free and cokernel calculation"
+   }
+  },
+  {
+   "text": "Give $S$ its left regular $S$-action and its right $R$-action $\\rho_S=\\mu_S\\circ(S\\otimes\\varphi)$, the mixed bimodule specified in [def-sfb-modobj-extension]. Its tensor product with the regular $R$-bimodule is precisely the coequalizer defining $E(R)$. Apply [lem-sfb-mixed-bimodule-right-unitor] to this $S$-$R$-bimodule and forget the right action. This gives the canonical $S$-linear isomorphism $e_1:E(R)\\xrightarrow{\\sim}S$. If $q:S\\otimes R\\to E(R)$ is the quotient, its normalization is $e_1\\circ q=\\mu_S\\circ(S\\otimes\\varphi)$; its inverse is $q\\circ(S\\otimes\\eta_R)\\circ(\\rho_S^{\\mathcal C})^{-1}$, where $\\rho_S^{\\mathcal C}:S\\otimes\\mathbf1\\cong S$ is the ambient right unitor. The mixed-bimodule theorem supplies $S$-linearity as well as invertibility, so no identification of $R$ with $S$ or flatness is being used.",
+   "uses": [
+    "def-sfb-modobj-extension",
+    "lem-sfb-mixed-bimodule-right-unitor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-extend-to-qlbar-constructible.proof.md",
+    "place": "Final clause, the rank-one balanced-tensor comparison"
+   }
+  },
+  {
+   "text": "For $k\\geq0$ use the finite biproducts $R^k,S^k$ of [def-sfb-finitely-presented-module], viewed as finite coproducts. By [lem-sfb-modobj-extension-right-exact], the maps $E(\\iota_i^R):E(R)\\to E(R^k)$ exhibit $E(R^k)$ as the coproduct of $k$ copies of $E(R)$. Consequently there is a unique $e_k:E(R^k)\\to S^k$ with $e_k\\circ E(\\iota_i^R)=\\iota_i^S\\circ e_1$, and a unique $d_k:S^k\\to E(R^k)$ with $d_k\\circ\\iota_i^S=E(\\iota_i^R)\\circ e_1^{-1}$. Their composites are identities: precompose with each coproduct injection and use $e_1e_1^{-1}=1$ and $e_1^{-1}e_1=1$; uniqueness of coproduct maps gives the equalities. Thus $e_k$ is a canonical isomorphism with inverse $d_k$. For $k=0$ the same argument is the uniqueness of maps between initial objects, giving $E(0)\\cong0$.",
+   "uses": [
+    "def-sfb-finitely-presented-module",
+    "lem-sfb-modobj-extension-right-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-extend-to-qlbar-constructible.proof.md",
+    "place": "Final clause, finite-free comparison in every rank including zero"
+   }
+  },
+  {
+   "text": "Fix a presentation $M\\cong Q=\\operatorname{coker}(f:R^m\\to R^n)$ as in [def-sfb-finitely-presented-module], with cokernel arrow $q_f:R^n\\to Q$. A cokernel is the coequalizer of $(f,0)$: both universal properties say that maps out of $R^n$ killing $f$ factor uniquely through $q_f$. Since $E$ preserves finite colimits [lem-sfb-modobj-extension-right-exact] and preserves zero morphisms by step 1, $E(q_f)$ is a cokernel of $E(f)$. Set $f_S=e_n\\circ E(f)\\circ e_m^{-1}$ and $q_S=E(q_f)\\circ e_n^{-1}:S^n\\to E(Q)$. Then $q_Sf_S=0$. For any $S$-linear $h:S^n\\to N$ with $hf_S=0$, the map $h e_n$ kills $E(f)$, since $e_n E(f)=f_S e_m$. There is therefore a unique $u:E(Q)\\to N$ with $u E(q_f)=h e_n$; equivalently $u q_S=h$. This proves that $q_S$ is a cokernel of $f_S$. Applying the two cokernel universal properties gives inverse maps $E(Q)\\cong\\operatorname{coker}(f_S)$ characterized by the cokernel arrows, so the comparison is canonical. Finally applying the functor $E$ to the given isomorphism $M\\cong Q$ gives $E(M)\\cong\\operatorname{coker}(f_S)$.",
+   "uses": [
+    "def-sfb-finitely-presented-module",
+    "lem-sfb-modobj-extension-right-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-extend-to-qlbar-constructible.proof.md",
+    "place": "Final clause, preserving the cokernel and writing out the conjugated presentation"
+   }
+  },
+  {
+   "text": "The integers $m,n$ in step 4 are finite and its arrow $f_S:S^m\\to S^n$ is $S$-linear. Hence the displayed isomorphism is exactly a witness to finite presentation over $S$ by [def-sfb-finitely-presented-module]. All steps used finite colimits and the mixed right unitor; none required scalar extension to preserve kernels, so no flatness hypothesis was needed.",
+   "uses": [
+    "def-sfb-finitely-presented-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-extend-to-qlbar-constructible.proof.md",
+    "place": "Final clause, finite presentation of the extended module"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-grothendieck-sheafification",
+  "sk-def-sfb-sheaf-tensor",
+  "lem-sfb-preserving-colimits-additive",
+  "lem-sfb-modobj-abelian",
+  "def-sfb-modobj-extension",
+  "lem-sfb-modobj-extension-right-exact",
+  "lem-sfb-mixed-bimodule-right-unitor",
+  "def-sfb-finitely-presented-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-extend-to-qlbar-constructible.proof.md",
+  "place": "Final sentence: expansion of tensoring local finite presentations into regular-module, finite-coproduct and cokernel calculations"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -59,10 +137,69 @@
    "results": "8 hits: ModuleCat.CoextendScalars.obj', ModuleCat.coextendScalars, instAB5ModuleCat, ModuleCat.extendScalars, ModuleCat.instHasCoequalizers, ModuleCat.instIsRightAdjointCoextendScalars, ModuleCat.hasCokernels_moduleCat, ModuleCat.preservesColimit_restrictScalars",
    "date": "2026-10-21",
    "verdict": "no match: ordinary ModuleCat/SheafOfModules or monoidal infrastructure, not internal module objects with the stated comparison and finite-presentation convention"
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalars.*[Ff]inite|[Ff]inite.*extendScalars|extendScalarsRegularIso|fp_extend",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: no matching declarations in the general category-theory directory.",
+   "subdirectory": "CategoryTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scalar extension of modules over monoid objects in a monoidal abelian category preserves finite cokernel presentations",
+   "results": "8 hits: ModuleCat.ExtendScalars.obj', ModuleCat.extendScalars, instFinitePresentationTensorProduct, ModuleCat.instIsLeftAdjointExtendScalars, ModuleCat.preservesFiniteLimits_extendScalars_of_flat, ModuleCat.preservesColimit_restrictScalars, ModuleCat.instPreservesMonomorphismsRestrictScalars, Module.FinitePresentation.isLocalizedModule_mapExtendScalars",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary modules, localization, or SheafOfModules infrastructure; does not state the internal-module assertion with its comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extendScalars\", \"FinitePresentation\"",
+   "results": "4 hits: Module.FinitePresentation.isLocalizedModule_mapExtendScalars, Module.FinitePresentation.linearEquivMapExtendScalars, Module.FinitePresentation.linearEquivMapExtendScalars_apply, Module.FinitePresentation.linearEquivMapExtendScalars_symm_apply",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary modules, localization, or SheafOfModules infrastructure; does not state the internal-module assertion with its comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars of internal modules over ring objects in abelian sheaves preserves finite presentations by finite free modules",
+   "results": "8 hits: SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.isFinitePresentation, SheafOfModules.instIsFiniteTypeOfIsFinitePresentation, SheafOfModules.Presentation.map, SheafOfModules.IsFinitePresentation, SheafOfModules.quasicoherentDataOfIsFinitePresentation, SheafOfModules.IsFinitePresentation.exists_quasicoherentData, SheafOfModules.instIsQuasicoherentOfIsFinitePresentation",
+   "date": "2026-10-21",
+   "verdict": "no match: read Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:146–188 and 265–269; Presentation.map is close infrastructure for SheafOfModules, but changing from internal module objects is additional work, not a one-line specialization. The local finite-presentation predicate also differs from the global convention here."
+  },
+  {
+   "tool": "grep",
+   "query": "FinitePresentation|IsFinitePresentation|extendScalars",
+   "results": "25 hits: Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean, Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean, Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean, Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean, Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean, Mathlib/Algebra/Category/ModuleCat/Localization.lean, Mathlib/Algebra/Category/ModuleCat/Localization.lean, Mathlib/Algebra/Category/ModuleCat/Localization.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary modules, localization, or SheafOfModules infrastructure; does not state the internal-module assertion with its comparisons.",
+   "subdirectory": "Algebra/Category/ModuleCat"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"presentation\"",
+   "results": "12 hits: SheafOfModules.Presentation, SheafOfModules.Presentation.IsFinite, SheafOfModules.Presentation.generators, SheafOfModules.IsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.isFinitePresentation, SheafOfModules.Presentation.IsFinite.isFiniteType_generators, SheafOfModules.instIsFiniteTypeOfIsFinitePresentation",
+   "date": "2026-10-21",
+   "verdict": "no match: read Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:146–188 and 265–269; Presentation.map is close infrastructure for SheafOfModules, but changing from internal module objects is additional work, not a one-line specialization. The local finite-presentation predicate also differs from the global convention here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A right exact functor between abelian categories taking the regular ring module to the regular ring module sends finite free cokernel presentations to finite free cokernel presentations",
+   "results": "8 hits: CategoryTheory.Abelian.FreydMitchell.instPreservesFiniteColimitsModuleCatEmbeddingRingFunctor, CategoryTheory.Functor.preservesFiniteColimits_tfae, isFinitelyPresentable, CategoryTheory.Abelian.FreydMitchell.instPreservesFiniteLimitsModuleCatEmbeddingRingFunctor, Module.Presentation.ofExact_var, CategoryTheory.Functor.preservesFiniteColimits_of_preservesCokernels, CategoryTheory.RightExactFunctor.ofExact_obj, Module.Presentation.ofExact_G",
+   "date": "2026-10-21",
+   "verdict": "no match: general exact-functor and ordinary module-presentation infrastructure only; no theorem with the internal finite-free and canonical cokernel comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "FinitePresentation A|instance.*TensorProduct|linearEquivMapExtendScalars|isLocalizedModule_mapExtendScalars",
+   "results": "5 hits: 339, 356, 591, 600, 656",
+   "date": "2026-10-21",
+   "verdict": "no match: read Algebra/Module/FinitePresentation.lean:338–351; ordinary type-valued algebraic tensor extension, not internal modules. Single-file grep formats line numbers as file fields.",
+   "subdirectory": "Algebra/Module/FinitePresentation.lean"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-extend-to-qlbar-constructible",
@@ -79,5 +216,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-internal-extension-finite-presentation",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged and expanded its finite-free and cokernel comparisons into five steps. Reused the existing mixed-bimodule right unitor and right exactness of internal scalar extension; created no nodes. Checked the nearby internal-scalar-extension-finite-presentation node, which states only the resulting finite-presentation property. Searched the live project and Mathlib; no exact attachment or one-line Mathlib match was found.",
+  "blueprint": "Realizes the final sentence of lem-sfb-extend-to-qlbar-constructible.proof.md: tensoring local finite presentations on the strata gives local finite presentations. Steps 1–3 supply the internal-module and finite-free calculation; steps 4–5 give the canonical cokernel presentation.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-grothendieck-sheafification",
+    "why": "Only its abelianness assertion for sheaves with Grothendieck abelian coefficients is used, specialized to Ab on the small pro-etale site; this is ambient category infrastructure, not a replacement for coefficient descent."
+   },
+   {
+    "node": "lem-sfb-modobj-abelian",
+    "why": "Generic abelianness of internal module categories is used to form finite biproducts and cokernels over R and S; the finite-coefficient-field descent unit does not supply this ambient algebra theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-grothendieck-sheafification",
+  "lem-sfb-modobj-abelian"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-O1-9e0fd4308",
+  "group": "O1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O1-9e0fd4308 (reviewer sub-agent of L); spot-checked: I read the item in full: the statement is unchanged, it has 5 steps and creates no nodes. I also read every cited statement and the source, the last clause of main-20261015 lem-sfb-extend-to-qlbar-constructible.proof.md ('tensoring local finite presentations ... gives local finite presentations'). Step 1: the hypotheses hold. sk-def-sfb-sheaf-tensor gives colimit preservation of F⊗– and –⊗F for every F, so lem-sfb-preserving-colimits-additive gives additivity. Then lem-sfb-modobj-abelian makes both module categories abelian, def-sfb-modobj-extension applies (braided, R commutative), and lem-sfb-modobj-extension-right-exact makes E right exact. E(0)=0 because E is additive. Step 2: with P=S, the coequaliser in lem-sfb-mixed-bimodule-right-unitor is the same pair, with the same bracketing (μ_S(S⊗φ))⊗R and (S⊗μ_R)α, as the one defining E(R). So e_1 is an S-linear iso with e_1q=μ_S(S⊗φ), and S≠R is allowed. Step 3: the finite coproduct comparison is correctly elementary, including k=0. Step 4: E(q_f) is the cokernel of the conjugate f_S, with existence and uniqueness checked. Step 5: (m,n,f_S) is exactly a witness for def-sfb-finitely-presented-module. Edge cases tested: m=0, n=0, φ=id, S=0, X=∅, and the non-flat map ℤ→ℤ/2 (only right exactness is used). review_split passes, and the two tool_uses (grothendieck-sheafification, modobj-abelian) are only ambient abelianness, which I accept. No SGA source is cited. Maintainer note: lem-sfb-internal-scalar-extension-finite-presentation (created by Q53 the same day, split in a separate N7 run) states the weaker form of this item and duplicates it in content. Consolidate the two, e.g. have lem-sfb-extend-subfield-constructible steps 2–3 cite this stronger item. This delivery is not at fault, since it creates nothing."
  }
 }
