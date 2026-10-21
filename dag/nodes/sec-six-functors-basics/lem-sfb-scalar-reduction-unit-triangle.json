@@ -334,5 +334,28 @@
   "group": "NB",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-fda83a6d3 (reviewer sub-agent of L); spot-checked: I read the full nine-step split and every cited statement, and found no faults. Statement unchanged vs live/side-live (still unsplit there). The only stmt_deps change is the added def-weil-triangulated-category. No repair note, no new nodes, no SGA; the Stacks tags 093J/03D7/0B65/03ER/06YY/0152 match their labels. Step 3 inverse maps check out: fvπ=π gives fv=1, and vf has the same adjunct as 1. Step 4 uses the conjugate-iso unit equation. Step 5 is flatness as exactness of G↦G⊗M, so n is monic on every flat term. Step 7: ∂_P is pinned by the Mathlib leaf triangleOfSESδ, whose -fst cocycle sign matches the -p convention of Stacks 0152 and def-weil-abstract-derived-category. Step 8: c_A Lq(p)=c_P, (Res c_P)η_P=j and naturality give all three squares of the (p,p,(Res c_A)^{-1}) triangle iso and δ_A=p[1]∂_P Res(c_A). Step 9 fills every field of def-sfb-scalar-reduction-presentation. Edge cases: n=1 (R=0, triangle A→A→0) and non-flat A=Z/n are consistent. No duplicate found in the snapshot DAG and no cycle. I accept both declared tool_uses (lem-pur-torsion-sheaf-constant-module, lem-pur-derived-change-of-rings) as generic tools for unit paragraph 4. Side note: the normalization node's statement cites a placeholder [new-derived-adjunction-compatibility]."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.ScalarReductionUnitTriangle",
+  "declaration": "SheafOfModules.ScalarAdjunctionNormalization.scalarReductionUnitTriangle",
+  "declarations": [
+   "SheafOfModules.ScalarAdjunctionNormalization.ScalarReductionUnitTriangle",
+   "SheafOfModules.ScalarAdjunctionNormalization.scalarReductionUnitTriangle"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/ScalarReductionUnitTriangle.lean",
+  "statement": "theorem scalarReductionUnitTriangle [HasTerminal C] (hn : 1 ≤ n) : Nonempty (ScalarReductionUnitTriangle J n M N)",
+  "branch": "sheaf-dag",
+  "by": "NJ",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The result is packaged by ScalarReductionUnitTriangle for the prescribed universal tensor model M and its normalized adjunction N. Cokernel universal properties specify the natural residue quotient; the resolution equation fixes c_A and triangleOfSESδ fixes the boundary. The presentation clause uses DivisibleReduction.Presentation, the recorded generic presentation specialized to these coefficients (an abbreviation in current source; the last published build still exposes its identical former specialized structure). No statement correction or new independent notion."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e945f0332",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Clause-by-clause match with lem-sfb-scalar-reduction-unit-triangle. Every clause is rendered by a field of ScalarReductionUnitTriangle, pinned by universal properties or equations: coefficient SES; torsion lift, fully faithful toSheaf and integer_action; restriction fully faithful; natural iso M.E ≅ cokernel functor with unit and pure-tensor formulas; all ordinary units; flat-term mono; resolution triangle with c fixed by T(Qp)≫c=ε_P, δ = Res(c)≫factors≫triangleOfSESδ≫Q(p)[1], and the (p,p,Res c⁻¹) iso, whose three squares I checked via kflat_unit and naturality; presentations. No extra hypotheses, universes bound, statement verbatim, docstrings complete, sorry only. Edge cases n=1, non-flat A and unbounded complexes covered. No public duplicate (parent module has only private lemmas). Advisory: the Presentation abbrev and its restriction belong to the non-stmt_dep parent node (cycle prevents citing it) and duplicate the restriction functor; switch to ScalarReductionPresentation (restriction J n) n once published. Proof-only imports. No compile (no file changed)."
  }
 }

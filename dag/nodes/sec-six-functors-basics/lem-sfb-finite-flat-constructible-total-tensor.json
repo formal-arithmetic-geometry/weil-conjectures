@@ -20,7 +20,8 @@
   "def-weil-abstract-derived-category",
   "def-kun-derived-tensor",
   "def-weil-size-convention",
-  "def-weil-derived-cohomology-sheaves"
+  "def-weil-derived-cohomology-sheaves",
+  "def-sfb-preserves-kflat-quasi-iso"
  ],
  "proof": [
   {
@@ -318,5 +319,24 @@
   "group": "Q07",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q07-2d72dd8cb (reviewer sub-agent of L); spot-checked: I read all seven steps of the item and every cited statement; the item's statement is unchanged; the delivery creates no new nodes. Source: main-20261015 det-thm-sf-ctf-stability-direct-images proof (1),(2), finite-A total-tensor sentence. The from.node repair to det-thm-sf-ctf-stability-direct-images via the parent is correct. Steps: (1) bounded-above flat complexes are K-flat (06YQ, l.3120); (2) the total tensor model is K-flat with flat terms (07A2); (3) term support from the term formula, elementary; (4) each P^i⊗Q^j is constructible by fibre-product common refinement, then refines, then inverse-image modules, then pullback-tensor, then the flc-tensor parts, as in Stacks 095I l.11991; with A finite, finitely generated means finite; (5) thm-constructible-serre gives kernels, cokernels and extensions, so finite sums and H^n=coker(T^{n-1}→Z^n) are constructible, without the false subsheaf claim; (6) site-derived-tensor-descent with the identity resolution in def-kun-derived-tensor and well-defined (06YT/06YU); (7) the single-tensor comparison for K-flat T and arbitrary N gives the Tor interval. Edge cases checked: A=0, X empty, degenerate intervals, A=Z/4 with N=Z/2 and non-flat N. No duplicate: lem-fd-flat-constructible-tensor, lem-sf-etale-flat-constructible and det-sf-flat-model-generation all differ. No cycle. Route: every cited statement is on the unit's route except the two declared tool uses, lem-pur-kflat-total-tensor-model and lem-kun-derived-tensor-well-defined, both generic tensor calculus, accepted. Batch-5: the citation of lem-sf-ringed-kflat-single-tensor-comparison adds only lem-trf-site-functorial-flat-resolution (functorial flat resolutions of module sheaves) and lem-trf-localization-essentially-surjective (category theory) to the closure. Both are generic tools that are neither statements nor proof steps of the trace formula or Poincaré duality, so the citation is accepted."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteFlatConstructibleTotalTensor",
+  "declaration": "AlgebraicGeometry.Etale.finiteFlatConstructible_totalTensor",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteFlatConstructibleTotalTensor.lean",
+  "statement": "theorem finiteFlatConstructible_totalTensor (A : Type (u + 1)) [CommRing A] [Finite A] (X : Scheme.{u}) [CompactSpace X] [IsLocallyNoetherian X] (a b c d : ℤ) (_hab : a ≤ b) (_hcd : c ≤ d) (P Q : CochainComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ) (_hPflat : ∀ i : ℤ, exactFunctor _ _ (@tensorRight _ _ (Sheaf.monoidalCategory X.smallEtaleTopology (ModuleCat.{u + 1} A)) (P.X i))) (_hQflat : ∀ j : ℤ, exactFunctor _ _ (@tensorRight _ _ (Sheaf.monoidalCategory X.smallEtaleTopology (ModuleCat.{u + 1} A)) (Q.X j))) (_hPc : ∀ i : ℤ, Scheme.IsConstructibleEtaleModuleSheaf (P.X i)) (_hQc : ∀ j : ℤ, Scheme.IsConstructibleEtaleModuleSheaf (Q.X j)) (_hPbound : ∀ i : ℤ, (i < a ∨ b < i) → IsZero (P.X i)) (_hQbound : ∀ j : ℤ, (j < c ∨ d < j) → IsZero (Q.X j)) (T : CochainComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ) (_hT : T = CochainComplex.mapBifunctor P Q (@curriedTensor _ _ (Sheaf.monoidalCategory X.smallEtaleTopology (ModuleCat.{u + 1} A)))) : (∀ n : ℤ, exactFunctor _ _ (@tensorRight _ _ (Sheaf.monoidalCategory X.smallEtaleTopology (ModuleCat.{u + 1} A)) (T.X n))) ∧ (∀ n : ℤ, Scheme.IsConstructibleEtaleModuleSheaf (T.X n)) ∧ (∀ n : ℤ, (n < a + c ∨ b + d < n) → IsZero (T.X n)) ∧ (∀ n : ℤ, Scheme.IsConstructibleEtaleModuleSheaf ((_root_.DerivedCategory.homologyFunctor _ n).obj (_root_.DerivedCategory.Q.obj T))) ∧ (@CochainComplex.IsKFlatForTotalTensor _ _ _ (Sheaf.monoidalCategory X.smallEtaleTopology (ModuleCat.{u + 1} A)) _ _ T) ∧ Nonempty (_root_.DerivedCategory.Q.obj T ≅ ((derivedTensor (ModuleCat.{u + 1} A) X).obj (_root_.DerivedCategory.Q.obj P)).obj (_root_.DerivedCategory.Q.obj Q)) ∧ ∀ (N : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) (n : ℤ), (n < a + c ∨ b + d < n) → IsZero ((_root_.DerivedCategory.homologyFunctor _ n).obj (((derivedTensor (ModuleCat.{u + 1} A) X).obj (_root_.DerivedCategory.Q.obj T)).obj ((_root_.DerivedCategory.singleFunctor _ 0).obj N)))",
+  "branch": "sheaf-dag",
+  "by": "Q52",
+  "date": "2026-10-21",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-2fab6b0f7"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2fab6b0f7",
+  "group": "Q52",
+  "result": "fix",
+  "note": "H13 repair verified: all 14 dep records byte-identical to live; item gains only def-sfb-preserves-kflat-quasi-iso in stmt_deps (owner of IsKFlatForTotalTensor, whose node defines K-flat by the two-sided quasi-iso test); signature unchanged and verbatim = lean.statement; docstring adds the acyclic-test equivalence. Substance correct: finite A in Type (u+1) without Nontrivial, CompactSpace+IsLocallyNoetherian, exactFunctor-tensorRight flatness, recorded constructibility, strict IsZero term bounds, T pinned to mapBifunctor curriedTensor, all 7 conclusions incl. Nonempty iso with recorded Etale.derivedTensor and the arbitrary-N degree-0 Tor interval; edge cases A=0, X empty, a=b, non-flat N covered. FIX (mechanical): private plan import Sheaf.CategoryTheory.ModulePullbackTensorIso was quarantined 2026-10-21T09:43Z (rework.tsv; rework-hold.txt:4470 holds this item), which would fail the landing compile; dropped that line in fixes/FiniteFlatConstructibleTotalTensor.lean, compiled via nt_compile --json in 6.5 s with no errors or warnings. Advisory: the RingedKFlatSingleTensorComparison proof-dep import is now recordable but has no published olean, left for stage 3; release the item from rework-hold after landing."
  }
 }

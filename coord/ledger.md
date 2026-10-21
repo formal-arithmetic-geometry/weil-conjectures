@@ -22007,3 +22007,5 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:55 L: merged deliver/Q74/lem-trf-section-rees-noetherian-geometry (stage 2; reviewer FIX; parallel immutable checks)
 - 09:55 L: merged deliver/O4/lem-zl-bertini-finite-cover-irreducible-system (stage 2; reviewer PASS; parallel immutable checks)
 - 09:56 L: merged deliver/Q79/lem-pc-tate-residue-exact-sequence (reviewer PASS; first push; new nodes: 0)
+- 09:57 L: merged deliver/Q52/lem-sfb-finite-flat-constructible-total-tensor (stage 2; reviewer FIX; parallel immutable checks)
+- 09:57 L: merged deliver/NJ/lem-sfb-scalar-reduction-unit-triangle (stage 2; reviewer PASS; parallel immutable checks)
