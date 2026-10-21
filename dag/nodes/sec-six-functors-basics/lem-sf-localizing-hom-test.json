@@ -2,17 +2,86 @@
  "id": "lem-sf-localizing-hom-test",
  "kind": "statement",
  "title": "Shifted generators detect isomorphisms on their localizing closure",
- "statement": "Let $\\mathcal T$ be a locally small triangulated category with all small coproducts [def-weil-triangulated-category]. Fix a class $\\mathcal S$ of objects. Define $\\operatorname{Loc}(\\mathcal S)$ to be the intersection of the full replete triangulated subcategories containing $\\mathcal S$ and closed under all small coproducts. Let $\\alpha:B\\to G$ be a morphism with $B,G\\in\\operatorname{Loc}(\\mathcal S)$. If postcomposition with $\\alpha$ gives bijections $\\operatorname{Hom}(S[n],B)\\to\\operatorname{Hom}(S[n],G)$ for all $S\\in\\mathcal S$ and $n\\in\\mathbf Z$, then $\\alpha$ is an isomorphism. Neither compactness nor smallness of the class $\\mathcal S$ is assumed; coproducts and Hom sets use one fixed universe.",
+ "statement": "Let $\\mathcal T$ be a locally small triangulated category with all small coproducts [def-weil-triangulated-category]. Fix a class $\\mathcal S$ of objects. Define $\\operatorname{Loc}(\\mathcal S)$ to be the intersection of the full replete triangulated subcategories [def-weil-triangulated-subcategory] containing $\\mathcal S$ and closed under all small coproducts. Let $\\alpha:B\\to G$ be a morphism with $B,G\\in\\operatorname{Loc}(\\mathcal S)$. If postcomposition with $\\alpha$ gives bijections $\\operatorname{Hom}(S[n],B)\\to\\operatorname{Hom}(S[n],G)$ for all $S\\in\\mathcal S$ and $n\\in\\mathbf Z$, then $\\alpha$ is an isomorphism. Neither compactness nor smallness of the class $\\mathcal S$ is assumed; coproducts and Hom sets use one fixed universe.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/sk-prop-sf-rf-shriek-preservation.proof.md",
   "place": "Closed-adjoint uniqueness and final restriction paragraphs: localizing generator test"
  },
  "stmt_deps": [
-  "def-weil-triangulated-category"
+  "def-weil-triangulated-category",
+  "def-weil-triangulated-subcategory"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By TR1 choose a distinguished triangle $B\\xrightarrow{\\alpha}G\\xrightarrow{p}C\\xrightarrow{\\delta}B[1]$. In every full replete triangulated subcategory containing $\\mathcal S$ and closed under small coproducts, both $B$ and $G$ belong by the hypotheses. Rotating this triangle and using extension closure shows that $C$ belongs too. Thus $C\\in\\operatorname{Loc}(\\mathcal S)$.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "def-weil-triangulated-subcategory"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 0145, definition-triangulated-category (TR1, TR2), and 05QM, definition-triangulated-subcategory"
+   }
+  },
+  {
+   "text": "Fix $S\\in\\mathcal S$, $n\\in\\mathbf Z$, and put $W=S[n]$. The hypothesis also implies injectivity of $\\operatorname{Hom}(W,B[1])\\xrightarrow{\\alpha[1]\\circ-}\\operatorname{Hom}(W,G[1])$: applying the inverse shift identifies this map with postcomposition by $\\alpha$ on maps out of $S[n-1]$. For $f:W\\to C$, consecutive composites in the triangle give $\\alpha[1]\\delta f=0$, so injectivity gives $\\delta f=0$. Exactness at $\\operatorname{Hom}(W,C)$, obtained by applying clause (ii) of the cited Hom-exactness node to the rotated triangle, yields $g:W\\to G$ with $f=pg$. Surjectivity in the hypothesis gives $h:W\\to B$ with $g=\\alpha h$. Hence $f=p\\alpha h=0$. Therefore every map $S[n]\\to C$ vanishes.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "lem-weil-pbc-hom-into-triangle-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 0146, lemma-composition-zero, and 0149, lemma-representable-homological; the exact-sequence argument of lemma-pre-prepare-adjoint"
+   }
+  },
+  {
+   "text": "Let $\\mathcal Q$ be the replete class of all shifts $C[m]$ for $m\\in\\mathbf Z$. It is stable under shifts because $(C[m])[r]\\cong C[m+r]$. By the left-orthogonal lemma, the full subcategory $\\mathcal O={}^{\\perp}\\mathcal Q$ is replete and triangulated. It is also closed under every small coproduct: if $X_i\\in\\mathcal O$ and $u:\\coprod_iX_i\\to Q$ with $Q\\in\\mathcal Q$, then $u\\iota_i=0$ for each coproduct injection $\\iota_i$; uniqueness in the coproduct universal property forces $u=0$, also for the empty family. Thus $\\mathcal O$ is one of the localizing subcategories used in the defining intersection as soon as it contains $\\mathcal S$.",
+   "uses": [
+    "lem-sf-shift-stable-left-orthogonal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0FXC, lemma-orthogonal-triangulated; coproduct universal property (written out)"
+   }
+  },
+  {
+   "text": "For $S\\in\\mathcal S$ and $m\\in\\mathbf Z$, applying the inverse shift identifies $\\operatorname{Hom}(S,C[m])$ with $\\operatorname{Hom}(S[-m],C)$, which is zero by step 2. Isomorphisms to shifts of $C$ preserve this vanishing, so $\\mathcal S\\subseteq\\mathcal O$. By the defining intersection, $\\operatorname{Loc}(\\mathcal S)\\subseteq\\mathcal O$. Step 1 now gives $C\\in\\mathcal O$, and $C=C[0]$ up to the shift-zero isomorphism belongs to $\\mathcal Q$. Consequently $1_C=0$. Every map into $C$ equals $1_C$ composed with that map and is zero, and every map out of $C$ equals that map composed with $1_C$ and is zero. Since zero maps exist, $C$ is both initial and terminal, hence a zero object. This uses only individual objects of $\\mathcal S$, never a coproduct indexed by $\\mathcal S$.",
+   "uses": [
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0145, definition-triangulated-category (shift automorphism); definition of the localizing intersection and zero object"
+   }
+  },
+  {
+   "text": "Apply the zero-cone criterion to the distinguished triangle $B\\xrightarrow{\\alpha}G\\to C\\to B[1]$ of step 1. Its third vertex is a zero object by step 4, so its first arrow $\\alpha$ is an isomorphism.",
+   "uses": [
+    "lem-kun-distinguished-cone-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05QR, lemma-third-object-zero"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-triangulated-category",
+  "def-weil-triangulated-subcategory",
+  "lem-weil-pbc-hom-into-triangle-exact",
+  "lem-sf-shift-stable-left-orthogonal",
+  "lem-kun-distinguished-cone-zero"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/sk-prop-sf-rf-shriek-preservation.proof.md",
+  "place": "Localizing generator test expanded using Stacks 0145, 0146, 0149, 0FXC and 05QR; elementary coproduct-orthogonality argument as in the existing project LocalizingClosureGeneration.lean:61-92"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -48,10 +117,52 @@
    "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
    "date": "2026-10-21",
    "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "isIso.*localizing|localizing.*isIso|IsTriangulatedLeftOrthogonal|isTriangulatedLeftOrthogonal",
+   "results": "{\"t\": \"2026-10-21T03:29:31Z\", \"tool\": \"grep\", \"query\": \"isIso.*localizing|localizing.*isIso|IsTriangulatedLeftOrthogonal|isTriangulatedLeftOrthogonal\", \"sub\": \"CategoryTheory/Triangulated\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the item: these hits concern orthogonals or localization size, and do not state the full arbitrary-class localizing-closure isomorphism test"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Shifted generators detect isomorphisms in their localizing triangulated closure without compactness",
+   "results": "{\"t\": \"2026-10-21T03:29:31Z\", \"tool\": \"leansearch\", \"query\": \"Shifted generators detect isomorphisms in their localizing triangulated closure without compactness\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ObjectProperty.instIsClosedUnderIsomorphismsShift\", \"CategoryTheory.Triangulated.Localization.instAdditiveLocalization'ShiftFunctorInt\", \"CategoryTheory.Triangulated.Localization.instAdditiveLocalizationShiftFunctorInt\", \"CategoryTheory.ObjectProperty.instIsTriangulatedClosed₂IsoClosure\", \"CategoryTheory.Triangulated.Localization.isTriangulated\", \"CategoryTheory.Functor.isTriangulated_iff_of_iso\", \"CategoryTheory.ObjectProperty.instIsStableUnderShiftByIsoClosure\", \"CategoryTheory.Triangulated.Localization.pretriangulated\"], \"digest\": \"e69349d8fac88b7d\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the item: these hits concern orthogonals or localization size, and do not state the full arbitrary-class localizing-closure isomorphism test"
+  },
+  {
+   "tool": "loogle",
+   "query": "ObjectProperty.leftOrthogonal, ObjectProperty.IsTriangulated",
+   "results": "{\"t\": \"2026-10-21T03:29:31Z\", \"tool\": \"loogle\", \"query\": \"ObjectProperty.leftOrthogonal, ObjectProperty.IsTriangulated\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'ObjectProperty.leftOrthogonal'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the item: these hits concern orthogonals or localization size, and do not state the full arbitrary-class localizing-closure isomorphism test"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism between objects in the localizing closure of a class is an isomorphism if postcomposition is bijective on Hom from every integer shift of each generator",
+   "results": "{\"t\": \"2026-10-21T03:29:38Z\", \"tool\": \"leanfinder\", \"query\": \"A morphism between objects in the localizing closure of a class is an isomorphism if postcomposition is bijective on Hom from every integer shift of each generator\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Localization.hasSmallLocalizedShiftedHom_iff\", \"CategoryTheory.Localization.LeftBousfield.W_iff_isIso\", \"CategoryTheory.Localization.isoOfHom\", \"CategoryTheory.Localization.HasSmallLocalizedShiftedHom\", \"CategoryTheory.Localization.hasSmallLocalizedHom_of_hasSmallLocalizedShiftedHom₀\", \"CategoryTheory.Localization.hasSmallLocalizedShiftedHom_iff_target\", \"CategoryTheory.Localization.hasSmallLocalizedShiftedHom_iff_source\", \"CategoryTheory.Localization.instHasSmallLocalizedHomObjShiftFunctor_3\"], \"digest\": \"f01de86babb00de0\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the item: these hits concern orthogonals or localization size, and do not state the full arbitrary-class localizing-closure isomorphism test"
+  },
+  {
+   "tool": "grep",
+   "query": "leftOrthogonal|isZero₃_iff_isIso₁",
+   "results": "{\"t\": \"2026-10-21T03:29:48Z\", \"tool\": \"grep\", \"query\": \"leftOrthogonal|isZero₃_iff_isIso₁\", \"sub\": \"CategoryTheory/Triangulated\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean\", \"Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean\", \"Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean\", \"Mathlib/CategoryTheory/Triangulated/Orthogonal.lean\", \"Mathlib/CategoryTheory/Triangulated/Orthogonal.lean\", \"Mathlib/CategoryTheory/Triangulated/Orthogonal.lean\", \"Mathlib/CategoryTheory/Triangulated/Orthogonal.lean\", \"Mathlib/CategoryTheory/Triangulated/Orthogonal.lean\"], \"digest\": \"0ba510556cedf001\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the item: these hits concern orthogonals or localization size, and do not state the full arbitrary-class localizing-closure isomorphism test"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ObjectProperty.leftOrthogonal",
+   "results": "{\"t\": \"2026-10-21T03:29:49Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.ObjectProperty.leftOrthogonal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.ObjectProperty.leftOrthogonal\", \"CategoryTheory.ObjectProperty.instIsClosedUnderIsomorphismsLeftOrthogonal\", \"CategoryTheory.ObjectProperty.instContainsZeroLeftOrthogonalOfHasZeroObject\", \"CategoryTheory.ObjectProperty.le_leftOrthogonal_rightOrthogonal\", \"CategoryTheory.ObjectProperty.le_rightOrthogonal_leftOrthogonal\", \"CategoryTheory.ObjectProperty.leftOrthogonal_rightOrthogonal_leftOrthogonal\", \"CategoryTheory.ObjectProperty.rightOrthogonal_leftOrthogonal_rightOrthogonal\", \"CategoryTheory.ObjectProperty.antitone_leftOrthogonal\"], \"digest\": \"34a6590382b070dc\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the item: these hits concern orthogonals or localization size, and do not state the full arbitrary-class localizing-closure isomorphism test"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "sk-prop-sf-rf-shriek-preservation",
@@ -68,5 +179,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sf-localizing-hom-test",
+  "worker": "stage1",
+  "summary": "Proved the arbitrary-class generator test by cone vanishing, the shift-stable left orthogonal of the cone, and coproduct universality. Reused the existing Hom-exactness and zero-cone Mathlib leaves; created one Mathlib leaf for the left orthogonal. No compactness or essential-smallness hypothesis added.",
+  "blueprint": "Closed-adjoint uniqueness and final restriction paragraphs of sk-prop-sf-rf-shriek-preservation: expands the localizing generator test used in the parent split, without changing the unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q68-75c182458",
+  "group": "Q68",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q68-75c182458 (reviewer sub-agent of L); spot-checked: I read the delivery in full. The item's statement is the live base statement unchanged except for an added citation of def-weil-triangulated-subcategory. Its general form (an arbitrary class of objects, no compactness) is what parent step 5 of sk-prop-sf-rf-shriek-preservation needs, since the class there is D_ctf. Step 1 uses TR1, then a rotation, then extension closure and repleteness to show the cone C lies in Loc(S); this is correct. Step 2 shows Hom(S[n],C)=0: injectivity for α[1] comes from the hypothesis at n-1 through the shift equivalence, clause (i) is applied to the rotated triangles, and clause (ii) to G→C→B[1] at C, all as stated in lem-weil-pbc-hom-into-triangle-exact. Step 3 uses the new leaf for the left orthogonal of the iso-closure of {C[m]}, and its coproduct closure is written out from the universal property. Step 4 gives S ⊆ O, so Loc ⊆ O and C ∈ O ∩ Q, hence 1_C=0. Step 5 applies lem-kun-distinguished-cone-zero (Stacks 05QR). The new node lem-sf-shift-stable-left-orthogonal is true: it is the left-orthogonal half of Stacks 0FXC. It is a correct Mathlib leaf: I checked Triangulated/Orthogonal.lean:68 and ObjectProperty/Orthogonal.lean:47/58/66, and it needs only Pretriangulated, not TR4. Its form is OK (B1, B9, four search kinds). It does not restate a clause of the item or the parent. An rg duplicate search found no existing node stating the item or the leaf; lem-pc-cohomological-generator-detection needs compact set-indexed generators, and the lem-sc iso-locus lemmas concern a natural transformation of exact functors. Off-unit citations are Mathlib leaves, so no tool_uses are needed. Item not dropped, no repair note, live still unsplit, no SGA. Edge cases tested: S empty, S={Z} in D(Z), Q empty/zero/all. No fixes."
  }
 }
