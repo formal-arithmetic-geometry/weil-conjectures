@@ -23283,3 +23283,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:08 L: merged deliver/NJ/lem-sfb-norm-algcl-cohomology-topology-comparison (stage 2; reviewer PASS; parallel immutable checks)
 - 18:08 L: merged deliver/NK/lem-sfb-closed-test-derived-exchange-model (reviewer FIX; first push; new nodes: 0)
 - 18:09 L: returned deliver/NA/lem-sfb-norm-algcl-internal-hom-base-change (reviewer RETURN: D4/C6 (circular in substance), C5 (duplicate), D2. The new node lem-sfb-norm-algcl-closed-costalk-exchange (kappa: S_Z R)
+- 18:09 L: merged deliver/NP/lem-sfb-snc-tame-root-etale-extension (stage 2; reviewer PASS; parallel immutable checks)
