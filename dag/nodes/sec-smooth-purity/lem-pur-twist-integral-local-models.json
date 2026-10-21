@@ -1,0 +1,159 @@
+{
+ "id": "lem-pur-twist-integral-local-models",
+ "kind": "statement",
+ "title": "Scalar-extension local models of the integral root line",
+ "statement": "For the concrete Tate sheaves [def-pur-twist-sheaves], assume the completed Z_l root module has rank one. The integral tensor has a pro-etale unit trivialization. At every positive finite level its completed scalar reduction is the prescribed finite tensor, which has a unit trivialization and is nonzero if the base is nonempty. Local constancy, constructibility and finite stalks follow separately from the generic proved finite-line theorem. No derived assertion is included.\n\ntheorem purTwistIntegralLocalModels\n    (S : Scheme.{u}) (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    [∀ x : S, Invertible (l : S.residueField x)]\n    (hL : (purTwistZlModule S l).IsFiniteLocallyFreeOfRank 1) :\n    (∃ (I : Type (u + 1)) (U : I → S.ProEt)\n      (f : ∀ i, U i ⟶ ProEt.mk (𝟙 S)),\n      Presieve.ofArrows U f ∈ (ProEt.precoverage S).coverings _ ∧\n      ∀ i, Nonempty ((purTwistIntegralModule S l E).over (U i) ≅\n        (SheafOfModules.unit\n          (WeilConjectures.completedIntegralCoefficientSheafUnrestricted l E S)).over (U i))) ∧\n    ∀ n : ℕ,\n      Nonempty (SheafOfModules.changeOfRingsOfUniverses.{u, u + 1, u + 1, u + 1}\n        (WeilConjectures.completedIntegralCommRingProjectionUnrestricted l E S n)\n          (purTwistIntegralModule S l E) ≅ purTwistFiniteOne S l E n) ∧\n      (∃ (I : Type (u + 1)) (U : I → S.ProEt)\n        (f : ∀ i, U i ⟶ ProEt.mk (𝟙 S)),\n        Presieve.ofArrows U f ∈ (ProEt.precoverage S).coverings _ ∧\n        ∀ i, Nonempty ((purTwistFiniteOne S l E n).over (U i) ≅\n          (SheafOfModules.unit (WeilConjectures.integralCoefficientSheaf l E S n)).over (U i))) ∧\n      (Nonempty S → ¬IsZero (purTwistFiniteOne S l E n))",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Coefficient-twist blueprint proof steps 6--8 and 10; Stacks Tags 03EK, 03PK and 03RV."
+ },
+ "stmt_deps": [
+  "def-pur-twist-sheaves",
+  "def-weil-proetale-constructible-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "Use the proved scalar pushout comparison, then carry out ordinary scalar tensor and its finite local models.",
+   "uses": [
+    "lem-pur-twist-coefficient-comparison",
+    "lem-pur-twist-root-local-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The integral twist and its ordinary reductions. Put $L=M\\otimes_{(\\mathbf Z_\\ell)_S}(\\mathcal O_E)_S$. It has the $B=R\\otimes_{(\\mathbf Z_\\ell)_S}(\\mathcal O_E)_S$-module structure $(x\\otimes a)(m\\otimes b)=(xm)\\otimes ab$. The tensor relations show this is well defined. On the cover of step 3, $M=R$, so $L=B$; restriction commutes with the tensor because both are formed from the same local tensor sections and sheafification relations on the slice. Thus $L$ is a line over the completed coefficient sheaf. Apply the quotient clause of lem-weil-pbc-constant-completion-equivalence with $A=\\mathcal O_E$, $I=(\\varpi_E)$ (a Noetherian DVR by step 5's cited valuation theorem). It gives $B/\\varpi_E^nB=(A_{E,n})_S$. For any $B$-module sheaf $H$, both $H\\otimes_{(\\mathcal O_E)_S}(A_{E,n})_S$ and $H\\otimes_B(A_{E,n})_S$ canonically equal $H/\\varpi_E^nH$: the mutually inverse maps are $h\\otimes\\bar a\\mapsto\\overline{ah}$ and $\\bar h\\mapsto h\\otimes1$. Hence the two reductions of $L$ coincide with the stated $A_{E,n}(1)_S$, with their quotient projections and transition maps. Tensoring the local isomorphism $L=B$ with $(A_{E,n})_S$ proves rank one of each reduction.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-weil-proetale-weakly-etale-localization",
+    "def-weil-completed-integral-coefficients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Finite reductions have etale trivializations, not only the infinite pro-etale trivialization. For fixed $n$, choose $r$ with $er\\geq n$, so $\\ell^r A_{E,n}=0$. Tensor reassociation gives $A_{E,n}(1)_S=M\\otimes_{(\\mathbf Z_\\ell)_S}(A_{E,n})_S$. Since $\\ell^r$ annihilates the second factor, the maps $m\\otimes a\\mapsto\\bar m\\otimes a$ and $\\bar m\\otimes a\\mapsto m\\otimes a$ identify this with $(M/\\ell^rM)\\otimes_{(\\mathbf Z/\\ell^r)_S}(A_{E,n})_S$ (changing a lift by $\\ell^rm'$ gives zero). By step 4 this is $\\mu_{\\ell^r,S}\\otimes_{(\\mathbf Z/\\ell^r)_S}(A_{E,n})_S$. Apply the etale trivialization in step 1 to identify it with $(A_{E,n})$ on that etale cover. Thus it is locally constant with finite stalks: lem-weil-pbc-etale-cover-geometric-point-lift lifts any geometric point to one of these etale cover members, lem-weil-proetale-weakly-etale-localization identifies the corresponding slice site, and lem-weil-proetale-constant-sheaf-stalk identifies its stalk with the finite ring $A_{E,n}$, finite by lem-weil-valued-dvr-finite-quotients. The same three citations, applied to the step-1 isomorphisms $\\mu_{\\ell^r,S}|_{U_i}\\cong(\\mathbf Z/\\ell^r\\mathbf Z)_{U_i}$ on the jointly surjective etale cover of step 1, identify every geometric stalk of $\\mu_{\\ell^r,S}$ with the finite ring $\\mathbf Z/\\ell^r\\mathbf Z$; this is the finite-stalk assertion of clause 1. This argument supplies etale-local finite coefficients even when $S$ itself is not quasi-compact.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "lem-weil-pbc-etale-cover-geometric-point-lift",
+    "lem-weil-proetale-constant-sheaf-stalk",
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-weil-valued-dvr-finite-quotients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Constructibility and the empty-base correction. The reduction complex has only the cohomology sheaf $A_{E,n}(1)_S$ in degree zero. Step 8 makes it locally constant with finite module stalks, so the single stratum $S$ is a finite locally closed constructible partition witnessing constructibility in def-weil-finite-torsion-constructibility; its underlying whole subset is constructible even without any finiteness hypothesis on $S$: in def-weil-constructible-subset take the retrocompact opens $U=S$, $V=\\varnothing$ (their intersections with each quasi-compact open are that open and the empty set). The subset $S$ is also locally closed as the intersection of the whole open and whole closed subset. It belongs to $D^b_c(S,A_{E,n})$ with support contained in $[0,0]$ by def-weil-cohomological-support. If $S$ is nonempty, choose a geometric point, lift it to an etale trivializing member using lem-weil-pbc-etale-cover-geometric-point-lift, and use lem-weil-proetale-constant-sheaf-stalk to obtain the nonzero stalk $A_{E,n}$ ($1\\notin(\\varpi_E^n)$ in the local DVR). Thus the support is exactly $\\{0\\}$. If $S=\\varnothing$, every site object is empty and covered by the empty family; the sheaf axiom forces the only module sheaf to be zero. The support is then empty. This explicit counterexample repairs the imported unconditional equality with $\\{0\\}$.",
+   "uses": [
+    "def-weil-finite-torsion-constructibility",
+    "def-weil-cohomological-support",
+    "lem-weil-pbc-etale-cover-geometric-point-lift",
+    "lem-weil-proetale-constant-sheaf-stalk",
+    "def-weil-constructible-subset"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-twist-coefficient-comparison",
+  "lem-pur-twist-root-local-models",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-proetale-weakly-etale-localization",
+  "def-weil-completed-integral-coefficients",
+  "lem-weil-pbc-etale-cover-geometric-point-lift",
+  "lem-weil-proetale-constant-sheaf-stalk",
+  "lem-weil-valued-dvr-finite-quotients",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-cohomological-support",
+  "def-weil-constructible-subset"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Coefficient-twist blueprint proof steps 6--8 and 10; Stacks Tags 03EK, 03PK and 03RV.",
+  "group": "B7",
+  "date": "2026-10-21"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension of a Tate line along a finite p-adic integer coefficient extension has finite locally constant reductions",
+   "results": "BDeRhamPlus; BDeRham; WittVector.StandardOneDimIsocrystal; LocallyConstant.freeOfProfinite; Profinite.NobelingProof.Nobeling_aux; WittVector.instModuleFractionRingStandardOneDimIsocrystal; WittVector.mk_pow_fontaineTheta; PadicInt.lift_sub_val_mem_span",
+   "date": "2026-10-21",
+   "verdict": "Ordinary module scalar extension is present, but no match identifies these completed scalar actions, their finite local models and their geometric stalks."
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.extendScalars",
+   "results": "ModuleCat.extendScalars; ModuleCat.instIsLeftAdjointExtendScalars; ModuleCat.extendRestrictScalarsAdj; ModuleCat.extendScalarsId; ModuleCat.ExtendRestrictScalarsAdj.Counit.map; ModuleCat.ExtendRestrictScalarsAdj.Unit.map; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars",
+   "date": "2026-10-21",
+   "verdict": "Ordinary module scalar extension is present, but no match identifies these completed scalar actions, their finite local models and their geometric stalks."
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalars.*Iso|tensorProduct.*Iso",
+   "results": "Mathlib/FieldTheory/IntermediateField/Adjoin/Defs.lean; Mathlib/FieldTheory/IntermediateField/Adjoin/Defs.lean; Mathlib/FieldTheory/IntermediateField/Adjoin/Defs.lean; Mathlib/FieldTheory/IntermediateField/Adjoin/Defs.lean; Mathlib/FieldTheory/IntermediateField/Basic.lean; Mathlib/FieldTheory/IntermediateField/Basic.lean; Mathlib/FieldTheory/IntermediateField/Basic.lean; Mathlib/FieldTheory/IntermediateField/Basic.lean",
+   "date": "2026-10-21",
+   "verdict": "Ordinary module scalar extension is present, but no match identifies these completed scalar actions, their finite local models and their geometric stalks."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scalar extension of a Tate line along a finite p-adic integer coefficient extension has finite locally constant reductions",
+   "results": "LinearMap.extendScalarsOfIsLocalization_apply; LinearEquiv.extendScalarsOfIsLocalizationEquiv; Valuation.HasExtension.instIsScalarTowerInteger; LinearMap.extendScalarsOfIsLocalization.congr_simp; IntermediateField.extendScalars_top; PadicComplex.instIsScalarTowerPadicPadicAlgCl; Valuation.HasExtension.instIsScalarTower_valuationSubring'; Module.FinitePresentation.isLocalizedModule_mapExtendScalars",
+   "date": "2026-10-21",
+   "verdict": "Ordinary module scalar extension is present, but no match identifies these completed scalar actions, their finite local models and their geometric stalks."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurTwistSheafLocallyFree",
+  "date": "2026-10-21",
+  "group": "B7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-coefficient-twists-detailed",
+   "place": "Coefficient-twist blueprint proof steps 6--8 and 10; Stacks Tags 03EK, 03PK and 03RV.",
+   "via": [
+    "lem-pur-twist-sheaf-locally-free"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-admissible",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PurTwistIntegralLocalModels",
+  "file": "lean/Sheaf/Paper/PurTwistIntegralLocalModels.lean",
+  "declaration": "AlgebraicGeometry.Scheme.purTwistIntegralLocalModels",
+  "statement": "theorem purTwistIntegralLocalModels\n    (S : Scheme.{u}) (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    [∀ x : S, Invertible (l : S.residueField x)]\n    (hL : (purTwistZlModule S l).IsFiniteLocallyFreeOfRank 1) :\n    (∃ (I : Type (u + 1)) (U : I → S.ProEt)\n      (f : ∀ i, U i ⟶ ProEt.mk (𝟙 S)),\n      Presieve.ofArrows U f ∈ (ProEt.precoverage S).coverings _ ∧\n      ∀ i, Nonempty ((purTwistIntegralModule S l E).over (U i) ≅\n        (SheafOfModules.unit\n          (WeilConjectures.completedIntegralCoefficientSheafUnrestricted l E S)).over (U i))) ∧\n    ∀ n : ℕ,\n      Nonempty (SheafOfModules.changeOfRingsOfUniverses.{u, u + 1, u + 1, u + 1}\n        (WeilConjectures.completedIntegralCommRingProjectionUnrestricted l E S n)\n          (purTwistIntegralModule S l E) ≅ purTwistFiniteOne S l E n) ∧\n      (∃ (I : Type (u + 1)) (U : I → S.ProEt)\n        (f : ∀ i, U i ⟶ ProEt.mk (𝟙 S)),\n        Presieve.ofArrows U f ∈ (ProEt.precoverage S).coverings _ ∧\n        ∀ i, Nonempty ((purTwistFiniteOne S l E n).over (U i) ≅\n          (SheafOfModules.unit (WeilConjectures.integralCoefficientSheaf l E S n)).over (U i))) ∧\n      (Nonempty S → ¬IsZero (purTwistFiniteOne S l E n))",
+  "branch": "sheaf-dag",
+  "by": "B7",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-da373",
+  "group": "B7",
+  "result": "pass",
+  "landing": "20261021T020059-L-2582936",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-da373",
+  "group": "B7",
+  "result": "pass",
+  "landing": "20261021T020059-L-2582936",
+  "kind": "interface",
+  "note": "independent cc review: item statement byte-identical to live; moved defs in PurTwistSheaves identical to live up to blueprint markers; two sorry statements (root/integral local models) checked true against nodes; all 12 modules plus importer CoefficientTwistsDetailed and 2 transitive users compiled; #print axioms sorryAx only via the new sorry lemmas and existing sorry library statements"
+ }
+}

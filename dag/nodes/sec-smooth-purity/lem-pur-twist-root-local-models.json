@@ -1,0 +1,157 @@
+{
+ "id": "lem-pur-twist-root-local-models",
+ "kind": "statement",
+ "title": "Finite and compatible completed local bases of the root tower",
+ "statement": "For any scheme on which l is invertible, the concrete finite root modules [def-pur-twist-sheaves] admit etale unit trivializations and have finite geometric stalks. The completed root module admits a pro-etale unit trivialization, and its ordinary finite scalar reductions are the prescribed finite root modules. There is no coefficient field or derived-completeness assertion.\n\ntheorem purTwistRootLocalModels (S : Scheme.{u}) (l : ℕ) [Fact l.Prime]\n    [∀ x : S, Invertible (l : S.residueField x)] :\n    (∀ n : ℕ,\n      (∃ (I : Type (u + 1)) (U : I → S.ProEt)\n        (f : ∀ i : I, U i ⟶ ProEt.mk (𝟙 S)),\n        Presieve.ofArrows U f ∈ (ProEt.precoverage S).coverings _ ∧\n        (∀ i : I, Etale (U i).hom) ∧\n        ∀ i : I, Nonempty ((purTwistRootsModule S l n).over (U i) ≅\n          (SheafOfModules.unit (purTwistRing S (purTwistFiniteRing S l n))).over (U i))) ∧\n      (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S),\n        Finite ((proEtaleGeometricStalk (C := AddCommGrpCat.{u + 1}) s\n          (proEtaleRootsOfUnitySheaf S (l ^ (n + 1)))) : Type (u + 1)))) ∧\n    ((∃ (I : Type (u + 1)) (U : I → S.ProEt)\n        (f : ∀ i : I, U i ⟶ ProEt.mk (𝟙 S)),\n        Presieve.ofArrows U f ∈ (ProEt.precoverage S).coverings _ ∧\n        ∀ i : I, Nonempty ((purTwistZlModule S l).over (U i) ≅\n          (SheafOfModules.unit (purTwistRing S (purTwistZlCompletion S l))).over (U i))) ∧\n      ∀ n : ℕ, Nonempty\n        (SheafOfModules.changeOfRingsOfUniverses.{u, u + 1, u + 1, u + 1}\n          (purTwistZlProjection S l n)\n          (purTwistZlModule S l) ≅ purTwistRootsModule S l n))",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Coefficient-twist blueprint proof steps 1, 3 and 4; Stacks Tags 03PK and 03RV; Bhatt--Scholze Sections 6.5 and 6.8."
+ },
+ "stmt_deps": [
+  "def-pur-twist-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "Finite-level trivializations on the correct site. Work first over an affine open $T=\\operatorname{Spec}B\\subset S$, and put $N=\\ell^r$. Apply lem-asd-finite-etale-twist-line with $A=\\mathbf Z/N\\mathbf Z$ and twist exponent $1$. The tensor with the coefficient ring is the identity (the maps $z\\otimes a\\mapsto z^a$ and $z\\mapsto z\\otimes1$ are inverse), so its conclusion is an etale cover trivializing the ordinary etale roots-of-unity sheaf. To transfer this particular sheaf, rather than assume an identification of sites, put $P=\\operatorname{Spec}(B[X]/(X^N-1))$. On every $T$-scheme, maps to $P$ are precisely units $z$ with $z^N=1$, by the defining polynomial relation (the inverse of $z$ is $z^{N-1}$). Taking $g=1$ in lem-sbc-root-split-away-cover-etale makes its basic open all of $P$, so $P\\to T$ is etale. Thus $P$ is an object of the etale site. In the explicit left-Kan-extension formula of def-weil-pbc-site-comparison-morphism, a representative $a\\in h_P(U)$ at $(U,W\\to U)$ maps to the composite $W\\to U\\xrightarrow a P$. Its inverse sends $b:W\\to P$ to $\\mathrm{id}_P$ at $(P,b)$. These are inverse: the arrow $(U,W\\to U)\\to(P,b)$ is $a$, and its restriction sends $\\mathrm{id}_P$ to $a$. Consequently $\\nu_T^{-1}h_P=h_P$ on the pro-etale site, after sheafification; the right side is the roots-of-unity sheaf in def-pur-roots-of-unity-sheaf. Apply clause 1 of the current statement of lem-sf-comparison-pullback-exact with the finite discrete commutative ring $\\Lambda=\\mathbf Z/N\\mathbf Z$: it identifies $\\nu_T^{-1}\\Lambda_{T_{\\mathrm{et}}}$ with $\\Lambda_{T_{\\mathrm{proet}}}$ and the module inverse image with the underlying inverse image. For each etale trivializing member $U_i\\to T$, repeat the preceding representative calculation with $W\\to U_i$ and $P\\times_TU_i$: a root over $W$ is exactly a $U_i$-map $W\\to P\\times_TU_i$. The etale isomorphism on $U_i$ and its inverse therefore pull back to inverse module morphisms on $(U_i)_{\\mathrm{proet}}$, with the indicated constant coefficient ring. These are precisely the restrictions of the roots sheaf on $T_{\\mathrm{proet}}$, since both evaluate on $W$ as roots in $\\Gamma(W,\\mathcal O_W)^\\times$. Thus the same etale cover trivializes the pro-etale roots sheaf; no conclusion about integral twists or derived completeness is taken from this finite-coefficient comparison lemma. The power maps and scalar actions are unchanged because the displayed inverse is evaluation of the same root. Combining with the affine-open cover gives the first asserted rank-one local trivializations over $S$. No quasi-compactness or separation assumption on $S$ is used.",
+   "uses": [
+    "lem-asd-finite-etale-twist-line",
+    "lem-sbc-root-split-away-cover-etale",
+    "def-weil-pbc-site-comparison-morphism",
+    "lem-sf-comparison-pullback-exact",
+    "def-pur-roots-of-unity-sheaf",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose compatible primitive roots on one covering. Start with the etale cover in step 1 for $r=1$, with its generator $\\zeta_1$. Cover each member by affine objects $V$ weakly contractible for the full $S$-pro-etale site using lem-weil-pbc-proetale-affine-wcontractible-covering-family. This composite is a pro-etale covering of $S$. Fix such a $V$. Inductively, after choosing $\\zeta_r\\in\\mu_{\\ell^r}(V)$, apply its stated surjectivity of sections on $V$ to the epimorphism of step 2 to choose $\\zeta_{r+1}$ with $\\zeta_{r+1}^\\ell=\\zeta_r$. The base generator still trivializes $\\mu_\\ell|_V$. Each $\\zeta_r$ generates $\\mu_{\\ell^r}|_V$: locally trivialize both finite sheaves of the composite power map to $\\mu_\\ell$, and refine until the image of the source generator and $\\zeta_r$ have constant coefficients $b\\in\\mathbf Z/\\ell$ and $a\\in\\mathbf Z/\\ell^r$. This refinement exists by lem-pc-sites-sheafification-underlying-sets (for the constant rings) followed by lem-weil-pbc-site-sheafification-sections-local applied to their underlying constant set presheaves; these are generic-site statements, not their etale-only counterparts. The epimorphism onto $\\mu_\\ell$ forces $b\\neq0$ on every nonempty member: if $b=0$, the target constant section $1$ could not locally lift, as nonempty covering members have geometric points and the constant-sheaf stalk in lem-weil-proetale-constant-sheaf-stalk distinguishes $0$ and $1$. The equation $\\zeta_r^{\\ell^{r-1}}=\\zeta_1$ now says $b(a\\bmod\\ell)$ is the unit coefficient of $\\zeta_1$. Thus $a\\bmod\\ell\\neq0$, so $a$ is a unit modulo $\\ell^r$. Multiplication by its inverse proves that $a$ generates. The local inverse morphisms glue by the sheaf axiom. We obtain compatible isomorphisms $\\theta_r:(\\mathbf Z/\\ell^r)_V\\xrightarrow{\\sim}\\mu_{\\ell^r}|_V$, $a\\mapsto\\zeta_r^a$, with $\\theta_r\\circ\\mathrm{red}=(u\\mapsto u^\\ell)\\circ\\theta_{r+1}$. Empty members may simply be discarded.",
+   "uses": [
+    "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
+    "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+    "lem-weil-proetale-constant-sheaf-stalk",
+    "lem-weil-proetale-weakly-etale-localization",
+    "def-pur-roots-of-unity-sheaf",
+    "lem-pc-sites-sheafification-underlying-sets",
+    "lem-weil-pbc-site-sheafification-sections-local"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the inverse limit and identify its finite quotients. Write $R=\\widehat{\\mathbf Z}_{\\ell,S}$ and $M=\\varprojlim_r\\mu_{\\ell^r,S}$. Give $M$ its $R$-action coordinatewise: $(a_r)_r\\cdot(z_r)_r=(z_r^{a_r})_r$. Compatibility follows from reduction of $a_{r+1}$ modulo $\\ell^r$ and $z_{r+1}^\\ell=z_r$; the module identities hold coordinatewise. By def-pur-sheaf-inverse-limit, sections of both limits are compatible tuples. Restriction to $V$ is evaluation on the slice site, identified with $V_{\\mathrm{proet}}$ by lem-weil-proetale-weakly-etale-localization, and hence commutes with these sectionwise limits. Taking the compatible $\\theta_r$ of step 3 gives the $R|_V$-linear isomorphism $R|_V\\xrightarrow{\\sim}M|_V$, with its $r$-th projection exactly $\\theta_r\\circ p_r$. Apply the quotient clause of lem-weil-pbc-constant-completion-equivalence with $A=\\mathbf Z_\\ell$ and $I=(\\ell)$. It is Noetherian because it is a DVR (each ideal is principal), and its quotient $A/I^r$ is $\\mathbf Z/\\ell^r$ by def-weil-l-adic-numbers. Thus $R/\\ell^rR=(\\mathbf Z/\\ell^r)_S$. On each $V$, the projection induces $M/\\ell^rM\\cong\\mu_{\\ell^r}$. These are the restrictions of the global canonical projection-induced map, so they glue to the global isomorphism. The tensor with a quotient ring is its quotient module: $m\\otimes\\bar a\\mapsto\\overline{am}$ and $\\bar m\\mapsto m\\otimes1$ are inverse, first sectionwise and then after sheafification. Therefore $M\\otimes_R(\\mathbf Z/\\ell^r)_S\\cong\\mu_{\\ell^r,S}$, compatibly with the power/reduction transitions.",
+   "uses": [
+    "def-pur-sheaf-inverse-limit",
+    "def-pur-sheaf-tensor-product",
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "def-weil-l-adic-numbers"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-asd-finite-etale-twist-line",
+  "lem-sbc-root-split-away-cover-etale",
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-sf-comparison-pullback-exact",
+  "def-pur-roots-of-unity-sheaf",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
+  "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+  "lem-weil-proetale-constant-sheaf-stalk",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-pc-sites-sheafification-underlying-sets",
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "def-pur-sheaf-inverse-limit",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "def-weil-l-adic-numbers"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Coefficient-twist blueprint proof steps 1, 3 and 4; Stacks Tags 03PK and 03RV; Bhatt--Scholze Sections 6.5 and 6.8.",
+  "group": "B7",
+  "date": "2026-10-21"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Roots of unity of prime power order are etale locally constant cyclic modules and their inverse limit is a pro-etale locally free line",
+   "results": "cyclotomicCharacter.spec; cyclotomicCharacter.toFun_spec; cyclotomicCharacter.toZModPow_toFun; cyclotomicCharacter.toFun_apply; cyclotomicCharacter.toZModPow; cyclotomicCharacter; cyclotomicCharacter.toFun; modularCyclotomicCharacter.spec",
+   "date": "2026-10-21",
+   "verdict": "Cyclic-group and primitive-root algebra is present. No match supplies the canonical pro-etale module comparison and its compatible completed quotient models."
+  },
+  {
+   "tool": "loogle",
+   "query": "rootsOfUnity, IsPrimitiveRoot",
+   "results": "IsPrimitiveRoot.mem_rootsOfUnity; IsPrimitiveRoot.toRootsOfUnity; IsPrimitiveRoot.val_toRootsOfUnity_coe; IsPrimitiveRoot.zpowers_eq; isPrimitiveRoot_of_mem_rootsOfUnity; IsPrimitiveRoot.card_rootsOfUnity; card_rootsOfUnity_eq_iff_exists_isPrimitiveRoot; IsPrimitiveRoot.val_inv_toRootsOfUnity_coe",
+   "date": "2026-10-21",
+   "verdict": "Cyclic-group and primitive-root algebra is present. No match supplies the canonical pro-etale module comparison and its compatible completed quotient models."
+  },
+  {
+   "tool": "grep",
+   "query": "rootsOfUnity|isPrimitiveRoot",
+   "results": "Mathlib/NumberTheory/JacobiSum/Basic.lean; Mathlib/NumberTheory/JacobiSum/Basic.lean; Mathlib/NumberTheory/JacobiSum/Basic.lean; Mathlib/NumberTheory/JacobiSum/Basic.lean; Mathlib/NumberTheory/JacobiSum/Basic.lean; Mathlib/NumberTheory/DirichletCharacter/Orthogonality.lean; Mathlib/NumberTheory/DirichletCharacter/Orthogonality.lean; Mathlib/NumberTheory/DirichletCharacter/Orthogonality.lean",
+   "date": "2026-10-21",
+   "verdict": "Cyclic-group and primitive-root algebra is present. No match supplies the canonical pro-etale module comparison and its compatible completed quotient models."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Roots of unity of prime power order are etale locally constant cyclic modules and their inverse limit is a pro-etale locally free line",
+   "results": "HasEnoughRootsOfUnity.rootsOfUnity_isCyclic; rootsOfUnity.isCyclic; modularCyclotomicCharacter.toFun_unique'; LocallyConstant.freeOfProfinite; mem_rootsOfUnity_prime_pow_mul_iff; modularCyclotomicCharacter.toFun; cyclotomicCharacter.toFun_spec; ZMod.rootsOfUnity_eq_top",
+   "date": "2026-10-21",
+   "verdict": "Cyclic-group and primitive-root algebra is present. No match supplies the canonical pro-etale module comparison and its compatible completed quotient models."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurTwistSheafLocallyFree",
+  "date": "2026-10-21",
+  "group": "B7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-coefficient-twists-detailed",
+   "place": "Coefficient-twist blueprint proof steps 1, 3 and 4; Stacks Tags 03PK and 03RV; Bhatt--Scholze Sections 6.5 and 6.8.",
+   "via": [
+    "lem-pur-twist-sheaf-locally-free"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-admissible",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PurTwistRootLocalModels",
+  "file": "lean/Sheaf/Paper/PurTwistRootLocalModels.lean",
+  "declaration": "AlgebraicGeometry.Scheme.purTwistRootLocalModels",
+  "statement": "theorem purTwistRootLocalModels (S : Scheme.{u}) (l : ℕ) [Fact l.Prime]\n    [∀ x : S, Invertible (l : S.residueField x)] :\n    (∀ n : ℕ,\n      (∃ (I : Type (u + 1)) (U : I → S.ProEt)\n        (f : ∀ i : I, U i ⟶ ProEt.mk (𝟙 S)),\n        Presieve.ofArrows U f ∈ (ProEt.precoverage S).coverings _ ∧\n        (∀ i : I, Etale (U i).hom) ∧\n        ∀ i : I, Nonempty ((purTwistRootsModule S l n).over (U i) ≅\n          (SheafOfModules.unit (purTwistRing S (purTwistFiniteRing S l n))).over (U i))) ∧\n      (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S),\n        Finite ((proEtaleGeometricStalk (C := AddCommGrpCat.{u + 1}) s\n          (proEtaleRootsOfUnitySheaf S (l ^ (n + 1)))) : Type (u + 1)))) ∧\n    ((∃ (I : Type (u + 1)) (U : I → S.ProEt)\n        (f : ∀ i : I, U i ⟶ ProEt.mk (𝟙 S)),\n        Presieve.ofArrows U f ∈ (ProEt.precoverage S).coverings _ ∧\n        ∀ i : I, Nonempty ((purTwistZlModule S l).over (U i) ≅\n          (SheafOfModules.unit (purTwistRing S (purTwistZlCompletion S l))).over (U i))) ∧\n      ∀ n : ℕ, Nonempty\n        (SheafOfModules.changeOfRingsOfUniverses.{u, u + 1, u + 1, u + 1}\n          (purTwistZlProjection S l n)\n          (purTwistZlModule S l) ≅ purTwistRootsModule S l n))",
+  "branch": "sheaf-dag",
+  "by": "B7",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-da373",
+  "group": "B7",
+  "result": "pass",
+  "landing": "20261021T020059-L-2582936",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-da373",
+  "group": "B7",
+  "result": "pass",
+  "landing": "20261021T020059-L-2582936",
+  "kind": "interface",
+  "note": "independent cc review: item statement byte-identical to live; moved defs in PurTwistSheaves identical to live up to blueprint markers; two sorry statements (root/integral local models) checked true against nodes; all 12 modules plus importer CoefficientTwistsDetailed and 2 transitive users compiled; #print axioms sorryAx only via the new sorry lemmas and existing sorry library statements"
+ }
+}

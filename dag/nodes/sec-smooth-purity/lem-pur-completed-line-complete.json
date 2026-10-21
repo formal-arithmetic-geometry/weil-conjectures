@@ -1,0 +1,121 @@
+{
+ "id": "lem-pur-completed-line-complete",
+ "kind": "statement",
+ "title": "A locally free completed coefficient line is derived complete",
+ "statement": "Let L be any rank-one locally free module over the actual completed integral coefficient sheaf [def-weil-completed-integral-coefficients] of a scheme S. For every compatible finite-field datum, L[0] satisfies IsDerivedComplete [def-weil-derived-complete] with its actual augmentation. This concerns arbitrary completed coefficient lines and requires no root tower or finite local models.\n\ntheorem completedLine_complete (S : Scheme.{u}) (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (L : SheafOfModules.{u + 1}\n      (WeilConjectures.completedIntegralCoefficientSheafUnrestricted.{u, u} l E S))\n    (hL : L.IsFiniteLocallyFreeOfRank 1)\n    (D : WeilConjectures.FiniteFieldDatum.{d}) (hl : l ≠ D.p) :\n    letI := WeilConjectures.integralCoefficientAbLocallyBijective.{u, u} S\n    WeilConjectures.IsDerivedComplete.{d, u, u} l E S D hl\n      ((DerivedCategory.singleFunctor _ 0).obj L)",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Coefficient-twist blueprint proof step 11 via perfect duality; Bhatt--Scholze Sections 3.4 and 6.5; Stacks Tag 08JJ."
+ },
+ "stmt_deps": [
+  "def-weil-completed-integral-coefficients",
+  "def-weil-derived-complete"
+ ],
+ "proof": [
+  {
+   "text": "The line has a locally strictly perfect single complex: on a rank-one trivializing cover take the regular module in degree zero, with its Fin 1 product splitting, and zero terms with their Fin 0 splittings. Perfect duality identifies its derived single with its double dual. The existing constant coefficient theorem supplies completeness of the regular coefficient object. The existing ambient internal-Hom completeness theorem supplies completeness of the double dual. Naturality of quotient transitions and actual units transports its Roos triangle along the bidual isomorphism. The proved intrinsic/legacy comparison gives the exact finite-field completeness predicate.",
+   "uses": [
+    "lem-sfb-ringed-site-perfect-duality",
+    "lem-weil-constant-coefficient-objects-constructible",
+    "lem-pur-integral-operations-scalar-extension",
+    "lem-sf-derived-complete-legacy-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-ringed-site-perfect-duality",
+  "lem-weil-constant-coefficient-objects-constructible",
+  "lem-pur-integral-operations-scalar-extension",
+  "lem-sf-derived-complete-legacy-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Coefficient-twist blueprint proof step 11 via perfect duality; Bhatt--Scholze Sections 3.4 and 6.5; Stacks Tag 08JJ.",
+  "group": "B7",
+  "date": "2026-10-21"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A locally free rank one module over a completed constant ring is derived complete and its derived quotient is ordinary quotient",
+   "results": "IsPrecomplete; IsAdicComplete; AdicCompletion.module; AdicCompletion.of_apply; IsAdicComplete.toIsPrecomplete; instCommRingBDeRhamPlus; AdicCompletion; AdicCompletion.ofLinearEquiv",
+   "date": "2026-10-21",
+   "verdict": "Reuse the existing constant-coefficient completeness and ambient internal-Hom completeness theorems, together with proved perfect duality. For K-flatness reuse integralLineTensorComparison_representative, then the existing derived-reduction counit and single-complex comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.kFlat_single_obj_iff_flat",
+   "results": "loogle: unknown identifier 'CochainComplex.kFlat_single_obj_iff_flat'",
+   "date": "2026-10-21",
+   "verdict": "Reuse the existing constant-coefficient completeness and ambient internal-Hom completeness theorems, together with proved perfect duality. For K-flatness reuse integralLineTensorComparison_representative, then the existing derived-reduction counit and single-complex comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "kFlat_single_obj_iff_flat|isZero_of_isGE|isIntegralClosure",
+   "results": "Mathlib/NumberTheory/ClassNumber/Finite.lean; Mathlib/NumberTheory/ClassNumber/Finite.lean; Mathlib/NumberTheory/ClassNumber/Finite.lean; Mathlib/NumberTheory/ClassNumber/Finite.lean; Mathlib/NumberTheory/ClassNumber/Finite.lean; Mathlib/NumberTheory/RamificationInertia/Galois.lean; Mathlib/NumberTheory/RamificationInertia/Galois.lean; Mathlib/NumberTheory/RamificationInertia/Galois.lean",
+   "date": "2026-10-21",
+   "verdict": "Reuse the existing constant-coefficient completeness and ambient internal-Hom completeness theorems, together with proved perfect duality. For K-flatness reuse integralLineTensorComparison_representative, then the existing derived-reduction counit and single-complex comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A locally free rank one module over a completed constant ring is derived complete and its derived quotient is ordinary quotient",
+   "results": "AdicCompletion; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian; IsAdicComplete.mk; AdicCompletion.module; IsAdicComplete; IsAdicComplete.bot; IsAdicComplete.of_subsingleton; AdicCompletion.flat_of_isNoetherian",
+   "date": "2026-10-21",
+   "verdict": "Reuse the existing constant-coefficient completeness and ambient internal-Hom completeness theorems, together with proved perfect duality. For K-flatness reuse integralLineTensorComparison_representative, then the existing derived-reduction counit and single-complex comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurTwistSheafLocallyFree",
+  "date": "2026-10-21",
+  "group": "B7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-coefficient-twists-detailed",
+   "place": "Coefficient-twist blueprint proof step 11 via perfect duality; Bhatt--Scholze Sections 3.4 and 6.5; Stacks Tag 08JJ.",
+   "via": [
+    "lem-pur-twist-sheaf-locally-free"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-admissible",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedLineComplete",
+  "file": "lean/Sheaf/Paper/CompletedLineComplete.lean",
+  "declaration": "AlgebraicGeometry.Scheme.completedLine_complete",
+  "statement": "theorem completedLine_complete (S : Scheme.{u}) (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (L : SheafOfModules.{u + 1}\n      (WeilConjectures.completedIntegralCoefficientSheafUnrestricted.{u, u} l E S))\n    (hL : L.IsFiniteLocallyFreeOfRank 1)\n    (D : WeilConjectures.FiniteFieldDatum.{d}) (hl : l ≠ D.p) :\n    letI := WeilConjectures.integralCoefficientAbLocallyBijective.{u, u} S\n    WeilConjectures.IsDerivedComplete.{d, u, u} l E S D hl\n      ((DerivedCategory.singleFunctor _ 0).obj L)",
+  "branch": "sheaf-dag",
+  "by": "B7",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-da373",
+  "group": "B7",
+  "result": "pass",
+  "landing": "20261021T020059-L-2582936",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-da373",
+  "group": "B7",
+  "result": "pass",
+  "landing": "20261021T020059-L-2582936",
+  "kind": "interface",
+  "note": "independent cc review: item statement byte-identical to live; moved defs in PurTwistSheaves identical to live up to blueprint markers; two sorry statements (root/integral local models) checked true against nodes; all 12 modules plus importer CoefficientTwistsDetailed and 2 transitive users compiled; #print axioms sorryAx only via the new sorry lemmas and existing sorry library statements"
+ }
+}

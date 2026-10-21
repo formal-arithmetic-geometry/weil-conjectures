@@ -1,0 +1,108 @@
+{
+ "id": "lem-pur-sectionwise-pushout",
+ "kind": "statement",
+ "title": "A sectionwise pushout square of sheaves is a pushout square",
+ "statement": "For an arbitrary Grothendieck topology J on a category C and a category D, consider a commuting square of D-valued sheaves. If evaluation at every object of C makes it a pushout square in D, then it is a pushout in Sheaf J D.\n\ntheorem sheaf_isPushout_of_sectionwise\n    {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)\n    {D : Type w} [Category.{t} D]\n    {A B M N : Sheaf J D} (a : A ⟶ B) (b : A ⟶ M)\n    (c : B ⟶ N) (d : M ⟶ N) (h : a ≫ c = b ≫ d)\n    (hs : ∀ U : Cᵒᵖ, IsPushout (a.hom.app U) (b.hom.app U)\n      (c.hom.app U) (d.hom.app U)) : IsPushout a b c d",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Coefficient-twist blueprint proof step 6; pointwise colimits and full sheaf inclusion; Stacks Tag 00W1."
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "The sheaf-to-presheaf inclusion reflects colimits. The evaluation functors jointly reflect colimits in the presheaf category. Identify each evaluated square cocone with the supplied pushout cocone, obtaining its universal property; then reflect it back to sheaves.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Coefficient-twist blueprint proof step 6; pointwise colimits and full sheaf inclusion; Stacks Tag 00W1.",
+  "group": "B7",
+  "date": "2026-10-21"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A pointwise pushout square of sheaves is a pushout square of sheaves",
+   "results": "CategoryTheory.GrothendieckTopology.MayerVietorisSquare.isPushout; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.isPushoutAddCommGrpFreeSheaf; CategoryTheory.SheafOfTypes.adhesive; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition; CategoryTheory.instAdhesiveSheafOfHasPullbacksOfHasPushoutsOfHasSheafify; CategoryTheory.GrothendieckTopology.MayerVietorisSquare; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.mk'; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.sheafCondition_of_sheaf",
+   "date": "2026-10-21",
+   "verdict": "Use the Mathlib colimit reflection and IsPushout APIs. These prove the helper and the coefficient comparison; no new pushout assumption is introduced."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsPushout, _ ≅ _",
+   "results": "CategoryTheory.IsPushout.isoPushout; CategoryTheory.IsPushout.isoIsPushout; CategoryTheory.IsPushout.of_iso_pushout; CategoryTheory.IsPushout.of_iso; CategoryTheory.IsPushout.of_iso'",
+   "date": "2026-10-21",
+   "verdict": "Use the Mathlib colimit reflection and IsPushout APIs. These prove the helper and the coefficient comparison; no new pushout assumption is introduced."
+  },
+  {
+   "tool": "grep",
+   "query": "evaluationJointlyReflectsColimits|isColimitOfReflects|isPushout_tensorProduct",
+   "results": "Mathlib/AlgebraicTopology/SimplicialSet/SubcomplexColimits.lean; Mathlib/AlgebraicTopology/SimplicialSet/SubcomplexColimits.lean; Mathlib/AlgebraicTopology/SimplicialSet/Skeleton.lean; Mathlib/AlgebraicTopology/SimplicialSet/SubcomplexEvaluation.lean; Mathlib/AlgebraicTopology/SimplicialSet/PiZero.lean; Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/RelativeCellComplex.lean; Mathlib/Algebra/Category/Grp/FilteredColimits.lean; Mathlib/Algebra/Category/Grp/FilteredColimits.lean",
+   "date": "2026-10-21",
+   "verdict": "Use the Mathlib colimit reflection and IsPushout APIs. These prove the helper and the coefficient comparison; no new pushout assumption is introduced."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A pointwise pushout square of sheaves is a pushout square of sheaves",
+   "results": "CategoryTheory.Limits.pushoutObjIso; CategoryTheory.Square.IsPushout; CategoryTheory.IsPushout.mk; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.isPushout; CategoryTheory.IsPushout.isColimit; CategoryTheory.Square.IsPushout.mk; CategoryTheory.Square.IsPushout.isColimit; CategoryTheory.IsPushout.of_isColimit'",
+   "date": "2026-10-21",
+   "verdict": "Use the Mathlib colimit reflection and IsPushout APIs. These prove the helper and the coefficient comparison; no new pushout assumption is introduced."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurTwistSheafLocallyFree",
+  "date": "2026-10-21",
+  "group": "B7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-coefficient-twists-detailed",
+   "place": "Coefficient-twist blueprint proof step 6; pointwise colimits and full sheaf inclusion; Stacks Tag 00W1.",
+   "via": [
+    "lem-pur-twist-sheaf-locally-free"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-admissible",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SectionwisePushout",
+  "file": "lean/Sheaf/CategoryTheory/SectionwisePushout.lean",
+  "declaration": "CategoryTheory.sheaf_isPushout_of_sectionwise",
+  "statement": "theorem sheaf_isPushout_of_sectionwise\n    {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)\n    {D : Type w} [Category.{t} D]\n    {A B M N : Sheaf J D} (a : A ⟶ B) (b : A ⟶ M)\n    (c : B ⟶ N) (d : M ⟶ N) (h : a ≫ c = b ≫ d)\n    (hs : ∀ U : Cᵒᵖ, IsPushout (a.hom.app U) (b.hom.app U)\n      (c.hom.app U) (d.hom.app U)) : IsPushout a b c d",
+  "branch": "sheaf-dag",
+  "by": "B7",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-da373",
+  "group": "B7",
+  "result": "pass",
+  "landing": "20261021T020059-L-2582936",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-da373",
+  "group": "B7",
+  "result": "pass",
+  "landing": "20261021T020059-L-2582936",
+  "kind": "interface",
+  "note": "independent cc review: item statement byte-identical to live; moved defs in PurTwistSheaves identical to live up to blueprint markers; two sorry statements (root/integral local models) checked true against nodes; all 12 modules plus importer CoefficientTwistsDetailed and 2 transitive users compiled; #print axioms sorryAx only via the new sorry lemmas and existing sorry library statements"
+ }
+}

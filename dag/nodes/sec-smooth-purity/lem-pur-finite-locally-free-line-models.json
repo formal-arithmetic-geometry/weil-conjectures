@@ -1,0 +1,117 @@
+{
+ "id": "lem-pur-finite-locally-free-line-models",
+ "kind": "statement",
+ "title": "Finite local models for a locally free coefficient line",
+ "statement": "A rank-one locally free module over a finite constant commutative coefficient ring on any scheme is locally constant and constructible, with finite geometric stalks. The zero ring and empty scheme are allowed.\n\ntheorem finiteLocallyFreeLine_models (S : Scheme.{u}) (A : Type u)\n    [CommRing A] [Finite A]\n    (L : proEtaleRingModules S (proEtaleConstantRing S A))\n    (hL : L.IsFiniteLocallyFreeOfRank 1) :\n    IsLocallyConstantProEtaleModuleSheaf S A L ∧\n      IsConstructibleProEtaleModuleSheaf S A L ∧\n      ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S),\n        Finite (proEtaleGeometricModuleStalk s (proEtaleConstantRing S A) L)",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Coefficient-twist blueprint proof steps 1 and 8; Stacks Tag 03RV."
+ },
+ "stmt_deps": [
+  "def-weil-proetale-constructible-sheaf",
+  "def-weil-proetale-geometric-stalk"
+ ],
+ "proof": [
+  {
+   "text": "The proved line_finite_models helper in FiniteLineTensorConditions gives fixed-ring finite local models. The proved finiteLocal_iff helper gives intrinsic local constancy and finite stalks. The trivial stratification gives fixed-ring constructibility, transported by proEtaleModuleRestriction_constructible_iff. All these helper proofs are complete.",
+   "uses": [
+    "lem-weil-finite-line-tensor-conditions",
+    "lem-weil-pbc-proetale-constant-module-constructibility"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-finite-line-tensor-conditions",
+  "lem-weil-pbc-proetale-constant-module-constructibility"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Coefficient-twist blueprint proof steps 1 and 8; Stacks Tag 03RV.",
+  "group": "B7",
+  "date": "2026-10-21"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A constructible sheaf in degree zero has constructible homology supported in degree zero",
+   "results": "DerivedCategory.isGE_iff; DerivedCategory.isLE_iff; DerivedCategory.isZero_of_isGE; DerivedCategory.isZero_of_isLE; DerivedCategory.IsGE; HomologicalComplex.isSupported_iff_of_quasiIso; DerivedCategory.instIsGEObjSingleFunctor; DerivedCategory.isGE_Q_obj_iff",
+   "date": "2026-10-21",
+   "verdict": "Use the derived single-functor homology isomorphism and vanishing outside degree zero. The constructibility and stalk transports are proved here."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.singleFunctorCompHomologyFunctorIso",
+   "results": "DerivedCategory.singleFunctorCompHomologyFunctorIso",
+   "date": "2026-10-21",
+   "verdict": "Use the derived single-functor homology isomorphism and vanishing outside degree zero. The constructibility and stalk transports are proved here."
+  },
+  {
+   "tool": "grep",
+   "query": "isZero_single_obj_X|singleFunctorCompHomologyFunctorIso",
+   "results": "Mathlib/Algebra/Homology/HomotopyCategory/HomComplexSingle.lean; Mathlib/Algebra/Homology/HomotopyCategory/HomComplexSingle.lean; Mathlib/Algebra/Homology/Factorizations/CM5a.lean; Mathlib/Algebra/Homology/Factorizations/CM5a.lean; Mathlib/Algebra/Homology/Factorizations/CM5a.lean; Mathlib/Algebra/Homology/Factorizations/CM5a.lean; Mathlib/Algebra/Homology/Single.lean; Mathlib/Algebra/Homology/Single.lean",
+   "date": "2026-10-21",
+   "verdict": "Use the derived single-functor homology isomorphism and vanishing outside degree zero. The constructibility and stalk transports are proved here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A constructible sheaf in degree zero has constructible homology supported in degree zero",
+   "results": "DerivedCategory.isZero_of_isGE; ChainComplex.alternatingConstHomologyZero; HomologicalComplex.IsStrictlySupportedOutside.casesOn; HomologicalComplex.isZero_iff_isStrictlySupported_and_isStrictlySupportedOutside; HomologicalComplex.IsStrictlySupported.isZero; CochainComplex.HomComplex.Cochain.ofHom_zero; AlgebraicGeometry.StructureSheaf.const_zero; groupHomology.H0",
+   "date": "2026-10-21",
+   "verdict": "Use the derived single-functor homology isomorphism and vanishing outside degree zero. The constructibility and stalk transports are proved here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurTwistSheafLocallyFree",
+  "date": "2026-10-21",
+  "group": "B7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-coefficient-twists-detailed",
+   "place": "Coefficient-twist blueprint proof steps 1 and 8; Stacks Tag 03RV.",
+   "via": [
+    "lem-pur-twist-sheaf-locally-free"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-admissible",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteLocallyFreeLineModels",
+  "file": "lean/Sheaf/Paper/FiniteLocallyFreeLineModels.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finiteLocallyFreeLine_models",
+  "statement": "theorem finiteLocallyFreeLine_models (S : Scheme.{u}) (A : Type u)\n    [CommRing A] [Finite A]\n    (L : proEtaleRingModules S (proEtaleConstantRing S A))\n    (hL : L.IsFiniteLocallyFreeOfRank 1) :\n    IsLocallyConstantProEtaleModuleSheaf S A L ∧\n      IsConstructibleProEtaleModuleSheaf S A L ∧\n      ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S),\n        Finite (proEtaleGeometricModuleStalk s (proEtaleConstantRing S A) L)",
+  "branch": "sheaf-dag",
+  "by": "B7",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-da373",
+  "group": "B7",
+  "result": "pass",
+  "landing": "20261021T020059-L-2582936",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-da373",
+  "group": "B7",
+  "result": "pass",
+  "landing": "20261021T020059-L-2582936",
+  "kind": "interface",
+  "note": "independent cc review: item statement byte-identical to live; moved defs in PurTwistSheaves identical to live up to blueprint markers; two sorry statements (root/integral local models) checked true against nodes; all 12 modules plus importer CoefficientTwistsDetailed and 2 transitive users compiled; #print axioms sorryAx only via the new sorry lemmas and existing sorry library statements"
+ }
+}

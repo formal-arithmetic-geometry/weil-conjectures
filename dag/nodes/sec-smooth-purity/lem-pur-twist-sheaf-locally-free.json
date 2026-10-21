@@ -31,234 +31,58 @@
  ],
  "proof": [
   {
-   "text": "Use the unchanged canonical coefficient-ring constructions now grouped in def-pur-twist-coefficient-rings. The public import reexports all original names, universes and definitions.",
+   "text": "Use the unchanged concrete sheaf constructions, publicly reexported from their acyclic construction module.",
    "uses": [
-    "def-pur-twist-coefficient-rings"
+    "def-pur-twist-sheaves"
    ],
    "elementary": true
   },
   {
-   "text": "Finite-level trivializations on the correct site. Work first over an affine open $T=\\operatorname{Spec}B\\subset S$, and put $N=\\ell^r$. Apply lem-asd-finite-etale-twist-line with $A=\\mathbf Z/N\\mathbf Z$ and twist exponent $1$. The tensor with the coefficient ring is the identity (the maps $z\\otimes a\\mapsto z^a$ and $z\\mapsto z\\otimes1$ are inverse), so its conclusion is an etale cover trivializing the ordinary etale roots-of-unity sheaf. To transfer this particular sheaf, rather than assume an identification of sites, put $P=\\operatorname{Spec}(B[X]/(X^N-1))$. On every $T$-scheme, maps to $P$ are precisely units $z$ with $z^N=1$, by the defining polynomial relation (the inverse of $z$ is $z^{N-1}$). Taking $g=1$ in lem-sbc-root-split-away-cover-etale makes its basic open all of $P$, so $P\\to T$ is etale. Thus $P$ is an object of the etale site. In the explicit left-Kan-extension formula of def-weil-pbc-site-comparison-morphism, a representative $a\\in h_P(U)$ at $(U,W\\to U)$ maps to the composite $W\\to U\\xrightarrow a P$. Its inverse sends $b:W\\to P$ to $\\mathrm{id}_P$ at $(P,b)$. These are inverse: the arrow $(U,W\\to U)\\to(P,b)$ is $a$, and its restriction sends $\\mathrm{id}_P$ to $a$. Consequently $\\nu_T^{-1}h_P=h_P$ on the pro-etale site, after sheafification; the right side is the roots-of-unity sheaf in def-pur-roots-of-unity-sheaf. Apply clause 1 of the current statement of lem-sf-comparison-pullback-exact with the finite discrete commutative ring $\\Lambda=\\mathbf Z/N\\mathbf Z$: it identifies $\\nu_T^{-1}\\Lambda_{T_{\\mathrm{et}}}$ with $\\Lambda_{T_{\\mathrm{proet}}}$ and the module inverse image with the underlying inverse image. For each etale trivializing member $U_i\\to T$, repeat the preceding representative calculation with $W\\to U_i$ and $P\\times_TU_i$: a root over $W$ is exactly a $U_i$-map $W\\to P\\times_TU_i$. The etale isomorphism on $U_i$ and its inverse therefore pull back to inverse module morphisms on $(U_i)_{\\mathrm{proet}}$, with the indicated constant coefficient ring. These are precisely the restrictions of the roots sheaf on $T_{\\mathrm{proet}}$, since both evaluate on $W$ as roots in $\\Gamma(W,\\mathcal O_W)^\\times$. Thus the same etale cover trivializes the pro-etale roots sheaf; no conclusion about integral twists or derived completeness is taken from this finite-coefficient comparison lemma. The power maps and scalar actions are unchanged because the displayed inverse is evaluation of the same root. Combining with the affine-open cover gives the first asserted rank-one local trivializations over $S$. No quasi-compactness or separation assumption on $S$ is used.",
+   "text": "Obtain finite and compatible completed root local models. Their covering presieves are covering sieves of the terminal site object, so the unit-over criterion gives rank one. The Kummer local-lifting theorem proves the actual power transitions epi.",
    "uses": [
-    "lem-asd-finite-etale-twist-line",
-    "lem-sbc-root-split-away-cover-etale",
-    "def-weil-pbc-site-comparison-morphism",
-    "lem-sf-comparison-pullback-exact",
-    "def-pur-roots-of-unity-sheaf",
-    "def-pur-sheaf-tensor-product"
+    "lem-pur-twist-root-local-models",
+    "lem-pur-twist-root-transitions",
+    "lem-pur-finite-locally-free-line-models"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Section 03PK, label section-kummer; groupoids.tex Example 040M, label example-roots-of-unity; proetale.tex Tag 0GLZ, label lemma-describe-pullback-from-etale. The representable left-Kan-extension computation is written here."
-   }
+   "elementary": false
   },
   {
-   "text": "Surjectivity of the transition maps. Let $W\\to S$ be any object of the pro-etale site and let $u\\in\\mu_{\\ell^r}(W)$. The integer $\\ell$ is invertible on $W$. Apply lem-amb-kummer-any-base with $n=\\ell$ on the scheme $W$, not merely on $S$: its last exactness assertion supplies an etale covering of $W$ on which $u=v^\\ell$ for a unit $v$. On this covering $v^{\\ell^{r+1}}=u^{\\ell^r}=1$, so $v$ is a section of $\\mu_{\\ell^{r+1}}$. The etale covering is a covering in the pro-etale site (the comparison inclusion in def-weil-pbc-site-comparison-morphism is continuous). The local-surjectivity criterion in lem-weil-pbc-site-sheaf-sets-epi-locally-surjective therefore proves that the power transition is an epimorphism of underlying sheaves of sets, hence a surjective morphism of abelian sheaves. This also proves local surjectivity for the composite power map $\\mu_{\\ell^r}\\to\\mu_\\ell$ by iterating the covers.",
+   "text": "The finite coefficient integer basis and normalized coefficient pushout comparison are proved independently. Integral and finite local models give rank one by the same covering criterion.",
    "uses": [
-    "lem-amb-kummer-any-base",
-    "def-pur-roots-of-unity-sheaf",
-    "def-weil-pbc-site-comparison-morphism",
-    "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective"
+    "lem-pur-twist-integral-basis",
+    "lem-pur-twist-coefficient-comparison",
+    "lem-pur-twist-integral-local-models",
+    "lem-pur-finite-locally-free-line-models"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 03PL, label lemma-kummer-sequence; sites.tex Tags 00WM and 00WN, labels definition-sheaves-injective-surjective and lemma-mono-epi-sheaves."
-   }
+   "elementary": false
   },
   {
-   "text": "Choose compatible primitive roots on one covering. Start with the etale cover in step 1 for $r=1$, with its generator $\\zeta_1$. Cover each member by affine objects $V$ weakly contractible for the full $S$-pro-etale site using lem-weil-pbc-proetale-affine-wcontractible-covering-family. This composite is a pro-etale covering of $S$. Fix such a $V$. Inductively, after choosing $\\zeta_r\\in\\mu_{\\ell^r}(V)$, apply its stated surjectivity of sections on $V$ to the epimorphism of step 2 to choose $\\zeta_{r+1}$ with $\\zeta_{r+1}^\\ell=\\zeta_r$. The base generator still trivializes $\\mu_\\ell|_V$. Each $\\zeta_r$ generates $\\mu_{\\ell^r}|_V$: locally trivialize both finite sheaves of the composite power map to $\\mu_\\ell$, and refine until the image of the source generator and $\\zeta_r$ have constant coefficients $b\\in\\mathbf Z/\\ell$ and $a\\in\\mathbf Z/\\ell^r$. This refinement exists by lem-pc-sites-sheafification-underlying-sets (for the constant rings) followed by lem-weil-pbc-site-sheafification-sections-local applied to their underlying constant set presheaves; these are generic-site statements, not their etale-only counterparts. The epimorphism onto $\\mu_\\ell$ forces $b\\neq0$ on every nonempty member: if $b=0$, the target constant section $1$ could not locally lift, as nonempty covering members have geometric points and the constant-sheaf stalk in lem-weil-proetale-constant-sheaf-stalk distinguishes $0$ and $1$. The equation $\\zeta_r^{\\ell^{r-1}}=\\zeta_1$ now says $b(a\\bmod\\ell)$ is the unit coefficient of $\\zeta_1$. Thus $a\\bmod\\ell\\neq0$, so $a$ is a unit modulo $\\ell^r$. Multiplication by its inverse proves that $a$ generates. The local inverse morphisms glue by the sheaf axiom. We obtain compatible isomorphisms $\\theta_r:(\\mathbf Z/\\ell^r)_V\\xrightarrow{\\sim}\\mu_{\\ell^r}|_V$, $a\\mapsto\\zeta_r^a$, with $\\theta_r\\circ\\mathrm{red}=(u\\mapsto u^\\ell)\\circ\\theta_{r+1}$. Empty members may simply be discarded.",
+   "text": "Apply the generic completed-line reduction theorem and compose the ordinary scalar-reduction isomorphism with the finite-model isomorphism. Apply constructible_single_support to the actual finite module and to every derived reduction. Nonzero finite models on a nonempty scheme give support exactly {0}. The common interval is [0,0]. Combine this with the supplied actual augmented derived completeness to obtain bounded integral constructibility.",
    "uses": [
-    "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
-    "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
-    "lem-weil-proetale-constant-sheaf-stalk",
-    "lem-weil-proetale-weakly-etale-localization",
-    "def-pur-roots-of-unity-sheaf",
-    "lem-pc-sites-sheafification-underlying-sets",
-    "lem-weil-pbc-site-sheafification-sections-local"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tags 0990 and 0F4P, labels lemma-proetale-enough-w-contractible and lemma-weakly-contractible-cover. The induction and primitive-generator calculation are written here."
-   }
-  },
-  {
-   "text": "Take the inverse limit and identify its finite quotients. Write $R=\\widehat{\\mathbf Z}_{\\ell,S}$ and $M=\\varprojlim_r\\mu_{\\ell^r,S}$. Give $M$ its $R$-action coordinatewise: $(a_r)_r\\cdot(z_r)_r=(z_r^{a_r})_r$. Compatibility follows from reduction of $a_{r+1}$ modulo $\\ell^r$ and $z_{r+1}^\\ell=z_r$; the module identities hold coordinatewise. By def-pur-sheaf-inverse-limit, sections of both limits are compatible tuples. Restriction to $V$ is evaluation on the slice site, identified with $V_{\\mathrm{proet}}$ by lem-weil-proetale-weakly-etale-localization, and hence commutes with these sectionwise limits. Taking the compatible $\\theta_r$ of step 3 gives the $R|_V$-linear isomorphism $R|_V\\xrightarrow{\\sim}M|_V$, with its $r$-th projection exactly $\\theta_r\\circ p_r$. Apply the quotient clause of lem-weil-pbc-constant-completion-equivalence with $A=\\mathbf Z_\\ell$ and $I=(\\ell)$. It is Noetherian because it is a DVR (each ideal is principal), and its quotient $A/I^r$ is $\\mathbf Z/\\ell^r$ by def-weil-l-adic-numbers. Thus $R/\\ell^rR=(\\mathbf Z/\\ell^r)_S$. On each $V$, the projection induces $M/\\ell^rM\\cong\\mu_{\\ell^r}$. These are the restrictions of the global canonical projection-induced map, so they glue to the global isomorphism. The tensor with a quotient ring is its quotient module: $m\\otimes\\bar a\\mapsto\\overline{am}$ and $\\bar m\\mapsto m\\otimes1$ are inverse, first sectionwise and then after sheafification. Therefore $M\\otimes_R(\\mathbf Z/\\ell^r)_S\\cong\\mu_{\\ell^r,S}$, compatibly with the power/reduction transitions.",
-   "uses": [
-    "def-pur-sheaf-inverse-limit",
-    "def-pur-sheaf-tensor-product",
-    "lem-weil-proetale-weakly-etale-localization",
-    "lem-weil-pbc-constant-completion-equivalence",
-    "def-weil-l-adic-numbers"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 093M, label lemma-completion-flat (quotients of completed constant rings); the coordinate action and compatible-tuple calculation are written here."
-   }
-  },
-  {
-   "text": "Finite freeness of $\\mathcal O_E$ over $\\mathbf Z_\\ell$. Apply lem-weil-l-adic-extension-integers-dvr to the finite extension and its extended absolute value. Since $|\\ell|_E=\\ell^{-1}<1$, its valuation decomposition writes $\\ell=u\\varpi_E^e$ with $u$ a unit and $e\\geq1$. By lem-weil-valued-dvr-finite-quotients, $\\mathcal O_E/\\ell\\mathcal O_E=\\mathcal O_E/\\varpi_E^e$ is finite; choose finitely many lifts $b_1,\\ldots,b_t$ generating it over $\\mathbf F_\\ell$. For each $x\\in\\mathcal O_E$, successive residue expansions give $x=\\sum_i(\\sum_{k<m}\\ell^kc_{i,k})b_i+\\ell^m x_m$, with $c_{i,k}\\in\\{0,\\ldots,\\ell-1\\}$ and $x_m\\in\\mathcal O_E$. The digit series converge in $\\mathbf Z_\\ell$: it is a closed unit ball in the complete $\\mathbf Q_\\ell$ of def-weil-l-adic-numbers. Meanwhile $|\\ell^mx_m|_E\\leq\\ell^{-m}$ tends to zero. Taking limits in this finite sum proves $x=\\sum_i a_ib_i$ with $a_i\\in\\mathbf Z_\\ell$. Thus $\\mathcal O_E$ is finitely generated. It is torsion-free as a subring of the field $E$, and $\\mathbf Z_\\ell$ is a DVR, so lem-sc-dvr-fg-torsionfree-free gives a finite basis, say of size $d$. Every element of $E$ becomes integral after multiplying by a sufficiently large power of $\\ell$, since its absolute value is finite. Hence $\\mathcal O_E[1/\\ell]=E$ and $\\mathbf Z_\\ell[1/\\ell]=\\mathbf Q_\\ell$; localizing the basis shows $d=[E:\\mathbf Q_\\ell]$. The digit argument explicitly uses the valuation bound; it does not invoke a general finite-generation claim for merely separated abstract modules.",
-   "uses": [
-    "lem-weil-l-adic-extension-integers-dvr",
-    "lem-weil-valued-dvr-finite-quotients",
-    "def-weil-l-adic-numbers",
-    "lem-sc-dvr-fg-torsionfree-free"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-comp-category/def-weil-finite-field-fiber.md",
-    "place": "The coefficient-field convention; finite freeness uses Stacks more-algebra.tex Tag 0AUW, label lemma-dedekind-torsion-free-flat, part (3); the digit expansion is written here. Serre Local Fields is WANTED for the valuation-ring input already recorded by its existing node."
-   }
-  },
-  {
-   "text": "Compare the two completed coefficient sheaves, using a finite basis rather than interchanging tensor and an arbitrary limit. Choose the basis $b_1,\\ldots,b_d$ from step 5. Its reduction gives $(\\mathbf Z_\\ell/\\ell^r)^d\\cong\\mathcal O_E/\\ell^r\\mathcal O_E$ for every $r$, commuting with reductions. Applying constant sheafification preserves this explicit isomorphism and its inverse; finite direct sums of constant modules identify with the corresponding constant finite direct sum by the coordinate inclusions and projections. By the sectionwise description of limits, taking the limit identifies $\\varprojlim_r(\\mathcal O_E/\\ell^r)_S$ with $R^d$. The ideals $\\ell^r\\mathcal O_E=(\\varpi_E^{er})$ are cofinal in the $\\varpi_E$-powers: a compatible tuple on the subsequence $er$ extends uniquely to index $n$ by reducing its entry at any $er\\geq n$, independently of that choice. Thus this limit is $B=\\widehat{\\mathcal O}_{E,S}$. On the other hand the same basis identifies $R\\otimes_{(\\mathbf Z_\\ell)_S}(\\mathcal O_E)_S$ with $R^d$ by $x\\otimes\\sum a_ib_i\\mapsto(a_ix)_i$ and its explicit inverse. The resulting isomorphism is the canonical scalar map: at index $er$, $x\\otimes a$ maps to $p_r(x)(a\\bmod\\ell^r)$; at other indices it is its reduction. This formula also proves multiplicativity, unity, independence of the basis, and compatibility with every coefficient projection. In particular it is an isomorphism of sheaves of rings, not just of underlying modules. Slice restriction preserves the constructions because all sections and covering relations are the same under lem-weil-proetale-weakly-etale-localization. In Lean the coefficient-only part is lem-pur-twist-coefficient-tensor. Apply lem-pur-tensor-pushout-action with these sectionwise equivalences and M=Z_l(1). This proves purTwistIntegralAction_existsUnique, including restriction, both scalar normalizations and uniqueness. The main local-freeness/derived-completeness theorem remains unproved; its other steps are retained.",
-   "uses": [
-    "def-pur-sheaf-inverse-limit",
-    "def-pur-sheaf-tensor-product",
-    "def-weil-completed-integral-coefficients",
-    "lem-weil-proetale-weakly-etale-localization",
-    "lem-pur-twist-coefficient-tensor",
-    "lem-pur-tensor-pushout-action"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Section 03EK, label section-tensor-product (sheaf tensor as sheafification); the finite-basis and explicit cofinal-subsequence computations are written here."
-   }
-  },
-  {
-   "text": "The integral twist and its ordinary reductions. Put $L=M\\otimes_{(\\mathbf Z_\\ell)_S}(\\mathcal O_E)_S$. It has the $B=R\\otimes_{(\\mathbf Z_\\ell)_S}(\\mathcal O_E)_S$-module structure $(x\\otimes a)(m\\otimes b)=(xm)\\otimes ab$. The tensor relations show this is well defined. On the cover of step 3, $M=R$, so $L=B$; restriction commutes with the tensor because both are formed from the same local tensor sections and sheafification relations on the slice. Thus $L$ is a line over the completed coefficient sheaf. Apply the quotient clause of lem-weil-pbc-constant-completion-equivalence with $A=\\mathcal O_E$, $I=(\\varpi_E)$ (a Noetherian DVR by step 5's cited valuation theorem). It gives $B/\\varpi_E^nB=(A_{E,n})_S$. For any $B$-module sheaf $H$, both $H\\otimes_{(\\mathcal O_E)_S}(A_{E,n})_S$ and $H\\otimes_B(A_{E,n})_S$ canonically equal $H/\\varpi_E^nH$: the mutually inverse maps are $h\\otimes\\bar a\\mapsto\\overline{ah}$ and $\\bar h\\mapsto h\\otimes1$. Hence the two reductions of $L$ coincide with the stated $A_{E,n}(1)_S$, with their quotient projections and transition maps. Tensoring the local isomorphism $L=B$ with $(A_{E,n})_S$ proves rank one of each reduction.",
-   "uses": [
-    "def-pur-sheaf-tensor-product",
-    "lem-weil-pbc-constant-completion-equivalence",
-    "lem-weil-proetale-weakly-etale-localization",
-    "def-weil-completed-integral-coefficients"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 093M, label lemma-completion-flat, and Section 03EK, label section-tensor-product; the quotient-module maps are written here."
-   }
-  },
-  {
-   "text": "Finite reductions have etale trivializations, not only the infinite pro-etale trivialization. For fixed $n$, choose $r$ with $er\\geq n$, so $\\ell^r A_{E,n}=0$. Tensor reassociation gives $A_{E,n}(1)_S=M\\otimes_{(\\mathbf Z_\\ell)_S}(A_{E,n})_S$. Since $\\ell^r$ annihilates the second factor, the maps $m\\otimes a\\mapsto\\bar m\\otimes a$ and $\\bar m\\otimes a\\mapsto m\\otimes a$ identify this with $(M/\\ell^rM)\\otimes_{(\\mathbf Z/\\ell^r)_S}(A_{E,n})_S$ (changing a lift by $\\ell^rm'$ gives zero). By step 4 this is $\\mu_{\\ell^r,S}\\otimes_{(\\mathbf Z/\\ell^r)_S}(A_{E,n})_S$. Apply the etale trivialization in step 1 to identify it with $(A_{E,n})$ on that etale cover. Thus it is locally constant with finite stalks: lem-weil-pbc-etale-cover-geometric-point-lift lifts any geometric point to one of these etale cover members, lem-weil-proetale-weakly-etale-localization identifies the corresponding slice site, and lem-weil-proetale-constant-sheaf-stalk identifies its stalk with the finite ring $A_{E,n}$, finite by lem-weil-valued-dvr-finite-quotients. The same three citations, applied to the step-1 isomorphisms $\\mu_{\\ell^r,S}|_{U_i}\\cong(\\mathbf Z/\\ell^r\\mathbf Z)_{U_i}$ on the jointly surjective etale cover of step 1, identify every geometric stalk of $\\mu_{\\ell^r,S}$ with the finite ring $\\mathbf Z/\\ell^r\\mathbf Z$; this is the finite-stalk assertion of clause 1. This argument supplies etale-local finite coefficients even when $S$ itself is not quasi-compact.",
-   "uses": [
-    "def-pur-sheaf-tensor-product",
-    "lem-weil-pbc-etale-cover-geometric-point-lift",
-    "lem-weil-proetale-constant-sheaf-stalk",
-    "lem-weil-proetale-weakly-etale-localization",
-    "lem-weil-valued-dvr-finite-quotients"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tags 03PK and 03PR, labels section-kummer and lemma-geometric-lift-to-cover; the tensor factoring through the annihilator is written here."
-   }
-  },
-  {
-   "text": "Compute the derived reductions. The complex $L[0]$ is K-flat over $B$: if $F^\\bullet$ is any acyclic complex of $B$-modules, restrict to each $V$ of step 3. Restriction to the slice is exact by lem-pur-site-restriction-module-adjunction-exact, so $F^\\bullet|_V$ is acyclic; $L|_V=B|_V$ identifies $\\operatorname{Tot}(F^\\bullet\\otimes_B L[0])|_V$ with $F^\\bullet|_V$ by the tensor-unit maps, with exactly the same differentials. Its cohomology therefore vanishes locally and hence globally: a section of a sheaf restricting to zero on a covering is zero by the sheaf axiom. This verifies the quantified definition in def-pc-kflat-complex directly. The identity of $L[0]$ is consequently a K-flat resolution of itself. By def-weil-integral-derived-reduction we can compute every derived reduction on this representative, giving $L[0]\\otimes^L_{\\mathcal O_E}A_{E,n}=(L\\otimes_B(A_{E,n})_S)[0]\\cong A_{E,n}(1)_S[0]$. The explicit quotient map in step 7 proves these identifications commute with $n+1\\to n$ and with the maps from $L$, since all are induced by $l\\mapsto l\\otimes1$ and coefficient reduction.",
-   "uses": [
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "def-pc-kflat-complex",
-    "def-weil-integral-derived-reduction",
-    "def-pur-sheaf-tensor-product"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YN, label definition-K-flat; integral reduction as specified by its definition node. The local tensor-unit verification is written here."
-   }
-  },
-  {
-   "text": "Constructibility and the empty-base correction. The reduction complex has only the cohomology sheaf $A_{E,n}(1)_S$ in degree zero. Step 8 makes it locally constant with finite module stalks, so the single stratum $S$ is a finite locally closed constructible partition witnessing constructibility in def-weil-finite-torsion-constructibility; its underlying whole subset is constructible even without any finiteness hypothesis on $S$: in def-weil-constructible-subset take the retrocompact opens $U=S$, $V=\\varnothing$ (their intersections with each quasi-compact open are that open and the empty set). The subset $S$ is also locally closed as the intersection of the whole open and whole closed subset. It belongs to $D^b_c(S,A_{E,n})$ with support contained in $[0,0]$ by def-weil-cohomological-support. If $S$ is nonempty, choose a geometric point, lift it to an etale trivializing member using lem-weil-pbc-etale-cover-geometric-point-lift, and use lem-weil-proetale-constant-sheaf-stalk to obtain the nonzero stalk $A_{E,n}$ ($1\\notin(\\varpi_E^n)$ in the local DVR). Thus the support is exactly $\\{0\\}$. If $S=\\varnothing$, every site object is empty and covered by the empty family; the sheaf axiom forces the only module sheaf to be zero. The support is then empty. This explicit counterexample repairs the imported unconditional equality with $\\{0\\}$.",
-   "uses": [
-    "def-weil-finite-torsion-constructibility",
-    "def-weil-cohomological-support",
-    "lem-weil-pbc-etale-cover-geometric-point-lift",
-    "lem-weil-proetale-constant-sheaf-stalk",
-    "def-weil-constructible-subset"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-finite-torsion-constructibility.md",
-    "place": "Definition of the finite-torsion constructible category; support and the empty-family calculation follow the corresponding definitions."
-   }
-  },
-  {
-   "text": "Derived completeness with the correct reduction maps. Regard $F_n=A_{E,n}(1)_S$ as a sheaf of modules over the single ring sheaf $B$ by its quotient projection. Its transition maps are epimorphisms: on the covering $V$ where $L=B$ they are the constant quotient maps $A_{E,n+1}\\twoheadrightarrow A_{E,n}$ of lem-weil-valued-dvr-finite-quotients. By lem-pc-sites-sheafification-underlying-sets and lem-weil-pbc-site-sheafification-sections-local, a section of a constant quotient ring sheaf is locally a constant residue, for which a constant lift exists, so the local-surjectivity criterion proves the assertion globally after composing covers. The natural morphism $L\\to\\varprojlim_n F_n$ induced by the quotient projections is an isomorphism: restricting to $V$, the source is $B|_V$ and the target is $\\varprojlim_n(A_{E,n})_V=B|_V$ by the completed coefficient definition and sectionwise limits; this map is the identity on compatible tuples. Local inverse maps glue, so the isomorphism is canonical and its finite projections are precisely those used in step 9. Apply clauses 1 and 2 of lem-weil-proetale-surjective-tower-derived-limit with $\\mathcal R=B$ and this tower. They give the Roos distinguished triangle $\\varprojlim F_n\\to\\prod F_n\\xrightarrow{1-s}\\prod F_n\\to(\\varprojlim F_n)[1]$, whose first components are the limit projections. Transfer its first and last objects through the just constructed isomorphism with $L[0]$. The resulting first map has components $c_n:L[0]\\to F_n[0]$ from the actual derived reductions, by step 9's compatibility. This is exactly the distinguished-triangle condition in def-weil-derived-complete, rather than an assertion of completeness over the discrete constant ring. No assertion about arbitrary nonsurjective towers is needed.",
-   "uses": [
-    "lem-weil-valued-dvr-finite-quotients",
-    "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
-    "def-weil-completed-integral-coefficients",
-    "def-pur-sheaf-inverse-limit",
-    "lem-weil-proetale-weakly-etale-localization",
-    "lem-weil-proetale-surjective-tower-derived-limit",
-    "def-weil-derived-complete",
-    "lem-pc-sites-sheafification-underlying-sets",
-    "lem-weil-pbc-site-sheafification-sections-local"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "p. 17, Proposition 3.1.10, with Proposition 3.1.9; p. 18, Proposition 3.2.3(1); completed coefficient and derived-completeness definitions fix the ring and first map."
-   }
-  },
-  {
-   "text": "Combine the properties. The locally free $B$-module sheaf $L$ placed in degree zero is an object of the derived category for the completed coefficient sheaf by def-weil-completed-integral-coefficients. Step 11 proves it derived complete. Steps 9 and 10 put every derived reduction in $D^b_c(S,A_{E,n})$, and all their cohomological supports lie in the same interval $[0,0]$, including the empty scheme. These are precisely all conditions in def-weil-derived-complete-integral-detailed. Therefore $\\mathcal O_E(1)_S=L[0]$ belongs to $D^b_c(S,\\mathcal O_E)$. This concludes all four clauses with the specified coefficient categories.",
-   "uses": [
-    "def-weil-completed-integral-coefficients",
+    "lem-pur-completed-line-derived",
+    "lem-pur-constructible-single-support",
     "def-weil-derived-complete-integral-detailed"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-admissible/def-coefficient-twists-detailed.md",
-    "place": "The definition of the integral twist, read together with def-weil-derived-complete-integral-detailed (uniform amplitude of finite reductions)."
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pur-twist-coefficient-rings",
-  "lem-asd-finite-etale-twist-line",
-  "lem-sbc-root-split-away-cover-etale",
-  "def-weil-pbc-site-comparison-morphism",
-  "lem-sf-comparison-pullback-exact",
-  "def-pur-roots-of-unity-sheaf",
-  "def-pur-sheaf-tensor-product",
-  "lem-amb-kummer-any-base",
-  "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
-  "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
-  "lem-weil-proetale-constant-sheaf-stalk",
-  "lem-weil-proetale-weakly-etale-localization",
-  "lem-pc-sites-sheafification-underlying-sets",
-  "lem-weil-pbc-site-sheafification-sections-local",
-  "def-pur-sheaf-inverse-limit",
-  "lem-weil-pbc-constant-completion-equivalence",
-  "def-weil-l-adic-numbers",
-  "lem-weil-l-adic-extension-integers-dvr",
-  "lem-weil-valued-dvr-finite-quotients",
-  "lem-sc-dvr-fg-torsionfree-free",
-  "def-weil-completed-integral-coefficients",
-  "lem-pur-twist-coefficient-tensor",
-  "lem-pur-tensor-pushout-action",
-  "lem-weil-pbc-etale-cover-geometric-point-lift",
-  "lem-pur-site-restriction-module-adjunction-exact",
-  "def-pc-kflat-complex",
-  "def-weil-integral-derived-reduction",
-  "def-weil-finite-torsion-constructibility",
-  "def-weil-cohomological-support",
-  "def-weil-constructible-subset",
-  "lem-weil-proetale-surjective-tower-derived-limit",
-  "def-weil-derived-complete",
+  "def-pur-twist-sheaves",
+  "lem-pur-twist-root-local-models",
+  "lem-pur-twist-root-transitions",
+  "lem-pur-finite-locally-free-line-models",
+  "lem-pur-twist-integral-basis",
+  "lem-pur-twist-coefficient-comparison",
+  "lem-pur-twist-integral-local-models",
+  "lem-pur-completed-line-derived",
+  "lem-pur-constructible-single-support",
   "def-weil-derived-complete-integral-detailed"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Original twelve-step proof plan; coefficient action factored through a fully proved generic sheaf action and the separate coefficient tensor calculation.",
-  "group": "Q6",
+  "place": "Coefficient-twist blueprint proof steps 1--12; complete assembly with independent geometric and completeness lemmas.",
+  "group": "B7",
   "date": "2026-10-21"
  },
  "mathlib_searches": [
@@ -447,21 +271,6 @@
   "module": "Sheaf.Paper.PurTwistSheafLocallyFree",
   "declaration": "AlgebraicGeometry.Scheme.pur_twist_sheaf_locally_free",
   "declarations": [
-   "AlgebraicGeometry.Scheme.purTwistZlOne",
-   "AlgebraicGeometry.Scheme.purTwistForgetPreservesSheafification",
-   "AlgebraicGeometry.Scheme.purTwistFiniteRingIso",
-   "AlgebraicGeometry.Scheme.purTwistRootsModule",
-   "AlgebraicGeometry.Scheme.purTwistZlAction_existsUnique",
-   "AlgebraicGeometry.Scheme.purTwistZlAction",
-   "AlgebraicGeometry.Scheme.purTwistZlAction_restriction",
-   "AlgebraicGeometry.Scheme.purTwistZlModule",
-   "AlgebraicGeometry.Scheme.purTwistIntegralOne",
-   "AlgebraicGeometry.Scheme.purTwistIntegralTensor",
-   "AlgebraicGeometry.Scheme.purTwistIntegralAction_existsUnique",
-   "AlgebraicGeometry.Scheme.purTwistIntegralAction",
-   "AlgebraicGeometry.Scheme.purTwistIntegralAction_restriction",
-   "AlgebraicGeometry.Scheme.purTwistIntegralModule",
-   "AlgebraicGeometry.Scheme.purTwistFiniteOne",
    "AlgebraicGeometry.Scheme.pur_twist_sheaf_locally_free"
   ],
   "file": "lean/Sheaf/Paper/PurTwistSheafLocallyFree.lean",
@@ -470,16 +279,16 @@
   "by": "NF",
   "date": "2026-10-16",
   "existing": false,
-  "note": "Canonical root-limit, constant-coefficient tensor and completed-action helpers are included in this owning module. All data choices have unique specifications; the main theorem refers to the concrete integral line and its concrete finite reductions. Coefficient-only declarations have moved verbatim to Sheaf.Paper.PurTwistCoefficientRings, publicly imported here; their attachment is def-pur-twist-coefficient-rings. Integral action now follows from the coefficient tensor and generic tensor action nodes; the main theorem still has its original hole."
+  "note": "The concrete sheaf constructions are preserved in def-pur-twist-sheaves and publicly reexported. This theorem has a complete assembly proof from the independent root, scalar-extension and completed-line lemmas. The signature is unchanged."
  },
  "reviewed_proof": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "C-b1777",
-  "group": "Q6",
+  "reviewer": "C-da373",
+  "group": "B7",
   "result": "pass",
-  "landing": "20261021T001137-L-1377147",
+  "landing": "20261021T020059-L-2582936",
   "kind": "interface",
-  "note": "independent cc review: Delivered item + 3 new modules vs live PurTwistSheafLocallyFree (moved block byte-identical bar one private proof line); new sorry purTwistCoefficientTensor vs finite-basis/cofinality argument (true); axioms audit; importer CoefficientTwistsDetailed compiled against delivery (32.4 s vs 32.6 s baseline)"
+  "note": "independent cc review: item statement byte-identical to live; moved defs in PurTwistSheaves identical to live up to blueprint markers; two sorry statements (root/integral local models) checked true against nodes; all 12 modules plus importer CoefficientTwistsDetailed and 2 transitive users compiled; #print axioms sorryAx only via the new sorry lemmas and existing sorry library statements"
  }
 }

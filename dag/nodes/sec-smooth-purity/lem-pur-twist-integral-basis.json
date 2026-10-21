@@ -1,0 +1,116 @@
+{
+ "id": "lem-pur-twist-integral-basis",
+ "kind": "statement",
+ "title": "The coefficient extension integers have a finite Z_l basis",
+ "statement": "The integral coefficient ring O_E of [def-pur-twist-coefficient-rings], with its specified Z_l action, admits a basis indexed by Fin k for some finite k.\n\ntheorem purTwistIntegralBasis (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :\n    ∃ k : ℕ, Nonempty (@Module.Basis (Fin k) ℤ_[l]\n        (Padic.coefficientExtensionIntegers l E) _ _\n        (Module.compHom (Padic.coefficientExtensionIntegers l E) (purTwistIntegersMap l E)))",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Coefficient-twist blueprint proof step 5; Stacks Tags 00NZ and 0AUW."
+ },
+ "stmt_deps": [
+  "def-pur-twist-coefficient-rings"
+ ],
+ "proof": [
+  {
+   "text": "Identify O_E with the integral closure of Z_l by the spectral-value criterion for the monic minimal polynomial and integral closedness of the valuation ring. Apply IsIntegralClosure.module_free and finite generation, then reindex its finite basis by Fin k. This is the complete integral_basis proof already present privately in PurTwistCoefficientTensor, now available independently.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-sc-dvr-fg-torsionfree-free"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-sc-dvr-fg-torsionfree-free"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Coefficient-twist blueprint proof step 5; Stacks Tags 00NZ and 0AUW.",
+  "group": "B7",
+  "date": "2026-10-21"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The integral closure of the p-adic integers in a finite extension is a finite free module",
+   "results": "NumberField.RingOfIntegers.instFreeInt; PadicInt.algebra; PadicComplexInt.integers; NumberField.RingOfIntegers.instIsTorsionFree_1; NumberField.RingOfIntegers.extension_isNoetherian; NumberField.RingOfIntegers.instIsTorsionFree_2; Ring.instFiniteNormalClosure; NumberField.RingOfIntegers.instIsTorsionFree",
+   "date": "2026-10-21",
+   "verdict": "Use IsIntegralClosure.module_free and the spectral-value integral-closure criterion. The already proved private integral_basis helper in PurTwistCoefficientTensor gives the specialized argument copied here."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIntegralClosure.module_free",
+   "results": "IsIntegralClosure.module_free",
+   "date": "2026-10-21",
+   "verdict": "Use IsIntegralClosure.module_free and the spectral-value integral-closure criterion. The already proved private integral_basis helper in PurTwistCoefficientTensor gives the specialized argument copied here."
+  },
+  {
+   "tool": "grep",
+   "query": "IsIntegralClosure.module_free|spectralValue_le_one_iff",
+   "results": "Mathlib/NumberTheory/NumberField/Basic.lean; Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean; Mathlib/RingTheory/DedekindDomain/IntegralClosure.lean; Mathlib/RingTheory/DedekindDomain/IntegralClosure.lean",
+   "date": "2026-10-21",
+   "verdict": "Use IsIntegralClosure.module_free and the spectral-value integral-closure criterion. The already proved private integral_basis helper in PurTwistCoefficientTensor gives the specialized argument copied here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The integral closure of the p-adic integers in a finite extension is a finite free module",
+   "results": "IsIntegralClosure.module_free; IsIntegralClosure.finite; integralClosure.isIntegrallyClosedOfFiniteExtension; PadicInt; Ring.instFiniteNormalClosure_1; NumberField.RingOfIntegers.instIsIntegralClosure; integralClosure.AlgebraIsIntegral; Ring.instIsIntegrallyClosedNormalClosure",
+   "date": "2026-10-21",
+   "verdict": "Use IsIntegralClosure.module_free and the spectral-value integral-closure criterion. The already proved private integral_basis helper in PurTwistCoefficientTensor gives the specialized argument copied here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurTwistSheafLocallyFree",
+  "date": "2026-10-21",
+  "group": "B7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-coefficient-twists-detailed",
+   "place": "Coefficient-twist blueprint proof step 5; Stacks Tags 00NZ and 0AUW.",
+   "via": [
+    "lem-pur-twist-sheaf-locally-free"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-admissible",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PurTwistIntegralBasis",
+  "file": "lean/Sheaf/Paper/PurTwistIntegralBasis.lean",
+  "declaration": "AlgebraicGeometry.Scheme.purTwistIntegralBasis",
+  "statement": "theorem purTwistIntegralBasis (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :\n    ∃ k : ℕ, Nonempty (@Module.Basis (Fin k) ℤ_[l]\n        (Padic.coefficientExtensionIntegers l E) _ _\n        (Module.compHom (Padic.coefficientExtensionIntegers l E) (purTwistIntegersMap l E)))",
+  "branch": "sheaf-dag",
+  "by": "B7",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-da373",
+  "group": "B7",
+  "result": "pass",
+  "landing": "20261021T020059-L-2582936",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-da373",
+  "group": "B7",
+  "result": "pass",
+  "landing": "20261021T020059-L-2582936",
+  "kind": "interface",
+  "note": "independent cc review: item statement byte-identical to live; moved defs in PurTwistSheaves identical to live up to blueprint markers; two sorry statements (root/integral local models) checked true against nodes; all 12 modules plus importer CoefficientTwistsDetailed and 2 transitive users compiled; #print axioms sorryAx only via the new sorry lemmas and existing sorry library statements"
+ }
+}
