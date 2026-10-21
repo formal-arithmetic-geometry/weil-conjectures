@@ -28,9 +28,8 @@
   {
    "text": "Put $R=\\mathcal O_E$, $t=\\varpi_E^n$, $A=R/(t)$, $B=\\widehat{\\mathcal O}_{E,s}$, and $A_s=(A_{E,n})_s$. The coefficient-ring theorem says that $R$ is a discrete valuation ring, in particular a principal ideal domain; hence it is Noetherian (each ideal has one generator). The standard quotient-resolution theorem gives $F=[R\\xrightarrow{t}R]$ in degrees $-1,0$ as a finite free resolution of $A$. Apply the completed-constant-sheaf reduction theorem on $s_{\\mathrm{proet}}$ with ring $R$ and ideal $(\\varpi_E)$. Its finite-resolution clause identifies $B\\otimes_{\\underline R}\\underline F=[B\\xrightarrow{t}B]$, augmented by the coefficient projection, with $A_s[0]$. Its cohomology in degree $-1$ is therefore zero and its degree-zero cohomology is $A_s$. Thus $0\\to B\\xrightarrow{t}B\\to A_s\\to0$ is exact, with the stated coefficient projection as last map. This uses completed coefficients, rather than an identification of $B$ with the discrete constant sheaf.",
    "uses": [
-    "lem-weil-l-adic-extension-integers-dvr",
-    "lem-weil-pbc-standard-quotients-perfect",
-    "lem-weil-pbc-completed-constant-sheaf-reduction"
+    "lem-pod-point-reduction-coefficient-ring",
+    "lem-pod-point-principal-reduction-coefficients"
    ],
    "elementary": false,
    "source": {
@@ -42,9 +41,7 @@
    "text": "Represent $N$ by a complex of $B$-module sheaves and choose a K-flat resolution $P\\to N$ whose terms are flat, using the resolution theorem. Derived reduction is represented in $D(A_s)$ by $P\\otimes_B A_s$. By the definition of flatness, tensoring the exact sequence of step 1 with each $P^j$ remains exact. Hence multiplication by $t$ is injective on $P^j$ and $P^j\\otimes_B A_s=P^j/tP^j$. Locally lift $\\bar b\\in A_s$ to $b\\in B$. The latter identification is induced by $x\\otimes\\bar b\\mapsto bx\\bmod tP^j$: two lifts differ by $tc$ and thus give the same quotient section. Its inverse is $\\bar x\\mapsto x\\otimes1$, independent of the lift of $\\bar x$ because $tx\\otimes1=x\\otimes t=0$. The maps commute with restrictions, are balanced, and are mutually inverse after sheafification, giving the claimed sheaf tensor isomorphism. They commute with differentials. Consequently $P/tP$ represents $N\\otimes_R^L A$ as an $A_s$-complex.",
    "uses": [
     "lem-pc-kflat-resolution",
-    "def-weil-integral-derived-reduction",
-    "def-pc-flat-sheaf-modules",
-    "def-pur-sheaf-tensor-product"
+    "lem-pod-derived-reduction-sheaf-resolution-independence"
    ],
    "elementary": false,
    "source": {
@@ -55,8 +52,8 @@
   {
    "text": "The field $k$ is algebraically closed by the finite-field datum, so exactness of point sections applies to the ring sheaves $B$ and $A_s$. Put $C=\\Gamma(s,P)$ and regard it as an $R$-complex through the coefficient map in the statement. Exact sections preserve the quasi-isomorphism $P\\to N$, so $C$ represents $\\Gamma(s,N)$. Applying exact sections to $0\\to P^j\\xrightarrow{t}P^j\\to P^j/tP^j\\to0$ shows both that $t:C^j\\to C^j$ is injective and that $C^j/tC^j\\xrightarrow{\\sim}\\Gamma(s,P^j/tP^j)$. The isomorphism sends $\\bar x$ to the image of the section $x$. It commutes with differentials and is $A$-linear through $A\\to\\Gamma(s,A_s)$. Thus $C/tC\\cong\\Gamma(s,P/tP)$ as complexes of $A$-modules.",
    "uses": [
-    "def-weil-finite-field-fiber",
-    "lem-weil-point-proetale-sections-exact"
+    "lem-pod-derived-reduction-sheaf-resolution-independence",
+    "lem-pod-principal-reduction-flat-comparison"
    ],
    "elementary": false,
    "source": {
@@ -67,8 +64,8 @@
   {
    "text": "Apply K-flat resolution on the one-point ringed site with coefficient ring $R$ to obtain a quasi-isomorphism $q:Q\\to C$, where $Q$ is K-flat and every $Q^j$ is flat. The exact sequence $0\\to R\\xrightarrow{t}R\\to A\\to0$ of step 1, tensoring with $Q^j$, gives injectivity of $t$ on every $Q^j$. Here flatness means precisely exactness of this tensor functor. The ordinary reduction of $q$ is an $A$-linear chain map $\\bar q:Q/tQ\\to C/tC$. No K-flatness of the section complex $C$ is needed.",
    "uses": [
-    "lem-pc-kflat-resolution",
-    "def-pc-flat-sheaf-modules"
+    "lem-pod-principal-reduction-flat-comparison",
+    "lem-pod-principal-quotient-quasi-iso"
    ],
    "elementary": false,
    "source": {
@@ -79,8 +76,7 @@
   {
    "text": "Let $T=\\operatorname{Cone}(q)$, with $T^j=C^j\\oplus Q^{j+1}$ and $d_T(x,y)=(d_Cx+q(y),-d_Qy)$. The quasi-isomorphism/cone criterion shows that $T$ is acyclic. Multiplication by $t$ is injective in every degree by steps 3 and 4. Finite direct sums and the displayed differential give an identification $T/tT=\\operatorname{Cone}(\\bar q)$ as complexes of $R$-modules (and of $A$-modules on the quotient side).",
    "uses": [
-    "lem-pur-quasi-iso-cone-acyclic",
-    "def-weil-abstract-derived-category"
+    "lem-pod-principal-quotient-quasi-iso"
    ],
    "elementary": false,
    "source": {
@@ -90,7 +86,9 @@
   },
   {
    "text": "Here is the elementary quotient calculation, for every integer $j$. If $\\bar z\\in(T/tT)^j$ is a cycle, lift it to $z\\in T^j$ and write $d_Tz=tw$ with $w\\in T^{j+1}$. Then $t\\,d_Tw=0$; injectivity of $t$ gives $d_Tw=0$. Acyclicity of $T$ gives $w=d_Tv$ for some $v\\in T^j$. Now $d_T(z-tv)=0$, so again acyclicity gives $z-tv=d_Tu$ for some $u\\in T^{j-1}$. Reducing this equality modulo $t$ yields $\\bar z=d_T\\bar u$. Thus $T/tT$ is acyclic. This calculation has no boundedness assumption and does not assume that termwise flat complexes are K-flat.",
-   "uses": [],
+   "uses": [
+    "lem-pod-principal-quotient-quasi-iso"
+   ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/derived.tex",
@@ -100,10 +98,7 @@
   {
    "text": "By the cone criterion, applied now in the abelian category of $A$-modules, steps 5 and 6 show that $\\bar q$ is a quasi-isomorphism. The ordinary-module derived tensor theorem, with coefficient map $R\\to A$ and second factor $A[0]$, computes $\\Gamma(s,N)\\otimes_R^L A$ by $Q\\otimes_R A=Q/tQ$. Derived reduction and exact sections compute the right side by $\\Gamma(s,P/tP)$. Therefore the composite $Q/tQ\\xrightarrow{\\bar q}C/tC\\xrightarrow{\\sim}\\Gamma(s,P/tP)$ represents the required isomorphism in $D(A)$. In particular the morphism is constructed with its $A$-module structure, before forgetting scalars.",
    "uses": [
-    "lem-pur-quasi-iso-cone-acyclic",
-    "lem-pc-derived-tensor-second-factor-functor",
-    "def-weil-integral-derived-reduction",
-    "lem-weil-point-proetale-sections-exact"
+    "lem-pod-principal-quotient-quasi-iso"
    ],
    "elementary": false,
    "source": {
@@ -114,8 +109,7 @@
   {
    "text": "Fix a flat-term K-flat sheaf model $P$ and put $C=\\Gamma(s,P)$. Specialize [lem-pc-mixed-tensor-pointwise-left-derived] to $R\\to A=R/(t)$ and second factor $A[0]$, using its universal derived-tensor counit $\\varepsilon_C:L(Q_R C)\\to Q_A(C\\otimes_R A)=Q_A(C/tC)$. For a K-flat resolution $q:Q\\to C$, the canonical identification is $\\lambda_q=\\varepsilon_Q\\circ L(Q_Rq)^{-1}$. Naturality of $\\varepsilon$ gives $Q_A(\\bar q)\\circ\\lambda_q=\\varepsilon_C$. Thus the first map of step 7 is independent of $q$, and its chain naturality is the naturality of $\\varepsilon$. Step 7 proves this component is invertible for the particular $C$ in use. The quotient identification is the balanced map $x\\otimes\\bar a\\mapsto ax\\bmod tC$, with inverse $\\bar x\\mapsto x\\otimes1$.",
    "uses": [
-    "lem-pc-mixed-tensor-pointwise-left-derived",
-    "lem-pc-derived-tensor-second-factor-functor"
+    "lem-pod-derived-reduction-sheaf-resolution-independence"
    ],
    "elementary": true,
    "source": {
@@ -126,8 +120,7 @@
   {
    "text": "Apply [lem-pod-derived-reduction-sheaf-resolution-independence] on $s_{\\mathrm{proet}}$, with $\\mathcal O=B$, $\\mathcal O'=A_s$, the map $R\\to\\Gamma(s,B)$ of the statement, and $t=\\varpi_E^n$. Step 1 supplies its coefficient exact sequence, step 2 supplies a K-flat model with flat terms, and [lem-weil-point-proetale-sections-exact] supplies exactness on abelian sheaves. Its $\\theta_P\\circ c_C$ is exactly the comparison of step 7, by step 3. The lemma proves naturality for maps between such sheaf models and equality of the transported comparisons for any two resolutions of a complex $M$. Thus the comparison is independent of the sheaf model as well as of the ordinary resolution.",
    "uses": [
-    "lem-pod-derived-reduction-sheaf-resolution-independence",
-    "lem-weil-point-proetale-sections-exact"
+    "lem-pod-principal-reduction-flat-comparison"
    ],
    "elementary": false,
    "source": {
@@ -138,12 +131,9 @@
   {
    "text": "For a chain map $M\\to M'$, [lem-weil-pbc-diagram-kflat-replacements] supplies a strict replacement of this arrow with flat-term K-flat sources and objectwise quasi-isomorphisms. Naturality on its replaced arrow from step 9 and resolution independence give the comparison square for $M\\to M'$. The functors $L\\Gamma(s,-)$ and $\\Gamma(s,-)T$ invert quasi-isomorphisms by the ordinary derived-tensor theorem, derived change of rings and exact point sections. Apply clause (2) of [lem-weil-pbc-localization-universal-property] to $Q:\\mathrm{CoCh}(\\operatorname{Mod}(B))\\to D(B)$: the chain-natural comparison descends uniquely to a natural transformation on the derived category. This includes compatibility with composition. Its components are isomorphisms by step 7, hence it is the required natural isomorphism. All replacement diagrams used here are finite, hence small.",
    "uses": [
-    "lem-weil-pbc-diagram-kflat-replacements",
-    "lem-weil-pbc-localization-universal-property",
-    "lem-pc-derived-tensor-second-factor-functor",
-    "lem-pur-derived-change-of-rings",
-    "lem-weil-point-proetale-sections-exact",
-    "def-weil-abstract-derived-category"
+    "lem-pod-principal-reduction-comparison",
+    "lem-pod-scalar-reduction-cochain-comparison",
+    "lem-pod-point-sections-derived-reduction-iso"
    ],
    "elementary": false,
    "source": {
@@ -154,11 +144,9 @@
   {
    "text": "To justify the cone description in the statement, restrict the left side from $A$ to $R$. In both tensor-invariance lemmas used in this step, specialize their coefficient homomorphism to $R\\xrightarrow{\\mathrm{id}}R$: the second factors $F$, $A[0]$, $Q$ and $C$ are thus ordinary $R$-complexes. In particular no $A$-module structure on the terms of $F$ is required. The complex $F=[R\\xrightarrow{t}R]$ of step 1 is K-flat because it is bounded with free terms. Since $Q$ is K-flat, tensoring the quasi-isomorphism $F\\to A[0]$ with $Q$ gives a quasi-isomorphism $Q\\otimes_R F\\to Q\\otimes_R A$. Since $F$ is K-flat, tensoring $q:Q\\to C$ with $F$ gives a quasi-isomorphism $F\\otimes_R Q\\to F\\otimes_R C$. The signed interchange $x\\otimes y\\mapsto(-1)^{ij}y\\otimes x$ for $x$ in degree $i$ and $y$ in degree $j$ identifies $Q\\otimes_R F$ with $F\\otimes_R Q$. Finally $F\\otimes_R C$ has degree-$j$ term $C^j\\oplus C^{j+1}$ and differential $(x,y)\\mapsto(d_Cx+ty,-d_Cy)$, exactly $\\operatorname{Cone}(t:C\\to C)$. Thus the left side, after scalar restriction, has the claimed cone representative. The actual isomorphism in $D(A)$ is the one constructed in step 7; the cone computation does not assign an ordinary $A$-action to the terms $C^j$.",
    "uses": [
-    "lem-pc-module-bounded-flat-kflat",
-    "lem-pc-derived-tensor-second-factor-functor",
-    "lem-pc-mixed-tensor-kflat-quasi-iso",
-    "def-pc-tensor-complex-sheaves",
-    "def-weil-abstract-derived-category"
+    "lem-pod-principal-derived-tensor-cone",
+    "lem-pod-point-reduction-coefficient-ring",
+    "lem-pod-point-sections-derived-reduction-cone"
    ],
    "elementary": false,
    "source": {
@@ -169,6 +157,7 @@
   {
    "text": "Apply $H^r$ to the isomorphism of step 7, for any $r\\in\\mathbf Z$. The exact-point-sections theorem, applied to the ring sheaf $A_s$ and the complex $N\\otimes_R^L A$, identifies $H^r\\Gamma(s,N\\otimes_R^L A)$ with $\\Gamma(s,\\mathcal H^r(N\\otimes_R^L A))$, naturally in $N$. Restriction along $A\\to\\Gamma(s,A_s)$ leaves this an $A$-linear isomorphism. Composing gives the last assertion, in every degree.",
    "uses": [
+    "lem-pod-point-sections-derived-reduction-homology",
     "lem-weil-point-proetale-sections-exact"
    ],
    "elementary": false,
@@ -179,31 +168,25 @@
   }
  ],
  "proof_deps": [
-  "def-pc-flat-sheaf-modules",
-  "def-pc-tensor-complex-sheaves",
-  "def-pur-sheaf-tensor-product",
-  "def-weil-abstract-derived-category",
-  "def-weil-finite-field-fiber",
-  "def-weil-integral-derived-reduction",
-  "lem-pc-derived-tensor-second-factor-functor",
+  "lem-pod-point-reduction-coefficient-ring",
+  "lem-pod-point-principal-reduction-coefficients",
   "lem-pc-kflat-resolution",
-  "lem-pc-mixed-tensor-kflat-quasi-iso",
-  "lem-pc-mixed-tensor-pointwise-left-derived",
-  "lem-pc-module-bounded-flat-kflat",
   "lem-pod-derived-reduction-sheaf-resolution-independence",
-  "lem-pur-derived-change-of-rings",
-  "lem-pur-quasi-iso-cone-acyclic",
-  "lem-weil-l-adic-extension-integers-dvr",
-  "lem-weil-pbc-completed-constant-sheaf-reduction",
-  "lem-weil-pbc-diagram-kflat-replacements",
-  "lem-weil-pbc-localization-universal-property",
-  "lem-weil-pbc-standard-quotients-perfect",
+  "lem-pod-principal-reduction-flat-comparison",
+  "lem-pod-principal-quotient-quasi-iso",
+  "lem-pod-principal-reduction-comparison",
+  "lem-pod-scalar-reduction-cochain-comparison",
+  "lem-pod-point-sections-derived-reduction-iso",
+  "lem-pod-principal-derived-tensor-cone",
+  "lem-pod-point-sections-derived-reduction-cone",
+  "lem-pod-point-sections-derived-reduction-homology",
   "lem-weil-point-proetale-sections-exact"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-lem-finite/prop-cohomological-finiteness.md",
-  "place": "Proof Steps 2 and 4: the integral point-to-finite-level comparison, expanded using Stacks Tags 093M, 06YS, 05RT, 064L and 06Y6, with the elementary quotient-complex calculation in step 6."
+  "by": "A6",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YY; original twelve-step route",
+  "note": "All steps are realized by proved lemmas. Steps 5--7 use the equivalent short-exact-sequence homology argument for regular complexes. No point-reduction normalization or new sorry is used."
  },
  "mathlib_searches": [
   {
@@ -491,20 +474,6 @@
   "module": "Sheaf.Paper.PointSectionsDerivedReduction",
   "declaration": "WeilConjectures.point_sections_derived_reduction",
   "declarations": [
-   "WeilConjectures.pointReductionDatumAlgClosed",
-   "WeilConjectures.pointReductionModuleDerived",
-   "WeilConjectures.pointReductionIntegralEvalLimits",
-   "WeilConjectures.pointReductionIntegralEvalColimits",
-   "WeilConjectures.pointReductionIntegralLimits",
-   "WeilConjectures.pointReductionIntegralColimits",
-   "WeilConjectures.pointReductionFiniteEvalLimits",
-   "WeilConjectures.pointReductionFiniteEvalColimits",
-   "WeilConjectures.pointReductionFiniteLimits",
-   "WeilConjectures.pointReductionFiniteColimits",
-   "WeilConjectures.pointReductionQuotient",
-   "WeilConjectures.pointReductionModuleTensor",
-   "WeilConjectures.pointReductionTensorSections",
-   "WeilConjectures.pointReductionSectionsTensor",
    "WeilConjectures.point_sections_derived_reduction"
   ],
   "file": "lean/Sheaf/Paper/PointSectionsDerivedReduction.lean",
@@ -521,5 +490,15 @@
   "from_unit": "sk-lem-finite",
   "date": "2026-10-17",
   "why": "compatibility node re-routed under the central compatibility sketch (blueprint cbac0b347)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-7caae",
+  "group": "A6",
+  "result": "pass",
+  "landing": "20261021T011011-L-2027053",
+  "kind": "interface",
+  "note": "independent cc review: 14 delivered modules (lcompile --all clean, no sorry) and the 3 direct importers compiled against them, the Setup generalization checked against the live module, change records and node records, and the earlier C6/C7/D1 return"
  }
 }

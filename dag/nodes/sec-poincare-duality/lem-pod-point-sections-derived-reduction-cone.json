@@ -1,0 +1,107 @@
+{
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-cohomological-finiteness",
+   "place": "step 6 of its split (source: proof of Theorem 19.2, p. 125 (0 -> H^r(M)/l^n -> H^r(M_n) -> H^{r+1}(M)_{l^n} -> 0, and Nakayama), and p. 124 (H^r(X,Z_l)=lim H^r(X,Z/l^n)); the blueprint ## Proof, Step 4)",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-thm-sf-compatibility",
+ "id": "lem-pod-point-sections-derived-reduction-cone",
+ "kind": "statement",
+ "title": "Multiplication-cone component",
+ "statement": "theorem point_sections_derived_reduction_module_cone (_hl : l ≠ D.p) (n : ℕ)\n    (C : CochainComplex (ModuleCat.{u + 1}\n      (ULift.{u + 1, u} (Padic.coefficientExtensionIntegers l E))) ℤ) :\n    Nonempty (((ModuleCat.restrictScalars.{u + 1, u + 1, u + 1}\n        (pointReductionQuotient l E n)).mapDerivedCategory).obj\n        ((pointReductionModuleTensor l E n).obj (DerivedCategory.Q.obj C)) ≅\n      DerivedCategory.Q.obj (CochainComplex.mappingCone\n        ((ULift.up (Padic.coefficientExtensionUniformizer l E) ^ (n + 1)) • 𝟙 C)))",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 05RT, 06Y6, 06YY, 064L and 0946"
+ },
+ "stmt_deps": [
+  "lem-pod-point-sections-derived-reduction-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply the fully proved general derived principal quotient cone theorem to the actual lifted coefficient map, using its surjectivity, regularity and principal-kernel formula.",
+   "uses": [
+    "lem-pod-principal-derived-tensor-cone",
+    "lem-pod-point-reduction-coefficient-ring"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pod-principal-derived-tensor-cone",
+  "lem-pod-point-reduction-coefficient-ring"
+ ],
+ "proof_origin": {
+  "by": "A6",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YY and original item steps 1--12",
+  "note": "Returned circular normalization route removed. This component and all newly introduced lemmas are proved, with zero sorry."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor by quotient of a discrete valuation ring is the mapping cone of multiplication by the uniformizer power",
+   "results": "TensorProduct.tensorQuotEquivQuotSMul and tensorQuotientEquiv identify ordinary module quotients, but no derived point-sections or cone comparison.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor by quotient of a discrete valuation ring is the mapping cone of multiplication by the uniformizer power",
+   "results": "BDeRham and cotangent tensor declarations; no derived point-sections or cone comparison.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "pointReductionQuotient|pointReductionTensorSections|reductionIso in Mathlib/Algebra/Homology",
+   "results": "No matches.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PointSectionsDerivedReduction",
+  "date": "2026-10-21",
+  "group": "A6"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PointSectionsDerivedReductionCone",
+  "declaration": "WeilConjectures.point_sections_derived_reduction_module_cone",
+  "declarations": [
+   "WeilConjectures.point_sections_derived_reduction_module_cone"
+  ],
+  "statement": "theorem point_sections_derived_reduction_module_cone (_hl : l ≠ D.p) (n : ℕ)\n    (C : CochainComplex (ModuleCat.{u + 1}\n      (ULift.{u + 1, u} (Padic.coefficientExtensionIntegers l E))) ℤ) :\n    Nonempty (((ModuleCat.restrictScalars.{u + 1, u + 1, u + 1}\n        (pointReductionQuotient l E n)).mapDerivedCategory).obj\n        ((pointReductionModuleTensor l E n).obj (DerivedCategory.Q.obj C)) ≅\n      DerivedCategory.Q.obj (CochainComplex.mappingCone\n        ((ULift.up (Padic.coefficientExtensionUniformizer l E) ^ (n + 1)) • 𝟙 C)))",
+  "file": "lean/Sheaf/Paper/PointSectionsDerivedReductionCone.lean",
+  "branch": "sheaf-dag",
+  "by": "A6",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-7caae",
+  "group": "A6",
+  "result": "pass",
+  "landing": "20261021T011011-L-2027053",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-7caae",
+  "group": "A6",
+  "result": "pass",
+  "landing": "20261021T011011-L-2027053",
+  "kind": "interface",
+  "note": "independent cc review: 14 delivered modules (lcompile --all clean, no sorry) and the 3 direct importers compiled against them, the Setup generalization checked against the live module, change records and node records, and the earlier C6/C7/D1 return"
+ }
+}

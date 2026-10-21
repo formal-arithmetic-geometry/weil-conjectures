@@ -1,0 +1,141 @@
+{
+ "id": "lem-pod-principal-reduction-comparison",
+ "kind": "statement",
+ "title": "Descent of exact-sections principal reduction through derived roofs",
+ "statement": "In the setup [lem-pod-derived-reduction-sheaf-resolution-independence], suppose R is a domain and t≠0. The exact section functors G,G′ and the derived quotient functors L,T have a natural isomorphism G⋙L≅T⋙G′ on the entire unbounded derived category.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YY, lemma-derived-base-change; principal quotient specialization of the original item proof"
+ },
+ "stmt_deps": [
+  "lem-pod-derived-reduction-sheaf-resolution-independence"
+ ],
+ "proof": [
+  {
+   "text": "Choose a flat-term K-flat model P_X and an isomorphism QP_X≅X for every derived object X. Its alpha comparison is invertible.",
+   "uses": [
+    "lem-pod-principal-reduction-flat-comparison",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YY, lemma-derived-base-change; principal quotient specialization of the original item proof"
+   }
+  },
+  {
+   "text": "Represent any map QP→QP′ by a right roof. Resolve its source by another flat-term K-flat complex. Apply resolution-independence naturality to both chain maps in the resulting roof, then cancel the invertible denominator. This proves naturality for every derived arrow.",
+   "uses": [
+    "lem-pod-derived-reduction-sheaf-resolution-independence",
+    "lem-pc-right-fraction-representation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YY, lemma-derived-base-change; principal quotient specialization of the original item proof"
+   }
+  },
+  {
+   "text": "Transport the alpha comparisons through the chosen object isomorphisms and assemble them with NatIso.ofComponents. The roof calculation proves the required naturality equation.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YY, lemma-derived-base-change; principal quotient specialization of the original item proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pod-principal-reduction-flat-comparison",
+  "lem-pc-kflat-resolution",
+  "lem-pod-derived-reduction-sheaf-resolution-independence",
+  "lem-pc-right-fraction-representation"
+ ],
+ "proof_origin": {
+  "by": "A6",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YY, lemma-derived-base-change; principal quotient specialization of the original item proof",
+  "note": "Proved in Lean in this repair; no postponed proof and no normalization dependency."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Principal quotient preserves quasi-isomorphisms of unbounded complexes with injective scalar multiplication; exact sheaf sections commute with derived principal reduction",
+   "results": "8 hits inspected: DerivedCategory.isIso_Q_map_iff_quasiIso, HomologicalComplexUpToQuasiIso.isIso_Q_map_iff_mem_quasiIso, quotientCompQhIso, and generic localization/CM5b declarations. No principal-quotient or exact-sections comparison. The localization APIs are used in the proof.",
+   "date": "2026-10-21",
+   "verdict": "no exact match; use general localization APIs"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerivedUnique",
+   "results": "1 hit: Mathlib.CategoryTheory.Functor.Derived.LeftDerived, CategoryTheory.Functor.leftDerivedUnique. Inspected and used to identify universal derived presentations; does not supply the coefficient or quotient comparison.",
+   "date": "2026-10-21",
+   "verdict": "use as proof tool; no full match"
+  },
+  {
+   "tool": "grep",
+   "query": "quasiIso.*[Qq]uotient|principalDerivedTensor|pointPrincipalReduction|completedIntegralScalar",
+   "results": "12 hits in HomologicalComplex localization and DerivedCategory basic/homology files; they concern the homotopy quotient, not quotient coefficients. Read the localization APIs, ShortComplex.Ab and HomologySequenceLemmas for the actual argument.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A principal quotient of a complex preserves a quasi-isomorphism when multiplication by the generator is injective in each degree; sections of an exact sheaf functor commute with derived principal reduction",
+   "results": "8 hits inspected: ShortComplex.quasiIso_map_of_preservesLeftHomology, its right homology analogue, HomotopyCategory.quotient_map_mem_quasiIso_iff, DerivedCategory.instIsIsoMapCochainComplexIntQ, and generic localization instances. No principal coefficient quotient or exact sections derived comparison.",
+   "date": "2026-10-21",
+   "verdict": "no exact match; general homology and localization tools used"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PointSectionsDerivedReduction",
+  "date": "2026-10-21",
+  "group": "A6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-cohomological-finiteness",
+   "place": "step 6 of its split (source: proof of Theorem 19.2, p. 125 (0 -> H^r(M)/l^n -> H^r(M_n) -> H^{r+1}(M)_{l^n} -> 0, and Nakayama), and p. 124 (H^r(X,Z_l)=lim H^r(X,Z/l^n)); the blueprint ## Proof, Step 4)",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "module": "Sheaf.Paper.PrincipalReductionComparison",
+  "file": "lean/Sheaf/Paper/PrincipalReductionComparison.lean",
+  "declaration": "SheafOfModules.PrincipalReduction.Setup.comparison",
+  "declarations": [
+   "SheafOfModules.PrincipalReduction.Setup.comparison"
+  ],
+  "statement": "theorem comparison [IsDomain R] (ht : D.t ≠ 0) :\n    Nonempty (D.G ⋙ D.L ≅ D.T ⋙ D.G')",
+  "branch": "sheaf-dag",
+  "by": "A6",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-7caae",
+  "group": "A6",
+  "result": "pass",
+  "landing": "20261021T011011-L-2027053",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-7caae",
+  "group": "A6",
+  "result": "pass",
+  "landing": "20261021T011011-L-2027053",
+  "kind": "interface",
+  "note": "independent cc review: 14 delivered modules (lcompile --all clean, no sorry) and the 3 direct importers compiled against them, the Setup generalization checked against the live module, change records and node records, and the earlier C6/C7/D1 return"
+ }
+}

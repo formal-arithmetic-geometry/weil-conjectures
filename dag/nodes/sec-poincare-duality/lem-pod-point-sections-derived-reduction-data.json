@@ -1,0 +1,123 @@
+{
+ "id": "lem-pod-point-sections-derived-reduction-data",
+ "kind": "definition",
+ "title": "Shared point-section reduction data",
+ "statement": "instance pointReductionDatumAlgClosed (D : FiniteFieldDatum.{u}) : IsAlgClosed D.k",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Coefficient quotient, tensor and point-section functor constructions used by the reduction theorem"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-abstract-derived-category",
+  "def-weil-integral-derived-reduction",
+  "lem-pc-derived-tensor-second-factor-functor"
+ ],
+ "proof": [
+  {
+   "text": "The algebraic closure in the finite-field datum is algebraically closed. The established exactness theorem for point sections supplies the evaluation instances; restriction of scalars is exact. The quotient and tensor functors are the verbatim definitions moved from the original item.",
+   "uses": [
+    "lem-weil-point-proetale-sections-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-point-proetale-sections-exact"
+ ],
+ "proof_origin": {
+  "by": "A6",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Definitions and instances factored from the target module",
+  "note": "Unchanged definitions and exact-section instances factored into the data module for use before assembling the proof. No normalization module is imported or adapted."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor by quotient of a discrete valuation ring is the mapping cone of multiplication by the uniformizer power",
+   "results": "TensorProduct.tensorQuotEquivQuotSMul and tensorQuotientEquiv identify ordinary module quotients, but no derived point-sections or cone comparison.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor by quotient of a discrete valuation ring is the mapping cone of multiplication by the uniformizer power",
+   "results": "BDeRham and cotangent tensor declarations; no derived point-sections or cone comparison.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "pointReductionQuotient|pointReductionTensorSections|reductionIso in Mathlib/Algebra/Homology",
+   "results": "No matches.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PointSectionsDerivedReduction",
+  "date": "2026-10-21",
+  "group": "A6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-cohomological-finiteness",
+   "place": "step 6 of its split (source: proof of Theorem 19.2, p. 125 (0 -> H^r(M)/l^n -> H^r(M_n) -> H^{r+1}(M)_{l^n} -> 0, and Nakayama), and p. 124 (H^r(X,Z_l)=lim H^r(X,Z/l^n)); the blueprint ## Proof, Step 4)",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "module": "Sheaf.Paper.PointSectionsDerivedReductionData",
+  "declaration": "WeilConjectures.pointReductionDatumAlgClosed",
+  "declarations": [
+   "WeilConjectures.pointReductionDatumAlgClosed",
+   "WeilConjectures.pointReductionModuleDerived",
+   "WeilConjectures.pointReductionIntegralEvalLimits",
+   "WeilConjectures.pointReductionIntegralEvalColimits",
+   "WeilConjectures.pointReductionIntegralLimits",
+   "WeilConjectures.pointReductionIntegralColimits",
+   "WeilConjectures.pointReductionFiniteEvalLimits",
+   "WeilConjectures.pointReductionFiniteEvalColimits",
+   "WeilConjectures.pointReductionFiniteLimits",
+   "WeilConjectures.pointReductionFiniteColimits",
+   "WeilConjectures.pointReductionQuotient",
+   "WeilConjectures.pointReductionModuleTensor",
+   "WeilConjectures.pointReductionTensorSections",
+   "WeilConjectures.pointReductionSectionsTensor"
+  ],
+  "statement": "instance pointReductionDatumAlgClosed (D : FiniteFieldDatum.{u}) : IsAlgClosed D.k",
+  "file": "lean/Sheaf/Paper/PointSectionsDerivedReductionData.lean",
+  "branch": "sheaf-dag",
+  "by": "A6",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-7caae",
+  "group": "A6",
+  "result": "pass",
+  "landing": "20261021T011011-L-2027053",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-7caae",
+  "group": "A6",
+  "result": "pass",
+  "landing": "20261021T011011-L-2027053",
+  "kind": "interface",
+  "note": "independent cc review: 14 delivered modules (lcompile --all clean, no sorry) and the 3 direct importers compiled against them, the Setup generalization checked against the live module, change records and node records, and the earlier C6/C7/D1 return"
+ }
+}

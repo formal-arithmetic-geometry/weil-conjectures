@@ -1,0 +1,139 @@
+{
+ "id": "lem-pod-completed-integral-scalar-regular",
+ "kind": "statement",
+ "title": "Powers of the uniformizer are regular on completed coefficient sections",
+ "statement": "Let ℓ be prime, E a finite extension of Q_ℓ, T any scheme and U any object of T_proet. For every m≥0, multiplication by the mth power of the constant uniformizer is injective on sections at U of the inverse-limit completed integral coefficient sheaf.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Coefficient sheaves and finite constant quotients, Tags 093J--093M; original item step 1 and the finite-level divisibility argument"
+ },
+ "stmt_deps": [
+  "def-weil-completed-integral-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "For a domain O and nonzero π, the finite map O/(π^r)→O/(π^(m+r)), [a]↦[π^m a], is injective by cancellation in the domain. Constant sheafification on sets, universe lifting, and evaluation preserve this injection.",
+   "uses": [
+    "lem-sp-completed-integral-projection-divisibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Coefficient sheaves and finite constant quotients, Tags 093J--093M; original item step 1 and the finite-level divisibility argument"
+   }
+  },
+  {
+   "text": "For two compatible quotient families with equal products by π^m, evaluate at level m+r. Compatibility identifies the multiplied high-level projections with the images of their level-r projections under the preceding injection. Thus the level-r projections agree for all r.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Coefficient sheaves and finite constant quotients, Tags 093J--093M; original item step 1 and the finite-level divisibility argument"
+   }
+  },
+  {
+   "text": "The constant sheaf/underlying-set comparison identifies multiplication with the image of the finite multiplication map. Naturality of the constant-to-completed map identifies its scalar with the quotient uniformizer. The jointly injective inverse-limit projections prove equality of the original sections, including m=0 and empty U.",
+   "uses": [
+    "def-weil-completed-integral-coefficients",
+    "def-weil-pbc-constant-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Coefficient sheaves and finite constant quotients, Tags 093J--093M; original item step 1 and the finite-level divisibility argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-completed-integral-projection-divisibility",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-pbc-constant-sheaf"
+ ],
+ "proof_origin": {
+  "by": "A6",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Coefficient sheaves and finite constant quotients, Tags 093J--093M; original item step 1 and the finite-level divisibility argument",
+  "note": "Proved in Lean in this repair; no postponed proof and no normalization dependency."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Multiplication by a uniformizer is injective on the inverse limit of constant quotient sheaves of a discrete valuation ring",
+   "results": "8 hits inspected: adic-completion integer torsion-freeness in DedekindDomain.AdicValuation, PreTilt.isDomain, PreTilt.map_eq_zero, and finite ideal-quotient injections. None concerns the inverse limit of sheafified constant coefficients used here.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.span_singleton_pow",
+   "results": "1 hit: Mathlib.RingTheory.Ideal.Operations, Ideal.span_singleton_pow. This gives the elementary principal-ideal equality used in the kernel calculation, not the sheaf or derived result.",
+   "date": "2026-10-21",
+   "verdict": "use elementary ideal API; no full match"
+  },
+  {
+   "tool": "grep",
+   "query": "quasiIso.*[Qq]uotient|principalDerivedTensor|pointPrincipalReduction|completedIntegralScalar",
+   "results": "12 hits in HomologicalComplex localization and DerivedCategory basic/homology files; they concern the homotopy quotient, not quotient coefficients. Read the localization APIs, ShortComplex.Ab and HomologySequenceLemmas for the actual argument.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Multiplication by a uniformizer is injective on completed integral coefficient sheaves, and reduction of the completion is the finite quotient coefficient sheaf",
+   "results": "8 hits inspected: AdicCompletion.of_injective_iff, AdicCompletion.module, Valued faithful scalar completion instances, PresheafOfModules.Sheafify.SMulCandidate.mk.inj, and general completion multiplication. No completed integral coefficient sheaf or finite quotient comparison.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PointSectionsDerivedReduction",
+  "date": "2026-10-21",
+  "group": "A6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-cohomological-finiteness",
+   "place": "step 6 of its split (source: proof of Theorem 19.2, p. 125 (0 -> H^r(M)/l^n -> H^r(M_n) -> H^{r+1}(M)_{l^n} -> 0, and Nakayama), and p. 124 (H^r(X,Z_l)=lim H^r(X,Z/l^n)); the blueprint ## Proof, Step 4)",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "module": "Sheaf.Paper.CompletedIntegralScalarRegular",
+  "file": "lean/Sheaf/Paper/CompletedIntegralScalarRegular.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.completedIntegralScalar_regular",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.completedIntegralScalar_regular"
+  ],
+  "statement": "theorem completedIntegralScalar_regular\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (T : Scheme.{t})\n    (m : ℕ) (U : T.ProEtᵒᵖ) :\n    Function.Injective (fun x : (completedIntegralCoefficientSheafUnrestricted l E T).obj.obj U ↦\n      ((integralConstantToCompletionOfUniverses l E T).hom.app U\n        ((toSheafify (Scheme.ProEt.topology T)\n          ((Functor.const T.ProEtᵒᵖ).obj\n            (CommRingCat.of (ULift.{t + 1} (Padic.coefficientExtensionIntegers l E))))).app U\n              (ULift.up (Padic.coefficientExtensionUniformizer l E)))) ^ m * x)",
+  "branch": "sheaf-dag",
+  "by": "A6",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-7caae",
+  "group": "A6",
+  "result": "pass",
+  "landing": "20261021T011011-L-2027053",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-7caae",
+  "group": "A6",
+  "result": "pass",
+  "landing": "20261021T011011-L-2027053",
+  "kind": "interface",
+  "note": "independent cc review: 14 delivered modules (lcompile --all clean, no sorry) and the 3 direct importers compiled against them, the Setup generalization checked against the live module, change records and node records, and the earlier C6/C7/D1 return"
+ }
+}

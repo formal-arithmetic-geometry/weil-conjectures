@@ -1,0 +1,119 @@
+{
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-cohomological-finiteness",
+   "place": "step 6 of its split (source: proof of Theorem 19.2, p. 125 (0 -> H^r(M)/l^n -> H^r(M_n) -> H^{r+1}(M)_{l^n} -> 0, and Nakayama), and p. 124 (H^r(X,Z_l)=lim H^r(X,Z/l^n)); the blueprint ## Proof, Step 4)",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-thm-sf-compatibility",
+ "id": "lem-pod-point-sections-derived-reduction-iso",
+ "kind": "statement",
+ "title": "Derived point-section comparison component",
+ "statement": "theorem point_sections_derived_reduction_iso (_hl : l ≠ D.p) (n : ℕ) :\n    Nonempty (pointReductionTensorSections D l E n ≅ pointReductionSectionsTensor D l E n)",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 05RT, 06Y6, 06YY, 064L and 0946"
+ },
+ "stmt_deps": [
+  "lem-pod-point-sections-derived-reduction-data"
+ ],
+ "proof": [
+  {
+   "text": "Exact abelian sections follow from left exactness and the established surjectivity on epimorphisms at the algebraically closed point. The completed coefficient sequence and actual lifted quotient give the principal reduction setup.",
+   "uses": [
+    "lem-pod-point-principal-reduction-coefficients",
+    "lem-pod-point-reduction-coefficient-ring",
+    "lem-weil-point-proetale-sections-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the flat-resolution/roof-descent comparison to this setup. The canonical cochain-model comparison identifies its derived sheaf quotient with the prescribed scalarReductionDerivedExtension. Whisker by the integral constructible inclusion.",
+   "uses": [
+    "lem-pod-principal-reduction-comparison",
+    "lem-pod-scalar-reduction-cochain-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pod-point-principal-reduction-coefficients",
+  "lem-pod-point-reduction-coefficient-ring",
+  "lem-weil-point-proetale-sections-exact",
+  "lem-pod-principal-reduction-comparison",
+  "lem-pod-scalar-reduction-cochain-comparison"
+ ],
+ "proof_origin": {
+  "by": "A6",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YY and original item steps 1--12",
+  "note": "Returned circular normalization route removed. This component and all newly introduced lemmas are proved, with zero sorry."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor by quotient of a discrete valuation ring is the mapping cone of multiplication by the uniformizer power",
+   "results": "TensorProduct.tensorQuotEquivQuotSMul and tensorQuotientEquiv identify ordinary module quotients, but no derived point-sections or cone comparison.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor by quotient of a discrete valuation ring is the mapping cone of multiplication by the uniformizer power",
+   "results": "BDeRham and cotangent tensor declarations; no derived point-sections or cone comparison.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "pointReductionQuotient|pointReductionTensorSections|reductionIso in Mathlib/Algebra/Homology",
+   "results": "No matches.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PointSectionsDerivedReduction",
+  "date": "2026-10-21",
+  "group": "A6"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PointSectionsDerivedReductionIso",
+  "declaration": "WeilConjectures.point_sections_derived_reduction_iso",
+  "declarations": [
+   "WeilConjectures.point_sections_derived_reduction_iso"
+  ],
+  "statement": "theorem point_sections_derived_reduction_iso (_hl : l ≠ D.p) (n : ℕ) :\n    Nonempty (pointReductionTensorSections D l E n ≅ pointReductionSectionsTensor D l E n)",
+  "file": "lean/Sheaf/Paper/PointSectionsDerivedReductionIso.lean",
+  "branch": "sheaf-dag",
+  "by": "A6",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-7caae",
+  "group": "A6",
+  "result": "pass",
+  "landing": "20261021T011011-L-2027053",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-7caae",
+  "group": "A6",
+  "result": "pass",
+  "landing": "20261021T011011-L-2027053",
+  "kind": "interface",
+  "note": "independent cc review: 14 delivered modules (lcompile --all clean, no sorry) and the 3 direct importers compiled against them, the Setup generalization checked against the live module, change records and node records, and the earlier C6/C7/D1 return"
+ }
+}
