@@ -21264,3 +21264,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:44 L: merged deliver/Q113/lem-trf-quotient-system-mixed-coherence (reviewer PASS; first push; new nodes: 0)
 - 08:44 L: merged deliver/NZ/lem-pur-finite-open-product-swap (reviewer PASS; first push; new nodes: 0)
 - 08:44 L: merged deliver/NZ/lem-weil-boundary-etale-adjunction-restriction (reviewer FIX; first push; new nodes: 0)
+- 08:44 L: merged deliver/Q54/lem-weil-proetale-tor-interval-triangle (reviewer FIX; first push; new nodes: 0)

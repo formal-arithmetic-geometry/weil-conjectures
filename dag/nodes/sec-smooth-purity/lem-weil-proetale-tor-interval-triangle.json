@@ -13,9 +13,68 @@
   "def-weil-derived-cohomology-sheaves",
   "def-weil-triangulated-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix an arbitrary degree-zero $A_Y$-module sheaf $N$. Apply [lem-pc-kflat-resolution] on the ringed site $(Y_{\\mathrm{proet}},A_Y)$ to $N[0]$, obtaining a quasi-isomorphism $P\\to N[0]$ with $P$ K-flat and every term flat. By [lem-weil-pbc-kflat-fixed-tensor-triangulated], $K\\mapsto K\\otimes_{A_Y}P$ preserves quasi-isomorphisms and descends to an exact functor $T_P$ on $D(Y_{\\mathrm{proet}},A)$, together with its shift comparison $T_P(K[1])\\cong T_P(K)[1]$. Compare $T_P$ with the tensor of [def-weil-derived-tensor], which resolves the first argument: for a complex $K$ choose, again by [lem-pc-kflat-resolution], a quasi-isomorphism $P_K\\to K$ with $P_K$ K-flat with flat terms; by [lem-weil-derived-tensor-resolution-independent], $K\\otimes_A^LN$ is $P_K\\otimes_AN$ up to canonical isomorphism, whatever K-flat resolution was chosen. Applying [lem-weil-pbc-kflat-fixed-tensor-triangulated] to the fixed argument $P_K$ shows that $P_K\\otimes P\\to P_K\\otimes N$ is a quasi-isomorphism, and applying it to $P$ shows that $P_K\\otimes P\\to K\\otimes P$ is one. Hence $K\\otimes_A^LN\\cong T_P(K)$ in $D(Y_{\\mathrm{proet}},A)$ for every $K$, and $T_P$ supplies the tensor image $K\\mapsto K\\otimes_A^LN$ on morphisms. Therefore the given distinguished triangle is sent to a distinguished triangle with vertices $U\\otimes_A^L N$, $V\\otimes_A^L N$, $W\\otimes_A^L N$, and the shift comparison of $T_P$ identifies its last vertex with $(U\\otimes_A^L N)[1]$.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+    "def-weil-derived-tensor",
+    "lem-weil-derived-tensor-resolution-independent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08G2, lemma-cone-tor-amplitude, proof of (2); derived tensor construction Tag 06YU, definition-derived-tor and preceding paragraph."
+   }
+  },
+  {
+   "text": "Apply [lem-sf-derived-homology-long-exact] to the distinguished triangle of step 1 in the abelian category of $A_Y$-module sheaves. Its cohomology functors are the cohomology sheaves of [def-weil-derived-cohomology-sheaves]. In each integer degree $i$, the long exact sequence contains the exact segment $\\mathcal H^i(U\\otimes_A^L N)\\to\\mathcal H^i(V\\otimes_A^L N)\\to\\mathcal H^i(W\\otimes_A^L N)$. This proves the first assertion for every $N$ and $i$.",
+   "uses": [
+    "lem-sf-derived-homology-long-exact",
+    "def-weil-derived-cohomology-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0147, definition-homological and equation-long-exact-cohomology-sequence; Tag 05RS, lemma-cohomology-homological, and descent to D in definition-unbounded-derived-category."
+   }
+  },
+  {
+   "text": "Put $c=\\min(a_U,a_W)$ and $d=\\max(b_U,b_W)$. We have $c\\leq a_U\\leq b_U\\leq d$, so $[c,d]$ is ordered. If $i<c$, then $i<a_U$ and $i<a_W$; if $i>d$, then $i>b_U$ and $i>b_W$. Thus, for every test sheaf $N$, both outside terms of the exact segment in step 2 vanish by the two Tor-amplitude hypotheses and [def-weil-proetale-tor-amplitude]. Exactness then forces its middle term to vanish: the map from zero has image zero, while the map to zero has kernel the whole middle sheaf, so that sheaf is zero. This holds for every $N$ and every $i\\notin[c,d]$, which is precisely the Tor-amplitude condition for $V$ in $[c,d]$.",
+   "uses": [
+    "def-weil-proetale-tor-amplitude"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08G2, lemma-cone-tor-amplitude (2), and Tag 08FZ, definition-tor-amplitude (1); enlargement to minimum/maximum is elementary."
+   }
+  },
+  {
+   "text": "If $a_U=a_W=a$ and $b_U=b_W=b$, then $c=\\min(a,a)=a$ and $d=\\max(b,b)=b$. Step 3 therefore gives Tor amplitude in the same ordered interval $[a,b]$, as asserted. This is an interval of vanishing, with no assertion that its endpoints are optimal. All preceding steps quantified over arbitrary module sheaves and used no constructibility, boundedness of the vertices, or finiteness of $A$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08G2, lemma-cone-tor-amplitude (2)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+  "def-weil-derived-tensor",
+  "lem-weil-derived-tensor-resolution-independent",
+  "lem-sf-derived-homology-long-exact",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-proetale-tor-amplitude"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08G2, lemma-cone-tor-amplitude, proof hint for (2), expanded using 06YS, 06YU and derived.tex 0147/05RS; unequal intervals by elementary endpoint inequalities."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -51,10 +110,45 @@
    "results": "Hits: DerivedCategory.TStructure.t, DerivedCategory.IsLE, DerivedCategory.IsGE, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.instIsGEObjSingleFunctor. ",
    "date": "2026-10-21",
    "verdict": "no match: the hits do not assert the Tor-amplitude predicate for arbitrary ordinary constant-ring module sheaves, its quantified tensor tests, and the stated quantitative interval conclusion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tor amplitude of the middle vertex of a distinguished triangle of pro-etale module sheaves is bounded by the minimum lower endpoint and maximum upper endpoint of the outside vertices",
+   "results": "DerivedCategory.TStructure.t; DerivedCategory.isLE_Q_obj_iff; DerivedCategory.IsLE; DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE; DerivedCategory.isGE_Q_obj_iff; DerivedCategory.IsGE; DerivedCategory.isLE_iff; DerivedCategory.isGE_iff",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits do not state the quantified ordinary module-sheaf Tor condition or its tensor-triangle exact segment and interval conclusion"
+  },
+  {
+   "tool": "grep",
+   "query": "tor.?[Aa]mplitude|torAmplitudeIn|finiteTorAmplitude",
+   "results": "No hits.",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits do not state the quantified ordinary module-sheaf Tor condition or its tensor-triangle exact segment and interval conclusion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tor amplitude is stable under extensions in a distinguished triangle of complexes of sheaves",
+   "results": "HomotopyCategory.Pretriangulated.distinguishedTriangles; HomotopyCategory.Pretriangulated.isomorphic_distinguished; DerivedCategory.triangleOfSES_distinguished; DerivedCategory.mem_distTriang_iff; CategoryTheory.Triangulated.TStructure.triangleLTGE_distinguished; CategoryTheory.ShortComplex.ShortExact.singleTriangle; CategoryTheory.ObjectProperty.ext_of_isTriangulatedClosed₃; CategoryTheory.ShortComplex.ShortExact.singleTriangle_distinguished",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits do not state the quantified ordinary module-sheaf Tor condition or its tensor-triangle exact segment and interval conclusion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TorAmplitude\"",
+   "results": "No hits.",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits do not state the quantified ordinary module-sheaf Tor condition or its tensor-triangle exact segment and interval conclusion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact sequence of cohomology after derived tensor implies that complexes with Tor amplitude in a common interval are closed under extensions",
+   "results": "CategoryTheory.Abelian.Ext.contravariant_sequence_exact₁'; CategoryTheory.Abelian.Ext.contravariant_sequence_exact₃'; CategoryTheory.Abelian.Ext.contravariant_sequence_exact₁; CategoryTheory.Abelian.Ext.covariant_sequence_exact₁; CategoryTheory.Abelian.Ext.covariant_sequence_exact₁'; CategoryTheory.Abelian.Ext.contravariant_sequence_exact₃; CategoryTheory.Abelian.Ext.covariant_sequence_exact₃'; CategoryTheory.isZero_Tor_succ_of_projective",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits do not state the quantified ordinary module-sheaf Tor condition or its tensor-triangle exact segment and interval conclusion"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-integral-ctf-triangulated",
@@ -71,9 +165,41 @@
     "lem-weil-integral-ctf-triangulated"
    ]
   },
-  "same_as": [
-   "det-def-sfb-constructible-tor-amplitude"
-  ],
+  "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-weil-proetale-tor-interval-triangle",
+  "worker": "stage1",
+  "summary": "Expanded Stacks 08G2(2) into the K-flat resolution, exact tensor functor, cohomology segment, and elementary vanishing argument, reusing existing nodes throughout. Checked arbitrary coefficient rings and arbitrary test sheaves, all four statement dependencies, and the absence of a complete upstream attachment. No new nodes. Removed the inherited same_as pointer to the condensed-coefficient constructible-Tor definition, which is related but does not state this result.",
+  "blueprint": "Realizes the closure under extensions implicit in the finite-stage Tor condition and the integral-stage uniform reduction bounds of def-weil-finite-tor-amplitude, via the parent lem-weil-integral-ctf-triangulated steps 4-5. The ambient-typing unit uses this as a generic module-derived-category tool; no unit route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic resolution theorem for arbitrary complexes on a ringed site; supplies a flat-term K-flat model of the arbitrary test sheaf N, absent from this ambient-typing unit."
+   },
+   {
+    "node": "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+    "why": "Generic exactness theorem for fixed K-flat tensor on any ringed site; applies to the test sheaf resolution and supplies tensor preservation of distinguished triangles, not a replacement geometric route."
+   },
+   {
+    "node": "lem-weil-derived-tensor-resolution-independent",
+    "why": "Generic resolution-independence of the pro-etale K-flat tensor of def-weil-derived-tensor; lets step 1 compute K tensor N with a flat-term K-flat resolution of K, needed to compare it with the fixed-argument tensor by the resolution P of N. No node of the ambient-typing unit states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+  "lem-weil-derived-tensor-resolution-independent"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q54-d55105c83",
+  "group": "Q54",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q54-d55105c83 (reviewer sub-agent of L); spot-checked: This is an ordinary first split: the item is unsplit live and side-live, no repair note exists, and it is not on the dropped list. The statement is unchanged, there are no new nodes, and removing the blueprint same_as to the condensed det-def-sfb-constructible-tor-amplitude is correct (different coefficient setting, same-interval clause only). Source Stacks 08G2(2) (sites-cohomology.tex:12566) was checked, with unequal intervals widened via 08FZ. Steps 2-4 are correct: the Mathlib leaf for the long exact sequence holds in any abelian category, the cohomology sheaves match, and the min/max vanishing argument is elementary. The N=0, split-triangle, disjoint [0,0]/[2,2], negative-endpoint, non-flat N over Z/4 and zero-ring cases were checked. Fix in step 1: def-weil-derived-tensor resolves the first argument, but lem-weil-pbc-kflat-fixed-tensor-triangulated identifies K -> K⊗P (with P resolving N) only with the descent bifunctor, so the claimed 'canonical identification' had no node behind it. I added lem-weil-derived-tensor-resolution-independent to choose a flat-term P_K, then applied the fixed-tensor lemma twice: P_K⊗P -> P_K⊗N and P_K⊗P -> K⊗P are both quasi-isomorphisms. The citation is added to uses and proof_deps and declared in tool_uses; it is generic and forms no cycle. The worker's tool uses lem-pc-kflat-resolution and the fixed-tensor lemma are accepted. No duplicate was found: kun-derived-tensor-triangulated is étale-only and interval-shift is a sibling lemma.; 1 file(s) fixed by the reviewer"
  }
 }
