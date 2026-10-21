@@ -16,11 +16,142 @@
   "def-pur-derived-internal-hom",
   "def-kun-constant-projection-morphism",
   "def-kun-constant-sheaf",
-  "def-weil-open-immersion"
+  "def-weil-open-immersion",
+  "def-pur-derived-constant-pullback-comparison"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $L_TQ=\\underline Q_T$, $R_T=R\\Gamma(T,-)$ and $I_T(G,M)=R\\mathcal Hom_A(G,M)$. The constant/sections adjunction of [def-kun-constant-projection-morphism] and the closed adjunction of [lem-sf-ringed-derived-closed-symmetric-monoidal], applied on the small ringed site $(T_{\\mathrm{et}},A_T)$, give natural bijections\n$$\\operatorname{Hom}(Q,R_TI_T(G,M))\\cong\\operatorname{Hom}(L_TQ,I_T(G,M))\\cong\\operatorname{Hom}(L_TQ\\otimes_A^LG,M).$$\nAll three objects are arbitrary unbounded objects, as allowed in both cited statements. If $\\varepsilon$ is the constant/sections counit and $e$ the internal tensor-Hom counit, define $\\mathrm{ev}_{G,M}=e_{G,M}\\circ(\\varepsilon_{I_T(G,M)}\\otimes1_G)$. The explicit counit formula in the closed-adjunction statement shows that the displayed bijection sends $f:Q\\to\\mathsf H_T(G,M)$ to $\\mathrm{ev}_{G,M}\\circ(L_Tf\\otimes1_G)$. In particular the identity has the required image. Denote the inverse bijection by $\\operatorname{tr}_T$.",
+   "uses": [
+    "def-kun-constant-projection-morphism",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 (lemma-adjoint), 08J9 (lemma-internal-hom), equation-internal-hom; composition of their Hom bijections."
+   }
+  },
+  {
+   "text": "For $u:G'\\to G$ and $v:M\\to M'$, let $h=\\mathsf H_T(u,v):\\mathsf H_T(G,M)\\to\\mathsf H_T(G',M')$. Naturality of the two bijections in step 1 gives the equality\n$$\\mathrm{ev}_{G',M'}\\circ(L_Th\\otimes1_{G'})=v\\circ\\mathrm{ev}_{G,M}\\circ(1\\otimes u).$$\nIndeed both sides are the untranspose of $h$, the right side by naturality in $G,M$, the left side by naturality in $Q$. Thus this equation follows from the stated naturality of the closed adjunction [lem-sf-ringed-derived-closed-symmetric-monoidal] and of $L_T\\dashv R_T$ [def-kun-constant-projection-morphism], without an additional evaluation lemma.",
+   "uses": [
+    "def-kun-constant-projection-morphism",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J9, functoriality of equation-internal-hom; Tag 07A6, bifunctoriality of the adjunction."
+   }
+  },
+  {
+   "text": "Construct $\\chi$ by first replacing $L_P(C\\otimes_A^LD)$ with $L_PC\\otimes_A^LL_PD$, replacing these constants by $a^{-1}L_XC$ and $b^{-1}L_YD$, then reassociating and interchanging the middle two factors $b^{-1}L_YD$ and $a^{-1}E$. Constant pullback is exactly [def-pur-derived-constant-pullback-comparison]. Scheme inverse image is exact module pullback by [prop-weil-pbc-inverse-image-modules-exact]; its derived tensor comparison and signed coherence are therefore supplied by [lem-pur-exact-pullback-signed-comparison]. The same result applies to constant realization, the exact module inverse image from the one-point site with ring $A$, as identified in [def-kun-constant-projection-morphism]. The signed symmetric monoidal structure is [lem-sf-ringed-derived-closed-symmetric-monoidal]. Thus $\\chi$ is a natural isomorphism, with middle interchange $z\\otimes e\\mapsto(-1)^{|z||e|}e\\otimes z$. Put\n$$B=(a^{-1}\\mathrm{ev}_{E,K}\\otimes_A^Lb^{-1}\\mathrm{ev}_{H,L})\\circ\\chi.$$\nIt has source $L_P(C\\otimes_A^LD)\\otimes_A^LG$ and target $F$. Define $\\beta=\\operatorname{tr}_P(B)$ using step 1. Every map is a map of the specified derived categories, so this definition needs no choice of resolutions or boundedness hypothesis.",
+   "uses": [
+    "def-pur-derived-constant-pullback-comparison",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-pur-exact-pullback-signed-comparison",
+    "def-kun-constant-projection-morphism",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4 (lemma-pullback-tensor-product), its total K-flat construction; Tag 0FPT (lemma-symmetric-monoidal-derived); Tag 08J9, transposition."
+   }
+  },
+  {
+   "text": "Take $u:E'\\to E$, $v:H'\\to H$, $s:K\\to K'$, $t:L\\to L'$. Write $c=\\mathsf H_X(u,s):C\\to C'$, $d=\\mathsf H_Y(v,t):D\\to D'$, $g=a^{-1}u\\otimes_A^Lb^{-1}v:G'\\to G$, and $f=a^{-1}s\\otimes_A^Lb^{-1}t:F\\to F'$. Tensoring the two evaluation equations of step 2 and using naturality of every factor of $\\chi$ gives\n$$B'\\circ(L_P(c\\otimes_A^Ld)\\otimes1_{G'})=f\\circ B\\circ(1\\otimes g).$$\nHere naturality of the signed interchange is the naturality assertion of [lem-sf-ringed-derived-closed-symmetric-monoidal], and the pullback tensor comparisons are natural by [lem-pur-exact-pullback-signed-comparison]. By the formula for untransposition in step 1, these are the untransposes of $\\beta'\\circ(c\\otimes_A^Ld)$ and $\\mathsf H_P(g,f)\\circ\\beta$. Injectivity of that bijection proves their equality. Setting three of $u,v,s,t$ to identities proves naturality separately in each of the four variables.",
+   "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-pur-exact-pullback-signed-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J9, naturality of the Hom bijection; Tag 07A4, bifunctoriality; agent expansion of external evaluation naturality."
+   }
+  },
+  {
+   "text": "For an open $j:T'\\hookrightarrow T$, identify the small etale site of $T'$ with the slice of $T_{\\mathrm{et}}$ at $T'\\to T$: an object is precisely an etale $V\\to T$ equipped with a map $V\\to T'$ over $T$, and coverings are the same. By [lem-weil-pbc-etale-inverse-image-restriction] (1), applied to the etale morphism $j$, the scheme inverse image $j^{-1}$ is identified with this restriction by a natural isomorphism $\\rho$, termwise on complexes; being natural, $\\rho$ respects the $A$-actions, and both tensor comparisons send a local $x\\otimes y$ to $x\\otimes y$, so they agree under $\\rho$. Write $j^*$ for this restriction. For $Z\\in D(T_{\\mathrm{et}},A)$ the derived-sections restriction $s_Z:R_TZ\\to R_{T'}j^*Z$ is the $L_{T'}\\dashv R_{T'}$ adjunct of\n$$L_{T'}R_TZ\\cong j^*L_TR_TZ\\xrightarrow{j^*\\varepsilon_Z}j^*Z.$$\nThis is the usual restriction (clause (2) of [lem-weil-pbc-etale-inverse-image-restriction]: under $\\rho$ the unit of $j^{-1}\\dashv j_*$ is restriction of sections): under the constants/sections adjunction it sends a constant-source morphism to its pullback. The canonical constant comparison is [def-pur-derived-constant-pullback-comparison]. The counit formula for the adjunction [def-kun-constant-projection-morphism] gives, with that comparison understood,\n$$\\varepsilon_{j^*Z}\\circ L_{T'}s_Z=j^*\\varepsilon_Z.$$\nThis equation is simply the inverse Hom-bijection applied to its defining adjunct, so no invertibility of the sections restriction is asserted.",
+   "uses": [
+    "def-pur-derived-constant-pullback-comparison",
+    "def-kun-constant-projection-morphism",
+    "lem-weil-pbc-etale-inverse-image-restriction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A6 (lemma-adjoint), counit formula for restriction of derived sections; Tag 08JB, slice restriction."
+   }
+  },
+  {
+   "text": "Let $\\eta:j^*I_T(G,M)\\cong I_{T'}(j^*G,j^*M)$ be the canonical restriction comparison. The node [lem-weil-pbc-ringed-slice-evaluation-transpose] states both its existence for arbitrary unbounded objects and its compatibility with the internal evaluation counit. Define the restriction on global derived Hom by\n$$r_j=R_{T'}(\\eta)\\circ s_{I_T(G,M)}.$$\nThis is restriction of global derived morphisms, since $s$ restricts sections and $\\eta$ restricts internal Hom. Naturality of the constant/sections counit, then step 5, gives\n$$\\varepsilon_{I_{T'}(j^*G,j^*M)}\\circ L_{T'}r_j=\\eta\\circ j^*\\varepsilon_{I_T(G,M)}.$$\nInsert this into the formula for global evaluation in step 1 and use the internal evaluation equation of the cited slice node. With the canonical tensor and constant comparisons suppressed, the result is\n$$\\mathrm{ev}_{j^*G,j^*M}\\circ(L_{T'}r_j\\otimes1_{j^*G})=j^*\\mathrm{ev}_{G,M}.$$\nConsequently, for any $w:Q\\to\\mathsf H_T(G,M)$, the untranspose of $r_jw$ is $j^*$ of the untranspose of $w$. This follows by composing the displayed equality with $L_{T'}w\\otimes1$.",
+   "uses": [
+    "lem-weil-pbc-ringed-slice-evaluation-transpose",
+    "def-kun-constant-projection-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08JB (lemma-restriction-RHom-to-U), 08J9 (lemma-internal-hom), 07A6 (lemma-adjoint); compose internal evaluation compatibility with the sections counit."
+   }
+  },
+  {
+   "text": "The constant-pullback identifications used here respect composition. In fact [lem-weil-pbc-constant-pullback-composition-coherence] states the equality before deriving, for every abelian group. Apply it to each underlying abelian group $Q^n$ of a complex of $A$-modules. All comparison maps respect the $A$-action because they are induced by constant sections; the equality commutes with the differentials by naturality. Localizing therefore gives the same equality for $Q\\in D(A)$, using the termwise construction in [def-pur-derived-constant-pullback-comparison]. In particular the two constant identifications for $k^{-1}a^{-1}$ and $a'^{-1}j^{-1}$ coincide when $ak=ja'$; the analogous assertion holds for $b'=bk$.",
+   "uses": [
+    "lem-weil-pbc-constant-pullback-composition-coherence",
+    "def-pur-derived-constant-pullback-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "sites.tex Tag 03CB (lemma-composition-morphisms-sites), categories.tex Tag 0B65 (lemma-transformation-between-functors-and-adjoints), termwise localization of the constant comparison."
+   }
+  },
+  {
+   "text": "For the square in the statement, identify $k^{-1}a^{-1}$ with $a'^{-1}j^{-1}$ and $k^{-1}b^{-1}$ with $b'^{-1}$. The node [lem-kun-derived-pullback-composition-monoidal] gives the tensor compatibility of these canonical composition comparisons. The associator and symmetry equations of [lem-pur-exact-pullback-signed-comparison] show that $k^{-1}$ preserves the reassociation and middle interchange used in $\\chi$. Together with the constants equality of step 7 these give equality of $k^{-1}\\chi$ with the corresponding $\\chi'$ after the canonical identifications of all four input factors. More explicitly, for the constants use the cochain composition equation of [lem-pur-cochain-pullback-tensor-coherence] for the structural ringed-site maps to the one-point site. On flat-term K-flat representatives its equality localizes to the desired equality, by the unique representative formula of [lem-pur-exact-pullback-signed-comparison]; these exact pullbacks preserve such representatives. For the two geometric inverse images use [lem-kun-derived-pullback-composition-monoidal] for $(a,k)$ and $(j,a')$, and for $(b,k)$. The only nontrivial permutation is still interchange of the $D$ and $a^{-1}E$ factors, preserved by the cited symmetry equation. Thus every factor of the two composites agrees, not just their underlying objects.",
+   "uses": [
+    "lem-kun-derived-pullback-composition-monoidal",
+    "lem-pur-exact-pullback-signed-comparison",
+    "lem-pur-cochain-pullback-tensor-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, canonical K-flat tensor comparison under composition; signed reassociation and symmetry equations. Agent expansion of the restriction comparison."
+   }
+  },
+  {
+   "text": "The morphism $k:P\\times_XX'\\to P$ is an open immersion by [lem-weil-pbc-open-immersion-base-change], applied to the open immersion $j$ and the arbitrary morphism $a$; likewise for the open pullback over $Y$. Put $C'=\\mathsf H_{X'}(j^{-1}E,j^{-1}K)$ and let $r_X:C\\to C'$ and $r_P:\\mathsf H_P(G,F)\\to\\mathsf H_{P'}(k^{-1}G,k^{-1}F)$ be the restrictions of step 6. Write $B'$ for the external untransposed evaluation constructed on $(X',Y,P')$. Applying the evaluation equation of step 6 on $X$ yields\n$$a'^{-1}\\mathrm{ev}_{j^{-1}E,j^{-1}K}\\circ(a'^{-1}L_{X'}r_X\\otimes1)=k^{-1}a^{-1}\\mathrm{ev}_{E,K}.$$\nThe second evaluation is unchanged, with $b'^{-1}=k^{-1}b^{-1}$. Tensor these equalities and insert the $\\chi$ equality of step 8. They give\n$$B'\\circ(L_{P'}(r_X\\otimes_A^L1_D)\\otimes1_{k^{-1}G})=k^{-1}B.$$\nBy step 6 on $P$, the right side is the untranspose of $r_P\\beta$. By step 1 the left side is the untranspose of $\\beta'\\circ(r_X\\otimes_A^L1_D)$. Injectivity proves the required restriction square. For an open $j_Y:Y'\\hookrightarrow Y$, put $P''=P\\times_YY'$, restrict the second evaluation instead, and use the identical equality with $1_C\\otimes r_Y$ in place of $r_X\\otimes1_D$. The first evaluation is then unchanged and the same middle interchange is preserved by step 8, so its square also commutes. All cited adjunctions and comparisons hold on unbounded objects; no flatness or boundedness hypothesis was introduced.",
+   "uses": [
+    "lem-weil-pbc-ringed-slice-evaluation-transpose",
+    "lem-weil-pbc-open-immersion-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08JB and 08J9; external tensor of the two evaluation equations, followed by injectivity of the composed adjunction bijection."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-constant-projection-morphism",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "def-pur-derived-constant-pullback-comparison",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-pur-exact-pullback-signed-comparison",
+  "lem-weil-pbc-ringed-slice-evaluation-transpose",
+  "lem-weil-pbc-constant-pullback-composition-coherence",
+  "lem-kun-derived-pullback-composition-monoidal",
+  "lem-pur-cochain-pullback-tensor-coherence",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-etale-inverse-image-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08J9, 08JB, 07A6, 07A4 and 0FPT; explicit external evaluation and global-sections counit calculation, realizing lem-pur-kunneth-supported proof paragraphs 1 and 3."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -63,10 +194,45 @@
    "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CategoryTheory.ihom\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.MonoidalCategory C] (A : C) [CategoryTheory.Closed A] : CategoryTheory.Functor C C\", \"doc\": \"This is the internal hom `A ⟶[C] -`.\"}\n  {\"name\": \"CategoryTheory.ihom.instIsRightAdjoint\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.MonoidalCategory C] (A : C) [CategoryTheory.Closed A] : (CategoryTheory.ihom A).IsRightAdjoint\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.ihom.adjunction\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.MonoidalCategory C] (A : C) [CategoryTheory.Closed A] : CategoryTheory.MonoidalCategory.tensorLeft A ⊣ CategoryTheory.ihom A\", \"doc\": \"The adjunction between `A ⊗ -` and `A ⟹ -`.\"}\n  {\"name\": \"CategoryTheory.MonoidalClosed.id\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.MonoidalCategory C] (x : C) [CategoryTheory.Closed x] : CategoryTheory.MonoidalCategoryStruct.tensorUnit C ⟶ x ⟹ x\", \"doc\": \"The C-identity morphism\\n  `𝟙_ C ⟶ hom(x, x)`\\nused to equip `C` with the structure of a `C`-category\"}\n  {\"name\": \"CategoryTheory.MonoidalClosed.unitIsoSelf\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.MonoidalCategory C] (X : C) [CategoryTheory.Closed (CategoryTheory.MonoidalCategoryStruct.tensorUnit C)] : CategoryTheory.MonoidalCategoryStruct.tensorUnit C ⟹ X ≅ X\", \"doc\": \"The internal hom object from the unit to any object is isomorphic to that object.\\nThe typeclass argument is explicit: any instance can be used.\"}\n  {\"name\": \"CategoryTheory.MonoidalClosed.unitNatIso\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.MonoidalCategory C] [CategoryTheory.Closed (CategoryTheory.MonoidalCategoryStruct.tensorUnit C)] : CategoryTheory.Functor.id C ≅ CategoryTheory.ihom (CategoryTheory.MonoidalCategoryStruct.tensorUnit C)\", \"doc\": \"The internal hom out of the unit is naturally isomorphic to the identity functor.\"}\n  {\"name\": \"CategoryTheory.MonoidalClosed.curry'\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.MonoidalCategory C] {X Y : C} [CategoryTheory.Closed X] (f : X ⟶ Y) : CategoryTheory.MonoidalCategoryStruct.tensorUnit C ⟶ X ⟹ Y\", \"doc\": \"The morphism `𝟙_ C ⟶ (ihom X).obj Y` corresponding to a morphism `X ⟶ Y`.\"}\n  {\"name\": \"CategoryTheory.MonoidalClosed.uncurry'\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.MonoidalCategory C] {X Y : C} [CategoryTheory.Closed X] (g : CategoryTheory.MonoidalCategoryStruct.tensorUnit C ⟶ X ⟹ Y) : X ⟶ Y\", \"doc\": \"The morphism `X ⟶ Y` corresponding to a morphism `𝟙_ C ⟶ (ihom X).obj Y`.\"}\n  {\"name\": \"CategoryTheory.MonoidalClosed.curryHomEquiv'\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.MonoidalCategory C] {X Y : C} [CategoryTheory.Closed X] : (X ⟶ Y) ≃ (CategoryTheory.MonoidalCategoryStruct.tensorUnit C ⟶ X ⟹ Y)\", \"doc\": \"The bijection `(X ⟶ Y) ≃ (𝟙_ C ⟶ (ihom X).obj Y)` in a monoidal closed category.\"}\n  {\"name\": \"CategoryTheory.MonoidalClosed.curry\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.MonoidalCategory C] {A X Y : C} [CategoryTheory.Closed A] : (CategoryTheory.MonoidalCategoryStruct.tensorObj A Y ⟶ X) → (Y ⟶ A ⟹ X)\", \"doc\": \"Currying in a monoidal closed category.\"}\n  {\"name\": \"CategoryTheory.MonoidalClosed.uncurry\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.MonoidalCategory C] {A X Y : C} [CategoryTheory.Closed A] : (Y ⟶ A ⟹ X) → (CategoryTheory.MonoidalCategoryStruct.tensorObj A Y ⟶ X)\", \"doc\": \"Uncurrying in a monoidal closed category.\"}\n  {\"name\": \"CategoryTheory.MonoidalClosed.internalHom_obj\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.MonoidalCategory C] [CategoryTheory.MonoidalClosed C] (X : Cᵒᵖ) : CategoryTheory.MonoidalClosed.internalHom.obj X = CategoryTheory.ihom (Opposite.unop X)\", \"doc\": \"\"}",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "External evaluation pairing of unbounded derived global Hom complexes on etale sheaves is contravariantly natural and commutes with open restriction",
+   "results": "{\"available\": true, \"hits\": 8, \"top\": [\"AlgebraicGeometry.Scheme.Hom.map_appLE\", \"AlgebraicGeometry.Scheme.Hom.naturality\", \"AlgebraicGeometry.Scheme.Hom.naturality_assoc\", \"AlgebraicGeometry.LocallyRingedSpace.evaluation_naturality\", \"AlgebraicGeometry.LocallyRingedSpace.evaluation_naturality_apply\", \"CategoryTheory.Sheaf.ΓHomEquiv_naturality_left\", \"CategoryTheory.Sheaf.ΓHomEquiv_naturality_right\", \"CategoryTheory.Sheaf.ΓHomEquiv_naturality_left_symm\"], \"note\": \"\", \"subdirectory\": \"\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern ordinary sections adjunctions, light condensed internal Hom, or scheme structure sheaf maps, not the unbounded etale external global-Hom evaluation transformation."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ihom.ev_naturality",
+   "results": "{\"available\": true, \"hits\": 1, \"top\": [\"CategoryTheory.ihom.ev_naturality\"], \"note\": \"\", \"subdirectory\": \"\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the item: CategoryTheory.ihom.ev_naturality is a generic closed-category counit identity; it does not supply the derived sheaf structures or the external and restriction transformation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor product of derived global Hom complexes maps to the derived global Hom of external tensor products naturally under open restriction",
+   "results": "{\"available\": true, \"hits\": 8, \"top\": [\"TensorProduct.AlgebraTensorModule.homTensorHomMap\", \"PresheafOfModules.Monoidal.tensorObjMap\", \"HomologicalComplex.tensorHom\", \"TensorProduct.lTensorHomToHomLTensor\", \"TensorProduct.rTensorHomToHomRTensor\", \"TensorProduct.homTensorHomMap\", \"PresheafOfModules.Monoidal.tensorHom\", \"PresheafOfModules.Monoidal.tensorObj\"], \"note\": \"\", \"subdirectory\": \"\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary tensor-of-linear-map and presheaf tensor constructions, not derived etale global Hom."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compose constant sheaf global sections adjunction with closed tensor Hom adjunction to transpose tensor product of evaluations naturally",
+   "results": "{\"available\": true, \"hits\": 8, \"top\": [\"LightCondensed.ihomPoints_symm_apply\", \"CategoryTheory.Sheaf.ΓHomEquiv_naturality_right\", \"CategoryTheory.Sheaf.ΓHomEquiv\", \"LightCondensed.ihomPoints_apply\", \"CategoryTheory.Sheaf.ΓHomEquiv_naturality_left\", \"LightCondensed.ihomPoints\", \"CategoryTheory.Sheaf.ΓHomEquiv_naturality_left_symm\", \"CategoryTheory.Sheaf.ΓHomEquiv_naturality_right_symm\"], \"note\": \"\", \"subdirectory\": \"\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern ordinary sections adjunctions, light condensed internal Hom, or scheme structure sheaf maps, not the unbounded etale external global-Hom evaluation transformation."
+  },
+  {
+   "tool": "grep",
+   "query": "ev_naturality|curry_natural|uncurry_natural",
+   "results": "{\"available\": true, \"hits\": 20, \"top\": [\"Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Ideal.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Ideal.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Ideal.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Ideal.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Ideal.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean\"], \"note\": \"\", \"subdirectory\": \"CategoryTheory/Monoidal/Closed\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the item: generic closed currying/naturality or Day convolution only."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-external-rhom-cone-pairing",
@@ -86,5 +252,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-external-evaluation-transpose-natural",
+  "worker": "stage1",
+  "summary": "Composed the existing constants/sections and closed tensor-Hom adjunctions, constructed the external evaluation transpose, and proved four-variable naturality and both open-restriction squares by explicit untransposition and counit equations. Reused existing general comparison nodes; no new node and no statement correction. Preserved the creating split searches and added logged Q80 searches.",
+  "blueprint": "Nearest ancestor lem-pur-kunneth-supported, current main-20261015 proof paragraphs 1 and 3: the restriction-commuting external maps and the identification with the supported exterior product. This item realizes the global evaluation naturality/restriction part extracted from old steps 2 and 5 of lem-pur-external-rhom-cone-pairing, without invoking that parent.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "why": "The unbounded ringed-site tensor-Hom adjunction, explicit counit, and signed symmetry are generic tools, not a different geometric purity or Kunneth proof route."
+   },
+   {
+    "node": "lem-kun-derived-pullback-composition-monoidal",
+    "why": "The canonical inverse-image composition equation is the generic coherence tool for restricting the four-factor evaluation composite; the affine-line unit has no replacement for it."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-slice-evaluation-transpose",
+    "why": "Its unbounded evaluation-counit restriction equation is the generic ringed-site tool needed before tensoring the external evaluations; the item proves the external square itself."
+   },
+   {
+    "node": "lem-weil-pbc-constant-pullback-composition-coherence",
+    "why": "The ordinary constant-section composition identity is used termwise, solely to fix the canonical constants identifications in the restriction square."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Exactness and identification with ringed module pullback allow the same-unit signed comparison theorem to apply to arbitrary scheme inverse images."
+   },
+   {
+    "node": "lem-weil-pbc-etale-inverse-image-restriction",
+    "why": "Identifies scheme inverse image along an open immersion with slice restriction (and its unit with restriction of sections), so the generic slice evaluation node applies to the scheme pullbacks k^{-1}, j^{-1}; added by the maintainer reader."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-kun-derived-pullback-composition-monoidal",
+  "lem-weil-pbc-ringed-slice-evaluation-transpose",
+  "lem-weil-pbc-constant-pullback-composition-coherence",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-etale-inverse-image-restriction"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q80-8cba44aed",
+  "group": "Q80",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q80-8cba44aed (reviewer sub-agent of L); spot-checked: I read the full nine-step split and every cited statement, plus Stacks 08J9 and 08JB in sites-cohomology.tex (l. 8896 and l. 8934). There are no new nodes and the statement is unchanged; the added stmt_dep def-pur-derived-constant-pullback-comparison is needed for χ. The closure walk finds no cycle. Steps 1–4 check: L⊣RΓ composed with the closed tensor-Hom adjunction, the untranspose formula, χ built from the exact-pullback signed comparison (constants treated as exact module pullback from the point) with Koszul sign (-1)^{|z||e|}, and four-variable naturality by injectivity. Step 6 checks: I recomputed the counit chain using the slice evaluation-transpose node. Steps 7–9 check: termwise constant composition coherence, the composition-monoidal and cochain composition equations, and k open by base change. One fault (C1/C4): steps 5, 6 and 9 work with slice restriction j*, while the statement and χ use the scheme inverse image k^{-1}, a'^{-1}j^{-1}, and no step cited a node identifying the two. Repaired: step 5 now cites lem-weil-pbc-etale-inverse-image-restriction (1) for ρ: j^{-1}G≅G|_Y, which respects A-actions and the pure-tensor comparisons, and (2) for the unit being restriction of sections. The node is added to uses and proof_deps and declared in tool_uses. I accept all other declared tool_uses as generic. Small cases checked: the point, empty and identity opens, and the signs. No SGA is cited.; 1 file(s) fixed by the reviewer"
  }
 }
