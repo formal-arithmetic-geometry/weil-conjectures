@@ -23,7 +23,7 @@
    }
   },
   {
-   "text": "Fix $j$. Since $q_ja_j=q_jb_j$, the coequalizer property of $r_j$ in (1), with $T=P_j$ and $h=q_j$, gives a unique $c_j:Q_j\\to P_j$ such that $c_jr_j=q_j$. Since $r_ja_j=r_jb_j$, the coequalizer property of $q_j$, with $T=Q_j$ and $h=r_j$, gives a unique $d_j:P_j\\to Q_j$ such that $d_jq_j=r_j$. These are morphisms in $\\mathcal D$ at this point; no action on $H_j$ was used.",
+   "text": "Fix $j$. Since $q_ja_j=q_jb_j$, the coequalizer property of $r_j$ in (1), with $T=P_j$ and $h=q_j$, gives a unique $c_j:Q_j\\to P_j$ such that $c_jr_j=q_j$. Since $r_ja_j=r_jb_j$, the coequalizer property of $q_j$, with $T=Q_j$ and $h=r_j$, gives a unique $d_j:P_j\\to Q_j$ such that $d_jq_j=r_j$. These are morphisms in $\\mathcal D$ at this point; no action on $H_j$ was used. In Lean these two factorizations are the hom and inv of IsColimit.coconePointUniqueUpToIso for the two given colimit coforks; its normalization lemmas give the displayed equations.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -32,7 +32,7 @@
    }
   },
   {
-   "text": "The two composites satisfy $(d_jc_j)r_j=d_jq_j=r_j=1_{Q_j}r_j$ and $(c_jd_j)q_j=c_jr_j=q_j=1_{P_j}q_j$. Applying the uniqueness argument in step 1 to $r_j$ and $q_j$, respectively, proves $d_jc_j=1_{Q_j}$ and $c_jd_j=1_{P_j}$. Thus the underlying morphisms are inverse isomorphisms.",
+   "text": "The two composites satisfy $(d_jc_j)r_j=d_jq_j=r_j=1_{Q_j}r_j$ and $(c_jd_j)q_j=c_jr_j=q_j=1_{P_j}q_j$. Applying the uniqueness argument in step 1 to $r_j$ and $q_j$, respectively, proves $d_jc_j=1_{Q_j}$ and $c_jd_j=1_{P_j}$. Thus the underlying morphisms are inverse isomorphisms. Lean uses the inverse identities supplied by this same Mathlib coequalizer comparison.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -76,7 +76,7 @@
    }
   },
   {
-   "text": "The inverse family is natural too: for $u:j\\to k$,\n\\[\n(Q(u)d_j)q_j=Q(u)r_j=r_kB(u)=d_kq_kB(u)=(d_kP(u))q_j.\n\\]\nStep 1 applied to $q_j$ proves $Q(u)d_j=d_kP(u)$. As in [sk-def-sfb-module-objects], the equality of these underlying module morphisms is precisely their equality in the module category.",
+   "text": "Naturality of the inverse family also follows directly from step 6 and the inverse identities of step 3: compose P(u)c_j = c_kQ(u) on the left with d_k and on the right with d_j, and cancel the two inverse pairs, obtaining d_kP(u) = Q(u)d_j. Module morphisms have the underlying composition of [sk-def-sfb-module-objects], so the equality holds in the module category. Lean uses NatIso.ofComponents, which supplies precisely this inverse naturality from naturality of the forward components.",
    "uses": [
     "sk-def-sfb-module-objects"
    ],
@@ -259,5 +259,15 @@
   "group": "Q49",
   "result": "pass",
   "note": "The node differs from side-live only in its new lean record, and lean.statement appears verbatim in the file. Clauses: (1) hq/hr plus IsColimit of the given Cofork.ofπ; (2) IsModHom, which in Mod D A unfolds to γ≫q = A◁q≫γ, the node's direction; (3) the tensorLeft image of the same coforks is a colimit. The conclusion ∃! c : Q ≅ P in J ⥤ Mod D A gives linearity, naturality and the inverse identities; requiring both normalizations is equivalent for an iso. Universes are independent and no smallness, braiding or commutativity is assumed; empty J is covered. Searches of the project's Mod/Limits and Mod files and Mathlib Monoidal/Mod found no duplicate. Docstrings carry the source (Stacks 002A), the blueprint tag and the 8-step proof; the proof is sorry only. nt_compile --json: 29.0 s, clean. Advisory: the RingPresheaf import is not needed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261021T120812-L-3949737",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
