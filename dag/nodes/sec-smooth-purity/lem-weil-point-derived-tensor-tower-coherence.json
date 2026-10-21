@@ -16,11 +16,121 @@
   "def-pc-kflat-complex",
   "lem-pur-derived-change-of-rings",
   "lem-weil-point-derived-sections-tensor-descent",
-  "def-pc-flat-sheaf-modules"
+  "def-pc-flat-sheaf-modules",
+  "def-pur-sheaf-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $T_{V/U}C=C\\otimes_{R_U}R_V$ and $t_{V/U}N=N\\otimes_{\\mathcal O_U}\\mathcal O_V$ on complexes. For each pair in the tower, [lem-weil-point-finite-free-sections-tensor] identifies coefficient sections with their valuation rings compatibly with inclusions and gives the natural chain isomorphism $\\theta_{V/U,C}(n\\otimes a)=n\\otimes a_s$. By [lem-weil-point-derived-sections-tensor-descent], $T$, $t$ and $\\Gamma(s,-)$ preserve all quasi-isomorphisms; the localization of $T_{V/U}$ is identified with the stipulated ordinary derived scalar extension by its counit. The localization of this particular $\\theta$ is exactly the stipulated $\\theta^D$. These statements apply to every complex, including the intermediate $T_{L/E}C$, without a completeness or boundedness assumption.",
+   "uses": [
+    "lem-weil-point-finite-free-sections-tensor",
+    "lem-weil-point-derived-sections-tensor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YY, lemma-derived-base-change; specialization through the two cited point-sections comparison statements"
+   }
+  },
+  {
+   "text": "For a sheaf $F$, define $u_F: (F\\otimes_{R_E}R_L)\\otimes_{R_L}R_M\\to F\\otimes_{R_E}R_M$ by $((x\\otimes a)\\otimes b)\\mapsto x\\otimes ab$, using the coefficient inclusions. The inner balance is respected because $(rx)\\otimes ab=x\\otimes r(ab)$, and the outer balance because $x\\otimes(ac)b=x\\otimes a(cb)$. Its inverse is $v_F(x\\otimes b)=(x\\otimes1)\\otimes b$: the $R_E$-balance follows from $((rx)\\otimes1)\\otimes b=(x\\otimes r)\\otimes b=(x\\otimes1)\\otimes rb$. These compatible bilinear formulas define sheaf maps by [def-pur-sheaf-tensor-product] and the unique factorization in [def-weil-pbc-sheafification], applied successively to the two tensor factors. They are $R_M$-linear. The composites are the identity, since $(x\\otimes1)\\otimes ab=(x\\otimes a)\\otimes b$. Equalities are tested before each sheafification by its uniqueness clause; no assertion that all global sections of a sheaf tensor are pure is needed. Applying the identical balanced formulas to ordinary modules defines $a^{\\mathrm{mod}}$ and its inverse. All formulas commute with restrictions and with $f(x)$ for a module-sheaf map $f$.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product: sheafified tensor and its bilinear universal property; explicit scalar-tower calculation supporting def-weil-finite-coefficient-point, final paragraph"
+   }
+  },
+  {
+   "text": "Apply $u$ and $v$ degreewise to any cochain complex $C$. The differential check is $d(x\\otimes ab)=dx\\otimes ab=u((dx\\otimes a)\\otimes b)$; the inverse check is the same with $a=1$. Coefficients are in degree zero, so no Koszul signs occur. The maps are natural chain isomorphisms. To compute the derived version, choose $P\\to C$ K-flat with flat terms by [lem-pc-kflat-resolution]. Apply [lem-weil-pbc-ringed-topos-kflat-pullback] to the identity morphism of the underlying sheaf topos and the ring map $R_E\\to R_L$. The inverse image is the identity (hence preserves finite limits), so its module pullback is precisely $T_{L/E}$. Thus $T_{L/E}P$ is K-flat with flat terms. Take the small-site presentation in the fixed larger module universe used for these sheaf-module categories. By [lem-pur-derived-change-of-rings], both successive derived extensions and direct extension to $R_M$ are consequently computed by these very complexes. Their canonical scalar-composition associator is the class of $u_P$, with inverse the class of $v_P$, as in the K-flat construction of derived pullback composition.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 0G7E (lemma-pullback-K-flat), 06YY (lemma-derived-base-change), and 0D6D (lemma-derived-pullback-composition), specialized to identity underlying topoi"
+   }
+  },
+  {
+   "text": "On $((n\\otimes a)\\otimes b)$ in degree $i$ of $t_{M/L}t_{L/E}\\Gamma(s,C)$, the upper route first gives $(n\\otimes a_s)\\otimes b_s$ and then the section $n\\otimes a_sb_s=n\\otimes(ab)_s$. The lower route first gives $n\\otimes ab$ and then the same section, by [lem-weil-point-finite-free-sections-tensor]. Equality extends to the whole module by additivity and the two tensor balancing relations. The maps commute with differentials by the previous step and by the chain assertion of the cited node. Thus $\\Gamma(s,u_C)\\theta_{M/L,T_{L/E}C}(\\theta_{L/E,C}\\otimes1)=\\theta_{M/E,C}a^{\\mathrm{mod}}$ is an equality of natural chain maps for every $C$, in particular every $P$.",
+   "uses": [
+    "lem-weil-point-finite-free-sections-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product: sheafified tensor and its bilinear universal property; explicit scalar-tower calculation supporting def-weil-finite-coefficient-point, final paragraph"
+   }
+  },
+  {
+   "text": "By [lem-weil-point-derived-sections-tensor-descent], every composite functor occurring in the last equation preserves quasi-isomorphisms before the final localization. Apply [lem-weil-pbc-localization-universal-property] (2) to the natural chain isomorphisms $u,v,\\theta$ after composing with target localization. They descend to natural isomorphisms, and (2)-(3) preserve compositions and equality. Conjugate by the counit-fixed comparisons of [lem-weil-point-derived-sections-tensor-descent]. Step 3 identifies the descended $u$ with $\\alpha$ on K-flat representatives, and that descent identifies the descended $\\theta$ with $\\theta^D$ on every representative. The equation of step 4 therefore becomes exactly the displayed derived equation, with its stated source and target.",
+   "uses": [
+    "lem-weil-point-derived-sections-tensor-descent",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VG, lemma-properties-left-localization, together with the fully faithful natural-transformation clause stated in lem-weil-pbc-localization-universal-property; agent calculation after localization"
+   }
+  },
+  {
+   "text": "For clarity, the associator's naturality on a roof $C\\xleftarrow{q}H\\xrightarrow{f}J$ can be checked without choosing a lift between resolutions. Put $F=T_{M/L}T_{L/E}$ and $G=T_{M/E}$, and denote localized chain maps by the same letters. Chain naturality gives $G(f)u_H=u_JF(f)$ and $G(q)u_H=u_CF(q)$. Since $F(q),G(q)$ are invertible by [lem-weil-point-derived-sections-tensor-descent], the latter gives $G(q)^{-1}u_C=u_HF(q)^{-1}$, and substitution yields $G(f)G(q)^{-1}u_C=u_JF(f)F(q)^{-1}$. The same algebra applies to $\\theta$ and to the unit maps below. Moreover [lem-weil-pbc-localization-universal-property] makes each descent unique with its representative comparison; thus any K-flat resolution computes this same transformation. Replacing resolutions cannot change either the maps or their equations.",
+   "uses": [
+    "lem-weil-point-derived-sections-tensor-descent",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VG, lemma-properties-left-localization; explicit roof algebra using the cited full natural-transformation statement"
+   }
+  },
+  {
+   "text": "For the equal-field case define $m_F:F\\otimes_{R_E}R_E\\to F$ by $x\\otimes r\\mapsto rx$; its inverse is $x\\mapsto x\\otimes1$. Balance and $R_E$-linearity show both composites are identities. The module multiplication map has the identical formula. On a section tensor $n\\otimes r$, $\\Gamma(s,m_F)\\theta_{E/E,F}$ gives $r_sn=rn$, using the coefficient-section identification of [lem-weil-point-finite-free-sections-tensor]. Hence it equals module multiplication, degreewise, naturally in complexes. This is the requested unit equation. Under the descent of step 5 it is the unit equation for $\\theta^D$; the representative-normalized comparisons ensure the prescribed multiplication identifications are the ones being used.",
+   "uses": [
+    "lem-weil-point-finite-free-sections-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product: sheafified tensor and its bilinear universal property; explicit scalar-tower calculation supporting def-weil-finite-coefficient-point, final paragraph"
+   }
+  },
+  {
+   "text": "For $E\\subset L\\subset M\\subset H$, apply the already constructed $u$ to a nested sheaf tensor $(((x\\otimes a)\\otimes b)\\otimes c)$. One composition gives $x\\otimes(ab)c$, and the other $x\\otimes a(bc)$; these are equal by associativity in $R_H$. Repeated uniqueness of the balanced maps of step 2 gives equality as sheaf chain maps. For module tensors the same calculation gives $n\\otimes abc$. Repeated use of [lem-weil-point-finite-free-sections-tensor] sends $a,b,c$ to their constant sections, whose product is $(abc)_s$; consequently the iterated sections comparisons give that same section whichever route is chosen. The localization theorem [lem-weil-pbc-localization-universal-property] carries these equalities to derived categories. Step 6 supplies their resolution independence. This includes identity stages and repeated fields, and proves precisely ordinary scalar-tower coherence.",
+   "uses": [
+    "lem-weil-point-finite-free-sections-tensor",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product: sheafified tensor and its bilinear universal property; explicit scalar-tower calculation supporting def-weil-finite-coefficient-point, final paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-point-finite-free-sections-tensor",
+  "lem-weil-point-derived-sections-tensor-descent",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-sheafification",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0G7E and 0D6D for representative computations; explicit balanced tensor, sections, unit, tower and localization calculations written here for the final paragraph of blueprint def-weil-finite-coefficient-point"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,10 +166,45 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"ModuleCat.extendScalars_assoc\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \":\\n  (extendScalarsComp (f₂₃.comp f₁₂) f₃₄).hom ≫ Functor.whiskerRight (extendScalarsComp f₁₂ f₂₃).hom _ =\\n    (extendScalarsComp f₁₂ (f₃₄.comp f₂₃)).hom ≫\\n      Functor.whiskerLeft _ (extendScalarsComp f₂₃ f₃₄).hom ≫ (Functor.associator _ _ _).inv\", \"doc\": \"Given commutative rings $ R_1, R_2, R_3, R_4 $ and ring homomorphisms $ f_{12} : R_1 → R_2 $, $ f_{23} : R_2 → R_3 $, $ f_{34} : R_3 → R_4 $, the associator natural isomorphism establishes coherence b\"}\n  {\"name\": \"ModuleCat.extendScalars_assoc'\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \":\\n  (extendScalarsComp (f₂₃.comp f₁₂) f₃₄).hom ≫\\n      Functor.whiskerRight (extendScalarsComp f₁₂ f₂₃).hom _ ≫\\n        (Functor.associator _ _ _).hom ≫\\n          Functor.whiskerLeft _ (extendScalarsComp f₂₃ f₃₄).inv ≫ (extendScalarsComp f₁₂ (f₃₄.comp f₂₃)).inv =\\n    𝟙 _\", \"doc\": \"The composition of the associator natural isomorphism and whiskered transformations for extension of scalars functors along composed ring homomorphisms equals the identity transformation, establishing\"}\n  {\"name\": \"TensorProduct.AlgebraTensorModule.distribBaseChange\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Tower\", \"type\": \": A ⊗[R] (M ⊗[R] N) ≃ₗ[A] (A ⊗[R] M) ⊗[A] (A ⊗[R] N)\", \"doc\": \"Let $R$ and $A$ be commutative semirings, let $A$ be an $R$-algebra, and let $M$ and $N$ be $R$-modules. There is a canonical $A$-linear isomorphism between the extension of scalars of the tensor prod\"}\n  {\"name\": \"ModuleCat.extendScalars_assoc_assoc\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"∀ {R₁ R₂ R₃ R₄ : Type u₁} [inst : CommRing R₁] [inst_1 : CommRing R₂] [inst_2 : CommRing R₃] [inst_3 : CommRing R₄]\\n  (f₁₂ : R₁ →+* R₂) (f₂₃ : R₂ →+* R₃) (f₃₄ : R₃ →+* R₄) {Z : CategoryTheory.Functor (ModuleCat R₁) (ModuleCat R₄)}\\n  (h : ((ModuleCat.extendScalars f₁₂).comp (ModuleCat.extendScalars f\", \"doc\": \"For commutative rings $R_1, R_2, R_3, R_4$ and ring homomorphisms $f_{12}: R_1 \\\\to R_2$, $f_{23}: R_2 \\\\to R_3$, $f_{34}: R_3 \\\\to R_4$, the associator natural isomorphism for the triple composition $(\\\\\"}\n  {\"name\": \"TensorProduct.tensorTensorTensorAssoc\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Associator\", \"type\": \": M ⊗[R] N ⊗[R] (P ⊗[R] Q) ≃ₗ[R] M ⊗[R] (N ⊗[R] P) ⊗[R] Q\", \"doc\": \"The canonical isomorphism between $ (M \\\\otimes_R N) \\\\otimes_R (P \\\\otimes_R Q) $ and $ M \\\\otimes_R (N \\\\otimes_R P) \\\\otimes_R Q $, constructed by composing the inverse of the standard associator with co\"}\n  {\"name\": \"PresheafOfModules.Sheafify.smul.congr_simp\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafify\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R₀ : CategoryTheory.Functor Cᵒᵖ RingCat} {R : CategoryTheory.Sheaf J RingCat} (α α_1 : R₀ ⟶ R.val) (e_α : α = α_1)\\n  [inst_1 : CategoryTheory.Presheaf.IsLocallyInjective J α] [inst_2 : Category\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a presheaf of rings $R_0$ with sheafification $R$, a presheaf of modules $M_0$ over $R_0$, and a sheaf of abelian groups $A$, if the na\"}\n  {\"name\": \"CategoryTheory.Sheaf.ΓRes_naturality\", \"module\": \"Mathlib.CategoryTheory.Sites.GlobalSections\", \"type\": \"[HasGlobalSectionsFunctor J A] {F G : Sheaf J A} (f : F ⟶ G) (U : Cᵒᵖ) :\\n  (Γ J A).map f ≫ ΓRes G U = ΓRes F U ≫ f.val.app U\", \"doc\": \"For any morphism $ f : F \\to G $ of sheaves on a category $\\\\mathcal{C}$ with values in $\\\\mathcal{A}$, and for any object $ U $ in $\\\\mathcal{C}^\\\\text{op}$, the diagram involving the global sections func\"}\n  {\"name\": \"TensorProduct.AlgebraTensorModule.tensorTensorTensorComm\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Tower\", \"type\": \": (M ⊗[S] N) ⊗[A] (P ⊗[R] Q) ≃ₗ[B] (M ⊗[A] P) ⊗[S] (N ⊗[R] Q)\", \"doc\": \"Given commutative semirings $ R $, $ S $, and $ A $-modules $ M, N, P, Q $ with compatible scalar actions (via $ \\\\text{IsScalarTower} $ and $ \\\\text{SMulCommClass} $), there exists a $ B $-linear equiv\"}",
    "date": "2026-10-21",
    "verdict": "no match: ordinary module/pullback associators and abstract derived comparisons are available, but not the normalized point sections equation with its derived roof compatibility"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived scalar extension associator coherent with global sections tensor comparison for finite free coefficient ring sheaves",
+   "results": "OK: 8 hits; ModuleCat.extendScalars_assoc, ModuleCat.extendScalars_assoc_assoc, ModuleCat.extendScalars_assoc', CommRingCat.moduleCatExtendScalarsPseudofunctor, ModuleCat.ExtendScalars.obj', PresheafOfModules.Sheafify.mul_smul, ModuleCat.restrictCoextendScalarsAdj, Algebra.TensorProduct.instFree; digest 16dc430a8e6a8e00",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module associators and unrelated sheaf comparison lemmas do not state the normalized point-sections equation on unbounded derived ring-sheaf complexes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar extension associator coherent with global sections tensor comparison for finite free coefficient ring sheaves",
+   "results": "OK: 8 hits; SheafOfModules.map_ιFree_mapFree_hom_assoc, SheafOfModules.ιFree_mapFree_inv_assoc, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.ιFree_freeMap_assoc, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom_assoc, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.freeHomEquiv_comp_apply; digest 04f70e2be18efb2f",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module associators and unrelated sheaf comparison lemmas do not state the normalized point-sections equation on unbounded derived ring-sheaf complexes"
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalars_assoc|extendScalarsComp|pullbackComp|KFlat",
+   "results": "OK: 17 hits; Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean, Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean; digest c5f98c521c1816f8",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module associators and unrelated sheaf comparison lemmas do not state the normalized point-sections equation on unbounded derived ring-sheaf complexes"
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.extendScalarsComp",
+   "results": "OK: 11 hits; ModuleCat.extendScalarsComp, ModuleCat.extendScalars_comp_id, ModuleCat.extendScalars_id_comp, ModuleCat.extendScalars_comp_id_assoc, ModuleCat.extendScalars_id_comp_assoc, ModuleCat.extendScalarsComp_hom_app_one_tmul, ModuleCat.extendScalars_assoc, ModuleCat.extendScalars_assoc_assoc; digest 5ae72c29f2cd9bae",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module associators and unrelated sheaf comparison lemmas do not state the normalized point-sections equation on unbounded derived ring-sheaf complexes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global sections balanced tensor map commutes with scalar extension associativity units on unbounded derived sheaf complexes",
+   "results": "OK: 8 hits; SheafOfModules.map_ιFree_mapFree_hom_assoc, HomologicalComplex.leftUnitor'_inv_comm_assoc, HomologicalComplex.rightUnitor'_inv_comm, HomologicalComplex.leftUnitor'_inv_comm, HomologicalComplex.HasGoodTensor₁₂, HomologicalComplex.HasGoodTensor₂₃, PresheafOfModules.Monoidal.tensorObjMap, ModuleCat.extendScalarsComp_hom_app_one_tmul; digest 408d51e56d15ed26",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module associators and unrelated sheaf comparison lemmas do not state the normalized point-sections equation on unbounded derived ring-sheaf complexes"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-point-sections-scalar-extension",
@@ -78,5 +223,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-weil-point-derived-tensor-tower-coherence",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged; constructed the balanced sheaf and module associators and their inverses, checked the sections equation, units and four-field products explicitly, used the existing flat-term K-flat pullback theorem to compute successive derived extensions, and used the existing localization universal property for descent, roof naturality and resolution independence. No new nodes.",
+  "blueprint": "def-weil-finite-coefficient-point, final paragraph: stagewise passage to the finite-stage colimit; the ordinary tensor and sections coherence subargument extracted through lem-weil-point-sections-scalar-extension. Steps 1-6 establish the normalized tower equation and its naturality; steps 7-8 give units and iterated coherence.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Existence of flat-term K-flat sheaf resolutions, a general tool for the ordinary tensor computation; not a replacement of the point-coefficient route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "why": "Generic pullback preservation of K-flatness and flat terms, specialized to the identity topos and a coefficient ring map; the exact statement needed for the intermediate complex."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-topos-kflat-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q140-527d0a86a",
+  "group": "Q140",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q140-527d0a86a (reviewer sub-agent of L); spot-checked: I read the item and all 8 cited statements in full. The statement is identical to live; stmt_deps adds only def-pur-sheaf-tensor-product, which the sheaf tensors in the statement use. There are no new nodes and no cycle, the item has no re-split note of its own and is not dropped. Step 1 takes only what lem-weil-point-finite-free-sections-tensor and lem-weil-point-derived-sections-tensor-descent state; the descent node has no hypotheses on the complex, so it also applies to the intermediate T_{L/E}C. Step 2 builds the associator u by two successive factorizations through sheafification (def-pur-sheaf-tensor-product, def-weil-pbc-sheafification). Its balance checks and both inverse composites are correct, and it is elementary. Step 3 uses lem-pc-kflat-resolution, then lem-weil-pbc-ringed-topos-kflat-pullback on the identity topos with R_E→R_L (the hypotheses hold), then lem-pur-derived-change-of-rings (2), so the class of u_P is the derived associator α. I recomputed step 4 on pure tensors: n⊗a_s b_s = n⊗(ab)_s, because the constant-value maps are ring maps compatible with inclusions. Step 5 descends u and θ by clauses (2)-(3) of lem-weil-pbc-localization-universal-property and the counit-fixed comparisons of the descent node. Steps 6-8 are correct: the roof algebra, the unit case L=E via the finite-free node with d=1, and the four-field equality via associativity in R_H. Edge cases checked: L=E and M=L, ramified extensions, K=0, a single module in one degree, repeated fields. Duplicate search over all node statements (associator, tensor-tower, 0D6D, lem-weil-point-*) found no node stating the item. lem-sfb-flat-scalar-tower-coherence (unit sk-thm-sfb-qlbar-two-colimit) states the generic sheaf part of steps 2/3/8 in another formalism; the item re-derives that part elementarily and citing it is optional. Sources checked: Stacks 0G7E at sites-cohomology.tex line 3508 and 0D6D at line 3658; the final paragraph of blueprint main-20261015 def-weil-finite-coefficient-point; no SGA. I accept the declared tool_uses lem-pc-kflat-resolution and lem-weil-pbc-ringed-topos-kflat-pullback as generic K-flat tools. No fixes."
  }
 }
