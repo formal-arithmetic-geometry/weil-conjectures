@@ -5,7 +5,9 @@ modules under .lbuild/. Compiles the jobs in the given order in a scratch direct
 live repository, at nice 10. There is no request admission limit: workers must receive
 compiler results even when other requests are active. stdout: a gzip tar with result.json and, for each job that
 writes its compiled module (out), the files written to .lbuild/. Exit 75 (nothing on stdout) only when the published
-build stays unavailable for more than 60 s. The caller retries on the server."""
+build stays unavailable for more than 60 s. The caller retries on the server.
+Committed repository imports absent from that build are compiled first into this
+request's private overlay; they never modify the published build."""
 import fcntl, io, json, os, pathlib, re, shutil, subprocess, sys, tarfile, tempfile, time
 H = pathlib.Path.home(); REPO = H / "weil-conjectures-sheaf"; LEAN = REPO / "lean"
 LEANBIN = str(H / ".elan/bin/lean")
@@ -138,6 +140,21 @@ try:
             except OSError: pass
     timeout = int(man.get("timeout", 60)); results = []; outputs = []
     for j in man["jobs"]:
+        if not safe(j["rel"]) or pathlib.PurePosixPath(j["rel"]).suffix != ".lean":
+            raise SystemExit("bad path")
+    # A landed module can be newer than the last green publication. Compile its
+    # real committed sources privately, using the same per-file limit and cache.
+    # Never copy unverified objects from the global build tree into publication.
+    sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+    from remote_compile_dependencies import missing_dependencies, DependencySourceError
+    try:
+        dependencies = missing_dependencies(man["jobs"], root, lb, PUB, LEAN, REPO, header_imports)
+    except (DependencySourceError, OSError, subprocess.CalledProcessError) as exc:
+        dependencies = []
+        results = [{"rel": j["rel"], "rc": 1, "out": f"Dependency source unavailable: {exc}\n",
+                    "secs": 0, "arts": False} for j in man["jobs"]]
+    dependency_notes = []
+    for j in ([] if results else dependencies + man["jobs"]):
         rel = pathlib.PurePosixPath(j["rel"])
         if not safe(j["rel"]) or rel.suffix != ".lean": raise SystemExit("bad path")
         f = root / rel; t0 = time.time()
@@ -189,6 +206,22 @@ try:
         finally:
             if j.get("probe"): src.unlink(missing_ok=True)
             if ckf: ckf.close()
+        if j.get("dependency"):
+            if rc:
+                diagnostic = out if out is not None else f"timeout after {timeout} s\n"
+                diagnostic = (f"Dependency {j['dependency']} from {j['source_commit']} "
+                              f"failed in the private compile overlay:\n{diagnostic}")
+                results = [{"rel": requested["rel"], "rc": rc, "out": diagnostic,
+                            "secs": round(time.time() - t0, 1), "arts": bool(a)}
+                           for requested in man["jobs"]]
+                break
+            dependency_notes.append(
+                f"Compiled unpublished dependency {j['dependency']} from {j['source_commit']} "
+                f"in the private overlay{' (cache)' if hit else ''}.\n" + out)
+            continue
+        if out is not None and dependency_notes:
+            out = "".join(dependency_notes) + out
+            dependency_notes = []
         results.append({"rel": j["rel"], "rc": rc, "out": out, "secs": round(time.time() - t0, 1), "arts": bool(a)})
         if j.get("out") and not j.get("probe"):
             o = lb / rel.with_suffix(".olean")
