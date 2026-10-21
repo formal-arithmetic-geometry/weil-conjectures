@@ -20286,3 +20286,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:11 L: returned deliver/NA/lem-weil-pbc-proetale-projection-formula-tensor-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-pbc-proetale-projection-formula-tensor-cohere)
 - 04:12 L: merged deliver/NR/lem-fix-open-scalar-tensor-normalization (reviewer PASS; first push; new nodes: 0)
 - 04:13 L: merged deliver/NS/lem-fix-proetale-scalar-mate-normalization (reviewer FIX; first push; new nodes: 0)
+- 04:13 L: returned deliver/NG/lem-sfb-finite-etale-trace-image (reviewer RETURN: L: independent stage-2 immutable head 0e8accd4a547: H2: stmt_dep lem-weil-pbc-continuous-coefficient-pullback-compositio)
