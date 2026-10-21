@@ -23071,3 +23071,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:38 L: merged deliver/Q8/Sheaf.RingTheory.FinitePresentationAndFlatOfFiniteFreeStandardCover (stage 3; reviewer PASS; first push; landing 20261021T163828-L-1112412 (proof); batch 20261021T163749; modules 1; new nodes 0)
 - 16:38 L: merged deliver/U9/Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreComparisons (stage 3; reviewer PASS; first push; landing 20261021T163831-L-1115476 (proof); batch 20261021T163749; modules 1; new nodes 0; change records: coord/changes/u9-perfect-overlap-core-comparisons-adapter.md)
 - 16:39 L: returned deliver/Q85/lem-weil-integral-twist-scalar-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-integral-twist-scalar-coherence: lem-weil-int)
+- 16:40 L: merged deliver/Q01/lem-sfb-finite-closed-cover-resolution (reviewer PASS; first push; new nodes: 0)
