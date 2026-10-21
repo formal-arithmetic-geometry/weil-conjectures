@@ -22515,3 +22515,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:23 L: returned deliver/NI/lem-sfb-internal-extension-finite-presentation (reviewer RETURN: Superseded (A7/B10). The mathematics is sound and I read it in full. Timeline: the re-split note coord/repair-notes/lem-)
 - 13:24 L: merged deliver/Q10/lem-sfb-ordinary-proetale-direct-image-plus-comparison (stage 2; reviewer PASS; parallel immutable checks)
 - 13:24 L: merged deliver/Q03/lem-sf-strict-dvr-reduction-triangles (stage 2; reviewer PASS; parallel immutable checks)
+- 13:24 L: returned deliver/NG/lem-pod-stratified-dualizable-bounded (reviewer RETURN: L: independent stage-2 immutable head c081aa46b97f: H1: no Lean module, no lean record on the item, and no '## Worker re)

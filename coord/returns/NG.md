@@ -38,5 +38,6 @@ L: independent stage-2 immutable head 04978822afb4: --apply-fixes: coord/reports
 
 L: approved by the reader, but the landing refused it: NOT MERGED lem-trf-elementary-semistable-chart-globalization: lem-trf-elementary-semistable-chart-globalization: completed in this project's DAG but not in the live DAG the queue reads (side completion never promoted; L promotes it) Rebase the delivery onto the current DAG, re-read every cited node that changed, adjust the split, and push again.
 
+## lem-pod-stratified-dualizable-bounded (2026-10-21 13:24 UTC, branch head c081aa46b97)
 
-
+L: independent stage-2 immutable head c081aa46b97f: H1: no Lean module, no lean record on the item, and no '## Worker report' / '## Second reading by NG'; the head is a stage-1 re-split (report '# Stage-1 delivery', 'No Lean was written') sent to the S2 lane. H2: compared with the live node, proof, proof_deps, proof_origin, mathlib_searches and split_report change and the live tool_uses/reviewed fields are dropped. Superseded: base 10:46; NU's split of the same item merged at 11:15 with a reviewer PASS (ledger 22277), and NJ's parallel delivery was superseded at 11:17. Statement, stmt_deps and source are unchanged. No fix is possible: there is no stage-2 content and a fix cannot rewrite a merged split. Correction: retire the NG claim, or deliver a real stage-2 branch on current sheaf-dag (module, lean record, unchanged split, both report sections).
