@@ -18,23 +18,51 @@
  ],
  "proof": [
   {
-   "text": "Let $a:\\underline E\\to\\underline F$ be the inclusion of condensed rings and write $G_Z=F_Z\\otimes_{E_Z}-$ for every scheme $Z$. These are exactly the coefficient changes of [def-sfb-subfield-coefficient-map]. By [lem-sfb-subfield-flat], $G_Z$ preserves finite limits for every $Z$. By part (2) of [sk-def-sfb-change-of-scalars], it also preserves finite colimits. It is additive: on elementary tensors, $G_Z(u+v)(s\\otimes m)=s\\otimes(u(m)+v(m))=G_Z(u)(s\\otimes m)+G_Z(v)(s\\otimes m)$, and the equality passes through the defining coequalizer. Thus $G_Z$ is exact. Apply [def-sfb-left-derived-exact] to obtain $L(G_X)\\cong D(G_X)$, and [lem-sfb-extend-scalars-preserves-homology] to this same coefficient inclusion (the required flatness holds for every $Z$). For any complex representing $K$, these give\n$$H^q(T_{E,F}K)\\cong G_X(H^q(K))=F_X\\otimes_{E_X}H^q(K)\\quad(q\\in\\mathbf Z),$$\nwhere $T_{E,F}=L(G_X)$ is [def-sfb-derived-extend-subfield]. No bounded representative is needed.",
+   "text": "Write $G_Z=F_Z\\otimes_{E_Z}-$ for the coefficient inclusion [def-sfb-subfield-coefficient-map]. It preserves finite limits by [lem-sfb-subfield-flat] and finite colimits by [sk-def-sfb-change-of-scalars], hence is exact. By [def-sfb-left-derived-exact], [def-sfb-derived-extend-subfield] and [lem-sfb-extend-scalars-preserves-homology],\n$$H^q(T_{E,F}K)\\cong G_X(H^qK).$$\nThe homology lemma's hypothesis holds on every scheme by the same flatness node; this does not require a bounded representative.",
    "uses": [
     "def-sfb-subfield-coefficient-map",
     "lem-sfb-subfield-flat",
     "sk-def-sfb-change-of-scalars",
     "def-sfb-left-derived-exact",
-    "lem-sfb-extend-scalars-preserves-homology",
-    "def-sfb-derived-extend-subfield"
+    "def-sfb-derived-extend-subfield",
+    "lem-sfb-extend-scalars-preserves-homology"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-extend-subfield-constructible.proof.md",
-    "place": "first sentence: exact extension, termwise computation and cohomology formula"
+    "place": "first sentence: exactness and the cohomology formula"
    }
   },
   {
-   "text": "By [sk-def-sfb-bounded-constructible], there are integers $b\\le c$ such that $H^q(K)=0$ whenever $q<b$ or $q>c$. Since $G_X$ preserves the initial object by [sk-def-sfb-change-of-scalars], it sends the zero module to the zero module. The cohomology formula from step 1 therefore gives $H^q(T_{E,F}K)=0$ outside the same interval $[b,c]$.",
+   "text": "In applying finite presentations, coefficient pullback can be identified with raw module pullback: [sk-prop-sfb-cartesian-coefficients] gives the ring isomorphism $f^{-1}E_Z\\cong E_W$ for every $f:W\\to Z$, and likewise for $F$. Part (5) of [sk-def-sfb-change-of-scalars] expresses this identification as scalar extension along that isomorphism. Apply [lem-sfb-internal-scalar-extension-finite-presentation] to the isomorphism and its inverse: a finite presentation on either side gives one on the other. Thus the local-presentation predicates may be checked using the coefficient pullbacks of [def-sfb-pull-iso].",
+   "uses": [
+    "sk-prop-sfb-cartesian-coefficients",
+    "sk-def-sfb-change-of-scalars",
+    "lem-sfb-internal-scalar-extension-finite-presentation",
+    "def-sfb-pull-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-extend-subfield-constructible.proof.md",
+    "place": "local presentations: canonical identification of pulled-back coefficient rings"
+   }
+  },
+  {
+   "text": "Let $M$ be constructible. Choose its finite stratification and presentation covers on each stratum from [def-sfb-constructible-module] and [def-sfb-locally-finitely-presented]. On a stratum $S$, [def-sfb-pull-iso] identifies $(G_XM)|_S$ with $G_S(M|_S)$. On every member $U\\to S$ of its presentation cover, the same comparison identifies the latter restriction with $G_U(M|_U)$. By step 2 the input is finitely presented over $E_U$; [lem-sfb-internal-scalar-extension-finite-presentation] makes its extension finitely presented over $F_U$. Step 2 identifies this with the raw pulled-back-ring presentation required by the definition. Hence the same covers on the same finite stratification witness constructibility of $G_XM$.",
+   "uses": [
+    "def-sfb-constructible-module",
+    "def-sfb-locally-finitely-presented",
+    "def-sfb-pull-iso",
+    "lem-sfb-internal-scalar-extension-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-extend-subfield-constructible.proof.md",
+    "place": "tensoring local presentations on the same strata"
+   }
+  },
+  {
+   "text": "By [sk-def-sfb-bounded-constructible], $H^qK$ is constructible for each $q$ and zero outside one finite interval. Step 3 and the isomorphism of step 1 give constructibility of $H^q(T_{E,F}K)$: compose its local-presentation isomorphisms with that isomorphism. Since $G_X$ preserves the initial object by [sk-def-sfb-change-of-scalars], it sends zero to zero, so step 1 retains the same interval. These are exactly the two conditions in [sk-def-sfb-bounded-constructible].",
    "uses": [
     "sk-def-sfb-bounded-constructible",
     "sk-def-sfb-change-of-scalars"
@@ -42,47 +70,7 @@
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-extend-subfield-constructible.proof.md",
-    "place": "first sentence: in particular boundedness is preserved"
-   }
-  },
-  {
-   "text": "Let $M$ be any constructible $E_X$-module. If $X$ is qcqs, set $V=X$ and choose the global finite stratification supplied by [sk-def-sfb-constructible]. For arbitrary $X$, work on the affine opens $V$ of a covering on which that definition imposes the condition, choosing a finite stratification on each such $V$. In either case write the strata as constructible locally closed subschemes $S_a\\subset V$ and choose, on each $S_a$, a pro-étale cover by schemes $U_{ai}$ carrying finite constant local models of $M|_{S_a}$. By the equivalence (1)–(2) of [det-def-sfb-constructible-local-model], on each $U=U_{ai}$ there is a presentation\n$$E_U^m\\xrightarrow{A}E_U^n\\longrightarrow M|_U\\longrightarrow0$$\nwhose matrix $A$ has entries in the scalar field $E$. For the morphism $f:U\\to X$, [def-sfb-pull-iso] applied to the coefficient inclusion of [def-sfb-subfield-coefficient-map] gives\n$$(G_XM)|_U\\cong G_U(M|_U).$$\nApplying that comparison to $V\\to X$ gives $(G_XM)|_V\\cong G_V(M|_V)$, and applying it to $S_a\\to V$ gives $(G_V(M|_V))|_{S_a}\\cong G_{S_a}(M|_{S_a})$. Applying it to each cover map $U_{ai}\\to S_a$ identifies the restriction of this last object with $G_{U_{ai}}(M|_{U_{ai}})$. These are the restrictions required by the chosen stratification and covers.",
-   "uses": [
-    "sk-def-sfb-constructible",
-    "det-def-sfb-constructible-local-model",
-    "def-sfb-pull-iso",
-    "def-sfb-subfield-coefficient-map"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-extend-subfield-constructible.proof.md",
-    "place": "remaining sentences: choose the local presentations on the same strata, with the restriction comparison made explicit"
-   }
-  },
-  {
-   "text": "Apply the right exact extension functor of [sk-def-sfb-change-of-scalars] on $U$ to the presentation of step 3. For every finite $r$, the balanced maps\n$$F_U\\otimes_{E_U}E_U^r\\longrightarrow F_U^r,\\quad s\\otimes(t_j)_j\\longmapsto(st_j)_j,\\qquad (s_j)_j\\longmapsto\\sum_j s_j\\otimes e_j$$\nare inverse: their composites are the identity by $t=\\sum_jt_je_j$ and the balancing relation. These formulas define morphisms through the relative-tensor coequalizer; hence they apply to module sheaves, not just to sectionwise tensor products. For $r=0$ both sides are zero. Under these identifications the tensored matrix is obtained by sending each entry $a_{ij}\\in E$ to its image in $F$, since $s\\otimes a_{ij}e_i=(sa_{ij})\\otimes e_i$. The coefficient map is the inclusion induced from $\\underline E\\to\\underline F$ by [def-sfb-subfield-coefficient-map], so these are still constant scalar entries. Thus\n$$F_U^m\\xrightarrow{A_F}F_U^n\\longrightarrow G_U(M|_U)\\longrightarrow0$$\nis a finite constant-matrix presentation. Equivalence (2)–(1) of [det-def-sfb-constructible-local-model] makes it a finite constant local model over $F$. By step 3 the same is true of $(G_XM)|_U$. For qcqs $X$, the chosen global finite stratification and its covers therefore witness constructibility of $G_XM$. For arbitrary $X$, on every chosen affine open $V$ its finite stratification and covers witness constructibility of $(G_XM)|_V$. This is the affine-local condition of [sk-def-sfb-constructible].",
-   "uses": [
-    "sk-def-sfb-change-of-scalars",
-    "def-sfb-subfield-coefficient-map",
-    "det-def-sfb-constructible-local-model",
-    "sk-def-sfb-constructible"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-extend-subfield-constructible.proof.md",
-    "place": "last two sentences: tensor the finite presentations; retain constant scalar matrices, rather than only local finite presentation"
-   }
-  },
-  {
-   "text": "For each $q$, the sheaf $H^q(K)$ is constructible by [sk-def-sfb-bounded-constructible]. Apply steps 3–4 with $M=H^q(K)$. Step 1 identifies the resulting constructible $F_X$-module with $H^q(T_{E,F}K)$; composing the local-model isomorphisms with this isomorphism gives the required local models for that cohomology sheaf, as in [sk-def-sfb-constructible]. Together with the bound from step 2, this is exactly the definition of a bounded constructible $F_X$-complex in [sk-def-sfb-bounded-constructible].",
-   "uses": [
-    "sk-def-sfb-bounded-constructible",
-    "sk-def-sfb-constructible"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-extend-subfield-constructible.proof.md",
-    "place": "final conclusion: the cohomology sheaves are constructible and the complex is bounded"
+    "place": "boundedness and final constructibility conclusion"
    }
   }
  ],
@@ -91,17 +79,19 @@
   "lem-sfb-subfield-flat",
   "sk-def-sfb-change-of-scalars",
   "def-sfb-left-derived-exact",
-  "lem-sfb-extend-scalars-preserves-homology",
   "def-sfb-derived-extend-subfield",
-  "sk-def-sfb-bounded-constructible",
-  "sk-def-sfb-constructible",
-  "det-def-sfb-constructible-local-model",
-  "def-sfb-pull-iso"
+  "lem-sfb-extend-scalars-preserves-homology",
+  "sk-prop-sfb-cartesian-coefficients",
+  "lem-sfb-internal-scalar-extension-finite-presentation",
+  "def-sfb-pull-iso",
+  "def-sfb-constructible-module",
+  "def-sfb-locally-finitely-presented",
+  "sk-def-sfb-bounded-constructible"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-extend-subfield-constructible.proof.md",
-  "place": "entire proof, expanded into exactness, boundedness, restriction to strata, constant-matrix presentations and the cohomological conclusion"
+  "place": "proof reassembled from the extracted finite-presentation lemma and existing comparison nodes; current general ring-object constructibility definition"
  },
  "mathlib_searches": [
   {
@@ -193,11 +183,11 @@
  "chapter": "sec-six-functors-basics",
  "unit": "sk-thm-sfb-qlbar-two-colimit",
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-21",
   "item": "lem-sfb-extend-subfield-constructible",
   "worker": "stage1",
-  "summary": "Expanded the imported paragraph into five steps using existing DAG nodes only. Verified flatness for every scheme, right exactness, the exact-functor derived comparison, preservation of homology, underived pullback compatibility, and the constant-matrix local-model equivalence. Repaired the proof gap that local finite presentation alone need not imply the current constructibility predicate. Wrote explicit inverse maps on finite free modules, tracked the scalar entries, and handled arbitrary schemes affine-locally without a Noetherian hypothesis. The statement is unchanged; upstream master has sorry and the slopmaster2 declaration is absent. No new nodes or Lean work. Second reading makes the global finite stratification for qcqs X explicit, treats arbitrary X on an affine covering, and spells out the three restriction comparisons.",
-  "blueprint": "Realizes the entire proof of lem-sfb-extend-subfield-constructible.proof.md and the cocone-preservation clause (step 9) of sk-thm-sfb-qlbar-two-colimit: step 1 expands exactness and termwise cohomology; step 2 proves the same cohomological bound; steps 3–4 expand tensoring on strata and retain the finite constant local models of the current constructibility definition; step 5 concludes.",
+  "summary": "Human-requested finer split: extracted the scalar-extension finite-presentation argument with a full short proof, reusing the existing regular-module isomorphism. Kept the item statement exactly unchanged. Updated the assembly to the current bounded-constructible definition (stratified local finite presentation), explicitly comparing raw and coefficient pullback, and retained the same finite strata, covers and cohomology bounds. No Lean written or compiled.",
+  "blueprint": "Realizes the first sentence via existing exactness/homology nodes, the local-presentation argument via the new internal scalar-extension finite-presentation lemma, and the conclusion by retaining the same strata and bounds. This is unit step 9, preservation for the coefficient cocone.",
   "tool_uses": [
    {
     "node": "lem-sfb-subfield-flat",
@@ -206,20 +196,25 @@
    {
     "node": "lem-sfb-extend-scalars-preserves-homology",
     "why": "Generic homology-preservation theorem for a uniformly flat condensed coefficient change; the item unit has no separate homology comparison theorem."
+   },
+   {
+    "node": "sk-prop-sfb-cartesian-coefficients",
+    "why": "Canonical coefficient ring isomorphisms identify raw module pullback with coefficient pullback; no change to the unit route."
    }
   ]
  },
  "tool_uses": [
   "lem-sfb-subfield-flat",
-  "lem-sfb-extend-scalars-preserves-homology"
+  "lem-sfb-extend-scalars-preserves-homology",
+  "sk-prop-sfb-cartesian-coefficients"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-Codex-N3-afe2d7910",
-  "group": "N3",
+  "reviewer": "NT-cc-Q53-2500aa9b9",
+  "group": "Q53",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N3-afe2d7910 (reviewer sub-agent of L); spot-checked: Read the full item, unit/chapter route, all ten cited node statements and source locations, delivery rules A–F, and blueprint proof. Verified coefficient map/category, pullback comparison orientation, exactness, homology, constant-matrix constructibility, boundedness, edge cases, dependency closure, and no cycle. No repairs needed; review.md records the checks and accepted tool uses."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-2500aa9b9 (reviewer sub-agent of L); spot-checked: The human asked for a finer re-split on 2026-10-21 (repair note). This delivery does it: the item statement is verbatim the main-20261015 blueprint statement, and its stmt_deps are unchanged. The proof is now 2307 characters in 4 steps, and the new node's proof in words in the report is 1185 characters. Step 1: lem-sfb-subfield-flat gives finite limits on every scheme and change-of-scalars (2) gives finite colimits, so the extension is exact. def-sfb-left-derived-exact then gives L(Ext) ≅ D(Ext), and the homology lemma gives H^q(TK) ≅ G_X(H^qK); its every-scheme hypothesis is met. Step 2: module pullback is Ext_{α_f}∘mapMod(f^*), which is compared with the raw mapMod(g^*) used in def-sfb-constructible-module and def-sfb-locally-finitely-presented. sk-prop-sfb-cartesian-coefficients (1) says α_f is invertible for E and F with no condition on ell, change-of-scalars (5) gives Ext_α ≅ Res_{α^{-1}}, and the new lemma applied in both directions transfers finite presentation. This is a correct elementary application of cited statements. Step 3: def-sfb-pull-iso is applied along the stratum immersion and then along the cover member, keeping the same finite stratification and the same covers; no qcqs or Noetherian hypothesis is added. Step 4: Ext(0)=0 keeps the cohomological interval, and constructibility is iso-invariant. The coefficient map is p_X^* of the condensed inclusion E→F (def-sfb-subfield-coefficient-map), the same a_X as in the pull-iso and homology nodes. The new node lem-sfb-internal-scalar-extension-finite-presentation is true: Ext preserves finite colimits, and lem-weil-pbc-regular-extension-comparison gives Ext(R) ≅ S. I tested it on Z→Z/2 with M=Z/2, on M=0, m=0 and φ=id. Its hypotheses match def-sfb-finitely-presented-module and change-of-scalars (2), with sheaf-tensor (2) giving right exactness. It is self-contained, strictly smaller than the item (no D1 problem), and statement-only as B1 requires. Its searches cover the three kinds, and SheafOfModules.Presentation.map is correctly rejected as a different encoding. I searched the whole snapshot DAG and no node states it. I accept the declared tool uses: subfield-flat, the homology lemma and cartesian-coefficients. The item is not on the route-pivot drop list and nothing cites SGA. Maintainer note: lem-weil-pbc-bounded-constructible-exact-scalar-extension (stage-3 interface, boundedConstructible_leftDerivedExtendScalars_obj) states the item for any exact ring-object morphism. At stage 3 the item's Lean can be obtained by applying it, as lem-sfb-extend-scalars-bounded-constructible does; the finer in-unit route is what the human asked for, so not citing it is not a fault."
  },
  "lean_audit": {
   "master": {
