@@ -1,0 +1,143 @@
+{
+ "id": "stage3-pur-extension-strict-representatives",
+ "kind": "statement",
+ "title": "Strict finite quotient representatives for coefficient extension",
+ "statement": "For a prime l, finite extensions E,L of Q_l, an embedding iota:E→L, a scheme W, a derived reduction calculus SE and compatible scalar-system data A, let C be reduction by SE followed by derived scalar extension by A. Given the balanced ordinary association at every quotient, there is a functor direct on flat-term K-flat complexes over the completed E-coefficients, with values in complexes of actual L-coefficient systems. Its nth evaluation is naturally the specified ordinary tensor complex with A_L,n, and its successor transitions are the specified quotient tensor maps on all local sections. There is a natural isomorphism C(QP) ≅ Q(direct P) whose nth evaluation equals the composite of SE reduction evaluation, its K-flat finite comparison, A levelwise K-flat comparison, and the given tensor association. For every derived K over the completed E-coefficients, C(K) is a normalized L-coefficient sequence: each transition is universal for scalar restriction from level n to any higher level. Uses [def-coef-ringed-sequence-site], [lem-coef-derived-system-evaluation-calculus] and [lem-coef-semilinear-derived-sections].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
+  "place": "Integral operations and normalized coefficient reduction model."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-integral-scalar-extension",
+  "def-weil-abstract-derived-category",
+  "def-weil-sheaf-of-modules-category",
+  "def-coef-ringed-sequence-site",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "def-weil-integral-reduction-tower",
+  "def-coef-normalized-dvr-tower",
+  "lem-coef-semilinear-derived-sections",
+  "lem-coef-derived-system-evaluation-calculus",
+  "stage3-pur-extension-reduction-data"
+ ],
+ "proof": [
+  {
+   "text": "Construct the ordinary strict quotient tensor system by the ringed sequence projection adjunction. Apply it degreewise on flat-term K-flat complexes; its prescribed tensor-generator transitions give the actual quotient transition equation.",
+   "uses": [
+    "lem-coef-sequence-projection-derived-adjunction",
+    "lem-pur-kflat-change-of-rings-independent",
+    "lem-pc-kflat-resolution",
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-coef-semilinear-derived-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transpose the ordinary tensor units through the reduction/limit and scalar adjunctions. Their normalization and scalar evaluation identify the evaluated comparison with the composite of the finite K-flat comparison maps and the supplied balanced association. These maps are invertible, so joint conservativity gives the natural representative isomorphism.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "For every pair of quotient levels, balanced tensor association identifies further derived scalar extension of the higher quotient model with the lower quotient model. Its adjoint is the actual quotient transition, so the Hom criterion gives normalization. Resolve arbitrary derived objects by flat-term K-flat complexes to obtain the assertion for all objects.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-sequence-projection-derived-adjunction",
+  "lem-pur-kflat-change-of-rings-independent",
+  "lem-pc-kflat-resolution",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-coef-semilinear-derived-sections"
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
+  "place": "Integral operations clause",
+  "group": "E6",
+  "date": "2026-10-21"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Sheaf module scalar extension composite adjunction unit tensor associativity",
+   "results": "Eight ordinary scalar/unit lemmas, including ModuleCat.homEquiv_extendScalarsComp and SheafOfModules.unitHomEquiv_comp_apply; no simultaneous coefficient-system reduction model.",
+   "date": "2026-10-21",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "Mathlib.CategoryTheory.Adjunction.Unique supplies leftAdjointUniq and its unit normalization.",
+   "date": "2026-10-21",
+   "verdict": "ordinary ingredient"
+  },
+  {
+   "tool": "grep",
+   "query": "roos|Roos|leftAdjointUniq",
+   "results": "Mathlib gives adjunction uniqueness; no specialized completed coefficient-system theorem. Project StrictRoosComparison supplies the derived-limit ingredient.",
+   "date": "2026-10-21",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Simultaneous strict normalized quotient representatives for derived scalar extension between finite extensions of p-adic fields.",
+   "results": "Padic, Padic.field and PadicInt.isFractionRing are basic coefficient ingredients; the other hits concern field normality or norms. No simultaneous strict quotient model with its derived evaluation and normalization equations.",
+   "date": "2026-10-21",
+   "verdict": "no match; ingredients only"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefficientExtensionReductionModel",
+  "date": "2026-10-21",
+  "group": "E6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "Compatibility with finite reduction and scalar extension to Qlbar: Strict normalized representatives of coefficient extension",
+   "via": [
+    "stage3-pur-reduction-skeleton-exists"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefficientExtensionStrictRepresentatives",
+  "file": "lean/Sheaf/Paper/CoefficientExtensionStrictRepresentatives.lean",
+  "declaration": "WeilConjectures.coefficientExtensionStrictRepresentative_exists",
+  "statement": "theorem coefficientExtensionStrictRepresentative_exists\n    (SE : CoefficientDerivedSystemCalculus l E W)\n    (association : ∀ n : ℕ,\n      scalarReductionExtension l E W n ⋙ (A.levels n).model.E ≅\n        integralScalarReduction l E L ι W n)\n    (hassociation : IsCoefficientExtensionAssociation l E L ι W A association) :\n    ∃ (direct : (integralOperationsGoodComplex l E W).FullSubcategory ⥤\n        CochainComplex (coefficientSequenceModules l L W) ℤ)\n      (directEvaluation : ∀ n : ℕ,\n        direct ⋙ (coefficientSequenceEvaluation l L W n).mapHomologicalComplex (.up ℤ) ≅\n          (integralOperationsGoodComplex l E W).ι ⋙ integralScalarFiniteComplex l E L ι W n)\n      (model : integralOperationsGoodLocalization l E W ⋙\n        coefficientExtensionSystem l E L ι W SE A ≅ direct ⋙ DerivedCategory.Q),\n      IsCoefficientExtensionStrictTransition l E L ι W direct directEvaluation ∧\n      IsCoefficientExtensionModelEvaluation l E L ι W SE A association direct\n        directEvaluation model ∧\n      ∀ K : DerivedCategory (scalarReductionSource l E W),\n        IsNormalizedCoefficientSequence l L W\n          ((coefficientExtensionSystem l E L ι W SE A).obj K)",
+  "branch": "sheaf-dag",
+  "by": "E6",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-dfb7c",
+  "group": "E6",
+  "result": "pass",
+  "landing": "20261021T233647-L-845381",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-dfb7c",
+  "group": "E6",
+  "result": "pass",
+  "landing": "20261021T233647-L-845381",
+  "kind": "interface",
+  "note": "independent cc review: the 28 moved interface declarations, block by block, with the clone's item module (identical); the item and new nodes' proof/proof_deps with the Lean citations; the new sorry statement with the original skeleton fields (strictly smaller: completion and projection now proved); the 7 delivered modules and 4 direct importers compiled in a sandbox; #print axioms"
+ }
+}

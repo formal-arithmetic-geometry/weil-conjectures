@@ -1,0 +1,122 @@
+{
+ "id": "stage3-pur-finite-extension-association",
+ "kind": "statement",
+ "title": "Finite coefficient extension balanced association",
+ "statement": "For a prime l, finite extensions E and L of Q_l, an embedding iota:E→L, a scheme W and prescribed scalar-system data A for the actual quotient maps, there are natural isomorphisms A_E,n⊗_{O_E}(-) followed by A_L,n⊗_{A_E,n}(-) ≅ A_L,n⊗_{O_E}(-), for every n≥0. On every local section the isomorphism sends b⊗(a⊗x) to (iota(a)b)⊗x. The chosen ordinary extension models and their adjunction units are used, not arbitrary tensor identifications. Actual coefficient systems are those of [def-coef-ringed-sequence-site], and scalar models those of [lem-coef-semilinear-derived-sections].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
+  "place": "Integral operations and normalized coefficient reduction model."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-integral-scalar-extension",
+  "def-weil-abstract-derived-category",
+  "def-weil-sheaf-of-modules-category",
+  "def-coef-ringed-sequence-site",
+  "def-weil-integral-reduction-tower",
+  "def-coef-normalized-dvr-tower",
+  "lem-coef-semilinear-derived-sections",
+  "stage3-pur-extension-reduction-data"
+ ],
+ "proof": [
+  {
+   "text": "Compose the two ordinary extension/restriction adjunctions. Identify the iterated restriction with restriction along the composite ring map. Left-adjoint uniqueness gives the ordinary natural isomorphism. Its unit equation and module linearity give the balanced section formula.",
+   "uses": [
+    "lem-pur-sheaf-ring-coefficient-ordinary-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-sheaf-ring-coefficient-ordinary-adjunction"
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
+  "place": "Integral operations clause",
+  "group": "E6",
+  "date": "2026-10-21"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Sheaf module scalar extension composite adjunction unit tensor associativity",
+   "results": "Eight ordinary scalar/unit lemmas, including ModuleCat.homEquiv_extendScalarsComp and SheafOfModules.unitHomEquiv_comp_apply; no simultaneous coefficient-system reduction model.",
+   "date": "2026-10-21",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "Mathlib.CategoryTheory.Adjunction.Unique supplies leftAdjointUniq and its unit normalization.",
+   "date": "2026-10-21",
+   "verdict": "ordinary ingredient"
+  },
+  {
+   "tool": "grep",
+   "query": "roos|Roos|leftAdjointUniq",
+   "results": "Mathlib gives adjunction uniqueness; no specialized completed coefficient-system theorem. Project StrictRoosComparison supplies the derived-limit ingredient.",
+   "date": "2026-10-21",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Associativity of extension of scalars on sheaves of modules agrees with adjunction units and pure tensor sections.",
+   "results": "ModuleCat.extendScalars_assoc and ModuleCat.extendRestrictScalarsAdj_unit_app_apply in Mathlib.Algebra.Category.ModuleCat.ChangeOfRings concern ordinary module categories. The required sheaf scalar-model association and its prescribed tensor-section formula are not an exact match.",
+   "date": "2026-10-21",
+   "verdict": "no match; ingredients only"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefficientExtensionReductionModel",
+  "date": "2026-10-21",
+  "group": "E6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "Compatibility with finite reduction and scalar extension to Qlbar: Finite coefficient extension balanced association",
+   "via": [
+    "stage3-pur-reduction-skeleton-exists"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefficientExtensionFiniteAssociation",
+  "file": "lean/Sheaf/Paper/CoefficientExtensionFiniteAssociation.lean",
+  "declaration": "WeilConjectures.coefficientExtensionFiniteAssociation_exists",
+  "statement": "theorem coefficientExtensionFiniteAssociation_exists :\n    Nonempty (CoefficientExtensionAssociationData l E L ι W A)",
+  "branch": "sheaf-dag",
+  "by": "E6",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-dfb7c",
+  "group": "E6",
+  "result": "pass",
+  "landing": "20261021T233647-L-845381",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-dfb7c",
+  "group": "E6",
+  "result": "pass",
+  "landing": "20261021T233647-L-845381",
+  "kind": "interface",
+  "note": "independent cc review: the 28 moved interface declarations, block by block, with the clone's item module (identical); the item and new nodes' proof/proof_deps with the Lean citations; the new sorry statement with the original skeleton fields (strictly smaller: completion and projection now proved); the 7 delivered modules and 4 direct importers compiled in a sandbox; #print axioms"
+ }
+}

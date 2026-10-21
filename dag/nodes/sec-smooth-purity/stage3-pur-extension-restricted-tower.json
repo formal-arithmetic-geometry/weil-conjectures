@@ -1,0 +1,122 @@
+{
+ "id": "stage3-pur-extension-restricted-tower",
+ "kind": "statement",
+ "title": "Restriction identifies the strict finite quotient tower",
+ "statement": "For a prime l, finite extensions E,L of Q_l, an embedding iota:E→L and a scheme W, suppose direct is a functor from flat-term K-flat completed E-complexes to strict L-system complexes, with natural isomorphisms between each evaluated complex and the specified finite scalar complex. Assume the successor transition on every degree and local section is the prescribed quotient transition conjugated by these isomorphisms. Restrict the system to a tower of completed L-modules and exchange towers with complexes. There is then a natural isomorphism of towers from this restricted tower to the specified finite scalar tower. Its nth component is exactly the canonical restriction-evaluation comparison followed by restriction of the given nth isomorphism. The strict systems and their transition maps are those of [def-coef-ringed-sequence-site].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
+  "place": "Integral operations and normalized coefficient reduction model."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-integral-scalar-extension",
+  "def-weil-abstract-derived-category",
+  "def-weil-sheaf-of-modules-category",
+  "def-coef-ringed-sequence-site",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "def-coef-normalized-dvr-tower",
+  "stage3-pur-extension-reduction-data"
+ ],
+ "proof": [
+  {
+   "text": "The given transition equation identifies successor squares on every local section. The characterizations of restriction and sequence transitions show that both compute the same horizontal restriction. Extensionality gives naturality as chain maps. Successor naturality extends to every tower arrow; the given invertible level maps assemble into a tower isomorphism. Their naturality in the good complex gives functoriality.",
+   "uses": [
+    "def-coef-ringed-sequence-site"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-coef-ringed-sequence-site"
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
+  "place": "Integral operations clause",
+  "group": "E6",
+  "date": "2026-10-21"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Roos mapping cone total right derived inverse limit strict towers natural isomorphism canonical projection",
+   "results": "Eight mapping-cone comparison lemmas, including CochainComplex.mappingCone.mapHomologicalComplexIso; no theorem giving this coefficient-tower derived-limit comparison with its canonical projections.",
+   "date": "2026-10-21",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapHomologicalComplexCompIso",
+   "results": "Seven comparison lemmas, including mapHomologicalComplexCompIso and its component equations; used to compare exact restriction and evaluated complexes.",
+   "date": "2026-10-21",
+   "verdict": "comparison ingredient"
+  },
+  {
+   "tool": "grep",
+   "query": "roos|Roos|leftAdjointUniq",
+   "results": "Mathlib gives adjunction uniqueness; no specialized completed coefficient-system theorem. Project StrictRoosComparison supplies the derived-limit ingredient.",
+   "date": "2026-10-21",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars commutes with evaluating a strict tower of complexes and preserves its quotient transition maps.",
+   "results": "ModuleCat.restrictScalars in Mathlib.Algebra.Category.ModuleCat.ChangeOfRings and PresheafOfModules.restrictScalarsObj in Mathlib.Algebra.Category.ModuleCat.Presheaf.ChangeOfRings supply restriction constructions, not the specified tower comparison and transition equation.",
+   "date": "2026-10-21",
+   "verdict": "no match; ingredients only"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefficientExtensionReductionModel",
+  "date": "2026-10-21",
+  "group": "E6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "Compatibility with finite reduction and scalar extension to Qlbar: Restriction identifies the strict finite quotient tower",
+   "via": [
+    "stage3-pur-reduction-skeleton-exists"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefficientExtensionRestrictedTower",
+  "file": "lean/Sheaf/Paper/CoefficientExtensionRestrictedTower.lean",
+  "declaration": "WeilConjectures.coefficientExtensionRestrictedTower_exists",
+  "statement": "theorem coefficientExtensionRestrictedTower_exists\n    (direct : (integralOperationsGoodComplex l E W).FullSubcategory ⥤\n      CochainComplex (coefficientSequenceModules l L W) ℤ)\n    (directEvaluation : ∀ n : ℕ,\n      direct ⋙ (coefficientSequenceEvaluation l L W n).mapHomologicalComplex (.up ℤ) ≅\n        (integralOperationsGoodComplex l E W).ι ⋙ integralScalarFiniteComplex l E L ι W n)\n    (htransition : IsCoefficientExtensionStrictTransition l E L ι W direct directEvaluation) :\n    ∃ e : direct ⋙ (coefficientSequenceRestriction l L W).mapHomologicalComplex (.up ℤ) ⋙\n        HomologicalComplex.complexOfFunctorsToFunctorToComplex ≅\n      (integralOperationsGoodComplex l E W).ι ⋙ integralScalarTowerFunctor l E L ι W,\n      ∀ (P : (integralOperationsGoodComplex l E W).FullSubcategory) (n : ℕ),\n        (e.hom.app P).app (op n) =\n          (coefficientRestrictedComplexEvaluation l L W n).hom.app (direct.obj P) ≫\n            ((scalarReductionRestriction l L W n).mapHomologicalComplex (.up ℤ)).map\n              ((directEvaluation n).hom.app P)",
+  "branch": "sheaf-dag",
+  "by": "E6",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-dfb7c",
+  "group": "E6",
+  "result": "pass",
+  "landing": "20261021T233647-L-845381",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-dfb7c",
+  "group": "E6",
+  "result": "pass",
+  "landing": "20261021T233647-L-845381",
+  "kind": "interface",
+  "note": "independent cc review: the 28 moved interface declarations, block by block, with the clone's item module (identical); the item and new nodes' proof/proof_deps with the Lean citations; the new sorry statement with the original skeleton fields (strictly smaller: completion and projection now proved); the 7 delivered modules and 4 direct importers compiled in a sandbox; #print axioms"
+ }
+}

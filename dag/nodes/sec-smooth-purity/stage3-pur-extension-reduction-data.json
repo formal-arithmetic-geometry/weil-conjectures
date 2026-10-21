@@ -1,0 +1,94 @@
+{
+ "id": "stage3-pur-extension-reduction-data",
+ "kind": "definition",
+ "title": "Coherent coefficient-extension comparison and model data",
+ "statement": "For types Association, Direct and Completion, a section predicate on Association, evaluation types Evaluation(direct), a transition predicate, model types Model(direct), a model-evaluation predicate, a normalization proposition, and completion-projection and comparison predicates, define CoefficientReductionModelData to be the record of: an association with its section formula; a direct representative with its evaluated transitions; a model with its evaluation formula; a proof of normalization; a completion with its projection formula and comparison predicate. The accompanying generic comparison records and their concrete coefficient specializations are the existing interfaces relocated verbatim from CoefficientExtensionReductionModel to CoefficientExtensionReductionData. This node records the interface, not an existence assertion.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
+  "place": "Integral operations and normalized coefficient reduction model."
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
+  "place": "Integral operations, coherent finite reduction model: existing record interfaces",
+  "group": "E6",
+  "date": "2026-10-21"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Record ordinary and derived scalar extension comparisons together with their section and model normalization formulas.",
+   "results": "IntermediateField.extendScalars_le_extendScalars_iff in Mathlib.FieldTheory.IntermediateField.Basic and scalar-tower/localization results are unrelated to this project record of comparison maps and formulas.",
+   "date": "2026-10-21",
+   "verdict": "no match; project interface relocation"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ComparisonData\"",
+   "results": "No hits for this record-name pattern.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "CoefficientScalarComparisonData|CoefficientReductionModelData",
+   "results": "No hits in Mathlib. The existing project declarations are relocated unchanged, not replaced by a different construction.",
+   "date": "2026-10-21",
+   "verdict": "no match; existing project interface"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefficientExtensionReductionModel",
+  "date": "2026-10-21",
+  "group": "E6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "Compatibility with finite reduction and scalar extension: shared coherent model interfaces",
+   "via": [
+    "stage3-pur-reduction-skeleton-exists"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefficientExtensionReductionData",
+  "file": "lean/Sheaf/Paper/CoefficientExtensionReductionData.lean",
+  "declaration": "WeilConjectures.CoefficientReductionModelData",
+  "statement": "structure CoefficientReductionModelData (Association Direct Completion : Type*)\n    (sectionFormula : Association → Prop) (Evaluation : Direct → Type*)\n    (transitionFormula : ∀ direct, Evaluation direct → Prop) (Model : Direct → Type*)\n    (modelFormula : Association → ∀ direct, Evaluation direct → Model direct → Prop)\n    (Normalized : Prop)\n    (completionFormula : ∀ direct, Evaluation direct → Model direct → Completion → Prop)\n    (comparisonFormula : Completion → Prop)\n    extends CoefficientStrictModelData Association Direct sectionFormula Evaluation\n      transitionFormula",
+  "branch": "sheaf-dag",
+  "by": "E6",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-dfb7c",
+  "group": "E6",
+  "result": "pass",
+  "landing": "20261021T233647-L-845381",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-dfb7c",
+  "group": "E6",
+  "result": "pass",
+  "landing": "20261021T233647-L-845381",
+  "kind": "interface",
+  "note": "independent cc review: the 28 moved interface declarations, block by block, with the clone's item module (identical); the item and new nodes' proof/proof_deps with the Lean citations; the new sorry statement with the original skeleton fields (strictly smaller: completion and projection now proved); the 7 delivered modules and 4 direct importers compiled in a sandbox; #print axioms"
+ }
+}

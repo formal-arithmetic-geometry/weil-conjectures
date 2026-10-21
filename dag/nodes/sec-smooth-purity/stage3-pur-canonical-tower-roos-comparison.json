@@ -1,0 +1,120 @@
+{
+ "id": "stage3-pur-canonical-tower-roos-comparison",
+ "kind": "statement",
+ "title": "Canonical projection-normalized Roos comparison",
+ "statement": "For a prime l, a finite extension E of Q_l and a scheme W, let B be sheaves of modules over the completed integral E-coefficients. There is a natural isomorphism Q followed by the canonical right-derived inverse-limit functor on towers in B ≅ the strict Roos functor followed by Q. For every tower complex X and n≥0, the inverse comparison followed by the canonical derived projection to level n and the evaluation factorization is Q of the actual Roos projection X→X_n. The canonical inverse limit and its projections are those of [def-coef-ringed-sequence-site].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
+  "place": "Integral operations and normalized coefficient reduction model."
+ },
+ "stmt_deps": [
+  "def-weil-completed-integral-coefficients",
+  "def-weil-abstract-derived-category",
+  "def-weil-sheaf-of-modules-category",
+  "def-coef-ringed-sequence-site"
+ ],
+ "proof": [
+  {
+   "text": "Resolve tower complexes functorially by K-injectives. The ordinary-limit inclusion into the strict Roos complex is a quasi-isomorphism on K-injectives. Invert it after localization, use the unit of the right-derived limit, and invert the resolution map to obtain the natural comparison. Its inclusion normalization proves the projection formula on K-injectives. Naturality along a K-injective resolution proves it for every tower complex.",
+   "uses": [
+    "lem-weil-strict-roos-derivation",
+    "lem-sf-strict-roos-derived-limit-comparison",
+    "lem-weil-proetale-countable-products-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-strict-roos-derivation",
+  "lem-sf-strict-roos-derived-limit-comparison",
+  "lem-weil-proetale-countable-products-exact"
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
+  "place": "Integral operations clause",
+  "group": "E6",
+  "date": "2026-10-21"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Roos mapping cone total right derived inverse limit strict towers natural isomorphism canonical projection",
+   "results": "Eight mapping-cone comparison lemmas, including CochainComplex.mappingCone.mapHomologicalComplexIso; no theorem giving this coefficient-tower derived-limit comparison with its canonical projections.",
+   "date": "2026-10-21",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapHomologicalComplexCompIso",
+   "results": "Seven comparison lemmas, including mapHomologicalComplexCompIso and its component equations; used to compare exact restriction and evaluated complexes.",
+   "date": "2026-10-21",
+   "verdict": "comparison ingredient"
+  },
+  {
+   "tool": "grep",
+   "query": "roos|Roos|leftAdjointUniq",
+   "results": "Mathlib gives adjunction uniqueness; no specialized completed coefficient-system theorem. Project StrictRoosComparison supplies the derived-limit ingredient.",
+   "date": "2026-10-21",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical Roos complex computes right derived inverse limit of towers in an abelian category with exact countable products, with the canonical projections.",
+   "results": "CategoryTheory.CountableAB4Star.of_hasExactLimitsOfShape_nat in Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic and CategoryTheory.Functor.limitIsoOfIsRightKanExtension_inv_π in Mathlib.CategoryTheory.Functor.KanExtension.Basic are general ingredients; no strict Roos comparison with the specified derived projections.",
+   "date": "2026-10-21",
+   "verdict": "no match; ingredients only"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefficientExtensionReductionModel",
+  "date": "2026-10-21",
+  "group": "E6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "Compatibility with finite reduction and scalar extension to Qlbar: Canonical projection-normalized Roos comparison",
+   "via": [
+    "stage3-pur-reduction-skeleton-exists"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefficientConstantTowerRoosComparison",
+  "file": "lean/Sheaf/Paper/CoefficientConstantTowerRoosComparison.lean",
+  "declaration": "WeilConjectures.coefficientConstantTowerRoosComparison",
+  "statement": "theorem coefficientConstantTowerRoosComparison\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{t}) :\n    ∃ e : DerivedCategory.Q ⋙ coefficientConstantTowerLimit l E W ≅\n        roosF ⋙ DerivedCategory.Q,\n      ∀ (X : CochainComplex (ℕᵒᵖ ⥤ scalarReductionSource l E W) ℤ) (n : ℕ),\n        e.inv.app X ≫ (coefficientConstantTowerProjection l E W n).app\n            (DerivedCategory.Q.obj X) ≫\n          (coefficientConstantTowerEvaluationFactors l E W n).hom.app X =\n        DerivedCategory.Q.map (roosEval X n)",
+  "branch": "sheaf-dag",
+  "by": "E6",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-dfb7c",
+  "group": "E6",
+  "result": "pass",
+  "landing": "20261021T233647-L-845381",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-dfb7c",
+  "group": "E6",
+  "result": "pass",
+  "landing": "20261021T233647-L-845381",
+  "kind": "interface",
+  "note": "independent cc review: the 28 moved interface declarations, block by block, with the clone's item module (identical); the item and new nodes' proof/proof_deps with the Lean citations; the new sorry statement with the original skeleton fields (strictly smaller: completion and projection now proved); the 7 delivered modules and 4 direct importers compiled in a sandbox; #print axioms"
+ }
+}

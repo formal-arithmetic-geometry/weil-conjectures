@@ -1,0 +1,126 @@
+{
+ "id": "stage3-pur-extension-representative-roos",
+ "kind": "statement",
+ "title": "Roos completion of strict coefficient-extension representatives",
+ "statement": "For the actual coefficient systems of [def-coef-ringed-sequence-site], fix a coefficient extension E→L and its functor C from derived completed E-modules to derived L-systems. Suppose direct is a natural strict complex model of C on good complexes, its evaluations are the specified finite scalar complexes, and its successor transition maps agree with the specified quotient tensors. Then there is a natural isomorphism C(QP) completed by the canonical derived sequence limit ≅ the specified Roos scalar-extension complex of P. For each level n its inverse followed by the canonical limit projection, the restricted evaluated model map and the scalar-restriction factorization equals Q of the actual nth Roos projection. This conclusion fixes the projection maps, in addition to identifying objects.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
+  "place": "Integral operations and normalized coefficient reduction model."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-integral-scalar-extension",
+  "def-weil-abstract-derived-category",
+  "def-weil-sheaf-of-modules-category",
+  "def-coef-ringed-sequence-site",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "def-coef-normalized-dvr-tower",
+  "lem-coef-semilinear-derived-sections",
+  "lem-coef-derived-system-evaluation-calculus",
+  "stage3-pur-extension-reduction-data"
+ ],
+ "proof": [
+  {
+   "text": "Assemble the restriction-evaluation comparisons into the specified isomorphism of strict towers. Apply the canonical projection-normalized Roos comparison to the restricted complex. Whisker the given representative isomorphism and the strict tower isomorphism, then use naturality of the canonical projections and the derived-factorization cocycle to prove the projection equation.",
+   "uses": [
+    "stage3-pur-extension-restricted-tower",
+    "stage3-pur-canonical-tower-roos-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "stage3-pur-extension-restricted-tower",
+  "stage3-pur-canonical-tower-roos-comparison"
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
+  "place": "Integral operations clause",
+  "group": "E6",
+  "date": "2026-10-21"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Roos mapping cone total right derived inverse limit strict towers natural isomorphism canonical projection",
+   "results": "Eight mapping-cone comparison lemmas, including CochainComplex.mappingCone.mapHomologicalComplexIso; no theorem giving this coefficient-tower derived-limit comparison with its canonical projections.",
+   "date": "2026-10-21",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapHomologicalComplexCompIso",
+   "results": "Seven comparison lemmas, including mapHomologicalComplexCompIso and its component equations; used to compare exact restriction and evaluated complexes.",
+   "date": "2026-10-21",
+   "verdict": "comparison ingredient"
+  },
+  {
+   "tool": "grep",
+   "query": "roos|Roos|leftAdjointUniq",
+   "results": "Mathlib gives adjunction uniqueness; no specialized completed coefficient-system theorem. Project StrictRoosComparison supplies the derived-limit ingredient.",
+   "date": "2026-10-21",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compose a strict scalar extension representative with a Roos derived limit comparison and preserve each specified projection.",
+   "results": "ModuleCat.preservesFiniteLimits_extendScalars_of_flat in Mathlib.Algebra.Category.ModuleCat.Descent and ModuleCat.ExtendRestrictScalarsAdj.unit are scalar-extension ingredients, not the projection-normalized derived-limit assembly.",
+   "date": "2026-10-21",
+   "verdict": "no match; ingredients only"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefficientExtensionReductionModel",
+  "date": "2026-10-21",
+  "group": "E6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "Compatibility with finite reduction and scalar extension to Qlbar: Roos comparison for the strict coefficient extension representative",
+   "via": [
+    "stage3-pur-reduction-skeleton-exists"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefficientExtensionRepresentativeRoos",
+  "file": "lean/Sheaf/Paper/CoefficientExtensionRepresentativeRoos.lean",
+  "declaration": "WeilConjectures.coefficientExtensionRepresentativeRoos_exists",
+  "statement": "theorem coefficientExtensionRepresentativeRoos_exists\n    (SE : CoefficientDerivedSystemCalculus l E W)\n    (direct : (integralOperationsGoodComplex l E W).FullSubcategory ⥤\n      CochainComplex (coefficientSequenceModules l L W) ℤ)\n    (directEvaluation : ∀ n : ℕ,\n      direct ⋙ (coefficientSequenceEvaluation l L W n).mapHomologicalComplex (.up ℤ) ≅\n        (integralOperationsGoodComplex l E W).ι ⋙ integralScalarFiniteComplex l E L ι W n)\n    (htransition : IsCoefficientExtensionStrictTransition l E L ι W direct directEvaluation)\n    (model : integralOperationsGoodLocalization l E W ⋙\n      coefficientExtensionSystem l E L ι W SE A ≅ direct ⋙ DerivedCategory.Q) :\n    ∃ e : integralOperationsGoodLocalization l E W ⋙\n        (coefficientExtensionSystem l E L ι W SE A ⋙ coefficientSequenceLimit l L W) ≅\n          integralScalarOnGood l E L ι W,\n      ∀ (P : (integralOperationsGoodComplex l E W).FullSubcategory) (n : ℕ),\n        e.inv.app P ≫\n            (coefficientSequenceProjection l L W n).app\n              ((coefficientExtensionSystem l E L ι W SE A).obj\n                (DerivedCategory.Q.obj P.obj)) ≫\n            (coefficientFiniteDerivedRestriction l L W n).map\n              ((coefficientSequenceDerivedEvaluation l L W n).map (model.hom.app P) ≫\n                (coefficientSequenceEvaluation l L W n).mapDerivedCategoryFactors.hom.app\n                  (direct.obj P) ≫ DerivedCategory.Q.map ((directEvaluation n).hom.app P)) ≫\n            (scalarReductionRestriction l L W n).mapDerivedCategoryFactors.hom.app\n              ((integralScalarFiniteComplex l E L ι W n).obj P.obj) =\n          DerivedCategory.Q.map (coefficientExtensionRoosProjection l E L ι W P.obj n)",
+  "branch": "sheaf-dag",
+  "by": "E6",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-dfb7c",
+  "group": "E6",
+  "result": "pass",
+  "landing": "20261021T233647-L-845381",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-dfb7c",
+  "group": "E6",
+  "result": "pass",
+  "landing": "20261021T233647-L-845381",
+  "kind": "interface",
+  "note": "independent cc review: the 28 moved interface declarations, block by block, with the clone's item module (identical); the item and new nodes' proof/proof_deps with the Lean citations; the new sorry statement with the original skeleton fields (strictly smaller: completion and projection now proved); the 7 delivered modules and 4 direct importers compiled in a sandbox; #print axioms"
+ }
+}
