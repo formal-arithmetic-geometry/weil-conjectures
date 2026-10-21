@@ -21148,3 +21148,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:30 L: returned deliver/NO/def-per-support-condition (reviewer RETURN: C4/C7, route lock. Definition-only split with no new nodes. Its D_X comes from lem-per-qbar-arbitrary-field-duality, whi)
 - 08:30 L: returned deliver/Q55/lem-sfb-rationalization-localization-hom-criterion (reviewer RETURN: A6/A7/B10, superseded. This is the third push of the same split: the item statement+proof and both new nodes (lem-sfb-sc)
 - 08:33 L: merged deliver/NL/lem-sfb-finite-open-direct-image-ctf (reviewer PASS; first push; new nodes: 0)
+- 08:33 L: merged deliver/Q68/lem-weil-finite-duality-locally-closed-comparison (reviewer PASS; after a return; new nodes: 4)
