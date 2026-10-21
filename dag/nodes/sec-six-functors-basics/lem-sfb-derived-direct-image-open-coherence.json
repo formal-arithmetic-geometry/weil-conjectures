@@ -21,102 +21,61 @@
  ],
  "proof": [
   {
-   "text": "Throughout, identify $\\Mod_{\\Lambda_T}$ with the category of sheaves of modules over the section-ring sheaf of $\\Lambda_T$ by the equivalence of [def-weil-pbc-internal-abelian-sheaf-module-equivalence]; it leaves underlying abelian sheaves, section groups, restriction maps and morphisms unchanged, so the module direct images, inverse images and comparisons below are the ringed-site ones, and the ringed-site statements cited below apply to $D_T$. For every morphism $a$, the module adjunction $a^*\\dashv a_*$ of [sk-def-sfb-module-pushforward-pullback] has exact left adjoint by [sk-prop-sfb-cartesian-coefficients]. Apply [lem-weil-pbc-right-adjoint-preserves-kinjective] with $u=a_*$ and $v=a^*$: $a_*I$ is K-injective whenever $I$ is. For an open $j$, [sk-def-sfb-module-lower-shriek] gives the exact additive left adjoint $j_!\\dashv j^*$, so the same lemma also makes $j^*I$ K-injective. These applications are in module categories over the pulled-back ring sheaves, not in constant discrete-coefficient categories. The small-site module categories have K-injective resolutions by [prop-pur-kinjective-resolutions-exist]. Thus all the iterated direct images and open restrictions used below can be computed on the same initial K-injective complex.",
+   "text": "Apply [lem-sfb-kinjective-direct-image-open-word-model] to the pulled-back coefficient system. Its coefficient-map hypothesis holds by [sk-prop-sfb-cartesian-coefficients], for both $E$ and the specified finite-subextension $\\overline{\\mathbf Q}_\\ell$. Thus every direct image and open restriction in the formulas is computed on one initial K-injective $I$. In [lem-weil-pbc-ringed-topoi-derived-pushforward-composition], choose the identity resolution of $f_*I$. Its normalization identifies the specified $\\kappa_{g,f}$ with the class of $c_{g,f,I}$ from [lem-sfb-module-direct-image-open-pasting]; this identifies the given comparison, rather than choosing one.",
    "uses": [
-    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
-    "sk-def-sfb-module-pushforward-pullback",
+    "lem-sfb-kinjective-direct-image-open-word-model",
     "sk-prop-sfb-cartesian-coefficients",
-    "lem-weil-pbc-right-adjoint-preserves-kinjective",
-    "sk-def-sfb-module-lower-shriek",
-    "prop-pur-kinjective-resolutions-exist"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 08BJ, lemma-adjoint-preserve-K-injectives; module adjunctions and exactness as cited"
-   }
-  },
-  {
-   "text": "Fix a K-injective representative $I$. In the normalization of [lem-weil-pbc-ringed-topoi-derived-pushforward-composition], take the resolution $f_*I\\to J$ to be the identity of $f_*I$, which is allowed by step 1. Consequently $\\kappa_{g,f,QI}$ is the class of the inverse of the underived comparison $g_*f_*I\\cong(gf)_*I$ of [sk-def-sfb-module-pushforward-pullback]. This identifies the specified comparison, rather than choosing a new isomorphism. The arbitrary-resolution formulas in [lem-sf-kinjective-derived-map-computation] show how to use these representatives functorially: a derived arrow $QI\\to QI'$ is represented by a unique homotopy class $t:I\\to I'$, its direct-image arrow is the class of $a_*t$, and a change of representative is the corresponding image of a homotopy equivalence. Hence the computations below determine natural transformations and remain valid under the canonical resolution identifications.",
-   "uses": [
     "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-    "sk-def-sfb-module-pushforward-pullback",
-    "lem-sf-kinjective-derived-map-computation"
+    "lem-sfb-module-direct-image-open-pasting"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 070I and 070Y, lemma-K-injective and lemma-K-injective-defined; sites-cohomology.tex Tag 0D6E normalization"
-   }
-  },
-  {
-   "text": "For clause 1 compute on $I$ as in step 2. The underlying composition comparison is restriction along the fibre-product isomorphism of [def-sfb-finite-lower-star-comp]. On a site object $V\\to T$, both bracketings identify the iterated fibre product with $V\\times_T X$. Both isomorphisms have the same projections to $V$ and $X$: all intermediate projections are forgotten by composition. The universal property of the fibre product therefore makes the two isomorphisms equal. Applying the contravariant sections functor $I^n$ gives equal maps in every degree $n$, compatible with the differential. The module comparisons are precisely the lifts of these sheaf comparisons by [sk-def-sfb-module-pushforward-pullback]; their linearity uses the coefficient-composition equation of [lem-sfb-eta-comp]. Equality of their underlying sheaf maps is equality of module maps, since a module morphism is a sheaf map satisfying a property. Taking their classes and the identifications of step 2 gives exactly the displayed associativity equation.",
-   "uses": [
-    "def-sfb-finite-lower-star-comp",
-    "sk-def-sfb-module-pushforward-pullback",
-    "lem-sfb-eta-comp"
-   ],
-   "elementary": true,
-   "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/sk-thm-sf-comp-composition.proof.md",
-    "place": "Canonicity and associativity: composition of proper direct images is associative; explicit sectionwise argument"
+    "place": "Composition isomorphism and Canonicity and associativity; assembly of the two extracted arguments"
    }
   },
   {
-   "text": "Through the equivalence of [def-weil-pbc-internal-abelian-sheaf-module-equivalence] (step 1), apply [lem-sfb-proetale-open-restriction-counit] with $R=\\Lambda_T$ and $X=S$, $Y=T$, $W=U$. Its coefficient rings are actual inverse-image rings. Transport them to $\\Lambda_S,\\Lambda_U,\\Lambda_{S_U}$ using the canonical ring isomorphisms of [sk-prop-sfb-cartesian-coefficients]; its final assertion identifies each module inverse image with the lift of the sheaf inverse image using $\\alpha^{-1}$. This gives a natural module isomorphism $\\beta_{f,j}:j^*f_*\\cong(f_U)_*j_S^*$. The cited open comparison states its evaluation: on $V\\to U$ it is the identification $M(S\\times_TV)\\cong M(S_U\\times_UV)$. Under the canonical fibre-product identification this is the identity on the section module. Thus the comparison has exactly the coefficient action and the underived normalization required in clause 2, without assuming that $\\Lambda$ is finite or discrete.",
+   "text": "For an open square use $\\beta_{f,j}$ of [lem-sfb-module-direct-image-open-pasting]. Its component is the identity on $I(V\\times_T S)$ after the stated fibre-product identification, and its module actions use the inverse coefficient comparisons. By [lem-sfb-kinjective-direct-image-open-word-model](iii), its degreewise maps descend to a natural isomorphism $\\rho_{f,j}:j^*Rf_*\\cong R(f_U)_*j_S^*$ with precisely that K-injective formula. The transition formula there supplies independence of $I$ and naturality for every derived arrow. This proves clause 2.",
    "uses": [
-    "lem-sfb-proetale-open-restriction-counit",
-    "sk-prop-sfb-cartesian-coefficients",
-    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+    "lem-sfb-kinjective-direct-image-open-word-model",
+    "lem-sfb-module-direct-image-open-pasting"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09A5, section-morphism; open-slice comparison and general ring-sheaf version as stated by the cited node"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/sk-thm-sf-comp-composition.proof.md",
+    "place": "Composition isomorphism and Canonicity and associativity; assembly of the two extracted arguments"
    }
   },
   {
-   "text": "For $K\\cong QI$, step 1 makes $j_S^*I$ K-injective, so $j^*Rf_*K$ is represented by $j^*f_*I$ and $R(f_U)_*j_S^*K$ by $(f_U)_*j_S^*I$. Define $\\rho_{f,j,K}$ to be the class of $\\beta_{f,j,I}$ from step 4. Both $\\beta$ and its inverse are chain maps, since the underived isomorphism is natural and thus commutes with every differential. They give an isomorphism in the derived category. For a chain map $t:I\\to I'$, naturality of $\\beta$ gives $\\beta_{I'}(j^*f_*t)=((f_U)_*j_S^*t)\\beta_I$. The representative and transition formulas of [lem-sf-kinjective-derived-map-computation] identify these terms with the corresponding derived arrows; the same equality for the homotopy equivalence changing $I$ proves independence of the representative. This proves existence, naturality, and the K-injective formula of clause 2.",
+   "text": "Equation (b) of [lem-sfb-module-direct-image-open-pasting] is an equality of transformations between underived words. Apply the diagram-descent assertion of [lem-sfb-kinjective-direct-image-open-word-model] and substitute the identification of $\\kappa$ from step 1. It becomes exactly clause 1, with its canonical associators. Equation (c) descends in the same way, using step 2, and gives successive-open compatibility.",
    "uses": [
-    "lem-sf-kinjective-derived-map-computation"
+    "lem-sfb-kinjective-direct-image-open-word-model",
+    "lem-sfb-module-direct-image-open-pasting"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 070I and 070Y; descend the natural open comparison on K-injectives"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/sk-thm-sf-comp-composition.proof.md",
+    "place": "Composition isomorphism and Canonicity and associativity; assembly of the two extracted arguments"
    }
   },
   {
-   "text": "For successive opens $W\\xrightarrow{v}U\\xrightarrow{j}T$, evaluate both the direct restriction comparison and the composite of the two comparisons on a K-injective $I$, in degree $n$, at $V\\to W$. By step 4 both identify the section module with $I^n(V\\times_T S)$ and act as the identity after the canonical fibre-product identifications. The ring identifications are obtained by restricting the same ring sheaf $\\Lambda_T$ to the slice at $V$; iterated restriction of that sheaf is literal restriction along the composite. Equivalently, the two fibre-product maps have equal projections to $V$ and $S$, as in step 3. Thus the two module maps agree in every degree and after localization. For an identity open the same calculation is already the identity. For an identity scheme morphism its direct-image comparison acts on $I^n(V)$ as the identity, so the unit constraints in clause 1 also hold.",
-   "uses": [],
-   "elementary": true,
+   "text": "Finally apply the same diagram-descent assertion of [lem-sfb-kinjective-direct-image-open-word-model] to equation (d) of [lem-sfb-module-direct-image-open-pasting]. Each whiskering is computed on a K-injective image of $I$, so its factors are exactly the $\\kappa$ of step 1 and $\\rho$ of step 2. Its source is $j^*R(gf)_*$ and its target is $R(g_U)_*R(f_U)_*j_X^*$, giving the displayed equation of clause 3. The identity constraints of the underived node descend to the asserted identities as well.",
+   "uses": [
+    "lem-sfb-kinjective-direct-image-open-word-model",
+    "lem-sfb-module-direct-image-open-pasting"
+   ],
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/sk-thm-sf-comp-composition.proof.md",
-    "place": "Canonicity and associativity: restrictions of comparisons are identities, including identity constraints"
-   }
-  },
-  {
-   "text": "For clause 3 fix $I$ on $X$. The complexes $f_*I$, $(gf)_*I$, $j_X^*I$, and $(f_U)_*j_X^*I$ are K-injective by step 1. Hence every factor in the displayed equation is computed without another replacement, using steps 2 and 5. At $V\\to U$ in degree $n$, its left-hand path first replaces $(gf)_*I$ by $g_*f_*I$, then restricts $g$ to $U$, then restricts $f$ to $Y_U$. Its right-hand path first restricts $gf$ to $U$, then splits it into $g_U$ and $f_U$. By steps 3 and 4 each path sends a section over $V\\times_T X$ to that same section over $(V\\times_UY_U)\\times_{Y_U}X_U$, via the canonical isomorphism to $V\\times_T X$. The two isomorphisms have the same projections to $V$ and $X$, so they are equal by the fibre-product universal property. Thus the paths give equal module chain maps and equal derived maps. Naturality and independence of $I$ follow from step 2 and step 5. This is the precise composition equation in clause 3, with its stated associators and fibre-product identifications.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/sk-thm-sf-comp-composition.proof.md",
-    "place": "Composition isomorphism and Canonicity and associativity: compatibility of direct-image reassociation with open restriction"
+    "place": "Composition isomorphism and Canonicity and associativity; assembly of the two extracted arguments"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
-  "sk-def-sfb-module-pushforward-pullback",
+  "lem-sfb-kinjective-direct-image-open-word-model",
   "sk-prop-sfb-cartesian-coefficients",
-  "lem-weil-pbc-right-adjoint-preserves-kinjective",
-  "sk-def-sfb-module-lower-shriek",
-  "prop-pur-kinjective-resolutions-exist",
   "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-  "lem-sf-kinjective-derived-map-computation",
-  "def-sfb-finite-lower-star-comp",
-  "lem-sfb-eta-comp",
-  "lem-sfb-proetale-open-restriction-counit"
+  "lem-sfb-module-direct-image-open-pasting"
  ],
  "proof_origin": {
   "by": "agent",
@@ -231,11 +190,11 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "item": "lem-sfb-derived-direct-image-open-coherence",
   "worker": "stage1",
-  "summary": "Proved all three clauses on a single K-injective representative, using exact pulled-back module inverse images and exact open extension by zero. Expanded both coherence equations by their maps on site sections; reused existing arbitrary-coefficient open comparison and K-injective lemmas. No new nodes and no statement change.",
-  "blueprint": "The composition-of-direct-images equality and open-restriction normalization in sk-thm-sf-comp-composition; serves the composition input of det-cor-affine-space-rational-induction through lem-sfb-localizing-lower-shriek-composition.",
+  "summary": "Repair of the human re-split request: preserve the statement and all Lean records; extract the common K-injective word/diagram argument (old steps 1, 2, 5) and underived module sectionwise pasting argument (old steps 3, 4, 6, 7) as two independent, comparably sized statement-only unsplit nodes. The parent now only specializes the coefficient hypothesis, identifies the given kappa normalization, and derives the underived comparisons and equations.",
+  "blueprint": "Preserves the composition-direct-image equality and restriction normalization of sk-thm-sf-comp-composition and its use through lem-sfb-localizing-lower-shriek-composition for det-cor-affine-space-rational-induction. Both new nodes have this same ancestor and unit.",
   "tool_uses": [
    {
     "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
@@ -277,12 +236,12 @@
   "sk-prop-sfb-cartesian-coefficients"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-Q73-90f4c61cc",
-  "group": "Q73",
+  "reviewer": "NT-cc-Q61-a8768df74",
+  "group": "Q61",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q73-90f4c61cc (reviewer sub-agent of L); spot-checked: Read the whole delivery: item statement, all 7 steps, the 10 cited node statements and the notions behind them, unit sk-cor-affine-space-rational, the main-20261015 sk-thm-sf-comp-composition proof (composition and canonicity paragraphs), and the local Stacks copies of 08BJ (lemma-adjoint-preserve-K-injectives) and 0D6E (lemma-derived-pushforward-composition). The mathematics is correct. Exact a^* (cartesian-coefficients final paragraph) and exact j_! with j_! ⊣ j^* (module-lower-shriek) meet the hypotheses of 08BJ, so f_*I, j^*I and j_Y^*f_*I are K-injective. κ is normalized with the identity resolution. Clauses 1 and 3 reduce sectionwise to fibre-product isomorphisms with the same projections to V and X. ρ comes from lem-sfb-proetale-open-restriction-counit for arbitrary ring sheaves with R=Λ_T. Naturality and independence of the representative follow from the representative and transition formulas of lem-sf-kinjective-derived-map-computation. Checked edge cases: empty and identity opens, identity maps, the zero complex, complexes unbounded in both directions. Statement unchanged; Λ=E or Q̄_ℓ with unbounded D(Mod_{Λ_T}); not a duplicate of lem-pc-restrict-derived-direct-image-open (ringed spaces) or lem-exc-proetale-derived-open-restriction (finite A); no new nodes; no SGA. Fixes: (C1/C4) steps 1 and 4 applied ringed-site module-sheaf nodes to the module-object category Mod_{Λ_T} without citing the identification, so they now cite def-weil-pbc-internal-abelian-sheaf-module-equivalence and proof_deps is recomputed. (C8) the off-route sk-prop-sfb-cartesian-coefficients was undeclared; it is now added to split_report.tool_uses and accepted. All six declared tool uses are accepted as generic tools.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q61-a8768df74 (reviewer sub-agent of L); spot-checked: Human re-split note (clones/live coord/repair-notes, 2026-10-21; asks for ≥2 statement-only nodes of comparable size and an assembly ≤3000 chars) is met. The live item is still the Q73-reviewed 7-step split (6870 chars), so the delivery is not superseded. Item statement, stmt_deps, lean, blueprint and tool_uses are byte-identical to live; only proof, proof_deps and split_report change. New nodes: word-model (3037 chars; old steps 1, 2 [representative formulas] and 5) and module-pasting (3174 chars; old steps 3, 4, 6 and 7). The item keeps 4 assembly steps totalling 2140 chars: verify the α hypothesis via cartesian-coefficients cl.1 for E and Q̄_ℓ, κ = c^d via the identity resolution allowed by ringed-topoi-composition, ρ = β^d, and (b), (c), (d) descended. No argument was dropped or blurred, and neither node restates an item clause: one is purely derived descent, the other purely underived. Truth: word-model (i) holds by 08BJ (derived.tex l.9857), since a_* has exact left adjoint a^* when α is invertible and j^* has exact j_!; (ii) by letter-wise induction on lem-sf-kinjective-derived-map-computation; (iii) because natural θ on additive words commutes with homotopies, and whiskering holds because intermediate images stay K-injective. Module-pasting (b), (c), (d) directions and endpoints checked (S_U×_U W = S_W, X×_Y Y_U = X_U); sectionwise fibre-product isomorphisms with equal projections. Edge cases: empty word, identity and empty opens, identity maps, zero complex, unbounded complexes. Duplicate search (rg whisker/K-injective/preserv; candidates exact-derived-transformation-pasting [exact letters only], derived-composition-adjunction-normalization, open-restriction-counit, derived-open-square-restriction, exc-proetale-derived-open-restriction [finite A], pc-restrict-derived-direct-image-open [ringed spaces]): no duplicate. Stacks tags 08BJ, 070Y, 09A5 and 00XZ match their labels. Searches recorded in three kinds; blueprint.from via [item, localizing-lower-shriek-composition] correct; no SGA. Accepted tool uses: sk-prop-sfb-cartesian-coefficients and lem-weil-pbc-ringed-topoi-derived-pushforward-composition. Advisory only: five split_report.tool_uses entries are no longer cited by the item; module-pasting cites the theorem node open-restriction-counit in stmt_deps for β, which is fine at stage 1, but stage 2 should pin β sectionwise (cf. Q13 b91fff144cfc). No fixes written."
  },
  "reviewed_lean": {
   "date": "2026-10-18",
