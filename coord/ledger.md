@@ -19957,3 +19957,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:45 L: merged deliver/Q10/lem-sfb-rationalization-localization-hom-criterion (stage 2; reviewer PASS; parallel immutable checks)
 - 03:45 L: merged deliver/Q14/lem-sfb-derived-lower-shriek-hom-iso (stage 2; reviewer PASS; parallel immutable checks)
 - 03:45 L: merged deliver/Q02/lem-sfb-abelian-functorial-flat-resolution (stage 2; reviewer PASS; parallel immutable checks)
+- 03:45 L: returned deliver/NE/lem-sf-normalized-derived-comparison-composition (reviewer RETURN: L: independent stage-2 immutable head 8711b9b5240a: H2/H12 theorem-stmt_dep finding upheld: the statement (via IsKInject)
