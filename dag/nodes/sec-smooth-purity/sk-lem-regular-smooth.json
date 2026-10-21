@@ -3,7 +3,9 @@
  "blueprint": {
   "is": "sk-lem-regular-smooth",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "lem-pur-regular-immersion-smooth-structure"
+  ]
  },
  "kind": "statement",
  "title": "A regular immersion of smooth schemes over a perfect field",
@@ -13,24 +15,143 @@
   "place": "node sk-lem-regular-smooth, order 1947"
  },
  "stmt_deps": [
-  "sk-def-purity-conv"
+  "sk-def-purity-conv",
+  "def-weil-scheme-over-base",
+  "def-sbc-smooth-morphisms",
+  "def-weil-regular-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-krull-dimension-ring"
  ],
  "proof": [
   {
-   "text": "$X$ is smooth over $k$ by hypothesis. A regular finite-type scheme over a\nperfect field is smooth over it (the regular–smooth criterion), so $a_Z$ is\nsmooth. Smooth schemes over a field are regular and their connected\ncomponents have a fixed dimension; on a component of $X$ of dimension $n$\nthe pure-codimension hypothesis gives dimension $n-c$ for each component of\n$Z$ lying in it. The identity $a_Z=a_X\\circ i$ is the definition of $i$ as a\n$k$-morphism.",
-   "uses": [],
-   "elementary": null
+   "text": "By hypothesis $a_X$ is smooth. Regard $Z$ as a $k$-scheme with structure morphism $a_Z=a_X\\circ i$; this is precisely the composition required for a morphism of $k$-schemes by [def-weil-scheme-over-base]. Thus the claimed identity of structure morphisms is definitional.",
+   "uses": [
+    "def-weil-scheme-over-base"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-regular-smooth/sk-lem-regular-smooth.proof.md",
+    "place": "First and last sentences; structure-morphism identity"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-regular-perfect-field-smooth] to $a_Z:Z\\to\\operatorname{Spec}k$. Its three hypotheses are exactly the perfectness of $k$, the assumed regularity of $Z$, and the assumed local finite type of $a_Z$. It gives smoothness of $a_Z$. This criterion is the equality of the regular and smooth loci over a perfect field (Stacks Tag 0B8X); it requires neither connectedness nor quasi-compactness.",
+   "uses": [
+    "lem-trf-regular-perfect-field-smooth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B8X, lemma-dense-smooth-open-variety-over-perfect-field; equality of the two loci"
+   }
+  },
+  {
+   "text": "Fix $z\\in Z$ and put $x=i(z)$. The regular-immersion convention of [sk-def-purity-conv] supplies an affine neighbourhood $U=\\operatorname{Spec}A$ of $x$ on which the defining ideal is $J=(f_1,\\ldots,f_c)$, with $f_1,\\ldots,f_c$ an $A$-regular sequence. This condition is needed only near points of $Z$, and allows $c=0$. By the affine description of [def-weil-closed-immersion], $i^{-1}(U)=\\operatorname{Spec}(A/J)$ over $U$. Write $\\mathfrak q$ for the prime of $A/J$ corresponding to $z$, and $\\mathfrak p$ for its inverse image in $A$, so $J\\subseteq\\mathfrak p$. By [lem-weil-pbc-affine-open-stalk-localization], $R:=\\mathcal O_{X,x}\\cong A_{\\mathfrak p}$ and $S:=\\mathcal O_{Z,z}\\cong(A/J)_{\\mathfrak q}$. Now [lem-weil-pbc-localization-at-prime-of-quotient] identifies $S$ with $A_{\\mathfrak p}/JA_{\\mathfrak p}$ by the explicit map $\\overline{a/s}\\mapsto\\bar a/\\bar s$.",
+   "uses": [
+    "sk-def-purity-conv",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-localization-at-prime-of-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CT, proposition-localize-quotient; affine closed immersion Tag 01QO (morphisms.tex), stalk localization Tag 01HV (schemes.tex)"
+   }
+  },
+  {
+   "text": "Since $a_X$ is smooth, [lem-weil-pbc-smooth-scheme-over-field-regular] makes every local ring of $X$ regular; in particular $R$ is a Noetherian local ring. Each $f_j$ belongs to $J\\subseteq\\mathfrak p$. Apply [lem-weil-pbc-weakly-regular-sequence-localization-prime] to $A$, $\\mathfrak p$ and the chosen sequence: its image $f_1/1,\\ldots,f_c/1$ is an $A_{\\mathfrak p}$-regular sequence. The required weak regularity follows from the regular sequence chosen in step 3. This also covers the empty sequence; the local ring at a point is nonzero.",
+   "uses": [
+    "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "lem-weil-pbc-weakly-regular-sequence-localization-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 056S, lemma-smooth-regular; localization of a regular sequence as in algebra.tex Tag 00LF (definition-regular-sequence), via localization exactness"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-regular-sequence-dimension-formula] to the Noetherian local ring $A_{\\mathfrak p}$ and the length-$c$ regular sequence from step 4. It gives $\\dim(A_{\\mathfrak p}/(f_1/1,\\ldots,f_c/1))+c=\\dim A_{\\mathfrak p}$. The ideal in this quotient is $JA_{\\mathfrak p}$: an element generated by the $f_j/1$ is a fraction with numerator in $J$, and every $a/s$ with $a\\in J$ is such a linear combination after dividing its coefficients by $s$. Step 3 identifies the two rings with $S$ and $R$. Ring isomorphisms preserve Krull dimension because inverse images and images give inverse order-preserving bijections of their prime ideals and of chains of prime ideals. Hence $\\dim\\mathcal O_{X,i(z)}=\\dim\\mathcal O_{Z,z}+c$. The argument holds for every $z$; if $Z$ is empty the dimension assertion is vacuous.",
+   "uses": [
+    "lem-trf-regular-sequence-dimension-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00KW, lemma-one-equation, iterated along a regular sequence; exact existing Mathlib leaf ringKrullDim_add_length_eq_ringKrullDim_of_isRegular"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-weil-scheme-over-base",
+  "lem-trf-regular-perfect-field-smooth",
+  "sk-def-purity-conv",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-localization-at-prime-of-quotient",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-weil-pbc-weakly-regular-sequence-localization-prime",
+  "lem-trf-regular-sequence-dimension-formula"
+ ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-regular-smooth/_section.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-regular-smooth/sk-lem-regular-smooth.proof.md",
+  "place": "Regular–smooth criterion and dimension drop: expand the latter stalkwise using Stacks 0B8X, 056S, 01QO, 01HV, 00CT, 00LF and 00KW and the existing Mathlib dimension formula."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "smooth.*regular|regular.*smooth|ringKrullDim.*quotient|finrank.*quotient",
+   "results": "{\"t\": \"2026-10-21T05:49:33Z\", \"tool\": \"grep\", \"query\": \"smooth.*regular|regular.*smooth|ringKrullDim.*quotient|finrank.*quotient\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean\"], \"digest\": \"6a3f1c780f4c78e8\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the complete item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "regular scheme locally of finite type over perfect field is smooth",
+   "results": "{\"t\": \"2026-10-21T05:49:33Z\", \"tool\": \"leansearch\", \"query\": \"regular scheme locally of finite type over perfect field is smooth\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.IsSmooth.mk\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.IsSmooth.recOn\", \"Algebra.FormallySmooth.of_perfectField\", \"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.mk\", \"RingHom.smooth_def\"], \"digest\": \"44d05b1f6d236718\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the complete item"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Smooth, IsRegularLocalRing",
+   "results": "{\"t\": \"2026-10-21T05:49:34Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Smooth, IsRegularLocalRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the complete item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A regular scheme locally of finite type over a perfect field is smooth, and a regular closed immersion of codimension c drops local ring dimension by c",
+   "results": "{\"t\": \"2026-10-21T05:49:42Z\", \"tool\": \"leanfinder\", \"query\": \"A regular scheme locally of finite type over a perfect field is smooth, and a regular closed immersion of codimension c drops local ring dimension by c\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"Algebra.IsStandardSmoothOfRelativeDimension\"], \"digest\": \"7390a6b7d597ec97\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the complete item"
+  },
+  {
+   "tool": "grep",
+   "query": "ringKrullDim_add_length_eq_ringKrullDim_of_isRegular|isRegular_of_isLocalization_of_mem",
+   "results": "{\"t\": \"2026-10-21T05:57:22Z\", \"tool\": \"grep\", \"query\": \"ringKrullDim_add_length_eq_ringKrullDim_of_isRegular|isRegular_of_isLocalization_of_mem\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Regular/Flat.lean\", \"Mathlib/RingTheory/KrullDimension/Regular.lean\"], \"digest\": \"4e4bb4fb968f8e0c\"}",
+   "date": "2026-10-21",
+   "verdict": "partial match: algebraic dimension and localization lemmas only; existing DAG leaves reused"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A regular closed immersion between schemes smooth over a perfect field lowers the Krull dimension of every local ring by its codimension",
+   "results": "{\"t\": \"2026-10-21T05:57:23Z\", \"tool\": \"leanfinder\", \"query\": \"A regular closed immersion between schemes smooth over a perfect field lowers the Krull dimension of every local ring by its codimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"Algebra.IsStandardSmooth.relativeDimension\", \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion\", \"Algebra.IsStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"Algebra.IsStandardSmoothOfRelativeDimension.out\"], \"digest\": \"8ef698ba045f8cc1\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the complete item"
+  },
+  {
+   "tool": "loogle",
+   "query": "ringKrullDim, RingTheory.Sequence.IsRegular",
+   "results": "{\"t\": \"2026-10-21T05:57:37Z\", \"tool\": \"loogle\", \"query\": \"ringKrullDim, RingTheory.Sequence.IsRegular\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"ringKrullDim_add_length_eq_ringKrullDim_of_isRegular\"], \"digest\": \"971d590cc5534c1b\"}",
+   "date": "2026-10-21",
+   "verdict": "partial match: regular-sequence dimension formula only; existing leaf lem-trf-regular-sequence-dimension-formula reused"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -59,5 +180,34 @@
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-smooth-purity",
  "unit": "sk-lem-regular-smooth",
- "lean_audit": {}
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "sk-lem-regular-smooth",
+  "worker": "stage1",
+  "summary": "Preserved the current main-20261015 statement, proved smoothness by the existing regular–smooth criterion, and expanded the codimension calculation into affine quotient, stalk localization, localized regular sequence, and the existing Mathlib dimension formula. No new nodes. Rejected the apparent project attachment because its all-points affine definition of IsRegularImmersion excludes codimension-zero proper clopen inclusions, which the current purity convention allows.",
+  "blueprint": "Steps 1–2 realize the smoothness and structure-morphism clauses of the blueprint proof. Steps 3–5 make its dimension-drop argument stalkwise, as required by the current statement; no unit or chapter route is replaced. same_as records the detailed sibling lemma, whose blueprint_update is the same assertion in the fixed purity setting.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-regular-perfect-field-smooth",
+    "why": "Generic regular–smooth criterion explicitly invoked by this unit; no node of the unit states it at the required generality."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "why": "Generic smooth-implies-regular theorem supplies the Noetherian local stalk for the unit dimension calculation; this unit has no separate general statement of it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-regular-perfect-field-smooth",
+  "lem-weil-pbc-smooth-scheme-over-field-regular"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NA-2e83fc5bc",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-2e83fc5bc (reviewer sub-agent of L); spot-checked: I read the item in full; the delivery has no new nodes. The statement matches main-20261015 sk-lem-regular-smooth verbatim, including the stalkwise dim O_{X,i(z)} = dim O_{Z,z} + c. Step 1: a_Z = a_X∘i follows from the definition of an S-morphism (def-weil-scheme-over-base). Step 2: lem-trf-regular-perfect-field-smooth applies to a_Z. Its hypotheses are k perfect, Z regular and Z locally of finite type, all assumed by the item, and I checked it against Stacks 0B8X (varieties.tex:4730). Step 3: the sk-def-purity-conv neighbourhood U = Spec A with J = (f_1..f_c) A-regular, the 01QO form of a closed immersion, the stalk-localization leaf and the 00CT quotient-localization leaf give O_X ≅ A_p and O_Z ≅ A_p/JA_p, with J ⊆ p. Step 4: smooth ⇒ regular, so A_p is Noetherian local, and the localization leaf (Mathlib Regular/Flat.lean:75-79, read) makes the f_j/1 a regular sequence in A_p. Step 5: ringKrullDim_add_length_eq_ringKrullDim_of_isRegular (KrullDimension/Regular.lean:210-214, read), plus JA_p = (f_j/1) and isomorphism invariance of dimension. Cases checked: a line in A² at its generic and at a closed point, the origin in A², c = 0 with a clopen component, and Z empty. Route: the two tool_uses (the regular–smooth criterion and the smooth ⇒ regular lemma) are exactly the generic black boxes the unit step invokes, so I accept them; the other citations are definitions or Mathlib leaves; the unit's realized fields are correct. Batch-5: lem-trf-regular-perfect-field-smooth is a generic 0B8X lemma and unsplit with empty proof_deps, and lem-trf-regular-sequence-dimension-formula is a pure-algebra Mathlib leaf. Neither closure reaches the trace formula or Poincaré duality, and neither is part of either assumption, so I accept both. Duplicates: the sibling lem-pur-regular-immersion-smooth-structure is recorded in same_as and not cited, so there is no cycle. Declining the IsRegularImmersion attachment is correct, because its all-points definition fails for c = 0. The item is not in the dropped list and has no repair note. No changes made."
+ }
 }

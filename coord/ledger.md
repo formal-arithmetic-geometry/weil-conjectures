@@ -20408,3 +20408,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:26 L: returned deliver/Q03/lem-pd-module-ringed-topos-derived-comparison (reviewer RETURN: C5/D1 duplicates. The delivery answers the 13:45 reopening of the human's re-split ('split further'), so it is not super)
 - 06:26 L: returned deliver/Q48/lem-sfb-divisible-extension-derived-reduction (reviewer RETURN: Superseded, not a fault in the maths. The delivery was committed at 13:55 +0800 on base ae5a966. At 14:17 the live proje)
 - 06:28 L: merged deliver/N5/lem-pe-roos-cone-calculus (reviewer PASS; after a return; new nodes: 2)
+- 06:28 L: merged deliver/NA/sk-lem-regular-smooth (reviewer PASS; first push; new nodes: 0); claim not held by NA: not your claim
