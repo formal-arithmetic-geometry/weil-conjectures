@@ -21341,3 +21341,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:50 L: merged deliver/Q38/lem-pur-completed-primitive-counit-comparison (reviewer PASS; first push; new nodes: 0)
 - 08:50 L: merged deliver/NY/lem-sfb-qcqs-proper-hull-tail-bound (reviewer PASS; first push; new nodes: 1)
 - 08:50 L: merged deliver/NO/lem-sfb-integral-pullback-strict-roos-normalization (reviewer FIX; first push; new nodes: 0)
+- 08:50 L: merged deliver/Q05/lem-sf-cbc-localized-strict-tensor-descent (reviewer FIX; first push; new nodes: 0)
