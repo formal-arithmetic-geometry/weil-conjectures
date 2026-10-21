@@ -19907,3 +19907,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:40 L: merged deliver/Q123/lem-weil-pbc-scalar-localization-sheaf-exact (stage 2; reviewer PASS; parallel immutable checks)
 - 03:41 L: merged deliver/Q118/lem-sfb-hom-scalar-chain-identification (reviewer FIX; first push; new nodes: 0)
 - 03:41 L: merged deliver/Q112/lem-sfb-internal-hom-localization-comparison (reviewer FIX; first push; new nodes: 0)
+- 03:41 L: merged deliver/Q130/lem-sfb-finite-proper-classical-truncation (reviewer PASS; first push; new nodes: 1)
