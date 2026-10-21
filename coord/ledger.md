@@ -23195,3 +23195,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:31 L: merged deliver/NR/lem-sfb-norm-algcl-cohomology-topology-comparison (reviewer FIX; first push; new nodes: 3)
 - 17:32 L: merged deliver/Q09/lem-sfb-trivial-ladic-derived-exterior (reviewer FIX; first push; new nodes: 3)
 - 17:32 L: merged deliver/NU/lem-sfb-wstrict-lisse-component-cohomology (reviewer FIX; first push; new nodes: 1)
+- 17:32 L: merged deliver/NJ/lem-sfb-integral-lattice-cubical-contraction (reviewer PASS; first push; new nodes: 0)

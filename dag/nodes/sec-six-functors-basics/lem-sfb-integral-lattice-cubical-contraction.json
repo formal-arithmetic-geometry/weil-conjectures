@@ -11,9 +11,98 @@
   "def-weil-pbc-free-module",
   "def-weil-pbc-module-chain-complex-homology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By the basis description in [def-weil-pbc-free-module], a prescribed finite integral combination for each $[v,I]$ extends uniquely to a homomorphism. Use this throughout. Put $\\partial_0=0$. For distinct $i,j\\in I$, removing $i$ then $j$ and removing $j$ then $i$ produce opposite signs: if $i<j$, their exponents are $q_i+q_j-1$ and $q_j+q_i$, where $q_k=\\#\\{l\\in I:l<k\\}$. Their four translated terms agree because translations in distinct coordinates commute. Pairing these terms gives $\\partial^2=0$; degrees with fewer than two coordinates give zero directly. Also $\\epsilon\\partial_1[v,\\{i\\}]=1-1=0$. Thus these maps form the chain complex of [def-weil-pbc-module-chain-complex-homology] with the stated augmentation.",
+   "uses": [
+    "def-weil-pbc-free-module",
+    "def-weil-pbc-module-chain-complex-homology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0623 (definition-koszul-complex), preceding displayed alternating differential, for comparison only; the following signed-coordinate construction and its verification are agent-written, not asserted by Tags 0623 or 062F."
+   }
+  },
+  {
+   "text": "For $1\\leq i\\leq r$ let $\\rho_i(v)=v-v_i u_i$, and define a degree-preserving homomorphism $p_i$ by $p_i[v,I]=0$ if $i\\in I$, and $p_i[v,I]=[\\rho_i(v),I]$ otherwise. If $i\\notin I$, each face removes $j\\ne i$ and $\\rho_i(v+u_j)=\\rho_i(v)+u_j$, so $p_i\\partial=\\partial p_i$. If $i\\in I$, every face except the $i$-face is killed by $p_i$, while the two vertices of the $i$-face acquire the same $i$-coordinate zero and cancel. Hence $p_i$ is a chain map. The $p_i$ commute: each either kills a cell containing its coordinate, or resets that coordinate, independently of all others.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0623 (definition-koszul-complex), preceding displayed alternating differential, for comparison only; the following signed-coordinate construction and its verification are agent-written, not asserted by Tags 0623 or 062F."
+   }
+  },
+  {
+   "text": "For any integer-indexed family $b(k)$ in an abelian group write $\\Sigma_n b=\\sum_{k=0}^{n-1}b(k)$ for $n>0$, $\\Sigma_0 b=0$, and $\\Sigma_n b=-\\sum_{k=n}^{-1}b(k)$ for $n<0$. Cancelling consecutive terms gives, for every integer $n$, $\\Sigma_n(b(k+1)-b(k))=b(n)-b(0)$ and $\\Sigma_{n+1}b-\\Sigma_n b=b(n)$; these formulas include $n=-1,0$. For $i\\notin I$ define the degree-one homomorphism $$H_i[v,I]=(-1)^{q_i}\\Sigma_{v_i}\\bigl[\\rho_i(v)+ku_i,I\\cup\\{i\\}\\bigr],\\qquad q_i=\\#\\{j\\in I:j<i\\},$$ and set $H_i[v,I]=0$ for $i\\in I$. Every sum is finite, so this is a well-defined homomorphism by [def-weil-pbc-free-module]. It vanishes on $C_r$ and on degrees outside the stated range.",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0623 (definition-koszul-complex), preceding displayed alternating differential, for comparison only; the following signed-coordinate construction and its verification are agent-written, not asserted by Tags 0623 or 062F."
+   }
+  },
+  {
+   "text": "Suppose $i\\notin I$. In $\\partial H_i[v,I]$, the $i$-face has sign $(-1)^{q_i}$ as well as the prefactor $(-1)^{q_i}$. Its signed sum therefore telescopes to $[v,I]-[\\rho_i(v),I]$. For $j\\in I$, the other face terms cancel those of $H_i\\partial[v,I]$, with identical bases and summation ranges. Indeed if $j<i$, their exponents are $q_i+q_j$ and $q_j+q_i-1$; if $j>i$, they are $q_i+q_j+1$ and $q_j+q_i$. Shifting in the $j$-direction leaves $v_i$ unchanged, so this compares the actual summands also for negative $v_i$. Thus $(\\partial H_i+H_i\\partial)[v,I]=(1-p_i)[v,I]$ when $i\\notin I$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0623 (definition-koszul-complex), preceding displayed alternating differential, for comparison only; the following signed-coordinate construction and its verification are agent-written, not asserted by Tags 0623 or 062F."
+   }
+  },
+  {
+   "text": "Suppose $i\\in I$. Here $H_i[v,I]=0$. In $H_i\\partial[v,I]$ all faces except the $i$-face still contain $i$ and give zero. For that face the boundary and insertion signs are both $(-1)^{q_i}$, so their product is $1$. The two path sums have the same base $\\rho_i(v)$ and upper endpoints $v_i+1$ and $v_i$. Their difference is exactly $[v,I]$ by $\\Sigma_{v_i+1}-\\Sigma_{v_i}$. Since $p_i[v,I]=0$, this proves $\\partial H_i+H_i\\partial=1-p_i$ on the remaining basis elements. Linearity gives this identity in every degree, including the top degree.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0623 (definition-koszul-complex), preceding displayed alternating differential, for comparison only; the following signed-coordinate construction and its verification are agent-written, not asserted by Tags 0623 or 062F."
+   }
+  },
+  {
+   "text": "Put $P_0=1$ and $P_i=p_1\\cdots p_i$, and in each degree set $h=\\sum_{i=1}^r P_{i-1}H_i$. Every $P_i$ is a chain map by step 2, so the identities of steps 4 and 5 yield $$\\partial h+h\\partial=\\sum_{i=1}^r P_{i-1}(1-p_i)=\\sum_{i=1}^r(P_{i-1}-P_i)=1-P_r.$$ For $I\\ne\\varnothing$ one factor $p_i$ kills $[v,I]$, hence $P_r=0$ in positive degree; in degree zero it resets all coordinates and sends $[v,\\varnothing]$ to $[0,\\varnothing]$. Thus $P_r=e$ and the required contraction identity holds, with the degree-minus-one term zero. Directly $\\epsilon s(1)=1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0623 (definition-koszul-complex), preceding displayed alternating differential, for comparison only; the following signed-coordinate construction and its verification are agent-written, not asserted by Tags 0623 or 062F."
+   }
+  },
+  {
+   "text": "For $a>0$ and $x\\in C_a$ with $\\partial_a x=0$, the contraction gives $x=\\partial_{a+1}h_a x$, proving exactness in positive degree. If $x\\in C_0$ and $\\epsilon x=0$, it gives $x=\\partial_1 h_0x$; the opposite inclusion follows from $\\epsilon\\partial_1=0$. Surjectivity at $\\mathbf Z$ follows from $\\epsilon s=1$. These are precisely kernel equals image at every position of the augmented complex, or vanishing homology by [def-weil-pbc-module-chain-complex-homology]. For $r=0$ there is just the basis vector $[0,\\varnothing]$; identify its group with $\\mathbf Z$. The empty sum gives $h=0$ and the augmentation and section are identities.",
+   "uses": [
+    "def-weil-pbc-module-chain-complex-homology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0623 (definition-koszul-complex), preceding displayed alternating differential, for comparison only; the following signed-coordinate construction and its verification are agent-written, not asserted by Tags 0623 or 062F."
+   }
+  },
+  {
+   "text": "For $w\\in D$, replacing $v$ by $v+w$ in each summand of $\\partial[v,I]$ gives exactly $w\\partial[v,I]$; also $\\epsilon[v+w,\\varnothing]=1=\\epsilon[v,\\varnothing]$. Fixing $I$ of size $a$, the subgroup with basis $[v,I]$ is the free abelian group on $D$ with its translation action, i.e. the free integral $D$-module on one orbit. The basis partitions by $I$, so $C_a$ is the direct sum of these subgroups by [def-weil-pbc-free-module]. There are finitely many such subsets of the finite set $\\{1,\\ldots,r\\}$. No equivariance of $h$ or $s$ was used or claimed: for $r=1$, $s(1)=[0,\\varnothing]$ already fails to be fixed by translation by $u_1$.",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0623 (definition-koszul-complex), preceding displayed alternating differential, for comparison only; the following signed-coordinate construction and its verification are agent-written, not asserted by Tags 0623 or 062F."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-module-chain-complex-homology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Explicit signed-coordinate proof of the integral cubical contraction. Compare Tag 0623, definition-koszul-complex and preceding differential; Tag 062F gives regular-sequence acyclicity only and is not invoked."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -56,10 +145,52 @@
    "results": "{\"t\": \"2026-10-21T16:33:58Z\", \"tool\": \"leanfinder\", \"query\": \"A tensor product of augmented two term complexes of free abelian groups with boundary e_n maps to e_(n+1) minus e_n deformation retracts onto the integers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.standardComplex.εToSingle₀_comp_eq\", \"groupHomology.inhomogeneousChains.d_eq\", \"HomologicalComplex.unit_tensor_d₁\", \"HomologicalComplex.tensor_unit_d₂\", \"Rep.barComplex.d_comp_diagonalSuccIsoFree_inv_eq\", \"Rep.barComplex.d_single\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopyEquiv\", \"Rep.standardComplex.forget₂ToModuleCatHomotopyEquiv\"], \"digest\": \"bfdbb48326285db7\"}",
    "date": "2026-10-21",
    "verdict": "no match: the hits concern simplicial extra degeneracies, the infinite bar resolution, alternating constant complexes or tensor constructions; none states the finite cubical lattice differential and its integral contraction. Source declarations inspected."
+  },
+  {
+   "tool": "grep",
+   "query": "cubical|[Ll]attice.*contract|contract.*[Ll]attice|[Kk]oszul.*[Hh]omotopy",
+   "results": "{\"t\": \"2026-10-21T17:22:40Z\", \"tool\": \"grep\", \"query\": \"cubical|[Ll]attice.*contract|contract.*[Ll]attice|[Kk]oszul.*[Hh]omotopy\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern augmentation definitions, abstract homotopy operations, simplicial/Dold-Kan or bar contractions, alternating constant complexes, or unrelated signed sums; none identifies this finite cubical lattice complex or constructs its contraction. Candidate source files read."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The augmented cubical chain complex of the integer lattice deformation retracts onto the integers by signed coordinate paths",
+   "results": "{\"t\": \"2026-10-21T17:22:40Z\", \"tool\": \"leansearch\", \"query\": \"The augmented cubical chain complex of the integer lattice deformation retracts onto the integers by signed coordinate paths\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ChainComplex.augment\", \"ChainComplex.truncateAugment\", \"ChainComplex.toSingle₀AsComplex\", \"ChainComplex.augmentTruncate\", \"ChainComplex.augment_X_succ\", \"CochainComplex.fromSingle₀AsComplex\", \"CochainComplex.augment\", \"ChainComplex.augmentTruncate_hom_f_succ\"], \"digest\": \"936f432dcc896443\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern augmentation definitions, abstract homotopy operations, simplicial/Dold-Kan or bar contractions, alternating constant complexes, or unrelated signed sums; none identifies this finite cubical lattice complex or constructs its contraction. Candidate source files read."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Homotopy\", \"ChainComplex\"",
+   "results": "{\"t\": \"2026-10-21T17:22:41Z\", \"tool\": \"loogle\", \"query\": \"\\\"Homotopy\\\", \\\"ChainComplex\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Homotopy.dNext_cochainComplex\", \"Homotopy.prevD_chainComplex\", \"Homotopy.dNext_zero_chainComplex\", \"Homotopy.prevD_zero_cochainComplex\", \"Homotopy.dNext_succ_chainComplex\", \"Homotopy.prevD_succ_cochainComplex\", \"CochainComplex.HomComplex.Cochain.ofHomotopy\", \"CochainComplex.HomComplex.Cochain.ofHomotopy_refl\"], \"digest\": \"d275ca59202a37d8\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern augmentation definitions, abstract homotopy operations, simplicial/Dold-Kan or bar contractions, alternating constant complexes, or unrelated signed sums; none identifies this finite cubical lattice complex or constructs its contraction. Candidate source files read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The finite cubical chain complex of the integer lattice has an integral contracting homotopy onto its augmentation",
+   "results": "{\"t\": \"2026-10-21T17:22:41Z\", \"tool\": \"leanfinder\", \"query\": \"The finite cubical chain complex of the integer lattice has an integral contracting homotopy onto its augmentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.DoldKan.homotopyPInftyToId\", \"ChainComplex.alternatingConstHomotopyEquiv\", \"AlgebraicTopology.DoldKan.homotopyHσToZero\", \"AlgebraicTopology.DoldKan.homotopyQToZero\", \"AlgebraicTopology.DoldKan.homotopyPToId\", \"AlgebraicTopology.DoldKan.Hσ\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopyEquiv\", \"AlgebraicTopology.DoldKan.homotopyPInftyToId_hom\"], \"digest\": \"8f870592210e03b2\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern augmentation definitions, abstract homotopy operations, simplicial/Dold-Kan or bar contractions, alternating constant complexes, or unrelated signed sums; none identifies this finite cubical lattice complex or constructs its contraction. Candidate source files read."
+  },
+  {
+   "tool": "grep",
+   "query": "contractingHomotopy|alternatingConstHomotopyEquiv|forget₂ToModuleCatHomotopyEquiv",
+   "results": "{\"t\": \"2026-10-21T17:23:23Z\", \"tool\": \"grep\", \"query\": \"contractingHomotopy|alternatingConstHomotopyEquiv|forget₂ToModuleCatHomotopyEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/Algebra/Homology/AlternatingConst.lean\"], \"digest\": \"dbe82bf6095ef0e4\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern augmentation definitions, abstract homotopy operations, simplicial/Dold-Kan or bar contractions, alternating constant complexes, or unrelated signed sums; none identifies this finite cubical lattice complex or constructs its contraction. Candidate source files read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Signed sums of edges from zero to a lattice point give a chain contraction of the finite cube resolution of a free abelian group",
+   "results": "{\"t\": \"2026-10-21T17:23:25Z\", \"tool\": \"leanfinder\", \"query\": \"Signed sums of edges from zero to a lattice point give a chain contraction of the finite cube resolution of a free abelian group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.standardComplex.d_of\", \"Fin.neg_partialSum_add_eq_contractNth\", \"Profinite.NobelingProof.Linear_CC'\", \"Profinite.NobelingProof.GoodProducts.finsuppSum_mem_span_eval\", \"exists_signed_sum\", \"Rep.standardComplex.d\", \"BoxIntegral.unitPartition.tag_index_eq_self_of_mem_smul_span\", \"parallelepiped\"], \"digest\": \"f5f9ceea0a138ad3\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern augmentation definitions, abstract homotopy operations, simplicial/Dold-Kan or bar contractions, alternating constant complexes, or unrelated signed sums; none identifies this finite cubical lattice complex or constructs its contraction. Candidate source files read."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-discrete-lattice-koszul-resolution",
@@ -83,5 +214,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-integral-lattice-cubical-contraction",
+  "worker": "stage1",
+  "summary": "Unchanged statement; explicit finite signed-coordinate homotopies, sign cancellation, telescoping, augmented exactness, and translation/free-orbit clauses. Every step is an elementary computation from the displayed formulas and the two cited definitions. No new nodes. Mathlib and project searches found no attachment or exact leaf.",
+  "blueprint": "Realizes the integral algebraic input below paragraph (3), open direct image, of sk-thm-sf-ctf-stability-direct-images.proof.md, through the inherited discrete-lattice Koszul chain. The ancestor utility returns None, matching the inherited null from.node. The unit route is unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NJ-afe3d1099",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NJ-afe3d1099 (reviewer sub-agent of L); spot-checked: Read the whole item (8 steps) and both cited definitions (def-weil-pbc-free-module, def-weil-pbc-module-chain-complex-homology; both Mathlib leaves), and checked that the citer lem-sfb-discrete-lattice-koszul-resolution uses exactly what the statement gives. One commit, item plus report, statement unchanged from base, 0 new nodes, proof_deps = union of uses, no repair or re-split note, no SGA. Recomputed by hand: the ∂² sign cancellation (exponents q_i+q_j−1 vs q_i+q_j); the p_i chain map (on the i-face both vertices reset to the same point); the Σ_n telescoping for n>0, n=0, n=−1 and n<−1; step 4 face cancellation for j<i and j>i (exponents q_i+q_j+[i<j] vs q_i+q_j−[j<i]); step 5 (sign product 1, Σ_{v_i+1}−Σ_{v_i}=[v,I]); the sum of P_{i−1}(1−p_i) telescoping to 1−P_r=e; exactness; r=0; translation and free orbits; non-equivariance of s. My own script checked ∂²=0 and ∂h+h∂=1−e on 1111 cells (r≤3, coordinates in [−2,2]) with 0 failures. A DAG grep for cubical, contraction and Koszul-lattice found no duplicate. Elementary marks are justified: each step is a few-line check, the source tags are cited for comparison only, proof_origin is agent. No tool_uses and no fixes."
  }
 }
