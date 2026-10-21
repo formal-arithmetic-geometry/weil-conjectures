@@ -6,33 +6,11 @@ module
 public import Sheaf.Paper.PointFibreDerivedTensorQbar
 public import Sheaf.Paper.PointFibreDerivedTensorModels
 public import Sheaf.Paper.PointFibreDerivedTensorFiniteModels
-import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
-import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
-import Sheaf.AlgebraicGeometry.GeometricStalkToposPoint
-import Sheaf.AlgebraicGeometry.ProEtaleConstantSheafStalk
-import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
-import Sheaf.AlgebraicGeometry.ProEtaleModuleStalkFunctor
-import Sheaf.CategoryTheory.DerivedCategory.PerfectRingComplexGeneral
-import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
-import Sheaf.CategoryTheory.ModulePullbackTensorIso
-import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
-import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
-import Sheaf.Paper.CoefficientFrobenius
-import Sheaf.Paper.CompletedIntegralConstantMapOfUniverses
-import Sheaf.Paper.DerivedPullbackTensorHom
-import Sheaf.Paper.FiniteCoefficientPoint
-import Sheaf.Paper.FiniteCoefficientTensorCtf
+public import Sheaf.Paper.PointFibreDerivedTensorCompatibility
 import Sheaf.Paper.FiniteTorAmplitudeSites
-import Sheaf.Paper.IntegralOperationsPreserveConstructible
-import Sheaf.Paper.IntegralOperationsScalarComparisons
-import Sheaf.Paper.IntegralResidueTor
-import Sheaf.Paper.PointProEtaleSectionsExact
-import Sheaf.Paper.PointSectionsDerivedReduction
-import Sheaf.Paper.PointSectionsFiniteness
-import Sheaf.Paper.PointSectionsScalarExtension
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
-import Sheaf.Paper.RingedTopoiDerivedPullback
-import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitProducts
+import Sheaf.Paper.PointFiniteTensorComparisons
+import Sheaf.Paper.PointIntegralCompletedTensorComparisons
+import Sheaf.Paper.PointFieldTensorDescent
 
 /-! # Canonical point tensor comparison interfaces
 
@@ -54,71 +32,6 @@ open Opposite
 open scoped TensorProduct ChangeOfRings
 
 namespace WeilConjectures
-
-/-- The source constraints at finite level are the restrictions of the recorded
-closed derived tensor, not newly selected associators or unitors.
-Source: finiteIntrinsicClosed (blueprint: lem-sf-point-fibre-derived-tensor). -/
-def PointFiniteSourceConstraints
-    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime]
-    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (n : ℕ)
-    (S : PointFiniteTensorData D l E n) : Prop :=
-  letI := (finiteIntrinsicClosed l E (Spec (.of D.k)) n).monoidal
-  ∃ J : @Functor.Monoidal _ _ S.monoidal _ _
-      (finiteIntrinsicClosed l E (Spec (.of D.k)) n).monoidal
-      (finiteTorConstructible l E (n + 1) (Nat.succ_le_succ (Nat.zero_le n))
-        (Spec (.of D.k))).ι,
-    (∀ X Y, HEq
-      (@Functor.LaxMonoidal.μ _ _ S.monoidal _ _ _ _ J.toLaxMonoidal X Y)
-      (eqToHom (congrArg (fun G ↦ G.obj (X, Y)) S.tensor_eq).symm)) ∧
-    HEq (@Functor.LaxMonoidal.ε _ _ S.monoidal _ _ _ _ J.toLaxMonoidal)
-      (eqToHom S.unit_eq.symm)
-
-/-- Compatibility with the actual integral scalar/completed-tensor comparison.
-This is the square on good representatives: scalarTensorChain is the specified
-map on both Roos coordinates. Together with the completion normalization above,
-it fixes the derived scalar square, including identity embeddings.
-Source: scalarTensorOrdinary representative equation, Stacks 07A4 and 0941
-(blueprint: lem-sf-point-fibre-derived-tensor). -/
-def PointIntegralTensorScalarSquare
-    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
-    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
-    (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]
-    (ι : E →ₐ[ℚ_[l]] L)
-    (I₁ : PointIntegralTensorData D l hl E) (I₂ : PointIntegralTensorData D l hl L)
-    (C₁ : PointIntegralTensorCanonical D l hl E I₁)
-    (C₂ : PointIntegralTensorCanonical D l hl L I₂) : Prop :=
-  ∀ (P Q : (integralOperationsGoodComplex l E (Spec (.of D.k))).FullSubcategory)
-    (p q : ℤ)
-    (a b : (completedIntegralCommRingSheafUnrestricted l L
-      (Spec (.of D.k))).obj.obj (op (Scheme.ProEt.mk (𝟙 (Spec (.of D.k))))))
-    (x : (P.obj.X p).val.obj (op (Scheme.ProEt.mk (𝟙 (Spec (.of D.k))))))
-    (y : (Q.obj.X q).val.obj (op (Scheme.ProEt.mk (𝟙 (Spec (.of D.k)))))),
-    ((C₂.completion
-      ⟨_, scalarGood l E L ι (Spec (.of D.k)) P⟩
-      ⟨_, scalarGood l E L ι (Spec (.of D.k)) Q⟩).f (p + q))
-      ((HomologicalComplex.ιTensorObj
-        ((pointIntegralComplexSections D l L).obj
-          (((integralOrdinaryScalar l E L ι (Spec (.of D.k))).mapHomologicalComplex
-            (ComplexShape.up ℤ)).obj P.obj))
-        ((pointIntegralComplexSections D l L).obj
-          (((integralOrdinaryScalar l E L ι (Spec (.of D.k))).mapHomologicalComplex
-            (ComplexShape.up ℤ)).obj Q.obj)) p q (p + q) rfl).hom
-        (integralOrdinaryTensorSection l E L ι (Spec (.of D.k)) (P.obj.X p)
-          (op (Scheme.ProEt.mk (𝟙 (Spec (.of D.k))))) a x ⊗ₜ[
-            ULift.{u + 1, u} (Padic.coefficientExtensionIntegers l L)]
-          integralOrdinaryTensorSection l E L ι (Spec (.of D.k)) (Q.obj.X q)
-            (op (Scheme.ProEt.mk (𝟙 (Spec (.of D.k))))) b y)) =
-    ((scalarTensorChain l E L ι (Spec (.of D.k)) P.obj Q.obj).f (p + q)).val.app
-      (op (Scheme.ProEt.mk (𝟙 (Spec (.of D.k)))))
-      (integralOrdinaryTensorSection l E L ι (Spec (.of D.k))
-        (((integralOperationsTensorComplexFunctor l E (Spec (.of D.k))).obj
-          (P.obj, Q.obj)).X (p + q))
-        (op (Scheme.ProEt.mk (𝟙 (Spec (.of D.k))))) (a * b)
-        (((C₁.completion P Q).f (p + q))
-          ((HomologicalComplex.ιTensorObj
-            ((pointIntegralComplexSections D l E).obj P.obj)
-            ((pointIntegralComplexSections D l E).obj Q.obj) p q (p + q) rfl).hom
-            (x ⊗ₜ[ULift.{u + 1, u} (Padic.coefficientExtensionIntegers l E)] y))))
 
 /-- All canonical normalizations and actual cross-stage diagrams for the simultaneous
 strong symmetric monoidal fibre functors. Each scalar functor has its universal
@@ -234,6 +147,33 @@ theorem pointFibreDerivedTensor
     (Ω : Type u) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω] :
     ∃ S : PointFibreDerivedTensorSystem D l hl Ω,
       Nonempty (PointFibreDerivedTensorCanonical D l hl Ω S) := by
-  sorry
+  classical
+  obtain ⟨F, hF, hred⟩ := pointFiniteTensorComparisons D l hl
+  obtain ⟨I, C, hscalar⟩ := pointIntegralCompletedTensorComparisons D l hl
+  obtain ⟨R⟩ := pointFieldTensorDescent D l hl Ω I C hscalar
+  let S : PointFibreDerivedTensorSystem D l hl Ω :=
+    { finite := F, integral := I, rational := R.rational, qbar := R.qbar }
+  refine ⟨S, ⟨{
+    finite_source := ?_
+    finite_model := ?_
+    integral_model := C
+    reduction := hred
+    integral_scalar := hscalar
+    lift := R.lift
+    localization := R.localization
+    localization_counit := R.localization_counit
+    rational_model := R.rational_model
+    rational_unit := R.rational_unit
+    field_scalar := R.field_scalar
+    field_scalar_counit := R.field_scalar_counit
+    rational_scalar := R.rational_scalar
+    stage_scalar := R.stage_scalar
+    stage_scalar_counit := R.stage_scalar_counit
+    qbar_model := R.qbar_model F
+    qbar_unit := R.qbar_unit F }⟩⟩
+  · intro E _ _ _ n
+    exact (hF E n).1
+  · intro E _ _ _ n
+    exact (hF E n).2
 
 end WeilConjectures

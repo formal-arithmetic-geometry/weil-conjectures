@@ -1,0 +1,151 @@
+{
+ "id": "lem-sf-point-finite-tensor-comparisons",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sf-kunneth-relative",
+   "place": "Proof, final compact-support specialization over Spec k: identifying the point tensor with derived coefficient modules.",
+   "via": [
+    "lem-sf-point-fibre-derived-tensor"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Finite point tensor comparisons and all quotient squares",
+ "statement": "Fix a finite-field datum D and a prime l!=p. For every finite extension E/Q_l and every n>=0, there exist simultaneous finite point tensor data F(E,n) [def-sf-point-fibre-tensor-system]. Their source constraints are the recorded ones [def-sf-point-finite-source-constraints]; their tensor and unit maps satisfy the arbitrary K-flat representative normalization [def-sf-point-fibre-tensor-finite-models]. For every n<=m they satisfy the canonical finite quotient tensor square [def-sf-point-fibre-tensor-reduction], including n=m. The assertion contains only the finite stage; it has no integral or field-stage conclusion.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, label lemma-pullback-tensor-product (the finite-level geometric fibre case); at the integral, rational and common finite-field stages use the coefficient constructions of def-weil-finite-coefficient-point and def-weil-derived-pullback-tensor-hom."
+ },
+ "stmt_deps": [
+  "def-sf-point-fibre-tensor-system",
+  "def-sf-point-finite-source-constraints",
+  "def-sf-point-fibre-tensor-finite-models",
+  "def-sf-point-fibre-tensor-reduction"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sf-point-ringed-evaluation-model] to the finite coefficient ring sheaf. It identifies the exact sections fibre with the actual ringed-point derived pullback, with its canonical tensor, coefficient unit, signed constraints and scalar squares. By [lem-sf-tensor-ctf](ii) the tensor of the two finite-Tor inputs is still finite-Tor constructible. This gives the finite comparison and its finite reduction squares. Identify the specified lifted constant-section map by composing the unlifted coefficient identification with ULift.down. Restrict the ambient constraints, and retain the specified comparison on every arbitrary K-flat representative by comparison with a flat-term resolution. Quotient squares are checked on the balanced tensor generators before localization, including m=n.",
+   "uses": [
+    "lem-sf-point-ringed-evaluation-model",
+    "lem-sf-tensor-ctf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, lemma-pullback-tensor-product, its total-complex construction; sites-modules.tex Tag 03EL, lemma-tensor-product-pullback; proetale.tex Tag 0991, section-points. Agent-written specialization and constraint/scalar normalization of old item steps 1, 2, 8 and 9."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-point-ringed-evaluation-model",
+  "lem-sf-tensor-ctf"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4 and the prescribed coefficient constructions; stage-specific specialization of the point comparison argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "geometric point sections derived tensor monoidal comparison finite integral rational coefficients",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo, AlgebraicGeometry.Scheme.Pullback.ofPointTensor, AlgebraicGeometry.Scheme.Pullback.Triplet.ofPoint_SpecTensorTo, AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorInr, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorInl, AlgebraicGeometry.Scheme.Pullback.Triplet.SpecMap_tensorInl_fromSpecResidueField, AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensorInl_fromSpecResidueField; digest 68580c66b9ab9f5a",
+   "date": "2026-10-21",
+   "verdict": "No match: no canonical four-stage point derived tensor comparison, representative normalization, integral Roos comparison or field-stage descent."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Monoidal\", \"mapDerivedCategory\"",
+   "results": "0 hits; ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-21",
+   "verdict": "No match: no canonical four-stage point derived tensor comparison, representative normalization, integral Roos comparison or field-stage descent."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical tensor comparison for sections at an algebraically closed point and finite quotient coefficient change",
+   "results": "8 hits; sectionOfRetractionKerToTensor.congr_simp, TensorProduct.tensorQuotMapSMulEquivTensorQuot, IsLocalFrameOn.coeff_eq_of_eq, IsLocalization.algebraTensorEquiv, QuotSMulTop.algebraMapTensorEquivTensorQuotSMulTop, IsLocalFrameOn.coeff_congr, Algebra.Extension.tensorCotangent.congr_simp, ContMDiffSection.coe_inj; digest d99d77e4268d976f",
+   "date": "2026-10-21",
+   "verdict": "No match: no canonical four-stage point derived tensor comparison, representative normalization, integral Roos comparison or field-stage descent."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completed integral tensor evaluation at a geometric point via perfect complexes and the Roos completion augmentation",
+   "results": "8 hits; BDeRhamPlus, AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.ofTensorProduct, AdicCompletion.ofTensorProduct_naturality, AdicCompletion.ofTensorProduct_tmul, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of; digest f194bd379559370e",
+   "date": "2026-10-21",
+   "verdict": "No match: no canonical four-stage point derived tensor comparison, representative normalization, integral Roos comparison or field-stage descent."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ModuleCat\", \"extendScalars\"",
+   "results": "12 hits; ModuleCat.CoextendScalars.obj', ModuleCat.coextendScalars, ModuleCat.ExtendScalars.obj', ModuleCat.instIsRightAdjointCoextendScalars, ModuleCat.extendScalars, ModuleCat.restrictCoextendScalarsAdj, ModuleCat.instIsLeftAdjointExtendScalars, ModuleCat.extendScalarsId; digest dbb4976d208e3edb",
+   "date": "2026-10-21",
+   "verdict": "No match: no canonical four-stage point derived tensor comparison, representative normalization, integral Roos comparison or field-stage descent."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Strong tensor functors descend through rationalization and a common finite coefficient field",
+   "results": "8 hits; CommRingCat.tensorProd, CategoryTheory.Functor.ratLinear, Algebra.TensorProduct.instCompatibleSMulRat, CommRingCat.Under.instPreservesLimitUnderWalkingParallelPairParallelPairTensorProdOfFlatCarrier, CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier, CommRingCat.Under.instPreservesLimitUnderDiscreteFunctorTensorProdOfFinite, CommRingCat.Under.tensorProdMapEqualizerForkIsLimit, DerivedCategory.instLinearCochainComplexIntQ; digest 1093e8a5ce46dc3e",
+   "date": "2026-10-21",
+   "verdict": "No match: no canonical four-stage point derived tensor comparison, representative normalization, integral Roos comparison or field-stage descent."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory.*Monoidal|Monoidal.*mapDerivedCategory|Roos.*tensor|tensor.*Roos",
+   "results": "0 hits; ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-21",
+   "verdict": "No match: no canonical four-stage point derived tensor comparison, representative normalization, integral Roos comparison or field-stage descent."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact geometric point evaluation functor preserves derived tensor products on constructible complexes with finite Tor amplitude",
+   "results": "8 hits; PresheafOfModules.evaluation, CategoryTheory.ExactFunctor.of, CategoryTheory.exactFunctor, SheafOfModules.evaluationPreservesLimit, PresheafOfModules.Finite.evaluation_preservesFiniteColimits, SheafOfModules.evaluationPreservesLimitsOfSize, HomologicalComplex.instPreservesColimitEval, SheafOfModules.evaluation; digest 09fa9097d06a25f3",
+   "date": "2026-10-21",
+   "verdict": "No match: no canonical four-stage point derived tensor comparison, representative normalization, integral Roos comparison or field-stage descent."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PointFibreDerivedTensor",
+  "group": "S7",
+  "date": "2026-10-22"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-kunneth-relative",
+ "lean": {
+  "module": "Sheaf.Paper.PointFiniteTensorComparisons",
+  "file": "lean/Sheaf/Paper/PointFiniteTensorComparisons.lean",
+  "declaration": "WeilConjectures.pointFiniteTensorComparisons",
+  "declarations": [
+   "WeilConjectures.pointFiniteTensorComparisons"
+  ],
+  "statement": "theorem pointFiniteTensorComparisons\n    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) :\n    ∃ F : ∀ (E : Type u) [Field E] [Algebra ℚ_[l] E]\n      [FiniteDimensional ℚ_[l] E] (n : ℕ), PointFiniteTensorData D l E n,\n      (∀ (E : Type u) [Field E] [Algebra ℚ_[l] E]\n        [FiniteDimensional ℚ_[l] E] (n : ℕ),\n        PointFiniteSourceConstraints D l E n (F E n) ∧\n          PointFiniteTensorCanonical D l E n (F E n)) ∧\n      ∀ (E : Type u) [Field E] [Algebra ℚ_[l] E]\n        [FiniteDimensional ℚ_[l] E] (m n : ℕ) (h : n ≤ m),\n        PointFiniteTensorReductionData D l E h (F E m) (F E n)",
+  "branch": "sheaf-dag",
+  "by": "S7",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-dd706",
+  "group": "S7",
+  "result": "pass",
+  "landing": "20261021T182521-L-1212342",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-dd706",
+  "group": "S7",
+  "result": "pass",
+  "landing": "20261021T182521-L-1212342",
+  "kind": "interface",
+  "note": "independent cc review: pointFibreDerivedTensor assembly vs PointFibreDerivedTensorCanonical fields; the moved defs vs the clone text (verbatim); the three stage-lemma statements vs the original fields and their nodes; PointQbarTensorCanonical/UnitCanonical do not depend on S.finite; importer IdentificationFibreAdjunction compiled with the delivered modules (exit 0); #print axioms = propext, sorryAx, Classical.choice, Quot.sound"
+ }
+}
