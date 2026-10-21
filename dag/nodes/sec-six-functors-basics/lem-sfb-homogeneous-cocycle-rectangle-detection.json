@@ -400,5 +400,23 @@
   "group": "N6",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-f7591fb59 (reviewer sub-agent of L); spot-checked: Read the item, the new node lem-sfb-ordered-join-partial-contraction, the cited definitions (def-weil-field, def-kun-subspace-topology, def-weil-pbc-free-module), the parent step that applies the item in lem-sfb-local-norm-algcl-cocycle-descent, the unit record sk-thm-sf-ctf-stability and paragraph (3) of main-20261015 sk-thm-sf-ctf-stability-direct-images.proof. The proof is agent-written (proof_origin agent, WANTED recorded); no SGA citation, no repair note, no re-split instruction. New node checked by hand: dc_i+c_id=1−R_i, with face signs cancelling for faces before and after the insertion point, and on [∅]; R_i commutes with d; telescoping gives dS+Sd=1−ΠR_j, and ΠR_j vanishes below top degree because some color is missing; naturality holds via w_i=u_i(v_i); the finite-formula clause holds. Tested r=1 and r=2 with two-point sets, where top homology is nonzero so the exclusion of the top degree is necessary. The node is statement-only, self-contained, has 7 recorded searches and does not restate the item. Item steps 1–9 checked: the augmented tuple complex; the join comparison P recursion in degrees up to n−1 of the contraction; equivariance by per-tuple anchors; the prefix homotopy C_b with Q built by an inductive Z_q (dZ_q=0, base with augmentation 0); uniform integer expansion giving continuity of t through the coordinate maps h_j and h_j a_i; FA_n=0 from the rectangle and FdQ_n=0 from the cocycle identity. Hand case n=1 gives t(h)=−f(h,ha_0), consistent. No duplicates found: def-coef-ordered-join, the set Čech-nerve resolution, lem-sfb-projective-resolution-homotopy-equivalence (needs exactness, gives no uniform formula) and the bar-resolution nodes all differ. Same unit, no tool_uses needed. Advisory: the item statement now spells out 'topological field' and drops continuity of inversion on K. This is a harmless generalization; the citer with K=E still applies. The report wrongly says no hypothesis changed (E7 wording only). No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RepresentationTheory.HomogeneousCocycleRectangleDetection",
+  "declaration": "Representation.homogeneous_cocycle_rectangle_detection",
+  "file": "lean/Sheaf/RepresentationTheory/HomogeneousCocycleRectangleDetection.lean",
+  "statement": "theorem homogeneous_cocycle_rectangle_detection (K : Type u) [Field K] [TopologicalSpace K] [IsTopologicalRing K] (G : Type v) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] (M : Type w) [AddCommGroup M] [Module K M] [TopologicalSpace M] [IsTopologicalAddGroup M] [ContinuousSMul K M] (ρ : G →* (M ≃ₗ[K] M)) (hρ : Continuous (fun p : G × M ↦ ρ p.1 p.2)) (n : ℕ) (hn : 1 ≤ n) (H : OpenSubgroup G) (a : Fin (n + 1) → G) (f : C(Fin (n + 1) → G, M)) (hequiv : ∀ (g : G) (x : Fin (n + 1) → G), f (fun i ↦ g * x i) = ρ g (f x)) (hcocycle : ∀ x : Fin (n + 2) → G, ∑ i : Fin (n + 2), (-1 : ℤ) ^ i.val • f (fun j ↦ x (i.succAbove j)) = 0) (hrectangle : ∀ x : Fin (n + 1) → H, f (fun i ↦ (x i : G) * a i) = 0) : ∃ t : C(Fin n → H, M), (∀ (g : H) (x : Fin n → H), t (fun i ↦ g * x i) = ρ (g : G) (t x)) ∧ ∀ x : Fin (n + 1) → H, f (fun i ↦ (x i : G)) = ∑ i : Fin (n + 1), (-1 : ℤ) ^ i.val • t (fun j ↦ x (i.succAbove j))",
+  "branch": "sheaf-dag",
+  "by": "NK",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-91694a517",
+  "group": "NK",
+  "result": "pass",
+  "note": "Snapshot vs side-live: only the lean field changes; live lean was None. lean.statement is verbatim in the module, universes u v w explicit. Clause-by-clause match: IsTopologicalRing K (no continuous inversion, as the node says); topological group G; M topological add group with ContinuousSMul; ρ : G →* (M ≃ₗ[K] M) with joint continuity; 1 ≤ n; OpenSubgroup with subtype topology (def-kun-subspace-topology); continuous f on Fin (n+1) → G; diagonal equivariance; ℤ-signed succAbove cocycle; ordered rectangle (x i)*a i; ∃ continuous H-equivariant t with f|H = δt. Hand check n=1: t(h) = −f(h,h a0), identity verified from three cocycle relations and two rectangle vanishings. Edge cases fine (n=0 excluded as in the node; any characteristic; no completeness). Citer local-norm-algcl-cocycle-descent instances are covered. No duplicate found in the project or Mathlib. Docstrings have source place, blueprint id and the 9 proof steps; no defs; sorry only. Advisory: unused public import Basis.Defs. Not recompiled (no fix)."
  }
 }
