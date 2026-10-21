@@ -23921,3 +23921,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:50 L: returned deliver/NH/lem-sfb-norm-algcl-internal-hom-base-change (reviewer RETURN: D4/C6 (circular in substance), D1/D2 and C5 (the only new node restates an ancestor in another form). The new node lem-s)
 - 22:50 L: returned deliver/F5/Sheaf.Paper.CompletedOperationTowerSubstitution (reviewer RETURN: (the landing tools, head 9f61ae3cc) the delivery did not land: (d) user Sheaf.Paper.OrientationFiniteReductionTwists (me)
 - 22:50 L: returned deliver/M5/Sheaf.AlgebraicGeometry.PerfectOverlapStageTransport (reviewer RETURN: (the landing tools, head bfc856a2d) the delivery did not land: lean/Sheaf/AlgebraicGeometry/PerfectOverlapTailProjection)
+- 22:51 L: merged deliver/B2/Sheaf.AlgebraicGeometry.SmoothLocalAcyclicity (stage 3; reviewer PASS; first push; landing 20261021T225057-L-3762772 (proof); batch 20261021T225056; modules 1; new nodes 0)

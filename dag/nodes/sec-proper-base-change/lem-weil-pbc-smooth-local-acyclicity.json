@@ -31,64 +31,62 @@
  ],
  "proof": [
   {
-   "text": "It suffices to prove local acyclicity for every smooth morphism: for an arbitrary $S\\prime\\to S$, the base change is smooth by [lem-pc-proper-base-change](2), and the definition [def-weil-pbc-local-acyclicity-abelian-sheaf] then upgrades that assertion to universal local acyclicity. We therefore fix a smooth $f$, a geometric $\\bar x$, its image $\\bar s$, and $n\\geq1$ prime to the residue characteristic at $\\bar x$.",
+   "text": "Smoothness is stable under arbitrary base change, so it suffices to establish local acyclicity for a smooth f. Fix x and an admissible positive integer n. Its image in the residue field at x is a unit: use characteristic zero or Bezout for coprimality with the characteristic. The residue embedding carries this unit to the geometric field Omega.",
    "uses": [
     "lem-pc-proper-base-change",
-    "def-weil-pbc-local-acyclicity-abelian-sheaf"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0GJQ, first sentence"
-   }
-  },
-  {
-   "text": "The injection of residue fields $\\kappa(s)\\to\\kappa(x)$ gives the same characteristic. In an affine neighbourhood $U=\\operatorname{Spec}R$ of $s$, $n$ is not in the prime of $s$; replace $S$ by the affine basic open $D(n)\\subset U$ and $X$ by its inverse image. Smoothness is preserved by [lem-pc-proper-base-change](2). This replacement does not change either strict henselization or their map: every pointed etale neighbourhood can be refined by an affine open around its marked point lying over these opens. The full subcategories of such neighbourhoods are initial by [lem-weil-pbc-colimit-initial-full-subcategory](1), so their ring colimits [def-weil-pbc-strict-henselization-limit] and canonical maps [lem-weil-pbc-strict-henselization-functoriality](4) agree. Consequently the fibre and restriction map in the definition of local acyclicity are unchanged. Now $S$ is affine and $n$ is invertible everywhere on it.",
-   "uses": [
-    "lem-pc-proper-base-change",
-    "def-weil-pbc-strict-henselization-limit",
-    "lem-weil-pbc-colimit-initial-full-subcategory",
-    "lem-weil-pbc-strict-henselization-functoriality",
     "def-weil-pbc-local-acyclicity-abelian-sheaf"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0GJQ, torsion-hypothesis check; open restriction of the strict-local construction"
+    "place": "Tag 0GJQ, proposition-smooth-locally-acyclic; Tags 0EZU, 03QO and 0GJR for the comparisons"
    }
   },
   {
-   "text": "Fix any $\\bar t:\\operatorname{Spec}K\\to A=S_{(\\bar s)}$, without an algebraicity restriction, and compose with $A\\to S$ to obtain $g$. The source is affine and the now affine target is quasi-separated, so $g$ is quasi-compact and quasi-separated by [lem-weil-pbc-qcqs-morphism-permanence](1). Take $M=\\mathbf Z/n\\mathbf Z$ and $F=\\underline M$ on $\\operatorname{Spec}K$. Its geometric stalks are $M$ by [lem-weil-pbc-constant-sheaf-geometric-stalk], hence every stalk is torsion of order dividing the now invertible $n$. Applying [sbc-thm-smooth-base-change] to $X\\times_S\\operatorname{Spec}K$ proves that $f^{-1}R^qg_*F\\to R^qh_*e^{-1}F$ is an isomorphism for every $q\\geq0$.",
+   "text": "Put s=f x and A=S_(s). The chosen strict-local ring is local and strictly henselian. Its canonical evaluation into Omega factors as its surjection onto the relative separable closure followed by the field embedding. The surjection is local, as is the field embedding, so evaluation reflects units. Since n is a unit in Omega, n is a unit in A and in its global sections. Form Xprime=X times_S A and lift x using the canonical closed-point lift of s.",
    "uses": [
-    "lem-weil-pbc-qcqs-morphism-permanence",
-    "lem-weil-pbc-constant-sheaf-geometric-stalk",
-    "sbc-thm-smooth-base-change"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tags 0GJQ and 0EYU, application of smooth base change"
-   }
-  },
-  {
-   "text": "By [lem-weil-pbc-exchange-strict-local-cohomology], the exchange isomorphism gives the canonical isomorphism $H^q(A\\times_S\\operatorname{Spec}K,F)\\to H^q(B\\times_S\\operatorname{Spec}K,F)$ for $B=X_{(\\bar x)}$. The selected $\\bar t$ supplies the map $\\operatorname{Spec}K\\to A$ required in [lem-weil-pbc-strict-local-geometric-fibre-test]; its equivalence therefore gives the canonical isomorphism $H^q(\\operatorname{Spec}K,F)\\to H^q(B\\times_A\\operatorname{Spec}K,F)$. This last fibre product is precisely the vanishing-cycle fibre $V$ in [def-weil-pbc-local-acyclicity-abelian-sheaf].",
-   "uses": [
-    "lem-weil-pbc-exchange-strict-local-cohomology",
-    "lem-weil-pbc-strict-local-geometric-fibre-test",
+    "lem-weil-pbc-strict-henselization-local-structure",
+    "lem-weil-pbc-strict-henselization-point-evaluation-properties",
+    "lem-weil-pbc-strict-henselization-functoriality",
     "def-weil-pbc-local-acyclicity-abelian-sheaf"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tags 0EZU and 0EZV, making the strict-local reduction in Tag 0GJQ explicit"
+    "place": "Tag 0GJQ, proposition-smooth-locally-acyclic; Tags 0EZU, 03QO and 0GJR for the comparisons"
    }
   },
   {
-   "text": "The field $K$ is algebraically closed, hence separably closed; as a local ring with maximal ideal zero it is henselian (the idempotent-lifting condition modulo zero is tautological), hence strictly henselian. Also $n$ is invertible in $K$. Thus [sbc-lem-strict-henselian-constant-cohomology] applied to $\\operatorname{Spec}K$ gives zero cohomology in every positive degree. Its degree-zero identification with $M$ is the constant-section map: the germ map is an isomorphism by [lem-weil-pbc-strictly-henselian-sections-stalk], and its composite with the constant-section map is the isomorphism of [lem-weil-pbc-constant-sheaf-geometric-stalk]. The pullback coefficient on $V$ is $\\underline M_V$ by [lemma-constructible-pullback-constant]. To identify the map on sections, use the constant-sheaf/global-sections adjunction [def-constructible-constant] and the inverse-image adjunction [def-weil-pbc-inverse-image]. For any $p:Z\\to W$, their composite identifies $\\operatorname{Hom}(p^{-1}\\underline M_W,H)$ with $\\operatorname{Hom}(M,\\Gamma(Z,H))$, since $\\Gamma(W,p_*H)=\\Gamma(Z,H)$ by [def-weil-pbc-direct-image]. Consequently the canonical inverse comparison $\\underline M_Z\\to p^{-1}\\underline M_W$ of [lemma-constructible-pullback-constant] transposes to the section map $M\\to\\Gamma(W,\\underline M_W)\\to\\Gamma(Z,p^{-1}\\underline M_W)$, the second arrow being the inverse-image unit. Under the comparison this is the unit $M\\to\\Gamma(Z,\\underline M_Z)$ of the constant-sheaf adjunction. Thus pullback along $V\\to\\operatorname{Spec}K$ sends the constant section $m$ to the constant section $m$. We conclude $H^q(V,\\underline M_V)=0$ for $q>0$, and $M\\to H^0(V,\\underline M_V)$ sending $m$ to its constant section is an isomorphism.",
+   "text": "Apply strictBaseClosedPointLocalizations to this cartesian square and the pointed strict-local maps. It gives an isomorphism from the strict localization of the image of xprime to A, an isomorphism on the source strict localizations, and compatible isomorphisms of every vanishing-cycle fibre. In particular every original test point is transported by the inverse base isomorphism; no algebraicity restriction is imposed.",
    "uses": [
-    "sbc-lem-strict-henselian-constant-cohomology",
-    "lem-weil-pbc-strictly-henselian-sections-stalk",
+    "lem-weil-pbc-strict-base-closed-point-localizations",
+    "def-weil-pbc-local-acyclicity-abelian-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GJQ, proposition-smooth-locally-acyclic; Tags 0EZU, 03QO and 0GJR for the comparisons"
+   }
+  },
+  {
+   "text": "On the strict-local base A apply smooth base change to the map Spec K to A and the constant group M=ULift(Z/n). Both schemes are affine, so that map is qcqs; n is invertible on A, and constant geometric stalks are M, killed by n. Regard the abelian sheaf as a sheaf of ULift Z-modules via the existing coefficient-forgetting equivalence. The derived coefficient-forgetting comparison and its single-functor comparison transport the smooth exchange isomorphism back to abelian sheaves. Apply the strict-local exchange criterion at xprime, using Spec.preimage of its canonical strict-local map, to obtain the bijective cohomology pullback from A_(fprime xprime) times_A Spec K to Xprime_(xprime) times_A Spec K.",
+   "uses": [
+    "sbc-thm-smooth-base-change",
     "lem-weil-pbc-constant-sheaf-geometric-stalk",
+    "lem-weil-pbc-exchange-strict-local-cohomology",
+    "lem-weil-pbc-strict-base-closed-point-localizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GJQ, proposition-smooth-locally-acyclic; Tags 0EZU, 03QO and 0GJR for the comparisons"
+   }
+  },
+  {
+   "text": "A separably closed field is strictly henselian: its residue map is a ring isomorphism. Its constant-section unit is invertible, by the sheafification unit at the terminal object and uniqueness of right adjoints; all positive derived cohomology vanishes. Transfer these properties first along the isomorphism from A_(fprime xprime) times_A Spec K to Spec K, then along the bijective comparison of the preceding step, and finally along the fibre isomorphism of step 3. In degree zero use bijective_cohomologyMap_zero_iff and the constant-sheaf adjunction identity that pullback sends each constant section to itself. In positive degrees use the natural Ext/derived-cohomology comparison, bijectivity, and the inverse-image constant-sheaf isomorphism.",
+   "uses": [
+    "lem-weil-pbc-strictly-henselian-etale-acyclic",
+    "lem-weil-pbc-sheafH-ext-derived-comparison",
     "lemma-constructible-pullback-constant",
     "def-constructible-constant",
     "def-weil-pbc-inverse-image",
@@ -97,51 +95,45 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0GJQ, final cohomology calculation; Tag 03QO; sites.tex Tag 0H7J, example-constant-sheaf, and blueprint lemma-constructible-pullback-constant, Proof (composite adjunction and its unit)"
+    "place": "Tag 0GJQ, proposition-smooth-locally-acyclic; Tags 0EZU, 03QO and 0GJR for the comparisons"
    }
   },
   {
-   "text": "For completeness this is the required canonical $\\alpha$, not merely an abstract isomorphism. The constant-section map $M\\to(\\underline M_X)_{\\bar x}$ is an isomorphism by [lem-weil-pbc-constant-sheaf-geometric-stalk]. By the definition [def-weil-pbc-local-acyclicity-abelian-sheaf], $\\alpha$ first takes the unique strict-local section with that germ, then restricts it to $V$. The lift of $\\bar x$ to the strict-local closed point is given by [lem-weil-pbc-strict-henselization-functoriality](1). The compatibility formula of [lem-weil-pbc-inverse-image-stalk-germ] identifies the germ of a pulled-back constant section with its original germ. Therefore the section with germ $m$ is the constant section $m$, by [lem-weil-pbc-strictly-henselian-sections-stalk] and [lemma-constructible-pullback-constant]. Apply the adjunction calculation in step 5, using [def-constructible-constant], [def-weil-pbc-inverse-image] and the canonical comparison of [lemma-constructible-pullback-constant], first to $B\\to X$ and then to $V\\to B$: in each case the unit pullback of the constant section $m$ is the constant section $m$ under that comparison. Thus its restriction is constant $m$. Thus $\\alpha$ composed with $M\\cong(\\underline M_X)_{\\bar x}$ is the isomorphism in the preceding step. As $\\bar t$, $\\bar x$ and $n$ were arbitrary, $f$ is locally acyclic. Step 1 proves universal local acyclicity, with no properness or dimension hypothesis.",
+   "text": "The germ-compatible strict-local constant comparison identifies the actual canonical alpha with the constant-section unit followed by global sections of its coefficient isomorphism. The constant geometric stalk is M. Naturality of the constant-section unit transports its invertibility along that stalk isomorphism, and functoriality transports positive cohomology vanishing. Thus the canonical alpha is invertible and every required positive cohomology object vanishes. This proves local acyclicity; step 1 supplies universality.",
    "uses": [
+    "lem-weil-pbc-strict-local-constant-comparison",
     "lem-weil-pbc-constant-sheaf-geometric-stalk",
-    "def-weil-pbc-local-acyclicity-abelian-sheaf",
-    "lem-weil-pbc-strictly-henselian-sections-stalk",
-    "lemma-constructible-pullback-constant",
-    "lem-weil-pbc-inverse-image-stalk-germ",
-    "lem-weil-pbc-strict-henselization-functoriality",
-    "def-constructible-constant",
-    "def-weil-pbc-inverse-image"
+    "def-weil-pbc-local-acyclicity-abelian-sheaf"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0GJQ, conclusion; Tag 0GJP, canonical alpha; sites.tex Tag 0H7J, example-constant-sheaf, and blueprint lemma-constructible-pullback-constant, Proof (composite adjunction and its unit)"
+    "place": "Tag 0GJQ, proposition-smooth-locally-acyclic; Tags 0EZU, 03QO and 0GJR for the comparisons"
    }
   }
  ],
  "proof_deps": [
   "lem-pc-proper-base-change",
   "def-weil-pbc-local-acyclicity-abelian-sheaf",
-  "def-weil-pbc-strict-henselization-limit",
-  "lem-weil-pbc-colimit-initial-full-subcategory",
+  "lem-weil-pbc-strict-henselization-local-structure",
+  "lem-weil-pbc-strict-henselization-point-evaluation-properties",
   "lem-weil-pbc-strict-henselization-functoriality",
-  "lem-weil-pbc-qcqs-morphism-permanence",
-  "lem-weil-pbc-constant-sheaf-geometric-stalk",
+  "lem-weil-pbc-strict-base-closed-point-localizations",
   "sbc-thm-smooth-base-change",
+  "lem-weil-pbc-constant-sheaf-geometric-stalk",
   "lem-weil-pbc-exchange-strict-local-cohomology",
-  "lem-weil-pbc-strict-local-geometric-fibre-test",
-  "sbc-lem-strict-henselian-constant-cohomology",
-  "lem-weil-pbc-strictly-henselian-sections-stalk",
+  "lem-weil-pbc-strictly-henselian-etale-acyclic",
+  "lem-weil-pbc-sheafH-ext-derived-comparison",
   "lemma-constructible-pullback-constant",
   "def-constructible-constant",
   "def-weil-pbc-inverse-image",
   "def-weil-pbc-direct-image",
-  "lem-weil-pbc-inverse-image-stalk-germ"
+  "lem-weil-pbc-strict-local-constant-comparison"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 0GJQ, proposition-smooth-locally-acyclic; strict-local reduction expanded with Tags 0EZU and 0EZV"
+  "place": "Tag 0GJQ, proposition-smooth-locally-acyclic, using its strict-base replacement directly; canonical coefficient comparison from Tag 0GJR"
  },
  "mathlib_searches": [
   {
@@ -268,9 +260,7 @@
   "lem-pc-proper-base-change",
   "lem-weil-pbc-strict-henselization-functoriality",
   "lem-weil-pbc-constant-sheaf-geometric-stalk",
-  "sbc-thm-smooth-base-change",
-  "sbc-lem-strict-henselian-constant-cohomology",
-  "lem-weil-pbc-strictly-henselian-sections-stalk"
+  "sbc-thm-smooth-base-change"
  ],
  "reviewed": {
   "date": "2026-10-14",
@@ -298,5 +288,15 @@
   "by": "NP",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261021T225057-L-3762772",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
