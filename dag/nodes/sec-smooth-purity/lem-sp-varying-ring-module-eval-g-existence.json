@@ -1,0 +1,106 @@
+{
+ "kind": "statement",
+ "status": "split",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Zheng Construction 4.1, ordinary inverse-image evaluation comparison"
+ },
+ "stmt_deps": [
+  "def-sp-varying-ring-operations",
+  "lem-coef-semilinear-derived-sections",
+  "def-cbc-strict-constant-tower-operations"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EK; unit-normalized componentwise inverse-image adjunction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "unit-normalized inverse image evaluation comparison for semilinear module systems",
+   "results": "No direct match; searched adjunction and evaluation APIs.",
+   "date": "2026-10-21",
+   "verdict": "No direct theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "Adjunction homEquiv unit natural isomorphism evaluation",
+   "results": "Generic adjunction uniqueness lemmas only.",
+   "date": "2026-10-21",
+   "verdict": "No direct theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "moduleEvalG_existsUnique|ordinaryPullEvaluation|unit_evaluation",
+   "results": "Found generic SemilinearGeometry interfaces and fixed-ring tower analogue.",
+   "date": "2026-10-21",
+   "verdict": "Used as source route."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.VaryingRingOperations",
+  "date": "2026-10-21",
+  "group": "R5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-sp-varying-ring-operations",
+   "place": "ordinary inverse-image evaluation comparison",
+   "via": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "id": "lem-sp-varying-ring-module-eval-g-existence",
+ "title": "Existence of varying-ring ordinary pullback evaluation",
+ "statement": "The Lean declaration `lem-sp-varying-ring-module-eval-g-existence` has the displayed unit-normalized ordinary pullback evaluation statement.",
+ "proof": [
+  {
+   "text": "Construct the comparison by the componentwise inverse-image adjunction and the level adjunction; the ordinary direct-image comparison transports the system unit to the level unit and the component maps assemble naturally.",
+   "uses": [
+    "def-sp-varying-ring-operations",
+    "lem-coef-semilinear-derived-sections",
+    "def-cbc-strict-constant-tower-operations"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-varying-ring-operations",
+  "lem-coef-semilinear-derived-sections",
+  "def-cbc-strict-constant-tower-operations"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.VaryingRingOperations",
+  "file": "lean/Sheaf/AlgebraicGeometry/VaryingRingOperations.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.VaryingRing.moduleEvalG_exists",
+  "statement": "theorem moduleEvalG_exists {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :\n    ∃ d : pull R φ f ⋙ eval R φ X n ≅\n        eval R φ Y n ⋙ StrictTower.modulePullback (R n) f,\n      ∀ N : Modules R φ Y,\n        (eval R φ Y n).map ((moduleAdj R φ f).unit.app N) ≫\n          (moduleEvalP R φ f n).hom.app ((pull R φ f).obj N) ≫\n          (StrictTower.moduleDirectImage (R n) f).map (d.hom.app N) =\n        (Scheme.proEtaleRingModuleAdjunction f (coefficients R Y n)\n          (coefficients R X n) (StrictTower.constantRingIso (R n) f)).unit.app\n            ((eval R φ Y n).obj N)",
+  "branch": "sheaf-dag",
+  "by": "R5",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R5",
+  "result": "pass",
+  "landing": "20261021T001139-L-1377342",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R5",
+  "result": "pass",
+  "landing": "20261021T001139-L-1377342",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

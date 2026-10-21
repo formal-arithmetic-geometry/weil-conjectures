@@ -558,12 +558,52 @@ def moduleEvalP {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
       eval R φ X n ⋙ StrictTower.moduleDirectImage (R n) f :=
   (moduleEvalP_existsUnique R φ f n).choose
 
-/-- Inverse-image evaluation is uniquely fixed by the ordinary unit equation.
-Source: Zheng 4.1 (blueprint: def-sp-varying-ring-operations).
-Proof: the componentwise ordinary inverse-image adjunction identifies the left
-adjoint with level inverse image. Its unit is the displayed system unit. The Hom
-bijection forces the comparison uniquely, and inverse images of the same constant
-rings make it invertible. This includes all semilinear transitions. -/
+/-- Existence of the unit-normalized ordinary pullback evaluation comparison.
+Source: Zheng 4.1 (blueprint: lem-sp-varying-ring-module-eval-g-existence).
+Proof: construct the comparison by the componentwise inverse-image adjunction and the
+level adjunction. The ordinary direct-image comparison transports the system unit to the
+level unit, and the resulting component maps assemble naturally; the remaining assembly
+and unit calculations are exactly the ordinary pullback evaluation argument.
+-/
+theorem moduleEvalG_exists {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
+    ∃ d : pull R φ f ⋙ eval R φ X n ≅
+        eval R φ Y n ⋙ StrictTower.modulePullback (R n) f,
+      ∀ N : Modules R φ Y,
+        (eval R φ Y n).map ((moduleAdj R φ f).unit.app N) ≫
+          (moduleEvalP R φ f n).hom.app ((pull R φ f).obj N) ≫
+          (StrictTower.moduleDirectImage (R n) f).map (d.hom.app N) =
+        (Scheme.proEtaleRingModuleAdjunction f (coefficients R Y n)
+          (coefficients R X n) (StrictTower.constantRingIso (R n) f)).unit.app
+            ((eval R φ Y n).obj N) := by
+  sorry
+
+/-- Uniqueness of the unit-normalized ordinary pullback evaluation comparison.
+Source: Zheng 4.1 (blueprint: lem-sp-varying-ring-module-eval-g-uniqueness).
+Proof: apply naturality to the system adjunction unit and use the triangle identity.
+The direct-image evaluation comparison is invertible, so the displayed unit equation
+cancels its component; the level adjunction hom-equivalence then cancels the remaining
+unit and identifies the two natural isomorphisms componentwise.
+-/
+theorem moduleEvalG_unique {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
+    (d e : pull R φ f ⋙ eval R φ X n ≅
+      eval R φ Y n ⋙ StrictTower.modulePullback (R n) f)
+    (hd : ∀ N : Modules R φ Y,
+      (eval R φ Y n).map ((moduleAdj R φ f).unit.app N) ≫
+        (moduleEvalP R φ f n).hom.app ((pull R φ f).obj N) ≫
+        (StrictTower.moduleDirectImage (R n) f).map (d.hom.app N) =
+      (Scheme.proEtaleRingModuleAdjunction f (coefficients R Y n)
+        (coefficients R X n) (StrictTower.constantRingIso (R n) f)).unit.app
+          ((eval R φ Y n).obj N))
+    (he : ∀ N : Modules R φ Y,
+      (eval R φ Y n).map ((moduleAdj R φ f).unit.app N) ≫
+        (moduleEvalP R φ f n).hom.app ((pull R φ f).obj N) ≫
+        (StrictTower.moduleDirectImage (R n) f).map (e.hom.app N) =
+      (Scheme.proEtaleRingModuleAdjunction f (coefficients R Y n)
+        (coefficients R X n) (StrictTower.constantRingIso (R n) f)).unit.app
+          ((eval R φ Y n).obj N)) :
+    d = e := by
+  sorry
+
 theorem moduleEvalG_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     ∃! d : pull R φ f ⋙ eval R φ X n ≅
         eval R φ Y n ⋙ StrictTower.modulePullback (R n) f,
@@ -574,7 +614,15 @@ theorem moduleEvalG_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
         (Scheme.proEtaleRingModuleAdjunction f (coefficients R Y n)
           (coefficients R X n) (StrictTower.constantRingIso (R n) f)).unit.app
             ((eval R φ Y n).obj N) := by
-  sorry
+  obtain ⟨d, hd⟩ := moduleEvalG_exists R φ f n
+  refine ⟨d, hd, ?_⟩
+  intro e he
+  exact (moduleEvalG_unique R φ f n d e hd he).symm
+
+/-- The ordinary direct-image comparison is an isomorphism by construction. -/
+private theorem moduleEvalP_hom_isIso {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
+    IsIso (moduleEvalP R φ f n).hom := by
+  infer_instance
 
 /-- The normalized ordinary pullback evaluation comparison.
 Source: Zheng 4.1 (blueprint: def-sp-varying-ring-operations). -/
