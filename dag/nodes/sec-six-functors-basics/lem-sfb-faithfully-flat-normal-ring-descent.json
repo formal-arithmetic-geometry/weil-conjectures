@@ -224,5 +224,23 @@
   "group": "Q07",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q07-fc16048c7 (reviewer sub-agent of L); spot-checked: I read Stacks 033G (lemma-descent-normal) and 05CK (l.20255) in algebra.tex: the hypotheses are only faithful flatness and normality of S, which matches the item exactly. The delivery has no new nodes and leaves the statement and stmt_deps unchanged. It does not answer a re-split note, and it cites no SGA. The six steps prove the lemma at each prime instead of going through Stacks' reducedness step first. I checked each step against the statement of the node it cites. Step 1: def faithfully-flat ⇒ flat; 00HQ leaf ⇒ q over p. Step 2: the 00HT(6) leaf's hypothesis p=φ⁻¹(q) holds by Step 1 and gives a flat local map R_p→S_q; the 00HR leaf gives faithful flatness; def-weil-pbc-normal-ring makes S_q a normal domain. Step 3: the I=0 clause of the ideal-contraction leaf gives g injective, so A is a domain. Step 4: the map Frac(A)→Frac(B) is well defined, the transported equation stays monic, and g(a)=g(b)s; this is a few lines from the definitions, so the elementary flag is justified. Step 5: (bA)B=g(b)B, and the 05CK leaf gives a∈bA. Step 6: both zero-ring cases are vacuous. All four tools are existing Mathlib leaves (sk-thm-p1), so no tool_uses entry is needed. Edge cases checked: R=S=0, field extensions, k×k (not a domain), Z→Z[i]. Maintainer note: lem-per-faithfully-flat-normal-ring-descent is an unsplit node with the same statement. It existed before this delivery and should be merged into this item or made to cite it. This is not a delivery fault."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FaithfullyFlatNormalRingDescent",
+  "declaration": "Algebra.normal_ring_of_faithfullyFlat",
+  "file": "lean/Sheaf/RingTheory/FaithfullyFlatNormalRingDescent.lean",
+  "statement": "theorem normal_ring_of_faithfullyFlat (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S] [Module.FaithfullyFlat R S] (hS : ∀ (q : Ideal S) [q.IsPrime], IsDomain (Localization.AtPrime q) ∧ IsIntegrallyClosed (Localization.AtPrime q)) : ∀ (p : Ideal R) [p.IsPrime], IsDomain (Localization.AtPrime p) ∧ IsIntegrallyClosed (Localization.AtPrime p)",
+  "branch": "newtargets-dag",
+  "by": "Q01",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f82a1fb34",
+  "group": "Q01",
+  "result": "pass",
+  "note": "Lean statement matches Stacks 033G and the node clause by clause: [Algebra R S] [Module.FaithfullyFlat R S] with independent universes u v; the normality hypothesis and conclusion use def-weil-pbc-normal-ring's recorded inline form; no extra hypotheses. Edge cases R=S=0 (vacuous), S=0 over nonzero R (not faithfully flat) and R=k×k are covered. lean.statement is verbatim in the file; the node differs from live only by the lean field; docstrings carry the source place, blueprint id and 6 proof steps; proof is sorry only; Mathlib-only imports. No Mathlib or project match (grep). Duplicate lem-per-faithfully-flat-normal-ring-descent has no lean record, so it is a maintainer note only. Not recompiled; no files changed."
  }
 }
