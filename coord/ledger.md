@@ -22520,3 +22520,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:25 L: returned deliver/O4/lem-pe-profinite-sections-finite-quotient (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-pe-profinite-sections-finite-quotient: lem-pe-prof)
 - 13:25 L: returned deliver/N7/lem-pe-scalar-cone-tensor-model (reviewer RETURN: A7/B10: the item is superseded by a later stage-3 landing. The 2026-10-21 re-split note (live coord/repair-notes, mtime )
 - 13:25 L: returned deliver/Q42/lem-sfb-sheaf-pushforward-generator-comparison (reviewer RETURN: Superseded (A6/A7/B10). This is the third push with unchanged content, and the maths is sound. (1) The item is Lean-clos)
+- 13:26 L: merged deliver/NH/lem-pc-curve-local-scalar-principal-parts (stage 2; reviewer PASS; parallel immutable checks)
