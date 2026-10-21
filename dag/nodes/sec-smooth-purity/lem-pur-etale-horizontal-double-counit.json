@@ -103,10 +103,9 @@
    }
   },
   {
-   "text": "For a change of compactification, identify the left adjoints by their proper-refinement comparisons. The comparison theorem says that $\\alpha$ and $C$ agree under these identifications, and the quasi-finite comparison theorem says that $d_e,d_{e'}$ do also. For example, if $r_a:F_a^c\\to F_a^{\\tilde c}$, then $d_a^c=d_a^{\\tilde c}\\circ r_a$; substituting this and the corresponding compositor square into the four factors of $\\delta$ cancels each adjacent $r_a,r_a^{-1}$. Thus $\\delta$ agrees. The right-adjoint comparisons are the conjugates of the inverse $r_a$. By the change-of-adjunction pasting rule these same substitutions into $\\widehat\\tau^c=b$ give the right-adjoint comparison square for $b$. The defining transpose identity preserves the counits as in Step 1. Consequently both counit equalities, including their normalization, agree under refinement. The cocycle identity for the left comparisons and contravariant composition give independence of a common refinement on both sides.",
+   "text": "First use the single-counit identity and the hom bijection to identify b with the mate of the specified inverse compact-support exchange. For fixed-compactification adjunctions ac and ad, put i=rightDerivedLowerShriekIso(c), j=rightDerivedLowerShriekIso(d), and t=rightDerivedLowerShriekOfCompactificationIso(d,c). The common-refinement cocycle gives t.hom followed by i.hom equal to j.hom. Expanding the transported counits and using naturality shows that the conjugate of t.hom under ac,ad equals the conjugate of the identity under ac.ofNatIsoLeft(i),ad.ofNatIsoLeft(j). Do this for both vertical arrows. The change-of-adjunction mate identities then identify the two paths in the refinement square: conjugateEquiv_mateEquiv_vcomp and mateEquiv_conjugateEquiv_vcomp applied to identity left transformations give the required equality. This avoids a second geometric calculation of delta, and works for arbitrary N and M because the exchange description is independent of them.",
    "uses": [
     "lem-amb-unbounded-compact-support-comparisons",
-    "lem-sfb-quasifinite-compact-support-exact",
     "def-weil-pbc-adjunction-conjugate",
     "lem-weil-pbc-mate-pasting"
    ],
@@ -117,14 +116,12 @@
    }
   },
   {
-   "text": "Finally consider a further compatible Cartesian open restriction. For a vertical arrow $a:Z\\to W$ and its restricted arrow $\\bar a:\\bar Z\\to\\bar W$, with open maps $j_Z,j_W$, denote the inverse exchange by $E_a:F_{\\bar a}j_Z^*\\to j_W^*F_a$. Its mate $r_a:j_Z^*G_a\\to G_{\\bar a}j_W^*$ is precisely the right-adjoint restriction comparison specified in the question; its counit equation is\n$$\\varepsilon_{\\bar a,j_W^*K}\\circ F_{\\bar a}(r_{a,K})=j_W^*(\\varepsilon_{a,K})\\circ E_{a,G_aK}.$$\nThe comparison theorem's compatibility of $C$ with successive changes of base gives equality of the two pasted inverse-exchange squares obtained by first restricting our square or first applying its horizontal exchange. Apply mate pasting along the intervening functors to that equality. Its two mates are the two paths comparing the restriction of $b$ with $\\bar b$, since Step 6 identifies $b$ with the mate of $C^{-1}$. Hence their comparison square commutes. This also identifies both counit formulas after restriction, by the displayed counit equation. The normalization uses the same sum adjunctions: clause (1) of the etale support-map compatibility intertwines $d_a$ with the specified sum-extension base-change comparison. Restricting a sum/evaluation counit evaluates each restricted lift, the same operation as restricting its evaluated section; thus this comparison preserves evaluation, degreewise and hence on the stated termwise derived adjunctions. No new smoothness or purity input is involved.",
+   "text": "Identify both horizontal b maps with the mates of inverse compact-support exchange. Apply unboundedEtaleCompactSupport_baseChange_comp to the original square followed by the right open restriction, and to the left open restriction followed by the restricted square. Choose the same outer square in both applications; the upper and lower commutative faces express its composite arrows in the first application. Invert the two isomorphism equations. Write sx,sy for the two inverse-image compositors at the upper face and tx,ty for those at the lower face. The exact-derived square comparisons are sx inverse followed by sy, and tx inverse followed by ty, by the definition of squareUpperStarIso and functoriality of descent of natural isomorphisms. Precompose the desired equality of pasted inverse exchanges by the image of sx.hom, and postcompose by tx.inv. Both are isomorphisms. Their inverse factors cancel; the two sides become exactly the two expressions for the outer inverse exchange from the pasting theorem. Apply mateEquiv_vcomp to this equality. Whiskering at the top and bottom commutes with taking mates, with the bottom transformation mapped by the target right adjoint. Componentwise expansion gives exactly the stated open-restriction square. The previously proved single-counit identification fixes the same sum/evaluation normalization, so no separate support-map comparison is needed.",
    "uses": [
     "lem-amb-unbounded-compact-support-comparisons",
     "def-weil-pbc-adjunction-mate",
     "lem-weil-pbc-mate-pasting",
-    "lem-pur-etale-support-map-compatibility",
-    "lem-amb-etale-adjoint-locality",
-    "def-weil-pbc-etale-sum-extension"
+    "lem-amb-etale-adjoint-locality"
    ],
    "elementary": false,
    "source": {
@@ -137,19 +134,16 @@
   "def-weil-pbc-adjunction-conjugate",
   "def-weil-pbc-adjunction-mate",
   "def-weil-pbc-composite-adjunction",
-  "def-weil-pbc-etale-sum-extension",
   "lem-amb-etale-adjoint-locality",
   "lem-amb-unbounded-compact-support-comparisons",
   "lem-pur-etale-horizontal-support-mate",
-  "lem-pur-etale-support-map-compatibility",
-  "lem-sfb-quasifinite-compact-support-exact",
   "lem-weil-pbc-adjunction-of-natural-bijection",
   "lem-weil-pbc-mate-pasting"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-co-smooth-etale-locality.proof.md",
-  "place": "Step 1: expand the composite counits and prove the two adjunction cancellations using the existing etale-horizontal support-mate identity; categorical formulas from Stacks 0037/0DV0 and Mathlib Adjunction.Mates"
+  "document": "literature/stacks-project/categories.tex; literature/stacks-project/more-etale.tex; Mathlib/CategoryTheory/Adjunction/Mates.lean",
+  "place": "0037, 0DV0 and 0F7L; conjugateEquiv_counit, conjugateEquiv_comp, conjugateEquiv_whiskerLeft/Right, mateEquiv_vcomp, and the two change-of-adjunction mate identities; refinement and open restriction reduced to the proved inverse-exchange description."
  },
  "mathlib_searches": [
   {
@@ -262,10 +256,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-sfb-quasifinite-compact-support-exact",
-  "lem-pur-etale-support-map-compatibility"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
@@ -301,5 +292,15 @@
   "group": "Q83",
   "result": "pass",
   "note": "Re-delivery after H2 RETURN 9574abe22c2c, with the Lean module byte-identical (sha256 ba190eb8). stmt_deps: dropped the theorem nodes support-mate and lem-asd-normalization, added def-sp-etale-compact-support-normalization and the new def-pur-etale-horizontal-support-comparisons; support-mate stays in proof_deps. Item differs from live only in lean/stmt_deps and lean.statement is verbatim. New node: existing:true ownership of etaleCanonicalCompactSupportComparison, etaleHorizontalSupportMateDelta and etaleHorizontalSupportBaseChangeIso. Clauses (1) d=(rightDerivedLowerShriekIso)^-1 then N.comparison, (2) delta five factors with congr, (3) C=asIso of the exchange via the base-cited unbounded-comparisons theorem; each matches the live Lean and its hypotheses. H12 fields ok (id, chapter, status split, empty proof, created, blueprint.from/via, three search kinds, lean_audit none); deps exist, none dropped, no cycle, no other owner. Re-read the Lean: hypotheses, b direction, compositor formula, double/single/adjunct clauses, exchange, refinement and open-restriction cube, edge cases, docstrings, sorry-only theorems. Advisory: two plain imports not used by any statement; unused _r/_r' binders; inherited theorem stmt_deps supplying plain defs; snapshot's def-weil-compactifications-refinements is the stale pre-Q52 base copy and the merge must not revert Q52's landed record. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T7",
+  "result": "pass",
+  "landing": "20261021T130159-L-2598879",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
