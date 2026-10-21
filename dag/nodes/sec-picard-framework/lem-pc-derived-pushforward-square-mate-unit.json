@@ -99,14 +99,15 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-duality",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.DerivedPushforwardSquareMateUnit",
-  "file": "lean/Sheaf/AlgebraicGeometry/DerivedPushforwardSquareMateUnit.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.DerivedPushforwardSquareMateUnit",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/DerivedPushforwardSquareMateUnit.lean",
   "declaration": "AlgebraicGeometry.exists_derivedPushforwardSquareMateUnit",
   "statement": "theorem exists_derivedPushforwardSquareMateUnit\n    {R B : CommRingCat.{u}} {X : Scheme.{u}}\n    (f : X ⟶ Spec R) (g : Spec B ⟶ Spec R) :\n    let P₀ := RingedSpace.moduleDirectImage (pullback.fst f g).toLRSHom.toShHom\n    let Q₀ := RingedSpace.moduleDirectImage (pullback.snd f g).toLRSHom.toShHom\n    let F₀ := RingedSpace.moduleDirectImage f.toLRSHom.toShHom\n    let G₀ := RingedSpace.moduleDirectImage g.toLRSHom.toShHom\n    let RF := schemeDerivedDirectImage f\n    let RG := schemeDerivedDirectImage g\n    let a := fun {A D : Scheme.{u}} (h : A ⟶ D) ↦ canonicalPullbackAdjunction h\n    let p : ∀ {X Y Z : Scheme.{u}} (h : X ⟶ Y) (i : Y ⟶ Z),\n        derivedPullback i ⋙ derivedPullback h ≅ derivedPullback (h ≫ i) :=\n      @Classical.choose _ _ (Classical.choose_spec (Classical.choose_spec\n      (Classical.choose_spec exists_derivedPullbackComposition.{u, w})))\n    let k := p (pullback.snd f g) g ≪≫\n      eqToIso (congrArg (fun h ↦ derivedPullback h)\n        (pullback.condition (f := f) (g := g)).symm) ≪≫\n      (p (pullback.fst f g) f).symm\n    let δ := conjugateEquiv ((a f).comp (a (pullback.fst f g)))\n      ((a g).comp (a (pullback.snd f g))) k.hom\n    ∃ e : P₀ ⋙ F₀ ≅ Q₀ ⋙ G₀,\n      (∀ (M : SheafOfModules.{u} (moduleRings (pullback f g).toRingedSpace))\n        (x : M.val.obj (op ⊤)), ((e.hom.app M).val.app (op ⊤)) x = x) ∧\n      ∀ J : HomotopyCategory\n        (SheafOfModules.{u} (moduleRings (pullback f g).toRingedSpace)) (.up ℤ),\n        F₀.rightDerivedFunctorUnit.app ((P₀.mapHomotopyCategory (.up ℤ)).obj J) ≫\n          RF.map (P₀.rightDerivedFunctorUnit.app J) ≫\n          δ.app (DerivedCategory.Qh.obj J) =\n        DerivedCategory.Qh.map ((e.hom.mapHomotopyCategory (.up ℤ)).app J) ≫\n          G₀.rightDerivedFunctorUnit.app ((Q₀.mapHomotopyCategory (.up ℤ)).obj J) ≫\n          RG.map (Q₀.rightDerivedFunctorUnit.app J)",
   "branch": "sheaf-dag",
   "by": "T2",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "J1 2026-10-22: the adopted source contains the identical public theorem signature and complete proof. The former Sheaf module publicly imports this declaration; the proof route and all dependencies are preserved."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -121,14 +122,12 @@
  "reviewed_proof": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "P4",
+  "reviewer": "C-48459",
+  "group": "J1",
   "result": "pass",
-  "landing": "20261021T214850-L-1873330",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [],
-  "sorry_after": []
+  "landing": "20261021T233728-L-855330",
+  "kind": "interface",
+  "note": "independent cc review: delivered Sheaf compatibility module + node lean record vs live Sheaf and WeilConjectures DerivedPushforwardSquareMateUnit files (byte-identical theorem and proof, only header/import path differ); node diff limited to lean.existing/module/file/note"
  },
  "lean_audit": {}
 }
