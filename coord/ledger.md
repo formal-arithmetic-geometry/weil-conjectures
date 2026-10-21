@@ -23642,3 +23642,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:22 L: merged deliver/Q01/lem-trf-point-system-power-roos-coherence (stage 2; reviewer FIX; parallel immutable checks)
 - 20:23 L: merged deliver/NC/lem-sfb-norm-algcl-bar-augmentation (reviewer PASS; first push; new nodes: 1)
 - 2026-10-21T20:23:27Z L: superseded stage-1 delivery NM/lem-sfb-finite-valued-cech-cocycle-descent at ffe070bcae1954d1e07fd6740f812538f5e261d6; current completion retained; packet archived at refs/superseded/NM/lem-sfb-finite-valued-cech-cocycle-descent/ffe070bcae1954d1e07fd6740f812538f5e261d6; stale return retired.
+- 2026-10-21T20:23:32Z L: superseded stage-1 delivery NP/lem-sfb-norm-one-finite-subfield-projection at 19ef3b154eb47b6aac44ad5febff07534985da02; current completion retained; packet archived at refs/superseded/NP/lem-sfb-norm-one-finite-subfield-projection/19ef3b154eb47b6aac44ad5febff07534985da02; stale return retired.
