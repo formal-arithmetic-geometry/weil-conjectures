@@ -23,120 +23,82 @@
  ],
  "proof": [
   {
-   "text": "The lift equivalence sends $(\\varpi.\\mathrm{up})^n$ to $\\varpi^n$, so $x-y\\in I^n$ iff $x.\\mathrm{down}-y.\\mathrm{down}\\in(\\varpi^n)$. Therefore $[x]\\mapsto[x.\\mathrm{down}].\\mathrm{up}$ is well defined; addition, multiplication and $1$ are preserved on representatives. The inverse sends $[a].\\mathrm{up}$ to $[a.\\mathrm{up}]$. These two formulas compose to the identity on every representative, and every quotient element has a representative, proving existence and uniqueness of $e_n$. If $b\\geq a\\geq1$, both composites from $P_b$ to $Q_a$ send $[x]$ to $[x.\\mathrm{down}].\\mathrm{up}$, with the last class taken modulo $\\varpi^a$. This proves every transition square, including identities.",
+   "text": "Descend ULift.ringEquiv with Ideal.quotientEquiv and then lift the quotient. Its representative formula proves uniqueness by quotient surjectivity. The same formula on representatives proves the transition identity for every a ≤ b, including equal indices.",
    "uses": [
     "def-weil-l-adic-coefficient-extension"
    ],
    "elementary": true,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Section 6.5, coefficient convention; agent quotient-representative calculation, matching IntegralStratifiedPerfectCharacterization.lean lines 672–710"
+    "place": "Section 6.5, completed ring convention preceding Definition 6.5.1; explicit coefficient-presentation supplement for the detailed-category clause of Proposition 6.8.11(3). The finite quotient formula and limit normalization are the integralCoefficientULift_exists and integralDetailedCoefficientComparison_exists constructions read in Sheaf.Paper.IntegralStratifiedPerfectCharacterization."
    }
   },
   {
-   "text": "The absolute value fixed in the coefficient datum restricts to the $\\ell$-adic absolute value. Apply the integers-DVR theorem to this finite extension: $A$ is a DVR with finite residue field and $\\varpi$ generates its maximal ideal. The valued-DVR finite-quotients theorem then gives finiteness of $A/(\\varpi^n)$ for every positive $n$. Thus $Q_n$ and, by step 1, $P_n$ are finite commutative rings. Lifting changes neither their elements nor these finiteness properties.",
-   "uses": [
-    "def-weil-l-adic-coefficient-extension",
-    "lem-weil-l-adic-extension-integers-dvr",
-    "lem-weil-valued-dvr-finite-quotients"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Section 6.8, finite extension coefficient convention; valuation-ring and finite-quotient facts supplied by the cited existing nodes"
-   }
-  },
-  {
-   "text": "Fix $n$. For any object $U$ of the small pro-etale site, a continuous function $|U|\\to P_n$ is constant on each connected component: a connected subset of a discrete space is a singleton. It therefore factors uniquely through $\\pi_0(|U|)$; the factor is continuous by the quotient topology. Conversely precomposing a continuous function on $\\pi_0(|U|)$ gives a continuous function on $|U|$. These inverse ring maps commute with restrictions and with postcomposition by every quotient ring map. The finite-constant-sections theorem identifies $\\underline{P_n}(U)$ with these continuous functions, sending each constant-presheaf element to its constant function. Hence the functions presheaf is already isomorphic to $\\underline{P_n}$; sheafifying gives exactly the specified $\\kappa_n$, not an arbitrary isomorphism. The same postcomposition calculation proves that all $\\kappa_n$ commute with transitions. Applying constant-sheaf functoriality to $e_n$ now gives $\\bar e_n=\\underline{e_n}\\kappa_n^{-1}$ and its inverse, with $\\bar e_aq^P_{b,a}=q^Q_{b,a}\\bar e_b$.",
-   "uses": [
-    "def-weil-pbc-proetale-site",
-    "def-weil-pbc-proetale-modules",
-    "def-weil-pbc-constant-sheaf",
-    "lem-pur-proetale-finite-constant-sections"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 4.2.12, discrete-space assertion, printed p. 30; quotient-topology factorization written out here for arbitrary U"
-   }
-  },
-  {
-   "text": "Use the sectionwise inverse-limit description. For each $U$, send a compatible family $(z_n)_n\\in B_T^{\\mathrm{pbc}}(U)$ to $(\\bar e_n(z_n))_n$. It is compatible by the last identity in step 3. The inverse sends $(w_n)_n$ to $(\\bar e_n^{-1}(w_n))_n$. These maps preserve ring operations and restrictions coordinatewise and their composites are identities. They define $e_T$ with the required projection equations. Any other map satisfying those equations has the same value in every coordinate on every section, hence is equal to $e_T$. Set $R=B_T^{\\mathrm{pbc}}$, $S=B_T^{\\mathrm{det}}$, $R_n=(P_n)_T$, $S_n=(Q_n)_T$, $e=e_T$ and $b_n=\\bar e_n$ below. The normalization is $\\pi_n^S e=b_n\\pi_n^R$.",
+   "text": "Reuse pbcLevelConstantComparison and its constants-to-functions normalization. Sheafification extensionality gives the specified kappa hom; pbcConstantSystemComparison_naturality supplies every transition square. Compose its inverse with the constant-sheaf image of the quotient isomorphisms to obtain the natural level comparison.",
    "uses": [
     "def-weil-pbc-adic-coefficient-datum",
-    "def-weil-completed-integral-coefficients",
-    "def-pur-sheaf-inverse-limit"
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-proetale-modules"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 03CO (lemma-limits-colimits-abelian-sheaves) and 03DB (lemma-limits-colimits); coordinate calculation for the ring limits"
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Section 6.5, completed ring convention preceding Definition 6.5.1; explicit coefficient-presentation supplement for the detailed-category clause of Proposition 6.8.11(3). The finite quotient formula and limit normalization are the integralCoefficientULift_exists and integralDetailedCoefficientComparison_exists constructions read in Sheaf.Paper.IntegralStratifiedPerfectCharacterization."
    }
   },
   {
-   "text": "Apply ring-isomorphism tensor transport to $e:R\\simeq S$ on the fixed small site: $C=\\operatorname{Res}_e:\\operatorname{Mod}(S)\\to\\operatorname{Mod}(R)$ is an additive exact equivalence with inverse $\\operatorname{Res}_{e^{-1}}$. Indeed the two restrictions leave underlying abelian sheaves and maps unchanged, and the composite scalar actions are those through $e^{-1}e$ and $ee^{-1}$. Use the same result for each $b_n$ to obtain exact equivalences $C_n=\\operatorname{Res}_{b_n}:\\operatorname{Mod}(S_n)\\to\\operatorname{Mod}(R_n)$.",
+   "text": "Build the natural transformation of completed projections by the inverse-limit equations, initially on successor arrows. The finite-level natural isomorphism induces an isomorphism of inverse limits. The commutative-to-ring forgetful functor preserves these limits and is fully faithful; transport the limit comparison back through it. Limit projections give the normalization and its uniqueness.",
+   "uses": [
+    "def-weil-completed-integral-coefficients",
+    "def-pur-sheaf-inverse-limit",
+    "def-weil-pbc-adic-coefficient-datum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Section 6.5, completed ring convention preceding Definition 6.5.1; explicit coefficient-presentation supplement for the detailed-category clause of Proposition 6.8.11(3). The finite quotient formula and limit normalization are the integralCoefficientULift_exists and integralDetailedCoefficientComparison_exists constructions read in Sheaf.Paper.IntegralStratifiedPerfectCharacterization."
+   }
+  },
+  {
+   "text": "Construct restriction along the identity sectionwise using restrictScalarsIdApp. Compose the normalized pbcRestrictComp comparisons for e and its inverse with these identity comparisons. This gives inverse scalar equivalences, hence exactness. Derive the inverse natural isomorphisms using the exact-functor compositor and identity comparison. The derived homology comparison preserves bounds; faithful exact restriction reflects vanishing and hence reflects every bound.",
    "uses": [
     "def-pc-sheaf-restrict-scalars",
-    "lem-sfb-ring-isomorphism-tensor-transport"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YP (lemma-K-flat-quasi-isomorphism), ring-isomorphism specialization; explicit scalar action as in the cited transport node"
-   }
-  },
-  {
-   "text": "The exact-functor derived theorem applies to $C$, $C^{-1}$, $C_n$ and $C_n^{-1}$. Their termwise extensions are triangulated on the unbounded derived categories. The ordinary inverse natural isomorphisms extend termwise and descend through localization, so the derived functors are inverse equivalences. Exactness identifies $C(\\ker d/\\operatorname{im}d)$ with $\\ker C(d)/\\operatorname{im}C(d)$, and thus $H^i(D(C)K)\\simeq C(H^iK)$. An equivalence preserves and reflects the zero object, so every upper or lower cohomology bound, including any fixed interval, is preserved in both directions.",
-   "uses": [
     "lem-sf-exact-functor-derived-triangulated",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 015F, lemma-right-derived-exact-functor; inverse and cohomology calculation"
-   }
-  },
-  {
-   "text": "Choose a flat-term K-flat resolution $P\\to M$ over $S$. Ring-isomorphism tensor transport makes $C(P)$ flat-term K-flat over $R$. For every $n$ define the natural chain isomorphism\n$$\\alpha_n:C(P)\\otimes_R R_n\\longrightarrow C_n(P\\otimes_S S_n),\\qquad x\\otimes a\\longmapsto x\\otimes b_n(a).$$\nIt is balanced because $\\pi_n^S(e(r))=b_n(\\pi_n^R(r))$; its inverse is $x\\otimes z\\mapsto x\\otimes b_n^{-1}(z)$. Both composites fix pure tensors. These maps commute with restrictions and differentials and so induce maps on sheafified tensor complexes. They are natural in chain maps, since both orders send $x\\otimes a$ to $f(x)\\otimes b_n(a)$. Derived change of rings is computed by these K-flat models, giving\n$$D(C)M\\otimes_R^L R_n\\simeq D(C_n)(M\\otimes_S^L S_n).$$\nThe quasi-isomorphism and canonical resolution-comparison clauses of derived change of rings descend this natural chain isomorphism to the derived functors; consequently it is independent of the chosen resolution. No boundedness or flatness of $R\\to R_n$ is used.",
-   "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-sfb-ring-isomorphism-tensor-transport",
-    "lem-pur-derived-change-of-rings",
-    "def-pur-sheaf-tensor-product"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YS (lemma-K-flat-resolution) and 06YT (lemma-derived-tor-quasi-isomorphism-other-side); agent balanced-tensor comparison"
-   }
-  },
-  {
-   "text": "The normalized derived coefficient-adjunction theorem applies to $R\\to R_n$ and $S\\to S_n$, without a flatness assumption. On the flat-term K-flat models its unit is $x\\mapsto x\\otimes1$. Restriction of the target of $\\alpha_n$ to $R$ is the same as first restricting along $S\\to S_n$ and then along $e$, since the projection square commutes. Now $\\alpha_n(x\\otimes1)=x\\otimes b_n(1)=x\\otimes1$, so $\\alpha_n$ intertwines these genuine adjunction units on K-flat objects. For arbitrary $M$, insert the inverse of $[P\\to M]$ and use naturality to obtain the same equation. This identifies precisely the maps $c_n=[\\gamma_n][P\\to M]^{-1}$ in the integral reduction tower; it does not replace an adjunction unit by an unspecified map.",
-   "uses": [
-    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
-    "def-weil-integral-reduction-tower"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A6 (lemma-adjoint), identity-topos scalar extension; derived.tex Tags 0FND and 09T5; unit normalization on K-flat models"
-   }
-  },
-  {
-   "text": "For the adjacent transitions write $q_n:R_{n+1}\\to R_n$ and $r_n:S_{n+1}\\to S_n$. The coefficient identity is $b_nq_n=r_nb_{n+1}$. Applying $\\alpha_n$ after $1\\otimes q_n$ sends $x\\otimes a$ to $x\\otimes b_n(q_n(a))$, whereas applying $1\\otimes r_n$ after $\\alpha_{n+1}$ gives $x\\otimes r_n(b_{n+1}(a))$; these coincide. For any $b\\geq a$ the identical computation uses $b_aq_{b,a}=r_{b,a}b_b$. For iterated reduction, both orders of the balancing normalization send $(x\\otimes a)\\otimes a'$ to $x\\otimes b_a(q_{b,a}(a)a')$. Thus the comparisons respect also the quotient normalization cocycle. All equations hold as maps of sheafified complexes before localization, hence in the derived categories. Together with step 8 they identify the entire inverse systems and their specified maps from $M$.",
-   "uses": [
-    "def-weil-pbc-adic-coefficient-datum",
-    "def-weil-integral-reduction-tower"
+    "def-weil-pbc-bounded-constructible-tower"
    ],
    "elementary": true,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Section 6.5, finite quotient reductions; Proposition 3.5.1(1) and Definition 3.5.2, normalized quotient tower; explicit tensor formulas"
+    "place": "Section 6.5, completed ring convention preceding Definition 6.5.1; explicit coefficient-presentation supplement for the detailed-category clause of Proposition 6.8.11(3). The finite quotient formula and limit normalization are the integralCoefficientULift_exists and integralDetailedCoefficientComparison_exists constructions read in Sheaf.Paper.IntegralStratifiedPerfectCharacterization."
    }
   },
   {
-   "text": "The countable-products-exact theorem applies to both commutative ring sheaves $R$ and $S$ on this small pro-etale site, for any scheme $T$. Therefore their module categories have exact countable products. Clause 2 of derived-limit existence supplies countable products in both unbounded derived categories, represented by termwise products. This verifies product existence for the reduction towers without assuming that $M$ is bounded, constructible or complete.",
+   "text": "For each projection square form r from the two pbcRestrictComp comparisons; both its maps are identity on underlying sections. Given adjunctions L ⊣ U and Lprime ⊣ Uprime and equivalences F and G with r:G U ≅ Uprime F, define alpha at X as the adjunct of F(unitprime X) followed by r inverse. Naturality follows from the two adjunction bijections. Precomposition with alpha is the composite of those bijections and the fully faithful equivalence bijections, so it is bijective for every target; thus alpha is invertible by Yoneda. Its defining adjunct equation is precisely the required unit compatibility.",
+   "uses": [
+    "def-weil-pbc-bounded-constructible-tower",
+    "lem-sf-exact-functor-derived-triangulated"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Section 6.5, completed ring convention preceding Definition 6.5.1; explicit coefficient-presentation supplement for the detailed-category clause of Proposition 6.8.11(3). The finite quotient formula and limit normalization are the integralCoefficientULift_exists and integralDetailedCoefficientComparison_exists constructions read in Sheaf.Paper.IntegralStratifiedPerfectCharacterization."
+   }
+  },
+  {
+   "text": "For an arbitrary quotient arrow form the restriction square s from the finite-level naturality equation. The ordinary composition coherence follows by evaluating its section maps, all identities. Apply the proved exact-derived-square composition theorem to descend this coherence. The generic adjunction calculation then identifies the two reduction transitions: applying the upper adjunction bijection reduces the equation to the unit identities and restriction coherence. This works for all a ≤ b without induction or a flatness assumption.",
+   "uses": [
+    "def-weil-pbc-bounded-constructible-tower",
+    "lem-pod-derived-exact-square-composition",
+    "lem-pur-exact-restriction-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Section 6.5, completed ring convention preceding Definition 6.5.1; explicit coefficient-presentation supplement for the detailed-category clause of Proposition 6.8.11(3). The finite quotient formula and limit normalization are the integralCoefficientULift_exists and integralDetailedCoefficientComparison_exists constructions read in Sheaf.Paper.IntegralStratifiedPerfectCharacterization."
+   }
+  },
+  {
+   "text": "Apply pro-etale countable-products exactness to each completed ring. Its product-of-epimorphisms clause makes the countable limit functor preserve epimorphisms; with left exactness this gives CountableAB4Star. The derived-product existence theorem supplies products of both reduction families.",
    "uses": [
     "lem-weil-proetale-countable-products-exact",
     "lem-weil-derived-limit-existence"
@@ -144,11 +106,11 @@
    "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Propositions 3.1.9, 3.2.3(1) and 4.2.8, exact countable products; derived product consequence as in the cited existence node"
+    "place": "Section 6.5, completed ring convention preceding Definition 6.5.1; explicit coefficient-presentation supplement for the detailed-category clause of Proposition 6.8.11(3). The finite quotient formula and limit normalization are the integralCoefficientULift_exists and integralDetailedCoefficientComparison_exists constructions read in Sheaf.Paper.IntegralStratifiedPerfectCharacterization."
    }
   },
   {
-   "text": "An equivalence $F=D(C)$ preserves these products: with inverse $G$, the bijections $\\operatorname{Hom}(X,F(\\prod M_n))\\simeq\\operatorname{Hom}(GX,\\prod M_n)\\simeq\\prod_n\\operatorname{Hom}(GX,M_n)\\simeq\\prod_n\\operatorname{Hom}(X,FM_n)$ exhibit $F(\\prod M_n)$ as their product, with projections $F(\\mathrm{pr}_n)$. Insert the level comparisons from steps 7–9. The first arrow of the Roos diagram has components $c_n$, which agree by step 8. The second arrow has nth component $\\mathrm{pr}_n-t_n\\mathrm{pr}_{n+1}$. Additivity of $F$ and the transition identity of step 9 identify this component with the corresponding one for the transported tower. Product uniqueness makes both squares commute. Applying the inverse equivalence gives the converse identification. This proves compatibility of the stated product Roos diagrams, without asserting that either diagram extends to a distinguished triangle or asserting any completeness membership.",
+   "text": "An equivalence preserves products. Compose its canonical product comparison with the product of the inverse level isomorphisms. Each projection is F(pr_n) followed by beta_n inverse. The unit equation identifies the first Roos arrow after all projections. The transition equation identifies the product shifts after all projections. Additivity then identifies their differences from the identity, which are the actual 1-s maps.",
    "uses": [
     "def-weil-derived-limit",
     "def-weil-derived-complete"
@@ -156,30 +118,22 @@
    "elementary": true,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Propositions 3.1.10–3.1.11, product Roos diagrams; projection computation in the convention 1-s of def-weil-derived-limit"
+    "place": "Section 6.5, completed ring convention preceding Definition 6.5.1; explicit coefficient-presentation supplement for the detailed-category clause of Proposition 6.8.11(3). The finite quotient formula and limit normalization are the integralCoefficientULift_exists and integralDetailedCoefficientComparison_exists constructions read in Sheaf.Paper.IntegralStratifiedPerfectCharacterization."
    }
   }
  ],
  "proof_deps": [
   "def-weil-l-adic-coefficient-extension",
-  "lem-weil-l-adic-extension-integers-dvr",
-  "lem-weil-valued-dvr-finite-quotients",
-  "def-weil-pbc-proetale-site",
-  "def-weil-pbc-proetale-modules",
-  "def-weil-pbc-constant-sheaf",
-  "lem-pur-proetale-finite-constant-sections",
   "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-proetale-modules",
   "def-weil-completed-integral-coefficients",
   "def-pur-sheaf-inverse-limit",
   "def-pc-sheaf-restrict-scalars",
-  "lem-sfb-ring-isomorphism-tensor-transport",
   "lem-sf-exact-functor-derived-triangulated",
-  "def-weil-abstract-derived-category",
-  "lem-pc-kflat-resolution",
-  "lem-pur-derived-change-of-rings",
-  "def-pur-sheaf-tensor-product",
-  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
-  "def-weil-integral-reduction-tower",
+  "def-weil-pbc-bounded-constructible-tower",
+  "lem-pod-derived-exact-square-composition",
+  "lem-pur-exact-restriction-composition",
   "lem-weil-proetale-countable-products-exact",
   "lem-weil-derived-limit-existence",
   "def-weil-derived-limit",
@@ -188,7 +142,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Section 6.5 coefficient convention and Lemma 4.2.12; explicit universe, inverse-limit, scalar and unit-normalization arguments, supplemented by the cited Stacks-derived tools. Proposition 6.8.11(3) is the parent application, not a proof of this comparison."
+  "place": "Section 6.5 coefficient convention; G3 proof using quotient representatives, limit universal properties, exact restriction, adjunction uniqueness, derived-square coherence and product projections."
  },
  "mathlib_searches": [
   {
@@ -352,14 +306,7 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-l-adic-extension-integers-dvr",
-  "lem-weil-valued-dvr-finite-quotients",
-  "lem-pur-proetale-finite-constant-sections",
-  "lem-sfb-ring-isomorphism-tensor-transport",
   "lem-sf-exact-functor-derived-triangulated",
-  "lem-pc-kflat-resolution",
-  "lem-pur-derived-change-of-rings",
-  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
   "lem-weil-proetale-countable-products-exact"
  ],
  "reviewed": {
@@ -400,5 +347,15 @@
   "group": "NR",
   "result": "fix",
   "note": "Mathematics correct clause by clause (e_n unique with representative formula and transitions; kappa_n = sheafified constants-to-functions; level = e_n∘kappa_n^-1; unique projection-normalized e_T; exact inverse scalar equivalences; derived bound preservation; DerivedCompatible pinned: r identity on sections, alpha unique via unit/homEquiv, transitions for all a<=b, Roos product iso fixed by projections with actual 1-s). Fault fixed (H2/H3 dependency inversion): module imported CompletedCoefficientPresentationTransport -> IntegralStratifiedPerfectCharacterization and used integralCoefficientULift (.choose in parent theorem module) and purCoefficientIso (def node with the parent in stmt_deps), but the parent lem-weil-pbc-integral-stratified-perfect-characterization has this item in proof_deps, so the parent module can never import it. FIX: dropped that import (now BoundedConstructibleComplete + CompletedIntegralConstantMapOfUniverses, closure checked free of parent/transport); level/DerivedCompatible take q; theorem keeps the existence-and-uniqueness conjuncts and quantifies the remaining clauses over the uniquely normalized q and e; attribute [-instance] integralOperationsAbLocallyBijective to avoid a stuck universe; docstrings and lean record statement/note updated (refit_record clean, stmt_deps/proof untouched). nt_compile of the fixed file: clean, 6.8 s. Advisories: non-stmt_dep pbc declarations used (pre-existing, no cycle); E:Type u with Scheme.{u} forced by the pbc datum and the same in the parent; second reading done by the same worker."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261021T143906-L-17757",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
