@@ -11,7 +11,7 @@ public import Mathlib.Data.Matrix.Mul
 public import Mathlib.LinearAlgebra.Matrix.Defs
 public import Mathlib.RingTheory.DiscreteValuationRing.Basic
 public import Mathlib.RingTheory.Finiteness.Defs
-import Mathlib.LinearAlgebra.FreeModule.Basic
+import Mathlib.LinearAlgebra.Dimension.Free
 import Mathlib.LinearAlgebra.FreeModule.PID
 
 /-!
@@ -74,6 +74,34 @@ theorem exists_finite_matrix_model_of_projective_over_dvr
       (∀ (i : ℤ) (x : Fin (n i) → R),
         (P.d i (i + 1)).hom (e i x) = e (i + 1) ((D i).mulVec x)) ∧
       (∀ i : ℤ, D (i + 1) * D i = 0) := by
-  sorry
+  have _hab := hab
+  classical
+  have : ∀ i : ℤ, Module.IsTorsionFree R (P.X i) := fun i ↦ by
+    obtain ⟨s, hs⟩ := (inferInstance : Module.Projective R (P.X i)).out
+    exact Function.Injective.moduleIsTorsionFree s hs.injective s.map_smul
+  let n : ℤ → ℕ := fun i ↦ Module.finrank R (P.X i)
+  let c := fun i : ℤ ↦ Module.finBasis R (P.X i)
+  let e := fun i : ℤ ↦ (c i).equivFun.symm
+  let D := fun i : ℤ ↦ LinearMap.toMatrix (c i) (c (i + 1)) (P.d i (i + 1)).hom
+  refine ⟨n, e, D, ?_, ?_, ?_⟩
+  · intro i hi
+    have := ModuleCat.subsingleton_of_isZero (hP i hi)
+    exact Module.finrank_eq_zero_of_subsingleton R (P.X i)
+  · intro i x
+    apply (c (i + 1)).equivFun.injective
+    change (c (i + 1)).equivFun ((P.d i (i + 1)).hom ((c i).equivFun.symm x)) =
+      (c (i + 1)).equivFun ((c (i + 1)).equivFun.symm ((D i).mulVec x))
+    rw [LinearEquiv.apply_symm_apply, Module.Basis.equivFun_apply]
+    simpa only [← Module.Basis.equivFun_apply, LinearEquiv.apply_symm_apply] using
+      ((P.d i (i + 1)).hom.toMatrix_mulVec_repr (c i) (c (i + 1))
+        ((c i).equivFun.symm x)).symm
+  · intro i
+    change LinearMap.toMatrix (c (i + 1)) (c (i + 1 + 1))
+        (P.d (i + 1) (i + 1 + 1)).hom *
+      LinearMap.toMatrix (c i) (c (i + 1)) (P.d i (i + 1)).hom = 0
+    rw [← LinearMap.toMatrix_comp]
+    have hz : (P.d (i + 1) (i + 1 + 1)).hom.comp (P.d i (i + 1)).hom = 0 := by
+      exact congrArg ModuleCat.Hom.hom (P.d_comp_d i (i + 1) (i + 1 + 1))
+    rw [hz, map_zero]
 
 end CochainComplex
