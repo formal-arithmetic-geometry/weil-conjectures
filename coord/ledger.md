@@ -23916,3 +23916,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:46 L: merged deliver/NI/def-pur-affine-line-purity-comparison (stage 2; reviewer PASS; parallel immutable checks)
 - 22:48 L: merged deliver/NK/lem-sfb-ultrametric-orthogonal-extension (stage 2; reviewer PASS; parallel immutable checks)
 - 22:49 L: merged deliver/NN/lem-sfb-finite-ultrametric-best-approximation (stage 2; reviewer PASS; parallel immutable checks)
+- 22:49 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
