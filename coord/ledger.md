@@ -20748,3 +20748,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:39 L: returned deliver/Q134/thm-nagata-blowup-flat-base-change (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED thm-nagata-blowup-flat-base-change: cited node def-nag)
 - 07:39 L: returned deliver/NF/lem-fix-site-perfect-scalar-hom (reviewer RETURN: L: independent stage-2 immutable head 56770ebd5b19: H2/H12 theorem-stmt_dep: the statement uses plain defs RingedTensorM)
 - 07:39 L: returned deliver/Q11/lem-sfb-constructible-local-tor-etale-origin (reviewer RETURN: L: independent stage-2 immutable head 637a5d5f856b: H13: delivery rebinds def-weil-derived-cohomology-sheaves (live N5 r)
+- 07:39 L: returned deliver/Q43/def-wf-internal-hom (reviewer RETURN: L: independent stage-2 immutable head 7d88d09401f7: Item Lean is right in substance: B, D_comp and its raw rationalizati)
