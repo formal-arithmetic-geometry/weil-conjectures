@@ -28,9 +28,136 @@
   "def-sbc-standard-tstructure-derived-category",
   "sk-thm-pe-direct-image-comparison"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For either site of either scheme $T$, its constant-$A$ module-sheaf category is Grothendieck abelian by [lem-weil-pbc-ring-sheaves-grothendieck], applied to the small site and its constant ring sheaf in the common universe. Its small sums are exact: write a sum as the filtered colimit of the finite partial sums, indexed by finite subsets of the indexing set. Finite sums of short exact sequences are exact in an abelian category, and filtered colimits are exact by the cited Grothendieck assertion. This includes the empty sum, which is zero. By [lem-kun-grothendieck-derived-coproducts], the termwise sum of any chosen representative complexes, with its termwise coprojections, represents their ambient coproduct in the unbounded derived category.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-kun-grothendieck-derived-coproducts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tags 079Q (remark-existence-D), 079B (definition-grothendieck-conditions), and 07D9 (lemma-derived-products), (1)-(2)"
+   }
+  },
+  {
+   "text": "Exactness of sums in step 1 gives natural identifications $\\ker(\\bigoplus_s d_s^q)=\\bigoplus_s\\ker d_s^q$, $\\operatorname{im}(\\bigoplus_s d_s^{q-1})=\\bigoplus_s\\operatorname{im}d_s^{q-1}$, and the corresponding cokernel identification. Taking their quotient gives $H^q(\\bigoplus_sK_s)\\cong\\bigoplus_sH^q(K_s)$. The formulas of [def-kun-truncations] now give termwise isomorphisms $\\bigoplus_s\\tau_{\\le b}K_s\\cong\\tau_{\\le b}(\\bigoplus_sK_s)$ and $\\bigoplus_s\\tau_{\\ge a}K_s\\cong\\tau_{\\ge a}(\\bigoplus_sK_s)$. In the boundary degree these are the just-described kernel and cokernel maps; elsewhere they are identities or the unique map between zero objects. Thus they commute with the inclusion $\\tau_{\\le b}K_s\\to K_s$ and quotient $K_s\\to\\tau_{\\ge a}K_s$, and are natural in the complexes. Step 1 passes these computations and their coprojections to the derived category. The cohomology formula also shows that a coproduct of objects in a common interval $[a,b]$ is in that interval.",
+   "uses": [
+    "def-kun-truncations",
+    "lem-kun-grothendieck-derived-coproducts"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tag 07D9, lemma-derived-products (2), with the explicit good-truncation formulas of def-kun-truncations"
+   }
+  },
+  {
+   "text": "By [det-pe-classical-sheaves-modules], on module sheaves $F_T=\\nu_T^*$ is exact, fully faithful and left adjoint to $\\nu_{T,*}$. It preserves small sheaf sums: for every module sheaf $M$, adjunction identifies maps from $F_T(\\bigoplus_sN_s)$ to $M$ with $\\prod_s\\operatorname{Hom}(N_s,\\nu_{T,*}M)=\\prod_s\\operatorname{Hom}(F_TN_s,M)$, including the empty family. Apply this preservation termwise to representatives and use [lem-kun-grothendieck-derived-coproducts] on both sites. The induced functor $F_T$ on unbounded derived categories therefore preserves all the specified ambient coproducts, with the canonical comparison determined by their coprojections. By [lem-weil-pbc-exact-functor-bounded-below], $H^q(F_TB)=F_TH^q(B)$ naturally.",
+   "uses": [
+    "det-pe-classical-sheaves-modules",
+    "lem-kun-grothendieck-derived-coproducts",
+    "lem-weil-pbc-exact-functor-bounded-below"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 5.1.2 and the comparison geometric morphism; module-sheaf form det-pe-classical-sheaves-modules; derived coproducts: Stacks Tag 07D9"
+   }
+  },
+  {
+   "text": "Suppose that every $K_s$ has classical cohomology. For each $q$ choose étale module sheaves $M_s^q$ and isomorphisms $F_TM_s^q\\cong H^q(K_s)$, using [det-pe-classical-sheaves-modules]. Steps 2 and 3 give $H^q(\\bigoplus_sK_s)\\cong\\bigoplus_sF_TM_s^q\\cong F_T(\\bigoplus_sM_s^q)$, so the coproduct is classical by [sk-def-pe-classical-definition]. The cohomology of a good truncation is either the original cohomology or zero [def-kun-truncations]; zero is $F_T0$ since $F_T$ is exact. Thus both good truncations remain classical. This proves all closure assertions for arbitrary, possibly unbounded, classical inputs, without claiming that such an input itself has an unbounded étale origin.",
+   "uses": [
+    "det-pe-classical-sheaves-modules",
+    "sk-def-pe-classical-definition",
+    "def-kun-truncations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 5.1.2, Definition 5.1.3; termwise cohomology and good truncations as in steps 2-3"
+   }
+  },
+  {
+   "text": "The bounded-below derived unit needed in [det-pe-classical-derived-equivalence] holds for the discrete commutative ring $A$ by [sk-prop-sf-comparison]. Apply that equivalence to each classical $L_s\\in D_X^{\\ge a}\\cap D_X^{\\le b}$. It supplies a bounded-below étale object $B_s$ and a counit isomorphism $i_s:F_XB_s\\xrightarrow{\\sim}L_s$. For $q<a$ or $q>b$, step 3 gives $F_XH^q(B_s)\\cong H^q(L_s)=0$. Full faithfulness on sheaves [det-pe-classical-sheaves-modules] reflects zero objects: if $F_TM=0$, then faithfulness forces $1_M=0$, so $M=0$. Hence $H^q(B_s)=0$ outside $[a,b]$, and these origins have the required bounds, in the sense of [def-sbc-standard-tstructure-derived-category]. Any other choices of $B_s,i_s$ with these properties can be used in the remaining steps.",
+   "uses": [
+    "sk-prop-sf-comparison",
+    "det-pe-classical-derived-equivalence",
+    "det-pe-classical-sheaves-modules",
+    "lem-weil-pbc-exact-functor-bounded-below",
+    "def-sbc-standard-tstructure-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Corollary 5.1.6 and Proposition 5.2.6 (1)-(3), used through the existing constant-ring module comparison nodes"
+   }
+  },
+  {
+   "text": "Put $B=\\bigoplus_s B_s$. By step 2, $B$ remains in $[a,b]$, so $B$ and all $B_s$ are bounded below. Properness [def-weil-proper-morphism] includes finite type, which includes quasi-compactness [def-weil-finite-type-morphism]; it also includes separatedness, which gives quasi-separatedness by [lem-pc-separated-quasi-separated]. Thus [sk-thm-pe-direct-image-comparison] supplies the natural isomorphisms $\\theta_{B_s}$ and $\\theta_B$. Step 3 identifies $F_XB$ as the coproduct of the $F_XB_s$; composing its coprojections with the isomorphisms $i_s$ gives the unique isomorphism $t:F_XB\\to\\bigoplus_sL_s$ with $tF_X(\\iota_s)=\\iota'_s i_s$. Indeed its inverse is induced by the maps $F_X(\\iota_s)i_s^{-1}$, and the two composites are identities on every coprojection. Likewise step 3 gives the canonical isomorphism $\\alpha_Y:\\bigoplus_sF_YEB_s\\to F_Y(\\bigoplus_sEB_s)$, characterized by $\\alpha_Y\\kappa_s=F_Y(j_s)$, where $j_s:EB_s\\to\\bigoplus_sEB_s$ and $\\kappa_s:F_YEB_s\\to\\bigoplus_sF_YEB_s$.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism",
+    "lem-pc-separated-quasi-separated",
+    "sk-thm-pe-direct-image-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A6, lemma-morphism-comparison; bounded-below natural module form: sk-thm-pe-direct-image-comparison; proper implies separated and finite type: Tag 01W1"
+   }
+  },
+  {
+   "text": "The assumed preservation of all small étale coproducts by $E$ makes $\\sigma_B^E:\\bigoplus_sEB_s\\to EB$ an isomorphism. Consequently the displayed composite $C=G(t)\\theta_BF_Y(\\sigma_B^E)\\alpha_Y\\bigl(\\bigoplus_s(\\theta_{B_s}^{-1}G(i_s)^{-1})\\bigr)$ is an isomorphism: the factors $t,\\theta_B,\\sigma_B^E,\\alpha_Y,i_s,\\theta_{B_s}$ are all isomorphisms by the hypothesis and the preceding steps, functors preserve inverse equations, and the sum of inverse maps is inverse to the sum of the maps. It remains to verify that $C$ is the specified canonical comparison.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-proper/sk-prop-ctf-finite-proper-localizing.proof.md",
+    "place": "Transfer, compatibility with sums; the étale coproduct theorem is the explicit hypothesis on E in this item"
+   }
+  },
+  {
+   "text": "Let $k_s:GL_s\\to\\bigoplus_sGL_s$ be a coprojection. The definitions of a sum of maps, of $\\alpha_Y$, and of $\\sigma_B^E$ give $Ck_s=G(t)\\theta_BF_Y(E\\iota_s)\\theta_{B_s}^{-1}G(i_s)^{-1}$. Naturality of the canonical transformation of [sk-thm-pe-direct-image-comparison] at $\\iota_s:B_s\\to B$ is the identity $\\theta_BF_Y(E\\iota_s)=G(F_X\\iota_s)\\theta_{B_s}$. Substitution and cancellation therefore give\n$$Ck_s=G(t)G(F_X\\iota_s)G(i_s)^{-1}=G(tF_X(\\iota_s)i_s^{-1})=G(\\iota'_s).$$\nThe canonical coproduct comparison $\\sigma_L$ is the unique map with these composites with all $k_s$. The universal property of the coproduct thus gives $C=\\sigma_L$, proving the stated factorization for every allowed choice of the origins and proving that the actual comparison is invertible.",
+   "uses": [
+    "sk-thm-pe-direct-image-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-proper/sk-prop-ctf-finite-proper-localizing.proof.md",
+    "place": "Transfer, compatibility with sums: explicit naturality calculation for the bounded-below comparison; comparison itself: Stacks Tag 09A6"
+   }
+  },
+  {
+   "text": "If the family is empty, step 1 gives zero as its ambient coproduct on both sites, and steps 2-4 give zero cohomology, classicality, and the asserted truncation comparisons. In step 5 there are no origins to choose, and $B=0$ lies in every interval $[a,b]$, so $\\theta_B$ in step 6 is defined and invertible. The assumed étale sum comparison, $\\alpha_Y$, and $t$ are still isomorphisms. The coproduct universal property used in step 8 has no component equations and still gives a unique map out of the zero source; hence the same factorization proves the assertion for the empty family. The only derived essential-image result used in this proof was the bounded-below equivalence in step 5.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-proper/sk-prop-ctf-finite-proper-localizing.proof.md",
+    "place": "Transfer, empty-family case of the bounded classical coproduct calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-truncations",
+  "def-sbc-standard-tstructure-derived-category",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "det-pe-classical-derived-equivalence",
+  "det-pe-classical-sheaves-modules",
+  "lem-kun-grothendieck-derived-coproducts",
+  "lem-pc-separated-quasi-separated",
+  "lem-weil-pbc-exact-functor-bounded-below",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "sk-def-pe-classical-definition",
+  "sk-prop-sf-comparison",
+  "sk-thm-pe-direct-image-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-proper/sk-prop-ctf-finite-proper-localizing.proof.md",
+  "place": "Transfer: bounded classical coproduct calculation, using existing comparison nodes and termwise coproducts (Stacks 07D9); explicit coprojection identity supplied here."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -94,10 +221,52 @@
    "results": "; 12 hits: CategoryTheory.Limits.sigmaComparison, CategoryTheory.Limits.ι_comp_sigmaComparison, CategoryTheory.Limits.sigmaComparison_map_desc, CategoryTheory.Limits.ι_comp_sigmaComparison_assoc, CategoryTheory.Limits.sigmaComparison_map_desc_assoc, CategoryTheory.Limits.ι_comp_sigmaComparison_apply, CategoryTheory.Limits.instIsIsoSigmaComparison, CategoryTheory.Limits.map_ι_comp_inv_sigmaComparison",
    "date": "2026-10-21",
    "verdict": "no match: the actual hits give only generic coproduct infrastructure or site/t-structure inputs, not this coefficient-specific derived comparison or its hypotheses"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedLowerStar|etaleOriginHomology|mapDerivedCategory_preservesCoproducts",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: generic coproduct or exact-derived-functor infrastructure; no classical pro-étale bounded-sum transport or specified comparison factorization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "coproducts of classical pro-etale complexes and bounded etale derived comparison",
+   "results": "8 hits: CategoryTheory.Limits.coprodComparison, CategoryTheory.Limits.sigmaComparison, CategoryTheory.Sheaf.instHasFiniteCoproducts, Algebra.FormallyEtale.instTensorProduct, CategoryTheory.Limits.coprodComparisonNatTrans, AlgebraicGeometry.LocallyRingedSpace.coproduct, CategoryTheory.Limits.coprodComparison_natural_assoc, AlgebraicGeometry.Scheme.instHasPullbacksEtale",
+   "date": "2026-10-21",
+   "verdict": "no match: generic coproduct or exact-derived-functor infrastructure; no classical pro-étale bounded-sum transport or specified comparison factorization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sigmaComparison\"",
+   "results": "12 hits: CategoryTheory.Limits.sigmaComparison, CategoryTheory.Limits.ι_comp_sigmaComparison, CategoryTheory.Limits.sigmaComparison_map_desc, CategoryTheory.Limits.ι_comp_sigmaComparison_assoc, CategoryTheory.Limits.sigmaComparison_map_desc_assoc, CategoryTheory.Limits.ι_comp_sigmaComparison_apply, CategoryTheory.Limits.instIsIsoSigmaComparison, CategoryTheory.Limits.map_ι_comp_inv_sigmaComparison",
+   "date": "2026-10-21",
+   "verdict": "no match: generic coproduct or exact-derived-functor infrastructure; no classical pro-étale bounded-sum transport or specified comparison factorization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a proper scheme morphism, derived pro-etale direct image preserves coproducts of uniformly bounded classical complexes, via naturality of the etale comparison",
+   "results": "8 hits: AlgebraicGeometry.instFinitaryExtensiveScheme, AlgebraicGeometry.instHasFiniteCoproductsOverSchemeTopMorphismProperty, AlgebraicGeometry.instPreservesColimitOverSchemeTopMorphismPropertyOverForget, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.preservesColimit_Γ, AlgebraicGeometry.HasAffineProperty.coprodDesc_affineAnd, AlgebraicGeometry.instPreservesColimitsOfShapeOppositeCommRingCatSchemeDiscreteSpecOfFinite, AlgebraicGeometry.Scheme.instHasPullbacksEtale",
+   "date": "2026-10-21",
+   "verdict": "no match: generic coproduct or exact-derived-functor infrastructure; no classical pro-étale bounded-sum transport or specified comparison factorization"
+  },
+  {
+   "tool": "grep",
+   "query": "sigmaComparison|homologyFunctor.*[Cc]olimit|mapDerivedCategory",
+   "results": "subdirectory Algebra/Homology; 10 hits: Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: generic coproduct or exact-derived-functor infrastructure; no classical pro-étale bounded-sum transport or specified comparison factorization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact etale to pro-etale inverse image on derived categories preserves arbitrary direct sums, reflects cohomological bounds, and its bounded-below direct image comparison is natural",
+   "results": "8 hits: CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Functor.instLiftingHomotopyCategoryIntUpDerivedCategoryQhQuasiIsoCompMapHomotopyCategoryMapDerivedCategory",
+   "date": "2026-10-21",
+   "verdict": "no match: generic coproduct or exact-derived-functor infrastructure; no classical pro-étale bounded-sum transport or specified comparison factorization"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-finite-proper-classical-coproducts",
@@ -109,12 +278,66 @@
  "blueprint": {
   "from": {
    "node": "det-ctf-finite-proper-localizing",
-   "place": "Étale statements: arbitrary direct sums from finite cohomological dimension; Transfer: compatibility with sums. Extracts returned coproduct proof steps 1 (coefficient identification), 2, 3, 5 (étale sums) and 8.",
+   "place": "Transfer, compatibility with sums: the bounded-below classical/étale comparison and its naturality at coprojections; closure and truncation computations supplying the bounded step of the returned coproduct argument.",
    "via": [
     "lem-sfb-finite-proper-classical-coproducts"
    ]
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-finite-proper-classical-bounded-sums",
+  "worker": "stage1",
+  "summary": "Kept the statement and its explicit étale coproduct hypothesis. Proved termwise sum and truncation assertions, classical closure, bounded origins with reflected bounds, and the specified comparison factorization by an explicit naturality calculation on coprojections, including the empty family. Reused existing nodes throughout; no new nodes.",
+  "blueprint": "Transfer paragraph of det-ctf-finite-proper-localizing: realizes its compatibility-with-sums claim for bounded classical families, without the unsupported unbounded equivalence. Steps 1-4 supply the ambient sum and truncation inputs, step 5 supplies bounded origins, and steps 6-9 give the actual comparison and empty-family calculation.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "Generic theorem for modules over any ringed small site, used to obtain exact filtered colimits in both ambient sheaf categories; the unit does not construct those abelian categories."
+   },
+   {
+    "node": "lem-kun-grothendieck-derived-coproducts",
+    "why": "Generic termwise description of coproducts in a Grothendieck derived category, needed to compute cohomology and good truncations; no unit-specific replacement."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-bounded-below",
+    "why": "Generic cohomology comparison for a termwise exact functor, used to preserve and reflect the prescribed degree bounds; no proper-image theorem is substituted."
+   },
+   {
+    "node": "det-pe-classical-sheaves-modules",
+    "why": "The exact, fully faithful module-sheaf inverse image and its adjunction identify classical sheaves and their sums; this is the underlying comparison tool."
+   },
+   {
+    "node": "sk-prop-sf-comparison",
+    "why": "The bounded-below derived unit verifies the explicit hypothesis of the classical essential-image theorem."
+   },
+   {
+    "node": "det-pe-classical-derived-equivalence",
+    "why": "The bounded-below classical essential-image equivalence produces the bounded étale origins; no unbounded equivalence is used."
+   },
+   {
+    "node": "sk-thm-pe-direct-image-comparison",
+    "why": "The existing natural bounded-below direct-image comparison is the arrow used in the factorization; no unbounded direct-image comparison is substituted."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-kun-grothendieck-derived-coproducts",
+  "lem-weil-pbc-exact-functor-bounded-below",
+  "det-pe-classical-sheaves-modules",
+  "sk-prop-sf-comparison",
+  "det-pe-classical-derived-equivalence",
+  "sk-thm-pe-direct-image-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q06-bd2e00dd1",
+  "group": "Q06",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q06-bd2e00dd1 (reviewer sub-agent of L); spot-checked: I read the item, all 9 steps and every cited statement in full. There are no new nodes. The statement and stmt_deps are identical to live, where the item is still unsplit; it was created by Q60's re-split of lem-sfb-finite-proper-classical-coproducts (merged 06:32), and this item takes over that parent's old steps 2-3 and 8. No repair note exists for this item. Sources checked at the cited places: Stacks 07D9, 079B, 079Q and 09A6 labels verified; BS Lemma 5.1.2, Cor 5.1.6, Prop 5.2.6 and Lemma 5.4.3 (qcqs, D^+), with Remark 5.4.4 confirming that the item rightly asserts no unbounded version; and the blueprint Transfer paragraph of det-ctf-finite-proper-localizing. No SGA is cited. Step 1: Grothendieck categories, so small sums are exact (as filtered colimits of finite sums) and derived sums are computed termwise. Step 2: from the explicit ker/coker truncation formulas, sums commute with cohomology and both good truncations, including the canonical maps. Step 3: the adjunction Hom computation gives sheaf-sum preservation by nu^*, applied termwise for derived sums. Step 4: classical closure, also for unbounded inputs. Step 5: Rnu_* plus the counit of det-pe-classical-derived-equivalence give the origins B_s, whose hypothesis is supplied by sk-prop-sf-comparison; the bounds [a,b] are reflected because a fully faithful F reflects zero objects. Step 6: proper gives qcqs through the proper, finite-type and separated-implies-quasi-separated nodes; theta comes from sk-thm-pe-direct-image-comparison, and t and alpha_Y are built from coprojections. Steps 7-8: I recomputed C k_s = G(t)theta_B F_Y(E iota_s)theta_{B_s}^{-1}G(i_s)^{-1} = G(iota'_s) using naturality of theta on D^+, so C equals sigma_L by uniqueness, for every choice of origins. Step 9: the empty family. Small cases checked: empty family, singleton, a=b, zero ring, f=id. No hypothesis is added. proof_deps equals the union of uses. lem-sfb-finite-classical-localizing (the l^n A case) overlaps but is narrower, so it is not a duplicate. The seven generic tool_uses are accepted: they implement the Transfer paragraph on bounded-below objects, as accepted at the parent review. No changes made."
  }
 }
