@@ -17,9 +17,207 @@
   "def-exchange-projection",
   "def-weil-pbc-adjunction-mate"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work in the specified rational or common-stage categories themselves. The assumed adjunction is the constructible $F\\dashv G$ of [def-weil-exceptional-inverse-image]; its unit and counit therefore have exactly these categories as domain. The given $S,T$ are equivalences. Independently, [lem-pod-weil-frobenius-compact-support-exchange] states that the specified $a=\\operatorname{Ex}_!:TF\\to FS$ is a natural isomorphism on the supplied domains, including the rational/common-stage categories and non-separated $X_0,Y_0$. Thus the last assertion about this particular exchange is already available. Keep its coefficient and finite-Tor domain restrictions throughout. No ambient exceptional adjoint is used.",
+   "uses": [
+    "def-weil-exceptional-inverse-image",
+    "lem-pod-weil-frobenius-compact-support-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
+    "place": "Sentence 1: exceptional adjunction and equivariant algebraic comparisons; detailed mate calculation"
+   }
+  },
+  {
+   "text": "Apply [def-weil-pbc-adjunction-mate] with both adjunctions equal to $F\\dashv G$, the non-adjoint sides $S,T$, and square $\\alpha=a^{-1}:FS\\to TF$. Its displayed component formula is precisely $b_L=GT(\\varepsilon_L)\\,G(a^{-1}_{GL})\\,\\eta_{SGL}$. In [lem-weil-mate-iso-along-equivalences] take $L=L'=F$, $R=R'=G$, $G_{\\rm there}=S$, $G'_{\\rm there}=T$, and $\\theta=a^{-1}$. The first side is an equivalence and the second is fully faithful because $T$ is an equivalence. That theorem makes this same $b:SG\\to GT$ a natural isomorphism. This uses the equivalence hypotheses, not a general assertion that square mates preserve isomorphisms.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "lem-weil-mate-iso-along-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
+    "place": "Sentence 1: exceptional adjunction and equivariant algebraic comparisons; detailed mate calculation"
+   }
+  },
+  {
+   "text": "The unit identity of [lem-pur-mate-unit-compatibility], with $\\alpha=a^{-1}$, gives $b_{FK}S(\\eta_K)=G(a_K^{-1})\\eta_{SK}$. Postcompose with $G(a_K)$ to obtain $G(a_K)b_{FK}S(\\eta_K)=\\eta_{SK}$. The transpose characterization in [def-weil-pbc-adjunction-mate] gives $\\varepsilon_{TL}F(b_L)=T(\\varepsilon_L)a^{-1}_{GL}$. Precompose with $a_{GL}$ to obtain $\\varepsilon_{TL}F(b_L)a_{GL}=T(\\varepsilon_L)$. These are the two asserted mate equations, with every component typed in the constructible categories.",
+   "uses": [
+    "lem-pur-mate-unit-compatibility",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
+    "place": "Sentence 1: exceptional adjunction and equivariant algebraic comparisons; detailed mate calculation"
+   }
+  },
+  {
+   "text": "Set $\\theta_{GL}=G(\\theta_L)b_L$, an isomorphism since both factors are isomorphisms. For a Weil arrow $u:L\\to L'$, naturality of $b$ and the equation $u\\theta_L=\\theta_{L'}T(u)$ give\n$$G(u)G(\\theta_L)b_L=G(\\theta_{L'})G(Tu)b_L=G(\\theta_{L'})b_{L'}S(G(u)).$$\nThus $G(u)$ is a Weil arrow. Its identity and composition laws are the ones of the same underlying $G$. The analogous computation with naturality of $a$ gives the stated lift $\\theta_{FK}=F(\\theta_K)a_K$. These are actual functors on the categories of pairs in [def-weil-weil-sheaf-complex].",
+   "uses": [
+    "def-weil-weil-sheaf-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
+    "place": "Sentence 1: exceptional adjunction and equivariant algebraic comparisons; detailed mate calculation"
+   }
+  },
+  {
+   "text": "For $K$ on $X$, the structure of $GFK$ is $GF(\\theta_K)G(a_K)b_{FK}$. By Step 3 and naturality of $\\eta$,\n$$\\theta_{GFK}S(\\eta_K)=GF(\\theta_K)\\eta_{SK}=\\eta_K\\theta_K.$$\nFor $L$ on $Y$, the structure of $FGL$ is $FG(\\theta_L)F(b_L)a_{GL}$. Naturality of $\\varepsilon$ and Step 3 give\n$$\\varepsilon_L\\theta_{FGL}=\\theta_L\\varepsilon_{TL}F(b_L)a_{GL}=\\theta_LT(\\varepsilon_L).$$\nConsequently the original unit and counit are Weil morphisms, with no replacement of their underlying maps.",
+   "uses": [
+    "def-weil-weil-sheaf-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
+    "place": "Sentence 1: exceptional adjunction and equivariant algebraic comparisons; detailed mate calculation"
+   }
+  },
+  {
+   "text": "The two triangle equations are the original equations of the assumed $F\\dashv G$ and still hold after forgetting. They hold as equations of Weil morphisms as well, since the forgetful functor of [def-weil-weil-sheaf-complex] is faithful. Explicitly a Weil map $h:FK\\to L$ has transpose $G(h)\\eta_K$, which is Weil by Steps 4–5; a Weil map $v:K\\to GL$ has inverse transpose $\\varepsilon_LF(v)$, also Weil. These restrictions of the original Hom bijections are inverse by the triangles. This supplies the lifted adjunction, including naturality, rather than just equivariant functors.",
+   "uses": [
+    "def-weil-weil-sheaf-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
+    "place": "Sentence 1: exceptional adjunction and equivariant algebraic comparisons; detailed mate calculation"
+   }
+  },
+  {
+   "text": "We will use the following elementary equation test. If $H,J$ have Frobenius comparisons $c_H:PH\\to HQ$, $c_J:PJ\\to JQ$, a natural transformation $d:H\\to J$ induces a map of pairs whenever\n$$d_{QK}c_{H,K}=c_{J,K}P(d_K).$$\nIndeed multiply this equality on the left by $J(\\theta_K)$ and use naturality $d_KH(\\theta_K)=J(\\theta_K)d_{QK}$. For Weil arrows $u,v$, $(vu)\\theta=v\\theta'P(u)=\\theta''P(vu)$. If $u$ is invertible, multiplying $u\\theta=\\theta'P(u)$ by the inverses gives $u^{-1}\\theta'=\\theta P(u^{-1})$. Applying a lifted functor sends the equation for $u$ to the equation for its image, by naturality of that functor's comparison. Thus composition, both whiskerings by lifted functors, and inverses preserve equivariance; the forgetful functor reflects isomorphisms.",
+   "uses": [
+    "def-weil-weil-sheaf-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
+    "place": "Sentence 1: exceptional adjunction and equivariant algebraic comparisons; detailed mate calculation"
+   }
+  },
+  {
+   "text": "For ordinary adjunctions put $L=Lf^*$, $R=Rf_*$. Use only the constructible domains of the ordinary adjunction in [fix-prop-adjunctions](1). The comparison $P_XL\\simeq LP_Y$ is pullback composition in the Frobenius square. By the explicit definition of $\\operatorname{Ex}_*$ in [def-exchange-projection], the mate of its inverse is exactly the standard comparison $P_YR\\to RP_X$: its transpose is the pullback square followed by the ordinary counit. Consequently the calculations in Steps 3–6, replacing $(F,G,S,T)$ by $(L,R,P_Y,P_X)$, prove equivariance of both ordinary adjunction maps for the specified standard lifts. No exceptional-admissibility clause of [fix-prop-adjunctions] is invoked.",
+   "uses": [
+    "fix-prop-adjunctions",
+    "def-exchange-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
+    "place": "Sentence 1: exceptional adjunction and equivariant algebraic comparisons; detailed mate calculation"
+   }
+  },
+  {
+   "text": "For pullbacks along composable morphisms, expand the Frobenius comparison using the pullback-composition maps. The two maps from $P_XL(gf)^*$ to $Lf^*Lg^*P_Z$ are the two associative expansions of that composition; the associativity identity of [lem-pod-integral-pullback-composition] identifies them before rationalization. Their rational images and their common-stage classes are therefore equal, by the definitions in [def-weil-derived-pullback-tensor-hom]. This is the equation test of Step 7 for the pullback composition comparison. For tensor the composition compatibility and naturality of $\\mu$ in [lem-pur-derived-pullback-tensor-iso] give the same equation test for tensor-pullback comparisons; its associativity, symmetry and unit clauses give it for the tensor structure comparisons. All inputs and outputs are restricted to the already specified constructible domains.",
+   "uses": [
+    "lem-pod-integral-pullback-composition",
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
+    "place": "Sentence 1: exceptional adjunction and equivariant algebraic comparisons; detailed mate calculation"
+   }
+  },
+  {
+   "text": "Frobenius is semilinear over $k$, so apply the $k$-linear diagram theorems after the following relabeling. Replace the structural map $a_W:W\\to\\operatorname{Spec}k$ at a source corner of $g_W$ by $a_Wg_W$. Then $g_W$ to the original corner is $k$-linear, and a morphism $r$ between two such relabeled corners is $k$-linear because $rg_W=g_Vr$. These are still finite-type $k$-schemes: $g_W$ identifies each relabeled scheme with its original one. The sites, constant coefficient categories and underlying operation maps are unchanged, since the definitions depend on the underlying scheme morphisms. Thus all Frobenius faces of a composition diagram or exchange cube are diagrams to which [fix-lem-exchanges] applies. Its hypotheses require separated finite-type arrows and finite-type schemes, not separated structure maps $a_W$. Base-changed compactifications and the isomorphism faces retain the required arrow hypotheses.",
+   "uses": [
+    "fix-lem-exchanges",
+    "def-exchange-projection",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
+    "place": "Sentence 1: exceptional adjunction and equivariant algebraic comparisons; detailed mate calculation"
+   }
+  },
+  {
+   "text": "Apply [fix-lem-exchanges](1),(2),(4) to the relabeled diagrams of Step 10, first with $P=R(-)_*$ and then with $P=R(-)_!$. Vertical pasting says that exchange for a composite is the composite of the two exchanges with the direct-image composition comparison inserted. This is exactly Step 7's equation for that comparison. For an exchange square, paste a Frobenius square with it in either order; both composites are exchange for the same outside square by horizontal and vertical pasting. Inserting the pullback and direct-image comparisons just proved equivariant yields Step 7's equation for the exchange transformation itself. Clause (4) intertwines all these maps with compactification refinement comparisons, so this proves the assertion for the specified compact-support operation, independent of its chosen representative. Naturality in the input then inserts its Weil map as in Step 7. The coefficient, witnessed-origin and finite-Tor restrictions in [fix-lem-exchanges] remain in force.",
+   "uses": [
+    "fix-lem-exchanges"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
+    "place": "Sentence 1: exceptional adjunction and equivariant algebraic comparisons; detailed mate calculation"
+   }
+  },
+  {
+   "text": "Write $H(M,N)=R\\mathcal Hom(M,N)$ and $P=P_W$. For the canonical Hom transport $h:PH(M,N)\\to H(PM,PN)$, the definition as transpose under the tensor/Hom adjunction of [sk-def-sf-operations](i) is the identity\n$$\\operatorname{ev}_{PM,PN}(1\\otimes h)\\mu_{M,H(M,N)}=P(\\operatorname{ev}_{M,N}).$$\nHere evaluation has domain $M\\otimes H(M,N)$; this fixes the convention for $h$ in the standard lift. Naturality of evaluation in the isomorphisms $\\theta_M:PM\\to M$, $\\theta_N:PN\\to N$ gives\n$$\\operatorname{ev}_{M,N}(\\theta_M\\otimes H(\\theta_M^{-1},\\theta_N))=\\theta_N\\operatorname{ev}_{PM,PN}.$$\nCompose these equalities. The tensor structure on $M\\otimes H(M,N)$ is $(\\theta_M\\otimes H(\\theta_M^{-1},\\theta_N)h)\\mu$, so the result is exactly $\\operatorname{ev}\\,\\theta_{M\\otimes H}=\\theta_NP(\\operatorname{ev})$. This proves evaluation equivariant on its stated domain, without inferring site-perfectness of arbitrary constructible objects.",
+   "uses": [
+    "sk-def-sf-operations",
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
+    "place": "Sentence 1: exceptional adjunction and equivariant algebraic comparisons; detailed mate calculation"
+   }
+  },
+  {
+   "text": "For the ordinary projection transformation $\\pi$ in [def-exchange-projection], its transpose $a_{u,M,N}$ is tensor-pullback followed by $\\varepsilon_{u,M}\\otimes1$. Both are equivariant by Steps 8–9, and $\\pi=Ru_*(a)\\eta$ is equivariant by Step 7. For the open projection comparison $\\gamma$, compare its pullback under the compactification's Frobenius base-change map with the corresponding $\\gamma'$ for $j'$. Apply $j'^*$ to this square, inserting the open base-change maps $\\beta$ and the tensor/pullback comparisons. By [lem-sf-open-tensor-normalization], $j'^*\\beta$ and the restrictions of $\\gamma,\\gamma'$ are identities after the open-unit identifications; the remaining square is the tensor/pullback composition equation from Step 9. Both original source and target are in the essential image of $j'_!$: use $\\beta$ and $\\gamma'$ to identify the source as well. Full faithfulness of $j'_!$ and its invertible unit, asserted in that same node, therefore reflect the restricted equality. This proves the required open comparison equation. Its strict-coefficient-system version in that node and the supplied higher-stage comparisons in [def-exchange-projection] retain this equation in the specified coefficient constructions. Now $\\operatorname{PF}_{f,K,L}=Rp_*(\\gamma)\\pi_p$ is equivariant by composition and Step 11's compactification independence, on exactly its supplied tensor and finite-Tor domains.",
+   "uses": [
+    "def-exchange-projection",
+    "lem-sf-open-tensor-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
+    "place": "Sentence 1: exceptional adjunction and equivariant algebraic comparisons; detailed mate calculation"
+   }
+  },
+  {
+   "text": "A mate of any comparison now proved equivariant has, by [def-weil-pbc-adjunction-mate], three factors: a whiskered unit, the comparison under the appropriate lifted functors, and a whiskered counit. Steps 5–8 and 7 make each factor a Weil morphism, hence their composite is one. To identify it with an exceptional composition or exchange map, use [lem-weil-pbc-mate-pasting](1) for pasting on the non-adjoint sides, (2) for composition of adjunctions, and (3) for changing the adjunctions by the ordinary or compact-support comparison. These formulas identify the mate of the pasted square with the pasted mates for the very adjunctions fixed here. The bijection of [def-weil-pbc-adjunction-mate] ensures equality with the specified unit–map–counit definition, not merely an unspecified isomorphism of functors. In particular the conjugate of a composition comparison is equivariant; when it is invertible its inverse is equivariant by Step 7.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
+    "place": "Sentence 1: exceptional adjunction and equivariant algebraic comparisons; detailed mate calculation"
+   }
+  },
+  {
+   "text": "These calculations take place in the rational/common-stage categories, so they apply to all their morphisms, including Weil maps without an invariant integral lattice. When a comparison is represented integrally, apply rationalization to its defining composites, and then take their classes over one common finite field, exactly as specified in [def-exchange-projection] and [def-weil-derived-pullback-tensor-hom]. Functors preserve the equality of these composites. Further coefficient extension conjugates source and target by the supplied comparison isomorphisms; the two adjacent intermediate comparisons cancel. Their identity and tower cocycles make the resulting equality independent of the representative. For every comparison whose invertibility is already known on this domain, Step 7 shows that its actual inverse is a Weil arrow, hence gives an isomorphism of Weil pairs. Nothing in this reasoning enlarges the domain or proves invertibility of another exchange or projection map.",
+   "uses": [
+    "def-exchange-projection",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
+    "place": "Sentence 1: exceptional adjunction and equivariant algebraic comparisons; detailed mate calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exchange-projection",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-weil-sheaf-complex",
+  "fix-lem-exchanges",
+  "fix-prop-adjunctions",
+  "lem-pod-integral-pullback-composition",
+  "lem-pod-weil-frobenius-compact-support-exchange",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-pur-mate-unit-compatibility",
+  "lem-sf-open-tensor-normalization",
+  "lem-weil-mate-iso-along-equivalences",
+  "lem-weil-pbc-mate-pasting",
+  "sk-def-sf-operations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
+  "place": "Sentence 1; explicit constructible adjunction calculation following lem-fix-weil-operations.proof.md, using the existing equivalence-mate and pasting nodes; no ambient exceptional adjoint."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,10 +253,45 @@
    "results": "8 hit(s): CategoryTheory.LiftLeftAdjoint.otherMap; CategoryTheory.Adjunction.mkOfUnitCounit_counit; CategoryTheory.LiftRightAdjoint.otherMap; CategoryTheory.Adjunction.derived_unit; CategoryTheory.Adjunction.hasLiftingProperty_iff; CategoryTheory.CommSq.rightAdjointLiftStructEquiv; CategoryTheory.Adjunction.mk; CategoryTheory.Adjunction.mkOfUnitCounit_unit",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An adjunction commuting with two autoequivalences lifts to fixed pair categories with equivariant unit and counit",
+   "results": "CategoryTheory.mateEquiv_apply; CategoryTheory.conjugateEquiv_comm; CategoryTheory.conjugateEquiv_apply_app; CategoryTheory.conjugateEquiv; CategoryTheory.Equivalence.adjointifyη; CategoryTheory.unit_conjugateEquiv; CategoryTheory.conjugateIsoEquiv; CategoryTheory.Functor.adjunction",
+   "date": "2026-10-21",
+   "verdict": "no match: generic adjunction/mate or other Frobenius notions, not all clauses of this constructible Weil comparison statement"
+  },
+  {
+   "tool": "grep",
+   "query": "Weil|Frobenius|mateEquiv_counit|unit_mateEquiv",
+   "results": "Mathlib/CategoryTheory/RegularCategory/Basic.lean; Mathlib/CategoryTheory/RegularCategory/Basic.lean; Mathlib/CategoryTheory/RegularCategory/Basic.lean; Mathlib/CategoryTheory/RegularCategory/Basic.lean; Mathlib/CategoryTheory/RegularCategory/Basic.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean (searched Mathlib/CategoryTheory)",
+   "date": "2026-10-21",
+   "verdict": "no match: generic adjunction/mate or other Frobenius notions, not all clauses of this constructible Weil comparison statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adjunctions lift to categories of objects equipped with an automorphism using the right mate of an invertible commuting square",
+   "results": "CategoryTheory.isRightAdjoint_square_lift_monadic; CategoryTheory.CommSq.rightAdjointLiftStructEquiv; CategoryTheory.isRightAdjoint_square_lift; CategoryTheory.CommSq.instHasLift; CategoryTheory.isLeftAdjoint_square_lift_comonadic; CategoryTheory.CommSq.right_adjoint_hasLift_iff; CategoryTheory.isLeftAdjoint_square_lift; CategoryTheory.CommSq.left_adjoint_hasLift_iff",
+   "date": "2026-10-21",
+   "verdict": "no match: generic adjunction/mate or other Frobenius notions, not all clauses of this constructible Weil comparison statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "CategoryTheory.mateEquiv; CategoryTheory.mateEquiv_counit; CategoryTheory.mateEquiv_counit_symm; CategoryTheory.unit_mateEquiv; CategoryTheory.unit_mateEquiv_symm; CategoryTheory.conjugateEquiv_mateEquiv_vcomp; CategoryTheory.mateEquiv_conjugateEquiv_vcomp; CategoryTheory.mateEquiv_vcomp",
+   "date": "2026-10-21",
+   "verdict": "no match: generic adjunction/mate or other Frobenius notions, not all clauses of this constructible Weil comparison statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weil complexes Frobenius equivariant exceptional inverse image adjunction comparison maps rational coefficients",
+   "results": "CategoryTheory.frobeniusMorphism_iso_of_expComparison_iso; CategoryTheory.expComparison_iso_of_frobeniusMorphism_iso; WittVector.IsocrystalEquiv.mk.inj; WittVector.IsocrystalEquiv.frob_equivariant; WittVector.IsocrystalHom.frob_equivariant; WittVector.IsocrystalEquiv.toLinearEquiv; WittVector.isocrystal_classification; WittVector.frobeniusEquiv_symm_apply",
+   "date": "2026-10-21",
+   "verdict": "no match: generic adjunction/mate or other Frobenius notions, not all clauses of this constructible Weil comparison statement"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "prop-weil-operations",
@@ -75,5 +308,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pod-constructible-mate-coherence",
+  "worker": "stage1",
+  "summary": "Expanded the constructible Frobenius mate and both unit/counit equations; checked the actual operation comparison formulas, diagram pasting, semilinear relabeling, coefficient stages and non-separated bases. Reused all substantive lemmas: no new nodes.",
+  "blueprint": "prop-weil-operations.proof.md sentence 1, via lem-fix-weil-operations: exceptional adjunction, algebraic comparison maps, evaluation and projection; excludes the geometric orientation/trace sentences.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-mate-iso-along-equivalences",
+    "why": "Generic mate-invertibility theorem applied to the assumed constructible adjunction and two Frobenius equivalences; no ambient existence or geometric purity route is substituted."
+   },
+   {
+    "node": "fix-prop-adjunctions",
+    "why": "Uses only clause (1), the ordinary constructible pullback/direct-image adjunction; the exceptional clauses and their admissibility hypotheses are not used."
+   },
+   {
+    "node": "lem-pur-derived-pullback-tensor-iso",
+    "why": "Canonical tensor transport and its composition coherence, used as a generic operation comparison on the given coefficient domains."
+   },
+   {
+    "node": "fix-lem-exchanges",
+    "why": "Identity/pasting and compactification-refinement equations for ordinary and compact-support exchanges; these supply the generic diagram coherence required by the blueprint sentence."
+   },
+   {
+    "node": "sk-def-sf-operations",
+    "why": "Uses only (i), tensor/internal-Hom adjunction and evaluation, to spell out the standard Hom comparison."
+   },
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "Generic open-adjunction normalization of the open tensor comparison, including strict coefficient systems; needed to verify the projection composite, with no exceptional existence premise."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-mate-iso-along-equivalences",
+  "fix-prop-adjunctions",
+  "lem-pur-derived-pullback-tensor-iso",
+  "fix-lem-exchanges",
+  "sk-def-sf-operations",
+  "lem-sf-open-tensor-normalization"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-O1-53f94b429",
+  "group": "O1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O1-53f94b429 (reviewer sub-agent of L); spot-checked: I read the item in full: 15 steps, no new nodes. Its statement is identical to the live/side-live unsplit node that Q108 created on 2026-10-21; this is its first split and no repair note names it. It follows the main-20261015 route: prop-weil-operations sentence 1, then lem-fix-weil-operations, using the mate of Ex_!, mate calculus for the unit and counit, pasting, evaluation naturality and the projection composite. It uses the constructible adjunction of def-weil-exceptional-inverse-image and no admissibility, as the new blueprint statement requires. Checks: Step 2 matches the variables of lem-weil-mate-iso-along-equivalences (S an equivalence, T fully faithful, θ=a^{-1}), so b is invertible. Step 3: the unit identity of lem-pur-mate-unit-compatibility and the transpose clause of def-weil-pbc-adjunction-mate give (Ga)(bF)(Sη)=ηS and (εT)(Fb)(aG)=Tε; I verified both by hand. Steps 4–7 (Weil arrows, η and ε equivariant, lifted adjunction, the equation test d_{QK}c_H=c_JP(d)) recomputed correctly. Step 8: the Ex_* transpose of def-exchange-projection in the Frobenius square is the mate of the inverse pullback comparison, so the substitution is correct, and only clause (1) of fix-prop-adjunctions is used. Step 10: the semilinear relabelling (structure map a_W g_W) makes the Frobenius squares k-linear and of finite type, so fix-lem-exchanges applies. Step 11: pasting with (1), (2), (4) works because g∘g_{Y'}=g_Y∘g. Step 12: the evaluation dinaturality identity is verified. Step 13: lem-sf-open-tensor-normalization (full faithfulness of j_!, j^*γ is the identity) reflects the γ equation. Step 1: lem-pod-weil-frobenius-compact-support-exchange gives a=Ex_! invertible on non-separated bases. No SGA citation; none of the 16 ids (item and its deps) is in the dropped list; proof_deps equals the union of uses; all three search kinds are recorded. Small cases: identity functors, empty schemes, scalar Frobenius without a lattice. I accept the six declared tool_uses. Advisory, not a fault: Steps 8–13 re-prove the ordinary clauses that lem-fix-weil-operations already states unconditionally (citing it would shorten the item); invertibility of Ex_* and of the Hom comparison h is presupposed by the 'standard lifts' in the statement; Step 14 has a cosmetic 'Steps 5–8 and 7' typo. No fixes written."
  }
 }
