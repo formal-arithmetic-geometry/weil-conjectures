@@ -18,9 +18,134 @@
   "def-coef-ringed-tensor-hom-model",
   "lem-sf-ringed-derived-closed-symmetric-monoidal"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $e_{K,L,M}=\\epsilon_{L,M}(1\\otimes\\epsilon_{K,L})\\alpha$, so that $c=\\operatorname{tr}(e)$. The natural bijection of [lem-sf-ringed-derived-closed-symmetric-monoidal] is injective and sends a map $v:X\\to H(K,M)$ back to $\\epsilon_{K,M}(v\\otimes1)$. Consequently equality of maps into $H(K,M)$ can be checked after this operation. For $b:M\\to M'$, naturality of the counit in its target gives $b\\epsilon_{L,M}=\\epsilon_{L,M'}(H(L,b)\\otimes1)$, whence $b e_{K,L,M}=e_{K,L,M'}(H(L,b)\\otimes1\\otimes1)$. Naturality of transposition gives $H(K,b)c_{K,L,M}=c_{K,L,M'}(H(L,b)\\otimes1)$. For $a:K'\\to K$, the parameter naturality of the same adjunction gives $\\epsilon_{K,L}(1\\otimes a)=\\epsilon_{K',L}(H(a,L)\\otimes1)$. Substitute this in $e$ and transpose to obtain $H(a,M)c_{K,L,M}=c_{K',L,M}(1\\otimes H(a,L))$. Associators in these equations are the fixed natural associators.",
+   "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A98 (lemma-internal-hom-composition), omitted functoriality, expanded using the fixed adjunction of Tag 08J9 (lemma-internal-hom)."
+   }
+  },
+  {
+   "text": "For $u:L\\to L'$, uncurry both sides of the asserted dinaturality equation against $K$. Naturality in the target gives $\\epsilon_{K,L'}(H(K,u)\\otimes1)=u\\epsilon_{K,L}$. Parameter naturality gives $\\epsilon_{L,M}(H(u,M)\\otimes1)=\\epsilon_{L',M}(1\\otimes u)$. Thus both uncurried maps, from $(H(L',M)\\otimes H(K,L))\\otimes K$ to $M$, are $\\epsilon_{L',M}(1\\otimes u)(1\\otimes\\epsilon_{K,L})\\alpha$. Injectivity of the adjunction proves the equation, for arbitrary derived $u$, with no choice of a chain representative.",
+   "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0A98 and 08J9: omitted functoriality, expanded by the two counit naturality identities."
+   }
+  },
+  {
+   "text": "Write $\\mathcal H(X,Y)=\\mathcal Hom^\\bullet(X,Y)$. For degrees $p,q,a$, send local homogeneous $f\\in\\mathcal H(J,I)^p$, $g\\in\\mathcal H(E,J)^q$ to the family with $a$-component $f^{a+q}\\circ g^a:E^a\\to I^{a+q+p}$. This is $\\mathcal O$-bilinear and commutes with restriction to every slice. The sectionwise tensor universal property and [def-weil-presheaf-modules-sheafification] therefore give a morphism on each sheaf tensor summand. Assemble these morphisms using the total direct sum and the target Hom product. An input uses only finitely many total summands; there is no infinite summation over the Hom-product coordinates. The universal properties of sheafification, coproduct and product also prove that this graded map, denoted $m$, is the unique one with the stated local formula.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-pc-tensor-complex-sheaves",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A91 (lemma-composition): direct construction following More on Algebra Tag 0A8I (lemma-composition); sheafification Tag 03CY."
+   }
+  },
+  {
+   "text": "For homogeneous degrees $|f|=p$, $|g|=q$, expand the two Hom differentials:\n$$d(f\\circ g)=d_I f g-(-1)^{p+q}f g d_E\n=(d_I f-(-1)^p f d_J)g+(-1)^p f(d_Jg-(-1)^q g d_E).$$\nThe two $f d_Jg$ terms cancel. This is precisely $m(d f\\otimes g+(-1)^p f\\otimes d g)$, the total-tensor differential. Equality on the sheafification units and every Hom projection proves equality of sheaf morphisms. Hence $m$ is a chain map, with no extra sign. The same construction gives evaluation $\\operatorname{ev}_{X,Y}:\\operatorname{Tot}(\\mathcal H(X,Y)\\otimes X)\\to Y$, $f\\otimes x\\mapsto f(x)$: the equality $(df)(x)+(-1)^p f(dx)=d_Y(f(x))$ checks its differential. Both constructions commute strictly with precomposition and postcomposition by chain maps, by associativity of their component maps.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-pc-tensor-complex-sheaves",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0A8X (section-hom-complexes), 0A91 (lemma-composition), and More on Algebra 0A8I, displayed differential calculation."
+   }
+  },
+  {
+   "text": "Now suppose $J,I$ are K-injective. Put $A=\\mathcal H(J,I)$, $B=\\mathcal H(E,J)$, $C=\\mathcal H(E,I)$, and let $t:T\\to B$ be the given K-flat resolution. Choose quasi-isomorphisms $s:P\\to E$ and $r:U\\to A$ with $P,U$ K-flat by [lem-pc-kflat-resolution]. By [lem-pur-rhom-well-defined], precomposition by $s$ into $J$ or $I$ gives quasi-isomorphisms. The maps $\\mathcal H(X,I)\\to\\mathcal H(X,I(I))$ induced by $\\eta_I$, and likewise with $J$, are quasi-isomorphisms because both source and target injective representatives are K-injective. Their localizations give precisely the canonical comparisons to the fixed $H$ of [def-pur-derived-internal-hom]. In particular $QA,QB,QC$ represent $H(QJ,QI),H(QE,QJ),H(QE,QI)$, and $Qt,Qs,Qr$ are invertible. The canonical comparison $Q\\operatorname{Tot}(A\\otimes T)\\cong QA\\otimes^{\\mathbf L}QT$ is valid although $A$ need not be K-flat: [lem-sf-ringed-derived-native-tensor] requires only one factor to be K-flat.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-rhom-well-defined",
+    "def-pur-derived-internal-hom",
+    "lem-sf-ringed-derived-native-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0A98 (lemma-internal-hom-composition), 06YS (lemma-K-flat-resolution), and 0A95 (lemma-RHom-well-defined)."
+   }
+  },
+  {
+   "text": "Form $V=\\operatorname{Tot}(T\\otimes P)$ and the chain map $h:V\\to J$ given by $h(z\\otimes x)=t(z)(s(x))$, using the evaluation of step 4. The chain map $T\\to\\mathcal H(P,I(J))$ obtained from $t$ by precomposition with $s$ and postcomposition with $\\eta_J$ has uncurrying $\\eta_J h$. Since $T,P$ are K-flat, the normalization of [def-coef-ringed-tensor-hom-model], supplied for the fixed adjunction by [lem-sf-ringed-derived-tensor-hom-adjunction], identifies its derived uncurrying with $Q(\\eta_J h)$ followed by $(Q\\eta_J)^{-1}$, hence with $Qh$. Under the Hom comparisons of step 5 this says exactly that $Qh$ is $\\epsilon_{QE,QJ}(Qt\\otimes Qs)$, with the canonical tensor comparison understood. Also $V$ is K-flat, since the fixed model states closure of total tensor under K-flatness.",
+   "uses": [
+    "def-coef-ringed-tensor-hom-model",
+    "lem-sf-ringed-derived-tensor-hom-adjunction",
+    "lem-pur-rhom-well-defined",
+    "lem-sf-ringed-derived-native-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08J9 (lemma-internal-hom), 0A95 and 0A98; the stipulated representative normalization, applied to T and P."
+   }
+  },
+  {
+   "text": "Precompose Hom with the chain map $h$ and then with $r$ to obtain $k:U\\to\\mathcal H(V,I)$, namely $k(u)(z\\otimes x)=r(u)(t(z)(s(x)))$. Postcompose with $\\eta_I$ when using the fixed replacement. Both $U,V$ are K-flat. The same normalized uncurrying therefore identifies the map represented by $(u\\otimes(z\\otimes x))\\mapsto r(u)(t(z)(s(x)))$ into $I$ with $\\epsilon_{QV,QI}((H(Qh,QI)\\,Qr)\\otimes1)$. Here $Qr$ includes the canonical identification $QA\\cong H(QJ,QI)$. Naturality of the counit in its tensor parameter rewrites this as $\\epsilon_{QJ,QI}(Qr\\otimes Qh)$. By step 6 this is the composite of the two derived evaluations defining $e_{QE,QJ,QI}$, after precomposition by $Qr\\otimes Qt\\otimes Qs$. Thus the stipulated closed composition has this explicit triple-evaluation transpose.",
+   "uses": [
+    "def-coef-ringed-tensor-hom-model",
+    "lem-sf-ringed-derived-tensor-hom-adjunction",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-pur-rhom-well-defined",
+    "lem-sf-ringed-derived-native-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08J9 and 0A98: comparison with double evaluation via parameter naturality and normalized uncurrying on U,V."
+   }
+  },
+  {
+   "text": "Let $d=m\\circ(1_A\\otimes t):\\operatorname{Tot}(A\\otimes T)\\to C$ be the chain map in the statement. Put $W=\\operatorname{Tot}(U\\otimes T)$, which is K-flat by the fixed model. Precompose $d$ with $r\\otimes1_T$, then apply $\\mathcal H(s,I)$ and $\\mathcal H(P,\\eta_I)$. This gives a chain map $\\phi:W\\to\\mathcal H(P,I(I))$. Its uncurrying on $((u\\otimes z)\\otimes x)$ is $\\eta_I(r(u)(t(z)(s(x))))$. Normalize now with the K-flat pair $W,P$ and cancel $Q\\eta_I$. The transpose of the map induced by $Qd$, after precomposition by $Qr$ and replacement of $QE$ by $QP$, is therefore the same triple evaluation as in step 7. The tensor comparisons preserve the associator by [lem-sf-ringed-derived-native-tensor], so the two bracketings used in steps 7 and 8 give equal maps. Injectivity of the closed adjunction, invertibility of $Qr,Qs,Qt$, and the Hom comparisons of step 5 prove that $Qd$ represents $c_{QE,QJ,QI}$. This proof allowed the given arbitrary K-flat $T$ throughout; it imposed no boundedness, flat-term assumption on $T$, or perfectness.",
+   "uses": [
+    "def-coef-ringed-tensor-hom-model",
+    "lem-sf-ringed-derived-tensor-hom-adjunction",
+    "lem-sf-ringed-derived-native-tensor",
+    "lem-pur-rhom-well-defined",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A98 (lemma-internal-hom-composition): identify the localized composition by its normalized transpose; Tag 08J9."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "def-pur-hom-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-pc-kflat-resolution",
+  "lem-pur-rhom-well-defined",
+  "def-pur-derived-internal-hom",
+  "lem-sf-ringed-derived-native-tensor",
+  "def-coef-ringed-tensor-hom-model",
+  "lem-sf-ringed-derived-tensor-hom-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0A91 and 0A98, using the direct differential proof of More on Algebra Tag 0A8I; omitted functoriality and agreement with the stipulated normalized adjunction supplied explicitly."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -49,10 +174,59 @@
    "results": "LightCondensed.ihom_map_val_app; LightCondensed.ihomPoints_symm_comp; SheafOfModules.unitHomEquiv_comp_apply; LightCondensed.ihomPoints; LightCondensed.ihomPoints_apply; AlgebraicGeometry.Scheme.Modules.Hom.comp_app; SheafOfModules.unitHomEquiv_symm_comp; CategoryTheory.Sheaf.ΓHomEquiv_naturality_right",
    "date": "2026-10-21",
    "verdict": "no match: abstract closed composition and cochains do not identify the actual sheaf Hom-complex construction after K-flat resolution with the fixed K-injective derived adjunction"
+  },
+  {
+   "tool": "grep",
+   "query": "HomComplex.*comp|ihom.*comp|enrichedCategorySelf_comp",
+   "results": "Mathlib/CategoryTheory/Idempotents/HomologicalComplex.lean; Mathlib/CategoryTheory/Idempotents/HomologicalComplex.lean; Mathlib/CategoryTheory/Idempotents/HomologicalComplex.lean; Mathlib/CategoryTheory/Idempotents/HomologicalComplex.lean; Mathlib/CategoryTheory/Idempotents/HomologicalComplex.lean; Mathlib/CategoryTheory/Monoidal/Braided/Reflection.lean; Mathlib/CategoryTheory/Monoidal/Braided/Reflection.lean; Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: abstract closed composition and group-valued cochains do not give the sheaf-valued Hom chain map together with its canonical K-injective and K-flat derived model comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For sheaves of modules, derived Hom composition is represented by composing homogeneous maps of Hom complexes with no sign",
+   "results": "CochainComplex.HomComplex.Cochain.comp; CochainComplex.HomComplex.Cochain.ofHom_comp; CochainComplex.HomComplex.δ_hom; CochainComplex.HomComplex.δ_comp_ofHom; SheafOfModules.Hom; SheafOfModules.instCategory; SheafOfModules.comp_val_assoc; HomologicalComplex.comp",
+   "date": "2026-10-21",
+   "verdict": "no match: abstract closed composition and group-valued cochains do not give the sheaf-valued Hom chain map together with its canonical K-injective and K-flat derived model comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.HomComplex.Cochain.comp",
+   "results": "CochainComplex.HomComplex.Cochain.comp; CochainComplex.HomComplex.Cochain.comp_id; CochainComplex.HomComplex.Cochain.id_comp; CochainComplex.HomComplex.Cochain.comp_assoc_of_first_is_zero_cochain; CochainComplex.HomComplex.Cochain.comp_assoc_of_second_is_zero_cochain; CochainComplex.HomComplex.Cochain.comp_assoc_of_third_is_zero_cochain; CochainComplex.HomComplex.Cochain.comp_smul; CochainComplex.HomComplex.Cochain.smul_comp",
+   "date": "2026-10-21",
+   "verdict": "no match: abstract closed composition and group-valued cochains do not give the sheaf-valued Hom chain map together with its canonical K-injective and K-flat derived model comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition of internal Hom complexes of sheaves on a ringed site computes derived internal Hom composition by uncurrying two evaluations",
+   "results": "LightCondensed.ihomPoints_apply; SheafOfModules.unitHomEquiv_comp_apply; SheafOfModules.comp_val; CategoryTheory.Sheaf.ΓHomEquiv_naturality_right; LightCondensed.ihom_map_val_app; instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite; CategoryTheory.Sheaf.ΓHomEquiv_naturality_left_symm; SheafOfModules.unitHomEquiv_symm_comp",
+   "date": "2026-10-21",
+   "verdict": "no match: abstract closed composition and group-valued cochains do not give the sheaf-valued Hom chain map together with its canonical K-injective and K-flat derived model comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "def comp|δ_comp|enrichedCategorySelf_comp",
+   "results": "Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean; Mathlib/Algebra/Homology/HomotopyCategory/SpectralObject.lean; Mathlib/Algebra/Homology/HomotopyCategory/MappingCone.lean; Mathlib/Algebra/Homology/HomotopyCategory/MappingCone.lean; Mathlib/Algebra/Homology/HomotopyCategory/MappingCone.lean; Mathlib/Algebra/Homology/HomotopyCategory/MappingCone.lean; Mathlib/Algebra/Homology/HomotopyCategory/Triangulated.lean; Mathlib/Algebra/Homology/HomotopyCategory/Triangulated.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: abstract closed composition and group-valued cochains do not give the sheaf-valued Hom chain map together with its canonical K-injective and K-flat derived model comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed.comp",
+   "results": "CategoryTheory.MonoidalClosed.comp; CategoryTheory.MonoidalClosed.comp_eq; CategoryTheory.MonoidalClosed.id_comp; CategoryTheory.MonoidalClosed.comp_id; CategoryTheory.MonoidalClosed.curry'_comp; CategoryTheory.MonoidalClosed.id_comp_assoc; CategoryTheory.MonoidalClosed.comp_id_assoc; CategoryTheory.MonoidalClosed.whiskerLeft_curry'_comp",
+   "date": "2026-10-21",
+   "verdict": "no match: abstract closed composition and group-valued cochains do not give the sheaf-valued Hom chain map together with its canonical K-injective and K-flat derived model comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Differential graded internal Hom of complexes of module sheaves has composition satisfying the Leibniz rule and compatible with derived tensor Hom adjunction",
+   "results": "CategoryTheory.Sheaf.H; PresheafOfModules.DifferentialsConstruction.instHasDifferentials; PresheafOfModules.HasDifferentials; SheafOfModules.instAddCommGroupHom; CochainComplex.HomComplex; ChainComplex.linearYonedaObj_d; CategoryTheory.Sheaf.cohomologyPresheaf; CategoryTheory.Sheaf.cohomologyPresheafFunctor",
+   "date": "2026-10-21",
+   "verdict": "no match: abstract closed composition and group-valued cochains do not give the sheaf-valued Hom chain map together with its canonical K-injective and K-flat derived model comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-ringed-site-duality-maps",
@@ -72,5 +246,50 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-ringed-hom-composition-model",
+  "worker": "stage1",
+  "group": "Q115",
+  "summary": "Kept the full statement. Constructed and differentiated sheaf Hom composition explicitly, proved derived naturality and dinaturality by counit identities, and identified the one-K-flat composition model by two normalized uncurrying computations. Reused existing K-flat resolution, K-injective Hom-invariance, and native tensor-comparison nodes; created no nodes.",
+  "blueprint": "Realizes the coefficient-dual evaluation comparison in the final sentence of paragraph 2 of det-thm-sf-ctf-stability-internal-hom.proof.md by making its underlying Hom composition agree with the normalized derived adjunction. No change to the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic unbounded ringed-site K-flat resolution, used only to choose auxiliary P and U; not a constructibility argument."
+   },
+   {
+    "node": "lem-pur-rhom-well-defined",
+    "why": "Generic Hom-complex invariance into K-injectives, used for canonical representative comparisons; no coefficient-specific result is substituted."
+   },
+   {
+    "node": "lem-sf-ringed-derived-native-tensor",
+    "why": "Generic one-K-flat localization tensor comparison and associator compatibility, for the already fixed ringed tensor."
+   },
+   {
+    "node": "lem-sf-ringed-derived-tensor-hom-adjunction",
+    "why": "Generic normalized ringed tensor-Hom adjunction, supplying the stipulated K-flat uncurrying characterization."
+   },
+   {
+    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "why": "The fixed closed structure and its natural adjunction, already a hypothesis of the item, used as a generic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "lem-pur-rhom-well-defined",
+  "lem-sf-ringed-derived-native-tensor",
+  "lem-sf-ringed-derived-tensor-hom-adjunction",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q115-566d84745",
+  "group": "Q115",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q115-566d84745 (reviewer sub-agent of L); spot-checked: I read the whole split: 8 steps, 0 new nodes, statement and stmt_deps byte-identical to the live/side-live base (still unsplit there; no repair note; not in any dropped list). Source: I read Stacks 0A91 (sites-cohomology l.8636), 0A8I (more-algebra l.17966, unsigned composition) and 0A98 (l.8998, K-injective I,J plus a K-flat H→Hom(K,J)). The item matches them, and it supplies the functoriality and the agreement with the adjunction, which Stacks omits (correctly marked by: agent). Steps 1-2: I recomputed target and parameter naturality and both uncurried sides of the dinaturality equation from the bijection and counit of lem-sf-ringed-derived-closed-symmetric-monoidal; they agree. Steps 3-4: I expanded d(fg)=(df)g+(-1)^p f(dg); the f d_J g terms cancel and no extra sign is needed. The evaluation identity also checks. Step 5: lem-pur-rhom-well-defined is applied only into the K-injectives J and I, or between K-injectives (η_I, η_J). lem-sf-ringed-derived-native-tensor allows a single K-flat factor, which the possibly non-K-flat Hom(J,I) needs. Steps 6-8: the def-coef-ringed-tensor-hom-model normalization (supplied by lem-sf-ringed-derived-tensor-hom-adjunction) is applied only to K-flat pairs (T,P), (U,V), (W,P), with the fixed I(-) as target. The native associator compatibility identifies the bracketings, and cancelling the invertible Qr, Qs, Qt gives Qd = c∘(1⊗Qt). Edge cases: zero complexes; degree-0 complexes on the one-point site over Z (ordinary composition); odd degrees. No boundedness or flat terms are used. Duplicate search (rg -L for 0A91/0A98/internal composition): the pullback-comparison, trf exchange, zl duality-model, ordinary-evaluation and thick-evaluation nodes are distinct. Route: biduality-general and picard-semicon are reachable transitively from sk-thm-sf-ctf-stability. The 5 declared generic tool_uses are accepted. Minor: step 6 relies on the step-1 parameter naturality without citing it again; not a fault. No fixes."
  }
 }
