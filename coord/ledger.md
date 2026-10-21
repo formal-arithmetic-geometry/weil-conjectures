@@ -23421,3 +23421,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:06 L: returned deliver/NU/def-per-support-condition (reviewer RETURN: I read the whole delivery: the item, the report, the base item and the main-20261015 source (order 3082). This is a defi)
 - 19:07 L: merged deliver/NR/lem-sfb-qcqs-zero-dimensional-affine (reviewer PASS; first push; new nodes: 0)
 - 19:08 L: merged deliver/Q01/lem-sfb-continuous-cochain-finite-index-transfer (reviewer PASS; first push; new nodes: 1)
+- 19:08 L: returned deliver/O3/def-per-support-condition (reviewer RETURN: I read the delivered definition in full: 0 new nodes, no proof steps, 5 stmt_deps, each statement read. Source main-2026)
