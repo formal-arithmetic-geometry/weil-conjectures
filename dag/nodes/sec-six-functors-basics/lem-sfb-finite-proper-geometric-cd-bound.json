@@ -34,7 +34,7 @@
    }
   },
   {
-   "text": "For any field L and any u:Spec L → Y, put y = u(*). The residue-field naturality statement gives u = j_y ∘ Spec(r), where r:κ(y) → L is the induced field map: the residue field at the unique point of Spec L is L and its canonical point morphism is the identity. Thus L is a field extension of κ(y). By the universal property of fibre products, X ×_Y Spec L is canonically isomorphic to X_y ×_{Spec κ(y)} Spec L: the two maps are determined by the same projections to X and Spec L, and their composites are identities by uniqueness. Both X_y → Spec κ(y) and X ×_Y Spec L → Spec L are finite type by the arbitrary-base-change clause of lem-sfb-finite-type-composition-base-change. Apply the field-extension clause of lem-kun-dimension-extension to X_y. It gives dim(X ×_Y Spec L) = dim(X_y) ≤ e, including when X_y is empty. Isomorphic schemes have the same dimension since an isomorphism identifies their chains of irreducible closed subsets.",
+   "text": "Use Scheme.SpecToEquivOfField to write any s:Spec K → Y as Spec(t) followed by Y.fromSpecResidueField y. This is the residue-field factorization of lem-weil-pbc-residue-field-point-naturality. Pullback pasting identifies X ×_Y Spec K with the base change of f.fiber y along Spec(t). Equip f.fiber y with its canonical residue-field structure map and K with the algebra structure induced by t. The structure map is finite type by base change. Apply the field-extension conjunct of lem-kun-dimension-extension to identify the two dimensions; combine it with the ordinary-fibre bound from step 1. All comparisons are valid for empty fibres.",
    "uses": [
     "lem-weil-pbc-residue-field-point-naturality",
     "def-weil-residue-field",
@@ -64,12 +64,13 @@
    }
   },
   {
-   "text": "Fix a separably closed field Ω and a morphism bar y:Spec Ω → Y. Step 2 makes Z = X ×_Y Spec Ω a finite-type Ω-scheme of dimension at most e. Let F be a torsion abelian étale sheaf on Z, i.e. c_F is an isomorphism; by the implication (1)⇒(2) of lem-weil-pbc-torsion-sheaf-characterizations every local section of F is locally killed by a positive integer, which is the torsion notion used by def-sc-etale-torsion-cd and the three nodes below. By lem-sf-separably-closed-torsion-cd the torsion cohomological dimension of Ω is at most 0. The affine bound new-thm-sc-affine-torsion-cd-bound therefore supplies, for every affine finite-type Ω-scheme of dimension at most e, vanishing of torsion cohomology in degrees greater than e + 0. Feed this affine bound into new-thm-sc-finite-type-torsion-cd-affine-reduction with K = Ω, d = e and c = 0. Its conclusion is H^q(Z,F) = 0 for every torsion abelian étale sheaf F and q > 2e. These nodes use arbitrary torsion, with no common annihilator or invertibility condition. Their dimension-at-most statements cover the empty scheme as well. Together with step 3 this proves both assertions with the same e.",
+   "text": "Fix a separably closed field Ω and a morphism bar y:Spec Ω → Y. Step 2 makes Z = X ×_Y Spec Ω a finite-type Ω-scheme of dimension at most e. Let F be a torsion abelian étale sheaf on Z, i.e. c_F is an isomorphism; by the implication (1)⇒(2) of lem-weil-pbc-torsion-sheaf-characterizations every local section of F is locally killed by a positive integer, which is the torsion notion used by def-sc-etale-torsion-cd and the three nodes below. By lem-sf-separably-closed-torsion-cd the torsion cohomological dimension of Ω is at most 0. The affine bound new-thm-sc-affine-torsion-cd-bound therefore supplies, for every affine finite-type Ω-scheme of dimension at most e, vanishing of torsion cohomology in degrees greater than e + 0. Feed this affine bound into new-thm-sc-finite-type-torsion-cd-affine-reduction with K = Ω, d = e and c = 0. Its conclusion is H^q(Z,F) = 0 for every torsion abelian étale sheaf F and q > 2e. These nodes use arbitrary torsion, with no common annihilator or invertibility condition. Their dimension-at-most statements cover the empty scheme as well. Together with step 3 this proves both assertions with the same e. In Lean, the separably closed-field bound and the conclusion use Etale.cohomology of singleFunctor 0, while the affine and affine-to-global bounds use Sheaf.H. Apply the natural isomorphism lem-weil-pbc-sheafH-ext-derived-comparison to convert the field bound to Sheaf.H and to convert the final Sheaf.H vanishing back to the required IsZero statement. AddCommGrpCat.isZero_iff_subsingleton translates zero objects to subsingleton underlying groups. The torsion conversion is exactly the first equivalence of Scheme.isTorsionAbelianSheaf_characterizations.",
    "uses": [
     "lem-sf-separably-closed-torsion-cd",
     "new-thm-sc-affine-torsion-cd-bound",
     "new-thm-sc-finite-type-torsion-cd-affine-reduction",
-    "lem-weil-pbc-torsion-sheaf-characterizations"
+    "lem-weil-pbc-torsion-sheaf-characterizations",
+    "lem-weil-pbc-sheafH-ext-derived-comparison"
    ],
    "elementary": false,
    "source": {
@@ -90,6 +91,7 @@
   "lem-sf-separably-closed-torsion-cd",
   "lem-sfb-finite-type-composition-base-change",
   "lem-weil-pbc-residue-field-point-naturality",
+  "lem-weil-pbc-sheafH-ext-derived-comparison",
   "lem-weil-pbc-torsion-sheaf-characterizations",
   "new-thm-sc-affine-torsion-cd-bound",
   "new-thm-sc-finite-type-torsion-cd-affine-reduction"
@@ -97,7 +99,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/morphisms.tex",
-  "place": "Composition of Tag 0A3V with field-extension dimension invariance (algebra.tex, Tag 00P3), and the affine/Leray torsion bound in the blueprint thm-sc-finite-type-torsion-cd proof; follows the unit’s uniform-fibre-bound route."
+  "place": "Composition of Tag 0A3V with field-extension dimension invariance (algebra.tex, Tag 00P3), and the affine/Leray torsion bound in the blueprint thm-sc-finite-type-torsion-cd proof; follows the unit’s uniform-fibre-bound route. Implemented by F2 on 2026-10-21 using the declared dependencies; Mathlib SpecToEquivOfField supplies the residue-field factorization, pullbackLeftPullbackSndIso supplies both pasting isomorphisms, and the existing Ext/derived comparison handles the two cohomology encodings."
  },
  "mathlib_searches": [
   {
@@ -271,5 +273,15 @@
   "result": "pass",
   "note": "Only the item node's lean field and one module changed vs side-live. Every clause matches the node and its stmt_dep records: IsProper, CompactSpace Y, one e : ℕ for both conclusions, all base changes and points via (pullback.snd f g).fiber s with topologicalKrullDim ≤ e, Ω : Type u with Field and IsSepClosed, ybar : Spec Ω ⟶ Y, IsTorsionAbelianSheaf on AddCommGrpCat.{u+1}, and IsZero of Etale.cohomology of singleFunctor 0 F for q > 2e. Edge cases checked: empty Y or fibres, e = 0, P^1, imperfect Ω, p-torsion. Proof-only imports are exactly the stated proof-dep modules; docstrings, source place and the 4 proof steps are present; the recorded statement is verbatim in the file; the theorem name is unused. nt_compile --json is clean (2.2 s, exit 0). No findings."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261021T061044-L-1690565",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

@@ -14,6 +14,7 @@ public import WeilConjectures.AlgebraicGeometry.TorsionEtaleSheaf
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 import Sheaf.AlgebraicGeometry.FiniteTypeFibreDimensionBound
 import Sheaf.AlgebraicGeometry.DimensionExtension
+import WeilConjectures.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
 import Sheaf.AlgebraicGeometry.Sites.SeparablyClosedTorsionCohomologicalDimension
 import Sheaf.AlgebraicGeometry.Sites.AffineTorsionCohomologicalDimension
 import Sheaf.AlgebraicGeometry.Sites.AffineToGlobalTorsionCohomologicalDimension
@@ -83,6 +84,53 @@ theorem exists_uniform_geometric_fibre_dimension_and_torsion_cohomology_bound
           IsZero ((Etale.cohomology AddCommGrpCat.{u + 1} (pullback f ybar) (q : ℤ)).obj
             ((DerivedCategory.singleFunctor
               (Sheaf (pullback f ybar).smallEtaleTopology AddCommGrpCat.{u + 1}) 0).obj F))) := by
-  sorry
+  obtain ⟨e, he⟩ := exists_fibre_dimension_bound f
+  have hfield (K : Type u) [Field K] (s : Spec (.of K) ⟶ Y) :
+      topologicalKrullDim (pullback f s : Scheme.{u}) ≤ (e : WithBot ℕ∞) := by
+    obtain ⟨⟨y, t⟩, rfl⟩ := (Scheme.SpecToEquivOfField K Y).symm.surjective s
+    calc
+      topologicalKrullDim (pullback f (Spec.map t ≫ Y.fromSpecResidueField y) : Scheme)
+          = topologicalKrullDim
+              (pullback (pullback.snd f (Y.fromSpecResidueField y)) (Spec.map t) :
+                Scheme) :=
+        (IsHomeomorph.topologicalKrullDim_eq _ (pullbackLeftPullbackSndIso f
+          (Y.fromSpecResidueField y) (Spec.map t)).hom.homeomorph.isHomeomorph).symm
+      _ = topologicalKrullDim (f.fiber y) := by
+        let : (f.fiber y).Over (Spec (Y.residueField y)) :=
+          ⟨f.fiberToSpecResidueField y⟩
+        let : Algebra (Y.residueField y) K := t.hom.toAlgebra
+        let : LocallyOfFiniteType (f.fiber y ↘ Spec (.of (Y.residueField y))) := by
+          change LocallyOfFiniteType (pullback.snd f (Y.fromSpecResidueField y))
+          infer_instance
+        let : QuasiCompact (f.fiber y ↘ Spec (.of (Y.residueField y))) := by
+          change QuasiCompact (pullback.snd f (Y.fromSpecResidueField y))
+          infer_instance
+        exact (topologicalKrullDim_fieldExtension_and_denseOpen
+          (K := Y.residueField y) (X := f.fiber y)).1 K
+      _ ≤ (e : WithBot ℕ∞) := he y
+  refine ⟨e, ?_, ?_⟩
+  · intro S g s
+    let a := pullbackLeftPullbackSndIso f g (S.fromSpecResidueField s)
+    exact (IsHomeomorph.topologicalKrullDim_eq _ a.hom.homeomorph.isHomeomorph).le.trans
+      (hfield (S.residueField s) (S.fromSpecResidueField s ≫ g))
+  · intro Ω _ _ ybar F hF q hq
+    have hK : ∀ G : Sheaf (Spec (.of Ω)).smallEtaleTopology AddCommGrpCat.{u + 1},
+        G.IsTorsion → ∀ n : ℕ, 0 < n → Subsingleton (Sheaf.H G n) := by
+      intro G hG n hn
+      obtain ⟨a⟩ := Scheme.nonempty_sheafH_extDerivedIso (Spec (.of Ω)) n
+      have hz := AddCommGrpCat.isZero_iff_subsingleton.mpr
+        (Scheme.hasTorsionEtaleCohomologicalDimensionLE_zero_of_isSepClosed Ω G hG n hn)
+      exact AddCommGrpCat.isZero_iff_subsingleton.mp (hz.of_iso (a.app G))
+    have hAffine : ∀ {Z : Scheme.{u}} (b : Z ⟶ Spec (.of Ω)) [LocallyOfFiniteType b]
+        [QuasiCompact b] [IsAffine Z] (hZ : topologicalKrullDim Z ≤ (e : WithBot ℕ∞))
+        (G : Sheaf Z.smallEtaleTopology AddCommGrpCat.{u + 1}) (hG : G.IsTorsion)
+        (n : ℕ), e + 0 < n → Subsingleton (Sheaf.H G n) := by
+      intro Z b _ _ _ hZ G hG n hn
+      exact Scheme.subsingleton_H_of_two_mul_add_lt_of_isAffine 0 e hK b hZ G hG n hn
+    have hH := Scheme.subsingleton_H_of_two_mul_add_lt_of_affine_bound 0 e
+      (pullback.snd f ybar) (hfield Ω ybar) hAffine F
+      ((Scheme.isTorsionAbelianSheaf_characterizations F).1.mp hF) q (by omega)
+    obtain ⟨a⟩ := Scheme.nonempty_sheafH_extDerivedIso (pullback f ybar) q
+    exact (AddCommGrpCat.isZero_iff_subsingleton.mpr hH).of_iso (a.app F).symm
 
 end AlgebraicGeometry
