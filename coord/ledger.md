@@ -22815,3 +22815,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:33 L: merged deliver/NI/lem-per-rational-realization-finite-cone-models (stage 2; reviewer PASS; parallel immutable checks)
 - 14:34 L: merged deliver/NZ/lem-sfb-integral-pullback-strict-roos-normalization (stage 2; reviewer PASS; parallel immutable checks)
 - 14:35 L: merged deliver/O2/lem-sfb-spectral-clopen-component-homeomorphism (reviewer PASS; first push; new nodes: 0)
+- 14:38 L: returned deliver/P7/Sheaf.Paper.CompletedCoefficientTensorNormalization (reviewer RETURN: (reviewer C-01fbc, head 01fbc69aa) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.CompletedCoeff)
