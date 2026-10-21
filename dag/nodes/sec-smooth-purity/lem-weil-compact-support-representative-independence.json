@@ -23,7 +23,7 @@
  ],
  "proof": [
   {
-   "text": "By the nonemptiness assertion of [prop-compactification-refinement], a compactification exists under exactly the field, finite-type and separated hypotheses in force. Fix the compactification used to compute the integral operation, once for every level. Use the small site and coefficient universes of [def-weil-pbc-proetale-site]. Apply [lem-weil-compact-support-reduction-tower-functor] to obtain $\\mathcal T_f^c$ with evaluations $\\operatorname{Res}_nRf_{!,n}K_n$ and the prescribed transitions. Put $B_Y=\\widehat{\\mathcal O}_{E,Y}$ and $\\mathcal A_Y=\\operatorname{Mod}(B_Y)$. Apply [lem-weil-pbc-ringed-strict-tower-homotopy-limit] on a small representative of $Y_{\\mathrm{proet}}$, in the coefficient universes, to obtain the exact functor $L=R\\lim:D(\\operatorname{Tow}(\\mathcal A_Y))\\to D(\\mathcal A_Y)$. Its construction uses a K-injective resolution of the entire strict tower, rather than unrelated resolutions of its evaluations. Thus $F_f=L\\mathcal T_f^c$ is a genuine exact functor, whose value is the integral derived-limit formula of [def-weil-integral-rational-qbar-compact-support]. No functoriality of arbitrary choices of cones in a triangulated category is invoked.",
+   "text": "Choose one compactification using its existence theorem and a small site in the stated coefficient universes. The coherent reduction-tower theorem gives the exact $R$-linear functor $T=\\mathcal T_f^c$, including its evaluation isomorphisms and quotient transitions. The strict-tower limit theorem supplies the exact functor $L=R\\lim$, computed by resolving the entire tower. Its Roos triangle identifies $LT(K)$ with the integral compact-support derived-limit formula, without choosing cones functorially.",
    "uses": [
     "prop-compactification-refinement",
     "def-weil-pbc-proetale-site",
@@ -34,27 +34,27 @@
    "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-compact-support-representative-independence.md",
-    "place": "Proof first sentence, with the missing coherent tower distinguished from the derived-limit property; strict derived limit: Stacks Tag 0940, section-derived-limits (the cited tower-limit node supplies its module version)."
+    "place": "Proof first sentence: coherent exact tower and total inverse limit."
    }
   },
   {
-   "text": "The functor $L$ is $R$-linear. The completed coefficient action of $a\\in R$ on module sheaves is multiplication by its compatible constant sections, as specified by [lem-weil-integral-constructible-linear]; on a strict tower it is componentwise multiplication and commutes with every transition. The tower category is abelian by [lem-weil-tower-category-levelwise-abelian]. Componentwise module identities make it $R$-linear, so [lem-weil-linear-abelian-derived-category] makes its derived localization $Q$ linear too. For a derived map $h:M\\to N$, choose K-injective tower representatives $I_M,I_N$ as in [lem-weil-pbc-ringed-strict-tower-homotopy-limit]. Fix the resolution isomorphisms $q_M:M\\xrightarrow{\\sim}QI_M$ and $q_N:N\\xrightarrow{\\sim}QI_N$. By [lem-weil-pbc-kinjective-hom-derived], $q_Nh q_M^{-1}$ has a unique homotopy-class representative $\\bar h:I_M\\to I_N$. Since $Q$ and composition are linear, $Q(a\\bar h)=aQ(\\bar h)=q_N(ah)q_M^{-1}$; injectivity of the Hom map makes $a\\bar h$ the representative of $ah$. For a second map $h':M\\to N$, $Q(\\bar h+\\bar h')=Q(\\bar h)+Q(\\bar h')=q_N(h+h')q_M^{-1}$; the same injectivity makes $\\bar h+\\bar h'$ the representative of $h+h'$. Termwise inverse limit of compatible families satisfies $\\lim(a\\bar h)=a\\lim(\\bar h)$ and $\\lim(\\bar h+\\bar h')=\\lim(\\bar h)+\\lim(\\bar h')$. Termwise limit also respects tower chain homotopies: a compatible degree $-1$ map $H$ with $u-v=dH+Hd$ gives $\\lim u-\\lim v=d(\\lim H)+(\\lim H)d$, by evaluating each component of a compatible family. Thus these calculations descend to homotopy classes. Applying the linear localization in the target proves both linearity identities for $L$. This does not require a scalar-linear choice of resolution functor. Since $\\mathcal T_f^c$ is $R$-linear, so is $F_f$.",
+   "text": "Constant sections act on $\\mathcal A_Y=\\operatorname{Mod}(B_Y)$, $B_Y=\\widehat{\\mathcal O}_{E,Y}$ [lem-weil-integral-constructible-linear], and componentwise on the abelian category $\\operatorname{Tow}(\\mathcal A_Y)$ [lem-weil-tower-category-levelwise-abelian], commuting with the module-map transitions; derived localizations inherit this [lem-weil-linear-abelian-derived-category]. On compatible families $\\lim(au)=a\\lim(u)$ and $\\lim(u+v)=\\lim(u)+\\lim(v)$. By [lem-weil-pbc-ringed-strict-tower-homotopy-limit], tower complexes have K-injective resolutions and $L=R\\lim$ is the total right derived functor of termwise $\\lim$, computed on them. So [lem-weil-kinjective-total-derived-linear] applies with $\\mathcal A=\\operatorname{Tow}(\\mathcal A_Y)$, $\\mathcal B=\\mathcal A_Y$, $U=\\lim$: $L$ is additive and $R$-linear, hence so is $LT$ ($T$ is $R$-linear by [lem-weil-compact-support-reduction-tower-functor]). No linear choice of resolutions is required.",
    "uses": [
     "lem-weil-integral-constructible-linear",
     "lem-weil-tower-category-levelwise-abelian",
     "lem-weil-linear-abelian-derived-category",
+    "lem-weil-kinjective-total-derived-linear",
     "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "lem-weil-pbc-kinjective-hom-derived",
     "lem-weil-compact-support-reduction-tower-functor"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-compact-support-representative-independence.md",
-    "place": "Proof first sentence, scalar-linearity supplied explicitly on K-injective tower representatives; derived Hom input Stacks Tag 070I, lemma-K-injective; linear localization from the cited Mathlib leaf."
+    "place": "Proof first sentence: apply the extracted K-injective linearity theorem to ordinary inverse limit."
    }
   },
   {
-   "text": "For every $K\\in D^b_c(X,R)$, [lem-sf-integral-compact-support-constructible] applies to the same field, prime, coefficient field, compactification and transitions: every derived limit of this particular compact-support tower belongs to $D^b_c(Y,R)$, including the common cohomological interval required there. Thus $F_f$ restricts to the full integral constructible subcategories. Those subcategories have the induced triangulated structures by [lem-weil-integral-constructible-triangulated] and the inherited linear structures by [lem-weil-integral-constructible-linear], so the restricted functor remains exact and $R$-linear. By [def-weil-integral-rational-qbar-compact-support] it is the integral operation $Rf_!$. This step uses a constructibility theorem, not the definition as evidence of its own preservation claim.",
+   "text": "The integral compact-support constructibility theorem applies with the same field, invertible prime, coefficient field, compactification and transitions. Every such derived limit lies in $\\mathcal C_Y$, with the asserted uniform cohomological interval. Thus $LT$ restricts to $F:\\mathcal C_X\\to\\mathcal C_Y$. Fullness and the inherited triangulated and linear structures preserve exactness and linearity. Its values are $Rf_!K$ by the compact-support definition.",
    "uses": [
     "lem-sf-integral-compact-support-constructible",
     "lem-weil-integral-constructible-triangulated",
@@ -64,11 +64,11 @@
    "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-compact-support-representative-independence.md",
-    "place": "Proof first sentence: checking the integral functor lands in the stated full subcategory before rationalization; preservation is the existing constructibility node, with exactly its hypotheses."
+    "place": "Proof first sentence: constructibility and restriction to the full integral category."
    }
   },
   {
-   "text": "Write $F=F_f|_{D^b_c(X,R)}$. Using [def-weil-rationalization-karoubi] and [def-weil-linear-scalar-localization], define $F_E(K)=F(K)$ and $F_E(u\\otimes e)=F(u)\\otimes e$ on each rational Hom module. By [def-weil-module-base-change], $R$-linearity of $F$ makes this a well-defined $E$-linear Hom map: $F(ru)\\otimes e=F(u)\\otimes re$. For pure tensors, $F_E((v\\otimes b)(u\\otimes a))=F(vu)\\otimes ba=(F(v)\\otimes b)(F(u)\\otimes a)$; bilinearity gives the identity for sums. Also $F_E(1_K\\otimes1)=1_{F(K)}\\otimes1$. Hence it is a functor. Any $E$-linear extension must send $u\\otimes e=e(u\\otimes1)$ to $e(F(u)\\otimes1)$, proving uniqueness. This is the scalar-localization calculation of rational transport, performed on these actual Hom modules; it identifies neither the completed coefficient sheaf with a discrete constant sheaf nor two different definitions of an integral constructible category.",
+   "text": "On the raw localized Hom modules define $F_E(u\\otimes e)=F(u)\\otimes e$ and $F_E(K)=F(K)$. By $R$-linearity of $F$ (Step 3) and module base change, it is a well-defined $E$-linear Hom map: $F(ru)\\otimes e=rF(u)\\otimes e=F(u)\\otimes re$. For pure tensors,\n$F_E((v\\otimes b)(u\\otimes a))=F(vu)\\otimes ba=(F(v)\\otimes b)(F(u)\\otimes a)$;\nbilinearity gives the law for sums, and $F_E(1\\otimes1)=1\\otimes1$, so $F_E$ is a functor. This is the unique $E$-linear extension, since $u\\otimes e=e(u\\otimes1)$.",
    "uses": [
     "def-weil-rationalization-karoubi",
     "def-weil-linear-scalar-localization",
@@ -77,18 +77,18 @@
    "elementary": true,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-compact-support-representative-independence.md",
-    "place": "Proof, rational-transport sentence, expanded as its elementary tensor-Hom formula; tensor balancing: Stacks Tag 05G3, algebra-definition-base-change."
+    "place": "Rational-transport sentence: tensor balancing, identity, composition, and uniqueness."
    }
   },
   {
-   "text": "Define $\\beta_\\alpha=F_E(\\alpha)$ and its inverse to be $F_E(\\alpha^{-1})$. Their composites are $F_E(\\alpha^{-1}\\alpha)=1$ and $F_E(\\alpha\\alpha^{-1})=1$, so this is the asserted isomorphism. By [def-weil-integral-rational-qbar-compact-support], $F_E$ on objects is precisely the displayed rational compact-support operation. If $a:Q_XK\\to M$ and $a':Q_XK'\\to M$ are the specified presentations, the input comparison is $(a')^{-1}a$, so the stated comparison is its image. For a third presentation $a''$, $(a'')^{-1}a'\\,(a')^{-1}a=(a'')^{-1}a$; applying $F_E$ proves the cocycle. The identity presentation gives the identity and a composite of input isomorphisms gives the corresponding composite of comparisons. If one changes the presentations, their new relative isomorphism gives its own functorial comparison; no uniqueness of an isomorphism chosen from a bare existence assertion is claimed.",
+   "text": "Set $\\beta_\\alpha=F_E(\\alpha)$, with inverse $F_E(\\alpha^{-1})$: the two composites are images of identities. Its objects are the displayed rational compact-support values by definition. Functor laws give $\\beta_1=1$ and $\\beta_{\\alpha'\\alpha}=\\beta_{\\alpha'}\\beta_\\alpha$. Presentations $a,a'$ give $\\beta_{(a')^{-1}a}$; for a third, $(a'')^{-1}a'\\,(a')^{-1}a=(a'')^{-1}a$, proving the cocycle. Each changed presentation has its own relative comparison.",
    "uses": [
     "def-weil-integral-rational-qbar-compact-support"
    ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-compact-support-representative-independence.md",
-    "place": "Proof final sentence: explicit images of an isomorphism and its inverse, with identity, composition, and presentation cocycle checks."
+    "place": "Final sentence: comparison, inverse, identity, composition, and presentation cocycle."
    }
   }
  ],
@@ -101,7 +101,7 @@
   "lem-weil-integral-constructible-linear",
   "lem-weil-tower-category-levelwise-abelian",
   "lem-weil-linear-abelian-derived-category",
-  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-kinjective-total-derived-linear",
   "lem-sf-integral-compact-support-constructible",
   "lem-weil-integral-constructible-triangulated",
   "def-weil-rationalization-karoubi",
@@ -111,7 +111,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-compact-support-representative-independence.md",
-  "place": "Imported first proof sentence and final rational-transport sentence, repaired by an agent with coherent strict towers and the explicit scalar-localization calculation. The archived blueprint is absent; the second reader obtained and read primary Stacks TeX (sites-cohomology.tex, section-derived-limits and lemma-derived-limit-is-ok; derived.tex, lemma-K-injective) and Bhatt-Scholze arXiv:1309.1198 Sections 6.1, 6.5 and 6.7. See report.md for the precise limits of these sources."
+  "place": "Agent assembly of the existing coherent tower, total derived limit, constructibility and scalar-localization facts; K-injective scalar-linearity has been extracted as a separate statement-only lemma. Source route unchanged."
  },
  "mathlib_searches": [
   {
@@ -307,11 +307,11 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-def-sf-operations",
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-21",
   "item": "lem-weil-compact-support-representative-independence",
   "worker": "stage1",
-  "summary": "STATEMENT-DISPUTED: made the identification of two rational representatives explicit, since canonical comparison depends on it. Replaced the invalid appeal to the Roos-triangle definition as a functor by one statement-only coherent compact-support reduction-tower prerequisite and the existing strict-tower derived-limit theorem. Checked scalar-linearity on K-injective tower representatives, used the existing constructibility theorem, and wrote out scalar localization and the inverse/cocycle equations. No Lean or target statement changed. Second reading cited compactification existence and size conventions, made resolution conjugation and additivity explicit, and made the child statement-only with the separately derived operations and all coefficient restriction notions specified.",
-  "blueprint": "Steps 1-3 realize the first sentence of the imported proof (exact O_E-linear integral compact support), with its hidden coherent tower construction exposed. Step 4 realizes rational transport by the same tensor-Hom construction; Step 5 realizes representative independence with specified identifications. The unit sk-def-sf-operations has no proof steps, and its six-operation route is unchanged.",
+  "summary": "Human-requested re-split: keep the statement and all imported and Lean records unchanged. Extract the substantial K-injective representative argument as lem-weil-kinjective-total-derived-linear, a statement-only generic lemma without an exactness assumption on the underived functor. Retain compactification, coherent tower, total-limit comparison, constructibility, tensor balancing, extension uniqueness, and comparison inverse/cocycle in the parent assembly. Source and duplicate checks and full extracted argument are in report.md.",
+  "blueprint": "The new lemma carries the K-injective Hom comparison, conjugation, additivity, scalar-linearity, homotopy descent, and independence from linear choices used by the first proof sentence. Parent Steps 1-3 assemble its integral exact linear functor; Steps 4-5 retain every rational tensor and comparison calculation of the original route.",
   "tool_uses": [
    {
     "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
@@ -323,12 +323,12 @@
   "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
  ],
  "reviewed": {
-  "date": "2026-10-15",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-Codex-N5-c51ccab3c",
-  "group": "N5",
+  "reviewer": "NT-cc-Q31-6075185eb",
+  "group": "Q31",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N5-c51ccab3c (reviewer sub-agent of L); spot-checked: Read the item, new node, cited statements and source passages in full. Five-step proof and coefficient handling check out. Repaired new-node metadata and restored the accepted strict-tower-limit tool declaration. Mathematical statements remain unchanged. Detailed checks are in review.md; corrected JSON files are under fixes/dag/nodes/sec-smooth-purity/.; 2 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q31-6075185eb (reviewer sub-agent of L); spot-checked: The re-split meets the 2026-10-21 note. The item statement is unchanged, and the live item is still the base. Old Step 2's K-injective argument is now the true, generic, statement-only node lem-weil-kinjective-total-derived-linear (about 1.9k characters, so comparable to the parent). I checked it: c_M is well typed for η: Q_B U_K ⇒ RU∘Q_A, h̄ is unique by Stacks 070I (derived.tex lemma-K-injective (1)⇔(3), read), and the conjugation formula follows from naturality of η. Linearity follows because h↦h̄ is linear and U_K, Q_B are linear; U need not be exact. Small cases U=0, U=id, a=0, h'=−h all check. It duplicates no existing node: lem-cbc-exact-linear-derived-functor needs exactness, lem-sbc-ambient-operations-scalar-linearity is specific to Lu^*/Ru_*, and def-sfb-right-derived-functor and lem-weil-pbc-kinjective-total-derived make no linearity claim. Its B1–B9 checks pass. Parent Steps 1, 3 and 5 keep their arguments; I read every cited statement and each matches its hypotheses. The main-20261015 blueprint does have a .proof.md, despite the report, but it is the verbatim master proof, so the route is the same. FIX, two repairs to the item. (1) C3/E1: Step 2 applied the new lemma without its hypotheses and dropped lem-weil-pbc-ringed-strict-tower-homotopy-limit, which supplies them: K-injective tower resolutions exist and R lim is the total right derived functor of termwise lim. Step 2 now cites it, states A=Tow(Mod(B_Y)), B=Mod(B_Y), U=lim, and cites the tower-functor node for the R-linearity of T. (2) Step 4 had dropped why tensor balancing holds (the R-linearity of F) and the functor conclusion; both restored. The parent proof is now 2877 characters, proof_deps is unchanged, and there is no cycle, no SGA citation and no new tool use.; 1 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
   "date": "2026-10-17",
