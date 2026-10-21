@@ -2,7 +2,7 @@
  "id": "lem-sfb-qcqs-proper-integral-rational-scalar-comparison",
  "kind": "statement",
  "title": "Proper qcqs integral-to-rational scalar comparison with the counit normalization",
- "statement": "Fix a prime $\\ell$, a finite extension $F/\\mathbf Q_\\ell$ in a fixed algebraic closure, $A=\\mathcal O_F$ with its induced norm topology, and either a finite extension $E/\\mathbf Q_\\ell$ containing $F$ with $\\Lambda=E$, or $\\Lambda=\\overline{\\mathbf Q}_\\ell$ with the induced norm topology and all continuous functions, as in [sk-def-localizing-closure]. Let $h:U\\to V$ be a proper morphism of quasi-compact quasi-separated schemes [def-weil-proper-morphism]. Use $A_W=p_W^*\\underline A$, $\\Lambda_W=p_W^*\\underline\\Lambda$, the ordinary unbounded derived module-object categories [sk-def-sfb-module-derived-pushpull], and $T_W=\\Lambda_W\\otimes^L_{A_W}-$ in the universe [def-weil-size-convention]. For every $J\\in\\mathrm D_{\\mathrm{ctf}}(U,A)$ [sk-def-sfb-constructible], the canonical coefficient-change map\n$$\\rho_{h,J}:T_V Rh_{*,A}J\\longrightarrow Rh_{*,\\Lambda}T_UJ$$\nis an isomorphism. Its definition is the transpose under $h_\\Lambda^*\\dashv Rh_{*,\\Lambda}$ of\n$$h_\\Lambda^*T_V Rh_{*,A}J\\xrightarrow{\\sim}T_U h_A^*Rh_{*,A}J\\xrightarrow{T_U(\\varepsilon_{h,A,J})}T_UJ,$$\nwhere the first arrow is the inverse of the scalar/pullback mate of [lem-sfb-kflat-scalar-comparison-normalization], transported by the canonical section-module equivalences [lem-sfb-internal-module-operations-transport]. In particular this is the coefficient projection map with its specified counit, not an unspecified isomorphism between these objects. No geometric base-change assertion and no Noetherian, characteristic, dimension or invertibility-of-$\\ell$ hypothesis is included.",
+ "statement": "Fix a prime $\\ell$, finite extensions $F\\subseteq E$ of $\\mathbf Q_\\ell$ in a fixed algebraic closure, $A=\\mathcal O_F$, and $\\Lambda=E$, with their induced norm topologies as in [sk-def-localizing-closure]. Let $h:U\\to V$ be a proper morphism of quasi-compact quasi-separated schemes [def-weil-proper-morphism]. Use $A_W=p_W^*\\underline A$, $\\Lambda_W=p_W^*\\underline\\Lambda$, the ordinary unbounded derived module-object categories [sk-def-sfb-module-derived-pushpull], and $T_W=\\Lambda_W\\otimes^L_{A_W}-$ in the universe [def-weil-size-convention]. For every $J\\in\\mathrm D_{\\mathrm{ctf}}(U,A)$ [sk-def-sfb-constructible], the canonical coefficient-change map\n$$\\rho_{h,J}:T_V Rh_{*,A}J\\longrightarrow Rh_{*,\\Lambda}T_UJ$$\nis an isomorphism. Its definition is the transpose under $h_\\Lambda^*\\dashv Rh_{*,\\Lambda}$ of\n$$h_\\Lambda^*T_V Rh_{*,A}J\\xrightarrow{\\sim}T_U h_A^*Rh_{*,A}J\\xrightarrow{T_U(\\varepsilon_{h,A,J})}T_UJ,$$\nwhere the first arrow is the inverse of the scalar/pullback mate of [lem-sfb-kflat-scalar-comparison-normalization], transported by the canonical section-module equivalences [lem-sfb-internal-module-operations-transport]. Thus this is the coefficient projection map with its specified counit. No geometric base-change assertion and no Noetherian, characteristic, dimension or invertibility-of-$\\ell$ hypothesis is included. The coefficient field here is finite over $\\mathbf Q_\\ell$; the analogous assertion for all continuous functions into the norm-topological algebraic closure is false in this general qcqs scope (see the statement dispute in the split report).",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
   "place": "(2), scalar extension in the proper closed-complement calculation. Agent proper coefficient projection lemma for this qcqs finite-model scope. The full all-continuous norm-topological clause is not attributed to a finite-subextension-valued coefficient comparison or to the colimit-topological algebraic closure."
@@ -17,9 +17,89 @@
   "lem-sfb-kflat-scalar-comparison-normalization",
   "lem-sfb-internal-module-operations-transport"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Pass to section-ring modules using [lem-pd-section-derived-pushpull-normalization] and [lem-sfb-internal-section-scalar-adjunction]. These identify the ordinary unbounded derived functors, scalar extensions and the specified adjunctions, including their counits. Consequently proving invertibility of the section-ring counit mate proves invertibility of the internal map. By [pqf-lem-proper-basic], $h$ is qcqs. By the boundedness in [sk-def-sfb-constructible], $J$ is bounded below. No proper finite-presentation or Noetherian hypothesis has been inferred.",
+   "uses": [
+    "lem-pd-section-derived-pushpull-normalization",
+    "lem-sfb-internal-section-scalar-adjunction",
+    "pqf-lem-proper-basic",
+    "sk-def-sfb-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 09T5 (lemma-derived-adjoint-functors), 08BJ (lemma-adjoint-preserve-K-injectives); sites-modules.tex Tags 03D7 (lemma-adjoint-pullback-pushforward-modules), 03EK (section-tensor-product)."
+   }
+  },
+  {
+   "text": "Factor the coefficient inclusion as $A\\to F\\to E$. Apply [lem-sfb-localized-direct-image-comparison] to $h$ and $J$, with its finite field named $F$. Its hypotheses are exactly qcqs and bounded below, verified in step 1. It gives an isomorphism $\\gamma^1_J:F_V\\otimes^L_{A_V}Rh_{*,A}J\\to Rh_{*,F}(F_U\\otimes^L_{A_U}J)$, and expressly defines this map as the counit transpose with the canonical pullback/tensor comparison. Put $K=F_U\\otimes^L_{A_U}J$.",
+   "uses": [
+    "lem-sfb-localized-direct-image-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 5.3(1); the finite local-field localization is Lemma 5.6 and Bhatt–Scholze Lemma 6.8.2(2), using only the finite field case."
+   }
+  },
+  {
+   "text": "Choose an $\\mathcal O_F$-basis $b_1,\\ldots,b_d$ of $\\mathcal O_E$ using [lem-sfb-local-field-integral-basis]. Applied with the smaller field $F$ and larger field $E$, [det-prop-sfb-cartesian-coefficients-finite-free] gives $F_W^{\\oplus d}\\cong E_W$ and says that the same basis works after $h^{-1}$. The tensor coordinates of [lem-sfb-finite-free-scalar-coordinates] therefore identify restriction of $E_W\\otimes_{F_W}M$ with $M^{\\oplus d}$, by $e\\otimes m\\mapsto(q_i(e)m)_i$, with inverse $(m_i)\\mapsto\\sum_i b_i\\otimes m_i$. Apply these formulas termwise to complexes. Finite direct sums preserve exact sequences and quasi-isomorphisms, so the same coordinates compute the derived extension for every complex, including $K$. No boundedness of $Rh_*K$ is needed.",
+   "uses": [
+    "lem-sfb-local-field-integral-basis",
+    "det-prop-sfb-cartesian-coefficients-finite-free",
+    "lem-sfb-finite-free-scalar-coordinates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/sk-prop-sfb-cartesian-coefficients-finite-free.proof.md",
+    "place": "Finite integral basis, continuous coefficient coordinates and their inverse-image compatibility; the final termwise derivation is the elementary finite-sum argument."
+   }
+  },
+  {
+   "text": "Let $\\gamma^2_K:E_V\\otimes^L_{F_V}Rh_{*,F}K\\to Rh_{*,E}(E_U\\otimes^L_{F_U}K)$ be the counit mate. Restrict it to $F_V$-modules. The direct-image/restriction isomorphism of [lem-weil-pbc-ring-sheaf-change-adjunction] preserves its adjoint transpose. In the coordinates of step 3 its transpose on the $i$th summand is $\\varepsilon_{h,F,K}$ followed by the $i$th inclusion into $K^{\\oplus d}$: the basis vector $b_i$ pulls back to that same vector. Hence its $i$th component is $Rh_{*,F}$ of this inclusion, by the adjunction bijection. The additive functor $Rh_{*,F}$ preserves finite biproducts: applying it to $p_i\\iota_j=\\delta_{ij}$ and $\\sum_i\\iota_i p_i=1$ gives the inverse coordinate maps. Thus the restricted map is exactly the canonical isomorphism $(Rh_{*,F}K)^{\\oplus d}\\to Rh_{*,F}(K^{\\oplus d})$. Scalar restriction reflects isomorphisms by the cited node, so $\\gamma^2_K$ is invertible.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaf-change-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D7 (lemma-adjoint-pullback-pushforward-modules); finite biproduct identities and the adjunction bijection give the displayed coordinate computation."
+   }
+  },
+  {
+   "text": "Use K-flat representatives to identify the composite scalar extension with $T_W$: the isomorphism $E_W\\otimes_{F_W}(F_W\\otimes_{A_W}P)\\cong E_W\\otimes_{A_W}P$ sends $e\\otimes f\\otimes p$ to $ef\\otimes p$, with inverse $e\\otimes p\\mapsto e\\otimes1\\otimes p$. Extension carries flat-term K-flat representatives to such representatives by [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], applied to the identity underlying topos and the coefficient ring maps. Thus these very formulas identify the derived functors. Paste $E_V\\otimes^L_{F_V}\\gamma^1_J$ with $\\gamma^2_K$. Both are invertible. The pasting formula of [lem-sfb-pasted-mates-counit-normalization], with $b$ and $t$ identities, says its transpose is the composite of the two pullback/scalar comparisons followed by $T_U\\varepsilon_{h,A,J}$. On the same representatives the comparisons of [lem-sfb-kflat-scalar-comparison-normalization] preserve $1\\otimes p$; the preceding multiplication formula identifies their composite with the comparison for $A\\to E$. Therefore this transpose is precisely the one defining $\\rho_{h,J}$. Uniqueness of the adjunct proves that the invertible composite equals $\\rho_{h,J}$.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-sfb-pasted-mates-counit-normalization",
+    "lem-sfb-kflat-scalar-comparison-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0G7E (lemma-pullback-K-flat) and 0D6D (lemma-derived-pullback-composition); categorical pasting is the explicit counit-normalization lemma cited in this step."
+   }
+  }
+ ],
+ "proof_deps": [
+  "det-prop-sfb-cartesian-coefficients-finite-free",
+  "lem-pd-section-derived-pushpull-normalization",
+  "lem-sfb-finite-free-scalar-coordinates",
+  "lem-sfb-internal-section-scalar-adjunction",
+  "lem-sfb-kflat-scalar-comparison-normalization",
+  "lem-sfb-local-field-integral-basis",
+  "lem-sfb-localized-direct-image-comparison",
+  "lem-sfb-pasted-mates-counit-normalization",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "pqf-lem-proper-basic",
+  "sk-def-sfb-constructible"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Lemma 5.3(1), combined with finite free coefficient coordinates and the explicitly computed counit mates; statement correction and counterexample by NB."
+ },
  "mathlib_searches": [
   {
    "tool": "loogle",
@@ -55,10 +135,73 @@
    "results": "[\"WeierstrassCurve.IsIntegral.integral\", \"WeierstrassCurve.baseChange_integralModel_eq\", \"WeierstrassCurve.isIntegral_iff\", \"ax_grothendieck_of_locally_finite\", \"WeierstrassCurve.integralModel\", \"WeierstrassCurve.exists_isIntegral\", \"Algebra.SubmersivePresentation.instHasCoeffs\", \"ax_grothendieck_univ\"]",
    "date": "2026-10-21",
    "verdict": "no match: the hits concern ordinary algebraic completion, generic triangulated categories, scheme morphisms or scalar restriction, not this pro-etale finite-model coefficient theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "proper.*scalar|scalar.*proper|projectionFormula",
+   "results": "[\"Mathlib/Algebra/Algebra/Operations.lean\", \"Mathlib/Algebra/Algebra/Operations.lean\", \"Mathlib/Algebra/Regular/SMul.lean\", \"Mathlib/Algebra/Order/AddTorsor.lean\", \"Mathlib/Topology/Algebra/ConstMulAction.lean\", \"Mathlib/Topology/Algebra/ConstMulAction.lean\", \"Mathlib/Analysis/Normed/Algebra/Spectrum.lean\", \"Mathlib/LinearAlgebra/Matrix/SpecialLinearGroup.lean\"]",
+   "date": "2026-10-21",
+   "verdict": "no match: only underived sheaf pushforwards, ordinary localization, or algebraic-geometry normalization results; none states this continuous-coefficient derived comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived proper pushforward commutes with extension of condensed integral ell adic coefficients to a norm topological field",
+   "results": "[\"SheafOfModules.pushforward\", \"SheafOfModules.pushforwardComp\", \"SheafOfModules.instIsRightAdjointPushforward\", \"CondensedMod.hom_naturality_apply\", \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\", \"CategoryTheory.Functor.sheafPushforwardCocontinuous.congr_simp\", \"SheafOfModules.pushforwardPushforwardAdj\"]",
+   "date": "2026-10-21",
+   "verdict": "no match: only underived sheaf pushforwards, ordinary localization, or algebraic-geometry normalization results; none states this continuous-coefficient derived comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, ModuleCat",
+   "results": "[\"SheafOfModules.evaluation\", \"SheafOfModules.forgetToSheafModuleCat\", \"SheafOfModules.forgetToSheafModuleCat_obj_obj\", \"SheafOfModules.forgetToSheafModuleCat_map_hom\", \"SheafOfModules.unitHomEquiv_apply_coe\", \"SheafOfModules.forgetToSheafModuleCatOfIso\", \"SheafOfModules.evaluationPreservesLimitsOfSize\", \"SheafOfModules.Finite.evaluationPreservesFiniteLimits\"]",
+   "date": "2026-10-21",
+   "verdict": "no match: only underived sheaf pushforwards, ordinary localization, or algebraic-geometry normalization results; none states this continuous-coefficient derived comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper direct image of constructible integral proetale sheaves commutes with extension to norm topological algebraic closure coefficients",
+   "results": "[\"AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage\", \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.Scheme.Hom.ι_fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap\"]",
+   "date": "2026-10-21",
+   "verdict": "no match: only underived sheaf pushforwards, ordinary localization, or algebraic-geometry normalization results; none states this continuous-coefficient derived comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projection formula for a proper morphism of schemes and sheaves of modules with a continuous condensed coefficient ring",
+   "results": "[\"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"AlgebraicGeometry.Scheme.Modules.pushforward\", \"AlgebraicGeometry.Scheme.Modules.pullback\", \"SheafOfModules.Presentation.map_π_eq\", \"SheafOfModules.pushforwardSections_coe\", \"AlgebraicGeometry.Scheme.Modules.pushforward_obj_obj\", \"AlgebraicGeometry.Scheme.Hom.toRingCatSheafHom\"]",
+   "date": "2026-10-21",
+   "verdict": "no match: only underived sheaf pushforwards, ordinary localization, or algebraic-geometry normalization results; none states this continuous-coefficient derived comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "rationalization|locali[sz].*pushforward|pushforward.*locali[sz]",
+   "results": "[] ; directory Algebra/Category/ModuleCat",
+   "date": "2026-10-21",
+   "verdict": "no match: only underived sheaf pushforwards, ordinary localization, or algebraic-geometry normalization results; none states this continuous-coefficient derived comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localization and finite free extension of coefficients commute with derived pushforward of bounded below proetale sheaves",
+   "results": "[\"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"Module.FinitePresentation.isLocalizedModule_mapExtendScalars\", \"Module.free_of_isLocalizedModule\", \"Algebra.Extension.localization\", \"SheafOfModules.pushforwardComp\", \"RingHom.Etale.ofLocalizationSpanTarget\", \"Algebra.FormallyEtale.localization_map\", \"SheafOfModules.freeFunctorCompPullbackIso\"]",
+   "date": "2026-10-21",
+   "verdict": "no match: only underived sheaf pushforwards, ordinary localization, or algebraic-geometry normalization results; none states this continuous-coefficient derived comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension from continuous integral ell adic coefficients to a finite extension of the rational ell adic field commutes with bounded below qcqs derived direct image",
+   "results": "[\"BDeRhamPlus\", \"Padic.adicCompletionEquiv\", \"PadicInt.coe_adicCompletionIntegersEquiv_apply\", \"PadicInt.coe_adicCompletionIntegersEquiv_symm_apply\", \"IsDedekindDomain.HeightOneSpectrum.algebraMap_adicCompletionIntegers_apply\", \"IsDedekindDomain.HeightOneSpectrum.algebraMap_adicCompletion\", \"IsDedekindDomain.FiniteAdeleRing.algebraMap\", \"PadicInt.adicCompletionIntegersEquiv\"]",
+   "date": "2026-10-21",
+   "verdict": "no match: only underived sheaf pushforwards, ordinary localization, or algebraic-geometry normalization results; none states this continuous-coefficient derived comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforward",
+   "results": "[\"SheafOfModules.pushforwardId\", \"SheafOfModules.pushforward\", \"SheafOfModules.instIsLeftAdjointOverOverRingCatPushforwardIdSheafOver\", \"SheafOfModules.overPushforwardOverAdj\", \"SheafOfModules.isLeftAdjoint_pushforward_of_isIso\", \"SheafOfModules.pushforwardCongr\", \"SheafOfModules.pushforwardNatIso\", \"SheafOfModules.pushforwardNatTrans\"]",
+   "date": "2026-10-21",
+   "verdict": "no match: only underived sheaf pushforwards, ordinary localization, or algebraic-geometry normalization results; none states this continuous-coefficient derived comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-qcqs-proper-constructible-closed-base-change",
@@ -78,5 +221,79 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-qcqs-proper-integral-rational-scalar-comparison",
+  "worker": "stage1",
+  "summary": "STATEMENT-DISPUTED: the all-continuous norm-topological algebraic-closure clause is false for arbitrary proper qcqs maps; report.md constructs an elliptic-isogeny family with unbounded finite fibres and a finite tensor-rank obstruction. Retained and proved the finite-extension coefficient comparison, without changing its counit normalization. Existing nodes supply every substantive input; no new nodes. The parent cannot use this corrected statement to justify its algebraic-closure branch.",
+  "blueprint": "det-sf-comp-coherence-cocycle: refinement isomorphisms (2), scalar extension in the proper closed-complement calculation. This split establishes the finite rational case only; the imported all-continuous algebraic-closure extrapolation is disputed with an explicit counterexample, not silently replaced by filtered-union coefficients.",
+  "tool_uses": [
+   {
+    "node": "det-prop-sfb-cartesian-coefficients-finite-free",
+    "why": "Generic coefficient/derived-category tool used in the finite coefficient factorization; it supplies no geometric base-change replacement for the unit route."
+   },
+   {
+    "node": "lem-pd-section-derived-pushpull-normalization",
+    "why": "Generic coefficient/derived-category tool used in the finite coefficient factorization; it supplies no geometric base-change replacement for the unit route."
+   },
+   {
+    "node": "lem-sfb-finite-free-scalar-coordinates",
+    "why": "Generic coefficient/derived-category tool used in the finite coefficient factorization; it supplies no geometric base-change replacement for the unit route."
+   },
+   {
+    "node": "lem-sfb-internal-section-scalar-adjunction",
+    "why": "Generic coefficient/derived-category tool used in the finite coefficient factorization; it supplies no geometric base-change replacement for the unit route."
+   },
+   {
+    "node": "lem-sfb-kflat-scalar-comparison-normalization",
+    "why": "Generic coefficient/derived-category tool used in the finite coefficient factorization; it supplies no geometric base-change replacement for the unit route."
+   },
+   {
+    "node": "lem-sfb-local-field-integral-basis",
+    "why": "Generic coefficient/derived-category tool used in the finite coefficient factorization; it supplies no geometric base-change replacement for the unit route."
+   },
+   {
+    "node": "lem-sfb-localized-direct-image-comparison",
+    "why": "Generic coefficient/derived-category tool used in the finite coefficient factorization; it supplies no geometric base-change replacement for the unit route."
+   },
+   {
+    "node": "lem-sfb-pasted-mates-counit-normalization",
+    "why": "Generic coefficient/derived-category tool used in the finite coefficient factorization; it supplies no geometric base-change replacement for the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "why": "Generic coefficient/derived-category tool used in the finite coefficient factorization; it supplies no geometric base-change replacement for the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic coefficient/derived-category tool used in the finite coefficient factorization; it supplies no geometric base-change replacement for the unit route."
+   },
+   {
+    "node": "pqf-lem-proper-basic",
+    "why": "Generic coefficient/derived-category tool used in the finite coefficient factorization; it supplies no geometric base-change replacement for the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-prop-sfb-cartesian-coefficients-finite-free",
+  "lem-pd-section-derived-pushpull-normalization",
+  "lem-sfb-finite-free-scalar-coordinates",
+  "lem-sfb-internal-section-scalar-adjunction",
+  "lem-sfb-kflat-scalar-comparison-normalization",
+  "lem-sfb-local-field-integral-basis",
+  "lem-sfb-localized-direct-image-comparison",
+  "lem-sfb-pasted-mates-counit-normalization",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "pqf-lem-proper-basic"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NB-01bd45493",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-01bd45493 (reviewer sub-agent of L); spot-checked: Not superseded: in live, clones/live and side-live the item is unsplit and unreviewed, there is no LAND line and no repair note; NC/ND/NE/NI/NJ deliveries of the same item are still in flight. The delivery drops the base clause Λ=Q̄_ℓ (all continuous functions, norm topology, per sk-def-localizing-closure) and keeps the finite-E case with the same ρ and counit normalization. This is a proper E7 correction, reported under '## Source error'. I checked the counterexample step by step and it holds. V=Spec C(N∪{∞},F̄_5); U⊂C_V has fibres D_n (n points) and C over ∞; h is proper, qcqs and not of finite presentation; J is the sign local system of an order-2 isogeny, so J∈Dctf. RΓ(C,L/3^r)=0, and proper base change plus repleteness give Rh_*J=M[0] with M(V) the null sequences. Γ(U,J_Ω) is the null sequences in Ω^n. Sections of the sheaf tensor Ω_V⊗M are locally finite sums, so at points over n their coordinates span at most N dimensions over F. The section w_n=3^n(α_{n,j}), with the α F-independent and integral, has span n, so H^0(ρ) is not surjective. This is unlike Q21 cdc69125, where the counterexample did not refute the statement. Steps: (1) the section-module transport nodes give the derived adjunctions with counits; pqf-lem-proper-basic gives qcqs; Dctf⊂Dbc gives bounded below. (2) lem-sfb-localized-direct-image-comparison applies to A=O_F→F: its only hypotheses are qcqs and bounded below, and its map is the counit adjunct. (3) The integral-basis, finite-free and coordinate nodes give E⊗_F−≅(−)^d, exact and computed termwise. (4) ring-sheaf-change-adjunction's comparisons b and d, with the adjunct compatibility, reduce the mate to the finite biproduct isomorphism; marking this elementary is fair. (5) The pasted-mates normalization, χ preserving 1⊗p, and K-flat pullback identify the composite with ρ. Edge cases F=E, J=0 and ramified E/F are fine. No new nodes, no duplicates; same_as=[] is consistent with my search (lem-sfb-continuous-algcl-proper-scalar-comparison is the finite-type-over-k Q̄ node). The off-unit nodes are generic coefficient and derived-category tools declared in split_report.tool_uses; I accept them. Batch-5: lem-pd-section-derived-pushpull-normalization is general internal↔section derived normalization, not a step of Poincaré duality or of the trace formula; lem-sfb-localized-direct-image-comparison is a generic A→E localization that reaches sec-poincare-duality only through that node. Both are accepted. MAINTAINER: the landed parent lem-sfb-qcqs-proper-constructible-closed-base-change steps 4 and 6 cite this item for C(−,Q̄_ℓ). That branch is now unsupported; the grandparent open-boundary-vanishing needs it. Reopen the parent, for example with a finite-type scope via lem-sfb-continuous-algcl-proper-scalar-comparison, and record this in HUMAN.md. No fixes."
  }
 }

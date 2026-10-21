@@ -22534,3 +22534,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:28 L: returned deliver/NE/lem-weil-pbc-finite-field-stratified-perfect-models (reviewer RETURN: A6/A7/B10, superseded (sixth push). The item is finished on live. In clones/live and side-live it is split, with reviewe)
 - 13:28 L: returned deliver/NI/def-per-support-condition (reviewer RETURN: C4, route lock. The item defines D_X, and so ω_X = Ra_X^! Q̄_ℓ, the whole content of CosuppCon, through lem-per-qbar-arb)
 - 13:28 L: returned deliver/NA/lem-sfb-bounded-bifunctor-devissage (reviewer RETURN: Superseded (A7/B10); C5 is advisory. This is the third push of this re-split, after Q20 90d757505 and NH d4ae18616, both)
+- 13:29 L: merged deliver/NB/lem-sfb-qcqs-proper-integral-rational-scalar-comparison (reviewer PASS; first push; new nodes: 0); claim not held by NB: not your claim
