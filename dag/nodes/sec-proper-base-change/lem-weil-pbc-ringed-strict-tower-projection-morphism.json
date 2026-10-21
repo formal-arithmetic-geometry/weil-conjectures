@@ -20,122 +20,135 @@
  ],
  "proof": [
   {
-   "text": "Choose a K-injective representative $I^\\bullet\\to E$ and put $N=f_*I^\\bullet$, so that $Q(N)$ represents $Rf_*E$ by the K-injective definition of derived direct image; $N$ itself need not be K-injective when $f$ is not flat, and this is never used. For each $n$ put $C_n=\\operatorname{Tot}(N\\otimes_{R_Y}P_n)$, $J_n=\\operatorname{Tot}(I^\\bullet\\otimes_{R_X}f^*P_n)$, and $B_n=f_*J_n$. The bounded finite-free complexes $P_n$ and $f^*P_n$ are K-flat, and the tensor totalizations are the complexes specified in [def-pc-tensor-complex-sheaves]; the chain-representative clause of [def-weil-pbc-projection-formula-arrows] identifies $C_n$ with the derived tensor on the $Y$ side and $B_n$ with the derived direct image of the $X$-side tensor. If the representatives named in the statement are different, the canonical localization comparisons transport these models and their maps, so the resulting tower objects are representative-independent.",
+   "text": "Every bounded finite-free coefficient complex is K-flat and termwise flat. Pullback preserves these properties. Form the functors of total tensor diagrams in the coefficient tower and reassemble diagrams of complexes as complexes of strict towers using the existing HomologicalComplex.functorEquivalence and its counit. Lift diagram morphisms componentwise in chain degree. A quasi-isomorphism in the first variable remains a quasi-isomorphism at every level, hence in the tower category. Localize these functors to obtain S and T and their comparisons on all complex representatives.",
    "uses": [
-    "def-weil-abstract-derived-category",
     "def-pc-tensor-complex-sheaves",
-    "def-weil-pbc-projection-formula-arrows"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0943, section-projection-formula (canonical map and representative comparison)"
-   }
-  },
-  {
-   "text": "Apply the representative-independent pullback comparison of [lem-weil-pbc-ringed-topoi-derived-pullback] to every $P_n$, transition $p_n$, and augmentation $z_n$. It identifies $Lf^*P_n$ with the termwise complex $f^*P_n$, and carries $p_n$ and $z_n$ to $p'_n$ and $z'_n$. Thus the $J_n$ form the strict augmented tower $T_\\bullet(E)$ used in the statement.",
-   "uses": [
-    "lem-weil-pbc-ringed-topoi-derived-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0943, section-projection-formula (naturality of the canonical map)"
-   }
-  },
-  {
-   "text": "For each $n$, use the actual term maps in [def-weil-pbc-projection-formula-arrows] with $h=f$, $I^\\bullet$ as its K-injective complex, and $F^\\bullet=P_n$. They are maps $t_{I^a,P_n^r}:N^a\\otimes_{R_Y}P_n^r\\to f_*(I^a\\otimes_{R_X}f^*P_n^r)$, with inverse maps $s_{a,r}$, and the displayed naturality equation for $t$ makes them commute with both differentials. Finite totalization therefore gives a chain map $\\tau_n:C_n\\to B_n$, inverse to the totalized $s_n$. By [lemma-weil-pbc-projection-formula-totalization], the derived class of $\\tau_n$ is the projection transformation $\\alpha_{E,P_n}$, under the canonical derived-pullback comparison, and $Q(B_n)$ is the level-$n$ object computing $Rf_*T_n(E)$.",
-   "uses": [
+    "def-weil-abstract-derived-category",
     "def-weil-pbc-projection-formula-arrows",
-    "lemma-weil-pbc-projection-formula-totalization",
+    "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "def-pc-flat-sheaf-modules",
+    "def-pc-kflat-complex",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0943 and 0A07; augmented strict-tower compatibility used in algebraization.tex Tag 0A0G"
+   }
+  },
+  {
+   "text": "The mixed tensor representative is natural in its first complex variable: lift any morphism to a common pullback refinement of K-flat resolutions, using an epimorphic K-flat resolution, and cancel the localized quasi-isomorphisms. Descend this natural isomorphism along Q. Compose with the normalized tower evaluation comparison to construct sEv and tEv. K-flat coefficients compute derived pullback, so the X-side comparison includes the prescribed derived-pullback map. This proves the representative normalization and naturality clauses.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "def-weil-pbc-projection-formula-arrows",
+    "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0943 and 0A07; augmented strict-tower compatibility used in algebraization.tex Tag 0A0G"
+   }
+  },
+  {
+   "text": "The ordinary adjunction and its tensor comparison give a natural chain projection mate. Use the existing proved total-pullback naturality and projection summand lemmas; the direct-sum universal property gives a natural total pullback comparison. Thus the chain mate is natural in both variables and defines a morphism of the entire coefficient tower, before localization. Its tensor-unit equation follows from the ordinary projection mate unit equation, checked on the summands of total tensor.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "def-weil-pbc-projection-formula-arrows",
     "lem-weil-pbc-ringed-projection-mate-exact"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0943, section-projection-formula (equation-projection-formula-map and finite totalization)"
+    "place": "Tags 0943 and 0A07; augmented strict-tower compatibility used in algebraization.tex Tag 0A0G"
    }
   },
   {
-   "text": "The naturality equation $B(u)t=t'A(u)$ in [def-weil-pbc-projection-formula-arrows], applied to each coefficient transition $p_n:P_{n+1}\\to P_n$, gives a strict equality of the bidegree maps defining $\\tau_{n+1}$ and $\\tau_n$. Since totalization is a finite direct sum in each degree, these equalities say that $\\tau_\\bullet:C_\\bullet\\to f_*^{\\operatorname{Tow}}J_\\bullet$ is a morphism of strict chain towers. Define $u$ to be the composite in the derived tower category\n$$Q(C_\\bullet)\\xrightarrow{Q(\\tau_\\bullet)}Q(f_*^{\\operatorname{Tow}}J_\\bullet)\\longrightarrow Rf_*^{\\operatorname{Tow}}T_\\bullet(E),$$\nwhere the second arrow is the canonical total-derived-functor comparison. For its evaluation, $\\operatorname{ev}_n$ is right adjoint to the exact functor sending a module $A$ to the tower with $A$ at levels $m\\le n$, identity transitions there, and $0$ above (exactness is levelwise by [lem-weil-tower-category-levelwise-abelian]); so by [lem-weil-pbc-right-adjoint-preserves-kinjective] it preserves K-injective tower complexes. Hence, for a K-injective tower resolution $j:J_\\bullet\\to J'_\\bullet$, the second arrow is $Q(f_*^{\\operatorname{Tow}}j)$, and the evaluation identification $\\operatorname{ev}_nRf_*^{\\operatorname{Tow}}\\cong Rf_*\\operatorname{ev}_n$ of [lem-weil-ringed-tower-pushforward-limit-comparison] carries its $n$-th component to the canonical map $Q(f_*J_n)\\to Rf_*J_n$, an isomorphism because $J_n$ is K-injective. Thus the evaluation of $u$ is the class of $\\tau_n$, hence $\\alpha_{E,P_n}$. The construction is made before localization, so it does not identify $D(\\operatorname{Tow})$ with $\\operatorname{Tow}(D)$.",
+   "text": "Compose the localized strict chain mate with the total-derived tower direct-image comparison. The comparison from underived direct image to derived direct image is invertible on the functorial K-injective resolution of the first variable. Use that resolution and naturality to invert this comparison and descend the resulting natural transformation along Q. This constructs u simultaneously natural in the derived object and in the augmented coefficient tower, with its normalized lifting equation on every complex.",
    "uses": [
-    "def-weil-pbc-projection-formula-arrows",
     "def-weil-abstract-derived-category",
-    "lem-weil-tower-category-levelwise-abelian",
-    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "prop-pur-kinjective-resolutions-exist",
     "lem-weil-ringed-tower-pushforward-limit-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0943, section-projection-formula (naturality of the canonical map); chain-level tower realization"
+    "place": "Tags 0943 and 0A07; augmented strict-tower compatibility used in algebraization.tex Tag 0A0G"
    }
   },
   {
-   "text": "For a chain map of augmented coefficient towers $(P_\\bullet,p_\\bullet,z_\\bullet)\\to(\\widetilde P_\\bullet,\\widetilde p_\\bullet,\\widetilde z_\\bullet)$, the same coefficient naturality of $t$ commutes with the map in the coefficient variable on every bidegree. Finite totalization and the canonical comparison to the levelwise derived direct image preserve these equalities. Thus the strict tower map $\\tau_\\bullet$, and consequently $u$, is natural in maps of the entire augmented tower. Naturality in $E$: a morphism $E\\to E'$ is represented on the chosen K-injective representatives by a chain map $g:I^\\bullet\\to I'^\\bullet$, unique up to homotopy. Naturality of $t$ in the module variable gives $\\tau'_\\bullet\\circ\\operatorname{Tot}(f_*g\\otimes1)=f_*\\operatorname{Tot}(g\\otimes1)\\circ\\tau_\\bullet$ termwise, and a homotopy $h$ between two such $g$ is carried to the homotopies $\\operatorname{Tot}(f_*h\\otimes1)$ and $f_*\\operatorname{Tot}(h\\otimes1)$, which the same equation intertwines. Hence $u$ is natural in $E$.",
+   "text": "Extend the normalized compatibility between evaluation and tower direct image from K-injective tower complexes to all tower complexes using their functorial K-injective resolutions; evaluation preserves quasi-isomorphisms. The tower category is Grothendieck abelian by the small module-diagram theorem and equivalence of the lifted indexing categories. On K-injective first-variable representatives, the totalization-left equation identifies the chain mate with the canonical derived projection mate after canceling its isomorphisms. Keep the totalization equation in its original representative form and perform the identity-isomorphism simplifications and comparison transports in generic categories. Combine the evaluation, representative, and lifting naturality squares, cancel the direct-image comparison and the evaluation isomorphisms, and descend along Q. The evaluated components of u are exactly the prescribed projection transformation.",
    "uses": [
-    "def-weil-pbc-projection-formula-arrows"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0943, section-projection-formula (naturality in the coefficient complex)"
-   }
-  },
-  {
-   "text": "The strict-tower homotopy-limit statement [lem-weil-pbc-ringed-strict-tower-homotopy-limit] supplies the exact functor $L_Y$ and its natural Roos distinguished triangle. Applying this functor to $u$, which is the image in $D(\\operatorname{Tow}(R_Y))$ of the strict chain-tower map $f_*^{\\operatorname{Tow}}(j)\\circ\\tau_\\bullet:C_\\bullet\\to f_*^{\\operatorname{Tow}}J'_\\bullet$ of Step 4, gives the maps on the first and both product terms; the naturality of the Roos construction gives the commuting squares, including the connecting square. Therefore $L_Y(u)$ is a morphism of the natural Roos triangles.",
-   "uses": [
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0A07, lemma-Rf-commutes-with-Rlim, tower-topos proof"
-   }
-  },
-  {
-   "text": "The naturality of the same term maps $t$ at $z_n:R_Y[0]\\to P_n$, together with the tensor-unit normalization $\\alpha_{E,R_Y}=1_{Rf_*E}$ from [lem-weil-pbc-ringed-projection-mate-exact], gives an equality of chain maps $\\tau_n(1_N\\otimes z_n)=f_*(1_I\\otimes z'_n):N\\to B_n$. These equalities commute with the transitions by the already established strict tower equation. Let $c_X(I)$ and $c_Y(N)$ denote the constant towers; the equalities assemble to the strict square\n$$\n\\begin{CD}\nc_Y(N) @>{\\iota_Y}>> C_\\bullet\\\\\n@V{\\cong}VV @VV{\\tau_\\bullet}V\\\\\nf_*^{\\operatorname{Tow}}c_X(I) @>{f_*^{\\operatorname{Tow}}\\iota_X}>> f_*^{\\operatorname{Tow}}J_\\bullet,\n\\end{CD}\n$$\nwhere $\\iota_X$ and $\\iota_Y$ are the maps induced by $1\\otimes z'_\\bullet$ and $1\\otimes z_\\bullet$.",
-   "uses": [
-    "def-weil-pbc-projection-formula-arrows",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-small-module-diagrams-grothendieck",
+    "new-lem-weil-pbc-projection-formula-totalization-left",
+    "lem-weil-ringed-tower-pushforward-limit-comparison",
     "lem-weil-pbc-ringed-projection-mate-exact"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0943, section-projection-formula (unit normalization and coefficient naturality)"
+    "place": "Tags 0943 and 0A07; augmented strict-tower compatibility used in algebraization.tex Tag 0A0G"
    }
   },
   {
-   "text": "The evaluation functor $\\operatorname{ev}_1$ on towers is exact by [lem-weil-tower-category-levelwise-abelian]. The constant-tower functor $c$ is its right adjoint: a map from a tower $H_\\bullet$ to $c(I)$ is uniquely determined by its component $H_1\\to I$, since every $H_n\\to H_1$ is the composite of the transitions. Hence [lem-weil-pbc-right-adjoint-preserves-kinjective] makes $c_X(I)$ K-injective, because $I$ is. No such claim is made for $c_Y(N)$: $N=f_*I$ need not be K-injective for non-flat $f$, and it is not needed. For a strict tower complex $H$ write $\\kappa_H:Q(\\lim H)\\to L(H)$ for the canonical total-derived-functor comparison, natural in strict tower maps, and $\\gamma_H:Q(f_*^{\\operatorname{Tow}}H)\\to Rf_*^{\\operatorname{Tow}}H$ likewise; so $u=\\gamma_{J}Q(\\tau_\\bullet)$ by Step 4. Put $\\lambda_X=\\kappa_{c_X(I)}:Q(I)\\to L_Xc_X(I)$, an isomorphism since $c_X(I)$ is K-injective with limit $I$, and $\\lambda_Y=\\kappa_{c_Y(N)}:Q(N)\\to L_Yc_Y(N)$, whose invertibility is not used. By the definition in the statement and naturality of $\\kappa$, $\\zeta_X=\\kappa_JQ(\\lim\\iota_X)=L_X(\\iota_X)\\lambda_X$ and $\\zeta_Y=\\kappa_CQ(\\lim\\iota_Y)=L_Y(\\iota_Y)\\lambda_Y$, with $Rf_*E$ identified with $Q(N)$ through the canonical isomorphism $Q(f_*I)\\to Rf_*Q(I)$. The comparison $a_{f,M}$ of [lem-weil-ringed-tower-pushforward-limit-comparison] is induced by the equality of underived composites $f_*\\lim=\\lim f_*^{\\operatorname{Tow}}$, i.e. it is compatible with the canonical comparisons from $Q$ of that common composite to both derived composites. For $M=c_X(I)$ the common value is $f_*I=N=\\lim c_Y(N)$ with $f_*^{\\operatorname{Tow}}c_X(I)=c_Y(N)$ strictly, and the canonical comparison to $Rf_*L_Xc_X(I)$ is $Rf_*(\\lambda_X)$ after $Q(N)\\cong Rf_*Q(I)$, while that to $L_YRf_*^{\\operatorname{Tow}}c_X(I)$ is $L_Y(\\gamma_{c_X(I)})\\lambda_Y$. Hence $a_{f,c_X(I)}Rf_*(\\lambda_X)=L_Y(\\gamma_{c_X(I)})\\lambda_Y$. Naturality of $a$ along $\\iota_X$ and of $\\gamma$ give\n$$L_Y(\\gamma_J)\\,L_Y(Q f_*^{\\operatorname{Tow}}\\iota_X)\\,\\lambda_Y=a_{f,T}\\,Rf_*(L_X\\iota_X)\\,Rf_*(\\lambda_X).$$\nThe square of Step 7 gives $Q(\\tau_\\bullet)Q(\\iota_Y)=Q(f_*^{\\operatorname{Tow}}\\iota_X)$ under $c_Y(N)=f_*^{\\operatorname{Tow}}c_X(I)$. Applying $L_Y$, composing with $L_Y(\\gamma_J)$ and using the displayed identity yields\n$$L_Y(u)\\,\\zeta_Y=a_{f,T}\\,Rf_*(\\zeta_X).$$\nThis uses the coaugmentation of the constant towers; compatibility with tower projections alone is not used.",
+   "text": "Use the tensor right unitor and the compatible coefficient augmentations to obtain maps from the constant complex into the ordinary inverse limits of both strict tensor towers. Their degreewise projections are precisely the required coaugmentations. Compose their localizations with the total-derived-limit comparison and descend to obtain zetaY and zetaX with the stated normalization on arbitrary representatives.",
    "uses": [
-    "lem-weil-tower-category-levelwise-abelian",
-    "lem-weil-pbc-right-adjoint-preserves-kinjective",
-    "lem-weil-ringed-tower-pushforward-limit-comparison",
+    "def-pc-tensor-complex-sheaves",
     "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0A07, lemma-Rf-commutes-with-Rlim, tower-topos proof; Tag 0A0G, augmented-tower compatibility"
+    "place": "Tags 0943 and 0A07; augmented strict-tower compatibility used in algebraization.tex Tag 0A0G"
+   }
+  },
+  {
+   "text": "Coefficient naturality and the chain mate unit equation give the coaugmentation square at every tower level. The ordinary limit comparison, normalized as limit.post, transports this square through ordinary limits. Combine it with the normalized common-underived direct-image/limit comparison and the lifting equation for u, first on functorial K-injective representatives and then by localization. This gives the asserted zeta compatibility on every derived object without a constant-tower K-injectivity argument.",
+   "uses": [
+    "lem-weil-ringed-tower-pushforward-limit-comparison",
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "prop-pur-kinjective-resolutions-exist"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0943 and 0A07; augmented strict-tower compatibility used in algebraization.tex Tag 0A0G"
+   }
+  },
+  {
+   "text": "Apply naturality of the first Roos map and connecting morphism to each component of u. Naturality of its evaluated tower morphism gives the middle transition-endomorphism square. These are the three required squares of Roos triangles.",
+   "uses": [
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0943 and 0A07; augmented strict-tower compatibility used in algebraization.tex Tag 0A0G"
    }
   }
  ],
  "proof_deps": [
+  "def-pc-flat-sheaf-modules",
+  "def-pc-kflat-complex",
   "def-pc-tensor-complex-sheaves",
   "def-weil-abstract-derived-category",
   "def-weil-pbc-projection-formula-arrows",
-  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
   "lem-weil-pbc-ringed-projection-mate-exact",
   "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
   "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "lem-weil-pbc-small-module-diagrams-grothendieck",
   "lem-weil-ringed-tower-pushforward-limit-comparison",
-  "lem-weil-tower-category-levelwise-abelian",
-  "lemma-weil-pbc-projection-formula-totalization"
+  "new-lem-weil-pbc-projection-formula-totalization-left",
+  "prop-pur-kinjective-resolutions-exist"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 0943, section-projection-formula; Tag 0A07, lemma-Rf-commutes-with-Rlim; augmented strict-tower refinement of Tag 0A0G"
+  "place": "Tags 0943 and 0A07; augmented strict-tower compatibility used in algebraization.tex Tag 0A0G; P3 Lean proof using the existing complex/functor equivalence, localization, functorial resolutions, proved projection-map APIs, the existing totalization-left equation, and normalized comparison squares"
  },
  "mathlib_searches": [
   {
@@ -239,7 +252,10 @@
    "SheafOfModules.RingedTensorEdge.projectionUnit",
    "SheafOfModules.RingedTensorEdge.projectionUnitComplex",
    "SheafOfModules.ProjectionCoaugmentation",
-   "SheafOfModules.ringedStrictTowerProjectionMorphism"
+   "SheafOfModules.ringedStrictTowerProjectionMorphism",
+   "SheafOfModules.StrictProjectionLimitData",
+   "SheafOfModules.StrictProjectionDirectImageData",
+   "SheafOfModules.RingedTensorEdge.ProjectionCounitNormalized"
   ],
   "file": "lean/Sheaf/Paper/RingedStrictTowerProjectionMorphism.lean",
   "statement": "theorem ringedStrictTowerProjectionMorphism {Y X : RingedTensorCorner.{u, w}} (e : RingedTensorEdge Y X) (a : RingedTensorModel Y) (b : RingedTensorModel X) [e.pushforward.Additive] [HasDerivedCategory.{w} X.projectionTowers] [HasDerivedCategory.{w} Y.projectionTowers] [HasCountableProducts X.mateDerived] [HasCountableProducts Y.mateDerived] (lx : StrictProjectionLimit X) (ly : StrictProjectionLimit Y) (d : StrictProjectionDirectImage e lx ly) : ∃ (CY : CochainComplex Y.mateModules ℤ ⥤ Y.projectionCoefficients ⥤ CochainComplex Y.projectionTowers ℤ) (CX : CochainComplex X.mateModules ℤ ⥤ Y.projectionCoefficients ⥤ CochainComplex X.projectionTowers ℤ) (cy : CY ⋙ projectionPost HomologicalComplex.complexOfFunctorsToFunctorToComplex ≅ Y.projectionTensorDiagrams) (cx : CX ⋙ projectionPost HomologicalComplex.complexOfFunctorsToFunctorToComplex ≅ e.projectionTensorDiagrams) (S : Y.mateDerived ⥤ Y.projectionCoefficients ⥤ DerivedCategory Y.projectionTowers) (T : X.mateDerived ⥤ Y.projectionCoefficients ⥤ DerivedCategory X.projectionTowers) (s : DerivedCategory.Q ⋙ S ≅ CY ⋙ projectionPost DerivedCategory.Q) (t : DerivedCategory.Q ⋙ T ≅ CX ⋙ projectionPost DerivedCategory.Q) (hf : ∀ (P : Y.projectionCoefficients) (n : ℕᵒᵖ), Y.mateFlat (P.obj.right.obj n) ∧ X.mateFlat ((e.projectionCoefficientDiagram.obj P).obj n)) (sEv : ∀ (M : Y.mateDerived) (P : Y.projectionCoefficients) (n : ℕᵒᵖ), Y.tensor.obj (M, DerivedCategory.Q.obj (P.obj.right.obj n)) ≅ (ly.ev.obj ((S.obj M).obj P)).obj n) (tEv : ∀ (E : X.mateDerived) (P : Y.projectionCoefficients) (n : ℕᵒᵖ), X.tensor.obj (E, e.left.obj (DerivedCategory.Q.obj (P.obj.right.obj n))) ≅ (lx.ev.obj ((T.obj E).obj P)).obj n) (u : e.right ⋙ S ⟶ T ⋙ projectionPost d.Rt) (zY : ∀ P : Y.projectionCoefficients, 𝟭 Y.mateDerived ⟶ (S.flip.obj P) ⋙ ly.L) (zX : ∀ P : Y.projectionCoefficients, 𝟭 X.mateDerived ⟶ (T.flip.obj P) ⋙ lx.L), (∀ (N : CochainComplex Y.mateModules ℤ) (P : Y.projectionCoefficients) (n : ℕᵒᵖ), (sEv (DerivedCategory.Q.obj N) P n).hom ≫ (ly.ev.map ((s.hom.app N).app P)).app n ≫ (ly.evaluation.hom.app ((CY.obj N).obj P)).app n ≫ DerivedCategory.Q.map (((cy.hom.app N).app P).app n) = (mixedTensorRepresentative Y.ring Y.mateFlat (fun _ ↦ Iff.rfl) Y.tensor a.representative N (P.obj.right.obj n) (hf P n).1).hom) ∧ (∀ (K : CochainComplex X.mateModules ℤ) (P : Y.projectionCoefficients) (n : ℕᵒᵖ), (tEv (DerivedCategory.Q.obj K) P n).hom ≫ (lx.ev.map ((t.hom.app K).app P)).app n ≫ (lx.evaluation.hom.app ((CX.obj K).obj P)).app n ≫ DerivedCategory.Q.map (((cx.hom.app K).app P).app n) = X.tensor.map (Prod.mkHom (𝟙 (DerivedCategory.Q.obj K)) (derivedPullbackComplexComparison e.pullback e.left e.epsilon (P.obj.right.obj n))) ≫ (mixedTensorRepresentative X.ring X.mateFlat (fun _ ↦ Iff.rfl) X.tensor b.representative K ((e.projectionCoefficientDiagram.obj P).obj n) (hf P n).2).hom) ∧ (∀ (P : Y.projectionCoefficients) (n : ℕᵒᵖ) {M M' : Y.mateDerived} (g : M ⟶ M'), Y.tensor.map (Prod.mkHom g (𝟙 (DerivedCategory.Q.obj (P.obj.right.obj n)))) ≫ (sEv M' P n).hom = (sEv M P n).hom ≫ (ly.ev.map ((S.map g).app P)).app n) ∧ (∀ (P : Y.projectionCoefficients) (n : ℕᵒᵖ) {E E' : X.mateDerived} (g : E ⟶ E'), X.tensor.map (Prod.mkHom g (𝟙 (e.left.obj (DerivedCategory.Q.obj (P.obj.right.obj n))))) ≫ (tEv E' P n).hom = (tEv E P n).hom ≫ (lx.ev.map ((T.map g).app P)).app n) ∧ (∀ (E : X.mateDerived) (P : Y.projectionCoefficients) (n : ℕᵒᵖ), (sEv (e.right.obj E) P n).hom ≫ (ly.ev.map ((u.app E).app P)).app n ≫ (d.evaluation.hom.app ((T.obj E).obj P)).app n = derivedProjectionFormulaMate e.left e.right e.derivedAdjunction Y.tensor X.tensor (e.tensorComparison a b) E (DerivedCategory.Q.obj (P.obj.right.obj n)) ≫ e.right.map (tEv E P n).hom) ∧ (∀ (N : CochainComplex Y.mateModules ℤ) (P : Y.projectionCoefficients), ∃ i : N ⟶ ((lim : Y.projectionTowers ⥤ Y.mateModules).mapHomologicalComplex (ComplexShape.up ℤ)).obj ((CY.obj N).obj P), ProjectionCoaugmentation N P.obj.right P.obj.hom ((CY.obj N).obj P) ((Functor.mapIso ((CategoryTheory.evaluation Y.projectionCoefficients _).obj P) (cy.app N))) i ∧ (zY P).app (DerivedCategory.Q.obj N) ≫ ly.L.map ((s.hom.app N).app P) = DerivedCategory.Q.map i ≫ ly.eta.app ((CY.obj N).obj P)) ∧ (∀ (K : CochainComplex X.mateModules ℤ) (P : Y.projectionCoefficients), ∃ (z : (Functor.const ℕᵒᵖ).obj X.mateUnitComplex ⟶ e.projectionCoefficientDiagram.obj P) (i : K ⟶ ((lim : X.projectionTowers ⥤ X.mateModules).mapHomologicalComplex (ComplexShape.up ℤ)).obj ((CX.obj K).obj P)), (∀ n : ℕᵒᵖ, z.app n = e.projectionUnitComplex.inv ≫ (e.pullback.mapHomologicalComplex (ComplexShape.up ℤ)).map (P.obj.hom.app n)) ∧ ProjectionCoaugmentation K (e.projectionCoefficientDiagram.obj P) z ((CX.obj K).obj P) ((Functor.mapIso ((CategoryTheory.evaluation Y.projectionCoefficients _).obj P) (cx.app K))) i ∧ (zX P).app (DerivedCategory.Q.obj K) ≫ lx.L.map ((t.hom.app K).app P) = DerivedCategory.Q.map i ≫ lx.eta.app ((CX.obj K).obj P)) ∧ (∀ (E : X.mateDerived) (P : Y.projectionCoefficients), (zY P).app (e.right.obj E) ≫ ly.L.map ((u.app E).app P) = e.right.map ((zX P).app E) ≫ d.a.hom.app ((T.obj E).obj P)) ∧ (∀ (E : X.mateDerived) (P : Y.projectionCoefficients), ly.L.map ((u.app E).app P) ≫ ly.p (d.Rt.obj ((T.obj E).obj P)) = ly.p ((S.obj (e.right.obj E)).obj P) ≫ Limits.Pi.map (fun n : ℕ ↦ (ly.ev.map ((u.app E).app P)).app (op n))) ∧ (∀ (E : X.mateDerived) (P : Y.projectionCoefficients), Limits.Pi.map (fun n : ℕ ↦ (ly.ev.map ((u.app E).app P)).app (op n)) ≫ towerTransitionEndomorphism (fun n : ℕ ↦ (ly.ev.obj (d.Rt.obj ((T.obj E).obj P))).map (homOfLE (Nat.le_succ n)).op) = towerTransitionEndomorphism (fun n : ℕ ↦ (ly.ev.obj ((S.obj (e.right.obj E)).obj P)).map (homOfLE (Nat.le_succ n)).op) ≫ Limits.Pi.map (fun n : ℕ ↦ (ly.ev.map ((u.app E).app P)).app (op n))) ∧ (∀ (E : X.mateDerived) (P : Y.projectionCoefficients), Limits.Pi.map (fun n : ℕ ↦ (ly.ev.map ((u.app E).app P)).app (op n)) ≫ ly.delta (d.Rt.obj ((T.obj E).obj P)) = ly.delta ((S.obj (e.right.obj E)).obj P) ≫ (ly.L.map ((u.app E).app P))⟦(1 : ℤ)⟧')",
@@ -247,7 +263,7 @@
   "by": "NG",
   "date": "2026-10-17",
   "existing": false,
-  "note": "Auxiliary declarations package the coefficient diagrams, total tensor, and the canonical derived-functor data already specified in the dependencies. Chain-level diagram comparisons and localization factorizations retain strict towers and arbitrary representatives. The ordinary unit is selected from a unique normalized characterization, never an unconstrained existence statement.",
+  "note": "Auxiliary declarations package the coefficient diagrams, total tensor, and the canonical derived-functor data already specified in the dependencies. Chain-level diagram comparisons and localization factorizations retain strict towers and arbitrary representatives. The ordinary unit is selected from a unique normalized characterization, never an unconstrained existence statement. P3 representation repair: the two native hypothesis records specialize generic records over abstract categories and the original localization functors; the counit predicate is fixed to the exact original equation. See coord/changes/P3-strict-projection-record-layout.md.",
   "fixed_by": "NT-stage2-cc-6c0ab1186"
  },
  "reviewed_lean": {
@@ -257,5 +273,15 @@
   "group": "NG",
   "result": "fix",
   "note": "Read the node (statement unchanged from merged node; stmt_deps adds the reviewed tensor-square presentation), all dependency Lean declarations, the module and the report. Every clause matches except the core one: conjunct 3 (evaluation of u at n is alpha_{E,P_n}) went through object-indexed isos sEv/tEv with no naturality. They were pinned only on literal Q.obj N, and conjunct 3 uses sEv (e.right.obj E), which never has that form, so it only said each ev_n(u) is an iso (H3 weakening). Fix: two added conjuncts make sEv and tEv natural in the derived variable, which pins them everywhere through essential surjectivity of Q and restores ev_n(u)=alpha; the canonical comparisons satisfy them; the docstring is updated and the report gains a maintainer-fix section. Other gates pass: no hollow defs (projectionUnit chosen from an exists-unique; the hypothesis structures carry the dependencies' pinned data), no extra assumptions or universe restriction, source/blueprint docstrings with the 8 steps, proof only sorry, no pro-etale substitute; edge cases P=0, f=id, varying bounds and non-K-injective N are covered. nt_compile under load 110-160: delivered file clean at 47.6 s after two 60 s timeouts; fixed file clean at 53.2 s and 44.7 s after one timeout. Fixes: fixes/RingedStrictTowerProjectionMorphism.lean and fixes/lem-weil-pbc-ringed-strict-tower-projection-morphism.report.md."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-38084",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261021T020132-L-2589758",
+  "kind": "interface",
+  "note": "independent cc review: delivered RingedStrictTowerProjectionMorphism.lean vs live: target theorem signature/docstring identical, sorry → buildTowerProjection; old vs new StrictProjectionLimit/DirectImage fields matched one-to-one (V=e.pushforward, R=e.right, counit predicate = old equation); node proof_deps = union of step uses; axioms propext/Classical.choice/Quot.sound + sorryAx via reviewed totalization_left"
  }
 }
