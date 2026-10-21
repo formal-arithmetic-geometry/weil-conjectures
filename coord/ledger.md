@@ -19872,3 +19872,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:38 L: merged deliver/Q69/lem-sp-p1-splitting-scalar (reviewer FIX; first push; new nodes: 0); claim not held by Q69: not your claim
 - 03:38 L: merged deliver/Q43/lem-sfb-locally-free-derived-scalars (reviewer FIX; first push; new nodes: 0)
 - 03:38 L: merged deliver/NL/lem-weil-pbc-kflat-fixed-tensor-triangulated (reviewer PASS; first push; new nodes: 0)
+- 03:38 L: merged deliver/Q131/lem-sfb-finite-proper-geometric-cd-bound (reviewer FIX; first push; new nodes: 0)

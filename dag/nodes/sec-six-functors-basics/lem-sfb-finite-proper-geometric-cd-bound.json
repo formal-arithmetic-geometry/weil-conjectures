@@ -2,7 +2,7 @@
  "id": "lem-sfb-finite-proper-geometric-cd-bound",
  "kind": "statement",
  "title": "Uniform geometric fibre dimension and torsion cohomological bound",
- "statement": "Let $f:X\\to Y$ be a proper morphism of schemes with $Y$ quasi-compact [def-pc-scheme] [def-weil-proper-morphism] [def-weil-pbc-quasi-compact-scheme]. There is an integer $e\\geq0$ such that every fibre of every base change $f_S:X\\times_Y S\\to S$ has Krull dimension at most $e$ [def-pc-base-change] [def-pc-scheme-fibre] [def-kun-topological-krull-dimension]. Moreover, for every geometric point $\\bar y:\\operatorname{Spec}\\Omega\\to Y$, with $\\Omega$ separably closed, and every torsion abelian étale sheaf $F$ on $X_{\\bar y}$, one has $H^q(X_{\\bar y},F)=0$ for $q>2e$ [def-weil-geometric-point] [def-weil-pbc-torsion-etale-sheaf] [def-weil-pbc-etale-cohomology]. Empty fibres are allowed.",
+ "statement": "Let $f:X\\to Y$ be a proper morphism of schemes with $Y$ quasi-compact [def-pc-scheme] [def-weil-proper-morphism] [def-weil-pbc-quasi-compact-scheme]. There is an integer $e\\geq0$ such that every fibre of every base change $f_S:X\\times_Y S\\to S$ has Krull dimension at most $e$ [def-pc-base-change] [def-pc-scheme-fibre] [def-kun-topological-krull-dimension]. Moreover, for every separably closed field $\\Omega$ [def-weil-field] [def-pc-separably-closed] and every morphism $\\bar y:\\operatorname{Spec}\\Omega\\to Y$ [def-weil-affine-spectrum], and every torsion abelian étale sheaf $F$ on $X_{\\bar y}$, one has $H^q(X_{\\bar y},F)=0$ for $q>2e$ [def-weil-pbc-torsion-etale-sheaf] [def-weil-pbc-etale-cohomology]. Empty fibres are allowed.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-proper/sk-prop-ctf-finite-proper-localizing.proof.md",
   "place": "Étale statements, uniform cohomological bound; old split step 2 before the finite-Tor application"
@@ -14,13 +14,91 @@
   "def-pc-base-change",
   "def-pc-scheme-fibre",
   "def-kun-topological-krull-dimension",
-  "def-weil-geometric-point",
   "def-weil-pbc-torsion-etale-sheaf",
-  "def-weil-pbc-etale-cohomology"
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-field",
+  "def-pc-separably-closed",
+  "def-weil-affine-spectrum"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By the definition of properness, f is of finite type. Apply lem-fin-finite-type-fibre-dimension-bound to f and the quasi-compact base Y. Choose its nonnegative bound e, so dim(X_y) ≤ e for every y in Y. The theorem explicitly allows empty fibres. When Y is empty one may choose e = 0.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "lem-fin-finite-type-fibre-dimension-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0A3V, lemma-morphism-finite-type-bounded-dimension; Tag 01W1, definition-proper"
+   }
+  },
+  {
+   "text": "For any field L and any u:Spec L → Y, put y = u(*). The residue-field naturality statement gives u = j_y ∘ Spec(r), where r:κ(y) → L is the induced field map: the residue field at the unique point of Spec L is L and its canonical point morphism is the identity. Thus L is a field extension of κ(y). By the universal property of fibre products, X ×_Y Spec L is canonically isomorphic to X_y ×_{Spec κ(y)} Spec L: the two maps are determined by the same projections to X and Spec L, and their composites are identities by uniqueness. Both X_y → Spec κ(y) and X ×_Y Spec L → Spec L are finite type by the arbitrary-base-change clause of lem-sfb-finite-type-composition-base-change. Apply the field-extension clause of lem-kun-dimension-extension to X_y. It gives dim(X ×_Y Spec L) = dim(X_y) ≤ e, including when X_y is empty. Isomorphic schemes have the same dimension since an isomorphism identifies their chains of irreducible closed subsets.",
+   "uses": [
+    "lem-weil-pbc-residue-field-point-naturality",
+    "def-weil-residue-field",
+    "def-pc-scheme-fibre",
+    "def-pc-fibre-product",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-kun-dimension-extension",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00P3, lemma-dimension-preserved-field-extension; schemes.tex Tag 01J9, lemma-characterize-points and following naturality diagram; morphisms.tex Tag 01T4, lemma-base-change-finite-type"
+   }
+  },
+  {
+   "text": "Let S → Y be any base change and s ∈ S. By the definitions, its fibre is (X ×_Y S) ×_S Spec κ(s). The universal property identifies this with X ×_Y Spec κ(s), using the composite Spec κ(s) → S → Y. Explicitly, a pair of compatible maps to X ×_Y S and Spec κ(s) is exactly a pair of maps to X and Spec κ(s) compatible over Y; the S-component is forced by Spec κ(s) → S. The maps in both directions have identical projections, so their composites are identities. Apply step 2 with L = κ(s). This proves the same bound e for all fibres of all base changes, without any quasi-compactness hypothesis on S.",
+   "uses": [
+    "def-pc-base-change",
+    "def-pc-scheme-fibre",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01JP and 01K0, definition-fibre-product and definition-fibre"
+   }
+  },
+  {
+   "text": "Fix a separably closed field Ω and a morphism bar y:Spec Ω → Y. Step 2 makes Z = X ×_Y Spec Ω a finite-type Ω-scheme of dimension at most e. Let F be a torsion abelian étale sheaf on Z, i.e. c_F is an isomorphism; by the implication (1)⇒(2) of lem-weil-pbc-torsion-sheaf-characterizations every local section of F is locally killed by a positive integer, which is the torsion notion used by def-sc-etale-torsion-cd and the three nodes below. By lem-sf-separably-closed-torsion-cd the torsion cohomological dimension of Ω is at most 0. The affine bound new-thm-sc-affine-torsion-cd-bound therefore supplies, for every affine finite-type Ω-scheme of dimension at most e, vanishing of torsion cohomology in degrees greater than e + 0. Feed this affine bound into new-thm-sc-finite-type-torsion-cd-affine-reduction with K = Ω, d = e and c = 0. Its conclusion is H^q(Z,F) = 0 for every torsion abelian étale sheaf F and q > 2e. These nodes use arbitrary torsion, with no common annihilator or invertibility condition. Their dimension-at-most statements cover the empty scheme as well. Together with step 3 this proves both assertions with the same e.",
+   "uses": [
+    "lem-sf-separably-closed-torsion-cd",
+    "new-thm-sc-affine-torsion-cd-bound",
+    "new-thm-sc-finite-type-torsion-cd-affine-reduction",
+    "lem-weil-pbc-torsion-sheaf-characterizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-sc-finite-type-torsion-cd.md",
+    "place": "Full proof, affine bound plus Zariski-to-étale Leray reduction; Stacks Tag 0F0V, proposition-cd-affine, and Tag 03QU, lemma-compare-cohomology-point"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-topological-krull-dimension",
+  "def-pc-base-change",
+  "def-pc-fibre-product",
+  "def-pc-scheme-fibre",
+  "def-weil-proper-morphism",
+  "def-weil-residue-field",
+  "lem-fin-finite-type-fibre-dimension-bound",
+  "lem-kun-dimension-extension",
+  "lem-sf-separably-closed-torsion-cd",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-residue-field-point-naturality",
+  "lem-weil-pbc-torsion-sheaf-characterizations",
+  "new-thm-sc-affine-torsion-cd-bound",
+  "new-thm-sc-finite-type-torsion-cd-affine-reduction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Composition of Tag 0A3V with field-extension dimension invariance (algebra.tex, Tag 00P3), and the affine/Leray torsion bound in the blueprint thm-sc-finite-type-torsion-cd proof; follows the unit’s uniform-fibre-bound route."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -63,10 +141,52 @@
    "results": "; 1 hits: Mathlib/AlgebraicGeometry/Sites/Etale.lean; scope Mathlib/AlgebraicGeometry",
    "date": "2026-10-21",
    "verdict": "no match: general definitions and infrastructure do not give the stated scheme/coefficient comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomologicalDimension|cohomological_dimension|topologicalKrullDim.*(fiber|pullback)",
+   "results": "0 hits: none; scope Mathlib/AlgebraicGeometry",
+   "date": "2026-10-21",
+   "verdict": "no match: finite or quasi-finite fibres, smoothness and base-change infrastructure do not state the uniform dimension and torsion-cohomology bounds"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper, topologicalKrullDim",
+   "results": "0 hits: none",
+   "date": "2026-10-21",
+   "verdict": "no match: finite or quasi-finite fibres, smoothness and base-change infrastructure do not state the uniform dimension and torsion-cohomology bounds"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a proper morphism to a quasi compact scheme, dimensions of fibres after arbitrary base change are uniformly bounded, and torsion etale cohomology of geometric fibres vanishes above twice this bound",
+   "results": "8 hits: AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.quasiCompact_isStableUnderBaseChange, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.IsEtale, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite",
+   "date": "2026-10-21",
+   "verdict": "no match: finite or quasi-finite fibres, smoothness and base-change infrastructure do not state the uniform dimension and torsion-cohomology bounds"
+  },
+  {
+   "tool": "grep",
+   "query": "fiber.*[Dd]im|fibre.*[Dd]im|[Cc]ohomological.*[Dd]imension",
+   "results": "1 hits: Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean; scope Mathlib/AlgebraicGeometry",
+   "date": "2026-10-21",
+   "verdict": "no match: finite or quasi-finite fibres, smoothness and base-change infrastructure do not state the uniform dimension and torsion-cohomology bounds"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Uniform dimension bound for fibres of a finite type morphism and vanishing of torsion etale cohomology over a separably closed field",
+   "results": "8 hits: AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.IsFinite.finite_preimage_singleton, AlgebraicGeometry.Scheme.Hom.discrete_fiber, AlgebraicGeometry.IsFinite.recOn, AlgebraicGeometry.instCompactSpaceCarrierCarrierCommRingCatFiberOfQuasiCompact, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType",
+   "date": "2026-10-21",
+   "verdict": "no match: finite or quasi-finite fibres, smoothness and base-change infrastructure do not state the uniform dimension and torsion-cohomology bounds"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite type morphism over quasi compact base has bounded fibre Krull dimensions after arbitrary residue field extensions; geometric torsion etale cohomological dimension at most twice dimension",
+   "results": "8 hits: Algebra.QuasiFinite.finite_fiber, Algebra.quasiFinite_iff, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, Algebra.QuasiFinite.instFiniteResidueField, Algebra.instFiniteResidueFieldOfQuasiFiniteAt, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime, AlgebraicGeometry.finite_appTop_of_universallyClosed",
+   "date": "2026-10-21",
+   "verdict": "no match: finite or quasi-finite fibres, smoothness and base-change infrastructure do not state the uniform dimension and torsion-cohomology bounds"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-ctf-finite-proper-localizing",
@@ -83,5 +203,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-finite-proper-geometric-cd-bound",
+  "worker": "stage1",
+  "summary": "Reused existing ordinary-fibre bound, field-extension dimension invariance, arbitrary finite-type base change, residue-point naturality, separably closed field acyclicity and affine/Leray torsion bounds. Proved the fibre-product identifications explicitly. Clarified the separably closed field-valued-point quantifier because the cited geometric-point definition requires algebraic closure. No new nodes.",
+  "blueprint": "Realizes the uniform finite cohomological bound used in det-ctf-finite-proper-localizing, Étale statements paragraph: the bound is unchanged under every base change and applies to arbitrary torsion sheaves on separably closed fibres. Also supplies the uniform fibre bound requested in unit sk-prop-ctf-finite-proper, step 1.",
+  "tool_uses": [
+   {
+    "node": "lem-fin-finite-type-fibre-dimension-bound",
+    "why": "Generic Stacks 0A3V finite-type fibre-dimension bound over a quasi-compact base, needed for the unit’s uniform bound; no theorem of this unit supplies it."
+   },
+   {
+    "node": "lem-kun-dimension-extension",
+    "why": "Only its field-extension equality is used to carry the ordinary-fibre bound to arbitrary field-valued fibres; no Kunneth assertion or alternate unit route is used."
+   },
+   {
+    "node": "lem-sf-separably-closed-torsion-cd",
+    "why": "Generic separably closed field acyclicity supplies c=0 in the unit’s geometric torsion bound."
+   },
+   {
+    "node": "new-thm-sc-affine-torsion-cd-bound",
+    "why": "Generic torsion affine bound at dimension at most e, with no prime-to-characteristic restriction, supplies the hypothesis of the Leray reduction."
+   },
+   {
+    "node": "new-thm-sc-finite-type-torsion-cd-affine-reduction",
+    "why": "Generic affine-to-global cohomological bound supplies 2e for the geometric fibre, including empty fibres; this unit does not reprove the comparison-site spectral sequence."
+   },
+   {
+    "node": "lem-weil-pbc-torsion-sheaf-characterizations",
+    "why": "Only its (1)⇒(2) implication is used to pass from the colimit definition of a torsion étale sheaf in the item's statement to the local-section torsion notion of def-sc-etale-torsion-cd used by the cohomological-dimension nodes; definitional comparison, not a route step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-fin-finite-type-fibre-dimension-bound",
+  "lem-kun-dimension-extension",
+  "lem-sf-separably-closed-torsion-cd",
+  "new-thm-sc-affine-torsion-cd-bound",
+  "new-thm-sc-finite-type-torsion-cd-affine-reduction",
+  "lem-weil-pbc-torsion-sheaf-characterizations"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q131-69a0ff401",
+  "group": "Q131",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q131-69a0ff401 (reviewer sub-agent of L); spot-checked: Read the item, the report, the parent det-ctf step 1, unit sk-prop-ctf-finite-proper, the main-20261015 'Étale statements' paragraph, and Stacks 0A3V, 00P3, 0F0V and 0F10. The statement change is accepted: 'geometric point with Ω separably closed', which cited a definition requiring algebraic closure, becomes 'every separably closed Ω and every Spec Ω→Y'. This is strictly stronger and true, since 0F0V needs only cd(Ω)=0, which holds for separably closed fields including imperfect ones. The only citer, the parent, still applies, and the report names the change. Step 1: proper ⇒ finite type, and lem-fin-finite-type-fibre-dimension-bound (0A3V) gives the bound e. Step 2: the residue-point factorization, the fibre-product pasting, finite type by base change, and the field-extension clause of lem-kun-dimension-extension (00P3) give dim ≤ e on every field-valued fibre. Step 3: elementary pasting with L=κ(s). Step 4: cd_tor(Ω)≤0, the affine bound d+c and the Leray reduction with c=0 give H^q=0 for q>2e. Checked edge cases: empty X, Y and fibres; finite f; P^1 over the separable closure of F_p(t). No new nodes, no duplicate of the full conjunction, no cycle, no SGA source. The five declared tool uses are generic and accepted. FIX (C4/E6): step 4 silently passed from the colimit notion of a torsion sheaf (def-weil-pbc-torsion-etale-sheaf, used in the item's statement) to the local-section notion of def-sc-etale-torsion-cd that the cited cd nodes use. The fix adds the (1)⇒(2) citation of lem-weil-pbc-torsion-sheaf-characterizations to step 4's uses and proof_deps, and declares it in split_report.tool_uses. That node's closure does not contain the item, so there is no cycle. One file: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-finite-proper-geometric-cd-bound.json.; 1 file(s) fixed by the reviewer"
  }
 }
