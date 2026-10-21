@@ -30,7 +30,7 @@
    }
   },
   {
-   "text": "The object $U\\xrightarrow{1}U$ is terminal in its small pro-etale site. For every module sheaf $F$, a map $C^{\\oplus r}\\to F$ is uniquely specified by $r$ sections $s_j\\in F(U)$: on $T\\to U$ its formula is $(c_j)_j\\mapsto\\sum_jc_j(s_j|_T)$. Semilinear restrictions in [def-weil-sheaf-of-modules-category] show these formulas commute with restriction, and linearity shows every map has this formula. Finite direct sums here are the sectionwise finite products of modules, which satisfy the sheaf condition coordinatewise. Given an epimorphism $F\\to G$ and a map $C^{\\oplus r}\\to G$, step 1 lifts each of its finitely many generator sections to $F(U)$; the displayed formula gives a lift of the map. Hence every $C^{\\oplus r}$ is a projective object. For $r=0$ both the map and the lift are unique.",
+   "text": "The object U → U is terminal in the small pro-etale site, by reflection along the fully faithful forgetful functor to Over U. Construct sfSectionsEquiv explicitly by restriction along the unique arrows to U. Compose this equivalence with SheafOfModules.freeHomEquiv: maps out of a free sheaf are tuples of sections at U. Step 1 lifts every generator section along any epimorphism, so the free sheaf on any index type in the coefficient universe is projective. This includes the empty index type and rank zero.",
    "uses": [
     "def-weil-sheaf-of-modules-category"
    ],
@@ -41,19 +41,7 @@
    }
   },
   {
-   "text": "For each $q\\in[a,b]$, put $\\mathcal Z^q=\\ker(d_Z^q)$, and let $p_q:\\mathcal Z^q\\twoheadrightarrow H^q(Z)$ be the quotient by $\\operatorname{im}(d_Z^{q-1})$, using [def-weil-derived-cohomology-sheaves]. Regard $\\theta_q$ as a map to $H^q(Z)$ via the fixed identification of $Z$ with a representative of $N$. Projectivity from step 2 gives $t_q:C^{\\oplus r_q}\\to\\mathcal Z^q$ with $p_qt_q=\\theta_q$. Define $v^q:V^q\\to Z^q$ as $t_q$ followed by the kernel inclusion and define it to be zero outside $[a,b]$. Since $d_Z^qv^q=0$ and $d_V=0$, these maps form a chain map. Its cohomology map in degree $q$ is exactly $p_qt_q=\\theta_q$; outside the interval both cohomology sheaves vanish. Thus $v$ is a quasi-isomorphism, and its image in the localization [def-weil-abstract-derived-category] is the asserted isomorphism $V\\cong N$.",
-   "uses": [
-    "def-weil-derived-cohomology-sheaves",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09C3, lemma-local-structure-constructible-complex, lifting rho to tilde rho: apply the lifting separately to the chosen bases in each of the finitely many degrees."
-   }
-  },
-  {
-   "text": "Apply [lem-sc-bounded-above-projective-kprojective] in the abelian category $\\operatorname{Mod}(C)$ of [def-weil-sheaf-of-modules-category]. Every bounded-above complex of projective module sheaves is K-projective. In the Hom-complex description of K-projectivity, degree-zero cycles are chain maps and degree-zero boundaries are maps $d_Eh+hd_P$; thus acyclicity implies precisely the null-homotopy condition used by the next node. Then [lem-coef-kprojective-derived-hom-bijection] identifies its morphisms in the homotopy category with its morphisms in the unbounded derived category. By that node's definition, the homotopy category has chain maps modulo $f-g=d_Eh+hd_P$. This proves the chain-map representative assertion and its uniqueness precisely up to the homotopy in the statement. This argument does not require enough projective objects or any boundedness of the target.",
+   "text": "Apply CochainComplex.isKProjective_of_projective from [lem-sc-bounded-above-projective-kprojective] to the bounded-above complex of projectives. Apply CochainComplex.IsKProjective.Qh_map_bijective from [lem-coef-kprojective-derived-hom-bijection], lift homotopy-category maps by fullness of HomotopyCategory.quotient, and transport along DerivedCategory.quotientCompQhIso. Equality in the homotopy quotient is precisely Nonempty (Homotopy f g), by HomotopyCategory.homotopyOfEq and eq_of_homotopy. This proves chain representatives and their uniqueness without any boundedness on the target.",
    "uses": [
     "def-weil-sheaf-of-modules-category",
     "lem-sc-bounded-above-projective-kprojective",
@@ -66,7 +54,7 @@
    }
   },
   {
-   "text": "Fix a representative $E$ of $A$ and put $S=C^{\\oplus r}[-q]$, the single-term complex in degree $q$. It is bounded above and projective by step 2, so step 4 applies. A chain map $S\\to E$ is exactly a tuple of cycles $z_j\\in\\ker(d_E^q)(U)$ by the generator formula of step 2. Two such maps are homotopic exactly when their cycle differences have the form $d_E^{q-1}(h_j)$ for sections $h_j\\in E^{q-1}(U)$: the only possibly nonzero homotopy component is $S^q\\to E^{q-1}$, and $d_S=0$. Write $\\mathcal B^q=\\operatorname{im}(d_E^{q-1})$. Step 1 applied to $E^{q-1}\\twoheadrightarrow\\mathcal B^q$ and to $\\ker(d_E^q)\\twoheadrightarrow H^q(E)$ gives\n$$H^q(E)(U)=\\ker(d_E^q)(U)/d_E^{q-1}(E^{q-1}(U)).$$\nThus the homotopy classes, and hence the derived morphisms, are naturally $H^q(A)(U)^r$. The map sends a derived arrow to its cohomology map on the global standard generators, so it is independent of the representative $E$ by [def-weil-derived-cohomology-sheaves]. For a derived arrow $\\alpha:A\\to A'$, functoriality of $H^q$ gives $H^q(\\alpha\\circ f)(e_j)=H^q(\\alpha)(H^q(f)(e_j))$; this proves naturality for all derived arrows, including those not represented by chain maps between these representatives.",
+   "text": "Compute the canonical cohomology map from a projective single complex by truncation. Maps from P[-q] to an object in degrees at most q-1 vanish: choose a bounded-above representative using DerivedCategory.exists_iso_Q_obj_of_isLE and apply Mathlib DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective. In the distinguished triangle τ<q(A) → A → τ≥q(A), maps from P[-q] to the first term and its shift by 1 vanish. The exact Hom sequence makes postcomposition with the truncation projection bijective. On maps P[-q] → τ≥q(A), the source-library DerivedCategory.homologyFunctor_map_bijective_of_isLE_of_isGE computes H^q bijectively; H^q of the truncation projection is an isomorphism. This gives bijectivity of H^q on maps P[-q] → A. Precompose with the inverse canonical single-object and localization homology isomorphisms of [def-weil-derived-cohomology-sheaves], obtaining exactly sfFreeCohomologyMap. Compose with freeHomEquiv, sfSectionsEquiv, and the ULift index equivalence to obtain exactly sfShiftedFreeGeneratorMap. Functoriality of H^q and freeHomEquiv_comp_apply prove the naturality equation for every derived arrow. The private truncation calculation is the already proved argument of Sheaf.Paper.ModuleCupHomologyEvaluationBijective, generalized to the category and coefficient universes here.",
    "uses": [
     "def-weil-derived-cohomology-sheaves"
    ],
@@ -77,7 +65,19 @@
    }
   },
   {
-   "text": "Let $\\iota_b:C^{\\oplus r_b}[-b]\\to V$ be the inclusion in degree $b$, with all other components zero. The composite $v\\iota_b:C^{\\oplus r_b}[-b]\\to N$ induces $\\theta_b$ by step 3. Any other derived morphism inducing $\\theta_b$ has the same tuple of standard-generator cohomology sections, hence equals $v\\iota_b$ by step 5. Composing with $v^{-1}$ identifies it with $\\iota_b$. The construction also covers $a=b$, a zero top rank, all ranks zero, and the empty scheme: no nonempty set of generators is required when the relevant free object is zero.",
+   "text": "For every q in [a,b], bijectivity from the preceding projective-single calculation gives a derived arrow whose canonical cohomology map is exactly theta_q. Compose with the inverse representing isomorphism e and use the chain representatives theorem to lift it to a chain map t_q from the single free term to Z. In degree q, the actual cell inclusion has an invertible component, since it is the canonical single-object component isomorphism followed by the equality identifying the model term with the free sheaf. Define v^q by the inverse of this component followed by (t_q)^q. The private definition sfAssembledMap performs this explicit assembly; its proved cell equation is its interface in the main theorem. Outside [a,b] define v^q to be zero. Each t_q is a chain map and its source differential vanishes, so these components form v. The equality sfSplitCell_q ≫ v = t_q follows by from_single_hom_ext. Thus v induces exactly theta_q. The cell is an isomorphism on H^q because both source and model have zero differentials and its degree-q component is an isomorphism; cancellation proves H^q(v) is an isomorphism. Outside [a,b], the model term and its homology vanish, and hN and e imply vanishing of H^q(Z). Hence v is a quasi-isomorphism.",
+   "uses": [
+    "def-weil-derived-cohomology-sheaves",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09C3, lemma-local-structure-constructible-complex, lifting rho to tilde rho: apply the lifting separately to the chosen bases in each of the finitely many degrees."
+   }
+  },
+  {
+   "text": "The top cell followed by v induces theta_b by the prescribed cohomology calculation of step 5. Any other arrow with the same cohomology map equals this arrow by injectivity of sfFreeCohomologyMap from step 4. This gives precisely the asserted top summand identification, for the same v. Equal endpoints, zero ranks, zero coefficient sheaf, and the empty scheme are included without case exclusions.",
    "uses": [
     "def-weil-derived-cohomology-sheaves"
    ],
@@ -100,8 +100,10 @@
  ],
  "proof_origin": {
   "by": "agent",
+  "group": "K8",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Tag 09C3, lemma-local-structure-constructible-complex, lift of rho(e_s) in the b > a paragraph; expanded generatorwise and combined with derived.tex Tag 064B, lemma-morphisms-from-projective-complex. The simultaneous prescribed-cohomology splitting and the Hom calculation are written out by Q10."
+  "place": "Tag 09C3, lemma-local-structure-constructible-complex; literature/stacks-project/derived.tex, Tag 064B, lemma-morphisms-from-projective-complex.",
+  "note": "Complete Lean proof, no new holes. The canonical truncation calculation adapts the proved private projective_single_homology_bijective of Sheaf.Paper.ModuleCupHomologyEvaluationBijective; the split chain map is assembled from single-complex representatives. All statements and definitions unchanged."
  },
  "mathlib_searches": [
   {
@@ -249,5 +251,15 @@
   "group": "Q37",
   "result": "pass",
   "note": "Re-delivery of H13-RETURNed eb5d4689: the def-weil-derived-cohomology-sheaves record is now byte-identical to side-live (now Q20's existing:true homologyFunctor), so no dependency is rebound. Item module byte-identical to the returned one (sha f3371a93); item node equals live except the added lean record. Independent clause-by-clause reading: hEval, Mod(C)/D(Mod(C)) with independent universes, hN, theta isomorphisms, split complex with zero differentials, exists v with QuasiIso v and exact theta via canonical singleObjHomologySelfIso/homologyFunctorFactors, generator-section bijection plus naturality for every derived arrow, bounded-above projective chain representatives mod Homotopy, top-cell uniqueness with the same v: all match the node and are true (U terminal gives projective C^r, then K-projective, then Hom = H^q(A)(U)^r). Edge cases a=b, zero ranks, empty scheme, zero ring, universes all covered. lean.statement verbatim; 8 declarations present; canonical, non-hollow defs; sorry only; docstrings with source and blueprint; imports exist; not in dropped list. No compile (no file changed). No findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-d3044",
+  "group": "K8",
+  "result": "pass",
+  "landing": "20261021T183346-L-1606733",
+  "kind": "interface",
+  "note": "independent cc review: delivered ProjectiveCohomologySplitModel.lean and node lem-sf-projective-cohomology-split-model vs clones/live; abbrev→def sfSplitRings vs change record and users (none outside the item); axiom probe of the 3 closed theorems; import-necessity probe for Sites.Abelian"
  }
 }
