@@ -23294,3 +23294,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:14 L: merged deliver/Q26/lem-wf-internal-hom-weil (stage 2; reviewer PASS; parallel immutable checks)
 - 18:14 L: returned deliver/NC/lem-sfb-lisse-lattice-potential-kummer-tameness (reviewer RETURN: C1 + F + G4. This is the 7th delivery of this item (after N5 68c9bff0, NX af5315f6, NL 1f51eeaf, NN b8613865, NZ 8589c9f)
 - 18:15 L: merged deliver/Q30/lem-zl-adic-hom-tensor-lisse-criterion (stage 2; reviewer PASS; parallel immutable checks)
+- 2026-10-21T18:16:07Z L: superseded stage-1 delivery NN/lem-pur-compact-support-arrow-scalar-transport at 4b4c68a2d883f09bfe58418d13d6ffc333b76eb4; current completion retained; packet archived at refs/superseded/NN/lem-pur-compact-support-arrow-scalar-transport/4b4c68a2d883f09bfe58418d13d6ffc333b76eb4; stale return retired.
