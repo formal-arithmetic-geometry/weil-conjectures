@@ -21679,3 +21679,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:12 L: merged deliver/NP/lem-sfb-kinjective-hom-scalar-telescope (reviewer PASS; after a return; new nodes: 0)
 - 09:12 L: merged deliver/Q42/lem-weil-scalar-pullback-strict-cone-naturality (reviewer PASS; after a return; new nodes: 0)
 - 09:12 L: merged deliver/NL/lem-weil-pbc-adjunction-square-shift-mate (reviewer PASS; first push; new nodes: 0)
+- 09:12 L: merged deliver/NK/lem-sf-completed-pullback-mate-factorization (reviewer PASS; first push; new nodes: 0)
