@@ -12,9 +12,101 @@
  "stmt_deps": [
   "def-weil-abstract-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the cohomology construction in [def-weil-abstract-derived-category]. Cohomology is additive: differentials on a direct sum are diagonal, so cycles and boundaries, and then their quotient, are the corresponding direct sums. Thus the canonical identification $H^n(X\\oplus Y)=H^n(X)\\oplus H^n(Y)$ carries $H^n(f)$ to $(H^n(p),H^n(q))$ and $H^n(d)$ to $(H^n(h),-1)$ or $(1,-H^n(r))$, respectively. Functoriality and additivity preserve each biproduct identity used below.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex; literature/stacks-project/derived.tex",
+    "place": "Tag 08DG, lemma-glue, restriction triangle and its split second arrow; Tag 05RS, lemma-cohomology-homological, and Tag 05RT, lemma-acyclic"
+   }
+  },
+  {
+   "text": "In the first case $s:Y\\to X\\oplus Y$, $s=(0,-1)$, satisfies $ds=1_Y$; in the second case $s:X\\to X\\oplus Y$, $s=(1,0)$, satisfies $ds=1_X$. Therefore $D_n=H^n(d)$ has section $H^n(s)$ for every integer $n$. Apply [lem-sf-derived-homology-long-exact] to the given distinguished triangle. Its connecting map $\\delta^n$ is zero, since $\\delta^n D_n=0$ and $D_n$ has a right inverse. The same argument in degree $n-1$ gives $\\delta^{n-1}=0$. Exactness now gives a short exact sequence $0\\to H^n(G)\\xrightarrow{F_n}H^n(X)\\oplus H^n(Y)\\xrightarrow{D_n}H^n(Z)\\to0$, with $F_n=H^n(f)$. In particular $F_n$ is a kernel of $D_n$.",
+   "uses": [
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex; literature/stacks-project/derived.tex",
+    "place": "Tag 08DG, lemma-glue, restriction triangle and its split second arrow; Tag 05RS, lemma-cohomology-homological, and Tag 05RT, lemma-acyclic"
+   }
+  },
+  {
+   "text": "For the first case put $A=H^n(X)$, $B=H^n(Y)$ and $a=H^n(h)$. The morphism $j=(1_A,a):A\\to A\\oplus B$ is a kernel of $(a,-1_B)$: its composite with that map is zero, and if $t:T\\to A\\oplus B$ has components $(u,v)$ with $au-v=0$, then $v=au$ and $t=ju$. This factorization is unique because $\\operatorname{pr}_A j=1_A$. Hence the kernel subobject is exactly the image of this graph morphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex; literature/stacks-project/derived.tex",
+    "place": "Tag 08DG, lemma-glue, restriction triangle and its split second arrow; Tag 05RS, lemma-cohomology-homological, and Tag 05RT, lemma-acyclic"
+   }
+  },
+  {
+   "text": "For each $n$, let $k:A\\to H^n(G)$ be the unique kernel comparison with $F_n k=j$, using Steps 2 and 3. Then $H^n(p)k=\\operatorname{pr}_A j=1_A$. The equation $D_nF_n=0$ also gives $F_n=jH^n(p)$. Consequently $F_n kH^n(p)=jH^n(p)=F_n$; cancellation of the monomorphism $F_n$ gives $kH^n(p)=1$. Thus $H^n(p)$ is an isomorphism, and $F_n=jH^n(p)$ is precisely the asserted identification of $H^n(G)$ with the graph, for every $n$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex; literature/stacks-project/derived.tex",
+    "place": "Tag 08DG, lemma-glue, restriction triangle and its split second arrow; Tag 05RS, lemma-cohomology-homological, and Tag 05RT, lemma-acyclic"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-unbounded-derived-iso-cohomology] to $p:G\\to X$: Step 4 verifies its hypothesis in every integer degree, so $p$ is an isomorphism in the ordinary unbounded derived category. By clause (i) of [lem-weil-pbc-hom-into-triangle-exact], $df=0$ in the derived category itself. In the first case this is $hp-q=0$, hence $q=hp$. This proves the equality of derived morphisms, rather than merely its images under cohomology.",
+   "uses": [
+    "lem-weil-pbc-unbounded-derived-iso-cohomology",
+    "lem-weil-pbc-hom-into-triangle-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex; literature/stacks-project/derived.tex",
+    "place": "Tag 08DG, lemma-glue, restriction triangle and its split second arrow; Tag 05RS, lemma-cohomology-homological, and Tag 05RT, lemma-acyclic"
+   }
+  },
+  {
+   "text": "For the second case put $A=H^n(X)$, $B=H^n(Y)$ and $b=H^n(r)$. Now $j=(b,1_B):B\\to A\\oplus B$ is a kernel of $(1_A,-b)$: a morphism with components $(u,v)$ killed by this map satisfies $u=bv$, hence is uniquely $jv$. Step 2 makes $F_n$ another kernel, so obtain $k:B\\to H^n(G)$ with $F_nk=j$. The identities $H^n(q)k=1_B$ and $F_n=jH^n(q)$ give $kH^n(q)=1$ by cancellation of $F_n$. Thus $H^n(q)$ is an isomorphism, and $F_n=jH^n(q)$ identifies $H^n(G)$ with the stated image of $(H^n(r),1)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex; literature/stacks-project/derived.tex",
+    "place": "Tag 08DG, lemma-glue, restriction triangle and its split second arrow; Tag 05RS, lemma-cohomology-homological, and Tag 05RT, lemma-acyclic"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-unbounded-derived-iso-cohomology] to $q:G\\to Y$, using Step 6 in all degrees, to conclude that $q$ is an isomorphism. Clause (i) of [lem-weil-pbc-hom-into-triangle-exact] gives $df=0$; in this case the equation reads $p-rq=0$, so $p=rq$. The split epimorphism assertion for $H^n(d)$ was proved in Step 2.",
+   "uses": [
+    "lem-weil-pbc-unbounded-derived-iso-cohomology",
+    "lem-weil-pbc-hom-into-triangle-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex; literature/stacks-project/derived.tex",
+    "place": "Tag 08DG, lemma-glue, restriction triangle and its split second arrow; Tag 05RS, lemma-cohomology-homological, and Tag 05RT, lemma-acyclic"
+   }
+  },
+  {
+   "text": "Finally suppose specified isomorphisms $\\alpha:G_0\\xrightarrow{\\sim}G$, $\\beta:M_0\\xrightarrow{\\sim}X\\oplus Y$, $\\gamma:Z_0\\xrightarrow{\\sim}Z$ satisfy $\\beta f_0=f\\alpha$ and $\\gamma d_0=d\\beta$, with the transported triangle distinguished. The actual projections are $p_0=\\operatorname{pr}_X\\beta f_0=p\\alpha$ and $q_0=\\operatorname{pr}_Y\\beta f_0=q\\alpha$. Thus the isomorphism assertion and the identities $q_0=hp_0$ or $p_0=rq_0$ follow by composition with $\\alpha$. A section for $d_0$ is $\\beta^{-1}s\\gamma$. On cohomology, $H^n(\\beta)H^n(f_0)=F_nH^n(\\alpha)$ and $H^n(\\gamma)H^n(d_0)=D_nH^n(\\beta)$; therefore $H^n(\\beta)$ carries the kernel subobject of $H^n(d_0)$ onto the graph already computed, and the first equation identifies its inclusion. These formulas prove all assertions after the specified identifications.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex; literature/stacks-project/derived.tex",
+    "place": "Tag 08DG, lemma-glue, restriction triangle and its split second arrow; Tag 05RS, lemma-cohomology-homological, and Tag 05RT, lemma-acyclic"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "lem-sf-derived-homology-long-exact",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "lem-weil-pbc-hom-into-triangle-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex; literature/stacks-project/derived.tex",
+  "place": "Explicit cohomological verification of the split restriction assertion in Tag 08DG, lemma-glue, using Tags 05RS and 05RT; graph and conjugation calculations supplied here."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,10 +149,45 @@
    "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"CategoryTheory.Pretriangulated.exists_iso_binaryBiproduct_of_distTriang\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Pretriangulated\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasZeroObject C] [CategoryTheory.HasShift C ℤ] [CategoryTheory.Preadditive C] [∀ (n : ℤ), (CategoryTheory.shiftFunctor C n).Additive] [hC : CategoryTheory.Pretriangulated C] (T : CategoryTheory.Pretriangulated.Triangle C) (hT : \", \"doc\": \"\"}",
    "date": "2026-10-21",
    "verdict": "No exact or one-line match. Read CategoryTheory/Triangulated/Pretriangulated.lean:580-610: exists_iso_binaryBiproduct_of_distTriang needs a zero connecting arrow and supplies an unspecified splitting. The present statement fixes the fibre projection and both cohomological graph identifications for a difference map; obtaining them still requires the split-epimorphism and kernel argument. Other hits concern cone term objects or triangle isomorphisms."
+  },
+  {
+   "tool": "grep",
+   "query": "split|isIso.*[Bb]iprod|[Bb]iprod.*isIso",
+   "results": "OK 6 hits: Mathlib/CategoryTheory/Triangulated/Functor.lean, Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean, Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean, Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean, Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean, Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: hits do not state the projection and both graph-identification clauses in one line. The split-triangle theorem requires a zero connecting morphism and an additional comparison argument."
+  },
+  {
+   "tool": "leansearch",
+   "query": "In a distinguished triangle G to X direct sum Y to Y with second map (h,-identity), projection G to X is an isomorphism",
+   "results": "OK 8 hits: CategoryTheory.Pretriangulated.Triangle.distinguished_iff_of_isZero₁, CategoryTheory.Pretriangulated.isIso₂_of_isIso₁₃, CategoryTheory.Pretriangulated.isIso₁_of_isIso₂₃, CategoryTheory.Pretriangulated.isIso₃_of_isIso₁₂, CategoryTheory.Pretriangulated.Triangle.distinguished_iff_of_isZero₂, CategoryTheory.Pretriangulated.exists_iso_of_arrow_iso, CategoryTheory.Pretriangulated.distinguished_iff_of_iso, CategoryTheory.Pretriangulated.Triangle.distinguished_iff_of_isZero₃",
+   "date": "2026-10-21",
+   "verdict": "no match: hits do not state the projection and both graph-identification clauses in one line. The split-triangle theorem requires a zero connecting morphism and an additional comparison argument."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Pretriangulated.exists_iso_binaryBiproduct_of_distTriang",
+   "results": "OK 1 hits: CategoryTheory.Pretriangulated.exists_iso_binaryBiproduct_of_distTriang",
+   "date": "2026-10-21",
+   "verdict": "no match: hits do not state the projection and both graph-identification clauses in one line. The split-triangle theorem requires a zero connecting morphism and an additional comparison argument."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The fibre of the split difference map (h,-identity) from X direct sum Y to Y projects isomorphically onto X in the derived category",
+   "results": "OK 8 hits: CochainComplex.mappingConeHomOfDegreewiseSplitXIso, lequivProdOfLeftSplitExact, lequivProdOfRightSplitExact, HomologicalComplex.homotopyCofiber.XIsoBiprod, HomologicalComplex.homotopyCofiber.inlX_fstX, CochainComplex.mappingCone.triangleRotateShortComplexSplitting, CochainComplex.mappingConeHomOfDegreewiseSplitIso, CategoryTheory.ShortComplex.Splitting.isoBinaryBiproduct",
+   "date": "2026-10-21",
+   "verdict": "no match: hits do not state the projection and both graph-identification clauses in one line. The split-triangle theorem requires a zero connecting morphism and an additional comparison argument."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In the derived category, the homotopy kernel of a map with identity as one direct sum component is the graph of the other component",
+   "results": "OK 8 hits: instQFactorsThroughHomotopyDown, CochainComplex.cm5b.homotopyEquiv, ComplexShape.QFactorsThroughHomotopy, instQFactorsThroughHomotopyIntUp, CochainComplex.mappingCone.homotopyToZeroOfId, HomologicalComplex.homotopyCofiber.inrCompHomotopy_hom, ComplexShape.QFactorsThroughHomotopy_of_exists_prev, HomologicalComplex.homotopyCofiber.inrCompHomotopy",
+   "date": "2026-10-21",
+   "verdict": "no match: hits do not state the projection and both graph-identification clauses in one line. The split-triangle theorem requires a zero connecting morphism and an additional comparison argument."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sp-ringed-topos-binary-descent",
@@ -77,5 +204,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sp-derived-split-fibre-projections",
+  "worker": "stage1",
+  "summary": "Kept the statement and its definition dependency. Expanded both signed difference-map cases by split epimorphisms, the full long exact sequence, explicit universal graph kernels, and cohomological isomorphism detection; checked the derived component identities and specified-isomorphism transport. Reused three existing Mathlib leaves, with no new nodes.",
+  "blueprint": "Realizes det-sp-tower-gluing, gluing paragraph on the open-cover cone and its canonical restrictions, through the extraction lem-sp-ringed-topos-binary-descent, old step 7; makes the split restriction projection calculation explicit."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q157-8d32c8564",
+  "group": "Q157",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q157-8d32c8564 (reviewer sub-agent of L); spot-checked: Read in full: the item JSON (8 steps, no new nodes), all four cited statements (the def-weil-abstract-derived-category definition and three Mathlib leaves: HomologySequence.exact₁₂₃, DerivedCategory.isIso_iff at line 88, comp_distTriang_mor_zero₁₂), Stacks 08DG lemma-glue (cohomology.tex:11071-11125), and parent step 2 of lem-sp-ringed-topos-binary-descent, which uses case 1 on U, case 2 plus the transport clause on V, and df=0 on W. The statement is unchanged from side-live and is correct. Sign checks: d=(h,-1) has section (0,-1), its kernel is the graph (1,a), and df=hp-q. d=(1,-r) has section (1,0), its kernel is the image of (b,1), and df=p-rq. Step 2 uses the long exact sequence with δ^n and δ^{n-1} both zero to get a short exact sequence. Steps 3-4 and 6 are kernel comparisons with mono cancellation. Steps 5 and 7 conclude in D itself via isIso_iff and clause (i). In step 8 the transport section β⁻¹sγ is checked. Edge cases checked: zero objects, h=0, h=1, characteristic 2, unbounded objects. The item is not superseded (unsplit on live and side-live), not in route-pivot-dropped, has no repair note and cites no SGA. No duplicate: lem-pc-derived-zero-third-split and lem-pc-derived-splitting-unique do not give the specified projections. No tool_uses are needed because all cited nodes are definitions or Mathlib leaves."
  }
 }
