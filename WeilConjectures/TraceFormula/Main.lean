@@ -5,7 +5,8 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.TraceFormula.Correspondence
+public import WeilConjectures.TraceFormula.Additivity
+public import WeilConjectures.TraceFormula.TraceClass
 public import WeilConjectures.TraceFormula.FixedPoint
 
 /-!
@@ -73,7 +74,7 @@ closed complement `i : Z ⟶ X`, both stable under the Frobenius, the trace of t
 `RΓ_c(X, K)` is the sum of the traces of the Frobenii of `RΓ_c(U, K|_U)` and `RΓ_c(Z, K|_Z)`,
 the restrictions being the derived pullbacks of Weil objects. It comes from the localization
 triangle `j_! j^* K ⟶ K ⟶ i_* i^* K ⟶`, a triangle of Weil objects, and the additivity of
-traces in distinguished triangles (blueprint `lem-trf-trace-triangle-compatibility`); no
+traces in distinguished triangles (blueprint `prop-trf-trace-formal-laws`); no
 invertibility of `φ` is used in the blueprint. -/
 theorem trace_compactFrobenius_eq_add
     (hcompl : IsCompl (Set.range j.left.base) (Set.range i.left.base))
@@ -93,7 +94,7 @@ theorem trace_compactFrobenius_eq_add
     trace K.compactFrobenius =
       trace ((weilUpperStar ℓ ΦU Φ j hj).obj K).compactFrobenius +
         trace ((weilUpperStar ℓ ΦZ Φ i hi).obj K).compactFrobenius :=
-  sorry
+  trace_compactFrobenius_eq_add_of_isCompl hcompl hj hi K
 
 omit [Fact ℓ.Prime] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [LocallyOfFiniteType X.hom]
   [QuasiCompact X.hom] [IsSeparated X.hom] in
@@ -357,7 +358,7 @@ theorem trace_stalkFrobenius_weilUpperStar (hj : ΦU ≫ j = j ≫ Φ)
     (X' := (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (x ≫ j)).obj K.carrier)
     ((boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ x j).app
       K.carrier).symm _ _ ?_
-  rw [stalkFrobenius, stalkFrobenius, frobenius_hom, frobenius_hom]
+  rw [stalkFrobenius_eq_frobenius, stalkFrobenius_eq_frobenius, frobenius_hom, frobenius_hom]
   dsimp only [iterateStalk, weilStalk]
   rw [weilUpperStar_obj_str, weilUpperStar_obj_str, iterate_str, iterate_str]
   simp only [weilUpperStarComparison,
@@ -487,7 +488,7 @@ lemma stalkFrobenius_unit_aux {𝒞 : Type*} [Category 𝒞] {W Y : 𝒞} {DW DY
 theorem stalkFrobenius_unit (m : ℕ) (x : RationalPoint X)
     (hx : x ≫ frobeniusIterate Φ m = x) :
     (unit ℓ Φ).stalkFrobenius m x hx = 𝟙 _ := by
-  rw [stalkFrobenius, frobenius_hom]
+  rw [stalkFrobenius_eq_frobenius, frobenius_hom]
   dsimp only [iterateStalk, weilStalk]
   rw [weilUpperStar_obj_str, iterate_str]
   simp only [weilUpperStarComparison,
