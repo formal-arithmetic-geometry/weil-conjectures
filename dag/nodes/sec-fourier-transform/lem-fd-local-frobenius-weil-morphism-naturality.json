@@ -20,7 +20,7 @@
  ],
  "proof": [
   {
-   "text": "Work at the fixed finite field extension $F/\\Ql$. By clause 3 of [def-weil-finite-coefficient-point], $Q$ is a functor on the raw rationalized point category. Put $T=S_1$. Clause 2 of [lem-weil-frobenius-point-transport-natural], with $E=F$ and $\\Lambda=F$, gives, for every morphism $w:N\\to N'$ in that category,\n$$Q(Tw)\\iota_N=\\iota_{N'}Q(w).$$\nThis assertion already applies to every rational constructible morphism; it is not restricted to integral maps. In particular it applies to $T^j(w)$ for each $j\\geq0$.",
+   "text": "Use the rational clause of frobeniusPointTransport_natural from [lem-weil-frobenius-point-transport-natural]. Its canonical pullback equality agrees, by proof irrelevance, with the inverse of localPullbackObjectIso from [def-weil-local-frobenius-trace]. Compose the square with that inverse and cancel the equality transports. This gives naturality of localPointTransport for every raw rationalized constructible arrow.",
    "uses": [
     "def-weil-finite-coefficient-point",
     "lem-weil-frobenius-point-transport-natural"
@@ -32,10 +32,11 @@
    }
   },
   {
-   "text": "We prove naturality of the iterated point transport by induction, including its specified composition comparison. Set $J_{1,N}=\\iota_N$ and $J_{r+1,N}=\\iota_{T^rN}J_{r,N}$, so $J_{r,N}:Q(N)\\to Q(T^rN)$. The base $Q(Tw)J_{1,N}=J_{1,N'}Q(w)$ is step 1. If $Q(T^rw)J_{r,N}=J_{r,N'}Q(w)$, then step 1 applied to $T^rw$, followed by the induction hypothesis, gives\n$$Q(T^{r+1}w)J_{r+1,N}\n=\\iota_{T^rN'}Q(T^rw)J_{r,N}\n=J_{r+1,N'}Q(w).$$\nLet $c_r:S_r\\xrightarrow{\\sim}T^r$ be the iterated pullback-composition comparison. By [lem-trf-integral-pullback-comparison-realization] its rationalization is natural and respects finite iterations. The definition in [def-weil-local-frobenius-trace] is exactly $I_N^{[r]}=Q(c_{r,N}^{-1})J_{r,N}$. Naturality of $c_r^{-1}$ now gives\n$$Q(S_rw)I_N^{[r]}=Q(c_{r,N'}^{-1})Q(T^rw)J_{r,N}=I_{N'}^{[r]}Q(w).$$\nThus the induction proves the first asserted equation for every positive $r$.",
+   "text": "The prescribed localPullbackComposition of [def-weil-local-frobenius-trace] is natural. Its components are heterogeneous-equal to the localization of the components of the natural integral composition isomorphism [lem-pod-integral-pullback-composition]. The object and pure-tensor map prescriptions of rationalDerivedPullback [def-weil-derived-pullback-tensor-hom] show this equality of naturality squares on pure tensors. The integral naturality square and the tensor composition formula prove that case; additivity and tensor induction prove the general square. The inverse comparison is natural by cancelling its isomorphisms. Induct on the positive-power index in localPointTransportIterate: apply this inverse-comparison square, then the induction hypothesis to the one-step pullback of the arrow, then the single-step point-transport square. This proves the first clause with the actual specified recursion.",
    "uses": [
     "def-weil-local-frobenius-trace",
-    "lem-trf-integral-pullback-comparison-realization"
+    "lem-pod-integral-pullback-composition",
+    "def-weil-derived-pullback-tensor-hom"
    ],
    "elementary": true,
    "source": {
@@ -44,10 +45,8 @@
    }
   },
   {
-   "text": "Write $H=L(g_X^n\\bar x)^*_F=L(\\bar xg_s^n)^*_F$, where the equality is precisely the return equality stipulated in the statement. The specified comparisons give natural isomorphisms $a:H\\xrightarrow{\\sim}S_nP$ and $b:H\\xrightarrow{\\sim}PG_n$. Indeed these are the two composition comparisons in [lem-trf-integral-pullback-comparison-realization], whose rationalizations respect equality of scheme morphisms. Consequently the specified return map is $\\rho_M=b_Ma_M^{-1}$, not a newly chosen isomorphism. For $v:M\\to M'$, the two naturality squares give\n$$PG_n(v)b_M=b_{M'}H(v),\\qquad H(v)a_M^{-1}=a_{M'}^{-1}S_nP(v).$$\nMultiplying these equations yields $PG_n(v)\\rho_M=\\rho_{M'}S_nP(v)$, which is the asserted return-comparison naturality. We used $g_X^n\\bar x=\\bar xg_s^n$, and did not replace it by the generally false equality $g_X^n\\bar x=\\bar x$.",
-   "uses": [
-    "lem-trf-integral-pullback-comparison-realization"
-   ],
+   "text": "The two composition comparisons in localConstructibleReturnComparison are natural by the tensor-induction calculation in step 2. The middle equality-of-scheme-morphisms comparison is natural by a general equality-of-functors naturality lemma, proved by equality elimination. Compose these three squares; this proves the second clause for the stipulated semilinear return equality, without asserting a fixed geometric point.",
+   "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
@@ -64,10 +63,9 @@
    }
   },
   {
-   "text": "For the Weil-pair morphism $v$, [def-weil-weil-sheaf-complex] gives $v\\alpha=\\beta G_1(v)$. This is the base $r=1$ of the desired induction. Let $k_r:G_{r+1}\\xrightarrow{\\sim}G_rG_1$ be the specified natural composition comparison of [lem-trf-integral-pullback-comparison-realization]. The recursion of [def-weil-local-frobenius-trace], with comparisons written in, is $\\alpha^{[r+1]}=\\alpha^{[r]}G_r(\\alpha)k_{r,A}$ and likewise for $\\beta$. Assume $v\\alpha^{[r]}=\\beta^{[r]}G_r(v)$. Then\n$$\\begin{aligned}\nv\\alpha^{[r+1]}&=\\beta^{[r]}G_r(v)G_r(\\alpha)k_{r,A}\\\\\n&=\\beta^{[r]}G_r(\\beta)G_rG_1(v)k_{r,A}\\\\\n&=\\beta^{[r]}G_r(\\beta)k_{r,B}G_{r+1}(v)\n=\\beta^{[r+1]}G_{r+1}(v).\n\\end{aligned}$$\nThe middle equalities use functoriality and the one-step intertwining equation, then naturality of $k_r$. This proves the asserted intertwining for all $r\\geq1$.",
+   "text": "The defining algebra morphism condition of [def-weil-weil-sheaf-complex] is the base case for localWeilIterate. For the successor, expand its actual recursion from [def-weil-local-frobenius-trace], apply the induction hypothesis, combine the two maps under the power pullback functor, apply the one-step algebra morphism condition under that functor, and then apply the composition-comparison naturality square proved in step 2. Reassociate to obtain the fourth clause.",
    "uses": [
     "def-weil-weil-sheaf-complex",
-    "lem-trf-integral-pullback-comparison-realization",
     "def-weil-local-frobenius-trace"
    ],
    "elementary": true,
@@ -92,13 +90,14 @@
   "def-weil-finite-coefficient-point",
   "lem-weil-frobenius-point-transport-natural",
   "def-weil-local-frobenius-trace",
-  "lem-trf-integral-pullback-comparison-realization",
+  "lem-pod-integral-pullback-composition",
+  "def-weil-derived-pullback-tensor-hom",
   "def-weil-weil-sheaf-complex"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
-  "place": "Displayed local alternating-trace formula, expanded by explicit naturality squares and two inductions; this proof is not stated verbatim in the blueprint."
+  "place": "Displayed local alternating-trace formula; agent proof by tensor-induction naturality of the published localized integral composition, naturality of equality transports, two inductions, and assembly of the five clauses."
  },
  "mathlib_searches": [
   {
@@ -255,5 +254,15 @@
   "group": "Q82",
   "result": "pass",
   "note": "All 5 conjuncts match the node: point-transport naturality (published localPointTransportIterate, index r = exponent r+1), rho = b a^-1 (direction checked against localPullbackComposition; same composite as the published localReturnComparison on an arbitrary M), R = I ≫ Q(rho), localWeilIterate intertwining for every IsoAlgebra morphism (non-invertible allowed), published localExtensionFrobenius intertwining. Hypotheses exact (LocallyOfFiniteType+QuasiCompact+IsSeparated, n>=1, extensionPoints, semilinear return); raw rationalized categories; single universe u. Edge cases n=1, r=1, empty X0, zero maps checked. Node differs from live only in lean; statement verbatim; lines <=100; 5 helpers with real data, docstrings, no name collisions in the live side tree or project lean; private imports = stated proof_deps; 6-step proof docstring; sorry only. Not compiled (no file changed; worker compiles clean). Advisory: helper repeats the localReturnComparison body; second reading is the author's self-check."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261021T193345-L-1127053",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
