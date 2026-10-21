@@ -20191,3 +20191,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:05 L: merged deliver/NR/lem-pur-signed-line-derived-base-change (reviewer FIX; first push; new nodes: 0)
 - 04:05 L: merged deliver/Q21/det-prop-sfb-cartesian-coefficients-finite-free (reviewer FIX; after a return; new nodes: 1)
 - 2026-10-21T04:05:57Z L: superseded stage-1 delivery NO/lem-sfb-integral-quotient-direct-image-comparison at 3068412e9c09af68b39b52e8cb562114440ad653; current completion retained; packet archived at refs/superseded/NO/lem-sfb-integral-quotient-direct-image-comparison/3068412e9c09af68b39b52e8cb562114440ad653; stale return retired.
+- 2026-10-21T04:05:58Z L: superseded stage-1 delivery O3/lem-sp-chart-counit-scalar-transport at d705e3d3a6d66debda733298faeab50c3517543d; current completion retained; packet archived at refs/superseded/O3/lem-sp-chart-counit-scalar-transport/d705e3d3a6d66debda733298faeab50c3517543d; stale return retired.
