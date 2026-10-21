@@ -11,9 +11,71 @@
   "def-weil-finite-dimensional-subspace",
   "def-weil-endomorphism-trace"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-vector-space-projective], the $k$-vector space $C$ is projective. Apply the lifting characterization in [def-weil-pbc-projective-module] to the surjection $q:B\\to C$ and the linear map $1_C:C\\to C$. It gives a $k$-linear map $s:C\\to B$ with $qs=1_C$. No compatibility between $s$ and the endomorphisms is asserted.",
+   "uses": [
+    "lem-weil-pbc-vector-space-projective",
+    "def-weil-pbc-projective-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05CE (definition-projective), the Hom-exactness/lifting characterization preceding Tag 05CF (lemma-characterize-projective); projectivity over a field from Tag 09FN (fields-lemma-vector-space-is-free)"
+   }
+  },
+  {
+   "text": "For $b\\in B$, $q(b-sq(b))=q(b)-qsq(b)=0$. Exactness and injectivity of $i$ therefore give a unique $r(b)\\in A$ satisfying $i(r(b))=b-sq(b)$. This defines a linear map $r:B\\to A$: applying $i$ to $r(b+b^{\\prime})$ and to $r(b)+r(b^{\\prime})$ gives the same vector, and applying $i$ to $r(\\lambda b)$ and to $\\lambda r(b)$ gives the same vector; injectivity gives the two linearity identities. Moreover $qi=0$ by exactness, so $i(r(i(a)))=i(a)-sq(i(a))=i(a)$ and hence $ri=1_A$. The defining identity also gives $ir+sq=1_B$. These are identities of linear maps, obtained pointwise.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+    "place": "§1, p. 150, (T2), ordinary finite-dimensional case; omitted linear-algebra argument supplied by Q16"
+   }
+  },
+  {
+   "text": "The matrix definition of trace [def-weil-endomorphism-trace] gives additivity: in a single finite basis of $B$, the diagonal entries of the matrix of $u+v$ are the sums of those of $u$ and $v$, so summing them gives $\\operatorname{tr}_B(u+v)=\\operatorname{tr}_B(u)+\\operatorname{tr}_B(v)$. Apply this to $f_B=f_B(ir+sq)=(f_Bi)r+(f_Bs)q$, obtaining $\\operatorname{tr}_B(f_B)=\\operatorname{tr}_B((f_Bi)r)+\\operatorname{tr}_B((f_Bs)q)$.",
+   "uses": [
+    "def-weil-endomorphism-trace"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+    "place": "§1, p. 150, (T2), ordinary finite-dimensional case; omitted linear-algebra argument supplied by Q16"
+   }
+  },
+  {
+   "text": "Apply [lem-pc-finite-dimensional-trace-cyclic] first to the maps $r:B\\to A$ and $f_Bi:A\\to B$, and then to $q:B\\to C$ and $f_Bs:C\\to B$. All spaces involved are finite-dimensional by the hypotheses of the item. The two summands from the preceding step become $\\operatorname{tr}_A(rf_Bi)$ and $\\operatorname{tr}_C(qf_Bs)$, respectively.",
+   "uses": [
+    "lem-pc-finite-dimensional-trace-cyclic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+    "place": "§1, p. 150, (T2), ordinary finite-dimensional case; omitted linear-algebra argument supplied by Q16"
+   }
+  },
+  {
+   "text": "Use the assumed intertwining identities and the identities just constructed: $rf_Bi=rif_A=f_A$ because $ri=1_A$, and $qf_Bs=f_Cqs=f_C$ because $qs=1_C$. Substituting into the preceding trace equality gives $\\operatorname{tr}(f_B\\mid B)=\\operatorname{tr}(f_A\\mid A)+\\operatorname{tr}(f_C\\mid C)$, as required.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+    "place": "§1, p. 150, (T2), ordinary finite-dimensional case; omitted linear-algebra argument supplied by Q16"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-vector-space-projective",
+  "def-weil-pbc-projective-module",
+  "def-weil-endomorphism-trace",
+  "lem-pc-finite-dimensional-trace-cyclic"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+  "place": "§1, p. 150, (T2), specialized using (T1); explicit finite-dimensional splitting proof supplied by Q16, checked against the currently readable project proof at FinitePotent.lean:39–66"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -49,10 +111,87 @@
    "results": "15 hits; Mathlib/LinearAlgebra/PID.lean, Mathlib/LinearAlgebra/PID.lean, Mathlib/LinearAlgebra/PID.lean, Mathlib/LinearAlgebra/PID.lean, Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/FinTwo.lean, Mathlib/LinearAlgebra/Matrix/Charpoly/Coeff.lean, Mathlib/LinearAlgebra/Trace.lean, Mathlib/LinearAlgebra/Trace.lean",
    "date": "2026-10-21",
    "verdict": "no match: direct-sum formulas require both summands invariant, while an exact sequence need not admit an invariant splitting; no one-line specialization found"
+  },
+  {
+   "tool": "grep",
+   "query": "trace.*(exact|quotient)|trace_comp_comm|trace_add",
+   "results": "5 hits; 240, 265, 267, 284, 289",
+   "date": "2026-10-21",
+   "verdict": "search output malformed because rg on a single file omits the filename; repeated as a directory search; not used as evidence of absence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Trace additivity for compatible endomorphisms of a short exact sequence of finite dimensional vector spaces",
+   "results": "8 hits; LinearMap.trace_comp_cycle, LinearMap.trace_comp_cycle', LinearMap.trace_comp_comm, LinearMap.trace_prodMap', LinearMap.trace_comp_comm', LinearMap.trace_eq_sum_trace_restrict, LinearMap.trace_eq_sum_trace_restrict', LinearMap.trace_comp_eq_zero_of_commute_of_trace_restrict_eq_zero",
+   "date": "2026-10-21",
+   "verdict": "no match for the complete exact-sequence item; cyclic trace and direct-sum formulas alone do not give an equivariant splitting"
+  },
+  {
+   "tool": "grep",
+   "query": "trace_comp_comm|trace_eq_add_of_exact|trace_add",
+   "results": "9 hits; Mathlib/LinearAlgebra/Trace.lean, Mathlib/LinearAlgebra/Trace.lean, Mathlib/LinearAlgebra/Trace.lean, Mathlib/LinearAlgebra/Trace.lean, Mathlib/LinearAlgebra/Trace.lean, Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/FinTwo.lean, Mathlib/LinearAlgebra/Matrix/Trace.lean, Mathlib/LinearAlgebra/Matrix/Trace.lean",
+   "date": "2026-10-21",
+   "verdict": "no match for the complete exact-sequence item; cyclic trace and direct-sum formulas alone do not give an equivariant splitting"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Trace of a block upper triangular linear map equals sum of traces of its diagonal blocks",
+   "results": "8 hits; LinearMap.trace_eq_sum_trace_restrict, Matrix.traceLinearMap, LinearMap.trace_eq_sum_trace_restrict', LinearMap.trace_eq_sum_trace_restrict_of_eq_biSup, LinearMap.trace, Matrix.trace_blockDiagonal, LinearMap.trace_prodMap', LinearMap.trace_mul_comm",
+   "date": "2026-10-21",
+   "verdict": "no match for the complete exact-sequence item; cyclic trace and direct-sum formulas alone do not give an equivariant splitting"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.trace, Function.Exact",
+   "results": "0 hits; ",
+   "date": "2026-10-21",
+   "verdict": "no match for the complete exact-sequence item; cyclic trace and direct-sum formulas alone do not give an equivariant splitting"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_rightInverse_of_surjective|exists_leftInverse_of_injective",
+   "results": "11 hits; Mathlib/LinearAlgebra/Dimension/LinearMap.lean, Mathlib/LinearAlgebra/Dual/Lemmas.lean, Mathlib/LinearAlgebra/ExteriorPower/Basic.lean, Mathlib/LinearAlgebra/Determinant.lean, Mathlib/LinearAlgebra/FiniteDimensional/Basic.lean, Mathlib/LinearAlgebra/FiniteDimensional/Basic.lean, Mathlib/LinearAlgebra/ExteriorAlgebra/Basic.lean, Mathlib/LinearAlgebra/Basis/VectorSpace.lean",
+   "date": "2026-10-21",
+   "verdict": "supporting match: linear sections are supplied by LinearMap.exists_rightInverse_of_surjective; reused existing projectivity and lifting nodes instead of creating a duplicate"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every surjective linear map of vector spaces has a linear right inverse",
+   "results": "8 hits; LinearMap.exists_rightInverse_of_surjective, LinearMap.surjective_comp_left_of_exists_rightInverse, ContinuousLinearMap.exists_right_inverse_of_surjective, LinearMap.splittingOfFinsuppSurjective, LinearMap.surjective_compr₂_of_exists_rightInverse, LinearMap.surjective_compr₂ₛₗ_of_exists_rightInverse, LinearMap.splittingOfFinsuppSurjective_splits, LinearMap.splittingOfFunOnFintypeSurjective",
+   "date": "2026-10-21",
+   "verdict": "supporting match: linear sections are supplied by LinearMap.exists_rightInverse_of_surjective; reused existing projectivity and lifting nodes instead of creating a duplicate"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem exists_rightInverse_of_surjective|instance.*projective|projective_of_free",
+   "results": "9 hits; Mathlib/Algebra/Module/StablyFree/Basic.lean, Mathlib/Algebra/Module/FinitePresentation.lean, Mathlib/Algebra/Module/FinitePresentation.lean, Mathlib/Algebra/Module/FinitePresentation.lean, Mathlib/Algebra/Module/Projective.lean, Mathlib/Algebra/Module/Projective.lean, Mathlib/Algebra/Module/Projective.lean, Mathlib/Algebra/Module/Projective.lean",
+   "date": "2026-10-21",
+   "verdict": "supporting match: linear sections are supplied by LinearMap.exists_rightInverse_of_surjective; reused existing projectivity and lifting nodes instead of creating a duplicate"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.exists_rightInverse_of_surjective",
+   "results": "1 hits; LinearMap.exists_rightInverse_of_surjective",
+   "date": "2026-10-21",
+   "verdict": "supporting match: linear sections are supplied by LinearMap.exists_rightInverse_of_surjective; reused existing projectivity and lifting nodes instead of creating a duplicate"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A surjective map onto a vector space admits a linear section",
+   "results": "8 hits; ContinuousLinearMap.exists_right_inverse_of_surjective, LinearMap.isOpenMap_of_finiteDimensional, LinearMap.range_eq_top_of_surjective, LinearMap.splittingOfFunOnFintypeSurjective, LinearMap.splittingOfFinsuppSurjective, LinearMap.surjective_of_injective, LinearMap.range_eq_top, AffineMap.linear_surjective_iff",
+   "date": "2026-10-21",
+   "verdict": "supporting match: linear sections are supplied by LinearMap.exists_rightInverse_of_surjective; reused existing projectivity and lifting nodes instead of creating a duplicate"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_rightInverse_of_surjective",
+   "results": "2 hits; Mathlib/Algebra/Module/Projective.lean, Mathlib/Algebra/Module/Projective.lean",
+   "date": "2026-10-21",
+   "verdict": "supporting match: linear sections are supplied by LinearMap.exists_rightInverse_of_surjective; reused existing projectivity and lifting nodes instead of creating a duplicate"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pc-finite-potent-trace-calculus",
@@ -85,5 +224,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pc-finite-dimensional-trace-exact",
+  "worker": "stage1",
+  "summary": "Gave the full five-step linear-splitting and cyclic-trace proof of finite-dimensional exact-sequence trace additivity. Reused the existing vector-space-projectivity, projective-module lifting, ordinary-trace and cyclic-trace nodes; no new nodes. Preserved the statement, previous searches, provenance and candidate attachment metadata. Attachment is not requested, as the dispatcher explicitly requires a split after the earlier rejected attachment.",
+  "blueprint": "Realizes the finite-dimensional trace-additivity input to Tate's residue in the statement of sk-thm-picard-duality, the sentence t_X((eta_x)_x)=sum_x res_x(eta_x), through lem-pc-tate-dvr-residue-calculus and lem-pc-finite-potent-trace-calculus. This is below the unit's route, with no unit or chapter modification."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q16-b8532cbf6",
+  "group": "Q16",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-b8532cbf6 (reviewer sub-agent of L); spot-checked: I read the item, its 5 steps and every cited node; the split is correct and needs no changes. Statement: unchanged; it is Tate §1 (T1) plus the finite-dimensional case of (T2) on p. 150. Every hypothesis is needed: without the intertwining conditions it fails (k→k with i=1, C=0, f_B=1, f_A=0). Step 1: the lifting clause of def-weil-pbc-projective-module, together with lem-weil-pbc-vector-space-projective (a Mathlib leaf), gives s with qs=1. Step 2: r with ri=1 and ir+sq=1 is written out in full; I checked it, including the linearity of r from injectivity of i. Step 3: additivity of trace follows directly from the basis definition in def-weil-endomorphism-trace, applied to f_B=(f_B i)r+(f_B s)q. Step 4: lem-pc-finite-dimensional-trace-cyclic applied to the pairs (f_B i, r) and (f_B s, q); the direction is right. Step 5: substitution using ri=1 and qs=1 gives the result. Edge cases checked: A=0, C=0, and the nilpotent Jordan block with no invariant complement. No new nodes, no cycle, no SGA, and all cited nodes are Mathlib leaves or definitions, so they are notions rather than route and no tool_uses entry is needed. A DAG-wide rg -L search found no duplicate at the vector-space level. On live and side-live the item is still unsplit, and there is no repair note for it. Note for the maintainer: the item carries lean_candidates LinearMap.trace_eq_add_of_exact (FinitePotent.lean:39), which the maintainer may still attach after checking it for sorry and its axioms."
  }
 }
