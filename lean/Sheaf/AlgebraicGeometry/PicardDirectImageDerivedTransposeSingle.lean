@@ -71,9 +71,7 @@ private theorem transposeFromHomology
     rfl
   let m := (Modules.pullbackPushforwardAdjunction p).homEquiv _ _ b
   have ht : G.map m ≫ Modules.canonicalSingleDirectImageMap p N = q := by
-    have he := congrArg (adj.homEquiv _ _) hb
-    rw [Equiv.apply_symm_apply] at he
-    exact (compat b).symm.trans he
+    rw [← compat b, hb, Equiv.apply_symm_apply]
   have hu := Modules.canonicalDirectImageH0Unit p N
   change H.map (Modules.canonicalSingleDirectImageMap p N) ≫
     (Modules.canonicalDirectImageH0Iso p N).hom = z.hom.app ((Modules.pushforward p).obj N)
