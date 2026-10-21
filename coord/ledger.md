@@ -23918,3 +23918,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:49 L: merged deliver/NN/lem-sfb-finite-ultrametric-best-approximation (stage 2; reviewer PASS; parallel immutable checks)
 - 22:49 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
 - 22:50 L: returned deliver/NC/lem-sfb-gabber-global-snc-alteration (reviewer RETURN: 16th push of the live item lem-sfb-gabber-global-snc-alteration. The drop list (side-live route-pivot-dropped.txt) is st)
+- 22:50 L: returned deliver/NH/lem-sfb-norm-algcl-internal-hom-base-change (reviewer RETURN: D4/C6 (circular in substance), D1/D2 and C5 (the only new node restates an ancestor in another form). The new node lem-s)
