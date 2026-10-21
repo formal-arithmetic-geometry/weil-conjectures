@@ -20834,3 +20834,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:00 L: returned deliver/N9/lem-wf-tate-twist-frobenius (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-wf-tate-twist-frobenius: cited node def-wf-tate-tw)
 - 08:00 L: returned deliver/NB/lem-weil-pbc-projection-mate-square-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-pbc-projection-mate-square-coherence: lem-wei)
 - 08:00 L: returned deliver/Q04/lemma-nagata-strict-transform-chart-localization (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-strict-transform-chart-localization: lemm)
+- 08:00 L: returned deliver/NW/lemma-nagata-strict-chart-map-kernel (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-strict-chart-map-kernel: lemma-nagata-str)
