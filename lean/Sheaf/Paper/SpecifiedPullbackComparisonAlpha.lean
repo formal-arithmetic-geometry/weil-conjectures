@@ -12,18 +12,7 @@ public import Sheaf.Paper.SfDerivedComplete
 public import Sheaf.Paper.IntegralScalarExtensionUniverses
 public import Sheaf.Paper.CompletedIntegralConstantMapOfUniverses
 public import Sheaf.Paper.IntegralDerivedOperationsOnSlices
-import Sheaf.Paper.FiniteFreeCompletedScalarComparison
-import Sheaf.Paper.IsomorphismDerivedPullback
-import Sheaf.CategoryTheory.CompactSupportRoosCofinality
-import Sheaf.Paper.CompletedConstantSheafReduction
-import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
-import Sheaf.Algebra.Homology.ChangeOfRingsKFlat
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
-import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
-import Sheaf.Paper.IntegralOperationsWellDefined
-import Sheaf.Paper.IntegralScalarExtensionWellDefined
+import Sheaf.Paper.IntegralOperationsPreserveConstructible
 
 /-!
 # The specified quotient-cone pullback comparison
@@ -40,7 +29,6 @@ with their localization, including all representative comparison isomorphisms.
 
 @[expose] public section
 set_option autoImplicit false
-set_option warn.sorry false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 set_option synthInstance.maxSize 2048
@@ -145,6 +133,79 @@ theorem specifiedPullbackComparisonAlpha
             (scalarPullbackCompleted l E L ι g K' hK'.1 hF').hom =
           (scalarPullbackCompleted l E L ι g K hK.1 hF).hom ≫
             (integralDerivedPullback l L g).map ((integralScalarExtension l E L ι Y).map a) := by
-  sorry
+  have hF := ((integralOperations_preserve_constructible l E g).1 K hK).1.1
+  refine ⟨hF, ?_, ?_⟩
+  · intro P e
+    have hc := (scalarCompletion_existsUnique l E L ι Y).exists.choose_spec.1 P
+    change (scalarCompletion l E L ι Y).app _ ≫ _ = _ at hc
+    have hp := (scalarPullbackOrdinary_existsUnique l E L ι g).exists.choose_spec P
+    change _ = (scalarPullbackOrdinary l E L ι g).hom.app
+      (DerivedCategory.Q.obj P.obj) ≫ _ ≫ _ at hp
+    have hce :
+        (scalarCompletionIso l E L ι Y K hK.1).hom ≫
+            (integralScalarExtension l E L ι Y).map e.inv ≫
+            (integralScalarExtensionComparison l E L ι Y).hom.app P =
+          (integralOrdinaryDerivedScalar l E L ι Y).map e.inv ≫
+            (integralOrdinaryScalar l E L ι Y).mapDerivedCategoryFactors.hom.app P.obj ≫
+            DerivedCategory.Q.map ((integralScalarCompletionChain l E L ι Y).app P.obj) := by
+      change (scalarCompletion l E L ι Y).app K ≫ _ ≫ _ = _
+      rw [← (scalarCompletion l E L ι Y).naturality_assoc e.inv, hc]
+    have hchi : IsIso
+        (DerivedCategory.Q.map ((integralScalarCompletionChain l E L ι Y).app P.obj)) := by
+      have hi : IsIso
+          ((integralOrdinaryDerivedScalar l E L ι Y).map e.inv ≫
+            (integralOrdinaryScalar l E L ι Y).mapDerivedCategoryFactors.hom.app P.obj ≫
+            DerivedCategory.Q.map ((integralScalarCompletionChain l E L ι Y).app P.obj)) := by
+        rw [← hce]
+        infer_instance
+      simpa only [isIso_comp_left_iff] using hi
+    have hdelta : IsIso (DerivedCategory.Q.map (scalarPullbackChain l E L ι g P.obj)) := by
+      have hi : IsIso
+          ((integralOrdinaryDerivedScalar l E L ι X).map
+              ((integralDerivedPullbackComparison l E g).hom.app P) ≫
+            (integralOrdinaryScalar l E L ι X).mapDerivedCategoryFactors.hom.app
+              ((integralOperationsPullbackComplexFunctor l E g).obj P.obj) ≫
+            DerivedCategory.Q.map (scalarPullbackChain l E L ι g P.obj)) := by
+        rw [hp]
+        infer_instance
+      simpa only [isIso_comp_left_iff] using hi
+    refine ⟨scalarGood l E L ι Y P,
+      (DerivedCategory.isIso_Q_map_iff_quasiIso _ _).mp hchi,
+      (DerivedCategory.isIso_Q_map_iff_quasiIso _ _).mp hdelta, hce, ?_⟩
+    dsimp only [scalarPullbackCompleted, Iso.trans_hom, Iso.symm_hom,
+      Iso.app_hom, Functor.mapIso_hom]
+    rw [reassoc_of% hp]
+    simp only [Iso.hom_inv_id_app_assoc, ← Functor.map_comp_assoc]
+    have he := (scalarPullbackOrdinary l E L ι g).hom.naturality e.inv
+    dsimp only [Functor.comp_map] at he
+    rw [reassoc_of% he]
+    simp only [← Functor.map_comp_assoc, ← Functor.map_comp, Iso.inv_hom_id]
+    rw [CategoryTheory.Functor.map_id, Category.id_comp]
+  · intro K' hK' hF' a
+    have hnX := (scalarCompletion l E L ι X).naturality
+      ((integralDerivedPullback l E g).map a)
+    change _ ≫ (scalarCompletionIso l E L ι X _ hF').hom =
+      (scalarCompletionIso l E L ι X _ hF).hom ≫ _ at hnX
+    have hx :
+        (integralScalarExtension l E L ι X).map ((integralDerivedPullback l E g).map a) ≫
+            (scalarCompletionIso l E L ι X _ hF').inv =
+          (scalarCompletionIso l E L ι X _ hF).inv ≫
+            (integralOrdinaryDerivedScalar l E L ι X).map
+              ((integralDerivedPullback l E g).map a) := by
+      apply (cancel_epi (scalarCompletionIso l E L ι X _ hF).hom).1
+      rw [← Category.assoc, ← hnX, Category.assoc]
+      simp
+    dsimp only [scalarPullbackCompleted, Iso.trans_hom, Iso.symm_hom,
+      Iso.app_hom, Functor.mapIso_hom]
+    simp only [Category.assoc]
+    rw [reassoc_of% hx]
+    have ha := (scalarPullbackOrdinary l E L ι g).hom.naturality a
+    dsimp only [Functor.comp_map] at ha
+    rw [reassoc_of% ha]
+    simp only [← Functor.map_comp]
+    have hnY := (scalarCompletion l E L ι Y).naturality a
+    change _ ≫ (scalarCompletionIso l E L ι Y K' hK'.1).hom =
+      (scalarCompletionIso l E L ι Y K hK.1).hom ≫ _ at hnY
+    rw [← hnY]
 
 end WeilConjectures

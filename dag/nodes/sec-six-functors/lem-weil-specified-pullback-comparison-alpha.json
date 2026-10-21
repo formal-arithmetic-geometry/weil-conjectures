@@ -27,96 +27,52 @@
  ],
  "proof": [
   {
-   "text": "Choose $P$ by K-flat resolution and put $Q=P \\otimes_{R_Y}S_Y$. Change of rings makes $Q$ flat-term K-flat and a representative of $C_YK$. The integral-operations comparison identifies $A_E(P)$ and $A_L(Q)$ with the two derived pullbacks.",
+   "text": "Apply integralOperations_preserve_constructible to K and take the completeness component of the resulting sfIntegralConstructible proof. For every good representative P, scalarGood shows that its ordinary scalar extension is again good.",
    "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-pur-derived-change-of-rings",
-    "lem-pur-kflat-change-of-rings",
-    "lem-pur-integral-operations-well-defined"
+    "lem-pur-integral-operations-preserve-constructible",
+    "lem-pur-integral-operations-scalar-extension"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.8.2(1), pp. 58-59; Definition 3.4.10 and Lemma 3.4.12"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply the strict cone naturality lemma. Its normalized $d_m$ are precisely the displayed same-index maps, and its tensor/product isomorphism identifies the induced $\\delta_P$ on both cone coordinates. This supplies the chain model and its derived representative.",
+   "text": "The normalization equation of scalarCompletion_existsUnique identifies the localized completion chain map on P. Naturality along e inverse gives the displayed representative equation at K. Its left side is a composite of isomorphisms, since K is complete. Cancel the two ordinary representative isomorphisms on the right to prove that the localized completion chain map is an isomorphism. DerivedCategory.isIso_Q_map_iff_quasiIso then proves that the chain map is a quasi-isomorphism.",
    "uses": [
-    "lem-weil-scalar-pullback-strict-cone-naturality"
+    "lem-weil-normalized-scalar-completion"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 3.5.1 and finite-free product/cone calculation in Lemma 6.8.2(1)"
-   }
+   "elementary": true
   },
   {
-   "text": "Choose the ramification index $e$. The ramified tower identification gives $\\widetilde d_m:D^E_m(P)\\otimes_{R_X}S_X\\cong D^L_{em}(Q)$, with $d_m=T_{m,em}\\widetilde d_m$. Hence $\\delta_P$ is the forward Roos transition $\\Delta$ for $K_n=D^L_n(Q)$.",
+   "text": "The defining normalization equation of scalarPullbackOrdinary_existsUnique equates the localized scalarPullbackChain, preceded by two representative isomorphisms, to a composite of isomorphisms. Cancel the two preceding isomorphisms and reflect invertibility through DerivedCategory.Q to obtain the quasi-isomorphism of this specific scalarPullbackChain. This uses the existing normalized comparison theorem, rather than reconstructing the ramified tower argument already underlying that theorem.",
    "uses": [
-    "lem-weil-ramified-pullback-tower-identification"
+    "lem-pur-integral-operations-scalar-extension"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.8.2(1) (O_{E,X} = lim O_E/varpi^n) and Proposition 3.5.1 / proof of Lemma 6.5.9 (strict pro-isomorphisms of quotient towers give the same R lim); explicit homotopy agent-written"
-   }
+   "elementary": true
   },
   {
-   "text": "Apply the forward Roos transition lemma to the underlying abelian sheaves ($A=\\mathbf Z$). Countable products are exact on $X_{\\mathrm{proet}}$. Its coordinate maps and homotopy are $S_X$-linear, so $\\Delta$, and therefore $\\delta_P$, is a quasi-isomorphism of $S_X$-complexes, with localized inverse $[r_e]$.",
+   "text": "Expand scalarPullbackCompleted as conjugation of scalarPullbackOrdinary by the two completion isomorphisms. Substitute the representative normalization of scalarPullbackOrdinary, cancel the adjacent inverse comparison maps, and use its naturality along e inverse. Functoriality and the inverse identities for e give exactly the required representative formula.",
    "uses": [
-    "lem-weil-roos-transition-homotopy",
-    "lem-weil-proetale-countable-products-exact"
+    "lem-pur-integral-operations-scalar-extension"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.8.2(1) (O_{E,X} = lim O_E/varpi^n) and Proposition 3.5.1 / proof of Lemma 6.5.9 (strict pro-isomorphisms of quotient towers give the same R lim); explicit homotopy agent-written"
-   }
+   "elementary": true
   },
   {
-   "text": "The finite-free completed scalar comparison represents $\\chi_{Y,K}$ by $q\\mapsto(0,(q\\bmod\\varpi_L^m)_m)$ and makes it invertible. Isomorphism pullback preserves $D^b_c$ for the derived pullback of [def-weil-derived-pullback-tensor-hom], whose integral level is by definition the construction of [def-pur-integral-derived-operations] represented by $A_E(P)$; so $Lg_E^*K$ is derived complete and the same comparison makes $\\chi_{X,Lg_E^*K}$ invertible. Conjugate $[\\delta_P]$ by these two comparisons to obtain the displayed $\\alpha_K$.",
+   "text": "Precompose the asserted naturality square by the source completion isomorphism and postcompose by the pullback of the inverse target completion isomorphism. Naturality of scalarCompletion moves each completion map past the given morphism. Cancel inverse pairs. The remaining square is scalarPullbackOrdinary naturality, so cancellation proves the original square for every derived morphism.",
    "uses": [
-    "lem-weil-finite-free-completed-scalar-comparison",
-    "lem-weil-isomorphism-derived-pullback",
-    "def-weil-derived-pullback-tensor-hom"
+    "lem-pur-integral-operations-scalar-extension",
+    "lem-weil-normalized-scalar-completion"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.8.2(1), pp. 58-59; Proposition 3.5.1"
-   }
-  },
-  {
-   "text": "The strict cone lemma supplies resolution independence and naturality of $[\\delta_P]$ with the canonical representative comparisons. The completion comparison is natural. Their composite is therefore independent of $P$ and natural in $K$. This is exactly the specified tensor-and-quotient-completion construction of the statement.",
-   "uses": [
-    "lem-weil-scalar-pullback-strict-cone-naturality",
-    "lem-weil-finite-free-completed-scalar-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-weil-scalar-extension-well-defined.proof.md",
-    "place": "resolution-independence and naturality clauses"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-kflat-resolution",
-  "lem-pur-derived-change-of-rings",
-  "lem-pur-kflat-change-of-rings",
-  "lem-pur-integral-operations-well-defined",
-  "lem-weil-scalar-pullback-strict-cone-naturality",
-  "lem-weil-ramified-pullback-tower-identification",
-  "lem-weil-roos-transition-homotopy",
-  "lem-weil-proetale-countable-products-exact",
-  "lem-weil-finite-free-completed-scalar-comparison",
-  "lem-weil-isomorphism-derived-pullback",
-  "def-weil-derived-pullback-tensor-hom"
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-pur-integral-operations-scalar-extension",
+  "lem-weil-normalized-scalar-completion"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-weil-scalar-extension-well-defined.proof.md",
-  "place": "resolution-level strict quotient-tower comparison for integral pullback and scalar extension"
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 3.5.1 and Lemmas 6.5.9(4), 6.8.2(1); H1 assembly from the existing normalized scalar comparison declarations. The shorter proof reflects their invertibility through DerivedCategory.Q and uses naturality and cancellation."
  },
  "mathlib_searches": [
   {
@@ -208,9 +164,7 @@
   "blueprint": "Via lem-weil-isomorphism-comparison-scalar-extension and the Frobenius-transport chain: makes explicit the coefficient-change compatibility of the completed integral pullback needed in the first (cohomology-transport) arrow of def-weil-global-geometric-frobenius's composites; the blueprint states no proof of this model, and its integral/common-stage paragraph of def-weil-derived-pullback-tensor-hom is the related notion.",
   "tool_uses": []
  },
- "tool_uses": [
-  "lem-pur-compact-support-roos-cofinality"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
@@ -237,5 +191,15 @@
   "result": "pass",
   "note": "Read node, all 16 deps, module, report and every declaration used. Node changed only in lean; lean.statement verbatim. All clauses rendered: arbitrary good P with identification e (resolution independence), Q good over L, QuasiIso of integralScalarCompletionChain (zero shifted coordinate, quotient projections) and of scalarPullbackChain (both Roos coordinates fixed), chi representative equation, alpha = scalarPullbackCompleted equals the 10-arrow composite (sources/targets traced), completeness of Lg_E^*K concluded, naturality square. No stronger hypotheses (the X-side l-invertibility binder is implied by IsIso and the Y-side one); universes E, L, schemes in u as in the dependency API; edge cases E=L, unramified, e=2 m=1, K=0, empty scheme. One theorem with sorry, no definitions, docstrings with source/blueprint and the 8 proof steps, lines at most 100 characters. nt_compile --json of the snapshot file: clean in 4.5 s (a broken copy gives a type error). Informational: chi is scalarCompletion, pinned to the node's chain formula, not the finite-free completedScalarComparison."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261021T170728-L-2755019",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }
