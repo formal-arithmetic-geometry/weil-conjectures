@@ -20067,3 +20067,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:56 L: merged deliver/Q30/lem-sfb-coefficient-push-filtered-legs (reviewer PASS; first push; new nodes: 0); claim not held by Q30: not your claim
 - 03:56 L: merged deliver/Q24/lem-sp-ordinary-vertical-pasting-transport (reviewer PASS; first push; new nodes: 0)
 - 03:56 L: merged deliver/Q63/lem-sfb-integral-ambient-tower-comparison (reviewer PASS; first push; new nodes: 0); claim not held by Q63: not your claim
+- 03:56 L: merged deliver/Q23/lem-sp-ordinary-horizontal-pasting-transport (reviewer PASS; first push; new nodes: 0)

@@ -10,9 +10,68 @@
  "stmt_deps": [
   "def-weil-pbc-adjunction-mate"
  ],
- "proof": [],
+ "proof": [
+  {
+   "text": "Fix $N\\in C$ and put $n'=E_C(N)$. Write $e_T(M)$ for the forward component of a comparison, and write $E_X(u)$ for its action on a morphism. Set\n$$s=e_{QJI}(N),\\quad u=e_{QI_{12}}(N),\\quad v=e_{LKR}(N),\\quad w=e_{LPI}(N),\\quad t=e_{K_{12}R}(N).$$\nFor example, repeated use of the given composite convention gives\n$$\\begin{aligned}\ns&=Q'J'(e_I(N))\\circ Q'(e_J(IN))\\circ e_Q(JIN),\\\\\nu&=Q'(e_{I_{12}}(N))\\circ e_Q(I_{12}N),\\\\\nv&=L'K'(e_R(N))\\circ L'(e_K(RN))\\circ e_L(KRN),\\\\\nw&=L'P'(e_I(N))\\circ L'(e_P(IN))\\circ e_L(PIN),\\\\\nt&=K'_{12}(e_R(N))\\circ e_{K_{12}}(RN).\n\\end{aligned}$$\nBoth parenthesizations of a triple composite give exactly these products, by functoriality and associativity. The canonical functor associators have identity components, so they do not alter these component formulas. In particular, $s:E_E(QJIN)\\to Q'J'I'(n')$ and $t:E_E(K_{12}RN)\\to K'_{12}R'(n')$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7D, lemma-shriek-proper-and-open-compose-horizontal; agent component comparison calculation for its horizontal pasting equation"
+   }
+  },
+  {
+   "text": "Naturality of $e_Q$ at $(c_I)_N: JIN\\to I_{12}N$, followed by the assumed compatibility of $c_I$, gives\n$$\\begin{aligned}\nu\\circ E_E\\bigl(Q((c_I)_N)\\bigr)\n&=Q'(e_{I_{12}}(N))\\circ Q'\\bigl(E_F((c_I)_N)\\bigr)\\circ e_Q(JIN)\\\\\n&=Q'\\bigl((c'_I)_{n'}\\bigr)\\circ s.\n\\end{aligned}$$\nHere the second line substitutes $e_{I_{12}}(N)\\circ E_F((c_I)_N)=(c'_I)_{n'}\\circ J'(e_I(N))\\circ e_J(IN)$ and uses that $Q'$ preserves composition. The respected-cell hypothesis for $c$ is $t\\circ E_E(c_N)=c'_{n'}\\circ u$. Composing these equalities, and using that $E_E$ preserves composition, yields\n$$t\\circ E_E\\bigl(c_N\\circ Q((c_I)_N)\\bigr)=c'_{n'}\\circ Q'\\bigl((c'_I)_{n'}\\bigr)\\circ s.$$",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7D, lemma-shriek-proper-and-open-compose-horizontal; agent component comparison calculation for its horizontal pasting equation"
+   }
+  },
+  {
+   "text": "Evaluate the compatibility of $c_K$ at $RN$. Postcompose it with $K'_{12}(e_R(N))$ and use naturality of $c'_K:L'K'\\to K'_{12}$ at $e_R(N):E_A(RN)\\to R'(n')$. This gives\n$$\\begin{aligned}\nt\\circ E_E((c_K)_{RN})\n&=K'_{12}(e_R(N))\\circ(c'_K)_{E_A(RN)}\\circ e_{LK}(RN)\\\\\n&=(c'_K)_{R'(n')}\\circ L'K'(e_R(N))\\circ e_{LK}(RN)\\\\\n&=(c'_K)_{R'(n')}\\circ v.\n\\end{aligned}$$\nThe last line is just the expansion of $e_{LK}$ and the definition of $v$ in Step 1.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7D, lemma-shriek-proper-and-open-compose-horizontal; agent component comparison calculation for its horizontal pasting equation"
+   }
+  },
+  {
+   "text": "Naturality of $e_L$ at $a_N:PIN\\to KRN$ gives $e_L(KRN)\\circ E_E(L(a_N))=L'(E_B(a_N))\\circ e_L(PIN)$. Also the respected-cell equation for $a$ expands to\n$$K'(e_R(N))\\circ e_K(RN)\\circ E_B(a_N)=a'_{n'}\\circ P'(e_I(N))\\circ e_P(IN).$$\nSubstitute these two equations into the expansion of $v$, and use that $L'$ preserves composition:\n$$\\begin{aligned}\nv\\circ E_E(L(a_N))\n&=L'\\bigl(K'(e_R(N))\\circ e_K(RN)\\circ E_B(a_N)\\bigr)\\circ e_L(PIN)\\\\\n&=L'(a'_{n'})\\circ L'P'(e_I(N))\\circ L'(e_P(IN))\\circ e_L(PIN)\\\\\n&=L'(a'_{n'})\\circ w.\n\\end{aligned}$$",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7D, lemma-shriek-proper-and-open-compose-horizontal; agent component comparison calculation for its horizontal pasting equation"
+   }
+  },
+  {
+   "text": "The respected-cell equation for $b$, evaluated at $IN$, is $e_{LP}(IN)\\circ E_E(b_{IN})=b'_{E_D(IN)}\\circ e_{QJ}(IN)$. Naturality of $b':Q'J'\\to L'P'$ at $e_I(N):E_D(IN)\\to I'(n')$ therefore gives\n$$\\begin{aligned}\nw\\circ E_E(b_{IN})\n&=L'P'(e_I(N))\\circ b'_{E_D(IN)}\\circ e_{QJ}(IN)\\\\\n&=b'_{I'(n')}\\circ Q'J'(e_I(N))\\circ e_{QJ}(IN)\\\\\n&=b'_{I'(n')}\\circ s.\n\\end{aligned}$$\nThe first and last lines expand the composite comparisons according to Step 1.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7D, lemma-shriek-proper-and-open-compose-horizontal; agent component comparison calculation for its horizontal pasting equation"
+   }
+  },
+  {
+   "text": "Combining Steps 3, 4 and 5, with functoriality of $E_E$, gives\n$$\\begin{aligned}\nt\\circ E_E\\bigl((c_K)_{RN}\\circ L(a_N)\\circ b_{IN}\\bigr)\n=(c'_K)_{R'(n')}\\circ L'(a'_{n'})\\circ b'_{I'(n')}\\circ s.\n\\end{aligned}$$\nThe assumed primed horizontal-pasting equation evaluated at $n'$ identifies the right side with $c'_{n'}\\circ Q'((c'_I)_{n'})\\circ s$, which is the right side of Step 2. Thus the two morphisms asserted equal in the conclusion become equal after postcomposition with $t$. This $t$ is invertible: an explicit inverse is $e_{K_{12}}(RN)^{-1}\\circ K'_{12}(e_R(N)^{-1})$, using preservation of composition and identities by $K'_{12}$. Postcompose the equality with this inverse and cancel $t^{-1}\\circ t=1$. This is the claimed equality for arbitrary $N$; no equality is reflected through $E_E$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7D, lemma-shriek-proper-and-open-compose-horizontal; agent component comparison calculation for its horizontal pasting equation"
+   }
+  }
+ ],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.proof.md",
+  "place": "Local pairs: explicit component calculation transporting horizontal proper/open pasting through the coherent coefficient comparisons; Stacks Tag 0F7D supplies the motivating pasting equation"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -112,10 +171,199 @@
    },
    "date": "2026-10-21",
    "verdict": "no match: CatCommSq.hComp and TwoSquare.hComp construct composites; they do not prove this transport implication with nine edge comparisons and a prescribed outer square."
+  },
+  {
+   "tool": "grep",
+   "query": "transport.*(h[Cc]omp|horizontal)|horizontal.*transport|TwoSquare.*whisker",
+   "results": {
+    "t": "2026-10-21T03:45:25Z",
+    "tool": "grep",
+    "query": "transport.*(h[Cc]omp|horizontal)|horizontal.*transport|TwoSquare.*whisker",
+    "sub": "",
+    "ok": true,
+    "n_hits": 3,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean",
+     "Mathlib/CategoryTheory/GuitartExact/HorizontalComposition.lean",
+     "Mathlib/CategoryTheory/GuitartExact/VerticalComposition.lean"
+    ],
+    "digest": "f7ee45ec24ddeb15"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: inspected CatCommSq.hComp, TwoSquare.hComp and hCompVCompHComp, NatIso cancellation and naturality, and the Guitart-exactness candidates; these give elementary ingredients or constructions, not this implication with nine coherent comparisons and arbitrary noninvertible cells."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality transports a horizontal composite of natural transformation squares through coherent natural isomorphisms",
+   "results": {
+    "t": "2026-10-21T03:45:25Z",
+    "tool": "leansearch",
+    "query": "Naturality transports a horizontal composite of natural transformation squares through coherent natural isomorphisms",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.iso_hom_naturality_assoc",
+     "CategoryTheory.CatCommSq.iso_hom_naturality_assoc",
+     "CategoryTheory.Pseudofunctor.StrongTrans.naturality_naturality_iso",
+     "CategoryTheory.NatTrans.naturality_2",
+     "CategoryTheory.NatTrans.naturality_2_assoc",
+     "CategoryTheory.CatCommSq.iso_inv_naturality_assoc",
+     "CategoryTheory.NatIso.naturality_2_assoc",
+     "CategoryTheory.CatCommSq.hComp"
+    ],
+    "digest": "5040a808da7df298"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: inspected CatCommSq.hComp, TwoSquare.hComp and hCompVCompHComp, NatIso cancellation and naturality, and the Guitart-exactness candidates; these give elementary ingredients or constructions, not this implication with nine coherent comparisons and arbitrary noninvertible cells."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport a horizontal pasting equation of natural transformations along coherent invertible comparison maps without faithful functors",
+   "results": {
+    "t": "2026-10-21T03:45:26Z",
+    "tool": "leanfinder",
+    "query": "Transport a horizontal pasting equation of natural transformations along coherent invertible comparison maps without faithful functors",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.CatCommSq.hComp_iso_hom_app",
+     "CategoryTheory.CatCommSq.hComp_iso_inv_app",
+     "CategoryTheory.NatIso.hcomp",
+     "CategoryTheory.CatCommSq.vComp_iso_hom_app",
+     "CategoryTheory.CatCommSq.vComp_iso_inv_app",
+     "CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.transformObjComp",
+     "CategoryTheory.CatCommSq.hComp",
+     "CategoryTheory.CatCommSq.iso"
+    ],
+    "digest": "be716d36960a81a9"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: inspected CatCommSq.hComp, TwoSquare.hComp and hCompVCompHComp, NatIso cancellation and naturality, and the Guitart-exactness candidates; these give elementary ingredients or constructions, not this implication with nine coherent comparisons and arbitrary noninvertible cells."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.TwoSquare, CategoryTheory.Functor",
+   "results": {
+    "t": "2026-10-21T03:45:27Z",
+    "tool": "loogle",
+    "query": "CategoryTheory.TwoSquare, CategoryTheory.Functor",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "CategoryTheory.TwoSquare.hId",
+     "CategoryTheory.TwoSquare.vId",
+     "CategoryTheory.TwoSquare",
+     "CategoryTheory.TwoSquare.mk",
+     "CategoryTheory.TwoSquare.natTrans",
+     "CategoryTheory.TwoSquare.equivNatTrans",
+     "CategoryTheory.TwoSquare.whiskerBottom",
+     "CategoryTheory.TwoSquare.whiskerLeft"
+    ],
+    "digest": "a7214f7983f5cd17"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: inspected CatCommSq.hComp, TwoSquare.hComp and hCompVCompHComp, NatIso cancellation and naturality, and the Guitart-exactness candidates; these give elementary ingredients or constructions, not this implication with nine coherent comparisons and arbitrary noninvertible cells."
+  },
+  {
+   "tool": "grep",
+   "query": "hCompVCompHComp|conjugat|transport",
+   "results": {
+    "t": "2026-10-21T03:45:42Z",
+    "tool": "grep",
+    "query": "hCompVCompHComp|conjugat|transport",
+    "sub": "CategoryTheory/Functor",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Functor/TwoSquare.lean"
+    ],
+    "digest": "562bfd7d6dc19d39"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: inspected CatCommSq.hComp, TwoSquare.hComp and hCompVCompHComp, NatIso cancellation and naturality, and the Guitart-exactness candidates; these give elementary ingredients or constructions, not this implication with nine coherent comparisons and arbitrary noninvertible cells."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality_2",
+   "results": {
+    "t": "2026-10-21T03:45:43Z",
+    "tool": "loogle",
+    "query": "CategoryTheory.NatTrans.naturality_2",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "CategoryTheory.NatTrans.naturality_2"
+    ],
+    "digest": "50d1feb69f2e068a"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: inspected CatCommSq.hComp, TwoSquare.hComp and hCompVCompHComp, NatIso cancellation and naturality, and the Guitart-exactness candidates; these give elementary ingredients or constructions, not this implication with nine coherent comparisons and arbitrary noninvertible cells."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equality of a pasted natural transformation rectangle is preserved by compatible natural isomorphisms between functors",
+   "results": {
+    "t": "2026-10-21T03:45:43Z",
+    "tool": "leansearch",
+    "query": "Equality of a pasted natural transformation rectangle is preserved by compatible natural isomorphisms between functors",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Limits.CategoricalPullback.toCatCommSqOver_mapIso_mkNatIso_eq_mkIso",
+     "CategoryTheory.Limits.CategoricalPullback.mkNatIso",
+     "CategoryTheory.NatTrans.naturality_2",
+     "CategoryTheory.Limits.parallelPairIsoMk",
+     "CategoryTheory.NatTrans.naturality_1_assoc",
+     "CategoryTheory.Comma.mapLeftEq.congr_simp",
+     "CategoryTheory.NatTrans.naturality_2_assoc",
+     "CategoryTheory.NatTrans.mk.congr_simp"
+    ],
+    "digest": "08a1e2d80fc5ff3f"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: inspected CatCommSq.hComp, TwoSquare.hComp and hCompVCompHComp, NatIso cancellation and naturality, and the Guitart-exactness candidates; these give elementary ingredients or constructions, not this implication with nine coherent comparisons and arbitrary noninvertible cells."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Conjugation by natural isomorphisms preserves equality of composites of noninvertible natural transformations and whiskering",
+   "results": {
+    "t": "2026-10-21T03:45:47Z",
+    "tool": "leanfinder",
+    "query": "Conjugation by natural isomorphisms preserves equality of composites of noninvertible natural transformations and whiskering",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.NatIso.cancel_natIso_hom_right_assoc",
+     "CategoryTheory.NatIso.cancel_natIso_inv_right_assoc",
+     "CategoryTheory.NatIso.cancel_natIso_hom_left",
+     "CategoryTheory.NatIso.cancel_natIso_hom_right",
+     "CategoryTheory.NatIso.hcomp",
+     "CategoryTheory.NatTrans.naturality_2_assoc",
+     "CategoryTheory.NatTrans.naturality_1_assoc",
+     "CategoryTheory.Functor.isoWhiskerLeft_trans_isoWhiskerRight"
+    ],
+    "digest": "5b5479b90e075dbc"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: inspected CatCommSq.hComp, TwoSquare.hComp and hCompVCompHComp, NatIso cancellation and naturality, and the Guitart-exactness candidates; these give elementary ingredients or constructions, not this implication with nine coherent comparisons and arbitrary noninvertible cells."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sp-varying-ring-proper-open-pasting",
@@ -135,5 +383,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sp-ordinary-horizontal-pasting-transport",
+  "worker": "stage1",
+  "summary": "Expanded the transport argument into six component calculations: composite comparisons, the outer path, the upper compositor, left whiskering of a, right whiskering of b, and final comparison cancellation. Every step is elementary from the stated hypotheses and category axioms; no new nodes. Searched the project, DAG, blueprint and Mathlib, preserving previous searches. The private Sheaf proof is reference material, not an eligible project attachment under the brief.",
+  "blueprint": "det-sp-tower-gluing, Local pairs: realizes the horizontal proper/open compatibility used to compose chart counits via lem-sp-coefficient-tower-shriek-calculus and lem-sp-varying-ring-proper-open-pasting; no change to the unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q23-8c4c76347",
+  "group": "Q23",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-8c4c76347 (reviewer sub-agent of L); spot-checked: I read the whole item. It has no new nodes, no fixes and no tool_uses. The statement is byte-identical to live and side-live, where the item is still unsplit with no proof, so the delivery is not superseded. There is no repair note, so the 2026-10-21 re-split length rule does not apply. The item is not on the dropped list and no SGA is cited. I checked the typing of every functor, cell and comparison: e_{HF}, the respected-cell equations and the c_K/c_I compatibilities all have consistent endpoints. I recomputed all six steps. Step 1: the component formulas for s, u, v, w, t, with both parenthesizations agreeing. Step 2: naturality of e_Q at (c_I)_N, then the c_I compatibility, then the respected-cell equation for c. Step 3: the c_K compatibility at RN, then naturality of c'_K at e_R(N), giving v. Step 4: naturality of e_L at a_N, then L' applied to the respected-cell equation for a. Step 5: the respected-cell equation for b at IN, then naturality of b' at e_I(N). Step 6: the primed pasting hypothesis at n', then cancelling the invertible t. Every step is correct and elementary, so the empty uses and proof_deps are justified. Faithfulness is neither assumed nor used, which matches the parent's step 3, where faithfulness is supplied separately. The private Lean theorem ordinary_horizontal_transport (VaryingRingProperOpenPasting.lean:550-607) has the same hypotheses and follows the same rewrite chain. The stmt_dep def-weil-pbc-adjunction-mate gives only the square notation; adjunctions are explicitly not required. The item does not duplicate lem-sp-ordinary-vertical-pasting-transport, which is a different arrangement with vertical compositors, and no blueprint node states it, so same_as [] is correct. The Stacks 0F7D label checks out at more-etale.tex:2676. The three kinds of Mathlib search are recorded, and the TwoSquare/CatCommSq hComp candidates do not give the implication. Edge cases checked: identity comparisons, terminal primed categories, empty C and noninvertible cells."
  }
 }
