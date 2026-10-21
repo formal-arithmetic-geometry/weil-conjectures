@@ -23807,3 +23807,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:41 L: returned deliver/Q17/lem-coef-compact-support-normalized-realization (reviewer RETURN: L: independent stage-2 immutable head 5b409105055a: Item Lean unchanged since dd28 apart from imports and the step-6 doc)
 - 21:41 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
 - 21:43 L: merged deliver/NB/lem-sfb-relative-cyclic-restriction-model (stage 2; reviewer PASS; parallel immutable checks)
+- 21:43 L: returned deliver/Q85/lem-weil-integral-twist-scalar-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-integral-twist-scalar-coherence: lem-weil-int)
