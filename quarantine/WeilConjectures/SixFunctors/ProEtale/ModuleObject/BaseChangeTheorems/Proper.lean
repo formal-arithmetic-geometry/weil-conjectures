@@ -97,21 +97,8 @@ with `f` proper, the base-change morphism `BC_sq : Rf_* ⋙ Lg^* ⟶ Lg'^* ⋙ R
 isomorphism of functors `Dᵇc(X)⟦E̲⟧ ⥤ Dᵇc(Y')⟦E̲⟧`. -/
 theorem isIso_boundedConstructibleBaseChange_of_isProper [IsProper f.left]
     (sq : IsPullback g' f' f g) :
-    IsIso (boundedConstructibleBaseChange (Profinite.continuousMapRingObj E) ℓ sq.toCommSq) := by
-  have : LocallyOfFiniteType (X.left ↘ Spec (.of k)) := ‹LocallyOfFiniteType X.hom›
-  have : QuasiCompact (X.left ↘ Spec (.of k)) := ‹QuasiCompact X.hom›
-  have : IsSeparated (X.left ↘ Spec (.of k)) := ‹IsSeparated X.hom›
-  have : LocallyOfFiniteType (Y.left ↘ Spec (.of k)) := ‹LocallyOfFiniteType Y.hom›
-  have : QuasiCompact (Y.left ↘ Spec (.of k)) := ‹QuasiCompact Y.hom›
-  have : IsSeparated (Y.left ↘ Spec (.of k)) := ‹IsSeparated Y.hom›
-  have : LocallyOfFiniteType (X'.left ↘ Spec (.of k)) := ‹LocallyOfFiniteType X'.hom›
-  have : QuasiCompact (X'.left ↘ Spec (.of k)) := ‹QuasiCompact X'.hom›
-  have : IsSeparated (X'.left ↘ Spec (.of k)) := ‹IsSeparated X'.hom›
-  have : LocallyOfFiniteType (Y'.left ↘ Spec (.of k)) := ‹LocallyOfFiniteType Y'.hom›
-  have : QuasiCompact (Y'.left ↘ Spec (.of k)) := ‹QuasiCompact Y'.hom›
-  have : IsSeparated (Y'.left ↘ Spec (.of k)) := ‹IsSeparated Y'.hom›
-  rw [NatTrans.isIso_iff_isIso_app]
-  exact isIso_boundedConstructibleBaseChange_continuousMap_app ℓ E k sq.overLeft
+    IsIso (boundedConstructibleBaseChange (Profinite.continuousMapRingObj E) ℓ sq.toCommSq) :=
+  sorry
 
 /-- **The proper base change theorem** for bounded constructible `ℚ̄_ℓ`-sheaves: for a cartesian
 square of schemes `sq : IsPullback g' f' f g` with `f` proper, the base-change morphism
@@ -121,20 +108,7 @@ square of schemes `sq : IsPullback g' f' f g` with `f` proper, the base-change m
 theorem isIso_boundedConstructibleBaseChange_of_isProper_padicAlgCl [IsProper f.left]
     (sq : IsPullback g' f' f g) :
     IsIso (boundedConstructibleBaseChange
-      (Profinite.padicAlgClRingObj ℓ) ℓ sq.toCommSq) := by
-  have : LocallyOfFiniteType (X.left ↘ Spec (.of k)) := ‹LocallyOfFiniteType X.hom›
-  have : QuasiCompact (X.left ↘ Spec (.of k)) := ‹QuasiCompact X.hom›
-  have : IsSeparated (X.left ↘ Spec (.of k)) := ‹IsSeparated X.hom›
-  have : LocallyOfFiniteType (Y.left ↘ Spec (.of k)) := ‹LocallyOfFiniteType Y.hom›
-  have : QuasiCompact (Y.left ↘ Spec (.of k)) := ‹QuasiCompact Y.hom›
-  have : IsSeparated (Y.left ↘ Spec (.of k)) := ‹IsSeparated Y.hom›
-  have : LocallyOfFiniteType (X'.left ↘ Spec (.of k)) := ‹LocallyOfFiniteType X'.hom›
-  have : QuasiCompact (X'.left ↘ Spec (.of k)) := ‹QuasiCompact X'.hom›
-  have : IsSeparated (X'.left ↘ Spec (.of k)) := ‹IsSeparated X'.hom›
-  have : LocallyOfFiniteType (Y'.left ↘ Spec (.of k)) := ‹LocallyOfFiniteType Y'.hom›
-  have : QuasiCompact (Y'.left ↘ Spec (.of k)) := ‹QuasiCompact Y'.hom›
-  have : IsSeparated (Y'.left ↘ Spec (.of k)) := ‹IsSeparated Y'.hom›
-  rw [NatTrans.isIso_iff_isIso_app]
-  exact isIso_boundedConstructibleBaseChange_padicAlgCl_app ℓ k sq.overLeft
+      (Profinite.padicAlgClRingObj ℓ) ℓ sq.toCommSq) :=
+  sorry
 
 end AlgebraicGeometry.ProEtale.CondensedRing
