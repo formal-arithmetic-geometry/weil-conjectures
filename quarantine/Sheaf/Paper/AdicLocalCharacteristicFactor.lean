@@ -9,7 +9,7 @@ public import Sheaf.Paper.AdicPunctualWeights
 public import Sheaf.Paper.CommonStageLisse
 public import WeilConjectures.Mathlib.LinearAlgebra.Charpoly.ToMatrix
 
-import Sheaf.Paper.ImmersionWeilLocalBehavior
+import Sheaf.Paper.ImmersionWeilPullbackLocalBehavior
 import Sheaf.Paper.AdicLocalFrobeniusModelConjugacy
 import WeilConjectures.Mathlib.Algebra.Polynomial.Reverse
 

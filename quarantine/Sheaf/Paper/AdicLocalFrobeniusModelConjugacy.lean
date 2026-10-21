@@ -8,7 +8,6 @@ module
 public import Sheaf.Paper.AdicHeartIntrinsicFibres
 public import Sheaf.Paper.LocalFrobeniusTrace
 
-import Sheaf.Paper.LocalFrobeniusConjugacyClass
 import Sheaf.Paper.LocalWeilModelTraceIndependence
 import Sheaf.Paper.GeneralAlgebraicallyClosedCoefficients
 import Sheaf.SixFunctors.FrobeniusPointTransportNatural
