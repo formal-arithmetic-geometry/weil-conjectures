@@ -1,0 +1,131 @@
+{
+ "id": "lem-sp-relative-torsor-extension",
+ "kind": "statement",
+ "title": "Relative extension class of a torsor with a specified section",
+ "statement": "Let X be a scheme, G and Q abelian etale sheaves [def-weil-pbc-abelian-etale-sheaves], P a G-torsor [def-sc-gm-torsor], U an etale object and tau in P(U). Suppose 0 -> L --t--> Z_X --q--> Q -> 0 is short exact and natural additive equivalences Hom(L,A) = A(U) send t to the constant one. Then there is a unique beta in Ext^1(Q,G) [def-weil-abstract-derived-category] represented by an extension 0 -> G --a--> E --b--> Q -> 0 with a natural map f:P -> E satisfying f(g+p)=f(p)+a(g), b(f(p))=q(1), and f(tau)=0. The one is the image of one under constant-presheaf sheafification at each object.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "lemma-torsors-h1 (Tag 03AJ), free extension; Cartier proof (G1), complementary splitting"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-sc-gm-torsor",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Take the explicit free extension presentation E0 of P, and its short exact augmentation sequence. Use the sections equivalence to obtain h:L -> E0 with h corresponding to generator(tau). Naturality and the normalization of t show h followed by augmentation is t.",
+   "uses": [
+    "lem-sp-etale-torsor-extension-presentation-exists",
+    "lem-sc-extension-presentation-short-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "lemma-torsors-h1 (Tag 03AJ), free extension; Cartier proof (G1), complementary splitting"
+   }
+  },
+  {
+   "text": "Form E=coker(h). Compose G -> E0 with this quotient and descend E0 -> Z_X -> Q to E. Monicity of t makes G -> E monic: a kernel element lifts through h and then has t-image zero. The cokernel universal properties of both short exact sequences show E -> Q is the cokernel of G -> E, hence the new sequence is short exact. The generator map of P followed by the quotient is equivariant, lies over q(1), and sends tau to zero.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "lemma-torsors-h1 (Tag 03AJ), free extension; Cartier proof (G1), complementary splitting"
+   }
+  },
+  {
+   "text": "For any competing model, the free presentation universal property gives E0 -> Eprime inducing its torsor map and the identity on G. Its projection to Q equals augmentation followed by q, by uniqueness on generators. The sections equivalence and fprime(tau)=0 imply this map kills h. It descends to E -> Eprime, a morphism of short exact sequences inducing identities on G and Q. Naturality of Ext classes identifies their degree-one classes, proving uniqueness. The proof remains valid for the zero source or an empty open.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "lemma-torsors-h1 (Tag 03AJ), free extension; Cartier proof (G1), complementary splitting"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-etale-torsor-extension-presentation-exists",
+  "lem-sc-extension-presentation-short-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "lemma-torsors-h1 (Tag 03AJ), free extension; Cartier proof (G1), complementary splitting; explicit construction and categorical proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A torsor with a chosen section on an open subset defines a unique extension class of the supported integer sheaf",
+   "results": "Sheaf.H and generic gluing/group extension statements; no relative sheaf extension theorem.",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib statement; the cited categorical APIs are used in the proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extClass\", \"cokernel\"",
+   "results": "No exact match; general Ext-class naturality and constant-sheaf APIs are available.",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib statement; the cited categorical APIs are used in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "ExtensionPresentation|relative_extension_existsUnique|Torsor\\.extension",
+   "results": "No matches for the stated sheaf extension or complementary-section API in Mathlib.",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib statement; the cited categorical APIs are used in the proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CartierReductionSiteComparison",
+  "date": "2026-10-21",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-classes",
+   "place": "Classes proof (3), Cartier pole extension and its prescribed complementary splitting",
+   "via": [
+    "lem-sp-cartier-reduction-site-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.Sites.RelativeTorsorExtension",
+  "file": "lean/Sheaf/CategoryTheory/Sites/RelativeTorsorExtension.lean",
+  "declaration": "CategoryTheory.Sheaf.Torsor.relative_extension_existsUnique",
+  "statement": "theorem relative_extension_existsUnique (X : Scheme.{u})\n    {G Q L : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}} (P : Torsor G)\n    (U : X.Etale) (τ : P.sheaf.obj.obj (op U))\n    (t : L ⟶ ((constantSheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}).obj\n      (AddCommGrpCat.of (ULift.{u + 1} ℤ))))\n    (q : ((constantSheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}).obj\n      (AddCommGrpCat.of (ULift.{u + 1} ℤ))) ⟶ Q) (htq : t ≫ q = 0)\n    (hT : (ShortComplex.mk t q htq).ShortExact)\n    (η : ∀ A : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1},\n      (L ⟶ A) ≃+ A.obj.obj (op U))\n    (hη : ∀ {A B} (f : A ⟶ B) (g : L ⟶ A),\n      η B (g ≫ f) = f.hom.app (op U) (η A g))\n    (hηt : η (((constantSheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}).obj\n      (AddCommGrpCat.of (ULift.{u + 1} ℤ)))) t = (toSheafify X.smallEtaleTopology\n      ((Functor.const X.Etaleᵒᵖ).obj (AddCommGrpCat.of (ULift.{u + 1} ℤ)))).app (op U) ⟨1⟩) :\n    ∃! β : Ext Q G 1, \n  ∃ (E : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (a : G ⟶ E) (b : E ⟶ Q)\n    (hab : a ≫ b = 0) (hE : (ShortComplex.mk a b hab).ShortExact)\n    (f : P.sheaf.obj ⟶ E.obj ⋙ forget AddCommGrpCat.{u + 1}),\n    (∀ V g p, f.app V (P.vadd V g p) = (show E.obj.obj V from f.app V p) + a.hom.app V g) ∧\n    (∀ V p, b.hom.app V (f.app V p) = q.hom.app V ((toSheafify X.smallEtaleTopology\n        ((Functor.const X.Etaleᵒᵖ).obj (AddCommGrpCat.of (ULift.{u + 1} ℤ)))).app V ⟨1⟩)) ∧\n    (show E.obj.obj (op U) from f.app (op U) τ) = 0 ∧ β = hE.extClass",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-c4137",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261021T012410-L-2185565",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-c4137",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261021T012410-L-2185565",
+  "kind": "interface",
+  "note": "independent cc review: c41376bce864 vs previously FIXed head 2f8caf3265 (diff -rq: only the M9-rebase files changed) and vs live; 33 modules compiled (long-timeout sandbox for the last two), item importer plus 2 live second-level importers compiled, axioms probed"
+ }
+}

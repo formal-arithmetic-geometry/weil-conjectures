@@ -1,0 +1,128 @@
+{
+ "id": "lem-sp-cartier-complement-frame",
+ "kind": "statement",
+ "title": "Invertibility of the canonical divisor section on the complement",
+ "statement": "Let i:D -> T be any closed immersion of schemes [def-weil-closed-immersion], and W the complement of its image. The canonical divisor section pulled back to W, defined by [def-asd-ordinary-supported-kummer-boundary] as a map from the pulled-back unit module to the pulled-back dual of the ideal sheaf, is an isomorphism. In particular, when the ideal is invertible, it defines its prescribed complementary frame.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
+  "place": "(G1), inverse local equations and the canonical complementary section"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-asd-ordinary-supported-kummer-boundary"
+ ],
+ "proof": [
+  {
+   "text": "The support of the ideal of a closed immersion is its closed image. On the complementary open its ideal inclusion into the unit module is an isomorphism. The explicit canonical divisor section is the dual of this inclusion composed with the unit internal-Hom isomorphism; this equality follows on sections by commutativity of multiplication.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
+    "place": "(G1), inverse local equations and the canonical complementary section"
+   }
+  },
+  {
+   "text": "Open restriction commutes with internal Hom. Its naturality square identifies restriction of the dual inclusion, followed by that comparison, with the internal-Hom map induced by the restricted ideal inclusion. The latter is an isomorphism, so the restricted dual inclusion and canonical divisor section are isomorphisms.",
+   "uses": [
+    "lem-sc-internal-hom-restrict-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
+    "place": "(G1), inverse local equations and the canonical complementary section"
+   }
+  },
+  {
+   "text": "Uniqueness of left adjoints identifies the specified tensor-pullback section with ordinary pullback of the divisor section. The restriction-versus-pullback isomorphism transports the preceding invertibility. This also covers the empty complementary open.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
+    "place": "(G1), inverse local equations and the canonical complementary section"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-internal-hom-restrict-scheme"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
+  "place": "(G1), inverse local equations and the canonical complementary section; explicit construction and categorical proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The canonical divisor section is an isomorphism on the complement of a closed subscheme",
+   "results": "Structure-sheaf restriction and open-immersion section isomorphisms; no dual-ideal complementary-section theorem.",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib statement; the cited categorical APIs are used in the proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dualMap\", \"IsIso\"",
+   "results": "No exact match; general Ext-class naturality and constant-sheaf APIs are available.",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib statement; the cited categorical APIs are used in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "supportedDivisorSectionPullback|isIso_restrictFunctor_map_toModules",
+   "results": "No matches for the stated sheaf extension or complementary-section API in Mathlib.",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib statement; the cited categorical APIs are used in the proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CartierReductionSiteComparison",
+  "date": "2026-10-21",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-classes",
+   "place": "Classes proof (3), Cartier pole extension and its prescribed complementary splitting",
+   "via": [
+    "lem-sp-cartier-reduction-site-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CartierComplementFrame",
+  "file": "lean/Sheaf/AlgebraicGeometry/CartierComplementFrame.lean",
+  "declaration": "AlgebraicGeometry.Etale.cartierDivisorSectionPullback_isIso",
+  "statement": "theorem cartierDivisorSectionPullback_isIso {D T : Scheme.{u}} (i : D ⟶ T)\n    [IsClosedImmersion i] (W : T.Opens)\n    (hW : (W : Set T) = (Set.range i.base)ᶜ) :\n    IsIso (supportedDivisorSectionPullback i W)",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-c4137",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261021T012410-L-2185565",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-c4137",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261021T012410-L-2185565",
+  "kind": "interface",
+  "note": "independent cc review: c41376bce864 vs previously FIXed head 2f8caf3265 (diff -rq: only the M9-rebase files changed) and vs live; 33 modules compiled (long-timeout sandbox for the last two), item importer plus 2 live second-level importers compiled, axioms probed"
+ }
+}

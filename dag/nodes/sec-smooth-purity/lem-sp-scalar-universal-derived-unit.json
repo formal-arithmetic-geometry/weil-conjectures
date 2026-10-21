@@ -1,0 +1,109 @@
+{
+ "id": "lem-sp-scalar-universal-derived-unit",
+ "kind": "statement",
+ "title": "Canonical scalar universality in the exact-functor unit interface",
+ "statement": "Let C be an essentially small site category in Type (u+1) with morphisms in Type u, J its Grothendieck topology, R and S commutative rings in Type (u+1), and phi:R→S a ring homomorphism. For module sheaves F over R and G over S and eta:F→Res(phi)(G), the named canonical unbounded scalar universal property scalarUniversal [def-geo-exact-degree-zero-interface] implies DerivedUnit(Res(phi),F,G,eta) [def-sp-exact-functor-derived-unit]. The canonical models and all unbounded test objects are retained; no flatness or boundedness is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A6; canonical exact degree-zero scalar universal property, via scalarUniversal_iff of def-geo-exact-degree-zero-interface"
+ },
+ "stmt_deps": [
+  "def-geo-exact-degree-zero-interface",
+  "def-sp-exact-functor-derived-unit"
+ ],
+ "proof": [
+  {
+   "text": "Apply scalarUniversal_iff at the general site. Its conclusion is the raw bijection on maps from the degree-zero sheaf G to every unbounded test complex, with the canonical single-functor comparison. This is exactly the defining formula of DerivedUnit. The abstraction at the general site keeps callers from normalizing the concrete localization data.",
+   "uses": [
+    "def-geo-exact-degree-zero-interface",
+    "def-sp-exact-functor-derived-unit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A6; canonical exact degree-zero scalar universal property, via scalarUniversal_iff of def-geo-exact-degree-zero-interface"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-geo-exact-degree-zero-interface",
+  "def-sp-exact-functor-derived-unit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A6; canonical exact degree-zero scalar universal property, via scalarUniversal_iff of def-geo-exact-degree-zero-interface"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical unbounded derived scalar universal property of module sheaves expressed by exact functor single comparison Hom bijections",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"top\": [\"CategoryTheory.Functor.mapExactFunctor_smul\", \"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\", \"CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory\", \"DerivedCategory.instLinearSingleFunctor\", \"Ext\", \"PresheafOfModules.Sheafify.instUniqueSMulCandidate\", \"DerivedCategory.instLinearCochainComplexIntQ\", \"CategoryTheory.Abelian.Ext.mapExactFunctor\"]}",
+   "date": "2026-10-21",
+   "verdict": "The project-specific canonical scalar and DerivedUnit predicates have no Mathlib theorem. Reuse the existing project scalarUniversal_iff, without changing either definition."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For sheaves of modules restriction of scalars the canonical derived base change universal property equals the exact single functor Hom bijection",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"top\": [\"PresheafOfModules.restrictScalarsObj\", \"ModuleCat.restrictScalars\", \"ModuleCat.RestrictScalars.obj'\", \"RestrictScalars\", \"ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction\", \"SheafOfModules.restrictScalars\", \"PresheafOfModules.restrictScalars\", \"RingCat.moduleCatRestrictScalarsPseudofunctor\"]}",
+   "date": "2026-10-21",
+   "verdict": "The project-specific canonical scalar and DerivedUnit predicates have no Mathlib theorem. Reuse the existing project scalarUniversal_iff, without changing either definition."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarUniversal|DerivedUnit|universal_iff",
+   "results": "{\"ok\": true, \"n_hits\": 10, \"top\": [\"Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean\", \"Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean\"]}",
+   "date": "2026-10-21",
+   "verdict": "The project-specific canonical scalar and DerivedUnit predicates have no Mathlib theorem. Reuse the existing project scalarUniversal_iff, without changing either definition."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CartierReductionSiteComparison",
+  "date": "2026-10-21",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sp-cartier-reduction-site-comparison",
+   "place": "Derived scalar-unit normalization in the source and Kummer target",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ScalarUniversalDerivedUnit",
+  "file": "lean/Sheaf/AlgebraicGeometry/ScalarUniversalDerivedUnit.lean",
+  "declaration": "SheafExactDegreeZero.scalarUniversal_derivedUnit",
+  "statement": "theorem scalarUniversal_derivedUnit {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C] (J : GrothendieckTopology C) {R S : Type (u + 1)} [CommRing R] [CommRing S] (φ : R →+* S) (F : Sheaf J (ModuleCat.{u + 1} R)) (G : Sheaf J (ModuleCat.{u + 1} S)) (η : F ⟶ (Sheaf.restrictScalars J φ).obj G) (h : scalarUniversal J φ F G η) : (Sheaf.restrictScalars J φ).DerivedUnit F G η",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-c4137",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261021T012410-L-2185565",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-c4137",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261021T012410-L-2185565",
+  "kind": "interface",
+  "note": "independent cc review: c41376bce864 vs previously FIXed head 2f8caf3265 (diff -rq: only the M9-rebase files changed) and vs live; 33 modules compiled (long-timeout sandbox for the last two), item importer plus 2 live second-level importers compiled, axioms probed"
+ }
+}

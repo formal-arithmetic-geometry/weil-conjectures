@@ -1,0 +1,129 @@
+{
+ "id": "lem-sp-cartier-pole-boundary-existence",
+ "kind": "statement",
+ "title": "cartierPoleBoundary existsUnique",
+ "statement": "For an effective Cartier closed immersion i:D→Z, there exists a unique beta in Ext^1(i_*Z_D,G_m) satisfying CartierPoleBoundarySpec [def-sp-cartier-pole-boundary]: its torsor generators lie above supported one and its canonical complementary frame maps to zero, for every open complement of D.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
+  "place": "(G1), local lifts, and the prescribed complementary splitting"
+ },
+ "stmt_deps": [
+  "def-sp-cartier-pole-boundary"
+ ],
+ "proof": [
+  {
+   "text": "On the complement of D the canonical section of the dual ideal is invertible and hence gives a frame of its etale torsor. The integral open-closed exact sequence represents sections on this complement, with its inclusion normalized by one.",
+   "uses": [
+    "lem-sp-cartier-complement-frame",
+    "lem-sp-open-closed-integral-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
+    "place": "(G1), local lifts, and the prescribed complementary splitting"
+   }
+  },
+  {
+   "text": "Apply the relative torsor-extension theorem to this torsor and chosen complementary frame. Its quotient is precisely i_*Z_D. Naturality of the integral support unit identifies its prescribed quotient section with supported one.",
+   "uses": [
+    "lem-sp-relative-torsor-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
+    "place": "(G1), local lifts, and the prescribed complementary splitting"
+   }
+  },
+  {
+   "text": "Any other complement has the same underlying open, and its prescribed frame equals the canonical frame by injectivity of the frame-torsor realization. Thus every witness of CartierPoleBoundarySpec gives the same relative Ext class, proving uniqueness.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
+    "place": "(G1), local lifts, and the prescribed complementary splitting"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-cartier-complement-frame",
+  "lem-sp-open-closed-integral-sections",
+  "lem-sp-relative-torsor-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
+  "place": "Relative torsor construction of the normalized pole boundary"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A torsor with a chosen section on an open subset defines a unique extension class of the supported integer sheaf",
+   "results": "Sheaf.H and generic gluing/group extension statements; no relative sheaf extension theorem.",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib statement; the cited categorical APIs are used in the proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extClass\", \"cokernel\"",
+   "results": "No exact match; general Ext-class naturality and constant-sheaf APIs are available.",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib statement; the cited categorical APIs are used in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "ExtensionPresentation|relative_extension_existsUnique|Torsor\\.extension",
+   "results": "No matches for the stated sheaf extension or complementary-section API in Mathlib.",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib statement; the cited categorical APIs are used in the proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CartierReductionSiteComparison",
+  "date": "2026-10-21",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sp-cartier-reduction-site-comparison",
+   "place": "(G1), local lifts, and the prescribed complementary splitting",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CartierReductionData",
+  "file": "lean/Sheaf/AlgebraicGeometry/CartierReductionData.lean",
+  "declaration": "AlgebraicGeometry.Etale.cartierPoleBoundary_existsUnique",
+  "statement": "theorem cartierPoleBoundary_existsUnique {D Z : Scheme.{u}} (i : D ⟶ Z)\n    [IsClosedImmersion i] (hI : i.ker.IsInvertible) :\n    ∃! β : Ext.{u + 1} ((lowerStar AddCommGrpCat.{u + 1} i).obj (supportedIntegralConstant D))\n      Z.gmSheaf 1, CartierPoleBoundarySpec i hI β",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-c4137",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261021T012410-L-2185565",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-c4137",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261021T012410-L-2185565",
+  "kind": "interface",
+  "note": "independent cc review: c41376bce864 vs previously FIXed head 2f8caf3265 (diff -rq: only the M9-rebase files changed) and vs live; 33 modules compiled (long-timeout sandbox for the last two), item importer plus 2 live second-level importers compiled, axioms probed"
+ }
+}

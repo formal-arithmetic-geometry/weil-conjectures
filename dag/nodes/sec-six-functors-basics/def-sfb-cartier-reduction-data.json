@@ -78,23 +78,61 @@
  "chapter": "sec-six-functors-basics",
  "unit": "sk-prop-diagonal-tower",
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.CartierReductionSiteComparison",
+  "module": "Sheaf.AlgebraicGeometry.CartierReductionData",
   "declaration": "AlgebraicGeometry.ProEtale.cartierResidueReducedPro",
   "declarations": [
    "AlgebraicGeometry.Etale.cartierPoleBoundary",
+   "AlgebraicGeometry.ProEtale.cartierForget",
+   "AlgebraicGeometry.ProEtale.cartierForget_exact",
+   "AlgebraicGeometry.ProEtale.cartierForgetLimits",
+   "AlgebraicGeometry.ProEtale.cartierForgetColimits",
+   "AlgebraicGeometry.ProEtale.cartierForgetAdditive",
+   "AlgebraicGeometry.ProEtale.cartierForgetComparison",
+   "AlgebraicGeometry.ProEtale.cartierUnitsComparison",
+   "AlgebraicGeometry.ProEtale.cartierIntegralSourceComparison",
+   "AlgebraicGeometry.ProEtale.cartierIntegralSourceComparison_isIso",
    "AlgebraicGeometry.ProEtale.cartierIntegralSourceIso",
+   "AlgebraicGeometry.ProEtale.cartierProBoundary",
+   "AlgebraicGeometry.ProEtale.cartierRootsComparison_condition",
+   "AlgebraicGeometry.ProEtale.cartierRootsComparison",
+   "AlgebraicGeometry.ProEtale.cartierRootsComparison_isIso",
+   "AlgebraicGeometry.ProEtale.cartierRootsIso",
+   "AlgebraicGeometry.ProEtale.cartierProRootMap",
+   "AlgebraicGeometry.ProEtale.cartierProIntegralGenerator",
+   "AlgebraicGeometry.ProEtale.cartierProKummerComplex",
+   "AlgebraicGeometry.ProEtale.cartierProKummer_exact",
+   "AlgebraicGeometry.ProEtale.cartierEtaleKummerUnit",
+   "AlgebraicGeometry.ProEtale.cartierProKummerUnit",
+   "AlgebraicGeometry.ProEtale.CartierEtaleReductionSpec",
+   "AlgebraicGeometry.ProEtale.CartierProReductionSpec",
+   "AlgebraicGeometry.ProEtale.cartierReducedEtale",
+   "AlgebraicGeometry.ProEtale.cartierReducedPro",
+   "AlgebraicGeometry.ProEtale.CartierScalarUnit",
    "AlgebraicGeometry.ProEtale.cartierResidueRing",
    "AlgebraicGeometry.ProEtale.cartierResidue_cast",
+   "AlgebraicGeometry.ProEtale.cartierResidueAlgebra",
+   "AlgebraicGeometry.ProEtale.cartierResidue_finite",
    "AlgebraicGeometry.ProEtale.cartierResidueReducedPro",
-   "AlgebraicGeometry.ProEtale.cartierProIntegralGenerator",
-   "AlgebraicGeometry.ProEtale.cartierProRootMap"
+   "AlgebraicGeometry.cartierEtaleAbSheafify",
+   "AlgebraicGeometry.cartierProAbSheafify",
+   "AlgebraicGeometry.cartierEtaleModuleSheafify",
+   "AlgebraicGeometry.cartierProModuleSheafify",
+   "AlgebraicGeometry.cartierEtaleAbHasExt",
+   "AlgebraicGeometry.cartierProAbHasExt",
+   "AlgebraicGeometry.cartierEtaleModuleHasExt",
+   "AlgebraicGeometry.cartierProModuleHasExt",
+   "AlgebraicGeometry.ProEtale.cartierIntegralConstantComparisonIso",
+   "AlgebraicGeometry.ProEtale.cartierBoundaryImage",
+   "AlgebraicGeometry.ProEtale.cartierKummerClass",
+   "AlgebraicGeometry.ProEtale.cartierScalarBoundaryEquation"
   ],
   "statement": "def cartierResidueReducedPro (ℓ : ℕ) (hℓ : ℓ.Prime) (r : ℕ)\n    {D Z : Scheme.{u}} (i : D ⟶ Z) [IsClosedImmersion i] (hI : i.ker.IsInvertible)\n    (hZ : IsUnit ((ℓ ^ r : ℕ) : Γ(Z, ⊤))) :\n    GeoCartierClass (cartierResidueRing.{u} ℓ r) (ℓ ^ r) (cartierResidue_cast ℓ r) i",
   "branch": "newtargets-dag",
   "by": "Q05",
   "date": "2026-10-18",
   "existing": true,
-  "note": "R1: definition-node ownership for the exact already-published canonical Cartier maps. Reuse their original module without moving or copying declarations; the consumer does not use cartier_reduction_site_comparison. Pole boundary and reduced class are selected only from uniqueness theorems determining their Ext classes."
+  "note": "N1: moved the unchanged canonical constructions below the comparison theorem to break the coefficient theorem/boundary-existence import cycle. The old module publicly imports this foundation, retaining every old public name. Named abstract aliases and cached proof instances are definitionally equivalent; no arbitrary witness data is introduced.",
+  "file": "lean/Sheaf/AlgebraicGeometry/CartierReductionData.lean"
  },
  "reviewed": {
   "date": "2026-10-18",
@@ -113,24 +151,13 @@
   "note": "Re-push of PASSed e66b6ec46e79 per the 97e3a8deaae4 RETURN: diff -rq shows the Lean module and all node records byte-identical to e66b6; only the report and generated blueprint-index.tsv differ. The spurious lem-sp-cartier-reduction-site-comparison stmt_dep and the Q54 module change are gone; item not in live, so not a credit grab. Independent reading: hypotheses exact (Fact ℓ.Prime, IsUnit ℓ on Y, arbitrary Scheme.{u}, size-only instances); clause 1 positive roof −(ν^* cartierPoleBoundary); clause 2 left-derived strict-system T plus completion reflector (complete outputs, universal unit); clause 3 a/s/t normalized, roots tower ζ↦ζ^ℓ, b existential as in the node; clause 4 each level equals cartierResidueReducedPro. Edge cases OK; lean.statement verbatim; stmt_deps = live 12 + 2 definition nodes (sk-lem-geo-cartier is base and cited by the node text); six sorry theorems; docstrings OK. nt_compile --json clean 35–41 s at load ~50 (delivery 40.7/41.3 s). Speed-up attempts (genInjectivity off, linters off) gave no gain back to back, so no FIX. Maintainer note: e66b6's landing return was a load timeout of this module; retry landing at lower load."
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "E8",
+  "reviewer": "C-c4137",
+  "group": "N1",
   "result": "pass",
-  "landing": "20261020T051223-L-1598955",
+  "landing": "20261021T012410-L-2185565",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.Etale.cartierPoleBoundary_existsUnique",
-   "AlgebraicGeometry.ProEtale.cartierReduction_existsUnique",
-   "AlgebraicGeometry.ProEtale.cartierRootsComparison_isIso",
-   "AlgebraicGeometry.ProEtale.cartier_reduction_site_comparison"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.Etale.cartierPoleBoundary_existsUnique",
-   "AlgebraicGeometry.ProEtale.cartierReduction_existsUnique",
-   "AlgebraicGeometry.ProEtale.cartier_reduction_site_comparison"
-  ]
+  "note": "independent cc review: c41376bce864 vs previously FIXed head 2f8caf3265 (diff -rq: only the M9-rebase files changed) and vs live; 33 modules compiled (long-timeout sandbox for the last two), item importer plus 2 live second-level importers compiled, axioms probed"
  }
 }

@@ -1,0 +1,135 @@
+{
+ "id": "lem-sp-cartier-pro-integral-scalar",
+ "kind": "statement",
+ "title": "pro supported generator scalar",
+ "statement": "For commutative rings R,A, φ:R→A, a closed immersion i:D→Z and a coefficient map η:R_D→Res(A_D) normalized on constant-presheaf generators, the normalized pro-etale supported integral generator for R followed by forget(i_*η) equals the generator for A [def-sfb-cartier-reduction-data, sk-lem-geo-cartier].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
+  "place": "Derived reduction, finite coefficient extension and canonical comparison paragraphs"
+ },
+ "stmt_deps": [
+  "def-sfb-cartier-reduction-data",
+  "sk-lem-geo-cartier"
+ ],
+ "proof": [
+  {
+   "text": "Transpose the generator comparison under the abelian comparison adjunction. The unit equation for the mate defining closed direct-image comparison reduces the supported maps to direct images of the corresponding constant-sheaf maps. The direct-image/restriction comparison is the identity on sections. For the constant maps, apply the integral constant-sections adjunction: the constant comparison preserves a generator by its unit equation, and η sends each integral cast to its image under φ. Since φ preserves integer casts, both maps agree. Evaluate this equality on each base-changed etale object to finish the supported identity.",
+   "uses": [
+    "lem-sp-comparison-constant-generator",
+    "def-sp-comparison-forget-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
+    "place": "Derived reduction, finite coefficient extension and canonical comparison paragraphs"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-comparison-constant-generator",
+  "def-sp-comparison-forget-scalars"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
+  "place": "Subsidiary categorical argument for the normalized Cartier comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An exact restriction of scalars functor has a derived universal unit given by a residue quotient or a Kummer connecting class; compose such units and transport across equivalences",
+   "results": "Ext.mapExactFunctor_hom, Ext.mapExactFunctor and the module extend/restrict scalars adjunction; no sheaf residue-unit or Cartier normalization theorem.",
+   "date": "2026-10-21",
+   "verdict": "Use these generic APIs; the specialized residue-unit and comparison result is proved here."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategorySingleFunctor",
+   "results": "12 hits: the single-functor comparison and derived identity/composition/natural-transformation single comparisons; no complete scalar-unit theorem.",
+   "date": "2026-10-21",
+   "verdict": "Generic derived coherence is available; the stated universal-property argument is still required."
+  },
+  {
+   "tool": "grep",
+   "query": "DerivedExtUnit|DerivedUnit|scalar_unit|universal_unit_shift",
+   "results": "10 hits for totalRightDerivedUnit and its universal-property API; no raw residue/Kummer scalar-unit statement.",
+   "date": "2026-10-21",
+   "verdict": "No specialized statement matching the result."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact restriction of scalars functor has a derived universal unit given by a residue quotient or a Kummer connecting class; compose such units and transport across equivalences",
+   "results": {
+    "t": "2026-10-20T21:49:43Z",
+    "tool": "leansearch",
+    "query": "An exact restriction of scalars functor has a derived universal unit given by a residue quotient or a Kummer connecting class; compose such units and transport across equivalences",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ModuleCat.restrictScalars",
+     "PresheafOfModules.restrictScalarsObj",
+     "RingCat.moduleCatRestrictScalarsPseudofunctor",
+     "PresheafOfModules.restrictScalars",
+     "ModuleCat.RestrictScalars.obj'",
+     "SheafOfModules.restrictScalars",
+     "ModuleCat.restrictScalars_isEquivalence_of_ringEquiv",
+     "ModuleCat.extendRestrictScalarsAdj_unit_app_apply"
+    ],
+    "digest": "f729c665f19083b3"
+   },
+   "date": "2026-10-21",
+   "verdict": "Eight hits provide restriction-of-scalars functors, their ring-equivalence property and the ordinary tensor unit formula. These constituent APIs are used in the proofs; no normalized unbounded residue/Kummer universal-unit or exact comparison statement matches this result."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CartierReductionSiteComparison",
+  "date": "2026-10-21",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sp-cartier-reduction-site-comparison",
+   "place": "The source and Kummer scalar units and their exact-comparison compatibility",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CartierProIntegralScalar",
+  "file": "lean/Sheaf/AlgebraicGeometry/CartierProIntegralScalar.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.pro_supported_generator_scalar",
+  "statement": "theorem pro_supported_generator_scalar {R A : Type (u + 1)} [CommRing R] [CommRing A]\n    (φ : R →+* A) {D Z : Scheme.{u}} (i : D ⟶ Z) [IsClosedImmersion i]\n    (η : geoCartierConstant R D ⟶\n      (Sheaf.restrictScalars (Scheme.ProEt.topology D) φ).obj (geoCartierConstant A D))\n    (hη : ∀ (W : D.ProEtᵒᵖ) (a : R), η.hom.app W\n      ((toSheafify (Scheme.ProEt.topology D)\n        ((Functor.const D.ProEtᵒᵖ).obj (ModuleCat.of R R))).app W a) =\n      (toSheafify (Scheme.ProEt.topology D)\n        ((Functor.const D.ProEtᵒᵖ).obj (ModuleCat.of A A))).app W (φ a)) :\n    cartierProIntegralGenerator R i ≫ (cartierForget R Z).map\n        ((lowerStar (ModuleCat.{u + 1} R) i).map η) =\n      cartierProIntegralGenerator A i",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-c4137",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261021T012410-L-2185565",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-c4137",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261021T012410-L-2185565",
+  "kind": "interface",
+  "note": "independent cc review: c41376bce864 vs previously FIXed head 2f8caf3265 (diff -rq: only the M9-rebase files changed) and vs live; 33 modules compiled (long-timeout sandbox for the last two), item importer plus 2 live second-level importers compiled, axioms probed"
+ }
+}

@@ -1,0 +1,132 @@
+{
+ "id": "lem-sp-open-closed-integral-sections",
+ "kind": "statement",
+ "title": "The normalized sections presentation of the integral open-closed sequence",
+ "statement": "Let i:D -> X be a closed immersion of schemes [def-weil-closed-immersion] and W the complementary open. Let P=Z_X, Q=i_* Z_D, and q:P -> Q be the inverse-image adjunction mate of the canonical constant-sheaf isomorphism [def-weil-pbc-direct-image]. There exist L, t:L -> P and a short exact sequence 0 -> L --t--> P --q--> Q -> 0, together with natural additive equivalences Hom(L,A) = A(W) for every abelian etale sheaf A. The equivalence sends t to the constant section one on W, represented by the constant-presheaf sheafification unit.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Open-closed localization sequence (Tag 095L); sections adjunction (Tag 03F3)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "Restrict the constant integer sheaf literally to W. Sheafifying the restriction of its sheafification unit gives a map k:Z_W -> P restricted to W. Cocontinuity of the open-object functor preserves local injectivity and local surjectivity of that unit. The sheafification unit on W is locally bijective too, so cancellation proves k is an isomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Open-closed localization sequence (Tag 095L); sections adjunction (Tag 03F3)"
+   }
+  },
+  {
+   "text": "Apply the open-closed exact sequence to P. Transport its open term through open inverse image versus literal restriction and k, and its closed term through the canonical constant-sheaf pullback isomorphism. Naturality of the closed adjunction unit identifies the last map with the stated mate q. The result is a short exact sequence with L=j_! Z_W and t the counit after j_!(k).",
+   "uses": [
+    "lem-weil-pbc-open-closed-short-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Open-closed localization sequence (Tag 095L); sections adjunction (Tag 03F3)"
+   }
+  },
+  {
+   "text": "The additive lower-shriek adjunction followed by the constant-integer sections adjunction gives Hom(L,A)=A(W), naturally in A. The transpose of t is k. Evaluate k on one using its sheafification-unit equation and transport the harmless identity-composition etale isomorphism. Naturality of the sheafification unit gives exactly the constant one on W. All steps are categorical and apply when W or X is empty.",
+   "uses": [
+    "def-weil-pbc-etale-open-comparison-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Open-closed localization sequence (Tag 095L); sections adjunction (Tag 03F3)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-open-closed-short-exact",
+  "def-weil-pbc-etale-open-comparison-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Open-closed localization sequence (Tag 095L); sections adjunction (Tag 03F3); explicit construction and categorical proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The open closed exact sequence of constant integer sheaves represents sections on the complementary open subset",
+   "results": "Constant sheaf and global-sections APIs, plus structure-sheaf restriction lemmas; no normalized open-closed integer presentation.",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib statement; the cited categorical APIs are used in the proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constantSheaf\", \"IsIso\"",
+   "results": "No exact match; general Ext-class naturality and constant-sheaf APIs are available.",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib statement; the cited categorical APIs are used in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "openClosedShortComplex|restrictedSectionsEquiv|openImmersionLowerShriek",
+   "results": "No matches for the stated sheaf extension or complementary-section API in Mathlib.",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib statement; the cited categorical APIs are used in the proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CartierReductionSiteComparison",
+  "date": "2026-10-21",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-classes",
+   "place": "Classes proof (3), Cartier pole extension and its prescribed complementary splitting",
+   "via": [
+    "lem-sp-cartier-reduction-site-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OpenClosedIntegralSections",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenClosedIntegralSections.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_integral_openClosed_sections",
+  "statement": "theorem exists_integral_openClosed_sections {D X : Scheme.{u}} (i : D ⟶ X)\n    [IsClosedImmersion i] (W : X.Opens) (hW : (W : Set X) = (Set.range i.base)ᶜ) :\n    let P := EtaleOpenComparison.integerSheaf X\n    let Q := (lowerStar AddCommGrpCat.{u + 1} i).obj (EtaleOpenComparison.integerSheaf D)\n    let q : P ⟶ Q := (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} i).homEquiv _ _\n      ((Scheme.upperStarConstantSheafIso AddCommGrpCat.{u + 1} i).app\n        (AddCommGrpCat.of (ULift.{u + 1} ℤ))).hom\n    ∃ (L : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (t : L ⟶ P)\n      (htq : t ≫ q = 0), (ShortComplex.mk t q htq).ShortExact ∧\n      ∃ η : ∀ A : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1},\n        (L ⟶ A) ≃+ A.obj.obj (op (Scheme.Etale.mk W.ι)),\n        (∀ {A B} (f : A ⟶ B) (g : L ⟶ A),\n          η B (g ≫ f) = f.hom.app (op (Scheme.Etale.mk W.ι)) (η A g)) ∧\n        η P t = (toSheafify X.smallEtaleTopology\n          ((Functor.const X.Etaleᵒᵖ).obj (AddCommGrpCat.of (ULift.{u + 1} ℤ)))).app\n            (op (Scheme.Etale.mk W.ι)) ⟨1⟩",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-c4137",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261021T012410-L-2185565",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-c4137",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261021T012410-L-2185565",
+  "kind": "interface",
+  "note": "independent cc review: c41376bce864 vs previously FIXed head 2f8caf3265 (diff -rq: only the M9-rebase files changed) and vs live; 33 modules compiled (long-timeout sandbox for the last two), item importer plus 2 live second-level importers compiled, axioms probed"
+ }
+}

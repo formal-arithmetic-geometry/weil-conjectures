@@ -6,7 +6,7 @@ Authors: SHEAF group C7
 module
 
 public import Sheaf.AlgebraicGeometry.OrdinarySupportedKummerSystem
-import Sheaf.AlgebraicGeometry.CartierReductionSiteComparison
+import Sheaf.AlgebraicGeometry.CartierReductionData
 
 /-! # SupportedCartierBoundaryExistence -/
 
@@ -62,9 +62,11 @@ theorem supported_cartier_boundary_existsUnique (T : Scheme.{u}) (N : ℕ) (hN :
         subst W'
         exact ⟨τ, E, a, b, hab, hE, f, hτ, hf, hb, hzero, rfl⟩
       have hEβ : hE.extClass = β := hβuniq _ hEspec
-      dsimp only [spec, AlgebraicGeometry.ProEtale.CartierEtaleReductionSpec]
+      dsimp only [spec, AlgebraicGeometry.ProEtale.CartierEtaleReductionSpec,
+        AlgebraicGeometry.ProEtale.cartierScalarBoundaryEquation]
       rw [hpole, ← hEβ]
       unfold AlgebraicGeometry.ProEtale.cartierEtaleKummerUnit
+        AlgebraicGeometry.ProEtale.cartierKummerClass
       simpa only [Ext.comp_assoc] using hext
     · intro hκ
       let := hI.isInvertible_dual_toModules
@@ -74,9 +76,11 @@ theorem supported_cartier_boundary_existsUnique (T : Scheme.{u}) (N : ℕ) (hN :
       intro W hW
       obtain ⟨τ, E, a, b, hab, hE, f, hτ, hf, hb, hzero, he⟩ := hβ W hW
       refine ⟨τ, E, a, b, hab, hE, f, hτ, hf, hb, hzero, ?_⟩
-      dsimp only [spec, AlgebraicGeometry.ProEtale.CartierEtaleReductionSpec] at hκ
+      dsimp only [spec, AlgebraicGeometry.ProEtale.CartierEtaleReductionSpec,
+        AlgebraicGeometry.ProEtale.cartierScalarBoundaryEquation] at hκ
       rw [hpole, he] at hκ
-      unfold AlgebraicGeometry.ProEtale.cartierEtaleKummerUnit at hκ
+      unfold AlgebraicGeometry.ProEtale.cartierEtaleKummerUnit
+        AlgebraicGeometry.ProEtale.cartierKummerClass at hκ
       simpa only [Ext.comp_assoc] using hκ
   obtain ⟨κ, hκ, hu⟩ :=
     (AlgebraicGeometry.ProEtale.cartierReduction_existsUnique A N hN hA i hI hT).1

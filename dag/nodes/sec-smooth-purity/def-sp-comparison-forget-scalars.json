@@ -1,0 +1,133 @@
+{
+ "id": "def-sp-comparison-forget-scalars",
+ "kind": "definition",
+ "title": "forgetComparisonIso",
+ "statement": "For a scheme Z and commutative ring A, there is a canonical natural isomorphism forget_A,et ⋙ ν*_Ab ≅ ν*_A ⋙ forget_A,pro [def-weil-pbc-site-comparison-morphism, def-sbc-raw-module-scalar-pullback-comparison]. Its component is the adjoint of the coefficient-forgotten comparison adjunction unit.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
+  "place": "Derived reduction, finite coefficient extension and canonical comparison paragraphs"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-site-comparison-morphism",
+  "def-sbc-raw-module-scalar-pullback-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Coefficient forgetting is left adjoint to coefficient coinduction. Compose this adjunction with site comparison in the two orders. Their right adjoints agree, so uniqueness of left adjoints gives the isomorphism. Apply the two Hom equivalences to its component; the left-adjoint uniqueness unit equation and naturality of the coinduction unit identify the component with the stated mate.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
+    "place": "Derived reduction, finite coefficient extension and canonical comparison paragraphs"
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
+  "place": "Subsidiary categorical argument for the normalized Cartier comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An exact restriction of scalars functor has a derived universal unit given by a residue quotient or a Kummer connecting class; compose such units and transport across equivalences",
+   "results": "Ext.mapExactFunctor_hom, Ext.mapExactFunctor and the module extend/restrict scalars adjunction; no sheaf residue-unit or Cartier normalization theorem.",
+   "date": "2026-10-21",
+   "verdict": "Use these generic APIs; the specialized residue-unit and comparison result is proved here."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategorySingleFunctor",
+   "results": "12 hits: the single-functor comparison and derived identity/composition/natural-transformation single comparisons; no complete scalar-unit theorem.",
+   "date": "2026-10-21",
+   "verdict": "Generic derived coherence is available; the stated universal-property argument is still required."
+  },
+  {
+   "tool": "grep",
+   "query": "DerivedExtUnit|DerivedUnit|scalar_unit|universal_unit_shift",
+   "results": "10 hits for totalRightDerivedUnit and its universal-property API; no raw residue/Kummer scalar-unit statement.",
+   "date": "2026-10-21",
+   "verdict": "No specialized statement matching the result."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact restriction of scalars functor has a derived universal unit given by a residue quotient or a Kummer connecting class; compose such units and transport across equivalences",
+   "results": {
+    "t": "2026-10-20T21:49:43Z",
+    "tool": "leansearch",
+    "query": "An exact restriction of scalars functor has a derived universal unit given by a residue quotient or a Kummer connecting class; compose such units and transport across equivalences",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ModuleCat.restrictScalars",
+     "PresheafOfModules.restrictScalarsObj",
+     "RingCat.moduleCatRestrictScalarsPseudofunctor",
+     "PresheafOfModules.restrictScalars",
+     "ModuleCat.RestrictScalars.obj'",
+     "SheafOfModules.restrictScalars",
+     "ModuleCat.restrictScalars_isEquivalence_of_ringEquiv",
+     "ModuleCat.extendRestrictScalarsAdj_unit_app_apply"
+    ],
+    "digest": "f729c665f19083b3"
+   },
+   "date": "2026-10-21",
+   "verdict": "Eight hits provide restriction-of-scalars functors, their ring-equivalence property and the ordinary tensor unit formula. These constituent APIs are used in the proofs; no normalized unbounded residue/Kummer universal-unit or exact comparison statement matches this result."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CartierReductionSiteComparison",
+  "date": "2026-10-21",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sp-cartier-reduction-site-comparison",
+   "place": "The source and Kummer scalar units and their exact-comparison compatibility",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ComparisonForgetScalars",
+  "file": "lean/Sheaf/AlgebraicGeometry/ComparisonForgetScalars.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.forgetComparisonIso",
+  "statement": "def forgetComparisonIso (A : Type (u + 1)) [CommRing A] (Z : Scheme.{u}) :\n    Etale.RawModuleScalarComparison.forget A Z ⋙\n        comparisonUpperStar AddCommGrpCat.{u + 1} Z ≅\n      comparisonUpperStar (ModuleCat.{u + 1} A) Z ⋙\n        sheafCompose (Scheme.ProEt.topology Z)\n          (forget₂ (ModuleCat.{u + 1} A) AddCommGrpCat.{u + 1})",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-21",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.forgetComparisonIso",
+   "AlgebraicGeometry.ProEtale.forgetComparisonIso_hom"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-c4137",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261021T012410-L-2185565",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-c4137",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261021T012410-L-2185565",
+  "kind": "interface",
+  "note": "independent cc review: c41376bce864 vs previously FIXed head 2f8caf3265 (diff -rq: only the M9-rebase files changed) and vs live; 33 modules compiled (long-timeout sandbox for the last two), item importer plus 2 live second-level importers compiled, axioms probed"
+ }
+}

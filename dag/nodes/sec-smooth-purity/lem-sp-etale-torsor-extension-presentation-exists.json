@@ -1,0 +1,129 @@
+{
+ "id": "lem-sp-etale-torsor-extension-presentation-exists",
+ "kind": "statement",
+ "title": "Existence of the free extension presentation of an etale torsor",
+ "statement": "Let X be a scheme [def-pc-scheme], G an abelian sheaf on its small etale site [def-weil-pbc-abelian-etale-sheaves], and T a G-torsor [def-sc-gm-torsor]. There exists an extension presentation of T in the sense of [def-sc-torsor-extension-presentation]: an abelian sheaf E with G -> E -> Z_X, a natural generator map from T of degree one satisfying [g+t]=[t]+g, and the universal property for maps respecting these generators and the inclusion of G. Coefficients are in Type(u+1) for X in Scheme(u).",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "lemma-torsors-h1 (Tag 03AJ), free abelian sheaf and pushout construction"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-sc-gm-torsor",
+  "def-sc-torsor-extension-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Sheafify the free abelian presheaves on T and on pairs (x,y) of sections of T. Define the difference map by (x,y) -> [y]-[x], and the displacement map by the unique g with g+x=y. Form their pushout with G. This constructs E and the maps from G and from the free generators; no existence theorem is used to choose its data.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "lemma-torsors-h1 (Tag 03AJ), free abelian sheaf and pushout construction"
+   }
+  },
+  {
+   "text": "The degree map sends every torsor generator to one. Pair differences have degree zero, so the pushout supplies E -> Z_X. The sheafification unit supplies the natural generator map. The pushout relation applied to (p,g+p) gives [g+p]=[p]+g.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "lemma-torsors-h1 (Tag 03AJ), free abelian sheaf and pushout construction"
+   }
+  },
+  {
+   "text": "A natural map from T into an abelian sheaf A extends uniquely to the free abelian sheaf. Equivariance with a given G -> A is exactly the pushout compatibility. The resulting pushout map is unique, including on the free generators since equality after the sheafification unit detects equality of sheaf maps. Thus the constructed data satisfy the extension-presentation universal property. Empty objects cause no exception to these universal properties.",
+   "uses": [
+    "def-sc-torsor-extension-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "lemma-torsors-h1 (Tag 03AJ), free abelian sheaf and pushout construction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-torsor-extension-presentation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "lemma-torsors-h1 (Tag 03AJ), free abelian sheaf and pushout construction; explicit construction and categorical proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Every sheaf torsor has a universal extension by the constant integer sheaf built using free abelian groups",
+   "results": "FreeAbelianGroup, AddCommGrpCat.free, and Sheaf.H; no extension-presentation existence theorem.",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib statement; the cited categorical APIs are used in the proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.ShortExact.extClass_naturality",
+   "results": "No exact match; general Ext-class naturality and constant-sheaf APIs are available.",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib statement; the cited categorical APIs are used in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "ExtensionPresentation|relative_extension_existsUnique|Torsor\\.extension",
+   "results": "No matches for the stated sheaf extension or complementary-section API in Mathlib.",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib statement; the cited categorical APIs are used in the proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CartierReductionSiteComparison",
+  "date": "2026-10-21",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-classes",
+   "place": "Classes proof (3), Cartier pole extension and its prescribed complementary splitting",
+   "via": [
+    "lem-sp-cartier-reduction-site-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.Sites.EtaleTorsorExtensionPresentationExists",
+  "file": "lean/Sheaf/CategoryTheory/Sites/EtaleTorsorExtensionPresentationExists.lean",
+  "declaration": "CategoryTheory.Sheaf.Torsor.nonempty_extensionPresentation",
+  "statement": "theorem nonempty_extensionPresentation (X : Scheme.{u})\n    {G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}} (T : Torsor G) :\n    Nonempty (ExtensionPresentation.{u, u} X T)",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-c4137",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261021T012410-L-2185565",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-c4137",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261021T012410-L-2185565",
+  "kind": "interface",
+  "note": "independent cc review: c41376bce864 vs previously FIXed head 2f8caf3265 (diff -rq: only the M9-rebase files changed) and vs live; 33 modules compiled (long-timeout sandbox for the last two), item importer plus 2 live second-level importers compiled, axioms probed"
+ }
+}
