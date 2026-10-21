@@ -21149,3 +21149,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:30 L: returned deliver/Q55/lem-sfb-rationalization-localization-hom-criterion (reviewer RETURN: A6/A7/B10, superseded. This is the third push of the same split: the item statement+proof and both new nodes (lem-sfb-sc)
 - 08:33 L: merged deliver/NL/lem-sfb-finite-open-direct-image-ctf (reviewer PASS; first push; new nodes: 0)
 - 08:33 L: merged deliver/Q68/lem-weil-finite-duality-locally-closed-comparison (reviewer PASS; after a return; new nodes: 4)
+- 08:34 L: merged deliver/Q138/lem-coef-derived-tower-counit-projections (reviewer PASS; first push; new nodes: 0)
