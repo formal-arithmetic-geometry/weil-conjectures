@@ -74,3 +74,7 @@ L: independent stage-2 immutable head 0e473be282bd: Errors H3/§1(C): the statem
 ## lem-per-henselian-valuation-coarsenings (2026-10-19 01:46 UTC, branch head 770249ea4cb)
 
 L: approved by the reader, but the landing refused it: NOT MERGED lem-per-henselian-valuation-coarsenings: lem-per-henselian-valuation-coarsenings: completed in this project's DAG but not in the live DAG the queue reads (side completion never promoted; L promotes it) Rebase the delivery onto the current DAG, re-read every cited node that changed, adjust the split, and push again.
+
+## lem-sfb-snc-tame-finite-fibre-classification (2026-10-21 16:33 UTC, branch head ae172a82213)
+
+L: approved by the reader, but the landing refused it: NOT MERGED lem-sfb-snc-tame-finite-fibre-classification: cited node lem-sfb-snc-universal-residual-charts: statement changed since the reviewed delivery; rebase and revalidate the citation Rebase the delivery onto the current DAG, re-read every cited node that changed, adjust the split, and push again.
