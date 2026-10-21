@@ -21221,3 +21221,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:42 L: merged deliver/Q123/lem-trf-finite-ring-bundle-section-orientation (reviewer FIX; first push; new nodes: 0)
 - 08:42 L: merged deliver/Q88/lemma-nagata-finite-type-to-separated-target (reviewer PASS; after a return; new nodes: 0)
 - 08:42 L: merged deliver/NK/lem-weil-pbc-ringed-slice-comparisons-shift (reviewer PASS; after a return; new nodes: 3)
+- 08:42 L: merged deliver/Q141/lem-weil-point-finite-free-sections-tensor (reviewer FIX; first push; new nodes: 0)

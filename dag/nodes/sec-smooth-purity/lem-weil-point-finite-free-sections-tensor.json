@@ -14,9 +14,118 @@
   "def-weil-sheaf-of-modules-category",
   "def-pur-sheaf-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For $H=E,L$ put $A_{H,n}=\\mathcal O_H/\\varpi_H^n$. These rings are finite by the coefficient convention. Apply [lem-pur-proetale-finite-constant-sections] to $X=V=s$: a function from the singleton underlying space of $s$ to $A_{H,n}$ is specified by its constant value. Thus $\\Gamma(s,(A_{H,n})_s)=A_{H,n}$ canonically. The normalization on constant values makes these identifications commute with every quotient homomorphism. By the definition of completed coefficients and the sectionwise limit formula [def-pur-sheaf-inverse-limit], $\\Gamma(s,R_H)=\\varprojlim_n A_{H,n}$ as rings, with the displayed identifications respecting the limit projections.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension",
+    "lem-pur-proetale-finite-constant-sections",
+    "def-weil-completed-integral-coefficients",
+    "def-pur-sheaf-inverse-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 4.2.12, printed p. 30; Lemma 6.8.2(1), pp. 58-59"
+   }
+  },
+  {
+   "text": "The canonical residue map $\\mathcal O_H\\to\\varprojlim_n A_{H,n}$ is an isomorphism. Indeed, choose integral representatives $x_n$ of a compatible family. For $m\\geq n$, $|x_m-x_n|\\leq|\\varpi_H|^n$, with $0<|\\varpi_H|<1$ by [lem-weil-l-adic-extension-integers-dvr]. By [lem-weil-l-adic-extension-complete], $x_n$ converges in $H$ to some $x$. The nonarchimedean inequality gives $|x|\\leq1$ and $|x-x_n|\\leq|\\varpi_H|^n$; the DVR factorization identifies this last ball with $\\varpi_H^n\\mathcal O_H$, so $x$ has the prescribed residues. An element in all these balls has absolute value zero, proving injectivity. The map is a ring homomorphism because every residue map is one. Combining with step 1 gives precisely the constant-value isomorphisms in the statement, with their quotient projections.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-l-adic-extension-complete",
+    "lem-weil-l-adic-extension-absolute-value"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2(1), pp. 58-59; elementary completeness argument supplying the point evaluation"
+   }
+  },
+  {
+   "text": "Choose an $\\mathcal O_E$-basis $\\beta_1,\\ldots,\\beta_d$ of $\\mathcal O_L$ by [lem-sfb-local-field-integral-basis]. The extending absolute values are compatible: restricting the absolute value of $L$ to $E$ gives the unique extending absolute value of $E$ by [lem-weil-l-adic-extension-absolute-value]. Put $t=\\varpi_E$, $v=\\varpi_L$. The DVR factorization in $L$ gives $t=u v^e$ with $u\\in\\mathcal O_L^\\times$ and $e\\geq1$, since $0<|t|<1$. Apply [lem-pur-adic-basis-limit] with $A=\\mathcal O_E$, $B=\\mathcal O_L$ on the small site $s_{\\mathrm{proet}}$. It gives $R_E^{\\oplus d}\\simeq R_L$ whose columns $b_i$ are the compatible residues of $\\beta_i$. Step 2 therefore identifies $b_i(s)$ with $\\beta_i$, proving the required global-basis assertion. Its coefficient map sends each $a\\in\\mathcal O_E$ to its constant-value image in $R_L$: this holds at each quotient projection by the explicit formula in [lem-pur-adic-basis-limit], hence in the limit. This proves compatibility with coefficient inclusions as well.",
+   "uses": [
+    "lem-sfb-local-field-integral-basis",
+    "lem-weil-l-adic-extension-absolute-value",
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-pur-adic-basis-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2(1), pp. 58-59; common basis and cofinal uniformizer-power comparison, as stated in lem-pur-adic-basis-limit"
+   }
+  },
+  {
+   "text": "The basis of step 3 restricts on every site object $U$ to an $R_E(U)$-basis of $R_L(U)$, with restriction-compatible coordinate maps $q_i$. Write the presheaf tensor product of [def-pur-sheaf-tensor-product] as $P(U)=F(U)\\otimes_{R_E(U)}R_L(U)$. The balanced maps $f\\otimes a\\mapsto(q_i(a)f)_i$ and $(f_i)_i\\mapsto\\sum_i f_i\\otimes b_i|_U$ are inverse: on a pure tensor the second composite is $\\sum_iq_i(a)f\\otimes b_i=f\\otimes a$, and the first composite is the identity on tuples. They commute with restrictions. Tuples of sections satisfy the sheaf axiom by gluing each coordinate, so $P\\simeq F^d$ is already a sheaf. The universal property in [def-weil-presheaf-modules-sheafification] then identifies its sheafification with itself. This proves $F\\otimes_{R_E}R_L\\simeq F^{\\oplus d}$ as $R_E$-module sheaves, by the asserted coordinate formula; it derives the sectionwise description here specifically from the finite basis.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, sites-modules-section-tensor-product; elementary finite-basis calculation"
+   }
+  },
+  {
+   "text": "Set $N=\\Gamma(s,F)$. The formula $N\\times\\mathcal O_L\\to\\Gamma(s,F\\otimes_{R_E}R_L)$, $(n,a)\\mapsto n\\otimes a_s$, is additive in each variable and balanced over $\\mathcal O_E$, since step 3 identifies the two coefficient actions. It therefore induces $\\theta_F$. It is $\\mathcal O_L$-linear, because $\\theta_F(n\\otimes ca)=n\\otimes(ca)_s=c_s(n\\otimes a_s)$. The ordinary module coordinate isomorphism $N\\otimes_{\\mathcal O_E}\\mathcal O_L\\simeq N^d$ sends $n\\otimes\\sum_i a_i\\beta_i$ to $(a_i n)_i$ and has inverse $(n_i)_i\\mapsto\\sum_i n_i\\otimes\\beta_i$; the two inverse identities are the same finite sums as in step 4. Evaluation of the sheaf coordinate isomorphism at $s$ sends $\\theta_F(n\\otimes\\sum_i a_i\\beta_i)$ to $(a_i n)_i$. Consequently $\\theta_F$ is the identity between these two copies of $N^d$, hence an isomorphism with precisely the inverse in the statement (where $b_i$ on the module side denotes $\\beta_i$).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, sites-modules-section-tensor-product; elementary balanced-map and coordinate calculation"
+   }
+  },
+  {
+   "text": "For a morphism $h:F\\to G$, both routes around the naturality square send $n\\otimes a$ to $h_s(n)\\otimes a_s$; such pure tensors generate the source, so the square commutes. The construction of $\\theta_F$ used only the constant-value map and the canonical map from the presheaf tensor to its sheafification. Pure tensors also show uniqueness of a linear map with this formula. Thus two choices of basis give the same $\\theta_F$, although they give different coordinate descriptions of its inverse.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, sites-modules-section-tensor-product; elementary naturality and uniqueness"
+   }
+  },
+  {
+   "text": "The two scalar-extension functors are additive by the tensor formulas. Their underlying functors, after forgetting the extended coefficient action, are naturally the finite-power functors by steps 4 and 5. Finite powers preserve kernels and cokernels: the kernel equations hold coordinate by coordinate; maps out of a finite power are specified by their restrictions to the individual summands, so the coordinatewise cokernel has the cokernel universal property. These observations hold both for modules and for module sheaves. Restriction from $R_L$ to $R_E$ detects exactness: by [def-weil-sheaf-of-modules-category], kernels are sectionwise kernels and cokernels are sheafified sectionwise cokernels, and neither construction changes its underlying abelian sheaf on forgetting the coefficient action. The identical argument for ordinary modules uses their usual kernels and quotient modules. The finite-power descriptions therefore prove exactness of both scalar-extension functors.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, sites-modules-section-tensor-product; elementary kernel and cokernel calculation for finite sums"
+   }
+  },
+  {
+   "text": "For a cochain complex $K^\\bullet$, take $\\theta_{K^j}$ in degree $j$. Naturality in step 6, applied to $d^j:K^j\\to K^{j+1}$, gives $\\theta_{K^{j+1}}(\\Gamma(s,d^j)\\otimes1)=\\Gamma(s,d^j\\otimes1)\\theta_{K^j}$. This is exactly the chain-map identity. The degreewise inverses satisfy the inverse identity by multiplying this equation by the two inverses. Hence these maps give an isomorphism of complexes, natural in chain maps, without a boundedness condition.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Agent consequence for termwise complexes of the preceding balanced-map calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-inverse-limit",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-sheaf-of-modules-category",
+  "lem-pur-adic-basis-limit",
+  "lem-pur-proetale-finite-constant-sections",
+  "lem-sfb-local-field-integral-basis",
+  "lem-weil-l-adic-extension-absolute-value",
+  "lem-weil-l-adic-extension-complete",
+  "lem-weil-l-adic-extension-integers-dvr"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Explicit point-evaluation and finite-basis calculation using Lemmas 4.2.12 and 6.8.2(1); tensor product as in Stacks Tag 03EK. The whole comparison is not a numbered assertion of Bhatt-Scholze."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,10 +161,38 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Sheaf.Γ\", \"module\": \"Mathlib.CategoryTheory.Sites.GlobalSections\", \"type\": \"[HasGlobalSectionsFunctor J A] : Sheaf J A ⥤ A\", \"doc\": \"The global sections functor, which is the left adjoint to the constant sheaf functor, assigning to each sheaf its global sections.\"}\n  {\"name\": \"CategoryTheory.HasGlobalSectionsFunctor\", \"module\": \"Mathlib.CategoryTheory.Sites.GlobalSections\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (J : CategoryTheory.GrothendieckTopology C) →\\n      (A : Type u₂) → [inst_1 : CategoryTheory.Category.{v₂, u₂} A] → [CategoryTheory.HasWeakSheafify J A] → Prop\", \"doc\": \"The property that the constant sheaf functor has a left adjoint, called the global sections functor, which assigns to each sheaf its global sections.\"}\n  {\"name\": \"CategoryTheory.Sheaf.ΓRes_naturality\", \"module\": \"Mathlib.CategoryTheory.Sites.GlobalSections\", \"type\": \"[HasGlobalSectionsFunctor J A] {F G : Sheaf J A} (f : F ⟶ G) (U : Cᵒᵖ) :\\n  (Γ J A).map f ≫ ΓRes G U = ΓRes F U ≫ f.val.app U\", \"doc\": \"For any morphism $ f : F \\to G $ of sheaves on a category $\\\\mathcal{C}$ with values in $\\\\mathcal{A}$, and for any object $ U $ in $\\\\mathcal{C}^\\\\text{op}$, the diagram involving the global sections func\"}\n  {\"name\": \"SheafOfModules.sectionsFunctor_obj\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C}\\n  (R : CategoryTheory.Sheaf J RingCat) (M : SheafOfModules R), (SheafOfModules.sectionsFunctor R).obj M = M.sections\", \"doc\": \"For a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, the sections functor from the category of sheaves of modules over $R$ to the category of types \"}\n  {\"name\": \"SheafOfModules.sectionsFunctor\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf\", \"type\": \": SheafOfModules.{v} R ⥤ Type _\", \"doc\": \"The functor from the category of sheaves of modules over a sheaf of rings $ R $ to the category of types, which maps each sheaf of modules to its global sections (families of elements satisfying compa\"}\n  {\"name\": \"SheafOfModules.sections\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf\", \"type\": \"(M : SheafOfModules.{v} R) : Type _\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, the sections of a sheaf of modules $M$ over $R$ consist of families of elements $s_X \\\\in M(X)\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.ΓSpecIso\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \": Γ(Spec R, ⊤) ≅ R\", \"doc\": \"The global sections of the structure sheaf on the scheme $\\\\operatorname{Spec}(R)$ over its entire space are naturally isomorphic to the commutative ring $R$.\"}\n  {\"name\": \"AlgebraicGeometry.AffineScheme.Γ_preservesLimits\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \": PreservesLimits Γ.{u}.rightOp\", \"doc\": \"The contravariant global sections functor $ \\\\Gamma $ for affine schemes, when considered as a covariant functor from the opposite category of affine schemes to the category of commutative rings, prese\"}",
    "date": "2026-10-21",
    "verdict": "no match: free-sheaf and global-sections APIs do not state the completed-coefficient global basis and its balanced sections-tensor isomorphism"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global sections of module sheaves commute with finite free extension of completed proetale coefficient rings",
+   "results": "OK 8 hit(s): BDeRhamPlus, BDeRham, instCommRingBDeRhamPlus, AdicCompletion.eval_lift, Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq, AdicCompletion.transitionMap_comp_eval, AdicCompletion.factor_eval_eq_evalₐ, AdicCompletion.eval_comp_of",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits do not assert the completed coefficient global basis together with the balanced sections-tensor isomorphism and exactness"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Global sections commute with scalar extension along a finite free sheaf of algebras",
+   "results": "OK 8 hit(s): PresheafOfModules.Sheafify.map_smul, PresheafOfModules.Sheafify.map_smul_eq, SheafOfModules.restrictScalars, SheafOfModules.sectionsFunctor, ModuleCat.Tilde.smul_section_apply, PresheafOfModules.Sheafify.smul.congr_simp, AlgebraicGeometry.Scheme.ΓSpecIso, ModuleCat.Tilde.sections_smul_localizations_def",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits do not assert the completed coefficient global basis together with the balanced sections-tensor isomorphism and exactness"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, TensorProduct",
+   "results": "OK 0 hit(s): ",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits do not assert the completed coefficient global basis together with the balanced sections-tensor isomorphism and exactness"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A global finite basis of a ring sheaf identifies tensoring any module sheaf with a finite direct power",
+   "results": "OK 8 hit(s): SheafOfModules.IsFiniteType.exists_localGeneratorsData, SheafOfModules.IsFiniteType, SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType, SheafOfModules.localGeneratorsDataOfIsFiniteType, SheafOfModules.LocalGeneratorsData.IsFiniteType, SheafOfModules.GeneratingSections.IsFiniteType, SheafOfModules.IsFinitePresentation, SheafOfModules.isFinitePresentation",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits do not assert the completed coefficient global basis together with the balanced sections-tensor isomorphism and exactness"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-point-sections-scalar-extension",
@@ -67,12 +204,61 @@
  "blueprint": {
   "from": {
    "node": "def-weil-finite-coefficient-point",
-   "place": "Lemmas 4.2.12 and 6.8.2(1), pp. 58-59; explicit common-global-basis sections calculation extracted from old proof steps 1-2 of lem-weil-point-sections-scalar-extension, supporting the final paragraph of def-weil-finite-coefficient-point",
+   "place": "Final paragraph of def-weil-finite-coefficient-point: the point-evaluation functor is obtained stagewise and passed to the finite-stage colimit; integral sections-scalar comparison underlying lem-weil-point-sections-scalar-extension.",
    "via": [
     "lem-weil-point-sections-scalar-extension"
    ]
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-weil-point-finite-free-sections-tensor",
+  "worker": "stage1",
+  "summary": "Q141: eight explicit steps using existing finite-constant-sections, local-field basis, completeness, and adic-basis-limit statements. Proved the balanced comparison, its naturality, independence, exactness and chain compatibility without new nodes. Statement unchanged; corrected source page attribution.",
+  "blueprint": "Realizes the coefficient-extension comparison needed for the final paragraph of def-weil-finite-coefficient-point via lem-weil-point-sections-scalar-extension. It is not the key statement of sk-thm-sf-compatibility.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-adic-basis-limit",
+    "why": "Generic input to the explicit point sections/basis calculation: lifts the integral basis through the two cofinal quotient towers. No replacement of any six-functor compatibility route is involved."
+   },
+   {
+    "node": "lem-pur-proetale-finite-constant-sections",
+    "why": "Generic input to the explicit point sections/basis calculation: identifies finite constant coefficient sections, normalized on constants. No replacement of any six-functor compatibility route is involved."
+   },
+   {
+    "node": "lem-sfb-local-field-integral-basis",
+    "why": "Generic input to the explicit point sections/basis calculation: provides the integral basis of rank [L:E]. No replacement of any six-functor compatibility route is involved."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-absolute-value",
+    "why": "Generic input to the explicit point sections/basis calculation: ensures coefficient absolute values agree on the subfield. No replacement of any six-functor compatibility route is involved."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-complete",
+    "why": "Generic input to the explicit point sections/basis calculation: provides convergence of compatible residue lifts. No replacement of any six-functor compatibility route is involved."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Generic input to the explicit point sections/basis calculation: provides uniformizer factorization and unit absolute values. No replacement of any six-functor compatibility route is involved."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-adic-basis-limit",
+  "lem-pur-proetale-finite-constant-sections",
+  "lem-sfb-local-field-integral-basis",
+  "lem-weil-l-adic-extension-absolute-value",
+  "lem-weil-l-adic-extension-complete",
+  "lem-weil-l-adic-extension-integers-dvr"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q141-3e6f1debe",
+  "group": "Q141",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q141-3e6f1debe (reviewer sub-agent of L); spot-checked: Read the item and all eight steps against every cited statement. There are no new nodes. The statement, stmt_deps, source, chapter and unit are byte-identical to the base, so nothing is weakened. No re-split repair note exists. The item is still unsplit live. There is no cycle with its citer lem-weil-point-sections-scalar-extension. Steps: (1) lem-pur-proetale-finite-constant-sections applies at X=V=s, where |s| is one point; A_{H,n} is finite by def-weil-l-adic-coefficient-extension clause 4; the limit is sectionwise by def-pur-sheaf-inverse-limit. (2) The completeness and DVR-ball argument for O_H≅lim A_{H,n} checks line by line. (3) The hypotheses of lem-pur-adic-basis-limit hold: t=ϖ_E=u ϖ_L^e with e≥1 because the absolute value extending to L is unique; R and S are exactly R_E and R_L; the columns are the residues of β_i; the coefficient map is given by its explicit projections. (4) The presheaf tensor is F^d, already a sheaf, so the sheafification unit is an isomorphism. (5)-(6) Balancedness, O_L-linearity, the coordinate identity, naturality and basis independence all check. (7) Kernels and cokernels are formed on underlying abelian sheaves, so restriction detects exactness, and finite powers are exact. (8) The chain identity follows from naturality. Sources checked: Bhatt-Scholze Lemma 4.2.12 is on p.30; Definition 6.8.1 and Lemma 6.8.2(1) with its proof are on pp.58-59; Stacks 03EK is the section-tensor-product label; the blueprint place is the final paragraph of def-weil-finite-coefficient-point. Edge cases checked: E=L, ramified L/E, zero or torsion F. Not duplicates of lem-weil-finite-free-completed-scalar-comparison (sheaf finiteness only) or lem-sfb-finite-free-scalar-coordinates (internal-module framework). The six generic tool_uses are accepted. One fault (B5-type): the report claims the source page was corrected, but source.place still attributes pp.58-59 to Lemma 4.2.12. The fix file sets source.place to 'Lemma 4.2.12 (p. 30) and Lemma 6.8.2(1) with its proof (pp. 58-59); ...' and changes nothing else.; 1 file(s) fixed by the reviewer"
  }
 }
