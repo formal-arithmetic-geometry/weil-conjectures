@@ -15,9 +15,149 @@
   "def-weil-pbc-category-colimit",
   "def-weil-pbc-normal-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $A_n=A[x_{1,n},\\ldots,x_{r,n}]/(x_{d,n}^n-t_d)_d$. The SNC hypothesis includes regularity of $B$ (take the empty subset in the boundary definition). Since $(n,p)=1$, Bezout gives an inverse of $n\\cdot1_A$ in the characteristic-$p$ algebra $A$. Apply [lem-sfb-snc-finite-root-regular-ring] to this regular affine SNC pair: every $A_n$ is a regular Noetherian ring. Hence [lem-weil-pbc-regular-ring-normal] makes every $A_n$ normal. This assertion concerns the finite algebras over $A$, before weakly etale base change.",
+   "uses": [
+    "def-trf-strict-normal-crossings-boundary",
+    "lem-sfb-snc-finite-root-regular-ring",
+    "lem-weil-pbc-regular-ring-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose IX Proposition 2.1 proof, p.133; Stacks Tag 0567 (algebra-lemma-regular-normal)."
+   }
+  },
+  {
+   "text": "Put $R_n=R[x_{1,n},\\ldots,x_{r,n}]/(x_{d,n}^n-t_d)_d$. The tensor pushout universal property identifies $A_n\\otimes_A R$ with $R_n$: send $x_{d,n}\\otimes1$ to the displayed root and $1\\otimes a$ to $a\\in R$; conversely send each coefficient $a\\in R$ to $1\\otimes a$ and each root to $x_{d,n}\\otimes1$. The root relations hold in both rings, and the composites fix all coefficients and roots. Thus $A_n\\to R_n$ is the base change of $A\\to R$ and is weakly etale by [lem-exc-weakly-etale-ring-base-change-composition].",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "lem-exc-weakly-etale-ring-base-change-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 092H (lemma-base-change-weakly-etale); explicit polynomial-quotient pushout identification."
+   }
+  },
+  {
+   "text": "For each $n$, apply [lem-weil-pbc-existing-weakly-etale-indetale-refinement] to $A_n\\to R_n$. Obtain a faithfully flat $R_n\\to T_n$ with $A_n\\to T_n$ ind-etale. By the definition of ind-etale, $T_n$ is a small filtered colimit of finitely presented etale $A_n$-algebras. Every such algebra is normal by [lem-weil-pbc-etale-over-normal-ring-normal], since Step 1 proved $A_n$ normal. Therefore [lem-weil-pbc-filtered-colimit-normal-ring] makes $T_n$ normal. Faithfully flat descent [lem-sfb-faithfully-flat-normal-ring-descent] now makes $R_n$ normal. The refinement and descent statements impose no Noetherian condition on $R_n$ or $T_n$.",
+   "uses": [
+    "lem-weil-pbc-existing-weakly-etale-indetale-refinement",
+    "def-weil-pbc-ind-etale-algebra",
+    "lem-weil-pbc-etale-over-normal-ring-normal",
+    "lem-weil-pbc-filtered-colimit-normal-ring",
+    "lem-sfb-faithfully-flat-normal-ring-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 097Z (proposition-weakly-etale); algebra.tex Tags 033C (lemma-normal-goes-up), 037D (lemma-colimit-normal-ring), 033G (lemma-descent-normal)."
+   }
+  },
+  {
+   "text": "The positive integers prime to $p$, ordered by divisibility, form a small nonempty directed poset: $1$ belongs to it, and $nm$ is an upper bound for $n,m$ and remains prime to $p$. The prescribed transition respects each relation because $(x_{d,m}^{m/n})^n=t_d$, and transitions compose because $(m/n)(l/m)=l/n$. Thus the displayed $S$ is the filtered colimit of the normal rings $R_n$. Apply [lem-weil-pbc-filtered-colimit-normal-ring] to conclude that $S$ is normal; no injectivity assumption on its transitions is needed.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-normal-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 037D (lemma-colimit-normal-ring)."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-existing-weakly-etale-indetale-refinement] to the given weakly etale map $S\\to Q$. It supplies a faithfully flat map $Q\\to H$ for which $S\\to H$ is ind-etale. Its filtered etale presentation has normal terms by Step 4 and [lem-weil-pbc-etale-over-normal-ring-normal]. Hence $H$ is normal by [lem-weil-pbc-filtered-colimit-normal-ring], and $Q$ is normal by [lem-sfb-faithfully-flat-normal-ring-descent]. This is normality in the prime-localization sense stated in the item, including rings which are not domains.",
+   "uses": [
+    "lem-weil-pbc-existing-weakly-etale-indetale-refinement",
+    "def-weil-pbc-ind-etale-algebra",
+    "lem-weil-pbc-etale-over-normal-ring-normal",
+    "lem-weil-pbc-filtered-colimit-normal-ring",
+    "lem-sfb-faithfully-flat-normal-ring-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 097Z (proposition-weakly-etale); algebra.tex Tags 033C, 037D and 033G."
+   }
+  },
+  {
+   "text": "For injectivity start on $A$. By Step 1 with $n=1$ (where $A_1=A$), $A$ is a regular Noetherian ring, so each $A_{\\mathfrak m}$ at a maximal ideal is regular local [def-weil-regular-scheme], hence a domain [lem-sc-regular-local-domain]. Fix $d$ and $y\\in A$ with $t_dy=0$. In $A_{\\mathfrak m}$ either $y/1=0$ or $t_d/1=0$. In the latter case let $\\mathfrak q\\subseteq\\mathfrak m$ be the preimage of the prime $(0)\\subset A_{\\mathfrak m}$; then $A_{\\mathfrak q}=\\operatorname{Frac}(A_{\\mathfrak m})$ is a field, of dimension $0$ [def-weil-pbc-krull-dimension-ring], and $t_d\\in\\mathfrak q$, so $\\mathfrak q\\in V(t_d)=C_d$. The SNC definition with $J=\\{d\\}$ at $z=\\mathfrak q$ gives $\\dim A_{\\mathfrak q}=\\dim(A/t_dA)_{\\mathfrak q}+1\\geq1$ [def-trf-strict-normal-crossings-boundary], since $(A/t_dA)_{\\mathfrak q}\\neq0$. This contradiction shows $y/1=0$ in every $A_{\\mathfrak m}$, so $y=0$ by [lem-weil-pbc-ideal-membership-at-maximal-localizations] with $J=0$. Composing these injective multiplications gives injectivity of $s_A=\\prod_dt_d$ on $A$; the empty composite is the identity, and $A=0$ is trivial.",
+   "uses": [
+    "lem-sfb-snc-finite-root-regular-ring",
+    "def-weil-regular-scheme",
+    "lem-sc-regular-local-domain",
+    "def-weil-pbc-krull-dimension-ring",
+    "def-trf-strict-normal-crossings-boundary",
+    "lem-weil-pbc-ideal-membership-at-maximal-localizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00NP (lemma-regular-domain) and Tag 00HN (lemma-characterize-zero-local); the codimension clause of the SNC definition (ILO VIII 4.1.2, Stacks etale.tex Tag 0BI9)."
+   }
+  },
+  {
+   "text": "The weakly etale map $A\\to R$ is flat. By [def-weil-pbc-flat-ring-map], tensoring the injection $A\\xrightarrow{s_A}A$ with $R$ gives injectivity of multiplication by $s_R$ on $R$ (identify $A\\otimes_A R$ with $R$ by $a\\otimes b\\mapsto ab$). Repeatedly apply [lem-weil-pbc-monic-quotient-free] to the $r$ monic equations $X^n-t_d$: $R_n$ is free over $R$ on the monomials $\\prod_d x_{d,n}^{a_d}$ with $0\\leq a_d<n$. If $s_Rv=0$ in $R_n$, uniqueness of this expansion gives $s_Rc_a=0$ for each coefficient, hence $c_a=0$ and $v=0$. Thus multiplication by $s$ is injective at every finite stage.",
+   "uses": [
+    "def-weil-pbc-ind-etale-algebra",
+    "def-weil-pbc-flat-ring-map",
+    "lem-weil-pbc-monic-quotient-free"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HB (definition-flat); monic polynomial division, as in Tag 04GG (lemma-characterize-henselian), proof of (10) implies (1)."
+   }
+  },
+  {
+   "text": "Let $v\\in S$ satisfy $sv=0$. By [lem-pc-filtered-colimit-commrings-elementwise], choose $n$ and $v_n\\in R_n$ representing $v$. The equality of the images of $s v_n$ and $0$ holds at a common later stage $m$ by the same elementwise theorem. The image $v_m$ therefore satisfies $s v_m=0$ in $R_m$. Step 7 forces $v_m=0$, so $v=0$ in $S$. Finally $S\\to Q$ is flat by the definition of weakly etale. Tensor the injection $S\\xrightarrow{s}S$ with $Q$ using [def-weil-pbc-flat-ring-map]. The resulting map is multiplication by the specified image of $s$ on $Q$, so it is injective.",
+   "uses": [
+    "lem-pc-filtered-colimit-commrings-elementwise",
+    "def-weil-pbc-ind-etale-algebra",
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Filtered ring-colimit representatives and eventual equality (Tag 002W via algebraic filtered colimits); Tag 00HB (definition-flat)."
+   }
+  },
+  {
+   "text": "If the chart or $Q$ is empty, its ring is zero; injectivity on its one-element underlying set holds, and the local normality condition has no primes to check. If $r=0$, every finite root algebra is its base ring, all power transitions are identities, $S=R$, and $s=1$. Steps 3 and 5 still prove normality, and multiplication by $1$ is the identity. The same proof also includes $n=1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Empty products and definitions."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-strict-normal-crossings-boundary",
+  "lem-sfb-snc-finite-root-regular-ring",
+  "lem-weil-pbc-regular-ring-normal",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-exc-weakly-etale-ring-base-change-composition",
+  "lem-weil-pbc-existing-weakly-etale-indetale-refinement",
+  "def-weil-pbc-ind-etale-algebra",
+  "lem-weil-pbc-etale-over-normal-ring-normal",
+  "lem-weil-pbc-filtered-colimit-normal-ring",
+  "def-weil-pbc-flat-ring-map",
+  "lem-weil-pbc-monic-quotient-free",
+  "lem-pc-filtered-colimit-commrings-elementwise",
+  "lem-sfb-faithfully-flat-normal-ring-descent",
+  "def-weil-regular-scheme",
+  "lem-sc-regular-local-domain",
+  "def-weil-pbc-krull-dimension-ring",
+  "lem-weil-pbc-ideal-membership-at-maximal-localizations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Assembly of the finite SNC parameter-root calculation, Expose IX Proposition 2.1 proof p.133, with Stacks Tags 097Z, 033C, 037D and 033G; boundary injectivity is the SNC codimension clause, monic freeness and filtered-colimit representatives."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -53,10 +193,38 @@
    "results": "8 hits: StandardEtalePair, StandardEtalePair.hasMap_X, StandardEtalePresentation.P, StandardEtalePair.instEtaleRing, StandardEtalePair.instFormallyEtaleRing, StandardEtalePresentation, Algebra.instIsStandardEtaleRing, Algebra.IsStandardEtale",
    "date": "2026-10-21",
    "verdict": "no match: the hits do not assert normality of Kummer root limits or extension of continuous-coefficient lisse morphisms"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normality of weakly etale algebras over a filtered colimit of simultaneous prime to characteristic parameter root covers of a regular strict normal crossings pair",
+   "results": "8 hits: StandardEtalePair.instEtaleRing, StandardEtalePair.instFormallyEtaleRing, Algebra.instIsStandardEtaleRing, StandardEtalePresentation, Algebra.Etale, Algebra.instEtaleOfIsStandardEtale, Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial",
+   "date": "2026-10-21",
+   "verdict": "no match: retrieved standard etale and smooth interfaces do not state normality of these full SNC root-limit charts"
+  },
+  {
+   "tool": "grep",
+   "query": "(WeaklyEtale|IndEtale).*(IsIntegrallyClosed|[Nn]ormal)|(IsIntegrallyClosed|[Nn]ormal).*(WeaklyEtale|IndEtale)",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: retrieved standard etale and smooth interfaces do not state normality of these full SNC root-limit charts"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.WeaklyEtale, IsIntegrallyClosed",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: retrieved standard etale and smooth interfaces do not state normality of these full SNC root-limit charts"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An arbitrary weakly etale algebra over a normal ring is normal; simultaneous roots of distinct normal crossings parameters on a regular scheme remain regular",
+   "results": "8 hits: Algebra.FormallyEtale.instFormallySmooth, Algebra.Etale.formallyEtale, Algebra.FormallyEtale.iff_exists_algEquiv_prod, Algebra.FormallyEtale.of_unramified_and_smooth, Algebra.FormallyEtale.comp, Algebra.instEtaleOfIsStandardEtale, Algebra.FormallyEtale.instTensorProduct, Algebra.Etale",
+   "date": "2026-10-21",
+   "verdict": "no match: retrieved standard etale and smooth interfaces do not state normality of these full SNC root-limit charts"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-root-tower-lisse-morphism-extension",
@@ -81,5 +249,74 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-snc-root-limit-normal-charts",
+  "worker": "stage1",
+  "summary": "Proved finite-stage normality by a regular simultaneous SNC-root lemma and weakly etale ind-etale refinement; passed to the full root colimit and arbitrary weakly etale charts by normality descent. Proved boundary injectivity separately from the SNC codimension clause on the regular chart, monic freeness, and eventual equality. Reused all general normality and refinement nodes; one new finite-geometry statement-only node. Statement unchanged. Review NP fix: the dropped faithfully-flat descent and coordinate-locus nodes are replaced by the new statement-only Stacks 033G node and live regular-domain/local-zero nodes.",
+  "blueprint": "The inherited blueprint ancestor is null (confirmed by blueprint_refs.py ancestor). Realizes the recorded paragraph (3), open direct image, in the root-tower lisse-morphism extension chain: normal charts and nonzerodivisors on the full parameter-root limit. No unit or chapter route changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-regular-ring-normal",
+    "why": "Generic algebraic tool for the finite-root/filtered-colimit argument; it does not replace a unit-level six-functor step, and no statement of this unit supplies this algebraic fact."
+   },
+   {
+    "node": "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "why": "Generic algebraic tool for the finite-root/filtered-colimit argument; it does not replace a unit-level six-functor step, and no statement of this unit supplies this algebraic fact."
+   },
+   {
+    "node": "lem-exc-weakly-etale-ring-base-change-composition",
+    "why": "Generic algebraic tool for the finite-root/filtered-colimit argument; it does not replace a unit-level six-functor step, and no statement of this unit supplies this algebraic fact."
+   },
+   {
+    "node": "lem-weil-pbc-existing-weakly-etale-indetale-refinement",
+    "why": "Generic algebraic tool for the finite-root/filtered-colimit argument; it does not replace a unit-level six-functor step, and no statement of this unit supplies this algebraic fact."
+   },
+   {
+    "node": "lem-weil-pbc-etale-over-normal-ring-normal",
+    "why": "Generic algebraic tool for the finite-root/filtered-colimit argument; it does not replace a unit-level six-functor step, and no statement of this unit supplies this algebraic fact."
+   },
+   {
+    "node": "lem-weil-pbc-filtered-colimit-normal-ring",
+    "why": "Generic algebraic tool for the finite-root/filtered-colimit argument; it does not replace a unit-level six-functor step, and no statement of this unit supplies this algebraic fact."
+   },
+   {
+    "node": "lem-weil-pbc-monic-quotient-free",
+    "why": "Generic algebraic tool for the finite-root/filtered-colimit argument; it does not replace a unit-level six-functor step, and no statement of this unit supplies this algebraic fact."
+   },
+   {
+    "node": "lem-pc-filtered-colimit-commrings-elementwise",
+    "why": "Generic algebraic tool for the finite-root/filtered-colimit argument; it does not replace a unit-level six-functor step, and no statement of this unit supplies this algebraic fact."
+   },
+   {
+    "node": "lem-sc-regular-local-domain",
+    "why": "Generic algebraic tool for the finite-root/filtered-colimit argument; it does not replace a unit-level six-functor step, and no statement of this unit supplies this algebraic fact."
+   },
+   {
+    "node": "lem-weil-pbc-ideal-membership-at-maximal-localizations",
+    "why": "Generic algebraic tool for the finite-root/filtered-colimit argument; it does not replace a unit-level six-functor step, and no statement of this unit supplies this algebraic fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-regular-ring-normal",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-exc-weakly-etale-ring-base-change-composition",
+  "lem-weil-pbc-existing-weakly-etale-indetale-refinement",
+  "lem-weil-pbc-etale-over-normal-ring-normal",
+  "lem-weil-pbc-filtered-colimit-normal-ring",
+  "lem-weil-pbc-monic-quotient-free",
+  "lem-pc-filtered-colimit-commrings-elementwise",
+  "lem-sc-regular-local-domain",
+  "lem-weil-pbc-ideal-membership-at-maximal-localizations"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NP-f6a456de2",
+  "group": "NP",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-f6a456de2 (reviewer sub-agent of L); spot-checked: Read the item, the new node and every cited statement in full; sources: ILO IX Prop 2.1 pp.133-134, Stacks 033G/037D/00NP/00HN/0BI9-0BIA. The item is live and not on the drop list, its citer lem-sfb-root-tower-lisse-morphism-extension is live, side-live still has the item unsplit with the same statement, and there is no repair note. Mechanical dropped-route finding: lem-per-faithfully-flat-normal-ring-descent (drop line 1541, Steps 3/5) and lem-per-ind-etale-regular-coordinate-locus (line 1648, Step 6) are cited only for generic algebra, so I repaired the citations instead of returning. Fix 1: new statement-only node lem-sfb-faithfully-flat-normal-ring-descent (Stacks 033G, created.item = this item), cited in Steps 3/5. No live general 033G node exists, only the field-extension special case, and Mathlib has none. Fix 2: Step 6 rewritten from live nodes. A is regular (new node at n=1), so each A_m is a domain [lem-sc-regular-local-domain]. If t_d/1=0 in A_m, the generic point q of A_m lies in V(t_d) with dim A_q=0, contradicting the SNC codimension clause with J={d}. So y/1=0 in every A_m and y=0 by lem-weil-pbc-ideal-membership-at-maximal-localizations with J=0. This drops lem-pc-cartier-affine-generator-regular; proof_deps and tool_uses updated to match. The fixed closure (525 nodes) contains no dropped id. Batch-5 finding: def-trf-strict-normal-crossings-boundary is a general definition, already cited by the item statement on base and not part of the trace formula or Poincare duality, so accepted. The new node C_n=A[x]/(x_i^n-t_i) regular is true: t_J is part of a regular system of parameters at p, roots of unit branch equations are etale, the unique maximal ideal is (m,x_J), and C_n is finite over the Noetherian A. Tested on r=0, k[u,v], and the report's repeated-branch and n=p counterexamples; it duplicates no node. Steps 1,2,4,7,8,9 check out (Bezout, pushout, directed system, flatness plus monomial basis, eventual equality, edge cases). Statement unchanged, no SGA used.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
  }
 }
