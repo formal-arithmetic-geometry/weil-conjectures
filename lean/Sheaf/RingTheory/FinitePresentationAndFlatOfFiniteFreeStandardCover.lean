@@ -9,6 +9,9 @@ public import Mathlib.Algebra.Module.LocalizedModule.Basic
 public import Mathlib.Algebra.Module.FinitePresentation
 public import Mathlib.RingTheory.Flat.Basic
 
+import Mathlib.RingTheory.LocalProperties.FinitePresentation
+import Mathlib.RingTheory.Flat.Localization
+
 /-!
 # Finite presentation and flatness from a finite standard-open free cover
 
@@ -42,6 +45,18 @@ theorem finitePresentation_and_flat_of_finite_free_standard_cover
     (hfree : ∀ i : Fin r,
       Module.Finite (Localization.Away (f i)) (LocalizedModule.Away (f i) N) ∧
       Module.Free (Localization.Away (f i)) (LocalizedModule.Away (f i) N)) :
-    Module.FinitePresentation R N ∧ Module.Flat R N := by sorry
+    Module.FinitePresentation R N ∧ Module.Flat R N := by
+  constructor
+  · apply Module.FinitePresentation.of_localizationSpan (Set.range f) hspan
+    rintro ⟨g, i, rfl⟩
+    let := (hfree i).1
+    let := (hfree i).2
+    exact Module.finitePresentation_of_projective _ _
+  · apply Module.flat_of_localized_span R N (Set.range f) hspan
+    rintro ⟨g, i, rfl⟩
+    let := (hfree i).2
+    apply (Module.flat_iff_of_isLocalization (Localization.Away (f i))
+      (Submonoid.powers (f i)) (LocalizedModule.Away (f i) N)).mp
+    infer_instance
 
 end Module
