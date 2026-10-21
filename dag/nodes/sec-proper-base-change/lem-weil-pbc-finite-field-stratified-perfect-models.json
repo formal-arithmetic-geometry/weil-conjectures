@@ -20,7 +20,8 @@
   "def-constructible-stratification",
   "def-weil-constructible-subset",
   "def-pc-perfect-ring-complex",
-  "def-weil-pbc-proetale-modules"
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-proetale-operations"
  ],
  "proof": [
   {
@@ -215,5 +216,23 @@
   "group": "NV",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-ecc738d39 (reviewer sub-agent of L); spot-checked: I read the item, all 15 cited node statements, the parent integral-stratified characterization, the unit sk-thm-properbasechange, Stacks 094G (statement and full induction proof) and Bhatt–Scholze Prop. 6.6.11 (forward direction) and 6.8.11(3). The delivery is a first split with no new nodes, the statement is unchanged, review_split passes on the snapshot, and no SGA source is cited. Steps: (1) bounded interval, one constructibility stratification per degree, then repeated lem-weil-pbc-constructible-stratification-intersection, which uses real fibre-product schemes and constructible intersections. (2) Exactness from prop-weil-pbc-inverse-image-modules-exact(3) gives H^q(i^{-1}L)=i^{-1}H^q(L). The étale trivializing covers are pulled back along the refinement projections, and lem-sfb-geometric-inverse-image-constant-module keeps them constant with finite values on every étale W→S. (3) lem-weil-pbc-etale-site-bounded-constant-models (B=k finite commutative, a≤b) gives actual constant complexes of finite modules; Stacks 094G builds constant differentials. (4) Each term is projective by the Mathlib leaf and the complex is bounded, so it is perfect by def-pc-perfect-ring-complex; no claim is made over Z/4. (5) lem-weil-pbc-comparison-pullback, made termwise and derived by lem-pe exactness; the coefficient ring Cont(π0,Λ)^# is identified with the constant ring by prop-weil-pbc-proetale-constant-ring-map, so the coefficient category does not change silently. (6) Naturality in lem-sfb gives an isomorphism of complexes, and étale covers are pro-étale covers (098B leaf). Edge cases checked: empty X and empty strata, L=0, a=b, the residue characteristic of X equal to char k, and non-split extensions. The statement is true and needs no ℓ-invertibility. Accepted tool uses: lem-sfb-geometric-inverse-image-constant-module and lem-pe-constant-left-module-inverse-image, both generic topos facts used only for coefficients. The lem-pur-etale-proetale-cover declaration is redundant because that node is a Mathlib leaf. Duplicate search: lem-fin-lisse-field-site-perfect (F_ℓ only, no stratification), lem-weil-pbc-finite-ring-derived-local-constancy (local-constancy ingredient only) and lem-sf-etale-smooth-stratified-ctf (different hypotheses) are not duplicates. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteFieldStratifiedPerfectModels",
+  "declaration": "AlgebraicGeometry.ProEtale.finite_field_stratified_perfect_models",
+  "file": "lean/Sheaf/Paper/FiniteFieldStratifiedPerfectModels.lean",
+  "statement": "theorem finite_field_stratified_perfect_models (X : Scheme.{u}) [IsLocallyNoetherian X] [CompactSpace X] (k : Type (u + 1)) [Field k] [Finite k] [TopologicalSpace k] [DiscreteTopology k] (L : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} k))) (hbounded : ∃ a b : ℤ, a ≤ b ∧ ∀ q : ℤ, q < a ∨ b < q → IsZero ((DerivedCategory.homologyFunctor (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} k)) q).obj L)) (hconstructible : ∀ q : ℤ, Scheme.IsConstructibleEtaleModuleSheaf ((DerivedCategory.homologyFunctor (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} k)) q).obj L)) : ∃ S : Scheme.FiniteLocallyClosedStratification X, (∀ i : Fin S.n, Topology.IsConstructible (S.stratum i)) ∧ ∀ i : Fin S.n, ∃ 𝒰 : Cover.{u} etalePrecoverage (S.domain i), ∀ j : 𝒰.I₀, ∃ (P : CochainComplex (ModuleCat.{u + 1} k) ℤ) (a b : ℤ), P.IsStrictlyGE a ∧ P.IsStrictlyLE b ∧ (∀ q : ℤ, Module.Finite k (P.X q)) ∧ @DerivedCategory.IsPerfectRingComplex k _ (HasDerivedCategory.standard _) ((@DerivedCategory.Q (ModuleCat.{u + 1} k) _ _ (HasDerivedCategory.standard _)).obj P) ∧ Nonempty ((Etale.upperStar (ModuleCat.{u + 1} k) (𝒰.f j ≫ S.immersion i)).mapDerivedCategory.obj L ≅ DerivedCategory.Q.obj (((constantSheaf (𝒰.X j).smallEtaleTopology (ModuleCat.{u + 1} k)).mapHomologicalComplex (ComplexShape.up ℤ)).obj P)) ∧ Nonempty ((finiteCoefficientDerivedPullback X k (𝒰.f j ≫ S.immersion i)).obj ((finiteCoefficientDerivedComparison X k).obj L) ≅ (finiteCoefficientRealization (𝒰.X j) k).mapDerivedCategory.obj (DerivedCategory.Q.obj (((constantSheaf (Scheme.ProEt.topology (𝒰.X j)) (ModuleCat.{u + 1} k)).mapHomologicalComplex (ComplexShape.up ℤ)).obj P)))",
+  "branch": "newtargets-dag",
+  "by": "N8",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c68a3e3f0",
+  "group": "N8",
+  "result": "pass",
+  "note": "First delivery of lem-weil-pbc-finite-field-stratified-perfect-models (N8 c68a3e3f). Clause-by-clause match: Noetherian = IsLocallyNoetherian+CompactSpace; k : Type (u+1) Field+Finite (universe forced by recorded IsConstructibleEtaleModuleSheaf; DiscreteTopology is the pro-étale coefficient convention); hbounded/hconstructible on DerivedCategory.homologyFunctor; conclusion: FiniteLocallyClosedStratification + Topology.IsConstructible strata, Cover.{u} etalePrecoverage per stratum, per member an actual P with IsStrictlyGE/LE, Module.Finite terms, IsPerfectRingComplex (standard localization explicit), Etale.upperStar(composite) L ≅ Q(constant P), and the same P models finiteCoefficientDerivedPullback∘finiteCoefficientDerivedComparison L via finiteCoefficientRealization: canonical maps only. Item changed only in lean + added landed stmt_dep def-weil-pbc-proetale-operations (allowed); lean.statement verbatim; dependency node files identical to live; no duplicate found; docstrings carry the sources and the 6 proof steps; no line over 100 chars. nt_compile --json: 3.5 s, clean. Advisories: Etale.upperStar owner def-weil-pbc-inverse-image not in stmt_deps; finiteCoefficientDerivedPullback not in def-weil-pbc-proetale-operations' declarations list."
  }
 }

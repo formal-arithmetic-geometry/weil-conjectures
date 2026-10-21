@@ -260,5 +260,23 @@
   "group": "Q130",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q130-b60a17972 (reviewer sub-agent of L); spot-checked: PASS; no changes made. Shape: the item's statement and stmt_deps are identical to the side-live unsplit version, nothing is weakened. There is no repair note, nothing is on the drop list, no SGA is cited, and every cited id exists and is unmerged with proof_deps equal to the union of the step uses. Step 1: det-pe-topos-functoriality makes r:Z=X_S×_S W→X_S a site object, lem-pc-proper-base-change(1) makes f_S proper, and the bound e passes to f_S. Step 2: the first clause of sk-thm-pe-direct-image-comparison together with det-pe-classical-sheaves-modules shows r^*J is classical; lem-sfb-proetale-object-inverse-image-restriction(3) is A-linear exact restriction, so it commutes with def-kun-truncations. Step 3: exact Γ(W,−) (det-proper-heart-continuity-sections), (f_*I)(W)=I(Z) from def-weil-pbc-proetale-operations, the statement of lem-sfb-unbounded-sections-localization (unbounded K allowed) and lem-weil-proetale-weakly-etale-localization; the identities are natural on resolutions. Step 4: det-pe-unbounded-classical-truncation(2) is applied on Z at the terminal object with bound 2e, and N<m−2e−1 matches exactly; det-pe-sections-conservative(3) then gives the sheaf isomorphism. New node: self-contained and statement-only, with all four search kinds recorded. It is true: finite A makes the sheaves torsion, Stacks 095U (etale-cohomology.tex l.18786, no Noetherian or invertibility hypothesis) gives the étale vanishing, the qcqs bounded-below comparison moves it to pro-étale, and exact Γ on the affine weakly contractible V gives the absolute bound. Checked A=0, Z empty, e=0 and non-Noetherian V. It is not a restatement of the item and not a duplicate: lem-kun-proper-torsion-cd-bound is the relative étale part only, and det-proper-heart-bound-torsion covers only lisse lattices over a field. I accept the 13 tool_uses as generic pro-étale and site tools; three of them are definitions, which is harmless and advisory only."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.FiniteProperClassicalTruncation",
+  "declaration": "AlgebraicGeometry.ProEtale.finiteProper_classical_truncation",
+  "file": "lean/Sheaf/SixFunctors/FiniteProperClassicalTruncation.lean",
+  "statement": "theorem finiteProper_classical_truncation (A : Type u) [CommRing A] [Finite A] {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f] (e : ℕ) (_hbound : ∀ (T : Scheme.{u}) (g : T ⟶ Y) (t : T), topologicalKrullDim ((pullback.snd f g).fiber t) ≤ (e : WithBot ℕ∞)) (S : Scheme.{u}) (g : S ⟶ Y) (J : Scheme.proEtaleDerivedCategory (pullback f g) A) (_hJ : IsClassicalModuleComplex J) (m N : ℤ) (_hN : N < m - 2 * (e : ℤ) - 1) : IsIso ((DerivedCategory.homologyFunctor _ m).map ((Scheme.proEtaleConstantDerivedDirectImage (pullback.snd f g) A).map ((CategoryTheory.Triangulated.TStructure.truncGEπ DerivedCategory.TStructure.t N).app J)))",
+  "branch": "newtargets-dag",
+  "by": "O3",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0ed868efd",
+  "group": "O3",
+  "result": "pass",
+  "note": "Every clause matches: finite comm A : Type u (no loss), IsProper f, e:ℕ with a fibre bound over all base changes T/t (scheme fibres of pullback.snd), S,g quantified after e, J : proEtaleDerivedCategory (pullback f g) A (unbounded constant-A), IsClassicalModuleComplex J (all degrees), N < m-2e-1 exact, IsIso of H^m of Rf_{S,*} (rightDerivedFunctor) applied to truncGEπ N at J. Edge cases A=0, empty, e=0, negative degrees, unbounded J all allowed. Node changes only lean; lean.statement verbatim; docstrings have source, blueprint tag and 4 steps; sorry only, no defs; report sections present. nt_compile --json rc=0 in 2.8 s; probe shows HasDerivedCategory.standard throughout. No duplicate found. Advisories: constant-ring model instead of the FiniteCoefficientDerivedCategory record of def-weil-pbc-proetale-modules (canonically isomorphic rings, matches 'ordinary constant-A'; sibling coproducts item uses the other model, ring bridge needed at stage 3); proEtaleConstantDerivedDirectImage owner def-weil-pbc-proetale-operations is outside stmt_deps; unused proof-only imports."
  }
 }

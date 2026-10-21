@@ -20050,3 +20050,9 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:54 L: merged deliver/Q57/lem-sfb-adic-proper-localizing-adjunction-comparison (reviewer PASS; first push; new nodes: 0)
 - 03:54 L: merged deliver/Q15/lem-sfb-finite-local-model-rhom-continuity (reviewer FIX; first push; new nodes: 0)
 - 2026-10-21T03:54:44Z L: superseded stage-1 delivery NJ/lem-pd-section-derived-pushpull-normalization at 634241a7e0c0a651523bc7b3390bf9dc336ef2dd; current completion retained; packet archived at refs/superseded/NJ/lem-pd-section-derived-pushpull-normalization/634241a7e0c0a651523bc7b3390bf9dc336ef2dd; stale return retired.
+- 03:54 L: merged deliver/Q09/lem-weil-pbc-tower-derived-evaluation-normalization (stage 2; reviewer PASS; parallel immutable checks)
+- 03:54 L: merged deliver/O3/lem-sfb-finite-proper-classical-truncation (stage 2; reviewer PASS; parallel immutable checks)
+- 03:54 L: merged deliver/NB/lem-sfb-etale-proetale-scalar-pullback-cube (stage 2; reviewer PASS; parallel immutable checks)
+- 03:54 L: merged deliver/NS/lem-sfb-finite-field-closed-support (stage 2; reviewer PASS; parallel immutable checks)
+- 03:54 L: merged deliver/N8/lem-weil-pbc-finite-field-stratified-perfect-models (stage 2; reviewer PASS; parallel immutable checks)
+- 03:54 L: merged deliver/Q12/lem-weil-pbc-ringed-slice-pullback-mate-normalization (stage 2; reviewer PASS; parallel immutable checks)
