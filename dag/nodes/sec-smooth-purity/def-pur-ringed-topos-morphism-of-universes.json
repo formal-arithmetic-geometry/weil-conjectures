@@ -1,0 +1,105 @@
+{
+ "id": "def-pur-ringed-topos-morphism-of-universes",
+ "kind": "definition",
+ "title": "Ringed-topos morphism with independent site universes",
+ "status": "split",
+ "statement": "Let $\\mathcal C$ and $\\mathcal D$ be sites with object universes $c,d$, morphism universes $v,w$, and Grothendieck topologies $J,K$, each essentially small in a coefficient universe $r$. Let $A$ and $B$ be sheaves of rings in universe $r$ on these sites. Define a ringed-topos morphism from $(\\operatorname{Sh}(\\mathcal C),A)$ to $(\\operatorname{Sh}(\\mathcal D),B)$ by the same data as [def-weil-pbc-ringed-topos-morphism], with these independent universes: an adjunction $f^{-1}\\dashv f_*$ on sheaves of sets in universe $r$, finite-limit preservation by $f^{-1}$, a structural map $f^{-1}B\\to A$ preserving $0,1,+,\\cdot$ on all generalized elements, and an additive direct image of module sheaves naturally identified on underlying sheaves with $f_*$. Its scalar action is induced by the structural map: the adjoint transpose of $ax+y$ is $f^\\sharp(f^{-1}a)\\widetilde x+\\widetilde y$. No equality between the site object, morphism, and coefficient universes is required.",
+ "stmt_deps": [
+  "def-weil-pbc-ringed-topos-morphism"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Definition 01D3 (definition-ringed-topos), Definition 03D6 (definition-pushforward); sites.tex Definition 00XA (definition-topos)"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Ringed topos morphism with independent site object morphism and coefficient universes",
+   "results": "AlgebraicGeometry.LocallyRingedSpace.Hom, AlgebraicGeometry.LocallyRingedSpace.homMk, AlgebraicGeometry.Spec.locallyRingedSpaceMap, AlgebraicGeometry.LocallyRingedSpace.Hom.mk, AlgebraicGeometry.LocallyRingedSpace.homOfSheafedSpaceHomOfIsIso, AlgebraicGeometry.LocallyRingedSpace.instCategory, AlgebraicGeometry.LocallyRingedSpace.Hom.stalkMap, AlgebraicGeometry.LocallyRingedSpace.Hom.casesOn",
+   "date": "2026-10-21",
+   "verdict": "No Mathlib declaration of the general ringed-topos record; reuse the landed project declaration."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.RingedToposMorphismOfUniverses",
+   "results": "loogle: unknown identifier 'CategoryTheory.RingedToposMorphismOfUniverses'",
+   "date": "2026-10-21",
+   "verdict": "No Mathlib declaration of the general ringed-topos record; reuse the landed project declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "RingedToposMorphismOfUniverses|RingedToposMorphism",
+   "results": "No hits",
+   "date": "2026-10-21",
+   "verdict": "No Mathlib declaration of the general ringed-topos record; reuse the landed project declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n RingedToposMorphismOfUniverses dag/nodes lean/Sheaf lean/WeilConjectures; blueprint_refs.py search ringed topos",
+   "results": "Existing declaration in lean/Sheaf/Paper/SequenceSiteCompletionProjection.lean:107, listed by lem-pur-sequence-site-completion-projection; no upstream match and no definition node for it; blueprint search returned 0 matches.",
+   "date": "2026-10-21",
+   "verdict": "Attach the existing declaration without copying it or changing its owning module."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-sequence-adjoint-resolution-shifts",
+  "date": "2026-10-21",
+  "group": "Q111"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Unit Step 2 transport through the reduction/total-limit adjunction; coefficient-comparison sentence of fix-prop-coherence.proof.md. Extracted from returned parent proof steps 1–3 and the adjunction-identification part of step 4. Agent resolution-normalized specialization of Stacks sites-cohomology.tex Tag 0D6E (lemma-derived-pushforward-composition).",
+   "via": [
+    "lem-pur-sequence-adjoint-resolution-shifts",
+    "lem-pur-reduction-limit-shift-adjunction",
+    "lem-pur-integral-realization-shift-coherence",
+    "lem-pur-adic-projection-shift-coherence",
+    "lem-pur-adic-purity-scalar-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "module": "Sheaf.Paper.SequenceSiteCompletionProjection",
+  "declaration": "CategoryTheory.RingedToposMorphismOfUniverses",
+  "statement": "structure RingedToposMorphismOfUniverses\n    {C : Type c} {D : Type d} [Category.{v} C] [Category.{w} D]\n    [EssentiallySmall.{r} C] [EssentiallySmall.{r} D]\n    {J : GrothendieckTopology C} {K : GrothendieckTopology D}\n    (A : Sheaf J RingCat.{r}) (B : Sheaf K RingCat.{r})",
+  "branch": "newtargets-dag",
+  "by": "Q111",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Existing universe-general interface owned by lem-pur-sequence-site-completion-projection. This definition node attaches it without changing that module or the landed def-weil-pbc-ringed-topos-morphism record."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ba3aaf028",
+  "group": "Q111",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ba3aaf028",
+  "group": "Q111",
+  "result": "pass",
+  "note": "Re-delivery after H13 RETURN of a15b126b3163. def-weil-pbc-ringed-topos-morphism and def-pc-kflat-complex records are field-identical to live, so the overwrite is gone. New existing:true def node def-pur-ringed-topos-morphism-of-universes attaches CategoryTheory.RingedToposMorphismOfUniverses (Sheaf.Paper.SequenceSiteCompletionProjection, unchanged module); its statement is verbatim with the live file and its fields match the node and Stacks 01D3/03D6. The item and data node cite it. The item module only moves the right_resolution/shifted_degree fields verbatim into Prop defs purSequenceRightResolutionCompatibility/purSequenceShiftedDegreeCompatibility (bodies text-identical, docstrings present, listed in declarations). The data module is byte-identical, the theorem signature is unchanged and the proof is sorry only. Mathematics as accepted clause by clause last time. Report has Worker report, Second reading by Q111 and repair sections. Advisories: unused plain imports (H9, stage 3); pushforward-composition stmt_dep rendered by direct lim-j normalization. No compile: no file changed."
+ }
+}

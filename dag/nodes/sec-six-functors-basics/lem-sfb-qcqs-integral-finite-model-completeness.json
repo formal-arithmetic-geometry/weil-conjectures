@@ -481,5 +481,27 @@
   "group": "NC",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-694f45417 (reviewer sub-agent of L); spot-checked: I read the item and all 11 steps against the statements of all 33 cited nodes. The delivery has no new nodes, the statement is unchanged, and it drops the unused stmt_dep sk-def-localizing-closure. The item is still unsplit on live and side-live, is in no dropped list and has no repair note. There is no SGA and no cycle. Steps 1-2: an exact, product-preserving restriction along immersions (immersion-limit-preservation with alpha-iso) and along slices (sectionwise limits) carries the strict cone/Roos model and its augmentation (((m,0))_n,0) to the same model on the restriction. completion-triangle-comparison then makes this compatibility hold for c_K itself, so it is a real argument and not an E5 'transport'. Step 3: c_{B_T[0]} is an isomorphism by derived-nakayama-resolution, qlbar-colimit-x-integral-limit(3) (B = lim k_n), Milnor-epimorphic and Roos invariance under levelwise quasi-isomorphisms. I checked that the cone projection commutes with the transitions and the augmentation. Step 4: two-term free resolutions handle torsion P (tested A/pi^a); a triangle morphism, the five lemma and cover conservativity finish it. Steps 5-6: the qcqs refinement tree (quasi-compact open children, leaf-to-stratum morphisms) and a stated finite upward induction with open/closed detection on each H^q of the cone. Step 7: truncation triangles. Steps 8-10: the K-flat reduction gives [k_n^a -> k_n^b], with finite constant ker and coker in [-1,0], constructible in both senses; dbc-triangulated holds for any scheme and gives the bound [r-1,s]. Step 11: sk-thm-pe-constructible-comparison (qcqs, discrete Noetherian k_n) supplies the retained pair (L_n, alpha_n), and Stacks 09AL is checked. Nothing uses ell invertible or Noetherianity, so the full scope is kept, and the parent closed-base-change steps 2-3 get exactly completeness plus an etale-origin L_1. Duplicates: fix-constructible-tensor-completion assumes ell invertible; the integral criteria and adic-stratum-completion-unit are Noetherian; residue-class-triangle-closure is only the 2-out-of-3 closure. None of them is the item. All off-route uses are declared in tool_uses and I accept them as generic tools. FIX (C1/C3): step 5 pulled back the trivializing cover and identified the iterated leaf restriction with t^*(M|_{S_alpha}) without a citation. I added det-pe-topos-functoriality-inverse-image (1) and (5) to its text and uses; proof_deps is unchanged. Advisory: 09AI is a section label.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.QcqsIntegralFiniteModelCompleteness",
+  "declaration": "AlgebraicGeometry.ProEtale.qcqs_integral_finite_model_completeness",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.HasClassicalFiniteReduction",
+   "AlgebraicGeometry.ProEtale.qcqs_integral_finite_model_completeness"
+  ],
+  "file": "lean/Sheaf/Paper/QcqsIntegralFiniteModelCompleteness.lean",
+  "statement": "theorem qcqs_integral_finite_model_completeness (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (V : Scheme.{u}) [CompactSpace V] [QuasiSeparatedSpace V] (J : ConstantModelConstructibleFiniteTor (DerivedNakayama.integerRing l E) V) : IsDerivedComplete l E V J.obj ∧ ∀ n : ℕ, HasClassicalFiniteReduction l E V J.obj n",
+  "branch": "newtargets-dag",
+  "by": "O1",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dedf65045",
+  "group": "O1",
+  "result": "pass",
+  "note": "I read the item node, all 7 stmt_dep records and their side-live Lean (CondensedConstantConstructibility, DerivedCompletion, DerivedNakayamaResolution, FiniteDiscreteOrdinaryEncoding/Equivalence, FixedEtaleOriginWitness) against the delivered QcqsIntegralFiniteModelCompleteness.lean. Every clause matches: J in ConstantModelConstructibleFiniteTor(integerRing) on an arbitrary qcqs V, with no Noetherian or l-invertibility hypothesis; IsDerivedComplete is the recorded strict-tower augmentation; for all n the levels n+1 cover every n>=1; the actual derivedReduction is bounded constructible internally and ordinarily through a pinned Encoding (functor equations, constant-normalized ringIso), with a D+ proof and the retained FixedEtaleOriginWitness pair on the same image; the coefficient topology is the same quotient topology, so no transport is needed. Edge cases (empty V, torsion models, level 1, universes as in the dependency interfaces) are covered. Only the item's lean field changed, the statement is verbatim, docstrings carry source/blueprint and the 11 steps, lines are <=100, the proof is sorry only, the helper def is not hollow, and the imports follow the convention. No duplicate: the related results are Noetherian or a different level-1 predicate. Advisory: Encoding, ordinaryBoundedConstructible and DerivedNakayama.integerRing are used through re-exports without their owner nodes in stmt_deps, which stage 2 cannot add. I ran no compile because I changed no file."
  }
 }

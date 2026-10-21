@@ -15,7 +15,10 @@
   "def-pc-kflat-complex",
   "def-pur-kinjective-complex",
   "def-weil-pbc-ringed-topos-morphism",
-  "def-pc-flat-sheaf-modules"
+  "def-pc-flat-sheaf-modules",
+  "def-pur-sequence-adjoint-resolution-data",
+  "def-weil-finite-field-fiber",
+  "def-pur-ringed-topos-morphism-of-universes"
  ],
  "proof": [
   {
@@ -328,5 +331,32 @@
   "group": "Q107",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q107-bb8da660b (reviewer sub-agent of L); spot-checked: Faithful 9-step split; I read all of it. Nothing supersedes the delivery and it is not on the drop list: the item, created by Q120's re-split of lem-pur-reduction-limit-shift-adjunction, is still unsplit in live and side-live. The statement is byte-identical; the two added stmt_deps (ringed-topos morphism, flat sheaf modules) are both used by the statement. There are no new nodes, no cycle (its only citer is the parent) and no SGA citation. The only off-route node, lem-sfb-resolving-derived-adjunction-normalization, is declared in tool_uses, and I accept the generic tools. Source checks: Stacks section-derived-limits (sites-cohomology.tex 5016-5060) matches step 1 (sheaves are towers, g^{-1} is the constant system, g_*=lim); Tag 0D6E gives existence only, and the lim j normalization comes from the DAG statement of lem-weil-pbc-ringed-topoi-derived-pushforward-composition. Step checks: step 2's tensor and transpose formulas are the ones in lem-coef-sequence-projection-derived-adjunction. In step 4 I recomputed the (-1)^{rp} sign isomorphism (d_T coefficient (-1)^{r(p+1)}, d_Q coefficient (-1)^{rp+p+r}); p^*(Q[r])=(p^*Q)[r] holds literally. Step 5's composition normalization does not need UI to be K-injective. Step 6's b, with b·Ui homotopic to v, comes from the Hom bijections into K-injectives plus two-out-of-three. Step 7: the resolving-normalization hypotheses hold (flat-term K-flat resolving class, p^* inverts quasi-isomorphisms there), and it pins the Hom bijection with transpose (lim j)·adj_0(f). Step 8: lim(j[r])=(lim j)[r], with degree-i map lim j^{i+r}. Edge cases checked: r=0, r=±1, r+s, non-flat R→R/t^n, empty W and the zero complex. Advisory 1: the proof is 8306 characters, longer than the parent's re-split threshold, but no rule or repair note on this item forbids it. Advisory 2: the 'any supplied calculus S' identification rests on the calc statement's 'canonical derived adjunction' (its own step 1 builds it from the same two sequence lemmas); levelwise unit/counit data alone would leave a phantom automorphism of L. Advisory 3: Ra_*=D(U) on K-injectives is a one-line fact left implicit."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PurSequenceAdjointResolutionShifts",
+  "declaration": "WeilConjectures.purSequenceAdjointResolutionShifts",
+  "declarations": [
+   "WeilConjectures.purSequenceShiftedReplacement",
+   "WeilConjectures.PurSequenceLeftShiftModels",
+   "WeilConjectures.PurSequenceRightShiftModels",
+   "WeilConjectures.PurSequenceAdjointShifts",
+   "WeilConjectures.purSequenceAdjointResolutionShifts",
+   "WeilConjectures.purSequenceRightResolutionCompatibility",
+   "WeilConjectures.purSequenceShiftedDegreeCompatibility"
+  ],
+  "file": "lean/Sheaf/Paper/PurSequenceAdjointResolutionShifts.lean",
+  "statement": "theorem purSequenceAdjointResolutionShifts (F : FiniteFieldDatum.{t}) (hl : l ≠ F.p) [W.Over (Spec (.of F.k))] [LocallyOfFiniteType (W ↘ Spec (.of F.k))] [QuasiCompact (W ↘ Spec (.of F.k))] (S : CoefficientDerivedSystemCalculus l E W) (hS : CoefficientDerivedSystemCoherence l E W S) : ∃ A : PurSequenceResolutionData l E W S, Nonempty (PurSequenceAdjointShifts l E W S A.ordinary A.derived)",
+  "branch": "sheaf-dag",
+  "by": "Q111",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ba3aaf028",
+  "group": "Q111",
+  "result": "pass",
+  "note": "Re-delivery after H13 RETURN of a15b126b3163. def-weil-pbc-ringed-topos-morphism and def-pc-kflat-complex records are field-identical to live, so the overwrite is gone. New existing:true def node def-pur-ringed-topos-morphism-of-universes attaches CategoryTheory.RingedToposMorphismOfUniverses (Sheaf.Paper.SequenceSiteCompletionProjection, unchanged module); its statement is verbatim with the live file and its fields match the node and Stacks 01D3/03D6. The item and data node cite it. The item module only moves the right_resolution/shifted_degree fields verbatim into Prop defs purSequenceRightResolutionCompatibility/purSequenceShiftedDegreeCompatibility (bodies text-identical, docstrings present, listed in declarations). The data module is byte-identical, the theorem signature is unchanged and the proof is sorry only. Mathematics as accepted clause by clause last time. Report has Worker report, Second reading by Q111 and repair sections. Advisories: unused plain imports (H9, stage 3); pushforward-composition stmt_dep rendered by direct lim-j normalization. No compile: no file changed."
  }
 }
