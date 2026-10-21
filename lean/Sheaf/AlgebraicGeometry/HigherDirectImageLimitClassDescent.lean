@@ -10,7 +10,7 @@ public import Mathlib.Algebra.Category.Grp.Adjunctions
 public import WeilConjectures.AlgebraicGeometry.AbelianHigherDirectImageMap
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Sheaf.AlgebraicGeometry.HigherDirectImageLimitPresheafClassDescent
+import WeilConjectures.AlgebraicGeometry.HigherDirectImageLimitPresheafClassDescent
 
 /-! # Classes in fibers of higher direct images under scheme limits
 
@@ -98,6 +98,7 @@ theorem exists_higherDirectImage_limit_fiber_rep {S : Scheme.{v}}
         (((S.uliftPointSmallEtale s).sheafFiber
           (A := AddCommGrpCat.{v + 1})).map (η.app i)) y = x := by
   classical
+  have _hK := @hK
   let T := (DerivedCategory.Plus.homologyFunctor _ (p : ℤ)).obj
     (R+((c.pt.hom)_*[AddCommGrpCat.{v + 1}]).obj
       ((DerivedCategory.Plus.singleFunctor _ 0).obj (colimit H)))
@@ -111,7 +112,7 @@ theorem exists_higherDirectImage_limit_fiber_rep {S : Scheme.{v}}
   let Φ := S.uliftPointSmallEtale s
   have : LocallySmall.{v + 1} S.Etale := locallySmall_max.{v + 1, v, v + 1}
   obtain ⟨e, hlift⟩ := exists_higherDirectImage_limit_presheaf_class_cover
-    D c hc F φ hφid hφcomp H eH hH p K eK hK η hη
+    D c hc F φ hφid hφcomp H eH hH p K eK η hη
   let τ : P ⟶ T.obj := toSheafify S.smallEtaleTopology P ≫ e.hom.hom
   have : Presheaf.IsLocallySurjective S.smallEtaleTopology τ := by
     dsimp [τ]
