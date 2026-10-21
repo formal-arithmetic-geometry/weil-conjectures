@@ -21,9 +21,110 @@
   "def-pur-sheaf-tensor-product",
   "def-pc-tensor-complex-sheaves"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For any $B$-module sheaf $F$ and finite $r$, define $c_{F,r}:F\\otimes_B B^r\\to F^r$ by $z\\otimes(b_j)\\mapsto(b_jz)_j$. This is balanced on sections and commutes with restrictions. The sheafification universal property in [def-weil-presheaf-modules-sheafification], applied to [def-pur-sheaf-tensor-product], gives the sheaf map. Its inverse is $(z_j)\\mapsto\\sum_j z_j\\otimes e_j$, using the sheafification-unit images of these tensors. The composites are the identity: one gives $(z_j)$, while the other gives $\\sum_j b_jz\\otimes e_j=z\\otimes\\sum_j b_je_j=z\\otimes(b_j)$. These identities on the presheaf tensor imply the identity after sheafification by its universal property. All maps are natural in $F$, including $r=0$, when both objects are zero. Composing with $1_F\\otimes\\theta_i$ gives the specified $\\gamma_i$ when $F=N$.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section 03EK (section-tensor-product), tensor as sheafified sectionwise tensor; coordinate verification"
+   }
+  },
+  {
+   "text": "In the abelian module-sheaf category [def-weil-sheaf-of-modules-category], taking $r$ copies preserves kernels and cokernels: a map into a finite product is uniquely its coordinate maps, so the kernel is the product of the kernels; dually, maps out of the finite biproduct identify its cokernel with the biproduct of the cokernels. Thus it preserves images and short exact sequences. Step 1 naturally identifies $F\\mapsto F\\otimes_B K^i$ with $F\\mapsto F^{r_i}$. Consequently this tensor functor is exact, which is precisely the flatness of $K^i$ in [def-pc-flat-sheaf-modules]. This argument is in the abelian category, without asserting surjectivity on sections of an arbitrary sheaf epimorphism.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-pc-flat-sheaf-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Definition 03ER (definition-flat), sheaf flatness; elementary finite-biproduct argument"
+   }
+  },
+  {
+   "text": "The complex $K$ is zero above $b$ by hypothesis and all its terms are flat by step 2. Apply [lem-weil-pbc-independent-bounded-flat-kflat] to $(\\mathcal C,B,K,b)$ to obtain K-flatness for the direct-sum total tensor. The site's objects and arrows are sets by the site convention in [def-weil-pbc-sites-and-cohomology]; use a common containing coefficient universe, as in the module-sheaf and derived-category conventions. This supplies the required essential smallness and requires no points of the site.",
+   "uses": [
+    "lem-weil-pbc-independent-bounded-flat-kflat",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YQ (lemma-bounded-flat-K-flat)"
+   }
+  },
+  {
+   "text": "The ordinary symmetry of sheaf tensor is induced by $x\\otimes y\\mapsto y\\otimes x$ by [lem-pc-sheaf-modules-tensor-closed]. For any two complexes $P,L$, define $\\sigma:\\operatorname{Tot}(P\\otimes_B L)\\to\\operatorname{Tot}(L\\otimes_B P)$ on the $(p,q)$ summand by $x\\otimes y\\mapsto(-1)^{pq}y\\otimes x$. With the total differential in [def-pc-tensor-complex-sheaves], $\\sigma d$ has coefficients $(-1)^{(p+1)q}=(-1)^{pq+q}$ on $y\\otimes d_Px$ and $(-1)^{p+p(q+1)}=(-1)^{pq}$ on $d_Ly\\otimes x$; these are the coefficients in $d\\sigma$. Hence this is a cochain map. Interchanging again gives the sign $(-1)^{pq+qp}=1$, so it is an isomorphism. The formulas commute with restrictions and cochain maps, and induce maps on the direct sum since each summand goes to one summand. In particular for $L=N[0]$ all interchange signs are $1$.",
+   "uses": [
+    "lem-pc-sheaf-modules-tensor-closed",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Following Definition 06YU (definition-derived-tor), canonical symmetry; explicit total-complex sign check"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-kflat-fixed-tensor-triangulated], the K-flat complex $K$ with flat terms has a canonical comparison $Q\\operatorname{Tot}(K\\otimes_B N[0])\\cong QK\\otimes_B^{\\mathbf L}QN[0]$, with no condition on $N$. By [def-weil-abstract-derived-category], $Q\\epsilon:QK\\to M[0]$ is invertible. Compose $(Q\\epsilon\\otimes_B^{\\mathbf L}1)^{-1}$, the inverse of this comparison, and $Q\\sigma$ from step 4. This gives $M[0]\\otimes_B^{\\mathbf L}N[0]\\cong Q\\operatorname{Tot}(N[0]\\otimes_B K)$. Thus the comparison uses the given augmentation, the actual total tensor, and its signed interchange. On resolving complexes that interchange is precisely the map of step 4; its naturality makes it compatible with the inverted quasi-isomorphisms in the fixed-tensor descent statement. No flatness of $N$ is used.",
+   "uses": [
+    "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YP (lemma-K-flat-quasi-isomorphism) and 06YU (definition-derived-tor), one-sided K-flat computation and localization"
+   }
+  },
+  {
+   "text": "In $\\operatorname{Tot}(N[0]\\otimes_B K)$ the only nonzero summand of total degree $i$ has bidegree $(0,i)$. Its term is $N\\otimes_B K^i$ and its differential is $1_N\\otimes d_K^i$, since $d_{N[0]}=0$ and $(-1)^0=1$ [def-pc-tensor-complex-sheaves]. Transport through $\\gamma_i$ of step 1: the differential becomes $\\delta_i=\\gamma_{i+1}(1_N\\otimes d_K^i)\\gamma_i^{-1}$, and $\\delta_{i+1}\\delta_i=\\gamma_{i+2}(1_N\\otimes(d_K^{i+1}d_K^i))\\gamma_i^{-1}=0$. Hence the $\\gamma_i$ are a cochain isomorphism onto $T_N(K)$. If the transported differential of $K$ has matrix $(a^i_{kj})$ on an object of the site, it sends $e_j$ to $\\sum_k a^i_{kj}e_k$. Applying $1_N\\otimes d$ to $\\sum_j z_j\\otimes e_j$ and then $\\gamma_{i+1}$ gives $\\bigl(\\sum_j a^i_{kj}z_j\\bigr)_k$. This formula respects restriction, so also applies to locally specified matrices. Composing its localization with step 5 proves the stated isomorphism and the asserted differential.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section 03EK (section-tensor-product), balanced tensor relations; total differential as in homology Definition 012Z"
+   }
+  },
+  {
+   "text": "For a specified exact sequence $0\\to B^m\\xrightarrow fB^n\\xrightarrow gM\\to0$, put $K^{-1}=B^m$, $K^0=B^n$, $d^{-1}=f$, all other terms zero, and $\\epsilon^0=g$. Since $gf=0$ this is a cochain augmentation. Its cohomology is $H^{-1}K=\\ker f=0$, $H^0K=\\operatorname{coker}f\\cong M$ via $g$, and zero in all other degrees. The last isomorphism follows from exactness: $\\operatorname{im}f=\\ker g$ and $g$ is an epimorphism in the abelian category [def-weil-sheaf-of-modules-category]. Thus $\\epsilon$ is a quasi-isomorphism by [def-pc-quasi-iso-modules]. A specified isomorphism $B^r\\to M$ likewise gives a cochain isomorphism in degree zero. Steps 1–6 apply to these very complexes, with identity coordinate trivializations and ranks zero outside $[-1,0]$ or $\\{0\\}$, giving the two displayed special cases and their actual transported differentials. The cohomology formula used here is that of [def-weil-abstract-derived-category].",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-pc-quasi-iso-modules",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Definition 0115 (definition-quasi-isomorphism-cochain); direct kernel/cokernel check of the augmentations"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-presheaf-modules-sheafification",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-flat-sheaf-modules",
+  "lem-weil-pbc-independent-bounded-flat-kflat",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "def-pc-tensor-complex-sheaves",
+  "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+  "def-weil-abstract-derived-category",
+  "def-pc-quasi-iso-modules"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YQ, 06YP and 06YU (bounded-flat-K-flat and K-flat derived tensor); finite-coordinate expansion from sites-modules.tex Section 03EK; augmentation checked from homology Definition 0115"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -66,10 +167,38 @@
    "results": "OK: 8 hit(s); returned names/files: LightCondensed.instMonoidalLightCondSetLightCondModFree, CategoryTheory.Tor'_obj_obj, CategoryTheory.Tor_obj, CategoryTheory.Tor, CategoryTheory.Tor', LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalCategoryLightCondMod, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf",
    "date": "2026-10-21",
    "verdict": "no match: projective Tor, localization, and monoidal complex tools do not supply the K-flat sheaf resolution and coordinate calculation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor product computed from a specified bounded above resolution by finite free sheaves of modules",
+   "results": "OK: 8 hit(s); returned names: SheafOfModules.ιFree, SheafOfModules.free, CategoryTheory.Sheaf.tensorProd_isSheaf, Derivation.tensorProductTo_tmul, CategoryTheory.Tor, ModuleCat.FreeMonoidal.μIso, SheafOfModules.freeCofan, SheafOfModules.isFinitePresentation",
+   "date": "2026-10-21",
+   "verdict": "no match: free sheaves, module-level flat tensor exactness, projective-resolution Tor and localization of quasi-isomorphisms do not state this K-flat sheaf-resolution computation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded above complex of finite free module sheaves is K flat and computes derived tensor with any module sheaf by tensoring its differential matrices",
+   "results": "OK: 8 hit(s); returned names: Module.Flat.rTensor_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, Module.Flat.iff_rTensor_exact', Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.instPreservesFiniteLimitsModuleCatTensorLeftOfCarrier, Module.Flat.rTensor_exact, Module.Flat.iff_rTensor_exact",
+   "date": "2026-10-21",
+   "verdict": "no match: free sheaves, module-level flat tensor exactness, projective-resolution Tor and localization of quasi-isomorphisms do not state this K-flat sheaf-resolution computation"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedTensor|derived.tensor|IsKFlat",
+   "results": "OK: 0 hit(s); returned names: ; subdirectory Mathlib/Algebra",
+   "date": "2026-10-21",
+   "verdict": "no match: free sheaves, module-level flat tensor exactness, projective-resolution Tor and localization of quasi-isomorphisms do not state this K-flat sheaf-resolution computation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In the derived category of sheaves of modules a finite rank free resolution calculates tensor product by replacing each free summand with the other module",
+   "results": "OK: 8 hit(s); returned names: CategoryTheory.Tor'_obj_obj, CategoryTheory.Tor, LightCondensed.instMonoidalLightCondSetLightCondModFree, CategoryTheory.Tor_obj, CategoryTheory.Tor', LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition', CategoryTheory.Tor'_map_app",
+   "date": "2026-10-21",
+   "verdict": "no match: free sheaves, module-level flat tensor exactness, projective-resolution Tor and localization of quasi-isomorphisms do not state this K-flat sheaf-resolution computation"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-scalar-model-finite-flat-resolution",
@@ -86,5 +215,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-ringed-finite-free-resolution-tensor",
+  "worker": "stage1",
+  "summary": "Kept the complete statement. Reused existing site bounded-flat K-flat and fixed-K-flat tensor descent tools; wrote out finite-coordinate inverses, exactness of finite powers, signed interchange, transported matrix differential and the two augmentation checks. No new nodes. All cited statements were read and quotes recorded.",
+  "blueprint": "Realizes the Local models paragraph of det-def-localizing-closure-ctf-equals-bc: the supplied finite free complex is flat and K-flat, its tensor with any N is the same matrix on finite powers, and length-one/zero augmentations give the indicated degree ranges. No change to unit or chapter route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-independent-bounded-flat-kflat",
+    "why": "General ringed-site bounded-above-flat criterion, applied after proving finite free terms flat; the localizing-closure unit supplies no such general criterion."
+   },
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "Only the ordinary symmetry of sheaf tensor induced by module symmetry is used; the signed cochain formula is checked here. This is a generic structural tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+    "why": "General one-sided K-flat computation of the existing site derived tensor with an arbitrary other complex; needed because the statement of two-resolving-object tensor descent alone does not compute with nonflat N."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-independent-bounded-flat-kflat",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-weil-pbc-kflat-fixed-tensor-triangulated"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-N9-116d0237e",
+  "group": "N9",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N9-116d0237e (reviewer sub-agent of L); spot-checked: I read the whole item and all 7 steps. The delivery adds no new nodes, and there is no repair or re-split note for this item. I checked every cited statement. Step 1: the coordinate isomorphism follows from sectionwise finite products and the sheafification universal property. Step 2: flatness follows because a finite biproduct is exact. Step 3: lem-weil-pbc-independent-bounded-flat-kflat applies (it is Stacks 06YQ, sites-cohomology.tex:3120), and the site convention gives the smallness it needs. Step 4: I recomputed both signs of the signed interchange. Step 5: lem-weil-pbc-kflat-fixed-tensor-triangulated gives the one-sided K-flat comparison without any flatness of N, and Qε is invertible. Step 6: the matrix formula (z_j)↦(Σ_j a_kj z_j)_k is verified on generators. Step 7: the augmentations give H^{-1}=ker f=0 and H^0=coker f≅M via g. This matches the blueprint main-20261015 Local models paragraph (ctf-equals-bc proof, lines 8-16) and the parent lem-sfb-scalar-model-finite-flat-resolution's two citations. Edge cases checked: N=0, zero ranks, and the nonflat Z/2 example, which gives [Z/2 -0-> Z/2]. There is no cycle in the 142-node closure. No SGA source is used. Duplicate candidates were checked and differ: lem-sfb-locally-free-derived-scalars, lem-sf-ringed-finite-free-tensor-complex, lem-weil-pbc-site-tensor-local-model-comparison and lem-trf-finite-filtered-flat-resolution. All three declared tool uses are generic and accepted."
  }
 }
