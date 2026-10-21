@@ -19757,3 +19757,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:22 L: merged deliver/NC/lem-sfb-filtered-ring-object-cocone-colimit (reviewer PASS; first push; new nodes: 0)
 - 03:22 L: merged deliver/NV/lem-sfb-exact-derived-composition (reviewer PASS; first push; new nodes: 0)
 - 03:22 L: returned deliver/N6/lem-pd-module-ringed-topos-derived-comparison (reviewer RETURN: re-split (the human, 2026-10-21): every delivery made before the final requirement is returned and the re-split starts a)
+- 03:22 L: returned deliver/NX/lem-pe-comparison-injective-left-modules-acyclic (reviewer RETURN: re-split (the human, 2026-10-21): every delivery made before the final requirement is returned and the re-split starts a)
