@@ -24,7 +24,15 @@
   "lem-sbc-abelian-higher-direct-image-natural-comparison",
   "def-sbc-raw-restricted-cohomology-comparison-map",
   "def-weil-pbc-etale-cohomology",
-  "def-weil-pbc-sheafification"
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "def-weil-pbc-coherent-higher-image-classes",
+  "def-weil-pbc-tensor-pullback-ordinary-comparison",
+  "def-weil-pbc-abelian-higher-image-class",
+  "def-weil-pbc-etale-tensor-sections-restriction",
+  "def-pbc-canonical-coherent-etale-comparison",
+  "def-sc-ringed-space-module-cohomology",
+  "lem-weil-pbc-qcoherent-normalized-comparison-exists"
  ],
  "proof": [
   {
@@ -311,5 +319,30 @@
   "group": "NE",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NE-7422913ce (reviewer sub-agent of L); spot-checked: Read the item (8 steps), the new node lem-weil-pbc-raw-restricted-class-normalization and every cited statement in full; checked the source at Stacks 03Q8 (etale-cohomology.tex l.7510ff). One fault, fixed (C3/C4): step 6 relied on the dense-subsite comparison isomorphism being compatible with the sheafification units, but the statement of lem-pc-dense-subsite-sheafification-compatibility only gives an isomorphism natural in F. The rewritten step 6 derives the result from that naturality alone. Apply naturality to eta: P~ -> P~^#. Since eta^# is invertible, (eta o u^op)^# is invertible. eta o u^op = iota|_aff is a map between sheaves (P|_aff is isomorphic to T|_aff), so iota|_aff is invertible. Uses and statement are unchanged. Steps 1-5, 7 and 8 checked: qc/separated base change and X_V separated over affine V; etale inverse image is restriction plus module-pullback composition; the module action and clause 3 of cohomology-pullback-functorial; alpha natural and linear via the comparison naturality and the scalar-endomorphism lemma; comparison-lemma hypotheses (1)-(4) for the affine subcategory with the induced topology; non-affine linearity by affine covers and sheaf separation. The new node is true (checked for q=0 and empty V), strictly smaller than the item and not a restatement of any existing node (class-compatibility, natural-iso, functor-iso, raw-class def). It is statement-only and its B fields are fine. Batch-5 flag: lem-trf-sieve-dense-subsite-comparison is a Mathlib leaf (IsDenseSubsite.sheafEquiv) with empty closure, the general comparison lemma and no part of the trace formula or Poincaré duality, so the citation is accepted. All six declared tool_uses are accepted: module-pullback-identity-composition, etale-inverse-image-restriction, module-cohomology-scalar-endomorphism, module-pullback-quasi-coherent, sbc-lem-higher-direct-image-presheaf and cohomology-pullback-functorial. Advisory for the maintainer: 'the canonical comparison of lem-sbc-abelian-higher-direct-image-natural-comparison' points at a statement that only asserts existence (its proof constructs the map). If e is read as an arbitrary witness, e -> -e keeps the stated compatibility. A def node for the constructed comparison would pin kappa. The phrase was inherited from the base statement and is used by 24 nodes.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineCohomologyEtaleModuleRealization",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_affineCohomologyEtaleModuleRealization",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.affineRealizationComparison",
+   "AlgebraicGeometry.Scheme.Modules.affineRealizationRestriction",
+   "AlgebraicGeometry.Scheme.Modules.affineRealizationAffineComparison",
+   "AlgebraicGeometry.Scheme.Modules.affineRealizationSmul",
+   "AlgebraicGeometry.Scheme.Modules.exists_affineCohomologyEtaleModuleRealization"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineCohomologyEtaleModuleRealization.lean",
+  "statement": "theorem exists_affineCohomologyEtaleModuleRealization {X S : Scheme.{u}} (f : X ⟶ S) [QuasiCompact f] [IsSeparated f] (G : X.Modules) [G.IsQuasicoherent] (E : S.Modules) [E.IsQuasicoherent] (q : ℕ) (e : ∀ (V : S.Etale) [IsAffine V.left], ((RingedSpace.moduleCohomology (Limits.pullback V.hom f).toRingedSpace q).obj (affineRealizationCoefficient f G V)) ≃+ Γ((tensorPullback V.hom).obj E, ⊤)) (e_linear : ∀ (V : S.Etale) [IsAffine V.left] (a : Γ(V.left, ⊤)) (x : (RingedSpace.moduleCohomology (Limits.pullback V.hom f).toRingedSpace q).obj (affineRealizationCoefficient f G V)), e V ((Limits.pullback.fst V.hom f).appTop a • x) = a • e V x) (e_natural : ∀ (V V' : S.Etale) [IsAffine V.left] [IsAffine V'.left] (h : V' ⟶ V) (x : (RingedSpace.moduleCohomology (Limits.pullback V.hom f).toRingedSpace q).obj (affineRealizationCoefficient f G V)), e V' (affineRealizationRestriction f G q h x) = etaleTensorSectionsRestriction E h (e V x)) : ∃ (action : ∀ V : S.Etale, Module (ULift.{u + 1} Γ(V.left, ⊤)) ((affineRealizationHigherImage f G q).obj.obj (op V))) (Φ : affineRealizationHigherImage f G q ≅ liftedCoherentEtaleSheaf E), (∀ (V V' : S.Etale) (h : V' ⟶ V) (a : ULift.{u + 1} Γ(V.left, ⊤)) (x : (affineRealizationHigherImage f G q).obj.obj (op V)), (affineRealizationHigherImage f G q).obj.map h.op (affineRealizationSmul (action V) a x) = affineRealizationSmul (action V') (ULift.up (h.left.appTop a.down)) ((affineRealizationHigherImage f G q).obj.map h.op x)) ∧ (∀ (V : S.Etale) (a : Γ(V.left, ⊤)) (x : Sheaf.H (liftedCoherentEtaleSheaf (affineRealizationCoefficient f G V)) q), affineRealizationSmul (action V) (ULift.up a) (affineRealizationClass f G q V x) = affineRealizationClass f G q V (Sheaf.H.map (coherentEtaleMap _ _ ((affineRealizationCoefficient f G V).smulHom ((Limits.pullback.fst V.hom f).appTop a))) q x)) ∧ (∀ (V : S.Etale) (a : ULift.{u + 1} Γ(V.left, ⊤)) (x : (affineRealizationHigherImage f G q).obj.obj (op V)), Φ.hom.hom.app (op V) (affineRealizationSmul (action V) a x) = ULift.up (a.down • (@id Γ((tensorPullback V.hom).obj E, ⊤) (Φ.hom.hom.app (op V) x).down))) ∧ (∀ (V : S.Etale) [IsAffine V.left] (x : Sheaf.H (liftedCoherentEtaleSheaf (affineRealizationCoefficient f G V)) q), Φ.hom.hom.app (op V) (affineRealizationClass f G q V x) = ULift.up (e V (affineRealizationAffineComparison f G q V x))) ∧ (∀ (V : S.Etale) [IsAffine V.left] (z : (Etale.abelianHigherDirectImageRawPresheaf f q (liftedCoherentEtaleSheaf G)).obj (op V)), Φ.hom.hom.app (op V) (Etale.abelianHigherDirectImageClass f q (liftedCoherentEtaleSheaf G) V z) = ULift.up (e V (affineRealizationAffineComparison f G q V (affineRealizationRawEvaluation f G q V z))))",
+  "branch": "newtargets-dag",
+  "by": "NN",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c5d95fe4f",
+  "group": "NN",
+  "result": "pass",
+  "note": "Re-delivery of f860f10c. The commit changes only the item record, 7 new def nodes and 6 modules; no dependency record is touched, so the H13 rebinds are gone. The helpers are owned by def-weil-pbc-etale-cohomology-presentation, def-weil-pbc-derived-ext-evaluation, def-weil-pbc-coherent-etale-restriction and def-weil-pbc-tensor-pullback-ordinary-comparison (leftAdjointUniq iso plus qcoh instance), plus existing:true def-weil-pbc-abelian-higher-image-class and def-weil-pbc-etale-tensor-sections-restriction (signatures match live). The H2 owners are now cited. H3: every clause matches: qc+separated f only, qcoh G/E, q in N, e linear and natural for all affine arrows, ULift u+1, action pinned on all local classes independently of Phi, Phi linear on all V, both affine and raw normalizations; c^q is the exists-unique normalized comparison, which is the comparison-pullback family by that node's proof step 1. Mechanical finding: normalized-comparison-exists (Classical.choose of exists-unique) and module-pullback-quasi-coherent (qcoh conclusion needed for typing) are genuine, PASS on point. Statements are verbatim, declarations complete, no hollow data, no collisions, nothing dropped. Advisory: base-era plain abbrev abelianHigherDirectImageRawPresheaf sits in a theorem module. No file changed, so no compile run; the report records clean scompile."
  }
 }

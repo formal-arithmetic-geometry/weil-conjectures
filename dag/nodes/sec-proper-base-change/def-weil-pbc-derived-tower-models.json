@@ -1,0 +1,100 @@
+{
+ "id": "def-weil-pbc-derived-tower-models",
+ "kind": "definition",
+ "title": "Strict tower complex functor and universal K-injective derived model",
+ "status": "split",
+ "statement": "Let $\\mathcal A,\\mathcal B$ be abelian categories, allowing independent object and morphism universes. Their unbounded derived categories $D(\\mathcal A),D(\\mathcal B)$ are localizations of integer cochain complexes at quasi-isomorphisms, with localization functors $Q_{\\mathcal A},Q_{\\mathcal B}$ [def-weil-abstract-derived-category], in a chosen common localization universe. For an additive functor $G:\\mathcal A\\to\\mathcal B$ [def-weil-pbc-additive-functor], define $\\operatorname{tower}(G):C(\\mathbf N^{op}\\!\\to\\mathcal A)\\to C(\\mathbf N^{op}\\!\\to\\mathcal B)$ by applying $G$ at every tower level and every cochain degree, to transitions, differentials and chain maps. Level $n\\in\\mathbf N$ represents positive level $n+1$. For any functor $H:C(\\mathcal A)\\to C(\\mathcal B)$, a derived model consists of a functor $R:D(\\mathcal A)\\to D(\\mathcal B)$ and a natural transformation $\\eta:H Q_{\\mathcal B}\\to Q_{\\mathcal A}R$ exhibiting $R$ as the total right derived functor: every natural transformation $H Q_{\\mathcal B}\\to Q_{\\mathcal A}T$, for $T:D(\\mathcal A)\\to D(\\mathcal B)$, factors uniquely through $\\eta$ by a natural transformation $R\\to T$. In addition, $\\eta_I$ is an isomorphism for every K-injective complex $I$, where K-injective means every chain map from an acyclic complex to $I$ is null-homotopic. This defines the data of a model and asserts no existence of such a model.",
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-additive-functor"
+ ],
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 070K (lemma-enough-K-injectives-implies) and 070Y (lemma-K-injective-defined), universal total-derived unit and computation on K-injectives; levelwise strict tower functor from sites-cohomology.tex Tag 0A07 (lemma-Rf-commutes-with-Rlim), first proof."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Total right derived functor model with a universal unit invertible on K injective complexes and levelwise functor on strict tower complexes",
+   "results": "8 hits: CategoryTheory.Functor.totalRightDerived, rightDerived, totalLeftDerived, rightDerivedToHomotopyCategory, CategoryTheory.NatTrans.rightDerivedToHomotopyCategory_id, CategoryTheory.Functor.totalRightDerivedUnit, instIsRightDerivedFunctorTotalRightDerivedTotalRightDerivedUnit, rightDerived_map_eq.",
+   "date": "2026-10-21",
+   "verdict": "Mathlib has the universal derived functor APIs, but not this bundle with K-injective computation or this strict-tower abbreviation; reuse the existing project declarations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsRightDerivedFunctor, CochainComplex.IsKInjective",
+   "results": "0 hits.",
+   "date": "2026-10-21",
+   "verdict": "no exact Mathlib match; the exact project declarations already exist."
+  },
+  {
+   "tool": "grep",
+   "query": "structure DerivedModel|abbrev tower|IsRightDerivedFunctor",
+   "results": "25 hits, including Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean:55 (IsRightDerivedFunctor) and localization derivability APIs. Separate rg of lean/WeilConjectures/CategoryTheory and lean/Sheaf/CategoryTheory finds Sheaf/CategoryTheory/ExactAdjointTowerModels.lean; dag/nodes/sec-proper-base-change records these helpers only in lem-weil-pbc-exact-adjoint-tower-models, whose main statement is exists_models.",
+   "date": "2026-10-21",
+   "verdict": "exact project match: CategoryTheory.ExactAdjointTowerModels.tower and DerivedModel. Add an existing:true definition record; do not copy either declaration."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-flat-scalar-tower-limit-square",
+  "date": "2026-10-21",
+  "group": "NV"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-completed-exchange-coherence",
+   "place": "Second paragraph, conjugation by direct-image/limit isomorphisms: strict tower functors and their universal total-derived units, as used in the scalar normalization square.",
+   "via": [
+    "lem-weil-pbc-flat-scalar-tower-limit-square",
+    "lem-weil-pbc-ordered-exchange-coefficient-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ExactAdjointTowerModels",
+  "declaration": "CategoryTheory.ExactAdjointTowerModels.DerivedModel",
+  "declarations": [
+   "CategoryTheory.ExactAdjointTowerModels.tower",
+   "CategoryTheory.ExactAdjointTowerModels.DerivedModel"
+  ],
+  "statement": "structure DerivedModel (H : CochainComplex A ℤ ⥤ CochainComplex B ℤ)",
+  "branch": "newtargets-dag",
+  "by": "NV",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Ownership record for exactly the already published plain abbreviation tower and structure DerivedModel. The consumer supplies the actual model data; it does not choose from exists_models or use its existence theorem. No Lean declaration is moved, copied or changed."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2e1dd41d3",
+  "group": "NV",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2e1dd41d3",
+  "group": "NV",
+  "result": "pass",
+  "note": "Re-delivery after the H2 RETURN of 5703f407c8c9; item .lean byte-identical (sha edcf64e8). H2 repaired as required: theorem dep lem-weil-pbc-exact-adjoint-tower-models replaced by new existing:true def node def-weil-pbc-derived-tower-models on the unchanged ExactAdjointTowerModels module, owning exactly tower and DerivedModel. tower is levelwise whiskering plus mapHomologicalComplex; DerivedModel has functor, unit, IsRightDerivedFunctor and IsIso on K-injectives, matching the node text; universes independent. Item uses only these two declarations (no exists_models/Models/NormalizedRoos). Statement re-checked: chi/d fixed by the OrdinaryComparisonsNormalized clause, levelwise agreement and unit normalization; kappa fixed by limit.post and the dependency's a-normalization; lambdaU/V are conclusions with limit.post ordinary maps; square types match the node for all Z; lean.statement verbatim; one sorry; docstrings ok. Advisories: unused public theorem-module imports (H9); overlap with lem-cbc-flat-scalar-direct-image-limit-coherence. No compile (no file changed)."
+ }
+}

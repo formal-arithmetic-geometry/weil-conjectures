@@ -1,0 +1,129 @@
+{
+ "id": "def-weil-pbc-derived-ext-evaluation",
+ "kind": "definition",
+ "title": "Evaluation of a represented Ext class under a right derived functor",
+ "status": "split",
+ "statement": "Let $C$ be an abelian category [def-sp-abelian] with a chosen derived category [def-weil-abstract-derived-category], enough injectives [def-sp-enough-injectives], K-injective resolutions, and Ext groups in universe $u+1$, interpreted as the chosen small presentation of the shifted derived Hom groups. Let $P:C\\to\\mathrm{Ab}_{u+1}$ be additive and left exact, with its canonical total right derived functor and single-object cohomology comparison [src-right-derived-functor-plus-compatibility]. For $A,B\\in C$, $q\\in\\mathbb N$, $g\\in P(A)$, and $x\\in\\operatorname{Ext}^q(A,B)$, define the derived evaluation of $x$ at $g$ to be the following element of $H^q(RP(B[0]))$. Carry $g$ back through the canonical isomorphism $H^0(RP(A[0]))\\simeq P(A)$, apply $H^0$ of $RP$ of the represented morphism $x:A[0]\\to B[0][q]$, then apply the canonical shift comparison $RP(B[0][q])\\simeq RP(B[0])[q]$ and the cohomology shift isomorphism $H^0(RP(B[0])[q])\\simeq H^q(RP(B[0]))$. Finally apply the canonical identification of the derived single object with the localization of its single cochain complex, so that the target is literally the localization-based presentation of $H^q(RP(B[0]))$. All comparisons are the existing derived-functor constructions.",
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category",
+  "def-sp-enough-injectives",
+  "src-right-derived-functor-plus-compatibility"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "section-cohomology-sheaves, equation-cohomology, and section-derived-functors: right-derived sections and the derived-Hom evaluation, expanded through the canonical degree-zero and shift comparisons (Derived Categories, Tag 05RR)."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Evaluate a represented Ext class under a left exact additive functor on a degree zero section using right derived functor and shift comparison",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.toRightDerivedZero\", \"module\": \"Mathlib.CategoryTheory.Abelian.RightDerived\", \"type\": \"(F : C ⥤ D) [F.Additive] : F ⟶ F.rightDerived 0\", \"doc\": \"For an additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories with enough injectives, this constructs a natural transformation from $ F $ to its 0th right-derived functor $ R^\"}\n  {\"name\": \"CategoryTheory.Functor.rightDerivedZeroIsoSelf_hom_inv_id_app_assoc\", \"module\": \"Mathlib.CategoryTheory.Abelian.RightDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasInjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D) [inst_5 : F.Additiv\", \"doc\": \"For an additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories with enough injectives, the 0th right-derived functor $ R^0F $ is isomorphic to $ F $. This isomorphism is constr\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.mapExactFunctor\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.Map\", \"type\": \"[HasExt.{w} C] [HasExt.{w'} D] {X Y : C} {n : ℕ} (f : Ext.{w} X Y n) : Ext.{w'} (F.obj X) (F.obj Y) n\", \"doc\": \"For an exact functor $ F: \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories and objects $ X, Y \\\\in \\\\mathcal{C} $, this defines the induced group homomorphism $ \\\\text{Ext}^n(X, Y) \\\\to \\\\text{Ext}\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.Map\", \"type\": \"[HasDerivedCategory.{t} C] [HasDerivedCategory.{t'} D] [HasExt.{w} C] [HasExt.{w'} D] {X Y : C} {n : ℕ}\\n  (e : Ext X Y n) :\\n  (e.mapExactFunctor F).hom =\\n    (F.mapDerivedCategorySingleFunctor 0).inv.app X ≫\\n      e.hom.map F.mapDerivedCategory ≫ ((F.mapDerivedCategorySingleFunctor 0).hom.app Y)⟦(n \", \"doc\": \"For an exact functor $ F: \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories and an element $ e \\\\in \\\\text{Ext}^n(X, Y) $, the induced map $ \\\\text{Ext}^n(X, Y) \\\\to \\\\text{Ext}^n(F(X), F(Y)) $ corr\"}\n  {\"name\": \"CategoryTheory.Functor.rightDerivedZeroIsoSelf.congr_simp\", \"module\": \"Mathlib.CategoryTheory.Abelian.RightDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasInjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D) [inst_5 : F.Additiv\", \"doc\": \"For an additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories with enough injectives, the 0th right-derived functor $ R^0F $ is isomorphic to $ F $. This isomorphism is constr\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.mk₀\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic\", \"type\": \"(f : X ⟶ Y) : Ext X Y 0\", \"doc\": \"For objects $ X $ and $ Y $ in an abelian category $ \\\\mathcal{C} $, the Ext group in degree $ n $ is defined as the hom-set in the derived category between the $ n $-shifted single-term cochain comple\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.mapExactFunctor.congr_simp\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.Map\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] {D : Type u'}\\n  [inst_2 : CategoryTheory.Category.{v', u'} D] [inst_3 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D)\\n  [inst_4 : F.Additive] [inst_5 : CategoryTheory.Limits.PreservesFiniteLimit\", \"doc\": \"For an exact functor $ F: \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories and objects $ X, Y \\\\in \\\\mathcal{C} $, applying $ F $ to the $ n $-shifted cochain complexes of $ X $ and $ Y $ induce\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic\", \"type\": \"(X Y : C) (n : ℕ) : Type w\", \"doc\": \"For objects $ X $ and $ Y $ in an abelian category $ \\\\mathcal{C} $, the Ext group in degree $ n $ is defined as the hom-set in the derived category between the $ n $-shifted single-term cochain comple\"}\n",
+   "date": "2026-10-21",
+   "verdict": "The individual Ext and derived comparison constructions exist; no evaluation composite of this signature."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluate a represented Ext class under a left exact additive functor on a degree zero section using right derived functor and shift comparison",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Abelian.Ext.mapExactFunctor\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] →\\n      {D : Type u'} →\\n        [inst_2 : CategoryTheory.Category.{v', u'} D] →\\n          [inst_3 : CategoryTheory.Abelian D] →\\n            (F : CategoryTheory.Functor C D) →\\n              [F.Additiv\", \"doc\": \"For an exact functor $ F: \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories and objects $ X, Y \\\\in \\\\mathcal{C} $, this defines the induced group homomorphism $ \\\\text{Ext}^n(X, Y) \\\\to \\\\text{Ext}\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.mapExactFunctor_zero\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] {D : Type u'}\\n  [inst_2 : CategoryTheory.Category.{v', u'} D] [inst_3 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D)\\n  [inst_4 : F.Additive] [inst_5 : CategoryTheory.Limits.PreservesFiniteLimit\", \"doc\": \"For an exact functor $ F: \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories and objects $ X, Y \\\\in \\\\mathcal{C} $, the induced group homomorphism $ \\\\text{Ext}^n(X, Y) \\\\to \\\\text{Ext}^n(F(X), F(Y)\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] {D : Type u'}\\n  [inst_2 : CategoryTheory.Category.{v', u'} D] [inst_3 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D)\\n  [inst_4 : F.Additive] [inst_5 : CategoryTheory.Limits.PreservesFiniteLimit\", \"doc\": \"For an exact functor $ F: \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories and an element $ e \\\\in \\\\text{Ext}^n(X, Y) $, the induced map $ \\\\text{Ext}^n(X, Y) \\\\to \\\\text{Ext}^n(F(X), F(Y)) $ corr\"}\n  {\"name\": \"CategoryTheory.Functor.mapExtAddHom_apply\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] {D : Type u'}\\n  [inst_2 : CategoryTheory.Category.{v', u'} D] [inst_3 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D)\\n  [inst_4 : F.Additive] [inst_5 : CategoryTheory.Limits.PreservesFiniteLimit\", \"doc\": \"For an exact functor $ F: \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories and objects $ X, Y \\\\in \\\\mathcal{C} $, the induced additive group homomorphism $ \\\\operatorname{Ext}^n(X,Y) \\\\to \\\\operat\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.hom'\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] →\\n      [inst_2 : CategoryTheory.HasExt C] →\\n        {X Y : C} →\\n          {n : ℕ} →\\n            CategoryTheory.Abelian.Ext X Y n →\\n              CategoryTheory.ShiftedHom ((DerivedCategory.singleFun\", \"doc\": \"For objects $ X $ and $ Y $ in an abelian category $ \\\\mathcal{C} $, this function maps an element of the Ext group $ \\\\text{Ext}^n(X, Y) $ to the hom-set in the derived category between the $ n $-shift\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.hom\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] →\\n      [inst_2 : CategoryTheory.HasExt C] →\\n        {X Y : C} →\\n          [inst_3 : HasDerivedCategory C] →\\n            {a : ℕ} →\\n              CategoryTheory.Abelian.Ext X Y a →\\n                Cat\", \"doc\": \"For objects $ X $ and $ Y $ in an abelian category $ \\\\mathcal{C} $, this function maps an element of the Ext group $ \\\\text{Ext}^a(X, Y) $ in degree $ a $ to the hom-set in the derived category between\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.mk₀_hom\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.HasExt C] {X Y : C} [inst_3 : HasDerivedCategory C] (f : X ⟶ Y),\\n  (CategoryTheory.Abelian.Ext.mk₀ f).hom =\\n    CategoryTheory.ShiftedHom.mk₀ (↑0) CategoryTheory.Abelian.Ext.mk₀._p\", \"doc\": \"For objects $ X $ and $ Y $ in an abelian category $ \\\\mathcal{C} $, the function maps a morphism $ f : X \\\\to Y $ to the hom-set in the derived category between the $ a $-shifted single-term cochain co\"}\n  {\"name\": \"CategoryTheory.Functor.mapExtLinearMap_apply\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] {D : Type u'}\\n  [inst_2 : CategoryTheory.Category.{v', u'} D] [inst_3 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D)\\n  [inst_4 : F.Additive] [inst_5 : CategoryTheory.Limits.PreservesFiniteLimit\", \"doc\": \"For an exact functor $ F: \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between $ R $-linear abelian categories and objects $ X, Y \\\\in \\\\mathcal{C} $, the induced map $ \\\\operatorname{Ext}^n(X,Y) \\\\to \\\\operatorname{Ext}\"}\n",
+   "date": "2026-10-21",
+   "verdict": "The individual Ext and derived comparison constructions exist; no evaluation composite of this signature."
+  },
+  {
+   "tool": "grep",
+   "query": "derivedExtEvaluation|Ext.*[Ee]valuat|[Ee]valuat.*Ext",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/Lean/Elab/InfoTree.lean\", \"line\": \"55\", \"text\": \"`f` is **only** evaluated on nodes when some context is present. An initial context should be\"}\n  {\"file\": \"Mathlib/Lean/Elab/InfoTree.lean\", \"line\": \"81\", \"text\": \"`f` is **only** evaluated on nodes when some context is present. An initial context should be\"}\n  {\"file\": \"Mathlib/Geometry/RingedSpace/LocallyRingedSpace/ResidueField.lean\", \"line\": \"26\", \"text\": \"- `evaluationMap`: a morphism of locally ringed spaces induces a morphism, i.e. extension, of\"}\n  {\"file\": \"Mathlib/RingTheory/Valuation/ValuationRing.lean\", \"line\": \"64\", \"text\": \"class ValuationRing (A : Type u) [CommRing A] [IsDomain A] : Prop extends PreValuationRing A\"}\n  {\"file\": \"Mathlib/Computability/TuringMachine/Config.lean\", \"line\": \"68\", \"text\": \"evaluator for this basis, which we take up in the next section.\"}\n  {\"file\": \"Mathlib/Tactic/Abel.lean\", \"line\": \"92\", \"text\": \"/-- Populate a `context` object for evaluating `e`. -/\"}\n  {\"file\": \"Mathlib/Tactic/CategoryTheory/Monoidal/Datatypes.lean\", \"line\": \"54\", \"text\": \"/-- The context for evaluating expressions. -/\"}\n  {\"file\": \"Mathlib/Tactic/CategoryTheory/Monoidal/Datatypes.lean\", \"line\": \"67\", \"text\": \"/-- Populate a `context` object for evaluating `e`. -/\"}\n  {\"file\": \"Mathlib/Tactic/CategoryTheory/Bicategory/Datatypes.lean\", \"line\": \"54\", \"text\": \"/-- The context for evaluating expressions. -/\"}\n  {\"file\": \"Mathlib/Tactic/CategoryTheory/Bicategory/Datatypes.lean\", \"line\": \"67\", \"text\": \"/-- Populate a `context` object for evaluating `e`. -/\"}\n  {\"file\": \"Mathlib/Tactic/NormNum/PowMod.lean\", \"line\": \"22\", \"text\": \"* Adapt the `norm_num` extensions for `Nat.mod` and `Int.emod` to efficiently evaluate expressions\"}\n  {\"file\": \"Mathlib/Tactic/NormNum/RealSqrt.lean\", \"line\": \"58\", \"text\": \"/-- `norm_num` extension that evaluates the function `Real.sqrt`. -/\"}\n  {\"file\": \"Mathlib/Tactic/NormNum/RealSqrt.lean\", \"line\": \"95\", \"text\": \"/-- `norm_num` extension that evaluates the function `NNReal.sqrt`. -/\"}\n  {\"file\": \"Mathlib/Tactic/NormNum/Core.lean\", \"line\": \"280\", \"text\": \"This tactic is extensible. Extensions can allow `norm_num` to evaluate more kinds of expressions, or\"}\n  {\"file\": \"Mathlib/Tactic/NormNum/Core.lean\", \"line\": \"313\", \"text\": \"This tactic is extensible. Extensions can allow `norm_num1` to evaluate more kinds of expressions,\"}\n  {\"file\": \"Mathlib/CategoryTheory/Galois/Prorepresentability.lean\", \"line\": \"361\", \"text\": \"  refine AutGalois.ext F (fun A ↦ evaluation_aut_injective_of_isConnected F A A.pt ?_)\"}\n  {\"file\": \"Mathlib/Util/AtomM/Recurse.lean\", \"line\": \"61\", \"text\": \"a simp context for the main traversal and a cleanup function to simplify evaluation results. -/\"}\n  {\"file\": \"Mathlib/Tactic/Determinant/Bird/Meta.lean\", \"line\": \"48\", \"text\": \"/-- The context for a certificate evaluation. -/\"}\n  {\"file\": \"Mathlib/Tactic/Determinant/Bird/Meta.lean\", \"line\": \"63\", \"text\": \"/-- The ring instance and evaluator context parsed by `reifyBirdDet`. -/\"}\n  {\"file\": \"Mathlib/Tactic/Determinant/Bird/Meta.lean\", \"line\": \"71\", \"text\": \"  /-- The evaluator context for the parsed determinant expression. -/\"}\n  {\"file\": \"Mathlib/Tactic/Determinant/Bird/Meta.lean\", \"line\": \"74\", \"text\": \"/-- Recognise a `birdDet` call and reify it into an evaluator context. -/\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean\", \"line\": \"581\", \"text\": \"-- Next four lemmas passing `fᘁ` or `ᘁf` through (co)evaluations.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean\", \"line\": \"76\", \"text\": \"/-- If a left Kan extension is pointwise, then evaluating it at an object is isomorphic to\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean\", \"line\": \"316\", \"text\": \"/-- If a right Kan extension is pointwise, then evaluating it at an object is isomorphic to\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Limits.lean\", \"line\": \"109\", \"text\": \"      apply (isLimitOfPreserves ((evaluation Cᵒᵖ D).obj (op i.Y)) hE).hom_ext\"}\n",
+   "date": "2026-10-21",
+   "verdict": "The individual Ext and derived comparison constructions exist; no evaluation composite of this signature."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n derivedExtEvaluation|represented Ext.*evaluation dag/nodes",
+   "results": "No matches.",
+   "date": "2026-10-21",
+   "verdict": "No existing node or project declaration for the explicit composite."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n derivedExtEvaluation|represented Ext.*evaluation lean/WeilConjectures",
+   "results": "No matches.",
+   "date": "2026-10-21",
+   "verdict": "No existing node or project declaration for the explicit composite."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n derivedExtEvaluation|represented Ext.*evaluation lean/Sheaf",
+   "results": "No matches.",
+   "date": "2026-10-21",
+   "verdict": "No existing node or project declaration for the explicit composite."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-affine-cohomology-etale-module-realization",
+  "date": "2026-10-21",
+  "group": "NN"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "Canonical Ext-to-derived evaluation required by the affine coherent class normalization.",
+   "via": [
+    "lem-weil-pbc-affine-cohomology-etale-module-realization",
+    "lem-weil-pbc-smooth-curve-etale-structure-direct-images",
+    "lem-weil-pbc-proper-smooth-curves-prime-coefficients",
+    "lem-weil-pbc-etale-proper-smooth-curves-finite-module",
+    "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
+    "lem-weil-pbc-etale-lisse-open-relative-line-constructibility",
+    "lem-weil-pbc-etale-affine-line-shriek-sheaf-constructible",
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DerivedExtEvaluation",
+  "declaration": "CategoryTheory.derivedExtEvaluation",
+  "declarations": [
+   "CategoryTheory.derivedExtEvaluation"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/DerivedExtEvaluation.lean",
+  "statement": "def derivedExtEvaluation {C : Type v} [Category.{w} C] [Abelian C] [HasDerivedCategory.{t} C] [HasExt.{u + 1} C] [EnoughInjectives C] [HasKInjectiveResolutions C] (P : C ⥤ AddCommGrpCat.{u + 1}) [P.Additive] [PreservesFiniteLimits P] (A B : C) (q : ℕ) (g : P.obj A) (x : Ext A B q) : (DerivedCategory.homologyFunctor AddCommGrpCat.{u + 1} (q : ℤ)).obj (P.rightDerivedFunctor.obj (DerivedCategory.Q.obj ((CochainComplex.singleFunctor C 0).obj B)))",
+  "branch": "newtargets-dag",
+  "by": "NN",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c5d95fe4f",
+  "group": "NN",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c5d95fe4f",
+  "group": "NN",
+  "result": "pass",
+  "note": "Re-delivery of f860f10c. The commit changes only the item record, 7 new def nodes and 6 modules; no dependency record is touched, so the H13 rebinds are gone. The helpers are owned by def-weil-pbc-etale-cohomology-presentation, def-weil-pbc-derived-ext-evaluation, def-weil-pbc-coherent-etale-restriction and def-weil-pbc-tensor-pullback-ordinary-comparison (leftAdjointUniq iso plus qcoh instance), plus existing:true def-weil-pbc-abelian-higher-image-class and def-weil-pbc-etale-tensor-sections-restriction (signatures match live). The H2 owners are now cited. H3: every clause matches: qc+separated f only, qcoh G/E, q in N, e linear and natural for all affine arrows, ULift u+1, action pinned on all local classes independently of Phi, Phi linear on all V, both affine and raw normalizations; c^q is the exists-unique normalized comparison, which is the comparison-pullback family by that node's proof step 1. Mechanical finding: normalized-comparison-exists (Classical.choose of exists-unique) and module-pullback-quasi-coherent (qcoh conclusion needed for typing) are genuine, PASS on point. Statements are verbatim, declarations complete, no hollow data, no collisions, nothing dropped. Advisory: base-era plain abbrev abelianHigherDirectImageRawPresheaf sits in a theorem module. No file changed, so no compile run; the report records clean scompile."
+ }
+}

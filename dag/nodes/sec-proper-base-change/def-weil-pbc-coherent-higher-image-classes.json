@@ -1,0 +1,145 @@
+{
+ "id": "def-weil-pbc-coherent-higher-image-classes",
+ "kind": "definition",
+ "title": "Canonical coherent cohomology classes in the abelian higher image",
+ "status": "split",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme], $G$ a quasi-coherent $\\mathcal O_X$-module [def-sc-etale-qcoherent-module], $q\\in\\mathbb N$, and $v:V\\to S$ an object of the small etale site [def-weil-pbc-etale-site]. Use the common coefficient lift $L$ [def-weil-size-convention]. Set $X_V=V\\times_S X$, $j_V:X_V\\to X$ [def-pc-base-change], and $G_V=j_V^*G$ using tensor pullback [def-pc-module-pullback], which is quasi-coherent [lem-weil-pbc-module-pullback-quasi-coherent]. Write $B=R^qf_*L(G_{\\mathrm{et}})$ in abelian sheaves [def-weil-pbc-direct-image]. Define $r_V$ from the actual raw Hom group to $H^q(X_{V,\\mathrm{et}},L((G_V)_{\\mathrm{et}}))$ [def-weil-pbc-etale-cohomology] by the actual raw evaluation [def-sbc-raw-restricted-cohomology-comparison-map], followed by the canonical derived-global-sections/Ext identification and the coefficient identification $j_V^{-1}L(G_{\\mathrm{et}})\\simeq L((G_V)_{\\mathrm{et}})$ normalized by inverse tensor-pullback composition on sections. Define the cohomology class map $\\iota_V$ as the inverse of this evaluation, whose invertibility is [lem-sbc-raw-restricted-cohomology-comparison-is-iso], followed by the actual canonical raw class $\\kappa_V$ [def-weil-pbc-abelian-higher-image-class]. Thus the definition is $\\iota_V=\\kappa_V\\circ r_V^{-1}$, with these constructed maps and no arbitrary comparison witness. The coefficient restriction and presentation transports are precisely [def-weil-pbc-coherent-etale-restriction] and [def-weil-pbc-etale-cohomology-presentation]; the lifted coefficient and tensor quasi-coherence interfaces are [def-pbc-canonical-coherent-etale-comparison] and [def-weil-pbc-tensor-pullback-ordinary-comparison].",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-sc-etale-qcoherent-module",
+  "def-pc-base-change",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "def-weil-size-convention",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-etale-cohomology",
+  "def-sbc-raw-restricted-cohomology-comparison-map",
+  "lem-sbc-raw-restricted-cohomology-comparison-is-iso",
+  "def-weil-pbc-abelian-higher-image-class",
+  "def-weil-pbc-coherent-etale-restriction",
+  "def-weil-pbc-etale-cohomology-presentation",
+  "def-pbc-canonical-coherent-etale-comparison",
+  "def-weil-pbc-tensor-pullback-ordinary-comparison"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03Q8, label lemma-higher-direct-images; raw evaluation followed by the canonical higher-image class, with tensor-coefficient identification."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical cohomology class map from coherent etale cohomology on base change to an abelian higher direct image via inverse raw evaluation",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsBaseChange.toDualBaseChange_tmul\", \"module\": \"Mathlib.LinearAlgebra.Dual.BaseChange\", \"type\": \"(a : A) (f : Dual R V) (v : V) : (ibc.toDualBaseChange (a ⊗ₜ[R] f)) (j v) = a * algebraMap R A (f v)\", \"doc\": \"For an $ R $-algebra $ A $, dual module $ V^* = \\\\text{Dual}_R V $, and base-changed module $ W = A \\\\otimes_R V $, the linear equivalence $ \\\\text{toDualBaseChange}: A \\\\otimes_R V^* \\\\to \\\\text{Dual}_A W \"}\n  {\"name\": \"IsBaseChange.toDual_apply\", \"module\": \"Mathlib.LinearAlgebra.Dual.BaseChange\", \"type\": \"(f : Dual R V) : ibc.toDual f = (f.baseChange A).congr ibc.equiv\", \"doc\": \"For any R-linear functional $ f $ on $ V $, the dual map induced by base change to $ A $ satisfies $ \\\\text{toDual}(f) = (f_{A}) \\\\circ \\\\text{equiv} $, where $ f_{A} $ is the base change of $ f $ to $ A\"}\n  {\"name\": \"IsBaseChange.toDual\", \"module\": \"Mathlib.LinearAlgebra.Dual.BaseChange\", \"type\": \": Dual R V →ₗ[R] Dual A W\", \"doc\": \"The R-linear map from the dual module of V over R to the dual module of W over A, induced by base change via the algebra structure of A over R. This map sends an R-linear functional on V to an A-linea\"}\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap\", \"module\": \"Mathlib.RingTheory.Etale.Kaehler\", \"type\": \"[Algebra.FormallyEtale S T] (s : S) :\\n  (tensorKaehlerEquivOfFormallyEtale R S T).symm (D R T (algebraMap S T s)) = 1 ⊗ₜ D R S s\", \"doc\": \"For a formally étale algebra extension $ S \\to T $ over $ R $, the inverse of the base change isomorphism $ \\\\Omega_{S/R} \\\\otimes_S T \\\\cong \\\\Omega_{T/R} $ maps the Kähler differential $ d_T(\\\\mathrm{alge\"}\n  {\"name\": \"CochainComplex.HomComplex.CohomologyClass.mkAddMonoidHom\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.HomComplexCohomology\", \"type\": \": Cocycle K L n →+ CohomologyClass K L n\", \"doc\": \"The canonical additive monoid homomorphism that maps each cocycle in degree $n$ of the homomorphism complex $\\\\text{Hom}(K, L)$ to its corresponding cohomology class in the $n$-th cohomology group. Thi\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \": IsStableUnderBaseChange @IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.Γevaluation_naturality_assoc\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace.ResidueField\", \"type\": \"∀ {X Y : AlgebraicGeometry.LocallyRingedSpace} (f : X ⟶ Y) (x : ↑X.toTopCat) {Z : CommRingCat}\\n  (h : X.residueField x ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (Y.Γevaluation ((CategoryTheory.ConcreteCategory.hom f.base) x))\\n      (CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.LocallyRinge\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of locally ringed spaces, and let $x \\\\in X$ be a point with image $f(x) \\\\in Y$. Let $k(x)$ and $k(f(x))$ be the residue fields at these points. The morphism $f$ induces \"}\n  {\"name\": \"CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_symm_add\", \"module\": \"Mathlib.CategoryTheory.Abelian.Projective.Ext\", \"type\": \"(x y : CohomologyClass R.cochainComplex ((singleFunctor C 0).obj Y) n) :\\n  R.extEquivCohomologyClass.symm (x + y) = R.extEquivCohomologyClass.symm x + R.extEquivCohomologyClass.symm y\", \"doc\": \"For any cohomology classes $x$ and $y$ in degree $n$, the inverse of the natural equivalence between the Ext group $\\\\mathrm{Ext}^n(X, Y)$ and the $n$-th cohomology class of the homomorphism complex pr\"}\n",
+   "date": "2026-10-21",
+   "verdict": "Existing general cohomology constructions; no canonical coherent coefficient-transported class map."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical cohomology class map from coherent etale cohomology on base change to an abelian higher direct image via inverse raw evaluation",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Sheaf.H\", \"module\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      CategoryTheory.Sheaf J AddCommGrpCat →\\n        [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat] →\\n          [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] → ℕ → T\", \"doc\": \"For a sheaf $ F $ on a site with Grothendieck topology $ J $, the $ n $-th sheaf cohomology group is defined as the Ext group $ \\\\mathrm{Ext}^n $ between the constant sheaf associated to the integers $\"}\n  {\"name\": \"CategoryTheory.Sheaf.cohomologyPresheaf\", \"module\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat] →\\n        [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] →\\n          CategoryTheory.Sheaf J AddCommGrpCat → ℕ → C\", \"doc\": \"For a fixed natural number $n$ and a sheaf $F$ on a category $\\\\mathcal{C}$ with values in abelian groups, the cohomology presheaf is a contravariant functor $\\\\mathcal{C}^\\\\text{op} \\\\to \\\\text{AddCommGrp\"}\n  {\"name\": \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"module\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (J : CategoryTheory.GrothendieckTopology C) →\\n      [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat] →\\n        [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] →\\n          ℕ → CategoryTheory.Functor (CategoryTheory.S\", \"doc\": \"For a fixed natural number $n$, this defines a functor that maps a sheaf $F$ on a category $\\\\mathcal{C}$ with values in abelian groups to a presheaf of Ext groups. Specifically, it constructs a functo\"}\n  {\"name\": \"CochainComplex.HomComplex.CohomologyClass.toHom_mk\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/HomComplexCohomology\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Preadditive C]\\n  {K L : CochainComplex C ℤ} {n : ℤ} (x : CochainComplex.HomComplex.Cocycle K L n),\\n  CochainComplex.HomComplex.CohomologyClass.toHom (CochainComplex.HomComplex.CohomologyClass.mk x) =\\n    (HomotopyCateg\", \"doc\": \"For any cocycle $x$ in degree $n$ of the homomorphism complex $\\\\text{Hom}(K, L)$, the image of the cohomology class $[x]$ under the induced homomorphism $\\\\text{toHom}$ is equal to the homotopy class o\"}\n  {\"name\": \"CochainComplex.HomComplex.CohomologyClass.toHom\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/HomComplexCohomology\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Preadditive C] →\\n      {K L : CochainComplex C ℤ} →\\n        {n : ℤ} →\\n          CochainComplex.HomComplex.CohomologyClass K L n →+\\n            ((HomotopyCategory.quotient C (ComplexShape.up ℤ)).obj K ⟶\\n        \", \"doc\": \"The additive monoid homomorphism that maps each cohomology class in degree $ n $ of the homomorphism complex $ \\\\text{Hom}(K, L) $ to the homotopy class of chain maps from $ K $ to the $ n $-shifted co\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.extEquivCohomologyClass_extMk\", \"module\": \"Mathlib/CategoryTheory/Abelian/Injective/Ext\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.HasExt C] {X Y : C} (R : CategoryTheory.InjectiveResolution Y) {n : ℕ}\\n  (f : X ⟶ R.cocomplex.X n) (m : ℕ) (hm : n + 1 = m)\\n  (hf : CategoryTheory.CategoryStruct.comp f (R.cocomple\", \"doc\": \"Given objects $X$ and $Y$ in an abelian category $\\\\mathcal{C}$ with an injective resolution $R$ of $Y$, a morphism $f: X \\\\to R^{\\\\bullet}_n$ satisfying the cocycle condition $f \\\\circ d^n = 0$ defines a\"}\n  {\"name\": \"CategoryTheory.Sheaf.instAddCommGroupH\", \"module\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (F : CategoryTheory.Sheaf J AddCommGrpCat) →\\n        [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat] →\\n          [inst_2 : CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommG\", \"doc\": \"For any natural number $ n $, the $ n $-th sheaf cohomology group $ H^n(F) $ of a sheaf $ F $ is equipped with a canonical additive commutative group structure. This follows from the abelian category \"}\n  {\"name\": \"CochainComplex.HomComplex.leftHomologyData'_H_coe\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/HomComplexCohomology\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Preadditive C]\\n  (K L : CochainComplex C ℤ) (n m p : ℤ) (hm : n + 1 = m) (hp : m + 1 = p),\\n  ↑(CochainComplex.HomComplex.leftHomologyData' K L n m p hm hp).H = CochainComplex.HomComplex.CohomologyClass K L m\", \"doc\": \"The cohomology class in degree $ m $ of the homomorphism complex $ \\\\text{Hom}(K, L) $ is equal to the quotient of the cocycle subgroup $ \\\\text{Cocycle}(K, L, m) $ by the coboundary subgroup $ \\\\text{Co\"}\n",
+   "date": "2026-10-21",
+   "verdict": "Existing general cohomology constructions; no canonical coherent coefficient-transported class map."
+  },
+  {
+   "tool": "grep",
+   "query": "coherent.*[Cc]lass|[Cc]lass.*[Hh]igher[Dd]irect[Ii]mage",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-21",
+   "verdict": "Existing general cohomology constructions; no canonical coherent coefficient-transported class map."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l affineRealizationClass|coherentHigherImageClass dag/nodes",
+   "results": "No matches.",
+   "date": "2026-10-21",
+   "verdict": "No existing definition of the coefficient-transported class map."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l affineRealizationClass|coherentHigherImageClass lean/WeilConjectures",
+   "results": "No matches.",
+   "date": "2026-10-21",
+   "verdict": "No existing definition of the coefficient-transported class map."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l affineRealizationClass|coherentHigherImageClass lean/Sheaf",
+   "results": "No matches.",
+   "date": "2026-10-21",
+   "verdict": "No existing definition of the coefficient-transported class map."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-affine-cohomology-etale-module-realization",
+  "date": "2026-10-21",
+  "group": "NN"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "The affine coherent realization uses the canonical cohomology class map and raw evaluation in Tag 03Q8.",
+   "via": [
+    "lem-weil-pbc-affine-cohomology-etale-module-realization",
+    "lem-weil-pbc-smooth-curve-etale-structure-direct-images",
+    "lem-weil-pbc-proper-smooth-curves-prime-coefficients",
+    "lem-weil-pbc-etale-proper-smooth-curves-finite-module",
+    "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
+    "lem-weil-pbc-etale-lisse-open-relative-line-constructibility",
+    "lem-weil-pbc-etale-affine-line-shriek-sheaf-constructible",
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CoherentHigherImageClasses",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.affineRealizationClass",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.affineRealizationCoefficient",
+   "AlgebraicGeometry.Scheme.Modules.affineRealizationHigherImage",
+   "AlgebraicGeometry.Scheme.Modules.affineRealizationRawEvaluation",
+   "AlgebraicGeometry.Scheme.Modules.affineRealizationRawEvaluation_bijective",
+   "AlgebraicGeometry.Scheme.Modules.affineRealizationClass"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentHigherImageClasses.lean",
+  "statement": "def affineRealizationClass {X S : Scheme.{u}} (f : X ⟶ S) (G : X.Modules) [G.IsQuasicoherent] (q : ℕ) (V : S.Etale) (x : Sheaf.H (liftedCoherentEtaleSheaf (affineRealizationCoefficient f G V)) q) : (affineRealizationHigherImage f G q).obj.obj (op V)",
+  "branch": "newtargets-dag",
+  "by": "NN",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c5d95fe4f",
+  "group": "NN",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c5d95fe4f",
+  "group": "NN",
+  "result": "pass",
+  "note": "Re-delivery of f860f10c. The commit changes only the item record, 7 new def nodes and 6 modules; no dependency record is touched, so the H13 rebinds are gone. The helpers are owned by def-weil-pbc-etale-cohomology-presentation, def-weil-pbc-derived-ext-evaluation, def-weil-pbc-coherent-etale-restriction and def-weil-pbc-tensor-pullback-ordinary-comparison (leftAdjointUniq iso plus qcoh instance), plus existing:true def-weil-pbc-abelian-higher-image-class and def-weil-pbc-etale-tensor-sections-restriction (signatures match live). The H2 owners are now cited. H3: every clause matches: qc+separated f only, qcoh G/E, q in N, e linear and natural for all affine arrows, ULift u+1, action pinned on all local classes independently of Phi, Phi linear on all V, both affine and raw normalizations; c^q is the exists-unique normalized comparison, which is the comparison-pullback family by that node's proof step 1. Mechanical finding: normalized-comparison-exists (Classical.choose of exists-unique) and module-pullback-quasi-coherent (qcoh conclusion needed for typing) are genuine, PASS on point. Statements are verbatim, declarations complete, no hollow data, no collisions, nothing dropped. Advisory: base-era plain abbrev abelianHigherDirectImageRawPresheaf sits in a theorem module. No file changed, so no compile run; the report records clean scompile."
+ }
+}

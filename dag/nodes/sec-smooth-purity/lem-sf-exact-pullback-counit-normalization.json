@@ -17,7 +17,8 @@
   "def-weil-inverse-system",
   "def-pc-sheaf-restrict-scalars",
   "lem-sf-exact-functor-derived-triangulated",
-  "def-pc-kflat-complex"
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules"
  ],
  "proof": [
   {
@@ -290,5 +291,38 @@
   "group": "NR",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-4c850784a (reviewer sub-agent of L); spot-checked: I read the full 7-step split and every cited statement. No new nodes; the statement and stmt_deps are unchanged against the live node. The item is still unsplit live and side-live, is not on the 2026-10-19 drop list and has no re-split note. No cycle: the 1096-node closure does not contain the item. Steps are 762-1039 characters. No SGA; Stacks tags 015F, 06XN, 09T5, 0FND, 0941, 099N and 02MZ all exist. Step 1: (F_D,xi) is a right Kan extension by exact-functor-derived-functor (1). (L,Q(m)eps) is another, by composition with the iso Q(m). right-kan-extension-unique-iso then gives the unique e with xi e = Q(m) eps, in the right orientation. Step 2 repeats this in Tow(Mod), whose kernels and cokernels are levelwise. Step 3: the cbc evaluation equation eps v_n = e'_n(tau) on objectwise K-flat representatives, which exist by diagram-kflat-replacements with J = N^op small; transitions come from that node's second clause. Step 4: E b = c Delta(e) is checked after the invertible Xi_{Delta P} using tau b = Delta'(eps); equality is not inferred from evaluations. Step 5: strict-quotient-pullback-computation gives w_P Delta'(eps_P) = L~(Qa_P) b_{QP}, so the definition's constant-tower augmentation is beta_K = L~(a_K) b_K. Quotient levels need not be K-flat. Step 6: d = Rlim(E). The completed-pullback definition's chain-level map C -> lim I is the unit of the adjunction Delta -| Rlim, which counit-projections says is induced by the ordinary Delta -| lim (Hom_K(Delta C, I) = Hom_K(C, lim I) for K-injective I). That gives unit naturality and the displayed equality. Step 7: the projections pi_n are natural because e_n(eps_B) = pi_n naturally in B. Edge cases checked: g = id, zero object, I = 0 and incomplete K; alpha_K is never claimed invertible. The cbc nodes are stated for the item's G with (g,c_g), R = B_X, S = B_Y, on completed-coefficient categories; no silent identification with constant coefficients. All 8 tool_uses are accepted as generic infrastructure. Advisory: Steps 1-2 take the universality of the specified pairs from the definition via lem-pur-left-derived-from-kflat-class without citing it directly; this is acceptable."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SfExactPullbackCounitNormalization",
+  "declaration": "AlgebraicGeometry.Scheme.ExactPullbackNormalization.counit_normalization",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.ExactPullbackNormalization.moduleFunctor",
+   "AlgebraicGeometry.Scheme.ExactPullbackNormalization.towerFunctor",
+   "AlgebraicGeometry.Scheme.ExactPullbackNormalization.towerFiniteLimits",
+   "AlgebraicGeometry.Scheme.ExactPullbackNormalization.towerFiniteColimits",
+   "AlgebraicGeometry.Scheme.ExactPullbackNormalization.constantIso",
+   "AlgebraicGeometry.Scheme.ExactPullbackNormalization.evaluationIso",
+   "AlgebraicGeometry.Scheme.ExactPullbackNormalization.exactAugmentation",
+   "AlgebraicGeometry.Scheme.ExactPullbackNormalization.ModuleComparisonSpec",
+   "AlgebraicGeometry.Scheme.ExactPullbackNormalization.OrdinaryNormalized",
+   "AlgebraicGeometry.Scheme.ExactPullbackNormalization.TowerNormalized",
+   "AlgebraicGeometry.Scheme.ExactPullbackNormalization.EvaluationNormalized",
+   "AlgebraicGeometry.Scheme.ExactPullbackNormalization.completedIso",
+   "AlgebraicGeometry.Scheme.ExactPullbackNormalization.counit_normalization"
+  ],
+  "file": "lean/Sheaf/Paper/SfExactPullbackCounitNormalization.lean",
+  "statement": "theorem counit_normalization (m : completedModulePullback g d ≅ moduleFunctor d g) (_hm : ModuleComparisonSpec d g m) : ∃ e : completedOrdinaryPullback g d ≅ (moduleFunctor d g).mapDerivedCategory, OrdinaryNormalized d g m e ∧ (∀ e' : completedOrdinaryPullback g d ≅ (moduleFunctor d g).mapDerivedCategory, OrdinaryNormalized d g m e' → e' = e) ∧ ∃ E : completedTowerPullback g d ≅ (towerFunctor d g).mapDerivedCategory, TowerNormalized d g m E ∧ (∀ E' : completedTowerPullback g d ≅ (towerFunctor d g).mapDerivedCategory, TowerNormalized d g m E' → E' = E) ∧ (∀ K : DerivedCategory (pbcModules X (pbcAdicCompletion X d)), (completedPullbackConstantIso g d).hom.app K ≫ E.hom.app ((completedDerivedConstant d X).obj K) = (completedDerivedConstant d Y).map (e.hom.app K) ≫ (constantIso d g).hom.app K) ∧ (∀ K : DerivedCategory (pbcModules X (pbcAdicCompletion X d)), completedPullbackComparison g d K ≫ (completedIso d g E K).hom = e.hom.app K ≫ exactAugmentation d g K) ∧ (∀ (K : DerivedCategory (pbcModules X (pbcAdicCompletion X d))) (n : ℕ), (completedIso d g E K).hom ≫ (completedRlimProjection Y (pbcAdicCompletion Y d) n).app ((towerFunctor d g).mapDerivedCategory.obj ((completedReductionTower X d).obj K)) = (completedRlimProjection Y (pbcAdicCompletion Y d) n).app ((completedTowerPullback g d).obj ((completedReductionTower X d).obj K)) ≫ (pbcTowerEvaluation Y (pbcAdicCompletion Y d) n).map (E.hom.app ((completedReductionTower X d).obj K))) ∧ ∃ v : ∀ n : ℕ, completedTowerPullback g d ⋙ pbcTowerEvaluation Y (pbcAdicCompletion Y d) n ≅ pbcTowerEvaluation X (pbcAdicCompletion X d) n ⋙ completedOrdinaryPullback g d, (∀ n : ℕ, EvaluationNormalized d g n (v n)) ∧ (∀ (n : ℕ) (M : DerivedCategory (pbcTowers X (pbcAdicCompletion X d))), (pbcTowerEvaluation Y (pbcAdicCompletion Y d) n).map (E.hom.app M) ≫ (evaluationIso d g n).hom.app M = (v n).hom.app M ≫ e.hom.app ((pbcTowerEvaluation X (pbcAdicCompletion X d) n).obj M)) ∧ (∀ (a b : ℕ) (h : a ≤ b) (M : DerivedCategory (pbcTowers X (pbcAdicCompletion X d))), (v b).hom.app M ≫ (completedOrdinaryPullback g d).map ((DerivedTowerPullback.derivedTransition (A := pbcModules X (pbcAdicCompletion X d)) a b h).app M) = (DerivedTowerPullback.derivedTransition (A := pbcModules Y (pbcAdicCompletion Y d)) a b h).app ((completedTowerPullback g d).obj M) ≫ (v a).hom.app M)",
+  "branch": "sheaf-dag",
+  "by": "Q17",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bf7eaa762",
+  "group": "Q17",
+  "result": "pass",
+  "note": "Read node, 11 stmt_deps, the side-live sources of CompletedTowerPullback/AdicCoefficientDatum/DerivedTowerEvaluationNormalization/ExactFunctor and the item module. Node delta is lean only plus the landed stmt_dep def-pc-flat-sheaf-modules (allowed by brief-stage2 §5). Every clause matches: m is pinned by ModuleComparisonSpec on sheafified pure tensors (b⊗x ↦ c_g^{-1}(b)•x); e and E are unique, normalized by the actual complex counits; v is pinned by EvaluationNormalized (equation identical to IsNormalizedOn on the K-flat flat-term class) and compatible with every transition a≤b; the constant square b≫E=Δe≫c has the right directions; exactAugmentation mirrors completedPullbackComparison; α≫d=e≫α^F; projection square for every unbounded K. No hollow definitions, only the theorem is sorry, docstrings complete. Advisory: evaluationComplexIso/derivedTransition (theorem-owned), completedRlimProjection and pbcTowerEvaluation owners are proof_deps only, not stmt_deps; proof-only imports. No file changed, so no compile; worker reports scompile clean 35.6 s."
  }
 }

@@ -22069,3 +22069,7 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 10:08 L: merged deliver/Q16/lem-pc-finite-dimensional-trace-exact (reviewer PASS; first push; new nodes: 0)
 - 10:08 L: merged deliver/B9/Sheaf.CategoryTheory.RingedDerivedPushforwardLinear (stage 3; reviewer PASS; first push; landing 20261021T100827-L-4155872 (interface); batch 20261021T100250; modules 1; new nodes 0; change records: coord/changes/B9-ringed-derived-pushforward-imports.md)
 - 10:08 L: merged deliver/B9/Sheaf.Paper.CompleteProetaleStrictTowerRealization (stage 3; reviewer PASS; first push; landing 20261021T100831-L-4157034 (proof); batch 20261021T100250; modules 1; new nodes 0)
+- 10:08 L: merged deliver/NV/lem-weil-pbc-flat-scalar-tower-limit-square (stage 2; reviewer PASS; parallel immutable checks)
+- 10:08 L: merged deliver/NW/lem-trf-completion-unit-strict-quotient-model (stage 2; reviewer FIX; parallel immutable checks)
+- 10:08 L: merged deliver/Q17/lem-sf-exact-pullback-counit-normalization (stage 2; reviewer PASS; parallel immutable checks)
+- 10:08 L: merged deliver/NN/lem-weil-pbc-affine-cohomology-etale-module-realization (stage 2; reviewer PASS; parallel immutable checks)

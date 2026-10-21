@@ -127,23 +127,23 @@
    "WeilConjectures.canonicalIntegralReductionTower",
    "WeilConjectures.canonicalIntegralReductionTowerMap",
    "WeilConjectures.canonicalIntegralReductionTowerMap_naturality",
-   "WeilConjectures.canonicalIntegralReductionTowerCone"
+   "WeilConjectures.canonicalIntegralReductionTowerCone",
+   "WeilConjectures.unrestrictedIntegralTensorSection"
   ],
-  "file": "lean/Sheaf/Paper/IntegralReductionTowerCanonical.lean",
   "statement": "def canonicalIntegralReductionTower (P : CochainComplex (scalarReductionSource l E Y) ℤ) : ℕᵒᵖ ⥤ DerivedCategory (scalarReductionSource l E Y)",
-  "branch": "newtargets-dag",
-  "by": "Q63",
-  "date": "2026-10-17",
-  "existing": false,
-  "note": "§1(B): the recorded tower requires an auxiliary FiniteFieldDatum absent from the consumer. This module defines the same augmented derived tower using the unrestricted canonical comparison interface delivered for its dependency, with exponent n+1 and no change to the completed sheaf, quotients, projections or tensor constructions."
+  "branch": "sheaf-dag",
+  "by": "NW",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "§1(B), repair of the completion-unit delivery: retain the existing canonical augmented reduction tower and explicitly record its sheafified pure-tensor section unrestrictedIntegralTensorSection. The previous declarations list omitted this definition used to render the node's gamma_n(x)=x tensor 1. IntegralReductionTowerCanonical publicly imports IntegralReductionTowerWellDefinedUnrestricted, which publicly imports IntegralReductionTowerUnrestricted, where this existing section is defined with blueprint def-weil-integral-reduction-tower. The consumer spelling unrestrictedTowerTensorSection is definitionally this section, with identical arguments and value. Its well-definedness theorem conclusion is not needed to state the consumer. No declaration, mathematical statement, or construction is changed."
  },
  "reviewed_lean": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-stage2-cc-94c5afc59",
-  "group": "Q63",
+  "reviewer": "NT-stage2-cc-6ed7dd040",
+  "group": "NW",
   "result": "fix",
-  "note": "All item clauses match the node: completed-coefficient iso characterized by its projections, beta with its pure-tensor formula, quotient and transition identities, chain-map naturality, canonical resolution-comparison compatibility in D(X,A_n). Universes independent, no stronger assumptions, statements verbatim, docstrings and proof steps present, sorry only, no hollow definitions. The two section 1(B) dependency repairs (no FiniteFieldDatum) are justified and match their nodes. Fixes: (1) H4: unrestrictedTowerTransition now reuses the published unrestrictedIntegralTransition (NI) instead of a second choice; the existence-uniqueness theorem now covers the unit only; the unused transition condition is removed; all recorded signatures unchanged. (2) Added the missing proof-dependency imports LeftDerivedFromResolvingClass and RingedSiteModules to the item module. nt_compile of the three files: delivered and fixed both rc=0, no errors or warnings."
+  "note": "Re-delivery after the 43763eb2 C5 RETURN. stmt_deps now cites def-weil-integral-reduction-tower instead of the theorem node. That node gets a §1(B) superset existing:true record (4 decls kept, unrestrictedIntegralTensorSection added; live record is still base Q63, not overwritten), accepted. Only other change: the import, to IntegralReductionTowerCanonical, which re-exports publicly. FIX: the Lean still used unrestrictedTowerTensorSection, a wrapper recorded under the theorem node that is no longer a stmt_dep, and left the newly recorded def-node decl unused. Renamed both occurrences (lines 86, 261) to unrestrictedIntegralTensorSection (the wrapper's whole body, same arguments). fixes/: complete CompletionUnitStrictQuotientModel.lean and the item lean-record.json (statement + note); refit_record and check_lean_text clean, statement verbatim. Compile: nt_compile timed out at 60 s (load 133); lcompile(timeout=560) clean in 49.5 s and 27.4 s on re-run, vs 18.3 s for the delivered file. Mathematics re-checked: hypotheses, K-flat Q with arbitrary q, pinned OrdinaryModel/DerivedModel, zero shifted-coordinate cone, unit formula, two-resolution clause, naturality, independent universes, edge cases, 7-step docstring, sorry only. Advisory: the dependency's canonical adjunction is only an existential S."
  },
  "reviewed_proof": {
   "date": "2026-10-18",

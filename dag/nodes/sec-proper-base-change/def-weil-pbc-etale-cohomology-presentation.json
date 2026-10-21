@@ -1,0 +1,135 @@
+{
+ "id": "def-weil-pbc-etale-cohomology-presentation",
+ "kind": "definition",
+ "title": "Canonical Ext to derived-sections cohomology presentation",
+ "status": "split",
+ "statement": "For a scheme $X$ [def-pc-scheme] and an abelian sheaf $F$ on its small etale site [def-weil-pbc-etale-site] [def-weil-pbc-abelian-etale-sheaves], use the common coefficient universe [def-weil-size-convention]. Define $\\operatorname{Ext}^q(\\underline{\\mathbb Z},F)\\to H^q(R\\Gamma(X,F[0]))$ [def-weil-pbc-etale-cohomology] by the represented-derived-morphism evaluation [def-weil-pbc-derived-ext-evaluation] at the image of $1$ under the unit of the constant-sheaf/global-sections adjunction [def-weil-pbc-global-sections-functor]. Its additivity and bijectivity give the canonical additive equivalence, with inverse determined by this evaluation map. The evaluation in degree zero is evaluation at the integer generator, including for the empty scheme.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-size-convention",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-derived-ext-evaluation",
+  "def-weil-pbc-global-sections-functor"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03FD and 01FT; derived global sections as Ext from the constant integer sheaf."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "sheafHDerivedEquiv|coherentEtaleRestrictionIso|isQuasicoherent_tensorPullback|abelianHigherDirectImageClass|etaleTensorSectionsRestriction",
+   "results": "{\"t\": \"2026-10-21T09:25:18Z\", \"tool\": \"grep\", \"query\": \"sheafHDerivedEquiv|coherentEtaleRestrictionIso|isQuasicoherent_tensorPullback|abelianHigherDirectImageClass|etaleTensorSectionsRestriction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "General Mathlib cohomology primitives only; reuse the exact upstream class and restriction maps, and supply only the missing canonical comparison composites."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical etale cohomology Ext derived evaluation comparison, coherent tensor pullback restriction, and higher direct image class map",
+   "results": "{\"t\": \"2026-10-21T09:25:18Z\", \"tool\": \"leansearch\", \"query\": \"Canonical etale cohomology Ext derived evaluation comparison, coherent tensor pullback restriction, and higher direct image class map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ProjectiveResolution.extAddEquivCohomologyClass\", \"CategoryTheory.InjectiveResolution.extEquivCohomologyClass_symm_sub\", \"AlgebraicGeometry.LocallyRingedSpace.Γevaluation_naturality_assoc\", \"CategoryTheory.InjectiveResolution.extAddEquivCohomologyClass\", \"CategoryTheory.InjectiveResolution.extEquivCohomologyClass\", \"CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_extMk\", \"Algebra.FormallyEtale.instTensorProduct\", \"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\"], \"digest\": \"cfc34681edb8377d\"}",
+   "date": "2026-10-21",
+   "verdict": "General Mathlib cohomology primitives only; reuse the exact upstream class and restriction maps, and supply only the missing canonical comparison composites."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical etale cohomology Ext derived evaluation comparison, coherent tensor pullback restriction, and higher direct image class map",
+   "results": "{\"t\": \"2026-10-21T09:25:19Z\", \"tool\": \"leanfinder\", \"query\": \"Canonical etale cohomology Ext derived evaluation comparison, coherent tensor pullback restriction, and higher direct image class map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.H\", \"CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_extMk\", \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_symm_mk_hom\", \"CategoryTheory.InjectiveResolution.extEquivCohomologyClass_extMk\", \"CategoryTheory.Sheaf.cohomologyPresheaf\", \"CategoryTheory.InjectiveResolution.extEquivCohomologyClass_symm_mk_hom\", \"CategoryTheory.ProjectiveResolution.extEquivCohomologyClass\"], \"digest\": \"0d7fa36b568a0e95\"}",
+   "date": "2026-10-21",
+   "verdict": "General Mathlib cohomology primitives only; reuse the exact upstream class and restriction maps, and supply only the missing canonical comparison composites."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n sheafHDerivedEquiv|coherentEtaleRestrictionIso|isQuasicoherent_tensorPullback|^noncomputable def abelianHigherDirectImageClass|^def etaleTensorSectionsRestriction lean/WeilConjectures lean/Sheaf; inspect exact declaration ownership in dag/nodes",
+   "results": "Upstream AbelianHigherDirectImageClassCompatibility.lean:119 defines abelianHigherDirectImageClass without a definition-node owner; EtaleTensorSections.lean:62 defines etaleTensorSectionsRestriction under the theorem node lem-sc-etale-qcoherent-presheaf-functorial. No other three helper declarations found. Mathlib search: zero hits.",
+   "date": "2026-10-21",
+   "verdict": "Reuse both existing definitions with existing:true; new modules own only the missing comparison helpers."
+  },
+  {
+   "tool": "blueprint_refs.py",
+   "query": "search cohomology presentation; search coherent restriction; search higher direct image class; search tensor sections restriction; ancestor lem-weil-pbc-affine-cohomology-etale-module-realization",
+   "results": "Zero blueprint nodes for each search; ancestor thm-weil-pbc-direct-image-finiteness-proper. Exact declaration-owner scan found only theorem node lem-sc-etale-qcoherent-presheaf-functorial for etaleTensorSectionsRestriction.",
+   "date": "2026-10-21",
+   "verdict": "No existing definition node carries these five notions."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n leftAdjointUniq|tensorPullback.*Iso lean/WeilConjectures/AlgebraicGeometry/TensorPullback* lean/Sheaf/AlgebraicGeometry/TensorPullback*; rg -l tensorOrdinaryPullbackIso|tensor-pullback-ordinary-comparison dag/nodes lean/Sheaf lean/WeilConjectures",
+   "results": "Several proofs locally construct leftAdjointUniq; no public tensorOrdinaryPullbackIso or definition node for that canonical comparison.",
+   "date": "2026-10-21",
+   "verdict": "Expose the same canonical adjunction comparison once, with its quasi-coherence transport helper."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-affine-cohomology-etale-module-realization",
+  "date": "2026-10-21",
+  "group": "NN"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "Canonical coefficient and class identifications used in the affine coherent higher-image realization (Stacks 03Q8).",
+   "via": [
+    "lem-weil-pbc-affine-cohomology-etale-module-realization",
+    "lem-weil-pbc-smooth-curve-etale-structure-direct-images",
+    "lem-weil-pbc-proper-smooth-curves-prime-coefficients",
+    "lem-weil-pbc-etale-proper-smooth-curves-finite-module",
+    "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
+    "lem-weil-pbc-etale-lisse-open-relative-line-constructibility",
+    "lem-weil-pbc-etale-affine-line-shriek-sheaf-constructible",
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleCohomologyPresentation",
+  "declaration": "AlgebraicGeometry.Etale.sheafHDerivedEquiv",
+  "declarations": [
+   "AlgebraicGeometry.Etale.sheafHToDerived",
+   "AlgebraicGeometry.Etale.sheafHToDerived_add",
+   "AlgebraicGeometry.Etale.sheafHToDerived_bijective",
+   "AlgebraicGeometry.Etale.sheafHDerivedEquiv"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleCohomologyPresentation.lean",
+  "statement": "def sheafHDerivedEquiv {X : Scheme.{u}} (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) : Sheaf.H F q ≃+ (cohomology AddCommGrpCat.{u + 1} X (q : ℤ)).obj (DerivedCategory.Q.obj ((CochainComplex.singleFunctor _ 0).obj F))",
+  "branch": "newtargets-dag",
+  "by": "NN",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c5d95fe4f",
+  "group": "NN",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c5d95fe4f",
+  "group": "NN",
+  "result": "pass",
+  "note": "Re-delivery of f860f10c. The commit changes only the item record, 7 new def nodes and 6 modules; no dependency record is touched, so the H13 rebinds are gone. The helpers are owned by def-weil-pbc-etale-cohomology-presentation, def-weil-pbc-derived-ext-evaluation, def-weil-pbc-coherent-etale-restriction and def-weil-pbc-tensor-pullback-ordinary-comparison (leftAdjointUniq iso plus qcoh instance), plus existing:true def-weil-pbc-abelian-higher-image-class and def-weil-pbc-etale-tensor-sections-restriction (signatures match live). The H2 owners are now cited. H3: every clause matches: qc+separated f only, qcoh G/E, q in N, e linear and natural for all affine arrows, ULift u+1, action pinned on all local classes independently of Phi, Phi linear on all V, both affine and raw normalizations; c^q is the exists-unique normalized comparison, which is the comparison-pullback family by that node's proof step 1. Mechanical finding: normalized-comparison-exists (Classical.choose of exists-unique) and module-pullback-quasi-coherent (qcoh conclusion needed for typing) are genuine, PASS on point. Statements are verbatim, declarations complete, no hollow data, no collisions, nothing dropped. Advisory: base-era plain abbrev abelianHigherDirectImageRawPresheaf sits in a theorem module. No file changed, so no compile run; the report records clean scompile."
+ }
+}

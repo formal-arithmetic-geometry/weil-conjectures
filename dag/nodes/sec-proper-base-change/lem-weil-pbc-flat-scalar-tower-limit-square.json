@@ -14,7 +14,9 @@
   "lem-weil-pbc-diagram-site-realization",
   "lem-weil-pbc-flat-ringed-diagram-restriction",
   "lem-weil-ringed-tower-pushforward-limit-comparison",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "def-weil-pbc-flat-ringed-diagram-input",
+  "def-weil-pbc-derived-tower-models"
  ],
  "proof": [
   {
@@ -278,5 +280,36 @@
   "group": "N5",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-9998766f4 (reviewer sub-agent of L); spot-checked: I read the whole split: 8 steps, 0 new nodes, statement unchanged. Every cited statement checks against what its step takes from it. Step 1: sectionwise rho = id, and the R_V-actions agree because a_U c_R = c_S u^-1 a_V. Step 2: enough K-injectives through lem-weil-pbc-diagram-site-realization plus prop-pur-kinjective-resolutions-exist. Step 3: an exact instance of lem-weil-pbc-kinjective-exact-square-comparison (H'=lim_S, H=lim_R, r,s = r_T, sH'=Hr literally); its normalization is the displayed lambda equation. Step 4: exactness of L_B from lem-trf-geometric-inverse-image-exact; with Delta -| lim exact levelwise, the 08BJ node gives that F_B, F_B^J and lim preserve K-injectives, without exact products. Step 5: I recomputed both n-th projections, and they agree by naturality of delta. Step 6: the kappa, d and chi unit equations are what the kappa node and lem-weil-pbc-flat-ringed-diagram-restriction state. Step 7: I redid the chase; both sides reduce to B^R Q(step-5 map). Step 8: reduction to QI by naturality. Stacks tags 0A07 and 08BJ check out; no SGA is used. lem-cbc-flat-scalar-direct-image-limit-coherence is a weaker special case (it assumes exact countable products), noted for the maintainer, not a fault. FIX: step 6 uses lem-weil-ringed-tower-pushforward-limit-comparison (unit sk-def-sf-operations, off route) without declaring it. I added it to split_report.tool_uses as an accepted generic 0A07 tool. I also accept the three declared tool uses. Corrected item: fixes/dag/nodes/sec-proper-base-change/lem-weil-pbc-flat-scalar-tower-limit-square.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FlatScalarTowerLimitSquare",
+  "declaration": "CategoryTheory.FlatScalarTowerLimit.flatScalarTowerLimitSquare",
+  "declarations": [
+   "CategoryTheory.FlatScalarTowerLimit.ScalarComparison",
+   "CategoryTheory.FlatScalarTowerLimit.limitAdditive",
+   "CategoryTheory.FlatScalarTowerLimit.PushforwardComparison",
+   "CategoryTheory.FlatScalarTowerLimit.modulesRU",
+   "CategoryTheory.FlatScalarTowerLimit.modulesSU",
+   "CategoryTheory.FlatScalarTowerLimit.modulesRV",
+   "CategoryTheory.FlatScalarTowerLimit.modulesSV",
+   "CategoryTheory.FlatScalarTowerLimit.scalarU",
+   "CategoryTheory.FlatScalarTowerLimit.scalarV",
+   "CategoryTheory.FlatScalarTowerLimit.flatScalarTowerLimitSquare"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/FlatScalarTowerLimitSquare.lean",
+  "statement": "theorem flatScalarTowerLimitSquare (x : FlatRingedDiagramInput K H) [HasDerivedCategory.{w} (modulesRU x)] [HasDerivedCategory.{w} (modulesSU x)] [HasDerivedCategory.{w} (modulesRV x)] [HasDerivedCategory.{w} (modulesSV x)] [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ modulesRU x)] [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ modulesSU x)] [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ modulesRV x)] [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ modulesSV x)] (FR : DerivedModel (x.R.morphism.modules.mapHomologicalComplex (.up ℤ))) (TR : DerivedModel (tower x.R.morphism.modules)) (FS : DerivedModel (x.S.morphism.modules.mapHomologicalComplex (.up ℤ))) (TS : DerivedModel (tower x.S.morphism.modules)) (LRU : DerivedModel ((lim : (ℕᵒᵖ ⥤ modulesRU x) ⥤ modulesRU x).mapHomologicalComplex (.up ℤ))) (LSU : DerivedModel ((lim : (ℕᵒᵖ ⥤ modulesSU x) ⥤ modulesSU x).mapHomologicalComplex (.up ℤ))) (LRV : DerivedModel ((lim : (ℕᵒᵖ ⥤ modulesRV x) ⥤ modulesRV x).mapHomologicalComplex (.up ℤ))) (LSV : DerivedModel ((lim : (ℕᵒᵖ ⥤ modulesSV x) ⥤ modulesSV x).mapHomologicalComplex (.up ℤ))) (rU : DerivedCategory (modulesSU x) ⥤ DerivedCategory (modulesRU x)) (rtU : DerivedCategory (ℕᵒᵖ ⥤ modulesSU x) ⥤ DerivedCategory (ℕᵒᵖ ⥤ modulesRU x)) (qU : DerivedCategory.Q ⋙ rU ≅ (scalarU x).mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q) (qtU : DerivedCategory.Q ⋙ rtU ≅ tower (scalarU x) ⋙ DerivedCategory.Q) (rV : DerivedCategory (modulesSV x) ⥤ DerivedCategory (modulesRV x)) (rtV : DerivedCategory (ℕᵒᵖ ⥤ modulesSV x) ⥤ DerivedCategory (ℕᵒᵖ ⥤ modulesRV x)) (qV : DerivedCategory.Q ⋙ rV ≅ (scalarV x).mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q) (qtV : DerivedCategory.Q ⋙ rtV ≅ tower (scalarV x) ⋙ DerivedCategory.Q) (χ : ScalarComparison x.S.morphism.modules x.R.morphism.modules (scalarU x) (scalarV x) rU rV qU qV FS FR) (ordinaryχ : ∀ N : modulesSU x, (SheafOfModules.toSheaf _ ⋙ sheafCompose K (forget AddCommGrpCat)).map (χ.ordinary.hom.app N) ≫ x.R.morphism.underlying.hom.app ((scalarU x).obj N) = x.S.morphism.underlying.hom.app N ≫ eqToHom (congrArg (fun F ↦ F.obj ((SheafOfModules.toSheaf _ ⋙ sheafCompose H (forget AddCommGrpCat)).obj N)) x.sameDirect.symm)) (d : ScalarComparison ((Functor.whiskeringRight ℕᵒᵖ _ _).obj x.S.morphism.modules) ((Functor.whiskeringRight ℕᵒᵖ _ _).obj x.R.morphism.modules) ((Functor.whiskeringRight ℕᵒᵖ _ _).obj (scalarU x)) ((Functor.whiskeringRight ℕᵒᵖ _ _).obj (scalarV x)) rtU rtV qtU qtV TS TR) (ordinaryd : ∀ (T : ℕᵒᵖ ⥤ modulesSU x) (n : ℕᵒᵖ), (d.ordinary.hom.app T).app n = χ.ordinary.hom.app (T.obj n)) (κR : PushforwardComparison x.R.morphism.modules FR TR LRU LRV) (κS : PushforwardComparison x.S.morphism.modules FS TS LSU LSV) : ∃ (lambdaU : ScalarComparison (lim : (ℕᵒᵖ ⥤ modulesSU x) ⥤ modulesSU x) (lim : (ℕᵒᵖ ⥤ modulesRU x) ⥤ modulesRU x) ((Functor.whiskeringRight ℕᵒᵖ _ _).obj (scalarU x)) (scalarU x) rtU rU qtU qU LSU LRU) (lambdaV : ScalarComparison (lim : (ℕᵒᵖ ⥤ modulesSV x) ⥤ modulesSV x) (lim : (ℕᵒᵖ ⥤ modulesRV x) ⥤ modulesRV x) ((Functor.whiskeringRight ℕᵒᵖ _ _).obj (scalarV x)) (scalarV x) rtV rV qtV qV LSV LRV), (∀ T : ℕᵒᵖ ⥤ modulesSU x, lambdaU.ordinary.hom.app T = limit.post T (scalarU x)) ∧ (∀ T : ℕᵒᵖ ⥤ modulesSV x, lambdaV.ordinary.hom.app T = limit.post T (scalarV x)) ∧ ∀ Z : DerivedCategory (ℕᵒᵖ ⥤ modulesSU x), rV.map (κS.derived.hom.app Z) ≫ lambdaV.derived.hom.app (TS.functor.obj Z) ≫ LRV.functor.map (d.derived.hom.app Z) = χ.derived.hom.app (LSU.functor.obj Z) ≫ FR.functor.map (lambdaU.derived.hom.app Z) ≫ κR.derived.hom.app (rtU.obj Z)",
+  "branch": "newtargets-dag",
+  "by": "NV",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The main statement uses the existing FlatRingedDiagramInput and DerivedModel interfaces. ScalarComparison and PushforwardComparison bundle exactly the specified ordinary comparisons, universal units and normalization equations; they do not select arbitrary maps or assume the desired square. The normalized square is asserted for every derived strict tower. ℕ indexes positive tower levels n+1."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2e1dd41d3",
+  "group": "NV",
+  "result": "pass",
+  "note": "Re-delivery after the H2 RETURN of 5703f407c8c9; item .lean byte-identical (sha edcf64e8). H2 repaired as required: theorem dep lem-weil-pbc-exact-adjoint-tower-models replaced by new existing:true def node def-weil-pbc-derived-tower-models on the unchanged ExactAdjointTowerModels module, owning exactly tower and DerivedModel. tower is levelwise whiskering plus mapHomologicalComplex; DerivedModel has functor, unit, IsRightDerivedFunctor and IsIso on K-injectives, matching the node text; universes independent. Item uses only these two declarations (no exists_models/Models/NormalizedRoos). Statement re-checked: chi/d fixed by the OrdinaryComparisonsNormalized clause, levelwise agreement and unit normalization; kappa fixed by limit.post and the dependency's a-normalization; lambdaU/V are conclusions with limit.post ordinary maps; square types match the node for all Z; lean.statement verbatim; one sorry; docstrings ok. Advisories: unused public theorem-module imports (H9); overlap with lem-cbc-flat-scalar-direct-image-limit-coherence. No compile (no file changed)."
  }
 }
