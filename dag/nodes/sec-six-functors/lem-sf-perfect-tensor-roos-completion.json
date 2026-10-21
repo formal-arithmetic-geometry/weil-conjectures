@@ -11,11 +11,175 @@
   "def-pc-perfect-ring-complex",
   "def-weil-abstract-derived-category",
   "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "def-pc-tensor-complex-sheaves"
+  "def-pc-tensor-complex-sheaves",
+  "def-sc-discrete-valuation-ring",
+  "def-weil-pbc-projective-module",
+  "def-weil-finitely-generated-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For a finitely generated projective module $M$, choose a surjection $p:R^a\\to M$ using finite generators and split it by projectivity, obtaining $i:M\\to R^a$ with $pi=1$. Tensoring two such splittings makes $P^r\\otimes_RQ^s$ a retract of $R^{a_rb_s}$. A finite direct sum of these retractions makes $V^q$ finite projective. If $P,Q$ have supports in $[a,b],[c,d]$, $V$ has support in $[a+c,b+d]$. This proves the asserted bounded finite projectivity without any choice of compatible bases.",
+   "uses": [
+    "def-weil-pbc-projective-module",
+    "def-weil-finitely-generated-module",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Agent finite-retract argument; algebra.tex Tags 05CE/05CF (definition-projective, lemma-characterize-projective)"
+   }
+  },
+  {
+   "text": "The balanced map $\\phi_j:(P\\otimes_RA_j)\\otimes_{A_j}(Q\\otimes_RA_j)\\to V\\otimes_RA_j$ sends $(x\\otimes a)\\otimes(y\\otimes b)$ to $(x\\otimes y)\\otimes ab$. Its inverse sends $(x\\otimes y)\\otimes c$ to $(x\\otimes1)\\otimes(y\\otimes c)$. Both are balanced, and their composites are identities on pure tensors, hence on every element. On the summand of bidegree $(r,s)$ both differentials are $d_P\\otimes1+(-1)^r1\\otimes d_Q$, so these are cochain isomorphisms. Reducing $ab$ to a smaller quotient is the product of the reductions. Thus the isomorphisms identify every transition with the ordinary quotient transition of $V$. Here $M\\otimes_RA_j\\cong M/\\pi^jM$ sends $m\\otimes\\bar r$ to the class of $rm$, with inverse $[m]\\mapsto m\\otimes1$; the balancing relations check both composites.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Agent quotient-coordinate argument refining Tag 0941 (lemma-derived-limit-is-ok)"
+   }
+  },
+  {
+   "text": "For each $M=V^q$, use the finite splitting $M\\xrightarrow{i}R^a\\xrightarrow{p}M$ of step 1 and put $E=ip$. A compatible family in $M/\\pi^jM$ embeds, by the reduced maps $i_j$, in $\\varprojlim_j A_j^a=R^a$, where the equality follows coordinate by coordinate from the assumed completeness of $R$. Its image $z$ satisfies $Ez=z$, since this holds in every quotient and $R^a\\to\\varprojlim A_j^a$ is injective. Hence $z=i(pz)$ and the family is the reduction of $pz$. Injectivity follows from that same embedding. The inverse is linear, and this identification commutes with every module map because its quotient coordinates do. Applied degreewise, it identifies the termwise limit complex with $V$ and its projections with the given quotient maps. Each transition is surjective: $M/\\pi^{j+1}M\\to M/\\pi^jM$ sends any lift of a class to that class.",
+   "uses": [
+    "def-weil-pbc-projective-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Agent finite-retract completeness proof; algebra.tex Tag 031B (lemma-when-finite-module-complete-over-complete-ring) is a comparison, not an additional completeness assumption"
+   }
+  },
+  {
+   "text": "Write $B=\\prod_jU_j$ and $f=1-t$. In degree $q$, for any $b=(b_j)$ choose $a_1=0$ and recursively choose $a_{j+1}$ lifting $a_j-b_j$ along the surjective transition. Then $f(a)=b$. Also $f(a)=0$ means exactly that $(a_j)$ is compatible. By step 3, its kernel is the quotient image $c(V^q)$, and $c$ is injective. The quotient maps are cochain maps and $fc=0$, so $v\\mapsto(c(v),0)$ is a cochain map into $H(U)$ with precisely the coordinates specified for $e_{P,Q}$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Agent quotient-coordinate argument refining Tag 0941 (lemma-derived-limit-is-ok)"
+   }
+  },
+  {
+   "text": "The surjective-module-complex-tower theorem applies to $A_j$, whose limit is $R$ by hypothesis, and to $U_j\\cong V\\otimes_RA_j$: its transitions are scalar-linear and surjective in each degree by steps 2--3. It gives the derived-limit Roos triangle. To fix the actual quasi-isomorphism, let $(x,y)$ be a degree-$q$ cycle of our fibre model. Then $dx=0$ and $fx=dy$. Choose $a\\in B^{q-1}$ with $fa=y$ by step 4. Subtract $d(a,0)=(da,fa)$; the cycle becomes $(x-da,0)$ with $f(x-da)=0$, hence is $(c(v),0)$ for a unique cycle $v\\in V^q$. If $(c(v),0)=d(a,b)$, then $c(v)=da$ and $fa=db$. Choose $z\\in B^{q-2}$ with $fz=b$. Now $f(a-dz)=0$, so $a-dz=c(w)$ and $c(v)=c(dw)$; injectivity of $c$ gives $v=dw$. This proves surjectivity and injectivity on cohomology for the specified $e_{P,Q}$.",
+   "uses": [
+    "lem-weil-pbc-surjective-module-complex-tower-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Agent quotient-coordinate argument refining Tag 0941 (lemma-derived-limit-is-ok)"
+   }
+  },
+  {
+   "text": "Projective modules are flat, and bounded-above complexes of flat modules are K-flat; this applies to $P,Q,V$ and, after base change, to their quotient complexes, since the splittings of step 1 remain split after tensoring. Thus the derived monoidal computation identifies $V$ with $P\\otimes_R^{\\mathbf L}Q$. The K-flat scalar-tower realization, for the one-point site and $R\\to A_j$, identifies the actual derived reduction unit with $v\\mapsto v\\otimes1$ and the derived adjoint transition with the strict quotient map. Countable products of modules are exact (choose preimages coordinatewise), and the small-module-diagram theorem, with the one-point site and either terminal index category or $\\mathbf N_{\\geq1}^{\\mathrm{op}}$, gives the Grothendieck hypotheses for modules and towers, so the exact-products Roos comparison identifies localization of the zero-second-coordinate kernel map with the canonical derived-limit augmentation. Consequently our quasi-isomorphism is the canonical completion map of this derived tensor, not merely an isomorphism between its source and target. The free-module functor on underlying sets, with its evaluation surjection, supplies the functorial flat resolutions required by the derived-monoidal theorem.",
+   "uses": [
+    "lem-weil-pbc-projective-module-flat",
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-sfb-derived-monoidal",
+    "lem-pe-kflat-scalar-tower-realization",
+    "lem-weil-pbc-exact-products-roos-comparison",
+    "lem-weil-pbc-small-module-diagrams-grothendieck"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Agent quotient-coordinate argument refining Tag 0941 (lemma-derived-limit-is-ok)"
+   }
+  },
+  {
+   "text": "For cochain maps $a:P\\to P'$, $b:Q\\to Q'$, reduction of $a(x)\\otimes b(y)$ equals $(a\\bmod\\pi^j)(\\bar x)\\otimes(b\\bmod\\pi^j)(\\bar y)$, giving a strictly commuting augmentation square. Bounded-above projective complexes are K-projective, and the K-projective Hom bijection says that every derived morphism between our bounded projective models is represented by a cochain map uniquely up to homotopy. These squares therefore give naturality for all derived morphisms: tensoring a homotopy in the first variable gives $h\\otimes1$; in the second variable it gives $x\\otimes y\\mapsto(-1)^{\\deg x}x\\otimes h(y)$. A strict tower homotopy $h_j$ induces the fibre homotopy $(x,y)\\mapsto((h_jx_j)_j,-(h_jy_j)_j)$; substituting into $dH+Hd$ gives the difference of the induced fibre maps. Thus both the tensor and fibre maps depend only on the homotopy classes. An isomorphism of derived models is represented by maps inverse up to homotopy, so the comparison is an isomorphism and the strictly commuting squares prove independence of models and the identity and composition laws.",
+   "uses": [
+    "lem-sc-bounded-above-projective-kprojective",
+    "lem-coef-kprojective-derived-hom-bijection",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Agent quotient-coordinate argument refining Tag 0941 (lemma-derived-limit-is-ok)"
+   }
+  },
+  {
+   "text": "For a third bounded projective complex $T$ and homogeneous $x,y,z$, both associator routes have quotient coordinate $\\bar x\\otimes(\\bar y\\otimes\\bar z)$ under step 2. For degrees $r,s$ both symmetry routes have coordinate $(-1)^{rs}\\bar y\\otimes\\bar x$. The left unitor routes send $\\bar a\\otimes\\bar x$ to $\\overline{ax}$, and the right unitor routes send $\\bar x\\otimes\\bar a$ to $\\overline{ax}$. The coefficient unit sends $1$ to $(1\\bmod\\pi^j)_j$. In every case the shifted coordinate is zero, preserved by the product cochain maps, so these are equal maps to the fibre, not only equal maps after projection. Localizing gives the asserted coherence diagrams, since the derived associators and unitors are induced from complexes.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "lem-sfb-derived-monoidal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Agent quotient-coordinate argument refining Tag 0941 (lemma-derived-limit-is-ok)"
+   }
+  },
+  {
+   "text": "For $m\\geq n$, the quotient $A_m\\to A_n$ sends the $m$-coordinate of the augmentation to its $n$-coordinate: $(x\\bmod\\pi^m)\\otimes(y\\bmod\\pi^m)$ goes to $(x\\bmod\\pi^n)\\otimes(y\\bmod\\pi^n)$. Products, associators, signs and multiplication commute with these quotient homomorphisms. In particular all further-quotient squares commute on both coordinates, the shifted coordinate staying zero.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Agent quotient-coordinate argument refining Tag 0941 (lemma-derived-limit-is-ok)"
+   }
+  },
+  {
+   "text": "Let $R\\to S$ be as in the statement and first use the $\\pi$-power quotients $B_j=S/\\pi^jS$. The balanced scalar tensorator is $\\beta:((P\\otimes_RS)\\otimes_S(Q\\otimes_RS))\\xrightarrow{\\sim}V\\otimes_RS$, $(x\\otimes s)\\otimes(y\\otimes u)\\mapsto(x\\otimes y)\\otimes su$. The same formula in $B_j$ identifies the scalar-extended quotient tensor tower with the quotient tower of $V\\otimes_RS$. The finite-free scalar comparison for Roos complexes commutes with augmentations: on first coordinates the two routes send $((x\\otimes y)\\otimes s)$ to $((\\bar x\\otimes\\bar y)\\otimes\\bar s)_j$, and both shifted coordinates are zero. Thus the square with $e_{P,Q}\\otimes_RS$, $\\beta$, and the $\\pi$-power completion of the extended complexes commutes. Tensor with $S$ is exact, so it computes derived extension and preserves the quasi-isomorphism. The finite-free strict-tower transport identifies this chain comparison with the canonical derived completion comparison, independently of a chosen basis.",
+   "uses": [
+    "lem-pur-compact-support-roos-cofinality",
+    "lem-weil-pbc-finite-free-strict-tower-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Agent quotient-coordinate argument refining Tag 0941 (lemma-derived-limit-is-ok)"
+   }
+  },
+  {
+   "text": "Write $\\sigma$ for a uniformizer of $S$. The free $R$-module $S$ has positive rank, since $S$ is a nonzero unital ring; hence multiplication by the nonzero $\\pi$ is injective on $S$ and its image in $S$ is nonzero. The DVR factorization gives $\\pi=u\\sigma^e$. Locality makes $\\pi$ a nonunit, so $e\\geq1$. Thus $B_j=S/\\sigma^{ej}S$. Apply the explicit cofinal Roos restriction $r_e$ to the full $\\sigma$-power tower of the extended tensor. It is a quasi-isomorphism and sends its quotient augmentation to the augmentation at levels $ej$. More explicitly its first coordinate is restriction $x\\mapsto(x_{ej})_j$ and its shifted coordinate is the block sum of transition images, which sends zero to zero. Together with step 10 this gives the required square in the derived category by inverting $r_e$. It is the comparison through the cofinal quotient maps specified in the statement; no equality of the two indexed towers is assumed.",
+   "uses": [
+    "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+    "lem-pur-compact-support-roos-cofinality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Agent quotient-coordinate argument refining Tag 0941 (lemma-derived-limit-is-ok)"
+   }
+  },
+  {
+   "text": "For $R\\to S\\to T$, the two scalar tensorator composites send $(x\\otimes s)\\otimes t$ to $x\\otimes(st)$, and for the two tensor factors the scalar is the product of their scalar entries in $T$. Hence their $j$-th quotient coordinates agree by associativity of multiplication. The identity extension sends $x\\otimes1$ to $x$. The finite-free product maps have these same coordinate formulas, so their identity and composition diagrams commute. If $\\pi=u\\sigma^e$ and $\\sigma=v\\tau^f$ in $T$, then $\\pi=(uv^e)\\tau^{ef}$; the cofinal restrictions satisfy that two successive cofinal restrictions equal $r_{ef}$, because their first-coordinate restrictions compose and their block sums concatenate the same transitions. The cofinality lemma supplies this composition law. All augmentations in these diagrams retain zero shifted coordinate. Thus the identity and iterated-extension squares, including the cofinal completion comparisons, commute.",
+   "uses": [
+    "lem-pur-compact-support-roos-cofinality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Agent quotient-coordinate argument refining Tag 0941 (lemma-derived-limit-is-ok)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-projective-module",
+  "def-weil-finitely-generated-module",
+  "def-pc-tensor-complex-sheaves",
+  "lem-weil-pbc-surjective-module-complex-tower-limit",
+  "lem-weil-pbc-projective-module-flat",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-sfb-derived-monoidal",
+  "lem-pe-kflat-scalar-tower-realization",
+  "lem-weil-pbc-exact-products-roos-comparison",
+  "lem-weil-pbc-small-module-diagrams-grothendieck",
+  "lem-sc-bounded-above-projective-kprojective",
+  "lem-coef-kprojective-derived-hom-bijection",
+  "lem-pur-compact-support-roos-cofinality",
+  "lem-weil-pbc-finite-free-strict-tower-transport",
+  "lem-weil-pbc-dvr-unit-times-uniformizer-power"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941, lemma-derived-limit-is-ok; explicit finite-retract and pure-tensor calculations supplied by NJ, following the parent completion route"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,10 +215,45 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian.congr_simp\", \"module\": \"Mathlib.RingTheory.AdicCompletion.AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) (M : Type u) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [inst_3 : IsNoetherianRing R] [inst_4 : Module.Finite R M],\\n  AdicCompletion.ofTensorProductEquivOfFiniteNoetherian I M = AdicCompletion.ofTensorProductEquivOfFiniteNoetherian I M\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, the tensor product of the $ I $-adic completion of $ R $ with $ M $ is linearly equivalent to the \"}\n  {\"name\": \"AdicCompletion.tensor_map_id_left_eq_map\", \"module\": \"Mathlib.RingTheory.AdicCompletion.AsTensorProduct\", \"type\": \":\\n  (AlgebraTensorModule.map LinearMap.id f) =\\n    (ofTensorProductEquivOfFiniteNoetherian I N).symm.toLinearMap ∘ₗ\\n      map I f ∘ₗ (ofTensorProductEquivOfFiniteNoetherian I M).toLinearMap\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, the tensor product of the $ I $-adic completion of $ R $ with $ M $ is isomorphic to the $ I $-adi\"}\n  {\"name\": \"AdicCompletion.module\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Algebra\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      {M : Type u_3} →\\n        [inst_1 : AddCommGroup M] → [inst_2 : Module R M] → Module (AdicCompletion I R) (AdicCompletion I M)\", \"doc\": \"For a commutative ring $ R $, an ideal $ I $, and an $ R $-module $ M $, the $ I $-adic completion of $ M $ admits a scalar multiplication by the $ I $-adic completion of $ R $, making it a module ove\"}\n  {\"name\": \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian\", \"module\": \"Mathlib.RingTheory.AdicCompletion.AsTensorProduct\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      (M : Type u) →\\n        [inst_1 : AddCommGroup M] →\\n          [inst_2 : Module R M] →\\n            [IsNoetherianRing R] →\\n              [Module.Finite R M] → TensorProduct R (AdicCompletion I R) M ≃ₗ[AdicCompletion I R] AdicCompletion I \", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, the tensor product of the $ I $-adic completion of $ R $ with $ M $ is linearly equivalent to the \"}\n  {\"name\": \"AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian\", \"module\": \"Mathlib.RingTheory.AdicCompletion.AsTensorProduct\", \"type\": \"[Module.Finite R M] : ofTensorProductEquivOfFiniteNoetherian I M = ofTensorProduct I M\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, the tensor product of the $ I $-adic completion of $ R $ with $ M $ is linearly equivalent to the \"}\n  {\"name\": \"AdicCompletion.instCommRing\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Algebra\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → (I : Ideal R) → CommRing (AdicCompletion I R)\", \"doc\": \"The $I$-adic completion of a commutative ring $R$ with respect to an ideal $I$ forms a commutative ring under component-wise operations induced by the inverse limit of the quotient rings $R/I^n$. The \"}\n  {\"name\": \"AdicCompletion\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → Ideal R → (M : Type u_4) → [inst_1 : AddCommGroup M] → [Module R M] → Type u_4\", \"doc\": \"The adic completion of an $ R $-module $ M $ with respect to an ideal $ I $ of a commutative ring $ R $ is the inverse limit of the quotient modules $ M/I^nM $, where $ I^n $ denotes the $ n $th power\"}\n  {\"name\": \"AdicCompletion.instAddCommGroup\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      (M : Type u_4) → [inst_1 : AddCommGroup M] → [inst_2 : Module R M] → AddCommGroup (AdicCompletion I M)\", \"doc\": \"The $I$-adic completion of an $R$-module $M$ with respect to an ideal $I$ of a commutative ring $R$ is equipped with the structure of an additive commutative group. The group operations (addition, neg\"}",
    "date": "2026-10-21",
    "verdict": "no match: Old step 4 and completion portions of 5, 8--9: finite-projective tensor completion with its canonical coaugmentation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A perfect complex over a complete discrete valuation ring is isomorphic to the homotopy inverse limit of its derived quotients with natural tensor compatibility",
+   "results": "Actual search returned 8 hits: BDeRhamPlus, BDeRham, DerivedCategory.quotientCompQhIso, instCommRingBDeRhamPlus, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, AdicCompletion.mk_smul_top_ofAlgEquiv_symm, HomologicalComplexUpToQuasiIso.quotientCompQhIso, AdicCompletion.mk_ofAlgEquiv_symm. ",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern ordinary completion, localization, or general resolution maps; none states the quotient tensor coaugmentation and all its coherence clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "([Pp]erfect|[Pp]rojective).*(complet|[Rr]oos)|(complet|[Rr]oos).*([Pp]erfect|[Pp]rojective)",
+   "results": "Actual search returned 0 hits: . ",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern ordinary completion, localization, or general resolution maps; none states the quotient tensor coaugmentation and all its coherence clauses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived completion of a bounded finite projective complex via its quotient inverse system",
+   "results": "Actual search returned 8 hits: AdicCompletion, HasDerivedCategory.standard, DerivedCategory, DerivedCategory.quotientCompQhIso, AdicCompletion.submodule, HomologicalComplexUpToQuasiIso.quotientCompQhIso, AdicCompletion.of, CategoryTheory.ProjectiveResolution.cochainComplex. ",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern ordinary completion, localization, or general resolution maps; none states the quotient tensor coaugmentation and all its coherence clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAdicComplete\", \"tensor\"",
+   "results": "Actual search returned 0 hits: . ",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern ordinary completion, localization, or general resolution maps; none states the quotient tensor coaugmentation and all its coherence clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The quotient unit from a bounded complex of projective modules to the mapping fibre of one minus shift on the product of its adic reductions is a quasi isomorphism",
+   "results": "Actual search returned 8 hits: CochainComplex.cm5b.instQuasiIsoIntP, CategoryTheory.ProjectiveResolution.instQuasiIsoIntπ', CategoryTheory.ProjectiveResolution.quasiIso, CategoryTheory.InjectiveResolution.instQuasiIsoIntι', CochainComplex.mappingCone.quasiIso_descShortComplex, Rep.standardComplex.quasiIso_forget₂_εToSingle₀, Rep.standardComplex.instQuasiIsoNatεToSingle₀, CochainComplex.quasiIsoAt₀_iff. ",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern ordinary completion, localization, or general resolution maps; none states the quotient tensor coaugmentation and all its coherence clauses"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sf-point-fibre-derived-tensor",
   "by": "worker",
@@ -72,5 +271,64 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sf-perfect-tensor-roos-completion",
+  "worker": "stage1",
+  "summary": "Reused existing generic tower, K-flat, K-projective and finite-free/cofinal Roos lemmas. Wrote finite-retract completeness, the actual zero-coordinate quasi-isomorphism, homotopy descent and all tensor, quotient and ramified scalar coherence calculations explicitly. No new nodes and no mathematical statement change.",
+  "blueprint": "thm-sf-kunneth-relative, final compact-support specialization over Spec k and its finite reduction/scalar extension compatibility; parent lem-sf-point-fibre-derived-tensor old step 4 and completion parts of steps 5, 8 and 9.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-surjective-module-complex-tower-limit",
+    "why": "Generic module/complex/tower tool applied on the one-point ringed site; used as its stated black box to realize the existing quotient-completion route, not to replace a geometric step of the unit."
+   },
+   {
+    "node": "lem-pc-module-bounded-flat-kflat",
+    "why": "Generic module/complex/tower tool applied on the one-point ringed site; used as its stated black box to realize the existing quotient-completion route, not to replace a geometric step of the unit."
+   },
+   {
+    "node": "lem-sfb-derived-monoidal",
+    "why": "Generic module/complex/tower tool applied on the one-point ringed site; used as its stated black box to realize the existing quotient-completion route, not to replace a geometric step of the unit."
+   },
+   {
+    "node": "lem-pe-kflat-scalar-tower-realization",
+    "why": "Generic module/complex/tower tool applied on the one-point ringed site; used as its stated black box to realize the existing quotient-completion route, not to replace a geometric step of the unit."
+   },
+   {
+    "node": "lem-weil-pbc-exact-products-roos-comparison",
+    "why": "Generic module/complex/tower tool applied on the one-point ringed site; used as its stated black box to realize the existing quotient-completion route, not to replace a geometric step of the unit."
+   },
+   {
+    "node": "lem-pur-compact-support-roos-cofinality",
+    "why": "Generic module/complex/tower tool applied on the one-point ringed site; used as its stated black box to realize the existing quotient-completion route, not to replace a geometric step of the unit."
+   },
+   {
+    "node": "lem-weil-pbc-finite-free-strict-tower-transport",
+    "why": "Generic module/complex/tower tool applied on the one-point ringed site; used as its stated black box to realize the existing quotient-completion route, not to replace a geometric step of the unit."
+   },
+   {
+    "node": "lem-weil-pbc-small-module-diagrams-grothendieck",
+    "why": "Provides the Grothendieck hypotheses for ordinary modules and their small strict tower category, needed by the existing exact-products Roos comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-surjective-module-complex-tower-limit",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-sfb-derived-monoidal",
+  "lem-pe-kflat-scalar-tower-realization",
+  "lem-weil-pbc-exact-products-roos-comparison",
+  "lem-pur-compact-support-roos-cofinality",
+  "lem-weil-pbc-finite-free-strict-tower-transport",
+  "lem-weil-pbc-small-module-diagrams-grothendieck"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NJ-45100206d",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NJ-45100206d (reviewer sub-agent of L); spot-checked: Read the whole 12-step split (no new nodes); statement byte-identical to live (live still unsplit, so no supersession), not on the dropped lists, no SGA. Added stmt_deps (DVR, projective, finitely generated) are used. All 15 proof_deps exist, are unmerged and equal the union of the steps' uses; a closure check finds no cycle. Steps checked by hand. Step 3: completeness of f.g. projective modules by the retract argument, so it does not rely on Tag 031B. Step 4: 1-t is surjective by recursive lifting, with kernel the compatible families. d^2=0 and e is a chain map. Step 5: cycle and boundary computation with fa=y and fz=b, all signs correct. Step 7: the fibre homotopy (hx,-hy) gives (g-g') because hf=fh. Steps 8-9: coherence of pure tensors. Step 11: positive rank gives pi nonzero and a nonunit, so pi=u sigma^e with e>=1 and S/pi^j=S/sigma^{ej}. Step 12: r_e r_f = r_ef. Cited statements verified against hypotheses: the exact-products Roos comparison (exact products of modules; towers Grothendieck via small-module-diagrams; zero-second-coordinate composite = eta); the K-flat scalar-tower realization on the one-point site; the cofinality node with A=R and B=S finite free; finite-free strict-tower transport. Sources verified in Stacks: 0941 lemma-derived-limit-is-ok, 031B, 05CE/05CF. No duplicate in the DAG. The 8 declared tool_uses are generic module/tower tools; accepted. Advisory only: the item's cone coordinate order differs from the cofinality node's by the sign isomorphism (x,y)->(-y,x), left implicit; derived-monoidal does not state the symmetry, but step 8 checks the chain-level Koszul symmetry directly; the report mentions a citations.json that is not in the commit."
  }
 }
