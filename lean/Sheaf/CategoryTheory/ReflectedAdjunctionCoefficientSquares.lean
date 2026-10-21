@@ -12,6 +12,7 @@ public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 public import Mathlib.CategoryTheory.ObjectProperty.ClosedUnderIsomorphisms
 public import Mathlib.CategoryTheory.ObjectProperty.Shift
 public import Mathlib.CategoryTheory.Shift.Adjunction
+import Mathlib.CategoryTheory.Adjunction.Restrict
 
 /-! # Unit-normalized reflection of coefficient squares
 
@@ -29,6 +30,8 @@ never required to be invertible.
 @[expose] public section
 
 set_option autoImplicit false
+set_option backward.defeqAttrib.useBackward true
+set_option backward.isDefEq.respectTransparency false
 
 noncomputable section
 
@@ -58,6 +61,14 @@ variable {C₀ : Type u₀} [Category.{v₀} C₀]
   {C₃ : Type u₃} [Category.{v₃} C₃] {C₄ : Type u₄} [Category.{v₄} C₄]
   {C₅ : Type u₅} [Category.{v₅} C₅]
 
+private theorem mate_formula {L : C₀ ⥤ C₁} {R : C₁ ⥤ C₀}
+    {L' : C₂ ⥤ C₃} {R' : C₃ ⥤ C₂}
+    (adj : L ⊣ R) (adj' : L' ⊣ R') {G : C₀ ⥤ C₂} {H : C₁ ⥤ C₃}
+    (α : G ⋙ L' ⟶ L ⋙ H) (Z : C₁) :
+    (mateEquiv adj adj' α).app Z =
+      adj'.homEquiv _ _ (α.app (R.obj Z) ≫ H.map (adj.counit.app Z)) := by
+  simp [mateEquiv, Adjunction.homEquiv_unit, Functor.map_comp]
+
 /-- The specified reflector followed by the inclusion, denoted Λ in the node.
 
 Source: scalar-extension blueprint, coherent pullback/direct-image comparisons;
@@ -73,6 +84,14 @@ Stacks Tags 0037, 07A7 and 0DV0
 (blueprint: lem-weil-pbc-reflected-adjunction-coefficient-squares). -/
 def Context.unit (A : Context C₀) : 𝟭 C₀ ⟶ A.completion :=
   (reflectorAdjunction A.localObjects.ι).unit
+
+private theorem cancel_unit (A : Context C₀) (X : C₀)
+    (Y : A.localObjects.FullSubcategory)
+    {f g : A.completion.obj X ⟶ Y.obj}
+    (h : A.unit.app X ≫ f = A.unit.app X ≫ g) : f = g := by
+  dsimp only [Context.completion, Context.unit] at *
+  exact (unitCompPartialBijectiveAux (i := A.localObjects.ι) X Y).symm.injective (by
+    simpa only [unitCompPartialBijectiveAux_symm_apply] using h)
 
 /-- An adjunction with a local-object-preserving right adjoint and normalized γ.
 
@@ -116,7 +135,13 @@ Stacks Tags 0037, 07A7 and 0DV0
 (blueprint: lem-weil-pbc-reflected-adjunction-coefficient-squares). -/
 theorem Change.preserves {A : Context C₀} {B : Context C₁} (c : Change A B)
     (X : C₀) (hX : A.localObjects X) : B.localObjects (c.F.obj X) := by
-  sorry
+  have hη : IsIso (A.unit.app X) :=
+    Functor.essImage.unit_isIso (A.localObjects.ι.obj_mem_essImage ⟨X, hX⟩)
+  have : IsIso (B.unit.app (c.F.obj X)) := by
+    rw [← c.kappa_unit X]
+    infer_instance
+  exact B.localObjects.prop_of_iso (asIso (B.unit.app (c.F.obj X))).symm
+    ((reflector B.localObjects.ι).obj (c.F.obj X)).property
 
 /-- The restriction of a coefficient change, using its proved locality clause.
 
@@ -163,7 +188,15 @@ theorem Arrow.adjunction_exists {A : Context C₀} {B : Context C₁} (a : Arrow
       A.localObjects.ι.map (h.homEquiv X Y t) =
         a.adj.homEquiv X.obj Y.obj
           (B.unit.app (a.F.obj X.obj) ≫ B.localObjects.ι.map t) := by
-  sorry
+  let h : a.left ⊣ a.right :=
+    (a.adj.comp (reflectorAdjunction B.localObjects.ι)).restrictFullyFaithful
+      A.localObjects.fullyFaithfulι (Functor.FullyFaithful.id _)
+      (Iso.refl _) (Iso.refl _)
+  refine ⟨h, ?_⟩
+  intro X Y t
+  simp [h, Adjunction.restrictFullyFaithful, Adjunction.comp_homEquiv,
+    Functor.FullyFaithful.homEquiv, Context.unit]
+  rfl
 
 /-- The adjunction determined uniquely by the displayed Hom bijections.
 The postponed existence theorem determines the entire adjunction, rather than
@@ -175,6 +208,48 @@ Stacks Tags 0037, 07A7 and 0DV0
 def Arrow.reflectedAdjunction {A : Context C₀} {B : Context C₁} (a : Arrow A B) :
     a.left ⊣ a.right :=
   Classical.choose a.adjunction_exists
+
+private theorem reflected_hom {A : Context C₀} {B : Context C₁} (a : Arrow A B)
+    (X : A.localObjects.FullSubcategory) (Y : B.localObjects.FullSubcategory)
+    (t : a.left.obj X ⟶ Y) :
+    A.localObjects.ι.map (a.reflectedAdjunction.homEquiv X Y t) =
+      a.adj.homEquiv X.obj Y.obj
+        (B.unit.app (a.F.obj X.obj) ≫ B.localObjects.ι.map t) :=
+  Classical.choose_spec a.adjunction_exists X Y t
+
+private theorem reflected_unit {A : Context C₀} {B : Context C₁} (a : Arrow A B)
+    (X : A.localObjects.FullSubcategory) :
+    A.localObjects.ι.map (a.reflectedAdjunction.unit.app X) =
+      a.adj.unit.app X.obj ≫ a.G.map (B.unit.app (a.F.obj X.obj)) := by
+  have h := reflected_hom a X (a.left.obj X) (𝟙 _)
+  rw [Adjunction.homEquiv_id] at h
+  change A.localObjects.ι.map (a.reflectedAdjunction.unit.app X) =
+    a.adj.homEquiv X.obj (a.left.obj X).obj (B.unit.app _ ≫ 𝟙 _) at h
+  simpa only [Category.comp_id, Adjunction.homEquiv_unit] using h
+
+private theorem reflected_counit {A : Context C₀} {B : Context C₁} (a : Arrow A B)
+    (Y : B.localObjects.FullSubcategory) :
+    B.unit.app (a.F.obj (a.G.obj Y.obj)) ≫
+      B.localObjects.ι.map (a.reflectedAdjunction.counit.app Y) =
+        a.adj.counit.app Y.obj := by
+  have he : a.reflectedAdjunction.homEquiv (a.right.obj Y) Y
+      (a.reflectedAdjunction.counit.app Y) = 𝟙 _ := by
+    rw [← a.reflectedAdjunction.homEquiv_symm_id]
+    exact Equiv.apply_symm_apply _ _
+  have he' : a.adj.homEquiv (a.G.obj Y.obj) Y.obj (a.adj.counit.app Y.obj) = 𝟙 _ := by
+    rw [← a.adj.homEquiv_symm_id]
+    exact Equiv.apply_symm_apply _ _
+  apply (a.adj.homEquiv _ _).injective
+  exact (reflected_hom a (a.right.obj Y) Y
+    (a.reflectedAdjunction.counit.app Y)).symm.trans
+      ((congrArg A.localObjects.ι.map he).trans
+        ((A.localObjects.ι.map_id _).trans he'.symm))
+
+private theorem kappa_unit_inv {A : Context C₀} {B : Context C₁} (c : Change A B)
+    (X : C₀) :
+    B.unit.app (c.F.obj X) ≫ c.kappa.inv.app X = c.F.map (A.unit.app X) := by
+  rw [← c.kappa_unit]
+  simp
 
 /-- A coefficient square of the two specified left adjoints.
 
@@ -210,6 +285,14 @@ def Square.comparison (s : Square a₀ a₁ cA cB) :
     cA.F ⋙ a₁.F ⋙ B₁.completion ≅ a₀.F ⋙ B₀.completion ⋙ cB.F :=
   isoWhiskerRight s.delta B₁.completion ≪≫ isoWhiskerLeft a₀.F cB.kappa.symm
 
+private theorem comparison_unit (s : Square a₀ a₁ cA cB) (X : C₀) :
+    B₁.unit.app (a₁.F.obj (cA.F.obj X)) ≫ s.comparison.hom.app X =
+      s.delta.hom.app X ≫ cB.F.map (B₀.unit.app (a₀.F.obj X)) := by
+  change B₁.unit.app _ ≫ B₁.completion.map (s.delta.hom.app X) ≫
+    cB.kappa.inv.app _ = _
+  rw [← Category.assoc, ← B₁.unit.naturality, Category.assoc]
+  exact congrArg (s.delta.hom.app X ≫ ·) (kappa_unit_inv cB _)
+
 /-- Naturality needed to construct the local comparison from its ambient formula.
 
 Proof: step 3. Both components are lifted by the full inclusion; apply
@@ -224,7 +307,8 @@ theorem Square.comparison_naturality (s : Square a₀ a₁ cA cB)
         (B₁.localObjects.isoMk (s.comparison.app Y.obj)).hom =
       (B₁.localObjects.isoMk (s.comparison.app X.obj)).hom ≫
         (a₀.left ⋙ cB.restrict).map f := by
-  sorry
+  apply B₁.localObjects.ι.map_injective
+  exact s.comparison.hom.naturality (A₀.localObjects.ι.map f)
 
 /-- The canonical comparison on local objects, with actual isomorphism data.
 
@@ -253,7 +337,20 @@ theorem Square.mate (s : Square a₀ a₁ cA cB)
     A₁.localObjects.ι.map
         ((mateEquiv a₀.reflectedAdjunction a₁.reflectedAdjunction
           s.localComparison.hom).app Y) = s.beta.app Y.obj := by
-  sorry
+  have hm := reflected_hom a₁ (cA.restrict.obj (a₀.right.obj Y))
+    (cB.restrict.obj Y)
+    (s.localComparison.hom.app (a₀.right.obj Y) ≫
+      cB.restrict.map (a₀.reflectedAdjunction.counit.app Y))
+  rw [mate_formula]
+  refine hm.trans ?_
+  unfold Square.beta
+  rw [mate_formula]
+  congr 1
+  change B₁.unit.app _ ≫ s.comparison.hom.app _ ≫
+    cB.F.map (B₀.localObjects.ι.map (a₀.reflectedAdjunction.counit.app Y)) = _
+  rw [← Category.assoc, comparison_unit, Category.assoc, ← cB.F.map_comp]
+  exact congrArg (fun f ↦ s.delta.hom.app (a₀.G.obj Y.obj) ≫ cB.F.map f)
+    (reflected_counit a₀ Y)
 
 /-- The ambient γ/κ normalization equation, including nonlocal inputs.
 
@@ -270,7 +367,22 @@ theorem Square.normalization (s : Square a₀ a₁ cA cB) (M : C₁) :
     cA.F.map (a₀.gamma.hom.app M) ≫ s.beta.app (B₀.completion.obj M) =
       cA.kappa.hom.app (a₀.G.obj M) ≫ A₁.completion.map (s.beta.app M) ≫
         a₁.gamma.hom.app (cB.F.obj M) ≫ a₁.G.map (cB.kappa.inv.app M) := by
-  sorry
+  apply (cancel_epi (cA.kappa.inv.app (a₀.G.obj M))).mp
+  apply cancel_unit A₁ _
+    ⟨_, a₁.preserves _ (cB.preserves _ ((reflector B₀.localObjects.ι).obj M).property)⟩
+  simp only [← Category.assoc, kappa_unit_inv]
+  rw [← cA.F.map_comp, a₀.gamma_unit]
+  rw [show cA.F.map (a₀.G.map (B₀.unit.app M)) ≫
+      s.beta.app (B₀.completion.obj M) =
+      s.beta.app M ≫ a₁.G.map (cB.F.map (B₀.unit.app M)) from
+    s.beta.naturality (B₀.unit.app M)]
+  simp only [Category.assoc]
+  rw [← Category.assoc, ← Category.assoc, cA.kappa_unit]
+  simp only [Category.assoc]
+  rw [← A₁.unit.naturality_assoc]
+  dsimp only [Functor.comp_obj, Functor.id_map]
+  rw [reassoc_of% (a₁.gamma_unit (cB.F.obj M))]
+  rw [← a₁.G.map_comp, kappa_unit_inv]
 
 variable {A₂ : Context C₄} {B₂ : Context C₅}
   {a₂ : Arrow A₂ B₂} {dA : Change A₁ A₂} {dB : Change B₁ B₂}
@@ -289,7 +401,7 @@ theorem Change.comp_kappa_unit
     d.F.map (c.F.map (A.unit.app X)) ≫
       d.F.map (c.kappa.hom.app X) ≫ d.kappa.hom.app (c.F.obj X) =
         D.unit.app (d.F.obj (c.F.obj X)) := by
-  sorry
+  rw [← d.F.map_comp_assoc, c.kappa_unit, d.kappa_unit]
 
 /-- The specified composite coefficient data: κ_DC=κ_D D(κ_C).
 
@@ -333,7 +445,16 @@ theorem Square.coefficient_pasting (s : Square a₀ a₁ cA cB)
     ((mateEquiv (G := cA.F ⋙ dA.F) (H := cB.F ⋙ dB.F) a₀.adj a₂.adj
         (whiskerLeft cA.F t.delta.hom ≫ whiskerRight s.delta.hom dB.F)).app M =
       dA.F.map (s.beta.app M) ≫ t.beta.app (cB.F.obj M)) := by
-  sorry
+  constructor
+  · dsimp [Square.comparison]
+    simp only [Functor.map_comp, Category.assoc]
+    have hn := dB.kappa.inv.naturality (s.delta.hom.app X.obj)
+    dsimp only [Functor.comp_map] at hn
+    rw [reassoc_of% hn]
+  · simpa [TwoSquare.hComp, TwoSquare.vComp, Square.beta] using
+      congrArg (fun α ↦ α.app M)
+        (mateEquiv_vcomp a₀.adj a₁.adj a₂.adj
+          (TwoSquare.mk _ _ _ _ s.delta.hom) (TwoSquare.mk _ _ _ _ t.delta.hom))
 
 /-- The composite completion comparison has the required unit normalization.
 
@@ -348,7 +469,7 @@ theorem Arrow.comp_gamma_unit {A : Context C₀} {B : Context C₁} {D : Context
     A.unit.app (a.G.obj (h.G.obj M)) ≫
       a.gamma.hom.app (h.G.obj M) ≫ a.G.map (h.gamma.hom.app M) =
         a.G.map (h.G.map (D.unit.app M)) := by
-  sorry
+  rw [← Category.assoc, a.gamma_unit, ← a.G.map_comp, h.gamma_unit]
 
 /-- The specified composite adjunction and normalized completion comparison.
 
@@ -374,6 +495,33 @@ def Arrow.compositionComparison {A : Context C₀} {B : Context C₁} {D : Conte
     (a : Arrow A B) (h : Arrow B D) :
     a.F ⋙ h.F ⋙ D.completion ⟶ a.F ⋙ B.completion ⋙ h.F ⋙ D.completion :=
   whiskerRight (whiskerLeft a.F B.unit) (h.F ⋙ D.completion)
+
+private def completedHom {B : Context C₁} {D : Context C₂} (h : Arrow B D)
+    (V : C₁) (Z : D.localObjects.FullSubcategory) :
+    (D.completion.obj (h.F.obj V) ⟶ Z.obj) ≃ (V ⟶ h.G.obj Z.obj) :=
+  (unitCompPartialBijectiveAux (i := D.localObjects.ι) (h.F.obj V) Z).symm.trans
+    (h.adj.homEquiv V Z.obj)
+
+private theorem completedHom_apply {B : Context C₁} {D : Context C₂} (h : Arrow B D)
+    (V : C₁) (Z : D.localObjects.FullSubcategory)
+    (t : D.completion.obj (h.F.obj V) ⟶ Z.obj) :
+    completedHom h V Z t = h.adj.homEquiv V Z.obj (D.unit.app (h.F.obj V) ≫ t) := by
+  change h.adj.homEquiv V Z.obj
+    ((unitCompPartialBijectiveAux (i := D.localObjects.ι) (h.F.obj V) Z).symm t) = _
+  exact congrArg (h.adj.homEquiv V Z.obj)
+    (unitCompPartialBijectiveAux_symm_apply (i := D.localObjects.ι)
+      (A := h.F.obj V) (B := Z) t)
+
+private theorem completedHom_naturality {B : Context C₁} {D : Context C₂}
+    (h : Arrow B D) {V W : C₁} (f : V ⟶ W)
+    (Z : D.localObjects.FullSubcategory)
+    (t : D.completion.obj (h.F.obj W) ⟶ Z.obj) :
+    completedHom h V Z (D.completion.map (h.F.map f) ≫ t) =
+      f ≫ completedHom h W Z t := by
+  simp only [completedHom_apply]
+  rw [← Category.assoc, ← D.unit.naturality]
+  simp only [Functor.id_map, Category.assoc]
+  exact h.adj.homEquiv_naturality_left f _
 
 /-- The composition comparison is invertible on local inputs and identifies
 the Hom bijections of the reflected composite and the composite reflections.
@@ -402,7 +550,43 @@ theorem Arrow.compositionComparison_spec
           (B.unit.app (a.F.obj X.obj) ≫
             h.adj.homEquiv (B.completion.obj (a.F.obj X.obj)) Z.obj
               (D.unit.app (h.F.obj (B.completion.obj (a.F.obj X.obj))) ≫ t)) := by
-  sorry
+  let V := a.F.obj X.obj
+  let Q : D.localObjects.FullSubcategory := (reflector D.localObjects.ι).obj (h.F.obj V)
+  let P : D.localObjects.FullSubcategory :=
+    (reflector D.localObjects.ι).obj (h.F.obj (B.completion.obj V))
+  let q : Q.obj ⟶ P.obj := (a.compositionComparison h).app X.obj
+  have heq (Z : D.localObjects.FullSubcategory) (t : P.obj ⟶ Z.obj) :
+      completedHom h V Z (q ≫ t) =
+        B.unit.app V ≫ completedHom h (B.completion.obj V) Z t :=
+    completedHom_naturality h (B.unit.app V) Z t
+  have hbij (Z : D.localObjects.FullSubcategory) :
+      Function.Bijective (fun t : P.obj ⟶ Z.obj ↦ q ≫ t) := by
+    let e := (completedHom h (B.completion.obj V) Z).trans
+      ((unitCompPartialBijectiveAux (i := B.localObjects.ι) V (h.right.obj Z)).symm.trans
+        (completedHom h V Z).symm)
+    have ee : (fun t : P.obj ⟶ Z.obj ↦ q ≫ t) = e := by
+      funext t
+      apply (completedHom h V Z).injective
+      change completedHom h V Z (q ≫ t) =
+        completedHom h V Z ((completedHom h V Z).symm
+          ((unitCompPartialBijectiveAux (i := B.localObjects.ι) V (h.right.obj Z)).symm
+            (completedHom h (B.completion.obj V) Z t)))
+      rw [Equiv.apply_symm_apply]
+      exact (heq Z t).trans
+        (unitCompPartialBijectiveAux_symm_apply (i := B.localObjects.ι)
+          (A := V) (B := h.right.obj Z) (completedHom h (B.completion.obj V) Z t)).symm
+    rw [ee]
+    exact e.bijective
+  obtain ⟨r, hr⟩ := (hbij Q).surjective (𝟙 Q.obj)
+  have hr' : r ≫ q = 𝟙 P.obj := (hbij P).injective (by
+    simp only [← Category.assoc, hr, Category.id_comp, Category.comp_id])
+  refine ⟨⟨⟨r, hr, hr'⟩⟩, ?_⟩
+  intro Z t
+  rw [Adjunction.comp_homEquiv]
+  change a.adj.homEquiv X.obj (h.G.obj Z.obj)
+      (h.adj.homEquiv V Z.obj (D.unit.app (h.F.obj V) ≫ q ≫ t)) = _
+  congr 1
+  simpa only [completedHom_apply] using heq Z t
 
 /-- Pasting along adjunctions uses the specified composite adjunctions and δ squares.
 
@@ -444,7 +628,26 @@ theorem Square.adjunction_pasting
     ((mateEquiv (a₀.adj.comp h₀.adj) (a₁.adj.comp h₁.adj)
         (whiskerRight s.delta.hom h₁.F ≫ whiskerLeft a₀.F t.delta.hom)).app Z =
       s.beta.app (h₀.G.obj Z) ≫ a₁.G.map (t.beta.app Z)) := by
-  sorry
+  constructor
+  · change D₁.completion.map (h₁.F.map (B₁.unit.app _)) ≫
+      D₁.completion.map (h₁.F.map (s.comparison.hom.app X.obj)) ≫
+      t.comparison.hom.app _ = _
+    rw [← D₁.completion.map_comp_assoc, ← h₁.F.map_comp, comparison_unit]
+    dsimp [Square.comparison, Arrow.compositionComparison]
+    simp only [Functor.map_comp, Category.assoc]
+    have hn := congrArg D₁.completion.map
+      (t.delta.hom.naturality (B₀.unit.app (a₀.F.obj X.obj)))
+    dsimp only [Functor.comp_map] at hn
+    simp only [Functor.map_comp] at hn
+    rw [reassoc_of% hn]
+    have hk := cD.kappa.inv.naturality (h₀.F.map (B₀.unit.app (a₀.F.obj X.obj)))
+    dsimp only [Functor.comp_map] at hk
+    rw [hk]
+    rfl
+  · simpa [TwoSquare.hComp, TwoSquare.vComp, Square.beta] using
+      congrArg (fun α ↦ α.app Z)
+        (mateEquiv_hcomp a₀.adj a₁.adj h₀.adj h₁.adj
+          (TwoSquare.mk _ _ _ _ s.delta.hom) (TwoSquare.mk _ _ _ _ t.delta.hom))
 
 /-- Repeated coefficient composition is associative with its specified κ.
 
@@ -458,7 +661,7 @@ theorem Change.associativity
     {A : Context C₀} {B : Context C₁} {D : Context C₂} {E : Context C₃}
     (c : Change A B) (d : Change B D) (e : Change D E) (X : C₀) :
     ((c.comp d).comp e).kappa.hom.app X = (c.comp (d.comp e)).kappa.hom.app X := by
-  sorry
+  simp [Change.comp]
 
 /-- Repeated adjunction pasting gives the same normalized comparisons and
 Hom bijections for either parenthesization.
@@ -485,7 +688,15 @@ theorem Arrow.associativity
     ∀ (t : k.F.obj (h.F.obj (a.F.obj X.obj)) ⟶ Y),
       ((a.comp h).comp k).adj.homEquiv X.obj Y t =
         (a.comp (h.comp k)).adj.homEquiv X.obj Y t := by
-  sorry
+  refine ⟨?_, ?_, ?_⟩
+  · dsimp [Arrow.compositionComparison, Arrow.comp]
+    rw [← E.completion.map_comp, ← k.F.map_comp]
+    rw [← D.unit.naturality]
+    simp only [Functor.id_map, Functor.map_comp]
+  · simp [Arrow.comp]
+  · intro t
+    simp only [Arrow.comp, Adjunction.comp_homEquiv]
+    rfl
 
 /-- The identity coefficient data, with literal identity functor.
 
@@ -519,7 +730,9 @@ theorem Square.identity {A : Context C₀} {B : Context C₁} (a : Arrow A B)
     (X : A.localObjects.FullSubcategory) (Y : C₁) :
     (Square.id a).comparison.hom.app X.obj = 𝟙 _ ∧
       (Square.id a).beta.app Y = 𝟙 _ := by
-  sorry
+  constructor
+  · simp [Square.id, Square.comparison, Change.id]
+  · simp [Square.beta, Square.id, Change.id, mateEquiv]
 
 /-- The identity adjunction with its literal functors and normalized γ.
 
@@ -549,7 +762,10 @@ theorem Arrow.identity {A : Context C₀} (X : A.localObjects.FullSubcategory) :
       A.unit.app X.obj ∧
     A.unit.app X.obj ≫
       A.localObjects.ι.map ((Arrow.id A).reflectedAdjunction.counit.app X) = 𝟙 _ := by
-  sorry
+  refine ⟨?_, ?_, ?_⟩
+  · exact Functor.essImage.unit_isIso (A.localObjects.ι.obj_mem_essImage X)
+  · simpa [Arrow.id] using reflected_unit (Arrow.id A) X
+  · simpa [Arrow.id] using reflected_counit (Arrow.id A) X
 
 /-- Local objects are stable under all specified shifts.
 
@@ -563,7 +779,20 @@ Stacks Tags 0037, 07A7 and 0DV0
 theorem Context.stableUnderShift (A : Context C₀) [HasShift C₀ ℤ]
     [A.completion.CommShift ℤ] [NatTrans.CommShift A.unit ℤ] :
     A.localObjects.IsStableUnderShift ℤ := by
-  sorry
+  constructor
+  intro n
+  constructor
+  intro X hX
+  have : IsIso (A.unit.app X) :=
+    Functor.essImage.unit_isIso (A.localObjects.ι.obj_mem_essImage ⟨X, hX⟩)
+  have hn : A.unit.app (X⟦n⟧) =
+      (A.unit.app X)⟦n⟧' ≫ (A.completion.commShiftIso n).inv.app X := by
+    simpa using NatTrans.app_shift A.unit n X
+  have : IsIso (A.unit.app (X⟦n⟧)) := by
+    rw [hn]
+    infer_instance
+  exact A.localObjects.prop_of_iso (asIso (A.unit.app (X⟦n⟧))).symm
+    ((reflector A.localObjects.ι).obj (X⟦n⟧)).property
 
 attribute [instance] Context.stableUnderShift
 
@@ -615,6 +844,68 @@ instance Change.restrictCommShift {A : Context C₀} {B : Context C₁} (c : Cha
   inferInstanceAs ((B.localObjects.lift (A.localObjects.ι ⋙ c.F)
     (fun X ↦ c.preserves X.obj X.property)).CommShift ℤ)
 
+private theorem commShift_of_whiskerRight
+    {F G : C₀ ⥤ C₁} {I : C₁ ⥤ C₂} [I.Faithful]
+    [HasShift C₀ ℤ] [HasShift C₁ ℤ] [HasShift C₂ ℤ]
+    [F.CommShift ℤ] [G.CommShift ℤ] [I.CommShift ℤ]
+    (τ : F ⟶ G) [NatTrans.CommShift (whiskerRight τ I) ℤ] :
+    NatTrans.CommShift τ ℤ := by
+  constructor
+  intro n
+  ext X
+  apply I.map_injective
+  apply (cancel_mono ((I.commShiftIso n).hom.app (G.obj X))).mp
+  have ht := NatTrans.shift_app_comm (whiskerRight τ I) n X
+  simpa only [Functor.commShiftIso_comp_hom_app, whiskerRight_app,
+    NatTrans.comp_app, whiskerLeft_app, Functor.map_comp, Category.assoc,
+    ← Functor.commShiftIso_hom_naturality] using ht
+
+private theorem commShift_of_comparison
+    {F G : C₀ ⥤ C₁} {I : C₁ ⥤ C₂} [I.Faithful] {F' G' : C₀ ⥤ C₂}
+    [HasShift C₀ ℤ] [HasShift C₁ ℤ] [HasShift C₂ ℤ]
+    [F.CommShift ℤ] [G.CommShift ℤ] [I.CommShift ℤ]
+    [F'.CommShift ℤ] [G'.CommShift ℤ]
+    (τ : F ⟶ G) (eF : F ⋙ I ≅ F') (eG : G ⋙ I ≅ G')
+    [NatTrans.CommShift eF.hom ℤ] [NatTrans.CommShift eG.hom ℤ]
+    (σ : F' ⟶ G') [NatTrans.CommShift σ ℤ]
+    (h : whiskerRight τ I = eF.hom ≫ σ ≫ eG.inv) : NatTrans.CommShift τ ℤ := by
+  have : NatTrans.CommShift (whiskerRight τ I) ℤ := by
+    rw [h]
+    infer_instance
+  exact commShift_of_whiskerRight (I := I) τ
+
+private def completionInclusion (A : Context C₀) :
+    reflector A.localObjects.ι ⋙ A.localObjects.ι ≅ A.completion := Iso.refl _
+
+private def leftInclusion {A : Context C₀} {B : Context C₁} (a : Arrow A B) :
+    a.left ⋙ B.localObjects.ι ≅ A.localObjects.ι ⋙ a.F ⋙ B.completion :=
+  associator A.localObjects.ι (a.F ⋙ reflector B.localObjects.ι) B.localObjects.ι ≪≫
+    isoWhiskerLeft A.localObjects.ι
+      (associator a.F (reflector B.localObjects.ι) B.localObjects.ι ≪≫
+        isoWhiskerLeft a.F (completionInclusion B))
+
+private theorem leftInclusion_shift {A : Context C₀} {B : Context C₁} (a : Arrow A B)
+    [HasShift C₀ ℤ] [HasShift C₁ ℤ]
+    [A.completion.CommShift ℤ] [NatTrans.CommShift A.unit ℤ]
+    [B.completion.CommShift ℤ] [NatTrans.CommShift B.unit ℤ] [a.F.CommShift ℤ] :
+    NatTrans.CommShift (leftInclusion a).hom ℤ := by
+  have : NatTrans.CommShift (completionInclusion B).hom ℤ :=
+    Functor.CommShift.ofComp_compatibility (F := reflector B.localObjects.ι)
+      (G := B.localObjects.ι) (completionInclusion B) ℤ
+  dsimp only [leftInclusion, Iso.trans_hom, isoWhiskerLeft_hom]
+  simp only [whiskerLeft_comp]
+  infer_instance
+
+private def rightInclusion {A : Context C₀} {B : Context C₁} (a : Arrow A B) :
+    a.right ⋙ A.localObjects.ι ≅ B.localObjects.ι ⋙ a.G :=
+  A.localObjects.liftCompιIso (B.localObjects.ι ⋙ a.G)
+    (fun Y ↦ a.preserves Y.obj Y.property)
+
+private def changeInclusion {A : Context C₀} {B : Context C₁} (c : Change A B) :
+    c.restrict ⋙ B.localObjects.ι ≅ A.localObjects.ι ⋙ c.F :=
+  B.localObjects.liftCompιIso (A.localObjects.ι ⋙ c.F)
+    (fun X ↦ c.preserves X.obj X.property)
+
 /-- The reflected adjunction respects the specified shifts.
 
 Proof: step 10. Its unit is G(k)u, which commutes with shifts by the
@@ -630,7 +921,48 @@ theorem Arrow.reflectedAdjunction_commShift {A : Context C₀} {B : Context C₁
     [B.completion.CommShift ℤ] [NatTrans.CommShift B.unit ℤ]
     [a.F.CommShift ℤ] [a.G.CommShift ℤ] [a.adj.CommShift ℤ] :
     a.reflectedAdjunction.CommShift ℤ := by
-  sorry
+  have hl := leftInclusion_shift a
+  have hr : NatTrans.CommShift (rightInclusion a).hom ℤ := by
+    dsimp [rightInclusion]
+    infer_instance
+  let e := associator a.left a.right A.localObjects.ι ≪≫
+    isoWhiskerLeft a.left (rightInclusion a) ≪≫
+    (associator a.left B.localObjects.ι a.G).symm ≪≫
+    isoWhiskerRight (leftInclusion a) a.G
+  have he : NatTrans.CommShift e.hom ℤ := by
+    dsimp only [e, Iso.trans_hom, isoWhiskerLeft_hom, isoWhiskerRight_hom, Iso.symm_hom]
+    infer_instance
+  let σ := A.localObjects.ι.rightUnitor.inv ≫
+    whiskerLeft A.localObjects.ι a.adj.unit ≫
+    (associator A.localObjects.ι a.F a.G).inv ≫
+    whiskerRight (A.localObjects.ι ⋙ a.F).rightUnitor.inv a.G ≫
+    whiskerRight (whiskerLeft (A.localObjects.ι ⋙ a.F) B.unit) a.G ≫
+    whiskerRight (associator A.localObjects.ι a.F B.completion).hom a.G
+  have hσ : NatTrans.CommShift σ ℤ := by
+    dsimp only [σ]
+    infer_instance
+  apply Adjunction.CommShift.mk'
+  apply commShift_of_comparison a.reflectedAdjunction.unit
+    A.localObjects.ι.leftUnitor e σ
+  ext X
+  suffices ht : (a.reflectedAdjunction.unit.app X).hom =
+      a.adj.unit.app X.obj ≫ a.G.map (B.unit.app (a.F.obj X.obj)) ≫
+        a.G.map (𝟙 (B.completion.obj (a.F.obj X.obj))) by
+    simpa [e, σ, leftInclusion, rightInclusion, completionInclusion,
+      ObjectProperty.liftCompιIso, Context.completion] using ht
+  rw [a.G.map_id, Category.comp_id]
+  exact reflected_unit a X
+
+private theorem mate_shift {L : C₀ ⥤ C₁} {R : C₁ ⥤ C₀}
+    {L' : C₂ ⥤ C₃} {R' : C₃ ⥤ C₂}
+    (adj : L ⊣ R) (adj' : L' ⊣ R') {G : C₀ ⥤ C₂} {H : C₁ ⥤ C₃}
+    [HasShift C₀ ℤ] [HasShift C₁ ℤ] [HasShift C₂ ℤ] [HasShift C₃ ℤ]
+    [L.CommShift ℤ] [R.CommShift ℤ] [L'.CommShift ℤ] [R'.CommShift ℤ]
+    [G.CommShift ℤ] [H.CommShift ℤ] [adj.CommShift ℤ] [adj'.CommShift ℤ]
+    (δ : G ⋙ L' ⟶ L ⋙ H) [NatTrans.CommShift δ ℤ] :
+    NatTrans.CommShift (mateEquiv adj adj' δ).natTrans ℤ := by
+  dsimp only [mateEquiv, Equiv.coe_fn_mk, TwoSquare.mk, TwoSquare.natTrans]
+  infer_instance
 
 /-- The reflected coefficient comparison and its right mate respect shifts.
 
@@ -661,7 +993,53 @@ theorem Square.commShift (s : Square a₀ a₁ cA cB)
       NatTrans.CommShift
         (mateEquiv a₀.reflectedAdjunction a₁.reflectedAdjunction
           s.localComparison.hom).natTrans ℤ := by
-  sorry
+  let τ := (associator cA.F a₁.F B₁.completion).inv ≫
+    whiskerRight s.delta.hom B₁.completion ≫
+    (associator a₀.F cB.F B₁.completion).hom ≫ whiskerLeft a₀.F cB.kappa.inv
+  have hτ : NatTrans.CommShift τ ℤ := by
+    dsimp only [τ]
+    infer_instance
+  have hc : NatTrans.CommShift s.comparison.hom ℤ := by
+    convert hτ using 1
+    ext X
+    simp [τ, Square.comparison]
+  have hb : NatTrans.CommShift s.beta ℤ := mate_shift a₀.adj a₁.adj s.delta.hom
+  have hl₀ := leftInclusion_shift a₀
+  have hl₁ := leftInclusion_shift a₁
+  have hA : NatTrans.CommShift (changeInclusion cA).hom ℤ := by
+    dsimp [changeInclusion]
+    infer_instance
+  have hB : NatTrans.CommShift (changeInclusion cB).hom ℤ := by
+    dsimp [changeInclusion]
+    infer_instance
+  let e₁ := associator cA.restrict a₁.left B₁.localObjects.ι ≪≫
+    isoWhiskerLeft cA.restrict (leftInclusion a₁) ≪≫
+    (associator cA.restrict A₁.localObjects.ι (a₁.F ⋙ B₁.completion)).symm ≪≫
+    isoWhiskerRight (changeInclusion cA) (a₁.F ⋙ B₁.completion) ≪≫
+    associator A₀.localObjects.ι cA.F (a₁.F ⋙ B₁.completion)
+  let e₀ := associator a₀.left cB.restrict B₁.localObjects.ι ≪≫
+    isoWhiskerLeft a₀.left (changeInclusion cB) ≪≫
+    (associator a₀.left B₀.localObjects.ι cB.F).symm ≪≫
+    isoWhiskerRight (leftInclusion a₀) cB.F ≪≫
+    associator A₀.localObjects.ι (a₀.F ⋙ B₀.completion) cB.F ≪≫
+    isoWhiskerLeft A₀.localObjects.ι (associator a₀.F B₀.completion cB.F)
+  have he₁ : NatTrans.CommShift e₁.hom ℤ := by
+    dsimp only [e₁, Iso.trans_hom, isoWhiskerLeft_hom, isoWhiskerRight_hom, Iso.symm_hom]
+    infer_instance
+  have he₀ : NatTrans.CommShift e₀.hom ℤ := by
+    dsimp only [e₀, Iso.trans_hom, isoWhiskerLeft_hom, isoWhiskerRight_hom, Iso.symm_hom]
+    infer_instance
+  have hl : NatTrans.CommShift s.localComparison.hom ℤ := by
+    apply commShift_of_comparison s.localComparison.hom e₁ e₀
+      (whiskerLeft A₀.localObjects.ι s.comparison.hom)
+    ext X
+    simp [e₁, e₀, leftInclusion, changeInclusion, completionInclusion,
+      ObjectProperty.liftCompιIso, Square.localComparison, Context.completion,
+      Change.restrict]
+  have := a₀.reflectedAdjunction_commShift
+  have := a₁.reflectedAdjunction_commShift
+  exact ⟨hc, hb, hl, mate_shift a₀.reflectedAdjunction a₁.reflectedAdjunction
+    s.localComparison.hom⟩
 
 /-- The composition comparisons also commute with shifts. Consequently all
 composites in the normalization and both pasting equations are compatible.
@@ -680,6 +1058,14 @@ theorem Arrow.compositionComparison_commShift
     [B.completion.CommShift ℤ] [D.completion.CommShift ℤ]
     [a.F.CommShift ℤ] [h.F.CommShift ℤ] [NatTrans.CommShift B.unit ℤ] :
     NatTrans.CommShift (a.compositionComparison h) ℤ := by
-  sorry
+  let τ := whiskerRight a.F.rightUnitor.inv (h.F ⋙ D.completion) ≫
+    whiskerRight (whiskerLeft a.F B.unit) (h.F ⋙ D.completion) ≫
+    (associator a.F B.completion (h.F ⋙ D.completion)).hom
+  have : NatTrans.CommShift τ ℤ := by
+    dsimp only [τ]
+    infer_instance
+  convert this using 1
+  ext X
+  simp [τ, Arrow.compositionComparison]
 
 end CategoryTheory.ReflectedCoefficient
