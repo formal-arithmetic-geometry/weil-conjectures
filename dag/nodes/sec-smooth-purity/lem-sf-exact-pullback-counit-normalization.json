@@ -19,9 +19,119 @@
   "lem-sf-exact-functor-derived-triangulated",
   "def-pc-kflat-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $H(P)=Q_Y(FP)$ and $H_G(P)=Q_Y(GP)$, with the termwise extension of $m$ still denoted $m$. By the exact-functor derived-functor theorem, $(F_D,\\xi)$ is a universal left derived pair for $H$. The pair $(L,Q_Y(m)\\epsilon)$ is another: composition with the natural isomorphism $Q_Y(m)$ converts, bijectively, transformations into $H_G$ into transformations into $H$, and its inverse converts them back. Apply uniqueness of right Kan extensions to these two pairs. This gives a unique natural isomorphism $e:L\\to F_D$ with $\\xi_Pe_{Q_XP}=Q_Y(m_P)\\epsilon_P$. In particular every $\\epsilon_P$ is invertible, since the other three maps in this equation are invertible. This argument uses the specified counit, not just an abstract isomorphism between the functors.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-functor",
+    "lem-sfb-right-kan-extension-unique-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor, and its left-derived dual; universal comparison as in Mathlib CategoryTheory/Functor/KanExtension/Basic.lean rightKanExtensionUnique"
+   }
+  },
+  {
+   "text": "Write $\\mathcal T_T=\\operatorname{Tow}(\\operatorname{Mod}(B_T))$ and $\\widetilde L$ for the specified left-derived levelwise $G$, with counit $\\tau$. Kernels and cokernels in $\\mathcal T_T$ are levelwise. Hence levelwise $F$, written $F^{\\mathrm{Tow}}$, is additive and exact: evaluation of its kernel or cokernel comparison is the corresponding isomorphism for $F$. Likewise $m$ gives a natural isomorphism $m^{\\mathrm{Tow}}:G^{\\mathrm{Tow}}\\to F^{\\mathrm{Tow}}$, since its components commute with every tower transition by naturality of $m$. Apply the two cited universal comparison results to the abelian categories $\\mathcal T_X,\\mathcal T_Y$. They give a unique $E:\\widetilde L\\xrightarrow{\\sim}F_D^{\\mathrm{Tow}}$ with $\\Xi_M E_{Q M}=Q(m^{\\mathrm{Tow}}_M)\\tau_M$ for every complex of strict towers $M$, where $\\Xi$ is exact localization comparison. In particular this is a comparison in the derived category of strict towers.",
+   "uses": [
+    "lem-weil-tower-category-levelwise-abelian",
+    "lem-weil-pbc-exact-functor-derived-functor",
+    "lem-sfb-right-kan-extension-unique-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F applied to the abelian strict-tower categories; homology.tex Tag 02MZ, lemma-inverse-systems-abelian; right Kan extension uniqueness"
+   }
+  },
+  {
+   "text": "Use the counit-normalized evaluation comparisons $v_n:\\operatorname{ev}_n\\widetilde L\\cong L\\operatorname{ev}_n$. On an objectwise K-flat flat-term representative $M$, the equation for $E$ evaluates to $Q(m_{M_n})\\operatorname{ev}_n(\\tau_M)$. The equation for $e$ after $v_n$ is $Q(m_{M_n})\\epsilon_{M_n}v_n$, equal to that expression by the defining equation $\\epsilon_{M_n}v_n=\\operatorname{ev}_n(\\tau_M)$. Thus evaluation of $E$ is $e\\operatorname{ev}_n$ after $v_n$ and the exact-localization comparisons. Every derived strict tower has such a representative by the strict diagram replacement theorem; these equalities therefore hold on every object by naturality along its replacement isomorphism. The $v_n$ commute with transitions by the cited evaluation theorem, so these identifications respect all transitions as well.",
+   "uses": [
+    "lem-cbc-derived-tower-evaluation-normalization",
+    "lem-weil-pbc-diagram-kflat-replacements"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06XN, lemma-find-existence-computes, dual; normalized evaluation equation of lem-cbc-derived-tower-evaluation-normalization"
+   }
+  },
+  {
+   "text": "Let $b:\\Delta_YL\\xrightarrow{\\sim}\\widetilde L\\Delta_X$ be the counit-normalized constant-tower comparison. Let $c:\\Delta_YF_D\\xrightarrow{\\sim}F_D^{\\mathrm{Tow}}\\Delta_X$ be the comparison obtained from the identity $\\Delta_YF=F^{\\mathrm{Tow}}\\Delta_X$ on complexes by exact localization. Constant towers are exact because kernels and cokernels are levelwise. We have $E_{\\Delta K}b_K=c_K\\Delta_Y(e_K)$. To check it, represent $K$ by a K-flat flat-term $P$. Compose both sides with the target exact-localization comparison $\\Xi_{\\Delta P}$. The first becomes $Q(m_{\\Delta P})\\tau_{\\Delta P}b_{Q P}=\\Delta_Y(Q(m_P)\\epsilon_P)$ by normalization of $b$. The second is the same expression by the defining equation for $e$, since $m_{\\Delta P}=\\Delta_Ym_P$. Cancel $\\Xi_{\\Delta P}$. Naturality along a K-flat replacement proves the equation for every $K$. This verifies the constant-tower compatibility in the strict derived tower category, without testing equality merely on its evaluations.",
+   "uses": [
+    "lem-cbc-derived-constant-tower-normalization",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-tower-category-levelwise-abelian",
+    "lem-weil-pbc-diagram-kflat-replacements"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06XN, lemma-find-existence-computes, dual; counit normalization of constant towers; Tag 015F for exact localization"
+   }
+  },
+  {
+   "text": "For any $K$, choose a K-flat flat-term representative $P$ and write $R(P)_n=P\\otimes_{B_X}(P_n)_X$ and $a_P:\\Delta_XP\\to R(P)$ for $x\\mapsto x\\otimes1$. Thus $K_\\bullet=Q R(P)$. Write $a_K:\\Delta_XK\\to K_\\bullet$ for this localized augmentation. The actual pulled-back augmentation is $\\beta_K=\\widetilde L(a_K)b_K:\\Delta_YLK\\to\\widetilde L K_\\bullet$, and the exact one is $\\beta^F_K=F_D^{\\mathrm{Tow}}(a_K)c_K:\\Delta_YF_DK\\to F_D^{\\mathrm{Tow}}K_\\bullet$. Indeed the strict quotient computation gives the actual representative $w_P=\\widetilde L(Qa_P)\\tau_{\\Delta P}^{-1}$; after identifying $LK$ with $QG(P)$ by $\\epsilon_P$, this is precisely $\\beta_K$, because $\\tau_{\\Delta P}b_{Q P}=\\Delta_Y\\epsilon_P$. These formulas are compatible with changing K-flat representatives by the same cited computation. Naturality of $E$ at $a_K$ and Step 4 now give explicitly\n$$E_{K_\\bullet}\\beta_K=F_D^{\\mathrm{Tow}}(a_K)E_{\\Delta K}b_K=F_D^{\\mathrm{Tow}}(a_K)c_K\\Delta_Y(e_K)=\\beta^F_K\\Delta_Y(e_K).$$\nNo K-flatness of the quotient levels is used.",
+   "uses": [
+    "def-weil-pbc-adic-coefficient-datum",
+    "lem-cbc-strict-quotient-pullback-computation",
+    "lem-cbc-derived-constant-tower-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Strict quotient augmentation of def-weil-pbc-completed-pullback; Stacks Tag 06XN for resolving the quotient diagram; agent-written naturality square"
+   }
+  },
+  {
+   "text": "Let $L_Y=R\\lim$ be the total right derived inverse-limit functor and put $d_K=L_Y(E_{K_\\bullet})$. It is an isomorphism, since a functor sends an inverse pair to an inverse pair. Use the normalized adjunction $\\Delta_Y\\dashv L_Y$ with unit $u_C:C\\to L_Y\\Delta_YC$. The ambient construction in the completed-pullback definition is $\\alpha_K=L_Y(\\beta_K)u_{LK}$; the exact augmented construction is $\\alpha^F_K=L_Y(\\beta^F_K)u_{F_DK}$. These are exactly the chain-level compatible-map constructions: for a tower K-injective resolution of $\\Delta_YC$, the adjunction unit is the map into its termwise limit induced by the compatible resolution maps. Apply $L_Y$ to Step 5 and use the unit's naturality $L_Y(\\Delta_Ye_K)u_{LK}=u_{F_DK}e_K$. This yields\n$$d_K\\alpha_K=L_Y(E_{K_\\bullet}\\beta_K)u_{LK}=L_Y(\\beta^F_K)L_Y(\\Delta_Ye_K)u_{LK}=\\alpha^F_Ke_K.$$\nBoth sides of this equality are the specified augmented maps.",
+   "uses": [
+    "def-weil-pbc-completed-pullback",
+    "prop-weil-pbc-rlim-functoriality",
+    "lem-coef-derived-tower-counit-projections",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Stacks Tags 09T5 and 0FND (derived adjunction); sites-cohomology.tex Tag 0941 (strict derived limit); proetale.tex Tag 099N (2),(5) for the completed construction"
+   }
+  },
+  {
+   "text": "For the natural derived-limit projections $\\pi_{n,M}:L_YM\\to\\operatorname{ev}_nM$, apply the naturality asserted in the normalized tower-counit theorem to $E_{K_\\bullet}$. It gives\n$$\\pi_{n,F_D^{\\mathrm{Tow}}K_\\bullet}d_K=\\operatorname{ev}_n(E_{K_\\bullet})\\pi_{n,\\widetilde L K_\\bullet}.$$\nStep 3 identifies the evaluated map with the prescribed ordinary comparison $e$ and $v_n$. This is the claimed derived-limit evaluation compatibility. All replacements and functors used above exist on unbounded complexes. The quotient augmentation, $\\beta_K$, and $L_Y\\beta_K\\,u$ make sense for every $K$; completeness is needed only to restrict the completed-pullback functor to its intrinsic complete subcategory, not for any of these constructions or equalities. In particular the argument never identifies an arbitrary map of triangulated cones with the augmentation.",
+   "uses": [
+    "lem-coef-derived-tower-counit-projections",
+    "def-weil-pbc-completed-pullback",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "sites-cohomology.tex Tag 0941; natural projection normalization of lem-coef-derived-tower-counit-projections; ambient strict augmented construction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-sfb-right-kan-extension-unique-iso",
+  "lem-weil-tower-category-levelwise-abelian",
+  "lem-cbc-derived-tower-evaluation-normalization",
+  "lem-weil-pbc-diagram-kflat-replacements",
+  "lem-cbc-derived-constant-tower-normalization",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "def-weil-pbc-adic-coefficient-datum",
+  "lem-cbc-strict-quotient-pullback-computation",
+  "def-weil-pbc-completed-pullback",
+  "prop-weil-pbc-rlim-functoriality",
+  "lem-coef-derived-tower-counit-projections",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.md",
+  "place": "Counit-normalized exact descent and augmentation argument refining the returned localization Step 6; supporting Stacks Tags 015F, 06XN, 09T5, 0FND, 0941, 099N"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -64,10 +174,45 @@
    "results": "8 hits: CategoryTheory.constantSheafAdj_counit_app, CategoryTheory.Functor.totalLeftDerivedCounit, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, CategoryTheory.plusPlusAdjunction_counit_app_val, SheafOfModules.pullback, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, CompHausLike.LocallyConstant.counit, CategoryTheory.Sheaf.adjunction_counit_app_val",
    "date": "2026-10-21",
    "verdict": "no match: generic derived counits and mates are ingredients; no hit identifies these specified sheaf pullbacks, their strict augmented construction, and the asserted normalized maps"
+  },
+  {
+   "tool": "grep",
+   "query": "rightKanExtensionUnique|isLeftDerivedFunctor_of_inverts|totalLeftDerivedCounit",
+   "results": "15 hits: Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean",
+   "date": "2026-10-21",
+   "verdict": "no match for the full item: generic exact descent, Kan-extension uniqueness and derived counits are existing ingredients; no result includes the specified completed-coefficient strict quotient augmentation and all its normalized evaluation maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightKanExtensionUnique",
+   "results": "3 hits: CategoryTheory.Functor.rightKanExtensionUnique, CategoryTheory.Functor.rightKanExtensionUnique_hom, CategoryTheory.Functor.rightKanExtensionUnique_inv",
+   "date": "2026-10-21",
+   "verdict": "no match for the full item: generic exact descent, Kan-extension uniqueness and derived counits are existing ingredients; no result includes the specified completed-coefficient strict quotient augmentation and all its normalized evaluation maps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "exact pullback derived functor natural isomorphism commutes with completion augmentation",
+   "results": "8 hits: CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.e, CategoryTheory.Limits.CategoricalPullback.mkNatIso, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_hom_naturality, CategoryTheory.Functor.leftDerivedNatIso, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, SheafOfModules.freeFunctorCompPullbackIso, CategoryTheory.Limits.CategoricalPullback.mkNatIso_hom_app_snd, CategoryTheory.Limits.pullbackObjIso",
+   "date": "2026-10-21",
+   "verdict": "no match for the full item: generic exact descent, Kan-extension uniqueness and derived counits are existing ingredients; no result includes the specified completed-coefficient strict quotient augmentation and all its normalized evaluation maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "exact functor left derived functor counit isomorphism strict inverse tower quotient augmentation",
+   "results": "8 hits: CategoryTheory.Functor.totalLeftDerivedCounit, CategoryTheory.Functor.leftDerivedZeroIsoSelf_inv_hom_id_app, CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_app, CategoryTheory.Functor.leftDerivedZeroIsoSelf_inv_hom_id_app_assoc, CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_assoc, CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_app_assoc, CategoryTheory.Functor.leftDerivedZeroIsoSelf_inv_hom_id_assoc, CategoryTheory.Functor.instIsLeftDerivedFunctorTotalLeftDerivedTotalLeftDerivedCounit",
+   "date": "2026-10-21",
+   "verdict": "no match for the full item: generic exact descent, Kan-extension uniqueness and derived counits are existing ingredients; no result includes the specified completed-coefficient strict quotient augmentation and all its normalized evaluation maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "left derived exact functor universal comparison on inverse systems preserves quotient augmentation after right derived inverse limit",
+   "results": "8 hits: CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_assoc, CategoryTheory.Functor.leftDerivedZeroIsoSelf_inv_hom_id_assoc, CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_assoc, CategoryTheory.Functor.leftDerivedZeroIsoSelf_inv_hom_id_app_assoc, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac",
+   "date": "2026-10-21",
+   "verdict": "no match for the full item: generic exact descent, Kan-extension uniqueness and derived counits are existing ingredients; no result includes the specified completed-coefficient strict quotient augmentation and all its normalized evaluation maps."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sf-immersion-completed-pullback-comparison",
@@ -86,5 +231,64 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sf-exact-pullback-counit-normalization",
+  "worker": "stage1",
+  "summary": "Seven proof steps compare the universal counits, derive exact levelwise pullback, check evaluation and constant-tower normalizations, write the strict quotient augmentation square, and apply the normalized derived-limit adjunction. All ingredients already exist in the DAG; no new nodes. The statement is unchanged.",
+  "blueprint": "Realizes prop-sf-localization-all-stages returned proof Step 6, via lem-sf-immersion-completed-pullback-comparison: exact ordinary/strict pullback normalization and the augmentation part of the completed comparison; the current blueprint statement itself has no proof text.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Generic universal-property theorem for exact functors on unbounded derived categories, applied both to modules and strict towers; no localization-unit node supplies this Kan-extension assertion."
+   },
+   {
+    "node": "lem-cbc-derived-tower-evaluation-normalization",
+    "why": "Generic counit-normalized comparison for evaluation of the specified strict derived pullback, needed to identify the actual evaluation maps rather than merely their objects."
+   },
+   {
+    "node": "lem-cbc-derived-constant-tower-normalization",
+    "why": "Generic counit-normalized constant-tower comparison, needed to identify the specified source of the augmentation."
+   },
+   {
+    "node": "lem-weil-pbc-diagram-kflat-replacements",
+    "why": "Generic strict small-diagram K-flat replacements, used to check normalized equations on representatives of every unbounded object."
+   },
+   {
+    "node": "lem-cbc-strict-quotient-pullback-computation",
+    "why": "Generic strict quotient-augmentation counit formula and its resolution independence; it identifies the actual map used by completed pullback."
+   },
+   {
+    "node": "prop-weil-pbc-rlim-functoriality",
+    "why": "Generic total unbounded right derived inverse-limit functor, applied to the constructed tower isomorphism."
+   },
+   {
+    "node": "lem-coef-derived-tower-counit-projections",
+    "why": "Generic normalized constant-tower/derived-limit adjunction and natural projection theorem; this supplies the unit naturality and evaluation maps for the augmented construction."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "why": "Generic small-ringed-site strict tower theorem provides unbounded K-injective computation and the total derived limit, verifying the hypotheses of the projection/adjunction tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-cbc-derived-tower-evaluation-normalization",
+  "lem-cbc-derived-constant-tower-normalization",
+  "lem-weil-pbc-diagram-kflat-replacements",
+  "lem-cbc-strict-quotient-pullback-computation",
+  "prop-weil-pbc-rlim-functoriality",
+  "lem-coef-derived-tower-counit-projections",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NR-4c850784a",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-4c850784a (reviewer sub-agent of L); spot-checked: I read the full 7-step split and every cited statement. No new nodes; the statement and stmt_deps are unchanged against the live node. The item is still unsplit live and side-live, is not on the 2026-10-19 drop list and has no re-split note. No cycle: the 1096-node closure does not contain the item. Steps are 762-1039 characters. No SGA; Stacks tags 015F, 06XN, 09T5, 0FND, 0941, 099N and 02MZ all exist. Step 1: (F_D,xi) is a right Kan extension by exact-functor-derived-functor (1). (L,Q(m)eps) is another, by composition with the iso Q(m). right-kan-extension-unique-iso then gives the unique e with xi e = Q(m) eps, in the right orientation. Step 2 repeats this in Tow(Mod), whose kernels and cokernels are levelwise. Step 3: the cbc evaluation equation eps v_n = e'_n(tau) on objectwise K-flat representatives, which exist by diagram-kflat-replacements with J = N^op small; transitions come from that node's second clause. Step 4: E b = c Delta(e) is checked after the invertible Xi_{Delta P} using tau b = Delta'(eps); equality is not inferred from evaluations. Step 5: strict-quotient-pullback-computation gives w_P Delta'(eps_P) = L~(Qa_P) b_{QP}, so the definition's constant-tower augmentation is beta_K = L~(a_K) b_K. Quotient levels need not be K-flat. Step 6: d = Rlim(E). The completed-pullback definition's chain-level map C -> lim I is the unit of the adjunction Delta -| Rlim, which counit-projections says is induced by the ordinary Delta -| lim (Hom_K(Delta C, I) = Hom_K(C, lim I) for K-injective I). That gives unit naturality and the displayed equality. Step 7: the projections pi_n are natural because e_n(eps_B) = pi_n naturally in B. Edge cases checked: g = id, zero object, I = 0 and incomplete K; alpha_K is never claimed invertible. The cbc nodes are stated for the item's G with (g,c_g), R = B_X, S = B_Y, on completed-coefficient categories; no silent identification with constant coefficients. All 8 tool_uses are accepted as generic infrastructure. Advisory: Steps 1-2 take the universality of the specified pairs from the definition via lem-pur-left-derived-from-kflat-class without citing it directly; this is acceptable."
  }
 }
