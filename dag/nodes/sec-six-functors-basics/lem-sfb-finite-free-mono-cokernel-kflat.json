@@ -12,11 +12,99 @@
   "def-pc-cochain-complex-modules",
   "def-pc-quasi-iso-modules",
   "def-pc-flat-sheaf-modules",
+  "def-pc-kflat-complex",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Work in the abelian category $\\operatorname{Mod}(R)$ of [def-weil-sheaf-of-modules-category]. Since $u$ is monic and $q$ is its cokernel, $0\\to P\\xrightarrow{u}Q\\xrightarrow{q}T\\to0$ is short exact: its middle exactness is $\\operatorname{im}(u)=\\ker(q)$ in an abelian category, and a cokernel projection is epic. Placing these three objects in degree zero gives a short exact sequence of complexes (the degree-zero sequence is the displayed sequence and all other degrees are zero). The prescribed $C_u$ satisfies $d^{i+1}d^i=0$ since two successive differentials cannot both be nonzero. Moreover $qu=0$, so the prescribed components define the chain map $\\epsilon:C_u\\to T[0]$ by [def-pc-cochain-complex-modules].",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-pc-cochain-complex-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Section 010V, cochain complexes; degree-zero short exact sequence"
+   }
+  },
+  {
+   "text": "The cone convention in [def-weil-abstract-derived-category] gives $\\operatorname{Cone}(u[0])^i=Q[0]^i\\oplus P[0]^{i+1}$ with differential $\\left(\\begin{smallmatrix}d_Q&u[0]\\\\0&-d_P\\end{smallmatrix}\\right)$. Thus its only nonzero terms are $P$ in degree $-1$ and $Q$ in degree $0$, and its only possible nonzero differential is $+u$. The canonical identifications $0\\oplus P\\cong P$ and $Q\\oplus0\\cong Q$ therefore identify this cone with $C_u$ as a complex, and its unshifted-summand inclusion with the map $j:Q[0]\\to C_u$ whose degree-zero component is $1_Q$.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "definition-cone (cone differential and inclusion)"
+   }
+  },
+  {
+   "text": "Apply [lem-pc-cone-short-exact-quasi-iso] to the short exact sequence $P[0]\\xrightarrow{u[0]}Q[0]\\xrightarrow{q[0]}T[0]$ from step 1. It gives a quasi-isomorphism from the cone to $T[0]$, equal to $q[0]$ on the $Q[0]$ summand and zero on the shifted $P[0]$ summand. Under the component identifications in step 2 this is exactly $\\epsilon$, not merely some augmentation. Hence $\\epsilon$ is a quasi-isomorphism [def-pc-quasi-iso-modules], and $\\epsilon\\circ j=q[0]$ holds componentwise: its degree-zero component is $q\\circ1_Q=q$ and all other components are zero.",
+   "uses": [
+    "lem-pc-cone-short-exact-quasi-iso",
+    "def-pc-quasi-iso-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "discussion before Tag 0152 (lemma-derived-canonical-delta-functor); Mathlib HomotopyCategory/ShortExact.lean:53,56,137"
+   }
+  },
+  {
+   "text": "The unit isomorphism for the sheaf tensor product in [lem-pc-sheaf-modules-tensor-closed] identifies $\\mathcal G\\otimes_R R$ naturally with $\\mathcal G$ for every module sheaf $\\mathcal G$. Tensoring with $R$ therefore identifies each exact sequence with itself. Consequently the regular module sheaf $R$ is flat by [def-pc-flat-sheaf-modules]. This uses the sheaf tensor unit, not any claim that sections of every flat sheaf are flat.",
+   "uses": [
+    "lem-pc-sheaf-modules-tensor-closed",
+    "def-pc-flat-sheaf-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section 03EK tensor unit; Definition 03ER (definition-flat)"
+   }
+  },
+  {
+   "text": "Apply [lem-pc-sites-modules-coproduct-flat] to the constant families with value $R$ indexed by $\\{1,\\ldots,m\\}$ and $\\{1,\\ldots,n\\}$. Step 4 supplies flatness of each summand, so $R^{\\oplus m}$ and $R^{\\oplus n}$ are flat. The specified isomorphisms with $P$ and $Q$ induce natural isomorphisms of their tensor functors; exactness, hence flatness [def-pc-flat-sheaf-modules], follows for $P$ and $Q$. The same cited coproduct statement with empty index set proves that the zero module sheaf is flat. Thus every term of $C_u$, $P[0]$ and $Q[0]$ is flat, including their zero terms.",
+   "uses": [
+    "lem-pc-sites-modules-coproduct-flat",
+    "def-pc-flat-sheaf-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EU (lemma-colimits-flat), (2), including the empty coproduct"
+   }
+  },
+  {
+   "text": "All three complexes vanish in degrees greater than $0$. Apply [lem-pc-bounded-above-flat-kflat-site] separately to $C_u$, $P[0]$ and $Q[0]$, using their termwise flatness from step 5 and the common upper bound $0$. All three are K-flat for the given arbitrary ringed site. Together with the specific quasi-isomorphism $\\epsilon$ from step 3, the definition [def-pc-kflat-complex] says precisely that $\\epsilon:C_u\\to T[0]$ is a K-flat resolution. No property of the cokernel beyond its cokernel universal property, and no scalar origin for $u$ or $R$, entered the argument.",
+   "uses": [
+    "lem-pc-bounded-above-flat-kflat-site",
+    "def-pc-kflat-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YQ (lemma-bounded-flat-K-flat); Definition 06YN (definition-K-flat)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-cochain-complex-modules",
+  "def-weil-abstract-derived-category",
+  "lem-pc-cone-short-exact-quasi-iso",
+  "def-pc-quasi-iso-modules",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "def-pc-flat-sheaf-modules",
+  "lem-pc-sites-modules-coproduct-flat",
+  "lem-pc-bounded-above-flat-kflat-site",
   "def-pc-kflat-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YQ specialized using the tensor unit, Tag 03EU(2), and the canonical cone augmentation of Tag 0152; cone formula in derived-definition-cone"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -59,10 +147,52 @@
    "results": "3 hits; Mathlib/Computability/TuringMachine/Tape.lean, Mathlib/Computability/TuringMachine/Tape.lean, Mathlib/Computability/TuringMachine/Tape.lean; the three Tape.lean hits are ListBlank.flatMap, unrelated to homological K-flatness.",
    "date": "2026-10-21",
    "verdict": "no match: Mathlib has the general short-exact cone augmentation quasi-isomorphism, but not K-flatness of these module-sheaf complexes; the entire statement is not a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|kFlat|quasiIso_descShortComplex",
+   "results": "5 hits; Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean, Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/ExtClass.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: no K-flat theorem for module sheaves; the normalized cone quasi-isomorphism alone is already represented by lem-pc-cone-short-exact-quasi-iso"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bounded above complex of flat sheaves of modules on a ringed site is K flat",
+   "results": "8 hits; Module.FaithfullyFlat.toFlat, CochainComplex.isKProjective_iff_leftOrthogonal, CochainComplex.IsKProjective, Module.Flat.of_free, Module.Flat.of_projective, Module.Flat.rTensor_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, Module.Flat.iff_lTensor_preserves_shortComplex_exact",
+   "date": "2026-10-21",
+   "verdict": "no match: no K-flat theorem for module sheaves; the normalized cone quasi-isomorphism alone is already represented by lem-pc-cone-short-exact-quasi-iso"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mappingCone\", \"quasiIso\"",
+   "results": "1 hits; CochainComplex.mappingCone.quasiIso_descShortComplex",
+   "date": "2026-10-21",
+   "verdict": "no match: no K-flat theorem for module sheaves; the normalized cone quasi-isomorphism alone is already represented by lem-pc-cone-short-exact-quasi-iso"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An injective map of finite free sheaves has a bounded K flat complex resolving its cokernel with the quotient augmentation",
+   "results": "8 hits; SheafOfModules.generatorsOfIsCokernelFree, SheafOfModules.generatorsOfIsCokernelFree_I, SheafOfModules.relationsOfIsCokernelFree_I, SheafOfModules.generatorsOfIsCokernelFree_s, CochainComplex.isKInjective_of_injective, CochainComplex.cm5b.instInjectiveXIntI, CategoryTheory.InjectiveResolution.ofCocomplex, CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex",
+   "date": "2026-10-21",
+   "verdict": "no match: no K-flat theorem for module sheaves; the normalized cone quasi-isomorphism alone is already represented by lem-pc-cone-short-exact-quasi-iso"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded above complex of flat module sheaves preserves acyclicity under tensor product",
+   "results": "8 hits; Module.Flat.rTensor_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_exact', Module.Flat.lTensor_exact, Module.Flat.rTensor_exact, Module.Flat.iff_lTensor_exact'",
+   "date": "2026-10-21",
+   "verdict": "no match: no K-flat theorem for module sheaves; the normalized cone quasi-isomorphism alone is already represented by lem-pc-cone-short-exact-quasi-iso"
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|kFlat|K.flat",
+   "results": "3 hits; Mathlib/Computability/TuringMachine/Tape.lean, Mathlib/Computability/TuringMachine/Tape.lean, Mathlib/Computability/TuringMachine/Tape.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: no K-flat theorem for module sheaves; the normalized cone quasi-isomorphism alone is already represented by lem-pc-cone-short-exact-quasi-iso"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-flat-scalar-cyclic-resolution",
@@ -81,5 +211,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-finite-free-mono-cokernel-kflat",
+  "worker": "stage1",
+  "summary": "Split without new nodes. Verified the positive cone differential and specified quotient augmentation; used the existing general cone quasi-isomorphism, coproduct-flatness, and arbitrary-ringed-site bounded-above K-flatness nodes. The original statement is unchanged, including rank zero and arbitrary coefficients. Added the existing cone-definition dependency and fresh logged searches.",
+  "blueprint": "Realizes det-lem-integral-models-operations paragraph (2), tensor product, by supplying the normalized finite-free two-term flat resolutions used for the local scalar models; intermediate ancestor lem-sfb-flat-scalar-cyclic-resolution.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "Generic tensor unit of module sheaves on any ringed site, used only to prove flatness of the regular module; no integral-models route node states the unit law."
+   },
+   {
+    "node": "lem-pc-sites-modules-coproduct-flat",
+    "why": "Generic coproduct-flatness theorem, used for finite free and zero module sheaves; it does not replace any integral-models step."
+   },
+   {
+    "node": "lem-pc-bounded-above-flat-kflat-site",
+    "why": "Generic arbitrary-ringed-site bounded-above K-flatness criterion; this unit uses flat resolutions but has no separate copy of that criterion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-pc-sites-modules-coproduct-flat",
+  "lem-pc-bounded-above-flat-kflat-site"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q18-2fdd50126",
+  "group": "Q18",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-2fdd50126 (reviewer sub-agent of L); spot-checked: I read the whole delivery and wrote no fixes. It is an ordinary split with no new nodes. There is no repair note for this item; Q26 created it on 2026-10-21 when re-splitting lem-sfb-flat-scalar-cyclic-resolution, and it carries that parent's old Steps 3-5. The item is not on the drop list and is still unsplit in live and side-live. The statement is byte-identical to live; stmt_deps adds def-weil-abstract-derived-category for the Cone gloss. The statement is true. Tested cases: R=Z with u=2 (Z/2 resolved, never called flat); n=0 forces P=0; m=0; u an isomorphism; R=0 and the empty site. Step checks: step 1, monomorphism plus cokernel gives a short exact sequence in Mod(R) for a small site, and qu=0 makes ε a chain map. Step 2, the cone matrix (d_L f; 0 −d_K), as in derived.tex:2471 and the def node, gives differential +u and inclusion 1_Q. Step 3, the Mathlib leaf lem-pc-cone-short-exact-quasi-iso (quasiIso_descShortComplex) maps exactly to ε, which is unchanged even by a ± sign on P. Step 4, the tensor unit isomorphism makes R flat. Step 5, 03EU(2) at sites-modules.tex:4342 covers finite sums and the empty sum. Step 6, 06YQ at sites-cohomology.tex:3120 (bounded above and flat implies K-flat) applies to all three complexes with bound 0. proof_deps equals the union of the steps' uses, there is no cycle (closure of 183 nodes), all three search kinds are recorded, and the blueprint from/via fields are correct. I accept the three declared tool_uses: tensor unit, coproduct flatness and the bounded-above K-flat criterion. Advisories: lem-pc-bounded-above-flat-kflat-site labels its source 06YS, but the right tag is 06YQ. lem-sfb-ringed-finite-free-resolution-tensor (unsplit, another unit) overlaps the K-flatness clause, but it has no mono/cokernel quasi-isomorphism, so it is not a duplicate."
  }
 }
