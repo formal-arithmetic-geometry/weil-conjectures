@@ -1,8 +1,8 @@
 # Work queue
 
-153 items; claim with `tools/claim.py next <group> [--stage N]`.
+154 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Rework: quarantined by the upstream sync (10 clusters, 711 modules)
+## Rework: quarantined by the upstream sync (14 clusters, 708 modules)
 
 Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.tsv). One item per cluster: its root (a quarantined module importing no other quarantined one) and the quarantined modules importing it; fix the root, then the dependents as far as possible, deliver every module that compiles.
 
@@ -13,9 +13,13 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 | `Sheaf.Paper.ConstructibleCompactness` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.StandardSingleStalkFlatCounitModel` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.Paper.ClosedSupportConstructible` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
+| `Sheaf.AlgebraicGeometry.StrictHenselizationExchangeCubeSourceStalkIso` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.DerivedPullbackMonoidalDescent` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
+| `Sheaf.AlgebraicGeometry.PerfectOverlapNestedPullbackNormalization` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapStageTransport` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
+| `Sheaf.Paper.RelativeSupportBottomDescent` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.Paper.CoefficientExchangeFromComparisons` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
+| `Sheaf.Algebra.Homology.AffineTildeTensorOrdinaryExchangePreNormalizationChain` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.Paper.CondensedQbarPullbackCube` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.Algebra.Homology.AffineBaseChangeSourceModel` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 
@@ -46,7 +50,7 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-integral-closure-ind-etale-base-change` | 4014 | none |
 | `def-per-support-condition` | - | none |
 
-## Stage 2: nodes to state (54)
+## Stage 2: nodes to state (51)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -64,7 +68,6 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-coef-closed-identity-open-hom-normalization` | 1 | state | 0 |
 | `lem-coef-compact-support-normalized-realization` | 1 | state | 0 |
 | `lem-coef-residue-controlled-finite-homs` | 1 | state | 0 |
-| `lem-fd-whole-tower-integral-pullback-comparison` | 1 | state | 0 |
 | `lem-fix-compactification-completed-realization` | 1 | state | 0 |
 | `lem-pe-internal-module-sectionwise-short-exact` | 1 | state | 0 |
 | `lem-per-adic-normalized-fibre-comparisons` | 1 | state | 0 |
@@ -76,14 +79,12 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-cech-localization-unit-totalization` | 1 | state | 0 |
 | `lem-sfb-dense-lattice-derived-invariants-comparison` | 1 | state | 0 |
 | `lem-sfb-finite-closed-cover-resolution` | 1 | state | 0 |
-| `lem-sfb-indfinite-contractible-base-wstrict` | 1 | state | 0 |
 | `lem-sfb-integral-ambient-tower-comparison` | 1 | state | 0 |
 | `lem-sfb-integral-lattice-cubical-contraction` | 1 | state | 0 |
 | `lem-sfb-integral-lisse-closed-base-change` | 1 | state | 0 |
 | `lem-sfb-lattice-supported-hom-reduction-tower` | 1 | state | 0 |
 | `lem-sfb-norm-algcl-cohomology-topology-comparison` | 1 | state | 0 |
 | `lem-sfb-prime-to-ell-derived-invariants-reduction` | 1 | state | 0 |
-| `lem-sfb-root-tower-coordinate-face` | 1 | state | 0 |
 | `lem-sfb-snc-tame-finite-fibre-classification` | 1 | state | 0 |
 | `lem-sfb-snc-tame-root-etale-extension` | 1 | state | 0 |
 | `lem-sfb-tame-root-tower-extension` | 1 | state | 0 |
