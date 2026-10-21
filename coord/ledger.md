@@ -23338,3 +23338,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:28 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
 - 18:29 L: merged deliver/Q06/sk-thm-acyclicity (reviewer PASS; first push; new nodes: 0)
 - 18:29 L: merged deliver/Q21/lem-sfb-product-chain-proper-interval-homology (reviewer PASS; first push; new nodes: 1)
+- 18:29 L: returned deliver/Q08/lem-sf-open-tensor-quotient-augmentation (reviewer RETURN: L: independent stage-2 immutable head 62b2fd41551a: H2/H12: delivery adds theorem stmt_dep lem-sf-open-semilinear-tensor)
