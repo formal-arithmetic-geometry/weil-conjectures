@@ -1,0 +1,84 @@
+{
+ "id": "lem-sfb-lattice-supported-hom-finite-comparison",
+ "kind": "statement",
+ "title": "Finite coefficient comparison for supported lattice Hom",
+ "statement": "Fix a prime $\\ell$, a field $k$ of characteristic $p>0$ with $p\\ne\\ell$, and a finite extension $E/\\mathbf Q_\\ell$ with ring of integers $\\mathcal O_E$ and uniformizer $\\pi_E$ [sk-def-sfb-dc-setting, def-weil-l-adic-coefficient-extension]. All schemes are separated of finite type over $k$ and all morphisms are over $k$. On each small pro-étale site put $R_Y=p_Y^*\\underline{\\mathcal O_E}$, $A_n=\\mathcal O_E/(\\pi_E^n)$ and $A_{n,Y}=p_Y^*\\underline{A_n}$ for $n\\ge1$ [sk-def-sfb-pulled-back-coefficients, def-sfb-torsion-stratum-coefficients]. Work in the ordinary unbounded derived categories of module sheaves [sk-def-sfb-derived-categories], in universes making these sites small [def-weil-size-convention]. Write $\\operatorname{Res}_n:D(A_{n,X})\\to D(R_X)$ for termwise restriction along the quotient coefficient morphism [sk-def-sfb-coefficient-change]. Let $i:Z\\hookrightarrow X$ be closed, $j:V\\hookrightarrow X$ its open complement, $u:S\\hookrightarrow Z$ open and $a=i\\circ u$. Use $a_!=i_*u_!$, closed module direct image after open module extension by zero [def-sfb-module-lower-star, def-sfb-module-open-lower-shriek]. Let $L_0$ be a lisse $R_S$-module, meaning pro-étale locally finite free, and put $Q=a_!L_0$ and $L_0^\\vee=\\mathcal Hom_{R_S}(L_0,R_S)$ [def-sfb-lisse-coefficient-module]. Use the derived support functor $R\\underline\\Gamma_{Z,R}$ and global derived Hom of [sk-lem-formal-closed-support], the ordinary derived tensor of [sk-def-sfb-derived-tensor-hom], and derived global sections $R\\Gamma$ [def-pur-ringed-site-zeroth-hypercohomology].\n\nFix $n\\ge1$ and any $\\overline K\\in D(A_{n,X})$. The ring $A_n$ is finite and killed by a power of $\\ell$. The reduced lattice $L_{0,n}=L_0/\\pi_E^n$ is finite locally free over $A_{n,S}$, its dual has the canonical evaluation-compatible identification\n$$\\mathcal Hom_{A_{n,S}}(L_{0,n},A_{n,S})\\simeq L_0^\\vee/\\pi_E^n,$$\nand the derived source reduction is $Q\\otimes^{\\mathrm L}_{R_X}A_{n,X}\\simeq a_!L_{0,n}$ in $D(A_{n,X})$. For every integer $q$ there are isomorphisms of abelian groups, natural in $\\overline K$,\n$$\\begin{aligned}\n\\operatorname{Hom}_{D(R_X)}(Q,\\operatorname{Res}_n\\overline K[q])\n&\\cong\\operatorname{Hom}_{D(A_{n,X})}(Q\\otimes^{\\mathrm L}_{R_X}A_{n,X},\\overline K[q])\\\\\n&\\cong\\operatorname{Hom}_{D(A_{n,X})}(a_!L_{0,n},\\overline K[q])\\\\\n&\\cong H^qR\\Gamma\\bigl(S,(L_0^\\vee/\\pi_E^n)\\otimes^{\\mathrm L}_{A_{n,S}}u^*R\\underline\\Gamma_{Z,A_n}\\overline K\\bigr).\n\\end{aligned}$$\nHere $R\\underline\\Gamma_{Z,A_n}$ is the support functor in the finite coefficient category, defined by $M\\mapsto i^*\\ker(M\\to j_*j^*M)$ and total right derivation. The last tensor may equally be computed by ordinary termwise tensor with the finite locally free reduced dual. The first comparison is the derived extension/restriction scalar adjunction; no flatness of $R_X\\to A_{n,X}$ is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-uniform-constructible-ext/sk-lem-uniform-constructible-ext.proof.md",
+  "place": "Integral targets, comparison of integral Hom into a restricted finite target with finite-coefficient supported cohomology; Torsion targets, the displayed supported complex; expanded with sk-def-sfb-coefficient-change."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-sfb-torsion-stratum-coefficients",
+  "sk-def-sfb-derived-categories",
+  "def-weil-size-convention",
+  "sk-def-sfb-coefficient-change",
+  "def-sfb-module-lower-star",
+  "def-sfb-module-open-lower-shriek",
+  "def-sfb-lisse-coefficient-module",
+  "sk-lem-formal-closed-support",
+  "sk-def-sfb-derived-tensor-hom",
+  "def-pur-ringed-site-zeroth-hypercohomology"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(extendScalars|restrictScalars|adjunction).*([Dd]erived|Ext)|([Dd]erived|Ext).*(extendScalars|restrictScalars|adjunction)",
+   "results": "Mathlib/Condensed/Light/Epi.lean; Mathlib/FieldTheory/IntermediateField/Adjoin/Defs.lean; Mathlib/FieldTheory/IntermediateField/Adjoin/Defs.lean; Mathlib/FieldTheory/IntermediateField/Adjoin/Defs.lean; Mathlib/FieldTheory/IntermediateField/Adjoin/Defs.lean; Mathlib/FieldTheory/IntermediateField/Adjoin/Defs.lean; Mathlib/FieldTheory/IntermediateField/Algebraic.lean; Mathlib/FieldTheory/IntermediateField/Basic.lean The hits concern ordinary module dual bases, local cohomology or unrelated adjunction/extension lemmas; none states this sheaf-level derived scalar and support comparison or specializes to all its clauses in one line.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ext into a lattice modulo a uniformizer power is computed by finite coefficient closed support cohomology with the reduced dual lattice",
+   "results": "localCohomology.diagram; localCohomology.hasColimitDiagram; Module.DualBases.coeffs; localCohomology.ofDiagram; Module.DualBases.basis_repr_apply; localCohomology.ofSelfLERadical; Module.DualBases.coeffs_lc; Module.isClosed_support The hits concern ordinary module dual bases, local cohomology or unrelated adjunction/extension lemmas; none states this sheaf-level derived scalar and support comparison or specializes to all its clauses in one line.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Ext\", \"adjunction\"",
+   "results": "CategoryTheory.Adjunction.ext; CategoryTheory.Adjunction.ext_counit; CategoryTheory.Adjunction.ext_iff; CategoryTheory.Functor.instIsIsoAppCounitRanAdjunctionOfHasPointwiseRightKanExtension; CategoryTheory.Functor.instIsIsoAppUnitLanAdjunctionOfHasPointwiseLeftKanExtension; CategoryTheory.Adjunction.preservesLeftKanExtension; CategoryTheory.Adjunction.preservesRightKanExtension; CategoryTheory.Adjunction.leftExtensionPostCompose₂RightAdjoint The hits concern ordinary module dual bases, local cohomology or unrelated adjunction/extension lemmas; none states this sheaf-level derived scalar and support comparison or specializes to all its clauses in one line.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived coefficient adjunction and reduction of finite locally free duals identify integral Hom into restricted torsion targets with finite ring stratum supported cohomology",
+   "results": "PrimeSpectrum.exists_image_comap_of_finite_of_free; Algebra.smoothLocus_eq_compl_support_inter; Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential; Algebra.etaleLocus_eq_compl_support; Algebra.Extension.Cotangent.finite; KaehlerDifferential.finite; Algebra.instFreeCotangentToExtensionUnitLocalizationAway; Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField The hits concern ordinary module dual bases, local cohomology or unrelated adjunction/extension lemmas; none states this sheaf-level derived scalar and support comparison or specializes to all its clauses in one line.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compare derived Hom from an integral lisse lattice extended by zero into the restriction of a finite coefficient lattice: quotient scalar adjunction identifies it with finite coefficient supported cohomology on the source stratum",
+   "results": "Profinite.NobelingProof.Nobeling_aux; SheafOfModules.Presentation.map_π_eq; Profinite.NobelingProof.Linear_CC'₁; Profinite.NobelingProof.CC_exact; Profinite.NobelingProof.Linear_CC'₀; ModuleCat.Tilde.toOpen_res; groupCohomology.linearYonedaObjResProjectiveResolutionIso; Profinite.NobelingProof.Linear_CC' The hits concern ordinary module dual bases, local cohomology or unrelated adjunction/extension lemmas; none states this sheaf-level derived scalar and support comparison or specializes to all its clauses in one line.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "det-uniform-constructible-ext-integral",
+  "date": "2026-10-21",
+  "group": "Q76"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-uniform-constructible-ext",
+ "blueprint": {
+  "from": {
+   "node": "det-uniform-constructible-ext-integral",
+   "place": "Integral targets, comparison of integral Hom into a restricted finite target with finite-coefficient supported cohomology; Torsion targets, the displayed supported complex; expanded with sk-def-sfb-coefficient-change.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}

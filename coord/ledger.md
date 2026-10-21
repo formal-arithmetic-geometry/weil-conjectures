@@ -21063,3 +21063,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:16 L: merged deliver/NY/lem-sbc-ringed-topos-sheaf-slice-derived-comparison (reviewer PASS; first push; new nodes: 0)
 - 08:16 L: merged deliver/Q78/lem-pur-composite-integration-counit (reviewer PASS; after a return; new nodes: 1)
 - 08:16 L: merged deliver/Q22/lem-sfb-topological-module-condensation (reviewer PASS; first push; new nodes: 0)
+- 08:16 L: merged deliver/Q76/det-uniform-constructible-ext-integral (reviewer PASS; after a return; new nodes: 2)
