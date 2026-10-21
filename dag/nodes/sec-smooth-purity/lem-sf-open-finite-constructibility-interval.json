@@ -19,9 +19,114 @@
   "def-weil-finite-torsion-constructibility",
   "def-weil-cohomological-support"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For every affine open $W\\subseteq V$, the open subscheme $W\\cap U$ is quasi-compact by [lem-weil-pbc-noetherian-open-subscheme-noetherian], applied to the Noetherian scheme $V$. Thus $j$ is quasi-compact by the affine-open criterion in [def-weil-finite-type-morphism]. Choose the reduced induced closed subscheme $i:Z\\hookrightarrow V$ on the closed set $V\\setminus U$: by clause (2) of [lem-weil-pbc-reduced-induced-closed-subscheme], $i$ is a closed immersion with image $V\\setminus U$ and $Z$ is reduced. For the constant ring sheaf $(P_n)_V$, [lem-pur-proetale-constant-coefficient-comparison] identifies its inverse images on $U$ and $Z$ with $(P_n)_U$ and $(P_n)_Z$. Hence the open-closed module identities of [lem-weil-pbc-proetale-ringed-open-closed] apply with precisely the coefficient sheaves of the statement.",
+   "uses": [
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-pur-proetale-constant-coefficient-comparison",
+    "lem-weil-pbc-proetale-ringed-open-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09AH (lemma-ses-associated-to-open), 09BN (lemma-open-immersion); qc open and reduced complement hypotheses"
+   }
+  },
+  {
+   "text": "The functor $j_!$ is exact by [lem-weil-pbc-proetale-ringed-open-closed]. Apply [lem-sf-exact-functor-derived-triangulated] to obtain its termwise functor on the unbounded derived categories. If $K^\\bullet$ represents $C$, [lem-weil-pbc-exact-functor-complex-cohomology] gives $H^r(j_!K^\\bullet)\\cong j_!H^r(K^\\bullet)$ for every integer $r$, naturally in the representative. In particular an acyclic complex remains acyclic and a quasi-isomorphism remains a quasi-isomorphism. The isomorphisms therefore give $\\mathcal H^r(j_!C)\\cong j_!\\mathcal H^r(C)$ in the localized category, independently of the representative.",
+   "uses": [
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 010N (lemma-exact-functor), degreewise; derived.tex Tag 015F (lemma-right-derived-exact-functor)"
+   }
+  },
+  {
+   "text": "Fix $r$ and any given finite stratification $U=\\coprod_\\alpha S_\\alpha$ witnessing constructibility of $F=\\mathcal H^r(C)$ [def-weil-finite-torsion-constructibility]. Its strata remain locally closed in $V$: if their images are $O_\\alpha\\cap T_\\alpha$ with $O_\\alpha$ open and $T_\\alpha$ closed in $U$, write $T_\\alpha=U\\cap\\overline T_\\alpha$ with $\\overline T_\\alpha$ closed in $V$. Then $O_\\alpha$ is open in $V$ and the image is $O_\\alpha\\cap\\overline T_\\alpha$ [def-weil-locally-closed-subset]. The immersion $S_\\alpha\\to U$ factors as a closed immersion into an open of $U$; that open is open in $V$, giving the same immersion into $V$ [def-weil-closed-immersion]. The minimal-closed-subset property of [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal] implies the descending-chain condition: the set of terms of any descending chain has a minimal member, after which it is constant. Thus $|V|$ is Noetherian. By [def-weil-constructible-subset], every locally closed subset of $V$ is constructible. This applies both to the images of $S_\\alpha$ and to the closed subset $|Z|$. These subsets are disjoint and cover $V$, so, with the indicated immersions, they form a finite constructible locally closed stratification [def-constructible-stratification].",
+   "uses": [
+    "def-weil-finite-torsion-constructibility",
+    "def-weil-locally-closed-subset",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "def-weil-constructible-subset",
+    "def-constructible-stratification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 005L (lemma-constructible-Noetherian-space); properties.tex Tag 01OZ (lemma-Noetherian-topology); explicit extension of the partition"
+   }
+  },
+  {
+   "text": "For the immersion $s_\\alpha:S_\\alpha\\to U$, the canonical constant-coefficient composition isomorphism [lem-pur-proetale-module-pullback-composition] and the open unit isomorphism [lem-weil-pbc-proetale-ringed-open-closed] give\n$$(j\\circ s_\\alpha)^*(j_!F)\\cong s_\\alpha^*(j^*j_!F)\\cong s_\\alpha^*F.$$\nHere the inverse-image rings are identified by [lem-pur-proetale-constant-coefficient-comparison], so the isomorphisms are isomorphisms of $(P_n)_{S_\\alpha}$-modules. On the complementary stratum the same open-closed node gives $i^*(j_!F)=0$. No assertion about geometric stalks on the boundary is needed.",
+   "uses": [
+    "lem-pur-proetale-module-pullback-composition",
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-pur-proetale-constant-coefficient-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09BN and complementary restriction vanishing; sites-modules.tex Tag 03D8 (lemma-push-pull-composition-modules)"
+   }
+  },
+  {
+   "text": "On $S_\\alpha$, compose each local constant-model isomorphism for $s_\\alpha^*F$ with the isomorphism of step 4. This uses exactly the same covering and constant module, and induces isomorphisms on all geometric stalks; their finiteness is unchanged. On $Z$, the zero module sheaf is constant with value the zero $P_n$-module: its constant presheaf is already the zero sheaf, and every stalk is the one-element zero module [def-weil-proetale-locally-constant-sheaf, def-weil-proetale-constructible-sheaf]. Consequently the stratification of step 3 witnesses constructibility of $j_!F$. The cohomology isomorphism of step 2 transports these same witnesses to $\\mathcal H^r(j_!C)$ [def-weil-finite-torsion-constructibility].",
+   "uses": [
+    "def-weil-proetale-locally-constant-sheaf",
+    "def-weil-proetale-constructible-sheaf",
+    "def-weil-finite-torsion-constructibility"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.7.7, open factor; finite-stage stratification argument supplied explicitly"
+   }
+  },
+  {
+   "text": "If $r\\notin[a,b]$, then $\\mathcal H^r(C)=0$ by hypothesis, hence $\\mathcal H^r(j_!C)\\cong j_!0=0$ by step 2; an additive functor preserves the zero object. Thus the cohomological support stays in $[a,b]$ [def-weil-cohomological-support]. This interval contains only finitely many integers, and all cohomology sheaves are constructible by steps 3--5, so $j_!C\\in D^b_c(V,P_n)$ [def-weil-finite-torsion-constructibility]. If $U=\\varnothing$, the only stratum needed is $Z=V$ with the zero sheaf; if $U=V$, omit the empty complement. Empty original strata can also be omitted, since none contributes points or a nonvacuous restriction condition.",
+   "uses": [
+    "def-weil-cohomological-support",
+    "def-weil-finite-torsion-constructibility"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.7.7, open factor; interval and empty-stratum conclusions"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-pur-proetale-constant-coefficient-comparison",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-locally-closed-subset",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "def-weil-constructible-subset",
+  "def-constructible-stratification",
+  "lem-pur-proetale-module-pullback-composition",
+  "def-weil-proetale-locally-constant-sheaf",
+  "def-weil-proetale-constructible-sheaf",
+  "def-weil-cohomological-support"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.7.7, open factor: explicit finite-stage proof of the classical argument omitted there, using Stacks 09AH, 09BN, 010N and 005L"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -64,10 +169,45 @@
    "results": "0 hits: none; directory Mathlib/Algebra/Category/ModuleCat. Hits concern constructible subsets, finite-type module generators, complex-index extension or ordinary cohomology; none states constructible module-sheaf extension by zero on the pro-etale site.",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|lowerShriek|constructible",
+   "results": "0 hits: .  None states finite-constructible pro-etale module extension by zero, its strata and interval together; semantic hits are condensed-sheaf constructions or function extensions, and second-phrasing hits on constructible sets do not assert sheaf constructibility.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero preserves constructible sheaves and cohomology bounds",
+   "results": "8 hits: HasCompactSupport.extend_zero, ContMDiff.extend_zero, Finsupp.extendDomain, Finsupp.extendDomain.congr_simp, AlgebraicGeometry.RingedSpace.res_zero, HomologicalComplex.extendMap_zero, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_symm_zero, Function.extend_zero.  None states finite-constructible pro-etale module extension by zero, its strata and interval together; semantic hits are condensed-sheaf constructions or function extensions, and second-phrasing hits on constructible sets do not assert sheaf constructibility.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"constructible\"",
+   "results": "0 hits: .  None states finite-constructible pro-etale module extension by zero, its strata and interval together; semantic hits are condensed-sheaf constructions or function extensions, and second-phrasing hits on constructible sets do not assert sheaf constructibility.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero of finite module sheaves on a pro-etale site preserves bounded constructible complexes and cohomological bounds",
+   "results": "8 hits: LightCondMod.ofSheafLightProfinite, Condensed.profiniteSolid, CondensedMod.ofSheafProfinite, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, Condensed.lanSheafProfinite, LightCondAb.ofSheafLightProfinite, LightCondensed.instIsGrothendieckAbelianLightCondMod, CompHausLike.LocallyConstantModule.functor.  None states finite-constructible pro-etale module extension by zero, its strata and interval together; semantic hits are condensed-sheaf constructions or function extensions, and second-phrasing hits on constructible sets do not assert sheaf constructibility.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite locally constant module sheaf on strata of an open subscheme remains constructible after extension by zero",
+   "results": "8 hits: CompHausLike.LocallyConstantModule.functor, Topology.IsLocallyConstructible.isConstructible, PrimeSpectrum.ConstructibleSetData, Topology.IsConstructible.isLocallyConstructible, ModuleCat.Tilde.exists_const, AlgebraicGeometry.Scheme.Hom.isConstructible_image, PrimeSpectrum.isConstructible_basicOpen, PrimeSpectrum.ConstructibleSetData.isConstructible_toSet.  None states finite-constructible pro-etale module extension by zero, its strata and interval together; semantic hits are condensed-sheaf constructions or function extensions, and second-phrasing hits on constructible sets do not assert sheaf constructibility.",
+   "date": "2026-10-21",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sf-integral-compact-support-constructible",
@@ -87,5 +227,34 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sf-open-finite-constructibility-interval",
+  "worker": "stage1",
+  "summary": "Proved finite-stage open constructibility directly by extending each given stratification by the reduced complement, using canonical constant coefficients and the ringed open-closed identities. Exact-functor cohomology gives the same interval on the unbounded derived category. All ingredients already have nodes; no new nodes. Checked boundary, empty open/complement, arbitrary Noetherian schemes and nonregular finite coefficient rings.",
+  "blueprint": "Nearest ancestor def-weil-integral-rational-qbar-compact-support: integral construction, preservation of finite constructible reductions by the open factor (original step 6), via lem-sf-integral-compact-support-constructible. The current main-20261015 version remains the same integral compact-support construction; no unit route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "Generic exact module extension by zero and its open/closed restriction identities, for arbitrary ring sheaves. This unit has no replacement proving these ringed identities; its compact-support route uses them as a black box."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Generic existence of the reduced induced closed subscheme on the closed complement, needed for the reduced complement Z in the statement; the Mathlib leaf lem-weil-pbc-closed-subset-closed-subscheme gives a closed subscheme with that image but does not state reducedness."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-weil-pbc-reduced-induced-closed-subscheme"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NI-55f37f240",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NI-55f37f240 (reviewer sub-agent of L); spot-checked: I read the whole delivery against Bhatt–Scholze 6.7.7 (p. 56, which only gives a proof sketch) and Stacks proetale 09AH and 09BN. I also confirmed the 010N, 005L, 01OZ, 03D8 and 015F labels. There are no new nodes. The statement and stmt_deps are unchanged from NP's version, and there is no repair note, so this is a first split (6 steps, 4585 characters). All arguments of the base Q34 step 6 are kept and expanded. Step 1: j is quasi-compact (W∩U is Noetherian by the open-subscheme leaf). Step 2: constant-coefficient comparison, then H^r(j_!K) ≅ j_!H^r(K) through the exact-functor leaves. Step 3: strata that are locally closed in U are locally closed in V, the immersions compose, minimal elements give a Noetherian space, and 005L inside def-weil-constructible-subset gives constructibility. Steps 4–5: pullback composition plus j^{-1}j_!=id and i^{-1}j_!=0 give the same local models, with zero on Z. Step 6: the cohomology interval is kept. Edge cases checked: U empty, U=V, V empty, C=0, n=1, non-reduced V. There is no cycle, uses equal proof_deps, and no SGA is cited. Not a duplicate: the open-extension constant-model node has a field base, sfb-dc is lfp, and sf-open-ctf and trf-open-ctf need finite type plus Tor. Accepted tool use: lem-weil-pbc-proetale-ringed-open-closed. FIX, C4: step 1 claimed a reduced induced complement by citing lem-weil-pbc-closed-subset-closed-subscheme, which states no reducedness. I replaced it with clause (2) of lem-weil-pbc-reduced-induced-closed-subscheme, updated uses and proof_deps, and declared it in tool_uses. That node is a generic sk-thm-p1 tool that earlier reviews accepted. Advisory: the inherited statement says 'reduced' without citing def-pc-reduced-scheme.; 1 file(s) fixed by the reviewer"
+ }
 }

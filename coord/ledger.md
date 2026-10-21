@@ -20287,3 +20287,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:12 L: merged deliver/NR/lem-fix-open-scalar-tensor-normalization (reviewer PASS; first push; new nodes: 0)
 - 04:13 L: merged deliver/NS/lem-fix-proetale-scalar-mate-normalization (reviewer FIX; first push; new nodes: 0)
 - 04:13 L: returned deliver/NG/lem-sfb-finite-etale-trace-image (reviewer RETURN: L: independent stage-2 immutable head 0e8accd4a547: H2: stmt_dep lem-weil-pbc-continuous-coefficient-pullback-compositio)
+- 06:06 L: merged deliver/NI/lem-sf-open-finite-constructibility-interval (reviewer FIX; first push; new nodes: 0)
