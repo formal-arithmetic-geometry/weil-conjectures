@@ -13,9 +13,67 @@
   "def-pc-fibre-product",
   "def-weil-open-immersion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For $a\\in A$ put $W_{i,a}=\\rho_i^{-1}(a)$, an open subset of $U_i$, and give it the open subscheme structure [def-weil-open-immersion]. The assumed equality of label functions on $U_i\\times_XU_j$ implies $p_i^{-1}(W_{i,a})=p_j^{-1}(W_{j,a})$: a point belongs to either side exactly when the common label is $a$. Apply [lem-weil-pbc-open-subscheme-fpqc-descent] to these compatible opens for each $a$. It gives an open subset $Z_a\\subseteq|X|$, with its open subscheme structure, satisfying $f_i^{-1}(Z_a)=W_{i,a}$.",
+   "uses": [
+    "def-weil-open-immersion",
+    "lem-weil-pbc-open-subscheme-fpqc-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 03N0, lemma-open-fpqc-covering; label-fibre specialization"
+   }
+  },
+  {
+   "text": "The fpqc definition [def-weil-pbc-fpqc-covering] gives joint surjectivity. For any $x\\in|X|$, choose $u\\in|U_i|$ over $x$. Then $x\\in Z_a$ if and only if $\\rho_i(u)=a$. Thus every $x$ belongs to exactly one $Z_a$, proving disjointness and union $|X|$. Hence $|X|\\setminus Z_a=\\bigcup_{b\\ne a}Z_b$ is open and $Z_a$ is also closed. For any competing family, membership at $x$ is determined by its prescribed inverse image at the same $u$, so each competing piece equals $Z_a$. If $A=\\varnothing$, a point $x$ would produce the impossible value $\\rho_i(u)\\in A$, so $|X|=\\varnothing$ and the empty family has all the required properties.",
+   "uses": [
+    "def-weil-pbc-fpqc-covering"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 03N0, lemma-open-fpqc-covering; label-fibre specialization"
+   }
+  },
+  {
+   "text": "For the test morphism $h:V\\to X$, apply [lem-galois-fpqc-covering-base-change]. The projections $q_V:U_i\\times_XV\\to V$ form an fpqc covering, after exchanging the fibre-product factors by their universal property [def-pc-fibre-product]. In particular they are jointly surjective by [def-weil-pbc-fpqc-covering]. No finiteness or quasi-compactness hypothesis on $V$, $X$, $I$ or $A$ is used.",
+   "uses": [
+    "lem-galois-fpqc-covering-base-change",
+    "def-pc-fibre-product",
+    "def-weil-pbc-fpqc-covering"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tag 022D, lemma-fpqc (3), and Tag 022B, definition-fpqc-covering"
+   }
+  },
+  {
+   "text": "Given $v\\in|V|$, choose $i$ and $w\\in|U_i\\times_XV|$ with $q_V(w)=v$, using joint surjectivity [def-weil-pbc-fpqc-covering]. The fibre-product equation gives $h(v)=f_i(q_i(w))$. Therefore $h(v)\\in Z_a$ if and only if $q_i(w)\\in W_{i,a}$, if and only if $\\rho_i(q_i(w))=a$, if and only if $\\sigma(v)=a$, the last equivalence using the test compatibility. This proves $h^{-1}(Z_a)=\\sigma^{-1}(a)$. A scheme morphism is continuous, so inverse images of the open and closed $Z_a$ are open and closed. This also covers $V=\\varnothing$.",
+   "uses": [
+    "def-weil-pbc-fpqc-covering"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tag 022D, lemma-fpqc (3); elementary pointwise comparison using the descended inverse images"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-open-immersion",
+  "lem-weil-pbc-open-subscheme-fpqc-descent",
+  "def-weil-pbc-fpqc-covering",
+  "lem-galois-fpqc-covering-base-change",
+  "def-pc-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 03N0, lemma-open-fpqc-covering, applied label by label; test comparison from topologies.tex Tag 022D (3)"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -79,10 +137,66 @@
    "results": "{\"t\": \"2026-10-21T06:20:56Z\", \"tool\": \"leanfinder\", \"query\": \"Locally constant functions from members of an arbitrary fpqc scheme covering to a set, agreeing on scheme fibre products, descend uniquely and agree with every compatible test morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.OpenCover.ext_elem\", \"AlgebraicGeometry.Scheme.Cover.hom_ext\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq\", \"TopCat.Sheaf.existsUnique_gluing'\", \"TopCat.Sheaf.existsUnique_gluing\", \"CategoryTheory.Presheaf.FamilyOfElementsOnObjects.IsCompatible.existsUnique_section\", \"TopCat.Presheaf.IsSheaf.isSheafUniqueGluing\", \"CategoryTheory.GrothendieckTopology.CoversTop.sections_ext\"], \"digest\": \"a80e543403b814b7\"}",
    "date": "2026-10-21",
    "verdict": "no match: scheme hits concern morphism-property descent, and topology hits assume an already given quotient map; none descends arbitrary compatible functions on an fpqc covering family with the test-morphism comparison (FlatDescent.lean lines 133-140; Topology/Clopen.lean lines 136-138)."
+  },
+  {
+   "tool": "grep",
+   "query": "fpqc.*(clopen|partition)|IsClopen.*(cover|desc)|partition.*fpqc",
+   "results": "{\"t\": \"2026-10-21T08:28:15Z\", \"tool\": \"grep\", \"query\": \"fpqc.*(clopen|partition)|IsClopen.*(cover|desc)|partition.*fpqc\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected hits; morphism-property descent does not construct labelled partitions, quotient-map clopen reflection assumes a quotient map, and LocallyConstant.desc reflects local constancy through an injective codomain map (FlatDescent.lean:133, Topology/Clopen.lean:136, Topology/LocallyConstant/Basic.lean:424). Profinite limit factorization and affine-transition limit lemmas have different objects and hypotheses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Descend compatible partitions into open and closed subsets along an fpqc covering family of schemes",
+   "results": "{\"t\": \"2026-10-21T08:28:15Z\", \"tool\": \"leansearch\", \"query\": \"Descend compatible partitions into open and closed subsets along an fpqc covering family of schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\", \"AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.Scheme.openCoverOfIsOpenCover\", \"AlgebraicGeometry.Scheme.zariskiPretopology\", \"AlgebraicGeometry.Scheme.openCoverOfISupEqTop\", \"AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.directedCover\"], \"digest\": \"970269eb05573484\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected hits; morphism-property descent does not construct labelled partitions, quotient-map clopen reflection assumes a quotient map, and LocallyConstant.desc reflects local constancy through an injective codomain map (FlatDescent.lean:133, Topology/Clopen.lean:136, Topology/LocallyConstant/Basic.lean:424). Profinite limit factorization and affine-transition limit lemmas have different objects and hypotheses."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, IsClopen",
+   "results": "{\"t\": \"2026-10-21T08:28:15Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme, IsClopen\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.QuasiFiniteAt.isClopen_singleton_asFiber\"], \"digest\": \"15628ec0b2832814\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected hits; morphism-property descent does not construct labelled partitions, quotient-map clopen reflection assumes a quotient map, and LocallyConstant.desc reflects local constancy through an injective codomain map (FlatDescent.lean:133, Topology/Clopen.lean:136, Topology/LocallyConstant/Basic.lean:424). Profinite limit factorization and affine-transition limit lemmas have different objects and hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible locally constant labels on an arbitrary fpqc covering family of schemes descend uniquely to the base and commute with test morphisms",
+   "results": "{\"t\": \"2026-10-21T08:28:17Z\", \"tool\": \"leanfinder\", \"query\": \"Compatible locally constant labels on an arbitrary fpqc covering family of schemes descend uniquely to the base and commute with test morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hab\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hb\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii'\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.ha\", \"CompHausLike.LocallyConstant.presheaf_ext\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux\", \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\"], \"digest\": \"d1135c6e63c4506a\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected hits; morphism-property descent does not construct labelled partitions, quotient-map clopen reflection assumes a quotient map, and LocallyConstant.desc reflects local constancy through an injective codomain map (FlatDescent.lean:133, Topology/Clopen.lean:136, Topology/LocallyConstant/Basic.lean:424). Profinite limit factorization and affine-transition limit lemmas have different objects and hypotheses."
+  },
+  {
+   "tool": "grep",
+   "query": "IsLocallyConstant.*(desc|quotient)|IsQuotientMap.*(locallyConstant|isClopen)|isClopen_preimage",
+   "results": "{\"t\": \"2026-10-21T08:28:54Z\", \"tool\": \"grep\", \"query\": \"IsLocallyConstant.*(desc|quotient)|IsQuotientMap.*(locallyConstant|isClopen)|isClopen_preimage\", \"sub\": \"Topology\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/Topology/Separation/Regular.lean\", \"Mathlib/Topology/DiscreteQuotient.lean\", \"Mathlib/Topology/DiscreteQuotient.lean\", \"Mathlib/Topology/DiscreteQuotient.lean\", \"Mathlib/Topology/DiscreteQuotient.lean\", \"Mathlib/Topology/DiscreteQuotient.lean\", \"Mathlib/Topology/Connected/Clopen.lean\", \"Mathlib/Topology/LocallyConstant/Basic.lean\"], \"digest\": \"3a85d1c40ea2e523\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected hits; morphism-property descent does not construct labelled partitions, quotient-map clopen reflection assumes a quotient map, and LocallyConstant.desc reflects local constancy through an injective codomain map (FlatDescent.lean:133, Topology/Clopen.lean:136, Topology/LocallyConstant/Basic.lean:424). Profinite limit factorization and affine-transition limit lemmas have different objects and hypotheses."
+  },
+  {
+   "tool": "loogle",
+   "query": "Topology.IsQuotientMap, IsClopen",
+   "results": "{\"t\": \"2026-10-21T08:28:55Z\", \"tool\": \"loogle\", \"query\": \"Topology.IsQuotientMap, IsClopen\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Topology.IsQuotientMap.isClopen_preimage\"], \"digest\": \"ddcca248b8e8c3bc\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected hits; morphism-property descent does not construct labelled partitions, quotient-map clopen reflection assumes a quotient map, and LocallyConstant.desc reflects local constancy through an injective codomain map (FlatDescent.lean:133, Topology/Clopen.lean:136, Topology/LocallyConstant/Basic.lean:424). Profinite limit factorization and affine-transition limit lemmas have different objects and hypotheses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Locally constant functions agreeing on scheme fibre products of an fpqc family descend uniquely to the base scheme",
+   "results": "{\"t\": \"2026-10-21T08:28:55Z\", \"tool\": \"leansearch\", \"query\": \"Locally constant functions agreeing on scheme fibre products of an fpqc family descend uniquely to the base scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LocallyConstant\", \"LocallyConstant.toFun\", \"LocallyConstant.desc\", \"LocallyConstant.mk.injEq\", \"LocallyConstant.mk\", \"LocallyConstant.recOn\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"LocallyConstant.rec\"], \"digest\": \"8aaa37520ae226d3\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected hits; morphism-property descent does not construct labelled partitions, quotient-map clopen reflection assumes a quotient map, and LocallyConstant.desc reflects local constancy through an injective codomain map (FlatDescent.lean:133, Topology/Clopen.lean:136, Topology/LocallyConstant/Basic.lean:424). Profinite limit factorization and affine-transition limit lemmas have different objects and hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fpqc descent of a locally constant map from schemes to a discrete set without quasi compactness of the base",
+   "results": "{\"t\": \"2026-10-21T08:28:56Z\", \"tool\": \"leanfinder\", \"query\": \"Fpqc descent of a locally constant map from schemes to a discrete set without quasi compactness of the base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Profinite.exists_locallyConstant_finite_aux\", \"Profinite.exists_locallyConstant_finite_nonempty\", \"Condensed.isColimitLocallyConstantPresheaf_desc_apply\", \"CompHausLike.LocallyConstant.presheaf_ext\", \"Profinite.exists_locallyConstant\", \"Profinite.exists_locallyConstant_fin_two\", \"LightCondensed.isColimitLocallyConstantPresheaf_desc_apply\", \"CompHausLike.LocallyConstant.functor\"], \"digest\": \"475faeea97a18112\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected hits; morphism-property descent does not construct labelled partitions, quotient-map clopen reflection assumes a quotient map, and LocallyConstant.desc reflects local constancy through an injective codomain map (FlatDescent.lean:133, Topology/Clopen.lean:136, Topology/LocallyConstant/Basic.lean:424). Profinite limit factorization and affine-transition limit lemmas have different objects and hypotheses."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-lem-stratified-lattice-rank",
@@ -99,5 +213,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-fpqc-labelled-clopen-descent",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Descended each compatible label fibre using the existing Tag 03N0 node, proved disjointness, exhaustiveness, closedness and uniqueness pointwise by joint surjectivity, and proved the test-morphism clause by joint surjectivity of the base-changed fpqc covering. No new nodes. Read both Stacks sources and every cited node statement; checked empty labels, cover, base and test scheme and infinite families.",
+  "blueprint": "Realizes the first paragraph of det-lem-stratified-lattice-rank.proof.md: compatible rank fibres descend by fpqc descent of opens and their complements; the test-morphism comparison supplies independence of trivializing cover used by the parent split. The unit rank step is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-open-subscheme-fpqc-descent",
+    "why": "Tag 03N0 is the generic compatible-open descent theorem explicitly required by the rank paragraph; no node of the lattice unit provides this theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-open-subscheme-fpqc-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q158-dfb9a2cca",
+  "group": "Q158",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q158-dfb9a2cca (reviewer sub-agent of L); spot-checked: Read the whole item, all six cited statements, Stacks descent.tex 03N0 (lemma-open-fpqc-covering, l.4101) and topologies.tex 022D(3) (lemma-fpqc, l.3105), and the main-20261015 rank proof of sk-lem-stratified-lattice. There are no new nodes. The statement is true and unchanged, and it exactly serves the parent's use: det-lem-stratified-lattice-rank step 2 applies it with A=N, ρ_i≡n_i and the test clause σ≡s. Step 1: the compatible labels give equal pullbacks of W_{i,a}=ρ_i^{-1}(a) on U_i×_XU_j, so the 03N0 node gives Z_a. Step 2 is elementary: joint surjectivity comes from def-weil-pbc-fpqc-covering, and it gives exactly one label per point, the complement of Z_a as a union of the other pieces (so Z_a is closed), uniqueness and the A=∅ case. Step 3: 022D(3) (lem-galois-fpqc-covering-base-change, a Mathlib leaf) applies after swapping the fibre-product factors, so the q_V are jointly surjective. Step 4 is elementary: h(v)=f_i(q_i w), then a chain of equivalences ending in the test compatibility, and continuity of h gives clopenness. Edge cases checked: I, A, V, U_i empty; A a singleton; I and A infinite; X not quasi-compact. There is no duplicate in the DAG: the fpqc-detects-openness, etale-open and open-subscheme descent nodes and the profinite factorization node each state something else. The off-unit tool use of lem-weil-pbc-open-subscheme-fpqc-descent (from sk-thm-iff) is accepted, because the unit's own text names fpqc descent of opens as a black box. No fixes."
  }
 }

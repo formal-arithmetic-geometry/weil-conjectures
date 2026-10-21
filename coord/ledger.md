@@ -21507,3 +21507,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:58 L: merged deliver/Q73/lem-pur-affine-coordinate-support-stalk-continuity (reviewer FIX; first push; new nodes: 0)
 - 08:58 L: merged deliver/Q92/lem-weil-point-automorphism-transport-scalar-extension (reviewer FIX; first push; new nodes: 0)
 - 08:58 L: merged deliver/O2/lem-weil-pbc-pair-functor-shift-coherence (reviewer PASS; first push; new nodes: 0)
+- 08:58 L: merged deliver/Q158/lem-sfb-fpqc-labelled-clopen-descent (reviewer PASS; first push; new nodes: 0)
