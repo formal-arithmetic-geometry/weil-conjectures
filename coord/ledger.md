@@ -20207,3 +20207,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:06 L: merged deliver/O2/lem-pur-additive-localization-descent (reviewer PASS; first push; new nodes: 0)
 - 04:06 L: merged deliver/Q22/lem-weil-pbc-flat-scalar-restriction-kflat (reviewer FIX; first push; new nodes: 0)
 - 04:06 L: merged deliver/NF/lemma-weil-pbc-completed-pullback-reduction (reviewer FIX; after a return; new nodes: 4)
+- 04:06 L: merged deliver/Q03/lem-sbc-reflector-square-mate-factorization (reviewer PASS; first push; new nodes: 0)
