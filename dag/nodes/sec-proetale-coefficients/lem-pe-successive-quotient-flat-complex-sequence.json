@@ -1,0 +1,79 @@
+{
+ "id": "lem-pe-successive-quotient-flat-complex-sequence",
+ "kind": "statement",
+ "title": "The successive coefficient sequence stays exact on flat-term sheaf complexes",
+ "statement": "Let $\\mathcal C$ be a site small in the coefficient universe, $B$ a sheaf of commutative rings, and $t\\in\\Gamma(\\mathcal C,B)$ such that multiplication by $t$ on $B$ is injective. Let $n>1$ and put $R_j=B/t^jB$ with projections $\\pi_j:B\\to R_j$ [def-pe-principal-power-ring-quotients]. Use sheaves of modules [def-weil-sheaf-of-modules-category], scalar restriction [def-pc-sheaf-restrict-scalars], sheaf tensor [def-pur-sheaf-tensor-product] and unbounded cochain complexes [def-weil-abstract-derived-category]. There are canonical quotient ring maps $q_-:R_n\\to R_{n-1}$ and $q_1:R_n\\to R_1$ with $q_-\\pi_n=\\pi_{n-1}$ and $q_1\\pi_n=\\pi_1$. The local formulas\n$$a(\\pi_{n-1}(c))=\\pi_n(tc),\\qquad b(\\pi_n(c))=\\pi_1(c)$$\ndefine morphisms for which\n$$0\\longrightarrow\\operatorname{Res}_{q_-}R_{n-1}\\xrightarrow{a}R_n\\xrightarrow{b}\\operatorname{Res}_{q_1}R_1\\longrightarrow0$$\nis short exact in $\\operatorname{Mod}(R_n)$ and remains short exact after restriction to $B$.\nFor every unbounded cochain complex $P$ of $B$-modules whose terms are flat [def-pc-flat-sheaf-modules], put $C_j^i=R_j\\otimes_B P^i$ with differential $1\\otimes d_P^i$ and $R_j$ acting on the first factor. Tensoring $a,b$ with $1_P$ gives well-defined $R_n$-linear cochain maps\n$$\\alpha:\\operatorname{Res}_{q_-}C_{n-1}\\longrightarrow C_n,\\qquad \\beta:C_n\\longrightarrow\\operatorname{Res}_{q_1}C_1,$$\ncharacterized on local pure tensors by\n$$\\alpha(\\pi_{n-1}(c)\\otimes p)=\\pi_n(tc)\\otimes p,\\qquad \\beta(\\pi_n(c)\\otimes p)=\\pi_1(c)\\otimes p.$$\nThey form a degreewise short exact sequence of $R_n$-complexes, also degreewise short exact after restriction to $B$. These assertions do not require points of the site, sectionwise flatness of $P^i(U)$, K-flatness of $P$, or any bound on its degrees.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-integral-criterion/sk-prop-integral-criterion-reductions.proof.md",
+  "place": "Second paragraph: coefficient exact sequence before derived tensor; agent refinement to arbitrary small ringed sites and flat-term complexes. Stacks Tags 03DA (sites-modules-lemma-abelian), 03EK (sites-modules-section-tensor-product), 03ER (sites-modules-definition-flat, item (3))."
+ },
+ "stmt_deps": [
+  "def-pe-principal-power-ring-quotients",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-sheaf-restrict-scalars",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-abstract-derived-category",
+  "def-pc-flat-sheaf-modules"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "principalPower|quotient.*(exact|[Tt]ensor)|shortExact.*tensor",
+   "results": "{\"t\": \"2026-10-21T05:49:49Z\", \"tool\": \"grep\", \"query\": \"principalPower|quotient.*(exact|[Tt]ensor)|shortExact.*tensor\", \"sub\": \"Algebra/Category/ModuleCat\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "No match: the hits IsSMulRegular.smulShortComplex_shortExact (Mathlib/RingTheory/Regular/Category.lean:51) and Module.Flat.lTensor_shortComplex_exact / rTensor_shortComplex_exact (Mathlib/RingTheory/Flat/CategoryTheory.lean:41,46) concern ordinary modules over a ring. They neither construct the local ring-sheaf coefficient maps nor the exact sheaf-complex sequence with its R_n-action."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensoring successive powers of a regular element's quotient ring sheaves with a termwise flat complex gives a short exact sequence with the middle quotient ring acting on every term",
+   "results": "{\"t\": \"2026-10-21T05:49:49Z\", \"tool\": \"leansearch\", \"query\": \"Tensoring successive powers of a regular element's quotient ring sheaves with a termwise flat complex gives a short exact sequence with the middle quotient ring acting on every term\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsSMulRegular.smulShortComplex_shortExact\", \"Module.Flat.lTensor_shortComplex_exact\", \"Module.Flat.lTensor_exact\", \"Module.Flat.rTensor_shortComplex_exact\", \"Module.Flat.rTensor_exact\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"Module.Flat.iff_lTensor_exact'\", \"Module.FaithfullyFlat.rTensor_exact_iff_exact\"], \"digest\": \"b1c2949182de34a1\"}",
+   "date": "2026-10-21",
+   "verdict": "No match: the hits IsSMulRegular.smulShortComplex_shortExact (Mathlib/RingTheory/Regular/Category.lean:51) and Module.Flat.lTensor_shortComplex_exact / rTensor_shortComplex_exact (Mathlib/RingTheory/Flat/CategoryTheory.lean:41,46) concern ordinary modules over a ring. They neither construct the local ring-sheaf coefficient maps nor the exact sheaf-complex sequence with its R_n-action."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"exact\"",
+   "results": "{\"t\": \"2026-10-21T05:49:49Z\", \"tool\": \"loogle\", \"query\": \"\\\"SheafOfModules\\\", \\\"exact\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "No match: the hits IsSMulRegular.smulShortComplex_shortExact (Mathlib/RingTheory/Regular/Category.lean:51) and Module.Flat.lTensor_shortComplex_exact / rTensor_shortComplex_exact (Mathlib/RingTheory/Flat/CategoryTheory.lean:41,46) concern ordinary modules over a ring. They neither construct the local ring-sheaf coefficient maps nor the exact sheaf-complex sequence with its R_n-action."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Let B be a commutative ring sheaf on a small site and t a regular section. For any termwise flat cochain complex P the successive quotient tensors B/t^(n-1) tensor P, B/t^n tensor P and B/t tensor P form a degreewise short exact sequence of B/t^n module complexes",
+   "results": "{\"t\": \"2026-10-21T05:49:58Z\", \"tool\": \"leanfinder\", \"query\": \"Let B be a commutative ring sheaf on a small site and t a regular section. For any termwise flat cochain complex P the successive quotient tensors B/t^(n-1) tensor P, B/t^n tensor P and B/t tensor P form a degreewise short exact sequence of B/t^n module complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.rTensor_shortComplex_exact\", \"Module.Flat.rTensor_exact\", \"Module.Flat.lTensor_shortComplex_exact\", \"Module.Flat.iff_rTensor_exact'\", \"Module.Flat.lTensor_exact\", \"Module.Flat.iff_lTensor_exact'\", \"Module.Flat.iff_rTensor_exact\", \"lTensor_exact\"], \"digest\": \"422a5172b1eab568\"}",
+   "date": "2026-10-21",
+   "verdict": "No match: the hits IsSMulRegular.smulShortComplex_shortExact (Mathlib/RingTheory/Regular/Category.lean:51) and Module.Flat.lTensor_shortComplex_exact / rTensor_shortComplex_exact (Mathlib/RingTheory/Flat/CategoryTheory.lean:41,46) concern ordinary modules over a ring. They neither construct the local ring-sheaf coefficient maps nor the exact sheaf-complex sequence with its R_n-action."
+  },
+  {
+   "tool": "grep",
+   "query": "smulShortComplex_shortExact|rTensor_shortComplex_exact|lTensor_shortComplex_exact",
+   "results": "{\"t\": \"2026-10-21T05:50:19Z\", \"tool\": \"grep\", \"query\": \"smulShortComplex_shortExact|rTensor_shortComplex_exact|lTensor_shortComplex_exact\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Flat/CategoryTheory.lean\", \"Mathlib/RingTheory/Flat/CategoryTheory.lean\", \"Mathlib/RingTheory/Flat/CategoryTheory.lean\", \"Mathlib/RingTheory/Flat/CategoryTheory.lean\", \"Mathlib/RingTheory/Regular/Category.lean\", \"Mathlib/RingTheory/Regular/ProjectiveDimension.lean\", \"Mathlib/RingTheory/Depth/Rees.lean\", \"Mathlib/RingTheory/Depth/Rees.lean\"], \"digest\": \"451ee68a2669a3d2\"}",
+   "date": "2026-10-21",
+   "verdict": "No match: the hits IsSMulRegular.smulShortComplex_shortExact (Mathlib/RingTheory/Regular/Category.lean:51) and Module.Flat.lTensor_shortComplex_exact / rTensor_shortComplex_exact (Mathlib/RingTheory/Flat/CategoryTheory.lean:41,46) concern ordinary modules over a ring. They neither construct the local ring-sheaf coefficient maps nor the exact sheaf-complex sequence with its R_n-action."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-pe-successive-quotient-linear-triangle",
+  "date": "2026-10-21",
+  "group": "Q33"
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-prop-integral-criterion",
+ "blueprint": {
+  "from": {
+   "node": "det-prop-integral-criterion-reductions",
+   "place": "Second paragraph: the coefficient exact sequence and its termwise tensor with a flat-term representative, before passing to the derived category.",
+   "via": [
+    "lem-pe-successive-quotient-linear-triangle"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
