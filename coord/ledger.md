@@ -20855,3 +20855,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:07 L: merged deliver/NU/lem-pur-inverse-image-scalar-unit-normalization (reviewer PASS; first push; new nodes: 0)
 - 08:07 L: merged deliver/Q22/sk-d-real-weil (reviewer FIX; first push; new nodes: 1)
 - 08:07 L: merged deliver/N0/lem-weil-pbc-derived-adjunction-top-edge (reviewer PASS; first push; new nodes: 0)
+- 08:07 L: merged deliver/Q83/lem-pur-finite-forward-product-symmetry (reviewer PASS; after a return; new nodes: 2)

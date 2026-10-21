@@ -1,0 +1,83 @@
+{
+ "id": "lem-pur-finite-proper-product-transpose",
+ "kind": "statement",
+ "title": "Counit transpose and swap of the finite proper external product",
+ "statement": "Use the finite coefficient datum $k,A=A_{E,n}$ of [def-pur-conventions]. Let $B,Y,Z$ be separated finite-type $k$-schemes and $a:Y\\to B$, $b:Z\\to B$ proper morphisms [def-weil-proper-morphism]. Put $C=Y\\times_BZ$, with projections $r:C\\to Y$, $t:C\\to Z$ and $c=ar=bt$ [def-pc-fibre-product]. Work in ordinary unbounded constant-$A$ derived categories on the small pro-etale sites, with the pullback, tensor and signed symmetry of [def-weil-derived-pullback-tensor-hom]. For arbitrary $H\\in D(Y_{\\mathrm{proet}},A)$, $J\\in D(Z_{\\mathrm{proet}},A)$ write $F=Ra_*H$, $G=Rb_*J$, $E=Lr^*H\\otimes_A^LLt^*J$. Let $x=\\operatorname{Ex}_{*,a,b,H}:Lb^*F\\to Rt_*Lr^*H$ and $\\pi_u$ be exactly the ordinary counit-defined exchange and projection maps of [def-exchange-projection]. Define\n$$\\begin{aligned}\nv&=\\pi_{t,Lr^*H,J}\\circ(x\\otimes1_J):Lb^*F\\otimes_A^LJ\\longrightarrow Rt_*E,\\\\\nw&=Rb_*(\\sigma_{J,Lb^*F})\\circ\\pi_{b,J,F}\\circ\\sigma_{F,G}:F\\otimes_A^LG\\longrightarrow Rb_*(Lb^*F\\otimes_A^LJ),\\\\\n\\Omega_{a,b}(H,J)&=\\kappa_{b,t}^{-1}\\circ Rb_*(v)\\circ w:F\\otimes_A^LG\\longrightarrow Rc_*E,\n\\end{aligned}$$\nwhere $\\kappa_{b,t}:Rc_*\\xrightarrow{\\sim}Rb_*Rt_*$ is the canonical finite-level compositor of [lem-weil-derived-direct-image-composition]. Use the canonical pullback tensor and composition comparisons [lem-pur-derived-pullback-tensor-iso, lem-weil-pbc-proetale-derived-pullback-composition] and the ordinary derived adjunctions $Lu^*\\dashv Ru_*$. Write $\\varepsilon_{u,K}:Lu^*Ru_*K\\to K$ for their counits. Then the transposes of the displayed maps are\n$$\\begin{aligned}\n\\widehat v&=Lr^*\\varepsilon_{a,H}\\otimes1_{Lt^*J},\\\\\n\\widehat w&=1_{Lb^*F}\\otimes\\varepsilon_{b,J},\\\\\n\\widehat\\Omega_{a,b}&=Lr^*\\varepsilon_{a,H}\\otimes Lt^*\\varepsilon_{b,J}:Lc^*(F\\otimes_A^LG)\\longrightarrow E.\n\\end{aligned}$$\nHere $\\widehat v$ uses $Lt^*\\dashv Rt_*$, $\\widehat w$ uses $Lb^*\\dashv Rb_*$, and $\\widehat\\Omega$ uses $Lc^*\\dashv Rc_*$; all sources are identified by the specified pullback comparisons. In particular, with the composite hom bijection of [def-weil-pbc-composite-adjunction], the last transpose equals $\\widehat v\\circ Lt^*(\\widehat w)$ under $Lc^*\\cong Lt^*Lb^*$ and the displayed $\\kappa_{b,t}$.\n\nLet $C'=Z\\times_BY$, $c':C'\\to B$ and $\\bar s:C\\xrightarrow{\\sim}C'$ be the swap. Let $S_{a,b}$ be the canonical identification from $Rc'_*(Lr'^*J\\otimes_A^LLt'^*H)$ to $Rc_*E$ formed from transport along $\\bar s$ and $\\sigma_{Lt^*J,Lr^*H}$; the transport uses the same direct-image compositors. Then\n$$\\Omega_{a,b}(H,J)=S_{a,b}\\circ\\Omega_{b,a}(J,H)\\circ\\sigma_{F,G}.$$\nThere is no boundedness, etale-origin, constructibility, finite Tor-amplitude, compact-support comparison, exceptional adjoint or invertibility assumption on exchange or projection maps.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0E48, label remark-compatible-with-diagram, and equation-projection-formula-map immediately preceding it; The counit calculation in the symmetry paragraph; returned proof Steps 3--6. This is an agent-formulated comparison, not the literal assertion of the Stacks tag. The argument is retained in report.md from literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md."
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-proper-morphism",
+  "def-pc-fibre-product",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-exchange-projection",
+  "lem-weil-derived-direct-image-composition",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "def-weil-pbc-composite-adjunction"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The relative external product for ordinary derived direct images defined by base change and projection morphisms is adjoint to the tensor of the two pulled back counits",
+   "results": "Actual returned hits: CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit, CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc, CategoryTheory.ExponentiableMorphism.coev_ev_assoc, CategoryTheory.ExponentiableMorphism.coev_ev, CategoryTheory.ExponentiableMorphism.ev, CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom_assoc, CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom, CategoryTheory.ExponentiableMorphism.pushforwardId_hom_counit_assoc. The adjunction comp_homEquiv is only a composite hom-bijection identity. The scheme module conjugate-comparison theorem is underived on structure sheaves, and the exponentiable-morphism results concern slice categories. None identifies this specified derived exchange/projection composite with the tensor of two counits, including its derived compositor normalization.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For proper scheme maps the canonical external product built from projection formula and exchange has transpose the tensor of counits under the composite pullback direct image adjunction",
+   "results": "Actual returned hits: AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, CategoryTheory.MonoidalCategory.externalProductSwap, AlgebraicGeometry.pullbackSpecIso_hom_fst'_assoc, AlgebraicGeometry.IsProper.instFstScheme, AlgebraicGeometry.IsProper.instSndScheme, AlgebraicGeometry.pullbackSpecIso, CategoryTheory.MonoidalCategory.externalProduct, CategoryTheory.MonoidalCategory.externalProductCompDiagIso. The adjunction comp_homEquiv is only a composite hom-bijection identity. The scheme module conjugate-comparison theorem is underived on structure sheaves, and the exponentiable-morphism results concern slice categories. None identifies this specified derived exchange/projection composite with the tensor of two counits, including its derived compositor normalization.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv, CategoryTheory.Adjunction.comp",
+   "results": "Actual returned hits: CategoryTheory.Adjunction.comp_homEquiv. The adjunction comp_homEquiv is only a composite hom-bijection identity. The scheme module conjugate-comparison theorem is underived on structure sheaves, and the exponentiable-morphism results concern slice categories. None identifies this specified derived exchange/projection composite with the tensor of two counits, including its derived compositor normalization.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projection_formula|externalProduct|external_product",
+   "results": "Actual returned hits: Mathlib/CategoryTheory/Monoidal/DayConvolution.lean, Mathlib/CategoryTheory/Monoidal/DayConvolution.lean, Mathlib/CategoryTheory/Monoidal/DayConvolution.lean, Mathlib/CategoryTheory/Monoidal/DayConvolution.lean, Mathlib/CategoryTheory/Monoidal/DayConvolution.lean, Mathlib/CategoryTheory/Monoidal/ExternalProduct/KanExtension.lean, Mathlib/CategoryTheory/Monoidal/ExternalProduct/KanExtension.lean, Mathlib/CategoryTheory/Monoidal/ExternalProduct/KanExtension.lean. The adjunction comp_homEquiv is only a composite hom-bijection identity. The scheme module conjugate-comparison theorem is underived on structure sheaves, and the exponentiable-morphism results concern slice categories. None identifies this specified derived exchange/projection composite with the tensor of two counits, including its derived compositor normalization.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compute successive adjunction transposes of the two projection transformations and exchange in a cartesian square of ringed topoi; the direct image compositor is conjugate to the pullback compositor",
+   "results": "Actual returned hits: AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackComp, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, PresheafOfModules.pullbackComp, SheafOfModules.pullbackIso, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.pullbackObjUnitToUnit, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj. The adjunction comp_homEquiv is only a composite hom-bijection identity. The scheme module conjugate-comparison theorem is underived on structure sheaves, and the exponentiable-morphism results concern slice categories. None identifies this specified derived exchange/projection composite with the tensor of two counits, including its derived compositor normalization.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-finite-forward-product-symmetry",
+  "date": "2026-10-21",
+  "group": "Q83"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "from": {
+   "node": "prop-pur-affine-space-composition-law",
+   "place": "Proof Steps 3--4: the passage from reassociation of the ordered tower to symmetry of the actual product morphism; the compact-support external-product interchange needed before evaluating any trace. Proper-product part: successive transposes of exchange and projection, compositor normalization, and the swapped tensor-of-counits identity (returned proof Steps 3--6).",
+   "via": [
+    "lem-pur-finite-forward-product-symmetry",
+    "lem-pur-affine-space-trace-factorization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

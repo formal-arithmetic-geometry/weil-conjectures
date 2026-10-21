@@ -1,0 +1,82 @@
+{
+ "id": "lem-pur-finite-open-product-swap",
+ "kind": "statement",
+ "title": "Finite open external-tensor comparison and signed factor swap",
+ "statement": "Use the finite coefficient datum $k,A=A_{E,n}$ of [def-pur-conventions]. Work in the ordinary unbounded constant-$A$ module derived categories on the small pro-etale sites, with pullback, derived tensor and signed symmetry $\\sigma$ of [def-weil-derived-pullback-tensor-hom]. Let $\\bar X,\\bar Z,B,X,Z$ be separated finite-type $k$-schemes, let $a:\\bar X\\to B$, $b:\\bar Z\\to B$ be separated finite-type morphisms, and let $j:X\\hookrightarrow\\bar X$, $k:Z\\hookrightarrow\\bar Z$ be open immersions [def-weil-open-immersion]. Set $C=\\bar X\\times_B\\bar Z$, $P=X\\times_BZ$, with projections $r,t$ on $C$ and $p,q$ on $P$, and $u=j\\times_Bk:P\\hookrightarrow C$ [def-pc-fibre-product]. For arbitrary $M\\in D(X_{\\mathrm{proet}},A)$ and $N\\in D(Z_{\\mathrm{proet}},A)$ put\n$$E=Lr^*j_!M\\otimes_A^LLt^*k_!N,\\qquad D=Lp^*M\\otimes_A^LLq^*N,$$\nusing exact extension by zero [def-weil-extension-by-zero]. In the factorization $P\\xrightarrow{w}X\\times_B\\bar Z\\xrightarrow{v}C$ of $u$, define $e_{j,k}:E\\to u_!D$ as follows: use open base change for $j$, then the open tensor comparison for $v$, then inside $v_!$ open base change for $k$ and the open tensor comparison for $w$ (using signed symmetry to place the extension factor first), and finally $v_!w_!\\cong u_!$. All base-change and tensor maps are the actual unit-normalized maps of [lem-sf-open-tensor-normalization]; tensor/pullback identifications are those of [lem-pur-derived-pullback-tensor-iso], and open compositors those of [lem-cbc-extension-zero-composition]. Define $e^{\\mathrm{op}}_{j,k}$ by the other factorization through $\\bar X\\times_BZ$. Then both maps are isomorphisms, their restrictions along $u$ are $1_D$ under the specified open units, and $e_{j,k}=e^{\\mathrm{op}}_{j,k}$.\n\nPut $C'=\\bar Z\\times_B\\bar X$, $P'=Z\\times_BX$, let $\\bar s:C\\xrightarrow{\\sim}C'$ and $s:P\\xrightarrow{\\sim}P'$ be the swaps, and let $u':P'\\hookrightarrow C'$. Transport the reversed construction $e_{k,j}$ by $\\bar s^*$ and the normalized open base-change identifications, obtaining $\\widetilde e_{k,j}:Lt^*k_!N\\otimes_A^LLr^*j_!M\\to u_!(Lq^*N\\otimes_A^LLp^*M)$. The actual maps satisfy\n$$e_{j,k}=u_!(\\sigma_{Lq^*N,Lp^*M})\\circ\\widetilde e_{k,j}\\circ\\sigma_{Lr^*j_!M,Lt^*k_!N}.$$\nNo boundedness, etale-origin, constructibility, finite Tor-amplitude, properness of $a,b$, or abstract six-functor datum is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0GL1, label lemma-j-shriek-and-tensor; Product-open comparison required in the symmetry reduction; returned proof Step 2. This is an agent-formulated comparison, not the literal assertion of the Stacks tag. The argument is retained in report.md from literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md."
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-open-immersion",
+  "def-pc-fibre-product",
+  "def-weil-extension-by-zero",
+  "lem-sf-open-tensor-normalization",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-cbc-extension-zero-composition"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For arbitrary unbounded finite coefficient derived sheaf complexes extension by zero commutes with external tensor products and the factor swap with Koszul symmetry",
+   "results": "Actual returned hits: HomologicalComplex.ιTensorObj, HomologicalComplex.unit_tensor_d₁, HomologicalComplex.HasGoodTensor₁₂, HomologicalComplex.HasGoodTensor₂₃, HomologicalComplex.HasTensor, HomologicalComplex.tensor_unit_d₂, HomologicalComplex.rightUnitor'_inv_comm, HomologicalComplex.leftUnitor'_inv_comm. The returned external products are products of diagrams, the module tensors are underived, and the braided sheafification result concerns sheafification. None constructs the two extension-by-zero product comparisons or proves their unit-normalized signed swap equality in the ordinary unbounded derived pro-etale categories.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The unit normalized open immersion base change and projection tensor isomorphisms give the same external product map in either order and commute with signed symmetry",
+   "results": "Actual returned hits: CategoryTheory.MonoidalCategory.externalProductFlip, TensorProduct.gradedCommAux, TensorProduct.gradedComm, SemimoduleCat.MonoidalCategory.tensorμ_eq_tensorTensorTensorComm, CategoryTheory.MonoidalCategory.externalProductSwap, Algebra.TensorProduct.comm_symm, TensorProduct.gradedCommAux_comp_gradedCommAux, TensorProduct.tensorTensorTensorComm_symm. The returned external products are products of diagrams, the module tensors are underived, and the braided sheafification result concerns sheafification. None constructs the two extension-by-zero product comparisons or proves their unit-normalized signed swap equality in the ordinary unbounded derived pro-etale categories.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, CategoryTheory.Functor.Braided",
+   "results": "Actual returned hits: CategoryTheory.Sheaf.instBraidedFunctorOppositePresheafToSheaf. The returned external products are products of diagrams, the module tensors are underived, and the braided sheafification result concerns sheafification. None constructs the two extension-by-zero product comparisons or proves their unit-normalized signed swap equality in the ordinary unbounded derived pro-etale categories.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|extension_by_zero|jShriek|j_shriek",
+   "results": "No hits. The returned external products are products of diagrams, the module tensors are underived, and the braided sheafification result concerns sheafification. None constructs the two extension-by-zero product comparisons or proves their unit-normalized signed swap equality in the ordinary unbounded derived pro-etale categories.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two open immersions j and k have a canonical product extension by zero tensor comparison normalized to identity on the open product which intertwines tensor symmetry on derived module sheaves",
+   "results": "Actual returned hits: TopCat.Sheaf.objSupIsoProdEqLocus_inv_fst, TopCat.Sheaf.objSupIsoProdEqLocus_inv_snd, PresheafOfModules.Monoidal.tensorObj, PresheafOfModules.Monoidal.tensorObj_obj, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_inv, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_refl, PresheafOfModules.Monoidal.tensorObj_map_tmul, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app. The returned external products are products of diagrams, the module tensors are underived, and the braided sheafification result concerns sheafification. None constructs the two extension-by-zero product comparisons or proves their unit-normalized signed swap equality in the ordinary unbounded derived pro-etale categories.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-finite-forward-product-symmetry",
+  "date": "2026-10-21",
+  "group": "Q83"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "from": {
+   "node": "prop-pur-affine-space-composition-law",
+   "place": "Proof Steps 3--4: the passage from reassociation of the ordered tower to symmetry of the actual product morphism; the compact-support external-product interchange needed before evaluating any trace. Open-product part: equality of the two extension orders and its signed factor swap (returned proof Step 2).",
+   "via": [
+    "lem-pur-finite-forward-product-symmetry",
+    "lem-pur-affine-space-trace-factorization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

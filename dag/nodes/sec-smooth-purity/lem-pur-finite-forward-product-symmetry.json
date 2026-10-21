@@ -17,111 +17,57 @@
  ],
  "proof": [
   {
-   "text": "Use the compactifications already chosen in the definition of the two forward maps, writing $f=aj$, $g=bk$. Put $H=j_!M$, $J=k_!N$, $F=Ra_*H$, $G=Rb_*J$, and $C=\\bar X\\times_B\\bar Z$, with $r,t,c,u,D$ as in [lem-pur-finite-product-compactification]. That lemma identifies the actual map $\\Xi_{f,g}$ with $Rc_*(e)\\Omega_{a,b}(H,J)$, and identifies the exchanged actual map with the analogous expression for $(b,a,J,H)$. Its hypothesis about tensor objects holds in each order by the hypotheses of this item. The lemma includes transport from the independently chosen compactifications of the intermediate maps, so this is an equality of the specified maps, rather than a replacement by an arbitrarily chosen product morphism. It remains to compare the two proper composites and their open tensor identifications.",
+   "text": "Choose the two compactifications $f=aj$, $g=bk$ already used by the forward maps. With $H=j_!M$, $J=k_!N$, $C=\\bar X\\times_B\\bar Z$, $u:P\\hookrightarrow C$ and $c:C\\to B$, apply [lem-pur-finite-product-compactification] in both orders. Its stated equality is $\\Xi_{f,g}=Rc_*(e_{j,k})\\Omega_{a,b}(H,J)$, and similarly for the swapped map; it includes the comparisons from independently chosen intermediate compactifications. Its tensor-domain hypothesis holds in each order by the assumed bounded-below etale-origin tensor conditions in both orders.",
    "uses": [
     "lem-pur-finite-product-compactification"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
-    "place": "Symmetry paragraph, reduction to proper maps by compactification: agent-formulated finite-level comparison without the finite-Tor or abstract-datum hypotheses of that paragraph."
+    "place": "Symmetry paragraph (i), proper compactification and tensor of pulled-back counits; finite forward-map formulation from the retained split."
    }
   },
   {
-   "text": "The open comparison $e$ used in Step 1 intertwines signed symmetry. Indeed factor $u$ as $P\\xrightarrow{w}X\\times_B\\bar Z\\xrightarrow{v}C$. Open base change expresses $Lr^*j_!M$ as $v_!$ of the pullback of $M$; the tensor comparison for $v$ puts the other factor inside $v_!$. On $X\\times_B\\bar Z$, open base change of $k$ and the tensor comparison for $w$ then give $u_!D$. The opposite factorization gives the analogous isomorphism. By [lem-sf-open-tensor-normalization] each open comparison restricts to the identity under the open units. Both maps are therefore maps between objects in the essential image of the fully faithful $u_!$, with the same restriction, so are equal. The same test applied to the square obtained by swapping the factors and inserting tensor symmetry gives a commutative square: both restricted composites are exactly $\\sigma_{Lq^*N,Lp^*M}$. Compatibility of pullback with signed symmetry is [lem-pur-derived-pullback-tensor-iso]. This proves the required symmetry of $e$, including all Koszul signs.",
+   "text": "Apply [lem-pur-finite-proper-product-transpose] to the proper $a,b$ and the ambient complexes $H,J$. Its swap equality identifies $\\Omega_{a,b}$ with $S_{a,b}\\Omega_{b,a}\\sigma_{Ra_*H,Rb_*J}$, using exactly the ordinary exchange, projection and direct-image compositor appearing in Step 1. The lemma's transpose and normalization assertions include the successive counit calculations, so no projection or exchange map is inverted.",
    "uses": [
-    "lem-sf-open-tensor-normalization",
-    "lem-pur-derived-pullback-tensor-iso"
+    "lem-pur-finite-proper-product-transpose"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
-    "place": "Symmetry paragraph, reduction to proper maps by compactification: agent-formulated finite-level comparison without the finite-Tor or abstract-datum hypotheses of that paragraph."
+    "place": "Symmetry paragraph (i), proper compactification and tensor of pulled-back counits; finite forward-map formulation from the retained split."
    }
   },
   {
-   "text": "Compute the proper composite on $C$. Put $E=Lr^*H\\otimes^LLt^*J$ and let $x:Lb^*F\\to Rt_*Lr^*H$ be ordinary exchange. Its transpose is $Lr^*(\\varepsilon_{a,H}):Lt^*Lb^*F\\cong Lr^*La^*F\\to Lr^*H$ by the definition in [def-exchange-projection]. Let $v=\\pi_{t,Lr^*H,J}\\circ(x\\otimes1_J)$. Under $Lt^*\\dashv Rt_*$ its transpose, using the tensor comparisons, is\n$$\\widehat v=(\\varepsilon_{t,Lr^*H}\\otimes1)\\circ(Lt^*x\\otimes1)=Lr^*\\varepsilon_{a,H}\\otimes1_{Lt^*J}.$$\nThe first equality is exactly the counit definition of $\\pi_t$ and naturality of the tensor comparison; the second is the defining transpose equation for $x$. No exchange or projection is inverted.",
+   "text": "Apply [lem-pur-finite-open-product-swap] to $j,k,M,N$. Its comparison $e_{j,k}$ is the one used in Step 1: the ordered open-base-change and tensor construction is the same, and both orders are normalized by the open units. Its displayed signed-swap equation says that $e_{j,k}$ intertwines the ambient and supported tensor symmetries. Apply $Rc_*$ to this equation. The swap of $C$ restricts to $s:P\\to Z\\times_BX$, so the output comparison in the resulting composite is exactly the statement's $S$.",
    "uses": [
-    "def-exchange-projection",
-    "lem-pur-derived-pullback-tensor-iso"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
-    "place": "Symmetry paragraph, reduction to proper maps by compactification: agent-formulated finite-level comparison without the finite-Tor or abstract-datum hypotheses of that paragraph."
-   }
-  },
-  {
-   "text": "Write $w=Rb_*(\\sigma_{J,Lb^*F})\\circ\\pi_{b,J,F}\\circ\\sigma_{F,G}:F\\otimes^LG\\to Rb_*(Lb^*F\\otimes^LJ)$. Its $Lb^*\\dashv Rb_*$ transpose is\n$$\\widehat w=\\sigma_{J,Lb^*F}\\circ(\\varepsilon_{b,J}\\otimes1)\\circ\\sigma_{Lb^*F,Lb^*G}=1_{Lb^*F}\\otimes\\varepsilon_{b,J}.$$\nHere $G=Rb_*J$. The first equality is the definition of the ordinary projection transformation. The second is naturality and involutivity of signed symmetry; pullback carries the input symmetry to the displayed one by [lem-pur-derived-pullback-tensor-iso]. All maps, including counits, have degree zero, so this calculation introduces no extra sign.",
-   "uses": [
-    "def-exchange-projection",
-    "lem-pur-derived-pullback-tensor-iso"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
-    "place": "Symmetry paragraph, reduction to proper maps by compactification: agent-formulated finite-level comparison without the finite-Tor or abstract-datum hypotheses of that paragraph."
-   }
-  },
-  {
-   "text": "The ordinary proper product is $\\Omega_{a,b}=\\kappa_{b,t}^{-1}\\circ Rb_*(v)\\circ w$. Transpose successively under $Lb^*\\dashv Rb_*$ and $Lt^*\\dashv Rt_*$, with the canonical composite adjunction $Lc^*\\dashv Rc_*$. The composite hom bijection is the one of [def-weil-pbc-composite-adjunction], and [lem-weil-pbc-mate-pasting] supplies its pasting normalization. The compositor $\\kappa_{b,t}$ of [lem-weil-derived-direct-image-composition] is the conjugate of the pullback compositor $Lc^*\\cong Lt^*Lb^*$ of [lem-weil-pbc-proetale-derived-pullback-composition]: for constant $A$ the inverse images are exact, the module sheaf categories are Grothendieck abelian by [lem-cbc-sieve-module-sheaves-grothendieck], and [lem-sfb-derived-composition-adjunction-normalization] identifies the conjugate of the derived pullback compositor with the class of the termwise sheaf compositor on K-injectives, which is the normalization of $\\kappa_{b,t}$. Hence transposing $\\kappa_{b,t}^{-1}$-composites under $Lc^*\\dashv Rc_*$ is transposing successively under $Lb^*\\dashv Rb_*$ and $Lt^*\\dashv Rt_*$. Naturality of each hom bijection gives\n$$\\widehat\\Omega_{a,b}=\\widehat v\\circ Lt^*(\\widehat w)\n=(Lr^*\\varepsilon_{a,H}\\otimes1)\\circ(1\\otimes Lt^*\\varepsilon_{b,J})\n=Lr^*\\varepsilon_{a,H}\\otimes Lt^*\\varepsilon_{b,J}.$$\nIts source is $Lc^*(F\\otimes^LG)\\cong Lr^*La^*F\\otimes^LLt^*Lb^*G$ and target is $E$. The direct-image compositor is [lem-weil-derived-direct-image-composition]; the pullback tensor and composition identifications are those of [lem-pur-derived-pullback-tensor-iso]. The last equality is functoriality of tensor [lem-weil-derived-tensor-functorial].",
-   "uses": [
-    "def-weil-pbc-composite-adjunction",
-    "lem-weil-pbc-mate-pasting",
-    "lem-weil-derived-direct-image-composition",
-    "lem-pur-derived-pullback-tensor-iso",
-    "lem-weil-derived-tensor-functorial",
-    "lem-weil-pbc-proetale-derived-pullback-composition",
-    "lem-cbc-sieve-module-sheaves-grothendieck",
-    "lem-sfb-derived-composition-adjunction-normalization"
+    "lem-pur-finite-open-product-swap"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
-    "place": "Symmetry paragraph, reduction to proper maps by compactification: agent-formulated finite-level comparison without the finite-Tor or abstract-datum hypotheses of that paragraph."
+    "place": "Symmetry paragraph (i), proper compactification and tensor of pulled-back counits; finite forward-map formulation from the retained split."
    }
   },
   {
-   "text": "Repeat Steps 3--5 for $(b,a,J,H)$. Identify $\\bar Z\\times_B\\bar X$ with $C$ by the swap. After precomposing with $\\sigma_{F,G}$ and postcomposing with the external tensor symmetry, its transpose becomes\n$$\\sigma_{Lt^*J,Lr^*H}\\circ(Lt^*\\varepsilon_{b,J}\\otimes Lr^*\\varepsilon_{a,H})\\circ\\sigma_{Lr^*La^*F,Lt^*Lb^*G}\n=Lr^*\\varepsilon_{a,H}\\otimes Lt^*\\varepsilon_{b,J}.$$\nThis is naturality and involutivity of the same signed symmetry; compatibility of its pullback and the factor-swap identifications is [lem-pur-derived-pullback-tensor-iso]. Direct images respect transport along the swap by [lem-weil-derived-direct-image-composition]. The adjunction hom bijection is injective, so the two proper forward morphisms themselves agree under these input and output symmetries.",
-   "uses": [
-    "lem-pur-derived-pullback-tensor-iso",
-    "lem-weil-derived-direct-image-composition"
-   ],
+   "text": "Substitute Steps 2 and 3 into both factorizations of Step 1, and compose. This gives $\\Xi_{f,g}(M,N)=S\\circ\\Xi_{g,f}(N,M)\\circ\\sigma_{Rf_!M,Rg_!N}$. Both new lemmas apply on the ambient unbounded finite-level categories; only the existing compactification comparison uses the bounded-below etale-origin tensor assumptions, precisely those supplied here.",
+   "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
-    "place": "Symmetry paragraph, reduction to proper maps by compactification: agent-formulated finite-level comparison without the finite-Tor or abstract-datum hypotheses of that paragraph."
-   }
-  },
-  {
-   "text": "Apply $Rc_*$ to the commutative open-comparison square of Step 2 and combine it with the equality of proper maps in Step 6. Substitute the two factorizations from Step 1. The swap of the product compactifications restricts to $s:P\\to Z\\times_BX$; its external tensor symmetry followed by the open comparison is therefore exactly the map used to define $S$ in the statement. Thus the substituted equality is $\\Xi_{f,g}(M,N)=S\\circ\\Xi_{g,f}(N,M)\\circ\\sigma_{Rf_!M,Rg_!N}$. The comparison lemma applies on precisely the bounded-below etale-origin tensor domain assumed here. None of Steps 2--6 required boundedness of the auxiliary ambient tensor objects or invertibility of any projection map.",
-   "uses": [
-    "lem-pur-finite-product-compactification"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
-    "place": "Symmetry paragraph, reduction to proper maps by compactification: agent-formulated finite-level comparison without the finite-Tor or abstract-datum hypotheses of that paragraph."
+    "place": "Symmetry paragraph (i), proper compactification and tensor of pulled-back counits; finite forward-map formulation from the retained split."
    }
   }
  ],
  "proof_deps": [
   "lem-pur-finite-product-compactification",
-  "lem-sf-open-tensor-normalization",
-  "lem-pur-derived-pullback-tensor-iso",
-  "def-exchange-projection",
-  "def-weil-pbc-composite-adjunction",
-  "lem-weil-pbc-mate-pasting",
-  "lem-weil-derived-direct-image-composition",
-  "lem-weil-derived-tensor-functorial",
-  "lem-weil-pbc-proetale-derived-pullback-composition",
-  "lem-cbc-sieve-module-sheaves-grothendieck",
-  "lem-sfb-derived-composition-adjunction-normalization"
+  "lem-pur-finite-proper-product-transpose",
+  "lem-pur-finite-open-product-swap"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
-  "place": "Symmetry paragraph: forward-map counit calculation, with compactification comparison separated as a statement-only child."
+  "place": "Symmetry paragraph (i); finite forward-map assembly after separating open-product normalization and the proper counit-transpose calculation."
  },
  "mathlib_searches": [
   {
@@ -224,49 +170,12 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "item": "lem-pur-finite-forward-product-symmetry",
   "worker": "stage1",
-  "summary": "Separated the genuinely non-elementary arbitrary-input product-compactification comparison; proved the remaining proper symmetry by explicit successive transposition to the tensor of two ordinary counits, and checked the open comparison by full faithfulness. No ctf or six-functor-datum hypothesis introduced. Step 5 cites lem-sfb-derived-composition-adjunction-normalization (added on maintainer review) for the fact that the ordinary direct-image compositor of lem-weil-derived-direct-image-composition is the conjugate of the pullback compositor, which is what makes the composite-adjunction transpose valid.",
-  "blueprint": "Realizes the interchange missing between Steps 3 and 4 of prop-pur-affine-space-composition-law, as required by the ancestry through lem-pur-affine-space-trace-factorization; follows the proper-counit explanation of the current Kunneth-coherence proof without asserting its inverse exists.",
-  "tool_uses": [
-   {
-    "node": "lem-sf-open-tensor-normalization",
-    "why": "Unit-normalized open tensor/base-change maps and full faithfulness on ordinary unbounded finite-coefficient derived categories; the unit contains no such normalization theorem."
-   },
-   {
-    "node": "lem-pur-derived-pullback-tensor-iso",
-    "why": "Canonical finite-level pullback tensor comparison and its signed-symmetry/composition coherence on arbitrary ambient objects."
-   },
-   {
-    "node": "def-exchange-projection",
-    "why": "Concrete ordinary exchange and projection definitions already used in the item statement."
-   },
-   {
-    "node": "def-weil-pbc-composite-adjunction",
-    "why": "The composite hom bijection, used only to evaluate the proper forward composite."
-   },
-   {
-    "node": "lem-weil-pbc-mate-pasting",
-    "why": "Pasting of the ordinary adjunction hom bijections; no exceptional functor is invoked."
-   },
-   {
-    "node": "lem-weil-derived-direct-image-composition",
-    "why": "Ordinary direct-image compositor and its transport along the product swap."
-   },
-   {
-    "node": "lem-weil-derived-tensor-functorial",
-    "why": "Bifunctoriality of the specified finite derived tensor, needed in the counit calculation."
-   },
-   {
-    "node": "lem-sfb-derived-composition-adjunction-normalization",
-    "why": "Identifies the ordinary derived direct-image compositor with the conjugate of the exact pullback compositor, so the composite adjunction computes the proper transpose; no node of sk-prop-an gives this normalization."
-   },
-   {
-    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
-    "why": "The canonical finite-level pullback compositor Lc^* = Lt^*Lb^* to which the direct-image compositor is conjugate."
-   }
-  ]
+  "summary": "Repair of the human re-split return: separated the retained open-unit/full-faithfulness argument and the proper successive-counit/compositor/swap argument into two independently workable statement-only unsplit nodes. The item statement is unchanged; its proof is now a short assembly using those two nodes and the existing product-compactification comparison. All seven prior proof steps are preserved verbatim and assigned to their new tasks in report.md.",
+  "blueprint": "Preserves the interchange between Steps 3 and 4 of prop-pur-affine-space-composition-law through lem-pur-affine-space-trace-factorization; follows symmetry paragraph (i) of the current Kunneth-coherence proof without asserting invertibility.",
+  "tool_uses": []
  },
  "tool_uses": [
   "lem-sf-open-tensor-normalization",
@@ -280,12 +189,12 @@
   "lem-weil-pbc-proetale-derived-pullback-composition"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-NC-6052eb4a5",
-  "group": "NC",
+  "reviewer": "NT-cc-Q83-108931d09",
+  "group": "Q83",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-6052eb4a5 (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps, the new node lem-pur-finite-product-compactification, every cited statement, the citer lem-pur-affine-space-trace-factorization Step 6, unit sk-prop-an, and the symmetry paragraph (i) of main-20261015 lem-sf-kunneth-coherence.proof. No SGA source is used. The item's statement is unchanged and its arrow types check. The bounded-below etale-origin tensor hypotheses are needed, since over Z/4 the product Z/2⊗^L Z/2 is unbounded below. Identity and empty cases agree on both sides. Steps 2-4 and 6-7 are correct: full faithfulness of u_! (u=v∘w) gives the open symmetry; Ex_*'s mate clause gives v̂=Lr^*ε_a⊗1; naturality and involutivity of σ give ŵ=1⊗ε_b; transport along the swap is in the statement of lem-weil-derived-direct-image-composition. Fault C4 in Step 5: transposing κ_{b,t}^{-1}∘Rb_*(v)∘w under Lc^*⊣Rc_* as two successive transposes needs κ to be the conjugate of the pullback compositor, and the statement of lem-weil-derived-direct-image-composition does not say so. Fixed: Step 5 now cites lem-weil-pbc-proetale-derived-pullback-composition, lem-cbc-sieve-module-sheaves-grothendieck (Mathlib leaf) and lem-sfb-derived-composition-adjunction-normalization, following the pattern of lem-trf-compact-composition-tower-formula. I checked that none of these reaches the item, so there is no cycle. proof_deps was rebuilt, two tool_uses entries were added, and the split_report summary, which had said the item does not use that node, was corrected. The new node is statement-only and self-contained, and T_{f,g} is exactly Ξ_{f,g}. Ω type-checks to Rc_*(Lr^*H⊗Lt^*J), and (u,c) is a compactification of h. In the proper and open special cases the claim reduces to known normalizations, and in general it is a real compactification-reduction lemma with no symmetry in it. It is not a duplicate: lem-sf-product-compactification-identity needs a six-functor datum and D^b_ctf inputs, which the item does not supply. Accepted tool uses: lem-sf-open-tensor-normalization, lem-pur-derived-pullback-tensor-iso, def-exchange-projection, def-weil-pbc-composite-adjunction, lem-weil-pbc-mate-pasting, lem-weil-derived-direct-image-composition, lem-weil-derived-tensor-functorial, lem-sfb-derived-composition-adjunction-normalization and lem-weil-pbc-proetale-derived-pullback-composition. No statement or target was changed.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q83-108931d09 (reviewer sub-agent of L); spot-checked: Re-split delivery meets the human note of 2026-10-21. The item statement and stmt_deps are byte-identical to live (only proof, proof_deps, proof_origin and split_report changed). The new proof is 1830 characters in 4 steps, and there are 2 new unsplit statement-only nodes of comparable size (2350 and 2755 characters), each with 5 logged searches covering leanfinder, leansearch, loogle and grep. The delivery is not superseded: live and side still have the 2026-10-17 split. Nothing is on the route-pivot dropped list. Every old step reappears as a cited statement. Old Step 1 is parent Step 1, citing lem-pur-finite-product-compactification; its T_{f,g} is the item's Ξ, and its Ω equals the new node's κ^{-1}Rb_*(v)w. Old Step 2 (two open factorizations, restriction 1_D, full faithfulness of u_!, signed swap) is lem-pur-finite-open-product-swap, built from the actual β/γ of lem-sf-open-tensor-normalization; the compactification lemma's e coincides with it because both are unit-normalized. Old Steps 3-6 (v̂=Lr^*ε_a⊗1, ŵ=1⊗ε_b, Ω̂=Lr^*ε_a⊗Lt^*ε_b through κ as the conjugate of the pullback compositor, swap equation) are lem-pur-finite-proper-product-transpose; the Ex/π typing was checked against def-exchange-projection with X'=C, f'=t, g'=r. Old Step 7 is the elementary parent Step 4. Both new statements are true: tested with identity maps, zero inputs, Koszul signs in odd shifts, and arbitrary unbounded inputs. Neither restates the item. Duplicate check: lem-sf-open-external-tensor-normalization is the same comparison only for D^b_ctf under a six-functor datum, so it cannot be cited for j_!M with M in D^+; lem-sfb-ringed-kunneth-factorizations uses one q and two maps out of W, which is not a specialization. Sources: Stacks 0GL1 (sites-cohomology.tex:4578) and 0E48 (13715, equation-projection-formula-map at 13666), plus the main-20261015 lem-sf-kunneth-coherence proof paragraph (i); the route is unchanged and no SGA is used. All parent proof citations are in unit sk-prop-an, so tool_uses [] is correct. Maintainer note: the item's maintainer-owned tool_uses still lists 9 off-unit nodes the new proof no longer cites; prune at merge."
  },
  "lean": {
   "module": "Sheaf.Paper.FiniteForwardProductSymmetry",
