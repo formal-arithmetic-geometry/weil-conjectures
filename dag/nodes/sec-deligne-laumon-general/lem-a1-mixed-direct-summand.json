@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-a1-mixed-direct-summand",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Mixedness passes to subobjects, quotients, extensions and direct summands",
@@ -66,7 +66,7 @@
  },
  "mathlib_searches": [],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -118,5 +118,34 @@
   "landing": "20261019T154012-L-3026252",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-a1-mixed-direct-summand",
+  "worker": "stage1",
+  "summary": "Retained the exact mixedness statement and expanded its proof into the existing sheaf declarations plus four explicit Frobenius-module stability arguments. No new nodes were needed: the extension and stable-subquotient lemmas already state the required module facts. The existing source theorem in Sheaf/Paper/MixedWeightsStability.lean is recorded as provenance but is not an attachment because it is outside WeilConjectures/.",
+  "blueprint": "Realizes the main-20261015 proof file: the opening sheaf argument is represented by step 1, and the Frobenius-module paragraph on equivariant equivalences, stable subquotients, extensions and split inclusions is represented by steps 2–5.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-extension-bounds",
+    "why": "The general-weights route explicitly invokes the existing extension theorem for Frobenius modules; it supplies the finite-filtration splice used for equivariant equivalences and short exact sequences."
+   },
+   {
+    "node": "lem-a1-subquotient-extension-bounds",
+    "why": "The general-weights route explicitly invokes the existing stable-subquotient theorem for Frobenius modules; it supplies mixedness of the stable image and quotient used in the injective and surjective cases."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-extension-bounds",
+  "lem-a1-subquotient-extension-bounds"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q68-458751335",
+  "group": "Q68",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q68-458751335 (reviewer sub-agent of L); spot-checked: I diffed the delivery against the live node. The statement, stmt_deps, the 5 proof steps, proof_deps and proof_origin are byte-identical to the base. The only changes are status→split, same_as [] and a split_report with 2 tool_uses. There are no new nodes. The statement matches the master (order 2811) and main-20261015 (order 3155) blueprint files verbatim. Step 1 hands the sheaf clauses (1)-(3) to Lean declarations, which I read in WeilConjectures/DeligneLaumon/Reduction/Weights.lean:170-224 (0 sorry): of_mono covers subsheaves, of_epi quotients, of_shortExact (via of_exact) extensions, of_retract direct summands. It does not reproduce the blueprint's filtration and stalk-eigenvalue argument. I accept that only under B10 and §8, because the item's Lean is closed: MixedWeightsStability has 0 sorry, reviewed_lean passed (Q48) and reviewed_proof passed (G4). Steps 2-5 are correct. Step 2: equivalence invariance follows from lem-a1-extension-bounds applied to 0→0→A→B→0, the zero module having the m=0 filtration. Step 3: the image S of an injective map satisfies F_B(S)=S because F_A is surjective, and lem-a1-subquotient-extension-bounds applies to S/0. Step 4: the kernel U satisfies F_A(U)=U because F_B is injective, and A/U≅B. Step 5: the extension clause is lem-a1-extension-bounds exactly; r∘i=id makes i injective, so step 3 applies. The two tool_uses are accepted: both nodes are Lean-closed and named in the blueprint proof's Frobenius-module sentence. I found no duplicate: rg over dag/nodes gave lem-zl-complex-retract, which is about complexes, and nothing else equivalent. Maintainer note: the item is on coord/rework-hold.txt, because its stmt_dep def-weil-punctual-weights is realized by the quarantined module Sheaf.Paper.AdicPunctualWeights (rework.tsv row 348). If the item's Lean closure is ever withdrawn, step 1 must be rewritten from the blueprint's sheaf paragraphs. The report also names citations.json and searches.jsonl, which are not in the commit."
  }
 }
