@@ -20,7 +20,7 @@ small-coefficient constructions and slice-site inclusion remain available.
 
 set_option autoImplicit false
 
-universe u
+universe u v
 
 open CategoryTheory Opposite
 
@@ -138,5 +138,38 @@ def lisseEtaleCoefficientIdentificationSized (l : ℕ) [Fact l.Prime]
         (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (lisseFieldSheafSized l E X)).obj :=
   { app := fun _ ↦ 𝟙 _
     naturality := fun _ _ _ ↦ rfl }
+
+/-- The existing pointwise continuous-function presheaf, retaining commutativity.
+Source: Bhatt--Scholze, Definition 6.8.1.
+(blueprint: def-weil-pbc-lisse-lattice-coefficients) -/
+def lisseContinuousCommRingPresheafUniverses (X : Scheme.{u}) (T : Type v)
+    [TopologicalSpace T] [CommRing T] [IsTopologicalRing T] :
+    X.ProEtᵒᵖ ⥤ CommRingCat.{max (u + 1) v} where
+  obj U := CommRingCat.of (ULift.{u + 1} C(U.unop.left, T))
+  map f := CommRingCat.ofHom ((continuousMapRingPresheaf X T).map f).hom
+  map_id _ := rfl
+  map_comp _ _ := rfl
+
+/-- Continuous coefficients are a sheaf with independent site and coefficient universes.
+Source: Bhatt--Scholze, Definition 6.8.1 and Lemma 4.2.12.
+(blueprint: def-weil-pbc-lisse-lattice-coefficients)
+Proof: forgetting commutativity gives exactly continuousMapRingPresheaf X T.
+Its existing sheaf theorem follows from continuous-function fpqc descent and restriction
+to the small pro-etale site, with the specified ULift. The forgetful functor from
+commutative rings to rings reflects the sheaf condition. -/
+theorem isSheaf_lisseContinuousCommRingPresheafUniverses (X : Scheme.{u}) (T : Type v)
+    [TopologicalSpace T] [CommRing T] [IsTopologicalRing T] :
+    Presheaf.IsSheaf (Scheme.ProEt.topology X)
+      (lisseContinuousCommRingPresheafUniverses X T) := by
+  sorry
+
+/-- The continuous commutative-ring sheaf in the maximum of the required universes.
+Source: Bhatt--Scholze, Definition 6.8.1.
+(blueprint: def-weil-pbc-lisse-lattice-coefficients) -/
+def lisseContinuousCommRingSheafUniverses (X : Scheme.{u}) (T : Type v)
+    [TopologicalSpace T] [CommRing T] [IsTopologicalRing T] :
+    Sheaf (Scheme.ProEt.topology X) CommRingCat.{max (u + 1) v} :=
+  ⟨lisseContinuousCommRingPresheafUniverses X T,
+    isSheaf_lisseContinuousCommRingPresheafUniverses X T⟩
 
 end AlgebraicGeometry.ProEtale

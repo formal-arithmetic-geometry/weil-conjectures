@@ -80,7 +80,10 @@
    "AlgebraicGeometry.ProEtale.lisseIntegerToFieldSized",
    "AlgebraicGeometry.ProEtale.lisseIntegerConstantSized",
    "AlgebraicGeometry.ProEtale.lisseFieldConstantSized",
-   "AlgebraicGeometry.ProEtale.lisseEtaleCoefficientIdentificationSized"
+   "AlgebraicGeometry.ProEtale.lisseEtaleCoefficientIdentificationSized",
+   "AlgebraicGeometry.ProEtale.lisseContinuousCommRingPresheafUniverses",
+   "AlgebraicGeometry.ProEtale.isSheaf_lisseContinuousCommRingPresheafUniverses",
+   "AlgebraicGeometry.ProEtale.lisseContinuousCommRingSheafUniverses"
   ],
   "file": "lean/Sheaf/AlgebraicGeometry/LisseLatticeCoefficientsSized.lean",
   "statement": "def lisseFieldSheafSized (l : ℕ) [Fact l.Prime] (E : Type (u + 1)) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : Scheme.{u}) : Sheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1}",
@@ -88,7 +91,7 @@
   "by": "Q20",
   "date": "2026-10-16",
   "existing": false,
-  "note": "§1(B): the published continuous-function coefficient interface restricts its coefficient ring to Type 0, while the finite-monodromy and representation interfaces use the larger site universe u+1. This module supplies the identical pointwise continuous-function construction for coefficients in Type (u+1), on the unchanged site with objects in u+1 and morphisms in u. It imports and retains the small-coefficient API, uses the same spectral and subspace topologies, and constructs the inclusion and slice comparison by postcomposition and the identity. No universe equality is imposed."
+  "note": "§1(B): the published continuous-function coefficient interface restricts its coefficient ring to Type 0, while the finite-monodromy and representation interfaces use the larger site universe u+1. This module supplies the identical pointwise continuous-function construction for coefficients in Type (u+1), on the unchanged site with objects in u+1 and morphisms in u. It imports and retains the small-coefficient API, uses the same spectral and subspace topologies, and constructs the inclusion and slice comparison by postcomposition and the identity. No universe equality is imposed. Q11 stage-2 additive repair: the Sized API fixes T : Type (u+1), while the continuous-frame comparison needs an independent coefficient universe v. The same module additionally supplies lisseContinuousCommRingPresheafUniverses, its sheaf theorem, and lisseContinuousCommRingSheafUniverses for T : Type v in CommRingCat.{max (u+1) v}, using the existing upstream ring-presheaf maps. These additions preserve the primary lisseFieldSheafSized declaration, all nine previous declaration records, and their unchanged implementations, including E_X, A_X, their inclusion, constants and the etale slice comparison. The site retains object universe u+1 and morphism universe u; no universe equality or new mathematical hypothesis is imposed."
  },
  "reviewed": {
   "date": "2026-10-16",
