@@ -21745,3 +21745,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:13 L: merged deliver/Q01/lem-pur-adjoint-left-projection-action (stage 2; reviewer PASS; parallel immutable checks)
 - 09:13 L: merged deliver/Q44/lem-sfb-finite-colimit-matrix-cokernels (stage 2; reviewer PASS; parallel immutable checks)
 - 09:13 L: merged deliver/N6/lem-pur-completed-coefficient-tensor-normalization (stage 2; reviewer PASS; parallel immutable checks)
+- 09:13 L: returned deliver/Q154/lem-fix-open-scalar-tensor-normalization (reviewer RETURN: L: independent stage-2 immutable head 0dc45a25334e: Statement mathematically faithful (all clauses, directions, unit pin)
