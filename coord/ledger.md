@@ -20223,3 +20223,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:07 L: merged deliver/Q03/det-def-sp-tate-twist-locally-free (reviewer FIX; after a return; new nodes: 3)
 - 04:07 L: merged deliver/Q22/lem-sbc-unbounded-exact-adjunction-square (reviewer PASS; first push; new nodes: 0)
 - 04:07 L: merged deliver/O3/lem-sfb-extension-iso-quotient-formula (reviewer FIX; first push; new nodes: 0)
+- 04:07 L: merged deliver/Q56/det-sp-scalar-extension-functor (reviewer PASS; after a return; new nodes: 2)

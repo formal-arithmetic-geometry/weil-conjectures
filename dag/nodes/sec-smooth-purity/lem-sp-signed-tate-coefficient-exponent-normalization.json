@@ -1,0 +1,85 @@
+{
+ "id": "lem-sp-signed-tate-coefficient-exponent-normalization",
+ "kind": "statement",
+ "title": "Normalized signed finite Tate maps and Kummer exponent compatibility",
+ "statement": "Let $\\ell$ be a prime, let $T$ be a scheme on which $\\ell$ is invertible, and let $f:A\\to B$ be a unital homomorphism of finite commutative rings. Fix $m\\geq1$ with $\\ell^mA=\\ell^mB=0$. On the small pro-étale site [def-weil-pbc-proetale-site] use constant coefficient and module sheaves [def-weil-pbc-constant-sheaf, def-weil-sheaf-of-modules-category]. For $R=A,B$ and $n\\geq m$, put $L_{R,n}=\\mu_{\\ell^n,T}\\otimes_{(\\mathbf Z/\\ell^n)_T}R_T$, using the actual roots-of-unity sheaf [def-pur-roots-of-unity-sheaf]. Set $L_{R,n}^{[0]}=R_T$, $L_{R,n}^{[d]}=L_{R,n}^{\\otimes d}$ for $d>0$, and $L_{R,n}^{[-d]}=\\mathcal Hom_{R_T}(L_{R,n}^{[d]},R_T)$, with tensor and internal Hom as in [def-pur-sheaf-tensor-product, def-pur-sheaf-hom]. These are invertible lines [det-def-sp-tate-twist-locally-free].\n\nFor each $n\\geq m$ there is exactly one family of additive $f$-semilinear sheaf maps $c_{f,n}^r:L_{A,n}^{[r]}\\to L_{B,n}^{[r]}$ ($r\\in\\mathbf Z$) with the following normalization on local sections: $c_{f,n}^0=f$, $c_{f,n}^1(z\\otimes a)=z\\otimes f(a)$, positive-degree maps are tensor powers of $c_{f,n}^1$, and, for $d>0$,\n$$c_{f,n}^{-d}(\\lambda)\\bigl(c_{f,n}^{d}(x)\\bigr)=f\\bigl(\\lambda(x)\\bigr).$$\nThe induced $B_T$-linear map $\\widetilde c_{f,n}^r:L_{A,n}^{[r]}\\otimes_{A_T}B_T\\to L_{B,n}^{[r]}$, $x\\otimes b\\mapsto b\\,c_{f,n}^r(x)$, is an isomorphism.\n\nFor $n\\geq k\\geq m$ there is exactly one family of $R_T$-linear isomorphisms $e_R^{n,k,r}:L_{R,n}^{[r]}\\to L_{R,k}^{[r]}$ whose degree-one map is $z\\otimes a\\mapsto z^{\\ell^{n-k}}\\otimes a$, whose degree-zero map is the identity, whose positive maps are tensor powers, and whose negative maps satisfy $e_R^{n,k,-d}(\\lambda)(e_R^{n,k,d}(x))=\\lambda(x)$. They satisfy $e_R^{n,n,r}=\\mathrm{id}$ and $e_R^{k,j,r}e_R^{n,k,r}=e_R^{n,j,r}$ for $n\\geq k\\geq j\\geq m$. Moreover the normalized families satisfy\n$$e_B^{n,k,r}\\circ c_{f,n}^r=c_{f,k}^r\\circ e_A^{n,k,r}.$$\nEquivalently, after ordinary scalar extension, $e_B^{n,k,r}\\circ\\widetilde c_{f,n}^r=\\widetilde c_{f,k}^r\\circ(e_A^{n,k,r}\\otimes\\mathrm{id}_{B_T})$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sp-scalar-extension/sk-def-sp-scalar-extension-functor.proof.md",
+  "place": "Proof paragraph (3), root-tensor map, signed tensor powers and dual evaluation, and compatibility with the actual Kummer exponent maps; expanded normalization recorded in ScalarExtensionFunctor.lean at scalarExtensionTateMaps_existsUnique, scalarExtensionTateLevelIso_existsUnique, scalarExtensionTateIso_exponent_naturality"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-roots-of-unity-sheaf",
+  "def-pur-sheaf-tensor-product",
+  "def-pur-sheaf-hom",
+  "det-def-sp-tate-twist-locally-free"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Tate|Kummer|rootsOfUnity|RootsOfUnity",
+   "results": "25 hits: Mathlib/CategoryTheory/PathCategory/Basic.lean, Mathlib/CategoryTheory/Skeletal.lean, Mathlib/CategoryTheory/Skeletal.lean, Mathlib/CategoryTheory/Equivalence.lean, Mathlib/CategoryTheory/Pi/Basic.lean, Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean, Mathlib/CategoryTheory/Preadditive/Injective/Preserves.lean, Mathlib/CategoryTheory/Preadditive/HomOrthogonal.lean; directory CategoryTheory",
+   "date": "2026-10-21",
+   "verdict": "no match: algebraic roots, ordinary sheaf extensionality and tensor APIs do not give the normalized signed Kummer families or their exponent square"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical scalar extension of positive and negative Tate twists commutes with change of root of unity exponent",
+   "results": "8 hits: IsCyclotomicExtension.zeta.congr_simp, instIsScalarTowerCyclotomicField, modularCyclotomicCharacter.spec, modularCyclotomicCharacter.toFun_spec', modularCyclotomicCharacter'.spec', RootPairing.restrictScalars', RootPairing.instIsRootSystemSubtypeMemSubmoduleSpanRangeCoeEmbeddingRootCorootRestrictScalars', Algebra.Generators.extendScalars_val",
+   "date": "2026-10-21",
+   "verdict": "no match: algebraic roots, ordinary sheaf extensionality and tensor APIs do not give the normalized signed Kummer families or their exponent square"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, TensorProduct",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: algebraic roots, ordinary sheaf extensionality and tensor APIs do not give the normalized signed Kummer families or their exponent square"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Signed Tate sheaf coefficient maps uniquely normalized by roots tensor products and dual evaluation commute with Kummer power transitions and finite scalar extension",
+   "results": "8 hits: groupCohomology.Hilbert90.aux, galLift_galRestrict', groupCohomology.exists_mul_galRestrict_of_norm_eq_one, RootPairing.algebraMap_pairingIn', RootPairing.algebraMap_root'In_apply, RootPairing.restrictScalars_pairing, IsDedekindDomain.selmerGroup.fromUnitLift, RootPairing.Hom.root_weightMap",
+   "date": "2026-10-21",
+   "verdict": "no match: algebraic roots, ordinary sheaf extensionality and tensor APIs do not give the normalized signed Kummer families or their exponent square"
+  },
+  {
+   "tool": "grep",
+   "query": "\\bTate\\b|\\bKummer\\b|rootsOfUnity|RootsOfUnity",
+   "results": "1 hits: Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean; directory AlgebraicGeometry",
+   "date": "2026-10-21",
+   "verdict": "no match: algebraic roots, ordinary sheaf extensionality and tensor APIs do not give the normalized signed Kummer families or their exponent square"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Uniqueness of semilinear morphisms between invertible sheaves and their tensor powers and duals with compatibility of finite Tate root exponent changes",
+   "results": "8 hits: SheafOfModules.Hom.mk.inj, SheafOfModules.LocalGeneratorsData.mk.inj, AlgebraicGeometry.Scheme.Modules.hom_ext, AlgebraicGeometry.Scheme.Modules.hom_ext_iff, SheafOfModules.hom_ext, PresheafOfModules.Sheafify.instUniqueSMulCandidate, SheafOfModules.Hom.ext, SheafOfModules.hom_ext_iff",
+   "date": "2026-10-21",
+   "verdict": "no match: algebraic roots, ordinary sheaf extensionality and tensor APIs do not give the normalized signed Kummer families or their exponent square"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "det-sp-scalar-extension-functor",
+  "date": "2026-10-21",
+  "group": "Q56"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sp-scalar-extension",
+ "blueprint": {
+  "from": {
+   "node": "det-sp-scalar-extension-functor",
+   "place": "Proof paragraph (3): comparison on roots at a common exponent, extension to all signed powers by evaluation, and independence of the exponent; old expanded step 7, current step 6",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}
