@@ -1,0 +1,128 @@
+{
+ "id": "def-sfb-integral-ambient-direct-image-encoding",
+ "kind": "definition",
+ "title": "Normalized ordinary and derived coefficient direct-image squares",
+ "status": "split",
+ "statement": "For abelian categories with their specified (possibly differently sized) derived categories, additive direct-image functors $F,G$ and exact coefficient functors $U,V$, and a specified property $P$ of the ordinary comparison, a normalized square consists of $\\alpha:FV\\cong UG$ satisfying $P(\\alpha)$ and $\\beta:RF\\,DV\\cong DU\\,RG$ whose evaluations on every complex intertwine the actual universal right-derived units and the exact localization factor isomorphisms [sk-def-sfb-derived-categories]. For the coefficient models and finite fixed-scalar encodings [def-sfb-integral-ambient-coefficient-presentation], define FinitePushEncoding at level $n+1$ to be this normalized square between the actual ringed finite-coefficient direct image [def-weil-pbc-four-corners] and fixed-scalar pro-etale direct image [def-weil-pbc-site-comparison-morphism]. Require its ordinary map to be identity on underlying sections. Define AmbientEncoding similarly between the ordinary internal-module direct image [sk-def-sfb-module-derived-pushpull] and the ordinary completed-ring direct image [def-weil-pbc-four-corners], using the specified internal-module equivalences on source and target; require identity on underlying sections. These are data with normalization predicates, not arbitrary actions or arbitrary choices of an isomorphism. The finite square is defined first for an arbitrary adic datum [def-weil-pbc-adic-coefficient-datum] as FiniteCoefficientPushEncoding, and its specialization to the actual valuation-ring datum is the same FinitePushEncoding; both comparisons are the identical normalized square projection.",
+ "stmt_deps": [
+  "sk-def-sfb-derived-categories",
+  "def-sfb-integral-ambient-coefficient-presentation",
+  "def-weil-pbc-four-corners",
+  "def-weil-pbc-site-comparison-morphism",
+  "sk-def-sfb-module-derived-pushpull",
+  "def-weil-pbc-adic-coefficient-datum"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.9(2),(3) and Lemma 5.4.3; agent specialization retaining the ordinary ambient coefficient action"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical coefficient ring comparison between pulled back condensed p-adic integers and inverse limit of finite quotient sheaves, preserving module derived pushforward",
+   "results": "PadicInt.lift; SheafOfModules.PullbackConstruction.adjunction; SheafOfModules.PullbackConstruction.pullback; SheafOfModules.pullbackPushforwardAdjunction; PadicInt.toZMod. No normalized coefficient presentation/direct-image square.",
+   "date": "2026-10-21",
+   "verdict": "No exact match; reuse existing ring sheaves, section equivalence, scalar restriction and right derived functor instead."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical coefficient presentation pulled back condensed integers finite extension p adic completed finite quotient tower module equivalence",
+   "results": "8 hits, concerning PadicInt adicCompletion and piEquiv; none concerns the coefficient or direct-image encoding.",
+   "date": "2026-10-21",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.restrictScalars, Ideal.Quotient.mk",
+   "results": "0 hits",
+   "date": "2026-10-21",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "msearch.py NS lem-sfb-integral-ambient-tower-comparison grep \"coefficientModel|AmbientEncoding|FinitePushEncoding\" CategoryTheory",
+   "results": "0 hits",
+   "date": "2026-10-21",
+   "verdict": "No existing Mathlib definition."
+  },
+  {
+   "tool": "grep",
+   "query": "rg IntegralAmbientTower|FinitePushEncoding|quotientRoosComplete lean/WeilConjectures lean/Sheaf; grep task id lean/WeilConjectures",
+   "results": "No existing names or item declaration. Existing ConstantScalarRestriction, InternalAbelianSheafModule and CompletedCoefficientPushforward.Square are related; the latter uses a single localization universe and different coefficient models.",
+   "date": "2026-10-21",
+   "verdict": "No duplicate; build from existing interfaces."
+  },
+  {
+   "tool": "grep",
+   "query": "DAG coefficient encoding / integral ambient search; tools/blueprint_refs.py search \"coefficient encoding\"; search \"integral ambient\"",
+   "results": "No exact node; finite-discrete ordinary equivalence and finite comparison presentation concern different coefficient categories and/or constructibility. Ancestor is lem-sfb-dc-lower-star-preserves.",
+   "date": "2026-10-21",
+   "verdict": "New normalized presentation data are missing."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-integral-ambient-tower-comparison",
+  "date": "2026-10-21",
+  "group": "NS"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-dc-lower-star-preserves",
+   "place": "Integral paragraph of lem-sfb-dc-lower-star-preserves.proof.md: completeness from Rlim, perfect-coefficient reduction, and etale-origin direct-image comparison",
+   "via": [
+    "lem-sfb-integral-ambient-tower-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-open-coefficients",
+ "lean": {
+  "module": "Sheaf.Paper.IntegralAmbientDirectImageEncoding",
+  "declaration": "AlgebraicGeometry.Scheme.IntegralAmbientTower.FinitePushEncoding",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.IntegralAmbientTower.NormalizedSquare",
+   "AlgebraicGeometry.Scheme.IntegralAmbientTower.FinitePushEncoding",
+   "AlgebraicGeometry.Scheme.IntegralAmbientTower.AmbientEncoding",
+   "AlgebraicGeometry.Scheme.IntegralAmbientTower.FinitePushEncoding.comparison",
+   "AlgebraicGeometry.Scheme.IntegralAmbientTower.FiniteCoefficientPushEncoding",
+   "AlgebraicGeometry.Scheme.IntegralAmbientTower.FiniteCoefficientPushEncoding.comparison"
+  ],
+  "file": "lean/Sheaf/Paper/IntegralAmbientDirectImageEncoding.lean",
+  "statement": "abbrev FinitePushEncoding {π : PadicAlgCl.integers l E.1} {hπ : Ideal.span {π} = IsLocalRing.maximalIdeal (PadicAlgCl.integers l E.1)} {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)",
+  "branch": "newtargets-dag",
+  "by": "NS",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4f9c92f42",
+  "group": "NS",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4f9c92f42",
+  "group": "NS",
+  "result": "pass",
+  "note": "Return repairs of bb1634ad558b verified: def-weil-derived-complete record untouched and quotientRoosComplete moved into the new def node; prop-weil-pbc-rlim-functoriality replaced by def-pur-completed-rlim-functor plus the existing:true def-sfb-completed-rlim-roos-projection, whose signature matches live; the etale-origin clause is stated in item coordinates with a pinned composite (normalized finite encoding, Rf_* theta, inverse of the actual mate), with hypotheses equal to the live theorem. The three theorem stmt_deps are genuine: .choose in direct-image-limits, exactness instances from ConstantScalarRestriction.isEquivalence, and the IsIso instance from the bounded-below theorem inside etaleComparisonInverse. Records are verbatim and every declaration is listed; the rest of the item is unchanged from the previously reviewed text. Advisory: the etale IsIso is immediate once etaleComparisonInverse is formed."
+ }
+}

@@ -217,5 +217,28 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q32-17480c2c2 (reviewer sub-agent of L); spot-checked: Read the item, new adjunction node, all cited statements, source declarations, unit/chapter route, and delivery report. The repaired seven-step mate calculation checks all hypotheses and comparison morphisms, constructs the derived square explicitly, has no hidden long-step lemma, no route-pivot machinery or prohibited SGA citation, and passes edge-case and duplicate checks. Review written to review.md."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.CategoryTheory.BoundedBelowDerivedMateModel",
+  "declaration": "CategoryTheory.Adjunction.boundedBelowDerivedMateModel",
+  "declarations": [
+   "CategoryTheory.boundedBelowDerivedSquare",
+   "CategoryTheory.Adjunction.boundedBelowDerivedMateModel"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/BoundedBelowDerivedMateModel.lean",
+  "statement": "theorem Adjunction.boundedBelowDerivedMateModel [EnoughInjectives A] [EnoughInjectives A'] {R : A ⥤ B} {R' : A' ⥤ B'} [R.Additive] [R'.Additive] (adj : L ⊣ R) (adj' : L' ⊣ R') (σ : TwoSquare G L L' H) (P : HomotopyCategory.Plus A) : G.mapDerivedCategoryPlus.map (R.rightDerivedFunctorPlusUnit.app P) ≫ (mateEquiv adj.derivedPlus adj'.derivedPlus (boundedBelowDerivedSquare σ)).natTrans.app (DerivedCategory.Plus.Qh.obj P) = G.mapDerivedCategoryPlusFactorsh.hom.app (R.mapHomotopyCategoryPlus.obj P) ≫ DerivedCategory.Plus.Qh.map ((NatTrans.mapHomotopyCategoryPlus (mateEquiv adj adj' σ).natTrans).app P) ≫ R'.rightDerivedFunctorPlusUnit.app (H.mapHomotopyCategoryPlus.obj P) ≫ R'.rightDerivedFunctorPlus.map (H.mapDerivedCategoryPlusFactorsh.inv.app P)",
+  "branch": "newtargets-dag",
+  "by": "N5",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The upstream derivedPlus_mateEquiv_app_fac takes a derived square and its factorization hypothesis. This module constructs that square canonically for every ordinary transformation by the fully faithful localization preimage, then states its mate formula without those extra inputs. The construction uses the existing termwise composition isomorphisms, with real data throughout."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4610ea6d4",
+  "group": "N5",
+  "result": "pass",
+  "note": "Conclusion is verbatim the proved upstream derivedPlus_mateEquiv_app_fac conclusion with θ := boundedBelowDerivedSquare σ, the localization preimage of L'+(φ_G)≫φ_L'≫Qh(σ)≫φ_H⁻¹≫H+(φ_L⁻¹), which is node step 3's θ, so upstream hθ holds; arbitrary non-iso σ, no injective-preservation by H; hypotheses match the node (EnoughInjectives only on A, A'; L, L', G, H exact; R, R' additive; independent universes); no existing non-iso derived square (only NatIso/SquareIso versions), so no H4 duplicate; stmt_deps are Mathlib leaves or the closed derivedPlus audit; statement verbatim, docstrings with source, blueprint and 7 steps, only sorry is the theorem proof; not recompiled (no file changed). Advisory: second reading was by the same worker."
+ }
 }

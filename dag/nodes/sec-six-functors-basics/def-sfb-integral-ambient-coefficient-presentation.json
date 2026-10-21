@@ -1,0 +1,151 @@
+{
+ "id": "def-sfb-integral-ambient-coefficient-presentation",
+ "kind": "definition",
+ "title": "Normalized presentation of the integral condensed coefficient tower",
+ "status": "split",
+ "statement": "Fix a prime $\\ell$, a finite intermediate extension $E/\\mathbf Q_\\ell$ and a uniformizer $\\pi$ of $\\mathcal O_E$ [def-weil-l-adic-coefficient-extension]. Use $A=\\operatorname{ULift}\\mathcal O_E$ only to match the original small pro-etale site's coefficient universe. Define $I=(\\operatorname{up}\\pi)$ and the adic datum $d$ with this actual ideal [def-weil-pbc-adic-coefficient-datum]; the named arithmetic well-definedness theorem verifies Noetherianity, finite generation, torsion, finiteness and perfectness of its positive quotients. Define the actual two-term free complex as the cone of multiplication by $\\pi^{n+1}$ on $A[0]$, the quotient complex $(A/I^{n+1})[0]$, and HasFiniteFreeTerms as the conjunction of Mathlib Module.Free and Module.Finite in every degree. For any scheme $T$, reconstruct section rings $R_T,R_{T,n}$ of its pulled-back condensed $\\mathcal O_E$ and $\\mathcal O_E/\\pi^{n+1}$ [sk-def-sfb-pulled-back-coefficients], [sk-prop-sfb-qlbar-colimit-x], [def-weil-pbc-internal-abelian-sheaf-module-equivalence], and the specified quotient maps. A coefficient model consists of ring isomorphisms $R_T\\cong d.\\widehat A_T$ and $R_{T,n}\\cong d.(A/I^{n+1})_T$, commuting with every quotient projection and taking a local constant class of $a$ to the class of $\\operatorname{up}a$. Its internal-module equivalence is the existing section-module equivalence followed by scalar restriction along that completed-ring isomorphism [def-weil-pbc-continuous-coefficient-module-encoding]; its derived equivalence is induced termwise. Define finite fixed-scalar encoding by restriction along the canonical constants-to-functions ring isomorphism [def-weil-pbc-etale-origin-witness], followed by the canonical constant-ring module restriction [lem-sfb-constant-scalar-restriction-tensor], and define its exact derived functor. In the same adic coefficient coordinates define quotient Roos completeness to mean the distinguished Roos triangle with first map the specified completion unit [def-weil-pbc-completed-pullback] followed by the product of canonical derived projections [def-sfb-completed-rlim-roos-projection]. This is the augmented quotient-tower condition of [def-weil-derived-complete], transported in coefficient coordinates, not a definition by invertibility of a unit. The sheafification instances specialize the existing small-site module-universe instances.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-adic-coefficient-datum",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-prop-sfb-qlbar-colimit-x",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-weil-pbc-continuous-coefficient-module-encoding",
+  "def-weil-pbc-etale-origin-witness",
+  "lem-sfb-constant-scalar-restriction-tensor",
+  "def-weil-pbc-completed-pullback",
+  "def-sfb-completed-rlim-roos-projection",
+  "def-weil-derived-complete"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.9(2),(3) and Lemma 5.4.3; agent specialization retaining the ordinary ambient coefficient action"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical coefficient ring comparison between pulled back condensed p-adic integers and inverse limit of finite quotient sheaves, preserving module derived pushforward",
+   "results": "PadicInt.lift; SheafOfModules.PullbackConstruction.adjunction; SheafOfModules.PullbackConstruction.pullback; SheafOfModules.pullbackPushforwardAdjunction; PadicInt.toZMod. No normalized coefficient presentation/direct-image square.",
+   "date": "2026-10-21",
+   "verdict": "No exact match; reuse existing ring sheaves, section equivalence, scalar restriction and right derived functor instead."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical coefficient presentation pulled back condensed integers finite extension p adic completed finite quotient tower module equivalence",
+   "results": "8 hits, concerning PadicInt adicCompletion and piEquiv; none concerns the coefficient or direct-image encoding.",
+   "date": "2026-10-21",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.restrictScalars, Ideal.Quotient.mk",
+   "results": "0 hits",
+   "date": "2026-10-21",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "msearch.py NS lem-sfb-integral-ambient-tower-comparison grep \"coefficientModel|AmbientEncoding|FinitePushEncoding\" CategoryTheory",
+   "results": "0 hits",
+   "date": "2026-10-21",
+   "verdict": "No existing Mathlib definition."
+  },
+  {
+   "tool": "grep",
+   "query": "rg IntegralAmbientTower|FinitePushEncoding|quotientRoosComplete lean/WeilConjectures lean/Sheaf; grep task id lean/WeilConjectures",
+   "results": "No existing names or item declaration. Existing ConstantScalarRestriction, InternalAbelianSheafModule and CompletedCoefficientPushforward.Square are related; the latter uses a single localization universe and different coefficient models.",
+   "date": "2026-10-21",
+   "verdict": "No duplicate; build from existing interfaces."
+  },
+  {
+   "tool": "grep",
+   "query": "DAG coefficient encoding / integral ambient search; tools/blueprint_refs.py search \"coefficient encoding\"; search \"integral ambient\"",
+   "results": "No exact node; finite-discrete ordinary equivalence and finite comparison presentation concern different coefficient categories and/or constructibility. Ancestor is lem-sfb-dc-lower-star-preserves.",
+   "date": "2026-10-21",
+   "verdict": "New normalized presentation data are missing."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-integral-ambient-tower-comparison",
+  "date": "2026-10-21",
+  "group": "NS"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-dc-lower-star-preserves",
+   "place": "Integral paragraph of lem-sfb-dc-lower-star-preserves.proof.md: completeness from Rlim, perfect-coefficient reduction, and etale-origin direct-image comparison",
+   "via": [
+    "lem-sfb-integral-ambient-tower-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-open-coefficients",
+ "lean": {
+  "module": "Sheaf.Paper.IntegralAmbientCoefficientPresentation",
+  "declaration": "AlgebraicGeometry.Scheme.IntegralAmbientTower.CoefficientModel",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.IntegralAmbientTower.integers",
+   "AlgebraicGeometry.Scheme.IntegralAmbientTower.multiplication",
+   "AlgebraicGeometry.Scheme.IntegralAmbientTower.resolution",
+   "AlgebraicGeometry.Scheme.IntegralAmbientTower.arithmetic",
+   "AlgebraicGeometry.Scheme.IntegralAmbientTower.datum",
+   "AlgebraicGeometry.Scheme.IntegralAmbientTower.integralRing",
+   "AlgebraicGeometry.Scheme.IntegralAmbientTower.quotientRing",
+   "AlgebraicGeometry.Scheme.IntegralAmbientTower.quotientProjection",
+   "AlgebraicGeometry.Scheme.IntegralAmbientTower.quotientScalars",
+   "AlgebraicGeometry.Scheme.IntegralAmbientTower.CoefficientModel",
+   "AlgebraicGeometry.Scheme.IntegralAmbientTower.CoefficientModel.modules",
+   "AlgebraicGeometry.Scheme.IntegralAmbientTower.CoefficientModel.modules_additive",
+   "AlgebraicGeometry.Scheme.IntegralAmbientTower.CoefficientModel.modules_inverse_additive",
+   "AlgebraicGeometry.Scheme.IntegralAmbientTower.CoefficientModel.derived",
+   "AlgebraicGeometry.Scheme.IntegralAmbientTower.finiteFixed",
+   "AlgebraicGeometry.Scheme.IntegralAmbientTower.finiteFixed_additive",
+   "AlgebraicGeometry.Scheme.IntegralAmbientTower.finiteFixed_preservesFiniteLimits",
+   "AlgebraicGeometry.Scheme.IntegralAmbientTower.finiteFixed_preservesFiniteColimits",
+   "AlgebraicGeometry.Scheme.IntegralAmbientTower.finiteDerivedFixed",
+   "AlgebraicGeometry.Scheme.IntegralAmbientTower.quotientComplex",
+   "AlgebraicGeometry.Scheme.IntegralAmbientTower.HasFiniteFreeTerms",
+   "AlgebraicGeometry.Scheme.quotientRoosAbSheafify",
+   "AlgebraicGeometry.Scheme.quotientRoosAbLocallyBijective",
+   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.quotientRoosComplete"
+  ],
+  "file": "lean/Sheaf/Paper/IntegralAmbientCoefficientPresentation.lean",
+  "statement": "structure CoefficientModel (π : PadicAlgCl.integers l E.1) (hπ : Ideal.span {π} = IsLocalRing.maximalIdeal (PadicAlgCl.integers l E.1)) (T : Scheme.{u})",
+  "branch": "newtargets-dag",
+  "by": "NS",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4f9c92f42",
+  "group": "NS",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4f9c92f42",
+  "group": "NS",
+  "result": "pass",
+  "note": "Return repairs of bb1634ad558b verified: def-weil-derived-complete record untouched and quotientRoosComplete moved into the new def node; prop-weil-pbc-rlim-functoriality replaced by def-pur-completed-rlim-functor plus the existing:true def-sfb-completed-rlim-roos-projection, whose signature matches live; the etale-origin clause is stated in item coordinates with a pinned composite (normalized finite encoding, Rf_* theta, inverse of the actual mate), with hypotheses equal to the live theorem. The three theorem stmt_deps are genuine: .choose in direct-image-limits, exactness instances from ConstantScalarRestriction.isEquivalence, and the IsIso instance from the bounded-below theorem inside etaleComparisonInverse. Records are verbatim and every declaration is listed; the rest of the item is unchanged from the previously reviewed text. Advisory: the etale IsIso is immediate once etaleComparisonInverse is formed."
+ }
+}
