@@ -20342,3 +20342,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:10 L: merged deliver/E1/Sheaf.Paper.ProEtaleConstructibleExactClosure (stage 3; reviewer PASS; first push; landing 20261021T061009-L-1683218 (proof); batch 20261021T060921; modules 1; new nodes 0)
 - 06:10 L: merged deliver/E2/Sheaf.Algebra.Homology.DerivedTensorTruncationWindow (stage 3; reviewer PASS; first push; landing 20261021T061014-L-1683930 (proof); batch 20261021T060921; modules 1; new nodes 0; change records: coord/changes/E2-derived-tensor-truncation-proof-scope.md)
 - 06:10 L: merged deliver/E2/Sheaf.AlgebraicGeometry.ProEtaleRingedOpenExtensionProducts (stage 3; reviewer PASS; first push; landing 20261021T061018-L-1684502 (proof); batch 20261021T060921; modules 1; new nodes 0)
+- 06:10 L: merged deliver/E2/Sheaf.Paper.CohomologyTorInterval (stage 3; reviewer PASS; first push; landing 20261021T061022-L-1685287 (proof); batch 20261021T060921; modules 1; new nodes 1)

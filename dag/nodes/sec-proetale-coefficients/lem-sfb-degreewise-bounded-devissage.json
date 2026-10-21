@@ -1,0 +1,142 @@
+{
+ "id": "lem-sfb-degreewise-bounded-devissage",
+ "kind": "statement",
+ "title": "Existing degreewise dévissage for a finite cohomological interval",
+ "statement": "Let C be an abelian category with derived category D(C) [def-weil-abstract-derived-category] and its standard t-structure [def-sbc-standard-tstructure-derived-category]. Let Q be a property of objects of D(C), invariant under isomorphism, containing every zero object and closed under extensions in distinguished triangles [def-weil-triangulated-category]. For every integer q let P_q be an isomorphism-invariant property of objects of C. Suppose Q(M[0][-q]) whenever P_q(M). For n∈ℕ, a∈ℤ and K∈D(C) with H^q(K)=0 outside [a,a+n-1], assume P_q(H^q(K)) for a≤q<a+n. Then Q(K). No closure of Q under shifts and no zero-object hypothesis on P_q is required.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 08J5, remark-truncation-distinguished-triangle; finite induction as in the Complexes paragraph of blueprint main-20261015 localizing-closure ctf-equals-bc; existing source proof in WeilConjectures/Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean, prop_of_isGE_of_isLE_of_degreewise"
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-sbc-standard-tstructure-derived-category",
+  "def-weil-triangulated-category"
+ ],
+ "proof": [
+  {
+   "text": "Induct on n. If n=0, M lies both in degrees at least a and at most a-1; every cohomology vanishes and the standard t-structure makes M zero. Apply the hypothesis that Q contains every zero object.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08J5, remark-truncation-distinguished-triangle; finite induction as in the Complexes paragraph of blueprint main-20261015 localizing-closure ctf-equals-bc; existing source proof in WeilConjectures/Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean, prop_of_isGE_of_isLE_of_degreewise"
+   }
+  },
+  {
+   "text": "For n+1 put b=a+n. The standard truncation triangle is A=τ<b M → M → B=τ≥b M → A[1]. The upper bound on M makes B concentrated in degree b; choose the canonical shifted-heart identification B≅Y[b]. The long exact cohomology sequence gives H^b(M)≅Y. Transport P_b through this isomorphism and then use the supplied degree-b single-object hypothesis and repleteness of Q to obtain Q(B).",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08J5, remark-truncation-distinguished-triangle; finite induction as in the Complexes paragraph of blueprint main-20261015 localizing-closure ctf-equals-bc; existing source proof in WeilConjectures/Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean, prop_of_isGE_of_isLE_of_degreewise"
+   }
+  },
+  {
+   "text": "A lies in [a,b-1]. For every a≤q<b, its inclusion into M induces H^q(A)≅H^q(M), so repleteness transports P_q to H^q(A). The induction hypothesis gives Q(A). Apply extension closure of Q to A→M→B to obtain Q(M). All steps are the existing proved degreewise source lemma; no shift stability of Q is required.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08J5, remark-truncation-distinguished-triangle; finite induction as in the Complexes paragraph of blueprint main-20261015 localizing-closure ctf-equals-bc; existing source proof in WeilConjectures/Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean, prop_of_isGE_of_isLE_of_degreewise"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-sf-derived-homology-long-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 08J5, remark-truncation-distinguished-triangle; finite induction as in the Complexes paragraph of blueprint main-20261015 localizing-closure ctf-equals-bc; existing source proof in WeilConjectures/Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean, prop_of_isGE_of_isLE_of_degreewise"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A property closed under extensions and isomorphisms and containing zero contains every bounded complex whose cohomology objects placed in their degrees have the property",
+   "results": "Eight hits: ObjectProperty.IsSerreClass.mk, instIsTriangulatedIsoClosure, IsTriangulatedClosed₁, IsClosedUnderExtensions.mk, instIsTriangulatedClosed₂IsoClosure, IsClosedUnderExtensions, instIsTriangulatedClosed₁OfIsTriangulated, IsClosedUnderExtensions.recOn. These give closure infrastructure but no degreewise bounded dévissage.",
+   "date": "2026-10-21",
+   "verdict": "No Mathlib theorem; exact proved source-library match found."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"prop_of_isGE_of_isLE\"",
+   "results": "0 hits.",
+   "date": "2026-10-21",
+   "verdict": "Not in Mathlib; use existing source declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "prop_of_.*isLE|prop_of_bounded|degreewise.*devissage in Mathlib/Algebra/Homology/DerivedCategory and Mathlib/CategoryTheory/Triangulated; source and DAG search for prop_of_isGE_of_isLE_of_degreewise; blueprint_refs search degreewise devissage and bounded complexes",
+   "results": "Mathlib has t-structure infrastructure only. WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure has the exact proved prop_of_isGE_of_isLE_of_degreewise, lines 183-226. No existing DAG attachment or blueprint statement matches; the class-relative upper-amplitude lemma has a different conclusion.",
+   "date": "2026-10-21",
+   "verdict": "Attach existing source theorem; create no duplicate Lean declaration or hole."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CohomologyTorInterval",
+  "date": "2026-10-21",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-def-localizing-closure-ctf-equals-bc",
+   "place": "Complexes paragraph: finite truncation induction for a common Tor interval",
+   "via": [
+    "lem-sfb-cohomology-tor-interval"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-def-localizing-closure",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure",
+  "declaration": "DerivedCategory.prop_of_isGE_of_isLE_of_degreewise",
+  "statement": "lemma prop_of_isGE_of_isLE_of_degreewise (Q : ObjectProperty (DerivedCategory C))\n    [Q.IsClosedUnderIsomorphisms] (hQ₀ : ∀ M, IsZero M → Q M)\n    (hQ : ∀ T ∈ distTriang (DerivedCategory C), Q T.obj₁ → Q T.obj₃ → Q T.obj₂)\n    (P : ℤ → ObjectProperty C) [∀ q, (P q).IsClosedUnderIsomorphisms]\n    (hP : ∀ q X, P q X → Q ((singleFunctor C q).obj X)) (n : ℕ) :\n    ∀ (a : ℤ) (M : DerivedCategory C), M.IsGE a → M.IsLE (a + n - 1) →\n      (∀ q, a ≤ q → q < a + n → P q ((homologyFunctor C q).obj M)) → Q M",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-21"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261021T061022-L-1685287",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261021T061022-L-1685287",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

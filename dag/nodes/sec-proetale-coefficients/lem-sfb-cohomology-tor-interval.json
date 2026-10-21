@@ -15,33 +15,19 @@
  ],
  "proof": [
   {
-   "text": "Work in the abelian category $\\mathcal A=\\operatorname{Mod}(\\Lambda_X)$ of [def-weil-sheaf-of-modules-category], using the small-site universe convention included there. Choose a complex $C$ representing $K$ under the localization of [def-weil-abstract-derived-category], and put $T_q=Q(\\tau_{\\leq q}C)$. By [lem-weil-pbc-truncation-descends], $H^r(T_q)=H^r(K)$ for $r\\leq q$ and is zero for $r>q$. Thus $0\\to\\tau_{\\leq a-1}C$ is a quasi-isomorphism, since all its cohomology objects vanish, and $\\tau_{\\leq b}C\\to C$ is a quasi-isomorphism, since it induces the identity on $H^r(C)$ for $r\\leq b$ and both sides have zero cohomology for $r>b$. In the localization these give $T_{a-1}\\cong0$ and $T_b\\cong K$.",
+   "text": "Let C be the actual category of internal Λ_X-module sheaves in the statement. Let Q be Tor amplitude in I=[a+c,b+d]. For every q let P_q(M) mean a≤q≤b and Tor amplitude [c,d] for M in degree zero. Isomorphism invariance of Tor amplitude and of the single functor makes every P_q replete. Since a≤b and c≤d, I is ordered.",
    "uses": [
-    "def-weil-sheaf-of-modules-category",
-    "def-weil-abstract-derived-category",
-    "lem-weil-pbc-truncation-descends"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 0118, section-truncations, canonical cochain truncations; derived.tex Tag 05RU (definition-derived-category), inversion of quasi-isomorphisms"
-   }
-  },
-  {
-   "text": "For each $q\\in[a,b]$ set $M_q=H^q(K)$, regarded first in degree zero. The tensor in the tensor-test definition of [det-def-sfb-constructible-tor-amplitude] is the relative derived tensor $\\otimes^{\\mathbf L}_{\\Lambda_X}$ of Layer B of [sk-def-sfb-derived-tensor-hom]: the K-flat derived functor of the relative tensor product of module objects, computed by replacing an argument by a K-flat resolution. Fix a degree-zero $\\Lambda_X$-module $N$ and a K-flat resolution $P\\to N$, and compute both $(M_q[-q])\\otimes^{\\mathbf L}_{\\Lambda_X}N$ and $M_q\\otimes^{\\mathbf L}_{\\Lambda_X}N$ with this same $P$. With the shift convention $(L[1])^r=L^{r+1}$, $d_{L[1]}=-d_L$ of [def-weil-abstract-derived-category], the complex $M_q[-q]$ is $M_q$ placed in degree $q$. So the total tensor complex $M_q[-q]\\otimes_{\\Lambda_X}P$ has degree-$r$ term $M_q\\otimes_{\\Lambda_X}P^{r-q}$ and differential $\\pm(1\\otimes d_P)$. This is the complex $(M_q\\otimes_{\\Lambda_X}P)[-q]$ up to the sign of each differential. Signs change neither kernels nor images, so $H^r\\bigl((M_q[-q])\\otimes^{\\mathbf L}_{\\Lambda_X}N\\bigr)=H^{r-q}(M_q\\otimes^{\\mathbf L}_{\\Lambda_X}N)$ for every integer $q$, negative ones included. Consequently the hypothesis on $M_q$ makes this cohomology zero unless $c\\leq r-q\\leq d$. By the tensor-test definition in [det-def-sfb-constructible-tor-amplitude], $M_q[-q]$ therefore has Tor amplitude in $[q+c,q+d]$.",
-   "uses": [
-    "sk-def-sfb-derived-tensor-hom",
     "def-weil-abstract-derived-category",
     "det-def-sfb-constructible-tor-amplitude"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YU (definition-derived-tor) and the preceding construction: derived tensor computed on a K-flat resolution of one factor; blueprint Complexes paragraph, shifted cohomology term"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.proof.md",
+    "place": "Complexes, truncation induction with a general common cohomology Tor interval"
    }
   },
   {
-   "text": "Fix $I=[a+c,b+d]$; it is an ordered interval because $a\\leq b$ and $c\\leq d$. If $a\\leq q\\leq b$, then $a+c\\leq q+c$ and $q+d\\leq b+d$, so $[q+c,q+d]\\subseteq I$. Hence every $M_q[-q]$ above has Tor amplitude in $I$: vanishing outside the smaller interval implies vanishing outside the larger one for each test module, directly by [det-def-sfb-constructible-tor-amplitude]. The zero complex also has amplitude in $I$: computing with a K-flat resolution $P$ of a test module as in [sk-def-sfb-derived-tensor-hom], the relative tensor is additive in each variable, so $0\\otimes_{\\Lambda_X}P=0$ and every cohomology object vanishes. Isomorphism invariance from [det-def-sfb-constructible-tor-amplitude] and $T_{a-1}\\cong0$ give the base case for the truncation tower.",
+   "text": "For a zero derived object M and any test module N, the additive relative derived tensor functor F_N=(-)⊗ᴸN[0] sends M to zero. Every cohomology of F_N(M) is zero, so Q(M). For a distinguished triangle, the extension clause of constantModelConstructibleFiniteTor_wellDefined gives Q for its middle object from Q on its outer objects, with the common interval I.",
    "uses": [
     "det-def-sfb-constructible-tor-amplitude",
     "sk-def-sfb-derived-tensor-hom"
@@ -49,45 +35,47 @@
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.proof.md",
-    "place": "Complexes paragraph: choose a common Tor interval for all the shifted cohomology terms"
+    "place": "Complexes, truncation induction with a general common cohomology Tor interval"
    }
   },
   {
-   "text": "Let $L=b-a+1$, a positive integer. Induct on the natural number $m$ from $0$ through $L$ to prove that $T_{a-1+m}$ has Tor amplitude in the fixed interval $I$. The case $m=0$ was proved in the preceding step. If $0\\leq m<L$, put $q=a+m$; then $a\\leq q\\leq b$. The successive-truncation triangle furnished by [lem-weil-pbc-truncation-triangle], applied to $C$, is $T_{q-1}\\to T_q\\to H^q(K)[-q]\\to T_{q-1}[1]$. Its first term has Tor amplitude in $I$ by the induction hypothesis, since $q-1=a-1+m$, and its third term has that same amplitude by the preceding computation. The extension clause in the statement of [det-def-sfb-constructible-tor-amplitude] therefore gives that amplitude for the middle term $T_q=T_{a-1+(m+1)}$. This completes the finite induction. At $m=L$ the index is $a-1+L=b$, so $T_b$ has Tor amplitude in $I$.",
+   "text": "For P_q(M), use the existing K-flat derived tensor shift comparison F_N(M[0][-q])≅F_N(M[0])[-q]. The standard t-structure shift formula moves the bounds [c,d] to [c-(-q),d-(-q)]=[q+c,q+d]. Since a≤q≤b this interval lies in I. Transport the enlarged amplitude through the existing single-functor isomorphism M[0][-q]≅M[q], where the latter denotes placement in degree q. This proves Q(single_q M), including negative q. The tensor is the same relative internal-module tensor used in torAmplitudeIn, with no change of coefficient category.",
    "uses": [
-    "lem-weil-pbc-truncation-triangle",
-    "det-def-sfb-constructible-tor-amplitude"
+    "def-weil-abstract-derived-category",
+    "def-sbc-standard-tstructure-derived-category",
+    "det-def-sfb-constructible-tor-amplitude",
+    "sk-def-sfb-derived-tensor-hom"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.proof.md",
-    "place": "Complexes paragraph: finite truncation induction, with successive triangles as in Stacks Tag 08J5 (remark-truncation-distinguished-triangle)"
+    "place": "Complexes, truncation induction with a general common cohomology Tor interval"
    }
   },
   {
-   "text": "Transport the amplitude of $T_b$ along $T_b\\cong K$ by the isomorphism-invariance clause of [det-def-sfb-constructible-tor-amplitude]. The resulting interval is exactly $[a+c,b+d]$. The argument used only the finite cohomological window and the uniform tensor-test bound on its cohomology modules, so it applies without constructibility, quasi-compactness, or a restriction to any particular admissible coefficient ring.",
+   "text": "The vanishing hypothesis gives K.IsGE a and K.IsLE b by the standard cohomological characterizations. Apply the already proved degreewise dévissage theorem with Q and P_q above, n=(b-a+1).toNat and lower bound a. Since a≤b, a+n-1=b. The preceding steps supply zero, extension, repleteness and degreewise single-object conditions; hH supplies P_q(H^q(K)) throughout the induction interval. The conclusion is exactly Tor amplitude [a+c,b+d] for K. The dévissage theorem uses the same finite truncation induction as the blueprint, rather than reconstructing it in this module.",
    "uses": [
-    "det-def-sfb-constructible-tor-amplitude"
+    "lem-sfb-degreewise-bounded-devissage",
+    "def-sbc-standard-tstructure-derived-category"
    ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.proof.md",
-    "place": "Complexes paragraph, conclusion of truncation induction with a general common cohomology Tor interval"
+    "place": "Complexes, truncation induction with a general common cohomology Tor interval"
    }
   }
  ],
  "proof_deps": [
+  "def-sbc-standard-tstructure-derived-category",
   "def-weil-abstract-derived-category",
-  "def-weil-sheaf-of-modules-category",
   "det-def-sfb-constructible-tor-amplitude",
-  "lem-weil-pbc-truncation-descends",
-  "lem-weil-pbc-truncation-triangle",
+  "lem-sfb-degreewise-bounded-devissage",
   "sk-def-sfb-derived-tensor-hom"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.proof.md",
-  "place": "Complexes paragraph; finite truncation induction made explicit, with general common interval [c,d], using Stacks 0118, 08J5 and 06YU"
+  "place": "Complexes paragraph; reuse the existing proved degreewise finite truncation induction, with direct relative-derived-tensor shift comparison and the stated common-interval extension theorem. E2, 2026-10-21."
  },
  "mathlib_searches": [
   {
@@ -211,10 +199,7 @@
  },
  "tool_uses": [
   "def-weil-abstract-derived-category",
-  "def-weil-sheaf-of-modules-category",
-  "det-def-sfb-constructible-tor-amplitude",
-  "lem-weil-pbc-truncation-descends",
-  "lem-weil-pbc-truncation-triangle"
+  "det-def-sfb-constructible-tor-amplitude"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -242,5 +227,15 @@
   "result": "pass",
   "note": "Statement matches node clause by clause (X Scheme.{u}; Λ : Profinite.CondensedRing.{u} with IsCommMonObj Λ.X; K in D(Mod(condensedRingObj Λ.X X)) as in det-def-sfb-constructible-tor-amplitude record; a≤b, c≤d; hK zero outside Icc a b; hH torAmplitudeIn c d of single 0 of H^q for q in Icc; conclusion [a+c,b+d]); no constructibility/extra assumptions; universes as dep. Check file: torAmplitudeIn is Iff.rfl the Layer-B CondensedRing.derivedTensor test, and the dep's wellDefined extension clause applies directly to the item's types. Math true; edge cases K=0, a=b, negative q, [-1,0] blueprint case. Source Complexes paragraph (proof.md l.31) matches. One sorry, no defs, docstrings with source/blueprint tag and 5 proof steps; lean.statement verbatim; node unchanged except lean. Imports = recorded stmt/proof dep modules. No duplicate in Sheaf/WeilConjectures/Mathlib. nt_compile --json clean 8.9 s, no warnings."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261021T061022-L-1685287",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }
