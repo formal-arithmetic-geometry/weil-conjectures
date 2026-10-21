@@ -22292,3 +22292,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:16 L: merged deliver/S3/Sheaf.CategoryTheory.KInjectiveExactSquareComparison (stage 3; reviewer PASS; first push; landing 20261021T111609-L-380983 (proof); batch 20261021T110859; modules 1; new nodes 0)
 - 11:16 L: merged deliver/S4/Sheaf.AlgebraicGeometry.SfEtaleOriginPushforwardAmplitude (stage 3; reviewer PASS; first push; landing 20261021T111614-L-396304 (proof); batch 20261021T110859; modules 1; new nodes 0)
 - 11:16 L: merged deliver/S7/Sheaf.CategoryTheory.WordReconstructionCoherence (stage 3; reviewer PASS; first push; landing 20261021T111618-L-410947 (proof); batch 20261021T110859; modules 1; new nodes 0)
+- 11:16 L: merged deliver/S9/Sheaf.CategoryTheory.ScalarCoordinateLimitCriterion (stage 3; reviewer PASS; first push; landing 20261021T111624-L-427296 (proof); batch 20261021T110859; modules 1; new nodes 0)

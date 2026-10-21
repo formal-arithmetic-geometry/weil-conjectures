@@ -12,8 +12,8 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.Abelian
 public import Mathlib.CategoryTheory.Monoidal.Mod
 public import Mathlib.CategoryTheory.Sites.Abelian
 public import Mathlib.CategoryTheory.Sites.Equivalence
-import Sheaf.CategoryTheory.InternalAbelianSheafModuleEquivalence
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
+import WeilConjectures.CategoryTheory.Monoidal.Mod.Limits
+import Mathlib.CategoryTheory.Adjunction.Limits
 import Mathlib.CategoryTheory.Limits.Preserves.Finite
 
 /-!
@@ -66,35 +66,19 @@ Source: blueprint main-20261015, `sec-proetale-coefficients`,
 (blueprint: lem-sfb-scalar-coordinate-limit-criterion).
 
 Proof:
-1. The sheaf tensor dependency supplies additivity. Use
-`def-weil-pbc-internal-abelian-sheaf-module-equivalence` to compute internal-module
-limits as limits of sectionwise module sheaves. By
-`lem-weil-pbc-module-sheaves-limits-sectionwise`, their sections are compatible families
-with componentwise action. The empty compatible-family module is zero and terminal.
-2. Put V = Res_φ. By `def-sfb-modobj-restriction`, V leaves the underlying sheaf and
-maps unchanged and precomposes the action with φ tensor identity. A limit and the
-limit of its restriction have the same compatible-family sheaf and projections.
-Joint monicity of the projections shows that the canonical comparison respects the
-R-action. Its inverse is R-linear too, so V preserves finite limits, including the
-empty one.
-3. If a B-linear f becomes invertible under V, its underlying inverse g is B-linear:
-from f γ_M = γ_N (B tensor f), compose with g and B tensor g to get
-`g γ_N = γ_M (B tensor g)`. Thus V reflects isomorphisms.
-4. Finite limits exist by step 1. Apply
-`lem-sfb-conservative-left-exact-reflects-finite-limits` to steps 2 and 3: V reflects
-finite limits.
-5. For a limit cone (L,p_j) and a cone (Q,q_j) over the n-th powers, take its k-th
-coordinates. For each k the limit of the original diagram gives a unique map Q → L.
-Their product gives the unique map Q → L^n with the required composites. For n = 0,
-all powers are terminal and the unique map is the lift. For the empty diagram, L is
-terminal, and the same coordinatewise uniqueness applies. Thus the power functor
-preserves finite limits.
-6. Naturality of α transports every cone over V composed with T to a cone over the
-power diagram. Compose its unique lift with α_L inverse to obtain the unique lift
-for V composed with T. This is `lem-sfb-finite-exactness-nat-iso` applied to α inverse.
-7. Apply `lem-sfb-finite-limit-preservation-cancellation` to T and V: the composite
-preserves finite limits by step 6 and V reflects them by step 4. Hence T preserves
-each finite limit cone, including the empty cone.
+1. The canonical sheaf tensor is closed by `sfbSheafTensor_properties`, hence additive
+by `sfbSheafTensor_monoidalPreadditive`. Work with the arbitrary monoidal-additivity
+instance quantified in the criterion.
+2. Internal-module forgetful functors create limits by the source library's
+`CategoryTheory.Mod.createsLimit`. Thus they preserve and reflect finite limits,
+and finite powers exist without passage to sectionwise module sheaves.
+3. The constant-diagram functor preserves limits. The limit functor is a right adjoint,
+so it also preserves limits. Their composite, the n-th power functor, therefore
+preserves finite limits, including n = 0. Transport preservation across α inverse.
+4. Restriction followed by forgetting is definitionally the original forgetful functor.
+Consequently T followed by the B-module forgetful functor preserves finite limits.
+Cancel that forgetful functor, which reflects finite limits by step 2. This also
+handles empty diagrams.
 -/
 theorem sheaf_scalarCoordinateLimitCriterion
     {C : Type uC} [Category.{vC} C] [EssentiallySmall.{w} C]
@@ -104,6 +88,24 @@ theorem sheaf_scalarCoordinateLimitCriterion
       (sfbSheafTensorStructure (A := Ab.{w}) J).symmetric.toBraidedCategory
       (@sheafIsAbelian C _ Ab.{w} _ _ J
         (hasSheafifyEssentiallySmallSite J Ab.{w})) := by
-  sorry
+  let : HasSheafify J Ab.{w} := hasSheafifyEssentiallySmallSite J Ab.{w}
+  let t := sfbSheafTensorStructure (A := Ab.{w}) J
+  let : MonoidalCategory (Sheaf J Ab.{w}) := t.monoidal
+  let : SymmetricCategory (Sheaf J Ab.{w}) := t.symmetric
+  obtain ⟨closed⟩ := (sfbSheafTensor_properties.{uC, vC, w + 1, w, 0, 0} (A := Ab.{w}) J).2.1
+  let : MonoidalClosed (Sheaf J Ab.{w}) := closed
+  refine ⟨⟨sfbSheafTensor_monoidalPreadditive⟩, ?_⟩
+  intro h R B _ _ _ _ φ _ n T α
+  have : PreservesFiniteLimits (Functor.const (Discrete (Fin n)) ⋙
+      (lim : (Discrete (Fin n) ⥤ Mod (Sheaf J Ab.{w}) R) ⥤ _)) := inferInstance
+  have : PreservesFiniteLimits (T ⋙ comap φ) :=
+    preservesFiniteLimits_of_natIso α.symm
+  have : PreservesFiniteLimits (forget R : Mod (Sheaf J Ab.{w}) R ⥤ _) :=
+    ⟨fun _ _ _ ↦ inferInstance⟩
+  have : PreservesFiniteLimits (T ⋙ (forget B : Mod (Sheaf J Ab.{w}) B ⥤ _)) :=
+    inferInstanceAs (PreservesFiniteLimits ((T ⋙ comap φ) ⋙ forget R))
+  have : ReflectsFiniteLimits (forget B : Mod (Sheaf J Ab.{w}) B ⥤ _) :=
+    ⟨fun _ _ _ ↦ inferInstance⟩
+  exact preservesFiniteLimits_of_reflects_of_preserves T (forget B)
 
 end CategoryTheory.Mod
