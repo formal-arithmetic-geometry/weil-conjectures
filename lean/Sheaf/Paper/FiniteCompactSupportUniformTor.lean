@@ -15,13 +15,10 @@ public import Sheaf.Paper.IntrinsicFiniteTorsionConstructibility
 public import Sheaf.AlgebraicGeometry.CoefficientProEtaleTorAmplitude
 public import Sheaf.Paper.RefinementComparisonIsomorphism
 public import Sheaf.AlgebraicGeometry.SfOpenExceptionalBaseChange
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 import Sheaf.AlgebraicGeometry.DimensionExtension
 import Sheaf.Paper.OpenExtensionFiniteTor
 import Sheaf.Paper.ProEtaleFiniteCoefficientDirectImage
-import Sheaf.Paper.ProEtaleConstructibleOrigin
-import Sheaf.Paper.CompactificationCoherence
+import Sheaf.Paper.FiniteRingConstructibleDerivedOrigin
 
 /-!
 # Uniform finite-coefficient Tor bounds for compact support
@@ -116,9 +113,10 @@ of dimensions; the assumed bound for X therefore bounds this ambient scheme.
 5. lem-trf-open-ctf preserves intrinsic bounded constructibility and [a,b] under j_!.
 Apply cor-sf-direct-image-ctf-proetale to the refined proper map and the dimension
 bound to get intrinsic bounded constructibility and [a,b+2d].
-6. lem-sf-proetale-constructible-origin gives an etale-origin witness for L.
-prop-compactification-coherence-detailed identifies the two candidates by the canonical
-refinement comparison, realized by finiteCompactSupportDenseComparison below.
+6. The finite-ring constructible derived origin criterion gives a bounded constructible
+etale origin for L. Retain its comparison image with the identity origin witness and use
+refinementFixedWitnessIso to identify its fixed realization with L. The specified
+finiteCompactSupportDenseComparison then compares the two candidates.
 7. Transport cohomology constructibility and finite support across this isomorphism.
 Tensoring the isomorphism with every degree-zero module transports Tor vanishing.
 Neither the refinement nor d depends on n. The original compactification is arbitrary.
@@ -171,6 +169,84 @@ theorem finiteCompactSupport_uniformTor_after_denseRefinement
                 (Padic.coefficientExtensionRing l E n) _
                 (Padic.finite_coefficientExtensionRing l E n hn)).obj L),
             α = finiteCompactSupportDenseComparison l E n hn c₀ L O w := by
-  sorry
+  classical
+  let c := c₀.denseRefinement
+  let S := Spec (CommRingCat.of D.k)
+  let : c.Z.Over S := ⟨c.g ≫ (Y ↘ S)⟩
+  have hft : LocallyOfFiniteType (c.g ≫ (Y ↘ S)) := inferInstance
+  have hqc : QuasiCompact (c.g ≫ (Y ↘ S)) := inferInstance
+  have : IsSchemeTheoreticallyDominant c.i :=
+    c₀.isSchemeTheoreticallyDominant_denseRefinement_i
+  have : QuasiCompact c.i := c.quasiCompact_openImmersion inferInstance
+  have : LocallyOfFiniteType (c.Z ↘ S) := hft
+  have : QuasiCompact (c.Z ↘ S) := hqc
+  have hdense : DenseRange c.i := c.i.denseRange
+  have hdim : topologicalKrullDim c.Z = topologicalKrullDim X :=
+    (topologicalKrullDim_fieldExtension_and_denseOpen (K := D.k) (X := c.Z)).2
+      X c.i hdense |>.symm
+  have hbound : topologicalKrullDim c.Z ≤ (d : WithBot ℕ∞) := hdim.trans_le _hd
+  refine ⟨hft, hqc, hdense, hdim, hbound, ?_⟩
+  intro n hn a b _hab L hL hTor
+  let A := Padic.coefficientExtensionRing l E n
+  have : Finite A := Padic.finite_coefficientExtensionRing l E n hn
+  have : c.i.IsOver S := ⟨by
+    change c.i ≫ (c.g ≫ (Y ↘ S)) = (X ↘ S)
+    rw [← Category.assoc, ← c.comm]
+    simp⟩
+  have hopen := finiteStageDerivedExtensionByZero_constructibleFiniteTor
+    D l _hl E n hn c.i L hL ⟨a, b, hTor⟩
+  let p : Over.mk (c.g ≫ (Y ↘ S)) ⟶ Over.mk (Y ↘ S) := Over.homMk c.g rfl
+  have : LocallyOfFiniteType (Over.mk (c.g ≫ (Y ↘ S))).hom := hft
+  have : QuasiCompact (Over.mk (c.g ≫ (Y ↘ S))).hom := hqc
+  have : LocallyOfFiniteType (Over.mk (Y ↘ S)).hom :=
+    inferInstanceAs (LocallyOfFiniteType (Y ↘ S))
+  have : QuasiCompact (Over.mk (Y ↘ S)).hom :=
+    inferInstanceAs (QuasiCompact (Y ↘ S))
+  have : IsSeparated p.left := inferInstanceAs (IsSeparated c.g)
+  have : LocallyOfFiniteType p.left := inferInstanceAs (LocallyOfFiniteType c.g)
+  have : QuasiCompact p.left := inferInstanceAs (QuasiCompact c.g)
+  have hproper := finiteCoefficientDirectImage_boundedConstructible_torAmplitude
+    D l _hl E n hn _ _ p d hbound a b hopen.1 (hopen.2.2 a b hTor)
+  have hc : intrinsicFiniteTorsionConstructible l E n hn Y
+      ((sfIntrinsicCompactSupport c A).obj L) := hproper.1
+  have ht : HasProEtaleTorAmplitude Y A
+      ((sfIntrinsicCompactSupport c A).obj L) a (b + 2 * (d : ℤ)) := hproper.2
+  obtain ⟨lo, hlo⟩ := hL.1.bddBelow
+  obtain ⟨hi, hhi⟩ := hL.1.bddAbove
+  have hvan (i : ℤ) (hi' : i < min lo hi ∨ max lo hi < i) :
+      IsZero ((DerivedCategory.homologyFunctor _ i).obj L) := by
+    by_contra hz
+    rcases hi' with hi' | hi'
+    · exact (not_lt_of_ge (hlo hz)) (hi'.trans_le (min_le_left _ _))
+    · exact (not_lt_of_ge (hhi hz)) ((le_max_right _ _).trans_lt hi')
+  obtain ⟨G, ⟨eG⟩⟩ := ((finiteRing_constructibleDerived_origin X A).2.2.1 L).mpr
+    ⟨hL.2, min lo hi, max lo hi, min_le_max, hvan⟩
+  obtain ⟨r, s, _, hv⟩ := G.property.2
+  let Gplus : DerivedCategory.Plus
+      (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1, u} A))) :=
+    ⟨G.obj, r, (DerivedCategory.isGE_iff G.obj r).mpr (fun i hi ↦ hv i (Or.inl hi))⟩
+  let : TopologicalSpace (ULift.{u + 1, u} A) := ⊥
+  let : DiscreteTopology (ULift.{u + 1, u} A) := discreteTopology_bot _
+  let O : RefinementFiniteLevelOrigin l E n hn X :=
+    ⟨(finiteCoefficientComparison X (ULift.{u + 1, u} A)).mapDerivedCategoryPlus.obj Gplus,
+      ⟨Gplus, Iso.refl _⟩⟩
+  let w : (sfIntrinsicDerivedEquivalence X A).functor.obj
+      (refinementFiniteLevelFixedObject l E n hn X O) ≅ L :=
+    (sfIntrinsicDerivedEquivalence X A).functor.mapIso
+      (refinementFixedWitnessIso X (ULift.{u + 1, u} A) O).symm ≪≫
+    ((Functor.mapDerivedCategoryCompIso
+      (comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) X)
+      (sfIntrinsicModuleEquivalence X A).functor).app G.obj).symm ≪≫ eG
+  let α := finiteCompactSupportDenseComparison l E n hn c₀ L O w
+  have hc' : intrinsicFiniteTorsionConstructible l E n hn Y
+      ((sfIntrinsicCompactSupport c₀ A).obj L) := by
+    exact (finiteTorsionConstructible D l _hl E n hn Y).prop_of_iso α hc
+  have ht' : HasProEtaleTorAmplitude Y A
+      ((sfIntrinsicCompactSupport c₀ A).obj L) a (b + 2 * (d : ℤ)) := by
+    refine ⟨ht.1, ?_⟩
+    intro C P hC t htP hP M i hi
+    obtain ⟨eC⟩ := hC
+    exact ht.2 C P ⟨eC ≪≫ α.symm⟩ t htP hP M i hi
+  exact ⟨hc, ht, hc', ht', O, w, α, rfl⟩
 
 end AlgebraicGeometry.ProEtale
