@@ -23887,3 +23887,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:24 L: merged deliver/NL/lem-pur-line-zero-class-etale-realization (stage 2; reviewer FIX; parallel immutable checks)
 - 22:24 L: returned deliver/Q85/lem-weil-integral-twist-scalar-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-integral-twist-scalar-coherence: lem-weil-int)
 - 22:24 L: returned deliver/NK/lem-pur-affine-translation-trace (reviewer RETURN: L: independent stage-2 immutable head 60ab047e9131: review_split.py: lem-pur-affine-translation-trace: proof_deps ['lem-)
+- 22:27 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
