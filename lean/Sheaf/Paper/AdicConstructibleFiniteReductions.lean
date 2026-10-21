@@ -15,45 +15,23 @@ import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
 import Sheaf.Algebra.Homology.ChangeOfRingsKFlat
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
-import Sheaf.Paper.CompletedPullbackAdjunction
-import Sheaf.AlgebraicGeometry.ProEtaleMilnorSequence
-import Sheaf.AlgebraicGeometry.ProEtaleMilnorEpimorphic
-import Sheaf.AlgebraicGeometry.ProEtaleProductsExact
+import all Sheaf.Paper.CompletedPullbackAdjunction
+import Sheaf.CategoryTheory.GeometricModuleConstruction
+import all Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
-import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitExistence
-import Sheaf.AlgebraicGeometry.ProEtaleProductsDerived
 import Mathlib.Algebra.Homology.DerivedCategory.Basic
-import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicFiniteOperations
-import Sheaf.Paper.PbcActualScalarPullback
-import Sheaf.Paper.NilpotentReductionLissity
-import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 import Mathlib.RingTheory.Ideal.Quotient.Defs
 import Mathlib.RingTheory.Noetherian.Defs
 import Sheaf.Algebra.Homology.KFlatCoefficientUniverse
 import Sheaf.CategoryTheory.RingedSiteModules
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Sheaf.AlgebraicGeometry.SfIntrinsicRealizationTransport
-import Sheaf.CategoryTheory.SiteInverseImageTensor
-import Sheaf.Paper.LocalizeRingedSiteMorphism
-import WeilConjectures.CategoryTheory.SiteMorphismComposition
 import Mathlib.CategoryTheory.Sites.ConstantSheaf
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
-import Sheaf.Paper.LocallyConstantTensor
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
-import Sheaf.AlgebraicGeometry.AdicFiniteStratificationPullback
 import Sheaf.AlgebraicGeometry.CoefficientProEtaleTorAmplitude
-import Sheaf.AlgebraicGeometry.ConstructibleProEtaleComparison
-import Sheaf.AlgebraicGeometry.ProEtaleClassicalSheaves
-import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
-import Sheaf.AlgebraicGeometry.ProEtaleFiniteTorComparisonNoetherian
 import Sheaf.CategoryTheory.DerivedCategory.ResolvingAdjunction
 import Sheaf.Paper.KFlatRingedToposPullback
 import Sheaf.Algebra.Homology.TensorColimitsIndependentCoefficients
-import Sheaf.CategoryTheory.StrictRoosComparison
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 /-! # Finite reductions of a derived-complete constructible complex
 
 Source: Stacks Project, proetale.tex, Tag 09C2, with Tag 09AL for compatible etale origins
@@ -79,42 +57,6 @@ namespace AlgebraicGeometry.Scheme
 variable {D : Type w} [SmallCategory D] {T : GrothendieckTopology D}
 
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-open scoped ChangeOfRings in
-private def adicFiniteOrdinaryUnitApp {R S : Sheaf T CommRingCat.{w}}
-    (f : R ⟶ S) (M : Mod R) : M ⟶ (res f).obj ((change f).obj M) where
-  val :=
-    { app := fun U ↦ ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars
-        (f.hom.app U).hom
-        ((((PresheafOfModules.sheafificationAdjunction (𝟙 (siteModuleRings S).obj)).unit.app
-          (SheafOfModules.changeOfRingsPresheaf.{w, w, w} f M)).app U))
-      naturality := by
-        intro U V i
-        ext m
-        let eta := (PresheafOfModules.sheafificationAdjunction
-          (𝟙 (siteModuleRings S).obj)).unit.app (SheafOfModules.changeOfRingsPresheaf.{w, w, w} f M)
-        change eta.app V ((1 : S.obj.obj V) ⊗ₜ[R.obj.obj V, (f.hom.app V).hom]
-          M.val.map i m) = ((change f).obj M).val.map i
-            (eta.app U ((1 : S.obj.obj U) ⊗ₜ[R.obj.obj U, (f.hom.app U).hom] m))
-        have h := PresheafOfModules.naturality_apply eta i
-          ((1 : S.obj.obj U) ⊗ₜ[R.obj.obj U, (f.hom.app U).hom] m)
-        change eta.app V ((SheafOfModules.changeOfRingsPresheaf.{w, w, w} f M).map i
-            ((1 : S.obj.obj U) ⊗ₜ[R.obj.obj U, (f.hom.app U).hom] m)) =
-          ((change f).obj M).val.map i
-            (eta.app U ((1 : S.obj.obj U) ⊗ₜ[R.obj.obj U, (f.hom.app U).hom] m)) at h
-        rw [show (SheafOfModules.changeOfRingsPresheaf.{w, w, w} f M).map i
-            ((1 : S.obj.obj U) ⊗ₜ[R.obj.obj U, (f.hom.app U).hom] m) =
-            S.obj.map i 1 ⊗ₜ[R.obj.obj V, (f.hom.app V).hom] M.val.map i m from
-          Classical.choose_spec (SheafOfModules.exists_changeOfRingsMap f M i) 1 m,
-          map_one] at h
-        exact h }
-
-private theorem adicFiniteOrdinaryUnitApp_apply {R S : Sheaf T CommRingCat.{w}}
-    (f : R ⟶ S) (M : Mod R) (U : Dᵒᵖ) (m : M.val.obj U) :
-    (adicFiniteOrdinaryUnitApp f M).val.app U m = tensorSection f M U 1 m := by
-  rfl
-
 /-- The ordinary tensor unit is uniquely specified by insertion of 1 on sections.
 Proof: scalar insertion is linear over the source ring, natural and compatible with
 restrictions. Sheafification gives the map. The underlying-sheaf functor is faithful.
@@ -123,39 +65,10 @@ Source: Stacks Tags 06YY, 09C2 and 09AL
 theorem adicFiniteOrdinaryUnit_existsUnique {R S : Sheaf T CommRingCat.{w}} (f : R ⟶ S) :
     ∃! e : 𝟭 (Mod R) ⟶ change f ⋙ res f,
       ∀ M : Mod R, (underlying R).map (e.app M) = insertion f M := by
-  let e : 𝟭 (Mod R) ⟶ change f ⋙ res f :=
-    { app := adicFiniteOrdinaryUnitApp f
-      naturality := by
-        intro M N a
-        apply SheafOfModules.hom_ext
-        ext U m
-        change tensorSection f N U 1 (a.val.app U m) =
-          ((change f).map a).val.app U (tensorSection f M U 1 m)
-        let t : SheafOfModules.changeOfRingsPresheaf.{w, w, w} f M ⟶
-            SheafOfModules.changeOfRingsPresheaf.{w, w, w} f N :=
-          { app := fun U ↦ (ModuleCat.extendScalars (f.hom.app U).hom).map (a.val.app U)
-            naturality := SheafOfModules.changeOfRingsHom_naturality f M a }
-        have h := congrArg (fun z ↦ z.app U)
-          ((PresheafOfModules.sheafificationAdjunction
-            (𝟙 (siteModuleRings S).obj)).unit.naturality t)
-        have h' := ConcreteCategory.congr_hom h
-          (@TensorProduct.tmul (R.obj.obj U) _ _ _ _ _
-            (Module.compHom _ (f.hom.app U).hom) _ (1 : S.obj.obj U) m)
-        change tensorSection f N U 1 (a.val.app U m) = _
-        change ((PresheafOfModules.sheafificationAdjunction
-            (𝟙 (siteModuleRings S).obj)).unit.app
-              (SheafOfModules.changeOfRingsPresheaf.{w, w, w} f N)).app U
-            ((ModuleCat.extendScalars (f.hom.app U).hom).map (a.val.app U)
-              (@TensorProduct.tmul (R.obj.obj U) _ _ _ _ _
-            (Module.compHom _ (f.hom.app U).hom) _ (1 : S.obj.obj U) m)) =
-          ((change f).map a).val.app U (tensorSection f M U 1 m) at h'
-        rw [ModuleCat.ExtendScalars.map_tmul] at h'
-        exact h' }
-  have he : ∀ M : Mod R, (underlying R).map (e.app M) = insertion f M := by
-    intro M
+  let e : 𝟭 (Mod R) ⟶ change f ⋙ res f := (SheafOfModules.tensorAdjunction f).unit
+  have he (M : Mod R) : (underlying R).map (e.app M) = insertion f M := by
     apply (insertion_existsUnique f M).unique
-    · intro U m
-      exact adicFiniteOrdinaryUnitApp_apply f M U m
+    · exact SheafOfModules.tensorUnit_apply f M
     · exact (insertion_existsUnique f M).exists.choose_spec
   refine ⟨e, he, ?_⟩
   intro e' he'
@@ -224,137 +137,32 @@ def adicFiniteDresComp {R S V : Sheaf T CommRingCat.{w}} (f : R ⟶ S) (g : S �
   (Functor.mapDerivedCategoryCompIso (res g) (res f)).symm ≪≫
     Functor.mapDerivedCategoryNatIso (adicFiniteResComp f g)
 
-open scoped ChangeOfRings in
-private def adicFiniteTensorToRestriction {R S : Sheaf T CommRingCat.{w}}
-    (f : R ⟶ S) (M : Mod R) (N : Mod S)
-    (a : SheafOfModules.changeOfRingsPresheaf.{w, w, w} f M ⟶ N.val) :
-    M ⟶ (res f).obj N where
-  val :=
-    { app := fun U ↦ ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars
-        (f.hom.app U).hom (a.app U)
-      naturality := by
-        intro U V i
-        ext m
-        change a.app V ((1 : S.obj.obj V) ⊗ₜ[R.obj.obj V, (f.hom.app V).hom]
-          M.val.map i m) = N.val.map i
-            (a.app U ((1 : S.obj.obj U) ⊗ₜ[R.obj.obj U, (f.hom.app U).hom] m))
-        have h := PresheafOfModules.naturality_apply a i
-          ((1 : S.obj.obj U) ⊗ₜ[R.obj.obj U, (f.hom.app U).hom] m)
-        rw [show (SheafOfModules.changeOfRingsPresheaf.{w, w, w} f M).map i
-            ((1 : S.obj.obj U) ⊗ₜ[R.obj.obj U, (f.hom.app U).hom] m) =
-            S.obj.map i 1 ⊗ₜ[R.obj.obj V, (f.hom.app V).hom] M.val.map i m from
-          Classical.choose_spec (SheafOfModules.exists_changeOfRingsMap f M i) 1 m, map_one] at h
-        exact h }
-
-open scoped ChangeOfRings in
-private def adicFiniteRestrictionToTensor {R S : Sheaf T CommRingCat.{w}}
-    (f : R ⟶ S) (M : Mod R) (N : Mod S) (a : M ⟶ (res f).obj N) :
-    SheafOfModules.changeOfRingsPresheaf.{w, w, w} f M ⟶ N.val where
-  app U := ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars
-    (f.hom.app U).hom (a.val.app U)
-  naturality := by
-    intro U V i
-    apply ModuleCat.ExtendScalars.hom_ext
-    intro m
-    change ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars
-      (f.hom.app V).hom (a.val.app V)
-        ((SheafOfModules.changeOfRingsPresheaf.{w, w, w} f M).map i
-          ((1 : S.obj.obj U) ⊗ₜ[R.obj.obj U, (f.hom.app U).hom] m)) =
-      N.val.map i (ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars
-        (f.hom.app U).hom (a.val.app U)
-          ((1 : S.obj.obj U) ⊗ₜ[R.obj.obj U, (f.hom.app U).hom] m))
-    rw [show (SheafOfModules.changeOfRingsPresheaf.{w, w, w} f M).map i
-        ((1 : S.obj.obj U) ⊗ₜ[R.obj.obj U, (f.hom.app U).hom] m) =
-        S.obj.map i 1 ⊗ₜ[R.obj.obj V, (f.hom.app V).hom] M.val.map i m from
-      Classical.choose_spec (SheafOfModules.exists_changeOfRingsMap f M i) 1 m, map_one]
-    have atOne (W : Dᵒᵖ) (n : M.val.obj W) :
-        ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars
-          (f.hom.app W).hom (a.val.app W)
-            ((1 : S.obj.obj W) ⊗ₜ[R.obj.obj W, (f.hom.app W).hom] n) = a.val.app W n := by
-      exact congrArg (fun z : M.val.obj W ⟶
-        (ModuleCat.restrictScalars (f.hom.app W).hom).obj (N.val.obj W) ↦ z n)
-        ((ModuleCat.ExtendRestrictScalarsAdj.homEquiv (f.hom.app W).hom).apply_symm_apply
-          (a.val.app W))
-    rw [atOne, atOne]
-    exact PresheafOfModules.naturality_apply a.val i m
-
-private def adicFinitePresheafHomEquiv {R S : Sheaf T CommRingCat.{w}}
-    (f : R ⟶ S) (M : Mod R) (N : Mod S) :
-    (SheafOfModules.changeOfRingsPresheaf.{w, w, w} f M ⟶ N.val) ≃
-      (M ⟶ (res f).obj N) where
-  toFun := adicFiniteTensorToRestriction f M N
-  invFun := adicFiniteRestrictionToTensor f M N
-  left_inv a := by
-    ext U : 1
-    exact (ModuleCat.ExtendRestrictScalarsAdj.homEquiv (f.hom.app U).hom).symm_apply_apply
-      (a.app U)
-  right_inv a := by
-    apply SheafOfModules.hom_ext
-    ext U : 1
-    exact (ModuleCat.ExtendRestrictScalarsAdj.homEquiv (f.hom.app U).hom).apply_symm_apply
-      (a.val.app U)
-
-private def adicFiniteHomEquiv {R S : Sheaf T CommRingCat.{w}}
-    (f : R ⟶ S) (M : Mod R) (N : Mod S) :
+private def adicFiniteHomEquiv
+    {C : Type w} [SmallCategory C] {JC : GrothendieckTopology C}
+    {R S : Sheaf JC CommRingCat.{w}} (f : R ⟶ S) (M : Mod R) (N : Mod S) :
     ((change f).obj M ⟶ N) ≃ (M ⟶ (res f).obj N) :=
   ((PresheafOfModules.sheafificationAdjunction (𝟙 (siteModuleRings S).obj)).homEquiv _ _).trans
-    (adicFinitePresheafHomEquiv f M N)
+    (SheafOfModules.tensorPresheafHomEquiv f M N)
 
-private theorem adicFiniteHomEquiv_apply {R S : Sheaf T CommRingCat.{w}}
-    (f : R ⟶ S) (M : Mod R) (N : Mod S) (a : (change f).obj M ⟶ N)
-    (U : Dᵒᵖ) (m : M.val.obj U) :
+private theorem adicFiniteHomEquiv_apply
+    {C : Type w} [SmallCategory C] {JC : GrothendieckTopology C}
+    {R S : Sheaf JC CommRingCat.{w}} (f : R ⟶ S) (M : Mod R) (N : Mod S)
+    (a : (change f).obj M ⟶ N) (U : Cᵒᵖ) (m : M.val.obj U) :
     (adicFiniteHomEquiv f M N a).val.app U m =
       a.val.app U (tensorSection f M U 1 m) := by
   rfl
 
-open scoped ChangeOfRings in
-private theorem adicFiniteHomEquiv_naturality_left {R S : Sheaf T CommRingCat.{w}}
-    (f : R ⟶ S) {M M' : Mod R} (a : M ⟶ M') (N : Mod S)
-    (b : (change f).obj M' ⟶ N) :
-    adicFiniteHomEquiv f M N ((change f).map a ≫ b) =
-      a ≫ adicFiniteHomEquiv f M' N b := by
-  change adicFinitePresheafHomEquiv f M N
-      ((PresheafOfModules.sheafificationAdjunction (𝟙 (siteModuleRings S).obj)).homEquiv _ _
-        ((PresheafOfModules.sheafification (𝟙 (siteModuleRings S).obj)).map
-          (show SheafOfModules.changeOfRingsPresheaf.{w, w, w} f M ⟶
-              SheafOfModules.changeOfRingsPresheaf.{w, w, w} f M' from
-            { app := fun U ↦ (ModuleCat.extendScalars (f.hom.app U).hom).map (a.val.app U)
-              naturality := SheafOfModules.changeOfRingsHom_naturality f M a }) ≫ b)) = _
-  rw [Adjunction.homEquiv_naturality_left]
-  ext U m
-  change ((PresheafOfModules.sheafificationAdjunction (𝟙 (siteModuleRings S).obj)).homEquiv
-    (SheafOfModules.changeOfRingsPresheaf.{w, w, w} f M') N b).app U
-      ((ModuleCat.extendScalars (f.hom.app U).hom).map (a.val.app U)
-        ((1 : S.obj.obj U) ⊗ₜ[R.obj.obj U, (f.hom.app U).hom] m)) = _
-  rw [ModuleCat.ExtendScalars.map_tmul]
-  rfl
-
-private theorem adicFiniteHomEquiv_naturality_right {R S : Sheaf T CommRingCat.{w}}
-    (f : R ⟶ S) (M : Mod R) {N N' : Mod S}
-    (a : (change f).obj M ⟶ N) (b : N ⟶ N') :
-    adicFiniteHomEquiv f M N' (a ≫ b) =
-      adicFiniteHomEquiv f M N a ≫ (res f).map b := by
-  change adicFinitePresheafHomEquiv f M N'
-      ((PresheafOfModules.sheafificationAdjunction (𝟙 (siteModuleRings S).obj)).homEquiv _ _
-        (a ≫ b)) = _
-  rw [Adjunction.homEquiv_naturality_right]
-  rfl
-
-private def adicFiniteAdjunction {R S : Sheaf T CommRingCat.{w}}
-    (f : R ⟶ S) : change f ⊣ res f :=
-  Adjunction.mkOfHomEquiv
-    { homEquiv := adicFiniteHomEquiv f
-      homEquiv_naturality_left_symm := by
-        intro M M' N a g
-        apply (adicFiniteHomEquiv f M N).injective
-        rw [Equiv.apply_symm_apply, adicFiniteHomEquiv_naturality_left,
-          Equiv.apply_symm_apply]
-      homEquiv_naturality_right := fun a b ↦ adicFiniteHomEquiv_naturality_right f _ a b }
+private def adicFiniteAdjunction
+    {C : Type w} [SmallCategory C] {JC : GrothendieckTopology C}
+    {R S : Sheaf JC CommRingCat.{w}} (f : R ⟶ S) : change f ⊣ res f :=
+  SheafOfModules.tensorAdjunction f
 
 private theorem adicFiniteAdjunction_homEquiv {R S : Sheaf T CommRingCat.{w}}
     (f : R ⟶ S) (M : Mod R) (N : Mod S) (a : (change f).obj M ⟶ N) :
     (adicFiniteAdjunction f).homEquiv M N a = adicFiniteHomEquiv f M N a := by
-  simp only [adicFiniteAdjunction, Adjunction.mkOfHomEquiv_homEquiv]
+  simp only [adicFiniteAdjunction, SheafOfModules.tensorAdjunction,
+    Adjunction.mkOfHomEquiv_homEquiv]
+  rfl
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
@@ -395,14 +203,18 @@ theorem adicFiniteUnit_existsUnique {R S : Sheaf T CommRingCat.{w}} (f : R ⟶ S
   obtain ⟨E, hobj, hmap, _, hpres, _⟩ :=
     SheafOfModules.derivedChangeOfRingsIndependentCoefficients f
   have hE : E = change f := CategoryTheory.Functor.ext hobj (fun _ _ a ↦ hmap a)
-  subst E
+  have hpres' : ∀ {P Q : Cx R} (a : P ⟶ Q),
+      P.IsKFlatIndependentCoefficients → Q.IsKFlatIndependentCoefficients →
+        QuasiIso a → QuasiIso (((change f).mapHomologicalComplex (.up ℤ)).map a) := by
+    cases hE
+    exact hpres
   obtain ⟨_, L, ε, hu, hc, adj, ha⟩ :=
     Adjunction.exists_leftDerived_adjunction (change f) (res f) (adicFiniteAdjunction f)
       (CochainComplex.IsKFlatIndependentCoefficients (R := R))
       (fun P ↦ by
         obtain ⟨Y, s, hY, _, hs, _⟩ :=
           CochainComplex.exists_isKFlatResolutionIndependentCoefficients P
-        exact ⟨Y, s, hY, hs⟩) hpres
+        exact ⟨Y, s, hY, hs⟩) hpres'
   let : L.IsLeftDerivedFunctor ε (HomologicalComplex.quasiIso (Mod R) (.up ℤ)) := hu
   let : (extend f).IsLeftDerivedFunctor (extendComparison f)
       (HomologicalComplex.quasiIso (Mod R) (.up ℤ)) := (derivedExtension f).universal
@@ -740,6 +552,229 @@ def adicFiniteConstantMap {R S : Type w} [CommRing R] [CommRing S] (f : R →+* 
     constant T R ⟶ constant T S :=
   (constantSheaf T CommRingCat.{w}).map (CommRingCat.ofHom f)
 
+section
+
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+set_option backward.defeqAttrib.useBackward true
+set_option synthInstance.maxSize 2048
+
+-- The two routes round a coefficient square have the same right adjoint.
+-- Identify their left adjoints, keeping track of tensor insertion throughout.
+private noncomputable def adicFiniteRingData
+    {C E : Type w} [SmallCategory C] [SmallCategory E]
+    {JC : GrothendieckTopology C} {JD : GrothendieckTopology E}
+    {L : Sheaf JC (Type w) ⥤ Sheaf JD (Type w)}
+    (V : Sheaf JD (Type w) ⥤ Sheaf JC (Type w)) (adj : L ⊣ V)
+    [PreservesFiniteLimits L] (F : InverseImageData L)
+    {R : Sheaf JC CommRingCat.{w}} {S : Sheaf JD CommRingCat.{w}}
+    (c : F.rings.obj R ⟶ S) :
+    RingedToposMorphism.RingData (siteModuleRings S) (siteModuleRings R) := by
+  let AI := F.algebra R
+  exact
+    { inverse := L
+      direct := V
+      adj := adj
+      leftExact := inferInstance
+      ringMap := AI.ringUnderlying.hom ≫ (sheafCompose JD (CategoryTheory.forget CommRingCat)).map c
+      ring_zero := by
+        intro T z hz U t
+        change (c.hom.app U).hom
+          (AI.ringUnderlying.hom.hom.app U ((L.map z).hom.app U t)) = 0
+        exact (congrArg (fun a ↦ (c.hom.app U).hom a)
+          (AI.ringZero T z hz U t)).trans (map_zero _)
+      ring_one := by
+        intro T z hz U t
+        change (c.hom.app U).hom
+          (AI.ringUnderlying.hom.hom.app U ((L.map z).hom.app U t)) = 1
+        exact (congrArg (fun a ↦ (c.hom.app U).hom a)
+          (AI.ringOne T z hz U t)).trans (map_one _)
+      ring_add := by
+        intro T x y z hz U t
+        change (c.hom.app U).hom
+          (AI.ringUnderlying.hom.hom.app U ((L.map z).hom.app U t)) =
+          (c.hom.app U).hom
+              (AI.ringUnderlying.hom.hom.app U ((L.map x).hom.app U t)) +
+            (c.hom.app U).hom
+              (AI.ringUnderlying.hom.hom.app U ((L.map y).hom.app U t))
+        exact (congrArg (fun a ↦ (c.hom.app U).hom a)
+          (AI.ringAdd T x y z hz U t)).trans (map_add _ _ _)
+      ring_mul := by
+        intro T x y z hz U t
+        change (c.hom.app U).hom
+          (AI.ringUnderlying.hom.hom.app U ((L.map z).hom.app U t)) =
+          (c.hom.app U).hom
+              (AI.ringUnderlying.hom.hom.app U ((L.map x).hom.app U t)) *
+            (c.hom.app U).hom
+              (AI.ringUnderlying.hom.hom.app U ((L.map y).hom.app U t))
+        exact (congrArg (fun a ↦ (c.hom.app U).hom a)
+          (AI.ringMul T x y z hz U t)).trans (map_mul _ _ _) }
+
+private theorem adicFiniteTensorUnit_eq
+    {C : Type w} [SmallCategory C] {JC : GrothendieckTopology C}
+    {R S : Sheaf JC CommRingCat.{w}} (c : R ⟶ S) (M : Mod R) :
+    SheafOfModules.tensorUnit c M = insertion c M := by
+  ext U m
+  exact (SheafOfModules.tensorUnit_apply c M U m).trans
+    ((insertion_existsUnique c M).exists.choose_spec U m).symm
+
+private theorem adicFiniteAdjunction_underlying
+    {C : Type w} [SmallCategory C] {JC : GrothendieckTopology C}
+    {R S : Sheaf JC CommRingCat.{w}} (f : R ⟶ S)
+    (M : Mod R) (N : Mod S) (a : (change f).obj M ⟶ N) :
+    (underlying R).map ((adicFiniteAdjunction f).homEquiv M N a) =
+      insertion f M ≫ (underlying S).map a := by
+  rw [adicFiniteAdjunction_homEquiv]
+  ext U m
+  change (adicFiniteHomEquiv f M N a).val.app U m =
+    a.val.app U ((insertion f M).hom.app U m)
+  rw [show (insertion f M).hom.app U m = tensorSection f M U 1 m from
+    (insertion_existsUnique f M).exists.choose_spec U m]
+  exact adicFiniteHomEquiv_apply f M N a U m
+
+private theorem adicFiniteInsertion_apply
+    {C : Type w} [SmallCategory C] {JC : GrothendieckTopology C}
+    {R S : Sheaf JC CommRingCat.{w}} (f : R ⟶ S) (M : Mod R)
+    (U : Cᵒᵖ) (m : M.val.obj U) :
+    (insertion f M).hom.app U m = tensorSection f M U 1 m :=
+  (insertion_existsUnique f M).exists.choose_spec U m
+
+private theorem adicFiniteChangeComp_insertion
+    {C : Type w} [SmallCategory C] {JC : GrothendieckTopology C}
+    {R S V : Sheaf JC CommRingCat.{w}} (f : R ⟶ S) (g : S ⟶ V) (M : Mod R) :
+    insertion f M ≫ insertion g ((change f).obj M) ≫
+      (underlying V).map ((adicFiniteChangeComp f g).hom.app M) = insertion (f ≫ g) M := by
+  ext U m
+  change ((adicFiniteChangeComp f g).hom.app M).val.app U
+      ((insertion g _).hom.app U ((insertion f _).hom.app U m)) =
+    (insertion (f ≫ g) _).hom.app U m
+  rw [adicFiniteInsertion_apply, adicFiniteInsertion_apply, adicFiniteInsertion_apply]
+  simpa only [map_one, mul_one] using!
+    (adicFiniteChangeComp_existsUnique f g).exists.choose_spec M U 1 1 m
+
+private theorem adicFinitePullScalarSquare
+    {C E : Type w} [SmallCategory C] [SmallCategory E]
+    {JC : GrothendieckTopology C} {JD : GrothendieckTopology E}
+    {L : Sheaf JC (Type w) ⥤ Sheaf JD (Type w)}
+    (V : Sheaf JD (Type w) ⥤ Sheaf JC (Type w)) (adj : L ⊣ V)
+    [PreservesFiniteLimits L] (F : InverseImageData L)
+    {R S : Sheaf JC CommRingCat.{w}} {A B : Sheaf JD CommRingCat.{w}}
+    (f : R ⟶ S) (g : A ⟶ B) (cA : F.rings.obj R ⟶ A) (cB : F.rings.obj S ⟶ B)
+    (hsq : F.rings.map f ≫ cB = cA ≫ g) :
+    ∃! e : pull F cA ⋙ change g ≅ change f ⋙ pull F cB,
+      ∀ M : Mod R,
+        L.map (insertion f M) ≫ pullInsertion F cB ((change f).obj M) =
+          pullInsertion F cA M ≫ insertion g ((pull F cA).obj M) ≫
+            (underlying B).map (e.hom.app M) := by
+  let dB := adicFiniteRingData V adj F cB
+  let d₀ := adicFiniteRingData V adj F (cA ≫ g)
+  have hs : L.map ((sheafCompose JC (CategoryTheory.forget CommRingCat)).map f) ≫ dB.ringMap =
+      d₀.ringMap := by
+    change L.map ((sheafCompose JC (CategoryTheory.forget CommRingCat)).map f) ≫
+      (F.algebra S).ringUnderlying.hom ≫
+        (sheafCompose JD (CategoryTheory.forget CommRingCat)).map cB = _
+    rw [← Category.assoc, F.ring_naturality f, Category.assoc,
+      ← Functor.map_comp, hsq]
+    rfl
+  obtain ⟨md⟩ := SheafOfModules.ringData_inducedModules B S dB
+  let : md.modules.Additive := md.additive
+  let md₀ : d₀.Modules :=
+    { modules := md.modules ⋙ res f
+      additive := inferInstance
+      underlying := md.underlying
+      module_linear := by
+        intro N T a x y z hz U t
+        have h := md.module_linear N T
+          (a ≫ (sheafCompose JC (CategoryTheory.forget CommRingCat)).map f) x y z hz U t
+        change _ = (show N.val.obj U from
+          ((L.map (a ≫ (sheafCompose JC (CategoryTheory.forget CommRingCat)).map f)) ≫
+            dB.ringMap).hom.app U t • _) + _ at h
+        rw [Functor.map_comp, Category.assoc, hs] at h
+        exact h }
+  let b := dB.withModules md
+  let b₀ := d₀.withModules md₀
+  have hcB : (sheafCompose JD (CategoryTheory.forget CommRingCat)).map cB =
+      (F.algebra S).ringUnderlying.inv ≫ b.ringMap := by
+    change _ = _ ≫ ((F.algebra S).ringUnderlying.hom ≫ _)
+    rw [Iso.inv_hom_id_assoc]
+  have hc₀ : (sheafCompose JD (CategoryTheory.forget CommRingCat)).map (cA ≫ g) =
+      (F.algebra R).ringUnderlying.inv ≫ b₀.ringMap := by
+    change _ = _ ≫ ((F.algebra R).ringUnderlying.hom ≫ _)
+    rw [Iso.inv_hom_id_assoc]
+  obtain ⟨aB, haB⟩ := supplied_module_adjunction b (F.rings.obj S) (F.algebra S) cB hcB
+  obtain ⟨a₀, ha₀⟩ := supplied_module_adjunction b₀ (F.rings.obj R)
+    (F.algebra R) (cA ≫ g) hc₀
+  have hB (M : Mod S) (N : Mod B) (k : (pull F cB).obj M ⟶ N) :
+      (underlying S).map (aB.homEquiv M N k) ≫ md.underlying.hom.app N =
+        adj.homEquiv _ _ (pullInsertion F cB M ≫ (underlying B).map k) := by
+    simpa only [pullInsertion, adicFiniteTensorUnit_eq, Category.assoc] using! haB M N k
+  have h₀ (M : Mod R) (N : Mod B) (k : (pull F (cA ≫ g)).obj M ⟶ N) :
+      (underlying R).map (a₀.homEquiv M N k) ≫ md.underlying.hom.app N =
+        adj.homEquiv _ _ (pullInsertion F (cA ≫ g) M ≫ (underlying B).map k) := by
+    simpa only [pullInsertion, adicFiniteTensorUnit_eq, Category.assoc] using! ha₀ M N k
+  let a : change f ⋙ pull F cB ⊣ b₀.modules := (adicFiniteAdjunction f).comp aB
+  have ha (M : Mod R) (N : Mod B) (k : (change f ⋙ pull F cB).obj M ⟶ N) :
+      (underlying R).map (a.homEquiv M N k) ≫ md.underlying.hom.app N =
+        adj.homEquiv _ _ (L.map (insertion f M) ≫
+          pullInsertion F cB ((change f).obj M) ≫ (underlying B).map k) := by
+    change (underlying R).map ((adicFiniteAdjunction f).homEquiv M _
+      (aB.homEquiv _ N k)) ≫ md.underlying.hom.app N = _
+    rw [adicFiniteAdjunction_underlying, Category.assoc, hB]
+    exact (adj.homEquiv_naturality_left _ _).symm
+  let i : pull F (cA ≫ g) ≅ change f ⋙ pull F cB := a₀.leftAdjointUniq a
+  have hi (M : Mod R) :
+      pullInsertion F (cA ≫ g) M ≫ (underlying B).map (i.hom.app M) =
+        L.map (insertion f M) ≫ pullInsertion F cB ((change f).obj M) := by
+    apply (adj.homEquiv _ _).injective
+    rw [← h₀]
+    have h := Adjunction.homEquiv_leftAdjointUniq_hom_app a₀ a M
+    change a₀.homEquiv M _ (i.hom.app M) = _ at h
+    rw [h, ← Adjunction.homEquiv_id]
+    simpa only [Functor.map_id, Category.comp_id] using! ha M _ (𝟙 _)
+  let j : pull F cA ⋙ change g ≅ pull F (cA ≫ g) :=
+    Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft (F.algebra R).modules (adicFiniteChangeComp cA g)
+  have hj (M : Mod R) :
+      pullInsertion F cA M ≫ insertion g ((pull F cA).obj M) ≫
+        (underlying B).map (j.hom.app M) = pullInsertion F (cA ≫ g) M := by
+    change (F.algebra R).moduleUnderlying.inv.app M ≫
+        insertion cA ((F.algebra R).modules.obj M) ≫
+        insertion g ((change cA).obj ((F.algebra R).modules.obj M)) ≫
+        (underlying B).map ((adicFiniteChangeComp cA g).hom.app
+          ((F.algebra R).modules.obj M)) =
+      (F.algebra R).moduleUnderlying.inv.app M ≫
+        insertion (cA ≫ g) ((F.algebra R).modules.obj M)
+    exact congrArg ((F.algebra R).moduleUnderlying.inv.app M ≫ ·)
+      (adicFiniteChangeComp_insertion cA g ((F.algebra R).modules.obj M))
+  let e := j ≪≫ i
+  have he (M : Mod R) :
+      L.map (insertion f M) ≫ pullInsertion F cB ((change f).obj M) =
+        pullInsertion F cA M ≫ insertion g ((pull F cA).obj M) ≫
+          (underlying B).map (e.hom.app M) := by
+    rw [← hi M, ← hj M]
+    change _ = _ ≫ _ ≫ (underlying B).map (j.hom.app M ≫ i.hom.app M)
+    rw [Functor.map_comp, Category.assoc, Category.assoc]
+  refine ⟨e, he, ?_⟩
+  intro e' he'
+  apply Iso.ext
+  apply NatTrans.ext
+  funext M
+  apply (cancel_epi (j.inv.app M)).1
+  apply (a₀.homEquiv M _).injective
+  apply (underlying R).map_injective
+  apply (cancel_mono (md.underlying.hom.app _)).1
+  rw [h₀, h₀]
+  congr 1
+  have hji : pullInsertion F (cA ≫ g) M ≫ (underlying B).map (j.inv.app M) =
+      pullInsertion F cA M ≫ insertion g ((pull F cA).obj M) := by
+    rw [← hj M]
+    simp only [Category.assoc, ← Functor.map_comp, Iso.hom_inv_id_app]
+    erw [CategoryTheory.Functor.map_id, Category.comp_id]
+  rw [Functor.map_comp, Functor.map_comp, ← Category.assoc, ← Category.assoc, hji]
+  exact (he' M).symm.trans (he M)
+
+end
+
 /-- Ordinary comparison commutes with scalar extension, normalized by tensor insertion.
 Proof: inverse image preserves the tensor coequalizer. Both sides send a scalar and
 a module section to the same sheafified pure tensor. The displayed insertion equation
@@ -765,7 +800,16 @@ theorem adicFiniteOrdinaryComparison_existsUnique (X : Scheme.{u})
             ((adicFiniteOrdinaryPullback.{u, v} X A).obj M) ≫
           (underlying (constant (coefficientProEtaleModelTopology.{u, v} X) B)).map
             (e.hom.app M) := by
-  sorry
+  let : PreservesFiniteLimits (smallModelComparisonPullback.{u, v} X) :=
+    smallModelComparisonPullback_preservesFiniteLimits.{u, v} X
+  exact adicFinitePullScalarSquare
+    (smallModelComparisonPushforward.{u, v} X) (smallModelProEtaleComparison.{u, v} X)
+    (adicFiniteComparisonData.{u, v} X)
+    (adicFiniteConstantMap f (smallModelComparisonEtaleTopology.{u, v} X))
+    (adicFiniteConstantMap f (coefficientProEtaleModelTopology.{u, v} X))
+    (constantMap (adicFiniteComparisonData.{u, v} X) A)
+    (constantMap (adicFiniteComparisonData.{u, v} X) B)
+    ((adicFiniteComparisonData.{u, v} X).constants.hom.naturality (CommRingCat.ofHom f))
 
 /-- The ordinary scalar/pullback comparison with its insertion normalization.
 Source: Stacks Tags 06YY, 09C2 and 09AL
@@ -853,26 +897,43 @@ private theorem adicFinitePullChangeComparison
         (extend g).map (pa.comparison.app P) ≫
           (extendComparison g).app (((pull F cA).mapHomologicalComplex (.up ℤ)).obj P) ≫
           (Q W).map ((NatIso.mapHomologicalComplex o (.up ℤ)).hom.app P) := by
-  let := HasDerivedCategory.standard
-    (Mod R)
-  let := HasDerivedCategory.standard
-    (Mod S)
-  let := HasDerivedCategory.standard
-    (Mod V)
-  let := HasDerivedCategory.standard
-    (Mod W)
+  let := HasDerivedCategory.standard (Mod R)
+  let := HasDerivedCategory.standard (Mod S)
+  let := HasDerivedCategory.standard (Mod V)
+  let := HasDerivedCategory.standard (Mod W)
   let j : pull F cA ⋙ change g ≅ pull F (cA ≫ g) :=
     Functor.associator _ _ _ ≪≫
       Functor.isoWhiskerLeft _ (adicFiniteChangeComp cA g)
-  let jC := Functor.isoWhiskerRight (NatIso.mapHomologicalComplex j (.up ℤ)) (Q _)
-  let oC := Functor.isoWhiskerRight (NatIso.mapHomologicalComplex o (.up ℤ)) (Q _)
-  let β₁ := Functor.whiskerRight (pa.comparison) (extend g) ≫
-    Functor.whiskerLeft
-      ((pull F cA).mapHomologicalComplex (.up ℤ))
-      (extendComparison g)
-  let β₂ := Functor.whiskerRight (extendComparison f) (pb.functor) ≫
-    Functor.whiskerLeft ((change f).mapHomologicalComplex (.up ℤ))
-      (pb.comparison)
+  let jC : (pull F cA ⋙ change g).mapHomologicalComplex (.up ℤ) ⋙ Q W ≅
+      (pull F (cA ≫ g)).mapHomologicalComplex (.up ℤ) ⋙ Q W :=
+    NatIso.ofComponents (fun P ↦
+      (Q W).mapIso ((NatIso.mapHomologicalComplex j (.up ℤ)).app P))
+      (fun a ↦ (Functor.isoWhiskerRight
+        (NatIso.mapHomologicalComplex j (.up ℤ)) (Q W)).hom.naturality a)
+  let oC : (pull F cA ⋙ change g).mapHomologicalComplex (.up ℤ) ⋙ Q W ≅
+      (change f ⋙ pull F cB).mapHomologicalComplex (.up ℤ) ⋙ Q W :=
+    NatIso.ofComponents (fun P ↦
+      (Q W).mapIso ((NatIso.mapHomologicalComplex o (.up ℤ)).app P))
+      (fun a ↦ (Functor.isoWhiskerRight
+        (NatIso.mapHomologicalComplex o (.up ℤ)) (Q W)).hom.naturality a)
+  let β₁ : Q R ⋙ (pa.functor ⋙ extend g) ⟶
+      (pull F cA ⋙ change g).mapHomologicalComplex (.up ℤ) ⋙ Q W :=
+    { app := fun P ↦ (extend g).map (pa.comparison.app P) ≫
+        (extendComparison g).app (((pull F cA).mapHomologicalComplex (.up ℤ)).obj P)
+      naturality := by
+        intro P P' a
+        exact (Functor.whiskerRight pa.comparison (extend g) ≫
+          Functor.whiskerLeft ((pull F cA).mapHomologicalComplex (.up ℤ))
+            (extendComparison g)).naturality a }
+  let β₂ : Q R ⋙ (extend f ⋙ pb.functor) ⟶
+      (change f ⋙ pull F cB).mapHomologicalComplex (.up ℤ) ⋙ Q W :=
+    { app := fun P ↦ pb.functor.map ((extendComparison f).app P) ≫
+        pb.comparison.app (((change f).mapHomologicalComplex (.up ℤ)).obj P)
+      naturality := by
+        intro P P' a
+        exact (Functor.whiskerRight (extendComparison f) pb.functor ≫
+          Functor.whiskerLeft ((change f).mapHomologicalComplex (.up ℤ))
+            pb.comparison).naturality a }
   let : d.functor.IsLeftDerivedFunctor d.comparison
       (HomologicalComplex.quasiIso
         (Mod R) (.up ℤ)) :=
@@ -890,18 +951,13 @@ private theorem adicFinitePullChangeComparison
         (((change f).mapHomologicalComplex (.up ℤ)).obj P)) :=
       pb.computation _
           hchange.1 hchange.2
-    have ho (M) : (pull F cA).obj M =
-        SheafOfModules.changeOfRings cA ((F.algebra _).modules.obj M) := rfl
-    have hm {M N} (a : M ⟶ N) : (pull F cA).map a =
-        eqToHom (ho M) ≫ SheafOfModules.changeOfRingsHom cA
-          ((F.algebra _).modules.obj M) ((F.algebra _).modules.map a) ≫
-            eqToHom (ho N).symm := by
-      simp only [eqToHom_refl, Category.id_comp, Category.comp_id]
-      rfl
     have hpull := SheafOfModules.isKFlat_ringedToposPullback
       L U
       adj (F.algebra _) cA
-      (pull F cA) ho hm P hP (fun q ↦ by
+      (pull F cA) (fun _ ↦ rfl)
+      (fun a ↦ by
+        simp only [eqToHom_refl, Category.id_comp, Category.comp_id]
+        rfl) P hP (fun q ↦ by
         exact ObjectProperty.prop_of_iso (exactFunctor _ _)
           (SheafOfModules.siteSheafTensorRightIso _ (P.X q)).symm (hf q))
     have hs : IsIso ((extendComparison g).app
@@ -929,13 +985,22 @@ private theorem adicFinitePullChangeComparison
     (fun P hP ↦ hcomp P hP.1 hP.2)
   refine ⟨e, ?_, ?_⟩
   · intro P hP hf
-    simpa only [β₁, β₂, oC, Functor.isoWhiskerRight, NatTrans.comp_app,
-      Functor.whiskerRight_app, Functor.whiskerLeft_app, Category.assoc] using! he P ⟨hP, hf⟩
+    have h := he P ⟨hP, hf⟩
+    change e.hom.app ((Q R).obj P) ≫ pb.functor.map ((extendComparison f).app P) ≫
+        pb.comparison.app (((change f).mapHomologicalComplex (.up ℤ)).obj P) =
+      ((extend g).map (pa.comparison.app P) ≫
+        (extendComparison g).app (((pull F cA).mapHomologicalComplex (.up ℤ)).obj P)) ≫
+        (Q W).map ((NatIso.mapHomologicalComplex o (.up ℤ)).hom.app P) at h
+    exact h.trans (Category.assoc _ _ _)
   · intro e' he'
     apply hu e'
     rintro P ⟨hP, hf⟩
-    simpa only [β₁, β₂, oC, Functor.isoWhiskerRight, NatTrans.comp_app,
-      Functor.whiskerRight_app, Functor.whiskerLeft_app, Category.assoc] using! he' P hP hf
+    change e'.hom.app ((Q R).obj P) ≫ pb.functor.map ((extendComparison f).app P) ≫
+        pb.comparison.app (((change f).mapHomologicalComplex (.up ℤ)).obj P) =
+      ((extend g).map (pa.comparison.app P) ≫
+        (extendComparison g).app (((pull F cA).mapHomologicalComplex (.up ℤ)).obj P)) ≫
+        (Q W).map ((NatIso.mapHomologicalComplex o (.up ℤ)).hom.app P)
+    exact (he' P hP hf).trans (Category.assoc _ _ _).symm
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
