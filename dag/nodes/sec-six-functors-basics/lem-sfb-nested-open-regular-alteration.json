@@ -16,11 +16,163 @@
   "def-weil-surjective-morphism",
   "def-weil-regular-scheme",
   "def-weil-proper-morphism",
-  "def-trf-strict-normal-crossings-boundary"
+  "def-trf-strict-normal-crossings-boundary",
+  "def-sc-function-field",
+  "def-pc-field-extension",
+  "def-pc-fibre-product",
+  "def-weil-universal-homeomorphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $K=k(T)$. Choose a point of the nonempty finite etale generic fibre $H_K$ and let $F$ be its residue field; $F/K$ is finite. Let $q:X\\to T$ be the normalization of $T$ in $F$. By the normalization-in-a-residue-field node, $X$ is normal integral with function field $F$; by finiteness of normalization over a field, $q$ is finite. It is proper by finite-proper, and its image is closed and contains the generic point, hence it is surjective. Over an affine open of $S$, the integral-closure description of normalization is unchanged on localization. Thus $X_S$ is the normalization of $S$ in $\\operatorname{Spec}F$. Apply the relative-normalization universal property to $\\operatorname{Spec}F\\to H\\to S$, whose second arrow is integral: this supplies $X_S\\to H$ over $S$. This argument uses a field factor of $H_K$, not an unsupported assertion that connected $H$ is integral.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-normalization-in-residue-field-extension",
+    "def-fin-normalization-extension",
+    "lem-fin-normalization-extension-finite",
+    "lem-weil-pbc-finite-proper",
+    "lem-weil-pbc-proper-closed-image",
+    "lem-sbc-relative-normalization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 035H (definition-normalization-X-in-Y), 035I (lemma-characterize-normalization), 035K (lemma-normalization-localization), 035L (lemma-normal-normalization); finite normalization over field: Tag 035B, lemma-ubiquity-nagata."
+   }
+  },
+  {
+   "text": "The scheme $X$ is separated finite type over $k$, hence Noetherian. Set $U=q^{-1}S\\subseteq U^\\circ=q^{-1}T^\\circ$; both are dense quasi-compact opens. Choose finite-type quasi-coherent ideals $\\mathcal I,\\mathcal J$ with $V(\\mathcal I)=X\\setminus U$, $V(\\mathcal J)=X\\setminus U^\\circ$. Let $b_1:B_1=\\operatorname{Bl}_{\\mathcal I}(X)\\to X$, $b_2:B=\\operatorname{Bl}_{\\mathcal J\\mathcal O_{B_1}}(B_1)\\to B_1$, $b=b_1b_2$. As $\\mathcal J|_U=\\mathcal O_U$, $b_2$ is a $b_1^{-1}(U)$-admissible blowup. The boundary-divisor lemma, with its clause on a further admissible blowup, makes $I_B=\\mathcal I\\mathcal O_B$ effective Cartier with support $B\\setminus b^{-1}U$ and $b^{-1}U$ scheme-theoretically dense in $B$; the Cartier-total-transform lemma gives the same Cartier property. Applied to $B_1$, $b_1^{-1}U^\\circ$ and $\\mathcal J\\mathcal O_{B_1}$, it makes $J_B=\\mathcal J\\mathcal O_B$ effective Cartier with support $B\\setminus b^{-1}U^\\circ$. The blowup-complement theorem makes $b_1$ an isomorphism over $U$ and $b_2$ one over $B_1\\setminus V(\\mathcal J\\mathcal O_{B_1})\\supseteq b_1^{-1}U$, so $b^{-1}U\\to U$ is an isomorphism and $b^{-1}U$ is integral with function field $F$. Hence $B$ is integral: it is nonempty, and for a nonempty affine open $V\\subseteq B$ density makes $\\mathcal O_B(V)\\to\\mathcal O_B(V\\cap b^{-1}U)$ injective, so $V\\cap b^{-1}U\\neq\\varnothing$; sections of the integral $b^{-1}U$ over a nonempty open inject into $F$, because they do on each nonempty affine of a cover (affine-fraction lemma), so $\\mathcal O_B(V)$ is a domain. Thus $k(B)=F$ and $b$ is dominant. Blowup properness and proper composition make $b$ proper. Empty complements give unit ideals and identity blowups.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lemma-nagata-qc-open-complement-ideal-exists",
+    "def-nagata-admissible-blowup",
+    "det-nagata-boundary-divisor-cartier",
+    "def-nagata-scheme-theoretically-dense-open",
+    "lemma-nagata-cartier-total-transform-blowup",
+    "thm-nagata-global-blowup-complement",
+    "def-pc-integral-scheme",
+    "lem-sc-integral-function-field-affine-fraction",
+    "lemma-nagata-blowup-proper",
+    "lem-weil-pbc-proper-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 02OS (lemma-blowing-up-gives-effective-Cartier-divisor), 0809 (lemma-blow-up-pullback-effective-Cartier), 0805 (lemma-flat-base-change-blowing-up, for the open complement of the center) and 01OK (definition-integral), applied separately to the two ideals; integrality of $B$ from scheme-theoretic density of $b^{-1}U$ instead of Tag 02ND."
+   }
+  },
+  {
+   "text": "Choose a prime $\\ell\\ne p$ and apply the global Gabber theorem to $B$ and $Z=B\\setminus b^{-1}U$. It gives $a:P\\to B$ with $P$ smooth over a finite extension $k'/k$ and reduced inverse-image boundary relative strict normal crossings. Smooth-over-a-field regularity makes $P$ regular. The regular-normal-components node decomposes this Noetherian scheme into finitely many open-and-closed integral components. Choose one component $Y$; by the maximal-domination clause of Gabber's theorem its generic point maps to the generic point of $B$. Restrict $a$ and its boundary to $Y$. This remains proper (restriction to an open-and-closed component is a closed inclusion followed by $a$), dominant and generically finite. The restricted boundary $D=\\bigcup_{a\\in A}D_a$ has finitely many components and is strict normal crossings; it is regular in the sense of the regular-scheme boundary definition [def-trf-strict-normal-crossings-boundary] because all the relative intersections are smooth over $k'$. Set $h=qba|_Y$. By proper composition $h$ is proper. It is dominant, and $k(Y)/k(T)$ is finite, since $k(Y)/F$ and $F/K$ are finite. All schemes used are separated finite type over $k$.",
+   "uses": [
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "rem-pc-regular-normal",
+    "lem-weil-pbc-proper-composition",
+    "def-weil-proper-morphism",
+    "def-trf-strict-normal-crossings-boundary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X Theorem 2.1, printed p.149; VIII Remark 4.2.2(i), regular-intersection criterion. Choose an integral component over the integral target."
+   }
+  },
+  {
+   "text": "Pull back $I_B,J_B$ to $Y$. Both extended ideals are still effective Cartier: a local generator is nonzero in the function field of $B$, hence remains nonzero in $k(Y)$ by dominance, and every local ring of $Y$ is a domain. Their supports are $Y\\setminus h^{-1}S$ and $Y\\setminus h^{-1}T^\\circ$; the first is exactly $|D|$. To check that the second is a union of whole components, work locally at $y\\in Y$. The Gabber boundary has parameter equations $t_1,\\ldots,t_r$ there. A generator $f$ of the second ideal becomes a unit off $D$, because its zero set is contained in $|D|$. In $\\mathcal O_{Y,y}[1/(t_1\\cdots t_r)]$ it is therefore a unit. The regular-local-UFD boundary-factorization node gives $f=v\\prod t_i^{n_i}$ with $v$ a unit and $n_i\\ge0$. Consequently its support is locally a union of the branches of $D$. At every point of this support at least one branch through the point is selected, and its generic point also lies in the support. Since the support is closed, it contains that whole $D_a$. Conversely every selected component lies in the support. Thus, with $A_{\\rm out}$ the components whose generic points lie in it, the support is $\\bigcup_{a\\in A_{\\rm out}}D_a$. This proves both required open identities without asserting normal crossings for any later shrinking.",
+   "uses": [
+    "lem-trf-regular-local-ufd-boundary-factorization",
+    "lem-sfb-gabber-global-snc-alteration",
+    "def-nagata-effective-cartier-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X Theorem 2.1 for the boundary parameter equations; VIII 4.1.2, 4.2.2(i); the displayed factorization is the regular-local UFD consequence of Stacks Tag 0AG0."
+   }
+  },
+  {
+   "text": "Put $W=h^{-1}S$. The morphism $r:W\\to S$ is proper by base change. It is surjective: the proper image of $h$ is closed and contains the generic point of integral $T$, hence is all of $T$, so its restriction over $S$ is onto. The composite $W\\to X_S\\to H$ from step 1 factors $r$ through $c$. The open $W$ is nonempty integral. The affine-fraction-field lemma identifies every nonempty affine chart of the generic fibre with a finitely generated $K$-subalgebra of $L=k(Y)$. Its generators are algebraic over $K$, so it is a finite-dimensional domain, hence a field, necessarily $L$. These charts all contain the generic point; consequently the whole generic fibre is $\\operatorname{Spec}L$. Apply the generic-finiteness lemma to obtain a nonempty affine open $\\operatorname{Spec}A\\subseteq S$ on which $r$ is finite. Write its inverse image as $\\operatorname{Spec}E$, with $E$ a finite $A$-algebra domain and $E\\otimes_AK=L$.",
+   "uses": [
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-proper-closed-image",
+    "def-weil-finite-integral-morphism",
+    "def-sc-function-field",
+    "lem-sc-integral-function-field-affine-fraction",
+    "lem-weil-pbc-generic-finite-morphism-open-neighborhood"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02NW (lemma-generically-finite), equivalences (1),(4), applied at the generic point of integral S. The generic fibre is the localization of affine domains at nonzero base elements, hence a finite-type subalgebra of the algebraic extension L/K; it is a field."
+   }
+  },
+  {
+   "text": "Let $K'\\subseteq L$ be the separable closure of $K$ in $L$. The separable-first lemma gives $K'/K$ finite separable and $L/K'$ finite purely inseparable. Choose a primitive element $\\alpha\\in K'$ and write its monic separable minimal polynomial as $g\\in K[T]$. Apply the localized separable-polynomial model lemma and replace $A$ by the resulting nonzero principal localization, so $g\\in A[T]$ and $g$ is coprime to $g'$. Put $A'=A[T]/(g)$. Division by the monic polynomial shows that $1,T,\\ldots,T^{d-1}$ is an $A$-basis, where $d=\\deg g=[K':K]\\ge1$, and the map $A'\\to K'$ sending $T$ to $\\alpha$ is injective: a representative of degree less than $d$ which vanishes at $\\alpha$ is zero over $K$, hence over the domain $A$. Thus $A'$ is a domain with fraction field $K'$. The Bezout relation makes $g'$ a unit in $A'$, so the standard-etale monic-derivative lemma says $\\operatorname{Spec}A'\\to\\operatorname{Spec}A$ is etale. Its displayed free basis makes it finite and surjective of constant degree $d$.",
+   "uses": [
+    "lem-weil-pbc-separable-first-purely-inseparable",
+    "lem-weil-pbc-finite-separable-extension-primitive-element",
+    "lem-weil-pbc-localized-separable-polynomial-model",
+    "lem-weil-pbc-standard-etale-monic-derivative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 030K, lemma-separable-first; primitive element and polynomial spreading as cited. Etale polynomial model: algebra.tex Tags 00UB (definition-standard-etale), 00UC (lemma-standard-etale)."
+   }
+  },
+  {
+   "text": "As $E\\otimes_AK=L$, write $\\alpha=z/s$ with $z\\in E$ and $0\\ne s\\in A$. After replacing $A$ by $A[1/s]$ and $E,A'$ by their corresponding base localizations, $\\alpha\\in E$, and evaluation defines an injective $A$-algebra map $A'\\hookrightarrow E$ compatible with the embeddings in $L$. The finite $A$-module generators of $E$ also generate $E$ as an $A'$-module: their $A'$-span contains their $A$-span, which is already all of $E$. Hence $E$ is finite over $A'$. Apply the spreading-purely-inseparable-factors lemma to the Noetherian domain $A$, the finite etale domain $A'$, and the finite domain $E$, with fraction fields $K,K',L$. It gives a further nonzero base localization on which $\\operatorname{Spec}E\\to\\operatorname{Spec}A'$ is surjective radicial and a universal homeomorphism; it is finite by the preceding module argument. Let $S_0$ be this final principal open in $S$, $T_0=\\operatorname{Spec}A'$ over it, and $W_0=\\operatorname{Spec}E$. The maps $u:W_0\\to T_0$ and $e:T_0\\to S_0$ have all the asserted properties. The rank-$d$ free polynomial basis persists under each localization. All localizations are by nonzero elements, so $S_0$ remains nonempty dense.",
+   "uses": [
+    "lem-weil-pbc-spread-purely-inseparable-factors",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-finite-pushforward-generic-constructible.md",
+    "place": "Finite-algebra spreading calculation, applied to the separable-first factorization. Underlying algebra: Stacks Tags 00GQ, 0BR5, 01S2 as stated in the cited node."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-normalization-in-residue-field-extension",
+  "def-fin-normalization-extension",
+  "lem-fin-normalization-extension-finite",
+  "lem-weil-pbc-finite-proper",
+  "lem-weil-pbc-proper-closed-image",
+  "lem-sbc-relative-normalization-universal-property",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lemma-nagata-qc-open-complement-ideal-exists",
+  "def-nagata-admissible-blowup",
+  "det-nagata-boundary-divisor-cartier",
+  "def-nagata-scheme-theoretically-dense-open",
+  "lemma-nagata-cartier-total-transform-blowup",
+  "thm-nagata-global-blowup-complement",
+  "def-pc-integral-scheme",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lemma-nagata-blowup-proper",
+  "lem-weil-pbc-proper-composition",
+  "lem-sfb-gabber-global-snc-alteration",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "rem-pc-regular-normal",
+  "def-weil-proper-morphism",
+  "def-trf-strict-normal-crossings-boundary",
+  "lem-trf-regular-local-ufd-boundary-factorization",
+  "def-nagata-effective-cartier-ideal",
+  "lem-weil-pbc-proper-base-change",
+  "def-sc-function-field",
+  "lem-weil-pbc-generic-finite-morphism-open-neighborhood",
+  "lem-weil-pbc-separable-first-purely-inseparable",
+  "lem-weil-pbc-finite-separable-extension-primitive-element",
+  "lem-weil-pbc-localized-separable-polynomial-model",
+  "lem-weil-pbc-standard-etale-monic-derivative",
+  "lem-weil-pbc-spread-purely-inseparable-factors"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "X Theorem 2.1, printed p.149, combined with the cited Stacks normalization, blowup and generic finite-algebra arguments. This nested-boundary and prescribed-cover assembly is written by NO."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,10 +208,45 @@
    "results": "8 hits: AlgebraicGeometry.Scheme.Etale, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, StandardEtalePresentation, AlgebraicGeometry.Scheme.Hom.normalizationOpenCover, AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsSmoothOfRelativeDimension",
    "date": "2026-10-21",
    "verdict": "no match: the results do not state the specified geometric or lisse-coefficient assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Regular alteration of a variety adapted to nested dense opens and dominating a prescribed finite etale cover",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰S, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.IsDominant.isZariskiLocalAtTarget, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.Scheme.PartialMap.exists_restrict_isOver",
+   "date": "2026-10-21",
+   "verdict": "no match: none states the global regular SNC alteration theorem or the prescribed-cover nested-open consequence"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsProper\", \"IsRegular\"",
+   "results": "2 hits: SSet.Subcomplex.Pairing.IsRegular.toIsProper, SSet.Subcomplex.PairingCore.IsRegular.toIsProper",
+   "date": "2026-10-21",
+   "verdict": "no match: none states the global regular SNC alteration theorem or the prescribed-cover nested-open consequence"
+  },
+  {
+   "tool": "grep",
+   "query": "alteration|strictNormalCrossing|strict_normal_crossing",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: none states the global regular SNC alteration theorem or the prescribed-cover nested-open consequence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Gabber global projective alteration of a variety with strict normal crossings boundary",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization, AlgebraicGeometry.isProper_eq, AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization, AlgebraicGeometry.isSmooth_isStableUnderBaseChange, AlgebraicGeometry.Scheme.Hom.toNormalization, LibraryNote.Design_choices_about_smooth_algebraic_structures, AlgebraicGeometry.Proj.fromOfGlobalSections_resLE, AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom",
+   "date": "2026-10-21",
+   "verdict": "no match: none states the global regular SNC alteration theorem or the prescribed-cover nested-open consequence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper generically finite morphism from a regular scheme with strict normal crossings inverse image of a closed subset",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization, AlgebraicGeometry.QuasiSeparated, AlgebraicGeometry.instIsClosedImmersionLiftCoborder, AlgebraicGeometry.Scheme.Hom.normalizationOpenCover, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization",
+   "date": "2026-10-21",
+   "verdict": "no match: none states the global regular SNC alteration theorem or the prescribed-cover nested-open consequence"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-tame-pair-proper-generators",
@@ -81,5 +268,139 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-nested-open-regular-alteration",
+  "worker": "stage1",
+  "summary": "Read ILO X 2.1 and VIII 4.2.2(i). Normalize in a generic field factor of the prescribed cover, principalize the two boundary ideals separately, apply the global (not local-uniformization) alteration theorem, and obtain the generic factorization by explicit separable polynomial spreading. One new general single-boundary alteration input, no new clause-restatement nodes.",
+  "blueprint": "The item has no imported blueprint ancestor (blueprint_refs ancestor returns None). It serves det-thm-sf-ctf-stability-direct-images proof (3), below tame-pair proper generators. Steps 1--4 supply the coefficient-independent nested-boundary construction; steps 5--7 supply the proper prescribed-cover map and its generic radicial/etale factorization.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-normalization-in-residue-field-extension",
+    "why": "Generic geometric/algebraic tool for Put $K=k(T)$. Choose a point of the nonempty finite etale generic fibre $H_K$ and let $F$ be its res; the constructible-finite-Tor unit has no statement supplying this fact."
+   },
+   {
+    "node": "lem-fin-normalization-extension-finite",
+    "why": "Generic geometric/algebraic tool for Put $K=k(T)$. Choose a point of the nonempty finite etale generic fibre $H_K$ and let $F$ be its res; the constructible-finite-Tor unit has no statement supplying this fact."
+   },
+   {
+    "node": "lem-weil-pbc-finite-proper",
+    "why": "Generic geometric/algebraic tool for Put $K=k(T)$. Choose a point of the nonempty finite etale generic fibre $H_K$ and let $F$ be its res; the constructible-finite-Tor unit has no statement supplying this fact."
+   },
+   {
+    "node": "lem-weil-pbc-proper-closed-image",
+    "why": "Generic geometric/algebraic tool for Put $K=k(T)$. Choose a point of the nonempty finite etale generic fibre $H_K$ and let $F$ be its res; the constructible-finite-Tor unit has no statement supplying this fact."
+   },
+   {
+    "node": "lem-sbc-relative-normalization-universal-property",
+    "why": "Generic geometric/algebraic tool for Put $K=k(T)$. Choose a point of the nonempty finite etale generic fibre $H_K$ and let $F$ be its res; the constructible-finite-Tor unit has no statement supplying this fact."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic geometric/algebraic tool for The scheme $X$ is separated finite type over $k$, hence Noetherian. Set $U=q^{-1}S$ and $U^\\circ=q^{; the constructible-finite-Tor unit has no statement supplying this fact."
+   },
+   {
+    "node": "lemma-nagata-qc-open-complement-ideal-exists",
+    "why": "Generic geometric/algebraic tool for The scheme $X$ is separated finite type over $k$, hence Noetherian. Set $U=q^{-1}S$ and $U^\\circ=q^{; the constructible-finite-Tor unit has no statement supplying this fact."
+   },
+   {
+    "node": "det-nagata-boundary-divisor-cartier",
+    "why": "Generic geometric/algebraic tool for The scheme $X$ is separated finite type over $k$, hence Noetherian. Set $U=q^{-1}S$ and $U^\\circ=q^{; the constructible-finite-Tor unit has no statement supplying this fact."
+   },
+   {
+    "node": "lemma-nagata-blowup-proper",
+    "why": "Generic geometric/algebraic tool for The scheme $X$ is separated finite type over $k$, hence Noetherian. Set $U=q^{-1}S$ and $U^\\circ=q^{; the constructible-finite-Tor unit has no statement supplying this fact."
+   },
+   {
+    "node": "lemma-nagata-cartier-total-transform-blowup",
+    "why": "Generic geometric/algebraic tool for The scheme $X$ is separated finite type over $k$, hence Noetherian. Set $U=q^{-1}S$ and $U^\\circ=q^{; the constructible-finite-Tor unit has no statement supplying this fact."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "why": "Generic geometric/algebraic tool for Choose a prime $\\ell\\ne p$ and apply the global Gabber theorem to $B$ and $Z=B\\setminus b^{-1}U$. It; the constructible-finite-Tor unit has no statement supplying this fact."
+   },
+   {
+    "node": "rem-pc-regular-normal",
+    "why": "Generic geometric/algebraic tool for Choose a prime $\\ell\\ne p$ and apply the global Gabber theorem to $B$ and $Z=B\\setminus b^{-1}U$. It; the constructible-finite-Tor unit has no statement supplying this fact."
+   },
+   {
+    "node": "lem-weil-pbc-proper-composition",
+    "why": "Generic geometric/algebraic tool for Choose a prime $\\ell\\ne p$ and apply the global Gabber theorem to $B$ and $Z=B\\setminus b^{-1}U$. It; the constructible-finite-Tor unit has no statement supplying this fact."
+   },
+   {
+    "node": "lem-trf-regular-local-ufd-boundary-factorization",
+    "why": "Generic geometric/algebraic tool for Pull back $I_B,J_B$ to $Y$. Both extended ideals are still effective Cartier: a local generator is n; the constructible-finite-Tor unit has no statement supplying this fact."
+   },
+   {
+    "node": "lem-weil-pbc-proper-base-change",
+    "why": "Generic geometric/algebraic tool for Put $W=h^{-1}S$. The morphism $r:W\\to S$ is proper by base change. It is surjective: the proper imag; the constructible-finite-Tor unit has no statement supplying this fact."
+   },
+   {
+    "node": "lem-sc-integral-function-field-affine-fraction",
+    "why": "Generic geometric/algebraic tool for Put $W=h^{-1}S$. The morphism $r:W\\to S$ is proper by base change. It is surjective: the proper imag; the constructible-finite-Tor unit has no statement supplying this fact."
+   },
+   {
+    "node": "lem-weil-pbc-generic-finite-morphism-open-neighborhood",
+    "why": "Generic geometric/algebraic tool for Put $W=h^{-1}S$. The morphism $r:W\\to S$ is proper by base change. It is surjective: the proper imag; the constructible-finite-Tor unit has no statement supplying this fact."
+   },
+   {
+    "node": "lem-weil-pbc-separable-first-purely-inseparable",
+    "why": "Generic geometric/algebraic tool for Let $K'\\subseteq L$ be the separable closure of $K$ in $L$. The separable-first lemma gives $K'/K$ f; the constructible-finite-Tor unit has no statement supplying this fact."
+   },
+   {
+    "node": "lem-weil-pbc-finite-separable-extension-primitive-element",
+    "why": "Generic geometric/algebraic tool for Let $K'\\subseteq L$ be the separable closure of $K$ in $L$. The separable-first lemma gives $K'/K$ f; the constructible-finite-Tor unit has no statement supplying this fact."
+   },
+   {
+    "node": "lem-weil-pbc-localized-separable-polynomial-model",
+    "why": "Generic geometric/algebraic tool for Let $K'\\subseteq L$ be the separable closure of $K$ in $L$. The separable-first lemma gives $K'/K$ f; the constructible-finite-Tor unit has no statement supplying this fact."
+   },
+   {
+    "node": "lem-weil-pbc-standard-etale-monic-derivative",
+    "why": "Generic geometric/algebraic tool for Let $K'\\subseteq L$ be the separable closure of $K$ in $L$. The separable-first lemma gives $K'/K$ f; the constructible-finite-Tor unit has no statement supplying this fact."
+   },
+   {
+    "node": "lem-weil-pbc-spread-purely-inseparable-factors",
+    "why": "Generic geometric/algebraic tool for As $E\\otimes_AK=L$, write $\\alpha=z/s$ with $z\\in E$ and $0\\ne s\\in A$. After replacing $A$ by $A[1/; the constructible-finite-Tor unit has no statement supplying this fact."
+   },
+   {
+    "node": "thm-nagata-global-blowup-complement",
+    "why": "Generic blowup fact for step 2: the blowup is an isomorphism off its center, used to identify $b^{-1}U$ with $U$; the constructible-finite-Tor unit has no statement supplying this fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-normalization-in-residue-field-extension",
+  "lem-fin-normalization-extension-finite",
+  "lem-weil-pbc-finite-proper",
+  "lem-weil-pbc-proper-closed-image",
+  "lem-sbc-relative-normalization-universal-property",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lemma-nagata-qc-open-complement-ideal-exists",
+  "det-nagata-boundary-divisor-cartier",
+  "lemma-nagata-blowup-proper",
+  "lemma-nagata-cartier-total-transform-blowup",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "rem-pc-regular-normal",
+  "lem-weil-pbc-proper-composition",
+  "lem-trf-regular-local-ufd-boundary-factorization",
+  "lem-weil-pbc-proper-base-change",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-weil-pbc-generic-finite-morphism-open-neighborhood",
+  "lem-weil-pbc-separable-first-purely-inseparable",
+  "lem-weil-pbc-finite-separable-extension-primitive-element",
+  "lem-weil-pbc-localized-separable-polynomial-model",
+  "lem-weil-pbc-standard-etale-monic-derivative",
+  "lem-weil-pbc-spread-purely-inseparable-factors",
+  "thm-nagata-global-blowup-complement"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NO-72b2f0f41",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-72b2f0f41 (reviewer sub-agent of L); spot-checked: Read in full: the item, the new node, every cited statement, and ILO X §2 (pp.148-149: the l'-alteration definition, Thm 2.1, and the relative SNC definition). The item and its citer tame-pair-proper-generators are live; the live item is unsplit with an identical statement; there is no repair note. NEW NODE lem-sfb-gabber-global-snc-alteration is a faithful statement-only version of X 2.1: hypotheses k any field, l != char k, X separated of finite type, Z nowhere dense; conclusions k' of degree prime to l, a projective l'-alteration with maximal domination and prime-to-l residue degrees, P smooth quasi-projective over k', and a relative SNC boundary. Its added parameter clause and its 'SNC boundary in the regular sense' clause follow from regularity of the D_J (the t_i are independent in m/m^2). Edge cases checked: X empty, Z empty, dimension 0. It duplicates no node: the IX 1.1 covering family, the local standard form, the plurinodal (algebraically closed trait) node and the de Jong curve-fibration nodes all state something else. It is not a restatement of the item. STEPS: 1 (normalization in a residue field F of H_K, finite, with the map X_S->H from the relative-normalization universal property), 3 (Gabber applied to B and B\\b^-1U, then an open-and-closed integral component), 4 (localization-unit clause of the 0AG0 UFD lemma, then local-to-global through the generic points of the components), 5 (generic fibre = Spec L, then 02NW), 6 (030K, primitive element, Bezout from the polynomial model, standard etale) and 7 (spreading of purely inseparable factors, with E finite over A') are all correct, with every hypothesis in force. FAULT, fixed (Artin-Gabber finding): step 2 cited the dropped lem-per-integral-blowup-projective-geometry (drop list line 1653) only to get B integral; projectivity was unused. No live node states 02ND. The fixed step derives integrality from the density clause of det-nagata-boundary-divisor-cartier plus thm-nagata-global-blowup-complement, def-nagata-scheme-theoretically-dense-open, lem-sc-integral-function-field-affine-fraction and def-pc-integral-scheme. The step source now cites 02OS/0809/0805/01OK, proof_deps are recomputed, the dropped id is removed from tool_uses, and blowup-complement is added there. The fixed closure (615 nodes) meets no dropped id and has no cycle. BATCH 5: def-trf-projective-bundle-morphism and def-trf-strict-normal-crossings-boundary are general definitions, so accepted. The closure of lem-trf-regular-local-ufd-boundary-factorization (0AG0 via K0/Pic/height-one) is pure commutative algebra and part of neither assumption, so accepted. No poincare/trace-transport node is reached. No SGA is cited. The declared generic tool_uses are accepted.; 1 file(s) fixed by the reviewer"
  }
 }
