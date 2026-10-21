@@ -3,25 +3,189 @@
  "blueprint": {
   "is": "def-wf-lie-radical-centre",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Solvable radical and centre of a Lie algebra",
- "statement": "For a finite-dimensional Lie algebra $\\mathfrak g$, its solvable\nradical $\\operatorname{rad}(\\mathfrak g)$ is the sum of all solvable\nideals (solvability and ideals as in [def-wf-lie-algebra]), and its centre is\n\n$$\n\\mathfrak z(\\mathfrak g)=\\{X\\in\\mathfrak g:[X,Y]=0\\text{ for all }Y\\in\\mathfrak g\\}.\n$$\n\nThat this sum is again solvable, and is therefore the unique largest\nsolvable ideal of $\\mathfrak g$, is\nrecorded with the other properties of this notion;",
+ "statement": "For a finite-dimensional Lie algebra $\\mathfrak g$, its solvable\nradical $\\operatorname{rad}(\\mathfrak g)$ is the sum of all solvable\nideals (solvability and ideals as in [def-wf-lie-algebra]), and its centre is\n\n$$\n\\mathfrak z(\\mathfrak g)=\\{X\\in\\mathfrak g:[X,Y]=0\\text{ for all }Y\\in\\mathfrak g\\}.\n$$\n\nThe sum $\\operatorname{rad}(\\mathfrak g)$ is again solvable, and is\ntherefore the unique largest solvable ideal of $\\mathfrak g$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-d-lie/def-wf-lie-radical-centre.md",
   "place": "node def-wf-lie-radical-centre, order 2465"
  },
  "stmt_deps": [
-  "def-wf-lie-algebra",
-  "def-wf-semisimple-lie-algebra"
+  "def-wf-lie-algebra"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "def radical|radicalIsSolvable|solvable_iff_le_radical|def center|abbrev center",
+   "results": "7 hit(s); returned top entries: Mathlib/Algebra/Lie/Solvable.lean; Mathlib/Algebra/Lie/Solvable.lean; Mathlib/Algebra/Lie/Solvable.lean; Mathlib/Algebra/Lie/Solvable.lean; Mathlib/Algebra/Lie/Abelian.lean; Mathlib/Algebra/Lie/CartanCriterion.lean; Mathlib/Algebra/Lie/Semisimple/Basic.lean; searched Mathlib/Algebra/Lie",
+   "date": "2026-10-21",
+   "verdict": "match: radical, radicalIsSolvable, LieAlgebra.LieIdeal.solvable_iff_le_radical; centre supplied by Abelian.lean"
+  },
+  {
+   "tool": "grep",
+   "query": "def radical|radicalIsSolvable|solvable_iff_le_radical|def center|mem_center|mem_maxTrivSubmodule|isNoetherian_of_finite",
+   "results": "18 hit(s); returned top entries: Mathlib/Algebra/Lie/Solvable.lean; Mathlib/Algebra/Lie/Solvable.lean; Mathlib/Algebra/Lie/Solvable.lean; Mathlib/Algebra/Lie/Solvable.lean; Mathlib/Algebra/Lie/Abelian.lean; Mathlib/Algebra/Lie/Abelian.lean; Mathlib/Algebra/Lie/Abelian.lean; Mathlib/Algebra/Lie/Abelian.lean; searched Mathlib/Algebra/Lie",
+   "date": "2026-10-21",
+   "verdict": "match: radical, radicalIsSolvable, LieAlgebra.LieIdeal.solvable_iff_le_radical; centre supplied by Abelian.lean"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The radical of a finite dimensional Lie algebra is its largest solvable ideal and the center consists of elements commuting with all elements.",
+   "results": "8 hit(s); returned top entries: LieAlgebra.radical; LieAlgebra.HasCentralRadical.radical_eq_center; LieAlgebra.center; LieAlgebra.HasTrivialRadical.mk; LieAlgebra.center_le_radical; LieAlgebra.radicalIsSolvable; LieAlgebra.HasCentralRadical.mk; LieAlgebra.hasCentralRadical_of_radical_le",
+   "date": "2026-10-21",
+   "verdict": "match: clauses covered by the recorded Mathlib declarations, with the finite-dimensional specialization described in mathlib_match"
+  },
+  {
+   "tool": "loogle",
+   "query": "LieAlgebra.radical, LieAlgebra.center",
+   "results": "5 hit(s); returned top entries: LieAlgebra.center_le_radical; LieAlgebra.HasCentralRadical.mk; LieAlgebra.HasCentralRadical.radical_eq_center; LieAlgebra.hasCentralRadical_iff; LieAlgebra.hasCentralRadical_of_radical_le",
+   "date": "2026-10-21",
+   "verdict": "no match: these hits concern central radicals, not the full definition bundle"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The solvable radical of a finite dimensional Lie algebra is the sum of all solvable ideals and is the largest solvable ideal; the center consists of elements whose brackets with every element vanish.",
+   "results": "8 hit(s); returned top entries: LieAlgebra.radical; LieAlgebra.radicalIsSolvable; LieAlgebra.radical_eq_top_of_isSolvable; LieAlgebra.LieIdeal.solvable_iff_le_radical; LieAlgebra.HasCentralRadical; LieAlgebra.hasCentralRadical_iff; LieAlgebra.center_le_radical; LieAlgebra.abelian_radical_iff_solvable_is_abelian",
+   "date": "2026-10-21",
+   "verdict": "match: clauses covered by the recorded Mathlib declarations, with the finite-dimensional specialization described in mathlib_match"
+  },
+  {
+   "tool": "grep",
+   "query": "center :|center :=|lieCenter|lie_skew",
+   "results": "3 hit(s); returned top entries: 286; 299; 301; searched Mathlib/Algebra/Lie/Abelian.lean",
+   "date": "2026-10-21",
+   "verdict": "match: LieAlgebra.center at line 286; membership is LieModule.mem_maxTrivSubmodule at line 173"
+  },
+  {
+   "tool": "grep",
+   "query": "instance.*[Ii]sNoetherian|theorem.*[Ii]sNoetherian|def center|abbrev center|def lieCenter",
+   "results": "20 hit(s); returned top entries: Mathlib/RingTheory/Noetherian/Nilpotent.lean; Mathlib/RingTheory/Noetherian/Filter.lean; Mathlib/RingTheory/Noetherian/OfPrime.lean; Mathlib/RingTheory/Noetherian/OfPrime.lean; Mathlib/RingTheory/Noetherian/UniqueFactorizationDomain.lean; Mathlib/RingTheory/Noetherian/Orzech.lean; Mathlib/RingTheory/Noetherian/Orzech.lean; Mathlib/RingTheory/Noetherian/Orzech.lean; searched Mathlib/RingTheory/Noetherian",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem lie_skew|lemma lie_skew|instance.*isNoetherian|isNoetherian_of_finite",
+   "results": "1 hit(s); returned top entries: 179; searched Mathlib/Algebra/Lie/Basic.lean",
+   "date": "2026-10-21",
+   "verdict": "match: lie_skew at line 179 reverses the bracket in the centre condition"
+  },
+  {
+   "tool": "grep",
+   "query": "isNoetherian_of_finite|instIsNoetherian|isNoetherian_of_fg|isNoetherian.*finiteDimensional|isNoetherian.*Module.Finite",
+   "results": "5 hit(s); returned top entries: Mathlib/RingTheory/Noetherian/Basic.lean; Mathlib/RingTheory/Noetherian/Basic.lean; Mathlib/RingTheory/Noetherian/Basic.lean; Mathlib/RingTheory/Noetherian/Basic.lean; Mathlib/RingTheory/Noetherian/Basic.lean; searched Mathlib/RingTheory/Noetherian",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsNoetherianRing.*Module.Finite|Module.Finite.*IsNoetherianRing|isNoetherian_of_fg|isNoetherian_of_finite",
+   "results": "5 hit(s); returned top entries: 123; 312; 325; 330; 338; searched Mathlib/RingTheory/Noetherian/Basic.lean",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isNoetherian_of_fg|isNoetherian_of_finite|IsNoetherian.*of_finite|FiniteDimensional.*[Ii]sNoetherian|[Ii]sNoetherian.*[Ff]initeDimensional",
+   "results": "0 hit(s); searched Mathlib/LinearAlgebra",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isNoetherianRing_of|isNoetherian_of_isNoetherianRing_of_finite|isNoetherian_of_fg_of_noetherian",
+   "results": "5 hit(s); returned top entries: Mathlib/RingTheory/Noetherian/Basic.lean; Mathlib/RingTheory/Noetherian/Basic.lean; Mathlib/RingTheory/Noetherian/Basic.lean; Mathlib/RingTheory/Noetherian/Basic.lean; Mathlib/RingTheory/Noetherian/Basic.lean; searched Mathlib/RingTheory/Noetherian",
+   "date": "2026-10-21",
+   "verdict": "match: isNoetherian_of_isNoetherianRing_of_finite at Basic.lean:324 supplies the needed instance"
+  },
+  {
+   "tool": "grep",
+   "query": "DivisionRing|divisionRing|division_ring|Field|isNoetherianRing_of_isPrincipal",
+   "results": "0 hit(s); searched Mathlib/RingTheory/Noetherian",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "FiniteDimensional|abbrev.*Finite",
+   "results": "5 hit(s); returned top entries: 27; 30; 37; 48; 49; searched Mathlib/LinearAlgebra/FiniteDimensional/Defs.lean",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "^abbrev FiniteDimensional|^class FiniteDimensional|^def FiniteDimensional",
+   "results": "1 hit(s); returned top entries: Mathlib/LinearAlgebra/FiniteDimensional/Defs.lean; searched Mathlib/LinearAlgebra",
+   "date": "2026-10-21",
+   "verdict": "match: FiniteDimensional at Defs.lean:75 is Module.Finite"
+  },
+  {
+   "tool": "grep",
+   "query": "isNoetherianRing.*[Dd]ivision|[Dd]ivision.*isNoetherianRing|isNoetherianRing_of_isPrincipal|isNoetherianRing_of_isField",
+   "results": "0 hit(s); searched Mathlib/RingTheory",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsNoetherianRing|DivisionRing",
+   "results": "5 hit(s); returned top entries: 115; 116; 120; 121; 372; searched Mathlib/RingTheory/PrincipalIdealDomain.lean",
+   "date": "2026-10-21",
+   "verdict": "match: PrincipalIdealRing.isNoetherianRing at line 115"
+  },
+  {
+   "tool": "grep",
+   "query": "IsNoetherianRing",
+   "results": "9 hit(s); returned top entries: Mathlib/Algebra/Module/SpanRankOperations.lean; Mathlib/Algebra/Module/SpanRankOperations.lean; Mathlib/Algebra/Module/FinitePresentation.lean; Mathlib/Algebra/Module/FinitePresentation.lean; Mathlib/Algebra/Module/LinearMap/FiniteRange.lean; Mathlib/Algebra/Module/LinearMap/FiniteRange.lean; Mathlib/Algebra/Module/LinearMap/FiniteRange.lean; Mathlib/Algebra/Module/LinearMap/FiniteRange.lean; searched Mathlib/Algebra/Module",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "DivisionRing|Field",
+   "results": "0 hit(s); searched Mathlib/RingTheory/PrincipalIdealDomain",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "DivisionRing|Field",
+   "results": "0 hit(s); searched Mathlib/RingTheory/Ideal/Span.lean",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "DivisionSemiring.isPrincipalIdealRing",
+   "results": "1 hit(s); returned top entries: 72; searched Mathlib/RingTheory/PrincipalIdealDomain.lean",
+   "date": "2026-10-21",
+   "verdict": "match: DivisionSemiring.isPrincipalIdealRing at line 72 applies to the base field"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "LieAlgebra.radical; LieAlgebra.center; LieModule.mem_maxTrivSubmodule; lie_skew; LieAlgebra.radicalIsSolvable; LieAlgebra.LieIdeal.solvable_iff_le_radical; FiniteDimensional; DivisionSemiring.isPrincipalIdealRing; PrincipalIdealRing.isNoetherianRing; isNoetherian_of_isNoetherianRing_of_finite",
+  "file": "Mathlib/Algebra/Lie/Solvable.lean; Mathlib/Algebra/Lie/Abelian.lean; Mathlib/Algebra/Lie/Basic.lean; Mathlib/LinearAlgebra/FiniteDimensional/Defs.lean; Mathlib/RingTheory/PrincipalIdealDomain.lean; Mathlib/RingTheory/Noetherian/Basic.lean",
+  "line": 365,
+  "lines": [
+   365,
+   286,
+   173,
+   179,
+   369,
+   378,
+   75,
+   72,
+   115,
+   324
+  ],
+  "how": "One Mathlib declaration per clause, specialized to the base field k of def-wf-lie-algebra. LieAlgebra.radical (Solvable.lean:365-366) is sSup of all solvable Lie ideals, which is their sum. LieAlgebra.center (Abelian.lean:286-287) is LieModule.maxTrivSubmodule k L L; LieModule.mem_maxTrivSubmodule (Abelian.lean:173-174) gives x in center iff forall y, [y,x]=0. The one-line rewrite by lie_skew (Basic.lean:179-181) and neg_eq_zero gives the stated forall y, [x,y]=0 condition, in every characteristic. LieAlgebra.radicalIsSolvable (Solvable.lean:369-375) gives the solvability clause, and LieAlgebra.LieIdeal.solvable_iff_le_radical (Solvable.lean:378-380) says that every solvable ideal is contained in the radical. Hence the radical is the unique largest such ideal, uniqueness being antisymmetry. Its IsNoetherian k L hypothesis is inferred: FiniteDimensional (FiniteDimensional/Defs.lean:75-76) abbreviates Module.Finite; DivisionSemiring.isPrincipalIdealRing (PrincipalIdealDomain.lean:72-77) and PrincipalIdealRing.isNoetherianRing (same file:115-117) make the field Noetherian; isNoetherian_of_isNoetherianRing_of_finite (Noetherian/Basic.lean:324-328) gives IsNoetherian k L. No algebraic-closure or characteristic-zero hypothesis is used."
+ },
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -41,5 +205,20 @@
   "statement": "For a finite-dimensional Lie algebra $\\mathfrak g$, its solvable\nradical $\\operatorname{rad}(\\mathfrak g)$ is the sum of all solvable\nideals (solvability and ideals as in [def-wf-lie-algebra]), and its centre is\n\n$$\n\\mathfrak z(\\mathfrak g)=\\{X\\in\\mathfrak g:[X,Y]=0\\text{ for all }Y\\in\\mathfrak g\\}.\n$$\n\nThe sum $\\operatorname{rad}(\\mathfrak g)$ is again solvable, and is\ntherefore the unique largest solvable ideal of $\\mathfrak g$.",
   "proof": [],
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "def-wf-lie-radical-centre",
+  "worker": "stage1",
+  "summary": "Delivered the entire current-blueprint definition and largest-solvable-ideal assertion as one Mathlib leaf. Checked the radical supremum, centre membership including bracket orientation, radical solvability, maximality and the finite-dimensional Noetherian instance. Restored the final assertion from blueprint_update, removed the unused semisimple-Lie-algebra dependency, and created no nodes.",
+  "blueprint": "Realizes all three clauses of main-20261015/sk-d-lie/def-wf-lie-radical-centre.md (radical, centre, and the final solvability/maximality sentence). The encompassing sk-d-lie definition is broader, not a same-statement duplicate; from remains null because this is an imported blueprint node."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q34-26e48adaa",
+  "group": "Q34",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q34-26e48adaa (reviewer sub-agent of L); spot-checked: The item is delivered as a Mathlib leaf with no new nodes, and every clause checks out against the Mathlib lines it cites. Radical: LieAlgebra.radical is the sSup of the solvable ideals, which is their sum (Solvable.lean:365). Solvability: radicalIsSolvable (369). Maximality: LieIdeal.solvable_iff_le_radical (378), with uniqueness by antisymmetry. Centre: center = maxTrivSubmodule (Abelian.lean:286), whose membership mem_maxTrivSubmodule (173) gives [Y,X]=0; lie_skew (Basic.lean:179) plus neg_eq_zero turns this into [X,Y]=0 in any characteristic. The IsNoetherian k L instance comes from FiniteDimensional being Module.Finite (Defs.lean:75), DivisionSemiring.isPrincipalIdealRing (PID.lean:72), PrincipalIdealRing.isNoetherianRing (115) and isNoetherian_of_isNoetherianRing_of_finite (Noetherian/Basic.lean:324); this is an inferred instance, allowed under A8. The statement was synced to blueprint_update and the main-20261015 source, which asserts that the radical is solvable and is the unique largest solvable ideal, so it is stronger than the imported pointer and no target is weakened. The unused stmt_dep def-wf-semisimple-lie-algebra was dropped and recorded in uses_not_cited; this creates no cycle. def-wf-lie-algebra supplies ideals, the derived series and solvability. Small cases hold: the zero algebra, abelian algebras, and sl2 in characteristic 0 and in characteristic 2 (where the identity is central and rad = sl2). The item is not on the 2026-10-19 drop list, has no repair note, and is still imported on the live side, so it is not superseded. No SGA source, no tool_uses, no proof steps. Advisory only: source.document still points to blueprint/master, as in all imported nodes."
  }
 }
