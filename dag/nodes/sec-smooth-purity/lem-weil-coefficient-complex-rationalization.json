@@ -10,7 +10,9 @@
  "stmt_deps": [
   "def-weil-l-adic-coefficient-extension",
   "def-weil-module-base-change",
-  "def-weil-abstract-derived-category"
+  "def-weil-abstract-derived-category",
+  "def-weil-finite-subextension-directed-set",
+  "def-weil-pbc-integer-quotient-inclusions"
  ],
  "proof": [
   {
@@ -251,5 +253,58 @@
   "group": "Q136",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q136-642b13135 (reviewer sub-agent of L); spot-checked: PASS: this is a plain first split (no repair note), and the statement, stmt_deps and blueprint are byte-identical to the Q28-created node. It creates no new nodes and needs no tool_uses; all nine cited nodes are definitions or Mathlib leaves (O_E is a DVR, valuation-ring torsion-free => flat, flat tensor exactness, base change, tensor universal property, derived category as a localization, exact-functor derived factorization, localization universal property (2)/(3), Mod(R) abelian). I recomputed every step. Step 1: O_E and O_L are valuation rings with Frac = E and L; B, E over A, L over B and L over E are torsion-free, hence flat. Step 2: exact and additive, so finite limits and colimits are preserved. Step 3: u_C/v_C balancing and both inverse composites hold; beta=v_E u_B and its inverse v_B u_E match the stated formulas. Step 4: independence of the fraction presentation is equality in L; uniqueness and naturality hold on generators. Step 5: the L=E identity is correct under the multiplication identifications. Step 6: lifting via (2) gives naturality on all of D(A). Step 7: both tower paths give (n⊗1)⊗acd. Step 8: the whiskering claim holds with the composite factorization isos, via naturality of phi in chain maps; equality comes from (3). Edge cases N=0, torsion A/(s), E=L, degenerate triples and unbounded complexes are all fine. Stacks labels 0539/00HD/00CX/015F/04VG checked in tags/tags. rg duplicate search found only different sheaf-level or fibre-functor nodes; no SGA cited."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CoefficientComplexRationalization",
+  "declaration": "WeilConjectures.coefficientComplexRationalization",
+  "declarations": [
+   "WeilConjectures.coefficientComplexIntegralTensor",
+   "WeilConjectures.coefficientComplexRationalize",
+   "WeilConjectures.coefficientComplexFieldTensor",
+   "WeilConjectures.coefficientComplexTensors_exact",
+   "WeilConjectures.coefficientComplexIntegralAdditive",
+   "WeilConjectures.coefficientComplexIntegralLimits",
+   "WeilConjectures.coefficientComplexIntegralColimits",
+   "WeilConjectures.coefficientComplexRationalAdditive",
+   "WeilConjectures.coefficientComplexRationalLimits",
+   "WeilConjectures.coefficientComplexRationalColimits",
+   "WeilConjectures.coefficientComplexFieldAdditive",
+   "WeilConjectures.coefficientComplexFieldLimits",
+   "WeilConjectures.coefficientComplexFieldColimits",
+   "WeilConjectures.coefficientComplexModuleDerived",
+   "WeilConjectures.coefficientComplexBeta_existsUnique",
+   "WeilConjectures.coefficientComplexBeta",
+   "WeilConjectures.coefficientComplexChainBeta",
+   "WeilConjectures.coefficientComplexDerivedBeta",
+   "WeilConjectures.coefficientComplexIntegerIdentity",
+   "WeilConjectures.coefficientComplexIntegralUnit",
+   "WeilConjectures.coefficientComplexIntegerComp",
+   "WeilConjectures.coefficientComplexIntegralAssoc",
+   "WeilConjectures.coefficientComplexFieldUnit",
+   "WeilConjectures.coefficientComplexFieldAssoc",
+   "WeilConjectures.coefficientComplexDerivedIntegralUnit",
+   "WeilConjectures.coefficientComplexDerivedFieldUnit",
+   "WeilConjectures.coefficientComplexDerivedIntegralAssoc",
+   "WeilConjectures.coefficientComplexDerivedFieldAssoc",
+   "WeilConjectures.coefficientComplexDerivedFactors",
+   "WeilConjectures.coefficientComplexChainFormula",
+   "WeilConjectures.coefficientComplexComparison_spec",
+   "WeilConjectures.coefficientComplexRationalization"
+  ],
+  "file": "lean/Sheaf/Paper/CoefficientComplexRationalization.lean",
+  "statement": "theorem coefficientComplexRationalization (l : ℕ) [Fact l.Prime] (Q : Type u) [Field Q] [Algebra (Padic l) Q] [IsAlgClosure (Padic l) Q] (E L M : Padic.FiniteCoefficientFields l Q) (hEL : E ≤ L) (hLM : L ≤ M) (N : CochainComplex (ModuleCat.{max u v} (Padic.coefficientExtensionIntegers l E.val)) ℤ) (K : DerivedCategory (ModuleCat.{max u v} (Padic.coefficientExtensionIntegers l E.val))) : ((coefficientComplexChainBeta.{u, v} l E.val E.val (AlgHom.id (Padic l) E.val)).hom.app N ≫ (NatIso.mapHomologicalComplex (coefficientComplexFieldUnit.{u, v} l E.val) (ComplexShape.up ℤ)).hom.app (((coefficientComplexRationalize.{u, v} l E.val).mapHomologicalComplex (ComplexShape.up ℤ)).obj N) = ((coefficientComplexRationalize.{u, v} l E.val).mapHomologicalComplex (ComplexShape.up ℤ)).map ((NatIso.mapHomologicalComplex (coefficientComplexIntegralUnit.{u, v} l E.val) (ComplexShape.up ℤ)).hom.app N)) ∧ (((coefficientComplexRationalize.{u, v} l M.val).mapHomologicalComplex (ComplexShape.up ℤ)).map ((NatIso.mapHomologicalComplex (coefficientComplexIntegralAssoc.{u, v} l E.val L.val (IntermediateField.inclusion hEL) M.val (IntermediateField.inclusion hLM)) (ComplexShape.up ℤ)).hom.app N) ≫ (coefficientComplexChainBeta.{u, v} l E.val M.val ((IntermediateField.inclusion hLM).comp (IntermediateField.inclusion hEL))).hom.app N = (coefficientComplexChainBeta.{u, v} l L.val M.val (IntermediateField.inclusion hLM)).hom.app (((coefficientComplexIntegralTensor.{u, v} l E.val L.val (IntermediateField.inclusion hEL)).mapHomologicalComplex (ComplexShape.up ℤ)).obj N) ≫ ((coefficientComplexFieldTensor.{u, v} l L.val M.val (IntermediateField.inclusion hLM)).mapHomologicalComplex (ComplexShape.up ℤ)).map ((coefficientComplexChainBeta.{u, v} l E.val L.val (IntermediateField.inclusion hEL)).hom.app N) ≫ (NatIso.mapHomologicalComplex (coefficientComplexFieldAssoc.{u, v} l E.val L.val (IntermediateField.inclusion hEL) M.val (IntermediateField.inclusion hLM)) (ComplexShape.up ℤ)).hom.app (((coefficientComplexRationalize.{u, v} l E.val).mapHomologicalComplex (ComplexShape.up ℤ)).obj N)) ∧ ((coefficientComplexDerivedBeta.{u, v} l E.val E.val (AlgHom.id (Padic l) E.val)).hom.app K ≫ (coefficientComplexDerivedFieldUnit.{u, v} l E.val).hom.app ((coefficientComplexRationalize.{u, v} l E.val).mapDerivedCategory.obj K) = (coefficientComplexRationalize.{u, v} l E.val).mapDerivedCategory.map ((coefficientComplexDerivedIntegralUnit.{u, v} l E.val).hom.app K)) ∧ ((coefficientComplexRationalize.{u, v} l M.val).mapDerivedCategory.map ((coefficientComplexDerivedIntegralAssoc.{u, v} l E.val L.val (IntermediateField.inclusion hEL) M.val (IntermediateField.inclusion hLM)).hom.app K) ≫ (coefficientComplexDerivedBeta.{u, v} l E.val M.val ((IntermediateField.inclusion hLM).comp (IntermediateField.inclusion hEL))).hom.app K = (coefficientComplexDerivedBeta.{u, v} l L.val M.val (IntermediateField.inclusion hLM)).hom.app ((coefficientComplexIntegralTensor.{u, v} l E.val L.val (IntermediateField.inclusion hEL)).mapDerivedCategory.obj K) ≫ (coefficientComplexFieldTensor.{u, v} l L.val M.val (IntermediateField.inclusion hLM)).mapDerivedCategory.map ((coefficientComplexDerivedBeta.{u, v} l E.val L.val (IntermediateField.inclusion hEL)).hom.app K) ≫ (coefficientComplexDerivedFieldAssoc.{u, v} l E.val L.val (IntermediateField.inclusion hEL) M.val (IntermediateField.inclusion hLM)).hom.app ((coefficientComplexRationalize.{u, v} l E.val).mapDerivedCategory.obj K))",
+  "branch": "sheaf-dag",
+  "by": "Q27",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The declarations together render all clauses: coefficientComplexTensors_exact (all four additive exact functors), coefficientComplexBeta_existsUnique (normalized module comparison), coefficientComplexComparison_spec (unbounded chain formula, uniqueness, inverse for every field element including fractions, preservation of quasi-isomorphisms, and the specified derived descent), and coefficientComplexRationalization (identity and mixed integral/field tower laws before and after localization). All helper aliases use the existing ModuleCat.extendScalars. Extra statement dependencies cite the landed def-weil-pbc-integer-quotient-inclusions, which owns integralScalarIntegerInclusion and integralScalar_integer_mem, and def-weil-finite-subextension-directed-set for the fixed-closure finite-field indexing. No new definition node or declaration ownership is introduced; integralScalar_absoluteValue is not used by this item. The completed scalar-extension theorem is not a statement dependency: its conclusion is not used to construct the inclusion."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e81bba399",
+  "group": "Q27",
+  "result": "pass",
+  "note": "Re-delivery after RETURN 0ab0d85152f0 (H12/H4). Lean module byte-identical (sha256 d023688f) to 818d69d5/0ab0d851, whose full readings found the maths correct. I re-read hypotheses and all clauses: beta pinned by its formula, chain uniqueness, inverse formula for all x in E, exactness, quasi-iso preservation, derived descent square, unit and tower laws on chains and in D(M). Item node vs live differs only in stmt_deps and lean. def-weil-coefficient-integer-inclusion replaced by landed Q134 def-weil-pbc-integer-quotient-inclusions (existing:true, owns integralScalarIntegerInclusion and integralScalar_integer_mem); duplicate node removed; no new nodes. All project names used are owned by stmt_deps. Statement verbatim; 32 declarations match the file; theorems are sorry only; docstrings and report sections present. Not dropped, not superseded, no repair note. Advisory: global HasDerivedCategory instance overlaps derivedModules (defeq). No fix, so no compile."
  }
 }

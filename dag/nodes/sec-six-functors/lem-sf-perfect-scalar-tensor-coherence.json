@@ -345,5 +345,33 @@
   "group": "Q123",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q123-a832e974e (reviewer sub-agent of L); spot-checked: I read the whole item, all 13 steps, and every cited statement; there are no new nodes. The statement and stmt_deps are byte-identical to the landed Q51 FIX version (runs/1/Q51…/fixes), so this delivery adds only the proof, which was empty on the base. There is no repair note, no SGA citation and no cycle: the 72-node closure contains neither the item nor its parent. Sources checked: Stacks more-algebra 06Y6 lemma-derived-base-change and 0GWN section-symmetric-monoidal (sign (-1)^{pq}, d-compatibility), 064K, derived.tex 064B, algebra 00CV/05G3/05CF. I recomputed every step. Step 5: the first-variable homotopy cancels the dy terms ((-1)^{p-1}+(-1)^p=0) and the second-variable one cancels the dx terms. Step 6: b and v are balanced, vb=1 and bv=1 hold, and no flatness is needed. Step 7: db=bd. Step 9: associator, symmetry (equal by S-balance, no extra sign since s has degree 0) and both unitors (rx⊗s=x⊗f(r)s) hold. Steps 10–12: the tower inverse, both unit equations, the four-ring equation h(g(s)t)u=hg(s)h(t)u, and the tensor and unit squares (gf(r)g(s)t on both paths) hold. Steps 2–4 and 13 correctly use clause (2) of lem-pc-derived-tensor-second-factor-functor (K-flat computation over R and S, with finite-projective models from step 1) and the bounded-above projective Hom bijection (Mathlib leaf) for full faithfulness, naturality on all derived maps, and representative independence with the cocycle. Edge cases tested: zero ring, zero complexes, identity ring maps, non-flat Z→Z/2, odd degrees. Duplicate search: lem-weil-derived-field-scalar-extension-tower and def-weil-finite-dimensional-complex-scalar-extension are field-only and tower-only; the pur/sfb change-of-rings and point-sections coherence nodes do not state this ring-level coherence, so none is a duplicate. The parent's steps 1, 4, 5, 7, 8 and 11 use exactly the stated clauses. Accepted tool_uses: lem-pc-module-bounded-flat-kflat and lem-pc-derived-tensor-second-factor-functor, both generic ring-complex tools from sk-thm-picard-semicon; the other off-unit statements are Mathlib leaves. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DerivedCategory.PerfectScalarTensorCoherence",
+  "declaration": "DerivedCategory.PerfectScalar.perfect_scalar_tensor_coherence",
+  "declarations": [
+   "DerivedCategory.PerfectScalar.D",
+   "DerivedCategory.PerfectScalar.E",
+   "DerivedCategory.PerfectScalar.coefficient",
+   "DerivedCategory.PerfectScalar.B",
+   "DerivedCategory.PerfectScalar.modelMap",
+   "DerivedCategory.PerfectScalar.symmetry",
+   "DerivedCategory.PerfectScalar.Coherence",
+   "DerivedCategory.PerfectScalar.perfect_scalar_tensor_coherence"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/DerivedCategory/PerfectScalarTensorCoherence.lean",
+  "statement": "theorem perfect_scalar_tensor_coherence : Coherence.{u, w}",
+  "branch": "sheaf-dag",
+  "by": "NG",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0cef38744",
+  "group": "NG",
+  "result": "pass",
+  "note": "Snapshot item node differs from live only in lean; statement verbatim; no new nodes or dependency modules. Each node clause has a matching Coherence clause: perfect preservation, additivity, R-linearity (f.hom r scalar), IsIso of modelMap on bounded finite-projective models. tensor/unit/comp/identity Isos are pinned to mapCochainComplexμIso.inv (s⊗(x⊗y)↦(s⊗x)⊗(1⊗y)), εIso.inv (f(r)s), extendScalarsComp.symm (g(s)t) and extendScalarsId, with naturality for arbitrary derived arrows, so nothing is a free map. Associator, Koszul braiding' symmetry, both unitors, the two tower unit equations, the four-ring equation and the tensor/coefficient-unit squares for c and identity are present. B and modelMap are .choose of the recorded stmt_dep theorem and its actual derived counit. Edge cases (zero ring, a>b, negative degrees, identity maps, non-flat maps) are covered; u and w are independent; no extra hypotheses. H4: IsDerivedBaseChange is only a predicate; moduleDerivedExtension (def-zl) is a different construction and not a stmt_dep. Docstrings carry source, blueprint and all 13 steps; both report sections are present. Advisory only: three proof-only imports; a possible later comparison between B and moduleDerivedExtension. No files changed, so no compile run."
  }
 }

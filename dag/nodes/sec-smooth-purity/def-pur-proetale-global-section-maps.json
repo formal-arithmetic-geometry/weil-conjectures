@@ -1,0 +1,115 @@
+{
+ "id": "def-pur-proetale-global-section-maps",
+ "kind": "definition",
+ "title": "Ordinary pro-etale global sections and canonical section maps",
+ "status": "split",
+ "statement": "Let $A$ be a finite commutative ring and let $X,Y$ be schemes [def-pc-scheme]. Use the small pro-etale sites [def-weil-pbc-proetale-site] and the categories of modules over the constant ring sheaves $A_X,A_Y$ [def-weil-pbc-proetale-modules]. For an $A_X$-module sheaf $M$, define $\\Gamma_A(X,M)$ to be its global sections as an $A$-module: apply the inverse of the canonical fixed-scalar realization [def-weil-extension-by-zero] and evaluate at the terminal object $X\\to X$. For a scheme morphism $h:X\\to Y$, use the constant-section coefficient map and sectionwise direct image [def-weil-proetale-inverse-image], and the tensor-unit-normalized adjunction $h^*\\dashv h_*$ [def-weil-pbc-proetale-operations]. Define $d_h$ to identify this adjunction's ringed direct image with the sectionwise constant-module direct image, by the adjunction round trip on its coefficient map. Define $t_h:\\Gamma_A(Y,h_*M)\\xrightarrow{\\sim}\\Gamma_A(X,M)$ by cancelling the canonical scalar-realization equivalences and evaluating base change at the terminal object $X\\times_Y Y=X$. The fixed-scalar terminal identification, for the fixed-scalar sheaf pushforward [def-sfb-finite-lower-star], is induced by preservation of that terminal object. For an $A_Y$-module sheaf $N$, define the section-unit map $\\Gamma_A(Y,N)\\to\\Gamma_A(X,h^*N)$ to be $\\Gamma_A(Y,\\eta_h(N))$ followed by $t_h(h^*N)$, where $\\eta_h$ is the specified adjunction unit.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-extension-by-zero",
+  "def-sfb-finite-lower-star"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08J6, remark-before-Leray; Tag 0D6H, lemma-Leray-unbounded: evaluation at the terminal object and the ordinary adjunction unit"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "global sections functor constant ring module sheaves pro etale site terminal object section unit",
+   "results": "8 hits: CategoryTheory.Sheaf.Γ, SheafOfModules.sectionsFunctor_obj, AlgebraicGeometry.PresheafedSpace.Γ, SheafOfModules.sectionsFunctor, CategoryTheory.Sheaf.ΓNatIsoSheafSections, CategoryTheory.hasGlobalSectionsFunctor_of_hasTerminal, LightCondensed.underlying, SheafOfModules.unit",
+   "date": "2026-10-21",
+   "verdict": "General global-section constructions only; the existing project definitions are reused."
+  },
+  {
+   "tool": "loogle",
+   "query": "Sheaf.Γ",
+   "results": "0 hits: ; loogle: unknown identifier 'Sheaf.Γ'",
+   "date": "2026-10-21",
+   "verdict": "General global-section constructions only; the existing project definitions are reused."
+  },
+  {
+   "tool": "grep",
+   "query": "proEtaleUnitLeraySections|proEtaleUnitLeraySectionUnit|ΓNatIsoSheafSections",
+   "results": "4 hits: Mathlib/CategoryTheory/Sites/GlobalSections.lean, Mathlib/CategoryTheory/Sites/GlobalSections.lean, Mathlib/CategoryTheory/Sites/LocalSite.lean, Mathlib/CategoryTheory/Sites/LocalSite.lean",
+   "date": "2026-10-21",
+   "verdict": "General global-section constructions only; the existing project definitions are reused."
+  },
+  {
+   "tool": "grep",
+   "query": "proEtaleUnitLeraySections|proEtaleUnitLerayDirectImageIso|proEtaleUnitLeraySectionUnit (dag/nodes, lean/WeilConjectures, lean/Sheaf); blueprint_refs.py search Leray",
+   "results": "No upstream declarations. Project ProEtaleUnitLerayChainFormula.lean defines all requested maps; only the theorem node records them incidentally. No definition node owns these maps. Blueprint search gives 13 Leray nodes, none defines this ordinary section functor and its maps.",
+   "date": "2026-10-21",
+   "verdict": "Reuse the published definitions through an existing:true definition node; do not duplicate them."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-proetale-direct-image-global-evaluation",
+  "date": "2026-10-21",
+  "group": "Q61"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pur-affine-line-orientation-uniqueness",
+   "place": "Proof Step 3 global supported-class identification; sk-prop-a1 global-sections paragraph after localization and Rp_*, old item Step 9 final-object computation and composition coherence",
+   "via": [
+    "lem-pur-proetale-direct-image-global-evaluation",
+    "lem-pur-retracted-support-localization-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleUnitLerayChainFormula",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleUnitLeraySections",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.proEtaleUnitLeraySections",
+   "AlgebraicGeometry.Scheme.proEtaleUnitLerayDirectImageIso",
+   "AlgebraicGeometry.Scheme.proEtaleUnitLerayFixedTerminalIso",
+   "AlgebraicGeometry.Scheme.proEtaleUnitLerayTerminalIso",
+   "AlgebraicGeometry.Scheme.proEtaleUnitLeraySectionUnit"
+  ],
+  "statement": "def proEtaleUnitLeraySections (X : Scheme.{u})",
+  "branch": "newtargets-dag",
+  "by": "Q61",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Ownership record for the already published ordinary definitions, as requested by F1 of the return at 23b894b1070e. Uses no assertion of proEtale_unit_leray_chain_formula and introduces no duplicate declarations. Body owners: sfIntrinsicModuleEquivalence (def-weil-extension-by-zero), AlgebraicGeometry.ProEtale.lowerStar (def-sfb-finite-lower-star)."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bf144f094",
+  "group": "Q61",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bf144f094",
+  "group": "Q61",
+  "result": "fix",
+  "note": "Re-delivery of the 23b894b1 RETURN. F1 repaired: new def-pur-proetale-global-section-maps (existing:true on ProEtaleUnitLerayChainFormula) replaces theorem stmt_dep lem-trf-proetale-unit-leray-chain-formula; every used chain-formula def is in its declarations. F2 repaired: lem-weil-derived-direct-image-composition record identical to live; 4 helpers moved byte-identical into the item module (only docstring blueprint ids changed); item signatures unchanged, 12 clauses re-checked, no extra hypotheses. Mechanical finding on lem-pur-proetale-derived-pullback-identity: PASS, gamma is a pinned .choose of the theorem's conclusion (path traced through e, eM, alpha, b, gamma). FIX fixes/def-pur-proetale-global-section-maps.json: added body owners def-weil-extension-by-zero (sfIntrinsicModuleEquivalence) and def-sfb-finite-lower-star (ProEtale.lowerStar) to stmt_deps with TeX citations; trimmed noncomputable from lean.statement; check_existing and check_new_node clean, no cycle. No Lean changed, no compile."
+ }
+}

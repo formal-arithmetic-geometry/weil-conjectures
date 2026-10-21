@@ -16,7 +16,10 @@
   "def-weil-derived-direct-image",
   "lem-weil-derived-direct-image-composition",
   "def-weil-open-immersion",
-  "def-pur-kinjective-complex"
+  "def-pur-kinjective-complex",
+  "def-pur-proetale-global-section-maps",
+  "pur713-def-pullback-comparison",
+  "lem-pur-proetale-derived-pullback-identity"
  ],
  "proof": [
   {
@@ -363,5 +366,44 @@
   "group": "Q87",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q87-abb7d18f9 (reviewer sub-agent of L); spot-checked: Q87 abb7d18f is a first split with 8 steps and no new nodes. The item is not on the 10-19 drop list and is still unsplit live; there is no repair note and no cycle (closure check over all 19 cited nodes). The only statement change replaces the étale-only def-weil-pbc-derived-categories with def-weil-pbc-bounded-derived-subcategories for pro-étale D+. That is a correct citation repair and the report names it. Step checks: S1, the good truncation is a quasi-isomorphism and the constant-ring identification comes from prop-weil-pbc-proetale-constant-ring-map. S2, f_* preserves K-injectives (exact left adjoint f^* from def-weil-pbc-proetale-operations). S3, (f_*J)(Y)=J(T) with the A-action via rho^f_A. S4, naturality for every derived map via kinjective-hom-derived and the transition and cocycle clauses of sf-kinjective-derived-map-computation. S5, J[n] is K-injective and the (-1)^n differentials match. S6, kappa with j=1 gives the identity (gf)_*J=g_*f_*J, and the composite types check. S7, I recomputed the unit through the 0DVC-type characterization (t=id, s=v, adjunct v gives id), and open-unit-evaluation at V=T gives restriction; edge cases U empty and U=T hold, and no quasi-compactness is assumed. S8, naturality at the given d plus the Step 5 shift identification keeps the third arrow and its sign. Sources: Stacks 0D6H (sites-cohomology.tex:4403) and 0D6E (:4011) were read; no SGA is cited. All declared tool_uses are generic black boxes and I accept them; open-unit-evaluation is in sk-prop-a1-kummer, which is in route. Advisory for the maintainer: the finite c_{g,f}=kappa identification (Step 6) is pinned only in the proof, Step 1, of lem-weil-derived-direct-image-composition, and the shift comparison of lem-pc-right-derived-functor-triangulated is unspecified. The item inherits this from its parent, and the Lean universal compositor satisfies the same K-injective normalization. Consider stating the normalization in clause 1 of that node."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleDirectImageGlobalEvaluation",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleDirectImageGlobalEvaluation",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.proEtaleOrdinaryModuleAdjunction",
+   "AlgebraicGeometry.Scheme.proEtaleOrdinaryDirectImage_preservesKInjective",
+   "AlgebraicGeometry.Scheme.proEtaleOrdinaryDerivedAdjunction",
+   "AlgebraicGeometry.Scheme.proEtaleOrdinaryDirectImageComposition",
+   "AlgebraicGeometry.Scheme.purityGlobalEvaluation_finiteRing",
+   "AlgebraicGeometry.Scheme.proEtaleGlobalEvaluationSections",
+   "AlgebraicGeometry.Scheme.proEtaleGlobalEvaluationSectionsObj",
+   "AlgebraicGeometry.Scheme.proEtaleGlobalEvaluationImageObj",
+   "AlgebraicGeometry.Scheme.proEtaleGlobalEvaluationTerminal",
+   "AlgebraicGeometry.Scheme.proEtaleGlobalEvaluation",
+   "AlgebraicGeometry.Scheme.proEtaleGlobalEvaluationPlus",
+   "AlgebraicGeometry.Scheme.proEtaleGlobalEvaluationPullbackId",
+   "AlgebraicGeometry.Scheme.proEtaleGlobalEvaluationDirectImageId",
+   "AlgebraicGeometry.Scheme.proEtaleDirectImageGlobalEvaluation",
+   "AlgebraicGeometry.Scheme.proEtaleDirectImageGlobalEvaluation_shift",
+   "AlgebraicGeometry.Scheme.proEtaleDirectImageGlobalEvaluation_comp",
+   "AlgebraicGeometry.Scheme.proEtaleDirectImageGlobalEvaluation_id",
+   "AlgebraicGeometry.Scheme.proEtaleDirectImageGlobalEvaluation_open",
+   "AlgebraicGeometry.Scheme.proEtaleDirectImageGlobalEvaluation_third"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleDirectImageGlobalEvaluation.lean",
+  "statement": "theorem proEtaleDirectImageGlobalEvaluation (f : T ⟶ Y) [f.IsOver (Spec (.of P.field.k))] (J : CochainComplex (proEtaleRingModules T (proEtaleConstantRing T P.Ring)) ℤ) [J.IsKInjective] (_hJ : ∃ a : ℤ, J.IsStrictlyGE a) : (proEtaleGlobalEvaluation P.Ring f).hom.app (DerivedCategory.Q.obj J) = (proEtaleGlobalEvaluationSections P.Ring Y).map (proEtaleGlobalEvaluationImageObj P.Ring f J).hom ≫ ((proEtaleGlobalEvaluationSectionsObj P.Ring Y) (((proEtaleConstantModuleDirectImage f P.Ring).mapHomologicalComplex (.up ℤ)).obj J)).hom ≫ DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex (proEtaleGlobalEvaluationTerminal P.Ring f).hom (.up ℤ)).app J) ≫ ((proEtaleGlobalEvaluationSectionsObj P.Ring T) J).inv",
+  "branch": "newtargets-dag",
+  "by": "Q61",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bf144f094",
+  "group": "Q61",
+  "result": "fix",
+  "note": "Re-delivery of the 23b894b1 RETURN. F1 repaired: new def-pur-proetale-global-section-maps (existing:true on ProEtaleUnitLerayChainFormula) replaces theorem stmt_dep lem-trf-proetale-unit-leray-chain-formula; every used chain-formula def is in its declarations. F2 repaired: lem-weil-derived-direct-image-composition record identical to live; 4 helpers moved byte-identical into the item module (only docstring blueprint ids changed); item signatures unchanged, 12 clauses re-checked, no extra hypotheses. Mechanical finding on lem-pur-proetale-derived-pullback-identity: PASS, gamma is a pinned .choose of the theorem's conclusion (path traced through e, eM, alpha, b, gamma). FIX fixes/def-pur-proetale-global-section-maps.json: added body owners def-weil-extension-by-zero (sfIntrinsicModuleEquivalence) and def-sfb-finite-lower-star (ProEtale.lowerStar) to stmt_deps with TeX citations; trimmed noncomputable from lean.statement; check_existing and check_new_node clean, no cycle. No Lean changed, no compile."
  }
 }

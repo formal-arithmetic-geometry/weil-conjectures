@@ -204,5 +204,23 @@
   "group": "Q106",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q106-7b973cb2e (reviewer sub-agent of L); spot-checked: Read in full: the item, all 4 cited statements (lem-pc-tate-abstract-residue-calculus, lem-pc-finite-potent-trace-calculus, def-weil-endomorphism-trace, def-weil-pbc-kahler-differentials), the citer lem-pc-tate-adelic-reciprocity, the unit sk-thm-picard-duality, and Tate ASENS 1968 §1 T1-T5 (pp.149-150), Thm 1 and Remark (*) (pp.151-152), and R5 with its proof (p.153). The statement is unchanged and agrees with R5 hypothesis by hypothesis, including both admissibility conclusions. Step 1: the sum is admissible because fS lies in S+E_A+E_B; the intersection is admissible through the injection V/I into V/A+V/B. Step 2: I checked that basis-of-I plus A_0 plus B_0 is independent, and that pi_A+pi_B=pi_S+pi_I on each of the four summands. Step 3: Z_L=[pi_L m_f,m_g] is exactly the residue node's formula; I verified the expansion Z_L=(pi_L-1)m_fg - m_g(pi_L-1)m_f, which gives finite Z_L(L). Steps 4 and 6: I checked the filtrations V>S>A>0 for Z_A,Z_S and V>B>I>0 for Z_I,Z_B; the eight length-3 words have finite image and span an invariant W containing every cube. This is Tate's 'finite potent subspace' and T4 proof written out. Step 5 uses only the trace-calculus sentence 'equals Tr_k(T|_U) for finite T-stable U containing T^N(V)' plus matrix additivity, not the pairwise-product clause, whose hypothesis does not hold here. Step 7: Z_A-Z_S=Z_I-Z_B exactly, as in Tate's display. Step 8: Omega^1 is k-spanned by f dg, and the residues are k-linear. Edge cases: A=B, A in B, A=0, B=V, V finite-dimensional, char 2, non-domain C, and the citer's disjoint-summand use. No new nodes, no duplicate (lem-pc-tate-endomorphism-ideals covers a single A), no cycle (the cited unsplit nodes have empty proof_deps), same-unit route, no SGA, no tool_uses, and proof_deps equals the union of the step uses. Maintainer note: TateResidue.res_sup_add_res_inf covers the equality clause only, as the report says. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.TateResidueLatticeIdentity",
+  "declaration": "TateResidue.residue_lattice_identity",
+  "file": "lean/Sheaf/RingTheory/TateResidueLatticeIdentity.lean",
+  "statement": "theorem residue_lattice_identity {k : Type u} [Field k] {C : Type v} [CommRing C] [Algebra k C] {V : Type w} [AddCommGroup V] [Module k V] [Module C V] [IsScalarTower k C V] (A B : Submodule k V) (hA : Admissible C A) (hB : Admissible C B) : Admissible C (A ⊔ B) ∧ Admissible C (A ⊓ B) ∧ res C A + res C B = res C (A ⊔ B) + res C (A ⊓ B)",
+  "branch": "newtargets-dag",
+  "by": "NK",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-92ce786af",
+  "group": "NK",
+  "result": "pass",
+  "note": "Read the item node, stmt_dep lem-pc-tate-abstract-residue-calculus (Sheaf.RingTheory.TateAbstractResidueCalculus), upstream Admissible/E/AlmostLE/act/res definitions (Residue.lean:156,329; TateIdeals.lean:46,133), and Tate ASENS 1968 R5 p.153. All hypotheses match (field, comm k-algebra, Module k/C with IsScalarTower, Submodule k V, Admissible = ∀f, fA ≤ A+FG), no extra assumptions, independent universes. All three conjuncts present (Admissible ⊔, Admissible ⊓, res equality of k-linear maps in node order); res junk-0 is not an issue because both admissibilities are concluded. Upstream res_sup_add_res_inf has the equality only (sides swapped), so existing:true would drop two clauses and a new module is correct. Docstrings give source place, blueprint tag and all 8 proof steps; lean.statement verbatim; proof is sorry only; no defs; only the lean field of the node changed; not superseded live. Edge cases A=B, A≤B, A=0, B=V, V=0, char 2 covered. No changes, no compile."
  }
 }
