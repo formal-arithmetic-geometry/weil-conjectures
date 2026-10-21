@@ -14,7 +14,8 @@
   "def-sf-comparison-derived-pullback",
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
   "lem-weil-pbc-comparison-pullback",
-  "def-kun-projection-formula-map"
+  "def-kun-projection-formula-map",
+  "def-weil-boundary-exceptional-comparison-data"
  ],
  "proof": [
   {
@@ -217,5 +218,31 @@
   "group": "Q124",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q124-8842af6e0 (reviewer sub-agent of L); spot-checked: Ordinary first split of the statement-only node Q104 created on 2026-10-21. There is no repair note for this item and live shows it unsplit, so the re-split rules do not apply and no other group superseded it. The statement, stmt_deps, source and blueprint are byte-identical to the Q104-created node. The delivery adds 5 steps (3808 chars), no new nodes and no SGA citations. I read all three cited statements: the canonical ringed-topos tensor comparison (natural in both variables), the sfb node making that comparison symmetric strong monoidal with the signed (−1)^{pq} symmetry, and the signed symmetry being natural on any small ringed site. I recomputed every equation and checked every type. Step 2 gives r C_Z(σ_e)=σ_p s via the comparison/symmetry compatibility and naturality of σ, then H F_p(σ_p)F_p(s)=C(F_eσ_e)η_D by naturality of η. Step 3 inverts the assumed projection square to kC(π_e^{-1})H=(d⊗1)π_p^{-1}, with d=η_B F_p(v)^{-1}, inverting only the assumed-invertible π's. Step 4 gives a_p=C(a_e)d and c C(g_e)=g_p(d^{-1}⊗1)k. Step 5's substitution yields exactly the item's conclusion. Identifying the termwise C_W with Lν^* is elementary (exact pullback, constant A) and is already presupposed by the statement. Edge cases checked: identity comparisons, zero objects, a_e=0 (which forces a_p=0), odd-degree signs, and unbounded-below D^+⊗D^+ (handled by working in unbounded D). Sources read: the comparison paragraph of the thm-sf-pf-proetale proof (main-20261015) and the final paragraph of cor-weil-boundary-duality-discharge. Searching with rg -L found no duplicate; the nearest nodes are lem-weil-boundary-proetale-projection-comparison and lem-weil-pbc-projection-inverse-coefficient-naturality. A reachability check over stmt_deps and proof_deps shows no cycle. The three declared tool uses are accepted as generic monoidal coherence along ν_W (one of them is in the item's own unit)."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.BoundaryQDefiningCompositeComparison",
+  "declaration": "AlgebraicGeometry.ProEtale.BoundaryComparisonOfCoefficients.boundary_q_defining_composite_comparison",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.BoundaryComparisonOfCoefficients.boundaryDefiningSourceIso",
+   "AlgebraicGeometry.ProEtale.BoundaryComparisonOfCoefficients.boundaryDefiningTargetIso",
+   "AlgebraicGeometry.ProEtale.BoundaryComparisonOfCoefficients.boundaryEtaleDefiningComposite",
+   "AlgebraicGeometry.ProEtale.BoundaryComparisonOfCoefficients.BoundaryDefiningCompositeComparison",
+   "AlgebraicGeometry.ProEtale.BoundaryComparisonOfCoefficients.boundary_q_defining_composite_comparison"
+  ],
+  "file": "lean/Sheaf/Paper/BoundaryQDefiningCompositeComparison.lean",
+  "statement": "theorem boundary_q_defining_composite_comparison (A : Type (u + 1)) [CommRing A] [Finite A] {Z T : Scheme.{u}} (i : Z ⟶ T) [IsProper i] [CompactSpace T] : BoundaryDefiningCompositeComparison (ModuleCat.{u + 1} A) i",
+  "branch": "newtargets-dag",
+  "by": "Q96",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The three real helper definitions are the displayed s, r and t_e composites. BoundaryDefiningCompositeComparison packages all quantified inputs, the two projection-isomorphism hypotheses, compatible final arrows, the projection square and the conclusion in a Prop-valued definition; the theorem specializes it to finite commutative A. The conclusion expands t_p using the ordinary pro-etale projection and canonical Koszul braiding β_ from DerivedCategory.braidedCategory, with no supplied symmetry-presentation hypothesis. Uses the established fixed-ring sheaf presentation and canonical exact/left-derived identifications. The additional landed dependency owns the ordinary functor abbreviations and pullback square. No new node, dependency repair or statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-87708c39f",
+  "group": "Q96",
+  "result": "pass",
+  "note": "All clauses match the node with left-to-right composition: arrow compatibility, s and r (both tensor orders kept), the projection square, t_e, t_p and the conclusion. rho = pullbackSquare.symm, eta : C_Z⋙F_p ≅ F_e⋙C_T, both in the right direction; eta on unbounded D is needed for L⊗B. c is the canonical K-flat comparison of strong monoidal ν^*; σ is the Koszul β_ of DerivedCategory.braidedCategory (negOnePow sign); both projection maps are rightAdjointProjectionMap of the derived adjunction (def-kun record). IsIso only on π_e and π_p; no constructibility or Tor hypothesis. A : Type (u+1) matches the dependency records and the ULift citer. Statement verbatim; only the main theorem has sorry; helpers are real; source/blueprint docstrings and the five proof steps are present. Added stmt_dep def-weil-boundary-exceptional-comparison-data (landed, PASSed definition node) owns comparison/etaleImage/proetaleImage/pullbackSquare and does not reach the item (no cycle). No duplicate found. Advisory H9: two proof-only non-public imports. Nothing compiled (no file changed)."
  }
 }
