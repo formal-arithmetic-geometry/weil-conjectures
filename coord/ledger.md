@@ -22928,3 +22928,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:25 L: merged deliver/NB/lem-sfb-totally-disconnected-coefficient-realization (stage 2; reviewer PASS; parallel immutable checks)
 - 15:26 L: merged deliver/NL/lem-sfb-prime-to-ell-linear-image-finite (stage 2; reviewer PASS; parallel immutable checks)
 - 15:29 L: merged deliver/Q135/lem-weil-pbc-finite-free-strict-tower-transport (stage 2; reviewer PASS; parallel immutable checks)
+- 15:30 L: returned deliver/N8/lem-sfb-qlbar-internal-hom-coefficient-comparison (reviewer RETURN: L: independent stage-2 immutable head e3ce9f8f7f60: H2: 5 of the 6 flagged theorem stmt_deps supply only plain defs; non)
