@@ -23951,3 +23951,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:52 L: returned deliver/A3/Sheaf.Paper.RelativeSupportBottomDescent (reviewer RETURN: (reviewer C-c9702, head c9702ffff) E2: relative_support_vanishing (node lem-pur-relative-support-vanishing) is false: B=)
 - 22:52 L: returned deliver/Q85/lem-weil-integral-twist-scalar-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-integral-twist-scalar-coherence: lem-weil-int)
 - 22:53 L: merged deliver/NI/lem-sfb-countable-endomorphism-module-reconstruction (stage 2; reviewer PASS; parallel immutable checks)
+- 22:53 L: returned deliver/NF/def-pur-affine-line-purity-comparison (reviewer RETURN: L: independent stage-2 immutable head faac82d4846f: No-op re-delivery of an item NI already landed (ledger 22:46 'merged)
