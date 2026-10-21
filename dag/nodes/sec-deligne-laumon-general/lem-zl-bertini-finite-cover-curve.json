@@ -35,85 +35,42 @@
  ],
  "proof": [
   {
-   "text": "Use the sections-vanishing Bertini input [lem-zl-bertini-sections] (Stacks Tag 0FD5) on a projective closure $\\overline X$ of $X$ and the reduced finite closed subscheme supported on $S$. For a sufficiently large $n$, its space $V$ of sections of $\\mathcal O_{\\overline X}(n)$ vanishing on $S$ generates the twist away from $S$ and induces an immersion on $X\\setminus S$. Apply [lem-pc-serre-vanishing] to the ideal of the union of the first infinitesimal neighborhoods of the points of $S$; after increasing $n$, restriction to the direct sum of the cotangent spaces at $S$ is surjective. Thus the conditions that a section have nonzero first derivative at every point of $S$ are nonempty open conditions on $V$.",
+   "text": "Work first over the algebraically closed field $k$, without requiring a finite-field model of intermediate cuts. For any smooth connected affine $Y/k$ of pure dimension $e\\ge2$, any connected finite etale cover $P\\to Y$, and the prescribed set $S$, apply [lem-zl-bertini-prescribed-point-smooth-system] to choose $n,V_n,U_{\\rm sm}$. The system on $Y$ satisfies all hypotheses of [lem-zl-bertini-finite-cover-irreducible-system]; let $U_{\\rm irr}$ be its nonempty open. Their intersection is nonempty since $\\mathbf A(V_n)$ is irreducible, and has a $k$-point since $k$ is algebraically closed. Its zero scheme $Y_1$ is closed affine, smooth of pure dimension $e-1$, contains $S$, and is geometrically irreducible. The inverse image $P_1=P\\times_Y Y_1$ is connected and finite etale over $Y_1$.",
    "uses": [
-    "lem-zl-bertini-sections",
-    "lem-pc-serre-vanishing"
+    "lem-zl-bertini-prescribed-point-smooth-system",
+    "lem-zl-bertini-finite-cover-irreducible-system"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/lem-zl-bertini-finite-cover-curve.proof.md",
-    "place": "Proof paragraph 2; Stacks Tags 0FD5 and 0B5U"
+    "place": "Proof paragraphs 2-4, simultaneous choice of a member"
    }
   },
   {
-   "text": "Let $s\\in S$ and let $v\\in V$ have nonzero image in $(\\mathfrak m_s/\\mathfrak m_s^2)\\otimes\\mathcal O_{\\overline X}(n)|_s$ (Step 1). Since $X$ is smooth over $k$, $\\mathcal O_{X,s}$ is a regular local ring [lem-weil-pbc-geometric-regularity-smooth-field-criterion] (with $L=k$). In a trivialization of $\\mathcal O(n)$ at $s$, $v$ is an element $f\\in\\mathfrak m_s\\setminus\\mathfrak m_s^2$, so $\\mathcal O_{X,s}/(f)=\\mathcal O_{H_v,s}$ is regular [lem-weil-pbc-regular-local-hypersurface-criterion], and $H_v\\cap X$ is smooth over $k$ at the closed point $s$ [lem-weil-pbc-regular-closed-point-smooth-source] ($k$ algebraically closed, applied on an affine open of $H_v\\cap X$ containing $s$). The restriction $\\psi:V\\to\\Gamma(X\\setminus S,\\mathcal O(n))$ generates and gives an immersion $X\\setminus S\\to\\overline X\\setminus S\\to\\mathbf P(V)$ (an open immersion followed by an immersion), and $X\\setminus S$ is smooth, so [lem-zl-bertini-smooth-member] gives a nonempty open $U_{\\rm sm}\\subseteq\\mathbf A(V)$ whose $k$-points cut $X\\setminus S$ smoothly. Intersecting with the finitely many nonempty open derivative conditions of Step 1 gives a nonempty open whose $k$-points $v$ have $H_v\\cap X$ smooth over $k$ everywhere. For such $v$, $T\\times_X(H_v\\cap X)$ is étale over $H_v\\cap X$ (base change of $T\\to X$), hence smooth over $k$; no Bertini theorem is applied to $T$ for smoothness.",
-   "uses": [
-    "lem-zl-bertini-smooth-member",
-    "lem-weil-pbc-geometric-regularity-smooth-field-criterion",
-    "lem-weil-pbc-regular-local-hypersurface-criterion",
-    "lem-weil-pbc-regular-closed-point-smooth-source"
-   ],
-   "elementary": false,
+   "text": "Induct on the positive dimension $e$ for the assertion that such a pair $(Y,P)$ has a closed smooth connected affine curve through $S$ with connected inverse image. If $e=1$, take $Y$ and its identity immersion. If $e\\ge2$, Step 1 gives $(Y_1,P_1)$ in dimension $e-1$ with the same prescribed points; apply the induction hypothesis to it. Compose the closed immersions to obtain a closed curve in $Y$: on affine coordinate rings these are successive quotient maps, whose composite is surjective. The defining pullback squares identify its inverse image in $P$ with that in $P_1$. Starting with $(X,T)$ proves the geometric conclusion. Every use of Step 1 has $e\\ge2$, including the final cut from dimension two.",
+   "uses": [],
+   "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/lem-zl-bertini-finite-cover-curve.proof.md",
-    "place": "Proof paragraphs 2--3; Stacks Tag 0FD6"
+    "place": "Proof paragraph 4, iteration to dimension one"
    }
   },
   {
-   "text": "Both $X$ and $T$ are smooth and connected over the algebraically closed field $k$, hence irreducible and so geometrically irreducible; $T$ has dimension $d$ since it is finite étale over $X$. Base loci: the base locus of $V$ on $X$ is $S$ (all sections vanish on $S$, and $V$ generates off $S$), and that of the pulled-back system on $T$ is the finite inverse image of $S$; finite sets of closed points have codimension $d\\ge2$. Hypothesis (i) of [lem-zl-bertini-irreducible-member] on $Y\\in\\{X,T\\}$: choose a closed point $y\\in Y$ over some $x\\in X\\setminus S$. The morphism $Y\\setminus(\\text{inverse image of }S)\\to\\mathbf P(V)$ is unramified at $y$ (an immersion, or an étale morphism followed by an immersion), so by [lem-sc-rational-unramified-cotangent-criterion] the cotangent space of $\\mathbf P(V)$ at the image point surjects onto $\\mathfrak m_y/\\mathfrak m_y^2$; as the former is spanned by ratios of sections of $V$ vanishing at that point, and $\\dim\\mathfrak m_y/\\mathfrak m_y^2=d\\ge2$ ($\\mathcal O_{Y,y}$ is regular of dimension $d$ [lem-weil-pbc-geometric-regularity-smooth-field-criterion]), there are $v_2,v_3\\in V$ vanishing at $y$ with independent images in $\\mathfrak m_y/\\mathfrak m_y^2$, and by generation some $v_1$ with $v_1(y)\\neq0$. With $R=\\mathcal O_{Y,y}$ and $f_2,f_3$ local equations, $R/(f_2)$ and $R/(f_2,f_3)$ are regular [lem-weil-pbc-regular-local-hypersurface-criterion] (the image of $f_3$ lies outside the square of the maximal ideal of $R/(f_2)$ by independence), hence domains [lem-sc-regular-local-domain]. So $\\mathfrak p=(f_2,f_3)$ is prime, exactly one irreducible component $W$ of $H_{v_2}\\cap H_{v_3}$ passes through $y$, and $\\operatorname{codim}(W,Y)=\\operatorname{ht}\\mathfrak p$. Now $0\\subsetneq(f_2)\\subsetneq\\mathfrak p$ is a chain of primes ($f_2\\neq0$, and $f_3\\notin(f_2)$ by independence), so $\\operatorname{ht}\\mathfrak p\\ge2$, and $\\operatorname{ht}\\mathfrak p\\le0+2$ by [lem-weil-pbc-noetherian-height-quotient-bound]. Thus $\\operatorname{codim}(W,Y)=2$ and $W\\not\\subseteq H_{v_1}$ as $y\\in W$. Hence [lem-zl-bertini-irreducible-member] gives nonempty opens of $\\mathbf A(V)$ for $X$ and for $T$. Intersect them with the open of Step 2 (in the irreducible $\\mathbf A(V)$) and choose a $k$-point $v$ ($k$ is infinite). Then $H_v\\cap X$ and $H_v\\cap T=T\\times_X(H_v\\cap X)$ are smooth and geometrically irreducible, in particular connected.",
-   "uses": [
-    "lem-zl-bertini-irreducible-member",
-    "lem-sc-rational-unramified-cotangent-criterion",
-    "lem-weil-pbc-geometric-regularity-smooth-field-criterion",
-    "lem-weil-pbc-regular-local-hypersurface-criterion",
-    "lem-sc-regular-local-domain",
-    "lem-weil-pbc-noetherian-height-quotient-bound"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/lem-zl-bertini-finite-cover-curve.proof.md",
-    "place": "Proof paragraph 3; Stacks Tag 0G4F"
-   }
-  },
-  {
-   "text": "The resulting closed subscheme $X_1\\subset X$ contains $S$, is affine because it is closed in the affine scheme $X$, is smooth and connected, and has dimension $d-1$; its inverse image $T_1=T\\times_X X_1$ is connected, finite, and etale over $X_1$. Repeat the same construction with $X_1,T_1$ and the same finite set $S$ until dimension one. At every stage the dimension is at least two when Bertini is applied, so the codimension-two base-locus hypothesis remains valid; the final $X_r$ is the required curve $C$, and connectedness of $T_r$ is the connectedness of $T\\times_X C$.",
-   "uses": [
-    "lem-zl-bertini-smooth-member",
-    "lem-zl-bertini-irreducible-member",
-    "def-weil-scheme-morphism-properties"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/lem-zl-bertini-finite-cover-curve.proof.md",
-    "place": "Proof paragraph 4: iteration to dimension one"
-   }
-  },
-  {
-   "text": "The final curve $C=X_r$ is a closed subscheme of $X=X_0\\times_{k_0}k$ with $X_0$ of finite type over $k_0$ (smooth). By [lem-zl-bertini-finite-field-descent] applied to the closed immersion $i:C\\hookrightarrow X$, there are $m\\ge1$ and a closed subscheme $C_m\\subseteq X_0\\times_{k_0}\\mathbf F_{q^m}$ with $C=C_m\\times_{\\mathbf F_{q^m}}k$, and an automorphism $\\varphi:C\\to C$ with $i\\circ\\varphi=(\\mathrm{id}_{X_0}\\times\\sigma)^m\\circ i$, where $\\mathrm{id}_{X_0}\\times\\sigma=g_X$ is the geometric Frobenius of $X$. This is the displayed Frobenius stability; smoothness, connectedness and affineness of $C$ and connectedness of $T\\times_XC$ were proved over $k$ in Step 4.",
+   "text": "Apply [lem-zl-bertini-finite-field-descent] to the resulting closed immersion $i:C\\hookrightarrow X=X_0\\times_{k_0}k$. The original $X_0$ is of finite type since it is smooth and affine over $k_0$. This gives $m\\ge1$, the closed model $C_m$ over $\\mathbf F_{q^m}$, and the automorphism $\\varphi$ satisfying $i\\circ\\varphi=g_X^m\\circ i$. With $g_X=\\mathrm{id}_{X_0}\\times\\sigma$, this is exactly the required Frobenius stability. All geometric properties are those obtained in Step 2.",
    "uses": [
     "lem-zl-bertini-finite-field-descent"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/lem-zl-bertini-finite-cover-curve.proof.md",
-    "place": "Proof last paragraph: 'descend to one finite constant-field extension'"
+    "place": "Proof last paragraph, finite constant-field descent"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-scheme-morphism-properties",
-  "lem-pc-serre-vanishing",
-  "lem-sc-rational-unramified-cotangent-criterion",
-  "lem-sc-regular-local-domain",
-  "lem-weil-pbc-geometric-regularity-smooth-field-criterion",
-  "lem-weil-pbc-noetherian-height-quotient-bound",
-  "lem-weil-pbc-regular-closed-point-smooth-source",
-  "lem-weil-pbc-regular-local-hypersurface-criterion",
+  "lem-zl-bertini-finite-cover-irreducible-system",
   "lem-zl-bertini-finite-field-descent",
-  "lem-zl-bertini-irreducible-member",
-  "lem-zl-bertini-sections",
-  "lem-zl-bertini-smooth-member"
+  "lem-zl-bertini-prescribed-point-smooth-system"
  ],
  "proof_origin": {
   "by": "agent",
@@ -181,41 +138,12 @@
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
  },
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "item": "lem-zl-bertini-finite-cover-curve",
   "worker": "stage1",
-  "summary": "Updated the imported statement to the current main-20261015 finite-field geometric-fiber formulation and split the proof into the three Stacks Bertini inputs, the dimension-reduction iteration, and finite-constant-field descent. The only matching slopmaster2 declaration is sorry-backed, so it is not an attachment. Maintainer reader (cc review) repaired steps 2, 3 and 5: cited the regularity and cotangent tools for the derivative conditions and the codimension-two component, removed the Bertini application to T for smoothness (T-cut is étale over the X-cut), and applied the corrected closed-subscheme descent node directly to C.",
-  "blueprint": "Steps realize the main-20261015 proof paragraphs 2 (Tag 0FD5 and derivative conditions), 2 (Tag 0FD6), 3 (Tag 0G4F), and 4 (iteration and finite-field descent).",
-  "tool_uses": [
-   {
-    "node": "lem-pc-serre-vanishing",
-    "why": "Step 1 uses eventual vanishing for the ideal of the first infinitesimal neighborhoods to obtain surjectivity of first derivatives; this is a generic coherent-cohomology input absent from the Bertini unit's own nodes."
-   },
-   {
-    "node": "lem-weil-pbc-geometric-regularity-smooth-field-criterion",
-    "why": "Steps 2-3 take regularity of the local rings of the smooth k-schemes X and T (case L=k); a generic commutative-algebra tool, no node of the Bertini unit states it."
-   },
-   {
-    "node": "lem-weil-pbc-regular-local-hypersurface-criterion",
-    "why": "Steps 2-3 take Stacks 00NQ (R/f regular for f in m minus m^2) to turn the first-derivative conditions into regularity; generic tool."
-   },
-   {
-    "node": "lem-weil-pbc-regular-closed-point-smooth-source",
-    "why": "Step 2 takes regular-at-a-closed-point implies smooth over the algebraically closed field k at the points of S; generic tool."
-   },
-   {
-    "node": "lem-sc-rational-unramified-cotangent-criterion",
-    "why": "Step 3 takes surjectivity on cotangent spaces for the unramified map to P(V) to find v2,v3 with independent differentials; generic tool."
-   },
-   {
-    "node": "lem-sc-regular-local-domain",
-    "why": "Step 3 takes that regular local rings are domains, so (f2) and (f2,f3) are prime; generic tool."
-   },
-   {
-    "node": "lem-weil-pbc-noetherian-height-quotient-bound",
-    "why": "Step 3 takes Krull height bound ht P <= ht(P/J)+t to get codim(W)<=2 as required by Tag 0G4F; generic tool (Mathlib leaf)."
-   }
-  ]
+  "summary": "Q127 repair: preserved the item statement and all maintainer fields. Extracted the full prescribed-point jet/smoothness argument and the independent-differential/codimension-two argument for simultaneous irreducibility into two new statement-only unsplit nodes, with genuine logged searches. The item now only assembles their open conditions, performs dimension induction, and invokes the existing finite-field descent. Full former proof and allocation of every argument are retained in report.md.",
+  "blueprint": "Step 1 assembles paragraph 2 through prescribed-point-smooth-system and paragraph 3 through finite-cover-irreducible-system; Step 2 is paragraph 4 iteration; Step 3 is paragraph 4 finite-field descent. No unit or chapter route is changed.",
+  "tool_uses": []
  },
  "tool_uses": [
   "lem-pc-serre-vanishing",
@@ -227,11 +155,11 @@
   "lem-weil-pbc-noetherian-height-quotient-bound"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-Q137-7a71e23f0",
-  "group": "Q137",
+  "reviewer": "NT-cc-Q127-3038767b5",
+  "group": "Q127",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q137-7a71e23f0 (reviewer sub-agent of L); spot-checked: I read the item, all four new nodes, every cited statement, and the sources: blueprint main-20261015 (the item statement is verbatim the current blueprint, so the update is not a weakening) and the local Stacks text of 0FD5 (varieties.tex l.10821), Situation 0FD3/0FD6 (l.10910-10964) and 0G4F (more-morphisms.tex l.9055). No SGA source is used, and the slopmaster2 declaration has a sorry, so it was correctly not attached. Steps 1 and 4 are correct as written: 0FD5 applies on the projective closure, Serre vanishing (0B5U) for the ideal of the points' first-order neighbourhoods gives surjectivity onto the cotangent spaces, and the iteration keeps the cut affine, smooth and connected with base locus S of codimension at least 2. I repaired three faults in fixes/. (a) Delivery errors B2/B4/E2 in lem-zl-bertini-finite-field-descent: X_0 was never introduced, a $ was unclosed, and the data clause was not a precise statement; with X_0 arbitrary it is false (the disjoint union of A^1's over all n, taking one point of degree n in the n-th copy, has no m). I restated it for X_0 of finite type and a closed immersion C into X_0 x k, and checked that version: finitely many coefficients, gluing by faithful flatness, and gamma^m fixes F_{q^m}. Step 5 now applies it directly to C. (b) B2/B7/B4 in the 0FD6 and 0G4F nodes: 'general' was never defined, 'linear system' was vague, and one $ was unclosed. I rewrote both in the terms of Situation 0FD3 (psi, H_v=Z(psi(v)), Zariski open of A^r, all k'-points) with the hypotheses checked one by one against the source. I also added stmt_deps to the 0FD5 node. (c) C1/E1 in steps 2-3: the steps turned 'nonzero derivative' into 'smooth', and claimed sections with independent differentials and a component of codimension exactly 2, with nothing cited; they also implied applying 0FD6 on T, where the map is not an immersion. Repaired with existing nodes: geometric-regularity-smooth criterion, 00NQ hypersurface criterion, regular closed point over an algebraically closed field is smooth, unramified cotangent criterion, regular local rings are domains, and the Krull height bound (giving height exactly 2). Smoothness on T now comes from the cut on T being etale over the cut on X. I accepted these as tool uses, together with lem-pc-serre-vanishing. No duplicates: rg for bertini, descent and spreading-out over the DAG found only nodes with different statements. Edge cases checked: d=2, a single point in S, the trivial cover. No node created or dropped.; 5 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q127-3038767b5 (reviewer sub-agent of L); spot-checked: Re-split under the 2026-10-21 repair note (at least 1 new node, assembly at most 3000 characters). The base is the live Q137 split; live is unchanged, so the delivery is not superseded. I compared the old 5-step proof with the new one step by step. Old steps 1–2 (0FD5 on the projective closure, 0B5T Serre vanishing on the first-order neighbourhoods, jet surjectivity, m∖m² regular hypersurface, 0FD6 off S, pure dimension d−1) are now the statement lem-zl-bertini-prescribed-point-smooth-system. Old step 3 (unramified cotangent via 0B2G, independent v2,v3, regular quotients are domains, height exactly 2, 0G4F on X and on T) and the étale smoothness of T_v are now lem-zl-bertini-finite-cover-irreducible-system. The item keeps the intersection of the two opens and a k-point, an explicit induction on e (base e=1, every cut has e>=2), and the finite-field-descent citation (i∘φ=g_X^m∘i). The assembly is 1987 characters, and nothing was dropped or blurred. I checked both new statements against Stacks 0FD5, 0FD6, 0G4F and 0B5T (labels confirmed in the tags file), including the hypotheses for 0G4F on T (π^*ψ, base locus π^{-1}S of codimension d>=2, π surjective so T_v is nonempty). Both are true. Edge cases checked: single point S, d=2, identity cover. Neither node restates the item or a clause of it, and there are no duplicates (sections, smooth-member, irreducible-member, independent-functions, hypersurface-nonzero-differential, curve-testing-irreducibility all differ). No SGA source. Fix: B3 in both new nodes, which used 'pure dimension' without citing def-weil-pure-dimension; I added the citation and the stmt_dep. Advisory: the item's maintainer field tool_uses is now stale; those tools belong to the future proofs of the new nodes. The snapshot DAG directory disappeared mid-review, so I read the remaining definition statements from the live DAG, read-only.; 2 file(s) fixed by the reviewer"
  }
 }
