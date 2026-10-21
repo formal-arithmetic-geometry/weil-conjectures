@@ -14,68 +14,62 @@
  ],
  "proof": [
   {
-   "text": "Because the sites are subcanonical, $h_V,h_{uV}$ are sheaves. The sheaf categories are full subcategories of presheaves, so Yoneda evaluation applies to their morphisms. For every sheaf $F$ on $\\mathcal D$, the adjunction and Yoneda give bijections\n$$\\operatorname{Hom}(Lh_V,F)\\simeq\\operatorname{Hom}(h_V,u^sF)\\simeq F(uV)\\simeq\\operatorname{Hom}(h_{uV},F).$$\nLet $\\Psi_F$ denote their composite. For $r:h_{uV}\\to F$, the adjunct of $r\\circ c_V$ is $u^s(r)\\circ\\beta_V$ by naturality of the adjunction. Its value at $\\mathrm{id}_V$ is $r_{uV}(u(\\mathrm{id}_V))=r_{uV}(\\mathrm{id}_{uV})$. The two Yoneda evaluations therefore give $\\Psi_F(r\\circ c_V)=r$. Since $\\Psi_F$ is bijective, precomposition by $c_V$ is bijective for every $F$.",
+   "text": "Use the already proved Adjunction.uliftYonedaCompIso from WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantEtale.PullbackYoneda. It is the inverse of uliftYonedaCompHom, whose composition with any g evaluates under K.uliftYonedaEquiv to the Yoneda evaluation of adj.homEquiv(g). In particular, composing uliftYonedaCompHom with the comparison c gives the identity. Applying this identity and injectivity of J.uliftYonedaEquiv proves adj.homEquiv(c_V)=beta_V: both evaluations at id_V equal id_(U V), using U.map_id.",
    "uses": [
-    "lem-weil-pbc-left-exact-site-inverse-image-tensor",
-    "lem-galois-yoneda-hom-bijection",
-    "def-weil-pbc-sites-and-cohomology"
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-galois-yoneda-hom-bijection"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 04D3, lemma-pullback-representable-sheaf; expanded normalized adjunction/Yoneda argument (Categories Tag 001P, lemma-yoneda)."
+    "place": "Tag 04D3, lemma-pullback-representable-sheaf; normalized diagram and finite-limit compatibility are the expanded adjunction/Yoneda argument, written in report.md under Proof in words."
    }
   },
   {
-   "text": "Take $F=Lh_V$ in the preceding precomposition bijection. There is $t:h_{uV}\\to Lh_V$ with $t\\circ c_V=\\mathrm{id}_{Lh_V}$. For $F=h_{uV}$, the morphisms $c_V\\circ t$ and $\\mathrm{id}_{h_{uV}}$ have equal precomposites with $c_V$, since $(c_V\\circ t)\\circ c_V=c_V$. Injectivity gives $c_V\\circ t=\\mathrm{id}_{h_{uV}}$, proving that $c_V$ is an isomorphism. Its adjunct is the specified $\\beta_V$, and $\\beta_V(V)(\\mathrm{id}_V)=u(\\mathrm{id}_V)=\\mathrm{id}_{uV}$, proving the required normalization.",
+   "text": "Every component of the existing natural isomorphism is an isomorphism. Rewrite its adjunct using step 1. The beta definition gives beta_V(W)(a)=U.map(a) by reflexivity, and evaluation at id_V gives id_(U V) by U.map_id.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 04D3, lemma-pullback-representable-sheaf; expanded normalized adjunction/Yoneda argument (Categories Tag 001P, lemma-yoneda)."
+    "place": "Tag 04D3, lemma-pullback-representable-sheaf; normalized diagram and finite-limit compatibility are the expanded adjunction/Yoneda argument, written in report.md under Proof in words."
    }
   },
   {
-   "text": "For $a:V\\to V'$, the adjunct of $c_{V'}\\circ L(h_a)$ is $\\beta_{V'}\\circ h_a$, whereas the adjunct of $h_{u(a)}\\circ c_V$ is $u^s(h_{u(a)})\\circ\\beta_V$. At $W\\in\\mathcal C$ and $b:W\\to V$, these send $b$ respectively to $u(a\\circ b)$ and $u(a)\\circ u(b)$, equal by functoriality. Thus the adjuncts and hence the original maps agree. This gives the stated naturality equation, and applying it to each arrow identifies every represented finite diagram.",
-   "uses": [
-    "lem-weil-pbc-left-exact-site-inverse-image-tensor"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 04D3, lemma-pullback-representable-sheaf; expanded normalized adjunction/Yoneda argument (Categories Tag 001P, lemma-yoneda)."
-   }
-  },
-  {
-   "text": "Let $(T,p_j:T\\to V_j)$ be a limit cone of a finite diagram. The cone $(h_T,h_{p_j})$ is a limit of sheaves: for any sheaf $A$ and compatible maps $s_j:A\\to h_{V_j}$, their values at $x\\in A(W)$ are a compatible family of arrows $W\\to V_j$, hence give a unique arrow $W\\to T$. These assignments are natural in $W$ by uniqueness, giving the unique map $A\\to h_T$. The same argument applies in $\\mathcal D$. Since $u$ preserves finite limits, $(uT,u(p_j))$ is a limit cone; since $L$ preserves finite limits by the cited node, so is $(Lh_T,L(h_{p_j}))$. Step 3 says $c_{V_j}\\circ L(h_{p_j})=h_{u(p_j)}\\circ c_T$. Consequently $c_T$ is exactly the comparison of these cones determined by their legs, by uniqueness in the limit universal property. Equivalently, composing the canonical limit comparison for $L$ with the map induced by the $c_{V_j}$ equals the comparison through $c_T$ and $h_{uT}$. This also covers the empty diagram: both cones are terminal, so their comparison is the unique terminal isomorphism.",
-   "uses": [
-    "lem-weil-pbc-left-exact-site-inverse-image-tensor"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 04D3, lemma-pullback-representable-sheaf; expanded normalized adjunction/Yoneda argument (Categories Tag 001P, lemma-yoneda)."
-   }
-  },
-  {
-   "text": "Write $m:G\\times G\\to G$, $e:1\\to G$, and $i:G\\to G$ for the group operations. Under the product identifications of Step 4, the multiplication on $Lh_G$ is $L(h_m)$ preceded by $(Lh_G\\times Lh_G)\\xrightarrow{\\sim}Lh_{G\\times G}$, and on $h_{uG}$ it is $h_{u(m)}$ preceded by $(h_{uG}\\times h_{uG})\\xrightarrow{\\sim}h_{u(G\\times G)}$. Step 4 identifies $c_{G\\times G}$ with $c_G\\times c_G$ under these comparisons; Step 3 for $m$ therefore says $c_G$ respects multiplication. Step 3 for $e$ and $i$, with the terminal comparison of Step 4, gives preservation of the unit and inverse. The group identities hold because they are equalities of composites of operations, diagonals and projections, which the functors and these product comparisons preserve. As $c_G$ is invertible, its inverse also respects these operations, by composing the same equations with its inverse. Finally for a homomorphism $b:G\\to H$, Step 3 gives $c_H\\circ L(h_b)=h_{u(b)}\\circ c_G$, which is the claimed compatibility with all represented group homomorphisms.",
+   "text": "Apply the naturality field of Adjunction.uliftYonedaCompIso.hom to a:V -> V′. This is exactly L(h_a) followed by c_(V′) equals c_V followed by h_(U.map a).",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 04D3, lemma-pullback-representable-sheaf; expanded normalized adjunction/Yoneda argument (Categories Tag 001P, lemma-yoneda)."
+    "place": "Tag 04D3, lemma-pullback-representable-sheaf; normalized diagram and finite-limit compatibility are the expanded adjunction/Yoneda argument, written in report.md under Proof in words."
+   }
+  },
+  {
+   "text": "Apply limit.hom_ext to the two canonical finite-limit comparison composites. At every projection, limMap_pi and preservesLimitIso_hom_pi reduce the equation to naturality of c on limit.pi V i, which is step 3. This works for every finite shape, including the empty shape, because limit.hom_ext covers it as well. Yoneda preserves limits by Mathlib.Sites.PreservesLimits and U and L preserve finite limits by the stated typeclass hypotheses.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 04D3, lemma-pullback-representable-sheaf; normalized diagram and finite-limit compatibility are the expanded adjunction/Yoneda argument, written in report.md under Proof in words."
+   }
+  },
+  {
+   "text": "Apply Mathlib Functor.mapGrpNatIso to the existing natural isomorphism c. In cartesian monoidal categories every natural transformation of monoidal functors is monoidal, so no additional compatibility assumption is needed. The underlying hom and inverse components of the lifted isomorphism are definitionally c.hom and c.inv, respectively; both specified equations are reflexive.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 04D3, lemma-pullback-representable-sheaf; normalized diagram and finite-limit compatibility are the expanded adjunction/Yoneda argument, written in report.md under Proof in words."
    }
   }
  ],
  "proof_deps": [
   "def-weil-pbc-sites-and-cohomology",
-  "lem-galois-yoneda-hom-bijection",
-  "lem-weil-pbc-left-exact-site-inverse-image-tensor"
+  "lem-galois-yoneda-hom-bijection"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites.tex",
-  "place": "Tag 04D3, lemma-pullback-representable-sheaf, expanded using Categories Tag 001P, lemma-yoneda; naturality, finite-limit and group-operation calculations written explicitly by N7."
+  "place": "Tag 04D3, lemma-pullback-representable-sheaf; U7 reuses the proved source-library Adjunction.uliftYonedaCompIso and Mathlib finite-limit and group-object APIs."
  },
  "mathlib_searches": [
   {
@@ -216,9 +210,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-pbc-left-exact-site-inverse-image-tensor"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
@@ -250,5 +242,15 @@
   "group": "Q17",
   "result": "pass",
   "note": "Clause-by-clause match. c_V = adj.uliftYonedaCompIso.hom.app V, pinned by homEquiv(c_V) = siteRepresentableArrowMap (real data: homMk of Mathlib uliftYonedaMap); checked true via uliftYonedaCompHom's unit element. Normalization at id_V, naturality equation in node order, finite-limit preservesLimitIso/lim.map equation for any FinCategory shape incl. empty, and mapGrp natural iso with hom/inv fixed to c and c⁻¹ (oplax structure is Subsingleton, so not vacuous or arbitrary). Hypotheses are no stronger: general GrothendieckTopology, IsContinuous follows from the dep, independent object universes with a common hom universe per the size convention, PreservesFiniteLimits L redundant in substance (advisory). lean.statement verbatim; docstrings carry source, blueprint id and 5 steps; sorry only; node changes only lean. nt_compile --json of the unmodified file clean (1.8 s, exit 0) once the in-progress rebuild of the live library had produced the needed oleans; a copy without the Sheaf imports fails on HasLimitsOfShape, so those imports are needed. No findings blocking."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U7",
+  "result": "pass",
+  "landing": "20261021T120801-L-3946565",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

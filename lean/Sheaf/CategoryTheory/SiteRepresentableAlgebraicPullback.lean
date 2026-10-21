@@ -6,13 +6,11 @@ Authors: SHEAF group Q17
 module
 
 public import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantEtale.PullbackYoneda
-public import Sheaf.CategoryTheory.SiteCoveringAxioms
-public import Sheaf.CategoryTheory.SiteInverseImageTensor
+public import Mathlib.CategoryTheory.Sites.Limits
 public import Mathlib.CategoryTheory.Sites.PreservesLimits
-public import Mathlib.CategoryTheory.Sites.CoverPreserving
 public import Mathlib.CategoryTheory.Monoidal.Grp
 public import Mathlib.CategoryTheory.Limits.Preserves.Limits
-import Mathlib.CategoryTheory.Yoneda
+public import Mathlib.CategoryTheory.Limits.Types.Limits
 
 /-!
 # Normalized inverse image of represented diagrams
@@ -125,7 +123,34 @@ theorem siteRepresentableAlgebraicPullback
         (∀ G : Grp C, (e.hom.app G).hom.hom =
           adj.uliftYonedaCompIso.{max u v₁ v₂ w}.hom.app G.X) ∧
         (∀ G : Grp C, (e.inv.app G).hom.hom =
-          adj.uliftYonedaCompIso.{max u v₁ v₂ w}.inv.app G.X)) :=
-  sorry
+          adj.uliftYonedaCompIso.{max u v₁ v₂ w}.inv.app G.X)) := by
+  let c := adj.uliftYonedaCompIso.{max u v₁ v₂ w}
+  have hβ (V : C) : adj.homEquiv _ _ (c.hom.app V) =
+      siteRepresentableArrowMap J K U V := by
+    apply J.uliftYonedaEquiv.injective
+    rw [← adj.uliftYonedaEquiv_uliftYonedaCompHom_comp]
+    have h : adj.uliftYonedaCompHom V ≫ c.hom.app V = 𝟙 _ :=
+      (c.app V).inv_hom_id
+    rw [h]
+    change ULift.up (𝟙 (U.obj V)) = ULift.up (U.map (𝟙 V))
+    rw [U.map_id]
+  refine ⟨?_, ?_, ?_, ?_⟩
+  · intro V
+    refine ⟨inferInstance, hβ V, ?_, ?_⟩
+    · rw [hβ V]
+      change ULift.up (U.map (𝟙 V)) = ULift.up (𝟙 (U.obj V))
+      rw [U.map_id]
+    · intro W a
+      rfl
+  · intro V V' a
+    exact c.hom.naturality a
+  · intro I _ _ V
+    apply limit.hom_ext
+    intro i
+    simp only [← limMap_eq, Category.assoc, limMap_π, preservesLimitIso_hom_π_assoc,
+      preservesLimitIso_hom_π, Functor.whiskerLeft_app]
+    exact c.hom.naturality (limit.π V i)
+  · intro _ _ _ _
+    exact ⟨Functor.mapGrpNatIso c, (fun _ ↦ rfl), (fun _ ↦ rfl)⟩
 
 end CategoryTheory
