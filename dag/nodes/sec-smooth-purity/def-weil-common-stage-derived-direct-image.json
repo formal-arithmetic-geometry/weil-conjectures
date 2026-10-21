@@ -8,48 +8,366 @@
   "document": "lean/Sheaf/Paper/SfCommonStageDirectImage.lean",
   "place": "Existing landed interface, lines 275-480; sources recorded there: Bhatt-Scholze 6.8.14(2), 6.8.15 and Stacks 099N, 0D6G, 05TE. Reindexed from def-weil-derived-direct-image, not a new mathematical claim."
  },
- "statement": "Fix a finite-field datum D, a prime l distinct from its characteristic, an algebraic closure Omega of Q_l, and a morphism f:X_0 to Y_0 of finite-type quasi-compact models over the base field [def-weil-finite-field-fiber]. On their geometric fibres use the actual common-stage constructible categories [def-weil-algebraically-closed-coefficients] and the normalized derived pullback [def-weil-derived-pullback-tensor-hom]. The finite/integral direct-image construction is [def-weil-derived-direct-image]. The common-stage pullback has a right adjoint sfModelDerivedPush, with its specified adjunction sfModelDerivedAdjunction. Pullback composition gives the normalized commuting-square comparison, whose adjoint is sfModelDerivedExchange; the derived adjunction gives the compatible direct-image shift comparison and the image of connecting morphisms. Frobenius pullback is an equivalence. Its normalized square lifts this adjunction to the actual Weil fixed-pair categories [def-zl-weil-ind-sheaf-category], defining sfModelWeilDerivedPush and sfModelWeilDerivedAdjunction. Forgetting the Weil structure identifies this right adjoint with sfModelDerivedPush by the unique natural isomorphism whose image under geometric pullback, followed by the geometric counit, is the carrier of the Weil counit. These constructions are exactly the already-landed declarations of Sheaf.Paper.SfCommonStageDirectImage; no claim of arbitrary-field Weil models or of new finite-reduction comparison isomorphisms is added.",
+ "statement": "Fix a finite-field datum D, a prime l distinct from its characteristic, an algebraic closure Omega of Q_l, and a morphism f:X_0 to Y_0 of finite-type quasi-compact models over the base field [def-weil-finite-field-fiber]. On their geometric fibres use the actual common-stage constructible categories [def-weil-algebraically-closed-coefficients] and the normalized derived pullback [def-weil-derived-pullback-tensor-hom]. The finite/integral direct-image construction is [def-weil-derived-direct-image]. The common-stage pullback has a right adjoint sfModelDerivedPush, with its specified adjunction sfModelDerivedAdjunction. Pullback composition, with the normalized composition comparison and Frobenius square specified in [def-zl-weil-ind-sheaf-category], gives the normalized commuting-square comparison, whose adjoint is sfModelDerivedExchange; the derived adjunction gives the compatible direct-image shift comparison and the image of connecting morphisms. Frobenius pullback is an equivalence. Its normalized square lifts this adjunction to the actual Weil fixed-pair categories [def-weil-weil-sheaf-complex], defining sfModelWeilDerivedPush and sfModelWeilDerivedAdjunction. Forgetting the Weil structure identifies this right adjoint with sfModelDerivedPush by the unique natural isomorphism whose image under geometric pullback, followed by the geometric counit, is the carrier of the Weil counit. These constructions are exactly the already-landed declarations of Sheaf.Paper.SfCommonStageDirectImage; no claim of arbitrary-field Weil models or of new finite-reduction comparison isomorphisms is added.",
  "stmt_deps": [
   "def-weil-derived-direct-image",
   "def-weil-finite-field-fiber",
   "def-weil-algebraically-closed-coefficients",
   "def-weil-derived-pullback-tensor-hom",
+  "def-weil-weil-sheaf-complex",
   "def-zl-weil-ind-sheaf-category"
  ],
  "proof": [
   {
-   "text": "Use the finite-rational adjunctions and invertible scalar-change mates. The defining counit equation implies unit compatibility by transposition. Transpose both sides of the right-family associativity equation; counit naturality, the mate equation and left-family coherence prove equality. Thus the right functors form a stage-system morphism and both adjunction transformations form compatible families. Descend these transformations on the actual pair category, including both triangle identities. Identify the descended left functor with commonStageDerivedPullback using its exact object and representative formulas.",
+   "text": "Put $\\mathcal C=\\mathcal C_Y$, $\\mathcal D=\\mathcal C_X$ for the actual common-stage categories. Apply [lem-sf-rational-direct-image-adjunctions] to $f_0$. At coefficient stages $i\\le j$ write $S_{ij}$ for extension on $Y$, $T_{ij}$ for extension on $X$, $L_i\\dashv R_i$ for the stage adjunction, $c_{ij}:L_jS_{ij}\\xrightarrow{\\sim}T_{ij}L_i$ for the left comparison, and $b_{ij}:S_{ij}R_i\\xrightarrow{\\sim}R_jT_{ij}$ for the right comparison. With usual right-to-left composition its stated mate equation is $\\varepsilon_j\\circ L_j(b_{ij})=T_{ij}(\\varepsilon_i)\\circ c_{ij,R_i}$. These are rational constructible adjunctions, not arbitrary ambient sheaf adjunctions.",
    "uses": [
     "lem-sf-rational-direct-image-adjunctions",
-    "def-weil-derived-pullback-tensor-hom",
-    "prop-weil-pbc-descent-functors"
+    "def-weil-algebraically-closed-coefficients"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "lean/Sheaf/Paper/SfCommonStageDirectImage.lean",
+    "place": "DirectImageAdjunction and rationalStageAdjunction_descends, lines 39–237; public constructors lines 275–480; Bhatt–Scholze Proposition 6.8.14(2), Remark 6.8.15."
+   }
   },
   {
-   "text": "The geometric fibre of each finite-type quasi-compact model is Noetherian and has finite topological Krull dimension. Stalk invertibility follows from residue-field invertibility. The coherent coefficient comparison supplies the common-stage identity isomorphism. Together with pullback composition and the inverse geometric Frobenius this proves that Frobenius pullback is an equivalence. Lift the geometric adjunction to IsoAlgebra using the mate of the normalized Frobenius square.",
+   "text": "Check unit compatibility by the stage-$j$ Hom bijection. The transposes of $b_{ij,L_iK}\\circ S_{ij}(\\eta_{i,K})$ and $R_j(c_{ij,K})\\circ\\eta_{j,S_{ij}K}$ are both $c_{ij,K}$: for the first, substitute the mate equation, move $S_{ij}(\\eta_i)$ past $c_{ij}$ by naturality, and cancel $\\varepsilon_iL_i\\circ L_i\\eta_i=1$; for the second cancel the stage-$j$ triangle identity. Thus the units form a compatible family. The counit compatibility is the given mate equation itself.",
    "uses": [
-    "lem-sf-common-stage-pullback-identity",
-    "lem-fd-rational-coefficient-category-comparison",
+    "lem-sf-rational-direct-image-adjunctions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/Sheaf/Paper/SfCommonStageDirectImage.lean",
+    "place": "DirectImageAdjunction and rationalStageAdjunction_descends, lines 39–237; public constructors lines 275–480; Bhatt–Scholze Proposition 6.8.14(2), Remark 6.8.15."
+   }
+  },
+  {
+   "text": "For $i\\le j\\le k$, the two composites from $S_{jk}S_{ij}R_i$ to $R_kT_{ik}$ are $R_k(t_{ijk})\\circ b_{jk,T_{ij}}\\circ S_{jk}(b_{ij})$ and $b_{ik}\\circ s_{ijk,R_i}$, where $s,t$ are the stage associators. Apply the injective inverse Hom bijection for $L_k\\dashv R_k$. Substituting the mate equation twice in the first composite gives $t_{ijk}\\circ T_{jk}T_{ij}(\\varepsilon_i)\\circ T_{jk}(c_{ij,R_i})\\circ c_{jk,S_{ij}R_i}$. Naturality of $t$ and coherence of $c$ identify this with $T_{ik}(\\varepsilon_i)\\circ c_{ik,R_i}\\circ L_k(s_{ijk,R_i})$, the transpose of the second composite. Hence the right comparisons are coherent. The identity comparison follows by the same transposition with $i=j$, giving the unit constraint. No new geometric assertion enters this calculation.",
+   "uses": [
+    "lem-sf-rational-direct-image-adjunctions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/Sheaf/Paper/SfCommonStageDirectImage.lean",
+    "place": "DirectImageAdjunction and rationalStageAdjunction_descends, lines 39–237; public constructors lines 275–480; Bhatt–Scholze Proposition 6.8.14(2), Remark 6.8.15."
+   }
+  },
+  {
+   "text": "Construct the right functor directly on the actual pair category [def-weil-algebraically-closed-coefficients]: send $(i,K)$ to $(i,R_iK)$ and a representative $u:T_{im}K\\to T_{jm}K'$ to $b_{jm,K'}^{-1}\\circ R_m(u)\\circ b_{im,K}$. Refining the representative gives the same class, by naturality of $b$ and the coherence equation proved in step 3. Identity and composition follow by $b^{-1}b=1$ at a common stage. Represent each unit and counit by its component at the object's stage; step 2 gives their naturality across stages. The two triangle composites are identities at every finite stage, hence identities as classes. The descended left functor equals the prescribed common-stage pullback: on $(E,K)$ it is $(E,Lf_E^*K)$, and on a representative $u$ over $M$ it is the conjugate $\\beta_{\\mathrm{target}}^{-1}Lf_M^*(u)\\beta_{\\mathrm{source}}$ in [def-weil-derived-pullback-tensor-hom]. This specifies an adjunction on the actual pair category. Define sfModelDerivedPush as a right adjoint selected from this universal property, and sfModelDerivedAdjunction as its adjunction. The universal property, rather than unspecified object choices, determines its data.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
     "def-weil-derived-pullback-tensor-hom"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "lean/Sheaf/Paper/SfCommonStageDirectImage.lean",
+    "place": "DirectImageAdjunction and rationalStageAdjunction_descends, lines 39–237; public constructors lines 275–480; Bhatt–Scholze Proposition 6.8.14(2), Remark 6.8.15."
+   }
   },
   {
-   "text": "Apply uniqueness of right adjoints to compare the selected Weil right adjoint with the lifted geometric right adjoint. Forget its structure and project the canonical counit equation to the carrier map. If another isomorphism satisfies that equation, injectivity of the inverse geometric Hom equivalence gives equality of every component.",
-   "uses": [],
-   "elementary": true
+   "text": "Use the normalized composition comparison specified on rationalized integral representatives in [def-zl-weil-ind-sheaf-category]. It gives $L(gf)^*\\cong Lf^*Lg^*$ on geometric common-stage categories. For a commuting square $jb=aj_W$, composing this comparison, the equality of composites, and its inverse gives $\\theta:Lj_W^*La^*\\xrightarrow{\\sim}Lb^*Lj^*$. Define the exchange on $K$ as the adjunct of $Lj_W^*La^*Rj_*K\\xrightarrow{\\theta}Lb^*Lj^*Rj_*K\\xrightarrow{Lb^*(\\varepsilon_j)}Lb^*K$. This is exactly sfModelPullComposition, sfModelPullSquare and sfModelDerivedExchange. Naturality follows by applying the natural Hom bijection to this natural composite.",
+   "uses": [
+    "def-zl-weil-ind-sheaf-category",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/Sheaf/Paper/SfCommonStageDirectImage.lean",
+    "place": "DirectImageAdjunction and rationalStageAdjunction_descends, lines 39–237; public constructors lines 275–480; Bhatt–Scholze Proposition 6.8.14(2), Remark 6.8.15."
+   }
+  },
+  {
+   "text": "The specified pullback commutes with shifts; this follows by its finite/integral/rational/common-stage construction in [def-weil-derived-pullback-tensor-hom] and by descent of the finite-stage shift comparisons in [prop-weil-pbc-descent-functors]. Apply clause (iii) of [lem-weil-pbc-adjunction-shift-compatibility-unique] to the geometric adjunction: it supplies the unique shift structure on its right adjoint compatible with its unit and counit. For $w:K\\to L[1]$, define its connecting-map image by $R(w)$ followed by this specified comparison $R(L[1])\\xrightarrow{\\sim}(RL)[1]$. These are sfModelPushCommShift and sfModelPushConnecting, including the shift comparison rather than just the unshifted image.",
+   "uses": [
+    "def-weil-derived-pullback-tensor-hom",
+    "prop-weil-pbc-descent-functors",
+    "lem-weil-pbc-adjunction-shift-compatibility-unique"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/Sheaf/Paper/SfCommonStageDirectImage.lean",
+    "place": "DirectImageAdjunction and rationalStageAdjunction_descends, lines 39–237; public constructors lines 275–480; Bhatt–Scholze Proposition 6.8.14(2), Remark 6.8.15."
+   }
+  },
+  {
+   "text": "Each geometric fibre is finite type over $k$ by base-change stability [lem-sfb-finite-type-composition-base-change]. Since a field is Noetherian, [lem-weil-pbc-finite-type-over-noetherian] gives Noetherianity; [lem-kun-dimension-finite-type] gives finite topological Krull dimension. In every residue field the image of $\\ell\\ne p$ is nonzero, hence invertible. The local-ring residue criterion gives stalk invertibility: if $uv-1$ is in the maximal ideal for a lift $v$ of the residue inverse of $u=\\ell$, then $uv$ and hence $u$ are units. Thus the hypotheses of the coefficient comparison and common-stage identity theorems are satisfied, including the empty fibre.",
+   "uses": [
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-kun-dimension-finite-type",
+    "def-weil-finite-field-fiber"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/Sheaf/Paper/SfCommonStageDirectImage.lean",
+    "place": "DirectImageAdjunction and rationalStageAdjunction_descends, lines 39–237; public constructors lines 275–480; Bhatt–Scholze Proposition 6.8.14(2), Remark 6.8.15."
+   }
+  },
+  {
+   "text": "Take the simultaneous comparison system given by [lem-fd-rational-coefficient-category-comparison], and apply [lem-sf-common-stage-pullback-identity] on each fibre. Geometric Frobenius $g_X$ is a scheme automorphism with the explicitly specified inverse [def-weil-frobenius-detailed]. The normalized pullback compositions of step 5, followed by this identity comparison, identify $Lg_X^*L(g_X^{-1})^*$ and $L(g_X^{-1})^*Lg_X^*$ with the identity. They exhibit $Lg_X^*$ as an equivalence. For $f_0$ over $k_0$, $g_Yf=fg_X$: both have the same projection to the model and act on the field factor by the same $\\gamma$; the fibre-product universal property proves equality. Composing the normalized composition comparisons along this equality gives $e:L G\\xrightarrow{\\sim}F L$, for $L=Lf^*$, $F=Lg_Y^*$ and $G=Lg_X^*$, with diagrammatic juxtaposition: $LG=G\\circ L$ and $FL=L\\circ F$. This is the prescribed Frobenius square.",
+   "uses": [
+    "lem-fd-rational-coefficient-category-comparison",
+    "lem-sf-common-stage-pullback-identity",
+    "def-weil-frobenius-detailed",
+    "def-zl-weil-ind-sheaf-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/Sheaf/Paper/SfCommonStageDirectImage.lean",
+    "place": "DirectImageAdjunction and rationalStageAdjunction_descends, lines 39–237; public constructors lines 275–480; Bhatt–Scholze Proposition 6.8.14(2), Remark 6.8.15."
+   }
+  },
+  {
+   "text": "Form $b:RF\\to GR$ (diagrammatic, i.e. $F\\circ R\\to R\\circ G$ with components $FRM\\to RGM$) as the mate of $e^{-1}:FL\\to LG$ (i.e. $L\\circ F\\to G\\circ L$), where $R=$sfModelDerivedPush. Apply [lem-weil-mate-iso-along-equivalences] to $L\\dashv R$ on both sides, with horizontal functors $F,G$. They are equivalences by step 8, so its hypotheses (source equivalence and target fully faithful) hold; therefore $b$ is invertible. Apply [lem-sf-fixed-pair-adjunction-lift] to $e,b$. Its carrier adjunction is exactly the geometric one. The actual Weil-complex categories are precisely these fixed-pair categories [def-weil-weil-sheaf-complex]. Select its right adjoint and adjunction to define sfModelWeilDerivedPush and sfModelWeilDerivedAdjunction. This uses no derived category of Weil sheaves and no ind-category.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "lem-weil-mate-iso-along-equivalences",
+    "lem-sf-fixed-pair-adjunction-lift",
+    "def-weil-weil-sheaf-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/Sheaf/Paper/SfCommonStageDirectImage.lean",
+    "place": "DirectImageAdjunction and rationalStageAdjunction_descends, lines 39–237; public constructors lines 275–480; Bhatt–Scholze Proposition 6.8.14(2), Remark 6.8.15."
+   }
+  },
+  {
+   "text": "Let $\\widetilde R$ be the selected Weil right adjoint and $R^W$ the explicit lifted right adjoint of step 9, with counits $\\widetilde\\varepsilon,\\varepsilon^W$. For each Weil pair $K$, take the transpose under $L^W\\dashv R^W$ of $\\widetilde\\varepsilon_K:L^W\\widetilde RK\\to K$. Transposition in the other adjunction gives its inverse: both composites are identities since their transposes are the relevant counits. These component maps are natural by naturality of counits and Hom bijections. Forgetting yields an isomorphism $u:\\operatorname{For}_Y\\widetilde R\\xrightarrow{\\sim}R\\operatorname{For}_X$ with $\\varepsilon_{\\operatorname{For}_XK}\\circ L(u_K)=\\operatorname{For}_X(\\widetilde\\varepsilon_K)$, because the lifted counit has geometric carrier by [lem-sf-fixed-pair-adjunction-lift]. If $v$ satisfies this same equation, injectivity of the geometric inverse Hom bijection gives $u_K=v_K$ for every $K$, hence equality of natural isomorphisms. This constructs and uniquely normalizes sfModelWeilDerivedPushForget.",
+   "uses": [
+    "lem-sf-fixed-pair-adjunction-lift",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/Sheaf/Paper/SfCommonStageDirectImage.lean",
+    "place": "DirectImageAdjunction and rationalStageAdjunction_descends, lines 39–237; public constructors lines 275–480; Bhatt–Scholze Proposition 6.8.14(2), Remark 6.8.15."
+   }
   }
  ],
  "proof_deps": [
   "lem-sf-rational-direct-image-adjunctions",
+  "def-weil-algebraically-closed-coefficients",
   "def-weil-derived-pullback-tensor-hom",
+  "def-zl-weil-ind-sheaf-category",
+  "def-weil-pbc-adjunction-mate",
   "prop-weil-pbc-descent-functors",
+  "lem-weil-pbc-adjunction-shift-compatibility-unique",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-kun-dimension-finite-type",
+  "def-weil-finite-field-fiber",
+  "lem-fd-rational-coefficient-category-comparison",
   "lem-sf-common-stage-pullback-identity",
-  "lem-fd-rational-coefficient-category-comparison"
+  "def-weil-frobenius-detailed",
+  "lem-weil-mate-iso-along-equivalences",
+  "lem-sf-fixed-pair-adjunction-lift",
+  "def-weil-weil-sheaf-complex"
  ],
- "proof_origin": "E1, 2026-10-20: finite-stage adjunction descent on actual pair representatives; explicit Frobenius equivalence; IsoAlgebra mate lifting; uniqueness of the counit-normalized forgetful comparison. No arbitrary-field duality branch is used.",
- "mathlib_searches": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/Sheaf/Paper/SfCommonStageDirectImage.lean",
+  "place": "Explicit mate-coherence descent argument and fixed-pair adjunction construction, lines 39–480; reviewed against Bhatt–Scholze 6.8.14(2), 6.8.15 and the current blueprint common-stage convention."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A derived pullback on constructible l-adic categories descends through finite coefficient fields to an adjunction on common-stage categories and lifts to invertible Frobenius pairs",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback",
+     "LightCondMod.LocallyConstant.adjunction",
+     "AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction",
+     "CondensedMod.LocallyConstant.adjunction",
+     "AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj",
+     "SheafOfModules.PullbackConstruction.adjunction",
+     "AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv",
+     "SheafOfModules.instIsLeftAdjointPullback"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "No match for the complete geometric/common-stage/Weil construction. Generic shift facts match the existing Mathlib leaf lem-weil-pbc-adjunction-shift-compatibility-unique; generic adjunction or monad APIs do not construct these coefficient categories or the specified functors."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"rightAdjoint\"",
+   "results": {
+    "ok": true,
+    "n_hits": 12,
+    "top": [
+     "CategoryTheory.Adjunction.isRightAdjoint",
+     "CategoryTheory.Adjunction.ofIsRightAdjoint",
+     "CategoryTheory.Functor.IsLeftAdjoint.exists_rightAdjoint",
+     "CategoryTheory.Functor.IsRightAdjoint.exists_leftAdjoint",
+     "CategoryTheory.Functor.IsRightAdjoint.mk",
+     "CategoryTheory.CommSq.rightAdjointLiftStructEquiv",
+     "CategoryTheory.Limits.IsLimit.ofRightAdjoint",
+     "CategoryTheory.Adjunction.rightAdjointLaxMonoidal"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "No match for the complete geometric/common-stage/Weil construction. Generic shift facts match the existing Mathlib leaf lem-weil-pbc-adjunction-shift-compatibility-unique; generic adjunction or monad APIs do not construct these coefficient categories or the specified functors."
+  },
+  {
+   "tool": "grep",
+   "query": "commonStage|IsoAlgebra|rightAdjointCommShift",
+   "results": {
+    "ok": true,
+    "n_hits": 5,
+    "top": [
+     "Mathlib/CategoryTheory/Shift/Adjunction.lean",
+     "Mathlib/CategoryTheory/Shift/Adjunction.lean",
+     "Mathlib/CategoryTheory/Shift/Adjunction.lean",
+     "Mathlib/CategoryTheory/Shift/Adjunction.lean",
+     "Mathlib/CategoryTheory/Shift/Adjunction.lean"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "No match for the complete geometric/common-stage/Weil construction. Generic shift facts match the existing Mathlib leaf lem-weil-pbc-adjunction-shift-compatibility-unique; generic adjunction or monad APIs do not construct these coefficient categories or the specified functors."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adjunction between categories of invertible endofunctor algebras induced by an adjunction and a commuting isomorphism of equivalences",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "CategoryTheory.Monad.algebraEquivOfIsoMonads",
+     "CategoryTheory.Functor.adjunction",
+     "CategoryTheory.conjugateIsoEquiv",
+     "CategoryTheory.Adjunction.leftAdjointIdIso_hom_app",
+     "CategoryTheory.Endofunctor.Algebra.isoMk_inv_f",
+     "CategoryTheory.Adjunction.leftAdjointIdIso",
+     "CategoryTheory.Equivalence.toAdjunction",
+     "CategoryTheory.Adjunction.ofNatIsoLeft"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "No match for the complete geometric/common-stage/Weil construction. Generic shift facts match the existing Mathlib leaf lem-weil-pbc-adjunction-shift-compatibility-unique; generic adjunction or monad APIs do not construct these coefficient categories or the specified functors."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If L is left adjoint to R and commutes with equivalences F and G, then this adjunction lifts to categories of objects equipped with an isomorphism F X to X",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "CategoryTheory.LiftLeftAdjoint.constructLeftAdjointEquiv",
+     "CategoryTheory.CommSq.leftAdjointLiftStructEquiv",
+     "CategoryTheory.Adjunction.leftAdjointOfEquiv",
+     "CategoryTheory.Adjunction.adjunctionOfEquivLeft",
+     "CategoryTheory.Adjunction.leftAdjointCompIso",
+     "CategoryTheory.LiftLeftAdjoint.constructLeftAdjointEquiv_symm_apply",
+     "CategoryTheory.Adjunction.adjunctionOfEquivRight",
+     "CategoryTheory.LiftRightAdjoint.constructRightAdjointEquiv"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "No match for the complete geometric/common-stage/Weil construction. Generic shift facts match the existing Mathlib leaf lem-weil-pbc-adjunction-shift-compatibility-unique; generic adjunction or monad APIs do not construct these coefficient categories or the specified functors."
+  },
+  {
+   "tool": "grep",
+   "query": "mapOfNatIsoAdjunction|mateIso|IsoAlgebra",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "top": [],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "No match for the complete geometric/common-stage/Weil construction. Generic shift facts match the existing Mathlib leaf lem-weil-pbc-adjunction-shift-compatibility-unique; generic adjunction or monad APIs do not construct these coefficient categories or the specified functors."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapOfNatIsoAdjunction\"",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "top": [],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "No match for the complete geometric/common-stage/Weil construction. Generic shift facts match the existing Mathlib leaf lem-weil-pbc-adjunction-shift-compatibility-unique; generic adjunction or monad APIs do not construct these coefficient categories or the specified functors."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.rightAdjointCommShift",
+   "results": {
+    "ok": true,
+    "n_hits": 3,
+    "top": [
+     "CategoryTheory.Adjunction.rightAdjointCommShift",
+     "CategoryTheory.Adjunction.commShift_of_leftAdjoint",
+     "CategoryTheory.Adjunction.rightAdjointCommShift_commShiftIso"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "No match for the complete geometric/common-stage/Weil construction. Generic shift facts match the existing Mathlib leaf lem-weil-pbc-adjunction-shift-compatibility-unique; generic adjunction or monad APIs do not construct these coefficient categories or the specified functors."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The right adjoint of a functor commuting with shifts inherits canonical shift isomorphisms making the adjunction compatible with shifts",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "CategoryTheory.Adjunction.rightAdjointCommShift",
+     "CategoryTheory.Adjunction.commShift_of_rightAdjoint",
+     "CategoryTheory.Adjunction.rightAdjointCommShift_commShiftIso",
+     "CategoryTheory.Adjunction.commShift_of_leftAdjoint",
+     "CategoryTheory.Adjunction.RightAdjointCommShift.iso'",
+     "CategoryTheory.Adjunction.CommShift",
+     "CategoryTheory.Adjunction.RightAdjointCommShift.iso",
+     "CategoryTheory.Adjunction.leftAdjointCommShift"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "No match for the complete geometric/common-stage/Weil construction. Generic shift facts match the existing Mathlib leaf lem-weil-pbc-adjunction-shift-compatibility-unique; generic adjunction or monad APIs do not construct these coefficient categories or the specified functors."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The right adjoint of a functor commuting with shifts inherits the unique compatible shift structure from the adjunction",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "CategoryTheory.Adjunction.rightAdjointCommShift",
+     "CategoryTheory.Adjunction.rightAdjointCommShift_commShiftIso",
+     "CategoryTheory.Adjunction.RightAdjointCommShift.iso_hom_app",
+     "CategoryTheory.Adjunction.CommShift.mk",
+     "CategoryTheory.Adjunction.RightAdjointCommShift.compatibilityUnit_iso",
+     "CategoryTheory.Adjunction.unit_app_shift_commShiftIso_inv_app",
+     "CategoryTheory.Adjunction.commShift_of_leftAdjoint",
+     "CategoryTheory.Adjunction.CommShift.compatibilityUnit_unique_right"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "No match for the complete geometric/common-stage/Weil construction. Generic shift facts match the existing Mathlib leaf lem-weil-pbc-adjunction-shift-compatibility-unique; generic adjunction or monad APIs do not construct these coefficient categories or the specified functors."
+  },
+  {
+   "tool": "grep",
+   "query": "def rightAdjointCommShift|instance commShift_of_leftAdjoint|rightAdjointCommShift_commShiftIso",
+   "results": {
+    "ok": true,
+    "n_hits": 1,
+    "top": [
+     "Mathlib/CategoryTheory/Shift/Adjunction.lean"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "No match for the complete geometric/common-stage/Weil construction. Generic shift facts match the existing Mathlib leaf lem-weil-pbc-adjunction-shift-compatibility-unique; generic adjunction or monad APIs do not construct these coefficient categories or the specified functors."
+  }
+ ],
  "mathlib_match": null,
  "status": "split",
  "merged_into": null,
@@ -130,8 +448,45 @@
  "split_report": {
   "date": "2026-10-21",
   "item": "def-weil-common-stage-derived-direct-image",
-  "worker": "maintenance-N0",
-  "summary": "Reindex the existing landed common-stage construction and its entire proof without changing Lean.",
-  "blueprint": "Upper rational/common-stage and induced Weil construction, formerly conflated with the finite/integral definition."
+  "worker": "stage1-Q10",
+  "summary": "Audited the maintenance-imported definition and all cited statements. Expanded stage-mate coherence, common-stage descent, square/shift formulas, Frobenius-equivalence hypotheses, fixed-pair lifting and counit normalization. Corrected the Weil-complex definition reference; retained the ind-node only for its explicitly stated normalized pullback composition. One smaller generic lifting statement records an existing sorry-free project declaration for maintainer attachment. No Lean changed.",
+  "blueprint": "Final rational/common-stage clause of def-weil-derived-direct-image in main-20261015, made precise by the already-landed common-stage and Weil interface; sk-def-sf-operations ordinary direct-image clause.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-descent-functors",
+    "why": "Generic descent of scalar-compatible functors and transformations; the unit has no substitute for this common-stage calculus."
+   },
+   {
+    "node": "lem-fd-rational-coefficient-category-comparison",
+    "why": "Supplies the simultaneous coefficient comparison system required by the identity theorem; no use of its separated-model special case."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Finite-type geometric fibres are Noetherian; a generic geometric prerequisite, not a replacement route."
+   },
+   {
+    "node": "def-zl-weil-ind-sheaf-category",
+    "why": "Only its explicitly stated normalized pullback composition and Frobenius square are used, not its ind-category or its heart adjunction."
+   },
+   {
+    "node": "lem-weil-mate-iso-along-equivalences",
+    "why": "Generic categorical criterion for invertibility of the Frobenius mate, not invertibility of an arbitrary square mate."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-pbc-descent-functors",
+  "lem-fd-rational-coefficient-category-comparison",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "def-zl-weil-ind-sheaf-category",
+  "lem-weil-mate-iso-along-equivalences"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q10-f76d9012e",
+  "group": "Q10",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q10-f76d9012e (reviewer sub-agent of L); spot-checked: Read the whole delivery against the Lean in SfCommonStageDirectImage.lean (read in full), IsoAlgebraAdjunction.lean and WeilIndSheafCategory.lean, and against every cited statement. There is no re-split note, the item is not dropped, and live has not superseded it. The statement change from def-zl-weil-ind-sheaf-category to def-weil-weil-sheaf-complex is correct: sfCommonStageWeilComplex belongs to def-weil-weil-sheaf-complex. Fault 1 (repaired): the worker replaced def-zl-weil-ind-sheaf-category in stmt_deps instead of adding the new node beside it. The statement's normalized square and Frobenius square are zlPullComp and zlFrobeniusSquare, which only that node specifies. The landed Lean statements also use its declarations (sfModelDerivedAdjunction uses zlPull; sfModelWeilDerivedAdjunction uses mapOfNatIso (zlFrobeniusSquare ..)). The fix restores it in stmt_deps and cites it in the statement; no cycle results. Fault 2 (repaired): step 9 wrote b: FR→RG in ordinary order next to e^{-1}: FL→LG in diagrammatic order, the opposite of the new node's convention. Steps 8 and 9 now use the node's diagrammatic convention (b: RF→GR, components FRM→RGM). Uses are unchanged. Checks: the step 2 and 3 transposes were recomputed and match mateUnit and mateCoherence. Step 4 descent matches descendStageAdjunction plus commonStageDerivedPullback_existsUnique. The step 5 exchange orientation matches sfModelDerivedExchange. Step 6 uses clauses (iii) and (ii) of the Mathlib shift leaf. The step 7 hypotheses (finite type, Noetherian, finite dimension, stalk units) match the Lean. In step 8, the c1 and c2 identities and g_Y f = f g_X are correct. In step 9, lem-weil-mate-iso-along-equivalences is applied with G=F, an equivalence, and G'=G, fully faithful. Step 10 is rightAdjointUniq and the injectivity argument. New node lem-sf-fixed-pair-adjunction-lift: the mate formula b_M and the structure maps L(θ)∘e and R(ψ)∘b match mapOfNatIsoAdjunction, h and mapOfNatIso_obj_str. It is true (doctrinal adjunction), statement-only, and searched with four tools. It is not a duplicate: candidates lem-coef-cartesian-left-adjoint-transport, cor-coef-verdier-weil-equivariance, lem-a1-fixed-pair-truncation-orthogonality and lem-weil-mate-iso-along-equivalences were checked. It is strictly smaller than the item. Tool uses accepted. Advisory: prop-weil-pbc-descent-functors is stated for P_T but used on the sf category C_Y, as 29 nodes and the base already do. Maintainer notes: (1) attach mapOfNatIsoAdjunction to the new node; (2) sfModelPullCommShift takes its shift data from constructible_pullback_t_exact(..).2.some, a sorry'd Nonempty, which deserves a stage-2 look. No SGA is used.; 1 file(s) fixed by the reviewer"
  }
 }
