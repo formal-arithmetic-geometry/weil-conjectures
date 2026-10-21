@@ -567,5 +567,30 @@
   "group": "NF",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-2cd4f2681 (reviewer sub-agent of L); spot-checked: The item now uses the finite-subextension ring Ω^fin (sk-def-sfb-qlbar-condensed) in its Q̄_ℓ case instead of the all-continuous ring C(−,Q̄_ℓ); the E case, arbitrary qcqs V and both clauses are kept. Unlike Q21 cdc69125, this change comes with a counterexample to the base statement, and I checked it. Take X=Spec C(βN,k), ℓ=3 and Frobenius acting by a_n=1+3^n u_n, where the degrees d_n are primes tending to infinity. This gives a rank-one L in D_ctf(X,C(−,Ω)). The functor Q(M)=D⊗^L_{R[t^±]}Γ(W,M) is exact and preserves coproducts. Here W=Spec C(S',k̄) is w-contractible, R→K evaluates into the ultraproduct field ∏_UΩ, and D is K[t^±] with bounded-degree monic F-polynomials inverted. By Cayley–Hamilton Q kills every Λ⊗^L_{O_F}J, but H^0Q(L)=D/(t−α)≠0, so L is not in Loc(G). The earlier claim from the NA review that L is in Loc via j_! of a coproduct of points fails: N⊂βN is not quasi-compact, and Stacks proetale lemma-ses-associated-to-open needs j quasi-compact. So this is a legitimate E7 correction, named in the report and supported by HRS Lemma 7.9 (colimit topology, any qcqs X). I read all 14 steps against their cited statements. Steps 1–3: the ringed-site comparisons; O_F→F (det-prop-sfb-qlbar-colimit-x-invert-ell) and F→Ω^fin (lem-sfb-qlbar-flat) are flat, so T is exact; the two-term resolution over a field gives constructibility, and the flat model gives Tor bounds. Step 4: the qcqs open/closed refinement with real factoring morphisms, plus alpha-iso, makes each leaf lisse. Step 5: lisse descent clause (1), qcqs and Ω^fin only, then clopen rank pieces. Step 6: the Lat(L) scheme, finitely many affines and 03S0 (qcqs only). Step 7: the sheet-sum trace, elementary. Step 8: constant lattices, continuous-lattice-sum and the realization iso for O_F and F. Step 9: the trees are grafted. Step 10: j_!/i_* with a qc open are exact; constructibility composes by a few lines from def-weil-constructible-subset; Tor [0,0] by local detection (i),(ii). Step 11: the two-restriction comparison plus lem-exc-open-closed-detection. Steps 12–14: the leaf generators, the ses triangles on the finite tree and truncation triangles. Edge cases checked: empty V, rank 0, F=Q_ℓ, torsion. Not a duplicate: det-lem-integral-models-generators is finite type over k, lem-sfb-continuous-qbar-constructible-generators and lem-sfb-bounded-finite-model-generation are Noetherian. No SGA, no new nodes, no fixes. The split_report tool_uses (generic other-unit nodes) are accepted. MAINTAINER: the parent lem-sfb-qcqs-proper-constructible-closed-base-change (steps 4 and 6) cites this item for C(−,Q̄_ℓ). That case now has no supplier, and by the counterexample no generation route can supply it. Decide whether to re-point the localizing-closure Q̄_ℓ convention to Ω^fin (as in HRS 7.9) or find another route for the norm case (same open question as Q21)."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.QcqsRationalIntegralLocalizingGenerators",
+  "declaration": "AlgebraicGeometry.ProEtale.qcqs_rational_integral_localizing_generators",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.rationalIntegralGenerators",
+   "AlgebraicGeometry.ProEtale.algClIntegralGenerators",
+   "AlgebraicGeometry.ProEtale.qcqs_rational_integral_localizing_generators",
+   "AlgebraicGeometry.ProEtale.qcqs_algCl_integral_localizing_generators"
+  ],
+  "file": "lean/Sheaf/Paper/QcqsRationalIntegralLocalizingGenerators.lean",
+  "statement": "theorem qcqs_rational_integral_localizing_generators (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) (V : Scheme.{u}) [CompactSpace V] [QuasiSeparatedSpace V] : (∀ K, rationalIntegralGenerators ℓ E V K → constantModelBoundedConstructible (Profinite.continuousMapRingObj E) V K ∧ DerivedCategory.finiteTorAmplitude _ K) ∧ (∀ K : ConstantModelConstructibleFiniteTor (Profinite.continuousMapRingObj E) V, CategoryTheory.localizingClosure (rationalIntegralGenerators ℓ E V) K.obj ∧ ∃ n : ℕ, ((rationalIntegralGenerators ℓ E V).shiftClosure ℤ).extensionProductIter n K.obj)",
+  "branch": "sheaf-dag",
+  "by": "NO",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Two coefficient cases of the same node: the main theorem is the finite-extension clause and qcqs_algCl_integral_localizing_generators is the finite-subextension-valued algebraic-closure clause. Each includes generator constructibility, ambient localizing generation, and finite shift-and-triangle generation. The two helper predicates are exactly the G_V families introduced by this node, using the canonical inclusions and total left derived scalar extension."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fce19136c",
+  "group": "NO",
+  "result": "pass",
+  "note": "First S2 delivery of the S1-narrowed node (NF 2cd4f268). Lean matches the node: padicAlgClRingObj = Ω^fin (finite-subextension-valued), C(−,E), C(−,O_F); coefficient maps are the actual inclusions (padicIntegersToPadicSubfield ≫ padicSubfieldRingObjToPadicAlgCl); T = Mod.extendScalars(..).leftDerivedFunctor; G_V = ∃ J ∈ ConstantModelConstructibleFiniteTor(O_F), Nonempty(T J ≅ K), with F = E or ∃ F; conjunct 1 = D_ctf predicate; conjunct 2 = recorded localizingClosure plus ∃ n, (G.shiftClosure ℤ).extensionProductIter n, with arbitrary ambient maps. Hypotheses qcqs + ℓ prime only; universes per convention; record statement verbatim; only the lean field differs from the live node; sorry-only, no axiom/opaque; docstrings and 14-step plan present. Advisory: owner def nodes of padicIntegersRingObj/padicIntegersToPadicSubfield/padicSubfieldRingObjToPadicAlgCl/leftDerivedFunctor are not stmt_deps; the def-weil-l-adic-coefficient-extension stmt_dep is unused in the statement; parent closed-base-change node still needs the all-norm Q̄ case. No compile (human 2026-10-21 rule); no fixes."
  }
 }
