@@ -23152,3 +23152,5 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:14 L: merged deliver/Q01/lem-sfb-faithfully-flat-normal-ring-descent (stage 2; reviewer PASS; parallel immutable checks)
 - 17:15 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
 - 17:15 L: merged deliver/NV/lem-sfb-discrete-lattice-koszul-resolution (reviewer FIX; first push; new nodes: 1)
+- 17:15 L: merged deliver/NA/lem-sfb-simplex-lattice-shuffle-boundary (stage 2; reviewer PASS; parallel immutable checks)
+- 17:15 L: merged deliver/Q12/lem-sfb-nonnegative-derived-totalization (stage 2; reviewer FIX; parallel immutable checks)

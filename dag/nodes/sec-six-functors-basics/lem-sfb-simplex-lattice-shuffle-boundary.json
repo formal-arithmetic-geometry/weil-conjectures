@@ -227,5 +227,38 @@
   "group": "Q13",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-6e5db7bb8 (reviewer sub-agent of L); spot-checked: Read the item in full: statement plus 10 steps, no new nodes, one commit with item and report only. The statement and stmt_deps are byte-identical to the NY-created version, so the target is not weakened. The only citation, def-weil-pbc-module-chain-complex-homology, is a definition and Mathlib leaf; step 1 uses only d∘d=0 and extension by zero, which it states. So there is no route or tool-use issue and no SGA. Blueprint paragraph (3) of sk-thm-sf-ctf-stability-direct-images.proof.md has no shuffle calculation, correctly said; the proof is agent-written with Weibel 8.5 WANTED. Hand-checked every sign: step 1 square-zero (-1)^{i+j-1} vs (-1)^{i+j}; step 2 inversions are V-before-H; step 3 at a mixed corner both paths leave the same string and the swap flips the sign; step 4 HH gives (-1)^{2t+i}; step 5 a trailing H removes b inversions, giving (-1)^a; step 6 VV gives (-1)^{a+j}; step 7 a leading V removes a inversions; step 8 the cases are exhaustive and disjoint, and n=0 is handled; steps 9 and 10 (augmentation, naturality) are term-by-term. My own integer-coefficient enumeration, keeping repeated entries, passed all 2,704 pairs with p,q≤2 and a,b≤3, and naturality held for noninjective f,g. Duplicate search (rg -L over shuffle, Eilenberg–Zilber, lattice path, prism nodes, cbc diagonal and strict-chain nodes) found no node with this signed identity; the parent bicosimplicial totalization cites it. Mathlib has no chain-level shuffle. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.SimplexLatticeShuffleBoundary",
+  "declaration": "AlgebraicTopology.SimplexLatticeShuffle.shuffle_boundary_augmentation_naturality",
+  "declarations": [
+   "AlgebraicTopology.SimplexLatticeShuffle.simplexChains",
+   "AlgebraicTopology.SimplexLatticeShuffle.productChains",
+   "AlgebraicTopology.SimplexLatticeShuffle.LatticePath",
+   "AlgebraicTopology.SimplexLatticeShuffle.pathSign",
+   "AlgebraicTopology.SimplexLatticeShuffle.pathSimplex",
+   "AlgebraicTopology.SimplexLatticeShuffle.shuffle",
+   "AlgebraicTopology.SimplexLatticeShuffle.horizontalBoundary",
+   "AlgebraicTopology.SimplexLatticeShuffle.verticalBoundary",
+   "AlgebraicTopology.SimplexLatticeShuffle.augmentation",
+   "AlgebraicTopology.SimplexLatticeShuffle.simplexMap",
+   "AlgebraicTopology.SimplexLatticeShuffle.productMap",
+   "AlgebraicTopology.SimplexLatticeShuffle.shuffle_boundary_augmentation_naturality"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/SimplexLatticeShuffleBoundary.lean",
+  "statement": "theorem shuffle_boundary_augmentation_naturality : (∀ (p q a b : ℕ), ((productChains p q).d (a + b) (a + b - 1)).hom.comp (shuffle p q a b) = horizontalBoundary p q a b + (-1 : ℤ) ^ a • verticalBoundary p q a b) ∧ (∀ (p q : ℕ) (u : (simplexChains p).X 0) (v : (simplexChains q).X 0), augmentation (shuffle p q 0 0 (u ⊗ₜ[ℤ] v)) = augmentation u * augmentation v) ∧ (∀ (p p' q q' a b : ℕ) (f : Fin (p + 1) →o Fin (p' + 1)) (g : Fin (q + 1) →o Fin (q' + 1)), ((productMap f g).f (a + b)).hom.comp (shuffle p q a b) = (shuffle p' q' a b).comp (TensorProduct.map ((simplexMap f).f a).hom ((simplexMap g).f b).hom))",
+  "branch": "sheaf-dag",
+  "by": "NA",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Unnormalized Mathlib alternating-face complexes of free integral modules on standard simplices and their product. Helpers define the finite lattice-path sum and boundary contributions; one theorem states boundary compatibility in every nonnegative degree, augmentation, and naturality, with zero factor degrees handled explicitly. These are the constructions already introduced in this node, not independent additional notions. Nonnegative complexes are understood by the dependency convention as extended by zero in negative degrees."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6f4c533fe",
+  "group": "NA",
+  "result": "pass",
+  "note": "Clause-by-clause match: unnormalized AlternatingFaceMapComplex of free Z-modules on Δ[p] and Δ[p]⊗Δ[q] (repetitions retained, d=0 in degree 0); LatticePath = partitions with A_k,B_k as coordinates; pathSign = (-1)^#(vertical before horizontal) = sign of the μ-then-ν permutation; shuffle a genuine bilinear map via FreeMonoidal.μIso; terms omitted for a=0/b=0 are literally 0, sign (-1)^a; augmentation and naturality for all monotone f,g in all degrees. Own enumeration with the Lean conventions: 2704/2704 generator pairs (p,q≤2, a,b≤3) satisfy the boundary identity. lean.statement verbatim; node differs from live only by the lean record; 11 real-data helpers, single sorry theorem with the proof docstring; source and blueprint docstrings present; no extra hypotheses, universes fixed at 0; no duplicate in Mathlib or side-live (BicosimplicialShuffleTotalization is a downstream citer). Advisory: the ProdStdSimplex import is not needed by the statement. No compile (no changes)."
  }
 }

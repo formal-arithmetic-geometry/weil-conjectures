@@ -285,5 +285,34 @@
   "group": "N7",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-81c1e0b98 (reviewer sub-agent of L); spot-checked: I read in full the item and the statements of all 9 cited nodes, plus Stacks 015J proof remark (3) (derived.tex l.7177-7230), and compared it with side-live. Statement, stmt_deps, source and blueprint are byte-identical to side-live; there are no new nodes. The item is still unsplit in live and side-live, has no re-split note and is not on the drop list. The statement is true: the bounded-below injective total computes RF, and F(Tot J)=Tot F(J) by finite biproducts. Small cases checked: constant cosimplicial K=A gives T(K)≃A; zero K; r=0 has the single (0,0) term; r<0 is empty. Step checks: (1) I is functorial and preserves lower bounds; no additivity of I is needed, since delta_J^2=0 by functoriality alone. (3) A finite biproduct of injectives is injective, then kinjective-computes (2). (4) beta is an elementary finite-biproduct chain isomorphism. (5)/(6) chi = Q beta . c_{T(u)}, and naturality follows from the resolution-naturality node with g u_K = u_L f. (7) The zigzag maps are homotopy equivalences under K_n by kinjective-computes (1), and its legs are identified by the naturality node. (8) b_J=I(b_0) has zero coface component (d^0 b_0 = d^1 b_0), b_J eta_A = T(u) a holds, and the augmentation clause follows. Repair: lem-sc-first-quadrant-total-column-comparison (Lean quasiIso_totalMap_of_columns) takes quasi-isomorphisms at a fixed second index (flip.X n), while steps 2 and 7 have the u_n at fixed cosimplicial (first) index. I added the transposition D'^{t,n}=C_n^t with the natural sign isomorphism (-1)^{nt}: Tot(D') ≅ T(C), signs checked; no other field changed. No duplicate found in the DAG: derived-cech-image-totalization is geometric, and the CE/ce nodes are about spectral sequences. All five tool_uses are generic homological tools and accepted. No SGA source is used.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.NonnegativeDerivedTotalization",
+  "declaration": "CategoryTheory.nonnegative_derived_totalization",
+  "declarations": [
+   "CategoryTheory.nonnegativeCosimplicialTotal",
+   "CategoryTheory.nonnegativeComplexLocalization",
+   "CategoryTheory.NonnegativeCosimplicialResolution",
+   "CategoryTheory.nonnegativeRightDerivedUnit",
+   "CategoryTheory.IsNonnegativeTotalAugmentation",
+   "CategoryTheory.NonnegativeDerivedTotalizationComparison",
+   "CategoryTheory.nonnegative_derived_totalization"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/NonnegativeDerivedTotalization.lean",
+  "statement": "theorem nonnegative_derived_totalization [IsGrothendieckAbelian.{v} C] [IsGrothendieckAbelian.{v'} D] [PreservesFiniteLimits F] : Nonempty (NonnegativeDerivedTotalizationComparison F)",
+  "branch": "newtargets-dag",
+  "by": "Q12",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The auxiliary structures package this node's compatible replacements and all clauses of its comparison. Natural-indexed cochain complexes are extended by zero before ordinary unbounded localization; all object, morphism and localization universes are explicit and independent. RF is the existing K-injective rightDerivedFunctor convention, with its existing unit. No new independent notion or statement correction.",
+  "fixed_by": "NT-stage2-cc-e785c0498"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e785c0498",
+  "group": "Q12",
+  "result": "fix",
+  "note": "Read item, 4 stmt_deps + records, module, report, upstream rightDerivedFunctor/rightDerivedFunctorUnitQ/HasKInjectiveResolutions (Prop, Grothendieck instance)/mapExtendIso/alternatingCofaceMapComplex/TensorSigns(up ℕ) signs. All clauses match: independent universes, Additive+PreservesFiniteLimits, δ+(-1)^n d total, zero-extension localization, χ pinned by unit normalization, β pinned by summands, columns and augmentation pinned, all fields true. Gap (H3): naturality quantified over compatible g but no existence of g for each strict f, so 'natural in strict maps' could be vacuous → FIX adds field mapReplacement (∃ R S g, R.aug ≫ g = f ≫ S.aug; true by node step 1) plus docstring lines; theorem signature/lean record unchanged; fixes/NonnegativeDerivedTotalization.lean compiled clean via nt_compile --json in 3.6 s. Advisories: TotalComplex theorem-module import only for the TensorSigns(up ℕ) instance (import ComplexShapeSigns directly); unique follows from normalized."
  }
 }
