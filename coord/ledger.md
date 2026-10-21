@@ -21372,3 +21372,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:51 L: merged deliver/Q89/lem-pur-origin-class-projective-comparison (reviewer PASS; first push; new nodes: 0)
 - 08:51 L: merged deliver/Q160/lem-pur-finite-product-derived-tensor-calculus (reviewer FIX; first push; new nodes: 0)
 - 08:51 L: merged deliver/Q18/lem-pur-etale-sum-right-adjoint-tensor (reviewer PASS; first push; new nodes: 0)
+- 08:51 L: merged deliver/Q84/lem-trf-integral-comparison-counit-characterization (reviewer PASS; first push; new nodes: 0)
