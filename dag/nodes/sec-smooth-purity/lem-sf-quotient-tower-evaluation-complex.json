@@ -1,0 +1,114 @@
+{
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedPullbackUnitTower",
+  "date": "2026-10-21",
+  "group": "V1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Evaluation of a tower of quotient tensor module functors commutes with passage to cochain complexes",
+   "results": "Eight results concern ordinary tensor products with quotient modules, including TensorProduct.tensorQuotientEquiv.",
+   "date": "2026-10-21",
+   "verdict": "No quotient sheaf tower or complex-evaluation normalization result; instantiate the declared strict quotient functor directly."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapHomologicalComplex",
+   "results": "Twelve hits include Functor.mapHomologicalComplex, its obj_X formula, and NatIso.mapHomologicalComplex.",
+   "date": "2026-10-21",
+   "verdict": "Use the existing complex functor and the proved explicit-square interface."
+  },
+  {
+   "tool": "grep",
+   "query": "evaluation.*mapHomologicalComplex|mapHomologicalComplex.*evaluation",
+   "results": "Two hits in Mathlib.Algebra.Homology.Functor concern quasi-isomorphisms detected by evaluation.",
+   "date": "2026-10-21",
+   "verdict": "These detect quasi-isomorphisms rather than identify the prescribed quotient evaluation map; prove its degreewise identity from the quotient construction."
+  }
+ ],
+ "id": "lem-sf-quotient-tower-evaluation-complex",
+ "kind": "statement",
+ "title": "Explicit finite evaluation of a quotient-tower complex",
+ "statement": "For a small site J, commutative ring A, ideal I and integer n ≥ 0, applying quotient-tower reduction to a cochain complex and then evaluating at n is naturally isomorphic to finite quotient scalar extension followed by scalar restriction. The endpoints are the iterated complex functors, and the comparison is the identity in every degree.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0940 and 0941; proetale.tex Tag 099M"
+ },
+ "stmt_deps": [
+  "def-sf-complex-functor-square",
+  "lem-weil-pbc-constant-completion-equivalence"
+ ],
+ "proof": [
+  {
+   "text": "The ordinary evaluated quotient tower is definitionally scalar extension to A/I^(n+1) followed by restriction. Use its identity natural isomorphism and the explicit complex-square construction. The hom formula for that construction reduces every degree to the ordinary identity. Thus the equality includes all ideals, the zero ring and n = 0 without any cancellation or flatness hypothesis. Extensionality of chain maps then proves the full identity-chain-map formula quotientEvaluationComplexIso_hom_id.",
+   "uses": [
+    "def-sf-complex-functor-square",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0940 and 0941; proetale.tex Tag 099M"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-complex-functor-square",
+  "lem-weil-pbc-constant-completion-equivalence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0940 and 0941; proetale.tex Tag 099M; explicit construction and proof by V1"
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-reduction-pull-finite-evaluation",
+   "place": "Explicit finite evaluation of a quotient-tower complex",
+   "via": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.QuotientTowerEvaluationComplex",
+  "file": "lean/Sheaf/Paper/QuotientTowerEvaluationComplex.lean",
+  "declaration": "CategoryTheory.ConstantCompletion.quotientEvaluationComplexIso",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-21",
+  "statement": "def quotientEvaluationComplexIso :\n    (reductionTower J A I false).mapHomologicalComplex (.up ℤ) ⋙\n        ((evaluation ℕᵒᵖ (Mod (constant J A))).obj (op n)).mapHomologicalComplex (.up ℤ) ≅\n      (change (quotient J A I n)).mapHomologicalComplex (.up ℤ) ⋙\n        (res (quotient J A I n)).mapHomologicalComplex (.up ℤ)",
+  "declarations": [
+   "CategoryTheory.ConstantCompletion.quotientEvaluationIso",
+   "CategoryTheory.ConstantCompletion.quotientEvaluationComplexIso",
+   "CategoryTheory.ConstantCompletion.quotientEvaluationComplexIso_hom_f",
+   "CategoryTheory.ConstantCompletion.quotientEvaluationComplexIso_hom_id"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-87143",
+  "group": "V1",
+  "result": "fix",
+  "landing": "20261021T021030-L-2694797",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-87143",
+  "group": "V1",
+  "result": "fix",
+  "landing": "20261021T021030-L-2694797",
+  "kind": "interface",
+  "note": "independent cc review: delivered 7 modules + 7 nodes + change record + report against the live clone, the published build and the direct importers OrientedNearbyCycles, ProEtaleConstantReductionTower and CompletedProjectionCoherence; CMC node against the live node (B3 09:21)"
+ }
+}

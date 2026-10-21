@@ -1,0 +1,146 @@
+{
+ "id": "lem-sf-reduction-pull-finite-evaluation",
+ "kind": "statement",
+ "title": "Finite evaluation respects the specified reduction/pullback comparison",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "statement": "Let f be a morphism of small sites with its canonical algebraic lift, A a commutative Noetherian ring, I an ideal, K in the source derived category, and n ≥ 0. Use the strict quotient reduction/pullback isomorphism, evaluation/pullback isomorphism, finite evaluation isomorphism, scalar-restriction/pullback isomorphism, and finite scalar-extension/pullback isomorphism with the normalizations of [lem-sp-completion-mate-comparison]. Evaluating the inverse of the strict reduction/pullback isomorphism and then applying the three finite target comparisons equals finite evaluation of f* K followed by restriction of the finite scalar-extension/pullback comparison. This is equality of the prescribed maps, with their finite quotient actions.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EL; sites-cohomology.tex Tag 06YY; proetale.tex Tag 099N(5)"
+ },
+ "stmt_deps": [
+  "lem-sp-completion-mate-comparison"
+ ],
+ "proof": [
+  {
+   "text": "For module inverse image, the normalized tensor insertion along the constant-ring isomorphism is invertible and natural, by scalar extension along a ring isomorphism. The normalization of the ordinary reduction/pullback comparison gives the finite module unit compatibility. Restriction along the quotient is fully faithful; use local surjectivity of the quotient and the scalar adjunction to identify the ordinary finite comparison with the evaluated tower comparison.",
+   "uses": [
+    "lem-sp-completion-mate-comparison",
+    "lem-weil-sheaf-scalar-extension-ring-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL; sites-cohomology.tex Tag 06YY; proetale.tex Tag 099N(5)"
+   }
+  },
+  {
+   "text": "Apply this ordinary identity in every degree of a flat-term K-flat complex P. Pullback preserves K-flatness and flat terms; identify monoidal flatness with site flatness by the sheaf tensor comparison. Retain the iterated complex functors explicitly, using the proved complex-square hom formula and the degreewise identity of finite quotient evaluation.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "def-sf-complex-functor-square",
+    "lem-sf-quotient-tower-evaluation-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL; sites-cohomology.tex Tag 06YY; proetale.tex Tag 099N(5)"
+   }
+  },
+  {
+   "text": "Use the factorization law for derived squares of exact functors. Insert the normalized reduction, finite reduction and finite evaluation comparisons. Prove a generic pasting identity with the complex and derived functors, their factorization isomorphisms, six comparison squares, and their universally quantified normalization laws as parameters. Thus all functors remain abstract during the calculation. Naturality moves the K-flat comparison maps to a common invertible postcomposition; the ordinary degreewise identity identifies both paths, so cancel that postcomposition. Instantiate this identity for the site morphism, then transport to every derived K by a K-flat realization isomorphism and naturality.",
+   "uses": [
+    "lem-sp-completion-mate-comparison",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL; sites-cohomology.tex Tag 06YY; proetale.tex Tag 099N(5)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "lem-sp-completion-mate-comparison",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-weil-sheaf-scalar-extension-ring-iso",
+  "def-sf-complex-functor-square",
+  "lem-sf-quotient-tower-evaluation-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EL; sites-cohomology.tex Tag 06YY; proetale.tex Tag 099N(5); explicit normalization and adjunction argument by V1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Natural derived inverse image commutes with the inverse system of derived quotient tensors and the completion unit reduces to an equivalence",
+   "results": "Ordinary adic module completion and tensor-product equivalences; no derived strict-tower normalization match.",
+   "date": "2026-10-21",
+   "verdict": "no match; use the existing normalized AdicSites constructions"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapDerivedCategorySquareIso",
+   "results": "0 hits, unknown identifier in Mathlib.",
+   "date": "2026-10-21",
+   "verdict": "Use the source-library exact derived square API and prove its factorization compatibility."
+  },
+  {
+   "tool": "grep",
+   "query": "completion.*unit|mapDerivedCategorySquareIso",
+   "results": "Ordinary adic completion and valuation unit lemmas only. Local searches found the reflector, scalar adjunction, and representative-normalized comparisons.",
+   "date": "2026-10-21",
+   "verdict": "No existing theorem states these normalized derived finite-evaluation identities."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural derived inverse image commutes with the inverse system of derived quotient tensors and the completion unit reduces to an equivalence",
+   "results": "Eight results about ordinary adic module completion, including AdicCompletion.ofTensorProduct_naturality and ofTensorProductEquivOfFiniteNoetherian_apply.",
+   "date": "2026-10-21",
+   "verdict": "No derived strict-tower or sheaf comparison result; use the normalized completion and adjunction APIs already declared in the project."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedPullbackUnitTower",
+  "date": "2026-10-21",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-cbc-completed-pullback-unit-tower",
+   "place": "Finite evaluation respects the specified reduction/pullback comparison",
+   "via": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ReductionPullFiniteEvaluation",
+  "file": "lean/Sheaf/Paper/ReductionPullFiniteEvaluation.lean",
+  "declaration": "CategoryTheory.AdicSites.reductionPullFiniteEvaluation",
+  "statement": "theorem reductionPullFiniteEvaluation {V U : Site.{u}} (f : Morphism V U)\n    (A : Type u) [CommRing A] [IsNoetherianRing A]\n    (I : Ideal A) (K : V.derived A) (n : ℕ) :\n    (U.evaluate A n).map ((f.reductionPullIso A I).inv.app K) ≫\n        (f.evaluatePullIso A n).hom.app ((V.reduction A I).obj K) ≫\n        (f.pull A).map ((V.finiteEvaluationIso A I n).hom.app K) ≫\n        (f.finiteRestrictionPullIso A I n).hom.app ((V.finiteReduction A I n).obj K) =\n      (U.finiteEvaluationIso A I n).hom.app ((f.pull A).obj K) ≫\n        (U.finiteRestriction A I n).map ((f.finitePullIso A I n).hom.app K)",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-87143",
+  "group": "V1",
+  "result": "fix",
+  "landing": "20261021T021030-L-2694797",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-87143",
+  "group": "V1",
+  "result": "fix",
+  "landing": "20261021T021030-L-2694797",
+  "kind": "interface",
+  "note": "independent cc review: delivered 7 modules + 7 nodes + change record + report against the live clone, the published build and the direct importers OrientedNearbyCycles, ProEtaleConstantReductionTower and CompletedProjectionCoherence; CMC node against the live node (B3 09:21)"
+ }
+}

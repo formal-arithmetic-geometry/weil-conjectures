@@ -32,6 +32,7 @@ import WeilConjectures.Algebra.Homology.TowerEvaluationKInjective
 import Mathlib.Algebra.Homology.Functor
 import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
 public import Sheaf.Paper.ConstantCompletionEquivalence
+public import Sheaf.Paper.QuotientTowerEvaluationComplex
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 public import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
 public import Sheaf.CategoryTheory.RingedSiteModules
@@ -164,6 +165,15 @@ Source: Stacks 099N, 03D2 (blueprint: lem-sp-completion-mate-comparison). -/
 abbrev Morphism.modulePull {V U : Site.{u}} (f : Morphism V U)
     (A : Type u) [CommRing A] : V.modules A ⥤ U.modules A :=
   ConstantCompletion.pull f.algebra (ConstantCompletion.constantMap f.algebra A)
+
+/-- Additivity of the constant-coefficient inverse image, as a named instance.
+Source: Stacks 099N, 03D2 (blueprint: lem-sp-completion-mate-comparison).
+Proof: unfold the specified inverse image. Scalar extension and ringed inverse image
+are additive, so the existing additive-functor instance applies. -/
+instance Morphism.modulePull_additive {V U : Site.{u}} (f : Morphism V U)
+    (A : Type u) [CommRing A] : (f.modulePull A).Additive := by
+  dsimp only [Morphism.modulePull]
+  infer_instance
 
 /-- Exactness and existence of the right adjoint of the specified module inverse image.
 Source: Stacks 099N, 03D7 (blueprint: lem-sp-completion-mate-comparison).
@@ -674,13 +684,23 @@ instance Morphism.moduleReductionPull_preservesZero {V U : Site.{u}} (f : Morphi
   infer_instance
 
 /-- The ordinary strict reduction comparison applied to a whole complex.
-The named zero-preservation instance is supplied explicitly so that the fixed
-geometric morphism need not be reconstructed from its module inverse image.
+The iterated complex functors are explicit endpoints of the lifted square.
+Its hom component is the original ordinary comparison applied degreewise.
 Source: Stacks 07A4, 0941 (blueprint: lem-sp-completion-mate-comparison). -/
 def Morphism.moduleReductionPullComplexIso {V U : Site.{u}} (f : Morphism V U)
-    (A : Type u) [CommRing A] (I : Ideal A) :=
-  letI := f.moduleReductionPull_preservesZero A I
-  NatIso.mapHomologicalComplex (f.moduleReductionPullIso A I) (.up ℤ)
+    (A : Type u) [CommRing A] (I : Ideal A) :
+    (ConstantCompletion.reductionTower V.topology A I false).mapHomologicalComplex (.up ℤ) ⋙
+        (f.towerModulePull A).mapHomologicalComplex (.up ℤ) ≅
+      (f.modulePull A).mapHomologicalComplex (.up ℤ) ⋙
+        (ConstantCompletion.reductionTower U.topology A I false).mapHomologicalComplex (.up ℤ) :=
+  letI := ConstantCompletion.reductionTower_additive V.topology A I false
+  letI := ConstantCompletion.reductionTower_additive U.topology A I false
+  letI := f.modulePull_additive A
+  ConstantCompletion.mapComplexSquare
+    (C := V.modules A) (D := V.towers A) (D' := U.modules A) (E := U.towers A)
+    (ConstantCompletion.reductionTower V.topology A I false) (f.towerModulePull A)
+    (f.modulePull A) (ConstantCompletion.reductionTower U.topology A I false)
+    (f.moduleReductionPullIso A I)
 
 /-- The specified representative or unit normalization for this comparison.
 Source: Stacks 099M, 099N, 0941 and 0E48
@@ -931,8 +951,10 @@ def Site.finiteEvaluationIso_normalized (T : Site.{u}) (A : Type u)
           (ConstantCompletion.quotient T.topology A I n)).app P) =
     (T.evaluate A n).map
         ((ConstantCompletion.quotientPresentation T.topology A I false).comparison.app P) ≫
-      (T.evaluateModule A n).mapDerivedCategoryFactors.hom.app
-        (ConstantCompletion.reductionComplex T.topology A I false P) ≫
+      ((T.evaluateModule A n).mapDerivedCategoryFactors.hom.app
+          (ConstantCompletion.reductionComplex T.topology A I false P) ≫
+        (ConstantCompletion.Q (T.ring A)).map
+          ((ConstantCompletion.quotientEvaluationComplexIso T.topology A I n).hom.app P)) ≫
       (ConstantCompletion.resFactors (ConstantCompletion.quotient T.topology A I n)).hom.app
         (((ConstantCompletion.change (ConstantCompletion.quotient T.topology A I n)
           ).mapHomologicalComplex (.up ℤ)).obj P)
@@ -969,9 +991,12 @@ def Morphism.finitePullIso_normalized {V U : Site.{u}} (f : Morphism V U)
       (ConstantCompletion.extendComparison (ConstantCompletion.quotient U.topology A I n)).app
         (((f.modulePull A).mapHomologicalComplex (.up ℤ)).obj P) ≫
       (ConstantCompletion.Q (U.ring (quotientRing A I n))).map
-        ((NatIso.mapHomologicalComplex
+        ((ConstantCompletion.mapComplexSquare (f.modulePull A)
+          (ConstantCompletion.change (ConstantCompletion.quotient U.topology A I n))
+          (ConstantCompletion.change (ConstantCompletion.quotient V.topology A I n))
+          (f.modulePull (quotientRing A I n))
           (ConstantCompletion.ordinaryFinitePull f.algebra f.direct f.adjunction A I n)
-          (.up ℤ)).hom.app P) =
+          ).hom.app P) =
     e.hom.app ((ConstantCompletion.Q (V.ring A)).obj P) ≫
       (f.pull (quotientRing A I n)).map
         ((ConstantCompletion.extendComparison

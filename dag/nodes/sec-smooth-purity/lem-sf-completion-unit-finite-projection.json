@@ -1,0 +1,136 @@
+{
+ "id": "lem-sf-completion-unit-finite-projection",
+ "kind": "statement",
+ "title": "Projection of the completion unit is the finite scalar-extension unit",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "statement": "For a small site S and a commutative ring A, let R be its canonical strict derived quotient-tower functor for an ideal I, C = Rlim R, eta its specified unit, E_n tower evaluation, and F_n left derived scalar extension to A/I^(n+1). Let p_n be the limit projection defined by the normalized constant/limit adjunction and e_n : E_n R ≅ Res F_n the canonical finite evaluation isomorphism [lem-sp-completion-mate-comparison]. For every N in D(S,A), eta_N followed by p_n and e_n is the unit of the finite scalar extension/restriction adjunction.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099M; the strict derived limit of Tag 0941 and scalar adjunction of Tag 06YY"
+ },
+ "stmt_deps": [
+  "lem-sp-completion-mate-comparison"
+ ],
+ "proof": [
+  {
+   "text": "The normalized constant/limit adjunction gives its derived counit on an ordinary tower complex: apply the adjunction hom-set bijection, its prescribed unit, naturality of the derived-limit comparison, and the ordinary triangle identity. Factorizations for exact derived functors identify the diagonal/evaluation composite with the identity.",
+   "uses": [
+    "lem-sp-completion-mate-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099M; the strict derived limit of Tag 0941 and scalar adjunction of Tag 06YY"
+   }
+  },
+  {
+   "text": "On a flat-term K-flat complex P, the defining quotient-presentation law expresses eta as the quotient augmentation followed by the derived-limit comparison. Evaluate the preceding counit equation at n. The ordinary augmentation followed by the limit projection is the ordinary finite tensor-unit map. The normalization of finiteAdjunction gives this same map. Cancel the invertible K-flat extension comparison.",
+   "uses": [
+    "lem-sp-completion-mate-comparison",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099M; the strict derived limit of Tag 0941 and scalar adjunction of Tag 06YY"
+   }
+  },
+  {
+   "text": "Represent every derived object by a flat-term K-flat resolution and transport the equality through its realization isomorphism by naturality of the unit, projection, and finite evaluation.",
+   "uses": [
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099M; the strict derived limit of Tag 0941 and scalar adjunction of Tag 06YY"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "lem-sp-completion-mate-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099M; the strict derived limit of Tag 0941 and scalar adjunction of Tag 06YY; explicit normalization and adjunction argument by V1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Natural derived inverse image commutes with the inverse system of derived quotient tensors and the completion unit reduces to an equivalence",
+   "results": "Ordinary adic module completion and tensor-product equivalences; no derived strict-tower normalization match.",
+   "date": "2026-10-21",
+   "verdict": "no match; use the existing normalized AdicSites constructions"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapDerivedCategorySquareIso",
+   "results": "0 hits, unknown identifier in Mathlib.",
+   "date": "2026-10-21",
+   "verdict": "Use the source-library exact derived square API and prove its factorization compatibility."
+  },
+  {
+   "tool": "grep",
+   "query": "completion.*unit|mapDerivedCategorySquareIso",
+   "results": "Ordinary adic completion and valuation unit lemmas only. Local searches found the reflector, scalar adjunction, and representative-normalized comparisons.",
+   "date": "2026-10-21",
+   "verdict": "No existing theorem states these normalized derived finite-evaluation identities."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural derived inverse image commutes with the inverse system of derived quotient tensors and the completion unit reduces to an equivalence",
+   "results": "Eight results about ordinary adic module completion, including AdicCompletion.ofTensorProduct_naturality and ofTensorProductEquivOfFiniteNoetherian_apply.",
+   "date": "2026-10-21",
+   "verdict": "No derived strict-tower or sheaf comparison result; use the normalized completion and adjunction APIs already declared in the project."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedPullbackUnitTower",
+  "date": "2026-10-21",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-cbc-completed-pullback-unit-tower",
+   "place": "Projection of the completion unit is the finite scalar-extension unit",
+   "via": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletionUnitFiniteProjection",
+  "file": "lean/Sheaf/Paper/CompletionUnitFiniteProjection.lean",
+  "declaration": "CategoryTheory.AdicSites.completionUnitFiniteProjection",
+  "statement": "theorem completionUnitFiniteProjection (S : Site.{u}) (A : Type u) [CommRing A]\n    (I : Ideal A) (N : S.derived A) (n : ℕ) :\n    (S.unit A I).app N ≫\n          (show S.delta A ⋙ S.evaluate A n ≅ 𝟭 (S.derived A) from\n            (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫\n            Functor.mapDerivedCategoryNatIso\n              (NatIso.ofComponents (fun _ ↦ Iso.refl _) (fun _ ↦ by rfl)) ≪≫\n            Functor.mapDerivedCategoryIdIso (S.modules A)).inv.app\n              ((S.completion A I).obj N) ≫\n          (S.evaluate A n).map ((S.deltaAdjunction A).counit.app\n            ((S.reduction A I).obj N)) ≫\n          (S.finiteEvaluationIso A I n).hom.app N =\n        (S.finiteAdjunction A I n).unit.app N",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-87143",
+  "group": "V1",
+  "result": "fix",
+  "landing": "20261021T021030-L-2694797",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-87143",
+  "group": "V1",
+  "result": "fix",
+  "landing": "20261021T021030-L-2694797",
+  "kind": "interface",
+  "note": "independent cc review: delivered 7 modules + 7 nodes + change record + report against the live clone, the published build and the direct importers OrientedNearbyCycles, ProEtaleConstantReductionTower and CompletedProjectionCoherence; CMC node against the live node (B3 09:21)"
+ }
+}

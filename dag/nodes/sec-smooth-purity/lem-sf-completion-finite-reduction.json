@@ -1,0 +1,155 @@
+{
+ "id": "lem-sf-completion-finite-reduction",
+ "kind": "statement",
+ "title": "Finite reduction inverts the completion unit",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "statement": "Let S be a small site, A a commutative ring, and d a CompleteCoefficientDatum on A [def-weil-pbc-complete-coefficient-datum]. Let C, eta, F_n, p_n and e_n be the normalized completion, its unit, finite scalar extension, limit projection and finite evaluation [lem-sp-completion-mate-comparison]. For every N in D(S,A) and every n ≥ 0, F_n(eta_N) is an isomorphism. Moreover eta_N followed by p_n and e_n is the finite scalar-extension unit.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099M; algebraization.tex Tags 091N, 0999, 099B for the derived completion reflector"
+ },
+ "stmt_deps": [
+  "lem-sp-completion-mate-comparison",
+  "def-weil-pbc-complete-coefficient-datum"
+ ],
+ "proof": [
+  {
+   "text": "A sequential colimit with nilpotent repeated transition is zero: each colimit insertion factors through a zero composite. Apply this to multiplication by a nilpotent section to show its section localization is zero. Derived internal Hom out of it vanishes.",
+   "uses": [
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099M; algebraization.tex Tags 091N, 0999, 099B for the derived completion reflector"
+   }
+  },
+  {
+   "text": "For any quotient-coefficient object M, each element a of I has image with (n+1)st power zero. The restriction-of-scalars section completeness criterion and the constant-element criterion therefore show that Res M is derived I-complete. This works for I=0, I=A and the zero ring.",
+   "uses": [
+    "lem-weil-pbc-restriction-section-completeness",
+    "lem-sp-constant-direct-image-preserves-complete",
+    "def-weil-pbc-complete-coefficient-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099M; algebraization.tex Tags 091N, 0999, 099B for the derived completion reflector"
+   }
+  },
+  {
+   "text": "The unit-preserving Koszul/quotient reflector gives a bijection Hom(CN,Res M) → Hom(N,Res M) by precomposition with eta_N. Transport it through the finite scalar adjunction. It is precomposition by F_n(eta_N) on Hom into every M, so the coyoneda criterion proves invertibility.",
+   "uses": [
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-sp-completion-mate-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099M; algebraization.tex Tags 091N, 0999, 099B for the derived completion reflector"
+   }
+  },
+  {
+   "text": "Use the separately proved normalized projection/unit identity for the second assertion.",
+   "uses": [
+    "lem-sf-completion-unit-finite-projection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099M; algebraization.tex Tags 091N, 0999, 099B for the derived completion reflector"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-complete-coefficient-datum",
+  "lem-sf-completion-unit-finite-projection",
+  "lem-sp-completion-mate-comparison",
+  "lem-sp-constant-direct-image-preserves-complete",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-restriction-section-completeness",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099M; algebraization.tex Tags 091N, 0999, 099B for the derived completion reflector; explicit normalization and adjunction argument by V1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Natural derived inverse image commutes with the inverse system of derived quotient tensors and the completion unit reduces to an equivalence",
+   "results": "Ordinary adic module completion and tensor-product equivalences; no derived strict-tower normalization match.",
+   "date": "2026-10-21",
+   "verdict": "no match; use the existing normalized AdicSites constructions"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapDerivedCategorySquareIso",
+   "results": "0 hits, unknown identifier in Mathlib.",
+   "date": "2026-10-21",
+   "verdict": "Use the source-library exact derived square API and prove its factorization compatibility."
+  },
+  {
+   "tool": "grep",
+   "query": "completion.*unit|mapDerivedCategorySquareIso",
+   "results": "Ordinary adic completion and valuation unit lemmas only. Local searches found the reflector, scalar adjunction, and representative-normalized comparisons.",
+   "date": "2026-10-21",
+   "verdict": "No existing theorem states these normalized derived finite-evaluation identities."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural derived inverse image commutes with the inverse system of derived quotient tensors and the completion unit reduces to an equivalence",
+   "results": "Eight results about ordinary adic module completion, including AdicCompletion.ofTensorProduct_naturality and ofTensorProductEquivOfFiniteNoetherian_apply.",
+   "date": "2026-10-21",
+   "verdict": "No derived strict-tower or sheaf comparison result; use the normalized completion and adjunction APIs already declared in the project."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedPullbackUnitTower",
+  "date": "2026-10-21",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-cbc-completed-pullback-unit-tower",
+   "place": "Finite reduction inverts the completion unit",
+   "via": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletionFiniteReduction",
+  "file": "lean/Sheaf/Paper/CompletionFiniteReduction.lean",
+  "declaration": "CategoryTheory.AdicSites.completionFiniteReduction",
+  "statement": "theorem completionFiniteReduction (S : Site.{u}) (A : Type u) [CommRing A]\n    (d : AlgebraicGeometry.Scheme.CompleteCoefficientDatum A)\n    (N : S.derived A) (n : ℕ) :\n    IsIso ((S.finiteReduction A d.ideal n).map ((S.unit A d.ideal).app N)) ∧\n      (S.unit A d.ideal).app N ≫\n          (show S.delta A ⋙ S.evaluate A n ≅ 𝟭 (S.derived A) from\n            (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫\n            Functor.mapDerivedCategoryNatIso\n              (NatIso.ofComponents (fun _ ↦ Iso.refl _) (fun _ ↦ by rfl)) ≪≫\n            Functor.mapDerivedCategoryIdIso (S.modules A)).inv.app\n              ((S.completion A d.ideal).obj N) ≫\n          (S.evaluate A n).map ((S.deltaAdjunction A).counit.app\n            ((S.reduction A d.ideal).obj N)) ≫\n          (S.finiteEvaluationIso A d.ideal n).hom.app N =\n        (S.finiteAdjunction A d.ideal n).unit.app N",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-87143",
+  "group": "V1",
+  "result": "fix",
+  "landing": "20261021T021030-L-2694797",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-87143",
+  "group": "V1",
+  "result": "fix",
+  "landing": "20261021T021030-L-2694797",
+  "kind": "interface",
+  "note": "independent cc review: delivered 7 modules + 7 nodes + change record + report against the live clone, the published build and the direct importers OrientedNearbyCycles, ProEtaleConstantReductionTower and CompletedProjectionCoherence; CMC node against the live node (B3 09:21)"
+ }
+}

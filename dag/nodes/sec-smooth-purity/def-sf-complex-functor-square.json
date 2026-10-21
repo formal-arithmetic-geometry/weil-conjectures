@@ -1,0 +1,103 @@
+{
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedPullbackUnitTower",
+  "date": "2026-10-21",
+  "group": "V1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An isomorphism between composites of additive functors induces an isomorphism between the iterated functors on cochain complexes",
+   "results": "Eight related results, chiefly mapping-cone compatibility of additive complex functors.",
+   "date": "2026-10-21",
+   "verdict": "Use the existing NatIso construction directly, with the two iterated complex functors explicitly retained as endpoints."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso.mapHomologicalComplex",
+   "results": "Seven hits include NatIso.mapHomologicalComplex and its hom_app_f and inv_app_f formulas in Mathlib.Algebra.Homology.Additive.",
+   "date": "2026-10-21",
+   "verdict": "The construction is already in Mathlib; the new definition is an irreducible interface with explicit iterated endpoints, implemented by this construction."
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomologicalComplexCompIso|mapHomologicalComplex",
+   "results": "Twenty-five displayed matches include local reducibility annotations for complex functors and uses of mapHomologicalComplex. Local reading of Mathlib.Algebra.Homology.Additive supplies the exact NatIso construction.",
+   "date": "2026-10-21",
+   "verdict": "Reuse NatIso.mapHomologicalComplex; retain the explicit interface rather than unfold large concrete functors."
+  }
+ ],
+ "id": "def-sf-complex-functor-square",
+ "kind": "definition",
+ "title": "Explicit complex square of additive functors",
+ "statement": "Given a natural isomorphism F G ≅ F′ G′ of composite additive functors between preadditive categories, there is a natural isomorphism between their iterated cochain-complex functors. Its component is the original natural isomorphism applied degreewise.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 010V, functorial construction of complexes"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Use Mathlib NatIso.mapHomologicalComplex on the ordinary square, with an explicit result type retaining the two iterated complex functors. The ordinary and iterated complex functors have definitionally equal objects, differentials and maps. No composition with an auxiliary identity comparison is constructed. Unfolding the wrapper proves mapComplexSquare_hom by reflexivity.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 010V, functorial construction of complexes"
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 010V, functorial construction of complexes; explicit construction and proof by V1"
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-reduction-pull-finite-evaluation",
+   "place": "Explicit complex square of additive functors",
+   "via": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ComplexFunctorSquare",
+  "file": "lean/Sheaf/CategoryTheory/ComplexFunctorSquare.lean",
+  "declaration": "CategoryTheory.ConstantCompletion.mapComplexSquare",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-21",
+  "statement": "def mapComplexSquare\n    {C D D' E : Type*} [Category C] [Category D] [Category D'] [Category E]\n    [Preadditive C] [Preadditive D] [Preadditive D'] [Preadditive E]\n    (F : C ⥤ D) (G : D ⥤ E) (F' : C ⥤ D') (G' : D' ⥤ E)\n    [F.Additive] [G.Additive] [F'.Additive] [G'.Additive]\n    (e : F ⋙ G ≅ F' ⋙ G') :\n    F.mapHomologicalComplex (.up ℤ) ⋙ G.mapHomologicalComplex (.up ℤ) ≅\n      F'.mapHomologicalComplex (.up ℤ) ⋙ G'.mapHomologicalComplex (.up ℤ)",
+  "declarations": [
+   "CategoryTheory.ConstantCompletion.mapComplexSquare",
+   "CategoryTheory.ConstantCompletion.mapComplexSquare_hom"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-87143",
+  "group": "V1",
+  "result": "fix",
+  "landing": "20261021T021030-L-2694797",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-87143",
+  "group": "V1",
+  "result": "fix",
+  "landing": "20261021T021030-L-2694797",
+  "kind": "interface",
+  "note": "independent cc review: delivered 7 modules + 7 nodes + change record + report against the live clone, the published build and the direct importers OrientedNearbyCycles, ProEtaleConstantReductionTower and CompletedProjectionCoherence; CMC node against the live node (B3 09:21)"
+ }
+}
