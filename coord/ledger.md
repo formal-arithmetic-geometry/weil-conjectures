@@ -22585,3 +22585,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:35 L: merged deliver/Q15/sk-lem-regular-smooth (stage 2; reviewer PASS; parallel immutable checks)
 - 13:35 L: merged deliver/Q07/lem-sp-signed-tate-coefficient-exponent-normalization (stage 2; reviewer PASS; parallel immutable checks)
 - 13:35 L: returned deliver/NQ/lem-sfb-continuous-algcl-tame-boundary-comparison (reviewer RETURN: L: independent stage-2 immutable head 0e5c7e1cc703: H1: there is no Lean module and no item lean record, and the report )
+- 13:35 L: returned deliver/NH/lem-sfb-continuous-algcl-tame-boundary-comparison (reviewer RETURN: L: independent stage-2 immutable head 39dbfc86c5c1: H1/H2/H11 + superseded. The S2-lane delivery 39dbfc86 is NH's stage-)
