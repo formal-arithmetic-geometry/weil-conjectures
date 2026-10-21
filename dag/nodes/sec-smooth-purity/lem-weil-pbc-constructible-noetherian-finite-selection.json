@@ -40,15 +40,49 @@
    "text": "For the stalk-injective corollary, choose an index whose map at a given geometric point is injective. A nonzero element cannot have zero image, since this map sends zero to zero and is injective. Apply the proved stalk-detection theorem.",
    "uses": [],
    "elementary": true
+  },
+  {
+   "text": "For the module-valued counterpart Etale.exists_finset_mono_pi_lift in WeilConjectures.ConstructibleSheaf.Noetherian, inline the finite generic-stalk tests with the native ModuleCat APIs. Choose an irreducible finite lisse stratification. For each stratum let x_i be the image of its generic point. The geometric stalk of F at x_i is a finitely generated module over the finite ring Lambda, hence a finite set.",
+   "uses": [
+    "lem-weil-pbc-irreducible-lisse-strata"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose one detecting index for each pair consisting of a stratum and a nonzero element of its finite stalk at x_i. The image of this finite dependent sum is a finite set L_0. A stalk element killed by the product lift is killed by every projection, including its selected detecting component, so the product lift is injective at all x_i. The empty dependent sum gives L_0 empty and requires no separate nonemptiness assumption.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Lift the algebraic-closure point at x_i through the immersion of its stratum; injectivity of the immersion makes its image the generic point. Naturality of upperStarCompSheafFiberIso transports the tested monomorphism to the generic stalk of the restricted product lift. Apply the already proved module-valued mono_of_mono_sheafFiber_of_isLocallyConstantSheaf to obtain a monomorphism on each stratum.",
+   "uses": [
+    "lemma-openclosed-stalk-upperstar",
+    "lem-weil-pbc-lisse-generic-kernel"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Every algebraic-closure point of X lifts through the immersion of a stratum containing it. Stalk functors preserve monomorphisms, and upperStarCompSheafFiberIso transports the restricted monomorphism to the original stalk. For maps a,b whose composites with the product lift agree, cancel that monomorphism at each geometric stalk. Scheme.sheafHom_ext_of_sheafFiber_map_algClosurePoint gives a=b, hence the product lift is mono. No comparison between a stalk of a product and the product of stalks is needed.",
+   "uses": [
+    "lemma-openclosed-stalk-upperstar",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-constructible-finite-stalk-tests"
+  "lem-weil-pbc-constructible-finite-stalk-tests",
+  "lem-weil-pbc-irreducible-lisse-strata",
+  "lem-weil-pbc-lisse-generic-kernel",
+  "lemma-openclosed-stalk-upperstar",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "prop-weil-pbc-geometric-stalks-exact"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-constructible-noetherian-finite-selection.md",
-  "place": "Same finite lisse partition route, with the geometric testing portion split off; the finite dependent-sum selection and biproduct projection argument are proved in Lean."
+  "place": "Same finite lisse partition route, with the geometric testing portion split off; the finite dependent-sum selection and biproduct projection argument are proved in Lean.; 2026-10-21 M2: native module-valued realization in WeilConjectures.ConstructibleSheaf.Noetherian, retaining the existing abelian realization."
  },
  "mathlib_searches": [
   {
@@ -145,13 +179,13 @@
   "note": "X Scheme.{u} [IsNoetherian X]; F abelian etale sheaf, constructible = dep's IsConstructibleEtaleSheafOfSets of underlying set sheaf (dep defines constructibility only for set sheaves; IsConstructibleEtaleModuleSheaf needs finite Λ, not applicable); L : Type w arbitrary, G arbitrary, φ; geometric points Ω : Type u alg closed as in dep; ∀ nonzero v in sheafFiber stalk ∃ l with (φ l)_s v ≠ 0 (l depends on s,v); ∃ L₀ : Finset L, Mono biproduct.lift; in-particular corollary ∀ s ∃ l Injective; edge cases empty L/L₀, zero F"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-21",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T1",
+  "group": "M2",
   "result": "pass",
-  "landing": "20261012T042420-L-1821627",
-  "kind": "interface",
+  "landing": "20261021T111327-L-74481",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
