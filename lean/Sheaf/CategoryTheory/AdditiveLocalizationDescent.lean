@@ -53,6 +53,27 @@ theorem Functor.additive_of_additive_localization
     (W : MorphismProperty C) (q : C ⥤ D) [q.Additive] [q.IsLocalization W]
     [q.EssSurj] (U : C ⥤ E) [U.Additive] (G : D ⥤ E) (e : q ⋙ G ≅ U) :
     G.Additive := by
-  sorry
+  classical
+  have : (q ⋙ G).Additive := Functor.additive_of_iso e.symm
+  have : PreservesLimitsOfShape (Discrete WalkingPair) G := by
+    constructor
+    intro K
+    let F : Discrete WalkingPair ⥤ C :=
+      Discrete.functor (fun j ↦ q.objPreimage (K.obj ⟨j⟩))
+    have : PreservesLimit (F ⋙ q) G :=
+      preservesLimit_of_preserves_limit_cone
+        (isLimitOfPreserves q (limit.isLimit F))
+        (isLimitOfPreserves (q ⋙ G) (limit.isLimit F))
+    exact preservesLimit_of_iso_diagram G
+      (show F ⋙ q ≅ K from Discrete.natIso (fun j ↦ q.objObjPreimageIso (K.obj j)))
+  have : G.PreservesZeroMorphisms := by
+    constructor
+    intro X Y
+    rw [← cancel_mono (G.map (q.objObjPreimageIso Y).inv),
+      ← cancel_epi (G.map (q.objObjPreimageIso X).hom)]
+    simp only [← G.map_comp, zero_comp, comp_zero]
+    rw [← q.map_zero]
+    exact (q ⋙ G).map_zero _ _
+  exact G.additive_of_preserves_binary_products
 
 end CategoryTheory
