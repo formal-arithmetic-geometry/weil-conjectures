@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lemma-nagata-projective-target-local",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Properness is local on the target",
@@ -18,35 +18,68 @@
    }
   ]
  },
- "stmt_deps": [],
- "proof": [
-  {
-   "text": "Properness is a Zariski-local property on the target. Apply the verified\ntarget-locality instance\n`AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget` to the open\ncover $(V_i)$; its local hypotheses are exactly the properness hypotheses in\nthe statement, and it returns that $f$ is proper.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "*Warning.* The analogous assertion with ``projective'' in place of\n``proper'' is false for the finite-projective-space definition used here;\nsee Stacks Project Tag 08J0. No projectivity conclusion is used below.",
-   "uses": [],
-   "elementary": null
-  }
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-proper-morphism"
  ],
+ "proof": [],
  "proof_deps": [],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-blowups/lemma-nagata-projective-target-local.md",
-  "place": "## Proof"
+  "place": "## Proof, first paragraph: properness target-locality instance, specialized by the generic open-cover theorem recorded in mathlib_match"
  },
  "mathlib_searches": [
   {
-   "tool": "text search of the local Mathlib checkout (0df444a360)",
-   "query": "AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget",
-   "results": [],
-   "date": "2026-10-08"
+   "tool": "grep",
+   "query": "IsZariskiLocalAtTarget|of_openCover|of_iSup_eq_top",
+   "results": "Logged hits: 77. Single-file grep formats the line as the file field; source read confirms the locality instance at Proper.lean:77-79.",
+   "date": "2026-10-21",
+   "verdict": "match: locality instance"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A morphism of schemes is proper if its restrictions to an open cover of the target are proper",
+   "results": "AlgebraicGeometry.IsProper, IsProper.mk, IsProper.instMorphismRestrict, isProper_iff, isProper_eq; targetAffineLocally and IsLocalAtTarget.of_range_subset_iSup; topological IsProperMap. The definitions confirm the notion; this query does not return the direct cover theorem.",
+   "date": "2026-10-21",
+   "verdict": "no direct match in these hits; definition agrees with properness"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper, AlgebraicGeometry.IsZariskiLocalAtTarget",
+   "results": "AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget, Mathlib.AlgebraicGeometry.Morphisms.Proper; exact locality instance.",
+   "date": "2026-10-21",
+   "verdict": "match: locality instance used by the one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Properness of scheme morphisms is local on the target for an open cover",
+   "results": "AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget; AlgebraicGeometry.IsZariskiLocalAtTarget.of_iSup_eq_top (returned also under the IsLocalAtTarget alias); of_openCover and iff variants. Source read in Proper.lean:77-79 and Basic.lean:135-154.",
+   "date": "2026-10-21",
+   "verdict": "match: generic theorem specializes in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "of_iSup_eq_top|iff_of_iSup_eq_top|of_openCover",
+   "results": "Logged hits: 38, 40, 54, 56, 86. These are introductory documentation references, not declaration locations.",
+   "date": "2026-10-21",
+   "verdict": "no declaration match in truncated single-file hits; followed by directory grep"
+  },
+  {
+   "tool": "grep",
+   "query": "lemma of_iSup_eq_top|theorem of_iSup_eq_top|lemma of_openCover|theorem of_openCover",
+   "results": "Logged hits: Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties.lean, Mathlib/AlgebraicGeometry/Morphisms/Basic.lean, Mathlib/AlgebraicGeometry/Morphisms/Basic.lean, Mathlib/AlgebraicGeometry/Morphisms/Basic.lean, Mathlib/AlgebraicGeometry/Morphisms/Basic.lean, Mathlib/AlgebraicGeometry/Morphisms/Basic.lean. Directory grep locates AlgebraicGeometry.IsZariskiLocalAtTarget.of_iSup_eq_top at Mathlib/AlgebraicGeometry/Morphisms/Basic.lean:146-154 and of_openCover at lines 160-162; source and namespace read.",
+   "date": "2026-10-21",
+   "verdict": "match: generic cover theorem"
   }
  ],
- "mathlib_match": null,
- "status": "imported",
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.IsZariskiLocalAtTarget.of_iSup_eq_top",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/Basic.lean",
+  "line": 146,
+  "how": "specializes in one line: AlgebraicGeometry.IsZariskiLocalAtTarget.of_iSup_eq_top (P := @AlgebraicGeometry.IsProper) V hV hproper. Basic.lean:135-147 has only the target-locality instance, the cover equation iSup V = top, and properness of every restriction as hypotheses. The inferred instance is AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget, Mathlib/AlgebraicGeometry/Morphisms/Proper.lean:77-79. The restriction f ∣_ V i is the stated inverse-image restriction. No finite-cover, affine, Noetherian, or quasi-compact-base hypothesis occurs."
+ },
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature",
@@ -75,5 +108,20 @@
   ],
   "sorry_free": true,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lemma-nagata-projective-target-local",
+  "worker": "stage1",
+  "summary": "Verified the complete statement against both blueprint snapshots and Stacks Tag 01W2 (morphisms, lemma-proper-local-on-the-base); replaced the imported unjudged proof with a Mathlib leaf. Read the generic open-family theorem and the properness locality instance in source, and recorded all msearch queries actually run. No new node or statement change.",
+  "blueprint": "The first proof paragraph is exactly the properness instance at Proper.lean:77-79 followed by the generic open-cover implication at Basic.lean:146-154. The projectivity warning is commentary, not a proof step or a conclusion of this item."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q102-5c7a4fef8",
+  "group": "Q102",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q102-5c7a4fef8 (reviewer sub-agent of L); spot-checked: I read all of this delivery: one existing node, no new nodes, statement unchanged. The statement matches the master blueprint (order 88) and main-20261015 (order 96) word for word. Their proof is one sentence applying the IsProper locality instance, plus a warning about projectivity (Stacks 08J0). The warning is commentary, not a proof step, so dropping it is correct. The correct source for the statement is Stacks 01W2 (morphisms.tex:9883, lemma-proper-local-on-the-base): the item is direction (2)=>(1), and Stacks omits the proof. The Mathlib leaf holds up against the source. AlgebraicGeometry.IsZariskiLocalAtTarget.of_iSup_eq_top is at Basic.lean:146-154, and its section variables at line 135 carry [IsZariskiLocalAtTarget P]. The instance IsZariskiLocalAtTarget @IsProper is at Proper.lean:77-79, and IsProper is at line 42. The definition of proper matches def-weil-proper-morphism, which is already matched to the same Mathlib class. The restriction f|_U is f^{-1}(U) -> U, the family is arbitrary, and no extra hypotheses are added, so this is a one-line specialization under B8. Edge cases checked: a single-set cover, empty members, an empty index family (forces the empty scheme) and infinite covers. A search of the DAG found no other node stating that properness is local on the target; lemma-weil-pbc-target-locality is about étale coverings and is a different statement. No SGA is cited, no units are touched and there are no tool_uses. Fix: stmt_deps was empty although the statement uses the notions scheme morphism and proper. I set stmt_deps to [def-pc-scheme, def-weil-proper-morphism]; both are reviewed Mathlib-leaf definition nodes and this creates no cycle. Corrected file: fixes/dag/nodes/sec-nagata-compactification/lemma-nagata-projective-target-local.json. Nothing else changed.; 1 file(s) fixed by the reviewer"
  }
 }
