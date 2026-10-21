@@ -16,7 +16,14 @@
   "lem-sfb-condensed-product-action-inflation",
   "lem-sfb-condensed-derived-restriction-calculus",
   "lem-sfb-discrete-lattice-koszul-resolution",
-  "lem-sfb-condensed-derived-invariant-bar"
+  "lem-sfb-condensed-derived-invariant-bar",
+  "def-sfb-relative-derived-invariants",
+  "def-sfb-relative-cyclic-total",
+  "def-sfb-relative-invariant-forgetting",
+  "def-sfb-relative-coefficient-comparisons",
+  "def-sfb-relative-bar-data",
+  "def-sfb-relative-trivial-cyclic-map",
+  "def-sfb-relative-lattice-bridge"
  ],
  "proof": [
   {
@@ -508,5 +515,33 @@
   "group": "NN",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-528b8a8fb (reviewer sub-agent of L); spot-checked: I read the full item and all 17 steps, plus the full statement of every cited node. There are no new nodes. The statement is unchanged from the base, which NF created unsplit. There is no repair note, so the re-split rule does not apply. Sources: Stacks 03EV checked at sites-modules.tex:4389 (2). The blueprint place is main-20261015 direct-images proof (3), inherited from the base with from.node null. No SGA is used. Hand checks: (1) the K differential has d²=0, and the homotopy (h,−h) works because h commutes with T. (2) The shift map (x,(−1)^s y) and the cone reordering with source cyclic-1 sign −1 are chain isomorphisms and match the −p convention. (3) The step-5 β mate fits the mate-model node with G=id, H=Res, σ=id and the underived mate ι. (4) The step-14 mate orientation gives d_Z α_R(sI') = s α_{R'}(I'), and b_{sI'} is a quasi-isomorphism without injectivity. (5) E (identity, evaluation at τ, 0) is a cochain map; on D^{0,q} it gives (T−1)m, and on D^{1,q} −d_Iφ(τ) on both sides. E b_H is the invariant inclusion, and E∘j_rep = kε in degrees 0, 1 and ≥2. Step 4 is sound: C(−,G) is representable, so R[G] = j_{G!}R_G is flat and U preserves injectives. Step 12 takes the lattice node's ∃-witness to be the G=1 construction θα=Qb. That construction satisfies the lattice statement, and it is literally the lattice node's own construction λ=b_P^{-1}c_P on B^{a,b}=K(I^b)^a (its proof steps 5–6). I accepted this as a reading of the witness, not a C3 fault, and no uniqueness is inferred from H^0. Maintainer note: stage 2 must pin this witness because the lattice Lean theorem is ∃. Edge cases checked: τ=1, G=1, the zero ring, and negative lower bounds. Batch-5 flags: lem-trf-bounded-below-derived-adjunction (closure 14, generic derived adjunction), lem-trf-bounded-below-derived-mate-model (closure 18, generic mate formula), and the internal-bar-roof-adjunction closure (adds only lem-trf-localization-essentially-surjective). None is part of the trace-formula or Poincaré-duality proofs, so all three are accepted."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RelativeCyclicRestrictionModel",
+  "declaration": "CategoryTheory.RelativeCyclic.relative_cyclic_restriction_model",
+  "declarations": [
+   "CategoryTheory.RelativeCyclic.barEvaluation",
+   "CategoryTheory.RelativeCyclic.relative_cyclic_restriction_model",
+   "CategoryTheory.RelativeCyclic.scalarCyclicInput",
+   "CategoryTheory.RelativeCyclic.trivialResidualCyclicInput",
+   "CategoryTheory.RelativeCyclic.forgetLambda",
+   "CategoryTheory.RelativeCyclic.latticeCompatibility",
+   "CategoryTheory.RelativeCyclic.scalarForgetDerived",
+   "CategoryTheory.RelativeCyclic.forgetCoefficient"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/RelativeCyclicRestrictionModel.lean",
+  "statement": "theorem relative_cyclic_restriction_model : ∃ K : TotalModel A G, HasComparison A G K",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9ed221a0f",
+  "group": "NB",
+  "result": "pass",
+  "note": "Read the item, its 17 steps, 7 new def nodes, all 8 modules, and the dependency Lean in side-live (CondensedEquivariantBarData/Computation, CondensedDerivedInvariants, ProductInvariants, DiscreteLatticeKoszulResolution). Only lean plus new-def-node stmt_deps changed, records verbatim, new-node fields ok, no dep changes. Clauses: ProductInvariants generalized to topological J; derived = full rightDerivedFunctor; beta = rightDerivedPullback of the unique inclusion with unit equation, CommShift and H0 inclusion; TotalModel coordinates N^n+N^(n-1), d=(dx,(T-1)x-dy), T pinned sectionwise; shift pinned to (x,(-1)^s y) (hand-checked); HasComparison pins lambda by theta alpha = Qb on all D+; cyclicMap = lambda^-1 beta; forgetting exact/conservative/injectives, forgetDerived and forgetBeta (= groupMap) and forgetCoefficient and shift; latticeCompatibility exists-witness pinned to forgotten lambda (B, E, L, k pinned, consistent under B sign) = node step 12; barEvaluation Q(j) eta^-1 c = Q(eps) with eta = dep Computation normalization transported, j the resolution-zero row, eps id/eval at v(1)/0. Edge cases tau=1, G=1, zero ring, negative bounds, universes ok. Advisories: second reading is an in-worker check (dispatcher policy); new nodes cite calculus/bar theorems instead of def-sfb-condensed-derived-invariants/def-sfb-condensed-equivariant-bar-data; DiscreteLattice.* theorem-owned vocabulary; about 20 unused proof imports; docstring says 18 steps for 17. No recompile (human rule); no files changed."
  }
 }
