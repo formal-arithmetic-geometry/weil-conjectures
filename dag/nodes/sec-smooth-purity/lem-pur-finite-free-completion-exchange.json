@@ -2,7 +2,7 @@
  "id": "lem-pur-finite-free-completion-exchange",
  "kind": "statement",
  "title": "Finite free change of rings exchanges quotient completion on arbitrary complexes",
- "statement": "Let $\\mathcal C$ be a site small in the module universe [def-weil-pbc-sites-and-cohomology], and $R\\to S$ a map of sheaves of commutative rings. Suppose $S\\cong R^{\\oplus d}$ as an $R$-module sheaf for some finite $d\\geq0$. Let $t\\in R(1)$ and $v\\in S(1)$ be global sections with injective multiplication on their respective rings, and suppose the image of $t$ is $uv^e$ for a unit $u\\in S(1)^\\times$ and an integer $e\\geq1$. Assume countable products of $R$-modules, $S$-modules and abelian sheaves are exact. Use the unbounded derived categories of module sheaves [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category], derived change of rings $T=-\\otimes_R^{\\mathbf L}S$ [lem-pur-derived-change-of-rings], and the strict quotient completions\n$$C_RQ=R\\lim_{n\\geq1}(Q\\otimes_R^{\\mathbf L}R/t^nR),\\qquad C_SH=R\\lim_{m\\geq1}(H\\otimes_S^{\\mathbf L}S/v^mS).$$\nHere quotients are sheaf quotients, tensors are K-flat total tensors [def-pc-kflat-complex, def-pc-tensor-complex-sheaves], and the derived limits and units $\\eta^R,\\eta^S$ are the strict-tower derived limits [lem-weil-pbc-ringed-strict-tower-homotopy-limit] with the quotient augmentations, represented by a product map and zero shifted-product component. For every $Q\\in D(R)$ there is a natural isomorphism\n$$\\epsilon_Q:T C_RQ\\xrightarrow{\\sim}C_STQ,\\qquad \\epsilon_Q\\,T(\\eta^R_Q)=\\eta^S_{TQ}.$$\nIt is specified by the canonical tensor/product map on the $t$-tower, the identifications $(R/t^nR)\\otimes_R S=S/v^{en}S$, and the inverse of the specified arithmetic-subsequence Roos comparison of [lem-pur-compact-support-roos-cofinality]. It is independent of the basis of $S$. No completeness or boundedness hypothesis on $Q$ is imposed.",
+ "statement": "Let $\\mathcal C$ be a site small in the module universe [def-weil-pbc-sites-and-cohomology], and $R\\to S$ a map of sheaves of commutative rings. Suppose $S\\cong R^{\\oplus d}$ as an $R$-module sheaf for some finite $d\\geq0$. Let $t\\in R(1)$ and $v\\in S(1)$ be global sections with injective multiplication on their respective rings, and suppose the image of $t$ is $uv^e$ for a unit $u\\in S(1)^\\times$ and an integer $e\\geq1$. Assume countable products of $R$-modules, $S$-modules and abelian sheaves are exact. Use the unbounded derived categories of module sheaves [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category], derived change of rings $T=-\\otimes_R^{\\mathbf L}S$ [lem-pur-derived-change-of-rings], and the strict quotient completions\n$$C_RQ=R\\lim_{n\\geq1}(Q\\otimes_R^{\\mathbf L}R/t^nR),\\qquad C_SH=R\\lim_{m\\geq1}(H\\otimes_S^{\\mathbf L}S/v^mS).$$\nHere quotients are sheaf quotients, tensors are K-flat total tensors [def-pc-kflat-complex, def-pc-tensor-complex-sheaves], and the derived limits and units $\\eta^R,\\eta^S$ are the strict-tower derived limits [lem-weil-pbc-ringed-strict-tower-homotopy-limit, lem-weil-strict-roos-comparison] with the quotient augmentations, represented by a product map and zero shifted-product component. For every $Q\\in D(R)$ there is a natural isomorphism\n$$\\epsilon_Q:T C_RQ\\xrightarrow{\\sim}C_STQ,\\qquad \\epsilon_Q\\,T(\\eta^R_Q)=\\eta^S_{TQ}.$$\nIt is specified by the canonical tensor/product map on the $t$-tower, the identifications $(R/t^nR)\\otimes_R S=S/v^{en}S$, and the inverse of the specified arithmetic-subsequence Roos comparison of [lem-sp-strict-tower-arithmetic-restriction]. It is independent of the basis of $S$. No completeness or boundedness hypothesis on $Q$ is imposed.",
  "source": {
   "document": "literature/stacks-project/sites-cohomology.tex",
   "place": "Tag 0941, lemma-derived-limit-is-ok; finite-free tensor/product comparison and arithmetic cofinality argument extracted from returned Steps 6–7, including the quotient-augmentation equation. Agent refinement of the Roos model."
@@ -15,11 +15,139 @@
   "def-pc-kflat-complex",
   "def-pc-tensor-complex-sheaves",
   "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "lem-pur-compact-support-roos-cofinality"
+  "lem-sp-strict-tower-arithmetic-restriction",
+  "lem-weil-strict-roos-comparison"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $a:R\\to S$ and $F(M)=M\\otimes_R S$. Choose a basis only to verify exactness and preservation of products. The natural coordinates of [lem-sfb-finite-free-scalar-coordinates] identify the underlying $R$-module sheaf of $F(M)$ with $M^{\\oplus d}$, on maps as well as objects. Finite sums preserve exact sequences, and the forgetful functor to abelian sheaves is exact and faithful by [lem-weil-pbc-module-sheaves-colimits-forgetful]; it detects a zero kernel or cokernel. Thus $F$ is exact and additive. For any countable family the canonical map\n$$c:(\\prod_n M_n)\\otimes_R S\\longrightarrow\\prod_n(M_n\\otimes_R S)$$\nhas projections $F(\\mathrm{pr}_n)$. In these coordinates it is the reindexing $(\\prod_n M_n)^{\\oplus d}\\cong\\prod_n M_n^{\\oplus d}$: a finite tuple of sequences is the same as a sequence of finite tuples. The same forgetful-functor node computes products sectionwise; the inverse reindexing is a sheaf map. Hence $c$ is an $S$-linear isomorphism, including $d=0$.",
+   "uses": [
+    "lem-sfb-finite-free-scalar-coordinates",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok, product terms; agent finite-basis verification using the cited natural coordinate isomorphism."
+   }
+  },
+  {
+   "text": "By [lem-sf-exact-functor-derived-triangulated], termwise $F$ induces an exact functor on derived categories. It computes $T$ on every complex: for a K-flat resolution $P\\to M$, exactness makes $F(P)\\to F(M)$ a quasi-isomorphism, and [lem-pur-derived-change-of-rings] identifies $T(M)$ with $F(P)$. Now choose $P\\to Q$ K-flat with flat terms by [lem-pc-kflat-resolution]. Put\n$$X_n=P\\otimes_R R/t^nR,\\quad Y=P\\otimes_R S,\\quad Z_m=Y\\otimes_S S/v^mS.$$\nBy [lem-pur-kflat-change-of-rings], $Y$ is K-flat with flat $S$-terms. Thus $X$ and $Z$ compute the strict derived quotient towers of $Q$ and $TQ$, respectively. The transitions are induced by the quotient maps, and their strictly compatible augmentations are $p\\mapsto p\\otimes1$ and $y\\mapsto y\\otimes1$. All tensor products here are the sheaf tensors of [def-pur-sheaf-tensor-product], applied termwise because the second factors are in degree zero.",
+   "uses": [
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-pur-derived-change-of-rings",
+    "lem-pc-kflat-resolution",
+    "lem-pur-kflat-change-of-rings",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS, lemma-K-flat-resolution, and 06YT, lemma-derived-tor-quasi-isomorphism-other-side; exact finite-free scalar extension and the strict quotient diagrams."
+   }
+  },
+  {
+   "text": "Since $a(t)^n=u^n v^{en}$ and $u^n$ is a unit, the ideal sheaves $a(t)^nS$ and $v^{en}S$ are equal. Balancing and quotient universal properties give\n$$(R/t^nR)\\otimes_R S\\cong S/v^{en}S,\\qquad \\bar r\\otimes s\\longmapsto\\overline{a(r)s}.$$\nIts inverse is $\\bar s\\mapsto\\bar1\\otimes s$, defined on local lifts: changing a lift by $a(t)^n s'$ changes the tensor by $\\overline{t^n}\\otimes s'=0$. Using the same sheaf-tensor construction [def-pur-sheaf-tensor-product], obtain chain isomorphisms\n$$\\beta_n:F(X_n)\\xrightarrow{\\sim}Z_{en},\\qquad (p\\otimes\\bar r)\\otimes s\\longmapsto(p\\otimes s)\\otimes\\overline{a(r)}.$$\nThe inverse sends $(p\\otimes s)\\otimes\\bar c$ to $(p\\otimes\\bar1)\\otimes sc$ on local lifts $c$; the same ideal equality proves independence of the lift. These inverse formulas respect balancing, restrictions and differentials. Both composites are the identity on local tensor generators. Reducing the displayed formulas modulo the next smaller ideal proves that $\\beta$ is an isomorphism of strict towers $F(X)\\cong r_e Z$. It takes the scalar extension of the augmentation to the restricted augmentation of $Y$.",
+   "uses": [
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Agent balanced quotient calculation for the quotient terms in Tag 0941; the elementary calculation supplies the finite-stage comparison, not a claim that 0941 states it."
+   }
+  },
+  {
+   "text": "Let $H_R(X)$ and $H_S(Z)$ denote the actual shifted Roos cones, with the source-product and shifted-target-product coordinates of the statement. Step 1 verifies the product hypothesis of [lem-pur-roos-additive-comparison]. Apply it to $F$ and $X$ to obtain the canonical chain isomorphism $F(H_R(X))\\cong H_S(F(X))$. Compose with $H_S(\\beta)$ from step 3, obtaining\n$$\\delta_P:F(H_R(X))\\xrightarrow{\\sim}H_S(r_eZ).$$\nThis uses the tensor/product map on both cone coordinates and the ordinary additive cone comparison. By [lem-weil-strict-roos-comparison], exact countable products in each of the two module categories identify these actual cones naturally with the total strict-tower derived limits, including their quotient augmentations. Step 2 allows $T$ to be computed on $H_R(X)$ even though this complex need not be K-flat. Consequently $[\\delta_P]$ gives $T C_RQ\\cong R\\lim_n Z_{en}$ with precisely the specified product and quotient maps.",
+   "uses": [
+    "lem-pur-roos-additive-comparison",
+    "lem-weil-strict-roos-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok; agent application of the general additive cone and normalized exact-products Roos comparisons."
+   }
+  },
+  {
+   "text": "Apply [lem-sp-strict-tower-arithmetic-restriction] to the $S$-module tower $Z$. It gives an isomorphism $R\\lim_m Z_m\\to R\\lim_n Z_{en}$. With the normalized actual-cone comparisons [lem-weil-strict-roos-comparison], this is the class of the specified cone map $r_e:H_S(Z)\\to H_S(r_eZ)$: its source-product map selects coordinate $en$, and its target-product map is\n$$b_e((z_i)_i)_n=\\sum_{i=en}^{e(n+1)-1}s_{en,i}(z_i).$$\nHere $s_{j,i}:Z_i\\to Z_j$ is the composite transition. Exact products are assumed, so the termwise products compute these derived products; the formula also commutes with the resolution maps. Define\n$$\\epsilon_Q=[r_e]^{-1}[\\delta_P]:T C_RQ\\xrightarrow{\\sim}C_STQ,$$\nwhere the normalized identifications of step 4 are understood. Thus the direction is the inverse arithmetic restriction after the canonical tensor/product and quotient isomorphisms. In particular the weighted-block map, rather than an unspecified triangulated completion of a square, is used.",
+   "uses": [
+    "lem-sp-strict-tower-arithmetic-restriction",
+    "lem-weil-strict-roos-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok; specified arithmetic comparison from the general ring-sheaf node, not the constant-ring-only lemma."
+   }
+  },
+  {
+   "text": "Write $b_R:P\\to H_R(X)$ and $b_S:Y\\to H_S(Z)$ for the two augmentation maps with zero shifted-product component. On the source-product coordinate the map $\\delta_P F(b_R)$ sends $p\\otimes s$ at index $n$ to $(p\\otimes s)\\otimes\\bar1$ in $Z_{en}$; its other coordinate is zero. The same is true of $r_e b_S$: coordinate selection restricts the quotient augmentation, and the weighted-block map sends zero to zero. Hence\n$$\\delta_P F(b_R)=r_e b_S.$$\nThe augmentation normalizations of [lem-weil-strict-roos-comparison] identify $[b_R]$ and $[b_S]$ with $\\eta^R$ and $\\eta^S$, and [lem-sp-strict-tower-arithmetic-restriction] preserves the restricted augmentation. Multiplying by $[r_e]^{-1}$ proves $\\epsilon_Q\\,T(\\eta^R_Q)=\\eta^S_{TQ}$.",
+   "uses": [
+    "lem-weil-strict-roos-comparison",
+    "lem-sp-strict-tower-arithmetic-restriction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941 and agent coordinate calculation of the quotient-augmentation square on both product coordinates."
+   }
+  },
+  {
+   "text": "The construction is natural for chain maps between K-flat complexes with flat terms: products, the maps $\\beta_n$ and $F$, and coordinate selection and block sums commute with such maps, and so do their localized inverses. It also inverts quasi-isomorphisms between these representatives. Indeed [lem-pe-kflat-roos-representative-invariance] applies to $B_n=R/t^nR$, and separately over $S$ to $S/v^mS$, with the assumed exact countable products. Its first assertion makes the two quotient Roos constructions invert these quasi-isomorphisms. Step 1 makes $F$ invert all quasi-isomorphisms, and [lem-pur-kflat-change-of-rings] ensures its K-flat values satisfy the hypotheses of the $S$-version. These constructions also respect cochain homotopies: tensor each homotopy termwise with the quotient, take its product, and use the induced cone homotopy. Thus the natural isomorphism and its unit equation are defined on the localization of the homotopy category of K-flat complexes with flat terms.",
+   "uses": [
+    "lem-pe-kflat-roos-representative-invariance",
+    "lem-pur-kflat-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS and 06YT for K-flat representatives; Tag 0941 for the product-cone model; use the representative-invariance theorem for arbitrary ring sheaves."
+   }
+  },
+  {
+   "text": "This localization is $D(R)$. Let $\\mathcal P_R$ be the homotopy category of K-flat complexes of $R$-modules with flat terms and $W_R$ its quasi-isomorphisms. By [lem-weil-pbc-site-derived-tensor-descent] the induced functor $W_R^{-1}\\mathcal P_R\\to D(R)$ is an equivalence; every $Q$ is reached through a resolution $P\\to Q$ of [lem-pc-kflat-resolution]. Step 7 gives two functors on $\\mathcal P_R$, $P\\mapsto F(H_R(X(P)))$ and $P\\mapsto H_S(Z(P))$, with values in $D(S)$, both inverting $W_R$, and the natural isomorphism $[r_e]^{-1}[\\delta_P]$ between them. Clauses (1) and (2) of [lem-weil-pbc-localization-universal-property] descend the two functors and this natural isomorphism to $W_R^{-1}\\mathcal P_R$, uniquely, and hence along the equivalence to $D(R)$; the result is independent of the chosen representatives. Clause (3) descends the equation of step 6, which holds on every representative. By steps 2 and 4 the descended source and target are exactly $T C_RQ$ and the strict quotient completion $C_STQ$, so $\\epsilon$ is a natural isomorphism on all of $D(R)$.",
+   "uses": [
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YS, lemma-K-flat-resolution; descent along the K-flat localization equivalence as in the construction after Tag 06YT."
+   }
+  },
+  {
+   "text": "The basis in step 1 proved invertibility only. The actual product map is characterized by its projections $F(\\mathrm{pr}_n)$; the quotient maps have the fixed formulas of step 3; and the coordinate selection and the block map $b_e$ of step 5 are fixed coordinate formulas. Changing the basis changes none of these maps, their normalized realizations, or the inverse of their isomorphism classes. Thus $\\epsilon$ is independent of the basis. Rank zero gives $S=0$ and all target complexes zero. For $e=1$ the selection and block maps are identities. No step took a truncation of $P$ or assumed its completeness, so the result applies to every unbounded $Q$ as asserted.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Agent verification of the specified-map and unboundedness clauses after the Tag 0941 construction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-finite-free-scalar-coordinates",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-pur-derived-change-of-rings",
+  "lem-pc-kflat-resolution",
+  "lem-pur-kflat-change-of-rings",
+  "def-pur-sheaf-tensor-product",
+  "lem-pur-roos-additive-comparison",
+  "lem-weil-strict-roos-comparison",
+  "lem-sp-strict-tower-arithmetic-restriction",
+  "lem-pe-kflat-roos-representative-invariance",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941, lemma-derived-limit-is-ok, and Tags 06YS/06YT; finite-free coordinates, balanced quotient maps, and augmentation equation supplied explicitly by NO using the cited general nodes."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,10 +183,45 @@
    "results": "[leanfinder] OK 8 hit(s); LightProfinite.isoMapCone, ProfiniteAddGrp.limitConeIsLimit, Condensed.hasExactLimitsOfShape, ProfiniteAddGrp.limit, localCohomology.diagramComp, AddCommGrpCat.leftExactFunctorForgetEquivalence.instPreservesFiniteLimitsObjLeftExactFunctorTypeFunctorInverseAux, LightProfinite.Extend.isLimitCone, CategoryTheory.Localization.HasProductsOfShapeAux.isLimitMapCone",
    "date": "2026-10-21",
    "verdict": "no match: the adic-completion hits concern ordinary modules, and the limit hits concern ordinary categorical limits; none states this unbounded ringed-site quotient-completion exchange with the specified units and arithmetic maps"
+  },
+  {
+   "tool": "grep",
+   "query": "Roos|roos|completion.*tensor|tensor.*completion",
+   "results": "OK 6 hit(s): Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/Smooth/Flat.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module completion, ordinary sheaf limits/free modules, and exact-functor localization do not state the arbitrary ring-sheaf quotient-completion exchange with its arithmetic maps and units"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact additive functor preserving countable products commutes with derived inverse limit of towers of complexes of sheaves",
+   "results": "OK 8 hit(s): CategoryTheory.Functor.preservesFiniteProductsOfAdditive, CategoryTheory.exactFunctor, CategoryTheory.Functor.exact_tfae, CategoryTheory.ExactFunctor.of, CategoryTheory.exactFunctor_le_additiveFunctor, CategoryTheory.ExactFunctor, CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.exactFunctor_iff",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module completion, ordinary sheaf limits/free modules, and exact-functor localization do not state the arbitrary ring-sheaf quotient-completion exchange with its arithmetic maps and units"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AdicCompletion\", \"ofTensorProduct\"",
+   "results": "OK 12 hit(s): AdicCompletion.ofTensorProduct, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProductEquivOfPiFintype, AdicCompletion.ofTensorProductInvOfPiFintype, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProduct_surjective_of_finite, AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian, AdicCompletion.ofTensorProduct_tmul",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module completion, ordinary sheaf limits/free modules, and exact-functor localization do not state the arbitrary ring-sheaf quotient-completion exchange with its arithmetic maps and units"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite free extension of sheaves of rings commutes with derived inverse limits of quotient towers on unbounded complexes with completion unit compatibility",
+   "results": "OK 8 hit(s): SheafOfModules.ιFree_mapFree_inv_assoc, SheafOfModules.mapFree, IsAdicComplete.of_comp_lift, localCohomology.diagram, IsAdicComplete.StrictMono.of_comp_lift, IsAdicComplete.of_lift, IsAdicComplete.StrictMono.of_lift, localCohomology.ofDiagram",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module completion, ordinary sheaf limits/free modules, and exact-functor localization do not state the arbitrary ring-sheaf quotient-completion exchange with its arithmetic maps and units"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact product preserving functor on module sheaves commutes with homotopy inverse limits and the canonical augmentation of a quotient tower",
+   "results": "OK 8 hit(s): SheafOfModules.createsLimit, Profinite.NobelingProof.succ_exact, SheafOfModules.evaluationPreservesLimit, CondensedMod.ofSheafProfinite, LightCondMod.ofSheafLightProfinite, LightCondAb.ofSheafLightProfinite, Condensed.instAB4StarCondensedMod, SheafOfModules.evaluationPreservesLimitsOfShape",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module completion, ordinary sheaf limits/free modules, and exact-functor localization do not state the arbitrary ring-sheaf quotient-completion exchange with its arithmetic maps and units"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-integral-operations-scalar-extension",
@@ -77,5 +240,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-finite-free-completion-exchange",
+  "worker": "stage1",
+  "summary": "NO split the arbitrary-ring-sheaf finite-free quotient completion comparison into nine steps, reusing existing coordinate, K-flat, additive Roos, arithmetic restriction, normalization and localization nodes. Wrote the quotient balancing and both augmentation coordinates explicitly. Replaced the inapplicable constant-ring cofinality citation with its existing general ring-sheaf counterpart; no mathematical hypotheses or conclusions changed. No new nodes.",
+  "blueprint": "Nearest blueprint ancestor def-weil-derived-pullback-tensor-hom, main-20261015 order 1826, final paragraph: compatible finite reductions and the integral derived inverse limit. Steps 1–4 construct finite-free scalar transport on the quotient Roos tower; 5–6 use cofinal levels with the specified unit; 7–9 descend naturally to arbitrary unbounded complexes and remove the auxiliary basis."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NO-ce14d5e1d",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-ce14d5e1d (reviewer sub-agent of L); spot-checked: I read the instructions, the item in full (9 steps, no new nodes), every cited statement, Stacks sites-cohomology Tag 0941 (lemma-derived-limit-is-ok) and 06YS/06YT, and the main-20261015 def-weil-derived-pullback-tensor-hom final paragraph, which matches from.place. The item is not dropped or superseded: live is still unsplit, there is no repair note and no SGA is cited. Statement swap: lem-pur-compact-support-roos-cofinality covers only Mod of a constant ring A, while the item and its parent need arbitrary ring sheaves. lem-sp-strict-tower-arithmetic-restriction covers any ring sheaf and gives the same selection and block formulas and the same cone-unit restriction, so the statement is corrected, not weakened. The steps are sound. Step 1: the coordinates are natural, so c is reindexing, and forget is conservative. Step 2: the computation clause of derived change of rings applies to every complex, and K-flat change of rings gives flat S-terms. Step 3: a(t)^n S = v^{en} S because u^n is a unit. Step 4: the additive Roos node's product hypothesis is supplied by step 1. Step 5: I checked that (1-s')∘sel = block∘(1-s) by telescoping, and that restriction preserves K-injective towers. Step 6: both coordinates of the augmentation agree. Step 7: K-flat Roos invariance holds for any ring sheaf and tower of algebras. Edge cases d=0, t a unit, e=1, Q=0, and Z_p ⊂ Z_p[√p] with Q=Q_p or ⊕Z_p all behave correctly. FIX (C5): step 8 re-proved by roofs the statement of the existing node lem-weil-pbc-site-derived-tensor-descent (localized K-flat flat-term complexes ≃ D(R)). Step 8 now cites it together with the localization universal property; I dropped the two fraction lemmas and recomputed proof_deps, and the closure has no cycle. Step 9 also used an undefined a_e, now reworded. The off-unit tools (sfb finite-free coordinates, pe K-flat Roos invariance) are in sec-proetale-coefficients, which the unit cites, so no tool_uses record is needed; I accept them as generic if a record is required. Maintainer note: the unsplit sibling lem-pur-finite-free-completion-exchange-coherence still cites the constant-ring cofinality node and should be repointed when it is split. The fixed file is fixes/dag/nodes/sec-smooth-purity/lem-pur-finite-free-completion-exchange.json.; 1 file(s) fixed by the reviewer"
  }
 }
