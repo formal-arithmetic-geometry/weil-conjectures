@@ -1,0 +1,150 @@
+{
+ "id": "lem-sp-p1-diagonal-comparison-components",
+ "kind": "statement",
+ "title": "Exact comparison of the supported diagonal component formula",
+ "statement": "Let A be finite, N positive annihilating A, and S Noetherian and N-invertible. Let c be the normalized ordinary Chern arrow for P1 over P1(S), and let kappa be the normalized supported Kummer boundary of the product diagonal. Let cDelta be a pro-etale Cartier class satisfying its specified comparison equation [def-sp-cartier-derived-realization]. With the canonical exact diagonal direct-image realization and the canonical composition and chart maps, the composite before the trace equals beta times the canonical twisted unit plus the comparison image of the Chern adjunct, for each projection and some base arrow beta. This is DiagonalComponentFormula (geoP1DiagonalComponentData ...) and has no splitting or trace hypothesis.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/det-sp-p1-trace.proof.md",
+  "place": "Proof paragraph 3: exact comparison of the supported diagonal before applying the trace"
+ },
+ "stmt_deps": [
+  "def-sp-cartier-derived-realization",
+  "def-sp-p1-proetale-trace-system"
+ ],
+ "proof": [
+  {
+   "text": "Apply exact comparison to the ordinary supported diagonal component identity, retaining its base arrow beta and its coefficient-one normalized relative Chern component.",
+   "uses": [
+    "lem-sp-finite-p1-diagonal-kummer-component-formula"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The specified Cartier Ext comparison, degree-zero comparisons and shift comparisons identify its exact-derived realization with geoP1CartierDerivedArrow.",
+   "uses": [
+    "def-sp-cartier-derived-realization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The mate of a pasted square is the paste of the mates. Apply this to the diagonal followed by either projection and to the projective-line chart. The source and chart comparisons are exactly geoP1DiagonalSource and geoP1DiagonalChartMap; comparison commutes with the normalized twist pullback.",
+   "uses": [
+    "lem-weil-pbc-coefficient-exchange-mates"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Comparison is additive. The unit and Chern adjunct mate identities identify the two terms as geoP1TwistedUnit and geoP1ChernPushforward. Cancel the invertible closed-source comparison to obtain the displayed component formula.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sp-cartier-derived-realization",
+  "lem-sp-finite-p1-diagonal-kummer-component-formula",
+  "lem-weil-pbc-coefficient-exchange-mates"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/det-sp-p1-trace.proof.md",
+  "place": "Proof paragraph 3: exact comparison of the supported diagonal before applying the trace",
+  "notes": "P4: proof and exact comparison interfaces follow the retained unit route."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The supported Kummer class of the diagonal of the projective line over a scheme becomes a base component plus the relative Chern class under etale to proetale derived comparison",
+   "results": "8 hits: AlgebraicGeometry.IsImmersion.instDiagonalScheme, AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal, Algebra.FormallySmooth.projective_kaehlerDifferential, RingHom.Etale, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap, KaehlerDifferential.isBaseChange_of_formallyEtale, Algebra.FormallyEtale.subsingleton_kaehlerDifferential, AlgebraicGeometry.instIsZariskiLocalAtTargetDiagonalScheme. Read the returned signatures; generic category/cohomology tools do not state this projective-line comparison result.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The normalized comparison from Ext of the constant rank one module sheaf to underlying abelian sheaf cohomology is bijective on an arbitrary scheme, by acyclicity of injective module sheaves",
+   "results": "8 hits: CategoryTheory.Abelian.Ext.mk₀_bijective, CategoryTheory.InjectiveResolution.extEquivCohomologyClass, CategoryTheory.Sheaf.H, CategoryTheory.InjectiveResolution.extAddEquivCohomologyClass, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_zero, SheafOfModules.bijective_pushforwardSections, AlgebraicGeometry.Scheme.Modules.instAbelian. Read the returned signatures; generic category/cohomology tools do not state this projective-line comparison result.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapBiprod",
+   "results": "7 hits: CategoryTheory.Functor.mapBiprod, CategoryTheory.Functor.mapBiprod_hom, CategoryTheory.Functor.mapBiprod_inv, CategoryTheory.Limits.biprod.lift_mapBiprod, CategoryTheory.Limits.biprod.mapBiprod_hom_desc, CategoryTheory.Limits.biprod.mapBiprod_inv_map_desc, CategoryTheory.Limits.biprod.map_lift_mapBiprod. Read the returned signatures; generic category/cohomology tools do not state this projective-line comparison result.",
+   "date": "2026-10-20",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "Chern|Kummer|projectiveLine|proEtale",
+   "results": "25 hits: Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/NumberField/Cyclotomic/Ideal.lean, Mathlib/NumberTheory/ModularForms/Cusps.lean, Mathlib/NumberTheory/NumberField/Cyclotomic/Three.lean. Read the returned signatures; generic category/cohomology tools do not state this projective-line comparison result.",
+   "date": "2026-10-20",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleProjectiveLineTrace",
+  "group": "P4",
+  "date": "2026-10-21"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-p1-trace",
+   "place": "Proof paragraph 3: exact comparison of the supported diagonal before applying the trace",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-geo-p1-adjunction",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleP1DiagonalComponents",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleP1DiagonalComponents.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.geoP1_diagonal_comparison_components",
+  "statement": "theorem geoP1_diagonal_comparison_components\n    (A : Type (u + 1)) [CommRing A] [Finite A] (N : ℕ) (hN : 0 < N)\n    (hA : (N : A) = 0) (S : Scheme.{u}) [IsNoetherian S]\n    (hS : IsUnit (N : Γ(S, ⊤)))\n    (c : Etale.ordinaryFiniteUnit A (ProjectiveLine (ProjectiveLine S)) ⟶\n      (Etale.ordinaryFiniteLine A N hA (ProjectiveLine (ProjectiveLine S)))⟦(2 : ℤ)⟧)\n    (hc : Etale.ordinaryFiniteP1ChernSpec A N hA (ProjectiveLine S)\n      ((map_natCast (ProjectiveLine (ProjectiveLine S) ↘ ProjectiveLine S).appTop.hom N) ▸\n        ((map_natCast (ProjectiveLine S ↘ S).appTop.hom N) ▸\n          hS.map (ProjectiveLine S ↘ S).appTop.hom).map\n            (ProjectiveLine (ProjectiveLine S) ↘ ProjectiveLine S).appTop.hom) c)\n    (hI : (pullback.diagonal (ProjectiveLine S ↘ S)).ker.IsInvertible)\n    (κ : Ext\n      ((Etale.lowerStar (ModuleCat.{u + 1} A) (pullback.diagonal (ProjectiveLine S ↘ S))).obj\n        (Etale.ordinaryFiniteConstant A (ProjectiveLine S)))\n      (Scheme.finiteEtaleTateLine\n        (pullback (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S)) N A hA) 2)\n    (hκ : Etale.SupportedKummerBoundary A N hA\n      (pullback.diagonal (ProjectiveLine S ↘ S)) hI\n      ((map_natCast ((pullback.fst (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S)) ≫\n        (ProjectiveLine S ↘ S)).appTop.hom N) ▸\n          hS.map ((pullback.fst (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S)) ≫\n            (ProjectiveLine S ↘ S)).appTop.hom) κ)\n    (cΔ : GeoCartierClass A N hA (pullback.diagonal (ProjectiveLine S ↘ S)))\n    [hE : PreservesFiniteColimits\n      (lowerStar (ModuleCat.{u + 1} A) (pullback.diagonal (ProjectiveLine S ↘ S)))]\n    (hcompat : SpP1CartierCompatibility\n      (comparisonUpperStar (ModuleCat.{u + 1} A)\n        (pullback (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S)))\n      (geoCartierSourceComparison A (pullback.diagonal (ProjectiveLine S ↘ S))) κ cΔ) :\n    DiagonalComponentFormula (geoP1DiagonalComponentData A N hN hA S hS c cΔ)",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-21",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SpP1CartierCompatibility",
+   "AlgebraicGeometry.ProEtale.geoP1DiagonalSourceIso",
+   "AlgebraicGeometry.ProEtale.geoP1DiagonalSource",
+   "AlgebraicGeometry.ProEtale.geoP1DiagonalSource_isIso",
+   "AlgebraicGeometry.ProEtale.cartierDerivedArrow",
+   "AlgebraicGeometry.ProEtale.geoP1CartierDerivedArrow",
+   "AlgebraicGeometry.ProEtale.geoP1DiagonalChartMap",
+   "AlgebraicGeometry.ProEtale.DiagonalKernelData",
+   "AlgebraicGeometry.ProEtale.DiagonalKernelRealization",
+   "AlgebraicGeometry.ProEtale.DiagonalComponentData",
+   "AlgebraicGeometry.ProEtale.DiagonalIntegralFormula",
+   "AlgebraicGeometry.ProEtale.DiagonalIntegralCondition",
+   "AlgebraicGeometry.ProEtale.DiagonalComponentFormula",
+   "AlgebraicGeometry.ProEtale.geoP1DiagonalKernelData",
+   "AlgebraicGeometry.ProEtale.geoP1DiagonalComponentData",
+   "AlgebraicGeometry.ProEtale.geoP1_diagonal_comparison_components"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-5fe86",
+  "group": "P4",
+  "result": "fix",
+  "landing": "20261021T023317-L-2947720",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-5fe86",
+  "group": "P4",
+  "result": "fix",
+  "landing": "20261021T023317-L-2947720",
+  "kind": "interface",
+  "note": "independent cc review: delivered 7 modules + 9 nodes vs clone sheaf-dag: new SpP1DiagonalIntegrals/HEq kernel pins vs old α/δ/τ + CartierDerivedCompatibility (equivalent; HEq.rfl realization probe elaborates); sorry components theorem vs ordinary lem-sp-finite-p1-diagonal-kummer-component-formula; base-change sorry vs det-sp-p1-trace (1)-(2) and Noetherian-only geoP1Cohomology"
+ }
+}

@@ -1,0 +1,123 @@
+{
+ "id": "lem-sp-ordinary-finite-class-arbitrary-base",
+ "kind": "statement",
+ "title": "Normalized class comparison over an arbitrary scheme",
+ "statement": "For any commutative coefficient ring A in universe u+1, any scheme T in universe u, any A-module sheaf F on its small etale site and any natural degree q, the specified normalized class map ordinaryFiniteClass A T F q [def-asd-ordinary-finite-p1-kummer-class] is bijective. No quasi-compactness or quasi-separatedness assumption is imposed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/det-sp-p1-trace.proof.md",
+  "place": "Proof paragraph 1: ordinary module/abelian cohomology comparison needed to identify normalized Chern representatives"
+ },
+ "stmt_deps": [
+  "def-asd-ordinary-finite-p1-kummer-class"
+ ],
+ "proof": [
+  {
+   "text": "The constants/global-sections adjunction identifies maps from the constant free rank-one module sheaf with sections, by evaluation at one. The specified integral generator corepresents exactly this identification; hence the normalized comparison is bijective in degree zero.",
+   "uses": [
+    "def-asd-ordinary-finite-p1-kummer-class"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "An injective module sheaf has acyclic underlying abelian sheaf for global sections, on every scheme. Transport right-derived global sections to evaluation at the terminal etale object and then to sheaf cohomology.",
+   "uses": [
+    "lem-weil-pbc-etale-module-injective-forget-acyclic"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Embed F in an injective, take its cokernel, and compare the two long exact sequences using the Ext comparison naturality. By induction and the right-exact-sequence comparison lemma the next degree is bijective. Compose with the Ext/derived-morphism equivalence.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-asd-ordinary-finite-p1-kummer-class",
+  "lem-weil-pbc-etale-module-injective-forget-acyclic"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/det-sp-p1-trace.proof.md",
+  "place": "Proof paragraph 1: ordinary module/abelian cohomology comparison needed to identify normalized Chern representatives",
+  "notes": "P4: proof and exact comparison interfaces follow the retained unit route."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a sheaf of modules on the small etale site of any scheme, morphisms from the constant free rank one sheaf in the derived category are naturally in bijection with cohomology of its underlying abelian sheaf",
+   "results": "8 hits: CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.ΓHomEquiv, SheafOfModules.freeHomEquiv_comp_apply, SheafOfModules.freeHomEquiv, SheafOfModules.freeHomEquiv_freeMap, SheafOfModules.free, CategoryTheory.Sheaf.ΓObjEquivHom, SheafOfModules.ιFree. Read the returned signatures; generic category/cohomology tools do not state this projective-line comparison result.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The normalized comparison from Ext of the constant rank one module sheaf to underlying abelian sheaf cohomology is bijective on an arbitrary scheme, by acyclicity of injective module sheaves",
+   "results": "8 hits: CategoryTheory.Abelian.Ext.mk₀_bijective, CategoryTheory.InjectiveResolution.extEquivCohomologyClass, CategoryTheory.Sheaf.H, CategoryTheory.InjectiveResolution.extAddEquivCohomologyClass, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_zero, SheafOfModules.bijective_pushforwardSections, AlgebraicGeometry.Scheme.Modules.instAbelian. Read the returned signatures; generic category/cohomology tools do not state this projective-line comparison result.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H",
+   "results": "12 hits: CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.subsingleton_H_of_isZero, CategoryTheory.Sheaf.functorH_obj_coe, CategoryTheory.Sheaf.instSubsingletonHHAddNatOfNat, CategoryTheory.Sheaf.H.map, CategoryTheory.Sheaf.H.equiv₀, CategoryTheory.Sheaf.functorH_map, CategoryTheory.Sheaf.H.map_id_apply. Read the returned signatures; generic category/cohomology tools do not state this projective-line comparison result.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*injective|subsingleton.*Ext",
+   "results": "25 hits: Mathlib/Probability/Moments/CovarianceBilinDual.lean, Mathlib/NumberTheory/Cyclotomic/Basic.lean, Mathlib/NumberTheory/Cyclotomic/Basic.lean, Mathlib/RepresentationTheory/Rep/Basic.lean, Mathlib/Combinatorics/SimpleGraph/Basic.lean, Mathlib/Topology/Category/Profinite/Nobeling/ZeroLimit.lean, Mathlib/Analysis/Convex/Extreme.lean, Mathlib/RingTheory/Algebraic/StronglyTranscendental.lean. Read the returned signatures; generic category/cohomology tools do not state this projective-line comparison result.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleProjectiveLineTrace",
+  "group": "P4",
+  "date": "2026-10-21"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-p1-trace",
+   "place": "Proof paragraph 1: ordinary module/abelian cohomology comparison needed to identify normalized Chern representatives",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-geo-p1-adjunction",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OrdinaryFiniteClassArbitraryBase",
+  "file": "lean/Sheaf/AlgebraicGeometry/OrdinaryFiniteClassArbitraryBase.lean",
+  "declaration": "AlgebraicGeometry.Etale.ordinaryFiniteClass_bijective_arbitraryBase",
+  "statement": "theorem ordinaryFiniteClass_bijective_arbitraryBase (A : Type (u + 1)) [CommRing A]\n    (T : Scheme.{u}) (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) (n : ℕ) :\n    Function.Bijective (ordinaryFiniteClass A T F n)",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-5fe86",
+  "group": "P4",
+  "result": "fix",
+  "landing": "20261021T023317-L-2947720",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-5fe86",
+  "group": "P4",
+  "result": "fix",
+  "landing": "20261021T023317-L-2947720",
+  "kind": "interface",
+  "note": "independent cc review: delivered 7 modules + 9 nodes vs clone sheaf-dag: new SpP1DiagonalIntegrals/HEq kernel pins vs old α/δ/τ + CartierDerivedCompatibility (equivalent; HEq.rfl realization probe elaborates); sorry components theorem vs ordinary lem-sp-finite-p1-diagonal-kummer-component-formula; base-change sorry vs det-sp-p1-trace (1)-(2) and Noetherian-only geoP1Cohomology"
+ }
+}

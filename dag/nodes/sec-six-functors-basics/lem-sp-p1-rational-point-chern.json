@@ -1,0 +1,139 @@
+{
+ "id": "lem-sp-p1-rational-point-chern",
+ "kind": "statement",
+ "title": "Rational-point normalization of the comparison Chern family",
+ "statement": "For A,N,c,b,d as in SpP1NormalizedDecompositions [def-sp-p1-proetale-trace-system], the family c satisfies SpP1RationalPointChern: over every algebraically closed field on which N is invertible, every rational point section of P1 has the same scalar Kummer class as c, with its invertible Cartier ideal and the specified Kummer sign.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/det-sp-p1-trace.proof.md",
+  "place": "Proof paragraph 2: the rational-point divisor has the O(1) Kummer class"
+ },
+ "stmt_deps": [
+  "def-sp-p1-proetale-trace-system"
+ ],
+ "proof": [
+  {
+   "text": "P1 is a smooth proper connected geometric curve. A point section of this smooth relative curve has invertible ideal.",
+   "uses": [
+    "lem-asd-projective-line-genus-zero",
+    "lem-sc-point-cartier"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The divisor line of a rational point has degree one. The standard monomial calculation gives chi(O(d))=d+1 for d=0,1, and hence deg(O(1))=1.",
+   "uses": [
+    "lem-pc-degree-agrees-sc",
+    "lem-sc-p1-monomial"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a smooth proper connected geometric curve, the Kummer degree coordinate on H2 of roots of unity is bijective. Its value on the boundary of a line bundle is its degree modulo N, by the Kummer sequence, Brauer vanishing and divisibility of degree-zero Picard classes. Thus the two boundaries agree.",
+   "uses": [
+    "lem-sc-kummer-les",
+    "lem-sc-brauer-zero",
+    "lem-sc-pic-proper-ntorsion-div"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the scalar root map and use the normalized Chern specification to obtain the exact displayed rational-point condition.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-asd-projective-line-genus-zero",
+  "lem-pc-degree-agrees-sc",
+  "lem-sc-brauer-zero",
+  "lem-sc-kummer-les",
+  "lem-sc-p1-monomial",
+  "lem-sc-pic-proper-ntorsion-div",
+  "lem-sc-point-cartier"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/det-sp-p1-trace.proof.md",
+  "place": "Proof paragraph 2: the rational-point divisor has the O(1) Kummer class",
+  "notes": "P4: proof and exact comparison interfaces follow the retained unit route."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Over an algebraically closed field a rational point divisor on the projective line has the same Kummer Chern class as the line bundle O(1)",
+   "results": "8 hits: MeromorphicOn.divisor_sub_const_self, WeierstrassCurve.Projective.Point.point, RatFunc.intDegree, OnePoint.smul_some_eq_ite, AlgebraicClosure.instCharZero, RatFunc.noConfusionType, Function.FactorizedRational.divisor, RatFunc.zero. Read the returned signatures; generic category/cohomology tools do not state this projective-line comparison result.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The normalized comparison from Ext of the constant rank one module sheaf to underlying abelian sheaf cohomology is bijective on an arbitrary scheme, by acyclicity of injective module sheaves",
+   "results": "8 hits: CategoryTheory.Abelian.Ext.mk₀_bijective, CategoryTheory.InjectiveResolution.extEquivCohomologyClass, CategoryTheory.Sheaf.H, CategoryTheory.InjectiveResolution.extAddEquivCohomologyClass, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_zero, SheafOfModules.bijective_pushforwardSections, AlgebraicGeometry.Scheme.Modules.instAbelian. Read the returned signatures; generic category/cohomology tools do not state this projective-line comparison result.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapBiprod",
+   "results": "7 hits: CategoryTheory.Functor.mapBiprod, CategoryTheory.Functor.mapBiprod_hom, CategoryTheory.Functor.mapBiprod_inv, CategoryTheory.Limits.biprod.lift_mapBiprod, CategoryTheory.Limits.biprod.mapBiprod_hom_desc, CategoryTheory.Limits.biprod.mapBiprod_inv_map_desc, CategoryTheory.Limits.biprod.map_lift_mapBiprod. Read the returned signatures; generic category/cohomology tools do not state this projective-line comparison result.",
+   "date": "2026-10-20",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "Chern|Kummer|projectiveLine|proEtale",
+   "results": "25 hits: Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/NumberField/Cyclotomic/Ideal.lean, Mathlib/NumberTheory/ModularForms/Cusps.lean, Mathlib/NumberTheory/NumberField/Cyclotomic/Three.lean. Read the returned signatures; generic category/cohomology tools do not state this projective-line comparison result.",
+   "date": "2026-10-20",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleProjectiveLineTrace",
+  "group": "P4",
+  "date": "2026-10-21"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-p1-trace",
+   "place": "Proof paragraph 2: the rational-point divisor has the O(1) Kummer class",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-geo-p1-adjunction",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SpP1RationalPointChern",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpP1RationalPointChern.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.spP1RationalPointChern_of_normalized",
+  "statement": "theorem spP1RationalPointChern_of_normalized\n    (A : Type (u + 1)) [CommRing A] [Finite A] (N : ℕ) (hN : 0 < N)\n    (hA : (N : A) = 0) (c : SpP1ChernFamily A N hA)\n    (b : SpP1TwistedFamily A N hA) (d : SpP1DecompositionFamily A N hA)\n    (hnorm : SpP1NormalizedDecompositions A N hN hA c b d) :\n    SpP1RationalPointChern A N hA c",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-5fe86",
+  "group": "P4",
+  "result": "fix",
+  "landing": "20261021T023317-L-2947720",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-5fe86",
+  "group": "P4",
+  "result": "fix",
+  "landing": "20261021T023317-L-2947720",
+  "kind": "interface",
+  "note": "independent cc review: delivered 7 modules + 9 nodes vs clone sheaf-dag: new SpP1DiagonalIntegrals/HEq kernel pins vs old α/δ/τ + CartierDerivedCompatibility (equivalent; HEq.rfl realization probe elaborates); sorry components theorem vs ordinary lem-sp-finite-p1-diagonal-kummer-component-formula; base-change sorry vs det-sp-p1-trace (1)-(2) and Noetherian-only geoP1Cohomology"
+ }
+}

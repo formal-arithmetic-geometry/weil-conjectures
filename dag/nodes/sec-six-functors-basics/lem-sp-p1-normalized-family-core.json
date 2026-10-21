@@ -1,0 +1,135 @@
+{
+ "id": "lem-sp-p1-normalized-family-core",
+ "kind": "statement",
+ "title": "Normalized comparison decompositions over all bases",
+ "statement": "For every finite commutative ring A, positive N annihilating A, there exist a Chern family c, twisted isomorphism family b and untwisted decomposition family d satisfying SpP1NormalizedDecompositions A N hN hA c b d [def-sp-p1-proetale-trace-system]. Both maps are the specified comparison images; their unit and normalized Kummer components are fixed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/det-sp-p1-trace.proof.md",
+  "place": "Proof paragraphs 1--2: untwisted decomposition, positive twist, comparison, and arbitrary-base existence"
+ },
+ "stmt_deps": [
+  "def-sp-p1-proetale-trace-system"
+ ],
+ "proof": [
+  {
+   "text": "Choose the universal Noetherian N-invertible base. The ordinary projective-line decomposition there supplies an invertible canonical untwisted map after each base morphism.",
+   "uses": [
+    "lem-sp-finite-p1-noetherian-base",
+    "thm-amb-p1-decomposition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the already stated global normalized twisted Kummer splitting family. Injectivity of the arbitrary-base class map identifies its Chern arrow with the one just supplied by the untwisted decomposition.",
+   "uses": [
+    "lem-sp-finite-p1-kummer-splitting",
+    "lem-sp-ordinary-finite-class-arbitrary-base"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply exact comparison. Its canonical direct-image mate is invertible on single objects and their shifts. Transport its derived presentation through the canonical exact comparison isomorphisms; the mate whiskering identities identify it with geoP1PushComparison.",
+   "uses": [
+    "sk-thm-pe-direct-image-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The biproduct comparison is invertible. Define d by the specified composite and b by asIso of the specified twisted composite. Additive preservation of the two injections proves the required unit and Chern component formulas.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-finite-p1-kummer-splitting",
+  "lem-sp-finite-p1-noetherian-base",
+  "lem-sp-ordinary-finite-class-arbitrary-base",
+  "sk-thm-pe-direct-image-comparison",
+  "thm-amb-p1-decomposition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/det-sp-p1-trace.proof.md",
+  "place": "Proof paragraphs 1--2: untwisted decomposition, positive twist, comparison, and arbitrary-base existence",
+  "notes": "P4: proof and exact comparison interfaces follow the retained unit route."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Over any scheme where a positive integer is invertible, finite coefficient projective line cohomology has a canonical unit and Kummer Chern class decomposition, preserved by comparison with the proetale site",
+   "results": "8 hits: Module.Invertible.instProjective, EqualCharZero.coePNatUnits, WeierstrassCurve.Projective.smul_eq, groupCohomology.H1ofAutOnUnitsUnique, CochainComplex.HomComplex.Cocycle.coe_units_smul, CategoryTheory.Presheaf.coherentExtensiveEquivalence_unitIso, WittVector.mkUnit, CochainComplex.HomComplex.Cochain.units_smul_comp. Read the returned signatures; generic category/cohomology tools do not state this projective-line comparison result.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The normalized comparison from Ext of the constant rank one module sheaf to underlying abelian sheaf cohomology is bijective on an arbitrary scheme, by acyclicity of injective module sheaves",
+   "results": "8 hits: CategoryTheory.Abelian.Ext.mk₀_bijective, CategoryTheory.InjectiveResolution.extEquivCohomologyClass, CategoryTheory.Sheaf.H, CategoryTheory.InjectiveResolution.extAddEquivCohomologyClass, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_zero, SheafOfModules.bijective_pushforwardSections, AlgebraicGeometry.Scheme.Modules.instAbelian. Read the returned signatures; generic category/cohomology tools do not state this projective-line comparison result.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapBiprod",
+   "results": "7 hits: CategoryTheory.Functor.mapBiprod, CategoryTheory.Functor.mapBiprod_hom, CategoryTheory.Functor.mapBiprod_inv, CategoryTheory.Limits.biprod.lift_mapBiprod, CategoryTheory.Limits.biprod.mapBiprod_hom_desc, CategoryTheory.Limits.biprod.mapBiprod_inv_map_desc, CategoryTheory.Limits.biprod.map_lift_mapBiprod. Read the returned signatures; generic category/cohomology tools do not state this projective-line comparison result.",
+   "date": "2026-10-20",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "Chern|Kummer|projectiveLine|proEtale",
+   "results": "25 hits: Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/NumberField/Cyclotomic/Ideal.lean, Mathlib/NumberTheory/ModularForms/Cusps.lean, Mathlib/NumberTheory/NumberField/Cyclotomic/Three.lean. Read the returned signatures; generic category/cohomology tools do not state this projective-line comparison result.",
+   "date": "2026-10-20",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleProjectiveLineTrace",
+  "group": "P4",
+  "date": "2026-10-21"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-p1-trace",
+   "place": "Proof paragraphs 1--2: untwisted decomposition, positive twist, comparison, and arbitrary-base existence",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-geo-p1-adjunction",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SpP1NormalizedFamilyCore",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpP1NormalizedFamilyCore.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.exists_spP1NormalizedDecompositions",
+  "statement": "theorem exists_spP1NormalizedDecompositions\n    (A : Type (u + 1)) [CommRing A] [Finite A] (N : ℕ) (hN : 0 < N)\n    (hA : (N : A) = 0) :\n    ∃ (c : SpP1ChernFamily A N hA) (b : SpP1TwistedFamily A N hA)\n      (d : SpP1DecompositionFamily A N hA),\n      SpP1NormalizedDecompositions A N hN hA c b d",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-5fe86",
+  "group": "P4",
+  "result": "fix",
+  "landing": "20261021T023317-L-2947720",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-5fe86",
+  "group": "P4",
+  "result": "fix",
+  "landing": "20261021T023317-L-2947720",
+  "kind": "interface",
+  "note": "independent cc review: delivered 7 modules + 9 nodes vs clone sheaf-dag: new SpP1DiagonalIntegrals/HEq kernel pins vs old α/δ/τ + CartierDerivedCompatibility (equivalent; HEq.rfl realization probe elaborates); sorry components theorem vs ordinary lem-sp-finite-p1-diagonal-kummer-component-formula; base-change sorry vs det-sp-p1-trace (1)-(2) and Noetherian-only geoP1Cohomology"
+ }
+}

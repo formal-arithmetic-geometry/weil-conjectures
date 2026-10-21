@@ -21,16 +21,52 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "Verify the diagonal integral identity for a normalized projective-line family from the finite projective-line diagonal calculation and the supplied base trace conditions.",
-   "uses": [],
+   "text": "The diagonal is a section of a smooth relative curve. The relative Cartier criterion makes its ideal invertible. The ordinary supported Kummer theorem supplies its unique normalized boundary.",
+   "uses": [
+    "lem-pc-cartier-criterion",
+    "lem-asd-ordinary-supported-kummer"
+   ],
    "elementary": false
+  },
+  {
+   "text": "The closed immersion is qcqs, so its canonical underived supported comparison is invertible. Precompose the exact comparison image of kappa in Ext by the inverse of this source comparison. Ext composition proves the literal Cartier compatibility equation. No global class family is chosen.",
+   "uses": [
+    "sk-lem-geo-cartier"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Build the canonical kernel from the identity/composition source isomorphisms, exact Cartier realization, and chart comparison. Keep the specified trace by HEq in the common kernel Hom type.",
+   "uses": [
+    "def-sp-cartier-derived-realization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the pre-trace diagonal component formula. Replace its unit and Chern components by inl followed by b.hom and inr followed by b.hom, using normalized decompositions.",
+   "uses": [
+    "lem-sp-p1-diagonal-comparison-components"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose with b.inv followed by the second projection. The base summand vanishes and the Chern summand is identity. Both source maps are the homs of their constructed composition isomorphisms; the typed kernel representatives are uniquely fixed by HEq.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-sp-cartier-derived-realization",
+  "lem-asd-ordinary-supported-kummer",
+  "lem-pc-cartier-criterion",
+  "lem-sp-p1-diagonal-comparison-components",
+  "sk-lem-geo-cartier"
+ ],
  "proof_origin": {
-  "by": "worker",
-  "source": "det-sp-p1-trace split obligations",
-  "notes": "The component proof is left as the named stage-3 obligation."
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/det-sp-p1-trace.proof.md",
+  "place": "P4 implementation of the retained component argument",
+  "notes": "Canonical maps and integral identities retained through shared kernel data and uniquely determined HEq representatives."
  },
  "mathlib_searches": [
   {
@@ -153,13 +189,13 @@
   "group": "B4"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "B4",
-  "result": "pass",
-  "landing": "20261020T230718-L-604300",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "reviewer": "C-5fe86",
+  "group": "P4",
+  "result": "fix",
+  "landing": "20261021T023317-L-2947720",
+  "kind": "interface",
+  "note": "independent cc review: delivered 7 modules + 9 nodes vs clone sheaf-dag: new SpP1DiagonalIntegrals/HEq kernel pins vs old α/δ/τ + CartierDerivedCompatibility (equivalent; HEq.rfl realization probe elaborates); sorry components theorem vs ordinary lem-sp-finite-p1-diagonal-kummer-component-formula; base-change sorry vs det-sp-p1-trace (1)-(2) and Noetherian-only geoP1Cohomology"
  }
 }

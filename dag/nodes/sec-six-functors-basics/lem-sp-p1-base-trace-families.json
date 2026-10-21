@@ -21,16 +21,36 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "Construct the normalized Chern, twisted, and decomposition families and verify the base trace conditions from the stated finite projective-line constructions.",
-   "uses": [],
+   "text": "Construct the canonical normalized Chern, twisted and untwisted families.",
+   "uses": [
+    "lem-sp-p1-normalized-family-core"
+   ],
    "elementary": false
+  },
+  {
+   "text": "Apply canonical arbitrary base change and rational-point normalization.",
+   "uses": [
+    "lem-sp-p1-base-change-normalized",
+    "lem-sp-p1-rational-point-chern"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The Chern trace is inr followed by b.hom, b.inv and the second projection, hence identity. Combine the four clauses of SpP1BaseTraceConditions.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-sp-p1-base-change-normalized",
+  "lem-sp-p1-normalized-family-core",
+  "lem-sp-p1-rational-point-chern"
+ ],
  "proof_origin": {
-  "by": "worker",
-  "source": "det-sp-p1-trace split obligations",
-  "notes": "The component proof is left as the named stage-3 obligation."
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/det-sp-p1-trace.proof.md",
+  "place": "P4 implementation of the retained component argument",
+  "notes": "Canonical maps and integral identities retained through shared kernel data and uniquely determined HEq representatives."
  },
  "mathlib_searches": [
   {
@@ -153,13 +173,13 @@
   "group": "B4"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "B4",
-  "result": "pass",
-  "landing": "20261020T230718-L-604300",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "reviewer": "C-5fe86",
+  "group": "P4",
+  "result": "fix",
+  "landing": "20261021T023317-L-2947720",
+  "kind": "interface",
+  "note": "independent cc review: delivered 7 modules + 9 nodes vs clone sheaf-dag: new SpP1DiagonalIntegrals/HEq kernel pins vs old α/δ/τ + CartierDerivedCompatibility (equivalent; HEq.rfl realization probe elaborates); sorry components theorem vs ordinary lem-sp-finite-p1-diagonal-kummer-component-formula; base-change sorry vs det-sp-p1-trace (1)-(2) and Noetherian-only geoP1Cohomology"
  }
 }
