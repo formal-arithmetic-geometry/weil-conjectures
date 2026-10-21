@@ -20,9 +20,165 @@
   "def-pc-fibre-product",
   "def-weil-pbc-ambient-ringed-exchange"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Properness over the qcqs scheme $S$ makes $Y$ and $X$ qcqs. The closed subschemes $C$ and $X_C$ are qcqs, and $f_C$ is proper. The complement condition says that $c$ and its pullback $a$ are constructible closed immersions. A quasi-compact open of $X$ meets the closed $X_C$ in a quasi-compact open, so preimages of constructible strata are constructible. Pullback takes each finite constant scalar presentation $\\Lambda_U\\otimes_{\\Lambda(*)}P$ to the identical presentation on the pulled-back cover by the scalar/pullback comparison. If $L$ has Tor amplitude in $[p,r]$ and $N$ is a $\\Lambda_{X_C}$-module, the closed counit $a^*a_*N\\cong N$ and the pullback/tensor comparison give $a^*L\\otimes^{\\mathbf L}N\\cong a^*(L\\otimes^{\\mathbf L}a_*N)$, whose cohomology lies in $[p,r]$ since $a^*$ is exact. Thus $a^*$ preserves the bounded constructible finite-Tor input classes used below. In the finite discrete coefficient case, the exact coefficient equivalence and qcqs constructible comparison give an étale-origin witness for $L$. The finite-level proper-base-change theorem gives the required isomorphism. The internal/section functor comparisons transport to the derived categories through their universal derived comparisons; the unit--square--counit formula transports to that same formula, so this proves invertibility of the actual ambient exchange, not merely an isomorphism of its endpoints.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "def-weil-closed-immersion",
+    "def-weil-open-immersion",
+    "def-pc-fibre-product",
+    "sk-def-sfb-constructible",
+    "lem-sfb-kflat-scalar-comparison-normalization",
+    "lem-sf-module-object-ordinary-coefficient-equivalence",
+    "sk-thm-pe-constructible-comparison",
+    "thm-weil-pbc-finite-level-proetale",
+    "lem-sfb-internal-module-operations-transport",
+    "lem-derived-exact-equivalence-squares",
+    "def-weil-pbc-ambient-ringed-exchange",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-constructible-preimage",
+    "lem-weil-pbc-proetale-ringed-closed-counit",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-proetale-immersion-limit-preservation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+    "place": "(2), proper base change along the closed complement, coefficient devissage"
+   }
+  },
+  {
+   "text": "Let now $A=\\mathcal O_F$, including $\\mathbf Z_\\ell$, and $L\\in\\mathrm D_{\\mathrm{ctf}}(X,A)$. The finite-model adic criterion gives completeness of $L$ and bounded classical finite reductions. The integral ambient-tower comparison applies to the qcqs morphism $f$, so $Rf_*L$ is complete. Closed inverse image is exact and preserves countable products. Applying it to the strict Roos complex $\\operatorname{Cone}(1-T:\\prod L_n\\to\\prod L_n)[-1]$ preserves this complex and its zero-second-coordinate augmentation. Exact inverse image also takes the two-term quotient resolution $[A\\xrightarrow{\\pi^n}A]$ to that same resolution. Therefore $c^*Rf_*L$ is complete, and the same argument with $a$ proves completeness of $a^*L$. Applying the ambient-tower comparison to $f_C$ proves completeness of $R(f_C)_*a^*L$. These are ordinary direct images throughout; none is replaced by a completed direct image.",
+   "uses": [
+    "lem-sfb-qcqs-integral-finite-model-completeness",
+    "lem-sfb-integral-ambient-tower-comparison",
+    "lem-weil-pbc-proetale-immersion-limit-preservation",
+    "lem-pe-roos-cone-calculus",
+    "lem-sfb-internal-module-operations-transport",
+    "lem-derived-exact-equivalence-squares"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Corollary 6.1.5, Lemma 6.5.9 and Remark 6.5.10; strict augmentation rather than an unspecified inverse-limit isomorphism"
+   }
+  },
+  {
+   "text": "Reduce the integral ambient exchange modulo $\\pi$. The integral quotient-exchange comparison identifies this specific reduced map, through its invertible pull/reduction and quotient direct-image comparisons, with the finite-coefficient ambient exchange for $L_1$. By the adic criterion $L_1$ has a bounded-below étale-origin witness, so finite-level proper base change makes this map invertible. Both integral endpoints are complete by step 2. Derived Nakayama, transported through the exact internal/section equivalences with their quotient comparisons, therefore makes the original integral ambient exchange invertible.",
+   "uses": [
+    "lem-sfb-integral-quotient-exchange-comparison",
+    "lem-sfb-qcqs-integral-finite-model-completeness",
+    "thm-weil-pbc-finite-level-proetale",
+    "det-pe-derived-nakayama-first-reduction",
+    "lem-sfb-internal-module-operations-transport",
+    "lem-derived-exact-equivalence-squares"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09C9, theorem-proper-base-change: reduction to torsion proper base change and derived completeness; use the cited normalized ambient exchange rectangle"
+   }
+  },
+  {
+   "text": "For rational $\\Lambda$, write $T_W=\\Lambda_W\\otimes^L_{A_W}-$ and take a generator $T_XJ$ of the integral-generation lemma. Step 1 gives $a^*J\\in\\mathrm D_{\\mathrm{ctf}}(X_C,A)$. The proper scalar-comparison lemma applies to $f,J$ and $f_C,a^*J$, giving invertible comparisons $\\rho_f$ and $\\rho_{f_C}$. The scalar/pullback comparisons $\\lambda_u:u_\\Lambda^*T\\xrightarrow{\\sim}T u_A^*$ are invertible and coherent. The two arrows from $c_\\Lambda^*T_YRf_{*,A}J$ to $Rf_{C,*,\\Lambda}T_{X_C}a_A^*J$ satisfy\n$$Rf_{C,*,\\Lambda}(\\lambda_a)\\circ\\operatorname{Ex}^{\\Lambda}_{T_XJ}\\circ c_\\Lambda^*(\\rho_f)\n=\\rho_{f_C}\\circ T_C(\\operatorname{Ex}^{A}_J)\\circ\\lambda_c.$$\nIndeed apply the counit transpose for $f_C$ to each side. The pasted-mates counit formula cancels the units in the two coefficient projections and in exchange; both transposes are the pullback of $T_X(\\varepsilon_{f,A,J})$, preceded by the same scalar/pullback composition comparison. Coherence of the scalar/pullback mate equates these preceding comparisons, and adjunction bijectivity gives the displayed equality. Step 3 makes $\\operatorname{Ex}^{A}_J$ invertible; every comparison in the display is invertible. Hence the actual rational exchange is invertible on each $T_XJ$.",
+   "uses": [
+    "lem-sfb-qcqs-rational-integral-localizing-generators",
+    "lem-sfb-qcqs-proper-integral-rational-scalar-comparison",
+    "lem-sfb-kflat-scalar-comparison-normalization",
+    "lem-sfb-pasted-mates-counit-normalization",
+    "def-weil-pbc-ambient-ringed-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+    "place": "(2), proper base change along the closed complement, coefficient devissage"
+   }
+  },
+  {
+   "text": "For completeness, the actual exchange is a transformation of exact functors with their canonical shifts in this qcqs setting. Exact pullback is represented termwise, while the additive ordinary pushforward has the K-injective triangulated derived functor. The canonical exact-left/right-derived adjunction has shift-compatible unit and counit. The pullback square comparison is the localization of the degreewise inverse-image composition comparison: the exact-derived composition and natural-isomorphism factorizations show that on $M[n]$ it has the same components as on $M$ shifted by $n$; both differentials acquire $(-1)^n$. Its inverse has the same property. Whiskering and composing these shift-compatible unit, square and counit maps proves shift compatibility of the actual exchange. Thus its naturality squares also include the connecting arrow in every distinguished triangle.",
+   "uses": [
+    "sk-def-sfb-module-derived-pushpull",
+    "lem-sfb-alpha-iso",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-sp-canonical-right-derived-adjunction-shift",
+    "lem-sfb-exact-derived-composition",
+    "lem-sfb-exact-derived-natural-iso",
+    "lem-weil-pbc-commshift-nattrans-comp-whisker",
+    "def-weil-pbc-ambient-ringed-exchange",
+    "det-pe-topos-functoriality-inverse-image",
+    "det-prop-sfb-module-pullback-exact-lifted"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 015F and 0DVC: exact derived functors and the canonical derived adjunction; termwise check of square comparison"
+   }
+  },
+  {
+   "text": "Restrict the two rational exchange functors to $\\mathcal L_X=\\operatorname{Loc}(\\mathrm D_{\\mathrm{ctf}}(X,\\Lambda))$. The proper localizing-coproduct theorem applies to $f$ with its given $S,q$; it applies to $f_C$ with base $C$ and $q=\\mathrm{id}_C$. Pullback $a^*$ preserves the generating input classes by step 1 and is exact and preserves coproducts as a left adjoint, hence carries $\\mathcal L_X$ into $\\mathcal L_{X_C}$. The same adjoint argument for $c^*$ shows that both exchange functors preserve coproducts on $\\mathcal L_X$. Step 5 and the localizing determination theorem therefore show that the isomorphism locus of the actual exchange on this domain is localizing. It contains $\\mathcal G_X$ by step 4. The integral-generation lemma puts every rational $L\\in\\mathrm D_{\\mathrm{ctf}}(X,\\Lambda)$ in $\\operatorname{Loc}(\\mathcal G_X)\\subseteq\\mathcal L_X$, so exchange is invertible on $L$. Together with steps 1--3 this covers the full admissible coefficient list with the stated all-continuous norm-topological algebraic closure.",
+   "uses": [
+    "sk-def-localizing-closure",
+    "lem-sfb-qcqs-proper-localizing-coproducts",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "sk-def-sfb-module-derived-pushpull",
+    "det-sf-determination-localizing",
+    "lem-sfb-qcqs-rational-integral-localizing-generators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+    "place": "(2), proper base change along the closed complement, coefficient devissage"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proper-morphism",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-pc-fibre-product",
+  "sk-def-sfb-constructible",
+  "lem-sfb-kflat-scalar-comparison-normalization",
+  "lem-sf-module-object-ordinary-coefficient-equivalence",
+  "sk-thm-pe-constructible-comparison",
+  "thm-weil-pbc-finite-level-proetale",
+  "lem-sfb-internal-module-operations-transport",
+  "lem-derived-exact-equivalence-squares",
+  "def-weil-pbc-ambient-ringed-exchange",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-sfb-qcqs-integral-finite-model-completeness",
+  "lem-sfb-integral-ambient-tower-comparison",
+  "lem-weil-pbc-proetale-immersion-limit-preservation",
+  "lem-pe-roos-cone-calculus",
+  "lem-sfb-integral-quotient-exchange-comparison",
+  "det-pe-derived-nakayama-first-reduction",
+  "lem-sfb-qcqs-rational-integral-localizing-generators",
+  "lem-sfb-qcqs-proper-integral-rational-scalar-comparison",
+  "lem-sfb-pasted-mates-counit-normalization",
+  "sk-def-sfb-module-derived-pushpull",
+  "lem-sfb-alpha-iso",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-sp-canonical-right-derived-adjunction-shift",
+  "lem-sfb-exact-derived-composition",
+  "lem-sfb-exact-derived-natural-iso",
+  "lem-weil-pbc-commshift-nattrans-comp-whisker",
+  "det-pe-topos-functoriality-inverse-image",
+  "det-prop-sfb-module-pullback-exact-lifted",
+  "sk-def-localizing-closure",
+  "lem-sfb-qcqs-proper-localizing-coproducts",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "det-sf-determination-localizing",
+  "lem-weil-pbc-constructible-preimage",
+  "lem-weil-pbc-proetale-ringed-closed-counit",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+  "place": "(2), coefficient devissage of the qcqs closed-complement proper-base-change invocation; adic reduction follows BS Section 6.5 and Stacks 09C9"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -72,10 +228,31 @@
    "results": "AlgebraicGeometry.IsProper.instMorphismRestrict; AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo; AlgebraicGeometry.Scheme.Modules.pushforwardComp; AlgebraicGeometry.Scheme.IdealSheafData.map_comp; AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType; AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app; AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType; AlgebraicGeometry.Scheme.IdealSheafData.comapIso_hom_snd",
    "date": "2026-10-21",
    "verdict": "no match: scheme-property stability, ordinary ringed-space pushforward composition, and condensed-category structures do not state this closed proper exchange isomorphism"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper base change along a constructible closed immersion for bounded constructible complexes with condensed ell adic coefficients",
+   "results": "[\"Condensed.profiniteSolid\", \"CondensedMod.IsSolid\", \"Condensed.profiniteFree\", \"CondensedMod.ofSheafProfinite\", \"LightCondensed.free_internallyProjective_iff_tensor_condition'\", \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"LightCondensed.free_internallyProjective_iff_tensor_condition\", \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'\"]",
+   "date": "2026-10-21",
+   "verdict": "no match: no proper derived pro-etale module exchange theorem among these hits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Closed proper base change for ordinary uncompleted derived modules with condensed finite adic and rational coefficients",
+   "results": "[\"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"AdicCompletion.module\", \"AlgebraicGeometry.universallyClosed_isStableUnderBaseChange\", \"AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange\", \"AdicCompletion\", \"Condensed.instAB4CondensedMod\", \"CondensedMod.isDiscrete_tfae\", \"IsAdicComplete.toIsHausdorff\"]",
+   "date": "2026-10-21",
+   "verdict": "no match: no proper derived pro-etale module exchange theorem among these hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closed immersion pullback commutes with ordinary proper derived pushforward on bounded constructible proetale complexes with finite Tor amplitude over a quasi compact quasi separated base",
+   "results": "[\"AlgebraicGeometry.isPullback_of_isClosedImmersion\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"AlgebraicGeometry.Scheme.Modules.pushforwardComp\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"AlgebraicGeometry.IsImmersion.isPullback_toImage_liftCoborder\", \"AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\"]",
+   "date": "2026-10-21",
+   "verdict": "no match: no proper derived pro-etale module exchange theorem among these hits"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-qcqs-proper-open-boundary-vanishing",
@@ -94,5 +271,184 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-qcqs-proper-constructible-closed-base-change",
+  "worker": "stage1",
+  "summary": "NA retained the entire qcqs statement and the actual ordinary module-object exchange. Split finite, integral and rational coefficients using normalized quotient and scalar mate rectangles. Three statement-only supporting lemmas isolate the qcqs finite-model adic criterion, rational integral localizing generation, and proper integral-to-rational projection; the all-continuous norm-topological clauses are explicitly agent claims, not confused with colimit topology or finite-subextension-valued coefficients.",
+  "blueprint": "Refinement (2), the proper base-change invocation along the constructible closed complement on bounded constructible finite-Tor generators, serving det-sf-comp-coherence-cocycle through the existing open-boundary-vanishing node.",
+  "tool_uses": [
+   {
+    "node": "def-weil-proper-morphism",
+    "why": "Generic Separated, universally closed and proper morphisms used for coefficient/derived-category assembly; no replacement of the unit refinement route."
+   },
+   {
+    "node": "def-weil-closed-immersion",
+    "why": "Generic Closed immersion of schemes used for coefficient/derived-category assembly; no replacement of the unit refinement route."
+   },
+   {
+    "node": "def-weil-open-immersion",
+    "why": "Generic Open immersion of schemes used for coefficient/derived-category assembly; no replacement of the unit refinement route."
+   },
+   {
+    "node": "def-pc-fibre-product",
+    "why": "Generic Fibre product of schemes used for coefficient/derived-category assembly; no replacement of the unit refinement route."
+   },
+   {
+    "node": "sk-def-sfb-constructible",
+    "why": "Generic Local models and constructible sheaves used for coefficient/derived-category assembly; no replacement of the unit refinement route."
+   },
+   {
+    "node": "lem-sfb-kflat-scalar-comparison-normalization",
+    "why": "Generic Representative and adjunction normalization of scalar pullback comparison used for coefficient/derived-category assembly; no replacement of the unit refinement route."
+   },
+   {
+    "node": "lem-sf-module-object-ordinary-coefficient-equivalence",
+    "why": "Generic Finite discrete condensed coefficients and ordinary module sheaves used for coefficient/derived-category assembly; no replacement of the unit refinement route."
+   },
+   {
+    "node": "sk-thm-pe-constructible-comparison",
+    "why": "Generic Constructible comparison used for coefficient/derived-category assembly; no replacement of the unit refinement route."
+   },
+   {
+    "node": "thm-weil-pbc-finite-level-proetale",
+    "why": "Generic Finite-level pro-etale proper base change used for coefficient/derived-category assembly; no replacement of the unit refinement route."
+   },
+   {
+    "node": "lem-sfb-internal-module-operations-transport",
+    "why": "Generic Internal and sectionwise module operations agree used for coefficient/derived-category assembly; no replacement of the unit refinement route."
+   },
+   {
+    "node": "lem-derived-exact-equivalence-squares",
+    "why": "Generic Compatible derived squares under exact equivalences used for coefficient/derived-category assembly; no replacement of the unit refinement route."
+   },
+   {
+    "node": "def-weil-pbc-ambient-ringed-exchange",
+    "why": "Generic Ambient ringed exchange used for coefficient/derived-category assembly; no replacement of the unit refinement route."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Generic Permanence of proper, separated, finite type, finitely presented morphisms and of immersions used for coefficient/derived-category assembly; no replacement of the unit refinement route."
+   },
+   {
+    "node": "lem-sfb-integral-ambient-tower-comparison",
+    "why": "Generic Ambient integral direct image and the finite reduction tower used for coefficient/derived-category assembly; no replacement of the unit refinement route."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-immersion-limit-preservation",
+    "why": "Generic Inverse images along immersions preserve pro-etale limits used for coefficient/derived-category assembly; no replacement of the unit refinement route."
+   },
+   {
+    "node": "lem-pe-roos-cone-calculus",
+    "why": "Generic Roos fibres preserve cones, shifts and levelwise quasi-isomorphisms used for coefficient/derived-category assembly; no replacement of the unit refinement route."
+   },
+   {
+    "node": "lem-sfb-integral-quotient-exchange-comparison",
+    "why": "Generic Reduction of the actual unbounded integral exchange used for coefficient/derived-category assembly; no replacement of the unit refinement route."
+   },
+   {
+    "node": "det-pe-derived-nakayama-first-reduction",
+    "why": "Generic Derived Nakayama from the first reduction used for coefficient/derived-category assembly; no replacement of the unit refinement route."
+   },
+   {
+    "node": "lem-sfb-pasted-mates-counit-normalization",
+    "why": "Generic Counit normal form for two pasted mates with input and output arrows used for coefficient/derived-category assembly; no replacement of the unit refinement route."
+   },
+   {
+    "node": "sk-def-sfb-module-derived-pushpull",
+    "why": "Generic Derived pushforward and pullback of module objects used for coefficient/derived-category assembly; no replacement of the unit refinement route."
+   },
+   {
+    "node": "lem-sfb-alpha-iso",
+    "why": "Generic $\\alpha_f$ is an isomorphism for every $f$ used for coefficient/derived-category assembly; no replacement of the unit refinement route."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Generic The functor induced on derived categories by an exact functor, with its factorization through the localization functors used for coefficient/derived-category assembly; no replacement of the unit refinement route."
+   },
+   {
+    "node": "lem-pc-right-derived-functor-triangulated",
+    "why": "Generic The unbounded right derived functor is triangulated used for coefficient/derived-category assembly; no replacement of the unit refinement route."
+   },
+   {
+    "node": "lem-sp-canonical-right-derived-adjunction-shift",
+    "why": "Generic Canonical unbounded right-derived adjunctions commute with canonical shifts used for coefficient/derived-category assembly; no replacement of the unit refinement route."
+   },
+   {
+    "node": "lem-sfb-exact-derived-composition",
+    "why": "Generic Composition of the functors induced by exact functors on unbounded derived categories used for coefficient/derived-category assembly; no replacement of the unit refinement route."
+   },
+   {
+    "node": "lem-sfb-exact-derived-natural-iso",
+    "why": "Generic Natural isomorphisms of exact functors descend to unbounded derived categories used for coefficient/derived-category assembly; no replacement of the unit refinement route."
+   },
+   {
+    "node": "lem-weil-pbc-commshift-nattrans-comp-whisker",
+    "why": "Generic Composites and whiskerings of shift-compatible natural transformations are shift-compatible used for coefficient/derived-category assembly; no replacement of the unit refinement route."
+   },
+   {
+    "node": "det-pe-topos-functoriality-inverse-image",
+    "why": "Generic The geometric morphism attached to a morphism of schemes used for coefficient/derived-category assembly; no replacement of the unit refinement route."
+   },
+   {
+    "node": "det-prop-sfb-module-pullback-exact-lifted",
+    "why": "Generic Lifts of exact functors to module objects are exact used for coefficient/derived-category assembly; no replacement of the unit refinement route."
+   },
+   {
+    "node": "sk-def-localizing-closure",
+    "why": "Generic The localizing closure used for coefficient/derived-category assembly; no replacement of the unit refinement route."
+   },
+   {
+    "node": "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "why": "Generic Left adjoints preserve colimits used for coefficient/derived-category assembly; no replacement of the unit refinement route."
+   },
+   {
+    "node": "det-sf-determination-localizing",
+    "why": "Generic Invertibility propagates to the localizing closure used for coefficient/derived-category assembly; no replacement of the unit refinement route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-proper-morphism",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-pc-fibre-product",
+  "sk-def-sfb-constructible",
+  "lem-sfb-kflat-scalar-comparison-normalization",
+  "lem-sf-module-object-ordinary-coefficient-equivalence",
+  "sk-thm-pe-constructible-comparison",
+  "thm-weil-pbc-finite-level-proetale",
+  "lem-sfb-internal-module-operations-transport",
+  "lem-derived-exact-equivalence-squares",
+  "def-weil-pbc-ambient-ringed-exchange",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-sfb-integral-ambient-tower-comparison",
+  "lem-weil-pbc-proetale-immersion-limit-preservation",
+  "lem-pe-roos-cone-calculus",
+  "lem-sfb-integral-quotient-exchange-comparison",
+  "det-pe-derived-nakayama-first-reduction",
+  "lem-sfb-pasted-mates-counit-normalization",
+  "sk-def-sfb-module-derived-pushpull",
+  "lem-sfb-alpha-iso",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-sp-canonical-right-derived-adjunction-shift",
+  "lem-sfb-exact-derived-composition",
+  "lem-sfb-exact-derived-natural-iso",
+  "lem-weil-pbc-commshift-nattrans-comp-whisker",
+  "det-pe-topos-functoriality-inverse-image",
+  "det-prop-sfb-module-pullback-exact-lifted",
+  "sk-def-localizing-closure",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "det-sf-determination-localizing"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NA-bc896abd6",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-bc896abd6 (reviewer sub-agent of L); spot-checked: Item statement is byte-identical to the O4 original. Λ keeps the sk-def-localizing-closure convention, where Q̄_ℓ is the norm-topology ring C(−,Q̄_ℓ); this repairs the Q21 cdc69125 narrowing, which the citer open-boundary-vanishing needs. Source: blueprint main-20261015 det-sf-comp-coherence-refinement (2), 'proper base change along i, localizing form, valid on Dctf'. The exchange is def-weil-pbc-ambient-ringed-exchange in ordinary D(Mod_{Λ_T}). No repair note, no SGA, no other group's split. One fault, C4 in step 1: Tor-interval preservation by a^* was attributed to lem-sfb-kflat-scalar-comparison-normalization, which says nothing about ⊗N for arbitrary N, and preimages of strata were uncited. FIX rewrites step 1: a^*L⊗N ≅ a^*(L⊗a_*N) via lem-weil-pbc-proetale-ringed-closed-counit and lem-weil-pbc-ringed-topoi-derived-tensor-pullback, with a^* exact (lem-weil-pbc-proetale-immersion-limit-preservation), and lem-weil-pbc-constructible-preimage for strata. This holds for every admissible Λ, as step 6 needs; the four citations were added to uses and proof_deps. Other steps checked. Step 1 finite case: sk-thm-pe-constructible-comparison gives the étale-origin witness (qcqs, discrete Noetherian), then thm-weil-pbc-finite-level-proetale, identified through the transport lemmas. Step 2: lem-sfb-integral-ambient-tower-comparison (any qcqs f) plus product-preserving exact c^*/a^* applied to the Roos complex (lem-pe-roos-cone-calculus). Step 3: quotient-exchange rectangle with ρ invertible on all of D_R, then Nakayama on complete endpoints. Step 4: the pasted-mates counit formula plus θ coherence give the rational rectangle. Step 5: generic shift compatibility. Step 6: qcqs proper coproducts (f, and f_C with S=C), then localizing determination. New nodes are statement-only, self-contained, carry blueprint fields and are not item clauses. Completeness node: true (O_{F,U}=lim, local constant models, two-term resolution); it is not the Noetherian completion bridge. Generator node: E case via HRS 7.7. For C(−,Q̄_ℓ) I tested monodromy 1+ℓ^sα_s on S×(nodal cubic); it does not descend to one E but lies in Loc via the j_!/i_* triangle (clopen coproduct plus a sequential colimit). Scalar node: E case true (filtered colimit, qcqs Rh_*). C(−,Q̄_ℓ) case is unsourced but no counterexample found, parallel to the accepted NK open-scalar node; flagged for the maintainer. Batch-5: kflat→lem-trf-geometric-inverse-image-exact (exactness of geometric inverse image) and quotient-exchange→lem-pd-section-derived-pushpull-normalization (internal/section derived normalization) are generic, not steps of the trace formula or Poincaré duality proofs: accepted. The added citations reach neither chapter. Generic tool_uses in split_report accepted.; 1 file(s) fixed by the reviewer"
  }
 }
