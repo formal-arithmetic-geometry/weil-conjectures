@@ -1,0 +1,132 @@
+{
+ "id": "lem-sbc-roos-coordinates-derived-limit",
+ "kind": "statement",
+ "title": "A signed Roos coordinate model gives the derived-limit triangle",
+ "statement": "Let C be an abelian category with countable products and exact countable products, finite binary biproducts, and a chosen unbounded derived category [def-weil-abstract-derived-category]. Let K(n+1) to K(n) be a tower of cochain complexes and put B equal to its product and u equal to one minus its transition shift [def-weil-category-product]. Suppose a complex L is given with degreewise isomorphisms L^i to B^i direct sum B^(i-1), with differential (x,y) to (dx,ux-dy), and a chain map p:L to B that is the first coordinate. Then the product of the Q(K(n)) exists, and there are arrows q:Q(L) to this product and delta from this product to Q(L)[1] forming the derived-limit triangle [def-weil-derived-limit] for the actual localized tower transitions. For every n, q followed by the nth projection equals Q of p followed by the original nth projection.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 07KC and 08TC; signed coordinate and actual projection refinement"
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-category-product",
+  "def-weil-derived-limit"
+ ],
+ "proof": [
+  {
+   "text": "Use the first coordinate and negative second coordinate to define a map from L to the native mapping cocone of u. The displayed differential is precisely the chain-map equation. The matrix is invertible degreewise, and its composite with the native first projection is p.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The localized product cone is limiting by exact countable products. Identify it with the chosen product of the localized tower. Checking projections shows that this isomorphism conjugates Q(u) to one minus the localized transition shift.",
+   "uses": [
+    "lem-weil-derived-countable-products-core",
+    "def-weil-category-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The localized native mapping-cocone triangle is distinguished. Transport it along the coordinate isomorphism and the product comparison. Its first arrow is Q(p) followed by that comparison, so the claimed projection equations follow.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-derived-limit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "lem-weil-derived-countable-products-core",
+  "def-weil-category-product",
+  "def-weil-derived-limit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 07KC and 08TC; signed coordinate and actual projection refinement; explicit Lean comparison argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A signed Roos coordinate model gives the derived-limit triangle",
+   "results": "8 generic hits: spectral-object triangles, triangles of short exact sequences, t-structure triangles, homotopy distinguished triangles and IsTriangulated.mk'; none specifies the signed Roos coordinates and actual projections.",
+   "date": "2026-10-21",
+   "verdict": "No exact match; reuse the generic ingredients in the Lean proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.mappingCocone_triangle_distinguished",
+   "results": "Mathlib.Algebra.Homology.DerivedCategory.Basic: the localized native mapping-cocone triangle is distinguished.",
+   "date": "2026-10-21",
+   "verdict": "Used as an ingredient; the specified coordinate/projection and product comparisons remain to prove."
+  },
+  {
+   "tool": "grep",
+   "query": "derivedLimitTriangle_of_roos_coordinates|koszulTensorDerivedTower",
+   "results": "0 hits in the indexed source search.",
+   "date": "2026-10-21",
+   "verdict": "No existing exact comparison theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "signed Roos coordinates mapping cocone derived limit triangle exact countable products",
+   "results": "8 hits on module direct limits, countable products, CountableAB4Star and opposite cones; no signed coordinate triangle.",
+   "date": "2026-10-21",
+   "verdict": "No exact match. Reuse the existing K-flat and derived-product ingredients named in the proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.KoszulFibreLinearDescent",
+  "date": "2026-10-21",
+  "group": "X3"
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-rem-rest",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-e-coefficient-smooth-base-change",
+   "place": "Tags 07KC and 08TC; signed coordinate and actual projection refinement",
+   "via": [
+    "lem-sbc-koszul-fibre-linear-descent",
+    "lem-sbc-completed-operations-linear-natural-exchange"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.RoosCoordinatesDerivedLimit",
+  "file": "lean/Sheaf/Algebra/Homology/RoosCoordinatesDerivedLimit.lean",
+  "declaration": "CochainComplex.derivedLimitTriangle_of_roos_coordinates",
+  "statement": "theorem derivedLimitTriangle_of_roos_coordinates\n    [HasCountableProducts C] [CountableAB4Star C] [HasDerivedCategory.{w} C]\n    (K : ℕ → CochainComplex C ℤ) (f : ∀ n, K (n + 1) ⟶ K n)\n    (L : CochainComplex C ℤ)\n    (e : ∀ i : ℤ, L.X i ≅ (∏ᶜ K : CochainComplex C ℤ).X i ⊞\n      (∏ᶜ K : CochainComplex C ℤ).X (i - 1))\n    (hd : ∀ i : ℤ, L.d i (i + 1) ≫ (e (i + 1)).hom =\n      (e i).hom ≫ biprod.lift\n        (biprod.fst ≫ (∏ᶜ K : CochainComplex C ℤ).d i (i + 1))\n        (biprod.fst ≫ (towerTransitionEndomorphism f).f i ≫\n          eqToHom (congrArg (∏ᶜ K : CochainComplex C ℤ).X\n            (Int.add_sub_cancel i 1).symm) -\n          biprod.snd ≫ (∏ᶜ K : CochainComplex C ℤ).d (i - 1) ((i + 1) - 1)))\n    (p : L ⟶ ∏ᶜ K) (hp : ∀ i, p.f i = (e i).hom ≫ biprod.fst) :\n    ∃ _hP : HasProduct (fun n ↦ DerivedCategory.Q.{w}.obj (K n)),\n      ∃ (q : DerivedCategory.Q.{w}.obj L ⟶ ∏ᶜ (fun n ↦ DerivedCategory.Q.{w}.obj (K n)))\n        (δ : (∏ᶜ (fun n ↦ DerivedCategory.Q.{w}.obj (K n))) ⟶\n          (DerivedCategory.Q.{w}.obj L)⟦(1 : ℤ)⟧),\n        IsDerivedLimitTriangle (fun n ↦ DerivedCategory.Q.{w}.map (f n))\n          (DerivedCategory.Q.{w}.obj L) q δ ∧\n        ∀ n, q ≫ Pi.π _ n = DerivedCategory.Q.{w}.map (p ≫ Pi.π K n)",
+  "branch": "sheaf-dag",
+  "by": "X3",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261021T214919-L-1890729",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261021T214919-L-1890729",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

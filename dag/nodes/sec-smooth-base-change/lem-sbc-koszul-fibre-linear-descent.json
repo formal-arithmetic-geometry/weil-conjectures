@@ -22,153 +22,146 @@
  ],
  "proof": [
   {
-   "text": "The transitions are chain maps: in each two-term factor $b_j^m b_j=b_j^{m+1}$, and the degree-zero map is the identity. Tensor these maps with the signed total differential of [def-pc-tensor-complex-sheaves]. Each $Q_m$ has zero terms outside $[-r,0]$ and finite direct sums of $\\mathcal O$ as terms; for $r=0$ it is $\\mathcal O[0]$ with identity transitions. Such terms are flat: tensoring with $\\mathcal O^k$ is the finite direct-sum functor, which preserves short exact sequences coordinatewise, by the definition in [def-pc-flat-sheaf-modules].",
+   "text": "Use the existing strict ringed Koszul dual tower, whose terms are flat and K-flat, including the empty-list case. Define F(M)^i=B(M)^i direct sum B(M)^(i-1), and d=(d_B, u-d_B) with u=1-s. The chain-map equation for u makes d squared zero. Define maps by the diagonal product maps and prove identities and composition at projections.",
    "uses": [
-    "def-pc-tensor-complex-sheaves",
-    "def-pc-flat-sheaf-modules"
+    "def-weil-pbc-ringed-koszul-system",
+    "lem-weil-pbc-ringed-cech-koszul-dual-kflat",
+    "def-weil-category-product"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebraization.tex",
-    "place": "Tag 0A0E, lemma-derived-completion-koszul, finite free Koszul complexes and duals"
+    "place": "Tag 0A0E, lemma-derived-completion-koszul; explicit product/fibre and scalar-descent refinement, agent supplied"
    }
   },
   {
-   "text": "Apply [lem-pc-bounded-above-flat-kflat-site] to $Q_m$, bounded above by $0$ and with the flat terms established in Step 1. Then [lem-weil-pbc-kflat-fixed-tensor-triangulated], with fixed argument $Q_m$ on the right, shows that $M\\mapsto M\\otimes Q_m$ preserves quasi-isomorphisms for arbitrary unbounded $M$, and that its localization is $M\\mapsto M\\otimes^{\\mathbf L}Q_m$. Its naturality in chain maps of the fixed K-flat argument identifies the localized transitions with the stipulated Koszul transitions. No regularity of the $b_j$ or boundedness of $M$ is used.",
+   "text": "Tensoring a scalar multiple on the left with the identity multiplies the tensor map by the same scalar: apply the sheafification adjunction and check pure tensors of the underlying presheaves. Pass this equality through total tensor, products and the two biproduct coordinates. The analogous additive computation proves F additive and A-linear.",
    "uses": [
-    "lem-pc-bounded-above-flat-kflat-site",
-    "lem-weil-pbc-kflat-fixed-tensor-triangulated"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YQ (lemma-bounded-flat-K-flat), 06YP (lemma-K-flat-quasi-isomorphism), 06YU (definition-derived-tor and preceding construction)"
-   }
-  },
-  {
-   "text": "Put $u_M=1-s_M$. Since $s_M$ is a chain map, $d_F^2(x,y)=(0,u_Md_Bx-d_Bu_Mx)=0$. For a chain map $a$, write $a_B=\\prod_m(a\\otimes1)$; its compatibility with transitions gives $a_Bu_M=u_Na_B$, so the specified diagonal $F(a)$ is a chain map. Products are characterized by their projections [def-weil-category-product]; checking projections gives $F(1)=1$, $F(ba)=F(b)F(a)$, $F(a+a')=F(a)+F(a')$ and $F(ta)=tF(a)$ for $t\\in A$. Here the $A$-action is the given map to global sections, and every tensor and transition map is linear for it.",
-   "uses": [
-    "def-weil-category-product",
-    "def-pc-tensor-complex-sheaves"
+    "def-pc-tensor-complex-sheaves",
+    "def-weil-pbc-scalar-localization-coefficient-actions"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 08TC, definition-derived-limit; agent-supplied strict fibre calculation"
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0A0E, lemma-derived-completion-koszul; explicit product/fibre and scalar-descent refinement, agent supplied"
    }
   },
   {
-   "text": "If $a-a'=dh+hd$, tensor the homotopy with $1_{Q_m}$. On $M^p\\otimes Q_m^q$ the two cross terms cancel because $h$ has degree $-1$: their coefficients are $(-1)^{p-1}$ and $(-1)^p$. Thus $h\\otimes1$ is a homotopy between $a\\otimes1$ and $a'\\otimes1$. It commutes with the tower transitions. Let $h_B$ be its product and define $H^i:F(M)^i\\to F(N)^{i-1}$ by $H(x,y)=(h_Bx,-h_By)$. Expanding $dH+Hd$ gives first coordinate $(d h_B+h_Bd)x$ and second coordinate $(u_Nh_B-h_Bu_M)x+(d h_B+h_Bd)y$. The $x$ term in the second coordinate vanishes by transition compatibility. Hence $dH+Hd=F(a)-F(a')$, with exactly the minus sign on the second homotopy coordinate.",
+   "text": "Mathlib mapBifunctorMapHomotopy_1 tensors a chain homotopy with the identity. Its total-summand formula is natural in the second tensor factor. Take products of these homotopies; projection calculations prove that the product homotopy commutes with u. The diagonal homotopy (h,-h) is consequently a homotopy of fibre maps.",
    "uses": [
     "def-pc-tensor-complex-sheaves",
     "def-weil-category-product"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Signed total tensor differential; agent-supplied homotopy calculation"
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0A0E, lemma-derived-completion-koszul; explicit product/fibre and scalar-descent refinement, agent supplied"
    }
   },
   {
-   "text": "Suppose $a$ is a quasi-isomorphism. Step 2 makes every $a\\otimes1_{Q_m}$ a quasi-isomorphism. Apply [lem-weil-derived-countable-products-core] in $\\operatorname{Mod}(\\mathcal O)$, using precisely the assumed exact countable products: $Q(B(a))$ is the morphism between derived products induced by a family of isomorphisms, and is therefore invertible (its inverse is the product of the inverses, as checked at each projection). Because the cohomology functors factor through $Q$ [def-weil-abstract-derived-category], $B(a)$ is a quasi-isomorphism. Now apply [lem-pe-roos-coordinates-quasi-iso] with $V=B(M)$, $V'=B(N)$ and endomorphisms $u_M,u_N$. The chain map in that node is exactly the diagonal $F(a)$ of Step 3, with differential $(dx,ux-dy)$; consequently $F(a)$ is a quasi-isomorphism.",
+   "text": "Fixed K-flat tensor preserves quasi-isomorphisms for each Koszul factor. HomologicalComplex.quasiIso_limMap in the adopted TowerLimit source module proves that the termwise product map is a quasi-isomorphism under CountableAB4Star. Apply the stated Roos-coordinate quasi-isomorphism theorem to the diagonal fibre map.",
    "uses": [
-    "lem-weil-derived-countable-products-core",
-    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-ringed-cech-koszul-dual-kflat",
+    "lem-weil-pbc-kflat-fixed-tensor-triangulated",
     "lem-pe-roos-coordinates-quasi-iso"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 07KC, lemma-products; Tag 08TC, definition-derived-limit, and mapping-fibre quasi-isomorphism comparison"
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0A0E, lemma-derived-completion-koszul; explicit product/fibre and scalar-descent refinement, agent supplied"
    }
   },
   {
-   "text": "Let $Q$ denote localization from complexes to $D(\\mathcal O)$. The functor $QF$ inverts quasi-isomorphisms by Step 5, so [lem-weil-pbc-localization-universal-property](1) produces $C$ with $CQ\\cong QF$. Complexes and their derived category are additive; the induced derived $A$-linear structure and additivity and $A$-linearity of $Q$ are supplied by [lem-weil-linear-abelian-derived-category], applied to the componentwise $A$-action on module sheaves. Every derived object has a representative complex. Apply [lem-pur-additive-localization-descent] to $q=Q$, $U=QF$, $G=C$ and this comparison: it proves additivity of $C$. Apply [lem-sfb-linear-localization-descent] with the same data and $R=A$ to obtain $C(t\\alpha)=tC(\\alpha)$ for all derived morphisms, including ones represented by fractions rather than chain maps. Together these two conclusions give the $A$-linear functor required by [def-weil-linear-functor].",
+   "text": "Localize F followed by Q to obtain D and its comparison isomorphism. Transfer additivity from Q followed by D through the full essentially-surjective homotopy quotient, then use Mathlib Localization.functor_additive_iff for the fraction localization Qh. Mathlib Localization.functor_linear_iff for Q proves linearity on all derived morphisms. Localization.liftNatTrans descends the specified unit.",
    "uses": [
     "lem-weil-pbc-localization-universal-property",
     "lem-weil-linear-abelian-derived-category",
-    "lem-pur-additive-localization-descent",
-    "lem-sfb-linear-localization-descent",
-    "def-weil-linear-functor"
+    "lem-sfb-linear-localization-descent"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 04VG, lemma-properties-left-localization; linear refinement: Mathlib CategoryTheory/Localization/Linear.lean, functor_linear_iff; additive descent as stated by the cited node"
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0A0E, lemma-derived-completion-koszul; explicit product/fibre and scalar-descent refinement, agent supplied"
    }
   },
   {
-   "text": "By [lem-weil-derived-countable-products-core], $Q(B(M))$ with its actual projections is the product of the $Q(M\\otimes Q_m)$ in the derived category. The strict complex $F(M)$ is a model for the mapping fibre of $u_M$: in the cone convention of [def-weil-abstract-derived-category], the chain isomorphism to $\\operatorname{Cone}(u_M)[-1]$ is $(x,y)\\mapsto(-y,x)$, with inverse $(v,w)\\mapsto(w,-v)$. Its first projection is $x$. Rotating the cone triangle, with the corresponding sign on the final connecting map, gives a distinguished triangle $QF(M)\\to Q B(M)\\xrightarrow{Q(1-s_M)}Q B(M)\\to QF(M)[1]$. Thus [def-weil-derived-limit] identifies $QF(M)$ as a derived limit of the tower. Step 2 identifies that tower, including its transitions, with $M\\otimes^{\\mathbf L}Q_m$. This asserts a specified strict model and its triangle, not a functorial cone construction in an arbitrary triangulated category.",
+   "text": "Apply the transition-natural Koszul tensor comparison, proved using a flat K-flat resolution, to identify the localized strict tower with the stipulated derived tensor tower.",
    "uses": [
-    "lem-weil-derived-countable-products-core",
-    "def-weil-abstract-derived-category",
+    "lem-sbc-koszul-tensor-derived-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0A0E, lemma-derived-completion-koszul; explicit product/fibre and scalar-descent refinement, agent supplied"
+   }
+  },
+  {
+   "text": "Apply the generic signed-coordinate derived-limit triangle theorem to the constructed fibre and its first-coordinate projection. Transport that triangle along the descent isomorphism to D(QM). The resulting first arrow has exactly the specified composites with the actual product projections.",
+   "uses": [
+    "lem-sbc-roos-coordinates-derived-limit",
     "def-weil-derived-limit"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 08TC, definition-derived-limit, and Tag 07KC, lemma-products; explicit cone identification"
-   }
-  },
-  {
-   "text": "Let $e_M:M\\to B(M)$ have components $z\\mapsto z\\otimes1$ in the degree-zero summand of $Q_m$. These are chain maps because $1$ has degree $0$ and has zero differential. Transitions are identity on this summand, so $u_Me_M=0$. Therefore $\\kappa_M(z)=(e_Mz,0)$ is a chain map, and $F(a)\\kappa_M=\\kappa_Na$ follows at every product projection. Part (2) of [lem-weil-pbc-localization-universal-property] descends this transformation from $Q$ to $CQ$ to a natural transformation $\\mathrm{id}\\Rightarrow C$. Its projection to each tower level is the specified inclusion; under Step 7 it is precisely the coaugmentation of this derived-limit model. No claim of uniqueness from the level projections alone is needed.",
-   "uses": [
-    "def-pc-tensor-complex-sheaves",
-    "def-weil-category-product",
-    "lem-weil-pbc-localization-universal-property"
-   ],
-   "elementary": false,
-   "source": {
     "document": "literature/stacks-project/algebraization.tex",
-    "place": "Tag 0A0E, lemma-derived-completion-koszul; coaugmentation refinement using the strict compatible inclusions"
+    "place": "Tag 0A0E, lemma-derived-completion-koszul; explicit product/fibre and scalar-descent refinement, agent supplied"
    }
   },
   {
-   "text": "Tensor distributes over a binary direct sum by the maps induced by its inclusions and projections. Products do likewise: the inverse maps send $((v_m,w_m))_m$ to $((v_m)_m,(w_m)_m)$ and back, as follows from [def-weil-category-product]. Applying these maps to both fibre coordinates yields $F(M\\oplus N)\\cong F(M)\\oplus F(N)$; the maps commute with $d$, $s$, and all chain maps because all their components are the indicated projections and inclusions. Likewise $F(0)=0$. They send $\\kappa_{M\\oplus N}$ to $\\kappa_M\\oplus\\kappa_N$ and $\\kappa_0$ to the map $0\\to0$. These identities persist after localization by [lem-weil-pbc-localization-universal-property](2),(3). Every derived binary biproduct can be computed on representative complexes since $Q$ is additive [lem-weil-linear-abelian-derived-category].",
+   "text": "The given tensor unit inclusions are transition compatible, hence annihilated by u. Their lift with second coordinate zero is the fibre unit. Checking at projections proves naturality, which localizes as in the descent step.",
    "uses": [
-    "def-pc-tensor-complex-sheaves",
-    "def-weil-category-product",
-    "lem-weil-pbc-localization-universal-property",
-    "lem-weil-linear-abelian-derived-category"
+    "def-weil-pbc-ringed-koszul-system",
+    "def-weil-category-product"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebraization.tex",
-    "place": "Tag 0A0E strict Koszul model; elementary finite-biproduct coordinate refinement"
+    "place": "Tag 0A0E, lemma-derived-completion-koszul; explicit product/fibre and scalar-descent refinement, agent supplied"
    }
   },
   {
-   "text": "The zero object has invertible $\\kappa_0$. If $\\kappa_M$ and $\\kappa_N$ are invertible, Step 9 identifies $\\kappa_{M\\oplus N}$ with their direct sum, whose inverse is $\\kappa_M^{-1}\\oplus\\kappa_N^{-1}$. Thus the full subcategory on these objects contains zero and binary biproducts. Its Hom groups are the ambient $A$-modules, and composition remains bilinear; the biproduct identities are unchanged because it is full. This proves additivity with the inherited linear structure. The final scalar identity is the one already proved for all derived morphisms in Step 6.",
+   "text": "The additive functor has the canonical zero and biproduct comparison isomorphisms. Naturality of the unit with respect to the two projections proves its biproduct equation, and functoriality proves naturality of the comparison.",
    "uses": [
     "def-weil-linear-functor"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebraization.tex",
-    "place": "Tag 0A0E; elementary consequence of the explicit biproduct and coaugmentation identities"
+    "place": "Tag 0A0E, lemma-derived-completion-koszul; explicit product/fibre and scalar-descent refinement, agent supplied"
+   }
+  },
+  {
+   "text": "For any additive endofunctor with a unit from the identity, the objects with invertible unit contain zero and are closed under isomorphisms and binary biproducts. Apply the ObjectProperty finite-product and full-subcategory instances to obtain the required zero object and biproducts. Its inclusion is linear because its Hom modules are inherited.",
+   "uses": [
+    "def-weil-linear-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0A0E, lemma-derived-completion-koszul; explicit product/fibre and scalar-descent refinement, agent supplied"
    }
   }
  ],
  "proof_deps": [
-  "def-pc-tensor-complex-sheaves",
-  "def-pc-flat-sheaf-modules",
-  "lem-pc-bounded-above-flat-kflat-site",
-  "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+  "def-weil-pbc-ringed-koszul-system",
+  "lem-weil-pbc-ringed-cech-koszul-dual-kflat",
   "def-weil-category-product",
-  "lem-weil-derived-countable-products-core",
-  "def-weil-abstract-derived-category",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-pbc-scalar-localization-coefficient-actions",
+  "lem-weil-pbc-kflat-fixed-tensor-triangulated",
   "lem-pe-roos-coordinates-quasi-iso",
   "lem-weil-pbc-localization-universal-property",
   "lem-weil-linear-abelian-derived-category",
-  "lem-pur-additive-localization-descent",
   "lem-sfb-linear-localization-descent",
-  "def-weil-linear-functor",
-  "def-weil-derived-limit"
+  "lem-sbc-koszul-tensor-derived-tower",
+  "lem-sbc-roos-coordinates-derived-limit",
+  "def-weil-derived-limit",
+  "def-weil-linear-functor"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/algebraization.tex",
-  "place": "Tag 0A0E lemma-derived-completion-koszul; explicit product/fibre, homotopy, scalar-descent and biproduct refinement, using cited generic DAG lemmas"
+  "place": "Tag 0A0E; explicit Lean fibre construction, homotopy and scalar checks, Mathlib localization criteria, and proved transition/product comparison lemmas"
  },
  "mathlib_searches": [
   {
@@ -307,11 +300,9 @@
   ]
  },
  "tool_uses": [
-  "lem-pc-bounded-above-flat-kflat-site",
   "lem-weil-pbc-kflat-fixed-tensor-triangulated",
   "lem-weil-derived-countable-products-core",
-  "lem-pe-roos-coordinates-quasi-iso",
-  "lem-pur-additive-localization-descent"
+  "lem-pe-roos-coordinates-quasi-iso"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -348,5 +339,15 @@
   "group": "Q36",
   "result": "pass",
   "note": "Re-delivery after RETURN 7f39e44a; Lean module byte-identical to the module fully reviewed there; statement verbatim. Item node differs only in stmt_deps: theorem lem-weil-pbc-scalar-localization-derived-hom replaced by def-weil-pbc-scalar-localization-coefficient-actions, and lem-weil-pbc-site-derived-tensor-descent added, as requested. Dep record is a §1(B) lean-only change: scalarLocalizationCoefficientLinear (plain def, Module.compHom of homLinear along a = the node's 'restricting along a') added to declarations with lean.note, existing:true; live record unchanged since base. Mechanical finding: derivedTensor = curry of siteDerivedTensorIndependentCoefficients = .choose of site_derived_tensor_descent_independentCoefficients, so the statement genuinely depends on the theorem's constructed object, PASS on that point. No cycle; report sections present; one sorry. nt_compile --json clean in 31.4 s. Advisory: live docstring of scalarLocalizationCoefficientLinear is stale."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261021T214919-L-1890729",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

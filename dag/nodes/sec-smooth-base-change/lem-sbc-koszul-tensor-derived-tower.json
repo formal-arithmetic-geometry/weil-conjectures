@@ -1,0 +1,125 @@
+{
+ "id": "lem-sbc-koszul-tensor-derived-tower",
+ "kind": "statement",
+ "title": "Ordinary Koszul tensor towers represent derived tensor towers",
+ "statement": "Let S be a small site, O a sheaf of commutative rings, and D(O) its chosen unbounded derived category [def-weil-abstract-derived-category]. For a finite sequence b of global sections, including the empty sequence, let Q be the strict dual Koszul tower [def-weil-pbc-ringed-koszul-system]. For every cochain complex M there is an isomorphism of towers between the ordinary tensor tower M tensor Q followed by localization and Q followed by localization and the published derived tensor with Q(M) [lem-weil-pbc-site-derived-tensor-descent]. In particular the isomorphism intertwines every tower transition.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS and 06YU; Koszul tower comparison in the proof of Tag 0A0E"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ringed-koszul-system",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "proof": [
+  {
+   "text": "Choose a flat-term K-flat resolution P to M. Convert categorical flatness of its terms to site flatness by the canonical tensor comparison.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The dual Koszul terms are K-flat and termwise flat. Tensoring P to M with each such term is a quasi-isomorphism by the fixed-tensor theorem. Naturality in the tower gives an isomorphism between the localized ordinary tensor towers.",
+   "uses": [
+    "lem-weil-pbc-ringed-cech-koszul-dual-kflat",
+    "lem-weil-pbc-kflat-fixed-tensor-triangulated"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the fixed-left-factor comparison for P, which is natural in every second complex and thus in the whole Koszul tower. Finally apply the derived tensor bifunctor to the isomorphism Q(P) to Q(M) in its first variable. Compose these three tower isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-kflat-fixed-tensor-triangulated"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-weil-pbc-ringed-cech-koszul-dual-kflat",
+  "lem-weil-pbc-kflat-fixed-tensor-triangulated"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS and 06YU; Koszul tower comparison in the proof of Tag 0A0E; explicit Lean comparison argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Ordinary Koszul tensor towers represent derived tensor towers",
+   "results": "8 hits on Kaehler differentials, algebraic tensor scalar towers and formal smoothness; no derived Koszul tensor-tower comparison.",
+   "date": "2026-10-21",
+   "verdict": "No exact match; reuse the generic ingredients in the Lean proof."
+  },
+  {
+   "tool": "grep",
+   "query": "derivedLimitTriangle_of_roos_coordinates|koszulTensorDerivedTower",
+   "results": "0 hits in the indexed source search.",
+   "date": "2026-10-21",
+   "verdict": "No existing exact comparison theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Koszul tensor tower comparison with derived tensor via K flat resolution",
+   "results": "8 hits on flat-module tensor kernels, exactness and limits of ring tensor functors; no derived tensor tower comparison.",
+   "date": "2026-10-21",
+   "verdict": "No exact match. Reuse the existing K-flat and fixed-tensor ingredients named in the proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.KoszulFibreLinearDescent",
+  "date": "2026-10-21",
+  "group": "X3"
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-rem-rest",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-e-coefficient-smooth-base-change",
+   "place": "Tags 06YS and 06YU; Koszul tower comparison in the proof of Tag 0A0E",
+   "via": [
+    "lem-sbc-koszul-fibre-linear-descent",
+    "lem-sbc-completed-operations-linear-natural-exchange"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.KoszulTensorDerivedTower",
+  "file": "lean/Sheaf/CategoryTheory/KoszulTensorDerivedTower.lean",
+  "declaration": "CategoryTheory.koszulTensorDerivedTower",
+  "statement": "theorem koszulTensorDerivedTower (r : ℕ)\n    (b : Fin r → (O.obj ⋙ forget CommRingCat).sections) (M : ringedSiteComplex O) :\n    Nonempty (((ringedKoszulTensorTower O r b).obj M ⋙ DerivedCategory.Q) ≅\n      (ringedKoszulDualTower O r b ⋙ DerivedCategory.Q ⋙\n        (SheafOfModules.KFlatFixedTensor.derivedTensor O).obj\n          (DerivedCategory.Q.obj M)))",
+  "branch": "sheaf-dag",
+  "by": "X3",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261021T214919-L-1890729",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261021T214919-L-1890729",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
