@@ -13,7 +13,8 @@ public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.OfEquivalenc
 
 The categorical trace `CategoryTheory.MonoidalCategory.trace` of an endomorphism of an object `X`
 of a braided monoidal category does not depend on the choice of the right dual of `X`
-(`CategoryTheory.MonoidalCategory.trace_eq_of_exactPairing`), and it is preserved by monoidal
+(`CategoryTheory.MonoidalCategory.trace_eq_of_exactPairing`, in
+`WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Braided`), and it is preserved by monoidal
 functors which are compatible with the braidings on the pair `(X, Xᘁ)`
 (`CategoryTheory.MonoidalCategory.trace_map`).
 
@@ -27,22 +28,6 @@ the derived category is computed in the category of complexes, where it is the s
 namespace CategoryTheory.MonoidalCategory
 
 open Category Functor.LaxMonoidal Functor.OplaxMonoidal
-
-section
-
-variable {C : Type*} [Category C] [MonoidalCategory C] [BraidedCategory C]
-
-/-- The categorical trace does not depend on the choice of the right dual: it may be computed with
-any exact pairing `X ⊗ Y`. -/
-theorem trace_eq_of_exactPairing {X Y : C} [HasRightDual X] [ExactPairing X Y] (f : X ⟶ X) :
-    trace f = η_ X Y ≫ f ▷ Y ≫ (β_ X Y).hom ≫ ε_ X Y := by
-  have h₁ := @coevaluation_comp_rightAdjointMate C _ _ X X ⟨Y⟩ ‹_› (𝟙 X)
-  have h₂ := @rightAdjointMate_comp_evaluation C _ _ X X ⟨Y⟩ ‹_› (𝟙 X)
-  simp only [id_whiskerRight, comp_id, whiskerLeft_id, id_comp] at h₁ h₂
-  rw [← h₁, assoc, whisker_exchange_assoc, BraidedCategory.braiding_naturality_right_assoc, h₂,
-    trace]
-
-end
 
 variable {C D : Type*} [Category C] [Category D] [MonoidalCategory C] [MonoidalCategory D]
   [BraidedCategory C] [BraidedCategory D] (F : C ⥤ D) [F.Monoidal]

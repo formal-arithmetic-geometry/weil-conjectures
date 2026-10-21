@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
-public import WeilConjectures.CategoryTheory.Sites.SheafComposePushforwardMonoidal
+public import WeilConjectures.CategoryTheory.Sites.SheafAdjunctionUnitProjection
 public import WeilConjectures.SixFunctors.ProEtale.Adic.FreeWeilCoefficients
 
 /-!
@@ -57,23 +57,6 @@ lemma isLeftAdjoint_forget₂Ab : (forget₂ (ModuleCat.{v} R) Ab.{v}).IsLeftAdj
 end ModuleCat
 
 namespace CategoryTheory
-
-section
-
-variable {C : Type*} [Category* C] (J : GrothendieckTopology C)
-  {A : Type*} [Category* A] [MonoidalCategory A]
-  [(J.W (A := A)).IsMonoidal] [HasWeakSheafify J A]
-
-attribute [local instance] Sheaf.monoidalCategory
-
-/-- The tensorator `S ⊗ T ⟶ (S ⊗ T)^#` of the inclusion of sheaves into presheaves becomes an
-isomorphism after sheafification. -/
-lemma W_μ_sheafToPresheaf (S T : Sheaf J A) : J.W (μ (sheafToPresheaf J A) S T) := by
-  rw [J.W_iff, Adjunction.rightAdjointLaxMonoidal_μ, Adjunction.homEquiv_unit, Functor.map_comp]
-  have := (J.W_iff _).1 (J.W_toSheafify (S.obj ⊗ T.obj))
-  infer_instance
-
-end
 
 namespace Sheaf
 
@@ -128,7 +111,7 @@ instance isIso_extendScalarsAbProjection (P : Sheaf J (ModuleCat.{v} R)) (Z : Sh
   have : J.PreservesSheafification (forget₂ (ModuleCat.{v} R) Ab.{v}) :=
     Sheaf.preservesSheafification_of_adjunction J (Adjunction.ofIsLeftAdjoint _)
   rw [← J.W_sheafToPresheaf_map_iff_isIso]
-  refine J.W.of_precomp _ _ (W_μ_sheafToPresheaf J _ Z) ?_
+  refine J.W.of_precomp _ _ (J.W_μ_sheafToPresheaf _ Z) ?_
   rw [μ_comp_sheafToPresheaf_map_extendScalarsAbProjection, ← Category.assoc]
   refine J.W.comp_mem _ _ (@MorphismProperty.of_isIso _ _ _ _ _ _ _ _ ?_) (J.W.comp_mem _ _ ?_ ?_)
   · rw [NatTrans.isIso_iff_isIso_app]
@@ -137,7 +120,7 @@ instance isIso_extendScalarsAbProjection (P : Sheaf J (ModuleCat.{v} R)) (Z : Sh
     exact ModuleCat.isIso_whiskerLeft_unit_comp_μ R (P.obj.obj U) (Z.obj.obj U)
   · exact J.W_of_preservesSheafification _ _
       (MorphismProperty.IsMonoidal.whiskerLeft _ _ (J.W_toSheafify _))
-  · exact J.W_of_preservesSheafification _ _ (W_μ_sheafToPresheaf J _ _)
+  · exact J.W_of_preservesSheafification _ _ (J.W_μ_sheafToPresheaf _ _)
 
 end Sheaf
 

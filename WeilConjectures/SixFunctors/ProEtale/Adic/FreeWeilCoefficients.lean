@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.CategoryTheory.Sites.SheafComposeBraided
 public import WeilConjectures.CategoryTheory.Sites.SheafComposeMonoidal
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Braided.Basic
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ForgetMonoidalAdjunction
@@ -24,37 +25,6 @@ adjunction (`CategoryTheory.Sheaf.extendScalarsAbAdjunction`).
 namespace CategoryTheory
 
 open MonoidalCategory Functor.LaxMonoidal
-
-/-- Postcomposition with a lax braided functor is lax braided for the pointwise monoidal
-structures on functor categories. -/
-instance Functor.LaxBraided.whiskeringRight {C D E : Type*} [Category* C] [Category* D]
-    [Category* E] [MonoidalCategory D] [BraidedCategory D] [MonoidalCategory E]
-    [BraidedCategory E] (L : D ⥤ E) [L.LaxBraided] :
-    ((Functor.whiskeringRight C D E).obj L).LaxBraided where
-  braided F G := by
-    ext X
-    exact Functor.LaxBraided.braided (F := L) (F.obj X) (G.obj X)
-
-section SheafCompose
-
-variable {C : Type*} [Category* C] (J : GrothendieckTopology C)
-  {A : Type*} [Category* A] [MonoidalCategory A] [BraidedCategory A]
-  {B : Type*} [Category* B] [MonoidalCategory B] [BraidedCategory B]
-  [(J.W (A := A)).IsMonoidal] [HasWeakSheafify J A]
-  [(J.W (A := B)).IsMonoidal] [HasWeakSheafify J B]
-  (G : A ⥤ B) [J.HasSheafCompose G] [G.LaxBraided]
-
-attribute [local instance] Sheaf.monoidalCategory Sheaf.braidedCategory
-
-/-- The postcomposition of sheaves with a lax braided functor is lax braided, being monoidally
-isomorphic to the composite of the lax braided inclusion of sheaves into presheaves, of
-postcomposition with `G` on presheaves and of sheafification. -/
-noncomputable instance sheafComposeLaxBraided : (sheafCompose J G).LaxBraided :=
-  have := Functor.LaxMonoidal.natTransIsMonoidal_of_transport
-    (sheafToPresheafCompWhiskeringRightCompPresheafToSheafIso J G)
-  Functor.LaxBraided.ofNatIso (sheafToPresheafCompWhiskeringRightCompPresheafToSheafIso J G)
-
-end SheafCompose
 
 namespace Sheaf
 

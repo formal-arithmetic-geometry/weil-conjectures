@@ -29,7 +29,9 @@ compatible with the comonoidal structure of `F` on objects coming from `K₁`, i
 agrees with `G(μ) ≫ e ≫ Q₂(δ F)`. Suppose moreover that every object of `D₁` is isomorphic to
 `Q₁ a` for an `a` in a class `S` of objects such that `μ Q₂ x (F b)` is an isomorphism for all
 `x` and all `b` in `S`. Then `δG`, together with the unit induced by `F`, is an oplax monoidal
-structure on `G` (`CategoryTheory.Functor.OplaxMonoidal.ofLaxSquare`).
+structure on `G` (`CategoryTheory.Functor.OplaxMonoidal.ofLaxSquare`). It suffices that the
+components `e a` for `a` in `S` are isomorphisms
+(`CategoryTheory.Functor.OplaxMonoidal.ofLaxSquare'`).
 
 The typical example is that of a functor `G` between derived categories induced by a monoidal
 functor `F` between homotopy categories, `Q₁` and `Q₂` being the localization functors, and `S`
@@ -148,7 +150,7 @@ variable {Q₁ : K₁ ⥤ D₁} {Q₂ : K₂ ⥤ D₂} [Q₁.LaxMonoidal] [Q₂.
 include hδ he in
 /-- The associativity axiom holds for objects of the form `Q₁ a`, `Q₁ b`, `Q₁ c`, provided the
 relevant components of `μ Q₂` and `e` are isomorphisms. -/
-lemma oplax_associativity_of_lax_square [∀ a, IsIso (e a)] (a b c : K₁)
+lemma oplax_associativity_of_lax_square (a b c : K₁) [IsIso (e a)] [IsIso (e b)] [IsIso (e c)]
     [IsIso (μ Q₂ (F.obj a) (F.obj b))] [IsIso (μ Q₂ (F.obj a ⊗ F.obj b) (F.obj c))] :
     (δG.app (Q₁.obj a ⊗ Q₁.obj b)).app (Q₁.obj c) ≫
         (δG.app (Q₁.obj a)).app (Q₁.obj b) ▷ G.obj (Q₁.obj c) ≫
@@ -199,7 +201,7 @@ lemma oplax_associativity_of_lax_square [∀ a, IsIso (e a)] (a b c : K₁)
 include hδ he in
 /-- The left unitality axiom holds for an object of the form `Q₁ a`, provided the relevant
 components of `μ Q₂` and `e` are isomorphisms. -/
-lemma oplax_left_unitality_of_lax_square [∀ a, IsIso (e a)] [IsIso (ε Q₂)] (a : K₁)
+lemma oplax_left_unitality_of_lax_square [IsIso (ε Q₂)] (a : K₁) [IsIso (e a)]
     [IsIso (μ Q₂ (𝟙_ K₂) (F.obj a))] :
     (λ_ (G.obj (Q₁.obj a))).inv = G.map (λ_ (Q₁.obj a)).inv ≫
       (δG.app (𝟙_ D₁)).app (Q₁.obj a) ≫
@@ -220,7 +222,7 @@ lemma oplax_left_unitality_of_lax_square [∀ a, IsIso (e a)] [IsIso (ε Q₂)] 
 include hδ he in
 /-- The right unitality axiom holds for an object of the form `Q₁ a`, provided the relevant
 components of `μ Q₂` and `e` are isomorphisms. -/
-lemma oplax_right_unitality_of_lax_square [∀ a, IsIso (e a)] [IsIso (ε Q₂)] (a : K₁)
+lemma oplax_right_unitality_of_lax_square [IsIso (ε Q₂)] (a : K₁) [IsIso (e a)]
     [IsIso (μ Q₂ (F.obj a) (𝟙_ K₂))] :
     (ρ_ (G.obj (Q₁.obj a))).inv = G.map (ρ_ (Q₁.obj a)).inv ≫
       (δG.app (Q₁.obj a)).app (𝟙_ D₁) ≫
@@ -240,10 +242,12 @@ lemma oplax_right_unitality_of_lax_square [∀ a, IsIso (e a)] [IsIso (ε Q₂)]
 
 /-- The oplax monoidal structure on `G : D₁ ⥤ D₂` with comonoidal structure `δG`, induced by
 an oplax monoidal functor `F : K₁ ⥤ K₂` through the lax monoidal functors `Q₁ : K₁ ⥤ D₁` and
-`Q₂ : K₂ ⥤ D₂`: see the module docstring. -/
+`Q₂ : K₂ ⥤ D₂`: see the module docstring. Here `e a` only needs to be an isomorphism for the
+objects `a` in the class `S`. -/
 @[instance_reducible]
-noncomputable def ofLaxSquare [∀ a, IsIso (e a)] [IsIso (ε Q₂)] (S : ObjectProperty K₁)
+noncomputable def ofLaxSquare' [IsIso (ε Q₂)] (S : ObjectProperty K₁)
     (hS : ∀ X : D₁, ∃ a, S a ∧ Nonempty (Q₁.obj a ≅ X))
+    (he' : ∀ a, S a → IsIso (e a))
     (hμ : ∀ (x : K₂) (b : K₁), S b → IsIso (μ Q₂ x (F.obj b))) :
     G.OplaxMonoidal where
   η := G.map (ε Q₁) ≫ e (𝟙_ K₁) ≫ Q₂.map (η F) ≫ CategoryTheory.inv (ε Q₂)
@@ -251,20 +255,35 @@ noncomputable def ofLaxSquare [∀ a, IsIso (e a)] [IsIso (ε Q₂)] (S : Object
   δ_natural_left f X' := app_app_comp_whiskerRight δG X' f
   δ_natural_right X f := app_app_comp_whiskerLeft δG X f
   oplax_associativity X Y Z := by
-    obtain ⟨a, -, ⟨iX⟩⟩ := hS X
+    obtain ⟨a, ha, ⟨iX⟩⟩ := hS X
     obtain ⟨b, hb, ⟨iY⟩⟩ := hS Y
     obtain ⟨c, hc, ⟨iZ⟩⟩ := hS Z
+    have := he' a ha
+    have := he' b hb
+    have := he' c hc
     have := hμ (F.obj a) b hb
     have := hμ (F.obj a ⊗ F.obj b) c hc
     exact oplax_associativity_of_iso δG iX iY iZ
       (oplax_associativity_of_lax_square δG e he hδ a b c)
   oplax_left_unitality X := by
-    obtain ⟨a, -, ⟨iX⟩⟩ := hS X
+    obtain ⟨a, ha, ⟨iX⟩⟩ := hS X
+    have := he' a ha
     have := LaxMonoidal.isIso_μ_tensorUnit_left Q₂ (F.obj a)
     exact oplax_left_unitality_of_iso δG iX (oplax_left_unitality_of_lax_square δG e he hδ a)
   oplax_right_unitality X := by
-    obtain ⟨a, -, ⟨iX⟩⟩ := hS X
+    obtain ⟨a, ha, ⟨iX⟩⟩ := hS X
+    have := he' a ha
     have := LaxMonoidal.isIso_μ_tensorUnit_right Q₂ (F.obj a)
     exact oplax_right_unitality_of_iso δG iX (oplax_right_unitality_of_lax_square δG e he hδ a)
+
+/-- The oplax monoidal structure on `G : D₁ ⥤ D₂` with comonoidal structure `δG`, induced by
+an oplax monoidal functor `F : K₁ ⥤ K₂` through the lax monoidal functors `Q₁ : K₁ ⥤ D₁` and
+`Q₂ : K₂ ⥤ D₂`: see the module docstring. -/
+@[instance_reducible]
+noncomputable def ofLaxSquare [∀ a, IsIso (e a)] [IsIso (ε Q₂)] (S : ObjectProperty K₁)
+    (hS : ∀ X : D₁, ∃ a, S a ∧ Nonempty (Q₁.obj a ≅ X))
+    (hμ : ∀ (x : K₂) (b : K₁), S b → IsIso (μ Q₂ x (F.obj b))) :
+    G.OplaxMonoidal :=
+  ofLaxSquare' δG e he hδ S hS (fun _ _ ↦ inferInstance) hμ
 
 end CategoryTheory.Functor.OplaxMonoidal
