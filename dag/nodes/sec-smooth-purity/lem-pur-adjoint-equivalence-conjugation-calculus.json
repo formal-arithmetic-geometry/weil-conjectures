@@ -1,0 +1,75 @@
+{
+ "id": "lem-pur-adjoint-equivalence-conjugation-calculus",
+ "kind": "statement",
+ "title": "Counits, transposes and composition under adjoint-equivalence conjugation",
+ "statement": "Let $\\mathscr C_i,\\mathscr N_i$ ($i=1,2,3$) be categories in fixed universes [def-nagata-category]. For each $i$, specify functors $R_i:\\mathscr C_i\\to\\mathscr N_i$, $L_i:\\mathscr N_i\\to\\mathscr C_i$ and an adjunction $R_i\\dashv L_i$ whose unit $u_i:1\\to L_iR_i$ and counit $e_i:R_iL_i\\to1$ are natural isomorphisms satisfying the triangle identities. Use the reverse adjunction $L_i\\dashv R_i$ with unit $e_i^{-1}$ and counit $u_i^{-1}$. Composition is written right to left. For any functor $F:\\mathscr N_i\\to\\mathscr N_j$, define $\\bar F=L_jFR_i$, and for a natural transformation $\\alpha:F\\to F'$ define $\\bar\\alpha=L_j\\alpha R_i$. Define the natural isomorphism\n$$c_{F,P}=L_jF(e_{i,P}):\\bar F L_iP\\longrightarrow L_jFP.$$\nFor every adjunction $F:\\mathscr N_1\\rightleftarrows\\mathscr N_2:G$ with counit $\\epsilon$, form the composite adjunction $\\bar F\\dashv\\bar G$ from $R_1\\dashv L_1$, $F\\dashv G$, and $L_2\\dashv R_2$ [def-weil-pbc-composite-adjunction]. Its counit is\n$$\\bar\\epsilon_K=u_{2,K}^{-1}\\circ L_2(\\epsilon_{R_2K})\\circ L_2F(e_{1,GR_2K})\\qquad(K\\in\\mathscr C_2).$$\nFor $P\\in\\mathscr N_1$, $N\\in\\mathscr N_2$ and $a:P\\to GN$, the adjoint transpose of $c_{G,N}^{-1}\\circ L_1(a):L_1P\\to\\bar G L_2N$ is\n$$L_2(\\epsilon_N\\circ F(a))\\circ c_{F,P}:\\bar F L_1P\\longrightarrow L_2N.$$\nThe identifications $c_F,c_G$ are natural in all object maps and in transformations of the functors. For arbitrary $F:\\mathscr N_1\\to\\mathscr N_2$ and $H:\\mathscr N_2\\to\\mathscr N_3$, the maps\n$$\\kappa_{H,F,K}=L_3H(e_{2,FR_1K}):\\bar H\\bar F K\\longrightarrow\\overline{HF}K$$\nform a natural isomorphism. For $\\alpha:F\\to F'$ and $\\beta:H\\to H'$, writing $*$ for horizontal composition of natural transformations, one has\n$$\\overline{\\beta*\\alpha}\\circ\\kappa_{H,F}=\\kappa_{H',F'}\\circ(\\bar\\beta*\\bar\\alpha).$$\nNo additive, derived, sheaf-theoretic or nonemptiness hypothesis on these categories is needed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/prop-pur-adic-reconstruction-trace-coherence.proof.md",
+  "place": "sole proof paragraph: “counit of the realized adjunction and its transport” and “coherence statements”; former reconstruction-calculus proof steps 5–7, abstract adjunction/transpose/composition calculations; agent-extracted intermediate statement, not a theorem quoted verbatim from the blueprint"
+ },
+ "stmt_deps": [
+  "def-nagata-category",
+  "def-weil-pbc-composite-adjunction"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Conjugating an adjunction by two adjoint equivalences gives explicit counit and transpose formulas; conjugation composition comparison is natural in transformations of both functors",
+   "results": "8 hits: CategoryTheory.conjugateEquiv_comp, CategoryTheory.conjugateEquiv_comm, CategoryTheory.conjugateEquiv_comp_assoc, CategoryTheory.conjugateEquiv_counit, CategoryTheory.conjugateEquiv_apply_app, CategoryTheory.conjugateEquiv_symm_comp_assoc, CategoryTheory.conjugateEquiv_symm_comp, CategoryTheory.Adjunction.conjugateEquiv_leftAdjointCompIso_inv",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole statement: Adjunction.comp and comp_counit_app supply the composite adjunction/counit, but the e-induced transpose identity and two-variable composition comparison require additional naturality and triangle-identity calculations; conjugateEquiv is about mates between parallel adjunctions."
+  },
+  {
+   "tool": "grep",
+   "query": "def comp|comp_counit|homEquiv.*symm|counit_naturality",
+   "results": "25 hits: Mathlib/CategoryTheory/Adjunction/AdjointFunctorTheorems.lean, Mathlib/CategoryTheory/Adjunction/AdjointFunctorTheorems.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean [Mathlib/CategoryTheory/Adjunction]",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole statement: Adjunction.comp and comp_counit_app supply the composite adjunction/counit, but the e-induced transpose identity and two-variable composition comparison require additional naturality and triangle-identity calculations; conjugateEquiv is about mates between parallel adjunctions."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp",
+   "results": "12 hits: CategoryTheory.Adjunction.comp, CategoryTheory.Equivalence.trans_toAdjunction, CategoryTheory.Adjunction.comp_homEquiv, CategoryTheory.Adjunction.comp_counit_app, CategoryTheory.Adjunction.comp_unit_app, CategoryTheory.Adjunction.comp_counit_app_assoc, CategoryTheory.Adjunction.comp_unit_app_assoc, CategoryTheory.Adjunction.comp_counit",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole statement: Adjunction.comp and comp_counit_app supply the composite adjunction/counit, but the e-induced transpose identity and two-variable composition comparison require additional naturality and triangle-identity calculations; conjugateEquiv is about mates between parallel adjunctions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The counit of conjugation of an adjunction by adjoint equivalences and the transpose of a transported map agree with the image of the original transpose",
+   "results": "8 hits: CategoryTheory.conjugateEquiv_counit, CategoryTheory.Adjunction.counitAsIsoOfIso, CategoryTheory.Adjunction.toCat_counit_toNatTrans, CategoryTheory.Adjunction.toEquivalence_counitIso_hom_app, CategoryTheory.conjugateEquiv_symm_apply_app, CategoryTheory.Equivalence.toAdjunction_counit, CategoryTheory.conjugateEquiv_apply_app, CategoryTheory.conjugateEquiv_counit_symm",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole statement: Adjunction.comp and comp_counit_app supply the composite adjunction/counit, but the e-induced transpose identity and two-variable composition comparison require additional naturality and triangle-identity calculations; conjugateEquiv is about mates between parallel adjunctions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For equivalences R_i left adjoint L_i with unit u_i and counit e_i, transport F left adjoint G to L_2 F R_1 left adjoint L_1 G R_2, computing its counit, transposes and natural comparison for composition",
+   "results": "8 hits: CategoryTheory.Equivalence.trans_toAdjunction, CategoryTheory.Adjunction.leftAdjointCompIso, CategoryTheory.Adjunction.comp, CategoryTheory.Adjunction.leftAdjointCompIso_hom_app, CategoryTheory.Adjunction.leftAdjointCompIso_hom, CategoryTheory.Equivalence.adjointify_η_ε_assoc, CategoryTheory.Equivalence.adjointifyη, CategoryTheory.Adjunction.leftAdjointCompNatTrans",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole statement: Adjunction.comp and comp_counit_app supply the composite adjunction/counit, but the e-induced transpose identity and two-variable composition comparison require additional naturality and triangle-identity calculations; conjugateEquiv is about mates between parallel adjunctions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-normalized-reconstruction-adjunction-calculus",
+  "date": "2026-10-21",
+  "group": "O3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "from": {
+   "node": "prop-pur-adic-reconstruction-trace-coherence",
+   "place": "sole proof paragraph: “counit of the realized adjunction and its transport” and “coherence statements”; former reconstruction-calculus proof steps 5–7, abstract adjunction/transpose/composition calculations",
+   "via": [
+    "lem-pur-normalized-reconstruction-adjunction-calculus"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

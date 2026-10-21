@@ -20448,3 +20448,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:35 L: merged deliver/NG/lem-fix-site-perfect-scalar-hom (reviewer FIX; first push; new nodes: 2)
 - 06:35 L: merged deliver/NV/lem-pur-etale-kflat-support-comparison (reviewer PASS; first push; new nodes: 0)
 - 06:35 L: merged deliver/Q56/lem-pur-site-comparison-edge-section (reviewer FIX; after a return; new nodes: 2)
+- 06:36 L: merged deliver/O3/lem-pur-normalized-reconstruction-adjunction-calculus (reviewer PASS; after a return; new nodes: 2)
