@@ -22298,3 +22298,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 2026-10-21T11:17:17Z L: superseded stage-1 delivery NJ/lem-pod-stratified-dualizable-bounded at 0fe536fe660cc19164ff6f7457b57a5cf0e42d23; current completion retained; packet archived at refs/superseded/NJ/lem-pod-stratified-dualizable-bounded/0fe536fe660cc19164ff6f7457b57a5cf0e42d23; stale return retired.
 - 11:19 L: merged deliver/NG/def-pur-support-triangle (reviewer PASS; after a return; new nodes: 0)
 - 11:19 L: merged deliver/NI/lem-weil-pbc-augmented-diagram-projection-mate (stage 2; reviewer PASS; parallel immutable checks)
+- 11:20 L: returned deliver/NH/lem-sfb-bounded-bifunctor-devissage (reviewer RETURN: Superseded (A7/B10), and C5/D1 on the new node. The live item lem-sfb-bounded-bifunctor-devissage already has reviewed ()
