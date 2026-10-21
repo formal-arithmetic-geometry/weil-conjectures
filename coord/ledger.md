@@ -23526,3 +23526,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:36 L: merged deliver/Q14/lem-trf-point-transport-cone-comparison-descent (stage 2; reviewer PASS; parallel immutable checks)
 - 19:36 L: merged deliver/NA/lem-sfb-torsion-acyclic-norm-coefficient-test (stage 2; reviewer PASS; parallel immutable checks)
 - 19:36 L: returned deliver/Q10/lem-trf-point-system-transport-descent (reviewer RETURN: L: independent stage-2 immutable head 7023c01703ec: H2/theorem-stmt_dep: the delivery adds lem-weil-point-automorphism-r)
+- 19:36 L: returned deliver/Q18/lem-zl-classical-weil-filtration-heart-transport (reviewer RETURN: L: independent stage-2 immutable head 7824c8832548: H3/H4: ZlClassicalRealization.pullback (l.124) is a free NatIso func)
