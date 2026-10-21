@@ -18,9 +18,93 @@
   "prop-weil-pbc-rlim-functoriality",
   "def-weil-pbc-completed-pullback"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For a tower complex $M$, write $H(M)=\\lim_nJ(M)_n$, taken degreewise. The module-sheaf limit theorem supplies these limits, computed as compatible families of sections. The differential sends $(x_n)_n$ to $(d x_n)_n$; transitions are chain maps, so this remains a compatible family and its differential squares to zero. If $u:M\\to N$ is a tower chain map, set $H(u)((x_n)_n)=(J(u)_n(x_n))_n$. These maps commute with the differential. Functoriality of the fixed $J$ gives $H(1)=1$ and $H(vu)=H(v)H(u)$ componentwise. Thus $H$ is a functor on tower complexes, without requiring exactness of inverse limits.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-limits-sectionwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+    "place": "Agent expansion of the completed-pullback invocation; ordinary limits: Stacks sites-modules.tex, Tag 03DB (lemma-limits-colimits) and Tag 03CO (lemma-limits-colimits-abelian-sheaves), part (2)."
+   }
+  },
+  {
+   "text": "For every complex $C$, put $a_{C,n}=(\\iota_{\\Delta C})_n:C\\to J(\\Delta C)_n$. Since $\\iota_{\\Delta C}$ is a morphism of towers and the transitions of $\\Delta C$ are identities, $t_n a_{C,n+1}=a_{C,n}$. Hence $z_C(x)=(a_{C,n}(x))_n$ is a section of $H(\\Delta C)$ in each degree. It commutes with restriction and is $A_T$-linear. Each $a_{C,n}$ is a chain map, so $d z_C(x)=(d a_{C,n}(x))_n=(a_{C,n}(dx))_n=z_C(dx)$. Its projections are precisely $a_{C,n}$. Any other such chain map agrees on all coordinates, hence equals $z_C$.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-limits-sectionwise",
+    "def-weil-inverse-system"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+    "place": "Agent expansion: factor the compatible component maps of the fixed resolution through the ordinary inverse limit."
+   }
+  },
+  {
+   "text": "Let $f:C\\to D$ be a chain map. Naturality of the stipulated resolution transformation $\\iota$ gives $J(\\Delta f)_n a_{C,n}=a_{D,n}f$ for every $n$. Therefore, writing $\\pi_{D,n}:H(\\Delta D)\\to J(\\Delta D)_n$, one has $\\pi_{D,n}H(\\Delta f)z_C=J(\\Delta f)_n a_{C,n}=a_{D,n}f=\\pi_{D,n}z_Df$. The coordinate description of the limit makes its projections jointly monic, so $H(\\Delta f)z_C=z_Df$. Thus $z$ is a natural transformation on the category of complexes. No additivity of the resolution functor is needed for this calculation.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-limits-sectionwise"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+    "place": "Agent expansion: naturality checked on every resolution projection."
+   }
+  },
+  {
+   "text": "Exactness in the tower category is levelwise. A short exact sequence sent through $\\Delta$ is the same short exact sequence at every level, so $\\Delta$ is exact. The exact-functor factorization theorem therefore gives the natural comparison $Q_{\\operatorname{Tow}}\\Delta\\cong\\Delta_D Q_{\\mathcal A}$. Set $B=Q_{\\mathcal A}H\\Delta$ and $G=\\mathcal L\\Delta_D$. The stipulated localization comparisons for the total derived inverse-limit functor computed by this same $J$ give a natural isomorphism $\\beta:B\\xrightarrow{\\sim}GQ_{\\mathcal A}$, by composing $Q_{\\mathcal A}H\\cong\\mathcal LQ_{\\operatorname{Tow}}$ with the preceding comparison. These are comparisons of functors, including their maps, rather than arbitrary isomorphisms of their object values. In particular $B$ inverts quasi-isomorphisms: for such an $s$, $\\beta_D B(s)=G(Q_{\\mathcal A}(s))\\beta_C$, whose right side is invertible.",
+   "uses": [
+    "lem-weil-tower-category-levelwise-abelian",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "prop-weil-pbc-rlim-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+    "place": "Agent expansion: the fixed derived-localization comparisons; the total derived inverse-limit functor is the one already provided by prop-weil-pbc-rlim-functoriality."
+   }
+  },
+  {
+   "text": "Apply $Q_{\\mathcal A}$ to the natural transformation in Step 3 and then compose with $\\beta$. This gives $\\tau:Q_{\\mathcal A}\\Rightarrow GQ_{\\mathcal A}$ with $\\tau_C=\\beta_C Q_{\\mathcal A}(z_C)$. Both functors invert quasi-isomorphisms, and $Q_{\\mathcal A}$ is localization at precisely that class. Apply clause (2) of the localization universal-property theorem with source $\\mathrm{CoCh}(\\mathcal A)$, target $D(\\mathcal A)$, $F_1=Q_{\\mathcal A}$, $F_2=GQ_{\\mathcal A}$ and descended functors $F_1^{\\prime}=\\mathrm{id}$, $F_2^{\\prime}=G$. It produces the unique natural transformation $\\eta:\\mathrm{id}\\Rightarrow G$ with $\\eta_{Q_{\\mathcal A}C}=\\tau_C$. This proves descent from complexes and covers every derived morphism, including inverses of quasi-isomorphisms, without an assumption that derived morphisms lift to chain maps.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+    "place": "Agent expansion: descent of a natural transformation through localization; the cited localization node supplies the natural-transformation clause (Mathlib Localization.liftNatTrans), not merely factorization of functors."
+   }
+  },
+  {
+   "text": "Naturality of the descended transformation now gives $\\mathcal L\\Delta_D(h)\\eta_C=\\eta_Dh$ for every $h:C\\to D$ in $D(\\mathcal A)$. The constant-tower map in the completed-pullback definition is specified by taking the tower resolution $\\Delta C\\to J(\\Delta C)$ and factoring its compatible maps into the ordinary inverse limit. Step 2 is exactly this factorization, and Step 5 has component $\\beta_CQ_{\\mathcal A}(z_C)$ under the fixed comparisons. Thus it is that specified map, with its naturality now established. Uniqueness in Step 2 concerns the ordinary limit of complexes; no claim that projections determine arbitrary maps into a triangulated homotopy limit is used.",
+   "uses": [
+    "def-weil-pbc-completed-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+    "place": "Agent expansion: identification with the projection-defined constant-tower map in def-weil-pbc-completed-pullback."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-sheaves-limits-sectionwise",
+  "def-weil-inverse-system",
+  "lem-weil-tower-category-levelwise-abelian",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "prop-weil-pbc-rlim-functoriality",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-localization-universal-property",
+  "def-weil-pbc-completed-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+  "place": "Expansion of the constant-tower/derived-limit unit required by the completed-pullback invocation; the blueprint invokes completed pullback but does not prove this auxiliary naturality statement."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,10 +140,45 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app\", \"module\": \"Mathlib/Algebra/Homology/Localization\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] (F : CategoryTheory.Functor C D) {ι : Type u_3} {c : ComplexShape ι}\\n  [inst_2 : CategoryTheory.Preadditive C] [inst_3 : CategoryTheory.Preadditive D]\\n  [inst_4 : CategoryT\", \"doc\": \"For an additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between preadditive categories with homology that preserves homology, the composition of the quotient functor from the category of chain com\"}\n  {\"name\": \"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app_assoc\", \"module\": \"Mathlib/Algebra/Homology/Localization\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] (F : CategoryTheory.Functor C D) {ι : Type u_3} {c : ComplexShape ι}\\n  [inst_2 : CategoryTheory.Preadditive C] [inst_3 : CategoryTheory.Preadditive D]\\n  [inst_4 : CategoryT\", \"doc\": \"Given an additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between preadditive categories with homology that preserves homology, there exists a natural isomorphism between the composition of the de\"}\n  {\"name\": \"HomologicalComplexUpToQuasiIso.homologyFunctorFactors\", \"module\": \"Mathlib/Algebra/Homology/Localization\", \"type\": \"(C : Type u_1) →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    {ι : Type u_2} →\\n      (c : ComplexShape ι) →\\n        [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C] →\\n          [inst_2 : CategoryTheory.CategoryWithHomology C] →\\n            [inst_3 : (HomologicalComplex.quasiIso C c).HasL\", \"doc\": \"For each index $i$, the composition of the localization functor $Q$ (inverting quasi-isomorphisms) with the homology functor on the derived category is naturally isomorphic to the original homology fu\"}\n  {\"name\": \"HomologicalComplexUpToQuasiIso.homologyFunctorFactorsh\", \"module\": \"Mathlib/Algebra/Homology/Localization\", \"type\": \"(C : Type u_1) →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    {ι : Type u_2} →\\n      (c : ComplexShape ι) →\\n        [inst_1 : CategoryTheory.Preadditive C] →\\n          [inst_2 : CategoryTheory.CategoryWithHomology C] →\\n            [inst_3 : (HomologicalComplex.quasiIso C c).HasLocalization]\", \"doc\": \"For each index $i$, the composition of the functor $Qh$ from the homotopy category to the derived category with the $i$-th homology functor on the derived category is naturally isomorphic to the $i$-t\"}\n  {\"name\": \"HomologicalComplex.coneOfHasLimitEval_π_app_f\", \"module\": \"Mathlib/Algebra/Homology/HomologicalComplexLimits\", \"type\": \"∀ {C : Type u_1} {ι : Type u_2} {J : Type u_3} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_3} J] {c : ComplexShape ι}\\n  [inst_2 : CategoryTheory.Limits.HasZeroMorphisms C] (F : CategoryTheory.Functor J (HomologicalComplex C c))\\n  [inst_3 : ∀ (n : ι), Cat\", \"doc\": \"For a functor $ F : \\\\mathcal{J} \\\\to \\\\text{HomologicalComplex}(\\\\mathcal{C}, c) $, the component of the cone's projection at object $ j \\\\in \\\\mathcal{J} $ and index $ x \\\\in \\\\iota $ equals the projection \"}\n  {\"name\": \"DerivedCategory.homologyFunctorFactors\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/HomologySequence\", \"type\": \"(C : Type u) →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] →\\n      [inst_2 : HasDerivedCategory C] →\\n        (n : ℤ) →\\n          DerivedCategory.Q.comp (DerivedCategory.homologyFunctor C n) ≅\\n            HomologicalComplex.homologyFunctor C (ComplexShape.up \", \"doc\": \"For each integer $n$, the composition of the localization functor $Q$ (which inverts quasi-isomorphisms) with the $n$-th homology functor on the derived category is naturally isomorphic to the origina\"}\n  {\"name\": \"DerivedCategory.homologyFunctorFactorsh\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/HomologySequence\", \"type\": \"(C : Type u) →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] →\\n      [inst_2 : HasDerivedCategory C] →\\n        (n : ℤ) →\\n          DerivedCategory.Qh.comp (DerivedCategory.homologyFunctor C n) ≅\\n            HomotopyCategory.homologyFunctor C (ComplexShape.up ℤ\", \"doc\": \"For each integer $n$, the composition of the functor $Qh$ from the homotopy category to the derived category with the $n$-th homology functor on the derived category is naturally isomorphic to the $n$\"}\n  {\"name\": \"CategoryTheory.ProjectiveResolution.isoLeftDerivedToHomotopyCategoryObj_hom_naturality\", \"module\": \"Mathlib/CategoryTheory/Abelian/LeftDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasProjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] {X Y : C} (f : X ⟶ Y) (P : CategoryTheory.Projectiv\", \"doc\": \"Given an additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories, projective resolutions $ P \\\\to X $ and $ Q \\\\to Y $, and a chain map $ \\\\phi : P \\\\to Q $ satisfying $ \\\\phi_0 \\\\ci\"}",
    "date": "2026-10-21",
    "verdict": "no match: generic derived counits, derived-adjunction units, ordinary module completion and bounded-below injective-resolution formulas do not identify this strict ringed-site quotient/resolution construction"
+  },
+  {
+   "tool": "grep",
+   "query": "liftNatTrans|natTrans.*[Ll]ocaliz|constLimAdj",
+   "results": "25 hits, including Localization.liftNatTrans, Construction.natTransExtension, constLimAdj (Limits/HasLimits.lean:593). These provide the ordinary adjunction and general descent, not the complete resolution-defined assertion.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural transformations between functors that invert weak equivalences descend uniquely to localization",
+   "results": "8 hits including CategoryTheory.Localization.natTrans_ext and CategoryTheory.Localization.Construction.natTransExtension. These are general localization results, already covered by the existing DAG leaf.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.liftNatTrans",
+   "results": "10 hits including CategoryTheory.Localization.liftNatTrans and liftNatTrans_app in Mathlib.CategoryTheory.Localization.Predicate; read Predicate.lean:320-339. The existing DAG localization leaf supplies this step.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constant diagram derived inverse limit unit natural transformation via injective resolution and adjunction",
+   "results": "8 hits including CategoryTheory.Functor.toRightDerivedZero and InjectiveResolution.toRightDerivedZero′_naturality in Mathlib/CategoryTheory/Abelian/RightDerived. These concern objectwise nonnegative right derived functors, not this unbounded strict tower construction.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical map from a complex to derived inverse limit of its constant tower defined by a functorial K injective tower resolution is natural after localization",
+   "results": "8 hits including CategoryTheory.Functor.toRightDerivedZero and InjectiveResolution.toRightDerivedZero′_naturality in Mathlib/CategoryTheory/Abelian/RightDerived. These concern objectwise nonnegative right derived functors, not this unbounded strict tower construction.",
+   "date": "2026-10-21",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-cbc-adic-pullback-presentation-transport",
@@ -78,5 +197,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-cbc-constant-derived-limit-resolution-unit",
+  "worker": "stage1",
+  "summary": "Constructed the degreewise limit functor and projection-defined chain map, checked its naturality coordinatewise, and descended it through the existing localization universal-property theorem. Reused the module-sheaf limit theorem and existing total derived inverse-limit and exact-functor comparisons. No statement change, new nodes, Mathlib leaves or Lean edits.",
+  "blueprint": "Realizes the canonical constant-tower/derived-limit map in the completed-pullback invocation of lem-cbc-completed-extension-zero-comparison (via lem-cbc-adic-pullback-presentation-transport); this is the resolution-level naturality needed in the live parent Step 8.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-rlim-functoriality",
+    "why": "Generic total derived inverse-limit functor and its fixed resolution realization; the CBC unit does not replace its construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-pbc-rlim-functoriality"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q28-555d88a58",
+  "group": "Q28",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-555d88a58 (reviewer sub-agent of L); spot-checked: PASS. This is a one-commit split of the item into six steps, with no new nodes. The statement is byte-identical to the live node, the live item is still unsplit, and the item has no repair note and is not on any dropped list. I read every cited statement in full. The specified map is exactly the one prescribed in def-weil-pbc-completed-pullback: take a tower K-injective resolution and factor its components through lim I_n. Steps 1-3 build H = lim J degreewise and the map z_C using the module-limit leaf (Stacks 03DB/03CO), the tower-morphism condition with identity transitions, and naturality of ι. Joint monicity of the projections gives naturality on complexes. Step 4: Δ is exact because exactness is levelwise. β is the composite of the exact-functor comparison with the fixed comparison Q_A H ≅ Rlim Q_Tow for the same J (prop-weil-pbc-rlim-functoriality). Because β is natural, B inverts quasi-isomorphisms. Step 5 applies localization clause (2) with F1 = Q_A, F2 = G Q_A, F1' = id and F2' = G; I checked this against Mathlib liftNatTrans_app. Step 6 reads off the specification. The parent's Step 7 uses exactly this derived-morphism naturality. The coefficient category is Mod(A_T) with completed coefficients, and no η-iso claim is made. Small cases checked: C = 0, an acyclic C, a single-degree C, the identity map and empty T. The cited Stacks tags 079P, 03DB, 03CO and 04VG are verified, and no SGA is cited. No duplicates were found in a grep of all constant-tower nodes; the adjunction-unit nodes use a different construction. There are no cycles. I accept the declared tool use of prop-weil-pbc-rlim-functoriality, from unit sk-thm-properbasechange, as a generic Rlim functor that replaces no CBC route step. Advisory only: tower K-injectivity cites def-pur-kinjective-complex, which is stated for modules on a site, but the item spells the meaning out inline. Review written to review.md; no fixes."
  }
 }
