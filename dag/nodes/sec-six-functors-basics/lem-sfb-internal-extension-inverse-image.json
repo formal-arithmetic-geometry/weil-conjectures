@@ -18,63 +18,67 @@
  ],
  "proof": [
   {
-   "text": "Put $F=g^{-1}$, $G=g_*$. For each $R$-module $M$, [sk-def-sfb-change-of-scalars](2) gives the balancing quotient $q_M:S\\otimes M\\to P_M=\\operatorname{Ext}_{\\varphi}M$ and its induced $S$-action. It also gives $q'_M:FS\\otimes FM\\to Q_M=\\operatorname{Ext}_{F\\varphi}(F_RM)$, with its induced $FS$-action; the inverse-image rings are commutative by [lem-sfb-finite-upper-star-braided]. By [def-sfb-finite-upper-lower-star-adjunction] and [lem-weil-pbc-left-adjoint-preserves-colimits], $F(q_M)$ coequalizes $F(a_M),F(b_M)$ universally. The index is the finite parallel-pair category, so the cited smallness hypothesis holds.",
+   "text": "Write $F=g^{-1}$ and $G=g_*$. The strong monoidal structure [def-sfb-finite-upper-star-monoidal] and monoidal adjunction [lem-sfb-finite-monoidal-adjunction] on [def-sfb-finite-upper-lower-star-adjunction] give the lifted adjunctions $F_A\\dashv H_A$ for $A=R,S$, by [def-sfb-modobj-transport-adjunction], where $H_A=\\operatorname{mapMod}(G)\\,;\\operatorname{Res}_{u_A}$ and $u_A:A\\to GF(A)$ is the adjunction unit. Compose with the extension--restriction adjunctions of [sk-def-sfb-change-of-scalars]. Thus $\\operatorname{Ext}_{\\varphi}\\,;F_S$ is left adjoint to $H_S\\,;\\operatorname{Res}_{\\varphi}$, and $F_R\\,;\\operatorname{Ext}_{F\\varphi}$ is left adjoint to $\\operatorname{Res}_{F\\varphi}\\,;H_R$. The image ring $F(R)$ is commutative by [lem-sfb-finite-upper-star-braided], so its extension--restriction adjunction applies.",
    "uses": [
-    "sk-def-sfb-change-of-scalars",
-    "lem-sfb-finite-upper-star-braided",
+    "def-sfb-finite-upper-star-monoidal",
+    "lem-sfb-finite-monoidal-adjunction",
     "def-sfb-finite-upper-lower-star-adjunction",
-    "lem-weil-pbc-left-adjoint-preserves-colimits"
+    "def-sfb-modobj-transport-adjunction",
+    "sk-def-sfb-change-of-scalars",
+    "lem-sfb-finite-upper-star-braided"
    ],
    "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-extend-to-qlbar-constructible.proof.md",
+    "place": "Final clause: restricting the extended presentation to a stratum and then to a pro-étale cover; inverse image of the balancing coequalizer"
+   }
+  },
+  {
+   "text": "Naturality of the adjunction unit gives $\\varphi\\,;u_S=u_R\\,;G(F\\varphi)$ as morphisms into the twice-transported monoid $GF(S)$. By the composition and congruence isomorphisms for restriction in [sk-def-sfb-change-of-scalars], restriction first along $u_S$ and then along $\\varphi$ is naturally isomorphic to restriction first along $G(F\\varphi)$ and then along $u_R$. In Lean use Mod.comapComp, Mod.comapCongr and this unit-naturality equality, explicitly typed using unitAlgHom to keep the transported monoid structures.",
+   "uses": [
+    "sk-def-sfb-change-of-scalars",
+    "def-sfb-modobj-transport-adjunction"
+   ],
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 0038, lemma-adjoint-exact(1), applied to the balancing coequalizer"
+    "place": "Section Adjoint functors, definition-adjoint: the adjunction unit is natural; restriction acts by precomposing the scalar action"
    }
   },
   {
-   "text": "Apply [lem-sfb-monoidal-balancing-diagrams] to $F$, strong monoidal by [def-sfb-finite-upper-star-monoidal], and to $q_M$. Its tensorator isomorphisms identify both image balancing arrows with $a'_M,b'_M$. Thus $\\widehat q_M=F(q_M)t_{S,M}$ is a coequalizer of the same pair as $q'_M$: any equalizing map can be composed with $t_{S,M}^{-1}$, factored uniquely through $F(q_M)$, then composed back. The lemma's last equation says $\\widehat q_M$ is $FS$-linear for the action transported by [def-sfb-modobj-transport]. The quotient $q'_M$ is linear by [sk-def-sfb-change-of-scalars]. For any $R$-linear $u:M\\to N$, the defining equation $\\operatorname{Ext}_{\\varphi}(u)q_M=q_N(1_S\\otimes u)$ and tensorator naturality [def-sfb-strong-monoidal-functor] give\n\\[\nF(\\operatorname{Ext}_{\\varphi}u)\\widehat q_M=\\widehat q_N(1_{FS}\\otimes F(u)).\n\\]\nThe defining equation for the other extension similarly makes $q'_M$ natural.",
+   "text": "Transport of modules [def-sfb-modobj-transport] commutes with restriction: G.mapModComapIso applied to $F\\varphi$ identifies $\\operatorname{Res}_{F\\varphi}\\,;\\operatorname{mapMod}(G)$ with $\\operatorname{mapMod}(G)\\,;\\operatorname{Res}_{G(F\\varphi)}$. Combine its inverse with step 2, whiskering by the remaining restriction and inserting functor associators. This constructs an isomorphism $e:H_S\\,;\\operatorname{Res}_{\\varphi}\\cong\\operatorname{Res}_{F\\varphi}\\,;H_R$ between the two right adjoints.",
    "uses": [
-    "lem-sfb-monoidal-balancing-diagrams",
-    "def-sfb-finite-upper-star-monoidal",
-    "def-sfb-modobj-transport",
-    "sk-def-sfb-change-of-scalars",
-    "def-sfb-strong-monoidal-functor"
+    "def-sfb-modobj-transport"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-extend-to-qlbar-constructible.proof.md",
     "place": "Final clause: restricting the extended presentation to a stratum and then to a pro-étale cover; inverse image of the balancing coequalizer"
    }
   },
   {
-   "text": "Use [lem-sfb-equivariant-coequalizer-comparison] with $J=\\operatorname{Mod}_R$, $A=FS$, $B_M=FS\\otimes FM$ with first-factor multiplication, $P_M=F_S(\\operatorname{Ext}_{\\varphi}M)$, $Q_M=\\operatorname{Ext}_{F\\varphi}(F_RM)$, and quotient maps $\\widehat q_M,q'_M$. The balancing pairs are natural by the module-map equation and tensor functoriality; their coequalizer and linearity hypotheses were checked above. Tensoring by $FS$ preserves them by [sk-def-sfb-sheaf-tensor](2). The lemma supplies the natural $FS$-linear isomorphism $Q\\cong P$ characterized by $c_Mq'_M=\\widehat q_M$. Invert it to obtain the requested $P\\cong Q$; evaluation at $M$ is the displayed relative-tensor formula.",
-   "uses": [
-    "lem-sfb-equivariant-coequalizer-comparison",
-    "sk-def-sfb-sheaf-tensor"
-   ],
-   "elementary": false,
+   "text": "Transport the second composite adjunction across $e^{-1}$ (Adjunction.ofNatIsoRight). Its right adjoint is now exactly the right adjoint of the first composite adjunction. Adjunction.leftAdjointUniq gives the required natural isomorphism $\\operatorname{Ext}_{\\varphi}\\,;F_S\\cong F_R\\,;\\operatorname{Ext}_{F\\varphi}$, as an isomorphism of module-valued functors. Therefore linearity, invertibility and naturality are already part of the constructed isomorphism; no separate underlying-object comparison is needed. The coefficient rings are the actual $F(R),F(S)$ throughout.",
+   "uses": [],
+   "elementary": true,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-extend-to-qlbar-constructible.proof.md",
-    "place": "Final clause: restricting the extended presentation to a stratum and then to a pro-étale cover; inverse image of the balancing coequalizer"
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Section Adjoint functors, definition-adjoint and lemma-compose-counits; uniqueness follows from the natural Hom bijections and Yoneda (Mathlib Adjunction.leftAdjointUniq)"
    }
   }
  ],
  "proof_deps": [
+  "def-sfb-finite-upper-star-monoidal",
+  "lem-sfb-finite-monoidal-adjunction",
+  "def-sfb-finite-upper-lower-star-adjunction",
+  "def-sfb-modobj-transport-adjunction",
   "sk-def-sfb-change-of-scalars",
   "lem-sfb-finite-upper-star-braided",
-  "def-sfb-finite-upper-lower-star-adjunction",
-  "lem-weil-pbc-left-adjoint-preserves-colimits",
-  "lem-sfb-monoidal-balancing-diagrams",
-  "def-sfb-finite-upper-star-monoidal",
-  "def-sfb-modobj-transport",
-  "def-sfb-strong-monoidal-functor",
-  "lem-sfb-equivariant-coequalizer-comparison",
-  "sk-def-sfb-sheaf-tensor"
+  "def-sfb-modobj-transport"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-extend-to-qlbar-constructible.proof.md",
-  "place": "Final sentence, expanded via strong-monoidal balancing diagrams and equivariant coequalizer comparison; colimit preservation is Stacks Tag 0038"
+  "place": "Final sentence, using the shorter lifted-adjunction argument from the existing module-object transport and extension--restriction adjunctions (F4, 2026-10-21)"
  },
  "mathlib_searches": [
   {
@@ -219,5 +223,15 @@
   "result": "pass",
   "note": "Statement matches the node clause by clause: g arbitrary; R,S arbitrary commutative MonObj on Sheaf(ProEt X, Ab.{u+1}); IsMonHom φ; F = upperStar with recorded monoidal_upperStar/laxBraided_upperStar; mapMod; Mod.extendScalars φ and extendScalars (F.map φ) over the actual F(R),F(S); orientation correct, component at M = object formula. Monoidal instance found (sheafMonoidalCategory) is rfl-equal to Sheaf.monoidalCategory = sfbSheafTensorStructure.monoidal. Nonempty(natural iso) accepted: the node says 'there is a natural isomorphism', not canonical, and the only citer (lem-sfb-extend-to-qlbar-constructible) uses only iso invariance of finite presentation. The same comparison exists only as private helpers (pullbackExtendScalarsIso in BoundedConstructibleExtendScalars, pullExtendIso in TateTwistOneLocalLine), not citable → no H4. Statement record verbatim, docstrings have source, blueprint id and the 5 proof steps, lines ≤87, sorry only. nt_compile --json clean 4.7 s. Advisory: plain import Sheaf.CategoryTheory.SheafTensor is not needed (compiles without it, not in the transitive closure) but harmless as a stmt_dep module; the RingPresheaf import is needed. Stage 3 can reuse the private pullbackExtendScalarsIso construction."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261021T111055-L-4026051",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

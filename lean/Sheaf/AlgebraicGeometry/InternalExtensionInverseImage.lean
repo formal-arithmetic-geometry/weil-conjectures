@@ -7,7 +7,6 @@ module
 
 public import WeilConjectures.CategoryTheory.RingObjects.RingPresheaf
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Monoidal
-import Sheaf.CategoryTheory.SheafTensor
 
 /-!
 # Inverse image commutes with internal extension of scalars
@@ -38,28 +37,18 @@ final clause on restricting extended presentations to strata and pro-étale cove
 (blueprint: lem-sfb-internal-extension-inverse-image)
 
 Proof:
-1. By sk-def-sfb-change-of-scalars, extension is the balancing coequalizer of the
-right R-action on S and the R-action on M, with the induced S-action. Transporting
-rings and modules by def-sfb-modobj-transport gives precisely the balancing diagram
-for the actual inverse-image rings. Commutativity follows from
-lem-sfb-finite-upper-star-braided.
-2. The adjunction def-sfb-finite-upper-lower-star-adjunction identifies maps from
-F of this coequalizer to T with maps from S tensor M to g_* T that equalize the
-balancing pair. Naturality of the adjunction identifies these with maps from
-F(S tensor M) to T equalizing the image pair. Thus F preserves this coequalizer.
-3. The tensorators of def-sfb-finite-upper-star-monoidal identify the image pair
-with the transported balancing pair. The first-arrow identity follows from
-naturality and the transported multiplication; the second follows from the
-associativity coherence in def-sfb-strong-monoidal-functor and the transported
-module action. The two coequalizer universal properties give inverse comparisons.
-4. Both quotient maps respect multiplication on the first F(S) factor. After
-precomposition with F(S) tensor the quotient map, the linearity equation is the
-same on both sides. Tensor preserves this coequalizer by sk-def-sfb-sheaf-tensor,
-so its quotient map is epic and cancels. The inverse comparison is linear too.
-5. For a module morphism M to N, precompose the naturality equation with the
-balancing quotient. The defining formula for extension on morphisms and
-naturality of the tensorator make both sides equal. Cancel the quotient to get
-naturality. Inverting this natural comparison gives the displayed orientation.
+1. Write F = g⁻¹ and G = g_*. The monoidal adjunction F ⊣ G lifts to
+   F.mapMod A ⊣ G.mapMod (F.obj A) ⋙ Mod.comap (unit.app A), for A = R,S.
+   Compose these with the extension--restriction adjunctions along φ and F.map φ.
+2. Naturality of the unit gives φ ≫ unit.app S = unit.app R ≫ G.map (F.map φ).
+   Restriction along these equal composites is naturally isomorphic, by
+   Mod.comapComp and Mod.comapCongr.
+3. G.mapModComapIso identifies transport after restriction along F.map φ with
+   restriction along G.map (F.map φ) after transport. Together with step 2 this
+   identifies the two composite right adjoints.
+4. Transport one composite adjunction along this isomorphism and apply uniqueness
+   of left adjoints. This produces the required natural isomorphism of module-valued
+   functors, with the actual inverse-image rings and the displayed orientation.
 -/
 theorem internal_extension_inverse_image
     {Z X : Scheme.{u}} (g : Z ⟶ X)
@@ -69,6 +58,24 @@ theorem internal_extension_inverse_image
     Nonempty (Mod.extendScalars φ ⋙ (upperStar Ab.{u + 1} g).mapMod S ≅
       (upperStar Ab.{u + 1} g).mapMod R ⋙
         Mod.extendScalars ((upperStar Ab.{u + 1} g).map φ)) := by
-  sorry
+  let F := upperStar Ab.{u + 1} g
+  let G := lowerStar Ab.{u + 1} g
+  let adj := upperStarLowerStarAdjunction Ab.{u + 1} g
+  have sq : φ ≫ adj.unitAlgHom S = adj.unitAlgHom R ≫ G.map (F.map φ) :=
+    adj.unit.naturality φ
+  let e : (G.mapMod (F.obj S) ⋙ Mod.comap (adj.unitAlgHom S)) ⋙ Mod.comap φ ≅
+      Mod.comap (F.map φ) ⋙ (G.mapMod (F.obj R) ⋙ Mod.comap (adj.unitAlgHom R)) :=
+    Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft (G.mapMod (F.obj S))
+        ((Mod.comapComp φ (adj.unitAlgHom S)).symm ≪≫
+          Mod.comapCongr sq ≪≫
+          Mod.comapComp (adj.unitAlgHom R) (G.map (F.map φ))) ≪≫
+      (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight (G.mapModComapIso (F.map φ)).symm
+        (Mod.comap (adj.unitAlgHom R)) ≪≫
+      Functor.associator _ _ _
+  exact ⟨((Mod.extendRestrictAdjunction φ).comp (adj.mapModAdjunction S)).leftAdjointUniq
+    (((adj.mapModAdjunction R).comp (Mod.extendRestrictAdjunction (F.map φ))).ofNatIsoRight
+      e.symm)⟩
 
 end AlgebraicGeometry.ProEtale
