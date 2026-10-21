@@ -19,9 +19,104 @@
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
   "def-weil-proper-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Distinguish the two algebraic-closure coefficient rings: let $C$ be the finite-subextension-valued ring of [sk-def-sfb-qlbar-condensed], and retain $B$ from the item. The inclusions give $A_E\\xrightarrow a C\\xrightarrow c B$. Write $S_W=C_W\\otimes^L_{A_{E,W}}-$ and $J_W=B_W\\otimes^L_{C_W}-$. The canonical balanced associator identifies $J_WS_W$ with $T_W$. All three rings are pulled back from the point, so [lem-sfb-alpha-iso] identifies their geometric inverse images with their source coefficients. Work through the exact monoidal internal/section-module equivalence [lem-pd-module-ringed-topos-derived-comparison]. Then the associators and the normalized scalar push comparisons are those of [lem-pur-ringed-coefficient-projection-cocycle]; they apply to $a,c$ without a flatness hypothesis. Denote the three counit-mate push comparisons by $\\chi_a,\\chi_c,\\chi_{ca}$.",
+   "uses": [
+    "sk-def-sfb-qlbar-condensed",
+    "lem-sfb-alpha-iso",
+    "lem-pd-module-ringed-topos-derived-comparison",
+    "lem-pur-ringed-coefficient-projection-cocycle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3): coefficient rings and canonical maps, agent expansion"
+   }
+  },
+  {
+   "text": "Put $L=S_ZK$. It is bounded constructible by [lem-sfb-extend-to-qlbar-constructible]. Since $f$ is proper between the standing schemes, clause (2) of [det-thm-sfb-proper-base-change-rational], used with coefficient $C$, gives $P=Rf_{*,C}L\\in D^b_c(T,C)$. Clause (1) of the same node, applied to the bounded-below $A_E$-complex $K$, says that the canonical map $\\chi_{a,K}:S_TRf_{*,A_E}K\\to Rf_{*,C}L$ is invertible. This invocation is solely about $C$, not $B$.",
+   "uses": [
+    "lem-sfb-extend-to-qlbar-constructible",
+    "det-thm-sfb-proper-base-change-rational"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3): existing finite-subextension-valued proper comparison"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-constructible-algcl-topology-comparison] at $Z$ and $T$. Thus $J_ZL$ and $J_TP$ are bounded constructible. The schemes are Noetherian because they are finite type over a field [lem-weil-pbc-finite-type-over-noetherian]; the field is Noetherian since its only ideals are zero and itself. Hence [det-sf-comp-continuous-algcl-constructible-tor] gives finite Tor amplitude for $J_ZL$. The bounded-constructible finite-Tor preservation assertion of [det-sf-comp-proper-continuous-algcl], for the actual all-continuous $B$ and the given proper $f$, gives $Q=Rf_{*,B}J_ZL\\in D^b_c(T,B)$. This verifies membership of both endpoints of $\\chi_{c,L}:J_TP\\to Q$ in the full constructible subcategory.",
+   "uses": [
+    "lem-sfb-constructible-algcl-topology-comparison",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "det-sf-comp-continuous-algcl-constructible-tor",
+    "det-sf-comp-proper-continuous-algcl"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3): verify the domains for constructible coefficient comparison"
+   }
+  },
+  {
+   "text": "For $M\\in D^b_c(T,C)$, pullback preserves bounded constructibility by [lem-sfb-dc-upper-star-preserves]. Write $\\sigma_M:f_B^*J_TM\\xrightarrow{\\sim}J_Zf_C^*M$ for the canonical tensor comparison, normalized by [lem-sfb-kflat-scalar-comparison-normalization]. The adjunctions of [sk-def-sfb-module-derived-pushpull] and full faithfulness of $J_T,J_Z$ in [lem-sfb-constructible-algcl-topology-comparison] give bijections\n$$\\operatorname{Hom}_B(J_TM,J_TP)\\cong\\operatorname{Hom}_C(M,P)\\cong\\operatorname{Hom}_C(f_C^*M,L)\\cong\\operatorname{Hom}_B(J_Zf_C^*M,J_ZL)\\cong\\operatorname{Hom}_B(J_TM,Q).$$\nThis composite is precisely postcomposition with $\\chi_{c,L}$. Indeed the first bijection writes an arrow as $J_Tu$. Its image under the middle two bijections is $J_Z(\\varepsilon_L\\circ f_C^*u)$. After precomposition with $\\sigma_M$ it is $J_Z\\varepsilon_L\\circ\\sigma_P\\circ f_B^*J_Tu$, by naturality of $\\sigma$. The adjunct of $J_Z\\varepsilon_L\\circ\\sigma_P$ is the specified $\\chi_{c,L}$, so naturality of adjunction gives $\\chi_{c,L}\\circ J_Tu$. This checks the actual counit mate, rather than a freely chosen isomorphism of its endpoints.",
+   "uses": [
+    "lem-sfb-dc-upper-star-preserves",
+    "lem-sfb-kflat-scalar-comparison-normalization",
+    "sk-def-sfb-module-derived-pushpull",
+    "lem-sfb-constructible-algcl-topology-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3): explicit Hom calculation identifying the canonical comparison"
+   }
+  },
+  {
+   "text": "Essential surjectivity of $J_T$ from [lem-sfb-constructible-algcl-topology-comparison] and step 4 imply that postcomposition with $\\chi_{c,L}$ is bijective on $\\operatorname{Hom}_B(N,-)$ for every bounded constructible $N$. Both endpoints are in that class by step 3. Taking $N=Q$, surjectivity supplies $v:Q\\to J_TP$ with $\\chi_{c,L}v=1_Q$. Taking $N=J_TP$, injectivity and $\\chi_{c,L}(v\\chi_{c,L})=\\chi_{c,L}1_{J_TP}$ give $v\\chi_{c,L}=1_{J_TP}$. Thus $\\chi_{c,L}$ is invertible in the ambient category, whose constructible subcategory is full.",
+   "uses": [
+    "lem-sfb-constructible-algcl-topology-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3): explicit inverse from full faithfulness and essential surjectivity"
+   }
+  },
+  {
+   "text": "The coefficient cocycle of [lem-pur-ringed-coefficient-projection-cocycle] gives\n$$\\chi_{ca,K}\\circ\\tau_T=Rf_{*,B}(\\tau_Z)\\circ\\chi_{c,S_ZK}\\circ J_T(\\chi_{a,K}),$$\nwhere $\\tau_W:J_WS_W\\xrightarrow{\\sim}T_W$ is the balanced associator, evaluated at the required complex. Step 2 proves invertibility of $\\chi_{a,K}$ and steps 3--5 prove invertibility of $\\chi_{c,S_ZK}$. Functors preserve inverses, so every factor on the right, and $\\tau_T$, is invertible. Thus $\\chi_{ca,K}$ is invertible. Its coefficient map is exactly the original $E\\hookrightarrow\\Omega$ map, and its adjunct is exactly the pullback/tensor comparison followed by $T_Z\\varepsilon$ in the item, by the cocycle's definition of $\\chi_{ca}$ and step 1's normalization. Therefore $\\chi_{ca,K}=\\beta_{f,K}$.",
+   "uses": [
+    "lem-pur-ringed-coefficient-projection-cocycle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3): assemble the two changes of coefficients with the specified mate"
+   }
+  }
+ ],
+ "proof_deps": [
+  "sk-def-sfb-qlbar-condensed",
+  "lem-sfb-alpha-iso",
+  "lem-pd-module-ringed-topos-derived-comparison",
+  "lem-pur-ringed-coefficient-projection-cocycle",
+  "lem-sfb-extend-to-qlbar-constructible",
+  "det-thm-sfb-proper-base-change-rational",
+  "lem-sfb-constructible-algcl-topology-comparison",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "det-sf-comp-continuous-algcl-constructible-tor",
+  "det-sf-comp-proper-continuous-algcl",
+  "lem-sfb-dc-upper-star-preserves",
+  "lem-sfb-kflat-scalar-comparison-normalization",
+  "sk-def-sfb-module-derived-pushpull"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3): agent reduction of the all-continuous proper comparison to constructible topology comparison, existing proper finiteness and coefficient mate cocycle; exact topology-comparison reference WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -57,10 +152,38 @@
    "results": "8 hits: AlgebraicGeometry.exists_appTop_π_eq_of_isLimit; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit; AlgebraicGeometry.exists_map_preimage_le_map_preimage; AlgebraicGeometry.exists_map_preimage_eq_map_preimage; AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit; AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType; AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType; AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty",
    "date": "2026-10-21",
    "verdict": "no match: proper algebraic limit lemmas, scalar norms and underived sheaf functors do not establish the derived all-continuous coefficient-change mate"
+  },
+  {
+   "tool": "grep",
+   "query": "(Condensed|PadicAlgCl).*(projectionFormula|proper.*[Cc]oefficient)|(projectionFormula|proper.*[Cc]oefficient).*(Condensed|PadicAlgCl)",
+   "results": "0 hits: none",
+   "date": "2026-10-21",
+   "verdict": "no match: these hits concern presentations of condensed categories, solid/free functors, discrete modules or constructible subsets; none compares the two coefficient topologies on bounded constructible derived modules"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projection formula for proper direct image and extension of condensed coefficient rings",
+   "results": "8 hits: Condensed.profiniteSolidIsPointwiseRightKanExtension; Algebra.PreSubmersivePresentation.ofHasCoeffs_map; Condensed.lanCondensedSet; Condensed.freeForgetAdjunction; CondensedMod.LocallyConstant.adjunction; Condensed.instAB4CondensedMod; CondensedMod.isDiscrete_tfae; Condensed.instIsRightKanExtensionFintypeCatCondensedModProfiniteProfiniteSolidProfiniteSolidCounit",
+   "date": "2026-10-21",
+   "verdict": "no match: these hits concern presentations of condensed categories, solid/free functors, discrete modules or constructible subsets; none compares the two coefficient topologies on bounded constructible derived modules"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper derived pushforward commutes with extension from condensed l adic field coefficients to all continuous algebraic closure coefficients",
+   "results": "8 hits: Condensed.profiniteSolid; SheafOfModules.pushforwardPushforwardAdj; Condensed.instIsRightKanExtensionFintypeCatCondensedModProfiniteProfiniteSolidProfiniteSolidCounit; Condensed.profiniteSolidification; Condensed.profiniteFree; Condensed.profiniteSolidCounit; SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous; SheafOfModules.pushforwardComp_hom_app_val_app",
+   "date": "2026-10-21",
+   "verdict": "no match: these hits concern presentations of condensed categories, solid/free functors, discrete modules or constructible subsets; none compares the two coefficient topologies on bounded constructible derived modules"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Condensed\", \"rightDerived\"",
+   "results": "0 hits: none",
+   "date": "2026-10-21",
+   "verdict": "no match: these hits concern presentations of condensed categories, solid/free functors, discrete modules or constructible subsets; none compares the two coefficient topologies on bounded constructible derived modules"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sfb-continuous-algcl-open-scalar-comparison",
   "by": "worker",
@@ -80,5 +203,74 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-continuous-algcl-proper-scalar-comparison",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Kept the all-continuous coefficient distinct from the finite-subextension ring. Used existing proper finiteness for all-continuous coefficients and the old proper comparison only for the finite-subextension ring. Isolated the coefficient-topology equivalence as one statement-only WANTED node; an explicit Hom-adjunction calculation and inverse construction identify and prove invertibility of the canonical mate, then the coefficient cocycle assembles the original inclusion.",
+  "blueprint": "Paragraph (3) of det-thm-sf-ctf-stability-direct-images.proof.md, proper comparison input to the alteration reduction. Ancestor tool returns None because the inherited created.item chain ends in a Lean module name; retained the exact inherited via chain and prepended this item on its child.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-alpha-iso",
+    "why": "Generic inverse-image coefficient identification for every condensed ring, including B."
+   },
+   {
+    "node": "lem-pd-module-ringed-topos-derived-comparison",
+    "why": "Generic exact monoidal comparison of internal modules with section-ring modules, including the independently derived adjunctions."
+   },
+   {
+    "node": "lem-pur-ringed-coefficient-projection-cocycle",
+    "why": "Generic coefficient-change mate cocycle, without flatness, needed to identify the original E-to-B mate."
+   },
+   {
+    "node": "lem-sfb-extend-to-qlbar-constructible",
+    "why": "Existing constructibility under extension to the finite-subextension-valued ring C, not B."
+   },
+   {
+    "node": "det-thm-sfb-proper-base-change-rational",
+    "why": "Existing finite-subextension-valued proper comparison and proper constructibility, used only on C."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic Noetherian consequence for the standing schemes, required for the all-continuous finite Tor theorem."
+   },
+   {
+    "node": "det-sf-comp-continuous-algcl-constructible-tor",
+    "why": "Existing finite Tor assertion for actual all-continuous bounded constructible inputs."
+   },
+   {
+    "node": "det-sf-comp-proper-continuous-algcl",
+    "why": "Existing proper preservation for actual all-continuous bounded constructible finite-Tor complexes, needed to restrict the right adjoint."
+   },
+   {
+    "node": "lem-sfb-dc-upper-star-preserves",
+    "why": "Generic constructibility under inverse image for arbitrary commutative condensed rings."
+   },
+   {
+    "node": "lem-sfb-kflat-scalar-comparison-normalization",
+    "why": "Generic canonical inverse-image/scalar tensor map and its normalization as a mate, with no flatness assumption."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-alpha-iso",
+  "lem-pd-module-ringed-topos-derived-comparison",
+  "lem-pur-ringed-coefficient-projection-cocycle",
+  "lem-sfb-extend-to-qlbar-constructible",
+  "det-thm-sfb-proper-base-change-rational",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "det-sf-comp-continuous-algcl-constructible-tor",
+  "det-sf-comp-proper-continuous-algcl",
+  "lem-sfb-dc-upper-star-preserves",
+  "lem-sfb-kflat-scalar-comparison-normalization"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NA-dc8353b19",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-dc8353b19 (reviewer sub-agent of L); spot-checked: Read in full: the item (statement unchanged; 6 steps), the new node lem-sfb-constructible-algcl-topology-comparison, every cited statement, and the source main-20261015 sk-thm-sf-ctf-stability-direct-images paragraph (3). Paragraph (3) routes proper direct images through sk-thm-sfb-proper-base-change, and the delivery stays on that route. Steps. Step 1: A_E→C→B; α-iso holds for any condensed ring; the pd comparison is the generic internal/section-module equivalence; the projection cocycle needs no flatness. Step 2: det-thm-sfb-proper-base-change-rational is used only for C, which is the Q̄ of sk-def-sfb-qlbar-condensed. Clause (2) gives P∈D^b_c and clause (1) gives χ_a invertible for bounded K. Step 3: the new node puts J_ZL and J_TP in D^b_c; Z and T are Noetherian; the all-continuous Tor node gives finite Tor amplitude, and det-sf-comp-proper-continuous-algcl gives Q∈Dctf. Step 4: I recomputed the Hom chain; J_Tu goes to J_Zε_L∘σ_P∘f_B^*J_Tu, whose adjunct is χ_{c,L}∘J_Tu, and this χ_c is exactly the cocycle's χ_b. Step 5: essential surjectivity plus the Yoneda argument on the full subcategory gives the two-sided inverse. Step 6: the cocycle identity with (A_E→C, C→B) gives χ_{ca}=β. There is no cycle and no cited node is merged. New node. It is statement-only and self-contained, with four recorded searches; from.node is null, as forced by the ancestor chain. It has no f, so it does not restate the item. It does not duplicate stratified-finite-models (heart only), normal-continuous-algcl-monodromy, continuous-qbar-constructible-generators, the E→C presentation/triangulation nodes or the two-colimit node. Edge cases checked: empty X; an algebraically closed point, where (B/C)(*)=0; B/C is uniquely ℓ-divisible because O_C/ℓ^n=O_B/ℓ^n; Hom and Ext^1 over an arbitrary field agree by a Baire argument (compact image in Ω, a countable union of closed finite subextensions). Higher arithmetic Ext is the WANTED content; I found no counterexample, and the node agrees with the accepted norm-topology nodes (NK a7a07614, ND adcf6833). Tool uses: all 10 are generic and accepted. Batch-5 flags: lem-pd-module-ringed-topos-derived-comparison is the module/section foundation, not Poincaré duality. The closures of the rational proper-base-change node and of det-sf-comp-proper-continuous-algcl reach only foundational pd-section, pod-lattice, trf point-system/inverse-image and poincare-twist nodes. kflat-normalization reaches only lem-trf-geometric-inverse-image-exact. None of these is a step of the trace formula or of Poincaré duality, so all are accepted. Minor: the new node lacks a lean_audit field (cosmetic). No changes made."
  }
 }
