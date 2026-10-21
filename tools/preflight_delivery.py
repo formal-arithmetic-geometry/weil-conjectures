@@ -343,6 +343,21 @@ def main() -> int:
             f(f"{p}: file outside the item's files (allowed: the item's node, its new nodes, dag/units/{unit}.json realized fields, {report})")
     if commits and item_path not in files:
         f("the item's node file is unchanged")
+    # 2026-10-21 (the human): a node sent back for a finer split (repair note "re-split ... 2026-10-21") is answered only
+    # when its proof in words is at most 3000 characters and the delivery adds at least one new node
+    try:
+        _rn = json.loads((ROOT / "coord" / "repair-notes" / f"{item}.json").read_text())
+    except (OSError, ValueError):
+        _rn = {}
+    if _rn.get("state") == "released" and "2026-10-21" in str(_rn.get("note", "")) and "re-split" in str(_rn.get("note", "")):
+        _d = load_at("HEAD", item_path) if exists_at("HEAD", item_path) else {}
+        _p = _d.get("proof")
+        _L = sum(len(x.get("text", "")) if isinstance(x, dict) else len(str(x)) for x in _p) if isinstance(_p, list) else len(_p or "")
+        if _L > 3000:
+            f(f"re-split (the human, 2026-10-21): the item's proof in words is still {_L} characters; split further until it "
+              "is at most 3000 characters (each non-elementary argument a new statement-only node the step cites)")
+        if not new_paths:
+            f("re-split (the human, 2026-10-21): the delivery adds no new node; the finer split needs new nodes")
 
     # 3. the report
     if not exists_at("HEAD", report):

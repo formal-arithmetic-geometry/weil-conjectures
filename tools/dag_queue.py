@@ -315,6 +315,9 @@ def stage1_completed(d) -> bool:
     false, tools/claim.py node_finished (stage 1) refuses claims and tools/retire_stage1.py archives deliveries exactly
     when it is true. unfolded() (a Mathlib leaf; closed upstream, including an attached closed_part; or a reviewed split
     with no owed repair note) or a node merged into another."""
+    # 2026-10-21 (the human): a released stage-1 repair note (a re-split) reopens the node whatever else closed it
+    if d is not None and stage1_repair_owed(str(d.get("id") or "")):
+        return False
     return unfolded(d) or str(field(d, "status") or "").lower() == "merged"
 
 
