@@ -21402,3 +21402,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:52 L: merged deliver/Q129/lem-trf-smooth-section-centred-coordinates (reviewer FIX; first push; new nodes: 0)
 - 08:52 L: merged deliver/Q55/lem-tw-ordinary-pullback-stratified-models (reviewer FIX; first push; new nodes: 0)
 - 08:52 L: merged deliver/Q107/lem-pur-sequence-adjoint-resolution-shifts (reviewer PASS; first push; new nodes: 0)
+- 08:52 L: merged deliver/Q126/lem-trf-point-system-power-roos-coherence (reviewer PASS; first push; new nodes: 0); claim not held by Q126: not your claim
