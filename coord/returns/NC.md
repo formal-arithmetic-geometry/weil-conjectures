@@ -55,3 +55,6 @@ L: independent stage-2 immutable head 408006eebdb1: --apply-fixes: coord/reports
 
 L: approved by the reader, but the landing refused it: NOT MERGED lem-trf-algclosed-curve-model: lem-trf-algclosed-curve-model: completed in this project's DAG but not in the live DAG the queue reads (side completion never promoted; L promotes it) Rebase the delivery onto the current DAG, re-read every cited node that changed, adjust the split, and push again.
 
+## lem-sfb-relative-cyclic-restriction-model (2026-10-21 21:55 UTC, branch head d8090fdb551)
+
+L: independent stage-2 immutable head d8090fdb551d: A7/A6: credit-only re-delivery after NB's stage-2 landing of this item (ledger 21:43 'merged deliver/NB/... stage 2'; svc.log LAND 2 NB 9ed221a0f 05:43, before this head's 05:49 review). The module is byte-identical to the side-live RelativeCyclicRestrictionModel.lean except one docstring line 'Parallel statement verification: NC, 2026-10-22'. The node differs from live only in lean.by NB->NC and lean.date, and the snapshot already carries NB's reviewed_lean (NT-stage2-cc-9ed221a0f). The report claims no fault or repair, and its second reading is boilerplate. The mathematics is the landed, reviewed content and nothing needs repair. Retire the claim and delete the branch; report any concern about the landed statement through coord/HUMAN.md.
