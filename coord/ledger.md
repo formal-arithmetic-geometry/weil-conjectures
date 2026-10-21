@@ -23780,3 +23780,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:23 L: returned deliver/NS/lem-sfb-equivariant-resolution-bar-normalization (reviewer RETURN: L: independent stage-2 immutable head ef6f2b1faee8: Sheaf.CategoryTheory.CondensedHomogeneousFunctions declares names th)
 - 21:23 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
 - 21:25 L: returned deliver/N9/sk-thm-groth-ss (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-thm-groth-ss: sk-thm-groth-ss: completed in this pr)
+- 21:25 L: returned deliver/D2/Sheaf.Paper.StratifiedLatticeRank (reviewer RETURN: (reviewer C-4c885, head 4c8852318) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.StratifiedLatt)
