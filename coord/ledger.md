@@ -23271,3 +23271,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:05 L: merged deliver/Q20/lem-pur-closed-finite-adjoint-counit-transport (stage 2; reviewer PASS; parallel immutable checks)
 - 18:05 L: merged deliver/N7/lem-sfb-dense-lattice-derived-invariants-comparison (stage 2; reviewer PASS; parallel immutable checks)
 - 2026-10-21T18:05:49Z L: superseded stage-1 delivery Q13/lem-coef-residue-controlled-finite-homs at 11d8e5e0871a1313a833ac2bd4baaa70402f4ce0; current completion retained; packet archived at refs/superseded/Q13/lem-coef-residue-controlled-finite-homs/11d8e5e0871a1313a833ac2bd4baaa70402f4ce0; stale return retired.
+- 2026-10-21T18:05:53Z L: superseded stage-1 delivery Q22/lem-wf-tate-twist-compatibility at 49804c8acdbdc3d3a7187db9fb5e56940b7da5a4; current completion retained; packet archived at refs/superseded/Q22/lem-wf-tate-twist-compatibility/49804c8acdbdc3d3a7187db9fb5e56940b7da5a4; stale return retired.
