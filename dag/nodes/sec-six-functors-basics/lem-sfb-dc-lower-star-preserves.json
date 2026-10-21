@@ -35,193 +35,95 @@
  ],
  "proof": [
   {
-   "text": "The setting supplies separated finite-type $k$-schemes, with $\\ell$ invertible in $k$. They are Noetherian by [lem-weil-pbc-finite-type-over-noetherian] applied to $\\operatorname{Spec}k$ (a field is Noetherian), and finite-dimensional by [lem-kun-dimension-finite-type]. They are qcqs by [lem-weil-pbc-qcqs-over-affine], and $f$ is qcqs by [lem-weil-pbc-qcqs-morphism-permanence](1). Fix a finite $E/\\mathbf Q_\\ell$, put $A=\\mathcal O_E$, choose a uniformizer $\\varpi$, and put $P_n=A/\\varpi^n$. By [lem-weil-l-adic-extension-integers-dvr], $A$ is a DVR with finite residue field. In particular $A$ is Noetherian: every ideal is principal. Since $|\\ell|_E=\\ell^{-1}<1$, clause (5) of that DVR statement writes $\\ell=u\\varpi^e$ with $e>0$ and $u\\in A^\\times$. Thus a sufficiently large power of $\\ell$ kills $P_n$. Each $P_n$ is finite by [lem-weil-valued-dvr-finite-quotients]. When $E$ is given abstractly, as a finite normed extension of $\\mathbf Q_\\ell$ whose closed unit ball $\\{x\\in E:\\|x\\|\\le1\\}$ is the listed $\\mathcal O_E$ (or for $\\underline E$ with $E$ such a field), we first reduce to a subfield of $\\Qlb$. A finite extension is algebraic, so [lem-weil-pbc-algebraic-extension-embeds-algebraically-closed] gives a $\\mathbf Q_\\ell$-embedding $\\sigma\\colon E\\to\\Qlb$, with image a finite subextension $E'$. The norm of $E$ is multiplicative (a normed field) and restricts to $|\\cdot|_\\ell$ on $\\mathbf Q_\\ell$ (normed algebra: $\\|c\\cdot1\\|=|c|_\\ell$); so does $x\\mapsto|\\sigma(x)|$, and the uniqueness in [lem-weil-l-adic-extension-absolute-value] makes them equal. Thus $\\sigma\\colon E\\to E'$ is an isometric ring isomorphism, a homeomorphism carrying the closed unit ball onto $\\mathcal O_{E'}$. By the functoriality of $T\\mapsto\\underline T$ in [sk-def-sfb-condensed-ring], $\\sigma$ and $\\sigma^{-1}$ give mutually inverse isomorphisms of condensed rings $\\underline{\\mathcal O}_E\\cong\\underline{\\mathcal O}_{E'}$ and $\\underline E\\cong\\underline{E'}$. Their pullbacks along $p_T$ are ring-sheaf isomorphisms natural in $T$, hence compatible with the coefficient maps of every $f$; scalar transport along them is an isomorphism of module categories commuting with the pushforward and pullback of [sk-def-sfb-module-derived-pushpull] and their derived functors, and it carries finite presentations to finite presentations, so it preserves bounded constructibility. We may therefore assume $E\\subseteq\\Qlb$. In either form the DVR statement applies, since its only hypothesis is an absolute value on $E$ extending $|\\cdot|_\\ell$. Thus $0\\to A\\xrightarrow{\\varpi^n}A\\to P_n\\to0$ is a finite free resolution, for every $n\\ge1$; this is the perfectness needed below. The coefficient identifications [sk-prop-sfb-qlbar-colimit-x] identify the pulled-back integral ring with $A_T=\\varprojlim_n(P_n)_T$ for $T=X,Y$. Its inverse-image identifications are [sk-prop-sfb-cartesian-coefficients](1), so the ordinary ringed-topos direct image for $A_T$ is the functor in the item.",
+   "text": "Finite type over the field makes $X,Y$ Noetherian and finite-dimensional; separated finite type makes them qcqs, and qcqs permanence makes $f$ qcqs. The normed-coefficient realization identifies abstract $E$ and its actual closed unit ball with embedded coefficients, preserves bounded constructibility both ways, and commutes with $Rf_*$. Thus assume $E\\subseteq\\Qlb$.",
    "uses": [
     "sk-def-sfb-dc-setting",
     "lem-weil-pbc-finite-type-over-noetherian",
     "lem-kun-dimension-finite-type",
     "lem-weil-pbc-qcqs-over-affine",
     "lem-weil-pbc-qcqs-morphism-permanence",
-    "lem-weil-l-adic-extension-integers-dvr",
-    "sk-prop-sfb-qlbar-colimit-x",
-    "sk-prop-sfb-cartesian-coefficients",
-    "sk-def-sfb-module-derived-pushpull",
-    "lem-weil-valued-dvr-finite-quotients",
-    "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed",
-    "lem-weil-l-adic-extension-absolute-value",
-    "sk-def-sfb-condensed-ring"
+    "lem-sfb-normed-coefficient-realization"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "§6.5 opening paragraph; §6.8 Definition 6.8.1 and Remark 6.8.15"
+    "place": "§6.8 scheme and coefficient hypotheses"
    }
   },
   {
-   "text": "Suppose first $K$ is bounded constructible over $A_X$. Its cohomology sheaves are constructible in the ring-object sense used by [sk-def-sfb-bounded-constructible]: on the strata of a finite stratification they are pro-étale locally finitely presented over $A_X$, with matrix entries arbitrary sections of $A_X$. Since $X$ is Noetherian (step 1) and $A_X=p_X^*\\underline{\\mathcal O_E}$ for the valuation topology, the implication (i)$\\Rightarrow$(ii) of [lem-sfb-integral-lfp-constant-model-comparison] gives, after changing the stratification, finite constant local models $A_V\\otimes_AP$ with $P$ finitely presented over $A$ [sk-def-sfb-constructible]. So condition (iii) applies. The characterization [lem-weil-pbc-integral-stratified-perfect-characterization] identifies this bounded-constructible object with the derived-complete integral category [def-weil-derived-complete-integral-detailed], and its condition (i) supplies compatible etale-origin witnesses for the reductions. Thus $K$ is derived $\\varpi$-complete, each $K_n=K\\otimes^L_{A_X}(P_n)_X$ has bounded constructible classical cohomology and an etale-origin representative, and all $K_n$ have cohomology in one interval $[a,b]$. This supplies completeness and the uniform reduction bounds from a theorem; they are not added to the hypotheses on $K$.",
+   "text": "For $A=\\mathcal O_E$, the completion bridge puts $K$ in the derived-complete integral category with compatible étale reductions in one interval. The ambient-tower comparison identifies the prescribed $M=Rf_*K$ and all its coefficient-linear reductions with the integral direct-image tower. Integral finiteness makes this tower limit derived complete with constructible reductions in one interval $[a,b+N]$, with $N$ independent of $n$. The reverse completion bridge on $Y$ gives bounded constructibility of $M$.",
    "uses": [
-    "lem-weil-pbc-integral-stratified-perfect-characterization",
-    "def-weil-derived-complete-integral-detailed",
-    "sk-def-sfb-constructible",
-    "lem-sfb-integral-lfp-constant-model-comparison",
-    "sk-def-sfb-bounded-constructible"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Definition 6.5.1; Proposition 6.6.11; Proposition 6.8.11(3)"
-   }
-  },
-  {
-   "text": "Set $M=Rf_*K$ in the ordinary, uncompleted $A_Y$-module derived category. By [prop-weil-pbc-direct-image-limits], $M$ is derived complete and the limit comparison identifies it with $R\\varprojlim_n\\operatorname{Res}_n Rf_{*,n}K_n$. The finite-level comparison is also explicit: [lemma-weil-pbc-perfect-projection-formula], applied to the finite free resolution of $P_n$ from step 1, gives $M\\otimes^L_{A_Y}(P_n)_Y\\simeq Rf_{*,n}K_n$, naturally in $n$. Restriction of scalars along $A_T\\to(P_n)_T$ in this formula is compatible with derived direct image by [lem-weil-pbc-ring-sheaf-change-adjunction], whose $d$ identifies the two composites of restriction and direct image. Thus the right side really is the direct image in the finite coefficient category, not merely an equality after forgetting the module action.",
-   "uses": [
-    "prop-weil-pbc-direct-image-limits",
-    "lemma-weil-pbc-perfect-projection-formula",
-    "lem-weil-pbc-ring-sheaf-change-adjunction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.5.9(2),(3); also Stacks Tag 099N (lemma-pushforward-Noetherian-case), Tag 0944 (lemma-projection-formula)"
-   }
-  },
-  {
-   "text": "For every $n$, choose an étale-origin representative $L_n$ of $K_n$ as furnished by step 2. The comparison [prop-weil-pbc-comparison-direct-image] gives $Rf_{*,n}K_n\\simeq\\nu_Y^*Rf_{\\mathrm{et},*}L_n$, since $f$ is qcqs and $L_n$ is bounded below. Each $P_n$ is finite by [lem-weil-valued-dvr-finite-quotients] and is killed by a power of $\\ell$, which is invertible on $k$. Hence [thm-dg-finite-type-constructibility] applies to $L_n$ and makes this output bounded constructible. For the bound independent of $n$, use the more precise bound in [lem-sf-integral-direct-image-constructible]: applied to the integral object of step 2, it puts every $Rf_{*,n}K_n$ in $[a,b+N]$ for one $N$ depending on $f$, not $n$. Its integral direct image is the tower limit already identified with $M$ in step 3. We use no claim that $k$ itself has finite absolute cohomological dimension and no algebraic-closedness assumption.",
-   "uses": [
-    "prop-weil-pbc-comparison-direct-image",
-    "lem-weil-valued-dvr-finite-quotients",
-    "thm-dg-finite-type-constructibility",
+    "lem-sfb-integral-constructible-completion-bridge",
+    "lem-sfb-integral-ambient-tower-comparison",
     "lem-sf-integral-direct-image-constructible"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 5.4.3; Theorem 6.7.1; proof of Lemma 6.7.2; Stacks Tag 09A6 (lemma-morphism-comparison)"
+    "place": "Lemma 6.5.9; Lemma 6.7.2; Proposition 6.8.11(3)"
    }
   },
   {
-   "text": "Steps 3 and 4 say exactly that $M$ is in [def-weil-derived-complete-integral-detailed]: it is derived complete and its reductions are bounded constructible with one common interval. Apply [lem-weil-pbc-integral-stratified-perfect-characterization] on $Y$ in the reverse direction, using its explicit clause identifying that category with condition (iii). The result is bounded cohomology with stratified finite constant local models over $A_Y$. By (ii)$\\Rightarrow$(i) of [lem-sfb-integral-lfp-constant-model-comparison] ($Y$ is Noetherian) each cohomology sheaf is constructible in the ring-object sense, which is bounded constructibility as defined in [sk-def-sfb-bounded-constructible]. This proves the integral case for the ambient $Rf_*$.",
-   "uses": [
-    "def-weil-derived-complete-integral-detailed",
-    "lem-weil-pbc-integral-stratified-perfect-characterization",
-    "sk-def-sfb-bounded-constructible",
-    "lem-sfb-integral-lfp-constant-model-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.8.11(3), applied after Lemma 6.7.2"
-   }
-  },
-  {
-   "text": "For $E$-coefficients, [def-sfb-rationalization-equivalence] identifies the bounded constructible $E$-category with the rationalization of the integral category, and identifies the composite with its localization functor with $E_X\\otimes^L_{A_X}-$. Thus every $K\\in D_{\\mathrm{cons}}(X,E)$ has a representative $K_0\\in D_{\\mathrm{cons}}(X,A)$ with $K\\simeq E_X\\otimes^L_{A_X}K_0$; rationalization here is a Verdier quotient, whose objects are the original objects, not a subsequent idempotent completion. By [det-prop-sfb-qlbar-colimit-x-invert-ell], $E_X=A_X[1/\\ell]$ is flat, and this extension is the filtered colimit of $K_0\\xrightarrow{\\ell}K_0\\to\\cdots$, a diagram with the same lower cohomological bound. Apply [lem-weil-pbc-condensed-qcqs-pushforward-continuity] to this diagram in $A_X$-modules. It gives, in every cohomological degree, the canonical isomorphism $\\varinjlim_m Rf_*K_0\\xrightarrow{\\sim} Rf_*(\\varinjlim_m K_0)$, with the transition maps multiplication by $\\ell$. The restriction/direct-image comparison and reflection of isomorphisms in [lem-weil-pbc-ring-sheaf-change-adjunction] turn this into the $E_Y$-linear isomorphism $Rf_*(E_X\\otimes^L K_0)\\simeq E_Y\\otimes^L Rf_*K_0$. The integral case makes $Rf_*K_0$ bounded constructible, and [lem-sfb-extend-scalars-bounded-constructible] makes its extension bounded constructible. This proves the $E$ case.",
+   "text": "For $E$, rationalization gives $K\\cong E_X\\otimes^LK_0$ for integral bounded constructible $K_0$: the Verdier quotient retains the original objects. Localization/direct-image comparison gives $Rf_*K\\cong E_Y\\otimes^LRf_*K_0$. Step 2 and scalar-extension stability prove this case.",
    "uses": [
     "def-sfb-rationalization-equivalence",
     "sk-def-sfb-rationalization",
-    "det-prop-sfb-qlbar-colimit-x-invert-ell",
-    "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
-    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "lem-sfb-localized-direct-image-comparison",
     "lem-sfb-extend-scalars-bounded-constructible"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Lemma 5.3(1); Bhatt–Scholze Proposition 6.8.14(2), Remark 6.8.15"
-   }
-  },
-  {
-   "text": "For later passage to $\\overline{\\mathbf Q}_\\ell$, check the coefficient comparison for every finite $F/E$. By [sk-prop-sfb-cartesian-coefficients](2), choose a finite free presentation $F_Y\\simeq E_Y^{\\oplus r}$. Pull this presentation back along $f^{-1}$; part (1) of the same node identifies its rings with $F_X$ and $E_X$, giving $F_X\\simeq E_X^{\\oplus r}$ with compatible bases. Scalar extension is exact by [lem-sfb-subfield-flat]. After restriction to $E_T$, extension sends a complex $C$ to a finite direct sum $C^{\\oplus r}$. The functor $Rf_*$ is additive and triangulated by [lem-pc-right-derived-functor-triangulated], hence commutes with this finite sum. On every basis inclusion, the canonical coefficient-change map is the identity comparison $Rf_*C\\to Rf_*C$ by the unit-counit identities. It is therefore the finite-sum isomorphism. By [lem-weil-pbc-ring-sheaf-change-adjunction], restriction commutes with direct image and reflects isomorphisms. Consequently $F_Y\\otimes^L_{E_Y}Rf_*C\\xrightarrow{\\sim}Rf_*(F_X\\otimes^L_{E_X}C)$; the maps are canonical and thus compatible with $F\\subset F'$.",
-   "uses": [
-    "sk-prop-sfb-cartesian-coefficients",
-    "lem-sfb-subfield-flat",
-    "lem-pc-right-derived-functor-triangulated",
-    "lem-weil-pbc-ring-sheaf-change-adjunction"
-   ],
-   "elementary": false,
-   "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.8.2 and Remark 6.8.15; finite free coefficient-change calculation"
+    "place": "Proposition 6.8.14(2); Remark 6.8.15"
    }
   },
   {
-   "text": "Now let $K\\in D_{\\mathrm{cons}}(X,\\overline{\\mathbf Q}_\\ell)$. Part (3) of [sk-thm-sfb-qlbar-two-colimit] supplies a finite $E$ and bounded constructible $C\\in D(X,E)$ with $K\\simeq\\QbarX\\otimes^L_{E_X}C$. Flatness [lem-sfb-qlbar-flat] allows the derived extension to be computed termwise. The colimit formula [sk-prop-sfb-qlbar-colimit-x] expresses this extension as $\\varinjlim_{F\\supset E}(F_X\\otimes_{E_X}C)$ over a small skeleton of finite subextensions. Every term has the same lower bound as $C$, by [lem-sfb-subfield-flat]. Apply [lem-weil-pbc-condensed-qcqs-pushforward-continuity] with fixed coefficients $E_X$ to this diagram and use the compatible comparisons from step 7. It yields $Rf_*K\\simeq\\overline{\\mathbf Q}_{\\ell,Y}\\otimes^L_{E_Y}Rf_*C$, first after restriction to $E_Y$ and then in the algebraic-closure coefficient category by [lem-weil-pbc-ring-sheaf-change-adjunction]. The $E$ case makes $Rf_*C$ bounded constructible. Finally [lem-sfb-extend-to-qlbar-constructible] says exactly that its derived extension to $\\overline{\\mathbf Q}_{\\ell,Y}$ is bounded constructible. This proves the last coefficient case.",
+   "text": "For $\\Qlb$, finite-stage descent gives $K\\cong\\QbarX\\otimes^L_{E_X}C$ with $C$ bounded constructible over finite $E$. The algebraic-closure/direct-image comparison identifies its image with $\\overline{\\mathbf Q}_{\\ell,Y}\\otimes^LRf_*C$. Step 3 and extension stability finish this case.",
    "uses": [
     "sk-thm-sfb-qlbar-two-colimit",
-    "lem-sfb-qlbar-flat",
-    "sk-prop-sfb-qlbar-colimit-x",
-    "lem-sfb-subfield-flat",
-    "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
-    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "lem-sfb-qlbar-direct-image-comparison",
     "lem-sfb-extend-to-qlbar-constructible"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Lemma 5.3(1); Bhatt–Scholze Proposition 6.8.14 and Remark 6.8.15"
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14; Remark 6.8.15"
    }
   },
   {
-   "text": "Finally suppose $\\Lambda=\\underline T$ for a finite discrete commutative ring $T$ with $\\ell^nT=0$. The ring $T$ is Noetherian, being finite, and is annihilated by $\\ell^n$, which is invertible in $k$ (for $n=0$, $T=0$ and every module is zero). For $Z=X,Y$ use the encoding equivalence $E_Z$ of [def-weil-pbc-common-finite-discrete-encoding] with $B=T$, from ordinary module sheaves over the constant ring $T_Z$ to module objects over $T^c_Z=p_Z^*\\underline T$. It is exact, and it sends the regular module $T_Z$ to the regular module $T^c_Z$, because it transports scalars along the ring isomorphism. Put $K'=E_X^{-1}K$ termwise. By [lem-weil-pbc-finite-discrete-constructible-local-piece], every cohomology sheaf of $K'$ is finite locally constant on the strata of a finite stratification, because its image under $E_X$ is locally finitely presented there. So $K'$ is bounded with constructible cohomology in the sense of [sk-thm-pe-constructible-comparison]. Since $X$ is qcqs, that comparison gives $L\\in D^b_c(X_{\\mathrm{et}},T)$ with $K'\\simeq\\nu_X^*L$. Next, [prop-weil-pbc-comparison-direct-image] gives $Rf_{\\mathrm{proét},*}K'\\simeq\\nu_Y^*Rf_{\\mathrm{et},*}L$. By [thm-dg-finite-type-constructibility], applied to the finite ring $T$ and the integer $\\ell^n$ invertible in $k$, $Rf_{\\mathrm{et},*}L$ is bounded constructible. Its cohomology sheaves have finite partitions on each member of a finite affine cover of the Noetherian scheme $Y$, and [lem-weil-pbc-etale-stratification-local-gluing-core] refines them to one finite stratification of $Y$. On each stratum the restriction is locally the constant sheaf of a finite $T$-module. By [lem-weil-pbc-finite-discrete-coefficient-direct-image-conjugation] ($f$ is qcqs by step 1, and $K'$ is bounded below), $Rf_*K$ in module objects over $T^c_Y$ is isomorphic to $E_Y(Rf_{\\mathrm{proét},*}K')\\simeq E_Y\\nu_Y^*Rf_{\\mathrm{et},*}L$. By [lem-weil-pbc-finite-discrete-derived-coefficient-data], $E\\circ\\nu^*$ commutes with restriction to strata and covers. Suppose a sheaf is constant with finite value $P$ on such a piece $V$. Write $P=\\operatorname{coker}(T^m\\to T^n)$, which is possible since $T$ is Noetherian. Exactness of $E_V$ and $E_V(T_V)\\cong T^c_V$ make its image a cokernel of a map $(T^c_V)^m\\to(T^c_V)^n$, so it is finitely presented. Hence $Rf_*K$ is bounded constructible over $T^c_Y$ as in [sk-def-sfb-bounded-constructible]. The coefficient action is the prescribed one because [sk-prop-sfb-cartesian-coefficients](1) identifies $f^{-1}T^c_Y$ with $T^c_X$.",
+   "text": "For finite discrete $T$ killed by $\\ell^n$, the finite-discrete model lemma gives $K\\cong E_X\\nu_X^*L$. Its derived coefficient comparison identifies $Rf_*K\\cong E_Y\\nu_Y^*Rf_{\\mathrm{et},*}L$. Finite-coefficient finiteness applies since $\\ell^n$ is invertible in $k$; the reverse model implication gives bounded constructibility. If $n=0$, $T=0$ and all modules vanish.",
    "uses": [
-    "def-weil-pbc-common-finite-discrete-encoding",
-    "lem-weil-pbc-finite-discrete-constructible-local-piece",
-    "sk-thm-pe-constructible-comparison",
-    "prop-weil-pbc-comparison-direct-image",
-    "thm-dg-finite-type-constructibility",
-    "lem-weil-pbc-etale-stratification-local-gluing-core",
-    "lem-weil-pbc-finite-discrete-coefficient-direct-image-conjugation",
+    "lem-sfb-finite-discrete-constructible-model",
     "lem-weil-pbc-finite-discrete-derived-coefficient-data",
-    "sk-def-sfb-bounded-constructible",
-    "sk-prop-sfb-cartesian-coefficients"
+    "thm-dg-finite-type-constructibility"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "§6.8; Stacks Tags 09AI and 09A6"
+    "place": "§5.4 comparison; §6.7 finite-coefficient finiteness"
    }
   }
  ],
  "proof_deps": [
-  "sk-def-sfb-dc-setting",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-kun-dimension-finite-type",
-  "lem-weil-pbc-qcqs-over-affine",
-  "lem-weil-pbc-qcqs-morphism-permanence",
-  "lem-weil-l-adic-extension-integers-dvr",
-  "sk-prop-sfb-qlbar-colimit-x",
-  "sk-prop-sfb-cartesian-coefficients",
-  "sk-def-sfb-module-derived-pushpull",
-  "lem-weil-valued-dvr-finite-quotients",
-  "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed",
-  "lem-weil-l-adic-extension-absolute-value",
-  "sk-def-sfb-condensed-ring",
-  "lem-weil-pbc-integral-stratified-perfect-characterization",
-  "def-weil-derived-complete-integral-detailed",
-  "sk-def-sfb-constructible",
-  "lem-sfb-integral-lfp-constant-model-comparison",
-  "sk-def-sfb-bounded-constructible",
-  "prop-weil-pbc-direct-image-limits",
-  "lemma-weil-pbc-perfect-projection-formula",
-  "lem-weil-pbc-ring-sheaf-change-adjunction",
-  "prop-weil-pbc-comparison-direct-image",
-  "thm-dg-finite-type-constructibility",
-  "lem-sf-integral-direct-image-constructible",
   "def-sfb-rationalization-equivalence",
-  "sk-def-sfb-rationalization",
-  "det-prop-sfb-qlbar-colimit-x-invert-ell",
-  "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
+  "lem-kun-dimension-finite-type",
+  "lem-sf-integral-direct-image-constructible",
   "lem-sfb-extend-scalars-bounded-constructible",
-  "lem-sfb-subfield-flat",
-  "lem-pc-right-derived-functor-triangulated",
-  "sk-thm-sfb-qlbar-two-colimit",
-  "lem-sfb-qlbar-flat",
   "lem-sfb-extend-to-qlbar-constructible",
-  "def-weil-pbc-common-finite-discrete-encoding",
-  "lem-weil-pbc-finite-discrete-constructible-local-piece",
-  "sk-thm-pe-constructible-comparison",
-  "lem-weil-pbc-etale-stratification-local-gluing-core",
-  "lem-weil-pbc-finite-discrete-coefficient-direct-image-conjugation",
-  "lem-weil-pbc-finite-discrete-derived-coefficient-data"
+  "lem-sfb-finite-discrete-constructible-model",
+  "lem-sfb-integral-ambient-tower-comparison",
+  "lem-sfb-integral-constructible-completion-bridge",
+  "lem-sfb-localized-direct-image-comparison",
+  "lem-sfb-normed-coefficient-realization",
+  "lem-sfb-qlbar-direct-image-comparison",
+  "lem-weil-pbc-finite-discrete-derived-coefficient-data",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-qcqs-over-affine",
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-rationalization",
+  "sk-thm-sfb-qlbar-two-colimit",
+  "thm-dg-finite-type-constructibility"
  ],
  "proof_origin": {
   "by": "agent",
@@ -322,11 +224,11 @@
  "chapter": "sec-six-functors-basics",
  "unit": "sk-prop-open-coefficients",
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-21",
   "item": "lem-sfb-dc-lower-star-preserves",
   "worker": "stage1",
-  "summary": "Retained the existing eight-step adic/rational/Qbar proof and repaired it for the statement extension: the DVR step now explicitly covers rings of integers given as closed unit balls of finite normed extensions, and a final step treats finite discrete rings killed by a power of ell via pro-etale/etale constructible comparison and finite-coefficient finiteness. No new DAG nodes were needed.",
-  "blueprint": "Realizes the imported adic direct-image route in lem-sfb-dc-lower-star-preserves.proof.md, with the added finite-torsion coefficient case supplied by the existing constructible comparison and finite-coefficient finiteness nodes.",
+  "summary": "Repair of the 2026-10-21 return: retain the three previous statement-only helpers and extract three additional independent arguments, making six new unsplit nodes. The unchanged statement now has a short assembly. The report preserves every original proof step verbatim, maps its arguments to the new interfaces or already existing exact statements, and retains authentic searches and the previous report. No Lean edited or compiled.",
+  "blueprint": "Integral reduction route: normed coefficient realization, integral lfp/completion bridge, ambient strict-tower comparison, then existing finite-coefficient/integral finiteness. Rational paragraph: localization comparison. Algebraic-closure paragraph: finite-stage descent and filtered coefficient comparison. Finite discrete extension: classical/internal constructible models and the existing exact direct-image mate.",
   "tool_uses": [
    {
     "node": "lem-weil-pbc-finite-type-over-noetherian",
@@ -345,52 +247,16 @@
     "why": "Step 1 supplies qcqs for f from the qcqs source and target; the continuity and comparison tools require this. This is a generic input to the existing integral-reduction and scalar-change route, for which this unit supplies no separate interface."
    },
    {
-    "node": "lem-weil-l-adic-extension-integers-dvr",
-    "why": "Step 1 gives the uniformizer, finite residue field, principal-ideal Noetherian property and valuation decomposition used to verify the adic coefficient hypotheses. This is a generic input to the existing integral-reduction and scalar-change route, for which this unit supplies no separate interface."
-   },
-   {
-    "node": "lem-weil-pbc-integral-stratified-perfect-characterization",
-    "why": "Steps 2 and 5 identify the blueprint cohomological constructibility definition with the derived-complete integral category, in both directions. This is a generic input to the existing integral-reduction and scalar-change route, for which this unit supplies no separate interface."
-   },
-   {
-    "node": "def-weil-derived-complete-integral-detailed",
-    "why": "Steps 2 and 5 use the precise completed ring, finite reductions and uniform amplitude convention needed to apply the existing integral direct-image theorem. This is a generic input to the existing integral-reduction and scalar-change route, for which this unit supplies no separate interface."
-   },
-   {
-    "node": "prop-weil-pbc-direct-image-limits",
-    "why": "Step 3 identifies the ordinary module direct image with the derived limit of its reductions and gives completeness. This is a generic input to the existing integral-reduction and scalar-change route, for which this unit supplies no separate interface."
-   },
-   {
-    "node": "lemma-weil-pbc-perfect-projection-formula",
-    "why": "Step 3 identifies the finite reductions of the ordinary direct image with finite-coefficient direct images using the two-term perfect resolution. This is a generic input to the existing integral-reduction and scalar-change route, for which this unit supplies no separate interface."
-   },
-   {
-    "node": "lem-weil-pbc-ring-sheaf-change-adjunction",
-    "why": "Steps 3, 6, 7 and 8 use its displayed d comparison and reflection of isomorphisms to retain coefficient actions when restricting scalars. This is a generic input to the existing integral-reduction and scalar-change route, for which this unit supplies no separate interface."
-   },
-   {
-    "node": "prop-weil-pbc-comparison-direct-image",
-    "why": "Step 4 compares the bounded-below finite-coefficient pro-etale direct image with the etale direct image to which finite-coefficient finiteness applies. This is a generic input to the existing integral-reduction and scalar-change route, for which this unit supplies no separate interface."
-   },
-   {
-    "node": "lem-weil-valued-dvr-finite-quotients",
-    "why": "Steps 1 and 4 supply finiteness of every A/varpi^n, a hypothesis of the adic datum, perfect projection formula and finite-coefficient finiteness. This is a generic input to the existing integral-reduction and scalar-change route, for which this unit supplies no separate interface."
-   },
-   {
     "node": "thm-dg-finite-type-constructibility",
-    "why": "Step 4 supplies finite-coefficient direct-image constructibility over the arbitrary field of the setting. This is a generic input to the existing integral-reduction and scalar-change route, for which this unit supplies no separate interface."
+    "why": "Step 5 supplies finite-coefficient direct-image constructibility over the arbitrary field of the setting. This is a generic input to the existing integral-reduction and scalar-change route, for which this unit supplies no separate interface."
    },
    {
     "node": "lem-sf-integral-direct-image-constructible",
-    "why": "Step 4 uses its uniform bound independent of n for the reduction tower, after step 3 identifies that tower with the ambient direct image. This is a generic input to the existing integral-reduction and scalar-change route, for which this unit supplies no separate interface."
+    "why": "Step 2 uses its uniform bound independent of n for the reduction tower, after the ambient-tower comparison identifies that tower with the ambient direct image. This is a generic input to the existing integral-reduction and scalar-change route, for which this unit supplies no separate interface."
    },
    {
-    "node": "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
-    "why": "Steps 6 and 8 commute ordinary module direct image with the two scalar-extension colimits, each having a common lower bound. This is a generic input to the existing integral-reduction and scalar-change route, for which this unit supplies no separate interface."
-   },
-   {
-    "node": "lem-pc-right-derived-functor-triangulated",
-    "why": "Step 7 uses additivity and finite-sum preservation of the derived functor to prove the canonical finite-free coefficient comparison. This is a generic input to the existing integral-reduction and scalar-change route, for which this unit supplies no separate interface."
+    "node": "lem-weil-pbc-finite-discrete-derived-coefficient-data",
+    "why": "Generic finite-coefficient constructibility and comparison interface needed for the existing coefficient-reduction route; it does not replace a step of the unit."
    }
   ]
  },
@@ -410,7 +276,8 @@
   "thm-dg-finite-type-constructibility",
   "lem-sf-integral-direct-image-constructible",
   "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
-  "lem-pc-right-derived-functor-triangulated"
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-weil-pbc-finite-discrete-derived-coefficient-data"
  ],
  "lean_audit": {
   "master": {
@@ -438,12 +305,12 @@
  },
  "lead_note": "2026-10-17 (L): statement extended to the coefficient cases of IsFinitenessCoefficient (torsion, unit ball); review withdrawn for re-review; the proof steps still treat only O_E, E, Qlbar. Previous review: {\"date\": \"2026-10-16\", \"by\": \"L\", \"reviewer\": \"NT-Codex-Q37-d9be3c030\", \"group\": \"Q37\", \"result\": \"pass\", \"note\": \"mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q37-d9be3c030 (reviewer sub-agent of L); spot-checked: Read the full item, all cited statements, s",
  "reviewed": {
-  "date": "2026-10-18",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-NC-af14ec232",
-  "group": "NC",
+  "reviewer": "NT-cc-Q23-5b53b2714",
+  "group": "Q23",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-af14ec232 (reviewer sub-agent of L); spot-checked: I read all of the mathematics. That covers the item, the statement of every cited node, the blueprint main-20261015 lemma and proof, the unit and chapter records, Lean IsFinitenessCoefficient (5 constructors) and boundedConstructible_rightDerivedLowerStar_obj, and Bhatt–Scholze 6.5.9, 6.7.1–6.7.3 and 6.8.11–6.8.14. The statement agrees with the Lean cases and is not weakened. Steps 3, 4 and 6–8 are correct. There are no new nodes, no cycle and no SGA citation in any step. Every citation is on the route, or is one of the already accepted tool_uses, or is a Mathlib leaf. I repaired three faults in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-dc-lower-star-preserves.json. (1) C4/E1, step 1: the coefficient nodes sk-prop-sfb-qlbar-colimit-x, sk-prop-sfb-cartesian-coefficients and the rationalization/flatness nodes are stated only for E inside Qlbar. The unit-ball case and Lean's abstract normed E case were covered only by 'the same argument applies'. I added the transport: an embedding into Qlbar by IsAlgClosed.lift (lem-weil-pbc-algebraic-extension-embeds-algebraically-closed); the uniqueness of the extended absolute value (lem-weil-l-adic-extension-absolute-value) makes it isometric; the functoriality in sk-def-sfb-condensed-ring then gives isomorphic condensed rings. (2) C4, steps 2 and 5: sk-def-sfb-bounded-constructible uses stratified local finite presentation, not finite constant local models, and det-def-sfb-constructible-local-model says the converse fails in general. I now cite lem-sfb-integral-lfp-constant-model-comparison, (i)=>(ii) in step 2 and (ii)=>(i) in step 5. (3) C4/E6, step 9: sk-thm-pe-constructible-comparison concerns ordinary modules over the constant sheaf with classical constructibility, but the step applied it to module objects over p^*T with the lfp notion. I rewrote the step with existing route nodes: def-weil-pbc-common-finite-discrete-encoding, lem-weil-pbc-finite-discrete-constructible-local-piece, lem-weil-pbc-finite-discrete-coefficient-direct-image-conjugation, lem-weil-pbc-finite-discrete-derived-coefficient-data, and lem-weil-pbc-etale-stratification-local-gluing-core to turn affine-local partitions into one stratification. I regenerated proof_deps (40 ids). The unit realized fields are still empty; I left them for the maintainer.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-5b53b2714 (reviewer sub-agent of L); spot-checked: I read all of the mathematics. I read the human re-split note (10-21, file dated 11:19, before this 11:29 delivery), the previous RETURN of 6e03a159 (G1/D: 3 nodes) and the NC FIX, the main-20261015 lemma and its proof, the item, all 6 new nodes, and the statement of every cited node. BS sources checked at the cited places: Lemma 5.4.3, Lemma 6.5.9(2),(3), Definition 6.5.1, Proposition 6.6.11, Proposition 6.8.11(3) and Lemma 6.7.2. The re-split note is met. There are 6 statement-only unsplit nodes, each with 5 real searches. The parent is 1815 chars in 5 steps; its statement and stmt_deps are byte-identical to live. Every old argument now has a node. Old step 1: realization node for the transport, tower node for the DVR facts. Old steps 2 and 5: the bridge. Old steps 3 and 4: the tower node; the per-level thm-dg finiteness and the [a,b+N] bound are carried by the statement of lem-sf-integral-direct-image-constructible, which the old proof already cited. Old step 6: localized node. Old steps 7 and 8: Q̄_ℓ node. Old step 9: the finite-discrete model. No node restates the item or a clause of it. I found no cycle: none of the cited nodes is among the item's 989 dependents. No step cites SGA. Steps checked: step 1 scheme hypotheses plus realization (σ is isometric by uniqueness of the absolute value, so A=O_{E'}). Step 2: bridge on X, tower comparison, integral finiteness, bridge back on Y. Steps 3–5: E, Q̄_ℓ and finite-discrete cases, unchanged from the earlier review. Small cases tested: Z empty, K=0, f=id, (A/ϖ)_Z, E_Z (fails both (i) and (ii)), T=0. The three new nodes duplicate nothing. FIX in fixes/dag/nodes/sec-six-functors-basics/: B3 definition citations added to statement and stmt_deps. def-weil-pbc-scheme-conventions for qcqs in the localized, Q̄_ℓ and tower nodes. def-weil-pbc-quasi-compact-scheme and pqf-def-locnoeth (and def-weil-pbc-derived-categories) in the finite-discrete model. def-weil-pbc-quasi-compact-scheme, pqf-def-locnoeth and def-kun-topological-krull-dimension in the bridge. The tool_uses 'why' step numbers in the item are corrected (thm-dg is now step 5, integral finiteness step 2). Maintainer note: the later-chapter lem-a1-rational-direct-image-realization specializes lem-sfb-localized-direct-image-comparison.; 6 file(s) fixed by the reviewer"
  },
  "lean": {
   "branch": "master",
