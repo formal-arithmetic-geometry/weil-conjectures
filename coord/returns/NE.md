@@ -54,10 +54,3 @@ L: independent stage-2 immutable head b3cbc5b38afc: This is a stale duplicate of
 
 
 
-## lemma-weil-pbc-perfect-projection-formula (dedicated repair handoff; head 48f7b5522993d6d14c782f459be420d0ba37b197)
-
-The previous worker ended with: re-split (decision of the human, 2026-10-21): the proof in words is 6015 characters. We consider the current split too coarse: a node whose proof is over 3000 characters is rarely proved in one Lean module (stage-3 history: 11 attempts per module on average, more than half blocked). Make the split finer: every argument of the proof that is not elementary becomes a NEW node, delivered statement-only by the usual stage-1 rules (status unsplit, a self-contained statement citing its nodes, source, three kinds of Mathlib search, no proof steps: the next stage-1 worker writes its proof), and the step of this node cites it. This node keeps its statement; its proof becomes the short assembly of the new nodes. A delivery that adds no new node does not answer this note. Longest steps: step 2 (1106 characters); step 4 (1153 characters); step 5 (983 characters); step 6 (1286 characters). Lean module: Sheaf.Paper.PerfectProjectionFormula.
-
-Compiler messages and attribution:
-re-split (decision of the human, 2026-10-21): the proof in words is 6015 characters. We consider the current split too coarse: a node whose proof is over 3000 characters is rarely proved in one Lean module (stage-3 history: 11 attempts per module on average, more than half blocked). Make the split finer: every argument of the proof that is not elementary becomes a NEW node, delivered statement-only by the usual stage-1 rules (status unsplit, a self-contained statement citing its nodes, source, three kinds of Mathlib search, no proof steps: the next stage-1 worker writes its proof), and the step of this node cites it. This node keeps its statement; its proof becomes the short assembly of the new nodes. A delivery that adds no new node does not answer this note. Longest steps: step 2 (1106 characters); step 4 (1153 characters); step 5 (983 characters); step 6 (1286 characters). Lean module: Sheaf.Paper.PerfectProjectionFormula.
-
