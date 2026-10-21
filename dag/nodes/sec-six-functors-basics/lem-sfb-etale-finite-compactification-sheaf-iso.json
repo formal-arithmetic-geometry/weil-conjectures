@@ -1,0 +1,141 @@
+{
+ "id": "lem-sfb-etale-finite-compactification-sheaf-iso",
+ "kind": "statement",
+ "title": "The etale graph sheaf map in a finite compactification is invertible",
+ "statement": "Let A be a finite commutative ring, f:X→Y a separated quasi-compact etale morphism, and c=(j,p) a compactification with p finite. The specified graph-extension map eΣ!→j!⋙p* of [def-asd-compact-support-graph-comparison] is an isomorphism of functors of constant-A module sheaves.\nConventions and constructions: [def-pc-scheme], [def-weil-pbc-etale-sheaves], [def-weil-pbc-derived-categories], [def-weil-compactifications-refinements], [def-amb-etale-compact-support], [def-asd-compact-support-graph-comparison], [def-weil-etale-morphism].",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0GKM, 0F4Y and 015F"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-derived-categories",
+  "def-weil-compactifications-refinements",
+  "def-amb-etale-compact-support",
+  "def-asd-compact-support-graph-comparison",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "The normalized derived graph comparison is invertible by the existing graph-derived isomorphism theorem. On each representative its formula is the image of the termwise sheaf graph map surrounded by invertible factors: the exact sum/open localization comparisons, the homotopy composition isomorphism, and the finite-pushforward derived unit. Cancel these factors. The proved private helper isIso_of_derived_comparison performs this cancellation for abstract exact functors and the specified formula; the concrete theorem applies it once to the sum, open and finite-pushforward functors.",
+   "uses": [
+    "lem-asd-compact-support-graph-derived-isomorphism",
+    "lemma-weil-pbc-finite-direct-image-exact",
+    "def-asd-compact-support-graph-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0GKM, 0F4Y and 015F"
+   }
+  },
+  {
+   "text": "Evaluate on a complex concentrated in degree zero. The canonical single-complex comparison conjugates the termwise map to the single of the sheaf map; prove this degreewise, using zero source in other degrees. Localization of complexes agrees with quotient to the homotopy category followed by Qh. The localized single map is a quasi-isomorphism, hence induces an invertible degree-zero homology map. The canonical homology-of-single isomorphism identifies this with the original sheaf component, which is therefore invertible. All components give an invertible natural transformation. The private general criterion isIso_of_isIso_Q_map carries out this degree-zero detection for abstract exact functors; the concrete graph proof invokes it after cancelling the finite-unit factors.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0GKM, 0F4Y and 015F"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-asd-compact-support-graph-derived-isomorphism",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "def-asd-compact-support-graph-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0GKM, 0F4Y and 015F; source steps extracted and formalized by U1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "compactification.*unit|graphExtend.*comp|mapDerivedCategory.*unit",
+   "results": "msearch.py: 0 Mathlib hits. Local rg found normalizationLocalizationDesc, mapDerivedCategoryNatIso_fach, and rightDerivedFunctorIsoMapDerivedCategory_hom_fac in the adopted source/library.",
+   "date": "2026-10-21",
+   "verdict": "The general exact-functor and localization APIs suffice for the construction and finite case. No Mathlib declaration states these geometric normalizations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isIso_of_reflects_iso\"",
+   "results": "CategoryTheory.isIso_of_reflects_iso in Mathlib.CategoryTheory.Functor.ReflectsIso.Basic. A search for Functor.mapDerivedCategoryCompIso reported unknown identifier because this API is in the adopted source.",
+   "date": "2026-10-21",
+   "verdict": "Use reflection of isomorphisms for degree-zero detection; it does not provide compactification or graph coherence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact functors of sheaves with proper support on quasi finite morphisms compare with derived pushforward and composition",
+   "results": "Eight hits, including SheafOfModules.pushforwardComp, CategoryTheory.Functor.sheafPushforwardContinuousComp, sheafPushforwardContinuousComp_hom_app_val_app, and SheafOfModules.pushforward_assoc.",
+   "date": "2026-10-21",
+   "verdict": "These are ordinary sheaf pushforward composition statements, not the normalized exact proper-support derived-unit assertions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact functor on sheaves gives its derived functor, compatible with natural transformations and composition",
+   "results": "Eight hits, including CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.rightDerivedNatTrans, CategoryTheory.ExactFunctor.of and CategoryTheory.ExactFunctor.whiskeringLeft.",
+   "date": "2026-10-21",
+   "verdict": "The exact-derived and single-complex APIs apply to the construction and finite detection proof. They do not state compact-support refinement, graph or tower normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "homologyFunctorSingleIso; isIso_Q_map_iff_quasiIso; NatTrans.mapHomotopyCategory_app",
+   "results": "Mathlib/Algebra/Homology/SingleHomology.lean:191 gives homologyFunctorSingleIso; DerivedCategory/Basic.lean:299 gives isIso_Q_map_iff_quasiIso. NatTrans.mapHomotopyCategory_app is generated by simps on its definition in HomotopyCategory.lean:259.",
+   "date": "2026-10-21",
+   "verdict": "Use the cochain homology API and explicit mapHomotopyCategory_app equation; the heavier derived fully faithful import is unnecessary."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.QuasiFiniteCompactSupportExact",
+  "date": "2026-10-21",
+  "group": "U1"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-geo-affine-local",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-geo-affine-local",
+   "place": "Proof (2), compact-support comparison and its normalization; extracted from lem-sfb-quasifinite-compact-support-exact",
+   "via": [
+    "lem-sfb-quasifinite-compact-support-exact"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleFiniteCompactificationSheafIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleFiniteCompactificationSheafIso.lean",
+  "declaration": "AlgebraicGeometry.Etale.isIso_etaleCompactificationGraphMap_of_isFinite",
+  "statement": "theorem isIso_etaleCompactificationGraphMap_of_isFinite\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    {X Y : Scheme.{u}} (f : X ⟶ Y) [Etale f] [IsSeparated f] [QuasiCompact f]\n    (c : Compactification f) [IsFinite c.g] :\n    IsIso (etaleCompactificationGraphMap A f c)",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-748a7",
+  "group": "U1",
+  "result": "fix",
+  "landing": "20261021T140922-L-2774891",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-748a7",
+  "group": "U1",
+  "result": "fix",
+  "landing": "20261021T140922-L-2774891",
+  "kind": "interface",
+  "note": "independent cc review: re-delivery of 5642e44c (FIX, landing failed on override name): 7 Lean files and 7 new nodes byte-identical; item node vs live (only lean/proof/proof_deps/proof_origin/statement addendum/statement_change); statement_change.citers vs the 10 live citing nodes; change record Users vs tools/downstream.py --uses and coord/claims; 7 delivered modules plus new importers EtaleClosedChartExceptionalPreservation and EtaleSumRightAdjointCoherence compiled together"
+ }
+}

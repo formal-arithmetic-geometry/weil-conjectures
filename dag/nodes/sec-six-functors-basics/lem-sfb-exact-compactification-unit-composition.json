@@ -1,0 +1,151 @@
+{
+ "id": "lem-sfb-exact-compactification-unit-composition",
+ "kind": "statement",
+ "title": "Composition of normalized exact compact-support units",
+ "statement": "Let h:V→T and e:T→B be separated finite-type quasi-compact maps of Noetherian schemes, and A a finite commutative ring. Let F,G,H be additive exact sheaf functors for h,e,eh with inclusions into the respective ordinary direct images. For every compactification suppose their sheaf factorizations are normalized by these inclusions. Let ch,ce,che be isomorphisms from the compactification derived functors to DF,DG,DH whose inverses are the normalized units δ. If σ:F⋙G≅H preserves the section inside ordinary composite direct image, then the actual unbounded compact-support compositor, followed by che, equals the whiskered ch,ce followed by the inverse exact-derived composition comparison and Dσ (with the chosen-compactification identifications).\nConventions and constructions: [def-pc-scheme], [def-weil-pbc-etale-sheaves], [def-weil-pbc-derived-categories], [def-weil-compactifications-refinements], [def-amb-etale-compact-support], [def-sfb-exact-compactification-unit], [lem-amb-unbounded-compact-support-comparisons].",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7B, 0F7J and 0D6E"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-derived-categories",
+  "def-weil-compactifications-refinements",
+  "def-amb-etale-compact-support",
+  "def-sfb-exact-compactification-unit",
+  "lem-amb-unbounded-compact-support-comparisons"
+ ],
+ "proof": [
+  {
+   "text": "Choose a compatible proper/open compactification tower for h,e. Normalize the sheaf identifications into ordinary direct image; their injective images force the tower sheaf comparison to be σ.",
+   "uses": [
+    "def-sfb-exact-compactification-unit",
+    "lem-sfb-exact-compactification-unit-refinement",
+    "lem-sfb-proper-open-tower-derived-unit",
+    "lem-weil-pbc-compatible-compactification-triangle",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-cbc-proper-support-sheaf-composition",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7B, 0F7J and 0D6E"
+   }
+  },
+  {
+   "text": "Apply properOpenTowerDerivedUnit to the successive K-injective resolutions of j!J and b!I, and the lift of the resolution of i!q*I to p*M. Its equality of resolution paths identifies the successive units with the single unit after Dσ. Since b! is exact, the composite is a K-injective resolution of the composite open extension. Descend equality through localization.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7B, 0F7J and 0D6E"
+   }
+  },
+  {
+   "text": "Use refinement compatibility of normalized units and the tower normalization of the canonical compositor to pass to the chosen compactifications. Invert the three units and cancel their whiskerings to get the displayed isomorphism equation.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7B, 0F7J and 0D6E"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-exact-compactification-unit",
+  "lem-sfb-exact-compactification-unit-refinement",
+  "lem-sfb-proper-open-tower-derived-unit",
+  "lem-weil-pbc-compatible-compactification-triangle",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-cbc-proper-support-sheaf-composition",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7B, 0F7J and 0D6E; source steps extracted and formalized by U1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "compactification.*unit|graphExtend.*comp|mapDerivedCategory.*unit",
+   "results": "msearch.py: 0 Mathlib hits. Local rg found normalizationLocalizationDesc, mapDerivedCategoryNatIso_fach, and rightDerivedFunctorIsoMapDerivedCategory_hom_fac in the adopted source/library.",
+   "date": "2026-10-21",
+   "verdict": "The general exact-functor and localization APIs suffice for the construction and finite case. No Mathlib declaration states these geometric normalizations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isIso_of_reflects_iso\"",
+   "results": "CategoryTheory.isIso_of_reflects_iso in Mathlib.CategoryTheory.Functor.ReflectsIso.Basic. A search for Functor.mapDerivedCategoryCompIso reported unknown identifier because this API is in the adopted source.",
+   "date": "2026-10-21",
+   "verdict": "Use reflection of isomorphisms for degree-zero detection; it does not provide compactification or graph coherence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact functors of sheaves with proper support on quasi finite morphisms compare with derived pushforward and composition",
+   "results": "Eight hits, including SheafOfModules.pushforwardComp, CategoryTheory.Functor.sheafPushforwardContinuousComp, sheafPushforwardContinuousComp_hom_app_val_app, and SheafOfModules.pushforward_assoc.",
+   "date": "2026-10-21",
+   "verdict": "These are ordinary sheaf pushforward composition statements, not the normalized exact proper-support derived-unit assertions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact functor on sheaves gives its derived functor, compatible with natural transformations and composition",
+   "results": "Eight hits, including CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.rightDerivedNatTrans, CategoryTheory.ExactFunctor.of and CategoryTheory.ExactFunctor.whiskeringLeft.",
+   "date": "2026-10-21",
+   "verdict": "The exact-derived and single-complex APIs apply to the construction and finite detection proof. They do not state compact-support refinement, graph or tower normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.QuasiFiniteCompactSupportExact",
+  "date": "2026-10-21",
+  "group": "U1"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-geo-affine-local",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-geo-affine-local",
+   "place": "Proof (2), compact-support comparison and its normalization; extracted from lem-sfb-quasifinite-compact-support-exact",
+   "via": [
+    "lem-sfb-quasifinite-compact-support-exact"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ExactCompactificationUnitComposition",
+  "file": "lean/Sheaf/AlgebraicGeometry/ExactCompactificationUnitComposition.lean",
+  "declaration": "AlgebraicGeometry.Etale.exactCompactificationUnit_composition",
+  "statement": "theorem exactCompactificationUnit_composition\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    {V T B : Scheme.{u}} [IsNoetherian V] [IsNoetherian T] [IsNoetherian B]\n    (h : V ⟶ T) (e : T ⟶ B)\n    [IsSeparated h] [LocallyOfFiniteType h] [QuasiCompact h]\n    [IsSeparated e] [LocallyOfFiniteType e] [QuasiCompact e]\n    (F : Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} A) ⥤\n      Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A))\n    (G : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A) ⥤\n      Sheaf B.smallEtaleTopology (ModuleCat.{u + 1} A))\n    (H : Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} A) ⥤\n      Sheaf B.smallEtaleTopology (ModuleCat.{u + 1} A))\n    [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]\n    [G.Additive] [PreservesFiniteLimits G] [PreservesFiniteColimits G]\n    [H.Additive] [PreservesFiniteLimits H] [PreservesFiniteColimits H]\n    (ιh : F ⟶ lowerStar (ModuleCat.{u + 1} A) h)\n    (ιe : G ⟶ lowerStar (ModuleCat.{u + 1} A) e)\n    (ιhe : H ⟶ lowerStar (ModuleCat.{u + 1} A) (h ≫ e))\n    (ah : ∀ c : Compactification h, F ≅\n      openImmersionLowerShriek (ModuleCat.{u + 1} A) c.i ⋙\n        lowerStar (ModuleCat.{u + 1} A) c.g)\n    (ae : ∀ c : Compactification e, G ≅\n      openImmersionLowerShriek (ModuleCat.{u + 1} A) c.i ⋙\n        lowerStar (ModuleCat.{u + 1} A) c.g)\n    (ahe : ∀ c : Compactification (h ≫ e), H ≅\n      openImmersionLowerShriek (ModuleCat.{u + 1} A) c.i ⋙\n        lowerStar (ModuleCat.{u + 1} A) c.g)\n    (nh : ∀ c, (ah c).hom ≫ compactificationSheafToDirectImage A c = ιh)\n    (ne : ∀ c, (ae c).hom ≫ compactificationSheafToDirectImage A c = ιe)\n    (nhe : ∀ c, (ahe c).hom ≫ compactificationSheafToDirectImage A c = ιhe)\n    (ch : ∀ c : Compactification h,\n      rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c ≅\n        F.mapDerivedCategory)\n    (ce : ∀ c : Compactification e,\n      rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c ≅\n        G.mapDerivedCategory)\n    (che : ∀ c : Compactification (h ≫ e),\n      rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c ≅\n        H.mapDerivedCategory)\n    (uh : ∀ c, (ch c).inv = exactCompactificationUnit A c F (ah c))\n    (ue : ∀ c, (ce c).inv = exactCompactificationUnit A c G (ae c))\n    (uhe : ∀ c, (che c).inv = exactCompactificationUnit A c H (ahe c))\n    (σ : F ⋙ G ≅ H)\n    (nσ : ∀ M, σ.hom.app M ≫ ιhe.app M =\n      ιe.app (F.obj M) ≫ (lowerStar (ModuleCat.{u + 1} A) e).map (ιh.app M) ≫\n        (lowerStarComp (ModuleCat.{u + 1} A) h e).hom.app M) :\n    (unboundedEtaleLowerShriekCompIso A h e ≪≫\n      (rightDerivedLowerShriekIso A\n        (HasCompactification.compactification (h ≫ e))).symm ≪≫\n      che (HasCompactification.compactification (h ≫ e))) =\n    (Functor.isoWhiskerRight\n        ((rightDerivedLowerShriekIso A\n          (HasCompactification.compactification h)).symm ≪≫\n          ch (HasCompactification.compactification h))\n        (rightDerivedLowerShriek (ModuleCat.{u + 1} A) e) ≪≫\n      Functor.isoWhiskerLeft F.mapDerivedCategory\n        ((rightDerivedLowerShriekIso A\n          (HasCompactification.compactification e)).symm ≪≫\n          ce (HasCompactification.compactification e)) ≪≫\n      (Functor.mapDerivedCategoryCompIso F G).symm ≪≫\n      Functor.mapDerivedCategoryNatIso σ)",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-748a7",
+  "group": "U1",
+  "result": "fix",
+  "landing": "20261021T140922-L-2774891",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-748a7",
+  "group": "U1",
+  "result": "fix",
+  "landing": "20261021T140922-L-2774891",
+  "kind": "interface",
+  "note": "independent cc review: re-delivery of 5642e44c (FIX, landing failed on override name): 7 Lean files and 7 new nodes byte-identical; item node vs live (only lean/proof/proof_deps/proof_origin/statement addendum/statement_change); statement_change.citers vs the 10 live citing nodes; change record Users vs tools/downstream.py --uses and coord/claims; 7 delivered modules plus new importers EtaleClosedChartExceptionalPreservation and EtaleSumRightAdjointCoherence compiled together"
+ }
+}

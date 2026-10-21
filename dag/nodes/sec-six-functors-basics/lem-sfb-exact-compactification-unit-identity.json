@@ -1,0 +1,151 @@
+{
+ "id": "lem-sfb-exact-compactification-unit-identity",
+ "kind": "statement",
+ "title": "Identity normalization of the exact compactification unit",
+ "statement": "Let X be Noetherian, A a finite commutative ring, F an additive exact endofunctor of constant-A module sheaves on X, and ι:F→(idX)* an isomorphism. In the proper identity compactification let a:F≅j!⋙p* be normalized into ordinary direct image by ι, and let c have inverse δ(c,F,a). Then the chosen compact-support comparison followed by c, D(ι followed by lowerStarId), and the exact-derived identity isomorphism equals unboundedEtaleLowerShriekId.\nConventions and constructions: [def-pc-scheme], [def-weil-pbc-etale-sheaves], [def-weil-pbc-derived-categories], [def-weil-compactifications-refinements], [def-amb-etale-compact-support], [def-sfb-exact-compactification-unit], [lem-amb-unbounded-compact-support-comparisons].",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7I and 015F"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-derived-categories",
+  "def-weil-compactifications-refinements",
+  "def-amb-etale-compact-support",
+  "def-sfb-exact-compactification-unit",
+  "lem-amb-unbounded-compact-support-comparisons"
+ ],
+ "proof": [
+  {
+   "text": "For every identity compactification the source open is clopen, hence its sheaf inclusion into direct image is invertible. Normalize F against these inclusions. The finite proper identity gives an invertible exact unit, and refinement compatibility transfers invertibility to every compactification. Inverting the units gives a compatible family, equal to the supplied comparison at the proper identity.",
+   "uses": [
+    "def-sfb-exact-compactification-unit",
+    "lem-sfb-exact-compactification-unit-finite",
+    "lem-sfb-exact-compactification-unit-refinement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7I, 0F7K and 015F; identity follows from composition and the unit law"
+   }
+  },
+  {
+   "text": "Apply exactCompactificationUnit_composition to two identity morphisms and the multiplication F composed with F to F induced by the given F to id isomorphism. Exact-derived composition naturality and its right unit law identify the derived multiplication with the whiskered exact-derived identity comparison.",
+   "uses": [
+    "lem-sfb-exact-compactification-unit-composition",
+    "lem-weil-pbc-exact-functor-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7I, 0F7K and 015F; identity follows from composition and the unit law"
+   }
+  },
+  {
+   "text": "The existing left unit law for unbounded compact support identifies its composition map. Naturality of the exact-derived isomorphism to the identity, cancellation of the invertible comparison, and faithfulness of R(id)! identify the identity comparisons. Transport from the chosen compactification to the proper identity using the refinement equation.",
+   "uses": [
+    "lem-amb-unbounded-compact-support-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7I, 0F7K and 015F; identity follows from composition and the unit law"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-exact-compactification-unit",
+  "lem-sfb-exact-compactification-unit-finite",
+  "lem-sfb-exact-compactification-unit-refinement",
+  "lem-sfb-exact-compactification-unit-composition",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-amb-unbounded-compact-support-comparisons"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7I and 0F7K; U1 proved the identity equation from composition, refinement and exact-derived coherence"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "compactification.*unit|graphExtend.*comp|mapDerivedCategory.*unit",
+   "results": "msearch.py: 0 Mathlib hits. Local rg found normalizationLocalizationDesc, mapDerivedCategoryNatIso_fach, and rightDerivedFunctorIsoMapDerivedCategory_hom_fac in the adopted source/library.",
+   "date": "2026-10-21",
+   "verdict": "The general exact-functor and localization APIs suffice for the construction and finite case. No Mathlib declaration states these geometric normalizations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isIso_of_reflects_iso\"",
+   "results": "CategoryTheory.isIso_of_reflects_iso in Mathlib.CategoryTheory.Functor.ReflectsIso.Basic. A search for Functor.mapDerivedCategoryCompIso reported unknown identifier because this API is in the adopted source.",
+   "date": "2026-10-21",
+   "verdict": "Use reflection of isomorphisms for degree-zero detection; it does not provide compactification or graph coherence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact functors of sheaves with proper support on quasi finite morphisms compare with derived pushforward and composition",
+   "results": "Eight hits, including SheafOfModules.pushforwardComp, CategoryTheory.Functor.sheafPushforwardContinuousComp, sheafPushforwardContinuousComp_hom_app_val_app, and SheafOfModules.pushforward_assoc.",
+   "date": "2026-10-21",
+   "verdict": "These are ordinary sheaf pushforward composition statements, not the normalized exact proper-support derived-unit assertions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact functor on sheaves gives its derived functor, compatible with natural transformations and composition",
+   "results": "Eight hits, including CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.rightDerivedNatTrans, CategoryTheory.ExactFunctor.of and CategoryTheory.ExactFunctor.whiskeringLeft.",
+   "date": "2026-10-21",
+   "verdict": "The exact-derived and single-complex APIs apply to the construction and finite detection proof. They do not state compact-support refinement, graph or tower normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.QuasiFiniteCompactSupportExact",
+  "date": "2026-10-21",
+  "group": "U1"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-geo-affine-local",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-geo-affine-local",
+   "place": "Proof (2), compact-support comparison and its normalization; extracted from lem-sfb-quasifinite-compact-support-exact",
+   "via": [
+    "lem-sfb-quasifinite-compact-support-exact"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ExactCompactificationUnitIdentity",
+  "file": "lean/Sheaf/AlgebraicGeometry/ExactCompactificationUnitIdentity.lean",
+  "declaration": "AlgebraicGeometry.Etale.exactCompactificationUnit_identity",
+  "statement": "theorem exactCompactificationUnit_identity\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    (X : Scheme.{u}) [IsNoetherian X]\n    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A) ⥤\n      Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))\n    [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]\n    (ι : F ⟶ lowerStar (ModuleCat.{u + 1} A) (𝟙 X)) [IsIso ι]\n    (a : F ≅\n      openImmersionLowerShriek (ModuleCat.{u + 1} A)\n          (Compactification.ofIsProper (𝟙 X)).i ⋙\n        lowerStar (ModuleCat.{u + 1} A) (Compactification.ofIsProper (𝟙 X)).g)\n    (na : a.hom ≫ compactificationSheafToDirectImage.{u} A\n      (Compactification.ofIsProper (𝟙 X)) = ι)\n    (c : rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A)\n      (Compactification.ofIsProper (𝟙 X)) ≅ F.mapDerivedCategory)\n    (uc : c.inv = exactCompactificationUnit A\n      (Compactification.ofIsProper (𝟙 X)) F a) :\n    (rightDerivedLowerShriekIso A (Compactification.ofIsProper (𝟙 X))).symm ≪≫\n      c ≪≫ Functor.mapDerivedCategoryNatIso\n        (asIso ι ≪≫ lowerStarId (ModuleCat.{u + 1} A) X) ≪≫\n      Functor.mapDerivedCategoryIdIso _ = unboundedEtaleLowerShriekId A X",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-748a7",
+  "group": "U1",
+  "result": "fix",
+  "landing": "20261021T140922-L-2774891",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-748a7",
+  "group": "U1",
+  "result": "fix",
+  "landing": "20261021T140922-L-2774891",
+  "kind": "interface",
+  "note": "independent cc review: re-delivery of 5642e44c (FIX, landing failed on override name): 7 Lean files and 7 new nodes byte-identical; item node vs live (only lean/proof/proof_deps/proof_origin/statement addendum/statement_change); statement_change.citers vs the 10 live citing nodes; change record Users vs tools/downstream.py --uses and coord/claims; 7 delivered modules plus new importers EtaleClosedChartExceptionalPreservation and EtaleSumRightAdjointCoherence compiled together"
+ }
+}

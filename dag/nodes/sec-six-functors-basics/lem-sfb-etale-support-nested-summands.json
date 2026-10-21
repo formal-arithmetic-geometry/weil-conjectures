@@ -1,0 +1,131 @@
+{
+ "id": "lem-sfb-etale-support-nested-summands",
+ "kind": "statement",
+ "title": "Section-preserving etale support composition sends nested lifts to composite lifts",
+ "statement": "Let h:V→T,e:T→B be separated etale maps and A a commutative ring. Let F,G,H be sheaf functors with inclusions ιh,ιe,ιhe into ordinary direct images, with ιhe injective on every section. Let oh,oe,ohe identify the corresponding sum-extension functors with F,G,H, normalized by their canonical maps into ordinary direct image. If σ:F⋙G≅H preserves sections in composite direct image, the two successive sum-adjunction unit inclusions followed by oh,oe and σ equal the sum-adjunction unit for eh followed by ohe, after the canonical identification of composite test objects.\nConventions and constructions: [def-pc-scheme], [def-weil-etale-morphism], [def-weil-pbc-etale-sheaves], [def-weil-pbc-etale-sum-extension].",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F4Y and 0F50"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-etale-sum-extension"
+ ],
+ "proof": [
+  {
+   "text": "The private Lean lemma unit_comp_toLowerStar proves by the adjunction hom-equivalence that the structural unit followed by the sum-to-direct-image comparison is graph extension. The private lemma unit_comp_normalized_inclusion extends this to the arbitrary support functor and supplied normalized sum isomorphism. Postcompose the desired equation with the injective final support inclusion; substitute the three normalized comparisons and the section-preserving composition equation. Naturality moves the inner sheaf inclusion past the outer graph extension. It remains to compose graph extensions along h and e, with the canonical mapComp identification.",
+   "uses": [
+    "def-weil-pbc-etale-sum-extension",
+    "lem-cbc-proper-support-sheaf-composition",
+    "lem-weil-pbc-etale-section-clopen-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F4Y and 0F50"
+   }
+  },
+  {
+   "text": "On a nested lift, extending by zero along its inner and outer clopen graphs is extending by zero along the composite graph: both restrictions to the graph are the input section and both restrictions off it are zero. The sheaf axiom gives equality. Addition and sheafification extend from lift generators. The inverse mapComp identifies the test objects. Cancel the final injective inclusion.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F4Y and 0F50"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-sum-extension",
+  "lem-cbc-proper-support-sheaf-composition",
+  "lem-weil-pbc-etale-section-clopen-immersion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F4Y and 0F50; source steps extracted and formalized by U1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "compactification.*unit|graphExtend.*comp|mapDerivedCategory.*unit",
+   "results": "msearch.py: 0 Mathlib hits. Local rg found normalizationLocalizationDesc, mapDerivedCategoryNatIso_fach, and rightDerivedFunctorIsoMapDerivedCategory_hom_fac in the adopted source/library.",
+   "date": "2026-10-21",
+   "verdict": "The general exact-functor and localization APIs suffice for the construction and finite case. No Mathlib declaration states these geometric normalizations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isIso_of_reflects_iso\"",
+   "results": "CategoryTheory.isIso_of_reflects_iso in Mathlib.CategoryTheory.Functor.ReflectsIso.Basic. A search for Functor.mapDerivedCategoryCompIso reported unknown identifier because this API is in the adopted source.",
+   "date": "2026-10-21",
+   "verdict": "Use reflection of isomorphisms for degree-zero detection; it does not provide compactification or graph coherence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact functors of sheaves with proper support on quasi finite morphisms compare with derived pushforward and composition",
+   "results": "Eight hits, including SheafOfModules.pushforwardComp, CategoryTheory.Functor.sheafPushforwardContinuousComp, sheafPushforwardContinuousComp_hom_app_val_app, and SheafOfModules.pushforward_assoc.",
+   "date": "2026-10-21",
+   "verdict": "These are ordinary sheaf pushforward composition statements, not the normalized exact proper-support derived-unit assertions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact functor on sheaves gives its derived functor, compatible with natural transformations and composition",
+   "results": "Eight hits, including CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.rightDerivedNatTrans, CategoryTheory.ExactFunctor.of and CategoryTheory.ExactFunctor.whiskeringLeft.",
+   "date": "2026-10-21",
+   "verdict": "The exact-derived and single-complex APIs apply to the construction and finite detection proof. They do not state compact-support refinement, graph or tower normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.QuasiFiniteCompactSupportExact",
+  "date": "2026-10-21",
+  "group": "U1"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-geo-affine-local",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-geo-affine-local",
+   "place": "Proof (2), compact-support comparison and its normalization; extracted from lem-sfb-quasifinite-compact-support-exact",
+   "via": [
+    "lem-sfb-quasifinite-compact-support-exact"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleSupportNestedSummands",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSupportNestedSummands.lean",
+  "declaration": "AlgebraicGeometry.Etale.etaleSupportNestedSummands",
+  "statement": "theorem etaleSupportNestedSummands\n    (A : Type (u + 1)) [CommRing A]\n    {V T B : Scheme.{u}} (h : V ⟶ T) (e : T ⟶ B) [Etale h] [Etale e]\n    [IsSeparated h] [IsSeparated e]\n    (F : Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} A) ⥤\n      Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A))\n    (G : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A) ⥤\n      Sheaf B.smallEtaleTopology (ModuleCat.{u + 1} A))\n    (H : Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} A) ⥤\n      Sheaf B.smallEtaleTopology (ModuleCat.{u + 1} A))\n    (ιh : F ⟶ lowerStar (ModuleCat.{u + 1} A) h)\n    (ιe : G ⟶ lowerStar (ModuleCat.{u + 1} A) e)\n    (ιhe : H ⟶ lowerStar (ModuleCat.{u + 1} A) (h ≫ e))\n    (hi : ∀ (M : Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} A)) (W : B.Etale),\n      Function.Injective ((ιhe.app M).hom.app (Opposite.op W)))\n    (oh : etaleLowerShriek (ModuleCat.{u + 1} A) h inferInstance ≅ F)\n    (oe : etaleLowerShriek (ModuleCat.{u + 1} A) e inferInstance ≅ G)\n    (ohe : etaleLowerShriek (ModuleCat.{u + 1} A) (h ≫ e) inferInstance ≅ H)\n    (nh : ∀ M, oh.hom.app M ≫ ιh.app M =\n      etaleLowerShriekToLowerStar (ModuleCat.{u + 1} A) h M)\n    (ne : ∀ M, oe.hom.app M ≫ ιe.app M =\n      etaleLowerShriekToLowerStar (ModuleCat.{u + 1} A) e M)\n    (nhe : ∀ M, ohe.hom.app M ≫ ιhe.app M =\n      etaleLowerShriekToLowerStar (ModuleCat.{u + 1} A) (h ≫ e) M)\n    (σ : F ⋙ G ≅ H)\n    (nσ : ∀ M, σ.hom.app M ≫ ιhe.app M =\n      ιe.app (F.obj M) ≫ (lowerStar (ModuleCat.{u + 1} A) e).map (ιh.app M) ≫\n        (lowerStarComp (ModuleCat.{u + 1} A) h e).hom.app M)\n    (M : Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} A)) (W : V.Etale) :\n          ((etaleLowerShriekRestrictionAdjunction (ModuleCat.{u + 1} A) h).unit.app M).hom.app\n              (Opposite.op W) ≫\n            (oh.hom.app M).hom.app\n              (Opposite.op ((MorphismProperty.Over.map ⊤ (inferInstance : Etale h)).obj W)) ≫\n            ((etaleLowerShriekRestrictionAdjunction (ModuleCat.{u + 1} A) e).unit.app\n              (F.obj M)).hom.app\n              (Opposite.op ((MorphismProperty.Over.map ⊤ (inferInstance : Etale h)).obj W)) ≫\n            (oe.hom.app (F.obj M)).hom.app\n              (Opposite.op ((MorphismProperty.Over.map ⊤ (inferInstance : Etale e)).obj\n                ((MorphismProperty.Over.map ⊤ (inferInstance : Etale h)).obj W))) ≫\n            (σ.hom.app M).hom.app\n              (Opposite.op ((MorphismProperty.Over.map ⊤ (inferInstance : Etale e)).obj\n                ((MorphismProperty.Over.map ⊤ (inferInstance : Etale h)).obj W))) =\n          ((etaleLowerShriekRestrictionAdjunction (ModuleCat.{u + 1} A)\n              (h ≫ e)).unit.app M).hom.app (Opposite.op W) ≫\n            (ohe.hom.app M).hom.app\n              (Opposite.op\n                ((MorphismProperty.Over.map ⊤ (inferInstance : Etale (h ≫ e))).obj W)) ≫\n            (H.obj M).obj.map\n              ((MorphismProperty.Over.mapComp ⊤ (inferInstance : Etale h)\n                (inferInstance : Etale e)).inv.app W).op",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-748a7",
+  "group": "U1",
+  "result": "fix",
+  "landing": "20261021T140922-L-2774891",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-748a7",
+  "group": "U1",
+  "result": "fix",
+  "landing": "20261021T140922-L-2774891",
+  "kind": "interface",
+  "note": "independent cc review: re-delivery of 5642e44c (FIX, landing failed on override name): 7 Lean files and 7 new nodes byte-identical; item node vs live (only lean/proof/proof_deps/proof_origin/statement addendum/statement_change); statement_change.citers vs the 10 live citing nodes; change record Users vs tools/downstream.py --uses and coord/claims; 7 delivered modules plus new importers EtaleClosedChartExceptionalPreservation and EtaleSumRightAdjointCoherence compiled together"
+ }
+}

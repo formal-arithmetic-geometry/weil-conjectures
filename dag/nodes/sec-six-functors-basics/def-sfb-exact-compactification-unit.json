@@ -1,0 +1,122 @@
+{
+ "id": "def-sfb-exact-compactification-unit",
+ "kind": "definition",
+ "title": "Normalized derived unit for an exact compactification sheaf functor",
+ "statement": "Let A be a commutative ring, f:X→Y a morphism of schemes, c=(j,p) a compactification, F an additive exact functor on constant-A module sheaves, and a:F≅j!⋙p*. Define δ(c,F,a):D(F)→Dj!⋙Rp* by descending the termwise transformation D(F)→Q(p*j!)→Rp*Dj!. The transformation on homotopy representatives is the map induced by a followed by the total-right-derived unit of p*, with the canonical exact-functor localization factorizations.\nConventions and constructions: [def-pc-scheme], [def-weil-pbc-etale-sheaves], [def-weil-pbc-derived-categories], [def-weil-compactifications-refinements], [def-amb-etale-compact-support], [def-asd-compact-support-graph-comparison].",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0GKM and 015F"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-derived-categories",
+  "def-weil-compactifications-refinements",
+  "def-amb-etale-compact-support",
+  "def-asd-compact-support-graph-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Apply the exact-functor factorization for F, apply a on homotopy complexes, and separate j! followed by p* with mapHomotopyCategoryCompIso. Apply the proper direct-image derived unit, then the inverse localization factorization of the exact open extension. Descend this natural transformation with normalizationLocalizationDesc. Full faithfulness specifies its unique descent; no existence witness for an unspecified object is chosen.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0GKM and 015F"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-exact-functor-derived-factorization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0GKM and 015F; source steps extracted and formalized by U1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "compactification.*unit|graphExtend.*comp|mapDerivedCategory.*unit",
+   "results": "msearch.py: 0 Mathlib hits. Local rg found normalizationLocalizationDesc, mapDerivedCategoryNatIso_fach, and rightDerivedFunctorIsoMapDerivedCategory_hom_fac in the adopted source/library.",
+   "date": "2026-10-21",
+   "verdict": "The general exact-functor and localization APIs suffice for the construction and finite case. No Mathlib declaration states these geometric normalizations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isIso_of_reflects_iso\"",
+   "results": "CategoryTheory.isIso_of_reflects_iso in Mathlib.CategoryTheory.Functor.ReflectsIso.Basic. A search for Functor.mapDerivedCategoryCompIso reported unknown identifier because this API is in the adopted source.",
+   "date": "2026-10-21",
+   "verdict": "Use reflection of isomorphisms for degree-zero detection; it does not provide compactification or graph coherence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact functors of sheaves with proper support on quasi finite morphisms compare with derived pushforward and composition",
+   "results": "Eight hits, including SheafOfModules.pushforwardComp, CategoryTheory.Functor.sheafPushforwardContinuousComp, sheafPushforwardContinuousComp_hom_app_val_app, and SheafOfModules.pushforward_assoc.",
+   "date": "2026-10-21",
+   "verdict": "These are ordinary sheaf pushforward composition statements, not the normalized exact proper-support derived-unit assertions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact functor on sheaves gives its derived functor, compatible with natural transformations and composition",
+   "results": "Eight hits, including CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.rightDerivedNatTrans, CategoryTheory.ExactFunctor.of and CategoryTheory.ExactFunctor.whiskeringLeft.",
+   "date": "2026-10-21",
+   "verdict": "The exact-derived and single-complex APIs apply to the construction and finite detection proof. They do not state compact-support refinement, graph or tower normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.QuasiFiniteCompactSupportExact",
+  "date": "2026-10-21",
+  "group": "U1"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-geo-affine-local",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-geo-affine-local",
+   "place": "Proof (2), compact-support comparison and its normalization; extracted from lem-sfb-quasifinite-compact-support-exact",
+   "via": [
+    "lem-sfb-quasifinite-compact-support-exact"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ExactCompactificationUnit",
+  "file": "lean/Sheaf/AlgebraicGeometry/ExactCompactificationUnit.lean",
+  "declaration": "AlgebraicGeometry.Etale.exactCompactificationUnit",
+  "statement": "def exactCompactificationUnit :\n    F.mapDerivedCategory ⟶\n      rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-748a7",
+  "group": "U1",
+  "result": "fix",
+  "landing": "20261021T140922-L-2774891",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-748a7",
+  "group": "U1",
+  "result": "fix",
+  "landing": "20261021T140922-L-2774891",
+  "kind": "interface",
+  "note": "independent cc review: re-delivery of 5642e44c (FIX, landing failed on override name): 7 Lean files and 7 new nodes byte-identical; item node vs live (only lean/proof/proof_deps/proof_origin/statement addendum/statement_change); statement_change.citers vs the 10 live citing nodes; change record Users vs tools/downstream.py --uses and coord/claims; 7 delivered modules plus new importers EtaleClosedChartExceptionalPreservation and EtaleSumRightAdjointCoherence compiled together"
+ }
+}
