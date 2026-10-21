@@ -70,6 +70,81 @@ theorem labelledClopenPartition_existsUnique_of_fpqc
       ∀ (V : Scheme.{u}) (h : V ⟶ X) (σ : V → A),
         (∀ i, ρ i ∘ pullback.fst (f i) h = σ ∘ pullback.snd (f i) h) →
           ∀ a, h ⁻¹' (Z a : Set X) = σ ⁻¹' {a} ∧ IsClopen (σ ⁻¹' {a}) := by
-  sorry
+  classical
+  let W (a : A) (i : I) : (U i).Opens := ⟨ρ i ⁻¹' {a}, hρ i a⟩
+  have hW (a : A) (i j : I) :
+      pullback.fst (f i) (f j) ⁻¹ᵁ W a i =
+        pullback.snd (f i) (f j) ⁻¹ᵁ W a j := by
+    ext z
+    exact congrArg (fun t : A ↦ t = a) (congrFun (hcompat i j) z) |>.to_iff
+  choose Z hZ using fun a ↦ (openSubscheme_existsUnique_of_fpqc f hf (W a) (hW a)).exists
+  have hmem (i : I) (a : A) (x : U i) : f i x ∈ Z a ↔ ρ i x = a := by
+    change x ∈ f i ⁻¹ᵁ Z a ↔ _
+    rw [hZ a i]
+    rfl
+  have hsurj : ∀ x : X, ∃ i, ∃ y : U i, f i y = x := by
+    intro x
+    obtain ⟨Y, g, hg, y, hy⟩ := Scheme.JointlySurjective.exists_eq
+      (K := Scheme.precoverage @Flat) (Presieve.ofArrows U f) hf.2 x
+    obtain ⟨i⟩ := hg
+    exact ⟨i, y, hy⟩
+  have hclosed (a : A) : IsClosed (Z a : Set X) := by
+    apply isOpen_compl_iff.mp
+    have heq : (Z a : Set X)ᶜ = ⋃ b : {b : A // b ≠ a}, (Z b.1 : Set X) := by
+      ext x
+      obtain ⟨i, y, rfl⟩ := hsurj x
+      constructor
+      · intro hy
+        have hne : ρ i y ≠ a := fun he ↦ hy ((hmem i a y).mpr he)
+        exact Set.mem_iUnion.mpr ⟨⟨ρ i y, hne⟩, (hmem i (ρ i y) y).mpr rfl⟩
+      · intro hy ha
+        obtain ⟨b, hb⟩ := Set.mem_iUnion.mp hy
+        exact b.2 (((hmem i b.1 y).mp hb).symm.trans ((hmem i a y).mp ha))
+    rw [heq]
+    exact isOpen_iUnion fun b ↦ (Z b.1).isOpen
+  refine ⟨Z, ⟨hclosed, ?_, ?_, ?_, ?_⟩, ?_⟩
+  · intro a b hab
+    apply disjoint_iff.mpr
+    apply SetLike.ext
+    intro x
+    change (x ∈ Z a ∧ x ∈ Z b) ↔ False
+    refine ⟨fun ⟨hxa, hxb⟩ ↦ ?_, False.elim⟩
+    obtain ⟨i, y, rfl⟩ := hsurj x
+    exact hab (((hmem i a y).mp hxa).symm.trans ((hmem i b y).mp hxb))
+  · apply Set.eq_univ_of_forall
+    intro x
+    obtain ⟨i, y, rfl⟩ := hsurj x
+    exact Set.mem_iUnion.mpr ⟨ρ i y, (hmem i (ρ i y) y).mpr rfl⟩
+  · intro i a
+    ext x
+    exact hmem i a x
+  · intro V h σ hσ a
+    have hcover : Presieve.ofArrows (fun i ↦ pullback (f i) h)
+        (fun i ↦ pullback.snd (f i) h) ∈ Scheme.fpqcPrecoverage V :=
+      Precoverage.mem_coverings_of_isPullback f hf h
+        (fun i ↦ pullback.snd (f i) h) (fun i ↦ pullback.fst (f i) h)
+        (fun i ↦ (IsPullback.of_hasPullback (f i) h).flip)
+    have heq : h ⁻¹' (Z a : Set X) = σ ⁻¹' {a} := by
+      ext z
+      obtain ⟨Y, g, hg, t, ht⟩ := Scheme.JointlySurjective.exists_eq
+        (K := Scheme.precoverage @Flat) _ hcover.2 z
+      obtain ⟨i⟩ := hg
+      subst z
+      have hcomm := congrArg (fun g : pullback (f i) h ⟶ X ↦ g t)
+        (pullback.condition (f := f i) (g := h))
+      change f i (pullback.fst (f i) h t) = h (pullback.snd (f i) h t) at hcomm
+      change h (pullback.snd (f i) h t) ∈ Z a ↔ σ (pullback.snd (f i) h t) = a
+      rw [← hcomm, hmem]
+      exact congrArg (fun b : A ↦ b = a) (congrFun (hσ i) t) |>.to_iff
+    refine ⟨heq, ?_⟩
+    rw [← heq]
+    exact ⟨(hclosed a).preimage h.continuous, (Z a).isOpen.preimage h.continuous⟩
+  · intro Z' hZ'
+    funext a
+    apply SetLike.ext
+    intro x
+    obtain ⟨i, y, rfl⟩ := hsurj x
+    have heq := congrArg (fun s : Set (U i) ↦ y ∈ s) (hZ'.2.2.2.1 i a)
+    exact heq.to_iff.trans (hmem i a y).symm
 
 end AlgebraicGeometry
