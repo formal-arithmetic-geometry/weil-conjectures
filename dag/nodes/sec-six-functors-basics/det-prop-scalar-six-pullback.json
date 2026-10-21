@@ -27,142 +27,131 @@
  ],
  "proof": [
   {
-   "text": "Write $A_Z=\\Lambda_Z$, $B_Z=\\Lambda'_Z$, $T_Z=B_Z\\otimes^{\\mathbf L}_{A_Z}-$, and $r_Z=\\operatorname{Res}_{A_Z\\to B_Z}$. The internal module objects are the ordinary module sheaves over the coefficient ring sheaf: [det-def-sfb-module-objects-sheaves] describes an action $A_Z\\otimes M\\to M$, and the tensor universal property identifies it with the bilinear sheaf action $A_Z\\times M\\to M$; the unit, associativity and linearity equations are exactly the module-sheaf equations. The relative tensor products agree by their balanced coequalizer universal property. We use this identification, retaining the coefficient ring sheaf rather than replacing it by a constant-ring coefficient category. For every scheme map $h:Z\\to W$, [lem-sfb-alpha-iso] identifies $h^{-1}A_W=A_Z$ and $h^{-1}B_W=B_Z$ without an admissibility assumption on the condensed rings. The square in [sk-def-sfb-coefficient-change] identifies the pulled-back ring map with $A_Z\\to B_Z$. Thus [def-weil-pbc-proetale-operations] identifies module pullback over both rings with exact inverse image. Restriction of scalars changes only the action, by [sk-def-sfb-change-of-scalars], so $r_Zh_B^*=h_A^*r_W$ canonically, already on complexes. Applying inverse image to the coequalizer defining $B_W\\otimes_{A_W}P$ gives\n$$h_B^*(B_W\\otimes_{A_W}P)\\cong B_Z\\otimes_{A_Z}h_A^*P.$$\nIndeed inverse image is a left adjoint, hence preserves that coequalizer, and its tensor comparison is invertible by [lem-sfb-finite-upper-star-tensor]. The displayed identification is $B_Z$-linear: the action is on the first tensor factor on both sides.",
+   "text": "Put $A_Z=\\Lambda_Z$, $B_Z=\\Lambda'_Z$ and $T_Z=B_Z\\otimes^L_{A_Z}-$. The scalar-transport lemma identifies internal and sectionwise scalar adjunctions; the operations-transport lemma identifies geometric and open functors. Cartesian coefficient maps give exactly the pulled-back rings.",
    "uses": [
+    "lem-sfb-internal-section-scalar-adjunction",
+    "lem-sfb-internal-module-operations-transport",
     "lem-sfb-alpha-iso",
-    "sk-def-sfb-coefficient-change",
-    "def-weil-pbc-proetale-operations",
-    "sk-def-sfb-change-of-scalars",
-    "lem-sfb-finite-upper-star-tensor",
-    "det-def-sfb-module-objects-sheaves"
+    "sk-def-sfb-coefficient-change"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
-    "place": "(1), coefficient identifications and the ordinary tensor calculation"
+    "place": "(1), module and coefficient identifications"
    }
   },
   {
-   "text": "Choose a K-flat representative $P$ of $K$ with flat terms using [lem-pc-kflat-resolution]. The pullback $h_A^*P$ is again K-flat with flat terms by [lem-weil-pbc-ringed-pullback-preserves-kflat]. By [sk-def-sfb-derived-extension-of-scalars], $B_W\\otimes_{A_W}P$ computes $T_WK$ and $B_Z\\otimes_{A_Z}h_A^*P$ computes $T_Zh_A^*K$. Exactness of $h_B^*$ lets us apply it to the first representative without resolving again. The inverse of the termwise isomorphism in step 1 therefore defines\n$$\\theta_h:T_Zh_A^*\\xrightarrow{\\sim}h_B^*T_W$$\nin the derived category of $B_Z$-modules. It is natural because the tensor map is natural before localization and derived scalar extension is computed on K-flat resolutions. The coefficient identifications respect composition by [lem-weil-pbc-profinite-point-pullback]. For $f:X\\to Y$, $g:Y\\to W$, the termwise map obtained directly for $gf$ and the map obtained successively for $g,f$ both send the class of $b\\otimes (gf)^{-1}p$ to the same class with the $B_X$ action on $b$. Equivalently both are the maps of the same pulled-back coequalizer induced by the identical maps on $B_W\\otimes P$. Its universal property proves their equality. Hence $\\theta_{gf}=(f_B^*\\theta_g)\\circ(\\theta_f g_A^*)$ under the canonical inverse-image composition maps, proving (1).",
+   "text": "Apply the normalized K-flat comparison to these rings. It supplies the natural $\\theta_f$ and its geometric-composition equation for the canonical ring composition maps $(gf)^{-1}\\cong f^{-1}g^{-1}$. Under the identifications $\\alpha$ of step 1 these composition maps are the ones of the pulled-back coefficients, since the comparisons $h^{-1}p_U^*\\cong p_T^*$ and their ring-sheaf lifts are compatible with composition by [lem-weil-pbc-profinite-point-pullback]. This proves (1).",
    "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-weil-pbc-ringed-pullback-preserves-kflat",
-    "def-weil-pbc-proetale-operations",
-    "sk-def-sfb-derived-extension-of-scalars",
+    "lem-sfb-kflat-scalar-comparison-normalization",
     "lem-weil-pbc-profinite-point-pullback"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
-    "place": "(1), K-flat realization and the composition equation; Stacks 0G7E and 0D6D"
+    "place": "(1), coequalizer comparison and geometric composition"
    }
   },
   {
-   "text": "For clause (2), the schemes of [sk-def-sfb-dc-setting] are Noetherian: a field is Noetherian since its only ideals are $0$ and the whole field, and [lem-weil-pbc-finite-type-over-noetherian] applies. Every open in each affine chart is quasi-compact by [lem-weil-pbc-noetherian-open-subscheme-noetherian], so the complementary opens used below are quasi-compact morphisms. For complementary $j:U\\hookrightarrow X$ and $i:Z\\hookrightarrow X$, apply [lem-weil-pbc-proetale-ringed-open-closed] to $A_X$ and $B_X$. It supplies exact $j_!,i_*$, $j^*j_!=1$, $i^*i_*=1$, the two cross-vanishings, and the sheaf short exact sequence. Exact inverse images and exact extension functors descend termwise to all unbounded complexes by [sk-def-sfb-derived-categories]; the ordinary adjunctions descend as well, since both functors are exact. In particular $j_!\\dashv j^*$ and $i^*\\dashv i_*$ hold unboundedly. The pair $(j^*,i^*)$ detects isomorphisms there: for any derived morphism take all cohomology maps, use [lem-weil-pbc-exact-functor-complex-cohomology] to commute the exact restrictions with cohomology, apply the sheaf short exact sequence to the kernels and cokernels, and then use [lem-weil-pbc-unbounded-derived-iso-cohomology]. No bounded-below recollement theorem is being extended by assumption.",
+   "text": "The standing schemes are Noetherian: a field has only the ideals $0,k$, and finite type preserves Noetherianity. Their complementary opens are quasi-compact. The specified module adjunctions and ring-sheaf open/closed sequence supply the exact abelian datum; the unbounded-calculus lemma supplies its actual adjunctions and detection.",
    "uses": [
     "sk-def-sfb-dc-setting",
     "lem-weil-pbc-finite-type-over-noetherian",
     "lem-weil-pbc-noetherian-open-subscheme-noetherian",
     "lem-weil-pbc-proetale-ringed-open-closed",
-    "def-weil-pbc-proetale-operations",
-    "sk-def-sfb-derived-categories",
-    "lem-weil-pbc-exact-functor-complex-cohomology",
-    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+    "lem-sfb-exact-open-closed-unbounded-calculus",
+    "def-weil-pbc-proetale-operations"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
-    "place": "(2), standing-scheme scope and exact open/closed functors; Stacks 09BM, 09AH, 09AA, 09BN"
+    "place": "(2), unbounded open/closed calculus"
    }
   },
   {
-   "text": "For $j$ open, both $T_Xj_{!,A}$ and $j_{!,B}T_U$ are left adjoint to the same functor $r_Uj_B^*=j_A^*r_X$. In detail, for $N\\in D(X,B)$ the adjunctions give natural bijections\n$$\\operatorname{Hom}(T_Xj_{!,A}M,N)\\cong\\operatorname{Hom}(M,j_A^*r_XN)=\\operatorname{Hom}(M,r_Uj_B^*N)\\cong\\operatorname{Hom}(j_{!,B}T_UM,N).$$\nHere the scalar adjunction is the one in [sk-def-sfb-coefficient-change], the exact open adjunction is [sk-def-sfb-module-lower-shriek] derived as in [sk-def-sfb-derived-categories], and the middle equality is the action equality proved in step 1. By [lem-weil-pbc-conjugate-iso-unit-equation] these define the canonical unit-compatible isomorphism $\\beta_j:T_Xj_{!,A}\\cong j_{!,B}T_U$. This is exactly the isomorphism $T^X\\circ D(j_!)\\cong D(j_!)\\circ T^U$ of [def-sfb-derived-open-immersion-shriek-iso]: that definition is the conjugate, along the same adjunctions $D(j_!)\\dashv D(j^*)$ and $T\\dashv D(\\operatorname{Res})$, of the canonical comparison $D(\\operatorname{Res}_{a_U})D(j^*)\\cong D(j^*)D(\\operatorname{Res}_{a_X})$ of [def-sfb-derived-comap-upper-star-iso], which is termwise the action identification of step 1 (both are the identity on underlying sheaves after the coefficient isomorphisms $\\alpha_j,\\alpha'_j$) used in the middle equality, so the uniqueness clause of [lem-weil-pbc-conjugate-iso-unit-equation] identifies the two. Its restriction to $U$ is $\\theta_j^{-1}$ after $j^*j_!=1$: taking adjuncts reduces this assertion to the identity transformation of $r_Uj_B^*$, because $j^*$ applied to the open unit and counit is the identity. This also verifies naturality in $M$ in the category with the new coefficient action. No flatness of $A_X\\to B_X$ was used.",
+   "text": "Take the published open conjugate as $\\beta_j$. Its restriction normalization is exactly the open-normalization lemma; hence it is an open comparison normalized by $\\theta_j^{-1}$.",
    "uses": [
-    "sk-def-sfb-coefficient-change",
-    "sk-def-sfb-module-lower-shriek",
-    "sk-def-sfb-derived-categories",
-    "lem-weil-pbc-conjugate-iso-unit-equation",
-    "def-sfb-derived-open-immersion-shriek-iso",
-    "def-sfb-derived-comap-upper-star-iso"
+    "lem-sfb-open-scalar-conjugate-normalization",
+    "def-sfb-derived-open-immersion-shriek-iso"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
-    "place": "(2), the alternative proof by equality of right adjoints"
+    "place": "(2), specified open comparison"
    }
   },
   {
-   "text": "For $i$ closed put $H=T_Xi_{*,A}M$ and define an actual $B_X$-linear derived morphism\n$$\\beta_i:H\\xrightarrow{\\eta_i}i_{*,B}i_B^*H\\xrightarrow{i_{*,B}(\\theta_i^{-1})}i_{*,B}T_Zi_A^*i_{*,A}M\\xrightarrow{i_{*,B}T_Z(\\varepsilon_i)}i_{*,B}T_ZM.$$\nThe unit and counit here come from the exact adjunctions of step 3. By the triangle identity, $i_B^*\\beta_i$ is $\\theta_i^{-1}$ after the closed counit identifications, so is invertible. Moreover $j_B^*H\\cong T_Uj_A^*i_{*,A}M=0$ by step 2 and the cross-vanishing in [lem-weil-pbc-proetale-ringed-open-closed], and $j_B^*i_{*,B}T_ZM=0$. Detection from step 3 proves $\\beta_i$ is invertible. All three arrows are natural transformations in $B$-module derived categories; this proves the new coefficient linearity before passing to an underlying $A$-module comparison. The construction is the closed projection-formula unit specialized to the coefficient algebra.",
+   "text": "Take the supported closed-unit morphism $\\delta$ as $\\beta_i$. The closed-comparison lemma gives its $B$-linearity, invertibility and restriction normalization by $\\theta_i^{-1}$.",
    "uses": [
-    "lem-weil-pbc-proetale-ringed-open-closed"
+    "lem-sfb-closed-supported-scalar-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
-    "place": "(2), closed immersion case, expanding the unit construction of the projection formula"
+    "place": "(2), closed unit comparison"
    }
   },
   {
-   "text": "For a locally closed $a=v\\circ c$, $c$ closed and $v$ open, use [lem-sfb-locally-closed-extension-coherence] and define\n$$\\beta_a:T_Xv_{!,A}c_{*,A}\\xrightarrow{\\beta_v}v_{!,B}T_Vc_{*,A}\\xrightarrow{v_{!,B}\\beta_c}v_{!,B}c_{*,B}T_S.$$\nIt is natural and invertible by steps 4 and 5. Under $a^*a_!=1$, its restriction is $\\theta_a^{-1}$: the two restrictions are $\\theta_v^{-1}$ and $\\theta_c^{-1}$, whose composite is $\\theta_a^{-1}$ by step 2. The cited coherence lemma supplies factorization identifications, the identification with $i_*u_!$ when $a=i\\circ u$, and full faithfulness: between objects in the essential image of $a_!$, restriction $a^*$ is faithful. To compare two factorizations, identify their extension functors by the cited canonical comparisons in each coefficient category. The source $T_Xa_{!,A}M$ is isomorphic to $a_{!,B}T_SM$ by the displayed composite for either factorization, so both source and target lie in the essential image of the same $a_{!,B}$. Both restricted maps are $\\theta_a^{-1}$; faithfulness therefore makes the two maps equal. For $b:T\\hookrightarrow S$, compare $\\beta_{ab}$ with $(a_{!,B}\\beta_b)\\circ(\\beta_a b_{!,A})$, using the canonical composition identifications of that lemma. Both maps have source and target in the essential image of $(ab)_{!,B}$ (use the displayed isomorphisms), and restriction to $T$ gives $\\theta_{ab}^{-1}$ in both cases by step 2. Faithfulness proves the required equality, including mixed open/closed compositions. This proves all of (2).",
+   "text": "Apply normalized-immersion coherence with $F^{AB}=T$, $q_a=\\theta_a^{-1}$ and the open/closed comparisons just obtained. This gives $\\beta_a$, independent of factorization and compatible with all immersion compositions. Thus (2) holds.",
    "uses": [
-    "lem-sfb-locally-closed-extension-coherence"
+    "lem-sfb-normalized-immersion-comparison-coherence"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
-    "place": "(2), locally closed factorization, independence and composition"
+    "place": "(2), normalized locally closed assembly"
    }
   },
   {
-   "text": "For $\\Lambda\\to\\Lambda'\\to\\Lambda''$, restriction of scalars is transitive already on module complexes: composing the two actions gives the action along the composite ring map, by [sk-def-sfb-change-of-scalars] and functoriality in [sk-def-sfb-coefficient-change]. Hence $T_{\\Lambda',\\Lambda''}^XT_{\\Lambda,\\Lambda'}^X$ and $T_{\\Lambda,\\Lambda''}^X$ are left adjoint to the same restriction functor, by the derived scalar adjunction. The unit-compatible isomorphism of [lem-weil-pbc-conjugate-iso-unit-equation] gives $\\tau_X:(K_{\\Lambda'})_{\\Lambda''}\\cong K_{\\Lambda''}$. This is the usual tensor reassociation, with the final coefficient action retained: if $P$ is a K-flat representative with flat terms, [lem-weil-pbc-ringed-pullback-preserves-kflat] applied to the identity underlying topos and $A_X\\to B_X$ makes $B_X\\otimes_{A_X}P$ K-flat over $B_X$. Thus both functors are computed without another resolution and $\\tau_X$ is\n$$C_X\\otimes_{B_X}(B_X\\otimes_{A_X}P)\\longrightarrow C_X\\otimes_{A_X}P,\\qquad c\\otimes(b\\otimes p)\\longmapsto cb\\otimes p,$$\nwhere $C_X=\\Lambda''_X$, with inverse $c\\otimes p\\mapsto c\\otimes(1\\otimes p)$. The balancing relations give the two inverse equations; each map is $C_X$-linear. Its normalization agrees with the scalar units $p\\mapsto1\\otimes p$, which identifies this chain isomorphism with the adjunction-defined $\\tau_X$.",
+   "text": "The successive-derived-scalar normalization gives $\\tau_X:T_{BC}^XT_{AB}^X\\cong T_{AC}^X$ with its multiplication formula and scalar-unit normalization. Scalar transport identifies it with the required coefficient-tower comparison.",
    "uses": [
-    "sk-def-sfb-change-of-scalars",
-    "sk-def-sfb-coefficient-change",
-    "lem-weil-pbc-conjugate-iso-unit-equation",
-    "lem-weil-pbc-ringed-pullback-preserves-kflat"
+    "lem-sfb-successive-derived-quotient-normalization",
+    "lem-sfb-internal-section-scalar-adjunction"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
-    "place": "(3), associativity of derived extension, with the coefficient action and nonflat case explicit"
+    "place": "(3), normalized scalar reassociation"
    }
   },
   {
-   "text": "For inverse image, compare the two composites from $T_{\\Lambda',\\Lambda''}^XT_{\\Lambda,\\Lambda'}^Xf_\\Lambda^*K$ to $f_{\\Lambda''}^*T_{\\Lambda,\\Lambda''}^YK$ using $\\tau$ and the two $\\theta$ maps. On the K-flat representatives from steps 2 and 7, both maps send $c\\otimes(b\\otimes f^{-1}p)$ to the class of $cb\\otimes f^{-1}p$. Since these are the same maps on the defining balanced tensor coequalizers, they agree, and localization preserves this equality. For an open $j$, the two coefficient-extension comparisons are conjugate to the identical equality of right adjoints $r_{\\Lambda,\\Lambda'}r_{\\Lambda',\\Lambda''}j^*=r_{\\Lambda,\\Lambda''}j^*$, and their units agree by the normalization in step 7; uniqueness in [lem-weil-pbc-conjugate-iso-unit-equation] proves equality. For closed $i$, apply $i^*$ to the two routes, using the closed counit: they become the inverse-image equality just proved. Both sources and targets belong to the essential image of $i_{*,\\Lambda''}$ by step 5, so faithfulness of restriction from [lem-sfb-locally-closed-extension-coherence] proves equality before restriction. For any locally closed $a:S\\hookrightarrow X$, the required equality, with $T_{AB}$, $T_{BC}$, $T_{AC}$ denoting the three scalar extensions, is explicitly\n$$a_{!,C}(\\tau_SM)\\circ\\beta_a^{BC}(T_{AB}^SM)\\circ T_{BC}^X(\\beta_a^{AB}M)=\\beta_a^{AC}M\\circ\\tau_X(a_{!,A}M).$$\nBoth routes start at $T_{BC}^XT_{AB}^Xa_{!,A}M$ and end at $a_{!,C}T_{AC}^SM$. Step 6 identifies the source with $a_{!,C}T_{BC}^ST_{AB}^SM$, so both objects lie in the image of $a_{!,C}$. Apply $a_C^*$ and the identifications $a_C^*a_{!,C}=1$: each restricted beta is the inverse theta by step 6, and the equality becomes precisely the inverse-image/tower equality proved at the start of this step, evaluated at $a_{!,A}M$ and then restricted via $a_A^*a_{!,A}M=M$. The Hom bijection in the cited coherence lemma gives the displayed equality before restriction. This proves both compatibility squares in (3).",
+   "text": "Localize the ordinary tower-diagram equality on flat-term K-flat models; pullback preserves these, so it gives the $\\theta/\\tau$ square. The last assertion of normalized-immersion coherence, with $t=\\tau$, gives the $\\beta/\\tau$ square. This proves (3).",
    "uses": [
-    "lem-weil-pbc-conjugate-iso-unit-equation",
-    "lem-sfb-locally-closed-extension-coherence"
+    "lem-sfb-scalar-inverse-image-tower-diagram",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "lem-weil-pbc-localization-universal-property",
+    "lem-sfb-normalized-immersion-comparison-coherence"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
-    "place": "(3), the two compatibility squares with inverse image and extension by zero"
+    "place": "(3), both tower squares"
    }
   }
  ],
  "proof_deps": [
-  "lem-sfb-alpha-iso",
-  "sk-def-sfb-coefficient-change",
+  "def-sfb-derived-open-immersion-shriek-iso",
   "def-weil-pbc-proetale-operations",
-  "sk-def-sfb-change-of-scalars",
-  "lem-sfb-finite-upper-star-tensor",
   "lem-pc-kflat-resolution",
-  "lem-weil-pbc-ringed-pullback-preserves-kflat",
-  "sk-def-sfb-derived-extension-of-scalars",
-  "lem-weil-pbc-profinite-point-pullback",
-  "sk-def-sfb-dc-setting",
+  "lem-sfb-alpha-iso",
+  "lem-sfb-closed-supported-scalar-comparison",
+  "lem-sfb-exact-open-closed-unbounded-calculus",
+  "lem-sfb-internal-module-operations-transport",
+  "lem-sfb-internal-section-scalar-adjunction",
+  "lem-sfb-kflat-scalar-comparison-normalization",
+  "lem-sfb-normalized-immersion-comparison-coherence",
+  "lem-sfb-open-scalar-conjugate-normalization",
+  "lem-sfb-scalar-inverse-image-tower-diagram",
+  "lem-sfb-successive-derived-quotient-normalization",
   "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-localization-universal-property",
   "lem-weil-pbc-noetherian-open-subscheme-noetherian",
   "lem-weil-pbc-proetale-ringed-open-closed",
-  "sk-def-sfb-derived-categories",
-  "lem-weil-pbc-exact-functor-complex-cohomology",
-  "lem-weil-pbc-unbounded-derived-iso-cohomology",
-  "sk-def-sfb-module-lower-shriek",
-  "lem-weil-pbc-conjugate-iso-unit-equation",
-  "lem-sfb-locally-closed-extension-coherence",
-  "det-def-sfb-module-objects-sheaves",
-  "def-sfb-derived-open-immersion-shriek-iso",
-  "def-sfb-derived-comap-upper-star-iso"
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "sk-def-sfb-coefficient-change",
+  "sk-def-sfb-dc-setting",
+  "lem-weil-pbc-profinite-point-pullback"
  ],
  "proof_origin": {
   "by": "agent",
@@ -211,6 +200,48 @@
    "results": "16 hits: Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean",
    "date": "2026-10-16",
    "verdict": "no match: ordinary sheaf pullback and ordinary module scalar-extension hits do not supply the unbounded condensed-coefficient theorem with extension by zero and all three coherences"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*[Ee]xtendScalars|[Ee]xtendScalars.*[Pp]ullback|[Cc]ondensed.*[Ss]calar",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected hits describe underived module scalar extension and sheaf pullback composition, not the full unbounded condensed-ring comparison with immersion and coefficient-tower coherences"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor extension of scalars for ring sheaves commutes with exact inverse image and extension by zero",
+   "results": "8 hits: ModuleCat.extendScalars, ModuleCat.ExtendScalars.obj', ModuleCat.extendScalarsId_inv_app_apply, PresheafOfModules.pullback, ModuleCat.restrictCoextendScalarsAdj, Algebra.Extension.baseChange, SheafOfModules.sheafificationCompPullback, ModuleCat.extendRestrictScalarsAdj",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected hits describe underived module scalar extension and sheaf pullback composition, not the full unbounded condensed-ring comparison with immersion and coefficient-tower coherences"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback, SheafOfModules.restrictScalars",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected hits describe underived module scalar extension and sheaf pullback composition, not the full unbounded condensed-ring comparison with immersion and coefficient-tower coherences"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of scalars for sheaves of modules commutes with inverse image and extension by zero along locally closed immersions, compatibly with composition and coefficient towers",
+   "results": "8 hits: SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.pushforwardCongr, SheafOfModules.pushforwardComp_inv_app_val_app, SheafOfModules.pushforward_assoc, SheafOfModules.pushforward_map_val, SheafOfModules.pushforwardComp_hom_app_val_app",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected hits describe underived module scalar extension and sheaf pullback composition, not the full unbounded condensed-ring comparison with immersion and coefficient-tower coherences"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackComp|extendScalarsComp|extension.*zero",
+   "results": "16 hits: Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean (subdirectory Algebra/Category/ModuleCat)",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected hits describe underived module scalar extension and sheaf pullback composition, not the full unbounded condensed-ring comparison with immersion and coefficient-tower coherences"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Associativity of derived pullback on ringed topoi and base change of coefficient rings for unbounded complexes",
+   "results": "8 hits: SheafOfModules.pullback_assoc, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity, PresheafOfModules.pullback_assoc, SheafOfModules.pullbackComp, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc, AlgebraicGeometry.Scheme.Modules.pullbackComp, PresheafOfModules.pullbackComp, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected hits describe underived module scalar extension and sheaf pullback composition, not the full unbounded condensed-ring comparison with immersion and coefficient-tower coherences"
   }
  ],
  "mathlib_match": null,
@@ -232,35 +263,23 @@
  "chapter": "sec-six-functors-basics",
  "unit": "sk-prop-scalar-six",
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "item": "det-prop-scalar-six-pullback",
   "worker": "stage1",
-  "summary": "Made the intended standing-scheme scope of clause (2) and commutative coefficient convention explicit. Replaced inadmissibly broad use of the admissible-coefficient Cartesian statement by its existing arbitrary-condensed-ring lemma. Expanded K-flat models, the open adjunction calculation, an actual new-coefficient-linear closed comparison and its detection, and the composition/coefficient-tower squares. One new statement-only generic immersion-coherence lemma; no new scalar-comparison clauses were exported. Second reading specifies the generic extension construction and all source tags, and expands the image and tower-square arguments.",
-  "blueprint": "Realizes proof (1) termwise tensor calculation and composition; proof (2) alternative open adjunction route and closed projection-formula unit, then locally closed composition; proof (3) tensor reassociation and both compatibility squares. The unit sk-prop-scalar-six step 2 is unchanged.",
+  "summary": "Repair of A6/D and the human 2026-10-21 re-split note: statement unchanged; seven new statement-only unsplit technical nodes replace the non-elementary internal/sectionwise scalar identification, K-flat comparison normalization, unbounded support passage, open normalization, closed supported-unit construction, conditional immersion coherence and ordinary coefficient-tower diagram. The item is a short assembly. All existing metadata and prior search evidence retained; no Lean or compiler work.",
+  "blueprint": "Realizes sk-prop-scalar-six step 2: proof (1) coequalizer and K-flat inverse-image comparison, proof (2) alternative open-adjunction and closed-support unit route with factorization coherence, proof (3) scalar reassociation and both squares.",
   "tool_uses": [
    {
-    "node": "lem-sfb-alpha-iso",
-    "why": "Canonical Cartesian coefficient isomorphism for arbitrary condensed rings, extending the admissible-ring wording used in the imported proof."
+    "node": "lem-sfb-internal-module-operations-transport",
+    "why": "Generic identification of geometric and open operations under the internal/sectionwise module equivalence; scalar compatibility is separately extracted."
    },
    {
-    "node": "lem-sfb-finite-upper-star-tensor",
-    "why": "Ordinary monoidality used only to identify the two balanced tensor coequalizers."
-   },
-   {
-    "node": "lem-pc-kflat-resolution",
-    "why": "Generic existence of flat-term K-flat representatives on a ringed site."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-pullback-preserves-kflat",
-    "why": "Generic K-flat preservation for any ringed-topos pullback; used for geometric pullback and for coefficient extension with identity underlying topos."
-   },
-   {
-    "node": "lem-weil-pbc-profinite-point-pullback",
-    "why": "Generic coherent coefficient inverse-image identifications from the profinite point."
+    "node": "lem-sfb-successive-derived-quotient-normalization",
+    "why": "Generic K-flat scalar-tower reassociation and its unit formula; reused instead of making a duplicate of the old step 7 argument."
    },
    {
     "node": "lem-weil-pbc-proetale-ringed-open-closed",
-    "why": "Generic sheaf-level exact open/closed localization for arbitrary ring sheaves; no coefficient comparison is imported."
+    "why": "Generic exact ring-sheaf localization datum, with quasi-compact complement verified for the standing schemes."
    }
   ]
  },
@@ -270,15 +289,17 @@
   "lem-pc-kflat-resolution",
   "lem-weil-pbc-ringed-pullback-preserves-kflat",
   "lem-weil-pbc-profinite-point-pullback",
-  "lem-weil-pbc-proetale-ringed-open-closed"
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-sfb-internal-module-operations-transport",
+  "lem-sfb-successive-derived-quotient-normalization"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-Q60-e2ba891d4",
-  "group": "Q60",
+  "reviewer": "NT-cc-Q20-c1305f606",
+  "group": "Q20",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q60-e2ba891d4 (reviewer sub-agent of L); spot-checked: I read the item, all 8 steps, the new node and every cited statement in full, against blueprint main-20261015 det-prop-scalar-six-pullback(.proof).md, unit sk-prop-scalar-six step 2 and chapter sec-six-functors-basics. Statement changes accepted. (a) 'Commutative' is already required by sk-def-sfb-coefficient-change and by the chapter. (b) Clause (2) is scoped to the standing setting sk-def-sfb-dc-setting with termwise exact a_!. Stacks proetale.tex 09BM (l.5020) gives exact pro-étale i_* only for a retrocompact complement, and 09AA gives only full faithfulness. det-lem-int-tensor-projection uses the same standing/termwise convention. The only citer of clause (2), det-lem-coefficient-finite-descent-objects, is in the standing setting. Clauses (1) and (3) stay general with non-flat maps. Step checks: step 1 against lem-sfb-alpha-iso (any condensed ring), lem-sfb-finite-upper-star-tensor (any g, A=Ab) and the coequalizer Ext. Step 2 against lem-weil-pbc-ringed-pullback-preserves-kflat = Stacks 0G7E (sites-cohomology.tex l.3508, flat-terms hypothesis respected). Step 3: standing schemes are Noetherian, so the open complement is quasi-compact, which is the hypothesis of lem-weil-pbc-proetale-ringed-open-closed; detection uses the unbounded cohomology criteria. Steps 4 and 5: orientations and B-linearity checked, θ_i^{-1} source correct, triangle identity and cross-vanishing. Steps 6–8 use only the new node's statement (Hom bijection, factorization and composition identifications). New node lem-sfb-locally-closed-extension-coherence is statement-only, self-contained and true: c_* is exact by 09BM since V∖S is retrocompact in a Noetherian scheme, and full faithfulness follows from the unit/counit isomorphisms. Edge cases checked: empty, identity, pure open or closed. It has no coefficient content, so it restates no clause, and no DAG duplicate exists (checked det-lem-int-tensor-projection, new-module-extension-by-zero-coherence, the pbc condensed-locally-closed nodes, lem-weil-pbc-proetale-ringed-open-closed and others). Accepted tool_uses: lem-sfb-alpha-iso, lem-sfb-finite-upper-star-tensor, lem-pc-kflat-resolution, lem-weil-pbc-ringed-pullback-preserves-kflat, lem-weil-pbc-profinite-point-pullback, lem-weil-pbc-proetale-ringed-open-closed. FIX: step 4 rebuilt the open comparison β_j without citing the existing definition of that isomorphism, def-sfb-derived-open-immersion-shriek-iso, which unit step 2 names. I added the identification of β_j with it (the conjugate of def-sfb-derived-comap-upper-star-iso, unique by lem-weil-pbc-conjugate-iso-unit-equation) and both citations to step 4 and proof_deps. I checked that this creates no cycle. Corrected file: fixes/dag/nodes/sec-six-functors-basics/det-prop-scalar-six-pullback.json. Remark only: source.external still lists Tag 06YV, which is a valid section tag; the precise tags 0G7E and 0D6D are in proof_origin.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-c1305f606 (reviewer sub-agent of L); spot-checked: I read the item, all 8 steps, all seven new nodes in full, every cited statement, and the main-20261015 det-prop-scalar-six-pullback.proof.md (1)-(3). The delivery carries out the human re-split note of 2026-10-21. It adds 7 statement-only unsplit nodes (1264-1851 characters, three search kinds recorded). The item statement, stmt_deps, lean, reviewed, source, blueprint and tool_uses are byte-identical to live. The proof is 1839 characters and there is no cycle. I compared the old (Q60) proof step by step. Old step 1 (internal = sectionwise) went to internal-section-scalar-adjunction. Steps 1-2 (coequalizer χ_h, θ_h as mate = Q(χ)^-1, θ_gf) went to kflat-scalar-comparison-normalization. Step 3 (unbounded descent, joint (j^*,i^*) detection) went to exact-open-closed-unbounded-calculus, with Noetherianity kept in the item. Step 4 went to open-scalar-conjugate-normalization; I checked the typing j_B^*T_X j_!M → T_U M. Step 5 went to closed-supported-scalar-comparison; I checked the normalization through ε naturality and the triangle identity, uniqueness through the i^*⊣i_* adjunction, and invertibility through θ_j, j^*i_*=0 and detection. Step 6 went to normalized-immersion-comparison-coherence, which is true by the Hom bijection of locally-closed-extension-coherence. Step 7 uses the existing successive-derived-quotient-normalization (formula and unit normalization present). Step 8 went to scalar-inverse-image-tower-diagram, checked on generators. With q=θ^-1, the coherence node's t-premise is literally the tower equality inverted. Every node holds on identity, empty, pure open and pure closed cases and on non-flat Z/ℓ²→F_ℓ. No node restates the item or one of its clauses. No SGA is cited. FIX: the old step 2 got the compatibility of the coefficient identifications α with composition from lem-weil-pbc-profinite-point-pullback. Clause (1)'s θ_gf under α needs this cocycle, and the delivery dropped it. I restored the sentence and citation in step 2, uses and proof_deps (fixes/dag/nodes/sec-six-functors-basics/det-prop-scalar-six-pullback.json). Advisory: the existing sec-smooth-purity nodes lem-pur-coefficient-pullback-comparison (derived comparison existence and normalization, no composition or mate law) and lem-pur-coefficient-pullback-coherence (the derived θ/τ square) overlap parts of the kflat and tower nodes. They are not restatements and lie off this unit's route; the kflat node's splitter should cite them. The new nodes lack a lean_audit key, which is mechanical. Accepted split_report tool_uses: lem-sfb-internal-module-operations-transport, lem-sfb-successive-derived-quotient-normalization, lem-weil-pbc-proetale-ringed-open-closed.; 1 file(s) fixed by the reviewer"
  },
  "lean_audit": {
   "master": {

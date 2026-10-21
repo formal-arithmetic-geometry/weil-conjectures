@@ -1,0 +1,85 @@
+{
+ "id": "lem-sfb-normalized-immersion-comparison-coherence",
+ "kind": "statement",
+ "title": "Coherence of comparison maps normalized on an immersion image",
+ "statement": "Let schemes be quasi-compact and locally Noetherian, with small pro-etale sites [def-pc-scheme, def-weil-pbc-quasi-compact-scheme, pqf-def-locnoeth, def-weil-pbc-proetale-site]. For each coefficient label $r$ give a cartesian system of commutative ring sheaves $R_X^r$, meaning coherent identifications $a^{-1}R_X^r=R_S^r$ for every immersion $a:S\\hookrightarrow X$. Write $D(X,r)=D(\\operatorname{Mod}(R_X^r))$ [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]. Use the exact extensions $E_a^r=a_{!,r}$, restriction isomorphisms $a_r^*E_a^r\\cong1$, and factorization/composition maps $\\gamma^r_{a,b}:E_a^rE_b^r\\cong E_{ab}^r$ of [lem-sfb-locally-closed-extension-coherence].\n\nSuppose functors $F_X^{rs}:D(X,r)\\to D(X,s)$ have coherent isomorphisms $q_a^{rs}:a_s^*F_X^{rs}\\xrightarrow{\\sim}F_S^{rs}a_r^*$, respecting identity and composition. For open and closed immersions suppose isomorphisms $d_a^{rs}:F_X^{rs}E_a^r\\xrightarrow{\\sim}E_a^sF_S^{rs}$ are given whose restriction is $q_a^{rs}$ under $a^*E_a\\cong1$. For a factorization $a=vc$ with $c$ closed and $v$ open, form $d_a=(E_v^s d_c)\\circ(d_v E_c^r)$, inserting $\\gamma$. These composites are independent of factorization, including comparison with open-then-closed factorizations, and satisfy\n$$d_{ab}\\circ F_X^{rs}(\\gamma^r_{a,b})=\\gamma^s_{a,b}F_T^{rs}\\circ(E_a^s d_b)\\circ(d_aE_b^r)$$\nfor $b:T\\hookrightarrow S$.\n\nIf also natural isomorphisms $t_X:F_X^{st}F_X^{rs}\\xrightarrow{\\sim}F_X^{rt}$ are given and satisfy\n$$q_a^{rt}\\circ(a_t^*t_X)=(t_Sa_r^*)\\circ F_S^{st}(q_a^{rs})\\circ(q_a^{st}F_X^{rs}),$$\nthen the assembled comparisons satisfy\n$$E_a^t(t_SM)\\circ d_a^{st}(F_S^{rs}M)\\circ F_X^{st}(d_a^{rs}M)=d_a^{rt}(M)\\circ t_X(E_a^rM).$$\nThis is conditional coherence for already given comparisons; it asserts no existence of scalar-extension or pullback comparisons.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
+  "place": "(2), factorization and mixed-composition check by restriction; (3), extension-by-zero tower square by restriction; agent-extracted technical lemma, supported by Stacks proetale.tex Tags 09AA (lemma-closed-immersion), 09BN (lemma-open-immersion); factorization and Hom identifications are the cited extension-coherence node"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-quasi-compact-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "lem-sfb-locally-closed-extension-coherence"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A family of restriction normalized comparisons for fully faithful locally closed extensions is independent of open closed factorization and compatible with immersion composition and coefficient towers",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.normalizationDiagram, AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap, AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap, AlgebraicGeometry.Scheme.Hom.ι_toNormalization, AlgebraicGeometry.Scheme.Hom.ι_fromNormalization, AlgebraicGeometry.Scheme.Hom.ι_fromNormalization_assoc, AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc, AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage",
+   "date": "2026-10-21",
+   "verdict": "no match: faithful-functor primitives and scheme immersion uniqueness do not give these conditional factorization, composition and coefficient-tower equations for normalized comparisons"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Faithfulness of restriction on supported objects proves coherence of comparison isomorphisms assembled from open and closed factors",
+   "results": "8 hits: AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_hom_ofRestrict_assoc, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.isoRestrict, AlgebraicGeometry.IsOpenImmersion.isoRestrict, CategoryTheory.Adjunction.restrictFullyFaithful, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.isoRestrict, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.isoRestrict_inv_ofRestrict, AlgebraicGeometry.PresheafedSpace.restrictStalkIso",
+   "date": "2026-10-21",
+   "verdict": "no match: faithful-functor primitives and scheme immersion uniqueness do not give these conditional factorization, composition and coefficient-tower equations for normalized comparisons"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Faithful, CategoryTheory.NatIso",
+   "results": "0 hits: ; loogle: unknown identifier 'CategoryTheory.NatIso'",
+   "date": "2026-10-21",
+   "verdict": "invalid pattern; no absence inference from this search"
+  },
+  {
+   "tool": "grep",
+   "query": "Faithful.*(restrict|comp)|factorization.*(coher|compar)|extensionByZero",
+   "results": "25 hits: Mathlib/CategoryTheory/ObjectProperty/FullSubcategory.lean, Mathlib/CategoryTheory/ObjectProperty/FullSubcategory.lean, Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean, Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean, Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean, Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean, Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean, Mathlib/CategoryTheory/Localization/Predicate.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: faithful-functor primitives and scheme immersion uniqueness do not give these conditional factorization, composition and coefficient-tower equations for normalized comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lift coherent inverse image comparison diagrams uniquely through fully faithful immersion extension functors using their restriction normalization",
+   "results": "8 hits: AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.lift_uniq, AlgebraicGeometry.IsOpenImmersion.lift_uniq, AlgebraicGeometry.IsOpenImmersion.lift_app, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.lift_uniq, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.lift_fac_assoc, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.lift, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.lift, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.lift_fac",
+   "date": "2026-10-21",
+   "verdict": "no match: faithful-functor primitives and scheme immersion uniqueness do not give these conditional factorization, composition and coefficient-tower equations for normalized comparisons"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Faithful, CategoryTheory.NatTrans",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: faithful-functor primitives and scheme immersion uniqueness do not give these conditional factorization, composition and coefficient-tower equations for normalized comparisons"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "det-prop-scalar-six-pullback",
+  "date": "2026-10-21",
+  "group": "Q20"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-scalar-six",
+ "blueprint": {
+  "from": {
+   "node": "det-prop-scalar-six-pullback",
+   "place": "(2), factorization and mixed-composition check by restriction; (3), extension-by-zero tower square by restriction",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}
