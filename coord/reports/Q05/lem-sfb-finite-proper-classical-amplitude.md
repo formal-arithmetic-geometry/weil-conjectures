@@ -1,0 +1,59 @@
+# Q05 stage-1 report: lem-sfb-finite-proper-classical-amplitude
+
+## Files written
+
+- `dag/nodes/sec-six-functors-basics/lem-sfb-finite-proper-classical-amplitude.json`: item, statement, split into eight steps; not a Mathlib leaf. Statement and statement dependencies unchanged.
+- `citations.json`: one verbatim statement excerpt for each node cited by each numbered step.
+- `report.md`: this report.
+
+New nodes: **0**. New Mathlib leaves: **0**. The sandbox was empty at arrival; no earlier item, report or search log was displaced. `write_split.py` is a sandbox-only generation aid, not a project file.
+
+## Attachments
+
+None. Searched `lean/WeilConjectures` by the exact item id and by proper/classical/amplitude and derived-functor terminology. Read `SixFunctors/ProEtale/FiniteCoefficient/Derived/Finiteness.lean` and `LowerStarCoproducts.lean`. The former proves bounded constructible amplitude under field/finite-type/invertible-exponent assumptions. The latter gives an existential upper bound under finite-type-over-a-field assumptions; it does not state the sharp 2e assertion for arbitrary schemes in this item. Neither covers every clause here. Generic finished declarations belong to existing input nodes; they do not attach the item.
+
+## WANTED
+
+None. The relevant Stacks sources, blueprint and project source declarations are present locally.
+
+## What was wrong or needed completion
+
+The imported item had no proof. Its hypotheses already suffice; no statement correction or STATEMENT-DISPUTED is needed. Its antecedent source's Transfer paragraph describes an unbounded comparison/localizing equivalence. That cannot simply be invoked under this item's arbitrary-scheme hypotheses using the narrower field-dependent comparison nodes. The split uses only the bounded-below comparison and the already reviewed classical truncation window, whose statement explicitly has arbitrary schemes and a base-change-stable dimension bound. Likewise the existing countable-products node `lem-pc-right-derived-functor-countable-products` is restricted to O_X-modules with values in Ab, so I did not cite it for this pro-étale-to-pro-étale functor. The needed product argument is written out from the general K-injective product theorem and the actual total derived adjunction.
+
+The item is not the unit's key statement, so no unit record was changed. The proof realizes the uniform bound, truncation argument, and direct-sum assertion in the Étale statements paragraph and the bounded-below part of Transfer of `det-ctf-finite-proper-localizing`. It neither proves nor needs a claim that every unbounded classical complex descends to an ordinary étale complex.
+
+## Mathlib and duplicate searches
+
+All new searches were run through the supplied `msearch.py` and appear verbatim in `searches.jsonl` and the item's `mathlib_searches`. The item's inherited searches are retained. Ran LeanFinder, Loogle, grep and LeanSearch, then a second natural-language phrasing targeting total derived products, lower bounds and coproducts. The first semantic hits were unrelated étale morphism properties and scheme limits; LeanSearch first returned Zariski O_X-module pushforward and proper/finite morphism properties. Loogle returned `DerivedCategory.IsGE`, `isGE_iff`, single-complex and representative lemmas. Read `Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean` to verify these are degree-predicate infrastructure. Read `Mathlib/AlgebraicGeometry/Modules/Sheaf.lean` to distinguish the returned O_X-module category from constant-A small-site module sheaves. The second LeanSearch gave generic total-derived definitions, nth right-derived definitions, and the right-adjoint-preserves-limits instance: useful infrastructure, not the complete item or a one-line specialization of it. The grep query found no proper cohomological-dimension theorem.
+
+Searched the whole DAG for 095U, 0D6J, 07KC, 0H72 and 0F0D and then by the concepts of classical comparison, bounded dévissage, product preservation and lower vanishing. The exact applicable existing inputs are cited. Whole-blueprint searches via `tools/blueprint_refs.py search` for `proper classical amplitude`, `proper cohomological`, `classical truncation` and `proper direct image` found no duplicate blueprint statement with all of this item's clauses and hypotheses. `ancestor` confirms `det-ctf-finite-proper-localizing`, through `lem-sfb-finite-proper-classical-coproducts`, matching the retained provenance.
+
+## Not duplicates
+
+No new nodes were created. In particular, the existing `lem-kun-proper-torsion-cd-bound`, `lem-sfb-finite-proper-classical-truncation`, `lem-sfb-bounded-heart-amplitude-devissage` and `lem-exc-direct-image-coproducts` are reused rather than duplicated. The bounded-below and field-restricted comparison statements do not duplicate the combined item.
+
+## Review by Q05
+
+I read the item against the current main-20261015 chapter and unit records and `sk-prop-ctf-finite-proper-localizing.proof.md`, then opened every cited node and read its statement. I read Stacks `etale-cohomology.tex`, label `lemma-cohomological-dimension-proper` (095U): it assumes properness and a fibre dimension bound, and allows arbitrary torsion sheaves with no quasi-compact base or invertibility hypothesis. The statement of `lem-kun-proper-torsion-cd-bound` is that assertion. I also read `lemma-proper-mod-n-direct-sums` (0F0D) and its reduction to finite relative cohomological dimension, and `sites-cohomology.tex`, `lemma-modules-abelian-unbounded` (0D6J), which compares module and abelian total direct images. For the derived inputs I read `derived.tex`, `lemma-negative-vanishing` (05TC), `lemma-derived-adjoint-functors` (09T5) and `lemma-product-K-injective` (0BK6), the actual PlusCompatibility source, and the bounded Postnikov paragraph of the proper-window blueprint proof. There are no new nodes whose sources require a separate audit.
+
+Step 1 uses `prop-pur-kinjective-resolutions-exist`, whose statement explicitly supplies both Grothendieck abelianness and K-injective resolutions for modules over any small ringed site; the common universe in the item checks smallness. `def-weil-pbc-proetale-operations` really states exact module inverse image, the section formula for direct image, and the total adjunction. `def-weil-sheaf-of-modules-category` supplies sectionwise kernels, making the stated left-exactness check valid. `lem-pc-right-derived-functor-triangulated` is for general abelian categories with K-injectives, not merely coherent sheaves or bounded categories, and supplies both functor clauses taken here.
+
+Step 2 uses the statement of `lem-pc-ringed-space-product-kinjective`, which despite its title is quantified over an arbitrary abelian category and any set of K-injectives; it requires only existence of termwise products, not exactness of products. I wrote the componentwise section/gluing construction of those products. The three displayed Hom bijections then follow immediately from the total adjunction actually stated in `def-weil-pbc-proetale-operations` and the product universal property. They identify the canonical projected cone, so projection compatibility is checked. This is elementary after the two cited inputs; no general product-preservation lemma is hidden or introduced.
+
+Step 3 uses the bounded-below negative-vanishing statement, with exactly its left-exactness and Grothendieck hypotheses checked in step 1. Every L with a lower bound is in D+, even if unbounded above. `src-right-derived-functor-plus-compatibility` states the required natural isomorphism between restriction of the total derived functor and the included bounded-below functor; it is not merely a cohomology-in-degree-zero assertion.
+
+Step 4 checks finiteness by the repeated-multiples argument for 1_A, which supplies a common positive annihilator even when A is the zero ring. `lem-kun-proper-torsion-cd-bound` applies to the underlying torsion abelian sheaf, with the identity instance of the given dimension bound. `lem-sbc-higher-direct-image-forget-comparison` states precisely that forgetting scalars on the module higher direct image gives the abelian derived cohomology. Forgetting scalars reflects zero by the sectionwise definition, so the conclusion is genuinely about all A-module sheaves, not only constructible ones or abelian coefficients.
+
+Step 5 verifies quasi-compactness from the finite-type definition and quasi-separatedness from separatedness using the exact statements of `def-weil-proper-morphism`, `def-weil-finite-type-morphism` and `lem-pc-separated-quasi-separated`. It uses `det-pe-classical-sheaves-modules` for both the essential-image description of a classical module sheaf and exactness of nu*. `sk-thm-pe-direct-image-comparison` is used only on F[0], where its bounded-below hypothesis holds, and its qcqs hypothesis has just been checked. PlusCompatibility passes to the total functor. `lem-sp-kinjective-computes` supplies the sheaf-case higher-derived identification. Exact inverse image commutes with cohomology by kernels/images/cokernels. No unbounded comparison theorem is used.
+
+Step 6 uses `lem-sfb-bounded-heart-amplitude-devissage` exactly as stated: its P is an arbitrary replete class containing zero, not necessarily a Serre subcategory. Classical sheaves form such a class by `det-pe-classical-sheaves-modules`. Its bounded-complex hypothesis holds in this step; the d=2e heart bound is step 5. This proves a genuinely bounded intermediate case, rather than moving an item clause into a new node.
+
+Step 7 uses only good truncation formulas and the statement of `lem-sfb-finite-proper-classical-truncation`. The explicit choice N=min(b,m-2e-2) is at most b and strictly less than m-2e-1. Thus the resulting complex is bounded with classical cohomology. The truncation node allows arbitrary base changes S and arbitrary unbounded J; specialize to S=Y and the identity, with the canonical fibre-product projection identification. Its inequality and coefficient category agree exactly. The cohomology isomorphism then carries the zero from step 6 to the desired degree of GL. I checked dependency reach: this truncation input, the bounded dévissage input and the coproduct criterion have no path back to the item.
+
+Step 8 uses `lem-exc-direct-image-coproducts`, whose statement has a finite commutative ring, qcqs morphism and a uniform bound on all module sheaves, and concludes preservation of all set-indexed ambient coproducts of unbounded complexes with the coprojection comparison. These hypotheses are supplied by steps 4 and 5. This avoids using the narrower Noetherian `lem-amb-proper-coproducts` or assuming the base is quasi-compact.
+
+I tested A=0, empty X and Y, e=0, negative a and b, and N>b: the chosen minimum prevents the last issue; empty fibres are allowed in the bound node; zero classical sheaves and zero complexes are included. At e=0 the bound remains b, with no spurious +1 from an unsupported homotopy-limit estimate. The identity and finite proper maps meet the expected exact upper bound. Non-quasi-compact Y is allowed because neither 095U nor the chosen coproduct criterion requires it. Every step is below 2000 characters. I checked sections B–E of `coord/delivery-errors.md`: statements are unchanged, there are no new statement-only leaves to validate, all non-elementary inputs have existing node citations, quotes come from statements rather than proofs, canonical maps are identified, and no SGA route is used. Off-unit generic tools are declared with their purposes in `split_report.tool_uses`.
+
+## Unfinished work
+
+None in the requested one-level split. Existing input nodes remain the responsibility of their own items; this delivery does not claim to close their Lean proofs. Server dry-run and push results follow from the delivery command.
