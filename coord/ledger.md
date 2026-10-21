@@ -19783,3 +19783,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:22 L: returned deliver/Q01/lem-weil-pbc-lisse-e-constructible-integral-lattice (reviewer RETURN: re-split (the human, 2026-10-21): every delivery made before the final requirement is returned and the re-split starts a)
 - 03:22 L: returned deliver/NI/prop-weil-pbc-direct-image-limits (reviewer RETURN: re-split (the human, 2026-10-21): every delivery made before the final requirement is returned and the re-split starts a)
 - 03:22 L: returned deliver/Q46/sk-lem-stratified-lattice (reviewer RETURN: re-split (the human, 2026-10-21): every delivery made before the final requirement is returned and the re-split starts a)
+- 03:22 L: returned deliver/Q13/sk-prop-sf-rf-shriek-preservation (reviewer RETURN: re-split (the human, 2026-10-21): every delivery made before the final requirement is returned and the re-split starts a)
