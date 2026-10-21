@@ -16,10 +16,9 @@
  ],
  "proof": [
   {
-   "text": "Apply the adopted determinant_dual_evaluation to M and hfree to obtain exteriorPower(M^dual,d) tensor exteriorPower(M,d) ≅ O_X. Precompose with the tensor of exteriorSheafPowerIso (dual M) d and exteriorSheafPowerIso M d. This yields the original ordinary sheaf tensor isomorphism L tensor F ≅ O_X for the legacy exteriorSheaf determinant objects. Continue with the unchanged K-flat single-complex and shift comparisons below.",
+   "text": "Apply the adopted determinant_dual_evaluation X M d hfree on canonical exteriorPower objects, obtaining their ordinary tensor product isomorphic to the sheaf tensor unit. The existing exteriorSheafPowerIso comparisons identify these with the sheafified sectionwise exterior powers in the mathematical statement. They are transported in the legacy consumer, rather than in the adopted theorem.",
    "uses": [
-    "lem-sc-determinant-dual-evaluation",
-    "lem-sc-exterior-sheaf-power-comparison"
+    "lem-sc-determinant-dual-evaluation"
    ],
    "elementary": false
   },
@@ -42,14 +41,13 @@
  "proof_deps": [
   "lem-sc-determinant-dual-evaluation",
   "def-pc-scheme-derived-tensor-structure",
-  "lem-pc-sheaf-modules-tensor-closed",
-  "lem-sc-exterior-sheaf-power-comparison"
+  "lem-pc-sheaf-modules-tensor-closed"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/duality.tex",
   "place": "Tag 0BRT final determinant inversion; ordinary evaluation split off, K-flat localization and shift composition formalized by P3 using upstream Etale.Derived.Invertible and DerivedCategory.Monoidal.Shift",
-  "note": "S4 retirement of the ordinary legacy determinant evaluation: the only consumer proof change is the tensor of the existing exterior-sheaf comparison isomorphisms before the adopted ordinary evaluation. Public signature and remaining derived argument are preserved."
+  "note": "W2 duplicate retirement: attachment and proof now describe the unchanged adopted exteriorPower theorem. The same ordinary determinant, K-flat single, and opposite-shift cancellation route remains; exteriorSheaf compatibility for the quarantined legacy consumer is recorded with a compiled transport in the change record."
  },
  "mathlib_searches": [
   {
@@ -112,14 +110,15 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-duality",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.ShiftedDeterminantDualEvaluation",
-  "file": "lean/Sheaf/AlgebraicGeometry/ShiftedDeterminantDualEvaluation.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.ShiftedDeterminantDualEvaluation",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/ShiftedDeterminantDualEvaluation.lean",
   "declaration": "AlgebraicGeometry.shiftedDeterminant_dual_evaluation",
-  "statement": "theorem shiftedDeterminant_dual_evaluation (X : Scheme.{u}) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] (M : X.Modules) (d : ℕ) (hfree : M.IsFiniteLocallyFreeOfRank d) : Nonempty ((((DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj (Scheme.Modules.exteriorSheaf (SheafOfModules.homObj (R := X.sheaf) M (SheafOfModules.unit X.ringCatSheaf)) d))⟦-(d : ℤ)⟧ ⊗ ((DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj (Scheme.Modules.exteriorSheaf M d))⟦(d : ℤ)⟧) ≅ 𝟙_ (schemeDerivedCategory X))",
+  "statement": "theorem shiftedDeterminant_dual_evaluation\n    (X : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    (M : X.Modules) (d : ℕ) (hfree : M.IsFiniteLocallyFreeOfRank d) :\n    Nonempty ((((DerivedCategory.singleFunctor\n      (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj\n        (Scheme.Modules.exteriorPower\n          (SheafOfModules.homObj (R := X.sheaf) M\n            (SheafOfModules.unit X.ringCatSheaf)) d))⟦-(d : ℤ)⟧ ⊗\n      ((DerivedCategory.singleFunctor\n        (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj\n          (Scheme.Modules.exteriorPower M d))⟦(d : ℤ)⟧) ≅\n      𝟙_ (schemeDerivedCategory X))",
   "branch": "sheaf-dag",
-  "by": "V1",
-  "date": "2026-10-12"
+  "by": "W2",
+  "date": "2026-10-21",
+  "note": "Retirement: use the adopted proved theorem on exteriorPower. The preserved quarantined consumer uses exteriorSheaf; its exact shifted comparison transport is compiled and recorded in coord/changes/W2-retire-shifted-determinant-dual-evaluation.md for restoration. No node or parent dependency is withdrawn."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -134,12 +133,12 @@
  "reviewed_proof": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "C-6e4ba",
-  "group": "S4",
+  "reviewer": "C-69d56",
+  "group": "W2",
   "result": "pass",
-  "landing": "20261021T134536-L-1343342",
+  "landing": "20261021T154105-L-2792525",
   "kind": "interface",
-  "note": "independent cc review: withdrawn Sheaf item stub + adapted ShiftedDeterminantDualEvaluation (diff vs live: import swap + exteriorSheafPowerIso transport) against upstream WeilConjectures.AlgebraicGeometry.DeterminantDualEvaluation; node lean.statement verbatim vs upstream theorem; importer compiled (28.6 s, axioms standard)"
+  "note": "independent cc review: Withdrawn stub + node lean record (existing:true) against upstream WeilConjectures.AlgebraicGeometry.ShiftedDeterminantDualEvaluation.shiftedDeterminant_dual_evaluation (verbatim statement, proof fields vs upstream proof); importers via rg (only quarantined SmoothProperRelativeDualizing, restoration edit in change record)"
  },
  "lean_audit": {}
 }
