@@ -20,134 +20,48 @@
  ],
  "proof": [
   {
-   "text": "Work with the small site representatives in the coefficient universe. By [lem-weil-proetale-weakly-etale-localization](1), the sites over the open $U$ are the slice sites at $j$ and $i$. By [lem-sfb-internal-module-operations-transport], internal module objects, their pullbacks, direct images and specified adjunctions identify with sectionwise modules over the reconstructed coefficient ring sheaves, including the units and counits. This exact equivalence preserves K-injectivity: it identifies the Hom groups from acyclic complexes, which define K-injectivity. We may therefore calculate with ringed-site modules and carry back the resulting morphisms. By [sk-prop-sfb-cartesian-coefficients](1), each coefficient comparison is an isomorphism and every module pullback in the diagram is exact and additive. Thus its derived functor is the termwise functor. The Cartesian identification gives $D'\\times_{Z'}U'=h^{-1}(U)\\times_UU'=U'$, with $h'|_{U'}=\\mathrm{id}_{U'}$. All the following constructions apply to the primed and unprimed triples.",
+   "text": "Apply [lem-sfb-identity-open-underived-square-normalization] to the specified identity locus and its base change. This supplies the sectionwise $c_h,c_{h'}$, composition comparisons $a_h,a_{h'}$, their underived adjunct compatibility, and, writing $s:j'^*v^*\\cong v_U^*j^*$ and $t:i'^*w^*\\cong v_U^*i^*$, the derived termwise equation\n$$t_{h^*A}\\,i'^*(\\theta_A)\\,a_{h',v^*A}^{-1}=v_U^*(a_{h,A}^{-1})\\,s_A.$$\nThe primed identity locus is $D'\\times_{Z'}U'=h^{-1}(U)\\times_UU'=U'$; hence all hypotheses hold for both triples.",
    "uses": [
-    "lem-weil-proetale-weakly-etale-localization",
-    "lem-sfb-internal-module-operations-transport",
-    "sk-prop-sfb-cartesian-coefficients"
+    "lem-sfb-identity-open-underived-square-normalization"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "lemma-localize-morphism-ringed-sites; module-object transport and Cartesian coefficients as in the cited blueprint nodes"
+    "place": "Tag 04J0, lemma-localize-morphism-ringed-sites; explicit adjunction/conjugate normalization for the identity localized map, and the pullback-composition comparison of sites-cohomology.tex, Tag 07A7, remark-base-change."
    }
   },
   {
-   "text": "At the sheaf level write $c_h:j^*h_*\\xrightarrow{\\sim}i^*$ for the sectionwise identification. Indeed, for every pro-etale $T\\to U$, $T\\times_ZD=T$ by the specified identification $h^{-1}(U)=U$, so both sides evaluate to $M(T\\to U\\xrightarrow{i}D)$ by [def-sfb-finite-lower-star] and [def-pur-localized-ringed-site]. Their restriction maps coincide. Their module actions coincide as well: [def-sfb-module-lower-star] uses the structural ring map, whose restriction along the identity $U\\to U$ is the identity. Let $a_h:i^*h^*\\xrightarrow{\\sim}j^*$ be the pullback-composition comparison for $h i=j$ from [def-sfb-module-upper-star-comp], followed by the specified equality. On the localized sites this is the usual identity-pullback identification, with tensor unit $1\\otimes m\\mapsto m$: its right-adjoint comparison is the sectionwise composition identification of [def-sfb-module-lower-star-comp], so the defining conjugacy gives this normalization. Define $c_{h'}$ and $a_{h'}$ in exactly these ways for $h'i'=j'$.",
+   "text": "Apply [lem-sfb-identity-open-derived-adjunction-normalization] separately to $(h,i,j)$ and $(h',i',j')$, using the underived adjunct compatibility just obtained. It gives the canonical K-injective natural restriction isomorphisms $r_h,r_{h'}$ of the statement and the actual derived equations\n$$r_{h',h'^*A}\\,j'^*(\\eta_{h',A})=a_{h',A}^{-1},\\qquad i^*(\\varepsilon_{h,K})=r_{h,K}\\,a_{h,Rh_*K}.$$\nThe lemma verifies the localized right-derived comparison units, so these formulas concern precisely the specified adjunctions.",
    "uses": [
-    "def-sfb-finite-lower-star",
-    "def-pur-localized-ringed-site",
-    "def-sfb-module-lower-star",
-    "def-sfb-module-upper-star-comp",
-    "def-sfb-module-lower-star-comp"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "lemma-localize-morphism-ringed-sites, sectionwise identities, specialized to identity localized vertical map"
-   }
-  },
-  {
-   "text": "These underived comparisons respect adjuncts. In fact, for a section $s\\in M(T\\to U\\xrightarrow{j}Z)$ the unit of the canonical module adjunction sends $s$ to the universal pullback section $1\\otimes s$. On the localized identity morphism, $a_{h,M}$ sends that section back to $s$. Consequently $c_{h,h^*M}\\,j^*(\\eta_{h,M})=a_{h,M}^{-1}$ on every site object, hence as module-sheaf maps. This uses the concrete tensor/adjunction bijection in [def-sfb-module-upper-lower-adjunction] and its preservation by [lem-sfb-internal-module-operations-transport]. For any $t:h^*M\\to N$, write $t^\\sharp=h_*t\\circ\\eta_{h,M}$. Naturality of $c_h$ gives\n$$c_{h,N}\\,j^*(t^\\sharp)=i^*(t)\\,c_{h,h^*M}\\,j^*(\\eta_{h,M})=i^*(t)\\,a_{h,M}^{-1}.$$\nThis is precisely the adjunct compatibility with the identity adjunction on $U$. The same section calculation with $T\\to U'$ proves the primed compatibility.",
-   "uses": [
-    "def-sfb-module-upper-lower-adjunction",
-    "lem-sfb-internal-module-operations-transport"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "lemma-localize-morphism-ringed-sites; calculation of the localized module-adjunction unit"
-   }
-  },
-  {
-   "text": "Choose a K-injective resolution $K\\to I$ in the sectionwise module category using [prop-pur-kinjective-resolutions-exist], and use the exact equivalence of step 1 for internal modules. By [sk-def-sfb-module-derived-pushpull], $h_*I$ represents $Rh_*K$. The complex $i^*I$ is K-injective on the slice by [lem-pur-kinjective-restrict-localized]; $K\\to I$ restricts to a quasi-isomorphism because restriction is exact. The degreewise section identity $c_{h,I}:j^*h_*I\\cong i^*I$ therefore yields\n$$r_{h,K}:j^*Rh_*K\\xrightarrow{\\sim}i^*K.$$\nThis is exactly the K-injective normalization in the statement. On complexes the maps $c_{h,I}$ are natural, and the canonical resolution comparisons are natural by the right-derived construction [def-sfb-right-derived-functor], so $r_h$ is a natural isomorphism. Repeating this argument for $h'$ gives $r_{h'}$; there is no assumption that $w^*I$ is K-injective.",
-   "uses": [
-    "prop-pur-kinjective-resolutions-exist",
-    "sk-def-sfb-module-derived-pushpull",
-    "lem-pur-kinjective-restrict-localized",
-    "def-sfb-right-derived-functor"
+    "lem-sfb-identity-open-derived-adjunction-normalization"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6G, lemma-restrict-direct-image-open, proof; Tag 08FI, lemma-restrict-K-injective-to-open"
+    "place": "Tag 0D6G, lemma-restrict-direct-image-open; Tag 08FI, lemma-restrict-K-injective-to-open; derived adjunct normalization via derived.tex, Tag 09T5, lemma-derived-adjoint-functors and the existing derived adjoint-square comparison."
    }
   },
   {
-   "text": "Check the right-derived-functor hypothesis needed to transport adjuncts. The underived functor $j^*h_*$ is naturally isomorphic via $c_h$ to the exact functor $i^*$. Its termwise derived factorization is consequently its total right derived functor by [lem-weil-pbc-exact-functor-derived-functor](1). The natural isomorphism $r_h$ of step 4 identifies that factorization with $j^*Rh_*$. It also identifies their comparison units: if $P\\to I$ is a resolution, naturality of $c_h$ says\n$$c_{h,I}\\circ j^*h_*(P\\to I)=i^*(P\\to I)\\circ c_{h,P}.$$\nAfter localization, the right-hand resolution map is invertible and is exactly the one used to identify $i^*I$ with $i^*P$. Thus $r_{h,QP}\\,j^*(\\gamma_{h,P})=Q(c_{h,P})$, with $\\gamma$ the right-derived comparison unit of [def-sfb-right-derived-functor]. Hence $j^*Rh_*$, with its localized comparison unit, is a right derived functor of $j^*h_*$. The identical argument proves this assertion for $h'$.",
-   "uses": [
-    "lem-weil-pbc-exact-functor-derived-functor",
-    "def-sfb-right-derived-functor"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "lemma-restrict-direct-image-open, proof; exact-functor derived universal property applied to the sectionwise identification"
-   }
-  },
-  {
-   "text": "Apply [lem-kun-derived-adjoint-square-comparison] with\n$$(L,R,V,W)=(h^*,h_*,i^*,j^*),\\qquad L_0=R_0=\\mathrm{id}_{\\Mod_{\\Lambda_U}},\\quad (a,c)=(a_h,c_h).$$\nThe identity adjunction has identity unit and counit [def-weil-pbc-composite-adjunction]. All four functors required to be exact are exact by step 1; the underived adjunct condition was verified in step 3, the total derived adjunction exists by [sk-def-sfb-module-derived-pushpull], and the extra right-derived hypothesis and normalization $b=r_h$ were verified in step 5. Its two formulas consequently give, now on the derived categories,\n$$r_{h,h^*A}\\circ j^*(\\eta_{h,A})=a_{h,A}^{-1},\\qquad i^*(\\varepsilon_{h,K})=r_{h,K}\\circ a_{h,Rh_*K}.$$\nApply the same theorem to $(h'^*,h'_*,i'^*,j'^*)$ to obtain these formulas with primes. Here and below $a_h$ also denotes its termwise derived comparison, as required by the theorem; no other derived adjunction or arbitrary isomorphism of functors is substituted.",
-   "uses": [
-    "lem-kun-derived-adjoint-square-comparison",
-    "def-weil-pbc-composite-adjunction",
-    "sk-def-sfb-module-derived-pushpull"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 09T5, lemma-derived-adjoint-functors; exact adjoint-square specialization supplied by the cited node"
-   }
-  },
-  {
-   "text": "Put $s:j'^*v^*\\xrightarrow{\\sim}v_U^*j^*$ and $t:i'^*w^*\\xrightarrow{\\sim}v_U^*i^*$. The comparison $\\theta$ and these two comparisons all use [def-sfb-module-upper-star-comp]. The composite Hom bijection is the composite of the two Hom bijections [def-weil-pbc-composite-adjunction]. Their associativity follows directly from that definition and the comparison normalization: the conjugate of either reassociation is the same sectionwise composition map of pushforwards in [def-sfb-module-lower-star-comp], and conjugation is injective and respects composition [def-weil-pbc-adjunction-conjugate]. Inserting the identity localized map $h|_U=h'|_{U'}=\\mathrm{id}$, the two reassociations of pullback along the equality $hwi'=vj'=jv_U$ therefore give\n$$t_{h^*A}\\circ i'^*(\\theta_A)\\circ a_{h',v^*A}^{-1}\n =v_U^*(a_{h,A}^{-1})\\circ s_A.$$\nTo check the normalization, before deriving, both right-adjoint composites evaluate a sheaf on the very same iterated fibre product; the associativity map sends a tuple of projections to that tuple. Their composites to the final fibre product agree by its universal property, so the section maps agree, not merely up to an unspecified automorphism. This proves the displayed comparison identity on sheaves, and all pullbacks are exact, so the same equality holds termwise on complexes and on their derived categories.",
-   "uses": [
-    "def-sfb-module-upper-star-comp",
-    "def-sfb-module-lower-star-comp",
-    "def-weil-pbc-adjunction-conjugate",
-    "def-weil-pbc-composite-adjunction"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "remark-base-change, its canonical pullback-composition identification; elementary reassociation with the specified conjugate normalization"
-   }
-  },
-  {
-   "text": "Set $A=v^*Rh_*K$. Expand the mate by [def-weil-pbc-adjunction-mate] as the specified unit/square/counit composite. Naturality of $r_{h'}$, first at $w^*\\varepsilon_{h,K}$ and then at $\\theta_{Rh_*K}$, followed by the primed unit equation of step 6, gives\n$$r_{h',w^*K}\\circ j'^*B_{h,K}\n =i'^*(w^*\\varepsilon_{h,K})\\circ i'^*(\\theta_{Rh_*K})\\circ a_{h',A}^{-1}.$$\nNow apply $t_K$ and use naturality of $t$, the comparison identity of step 7, and the unprimed counit equation of step 6, in that order:\n$$\\begin{aligned}\nt_K r_{h',w^*K}j'^*B_{h,K}\n &=v_U^*(i^*\\varepsilon_{h,K})\\,v_U^*(a_{h,Rh_*K}^{-1})\\,s_{Rh_*K}\\\\\n &=v_U^*(r_{h,K})\\,s_{Rh_*K}.\n\\end{aligned}$$\nThe right side is exactly the statement's source identification $j'^*v^*Rh_*K\\cong v_U^*i^*K$; $t_Kr_{h',w^*K}$ is exactly its target identification. Conjugating the displayed equality by the inverse of the source identification proves that $j'^*B_{h,K}$ is the identity of $v_U^*i^*K$. Every comparison and every equation used is natural in $K$, so this is equality of natural derived morphisms for arbitrary unbounded $K$.",
+   "text": "Expand the specified mate by [def-weil-pbc-adjunction-mate]. Naturality of $r_{h'}$ at $w^*\\varepsilon_{h,K}$ and $\\theta_{Rh_*K}$, followed by step 2's primed unit equation, gives\n$$r_{h',w^*K}\\,j'^*B_{h,K}=i'^*(w^*\\varepsilon_{h,K})\\,i'^*(\\theta_{Rh_*K})\\,a_{h',v^*Rh_*K}^{-1}.$$\nApply $t_K$, then its naturality, step 1's comparison equation, and step 2's unprimed counit equation:\n$$\\begin{aligned}\nt_Kr_{h',w^*K}j'^*B_{h,K}\n&=v_U^*(i^*\\varepsilon_{h,K})\\,v_U^*(a_{h,Rh_*K}^{-1})\\,s_{Rh_*K}\\\\\n&=v_U^*(r_{h,K})\\,s_{Rh_*K}.\n\\end{aligned}$$\nThe last expression is the prescribed source identification and $t_Kr_{h',w^*K}$ the prescribed target identification. Composing with the inverse source identification proves the required identity. All factors are natural in $K$, for arbitrary unbounded $K$.",
    "uses": [
     "def-weil-pbc-adjunction-mate"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "remark-base-change, explicit restriction of the unit/square/counit construction to the identity vertical maps"
+    "place": "Tag 07A7, remark-base-change; unit/square/counit formula and cancellation after the two normalized restriction lemmas."
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-proetale-weakly-etale-localization",
-  "lem-sfb-internal-module-operations-transport",
-  "sk-prop-sfb-cartesian-coefficients",
-  "def-sfb-finite-lower-star",
-  "def-pur-localized-ringed-site",
-  "def-sfb-module-lower-star",
-  "def-sfb-module-upper-star-comp",
-  "def-sfb-module-lower-star-comp",
-  "def-sfb-module-upper-lower-adjunction",
-  "prop-pur-kinjective-resolutions-exist",
-  "sk-def-sfb-module-derived-pushpull",
-  "lem-pur-kinjective-restrict-localized",
-  "def-sfb-right-derived-functor",
-  "lem-weil-pbc-exact-functor-derived-functor",
-  "lem-kun-derived-adjoint-square-comparison",
-  "def-weil-pbc-composite-adjunction",
-  "def-weil-pbc-adjunction-conjugate",
+  "lem-sfb-identity-open-underived-square-normalization",
+  "lem-sfb-identity-open-derived-adjunction-normalization",
   "def-weil-pbc-adjunction-mate"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 0D6G and 08FI and remark-base-change; explicit unit/counit normalization using the existing exact derived adjoint-square theorem"
+  "place": "Tags 0D6G, 08FI and 07A7; short assembly of the underived normalized square and its K-injective/derived adjunction lift, preserving the original route."
  },
  "mathlib_searches": [
   {
@@ -262,45 +176,12 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "item": "lem-sfb-base-change-identity-open-restriction",
   "worker": "stage1",
-  "summary": "Eight steps construct the canonical K-injective restriction isomorphisms, verify the underived adjoint-square normalization and the right-derived universal-property hypothesis, apply the existing derived adjoint-square theorem to the unit and counit, and cancel them in the specified mate. Statement unchanged; no new nodes.",
+  "summary": "Repair of the 2026-10-21 human re-split: two comparable statement-only nodes separate the underived normalized adjunction square (old steps 1–3 and 7) from its K-injective/right-derived lift (old steps 1 and 4–6). The parent retains explicit mate expansion and cancellation (old step 8). Statement and Lean metadata unchanged; all eight old arguments retained verbatim in report.md for the future workers.",
   "blueprint": "Realizes det-sf-comp-composition-base-change proof (3), the sentence that proper base change for h is compatible with restriction to the open X′ on which h′ is the identity. The calculation needs neither properness nor density once h^{-1}(U)=U is specified.",
-  "tool_uses": [
-   {
-    "node": "lem-weil-proetale-weakly-etale-localization",
-    "why": "Identifies the pro-etale open sites with slice sites, allowing the ringed-site K-injective restriction theorem; this is a localization tool, not a new compactification route."
-   },
-   {
-    "node": "lem-sfb-internal-module-operations-transport",
-    "why": "Identifies internal condensed modules with ringed-site modules and preserves their specified adjunction units and counits, rather than only their underlying categories."
-   },
-   {
-    "node": "sk-prop-sfb-cartesian-coefficients",
-    "why": "Supplies exact module pullback for all admissible condensed coefficients; exactness is required by the derived adjoint-square theorem."
-   },
-   {
-    "node": "prop-pur-kinjective-resolutions-exist",
-    "why": "Supplies unbounded K-injective resolutions on the chosen small ringed sites; no compactification-specific result replaces this existence tool."
-   },
-   {
-    "node": "lem-pur-kinjective-restrict-localized",
-    "why": "Supplies K-injectivity after open slice restriction, with arbitrary ring sheaves and unbounded complexes."
-   },
-   {
-    "node": "lem-weil-pbc-exact-functor-derived-functor",
-    "why": "Identifies the derived exact restriction functor with its total right derived functor, verifying the extra hypothesis of the derived square comparison."
-   },
-   {
-    "node": "lem-kun-derived-adjoint-square-comparison",
-    "why": "Supplies preservation of adjuncts, units and counits by a canonical right-derived square comparison after all its hypotheses are checked; the composition unit has no such generic categorical theorem."
-   },
-   {
-    "node": "sk-def-sfb-module-derived-pushpull",
-    "why": "Specifies the unbounded total module derived functors and their canonical adjunction, rather than a completed or bounded substitute."
-   }
-  ]
+  "tool_uses": []
  },
  "tool_uses": [
   "lem-weil-proetale-weakly-etale-localization",
@@ -313,12 +194,12 @@
   "sk-def-sfb-module-derived-pushpull"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-Codex-Q18-afc06a869",
-  "group": "Q18",
+  "reviewer": "NT-cc-Q12-4b63bb53b",
+  "group": "Q12",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q18-afc06a869 (reviewer sub-agent of L); spot-checked: Reviewed item, all eight steps, cited DAG statements, Stacks Tags 0D6G/08FI and Remark 07A7, current main-20261015 blueprint route, unit/chapter metadata, edge cases, and Mathlib searches. The mate typing, K-injective restriction, derived adjunction normalization, and final cancellation are correct; no new nodes or repairs are needed. Wrote review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-4b63bb53b (reviewer sub-agent of L); spot-checked: Re-split note (human, 2026-10-21) is satisfied. The item statement is unchanged. The proof is a 3-step assembly of 1844 characters. There are two statement-only nodes of comparable size (2753 and 3170 characters), and every old argument has a home: old steps 2, 3 and 7 go to the underived square node, old steps 4, 5 and 6 go to the derived adjunction node, and old step 8 is the parent's step 3. I checked step 3's chase by hand. Naturality of r_h' and the primed unit equation come first. Then come t-naturality, the coherence equation at A=Rh_*K, and the counit equation i^*ε=r_h a_h. The result gives v_U^*(r_h)s, which matches the Lean equation. Edge cases are fine: v=id reduces to the triangle identity, and U=∅ and K=0 are trivial. I typechecked every equation in both new statements. The pullback-compositor coherence and the adjoint-square outputs (lem-kun-derived-adjoint-square-comparison with V=i^*, W=j^*) are true. Neither node restates the item or the adjoint-square node. All three kinds of Mathlib search are present. Stacks 04J0, 0D6G, 08FI, 07A7 and 09T5 and blueprint det-sf-comp-composition-base-change proof (3) all match. There is no SGA citation, the item is not on the dropped list, and live still has the old proof, so nothing supersedes this delivery. Two faults, both fixed in fixes/dag/nodes/sec-six-functors-basics/. (1) C4/E1: both new statements took pullback exactness from sk-prop-sfb-cartesian-coefficients. That node covers only the finite-subextension Q̄_ℓ, not the ℓ-adic Q̄_ℓ of sk-def-localizing-closure. Both now cite det-prop-sfb-module-pullback-exact-main, with stmt_deps swapped. (2) Duplicate clause: the derived node constructed r_h again, but r_h is already given by lem-sfb-identity-open-derived-restriction (N0 PASS, landed on live 2026-10-21 after this base) with (Z',j')=(D,i). The derived node now takes r_h from that node and keeps its normalization, the γ-equation and the unit/counit equations. A cycle check on live found no cycle. Advisories: the item statement still cites cartesian-coefficients for exactness (left alone because the note fixes the statement). The item's top-level tool_uses still lists 8 old dependencies the proof no longer uses; this field is merge-owned. lem-sfb-proetale-open-restriction-counit is a useful sectionwise input for proving node 1, not a duplicate. Off-chapter snapshot nodes disappeared during the review, so I read them from clones/live. No tool_uses to accept.; 2 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
   "date": "2026-10-18",
