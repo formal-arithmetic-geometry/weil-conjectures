@@ -22986,3 +22986,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:55 L: merged deliver/X7/Sheaf.Paper.ConstantCoefficientScalarNormalization (stage 3; reviewer PASS; first push; landing 20261021T155525-L-3346041 (proof); batch 20261021T155519; modules 1; new nodes 0)
 - 15:57 L: merged deliver/B2/Sheaf.Paper.PerfectStrataUniformReductions (stage 3; reviewer PASS; first push; landing 20261021T155739-L-3432110 (interface); batch 20261021T155738; modules 3; new nodes 2)
 - 15:57 L: merged deliver/B5/Sheaf.Paper.IntegralConstructibleCompletionBridge (stage 3; reviewer PASS; first push; landing 20261021T155743-L-3435194 (interface); batch 20261021T155738; modules 2; new nodes 1)
+- 15:57 L: merged deliver/B5/Sheaf.Paper.PurTwistIntegralLocalModels (stage 3; reviewer PASS; first push; landing 20261021T155746-L-3437657 (interface); batch 20261021T155738; modules 1; new nodes 0; change records: coord/changes/B5-pur-twist-integral-local-proof.md)
