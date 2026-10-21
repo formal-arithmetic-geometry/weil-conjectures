@@ -10,7 +10,7 @@ public import Mathlib.FieldTheory.KrullTopology
 public import WeilConjectures.RepresentationTheory.DiscreteContinuousRep
 public import Mathlib.RepresentationTheory.Invariants
 import WeilConjectures.AlgebraicGeometry.EtaleGlobalSectionsGaloisInjective
-import Sheaf.AlgebraicGeometry.EtaleGlobalSectionsGaloisImage
+import WeilConjectures.AlgebraicGeometry.EtaleGlobalSectionsGaloisImage
 
 /-!
 # Global sections under the abelian Galois stalk equivalence
