@@ -23,11 +23,9 @@
  ],
  "proof": [
   {
-   "text": "Identify the étale slice explicitly. Send $(T\\to W)$ in $W_{\\mathrm{ét}}$ to $(T\\to W\\xrightarrow{v}X,\\ T\\to W)$ in $X_{\\mathrm{ét}}/W$. The composite is étale by clause (2) of [lem-weil-pbc-etale-composition-cancellation]. Conversely an object of the slice has $T\\to X$ and $W\\to X$ étale, so its $X$-map $T\\to W$ is étale by clause (3) of that node. These operations leave the underlying schemes and arrows unchanged and are inverse, before passage to compatible small skeletons. By [def-weil-pbc-etale-site] and [def-pur-localized-ringed-site], a family on either side covers precisely when its underlying étale arrows are jointly surjective. Thus this is an equivalence of sites. The restriction of $F$ through this identification evaluates at $T\\to W$ as $F(T\\to X)$, including its original restriction homomorphisms.",
+   "text": "Use the existing sorry-free equivalence Scheme.Etale.overEquiv W from [lem-weil-pbc-etale-site-localization-open]. Its inverse is Scheme.Etale.etaleToOver W, composition with W.hom on the same schemes and arrows. Its composite with Over.forget W equals MorphismProperty.Over.map ⊤ W.prop definitionally, and the underlying map to W is definitionally T.hom. The existing overEquiv_inverse_isDenseSubsite instance identifies the two topologies.",
    "uses": [
-    "lem-weil-pbc-etale-composition-cancellation",
-    "def-weil-pbc-etale-site",
-    "def-pur-localized-ringed-site"
+    "lem-weil-pbc-etale-site-localization-open"
    ],
    "elementary": true,
    "source": {
@@ -36,7 +34,7 @@
    }
   },
   {
-   "text": "The inclusion of étale objects into weakly étale objects in [def-weil-pbc-site-comparison-morphism] makes $v:W\\to X$ an object of $X_{\\mathrm{proét}}$. Apply clause (1) of [lem-weil-proetale-weakly-etale-localization] to this object (choose the auxiliary commutative ring $A=\\mathbf Z$, whose value is irrelevant to that clause). It identifies $W_{\\mathrm{proét}}$ with $X_{\\mathrm{proét}}/W$, by the same composition and forgetful operations as in step 1, and identifies their coverings. For an abelian sheaf $G$ the slice restriction is therefore the sheaf $G|_W$ with $G|_W(T\\to W)=G(T\\to X)$ and the restriction maps of $G$.",
+   "text": "Use Scheme.ProEt.sliceDense X ((Scheme.toProEt X).obj W), the dense-subsite clause of [lem-weil-proetale-weakly-etale-localization] for the concrete slice equivalence. The inclusion in [def-weil-pbc-site-comparison-morphism] retains W and its structure map, now regarded as weakly etale. Thus restriction retains the sectionwise formula on schemes and arrows.",
    "uses": [
     "def-weil-pbc-site-comparison-morphism",
     "lem-weil-proetale-weakly-etale-localization"
@@ -48,7 +46,7 @@
    }
   },
   {
-   "text": "Apply clause (1) of [lem-weil-pbc-etale-inverse-image-restriction] to the étale map $v$ and the abelian sheaf $F$, obtaining $\\rho_{e,F}:v_{\\mathrm{ét}}^{-1}F\\xrightarrow{\\sim}F|_W$, natural in $F$. Apply the abelian-sheaf part of clause (1) of [lem-sfb-proetale-object-inverse-image-restriction] to the object $v$ of step 2, obtaining $\\rho_{p,G}:v_{\\mathrm{proét}}^{-1}G\\xrightarrow{\\sim}G|_W$, natural in $G$. These are the geometric inverse images induced by the scheme map $v$, not merely the restriction functors on the abstract slice. Their section formulas are exactly those of steps 1 and 2. The abelian clauses used here require neither a finite coefficient ring nor that $v$ be a monomorphism.",
+   "text": "Specialize Scheme.proEtaleObjectInverseImageRestriction from [lem-sfb-proetale-object-inverse-image-restriction] to the pro-etale object W and the auxiliary commutative ring ULift ℤ in universe u. Extract its abelian comparison C, including the distinguished Kan-coprojection and sheafification-unit normalization. Its sheafIso identifies the pro-etale inverse image with sectionwise restriction. Use Etale.upperStarIsoLocalizationRestriction from [lem-weil-pbc-etale-inverse-image-restriction] for the etale identification. Both are natural isomorphisms in the sheaf and require no monomorphism or coefficient finiteness.",
    "uses": [
     "lem-weil-pbc-etale-inverse-image-restriction",
     "lem-sfb-proetale-object-inverse-image-restriction"
@@ -60,7 +58,7 @@
    }
   },
   {
-   "text": "Use the abelian comparison square [lem-weil-pbc-comparison-pullback] with $u=v$, $U=W$ and $V=X$. Write its component as $c_F:\\nu_W^{-1}v_{\\mathrm{ét}}^{-1}F\\xrightarrow{\\sim}v_{\\mathrm{proét}}^{-1}\\nu_X^{-1}F$. The required component is the following explicit composite of abelian-sheaf isomorphisms on $W_{\\mathrm{proét}}$:\n$$ (\\nu_X^{-1}F)|_W\\xrightarrow{\\rho_{p,\\nu_X^{-1}F}^{-1}}v_{\\mathrm{proét}}^{-1}\\nu_X^{-1}F\\xrightarrow{c_F^{-1}}\\nu_W^{-1}v_{\\mathrm{ét}}^{-1}F\\xrightarrow{\\nu_W^{-1}(\\rho_{e,F})}\\nu_W^{-1}(F|_W). $$\nEvery adjacent domain and codomain agrees as written. Each factor is invertible, and naturality in $F$ follows by composing the naturality equations of $\\rho_p$, $c$, and $\\rho_e$ from step 3 and the cited comparison square. This is precisely the comparison square expressed using the two restriction identifications, proving the final assertion.",
+   "text": "Form the natural isomorphism tau as the composite of isoWhiskerLeft (comparisonUpperStar X) C.sheafIso.symm, the inverse of supportSiteComparisonCoefficientPullbackIso W.hom from [lem-weil-pbc-comparison-pullback], and isoWhiskerRight Etale.upperStarIsoLocalizationRestriction (comparisonUpperStar W.left). The intermediate functors agree definitionally with the specified inverse-image constructions. Whiskering and composition preserve natural isomorphisms, so naturality is automatic. Evaluation at F gives precisely the required three-factor component equation by reflexivity.",
    "uses": [
     "lem-weil-pbc-comparison-pullback"
    ],
@@ -72,9 +70,7 @@
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-etale-composition-cancellation",
-  "def-weil-pbc-etale-site",
-  "def-pur-localized-ringed-site",
+  "lem-weil-pbc-etale-site-localization-open",
   "def-weil-pbc-site-comparison-morphism",
   "lem-weil-proetale-weakly-etale-localization",
   "lem-weil-pbc-etale-inverse-image-restriction",
@@ -84,7 +80,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites.tex",
-  "place": "Tags 00Y0 and 03CE; assembly of existing étale/pro-étale restriction and comparison-square lemmas, with the final composite written explicitly"
+  "place": "Tags 00Y0 and 03CE; reuse Scheme.Etale.overEquiv, Scheme.ProEt.sliceDense and the normalized object-restriction comparison, then whisker and compose the canonical natural isomorphisms as in proetale.tex Tag 09A5. Lean assembly by E2, 2026-10-21."
  },
  "mathlib_searches": [
   {
@@ -251,5 +247,15 @@
   "group": "NF",
   "result": "pass",
   "note": "Re-delivery after RETURN aee04b74 makes exactly the requested H2 repair: comparisonCoefficientPullbackIso → supportSiteComparisonCoefficientPullbackIso (owned by landed def-per-site-comparison-pullback-data, existing:true), and stmt_dep lem-sfb-proetale-object-inverse-image-restriction → new def node def-pe-proetale-object-restriction-comparison-data (existing:true on the unchanged ProEtaleObjectInverseImageRestriction module, statement verbatim, both used decls listed, clauses (i)-(v) = structure fields, no inhabitance claim, no live competing owner). Statement, proof and proof_deps are unchanged; lean.statement matches the file verbatim. Mechanical finding judged: lem-weil-pbc-etale-inverse-image-restriction's record is the used def upperStarIsoLocalizationRestriction, and sliceEquiv needs clause (2) of lem-weil-proetale-weakly-etale-localization (weaklyEtale_slice in sliceTo), so both theorem stmt_deps are genuine → PASS on that point. Earlier accepted H3 pinning, u+1 universes, edge cases, sorry-only proof and docstrings are unchanged. nt_compile --json clean in 14.2 s."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261021T100936-L-4175967",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -10,7 +10,7 @@ public import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
 public import Mathlib.CategoryTheory.Sites.Over
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
-import Sheaf.CategoryTheory.SiteCoveringAxioms
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
 public import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
 public import Sheaf.AlgebraicGeometry.ProEtaleObjectInverseImageRestriction
 public import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
@@ -84,6 +84,19 @@ theorem comparison_etaleSlice_abelian_pullback (X : Scheme.{u}) (W : X.Etale) :
           (comparisonUpperStar AddCommGrpCat.{u + 1} W.left).mapIso
             ((Etale.upperStarIsoLocalizationRestriction AddCommGrpCat.{u + 1}
               W.hom W.prop).app F) := by
-  sorry
+  classical
+  refine ⟨⟨Scheme.Etale.overEquiv W, rfl, fun _ ↦ HEq.rfl, inferInstance⟩,
+    Scheme.ProEt.sliceDense X ((Scheme.toProEt X).obj W), ?_⟩
+  obtain ⟨C⟩ := (Scheme.proEtaleObjectInverseImageRestriction X
+    ((Scheme.toProEt X).obj W) (ULift.{u} ℤ)).2.2.1
+  refine ⟨C,
+    Functor.isoWhiskerLeft (comparisonUpperStar AddCommGrpCat.{u + 1} X)
+        C.sheafIso.symm ≪≫
+      (supportSiteComparisonCoefficientPullbackIso AddCommGrpCat.{u + 1} W.hom).symm ≪≫
+      Functor.isoWhiskerRight
+        (Etale.upperStarIsoLocalizationRestriction AddCommGrpCat.{u + 1} W.hom W.prop)
+        (comparisonUpperStar AddCommGrpCat.{u + 1} W.left), ?_⟩
+  intro F
+  rfl
 
 end AlgebraicGeometry.ProEtale
