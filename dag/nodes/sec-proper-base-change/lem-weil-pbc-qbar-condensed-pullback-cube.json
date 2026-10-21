@@ -13,7 +13,7 @@
  ],
  "proof": [
   {
-   "text": "Specialize the proved generic derived_pull_comp calculation in ContinuousIntegralPullComposition to the flat condensed ring map E → PadicAlgCl ℓ. Apply Iso.ext and ObjectProperty.hom_ext, reduce restricted functor projections, and use the existing bounded_comp_hom equation for both coefficient rings. Evaluate derived_pull_comp at K.obj, simplify the identity associators, and normalize the scalar-functor and over-category projections. This proves qbarPullIso_comp with no new statement or hypothesis.",
+   "text": "Specialize the proved generic derived_pull_comp calculation in ContinuousIntegralPullComposition to the flat condensed ring map E → PadicAlgCl ℓ. Apply Iso.ext and ObjectProperty.hom_ext, reduce restricted functor projections, and use the existing bounded_comp_hom equation for both coefficient rings. Evaluate derived_pull_comp at K.obj, simplify the identity associators, and normalize the scalar-functor and over-category projections. This proves qbarPullIso_comp with no new statement or hypothesis. Keep the two restricted coefficient comparison definitions locally irreducible while elaborating the signature; explicitly unfold them inside the projection calculation, infer the already-unfolded object in the second bounded_comp_hom rewrite, and normalize Over.Hom.left explicitly. Keep boundedConstructibleUpperStarComp folded in that same local section.",
    "uses": [
     "lem-weil-pbc-continuous-integral-pull-composition",
     "def-weil-pbc-qbar-condensed-comparisons",
@@ -50,7 +50,7 @@
   "by": "agent",
   "document": "lean/WeilConjectures/SixFunctors/ProEtale/ModuleObject/ChangeOfCoefficients.lean",
   "place": "Geometric composition coherence in parent exchange proof, isolated before taking mates",
-  "note": "E1 repair: all five original holes are proved. Reuse the generic composition and bounded-projection calculations from ContinuousIntegralPullComposition and the existing elementary mapped_iso_rectangle and inverse_mapped_square from ContinuousIntegralExchangeTargetAdjunct, both via import all. The only new generic diagram helper is coefficientCube_of_iso. No duplicate diagram statements remain. The original public statement is unchanged; no imported module, definition, instance, new node, or sorry is added or modified."
+  "note": "E1 repair: all five original holes are proved. Reuse the generic composition and bounded-projection calculations from ContinuousIntegralPullComposition and the existing elementary mapped_iso_rectangle and inverse_mapped_square from ContinuousIntegralExchangeTargetAdjunct, both via import all. The only new generic diagram helper is coefficientCube_of_iso. No duplicate diagram statements remain. The original public statement is unchanged; no imported module, definition, instance, new node, or sorry is added or modified. J7 upstream-sync repair: restore the quarantined module with all completed proofs and existing declarations intact; remove the obsolete finiteCoefficientDerivedToAlgCl name from the proof-only dsimp list. The current derivedExtendScalarsToPadicAlgCl abbreviation directly supplies the canonical derived scalar-extension functor. No statement, definition, import, dependency, or unit route changes. For signature elaboration, respect proof-local reducibility (except in types), keep constructibleToPadicAlgCl and constructibleToQbarPullIso folded in a section, explicitly unfold them for the calculation, and use the inferred bounded object in the Omega rewrite. This removes repeated comparison of the full derived constructions. The complete repair compiled in 49.5 seconds before removal of an unused reflexivity tactic. Final warning-free whole-file check: 58.3 seconds, also keeping boundedConstructibleUpperStarComp folded in the local composition section."
  },
  "mathlib_searches": [
   {
@@ -165,13 +165,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E1",
+  "group": "J7",
   "result": "pass",
-  "landing": "20261017T024327-L-1173448",
-  "kind": "interface",
+  "landing": "20261021T190432-L-3595078",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "lean_audit": {}
