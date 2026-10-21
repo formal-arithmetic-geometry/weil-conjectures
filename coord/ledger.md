@@ -22281,3 +22281,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:15 L: merged deliver/Q9/Sheaf.Paper.PointFibreDerivedTensorBasic (stage 3; reviewer PASS; first push; landing 20261021T111530-L-250137 (proof); batch 20261021T110859; modules 1; new nodes 0)
 - 11:15 L: merged deliver/R4/Sheaf.Algebra.Homology.ScalarConeTensorModel (stage 3; reviewer PASS; first push; landing 20261021T111534-L-261060 (proof); batch 20261021T110859; modules 1; new nodes 0)
 - 11:15 L: merged deliver/R4/Sheaf.CategoryTheory.Sites.SliceSubtoposSitePresentation (stage 3; reviewer PASS; first push; landing 20261021T111538-L-275197 (proof); batch 20261021T110859; modules 1; new nodes 0)
+- 11:15 L: merged deliver/R4/Sheaf.Paper.AdicStratifiedPerfect (stage 3; reviewer PASS; first push; landing 20261021T111542-L-288233 (proof); batch 20261021T110859; modules 1; new nodes 0; change records: coord/changes/R4-adic-stratified-perfect-restoration.md)
