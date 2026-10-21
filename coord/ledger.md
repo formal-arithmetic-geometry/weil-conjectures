@@ -22000,3 +22000,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:51 L: merged deliver/Q55/det-sp-composition-factors (reviewer FIX; after a return; new nodes: 0)
 - 09:51 L: merged deliver/Q91/lem-pur-coordinate-chart-finite-dimension-witness (stage 2; reviewer PASS; parallel immutable checks)
 - 09:51 L: merged deliver/Q15/lem-weil-pbc-proetale-closed-underived-projection (stage 2; reviewer PASS; parallel immutable checks)
+- 09:51 L: returned deliver/Q27/lem-weil-coefficient-complex-rationalization (reviewer RETURN: L: independent stage-2 immutable head 0ab0d85152f0: H12/H4: the new def node def-weil-coefficient-integer-inclusion (exi)
