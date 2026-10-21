@@ -100,15 +100,14 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-duality",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.CategoryTheory.BoundedBelowCoproductFiltration",
-  "file": "lean/Sheaf/CategoryTheory/BoundedBelowCoproductFiltration.lean",
+  "existing": true,
+  "module": "WeilConjectures.CategoryTheory.BoundedBelowCoproductFiltration",
   "declaration": "CategoryTheory.exists_boundedBelow_coproduct_filtration",
-  "branch": "sheaf-dag",
-  "by": "S3",
-  "date": "2026-10-12",
   "statement": "theorem exists_boundedBelow_coproduct_filtration {A : Type uA} [Category.{v} A] [Abelian A] [IsGrothendieckAbelian.{v} A] [HasDerivedCategory.{wA} A] {B : Type uB} [Category.{v} B] [Abelian B] [IsGrothendieckAbelian.{v} B] [HasDerivedCategory.{wB} B] (F : A ⥤ B) [F.Additive] [PreservesFiniteLimits F] (I : Type v) (K : I → DerivedCategory A) (S : DerivedCategory A) (u : ∀ i, K i ⟶ S) (a q : ℤ) (hK : ∀ (i : I) (r : ℤ), r < a → IsZero ((DerivedCategory.homologyFunctor A r).obj (K i))) (hS : ∀ r : ℤ, r < a → IsZero ((DerivedCategory.homologyFunctor A r).obj S)) (hE2 : ∀ (p : ℕ) (r : ℤ), IsIso (Sigma.desc (fun i ↦ (DerivedCategory.singleFunctor A 0 ⋙ F.rightDerivedFunctor ⋙ DerivedCategory.homologyFunctor B (p : ℤ)).map ((DerivedCategory.homologyFunctor A r).map (u i))))) : ∃ (FS : DecreasingFiltration (∐ (fun i ↦ (F.rightDerivedFunctor ⋙ DerivedCategory.homologyFunctor B q).obj (K i)))) (FT : DecreasingFiltration ((F.rightDerivedFunctor ⋙ DerivedCategory.homologyFunctor B q).obj S)) (phi : FilteredObject.Hom ⟨_, FS⟩ ⟨_, FT⟩), FS.IsFinite ∧ FT.IsFinite ∧ phi.hom = Sigma.desc (fun i ↦ (F.rightDerivedFunctor ⋙ DerivedCategory.homologyFunctor B q).map (u i)) ∧ ∀ p : ℤ, IsIso (FilteredObject.gradedMapSteps phi p)",
-  "note": " 2026-10-20 X3: after retiring Sheaf.CategoryTheory.Filtration, the filtered morphism type is the official FilteredObject.Hom; both fields are exactly the former HomPreservingSteps fields. The mathematical statement and hypotheses are unchanged."
+  "branch": "slopmaster2",
+  "by": "A7",
+  "date": "2026-10-21",
+  "note": "Existing proved upstream declaration; the duplicate Sheaf module is retired. The theorem signature is unchanged and is read from the current source module."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -121,14 +120,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "C-69894",
-  "group": "X3",
+  "reviewer": "C-34b00",
+  "group": "A7",
   "result": "pass",
-  "landing": "20261020T161325-L-3477155",
+  "landing": "20261021T001103-L-1369201",
   "kind": "interface",
-  "note": "independent cc review: Lean/DAG files byte-identical to previously passed head 36e974bf (diff -r), compared with live (only HomPreservingSteps→FilteredObject.Hom, import, linter and stub changes); change-record Users now lists the QcoherentNormalized* modules (Scheme.IsSeparated) the landing named; 16 delivered + 27 live direct importers compile 43/43 clean"
+  "note": "independent cc review: retired Sheaf module vs upstream twin WeilConjectures.CategoryTheory.BoundedBelowCoproductFiltration (same theorem signature and proof, only the header and one import differ); node lean record vs the upstream source; retire-items.tsv row 1088; no importers of the Sheaf module"
  },
  "lean_audit": {
   "master": {
