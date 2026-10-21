@@ -13,9 +13,120 @@
   "def-pc-fibre-product",
   "def-weil-scheme-morphism-properties"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $T=V\\times_ZW$, with projections $b:T\\to V$, $q:T\\to W$, and $s=(k,r):U\\to T$. The geometric clause of [lem-cbc-strict-tower-proper-open-calculus] says that $s$ is clopen, $bs=k$, and $qs=r$. The base changes $p_1,r_1$ remain proper, $i_1,k_1$ remain open and quasi-compact, by [lem-weil-pbc-proper-base-change], [lem-weil-pbc-open-immersion-base-change] and [lem-pc-quasi-compact-base-change]. Thus the same geometric clause applies to $Q_1$. Write $T_1=V_1\\times_{Z_1}W_1$, with $b_1,q_1,s_1$. Fibre-product uniqueness [def-pc-fibre-product] identifies $T_1$ with $T\\times_ZZ_1$. Its map $e:T_1\\to T$ satisfies $be=ab_1$, $qe=cq_1$, $es_1=sd$, and identifies $s_1$ with the base change of $s$. In particular $T_1=s_1(U_1)\\amalg T_1^c$ is a disjoint open cover. This uses no cartesianness of $Q$ itself.",
+   "uses": [
+    "lem-cbc-strict-tower-proper-open-calculus",
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-pc-quasi-compact-base-change",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7F (lemma-shriek-proper-and-open-base-change), open case; clopen factorization of Tag 0F7B"
+   }
+  },
+  {
+   "text": "Work first in the ordinary abelian system categories of [def-sp-varying-ring-operations], not in their derived categories. Their identification as modules over the ring object on the sequence topos is supplied by [lem-coef-semilinear-derived-sections]. In this paragraph stars and shrieks denote ordinary system functors. For $M\\in\\mathscr S_W$, put $F=p_1^*h^*i_!M$ and $G=k_{1!}r_1^*c^*M$. Let $L_M,R_M:F\\to G$ be the two composites in the question before localization. The two cartesian open comparisons of [def-sp-varying-ring-proper-open-arrows] give an isomorphism $\\rho_M:F\\xrightarrow{\\sim}b_{1!}A$, where $A=q_1^*c^*M$: first use $h^*i_!\\cong i_{1!}c^*$ and then $p_1^*i_{1!}\\cong b_{1!}q_1^*$. By the Hom bijection of [lem-pur-site-restriction-module-adjunction-exact], applied to the localized ringed sequence site, equality of $L_M,R_M$ is equivalent to equality of the adjuncts of $L_M\\rho_M^{-1},R_M\\rho_M^{-1}$. These adjuncts are $b_1^*L_M,b_1^*R_M$ preceded by the same map $A\\to b_1^*F$. It therefore suffices to prove $b_1^*L_M=b_1^*R_M$.",
+   "uses": [
+    "def-sp-varying-ring-operations",
+    "lem-coef-semilinear-derived-sections",
+    "def-sp-varying-ring-proper-open-arrows",
+    "lem-pur-site-restriction-module-adjunction-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DI (lemma-extension-by-zero), Hom bijection on the ringed sequence site"
+   }
+  },
+  {
+   "text": "Record explicitly the ordinary normalization used in the restriction calculation. For any cartesian open square $(j,g,j',g_U)$, [def-sp-varying-ring-proper-open-arrows] defines $\\beta_{j,g}^{-1}$ as the $j'_!\\dashv j'^*$ transpose of $g_U^*u_j$ followed by the inverse-image compositor, where $u_j:1\\to j^*j_!$ is the open unit. Consequently $j'^*\\beta_{j,g}^{-1}\\circ u_{j'}=g_U^*u_j$ under that compositor. Since both units are invertible, $j'^*\\beta_{j,g}$ is the identity under the open-unit identifications. This is the adjunction triangle identity, with no single-level or derived evaluation argument. All the compositors here are the unit-preserving comparisons of [def-sp-varying-ring-operations].",
+   "uses": [
+    "def-sp-varying-ring-operations",
+    "def-sp-varying-ring-proper-open-arrows"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DI (lemma-extension-by-zero), adjunction and open-unit transpose"
+   }
+  },
+  {
+   "text": "For the clopen $s$, let $t:s_!\\to s_*$ be the transpose of $u_s^{-1}$. By [def-sp-varying-ring-proper-open-arrows], $\\pi_s=t^{-1}_{s^*(-)}\\circ\\eta_s$. The transpose equation and the $s^*\\dashv s_*$ triangle identity give $s^*\\pi_s=u_{s^*(-)}$; thus this is the identity under the open unit. Restrict the defining word $\\alpha_Q=\\beta_{i,p}$, then $b_!\\pi_s q^*$, then the open and pullback compositors, along $k=bs$. The restriction of its first factor is the identity by step 3, that of its second factor is the identity just computed, and the final compositors identify $s^*q^*$ with $r^*$. Hence $k^*\\alpha_Q$ is the canonical map $k^*p^*i_!\\cong r^*i^*i_!\\xrightarrow{r^*u_i^{-1}}r^*$. The identical computation with $s_1,b_1,q_1$ gives the corresponding formula for $k_1^*\\alpha_{Q_1}$.",
+   "uses": [
+    "def-sp-varying-ring-operations",
+    "def-sp-varying-ring-proper-open-arrows"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7F, alpha-level open case; ordinary clopen projection word of Tag 0F7B"
+   }
+  },
+  {
+   "text": "Now restrict both $L_M$ and $R_M$ along $k_1=b_1s_1$. Identify their common source with $r_1^*c^*i^*i_!M$ and their common target with $r_1^*c^*M$. For $L_M=(\\alpha_{Q_1}c^*)\\circ(p_1^*\\beta_{i,h})$, step 3 makes the first comparison the identity after restriction through $k_1^*p_1^*\\cong r_1^*i_1^*$; step 4 then gives $r_1^*c^*u_i^{-1}$. For $R_M$, restriction of $a^*\\alpha_Q$ becomes $d^*k^*\\alpha_Q=d^*r^*u_i^{-1}$ by step 4, and restriction of $\\beta_{k,a}r^*$ is the identity by step 3. The equality $rd=cr_1$ identifies this with $r_1^*c^*u_i^{-1}$. Both source identifications use the same equality $hp_1k_1=icr_1=pkd$. The specified compositors [def-sp-varying-ring-operations] are the adjoints of identity-on-sections direct-image comparisons; the two rebracketings have the same such adjoint, so their identifications agree. This proves $s_1^*b_1^*L_M=s_1^*b_1^*R_M$, with the required compositors.",
+   "uses": [
+    "def-sp-varying-ring-operations",
+    "def-sp-varying-ring-proper-open-arrows"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7F (lemma-shriek-proper-and-open-base-change), selected-component computation; agent extension to strict semilinear systems"
+   }
+  },
+  {
+   "text": "On the complementary open $T_1^c$, the common target $b_1^*G\\cong s_{1!}r_1^*c^*M$ restricts to zero. Indeed the clopen comparison $s_{1!}\\cong s_{1*}$ is invertible by [def-sp-varying-ring-proper-open-arrows], and the direct-image section formula of [def-sp-varying-ring-operations] on an object $H\\to T_1^c$ gives sections over $H\\times_{T_1}U_1=\\varnothing$, hence the zero module. Both restricted arrows are therefore zero. For each coefficient index and every pro-etale object $H\\to T_1$, the two arrows agree after restriction to the covering $H\\times_{T_1}U_1$ and $H\\times_{T_1}T_1^c$. The uniqueness part of the sheaf axiom makes their values on each section equal [def-weil-sheaf-of-modules-category, def-weil-pbc-proetale-site]. Since ordinary system morphisms are compatible componentwise module maps [lem-coef-semilinear-derived-sections], this proves equality of the ordinary system arrows $b_1^*L_M=b_1^*R_M$, and step 2 proves $L_M=R_M$. Their naturality in $M$ is inherited from the functorial words defining them, so the equality is one of system natural transformations.",
+   "uses": [
+    "def-sp-varying-ring-operations",
+    "def-sp-varying-ring-proper-open-arrows",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-proetale-site",
+    "lem-coef-semilinear-derived-sections"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DI (lemma-extension-by-zero), disjoint-open section calculation; proetale.tex Tag 09AE (definition-extension-zero)"
+   }
+  },
+  {
+   "text": "Finally apply these ordinary natural transformations degreewise to arbitrary cochain complexes of systems. The exact additive inverse-image and open-extension functors of [def-sp-varying-ring-operations] preserve quasi-isomorphisms, and every map and compositor used above is the specified ordinary one localized in that definition and [def-sp-varying-ring-proper-open-arrows]. By [lem-weil-pbc-localization-universal-property], localization respects composition and carries the equality of the degreewise natural transformations to an equality of natural transformations on $D(\\mathscr S_W)$. It is exactly the two displayed words in the statement, since $P_v=D(v^*_{\\bullet})$ and $J_j=D(j_{!,\\bullet})$. This proves the equality before any proper direct-image mate is taken and for arbitrary unbounded complexes; it does not infer equality from derived evaluations.",
+   "uses": [
+    "def-sp-varying-ring-operations",
+    "def-sp-varying-ring-proper-open-arrows",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VG (lemma-properties-left-localization), natural-transformation localization; agent extension to exact system functors"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-strict-tower-proper-open-calculus",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-pc-quasi-compact-base-change",
+  "def-pc-fibre-product",
+  "def-sp-varying-ring-operations",
+  "lem-coef-semilinear-derived-sections",
+  "def-sp-varying-ring-proper-open-arrows",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-proetale-site",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7F (lemma-shriek-proper-and-open-base-change), alpha-level open analogue, proved on ordinary strict semilinear systems by adjunction and clopen restriction; the source itself treats fixed-ring etale gamma maps."
+ },
  "mathlib_searches": [
   {
    "tool": "loogle",
@@ -51,10 +162,45 @@
    "results": "8 hits: CategoryTheory.ExponentiableMorphism.ev_coev, CategoryTheory.ChosenPullbacksAlong.unit_pullbackComp_hom, CategoryTheory.ExponentiableMorphism.unit_pushforwardId_hom, CategoryTheory.ExponentiableMorphism.ev_def, CategoryTheory.ExponentiableMorphism.coev_def, CategoryTheory.ChosenPullbacksAlong.pullbackComp_hom_counit, CategoryTheory.ExponentiableMorphism.pullbackPushforwardAdj, CategoryTheory.ExponentiableMorphism.pushforwardId_hom_counit",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of open extension and clopen projection for semilinear systems of module sheaves commutes with base change",
+   "results": "{\"t\": \"2026-10-21T03:40:35Z\", \"tool\": \"leanfinder\", \"query\": \"Pullback of open extension and clopen projection for semilinear systems of module sheaves commutes with base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"ModuleCat.Tilde.toOpen_res\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"SheafOfModules.pullbackObjFreeIso\", \"SheafOfModules.pullback_assoc\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc\"], \"digest\": \"4e37473df28f79ff\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: generic module pullback, free-module, or topological sheaf facts only; no varying-ring proper/open alpha cube"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback, SheafOfModules.pushforward",
+   "results": "{\"t\": \"2026-10-21T03:40:35Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules.pullback, SheafOfModules.pushforward\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SheafOfModules.pullback\", \"SheafOfModules.instIsLeftAdjointPullback\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"SheafOfModules.pullbackComp\", \"SheafOfModules.pullback_comp_id\", \"SheafOfModules.pullback_id_comp\", \"SheafOfModules.conjugateEquiv_pullbackId_hom\", \"SheafOfModules.pullback_assoc\"], \"digest\": \"de3cefe46418329c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: generic module pullback, free-module, or topological sheaf facts only; no varying-ring proper/open alpha cube"
+  },
+  {
+   "tool": "grep",
+   "query": "clopen.*base.?change|proper.*open.*alpha|extensionByZero.*pullback",
+   "results": "{\"t\": \"2026-10-21T03:40:35Z\", \"tool\": \"grep\", \"query\": \"clopen.*base.?change|proper.*open.*alpha|extensionByZero.*pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: generic module pullback, free-module, or topological sheaf facts only; no varying-ring proper/open alpha cube"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The inverse image of a clopen projection and an open extension natural transformation commutes with a pullback cube for systems of sheaves of modules",
+   "results": "{\"t\": \"2026-10-21T03:40:36Z\", \"tool\": \"leansearch\", \"query\": \"The inverse image of a clopen projection and an open extension natural transformation commutes with a pullback cube for systems of sheaves of modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.pullback\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"SheafOfModules.pullbackComp\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"SheafOfModules.instIsLeftAdjointPullback\", \"SheafOfModules.sheafificationCompPullback\", \"TopCat.Presheaf.pullbackObjObjOfImageOpen\"], \"digest\": \"f38c3309efaf4dd2\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: generic module pullback, free-module, or topological sheaf facts only; no varying-ring proper/open alpha cube"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image preserves identity on one clopen component and zero on its complement for sheaves of modules",
+   "results": "{\"t\": \"2026-10-21T03:41:05Z\", \"tool\": \"leanfinder\", \"query\": \"Inverse image preserves identity on one clopen component and zero on its complement for sheaves of modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Sheaf.objSupIsoProdEqLocus_inv_eq_iff\", \"TopCat.Sheaf.objSupIsoProdEqLocus_inv_fst\", \"TopCat.Sheaf.objSupIsoProdEqLocus_inv_snd\", \"TopCat.Sheaf.objSupIsoProdEqLocus_hom_fst\", \"TopCat.Sheaf.objSupIsoProdEqLocus_hom_snd\", \"TopCat.Sheaf.objSupIsoProdEqLocus\", \"ModuleCat.Tilde.res_const\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorId_inv_app_app\"], \"digest\": \"1ee4887d36dcaf06\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: generic module pullback, free-module, or topological sheaf facts only; no varying-ring proper/open alpha cube"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sf-semilinear-proper-open-mate-pasting",
@@ -66,7 +212,7 @@
  "blueprint": {
   "from": {
    "node": "fix-prop-coherence",
-   "place": "Proof, sentence on adjunction units and counits and their coefficient comparisons: Pullback cube for the intrinsic semilinear alpha transformation",
+   "place": "Proof, sentence \"The maps used here are tensor reassociation, evaluation, and adjunction units and counits\": pullback compatibility of the ordinary clopen alpha word, prior to proper direct-image mating.",
    "via": [
     "lem-sf-semilinear-proper-open-mate-pasting",
     "lem-sf-integral-compactification-system-realization"
@@ -74,5 +220,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sf-semilinear-alpha-pullback",
+  "worker": "stage1",
+  "summary": "Proved the pullback cube directly on ordinary semilinear system maps: open-adjunction support reduction, explicit normalization on the selected clopen component, zero target on its complement, and exact localization. Preserved the statement and all inherited metadata. Reused existing nodes, with no new nodes or Mathlib leaves. Verified that fixed-ring tower results are used only for their coefficient-independent geometric assertion, not as varying-ring base-change statements.",
+  "blueprint": "fix-prop-coherence.proof.md, sentence on tensor reassociation, evaluation, and adjunction units and counits; the seven steps supply the alpha-level pullback equation needed before taking the proper mates in lem-sf-semilinear-proper-open-mate-pasting.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-strict-tower-proper-open-calculus",
+    "why": "Only its coefficient-independent scheme statement that the lift s is clopen is used; no strict constant-ring transformation is transferred to varying systems."
+   },
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "Identifies the actual semilinear category with ring-object modules in the sequence topos and identifies ordinary system morphisms as compatible component maps, needed for the open adjunction and ordinary equality."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "General ringed-site extension-by-zero Hom bijection, applied on the ringed sequence site to reduce equality to the support open; no replacement of a unit proof step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-strict-tower-proper-open-calculus",
+  "lem-coef-semilinear-derived-sections",
+  "lem-pur-site-restriction-module-adjunction-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q38-e91530380",
+  "group": "Q38",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q38-e91530380 (reviewer sub-agent of L); spot-checked: I read the full mathematics; nothing needs fixing. Shape: one commit with the item and the report, no new nodes, no Lean. Statement and stmt_deps are byte-identical to live, where the item is still unsplit (it was created by the Q49 mate-pasting re-split, and parent step 4 cites it). No re-split note applies. proof_deps equals the union of the step uses. Sources: Stacks 0F7F/0F7B/03DI/09AE/04VG exist, I read 0F7F at its label (fixed-ring γ cube), proof_origin is agent, no SGA. Blueprint: the fix-prop-coherence proof sentence exists in main-20261015. The statement matches the a_Q and β conventions of def-sp-varying-ring-proper-open-arrows; the β squares (i,h) and (k,a) are cartesian since U×_V V_1 = U_1. Edge cases checked: h=id, cartesian Q, refinement square, empty U, zero ring, non-flat transitions. Steps: (1) the geometric clopen clause of lem-cbc-strict-tower-proper-open-calculus has no cartesian or coefficient hypothesis, base change keeps the hypotheses by the three Mathlib leaves, and I re-checked clopenness independently. (2) The adjunct reduction to b_1^* is correct, with j_!⊣j^* by definition and the system adjunction in lem-coef-semilinear-derived-sections. (3) j'^*β=1 by the triangle identity. (4) I verified s^*π_s=u by hand using that ε is invertible for an open immersion, giving k^*α_Q=r^*u_i^{-1}. (5) Both words restrict to r_1^*c^*u_i^{-1}; compositor coherence is argued by mates of the unique direct-image comparisons, which is valid. (6) The target vanishes on T_1^c by s_!≅s_* and empty sections, then the disjoint pro-étale cover and separatedness give equality. (7) The localization universal property (2) lifts the degreewise equality, using no faithfulness of evaluation. Route: the three declared tool_uses are all on the transitive uses route of sk-thm-sf-compatibility, and the rest are definitions or Mathlib leaves. No cycle and no duplicate: the cbc node has the fixed-B γ cube and lem-sp-varying-ring-proper-open-pasting has no base change. Advisory: steps 4-6 recompute inline the sibling unsplit nodes lem-sf-semilinear-clopen-unit-projector and lem-sf-semilinear-compositor-coherence (ordinary form); this is acceptable."
  }
 }

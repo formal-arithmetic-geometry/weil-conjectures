@@ -20114,3 +20114,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:59 L: merged deliver/Q40/lem-sf-semilinear-compositor-coherence (reviewer PASS; first push; new nodes: 0)
 - 03:59 L: merged deliver/O1/lem-pur-scalar-hom-comparison-tower (reviewer PASS; first push; new nodes: 0)
 - 03:59 L: merged deliver/Q66/lem-sfb-kflat-scalar-comparison-normalization (reviewer FIX; first push; new nodes: 0)
+- 04:00 L: merged deliver/Q38/lem-sf-semilinear-alpha-pullback (reviewer PASS; first push; new nodes: 0)
