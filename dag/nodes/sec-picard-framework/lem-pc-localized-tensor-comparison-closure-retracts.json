@@ -115,14 +115,15 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-semicon",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.Algebra.Homology.LocalizedTensorComparisonClosureRetract",
-  "file": "lean/Sheaf/Algebra/Homology/LocalizedTensorComparisonClosureRetract.lean",
+  "existing": true,
+  "module": "WeilConjectures.Algebra.Homology.LocalizedTensorComparisonClosureRetract",
+  "file": "lean/WeilConjectures/Algebra/Homology/LocalizedTensorComparisonClosureRetract.lean",
   "declaration": "ModuleCat.localizedTensorComparisonProperty_closure_retracts",
-  "statement": "theorem localizedTensorComparisonProperty_closure_retracts\n    (hC : Module.Flat (A ⊗[R] B) C)\n    (hQ : ∀ V : CochainComplex (ModuleCat.{u} A) ℤ, V.Acyclic →\n      (CochainComplex.mapBifunctor V Q (curriedTensor _)).Acyclic) :\n    ∀ {X Y : DerivedCategory (ModuleCat.{u} A)}, Retract X Y →\n      localizedTensorComparisonProperty R A B C Q N t Y →\n      localizedTensorComparisonProperty R A B C Q N t X",
+  "statement": "theorem localizedTensorComparisonProperty_closure_retracts\n    (hQ : ∀ V : CochainComplex (ModuleCat.{u} A) ℤ, V.Acyclic →\n      (CochainComplex.mapBifunctor V Q (curriedTensor _)).Acyclic) :\n    ∀ {X Y : DerivedCategory (ModuleCat.{u} A)}, Retract X Y →\n      localizedTensorComparisonProperty R A B C Q N t Y →\n      localizedTensorComparisonProperty R A B C Q N t X",
   "branch": "sheaf-dag",
-  "by": "K3",
-  "date": "2026-10-14"
+  "by": "J2",
+  "date": "2026-10-21",
+  "note": "Retired the listed duplicate Sheaf module. The fully proved upstream theorem has the same conclusion without the unused C-flatness hypothesis and specializes to the unchanged mathematical node statement. The upstream closure consumer already imports and uses this theorem; all incoming DAG edges and the unit route remain valid."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -135,18 +136,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "COMPILER",
+  "reviewer": "C-66bc5",
   "group": "J2",
   "result": "pass",
-  "landing": "20261013T181102-L-2601300",
+  "landing": "20261021T014224-L-2390169",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "ModuleCat.localizedTensorComparisonProperty_closure_retracts"
-  ],
-  "sorry_after": []
+  "note": "independent cc review: Withdrawn Sheaf copy vs retire-items.tsv row 1692 and upstream twin WeilConjectures…LocalizedTensorComparisonClosureRetract (same theorem minus unused hC, axioms clean); node diff vs live = lean record only; no importers of the copy"
  },
  "lean_audit": {
   "master": {
