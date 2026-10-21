@@ -19264,3 +19264,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:10 L: returned deliver/K7/Sheaf.AlgebraicGeometry.StrictHenselizationRestriction (reviewer RETURN: (the landing tools, head e3d405983) the delivery did not land: (d) user Sheaf.AlgebraicGeometry.StrictLocalSmallModel.So)
 - 00:10 L: returned deliver/N3/Sheaf.AlgebraicGeometry.StrictHenselizationLocalPresentation (reviewer RETURN: (the landing tools, head 1fb6d473b) the delivery did not land: lean/Sheaf/AlgebraicGeometry/Morphisms/StrictHenselDiviso)
 - 00:10 L: returned deliver/Q8/Sheaf.AlgebraicGeometry.KoszulSelfExtStalkBases (reviewer RETURN: (the landing tools, head bfbfa9fd1) the delivery did not land: lean/Sheaf/AlgebraicGeometry/KoszulSelfExtDualExteriorCon)
+- 00:11 L: merged deliver/A3/Sheaf.Paper.PbcUniformCompleteTriangulated (stage 3; reviewer PASS; first push; landing 20261021T001102-L-1368815 (proof); batch 20261021T001057; modules 1; new nodes 0)
