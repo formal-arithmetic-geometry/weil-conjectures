@@ -1,0 +1,144 @@
+{
+ "id": "lem-sfb-finite-etale-trace-section-descent",
+ "kind": "statement",
+ "title": "Descent of one section to the sum of its sheet coordinates",
+ "statement": "Use the trace data [def-sfb-finite-etale-trace-data]. For a finite etale p:V→S, a rational continuous-coefficient module sheaf L and a section s of p*L over B×_S V, there is a unique r∈L(B) with this property: on any C→B mapping to an etale U→S with a finite splitting σ, if the restriction of s has sheet coordinates t_j∈L(C) under the canonical sheet units, then r restricts to the sum of the t_j. This asserts descent of a single section; it contains no linearity, module morphism, or integral-image claim.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice.proof.md",
+  "place": "Pushing down by the trace: definition of the trace and of its image, before asserting that the image is lisse"
+ },
+ "stmt_deps": [
+  "def-sfb-finite-etale-trace-data"
+ ],
+ "proof": [
+  {
+   "text": "Use the bijective sheet units to obtain unique sheet coordinates. The adjunction unit is natural, so these coordinates commute with restriction.",
+   "uses": [
+    "lem-sfb-finite-etale-trace-sheet-lifting"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the source-library finite-etale splitting-cover theorem to the identity etale object over S. Convert its explicit clopen splitting data into TraceImageSplitting: each supplied inverse identifies its summand with the base, and the pullback universal property identifies the resulting section with the canonical sheet lift. The continuous inclusion of the small etale site pushes the covering sieve to a pro-etale covering sieve. Pull it back to B. Consequently the presieve of all arrows C→B whose domain maps to an etale splitting object is covering.",
+   "uses": [
+    "lem-weil-pbc-finite-etale-trace-split-cover",
+    "def-weil-pbc-finite-etale-trace-splitting-data",
+    "lem-pur-etale-proetale-cover"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On an overlap, use the coproduct presentations of the pulled-back sheets. The local-permutation lemma gives an open cover and a fixed bijection of the two sheet sets on each open. Corresponding sheet maps agree, hence their coordinates agree by sheet-unit injectivity. Reindex the finite sum. Separatedness gives equality on the overlap. The empty case is the empty-cover sheaf axiom.",
+   "uses": [
+    "lem-weil-pbc-finite-section-coproduct-local-permutation",
+    "lem-sfb-finite-etale-trace-sheet-lifting"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For every arrow of this presieve the sum is uniquely characterized by all splittings of its domain, by the preceding independence result. Choose this unique value, obtaining a family. Naturality of coordinates and equality of the two composite restriction maps prove compatibility. The sheaf axiom glues the family. Every arrow appearing in the required formula belongs to this same presieve, so the gluing equation proves the formula directly. Bijectivity of sheet units identifies arbitrary supplied coordinates with the chosen ones. Uniqueness of the amalgamation proves the required uniqueness. No module linearity or integral image is used.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-finite-etale-trace-sheet-lifting",
+  "lem-weil-pbc-finite-etale-trace-split-cover",
+  "def-weil-pbc-finite-etale-trace-splitting-data",
+  "lem-pur-etale-proetale-cover",
+  "lem-weil-pbc-finite-section-coproduct-local-permutation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice.proof.md",
+  "place": "Completed S2 Lean proof: natural sheet coordinates, universal finite coproduct base change, local permutation comparison, source splitting-cover conversion, and sheaf amalgamation on the presieve of all split domains."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite etale morphism has a trace on sheaves of modules computed by summing sheets",
+   "results": "8 algebraic trace hits, including trace_eq_sum_automorphisms, trace_eq_sum_embeddings and Algebra.Etale.iff_exists_algEquiv_prod. None concerns the continuous-coefficient pro-etale module assertion.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"pullback\"",
+   "results": "12 hits for the module pullback functor and adjunction infrastructure; no trace or sheet-coordinate theorem. Use pullbackPushforwardAdjunction and pushforwardPushforwardAdj for the proved comparison.",
+   "date": "2026-10-21",
+   "verdict": "building blocks only"
+  },
+  {
+   "tool": "grep",
+   "query": "SheafOfModules.*(sheet|trace)|finite.*etale.*sum",
+   "results": "0 Mathlib hits. Project search locates the original item and the source-library small-etale trace, which has a different site and coefficients.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite etale splitting gives a unique descended sum of the sheet coordinates of a section of a sheaf of modules",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.Presentation.map_π_eq\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat]\\n  [inst_3 : J.HasSheafCompose (CategoryTheory.forg\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $R$ of rings on $\\\\mathcal{C}$, and a colimit-preserving functor $F$ between module categories, the generator morphism of the pr\"}\n  {\"name\": \"SheafOfModules.generatorsOfIsCokernelFree_π\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat]\\n  [inst_3 : J.HasSheafCompose (CategoryTheory.forg\", \"doc\": \"Given a sheaf of modules $ M $ over a ring sheaf $ R $ on a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $, if there exists a morphism $ g: F_\\\\sigma \\\\to M $ from a free sheaf $ F_\\\\sigma $ s\"}\n  {\"name\": \"TopCat.Sheaf.existsUnique_gluing'\", \"module\": \"Mathlib/Topology/Sheaves/SheafCondition/UniqueGluing\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] {FC : C → C → Type u_2} {CC : C → Type u_3}\\n  [inst_1 : (X Y : C) → FunLike (FC X Y) (CC X) (CC Y)] [inst_2 : CategoryTheory.ConcreteCategory C FC]\\n  [CategoryTheory.Limits.HasLimitsOfSize.{x, x, v_1, u_1} C] [CategoryTheory.HasForget.fo\", \"doc\": \"For a sheaf $\\\\mathcal{F}$ on a topological space $X$, given an open set $V$ covered by the union of open sets $\\\\{U_i\\\\}_{i \\\\in \\\\iota}$ and compatible sections $s_i \\\\in \\\\mathcal{F}(U_i)$ (i.e., sections\"}\n  {\"name\": \"TopCat.Sheaf.existsUnique_gluing\", \"module\": \"Mathlib/Topology/Sheaves/SheafCondition/UniqueGluing\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] {FC : C → C → Type u_2} {CC : C → Type u_3}\\n  [inst_1 : (X Y : C) → FunLike (FC X Y) (CC X) (CC Y)] [inst_2 : CategoryTheory.ConcreteCategory C FC]\\n  [CategoryTheory.Limits.HasLimitsOfSize.{x, x, v_1, u_1} C] [CategoryTheory.HasForget.fo\", \"doc\": \"For a sheaf $\\\\mathcal{F}$ on a topological space $X$, given an open cover $\\\\{U_i\\\\}_{i \\\\in I}$ of an open set $U \\\\subseteq X$ and a family of sections $s_i \\\\in \\\\mathcal{F}(U_i)$ that are compatible on \"}\n  {\"name\": \"Algebra.SubmersivePresentation.sectionCotangent_eq_iff\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {ι : Type u_3} {σ : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : Finite σ] (P : Algebra.SubmersivePresentation R S ι σ) [inst_4 : Finite σ]\\n  (x : P.toExtension.CotangentSpace) (y : P.toExtension.Cotangent),\\n  P.sectionCotange\", \"doc\": \"For a submersive presentation $ P $ with finite generating set $ \\\\sigma $, the section map $ \\\\text{sectionCotangent} $ sends an element $ x $ of the cotangent space to an element $ y $ of the cotangen\"}\n  {\"name\": \"TopCat.Sheaf.objSupIsoProdEqLocus_inv_eq_iff\", \"module\": \"Mathlib/Topology/Sheaves/CommRingCat\", \"type\": \"∀ {X : TopCat} (F : TopCat.Sheaf CommRingCat X) {U V W UW VW : TopologicalSpace.Opens ↑X} (e : W ≤ U ⊔ V)\\n  (x :\\n    ↑{\\n        carrier :=\\n          ↥(((CommRingCat.Hom.hom (F.val.map (CategoryTheory.homOfLE ⋯).op)).comp\\n                  (RingHom.fst ↑(F.val.obj (Opposite.op U)) ↑(F.val.obj (Opposi\", \"doc\": \"For a sheaf $ F $ of commutative rings on a topological space $ X $, given open subsets $ U, V, W $ with $ W \\\\subseteq U \\\\cup V $, and elements $ x $ in the product of sections over $ U $ and $ V $, t\"}\n  {\"name\": \"StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : StandardEtalePair R) (I : Ideal S),\\n  I ^ 2 = ⊥ → ∀ (x : S), P.HasMap ((Ideal.Quotient.mk I) x) → ∃! ε, ε ∈ I ∧ P.HasMap (x + ε)\", \"doc\": \"Let $S$ be a commutative algebra over a commutative ring $R$, and let $I$ be an ideal of $S$ such that $I^2 = \\\\{0\\\\}$. Let $P$ be a standard étale pair over $R$. If the image of an element $x \\\\in S$ in\"}\n  {\"name\": \"Algebra.Etale.iff_exists_algEquiv_prod\", \"module\": \"Mathlib/RingTheory/Etale/Field\", \"type\": \"∀ (K : Type u_1) (A : Type u) [inst : Field K] [inst_1 : CommRing A] [inst_2 : Algebra K A],\\n  Algebra.Etale K A ↔\\n    ∃ I, ∃ (_ : Finite I), ∃ Ai x x_1 x_2, ∀ (i : I), Module.Finite K (Ai i) ∧ Algebra.IsSeparable K (Ai i)\", \"doc\": \"An algebra $ A $ over a field $ K $ is étale if and only if there exists a finite index set $ I $ and a family of fields $ \\\\{A_i\\\\}_{i \\\\in I} $, each equipped with a $ K $-algebra structure, such that \"}\n",
+   "date": "2026-10-21",
+   "verdict": "Generic topological-space gluing and presentation results only; no pro-etale section trace."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a finite etale morphism, sheet units for module sheaves are bijective, integral sheet sections glue, and sheet sums descend uniquely",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.unitToPushforwardObjUnit\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree\", \"type\": \": unit S ⟶ (pushforward.{u} φ).obj (unit R)\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on $\\\\ma\"}\n  {\"name\": \"SheafOfModules.unit\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf\", \"type\": \": SheafOfModules R\", \"doc\": \"Given a sheaf $ R $ of rings on a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $, this constructs the canonical sheaf of $ R $-modules by assigning to each object $ X $ the free $ R(X) $-mo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"Given a scheme $X$, this defines the type of sheaves of modules over the ring sheaf associated to $X$, obtained by composing the structure sheaf (taking values in commutative rings) with the canonical\"}\n  {\"name\": \"SheafOfModules.sheafificationCompPullback\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \":\\n  PresheafOfModules.sheafification (𝟙 S.val) ⋙ pullback.{v} φ ≅\\n    PresheafOfModules.pullback.{v} φ.val ⋙ PresheafOfModules.sheafification (𝟙 R.val)\", \"doc\": \"The natural isomorphism asserting that composing sheafification with the pullback functor (along a ring sheaf morphism) is equivalent to composing the pullback functor (on presheaves) with sheafificat\"}\n  {\"name\": \"SheafOfModules.sections\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf\", \"type\": \"(M : SheafOfModules.{v} R) : Type _\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, the sections of a sheaf of modules $M$ over $R$ consist of families of elements $s_X \\\\in M(X)\"}\n  {\"name\": \"SheafOfModules.unitHomEquiv_comp_apply\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf\", \"type\": \"{M N : SheafOfModules.{u} R} (f : unit R ⟶ M) (p : M ⟶ N) : N.unitHomEquiv (f ≫ p) = sectionsMap p (M.unitHomEquiv f)\", \"doc\": \"For a sheaf of rings $ R $ on a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $, and sheaves of modules $ M $ and $ N $ over $ R $, the equivalence between natural transformations $ \\\\eta: \\\\t\"}\n  {\"name\": \"PresheafOfModules.unitHomEquiv\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf\", \"type\": \"(M : PresheafOfModules R) : (unit R ⟶ M) ≃ M.sections\", \"doc\": \"For a presheaf of rings $ R $ on a category $ \\\\mathcal{C} $ and a presheaf of modules $ M $ over $ R $, there is a canonical equivalence between the set of natural transformations from the unit preshe\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsIsoAbApp\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"[IsIso φ] : IsIso (φ.app U)\", \"doc\": \"For any isomorphism $\\\\phi$ between sheaves of modules over a scheme $X$ and any open subset $U \\\\subseteq X$, the induced map $\\\\phi_U$ on sections over $U$ is an isomorphism of abelian groups.\"}\n",
+   "date": "2026-10-21",
+   "verdict": "No matching continuous-coefficient pro-etale trace result."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteEtaleTraceImage",
+  "date": "2026-10-21",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "same_as": [],
+  "from": {
+   "node": "sk-lem-stratified-lattice",
+   "place": "Pushing down by the trace: definition of the trace and of its image, before asserting that the image is lisse",
+   "via": [
+    "lem-sfb-finite-etale-trace-image"
+   ]
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-stratified-lattice",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteEtaleTraceSectionDescent",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteEtaleTraceSectionDescent.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finiteEtaleTrace_section_sum_descent",
+  "statement": "theorem finiteEtaleTrace_section_sum_descent\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    {V S : Scheme.{u}} (p : V ⟶ S) [IsFinite p] [Etale p]\n    (L : SheafOfModules.{u + 1} (traceFieldRing l E S))\n    (B : S.ProEt)\n    (s : ((traceModulePullback l E p).obj L).val.obj\n      (op (AsSmall.up.obj ((proEtaleBaseChange p).obj B)))) :\n    ∃! r : L.val.obj (op (AsSmall.up.obj B)),\n      ∀ (U : S.ProEt) (_ : Etale U.hom) (J : Type u) [Fintype J]\n        (σ : TraceImageSplitting p U J) (C : S.ProEt) (a : C ⟶ B) (h : C ⟶ U)\n        (t : J → L.val.obj (op (AsSmall.up.obj C))),\n        (∀ j, traceImageSheetRestriction σ h j ((traceModulePullback l E p).obj L)\n          (((traceModulePullback l E p).obj L).val.map\n            (AsSmall.up.map ((proEtaleBaseChange p).map a)).op s) =\n              traceImageSheetUnit l E p L σ h j (t j)) →\n          L.val.map (AsSmall.up.map a).op r = ∑ j, t j",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-0db3e",
+  "group": "S2",
+  "result": "fix",
+  "landing": "20261021T111606-L-368636",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-0db3e",
+  "group": "S2",
+  "result": "fix",
+  "landing": "20261021T111606-L-368636",
+  "kind": "interface",
+  "note": "independent cc review: 16 moved decls vs live item lines 1-224 (identical apart from blueprint tags); item theorem statement vs live (byte-identical); #print axioms of finite_etale_trace_image (propext/choice/Quot.sound); unit-route import kept via the public Definitions import"
+ }
+}

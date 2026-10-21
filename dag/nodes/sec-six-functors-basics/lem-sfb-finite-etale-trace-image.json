@@ -22,119 +22,36 @@
  ],
  "proof": [
   {
-   "text": "Work in the compatible small sites and larger universe of the statement. For any site object $r:W\\to S$, the weakly étale localization lemma identifies $W_{\\mathrm{proét}}$ with $S_{\\mathrm{proét}}/W$. Clause (1) of the object inverse-image restriction lemma identifies $r^{-1}G$ with $G|_W$ for arbitrary abelian and ring sheaves, not only constant coefficients. In particular $r^{-1}T_S$ identifies with $T_S|_W=T_W$ for $T=A,E$: both evaluate on $Z\\to W$ as $C(|Z|,T)$. The canonical map $c_r:r^{-1}T_S\\to T_W$ is the adjunct of precomposition along $W\\times_SZ\\to Z$; under the restriction identification its component is identity, because the distinguished map $Z\\to W\\times_SZ$ followed by that projection is $\\mathrm{id}_Z$. Thus canonical module pullback along $r$ is restriction: the scalar-extension isomorphism sends $t\\otimes m$ to $tm$, with inverse $m\\mapsto1\\otimes m$. These maps commute with restriction and are inverse already on the presheaf tensors, hence on their sheafifications. The same identifications apply to arrows between site objects by relocalization.",
+   "text": "Choose the unique descended section supplied by section-sum descent. Its characterization proves restriction compatibility. Use bijective sheet units to give unique coordinates for two inputs and for a scalar multiple. Addition and diagonal scalar multiplication commute with their finite sums; uniqueness of descent gives additivity and coefficient linearity. PresheafOfModules.homMk builds the trace morphism. Its local-sum formula is the characterization at the identity; the same characterization and naturality prove uniqueness among all morphisms with that formula.",
    "uses": [
-    "lem-weil-proetale-weakly-etale-localization",
-    "lem-sfb-proetale-object-inverse-image-restriction",
-    "lem-weil-pbc-continuous-coefficient-pullback-composition",
-    "def-pur-sheaf-tensor-product",
-    "def-pur-localized-ringed-site"
+    "def-sfb-finite-etale-trace-data",
+    "lem-sfb-finite-etale-trace-section-descent",
+    "lem-sfb-finite-etale-trace-sheet-lifting"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tags 03CE (lemma-localize-given-products), 00Y0 (definition-localize), 03EH (lemma-relocalize); proetale.tex Tag 09A5; continuous coefficient specialization written out here"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply the finite étale local-splitting lemma to $p$ at each point of $S$. Obtain a jointly surjective étale family $\\{U_a\\to S\\}$ and finite sets $J_a$ with $V\\times_SU_a\\cong\\coprod_{j\\in J_a}U_a$. This is a covering in the small pro-étale site by the étale/pro-étale covering lemma. Its members and $V$ are weakly étale over $S$ by clause (1) of the étale comparison lemma, so step 1 applies to them. No constant degree or surjectivity of $p$ is assumed: the sets $J_a$ can vary and can be empty.",
-   "uses": [
-    "lem-weil-pbc-finite-etale-etale-local-split",
-    "lem-pur-etale-proetale-cover",
-    "det-pe-morphisms-etale-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale.tex",
-    "place": "Tag 04HN (lemma-finite-etale-etale-local); proetale.tex Tag 098B (lemma-etale-proetale)"
-   }
+   "text": "Construct the pointwise image of M under any trace satisfying local sums. Its integral scalar closure follows from the coefficient inclusion and projection-precomposition commutative square. Saturate the underlying subfunctor by local membership. A common refinement proves closure under addition; restrictions and scalar closure are preserved. Mathlib Subfunctor.sheafify_isSheaf proves sheafhood. Transfer covering sieves between the equivalent small model and S.ProEt to obtain exactly TraceImageLocalRepresentatives.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "Fix any splitting over an étale $U\\to S$ and any $Z\\to U$ in $U_{\\mathrm{proét}}$. Its pullback is the disjoint union of $J$ copies of $Z$. By step 1, $(p^*L)$ restricted to each sheet is $L|_U$. Its finitely many sheets are open immersions, hence étale and jointly surjective, so they form a pro-étale covering by the étale/pro-étale covering lemma; the sheaf equalizer axiom on this disjoint open cover gives $(p_*p^*L)|_U(Z)=\\prod_{j\\in J}L|_U(Z)$ and $(p_*M)|_U(Z)=\\prod_{j\\in J}M_j(Z)$: mixed intersections are empty, a sheaf of modules has its zero group on the empty object by the empty-cover axiom, so every tuple is matching and glues uniquely. Define $\\tau_{U,Z}((s_j))=\\sum_{j\\in J}s_j$. The coefficient action is diagonal, since a function $Z\\to E$ pulls back to the same function on every sheet. Distributivity gives $\\tau_{U,Z}(a(s_j))=a\\tau_{U,Z}((s_j))$, and restrictions commute with the sum. Hence these are $E_U$-linear sheaf maps. For $J=\\varnothing$ the domain is zero and the map is zero.",
+   "text": "On a splitting, a local trace representative has unique sheet coordinates by sheet-unit bijectivity. Restrict the submodule section to show these coordinates lie in the indicated sheet submodules, and use the local-sum formula. Conversely, glue an integral sheet tuple using the sheet-lifting lemma and apply the local-sum formula. The covering sieves are preserved, so both implications give precisely TraceImageLocalSheetSum.",
    "uses": [
-    "def-weil-pbc-sites-and-cohomology",
-    "def-weil-sheaf-of-modules-category",
-    "def-pur-localized-ringed-site",
-    "def-weil-proetale-inverse-image",
-    "lem-pur-etale-proetale-cover"
+    "lem-sfb-finite-etale-trace-sheet-lifting"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice.proof.md",
-    "place": "Pushing down by the trace: splitting into copies and the trace is their sum; sheaf equalizer calculation written out"
-   }
-  },
-  {
-   "text": "The maps of step 3 agree on overlaps without a connectedness assumption. Indeed over $W=U\\times_SU'$ two splittings identify the same scheme with $\\coprod_JW$ and $\\coprod_KW$. Intersect its $j$-th component in the first decomposition with its $k$-th component in the second. Viewed inside the first component $W$, these intersections are open and closed subsets $C_{jk}$; for each $j$ they partition $W$, and at each point they give a bijection between the two finite sets of sheets. For every bijection $\\sigma:J\\to K$, the open and closed subset $\\bigcap_j C_{j,\\sigma(j)}$ is therefore a locus where the decompositions differ by that fixed permutation; these finitely many subsets cover $W$, and pulled back to any $Z\\to W$ they form a pro-étale covering by the étale/pro-étale covering lemma. If there is no bijection, $W$ is empty. On each subset the two maps are equal by reindexing the finite sum, and equality on $W$ follows from the sheaf separatedness axiom. The identical argument compares the chosen cover with any other splitting.",
-   "uses": [
-    "def-weil-pbc-sites-and-cohomology",
-    "lem-pur-etale-proetale-cover"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice.proof.md",
-    "place": "Pushing down by the trace: independence of the local splitting, expanded by intersections of sheet components"
-   }
-  },
-  {
-   "text": "Apply the map-gluing clause of sheaf covering descent to the underlying sheaves of sets $P=p_*p^*L$, $Q=L$ and the covering of step 2. Its hypotheses hold: the small pro-étale site is small in the chosen larger universe, has fibre products (base change and composition preserve weakly étale maps), the family covers, and its double-overlap maps agree by step 4. Obtain a unique sheaf map $\\operatorname{Tr}:P\\to L$ restricting to the chosen sums. It is additive and $E_S$-linear because those equalities can be checked after restricting a section to that cover, where step 3 proves them, and then using separatedness of $L$. Comparing with any splitting on its pullback of the chosen cover, step 4 and separatedness give its required sum formula. Any other map with all the sum formulas agrees on the chosen cover and therefore equals $\\operatorname{Tr}$.",
-   "uses": [
-    "lem-pe-set-sheaf-cover-descent",
-    "def-weil-sheaf-of-modules-category",
-    "def-weil-pbc-sites-and-cohomology",
-    "lem-weil-pbc-weakly-etale-composition-base-change"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 04TQ (lemma-glue-maps), applied to the small pro-étale site; blueprint trace paragraph"
-   }
-  },
-  {
-   "text": "Let $q:p_*M\\to L$ be inclusion followed by the trace, using the inclusion $A_S\\to E_S$ on scalars. It is $A_S$-linear: a section of $A_S$ acts on $M$ by its pullback to $V$, and the inclusion and the trace preserve this action. Define $N(Z)$ to be those $s\\in L(Z)$ which on a covering $\\{Z_b\\to Z\\}$ are $q(m_b)$ for $m_b\\in(p_*M)(Z_b)$, exactly the sheaf image specified in the statement. Pullbacks of witnessing covers show stability under restriction. Zero is represented by zero; on a common refinement of two witnessing covers, $q(m)+q(m')=q(m+m')$, $-q(m)=q(-m)$, and $a q(m)=q((a|_{Z_b})m)$. Thus $N(Z)$ is an $A_S(Z)$-submodule. If matching sections of $N$ are glued in $L$, compose their covers of local lifts with the original cover: transitivity of covers supplies local lifts of the glued section. Hence $N$ is a subsheaf and an $A_S$-submodule of $L$, without assuming that $q$ is surjective on global sections.",
-   "uses": [
-    "def-weil-pbc-sites-and-cohomology",
-    "def-weil-sheaf-of-modules-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice.proof.md",
-    "place": "Pushing down by the trace: image of the composite; local-image and module-closure argument"
-   }
-  },
-  {
-   "text": "Restrict to any splitting over $U$. The witnessing-cover definition of $N$ is unchanged on the slice: covers there are precisely covers of the underlying objects. By step 3 the map $q$ on this slice is $\\prod_jM_j\\to L|_U$, $(m_j)\\mapsto\\sum_jm_j$. Let $\\sum_jM_j$ mean the smallest submodule sheaf of $L|_U$ containing each $M_j$; equivalently its sections locally are finite sums with one term in each $M_j$. This description is a subsheaf by the same cover-composition argument as step 6; it contains each $M_j$ by using zero in the other coordinates, and every submodule sheaf containing the $M_j$ contains these local sums by gluing. Every local trace is such a sum, giving $N|_U\\subseteq\\sum_jM_j$. Conversely a locally represented sum is the trace of its tuple, which is a section of $p_*M$ by the disjoint-cover gluing of step 3, giving the reverse inclusion. If individual summands are initially specified on different covers, their finitely many covers admit a common refinement by successive pullbacks. For $J=\\varnothing$ both sides are zero. This proves the asserted equality of submodule sheaves.",
-   "uses": [
-    "def-pur-localized-ringed-site",
-    "def-weil-pbc-sites-and-cohomology",
-    "def-weil-sheaf-of-modules-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice.proof.md",
-    "place": "Pushing down by the trace: L_0=M_1+...+M_d, before proving lisseness"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-proetale-weakly-etale-localization",
-  "lem-sfb-proetale-object-inverse-image-restriction",
-  "lem-weil-pbc-continuous-coefficient-pullback-composition",
-  "def-pur-sheaf-tensor-product",
-  "def-pur-localized-ringed-site",
-  "lem-weil-pbc-finite-etale-etale-local-split",
-  "lem-pur-etale-proetale-cover",
-  "det-pe-morphisms-etale-comparison",
-  "def-weil-pbc-sites-and-cohomology",
-  "def-weil-sheaf-of-modules-category",
-  "def-weil-proetale-inverse-image",
-  "lem-pe-set-sheaf-cover-descent",
-  "lem-weil-pbc-weakly-etale-composition-base-change"
+  "def-sfb-finite-etale-trace-data",
+  "lem-sfb-finite-etale-trace-section-descent",
+  "lem-sfb-finite-etale-trace-sheet-lifting"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice.proof.md",
-  "place": "Pushing down by the trace: construction and image; elementary sheaf arguments expanded using Stacks 04HN, 03CE, 04TQ"
+  "place": "S2 Lean proof: sectionwise descent, module linearity, subfunctor saturation, and the two local-image inclusions; the unit trace route is retained."
  },
  "mathlib_searches": [
   {
@@ -255,13 +172,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-proetale-weakly-etale-localization",
-  "lem-weil-pbc-continuous-coefficient-pullback-composition",
-  "lem-pe-set-sheaf-cover-descent",
-  "det-pe-morphisms-etale-comparison",
-  "lem-weil-pbc-weakly-etale-composition-base-change"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
@@ -275,22 +186,6 @@
   "module": "Sheaf.AlgebraicGeometry.FiniteEtaleTraceImage",
   "declaration": "AlgebraicGeometry.Scheme.finite_etale_trace_image",
   "declarations": [
-   "AlgebraicGeometry.Scheme.traceModelRing",
-   "AlgebraicGeometry.Scheme.traceContinuousRingMap",
-   "AlgebraicGeometry.Scheme.traceFieldRing",
-   "AlgebraicGeometry.Scheme.traceIntegerRing",
-   "AlgebraicGeometry.Scheme.traceIntegerToField",
-   "AlgebraicGeometry.Scheme.traceFieldRingMap",
-   "AlgebraicGeometry.Scheme.traceModulePullback",
-   "AlgebraicGeometry.Scheme.traceModuleDirectImage",
-   "AlgebraicGeometry.Scheme.TraceImageSplitting",
-   "AlgebraicGeometry.Scheme.traceImageSheetObject",
-   "AlgebraicGeometry.Scheme.traceImageSheetArrow",
-   "AlgebraicGeometry.Scheme.traceImageSheetRestriction",
-   "AlgebraicGeometry.Scheme.traceImageSheetUnit",
-   "AlgebraicGeometry.Scheme.TraceImageLocalSums",
-   "AlgebraicGeometry.Scheme.TraceImageLocalRepresentatives",
-   "AlgebraicGeometry.Scheme.TraceImageLocalSheetSum",
    "AlgebraicGeometry.Scheme.finite_etale_trace_image"
   ],
   "file": "lean/Sheaf/AlgebraicGeometry/FiniteEtaleTraceImage.lean",
@@ -299,7 +194,7 @@
   "by": "NG",
   "date": "2026-10-21",
   "existing": false,
-  "note": "Repair H2/H3: the existing coefficient maps are owned by def-sfb-continuous-coefficient-pullback-maps; continuousCoefficientSheaf genuinely uses its sheafhood theorem. Trace uniqueness is asserted among all maps satisfying the local sums, separately from the integral sheaf-image conclusion for every such map. Uses the existing equivalent AsSmall site and covering-sieve formulas, including empty splittings."
+  "note": "Repair H2/H3: the existing coefficient maps are owned by def-sfb-continuous-coefficient-pullback-maps; continuousCoefficientSheaf genuinely uses its sheafhood theorem. Trace uniqueness is asserted among all maps satisfying the local sums, separately from the integral sheaf-image conclusion for every such map. Uses the existing equivalent AsSmall site and covering-sieve formulas, including empty splittings. S2: the 16 unchanged data declarations are now owned by def-sfb-finite-etale-trace-data and publicly reexported; the theorem signature is unchanged."
  },
  "reviewed_lean": {
   "date": "2026-10-21",
@@ -308,5 +203,15 @@
   "group": "NG",
   "result": "fix",
   "note": "Re-delivery after the 0e8accd4a547 RETURN. Lean delta: unused Paper.ContinuousIntegralCoefficients import removed; conclusion restated as (∃! τ, TraceImageLocalSums τ) ∧ ∀ τ, TraceImageLocalSums τ → ∃ N, ..., so H3 is fixed. H2 fixed: theorem stmt_dep lem-weil-pbc-continuous-coefficient-pullback-composition replaced by new def node def-sfb-continuous-coefficient-pullback-maps, existing:true on the unchanged ContinuousCoefficientPullback (DirectMap, Pullback, Map, integralRationalCoefficientMap). It covers every decl the item uses, no competing owner exists live, side-live or in other runs, and its body owners are in its stmt_deps. Mechanical finding: lem-weil-pbc-continuous-ring-functions-sheaf is genuine because continuousCoefficientSheaf packs continuousMapPresheafCommRing_isSheaf; PASS on that point. Item statement verbatim, 17 declarations match the file, one sorry, docstrings complete, not dropped. Splitting-datum advisory justified with explicit maps both ways. nt_compile timed out at 60 s (load 206); lcompile timeout=560 clean in 39.0 s. FIX: fixes/def-sfb-continuous-coefficient-pullback-maps.json trims `noncomputable` from lean.statement; check_existing now returns ([], [])."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-0db3e",
+  "group": "S2",
+  "result": "fix",
+  "landing": "20261021T111606-L-368636",
+  "kind": "interface",
+  "note": "independent cc review: 16 moved decls vs live item lines 1-224 (identical apart from blueprint tags); item theorem statement vs live (byte-identical); #print axioms of finite_etale_trace_image (propext/choice/Quot.sound); unit-route import kept via the public Definitions import"
  }
 }
