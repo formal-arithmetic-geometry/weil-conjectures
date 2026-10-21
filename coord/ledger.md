@@ -20239,3 +20239,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:08 L: returned deliver/NB/lem-weil-pbc-projection-mate-square-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-pbc-projection-mate-square-coherence: lem-wei)
 - 04:08 L: merged deliver/N8/lem-sfb-equivalence-square-inverse-mate-coherence (reviewer PASS; first push; new nodes: 0)
 - 04:08 L: merged deliver/Q39/lem-pd-ringed-tensor-adjunction-mate (reviewer PASS; first push; new nodes: 0)
+- 04:08 L: merged deliver/NW/lem-cbc-completed-extension-zero-comparison (reviewer FIX; after a return; new nodes: 4)
