@@ -24,66 +24,23 @@
  ],
  "proof": [
   {
-   "text": "First identify the two meanings of closed support on the ordinary etale site. For $i:C\\hookrightarrow P$ put $Q(F)=\\ker(F\\to j_*j^*F)$, with $j:P\\setminus C\\hookrightarrow P$. By [lem-kun-04ca], $Q(F)=i_*i^{-1}Q(F)$; every map from a sheaf supported on $C$ to $F$ factors uniquely through this kernel. Thus $i^!F=i^{-1}Q(F)$ is right adjoint to $i_*$. Closed direct image is exact by [lem-weil-pbc-closed-immersion-finite] and [lemma-weil-pbc-finite-direct-image-exact]; these assertions apply to constant-$A$ modules by forgetting the action. Also $i^{-1}$ is exact by [prop-weil-pbc-inverse-image-modules-exact]. Hence $i^!$ and $i_*$ preserve injectives, by their adjunctions to exact functors. Applying them to an injective resolution gives $RQ=i_*Ri^!$, where the right adjoint is the one of [lem-exc-closed-ambient], and $R\\Gamma_C(P,F)=R\\Gamma(C,Ri^!F)$. In the latter equality the same complex computes both sides: $\\Gamma(P,Q(I^\\bullet))=\\Gamma(C,i^!I^\\bullet)$. The natural triangle of [lem-exc-closed-support-triangle] consequently gives the localization triangle for the precise sheaf support functor in the item.",
+   "text": "Choose an affine neighbourhood $S_0$ of the image of $\\bar t$, put $B=\\mathbf A^a_{S_0}$ and view the chart as etale over $P=\\mathbf A^b_B$. For every finitely generated $k$-subalgebra of the affine base ring, [lem-pur-finite-type-coordinate-support-orientation] identifies the stage support complex with $z_*A(r-b)[-2b]$; at a geometric point on the zero section the stalk of a closed direct image is the stalk of the sheaf on the closed subscheme by [lemma-openclosed-stalk-lowerstar], and the stalk of the constant line sheaf is $L_{r-b}$. So the stage supported stalk cohomology is $L_{r-b}$ in degree $2b$ and zero otherwise. Its base-change compatibility makes the transitions the identity on $L_{r-b}$. Apply [lem-pur-affine-coordinate-support-stalk-continuity] in each degree: the same concentration and ordered coordinate identification hold over $B$. Its normalization and refinement clauses identify this orientation with pullback of the field coordinate class and make it independent of the affine models.",
    "uses": [
-    "lem-kun-04ca",
-    "lem-weil-pbc-closed-immersion-finite",
-    "lemma-weil-pbc-finite-direct-image-exact",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-exc-closed-ambient",
-    "lem-exc-closed-support-triangle"
+    "lem-pur-finite-type-coordinate-support-orientation",
+    "lem-pur-affine-coordinate-support-stalk-continuity",
+    "lemma-openclosed-stalk-lowerstar"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 09XP, section-cohomology-support; Tag 09XQ, lemma-sections-with-support-acyclic; closed-support adjunction and localization triangle."
+    "document": "literature/stacks-project/etale-cohomology.tex; literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md",
+    "place": "Assembly of the separately stated arguments extracted from original Steps 1--4 and the refinement part of Step 7."
    }
   },
   {
-   "text": "Suppose temporarily that $B$ is affine of finite type over $k$, put $P=\\mathbf A^b_B$, and let $z:B\\hookrightarrow P$ be its zero section. Apply [cor-pur-affine-space-zero-section-purity]. Its orientation is the ordered product of the ordinary etale Cartier-Kummer boundaries, followed by comparison, and its exceptional inverse image is the comparison-transported ordinary etale right adjoint by [def-weil-exceptional-inverse-image]. The fully faithful comparison [thm-weil-pbc-site-comparison] therefore reflects this isomorphism and its stated base-change compatibility to the ordinary etale formulation. The ordinary boundary and its identification with the specified finite Tate twist, for every coefficient index, are explicitly supplied by [lem-amb-cartier-kummer-map]. Step 1 now gives $RQ(A(b))\\simeq z_*A_B[-2b]$. Let $L_m$ be the finite free rank-one $A$-module given by the twist $A(m)$ over the algebraically closed field $k$. The roots of unity lie in $k$, and the pullback/tensor/dual identifications of [lem-asd-etale-finite-twist-pullback] identify $A(m)$ on every $k$-scheme with the constant line $L_m$. Tensoring the displayed isomorphism with $L_{r-b}$ gives $RQ(A(r))\\simeq z_*A_B(r-b)[-2b]$: tensor by a finite free constant line commutes with kernels and with injective resolutions, as can be checked after choosing a basis of that line. The resulting map is independent of this checking basis. Its normalizing class is still the ordered coordinate product, tensored with $L_{r-b}$.",
+   "text": "Over $k$, [lem-pur-finite-type-coordinate-support-orientation] identifies the global supported complex with $L_{r-b}[-2b]$. The chart and Step 1 now satisfy the two concentration hypotheses of [lem-pur-concentrated-support-etale-transfer]. Before applying it, shrink $T$ to the open $T_0=h^{-1}(\\mathbf A^{a+b}_{S_0})$, which contains $\\bar t$: etale inverse image along $T_0\\hookrightarrow T$ is literal restriction [lem-weil-pbc-etale-inverse-image-restriction], under which the support kernel of $Y_T$ restricts to that of $Y_T\\times_TT_0$ on every etale test object; restriction is exact [prop-weil-pbc-inverse-image-modules-exact] and preserves injectives [lem-weil-pbc-etale-restriction-injectives], so it carries $R\\underline\\Gamma_{Y_T}$ to the derived support kernel on $T_0$, and the stalk at $\\bar t$ is unchanged by [lemma-openclosed-stalk-upperstar]. Applied to the etale map $T_0\\to P$, [lem-pur-concentrated-support-etale-transfer] identifies the actual derived support kernel on the chart, proves the normalized global-to-stalk morphism invertible, and identifies its inverse with the functorial truncation comparison. Inverting gives the displayed isomorphism. The transfer lemma supplies further etale restriction and twist compatibility; the continuity lemma in Step 1 supplies independence of the chosen affine neighbourhood and finite stages. The empty product covers $b=0$, and empty support has no geometric points at which to make an assertion.",
    "uses": [
-    "cor-pur-affine-space-zero-section-purity",
-    "def-weil-exceptional-inverse-image",
-    "thm-weil-pbc-site-comparison",
-    "lem-amb-cartier-kummer-map",
-    "lem-asd-etale-finite-twist-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md",
-    "place": "Ordinary etale zero-section orientation, its ordered Cartier product and base-change normalization; all finite coefficient indices."
-   }
-  },
-  {
-   "text": "Extend Step 2 to an arbitrary affine base $B=\\operatorname{Spec}R$ over $k$. Write $R$ as the directed union of its finitely generated $k$-subalgebras $R_i$. Put $B_i=\\operatorname{Spec}R_i$, $P_i=\\mathbf A^b_{B_i}$, $C_i=z_i(B_i)$ and $j_i:O_i=P_i\\setminus C_i\\hookrightarrow P_i$. The limit pair is $(P,C)=(\\mathbf A^b_B,z(B))$. All transitions of $P_i$ and $O_i$ are affine: the latter are restrictions of base changes of the affine base transitions. The open $O_i$ is the union of the $b$ principal opens $D(v_j)$; it and its intersections are qcqs, so $j_i$ is quasi-compact and quasi-separated. For $b=0$, $O_i$ is empty, and the same assertions hold. All $B_i$ are separated finite-type $k$-schemes, so Step 2 applies to every stage. Apply [lem-kun-0eym] to the system of open inclusions $j_i$, with the restrictions of the constant coefficient line $L_r$. For the limit projections $u_i:P\\to P_i$, its canonical comparisons give $\\varinjlim_i u_i^{-1}R^qj_{i,*}A(r)\\simeq R^qj_*A(r)$ for every $q\\geq0$, including degree zero. The specified exchange maps in that lemma are the transition maps used here.",
-   "uses": [
-    "lem-kun-0eym"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0EYM, lemma-relative-colimit-general, applied to punctured coordinate opens and their canonical exchange maps."
-   }
-  },
-  {
-   "text": "Take the localization triangle from Step 1 at a geometric point $\\bar x$ of $C$, with images $\\bar x_i$ in $C_i$. By [prop-weil-pbc-geometric-stalks-exact] and [lemma-openclosed-stalk-upperstar], the comparison in Step 3 identifies the colimit of the stalks of $R^qj_{i,*}A(r)$ with the corresponding limit stalk. Here the stalk of the colimit sheaf of Step 3 is the colimit of the stalks by [lem-kun-stalks-commute-colimits]. The higher direct images $R^qj_*$ in the triangle of Step 1 are formed in sheaves of $A$-modules, while [lem-kun-0eym] forms them in abelian sheaves; by [det-pbc-conventions-module-cohomology] (clause 3) they agree after forgetting the $A$-action, canonically, so the comparisons of Step 3 apply to the module-theoretic terms. Use the exact sequences $0\\to\\mathcal H^0(RQ)\\to A(r)\\to j_*A(r)\\to\\mathcal H^1(RQ)\\to0$ and the identities $\\mathcal H^d(RQ)=R^{d-1}j_*A(r)$ for $d\\geq2$. Filtered colimits preserve their exactness by [lem-weil-pbc-filtered-colimit-abelian-groups-exact]. Kernels and cokernels in the first sequence, and the displayed identities in higher degrees, therefore identify the supported stalk cohomology with the colimit of the corresponding stage supported stalk cohomology. By [lemma-openclosed-stalk-lowerstar], Step 2 identifies every stage group with $L_{r-b}$ in degree $2b$ and zero otherwise. Its base-change compatibility makes the transition maps on $L_{r-b}$ the identity. Thus the limit has exactly these same cohomology groups, with the coordinate-induced identification in degree $2b$. Negative degrees vanish since $RQ$ is the right derived functor of a left exact functor applied to a sheaf.",
-   "uses": [
-    "prop-weil-pbc-geometric-stalks-exact",
-    "lemma-openclosed-stalk-upperstar",
-    "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
-    "lemma-openclosed-stalk-lowerstar",
-    "lem-kun-stalks-commute-colimits",
-    "det-pbc-conventions-module-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 09XP support triangle and Tag 0EYM continuity; the supported consequence is the kernel/cokernel calculation written here."
-   }
-  },
-  {
-   "text": "Return to the given chart and choose an affine open $S_0\\subseteq S$ about the image of $\\bar t$. Write $B=\\mathbf A^a_{S_0}$ and $P=\\mathbf A^b_B$, with zero section $C=B$. The restricted $h$ is an etale map to $P$ and $Y_T=h^{-1}C$. Etale inverse image is literal restriction on etale test objects by [lem-weil-pbc-etale-inverse-image-restriction]. On such an object $W\\to T$, both restricted support functors are the kernel of $F(W)\\to F(W\\setminus Y_W)$, so they agree before deriving. Restriction is exact by [prop-weil-pbc-inverse-image-modules-exact] and preserves injectives by [lem-weil-pbc-etale-restriction-injectives]; the equality therefore persists on injective resolutions. The stalk formula [lemma-openclosed-stalk-upperstar] identifies the supported stalk on $T$ with the one on $P$ at $h\\bar t$. Applying Step 4 gives cohomology $L_{r-b}$ in degree $2b$, zero otherwise, with the coordinate identification. The same restriction argument justifies the initial shrinking of $S$ and $T$.",
-   "uses": [
+    "lem-pur-finite-type-coordinate-support-orientation",
+    "lem-pur-concentrated-support-etale-transfer",
     "lem-weil-pbc-etale-inverse-image-restriction",
     "prop-weil-pbc-inverse-image-modules-exact",
     "lem-weil-pbc-etale-restriction-injectives",
@@ -91,96 +48,37 @@
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 09XP kernel definition; etale restriction computes both underived and derived support on the chart."
+    "document": "literature/stacks-project/etale-cohomology.tex; literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md",
+    "place": "Assembly of the separately stated arguments extracted from original Steps 5--7 and the field part of Step 6."
    }
   },
   {
-   "text": "Apply Step 2 also with $B=\\operatorname{Spec}k$. Step 1 identifies $R\\Gamma_{\\{0\\}}(\\mathbf A^b_k,A(r))$ with $R\\Gamma(k,Rz^!A(r))$. By [sbc-lem-strict-henselian-constant-cohomology], the cohomology of the constant finite line $L_{r-b}$ on the strictly henselian scheme $\\operatorname{Spec}k$ is that line in degree zero and zero above. Consequently this field complex too has only $L_{r-b}$ in degree $2b$, identified by the same ordered coordinate class. A complex $K$ with only $H^d(K)$ nonzero is canonically isomorphic to $H^d(K)[-d]$: the good truncation, using $\\ker d^d$ in degree $d$, gives quasi-isomorphisms $K\\leftarrow\\tau_{\\leq d}K\\to H^d(K)[-d]$. Apply this with $d=2b$ to the field complex and the supported stalk of Step 5. Their coordinate identifications with $L_{r-b}$ give the required isomorphism of complexes, with the direction in the statement obtained by inverting the field identification.",
+   "text": "If $Y_T$ is nonempty, apply [lem-pur-coordinate-chart-finite-dimension-witness] to $i:Y\\hookrightarrow X$, $e:T\\to X$ and $h$. It gives $y\\in Y$ with $\\dim\\mathcal O_{Y,y}=0$ and $\\dim\\mathcal O_{X,y}=b$, both finite. At this point the additional hypothesis reads $b=0+c$, hence $b=c$. No cancellation of infinite local dimensions is involved.",
    "uses": [
-    "sbc-lem-strict-henselian-constant-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md",
-    "place": "Coordinate zero-section orientation over the ground field; Stacks support adjunction identifies its global supported complex."
-   }
-  },
-  {
-   "text": "The comparison commutes with further etale restriction: Step 5 uses the literal restriction of one injective resolution, and the continuity maps of Step 3 are the canonical exchange maps. The ordinary Cartier boundaries and their ordered products commute with pullback by [lem-pur-supported-cup-functoriality]. Step 2 uses exactly these classes, so the degree-$2b$ identifications of Step 4 commute with restriction, and the good truncation maps in Step 6 are functorial. The twist identity $A(r)=A(b)\\otimes_A A(r-b)$ is respected because the same coefficient-line tensor identification is used at every stage, on the chart, and over $k$, by [lem-asd-etale-finite-twist-pullback]. This also explains negative $r$: take the dual tensor powers, with their stated evaluation and pullback compatibility. No freeness of $A$ over an auxiliary $\\mathbf Z/\\ell^N$ is used. When $b=0$, the support is all of $T$, $RQ$ is the identity and the empty coordinate product is the unit; the construction reduces to $L_r\\simeq R\\Gamma(k,A(r))$. If $Y_T$ is empty there are no supported geometric points and the comparison assertion is vacuous. Two affine base neighbourhoods can be compared on a common affine neighbourhood of the image point; any finite collection of their algebra coefficients lies in a common finitely generated subalgebra. Cofinal refinement of those subalgebras and the canonical exchange legs therefore give the same cohomology identification. Thus the comparison is independent of the affine and stage choices.",
-   "uses": [
-    "lem-pur-supported-cup-functoriality",
-    "lem-asd-etale-finite-twist-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md",
-    "place": "Base-change compatibility of the ordered supported coordinate product and the all-finite-level Tate twists; empty product case."
-   }
-  },
-  {
-   "text": "It remains to relate $b$ to $c$. Assume $Y_T\\ne\\varnothing$. Base changes of an etale map are etale: apply [lem-weil-pbc-etale-covering-base-change] to the cover consisting of that map together with the identity, and discard the identity member. Thus $Y_T\\to\\mathbf A^a_S$, its base changes, and $Y_T\\to Y$ are etale. Their images are open by [lem-weil-pbc-etale-morphism-open-map]. The projection $\\mathbf A^a_S\\to S$ is smooth by [sbc-lem-affine-space-smooth], hence flat and locally of finite presentation by [lem-pc-smooth-flat], and is open by [lem-weil-pbc-flat-lfp-open]. Hence the image of $Y_T$ in $S$ is a nonempty open. In an affine open of $S$ meeting that image choose a point in the image and a minimal prime $s$ contained in its prime; the minimal prime still lies in the image, since open subsets are stable under generalization. Existence here follows from Zorn: primes contained in the chosen prime are nonempty, and the intersection of a descending chain is prime (if a factor of a product is absent from one chain member, the other factor belongs to all smaller members and hence to every member). At this $s$, the image of $(Y_T)_s\\to\\mathbf A^a_{\\kappa(s)}$ is a nonempty open, so it contains the generic point $\\eta$. Choose $t'\\in(Y_T)_s$ over $\\eta$ and let $y\\in Y$ be its image.",
-   "uses": [
-    "lem-weil-pbc-etale-covering-base-change",
-    "lem-weil-pbc-etale-morphism-open-map",
-    "sbc-lem-affine-space-smooth",
-    "lem-pc-smooth-flat",
-    "lem-weil-pbc-flat-lfp-open"
+    "lem-pur-coordinate-chart-finite-dimension-witness"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 056G, lemma-smooth-open; use a point over a minimal base prime rather than cancellation of potentially infinite local dimensions."
-   }
-  },
-  {
-   "text": "Compute the local dimensions at this chosen point. Let $R$ be the affine base ring and replace it by $R_s$. The only prime of this local ring is its maximal ideal $\\mathfrak m$, since $s$ is minimal. Every element of $\\mathfrak m$ is therefore nilpotent. Its image generates a nil ideal in any $R_s$-algebra: every element of that generated ideal is a finite sum of nilpotents. All primes contain this ideal, so quotienting by it gives an inclusion-preserving bijection on primes, also after localization. Thus local dimensions in the chart and in its support equal their local dimensions in the fibre over $\\kappa(s)$. Localizing the base from $R$ to $R_s$ does not change any local ring at a point over $s$, because the inverted elements are already units there. By [lem-sc-etale-local-dimension], the local ring of $(Y_T)_s$ at $t'$ has dimension zero, that of $\\mathbf A^a_{\\kappa(s)}$ at its generic point. The ambient image in $\\mathbf A^{a+b}_{\\kappa(s)}$ is the prime $(v_1,\\ldots,v_b)$ over this generic point. Its local ring is $\\kappa(s)(u_1,\\ldots,u_a)[v_1,\\ldots,v_b]_{(v_1,\\ldots,v_b)}$, whose dimension is $b$ by [lem-weil-pbc-mv-polynomial-maximal-height]. The etale chart and the etale maps $T\\to X$, $Y_T\\to Y$ preserve local dimensions by [lem-sc-etale-local-dimension]. Hence $\\dim\\mathcal O_{X,y}=b$ and $\\dim\\mathcal O_{Y,y}=0$. The hypothesis at this $y$ now reads $b=0+c$, proving $b=c$. This uses finite integers at the selected point and never cancels an infinite dimension.",
-   "uses": [
-    "lem-sc-etale-local-dimension",
-    "lem-weil-pbc-mv-polynomial-maximal-height"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex; literature/stacks-project/algebra.tex",
-    "place": "Tag 07QP, lemma-dimension-etale-extension; polynomial maximal height, after reducing the zero-dimensional minimal-base local ring by its nil ideal."
+    "place": "Assembly of the separately stated arguments extracted from original Steps 8--9."
    }
   }
  ],
  "proof_deps": [
-  "cor-pur-affine-space-zero-section-purity",
-  "def-weil-exceptional-inverse-image",
-  "det-pbc-conventions-module-cohomology",
-  "lem-amb-cartier-kummer-map",
-  "lem-asd-etale-finite-twist-pullback",
-  "lem-exc-closed-ambient",
-  "lem-exc-closed-support-triangle",
-  "lem-kun-04ca",
-  "lem-kun-0eym",
-  "lem-kun-stalks-commute-colimits",
-  "lem-pc-smooth-flat",
-  "lem-pur-supported-cup-functoriality",
-  "lem-sc-etale-local-dimension",
-  "lem-weil-pbc-closed-immersion-finite",
-  "lem-weil-pbc-etale-covering-base-change",
-  "lem-weil-pbc-etale-inverse-image-restriction",
-  "lem-weil-pbc-etale-morphism-open-map",
-  "lem-weil-pbc-etale-restriction-injectives",
-  "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
-  "lem-weil-pbc-flat-lfp-open",
-  "lem-weil-pbc-mv-polynomial-maximal-height",
+  "lem-pur-finite-type-coordinate-support-orientation",
+  "lem-pur-affine-coordinate-support-stalk-continuity",
   "lemma-openclosed-stalk-lowerstar",
-  "lemma-openclosed-stalk-upperstar",
-  "lemma-weil-pbc-finite-direct-image-exact",
-  "prop-weil-pbc-geometric-stalks-exact",
+  "lem-pur-concentrated-support-etale-transfer",
+  "lem-weil-pbc-etale-inverse-image-restriction",
   "prop-weil-pbc-inverse-image-modules-exact",
-  "sbc-lem-affine-space-smooth",
-  "sbc-lem-strict-henselian-constant-cohomology",
-  "thm-weil-pbc-site-comparison"
+  "lem-weil-pbc-etale-restriction-injectives",
+  "lemma-openclosed-stalk-upperstar",
+  "lem-pur-coordinate-chart-finite-dimension-witness"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md",
-  "place": "Affine-line-route coordinate zero-section purity, extended from finite-type affine bases by Stacks Tag 0EYM continuity of punctured-coordinate direct images. The arbitrary-base comparison and minimal-base dimension argument are written out; no SGA route is used."
+  "place": "Short assembly of the four extracted statement-only arguments. The original affine-line-route zero-section calculation, punctured-open continuity, etale transfer, truncation and minimal-base-prime dimension argument are preserved in report.md and allocated to those nodes; no SGA route."
  },
  "mathlib_searches": [
   {
@@ -375,119 +273,31 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "item": "lem-pur-relative-support-coordinate-model",
   "worker": "stage1",
-  "summary": "Preserved the statement and all inherited provenance/searches. Proved the normal-slice comparison using existing affine-space zero-section orientation, canonical higher-image continuity on punctured opens and exact stalk sequences, then etale restriction. Proved the dimension clause at a point above a minimal base prime, avoiding infinite-dimension cancellation. No new nodes; all potential support-continuity and openness auxiliaries were subsumed by existing nodes. Second reading reclassified Steps 4–7 as non-elementary because their derived stalk, restriction, truncation, and compatibility arguments exceed a two- or three-line check.",
-  "blueprint": "Realizes the first two sentences of the frame-independence blueprint proof through the existing relative-bottom-descent child: rigorous sheaf supported-stalk calculation on a coordinate normal slice. Uses the current sk-prop-an affine-line coordinate orientation, not any SGA trace route.",
+  "summary": "Repaired the human-requested re-split. Preserved the statement and all inherited provenance, searches and maintainer metadata. Distributed all nine original steps among four independent statement-only nodes: ordinary finite-type orientation with support adjunction and field normalization, arbitrary affine supported-stalk continuity, conditional etale transfer of concentrated supported germs, and a finite local-dimension witness. The parent is a three-step assembly below 3000 characters. The complete original arguments and their extraction map are preserved verbatim in report.md for the workers taking the four unsplit nodes.",
+  "blueprint": "Realizes the first two sentences of the current main-20261015 frame-independence proof through the coordinate-model child. Keeps the existing affine-line/ordered-Cartier route; the dimension witness and continuity do not invoke a general purity or trace theorem.",
   "tool_uses": [
    {
-    "node": "lem-exc-closed-ambient",
-    "why": "Generic ordinary-etale closed direct-image adjoint, used only to identify the support functor; no purity conclusion."
-   },
-   {
-    "node": "lem-exc-closed-support-triangle",
-    "why": "Generic natural localization triangle for that ordinary-etale adjoint; needed for the punctured-open continuity calculation."
-   },
-   {
-    "node": "lem-kun-04ca",
-    "why": "Generic equivalence between closed-supported etale sheaves and sheaves on the support, used to derive the actual kernel adjunction."
-   },
-   {
-    "node": "cor-pur-affine-space-zero-section-purity",
-    "why": "Existing ordered affine-line-route zero-section calculation, used as a generic coordinate model over finite-type affine bases; no regular-immersion or frame-independence theorem is invoked."
-   },
-   {
-    "node": "lem-amb-cartier-kummer-map",
-    "why": "Generic all-index ordinary/pro-etale Cartier boundary comparison ensures the zero-section orientation is read on the correct coefficient object."
-   },
-   {
-    "node": "lem-asd-etale-finite-twist-pullback",
-    "why": "Generic ordinary-etale Tate line, tensor, dual and inverse-image identifications for every integer twist."
-   },
-   {
-    "node": "lem-kun-0eym",
-    "why": "Generic higher-direct-image continuity for a system of qcqs maps; applied only to punctured coordinate open immersions."
-   },
-   {
-    "node": "lemma-openclosed-stalk-upperstar",
-    "why": "Generic pullback stalk formula identifies the stage geometric stalks and the etale chart stalk."
-   },
-   {
     "node": "lemma-openclosed-stalk-lowerstar",
-    "why": "Generic closed-direct-image stalk formula reads the finite-stage zero-section orientation."
-   },
-   {
-    "node": "lem-weil-pbc-flat-lfp-open",
-    "why": "Generic openness tool to ensure the chart meets a minimal base point, including non-Noetherian bases."
-   },
-   {
-    "node": "lem-pc-smooth-flat",
-    "why": "Generic flatness and local-finite-presentation properties needed for the preceding openness tool."
-   },
-   {
-    "node": "lem-sc-etale-local-dimension",
-    "why": "Generic arbitrary-ring etale local-dimension equality; used after choosing a point where dimensions are finite."
-   },
-   {
-    "node": "lem-weil-pbc-mv-polynomial-maximal-height",
-    "why": "Generic polynomial maximal-height computation over the tangential function field."
-   },
-   {
-    "node": "lem-weil-pbc-closed-immersion-finite",
-    "why": "Generic exactness, stalk, restriction or scheme-geometry tool used in the displayed argument; no same-unit node states this general interface, and it does not replace an affine-line-route step."
-   },
-   {
-    "node": "lem-weil-pbc-etale-covering-base-change",
-    "why": "Generic exactness, stalk, restriction or scheme-geometry tool used in the displayed argument; no same-unit node states this general interface, and it does not replace an affine-line-route step."
+    "why": "Step 1: stalk of a closed direct image at a point of the closed subscheme; generic stalk tool, already in the item's tool_uses from the original Step 4."
    },
    {
     "node": "lem-weil-pbc-etale-inverse-image-restriction",
-    "why": "Generic exactness, stalk, restriction or scheme-geometry tool used in the displayed argument; no same-unit node states this general interface, and it does not replace an affine-line-route step."
-   },
-   {
-    "node": "lem-weil-pbc-etale-morphism-open-map",
-    "why": "Generic exactness, stalk, restriction or scheme-geometry tool used in the displayed argument; no same-unit node states this general interface, and it does not replace an affine-line-route step."
-   },
-   {
-    "node": "lem-weil-pbc-etale-restriction-injectives",
-    "why": "Generic exactness, stalk, restriction or scheme-geometry tool used in the displayed argument; no same-unit node states this general interface, and it does not replace an affine-line-route step."
-   },
-   {
-    "node": "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
-    "why": "Generic exactness, stalk, restriction or scheme-geometry tool used in the displayed argument; no same-unit node states this general interface, and it does not replace an affine-line-route step."
-   },
-   {
-    "node": "lemma-weil-pbc-finite-direct-image-exact",
-    "why": "Generic exactness, stalk, restriction or scheme-geometry tool used in the displayed argument; no same-unit node states this general interface, and it does not replace an affine-line-route step."
-   },
-   {
-    "node": "prop-weil-pbc-geometric-stalks-exact",
-    "why": "Generic exactness, stalk, restriction or scheme-geometry tool used in the displayed argument; no same-unit node states this general interface, and it does not replace an affine-line-route step."
+    "why": "Step 2: etale (open) inverse image is literal restriction, for shrinking T over the affine S_0; already in the item's tool_uses from the original Step 5."
    },
    {
     "node": "prop-weil-pbc-inverse-image-modules-exact",
-    "why": "Generic exactness, stalk, restriction or scheme-geometry tool used in the displayed argument; no same-unit node states this general interface, and it does not replace an affine-line-route step."
+    "why": "Step 2: exactness of restriction on module sheaves; already in the item's tool_uses from the original Step 5."
    },
    {
-    "node": "sbc-lem-affine-space-smooth",
-    "why": "Generic exactness, stalk, restriction or scheme-geometry tool used in the displayed argument; no same-unit node states this general interface, and it does not replace an affine-line-route step."
+    "node": "lem-weil-pbc-etale-restriction-injectives",
+    "why": "Step 2: etale restriction preserves injective module sheaves; already in the item's tool_uses from the original Step 5."
    },
    {
-    "node": "sbc-lem-strict-henselian-constant-cohomology",
-    "why": "Generic exactness, stalk, restriction or scheme-geometry tool used in the displayed argument; no same-unit node states this general interface, and it does not replace an affine-line-route step."
-   },
-   {
-    "node": "thm-weil-pbc-site-comparison",
-    "why": "Generic exactness, stalk, restriction or scheme-geometry tool used in the displayed argument; no same-unit node states this general interface, and it does not replace an affine-line-route step."
-   },
-   {
-    "node": "lem-kun-stalks-commute-colimits",
-    "why": "Generic fact that geometric stalks commute with colimits of etale sheaves, used to take the stalk of the continuity colimit in Step 4."
-   },
-   {
-    "node": "det-pbc-conventions-module-cohomology",
-    "why": "Generic agreement of higher direct images over A-module sheaves and abelian sheaves, used to apply the abelian continuity lemma to the module-theoretic support triangle."
+    "node": "lemma-openclosed-stalk-upperstar",
+    "why": "Step 2: pullback stalk formula; already in the item's tool_uses from the original Steps 4-5."
    }
   ]
  },
@@ -521,12 +331,12 @@
   "det-pbc-conventions-module-cohomology"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-Q46-8999d4b87",
-  "group": "Q46",
+  "reviewer": "NT-cc-Q86-da7b42022",
+  "group": "Q86",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q46-8999d4b87 (reviewer sub-agent of L); spot-checked: I read the item, its statement and all 9 steps, the parent bottom-descent node, the unit record, the statements of all 27 cited nodes, the convention nodes, the main-20261015 blueprint proof of frame-independence, and Stacks 0EYM (etale-cohomology.tex l.7567). The delivery has no new nodes. The statement is true on the cases I tested (A^1 inside A^2 over k; a zero section over a DVR base; b=0; empty support; a nonreduced, reducible or infinite-dimensional base; r<0). The b=c argument is sound: it chooses a minimal base prime and the generic point of the fibre, uses nil-ideal reduction, then étale local dimension and the height of the polynomial ring, with no infinite cancellation. Base-change morphism and coefficients: the cor's Rz^! is ν^*z^×Rν_*, and z^× agrees with the ordinary étale right adjoint of z_* by uniqueness of adjoints. The orientation is read on the étale witness; full faithfulness of the D^+ site comparison reflects it to an étale isomorphism. Twists are read through lem-amb-cartier-kummer-map and lem-asd-etale-finite-twist-pullback, which I accept. No cycles: the transitive closure of every cited node (and of the two added ones) avoids the item and its parent. No SGA source is used. Fixes, both C1 in Step 4: (1) the stalk of the continuity colimit sheaf is the colimit of the stalks, used without a node; I cited lem-kun-stalks-commute-colimits. (2) The support triangle and Step 2 use A-module R^q j_*, while lem-kun-0eym concerns abelian R^q j_*; I cited det-pbc-conventions-module-cohomology, clause 3, which says the two agree. I updated proof_deps and declared both in split_report.tool_uses. Note for the maintainer: the DAG binds the item, its parent and lem-pur-frame-independence to sk-prop-a1-kummer, but the blueprint places frame-independence in sk-prop-an. The declared tool use of cor-pur-affine-space-zero-section-purity is therefore consistent with the blueprint ancestor's real unit. The binding is maintainer metadata, not a fault of this split.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q86-da7b42022 (reviewer sub-agent of L); spot-checked: Read the item, all four new nodes, every cited statement, the parent node and the base nine-step proof (with the Q46 Step-4 fixes). The report reproduces the base proof word for word and assigns it to the new nodes. Orientation takes old Steps 1, 2 and the field part of 6. Continuity takes Steps 3, 4 and the refinement part of 7. Transfer takes Steps 5, 6 (truncation) and 7. The dimension witness takes Steps 8 and 9. The four statements are self-contained, true and of comparable size, and none restates the item: transfer is conditional on explicit concentration inputs, the witness gives a point with dimensions 0 and b rather than b=c, and orientation is finite-type only. Checks: orientation is the corollary cor-pur-affine-space-zero-section-purity carried over to ordinary étale sheaves (affine implies separated), extended to all r by tensoring with the constant line; continuity uses 0EYM on the qcqs punctured opens, the H0/H1 exact sequence plus filtered-colimit exactness, H^d = R^{d-1}j_* for d≥2, and allows any k-algebra; for transfer, both complexes are concentrated in degree 2b, the degree-2b map is the identity of the line, and good truncation finishes; for the witness, the image of Z in S is open, a minimal prime below it stays in the image, the fibre image contains the generic point, the nil maximal ideal gives dimension 0, the local ring κ(s)(u)[v]_(v) gives b, and lem-sc-etale-local-dimension holds for any étale ring map. Edge cases: b=0, a=0, empty support, nonreduced or infinite-dimensional bases, r<0. No duplicate found in the DAG, and no SGA source is used. Repaired 2 C1 gaps where the assembly dropped citations the base proof made. Step 1 now cites lemma-openclosed-stalk-lowerstar for the stage stalks of z_*A(r-b)[-2b]. Step 2 now writes out the shrink of T to T_0 = h^{-1}(A^{a+b}_{S_0}): old Step 5 had covered it with 'the same restriction argument', and the transfer node applies only to T over P. It cites lem-weil-pbc-etale-inverse-image-restriction, prop-weil-pbc-inverse-image-modules-exact, lem-weil-pbc-etale-restriction-injectives and lemma-openclosed-stalk-upperstar. proof_deps is updated, and the five tools are declared in split_report.tool_uses; all five were already in the item's accepted tool_uses. The assembly is now 2752 characters. Advisory: the abelian-sheaf vs A-module derived support in the item statement predates this delivery. Most chapter symlinks in the snapshot are broken; I read the other chapters from dagsnap ba587727.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.Paper.RelativeSupportCoordinateModel",
