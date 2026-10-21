@@ -12094,3 +12094,5 @@ public import WeilConjectures.ZetaLinearAlgebra.Weights
 public import WeilConjectures.ZetaLinearAlgebra.WeilFactorization
 public import WeilConjectures.ZetaLinearAlgebra.WeilNumbers
 public import WeilConjectures.ZetaSeries
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimit
