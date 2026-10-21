@@ -30,9 +30,135 @@
   "cor-amb-affine-space-adjunction",
   "lem-amb-etale-adjoint-locality"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First check the bases for smooth duality. Since $g$ is finite type and $S$ is Noetherian, $V$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. The same lemma applies to $\\mathbf A^1_S$, whose polynomial coordinate algebra has one generator. The hypothesis already makes $D_sV$ Noetherian. Invertibility of $N$ persists because a ring homomorphism sends units to units. Apply [thm-asd-smooth-tensor] to $g$ and $q$: their dualizing objects shifted by $[-2d]$ are locally constant sheaves locally isomorphic to the coefficient sheaf. Exact inverse image [prop-weil-pbc-inverse-image-modules-exact] commutes with shifts and carries a degree-zero sheaf to its inverse image. Pulling a trivializing etale cover back along $s$ or $\\sigma$ still trivializes its inverse image. Hence $C[-2d]$ and $F[-2d]$ are locally constant rank-one sheaves, as asserted.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "thm-asd-smooth-tensor",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+    "place": "Opening paragraph, shifted locally constant dualizing lines"
+   }
+  },
+  {
+   "text": "For $r=0,1$, apply [prop-asd-smooth-base-change] to $q$ and $i_r:S\\to\\mathbf A^1_S$, with coefficient object $A$. Its hypotheses hold: $q$ is smooth, separated, compactifiable, of dimension $d$, and both bases are Noetherian; the fibre structural maps are the assumed compactifiable $g$ and $\\pi$. It gives the actual counit-transpose isomorphisms $j_1^*\\omega_q\\to\\omega_g$ and $j_0^*\\omega_q\\to\\omega_\\pi$, where $j_r$ denotes the fibre inclusion. Pull back along the fibre sections. The identities $j_1s=\\sigma i_1$ and $j_0z=\\sigma i_0$, with the module inverse-image compositors of [lem-weil-pbc-inverse-image-composition-module-linear], give precisely $\\theta:i_1^*F\\to C$ and $\\eta:i_0^*F\\to z^*\\omega_\\pi$. Exact inverse images descend termwise to these unbounded categories by [prop-weil-pbc-inverse-image-modules-exact]. These are the specified maps because we have used the counit-defined comparisons themselves.",
+   "uses": [
+    "prop-asd-smooth-base-change",
+    "lem-weil-pbc-inverse-image-composition-module-linear",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+    "place": "Opening paragraph, restrictions to the two fibres"
+   }
+  },
+  {
+   "text": "Choose affine centred coordinates $e_i:U_i\\to\\mathbf A^d_{S_i}$ from [lem-trf-smooth-section-centred-coordinates], with $S_i$ an affine open cover of $S$ and $U_i$ an affine open neighbourhood of the section in $V_i=V\\times_SS_i$. Write $g_i:V_i\\to S_i$, $u_i:U_i\\hookrightarrow V_i$, and $p_i:\\mathbf A^d_{S_i}\\to S_i$. The square of centres is Cartesian, not merely a pointwise equality. All maps to which locality will be applied are between Noetherian schemes and are compactifiable: base changes of $g,q$ are separated finite type by [lem-pod-separated-finite-type-base-change]; the chart maps are separated etale finite type; their structural composites are separated finite type. Polynomial affine spaces and these finite-type sources are Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. Over each affine Noetherian base they are compactifiable by [thm-nagata-compactification]. The open inclusions are etale by [lem-weil-pbc-open-immersion-etale]; they are separated, and finite type here since their sources are quasi-compact opens in Noetherian schemes. The same checks apply to the deformed charts below.",
+   "uses": [
+    "lem-trf-smooth-section-centred-coordinates",
+    "lem-pod-separated-finite-type-base-change",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "thm-nagata-compactification",
+    "lem-weil-pbc-open-immersion-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+    "place": "Local construction, centred affine charts and locality hypotheses"
+   }
+  },
+  {
+   "text": "For an affine-space projection $p:\\mathbf A^d_T\\to T$ with a Noetherian base as above, [cor-amb-affine-space-adjunction] supplies a right adjoint $K\\mapsto p^*K(d)[2d]$ to $Rp_!$ on the entire unbounded category. Compare it with the chosen $p^\\times$ by [det-sp-unique-right-adjoint]. Choose the unique isomorphism whose image under $Rp_!$, followed by the target counit, is the source counit. Evaluating at $A_T$, and using the canonical isomorphism $p^{-1}A_T\\cong A_{\\mathbf A^d_T}$ of constant coefficient rings [prop-weil-pbc-inverse-image-modules-exact], identifies $\\omega_p$ with $A_{\\mathbf A^d_T}(d)[2d]$. Pulling to the zero section identifies $0^*\\omega_p$ with $A_T(d)[2d]$ by [lem-asd-etale-finite-twist-pullback]. Thus the identification compares adjunctions by their counits; it does not select an arbitrary isomorphism of rank-one fibres. This construction also applies to $T=\\mathbf A^1_{S_i}$.",
+   "uses": [
+    "cor-amb-affine-space-adjunction",
+    "det-sp-unique-right-adjoint",
+    "lem-asd-etale-finite-twist-pullback",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+    "place": "Local construction, affine-space adjunction"
+   }
+  },
+  {
+   "text": "Base change $g$ to $S_i$ using [prop-asd-smooth-base-change]. After section pullback this identifies $C|_{S_i}$ with $s_i^*\\omega_{g_i}$. Apply [lem-amb-etale-adjoint-locality] to $u_i$ over $S_i$ and to $e_i$ over $S_i$. Since $g_i u_i=p_i e_i$, their locality isomorphisms give $u_i^*\\omega_{g_i}\\cong\\omega_{g_i u_i}\\cong e_i^*\\omega_{p_i}$. The comparisons are normalized by the unique counit-compatible right-adjoint comparison [det-sp-unique-right-adjoint]. Pull back along the section in $U_i$. The equalities $u_i s_{U_i}=s_i$ and $e_i s_{U_i}=0_i$, using [lem-weil-pbc-inverse-image-composition-module-linear], identify the result with $0_i^*\\omega_{p_i}$. Step 4 therefore gives an isomorphism $c_i:C|_{S_i}\\to A_{S_i}(d)[2d]$.",
+   "uses": [
+    "prop-asd-smooth-base-change",
+    "lem-amb-etale-adjoint-locality",
+    "det-sp-unique-right-adjoint",
+    "lem-weil-pbc-inverse-image-composition-module-linear"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+    "place": "Local construction, chart identification of the section dualizing object"
+   }
+  },
+  {
+   "text": "The standard pair has deformation algebra $R_i[x][t,(x)/t]=R_i[t,u_1,\\ldots,u_d]$, with $x_j=tu_j$. Indeed the latter polynomial algebra maps into $R_i[x,t,t^{-1}]$ by $u_j\\mapsto x_j/t$; distinct monomials $t^a u^b$ map to distinct Laurent monomials $t^{a-|b|}x^b$, so this is injective over any $R_i$, and its image is exactly the stated generated subalgebra. Apply [lem-trf-section-rees-base-change-etale] first to $S_i\\to S$, then to the etale maps of pairs $u_i$ and $e_i$. This gives a deformed open neighbourhood of $\\sigma(\\mathbf A^1_{S_i})$ with a separated etale finite-type map to $\\mathbf A^d_{\\mathbf A^1_{S_i}}$, preserving its zero section. Use [prop-asd-smooth-base-change] for restriction of $q$ to this base, followed by [lem-amb-etale-adjoint-locality] for the two deformed chart maps. As in Step 5, their equal structural composites and the counit-compatible comparison of [det-sp-unique-right-adjoint] identify the restriction of $F$ with the zero-section pullback of the standard affine-space dualizing object. Step 4 over $\\mathbf A^1_{S_i}$ gives $f_i:F|_{\\mathbf A^1_{S_i}}\\to A_{\\mathbf A^1_{S_i}}(d)[2d]$. The section compositions use the same module inverse-image compositors [lem-weil-pbc-inverse-image-composition-module-linear].",
+   "uses": [
+    "lem-trf-section-rees-base-change-etale",
+    "prop-asd-smooth-base-change",
+    "lem-amb-etale-adjoint-locality",
+    "det-sp-unique-right-adjoint",
+    "lem-weil-pbc-inverse-image-composition-module-linear"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+    "place": "Local construction, Rees etale chart and x_j=t u_j standard model"
+   }
+  },
+  {
+   "text": "Let $\\tau_i:a_i^*A_{S_i}(d)[2d]\\xrightarrow{\\sim}A_{\\mathbf A^1_{S_i}}(d)[2d]$ be Tate pullback [lem-asd-etale-finite-twist-pullback]. The formula $\\lambda_i=(a_i^*c_i)^{-1}\\tau_i^{-1}f_i$ is an isomorphism from $F|_{\\mathbf A^1_{S_i}}$ to $a_i^*(C|_{S_i})$. All three arrows have been specified: two use the counit-normalized locality and affine adjunction comparisons of Steps 4–6, and the middle arrow is canonical Tate pullback. No equality between this initial map at $1$ and $\\theta_i$ is being assumed.",
+   "uses": [
+    "lem-asd-etale-finite-twist-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+    "place": "Local construction, composing the two chart identifications"
+   }
+  },
+  {
+   "text": "Use the inverse-image compositors [lem-weil-pbc-inverse-image-composition-module-linear] and $a_i i_1=1_{S_i}$ to regard $i_1^*\\lambda_i$ as an isomorphism $i_1^*F\\to C|_{S_i}$. Thus $h_i=(i_1^*\\lambda_i)\\theta_i^{-1}$ is an automorphism of $C|_{S_i}$, and $\\lambda_i^{\\mathrm{norm}}=a_i^*(h_i^{-1})\\lambda_i$ is an isomorphism. Its restriction is $h_i^{-1}(i_1^*\\lambda_i)=h_i^{-1}h_i\\theta_i=\\theta_i$. This proves exactly the normalization claimed, using the actual $\\theta_i$ from Step 2. For $d=0$ the polynomial calculation has no $u_j$, the twist and shift are trivial, and the same computation applies. For the empty base all constructions and equations restrict to the empty sites.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition-module-linear"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+    "place": "Local construction, correction at one"
+   }
+  }
+ ],
+ "proof_deps": [
+  "cor-amb-affine-space-adjunction",
+  "det-sp-unique-right-adjoint",
+  "lem-amb-etale-adjoint-locality",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-trf-section-rees-base-change-etale",
+  "lem-trf-smooth-section-centred-coordinates",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-inverse-image-composition-module-linear",
+  "lem-weil-pbc-open-immersion-etale",
+  "prop-asd-smooth-base-change",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "thm-asd-smooth-tensor",
+  "thm-nagata-compactification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+  "place": "Opening paragraph and Local construction; detailed counit comparisons and normalization"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -75,10 +201,45 @@
    "results": "[grep] OK 0 hit(s)\n",
    "date": "2026-10-21",
    "verdict": "no match: hits do not state the section-family assertion; general algebra, sheaf or mate infrastructure only"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizing|exceptional.*[Bb]ase[Cc]hange|[Tt]ate[Tt]wist",
+   "results": "10 hits: Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean, Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean, Mathlib/CategoryTheory/Category/Cat/Op.lean, Mathlib/Algebra/Homology/HomotopyFiber.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/Data/Set/Defs.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: returned general smooth-algebra, sheaf adjunction or categorical duality infrastructure; none gives the finite-etale section-family comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale dualizing complexes of smooth morphisms are locally shifted rank one sheaves",
+   "results": "8 hits: AlgebraicGeometry.IsEtale, Algebra.FormallyEtale.of_unramified_and_smooth, AlgebraicGeometry.IsEtale.instIsSmooth, Algebra.IsStandardSmoothOfRelativeDimension.rank_kaehlerDifferential, Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero, RingHom.Etale.propertyIsLocal, RingHom.Etale, AlgebraicGeometry.Scheme.Etale",
+   "date": "2026-10-21",
+   "verdict": "no match: returned general smooth-algebra, sheaf adjunction or categorical duality infrastructure; none gives the finite-etale section-family comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Sheaf",
+   "results": "12 hits: CategoryTheory.plusPlusAdjunction, CategoryTheory.sheafificationAdjunction, CategoryTheory.HasSheafify.mk', CategoryTheory.GrothendieckTopology.W_eq_inverseImage_isomorphisms_of_adjunction, CategoryTheory.GrothendieckTopology.W_iff_isIso_map_of_adjunction, CategoryTheory.GrothendieckTopology.W_adj_unit_app, CategoryTheory.sheafComposeNatIso, CategoryTheory.instIsIsoFunctorOppositeSheafSheafComposeNatTrans",
+   "date": "2026-10-21",
+   "verdict": "no match: returned general smooth-algebra, sheaf adjunction or categorical duality infrastructure; none gives the finite-etale section-family comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth section dualizing complex finite etale coefficients affine space adjunction local Tate line",
+   "results": "8 hits: AlgebraicGeometry.AffineSpace.homOverEquiv, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat, StandardEtalePresentation, StandardEtalePresentation.toPresentation_σ', AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension",
+   "date": "2026-10-21",
+   "verdict": "no match: returned general smooth-algebra, sheaf adjunction or categorical duality infrastructure; none gives the finite-etale section-family comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right adjoint of etale compactly supported pushforward for affine space is inverse image Tate twist shifted by twice dimension",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, SheafOfModules.instIsRightAdjointPushforward, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.pushforwardPushforwardAdj, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit",
+   "date": "2026-10-21",
+   "verdict": "no match: returned general smooth-algebra, sheaf adjunction or categorical duality infrastructure; none gives the finite-etale section-family comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-finite-ring-section-deformation",
@@ -100,5 +261,84 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-trf-section-local-dualizing-comparisons",
+  "worker": "stage1",
+  "summary": "Proved shifted section lines, actual exceptional fibre isomorphisms, centred-chart identifications and normalized comparisons using existing nodes only. Wrote the standard Rees algebra and correction calculation explicitly; checked finite-ring, Noetherian and compactification hypotheses. No statement change and no new nodes.",
+  "blueprint": "Realizes opening paragraph and Local construction of sk-thm-dnc.proof.md, used in lem-trf-local-term-locality proof (2) through the recorded ancestor chain. Stops before gluing.",
+  "tool_uses": [
+   {
+    "node": "cor-amb-affine-space-adjunction",
+    "why": "Generic Affine-space ambient adjunction used for the section-chart construction; the trace-formula unit supplies no replacement for this ordinary-etale/geometric infrastructure."
+   },
+   {
+    "node": "det-sp-unique-right-adjoint",
+    "why": "Generic Right adjoints are unique up to a unique counit-compatible isomorphism used for the section-chart construction; the trace-formula unit supplies no replacement for this ordinary-etale/geometric infrastructure."
+   },
+   {
+    "node": "lem-amb-etale-adjoint-locality",
+    "why": "Generic Etale localization of the ambient adjoint used for the section-chart construction; the trace-formula unit supplies no replacement for this ordinary-etale/geometric infrastructure."
+   },
+   {
+    "node": "lem-asd-etale-finite-twist-pullback",
+    "why": "Generic Finite Tate lines on the small etale site and their pullback used for the section-chart construction; the trace-formula unit supplies no replacement for this ordinary-etale/geometric infrastructure."
+   },
+   {
+    "node": "lem-pod-separated-finite-type-base-change",
+    "why": "Generic Separated finite-type morphisms are stable under base change used for the section-chart construction; the trace-formula unit supplies no replacement for this ordinary-etale/geometric infrastructure."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic A scheme of finite type over a Noetherian scheme is Noetherian (Stacks 01T6) used for the section-chart construction; the trace-formula unit supplies no replacement for this ordinary-etale/geometric infrastructure."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-composition-module-linear",
+    "why": "Generic The composition isomorphisms of inverse and direct images are linear on sheaves of modules used for the section-chart construction; the trace-formula unit supplies no replacement for this ordinary-etale/geometric infrastructure."
+   },
+   {
+    "node": "lem-weil-pbc-open-immersion-etale",
+    "why": "Generic An open immersion of schemes is etale used for the section-chart construction; the trace-formula unit supplies no replacement for this ordinary-etale/geometric infrastructure."
+   },
+   {
+    "node": "prop-asd-smooth-base-change",
+    "why": "Generic Arbitrary base change for smooth ambient duality used for the section-chart construction; the trace-formula unit supplies no replacement for this ordinary-etale/geometric infrastructure."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic Inverse image of etale sheaves of modules over a constant ring is exact used for the section-chart construction; the trace-formula unit supplies no replacement for this ordinary-etale/geometric infrastructure."
+   },
+   {
+    "node": "thm-asd-smooth-tensor",
+    "why": "Generic Smooth cohomological duality without a chosen orientation used for the section-chart construction; the trace-formula unit supplies no replacement for this ordinary-etale/geometric infrastructure."
+   },
+   {
+    "node": "thm-nagata-compactification",
+    "why": "Generic Nagata compactification, [stacks-project] used for the section-chart construction; the trace-formula unit supplies no replacement for this ordinary-etale/geometric infrastructure."
+   }
+  ]
+ },
+ "tool_uses": [
+  "cor-amb-affine-space-adjunction",
+  "det-sp-unique-right-adjoint",
+  "lem-amb-etale-adjoint-locality",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-inverse-image-composition-module-linear",
+  "lem-weil-pbc-open-immersion-etale",
+  "prop-asd-smooth-base-change",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "thm-asd-smooth-tensor",
+  "thm-nagata-compactification"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q126-ddbda9931",
+  "group": "Q126",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q126-ddbda9931 (reviewer sub-agent of L); spot-checked: I read the item in full: the statement, all 8 steps and every cited statement. The delivery has no new nodes and leaves the statement byte-identical to side-live. The item is still unsplit live and has no re-split note. Neither the item nor any dependency is in route-pivot-dropped, there is no SGA citation, and the item is not in its own dependency closure. The route follows main-20261015 sk-thm-dnc.proof.md: the opening paragraph and Local construction, stopping before Gluing. The old steps 7-9 from the Q58 report are all kept, and step 9 is expanded into Steps 3-8. Step checks: (1) thm-asd-smooth-tensor applies to g and q with Noetherian bases, and exact inverse image keeps the lines rank-one. (2) prop-asd-smooth-base-change along i_r with the hypothesised fibre pairs gives θ:i_1^*F→C in the right direction. (3) The centred-coordinates node gives Cartesian centres; Nagata applies over affine Noetherian bases; open immersions are étale. These meet the hypotheses of lem-amb-etale-adjoint-locality. (4) det-sp gives the counit-compatible comparison of p^× with p^*(-)(d)[2d], and Tate pullback handles the zero section. (5) Base change to S_i, then locality for u_i and e_i with g_i u_i=p_i e_i, gives c_i. (6) I verified R[x][t,(x)/t]=R[t,u] by monomial injectivity over any R. The Rees node's étale clause, applied to u_i and to e_i with V=A^d, makes the deformed charts base changes of étale maps, which gives f_i. (7)-(8) The λ_i and h_i cancellation is elementary and correct. Edge cases d=0, empty S, A=0 and non-reduced R all go through. The tool_uses are the same set as the merged parent's and are accepted. FIX: Step 4 used p^{-1}A_T≅A_{A^d_T} without citing it, so I added prop-weil-pbc-inverse-image-modules-exact to Step 4's text and uses; it was already in proof_deps. Advisory: the det-sp citation in Step 5 is redundant.; 1 file(s) fixed by the reviewer"
  }
 }
