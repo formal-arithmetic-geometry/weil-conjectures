@@ -19,9 +19,108 @@
   "lem-pur-derived-change-of-rings",
   "def-pc-flat-sheaf-modules"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $T(F)=F\\otimes_{R_E}R_L$, $V(N)=N\\otimes_{\\mathcal O_E}\\mathcal O_L$, and $\\Gamma_F=\\Gamma(s,-)$ on $R_F$-modules. The global datum has $k$ algebraically closed [def-weil-finite-field-fiber], so [lem-weil-point-proetale-sections-exact] applies to both $R_E$ and $R_L$. The coefficient-section identifications and exactness of $T,V$ are supplied by [lem-weil-point-finite-free-sections-tensor]. Thus all four functors $T,V,\\Gamma_E,\\Gamma_L$ are additive exact. By [lem-weil-pbc-exact-functor-derived-factorization] their termwise functors preserve every quasi-isomorphism and induce functors $T_D,V_D,\\Gamma_{E,D},\\Gamma_{L,D}$ on the unbounded derived categories. Hereafter suppress the canonical factorization isomorphisms when writing a complex for its localized object. In particular $A=V\\Gamma_E$ and $B=\\Gamma_LT$ preserve quasi-isomorphisms and have localized lifts $A_D=V_D\\Gamma_{E,D}$ and $B_D=\\Gamma_{L,D}T_D$.",
+   "uses": [
+    "def-weil-finite-field-fiber",
+    "lem-weil-point-proetale-sections-exact",
+    "lem-weil-point-finite-free-sections-tensor",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor; exact-functor factorization, specialized using the two stated point lemmas"
+   }
+  },
+  {
+   "text": "Let $Q_E,Q_L$ be the localizations for $R_E,R_L$ and let $\\mathbb LT=-\\otimes^L_{R_E}R_L$ be [lem-pur-derived-change-of-rings]. Its left-derived counit is a natural transformation $\\epsilon_C:\\mathbb LT(Q_EC)\\to Q_L(TC)$. More precisely, use the left-derived construction of [lem-pur-left-derived-from-kflat-class] for the class of K-flat complexes with flat terms: [lem-pc-kflat-resolution] gives a quasi-isomorphism from an object of this class to every complex, and clause (1) of [lem-pur-derived-change-of-rings] says that $Q_LT$ inverts quasi-isomorphisms between these objects. The termwise functor on the homotopy category is exact (it is the composite of the triangulated $T_D$ with its localization, by step 1). Consequently this construction applies and its counit is an isomorphism on every member $P$ of that class. This is the left-derived functor already denoted $\\mathbb LT$, with its canonical counit. Pull the counit back along complexes to their homotopy category when considering cochain maps.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "lem-pur-left-derived-from-kflat-class",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YY, lemma-derived-base-change, proof; derived.tex Tag 06XN, lemma-find-existence-computes, dual clause"
+   }
+  },
+  {
+   "text": "For any complex $C$, choose $q:P\\to C$ as in [lem-pc-kflat-resolution]. Naturality of the counit gives\n$$\\epsilon_C\\circ\\mathbb LT(Q_Eq)=Q_L(Tq)\\circ\\epsilon_P.$$\nThe left-derived functor sends the isomorphism $Q_Eq$ to an isomorphism, $Q_L(Tq)$ is invertible by step 1, and $\\epsilon_P$ is invertible by step 2. Hence\n$$\\epsilon_C=Q_L(Tq)\\circ\\epsilon_P\\circ\\mathbb LT(Q_Eq)^{-1}$$\nis invertible for every $C$. This deduction uses no K-flatness of $C$.",
+   "uses": [
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YY, lemma-derived-base-change; explicit naturality equation for its derived counit"
+   }
+  },
+  {
+   "text": "Use the factorization $T_DQ_E\\cong Q_LT$ of step 1 to view $\\epsilon$ as a natural transformation between $\\mathbb LTQ_E$ and $T_DQ_E$. These are functors on complexes inverting quasi-isomorphisms. By parts (2) and (3) of [lem-weil-pbc-localization-universal-property], it descends uniquely to a natural transformation $c:\\mathbb LT\\to T_D$, with $c_{Q_EC}=\\epsilon_C$ under the factorization. Step 3 makes $\\epsilon$ a natural isomorphism; the same localization result lifts its inverse, so $c$ is a natural isomorphism. The required comparison $T_D\\xrightarrow{\\sim}\\mathbb LT$ is $c^{-1}$. Its normalization is fixed on every representative by the counit, and uniqueness follows from the same fully faithful precomposition property.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VG, lemma-properties-left-localization; natural-transformation enhancement as stated in the cited node, Mathlib Localization.liftNatIso"
+   }
+  },
+  {
+   "text": "The termwise balanced maps of [lem-weil-point-finite-free-sections-tensor] form a natural chain isomorphism $\\theta:A\\xrightarrow{\\sim}B$. After applying the target localization, [lem-weil-pbc-localization-universal-property] lifts it to a natural isomorphism $\\tau:A_D\\xrightarrow{\\sim}B_D$ with component $[\\theta_C]$ on each complex. Define\n$$\\theta^D_K=\\Gamma_{L,D}(c_K^{-1})\\circ\\tau_K.$$\nThis has source $\\Gamma_{E,D}(K)\\otimes_{\\mathcal O_E}\\mathcal O_L$ and target $\\Gamma_{L,D}(\\mathbb LT K)$, exactly as required. Each factor is a natural isomorphism on all of $D(R_E)$; hence so is their composite.",
+   "uses": [
+    "lem-weil-point-finite-free-sections-tensor",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VG, lemma-properties-left-localization; lift the existing balanced chain isomorphism, then compose with the counit-normalized comparison"
+   }
+  },
+  {
+   "text": "For any K-flat resolution $q:P\\to C$ with flat terms put\n$$\\rho_q=\\epsilon_P\\circ\\mathbb LT(Q_Eq)^{-1}:\\mathbb LT(Q_EC)\\xrightarrow{\\sim}Q_L(TP).$$\nThis is the canonical resolution comparison of [lem-pur-derived-change-of-rings]. The equation of step 3 gives $c_{Q_EC}=Q_L(Tq)\\rho_q$. Naturality of the balanced chain map gives $[B(q)]\\,[\\theta_P]=[\\theta_C]\\,[A(q)]$. Substitution into step 5 therefore gives\n$$\\theta^D_{Q_EC}=\\Gamma_{L,D}(\\rho_q^{-1})\\circ[\\theta_P]\\circ[A(q)]^{-1}.$$\nHere $A(q)=V(\\Gamma_E(q))$ and $B(q)=\\Gamma_L(Tq)$ are quasi-isomorphisms by step 1, so the inverses exist. Thus this is precisely the stated termwise balanced map through the sections and tensor quasi-isomorphisms. For any second resolution the identical calculation yields the same $\\theta^D_{Q_EC}$; this proves independence without choosing a comparison cochain map between the resolutions.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-point-finite-free-sections-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YY, lemma-derived-base-change; canonical K-flat computation and explicit substitution of the counit equation"
+   }
+  },
+  {
+   "text": "For a roof $C\\xleftarrow{q}H\\xrightarrow{f}J$ with $q$ a quasi-isomorphism, chain naturality from [lem-weil-point-finite-free-sections-tensor] reads\n$$[B(f)][\\theta_H]=[\\theta_J][A(f)],\\qquad [B(q)][\\theta_H]=[\\theta_C][A(q)].$$\nSince $[A(q)]$ and $[B(q)]$ are invertible, the second equation gives $[B(q)]^{-1}[\\theta_C]=[\\theta_H][A(q)]^{-1}$. Multiplying by $[B(f)]$ and using the first equation yields\n$$[B(f)][B(q)]^{-1}[\\theta_C]=[\\theta_J][A(f)][A(q)]^{-1}.$$\nThis is the requested formula (writing $K=C$ and suppressing brackets). It characterizes the localized transformation with the prescribed components by [lem-weil-pbc-localization-universal-property]. That result already supplies naturality for every derived morphism, and $c$ is natural as well, so the composite $\\theta^D$ has that full naturality. All arguments used unbounded complexes and exact functors, with no constructibility or completeness assumption.",
+   "uses": [
+    "lem-weil-point-finite-free-sections-tensor",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VG, lemma-properties-left-localization; explicit inverse-arrow naturality calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-field-fiber",
+  "lem-weil-point-proetale-sections-exact",
+  "lem-weil-point-finite-free-sections-tensor",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-left-derived-from-kflat-class",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YY (lemma-derived-base-change), using derived.tex Tag 06XN (lemma-find-existence-computes) and the exact point functors; explicit counit, localization and roof calculations by Q137"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,10 +156,45 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Module.Flat.rTensor_shortComplex_exact\", \"module\": \"Mathlib.RingTheory.Flat.CategoryTheory\", \"type\": \"[Flat R M] (C : ShortComplex <| ModuleCat R) (hC : C.Exact) : C.map (tensorRight M) |>.Exact\", \"doc\": \"For a commutative ring $ R $, a flat $ R $-module $ M $, and an exact short complex $ C $ in the category of $ R $-modules, the tensor product of $ C $ with $ M $ results in an exact short complex.\"}\n  {\"name\": \"Module.Flat.iff_rTensor_exact'\", \"module\": \"Mathlib.RingTheory.Flat.Basic\", \"type\": \"[Small.{v'} R] :\\n  Flat R M ↔\\n    ∀ ⦃N N' N'' : Type v'⦄ [AddCommGroup N] [AddCommGroup N'] [AddCommGroup N''] [Module R N] [Module R N']\\n      [Module R N''] ⦃f : N →ₗ[R] N'⦄ ⦃g : N' →ₗ[R] N''⦄,\\n      Function.Exact f g → Function.Exact (f.rTensor M) (g.rTensor M)\", \"doc\": \"A module $ M $ over a commutative semiring $ R $ is flat if and only if, for every exact sequence of $ R $-modules $ N \\\\xrightarrow{f} N' \\\\xrightarrow{g} N'' $, the induced sequence $ N \\\\otimes_R M \\\\x\"}\n  {\"name\": \"SheafOfModules.free\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Free\", \"type\": \"(I : Type u) : SheafOfModules.{u} R\", \"doc\": \"Given a sheaf $ R $ of rings on a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $ and an index type $ I $, this constructs the free sheaf of $ R $-modules as the coproduct (direct sum) of $ \"}\n  {\"name\": \"Module.Flat.iff_rTensor_exact\", \"module\": \"Mathlib.RingTheory.Flat.Basic\", \"type\": \":\\n  Flat R M ↔\\n    ∀ ⦃N N' N'' : Type (max u v)⦄ [AddCommGroup N] [AddCommGroup N'] [AddCommGroup N''] [Module R N] [Module R N']\\n      [Module R N''] ⦃f : N →ₗ[R] N'⦄ ⦃g : N' →ₗ[R] N''⦄,\\n      Function.Exact f g → Function.Exact (f.rTensor M) (g.rTensor M)\", \"doc\": \"A module $ M $ over a commutative semiring $ R $ is flat if and only if for every exact sequence of $ R $-modules $ N \\\\xrightarrow{f} N' \\\\xrightarrow{g} N'' $, the induced sequence $ N \\\\otimes_R M \\\\xr\"}\n  {\"name\": \"Module.Flat.iff_flat_tensorProduct\", \"module\": \"Mathlib.RingTheory.Flat.FaithfullyFlat.Basic\", \"type\": \"(S : Type*) [CommRing S] [Algebra R S] [Module.FaithfullyFlat R S] : Module.Flat S (S ⊗[R] M) ↔ Module.Flat R M\", \"doc\": \"Let $ R $ and $ S $ be commutative rings with $ S $ a faithfully flat $ R $-algebra. Then an $ R $-module $ M $ is flat over $ R $ if and only if the tensor product $ S \\\\otimes_R M $ is flat as an $ S\"}\n  {\"name\": \"CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier\", \"module\": \"Mathlib.Algebra.Category.Ring.Under.Limits\", \"type\": \"[Module.Flat R S] : PreservesFiniteLimits (tensorProd R S)\", \"doc\": \"If $ S $ is a flat $ R $-module, then the tensor product functor from the under category of $ R $ to the under category of $ S $ preserves finite limits.\"}\n  {\"name\": \"Module.Flat.iff_lTensor_exact'\", \"module\": \"Mathlib.RingTheory.Flat.Basic\", \"type\": \"[Small.{v'} R] :\\n  Flat R M ↔\\n    ∀ ⦃N N' N'' : Type v'⦄ [AddCommGroup N] [AddCommGroup N'] [AddCommGroup N''] [Module R N] [Module R N']\\n      [Module R N''] ⦃f : N →ₗ[R] N'⦄ ⦃g : N' →ₗ[R] N''⦄,\\n      Function.Exact f g → Function.Exact (f.lTensor M) (g.lTensor M)\", \"doc\": \"A module $ M $ over a commutative semiring $ R $ is flat if and only if for every exact sequence of $ R $-modules $ N \\\\xrightarrow{f} N' \\\\xrightarrow{g} N'' $, the induced sequence $ N \\\\otimes_R M \\\\xr\"}\n  {\"name\": \"ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Descent\", \"type\": \"(hf : f.Flat) : PreservesFiniteLimits <| tensorLeft ((restrictScalars f).obj (ModuleCat.of B B))\", \"doc\": \"For a flat ring homomorphism $ f : R \\\\to S $, the functor $ - \\\\otimes_R S $ from the category of $ R $-modules to itself preserves finite limits.\"}",
    "date": "2026-10-21",
    "verdict": "no match: exact-functor derived localization is available, but not its identification with this K-flat sheaf change-of-rings comparison and the normalized sections map"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived sections of sheaves on an algebraically closed point commute with finite free scalar extension via the K-flat derived counit",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.map_ιFree_mapFree_hom\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Free\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} [inst_1 : CategoryTheory.HasWeakSheafify J AddCommGrpCat]\\n  [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat]\\n  [inst_3 : J.HasSheafCompose (CategoryTheory.\", \"doc\": \"Given a functor $ F $ between categories of sheaves of modules over ring sheaves $ R $ and $ S $, if $ F $ preserves colimits of discrete diagrams, then the image of the free $ R $-module sheaf over a\"}\n  {\"name\": \"SheafOfModules.map_ιFree_mapFree_hom_assoc\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Free\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} [inst_1 : CategoryTheory.HasWeakSheafify J AddCommGrpCat]\\n  [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat]\\n  [inst_3 : J.HasSheafCompose (CategoryTheory.\", \"doc\": \"Given a functor $ F $ between categories of sheaves of modules over ring sheaves $ R $ and $ S $, if $ F $ preserves colimits of discrete diagrams, then the composition of $ F $'s action on the inclus\"}\n  {\"name\": \"SheafOfModules.ιFree_mapFree_inv_assoc\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Free\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} [inst_1 : CategoryTheory.HasWeakSheafify J AddCommGrpCat]\\n  [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat]\\n  [inst_3 : J.HasSheafCompose (CategoryTheory.\", \"doc\": \"For a functor $F$ between sheaf of modules categories over ring sheaves $R$ and $S$, the composition of $\\\\iota_{\\\\text{Free}}(i)$ with the inverse of $\\\\text{mapFree}(F,\\\\eta,I)$ followed by a morphism $\"}\n  {\"name\": \"AlgebraicGeometry.ΓSpec.toOpen_comp_locallyRingedSpaceAdjunction_homEquiv_app\", \"module\": \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction\", \"type\": \"∀ {X : AlgebraicGeometry.LocallyRingedSpace} {R : Type u} [inst : CommRing R]\\n  (f : AlgebraicGeometry.LocallyRingedSpace.Γ.rightOp.obj X ⟶ Opposite.op { carrier := R, commRing := inst })\\n  (U :\\n    (TopologicalSpace.Opens\\n        ↑↑(AlgebraicGeometry.Spec.toLocallyRingedSpace.obj\\n                (O\", \"doc\": \"For a locally ringed space $X$ and commutative ring $R$, the composition of the structure sheaf morphism $\\\\mathcal{O}_{\\\\operatorname{Spec}(R)}(U) \\\\to R$ with the component of the Γ-Spec adjunction hom\"}\n  {\"name\": \"SheafOfModules.pushforwardSections_unitHomEquiv\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on $\\\\ma\"}\n  {\"name\": \"smoothSheafCommRing.ι_evalHom\", \"module\": \"Mathlib/Geometry/Manifold/Sheaf/Smooth\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {EM : Type u_2} [inst_1 : NormedAddCommGroup EM]\\n  [inst_2 : NormedSpace 𝕜 EM] {HM : Type u_3} [inst_3 : TopologicalSpace HM] (IM : ModelWithCorners 𝕜 EM HM)\\n  {E : Type u_4} [inst_4 : NormedAddCommGroup E] [inst_5 : NormedSpace 𝕜 E] {H : Type u_5}\", \"doc\": \"For a point $x$ in a manifold $M$ and an open neighborhood $U$ of $x$, the composition of the inclusion morphism from the colimit (stalk) of the opposite open neighborhoods inclusion with the evaluati\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.toΓSpecSheafedSpace_app_spec_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction\", \"type\": \"∀ (X : AlgebraicGeometry.LocallyRingedSpace) (r : ↑(AlgebraicGeometry.LocallyRingedSpace.Γ.obj (Opposite.op X)))\\n  {Z : CommRingCat}\\n  (h :\\n    ((TopCat.Presheaf.pushforward CommRingCat X.toΓSpecSheafedSpace.hom.base).obj X.presheaf).obj\\n        (Opposite.op (PrimeSpectrum.basicOpen r)) ⟶\\n      Z),\\n\", \"doc\": \"For any locally ringed space $X$ and element $r$ in its global sections $\\\\Gamma(X)$, the composition of the canonical localization morphism $\\\\Gamma(X)_r \\\\to \\\\mathcal{O}_X(D(r))$ with the pushforward s\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Γevaluation_naturality_apply\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (x : ↥X) (a : ↑(Y.presheaf.obj (Opposite.op ⊤))),\\n  (CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.residueFieldMap f x))\\n      ((CategoryTheory.ConcreteCategory.hom (Y.Γevaluation ((CategoryTheory.ConcreteCategory.hom f.base) x))) a)\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. For any point $x \\\\in X$ and any global section $a$ of the structure sheaf $\\\\mathcal{O}_Y$, the following equality holds:\\n$$ f^\\\\#_x(\\\\text{ev}_{f(x)}(a)) = \\\\te\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the item: general localization/exact-functor or sheaf APIs only; no completed coefficient point, counit-normalized balanced comparison with all clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact functor localization at quasi isomorphisms comparison with left derived functor natural isomorphism",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app\", \"module\": \"Mathlib/Algebra/Homology/Localization\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] (F : CategoryTheory.Functor C D) {ι : Type u_3} {c : ComplexShape ι}\\n  [inst_2 : CategoryTheory.Preadditive C] [inst_3 : CategoryTheory.Preadditive D]\\n  [inst_4 : CategoryT\", \"doc\": \"For an additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between preadditive categories with homology that preserves homology, the composition of the quotient functor from the category of chain com\"}\n  {\"name\": \"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app_assoc\", \"module\": \"Mathlib/Algebra/Homology/Localization\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] (F : CategoryTheory.Functor C D) {ι : Type u_3} {c : ComplexShape ι}\\n  [inst_2 : CategoryTheory.Preadditive C] [inst_3 : CategoryTheory.Preadditive D]\\n  [inst_4 : CategoryT\", \"doc\": \"Given an additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between preadditive categories with homology that preserves homology, there exists a natural isomorphism between the composition of the de\"}\n  {\"name\": \"CategoryTheory.Functor.mapHomologicalComplex_upToQuasiIso_Q_inverts_quasiIso\", \"module\": \"Mathlib/Algebra/Homology/Localization\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] (F : CategoryTheory.Functor C D) {ι : Type u_3} (c : ComplexShape ι)\\n  [inst_2 : CategoryTheory.Preadditive C] [inst_3 : CategoryTheory.Preadditive D]\\n  [inst_4 : CategoryT\", \"doc\": \"The composite of the induced functor on homological complexes from a zero-preserving functor $ F $ and the localization functor $ Q $ at quasi-isomorphisms inverts quasi-isomorphisms, meaning that eve\"}\n  {\"name\": \"CategoryTheory.Functor.leftDerivedNatIso_hom\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} {H : Type u_3} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_3, u_2} D] [inst_2 : CategoryTheory.Category.{v_5, u_3} H]\\n  (LF' LF : CategoryTheory.Functor D H) {F F' : CategoryTheory.Functor C H} {L : CategoryTheory.Functor C D}\\n\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{H}$, functors $LF', LF : \\\\mathcal{D} \\\\to \\\\mathcal{H}$, $F, F' : \\\\mathcal{C} \\\\to \\\\mathcal{H}$, a localization functor $L : \\\\mathcal{C} \\\\to \\\\mathcal{\"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategoryFactorsh\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"A natural isomorphism asserting that composing the homotopy category functor with the derived category localization is equivalent to composing the derived category localization with the induced functo\"}\n  {\"name\": \"CategoryTheory.Functor.leftDerivedNatIso\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived\", \"type\": \"{C : Type u_1} →\\n  {D : Type u_2} →\\n    {H : Type u_3} →\\n      [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n        [inst_1 : CategoryTheory.Category.{v_3, u_2} D] →\\n          [inst_2 : CategoryTheory.Category.{v_5, u_3} H] →\\n            (LF' LF : CategoryTheory.Functor D H) →\\n              {F F'\", \"doc\": \"Given a natural isomorphism $\\\\tau : F' \\\\cong F$ between functors $F', F : \\\\mathcal{C} \\\\to \\\\mathcal{H}$, this constructs the induced natural isomorphism $LF' \\\\cong LF$ between their left derived functo\"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"A natural isomorphism asserting that composing the derived category localization functor with the induced derived functor is naturally isomorphic to composing the homological complex functor with the \"}\n  {\"name\": \"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactors\", \"module\": \"Mathlib/Algebra/Homology/Localization\", \"type\": \"{C : Type u_1} →\\n  {D : Type u_2} →\\n    [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n      [inst_1 : CategoryTheory.Category.{v_2, u_2} D] →\\n        (F : CategoryTheory.Functor C D) →\\n          {ι : Type u_3} →\\n            (c : ComplexShape ι) →\\n              [inst_2 : CategoryTheory.Preadditive \", \"doc\": \"Given an additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between preadditive categories with homology that preserves homology, this asserts a natural isomorphism between the composition of the de\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the item: general localization/exact-functor or sheaf APIs only; no completed coefficient point, counit-normalized balanced comparison with all clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.liftNatIso",
+   "results": "[loogle] OK 3 hit(s)\n  {\"name\": \"CategoryTheory.Localization.liftNatIso\", \"module\": \"Mathlib.CategoryTheory.Localization.Predicate\", \"type\": \" {C : Type u_1} {D : Type u_2} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] (L : CategoryTheory.Functor C D) (W : CategoryTheory.MorphismProperty C) {E : Type u_3} [CategoryTheory.Category.{v_3, u_3} E] [L.IsLocalization W] (F₁ F₂ : CategoryTheory.Functor C E) (F₁' F\", \"doc\": \"Given a localization functor `L : C ⥤ D` for `W : MorphismProperty C`,\\nif `(F₁' F₂' : D ⥤ E)` are functors which lift functors `(F₁ F₂ : C ⥤ E)`,\\na natural isomorphism `τ : F₁ ⟶ F₂` lifts to a natural\"}\n  {\"name\": \"CategoryTheory.Localization.liftNatIso_hom\", \"module\": \"Mathlib.CategoryTheory.Localization.Predicate\", \"type\": \" {C : Type u_1} {D : Type u_2} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] (L : CategoryTheory.Functor C D) (W : CategoryTheory.MorphismProperty C) {E : Type u_3} [CategoryTheory.Category.{v_3, u_3} E] [L.IsLocalization W] (F₁ F₂ : CategoryTheory.Functor C E) (F₁' F\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Localization.liftNatIso_inv\", \"module\": \"Mathlib.CategoryTheory.Localization.Predicate\", \"type\": \" {C : Type u_1} {D : Type u_2} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] (L : CategoryTheory.Functor C D) (W : CategoryTheory.MorphismProperty C) {E : Type u_3} [CategoryTheory.Category.{v_3, u_3} E] [L.IsLocalization W] (F₁ F₂ : CategoryTheory.Functor C E) (F₁' F\", \"doc\": \"\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the item: general localization/exact-functor or sheaf APIs only; no completed coefficient point, counit-normalized balanced comparison with all clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryFactors|fullyFaithfulWhiskeringLeft|liftNatIso|rightKanExtensionUnique",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/PathCategory/MorphismProperty.lean\", \"line\": \"78\", \"text\": \"def liftNatIso {C} [Category* C] {F G : Paths V ⥤ C} (α_app : (v : V) → (F.obj v ≅ G.obj v))\"}\n  {\"file\": \"Mathlib/CategoryTheory/Shift/Localization.lean\", \"line\": \"142\", \"text\": \"  Localization.liftNatIso L W (L ⋙ shiftFunctor D a ⋙ F')\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean\", \"line\": \"313\", \"text\": \"    (Localization.liftNatIso Lcof (weakEquivalences _) Lcof (ι ⋙ HoCat.resolution ⋙ Lcofπ) _ _\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean\", \"line\": \"316\", \"text\": \"    (Localization.liftNatIso L (weakEquivalences _)\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean\", \"line\": \"311\", \"text\": \"    (Localization.liftNatIso Lfib (weakEquivalences _) Lfib (ι ⋙ HoCat.resolution ⋙ Lfibπ) _ _\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean\", \"line\": \"313\", \"text\": \"    (Localization.liftNatIso L (weakEquivalences _)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean\", \"line\": \"134\", \"text\": \"    (liftNatIso L₁ W₁ _ _ (G ⋙ E₂.functor) (E₁.functor ⋙ G') e)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean\", \"line\": \"157\", \"text\": \"    ((isoWhiskerLeft (E₁.inverse) (liftNatIso L₁ W₁ _ _ (G ⋙ E₂.functor) (E₁.functor ⋙ G') e) ≪≫\"}\n  {\"file\": \"Mathlib/CategoryTheory/Localization/Adjunction.lean\", \"line\": \"145\", \"text\": \"    (liftNatIso W.Q W W.Q (G ⋙ F ⋙ W.Q) _ _\"}\n  {\"file\": \"Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean\", \"line\": \"154\", \"text\": \"    Localization.liftNatIso L' W (tensorLeft (𝟙_ C) ⋙ L') L'\"}\n  {\"file\": \"Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean\", \"line\": \"161\", \"text\": \"    Localization.liftNatIso L' W (tensorRight (𝟙_ C) ⋙ L') L'\"}\n  {\"file\": \"Mathlib/CategoryTheory/Localization/Predicate.lean\", \"line\": \"30\", \"text\": \"`liftNatTrans` and `liftNatIso` can be used to lift natural transformations\"}\n  {\"file\": \"Mathlib/CategoryTheory/Localization/Predicate.lean\", \"line\": \"278\", \"text\": \"def fullyFaithfulWhiskeringLeft (L : C ⥤ D) (W) [L.IsLocalization W] (E : Type*) [Category* E] :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Localization/Predicate.lean\", \"line\": \"357\", \"text\": \"def liftNatIso (F₁ F₂ : C ⥤ E) (F₁' F₂' : D ⥤ E) [h₁ : Lifting L W F₁ F₁'] [h₂ : Lifting L W F₂ F₂']\"}\n  {\"file\": \"Mathlib/CategoryTheory/Localization/Predicate.lean\", \"line\": \"401\", \"text\": \"      isEquivalence := Functor.isEquivalence_of_iso (liftNatIso W.Q W L₁ L₂ F₁ F₂ e) }\"}\n  {\"file\": \"Mathlib/CategoryTheory/Localization/Predicate.lean\", \"line\": \"412\", \"text\": \"  let e' : F₁ ⋙ eq.functor ≅ F₂ := liftNatIso W.Q W (L ⋙ eq.functor) L' _ _ e\"}\n  {\"file\": \"Mathlib/CategoryTheory/Localization/CalculusOfFractions/OfAdjunction.lean\", \"line\": \"82\", \"text\": \"      (Localization.liftNatIso W.Q W W.Q (G ⋙ F ⋙ W.Q) _ _\"}\n  {\"file\": \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/Basic.lean\", \"line\": \"104\", \"text\": \"    liftNatIso W₁.Q W₁ _ _ _ _ e''\"}\n  {\"file\": \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/Basic.lean\", \"line\": \"107\", \"text\": \"    rw [TwoSquare.vComp'_app, liftNatIso_hom, liftNatTrans_app]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Localization/Equivalence.lean\", \"line\": \"46\", \"text\": \"  Equivalence.mk G' F' (liftNatIso L₁ W₁ L₁ (G ⋙ F') (𝟭 D₁) (G' ⋙ F') α.symm)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Localization/Equivalence.lean\", \"line\": \"47\", \"text\": \"    (liftNatIso L₂ W₂ (F ⋙ G') L₂ (F' ⋙ G') (𝟭 D₂) β)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Localization/HomEquiv.lean\", \"line\": \"78\", \"text\": \"  let α : G' ≅ G := Localization.liftNatIso L₁ W₁ (L₁ ⋙ G') (Φ.functor ⋙ L₂) _ _ e'.symm\"}\n  {\"file\": \"Mathlib/CategoryTheory/Localization/SmallHom.lean\", \"line\": \"282\", \"text\": \"  let γ : G' ⋙ E₂ ≅ E₁ ⋙ G := liftNatIso W₁.Q W₁ (W₁.Q ⋙ G' ⋙ E₂) (W₁.Q ⋙ E₁ ⋙ G) _ _\"}\n  {\"file\": \"Mathlib/CategoryTheory/Localization/Composition.lean\", \"line\": \"124\", \"text\": \"      (liftNatIso L₁ W₁ _ _ _ _\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/LocalizingSubcategory.lean\", \"line\": \"334\", \"text\": \"    (Localization.liftNatIso L₁ (B.inverseImage A.ι).trW\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the item: general localization/exact-functor or sheaf APIs only; no completed coefficient point, counit-normalized balanced comparison with all clauses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Global sections finite free coefficient extension of completed sheaves on a pro etale point derived tensor comparison",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Sheaf.Γ\", \"module\": \"Mathlib.CategoryTheory.Sites.GlobalSections\", \"type\": \"[HasGlobalSectionsFunctor J A] : Sheaf J A ⥤ A\", \"doc\": \"The global sections functor, which is the left adjoint to the constant sheaf functor, assigning to each sheaf its global sections.\"}\n  {\"name\": \"SheafOfModules.sectionsFunctor\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf\", \"type\": \": SheafOfModules.{v} R ⥤ Type _\", \"doc\": \"The functor from the category of sheaves of modules over a sheaf of rings $ R $ to the category of types, which maps each sheaf of modules to its global sections (families of elements satisfying compa\"}\n  {\"name\": \"SheafOfModules.sections\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf\", \"type\": \"(M : SheafOfModules.{v} R) : Type _\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, the sections of a sheaf of modules $M$ over $R$ consist of families of elements $s_X \\\\in M(X)\"}\n  {\"name\": \"SheafOfModules.free\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Free\", \"type\": \"(I : Type u) : SheafOfModules.{u} R\", \"doc\": \"Given a sheaf $ R $ of rings on a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $ and an index type $ I $, this constructs the free sheaf of $ R $-modules as the coproduct (direct sum) of $ \"}\n  {\"name\": \"SheafOfModules.ιFree\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Free\", \"type\": \"{I : Type u} (i : I) : unit R ⟶ free I\", \"doc\": \"Given a sheaf $ R $ of rings on a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $ and an index type $ I $, this constructs the free sheaf of $ R $-modules as the coproduct (direct sum) of $ \"}\n  {\"name\": \"CategoryTheory.Sheaf.ΓRes\", \"module\": \"Mathlib.CategoryTheory.Sites.GlobalSections\", \"type\": \"[HasGlobalSectionsFunctor J A] (F : Sheaf J A) (U : Cᵒᵖ) : (Γ J A).obj F ⟶ F.val.obj U\", \"doc\": \"For a sheaf $ F $ on a category $\\\\mathcal{C}$ with values in $\\\\mathcal{A}$, this is the morphism from the global sections $\\\\Gamma(F)$ to the sections $F(U)$ over an object $U$ in $\\\\mathcal{C}^\\\\text{op\"}\n  {\"name\": \"SheafOfModules.freeFunctorCompPullbackIso\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree\", \"type\": \": freeFunctor ⋙ pullback φ ≅ freeFunctor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"Condensed.lanSheafProfinite\", \"module\": \"Mathlib.Condensed.Discrete.Colimit\", \"type\": \"(X : Type (u + 1)) : Sheaf (coherentTopology Profinite.{u}) (Type (u + 1))\", \"doc\": \"For a type $X$, this sheaf on the coherent Grothendieck topology of profinite spaces is constructed as the left Kan extension of the presheaf assigning locally constant functions $S \\to X$ to each prof\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the item: general localization/exact-functor or sheaf APIs only; no completed coefficient point, counit-normalized balanced comparison with all clauses"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-point-sections-scalar-extension",
@@ -72,12 +206,51 @@
  "blueprint": {
   "from": {
    "node": "def-weil-finite-coefficient-point",
-   "place": "Tag 06YY, lemma-derived-base-change (K-flat model); explicit exact-functor and roof comparison extracted from old proof step 3 of lem-weil-point-sections-scalar-extension, supporting the final paragraph of def-weil-finite-coefficient-point",
+   "place": "Final paragraph of def-weil-finite-coefficient-point: 'the same functor is obtained stagewise and then passed to the finite-stage colimit'; derived descent of the stagewise sections/scalar comparison extracted as old proof step 3 of lem-weil-point-sections-scalar-extension",
    "via": [
     "lem-weil-point-sections-scalar-extension"
    ]
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-weil-point-derived-sections-tensor-descent",
+  "worker": "stage1",
+  "summary": "Preserved the statement and statement dependencies. Seven steps prove exactness and localization, the normalized counit comparison, descent of the balanced chain isomorphism, its formula on every K-flat resolution, independence, and the explicit roof equation. Every non-elementary input is an existing node; no new nodes. Searches found only general Mathlib localization and exact-functor APIs, not the completed-coefficient point statement.",
+  "blueprint": "Realizes the final paragraph of def-weil-finite-coefficient-point, stagewise passage to the finite-stage colimit, via the derived descent extracted in lem-weil-point-sections-scalar-extension. The scalar comparison is the balanced map, normalized by the derived counit; no unit or chapter route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-point-proetale-sections-exact",
+    "why": "Exact evaluation over the algebraically closed point, needed for unbounded localization; the compatibility unit does not reprove this general point-site tool."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Existence of unbounded K-flat resolutions with flat terms; a general ringed-site tool, not a replacement of the coefficient-compatibility route."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "The existing K-flat derived scalar extension and its resolution comparison, used to identify the exact scalar extension canonically."
+   },
+   {
+    "node": "lem-pur-left-derived-from-kflat-class",
+    "why": "Universal left-derived counit and its invertibility on the K-flat class, used with the resolutions and change-of-rings theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-point-proetale-sections-exact",
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-left-derived-from-kflat-class"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q137-e00d0506b",
+  "group": "Q137",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q137-e00d0506b (reviewer sub-agent of L); spot-checked: Read the item and all 8 cited nodes. The item is unsplit on live and side-live, with statement and stmt_deps byte-identical; it is not in route-pivot-dropped. The parent's re-split note is resolved and applies to the parent, not to this item. 0 new nodes; proof_deps = union of uses; no cycle across the 341-node closure; no SGA. Step 1: k is algebraically closed (global datum). point-proetale-sections-exact holds for any ring sheaf, so it applies to the completed R_E and R_L. The finite-free node states exactness of T and V and that the coefficient sections are O_F. The exact-functor factorization leaf gives T_D, V_D, Γ_D. Step 2: both hypotheses of left-derived-from-kflat-class hold, via kflat-resolution (flat terms) and derived-change-of-rings (1). Exactness of Q_L T follows from T_D Q_E. LT is identified as the Kan extension. Step 3: I re-derived the counit naturality equation ε_C LT(Qq)=Q_L(Tq)ε_P, so ε is invertible everywhere. Step 4: the lift c is unique and invertible by localization UP (2)/(3). Step 5: checked the direction of θ^D=Γ(c^{-1})τ. Step 6: ρ_q and the formula Γ(ρ_q^{-1})[θ_P][A(q)]^{-1} recomputed. Step 7: roof equation recomputed, order and types correct. Edge cases E=L, zero complex, q=id all fine. Sources 06YY/015F/04VG/06XN checked in tags/tags. I accept the 4 tool_uses: the pur nodes and point exactness are in units the unit cites; kflat-resolution is a generic tool. Advisory: lem-sfb-ind-finite-free-scalar-model with a one-object diagram already states steps 2–3 (counit invertible on all unbounded complexes, K-flat model); the re-derivation is correct, so no repair is needed."
  }
 }
