@@ -1,0 +1,61 @@
+# Stage-1 report: prop-weil-pbc-qbar-condensed-two-colimit
+
+## Files written
+
+- dag/nodes/sec-proper-base-change/prop-weil-pbc-qbar-condensed-two-colimit.json: existing statement, repaired split; statement unchanged byte for byte as a JSON string. Seven proof steps, 2287 characters of proof text instead of the returned 5596.
+- dag/nodes/sec-proper-base-change/lem-weil-pbc-monic-cocone-factorization-triangulated.json: one new statement-only unsplit node; no Mathlib match. Complete natural-language proof below. It extracts the genuine general factorization argument, rather than a coefficient-descent clause.
+- citations.json: every parent step/node pair with a verbatim quotation of the cited statement.
+
+## Attachments
+
+None. The assembly declaration AlgebraicGeometry.ProEtale.constructibleCocone_isFilteredTwoColimit, lean/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean:258, has a proof but its inputs in that same module remain sorry. Scalar preservation, object descent, and both Hom clauses are not finished upstream proofs. I did not claim an attachment based on this assembly.
+
+## WANTED
+
+WANTED: literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean, module docstring and TwoColimit section, for prop-weil-pbc-qbar-condensed-two-colimit and lem-weil-pbc-monic-cocone-factorization-triangulated. That archived path recorded by the nodes is absent in this read clone. I read its live source counterpart under lean/WeilConjectures/, including its full explanatory docstring, exact category definitions, scalar comparisons and three remaining sorry inputs. No document was downloaded. The repair is explicitly an agent proof, using existing DAG statements and the checked implementation of the same argument in lean/Sheaf/UpstreamExtra/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean:132-340.
+
+## Returned point and correction
+
+The dedicated handoff in coord/returns/NC.md requests re-splitting a 5596-character proof, preserving its statement, especially its factorization and bounded-object arguments. I extracted monic-cocone factorization closure and reused lem-sfb-dc-module-devissage for both bounded inductions. Existing proof steps that described private helper extraction/imports have been removed: those were implementation history, not mathematical arguments. The finite-model API is now cited only for what its statement actually promises, finite-field triangulated closure. Scalar exactness and coherence now cite lem-weil-pbc-condensed-flat-coefficient-calculus explicitly. The final comparison now cites the coherent pair-category model and characterization. There is no change of coefficient category or target statement, and no departure from the given route.
+
+The brief requires new unsplit nodes to carry statements only. Accordingly the extracted node has no proof fields populated; its complete proof is recorded immediately below for the next worker. Every parent step is below 2000 characters; the entire parent proof is below 3000.
+
+## Proof of the new generic lemma
+
+For a cocone c with legs iota_i, write F(K) for factorization of every K -> V through one leg. Suppose A --u--> B --v--> C --> A[1] is distinguished and F(A), F(C) hold. Given f:B -> V, choose a:A -> N_i with iota_i a = fu. Let d:C[-1] -> A be the first arrow of the inverse-rotated triangle. Since ud=0 and iota_i is monic, ad=0. Apply lem-weil-pbc-hom-out-of-triangle-exact (i) to C[-1] -> A -> B to obtain b:B -> N_i with bu=a. Now (f-iota_i b)u=0. Apply the same cited lemma to the original triangle to write f-iota_i b=e v for e:C -> V. Factor e=iota_j h. Choose a common recipient k of i,j, with arrows p:i -> k and q:j -> k. Then g=N(p)b+N(q)hv satisfies iota_k g=f by the cocone equations and additivity. This proves extension closure of F. Apply it to every shifted distinguished triangle to prove extension closure of P(K)=forall n,F(K[n]). Shift associativity and precomposition by shifted isomorphisms prove shift and isomorphism closure. For zero, choose any index (filteredness supplies one) and the zero map. This proves precisely the new statement, without assuming c is a colimit.
+
+Source read for this argument: the current extra TwoColimit.lean factors_middle, shiftFactors_iso, shiftFactors_shift and shiftFactors_tri; Stacks derived.tex Lemma 0149 (lemma-representable-homological), lines 386-415, read directly. The latter is already represented by lem-weil-pbc-hom-out-of-triangle-exact and is not recreated. The extension calculation is less than 1800 characters; it contains no separate hidden comparison theorem.
+
+## Not duplicates
+
+lem-weil-pbc-monic-cocone-factorization-triangulated vs lem-weil-pbc-condensed-finite-model-proof-api: the existing statement asserts finite-coefficient bounded-constructible triangulated closure; its mention that a module also extracts private cocone helpers does not state the generic factorization property or its closure theorem. Citing its implementation for that theorem would repeat C4.
+
+lem-weil-pbc-monic-cocone-factorization-triangulated vs lem-weil-pbc-hom-out-of-triangle-exact: the existing node asserts Hom exactness for one distinguished triangle; the new node proves closure of a shifted factorization class for an arbitrary filtered monic cocone, using Hom exactness twice.
+
+lem-weil-pbc-monic-cocone-factorization-triangulated vs lem-weil-pbc-directed-triangulated-image: the existing node concerns unions of essential images of triangulated functors with a Hom-surjectivity hypothesis, whereas the new node concerns maps into one cocone vertex and only assumes monic legs. Neither is a specialization of the other.
+
+Before creating this node I searched statements across the whole DAG for monic cocones, factorization and distinguished triangles, and used blueprint_refs search for factorization and monic. No blueprint node states it. The ancestor is thm-weil-pbc-qbar, with the parent item in via. Mathlib searches used leanfinder twice, loogle, leansearch, and grep twice, with the exact commands recorded in searches.jsonl and the new node. The hits concern established triangulated-subcategory closure or subobject/cocone existence, not closure of this factorization property. I read the Subcategory.lean closure APIs; they assume the closure the new lemma proves. No Mathlib leaf is claimed.
+
+## Review by NC
+
+I read SETUP's three blueprint levels, GOAL.md, the chapter and unit records, the item, the return entry, and delivery-errors B through E, including its repeated merged copy. I checked the live source against the item's coefficient convention: padicAlgClRingObj is the finite-subfield-valued continuous-function sheaf, and BoundedConstructible imposes bounded constructible cohomology without completeness. The source has precisely prime ell and topologically Noetherian X at the descent stage. I preserved all of the statement, including its comparison functor and eventual equality clause. The blueprint ancestor's actual proof says common-stage descent, which is what this repair realizes.
+
+Step 1 uses exact scalar extension and canonical coherent comparisons from the coefficient calculus, preservation from the general bounded-constructible lemma, and finite-field triangulated closure from the proof API. I opened all three statements. None is used to assert an unstated private-helper theorem.
+
+Step 2 uses the finite-field directed-set statement to take the tail above a compositum; that tail is nonempty and directed, and every field has a later field in it, so the inclusion is final. The size convention is already in the item's statement dependencies; the finite-field index lies in the universe of its sheaf complexes. L is bounded constructible and hence bounded below, as required by the presentation. I checked the presentation's equation and the faithfulness statement on the whole derived category. The cancellation argument uses only injectivity of the two adjunction bijections, isomorphisms, and the faithful functor; it is elementary relative to those cited statements. It does not assume injectivity of a sheaf colimit map implies monicity in a derived category.
+
+Step 3 applies exactly the single-sheaf Ext-continuity statement with its uniform termwise lower bound supplied by step 2. Its canonical map is an isomorphism of abelian groups in every integer shift. The directed-colimit definition explicitly supplies representatives at one stage; no compactness or preservation of arbitrary colimits is smuggled in. Shift adjunction changes n to -n. The new generic lemma then supplies closure of the shifted-factorization property. The existing module-devissage statement applies to internal modules over any commutative coefficient ring on this site, not only an integral rationalization, and supplies the bounded induction. Transport to the chosen cocone is by its colimit universal property. I opened all four cited statements, including the new one.
+
+Step 4 uses the actual fixed adjunctions and tensor comparison from the definition node, and precisely the comparison equation in the presentation statement. The equation identifies the extension of the finite adjoint arrow with the original Omega arrow, rather than merely an unspecified isomorphism of Hom groups. The categories are full subcategories, so no extra morphism-lifting theorem is required.
+
+Step 5 uses the directed-image lemma with the triangulated finite source categories from step 1, the exact ambient Omega derived category as target, tensor comparisons, and Hom surjectivity already established. It does not require an unconditional triangulated structure on bounded constructible Omega complexes. The finite-presentation-descent statement supplies a constructible finite sheaf and the correct scalar-extension isomorphism for each constructible sheaf. Exact termwise tensor identifies degree-zero complexes. The single finite complex is bounded constructible directly from its cohomology: M in degree zero, zero otherwise. Devissage in the ambient Omega category then gives the claimed object model. I opened all four cited statements and checked these hypotheses.
+
+Step 6 uses only faithful extension from H to Omega; equality holds already at H, so taking H itself verifies the eventual-equality clause. This is an elementary application of the stated faithfulness, not an unjustified appeal to filtered-colimit exactness.
+
+Step 7 uses the coefficient calculus's unit/pentagon/shift identities and the generic coherent pair model and characterization, all read in full. Normalizing the identity transition means replacing T_EE by Id and using its tensor unit isomorphism whenever an equal index occurs; distinct-index transitions remain the original ones. The unit identities check precisely those repeated-index cocycles, and the pentagon checks distinct-index ones. This gives the representative category and comparison in the item up to canonical equivalence. No integral pair-category equivalence or change of coefficients is substituted. These three off-unit tools, the directed-colimit definition, bounded devissage and directed-image lemma are explicitly declared as tool uses in split_report where needed; they provide generic calculus, not an alternative unit route.
+
+I checked zero objects, the one-index cocone, arbitrary (not necessarily monic) diagram transitions, and the identity finite-field extension. The generic proof needs monic cocone legs and nonempty filteredness and explicitly states both. It does not assert existence of a colimit. For the parent, a zero L gives zero presentation and factorization, and identity extensions give identity adjunctions and tensor units. No new statement is a clause of the parent, and the new node has no dependency on the parent, so the extraction introduces no cycle. The theorem remains subject to its existing cited sheaf descent/continuity inputs; no sorry-free proof is claimed.
+
+## Unfinished work
+
+None in the requested one-level split. The one new unsplit generic lemma is intentional; its full proof above is the handoff prescribed by the stage-1 brief. No Lean was written or compiled and no repository or launcher file was modified.

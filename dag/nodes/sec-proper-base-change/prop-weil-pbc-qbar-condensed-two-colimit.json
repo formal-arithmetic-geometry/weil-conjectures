@@ -26,11 +26,11 @@
  ],
  "proof": [
   {
-   "text": "Use the proved generic boundedConstructible_leftDerivedExtendScalars_obj for the scalar-preservation clauses, with the exactness instances of Compatibility. The three original names for extension and tensor comparison are now abbreviations of the helper constructions. All statements and the actual tensor comparison remain definitionally unchanged.",
+   "text": "The coefficient calculus gives exact scalar extension and coherent tensor comparisons. Apply bounded-constructible preservation to restrict these functors and comparisons to the full subcategories. Finite-field constructible complexes are triangulated by the existing finite-model API.",
    "uses": [
+    "lem-weil-pbc-condensed-flat-coefficient-calculus",
     "lem-weil-pbc-bounded-constructible-exact-scalar-extension",
-    "def-weil-pbc-finite-derived-tensor-comparison",
-    "def-weil-pbc-condensed-e-module-category"
+    "lem-weil-pbc-condensed-finite-model-proof-api"
    ],
    "elementary": false,
    "source": {
@@ -39,22 +39,25 @@
    }
   },
   {
-   "text": "Given finite E,F and bounded constructible K,L, take the small enlargement of the undercategory of a common upper field G. Its forgetful functor to finite fields is final. The coefficient complex presentation supplies N, a colimit cocone c, a uniform lower bound and the actual tensor/adjunction comparison equations. Each derived leg is proved monic in the parent: equality after a cocone leg gives equality after the comparison to Omega; cancel the two tensor isomorphisms, apply faithfulness of scalar extension to Omega, and cancel the finite adjunction equivalence and stage isomorphism. This argument is the fully proved mono_of_coefficient_comparison helper.",
+   "text": "For finite E,F, index by finite H containing their compositum, a small directed final tail. L is bounded constructible, hence bounded below. Apply the coefficient-complex presentation to L: it supplies N, a colimit cocone c, a uniform lower bound a, the stage isomorphisms e_H, e_Omega and the comparison equation used in step 4.",
    "uses": [
-    "lem-weil-pbc-condensed-coefficient-complex-presentation",
     "def-weil-finite-subextension-directed-set",
-    "lem-weil-pbc-condensed-coefficient-derived-faithful"
+    "lem-weil-pbc-condensed-coefficient-complex-presentation"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
     "place": "ExtendScalars and Constructible sections (boundedConstructible_derivedExtendScalarsSubfield_obj, boundedConstructible_derivedExtendScalarsToPadicAlgCl_obj), and TwoColimit section (constructibleCocone_essSurjObj, constructibleCocone_homSurj, constructibleCocone_homInj, constructibleCocone_isFilteredTwoColimit); these are unproved upstream inputs"
    }
   },
   {
-   "text": "Apply the constructible-sheaf Hom-colimit isomorphism in every degree. An element of the filtered colimit of the Hom groups is represented by an index and a morphism, by the already proved Mathlib Concrete.colimit_exists_rep. Use the shift equivalence to convert maps from a shifted single sheaf into these shifted-target Hom groups. Thus every map from every shift of a single constructible sheaf to Q(colim N) factors through a finite stage.",
+   "text": "Let P(A) be the property of [def-weil-pbc-hom-colimit-property] for the diagram QN and cocone Q(c) in D(Mod_{E_T^c}). Identify c.pt with the termwise sheaf colimit by the unique colimit isomorphism; with the uniform bound a and noetherian T, sheaf Ext continuity gives P(M[0]) for every constructible E_T^c-module sheaf M. P is isomorphism closed, contains 0, and is shift stable by Hom(A[m],Z[n])=Hom(A,Z[n-m]); the Hom-colimit extension lemma makes it extension closed, so P is triangulated. The cohomology sheaves of K are constructible in the devissage sense (same strata, pro-etale locally cokernels of finite free maps), so bounded devissage gives P(K). For n=0, a stage representative in the directed colimit factors every K -> Q(c.pt) through some Q(c.iota_H).",
    "uses": [
-    "lem-weil-pbc-condensed-sheaf-ext-continuity"
+    "lem-weil-pbc-condensed-sheaf-ext-continuity",
+    "def-weil-pbc-hom-colimit-property",
+    "lem-weil-pbc-hom-colimit-extension",
+    "lem-sfb-dc-module-devissage",
+    "def-weil-directed-colimit-abelian-groups"
    ],
    "elementary": false,
    "source": {
@@ -63,102 +66,78 @@
    }
   },
   {
-   "text": "For a cocone with monic legs, finite-stage factorization is extension closed. For a distinguished triangle A -> B -> C and f:B -> vertex, lift its restriction to A to a:A -> N_i. The boundary composite with a is zero, because its composite with the monic cocone leg is zero. Yoneda exactness of the inverse-rotated triangle extends a to b:B -> N_i. Then f minus b followed by the leg kills A and hence factors through C. Lift this last map by the hypothesis on C, move both resulting finite-stage arrows to a common index, and add them. Shift-stable factorization is therefore a triangulated, isomorphism-closed object property. DerivedCategory.prop_of_bounded applied to the constructible cohomology sheaves of K proves factorization for K. Transport between the chosen colimit cocone and c by their unique colimit isomorphism. These are fully proved private helpers in the parent; no five-lemma or filtered exactness theorem is assumed.",
-   "uses": [
-    "def-sbc-standard-tstructure-derived-category",
-    "def-weil-triangulated-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
-    "place": "ExtendScalars and Constructible sections (boundedConstructible_derivedExtendScalarsSubfield_obj, boundedConstructible_derivedExtendScalarsToPadicAlgCl_obj), and TwoColimit section (constructibleCocone_essSurjObj, constructibleCocone_homSurj, constructibleCocone_homInj, constructibleCocone_isFilteredTwoColimit); these are unproved upstream inputs"
-   }
-  },
-  {
-   "text": "Transpose the given Omega arrow to a map from K to the coefficient presentation vertex and factor it by the preceding two steps. The finite-stage presentation isomorphism and the E/H adjunction turn that factor into a derived H-linear arrow. Lift it to the full constructible subcategory. Prove the underlying component formulas for the lifted tensor comparison using fullyFaithfulCancelRight_hom_app, fullyFaithfulCancelRight_inv_app and map_preimage; then the presentation comparison equation and the inverse colimit isomorphism prove the exact HomSurj equation. In particular the proof accounts for the chosen preimages used in the lifted comparison.",
+   "text": "Transpose an Omega arrow by the E/Omega adjunction, factor it as above, and compose with the stage isomorphism. The E/H adjunction gives its finite-stage arrow. The presentation compatibility equation says exactly that its scalar extension, conjugated by the fixed tensor comparisons, is the original arrow. Fullness of the constructible inclusions gives Hom-surjectivity.",
    "uses": [
     "lem-weil-pbc-condensed-coefficient-complex-presentation",
     "def-weil-pbc-finite-derived-tensor-comparison"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
     "place": "ExtendScalars and Constructible sections (boundedConstructible_derivedExtendScalarsSubfield_obj, boundedConstructible_derivedExtendScalarsToPadicAlgCl_obj), and TwoColimit section (constructibleCocone_essSurjObj, constructibleCocone_homSurj, constructibleCocone_homInj, constructibleCocone_isFilteredTwoColimit); these are unproved upstream inputs"
    }
   },
   {
-   "text": "For finite-field and algebraic-closure coefficients, obtain kernel, cokernel and extension closure from lem-weil-pbc-condensed-constructible-serre. The extracted bounded_tri_of_serre helper packages isomorphism, kernel, cokernel and extension closure as ObjectProperty instances and applies the corrected conditional isTriangulated_boundedConstructible instance. Reuse the extracted finiteBoundedTriangulated theorem for the finite field; algClBoundedTriangulated applies the same shared private helper to the algebraic-closure Serre theorem. These are local instances in object descent; no unconditional constructibility-closure assertion is used.",
-   "uses": [
-    "lem-weil-pbc-condensed-constructible-serre",
-    "lem-weil-pbc-condensed-finite-model-proof-api"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/upstream-master-20261014/WeilConjectures/ConstructibleSheaf/ProEtaleModule/DerivedCategory.lean",
-    "place": "ConstructibleSheaf/ProEtaleModule/DerivedCategory.lean Sorried input"
-   }
-  },
-  {
-   "text": "Use the already proved DerivedCategory.prop_of_bounded (WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure): every bounded object belongs to a triangulated isomorphism-closed property if its cohomology objects, put in degree zero, do. Let Q be the union of the essential images of the finite coefficient constructible categories in the ambient derived Omega category. The Hom-surjectivity obligation supplies the hypothesis of [lem-weil-pbc-directed-triangulated-image], so Q is triangulated. For a constructible sheaf M use [lem-weil-pbc-condensed-finite-presentation-descent] to choose E and a constructible M_E whose scalar extension is M. The singleFunctorCompLeftDerivedFunctorIso identifies the image of M_E[0] with M[0]; the single complex is bounded constructible by its standard homology formula. Apply prop_of_bounded to K and lift its resulting ambient isomorphism through the fully faithful inclusion of bounded constructible complexes. All this glue is proved in the parent, with no new sorry.",
+   "text": "Let P be the union of the essential images of finite constructible categories in the ambient Omega derived category. Hom-surjectivity and the directed-image lemma make P triangulated and replete. Finite-presentation descent puts every constructible M[0] in P: exact termwise tensor sends its finite single model to M[0]. Bounded devissage puts every constructible K in P, proving object descent.",
    "uses": [
     "lem-weil-pbc-directed-triangulated-image",
     "lem-weil-pbc-condensed-finite-presentation-descent",
-    "def-sbc-standard-tstructure-derived-category",
-    "def-weil-triangulated-category"
+    "lem-weil-pbc-condensed-flat-coefficient-calculus",
+    "lem-sfb-dc-module-devissage"
    ],
    "elementary": false,
    "source": {
     "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
-    "place": "module docstring, scalar preservation, object descent, and Hom-injectivity paragraphs"
+    "place": "ExtendScalars and Constructible sections (boundedConstructible_derivedExtendScalarsSubfield_obj, boundedConstructible_derivedExtendScalarsToPadicAlgCl_obj), and TwoColimit section (constructibleCocone_essSurjObj, constructibleCocone_homSurj, constructibleCocone_homInj, constructibleCocone_isFilteredTwoColimit); these are unproved upstream inputs"
    }
   },
   {
-   "text": "Hom injectivity uses the proved faithful_leftDerivedExtendScalarsToPadicAlgCl on the entire derived category. Equal Omega images imply equality at the original finite stage; take that same stage for eventual equality.",
+   "text": "For two arrows at H with equal Omega images, faithful derived extension gives equality already at H. Thus Hom-injectivity holds with no enlargement.",
    "uses": [
     "lem-weil-pbc-condensed-coefficient-derived-faithful"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
     "place": "ExtendScalars and Constructible sections (boundedConstructible_derivedExtendScalarsSubfield_obj, boundedConstructible_derivedExtendScalarsToPadicAlgCl_obj), and TwoColimit section (constructibleCocone_essSurjObj, constructibleCocone_homSurj, constructibleCocone_homInj, constructibleCocone_isFilteredTwoColimit); these are unproved upstream inputs"
    }
   },
   {
-   "text": "As in the source CategoryCocone model, IsFilteredTwoColimit is the conjunction of object descent, Hom surjectivity and Hom injectivity. Assemble the three proved clauses. The ordinary pair-category interpretation is the source module documentation; no further unproved construction of a pair category is used in this Lean proof.",
-   "uses": [],
-   "elementary": false,
-   "source": {
-    "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
-    "place": "ExtendScalars and Constructible sections (boundedConstructible_derivedExtendScalarsSubfield_obj, boundedConstructible_derivedExtendScalarsToPadicAlgCl_obj), and TwoColimit section (constructibleCocone_essSurjObj, constructibleCocone_homSurj, constructibleCocone_homInj, constructibleCocone_isFilteredTwoColimit); these are unproved upstream inputs"
-   }
-  },
-  {
-   "text": "Reuse the extracted private factorization and single-complex bounded-constructibility helpers through nonpublic import all Sheaf.Paper.CondensedFiniteModelProofAPI. The generic factorization proofs, single-complex proof, and finite-field triangulated-closure proof have one home. Public statements and comparison maps are unchanged.",
+   "text": "Normalize identity transitions by their tensor unit comparisons. Tensor coherence gives the directed pair-category model. Object descent and the two Hom clauses give its comparison equivalence by the filtered-two-colimit characterization, with precisely the representative maps in the statement.",
    "uses": [
-    "lem-weil-pbc-condensed-finite-model-proof-api"
+    "lem-weil-pbc-condensed-flat-coefficient-calculus",
+    "det-def-sfb-filtered-two-colimit-model",
+    "det-def-sfb-filtered-two-colimit-characterization"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
+    "place": "ExtendScalars and Constructible sections (boundedConstructible_derivedExtendScalarsSubfield_obj, boundedConstructible_derivedExtendScalarsToPadicAlgCl_obj), and TwoColimit section (constructibleCocone_essSurjObj, constructibleCocone_homSurj, constructibleCocone_homInj, constructibleCocone_isFilteredTwoColimit); these are unproved upstream inputs"
+   }
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-condensed-flat-coefficient-calculus",
   "lem-weil-pbc-bounded-constructible-exact-scalar-extension",
-  "def-weil-pbc-finite-derived-tensor-comparison",
-  "def-weil-pbc-condensed-e-module-category",
-  "lem-weil-pbc-condensed-coefficient-complex-presentation",
-  "def-weil-finite-subextension-directed-set",
-  "lem-weil-pbc-condensed-coefficient-derived-faithful",
-  "lem-weil-pbc-condensed-sheaf-ext-continuity",
-  "def-sbc-standard-tstructure-derived-category",
-  "def-weil-triangulated-category",
-  "lem-weil-pbc-condensed-constructible-serre",
   "lem-weil-pbc-condensed-finite-model-proof-api",
+  "def-weil-finite-subextension-directed-set",
+  "lem-weil-pbc-condensed-coefficient-complex-presentation",
+  "lem-weil-pbc-condensed-sheaf-ext-continuity",
+  "def-weil-pbc-hom-colimit-property",
+  "lem-weil-pbc-hom-colimit-extension",
+  "lem-sfb-dc-module-devissage",
+  "def-weil-directed-colimit-abelian-groups",
+  "def-weil-pbc-finite-derived-tensor-comparison",
   "lem-weil-pbc-directed-triangulated-image",
-  "lem-weil-pbc-condensed-finite-presentation-descent"
+  "lem-weil-pbc-condensed-finite-presentation-descent",
+  "lem-weil-pbc-condensed-coefficient-derived-faithful",
+  "det-def-sfb-filtered-two-colimit-model",
+  "det-def-sfb-filtered-two-colimit-characterization"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
-  "place": "B2 2026-10-15: Hom-surjectivity reduced to the coefficient algebra presentation and the existing single-sheaf continuity input; monic-leg distinguished-triangle devissage and actual lifted comparison formulas are proved in Lean. The sole new hole is strictly the uniformly bounded-below coefficient diagram, with no constructibility or Hom descent in its statement."
+  "place": "module docstring (Obj), (Hom); 2026-10-21 re-split using the Hom-colimit extension lemma and existing bounded devissage"
  },
  "mathlib_searches": [
   {
@@ -480,19 +459,41 @@
   }
  },
  "split_report": {
-  "date": "2026-10-14",
+  "date": "2026-10-21",
   "item": "prop-weil-pbc-qbar-condensed-two-colimit",
   "worker": "stage1",
-  "summary": "Repair D1, C1/C4 and E1/E4: withdraw parent-Hom restatement; use single-sheaf continuity with explicit Postnikov/five-lemma induction; add ambient exact tensor calculus and sheaf Serre closure; construct condensed pair category directly and remove all integral pair-category citations. Second reading folds the elementary coefficient colimit into the parent and makes topology and rotation signs explicit.",
-  "blueprint": "thm-weil-pbc-qbar proof paragraph 1: step 1 constructs the coefficient colimit; steps 2–4 prove Hom continuity; steps 5–6 descend objects; steps 7–8 construct the condensed comparison equivalence."
+  "summary": "Dedicated re-split repair: statement unchanged. Hom descent now uses the existing Hom-colimit property and its extension lemma with bounded devissage (maintainer reader FIX: the delivered monic-cocone node was dropped as unneeded); implementation references replaced by cited statements for scalar calculus, bounded devissage and the coherent pair-category characterization. Proof text below 3000 characters.",
+  "blueprint": "thm-weil-pbc-qbar, proof first sentence, common-stage colimit: steps 1-4 establish finite-stage Hom descent, step 5 object descent, step 6 eventual equality, step 7 the pair comparison.",
+  "tool_uses": [
+   {
+    "node": "def-weil-finite-subextension-directed-set",
+    "why": "Generic bounded-derived, directed-colimit or coherent-category tool applied to the exact condensed module categories; it does not replace a proper-base-change unit step."
+   },
+   {
+    "node": "def-weil-directed-colimit-abelian-groups",
+    "why": "Generic bounded-derived, directed-colimit or coherent-category tool applied to the exact condensed module categories; it does not replace a proper-base-change unit step."
+   },
+   {
+    "node": "lem-sfb-dc-module-devissage",
+    "why": "Generic bounded-derived, directed-colimit or coherent-category tool applied to the exact condensed module categories; it does not replace a proper-base-change unit step."
+   },
+   {
+    "node": "det-def-sfb-filtered-two-colimit-model",
+    "why": "Generic bounded-derived, directed-colimit or coherent-category tool applied to the exact condensed module categories; it does not replace a proper-base-change unit step."
+   },
+   {
+    "node": "det-def-sfb-filtered-two-colimit-characterization",
+    "why": "Generic bounded-derived, directed-colimit or coherent-category tool applied to the exact condensed module categories; it does not replace a proper-base-change unit step."
+   }
+  ]
  },
  "reviewed": {
-  "date": "2026-10-13",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-Codex-NE-3b32faa6b",
-  "group": "NE",
+  "reviewer": "NT-cc-NC-f46ff14ab",
+  "group": "NC",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NE-3b32faa6b (reviewer sub-agent of L); spot-checked: Mathematics and source checks pass. I repaired missing created.by/date, merged_into, and lean_audit metadata in all four new nodes, and corrected the finite-presentation descent node’s undefined noetherianity citation by stating it inline with def-pc-scheme.; 4 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-f46ff14ab (reviewer sub-agent of L); spot-checked: I read the item, the new node, every cited statement and the live source lean/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean (docstring and lines 165-262). The archived upstream copy is absent, as the report says. The source matches the item: prime ell, topologically noetherian X, padicAlgClRingObj with finite-subfield-valued functions, no completeness condition, and Obj/Hom-surj/Hom-inj = IsFilteredTwoColimit. The statement is byte-identical to live. The item is not on the dropped list, and no cited closure reaches the item, so there is no cycle. The route is the common-stage descent of thm-weil-pbc-qbar. Step checks. Step 1: flat calculus gives exactness, which meets the finite-limit hypothesis of bounded-constructible-exact-scalar-extension; the proof API is cited only for finite-field triangulation. Step 2: the tail {H containing EF} is small, directed and final, and L is bounded below, as the presentation requires. Step 4: the presentation comparison equation plus injectivity of the adjunction gives exactly (Hom-surj) with theta = the fixed tensor comparisons. Step 5: directed-image lemma with target the ambient D(Mod_Omega), finite-presentation descent and termwise tensor give M[0] in P, then devissage gives (Obj). Step 6: derived-faithful at H gives (Hom-inj). Step 7: unit normalization plus pentagon gives the coherent model, and the characterization gives the item's pair category. Fault (C5): the new node is true (its triangle argument is correct) but unneeded. The same-unit lem-weil-pbc-hom-colimit-extension with def-weil-pbc-hom-colimit-property (Lean homColimitProperty_extensions) already gives a stronger triangulated property, Hom-colimit bijectivity for every shift. Sheaf-ext-continuity gives that property on M[0], and the sibling lem-sfb-constructible-cocone-hom-surj uses this route. FIX: step 3 is rewritten to cite sheaf-ext-continuity, hom-colimit-property, hom-colimit-extension, devissage and directed colimits, and it now states the constructibility identification for devissage (def-sfb-constructible-module / locally finitely presented = pro-etale-local cokernel of finite free maps, same as def-weil-pbc-condensed-e-module-category). The monic-leg argument in step 2 is no longer needed and is removed. proof_deps, proof_origin.place and the split_report summary are updated; the proof is now 2592 characters. Accepted tool uses: def-weil-finite-subextension-directed-set, def-weil-directed-colimit-abelian-groups, lem-sfb-dc-module-devissage, det-def-sfb-filtered-two-colimit-model and det-def-sfb-filtered-two-colimit-characterization, all generic.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "branch": "slopmaster2",
@@ -513,5 +514,12 @@
   "landing": "20261016T072032-L-914019",
   "kind": "interface",
   "note": "independent Codex review: Item signature and docstring unchanged; new statements match their nodes and proofs. All seven delivered modules, three adapted-parent importers, and the item importer compile cleanly. DAG fields and axiom checks pass; no new sorry."
- }
+ },
+ "tool_uses": [
+  "def-weil-finite-subextension-directed-set",
+  "def-weil-directed-colimit-abelian-groups",
+  "lem-sfb-dc-module-devissage",
+  "det-def-sfb-filtered-two-colimit-model",
+  "det-def-sfb-filtered-two-colimit-characterization"
+ ]
 }
