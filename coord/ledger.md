@@ -21243,3 +21243,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:43 L: merged deliver/Q63/lem-sfb-etale-proetale-cube-flat-model (reviewer FIX; first push; new nodes: 0)
 - 08:43 L: merged deliver/Q30/lem-sfb-integral-general-lfp-hom-inversion (reviewer PASS; first push; new nodes: 0)
 - 08:43 L: merged deliver/Q124/lem-weil-boundary-q-defining-composite-comparison (reviewer PASS; first push; new nodes: 0)
+- 08:43 L: merged deliver/Q26/lem-sfb-admissible-scalar-realization-exact (reviewer PASS; first push; new nodes: 0)
