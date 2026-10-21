@@ -2,7 +2,7 @@
  "id": "lem-coef-sequence-sections-limit-comparison",
  "kind": "statement",
  "title": "Derived sections and total limit with specified projections",
- "statement": "Let $\\mathcal C$ be a small site [def-weil-pbc-sites-and-cohomology] and $B_1\\leftarrow B_2\\leftarrow\\cdots$ an inverse sequence of sheaves of commutative rings. Write $\\mathscr S(B)$ for strict semilinear systems of module sheaves, with componentwise exactness, identified with modules over $B$ on the sequence site $\\mathcal T=\\mathcal C\\times\\mathbf N_{\\ge1}$ [lem-pur-system-ringed-sequence-site]. Use unbounded derived categories [def-weil-abstract-derived-category]. Let $A$ be a sheaf of commutative rings with compatible maps $A\\to B_n$. Let $p:(\\operatorname{Sh}(\\mathcal T),B)\\to(\\operatorname{Sh}(\\mathcal C),A)$ have inverse image on underlying sheaves the constant sequence, with ring map given by $A\\to B_n$. Let $U$ be exact termwise scalar restriction and $G=R\\Gamma^{\\operatorname{Tow}}_{\\mathcal C}\\circ U$ be the strict-system derived sections functor with its finite comparison of [lem-coef-sequence-global-sections-evaluation]. There is a specified natural isomorphism $$R\\Gamma(\\mathcal C,Rp_*J)\\xrightarrow{\\sim}R\\lim\\,G(J).$$ The comparison retains the actual finite projections: its nth projection is global sections of the total-limit projection followed by the scalar-restriction comparison at level $n$. All resolutions and comparisons are in the strict derived system categories, rather than unrelated choices at the fibers.",
+ "statement": "Let $\\mathcal C$ be a small site [def-weil-pbc-sites-and-cohomology] and $B_1\\leftarrow B_2\\leftarrow\\cdots$ an inverse sequence of sheaves of commutative rings. Write $\\mathscr S(B)$ for strict semilinear systems of module sheaves, with componentwise exactness, identified with modules over $B$ on the sequence site $\\mathcal T=\\mathcal C\\times\\mathbf N_{\\ge1}$ [lem-pur-system-ringed-sequence-site]. Use unbounded derived categories [def-weil-abstract-derived-category]. Let $A$ be a sheaf of commutative rings with compatible maps $A\\to B_n$. Let $p:(\\operatorname{Sh}(\\mathcal T),B)\\to(\\operatorname{Sh}(\\mathcal C),A)$ be the morphism of ringed topoi [def-weil-pbc-ringed-topos-morphism] whose inverse image on underlying sheaves is the constant sequence, and whose ring map is given by $A\\to B_n$. Let $U$ be exact termwise scalar restriction and $G=R\\Gamma^{\\operatorname{Tow}}_{\\mathcal C}\\circ U$ be the strict-system derived sections functor with its finite comparison of [lem-coef-sequence-global-sections-evaluation]. Write $Rp_*$ and $R\\Gamma(\\mathcal C,-)$ for the total derived direct images computed by K-injective resolutions [def-pur-kinjective-complex, prop-pur-kinjective-resolutions-exist], and $R\\lim:D(\\operatorname{Tow}(\\operatorname{Ab}))\\to D(\\operatorname{Ab})$ for total right derived inverse limit of strict towers [lem-weil-pbc-ringed-strict-tower-homotopy-limit]. For $J\\in D(\\mathscr S(B))$ there is a specified isomorphism, natural in $J$, $$R\\Gamma(\\mathcal C,Rp_*J)\\xrightarrow{\\sim}R\\lim\\,G(J).$$ The comparison retains the actual finite projections: its nth projection is global sections of the total-limit projection followed by the scalar-restriction comparison at level $n$. All resolutions and comparisons are in the strict derived system categories, rather than unrelated choices at the fibers.",
  "source": {
   "document": "literature/stacks-project/sites-cohomology.tex",
   "place": "Tags 079P (injectives.tex, theorem-K-injective-embedding-grothendieck), 0941 (lemma-derived-limit-is-ok) and 0D6E (lemma-derived-pushforward-composition); agent two-order total direct-image comparison, returned calculus step 12."
@@ -11,11 +11,123 @@
   "def-weil-abstract-derived-category",
   "def-weil-pbc-sites-and-cohomology",
   "lem-coef-sequence-global-sections-evaluation",
-  "lem-pur-system-ringed-sequence-site"
+  "lem-pur-system-ringed-sequence-site",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-pur-kinjective-complex",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "step": 1,
+   "text": "Put $\\mathcal T_A=(\\operatorname{Sh}(\\mathcal T),\\Delta A)$, where $\\Delta A$ is the constant-in-index ring sheaf. Factor $p=s r$, where $r:(\\operatorname{Sh}(\\mathcal T),B)\\to\\mathcal T_A$ is the identity geometric morphism with ring map $\\Delta A\\to B$, and $s:\\mathcal T_A\\to(\\operatorname{Sh}(\\mathcal C),A)$ has constant-sequence inverse image. On modules, $r_*=U$ and $s_*=\\lim$. Indeed, an $A$-linear map $P\\to p_*N$ is exactly a compatible family $P\\to\\operatorname{Res}_{A\\to B_n}N_n$, so $p_*N=\\lim UN$, with its actual cone projections. Restriction changes only the action, hence preserves kernels and cokernels. Also let $h:\\mathcal T_A\\to(\\operatorname{Sh}(\\mathbf N_{\\ge1}),\\mathbf Z)$ be the termwise global-sections morphism, and let $t$ be the sequence-to-point morphism. Thus $h_*=\\Gamma^{\\operatorname{Tow}}_{\\mathcal C}$ and $t_*=\\lim$ on abelian towers. Write $a:(\\operatorname{Sh}(\\mathcal C),A)\\to(*,\\mathbf Z)$ for global sections. The underlying inverse images for $h$ and $a$ take sets to their constant sheaves (levelwise for $h$), and their ring maps are the unit maps from $\\mathbf Z$; $t^{-1}$ is constant sequence. The two composites $a s$ and $t h$ agree: their inverse images send a set to the constant sheaf at every index, with the same unit ring map.",
+   "uses": [
+    "lem-pur-system-ringed-sequence-site",
+    "def-pc-sheaf-restrict-scalars",
+    "lem-coef-sequence-global-sections-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, lemma-derived-pushforward-composition; Tag 0941, lemma-derived-limit-is-ok and the preceding sequence-site construction; agent projection calculation."
+   }
+  },
+  {
+   "step": 2,
+   "text": "Use the ringed-site K-injective existence theorem on $B$-modules on $\\mathcal T$, on $\\Delta A$-modules on $\\mathcal T$, and on $\\mathbf Z$-modules on the one-point sequence site. Choose successively $J\\to I$, $v:UI\\to K$, and $w:\\Gamma^{\\operatorname{Tow}}K\\to H$, where $I,K,H$ are K-injective in these three respective categories. These are resolutions of strict systems, not a family of independently chosen fiber resolutions. Since $U$ is exact, its termwise derived functor represents $U(J)$ by $UI$, and $K$ resolves that object. By the finite-evaluation sections lemma, $G(J)$ is represented by $\\Gamma^{\\operatorname{Tow}}K$, and its specified finite comparison is computed using this same $K$.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-coef-sequence-global-sections-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, lemma-derived-pushforward-composition; Tag 0941, lemma-derived-limit-is-ok and the preceding sequence-site construction; agent projection calculation."
+   }
+  },
+  {
+   "step": 3,
+   "text": "Apply the normalized composition isomorphism to $r$ followed by $s$, at the K-injective $I$ with resolution $v:r_*I=UI\\to K$. It says precisely that $\\alpha=\\lim(v):p_*I=\\lim UI\\to\\lim K$ is a quasi-isomorphism, representing $Rp_*J\\xrightarrow{\\sim}Rs_*U(J)$. The functor $\\Delta:\\operatorname{Mod}(A)\\to\\operatorname{Tow}(\\operatorname{Mod}(A))$ is exact because exactness is componentwise, and its right adjoint is $\\lim$. The exact-left-adjoint preservation theorem therefore makes $\\lim K$ K-injective. Consequently $R\\Gamma(\\mathcal C,Rp_*J)$ is represented by $\\Gamma(\\mathcal C,\\lim K)$ using $\\alpha$. In addition $K_n$ is K-injective in $\\operatorname{Mod}(A)$ by tower evaluation.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-weil-tower-evaluation-kinjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, lemma-derived-pushforward-composition; Tag 0941, lemma-derived-limit-is-ok and the preceding sequence-site construction; agent projection calculation."
+   }
+  },
+  {
+   "step": 4,
+   "text": "For any strict tower of $A$-module sheaves $V$, there is an ordinary isomorphism $\\rho_V:\\Gamma(\\mathcal C,\\lim V)\\to\\lim\\Gamma^{\\operatorname{Tow}}_{\\mathcal C}V$. A global section on the left is exactly a family of global sections of $V_n$ compatible with every transition; that same family gives the inverse map. Thus $\\pi_n\\rho_V=\\Gamma(\\pi_n^V)$, and the family description proves naturality in $V$. Apply this degreewise to $K$; all maps commute with differentials, so $\\rho_K$ is an isomorphism of complexes. This verifies the ordinary equality $(a s)_*=(t h)_*$ with the cone normalization, rather than choosing an unspecified isomorphism of their values.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, lemma-derived-pushforward-composition; Tag 0941, lemma-derived-limit-is-ok and the preceding sequence-site construction; agent projection calculation."
+   }
+  },
+  {
+   "step": 5,
+   "text": "Apply the normalized composition theorem to $h$ followed by $t$, at the K-injective $K$ and the resolution $w:h_*K\\to H$. The theorem makes $\\lim(w):\\lim\\Gamma^{\\operatorname{Tow}}K\\to\\lim H$ a quasi-isomorphism. The strict-tower derived-limit theorem identifies $\\lim H$ with $R\\lim G(J)$. Define the required comparison by the class of $$\\beta=(\\lim w)\\rho_K:\\Gamma(\\mathcal C,\\lim K)\\longrightarrow\\lim H.$$ Step 3 computes its source as $R\\Gamma(\\mathcal C,Rp_*J)$; step 4 and the composition theorem make $\\beta$ a quasi-isomorphism. This constructs the asserted isomorphism without any claim that varying-ring evaluation or restriction of scalars preserves K-injectives.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, lemma-derived-pushforward-composition; Tag 0941, lemma-derived-limit-is-ok and the preceding sequence-site construction; agent projection calculation."
+   }
+  },
+  {
+   "step": 6,
+   "text": "Check its $n$th projection explicitly. The resolution map $v$ gives the strict identity $\\pi_n^K\\alpha=v_n\\pi_n^{UI}$. Under $Rp_*J=Q(p_*I)$ and $\\operatorname{Res}_nJ_n=Q(UI_n)$, the total-limit projection is $Q(\\pi_n^{UI})$. Since $\\alpha$ and $v_n$ are quasi-isomorphisms and $\\lim K,K_n$ are K-injective, its derived-sections map is represented by $\\Gamma(\\pi_n^K)$. On the target side, the finite comparison for $G(J)$ is $e_nG(J)\\cong Q(\\Gamma K_n)$, followed by the specified scalar-restriction comparison $R\\Gamma_A(\\operatorname{Res}_nJ_n)\\cong R\\Gamma_{B_n}(J_n)$. The map $w_n:\\Gamma K_n\\to H_n$ is a quasi-isomorphism, and the strict cone identity is $$\\pi_n^H\\beta=w_n\\Gamma(\\pi_n^K).$$ After identifying $QH_n$ with $Q(\\Gamma K_n)$ by $Q(w_n)^{-1}$, this is exactly global sections of the total-limit projection. Composing with the finite scalar-restriction comparison gives the projection formula in the statement.",
+   "uses": [
+    "lem-coef-sequence-global-sections-evaluation",
+    "lem-weil-tower-evaluation-kinjective",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, lemma-derived-pushforward-composition; Tag 0941, lemma-derived-limit-is-ok and the preceding sequence-site construction; agent projection calculation."
+   }
+  },
+  {
+   "step": 7,
+   "text": "The isomorphism constructed above is specified by the canonical composition comparisons for $r,s$ and $h,t$, with the ordinary identification $\\rho$ of step 4. Those comparisons are natural in derived input morphisms by the normalized composition theorem; the finite comparisons are natural by the sections-evaluation lemma. Hence their composite is a natural isomorphism on $D(\\mathscr S(B))$, independent of the auxiliary resolutions through their canonical computation identifications. The displayed identities of step 6 hold before localization for every $n$ and every strict transition, so localization preserves them and retains the actual projections and transitions. No selection of a limit of an unrelated diagram in the fiber derived categories occurs.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-coef-sequence-global-sections-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, lemma-derived-pushforward-composition; Tag 0941, lemma-derived-limit-is-ok and the preceding sequence-site construction; agent projection calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-sheaf-restrict-scalars",
+  "lem-coef-sequence-global-sections-evaluation",
+  "lem-pur-system-ringed-sequence-site",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-tower-evaluation-kinjective",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0D6E and 0941; explicit two-factorization proof with strict resolution and projection equations; blueprint prop-coef-integral-exceptional-adjoint, proof paragraph 2."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,10 +170,52 @@
    "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CategoryTheory.Sheaf.Γ\", \"module\": \"Mathlib.CategoryTheory.Sites.GlobalSections\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] (J : CategoryTheory.GrothendieckTopology C) (A : Type u₂) [CategoryTheory.Category.{v₂, u₂} A] [CategoryTheory.HasWeakSheafify J A] [CategoryTheory.HasGlobalSectionsFunctor J A] : CategoryTheory.Functor (CategoryTheory.Sheaf J A) A\", \"doc\": \"We define the global sections functor as the right-adjoint of the constant sheaf functor\\nwhenever it exists.\"}\n  {\"name\": \"CategoryTheory.Sheaf.instIsRightAdjointΓ\", \"module\": \"Mathlib.CategoryTheory.Sites.GlobalSections\", \"type\": \" {C : Type u_2} [CategoryTheory.Category.{u_4, u_2} C] (J : CategoryTheory.GrothendieckTopology C) (A : Type u_3) [CategoryTheory.Category.{u_1, u_3} A] [CategoryTheory.HasWeakSheafify J A] [CategoryTheory.HasGlobalSectionsFunctor J A] : (CategoryTheory.Sheaf.Γ J A).IsRightAdjoint\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.constantSheafΓAdj\", \"module\": \"Mathlib.CategoryTheory.Sites.GlobalSections\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] (J : CategoryTheory.GrothendieckTopology C) (A : Type u₂) [CategoryTheory.Category.{v₂, u₂} A] [CategoryTheory.HasWeakSheafify J A] [CategoryTheory.HasGlobalSectionsFunctor J A] : CategoryTheory.constantSheaf J A ⊣ CategoryTheory.Sheaf.Γ J A\", \"doc\": \"The constant sheaf functor is by definition left-adjoint to the global sections functor.\"}\n  {\"name\": \"CategoryTheory.Sheaf.ΓRes\", \"module\": \"Mathlib.CategoryTheory.Sites.GlobalSections\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} {A : Type u₂} [CategoryTheory.Category.{v₂, u₂} A] [CategoryTheory.HasWeakSheafify J A] [CategoryTheory.HasGlobalSectionsFunctor J A] (F : CategoryTheory.Sheaf J A) (U : Cᵒᵖ) : (CategoryTheory.Sheaf.Γ J A).o\", \"doc\": \"The restriction map from global sections of `F` to sections on `U`.\"}\n  {\"name\": \"CategoryTheory.Sheaf.coneΓ_pt\", \"module\": \"Mathlib.CategoryTheory.Sites.GlobalSections\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} {A : Type u₂} [CategoryTheory.Category.{v₂, u₂} A] [CategoryTheory.HasWeakSheafify J A] [CategoryTheory.HasGlobalSectionsFunctor J A] (F : CategoryTheory.Sheaf J A) : F.coneΓ.pt = (CategoryTheory.Sheaf.Γ J A\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Sheaf.ΓObjEquivSections\", \"module\": \"Mathlib.CategoryTheory.Sites.GlobalSections\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] (J : CategoryTheory.GrothendieckTopology C) [CategoryTheory.HasWeakSheafify J (Type w)] [CategoryTheory.HasGlobalSectionsFunctor J (Type w)] (F : CategoryTheory.Sheaf J (Type w)) : (CategoryTheory.Sheaf.Γ J (Type w)).obj F ≃ ↑F.obj.sections\", \"doc\": \"Global sections of a sheaf of types correspond to sections of the underlying presheaf.\"}\n  {\"name\": \"CategoryTheory.Sheaf.ΓObjEquivHom\", \"module\": \"Mathlib.CategoryTheory.Sites.GlobalSections\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] (J : CategoryTheory.GrothendieckTopology C) [CategoryTheory.HasWeakSheafify J (Type w)] [CategoryTheory.HasGlobalSectionsFunctor J (Type w)] (F : CategoryTheory.Sheaf J (Type w)) (X : Type w) [Unique X] : (CategoryTheory.Sheaf.Γ J (Type w)).obj F ≃ ((\", \"doc\": \"Global sections of a sheaf of types `F` correspond to morphisms from a terminal sheaf to `F`.\\nWe use the constant sheaf on a singleton type as a specific choice of terminal sheaf here.\"}\n  {\"name\": \"CategoryTheory.Sheaf.ΓHomEquiv\", \"module\": \"Mathlib.CategoryTheory.Sites.GlobalSections\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} {A : Type u₂} [CategoryTheory.Category.{v₂, u₂} A] [CategoryTheory.HasWeakSheafify J A] [CategoryTheory.HasGlobalSectionsFunctor J A] {X : A} {F : CategoryTheory.Sheaf J A} : ((CategoryTheory.Functor.const C\", \"doc\": \"Natural transformations from a constant presheaf into a sheaf correspond to morphisms to its\\nglobal sections.\"}\n  {\"name\": \"CategoryTheory.Sheaf.ΓNatIsoLim\", \"module\": \"Mathlib.CategoryTheory.Sites.GlobalSections\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] (J : CategoryTheory.GrothendieckTopology C) (A : Type u₂) [CategoryTheory.Category.{v₂, u₂} A] [CategoryTheory.HasWeakSheafify J A] [CategoryTheory.Limits.HasLimitsOfShape Cᵒᵖ A] : CategoryTheory.Sheaf.Γ J A ≅ (CategoryTheory.sheafToPresheaf J A).comp\", \"doc\": \"Global sections of sheaves are naturally isomorphic to the limits of the underlying presheaves.\\nNote that while `HasLimitsOfShape Cᵒᵖ A` is needed here to talk about `lim` as a functor, global\\nsection\"}\n  {\"name\": \"CategoryTheory.Sheaf.ΓNatIsoSectionsFunctor\", \"module\": \"Mathlib.CategoryTheory.Sites.GlobalSections\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] (J : CategoryTheory.GrothendieckTopology C) : CategoryTheory.Sheaf.Γ J (Type (max u v)) ≅ (CategoryTheory.sheafToPresheaf J (Type (max u v))).comp (CategoryTheory.Functor.sectionsFunctor Cᵒᵖ)\", \"doc\": \"For sheaves of types, the global sections functor is isomorphic to the sections functor\\non presheaves.\"}\n  {\"name\": \"CategoryTheory.Sheaf.ΓNatIsoSheafSections\", \"module\": \"Mathlib.CategoryTheory.Sites.GlobalSections\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] (J : CategoryTheory.GrothendieckTopology C) (A : Type u₂) [CategoryTheory.Category.{v₂, u₂} A] [CategoryTheory.HasWeakSheafify J A] [CategoryTheory.Limits.HasTerminal C] {T : C} (hT : CategoryTheory.Limits.IsTerminal T) : CategoryTheory.Sheaf.Γ J A ≅ \", \"doc\": \"On sites with a terminal object, the global sections functor is isomorphic to the functor\\nof sections on that object.\"}\n  {\"name\": \"CategoryTheory.Sheaf.natTransΓRes\", \"module\": \"Mathlib.CategoryTheory.Sites.GlobalSections\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] (J : CategoryTheory.GrothendieckTopology C) (A : Type u₂) [CategoryTheory.Category.{v₂, u₂} A] [CategoryTheory.HasWeakSheafify J A] [CategoryTheory.HasGlobalSectionsFunctor J A] (U : Cᵒᵖ) : CategoryTheory.Sheaf.Γ J A ⟶ (CategoryTheory.sheafSections J \", \"doc\": \"The natural transformation from the global sections functor to the sections functor on any\\nobject `U`.\"}",
    "date": "2026-10-21",
    "verdict": "no match: ordinary global sections, limits, and generic localization infrastructure do not state the two-order unbounded derived sections/limit comparison with actual finite projections"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived global sections commute with the total inverse limit of strict towers of sheaves with varying coefficient rings, preserving finite projections",
+   "results": "SheafOfModules.evaluationPreservesLimit; SheafOfModules.Finite.evaluationPreservesFiniteLimits; SheafOfModules.createsLimit; CondensedMod.ofSheafProfinite; CategoryTheory.Sheaf.ΓNatIsoLim; SheafOfModules.hasLimit; CategoryTheory.Sheaf.isLimitConeΓ; CategoryTheory.hasGlobalSectionsFunctor_of_hasLimitsOfShape",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern ordinary sections/limits or ordinary pushforward composition, not the unbounded strict-system derived comparison with specified projections"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctorCompIso|SectionsLimit|Γ.*lim|lim.*Γ",
+   "results": "Mathlib/CategoryTheory/Presentable/StrongGenerator.lean; Mathlib/CategoryTheory/Presentable/StrongGenerator.lean; Mathlib/CategoryTheory/Sites/GlobalSections.lean; Mathlib/CategoryTheory/Sites/GlobalSections.lean; Mathlib/CategoryTheory/Sites/GlobalSections.lean; Mathlib/CategoryTheory/Sites/GlobalSections.lean; Mathlib/CategoryTheory/Sites/GlobalSections.lean; Mathlib/CategoryTheory/Limits/Connected.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern ordinary sections/limits or ordinary pushforward composition, not the unbounded strict-system derived comparison with specified projections"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived global sections commute with inverse limits of towers of sheaves on a ringed site",
+   "results": "CategoryTheory.Sheaf.Γ; CategoryTheory.hasGlobalSectionsFunctor_of_hasLimitsOfShape; AlgebraicGeometry.Scheme.Γ; CategoryTheory.Sheaf.ΓNatIsoLim; AlgebraicGeometry.Scheme.Γ_def; AlgebraicGeometry.SheafedSpace.Γ; CategoryTheory.Sheaf.isLimitConeΓ; AlgebraicGeometry.preservesLimit_rightOp_Γ",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern ordinary sections/limits or ordinary pushforward composition, not the unbounded strict-system derived comparison with specified projections"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerivedFunctor, CategoryTheory.Limits.lim",
+   "results": "loogle: unknown identifier 'CategoryTheory.Functor.rightDerivedFunctor'",
+   "date": "2026-10-21",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived direct image of a composite of morphisms of ringed topoi is the composite of their derived direct images",
+   "results": "AlgebraicGeometry.Scheme.Modules.pushforwardComp; AlgebraicGeometry.LocallyRingedSpace.comp_c; SheafOfModules.pushforwardComp; SheafOfModules.pushforwardNatTrans_comp; SheafOfModules.pushforward_assoc; SheafOfModules.pushforwardComp_hom_app_val_app; AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app; AlgebraicGeometry.LocallyRingedSpace.comp_c_app",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern ordinary sections/limits or ordinary pushforward composition, not the unbounded strict-system derived comparison with specified projections"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforwardComp",
+   "results": "SheafOfModules.pushforwardComp; SheafOfModules.pushforward_id_comp; SheafOfModules.pushforward_comp_id; SheafOfModules.pushforward_assoc; SheafOfModules.pushforwardComp_hom_app_val_app; SheafOfModules.pushforwardComp_inv_app_val_app; SheafOfModules.conjugateEquiv_pullbackComp_inv",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern ordinary sections/limits or ordinary pushforward composition, not the unbounded strict-system derived comparison with specified projections"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-derived-system-evaluation-calculus",
@@ -81,5 +235,64 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-coef-sequence-sections-limit-comparison",
+  "worker": "stage1",
+  "summary": "Replaced the empty proof by a seven-step two-order direct-image argument. Kept the statement verbatim, added the scalar-restriction statement dependency, reused existing generic nodes, and checked the projection using the actual strict identities pi_K alpha=v_n pi_UI and pi_H beta=w_n Gamma(pi_K). No new nodes are needed.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint, proof paragraph 2, first and last derived mapping-complex comparisons: realizes the derived sections/limit passage extracted in lem-coef-derived-system-evaluation-calculus step 12.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-system-ringed-sequence-site",
+    "why": "Generic realization of strict systems as modules on the sequence site; no unit-specific replacement for this categorical tool."
+   },
+   {
+    "node": "def-pc-sheaf-restrict-scalars",
+    "why": "Generic coefficient restriction definition used to identify the identity-topos direct image with exact termwise restriction."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic existence of simultaneous K-injective resolutions on the three small ringed sites."
+   },
+   {
+    "node": "lem-sf-exact-functor-derived-triangulated",
+    "why": "Generic localization of exact additive functors, applied to scalar restriction; this is not a replacement for the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Generic unbounded direct-image composition with its representative normalization; applied to the two orders of total sections."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "why": "Generic preservation of K-injectives by the right adjoint of exact constant sequence."
+   },
+   {
+    "node": "lem-weil-tower-evaluation-kinjective",
+    "why": "Generic preservation of K-injectives by evaluation on constant-coefficient towers."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "why": "Generic computation of total derived inverse limit on strict K-injective towers."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-system-ringed-sequence-site",
+  "def-pc-sheaf-restrict-scalars",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-tower-evaluation-kinjective",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q16-48529f0a5",
+  "group": "Q16",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-48529f0a5 (reviewer sub-agent of L); spot-checked: I read the whole delivery: one commit, no new nodes. The item's statement is unchanged from live, where the item is still unsplit; it is not on any dropped list and has no re-split note. The 7-step proof is correct. Steps 1-2: p = s∘r, with r_* = U (scalar restriction, which keeps the same abelian sheaf and so is exact) and s_* = lim. The composites a∘s and t∘h have the same inverse images, and K-injective resolutions I, K, H come from prop-pur-kinjective-resolutions-exist. Step 3: by the normalization of the 0D6E composition node (f=r, g=s), alpha = lim v is a quasi-isomorphism without UI being K-injective. lim K is K-injective because Delta is exact and left adjoint to lim (right-adjoint node), and K_n is K-injective by the tower-evaluation node. Step 4: the elementary identity rho: Gamma(C, lim V) = lim Gamma(V_n). Step 5: the composition node with f=h, g=t is needed because h_* need not preserve K-injectives, and the strict-tower Rlim node is applied with C = point and O = Z. Step 6: I checked the cone identities pi^K alpha = v_n pi^{UI} and pi^H beta = w_n Gamma(pi^K), so the nth projection is as stated. I read Stacks 0D6E and 0941 in sites-cohomology.tex and paragraph 2 of the blueprint proof of prop-coef-integral-exceptional-adjoint. Small cases: one-point site with A = B_n = Z gives the identity comparison; non-flat Z -> Z/m and non-surjective transitions are fine because no flatness, Mittag-Leffler condition or exact products is used. Cycle check: the item's closure (453 nodes) does not contain the item, and the parallel Q11 sibling split does not cite it. I accept all 8 declared tool_uses. FIX (B3, statement notions): the statement used Rp_*, RGamma, the ringed-topos morphism p and Rlim on D(Tow(Ab)) without citing them, and did not introduce J. I added the citations def-weil-pbc-ringed-topos-morphism, def-pur-kinjective-complex, prop-pur-kinjective-resolutions-exist and lem-weil-pbc-ringed-strict-tower-homotopy-limit to the statement and its stmt_deps, plus 'for J in D(S(B)) ..., natural in J'. The meaning is unchanged and the proof is untouched. Maintainer note: the existing node lem-weil-ringed-tower-pushforward-limit-comparison (sk-def-sf-operations) states the generic form of steps 4-6 (Rf_* commutes with Rlim, compatible with projections; here f = global sections, M = U(J)). The delivery re-proves it correctly instead of citing it; Lean can reuse that node's declaration.; 1 file(s) fixed by the reviewer"
+ }
 }

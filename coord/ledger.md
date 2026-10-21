@@ -20476,3 +20476,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:07 L: merged deliver/Q05/lem-pur-regular-quotient-completion-unit (reviewer PASS; first push; new nodes: 0)
 - 07:07 L: merged deliver/Q54/lem-cbc-ringed-open-flat-resolution (reviewer PASS; first push; new nodes: 0)
 - 07:07 L: merged deliver/Q91/def-nagata-scheme-theoretic-closure (reviewer PASS; first push; new nodes: 0)
+- 07:07 L: merged deliver/Q16/lem-coef-sequence-sections-limit-comparison (reviewer FIX; first push; new nodes: 0)
