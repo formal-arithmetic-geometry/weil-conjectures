@@ -23538,3 +23538,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:39 L: merged deliver/N6/lem-sfb-homogeneous-cocycle-rectangle-detection (reviewer PASS; first push; new nodes: 1)
 - 19:39 L: merged deliver/Q2/Sheaf.Paper.AdmissibleScalarRealizationExact (stage 3; reviewer PASS; first push; landing 20261021T193928-L-1326247 (interface); batch 20261021T192711; modules 2; new nodes 1; change records: coord/changes/Q2-admissible-scalar-proof-scope.md)
 - 2026-10-21T19:40:06Z L: superseded stage-1 delivery N0/lem-sfb-finite-subfield-continuous-linear-retraction at 773f120eb6d61d73e034da44495c50ffe0f4b980; current completion retained; packet archived at refs/superseded/N0/lem-sfb-finite-subfield-continuous-linear-retraction/773f120eb6d61d73e034da44495c50ffe0f4b980; stale return retired.
+- 19:40 L: merged deliver/N5/lem-sfb-algcl-countable-closed-finite-cover (reviewer PASS; first push; new nodes: 2)

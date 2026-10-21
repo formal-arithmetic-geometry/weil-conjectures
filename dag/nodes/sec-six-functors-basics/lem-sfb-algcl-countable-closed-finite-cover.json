@@ -11,9 +11,79 @@
   "def-weil-l-adic-coefficient-extension",
   "def-weil-algebraic-closure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $k=\\mathbf Q_\\ell$ and $A=\\{b\\in\\Omega:b\\text{ is algebraic over }\\mathbf Q\\}$. Apply [lem-sfb-algebraic-elements-countable] to the canonical field extension $\\mathbf Q\\to\\Omega$; $\\mathbf Q$ is countable (its elements are quotients of integer pairs). Hence $A$ is countable. It contains $0$, so choose a sequence $(b_n)_{n\\ge0}$ whose range is $A$, repeating $0$ to fill unused indices if necessary: inject $A$ into $\\mathbf N$ and at an index in the image take its unique preimage, elsewhere take $0$.",
+   "uses": [
+    "lem-sfb-algebraic-elements-countable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stanford-weil2-seminar/L19.pdf",
+    "place": "Proposition 1.1.9, first bullet, p. 3; explicit construction of its countable finite-extension cover using the project Krasner input."
+   }
+  },
+  {
+   "text": "For $j\\ge0$ put $K_j=k(b_0,\\ldots,b_j)$, the smallest intermediate field containing these elements. Every $b_i$ is algebraic over $k$ because $\\Omega$ is an algebraic closure of $k$. Apply [lem-weil-pbc-algebraic-generators-finite-extension] to the finite set $\\{b_0,\\ldots,b_j\\}$; it gives $[K_j:k]<\\infty$. Inclusion of the generating sets gives $K_j\\subseteq K_{j+1}$ by minimality of the generated subfields.",
+   "uses": [
+    "def-weil-algebraic-closure",
+    "lem-weil-pbc-algebraic-generators-finite-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stanford-weil2-seminar/L19.pdf",
+    "place": "Proposition 1.1.9, first bullet, p. 3; explicit construction of its countable finite-extension cover using the project Krasner input."
+   }
+  },
+  {
+   "text": "Define $F_j=EK_j\\subseteq\\Omega$, the compositum, that is the smallest subfield containing $E$ and $K_j$. The finite-compositum clause of [def-weil-finite-subextension-directed-set] makes $F_j$ finite over $k$, since $E$ is finite by hypothesis and $K_j$ is finite by step 2. The inclusions $E\\subseteq F_j\\subseteq\\Omega$ follow from the definition. Since $K_j\\subseteq K_{j+1}$, the field $F_{j+1}$ contains both $E$ and $K_j$, so minimality gives $F_j\\subseteq F_{j+1}$.",
+   "uses": [
+    "def-weil-finite-subextension-directed-set"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stanford-weil2-seminar/L19.pdf",
+    "place": "Proposition 1.1.9, first bullet, p. 3; explicit construction of its countable finite-extension cover using the project Krasner input."
+   }
+  },
+  {
+   "text": "View each $F_j$ as a finite-dimensional $k$-linear subspace of the Hausdorff normed $k$-vector space $\\Omega$, with metric $d(x,y)=|x-y|$. Multiplicativity of the given extended absolute value makes scalar multiplication continuous, and the triangle inequality makes addition continuous. The field $k$ is complete by [def-weil-l-adic-numbers], and its absolute value is nontrivial since $|\\ell|_\\ell=\\ell^{-1}\\notin\\{0,1\\}$. Thus every hypothesis of [lem-sfb-finite-dimensional-subspace-closed] holds; it gives that $F_j$ is closed in $\\Omega$. Completeness of $\\Omega$ is not needed.",
+   "uses": [
+    "def-weil-l-adic-numbers",
+    "lem-sfb-finite-dimensional-subspace-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stanford-weil2-seminar/L19.pdf",
+    "place": "Proposition 1.1.9, first bullet, p. 3; explicit construction of its countable finite-extension cover using the project Krasner input."
+   }
+  },
+  {
+   "text": "Let $x\\in\\Omega$. By [lem-sfb-padic-rational-algebraic-generator] there is $b\\in A$ with $x\\in k(b)$. Step 1 supplies $n$ with $b=b_n$. The inclusions of generators give $k(b_n)\\subseteq K_n\\subseteq F_n$, so $x\\in F_n$. Therefore $\\Omega\\subseteq\\bigcup_{n\\ge0}F_n$; the reverse inclusion holds because every $F_n$ was constructed inside $\\Omega$. This proves the required equality together with all clauses established in steps 3 and 4.",
+   "uses": [
+    "lem-sfb-padic-rational-algebraic-generator"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stanford-weil2-seminar/L19.pdf",
+    "place": "Proposition 1.1.9, first bullet, p. 3; explicit construction of its countable finite-extension cover using the project Krasner input."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-algebraic-closure",
+  "def-weil-finite-subextension-directed-set",
+  "def-weil-l-adic-numbers",
+  "lem-sfb-algebraic-elements-countable",
+  "lem-sfb-finite-dimensional-subspace-closed",
+  "lem-sfb-padic-rational-algebraic-generator",
+  "lem-weil-pbc-algebraic-generators-finite-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stanford-weil2-seminar/L19.pdf",
+  "place": "Proposition 1.1.9 first bullet; explicit algebraic-generator enumeration and cumulative composita fill the countability input; closedness uses finite-dimensional topological linear algebra."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -145,10 +215,96 @@
    },
    "date": "2026-10-22",
    "verdict": "no match: algebraicity and the definition of PadicAlgCl do not give a countable finite-field cover; the grep hit in Adjoin/Defs.lean is an unrelated union inclusion."
+  },
+  {
+   "tool": "grep",
+   "query": "(countab|iUnion|union).*(PadicAlgCl|IntermediateField)|(PadicAlgCl|IntermediateField).*(countab|iUnion)",
+   "results": {
+    "t": "2026-10-21T19:25:05Z",
+    "tool": "grep",
+    "query": "(countab|iUnion|union).*(PadicAlgCl|IntermediateField)|(PadicAlgCl|IntermediateField).*(countab|iUnion)",
+    "sub": "NumberTheory",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the p-adic algebraic-closure definition and algebraicity instances do not provide a countable closed finite-field cover. Field.Emb.Cardinal filtrations are indexed by general ordinals and do not give this countable finite-dimensional cover."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An increasing sequence of finite subfields closed in the algebraic closure of the p-adic field covers the algebraic closure",
+   "results": {
+    "t": "2026-10-21T19:25:05Z",
+    "tool": "leansearch",
+    "query": "An increasing sequence of finite subfields closed in the algebraic closure of the p-adic field covers the algebraic closure",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PadicAlgCl",
+     "PadicAlgCl.isAlgebraic",
+     "PadicAlgCl.instCoePadic",
+     "IsSepClosure.isAlgClosure_of_perfectField",
+     "Field.Emb.Cardinal.iSup_adjoin_eq_top",
+     "PadicComplex",
+     "AlgebraicClosure.isAlgClosed",
+     "Padic.field"
+    ],
+    "digest": "46215971e65fb26f"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the p-adic algebraic-closure definition and algebraicity instances do not provide a countable closed finite-field cover. Field.Emb.Cardinal filtrations are indexed by general ordinals and do not give this countable finite-dimensional cover."
+  },
+  {
+   "tool": "loogle",
+   "query": "PadicAlgCl, Countable",
+   "results": {
+    "t": "2026-10-21T19:25:06Z",
+    "tool": "loogle",
+    "query": "PadicAlgCl, Countable",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the p-adic algebraic-closure definition and algebraicity instances do not provide a countable closed finite-field cover. Field.Emb.Cardinal filtrations are indexed by general ordinals and do not give this countable finite-dimensional cover."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The algebraic closure of Q_p is covered by an increasing sequence of closed finite extensions containing a fixed finite extension",
+   "results": {
+    "t": "2026-10-21T19:25:07Z",
+    "tool": "leanfinder",
+    "query": "The algebraic closure of Q_p is covered by an increasing sequence of closed finite extensions containing a fixed finite extension",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PadicAlgCl",
+     "PadicAlgCl.isAlgebraic",
+     "PadicAlgCl.instCoePadic",
+     "Padic.instProperSpace",
+     "Field.Emb.Cardinal.directed_filtration",
+     "PadicComplex",
+     "PadicAlgCl.coe_eq",
+     "PadicComplex.instIsScalarTowerPadicPadicAlgCl"
+    ],
+    "digest": "21fb5b75bf73bb61"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the p-adic algebraic-closure definition and algebraicity instances do not provide a countable closed finite-field cover. Field.Emb.Cardinal filtrations are indexed by general ordinals and do not give this countable finite-dimensional cover."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-local-norm-algcl-cocycle-descent",
@@ -175,5 +331,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-algcl-countable-closed-finite-cover",
+  "worker": "stage1",
+  "summary": "Statement preserved verbatim. Constructed the increasing sequence explicitly by enumerating rational-algebraic generators, then taking cumulative finite composita with E; closedness uses the existing finite-dimensional-subspace Mathlib leaf. New nodes: general countability Mathlib leaf and the project-proved rational-algebraic generator attachment candidate. No new node repeats a clause of the item. All citations checked against statements and recorded in citations.json.",
+  "blueprint": "Arithmetic topology input below paragraph (3) of main-20261015 sk-thm-sf-ctf-stability-direct-images.proof.md, through the existing local cocycle-descent dependency chain. The ancestor tool returns None, retained in blueprint.from.node. No unit or chapter route changed."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-N5-b7810abe1",
+  "group": "N5",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-b7810abe1 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement, L19 Prop 1.1.9 first bullet (p.3), Mathlib AlgebraicCard.lean:42-74 and FiniteDimension.lean:530, and project Extension.lean:76-127 (source only). The statement is unchanged against live, where the item is still unsplit with no proof, so the delivery is not superseded and the item is not dropped. Step 1: algebraic elements of Ω over the countable field Q are countable (Mathlib Algebraic.countable). The enumeration with 0 as filler is correct and Ω is never claimed countable. Step 2: each K_j is finite by the finiteDimensional_adjoin leaf, because Ω is algebraic over Q_ℓ. Step 3: the finite-compositum clause of def-weil-finite-subextension-directed-set applies. Step 4: closedness follows from Submodule.closed_of_finiteDimensional. Q_ℓ is complete and nontrivially valued (|ℓ|=1/ℓ), Ω is metric and so T2, and the extended absolute value makes Ω a topological Q_ℓ-vector space. Completeness of Ω is not used. Step 5: the generator node gives b=b_n with x in Q_ℓ(b_n) ⊆ F_n. New node lem-sfb-algebraic-elements-countable is an exact one-line Mathlib leaf with the line recorded. New node lem-sfb-padic-rational-algebraic-generator is true: approximate the minimal polynomial by a monic rational one of the same degree, take the nearby root, and apply Krasner. The sorry-free project theorem PadicAlgCl.exists_isAlgebraic_mem_adjoin_simple states it for the canonical model, and an algebraic isomorphism carries it to any Ω. It is statement-only, strictly smaller than the item and not a relabelling. Duplicate search over snapshot and live (countab*, Krasner, declaration names) found only the lem-per henselian Krasner and dense-henselian nodes, which are ingredients or a different, stronger statement and not one-line specializations. They are advisory citations for the later split of the generator. Every off-unit citation is a definition node or Mathlib leaf, so no tool_uses are needed. No SGA is cited. No fixes."
  }
 }
