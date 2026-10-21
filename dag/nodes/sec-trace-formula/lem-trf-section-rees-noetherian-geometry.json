@@ -21,7 +21,10 @@
   "def-asd-vector-bundle-zero-section",
   "lem-pur-conormal-graded-algebra",
   "def-asd-compactifiable",
-  "def-weil-etale-morphism"
+  "def-weil-etale-morphism",
+  "def-pur-normal-bundle",
+  "def-pur-finite-smooth-canonical-interfaces",
+  "def-trf-rees-chart-canonical-maps"
  ],
  "proof": [
   {
@@ -417,5 +420,31 @@
   "group": "Q128",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q128-27a24f1bd (reviewer sub-agent of L); spot-checked: Read the item's 12 steps in full, every one of the 25 cited statements, and the sk-thm-dnc 'Local construction' source; the Stacks tags all resolve. Only proof-side fields changed; statement, stmt_deps and blueprint are identical to the Q58 base. No new nodes. The item is still unsplit live and not on the dropped list. All arguments of the parent's old Steps 3-4 are carried and written out more fully. Steps: (1) the centred-coordinate node gives the Zariski etale charts, the rank-d conormal and Sym≅gr. (2) The Rees algebra localizes, so it is a quasi-coherent algebra and D→A^1_V is affine. (3) Augmentation surjects because the degree -m coefficients lie in I^m; E[1/t]=B[t,t^-1]; E/(t-1)≅B, kernel re-derived. (4) Rees-associated-graded chart plus the conormal algebra and relative-Spec base change give the zero fibre (N_s,z), in the right direction. (5) Etale Rees chart with A=R, C=P, R=B. (6) Off the centre 1/t∈E, so charts plus the punctured part cover D. (7) Smoothness by permanence and locality. (8) q separated through the affine map to A^1_V; σ is a section of a separated map, hence closed. (9) Finite type and Noetherianity in a non-circular order. (10) Bundle facts. (11) Open subschemes. (12) Nagata via its qcqs clause. Tested the standard pair, d=0, components disjoint from the section, empty and nonreduced bases. Duplicate search over the DAG: the only overlaps are the l-adic/cohomological lem-pur-noetherian-etale-section-specialization and lem-per-etale-section-deformation-comparison, and the field-setting lem-pur-dnc-section-geometry/sk-lem-geometry; none states this lemma. No cycle; proof_deps equals the union of uses. 17 declared generic tool uses accepted. Advisory only: G_m and fibre product have no stmt_dep (inherited from Q58)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SectionReesNoetherianGeometry",
+  "declaration": "AlgebraicGeometry.SectionReesNoetherianGeometry.geometry",
+  "declarations": [
+   "AlgebraicGeometry.SectionReesNoetherianGeometry.coneToBundle",
+   "AlgebraicGeometry.SectionReesNoetherianGeometry.geometry",
+   "AlgebraicGeometry.SectionReesNoetherianGeometry.affine_chart",
+   "AlgebraicGeometry.SectionReesNoetherianGeometry.chart_cover",
+   "AlgebraicGeometry.SectionReesNoetherianGeometry.chart_compactifications"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SectionReesNoetherianGeometry.lean",
+  "statement": "theorem geometry {V S : Scheme.{u}} [IsNoetherian S] (d : ℕ) (g : V ⟶ S) [SmoothOfRelativeDimension d g] [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g] (s : S ⟶ V) [IsClosedImmersion s] (hs : s ≫ g = 𝟙 S) : ∃ hE : (ConormalGradedAlgebra.piece s 1).IsFiniteLocallyFreeOfRank d, ∃ e : s.ker.normalCone ≅ @VectorBundleZeroSection.scheme S inferInstance d (ConormalGradedAlgebra.piece s 1) hE, e.hom = @coneToBundle V S inferInstance d s inferInstance hE ∧ e.hom ≫ @VectorBundleZeroSection.π S inferInstance d (ConormalGradedAlgebra.piece s 1) hE = Scheme.Hom.normalConeProj g s ∧ s.normalConeZeroSection ≫ e.hom = @VectorBundleZeroSection.zero S inferInstance d (ConormalGradedAlgebra.piece s 1) hE ∧ s.deformationSpaceSection ≫ Scheme.Hom.deformationSpaceProj g s = 𝟙 _ ∧ IsNoetherian (AffineSpace (ULift.{u} (Fin 1)) S) ∧ IsNoetherian s.ker.deformationSpace ∧ SmoothOfRelativeDimension d (Scheme.Hom.deformationSpaceProj g s) ∧ IsSeparated (Scheme.Hom.deformationSpaceProj g s) ∧ LocallyOfFiniteType (Scheme.Hom.deformationSpaceProj g s) ∧ QuasiCompact (Scheme.Hom.deformationSpaceProj g s) ∧ IsClosedImmersion s.deformationSpaceSection ∧ HasCompactification (Scheme.Hom.deformationSpaceProj g s) ∧ IsNoetherian (@VectorBundleZeroSection.scheme S inferInstance d (ConormalGradedAlgebra.piece s 1) hE) ∧ HasCompactification (@VectorBundleZeroSection.π S inferInstance d (ConormalGradedAlgebra.piece s 1) hE) ∧ IsPullback (Scheme.Hom.deformationSpaceOneFibre g s) g (Scheme.Hom.deformationSpaceProj g s) (AffineSpace.oneSection (ULift.{u} (Fin 1)) S) ∧ s ≫ Scheme.Hom.deformationSpaceOneFibre g s = AffineSpace.oneSection (ULift.{u} (Fin 1)) S ≫ s.deformationSpaceSection ∧ IsPullback s.ker.normalConeToDeformationSpace (Scheme.Hom.normalConeProj g s) (Scheme.Hom.deformationSpaceProj g s) (AffineSpace.zeroSection (ULift.{u} (Fin 1)) S) ∧ s.normalConeZeroSection ≫ s.ker.normalConeToDeformationSpace = AffineSpace.zeroSection (ULift.{u} (Fin 1)) S ≫ s.deformationSpaceSection ∧ IsPullback (Scheme.Hom.deformationSpaceGeneric g s) (pullback.snd _ _) (Scheme.Hom.deformationSpaceProj g s) (Scheme.Hom.puncturedLine S).ι ∧ (∃ σ : (Scheme.Hom.puncturedLine S).toScheme ⟶ pullback g ((Scheme.Hom.puncturedLine S).ι ≫ (AffineSpace (ULift.{u} (Fin 1)) S ↘ S)), σ ≫ pullback.fst _ _ = ((Scheme.Hom.puncturedLine S).ι ≫ (AffineSpace (ULift.{u} (Fin 1)) S ↘ S)) ≫ s ∧ σ ≫ pullback.snd _ _ = 𝟙 _ ∧ σ ≫ Scheme.Hom.deformationSpaceGeneric g s = (Scheme.Hom.puncturedLine S).ι ≫ s.deformationSpaceSection)",
+  "branch": "sheaf-dag",
+  "by": "Q74",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The theorem and three companion statements jointly render every clause: canonical pair comparisons; all centred affine chart algebras and their cover; Noetherian open restrictions and separated finite-type chart maps and structural composites. coneToBundle is the concrete relative-Spec image of the recorded symmetric comparison after the uniquely normalized recorded Rees comparison. Added landed definition dependencies own that comparison and its target cone; def-trf-rees-chart-canonical-maps owns exactly the three existing plain chart-map definitions. The etale-chart theorem remains only a proof dependency. No additional geometric hypothesis is imposed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-59140b869",
+  "group": "Q74",
+  "result": "fix",
+  "note": "Re-delivery of the be2267 H2 RETURN. Lean byte-identical (sha b8312a92). Item stmt_deps swap lem-pur-dnc-etale-rees-chart for the new def-trf-rees-chart-canonical-maps (existing:true on the unchanged EtaleReesChart; declarations are exactly etaleReesChartMap/BaseMap/TensorMap, plain defs with no .choose, the only owner-module decls the item uses). The new node's statement matches the Lean and sk-lem-geometry (2) (arbitrary A,R universes, any P-algebra, u_j↦x_j/t, β=C, θ=tensor lift, no extra hypotheses); its stmt_deps exist live; no cycle. Item and new node are not on the dropped lists; the item is unlanded live. check_new_node clean; check_existing gave only the noncomputable note. FIX: fixes/def-trf-rees-chart-canonical-maps.json trims `noncomputable` from lean.statement; both checks clean afterwards. Item mathematics re-checked against the prior full reading, no substance fault. Advisory: Ideal.extendedReesAlgebra has no DAG owner (inherited); later citers of the three maps should cite the new def node. No compile run (JSON-only fix)."
  }
 }

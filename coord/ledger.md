@@ -22004,3 +22004,5 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:51 L: returned deliver/R1/Sheaf.Paper.FiniteFieldDerivedTensorSummand (reviewer RETURN: (reviewer C-a536b, head a536bb87b) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.FiniteFieldDer)
 - 09:53 L: merged deliver/NC/lem-pur-tower-limit-transpose-normalization (stage 2; reviewer PASS; parallel immutable checks)
 - 09:53 L: merged deliver/Q49/lem-weil-scalar-pullback-strict-cone-naturality (stage 2; reviewer PASS; parallel immutable checks)
+- 09:55 L: merged deliver/Q74/lem-trf-section-rees-noetherian-geometry (stage 2; reviewer FIX; parallel immutable checks)
+- 09:55 L: merged deliver/O4/lem-zl-bertini-finite-cover-irreducible-system (stage 2; reviewer PASS; parallel immutable checks)
