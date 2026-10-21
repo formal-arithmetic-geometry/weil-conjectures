@@ -11,9 +11,91 @@
   "def-pc-field-extension",
   "def-weil-pbc-relative-separable-closure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $G=\\operatorname{Aut}_k(E)$ and $N=|G|\\ge1$. The relative separable closure $E_s$ is a subfield containing $k$, and every element of $E_s$ is separable algebraic over $k$. For every finite list $a_1,\\ldots,a_r\\in E_s$, the field $k(a_1,\\ldots,a_r)$ is finite over $k$ by the cited algebraic-generators theorem; it lies in $E_s$ because $E_s$ is a subfield, hence it is separable over $k$ by the elementwise definition. In particular the collection of finite intermediate fields $k\\subseteq F\\subseteq E_s$ is nonempty (it contains $k$).",
+   "uses": [
+    "def-weil-pbc-relative-separable-closure",
+    "lem-weil-pbc-algebraic-generators-finite-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 030K, lemma-separable-first, and Tag 09GH, lemma-algebraic-finitely-generated; finite-subextension reduction"
+   }
+  },
+  {
+   "text": "Fix any finite intermediate field $k\\subseteq F\\subseteq E_s$ and put $d=[F:k]$. By the primitive-element theorem, $F=k(\\alpha)$ for some $\\alpha\\in F$. Let $P\\in k[T]$ be its monic minimal polynomial. It is separable since $\\alpha\\in E_s$. The power-basis theorem gives the basis $1,\\alpha,\\ldots,\\alpha^{d-1}$ of $F/k$. To check explicitly that $\\deg P=d$, express $\\alpha^d$ in this basis: the resulting monic polynomial of degree $d$ annihilates $\\alpha$, so minimality gives $\\deg P\\le d$. If $\\deg P<d$, the relation $P(\\alpha)=0$ contradicts the independence of this same basis. Thus $\\deg P=d$.",
+   "uses": [
+    "lem-weil-pbc-finite-separable-extension-primitive-element",
+    "lem-weil-pbc-simple-algebraic-extension-power-basis",
+    "def-weil-pbc-separable-algebraic-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 030N, lemma-primitive-element (moreover clause); Tag 09GN, lemma-degree-minimal-polynomial, with the explicit basis argument"
+   }
+  },
+  {
+   "text": "Choose an algebraic closure $\\Omega$ of $E$, and regard $k\\subseteq E\\subseteq\\Omega$. The distinct-roots theorem applied to the monic separable polynomial $P$ over $k$ gives exactly $d$ roots in $\\Omega$. Normality of $E/k$ says that $P$ already splits into linear factors over $E$. For a root $\\beta\\in\\Omega$, evaluating that factorization gives a product of the factors $\\beta-b$ with $b\\in E$ equal to zero. Since $\\Omega$ is a field, one factor vanishes, so $\\beta\\in E$. Thus $P$ has exactly $d$ distinct roots in $E$.",
+   "uses": [
+    "lem-pc-algebraic-closure-exists-unique",
+    "lem-pc-separable-polynomial-distinct-roots-alg-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09GT, theorem-existence-algebraic-closure; normality and separability as in Tags 09HQ and 09HJ, lemma-separable-degree"
+   }
+  },
+  {
+   "text": "For every root $\\beta\\in E$ of $P$, the conjugacy theorem for algebraic normal extensions gives $\\sigma\\in G$ with $\\sigma(\\alpha)=\\beta$. Conversely every $\\sigma\\in G$ sends $\\alpha$ to a root of $P$, since it fixes its coefficients. Consequently $G\\to\\{\\beta\\in E:P(\\beta)=0\\}$, $\\sigma\\mapsto\\sigma(\\alpha)$, is surjective. Its finite target therefore has at most $N$ elements, proving $[F:k]=d\\le N$ for every finite intermediate $F\\subseteq E_s$. The cited conjugacy theorem requires algebraicity and normality of $E/k$, both hypotheses of the item, and does not require $F/k$ to be normal or $E/k$ finite.",
+   "uses": [
+    "lem-weil-pbc-normal-extension-conjugate-by-automorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 0BME, lemma-lift-maps (2), specialized to roots of the primitive element; finite counting"
+   }
+  },
+  {
+   "text": "The set $D=\\{[F:k]:k\\subseteq F\\subseteq E_s,\\ [F:k]<\\infty\\}$ is a nonempty subset of $\\{1,\\ldots,N\\}$, so it has a maximum. Choose a corresponding field $F_0$ and a finite $k$-basis $b_1,\\ldots,b_m$ of $F_0$. For any $a\\in E_s$, step 1 shows that $F_1=k(b_1,\\ldots,b_m,a)\\subseteq E_s$ is finite over $k$. It contains $F_0$: every element of $F_0$ is a $k$-linear combination of the $b_i$. The maximum defining $F_0$ gives $[F_1:k]\\le m$. The same basis is linearly independent in $F_1$, so if any $x\\in F_1$ were outside its span, adjoining $x$ would give $m+1$ independent vectors: in a relation with nonzero coefficient of $x$, solve for $x$ to get a contradiction, and if that coefficient is zero use independence of the $b_i$. This contradicts $\\dim_k F_1\\le m$. Hence $F_1=F_0$, and in particular $a\\in F_0$.",
+   "uses": [
+    "lem-weil-pbc-algebraic-generators-finite-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Elementary bounded-degree maximum argument completing the finite-subextension reduction used in pione.tex Tag 0BST, lemma-inertia-invariants-etale, second reduction paragraph"
+   }
+  },
+  {
+   "text": "Step 5 applies to every $a\\in E_s$, so $E_s\\subseteq F_0$. Since $F_0\\subseteq E_s$ by construction, $E_s=F_0$. The latter is finite-dimensional over $k$, which proves the assertion. The argument never bounds the purely inseparable extension $E/E_s$ or assumes that $E/k$ is finite.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Conclusion of the bounded-degree maximum argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-relative-separable-closure",
+  "lem-weil-pbc-algebraic-generators-finite-extension",
+  "lem-weil-pbc-finite-separable-extension-primitive-element",
+  "lem-weil-pbc-simple-algebraic-extension-power-basis",
+  "def-weil-pbc-separable-algebraic-extension",
+  "lem-pc-algebraic-closure-exists-unique",
+  "lem-pc-separable-polynomial-distinct-roots-alg-closed",
+  "lem-weil-pbc-normal-extension-conjugate-by-automorphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Explicit finite-subextension and maximal-degree argument using Tags 030K, 09GH, 030N, 09GN, 09GT and 0BME (2); supplies the field-theoretic finiteness inference needed in pione.tex Tag 0BST."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -65,10 +147,46 @@
    "date": "2026-10-21",
    "verdict": "no match: Normal.algHomEquivAut and Field.Emb.cardinal_eq are candidate ingredients; neither alone asserts finite-dimensionality of the relative separable subfield under finite automorphisms. A restriction/embedding argument and a finite-rank bound remain. Nat-valued finSepDegree alone cannot certify finiteness.",
    "subdirectory": "FieldTheory/CardinalEmb.lean"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic normal extension with finite automorphism group has finite dimensional relative separable closure",
+   "results": "{\"t\": \"2026-10-21T13:38:26Z\", \"tool\": \"leanfinder\", \"query\": \"An algebraic normal extension with finite automorphism group has finite dimensional relative separable closure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"separableClosure.isGalois\", \"normalClosure.is_finiteDimensional\", \"IsSepClosure.isGalois\", \"IsGalois\", \"FiniteGaloisIntermediateField.finiteDimensional\", \"Ring.instFiniteDimensionalFractionRingSubtypeAlgebraicClosureMemIntermediateFieldNormalClosure\", \"IsSepClosure\", \"Ring.instIsSeparableFractionRingSubtypeAlgebraicClosureMemIntermediateFieldNormalClosure\"], \"digest\": \"70b5ead6ce9fbe1f\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: read the returned candidates; separableClosure.isGalois gives Galoisness only, AlgHom.card counts embeddings under finite-dimensional hypotheses, and the cardinal embedding formulas require further rank/cardinality arguments. None is a one-line specialization of this item."
+  },
+  {
+   "tool": "loogle",
+   "query": "Normal, separableClosure, Module.Finite",
+   "results": "{\"t\": \"2026-10-21T13:38:26Z\", \"tool\": \"loogle\", \"query\": \"Normal, separableClosure, Module.Finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: read the returned candidates; separableClosure.isGalois gives Galoisness only, AlgHom.card counts embeddings under finite-dimensional hypotheses, and the cardinal embedding formulas require further rank/cardinality arguments. None is a one-line specialization of this item."
+  },
+  {
+   "tool": "grep",
+   "query": "finiteDimensional.*(card|emb)|finite.*separableClosure|algHomEquivAut|cardinal_eq_of_isSeparable",
+   "results": "{\"t\": \"2026-10-21T13:38:26Z\", \"tool\": \"grep\", \"query\": \"finiteDimensional.*(card|emb)|finite.*separableClosure|algHomEquivAut|cardinal_eq_of_isSeparable\", \"sub\": \"FieldTheory\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/PurelyInseparable/Basic.lean\", \"Mathlib/FieldTheory/SeparableClosure.lean\", \"Mathlib/FieldTheory/SeparableClosure.lean\", \"Mathlib/FieldTheory/Finite/GaloisField.lean\", \"Mathlib/FieldTheory/CardinalEmb.lean\", \"Mathlib/FieldTheory/CardinalEmb.lean\", \"Mathlib/FieldTheory/Fixed.lean\", \"Mathlib/FieldTheory/Normal/Defs.lean\"], \"digest\": \"33489123af0b9ad4\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: read the returned candidates; separableClosure.isGalois gives Galoisness only, AlgHom.card counts embeddings under finite-dimensional hypotheses, and the cardinal embedding formulas require further rank/cardinality arguments. None is a one-line specialization of this item.",
+   "subdirectory": "FieldTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An algebraic normal field extension with finite automorphism group has finite separable subfield",
+   "results": "{\"t\": \"2026-10-21T13:39:06Z\", \"tool\": \"leansearch\", \"query\": \"An algebraic normal field extension with finite automorphism group has finite separable subfield\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsGaloisGroup.isGalois\", \"isGalois_iff\", \"separableClosure\", \"IsGalois.mk\", \"IsSepClosure.isGalois\", \"IsGalois.to_isSeparable\", \"IsGalois.of_fixed_field\", \"IsGalois\"], \"digest\": \"1b86742416277a65\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: read the returned candidates; separableClosure.isGalois gives Galoisness only, AlgHom.card counts embeddings under finite-dimensional hypotheses, and the cardinal embedding formulas require further rank/cardinality arguments. None is a one-line specialization of this item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finitely many algebra embeddings of a separable algebraic extension imply finite dimensionality",
+   "results": "{\"t\": \"2026-10-21T13:39:07Z\", \"tool\": \"leanfinder\", \"query\": \"Finitely many algebra embeddings of a separable algebraic extension imply finite dimensionality\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgHom.card\", \"AlgHom.card_of_splits\", \"AlgHom.natCard_of_splits\", \"AlgHom.card_of_powerBasis\", \"Field.Emb.cardinal_eq_of_isSeparable\", \"minpoly.AlgHom.fintype\", \"AlgHom.card_le\", \"finrank_algHom\"], \"digest\": \"f0230a264cb34d69\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: read the returned candidates; separableClosure.isGalois gives Galoisness only, AlgHom.card counts embeddings under finite-dimensional hypotheses, and the cardinal embedding formulas require further rank/cardinality arguments. None is a one-line specialization of this item."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-dl-a1-integral-normal-residue-etale-splitting",
@@ -90,5 +208,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-dl-a1-normal-finite-aut-separable-subfield",
+  "worker": "stage1",
+  "summary": "Gave the finite-subextension degree bound using a primitive element, distinct roots and automorphism conjugacy, then the explicit bounded-degree maximum argument. Reused existing Mathlib leaves; no new nodes and no statement correction. Checked the project source, Stacks sources, exact cited statements and small cases.",
+  "blueprint": "Serves rem-dl-a1-conventions, second paragraph: inertia-invariant boundary stalks and the lisse-extension/trivial-inertia equivalence, through finite-quotient etale localization (pione.tex Tag 0BST, second reduction paragraph). Steps 1--4 justify finite separable subextension degree bounds; steps 5--6 establish the finite separable subfield required by the localization. The ancestor has no separate proof paragraphs for this field-theoretic inference."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-N5-eb9a65089",
+  "group": "N5",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-eb9a65089 (reviewer sub-agent of L); spot-checked: Read the item in full. The split is statement-preserving with no new nodes: six steps, eight proof_deps, all of them Mathlib-leaf nodes whose statements I opened. Step 1: E_s is a subfield, and finitely many of its elements generate a finite extension (generators node). Step 2: primitive element, using finiteness and separability of F ⊆ E_s; power basis; deg P = d proved explicitly because the power-basis node does not state it. Step 3: an algebraic closure Ω of E and the distinct-roots node give d distinct roots, and normality puts them in E (evaluating the factorization). Step 4: the normal-conjugacy node (algebraic and normal, no finiteness needed) maps G onto the roots, so [F:k] ≤ |G|. Steps 5–6: an elementary maximal-degree argument gives E_s = F_0. Small cases: the perfect closure of F_p(t) shows E/k need not be finite; Q(∛2) shows normality is needed. Sources: pione.tex 0BST (lemma-inertia-invariants-etale, l.2665ff) has exactly the 'algebraic, normal, finite automorphism group' hypotheses; the cited fields.tex labels exist. No SGA citation. No duplicate in the DAG (rg -L over finite-Aut and separable-closure-finite candidates). No repair or re-split note, no slopmaster2 declaration. Other-unit nodes are all Mathlib leaves, so no tool_uses are needed. Blueprint from/same_as and split_report are present."
  }
 }
