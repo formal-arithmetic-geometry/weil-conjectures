@@ -22806,3 +22806,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:28 L: merged deliver/Q10/lem-fd-completion-inverse-scalar-coherence (stage 2; reviewer PASS; parallel immutable checks)
 - 14:29 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
 - 14:29 L: merged deliver/NU/lem-sfb-tame-stratum-kummer-descent (reviewer PASS; first push; new nodes: 5)
+- 14:29 L: merged deliver/NJ/lem-dl-a1-integral-finite-residue-model (stage 2; reviewer PASS; parallel immutable checks)
