@@ -20334,3 +20334,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:09 L: merged deliver/A8/Sheaf.Paper.ExceptionalCoefficientComparison (stage 3; reviewer PASS; first push; landing 20261021T060932-L-1671794 (proof); batch 20261021T060921; modules 1; new nodes 0)
 - 06:09 L: merged deliver/C2/Sheaf.Paper.IntegralTensorShriek (stage 3; reviewer PASS; after a return; landing 20261021T060937-L-1674723 (proof); batch 20261021T060921; modules 1; new nodes 0; change records: coord/changes/C2-integral-tensor-shriek-proof-pruning.md)
 - 06:09 L: merged deliver/C3/Sheaf.CategoryTheory.FilteredTwoColimitCharacterization (stage 3; reviewer PASS; first push; landing 20261021T060942-L-1677914 (proof); batch 20261021T060921; modules 1; new nodes 0)
+- 06:09 L: merged deliver/C3/Sheaf.CategoryTheory.RationalizationLocalizationHomCriterion (stage 3; reviewer PASS; first push; landing 20261021T060946-L-1679585 (proof); batch 20261021T060921; modules 1; new nodes 0)

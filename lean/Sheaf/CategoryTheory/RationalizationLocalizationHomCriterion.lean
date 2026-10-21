@@ -10,8 +10,6 @@ public import Mathlib.CategoryTheory.Linear.LinearFunctor
 public import Mathlib.CategoryTheory.Localization.Predicate
 
 import WeilConjectures.CategoryTheory.DerivedCategory.RationalizationMap
-import Mathlib.CategoryTheory.Equivalence
-import Mathlib.CategoryTheory.Localization.Linear
 
 /-!
 # A scalar-fraction criterion for a localization functor
@@ -74,6 +72,72 @@ theorem localization_hom_criterion
     (Localization.lift F hInv (Q M C)).Full ∧
       (Localization.lift F hInv (Q M C)).Faithful ∧
       (Localization.lift F hInv (Q M C)).EssSurj ∧ F.IsLocalization (W M C) := by
-  sorry
+  let Q := Rationalization.Q M C
+  let W := Rationalization.W M C
+  let G := Localization.lift F hInv Q
+  let e : Q ⋙ G ≅ F := Localization.fac F hInv Q
+  have : (Q ⋙ G).Additive := Functor.additive_of_iso e.symm
+  have : G.Additive := (Localization.functor_additive_iff Q W G).2 inferInstance
+  let : Localization.Lifting Q W F G := ⟨e⟩
+  have : G.Linear R :=
+    (Localization.functor_linear_iff Q W R F G).1 inferInstance
+  let H (X Y : C) (f : Q.obj X ⟶ Q.obj Y) :=
+    e.inv.app X ≫ G.map f ≫ e.hom.app Y
+  have hMap (X Y : C) (f : X ⟶ Y) : H X Y (Q.map f) = F.map f := by
+    simp only [H, ← Functor.comp_map, e.hom.naturality, Iso.inv_hom_id_app_assoc]
+  have hSmul (X Y : C) (m : R) (f : Q.obj X ⟶ Q.obj Y) :
+      H X Y (m • f) = m • H X Y f := by
+    simp only [H, G.map_smul, Linear.comp_smul, Linear.smul_comp]
+  have hBij (X Y : C) : Function.Bijective (H X Y) := by
+    constructor
+    · intro f g h
+      obtain ⟨m₁, hm₁, f₁, hf₁⟩ := Rationalization.exists_smul_eq_map f
+      obtain ⟨m₂, hm₂, f₂, hf₂⟩ := Rationalization.exists_smul_eq_map g
+      have e₁ : (m₁ * m₂) • f = Q.map (m₂ • f₁) := by
+        rw [mul_comm, mul_smul, hf₁, Q.map_smul]
+      have e₂ : (m₁ * m₂) • g = Q.map (m₁ • f₂) := by
+        rw [mul_smul, hf₂, Q.map_smul]
+      have he : F.map (m₂ • f₁) = F.map (m₁ • f₂) := by
+        rw [← hMap, ← hMap, ← e₁, ← e₂, hSmul, hSmul, h]
+      apply Rationalization.smul_left_injective (M.mul_mem hm₁ hm₂)
+      dsimp only
+      rw [e₁, e₂]
+      exact (Rationalization.map_eq_map_iff _ _).2 (hEq X Y _ _ he)
+    · intro f
+      obtain ⟨m, hm, g, hg⟩ := hSurj X Y f
+      have : IsIso (m • 𝟙 (Q.obj X)) := Rationalization.isIso_smul_id hm _
+      have : IsIso (m • 𝟙 (F.obj X)) := hUnits m hm _
+      let g' := inv (m • 𝟙 (Q.obj X)) ≫ Q.map g
+      have hg' : m • g' = Q.map g := by
+        calc
+          m • g' = (m • 𝟙 (Q.obj X)) ≫ g' := by simp
+          _ = Q.map g := by dsimp only [g']; rw [IsIso.hom_inv_id_assoc]
+      refine ⟨g', ?_⟩
+      apply (cancel_epi (m • 𝟙 (F.obj X))).1
+      simp only [Linear.smul_comp, Category.id_comp]
+      rw [← hSmul, hg', hMap, hg]
+  have : G.Full := ⟨fun {A B} f ↦ by
+    let eA := Q.objObjPreimageIso A
+    let eB := Q.objObjPreimageIso B
+    obtain ⟨g, hg⟩ := (hBij _ _).2
+      (e.inv.app _ ≫ G.map eA.hom ≫ f ≫ G.map eB.inv ≫ e.hom.app _)
+    have h : G.map g = G.map eA.hom ≫ f ≫ G.map eB.inv := by
+      rw [← cancel_mono (e.hom.app _)]
+      simpa [H] using hg
+    refine ⟨eA.inv ≫ g ≫ eB.hom, ?_⟩
+    rw [G.map_comp, G.map_comp, h]
+    simp only [Category.assoc, ← G.map_comp_assoc, eA.inv_hom_id,
+      ← G.map_comp, eB.inv_hom_id, G.map_id, Category.id_comp, Category.comp_id]⟩
+  have : G.Faithful := ⟨fun {A B} f g h ↦ by
+    let eA := Q.objObjPreimageIso A
+    let eB := Q.objObjPreimageIso B
+    have he : eA.hom ≫ f ≫ eB.inv = eA.hom ≫ g ≫ eB.inv :=
+      (hBij _ _).1 (by simp only [H, G.map_comp, Category.assoc, h])
+    simpa using he⟩
+  have : G.EssSurj := ⟨fun Y ↦
+    ⟨Q.obj (F.objPreimage Y), ⟨e.app _ ≪≫ F.objObjPreimageIso Y⟩⟩⟩
+  have : G.IsEquivalence := {}
+  exact ⟨inferInstance, inferInstance, inferInstance,
+    Functor.IsLocalization.of_equivalence_target Q W F G.asEquivalence e⟩
 
 end CategoryTheory.Rationalization
