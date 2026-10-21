@@ -1,0 +1,109 @@
+{
+ "id": "lem-pc-projective-pair-linear-mono",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-very-ample-ample",
+   "place": "proof, first paragraph: the complete linear system containing a closed-immersion subsystem",
+   "via": [
+    "lem-pc-complete-linear-system-closed"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Enlarging a projective system of sections preserves monomorphy",
+ "statement": "Let $S$ be an affine scheme [def-weil-affine-spectrum], $Z$ a scheme [def-pc-scheme], $g:Z\\to S$, and $L$ an $\\mathcal O_Z$-module [def-weil-sheaf-of-modules-category]. Let $m$ be a finite index type and $n$ a finite index type, and let $u_q,v_l\\in\\Gamma(Z,L)$. Suppose $\\psi:Z\\to\\mathbf P(m;S)$ and $\\chi:Z\\to\\mathbf P(n;S)$ [def-nagata-projective-space-base-change] are over $S$, and there are isomorphisms $\\psi^*\\mathcal O(1)\\cong L$ and $\\chi^*\\mathcal O(1)\\cong L$ [def-pc-module-pullback, def-pc-projective-space-twist] carrying the pulled-back coordinate sections respectively to $u_q$ and $v_l$. Suppose $c_{lq}\\in\\Gamma(S,\\mathcal O_S)$ satisfy $v_l=\\sum_q g^\\sharp(c_{lq})u_q$. If $\\chi$ is a monomorphism (a left-cancellable morphism in the category of schemes), then $\\psi$ is a monomorphism.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Lemma 01NE, linear-projection uniqueness on standard charts; existing proof in WeilConjectures/AlgebraicGeometry/ProjectiveSpace/LinearCombination.lean, mono_of_eq_sum_smul"
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-nagata-projective-space-base-change",
+  "def-pc-module-pullback",
+  "def-pc-projective-space-twist"
+ ],
+ "proof": [
+  {
+   "text": "This is the already proved source theorem AlgebraicGeometry.ProjectiveSpace.mono_of_eq_sum_smul, specialized to finite n. The source theorem permits arbitrary n and arbitrary modules L; all other hypotheses and the conclusion agree verbatim. Its existing chart proof uses the relations A_ql = sum_r c_lr T_r/T_q: their nonvanishing preimages cover Z, and on them chi pulls every ratio T_r/T_l back to A_qr/A_ql. Thus equality after psi implies equality after chi, and monomorphy of chi cancels. No new Lean obligation is introduced by this attachment.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Lemma 01NE, linear-projection uniqueness on standard charts; existing proof in WeilConjectures/AlgebraicGeometry/ProjectiveSpace/LinearCombination.lean, mono_of_eq_sum_smul"
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Lemma 01NE, linear-projection uniqueness on standard charts; existing proof in WeilConjectures/AlgebraicGeometry/ProjectiveSpace/LinearCombination.lean, mono_of_eq_sum_smul"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Morphisms to projective space from linear combinations of sections preserve monomorphisms",
+   "results": "Service unavailable.",
+   "date": "2026-10-21",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mono_of_eq_sum_smul\"",
+   "results": "No Mathlib hit; existing source theorem found by local source search.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mono_of_eq_sum_smul|iff_isProper_and_mono",
+   "results": "Only the proper-monomorphism criterion is in Mathlib. The exact projective pair theorem is in the source library.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CompleteLinearSystemClosed",
+  "date": "2026-10-21",
+  "group": "F9"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LinearCombination",
+  "declaration": "AlgebraicGeometry.ProjectiveSpace.mono_of_eq_sum_smul",
+  "statement": "theorem mono_of_eq_sum_smul [IsAffine S] (hχ : χ ≫ ℙ(n; S) ↘ S = g) [Mono χ] : Mono ψ",
+  "branch": "sheaf-dag",
+  "by": "F9",
+  "date": "2026-10-21",
+  "note": "The existing source theorem is more general: its target coordinate type n need not be finite. It specializes directly to the finite-coordinate statement here."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F9",
+  "result": "pass",
+  "landing": "20261021T134432-L-1093020",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F9",
+  "result": "pass",
+  "landing": "20261021T134432-L-1093020",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

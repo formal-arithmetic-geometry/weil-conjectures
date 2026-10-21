@@ -22638,3 +22638,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:43 L: merged deliver/E9/Sheaf.Paper.SfIntegralDirectImageConstructible (stage 3; reviewer PASS; first push; landing 20261021T134337-L-877594 (interface); batch 20261021T134254; modules 2; new nodes 1)
 - 13:43 L: merged deliver/F2/Sheaf.Paper.ContinuousLisseStratifiedLattices (stage 3; reviewer PASS; first push; landing 20261021T134341-L-889495 (proof); batch 20261021T134254; modules 1; new nodes 0; change records: coord/changes/F2-continuous-lisse-stratified-lattices-restoration.md)
 - 13:44 L: merged deliver/Q42/lem-sfb-sheaf-pushforward-generator-comparison (reviewer PASS; after a return; new nodes: 2)
+- 13:44 L: merged deliver/F9/Sheaf.AlgebraicGeometry.CompleteLinearSystemClosed (stage 3; reviewer PASS; first push; landing 20261021T134432-L-1093020 (proof); batch 20261021T134254; modules 1; new nodes 2)

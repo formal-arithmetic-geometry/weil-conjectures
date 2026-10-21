@@ -28,75 +28,78 @@
  ],
  "proof": [
   {
-   "text": "If $X=\\varnothing$, the unique morphism to the empty projective space of its zero space of sections is a closed immersion, and the pullback assertion is vacuous. Otherwise, properness over the field implies $X$ is of finite type over the Noetherian $\\operatorname{Spec}k$, hence locally Noetherian [lem-weil-pbc-finite-type-over-noetherian]. The invertible $\\mathcal M$ is quasi-coherent and locally free of rank one [def-sc-invertible-module], so it is of finite type; it is coherent by [pqf-lem-coherent-ft-locnoeth]. Thus $W:=\\Gamma(X,\\mathcal M)$ is finite-dimensional over $k$ by [lem-pc-euler-characteristic-well-defined] with $i=0$.",
+   "text": "Invertibility supplies quasi-coherence and finite local freeness, hence finite presentation. Apply finiteDimensional_H_of_isProper in degree zero and transport along H.zeroLinearEquiv, with the field action given by globalSectionsRingHom. This works without a nonempty-scheme assumption.",
    "uses": [
-    "lem-weil-pbc-finite-type-over-noetherian",
     "def-sc-invertible-module",
-    "pqf-lem-coherent-ft-locnoeth",
     "lem-pc-euler-characteristic-well-defined"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 01XZ (coherent iff quasi-coherent of finite type on a locally Noetherian scheme), and Lemma 02O6 (finite coherent cohomology over a Noetherian affine base)"
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "01NE, basis extension and projective-coordinate uniqueness; final closedness via etale.tex, 04XV"
    }
   },
   {
-   "text": "Choose a basis $s_0,\\ldots,s_r$ of $V$ and extend it to a basis $s_0,\\ldots,s_N$ of $W$; both are finite by step 1. Since $j$ is the morphism associated with $V$, its defining sections generate $\\mathcal M$ at every point by [lem-weil-pbc-projective-space-functor-of-points]. Consequently the extended family also generates $\\mathcal M$. The same node gives the morphism $\\phi:X\\to\\mathbf P(W^\\vee)_k$ of the complete system, with $\\phi^*\\mathcal O(1)\\cong\\mathcal M$ carrying the coordinate sections to $s_i$.",
+   "text": "Extend the independent family of global sections to a basis using Module.Basis.extend; finite-dimensionality makes its index type J finite. Convert each basis vector to a global section via unitHomEquiv and homOfGlobalSection. The old section values are included among the new ones. On each stalk their spans are therefore included, so generating_sections_iff_stalk_span transfers the original generation to the extended basis.",
    "uses": [
-    "lem-weil-pbc-projective-space-functor-of-points"
+    "lem-weil-pbc-generating-sections-stalk-span"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/constructions.tex",
-    "place": "Constructions, Lemma 01NE (lemma-projective-space), generating sections and their associated morphism"
+    "place": "01NE, basis extension and projective-coordinate uniqueness; final closedness via etale.tex, 04XV"
    }
   },
   {
-   "text": "Let $U\\subseteq\\mathbf P(W^\\vee)_k$ be the union of the standard opens $D_+(T_0),\\ldots,D_+(T_r)$ corresponding to the basis of $V$. By [lem-weil-pbc-projective-space-standard-charts] these are exactly the nonvanishing loci of those coordinate sections. The sections $T_0,\\ldots,T_r$ therefore generate $\\mathcal O(1)|_U$, and [lem-weil-pbc-projective-space-functor-of-points] defines a $k$-morphism $p:U\\to\\mathbf P(V^\\vee)_k$. Since $s_0,\\ldots,s_r$ generate $\\mathcal M$, $\\phi(X)\\subseteq U$. Pulling the $T_i$ back through $p\\circ\\phi$ gives $s_i$, so uniqueness in the functor-of-points statement gives $p\\circ\\phi=j$ (with $\\phi$ regarded as a map to $U$).",
+   "text": "The unique integral morphism associated to generating sections pulls back the universal pair. Use its inverse images of standard charts as a cover with free generators. The native chart construction for any base morphism has the same integral composite by uniqueness of the universal pair and its chart formulas. The homOfGeneratingSections projection identities identify the two morphisms. The native twistRestrictHom and the adjoint-uniqueness comparison of pullbacks give the required section-preserving pullback isomorphism.",
    "uses": [
-    "lem-weil-pbc-projective-space-standard-charts",
-    "lem-weil-pbc-projective-space-functor-of-points"
+    "def-weil-pbc-morphism-to-projective-space-by-sections"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/constructions.tex",
-    "place": "Constructions, Lemma 01NE (lemma-projective-space) and Lemma 01NG (lemma-standard-covering-projective-space); projection defined only on the union of the indicated standard opens"
+    "place": "01NE, basis extension and projective-coordinate uniqueness; final closedness via etale.tex, 04XV"
    }
   },
   {
-   "text": "The projective space $\\mathbf P(W^\\vee)_k$ is separated over $k$ by [lem-weil-pbc-projective-space-proj-separated]. Hence its open subscheme $U$ is separated over $k$: its diagonal is the restriction of the closed diagonal of projective space to $U\\times_kU$. Since $U\\to\\operatorname{Spec}k$ is separated and factors through $p$, [lem-weil-pbc-separated-cancellation] (b) makes $p$ separated. Now $p\\circ\\phi=j$ is a closed immersion, so [lem-weil-pbc-closed-immersion-cancellation] makes $X\\to U$ a closed immersion. Composing with the open immersion $U\\hookrightarrow\\mathbf P(W^\\vee)_k$ makes $\\phi$ an immersion. Also $X$ is proper over $k$ and $\\mathbf P(W^\\vee)_k$ is separated over $k$, so [lem-weil-pbc-proper-to-separated] makes $\\phi$ proper. By [lem-weil-pbc-proper-immersion-closed], $\\phi$ is a closed immersion. Its pullback of $\\mathcal O(1)$ is $\\mathcal M$ by step 2.",
+   "text": "The old coordinate indexed by i is exactly the new coordinate indexed by f(i), so it is the linear combination with coefficient 1 at f(i) and 0 elsewhere, in global functions of Spec k. Apply mono_of_eq_sum_smul to the two section-preserving pairs. The original closed immersion is a monomorphism; hence the complete-system morphism is a monomorphism.",
    "uses": [
-    "lem-weil-pbc-projective-space-proj-separated",
-    "lem-weil-pbc-separated-cancellation",
-    "lem-weil-pbc-closed-immersion-cancellation",
+    "lem-pc-projective-pair-linear-mono"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "01NE, basis extension and projective-coordinate uniqueness; final closedness via etale.tex, 04XV"
+   }
+  },
+  {
+   "text": "The relative projective space projection is proper, in particular separated. Its composite with the complete-system morphism equals the given proper structure morphism, so IsProper.of_comp makes the complete-system morphism proper. The proper-monomorphism characterization makes it a closed immersion. Retain the pullback isomorphism already obtained.",
+   "uses": [
+    "lemma-nagata-projective-space-base-change-proper",
     "lem-weil-pbc-proper-to-separated",
-    "lem-weil-pbc-proper-immersion-closed"
+    "lem-pc-proper-monomorphism-closed"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, Lemma 07RK (lemma-immersion-permanence), part (3); Lemma 01W6 (lemma-image-proper-scheme-closed), part (2); Schemes, Lemma 01KV (lemma-compose-after-separated); Schemes, Lemma 01IQ for a proper immersion"
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "01NE, basis extension and projective-coordinate uniqueness; final closedness via etale.tex, 04XV"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-finite-type-over-noetherian",
   "def-sc-invertible-module",
-  "pqf-lem-coherent-ft-locnoeth",
   "lem-pc-euler-characteristic-well-defined",
-  "lem-weil-pbc-projective-space-functor-of-points",
-  "lem-weil-pbc-projective-space-standard-charts",
-  "lem-weil-pbc-projective-space-proj-separated",
-  "lem-weil-pbc-separated-cancellation",
-  "lem-weil-pbc-closed-immersion-cancellation",
+  "lem-weil-pbc-generating-sections-stalk-span",
+  "def-weil-pbc-morphism-to-projective-space-by-sections",
+  "lem-pc-projective-pair-linear-mono",
+  "lemma-nagata-projective-space-base-change-proper",
   "lem-weil-pbc-proper-to-separated",
-  "lem-weil-pbc-proper-immersion-closed"
+  "lem-pc-proper-monomorphism-closed"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/constructions.tex",
-  "place": "Projection argument using Constructions 01NE/01NG, Schemes 01KV, and Morphisms 07RK/01W6"
+  "place": "01NE, basis extension and projective-coordinate uniqueness; final closedness via etale.tex, 04XV"
  },
  "mathlib_searches": [
   {
@@ -172,14 +175,7 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "pqf-lem-coherent-ft-locnoeth",
-  "lem-weil-pbc-projective-space-functor-of-points",
-  "lem-weil-pbc-projective-space-standard-charts",
-  "lem-weil-pbc-separated-cancellation",
-  "lem-weil-pbc-closed-immersion-cancellation",
-  "lem-weil-pbc-proper-to-separated",
-  "lem-weil-pbc-proper-immersion-closed"
+  "lem-weil-pbc-proper-to-separated"
  ],
  "reviewed": {
   "date": "2026-10-10",
@@ -209,5 +205,15 @@
   "result": "fix",
   "note": "field k, X over Spec k proper, M invertible, k-action on Γ(M,⊤) by compHom along globalSectionsRingHom; V as linearly independent generating family s with j = homOfGeneratingSections (C1) closed immersion and j^*O(1) ≅ M; conclusion: a k-basis t of Γ(M,⊤) generating M whose homOfGeneratingSections is a closed immersion with φ^*O(1) ≅ M; free j + file-local pb notation replaced by the landed homOfGeneratingSections"
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F9",
+  "result": "pass",
+  "landing": "20261021T134432-L-1093020",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }
