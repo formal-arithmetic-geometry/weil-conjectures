@@ -205,5 +205,36 @@
   "group": "NP",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-60e58d326 (reviewer sub-agent of L); spot-checked: 0 new nodes; the item statement is unchanged; there is no re-split repair note; no SGA is cited; the item is not on the dropped list. I re-derived steps 2–3 by hand and they are correct. In step 2, removing i from the first factor of (B∪i,C) gives sign (-1)^{N+q+p}, and removing it from the second factor of (B,C∪i) gives (-1)^{N+t+|B|+q}=(-1)^{N+p+q}. In step 3 the middle faces [v,B]⊗[v+u_B+u_i,C] cancel, and the survivors equal the (B,C) term of Δ applied to the summand (-1)^{p+q}(...) of ∂[v,I]. The (i,B,C) parametrisation is a bijection with the terms of ∂Δ. Both counits are correct: only A=∅ survives in (ε⊗1)Δ, and only C=∅ (vertex v+u_I) in (1⊗ε)Δ. I checked that ε⊗1 is a chain map by cases a=0, a=1 (using ε∂_1=0) and a≥2. The double augmentation and the r=0 case are correct, and so is equivariance. Each cited statement says what its step takes from it. The contraction explicitly gives ∂²=0 and ε∂_1=0, and only these are used. The tensor, free-module and chain-map definition nodes give the bilinear extension and the d f=f d condition. An independent exact computation over Z checked ∂Δ=Δ∂ and both counits for all I ⊆ {1..r}, r=0..5, at two base vertices (126 cases, all pass). The only citer, lem-sfb-lattice-koszul-triangulated-cup-comparison, uses the literal diagonal term ε(A,C)[v,A]⊗[v+u_A,C] and (ε⊗ε)Δ=ε, both stated with the same sign convention. The DAG cubical grep found no duplicate: the lem-coef cubical nodes are homotopy-theoretic. Route: the only statement cited is the contraction, in the same unit; the rest are Mathlib-leaf definitions, so no tool_uses are needed. The proof is honestly marked agent-written with the reference WANTED; the blueprint direct-images paragraph (3) is the route location only. Minor: the report lists local artefact files that are not in the commit; this is not a fault."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.IntegralCubicalChainDiagonal",
+  "declaration": "IntegralLatticeCubical.diagonal",
+  "declarations": [
+   "IntegralLatticeCubical.chainComplex_square",
+   "IntegralLatticeCubical.chainComplex",
+   "IntegralLatticeCubical.augmentationMap_condition",
+   "IntegralLatticeCubical.augmentationMap",
+   "IntegralLatticeCubical.translationMap_condition",
+   "IntegralLatticeCubical.translationMap",
+   "IntegralLatticeCubical.directionSum",
+   "IntegralLatticeCubical.partitionSign",
+   "IntegralLatticeCubical.tensorCell",
+   "IntegralLatticeCubical.diagonalComponent",
+   "IntegralLatticeCubical.diagonal"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/IntegralCubicalChainDiagonal.lean",
+  "statement": "theorem diagonal (r : ℕ) : ∃ Δ : chainComplex r ⟶ HomologicalComplex.tensorObj (chainComplex r) (chainComplex r), (∀ n : ℕ, (Δ.f n).hom = diagonalComponent r n) ∧ (∀ w : Fin r → ℤ, translationMap r w ≫ Δ = Δ ≫ HomologicalComplex.tensorHom (translationMap r w) (translationMap r w)) ∧ (Δ ≫ HomologicalComplex.tensorHom (augmentationMap r) (𝟙 (chainComplex r))) ≫ (HomologicalComplex.leftUnitor (chainComplex r)).hom = 𝟙 (chainComplex r) ∧ (Δ ≫ HomologicalComplex.tensorHom (𝟙 (chainComplex r)) (augmentationMap r)) ≫ (HomologicalComplex.rightUnitor (chainComplex r)).hom = 𝟙 (chainComplex r) ∧ (Δ ≫ HomologicalComplex.tensorHom (augmentationMap r) (augmentationMap r)) ≫ (HomologicalComplex.leftUnitor (HomologicalComplex.tensorUnit (ModuleCat.{0} ℤ) (ComplexShape.down ℕ))).hom = augmentationMap r ∧ (r = 0 → (Δ.f 0) (cell r 0 0 ∅) = tensorCell r 0 0 0 ∅ ∅)",
+  "branch": "sheaf-dag",
+  "by": "NZ",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-01f56953e",
+  "group": "NZ",
+  "result": "pass",
+  "note": "Item node differs from live only in lean; dep lem-sfb-integral-lattice-cubical-contraction record identical to live (prior H13 repaired). Statement verbatim; all 11 declarations present. Chain complex bundles the dep's Chains/boundary/augmentation/translate unchanged; Mathlib TensorSigns(down ℕ) gives d(x⊗y)=dx⊗y+(-1)^a x⊗dy as in the node; partitionSign counts c<a in A×C; diagonalComponent = linearCombination over powerset with [v,A]⊗[v+u_A,I\\A]; Δ components fixed (no arbitrary map); translation equivariance, both unitor counits and double augmentation as chain-map equalities; r=0 clause. Independent exact ℤ check of ∂Δ=Δ∂ and counits for r≤4 passes. No duplicate bundling in live lean; no hollow defs; only sorry; docstrings with source/blueprint and the 6 proof steps. No compile (no file changed). Advisory: the r=0 clause is redundant but node-mandated."
  }
 }

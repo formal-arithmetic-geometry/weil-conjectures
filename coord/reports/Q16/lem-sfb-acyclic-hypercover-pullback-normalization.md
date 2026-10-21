@@ -1,59 +1,210 @@
-# Stage-1 report: lem-sfb-acyclic-hypercover-pullback-normalization
+## Worker report
 
-Group Q16, 2026-10-22. Direct delivery; no other worker was started.
+Item: lem-sfb-acyclic-hypercover-pullback-normalization. Group Q16, stage 2.
+Module: `Sheaf.Paper.AcyclicHypercoverPullbackNormalization`.
+Main declaration: `AlgebraicGeometry.Scheme.AcyclicHypercover.pullback_normalization`.
+All declarations in the module, including the other clauses of the statement, are
+listed in `lean.declarations`. Every theorem has `sorry`; all constructions have
+real data. The original mathematical statement, proof, and proof dependencies are
+unchanged. The already-landed inverse-image and operations definition nodes remain in
+`stmt_deps`. Three definition nodes now own matching arrows, composite coefficients
+and the ordinary comparison. The two theorem-only dependencies flagged by L are
+removed from `stmt_deps`; neither theorem is used to state the consumer.
 
-## Files written
+Source read: `literature/stacks-project/proetale.tex`, Tag 09A2,
+`lemma-compute-cohomology`, its injective-resolution proof. The functoriality and
+normalization are the eight steps of the item's recorded proof, using the actual
+adjunction and derived-composition constructions; the module docstrings give those
+steps and their dependencies. This is not merely an unnormalized cohomology iso.
 
-- `dag/nodes/sec-six-functors-basics/lem-sfb-acyclic-hypercover-pullback-normalization.json`: statement node, now split into eight steps; statement unchanged; not in Mathlib after two semantic phrasings, Loogle, grep and LeanSearch.
-- `citations.json`: one verbatim statement quotation for each step/node pair (21 pairs).
-- `report.md`: this report. No new DAG nodes and no Mathlib leaves.
+Hypotheses and clauses, with the namespace prefix
+`AlgebraicGeometry.Scheme.AcyclicHypercover` understood below:
 
-The search command maintains `searches.jsonl`. `write_split.py` is sandbox-only preparation code, not a delivery node. All files were written only in the assigned sandbox.
+| Node text | Lean rendering |
+| --- | --- |
+| Schemes and a morphism h:X'→X | Explicit section binders `{X Y : Scheme.{u}} (h : Y ⟶ X)`. |
+| Small pro-etale sites, compatible sizes | The published `X.ProEt`, `Y.ProEt`, `ProEt.topology`; object universe u+1 and morphism universe u are retained. Coefficients are `CommRingCat.{u+1}` and modules have that compatible value universe. No equality of site object and morphism universes is imposed. The published AsSmall model only transports module constructions. |
+| Ring sheaves R,R' and the specified inverse-image identification | `R : Sheaf (ProEt.topology X) CommRingCat.{u+1}`, similarly `S`, and `c : (proEtaleSheafInverseImage h CommRingCat.{u+1}).obj R ≅ S`. These are arbitrary ring sheaves, not constant or finite coefficients. |
+| Resulting exact inverse image, right adjoint | The actual `proEtaleRingModulePullback h R S c`, `proEtaleRingModuleDirectImage`, and `proEtaleRingModuleAdjunction`; published exactness/additivity instances are used. This is the specialized actual ringed-topos action of h, not an extra independently chosen ringed-topos morphism. |
+| Augmented simplicial objects over the bases | `U : SimplicialObject (Over (⊤_ X.ProEt))`, similarly `V` over Y. The slice structure supplies all augmentation maps and their compatibility. |
+| Every finite matching arrow is a cover, including degree zero | `hU`, `hV` quantify over n, target T, and arrow μ; `SimplicialObject.IsProperFaceMatchingArrow ...` implies membership of `Sieve.generate (Presieve.singleton μ.left)` in the topology. The existing predicate is terminal in degree zero, binary-product matching in degree one, and the finite proper-face boundary limit thereafter. Finite limits exist on the site, so this universal presentation does not drop matching-object existence. Quantifying over all choices is equivalent to the canonical choice by invariance under isomorphisms. |
+| Weak contractibility of every term | `wU`, `wV` use exactly `GrothendieckTopology.IsWeaklyContractible.{u+1}` for every natural degree; its published definition is surjectivity of section maps for locally surjective morphisms of set sheaves, equivalently epis. No affine assumption is used. |
+| g_n over h, compatible with faces, degeneracies and augmentation | `g : V ⋙ Over.forget _ ⟶ U ⋙ Over.forget _ ⋙ proEtaleBaseChange h`. Naturality covers every simplex operator. A map over h is equivalently a map to this fibre product; it need not be the fibre-product projection or an isomorphism. Compatibility with the terminal augmentations is automatic. |
+| M an R-module sheaf | `M : proEtaleRingModules X R`, the published abbreviation of the recorded ringed-site module category. |
+| Nonnegative alternating section complexes, as abelian groups | `rows` is the recorded `ProEt.hypercoverSectionRows` followed by coefficient forgetting. Its Nat-to-Int extension is zero in negative degrees; the original alternating-coface functor supplies the signed face sum. |
+| Canonical section map c_g | `sectionRestriction` is the actual normalized ordinary module unit on sections followed by sheaf restriction along g. `restrictionComponent` uses the canonical extension isomorphisms and is zero in negative degrees. `restrictionComponent_comm` states the differential equation, and `restriction` has these specified components. It is not an arbitrary chain map. |
+| Chosen bounded-below injective resolutions | `descent` and `IsNormalized` quantify over every bound `N : ℤ`, complex I, `[I.IsStrictlyGE N]`, `[∀ n, Injective (I.X n)]`, and map `i : M[0] ⟶ I` with `[QuasiIso i]`. Apply on X,M and on Y,h*M separately to obtain the two independently chosen resolutions. |
+| Signed totals T_U,T_V | `total` is exactly recorded `ProEt.hypercoverTotal`, then coefficient forgetting. Thus its differential is δ+(-1)^p d, not a different total convention. |
+| C_U(M)=T_U(M[0]), C_V(h*M)=T_V(h*M[0]) | `rowResolution_single_isIso` and `rowSingleTotalIso` expose the canonical isomorphism whose forward arrow is the actual (n,0) total injection. `rowResolution_eq_total_map` explicitly identifies the resolution map with T(i) after that iso. |
+| Specified restriction augmentations α_I,α_J | `augmentation` is the recorded `ProEt.hypercoverAugmentation` whiskered by scalar forgetting. No existential replacement augmentation is introduced. |
+| Four chain maps are quasi-isomorphisms | `descent` first conjunct asserts both `QuasiIso (rowResolution ... i)` and `QuasiIso ((augmentation ...).app I)` for every chosen resolution. Instantiate twice, on U and V, to obtain precisely all four arrows. |
+| Comparisons in D(Ab) from these zigzags | `derivedSectionsZero` is single-degree-zero, localization Q, and the published right derived functor of evaluation to `AddCommGrpCat`. The other side is `rows ⋙ DerivedCategory.Q`. `resolutionSectionsIso` is the published canonical computation on a bounded-below K-injective resolution. |
+| Augmentation normalization and resolution independence | `IsNormalized` states, for every resolution, `A.hom.app M ≫ Q.map(rowResolution i) = resolutionSectionsIso.hom ≫ Q.map(augmentation.app I)`. This is the exact zigzag equation. `descent` gives a unique natural iso satisfying it, and `comparison` selects this uniquely specified iso. No data is chosen from a bare existence theorem. |
+| Identification with the actual derived adjunction unit | `derivedSectionPullback` first applies derived Γ to `(proEtaleRingDerivedAdjunction h R S c).unit`, then uses `Functor.rightDerivedFunctorCompIso'` with the actual terminal-object `directSectionsIso`, then the canonical exact-pullback/single-complex identifications. `pullback_normalization` equates its square with `Q.map(restriction ... g M)` under `comparison` on each site. |
+| Natural in M | `comparison` is a natural iso, and `restriction_naturality` gives the strict chain-map coefficient square for every coefficient morphism. The canonical unit and composition comparison in `derivedSectionPullback` are natural. |
+| Refinements on both sites | `refinement` is actual restriction of sections. `comparison_refinement` states the normalized comparison equation for any site and any refinement, so applies on either side. `restriction_refinement` gives the strict square for simultaneous compatible refinements r,s. |
+| Composition of diagrams | `proEtaleRingCompositeCoefficients` is the already published canonical composite coefficient identification. The definition module `ProEtaleOrdinaryPullbackComparison` supplies `existsUnique_composition`, fixing the ordinary comparison by its conjugate direct-image section equation (fibre-product pasting), and `compositionIso`, selecting that uniquely fixed map. `restriction_comp` states equality of composite section maps under it. `derivedSectionPullback_comp` states the corresponding equation for the actual derived-unit maps with exactly the same coefficient identification. These together with `pullback_normalization` give composition of the normalized squares. |
+| No cartesian requirement; no assertion c_g is a quasi-isomorphism | The only g datum is the above natural transformation. Neither the main theorem nor any helper assumes cartesian squares, or asserts `QuasiIso (restriction ...)`. Only the four coefficient-resolution and augmentation maps are inverted. |
 
-## Attachments
+The generic recorded `RingedToposMorphism` is publicly imported. Its abstract data
+need not be postulated a second time: the published pro-etale operations construct
+the action, adjunction and derived operations for these actual sites and c. In
+particular the smaller-Hom universe of ProEt is not collapsed to apply a specialized
+abstract-site interface. The actual derived composition API already permits the
+independent site universes.
 
-None. Searched the current `lean/WeilConjectures/` by the exact blueprint tag, by acyclic-hypercover terminology, and by hypercover/derived-comparison terminology. No declaration states all the item's clauses. The project has one-hypercover constructions and specialized finite-coefficient derived adjunctions, which do not give this full augmented simplicial comparison for arbitrary ring sheaves. No sorry declaration was treated as a finished proof.
+Dependency declarations used (the full recorded signatures and docstrings were
+read, including the Mathlib matches):
 
-## WANTED
+- `Mathlib.AlgebraicGeometry.Scheme`: `AlgebraicGeometry.Scheme` and its Hom.
+- `Mathlib.AlgebraicGeometry.Sites.Proetale`: `Scheme.ProEt`, `ProEt.topology`.
+- `Sheaf.CategoryTheory.RingedToposMorphism`: `CategoryTheory.RingedToposMorphism`.
+- `Mathlib.AlgebraicTopology.SimplicialObject.Basic`: `SimplicialObject`, faces and degeneracies.
+- `WeilConjectures.CategoryTheory.Sites.WeaklyContractible`: `GrothendieckTopology.IsWeaklyContractible`.
+- `Sheaf.CategoryTheory.RingedSiteModules`: `CategoryTheory.ringedSiteModules` (used through the published `proEtaleRingModules`).
+- `Mathlib.Algebra.Homology.DerivedCategory.Basic`: `DerivedCategory`, `HasDerivedCategory`.
+- `Sheaf.AlgebraicGeometry.ProEtaleHypercoverTotal`: `Scheme.ProEt.hypercoverSections`, `hypercoverSectionRows`, `hypercoverTotal`.
+- `Sheaf.AlgebraicGeometry.ProEtaleHypercoverAugmentation`: `Scheme.ProEt.hypercoverAugmentation`.
+- `Sheaf.AlgebraicGeometry.ProEtaleInverseImage`: `Scheme.proEtaleBaseChange`, `proEtaleSheafInverseImage`.
+- `Sheaf.AlgebraicGeometry.ProEtaleOperationsCanonicalAdjunction`: the actual arbitrary-ring-sheaf module/derived adjunctions, derived pullback, and factorization; its public dependencies supply the module pullback and direct image. The current `def-weil-pbc-proetale-operations` module `ProEtaleConstantRingOperations` publicly reexports this general interface; no constant-ring specialization is used here.
+- `Sheaf.CategoryTheory.SiteHypercoverDisjointUnion`: `SimplicialObject.IsProperFaceMatchingArrow`, owned by the new definition node `def-sfb-proper-face-matching-arrow`, using the unchanged existing finite boundary diagram.
+- `Sheaf.AlgebraicGeometry.ProEtaleDerivedPullbackComposition`: `proEtaleRingCompositeCoefficients`, now owned directly by `def-sfb-proetale-composite-coefficients` with `existing: true`. The derived-composition theorem node is no longer a statement dependency.
+- `Sheaf.AlgebraicGeometry.ProEtaleOrdinaryPullbackComparison`: `AlgebraicGeometry.Scheme.AcyclicHypercover.compositionIso` and its unique section-normalized mate characterization, owned by `def-sfb-proetale-ordinary-pullback-comparison`.
+- `WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp`: `Adjunction.preservesKInjectiveComplexes` and `Functor.rightDerivedFunctorCompIso'`.
+- `WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective`: `rightDerivedFunctor`, `rightDerivedFunctorObjQIso`.
+- `Mathlib.Algebra.Homology.HomotopyCategory.KInjective`: `CochainComplex.isKInjective_of_injective`.
+- `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory`: the imported `HasDerivedCategory.ofIsGrothendieckAbelian` instance supplies the derived category of abelian groups. `Mathlib.Algebra.Category.Grp.AB` supplies `IsGrothendieckAbelian` for abelian groups. The packet no longer declares its own competing standard instance.
 
-None. The required sources are present locally; no literature was downloaded.
+Every recorded proof dependency's module is imported (ordinary imports unless
+already publicly needed in the statement). The proof plan remains the node's eight
+steps, as given in the theorem docstrings. The additional statement dependencies are definition nodes owning construction
+interfaces, not hypotheses or theorem dependencies.
 
-## Corrections and scope
+Edge cases checked by reading the actual formulas:
 
-The imported node had no proof. Its statement is retained in full: arbitrary schemes and commutative ring sheaves, exact inverse image through the specified ring isomorphism, possibly nonaffine weakly contractible terms, arbitrary maps of augmented simplicial objects over h, arbitrary bounded-below injective resolutions, comparisons in the derived category of abelian groups, and coefficient/refinement/composition compatibility. No extra cartesian, qcqs, finite-coefficient, nonempty or affine hypothesis has been introduced.
+- Degree-zero matching object is the base, degree-one matching is the binary fibre product.
+- Negative degrees of section rows are zero, and the -1 to 0 differential is zero.
+- Any integer lower bound N is accepted, including resolutions with negative terms.
+- M=0 and the empty scheme are not excluded; no nonemptiness or nonzero-ring assumption.
+- Nonaffine weakly contractible terms are allowed; exactness uses the set-sheaf definition.
+- No quasi-compactness, separatedness, finite/torsion/constant coefficient or bounded-M condition.
+- The identity and constant hypercover cases use actual units/restrictions, not arbitrary choices.
+- Two points over one point can give a noninvertible section map; this is allowed because c_g is never inverted.
+- Refinement maps need only be simplicial over the augmentation. Composition uses the actual coefficient/pasting identifications; the two hypercover maps need not be cartesian.
 
-The proof does not cite an affine-only evaluation theorem, an etale-only injective-row theorem, or the mere existence of a natural derived isomorphism as evidence for its normalization. Instead it proves evaluation exactness from the generic module and sheaf-epimorphism statements, uses the existing general ringed-site matching theorem, and calculates the two comparison squares explicitly.
+Searches made before construction:
 
-The chapter and unit records were read. This node is a general homological tool below the open-direct-image/root-tower branch of the inherited unit; no geometric unit step is replaced. The item's inherited blueprint ancestor is null: `tools/blueprint_refs.py ancestor` explicitly printed None. Its concrete inherited `from.place` is retained. Whole-blueprint searches for hypercover, weakly contractible and adjunction were made; the first finds `det-pe-hypercover-complex`, which asserts a natural derived-object comparison, but not the augmentation normalization and cross-site derived-unit identification here. Thus it is not the same statement, and `same_as` remains empty. Off-unit generic tools are declared in `split_report.tool_uses`, not in the maintainer-owned top-level field.
+- `msearch.py ... leanfinder "acyclic hypercover comparison natural derived global sections pullback adjunction unit"`: eight site/one-hypercover results, no normalized full hypercover comparison.
+- `msearch.py ... loogle "hypercoverTotal, hypercoverAugmentation, derivedUnit"`: no match (hypercoverTotal is a project name).
+- `msearch.py ... grep "hypercover|Hypercover" CategoryTheory/Sites`: one-/zero-hypercover infrastructure only; no statement of this derived-unit identification.
+- `rg` in `lean/WeilConjectures` and `lean/Sheaf` for `acyclic.*[Hh]ypercover|hypercover.*[Pp]ullback|hypercover.*[Nn]ormaliz|lem-sfb-acyclic-hypercover-pullback-normalization`: older unnormalized single-site or etale/Grothendieck hypercover comparisons, not the four-arrow augmentation-normalized actual-unit theorem here.
+- Direct node-id search in `lean/WeilConjectures` and `dag/lean_names_upstream.json`: no declaration for this node.
+- Existing total, augmentation, matching-arrow, inverse-image and canonical composition constructions were reused rather than copied. The helpers express the maps and equations of this item's statement. The repair records three independent notions as definition nodes, rather than citing theorem nodes solely to obtain their helper definitions.
 
-## Not duplicates
+No mathematical statement dispute or correction. The review found and this repair
+fixes a dependency-ownership fault; the mathematical statement remains unchanged.
+Validation: prescribed `scompile.py` compiles each delivery file in sandbox and
+library namespaces; only expected theorem sorry warnings are permitted.
+The dry run and actual delivery are run after this report is written.
 
-No new nodes were created, so there are no new/existing pairs sharing a source tag. Existing general statements were reused throughout. In particular, no separate node was created for exact evaluation, row/column total comparison, resolution independence, or any clause of the item.
+## Second reading by Q16
 
-## Review by Q16
+A separate second pass by the same worker checked the node and every declaration
+clause by clause, especially the direction of the normalization equation, arbitrary
+(noncartesian) g, signs, all four quasi-isomorphisms, every-resolution quantification,
+and the actual derived unit rather than a newly named map. This pass added the
+explicit single-total identification and its T(i) equation, and the derived-unit
+composition equation, so these clauses are exposed for later proof work.
 
-I read the actual injective-resolution proof of Stacks proetale.tex Tag 09A2, lemma-compute-cohomology. Its two spectral-sequence directions are respectively the column and row arguments in steps 4 and 3; the remaining work is the explicit normalization that the source does not state. I also read sites-cohomology.tex Tag 0946 (lemma-w-contractible), hypercovering.tex Tags 01GE (lemma-acyclic-hypercover-sheaves) and 01GW (lemma-injective-trivial-cech), derived.tex Tag 09T5 (lemma-derived-adjoint-functors), and sites-cohomology.tex Tag 0D6E (lemma-derived-pushforward-composition). The latter two source proofs refer to the partial-derived Hom formula and uniqueness of adjoints; the delivery uses existing DAG statements giving their normalized representative formulas. No SGA source is used. There are no new nodes requiring independent source checks.
+This is not claimed as an independent-worker reading: the dispatcher explicitly
+prohibits starting other agents and says the maintainer performs the independent
+review. That review remains with the maintainer. No independent review is fabricated.
 
-For step 1, I opened both total/augmentation definition nodes. They specify the signed differential, actual restriction augmentation, and termwise coefficient maps used here. The commutations in the step are the explicit simplicial and chain-map identities; no acyclicity is claimed there. All diagonal sums used later are finite under the chosen lower bound.
 
-For step 2, I opened all five cited statements. The module-colimits forgetful theorem explicitly gives exactness and sectionwise kernels and assumes sheafification; the pro-etale site statement supplies a small-site presentation where sheafification exists. The two general-site epimorphism statements bridge module epimorphisms to set-sheaf epimorphisms, to which the actual projectivity definition of weak contractibility applies. This avoids imposing the affineness required by det-pe-wc-sections-exact. The remaining cohomology calculation is the kernel/image/quotient computation for an exact additive evaluation functor, written out in the step.
+## Repair of independent review at a0d47048ff73
 
-For step 3, the pro-etale topos theorem explicitly supplies the covering axioms and subcanonicity required by the general ringed-hypercover injective-augmentation theorem. That theorem is for ring sheaves and locally solvable matching families, not just etale hypercovers with constant coefficients. Pulling back each matching covering verifies precisely its hypothesis, including degree zero. Its conclusion gives the actual alternating restriction row and augmentation, so the row-augmentation theorem applies with p >= 0 and a common q lower bound N in Ab. It does not require underlying abelian injectivity. The row theorem's countable coproduct assumption holds for abelian groups.
+H2/H13 is repaired by replacing
+`lem-weil-pbc-site-hypercover-disjoint-union` and
+`lem-weil-pbc-proetale-derived-pullback-composition` in the item's `stmt_deps`
+with definition nodes for the actual objects used. The original theorem statements,
+proof plan, and proof dependencies are unchanged. Compared with the saved returned
+packet, this is a substantive node-ownership and module repair. The prescribed
+initial dry run rebased that saved packet onto current main and passed mechanically;
+that did not discharge the independent review's mathematical/interface finding.
 
-For step 4, I checked the column-comparison statement: it requires simultaneous lower bounds in both directions, which the minimum of the resolution/source bounds supplies. Step 2 gives its fixed-column quasi-isomorphism hypothesis. This proves the two specifically displayed total maps are quasi-isomorphisms, rather than just asserting the existence of an abstract comparison.
+Both advisories are addressed as well. The duplicate public
+`abelianGroups_hasDerivedCategory` instance is removed: all D(Ab) occurrences use
+`HasDerivedCategory.ofIsGrothendieckAbelian` from the imported module. The ordinary
+`compositionIso` and its exact uniqueness/section equation have moved unchanged
+into their owning definition module. The consumer imports that module; it does not
+redefine the ordinary comparison or cite the derived-comparison theorem as a
+statement dependency. The namespace of the moved declarations is preserved, so
+the composition clauses have exactly their previous signatures.
 
-For step 5, the bounded-below injective theorem says exactly that the supplied I and J are K-injective; the small ringed-site existence theorem and the right-derived definition supply the universal derived functors and canonical resolution identifications. The K-injective Hom theorem gives the comparison unique up to homotopy, and the generic derived-map theorem identifies the resulting section map with the canonical transition. I checked the total homotopy sign: a coefficient homotopy s becomes (-1)^p s on the pth column; horizontal mixed terms cancel and vertical terms yield ds+sd. The augmentation square is strict. Hence the cancellation proves independence and coefficient naturality with the claimed normalization.
+## New nodes
 
-For step 6, I checked the K-injective Hom, exact-left-adjoint/right-adjoint K-injectivity, and partial-derived-adjunction statements. Exactness of h^* is an explicit hypothesis of the item. It makes h^*i a quasi-isomorphism, giving b by the Hom bijection. Transposing gives a, and the representative formula in the partial-derived theorem identifies the transpose of the identity with h_*j after the ordinary unit. The equation ai homotopic to h_*j eta proves that a represents the actual derived unit. It is not an arbitrary adjunction structure on the same underlying functors.
+`def-sfb-proper-face-matching-arrow` owns the unchanged existing declaration
+`CategoryTheory.SimplicialObject.IsProperFaceMatchingArrow` in
+`Sheaf.CategoryTheory.SiteHypercoverDisjointUnion` (`existing: true`, no new module).
+Its statement renders the three branches exactly: n=0 is `Nonempty (IsTerminal M)`;
+n=1 is a limiting binary fan with `μ ≫ p i = K.δ i`; n≥2 is a limiting finite
+boundary cone, an isomorphism from M to its vertex, and all face equations.
+The source is Stacks 0186 (finite face diagram) and 0DB1/0DB2 (augmented slice
+matching). Arbitrary categories and independent object/morphism universes remain
+allowed. No finite-limit existence hypothesis is imposed: if no limiting cone
+exists the predicate is false. Degree-zero μ is canonical by terminal uniqueness.
+The theorem node that used to list this helper does not own its definition.
 
-For step 7, I checked the ringed-topoi derived-pushforward composition theorem against the global-sections morphism to the point with ring Z. Its normalization permits identity resolution of h_*J, since step 6 makes this complex K-injective; the comparison is therefore the equality of actual section complexes. This avoids applying an exact-left-adjoint composition theorem to module global sections, whose left adjoint need not be exact over Z. The derived-map computation theorem then identifies Gamma(a) with derived sections of the unit. On each summand I verified G T_U(i) = T_V(j)c_g up to the explicit total homotopy, and G alpha_I = alpha_J Gamma(a) strictly. Cancelling yields the stated formula and direction of the comparison.
+`def-sfb-proetale-composite-coefficients` owns the unchanged existing declaration
+`AlgebraicGeometry.Scheme.proEtaleRingCompositeCoefficients` in
+`Sheaf.AlgebraicGeometry.ProEtaleDerivedPullbackComposition` (`existing: true`,
+no new module). Its hypotheses are arbitrary composable scheme morphisms, three
+commutative-ring sheaves and two coefficient isomorphisms. Its three arrows are
+`(proEtaleRingInverseImageComp h k).app R_V`, inverse image applied to `c_k`, and
+`c_h`, composed by `≪≫`. Thus it fixes the composite coefficient identification
+without independent choices. The source is the ringed-topos composition of Stacks
+03D8 and the coefficient convention in 0D6D. It retains the small-site universe
+levels and handles identity maps, empty schemes and the zero ring. No previous
+definition node records this declaration; the former theorem dependency had a
+different recorded module and is now removed from `stmt_deps`.
 
-For step 8, the refinement maps act by ordinary section restrictions, which commute with both augmentation and resolution maps. I wrote both equalities before cancellation. Coefficient naturality is componentwise and uses step 5. Composition uses the canonical inverse-image composition identification and the equality of successive section restrictions; the already proved map identification transfers that equality to the actual derived-unit maps. This requires no additional acyclicity or cartesian condition.
+`def-sfb-proetale-ordinary-pullback-comparison` owns the new module
+`Sheaf.AlgebraicGeometry.ProEtaleOrdinaryPullbackComparison`. Its declarations are
+the unchanged `AcyclicHypercover.existsUnique_composition` and `compositionIso`
+moved from the returned consumer. The schemes, coefficient sheaves and
+identifications are explicit binders; the composite coefficients are the published
+definition owned above. The unique isomorphism is from pullback along the composite
+to the composite of module pullbacks. Its conjugate is fixed for every module,
+site object and section by `N.val.map ((MorphismProperty.Over.pullbackComp k h).hom.app W).op`.
+`compositionIso` selects this uniquely specified isomorphism; its data is never
+`sorry`. The existence/uniqueness theorem has the complete original proof docstring
+and its proof is `sorry`. It is the canonical ordinary comparison underlying
+Stacks 03D8/0D6D, not a second derived comparison. No new hypothesis or equation
+is added to the consumer. All three new nodes cite exactly their bracketed
+notions and have the item's chapter, unit and inherited null blueprint ancestor.
 
-I checked small cases: zero coefficient sheaf and the zero ring give zero complexes and preserve every equality; the empty base causes no nonempty hypothesis; identity morphisms/refinements give identity section maps; a constant identity hypercover of a weakly contractible base has the usual alternating identity complex with H^0 equal to the sections and positive cohomology zero; arbitrary negative lower bounds cause finite diagonals after taking their minimum. A map from a two-point disjoint union to a point with constant nonzero coefficients induces a diagonal map in degree-zero cohomology, generally not an isomorphism, consistent with the explicit absence of a quasi-isomorphism claim for c_g.
+Searches for all new nodes were actually run in this repair and are recorded in
+`mathlib_searches`, including their actual result names:
 
-I checked delivery-errors B through E against the files: no new-node form defects, no bare-tag substitute for a non-elementary cited fact, no definition cited for an unstated theorem, no affine/etale/commutative coefficient mismatch, no relabelled clause as a helper lemma, and no unstated transport argument. All eight steps are shorter than 2000 characters. Verbatim quotes were taken directly from every cited node's statement into citations.json; none was fabricated from its proof.
+- `leansearch`: "Proper face matching arrow of a simplicial object is characterized by a boundary limit": eight face/naturality/Segal results, no matching-arrow predicate.
+- `leansearch`: "Composition of inverse images of ring sheaves induces a canonical comparison of module pullbacks": eight general module pullback and mate results, including `SheafOfModules.pullbackComp` and `conjugateEquiv_pullbackComp_inv`; these do not name the chosen pro-etale module functors with their coefficient transport.
+- `leanfinder`: "Composite coefficient identification and canonical ordinary module pullback comparison for morphisms of ringed sites": eight general module/free-section results, no exact project interface.
+- `loogle`: `"SimplicialObject", "matching"`: zero hits.
+- `msearch.py grep`: `IsProperFaceMatchingArrow|proEtaleRingCompositeCoefficients|proEtaleCanonicalPullbackComposition`: zero Mathlib hits.
+- `rg` of `lean/WeilConjectures` and `lean/Sheaf`: found the exact matching predicate at SiteHypercoverDisjointUnion.lean:42 and coefficient identification at ProEtaleDerivedPullbackComposition.lean:36. These are reused, never copied. ProEtaleCanonicalPullbackComposition selects a derived comparison, not an ordinary module comparison.
+- Definition-node `lean` records searched over `dag/nodes`: no node owns either exact definition or the ordinary comparison. Broader matching/coefficient text searches find theorem nodes and distinct matching-object notions, not this predicate/composite identification.
+- `blueprint_refs.py search` for "matching", "composite coefficient", and "pullback comparison": respectively six, zero, and nineteen imported nodes; none states one of the three notions. `ancestor` returns None, as already recorded on the item.
 
-## Unfinished work
+## Second reading of the repair by Q16
 
-No mathematical part of this one-level split remains open. Its cited existing lemmas retain their own DAG statuses; this delivery makes no claim to complete Lean proofs. Required server dry run and push results are recorded by the delivery tool.
+The same worker re-opened all three new node records, their existing declarations
+or new module, and the consumer. Matching-arrow degree zero, binary-product degree
+one and higher boundary equations agree exactly. The composite coefficient formula
+has the same three factors and orientation. The moved comparison has exactly the
+same unique mate equation and arguments. The consumer's coefficient, refinement,
+composition and derived-unit equations have not changed; removing the D(Ab)
+instance makes all of them use the one imported localization. The removed theorem
+nodes are absent from `stmt_deps`; all three new definition nodes are present.
+Only `lean` and the authorized `stmt_deps` additions differ from current main for
+the item. No independent-worker review is claimed; L supplies that independent
+review as the dispatch brief requires.

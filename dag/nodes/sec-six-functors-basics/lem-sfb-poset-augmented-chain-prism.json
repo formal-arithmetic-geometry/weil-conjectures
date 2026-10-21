@@ -8,7 +8,8 @@
   "place": "Tag 019S, lemma-homotopy-s-N, and preceding equation-homotopy-to-homotopy (lines 4739–4846): prism boundary cancellation. Agent-formulated augmented strict-poset-chain version; descent through repeated tuples and the degree -1 convention are additional obligations, not verbatim assertions of 019S."
  },
  "stmt_deps": [
-  "def-weil-pbc-module-chain-complex-homology"
+  "def-weil-pbc-module-chain-complex-homology",
+  "def-sfb-augmented-poset-chains"
  ],
  "proof": [
   {
@@ -232,5 +233,32 @@
   "group": "Q13",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-f0a71bd0a (reviewer sub-agent of L); spot-checked: Read the item in full: statement unchanged, 8 steps, 0 new nodes. The only citation is def-weil-pbc-module-chain-complex-homology, a Mathlib-leaf definition used only for what a complex and a chain map are. Source check: Stacks simplicial.tex l.4739-4846 (equation-homotopy-to-homotopy l.4754, lemma-homotopy-s-N l.4817, tag 019S checked in tags l.1663) has the same structure, first and last sums cancelling and the junction terms telescoping. The item's (-1)^i convention gives g_*-f_*, which I recomputed. I re-derived every step: (1) d^2=0 via the (-1)^{a+b-1}/(-1)^{a+b} pairs, including the augmentation at n=1; (2) a repetition is always adjacent by antisymmetry, so D is a subcomplex and W/D is free on strict tuples; (3)-(4) u_* is a chain map and is functorial, including degree 0, [∅] and collapses; (5) T_i is weakly increasing at the junction, and the repeated pair stays in the g block for i<=j and in the f block for i>=j+1, so H descends; (6) the j<i faces match T_{i-1}(δ_j x) and the j>i+1 faces match T_i(δ_{j-1}x) with opposite signs, and the inverse map (r,k) is a bijection; (7) the j=i and j=i+1 faces are A_i(+) and A_{i+1}(-), which telescope to g-f; (8) degrees 0 and -1 hold, including f(x)=g(x) and empty P or Q. My own small-case run: all labelled posets with up to 3 elements, every comparable pair of monotone maps, 12,558 checks of the homotopy identity and of the chain-map condition, all passed. Duplicates: searched the DAG for prism, strict chains, weakly increasing and order complex; simplicial-homotopy-free-chain-homotopy, split-simplicial-nondegenerate-homotopy and preorder-bar-terminal-augmentation do not state it, and blueprint_refs search finds nothing. Parent product-chain-proper-interval-homology uses exactly the stated clauses. No SGA, no repair note, no off-route statement, no tool_uses. Maintainer note: blueprint.from.node is null, inherited from the parent split (ancestor gives None). Not a fault of this delivery."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.AugmentedPosetChainPrism",
+  "declaration": "AlgebraicTopology.AugmentedPosetChains.prism_identity",
+  "declarations": [
+   "AlgebraicTopology.AugmentedPosetChains.mapComponent",
+   "AlgebraicTopology.AugmentedPosetChains.map_comm",
+   "AlgebraicTopology.AugmentedPosetChains.map",
+   "AlgebraicTopology.AugmentedPosetChains.map_id",
+   "AlgebraicTopology.AugmentedPosetChains.map_comp",
+   "AlgebraicTopology.AugmentedPosetChains.prismComponent",
+   "AlgebraicTopology.AugmentedPosetChains.prism_identity"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/AugmentedPosetChainPrism.lean",
+  "statement": "theorem prism_identity (R : Type u) [CommRing R] {P Q : Type v} [PartialOrder P] [PartialOrder Q] [Finite P] [Finite Q] (f g : P →o Q) (hfg : ∀ x : P, f x ≤ g x) (n : ℤ) : prismComponent R f g n (n + 1) ≫ (complex R Q).d (n + 1) n + (complex R P).d n (n - 1) ≫ prismComponent R f g (n - 1) n = (map R g).f n - (map R f).f n",
+  "branch": "newtargets-dag",
+  "by": "NM",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c94bfccf8",
+  "group": "NM",
+  "result": "pass",
+  "note": "Read item, stmt_deps, new def node def-sfb-augmented-poset-chains, both modules, report. Item node changes only lean + added (A) stmt_dep; signatures verbatim (def statement from keyword). Clause check: Simplex = Pairwise(<) lists of length n+1 (deg -1 = [∅], below zero), boundary = alternating eraseIdx on down shape, bracket kills repeated tuples, mapComponent = bracket(map f), map_comm/map/map_id/map_comp, prismComponent = Σ(-1)^k [f(take(k+1)) ++ g(drop k)] guarded 0≤i so h_{-1}=0, prism_identity h≫d + d≫h = g_*-f_* for all n:ℤ (n=0 sign and n=-1 checked). No extra assumptions; empty P/Q, f=g, zero ring fine. Named sorry obligation boundary_laws, real data, docstrings with source/blueprint. Not a duplicate: Mathlib DoldKan/augment not exact; parent ProductChainProperInterval.complex is ℚ/proper-interval specialized. Advisory: P,Q share universe v (forced by chain map in one ModuleCat); unused Finite instances; parent could later use the general complex. No compile (no change)."
  }
 }

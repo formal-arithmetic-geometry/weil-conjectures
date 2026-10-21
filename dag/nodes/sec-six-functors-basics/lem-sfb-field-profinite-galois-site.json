@@ -13,7 +13,8 @@
   "def-pd-separable-closure",
   "def-weil-size-convention",
   "def-weil-pbc-proetale-site",
-  "lem-weil-pbc-profinite-test-object-functor"
+  "lem-weil-pbc-profinite-test-object-functor",
+  "def-weil-pbc-proetale-qcqs-subsite"
  ],
  "proof": [
   {
@@ -522,5 +523,32 @@
   "group": "Q36",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-b8b3e9304 (reviewer sub-agent of L); spot-checked: Read in full: the item, both new nodes, every cited statement, Bhatt–Scholze Ex. 4.1.9–4.1.10 (pp. 27–28), and Stacks 0CKV and 08ZY. The item is unsplit in live and side-live, this is its first delivery, its statement and stmt_deps are identical to base, there is no cycle and no SGA. Steps 1–8 are correct: the affine reduction through all-primes-maximal plus 0CKV; the finite étale ↔ finite G-set step through the transitive classification and products; profinite F(B) with surjective projections (B=0 handled separately); full faithfulness through finite-stage factorization; essential surjectivity through invariant partitions and the ind-étale colimit; base change through k^s⊗B; coverings through surjective base change and the fpqc definition, with density; test objects with Hom_k(k^s,k^s)=G and G×P. Both new nodes are true and generic. qcqs zero-dimensional affine follows 0CKV and was tested on ∅, fields, finite products and Spec LC(Cantor); the qs hypothesis is needed. The equivariant finite-quotient node holds by the tube-lemma open stabilizer plus 08ZY. Neither duplicates an existing node or restates a clause of the item. The seven declared tool_uses are accepted. FIX: (1) B4: step 7 had a literal TAB for \\to and step 8 a BACKSPACE for \\bar, both restored; (2) C1: step 8 now cites lem-weil-pbc-finite-affine-coproduct-spectrum and lem-weil-pbc-spec-small-colimit-limit for s[P]=Spec colim k^{P_i}, with one sentence added. Advisory: lem-exc-etale-field-gsets and det-pe-condensed-point-basis could shorten steps 2 and 6.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FieldProfiniteGaloisSite",
+  "declaration": "AlgebraicGeometry.ProEtale.FieldGaloisSite.field_profinite_galois_site",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.FieldGaloisSite.qcqsOver",
+   "AlgebraicGeometry.ProEtale.FieldGaloisSite.testOver",
+   "AlgebraicGeometry.ProEtale.FieldGaloisSite.trivial",
+   "AlgebraicGeometry.ProEtale.FieldGaloisSite.regular",
+   "AlgebraicGeometry.ProEtale.FieldGaloisSite.projection",
+   "AlgebraicGeometry.ProEtale.FieldGaloisSite.normalizedArrow",
+   "AlgebraicGeometry.ProEtale.FieldGaloisSite.field_profinite_galois_site"
+  ],
+  "file": "lean/Sheaf/Paper/FieldProfiniteGaloisSite.lean",
+  "statement": "theorem field_profinite_galois_site (k Ω : Type u) [Field k] [Field Ω] [Algebra k Ω] [IsSepClosure k Ω] : ∃ (E : Scheme.ProEt.Qcqs (Spec (.of k)) ≌ ContAction Profinite.{u} (Ω ≃ₐ[k] Ω)) (Eb : Scheme.ProEt.Qcqs (Spec (.of Ω)) ≌ Profinite.{u}), (∀ (U : Scheme.ProEt.Qcqs (Spec (.of k))) (R : Sieve U), R ∈ (Scheme.ProEt.qcqsInclusion (Spec (.of k))).inducedTopology (Scheme.ProEt.topology (Spec (.of k))) U ↔ ∃ (n : ℕ) (V : Fin n → Scheme.ProEt.Qcqs (Spec (.of k))) (f : ∀ i : Fin n, V i ⟶ U), (∀ i : Fin n, R (f i)) ∧ ∀ x : (E.functor.obj U).obj.V, ∃ (i : Fin n) (y : (E.functor.obj (V i)).obj.V), (E.functor.map (f i)).hom.hom y = x) ∧ (Scheme.ProEt.qcqsInclusion (Spec (.of k))).IsDenseSubsite ((Scheme.ProEt.qcqsInclusion (Spec (.of k))).inducedTopology (Scheme.ProEt.topology (Spec (.of k)))) (Scheme.ProEt.topology (Spec (.of k))) ∧ (Scheme.ProEt.qcqsInclusion (Spec (.of Ω))).inducedTopology (Scheme.ProEt.topology (Spec (.of Ω))) = Eb.functor.inducedTopology (coherentTopology Profinite.{u}) ∧ Nonempty (E.functor ⋙ forget₂ (ContAction Profinite.{u} (Ω ≃ₐ[k] Ω)) Profinite.{u} ⋙ Eb.inverse ⋙ qcqsOver (Spec (.of Ω)) ≅ qcqsOver (Spec (.of k)) ⋙ Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap k Ω)))) ∧ ∃ (a : trivial (Ω ≃ₐ[k] Ω) ⋙ E.inverse ⋙ qcqsOver (Spec (.of k)) ≅ testOver (Spec (.of k))) (b : regular (Ω ≃ₐ[k] Ω) ⋙ E.inverse ⋙ qcqsOver (Spec (.of k)) ≅ testOver (Spec (.of Ω)) ⋙ Over.map (Spec.map (CommRingCat.ofHom (algebraMap k Ω)))), ∀ P : Profinite.{u}, ((normalizedArrow k Ω E a b).app P).left ≫ pullback.fst ((profiniteToProEt.obj P).hom) (toSpecZ (Spec (.of k))) = pullback.fst ((profiniteToProEt.obj P).hom) (toSpecZ (Spec (.of Ω)))",
+  "branch": "sheaf-dag",
+  "by": "NC",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8f7431383",
+  "group": "NC",
+  "result": "pass",
+  "note": "All clauses match the node: existential E between the qcqs objects of the pro-etale site and continuous profinite G-sets (ContAction Profinite (Ω ≃ₐ[k] Ω)); covering criterion with finitely many jointly surjective arrows, n=0 allowed; IsDenseSubsite with the induced topology; Eb with the coherent topology; base change as a natural iso with forgetting the action; natural isos a and b for s[P] (trivial action) and s̄[P] over s (left translation on G×P); normalizedArrow pinned by .left ≫ pullback.fst = pullback.fst inside Over s, so it is the canonical map. Statement verbatim; node changed only in lean and stmt_deps (added the landed qcqs-subsite def); one sorry; real helper data; docstrings carry source and blueprint; plain imports are proof-dep modules (rule 7); no duplicate in Mathlib or the project; no pro-etale substitute; single universe u matches the size convention. Not recompiled; no file changed."
  }
 }

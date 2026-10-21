@@ -1,0 +1,118 @@
+{
+ "id": "def-sfb-augmented-poset-chains",
+ "kind": "definition",
+ "title": "Augmented strict-poset chains with alternating deletion",
+ "statement": "Let $R$ be a commutative ring and $P$ a partially ordered set. For $n\\in\\mathbf Z$ let $B_n(P)$ consist of lists $l$ of elements of $P$ satisfying $l_a<l_b$ whenever $a<b$ and $|l|=n+1$. Define $C_n(P;R)=\\{a:B_n(P)\\to R\\mid a\\text{ has finite support}\\}$, with pointwise module operations. For any list $l$, write $[l]_n$ for its unit basis vector if $l\\in B_n(P)$, and zero otherwise; in particular repeated weakly increasing lists denote zero. Thus $B_{-1}(P)$ has the unique empty list, $C_{-1}(P;R)$ is canonically $R$ on $[\\varnothing]$, and $C_n(P;R)=0$ for $n<-1$. Define $d_{ij}$ to be zero unless $i=j+1$, and in that case extend the rule $d_{ij}[l]_i=\\sum_{a=0}^{|l|-1}(-1)^a[l\\text{ with vertex }a\\text{ deleted}]_j$ linearly. Let $C(P;R)$ be the integer-indexed chain complex [def-weil-pbc-module-chain-complex-homology] with these terms and differentials; the chain-complex proof obligation is the cancellation of each double deletion in the two possible orders. In particular a vertex maps to the empty generator and the empty generator has zero differential.",
+ "source": {
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Tag 019S, lemma-homotopy-s-N and preceding equation-homotopy-to-homotopy (lines 4739–4846); the explicit augmented strict-poset adaptation and double-deletion construction in lem-sfb-poset-augmented-chain-prism, statement and proof steps 1–2."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-module-chain-complex-homology"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Free modules on strict chains of a poset with augmented deletion differential and signed prism operator",
+   "results": "OK 8 hits: ChainComplex.augment, Module.Free.mk, Module.Free.finsupp, Module.Free, Module.Projective.of_free, Module.Free.rec, Module.Free.casesOn, IsStrictOrderedModule.",
+   "date": "2026-10-21",
+   "verdict": "no match: generic free modules and augmentation of an already supplied complex do not construct strict poset chains."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The augmented chain complex of a poset has free modules on strictly increasing chains, the empty chain in degree minus one, and alternating deletion differential",
+   "results": "OK 8 hits: ChainComplex.alternatingConst, AlgebraicTopology.DoldKan.c, ChainComplex.augment, AlgebraicTopology.AlternatingFaceMapComplex.obj, Rep.standardComplex.d_of, ChainComplex.alternatingConst_obj, AlgebraicTopology.alternatingFaceMapComplex, classifyingSpaceUniversalCover.compForgetAugmented.toModule.",
+   "date": "2026-10-21",
+   "verdict": "no match: constant complexes, general simplicial constructions and group resolutions do not give the augmented strict-poset complex in one line."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"OrderHom\", \"Homotopy\"",
+   "results": "OK 0 hits.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "augmented.*[Pp]oset|[Pp]oset.*[Cc]hain|orderComplex",
+   "results": "msearch.py grep in AlgebraicTopology: OK 0 hits. rg in lean/WeilConjectures and lean/Sheaf: OrderedCechModuleSignedSection.lean:470 is a docstring about sectionwise cochains on a poset; ProductChainProperIntervalHomology.lean:112 cites this prism in a proof docstring. Read the latter module: its Chains, boundary and complex are specialized to rational coefficients and the proper part of a product of finite chains. No general augmented-poset construction. grep -rn of the item id in lean/WeilConjectures gave no hits.",
+   "date": "2026-10-21",
+   "verdict": "no match: the specialized proper-interval complex cannot be instantiated with an arbitrary poset or arbitrary commutative coefficient ring."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-poset-augmented-chain-prism",
+  "date": "2026-10-21",
+  "group": "NM"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image: the trivial-lattice polynomial-bar multidegree calculation below lem-sfb-rational-polynomial-bar-contraction; contraction and Boolean-interval induction for its finite combinatorial input. This combinatorial argument is agent-written, not present in the blueprint. General normalized augmented poset-chain prism used in the contraction maps. The augmented chain complex and repeated-tuple convention in the prism statement and steps 1–2.",
+   "via": [
+    "lem-sfb-poset-augmented-chain-prism",
+    "lem-sfb-product-chain-proper-interval-homology",
+    "lem-sfb-rational-polynomial-bar-contraction",
+    "lem-sfb-trivial-ladic-derived-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.AugmentedPosetChains",
+  "declaration": "AlgebraicTopology.AugmentedPosetChains.complex",
+  "declarations": [
+   "AlgebraicTopology.AugmentedPosetChains.Simplex",
+   "AlgebraicTopology.AugmentedPosetChains.chains",
+   "AlgebraicTopology.AugmentedPosetChains.bracket",
+   "AlgebraicTopology.AugmentedPosetChains.boundary",
+   "AlgebraicTopology.AugmentedPosetChains.boundary_laws",
+   "AlgebraicTopology.AugmentedPosetChains.complex"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/AugmentedPosetChains.lean",
+  "statement": "def complex (R : Type u) [CommRing R] (P : Type v) [PartialOrder P] : ChainComplex (ModuleCat.{max u v} R) ℤ",
+  "branch": "newtargets-dag",
+  "by": "NM",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c94bfccf8",
+  "group": "NM",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c94bfccf8",
+  "group": "NM",
+  "result": "pass",
+  "note": "Read item, stmt_deps, new def node def-sfb-augmented-poset-chains, both modules, report. Item node changes only lean + added (A) stmt_dep; signatures verbatim (def statement from keyword). Clause check: Simplex = Pairwise(<) lists of length n+1 (deg -1 = [∅], below zero), boundary = alternating eraseIdx on down shape, bracket kills repeated tuples, mapComponent = bracket(map f), map_comm/map/map_id/map_comp, prismComponent = Σ(-1)^k [f(take(k+1)) ++ g(drop k)] guarded 0≤i so h_{-1}=0, prism_identity h≫d + d≫h = g_*-f_* for all n:ℤ (n=0 sign and n=-1 checked). No extra assumptions; empty P/Q, f=g, zero ring fine. Named sorry obligation boundary_laws, real data, docstrings with source/blueprint. Not a duplicate: Mathlib DoldKan/augment not exact; parent ProductChainProperInterval.complex is ℚ/proper-interval specialized. Advisory: P,Q share universe v (forced by chain map in one ModuleCat); unused Finite instances; parent could later use the general complex. No compile (no change)."
+ }
+}

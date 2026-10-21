@@ -16,7 +16,12 @@
   "def-sfb-profinite-test-objects",
   "def-weil-pbc-proetale-site",
   "def-sc-ring-strict-henselization",
-  "def-weil-geometric-point"
+  "def-weil-geometric-point",
+  "def-sfb-snc-finite-tame-sheaves",
+  "def-sfb-snc-finite-fibre-data",
+  "def-sfb-snc-residual-chart-data",
+  "def-sfb-profinite-product-maps",
+  "def-weil-proetale-inverse-image"
  ],
  "proof": [
   {
@@ -393,5 +398,29 @@
   "group": "NZ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-cb3a0ac0e (reviewer sub-agent of L); spot-checked: Re-delivery after a refused landing: lem-sfb-snc-universal-residual-charts had changed. Diffed against the earlier head ae172a82, whose FIX was lost. Here only Steps 1 and 12 differ from that head; they were rewritten to follow the revised residual-chart statement (prime-to-p levels by divisibility, identity chart, refinements through a fixed geometric point with compatible roots), and I checked both. Item statement unchanged; no re-split note; no SGA anywhere. Read ILO IX Prop 2.1(i)-(iii), printed pp.133-134. The new node avoids the SGA 1 Abhyankar route because its hypothesis is already the strict-local tower splitting. Route for its future split: finite level m, normalization, open etale locus, qc common n, gluing over the normal V_n. Steps 1-12 all checked. Step 4: descends to a stage S_a (finite-data descent, 01ZO) and splits using only the stated naturality of the pointed limit cover. Steps 5-6: H_n is free over H, H_n/JH_n=R[x]/(x^n) because t_i is in J, K^{r(n-1)+1}=0, two fully faithful liftings with the identity as proper scheme. Step 8: CRT with unit root differences; transitions a mod n -> a mod m. Step 9: cocycle order rho(hg)=rho(g)rho(h); a left action since the group is abelian. New node checked on r=0, empty P, unramified degree-p covers, one and two parameters, wild covers (excluded). It does not restate the item. Duplicate search (rg -L for abhyankar, tame, Kummer with SNC) found only single-divisor sbc nodes, invertible-order or log-Kummer per nodes, and residual charts: no duplicate. FIX (B2/E1, re-applied): the new node required the t_i to 'define the distinct components', but on the parent's etale charts V(t_i)=D_i x_Y V may be reducible, and the proof needs only the parameter condition. Restated as: V(t_1...t_r) is a reduced SNC boundary and the vanishing t_i are part of a regular system of parameters, V(t_i) possibly reducible. Item Step 3 now derives that condition from def-trf (C_{I(v)} regular of codimension |I(v)|), with def-trf-strict-normal-crossings-boundary and def-weil-pbc-regular-system-of-parameters added to its uses and proof_deps. Steps 1 and 12 kept as delivered. BATCH-5: lem-exc-tame-roots-product is the elementary lim mu_m = prod Z_q, and its trf node is a generic statement about cofiltered limits of finite sets. Residual charts and the new node reach only def-trf-strict-normal-crossings-boundary, a general definition already a stmt_dep of the item. None is part of the trace formula or Poincare duality; all accepted. Generic tool_uses accepted. Advisory: residual charts should state that its H-clauses hold for every chart with the listed properties.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SNCFiniteFibreClassification",
+  "declaration": "AlgebraicGeometry.ProEtale.nonempty_sncFiniteFibreClassification",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.nonempty_sncFiniteFibreClassification",
+   "AlgebraicGeometry.ProEtale.sncFiniteFibreClassification_refinement",
+   "AlgebraicGeometry.ProEtale.sncFiniteFibreClassification_scalarReduction"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SNCFiniteFibreClassification.lean",
+  "statement": "theorem nonempty_sncFiniteFibreClassification (p : ℕ) [Fact p.Prime] {Y : Scheme.{u}} {a : ℕ} {C : Fin a → Y.IdealSheafData} {I : Finset (Fin a)} (Q : SNCResidualChart p C I) (k : Type u) [Field k] [CharP k p] [(Spec Q.B).Over (Spec (.of k))] [LocallyOfFiniteType ((Spec Q.B) ↘ Spec (.of k))] [QuasiCompact ((Spec Q.B) ↘ Spec (.of k))] [IsSeparated ((Spec Q.B) ↘ Spec (.of k))] (_hD : IsStrictNormalCrossingsBoundary Q.chartBoundary) {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (z : Spec (.of Ω) ⟶ Q.puncturedTower) : ∃ d : SNCFiniteFibreClassification Q z, (letI := d.products; ∀ (R : Type v) [Ring R] [Finite R] (M : InternalModule R Q.FiniteTame), Nonempty (SNCFiniteLinearFibre d R M)) ∧ (Fintype.card I = 0 → (∀ g : SNCInertia.{u} p (Fintype.card I), g = 1) ∧ ∀ F : Q.FiniteTame, Nonempty (F.obj ≅ (constantSheaf (Scheme.ProEt.topology Q.puncturedResidual) (Type (u + 1))).obj (ULift.{u + 1, u} (d.fibre.obj F).obj.V)))",
+  "branch": "newtargets-dag",
+  "by": "O1",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The main declaration supplies the classifier and finite linear fibres; companion declarations state pointed-refinement and scalar-reduction compatibility. Universal sections express the normalized constant splitting on every site object, and the descent equation is on the entire profinite parameter scheme."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a6c62702f",
+  "group": "O1",
+  "result": "pass",
+  "note": "Re-delivery after the 508ed569 RETURN; both findings repaired. H2/H12: existing:true def-sfb-snc-residual-chart-data (SNCUniversalResidualCharts: SNCResidualChart, SNCParameterTower, SNCResidualRefinement, sncFullRootCoordinate etc.; statement matches the source, NL statement matches the fields) and def-sfb-profinite-product-maps (PointedLimitCech profiniteProduct/Base/Section/Map) now own the plain declarations; the item and both def nodes cite them and def-weil-proetale-inverse-image; setPullback/lowerStar replaced by proEtaleSheafInverseImage/DirectImage/Adjunction. H3: _scalarReduction binds Fact p.Prime, k with CharP, Over/LOFT/QC/IsSeparated and _hD like the main theorem. New moduleStalkLabel/SNCFiniteModuleStalkAction are real data pinned on all labels (End.mul order consistent); the commuting-with-action clause makes reduction explicit; R : Type v only generalizes. Statements verbatim, 3 sorry only in theorems, only lean/stmt_deps changed vs live, not dropped, no SGA. Compiles not reproduced; no fixes. Advisories: no def owner for UniversalCover.cover; def-sfb-full-parameter-root-tower should cite the new chart-data node."
  }
 }

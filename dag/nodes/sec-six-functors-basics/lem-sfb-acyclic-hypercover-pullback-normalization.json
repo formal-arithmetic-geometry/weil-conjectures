@@ -17,7 +17,12 @@
   "def-weil-sheaf-of-modules-category",
   "def-weil-abstract-derived-category",
   "def-weil-pbc-proetale-hypercover-total",
-  "def-weil-pbc-proetale-hypercover-augmentation"
+  "def-weil-pbc-proetale-hypercover-augmentation",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-proetale-operations",
+  "def-sfb-proper-face-matching-arrow",
+  "def-sfb-proetale-composite-coefficients",
+  "def-sfb-proetale-ordinary-pullback-comparison"
  ],
  "proof": [
   {
@@ -355,5 +360,56 @@
   "group": "Q16",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-818bfc61a (reviewer sub-agent of L); spot-checked: Read the item's 8 steps against all 18 cited statements and Stacks proetale.tex Tag 09A2 (lemma-compute-cohomology, line 3066). Steps 2-4 are the source's two spectral-sequence arguments in bicomplex form. Step 2: exactness of evaluation comes from forgetful exactness, then epi implies locally surjective implies epi of set sheaves, then the weakly-contractible definition; this avoids the affine-only det-pe-wc-sections-exact. Step 3: hypotheses of lem-sc-ringed-hypercover-injective-augmentation-ring verified (precoverage, subcanonicity and smallness from det-pe-topos-functoriality-site; local matching by pulling back the covering U_n→M_n), then the row-augmentation lemma with K^{p,q}=I^q(U_p). Step 4: column comparison with bounds P=0, Q=N. Step 5: recomputed the signed total homotopy (-1)^p s; the mixed δ terms cancel and give ds+sd; independence and naturality follow by cancellation. Step 6: 0DVC formula with s=j, t=id and f=h_*j∘η, whose transpose is j; together with a·i≃h_*j·η this gives the actual derived unit. Step 7: G·α_I=α_J·Γ(a) checked to hold strictly; 0D6E composition applies with the morphism to (pt,Z) and the identity resolution of the K-injective h_*J; cancellation gives c_g·A_U=A_V·Γ(a) in the stated direction. Step 8 (refinement, coefficient and composition compatibility) is elementary given steps 5 and 7. No new nodes, no cycle (closure of 265 nodes), no SGA, no re-split note, statement unchanged. det-pe-hypercover-complex and lem-weil-pbc-proetale-hypercover-computes-bounded-complex give only an unnormalized single-site isomorphism, so they are not duplicates. Edge cases checked: zero sheaf, empty base, constant hypercover, and two points mapping to one point (c_g is not a quasi-isomorphism there, consistent with the statement). The 18 declared tool_uses are generic homological or site tools and are accepted. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.AcyclicHypercoverPullbackNormalization",
+  "declaration": "AlgebraicGeometry.Scheme.AcyclicHypercover.pullback_normalization",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.AcyclicHypercover.sections",
+   "AlgebraicGeometry.Scheme.AcyclicHypercover.sections_additive",
+   "AlgebraicGeometry.Scheme.AcyclicHypercover.rows",
+   "AlgebraicGeometry.Scheme.AcyclicHypercover.total",
+   "AlgebraicGeometry.Scheme.AcyclicHypercover.augmentation",
+   "AlgebraicGeometry.Scheme.AcyclicHypercover.rowResolutionComponent",
+   "AlgebraicGeometry.Scheme.AcyclicHypercover.rowResolutionComponent_comm",
+   "AlgebraicGeometry.Scheme.AcyclicHypercover.rowResolution",
+   "AlgebraicGeometry.Scheme.AcyclicHypercover.rowResolution_single_isIso",
+   "AlgebraicGeometry.Scheme.AcyclicHypercover.rowSingleTotalIso",
+   "AlgebraicGeometry.Scheme.AcyclicHypercover.rowResolution_eq_total_map",
+   "AlgebraicGeometry.Scheme.AcyclicHypercover.derivedSectionsZero",
+   "AlgebraicGeometry.Scheme.AcyclicHypercover.resolutionSectionsIso",
+   "AlgebraicGeometry.Scheme.AcyclicHypercover.IsNormalized",
+   "AlgebraicGeometry.Scheme.AcyclicHypercover.descent",
+   "AlgebraicGeometry.Scheme.AcyclicHypercover.comparison",
+   "AlgebraicGeometry.Scheme.AcyclicHypercover.refinement",
+   "AlgebraicGeometry.Scheme.AcyclicHypercover.sectionRestriction",
+   "AlgebraicGeometry.Scheme.AcyclicHypercover.restrictionComponent",
+   "AlgebraicGeometry.Scheme.AcyclicHypercover.restrictionComponent_comm",
+   "AlgebraicGeometry.Scheme.AcyclicHypercover.restriction",
+   "AlgebraicGeometry.Scheme.AcyclicHypercover.directSectionsIso",
+   "AlgebraicGeometry.Scheme.AcyclicHypercover.directImage_preservesKInjective",
+   "AlgebraicGeometry.Scheme.AcyclicHypercover.derivedSectionPullback",
+   "AlgebraicGeometry.Scheme.AcyclicHypercover.pullback_normalization",
+   "AlgebraicGeometry.Scheme.AcyclicHypercover.restriction_naturality",
+   "AlgebraicGeometry.Scheme.AcyclicHypercover.comparison_refinement",
+   "AlgebraicGeometry.Scheme.AcyclicHypercover.restriction_refinement",
+   "AlgebraicGeometry.Scheme.AcyclicHypercover.restriction_comp",
+   "AlgebraicGeometry.Scheme.AcyclicHypercover.derivedSectionPullback_comp"
+  ],
+  "file": "lean/Sheaf/Paper/AcyclicHypercoverPullbackNormalization.lean",
+  "statement": "theorem pullback_normalization (U : SimplicialObject (Over (⊤_ X.ProEt))) (V : SimplicialObject (Over (⊤_ Y.ProEt))) (hU : ∀ (n : ℕ) (T : Over (⊤_ X.ProEt)) (μ : U _⦋n⦌ ⟶ T), SimplicialObject.IsProperFaceMatchingArrow U n T μ → Sieve.generate (Presieve.singleton μ.left) ∈ ProEt.topology X T.left) (wU : ∀ n : ℕ, (ProEt.topology X).IsWeaklyContractible.{u + 1} (U _⦋n⦌).left) (hV : ∀ (n : ℕ) (T : Over (⊤_ Y.ProEt)) (μ : V _⦋n⦌ ⟶ T), SimplicialObject.IsProperFaceMatchingArrow V n T μ → Sieve.generate (Presieve.singleton μ.left) ∈ ProEt.topology Y T.left) (wV : ∀ n : ℕ, (ProEt.topology Y).IsWeaklyContractible.{u + 1} (V _⦋n⦌).left) (g : V ⋙ Over.forget (⊤_ Y.ProEt) ⟶ U ⋙ Over.forget (⊤_ X.ProEt) ⋙ proEtaleBaseChange h) (M : proEtaleRingModules X R) : (comparison X R U hU wU).hom.app M ≫ DerivedCategory.Q.map (restriction h R S c _ _ U V g M) = derivedSectionPullback h R S c M ≫ (comparison Y S V hV wV).hom.app ((proEtaleRingModulePullback h R S c).obj M)",
+  "branch": "newtargets-dag",
+  "by": "Q16",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The recorded declarations jointly state all clauses: descent gives all four quasi-isomorphisms and the unique comparison normalized by every resolution; pullback_normalization identifies the actual derived adjunction unit; coefficient, refinement and composition equations are separate declarations. Helper definitions use the published section totals, augmentations, tensor-unit-normalized pro-etale operations and derived-composition comparison. All new theorem proofs are postponed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8ce9d35de",
+  "group": "Q16",
+  "result": "fix",
+  "note": "Re-delivery of a0d47048 H2 RETURN. Diffed against that snapshot: item Lean is byte-identical except the duplicate D(Ab) instance is removed and existsUnique_composition/compositionIso moved unchanged into the new ProEtaleOrdinaryPullbackComparison. The two theorem stmt_deps are replaced by def-sfb-proper-face-matching-arrow and def-sfb-proetale-composite-coefficients (existing:true, statements verbatim) and def-sfb-proetale-ordinary-pullback-comparison (new module). No theorem stmt_dep is added against live. Mathematics re-read vs Stacks 09A2: all clauses correct, normalization direction A=T(i)^-1 alpha_I, actual derived unit, arbitrary noncartesian g, every resolution covered, edge cases fine; no hollow data, all theorems sorry. check_existing/check_new_node clean. FIX fixes/def-sfb-proetale-composite-coefficients.json: adds body owner def-per-proetale-ring-inverse-image-comparisons (proEtaleRingInverseImageComp) to stmt_deps and statement, trims noncomputable from lean.statement. Advisory: matchingBoundaryIndex owned only by statement node lem-weil-pbc-simplicial-matching-object; module adjunction/pullback decls lack a def owner (base-era). No compile: no Lean changed."
  }
 }

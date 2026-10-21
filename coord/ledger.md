@@ -23425,3 +23425,9 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:09 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
 - 2026-10-21T19:09:47Z L: superseded stage-1 delivery N5/lem-sf-open-external-tensor-normalization at 030a7987f0943b5273c684ea2eb2ec029a5110b7; current completion retained; packet archived at refs/superseded/N5/lem-sf-open-external-tensor-normalization/030a7987f0943b5273c684ea2eb2ec029a5110b7; stale return retired.
 - 19:09 L: returned deliver/N9/sk-thm-groth-ss (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-thm-groth-ss: sk-thm-groth-ss: completed in this pr)
+- 19:09 L: merged deliver/NZ/lem-sfb-integral-cubical-chain-diagonal (stage 2; reviewer PASS; parallel immutable checks)
+- 19:09 L: merged deliver/Q16/lem-sfb-acyclic-hypercover-pullback-normalization (stage 2; reviewer FIX; parallel immutable checks)
+- 19:09 L: merged deliver/NC/lem-sfb-field-profinite-galois-site (stage 2; reviewer PASS; parallel immutable checks)
+- 19:09 L: merged deliver/O1/lem-sfb-snc-tame-finite-fibre-classification (stage 2; reviewer PASS; parallel immutable checks)
+- 19:09 L: merged deliver/Q32/lem-sfb-condensed-galois-global-descent (stage 2; reviewer PASS; parallel immutable checks)
+- 19:09 L: merged deliver/NM/lem-sfb-poset-augmented-chain-prism (stage 2; reviewer PASS; parallel immutable checks)
