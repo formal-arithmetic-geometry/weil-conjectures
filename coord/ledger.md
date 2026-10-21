@@ -19983,3 +19983,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:48 L: merged deliver/Q12/lem-weil-pbc-finite-postnikov-isomorphism (stage 2; reviewer PASS; parallel immutable checks)
 - 2026-10-21T03:48:25Z L: superseded stage-1 delivery O3/lem-sp-finite-coefficient-input-models at 4c8d447f9bc81067a22eb077e59ea7a213977e02; current completion retained; packet archived at refs/superseded/O3/lem-sp-finite-coefficient-input-models/4c8d447f9bc81067a22eb077e59ea7a213977e02; stale return retired.
 - 03:49 L: merged deliver/N8/lem-weil-pbc-realization-completed-mate (reviewer PASS; first push; new nodes: 0); claim not held by N8: not your claim
+- 03:49 L: merged deliver/Q20/lem-sfb-continuous-lattice-sum (reviewer FIX; first push; new nodes: 0)

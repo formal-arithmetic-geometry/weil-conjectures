@@ -14,11 +14,93 @@
   "def-pc-scheme",
   "def-weil-pbc-proetale-site",
   "def-weil-pbc-continuous-integral-coefficients",
-  "def-weil-sheaf-of-modules-category"
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-finite-sum-lattice] with the given finite nonempty $J$ and its full lattices. Choose an $A$-basis $b_1,\\ldots,b_r$ of $\\Lambda$ which is also an $E$-basis of $E^r$. Its coordinate map $\\beta:A^r\\to\\Lambda$, $(a_i)\\mapsto\\sum_i a_i b_i$, is a homeomorphism. The same lemma gives such coordinate homeomorphisms for each $\\Lambda_j$. The hypotheses are exactly those of that lemma, including the product/subspace topologies and the permitted case $r=0$.",
+   "uses": [
+    "lem-sfb-finite-sum-lattice"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice.proof.md",
+    "place": "Pushing down by the trace: identification of the sheaf sum with the continuous module of the finite sum lattice"
+   }
+  },
+  {
+   "text": "For each $i$, membership $b_i\\in\\sum_j\\Lambda_j$ gives vectors $v_{ji}\\in\\Lambda_j$ with $b_i=\\sum_jv_{ji}$: group the finitely many summands by $j$, inserting zeros. Define $s_j(\\sum_i a_i b_i)=\\sum_i a_i v_{ji}$ and $s=(s_j)_j$. These are $A$-linear, and $q(s(\\sum_i a_i b_i))=\\sum_i a_i\\sum_jv_{ji}=\\sum_i a_i b_i$, so $q s=1$. Each map $A^r\\to E^r$, $(a_i)\\mapsto\\sum_i a_i v_{ji}$, is continuous: each ambient coordinate is a finite sum of products of a coordinate $a_i\\in A\\subset E$ with a fixed scalar in $E$. Its image lies in $\\Lambda_j$, so it is continuous into its subspace topology. Compose with $\\beta^{-1}$ to obtain continuity of $s_j$; finitely many components give continuity of $s$ for the finite product topology. Here the topological field and subspace ring are those of [def-weil-l-adic-coefficient-extension], and the continuity of $\\beta^{-1}$ is supplied by [lem-sfb-finite-sum-lattice]. The sum map $q$ is itself continuous by the identical finite-coordinate addition calculation.",
+   "uses": [
+    "lem-sfb-finite-sum-lattice",
+    "def-weil-l-adic-coefficient-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice.proof.md",
+    "place": "Pushing down by the trace: identification of the sheaf sum with the continuous module of the finite sum lattice"
+   }
+  },
+  {
+   "text": "For any topological space $Z$ and continuous $f:Z\\to\\Lambda$, put $f_j=s_j\\circ f$. Each $f_j$ is continuous into $\\Lambda_j$, and $\\sum_j f_j=(q\\circ s)\\circ f=f$. As $J$ is finite the tuple $(f_j)_j$ is an element of the displayed direct sum. Conversely any finite sum of such functions is continuous and takes values in $\\Lambda$. Thus the continuous-function sum map is surjective for every $Z$, with no compactness or connectedness assumption.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice.proof.md",
+    "place": "Pushing down by the trace: identification of the sheaf sum with the continuous module of the finite sum lattice"
+   }
+  },
+  {
+   "text": "For an object $U$ of $S_{\\mathrm{pro\\acute et}}$, postcomposition with $\\beta$ gives an $A_S(U)$-linear bijection $A_S(U)^r=C(|U|,A)^r\\xrightarrow{\\sim}C(|U|,\\Lambda)$; its inverse is postcomposition with $\\beta^{-1}$ followed by the $r$ coordinate projections. Continuous functions into a finite product are exactly tuples of continuous functions. These maps commute with every restriction because they are postcomposition by fixed maps. Here $A_S$ is the coefficient ring sheaf of [def-weil-pbc-continuous-integral-coefficients]; that $U\\mapsto C(|U|,A)$, and likewise $U\\mapsto C(|U|,E)$, $U\\mapsto C(|U|,\\Lambda)$ and $U\\mapsto C(|U|,\\Lambda_j)$ for the topological abelian groups $E$, $\\Lambda$, $\\Lambda_j$ (addition is continuous as a restriction of that of $E^r$), satisfy the sheaf condition is [lem-cbc-continuous-functions-fpqc-sheaf]: covering families of $S_{\\mathrm{pro\\acute et}}$ are fpqc coverings and its fibre products are those of schemes. Thus this identifies the presheaf $F_\\Lambda(U)=C(|U|,\\Lambda)$ with the sheaf $A_S^r$: the sheaf gluing condition for a finite tuple is checked in each coordinate. In particular $F_\\Lambda$ is a free rank-$r$ module sheaf. Apply the coordinate homeomorphisms of [lem-sfb-finite-sum-lattice] in exactly the same way to each $\\Lambda_j$ to see that each $F_j(U)=C(|U|,\\Lambda_j)$ is a module sheaf.",
+   "uses": [
+    "lem-sfb-finite-sum-lattice",
+    "def-weil-pbc-continuous-integral-coefficients",
+    "lem-cbc-continuous-functions-fpqc-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice.proof.md",
+    "place": "Pushing down by the trace: identification of the sheaf sum with the continuous module of the finite sum lattice"
+   }
+  },
+  {
+   "text": "The inclusion $\\Lambda\\subset E^r$ induces an injective natural map $F_\\Lambda\\to E_S^r$, and each $F_j$ is contained in it. Apply step 3 to $Z=|U|$: every section of $F_\\Lambda$ is a sum of sections of the $F_j$ on $U$ itself. Hence the sectionwise image of $\\bigoplus_jF_j\\to E_S^r$ is exactly $F_\\Lambda$. This is already a sheaf by step 4, so it is also the sheaf image. Explicitly, the map to $F_\\Lambda$ has zero sectionwise cokernel, hence zero sheaf cokernel by [def-weil-sheaf-of-modules-category]; combined with the displayed monomorphism this gives the image factorization. Therefore the sum of submodule sheaves is precisely $U\\mapsto C(|U|,\\Lambda)$.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice.proof.md",
+    "place": "Pushing down by the trace: identification of the sheaf sum with the continuous module of the finite sum lattice"
+   }
+  },
+  {
+   "text": "Finally let $B\\in\\operatorname{GL}_r(E)$ have columns $b_i$, using the $E$-basis furnished by [lem-sfb-finite-sum-lattice]. Under step 4 the actual inclusion $F_\\Lambda\\to E_S^r$ sends the $i$th standard basis section to the constant vector $b_i$. Its scalar-extension adjoint is therefore the matrix $B$ on $E_S^r$, after the elementary identification $E_S\\otimes_{A_S}A_S^r\\simeq E_S^r$. On each $U$ this identification sends $a\\otimes(x_i)_i$ to $(a x_i)_i$, with inverse $(y_i)_i\\mapsto\\sum_i y_i\\otimes e_i$; the two composites are identities by the tensor balancing relation. These formulas commute with restriction, so the presheaf tensor product is isomorphic to $E_S^r$, which is already a sheaf by step 4 ([lem-cbc-continuous-functions-fpqc-sheaf] for $E$); its sheafification is therefore the same module, and this gives the identification for the sheaf tensor product defined in [def-pur-sheaf-tensor-product]. Multiplication by $B^{-1}$ is its inverse: its entries are constant sections of $E_S$, and both matrix products are identity matrices. Consequently extension of the inclusion is an isomorphism. For $r=0$ all modules, sums, maps and tensor products in this proof are zero, so the same formulas give the claimed rank-zero conclusions.",
+   "uses": [
+    "lem-sfb-finite-sum-lattice",
+    "def-pur-sheaf-tensor-product",
+    "lem-cbc-continuous-functions-fpqc-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice.proof.md",
+    "place": "Pushing down by the trace: identification of the sheaf sum with the continuous module of the finite sum lattice"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-finite-sum-lattice",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-continuous-integral-coefficients",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "lem-cbc-continuous-functions-fpqc-sheaf"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice.proof.md",
+  "place": "Pushing down by the trace: identification of the sheaf sum with the continuous module of the finite sum lattice; explicit basis lifts, continuous postcomposition and tensor coordinates supplied by the worker"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,10 +136,45 @@
    "results": "[leanfinder] OK 8 hit(s); AdicCompletion.sumInv_comp_sum, AdicCompletion.sum_comp_sumInv, AdicCompletion.sumInv_apply, ContinuousLinearMap.coprodEquivL_symm_apply, SeparationQuotient.exists_out_continuousLinearMap, ContinuousLinearMap.coprodEquiv_symm_apply, AdicCompletion.component_sumInv, AdicCompletion.sumInv ContinuousLinearMap.range_coprod and DirectSum.range_coeLinearMap identify algebraic ranges, without a continuous section or the continuous-function sheaf identification.",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Continuous functions into a finite sum of p-adic lattices are sums of continuous functions via an A-linear continuous section",
+   "results": "8 hits; Finite-product continuous linear maps and continuous splittings over a complete normed field occur; the latter cannot be applied over the valuation ring A. No declaration gives the whole lattice/sheaf statement.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ContinuousMap.*(split|surject)|continuous.*section.*(free|lattice)|lattice.*ContinuousMap",
+   "results": "4 hits; Four hits: Mathlib/Topology/Homotopy/HomotopyGroup.lean:375,409; Mathlib/Topology/Homotopy/Lifting.lean:285; Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean:85. Read these contexts: homotopy coordinate constructions and quotient-map cancellation, not finite lattice sums.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Surjective continuous linear maps onto finite free lattices split and continuous function sheaves preserve their image",
+   "results": "8 hits; LinearMap.splittingOfFunOnFintypeSurjective (Mathlib/LinearAlgebra/Finsupp/Pi.lean:171) and its splitting identity at line 176 cover algebraic splitting only. ContinuousLinearMap.exists_rightInverse_of_surjective (Mathlib/Topology/Algebra/Module/FiniteDimension.lean:582) requires a scalar field. Neither supplies the stated A-lattice topology and sheaf clauses.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ContinuousMap\", \"surjective\"",
+   "results": "0 hits; No hits.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A surjective linear map onto a finite free topological module admits a continuous linear right inverse",
+   "results": "8 hits; Finite-product continuous linear maps and continuous splittings over a complete normed field occur; the latter cannot be applied over the valuation ring A. No declaration gives the whole lattice/sheaf statement.",
+   "date": "2026-10-21",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "sk-lem-stratified-lattice",
@@ -72,5 +189,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-continuous-lattice-sum",
+  "worker": "stage1",
+  "summary": "Used the existing finite-sum lattice theorem for a simultaneous algebraic/topological basis. Wrote explicit basis lifts to construct the continuous A-linear section, then deduced surjectivity for all spaces, identified the sheaf sum, and checked scalar extension of the actual inclusion by inverse matrices. No new nodes and no change to the statement. Added the existing sheaf tensor definition to statement dependencies.",
+  "blueprint": "Realizes the Pushing down by the trace paragraph of sk-lem-stratified-lattice.proof.md: after common refinement to constant lattices, their sheaf sum is the continuous module of the finite sum lattice, free of the given rank and spanning the ambient E-module."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q20-419edde31",
+  "group": "Q20",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-419edde31 (reviewer sub-agent of L); spot-checked: Read in full. No new nodes; the statement is unchanged. The added stmt_dep def-pur-sheaf-tensor-product is legitimate because extension to E_S is change of rings. The item is not on the dropped list and is still unsplit on side-live; there is no repair note. Source: the main-20261015 blueprint, sk-lem-stratified-lattice proof 'Pushing down by the trace' and det-lem-stratified-lattice-trace 'Local computation', the sentence 'L_0 is the constant sheaf attached to Λ_1+…+Λ_d'. The item reads that as U↦C(|U|,Λ), which is correct for continuous coefficients. Steps 1-3 and 5 are correct: they use the basis and coordinate-homeomorphism clauses of lem-sfb-finite-sum-lattice, whose hypotheses match the item word for word and which is true. The section s_j = (a↦Σa_i v_ji)∘β⁻¹ is continuous and qs=1. Surjectivity holds for every space Z. The image is F_Λ: the sectionwise map is surjective, so the sheaf cokernel is zero, followed by a mono. Step 6 is correct: the inclusion e_i↦b_i becomes the constant matrix B, with inverse B⁻¹. Small cases checked: r=0, |J|=1, the rank-1 pair A and π⁻¹A, empty and non-compact Z. One fault, C1/C4: step 4 took the sheaf property of U↦C(|U|,O_E), and so of F_Λ, F_j and E_S^r, from def-weil-pbc-continuous-integral-coefficients, whose statement does not say it. Step 6 also used, without citation, that the presheaf tensor product E_S^r needs no sheafification. FIX: steps 4 and 6 and proof_deps now cite the existing Mathlib leaf lem-cbc-continuous-functions-fpqc-sheaf. I verified it at Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean:116 (isSheaf_fpqcTopology_continuousMapPresheafAb, any topological abelian group). It applies because pro-étale coverings are fpqc coverings by def-weil-pbc-proetale-site. It is a Mathlib leaf, so it is not a route use and creates no cycle. No tool_uses.; 1 file(s) fixed by the reviewer"
  }
 }
