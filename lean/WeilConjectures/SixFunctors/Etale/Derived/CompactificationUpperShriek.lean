@@ -96,6 +96,13 @@ variable {Z Y : Scheme.{u}} (g : Z ⟶ Y) [IsProper g]
 
 /-- For a proper morphism `g : Z ⟶ Y`, the derived pushforward `Rg_* : D(Z_ét) ⥤ D(Y_ét)` is a
 left adjoint; its right adjoint is the exceptional inverse image `Rg^!` along `g`. -/
+-- STATEMENT-DISPUTED: this instance quantifies over every Grothendieck abelian A, whereas
+-- Derived.UpperShriek explicitly assumes adjoint existence for general A. The available
+-- Derived.LowerShriekLeftAdjoint proves proper coproduct preservation only for ModuleCat Λ
+-- with IsAddTorsion Λ; its finite-coefficient specialization cannot supply arbitrary A.
+-- The historical generic coproduct node now states the finite-coefficient theorem instead.
+-- Brown representability supplies only the last step after coproduct preservation. This is
+-- a conflict of source contracts requiring review, not a certified counterexample.
 instance isLeftAdjoint_rightDerivedLowerStar_of_isProper :
     ((g)_*[A]).rightDerivedFunctor.IsLeftAdjoint :=
   sorry
