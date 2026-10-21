@@ -14,9 +14,117 @@
   "def-weil-strict-roos-model",
   "def-weil-linear-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the termwise products and signed coordinates of [def-weil-strict-roos-model]. Write $\\pi_{X,n}^i:P_X^i\\to X_n^i$. For any degreewise family $a_n:X_n^i\\to Y_n^j$, its product map $a_P:P_X^i\\to P_Y^j$ is, by the universal property of products [def-weil-category-product], the unique map with $\\pi_{Y,n}^ja_P=a_n\\pi_{X,n}^i$. Therefore equality of maps into $P_Y^j$ can be checked after every projection. In particular products of maps preserve identities, composition and addition: the projections of $(ba)_P$ and $b_Pa_P$ are both $b_na_n\\pi_{X,n}$, and those of $(a+b)_P$ and $a_P+b_P$ are both $(a_n+b_n)\\pi_{X,n}$. These are identities of morphisms; coordinate notation below denotes biproduct components, not elements of arbitrary objects.",
+   "uses": [
+    "def-weil-strict-roos-model",
+    "def-sp-abelian",
+    "def-weil-category-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 014E (definition-cone), explicit product universal-property calculation for the strict model"
+   }
+  },
+  {
+   "text": "For a strict tower chain map $f$, set $F^i=(f_n^i)_P$. The chain-map and strictness equations [def-weil-abstract-derived-category, def-weil-inverse-system] give $d_Y^iF^i=F^{i+1}d_X^i$ and $s_Y^iF^i=F^is_X^i$: the nth projection of the second equation is $t_{Y,n}^if_{n+1}^i\\pi_{X,n+1}^i=f_n^it_{X,n}^i\\pi_{X,n+1}^i$. Subtracting from $F^i$ gives $v_Y^iF^i=F^iv_X^i$. Consequently $D_Y^i\\operatorname{diag}(F^{i-1},F^i)=\\operatorname{diag}(F^i,F^{i+1})D_X^i$, since their respective components are $-d_YF y-v_YF x=F(-d_Xy-v_Xx)$ and $d_YF x=Fd_Xx$. Thus the prescribed diagonal map really is a cochain map.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-inverse-system",
+    "def-weil-strict-roos-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 014E (definition-cone), strict-square calculation; Tag 08TC (definition-derived-limit) for 1 minus shift"
+   }
+  },
+  {
+   "text": "On both diagonal blocks the product identities from Step 1 give $\\mathscr R(1_X)=1_{\\mathscr R(X)}$, $\\mathscr R(bf)=\\mathscr R(b)\\mathscr R(f)$ and $\\mathscr R(f+g)=\\mathscr R(f)+\\mathscr R(g)$. Equality of the two biproduct components proves each equality of cochain maps. Also $\\mathscr R(0)=0$. This proves the additive cochain functor asserted in the statement, with exactly the map prescription of [def-weil-strict-roos-model].",
+   "uses": [
+    "def-weil-strict-roos-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 014E (definition-cone), direct verification of the strict diagonal functor"
+   }
+  },
+  {
+   "text": "For the given compatible homotopy set $H^i=(h_n^i)_P:P_X^i\\to P_Y^{i-1}$. Taking nth projections of $F^i-G^i$ and $d_Y^{i-1}H^i+H^{i+1}d_X^i$ gives respectively $(f_n^i-g_n^i)\\pi_{X,n}^i$ and $(d_{Y,n}^{i-1}h_n^i+h_n^{i+1}d_{X,n}^i)\\pi_{X,n}^i$, so these maps agree. Likewise the projections of $s_Y^{i-1}H^i$ and $H^is_X^i$ agree by $t_{Y,n}^{i-1}h_{n+1}^i=h_n^it_{X,n}^i$. Hence $v_Y^{i-1}H^i=H^iv_X^i$. Only existence of the products has been used, not exactness of products.",
+   "uses": [
+    "def-weil-inverse-system",
+    "def-weil-strict-roos-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08TC (definition-derived-limit), direct product homotopy calculation; homology.tex, cochain homotopy definition before Tag 0112"
+   }
+  },
+  {
+   "text": "Define $T^i:\\mathscr R(X)^i\\to\\mathscr R(Y)^{i-1}$ by $T^i(y,x)=(-H^{i-1}y,H^ix)$. With the differential of [def-weil-strict-roos-model], the two components of $D_Y^{i-1}T^i+T^{i+1}D_X^i$ are $((d_Y^{i-2}H^{i-1}+H^id_X^{i-1})y+(H^iv_X^i-v_Y^{i-1}H^i)x,\\ (d_Y^{i-1}H^i+H^{i+1}d_X^i)x)$. The mixed term is zero by Step 4. The remaining diagonal blocks are $F^{i-1}-G^{i-1}$ and $F^i-G^i$, again by Step 4. Thus $D_YT+TD_X=\\mathscr R(f)-\\mathscr R(g)$, which is the required homotopy with the stated signs and degrees.",
+   "uses": [
+    "def-weil-strict-roos-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 014E (definition-cone), agent-written signed block-matrix calculation"
+   }
+  },
+  {
+   "text": "Here $\\operatorname{Tow}(\\mathcal A)$ has the strict maps of [def-weil-inverse-system], with sums and composition levelwise. A degree $-1$ map between its complexes is exactly a family $h_n^i$ commuting with transitions; commuting with adjacent transitions implies commuting with every transition by repeated composition. Thus the homotopies in $K(\\operatorname{Tow}(\\mathcal A))$ are exactly the compatible homotopies treated above. Explicitly $K$ has complexes as objects and chain maps modulo $f-g=dh+hd$. The homotopy relation is an equivalence relation: use $0,-h,h+h^{\\prime}$ for reflexivity, symmetry and transitivity. It respects addition, since homotopies add. It respects composition, since for chain maps $a,b$ the equation $b(f-g)a=d(bha)+(bha)d$ follows by commuting $a,b$ past the differentials. All these operations preserve transition compatibility when performed in towers.",
+   "uses": [
+    "def-weil-inverse-system",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 013H (definition-complexes-notation); elementary verification of the quotient operations of Tag 0112 (homology-lemma-compose-homotopy-cochain)"
+   }
+  },
+  {
+   "text": "Define the functor on homotopy categories by $X\\mapsto\\mathscr R(X)$ and $[f]\\mapsto[\\mathscr R(f)]$. Steps 4 and 5 make the map on classes independent of the representative. Step 3 gives preservation of identities, composition, addition and zero after taking classes, with the operations of Step 6. Thus the resulting functor $K(\\operatorname{Tow}(\\mathcal A))\\to K(\\mathcal A)$ is additive. No assertion about cones of arbitrary morphisms in a triangulated category is used: the construction uses the fixed strict cone of [def-weil-strict-roos-model].",
+   "uses": [
+    "def-weil-strict-roos-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 013H (definition-complexes-notation), direct quotient construction"
+   }
+  },
+  {
+   "text": "Assume the $k$-linearity of [def-weil-linear-category]. For $c\\in k$, $\\pi_{Y,n}(cF)=c(\\pi_{Y,n}F)=cf_n\\pi_{X,n}$, so uniqueness of the product map [def-weil-category-product] gives $(cf)_P=cF$. Composing with biproduct projections similarly gives $\\mathscr R(cf)=c\\mathscr R(f)$. The module structure on chain maps is componentwise; the chain-map equations are stable under scalars by bilinearity of composition. If $f-g=dh+hd$, then $cf-cg=d(ch)+(ch)d$, and $ch$ is transition-compatible whenever $h$ is. Thus scalar multiplication is well-defined on both homotopy quotients, and $[\\mathscr R(cf)]=c[\\mathscr R(f)]$. Together with Step 3 this proves $k$-linearity of both functors.",
+   "uses": [
+    "def-weil-linear-category",
+    "def-weil-strict-roos-model",
+    "def-weil-category-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09MJ (definition-linear-category), explicit scalar calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category",
+  "def-weil-category-product",
+  "def-weil-inverse-system",
+  "def-weil-linear-category",
+  "def-weil-strict-roos-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 014E (definition-cone), 08TC (definition-derived-limit), 013H (definition-complexes-notation); explicit strict-model calculation, with homology.tex Tag 0112 and dga.tex Tag 09MJ for conventions"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,10 +160,52 @@
    "results": "; Homotopy.shift, HomotopyCategory.instIsCompatibleWithShiftHomologicalComplexIntUpHomotopic, CochainComplex.instQuasiIsoIntMapHomologicalComplexUpShiftFunctor, HomotopyCategory.instCommShiftIntUpMapHomotopyCategory, HomotopyCategory.instCommShiftHomologicalComplexIntUpHomFunctorMapHomotopyCategoryFactors, CochainComplex.instIsCompatibleWithShiftHomologicalComplexIntUpQuasiIso, CochainComplex.mappingCone.shiftIso, CochainComplex.mappingCone.map_δ",
    "date": "2026-10-21",
    "verdict": "no match: the cone homotopy constructors and termwise mapHomotopyCategory do not identify the compatible product homotopy on a strict Roos cone in one specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "roos|mapOfHomotopy|mapHomotopyCategory",
+   "results": "25 hits; Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean, Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean, Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean, Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean, Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean, Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean, Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean, Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: generic cone or termwise homotopy-category constructions; none states the strict Roos product homotopy formula together with additive and linear quotient functoriality"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An additive functor on complexes preserving chain homotopies descends to an additive functor on homotopy categories",
+   "results": "8 hits; CategoryTheory.Functor.mapHomotopyCategory, CategoryTheory.Functor.mapHomotopyCategory_obj, HomotopyCategory.instAdditiveHomologicalComplexQuotientHomotopicFunctor, HomotopyCategory.instAdditiveHomologicalComplexQuotient, HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory, Homotopy.map_nullHomotopicMap, CategoryTheory.Functor.mapHomotopyCategory_map, Homotopy.map_nullHomotopicMap'",
+   "date": "2026-10-21",
+   "verdict": "no match: generic cone or termwise homotopy-category constructions; none states the strict Roos product homotopy formula together with additive and linear quotient functoriality"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCone.mapOfHomotopy",
+   "results": "11 hits; CochainComplex.mappingCone.mapOfHomotopy, CochainComplex.mappingCone.trianglehMapOfHomotopy_hom₃, CochainComplex.mappingCone.map_eq_mapOfHomotopy, CochainComplex.mappingCone.triangleMapOfHomotopy_comm₂, CochainComplex.mappingCone.triangleMapOfHomotopy_comm₂_assoc, CochainComplex.mappingCone.triangleMapOfHomotopy_comm₃, CochainComplex.mappingCone.triangleMapOfHomotopy_comm₂_map, CochainComplex.mappingCone.triangleMapOfHomotopy_comm₂_map_assoc",
+   "date": "2026-10-21",
+   "verdict": "no match: generic cone or termwise homotopy-category constructions; none states the strict Roos product homotopy formula together with additive and linear quotient functoriality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The shifted cone of one minus the transition shift on a product of strict tower complexes is an additive linear functor preserving compatible chain homotopies",
+   "results": "8 hits; CochainComplex.mappingCone.mapHomologicalComplexXIso'_hom, CochainComplex.mappingCone.mapHomologicalComplexXIso, CochainComplex.mappingCone.map_δ, CochainComplex.mappingCone.mapHomologicalComplexXIso_eq, CochainComplex.mappingCone.mapHomologicalComplexXIso'_inv, HomotopyCategory.spectralObjectMappingCone_δ'_app, CochainComplex.mappingCone.mapHomologicalComplexXIso', CochainComplex.mappingCone.mapHomologicalComplexIso",
+   "date": "2026-10-21",
+   "verdict": "no match: generic cone or termwise homotopy-category constructions; none states the strict Roos product homotopy formula together with additive and linear quotient functoriality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A chain homotopy between commutative squares of cochain maps gives the signed diagonal homotopy on their mapping fibers",
+   "results": "8 hits; CochainComplex.mappingCone.mapOfHomotopy, CochainComplex.mappingCone.liftHomotopy, CochainComplex.HomComplex.δ_ofHomotopy, Homotopy.mkCoinductiveAux₂, CochainComplex.mappingCone.descHomotopy, CochainComplex.mappingCone.map_eq_mapOfHomotopy, Homotopy.mkCoinductiveAux₃, CochainComplex.mappingCone.rotateHomotopyEquivComm₂Homotopy",
+   "date": "2026-10-21",
+   "verdict": "no match: generic cone or termwise homotopy-category constructions; none states the strict Roos product homotopy formula together with additive and linear quotient functoriality"
+  },
+  {
+   "tool": "grep",
+   "query": "def liftHomotopy|def descHomotopy|def mapHomologicalComplexXIso",
+   "results": "4 hits; 421, 535, 597, 624",
+   "date": "2026-10-21",
+   "verdict": "no match: generic cone or termwise homotopy-category constructions; none states the strict Roos product homotopy formula together with additive and linear quotient functoriality"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-integral-scalar-extension-well-defined",
@@ -75,5 +225,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-strict-roos-homotopy-functor",
+  "worker": "stage1",
+  "summary": "Expanded the strict product and cone calculation, checked all homotopy signs and degrees, and proved quotient descent and scalar linearity explicitly. Kept the statement and existing definition nodes; no new nodes or attachment. The proof uses existence, never exactness, of countable products.",
+  "blueprint": "Final paragraph of def-weil-rationalization-karoubi in main-20261015: completed scalar extension on integral tower representatives before rationalization. Steps 1–5 provide the strict functor and compatible homotopies needed by that construction; Steps 6–8 justify passing to homotopy classes with linearity."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q01-2e767175d",
+  "group": "Q01",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q01-2e767175d (reviewer sub-agent of L); spot-checked: I read the item and all 8 steps in full; there are no new nodes. The base statement is true and unchanged; it matches def-weil-strict-roos-model, which defines the cone as Cone(u)[-1] with coordinates P^{i-1}⊕P^i and differential (y,x)↦(−dy−ux,dx). I checked that this differential squares to zero and agrees with the Stacks 014E cone convention after the [-1] shift. I recomputed each calculation. Step 2: s_Y F = F s_X at every projection, using the tower-morphism equation. Steps 4–5: DT+TD for T=(−Hy,Hx) equals ((dH+Hd)y+(Hv−vH)x,(dH+Hd)x); the mixed term vanishes by compatibility of h with transitions, and the signs and degrees are correct. Step 6: the homotopy quotient is made explicit (witnesses 0, −h, h+h', bha), and adjacent compatibility implies compatibility with all transitions. Step 8: scalar multiplication passes through products and homotopies. Small cases checked: zero tower, f=g with h=0, constant tower, complexes in one degree, characteristic 2, and the sign flip, which fails as it should. The Stacks tags 014E/08TC/013H/0112/09MJ exist at the cited labels. No SGA is cited, and all citations are definition nodes, so no route issue and no tool_uses. There is no re-split note, the item is not dropped, no existing Lean is attachable, and no duplicate exists among the DAG's strict-Roos nodes. One fault, fixed: Steps 1 and 8 use the universal property of products without citing it. I added def-weil-category-product to their uses, their text and proof_deps (fixes/dag/nodes/sec-smooth-purity/lem-pur-strict-roos-homotopy-functor.json). Advisory: the statement's 'countable products' could also cite that node; I left the statement untouched.; 1 file(s) fixed by the reviewer"
  }
 }
