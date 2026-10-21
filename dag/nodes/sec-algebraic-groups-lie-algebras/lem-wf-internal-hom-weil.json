@@ -227,5 +227,45 @@
   "group": "Q06",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q06-a0f42185f (reviewer sub-agent of L); spot-checked: Read the delivered item (6 steps, no new nodes), the report, the blueprint text in main-20261015 and master (orders 2915/2571), unit sk-p-cyclotomic and all 10 cited statements in full. Statement: 'exact bifunctor' is made precise as preservation of equivariant triangle diagrams whose underlying triangle is distinguished, separately in each variable, with shift isomorphisms of Weil pairs. This is because def-wf-weil-category explicitly gives fixed pairs with no triangulation. Nothing is dropped. I checked the unipotent counterexample to a Verdier triangulation (a zero connecting map would force an equivariant section, but J(e2+a e1)-(e2+a e1)=e1). The only citer, lem-wf-tate-twist-compatibility, is unaffected. Step 1: the geometry lemma gives Noetherian, finite-dimensional, ell invertible. The characterization identifies the PBC integral category with def-weil-derived-complete-integral-detailed. cor-coef-integral-internal-hom gives Hom closure for all integral constructible inputs (no site-perfect hypothesis). Advisory: the Ô_{E,X} vs A_T sheaf identification rests on the characterization's stipulated-identical-coefficient clause, a DAG-wide convention. Step 2: ringed-site exactness plus closure under shifts and cones, then the scalar-localization triangle description and the fraction rule. Step 3: I verified the inverse of beta. Dropping lem-wf-tensor-weil is justified because a Weil pair needs one isomorphism and no cocycle. Step 4: I re-derived H(u,v)β = β' P(H(u,v)) with all types. Step 5: bifunctor laws. Step 6: shifts and connecting maps via presentation-transport K-injectivity. Tests: scalar point case gives mu/lambda; zero object, empty scheme, shifts of both signs. The six tool_uses are accepted as generic black boxes. prop-weil-operations is a different framework (ctf, site-perfect first argument), not a duplicate. No cycle, no SGA, not dropped or superseded, no repair note. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.WeilInternalHomWeil",
+  "declaration": "WeilConjectures.wf_internalHom_weil",
+  "declarations": [
+   "WeilConjectures.wfHom_constructible",
+   "WeilConjectures.wfConstructibleIntegralHom",
+   "WeilConjectures.wfConstructibleRationalHom_existsUnique",
+   "WeilConjectures.wfConstructibleRationalHom",
+   "WeilConjectures.wfConstructibleHomModel",
+   "WeilConjectures.wfHomCoefficientLinear",
+   "WeilConjectures.wfHomWeilLinear_existsUnique",
+   "WeilConjectures.wfHomWeilLinear",
+   "WeilConjectures.wfIntegralHomRightShift",
+   "WeilConjectures.wfIntegralHomLeftShift",
+   "WeilConjectures.wfRationalHomRightShift",
+   "WeilConjectures.wfRationalHomLeftShift",
+   "WeilConjectures.wfHomIntegralFrobeniusCommShift",
+   "WeilConjectures.wfHomFrobeniusShiftComponent",
+   "WeilConjectures.wfHomShiftPair",
+   "WeilConjectures.wfHomDoubleShift",
+   "WeilConjectures.wfHomLeftConnecting",
+   "WeilConjectures.WfHomPreservesTriangles",
+   "WeilConjectures.wfHomCoefficientInclusion",
+   "WeilConjectures.wf_internalHom_weil"
+  ],
+  "file": "lean/Sheaf/Paper/WeilInternalHomWeil.lean",
+  "statement": "theorem wf_internalHom_weil : ∃ W : (WeilD D c X₀ E)ᵒᵖ × WeilD D c X₀ E ⥤ WeilD D c X₀ E, ((wfHomCoefficientInclusion D c X₀ E).op.prod (wfHomCoefficientInclusion D c X₀ E)) ⋙ wfInternalHom D c X₀ E = wfConstructibleRationalHom D c X₀ E ⋙ wfHomCoefficientInclusion D c X₀ E ∧ (∀ K L : WeilD D c X₀ E, (W.obj (op K, L)).carrier = (wfConstructibleRationalHom D c X₀ E).obj (op K.carrier, L.carrier) ∧ HEq (wfWeilStructure D c X₀ E (W.obj (op K, L))) (wfInternalHomFrobenius D c X₀ E K L)) ∧ (∀ (K K' L L' : WeilD D c X₀ E) (f : K' ⟶ K) (g : L ⟶ L'), HEq (W.map (Prod.mkHom f.op g)).hom.f ((wfConstructibleRationalHom D c X₀ E).map (Prod.mkHom f.hom.f.op g.hom.f))) ∧ (∀ K : (WeilD D c X₀ E)ᵒᵖ, ((Functor.curry.obj W).obj K).Additive) ∧ (∀ L : WeilD D c X₀ E, ((Functor.curry.obj W).flip.obj L).Additive) ∧ (fun [hDim : Fact (∃ n : ℕ, topologicalKrullDim (D.geometricFiber X₀).left ≤ n)] [hInv : Fact (∀ t : (D.geometricFiber X₀).left, IsUnit (c.l : (D.geometricFiber X₀).left.presheaf.stalk t))] ↦ WfHomPreservesTriangles D c X₀ E W ∧ (∀ (K L : WeilD D c X₀ E) (r s : ℤ), ∃ e : W.obj (op (wfHomShiftPair D c X₀ E K r), wfHomShiftPair D c X₀ E L s) ≅ wfHomShiftPair D c X₀ E (W.obj (op K, L)) (s - r), HEq e.hom.hom.f (wfHomDoubleShift D c X₀ E K.carrier L.carrier r s).hom) ∧ (∀ K : (WeilD D c X₀ E)ᵒᵖ, ((Functor.curry.obj W).obj K).Linear (pbcFiniteField c.l c.Qbar E)) ∧ (∀ (K K' L : WeilD D c X₀ E) (a : pbcFiniteField c.l c.Qbar E) (f : K' ⟶ K), W.map (Prod.mkHom (a • f).op (𝟙 L)) = a • W.map (Prod.mkHom f.op (𝟙 L))) ∧ (∀ M : (pbcStageCategory c.l c.Qbar (D.geometricFiber X₀).left E)ᵒᵖ, ((Functor.curry.obj (wfConstructibleRationalHom D c X₀ E)).obj M).Linear (pbcFiniteField c.l c.Qbar E)) ∧ (∀ (M M' N : pbcStageCategory c.l c.Qbar (D.geometricFiber X₀).left E) (a : pbcFiniteField c.l c.Qbar E) (f : M' ⟶ M), (wfConstructibleRationalHom D c X₀ E).map (Prod.mkHom (a • f).op (𝟙 N)) = a • (wfConstructibleRationalHom D c X₀ E).map (Prod.mkHom f.op (𝟙 N)))) (hDim := ⟨(weilGeometricFiber_coefficientHypotheses D c X₀).2.1⟩) (hInv := ⟨(weilGeometricFiber_coefficientHypotheses D c X₀).2.2⟩)",
+  "branch": "newtargets-dag",
+  "by": "Q26",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7e5cb38ff",
+  "group": "Q26",
+  "result": "pass",
+  "note": "Every node clause matches the Lean with nothing added. W is unique: carrier, Frobenius structure (HEq to wfInternalHomFrobenius = alpha then H(phi_K^-1, phi_L)) and maps (HEq to H(u,v)) are pinned. The restricted Hom is tied to the ambient wfInternalHom by a true strict functor equality, and its ∃! holds strictly. Shifted pair = canonical localized Frobenius shift component then phi[n]. Triangle clause: covariant arrow = H(1,h) then homCommShift; contravariant arrow = sourceShift(A,1) then H(h,1), checked equal to the distinguished arrow via signedDerivedInternalHom_exact and Mathlib's triangleOpEquivalence. Double shift [s-r] is a Weil iso; additivity and E-linearity in each variable. Facts come from weilGeometricFiber_coefficientHypotheses; no universe equality. Only the 4 theorems are sorry, no hollow defs, docstrings complete, lines <=100, plain imports = proof_deps modules, lean.statement verbatim, node changed only in lean, dep records untouched. Not recompiled (no file changed); worker reports clean 49.1/46.9 s. Advisories: wfHomShiftPair repeats the upstream IsoAlgebra.hasShift formula (needs a CommShift on weilFrobeniusPullback, which is absent); wfHomCoefficientLinear has the same term as pbcScalarRationalLinear; sourceShift/homCommShift owned by proof_dep lem-weil-pbc-ringed-internal-hom-exact-restriction are .choose constructions, and stmt_deps are unchanged."
  }
 }
