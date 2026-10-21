@@ -3,24 +3,75 @@
  "blueprint": {
   "is": "def-pod-perfect-derived-pairing",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "sk-def-pairing",
+   "def-sf-pairing"
+  ]
  },
  "kind": "definition",
  "title": "Perfect derived pairing",
- "statement": "In the Poincare duality conventions of this chapter, let\n$\\Lambda\\in\\{A,\\mathcal O_E,E,\\Qlb\\}$, and let $C,D$ be\nperfect point complexes\nover $\\Lambda$. A morphism\n\n$$\nb:C\\otimes _\\Lambda^LD\\longrightarrow \\Lambda\n$$\n\nis *perfect* if its tensor–internal-Hom adjoint\n\n$$\nD\\longrightarrow R\\operatorname {Hom}_\\Lambda(C,\\Lambda)=C^\\vee\n$$\n\nis an isomorphism.",
+ "statement": "In the Poincare duality conventions [def-pod-conventions] of this chapter, let\n$\\Lambda\\in\\{A,\\mathcal O_E,E,\\Qlb\\}$, and let $C,D$ be\nperfect point complexes [def-pod-perfect-point-complex]\nover $\\Lambda$ in the point coefficient categories of\n[def-weil-finite-coefficient-point]. Use the coefficient-stage derived tensor\nand internal Hom of [def-weil-derived-pullback-tensor-hom] and their\ntensor–internal-Hom adjunction [sk-def-sf-operations] (i), read in these\npoint categories. At $\\Lambda=\\Qlb$ the point category is the common-stage\ncategory [def-weil-point-fd-qlbar-category]; tensor products, the coefficient\nunit and internal Hom are formed over common finite coefficient fields,\nwith the common-stage interpretation of the cited operations.\nA morphism\n\n$$\nb:C\\otimes _\\Lambda^LD\\longrightarrow \\Lambda\n$$\n\nis *perfect* if its tensor–internal-Hom adjoint\n\n$$\nD\\longrightarrow R\\operatorname {Hom}_\\Lambda(C,\\Lambda)=C^\\vee\n$$\n\nis an isomorphism. Here the adjoint means the image of $b$ under the\nnatural adjunction bijection\n$$\n\\operatorname{Hom}(C\\otimes^L_\\Lambda D,\\Lambda)\n\\cong\\operatorname{Hom}\\bigl(D,R\\operatorname{Hom}_\\Lambda(C,\\Lambda)\\bigr),\n$$\nand $C^\\vee$ is the point derived dual of [def-pod-perfect-point-complex].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-package/def-pod-perfect-derived-pairing.md",
   "place": "node def-pod-perfect-derived-pairing, order 2252"
  },
  "stmt_deps": [
-  "def-pod-perfect-point-complex"
+  "def-pod-conventions",
+  "def-pod-perfect-point-complex",
+  "def-weil-finite-coefficient-point",
+  "def-weil-derived-pullback-tensor-hom",
+  "sk-def-sf-operations",
+  "def-weil-point-fd-qlbar-category"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsPerfectPairing|def curry|curryHomEquiv",
+   "results": "{\"t\": \"2026-10-21T04:22:49Z\", \"tool\": \"grep\", \"query\": \"IsPerfectPairing|def curry|curryHomEquiv\", \"sub\": \"CategoryTheory/Monoidal/Closed\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Closed/Enrichment.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean\"], \"digest\": \"2bfd549aa974f6d7\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: generic currying, rigid-category adjunctions and underived module perfect pairings do not give the specified four-stage point-category definition"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A pairing of perfect derived complexes is perfect if the induced morphism to the derived dual is an isomorphism",
+   "results": "{\"t\": \"2026-10-21T04:22:50Z\", \"tool\": \"leansearch\", \"query\": \"A pairing of perfect derived complexes is perfect if the induced morphism to the derived dual is an isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.IsPerfPair.dualEval\", \"RootPairing.isPerfPair_toLinearMap\", \"LinearMap.IsPerfPair.congr\", \"LinearMap.IsPerfectCompl.flip\", \"LinearMap.IsPerfPair.flip\", \"LinearMap.IsPerfPair\", \"LinearMap.IsContPerfPair.mk\", \"Module.IsReflexive.of_isPerfPair\"], \"digest\": \"e79a5d33289c70b1\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: generic currying, rigid-category adjunctions and underived module perfect pairings do not give the specified four-stage point-category definition"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MonoidalClosed\", \"curry\"",
+   "results": "{\"t\": \"2026-10-21T04:22:51Z\", \"tool\": \"loogle\", \"query\": \"\\\"MonoidalClosed\\\", \\\"curry\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.MonoidalClosed.curry'\", \"CategoryTheory.MonoidalClosed.uncurry'\", \"CategoryTheory.MonoidalClosed.uncurry'_curry'\", \"CategoryTheory.MonoidalClosed.curryHomEquiv'\", \"CategoryTheory.MonoidalClosed.curry\", \"CategoryTheory.MonoidalClosed.uncurry\", \"CategoryTheory.MonoidalClosed.curry'_id\", \"CategoryTheory.MonoidalClosed.curry_injective\"], \"digest\": \"3fd2d92c096a04c0\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: generic currying, rigid-category adjunctions and underived module perfect pairings do not give the specified four-stage point-category definition"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A pairing between perfect point complexes over finite l-adic integral rational or algebraically closed coefficients is perfect when its tensor internal Hom adjoint is an isomorphism",
+   "results": "{\"t\": \"2026-10-21T04:22:51Z\", \"tool\": \"leanfinder\", \"query\": \"A pairing between perfect point complexes over finite l-adic integral rational or algebraically closed coefficients is perfect when its tensor internal Hom adjoint is an isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.isPerfPair_toLinearMap\", \"RootPairing.IsBalanced.isPerfectCompl\", \"Module.IsReflexive.of_isPerfPair\", \"LinearMap.IsPerfPair.compl₁₂\", \"LinearEquiv.instIsPerfPair\", \"LinearMap.IsPerfPair.of_bijective\", \"LinearMap.IsPerfPair.congr\", \"LinearMap.IsPerfPair.dualEval\"], \"digest\": \"3cb013135a4064e8\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: generic currying, rigid-category adjunctions and underived module perfect pairings do not give the specified four-stage point-category definition"
+  },
+  {
+   "tool": "grep",
+   "query": "IsPerfectPairing|IsPerfPair|def curry",
+   "results": "{\"t\": \"2026-10-21T04:23:09Z\", \"tool\": \"grep\", \"query\": \"IsPerfectPairing|IsPerfPair|def curry\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Logic/Equiv/Prod.lean\", \"Mathlib/Algebra/Module/CharacterModule.lean\", \"Mathlib/Algebra/Module/Equiv/Basic.lean\", \"Mathlib/LinearAlgebra/PerfectPairing/Restrict.lean\", \"Mathlib/LinearAlgebra/PerfectPairing/Restrict.lean\", \"Mathlib/LinearAlgebra/PerfectPairing/Restrict.lean\", \"Mathlib/LinearAlgebra/PerfectPairing/Restrict.lean\", \"Mathlib/LinearAlgebra/PerfectPairing/Restrict.lean\"], \"digest\": \"ee19a7af9ed8581e\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: generic currying, rigid-category adjunctions and underived module perfect pairings do not give the specified four-stage point-category definition"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a monoidal closed derived category a morphism C tensor D to the tensor unit is a perfect pairing if curry b is an isomorphism D to internal Hom C unit",
+   "results": "{\"t\": \"2026-10-21T04:23:12Z\", \"tool\": \"leanfinder\", \"query\": \"In a monoidal closed derived category a morphism C tensor D to the tensor unit is a perfect pairing if curry b is an isomorphism D to internal Hom C unit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.InternallyProjective\", \"CategoryTheory.tensorLeftHomEquiv\", \"CategoryTheory.exp.adjunction\", \"CategoryTheory.MonoidalClosed.internalHomAdjunction₂\", \"CategoryTheory.tensorRightHomEquiv\", \"CategoryTheory.tensorLeftAdjunction\", \"CategoryTheory.ihom.adjunction\", \"CategoryTheory.tensorRightAdjunction\"], \"digest\": \"0f680189d5df91dd\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: generic currying, rigid-category adjunctions and underived module perfect pairings do not give the specified four-stage point-category definition"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -40,5 +91,20 @@
    "CategoryTheory.MonoidalClosed.IsPerfectPairing"
   ],
   "note": "attached by the lead's tool attach.py 2026-10-16 22:57 UTC for group NX, the statement match confirmed by two remote workers, sorry-free and resting on no sorry by sorry_map_slopmaster2_19b471a7.jsonl.gz: Its `isIso` field gives exactly the tensor–internal-Hom adjoint isomorphism clause, specialized to the point category and coefficient unit Λ."
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "def-pod-perfect-derived-pairing",
+  "worker": "stage1",
+  "summary": "Definition-only split using six existing constituent nodes, no new nodes. Retained the exact perfectness criterion and its direction; exposed the standing conventions, perfect point complexes, point categories, coefficient-stage tensor and internal Hom and the adjunction, including the common-stage algebraically closed point category. Searched Mathlib twice by meaning and read the generic curry and underived perfect-pairing declarations; no full match. The previously rejected generic Lean attachment is not asserted anew; its inherited metadata is reported for maintainer correction.",
+  "blueprint": "Realizes the entire current main-20261015 definition at order 2596 (master order 2252): domain perfect point complexes at all four coefficient stages, pairing into the coefficient unit, and perfectness precisely when the adjoint D -> RHom(C,Lambda) is an isomorphism. This is a constituent definition of package clause (6), not the unit key theorem; it has no proof steps or unit realization edits."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NL-6906efc0a",
+  "group": "NL",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-6906efc0a (reviewer sub-agent of L); spot-checked: The definition split is correct, with 0 new nodes and no fixes or dropped nodes. I read the blueprint source in both copies: main-20261015 order 2596 and master order 2252 are word for word the same. The delivered statement keeps the source exactly. The domain is still perfect point complexes over Λ ∈ {A, O_E, E, Q̄_ℓ}, the target is the coefficient unit, the adjoint is still D → RHom(C,Λ) = C^∨, and the criterion is still that this adjoint is an isomorphism. It only adds citations, the common-stage reading for Q̄_ℓ and the adjunction bijection written out. I read the six stmt_deps in full and each defines what the item takes from it: def-pod-conventions (the stages, the point categories and C^∨, with no properness), def-pod-perfect-point-complex (bounded finite projective representative and the dual; its blueprint_update is identical), def-weil-finite-coefficient-point (the four point categories), def-weil-derived-pullback-tensor-hom (the four-level tensor and RHom, with compositum EE' at Q̄_ℓ), sk-def-sf-operations (i) (K⊗− left adjoint to RHom(K,−), which gives the right direction), and def-weil-point-fd-qlbar-category. All six are split, unmerged definitions, so there is no route or tool_use question. The full stmt_deps+proof_deps closure of the six (15084 nodes) does not contain the item, so there is no cycle. The same_as entries sk-def-pairing and def-sf-pairing are justified: both statements end with the identical perfectness clause. All five citers (thm-pod-derived-, proper- and qbar- duality, finite-reduction, identification-of-the-comparison) use this direction and domain. Small cases: multiplication on Λ is perfect, the zero pairing is not, C = D = 0 is perfect, C = 0 with D = Λ is not, the shifted evaluation is perfect, and O_E/ϖ² is handled correctly because the domain is perfect complexes only. The Mathlib 'no match' verdict is right. The inherited IsPerfectPairing record is IsIso(curry b) in a generic monoidal closed category, with no four-stage identification, so it is not an exact B10 match. The item is still imported and unsplit on live and side-live, so it is not superseded. Maintainer notes: the report wrongly says source.document now points at main-20261015 (it is still master 2252, with identical text); the inherited lean note should be qualified as a generic component; uses_not_cited is stale."
  }
 }
