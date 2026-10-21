@@ -14,9 +14,97 @@
   "def-sfb-qlbar-subextension-to-qlbar",
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [det-def-sfb-qlbar-condensed-subextensions](1), $I$ is nonempty and any two fields have a common finite overfield. It is small in the universe fixed in the statement, since its objects are subfields of the fixed set $\\Qlb$ and its arrows are inclusions. By [def-sfb-qlbar-subextension-map], the transition maps satisfy the identity and composition laws, giving $D$. By [def-sfb-qlbar-subextension-to-qlbar], $j_F\\circ\\iota_{E,F}=j_E$. Thus these actual sectionwise inclusions define the stated cocone of abelian sheaves on the site of [sk-def-sfb-condensed-ring].",
+   "uses": [
+    "det-def-sfb-qlbar-condensed-subextensions",
+    "def-sfb-qlbar-subextension-map",
+    "def-sfb-qlbar-subextension-to-qlbar",
+    "sk-def-sfb-condensed-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-point/sk-prop-sfb-qlbar-colimit-point.proof.md",
+    "place": "Paragraph 1: diagram and cocone; paragraph 2: directed index"
+   }
+  },
+  {
+   "text": "For a profinite $S$, every $x\\in A(S)$ takes values in some finite $E$, by [sk-def-sfb-qlbar-condensed]. Its corestriction $x_E:S\\to E$ is continuous: if $U=E\\cap V$ is open in the subspace topology, with $V$ open in $\\Qlb$, then $x_E^{-1}(U)=x^{-1}(V)$ is open. Hence $x_E\\in C(S,E)$ as in [sk-def-sfb-condensed-ring], and $j_{E,S}(x_E)=x$ by [def-sfb-qlbar-subextension-to-qlbar]. Conversely each $j_{E,S}$ has values in $A(S)$ and is injective, since equality after inclusion into $\\Qlb$ is pointwise equality in $E$. This identifies $A(S)$ with the union of these section groups inside $C(S,\\Qlb)$.",
+   "uses": [
+    "sk-def-sfb-qlbar-condensed",
+    "sk-def-sfb-condensed-ring",
+    "def-sfb-qlbar-subextension-to-qlbar"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-point/sk-prop-sfb-qlbar-colimit-point.proof.md",
+    "place": "Paragraphs 2–3: injectivity and identification of the union by continuous corestriction"
+   }
+  },
+  {
+   "text": "Fix a compatible cocone $a_E:\\underline E\\to G$. For $x\\in A(S)$ choose a representation $x=j_{E,S}(x_E)$ from step 2 and put $a_S(x)=a_{E,S}(x_E)$. If also $x=j_{F,S}(x_F)$, choose a finite $H$ containing $E,F$ by [det-def-sfb-qlbar-condensed-subextensions](1). The images of $x_E$ and $x_F$ in $C(S,H)$ under [def-sfb-qlbar-subextension-map] agree pointwise, since both have image $x$ in $\\Qlb$. The compatibility $a_H\\circ\\iota_{E,H}=a_E$ and $a_H\\circ\\iota_{F,H}=a_F$ then gives $a_{E,S}(x_E)=a_{F,S}(x_F)$. Thus $a_S$ is independent of every choice.",
+   "uses": [
+    "det-def-sfb-qlbar-condensed-subextensions",
+    "def-sfb-qlbar-subextension-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-point/sk-prop-sfb-qlbar-colimit-point.proof.md",
+    "place": "Paragraph 2: universal property of the directed union, with representative independence written out"
+   }
+  },
+  {
+   "text": "For $x,y\\in A(S)$ choose representatives over $E,F$ and a common finite $H$ using [det-def-sfb-qlbar-condensed-subextensions](1). Write $x_H,y_H\\in C(S,H)$ for their images. The pointwise operations of [sk-def-sfb-qlbar-condensed] and [sk-def-sfb-condensed-ring] give $x+y=j_{H,S}(x_H+y_H)$. Independence in step 3 and additivity of $a_{H,S}$ therefore give $a_S(x+y)=a_{H,S}(x_H+y_H)=a_S(x)+a_S(y)$. The zero section is represented by the zero function over $\\mathbf Q_\\ell$, so $a_S(0)=0$. Consequently every $a_S$ is an abelian-group homomorphism.",
+   "uses": [
+    "det-def-sfb-qlbar-condensed-subextensions",
+    "sk-def-sfb-qlbar-condensed",
+    "sk-def-sfb-condensed-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-point/sk-prop-sfb-qlbar-colimit-point.proof.md",
+    "place": "Paragraph 2: the directed-union universal map is additive"
+   }
+  },
+  {
+   "text": "For a continuous map $u:T\\to S$ of profinite sets, represent $x\\in A(S)$ by $x_E\\in C(S,E)$. The restrictions in [sk-def-sfb-qlbar-condensed] and [sk-def-sfb-condensed-ring] are precomposition, so $x|_T$ is represented by $x_E\\circ u$ over the same $E$. Naturality of the given sheaf morphism $a_E$ yields $a_T(x|_T)=a_{E,T}(x_E\\circ u)=G(u)(a_{E,S}(x_E))=G(u)(a_S(x))$. Thus the homomorphisms $a_S$ are a natural transformation of the underlying presheaves. Since $A$ and $G$ are sheaves, such a natural transformation is exactly an additive sheaf morphism $a:A\\to G$.",
+   "uses": [
+    "sk-def-sfb-qlbar-condensed",
+    "sk-def-sfb-condensed-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-point/sk-prop-sfb-qlbar-colimit-point.proof.md",
+    "place": "Paragraph 3: the sectionwise union identification is natural, and the vertex is already a sheaf"
+   }
+  },
+  {
+   "text": "For $x_E\\in C(S,E)$, the choice of its own representative gives $a_S(j_{E,S}(x_E))=a_{E,S}(x_E)$, so $a\\circ j_E=a_E$, with the legs of [def-sfb-qlbar-subextension-to-qlbar]. If $b:A\\to G$ has the same composites, represent any $x\\in A(S)$ by $j_{E,S}(x_E)$ as in step 2. Then $b_S(x)=b_S(j_{E,S}(x_E))=a_{E,S}(x_E)=a_S(x)$. Equality on all sections implies $b=a$. This proves existence and uniqueness for every compatible cocone, precisely the colimit universal property of [def-weil-pbc-category-colimit].",
+   "uses": [
+    "def-sfb-qlbar-subextension-to-qlbar",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-point/sk-prop-sfb-qlbar-colimit-point.proof.md",
+    "place": "Paragraph 3: conclude the colimit using its explicit universal property"
+   }
+  }
+ ],
+ "proof_deps": [
+  "det-def-sfb-qlbar-condensed-subextensions",
+  "def-sfb-qlbar-subextension-map",
+  "def-sfb-qlbar-subextension-to-qlbar",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-qlbar-condensed",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-point/sk-prop-sfb-qlbar-colimit-point.proof.md",
+  "place": "The blueprint point-colimit proof, with its sectionwise directed-union argument expanded into the additive natural universal map; no general sheafification theorem is needed."
+ },
  "mathlib_searches": [
   {
    "tool": "loogle",
@@ -59,10 +147,52 @@
    "results": "Condensed.fintypeCatAsCofanIsColimit; Condensed.isColimitLocallyConstantPresheafDiagram; LightCondensed.fintypeCatAsCofanIsColimit; LightCondensed.isColimitLocallyConstantPresheafDiagram; Profinite.Extend.isColimitCocone; Condensed.isColimitLocallyConstantPresheaf_desc_apply; LightCondensed.isColimitLocallyConstantPresheaf; Condensed.isColimitLocallyConstantPresheaf. The Condensed.Discrete.Colimit results concern locally constant functions and cofiltered finite quotient spaces, not continuous functions into finite p-adic fields.",
    "date": "2026-10-21",
    "verdict": "no match: no theorem for this specified finite-subextension cocone"
+  },
+  {
+   "tool": "grep",
+   "query": "([Pp]adic|[Ff]initeIntermediate|[Aa]lgCl).*(colimit|Cocone)|(colimit|Cocone).*([Pp]adic|[Ff]initeIntermediate|[Aa]lgCl)",
+   "results": "{\"t\": \"2026-10-21T04:14:16Z\", \"tool\": \"grep\", \"query\": \"([Pp]adic|[Ff]initeIntermediate|[Aa]lgCl).*(colimit|Cocone)|(colimit|Cocone).*([Pp]adic|[Ff]initeIntermediate|[Aa]lgCl)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: no p-adic finite-subextension cocone colimit in Mathlib"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The filtered colimit of continuous function sheaves on profinite sets into finite p-adic subfields is the sheaf of functions valued in a finite subextension",
+   "results": "{\"t\": \"2026-10-21T04:14:17Z\", \"tool\": \"leansearch\", \"query\": \"The filtered colimit of continuous function sheaves on profinite sets into finite p-adic subfields is the sheaf of functions valued in a finite subextension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.hasFilteredColimitsOfSize\", \"Condensed.lanSheafProfinite\", \"LightCondensed.isColimitLocallyConstantPresheaf\", \"Condensed.isoLocallyConstantOfIsColimit\", \"LightCondensed.lanLightCondSet\", \"LightCondensed.ofSheafForgetLightProfinite\", \"Condensed.ofSheafProfinite\", \"Condensed.fintypeCatAsCofanIsColimit\"], \"digest\": \"779a71f696147a71\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: generic sheaf colimits, locally constant-function colimits, free module presentations, and algebraic direct limits do not state the specified cocone universal property"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Condensed\", \"IsColimit\"",
+   "results": "{\"t\": \"2026-10-21T04:14:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"Condensed\\\", \\\"IsColimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Condensed.fintypeCatAsCofanIsColimit\", \"LightCondensed.isColimitLocallyConstantPresheafDiagram\", \"LightCondensed.fintypeCatAsCofanIsColimit\", \"LightCondensed.isoLocallyConstantOfIsColimit\", \"Condensed.isColimitLocallyConstantPresheaf\", \"LightCondensed.isoLocallyConstantOfIsColimit_inv\", \"Condensed.isColimitLocallyConstantPresheafDiagram\", \"Condensed.isoLocallyConstantOfIsColimit\"], \"digest\": \"f611ebf0de4d6f45\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: generic sheaf colimits, locally constant-function colimits, free module presentations, and algebraic direct limits do not state the specified cocone universal property"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The finite subextension valued continuous function sheaf into an algebraic closure of Q_p is the colimit in condensed abelian groups of the finite subfield sheaves",
+   "results": "{\"t\": \"2026-10-21T04:14:23Z\", \"tool\": \"leanfinder\", \"query\": \"The finite subextension valued continuous function sheaf into an algebraic closure of Q_p is the colimit in condensed abelian groups of the finite subfield sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"BDeRhamPlus\", \"Condensed.isColimitLocallyConstantPresheafDiagram\", \"LightCondensed.fintypeCatAsCofanIsColimit\", \"LightCondensed.isColimitLocallyConstantPresheafDiagram\", \"Condensed.isColimitLocallyConstantPresheaf_desc_apply\", \"Condensed.fintypeCatAsCofanIsColimit\", \"Condensed.profiniteSolid\", \"LightCondensed.isColimitLocallyConstantPresheaf\"], \"digest\": \"c2555ac67eb02935\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: generic sheaf colimits, locally constant-function colimits, free module presentations, and algebraic direct limits do not state the specified cocone universal property"
+  },
+  {
+   "tool": "grep",
+   "query": "isColimitSheafifyCocone|createsColimitOfIsSheaf|isColimitLocallyConstantPresheaf",
+   "results": "{\"t\": \"2026-10-21T04:14:31Z\", \"tool\": \"grep\", \"query\": \"isColimitSheafifyCocone|createsColimitOfIsSheaf|isColimitLocallyConstantPresheaf\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Limits.lean\", \"Mathlib/CategoryTheory/Sites/Limits.lean\", \"Mathlib/CategoryTheory/Sites/Limits.lean\", \"Mathlib/CategoryTheory/Sites/Limits.lean\", \"Mathlib/CategoryTheory/Sites/Coherent/ExtensiveColimits.lean\"], \"digest\": \"e6802ab227e28520\"}",
+   "date": "2026-10-21",
+   "verdict": "related only: Sites/Limits.lean:213 and :240 promote an established presheaf colimit; they do not prove the sectionwise finite-subextension universal property"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A directed union of continuous function subsheaves valued in intermediate subfields satisfies the colimit universal property for compatible additive natural transformations",
+   "results": "{\"t\": \"2026-10-21T04:14:33Z\", \"tool\": \"leanfinder\", \"query\": \"A directed union of continuous function subsheaves valued in intermediate subfields satisfies the colimit universal property for compatible additive natural transformations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.Presentation.isColimit\", \"SheafOfModules.isColimitFreeCofan\", \"IntermediateField.Lifts.union\", \"SheafOfModules.instHasColimitsOfSizeOfPresheafOfModulesValRingCat\", \"SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat\", \"AlgebraicGeometry.Scheme.Modules.instHasColimits\", \"CategoryTheory.Sheaf.isColimitSheafifyCocone\", \"DirectLimit.instFieldOfRingHomClass\"], \"digest\": \"6c5090a9fc2a3f51\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: generic sheaf colimits, locally constant-function colimits, free module presentations, and algebraic direct limits do not state the specified cocone universal property"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "sk-prop-sfb-qlbar-colimit-x",
@@ -80,5 +210,39 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-qlbar-point-abelian-colimit",
+  "worker": "stage1",
+  "summary": "Expanded the blueprint directed-union proof into continuous finite-stage representatives, independence in a common overfield, additivity, naturality, factorization and uniqueness. Reused the finite-compositum lemma and the actual transition/cocone definitions. No statement changes or new nodes. No Lean attachment is claimed, following the dispatcher instruction. Recorded fresh Mathlib searches and checked their hits.",
+  "blueprint": "The ancestor sk-prop-sfb-qlbar-colimit-x, third-isomorphism step, cites the raw sk-prop-sfb-qlbar-colimit-point: step 1 realizes its paragraph 1; steps 2–4 realize paragraph 2 and the union/corestriction part of paragraph 3; steps 5–6 realize the natural identification and colimit conclusion of paragraph 3. This keeps the same sectionwise directed-union route.",
+  "tool_uses": [
+   {
+    "node": "det-def-sfb-qlbar-condensed-subextensions",
+    "why": "The finite-compositum and nonemptiness statement supplies a common finite overfield for representative independence and addition; this is the field-algebra tool used by the point-colimit route."
+   },
+   {
+    "node": "def-sfb-qlbar-subextension-map",
+    "why": "The raw point-colimit unit supplies the actual transition maps and functor laws needed by the third isomorphism of the assigned colimit-x unit."
+   },
+   {
+    "node": "def-sfb-qlbar-subextension-to-qlbar",
+    "why": "The raw point-colimit unit supplies the actual inclusion legs and cocone compatibility, needed for the specified universal property."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-def-sfb-qlbar-condensed-subextensions",
+  "def-sfb-qlbar-subextension-map",
+  "def-sfb-qlbar-subextension-to-qlbar"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q55-ef92b76c3",
+  "group": "Q55",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q55-ef92b76c3 (reviewer sub-agent of L); spot-checked: I read the delivery in full: the item, the Q55 report, the statements of all six cited nodes, the colimit-x and raw colimit-point unit records, and the main-20261015 sk-prop-sfb-qlbar-colimit-point proof.md. The statement and stmt_deps are unchanged from side-live. The statement matches the raw blueprint proposition: the same index poset of finite subextensions, the subspace topology on each E, a vertex of finite-subextension-valued maps (not all of C(-,Qlb)), and the category Sh(*_proet,Ab). The 6 steps write out the source's sectionwise directed-union route. (1) det-subextensions(1) gives a nonempty directed index, and the definition nodes give the functor laws and j_F∘ι=j_E. (2) Corestriction is continuous and j_E is injective, so A(S) is the union of the C(S,E). (3) The value does not depend on the representative, by comparing in a common compositum H. (4) The map is additive, and zero is represented over Q_l. (5) It is natural under precomposition, and A and G are sheaves, so it is a morphism of sheaves. (6) Factorization and uniqueness follow, which is the colimit definition. Every step is correct and genuinely elementary from cited statements, and proof_deps equals the union of the step uses. Proving the universal property directly removes the need for the generic sheafification-of-colimits fact; no argument of the source is dropped. Edge cases checked: S empty, S a point, a section represented over two fields, G=0, non-locally-constant maps; using all of C(-,Qlb) would break step 2, and the statement excludes it. There are no new nodes and no duplicate in the DAG; the closure (173 nodes) is acyclic; no SGA is used; the three Mathlib search kinds are recorded with real results. I accept the declared tool_uses (det-subextensions is on the route through sk-def-sfb-qlbar-condensed; the other two are definitions); none was actually needed. Maintainer notes: (a) possible B10 case: the project Lean has Profinite.isColimitPadicAlgClRingObjCocone in RingObjects/Condensed/FiniteSubextension.lean, around lines 173-196; that file has no sorry but I did not check its closure; lean_audit is {} because the dispatcher forbade attaching. (b) Unit sk-prop-sfb-qlbar-colimit-point still has an empty realized; this item is its statement. (c) The citations.json and searches.jsonl named in the report are not in the commit and are not needed."
+ }
 }
