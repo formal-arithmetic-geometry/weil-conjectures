@@ -32,65 +32,62 @@
  ],
  "proof": [
   {
-   "text": "By [def-weil-derived-pullback-tensor-hom], integral pullback preserves $D^b_c$, so $M=Lk^*N$ is an allowed input to $\\kappa^h$. The coefficient identity of [lem-trf-constant-coefficient-composition] gives compatibility at every $A_{E,m}$. Projecting to every quotient in the structure-map formula of [def-weil-inverse-image-pullback-comparison] gives the completed coefficient identity. Thus the canonical inverse-image compositor $d$ respects the transported module actions, and its termwise map descends to the derived categories.",
+   "text": "Integral pullback preserves the bounded constructible completed category. The constant-section normalization and the completed-limit projection equations prove that the site inverse-image compositor is linear; use its already proved unique section formula to obtain the termwise and derived compositors.",
    "uses": [
     "def-weil-derived-pullback-tensor-hom",
-    "lem-trf-constant-coefficient-composition",
     "def-weil-inverse-image-pullback-comparison"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/thm-trf-l-function-euler-product.proof.md",
-    "place": "Step 1, Global powers: compatibility with composition of the integral identifications"
-   }
+   "elementary": true
   },
   {
-   "text": "Use [lem-trf-integral-composition-counit-images], with its one chosen $q:P\\to N$, $Q=h^{-1}k^{-1}(q)$, and $\\eta:Lh^*M\\xrightarrow\\sim R\\lim D_\\bullet$. It computes the two entire-tower counit images of $a=\\eta c^E\\kappa^{kh}_Nd_N$ and $b=\\eta\\kappa^h_Mh^{-1}(\\kappa^k_N)$ as $c_\\bullet\\theta_{kh}^\\Delta\\Delta(d_P)\\Delta[Q]^{-1}$ and $u_{h,C_k}h^{-1}(\\theta_k^\\Delta)\\Delta[Q]^{-1}$. Both formulas retain exactly the same inverted resolution map.",
+   "text": "For coefficient sequence modules, the unit-conjugateEquiv identity for the composite pullback adjunction identifies the composite generator with the two successive generators followed by the base-change compositor. Apply the defining section equation for the tower tensor units three times. Naturality of the generators and the canonical comma arrows then proves the whole-tower unit composition equation. The comma-arrow equality follows by cancelling the invertible pullback projections. This checks all sections and all transitions, before localization.",
    "uses": [
-    "lem-trf-integral-composition-counit-images"
+    "def-trf-integral-comparison-sequence-systems",
+    "def-trf-integral-tower-inverse-image-unit"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/thm-trf-l-function-euler-product.proof.md",
-    "place": "Step 1, Global powers: compatibility with composition of the integral identifications"
-   }
+   "elementary": true
   },
   {
-   "text": "The finite units of [def-weil-inverse-image-pullback-comparison] and the termwise compositor of [lem-weil-pbc-proetale-derived-pullback-composition] identify the two strict maps preceding $\\Delta[Q]^{-1}$: on local sections, $c_m\\theta_{kh,m}d_P(x)=\\bar x\\otimes1\\otimes1=u_{h,C_{k,m}}h^{-1}(\\theta_{k,m})(x)$. Tensor balancing uses the coefficient identity of step 1. These are sheafified tensor-unit maps, so the section formulas determine the sheaf maps and commute with differentials. Reducing the same $P$ from $m+1$ to $m$ sends both formulas to $\\bar x\\otimes1\\otimes1$, hence the equality is of strict tower maps. Consequently $\\epsilon_D\\Delta(a)=\\epsilon_D\\Delta(b)$.",
+   "text": "Encode the preceding unit equation and the diagonal/compositor equation as finite pastings of exact functors. The exact-derived transformation-pasting theorem transfers both ordinary equations with precisely the prescribed mapDerivedCategoryCompIso and mapDerivedCategoryNatIso comparisons. Naturality of the resulting tower compositor gives the composite unit equation after any map from a constant tower.",
    "uses": [
-    "def-weil-inverse-image-pullback-comparison",
-    "lem-weil-pbc-proetale-derived-pullback-composition"
+    "lem-sp-exact-derived-transformation-pasting",
+    "def-trf-integral-tower-inverse-image-unit"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/thm-trf-l-function-euler-product.proof.md",
-    "place": "Step 1, Global powers: compatibility with composition of the integral identifications"
-   }
+   "elementary": false
   },
   {
-   "text": "The bijection $\\Phi_{X,D}:f\\mapsto\\epsilon_D\\circ\\Delta(f)$ of [lem-trf-integral-comparison-counit-characterization] is injective. Apply it to the equality in step 3 to get $a=b$; cancel the isomorphism $\\eta$. This gives precisely $c^E_{h,k,N}\\kappa^{kh}_Nd_{h,k,N}=\\kappa^h_{Lk^*N}h^{-1}(\\kappa^k_N)$ in the ambient completed-coefficient derived category.",
+   "text": "The K-flat reduction counit theorem computes the single-pullback comparison at its defining good complex. Extract the exact resolution actually chosen by inverseImagePullbackComparisonDerived; its displayed formula and naturality transport the counit equation along the invertible derived resolution map to every ambient derived input. Apply this to k and h followed by k. The already proved resolution-matching theorem gives the corresponding h equation at Lk*N.",
    "uses": [
-    "lem-trf-integral-comparison-counit-characterization"
+    "lem-trf-integral-pullback-reduction-counit",
+    "lem-trf-integral-pullback-resolution-matching",
+    "def-weil-inverse-image-pullback-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/thm-trf-l-function-euler-product.proof.md",
-    "place": "Step 1, Global powers: compatibility with composition of the integral identifications"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Postcompose both sides of the desired equation by the recorded realization eta, which is invertible. Apply the inverse of the constant-tower/derived-limit adjunction hom equivalence, f ↦ Delta(f) followed by the counit. The definition of the normalized pullback compositor and counit naturality compute the left image from the single-composite counit formula. Resolution matching, diagonal naturality and the single-k counit formula compute the right image. The derived whole-tower unit equation of step 3 identifies them. Injectivity of the hom equivalence and cancellation of eta finish the original ambient derived equality.",
+   "uses": [
+    "def-trf-integral-comparison-realization-models",
+    "lem-trf-integral-pullback-comparison-realization"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "def-trf-integral-comparison-realization-models",
+  "def-trf-integral-comparison-sequence-systems",
+  "def-trf-integral-tower-inverse-image-unit",
   "def-weil-derived-pullback-tensor-hom",
   "def-weil-inverse-image-pullback-comparison",
-  "lem-trf-constant-coefficient-composition",
-  "lem-trf-integral-comparison-counit-characterization",
-  "lem-trf-integral-composition-counit-images",
-  "lem-weil-pbc-proetale-derived-pullback-composition"
+  "lem-sp-exact-derived-transformation-pasting",
+  "lem-trf-integral-pullback-comparison-realization",
+  "lem-trf-integral-pullback-reduction-counit",
+  "lem-trf-integral-pullback-resolution-matching"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/thm-trf-l-function-euler-product.proof.md",
-  "place": "Step 1, Global powers: integral comparison with composition; finite-level tensor calculation and strict-tower realization"
+  "place": "Step 1, Global powers; whole-tower tensor-unit composition, exact-derived pasting, and adjunction cancellation using the existing single-pullback counit and resolution-matching results"
  },
  "mathlib_searches": [
   {
@@ -162,20 +159,13 @@
   "note": "Read the item, all 9 stmt deps and the recorded declarations (IntegralComparisonSystem/integralComparisonComposition and the normalized pullback and Roos models, inverseImagePullbackComparisonDerived, inverseImageIntegralModules/Derived = SheafOfModules.pushforward along proEtaleIsoPostcompose, sfIntegralConstructibleCategory). Clause-by-clause match: IsIso h,k; residue-field invertibility as in c^E, with stalk units derived inline; κ evaluated at the right objects; d is a unique section-normalized iso via Over.mapComp, correctly oriented, a named ∃! theorem then choose (H5 ok), applied termwise via mapDerivedCategoryNatIso; Mathlib pushforwardComp needs a separate ring identity, so not H4; c^E is the recorded compositor for the normalized D; the equation c∘κ^{kh}∘d = κ^h∘h⁻¹κ^k holds in D(Z, O_E) with no reduction; the Lk*N constructibility conjunct is present. Common universe u comes from the c^E interface and loses no case. Edge cases (identities, zero, empty schemes, E=Q_l, all degrees) are not excluded. Imports match proof deps (resolution-matching has no lean record; levelwise-abelian imports its mathlib_match). Node differs from base only in lean; statement verbatim; lines ≤100; report has both sections. nt_compile --json: exit 0, item module 6.1 s, no errors or warnings. No findings."
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-21",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M1",
+  "group": "G3",
   "result": "pass",
-  "landing": "20261020T051513-L-1698169",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.ProEtale.integralInverseImageComparison_composition",
-   "AlgebraicGeometry.ProEtale.integralInverseImageComposition_existsUnique"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.ProEtale.integralInverseImageComparison_composition"
-  ]
+  "landing": "20261021T225131-L-3777125",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
