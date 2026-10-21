@@ -14,11 +14,83 @@
   "def-weil-abstract-derived-category",
   "def-weil-sheaf-of-modules-category",
   "lem-weil-pbc-diagram-site-realization",
-  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "def-pur-kinjective-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose small presenting sites $\\mathcal C_X,\\mathcal C_Y$ and their small diagram sites $J^{\\mathrm{op}}\\times\\mathcal C_T$ from [lem-weil-pbc-diagram-site-realization]. In that description $B_T$ is the ring sheaf with values $B_T(j)(U)$, and a module over it is exactly a diagram of module sheaves with the stated semilinear transitions: the sheaf and module axioms on each covering family are those at its fixed $j$ [def-weil-sheaf-of-modules-category]. The componentwise functors $(u^{-1})^J$ and $u_*^J$ are adjoint: the original adjunction sends each component map to its adjoint and its naturality says exactly that these maps commute with every arrow of $J$. Finite limits are computed componentwise, so $(u^{-1})^J$ preserves them. Thus they define the geometric morphism $u^J$ of these small diagram topoi, and the given structural maps define its two ringed versions $f_B$ and $f_S$ for $B$ and $\\Delta S$.",
+   "uses": [
+    "lem-weil-pbc-diagram-site-realization",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00Z4, 00Z8, 00XA, definitions of topology, sheaf and topos; explicit componentwise argument on the diagram sites"
+   }
+  },
+  {
+   "text": "Let $r_T:(\\mathscr T^J,B_T)\\to(\\mathscr T^J,\\Delta S_T)$ have identity underlying geometric morphism and structural ring map $a_T$. By [def-pc-sheaf-restrict-scalars], its direct image is $r_{T*}=\\rho_T$: the abelian sheaf and all transition maps stay the same, and $S_T$ acts through $a_T$. The composites $r_Y\\circ f_B$ and $f_S\\circ r_X$ have the same underlying morphism $u^J$. Their structural maps from $(u^{-1})^J\\Delta S_Y$ to $B_X$ are respectively $((u^{-1})^J\\Delta S_Y\\xrightarrow{(u^{-1})^Ja_Y}(u^{-1})^JB_Y\\to B_X)$ and $((u^{-1})^J\\Delta S_Y\\to\\Delta S_X\\xrightarrow{a_X}B_X)$. These are equal by the assumed commuting square, as maps of entire ring diagrams. Denote this common ringed-topos morphism by $h$.",
+   "uses": [
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, lemma-derived-pushforward-composition; two factorizations through identity-topos coefficient maps"
+   }
+  },
+  {
+   "text": "Restriction $\\rho_T$ preserves kernels and cokernels: it changes only the ring action on the underlying abelian sheaf, and kernels and cokernels in the module category are those of abelian sheaves by [def-weil-sheaf-of-modules-category]. Consequently it preserves cohomology and quasi-isomorphisms. By [lem-weil-pbc-exact-functor-derived-factorization], applied to the exact functor $\\rho_T$ between the abelian module categories, termwise application descends through the localizations of [def-weil-abstract-derived-category] to a triangulated functor, denoted again $\\rho_T$, with natural identification $\\rho_T(QK)\\cong Q(\\rho_TK)$. In the prescribed K-injective computation of $Rr_{T*}$, a resolution $K\\to I$ gives $\\rho_TK\\to\\rho_TI$, still a quasi-isomorphism. Its class identifies $\\rho_TK$ with $Rr_{T*}K$ naturally. Hence $Rr_{T*}\\cong\\rho_T$; this argument does not require $\\rho_T I$ to be K-injective.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-pc-sheaf-restrict-scalars",
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DA, lemma-abelian (exact underlying abelian-sheaf functor); localization and resolution comparison written out"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] on the small diagram sites to $(f_B,r_Y)$ and to $(r_X,f_S)$. Its hypotheses hold because Step 1 gives small sites and Step 2 gives morphisms of ringed topoi; it imposes no flatness condition on their structural maps. With the two compositions both identified with $h$, it supplies natural isomorphisms $\\kappa_{r_Y,f_B}:Rh_*\\xrightarrow{\\sim}Rr_{Y*}Rf_{B*}$ and $\\kappa_{f_S,r_X}:Rh_*\\xrightarrow{\\sim}Rf_{S*}Rr_{X*}$. Compose $\\kappa_{f_S,r_X}\\circ\\kappa_{r_Y,f_B}^{-1}$ and use Step 3. This is the required natural isomorphism $\\rho_Y Ru_{*,B}^J\\xrightarrow{\\sim}Ru_{*,S}^J\\rho_X$.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, lemma-derived-pushforward-composition; two factorizations through identity-topos coefficient maps"
+   }
+  },
+  {
+   "text": "The normalization is part of this construction: the intermediate functor is precisely $Rh_*$ and the two arrows are the composition comparisons of [lem-weil-pbc-ringed-topoi-derived-pushforward-composition], with the natural resolution identifications of Step 3. That node states that the comparisons and those identifications are natural in the derived argument, so their inverse and composite are natural as well. Every functor and comparison above was formed on modules on the diagram sites and then on their derived categories. No evaluation functor was applied, which proves the asserted before-evaluation clause.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, lemma-derived-pushforward-composition; two factorizations through identity-topos coefficient maps"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-diagram-site-realization",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-exact-functor-derived-factorization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6E, lemma-derived-pushforward-composition, applied to the two explicitly identified factorizations on small diagram sites"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,10 +126,52 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.Presentation.map_π_eq\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat]\\n  [inst_3 : J.HasSheafCompose (CategoryTheory.forg\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $R$ of rings on $\\\\mathcal{C}$, and a colimit-preserving functor $F$ between module categories, the generator morphism of the pr\"}\n  {\"name\": \"ModuleCat.Tilde.toOpen_res\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R)\\n  (U V : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R)) (i : V ⟶ U),\\n  CategoryTheory.CategoryStruct.comp (ModuleCat.Tilde.toOpen M U) (M.tildeInModuleCat.map i.op) =\\n    ModuleCat.Tilde.toOpen M V\", \"doc\": \"For open subsets $U$ and $V$ of $\\\\operatorname{Spec}(R)$ with $V \\\\subseteq U$, the composition of the restriction map $\\\\widetilde{M}(U) \\\\to \\\\widetilde{M}(V)$ with the sheaf morphism induced by the inc\"}\n  {\"name\": \"PresheafOfModules.map_comp\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat}\\n  (self : PresheafOfModules R) {X Y Z : Cᵒᵖ} (f : X ⟶ Y) (g : Y ⟶ Z),\\n  self.map (CategoryTheory.CategoryStruct.comp f g) =\\n    CategoryTheory.CategoryStruct.comp (self.map f)\\n      (CategoryTheory.C\", \"doc\": \"For a presheaf of modules over a presheaf of rings $ R $ on a category $ \\\\mathcal{C} $, the action on morphisms respects composition. Specifically, for any morphisms $ f : X \\\\to Y $ and $ g : Y \\\\to Z \"}\n  {\"name\": \"SheafOfModules.restrictScalars_map_val\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R R' : CategoryTheory.Sheaf J RingCat} (α : R ⟶ R') {X Y : SheafOfModules R'} (φ : X ⟶ Y),\\n  ((SheafOfModules.restrictScalars α).map φ).val = (PresheafOfModules.restrictScalars α.val).map φ.val\", \"doc\": \"Given a natural transformation $\\\\alpha: R \\\\to R'$ between sheaves of rings on a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, and a morphism $\\\\varphi: X \\\\to Y$ between sheaves of modules ov\"}\n  {\"name\": \"SheafOfModules.restrictScalars_obj_val\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R R' : CategoryTheory.Sheaf J RingCat} (α : R ⟶ R') (M' : SheafOfModules R'),\\n  ((SheafOfModules.restrictScalars α).obj M').val = (PresheafOfModules.restrictScalars α.val).obj M'.val\", \"doc\": \"For a natural transformation $\\\\alpha: R \\\\to R'$ between sheaves of rings on a category $\\\\mathcal{C}$ with Grothendieck topology $J$, the underlying presheaf of the restriction of scalars functor appli\"}\n  {\"name\": \"ModuleCat.Tilde.res_apply\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R)\\n  (U V : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R)) (i : V ⟶ U)\\n  (s : ↑(M.tildeInModuleCat.obj (Opposite.op U))) (x : ↥V),\\n  ↑((CategoryTheory.ConcreteCategory.hom (M.tildeInModuleCat.map i.op)) s) x = ↑s (i x)\", \"doc\": \"For open sets $U,V$ in $\\\\operatorname{Spec}(R)$ with inclusion $i:V\\\\to U$, the restriction map $\\\\widetilde{M}(U)\\\\to \\\\widetilde{M}(V)$ satisfies $(\\\\rho_{U\\\\supset V}(s))(x) = s(i(x))$ for all sections $\"}\n  {\"name\": \"SheafOfModules.restrictScalars\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R R' : CategoryTheory.Sheaf J RingCat} → (R ⟶ R') → CategoryTheory.Functor (SheafOfModules R') (SheafOfModules R)\", \"doc\": \"Given a natural transformation $\\\\alpha: R \\\\to R'$ between sheaves of rings on a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, this defines a functor from the category of sheaves of modules \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.map_smul\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (M : X.Modules) {U V : X.Opens} (i : U ⟶ V) (r : ↑(X.presheaf.obj (Opposite.op V)))\\n  (x : ↑(M.presheaf.obj (Opposite.op V))),\\n  (CategoryTheory.ConcreteCategory.hom (M.presheaf.map i.op)) (r • x) =\\n    (CategoryTheory.ConcreteCategory.hom (X.presheaf.map i.op)) r •\\n\", \"doc\": \"For a scheme $X$, a sheaf of modules $M$ over its structure sheaf, and open subsets $U \\\\subseteq V$ of $X$, the restriction map commutes with scalar multiplication. Specifically, for any section $r$ o\"}",
    "date": "2026-10-21",
    "verdict": "no match: the hits do not state this ringed-topos/coefficient assertion; see report for candidate distinctions"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctorCompIso|rightDerivedFunctorIsoMapDerivedCategory|pushforwardComp",
+   "results": "17 hits; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; grep subdirectory Algebra",
+   "date": "2026-10-21",
+   "verdict": "no match: underived sheaf pushforward composition or general derived-functor naturality only; no unbounded ringed-diagram coefficient comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived restriction of coefficients for sheaves of modules commutes with derived pushforward by composition of ringed topos morphisms",
+   "results": "8 hits; SheafOfModules.pushforward_map_val, PresheafOfModules.pushforward_obj_map_apply', PresheafOfModules.pushforward₀, SheafOfModules.pushforward, AlgebraicGeometry.Scheme.Modules.pushforwardComp, SheafOfModules.pushforwardSections, SheafOfModules.pushforward.congr_simp, PresheafOfModules.pushforward",
+   "date": "2026-10-21",
+   "verdict": "no match: underived sheaf pushforward composition or general derived-functor naturality only; no unbounded ringed-diagram coefficient comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforwardComp",
+   "results": "7 hits; SheafOfModules.pushforwardComp, SheafOfModules.pushforward_id_comp, SheafOfModules.pushforward_comp_id, SheafOfModules.pushforward_assoc, SheafOfModules.pushforwardComp_hom_app_val_app, SheafOfModules.pushforwardComp_inv_app_val_app, SheafOfModules.conjugateEquiv_pullbackComp_inv",
+   "date": "2026-10-21",
+   "verdict": "no match: underived sheaf pushforward composition or general derived-functor naturality only; no unbounded ringed-diagram coefficient comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars along a morphism of sheaves of rings commutes with unbounded derived direct image for a ringed topos morphism, including small diagram topoi",
+   "results": "8 hits; SheafOfModules.pushforwardComp, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.pushforward_assoc, SheafOfModules.pullbackComp, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, SheafOfModules.pushforwardNatIso, SheafOfModules.pushforward",
+   "date": "2026-10-21",
+   "verdict": "no match: underived sheaf pushforward composition or general derived-functor naturality only; no unbounded ringed-diagram coefficient comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctorCompIso|rightDerivedFunctorIsoMapDerivedCategory|derived.*[Pp]ushforward|[Pp]ushforward.*[Dd]erived",
+   "results": "0 hits; none",
+   "date": "2026-10-21",
+   "verdict": "no match: underived sheaf pushforward composition or general derived-functor naturality only; no unbounded ringed-diagram coefficient comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The total right derived functor of a composite of ringed topos direct images is the composite of total right derived functors without flatness hypotheses",
+   "results": "8 hits; SheafOfModules.pushforwardComp, CategoryTheory.NatTrans.rightDerived_comp, SheafOfModules.pushforwardNatTrans_comp, SheafOfModules.pushforward_assoc, SheafOfModules.pushforwardComp_hom_app_val_app, CategoryTheory.Functor.instIsRightDerivedFunctorTotalRightDerivedTotalRightDerivedUnit, CategoryTheory.NatTrans.rightDerived_comp_assoc, CategoryTheory.Functor.rightDerivedNatTrans_comp",
+   "date": "2026-10-21",
+   "verdict": "no match: underived sheaf pushforward composition or general derived-functor naturality only; no unbounded ringed-diagram coefficient comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-completed-coefficient-pushforward-comparison",
@@ -74,5 +188,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-diagram-ring-restriction-pushforward",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Realized the ring diagrams on small diagram sites, explicitly checked the componentwise geometric morphism and equality of the two structural maps, identified derived coefficient restriction with its exact termwise functor, and composed the two existing ringed-topos pushforward composition comparisons in the required direction. No new nodes; all non-elementary content is supplied by the existing composition theorem.",
+  "blueprint": "fix-prop-adjunctions, proof Step 1 (ordinary derived adjunction), specifically its integral coefficient comparison as exposed by lem-pur-completed-coefficient-pushforward-comparison: the finite quotient comparison is constructed on the strict coefficient diagram before evaluation. Steps 1–3 realize the diagram and coefficient data, and steps 4–5 give and normalize that comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-diagram-site-realization",
+    "why": "Small diagram sites realize the strict coefficient diagrams; this generic site construction is not a replacement for the mate unit route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "The generic unbounded ringed-topos composition comparison is applied twice to the coefficient square. The mate unit does not prove this general ringed-topos tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-diagram-site-realization",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NJ-c1d0dc2f0",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NJ-c1d0dc2f0 (reviewer sub-agent of L); spot-checked: I read the item in full; it adds no new nodes and leaves the statement unchanged. It is a first split of a node NS created on 2026-10-21 for lem-pur-completed-coefficient-pushforward-comparison, not a re-split. I checked it against Stacks 0D6E (sites-cohomology lemma-derived-pushforward-composition, lines 4010-4031) and Stacks 03DA (sites-modules lemma-abelian, lines 1336-1355). Step 1: the variable ring diagram B_T(j,U) is a ring sheaf on J^op x C_T, and its modules are defined directly with transitions semilinear along B_T; this is correctly written out, because the realization lemma's module clause covers only constant rings. The componentwise adjunction and left exactness give u^J. Step 2: the structural map of r_T is a_T, in the right direction. The composite structural maps of r_Y.f_B and f_S.r_X are both maps (u^-1)^J Delta S_Y -> B_X, and they are equal by the square. Step 3: rho_T is exact, and Rr_T* = Q(rho_T I) is isomorphic to Q(rho_T K) without rho_T I being K-injective. Step 4: kappa_{f_S,r_X} composed with kappa_{r_Y,f_B}^-1 gives the stated direction, and the diagram sites are small, also for J empty. Step 5: normalization uses the naturality clause of the composition node. Edge cases checked: J empty, J=1, identity coefficient maps, non-flat Z->Z/2, zero rings. No duplicates: lem-sbc-canonical-restrict-scalars-functor-comparisons covers only schemes, constant rings and D^+; lem-weil-proetale-direct-image-restriction-of-scalars covers only finite constant rings on pro-etale sites. The tool_uses of lem-weil-pbc-diagram-site-realization and lem-weil-pbc-ringed-topoi-derived-pushforward-composition are generic and accepted. One fault, C1/C5: Step 3 derived the termwise triangulated functor without citing the existing Mathlib leaf lem-weil-pbc-exact-functor-derived-factorization, which the parent's Step 1 cites for the same fact. I fixed this in the Step 3 text, its uses and proof_deps (fixes/dag/nodes/sec-smooth-purity/lem-pur-diagram-ring-restriction-pushforward.json). No SGA source is used.; 1 file(s) fixed by the reviewer"
  }
 }

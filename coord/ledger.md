@@ -20142,3 +20142,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:02 L: merged deliver/Q26/lem-pe-ringed-site-derived-evaluation-slice (reviewer PASS; first push; new nodes: 0)
 - 04:02 L: merged deliver/Q33/lem-sfb-subfield-push-iso (reviewer FIX; first push; new nodes: 0)
 - 04:02 L: merged deliver/Q12/lem-weil-pbc-discrete-exchange-site-comparison (reviewer FIX; first push; new nodes: 0)
+- 04:02 L: merged deliver/NJ/lem-pur-diagram-ring-restriction-pushforward (reviewer FIX; first push; new nodes: 0)
