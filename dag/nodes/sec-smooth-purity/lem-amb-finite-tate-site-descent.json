@@ -17,89 +17,32 @@
  ],
  "proof": [
   {
-   "text": "Put $Z=(\\mathbf Z_\\ell)_{T_{\\mathrm{proet}}}$, $C=\\widehat{\\mathbf Z}_{\\ell,T}$, $R_r=(\\mathbf Z/\\ell^r)_{T_{\\mathrm{proet}}}$ and $L=\\varprojlim_s\\mu_{\\ell^s,T}^{\\mathrm{pro}}$. The root projections are $p_r:L\\to\\mu_{\\ell^r,T}^{\\mathrm{pro}}$. Clause (2) of lem-pur-twist-sheaf-locally-free supplies the $C$-module structure of $L$ and its finite reduction $L\\otimes_C R_r\\cong\\mu_{\\ell^r,T}^{\\mathrm{pro}}$. The completed coefficient quotient theorem gives $C/\\ell^rC\\cong R_r$. Apply it to the Noetherian DVR $\\mathbf Z_\\ell$ and $(\\ell)$; these ring properties and $\\mathbf Z_\\ell/(\\ell^r)=\\mathbf Z/\\ell^r$ are in def-weil-l-adic-numbers. The finite reduction is the one belonging to the specified roots tower, induced by $p_r$. Thus it identifies $L/\\ell^rL$ with $\\mu_{\\ell^r,T}^{\\mathrm{pro}}$. All these constructions are on the pro-etale site, and only $\\ell$ invertible on $T$ is needed.",
+   "text": "Apply lem-amb-tate-root-projection-reduction and lem-amb-finite-root-site-comparison with $m=\\ell^r$. They give $\\theta_{r,T}:A_T^{\\mathrm{pro}}(1)\\cong D_{r,T}$ and $\\sigma_{r,T}:\\nu_T^*A_T^{\\mathrm{et}}(1)\\cong D_{r,T}$ with their specified root-tensor formulas. Set $\\beta_{r,T}=\\theta_{r,T}^{-1}\\sigma_{r,T}$. This is the required root-normalized $A$-linear isomorphism.",
    "uses": [
-    "lem-pur-twist-sheaf-locally-free",
-    "lem-weil-pbc-constant-completion-equivalence",
-    "def-weil-l-adic-numbers",
-    "def-pur-sheaf-inverse-limit"
+    "lem-amb-tate-root-projection-reduction",
+    "lem-amb-finite-root-site-comparison"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Finite Tate reduction of the roots tower; completed constant coefficient quotients, sites-modules.tex Tag 093M, lemma-completion-flat"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-amb-vector-bundle-purity.proof.md",
+    "place": "Short assembly of root reduction and finite-root site comparison; original steps 1-4"
    }
   },
   {
-   "text": "Reassociate the two coefficient tensors in def-coefficient-twists-detailed: $A_T^{\\mathrm{pro}}(1)\\cong L\\otimes_Z A_T$. The maps on local pure tensors are $(x\\otimes b)\\otimes a\\mapsto x\\otimes ba$ and $x\\otimes a\\mapsto(x\\otimes1)\\otimes a$. Since $\\ell^rA=0$, tensoring with $A_T$ factors through $L/\\ell^rL$: the inverse maps are $x\\otimes a\\mapsto\\bar x\\otimes a$ and $\\bar x\\otimes a\\mapsto x\\otimes a$, independent of the lift because $(\\ell^ry)\\otimes a=y\\otimes\\ell^ra=0$. The sheaf tensor definition makes these sectionwise formulas descend after sheafification. Step 1 therefore gives the isomorphism\n$$\\theta_r:A_T^{\\mathrm{pro}}(1)\\xrightarrow{\\sim}\\mu_{\\ell^r,T}^{\\mathrm{pro}}\\otimes_{R_r}A_T,\\qquad x\\otimes a\\longmapsto p_r(x)\\otimes a.$$\nNo flatness of $A$ over $\\mathbf Z/\\ell^r$ is used.",
+   "text": "The two cited projection/power equations give $\\beta_{r,T}\\nu_T^*(P_{r',r}\\otimes1)=\\beta_{r',T}$. The etale transition is invertible by lem-asd-etale-finite-twist-pullback. Exponent multiplication gives its cocycle identity; a common larger annihilating exponent compares any two choices. For $v:T'\\to T$, substitute the equation for $\\theta_{r,T'}b_v$ into the scheme square for $\\sigma_{r,T}$; cancellation gives $b_vv^*\\beta_{r,T}=\\beta_{r,T'}\\nu_{T'}^*(e^v_r)\\kappa_v$. Thus $b_v$ is invertible. The cited identity/composition equations give those for this square.",
    "uses": [
-    "def-coefficient-twists-detailed",
-    "def-pur-sheaf-tensor-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EK, section-tensor-product; quotient tensor and reassociation by their explicit inverse pure-tensor maps"
-   }
-  },
-  {
-   "text": "Apply lem-cbc-comparison-pullback-sections to the underlying etale root sheaf. For a weakly etale $f:W\\to T$, lem-asd-etale-finite-twist-pullback identifies $f_{\\mathrm{et}}^{-1}\\mu_{\\ell^r,T}^{\\mathrm{et}}$ with $\\mu_{\\ell^r,W}^{\\mathrm{et}}$. Sections at $W$ are exactly units $z\\in\\Gamma(W,\\mathcal O_W)^\\times$ satisfying $z^{\\ell^r}=1$, which is the defining value of the pro-etale root sheaf. This gives\n$$c_r:\\nu_T^{-1}\\mu_{\\ell^r,T}^{\\mathrm{et}}\\xrightarrow{\\sim}\\mu_{\\ell^r,T}^{\\mathrm{pro}}.$$\nRestriction is pullback of the same unit, so these objectwise bijections are natural. Powers give both the scalar actions and the transitions; hence $c_r$ is $R_r$-linear after the constant-ring identification of lem-sf-comparison-pullback-exact, and $c_r\\nu_T^{-1}(z\\mapsto z^{\\ell^{r'-r}})=(z\\mapsto z^{\\ell^{r'-r}})c_{r'}$. This uses the section formula for all weakly etale $W$, without an affine or finite-type hypothesis on $T$.",
-   "uses": [
-    "lem-cbc-comparison-pullback-sections",
-    "lem-asd-etale-finite-twist-pullback",
-    "def-pur-roots-of-unity-sheaf",
-    "lem-sf-comparison-pullback-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 0GLZ, lemma-describe-pullback-from-etale; finite roots and their functoriality in etale-cohomology.tex Tag 03PK, section-kummer"
-   }
-  },
-  {
-   "text": "The ringed-topos tensor comparison and the canonical identifications of the constant $\\mathbf Z/\\ell^r$ and $A$ sheaves give\n$$\\nu_T^*(\\mu_{\\ell^r,T}^{\\mathrm{et}}\\otimes_{\\mathbf Z/\\ell^r} A_T)\\cong\\mu_{\\ell^r,T}^{\\mathrm{pro}}\\otimes_{R_r}A_T.$$\nHere the mixed-coefficient tensor is the coequalizer imposing the $\\mathbf Z/\\ell^r$-balancing relations; the inverse image preserves this coequalizer and the integer tensor, and sends the scalar-action maps to the same scalar-action maps. Equivalently this is ordinary ringed pullback over $\\mathbf Z/\\ell^r$ followed by the $A$-action. Compose this comparison, denoted $c_r\\otimes1$, with $\\theta_r^{-1}$ from step 2. The resulting $A$-linear isomorphism $\\beta_r=\\theta_r^{-1}(c_r\\otimes1)$ is the required $\\nu_T^*A_T^{\\mathrm{et}}(1)\\cong A_T^{\\mathrm{pro}}(1)$, normalized by the specified root projections and constant scalar maps.",
-   "uses": [
-    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-    "lem-weil-pbc-left-exact-site-inverse-image-tensor",
-    "lem-sf-comparison-pullback-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EL, lemma-tensor-product-pullback; canonical comparison at finite discrete coefficients"
-   }
-  },
-  {
-   "text": "For $r'\\geq r$ let $P_{r',r}$ be the root power transition. The definition of the inverse limit gives $p_r=P_{r',r}p_{r'}$, so on every local generator $x\\otimes a$ of $L\\otimes_ZA_T$,\n$$(P_{r',r}\\otimes1)\\theta_{r'}(x\\otimes a)=p_r(x)\\otimes a=\\theta_r(x\\otimes a).$$\nTherefore $P_{r',r}\\otimes1=\\theta_r\\theta_{r'}^{-1}$ is an isomorphism. On the etale site the corresponding transition is an isomorphism by the last assertion of lem-asd-etale-finite-twist-pullback. Step 3 identifies its pullback with $P_{r',r}\\otimes1$, whence $\\beta_r\\nu_T^*(P_{r',r}\\otimes1)=\\beta_{r'}$. The power maps compose by multiplying their exponents; taking a common larger annihilating exponent compares any two choices and gives the cocycle identity. This proves canonical independence of $r$, including its comparison, rather than merely existence of an unspecified identification.",
-   "uses": [
-    "def-pur-sheaf-inverse-limit",
+    "lem-amb-tate-root-projection-reduction",
+    "lem-amb-finite-root-site-comparison",
     "lem-asd-etale-finite-twist-pullback"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "The root transition identity and tensor quotient normalization; section-comparison"
-   }
-  },
-  {
-   "text": "Let $v:T'\\to T$. Use the comparison square $\\nu_{T'}^*v_{\\mathrm{et}}^{-1}\\cong v_{\\mathrm{proet}}^{-1}\\nu_T^*$ and the etale root pullback of lem-asd-etale-finite-twist-pullback. The standard pro-etale root maps are compatible with the tower transitions by lem-pur-roots-of-unity-inverse-image-iso (1)-(2). They induce a map from $v^{-1}L_T$ to $L_{T'}$ by taking the family $c^v_{\\mu_{\\ell^s}}v^{-1}p_s$ of projections; this uses the limit universal property, without asserting that inverse image preserves this infinite limit. Extend scalars to define the usual finite-level map $b_v:v^*A_T^{\\mathrm{pro}}(1)\\to A_{T'}^{\\mathrm{pro}}(1)$. By the tensor comparison and constant-scalar identification, its $r$-th projection satisfies\n$$\\theta_{r,T'}b_v=(c^v_{\\mu_{\\ell^r}}\\otimes1)\\,v^*\\theta_{r,T}.$$\nStep 3's section description identifies the root map on the right with the etale root pullback through the comparison square: both pull a unit back to the same unit. Substitute $\\beta_r=\\theta_r^{-1}(c_r\\otimes1)$ in this equation. It says precisely that $b_v$ agrees with the pullback of $\\beta_r$ and the etale twist pullback isomorphism, so $b_v$ is an isomorphism and the claimed square commutes. Identity and composition compatibility follow by the same equation at the finite root projection and the identity/composition compatibility of the two cited pullback comparisons.",
-   "uses": [
-    "lem-weil-pbc-comparison-pullback",
-    "lem-asd-etale-finite-twist-pullback",
-    "lem-pur-roots-of-unity-inverse-image-iso",
-    "def-pur-sheaf-inverse-limit",
-    "def-weil-proetale-inverse-image",
-    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-    "lem-pe-constant-left-module-inverse-image"
-   ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09A5, section-morphism; root pullback and finite projection compatibility, with Tag 03EL tensor comparison"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-amb-vector-bundle-purity.proof.md",
+    "place": "Short assembly of root reduction and finite-root site comparison; original steps 5-6"
    }
   },
   {
-   "text": "For $a=0$ use the constant-$A$ comparison, and define $\\beta_{r,a}$ for $a>0$ by tensoring $a$ copies of $\\beta_r$ and the canonical inverse-image tensor comparisons. Explicitly $\\beta_{r,a+1}$ is $\\beta_{r,a}\\otimes_A\\beta_r$ after that tensor comparison. This is induction on the tensor-power definition in def-coefficient-twists-detailed and def-pur-sheaf-tensor-product, so gives $\\nu_T^*A_T^{\\mathrm{et}}(a)\\cong A_T^{\\mathrm{pro}}(a)$. Steps 5 and 6 give the transition and scheme-pullback squares factor by factor; naturality of the tensor comparison gives their tensor powers. For derived tensors the ringed-topos derived tensor theorem supplies $L\\nu_T^*(K\\otimes_A^LM)\\cong L\\nu_T^*K\\otimes_A^LL\\nu_T^*M$, and exactness of the finite-coefficient comparison identifies $L\\nu_T^*$ with the termwise $\\nu_T^*$. Thus the same comparisons respect the specified derived tensor conventions.",
+   "text": "At $a=0$ use the constant-$A$ isomorphism of lem-sf-comparison-pullback-exact. Inductively define $\\beta_{r,a+1}$ by $\\beta_{r,a}\\otimes_A\\beta_{r,1}$ after the canonical tensor comparison of lem-weil-pbc-ringed-topoi-module-pullback-tensor. The tensor-power definitions identify its source and target with the stated twists. Tensor the equations of step 2 factor by factor; naturality of the tensor comparison gives the required squares for every $a$. The derived comparison of lem-weil-pbc-ringed-topoi-derived-tensor-pullback and exactness of lem-sf-comparison-pullback-exact identify this construction with the stipulated derived tensor convention.",
    "uses": [
     "def-coefficient-twists-detailed",
     "def-pur-sheaf-tensor-product",
@@ -109,40 +52,31 @@
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EL, lemma-tensor-product-pullback; derived version sites-cohomology.tex Tag 07A4, lemma-pullback-tensor-product"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-amb-vector-bundle-purity.proof.md",
+    "place": "Short assembly of root reduction and finite-root site comparison; original steps 7"
    }
   },
   {
-   "text": "Finally the comparison adjunction unit is invertible on all module sheaves by lem-weil-pbc-comparison-grothendieck-unit, applied to $\\operatorname{Mod}(A)$, which is Grothendieck abelian by lem-weil-pbc-ring-modules-grothendieck-abelian. Hence $\\nu_T^*$ is fully faithful. If $G$ is another etale descent equipped with $\\alpha:\\nu_T^*G\\cong A_T^{\\mathrm{pro}}(1)$, the map $\\alpha^{-1}\\beta_r:\\nu_T^*A_T^{\\mathrm{et}}(1)\\to\\nu_T^*G$ lifts to exactly one etale map $h$. Its inverse lifts in the same way; faithfulness says their composites are identities. Thus $h$ is the unique comparison-preserving isomorphism. The argument applies to each tensor power as well. Throughout the finite reduction uses only $\\ell^rA=0$, never $A$ flat over $\\mathbf Z/\\ell^r$ or $n$ a multiple of a ramification index. On the empty scheme all maps are the unique maps between zero module sheaves; at $a=0$ the comparison is the coefficient-ring identity.",
+   "text": "The unit theorem lem-weil-pbc-comparison-grothendieck-unit applies to $\\operatorname{Mod}(A)$ by lem-weil-pbc-ring-modules-grothendieck-abelian; hence $\\nu_T^*$ is fully faithful. Given another descent $(G,\\alpha)$, lift $\\alpha^{-1}\\beta_{r,a}$ and its inverse uniquely. Faithfulness makes the lifts inverse, giving exactly one comparison-preserving isomorphism. This works for all $a\\geq0$. The empty scheme has only zero module sheaves. The reductions above use only $\\ell^rA=0$, so no ramification divisibility or flatness restriction was introduced.",
    "uses": [
     "lem-weil-pbc-comparison-grothendieck-unit",
     "lem-weil-pbc-ring-modules-grothendieck-abelian"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 099T, lemma-fully-faithful; uniqueness obtained by lifting the comparison and its inverse"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-amb-vector-bundle-purity.proof.md",
+    "place": "Short assembly of root reduction and finite-root site comparison; original steps 8"
    }
   }
  ],
  "proof_deps": [
-  "lem-pur-twist-sheaf-locally-free",
-  "lem-weil-pbc-constant-completion-equivalence",
-  "def-weil-l-adic-numbers",
-  "def-pur-sheaf-inverse-limit",
+  "lem-amb-tate-root-projection-reduction",
+  "lem-amb-finite-root-site-comparison",
+  "lem-asd-etale-finite-twist-pullback",
   "def-coefficient-twists-detailed",
   "def-pur-sheaf-tensor-product",
-  "lem-cbc-comparison-pullback-sections",
-  "lem-asd-etale-finite-twist-pullback",
-  "def-pur-roots-of-unity-sheaf",
-  "lem-sf-comparison-pullback-exact",
   "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
-  "lem-weil-pbc-comparison-pullback",
-  "lem-pur-roots-of-unity-inverse-image-iso",
-  "def-weil-proetale-inverse-image",
-  "lem-pe-constant-left-module-inverse-image",
+  "lem-sf-comparison-pullback-exact",
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
   "lem-weil-pbc-comparison-grothendieck-unit",
   "lem-weil-pbc-ring-modules-grothendieck-abelian"
@@ -246,24 +180,12 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "item": "lem-amb-finite-tate-site-descent",
   "worker": "stage1",
-  "summary": "Eight steps prove finite Tate descent using existing nodes only: reduce the root limit through an annihilating power, identify roots by the comparison section formula, tensor with A, and verify transition, scheme-pullback, tensor and uniqueness compatibilities. No statement change, no new nodes, no compiler. All Mathlib searches were executed through msearch.py and their hits read.",
-  "blueprint": "thm-amb-vector-bundle-purity proof paragraph 1, Tate coefficient of the integration formula; finite coefficient component of sk-prop-an Steps 5-7. The unit purity route is preserved.",
+  "summary": "Human-requested re-split: two independent statement-only tasks separate pro-etale root-limit reduction from finite-root comparison on the two sites. Preserves statement and all root normalization, transition, pullback, derived tensor and uniqueness clauses. Original detailed arguments are assigned verbatim in the report; parent is a short assembly.",
+  "blueprint": "thm-amb-vector-bundle-purity proof paragraph 1, Tate coefficient of the integration formula; coefficient component of sk-prop-an Steps 5-7. No unit/chapter route change.",
   "tool_uses": [
-   {
-    "node": "lem-pur-twist-sheaf-locally-free",
-    "why": "Finite root-limit reduction in step 1; the model purity unit presupposes this coefficient construction."
-   },
-   {
-    "node": "lem-weil-pbc-constant-completion-equivalence",
-    "why": "Step 1 uses only the completed-constant finite quotient statement for Z_l."
-   },
-   {
-    "node": "lem-cbc-comparison-pullback-sections",
-    "why": "Step 3 requires the root comparison on every weakly etale object, not just affine bases."
-   },
    {
     "node": "lem-asd-etale-finite-twist-pullback",
     "why": "Finite etale root pullback, powers and transition comparison in steps 3, 5 and 6."
@@ -275,22 +197,6 @@
    {
     "node": "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
     "why": "Generic ringed-topos tensor comparison for comparison and scheme inverse images."
-   },
-   {
-    "node": "lem-weil-pbc-left-exact-site-inverse-image-tensor",
-    "why": "Mixed-coefficient balancing and integer tensor preservation in step 4."
-   },
-   {
-    "node": "lem-weil-pbc-comparison-pullback",
-    "why": "Step 6 uses the canonical comparison square for arbitrary scheme morphisms."
-   },
-   {
-    "node": "lem-pur-roots-of-unity-inverse-image-iso",
-    "why": "Step 6 takes only tower compatibility and semilinearity (clauses 1-2), not the isomorphism-only clause 3."
-   },
-   {
-    "node": "lem-pe-constant-left-module-inverse-image",
-    "why": "Canonical constant scalar identification for scheme inverse images in step 6."
    },
    {
     "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
@@ -322,12 +228,12 @@
   "lem-weil-pbc-ring-modules-grothendieck-abelian"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-Codex-N7-a3d5f9ec0",
-  "group": "N7",
+  "reviewer": "NT-cc-Q41-98bdd91d7",
+  "group": "Q41",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N7-a3d5f9ec0 (reviewer sub-agent of L); spot-checked: Read the full item, all cited statements, sources and unit/chapter route. All eight steps check out, including ramified nonflat coefficients, canonical transitions, scheme pullback and uniqueness. No new nodes or target weakening. Accepted all 13 declared tool uses. review.md records the checks and one inherited missing dependency outside this delivery."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-98bdd91d7 (reviewer sub-agent of L); spot-checked: This re-split follows the human's 2026-10-21 note (clones/live/coord/repair-notes). It adds 2 statement-only nodes of comparable size (2334 and 2684 characters), and the parent proof is 2149 characters. The item statement and stmt_deps are identical to base and live. The item has not been superseded: live still holds the N7 8-step split. All 8 old steps appear verbatim in the report. Old steps 1, 2, 5 and the limit part of 6 go to lem-amb-tate-root-projection-reduction; steps 3, 4 and the comparison part of 6 go to lem-amb-finite-root-site-comparison. Steps 7 and 8 remain as short parent assemblies of existing generic nodes with no content lost; I accept them as assembly. Checked: beta=theta^-1 sigma; the transition and scheme squares follow by substitution, and b_v is invertible. Node 1 is true: def-coefficient-twists-detailed reassociates to L tensor over constant Z_l with A, and lem-pur-twist-sheaf-locally-free(2) gives L/l^rL = mu, with no flatness or e|n needed. c^v_L comes from the limit universal property, not from inverse image commuting with the limit. Node 2 is true by Stacks 0GLZ (proetale.tex l.3760, any weakly etale Y) and 03EL, and the power maps reduce locally to Z/m' -> Z/m. Small cases checked: E=Q_l with n=r=1; r=2; e=2 with n=1; m=1 (A=0); empty T; non-affine tests. No duplicates: lem-pur-finite-kummer-level needs e|n (node 1 generalizes it), lem-pur-tate-inverse-limit-base-change is only a generic ingredient, and def-pur-finite-tate-site-comparison contains only predicates. No SGA. I accept the 6 declared tool_uses. FIX: node 2's statement used the comparison square kappa_v of lem-weil-pbc-comparison-pullback and etale inverse image without citing them. Both citations are now in the text and in stmt_deps (fixes/dag/nodes/sec-smooth-purity/lem-amb-finite-root-site-comparison.json); this creates no cycle.; 1 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
   "date": "2026-10-18",

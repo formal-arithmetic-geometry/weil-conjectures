@@ -20451,3 +20451,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:36 L: merged deliver/O3/lem-pur-normalized-reconstruction-adjunction-calculus (reviewer PASS; after a return; new nodes: 2)
 - 06:36 L: merged deliver/Q69/thm-pur-general-admissibility (reviewer FIX; after a return; new nodes: 3)
 - 06:36 L: merged deliver/Q118/lem-a1-punctual-bound-module-mixed (reviewer FIX; first push; new nodes: 1)
+- 06:36 L: merged deliver/Q41/lem-amb-finite-tate-site-descent (reviewer FIX; after a return; new nodes: 2)

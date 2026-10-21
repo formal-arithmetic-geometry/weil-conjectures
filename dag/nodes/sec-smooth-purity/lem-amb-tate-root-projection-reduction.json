@@ -1,0 +1,83 @@
+{
+ "id": "lem-amb-tate-root-projection-reduction",
+ "kind": "statement",
+ "title": "Root-projection reduction of finite ramified Tate coefficients",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$, uniformizer $\\varpi_E$, and $n\\geq1$, and put $A=\\mathcal O_E/\\varpi_E^n$ [def-weil-l-adic-coefficient-extension]. For any scheme $T$ on which $\\ell$ is invertible [def-pc-scheme], work on $T_{\\mathrm{proet}}$ with constant ring sheaves [def-weil-pbc-constant-sheaf]. Put $Z_T=(\\mathbf Z_\\ell)_T$, $R_{r,T}=(\\mathbf Z/\\ell^r)_T$ and $L_T=\\varprojlim_{s\\geq1}\\mu_{\\ell^s,T}^{\\mathrm{pro}}$, with root projections $p_{r,T}$ and power transitions $P_{r',r}:z\\mapsto z^{\\ell^{r'-r}}$ [def-pur-roots-of-unity-sheaf, def-pur-sheaf-inverse-limit]. Let $P_T=A_T^{\\mathrm{pro}}(1)$ be the prescribed finite pro-etale twist [def-coefficient-twists-detailed], and use sheaf tensors [def-pur-sheaf-tensor-product].\n\nThere is a canonical reassociation isomorphism $j_T:P_T\\xrightarrow{\\sim}L_T\\otimes_{Z_T}A_T$, taking $(x\\otimes b)\\otimes a$ to $x\\otimes ba$. For every $r\\geq1$ with $\\ell^rA=0$, the map induced by $p_{r,T}$ is an isomorphism\n$$\\theta_{r,T}:P_T\\xrightarrow{\\sim}D_{r,T}:=\\mu_{\\ell^r,T}^{\\mathrm{pro}}\\otimes_{R_{r,T}}A_T,\\qquad j_T^{-1}(x\\otimes a)\\longmapsto p_{r,T}(x)\\otimes a.$$\nFor $r'\\geq r$ with $\\ell^rA=0$ it satisfies $(P_{r',r}\\otimes1)\\theta_{r',T}=\\theta_{r,T}$; thus $P_{r',r}\\otimes1:D_{r',T}\\to D_{r,T}$ is invertible, and these maps obey the identity and composition equations.\n\nFor every scheme morphism $v:T'\\to T$, use pro-etale inverse image [def-weil-proetale-inverse-image], identifying inverse images of constant rings with the target constant rings. Let $c^v_s:v^{-1}\\mu_{\\ell^s,T}^{\\mathrm{pro}}\\to\\mu_{\\ell^s,T'}^{\\mathrm{pro}}$ be the canonical root map adjoint to pullback of units [def-pur-roots-of-unity-inverse-image]. There is a unique map $c^v_L:v^{-1}L_T\\to L_{T'}$ with $p_{s,T'}c^v_L=c^v_sv^{-1}p_{s,T}$ for all $s$. Define $b_v:v^*P_T\\to P_{T'}$ by transporting $c^v_L\\otimes1$ through $j_T,j_{T'}$ and the canonical tensor pullback identifications. Then\n$$\\theta_{r,T'}b_v=(c^v_r\\otimes1)v^*\\theta_{r,T}.$$\nThe maps $c^v_L,b_v$ obey the identity and composition laws under the canonical inverse-image identifications. These assertions concern ordinary tensor products and require only $\\ell^rA=0$, with no flatness of $A$ over $\\mathbf Z/\\ell^r$ and no ramification-index divisibility condition.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 093M, lemma-completion-flat; applied to the root-limit finite reduction of lem-pur-twist-sheaf-locally-free (2). Agent combination preserving parent proof steps 1, 2, 5 and the limit-construction part of step 6."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-constant-sheaf",
+  "def-pur-roots-of-unity-sheaf",
+  "def-pur-sheaf-tensor-product",
+  "def-pur-roots-of-unity-inverse-image",
+  "def-weil-proetale-inverse-image",
+  "def-weil-l-adic-coefficient-extension",
+  "def-pur-sheaf-inverse-limit",
+  "def-coefficient-twists-detailed"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "TateTwist|rootsOfUnity|proetale",
+   "results": "{\"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\", \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\", \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\"]}",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern ordinary ring roots, cyclotomic characters, perfectoid ring projections, direct limits, etale algebras or general pullback; none gives this root-normalized sheaf comparison with its stated coherence.",
+   "sub": "AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proetale Tate root inverse limit tensor finite ramified coefficients equals finite roots via projection",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorProduct.directLimitLeft_symm_of_tmul\", \"ProfiniteGrp.isIso_toLimit\", \"Profinite.lim\", \"Algebra.FormallyEtale.instTensorProduct\", \"InfiniteGalois.proj\", \"Profinite.asLimit\", \"TensorProduct.directLimitRight_symm_of_tmul\", \"LightProfinite.proj\"]}",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern ordinary ring roots, cyclotomic characters, perfectoid ring projections, direct limits, etale algebras or general pullback; none gives this root-normalized sheaf comparison with its stated coherence."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rootsOfUnity\"",
+   "results": "{\"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"rootsOfUnity\", \"rootsOfUnity_one\", \"rootsOfUnity_zero\", \"rootsOfUnity_inf_rootsOfUnity\", \"rootsOfUnity_eq_ker\", \"ker_zpowGroupHom_eq_rootsOfUnity\", \"rootsOfUnity_le_of_dvd\", \"instSubsingletonSubtypeUnitsMemSubgroupRootsOfUnityOfNatNat\"]}",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern ordinary ring roots, cyclotomic characters, perfectoid ring projections, direct limits, etale algebras or general pullback; none gives this root-normalized sheaf comparison with its stated coherence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proetale Tate root inverse limit tensor finite ramified coefficients equals finite roots via projection",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PreTilt.mk_comp_untilt_eq_coeff_zero\", \"PreTilt.untiltFun\", \"PreTilt.mk_untilt_eq_coeff_zero\", \"PreTilt.exists_smodEq_untiltAux\", \"Perfection.coeff_pthRoot\", \"WittVector.mk_fontaineTheta\", \"StandardEtalePresentation.toPresentation_σ'\", \"WittVector.fontaineThetaModPPow_teichmuller\"]}",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern ordinary ring roots, cyclotomic characters, perfectoid ring projections, direct limits, etale algebras or general pullback; none gives this root-normalized sheaf comparison with its stated coherence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reduction modulo an annihilating prime power of an l-adic roots of unity sheaf commutes with scheme pullback",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"cyclotomicCharacter.toZModPow_toFun\", \"cyclotomicCharacter.toZModPow\", \"cyclotomicCharacter.spec\", \"cyclotomicCharacter.toFun_apply\", \"cyclotomicCharacter.toFun_spec\", \"cyclotomicCharacter.toFun\", \"cyclotomicCharacter\", \"WittVector.fontaineThetaModPPow_teichmuller\"]}",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern ordinary ring roots, cyclotomic characters, perfectoid ring projections, direct limits, etale algebras or general pullback; none gives this root-normalized sheaf comparison with its stated coherence."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-amb-finite-tate-site-descent",
+  "date": "2026-10-21",
+  "group": "Q41"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "from": {
+   "node": "thm-amb-vector-bundle-purity",
+   "place": "Proof paragraph 1, Tate coefficient in the integration formula: root-limit reduction and normalized finite projection, previously site-descent steps 1, 2, 5 and limit part of 6.",
+   "via": [
+    "lem-amb-finite-tate-site-descent"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
