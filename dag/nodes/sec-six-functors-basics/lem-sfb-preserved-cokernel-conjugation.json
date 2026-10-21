@@ -1,0 +1,89 @@
+{
+ "id": "lem-sfb-preserved-cokernel-conjugation",
+ "kind": "statement",
+ "title": "Normalized cokernel comparison after applying a functor and changing coordinates",
+ "statement": "Let $\\mathcal A,\\mathcal B$ be abelian categories [def-sp-abelian], and let $H:\\mathcal A\\to\\mathcal B$ be a functor preserving zero morphisms. Let $f:A\\to B$ be a morphism in $\\mathcal A$, and assume that $H$ preserves its cokernel, meaning that the image of a cokernel projection $q_f:B\\to\\operatorname{coker}(f)$, together with its universal property, is a cokernel of $H(f)$. Choose objects $A',B'\\in\\mathcal B$ and isomorphisms $a:H(A)\\xrightarrow{\\sim}A'$ and $b:H(B)\\xrightarrow{\\sim}B'$. Set $g=b\\circ H(f)\\circ a^{-1}:A'\\to B'$, and write $q_g:B'\\to\\operatorname{coker}(g)$ for a cokernel projection. There is a unique isomorphism\n$$u:H(\\operatorname{coker}(f))\\xrightarrow{\\sim}\\operatorname{coker}(g),\\qquad u\\circ H(q_f)=q_g\\circ b.$$\nIts inverse satisfies $u^{-1}\\circ q_g=H(q_f)\\circ b^{-1}$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-extend-to-qlbar-constructible.proof.md",
+  "place": "Final sentence: tensoring local finite presentations on strata; canonical transport of the cokernel through scalar extension and finite-free coordinate changes (old item step 4)."
+ },
+ "stmt_deps": [
+  "def-sp-abelian"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "def mapIso|π_mapIso|mapIso_hom|def iso|π_iso_hom",
+   "results": "4 hits: 106, 264, 616, 775",
+   "date": "2026-10-21",
+   "verdict": "match: PreservesCokernel.iso followed by cokernel.mapIso; read both declarations and their projection equations at the lines recorded in mathlib_match.",
+   "subdirectory": "CategoryTheory/Limits/Shapes/Kernels.lean"
+  },
+  {
+   "tool": "grep",
+   "query": "def iso|π_iso_hom|def mapIso|π_mapIso_hom",
+   "results": "1 hits: 268",
+   "date": "2026-10-21",
+   "verdict": "match: PreservesCokernel.iso followed by cokernel.mapIso; read both declarations and their projection equations at the lines recorded in mathlib_match.",
+   "subdirectory": "CategoryTheory/Limits/Preserves/Shapes/Kernels.lean"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An additive functor preserving cokernels sends a cokernel to the cokernel of the conjugated morphism under isomorphisms of source and target",
+   "results": "8 hits: CategoryTheory.Limits.cokernel.mapIso, CategoryTheory.Limits.cokernel.cokernelIso, CategoryTheory.Limits.PreservesCokernel.of_iso_comparison, CategoryTheory.Limits.PreservesCokernel.π_iso_hom, CategoryTheory.Limits.instIsIsoCokernelComparison, CategoryTheory.Limits.PreservesCokernel.π_iso_hom_assoc, CategoryTheory.Limits.PreservesCokernel.iso.congr_simp, CategoryTheory.Limits.preserves_cokernel_iso_comp_cokernel_map",
+   "date": "2026-10-21",
+   "verdict": "match: PreservesCokernel.iso followed by cokernel.mapIso; read both declarations and their projection equations at the lines recorded in mathlib_match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PreservesCokernel.iso\"",
+   "results": "2 hits: CategoryTheory.Limits.PreservesCokernel.iso, CategoryTheory.Limits.PreservesCokernel.iso_inv",
+   "date": "2026-10-21",
+   "verdict": "match: PreservesCokernel.iso followed by cokernel.mapIso; read both declarations and their projection equations at the lines recorded in mathlib_match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical isomorphism between the image of a cokernel and the cokernel after changing source and target by isomorphisms, compatible with the cokernel projection",
+   "results": "8 hits: CategoryTheory.Limits.cokernel.mapIso, CategoryTheory.Limits.cokernel.mapIso_hom, CategoryTheory.Limits.cokernel.mapIso_inv, CategoryTheory.Limits.cokernelCompIsIso, CategoryTheory.Limits.cokernel.ofIsoComp, CategoryTheory.Limits.cokernelCompIsIso_hom, CategoryTheory.Limits.cokernel.cokernelIso, CategoryTheory.Limits.cokernelCompIsIso_inv",
+   "date": "2026-10-21",
+   "verdict": "match: PreservesCokernel.iso followed by cokernel.mapIso; read both declarations and their projection equations at the lines recorded in mathlib_match."
+  },
+  {
+   "tool": "grep",
+   "query": "cokernel.mapIso|cokernel.π_map|cokernel.mapIso_hom",
+   "results": "1 hits: Mathlib/CategoryTheory/Limits/Shapes/Kernels.lean",
+   "date": "2026-10-21",
+   "verdict": "match: PreservesCokernel.iso followed by cokernel.mapIso; read both declarations and their projection equations at the lines recorded in mathlib_match.",
+   "subdirectory": "CategoryTheory/Limits/Shapes"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Limits.PreservesCokernel.iso",
+  "file": "Mathlib/CategoryTheory/Limits/Preserves/Shapes/Kernels.lean",
+  "line": 263,
+  "how": "specializes in one line: compose CategoryTheory.Limits.PreservesCokernel.iso H f (line 263 of this file) with CategoryTheory.Limits.cokernel.mapIso (H.map f) g a b (by simp) (Mathlib/CategoryTheory/Limits/Shapes/Kernels.lean:899–904). The forward normalization is PreservesCokernel.π_iso_hom (Preserves/Shapes/Kernels.lean:268) followed by cokernel.mapIso_hom and cokernel.π_desc (Shapes/Kernels.lean:817), using the definition cokernel.map at lines 847–853. The inverse equation follows by composing this normalization with u.inv and b.inv; uniqueness follows because H(q_f) is a cokernel projection, hence epi. This uses no preservation of all colimits and no finite-free hypothesis."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-internal-extension-finite-presentation",
+  "date": "2026-10-21",
+  "group": "NI"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-qlbar-two-colimit",
+ "blueprint": {
+  "from": {
+   "node": "lem-sfb-extend-to-qlbar-constructible",
+   "place": "Final sentence: tensoring local finite presentations on strata; canonical transport of the cokernel through scalar extension and finite-free coordinate changes (old item step 4).",
+   "via": [
+    "lem-sfb-internal-extension-finite-presentation"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

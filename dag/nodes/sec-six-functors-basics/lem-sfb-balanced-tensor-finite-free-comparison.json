@@ -1,0 +1,109 @@
+{
+ "id": "lem-sfb-balanced-tensor-finite-free-comparison",
+ "kind": "statement",
+ "title": "Balanced tensor with a finite free internal module",
+ "statement": "Let $\\mathcal C$ be an abelian symmetric monoidal category [def-sp-abelian] whose tensor product is additive in each variable and for which $Z\\otimes-$ and $-\\otimes Z$ preserve colimits for every $Z$. Let $R$ be a commutative monoid object and $S$ a monoid object [sk-def-sfb-ring-object]. Let $P$ be an $S$-$R$-bimodule [def-sfb-bimod-objects], with left action $a_P$ and right action $r_P:P\\otimes R\\to P$; write $P$ also for its underlying left $S$-module [sk-def-sfb-module-objects]. For a left $R$-module $M$ with action $\\gamma_M$, define $T_P(M)=P\\otimes_R M$ to be the coequalizer\n$$\n(P\\otimes R)\\otimes M\\mathrel{\\substack{\\xrightarrow{r_P\\otimes M}\\\\[-2pt]\\xrightarrow{(P\\otimes\\gamma_M)\\circ\\alpha_{P,R,M}}}}P\\otimes M,\n$$\nwith quotient $q_M$ and induced left $S$-action through $P$. For an $R$-linear $g:M\\to N$, $T_P(g)$ denotes the induced $S$-linear map characterized by $T_P(g)q_M=q_N(P\\otimes g)$. Let $R$ denote its regular left module, let $R^k$ be the finite biproduct of $k$ regular modules [def-sfb-finitely-presented-module], and put $P^k=\\bigoplus_{i\\in\\operatorname{Fin}(k)}P$ in $\\operatorname{Mod}_S(\\mathcal C)$, with injections $\\iota_i^R,\\iota_i^P$.\nThere is an $S$-linear isomorphism $c:T_P(R)\\xrightarrow{\\sim}P$ with\n$$c q_R=r_P,\\qquad c^{-1}=q_R(P\\otimes\\eta_R)(\\varrho_P^{\\mathcal C})^{-1},$$\nwhere $\\eta_R:\\mathbf1\\to R$ is the unit and $\\varrho_P^{\\mathcal C}:P\\otimes\\mathbf1\\xrightarrow{\\sim}P$ is the ambient right unitor. For every $k\\geq0$ there is a unique $S$-linear isomorphism $c_k:T_P(R^k)\\xrightarrow{\\sim}P^k$ satisfying\n$$c_k T_P(\\iota_i^R)=\\iota_i^P c\\quad(i\\in\\operatorname{Fin}(k)).$$\nIts inverse satisfies\n$$c_k^{-1}\\iota_i^P=q_{R^k}(P\\otimes\\iota_i^R)(P\\otimes\\eta_R)(\\varrho_P^{\\mathcal C})^{-1}.$$\nFor $k=0$ this is the unique isomorphism $T_P(0)\\cong0$. No flatness of $P$ as a right $R$-module is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-extend-to-qlbar-constructible.proof.md",
+  "place": "Final sentence: tensoring local finite presentations on strata; the balanced-tensor regular comparison and its finite-coproduct extension (old item steps 2–3)."
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "sk-def-sfb-ring-object",
+  "def-sfb-bimod-objects",
+  "sk-def-sfb-module-objects",
+  "def-sfb-finitely-presented-module"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "tensorBimod|rightUnitorBimod|finiteFree.*tensor|tensor.*finiteFree",
+   "results": "5 hits: Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/CategoryTheory/Monoidal/Bimod.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary type-valued tensor/direct-sum equivalences or Bimod construction/right-unitor infrastructure; no finite-free comparison for the mixed internal balanced tensor functor, whose finite-coproduct behavior must still be proved. Read Monoidal/Bimod.lean:347–405,679–772 and LinearAlgebra/DirectSum/TensorProduct.lean:36–75. The rank-one right unitor alone is the existing Mathlib leaf lem-sfb-mixed-bimodule-right-unitor.",
+   "subdirectory": "CategoryTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative tensor product of internal bimodule with finite direct sum of regular modules is finite direct sum of the bimodule",
+   "results": "8 hits: TensorProduct.finsuppLeft'_apply, TensorProduct.directSumLeft, TensorProduct.finsuppLeft, TensorProduct.directSumRight_tmul, TensorProduct.coe_directSumRight', PiTensorProduct.ofDirectSumEquiv_tprod_apply, TensorProduct.directSumRight_tmul_lof, TensorProduct.directSumRight'",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary type-valued tensor/direct-sum equivalences or Bimod construction/right-unitor infrastructure; no finite-free comparison for the mixed internal balanced tensor functor, whose finite-coproduct behavior must still be proved. Read Monoidal/Bimod.lean:347–405,679–772 and LinearAlgebra/DirectSum/TensorProduct.lean:36–75. The rank-one right unitor alone is the existing Mathlib leaf lem-sfb-mixed-bimodule-right-unitor."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Bimod\", \"tensor\"",
+   "results": "12 hits: Bimod.TensorBimod.X, Bimod.tensorBimod, Bimod.TensorBimod.actLeft, Bimod.TensorBimod.actRight, Bimod.tensorBimod_X, Bimod.tensorBimod_actLeft, Bimod.tensorBimod_actRight, Bimod.TensorBimod.actRight_one'",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary type-valued tensor/direct-sum equivalences or Bimod construction/right-unitor infrastructure; no finite-free comparison for the mixed internal balanced tensor functor, whose finite-coproduct behavior must still be proved. Read Monoidal/Bimod.lean:347–405,679–772 and LinearAlgebra/DirectSum/TensorProduct.lean:36–75. The rank-one right unitor alone is the existing Mathlib leaf lem-sfb-mixed-bimodule-right-unitor."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Mod\", \"free\"",
+   "results": "12 hits: Module.IsTorsionFree, Module.isTorsionFree_nat_iff_hasUniqueDiv, Module.isTorsionFree_nat_iff_isAddTorsionFree, Subsingleton.to_moduleIsTorsionFree, Module.isTorsionFree_int_iff_hasUniqueDiv, Module.isTorsionFree_int_iff_isAddTorsionFree, Module.IsTorsionFree.isSMulRegular, Module.IsTorsionFree.mk",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary type-valued tensor/direct-sum equivalences or Bimod construction/right-unitor infrastructure; no finite-free comparison for the mixed internal balanced tensor functor, whose finite-coproduct behavior must still be proved. Read Monoidal/Bimod.lean:347–405,679–772 and LinearAlgebra/DirectSum/TensorProduct.lean:36–75. The rank-one right unitor alone is the existing Mathlib leaf lem-sfb-mixed-bimodule-right-unitor."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The balanced tensor product of an internal S R bimodule with the finite free R module of rank n is canonically the direct sum of n copies of that bimodule",
+   "results": "8 hits: TensorProduct.finsuppRight, TensorProduct.finsuppLeft, TensorProduct.piScalarRight, TensorProduct.coe_finsuppScalarRight', TensorProduct.finsuppScalarRight_apply, Algebra.FormallyUnramified.finite_of_free_aux, ModuleCat.FreeMonoidal.μIso_hom_freeMk_tmul_freeMk, Algebra.TensorProduct.piScalarRight",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary type-valued tensor/direct-sum equivalences or Bimod construction/right-unitor infrastructure; no finite-free comparison for the mixed internal balanced tensor functor, whose finite-coproduct behavior must still be proved. Read Monoidal/Bimod.lean:347–405,679–772 and LinearAlgebra/DirectSum/TensorProduct.lean:36–75. The rank-one right unitor alone is the existing Mathlib leaf lem-sfb-mixed-bimodule-right-unitor."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In an abelian monoidal category tensoring a mixed bimodule with a finite free internal module has a canonical isomorphism normalized on coproduct injections",
+   "results": "8 hits: Bimod.tensorBimod_X, Bimod.tensorBimod, Bimod.TensorBimod.π_tensor_id_actRight, Bimod.tensorBimod_actLeft, Bimod.tensorBimod_actRight, Bimod.triangle_bimod, Bimod.rightUnitorBimod, Bimod.TensorBimod.X",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary type-valued tensor/direct-sum equivalences or Bimod construction/right-unitor infrastructure; no finite-free comparison for the mixed internal balanced tensor functor, whose finite-coproduct behavior must still be proved. Read Monoidal/Bimod.lean:347–405,679–772 and LinearAlgebra/DirectSum/TensorProduct.lean:36–75. The rank-one right unitor alone is the existing Mathlib leaf lem-sfb-mixed-bimodule-right-unitor."
+  },
+  {
+   "tool": "grep",
+   "query": "rightUnitorBimod|tensorBimod.*[Cc]olimit|[Cc]olimit.*tensorBimod|[Bb]iproduct|[Cc]oproduct",
+   "results": "5 hits: 679, 739, 764, 766, 767",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary type-valued tensor/direct-sum equivalences or Bimod construction/right-unitor infrastructure; no finite-free comparison for the mixed internal balanced tensor functor, whose finite-coproduct behavior must still be proved. Read Monoidal/Bimod.lean:347–405,679–772 and LinearAlgebra/DirectSum/TensorProduct.lean:36–75. The rank-one right unitor alone is the existing Mathlib leaf lem-sfb-mixed-bimodule-right-unitor.",
+   "subdirectory": "CategoryTheory/Monoidal/Bimod.lean"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorBimod.*[Cc]olimit|[Cc]olimit.*tensorBimod|tensorBimod.*[Bb]iproduct|[Bb]iproduct.*tensorBimod",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary type-valued tensor/direct-sum equivalences or Bimod construction/right-unitor infrastructure; no finite-free comparison for the mixed internal balanced tensor functor, whose finite-coproduct behavior must still be proved. Read Monoidal/Bimod.lean:347–405,679–772 and LinearAlgebra/DirectSum/TensorProduct.lean:36–75. The rank-one right unitor alone is the existing Mathlib leaf lem-sfb-mixed-bimodule-right-unitor.",
+   "subdirectory": "CategoryTheory"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Bimod\", \"coprod\"",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary type-valued tensor/direct-sum equivalences or Bimod construction/right-unitor infrastructure; no finite-free comparison for the mixed internal balanced tensor functor, whose finite-coproduct behavior must still be proved. Read Monoidal/Bimod.lean:347–405,679–772 and LinearAlgebra/DirectSum/TensorProduct.lean:36–75. The rank-one right unitor alone is the existing Mathlib leaf lem-sfb-mixed-bimodule-right-unitor."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-internal-extension-finite-presentation",
+  "date": "2026-10-21",
+  "group": "NI"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-qlbar-two-colimit",
+ "blueprint": {
+  "from": {
+   "node": "lem-sfb-extend-to-qlbar-constructible",
+   "place": "Final sentence: tensoring local finite presentations on strata; the balanced-tensor regular comparison and its finite-coproduct extension (old item steps 2–3).",
+   "via": [
+    "lem-sfb-internal-extension-finite-presentation"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

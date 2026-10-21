@@ -22608,3 +22608,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:37 L: returned deliver/NP/lem-pur-etale-sum-right-adjoint-tensor (reviewer RETURN: L: independent stage-2 immutable head f15896b1ba03: H2: the delivery added four theorem stmt_deps. canonicalEtaleCompact)
 - 13:37 L: returned deliver/Q85/lem-weil-integral-twist-scalar-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-integral-twist-scalar-coherence: lem-weil-int)
 - 13:38 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
+- 13:39 L: merged deliver/NI/lem-sfb-internal-extension-finite-presentation (reviewer PASS; after a return; new nodes: 2)
