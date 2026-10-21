@@ -15,9 +15,165 @@
   "def-weil-pbc-proetale-site",
   "lem-weil-pbc-profinite-test-object-functor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First reduce the qcqs objects to affines. For every affine open $V=\\operatorname{Spec}B$ of a weakly etale $k$-scheme $U$, the field-algebra theorem says that $B$ is reduced with separable algebraic residue fields and is a union of finite etale $k$-subalgebras. Every prime of $B$ is maximal: its quotient is an algebraic domain over $k$, and the minimal polynomial of each nonzero element expresses its inverse as a polynomial in that element. If $x$ specializes to $y$ in $U$, an affine neighbourhood of $y$ contains $x$; hence $x=y$ by maximality of primes there. Thus all points of $U$ are closed. When $U$ is qcqs, apply the zero-dimensional affineness input. Conversely an affine weakly etale object is qcqs. We may therefore write every object of $\\mathcal B_s$ as $\\operatorname{Spec}B$, with $B$ the directed union of its finite etale $k$-subalgebras.",
+   "uses": [
+    "lem-weil-pbc-weak-etale-field",
+    "lem-sfb-qcqs-zero-dimensional-affine",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "sk-lem-pe-weakly-etale-stability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Example 4.1.4 and Example 4.1.10; affineness detail: Stacks Tag 0CKV."
+   }
+  },
+  {
+   "text": "For a finite etale $k$-algebra $A$, put $F(A)=\\operatorname{Hom}_{k\\text{-alg}}(A,k^s)$ and let $g$ act by $f\\mapsto g\\circ f$. The finite product decomposition of $A$ identifies this with the finite disjoint union of embedding sets of finite separable extensions. The finite transitive classification on each factor, and componentwise maps between finite coproducts, give full faithfulness and essential surjectivity onto finite continuous $G$-sets. A map from a connected field spectrum to a finite disjoint union lands in exactly one component; this proves the componentwise assertion. This is a contravariant equivalence for algebras, hence a covariant one for finite etale schemes. Base change to $k^s$ splits each factor with one copy of $k^s$ per embedding: apply the same finite classification over the separably closed field, whose Galois group is trivial. The resulting fibre labels are the embeddings, by the point/residue-map description.",
+   "uses": [
+    "lem-exc-etale-field-galois-classification",
+    "lem-weil-pbc-etale-algebra-over-field-product",
+    "lem-weil-pbc-finite-affine-coproduct-spectrum",
+    "lem-weil-pbc-morphism-from-spec-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tags 03QR (lemma-sheaves-point), 03QS; finite product decomposition Tag 00U3."
+   }
+  },
+  {
+   "text": "The separable closure is Galois over $k$, and the Krull finite-limit theorem identifies $G$ with an inverse limit of finite groups; the finite-group limit input makes $G$ profinite. For $B=\\bigcup_i B_i$ as in step 1 define $F(B)=\\varprojlim_i\\operatorname{Hom}_{k\\text{-alg}}(B_i,k^s)$ with inverse-limit topology and coordinatewise action. The generic finite-action limit input makes this compact Hausdorff totally disconnected with continuous action. Compatible maps on the stages are exactly maps $B\\to k^s$. If $B=0$, its fibre is empty. Otherwise all the finite fibres are nonempty. Inclusions of finite etale algebras induce surjections on finite fibres: by finite full faithfulness an inclusion is a categorical monomorphism, and its corresponding map of finite sets must be surjective (a proper invariant image would give a nonzero component ideal in the kernel). Therefore the finite-set inverse-limit surjectivity theorem makes every projection $F(B)\\to F(B_i)$ surjective. An algebra map $C\\to B$ acts by precomposition; this proves functoriality. The topology is canonical, since the finite subalgebras are the canonical directed system.",
+   "uses": [
+    "lem-weil-pbc-weak-etale-field",
+    "lem-exc-etale-field-galois-classification",
+    "lem-sfb-profinite-action-finite-quotients",
+    "lem-galois-inverse-limit-surjective",
+    "lem-weil-pbc-separable-closure-exists-galois",
+    "lem-exc-galois-krull-finite-limit",
+    "lem-dl-a1-finite-group-limit-profinite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Example 4.1.10: geometric fibre as a pro-object in finite discrete G-sets; compactness argument expanded."
+   }
+  },
+  {
+   "text": "Here is full faithfulness, including the finite-stage argument. A continuous equivariant map $F(B)\\to F(C)$ is the same as compatible maps to $F(C_j)$ for the finite etale subalgebras $C_j\\subset C$. Each such map factors continuously through some $F(B_i)$ by profinite function factorization. Its factor is equivariant because $F(B)\\to F(B_i)$ is surjective and equivariant: evaluate at a lift of any point of $F(B_i)$ and at its translate. Step 2 gives a map $C_j\\to B_i\\subset B$. Two finite-stage factors give the same map into $B$: pass to a common larger subalgebra, and use surjectivity of its projection from $F(B)$ and finite full faithfulness. Conversely, any $C_j\\to B$ factors through a finite subalgebra $B_i$, by finite-presentation factorization. Thus the compatible maps just constructed glue uniquely to $C\\to B$. This proves the required bijection on morphisms, with the specified precomposition formula. If $B=0$, there is a unique algebra map $C\\to0$ and a unique map $\\varnothing\\to F(C)$. If $C=0$ and $B\\ne0$, both Hom sets are empty because $F(B)$ is nonempty. These cases handle every empty-stage exception.",
+   "uses": [
+    "lem-weil-pbc-profinite-limit-function-factorization",
+    "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Example 4.1.10, pro-object identification; finite-presentation step: Stacks Tag 00QO."
+   }
+  },
+  {
+   "text": "For essential surjectivity take a profinite continuous $G$-set $P$. Its invariant finite clopen partitions give $P=\\varprojlim_i P_i$ by the equivariant quotient input. Choose the finite etale schemes $\\operatorname{Spec}A_i$ corresponding to $P_i$ using step 2; full faithfulness gives all transition maps and their coherence. Set $A=\\varinjlim_i A_i$. The spectrum-colimit theorem identifies $\\operatorname{Spec}A$ with their inverse limit. This is weakly etale because ind-etale maps are weakly etale and are stable under filtered colimits. Its geometric fibre is $\\varprojlim_i P_i=P$, since maps from a colimit of algebras to $k^s$ are compatible maps on the stages. The coordinate topology is the same: every finite subalgebra of $A$ has finitely many generators, so is contained in the image of a stage, while each image is a finite etale subalgebra by step 1 (a finite-dimensional image is generated by finitely many elements). This proves $\\mathcal B_s\\simeq\\mathbf{Prof}_G$.",
+   "uses": [
+    "lem-sfb-profinite-action-finite-quotients",
+    "lem-weil-pbc-spec-small-colimit-limit",
+    "lem-weil-pbc-ind-etale-stability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Example 4.1.10: pro-objects and continuous profinite G-sets."
+   }
+  },
+  {
+   "text": "Base change to $k^s$ forgets the action. On affine rings it sends $B$ to $k^s\\otimes_k B$; a $k^s$-algebra map from this tensor product to $k^s$ is uniquely $a\\otimes b\\mapsto a f(b)$ for a $k$-algebra map $f:B\\to k^s$. These bijections are natural. They are homeomorphisms, since on every finite etale subalgebra they are the finite splitting of step 2, and tensoring commutes with the directed colimit by the cited tensor theorem (the ring compatibility follows on pure tensors). Over the separably closed field the construction of steps 1–5 has trivial Galois group, yielding $\\mathcal B_{\\bar s}\\simeq\\mathbf{Prof}$. Every point of an affine weakly etale $k^s$-scheme has residue field $k^s$, so the point/residue-map bijection identifies its entire underlying spectrum with its set of $k^s$-points; the topology agrees because the spectrum topological-limit theorem identifies it with the limit of the split finite-stage spectra.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-weak-etale-field",
+    "lem-weil-pbc-morphism-from-spec-field",
+    "lem-weil-pbc-tensor-commutes-with-colimits",
+    "lem-a1-filtered-spectrum-topological-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Example 4.1.10, separably closed case and geometric base change."
+   }
+  },
+  {
+   "text": "For an arrow in $\\mathcal B_s$ both schemes are affine; it is weakly etale and hence flat. A family with a finite jointly surjective subfamily of geometric fibres is jointly surjective on schemes: the projection $U_{k^s}\\to U$ is surjective by surjective base change, and step 6 identifies every point above with a $k^s$-point. Choosing such a lift and lifting its fibre coordinate proves the assertion. For every affine open of the target its inverse images under the finitely many selected arrows are affine, since a morphism between affines is affine. These inverse images therefore give exactly the finite affine opens required in the fpqc covering definition. Conversely a pro-etale covering of an affine target has finitely many affine source opens mapping onto it, so the finitely many source objects containing them are jointly surjective. Their geometric base changes remain jointly surjective by stability of surjectivity under base change, and step 6 identifies their points with the profinite fibres. This proves the covering criterion. Finally arbitrary weakly etale objects have covers by their affine open subschemes, which are qcqs and remain weakly etale; any affine open of the target has a finite refinement by affine opens in this open cover. Thus $\\mathcal B_s$ is cover dense, and its topology is the induced one just computed.",
+   "uses": [
+    "sk-lem-pe-weakly-etale-stability",
+    "def-weil-weakly-etale-morphism",
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "lem-weil-pbc-surjective-base-change",
+    "def-weil-pbc-fpqc-covering",
+    "def-weil-pbc-proetale-site",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-weak-etale-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 4.1.1, Examples 4.1.7 and 4.1.10; affine open coverings for density."
+   }
+  },
+  {
+   "text": "For finite $P_i$, the fibre of $\\coprod_{P_i}s$ is $P_i$ with trivial $G$-action. Each finite stage $\\coprod_{P_i}s$ is $\\operatorname{Spec}k^{P_i}$ by the finite coproduct-spectrum theorem, so by the spectrum-colimit theorem the limit $s[P]$ of the test-object construction is $\\operatorname{Spec}\\varinjlim_ik^{P_i}$, an affine object of $\\mathcal B_s$; as in step 5, its fibre is the limit of the stage fibres with the same topology. Passing to the finite-quotient inverse limit therefore gives $F(s[P])=P$ with trivial action; the same applies to $\\bar s[P]=\\operatorname{Spec}\\varinjlim_i(k^s)^{P_i}$. On the other hand $\\operatorname{Hom}_{k\\text{-alg}}(k^s,k^s)=G$: every such embedding is an automorphism. Indeed every element lies in a finite Galois intermediate field; a $k$-embedding preserves that field and permutes its finitely many roots, hence is surjective on it. The union is therefore surjective. The separable algebraic extension $k^s/k$ is ind-etale by its finite separable presentation, so $\\bar s[P]$ is itself an object over $s$. Its topology is the Krull topology since restrictions to finite subextensions are the finite coordinates. Hence the fibre of $\\coprod_{P_i}\\bar s$ is $G\\times P_i$, with $g(h,p)=(gh,p)$. Passing to the limit gives $F(\\bar s[P])=G\\times P$. Precomposition by the structural map $k\\to k^s$ forgets the embedding coordinate, so the morphism $\\bar s[P]\\to s[P]$ is $(h,p)\\mapsto p$. A continuous map of profinite parameters acts by $(h,p)\\mapsto(h,f(p))$ and by $p\\mapsto f(p)$; these formulas prove all the asserted naturality squares.",
+   "uses": [
+    "lem-weil-pbc-profinite-test-object-functor",
+    "def-pd-separable-closure",
+    "lem-weil-pbc-separable-closure-exists-galois",
+    "lem-exc-galois-krull-finite-limit",
+    "lem-weil-pbc-finite-set-in-finite-galois-subextension",
+    "lem-kun-algebraic-separable-smooth",
+    "lem-weil-pbc-finite-affine-coproduct-spectrum",
+    "lem-weil-pbc-spec-small-colimit-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Example 4.1.9 and Example 4.1.10: tensor objects and Galois action normalization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-weak-etale-field",
+  "lem-sfb-qcqs-zero-dimensional-affine",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "sk-lem-pe-weakly-etale-stability",
+  "lem-exc-etale-field-galois-classification",
+  "lem-weil-pbc-etale-algebra-over-field-product",
+  "lem-weil-pbc-finite-affine-coproduct-spectrum",
+  "lem-weil-pbc-morphism-from-spec-field",
+  "lem-sfb-profinite-action-finite-quotients",
+  "lem-galois-inverse-limit-surjective",
+  "lem-weil-pbc-separable-closure-exists-galois",
+  "lem-exc-galois-krull-finite-limit",
+  "lem-dl-a1-finite-group-limit-profinite",
+  "lem-weil-pbc-profinite-limit-function-factorization",
+  "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit",
+  "lem-weil-pbc-spec-small-colimit-limit",
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-tensor-commutes-with-colimits",
+  "lem-a1-filtered-spectrum-topological-limit",
+  "def-weil-weakly-etale-morphism",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "lem-weil-pbc-surjective-base-change",
+  "def-weil-pbc-fpqc-covering",
+  "def-weil-pbc-proetale-site",
+  "lem-weil-pbc-profinite-test-object-functor",
+  "def-pd-separable-closure",
+  "lem-weil-pbc-finite-set-in-finite-galois-subextension",
+  "lem-kun-algebraic-separable-smooth"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Examples 4.1.4, 4.1.9–4.1.10, pp. 27–28, expanded through finite etale algebras; supporting Stacks Tags 0CKV, 03QR, 03QS and 00QO."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -199,10 +355,96 @@
    },
    "date": "2026-10-21",
    "verdict": "no match: hits concern profinite Galois groups, finite etale algebras or condensed sheaf constructions separately; no field pro-etale site equivalence or unbounded internal-module descent."
+  },
+  {
+   "tool": "grep",
+   "query": "Galois.*[Pp]rofinite|[Pp]rofinite.*Galois|[Pp]ro[Ee]tale",
+   "results": {
+    "t": "2026-10-21T18:15:55Z",
+    "tool": "grep",
+    "query": "Galois.*[Pp]rofinite|[Pp]rofinite.*Galois|[Pp]ro[Ee]tale",
+    "sub": "CategoryTheory",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match for the full field-site presentation; Galois group limits, finite etale algebra structure and small etale topology are partial inputs only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The pro etale site of a field is the category of profinite continuous Galois sets",
+   "results": {
+    "t": "2026-10-21T18:15:55Z",
+    "tool": "leansearch",
+    "query": "The pro etale site of a field is the category of profinite continuous Galois sets",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.smallEtaleTopology",
+     "InfiniteGalois.profiniteGalGrp",
+     "AlgebraicGeometry.Scheme.smallEtalePretopology",
+     "AlgebraicGeometry.Scheme.etalePretopology",
+     "Profinite",
+     "InfiniteGalois.asProfiniteGaloisGroupFunctor",
+     "ProfiniteAddGrp.noConfusionType",
+     "Algebra.FormallyEtale.iff_exists_algEquiv_prod"
+    ],
+    "digest": "a84ca900198f4dd2"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match for the full field-site presentation; Galois group limits, finite etale algebra structure and small etale topology are partial inputs only."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Profinite\", \"MulAction\"",
+   "results": {
+    "t": "2026-10-21T18:15:55Z",
+    "tool": "loogle",
+    "query": "\"Profinite\", \"MulAction\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match for the full field-site presentation; Galois group limits, finite etale algebra structure and small etale topology are partial inputs only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The quasi compact quasi separated pro etale schemes over a field are equivalent to profinite continuous absolute Galois group sets",
+   "results": {
+    "t": "2026-10-21T18:15:56Z",
+    "tool": "leanfinder",
+    "query": "The quasi compact quasi separated pro etale schemes over a field are equivalent to profinite continuous absolute Galois group sets",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "InfiniteGalois.profiniteGalGrp",
+     "InfiniteGalois.profiniteGalGrpIsoLimit",
+     "InfiniteGalois.asProfiniteGaloisGroupFunctor",
+     "InfiniteGalois.limitToAlgEquiv",
+     "InfiniteGalois.mulEquivToLimit",
+     "InfiniteGalois.continuousMulEquivToLimit",
+     "InfiniteGalois.limitToAlgEquiv_apply",
+     "InfiniteGalois.algEquivToLimit"
+    ],
+    "digest": "4f2e0d100e1ca141"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match for the full field-site presentation; Galois group limits, finite etale algebra structure and small etale topology are partial inputs only."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-condensed-galois-global-descent",
@@ -226,5 +468,59 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-field-profinite-galois-site",
+  "worker": "stage1",
+  "summary": "Checked the full statement against Bhatt-Scholze Examples 4.1.9–4.1.10. Expanded the affine reduction, finite Galois classification, full faithfulness and essential surjectivity, base-change and covering criteria, and test-object normalization. Two genuinely generic statement-only inputs; no statement change.",
+  "blueprint": "The inherited ancestor is null (blueprint_refs.py ancestor reports None); this created node serves Paragraph (3), the field-site presentation in the separable-closure descent branch. Steps 1–5 expand Example 4.1.10, steps 6–7 its base-change/topology clauses and density, and step 8 Example 4.1.9 test objects.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-weak-etale-field",
+    "why": "Generic Weakly etale algebras over a field input used as stated in the field-site construction; this unit has no replacement for this algebra, topology or scheme tool and its six-functor route is unchanged."
+   },
+   {
+    "node": "sk-lem-pe-weakly-etale-stability",
+    "why": "Generic Stability input used as stated in the field-site construction; this unit has no replacement for this algebra, topology or scheme tool and its six-functor route is unchanged."
+   },
+   {
+    "node": "lem-exc-etale-field-galois-classification",
+    "why": "Generic Finite separable field extensions and finite continuous G-sets input used as stated in the field-site construction; this unit has no replacement for this algebra, topology or scheme tool and its six-functor route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-ind-etale-stability",
+    "why": "Generic Stability and diagonal of an ind-etale algebra input used as stated in the field-site construction; this unit has no replacement for this algebra, topology or scheme tool and its six-functor route is unchanged."
+   },
+   {
+    "node": "lem-a1-filtered-spectrum-topological-limit",
+    "why": "Generic Topological spectrum of a directed colimit of rings input used as stated in the field-site construction; this unit has no replacement for this algebra, topology or scheme tool and its six-functor route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-profinite-test-object-functor",
+    "why": "Generic Relative profinite test schemes: existence, functoriality and site properties input used as stated in the field-site construction; this unit has no replacement for this algebra, topology or scheme tool and its six-functor route is unchanged."
+   },
+   {
+    "node": "lem-kun-algebraic-separable-smooth",
+    "why": "Generic Algebraic separable extensions are filtered colimits of finite etale algebras input used as stated in the field-site construction; this unit has no replacement for this algebra, topology or scheme tool and its six-functor route is unchanged."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-weak-etale-field",
+  "sk-lem-pe-weakly-etale-stability",
+  "lem-exc-etale-field-galois-classification",
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-a1-filtered-spectrum-topological-limit",
+  "lem-weil-pbc-profinite-test-object-functor",
+  "lem-kun-algebraic-separable-smooth"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q36-b8b3e9304",
+  "group": "Q36",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-b8b3e9304 (reviewer sub-agent of L); spot-checked: Read in full: the item, both new nodes, every cited statement, Bhatt–Scholze Ex. 4.1.9–4.1.10 (pp. 27–28), and Stacks 0CKV and 08ZY. The item is unsplit in live and side-live, this is its first delivery, its statement and stmt_deps are identical to base, there is no cycle and no SGA. Steps 1–8 are correct: the affine reduction through all-primes-maximal plus 0CKV; the finite étale ↔ finite G-set step through the transitive classification and products; profinite F(B) with surjective projections (B=0 handled separately); full faithfulness through finite-stage factorization; essential surjectivity through invariant partitions and the ind-étale colimit; base change through k^s⊗B; coverings through surjective base change and the fpqc definition, with density; test objects with Hom_k(k^s,k^s)=G and G×P. Both new nodes are true and generic. qcqs zero-dimensional affine follows 0CKV and was tested on ∅, fields, finite products and Spec LC(Cantor); the qs hypothesis is needed. The equivariant finite-quotient node holds by the tube-lemma open stabilizer plus 08ZY. Neither duplicates an existing node or restates a clause of the item. The seven declared tool_uses are accepted. FIX: (1) B4: step 7 had a literal TAB for \\to and step 8 a BACKSPACE for \\bar, both restored; (2) C1: step 8 now cites lem-weil-pbc-finite-affine-coproduct-spectrum and lem-weil-pbc-spec-small-colimit-limit for s[P]=Spec colim k^{P_i}, with one sentence added. Advisory: lem-exc-etale-field-gsets and det-pe-condensed-point-basis could shorten steps 2 and 6.; 1 file(s) fixed by the reviewer"
  }
 }

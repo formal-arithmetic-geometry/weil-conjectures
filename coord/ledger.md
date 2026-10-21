@@ -23369,3 +23369,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:41 L: merged deliver/O3/lem-sfb-rational-polynomial-bar-contraction (stage 2; reviewer PASS; parallel immutable checks)
 - 18:42 L: returned deliver/O4/lem-sfb-prime-to-ell-cochain-finite-quotient-descent (reviewer RETURN: D1/D2 and D5. The new node lem-sfb-prime-to-ell-completed-boundary-reflection only appears to be smaller than the item. )
 - 18:43 L: returned deliver/N9/sk-thm-groth-ss (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-thm-groth-ss: sk-thm-groth-ss: completed in this pr)
+- 18:44 L: merged deliver/Q36/lem-sfb-field-profinite-galois-site (reviewer FIX; first push; new nodes: 2)
