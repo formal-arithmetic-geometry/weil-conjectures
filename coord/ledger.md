@@ -21139,3 +21139,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:28 L: merged deliver/Q128/lemma-nagata-strict-transform-chart-localization-data (reviewer PASS; after a return; new nodes: 0)
 - 08:28 L: merged deliver/NZ/sk-lem-nagata-sketch-dense-valuative (reviewer FIX; after a return; new nodes: 2)
 - 08:28 L: merged deliver/NB/sk-thm-purity-transport (reviewer PASS; first push; new nodes: 0); claim not held by NB: not your claim
+- 08:28 L: merged deliver/NW/lemma-nagata-strict-chart-map-kernel (reviewer PASS; after a return; new nodes: 0)
