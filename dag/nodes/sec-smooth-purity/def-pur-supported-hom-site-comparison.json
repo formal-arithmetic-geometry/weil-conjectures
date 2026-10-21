@@ -1,0 +1,104 @@
+{
+ "id": "def-pur-supported-hom-site-comparison",
+ "kind": "definition",
+ "title": "Canonical etale to pro-etale comparison on supported signed-twist Hom groups",
+ "status": "split",
+ "statement": "Fix the finite coefficient datum $P$, with coefficient ring $A=A_{E,n}$, and the two-site signed-twist supported Hom groups and exact comparison functor $\\nu_X^*$ of [def-pur-supported-class-operations]. For schemes $C,X$ and a closed immersion $i:C\\hookrightarrow X$ [def-weil-closed-immersion], and any integers $a,r$, define the canonical comparison\n$$\\operatorname{cmp}_i^{a,r}:H_i^a(X_{\\mathrm{et}},A(r))\\longrightarrow H_i^a(X_{\\mathrm{proet}},A(r)).$$\nWrite $c_i:\\nu_X^*(i_*A_C)\\xrightarrow{\\sim}i_*A_C$ for the unique closed-source comparison carrying the image of the coefficient-unit restriction $A_X\\to i_*A_C$ to the identical pro-etale restriction. For a representative $\\alpha:i_*A_C[0]\\to A_X(r)[a]$, the comparison is the composite of $c_i^{-1}[0]$, the exact derived inverse image of $\\alpha$ with its canonical degree-zero and shift identifications, and the defining identification $\\nu_X^*A_X(r)=A_X(r)$ on the pro-etale site. This defines the map only; no bijectivity, product law or pullback compatibility is asserted.",
+ "stmt_deps": [
+  "def-pur-supported-class-operations",
+  "def-weil-closed-immersion"
+ ],
+ "source": {
+  "document": "literature/stacks-project/proetale.tex; literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md",
+  "place": "Tags 099V (lemma-relative-comparison), 099W (lemma-compare-cohomology), 09B1 (lemma-compare-derived); blueprint ordinary ordered Cartier orientation and comparison of finite etale-origin objects. Canonical supported Hom map realized in Sheaf.Paper.SupportedCupFunctoriality."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical etale to pro-etale comparison on supported signed Tate twist derived Hom groups",
+   "results": "{\"t\": \"2026-10-21T13:43:35Z\", \"tool\": \"leansearch\", \"query\": \"Canonical etale to pro-etale comparison on supported signed Tate twist derived Hom groups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Etale.formallyEtale\", \"RingHom.Etale.toAlgebra\", \"CategoryTheory.Abelian.Ext.homEquiv\", \"RingHom.Etale.stableUnderComposition\", \"Algebra.FormallyEtale.instTensorProduct\", \"RingHom.Etale\", \"RingHom.Etale.propertyIsLocal\", \"RingHom.Etale.isStableUnderBaseChange\"], \"digest\": \"30401b766c0d1733\"}",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib match; reuse the existing project declaration functorialCupCompare."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact etale to pro-etale inverse image comparison on cohomology with closed support",
+   "results": "{\"t\": \"2026-10-21T13:43:36Z\", \"tool\": \"leanfinder\", \"query\": \"Exact etale to pro-etale inverse image comparison on cohomology with closed support\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"StandardEtalePair.homEquiv_symm_apply\", \"Algebra.etaleLocus_eq_compl_support\", \"Algebra.basicOpen_subset_etaleLocus_iff\", \"AlgebraicGeometry.IsEtale.of_comp\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale\", \"Algebra.FormallyEtale.iff_of_equiv\", \"Algebra.FormallyEtale.comp\"], \"digest\": \"ce1ab8ff1da702d8\"}",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib match; reuse the existing project declaration functorialCupCompare."
+  },
+  {
+   "tool": "grep",
+   "query": "functorialCupCompare|FunctorialCupH|proEtale.*[Cc]ompar",
+   "results": "{\"t\": \"2026-10-21T13:43:35Z\", \"tool\": \"grep\", \"query\": \"functorialCupCompare|FunctorialCupH|proEtale.*[Cc]ompar\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib match; reuse the existing project declaration functorialCupCompare."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n functorialCupCompare lean/WeilConjectures lean/Sheaf; rg -l functorialCupCompare dag/nodes; python3 tools/blueprint_refs.py search \"supported comparison\"; python3 tools/blueprint_refs.py search \"etale pro-etale\"",
+   "results": "No declaration in WeilConjectures. Sheaf/Paper/SupportedCupFunctoriality.lean:980 defines functorialCupCompare. The only DAG lean ownership is the theorem lem-pur-supported-cup-functoriality; def-pur-frame-class and lemma consumers mention it but do not own it. def-pur-supported-class-operations owns the Hom groups and comparison functor, but omits functorialCupCompare. def-pur-supported-class-site-comparison owns tensor-source representative transport, not this canonical map on supported Hom. Both blueprint searches return zero nodes.",
+   "date": "2026-10-21",
+   "verdict": "Existing Lean definition has no definition-node owner; record it existing:true, as required by the return."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-finite-type-coordinate-support-orientation",
+  "date": "2026-10-21",
+  "group": "NR"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-frame-independence",
+   "place": "Proof, first two sentences: the class is a section of the supported-cohomology sheaf and equality can be checked etale-locally; extracted coordinate orientation normalization via supported etale-to-pro-etale comparison.",
+   "via": [
+    "lem-pur-finite-type-coordinate-support-orientation",
+    "lem-pur-relative-support-coordinate-model",
+    "lem-pur-relative-support-bottom-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "lean": {
+  "module": "Sheaf.Paper.SupportedCupFunctoriality",
+  "declaration": "WeilConjectures.PurityFiniteSetting.functorialCupCompare",
+  "statement": "def functorialCupCompare (P : PurityFiniteSetting.{u})\n    {C X : Scheme.{u}} (i : C ⟶ X) [IsClosedImmersion i] (a r : ℤ)\n    (α : P.FunctorialCupH false i a r) : P.FunctorialCupH true i a r",
+  "branch": "newtargets-dag",
+  "by": "NR",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Definition-node ownership requested in the independent H2 return: reuse the landed canonical supported Hom comparison without writing a module. The closed-source .choose is of its local existence-and-uniqueness characterization, not of supportedCupFunctoriality."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-64c03d650",
+  "group": "NR",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-64c03d650",
+  "group": "NR",
+  "result": "pass",
+  "note": "Re-delivery after the H2 RETURN of c8a0677a3490 makes exactly the requested correction. The Lean module and the item lean record are byte-identical to the earlier delivery, whose substance was already accepted (family for all r, frame-product normalization with unit at b=0, basis-independent signed tensor, base change over all g, closed-support counit and abelian bridge, field IsIso from the same θ, no universe restriction, sorry-only proofs). stmt_deps drops theorem lem-pur-supported-cup-functoriality (kept in proof_deps) and adds landed def-pur-supported-class-operations, which owns functorialCupTwist/Single/FunctorialCupH/SupportMap/TwistProduct/EtaleTwistPullback, plus new def-pur-supported-hom-site-comparison, existing:true for functorialCupCompare. That signature matches live SupportedCupFunctoriality.lean:980-982 verbatim. The body (983-987) is the described composite of the inverse closed-source comparison (choice from the local unique-existence helper at line 946, characterized by the unit restriction), the exact derived inverse image and the twist eqToHom. No other definition node owns the map. The report has both required sections. Worker compiles 37.7/36.7 s clean; nothing changed, nothing recompiled. Advisory: the existing functorialCupCompare docstring still names lem-pur-supported-cup-functoriality as its blueprint node."
+ }
+}

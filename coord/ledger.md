@@ -22728,3 +22728,5 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:00 L: returned deliver/ND/lem-coef-enriched-sequence-projection-formula (reviewer RETURN: L: independent stage-2 immutable head 3e255f21b94a: H3/H5: the repaired degree-zero conjunct uses (rhom_global_sectionsO)
 - 14:01 L: merged deliver/NG/lem-pur-sequence-site-open-extension (stage 2; reviewer PASS; parallel immutable checks)
 - 14:01 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
+- 14:02 L: merged deliver/NO/lem-pur-perfect-quotient-exchange-normalization (stage 2; reviewer PASS; parallel immutable checks)
+- 14:02 L: merged deliver/NR/lem-pur-finite-type-coordinate-support-orientation (stage 2; reviewer PASS; parallel immutable checks)

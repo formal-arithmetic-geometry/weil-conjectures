@@ -22,7 +22,10 @@
   "lem-weil-ringed-tower-pushforward-limit-comparison",
   "lem-weil-pbc-constant-tower-pushforward-normalization",
   "lem-weil-pbc-augmented-diagram-projection-mate",
-  "lem-pur-strict-quotient-diagonal-normalization"
+  "lem-pur-strict-quotient-diagonal-normalization",
+  "def-pur-adic-site-strict-quotient-interface",
+  "lem-pur-system-evaluation-topos",
+  "def-pc-perfect-ring-complex"
  ],
  "proof": [
   {
@@ -264,5 +267,49 @@
   "group": "Q78",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q78-60a9121a3 (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps and every cited statement in full. There are no new nodes. The statement, stmt_deps and source are unchanged from base, and the item is unsplit in the live side DAG, not dropped and has no repair note. There is no cycle (closure of 1117 nodes), and proof_deps equals the union of uses. I accept both declared tool uses: lem-sbc-ringed-site-perfect-projection-formula (generic Stacks 0944, which I read at sites-cohomology.tex:13683) and lem-sfb-geometric-inverse-image-constant-module. Neither replaces a step of clause (7) of sk-thm-sf-compatibility. No SGA source is used. Step 1: I re-derived the transpose identity (d U t)^flat = U(t^flat) b by naturality from the counit equation of lem-pur-ringed-coefficient-restriction-counit; its κ has the same normalization as d. Step 2: U(c) b on K-flat representatives is the τ of the reduction-pullback lemma, so the adjoint clause of the augmented mate gives d U(h_F) = h^A_F. Step 3: at the tensor unit, α=1 gives v = h_F, and the level-n counit calculation gives the projection map. Step 4: the finite-projective splitting plus the exact constant realization makes underline(A_n) perfect, separately for each n. Step 5: levelwise isomorphism, then cohomology, then derived isomorphism; conservativity of U then makes h_F invertible. Step 7: I recomputed ρη = P(η) from naturality of a, the limit normalization of the constant-tower node and clause (4) of strict-quotient-diagonal. Edge cases checked: I=0, I=A, Z with (p), and k[t] with (t) (infinite perfect quotients). FIX: in Step 3 I added a citation of lem-sfb-geometric-inverse-image-constant-module for the structural map u^{-1}A_n,Y ≅ A_n,X, which the counit lemma needs on the original sites. In Step 5 I corrected the source place, which named Tag 05RT 'lemma-acyclic' (in derived.tex, and not the cohomology criterion). Advisory for the maintainer: lem-sbc-strict-quotient-exchange-unit-equation (sk-rem-rest), taken at the square f=e=id, g=h=u, already yields the invertibility of the constant-A projection map and the unit equation γκ = R_u(κ). The item proves this itself rather than citing it, which is not a fault, but the overlap is worth a merge consideration.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PerfectQuotientExchangeNormalization",
+  "declaration": "CategoryTheory.AdicSites.PerfectQuotientExchange.perfectQuotientExchangeNormalization",
+  "declarations": [
+   "CategoryTheory.AdicSites.PerfectQuotientExchange.Modules",
+   "CategoryTheory.AdicSites.PerfectQuotientExchange.quotientHasDerived",
+   "CategoryTheory.AdicSites.PerfectQuotientExchange.quotientKInjectives",
+   "CategoryTheory.AdicSites.PerfectQuotientExchange.Derived",
+   "CategoryTheory.AdicSites.PerfectQuotientExchange.evaluation",
+   "CategoryTheory.AdicSites.PerfectQuotientExchange.evaluationAdditive",
+   "CategoryTheory.AdicSites.PerfectQuotientExchange.evaluationLimits",
+   "CategoryTheory.AdicSites.PerfectQuotientExchange.evaluationColimits",
+   "CategoryTheory.AdicSites.PerfectQuotientExchange.evaluationD",
+   "CategoryTheory.AdicSites.PerfectQuotientExchange.reduction0",
+   "CategoryTheory.AdicSites.PerfectQuotientExchange.reductionComparison",
+   "CategoryTheory.AdicSites.PerfectQuotientExchange.restrictionComparison",
+   "CategoryTheory.AdicSites.PerfectQuotientExchange.ReductionPresentation",
+   "CategoryTheory.AdicSites.PerfectQuotientExchange.ReductionNormalized",
+   "CategoryTheory.AdicSites.PerfectQuotientExchange.Presentation",
+   "CategoryTheory.AdicSites.PerfectQuotientExchange.PresentationNormalized",
+   "CategoryTheory.AdicSites.PerfectQuotientExchange.Presentation.derivedAdjunction",
+   "CategoryTheory.AdicSites.PerfectQuotientExchange.exchange",
+   "CategoryTheory.AdicSites.PerfectQuotientExchange.restrictionMate",
+   "CategoryTheory.AdicSites.PerfectQuotientExchange.strictExchange",
+   "CategoryTheory.AdicSites.PerfectQuotientExchange.finiteExchange",
+   "CategoryTheory.AdicSites.PerfectQuotientExchange.completionExchange",
+   "CategoryTheory.AdicSites.PerfectQuotientExchange.perfectQuotientExchangeNormalization"
+  ],
+  "file": "lean/Sheaf/Paper/PerfectQuotientExchangeNormalization.lean",
+  "statement": "theorem perfectQuotientExchangeNormalization [IsNoetherianRing A] (hperfect : PerfectQuotients A I) : ∃ (p : Presentation f A I) (d : p.push.rightDerivedFunctor ⋙ p.atY.restrictionD ≅ p.atX.restrictionD ⋙ f.towerPush A), PresentationNormalized f A I p ∧ d.hom = restrictionMate p ∧ (∀ F : X.derived A, p.atY.restrictionD.map ((exchange p).app F) ≫ d.hom.app (p.atX.reductionD.obj F) = (strictExchange p).app F) ∧ (∀ (F : X.derived A) (n : ℕ), (finiteExchange p n).app F = f.finiteProjection A I n F) ∧ (∀ (F : X.derived A) (n : ℕ), (Y.evaluate A n).map ((strictExchange p).app F) ≫ (Y.evaluate A n).map ((f.towerPush A).map (p.reductionX.tower.hom.app F)) ≫ (f.evaluatePushIso A n).hom.app ((X.reduction A I).obj F) ≫ (f.push A).map ((X.finiteEvaluationIso A I n).hom.app F) ≫ (f.finiteRestrictionPushIso A I n).hom.app ((X.finiteReduction A I n).obj F) = (Y.evaluate A n).map (p.reductionY.tower.hom.app ((f.push A).obj F)) ≫ (Y.finiteEvaluationIso A I n).hom.app ((f.push A).obj F) ≫ (Y.finiteRestriction A I n).map ((finiteExchange p n).app F)) ∧ IsIso (exchange p) ∧ (∀ n : ℕ, IsIso (finiteExchange p n)) ∧ (∀ F : X.derived A, (Y.unit A I).app ((f.push A).obj F) ≫ completionExchange p F = (f.push A).map ((X.unit A I).app F))",
+  "branch": "newtargets-dag",
+  "by": "NO",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The canonical quotient-diagram module adjunction and comparisons are realized by presentation data whose ordinary section/Hom and full-cochain normalization equations are conclusions, not extra hypotheses. Reuses the published small-site completion, strict quotient reduction, and perfect-quotient interfaces. All maps and helper definitions have real data; only this node theorem is postponed. The AdicSites helper declarations are owned by def-pur-adic-site-strict-quotient-interface (existing: true on CompletionMateComparison); the completionMateComparison theorem is not a statement dependency."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4bf8cde0a",
+  "group": "NO",
+  "result": "pass",
+  "note": "Re-delivery after the e69a3279 RETURN (H2/H12). The item .lean is byte-identical; only lean and stmt_deps changed (lem-sp-completion-mate-comparison replaced by def-pur-adic-site-strict-quotient-interface). The new definition node records the unchanged module Sheaf.Paper.CompletionMateComparison with existing:true: all 84 declarations exist there, including the 9 existsUnique helpers and the instance support; no other node owns any of them; every AdicSites name the item uses is covered; statement 'structure Site' is verbatim; the TeX matches directLimitIso, finiteProjection and PerfectQuotients; completionMateComparison is excluded. Mechanical finding: lem-pur-system-evaluation-topos supplies the Prop-valued Additive and finite limit/colimit instances (its additive-and-exact conclusion) needed to type evaluationD = mapDerivedCategory, so it is a genuine theorem dependency: PASS on that point. Mathematics unchanged and re-checked clause by clause; no extra hypotheses; edge cases I=bot/top, zero ring, empty site, F=0 covered. Advisories: strictExchange restates augmentedDiagramProjection; the module docstrings still tag lem-sp-completion-mate-comparison; the new node's theorem stmt_deps are the item's existing ones. No compile (record-only change)."
  }
 }

@@ -19,7 +19,10 @@
   "lem-amb-cartier-kummer-map",
   "def-pur-supported-cup",
   "lem-asd-etale-finite-twist-pullback",
-  "def-pur-support-cohomology"
+  "def-pur-support-cohomology",
+  "def-pur-frame-class",
+  "def-pur-supported-class-operations",
+  "def-pur-supported-hom-site-comparison"
  ],
  "proof": [
   {
@@ -305,5 +308,51 @@
   "group": "Q77",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q77-12536ff1d (reviewer sub-agent of L); spot-checked: I read the whole delivery: one commit with zero new nodes, item statement byte-identical to the live node, no repair note (an ordinary split, not a 10-21 re-split), nothing dropped by the route pivot, no SGA, and no cycle. Sources: blueprint main-20261015 cor-pur-affine-space-zero-section-purity.proof.md and the first two sentences of lem-pur-frame-independence.proof.md; Stacks 09XP/09XQ (the support functor H_Z preserves injectives by its adjunction); 09B1 and 04JQ through their DAG nodes. The route works. Step 3 descends the normalized pro-etale th_b to the etale site: tate-site-descent (every n, no condition on the ramification index), the counit-preserving closed-adjoint transport on D^+, and the corollary for affine finite-type B; full faithfulness of nu^* on D^+ lifts both the map and its inverse. Step 4 identifies the normalization through the counit transpose, the etale witness of the Cartier map, the site comparison in supported-cup-functoriality (k-schemes, which is the case here) and faithfulness on P. Step 5 (constant free line over k = F_q-bar) is genuinely elementary. Step 6: coordinates stay nonzerodivisors after base change, and support-hom-naturality plus the adjunction give the square for the specified supported pullback. Step 7 uses the trivial Galois group. Small cases checked: b=0, b=1, empty B, nonreduced or disconnected B, r<b, and n not divisible by e. Duplicate search found nothing that states the ordinary support-kernel form; def-pur-finite-affine-orientation-comparison is b=1 only, and the Q86 siblings use this item. FIX 1 (C1/C4): Step 2 computed R Gamma_Z with injective A-module sheaves, but the statement fixes def-pur-support-cohomology, which is derived in abelian sheaves. I added the bridge: det-pbc-conventions-module-cohomology (injective module sheaves have no higher abelian cohomology on P, U and B); z_*z^!_0 I is injective, so I(P)->I(U) is onto; the long exact sequence of thm-pur-with-support-exactness then gives H^q_Z = 0. The step is now 1779 characters and proof_deps is recomputed. Both added nodes already lie in the item's dependency closure, so no new batch-5 reach. FIX 2: the tool_uses 'why' for lem-pur-etale-injective-support-sequence was copied from the cup-product entry; I corrected it and declared det-pbc-conventions-module-cohomology. Batch 5: both flagged citations (cor-pur-affine-space-zero-section-purity and lem-pur-supported-cup-functoriality) reach lem-pod-etale-stalk-tensor-scalar. That node is the generic fact that stalks commute with sheaf tensor and scalar extension; it is no step of the trace formula or Poincare duality, so I accepted both. The other trf/pod nodes newly reached are generic foundations. All declared off-unit tool_uses are accepted. Fixed node: fixes/dag/nodes/sec-smooth-purity/lem-pur-finite-type-coordinate-support-orientation.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteTypeCoordinateSupportOrientation",
+  "declaration": "WeilConjectures.PurityFiniteSetting.finiteTypeCoordinateSupportOrientation",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.coordinateTwist",
+   "WeilConjectures.PurityFiniteSetting.coordinateSingle",
+   "WeilConjectures.PurityFiniteSetting.coordinateDerivedInclusion",
+   "WeilConjectures.PurityFiniteSetting.CoordinateOrientationFamily",
+   "WeilConjectures.PurityFiniteSetting.coordinateOrientationCounit",
+   "WeilConjectures.PurityFiniteSetting.coordinateOrientationClass",
+   "WeilConjectures.PurityFiniteSetting.coordinateBasis",
+   "WeilConjectures.PurityFiniteSetting.coordinateBasisTwist",
+   "WeilConjectures.PurityFiniteSetting.CoordinateOrientationNormalization",
+   "WeilConjectures.PurityFiniteSetting.CoordinateOrientationTensor",
+   "WeilConjectures.PurityFiniteSetting.coordinateTwistedExchange",
+   "WeilConjectures.PurityFiniteSetting.CoordinateOrientationBaseChange",
+   "WeilConjectures.PurityFiniteSetting.coordinateAbHasDerivedCategory",
+   "WeilConjectures.PurityFiniteSetting.coordinateModuleHasDerivedCategory",
+   "WeilConjectures.PurityFiniteSetting.coordinateAbelianGlobalSections",
+   "WeilConjectures.PurityFiniteSetting.coordinateDerivedAbelianGlobalSections",
+   "WeilConjectures.PurityFiniteSetting.coordinateFieldLine",
+   "WeilConjectures.PurityFiniteSetting.coordinateSupport_closedComparison",
+   "WeilConjectures.PurityFiniteSetting.coordinateModuleGlobalSections",
+   "WeilConjectures.PurityFiniteSetting.coordinateDerivedModuleGlobalSections",
+   "WeilConjectures.PurityFiniteSetting.coordinateGlobalSupport_existsUnique",
+   "WeilConjectures.PurityFiniteSetting.coordinateDerivedGlobalSupportIso",
+   "WeilConjectures.PurityFiniteSetting.coordinateFieldSourceIso",
+   "WeilConjectures.PurityFiniteSetting.coordinateFieldOrientation",
+   "WeilConjectures.PurityFiniteSetting.finiteTypeCoordinateSupportOrientation"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteTypeCoordinateSupportOrientation.lean",
+  "statement": "theorem finiteTypeCoordinateSupportOrientation (P : PurityFiniteSetting.{u}) (b : ℕ) : ∃ θ : P.CoordinateOrientationFamily b, P.CoordinateOrientationNormalization b θ ∧ P.CoordinateOrientationTensor b θ ∧ P.CoordinateOrientationBaseChange b θ ∧ ∀ r : ℤ, IsIso (P.coordinateFieldOrientation b θ r)",
+  "branch": "newtargets-dag",
+  "by": "NR",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The main theorem gives one normalized family for all affine finite-type bases and signed twists. coordinateSupport_closedComparison states the ordinary closed-support, counit and abelian-global-support clauses. The remaining declarations name only canonical comparisons and the clause predicates of this item. Normalization is tested through the faithful supported etale-to-pro-etale comparison; base change is its equivalent counit-transpose equation. No definition selects an uncharacterized existence witness."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-64c03d650",
+  "group": "NR",
+  "result": "pass",
+  "note": "Re-delivery after the H2 RETURN of c8a0677a3490 makes exactly the requested correction. The Lean module and the item lean record are byte-identical to the earlier delivery, whose substance was already accepted (family for all r, frame-product normalization with unit at b=0, basis-independent signed tensor, base change over all g, closed-support counit and abelian bridge, field IsIso from the same θ, no universe restriction, sorry-only proofs). stmt_deps drops theorem lem-pur-supported-cup-functoriality (kept in proof_deps) and adds landed def-pur-supported-class-operations, which owns functorialCupTwist/Single/FunctorialCupH/SupportMap/TwistProduct/EtaleTwistPullback, plus new def-pur-supported-hom-site-comparison, existing:true for functorialCupCompare. That signature matches live SupportedCupFunctoriality.lean:980-982 verbatim. The body (983-987) is the described composite of the inverse closed-source comparison (choice from the local unique-existence helper at line 946, characterized by the unit restriction), the exact derived inverse image and the twist eqToHom. No other definition node owns the map. The report has both required sections. Worker compiles 37.7/36.7 s clean; nothing changed, nothing recompiled. Advisory: the existing functorialCupCompare docstring still names lem-pur-supported-cup-functoriality as its blueprint node."
  }
 }
