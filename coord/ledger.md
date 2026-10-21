@@ -23299,3 +23299,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:17 L: merged deliver/Q18/lem-sfb-condensed-split-coset-induction (reviewer PASS; first push; new nodes: 0)
 - 2026-10-21T18:17:20Z L: superseded stage-1 delivery NM/lem-trf-bounded-below-derived-mate-model at fa4178c7cefb2caec58b54fe89e8a4fec3c5766d; current completion retained; packet archived at refs/superseded/NM/lem-trf-bounded-below-derived-mate-model/fa4178c7cefb2caec58b54fe89e8a4fec3c5766d; stale return retired.
 - 18:17 L: merged deliver/Q37/lem-sfb-snc-finite-root-face-regular (reviewer PASS; first push; new nodes: 0)
+- 2026-10-21T18:17:45Z L: superseded stage-1 delivery Q15/lem-sfb-integral-lattice-cubical-contraction at b9e9a372026422bbcc9f56e1eaf6e92726738501; current completion retained; packet archived at refs/superseded/Q15/lem-sfb-integral-lattice-cubical-contraction/b9e9a372026422bbcc9f56e1eaf6e92726738501; stale return retired.
