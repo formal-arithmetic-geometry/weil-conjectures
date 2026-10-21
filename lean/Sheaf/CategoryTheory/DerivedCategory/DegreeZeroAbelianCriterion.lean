@@ -7,7 +7,7 @@ public import Mathlib.CategoryTheory.Abelian.Subcategory
 public import Mathlib.CategoryTheory.ObjectProperty.Extensions
 public import Mathlib.Algebra.Homology.ExactSequence
 import Mathlib.Algebra.Homology.DerivedCategory.TStructure
-import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
+import Mathlib.Algebra.Homology.DerivedCategory.SingleTriangle
 
 /-!
 # The degree-zero category of a cohomology-stable derived subcategory
@@ -101,6 +101,102 @@ theorem degreeZero_abelian_criterion
       (∀ (M N : (T.inverseImage (singleFunctor A 0)).FullSubcategory) (f : M ⟶ N),
         PreservesColimit (parallelPair f 0) (T.inverseImage (singleFunctor A 0)).ι)) ∧
     (T.inverseImage (singleFunctor A 0)).IsClosedUnderExtensions := by
-  sorry
+  let B := T.inverseImage (singleFunctor A 0)
+  have hcone : ∀ (M N : B.FullSubcategory) (f : M ⟶ N) (D : DerivedCategory A)
+      (g : (singleFunctor A 0).obj N.obj ⟶ D)
+      (h : D ⟶ ((singleFunctor A 0).obj M.obj)⟦(1 : ℤ)⟧),
+      Triangle.mk ((singleFunctor A 0).map f.hom) g h ∈ distTriang (DerivedCategory A) →
+      ∃ (eK : kernel f.hom ≅ (homologyFunctor A (-1)).obj D)
+        (eC : cokernel f.hom ≅ (homologyFunctor A 0).obj D),
+        eK.hom ≫
+            HomologySequence.δ (Triangle.mk ((singleFunctor A 0).map f.hom) g h) (-1) 0 ≫
+            (singleFunctorCompHomologyFunctorIso A 0).hom.app M.obj = kernel.ι f.hom ∧
+        (singleFunctorCompHomologyFunctorIso A 0).inv.app N.obj ≫
+            (homologyFunctor A 0).map g = cokernel.π f.hom ≫ eC.hom ∧
+        B (kernel f.hom) ∧ B (cokernel f.hom) := by
+    intro M N f D g h hΔ
+    let Δ := Triangle.mk ((singleFunctor A 0).map f.hom) g h
+    let eM := (singleFunctorCompHomologyFunctorIso A 0).app M.obj
+    let eN := (singleFunctorCompHomologyFunctorIso A 0).app N.obj
+    have hnat : (homologyFunctor A 0).map Δ.mor₁ ≫ eN.hom = eM.hom ≫ f.hom :=
+      (singleFunctorCompHomologyFunctorIso A 0).hom.naturality f.hom
+    have hneg : IsZero ((homologyFunctor A (-1)).obj Δ.obj₂) :=
+      isZero_of_isGE ((singleFunctor A 0).obj N.obj) 0 (-1) (by lia)
+    have hpos : IsZero ((homologyFunctor A 1).obj Δ.obj₁) :=
+      isZero_of_isLE ((singleFunctor A 0).obj M.obj) 0 1 (by lia)
+    have : Mono (HomologySequence.δ Δ (-1) 0) :=
+      (HomologySequence.exact₃ Δ hΔ (-1) 0).mono_g (hneg.eq_zero_of_src _)
+    have : Epi ((homologyFunctor A 0).map Δ.mor₂) :=
+      (HomologySequence.exact₃ Δ hΔ 0 1).epi_f (hpos.eq_zero_of_tgt _)
+    let k := HomologySequence.δ Δ (-1) 0 ≫ eM.hom
+    let c := eN.inv ≫ (homologyFunctor A 0).map Δ.mor₂
+    have hk : k ≫ f.hom = 0 := by
+      dsimp [k]
+      rw [Category.assoc, ← hnat, ← Category.assoc, HomologySequence.δ_comp Δ hΔ (-1) 0]
+      simp
+    have hc : f.hom ≫ c = 0 := by
+      dsimp [c]
+      rw [← cancel_epi eM.hom, ← Category.assoc, ← hnat]
+      simp [← Functor.map_comp, comp_distTriang_mor_zero₁₂ Δ hΔ]
+    let SK := ShortComplex.mk k f.hom hk
+    let SC := ShortComplex.mk f.hom c hc
+    have hSK : SK.Exact := by
+      refine ShortComplex.exact_of_iso ?_ (HomologySequence.exact₁ Δ hΔ (-1) 0)
+      exact ShortComplex.isoMk (Iso.refl _) eM eN (by simp [SK, k]) hnat.symm
+    have hSC : SC.Exact := by
+      refine ShortComplex.exact_of_iso ?_ (HomologySequence.exact₂ Δ hΔ 0)
+      refine ShortComplex.isoMk eM eN (Iso.refl _) hnat.symm ?_
+      simp [SC, c]
+    have : Mono SK.f := by dsimp [SK, k]; infer_instance
+    have : Epi SC.g := by dsimp [SC, c]; infer_instance
+    let eK := (kernelIsKernel f.hom).conePointUniqueUpToIso hSK.fIsKernel
+    let eC := (cokernelIsCokernel f.hom).coconePointUniqueUpToIso hSC.gIsCokernel
+    have hD : T D := T.ext_of_isTriangulatedClosed₃ Δ hΔ M.property N.property
+    refine ⟨eK, eC, ?_, ?_, ?_, ?_⟩
+    · exact (kernelIsKernel f.hom).conePointUniqueUpToIso_hom_comp
+        hSK.fIsKernel WalkingParallelPair.zero
+    · exact ((cokernelIsCokernel f.hom).comp_coconePointUniqueUpToIso_hom
+        hSC.gIsCokernel WalkingParallelPair.one).symm
+    · exact T.prop_of_iso ((singleFunctor A 0).mapIso eK).symm
+        (hcohomology D hD (-1))
+    · exact T.prop_of_iso ((singleFunctor A 0).mapIso eC).symm
+        (hcohomology D hD 0)
+  have : B.IsClosedUnderExtensions := ⟨fun hS h₁ h₃ ↦
+    T.ext_of_isTriangulatedClosed₂ _ hS.singleTriangle_distinguished h₁ h₃⟩
+  have : B.IsClosedUnderBinaryProducts := by
+    constructor
+    rintro X ⟨p⟩
+    refine B.prop_of_iso ?_ (B.prop_biprod
+      (p.prop_diag_obj ⟨.left⟩) (p.prop_diag_obj ⟨.right⟩))
+    exact biprod.isoProd _ _ ≪≫ HasLimit.isoOfNatIso (diagramIsoPair p.diag).symm ≪≫
+      (limit.isLimit _).conePointUniqueUpToIso p.isLimit
+  have : B.IsClosedUnderFiniteProducts := .mk'
+  have : B.IsClosedUnderKernels := by
+    constructor
+    rintro _ ⟨f, k, hk, hX, hY⟩
+    obtain ⟨D, g, h, hD⟩ := distinguished_cocone_triangle ((singleFunctor A 0).map f)
+    obtain ⟨eK, eC, _, _, hK, _⟩ := hcone ⟨_, hX⟩ ⟨_, hY⟩ (B.homMk f) D g h hD
+    exact B.prop_of_iso ((kernelIsKernel f).conePointUniqueUpToIso hk) hK
+  have : B.IsClosedUnderCokernels := by
+    constructor
+    rintro _ ⟨f, k, hk, hX, hY⟩
+    obtain ⟨D, g, h, hD⟩ := distinguished_cocone_triangle ((singleFunctor A 0).map f)
+    obtain ⟨eK, eC, _, _, _, hC⟩ := hcone ⟨_, hX⟩ ⟨_, hY⟩ (B.homMk f) D g h hD
+    exact B.prop_of_iso ((cokernelIsCokernel f).coconePointUniqueUpToIso hk) hC
+  refine ⟨inferInstance, inferInstance, ?_, hcone, inferInstance, inferInstance,
+    inferInstance, inferInstance, ?_, inferInstance⟩
+  · intro K
+    constructor
+    · rintro ⟨M, ⟨e⟩⟩ q hq
+      apply IsZero.of_iso _ ((homologyFunctor A q).mapIso e).symm
+      obtain hlt | hgt := lt_or_gt_of_ne hq
+      · exact isZero_of_isGE _ 0 q hlt
+      · exact isZero_of_isLE _ 0 q hgt
+    · intro hK
+      have : K.obj.IsGE 0 := (isGE_iff _ _).2 (fun i hi ↦ hK i (by lia))
+      have : K.obj.IsLE 0 := (isLE_iff _ _).2 (fun i hi ↦ hK i (by lia))
+      obtain ⟨M, ⟨e⟩⟩ := exists_iso_singleFunctor_obj_of_isGE_of_isLE K.obj 0
+      exact ⟨⟨M, T.prop_of_iso e K.property⟩, ⟨e.symm⟩⟩
+  · exact ⟨inferInstance, rfl, B.preservesKernels_ι, B.preservesCokernels_ι⟩
 
 end DerivedCategory
