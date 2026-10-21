@@ -22,7 +22,7 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 | `Sheaf.Paper.CondensedFiniteCoefficientLocalization` | 1 |  | error: reverted by the merge queue after a cluster restore (see the build log) |
 | `Sheaf.CategoryTheory.ThreeStepAdjunctionComparison` | 1 |  | error: reverted by the merge queue after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.StrictLocalBaseChangeGlobalHomology` | 1 |  | error: reverted by the merge queue after a cluster restore (see the build log) |
-| `Sheaf.AlgebraicGeometry.FiniteRingEtaleCompactGenerators` | 1 |  | error: reverted by the merge queue after a cluster restore (see the build log) |
+| `Sheaf.SixFunctors.FlatModel` | 1 |  | error: reverted by the merge queue after a cluster restore (see the build log) |
 | `Sheaf.Paper.IntegralModelSurjectiveClosedReflection` | 1 |  | error: reverted by the merge queue after a cluster restore (see the build log) |
 | `Sheaf.Paper.OpenExtensionConstantModelConstructible` | 1 |  | error: reverted by the merge queue after a cluster restore (see the build log) |
 | `Sheaf.Paper.FiniteDiscreteCoefficientEncoding` | 1 |  | error: reverted by the merge queue after a cluster restore (see the build log) |
