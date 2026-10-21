@@ -23812,3 +23812,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:44 L: returned deliver/N9/sk-thm-groth-ss (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-thm-groth-ss: sk-thm-groth-ss: completed in this pr)
 - 21:44 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
 - 21:45 L: returned deliver/ND/lem-sfb-supported-lattice-norm-projection (reviewer RETURN: I read the item, the new node lem-sfb-tame-generator-norm-projection, the cited statements (lem-sfb-tame-pair-proper-gen)
+- 21:45 L: merged deliver/NS/lem-sfb-equivariant-resolution-bar-normalization (stage 2; reviewer PASS; parallel immutable checks)

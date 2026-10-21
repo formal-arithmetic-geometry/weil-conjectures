@@ -15,7 +15,9 @@
   "def-weil-abstract-derived-category",
   "lem-sfb-condensed-derived-restriction-calculus",
   "def-sfb-right-derived-functor",
-  "lem-sfb-condensed-derived-invariant-bar"
+  "lem-sfb-condensed-derived-invariant-bar",
+  "def-sfb-condensed-equivariant-bar-data",
+  "def-sfb-condensed-homogeneous-functions"
  ],
  "proof": [
   {
@@ -308,5 +310,34 @@
   "group": "Q10",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q10-3c6872baf (reviewer sub-agent of L); spot-checked: I read the item, all nine steps, the new node and the cited statements in full. On the base the item had an empty proof; it was created by Q06 on 2026-10-22 for the polynomial-bar node, so it is not a 2026-10-21 re-split and is not on the dropped list. No SGA is cited. Step-by-step checks: (1) Grothendieck abelian with enough injectives gives an equivariant injective resolution s:N[0]->I, which is K-injective by lem-sp-kinjective-computes (2). (2) A[S]=j_{S!}A_S by the universal property, so it is flat by 03EV (read). L=A[G](x)- with translation is an exact left adjoint of U, and its transpose formulas are correct. By 015Z (read), U preserves injectives. (3) T^{p,q}=Hom(A[G^{p+1}],UI^q) with diagonal and value action; its terms are injective by the new node, and finite biproducts of injectives are injective. delta is the constant function, and its horizontal differential x-x=0. (4) chi(f)=f(1,g1,g1g2,...) with inverse h0.c(h0^{-1}h1,...); I checked invariance and that the first face equals g1.c(g2,...), the bar-data first face. (5) eps=Q(v)c_s is exactly the bar-data computation datum, which is normalized by the total augmentation and is Assertion(G) of the bar node. j is modeled as postcomposition with s^0; it is a chain map since s^0 is equivariant and N is trivial. (6) t is a chain map since d_I s^0=0. It is equivariant because N is trivial. chi F(te)=j rho holds coordinatewise. (7) a^0 is monic because K^{-1}=0 gives H^0=ker d^0, which satisfies the hypothesis of the 013P(2) lift lemma (read). (8) te.a=delta.s=const s^0 n, so te and delta b are homotopic by 013S (read). (9) Unit naturality and RF(Qb)=RF(Qs)RF(Qa)^{-1} give the stated equality exactly, with no acyclicity of K^n or R_N^n used. New node lem-sfb-internal-homogeneous-functions-injective: it is true, since H_n(J) is isomorphic to the coinduction of Hom(A[G^n],UJ) (I checked the untwisting). Coinduction is right adjoint to the exact U, and Hom(A[G^n],UJ) is injective by flatness. Small cases: G=1 gives UJ (the hypothesis), n=0 gives the twisted coinduced module, and J=0 gives 0. It is statement-only, self-contained, and strictly smaller than the item. The rg -L duplicate search found no duplicate: the lem-exc-coinduced-* nodes are about discrete modules over finite rings, and lem-sfb-condensed-internal-bar-resolution states exactness and the induced-module form, not injectivity. tool_uses (kinjective-computes, j-shriek-flat, tensor-closed, lift-unique-homotopy) are generic black-box homological tools and accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.EquivariantResolutionBarNormalization",
+  "declaration": "CategoryTheory.CondensedBar.equivariant_resolution_bar_normalization",
+  "declarations": [
+   "CategoryTheory.CondensedBar.homogeneousValue",
+   "CategoryTheory.CondensedBar.HomogeneousBar",
+   "CategoryTheory.CondensedBar.prefixTuple",
+   "CategoryTheory.CondensedBar.ResolutionEvaluation",
+   "CategoryTheory.CondensedBar.UnderivedBarComponents",
+   "CategoryTheory.CondensedBar.localizedAugmentation",
+   "CategoryTheory.CondensedBar.invariantUnit",
+   "CategoryTheory.CondensedBar.equivariant_resolution_bar_normalization"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/EquivariantResolutionBarNormalization.lean",
+  "statement": "theorem equivariant_resolution_bar_normalization (M : Model A G) (N : Modules A) (H : HomogeneousBar (G := G) N) (K : CochainComplex (Equivariant A G) ℕ) (a : (CochainComplex.single₀ (Equivariant A G)).obj ((trivial (P := G)).obj N) ⟶ K) [QuasiIso a] (e : K ⟶ H.complex) (hea : a ≫ e = H.augmentation) (rho : (M.invariants.functor.mapHomologicalComplex (.up ℕ)).obj K ⟶ (cochains M.bar).obj ((trivial (P := G)).obj N)) (hrho : ResolutionEvaluation M H e rho) (I : InjectiveResolution ((trivial (P := G)).obj N)) (j : (cochains M.bar).obj ((trivial (P := G)).obj N) ⟶ (totalCochains M.bar).obj I.cocomplex) (hj : UnderivedBarComponents M N I j) : DerivedCategory.Q.map (HomologicalComplex.extendMap rho ComplexShape.embeddingUpNat) ≫ DerivedCategory.Q.map (HomologicalComplex.extendMap j ComplexShape.embeddingUpNat) = invariantUnit M.invariants K ≫ (M.invariants.functor.rightDerivedFunctor.mapIso (localizedAugmentation a)).inv ≫ (M.computation.iso I).hom",
+  "branch": "sheaf-dag",
+  "by": "NS",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Repair of returned immutable head ab4904d3c220, H2: the statement cites def-sfb-condensed-homogeneous-functions for the existing homogeneousHom, homogeneousEvaluate and HomogeneousFunctions definitions in the unchanged module Sheaf.CategoryTheory.CondensedHomogeneousFunctionsInjective. The injectivity theorem is retained in proof_deps only. No Lean declaration, module, theorem statement or proof plan changes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-753205002",
+  "group": "NS",
+  "result": "pass",
+  "note": "Re-delivery of ab4904d3c220 H2 RETURN, done as instructed: new def-sfb-condensed-homogeneous-functions (existing:true) records homogeneousHom/homogeneousEvaluate/HomogeneousFunctions in the UNCHANGED module CondensedHomogeneousFunctionsInjective and replaces the theorem stmt_dep; the theorem stays in proof_deps; no dependency record touched (no ef6f2b collision). Item Lean byte-identical to ab4904 (sha256 c5fe4b92); only the item's stmt_deps changed. check_existing and check_new_node clean; the new node's stmt_deps cover every declaration its definitions use; no cycle; every declaration in the item statement comes from a stmt_dep. Maths re-read: homogeneous bar action/differential/augmentation pinned on slices; rho pinned via prefixTuple evaluation; j pinned via I.ι.f 0 into the (n,0) summand; epsilon = M.computation.iso I; u_K = rightDerivedFunctorUnitQ; diagrammatic composition order matches the node; equality in the derived category; no acyclicity assumed; edge cases n=0, trivial/noncommutative G, N=0, zero ring, empty test space covered. Docstrings carry the source and all nine proof steps; the only sorry is the theorem proof. No compile (no file changed). Advisory: the injectivity theorem node should later cite the new def node."
  }
 }
