@@ -1,0 +1,238 @@
+{
+ "id": "lem-pur-integral-line-restrictions",
+ "kind": "statement",
+ "title": "Completeness and normalized restricted line equivalences",
+ "statement": "Fix ell, E, X with ell invertible in every residue field, a completed coefficient line L with locally constant finite reduction models, and opposite-line evaluations e satisfying EvaluationFormula [def-pur-integral-line-reduction-data]. Ordinary derived tensor with every signed power preserves derived completeness for all complete unbounded inputs. Moreover Restrictions(e) holds: both ordinary and completed twists preserve the integral constructible category; their comparison is exactly the actual completion comparison; the opposite evaluations have the stated K-flat chain formulas and restrict to inverse equivalences, and the completed equivalences have exactly the displayed conjugated unit/counit equations.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 3.4.10, Lemma 3.4.12 and Proposition 3.5.1 / Definition 3.5.2, pp. 22-24; generic signed-line specialization with finite reduction conditions",
+  "also": [
+   {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4 (lemma-pullback-tensor-product), applied to a quotient map on the same topos"
+   },
+   {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+    "place": "Proof (3), last sentence interpreted in the derived-complete integral coefficient convention; extracted generic reduction/restriction argument"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-pur-integral-line-reduction-data"
+ ],
+ "proof": [
+  {
+   "text": "Use [lem-pur-integral-line-power-comparisons] to obtain the normalized quotient-power comparisons b. Apply [lem-pur-integral-line-derived-comparisons] to b to obtain normalized derived reduction, strict transition compatibility and the exact cohomological support computation. These are the reduction identifications used in the completeness and constructibility steps below. The evaluations e in the statement remain the given normalized evaluations.",
+   "uses": [
+    "lem-pur-integral-line-power-comparisons",
+    "lem-pur-integral-line-derived-comparisons"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let $T$ be ordinary sheaf tensor on the right by $P$. The given normalized evaluations and their inverse coevaluations are an exact pairing in the symmetric monoidal module category [lem-pc-sheaf-modules-tensor-closed]. Apply [lem-sfb-dual-tensor-adjunctions], with the order of the two lines chosen so that $T$ is the right adjoint. Thus $T$ preserves products, with comparison specified by $T(\\operatorname{pr}_n)$. It is exact by [lem-pur-line-unbounded-derived-tensor]. Countable products of these sheaves are exact [lem-weil-proetale-countable-products-exact], and their derived-category products are termwise products [lem-weil-derived-limit-existence](2). The same product comparison therefore identifies $T(\\prod C_n)$ with $\\prod T(C_n)$ for arbitrary complexes, and represents the product comparison for the derived tensor functor. No claim that localization to a covering preserves products is used.",
+   "uses": [
+    "lem-pc-sheaf-modules-tensor-closed",
+    "lem-sfb-dual-tensor-adjunctions",
+    "lem-pur-line-unbounded-derived-tensor",
+    "lem-weil-proetale-countable-products-exact",
+    "lem-weil-derived-limit-existence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 3.4.10 and Lemma 3.4.12; product preservation obtained from the exact line pairing"
+   }
+  },
+  {
+   "text": "Suppose $K$ is derived complete. Take its Roos triangle with the specified first map $c=(c_n)$ [def-weil-derived-complete]. Apply $T$ on the derived category: this is triangulated by [lem-pur-line-unbounded-derived-tensor]. By the product-preserving line tensor equivalence the two product terms become the products of $T(K_n)$, and their transition endomorphism becomes $1-s$ for that image tower, since its $n$th projection is $T(\\operatorname{pr}_n)-T(t_n)T(\\operatorname{pr}_{n+1})$. The balancing maps of the normalized derived scalar tensor comparison identify this tower with the reduction tower of $T(K)$ [def-weil-integral-reduction-tower]. They identify $T(c_n)$ with its reduction unit: on a representative $x\\otimes p$ the map is $(x\\otimes1)\\otimes(p\\otimes1)$. Thus the transported distinguished triangle has precisely the required first map, proving derived completeness of $K\\otimes_R^LP$.",
+   "uses": [
+    "def-weil-derived-complete",
+    "lem-pur-line-unbounded-derived-tensor",
+    "def-weil-integral-reduction-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 3.4.12 and Definition 3.5.2; explicit transport of the reduction-unit Roos triangle"
+   }
+  },
+  {
+   "text": "Choose a K-flat resolution $U$ of $K$ with flat terms as in [def-pur-integral-derived-operations]. The identity resolution of $P[0]$ is admissible by [lem-pur-line-unbounded-derived-tensor]. The well-definedness comparison [lem-pur-integral-operations-well-defined](2) therefore identifies the prescribed completed tensor with $H(B_\\bullet)$, where $H(C_\\bullet)=\\operatorname{Cone}(1-s)[-1]$, $U_n=U\\otimes_RR_n$, and $B_n=\\operatorname{Res}_n(U_n\\otimes_{R_n}P_n)$. There is a strict balancing isomorphism $T(\\operatorname{Res}_nU_n)\\cong B_n$: $(x\\otimes a)\\otimes p\\mapsto(x\\otimes a)\\otimes(p\\otimes1)$, with inverse $(x\\otimes a)\\otimes(p\\otimes b)\\mapsto(x\\otimes ab)\\otimes p$. It commutes with every transition and sends the quotient of $x\\otimes p$ to $(x\\otimes1)\\otimes(p\\otimes1)$. In the coordinates $H(C)^j=(\\prod C_n)^j\\oplus(\\prod C_n)^{j-1}$ of [lem-pe-roos-cone-calculus], apply the product comparison of the product-preserving line tensor equivalence to each summand. This gives a natural chain isomorphism $T(H(\\operatorname{Res}_nU_n))\\cong H(B_\\bullet)$: it commutes with $d(v,u)=(dv,-du-(1-s)v)$ because the balancing maps commute with the transitions and differentials.",
+   "uses": [
+    "def-pur-integral-derived-operations",
+    "lem-pur-line-unbounded-derived-tensor",
+    "lem-pur-integral-operations-well-defined",
+    "lem-pe-roos-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 3.4.10, Proposition 3.5.1 and Definition 3.5.2; specified quotient-tower cone calculation"
+   }
+  },
+  {
+   "text": "Use [lem-weil-finite-free-completed-scalar-comparison] with its two fields both equal to $E$ and the same uniformizer. For derived-complete $K$ its statement gives a natural isomorphism $\\eta_K:K\\to H(\\operatorname{Res}_nU_n)$, represented by $x\\mapsto((x\\otimes1)_n,0)$. Apply the exact functor $T$, then the chain isomorphism of the levelwise normalized tensor comparison. The resulting map $U\\otimes_RP\\to H(B_\\bullet)$ is $x\\otimes p\\mapsto(((x\\otimes1)\\otimes(p\\otimes1))_n,0)$, the quotient-tower completion comparison for this tensor, with zero shifted-product component [lem-pe-roos-cone-calculus]. It is an isomorphism because $T(\\eta_K)$ and the levelwise normalized tensor comparison are. The resolution comparisons of [lem-pur-integral-operations-well-defined] identify this very map with the specified completed-tensor model, naturally in $K$. This proves the asserted comparison, rather than choosing an arbitrary isomorphism between derived limits.",
+   "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-pe-roos-cone-calculus",
+    "lem-pur-integral-operations-well-defined"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 3.5.1 and Definition 3.5.2; identity-field completion comparison and zero-second-coordinate augmentation"
+   }
+  },
+  {
+   "text": "Assume $K\\in D^b_c(X,\\mathcal O_E)$. Fix $n,i$ and a finite constructible locally closed partition on which $\\mathcal H^i(K_n)$ is locally constant with finite values [def-weil-finite-torsion-constructibility]. Pullback to each stratum is exact for the finite constant ring [prop-weil-pbc-proetale-constant-exact], and commutes with derived tensor [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. For degree-zero sheaves with the line factor flat this is ordinary tensor. The hypothesis on $L_n$, and the normalized ordinary signed-power comparisons, make $P_n$ locally constant with finite rank-one values. On the common refinement of their trivializing covers, the tensor of the two constant sheaves has value $M\\otimes_{\\mathcal O_E/\\pi^n}(\\mathcal O_E/\\pi^n)\\cong M$: the maps are $x\\otimes a\\mapsto ax$ and $x\\mapsto x\\otimes1$. Thus the cohomology sheaf computed by the exact finite line tensor is locally constant with finite values on the same partition. It is constructible. The transported completeness triangle and the cohomology support computation give all conditions of [def-weil-derived-complete-integral-detailed]. The completed model satisfies them as well by invertibility of the actual completion comparison.",
+   "uses": [
+    "def-weil-finite-torsion-constructibility",
+    "prop-weil-pbc-proetale-constant-exact",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "def-weil-derived-complete-integral-detailed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+    "place": "Proof (3), final derived-tensor sentence: finite reduction constructibility and restriction to the integral full subcategory"
+   }
+  },
+  {
+   "text": "Apply the preceding steps also to $-m$. The given normalized ordinary evaluations induce the inverse equivalences on $D(R)$ supplied by [lem-pur-line-unbounded-derived-tensor]. Both functors preserve the integral category by Step 9. Because this category is full [def-weil-derived-complete-integral-detailed], their evaluations, inverses and triangle identities restrict to it. Write $\\chi_m:T_m\\xrightarrow{\\sim}\\widehat T_m$ for invertibility of the actual completion comparison. The completed evaluation is the composite $\\widehat T_{-m}\\widehat T_m\\xrightarrow{\\chi_{-m}^{-1}}T_{-m}\\widehat T_m\\xrightarrow{T_{-m}(\\chi_m^{-1})}T_{-m}T_m\\xrightarrow{\\mathrm{ev}}1$, and similarly in the other order. Naturality of the $\\chi$ cancels adjacent comparison maps in the two triangle composites, leaving the ordinary triangle identities. Step 2 identifies their reductions with the specified finite evaluations. Hence these comparisons and ordinary opposite-line evaluations give inverse equivalences for the completed tensor functors, as asserted.",
+   "uses": [
+    "lem-pur-line-unbounded-derived-tensor",
+    "def-weil-derived-complete-integral-detailed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+    "place": "Proof (3), final sentence: opposite twists are inverse, restricted through the completion comparisons"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-integral-line-power-comparisons",
+  "lem-pur-integral-line-derived-comparisons",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-sfb-dual-tensor-adjunctions",
+  "lem-pur-line-unbounded-derived-tensor",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-derived-limit-existence",
+  "def-weil-derived-complete",
+  "def-weil-integral-reduction-tower",
+  "def-pur-integral-derived-operations",
+  "lem-pur-integral-operations-well-defined",
+  "lem-pe-roos-cone-calculus",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "def-weil-finite-torsion-constructibility",
+  "prop-weil-pbc-proetale-constant-exact",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-weil-derived-complete-integral-detailed"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+  "place": "Proof (3), the corresponding signed-line reduction/restriction steps; isolated from lem-pur-integral-line-reduction-restriction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Tensoring by an invertible module sheaf commutes with derived reduction and derived completion",
+   "date": "2026-10-21",
+   "results": "AdicCompletion.ofTensorProduct_tmul; AdicCompletion.ofTensorProduct_naturality; AdicCompletion.tensor_map_id_left_eq_map; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of; LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply; LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat; LightCondensed.free_internallyProjective_iff_tensor_condition",
+   "verdict": "No complete normalized integral pro-etale line theorem. Use the library signed-line, scalar tensor and derived-category APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Equivalence",
+   "date": "2026-10-21",
+   "results": "CategoryTheory.Equivalence; CategoryTheory.Equivalence.refl; CategoryTheory.Equivalence.instInhabited; CategoryTheory.Equivalence.instPowInt; CategoryTheory.Equivalence.instCategory; CategoryTheory.Equivalence.pow; CategoryTheory.Equivalence.powNat; CategoryTheory.Equivalence.functor",
+   "verdict": "No complete normalized integral pro-etale line theorem. Use the library signed-line, scalar tensor and derived-category APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "integralLineTensorComparison_iso|signedLineTensor_equivalence|line_unbounded_derived_tensor",
+   "date": "2026-10-21",
+   "results": "0 hits",
+   "verdict": "No complete normalized integral pro-etale line theorem. Use the library signed-line, scalar tensor and derived-category APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "line.*reduction|reduction.*line|tensor.*complete",
+   "date": "2026-10-21",
+   "results": "Mathlib/LinearAlgebra/Matrix/Rank.lean; Mathlib/Algebra/HierarchyDesign.lean; Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean; Mathlib/Analysis/InnerProductSpace/TensorProduct.lean; Mathlib/Analysis/InnerProductSpace/TensorProduct.lean",
+   "verdict": "No complete normalized integral pro-etale line theorem. Use the library signed-line, scalar tensor and derived-category APIs."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars of a locally free rank one sheaf commutes with signed tensor powers and evaluation",
+   "date": "2026-10-21",
+   "results": "SheafOfModules.map_ιFree_mapFree_hom; SheafOfModules.map_ιFree_mapFree_hom_assoc; SheafOfModules.ιFree_mapFree_inv; SheafOfModules.ιFree_mapFree_inv_assoc; SheafOfModules.mapFree; SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply; SheafOfModules.ιFree_freeMap_assoc; SheafOfModules.freeHomEquiv_symm_comp",
+   "verdict": "No complete normalized integral pro-etale line theorem. Use the library signed-line, scalar tensor and derived-category APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategory",
+   "date": "2026-10-21",
+   "results": "CategoryTheory.Functor.mapDerivedCategory; CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt; CategoryTheory.Functor.mapDerivedCategoryIdIso; CategoryTheory.Functor.mapDerivedCategorySingleFunctor; CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory; CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory; CategoryTheory.NatTrans.instCommShiftDerivedCategoryMapDerivedCategoryInt; CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpMapDerivedCategoryId",
+   "verdict": "No complete normalized integral pro-etale line theorem. Use the library signed-line, scalar tensor and derived-category APIs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor with a locally free rank one module sheaf commutes with scalar extension and evaluation",
+   "date": "2026-10-21",
+   "results": "ModuleCat.ExtendScalars.obj'; ModuleCat.ExtendScalars.smul_tmul; ModuleCat.extendRestrictScalarsAdj_unit_app_apply; IsLocalization.moduleLid; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.evalAt; IsBaseChange; ModuleCat.ExtendScalars.map_tmul; Algebra.TensorProduct.instFree",
+   "verdict": "Sectionwise scalar-extension API found; no normalized derived pro-etale line restriction theorem in Mathlib."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralLineReductionRestriction",
+  "date": "2026-10-21",
+  "group": "J8"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-integral-line-reduction-restriction",
+   "place": "Completeness and normalized restricted line equivalences",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralLineRestrictions",
+  "file": "lean/Sheaf/Paper/IntegralLineRestrictions.lean",
+  "declaration": "WeilConjectures.IntegralLineReduction.integral_line_restrictions",
+  "statement": "theorem integral_line_restrictions (hl : ∀ x : X, Invertible (l : X.residueField x)) (L : scalarReductionSource.{u, u} l E X) [L.IsFiniteLocallyFreeOfRank 1] (hfinite : FiniteReductions l E X L) (e : Evaluations l E X L) (he : EvaluationFormula l E X L e) : (∀ (m : ℤ) (K : D.{u, u} l E X none), IsComplete l E X none K → IsComplete l E X none ((ordinary l E X L m).obj K)) ∧ Restrictions l E X L e",
+  "branch": "sheaf-dag",
+  "by": "J8",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-3b4c6",
+  "group": "J8",
+  "result": "pass",
+  "landing": "20261021T152321-L-1870640",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-3b4c6",
+  "group": "J8",
+  "result": "pass",
+  "landing": "20261021T152321-L-1870640",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs clone (identical); moved defs vs old item module (verbatim except power/finitePower, bridged by proved power_eq_coefficient/finitePower_eq_coefficient); two sorry halves vs item node statement; axioms probed in scratch sandbox"
+ }
+}

@@ -1,0 +1,159 @@
+{
+ "id": "lem-pur-integral-line-derived-comparisons",
+ "kind": "statement",
+ "title": "Normalized derived signed-line reductions and support",
+ "statement": "Fix ell, E, X, a completed coefficient line L, and ordinary comparison isomorphisms b satisfying PowerFormula [def-pur-integral-line-reduction-data]. There are natural isomorphisms d(m,n): ordinaryTensor(L^[m]) followed by derived reduction_n ≅ derived reduction_n followed by finite ordinary tensor with reduction_n(L)^[m]. They satisfy DerivedFormula: on every good K-flat flat-term representative the chain map is balancing followed by b, agrees with d through the actual reduction counit and specified tensor representative comparisons, and commutes with the strict quotient transitions with TransitionFormula. For every unbounded K, every interval [a,z] containing all cohomological supports of its derived reductions also contains all cohomological supports of the derived reductions of its ordinary twist.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 3.4.10, Lemma 3.4.12 and Proposition 3.5.1 / Definition 3.5.2, pp. 22-24; generic signed-line specialization with finite reduction conditions",
+  "also": [
+   {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4 (lemma-pullback-tensor-product), applied to a quotient map on the same topos"
+   },
+   {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+    "place": "Proof (3), last sentence interpreted in the derived-complete integral coefficient convention; extracted generic reduction/restriction argument"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-pur-integral-line-reduction-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-pur-line-unbounded-derived-tensor] to $P$ over $R$ and to the rank-one $P_n$ over $R_n$. These degree-zero lines are K-flat, ordinary tensor computes their unbounded derived tensor, and their cohomology functors are ordinary tensor on cohomology sheaves. Apply [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] to the identity topos with ring map $R\\to R_n$. It gives $(K\\otimes_R^LP)_n\\cong K_n\\otimes_{R_n}^L(P\\otimes_RR_n)$, then compose with the given normalized ordinary power comparison b. On a K-flat representative $U$ with flat terms its degree-$j$ map is the balancing identification $(U^j\\otimes_RP)\\otimes_RR_n\\cong(U^j\\otimes_RR_n)\\otimes_{R_n}P_n$. Its inverse multiplies the two quotient scalars. Consequently these comparisons are compatible with the strict quotient transitions as well as natural in $K$.",
+   "uses": [
+    "lem-pur-line-unbounded-derived-tensor",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YU (definition-derived-tor), 06YT (lemma-derived-tor-quasi-isomorphism-other-side), 07A4 (lemma-pullback-tensor-product)"
+   }
+  },
+  {
+   "text": "For every $n$ and $i$, the preceding derived reduction comparison and [lem-pur-line-unbounded-derived-tensor] over $R_n$ give $\\mathcal H^i((K\\otimes_R^LP)_n)\\cong\\mathcal H^i(K_n)\\otimes_{R_n}P_n$. If $i\\notin[a,b]$, the right hand side is zero whenever $\\mathcal H^i(K_n)=0$. Thus any common interval $[a,b]$ remains a common interval, with exactly the same endpoints, in the meaning of [def-weil-cohomological-support]. This argument uses cohomological support, not Tor amplitude or a boundedness assumption on the original unbounded representative.",
+   "uses": [
+    "lem-pur-line-unbounded-derived-tensor",
+    "def-weil-cohomological-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+    "place": "Proof (3), final derived-tensor sentence: preservation of the uniform cohomological bounds"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-line-unbounded-derived-tensor",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-weil-cohomological-support"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+  "place": "Proof (3), the corresponding signed-line reduction/restriction steps; isolated from lem-pur-integral-line-reduction-restriction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Tensoring by an invertible module sheaf commutes with derived reduction and derived completion",
+   "date": "2026-10-21",
+   "results": "AdicCompletion.ofTensorProduct_tmul; AdicCompletion.ofTensorProduct_naturality; AdicCompletion.tensor_map_id_left_eq_map; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of; LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply; LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat; LightCondensed.free_internallyProjective_iff_tensor_condition",
+   "verdict": "No complete normalized integral pro-etale line theorem. Use the library signed-line, scalar tensor and derived-category APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Equivalence",
+   "date": "2026-10-21",
+   "results": "CategoryTheory.Equivalence; CategoryTheory.Equivalence.refl; CategoryTheory.Equivalence.instInhabited; CategoryTheory.Equivalence.instPowInt; CategoryTheory.Equivalence.instCategory; CategoryTheory.Equivalence.pow; CategoryTheory.Equivalence.powNat; CategoryTheory.Equivalence.functor",
+   "verdict": "No complete normalized integral pro-etale line theorem. Use the library signed-line, scalar tensor and derived-category APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "integralLineTensorComparison_iso|signedLineTensor_equivalence|line_unbounded_derived_tensor",
+   "date": "2026-10-21",
+   "results": "0 hits",
+   "verdict": "No complete normalized integral pro-etale line theorem. Use the library signed-line, scalar tensor and derived-category APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "line.*reduction|reduction.*line|tensor.*complete",
+   "date": "2026-10-21",
+   "results": "Mathlib/LinearAlgebra/Matrix/Rank.lean; Mathlib/Algebra/HierarchyDesign.lean; Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean; Mathlib/Analysis/InnerProductSpace/TensorProduct.lean; Mathlib/Analysis/InnerProductSpace/TensorProduct.lean",
+   "verdict": "No complete normalized integral pro-etale line theorem. Use the library signed-line, scalar tensor and derived-category APIs."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars of a locally free rank one sheaf commutes with signed tensor powers and evaluation",
+   "date": "2026-10-21",
+   "results": "SheafOfModules.map_ιFree_mapFree_hom; SheafOfModules.map_ιFree_mapFree_hom_assoc; SheafOfModules.ιFree_mapFree_inv; SheafOfModules.ιFree_mapFree_inv_assoc; SheafOfModules.mapFree; SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply; SheafOfModules.ιFree_freeMap_assoc; SheafOfModules.freeHomEquiv_symm_comp",
+   "verdict": "No complete normalized integral pro-etale line theorem. Use the library signed-line, scalar tensor and derived-category APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategory",
+   "date": "2026-10-21",
+   "results": "CategoryTheory.Functor.mapDerivedCategory; CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt; CategoryTheory.Functor.mapDerivedCategoryIdIso; CategoryTheory.Functor.mapDerivedCategorySingleFunctor; CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory; CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory; CategoryTheory.NatTrans.instCommShiftDerivedCategoryMapDerivedCategoryInt; CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpMapDerivedCategoryId",
+   "verdict": "No complete normalized integral pro-etale line theorem. Use the library signed-line, scalar tensor and derived-category APIs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor with a locally free rank one module sheaf commutes with scalar extension and evaluation",
+   "date": "2026-10-21",
+   "results": "ModuleCat.ExtendScalars.obj'; ModuleCat.ExtendScalars.smul_tmul; ModuleCat.extendRestrictScalarsAdj_unit_app_apply; IsLocalization.moduleLid; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.evalAt; IsBaseChange; ModuleCat.ExtendScalars.map_tmul; Algebra.TensorProduct.instFree",
+   "verdict": "Sectionwise scalar-extension API found; no normalized derived pro-etale line restriction theorem in Mathlib."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralLineReductionRestriction",
+  "date": "2026-10-21",
+  "group": "J8"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-integral-line-reduction-restriction",
+   "place": "Normalized derived signed-line reductions and support",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralLineDerivedComparisons",
+  "file": "lean/Sheaf/Paper/IntegralLineDerivedComparisons.lean",
+  "declaration": "WeilConjectures.IntegralLineReduction.integral_line_derived_comparisons",
+  "statement": "theorem integral_line_derived_comparisons (L : scalarReductionSource.{u, u} l E X) [L.IsFiniteLocallyFreeOfRank 1] (b : PowerComparisons l E X L) (hb : PowerFormula l E X L b) : ∃ d : DerivedComparisons l E X L, DerivedFormula l E X L b d ∧ (∀ (m : ℤ) (K : D.{u, u} l E X none) (a z : ℤ), (∀ n : ℕ, proEtaleCohomologicalSupport ((scalarReductionDerivedExtension.{u, u} l E X n).obj K) ⊆ Set.Icc a z) → ∀ n : ℕ, proEtaleCohomologicalSupport ((scalarReductionDerivedExtension.{u, u} l E X n).obj ((ordinary l E X L m).obj K)) ⊆ Set.Icc a z)",
+  "branch": "sheaf-dag",
+  "by": "J8",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-3b4c6",
+  "group": "J8",
+  "result": "pass",
+  "landing": "20261021T152321-L-1870640",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-3b4c6",
+  "group": "J8",
+  "result": "pass",
+  "landing": "20261021T152321-L-1870640",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs clone (identical); moved defs vs old item module (verbatim except power/finitePower, bridged by proved power_eq_coefficient/finitePower_eq_coefficient); two sorry halves vs item node statement; axioms probed in scratch sandbox"
+ }
+}

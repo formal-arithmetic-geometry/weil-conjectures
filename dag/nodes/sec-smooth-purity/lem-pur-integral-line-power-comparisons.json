@@ -1,0 +1,158 @@
+{
+ "id": "lem-pur-integral-line-power-comparisons",
+ "kind": "statement",
+ "title": "Signed power scalar comparisons and evaluations",
+ "statement": "Fix ell, E and X as in [def-pur-integral-line-reduction-data], and a locally free rank-one sheaf L over the completed integral coefficient ring. There are isomorphisms b(m,n): reduction_n(L^[m]) ≅ reduction_n(L)^[m] and e(m): L^[m] tensor L^[-m] ≅ R. The b satisfy PowerFormula: multiplication by the projected coefficient at zero, identity at one, recursive positive balancing, and the dual formula phi tensor a applied to x tensor c equals projection(phi(x))*a*c. The e satisfy EvaluationFormula: multiplication at zero and the actual functional evaluation in both orders for a positive power and its dual.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 3.4.10, Lemma 3.4.12 and Proposition 3.5.1 / Definition 3.5.2, pp. 22-24; generic signed-line specialization with finite reduction conditions",
+  "also": [
+   {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4 (lemma-pullback-tensor-product), applied to a quotient map on the same topos"
+   },
+   {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+    "place": "Proof (3), last sentence interpreted in the derived-complete integral coefficient convention; extracted generic reduction/restriction argument"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-pur-integral-line-reduction-data"
+ ],
+ "proof": [
+  {
+   "text": "Identify the scalarTensorPower and signedLinePower constructions with the recorded coefficientTwistPower and coefficientTwistLine recursively. Convert rank one to a trivializing cover. The scalar-extension/dual local-isomorphism theorem makes every ordinary reduction of L invertible.",
+   "uses": [
+    "lem-sp-scalar-extension-dual-local-iso"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Transport the normalized signed comparison along the explicit comparison between the two ordinary scalar-extension presentations. Naturality of the sheafification unit identifies their pure tensors. The unit, first-power, recursive positive and dual-evaluation clauses therefore give precisely PowerFormula.",
+   "uses": [
+    "lem-pur-signed-line-scalar-tensor-tower",
+    "lem-sfb-scalar-ordinary-tensor-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Every positive power is rank one by signedLineTensor_equivalence. Sheafify the ordinary module/dual evaluation and use its locally constructed inverse. At zero use the scalar left unitor. For a negative exponent first swap the two factors. Naturality of sheafification and the evaluation adjunction give all three displayed section formulas, including both evaluation orders.",
+   "uses": [
+    "lem-weil-signed-line-tensor-equivalence"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-scalar-extension-dual-local-iso",
+  "lem-pur-signed-line-scalar-tensor-tower",
+  "lem-sfb-scalar-ordinary-tensor-comparison",
+  "lem-weil-signed-line-tensor-equivalence"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+  "place": "Proof (3), the corresponding signed-line reduction/restriction steps; isolated from lem-pur-integral-line-reduction-restriction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Tensoring by an invertible module sheaf commutes with derived reduction and derived completion",
+   "date": "2026-10-21",
+   "results": "AdicCompletion.ofTensorProduct_tmul; AdicCompletion.ofTensorProduct_naturality; AdicCompletion.tensor_map_id_left_eq_map; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of; LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply; LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat; LightCondensed.free_internallyProjective_iff_tensor_condition",
+   "verdict": "No complete normalized integral pro-etale line theorem. Use the library signed-line, scalar tensor and derived-category APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Equivalence",
+   "date": "2026-10-21",
+   "results": "CategoryTheory.Equivalence; CategoryTheory.Equivalence.refl; CategoryTheory.Equivalence.instInhabited; CategoryTheory.Equivalence.instPowInt; CategoryTheory.Equivalence.instCategory; CategoryTheory.Equivalence.pow; CategoryTheory.Equivalence.powNat; CategoryTheory.Equivalence.functor",
+   "verdict": "No complete normalized integral pro-etale line theorem. Use the library signed-line, scalar tensor and derived-category APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "integralLineTensorComparison_iso|signedLineTensor_equivalence|line_unbounded_derived_tensor",
+   "date": "2026-10-21",
+   "results": "0 hits",
+   "verdict": "No complete normalized integral pro-etale line theorem. Use the library signed-line, scalar tensor and derived-category APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "line.*reduction|reduction.*line|tensor.*complete",
+   "date": "2026-10-21",
+   "results": "Mathlib/LinearAlgebra/Matrix/Rank.lean; Mathlib/Algebra/HierarchyDesign.lean; Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean; Mathlib/Analysis/InnerProductSpace/TensorProduct.lean; Mathlib/Analysis/InnerProductSpace/TensorProduct.lean",
+   "verdict": "No complete normalized integral pro-etale line theorem. Use the library signed-line, scalar tensor and derived-category APIs."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars of a locally free rank one sheaf commutes with signed tensor powers and evaluation",
+   "date": "2026-10-21",
+   "results": "SheafOfModules.map_ιFree_mapFree_hom; SheafOfModules.map_ιFree_mapFree_hom_assoc; SheafOfModules.ιFree_mapFree_inv; SheafOfModules.ιFree_mapFree_inv_assoc; SheafOfModules.mapFree; SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply; SheafOfModules.ιFree_freeMap_assoc; SheafOfModules.freeHomEquiv_symm_comp",
+   "verdict": "No complete normalized integral pro-etale line theorem. Use the library signed-line, scalar tensor and derived-category APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategory",
+   "date": "2026-10-21",
+   "results": "CategoryTheory.Functor.mapDerivedCategory; CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt; CategoryTheory.Functor.mapDerivedCategoryIdIso; CategoryTheory.Functor.mapDerivedCategorySingleFunctor; CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory; CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory; CategoryTheory.NatTrans.instCommShiftDerivedCategoryMapDerivedCategoryInt; CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpMapDerivedCategoryId",
+   "verdict": "No complete normalized integral pro-etale line theorem. Use the library signed-line, scalar tensor and derived-category APIs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor with a locally free rank one module sheaf commutes with scalar extension and evaluation",
+   "date": "2026-10-21",
+   "results": "ModuleCat.ExtendScalars.obj'; ModuleCat.ExtendScalars.smul_tmul; ModuleCat.extendRestrictScalarsAdj_unit_app_apply; IsLocalization.moduleLid; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.evalAt; IsBaseChange; ModuleCat.ExtendScalars.map_tmul; Algebra.TensorProduct.instFree",
+   "verdict": "Sectionwise scalar-extension API found; no normalized derived pro-etale line restriction theorem in Mathlib."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralLineReductionRestriction",
+  "date": "2026-10-21",
+  "group": "J8"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-integral-line-reduction-restriction",
+   "place": "Signed power scalar comparisons and evaluations",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralLinePowerComparisons",
+  "file": "lean/Sheaf/Paper/IntegralLinePowerComparisons.lean",
+  "declaration": "WeilConjectures.IntegralLineReduction.integral_line_power_comparisons",
+  "statement": "theorem integral_line_power_comparisons (L : scalarReductionSource.{u, u} l E X) [L.IsFiniteLocallyFreeOfRank 1] : ∃ (b : PowerComparisons l E X L) (e : Evaluations l E X L), PowerFormula l E X L b ∧ EvaluationFormula l E X L e",
+  "branch": "sheaf-dag",
+  "by": "J8",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-3b4c6",
+  "group": "J8",
+  "result": "pass",
+  "landing": "20261021T152321-L-1870640",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-3b4c6",
+  "group": "J8",
+  "result": "pass",
+  "landing": "20261021T152321-L-1870640",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs clone (identical); moved defs vs old item module (verbatim except power/finitePower, bridged by proved power_eq_coefficient/finitePower_eq_coefficient); two sorry halves vs item node statement; axioms probed in scratch sandbox"
+ }
+}
