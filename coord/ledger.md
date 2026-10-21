@@ -23212,3 +23212,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 2026-10-21T17:37:31Z L: superseded stage-1 delivery Q01/lem-sfb-integral-quotient-projection-comparison at 6469c9fca53f753975b69f4d50e5454b1b4ada40; current completion retained; packet archived at refs/superseded/Q01/lem-sfb-integral-quotient-projection-comparison/6469c9fca53f753975b69f4d50e5454b1b4ada40; stale return retired.
 - 17:37 L: returned deliver/ND/lem-sfb-qcqs-proper-serre-heart-bound (reviewer RETURN: E2: the new node lem-sfb-qcqs-proper-heart-fibre-detection is false, and the item's Step 4 rests on it. Counterexample: )
 - 17:37 L: merged deliver/NY/lem-sfb-root-tower-puncture-invariance (stage 2; reviewer PASS; parallel immutable checks)
+- 17:37 L: returned deliver/F5/Sheaf.Paper.CompletedOperationTowerSubstitution (reviewer RETURN: (reviewer C-d7fca, head d7fca5d6c) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.CompletedOpera)
