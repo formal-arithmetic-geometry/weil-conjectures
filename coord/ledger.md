@@ -21420,3 +21420,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:53 L: merged deliver/Q13/lem-sf-cbc-word-reconstruction-coherence (reviewer FIX; first push; new nodes: 0)
 - 08:53 L: merged deliver/NS/lem-zl-constant-geometric-stalk-unit (reviewer PASS; first push; new nodes: 0)
 - 08:53 L: merged deliver/Q10/lem-sf-projective-cohomology-split-model (reviewer PASS; first push; new nodes: 0)
+- 08:53 L: merged deliver/Q94/lem-a1-texact-coefficient-stage-descent (reviewer PASS; first push; new nodes: 0)

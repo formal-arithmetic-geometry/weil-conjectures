@@ -15,9 +15,140 @@
   "def-weil-t-structure",
   "def-weil-linear-scalar-localization"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $E$ and write $A=R_E[1/\\pi_E]$. On each Hom module the $R_E$-linear map induced by $F_E^{\\mathrm{int}}$ extends to the $A$-linear map $f\\otimes a\\mapsto F_E^{\\mathrm{int}}(f)\\otimes a$ by [def-weil-module-base-change, def-weil-linear-functor]. In the scalar categories [def-weil-linear-scalar-localization], this preserves identity morphisms and composition, since on pure tensors both sides of the composition law are $F_E^{\\mathrm{int}}(fg)\\otimes ab=F_E^{\\mathrm{int}}(f)F_E^{\\mathrm{int}}(g)\\otimes ab$; bilinearity gives the equality on finite sums. Localize the integral shift comparison $c_K:F_E^{\\mathrm{int}}(K[1])\\simeq F_E^{\\mathrm{int}}(K)[1]$ and its inverse. Naturality on $f\\otimes a$ is the integral naturality equation tensored with $a$, using linearity of the shifts and of $c$. The same calculation preserves the iterated shift comparisons. This gives precisely the specified additive $F_E$ with its shift comparison.",
+   "uses": [
+    "def-weil-module-base-change",
+    "def-weil-linear-functor",
+    "def-weil-linear-scalar-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00CX (algebra-lemma-tensor-product) and 05G4 (algebra-definition-base-change); explicit Hom-module base-change calculation"
+   }
+  },
+  {
+   "text": "A distinguished triangle of $\\mathcal C_E$ is, by hypothesis, isomorphic to $Q_{\\mathcal C}(\\Delta)$ for an integral distinguished triangle $\\Delta$. Step 1 gives $F_EQ_{\\mathcal C}(\\Delta)=Q_{\\mathcal D}F_E^{\\mathrm{int}}(\\Delta)$, including the third arrow composed with the shift comparison. This is distinguished because $F_E^{\\mathrm{int}}$ is exact and the target triangulation is the stipulated localized one. Its isomorphic images are distinguished by [def-weil-triangulated-category]. Thus $F_E$ is exact. If $K$ is in either rational half at zero, choose an isomorphism $K\\simeq Q_{\\mathcal C}(K_0)$ with $K_0$ in the corresponding integral half. Its image is isomorphic to $Q_{\\mathcal D}F_E^{\\mathrm{int}}K_0$, in the corresponding rational half. Hence $F_E$ preserves both halves at zero. The identity $\\mathcal C^{\\le m}=\\mathcal C^{\\le0}[-m]$ and its lower counterpart [def-weil-t-structure], together with the shift comparison, give preservation at every integer $m$.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "def-weil-t-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 014V (derived-definition-exact-functor-triangulated-categories), applied to the assumed localized distinguished triangles; BBD 1.3.16 for t-exactness"
+   }
+  },
+  {
+   "text": "For objects $(E_i,K_i)$, choose a common field $L$; these fields form a nonempty directed set by [def-weil-finite-subextension-directed-set]. Write $X_i=T^{\\mathcal C}_{L/E_i}K_i$ and $b_i^L=\\beta_{L/E_i,K_i}$. The Hom-group map at $L$ is $h_L(u)=(b_2^L)^{-1}F_L(u)b_1^L$. For $M\\supset L$, the tower law reads $b_i^M=\\beta_{M/L,X_i}\\,T^{\\mathcal D}_{M/L}(b_i^L)$ after the supplied associators. Substitution gives\n$$h_M(T^{\\mathcal C}_{M/L}u)=T^{\\mathcal D}_{M/L}((b_2^L)^{-1})\\,\\beta_{M/L,X_2}^{-1}F_M(T^{\\mathcal C}_{M/L}u)\\beta_{M/L,X_1}\\,T^{\\mathcal D}_{M/L}(b_1^L)=T^{\\mathcal D}_{M/L}(h_L(u)),$$\nwhere the middle equality is naturality of $\\beta_{M/L}$. Thus the $h_L$ are compatible additive Hom maps. The universal property of [def-weil-directed-colimit-abelian-groups] gives well-defined additive maps on the Hom colimits; in particular equal representatives have equal images. This proves independence of the common field without assuming that coefficient transition functors are faithful.",
+   "uses": [
+    "def-weil-finite-subextension-directed-set",
+    "def-weil-directed-colimit-abelian-groups"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "algebra-lemma-directed-colimit (Tag 00D6), the representative description and universal property, applied to the assumed Hom systems; the beta equation is an agent calculation"
+   }
+  },
+  {
+   "text": "At a common field for three objects, cancellation of the middle comparison gives $h_L(v)h_L(u)=(b_3^L)^{-1}F_L(v)b_2^L(b_2^L)^{-1}F_L(u)b_1^L=h_L(vu)$, and $h_L(1)=1$. Any two composable arrow classes admit such representatives by directedness and the representative clause of [def-weil-directed-colimit-abelian-groups]. These equalities prove the functor laws for $F_\\Omega$. Its object assignment and Hom maps are exactly those in the statement. The structural functors $J_E^{\\mathcal C}:K\\mapsto(E,K)$ and $J_E^{\\mathcal D}$ satisfy $F_\\Omega J_E^{\\mathcal C}=J_E^{\\mathcal D}F_E$ on stage objects and arrows, with the identity-field identifications. For later fields the induced identifications are the specified $\\beta_{L/E}$.",
+   "uses": [
+    "def-weil-directed-colimit-abelian-groups",
+    "def-weil-finite-subextension-directed-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "algebra-lemma-directed-colimit: representatives at a common upper index; explicit cancellation proves functoriality"
+   }
+  },
+  {
+   "text": "Give $F_\\Omega$ the shift comparison represented at $(E,K)$ by that of $F_E$. This is independent of the stage and natural on every common-stage arrow: for a shift-compatible natural isomorphism $\\eta:G\\simeq H$ the required square is $c_{H,K}\\eta_{K[1]}=\\eta_K[1]c_{G,K}$, which is assumed for each $\\beta$; naturality of $c_{F_L}$ gives the other square. Every distinguished triangle in the pair category is isomorphic to $J_E^{\\mathcal C}\\Delta$ for a distinguished triangle $\\Delta$ of $\\mathcal C_E$. Its image is isomorphic, including the shifted third arrow, to $J_E^{\\mathcal D}(F_E\\Delta)$, distinguished by step 2 and the assumed description of pair triangles. This proves exactness in [def-weil-triangulated-category]. Likewise every object in either half is isomorphic to $J_E^{\\mathcal C}K$ for a $K$ in that finite-stage half; its image is isomorphic to $J_E^{\\mathcal D}F_EK$ in the target half. Shifts give all cutoffs as in step 2 [def-weil-t-structure]. This also shows that each $J_E$ is exact and t-exact: it sends a stage triangle to a declared distinguished triangle, commutes with shifts, and sends stage halves into the stipulated pair halves.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "def-weil-t-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 014V (derived-definition-exact-functor-triangulated-categories); direct use of the pair-triangle and pair-half hypotheses; BBD 1.3.16"
+   }
+  },
+  {
+   "text": "For $F=F_E$ or $F_\\Omega$, preservation of the two halves implies preservation of their intersection, the heart. Apply clause 4 of [lem-weil-heart-short-exact-triangles]: a short exact sequence $0\\to A\\to B\\to C\\to0$ in the source heart has a distinguished triangle $A\\to B\\to C\\to A[1]$. Exactness of $F$ gives a distinguished triangle on $FA,FB,FC$, all in the target heart, so the same clause makes its first two arrows a short exact sequence in that heart. The restricted functor is additive because $F$ is additive, and it preserves every short exact sequence. This is the claimed exact functor of hearts.",
+   "uses": [
+    "lem-weil-heart-short-exact-triangles"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "Theorem 1.3.6 and Proposition 1.3.17(i); apply the short-exact-sequence/distinguished-triangle criterion"
+   }
+  },
+  {
+   "text": "The bounded t-structures for both rational stages and pair categories are hypotheses. Steps 2 and 5 verify exactness with specified shifts and preservation of both halves at every cutoff. Thus [lem-pod-texact-truncation-comparison] applies to each $F_E$ and to $F_\\Omega$. It gives both natural isomorphisms $\\alpha^-_{F,m}$ and $\\alpha^+_{F,m}$, their uniqueness, and exactly the equations $\\iota^m_{FK}\\alpha^-_{F,m,K}=F(\\iota^m_K)$ and $\\alpha^+_{F,m,K}F(\\pi^m_K)=\\pi^m_{FK}$. In particular these are comparisons with the canonical maps, rather than unspecified objectwise truncation isomorphisms.",
+   "uses": [
+    "lem-pod-texact-truncation-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "Proposition 1.3.3(i),(ii), pp. 29-30, as packaged in the existing canonical t-exact comparison lemma"
+   }
+  },
+  {
+   "text": "Fix $E\\subset L$ and either truncation $\\tau$ at $m$. Both composites $G=T^{\\mathcal D}_{L/E}F_E$ and $H=F_LT^{\\mathcal C}_{L/E}$ are exact and preserve both halves: apply preservation for the two factors in succession. Apply the natural-transformation and composition clauses of [lem-pod-texact-truncation-comparison] to $\\eta=\\beta_{L/E}:G\\simeq H$. Writing the same symbol $\\tau$ for the respective stage truncations, its equality is explicitly\n$$\\alpha_{F_L,T^{\\mathcal C}_{L/E}K}\\,F_L(\\alpha_{T^{\\mathcal C}_{L/E},K})\\,\\beta_{L/E,\\tau K}=\\tau(\\beta_{L/E,K})\\,\\alpha_{T^{\\mathcal D}_{L/E},F_EK}\\,T^{\\mathcal D}_{L/E}(\\alpha_{F_E,K}).$$\nThis proves beta compatibility for each sign. For $E\\subset L\\subset M$, the composition clause identifies the comparison for each composite transition with the successive comparisons; apply the transformation clause also to the supplied tower associators. Substituting the assumed beta tower identity into the displayed equality makes the result for $M/E$ identical to its result first for $L/E$ and then for $M/L$. The identity clause deals with $L=E$.",
+   "uses": [
+    "lem-pod-texact-truncation-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "Proposition 1.3.3(i),(ii): natural-transformation, identity and composition clauses of the cited comparison lemma, applied to the supplied beta and tower isomorphisms"
+   }
+  },
+  {
+   "text": "Put $N=\\tau^{\\ge j}\\tau^{\\le j}K$ and let $c^j_{F,N}:F(N[j])\\simeq(FN)[j]$ be the iterated shift comparison. Define\n$$q_{F,j,K}=\\bigl(\\tau^{\\ge j}(\\alpha^-_{F,j,K})\\,\\alpha^+_{F,j,\\tau^{\\le j}K}\\bigr)[j]\\,c^j_{F,N}:F\\mathcal H^jK\\xrightarrow{\\sim}\\mathcal H^jFK.$$\nAll three factors are natural isomorphisms, so this is a natural isomorphism. For a shift-compatible transformation $\\eta:F\\Rightarrow G$, use the transformation equation of [lem-pod-texact-truncation-comparison] first for the lower truncation at $\\tau^{\\le j}K$ and then for the upper truncation at $K$. After shifting their composite and using $c^j_G\\eta_{N[j]}=\\eta_N[j]c^j_F$, the resulting equation is\n$$q_{G,j,K}\\,\\eta_{\\mathcal H^jK}=\\mathcal H^j(\\eta_K)\\,q_{F,j,K}.$$\nThe composition clause for both alpha factors and the composite shift comparison give $q_{HF,j,K}=q_{H,j,FK}\\,H(q_{F,j,K})$. Applying these equations to step 8 proves all beta, identity and successive-extension compatibilities for cohomology. Negative $j$ uses the inverse shift comparisons; the calculation is unchanged.",
+   "uses": [
+    "lem-pod-texact-truncation-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "Proposition 1.3.3 and the convention H^j(K)=H^0(K[j]) in 1.3.6; explicit composition of the two canonical comparisons with the specified shift comparison"
+   }
+  },
+  {
+   "text": "For either truncation let $\\gamma_{E,K}^{\\mathcal C}:J_E^{\\mathcal C}\\tau_EK\\simeq\\tau_\\Omega J_E^{\\mathcal C}K$ be its finite-stage computation isomorphism from the hypotheses, and similarly for $\\mathcal D$. These isomorphisms respect the canonical maps by hypothesis, so uniqueness in [lem-pod-texact-truncation-comparison], applied to the exact t-exact $J_E$ of step 5, identifies them with the canonical comparisons for $J_E$. Apply that lemma's composition clause to $F_\\Omega J_E^{\\mathcal C}=J_E^{\\mathcal D}F_E$ from step 4. It gives\n$$\\alpha_{F_\\Omega,J_E^{\\mathcal C}K}\\,F_\\Omega(\\gamma^{\\mathcal C}_{E,K})=\\gamma^{\\mathcal D}_{E,F_EK}\\,J_E^{\\mathcal D}(\\alpha_{F_E,K}).$$\nThus, under the prescribed identifications, the comparison at $(E,K)$ is represented by the comparison at $E$. Replacing $E$ by $L\\supset E$ gives the same morphism: the compatibility equation of step 8 is precisely the equation after the common-stage identifications by beta and the transition-truncation comparisons. Hence it is independent of further enlargement. Naturality for arbitrary pair arrows follows either from step 7 or by putting the arrow and these comparisons at its common field and using their stage naturality. Applying the formula of step 9, with shifts also computed at a stage, proves the identical finite-stage representation and independence assertions for $q$.",
+   "uses": [
+    "lem-pod-texact-truncation-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "Proposition 1.3.3(i),(ii): uniqueness and composition applied to finite-stage inclusions; coefficient context is Bhatt-Scholze Proposition 6.8.14 and Remark 6.8.15"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-module-base-change",
+  "def-weil-linear-functor",
+  "def-weil-linear-scalar-localization",
+  "def-weil-triangulated-category",
+  "def-weil-t-structure",
+  "def-weil-finite-subextension-directed-set",
+  "def-weil-directed-colimit-abelian-groups",
+  "lem-weil-heart-short-exact-triangles",
+  "lem-pod-texact-truncation-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.14(1)-(2) and Remark 6.8.15 supply context only. Explicit abstract transport argument under the item's hypotheses; truncation and heart steps use the existing lemmas from BBD 1.3.3, 1.3.6 and 1.3.17. No assertion that Bhatt-Scholze states this abstract lemma."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -46,10 +177,52 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.ExactFunctor.of\", \"module\": \"Mathlib.CategoryTheory.Limits.ExactFunctor\", \"type\": \"(F : C ⥤ D) [PreservesFiniteLimits F] [PreservesFiniteColimits F] : C ⥤ₑ D\", \"doc\": \"Given a functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ that preserves both finite limits and finite colimits, this constructs the corresponding exact functor from $ \\\\mathcal{C} $ to $ \\\\mathcal{D} $. An e\"}\n  {\"name\": \"CategoryTheory.exactFunctor\", \"module\": \"Mathlib.CategoryTheory.Limits.ExactFunctor\", \"type\": \": ObjectProperty (C ⥤ D)\", \"doc\": \"A functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ that preserves both finite limits and finite colimits, i.e., it preserves the limit of any finite diagram and the colimit of any finite diagram in $ \\\\math\"}\n  {\"name\": \"CategoryTheory.exactFunctor_iff\", \"module\": \"Mathlib.CategoryTheory.Limits.ExactFunctor\", \"type\": \"(F : C ⥤ D) : exactFunctor C D F ↔ PreservesFiniteLimits F ∧ PreservesFiniteColimits F\", \"doc\": \"A functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ is exact if and only if it preserves finite limits and finite colimits, i.e., $ F $ preserves the limit of any finite diagram and the colimit of any finit\"}\n  {\"name\": \"CategoryTheory.Functor.exact_tfae\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.ExactFunctor\", \"type\": \":\\n  List.TFAE\\n    [∀ (S : ShortComplex C), S.ShortExact → (S.map F).ShortExact, ∀ (S : ShortComplex C), S.Exact → (S.map F).Exact,\\n      PreservesHomology F, PreservesFiniteLimits F ∧ PreservesFiniteColimits F]\", \"doc\": \"For a functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ between abelian categories, the following are equivalent: (1) $F$ preserves short exact sequences, (2) $F$ preserves exact complexes, (3) $F$ preserves \"}\n  {\"name\": \"CategoryTheory.ExactFunctor\", \"module\": \"Mathlib.CategoryTheory.Limits.ExactFunctor\", \"type\": \"(C : Type u₁) →\\n  [CategoryTheory.Category.{v₁, u₁} C] →\\n    (D : Type u₂) → [CategoryTheory.Category.{v₂, u₂} D] → Type (max (max (max u₁ u₂) v₁) v₂)\", \"doc\": \"The full subcategory of functors from $\\\\mathcal{C}$ to $\\\\mathcal{D}$ that preserve both finite limits and finite colimits, i.e., functors that preserve the limit and colimit of any finite diagram in $\"}\n  {\"name\": \"CategoryTheory.exactFunctor_le_leftExactFunctor\", \"module\": \"Mathlib.CategoryTheory.Limits.ExactFunctor\", \"type\": \": exactFunctor C D ≤ leftExactFunctor C D\", \"doc\": \"The set of exact functors from $\\\\mathcal{C}$ to $\\\\mathcal{D}$ is a subset of the set of left exact functors from $\\\\mathcal{C}$ to $\\\\mathcal{D}$.\"}\n  {\"name\": \"CategoryTheory.exactFunctor_le_rightExactFunctor\", \"module\": \"Mathlib.CategoryTheory.Limits.ExactFunctor\", \"type\": \": exactFunctor C D ≤ rightExactFunctor C D\", \"doc\": \"Every exact functor from category $\\\\mathcal{C}$ to category $\\\\mathcal{D}$ is also a right exact functor, meaning the class of exact functors is contained within the class of right exact functors.\"}\n  {\"name\": \"CategoryTheory.ShortComplex.Exact.map_of_preservesRightHomologyOf\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.Exact\", \"type\": \"(h : S.Exact) (F : C ⥤ D) [F.PreservesZeroMorphisms] [F.PreservesRightHomologyOf S] [(S.map F).HasHomology] :\\n  (S.map F).Exact\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with zero morphisms, a functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ that preserves zero morphisms and the right homology of a short complex $S$ in $\\\\mathc\"}",
    "date": "2026-10-21",
    "verdict": "no match: The hits give linear localization or exact functors on abelian categories and complex truncations, not descent of t-exact families through these scalar and common-stage categories with coherent canonical maps."
+  },
+  {
+   "tool": "grep",
+   "query": "TExact|[Tt]Exact.*[Tt]runc|[Tt]runc.*[Tt]Exact",
+   "results": "0 hits; ; subdirectory CategoryTheory/Triangulated",
+   "date": "2026-10-21",
+   "verdict": "no match: hits supply ordinary complex truncations, individual t-structure triangles, or linear/homological localization infrastructure, not the full coefficient-family descent and coherent canonical comparisons under these hypotheses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact functor between triangulated categories preserving both halves of a t structure commutes with truncation and restricts to exact functor of hearts",
+   "results": "8 hits; CategoryTheory.Functor.IsTriangulated.mk, CategoryTheory.Functor.IsTriangulated, CategoryTheory.exactFunctor, CategoryTheory.ExactFunctor.of, CategoryTheory.Functor.IsHomological.mk, CategoryTheory.Triangulated.TStructure.truncLT, CategoryTheory.Triangulated.TStructure.truncGE, CategoryTheory.Triangulated.TStructure.triangleLTGE_obj_mor₁",
+   "date": "2026-10-21",
+   "verdict": "no match: hits supply ordinary complex truncations, individual t-structure triangles, or linear/homological localization infrastructure, not the full coefficient-family descent and coherent canonical comparisons under these hypotheses."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"trunc\", \"Functor\"",
+   "results": "12 hits; ComplexShape.Embedding.truncGE'Functor, ComplexShape.Embedding.truncGEFunctor, ComplexShape.Embedding.truncGE'Functor_obj, ComplexShape.Embedding.truncGEFunctor_obj, ComplexShape.Embedding.truncGE'Functor_map, ComplexShape.Embedding.truncGEFunctor_map, ComplexShape.Embedding.truncLE'Functor, ComplexShape.Embedding.truncLEFunctor",
+   "date": "2026-10-21",
+   "verdict": "no match: hits supply ordinary complex truncations, individual t-structure triangles, or linear/homological localization infrastructure, not the full coefficient-family descent and coherent canonical comparisons under these hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible t exact linear functors descend to scalar localizations and filtered coefficient field categories with coherent truncation comparisons",
+   "results": "8 hits; CategoryTheory.Localization.functor_linear_iff, CategoryTheory.Functor.isHomological_of_localization, CategoryTheory.Functor.mapExactFunctor_smul, ModuleCat.localizedModule_functor_map_exact, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, CategoryTheory.Functor.map_distinguished_exact, CategoryTheory.Functor.exact_tfae, CategoryTheory.Abelian.Ext.mapExactFunctor",
+   "date": "2026-10-21",
+   "verdict": "no match: hits supply ordinary complex truncations, individual t-structure triangles, or linear/homological localization infrastructure, not the full coefficient-family descent and coherent canonical comparisons under these hypotheses."
+  },
+  {
+   "tool": "grep",
+   "query": "localization.*[Ff]unctor|[Ff]unctor.*localization|[Ff]unctor.*truncLT|truncLT.*[Ff]unctor",
+   "results": "20 hits; Mathlib/CategoryTheory/Triangulated/LocalizingSubcategory.lean, Mathlib/CategoryTheory/Triangulated/LocalizingSubcategory.lean, Mathlib/CategoryTheory/Triangulated/LocalizingSubcategory.lean, Mathlib/CategoryTheory/Triangulated/LocalizingSubcategory.lean, Mathlib/CategoryTheory/Triangulated/LocalizingSubcategory.lean, Mathlib/CategoryTheory/Triangulated/TStructure/SpectralObject.lean, Mathlib/CategoryTheory/Triangulated/TStructure/SpectralObject.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean; subdirectory CategoryTheory/Triangulated",
+   "date": "2026-10-21",
+   "verdict": "no match: hits supply ordinary complex truncations, individual t-structure triangles, or linear/homological localization infrastructure, not the full coefficient-family descent and coherent canonical comparisons under these hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor preserving the aisle and coaisle of t structures has unique natural isomorphisms commuting with canonical truncation maps compatible with composition",
+   "results": "8 hits; CategoryTheory.Functor.map_distinguished, CategoryTheory.Functor.map_distinguished_iff, CategoryTheory.Functor.complete_distinguished_essImageDistTriang_morphism, CategoryTheory.Functor.IsHomological.mk', CategoryTheory.Pretriangulated.Triangle.functorIsoMk', CategoryTheory.Functor.distTriang_iff, CategoryTheory.Pretriangulated.Triangle.functorIsoMk, CategoryTheory.Triangulated.TStructure.triangle_iso_exists",
+   "date": "2026-10-21",
+   "verdict": "no match: hits supply ordinary complex truncations, individual t-structure triangles, or linear/homological localization infrastructure, not the full coefficient-family descent and coherent canonical comparisons under these hypotheses."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-a1-constructible-pullback-t-exact",
@@ -69,5 +242,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-a1-texact-coefficient-stage-descent",
+  "worker": "stage1",
+  "summary": "Kept the complete abstract statement. Constructed scalar Hom maps and shift comparisons, checked exactness and both halves at rational and common stages, used the existing heart/triangle criterion and canonical truncation-comparison lemma, and wrote beta, tower, cohomology and finite-stage equations explicitly. No new nodes; current logged Mathlib searches found infrastructure only.",
+  "blueprint": "Realizes the abstract coefficient-transport subargument of lem-a1-constructible-pullback-t-exact (returned Steps 7-10), below lem-a1-finite-map-purity, first proof paragraph on restriction to geometric fibres and the finite-stalk formula. The original blueprint does not state this generic lemma.",
+  "tool_uses": [
+   {
+    "node": "lem-pod-texact-truncation-comparison",
+    "why": "Generic uniqueness and coherence of canonical truncation comparisons after exactness and preservation of both halves are proved; this unit has no such generic tool."
+   },
+   {
+    "node": "lem-weil-heart-short-exact-triangles",
+    "why": "Generic criterion turning distinguished triangles in any t-structure heart into short exact sequences and conversely; no affine-line route is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pod-texact-truncation-comparison",
+  "lem-weil-heart-short-exact-triangles"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q94-fd1462deb",
+  "group": "Q94",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q94-fd1462deb (reviewer sub-agent of L); spot-checked: I read the full 10-step split of the unchanged statement-only item. It has no new nodes, and statement, stmt_deps, source and blueprint are byte-identical to side-live. The item is still unsplit with no reviewed field on both live and side-live, it is not in route-pivot-dropped and it has no repair note. Every step's citation states what the step takes from it. Step 1: base change of the linear Hom map, checked on pure tensors. Step 2: localized triangles, and both halves preserved at every cutoff via the shift and strict fullness. Step 3: I checked the types of the tower law b^M=β_{M/L}∘T(b^L), and naturality of β gives h_M∘T=T∘h_L; the colimit universal property then defines the maps without faithfulness. Steps 4-5: functor laws, exactness and t-exactness of F_Ω and of each J_E, with the shift square from the assumed shift-compatibility of β. Step 6: heart exactness from clause 4 of lem-weil-heart-short-exact-triangles in both directions. Steps 7-10: the hypotheses of lem-pod-texact-truncation-comparison hold. I re-derived the β equation and the q formula, including the α⁺_H naturality its composition law needs. Uniqueness for J_E identifies the finite-stage γ with α_{J_E}. Sources: Bhatt–Scholze 6.8.14(1)-(2) and Rem. 6.8.15 are context only, and proof_origin=agent is correct; no SGA. Edge cases tested: zero and identity functors, out-of-range cutoffs, torsion killed by localization, non-faithful transitions, negative j. Batch-5 flag on lem-pod-texact-truncation-comparison: its full closure is itself plus def-weil-triangulated-category and def-weil-t-structure, and it is the generic statement that t-exact functors commute with truncation. Neither the trace-formula nor the Poincaré-duality assumption gives it and it is no step of their proofs, so I accept it. I accept both declared tool_uses as generic black boxes. Advisory: steps 3-4 re-derive lem-sbc-coherent-pair-functor-descent from definitions; this is correct but could cite that node. Step 2 reads the item's 'have distinguished triangles isomorphic to localized integral triangles' as 'exactly those', which is the natural reading."
  }
 }
