@@ -1,0 +1,105 @@
+{
+ "id": "lem-sc-principal-quotient-dimension-full-height",
+ "kind": "statement",
+ "title": "Principal quotient dimension at a prime of full height",
+ "statement": "Let R be a commutative Noetherian ring [def-weil-pbc-noetherian-ring], let r be a nonzerodivisor of R, and let p be a prime ideal of R containing r. If the height of p equals the Krull dimension of R [def-weil-pbc-krull-dimension-ring], then dim(R/(r)) + 1 = dim(R). Heights are regarded in WithBot ENat through the canonical coercion.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00KW, lemma-one-equation, and prime localization; the lower bound comes from the local quotient inequality, and the upper bound by extending prime chains below a regular element."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-krull-dimension-ring"
+ ],
+ "proof": [
+  {
+   "text": "The lower bound dim(R/(r)) + 1 <= dim R follows by lifting a prime chain from the quotient to R and adjoining below it a minimal prime, which does not contain the nonzerodivisor r. For the reverse inequality, the principal ideal height bound gives height(p) <= dim(R/(r)) + 1 since r belongs to p; substitute height(p) = dim R. Mathlib packages these two inequalities as Module.ringKrullDim_quotient_add_one_of_mem_nonZeroDivisors.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00KW, lemma-one-equation, and prime localization; the lower bound comes from the local quotient inequality, and the upper bound by extending prime chains below a regular element."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a Noetherian ring R and a regular element r contained in a prime of height dim R, dim R/(r)+1=dim R",
+   "results": "Exact match: Module.ringKrullDim_quotient_add_one_of_mem_nonZeroDivisors.",
+   "date": "2026-10-21",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Krull dimension quotient finite type domain by a nonzero nonunit principal ideal",
+   "results": "Module.ringKrullDim_quotient_add_one_of_mem_nonZeroDivisors has precisely the full-height prime hypothesis.",
+   "date": "2026-10-21",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "ringKrullDim_quotient_add_one_of_mem_nonZeroDivisors in Mathlib/RingTheory/KrullDimension/Regular.lean; exact-name search over dag/nodes; blueprint_refs.py search nonzerodivisor height",
+   "results": "Read lines 129-135: [CommRing R] [IsNoetherianRing R], hr : r in nonZeroDivisors R, [p.IsPrime], h : p.height = ringKrullDim R, hp : r in p. Existing DAG mentions only searches for this name; no matching attached node. Blueprint search returns no matching node.",
+   "date": "2026-10-21",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Module.ringKrullDim_quotient_add_one_of_mem_nonZeroDivisors",
+  "file": "Mathlib/RingTheory/KrullDimension/Regular.lean",
+  "line": 131,
+  "how": "Exact: same Noetherian ring, nonzerodivisor, prime containing the element, and full-height hypothesis; no local or finite-type assumption."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EffectiveCartierAffineDimensionDrop",
+  "date": "2026-10-21",
+  "group": "G5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-mult-n-finite-flat",
+   "place": "Tag 0BEV induction step: an effective Cartier zero scheme has codimension one in each affine chart",
+   "via": [
+    "lem-sc-effective-cartier-affine-dimension-drop"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-isogeny",
+ "lean": {
+  "module": "Mathlib.RingTheory.KrullDimension.Regular",
+  "declaration": "Module.ringKrullDim_quotient_add_one_of_mem_nonZeroDivisors",
+  "statement": "lemma Module.ringKrullDim_quotient_add_one_of_mem_nonZeroDivisors {R : Type*} [CommRing R] [IsNoetherianRing R] {r : R} (hr : r ∈ nonZeroDivisors R) {p : Ideal R} [p.IsPrime] (h : (p.height : WithBot ℕ∞) = ringKrullDim R) (hp : r ∈ p) : ringKrullDim (R ⧸ Ideal.span {r}) + 1 = ringKrullDim R",
+  "branch": "mathlib",
+  "by": "G5",
+  "date": "2026-10-21",
+  "existing": true
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G5",
+  "result": "pass",
+  "landing": "20261021T111139-L-4190428",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G5",
+  "result": "pass",
+  "landing": "20261021T111139-L-4190428",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

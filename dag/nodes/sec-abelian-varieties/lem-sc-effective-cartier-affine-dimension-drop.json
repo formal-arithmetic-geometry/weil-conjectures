@@ -26,55 +26,37 @@
  ],
  "proof": [
   {
-   "text": "Since Spec(A) is integral, A is a domain, so the nonzero element f is a nonzerodivisor. Since f is not a unit, (f) is a proper ideal, A/(f) is nonzero and there is a maximal ideal of A containing f. Since Spec(k) is locally Noetherian and Spec(A) is of finite type over k, Spec(A) is locally Noetherian [pqf-lem-locnoeth-lft], so the ring A is Noetherian and all localizations A_m at maximal ideals are Noetherian local rings.",
+   "text": "Use affine_isIntegral_iff to obtain IsDomain A. Finite type over the field k makes A Noetherian by Algebra.FiniteType.isNoetherianRing. The nonzero f is a nonzerodivisor. Since f is not a unit, (f) is proper; choose a maximal ideal m containing (f).",
    "uses": [
-    "def-pc-integral-scheme",
-    "def-weil-finite-type-morphism",
-    "pqf-lem-locnoeth-lft"
+    "def-pc-integral-scheme"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tags 00KV and 00KW, hypotheses for the principal ideal theorem"
-   }
+   "elementary": true
   },
   {
-   "text": "For every maximal ideal m of A containing f, localize at m. The image of f lies in the maximal ideal of A_m and remains a nonzerodivisor (A_m is a domain). Applying the local principal-ideal dimension theorem [lem-weil-pbc-dimension-quotient-nonzerodivisor] gives dim(A_m/fA_m) + 1 = dim(A_m). Since A is a finite-type k-domain, dim(A_m) = dim(A), a non-negative integer, for every maximal ideal m [lem-weil-pbc-finite-type-domain-dimension-local-ring]. Under the canonical identification A_m/fA_m = (A/(f))_{m/(f)}, every maximal ideal n = m/(f) of A/(f) therefore has dim((A/(f))_n) = dim(A) - 1.",
+   "text": "Apply finiteTypeDomain_ringKrullDim_localizationAtMaximal to m to obtain dim A_m = dim A. Rewrite dim A_m as the height of m using IsLocalization.AtPrime.ringKrullDim_eq_height. Thus m is a prime of full height containing f.",
    "uses": [
-    "lem-weil-pbc-dimension-quotient-nonzerodivisor",
     "lem-weil-pbc-finite-type-domain-dimension-local-ring"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00KW after localization, with the finite-type domain equality dim A_m = dim A (Tags 00OS, 00P0)"
-   }
+   "elementary": false
   },
   {
-   "text": "For any scheme the Krull dimension of its underlying space is the supremum of the dimensions of its local rings [lem-pc-scheme-dimension-local-rings]. Apply this to X = Spec(A) and Y = Spec(A/(f)), both nonempty. Every prime p of a ring lies in a maximal ideal m, and the local ring at p is a localization of the local ring at m, so dim of the local ring at p is at most dim of the local ring at m (prime correspondence for localization); hence each supremum is attained over maximal ideals. By step 2 and lem-weil-pbc-finite-type-domain-dimension-local-ring, all local rings of X at maximal ideals have dimension dim(A) and all local rings of Y at maximal ideals have dimension dim(A) - 1 (and Y has at least one maximal ideal by step 1). Hence dim(Spec(A)) = dim(A) and dim(Spec(A/(f))) = dim(A) - 1 = dim(Spec(A)) - 1.",
+   "text": "Apply the full-height principal quotient theorem to f and m. It gives dim(A/(f)) + 1 = dim A. Change the spectra to PrimeSpectrum and rewrite both topological dimensions using PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim.",
    "uses": [
-    "lem-pc-scheme-dimension-local-rings",
-    "lem-weil-pbc-finite-type-domain-dimension-local-ring"
+    "lem-sc-principal-quotient-dimension-full-height"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tags 00KW, 00OS and 00P0; supremum of local dimensions"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-pc-integral-scheme",
-  "def-weil-finite-type-morphism",
-  "pqf-lem-locnoeth-lft",
-  "lem-weil-pbc-dimension-quotient-nonzerodivisor",
   "lem-weil-pbc-finite-type-domain-dimension-local-ring",
-  "lem-pc-scheme-dimension-local-rings"
+  "lem-sc-principal-quotient-dimension-full-height"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Tags 00KW, 00OS and 00P0"
+  "place": "Shortened proof of the same principal dimension drop using Tags 00KW and 00OS, via Mathlib full-height principal-quotient dimension equality.",
+  "note": "G5, 2026-10-21: no quotient-localization comparison or scheme local-ring supremum is required."
  },
  "mathlib_searches": [
   {
@@ -148,14 +130,8 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-dimension-quotient-nonzerodivisor",
   "lem-weil-pbc-finite-type-domain-dimension-local-ring",
-  "pqf-lem-locnoeth-lft",
-  "lem-pc-scheme-dimension-local-rings",
-  "lem-weil-pbc-dimension-quotient-nonzerodivisor",
-  "lem-weil-pbc-finite-type-domain-dimension-local-ring",
-  "pqf-lem-locnoeth-lft",
-  "lem-pc-scheme-dimension-local-rings"
+  "lem-weil-pbc-finite-type-domain-dimension-local-ring"
  ],
  "reviewed": {
   "date": "2026-10-10",
@@ -203,5 +179,15 @@
    }
   ]
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G5",
+  "result": "pass",
+  "landing": "20261021T111139-L-4190428",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

@@ -8,7 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Properties
 public import Mathlib.RingTheory.FiniteType
 public import Mathlib.Topology.KrullDimension
-import WeilConjectures.AlgebraicGeometry.Dimension
+import Mathlib.RingTheory.KrullDimension.Regular
 import WeilConjectures.RingTheory.FiniteTypeDomainDimensionLocalRing
 
 /-! # Dimension drop for a principal Cartier subscheme of an affine variety
@@ -32,24 +32,12 @@ Source: literature/stacks-project/algebra.tex, Tags 00KV, 00KW, 00OS and 00P0;
 literature/stacks-project/morphisms.tex, Tag 02FX.
 (blueprint: lem-sc-effective-cartier-affine-dimension-drop).
 
-Proof:
-1. Integrality of `Spec A` means that `A` is a domain (`affine_isIntegral_iff`), so `f ≠ 0`
-   makes `f` a nonzerodivisor. Since `f` is not a unit, `(f)` is proper, the quotient is
-   nonzero, and there is a maximal ideal containing `f`. Finite type over a field makes `A`
-   Noetherian (`pqf-lem-locnoeth-lft`), as are its localizations at maximal ideals.
-2. At every maximal ideal `m` containing `f`, the image of `f` remains a nonzerodivisor
-   and lies in the maximal ideal of `A_m`. The local quotient dimension theorem
-   (`lem-weil-pbc-dimension-quotient-nonzerodivisor`, Tag 00KW) gives
-   `dim(A_m / f A_m) + 1 = dim(A_m)`. Every maximal localization of the finite-type
-   domain `A` has the same finite dimension as `A`
-   (`lem-weil-pbc-finite-type-domain-dimension-local-ring`, Tags 00OS and 00P0).
-   Identify `A_m / f A_m` with the corresponding maximal localization of `A/(f)`.
-3. Scheme dimension is the supremum of local-ring dimensions
-   (`lem-pc-scheme-dimension-local-rings`). Every prime lies in a maximal ideal, and
-   localization at that prime cannot increase the dimension of the maximal local ring.
-   Thus the supremum can be taken over maximal ideals. Both spectra are nonempty;
-   their maximal local rings have dimensions `dim(A)` and `dim(A) - 1`, respectively.
-   Taking these suprema gives the asserted successor equality.
+Proof: integrality of the spectrum makes `A` a domain, and finite type over the field
+makes it Noetherian. Choose a maximal ideal `m` containing the proper ideal `(f)`.
+Its height equals the dimension of `A`, by the finite-type domain theorem and
+Mathlib's identification of height with the dimension of a prime localization.
+Apply Mathlib's principal-quotient dimension theorem for a nonzerodivisor contained
+in a prime of full height. Finally identify spectrum dimensions with ring dimensions.
 -/
 theorem effective_cartier_affine_dimension_drop
     (k : Type u) (A : Type v) [Field k] [CommRing A] [Algebra k A]
@@ -58,6 +46,20 @@ theorem effective_cartier_affine_dimension_drop
     topologicalKrullDim
         (AlgebraicGeometry.Spec (CommRingCat.of (A ⧸ Ideal.span ({f} : Set A)))) + 1 =
       topologicalKrullDim (AlgebraicGeometry.Spec (CommRingCat.of A)) := by
-  sorry
+  have : IsDomain A := (affine_isIntegral_iff (CommRingCat.of A)).mp inferInstance
+  have : IsNoetherianRing A := Algebra.FiniteType.isNoetherianRing k A
+  obtain ⟨m, hm, hfm⟩ := (Ideal.span ({f} : Set A)).exists_le_maximal
+    (fun h ↦ hfu (Ideal.span_singleton_eq_top.mp h))
+  have : m.IsMaximal := hm
+  have hheight : (m.height : WithBot ℕ∞) = ringKrullDim A := by
+    rw [← IsLocalization.AtPrime.ringKrullDim_eq_height m (Localization.AtPrime m)]
+    exact (finiteTypeDomain_ringKrullDim_localizationAtMaximal (k := k) (S := A)).1 m
+  change topologicalKrullDim (PrimeSpectrum (A ⧸ Ideal.span ({f} : Set A))) + 1 =
+    topologicalKrullDim (PrimeSpectrum A)
+  rw [PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim,
+    PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim]
+  exact Module.ringKrullDim_quotient_add_one_of_mem_nonZeroDivisors
+    (mem_nonZeroDivisors_of_ne_zero hf0) hheight
+    (hfm (Ideal.subset_span (Set.mem_singleton f)))
 
 end AlgebraicGeometry
