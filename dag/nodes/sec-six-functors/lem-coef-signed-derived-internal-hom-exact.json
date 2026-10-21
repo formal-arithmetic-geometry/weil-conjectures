@@ -14,7 +14,7 @@
  ],
  "proof": [
   {
-   "text": "Represent M by a K-injective I. Ordinary Hom(-,I) inverts quasi-isomorphisms. Its canonical localization comparison identifies it with T_M.",
+   "text": "Represent M by a K-injective I using essential surjectivity of the K-injective subcategory under Q. The ordinary-to-derived comparison is an isomorphism for every source complex. Compose it with the chosen isomorphism Q(I) ≅ M to obtain a natural isomorphism Hom(-,I) ⋙ Q ≅ Q.op ⋙ T_M.",
    "uses": [
     "prop-pur-kinjective-resolutions-exist",
     "lem-pur-rhom-well-defined",
@@ -27,7 +27,7 @@
    }
   },
   {
-   "text": "Use the source Hom reindexing, with degree-q sign (-1)^(m*q) for E[m]. For an opposite shift n use m=-n and multiply by (-1)^q(n), q(n)=n(n+1)/2. The raw composition discrepancy is (-1)^(n*m), canceled by q(n+m)=q(n)+q(m)+n*m. Zero and addition coherence follow for all integers. At 1 the correction is -1 and at -1 it is 1. The full ordinary-to-derived normalization identifies these with precisely the displayed sourceShift components. The delivered private ordinarySignedCommShift and ordinarySignedCommShift_formula prove the ordinary zero/addition laws and the full projection formula, with naive source parameter m and correction m(m-1)/2. Reindexing m=-n gives the exponent above; localization and triangle exactness remain in this theorem.",
+   "text": "Use the already proved ordinarySignedCommShift for the naive opposite source and negative target pullback, with source parameter m and correction m(m-1)/2. Pull both shifts back along negation and identify the double-negative target pullback with the original shift. The source is then the triangulated opposite and the correction for n is n(n+1)/2. Descend the coherent structure through localization, requiring the comparison natural isomorphism to commute with shifts. On a representative E of each X, the full normalization of sourceShift identifies the components at 1 and -1: their correction factors are respectively -1 and 1. Cancel the isomorphism from the representative Hom comparison to obtain the two displayed formulas.",
    "uses": [
     "def-pur-hom-complex",
     "lem-weil-pbc-ringed-internal-hom-exact-restriction"
@@ -39,10 +39,11 @@
    }
   },
   {
-   "text": "Apply Hom(-,I) to a cone of E to G. Its graded splitting is Hom(G,I) plus Hom(E,I)[-1], and its differential on (x,y) is (dx,dy+(-1)^(q+1)f*(x)). The map (x,y) to (x,(-1)^(q+1)y), in cone-summand order, identifies it with Cone(f*)[-1]. Rotation and the opposite triangle convention identify the connecting arrow with the negative raw degree-one comparison fixed above. Indeed the reversed third arrow has coefficient (-1)^q into the A summand of Hom(Cone(f),I)^(q+1), and the cone comparison multiplies that summand by (-1)^(q+2), giving cone inclusion. Localize and transport along cone-triangle isomorphisms to all distinguished triangles.",
+   "text": "Reuse the proved graded cone-summand identities of lem-sf-double-hom-cone-comparison. With g = Hom(f,I), define a map mappingCocone(g) → Hom(mappingCone(f),I) by inB on the G summand and (-1)^q inA on the E summand of degree q+1. The differential identities make this a chain map; the two projections give an explicit degreewise inverse. The first two triangle squares follow from the summand formulas. For the third square, the reversed cone boundary has component minus fst in degree p-1; combine this with the negative raw source comparison at 1 and the source-reindexing projection formula. The signs cancel, giving exactly the mapping-cocone boundary. Apply Q, transport across the shift-compatible comparison, and use the representation of every distinguished derived triangle by a localized cone triangle (also in the opposite category).",
    "uses": [
     "def-pur-hom-complex",
-    "def-weil-abstract-derived-category"
+    "def-weil-abstract-derived-category",
+    "lem-sf-double-hom-cone-comparison"
    ],
    "elementary": false,
    "source": {
@@ -56,14 +57,15 @@
   "def-pur-hom-complex",
   "def-weil-abstract-derived-category",
   "lem-pur-rhom-well-defined",
+  "lem-sf-double-hom-cone-comparison",
   "lem-weil-pbc-ringed-internal-hom-exact-restriction",
   "prop-pur-kinjective-resolutions-exist"
  ],
  "proof_origin": {
   "by": "agent",
   "date": "2026-10-21",
-  "note": "Separate source result extracted from the ambient signed bidual argument; all dependent declarations were read before this split.",
-  "group": "Q7"
+  "group": "Q2",
+  "note": "Complete proof of the existing normalized exactness statement: explicit signed cone-to-cocone comparison, abstract shift-convention conversion, localization descent, representative normalization and transport of distinguished triangles. Existing ordinary signed coherence is retained; the existing proved cone-summand API is reused. No new holes or statement changes."
  },
  "mathlib_searches": [
   {
@@ -140,9 +142,9 @@
   "date": "2026-10-21",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q7",
+  "group": "Q2",
   "result": "pass",
-  "landing": "20261021T011030-L-2030374",
+  "landing": "20261021T061633-L-1803618",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
