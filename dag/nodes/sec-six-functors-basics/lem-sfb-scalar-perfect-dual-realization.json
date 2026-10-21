@@ -37,7 +37,7 @@
    }
   },
   {
-   "text": "Constant sheafification takes the supplied scalar splitting to the constant splitting, with $\\underline{R^N}\\cong\\underline R^N$, exactly as specified in the coefficient-package definition. The sheaf tensor definition gives the coordinate isomorphism $C_B(R^N)\\cong B^N$: $b\\otimes(r_j)_j\\mapsto(br_j)_j$, with inverse $(b_j)_j\\mapsto\\sum_j b_j\\otimes e_j$. These maps are balanced and commute with restriction, so extend to sheafifications. Additivity and functoriality give $C_B(p)C_B(i)=1$ and $C_B(0)=0$. Thus $C_B(V)$ is a retract of $B^N$, and in particular each $E^q$ has the required finite-free retract. No tensor-exactness assertion is used.",
+   "text": "Constant module sheafification and ordinary change of rings are additive functors: the sheafification adjunction gives additivity and identities/composition are checked before sheafification on pure tensors. Identify the constant scalar unit with the constant ring sheaf using the locally bijective coefficient unit. Tensor multiplication identifies its scalar extension with B. Additive functors preserve finite products, so the resulting unit comparison gives C_B(R^N) ≅ B^N, including N=0. Applying C_B to the supplied scalar maps i_r,p_r preserves their splitting relation and gives the required finite-free retract terms. The finite product is identified with the lifted-index finite free coproduct by the biproduct comparison and reindexing. No tensor-exactness assertion is used.",
    "uses": [
     "def-weil-pbc-strict-perfect-coefficient-package",
     "def-pur-sheaf-tensor-product",
@@ -88,7 +88,7 @@
    }
   },
   {
-   "text": "In degree $q$, the only possibly nonzero factor of $\\mathcal Hom_B^\\bullet(E^\\bullet,B[0])$ is $\\mathcal Hom_B(E^{-q},B)$, and the Hom-complex differential is $h\\mapsto-(-1)^q h\\,d_E^{-q-1}$. Use $\\beta_{F^{-q}}$ for its degree-$q$ comparison. Naturality from step 4 applied to $d_F^{-q-1}:F^{-q-1}\\to F^{-q}$ gives, on generators,\n$$d_{\\mathcal Hom}\\beta(b\\otimes\\phi)(b'\\otimes v)=-(-1)^qbb'\\phi(d_F^{-q-1}v)=\\beta C_B(d_{F^\\vee})(b\\otimes\\phi)(b'\\otimes v).$$\nHence the degreewise isomorphisms form the claimed cochain isomorphism. They are natural in cochain maps by the same precomposition identity. If $F^r=0$ outside $[a,b]$, $F^{-q}=0$ outside $[-b,-a]$; $C_B(0)=0$ and the displayed unique-factor formula give the stated vanishing for both dual complexes, including the zero complex.",
+   "text": "In degree $q$, the only possibly nonzero factor of $\\mathcal Hom_B^\\bullet(E^\\bullet,B[0])$ is $\\mathcal Hom_B(E^{-q},B)$, and the Hom-complex differential is $h\\mapsto-(-1)^q h\\,d_E^{-q-1}$. Use $\\beta_{F^{-q}}$ for its degree-$q$ comparison. Naturality from step 4 applied to $d_F^{-q-1}:F^{-q-1}\\to F^{-q}$ gives, on generators,\n$$d_{\\mathcal Hom}\\beta(b\\otimes\\phi)(b'\\otimes v)=-(-1)^qbb'\\phi(d_F^{-q-1}v)=\\beta C_B(d_{F^\\vee})(b\\otimes\\phi)(b'\\otimes v).$$\nHence the degreewise isomorphisms form the claimed cochain isomorphism. They are natural in cochain maps by the same precomposition identity. If $F^r=0$ outside $[a,b]$, $F^{-q}=0$ outside $[-b,-a]$; $C_B(0)=0$ and the displayed unique-factor formula give the stated vanishing for both dual complexes, including the zero complex. In Lean, the scalar coordinate map is constructed from the (-q,0) cochain component, with inverse given by a single cochain; Mathlib's cochain differential formula verifies the sign. The evaluation naturality clause assembles the uniquely normalized signed comparison. The ordinary comparison uses the existing Hom-to-single isomorphism. Vanishing of Hom from a zero term follows from the zero identity and precomposition additivity.",
    "uses": [
     "def-pur-hom-complex",
     "def-pur-sheaf-tensor-product"
@@ -128,7 +128,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 08JH and 08JJ, with explicit scalar realization, inverse and sign calculation expanding current blueprint paragraph 2 final sentence; uses the existing bounded-exact-term Hom lemma."
+  "place": "Tags 08JH and 08JJ, with explicit scalar realization, inverse and sign calculation expanding current blueprint paragraph 2 final sentence; uses the existing bounded-exact-term Hom lemma. Lean proof refinement by X7 (2026-10-21): additive finite-product/unit construction and explicit signed coordinate and comparison calculations. The two evaluation theorem proofs and derived comparison remain open."
  },
  "mathlib_searches": [
   {
@@ -436,5 +436,15 @@
   "group": "Q17",
   "result": "pass",
   "note": "Read the node, all 13 stmt_deps, the module and the report (Worker report and Second reading by Q17 present). Records: the item changes only in lean and in stmt_deps, which gain 3 landed def nodes (allowed, each used). The statement is verbatim and all 24 declarations exist. Clause check: R CommRing; C : Type u small with no extra hypotheses; α from the constant sheaf to B with no flatness. C_B = changeOfRings α ∘ constantCoefficientModule, i.e. sheafified extendScalars of the constant module, which is B⊗M. The dual is moduleHomComplex F R[0]; dual_coordinates pins τ by evaluation at (-q,0), and the sign -(-1)^q dualMap d was checked against Mathlib δ_v. β is an ∃! fixed by bb'φ(v) on the sheafification-unit pure tensors at the slice identity; it is natural and IsIso exactly under Finite+Projective. The main theorem states: Nonempty sheaf finite-free package; internal homObjMap exact on every ShortExact; quasi-iso for every K-injective resolution, unbounded I allowed. κ is an ∃! iso to signedSheafDualComplex with components pinned by HEq over definitionally equal types (no cross-type pin). comparison_natural and dual_bounds [-b,-a] are stated for both complexes. Edge cases checked: V=0, rank 0, F=0, a>b, R=0, non-flat α, unbounded I, empty site. No hollow defs, all proofs sorry, docstrings carry the source and blueprint id. No compile run (no file changed). Advisory: (1) derived_comparison_natural is an existential natural family not pinned to κ; accepted because κ and the every-resolution quasi-iso are pinned, homComplex_to_single_iso and the derivedInternalHomOfUniverses comparisons are Nonempty only, and the only citer (internal-hom-dual-constructible-models) uses existence only. (2) ordinary_comparison is Nonempty, consistent with the library. (3) An unused proof-plan import of BoundedExactTermHomQuasiIso, as in other landed modules. (4) The citer's separate u+1 scalarDual is the citer's concern."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X7",
+  "result": "pass",
+  "landing": "20261021T151208-L-1177310",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
