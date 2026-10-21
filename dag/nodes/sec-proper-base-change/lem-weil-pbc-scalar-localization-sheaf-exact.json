@@ -13,9 +13,100 @@
   "def-weil-pbc-ringed-section-localization",
   "def-pur-sheaf-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $P$ be the presheaf of $R$-algebras $P(V)=R(V)[1/s|_V]$, with the localization restriction maps of [def-weil-pbc-ringed-section-localization]. For every $V$, apply [lem-weil-pbc-localization-flat] to the multiplicative subset $\\{1,s|_V,(s|_V)^2,\\ldots\\}$ of the commutative ring $R(V)$. Thus $P(V)$ is flat over $R(V)$. This argument also permits $0$ in the multiplicative subset: if $s|_V$ is nilpotent then $P(V)=0$, which is flat.",
+   "uses": [
+    "def-weil-pbc-ringed-section-localization",
+    "lem-weil-pbc-localization-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HT (algebra-lemma-flat-localization), assertion (1); section-localization construction."
+   }
+  },
+  {
+   "text": "We verify the presheaf finite-limit hypothesis needed below, rather than assuming exactness on sheaf sections. In the category of presheaves of $R$-modules [def-weil-presheaf-modules-sheafification], kernels are formed by $V\\mapsto\\ker(f_V)$ and finite products by sectionwise products: the restriction maps preserve the kernel equations, and the universal maps are obtained componentwise. For a map $f_V:A(V)\\to B(V)$, apply [lem-weil-pbc-flat-tensor-exact] with the flat module $P(V)$ to $0\\to\\ker(f_V)\\to A(V)\\xrightarrow{f_V}B(V)$. It identifies $\\ker(f_V)\\otimes_{R(V)}P(V)$ with the kernel of $f_V\\otimes1$, including its kernel inclusion. Tensoring also preserves finite products: for a finite family the mutually inverse maps are $(a_i)_i\\otimes p\\mapsto(a_i\\otimes p)_i$ and the sum of the maps induced by the coordinate inclusions; for the empty family both sides are zero. These maps commute with restrictions because their formulas use only restrictions, addition and tensoring. By [def-pur-presheaf-tensor-product], the functor $-\\otimes_{p,R}P$ therefore preserves finite products and kernels. Every finite limit is the kernel of the difference of the two incidence maps between the finite products over objects and arrows of its diagram, so it preserves finite limits.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "lem-weil-pbc-flat-tensor-exact",
+    "def-pur-presheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03ES (lemma-flatness-presheaves), its sectionwise argument; Tag 00HD (algebra-lemma-flat), exact tensoring with a flat module."
+   }
+  },
+  {
+   "text": "Apply [lem-pc-sites-modules-sheafification-flat] with $\\mathcal O=R$ and $\\mathcal F=P$, using step 2. As $R$ is already a sheaf, $R^\\#=R$, and by construction $P^\\#=R_s$ as an $R$-module. Thus $R_s$ is a flat $R$-module sheaf. By [def-pc-flat-sheaf-modules], $M\\mapsto M\\otimes_R R_s$ is exact as an endofunctor of $\\operatorname{Mod}(R)$. The symmetry and additivity in [lem-pc-sheaf-modules-tensor-closed] give that $T(M)=R_s\\otimes_R M$, with $T(f)=1\\otimes f$, is an additive exact endofunctor of $\\operatorname{Mod}(R)$.",
+   "uses": [
+    "lem-pc-sites-modules-sheafification-flat",
+    "def-pc-flat-sheaf-modules",
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03ET (lemma-flatness-sheafification); Tag 03ER (definition-flat), (3); Section 03EK and Tag 03EO (lemma-internal-hom-adjoint-tensor)."
+   }
+  },
+  {
+   "text": "Let $V=\\operatorname{Res}_{\\varphi}:\\operatorname{Mod}(R_s)\\to\\operatorname{Mod}(R)$ be restriction of scalars [def-pc-sheaf-restrict-scalars]. There is a natural identification $VE\\cong T$. Indeed, both underlying abelian sheaves are the abelian sheafification of the very same presheaf $W\\mapsto R_s(W)\\otimes_{R(W)}M(W)$, by [def-pur-sheaf-tensor-product, def-weil-presheaf-modules-sheafification]. In both, a local $a\\in R(W)$ acts by $b\\otimes m\\mapsto\\varphi(a)b\\otimes m=b\\otimes am$; the equality is the balancing relation. Thus the identity on this abelian sheafification is $R$-linear. Both functors send $f$ to the sheafification of $b\\otimes m\\mapsto b\\otimes f(m)$, which proves naturality. The $R_s$-action retained in $E$ is multiplication on the first tensor factor.",
+   "uses": [
+    "def-pc-sheaf-restrict-scalars",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section 03CV (section-sheaves-modules), change-of-rings paragraphs and lemma-adjointness-tensor-restrict; Section 03EK (tensor product); Tag 03CY (lemma-sheafification-presheaf-modules)."
+   }
+  },
+  {
+   "text": "For either ring sheaf $A=R$ or $A=R_s$, [lem-weil-pbc-module-sheaves-colimits-forgetful] gives a faithful exact functor $U_A$ to abelian sheaves, with kernels computed sectionwise and cokernels the sheafified sectionwise cokernels. Consequently exactness can be checked after $U_A$: the kernel, image and cokernel have the same underlying abelian sheaves, and an underlying zero sheaf has only zero sections and is the zero module sheaf. Now $U_{R_s}E=U_RVE\\cong U_RT$. Since $T$ and $U_R$ are exact, the image under $U_{R_s}$ of any short exact sequence after applying $E$ is short exact. The preceding test proves exactness in $\\operatorname{Mod}(R_s)$. Also $U_{R_s}$ is faithful and leaves addition of morphisms unchanged; additivity of $T$ gives $U_{R_s}(E(f+g))=U_{R_s}(E(f)+E(g))$, and similarly for zero maps. Faithfulness gives additivity of $E$. No surjectivity assertion on sections of a sheaf epimorphism has been used.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DA (lemma-abelian) and 03DB (lemma-limits-colimits)."
+   }
+  },
+  {
+   "text": "To obtain the finite-limit and finite-colimit formulation, work in the two abelian module categories [def-weil-sheaf-of-modules-category]. For any arrow $a:M\\to N$, the two short exact sequences $0\\to\\ker a\\to M\\to\\operatorname{im}a\\to0$ and $0\\to\\operatorname{im}a\\to N\\to\\operatorname{coker}a\\to0$ show, after applying step 5, that $E(\\ker a)\\to E(M)$ is a kernel of $E(a)$ and $E(N)\\to E(\\operatorname{coker}a)$ is its cokernel. Additivity preserves the biproduct equations $p_i i_j=\\delta_{ij}$ and $\\sum_i i_i p_i=1$, including the zero object. Finite diagram limits and colimits are respectively kernels and cokernels of the differences of the two incidence maps between these finite biproducts. Hence $E$ preserves both. Finally let $\\alpha:F\\xrightarrow{\\sim}E$ be any natural isomorphism of functors. For $f:M\\to N$, $F(f)=\\alpha_N^{-1}E(f)\\alpha_M$, so the same conjugation proves additivity. The components of $\\alpha$ identify the image under $F$ of every short exact sequence with its exact image under $E$, proving exactness and thus both finite preservation assertions for $F$ as well.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DA (lemma-abelian); paragraph following Tag 03DB, referring to homology-lemma-exact-functor; elementary biproduct/kernel formulas and natural-isomorphism conjugation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ringed-section-localization",
+  "lem-weil-pbc-localization-flat",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-weil-pbc-flat-tensor-exact",
+  "def-pur-presheaf-tensor-product",
+  "lem-pc-sites-modules-sheafification-flat",
+  "def-pc-flat-sheaf-modules",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "def-pc-sheaf-restrict-scalars",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03ET (lemma-flatness-sheafification), preceded by Tag 03ES (lemma-flatness-presheaves), and Definition 03ER; combine with Algebra Tag 00HT (1) and Modules on Sites Tags 03DA and 03DB to retain the target scalar structure."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -65,10 +156,52 @@
    "results": "{\"t\": \"2026-10-21T02:59:22Z\", \"tool\": \"leanfinder\", \"query\": \"Tensoring a sheaf of modules with the sheafification of the sectionwise localization at one element preserves kernels and cokernels on any Grothendieck site\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.instAbelian\", \"PresheafOfModules.Sheafify.mul_smul\", \"PresheafOfModules.instPreservesFiniteLimitsSheafOfModulesSheafification\", \"SheafOfModules.Presentation.map\", \"PresheafOfModules.instPreservesFiniteLimitsSheafAddCommGrpCatCompSheafOfModulesSheafificationToSheaf\", \"PresheafOfModules.Sheafify.module\", \"CategoryTheory.sheafIsAbelian\", \"CategoryTheory.Sheaf.instIsGrothendieckAbelian\"], \"digest\": \"f5198fb01e1beb15\"}",
    "date": "2026-10-21",
    "verdict": "no match: ordinary module localization, module sheafification and forgetful functors are ingredients, not exactness of this sheaf-valued scalar extension"
+  },
+  {
+   "tool": "grep",
+   "query": "localization|extendScalars|changeOfRings|[Ff]lat",
+   "results": "{\"t\": \"2026-10-21T03:13:10Z\", \"tool\": \"grep\", \"query\": \"localization|extendScalars|changeOfRings|[Ff]lat\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/Localization.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Localization.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Localization.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Localization.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Localization.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean\"], \"digest\": \"d3a1dd6a4ab40cb7\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: source hits concern ordinary ModuleCat localization, descent, and categorical sheafification localization; no exact scalar localization for a ring sheaf"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, CategoryTheory.Limits.PreservesFiniteLimits",
+   "results": "{\"t\": \"2026-10-21T03:13:11Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules, CategoryTheory.Limits.PreservesFiniteLimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"SheafOfModules.instPreservesFiniteLimitsSheafAddCommGrpCatToSheaf\", \"SheafOfModules.Finite.forgetPreservesFiniteLimits\", \"SheafOfModules.instPreservesFiniteLimitsFunctorOppositeAddCommGrpCatCompSheafToSheafSheafToPresheaf\", \"SheafOfModules.Finite.evaluationPreservesFiniteLimits\", \"PresheafOfModules.instPreservesFiniteLimitsSheafOfModulesSheafification\", \"PresheafOfModules.instPreservesFiniteLimitsSheafAddCommGrpCatCompSheafOfModulesSheafificationToSheaf\"], \"digest\": \"4a05f98d2ea9ecb4\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: finite-limit results concern forgetting module structures, evaluation and module sheafification, not this scalar-extension functor"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a sheaf of commutative rings on a small site, extension of scalars to its sheafified localization at a global section is additive and exact",
+   "results": "{\"t\": \"2026-10-21T03:13:14Z\", \"tool\": \"leanfinder\", \"query\": \"For a sheaf of commutative rings on a small site, extension of scalars to its sheafified localization at a global section is additive and exact\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.instAbelian\", \"PresheafOfModules.Sheafify.smul_add\", \"PresheafOfModules.Sheafify.add_smul\", \"PresheafOfModules.Sheafify.module\", \"PresheafOfModules.toSheafify\", \"PresheafOfModules.Sheafify.smulCandidate\", \"PresheafOfModules.sheafificationCompToSheaf\", \"SheafOfModules.IsQuasicoherent\"], \"digest\": \"abc42405dc60f15c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: results concern abelianness, sheafification and quasi-coherence, not the asserted scalar-localization functor"
+  },
+  {
+   "tool": "grep",
+   "query": "(extendScalars|changeOfRings|localiz).*(exact|FiniteLimits)|[Ee]xact.*(extendScalars|changeOfRings|localiz)",
+   "results": "{\"t\": \"2026-10-21T03:13:27Z\", \"tool\": \"grep\", \"query\": \"(extendScalars|changeOfRings|localiz).*(exact|FiniteLimits)|[Ee]xact.*(extendScalars|changeOfRings|localiz)\", \"sub\": \"Algebra/Category\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/Ring/Constructions.lean\", \"Mathlib/Algebra/Category/Ring/Instances.lean\", \"Mathlib/Algebra/Category/Ring/Instances.lean\", \"Mathlib/Algebra/Category/ModuleCat/Localization.lean\", \"Mathlib/Algebra/Category/ModuleCat/Localization.lean\", \"Mathlib/Algebra/Category/ModuleCat/Localization.lean\", \"Mathlib/Algebra/Category/ModuleCat/Localization.lean\", \"Mathlib/Algebra/Category/ModuleCat/Localization.lean\"], \"digest\": \"f5f3262d6ba39c08\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: source hits concern ordinary ModuleCat localization, descent, and categorical sheafification localization; no exact scalar localization for a ring sheaf"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localization of a sheaf of rings at a section induces an exact functor on module sheaves",
+   "results": "{\"t\": \"2026-10-21T03:13:27Z\", \"tool\": \"leansearch\", \"query\": \"Localization of a sheaf of rings at a section induces an exact functor on module sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.localizedModule_functor\", \"ModuleCat.instAdditiveLocalizationLocalizedModule_functor\", \"ModuleCat.localizedModule_functor_map_exact\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization\", \"ModuleCat.Tilde.instModuleCarrierObjOppositeOpensCarrierTopCommRingCatValStructureSheafLocalizationsValMemUnop\", \"ModuleCat.Tilde.const\", \"SheafOfModules.sectionsFunctor\", \"ModuleCat.Tilde.localizationToStalk_mk\"], \"digest\": \"2eb7ccdd8293bc5b\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary ModuleCat localization and tilde modules are different objects; the full arbitrary-site assertion is absent"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensoring a module sheaf with the associated sheaf of sectionwise ring localizations preserves kernels and cokernels on every Grothendieck site",
+   "results": "{\"t\": \"2026-10-21T03:13:30Z\", \"tool\": \"leanfinder\", \"query\": \"Tensoring a module sheaf with the associated sheaf of sectionwise ring localizations preserves kernels and cokernels on every Grothendieck site\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.instAbelian\", \"SheafOfModules.Presentation.map\", \"SheafOfModules.isQuasicoherent\", \"PresheafOfModules.instPreservesFiniteLimitsSheafOfModulesSheafification\", \"SheafOfModules.isFinitePresentation\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"SheafOfModules.IsQuasicoherent\", \"AlgebraicGeometry.Scheme.Modules.instAbelian\"], \"digest\": \"b8b1187b7f29ddbb\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: results concern abelianness, sheafification and quasi-coherence, not the asserted scalar-localization functor"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-pbc-scalar-localization-derived-hom",
@@ -80,7 +213,7 @@
  "blueprint": {
   "from": {
    "node": "thm-weil-pbc-finite-extension",
-   "place": "Proof, integral-lattice/rationalization paragraph: \"remains an isomorphism after rationalization\"; exactness of sheaf scalar localization used in the derived Hom denominator calculation.",
+   "place": "Proof, integral-lattice paragraph (master thm-weil-pbc-finite-extension.md; the same text is in main-20261015 thm-weil-pbc-finite-extension.proof.md): \"by [prop-weil-pbc-rational-transport] it remains an isomorphism after rationalization\"; exactness of sheaf scalar localization is used through the scalar-localization derived Hom comparison.",
    "via": [
     "lem-weil-pbc-scalar-localization-derived-hom",
     "lem-weil-pbc-condensed-e-realization",
@@ -89,5 +222,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-weil-pbc-scalar-localization-sheaf-exact",
+  "worker": "stage1",
+  "summary": "Reused localization flatness and sheafification preservation of flatness. Wrote out the pointwise finite-limit check, the comparison of underlying scalar-extension sheaves, the faithful exact forgetful test for exactness in the localized module category, and natural-isomorphism invariance. Statement unchanged; no new nodes.",
+  "blueprint": "Realizes the flat scalar-localization ingredient below the master snapshot integral-lattice proof of thm-weil-pbc-finite-extension, specifically its passage to rationalization. The main-20261015 file has only the exchange statement. This split supplies the auxiliary exactness used through scalar-localization-derived-hom; it does not replace the unit proper-base-change route.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-sites-modules-sheafification-flat",
+    "why": "General point-free preservation of module flatness by sheafification (03ET); used on the actual section-localization presheaf. It is a generic tool and no proper-base-change unit node states this general theorem."
+   },
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "Only symmetry and additivity of ordinary tensor on a ringed site are used. These are generic module-category structure, not a replacement for any proper-base-change step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-sites-modules-sheafification-flat",
+  "lem-pc-sheaf-modules-tensor-closed"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NB-399be18f7",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-399be18f7 (reviewer sub-agent of L); spot-checked: I read the item, all 13 cited statements, Stacks 03ER(1)/03ET (sites-modules.tex:4293) and 00HT, and the blueprint paragraph in both snapshots. The statement is byte-identical to the Q02-created node and there are no new nodes. The six steps are correct. Step 1: each P(V)=R(V)[1/s] is flat by localization-flat, including nilpotent s. Step 2: sectionwise kernels and finite products, kernel exactness from flat-tensor-exact, and finite limits as kernels of incidence-map differences; together these give exactly the presheaf finite-limit hypothesis of lem-pc-sites-modules-sheafification-flat. Step 3: R^#=R, and P^#=R_s by the module-sheafification definition, so R_s is flat; symmetry and additivity give T. Step 4: VE≅T because both are the same abelian sheafification and the R-actions agree by the balancing relation. Step 5: the faithful exact forgetful functor reflects exactness and additivity. Step 6: kernels and cokernels via the image short exact sequences, finite (co)limits via biproducts, and natural-isomorphism invariance. Edge cases checked: s=1, s nilpotent or 0, R=0, empty site, Z→Z[1/p]. No duplicate found in the DAG or the blueprint. Accepted tool uses: sheafification-flat (03ET), sheaf-modules-tensor-closed, and module-sheaves-colimits-forgetful (03DA; generic, but not declared in split_report.tool_uses). No SGA. FIX: the delivery rewrote blueprint.from.place to claim that main-20261015 omits the proof paragraph. That is false: main-20261015 thm-weil-pbc-finite-extension.proof.md has the same 'remains an isomorphism after rationalization' paragraph. The place is corrected in fixes/dag/nodes/sec-proper-base-change/lem-weil-pbc-scalar-localization-sheaf-exact.json; no other field changed.; 1 file(s) fixed by the reviewer"
  }
 }
