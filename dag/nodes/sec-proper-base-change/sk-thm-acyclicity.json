@@ -256,5 +256,27 @@
   "group": "Q06",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q06-03cc5d68b (reviewer sub-agent of L); spot-checked: I read the whole item and its 9 steps. There are no new nodes and no fixes. The statement is verbatim main-20261015 sk-thm-acyclicity: the resolution clause plus the D^+ canonical comparison, not weakened. Steps 1-3 realize the unit's single dimension-shifting step; I checked the indices, the cokernel identification and the q=0/q=1 cases. Steps 4-9 expand base paragraph 3 along the Stacks 05TA proof, which I read: injective replacement with the same bound (013K), cone bound b=a-1, cone terms acyclic via the split s.e.s. and the long exact sequence, cycle induction with an explicit base T^b=0 and the degree-0 epimorphism, v(Cone s)=Cone(v s) by additivity, then naturality of alpha from lem-weil-pbc-right-derived-plus-injective, so alpha_A itself is an isomorphism. Every cited statement says what its step takes from it; no Grothendieck hypothesis or exactness of v is needed. proof_deps equals the union of the step uses, the closure is acyclic, and no SGA is cited. The item is not on the 2026-10-19 dropped list, is still imported (unsplit) in live and side-live, and has no re-split note. I accept the three declared tool uses: lem-weil-pbc-derived-functor-long-exact and lem-weil-pbc-complex-injective-resolution-mono from sk-thm-p1, and lem-pur-quasi-iso-cone-acyclic. Removing the sk-thm-groth-ss pointer is correct. Notes for the maintainer: (1) the imported node lemma-weil-pbc-leray-acyclicity in the same unit already states clause 1 (its clause 2), a duplication between two blueprint nodes that predates this delivery and is a candidate for merging; (2) lem-weil-pbc-leray-acyclicity-quasi-iso (unsplit) states what steps 4-8 prove, so it could later cite this item."
+ },
+ "lean": {
+  "module": "WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusHomology",
+  "declaration": "CategoryTheory.Functor.isIso_rightDerivedFunctorPlusUnit_app_of_rightAcyclic",
+  "declarations": [
+   "CategoryTheory.Functor.isIso_rightDerivedFunctorPlusUnit_app_of_rightAcyclic",
+   "CategoryTheory.Functor.nonempty_rightDerivedObjIso_homology_of_acyclic"
+  ],
+  "statement": "theorem isIso_rightDerivedFunctorPlusUnit_app_of_rightAcyclic [PreservesFiniteLimits F]\n    (L : CochainComplex.Plus C) (hL : ∀ n, F.rightAcyclic (L.obj.X n)) :\n    IsIso (F.rightDerivedFunctorPlusUnit.app ((HomotopyCategory.Plus.quotient C).obj L))",
+  "branch": "slopmaster2",
+  "by": "N5",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Both clauses already exist. The main declaration (PlusHomology.lean:101) says the canonical unit is an isomorphism in DerivedCategory.Plus D for every bounded below complex of F-acyclic objects. The resolution clause is CategoryTheory.Functor.nonempty_rightDerivedObjIso_homology_of_acyclic in WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic:305, publicly imported by this module. Its isomorphism has the reverse orientation to the displayed formula, equivalently by symmetry. Both use the recorded rightAcyclic definition. EnoughInjectives C implies HasInjectiveResolutions C; the existing results do not need enough injectives in D, so specialize to the node hypothesis. HasDerivedCategory instances express the chosen localization sizes, not additional mathematical hypotheses; no equality between category universes is imposed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bc7589384",
+  "group": "N5",
+  "result": "pass",
+  "note": "existing:true lean-only delivery. Main declaration Functor.isIso_rightDerivedFunctorPlusUnit_app_of_rightAcyclic (PlusHomology:101) inverts the canonical rightDerivedFunctorPlusUnit in DerivedCategory.Plus D for termwise-bounded-below complexes of F-acyclic objects with any integer bound. nonempty_rightDerivedObjIso_homology_of_acyclic (Acyclic:305) gives R^qF X ≅ H^q(F I) for ℕ-indexed acyclic resolutions, q≥0; the witness is the canonical isomorphism. Hypotheses: Abelian C and D, additive F, PreservesFiniteLimits, EnoughInjectives C only (weaker than the node). HasDerivedCategory is size data. Universes free. Uses the recorded rightAcyclic. lean.statement verbatim. Sources identical in side-live and slopmaster2, sorry-free. Meets the derived-form rule. Edge cases q=0, zero object, negative bounds covered. No file changed, so no compile. Maintainer note: src-right-derived-functor-plus-acyclic-unit duplicates clause 2 at DAG level and shares the existing record."
  }
 }

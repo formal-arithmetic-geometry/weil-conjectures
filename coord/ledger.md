@@ -23378,3 +23378,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 2026-10-21T18:45:23Z L: superseded stage-1 delivery NR/lem-sfb-root-coordinate-supported-vanishing at ca0825dc929302b7ba7c8ced7f82aaf18566a822; current completion retained; packet archived at refs/superseded/NR/lem-sfb-root-coordinate-supported-vanishing/ca0825dc929302b7ba7c8ced7f82aaf18566a822; stale return retired.
 - 18:45 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
 - 18:45 L: returned deliver/Q85/lem-weil-integral-twist-scalar-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-integral-twist-scalar-coherence: lem-weil-int)
+- 18:46 L: merged deliver/N5/sk-thm-acyclicity (stage 2; reviewer PASS; parallel immutable checks)
