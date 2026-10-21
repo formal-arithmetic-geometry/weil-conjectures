@@ -23,3 +23,7 @@ Still quarantined, the tip's text written to the quarantined copy:
 ## Status
 
 landed
+
+## Prefer upstream, round 1
+
+The upstream module(s) `WeilConjectures.TraceFormula.WeilTrace` failed here while identical to the tip: the upstream files of their environment that this sync had merged with changes of ours take the tip's file: `WeilConjectures.CategoryTheory.ModuleObjects.MapModMonoidal`, `WeilConjectures.ConstructibleSheaf.Noetherian`.

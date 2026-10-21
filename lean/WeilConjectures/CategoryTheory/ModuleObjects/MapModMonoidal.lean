@@ -116,18 +116,8 @@ lemma mapMod_μ_balanced (M N : Mod C R) :
         ((F.mapMod R).obj N).X ≫ LaxMonoidal.μ F M.X N.X ≫ F.map (Mod.tensorObjπ M N) =
       ((α_ ((F.mapMod R).obj M).X (F.obj R) ((F.mapMod R).obj N).X).hom ≫
         ((F.mapMod R).obj M).X ◁ γ[F.obj R, ((F.mapMod R).obj N).X]) ≫
-          LaxMonoidal.μ F M.X N.X ≫ F.map (Mod.tensorObjπ M N) := by
-  dsimp only [Functor.mapMod]
-  simp only [F.modObjObj_smul]
-  simp only [comp_whiskerRight, MonoidalCategory.whiskerLeft_comp, Category.assoc]
-  rw [LaxMonoidal.μ_natural_left_assoc, LaxMonoidal.μ_natural_right_assoc]
-  slice_lhs 1 2 => rw [← comp_whiskerRight, ← Functor.LaxBraided.braided]
-  simp only [comp_whiskerRight, Category.assoc]
-  rw [LaxMonoidal.μ_natural_left_assoc, ← LaxMonoidal.associativity_assoc]
-  simp only [← F.map_comp]
-  have h := Mod.tensorObjπ_condition M N
-  simp only [comp_whiskerRight, Category.assoc] at h
-  rw [h]
+          LaxMonoidal.μ F M.X N.X ≫ F.map (Mod.tensorObjπ M N) :=
+  sorry
 
 /-- The composite `F (M ⊗ N) ⟶ F M ⊗ F N ⟶ F M ⊗_{F R} F N` coequalizes the image under `F` of
 the parallel pair presenting `M ⊗_R N`. -/
@@ -135,20 +125,8 @@ lemma mapMod_δ_balanced (M N : Mod C R) :
     F.map (((β_ M.X R).hom ≫ γ[R,M.X]) ▷ N.X) ≫ OplaxMonoidal.δ F M.X N.X ≫
         Mod.tensorObjπ ((F.mapMod R).obj M) ((F.mapMod R).obj N) =
       F.map ((α_ M.X R N.X).hom ≫ M.X ◁ γ[R,N.X]) ≫ OplaxMonoidal.δ F M.X N.X ≫
-        Mod.tensorObjπ ((F.mapMod R).obj M) ((F.mapMod R).obj N) := by
-  rw [← cancel_epi (LaxMonoidal.μ F M.X R ▷ F.obj N.X ≫
-    LaxMonoidal.μ F (M.X ⊗ R) N.X)]
-  simp only [Category.assoc, F.map_comp]
-  rw [← LaxMonoidal.μ_natural_left_assoc, LaxMonoidal.associativity_assoc,
-    ← LaxMonoidal.μ_natural_right_assoc, Monoidal.μ_δ_assoc]
-  simp only [F.map_comp, comp_whiskerRight, Category.assoc]
-  slice_lhs 1 2 =>
-    rw [← comp_whiskerRight, Functor.LaxBraided.braided, comp_whiskerRight]
-  simp only [Category.assoc]
-  have h := Mod.tensorObjπ_condition ((F.mapMod R).obj M) ((F.mapMod R).obj N)
-  dsimp only [Functor.mapMod] at h ⊢
-  simpa only [F.modObjObj_smul, comp_whiskerRight,
-    MonoidalCategory.whiskerLeft_comp, Category.assoc] using h
+        Mod.tensorObjπ ((F.mapMod R).obj M) ((F.mapMod R).obj N) :=
+  sorry
 
 /-- The image under `F` of the coequalizer presenting `M ⊗_R N` is a coequalizer, `F`
 preserving coequalizers. -/
@@ -179,25 +157,8 @@ noncomputable def mapModTensorIsoX (M N : Mod C R) :
 /-- The comparison `F M ⊗_{F R} F N ⟶ F (M ⊗_R N)` is `F R`-linear. -/
 lemma mapModTensorIso_linear (M N : Mod C R) :
     γ[F.obj R, ((F.mapMod R).obj M ⊗ (F.mapMod R).obj N).X] ≫ (F.mapModTensorIsoX M N).hom =
-      F.obj R ◁ (F.mapModTensorIsoX M N).hom ≫ γ[F.obj R, ((F.mapMod R).obj (M ⊗ N)).X] := by
-  have h : Mod.tensorObjπ ((F.mapMod R).obj M) ((F.mapMod R).obj N) ≫
-      (F.mapModTensorIsoX M N).hom =
-      LaxMonoidal.μ F M.X N.X ≫ F.map (Mod.tensorObjπ M N) :=
-    Mod.tensorObjπ_tensorObjDesc _ _ _ _
-  rw [← cancel_epi (F.obj R ◁ Mod.tensorObjπ ((F.mapMod R).obj M) ((F.mapMod R).obj N)),
-    Mod.whiskerLeft_tensorπ_smul_assoc, h,
-    ← MonoidalCategory.whiskerLeft_comp_assoc, h]
-  change (α_ (F.obj R) (F.obj M.X) (F.obj N.X)).inv ≫
-      (LaxMonoidal.μ F R M.X ≫ F.map γ[R,M.X]) ▷ F.obj N.X ≫
-        LaxMonoidal.μ F M.X N.X ≫ F.map (Mod.tensorObjπ M N) =
-    F.obj R ◁ (LaxMonoidal.μ F M.X N.X ≫ F.map (Mod.tensorObjπ M N)) ≫
-      LaxMonoidal.μ F R (M ⊗ N).X ≫ F.map γ[R,(M ⊗ N).X]
-  simp only [comp_whiskerRight, MonoidalCategory.whiskerLeft_comp, Category.assoc]
-  rw [LaxMonoidal.μ_natural_left_assoc, LaxMonoidal.μ_natural_right_assoc]
-  simp only [← F.map_comp]
-  rw [Mod.whiskerLeft_tensorπ_smul]
-  simp only [F.map_comp]
-  rw [LaxMonoidal.associativity_inv_assoc]
+      F.obj R ◁ (F.mapModTensorIsoX M N).hom ≫ γ[F.obj R, ((F.mapMod R).obj (M ⊗ N)).X] :=
+  sorry
 
 /-- The comparison isomorphism `F M ⊗_{F R} F N ≅ F (M ⊗_R N)` of `F R`-module objects. -/
 noncomputable def mapModTensorIso (M N : Mod C R) :
@@ -261,31 +222,15 @@ lemma tensorπ_comap_balanced (M N : Mod C R) :
     ((β_ ((comap ψ).obj M).X S).hom ≫ γ[S,((comap ψ).obj M).X]) ▷ ((comap ψ).obj N).X ≫
         tensorObjπ M N =
       ((α_ ((comap ψ).obj M).X S ((comap ψ).obj N).X).hom ≫
-        ((comap ψ).obj M).X ◁ γ[S,((comap ψ).obj N).X]) ≫ tensorObjπ M N := by
-  change ((β_ M.X S).hom ≫ ψ ▷ M.X ≫ γ[R,M.X]) ▷ N.X ≫ tensorObjπ M N =
-    ((α_ M.X S N.X).hom ≫ M.X ◁ (ψ ▷ N.X ≫ γ[R,N.X])) ≫ tensorObjπ M N
-  simp only [comp_whiskerRight, whiskerLeft_comp, Category.assoc]
-  slice_lhs 1 2 =>
-    rw [← comp_whiskerRight, ← braiding_naturality_right, comp_whiskerRight]
-  slice_lhs 2 3 => rw [← comp_whiskerRight]
-  rw [tensorObjπ_condition, Category.assoc, associator_naturality_middle_assoc]
+        ((comap ψ).obj M).X ◁ γ[S,((comap ψ).obj N).X]) ≫ tensorObjπ M N :=
+  sorry
 
 /-- The projection `M ⊗ N ⟶ M ⊗_S N` of the restrictions of scalars is balanced for the two
 actions of `R`, `ψ` being an isomorphism. -/
 lemma comap_tensorπ_balanced (M N : Mod C R) :
     ((β_ M.X R).hom ≫ γ[R,M.X]) ▷ N.X ≫ tensorObjπ ((comap ψ).obj M) ((comap ψ).obj N) =
-      ((α_ M.X R N.X).hom ≫ M.X ◁ γ[R,N.X]) ≫ tensorObjπ ((comap ψ).obj M) ((comap ψ).obj N) := by
-  rw [← cancel_epi ((M.X ◁ ψ) ▷ N.X)]
-  simp only [comp_whiskerRight, Category.assoc]
-  slice_lhs 1 2 =>
-    rw [← comp_whiskerRight, braiding_naturality_right, comp_whiskerRight]
-  rw [associator_naturality_middle_assoc]
-  have h := tensorObjπ_condition ((comap ψ).obj M) ((comap ψ).obj N)
-  change ((β_ M.X S).hom ≫ ψ ▷ M.X ≫ γ[R,M.X]) ▷ N.X ≫
-    tensorObjπ ((comap ψ).obj M) ((comap ψ).obj N) =
-    ((α_ M.X S N.X).hom ≫ M.X ◁ (ψ ▷ N.X ≫ γ[R,N.X])) ≫
-      tensorObjπ ((comap ψ).obj M) ((comap ψ).obj N) at h
-  simpa only [comp_whiskerRight, whiskerLeft_comp, Category.assoc] using h
+      ((α_ M.X R N.X).hom ≫ M.X ◁ γ[R,N.X]) ≫ tensorObjπ ((comap ψ).obj M) ((comap ψ).obj N) :=
+  sorry
 
 /-- The comparison `M ⊗_S N ≅ M ⊗_R N` of the underlying objects for an isomorphism
 `ψ : S ⟶ R`: both are coequalizers of parallel pairs out of `M ⊗ S ⊗ N` and `M ⊗ R ⊗ N`
@@ -308,16 +253,8 @@ noncomputable def comapTensorIsoX (M N : Mod C R) :
 /-- The comparison `M ⊗_S N ⟶ M ⊗_R N` is `S`-linear. -/
 lemma comapTensorIso_linear (M N : Mod C R) :
     γ[S, ((comap ψ).obj M ⊗ (comap ψ).obj N).X] ≫ (comapTensorIsoX ψ M N).hom =
-      S ◁ (comapTensorIsoX ψ M N).hom ≫ γ[S, ((comap ψ).obj (M ⊗ N)).X] := by
-  rw [← cancel_epi (S ◁ tensorObjπ ((comap ψ).obj M) ((comap ψ).obj N)),
-    whiskerLeft_tensorπ_smul_assoc]
-  dsimp only [comapTensorIsoX]
-  rw [tensorObjπ_tensorObjDesc, ← whiskerLeft_comp_assoc,
-    tensorObjπ_tensorObjDesc]
-  change (α_ S M.X N.X).inv ≫ (ψ ▷ M.X ≫ γ[R,M.X]) ▷ N.X ≫ tensorObjπ M N =
-    S ◁ tensorObjπ M N ≫ ψ ▷ (M ⊗ N).X ≫ γ[R,(M ⊗ N).X]
-  rw [whisker_exchange_assoc, whiskerLeft_tensorπ_smul,
-    associator_inv_naturality_left_assoc, comp_whiskerRight, Category.assoc]
+      S ◁ (comapTensorIsoX ψ M N).hom ≫ γ[S, ((comap ψ).obj (M ⊗ N)).X] :=
+  sorry
 
 /-- The comparison isomorphism `ψ^* M ⊗_S ψ^* N ≅ ψ^* (M ⊗_R N)` of `S`-module objects for an
 isomorphism `ψ : S ⟶ R` of commutative algebra objects. -/
