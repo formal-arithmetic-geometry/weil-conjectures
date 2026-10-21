@@ -320,31 +320,43 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q89-7e24bca30 (reviewer sub-agent of L); spot-checked: Read in full: the item's statement (unchanged from base), all 9 steps, and the statements of all 18 cited nodes. Sources checked: Bhatt–Scholze 6.8.2, 6.8.6/6.8.8, 6.8.14 and Rem. 6.8.15 (f^*K = f_naive^*K⊗Λ_Y), and the first proof paragraph of blueprint main-20261015 lem-per-smooth-pullback-t-exact. Delivery facts: no new nodes, no cycle (closure of 3905 nodes), not dropped, still unsplit in live. The item has no repair note of its own; it carries old parent steps 6–8 from the reviewed Q119 re-split. Step results: Step 1 Noetherian and finite-dimensional via the structure maps to Spec k. Step 2 P_gK ∈ C and γ invertible (rational-realization-pullback-comparison), triangles from cbc, R-linearity from the chart lemma. Steps 3–4 use fibre-product strata from the chart lemma, perfect-scalar pullback preserving [a,b] with no flatness, Noetherian stratum detection, and integral halves defined by ambient vanishing. Step 5 semilinear localization with φ=id, image halves, and scalar-extension comparisons that restrict once preservation holds. Steps 7–8 J-transport, the c_{f,g} composition comparison, slice restriction to non-Noetherian U, and the unit comparison e_h giving E_{U'}^r[0]; Step 8 is genuinely elementary and covers r=0, empty S' and varying rank. Step 9 reads α^±, F𝓗^j≅𝓗^jF and intervals off the descent lemma. Edge cases tested: empty schemes, rank 0, g=id, a point immersion, non-flat coefficient map; all true. No duplicates found (prop-constructible-truncations and lem-a1-constructible-pullback-t-exact are finite-field or automorphism variants). Off-unit tool uses accepted as generic black boxes. One fault, C4 in Step 6: lem-a1-texact-coefficient-stage-descent assumes the pair categories are triangulated and the transitions exact with associators. The step credited this to def-weil-pbc-qbar-category, which only defines cone triangles and defers the Verdier axioms to thm-weil-pbc-verdier-axioms. Repaired: Step 6 now cites thm-weil-pbc-verdier-axioms and prop-weil-pbc-scalar-extension, with the text updated; proof_deps and split_report.tool_uses updated. Corrected file: fixes/dag/nodes/sec-deligne-laumon-a1/lem-per-adic-stratified-pullback-texact.json.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
-  "module": "Sheaf.Paper.PerAdicStratifiedPullbackTExact",
-  "declaration": "AlgebraicGeometry.Scheme.perAdicStratifiedPullbackTExact",
+  "module": "Sheaf.Paper.AdicStratifiedPullbackInterface",
+  "declaration": "AlgebraicGeometry.Scheme.AdicFibreComparison.pullbackAssertions",
   "declarations": [
-   "AlgebraicGeometry.Scheme.StratifiedAdicPullback.base",
-   "AlgebraicGeometry.Scheme.StratifiedAdicPullback.coefficient",
-   "AlgebraicGeometry.Scheme.StratifiedAdicPullback.free",
-   "AlgebraicGeometry.Scheme.StratifiedAdicPullback.FreeCalculation",
-   "AlgebraicGeometry.Scheme.StratifiedAdicPullback.LocalCalculation",
-   "AlgebraicGeometry.Scheme.StratifiedAdicPullback.GlobalCalculation",
-   "AlgebraicGeometry.Scheme.perAdicStratifiedPullbackTExact"
+   "AlgebraicGeometry.Scheme.AdicFibreComparison.FiniteTypeBase",
+   "AlgebraicGeometry.Scheme.AdicFibreComparison.finiteTypeBaseGeometry",
+   "AlgebraicGeometry.Scheme.AdicFibreComparison.finiteTypeBasePrime",
+   "AlgebraicGeometry.Scheme.AdicFibreComparison.finiteTypeBaseNoetherian",
+   "AlgebraicGeometry.Scheme.AdicFibreComparison.finiteTypeBaseDimension",
+   "AlgebraicGeometry.Scheme.AdicFibreComparison.finiteTypeBasePrimeUnit",
+   "AlgebraicGeometry.Scheme.AdicFibreComparison.base",
+   "AlgebraicGeometry.Scheme.AdicFibreComparison.pullHeart",
+   "AlgebraicGeometry.Scheme.AdicFibreComparison.heartPull",
+   "AlgebraicGeometry.Scheme.AdicFibreComparison.commonPullHeart",
+   "AlgebraicGeometry.Scheme.AdicFibreComparison.commonHeartPull",
+   "AlgebraicGeometry.Scheme.AdicFibreComparison.free",
+   "AlgebraicGeometry.Scheme.AdicFibreComparison.LocalModels",
+   "AlgebraicGeometry.Scheme.AdicFibreComparison.FreeModels",
+   "AlgebraicGeometry.Scheme.AdicFibreComparison.ShiftData",
+   "AlgebraicGeometry.Scheme.AdicFibreComparison.ShiftData.component",
+   "AlgebraicGeometry.Scheme.AdicFibreComparison.FreeBalance",
+   "AlgebraicGeometry.Scheme.AdicFibreComparison.PullbackAssertions",
+   "AlgebraicGeometry.Scheme.AdicFibreComparison.pullbackAssertions"
   ],
-  "file": "lean/Sheaf/Paper/PerAdicStratifiedPullbackTExact.lean",
-  "statement": "theorem perAdicStratifiedPullbackTExact (l : ℕ) [Fact l.Prime] (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω] (k : Type u) [Field k] (X Y : Scheme.{u}) [X.Over (Spec (CommRingCat.of k))] [Y.Over (Spec (CommRingCat.of k))] [IsSeparated (X ↘ Spec (CommRingCat.of k))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k))] [QuasiCompact (X ↘ Spec (CommRingCat.of k))] [IsSeparated (Y ↘ Spec (CommRingCat.of k))] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k))] [QuasiCompact (Y ↘ Spec (CommRingCat.of k))] (_hl : IsUnit (l : k)) (g : Y ⟶ X) : ∃ _nX : IsNoetherian X, ∃ _nY : IsNoetherian Y, ∃ _dX : Fact (∃ n : ℕ, topologicalKrullDim X ≤ (n : WithBot ℕ∞)), ∃ _dY : Fact (∃ n : ℕ, topologicalKrullDim Y ≤ (n : WithBot ℕ∞)), ∃ _iX : Fact (∀ x : X, IsUnit (l : X.presheaf.stalk x)), ∃ _iY : Fact (∀ y : Y, IsUnit (l : Y.presheaf.stalk y)), ∃ tX : (pbcScalarSystem l Ω X (Fact.out) (Fact.out)).AdicCommonStageTruncations, ∃ tY : (pbcScalarSystem l Ω Y (Fact.out) (Fact.out)).AdicCommonStageTruncations, tX.common = pbcQbarStandardT l Ω X ∧ tY.common = pbcQbarStandardT l Ω Y ∧ Nonempty (StratifiedAdicPullback.GlobalCalculation l Ω tX tY g) ∧ ∀ (R : ContinuousRational.Family.{u} l) (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E], StratifiedAdicPullback.LocalCalculation l E R g",
+  "file": "lean/Sheaf/Paper/AdicStratifiedPullbackInterface.lean",
+  "statement": "theorem pullbackAssertions (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω] (X Y : FiniteTypeBase k) (g : Y.scheme ⟶ X.scheme) : Nonempty (PullbackAssertions l E R Ω X Y g)",
   "branch": "newtargets-dag",
-  "by": "NK",
+  "by": "N0",
   "date": "2026-10-21",
   "existing": false,
-  "note": "Returned-head repair 746b5293073b: preserve the live NM IntrinsicQbarCategory dependency record and use its publicly reexported pbcQbarCategory, as do the recorded standard t-structure and completed pullback. GlobalCalculation.integral_shift pins the integral restriction to the ambient completed-pullback shift; finite_fraction uses FractionExtension.factor_shift on that actual restriction, with the identity-normalized factorization; common_shift is the coefficient-stage descent HEq clause tying every common-stage shift component to its finite-stage image. The main signature and all non-lean item fields are unchanged."
+  "note": "Section 1(B): the recorded Sheaf.Paper.PerAdicStratifiedPullbackTExact source and compiled module are unavailable on the current server (scompile --source repeatedly reports Module source unavailable). This module states the dependency on the actual ContinuousRational.Along raw completed pullback and actual pbcQbarCompletedPull. It provides literal heart restrictions, lisse-stratum and pulled free-chart models, t-exactness at all degrees, normalized truncation comparisons, cohomology comparisons and exact hearts. The finite shift is pinned by the universal derived counit and realization, and the common shift is tied to those finite-stage comparisons. It reuses the existing scheme base, coefficient maps, categories and scalar coherence rather than introducing alternate constructions."
  },
  "reviewed_lean": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-stage2-cc-2fd4eeb76",
-  "group": "NK",
+  "reviewer": "NT-stage2-cc-6f9fd0628",
+  "group": "N0",
   "result": "pass",
-  "note": "Re-delivery after RETURN 746b5293073b. F1 (H13/H2) resolved: def-weil-pbc-qbar-category.json is byte-identical to side-live (cmp), as are all other delivered dependency node files. The item uses pbcQbarCategory through NM's recorded IntrinsicQbarCategory, which re-exports it publicly. F2 (H3) resolved: GlobalCalculation adds (1) integralShift with an integral_shift HEq tying the shift of the actual pbcConditionalIntegral restriction, after ObjectProperty.ι, to the ambient pbcActualCompletedPull shift at every n; it is unique because ι is faithful and is satisfied by Mathlib's lift CommShift over the full-subcategory hasShift; (2) finite_fraction : FractionExtension F0 (Phi A), whose obj/map/factor_id/factor_shift force finiteShift to be the localized integral shift, exactly hypothesis hF of texact_coefficient_stage_descent; (3) common_shift, the verbatim HEq conclusion of that lemma for pbcScalarSystem/pbcQbarPullFamily. Exactness, q_formula and scalar_shift therefore use the canonical shifts. The shift-pinned-only-at-1 pitfall does not arise: the integral shift is Mathlib's full-subcategory shift and the rational pin is a NatTrans.CommShift square. Other changes: the unused Indization.LocallySmall import is removed and one docstring line is edited; the main theorem, LocalCalculation, FreeCalculation and the helpers are unchanged; the item node differs only in lean.note. The statement is verbatim in the module, there is 1 sorry, the longest line is 96 characters, and there are no hollow definitions. Edge cases (empty schemes and strata, r=0, all n including 0 and negative, A=A, empty intervals) are fine. No compile run (no file changed); the worker reports clean compiles at 46.7 s and 43.6 s."
+  "note": "Re-delivery of RETURNed 7aee4a4f. Only the item module changed in Lean; Data, Coherence and Interface are byte-identical. The H3/H5 finding is repaired in substance. Pull side: psi = q >> modulePull(phi) >> eta. q is pinned by IsPullChartMap: modelH0 e = id, e' = pullModelMap (R.along comparison, derived counit, single map), and the germ equation. eta is pinned by IsPulledLattice: delta is unique because the f_*-image of M.reduction is a limit cone, and eta(unit(1⊗m)) = 1⊗delta m. The tower map is the canonical pullTowerIso, and PullLimit.iso is fixed by its projections. Scaling psi by lambda forces delta to scale by lambda, which contradicts the reductions in positive rank; re-choosing the reductions or the lattice cancels via Assertions.fractions (u = lambda^-1·1, uN = 1, b = 0). Scalar side: r is pinned pointwise; q is pinned via scalarModelMap and generators; delta is pinned by finiteScalarUnit plus tau; e is pinned componentwise by the germ formula mkQ(b⊗w) ↦ b·germ(tau(1⊗m)); a is pinned by the completion map; the final pure-tensor equation then fixes c.scalar. Rescaling tau by lambda cancels via fractions. Non-natural tau_n is harmless because delta forces a cone. The n+1 level is correct for ramified extensions (ϖ_A^{n+1} ∈ v^{n+1}). The duplicate def-per-normalized-fibre-data is replaced by the landed def-per-adic-normalized-fibre-data (record identical to live; publicly re-exported). lean.statement is verbatim and the declaration lists match. The §1(B) interface is still legitimate (NK PerAdicStratifiedPullbackTExact absent). Only sorry is used. Advisory: Descent identity/composition loosely pinned; H11 no independent second reader; possibly unused proof imports. No compile (no file changed)."
  }
 }

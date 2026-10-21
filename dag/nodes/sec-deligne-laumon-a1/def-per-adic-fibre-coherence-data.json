@@ -1,0 +1,114 @@
+{
+ "id": "def-per-adic-fibre-coherence-data",
+ "kind": "definition",
+ "title": "Coherence, germ normalization and common-stage descent data",
+ "status": "split",
+ "statement": "Fix a coefficient prime, a finite-type base field, a normalized continuous realization family, an algebraic closure of the rational coefficient field, finite-stage normalized fibres and their comparison and rank data [def-per-adic-fibre-comparison-data]. Define AllComparisons to be a family of the finite-stage comparison data over all finite coefficient fields and field embeddings. Define Coherence by the identity, scheme-composition, scalar-identity, scalar-composition and mixed pullback/scalar equations; the heart comparison maps must have the specified raw identity, composition and mixed comparisons as underlying maps, and scalar associators are the actual balanced tensor associators. Define a section germ by the ordinary module inverse-image tensor unit followed by restriction to the final object at the geometric point. A degree-zero derived presentation gives an intrinsic fibre identification by homology and the single-object cohomology comparison. Define pullback and scalar model maps using the normalized realization comparison, its actual derived counit and the single-complex comparison. Define UnitNormalization by requiring every such presentation comparison to be precisely that model map, and the fibre comparisons to carry pulled germs and pure scalar tensors to the specified original germs and scalar tensors. Define Descent for common-stage fibre assertion data by requiring the actual scalar transition map to agree with finite-stage beta, with its pure-tensor-normalized associator, and the common pullback comparison to agree with scalar extension of the finite-stage one via the underlying identity stage/pullback comparison; retain the identity and composition equations for the descended comparisons. These are data packages and equations, without an assertion that any comparison family exists.",
+ "stmt_deps": [
+  "def-per-adic-fibre-comparison-data"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.4, Definitions 6.8.3 and 6.8.6, Proposition 6.8.14 and Remark 6.8.15; finite quotient pullback/scalar comparisons and lisse ranks"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "ContinuousRational|NormalizedFibre|rationalFiber",
+   "results": "0 hits: .",
+   "date": "2026-10-21",
+   "verdict": "No equivalent comparison/coherence package in Mathlib or upstream. The earlier saved item packet supplies these definitions; move them without changes into this owning definition module."
+  },
+  {
+   "tool": "leansearch",
+   "query": "coherent family of continuous rational derived realizations and normalized geometric fibres on lattice charts",
+   "results": "8 hits: Topology.IsCoherentWith.continuous_iff, Rat.continuous_coe_real, ChartedSpace.LiftPropWithinAt.continuousWithinAt, Pretrivialization.continuousOn_continuousLinearMapCoordChange, continuousOn_extChartAt, VectorPrebundle.continuousOn_coordChange, ContinuousMap.instLatticeOfTopologicalLattice, continuousOn_coordChange.",
+   "date": "2026-10-21",
+   "verdict": "No equivalent comparison/coherence package in Mathlib or upstream. The earlier saved item packet supplies these definitions; move them without changes into this owning definition module."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "normalized geometric fibre inverse limit etale lattice rational realization family",
+   "results": "8 hits: BDeRham, StandardEtalePair.homEquiv_symm_apply, BDeRhamPlus, StandardEtalePair.hasMap_X, StandardEtalePresentation.toPresentation_σ', AlgebraicGeometry.Scheme.Hom.normalizationDiagram, AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap, StandardEtalePair.lift_X.",
+   "date": "2026-10-21",
+   "verdict": "No equivalent comparison/coherence package in Mathlib or upstream. The earlier saved item packet supplies these definitions; move them without changes into this owning definition module."
+  },
+  {
+   "tool": "grep",
+   "query": "ContinuousRational.Family|NormalizedFibre.Assertions",
+   "results": "Project: the existing ContinuousRationalDerivedRealization and AdicNormalizedFibreExactness modules; no definition node owns either package. Upstream WeilConjectures has neither. blueprint_refs.py search normalized fibre and continuous rational both returned zero blueprint matches. Other def-a1 finite-adic-section nodes merely take Family as input.",
+   "date": "2026-10-21",
+   "verdict": "No equivalent comparison/coherence package in Mathlib or upstream. The earlier saved item packet supplies these definitions; move them without changes into this owning definition module."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-per-adic-normalized-fibre-comparisons",
+  "date": "2026-10-21",
+  "group": "N0"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-smooth-pullback-t-exact",
+   "place": "First proof paragraph: normalized realization and lattice-limit fibre data used by the pullback and scalar comparisons.",
+   "via": [
+    "lem-per-adic-normalized-fibre-comparisons",
+    "lem-per-adic-heart-pullback-fibres",
+    "lem-per-smooth-pullback-support-dimension"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean": {
+  "module": "Sheaf.Paper.AdicFibreComparisonCoherence",
+  "declaration": "AlgebraicGeometry.Scheme.AdicFibreComparison.UnitNormalization",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.AdicFibreComparison.AllComparisons",
+   "AlgebraicGeometry.Scheme.AdicFibreComparison.Coherence",
+   "AlgebraicGeometry.Scheme.AdicFibreComparison.germ",
+   "AlgebraicGeometry.Scheme.AdicFibreComparison.presentedFibre",
+   "AlgebraicGeometry.Scheme.AdicFibreComparison.pullModelMap",
+   "AlgebraicGeometry.Scheme.AdicFibreComparison.scalarModelMap",
+   "AlgebraicGeometry.Scheme.AdicFibreComparison.UnitNormalization",
+   "AlgebraicGeometry.Scheme.AdicFibreComparison.Descent"
+  ],
+  "file": "lean/Sheaf/Paper/AdicFibreComparisonCoherence.lean",
+  "statement": "structure UnitNormalization (ω : Fibres (k := k) l R) (c : AllComparisons l R ω) : Prop",
+  "branch": "newtargets-dag",
+  "by": "N0",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Owns the unchanged raw-coherence, actual-derived-counit germ normalization and common-stage descent packages. Separate from the core definition module to stay within the fixed per-file compilation limit."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6f9fd0628",
+  "group": "N0",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6f9fd0628",
+  "group": "N0",
+  "result": "pass",
+  "note": "Re-delivery of RETURNed 7aee4a4f. Only the item module changed in Lean; Data, Coherence and Interface are byte-identical. The H3/H5 finding is repaired in substance. Pull side: psi = q >> modulePull(phi) >> eta. q is pinned by IsPullChartMap: modelH0 e = id, e' = pullModelMap (R.along comparison, derived counit, single map), and the germ equation. eta is pinned by IsPulledLattice: delta is unique because the f_*-image of M.reduction is a limit cone, and eta(unit(1⊗m)) = 1⊗delta m. The tower map is the canonical pullTowerIso, and PullLimit.iso is fixed by its projections. Scaling psi by lambda forces delta to scale by lambda, which contradicts the reductions in positive rank; re-choosing the reductions or the lattice cancels via Assertions.fractions (u = lambda^-1·1, uN = 1, b = 0). Scalar side: r is pinned pointwise; q is pinned via scalarModelMap and generators; delta is pinned by finiteScalarUnit plus tau; e is pinned componentwise by the germ formula mkQ(b⊗w) ↦ b·germ(tau(1⊗m)); a is pinned by the completion map; the final pure-tensor equation then fixes c.scalar. Rescaling tau by lambda cancels via fractions. Non-natural tau_n is harmless because delta forces a cone. The n+1 level is correct for ramified extensions (ϖ_A^{n+1} ∈ v^{n+1}). The duplicate def-per-normalized-fibre-data is replaced by the landed def-per-adic-normalized-fibre-data (record identical to live; publicly re-exported). lean.statement is verbatim and the declaration lists match. The §1(B) interface is still legitimate (NK PerAdicStratifiedPullbackTExact absent). Only sorry is used. Advisory: Descent identity/composition loosely pinned; H11 no independent second reader; possibly unused proof imports. No compile (no file changed)."
+ }
+}

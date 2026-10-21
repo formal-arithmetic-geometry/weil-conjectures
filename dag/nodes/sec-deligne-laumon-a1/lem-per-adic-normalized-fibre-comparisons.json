@@ -22,7 +22,12 @@
   "lem-per-adic-normalized-fibre-exactness",
   "def-weil-geometric-point",
   "def-weil-pbc-completed-pullback",
-  "def-weil-constructible-subset"
+  "def-weil-constructible-subset",
+  "def-constructible-stratification",
+  "def-per-continuous-rational-realization-data",
+  "def-per-adic-normalized-fibre-data",
+  "def-per-adic-fibre-comparison-data",
+  "def-per-adic-fibre-coherence-data"
  ],
  "proof": [
   {
@@ -373,5 +378,40 @@
   "group": "Q86",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q86-c8d66c64a (reviewer sub-agent of L); spot-checked: I read the item and all 12 steps in full, together with the full statements of all 20 cited nodes. Sources: Bhatt–Scholze 6.8.4(1)(4)(6), 6.8.5–6.8.7, 6.8.14 and Remark 6.8.15 (f^* = naive pullback ⊗ Λ_Y), and Stacks 03Q1 lemma-stalk-pullback. No SGA is cited. This is the first split of a statement-only node that the Q119 re-split of lem-per-adic-heart-pullback-fibres created. That repair note belongs to the parent and is resolved, so ordinary stage-1 rules apply. There are no new nodes. The statement and stmt_deps are byte-identical to live, every step is under 2000 characters, and there is no cycle. All arguments of old parent steps 12–14 reappear in more explicit form. The mathematics checks out: germ-formula linearity and composition; the pullback/scalar square on pure tensors with no flatness; α as limit and localization, computed on the actual pullback via J and the stratified node's degree-zero model; β via the def-pod(3) system with index ⌈m/e⌉, stalk M⊗D/v^m and finite-module completeness; associator coherence; chart independence via fractional representatives; the Q̄ functor well defined by transport; exactness via cones H^{-1}/H^0, zero objects vanishing at a finite stage and Q̄ flatness; detection by bases; ranks via the condensed↔continuous E_X identification and det-lem-stratified-lattice-rank; the constructible locus by Stacks 005L. Edge cases checked: empty X, rank 0, identity g and E, ramified L, non-flat g, disconnected strata. Two fixes. Step 4 (C3/C4) did not tie the def-pod(3) system to the actual T_{L/E}F. I added the bridge J_L∘T ≅ L_X⊗_{E_X}J_E by balancing, with T defined as integral change of coefficients followed by localization, and the lattice N⊗_{B_E}B_L. Its uses gain the realization node and prop-weil-pbc-scalar-extension, both already in proof_deps. In step 3 the pulled chart U×_X(Y×_X S) is affine over the stratum but need not be an affine scheme; I shrink it to an affine neighbourhood of (ū,ȳ). Batch-5 flags: lisse-completed-system-comparison, etale-stalk-tensor-scalar, def-pod-lisse-l-adic-sheaves, adic-limit-finite-modules and lisse-tensor-and-scalar-extension. Their closures reach only def-pod-ring-scalar-extension, stalk tensor algebra and adic tower reconstruction. These are general definitions or O_E-module algebra, not the trace formula, Poincaré duality or a step of either proof, so I accept all five. I accept all 10 tool_uses as generic. The corrected item is in fixes/dag/nodes/sec-deligne-laumon-a1/.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PerAdicNormalizedFibreComparisons",
+  "declaration": "AlgebraicGeometry.Scheme.AdicFibreComparison.normalizedFibreComparisons",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.AdicFibreComparison.scalarQuotients",
+   "AlgebraicGeometry.Scheme.AdicFibreComparison.scalarCompletionMap",
+   "AlgebraicGeometry.Scheme.AdicFibreComparison.modelH0",
+   "AlgebraicGeometry.Scheme.AdicFibreComparison.finiteUnitMate",
+   "AlgebraicGeometry.Scheme.AdicFibreComparison.finiteScalarLevel",
+   "AlgebraicGeometry.Scheme.AdicFibreComparison.finiteScalarUnit",
+   "AlgebraicGeometry.Scheme.AdicFibreComparison.IsPulledLattice",
+   "AlgebraicGeometry.Scheme.AdicFibreComparison.IsScalarLattice",
+   "AlgebraicGeometry.Scheme.AdicFibreComparison.IsPullChartMap",
+   "AlgebraicGeometry.Scheme.AdicFibreComparison.IsScalarChartMap",
+   "AlgebraicGeometry.Scheme.AdicFibreComparison.IsPullLimitNormalized",
+   "AlgebraicGeometry.Scheme.AdicFibreComparison.IsScalarLimitNormalized",
+   "AlgebraicGeometry.Scheme.AdicFibreComparison.LocalLimits",
+   "AlgebraicGeometry.Scheme.AdicFibreComparison.normalizedFibreComparisons"
+  ],
+  "file": "lean/Sheaf/Paper/PerAdicNormalizedFibreComparisons.lean",
+  "statement": "theorem normalizedFibreComparisons : ∃ (ω : Fibres (k := k) l R) (c : AllComparisons l R ω) (V : CommonAssertions l R Ω ω), Nonempty (Coherence l R ω c) ∧ Nonempty (UnitNormalization l R ω c) ∧ Nonempty (Descent l R Ω ω c V) ∧ Nonempty (LocalLimits l R ω c)",
+  "branch": "newtargets-dag",
+  "by": "N0",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Repair of immutable head 7aee4a4f4eec, finding 2 (H3/H5): target lattice presentations are pinned to the actual J/pullback or J/T comparison and its derived counit, with H0 identity-normalized source models. Both use the same finite tensor/pullback units, integral reduction cones and rational lattice section maps. Each finite scalar tower component is fixed on tensors of stalk germs; its limit map is the reduction-cone completion map. Consequently neither psi nor e can absorb an independent rescaling of c. Reuses the newly landed def-per-adic-normalized-fibre-data in place of the obsolete duplicate ownership node. Main statement and all non-lean fields other than authorized added stmt_deps are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6f9fd0628",
+  "group": "N0",
+  "result": "pass",
+  "note": "Re-delivery of RETURNed 7aee4a4f. Only the item module changed in Lean; Data, Coherence and Interface are byte-identical. The H3/H5 finding is repaired in substance. Pull side: psi = q >> modulePull(phi) >> eta. q is pinned by IsPullChartMap: modelH0 e = id, e' = pullModelMap (R.along comparison, derived counit, single map), and the germ equation. eta is pinned by IsPulledLattice: delta is unique because the f_*-image of M.reduction is a limit cone, and eta(unit(1⊗m)) = 1⊗delta m. The tower map is the canonical pullTowerIso, and PullLimit.iso is fixed by its projections. Scaling psi by lambda forces delta to scale by lambda, which contradicts the reductions in positive rank; re-choosing the reductions or the lattice cancels via Assertions.fractions (u = lambda^-1·1, uN = 1, b = 0). Scalar side: r is pinned pointwise; q is pinned via scalarModelMap and generators; delta is pinned by finiteScalarUnit plus tau; e is pinned componentwise by the germ formula mkQ(b⊗w) ↦ b·germ(tau(1⊗m)); a is pinned by the completion map; the final pure-tensor equation then fixes c.scalar. Rescaling tau by lambda cancels via fractions. Non-natural tau_n is harmless because delta forces a cone. The n+1 level is correct for ramified extensions (ϖ_A^{n+1} ∈ v^{n+1}). The duplicate def-per-normalized-fibre-data is replaced by the landed def-per-adic-normalized-fibre-data (record identical to live; publicly re-exported). lean.statement is verbatim and the declaration lists match. The §1(B) interface is still legitimate (NK PerAdicStratifiedPullbackTExact absent). Only sorry is used. Advisory: Descent identity/composition loosely pinned; H11 no independent second reader; possibly unused proof imports. No compile (no file changed)."
  }
 }
