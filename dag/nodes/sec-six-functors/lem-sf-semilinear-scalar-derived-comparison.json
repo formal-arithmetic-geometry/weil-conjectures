@@ -14,9 +14,101 @@
   "lem-weil-pbc-ring-sheaf-change-adjunction",
   "def-weil-scheme-morphism-properties"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply the ordinary comparison to the given compatible maps $B\\to C_n$. Its exact additive $\\rho_T^0$ acts termwise on complexes, so it sends quasi-isomorphisms to quasi-isomorphisms and defines $\\rho_T$. The system inverse images are exact, and their derived functors are their localizations. Localize $b_f^0$ and its inverse using the natural-transformation part of the localization universal property; the two composites remain identities. This gives the specified $b_f:\\rho_XP_f\\cong G_f\\rho_Y$. If $e^C_{T,n}$ and $e^B_{T,n}$ denote evaluation on the two system categories and $r_{T,n}$ single-level restriction from $C_n$ to $B$, then $e^B_{T,n}\\rho_T=r_{T,n}e^C_{T,n}$, with the canonical localization identifications: both sides are the same termwise functor on complexes. The same localization uniqueness identifies the evaluation of $b_f$ with the ordinary inverse-image scalar comparison localized at level $n$.",
+   "uses": [
+    "lem-sf-semilinear-scalar-ordinary-comparison",
+    "lem-coef-semilinear-derived-sections",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VG (lemma-properties-left-localization); natural-transformation lifting and uniqueness as stated in the cited Mathlib leaf"
+   }
+  },
+  {
+   "text": "Define $d_f$ by the displayed unit--$b_f^{-1}$--counit word, rather than choosing an isomorphism with its source and target. In the mate definition take $L_1=P_f$, $R_1=S_f$, $L_2=G_f$, $R_2=R_f^{\\mathcal T}$, $G=\\rho_Y$, $H=\\rho_X$ and square $b_f^{-1}$. This gives exactly $d_f$. Here $\\mathscr S_X$, the adjunction $P_f\\dashv S_f$ and their level-$n$ evaluation comparisons are those of [def-sp-varying-ring-operations]: evaluation of $P_f$ is the localized inverse-image comparison specified by the unit equation, and evaluation of $S_f$ is its adjunction mate. After the canonical identifications $f^{-1}(C_n)_Y\\cong(C_n)_X$ of constant ring sheaves, these are the comparisons $e_nV=u^{-1}e_n$ and $e_nG\\cong Ru_{*,n}e_n$ of the simultaneous system calculus for $u=f$, since a comparison compatible with the units and counits is the mate of the inverse-image comparison. Apply the evaluation comparisons of the simultaneous system calculus to both ring systems, using the constant ring system $B_n=\\underline B$ for towers. They identify $e_nS_f$ and $e_nR_f^{\\mathcal T}$ with the single-level derived direct images, and identify their units and counits. Together with step 1, evaluation of the actual word defining $d_f$ is therefore the single-level mate word\n$$ (R_{f,B}r_{X,n}\\varepsilon_{f,C_n})\\circ(R_{f,B}b_{f,n}^{-1}R_{f,C_n})\\circ(\\eta_{f,B}r_{Y,n}R_{f,C_n}). $$\nThis is an application of the stated evaluation-of-transposes formula, including its unit and counit normalization.",
+   "uses": [
+    "def-sp-varying-ring-operations",
+    "def-weil-pbc-adjunction-mate",
+    "lem-coef-semilinear-derived-sections",
+    "lem-cbc-strict-tower-proper-open-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A6 (lemma-adjoint); evaluation of the mate word supplied by the cited simultaneous-system theorem"
+   }
+  },
+  {
+   "text": "Apply the single-level ring-sheaf-change theorem to $u=f$, $R_T=\\underline B_T$, $S_T=\\underline {C_n}_T$, and $a_T$ induced by $B\\to C_n$. The constant-coefficient inverse-image identifications of the tower calculus give $c_R,c_S$; the compatibility equation holds because both composites send a constant $b\\in B$ to its image in $C_n$. Its inverse-image comparison is the one of step 1, since both are induced by identified-coefficient inverse image on module sheaves. In its adjunct equation put $M=R_{f,C_n}N$ and $t=\\varepsilon_{f,C_n,N}$. Then $t^\\sharp=1$ by the triangle identity. Consequently its specified direct-image comparison is the adjunct of $r_{X,n}(\\varepsilon_{f,C_n,N})\\circ b_{f,n,R_{f,C_n}N}^{-1}$. The mate formula identifies this adjunct with the word in step 2. Thus the evaluated $d_f$ is precisely that normalized comparison, and is invertible for every $n$ and every input.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "lem-cbc-strict-tower-proper-open-calculus",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0D6D (lemma-derived-pullback-composition), 0D6E (lemma-derived-pushforward-composition), 07A6 (lemma-adjoint); specialization of the cited ring-change adjunct equation"
+   }
+  },
+  {
+   "text": "Apply joint detection of isomorphisms in the simultaneous-system theorem to the constant ring system $B_n=\\underline B_Y$. Its semilinear category is exactly $\\mathcal T_Y$, since restriction along the identity maps of $B$ is the identity. For every $N\\in D(\\mathscr S_X)$, step 3 says that every evaluation of $d_{f,N}$ is an isomorphism. Hence $d_{f,N}$ is an isomorphism in $D(\\mathcal T_Y)$. The inverse components form a natural transformation by multiplying the naturality square of $d_f$ on both sides by these inverses, giving the asserted natural isomorphism. Only detection of invertibility has been used.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tag 079P is the resolution foundation only; joint detection is the additional assertion of the cited simultaneous-system theorem"
+   }
+  },
+  {
+   "text": "For the open $j$, localize $a_j^0$ and its inverse. All three functors involved are exact, including open extension, so localization gives an isomorphism $a_j:\\rho_XJ_j\\cong J_j^{\\mathcal T}\\rho_U$. Write $\\eta^{o,C}$ for the unit of $J_j\\dashv P_j$ and $\\varepsilon^{o,B}$ for the counit of $J_j^{\\mathcal T}\\dashv G_j$. The left open-adjunction mate of $b_j$ is the map\n$$\\ell=(\\varepsilon^{o,B}\\rho_XJ_j)\\circ(J_j^{\\mathcal T}b_jJ_j)\\circ(J_j^{\\mathcal T}\\rho_U\\eta^{o,C}).$$\nAlready before deriving, normalization of $a_j^0$ by the open units states that the transpose of $(a_j^0)^{-1}$ is $b_j^0j_!\\circ\\rho_U^0\\eta^{o,C}$. Applying the inverse adjunction bijection, or cancelling the adjacent unit and counit by the triangle identity, gives exactly the ordinary version of $\\ell$. The open adjunctions descend with these ordinary units and counits by the system calculus. Localization respects composition and identities, so that equality descends to $\\ell=a_j^{-1}$. This proves the left-mate assertion on systems.",
+   "uses": [
+    "lem-sf-semilinear-scalar-ordinary-comparison",
+    "lem-coef-semilinear-derived-sections",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D7 (lemma-adjoint-pullback-pushforward-modules); ordinary open-unit normalization and exact localization from the cited nodes"
+   }
+  },
+  {
+   "text": "Use the intrinsic ordinary $\\alpha_Q$ and the ordinary scalar-comparison equation, not a proper mate or a levelwise identification. Its construction is the cartesian open comparison, the clopen projector, and the open and pullback compositors. The varying-ring-arrow definition localizes this very transformation; the tower calculus defines its constant-$B$ counterpart by the same exact operations. The ordinary comparison preserves the cartesian open comparison and projector and hence their full composite. Termwise application to complexes followed by localization, which respects composition, gives the explicit equation\n$$(J_k^{\\mathcal T}b_r)\\circ(a_kP_r)\\circ\\rho_V(\\alpha_Q)\n=(\\alpha_Q^{\\mathcal T}\\rho_W)\\circ(G_pa_i)\\circ(b_pJ_i).$$\nBoth sides run from $\\rho_VP_pJ_i$ to $J_k^{\\mathcal T}G_r\\rho_W$. The hypotheses on $Q$ are exactly the proper/quasi-compact-open hypotheses of these intrinsic constructions, including the noncartesian case. This is the claimed equality after the specified $b,a$ identifications, before taking any proper mate. It is inherited from an equality of actual system transformations by localization, rather than inferred from evaluation.",
+   "uses": [
+    "lem-sf-semilinear-scalar-ordinary-comparison",
+    "def-sp-varying-ring-proper-open-arrows",
+    "lem-cbc-strict-tower-proper-open-calculus",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D7 coefficient-change foundation; intrinsic ordinary alpha preservation and its localization are the additional system assertions of the cited nodes"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-semilinear-scalar-ordinary-comparison",
+  "lem-coef-semilinear-derived-sections",
+  "lem-weil-pbc-localization-universal-property",
+  "def-weil-pbc-adjunction-mate",
+  "lem-cbc-strict-tower-proper-open-calculus",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "def-sp-varying-ring-proper-open-arrows",
+  "def-sp-varying-ring-operations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+  "place": "Sentence on adjunction units and counits and their coefficient comparisons; assembly from the ordinary-system, evaluation, localization and single-level ring-change statements"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -52,10 +144,59 @@
    "results": "8 hits: ModuleCat.instIsRightAdjointRestrictScalars, ModuleCat.instIsLeftAdjointRestrictScalars, ModuleCat.ExtendRestrictScalarsAdj.unit, ModuleCat.ExtendRestrictScalarsAdj.Unit.map, ModuleCat.RestrictionCoextensionAdj.unit'_app, ModuleCat.restrictCoextendScalarsAdj, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules, ModuleCat.extendRestrictScalarsAdj",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars.*(Derived|derived|mate)|[Ss]emilinear.*[Ss]ystem",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: hits give individual ordinary sheaf or abstract derived-functor tools, not this simultaneous-system assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars on derived inverse systems of module sheaves preserves inverse image open extension by zero and the direct image adjunction mate",
+   "results": "8 hits: PresheafOfModules.restrictScalarsObj, RestrictScalars, ModuleCat.RestrictScalars.obj', ModuleCat.restrictScalars, PresheafOfModules.restrictScalars, ModuleCat.restrictCoextendScalarsAdj, SheafOfModules.restrictScalars, ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction",
+   "date": "2026-10-21",
+   "verdict": "no match: hits give individual ordinary sheaf or abstract derived-functor tools, not this simultaneous-system assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv, CategoryTheory.IsIso",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: hits give individual ordinary sheaf or abstract derived-functor tools, not this simultaneous-system assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact restriction of scalars between semilinear sheaf systems and constant ring towers commutes with derived pushforward as the specified adjunction mate",
+   "results": "8 hits: SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pushforwardComp, SheafOfModules.instIsRightAdjointPushforward, SheafOfModules.pushforwardCongr",
+   "date": "2026-10-21",
+   "verdict": "no match: hits give individual ordinary sheaf or abstract derived-functor tools, not this simultaneous-system assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coefficient change for ringed topoi commutes with unbounded derived direct image compatibly with units and counits on inverse sequences",
+   "results": "8 hits: CategoryTheory.Functor.mapDerivedCategoryFactorsh, SheafOfModules.pushforwardNatIso, SheafOfModules.pushforwardNatIso_hom, CategoryTheory.Adjunction.derivedε_fac_app, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Adjunction.derivedε_fac_app_assoc, CategoryTheory.Adjunction.derivedη_fac_app, CategoryTheory.Functor.mapDerivedCategoryFactors",
+   "date": "2026-10-21",
+   "verdict": "no match: hits give individual ordinary sheaf or abstract derived-functor tools, not this simultaneous-system assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "def restrictScalars|def pushforwardPushforwardAdj|def pullbackPushforwardAdjunction",
+   "results": "3 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: hits give individual ordinary sheaf or abstract derived-functor tools, not this simultaneous-system assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "def mapDerivedCategoryFactors|lemma derivedε_fac_app|lemma derivedη_fac_app",
+   "results": "4 hits: Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: hits give individual ordinary sheaf or abstract derived-functor tools, not this simultaneous-system assertion"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sf-semilinear-proper-open-mate-pasting",
@@ -75,5 +216,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sf-semilinear-scalar-derived-comparison",
+  "worker": "stage1",
+  "summary": "No change to the statement. Localized the ordinary inverse-image and open comparisons; evaluated the specified direct-image mate using unit/counit-compatible system comparisons and identified it with the normalized single-level ring-change comparison. Joint conservativity for constant B systems proves invertibility. Localized the ordinary intrinsic alpha equation before proper mating. No new nodes and no assumption that derived evaluation is faithful.",
+  "blueprint": "fix-prop-coherence proof, sentence: The maps used here are tensor reassociation, evaluation, and adjunction units and counits, whose coefficient comparisons are proved in lem-fix-operation-reduction. Steps 1-4 supply scalar comparisons and the specified direct-image mate; step 5 treats the open left mate; step 6 preserves the intrinsic alpha before proper mating.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "Generic simultaneous-system evaluation, derived adjunction and conservativity theorem; supplies the actual unit/counit-compatible evaluation comparisons, not an alternative geometric route."
+   },
+   {
+    "node": "lem-cbc-strict-tower-proper-open-calculus",
+    "why": "Uses the constant-B tower adjunctions, constant-ring pullback identifications and intrinsic alpha construction, not its proper-base-change invertibility result."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "why": "Generic single-level ring-change adjunction comparison; the given unit has no replacement for its normalized unbounded direct-image comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-semilinear-derived-sections",
+  "lem-cbc-strict-tower-proper-open-calculus",
+  "lem-weil-pbc-ring-sheaf-change-adjunction"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q41-b590f9862",
+  "group": "Q41",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-b590f9862 (reviewer sub-agent of L); spot-checked: I read the item and every cited statement in full: ordinary scalar comparison, lem-coef-semilinear-derived-sections, lem-cbc-strict-tower-proper-open-calculus, ring-sheaf-change adjunction, the mate and localization leaves, def-sp-varying-ring-operations and def-sp-varying-ring-proper-open-arrows. I also read Stacks 03D7 (sites-modules.tex l.1197) and the blueprint fix-prop-coherence.proof.md l.10-15. There are no new nodes, no SGA, no cycle, and the route units are in the unit's uses. Math checks: d_f type-checks and is the mate of b^{-1}. Step 3's substitution M=R_SN, t=epsilon gives t^sharp=1, so e_n(d_f) is exactly the ring-change d and is invertible. Step 4 is correct: for constant B the semilinear category is T, and joint detection of isomorphisms gives invertibility. Step 5: the left mate has the direction of a_j^{-1} and equals it through the open-unit normalization. Step 6: both sides run from rho_V P_p J_i to J_k^T G_r rho_W, and the equation is the localization of the ordinary equation; no proper mate is involved. Small cases checked: B=Z with C_n=Z/2^n (no flatness needed), B=C_n, f=id, empty U, cartesian Q, s with empty image. FIX (C4): step 2 attributed the evaluation comparisons of S_f only to lem-coef, which is stated for systems over u^{-1}B_n. The item's S_X operations and their evaluation mates are specified in def-sp-varying-ring-operations. I cited it in step 2 and proof_deps and added the bridge through f^{-1}(C_n)_Y = (C_n)_X and mate uniqueness. Batch-5 flag (def-sp-varying-ring-proper-open-arrows -> lem-pod-derived-exact-square-composition): accepted. The node is a general definition, the reached node is generic derived-functor pasting coherence, and it was already in the item's statement closure through the ordinary-comparison stmt_dep. Advisory: lem-pur-diagram-ring-restriction-pushforward overlaps only the invertibility clause and has a different normalization; it is not a duplicate.; 1 file(s) fixed by the reviewer"
  }
 }
