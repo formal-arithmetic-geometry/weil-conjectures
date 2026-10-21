@@ -3,38 +3,171 @@
  "blueprint": {
   "is": "sk-thm-picard-pn",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Cohomology of $\\PP^n$, Serre 1954",
- "statement": "Let $k$ be a field, $X=\\PP^n_k$, $\\cO(m):=\\cO_X(m)$, and\n$S^m(V)$ the $m$-th symmetric power of $V=k^{n+1}$.\n\n$$\nH^0(X,\\cO(m))=S^m(V)\\ (m\\ge0),\\qquad\nH^q(X,\\cO(m))=0\\ (q\\notin\\{0,n\\}),\n$$\n\n$$\nH^n(X,\\cO(m))=0\\ (m\\ge-n),\\qquad\nH^n(X,\\cO(m))=S^{-m-n-1}(V)^{\\vee}\\ (m\\le-n-1),\n$$\n\nthe two top-degree clauses for $n\\ge1$; for $n=0$, $X=\\Spec k$ and\nevery $\\cO(m)$ is $\\cO_X$, so $H^0(X,\\cO(m))=k$ for all $m$ and there is\nno higher cohomology. In particular (for all $n\\ge0$)\n$\\omega_X=\\cO_X(-n-1)$ and $H^q(X,\\cO_X)=k\\cdot\\delta_{q,0}$.",
+ "statement": "Let $k$ be a field, $X=\\PP^n_k$, $\\cO(m):=\\cO_X(m)$, and\n$S^m(V)$ the $m$-th symmetric power of $V=k^{n+1}$.\n\n$$\nH^0(X,\\cO(m))=S^m(V)\\ (m\\ge0),\\qquad\nH^q(X,\\cO(m))=0\\ (q\\notin\\{0,n\\}),\n$$\n\n$$\nH^n(X,\\cO(m))=0\\ (m\\ge-n),\\qquad\nH^n(X,\\cO(m))=S^{-m-n-1}(V)^{\\vee}\\ (m\\le-n-1),\n$$\n\nthe two top-degree clauses for $n\\ge1$; for $n=0$, $X=\\Spec k$ and\nevery $\\cO(m)$ is $\\cO_X$, so $H^0(X,\\cO(m))=k$ for all $m$ and there is\nno higher cohomology. In particular (for all $n\\ge0$)\n$\\omega_X=\\cO_X(-n-1)$ and $H^q(X,\\cO_X)=k\\cdot\\delta_{q,0}$.\n\nHere $n,q\\in\\mathbf Z_{\\ge0}$, $m\\in\\mathbf Z$, and all displayed equalities of modules mean $k$-linear isomorphisms (and the canonical-sheaf equality means an isomorphism of $\\mathcal O_X$-modules). Projective space and its twists are those of [def-pc-projective-space-twist]; $H^q$ is the Zariski module-sheaf cohomology of [pqf-def-cohomology]. The ordered basis $x_0,\\ldots,x_n$ identifies $S^r(V)$ with the homogeneous degree-$r$ polynomials for $r\\ge0$, and $W^\\vee=\\operatorname{Hom}_k(W,k)$. We use $\\omega_X:=\\Lambda^n\\Omega^1_{X/k}$, with relative differentials as in [def-sc-relative-differential-sheaf] and sheaf exterior powers as in [def-sc-sheaf-exterior-power].",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-thm-picard-pn/_section.md",
   "place": "node sk-thm-picard-pn, order 719"
  },
  "stmt_deps": [
-  "sk-def-av-pic"
+  "def-pc-projective-space-twist",
+  "pqf-def-cohomology",
+  "def-sc-relative-differential-sheaf",
+  "def-sc-sheaf-exterior-power"
  ],
  "proof": [
   {
-   "text": "On the standard affine cover\n$\\mathfrak U=\\{D_+(x_0),\\dots,D_+(x_n)\\}$ the Čech complex is a\nKoszul-type complex; by [sk-lem-picard-cech-computes] it computes\n$H^*(X,\\cO(m))$, the intersections $D_+(x_{i_0}\\cdots x_{i_p})$ being\naffine and $\\PP^n_k$ separated over $k$. Koszul duality gives the\ndisplayed answer.",
+   "text": "First take $n=0$. The $n=0$ clause of [lem-pc-projective-space-twist-cohomology], with $A=k$, identifies $X$ with $\\operatorname{Spec}k$, every twist with a free rank-one module, and all its positive cohomology with zero. Its global sections are therefore $k$ for every $m\\in\\mathbf Z$. Also $\\omega_X=\\Lambda^0\\Omega^1_{X/k}=\\mathcal O_X$ by [def-sc-sheaf-exterior-power], and $\\mathcal O_X(-1)\\cong\\mathcal O_X$ by the same rank-one assertion. Thus the canonical-sheaf clause holds in dimension zero as well. In the remaining steps assume $n\\ge1$.",
    "uses": [
-    "sk-lem-picard-cech-computes"
+    "lem-pc-projective-space-twist-cohomology",
+    "def-sc-sheaf-exterior-power"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 01XT, label lemma-cohomology-projective-space-over-ring, proof (ordered Cech complex and exponent-vector decomposition)"
+   }
+  },
+  {
+   "text": "Use the standard cover $U_i=D_+(x_i)$, ordered by $0<\\cdots<n$. It covers $X$ because a homogeneous prime defining a point of $\\operatorname{Proj}k[x_0,\\ldots,x_n]$ cannot contain every $x_i$. Every nonempty intersection $U_J=D_+(\\prod_{j\\in J}x_j)$ is affine by [def-pc-proj]. The twist is locally free of rank one by [def-pc-projective-space-twist], hence quasi-coherent: on each chart it is the sheaf associated to the free rank-one chart module. Thus [lem-pc-cech-computes] identifies its Cech cohomology with $H^q(X,\\mathcal O(m))$. Apply [lem-pc-alternating-cech-computes] to replace the full complex by its ordered complex. Finally [lem-pc-twist-cech-monomial-decomposition], with $A=k,d=m$, identifies that complex with $\\bigoplus_{\\sum e_i=m}C_e^\\bullet$, preserving the monomial labels and the differential.",
+   "uses": [
+    "def-pc-proj",
+    "def-pc-projective-space-twist",
+    "lem-pc-cech-computes",
+    "lem-pc-alternating-cech-computes",
+    "lem-pc-twist-cech-monomial-decomposition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 01XT, label lemma-cohomology-projective-space-over-ring, proof (ordered Cech complex and exponent-vector decomposition)"
+   }
+  },
+  {
+   "text": "Apply [lem-pc-monomial-cech-complex-homology] to each exponent vector. An exponent vector with no negative entries contributes one copy of $k$ in degree zero; a vector with all entries negative contributes one copy in degree $n$; a vector with some but not all entries negative contributes nothing. Taking cohomology commutes here with the direct sum: the differential preserves each summand, so a finite-support element is a cycle exactly when each component is a cycle, and it is a boundary exactly when each component is a boundary (choose preimages for its finitely many nonzero components). Consequently $H^0$ has basis $x^e$ for $e_i\\ge0,\\sum e_i=m$, $H^n$ has basis $[x^e]$ for $e_i<0,\\sum e_i=m$, and $H^q=0$ for $q\\notin\\{0,n\\}$. These identifications are $k$-linear and the bases are $k$-bases: with $A=k$, [lem-pc-projective-space-twist-cohomology] states the same monomial descriptions as isomorphisms of $A$-modules, the degree-$n$ class of $x^e$ being that of the Cech $n$-cochain $x^e$ on $U_0\\cap\\cdots\\cap U_n$.",
+   "uses": [
+    "lem-pc-monomial-cech-complex-homology",
+    "lem-pc-projective-space-twist-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 01XT, label lemma-cohomology-projective-space-over-ring, proof (ordered Cech complex and exponent-vector decomposition)"
+   }
+  },
+  {
+   "text": "For $m\\ge0$, the degree-zero basis from the preceding step is precisely the monomial basis of $k[x_0,\\ldots,x_n]_m=S^m(V)$, with $V$ the free space on the ordered coordinates. The identification of this graded piece with the symmetric power is explicitly included in clause (i) of [lem-pc-projective-space-twist-cohomology], applied to $A=k,d=m$. This gives the claimed $H^0$ identification. For the top-degree vanishing, every surviving exponent has $e_i\\le-1$, so $m=\\sum e_i\\le-n-1$. Hence there are no such vectors if $m\\ge-n$, proving the asserted $H^n$ vanishing.",
+   "uses": [
+    "lem-pc-projective-space-twist-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 01XT, label lemma-cohomology-projective-space-over-ring, proof (ordered Cech complex and exponent-vector decomposition)"
+   }
+  },
+  {
+   "text": "If $m\\le-n-1$, set $r=-m-n-1\\ge0$. The assignment $e\\mapsto f=-e-\\mathbf1$ is a bijection from strictly negative vectors of sum $m$ to nonnegative vectors of sum $r$, with inverse $f\\mapsto-f-\\mathbf1$. The latter set is finite, since $0\\le f_i\\le r$. Send the basis vector $[x^e]$ of $H^n$ to the coordinate functional on $S^r(V)$ which is $1$ on the monomial $x^{-e-\\mathbf1}$ and $0$ on all other monomials. These are precisely the dual basis of this finite monomial basis, so the resulting linear map is an isomorphism $H^n(X,\\mathcal O(m))\\cong S^{-m-n-1}(V)^\\vee$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 01XT, label lemma-cohomology-projective-space-over-ring, proof (ordered Cech complex and exponent-vector decomposition)"
+   }
+  },
+  {
+   "text": "For the canonical-sheaf assertion with $n\\ge1$, apply [lem-pc-projective-space-canonical] with $A=k$. Its sheaf $\\omega_P$ is exactly $\\Lambda^n\\Omega^1_{X/k}$, and its stated isomorphism sends the local generator $\\eta_i=(-1)^i\\bigwedge_{j\\ne i}d(x_j/x_i)$ to the local generator of $\\mathcal O(-n-1)$. Thus it supplies the asserted canonical-bundle isomorphism, independently of the calculation of vector-space dimensions. The dimension-zero case was treated in step 1.",
+   "uses": [
+    "lem-pc-projective-space-canonical"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-thm-picard-pn/lem-pc-projective-space-canonical.md",
+    "place": "node lem-pc-projective-space-canonical, statement and local-generator formula"
+   }
+  },
+  {
+   "text": "Take $m=0$. In dimension $n\\ge1$, the only nonnegative exponent vector of sum zero is $(0,\\ldots,0)$, so $H^0(X,\\mathcal O_X)=k\\cdot1$. No strictly negative vector has sum zero, so the top group vanishes, and all other positive groups already vanish by step 3. Step 1 gives the same assertion when $n=0$. This proves $H^q(X,\\mathcal O_X)=k\\cdot\\delta_{q,0}$ for every $n\\ge0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 01XT, label lemma-cohomology-projective-space-over-ring, proof (ordered Cech complex and exponent-vector decomposition)"
+   }
   }
  ],
  "proof_deps": [
-  "sk-lem-picard-cech-computes"
+  "lem-pc-projective-space-twist-cohomology",
+  "def-sc-sheaf-exterior-power",
+  "def-pc-proj",
+  "def-pc-projective-space-twist",
+  "lem-pc-cech-computes",
+  "lem-pc-alternating-cech-computes",
+  "lem-pc-twist-cech-monomial-decomposition",
+  "lem-pc-monomial-cech-complex-homology",
+  "lem-pc-projective-space-canonical"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-thm-picard-pn/_section.md",
-  "place": "## Proof"
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 01XT, label lemma-cohomology-projective-space-over-ring, proof; completed with the cited blueprint canonical-sheaf lemma"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of twisting sheaves O(m) on projective space over a field, homogeneous polynomials in degree zero and dual homogeneous polynomials in top degree",
+   "results": "Hits: AlgebraicGeometry.Proj.zero_apply, AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf, AlgebraicGeometry.Proj, AlgebraicGeometry.Proj.one_apply, AlgebraicGeometry.Proj.awayMap_awayToSection, AlgebraicGeometry.Proj.toSheafedSpace, AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToΓ, AlgebraicGeometry.Proj.ext_iff",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ProjectiveSpace.*(cohomology|[Hh]omology)|[Hh]omology.*[Pp]rojective|[Cc]anonical.*[Pp]rojective",
+   "results": "0 hits; searched Mathlib/AlgebraicGeometry",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomology groups of line bundles on projective space over a field",
+   "results": "Hits: CategoryTheory.Sheaf.H, LinearAlgebra.Projectivization.termℙ, groupCohomology, CochainComplex.HomComplex.CohomologyClass.mk, CochainComplex.HomComplex.CohomologyClass, groupCohomology.H1, groupCohomology.inhomogeneousCochains.ext_iff, Projectivization.Subspace",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.ProjectiveSpace, SheafOfModules.H",
+   "results": "0 hits; loogle: unknown identifier 'AlgebraicGeometry.ProjectiveSpace'",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "twist|[Cc]ohomology|[Dd]ualizing",
+   "results": "0 hits; searched Mathlib/AlgebraicGeometry/ProjectiveSpectrum",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Proj, \"cohomology\"",
+   "results": "0 hits",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Serre computation of sheaf cohomology on Proj of a polynomial ring using Laurent monomials",
+   "results": "Hits: AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf, AlgebraicGeometry.Proj.toSheafedSpace, AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToΓ, AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection, AlgebraicGeometry.Proj.pow_apply, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structureSheafInType, AlgebraicGeometry.sectionInBasicOpen, AlgebraicGeometry.openToLocalization",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -68,5 +201,35 @@
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-pn",
- "lean_audit": {}
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "sk-thm-picard-pn",
+  "worker": "stage1",
+  "group": "NS",
+  "summary": "Reused the existing ordered-Cech comparison, Laurent-monomial decomposition and exponent-complex homology nodes; wrote out the finite dual-basis identification and boundary cases; reused the canonical-sheaf node. No new nodes. Replaced the irrelevant Picard-functor statement dependency by the actual definitions; preserved every original mathematical clause.",
+  "blueprint": "The unit's one proof paragraph is realized by steps 2-5 (standard affine ordered-Cech complex, exponent decomposition and explicit dual basis); steps 1, 6 and 7 supply its dimension-zero convention, canonical-sheaf clause and structure-sheaf consequence.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-cech-computes",
+    "why": "Generic affine-cover Cech comparison in the very same method required by the unit; the original sk-lem-picard-cech-computes invokes this precise form, which needs only affineness of the displayed intersections."
+   },
+   {
+    "node": "lem-pc-alternating-cech-computes",
+    "why": "Generic comparison of the full and ordered Cech complexes; needed to use the monomial complexes, and no node of this unit states this general comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-cech-computes",
+  "lem-pc-alternating-cech-computes"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NS-2b189f78a",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-2b189f78a (reviewer sub-agent of L); spot-checked: Read the item's 7 steps in full, every cited statement, and Stacks coherent.tex lemma-cohomology-projective-space-over-ring (01XT; the tag file confirms 01XS is the section) plus equation-identify. The statement is verbatim the main-20261015 blueprint text plus a conventions paragraph: no hypothesis or clause changed, n=0 and n>=1 kept as in the source. Replacing the Picard-functor stmt_dep sk-def-av-pic with the actual twist/cohomology/differentials/exterior-power definitions is correct, and sk-def-av-pic stays in uses_not_cited. Not split live or on side, no re-split note, not dropped. Step checks: (1) n=0 clause of lem-pc-projective-space-twist-cohomology plus Lambda^0=O; (2) D_+ cover, affine intersections, the twist is quasi-coherent, then cech-computes, alternating, and decomposition with A=k, d=m, n>=1; (3) three cases of the homology node, sign of the alternating differential checked, direct-sum argument; (4) clause (i), and e_i<=-1 gives m<=-n-1; (5) the bijection e -> -e-1 gives the dual basis; (6) canonical node with A=k, chart Omega agrees with def-sc-relative-differential-sheaf; (7) m=0. Small cases checked: n=1 with m=-1,-2,-3; n=2 with m=-3; the boundary m=-n; O(-2) on P^1. FIX: the item declares k-linear isomorphisms, but lem-pc-cech-computes only asserts '=', and step 5 needs k-bases. Step 3 now also cites lem-pc-projective-space-twist-cohomology (A=k), which gives the same monomial bases as A-module isomorphisms. Advisory: the general lemma, lem-pc-projective-space-serre-pairing and the canonical node together contain the item at A=k. The proof re-runs the unit's Cech route instead of citing them, which is correct but longer. The report says the pairing node was reused, but it is not cited. Accepted tool_uses: lem-pc-cech-computes and lem-pc-alternating-cech-computes, the same two comparisons Stacks uses. No SGA, no new nodes.; 1 file(s) fixed by the reviewer"
+ }
 }
