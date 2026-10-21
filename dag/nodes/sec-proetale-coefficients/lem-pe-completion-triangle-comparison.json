@@ -27,7 +27,7 @@
    }
   },
   {
-   "text": "Use the localization $Q$ at quasi-isomorphisms in [def-weil-abstract-derived-category]. The functor $QG$ inverts those arrows by step 1. Apply clause (1) of [lem-weil-pbc-localization-universal-property] to obtain $F$ and $FQ\\cong QG$. Apply clause (2) to $Q(c_M):Q\\Rightarrow QG$ to obtain $c:\\mathrm{id}\\Rightarrow F$. We use these comparison isomorphisms in the notation $F(QM)=QG(M)$ and $c_{QM}=Q(c_M)$. Full faithfulness of precomposition with $Q$, including clause (3), lets us descend identities between these transformations. This applies to the category of complexes itself; no claim that its quasi-isomorphisms have a calculus of fractions is needed.",
+   "text": "Apply Mathlib Localization.lift and Localization.fac to QG, which inverts quasi-isomorphisms. Descend Q of the strict augmentation with Localization.liftNatTrans; liftNatTrans_app gives c(QM) followed by the descent isomorphism equal to Q(a_M). These are exactly the universal-property clauses of [lem-weil-pbc-localization-universal-property] for the localization [def-weil-abstract-derived-category].",
    "uses": [
     "def-weil-abstract-derived-category",
     "lem-weil-pbc-localization-universal-property"
@@ -39,7 +39,7 @@
    }
   },
   {
-   "text": "The descended functor is additive. For complexes $M,N$, use their ordinary biproduct inclusions and projections. Both $Q$ and $G$ are additive, by [def-weil-abstract-derived-category] and the two calculus nodes, so their images under $QG$ satisfy $p_ai_b=\\delta_{ab}$ and $i_1p_1+i_2p_2=1$. Under $FQ\\cong QG$ these are exactly the images under $F$ of the biproduct diagrams for $QM,QN$. Every derived object is represented by a complex, hence $F$ preserves binary biproducts and the zero object. For arbitrary derived arrows $u,v:K\\to L$, use $u+v=\\nabla_L(u\\oplus v)\\Delta_K$. A functor preserving those biproduct diagrams carries the diagonal, codiagonal and the block diagonal map to the corresponding maps; the formula therefore gives $F(u+v)=F(u)+F(v)$.",
+   "text": "The assembled tower is additive by evaluation at every tower index and complex degree, using [lem-pe-principal-reduction-cone-calculus]. The Roos functor is additive by [lem-pe-roos-cone-calculus]. Transfer additivity across FQ ≅ QG. Factor Q through the homotopy quotient and Qh: Functor.additive_of_full_essSurj_comp descends it past the homotopy quotient, and Localization.functor_additive_iff descends it past Qh. Thus F is additive.",
    "uses": [
     "def-weil-abstract-derived-category",
     "lem-pe-principal-reduction-cone-calculus",
@@ -52,7 +52,7 @@
    }
   },
   {
-   "text": "For each integer $r$, compose $H$ of the tower shift comparison $D_\\bullet(M[r])\\cong D_\\bullet(M)[r]$ from [lem-pe-principal-reduction-cone-calculus] with the shift comparison $H(D_\\bullet(M)[r])\\cong G(M)[r]$ from [lem-pe-roos-cone-calculus]. In the four coordinates consisting of the two reduction coordinates in the product and the two in the shifted product, this composite multiplies by $(1,(-1)^r,(-1)^r,1)$. Its comparison at $r=0$ is the identity and successive comparisons at $r,s$ multiply to that at $r+s$, since $(-1)^r(-1)^s=(-1)^{r+s}$. The augmentation lies in the first coordinate, so the composite sends $c_{M[r]}$ to $c_M[r]$. Descend the natural isomorphisms and these identities by clauses (2)-(3) of [lem-weil-pbc-localization-universal-property], using the shift comparison of $Q$ in [def-weil-abstract-derived-category]. This gives coherent $\\sigma_{K,r}$ and the required equation $\\sigma_{K,r}c_{K[r]}=c_K[r]$.",
+   "text": "Assemble the supplied coherent shifts of D_n degreewise into coherent shifts of the tower, using transition compatibility from [lem-pe-principal-reduction-cone-calculus]. Compose with the Roos coherent shifts from [lem-pe-roos-cone-calculus]. Its ShiftAugmentation and AugmentationNaturality equations give a(M[r]) followed by the composite shift isomorphism equal to a(M)[r]. Mathlib Functor.commShiftOfLocalization and NatTrans.commShift_iso_hom_of_localization descend the shifts and descent isomorphism through [lem-weil-pbc-localization-universal-property]. To descend augmentation compatibility, precompose with Q and cancel the invertible Q-shift and descent maps; naturality and the two known shift equations give the desired equation.",
    "uses": [
     "lem-pe-principal-reduction-cone-calculus",
     "lem-pe-roos-cone-calculus",
@@ -66,12 +66,13 @@
    }
   },
   {
-   "text": "To compare with the specified completion, put $B_n=(\\mathcal O_E/\\pi^n)_X$. Apply [lem-pe-internal-section-tensor-comparison] to the small-site and abelian-sheaf tensor convention of [sk-def-pe-derived-completion]. Its exact equivalence preserves the relative tensor, total tensor complexes, flatness and K-flatness, so ringed-site resolutions compute the same coefficient objects, not completed coefficient sheaves. For a complex $M$, choose a quasi-isomorphism $a:P\\to M$ with $P$ K-flat and termwise flat by [lem-pc-kflat-resolution]. By [sk-def-sfb-derived-extension-of-scalars], the strict tower $T_n(P)=P\\otimes_RB_n$, with quotient transitions and augmentation $p\\mapsto p\\otimes1$, computes the derived reductions of $K=QM$. Restricting its $B_n$ action to $R$ is the termwise exact restriction in that same node. The canonical map in [sk-def-pe-derived-completion] is the one induced by these strict units, with $QP\\xrightarrow{Qa}K$ as its chosen identification.",
+   "text": "Work directly in the internal module category used by [sk-def-pe-derived-completion], with its actual tensorRight functors, quotient objects and levelUnit maps. The existing [lem-sfb-sheaf-functorial-flat-resolution] and [lem-sfb-modobj-flat-resolutions] supply functorial flat resolutions for the sheaf and internal-module categories. The adopted source CochainComplex.exists_quasiIso_flat_kFlat, attached to [lem-sfb-abstract-kflat-resolution], then supplies flat K-flat replacements in this Grothendieck monoidal category. No change of encoding to ringed-site section modules is required. For each quotient use the actual map levelUnit and the scalar action pinned sectionwise by [lem-pe-principal-reduction-cone-calculus].",
    "uses": [
-    "lem-pe-internal-section-tensor-comparison",
     "sk-def-pe-derived-completion",
-    "lem-pc-kflat-resolution",
-    "sk-def-sfb-derived-extension-of-scalars"
+    "lem-pe-principal-reduction-cone-calculus",
+    "lem-sfb-sheaf-functorial-flat-resolution",
+    "lem-sfb-modobj-flat-resolutions",
+    "lem-sfb-abstract-kflat-resolution"
    ],
    "elementary": false,
    "source": {
@@ -80,10 +81,9 @@
    }
   },
   {
-   "text": "The coefficient sequence $0\\to R\\xrightarrow{\\pi^n}R\\to B_n\\to0$ is exact by [det-pe-derived-nakayama-resolution]. Tensor it with each flat term $P^q$; the definition [def-pc-flat-sheaf-modules] says precisely that this preserves exactness. This gives a short exact sequence of complexes $0\\to P\\xrightarrow{\\pi^n}P\\to T_n(P)\\to0$. Apply [lem-pc-cone-short-exact-quasi-iso]: the chain map $\\alpha_n:D_n(P)\\to T_n(P)$, $(x,y)\\mapsto x\\otimes1$, is a quasi-isomorphism. These maps form a strict tower map: both composites from $D_{n+1}(P)$ send $(x,y)$ to $x\\otimes1$ modulo $\\pi^n$, using the transition $(x,y)\\mapsto(x,\\pi y)$ of [lem-pe-principal-reduction-cone-calculus]. Also $\\alpha_nj_n(p)=p\\otimes1$ strictly. Thus the comparison retains the augmentations and their zero homotopies, rather than only the individual derived objects.",
+   "text": "Pull the exact coefficient short complex of [det-pe-derived-nakayama-resolution] to X and transport its regular module to the tensor unit by regularPullbackIso. The canonical scalar of [lem-pe-principal-reduction-cone-calculus] equals the recorded uniformizer power by checking its action on sections. Tensoring with flat terms preserves this short exact sequence. Mathlib mappingCone.quasiIso_descShortComplex, the declaration of [lem-pc-cone-short-exact-quasi-iso], proves that its cone-to-tensor quotient map is a quasi-isomorphism for flat complexes. For an arbitrary K-flat P, replace P by a flat K-flat complex P′: scalar cones preserve that quasi-isomorphism by the cone triangles and two-out-of-three, tensorRight preserves it by MorphismProperty.whiskerRight_of_kFlat, and naturality of descShortComplex transfers the assertion to P. The coordinate formulas prove strict transition compatibility and that each j_n maps to levelUnit.",
    "uses": [
     "det-pe-derived-nakayama-resolution",
-    "def-pc-flat-sheaf-modules",
     "lem-pc-cone-short-exact-quasi-iso",
     "lem-pe-principal-reduction-cone-calculus"
    ],
@@ -94,11 +94,9 @@
    }
   },
   {
-   "text": "By [lem-pe-roos-cone-calculus], $H(\\alpha_\\bullet)$ is a quasi-isomorphism carrying $c_P$ to the zero-second-coordinate augmentation of $T_\\bullet(P)$. Countable products of these $R$-module sheaves are exact by [lem-weil-proetale-countable-products-exact], so [lem-weil-strict-roos-comparison] applies. Its augmentation clause identifies the latter map with the canonical map to total derived inverse limit. If that fibre is written in the coordinates $d(v,u)=(dv,(1-T)v-du)$ used for completion, the chain isomorphism from the negative-sign coordinates of $H$ is $(v,u)\\mapsto(v,-u)$; it fixes every zero-second-coordinate augmentation. Let $\\rho$ denote this normalized comparison from $QH(T_\\bullet(P))$ to the limit specified in [sk-def-pe-derived-completion]. Then $\\psi_M=\\rho\\,QH(\\alpha_\\bullet)\\,F(Qa)^{-1}$ is an isomorphism from $F(K)$ to that limit. Naturality of $c$ gives $F(Qa)^{-1}c_K=c_{QP}(Qa)^{-1}$; hence $\\psi_Mc_K=\\rho\\,QH(\\alpha_\\bullet)c_{QP}(Qa)^{-1}$ is exactly the specified canonical completion map. Thus completeness is equivalent to invertibility of $c_K$. This argument uses an augmented strict comparison, not the nonunique-isomorphism assertion for triangulated homotopy limits alone.",
+   "text": "Obtain CountableAB4Star for internal pro-etale module sheaves from the adopted proved Mod.epiπAppZeroOfEpi and Scheme.ProEt.epi_π_app_zero_of_epi_addCommGrpCat, hence use [lem-pe-roos-cone-calculus] on the assembled tower. Its levelwise quasi-isomorphism theorem and augmentation naturality carry the strict cone-to-tensor tower map to a quasi-isomorphism preserving augmentation. Compare that tensor tower directly with the complex roos in [sk-def-pe-derived-completion]: degreewise use the biproduct isomorphism (v,u) ↦ (v,−u), together with the product isomorphism induced by identical levels. The published differential coordinates verify it is a chain isomorphism; it fixes the zero-second-coordinate augmentation. Localize this explicit isomorphism. For any representative e:QP ≅ K, compose F(e inverse), the descent isomorphism, and this comparison. Naturality of c proves its composite with c_K is exactly completionMap. The specified isDerivedComplete_iff and existence of a flat K-flat representative then give completeness iff c_K is invertible.",
    "uses": [
     "lem-pe-roos-cone-calculus",
-    "lem-weil-proetale-countable-products-exact",
-    "lem-weil-strict-roos-comparison",
     "sk-def-pe-derived-completion"
    ],
    "elementary": false,
@@ -108,7 +106,7 @@
    }
   },
   {
-   "text": "For a chain map $f:M\\to N$, the cone comparisons in [lem-pe-principal-reduction-cone-calculus] form an isomorphism of strict towers $D_\\bullet(\\operatorname{Cone}(f))\\cong\\operatorname{Cone}(D_\\bullet(f))$, since they commute with transitions. Apply $H$ and then the cone comparison of [lem-pe-roos-cone-calculus] to obtain $\\chi_f:G(\\operatorname{Cone}(f))\\cong\\operatorname{Cone}(G(f))$. The first comparison preserves the cone inclusion and boundary after the $D$ shift comparison, and the second does so after the $H$ shift comparison. Their composite therefore satisfies $\\chi_fG(i)=i_{G(f)}$ and $p_{G(f)}\\chi_f=\\sigma_{M,1}G(p_f)$, read on complexes before localization. Additivity gives the same identity with $-p$ on both sides, as required by the cone-triangle convention. Consequently $(1,1,Q\\chi_f)$ identifies the image of the cone triangle with the cone triangle of $G(f)$. By [def-weil-abstract-derived-category] the latter is distinguished. The augmentation clauses in both calculus nodes also give $\\chi_fc_{\\operatorname{Cone}(f)}=\\operatorname{Cone}(c_M,c_N)$, so the comparison uses the specified $c$ on the third vertex.",
+   "text": "For any chain map f, evaluate at each tower index. The supplied transition-compatible cone isomorphisms from [lem-pe-principal-reduction-cone-calculus] assemble to an isomorphism D_bullet(Cone(f)) ≅ Cone(D_bullet(f)); evaluation commutes with mapping cones, their inclusion and signed boundary. The inclusion and boundary clauses of that calculus make it an isomorphism of cone triangles after using the assembled tower shift comparison. Apply the Roos mapTriangle functor and compose with its boundary-preserving cone-triangle isomorphism from [lem-pe-roos-cone-calculus]. Thus G sends each ordinary cone triangle to one isomorphic to the cone triangle of G(f). By [def-weil-abstract-derived-category], localizing the latter gives a distinguished triangle. The specified augmentation at the third vertex is the same natural augmentation already constructed; step 9 proves its triangle squares directly from naturality and shift compatibility, so no separate cone-augmentation identity is needed.",
    "uses": [
     "lem-pe-principal-reduction-cone-calculus",
     "lem-pe-roos-cone-calculus",
@@ -137,20 +135,17 @@
   "lem-pe-roos-cone-calculus",
   "def-weil-abstract-derived-category",
   "lem-weil-pbc-localization-universal-property",
-  "lem-pe-internal-section-tensor-comparison",
   "sk-def-pe-derived-completion",
-  "lem-pc-kflat-resolution",
-  "sk-def-sfb-derived-extension-of-scalars",
   "det-pe-derived-nakayama-resolution",
-  "def-pc-flat-sheaf-modules",
   "lem-pc-cone-short-exact-quasi-iso",
-  "lem-weil-proetale-countable-products-exact",
-  "lem-weil-strict-roos-comparison"
+  "lem-sfb-sheaf-functorial-flat-resolution",
+  "lem-sfb-modobj-flat-resolutions",
+  "lem-sfb-abstract-kflat-resolution"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-first-reduction.proof.md",
-  "place": "Cones paragraph and shifts sentence; explicit localization, augmented K-flat tower comparison and cone-sign argument supplied here from the cited statements and Stacks Tags 05RU, 06YS, 0152, 08TC, 07KC, 0941."
+  "place": "Cones paragraph and shifts sentence, following the same principal-cone/Roos unit route. Lean proof uses Mathlib localization and cone APIs, adopted flat K-flat resolution and internal-module repleteness, and a direct augmented sign isomorphism to the specified completion complex. No new assumptions or split-off holes."
  },
  "mathlib_searches": [
   {
@@ -274,10 +269,7 @@
  },
  "tool_uses": [
   "lem-weil-pbc-localization-universal-property",
-  "lem-pc-kflat-resolution",
-  "lem-pc-cone-short-exact-quasi-iso",
-  "lem-weil-strict-roos-comparison",
-  "lem-weil-proetale-countable-products-exact"
+  "lem-pc-cone-short-exact-quasi-iso"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -311,5 +303,15 @@
   "group": "Q01",
   "result": "pass",
   "note": "Re-delivery after RETURN (H13/H4) of head 2f89f3c9436b. The item module is byte-identical to the accepted version except the import, now Sheaf.Paper.PrincipalReductionConeCalculus. The dependency module is the live PrincipalReductionConeCalculus.lean kept byte for byte plus an appended PrincipalReductionConeData/IsCanonical/principalReductionConeData block, identical to the returned module body (the reviewer-probed option (a) layout, compiled clean). The dependency record keeps module, file and primary declaration, lists 5 old + 3 new declarations, and its statement differs from live only in whitespace and is verbatim in the file. IsCanonical (clauses under the profinite test binders) is equivalent to the original via the one-point profinite set, and D/T/j are pinned through chi. The item statement is verbatim and clause-by-clause correct (augmented psi for every K-flat P, complete iff IsIso c, CommShift compatible with c, distinguished F(T) with sigma-last arrow and the c triangle morphism). The other three stmt_deps are unchanged; no name clashes; imports exist; report sections present; no hollow definitions, no proof beyond sorry. Not compiled (no fix). Advisory: NH's original lean.note was replaced in the dependency record."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F7",
+  "result": "pass",
+  "landing": "20261021T233700-L-849332",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
