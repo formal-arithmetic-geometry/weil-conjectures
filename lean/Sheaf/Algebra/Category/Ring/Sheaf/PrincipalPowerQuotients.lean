@@ -40,7 +40,11 @@ Proof: restriction sends the generator t_U^n to t_V^n by naturality of t and
 preservation of powers by ring homomorphisms; it therefore preserves its ideal. -/
 theorem sectionPowerIdeal_restrict (n : ℕ) {U V : Cᵒᵖ} (f : U ⟶ V) :
     sectionPowerIdeal B t n U ≤
-      Ideal.comap (B.obj.map f).hom (sectionPowerIdeal B t n V) := sorry
+      Ideal.comap (B.obj.map f).hom (sectionPowerIdeal B t n V) := by
+  dsimp only [sectionPowerIdeal, id]
+  rw [Ideal.span_singleton_le_iff_mem, Ideal.mem_comap, map_pow]
+  rw [show (B.obj.map f).hom (t.val U) = t.val V from t.property f]
+  exact Ideal.subset_span (Set.mem_singleton _)
 
 /-- The actual quotient-ring restriction homomorphism.
 Source: blueprint, integral criterion reductions; Stacks 00YR
@@ -56,7 +60,14 @@ Source: blueprint, integral criterion reductions; Stacks 00YR
 (blueprint: def-pe-principal-power-ring-quotients).
 Proof: every quotient class lifts to a section; both sides send its class to itself. -/
 theorem sectionPowerQuotientMap_id (n : ℕ) (U : Cᵒᵖ) :
-    sectionPowerQuotientMap B t n (𝟙 U) = 𝟙 _ := sorry
+    sectionPowerQuotientMap B t n (𝟙 U) = 𝟙 _ := by
+  apply CommRingCat.hom_ext
+  apply RingHom.ext
+  intro x
+  obtain ⟨x, rfl⟩ := Ideal.Quotient.mk_surjective x
+  change Ideal.Quotient.mk _ ((B.obj.map (𝟙 U)).hom x) = Ideal.Quotient.mk _ x
+  rw [B.obj.map_id]
+  rfl
 
 /-- Composition of restrictions on the quotient rings.
 Source: blueprint, integral criterion reductions; Stacks 00YR
@@ -65,7 +76,15 @@ Proof: lift a quotient class to a section and apply the composition law of B. -/
 theorem sectionPowerQuotientMap_comp (n : ℕ) {U V W : Cᵒᵖ}
     (f : U ⟶ V) (g : V ⟶ W) :
     sectionPowerQuotientMap B t n (f ≫ g) =
-      sectionPowerQuotientMap B t n f ≫ sectionPowerQuotientMap B t n g := sorry
+      sectionPowerQuotientMap B t n f ≫ sectionPowerQuotientMap B t n g := by
+  apply CommRingCat.hom_ext
+  apply RingHom.ext
+  intro x
+  obtain ⟨x, rfl⟩ := Ideal.Quotient.mk_surjective x
+  change Ideal.Quotient.mk _ ((B.obj.map (f ≫ g)).hom x) =
+    Ideal.Quotient.mk _ ((B.obj.map g).hom ((B.obj.map f).hom x))
+  rw [B.obj.map_comp]
+  rfl
 
 /-- The presheaf of sectionwise principal-power quotient rings.
 Source: blueprint, integral criterion reductions; Stacks 00YR
@@ -83,7 +102,11 @@ Proof: both composites send b to the class of its restriction. -/
 theorem sectionPowerQuotientProjection_naturality (n : ℕ) {U V : Cᵒᵖ} (f : U ⟶ V) :
     B.obj.map f ≫ CommRingCat.ofHom (Ideal.Quotient.mk (sectionPowerIdeal B t n V)) =
       CommRingCat.ofHom (Ideal.Quotient.mk (sectionPowerIdeal B t n U)) ≫
-        (sectionPowerQuotientPresheaf B t n).map f := sorry
+        (sectionPowerQuotientPresheaf B t n).map f := by
+  apply CommRingCat.hom_ext
+  apply RingHom.ext
+  intro x
+  rfl
 
 /-- The sectionwise quotient projection.
 Source: blueprint, integral criterion reductions; Stacks 00YR
