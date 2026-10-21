@@ -5,7 +5,7 @@ Authors: SHEAF group H2
 -/
 module
 
-public import Sheaf.Algebra.Homology.AffineTildeTensorSourceComparisonCoreFinal
+public import Sheaf.Algebra.Homology.AffineTildePushforwardCohomologyNormalization
 public import WeilConjectures.Algebra.Homology.AffineTildeTensorSourceComparison
 
 /-! # Counit-normalized affine derived tensor source
