@@ -16,9 +16,89 @@
   "prop-weil-pbc-inverse-image-modules-exact",
   "def-weil-etale-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First prove the sheaf assertion, in fact for any sheaf $L$ of $A$-modules. By [new-lem-pur-etale-a1-pullback-full], the ordinary functor $a^*$ is full for this arbitrary scheme $S$ and commutative ring $A$. Hence there is a sheaf endomorphism $b:L\\to L$ with $u=a^*b$. Applying $i_1^*$ and using the natural identification $i_1^*a^*\\cong\\mathrm{id}$ specified in the statement gives $b=i_1^*u=1_L$. Functoriality then gives $u=a^*(1_L)=1_{a^*L}$. Only fullness was used; no claim that $i_1^*$ is faithful on all sheaves on $X$ is needed.",
+   "uses": [
+    "new-lem-pur-etale-a1-pullback-full"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A3H, lemma-sections-upstairs, connected-fibre argument, in the existing affine-line fullness node; blueprint sk-thm-dnc.proof.md, Gluing, rigidity of the ratio"
+   }
+  },
+  {
+   "text": "Choose sheaves $P$ on $X$ and $Q$ on $S$ and isomorphisms $F[-m]\\cong P[0]$, $C[-m]\\cong Q[0]$, as the hypotheses allow. Fixed-coefficient inverse image is exact by [prop-weil-pbc-inverse-image-modules-exact]. Its termwise derived functor commutes with shifts and takes $Q[0]$ to $(a^*Q)[0]$ by [lem-sf-exact-functor-derived-triangulated]. Shift every given map by $[-m]$ and conjugate with these fixed isomorphisms. Full faithfulness of the single-complex functor [lem-weil-pbc-derived-single-fully-faithful] identifies the resulting maps, their compositions and their inverses with unique ordinary sheaf maps. Thus $\\theta$ becomes an isomorphism $\\vartheta:i_1^*P\\to Q$ and $\\lambda_i$ becomes an isomorphism $l_i:P|_{X_i}\\to a_i^*(Q|_{S_i})$ normalized by $i_1^*l_i=\\vartheta|_{S_i}$. These identifications commute with restriction: termwise inverse image of a single complex is the single complex of the inverse image, also on morphisms. The supplied inverse-image compositors are used throughout. Undoing the shift is an inverse equivalence, so all sheaf equalities proved below give precisely the required derived equalities.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-weil-pbc-derived-single-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06XS, lemma-negative-exts, part (2); Tag 015F, lemma-right-derived-exact-functor; blueprint sk-thm-dnc.proof.md, opening paragraph: morphisms between these complexes are sheaf morphisms"
+   }
+  },
+  {
+   "text": "Put $S_{ij}=S_i\\times_SS_j$ and $X_{ij}=X\\times_SS_{ij}$. From the fibre-product definition of affine space [def-sbc-affine-space], $X\\times_SS_i\\cong\\mathbf A^1_{S_i}$ and $X_{ij}\\cong\\mathbf A^1_{S_{ij}}$: an arrow into either side is exactly an arrow into the new base together with an arrow into $\\operatorname{Spec}\\mathbf Z[t]$ over $\\operatorname{Spec}\\mathbf Z$. The two descriptions therefore have the same projections and the same section $t=1$. By [lem-weil-pbc-etale-covering-base-change], the $X_i\\to X$ form an etale covering family, and pulling the $S_i\\to S$ back to any $S_j$ again gives an etale cover. Consequently all the restrictions and overlaps used below are small-etale restrictions and the argument of Step 1 applies with base $S_{ij}$.",
+   "uses": [
+    "def-sbc-affine-space",
+    "lem-weil-pbc-etale-covering-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+    "place": "Gluing, base change to S_i times_S S_j"
+   }
+  },
+  {
+   "text": "On $X_{ij}$ write $l_i,l_j$ for the two restrictions, using the prescribed compositors, and form $r_{ij}=l_j\\circ l_i^{-1}$, an automorphism of $a_{ij}^*(Q|_{S_{ij}})$. Normalization gives $i_1^*r_{ij}=\\vartheta|_{S_{ij}}\\circ(\\vartheta|_{S_{ij}})^{-1}=1$. Step 1 over $S_{ij}$ gives $r_{ij}=1$, whence $l_j=r_{ij}l_i=l_i$. Their inverses agree too: multiply $l_j=l_i$ on the left by $l_j^{-1}$ and on the right by $l_i^{-1}$. These are equalities of sheaf maps, hence also of the original derived maps by Step 2.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+    "place": "Gluing, the two normalized local isomorphisms differ by an automorphism, which is the identity"
+   }
+  },
+  {
+   "text": "Apply [lem-amb-etale-sheaf-hom-family-gluing] to the sheaves $P,a^*Q$, the covering family $X_i\\to X$ of Step 3, and the maps $l_i$ of Step 4. Its compatibility condition on every etale object $W$ mapping to two cover members holds: the two arrows give an arrow $W\\to X_{ij}$ by the fibre-product universal property, and restricting $l_i=l_j$ along it gives exactly the required equality with the canonical localization identifications. This yields a unique sheaf map $k:P\\to a^*Q$ restricting to every $l_i$. Apply the same node to the inverse maps to obtain $h:a^*Q\\to P$. Both $hk$ and $1_P$ restrict to $1_{P|_{X_i}}$, and both $kh$ and $1_{a^*Q}$ restrict to $1_{(a^*Q)|_{X_i}}$; the uniqueness clause of the gluing node gives $hk=1_P$ and $kh=1_{a^*Q}$. Thus $k$ is an isomorphism. Step 2 returns an isomorphism $\\kappa:F\\to a^*C$ with all the required restrictions.",
+   "uses": [
+    "lem-amb-etale-sheaf-hom-family-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EM, lemma-internal-hom, via Sites Tag 04TQ, lemma-glue-maps; blueprint sk-thm-dnc.proof.md, Gluing, glue maps and inverses"
+   }
+  },
+  {
+   "text": "The sheaf maps $i_1^*k$ and $\\vartheta$ on $S$ restrict to the same map on every $S_i$, since $k|_{X_i}=l_i$ and the latter were normalized. Uniqueness in [lem-amb-etale-sheaf-hom-family-gluing], now on the cover $S_i\\to S$, gives $i_1^*k=\\vartheta$, hence $i_1^*\\kappa=\\theta$. For any other normalized global isomorphism $\\kappa'$, Step 2 turns its ratio $\\kappa'\\kappa^{-1}$ into a sheaf automorphism of $a^*Q$ whose restriction along $i_1$ is the identity. Step 1 gives that ratio equal to the identity, so $\\kappa'=\\kappa$ without assuming any local restriction for $\\kappa'$. Any other normalized local comparison on any cover equals the restriction of $\\kappa$ by the same ratio argument over its base. This proves independence of both comparisons and cover. If $S$ is empty, the gluing node explicitly allows its empty cover, and the same uniqueness statements apply. For $A=0$ all module sheaves are zero and the argument still applies; no step used a nonzero coefficient, reduced base, invertible exponent, or finite-type hypothesis.",
+   "uses": [
+    "lem-amb-etale-sheaf-hom-family-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+    "place": "Gluing, unique isomorphism normalized at t=1; explicit global uniqueness and degenerate cases"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-affine-space",
+  "lem-amb-etale-sheaf-hom-family-gluing",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "lem-weil-pbc-etale-covering-base-change",
+  "new-lem-pur-etale-a1-pullback-full",
+  "prop-weil-pbc-inverse-image-modules-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+  "place": "Opening paragraph and Gluing, expanded using existing ordinary-etale affine-line fullness (Stacks 0A3H), derived fully faithful single complexes (06XS), exact functors (015F), and sheaf-map gluing (03EM/04TQ)."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,10 +134,45 @@
    "results": "[grep] OK 0 hit(s)\n",
    "date": "2026-10-21",
    "verdict": "no match: hits do not state the section-family assertion; general algebra, sheaf or mate infrastructure only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Shifted rank one etale sheaves on affine line with local isomorphisms to a base pullback glue uniquely when normalized at t equals one",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (f : X ⟶ Y) → Y.presheaf ⟶ AlgebraicGeometry.Scheme.Hom.normalizationDiagram f\", \"doc\": \"A morphism from the presheaf of a scheme $ Y $ to the normalization diagram associated with a morphism $ f $, which encodes the integral closure data of $ Y $ in the context of the morphism $ f $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalization.hom_ext\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {T : AlgebraicGeometry.Scheme}\\n  (f₁ f₂ : AlgebraicGeometry.Scheme.Hom.normalization f ⟶ T) (g : T ⟶ Y) [AlgebraicGeometry.IsAffineHom g],\\n  CategoryTheory.Categor\", \"doc\": \"Given two morphisms from the normalization of a scheme morphism $ f: X \\to Y $ to a scheme $ T $, if there exists an affine morphism $ g: T \\to Y $ such that both morphisms compose with $ g $ to yield t\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → CategoryTheory.Functor Y.Opensᵒᵖ CommRingCat\", \"doc\": \"The functor assigns to each open subset $ U $ of $ Y $ the integral closure of the ring of sections $ \\\\Gamma(Y, U) $ in $ \\\\Gamma(X, f^{-1}(U)) $, and to each inclusion $ V \\\\subseteq U $ the induced ri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization\\n    ((AlgebraicGeometry.Scheme.AffineZariskiSite.toOpensFunctor Y).op.comp\\n      (AlgebraicGeometry.Scheme.Hom.no\", \"doc\": \"For a scheme morphism $ f $, the normalization diagram functor $ F $ equipped with a natural transformation $ \\\\alpha: \\\\mathcal{O}_Y \\\\Rightarrow F $ satisfies the localization condition: for every affi\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.homOverEquiv\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"{n : Type v} →\\n  (S : AlgebraicGeometry.Scheme) →\\n    {X : AlgebraicGeometry.Scheme} →\\n      [inst : X.Over S] → { f // AlgebraicGeometry.Scheme.Hom.IsOver f S } ≃ (n → ↑(X.presheaf.obj (Opposite.op ⊤)))\", \"doc\": \"For any scheme $ S $ and any scheme $ X $ over $ S $, there is a natural equivalence between morphisms from $ X $ to the affine space $ \\\\mathbb{A}^n_S $ over $ S $ and $ n $-tuples of global sections \"}\n  {\"name\": \"StandardEtalePair.homEquiv\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] → (P : StandardEtalePair R) → (P.Ring →ₐ[R] S) ≃ { x // P.HasMap x }\", \"doc\": \"For a commutative ring $R$, a standard étale pair $P=(f,g)$ over $R$, and a commutative $R$-algebra $S$, there is a natural equivalence:\\\\n$$ \\\\operatorname{Hom}_{R\\\\text{-alg}}(P.\\\\text{Ring}, S) \\\\cong \\\\\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (i : I) (s : ↑((D.obj i).pr\", \"doc\": \"Given a cofiltered diagram of affine schemes with a limit cone, if a global section of the structure sheaf of some object in the diagram maps to zero under the projection to the limit, then there exis\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"(n : Type v) →\\n  {X : AlgebraicGeometry.Scheme} →\\n    (X ⟶\\n        AlgebraicGeometry.Spec\\n          { carrier := MvPolynomial n (ULift.{u, 0} ℤ), commRing := MvPolynomial.instCommRingMvPolynomial }) ≃\\n      (n → ↑(X.presheaf.obj (Opposite.op ⊤)))\", \"doc\": \"There is a natural equivalence between the set of morphisms from a scheme $ X $ to the affine space $ \\\\mathbb{A}^n_\\\\mathbb{Z} $ (realized as $ \\\\operatorname{Spec}(\\\\mathbb{Z}[x_1, \\\\dots, x_n]) $) and t\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: normalization-diagram, structure-sheaf pullback, condensed locally constant, and topological sheaf-gluing hits do not state the fixed-coefficient ordinary-etale normalized descent assertion; the etale-base-change hit is an existing reused leaf."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Automorphism of pullback of locally constant rank one module sheaf on affine line is identity if identity at unit section",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackId\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"(X : AlgebraicGeometry.Scheme) →\\n  AlgebraicGeometry.Scheme.Modules.pullback (CategoryTheory.CategoryStruct.id X) ≅ CategoryTheory.Functor.id X.Modules\", \"doc\": \"The pullback functor induced by the identity morphism on a scheme $X$ is naturally isomorphic to the identity functor on the category of sheaves of modules over $X$. This follows from the adjunction b\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackId_hom\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme),\\n  (CategoryTheory.conjugateEquiv CategoryTheory.Adjunction.id\\n        (AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction (CategoryTheory.CategoryStruct.id X)))\\n      (AlgebraicGeometry.Scheme.Modules.pullbackId X).hom =\\n    (AlgebraicGeometry.Scheme.Mod\", \"doc\": \"For the identity morphism on a scheme $X$, the conjugate equivalence associated with the pullback-pushforward adjunction relates the natural transformation from the pullback identity functor to the in\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_left_unitality\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometry.Scheme.Modules.pullbackComp f (CategoryTheory.CategoryStruct.id Y)).inv\\n      (CategoryTheory.CategoryStruct.comp\\n        (CategoryTheory.Functor.whiskerRight (AlgebraicGeometry.Scheme.Modul\", \"doc\": \"For any morphism $ f : X \\\\to Y $ of schemes, the pullback functor applied to the composition of $ f $ with the identity morphism on $ Y $ is naturally isomorphic to the pullback functor applied direct\"}\n  {\"name\": \"SheafOfModules.pullbackId\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (S : CategoryTheory.Sheaf J RingCat) →\\n        SheafOfModules.pullback (CategoryTheory.CategoryStruct.id S) ≅ CategoryTheory.Functor.id (SheafOfModules S)\", \"doc\": \"The pullback functor induced by the identity functor on a category of sheaves of modules, along the identity natural transformation of the structure sheaf, is naturally isomorphic to the identity func\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometry.Scheme.Modules.pullbackComp (CategoryTheory.CategoryStruct.id X) f).inv\\n      (CategoryTheory.CategoryStruct.comp\\n        ((AlgebraicGeometry.Scheme.Modules.pullback f).whiskerLeft (Algebrai\", \"doc\": \"For a scheme $X$, the pullback functor induced by the identity morphism $\\\\mathrm{id}_X : X \\\\to X$ is naturally isomorphic to the identity functor on the category of sheaves of modules over $X$. This n\"}\n  {\"name\": \"PresheafOfModules.pullbackId\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    (S : CategoryTheory.Functor Cᵒᵖ RingCat) →\\n      PresheafOfModules.pullback (CategoryTheory.CategoryStruct.id S) ≅ CategoryTheory.Functor.id (PresheafOfModules S)\", \"doc\": \"The pullback functor associated to the identity functor and identity natural transformation is naturally isomorphic to the identity functor on the category of presheaves of modules over a presheaf of \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapId_hom_τl\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ (x : CategoryTheory.LocallyDiscrete AlgebraicGeometry.Schemeᵒᵖ),\\n  (AlgebraicGeometry.Scheme.Modules.pseudofunctor.mapId x).hom.τl =\\n    CategoryTheory.NatTrans.toCatHom₂ (AlgebraicGeometry.Scheme.Modules.pullbackId (Opposite.unop x.as)).hom\", \"doc\": \"For the pseudofunctor from the opposite category of schemes to module adjunctions, the coherence isomorphism for identity morphisms corresponds to the natural isomorphism between the pullback of the i\"}\n  {\"name\": \"SheafOfModules.pullbackObjFreeIso\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: normalization-diagram, structure-sheaf pullback, condensed locally constant, and topological sheaf-gluing hits do not state the fixed-coefficient ordinary-etale normalized descent assertion; the etale-base-change hit is an existing reused leaf."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, LocallyConstant",
+   "results": "[loogle] OK 7 hit(s)\n  {\"name\": \"CompHausLike.LocallyConstant.functor_obj_obj_obj\", \"module\": \"Mathlib.Condensed.Discrete.LocallyConstant\", \"type\": \" (P : TopCat → Prop) [CompHausLike.HasExplicitFiniteCoproducts P] [CompHausLike.HasExplicitPullbacks P] (hs : ∀ ⦃X Y : CompHausLike P⦄ (f : X ⟶ Y), CategoryTheory.EffectiveEpi f → Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom f)) (X : Type (max u w)) (x✝ : (CompHausLike P)ᵒᵖ) : ((CompHau\", \"doc\": \"\"}\n  {\"name\": \"CompHausLike.LocallyConstant.functor_obj_obj_map\", \"module\": \"Mathlib.Condensed.Discrete.LocallyConstant\", \"type\": \" (P : TopCat → Prop) [CompHausLike.HasExplicitFiniteCoproducts P] [CompHausLike.HasExplicitPullbacks P] (hs : ∀ ⦃X Y : CompHausLike P⦄ (f : X ⟶ Y), CategoryTheory.EffectiveEpi f → Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom f)) (X : Type (max u w)) {X✝ Y✝ : (CompHausLike P)ᵒᵖ} (f : X✝ \", \"doc\": \"\"}\n  {\"name\": \"CompHausLike.LocallyConstant.functor_map_hom_app\", \"module\": \"Mathlib.Condensed.Discrete.LocallyConstant\", \"type\": \" (P : TopCat → Prop) [CompHausLike.HasExplicitFiniteCoproducts P] [CompHausLike.HasExplicitPullbacks P] (hs : ∀ ⦃X Y : CompHausLike P⦄ (f : X ⟶ Y), CategoryTheory.EffectiveEpi f → Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom f)) {X✝ Y✝ : Type (max u w)} (f : X✝ ⟶ Y✝) (x✝ : (CompHausLike\", \"doc\": \"\"}\n  {\"name\": \"CompHausLike.LocallyConstant.counit_app_hom_app_hom_apply\", \"module\": \"Mathlib.Condensed.Discrete.LocallyConstant\", \"type\": \" (P : TopCat → Prop) [∀ (S : CompHausLike P) (p : ↑S.toTop → Prop), CompHausLike.HasProp P (Subtype p)] [CompHausLike.HasProp P PUnit.{u + 1}] [CompHausLike.HasExplicitFiniteCoproducts P] [CompHausLike.HasExplicitPullbacks P] (hs : ∀ ⦃X Y : CompHausLike P⦄ (f : X ⟶ Y), CategoryTheory.EffectiveEpi f \", \"doc\": \"\"}\n  {\"name\": \"CompHausLike.LocallyConstantModule.functor_obj_obj_obj_carrier\", \"module\": \"Mathlib.Condensed.Discrete.Module\", \"type\": \" {P : TopCat → Prop} (R : Type (max u w)) [Ring R] [CompHausLike.HasExplicitFiniteCoproducts P] [CompHausLike.HasExplicitPullbacks P] (hs : ∀ ⦃X Y : CompHausLike P⦄ (f : X ⟶ Y), CategoryTheory.EffectiveEpi f → Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom f)) (X : ModuleCat R) (x✝ : (Com\", \"doc\": \"\"}\n  {\"name\": \"CompHausLike.LocallyConstantModule.functor_obj_obj_map_hom_apply_apply\", \"module\": \"Mathlib.Condensed.Discrete.Module\", \"type\": \" {P : TopCat → Prop} (R : Type (max u w)) [Ring R] [CompHausLike.HasExplicitFiniteCoproducts P] [CompHausLike.HasExplicitPullbacks P] (hs : ∀ ⦃X Y : CompHausLike P⦄ (f : X ⟶ Y), CategoryTheory.EffectiveEpi f → Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom f)) (X : ModuleCat R) {X✝ Y✝ : (\", \"doc\": \"\"}\n  {\"name\": \"CompHausLike.LocallyConstantModule.functor_map_hom_app_hom_apply_apply\", \"module\": \"Mathlib.Condensed.Discrete.Module\", \"type\": \" {P : TopCat → Prop} (R : Type (max u w)) [Ring R] [CompHausLike.HasExplicitFiniteCoproducts P] [CompHausLike.HasExplicitPullbacks P] (hs : ∀ ⦃X Y : CompHausLike P⦄ (f : X ⟶ Y), CategoryTheory.EffectiveEpi f → Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom f)) {X✝ Y✝ : ModuleCat R} (f : X\", \"doc\": \"\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: normalization-diagram, structure-sheaf pullback, condensed locally constant, and topological sheaf-gluing hits do not state the fixed-coefficient ordinary-etale normalized descent assertion; the etale-base-change hit is an existing reused leaf."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Shifted rank one etale sheaves on affine line with local isomorphisms to a base pullback glue uniquely when normalized at t equals one",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"TopCat.Presheaf.isSheaf_iff_isSheafUniqueGluing\", \"module\": \"Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing\", \"type\": \": F.IsSheaf ↔ F.IsSheafUniqueGluing\", \"doc\": \"For a presheaf $\\\\mathcal{F}$ on a topological space $X$, the sheaf condition is equivalent to the unique gluing condition, i.e., $\\\\mathcal{F}$ is a sheaf if and only if for every open set $U \\\\subseteq\"}\n  {\"name\": \"TopCat.Presheaf.IsSheafUniqueGluing\", \"module\": \"Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing\", \"type\": \": Prop\", \"doc\": \"For a presheaf $\\\\mathcal{F}$ on a topological space $X$, given any open cover $\\\\{U_i\\\\}_{i \\\\in I}$ of an open set $U \\\\subseteq X$ and a family of sections $s_i \\\\in \\\\mathcal{F}(U_i)$ that are compatible\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \"(U : Opens (PrimeSpectrum.Top R)) (s : (structureSheaf R).1.obj (op U)) {ι : Type*} (t : Finset ι) (a h : ι → R)\\n  (iDh : ∀ i : ι, PrimeSpectrum.basicOpen (h i) ⟶ U) (h_cover : U ≤ ⨆ i ∈ t, PrimeSpectrum.basicOpen (h i))\\n  (hs :\\n    ∀ i : ι,\\n      (const R (a i) (h i) (PrimeSpectrum.basicOpen (h i))\", \"doc\": \"Given an open set $ U $ in the prime spectrum $ \\\\operatorname{Spec}(R) $ of a commutative ring $ R $, a section $ s $ of the structure sheaf over $ U $, and a finite cover of $ U $ by basic open sets \"}\n  {\"name\": \"TopCat.Sheaf.interUnionPullbackConeLift\", \"module\": \"Mathlib.Topology.Sheaves.SheafCondition.PairwiseIntersections\", \"type\": \": s.pt ⟶ F.1.obj (op (U ⊔ V))\", \"doc\": \"For a sheaf $F$ on a topological space and open sets $U, V$, let $s$ be a pullback cone over the diagram $F(U) \\\\to F(U \\\\cap V) \\\\leftarrow F(V)$. Such a cone represents a pair of compatible sections ov\"}\n  {\"name\": \"TopCat.Presheaf.isSheaf_iff_isSheafUniqueGluing_types\", \"module\": \"Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing\", \"type\": \": F.IsSheaf ↔ F.IsSheafUniqueGluing\", \"doc\": \"For a presheaf $\\\\mathcal{F}$ on a topological space $X$, given any open set $U \\\\subseteq X$ with an open cover $\\\\{U_i\\\\}_{i \\\\in I}$ and a family of sections $s_i \\\\in \\\\mathcal{F}(U_i)$ that are compatib\"}\n  {\"name\": \"TopCat.Presheaf.isSheaf_of_isSheafUniqueGluing_types\", \"module\": \"Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing\", \"type\": \"(Fsh : F.IsSheafUniqueGluing) : F.IsSheaf\", \"doc\": \"If a presheaf $\\\\mathcal{F}$ on a topological space $X$ satisfies the unique gluing condition - that for every open set $U \\\\subseteq X$, every open cover $\\\\{U_i\\\\}$ of $U$, and every family of compatibl\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \": IsStableUnderBaseChange @IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"TopCat.Sheaf.pullbackIso\", \"module\": \"Mathlib.Topology.Sheaves.Functors\", \"type\": \"(f : X ⟶ Y) : pullback A f ≅ forget A Y ⋙ Presheaf.pullback A f ⋙ presheafToSheaf _ _\", \"doc\": \"For a continuous map $ f: X \\to Y $ between topological spaces, the sheaf pullback $ f^* $ defined via left Kan extension and sheafification is naturally isomorphic to the composition of the forgetful \"}",
+   "date": "2026-10-21",
+   "verdict": "no match: normalization-diagram, structure-sheaf pullback, condensed locally constant, and topological sheaf-gluing hits do not state the fixed-coefficient ordinary-etale normalized descent assertion; the etale-base-change hit is an existing reused leaf."
+  },
+  {
+   "tool": "grep",
+   "query": "(locally[Cc]onstant|[Ll]ocally[Cc]onstant).*(automorph|[Ee]ndomorph)|[Aa]ffine[Ll]ine.*[Ss]heaf",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-21",
+   "verdict": "no match: normalization-diagram, structure-sheaf pullback, condensed locally constant, and topological sheaf-gluing hits do not state the fixed-coefficient ordinary-etale normalized descent assertion; the etale-base-change hit is an existing reused leaf."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-finite-ring-section-deformation",
@@ -79,5 +194,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-trf-etale-shifted-line-normalized-descent",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Split into six steps with no new nodes: ordinary-etale affine-line fullness gives section rigidity, exact inverse image and fully faithful single complexes reduce to sheaves, cover base change provides overlaps, ratios agree, maps and inverses glue, and arbitrary normalized global comparisons are unique. No finiteness or invertibility condition on the base is introduced.",
+  "blueprint": "lem-trf-local-term-locality proof (1)-(2), normal-cone specialization, through the existing finite-ring section-deformation ancestor; specifically sk-thm-dnc.proof.md opening paragraph and Gluing. Step 1 uses the existing general connected-fibre fullness result in place of reintroducing a scalar-rigidity node; Steps 2-6 realize shift reduction, overlap ratios and gluing in that same deformation route.",
+  "tool_uses": [
+   {
+    "node": "new-lem-pur-etale-a1-pullback-full",
+    "why": "Generic ordinary-etale affine-line fullness for every scheme and commutative ring supplies the connected-fibre rigidity input; no trace-unit node gives this arbitrary-base statement."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic exact fixed-coefficient etale inverse image is needed to reduce shifted comparisons to sheaf maps; this is coefficient infrastructure, not an alternative trace or purity proof."
+   },
+   {
+    "node": "lem-amb-etale-sheaf-hom-family-gluing",
+    "why": "Generic unique gluing of ordinary-etale module sheaf maps along an arbitrary cover, including empty covers, supplies descent and equality detection. No trace-unit node states this general sheaf-map fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "new-lem-pur-etale-a1-pullback-full",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-amb-etale-sheaf-hom-family-gluing"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q122-fa5fa4abc",
+  "group": "Q122",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q122-fa5fa4abc (reviewer sub-agent of L); spot-checked: First split, no new nodes. The statement is identical to the live base, where the item is unsplit with an empty proof; there is no re-split note, and neither the item nor any cited node is on the dropped list. The item contains no SGA source. All 7 cited nodes exist. The 6 steps carry the blueprint sk-thm-dnc.proof.md Gluing argument (lines 39-46) in full. Step 1: a^* is full (new-lem-pur-etale-a1-pullback-full), so u = a^*b, and b = i_1^*u = 1. That tool is true for every scheme S and every ring by Stacks Tag 0A3H: A^1_S->S is flat and affine, its geometric fibres are connected, and these hypotheses survive etale base change, so applying the lemma to the Hom sheaf gives a_*a^{-1} = id. The Lean declaration etale_a1_pullback_full has no extra hypotheses. Step 2: reduction to single complexes uses exact inverse image, 015F and 06XS(2), with faithfulness covering compositions and inverses. Step 3: affine-line base change, and the X_i form an etale covering. Step 4: the ratio on X_ij is normalized, so it is the identity. Step 5: lem-amb family gluing (Stacks 04TQ); the compatibility on W factors through X_ij, the inverses glue too, and uniqueness gives hk = 1 and kh = 1. Step 6: normalization holds by uniqueness of gluing on the S_i. Global uniqueness and independence of comparisons and cover come from the ratio argument plus Step 1. Edge cases checked: empty S, A = 0, nonreduced and non-quasi-compact S. Not a duplicate: lem-pur-a1-pullback-endomorphism-rigidity is the pro-etale version, and prop-pur-dnc-family-constancy is a finite-type purity application. The 3 generic tool_uses (a1 fullness, exact inverse image, sheaf-map family gluing) are accepted as infrastructure, not a new route. No fixes."
  }
 }
