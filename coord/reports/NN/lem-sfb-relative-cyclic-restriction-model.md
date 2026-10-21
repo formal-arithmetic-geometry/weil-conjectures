@@ -1,0 +1,65 @@
+## Worker report
+
+Files written:
+- `dag/nodes/sec-six-functors-basics/lem-sfb-relative-cyclic-restriction-model.json`: statement, split in 17 steps; Mathlib no match.
+- `citations.json`: a verbatim quotation of the cited statement for each step/node pair.
+
+## New nodes
+
+None. There are zero new Mathlib leaves. The split uses 29 existing dependencies. The generic exact-induction argument and evaluation map are written out as elementary steps, rather than made into extra nodes. No unit, chapter, repository file, launcher file or Lean source was changed. No compiler or Lake command was run.
+
+## Attachments
+
+None. Searches in `lean/WeilConjectures/` for the blueprint id, cyclic invariants, partial invariants and residual actions found no declaration stating this item. The isolated residual-action occurrence in `EtaleCohomology/Purity/RealSheaves/LocalSystems.lean` concerns geometric Frobenius, not relative condensed derived invariants. The existing Mathlib hits concern `Rep k G` for an ordinary ring and abstract group, not internal modules over a condensed ring with continuous condensed-group actions.
+
+## Literature wanted
+
+WANTED: a reference for the combined relative rank-one cyclic comparison, exact forgetting of a residual condensed action, and normalization by evaluation at a chosen generator, for lem-sfb-relative-cyclic-restriction-model. The blueprint paragraph (3) gives the geometric context only. The proof is consequently marked agent-origin. No SGA source is used.
+
+## Audit and corrections
+
+The imported item was an unsplit auxiliary theorem with no Lean declaration or proof steps. Its statement has been retained verbatim; no hypothesis or conclusion was changed. I checked the current chapter, unit record and main-20261015 direct-images proof paragraph (3). This formal cyclic calculation is below the open direct-image input; it does not replace a geometric step of the unit or claim an additional blueprint theorem.
+
+I searched the whole blueprint using `blueprint_refs.py search` for `cyclic restriction`, `residual`, and `lattice`, and the DAG by the same concepts, exact induction, and bar/derived comparison. The search hits in other chapters did not state this theorem. `blueprint_refs.py ancestor` reports a null nearest ancestor, which the inherited blueprint record already contains. I filled the precise source place and retained that null ancestor and its via chain. In particular the existing lattice, action-site, bar-model and derived-mate nodes were reused, not restated as new nodes.
+
+The four new Mathlib searches were run through the mandated msearch.py command and copied from searches.jsonl with exactly their query text and actual output summaries. LeanFinder and LeanSearch give two different conceptual phrasings; Loogle and grep provide the other search kinds. I read the hits and the source in Mathlib/RepresentationTheory/Homological/GroupCohomology/Basic.lean (ordinary-ring Rep cochains and explicit TODO concerning profinite cohomology), Functoriality.lean (cochainsMap from line 52), FiniteCyclic.lean (resolution at line 241) and GroupCohomology/FiniteCyclic.lean (degree-zero formula at line 72). They neither supply this internal condensed theorem nor the specified relative normalization.
+
+The standard inputs were checked in the local Stacks sources, with tags verified in tags/tags: sites-modules.tex Tag 03EV, label lemma-j-shriek-flat; homology.tex Tag 0133, label lemma-double-complex-gives-resolution, including its row variant; derived.tex Tags 05TH and 05TI, labels lemma-injective-acyclic and lemma-enough-injectives-right-derived; and Tag 013P, label lemma-morphisms-lift. The proof uses the existing DAG statements carrying these inputs, not an uncited invocation of their proofs.
+
+A distinction that required care is that degree-zero normalization alone does not uniquely characterize an isomorphism of derived functors. Step 10 instead fixes the comparison by its equation on the entire derived-functor unit, and step 12 explicitly chooses the scalar witness furnished by the lattice existence theorem to be this same construction. It does not conclude uniqueness from H^0. The existing lattice node is used in step 9 only for what its statement says: existence of an isomorphism whose composite with invariants is the invariant inclusion. This is enough to prove the cyclic row is acyclic on injectives.
+
+Another repaired point is that the resolution of the trivial H-module R does not itself have trivial H-action termwise. Step 16 accordingly uses the action-dependent equation (d_h m)(tau) = tau*m - m; only the source underived bar of R has zero degree-zero differential.
+
+Nothing remains unfinished in the stage-1 split. The whole theorem still depends on its existing DAG inputs, which stage 1 is allowed to cite without proving them here.
+
+## Not duplicates
+
+No new node is proposed. In particular the profinite split-coset induction node was not applied to G times the discrete infinite cyclic group; step 4 proves the simpler free-tensor adjunction directly from flatness of R[G]. The existing rank-one lattice node and the explicit compatible bar model are cited for separate parts of their actual statements.
+
+## Review by NN
+
+I read the unchanged item, its statement dependencies, each proof dependency's statement and the cited local sources with the node files open. This is my own check of the split, not a claim of independent review. I checked delivery-errors B through E as follows.
+
+Steps 1 and 2 use the action-site presentation, which explicitly covers arbitrary small sheaves of groups and creates kernels and cokernels. This matters for J = Z_disc, because the product-action-inflation theorem only states the profinite case. The small-site Grothendieck theorem and the enough-injectives theorem supply existence; the fixed-section submodule and the two adjunction transpose formulas are written out. All topological groups are converted to sheaves by the specified continuous-section construction. There is no assumption that G times Z_disc is profinite.
+
+Step 3 uses exact-functor cohomology and derived-factorization statements precisely for cohomology and the canonical shift-compatible derived functor. The elementary detection argument is that U creates kernels and cokernels, hence reflects zero cohomology; an acyclic complex is zero in the localization, and a triangle with zero cone has invertible first arrow. It establishes conservativity in the ordinary unbounded derived category, rather than assuming that the derived forgetful functor is faithful. No equality of derived arrows later in the proof is inferred from conservativity alone.
+
+Step 4 uses Tag 03EV through its existing node: G is a profinite site object, and the free sheaf R[G] is j_G!R_G by the same universal property. Tensoring it is therefore exact. The formulas at [1] and [g] prove the adjunction with forgetting directly, respecting the commuting J-action. The exact-left-adjoint theorem then applies to U_J and U_0 and proves preservation of injectives. The tensor-Hom node supplies the closed sheaf-module tensor used in this construction. This is a few-line construction from flatness and universal properties, not an uncited subgroup-induction theorem.
+
+Step 5 cites the bounded-below resolution and derived-adjunction nodes for their actual scope. In the mate-model node the two left adjoints are exact trivial-J inflations, the upper functor is the identity on G-actions, and the lower functor is exact restriction along 1_G times u. Its statement does not require that this restriction preserve injectives; the equation quoted in the step holds on arbitrary complexes. The specified invariant-inclusion transpose fixes degree zero. Canonical derived-adjunction shift compatibility controls the actual shift and triangle-boundary comparisons.
+
+Step 6 uses the resolution-naturality theorem before cohomology. Forgetting sends an injective resolution to an injective resolution by step 4 and identifies the invariant submodule and its inclusion literally. Substitution in the mate equation gives the scalar derived restriction equation. Uniqueness of the derived-unit comparison then gives equality of transformations, not just matching H^0.
+
+Steps 7 and 8 give the complete two-summand differential, homotopy, shift and cone maps. I checked d^2 = 0, the homotopy sign (h,-h), the shift sign on the second summand, and the minus sign on the cone-source summand of cyclic degree one. Those are the calculations needed to preserve the negative cone projection in the project's derived-category convention. Total comparison is applied only to a first-quadrant complex after translating a common lower bound, with the indicated sign change. No infinite diagonal total is used.
+
+Step 9 uses exactly the invariant-normalization clause of the scalar lattice theorem at r = 1, then the derived-unit theorem on an injective object. The scalar injectivity hypothesis follows from step 4; it is not inferred from exactness alone. Thus the actual invariant-inclusion map into the two-term row is a quasi-isomorphism. No complex-version theorem is extracted from a module-only statement.
+
+Step 10 cites total comparison for the augmented rows and spells out index interchange and the sign (-1)^(ab). The natural inclusion on complexes factors uniquely through the right-derived functor by the universal property in the cited node. Its components are isomorphisms on injective representatives, hence everywhere. Step 11 records the entire roof, and the cone-resolution naturality node states explicitly that cones remain bounded-below termwise injective and augmentation cone maps are quasi-isomorphisms. Together with the coordinate calculation this verifies all the triangle arrows. Step 12 then identifies the same roofs after forgetting; it explicitly fixes a common witness for the existential scalar lattice comparison and avoids the false uniqueness inference from degree zero alone.
+
+Steps 13 and 14 were checked against the actual ringed-topos statements. The geometric-restriction node applies to the projection of group sheaves as well as the homomorphism 1_G times u. Its inverse image is projection inflation, whose right adjoint is the partial invariants already constructed. Scalar change on the identity underlying action topos is a ringed-topos morphism. The composition and adjunction-normalization statements therefore give the scalar comparison isomorphism with no flatness assumption. Both coefficient/restriction composites have the same explicit counit transpose. I tightened step 14 during this check: the inverse scalar comparison is the derived mate of L_R s = s L_R', so the mate-model equation proves d alpha_R(sI') = s alpha_R'(I'). Its horizontal functors are exact scalar restrictions. Scalar-restricted rows remain exact, but their terms are never declared injective. Cancellation of the actual row and unit maps proves the coefficient square for lambda and hence for c.
+
+Steps 15 through 17 use the explicit model statement of internal-bar-roof-adjunction, not a construction hidden in its proof. That statement explicitly identifies D^(p,q), its signed total, the map b representing eta, and the degree-zero-resolution map representing j. The ordinary derived-bar theorem supplies the invariant-normalized isomorphism. The evaluation map is precomposition by the section [tau], which exists for every u; its horizontal chain equation is tau*m-m and the two vertical signs agree. On b it is precisely invariant inclusion. Finally E j = K(a) epsilon is equality of chain maps, with components checked in degree zero, degree one, and every degree at least two. The derived-mate equation is used on the resolution even though its restriction need not be injective. Cancelling K(a) proves the requested equality, without substituting continuous functions for derived internal Hom.
+
+For small cases I checked the zero ring and zero module, G = 1, H = 1, the zero homomorphism u, a nontrivial commuting residual G-action, and complexes beginning in a negative degree. If H = 1 or u = 0, tau = 1, the cyclic differential is zero, but beta need not be an isomorphism; the proof does not require it. Evaluation at the identity on the unnormalized bar is still a chain map and the equality remains valid after localization. For G = 1 the forgetting comparisons become identities. The direct-sum total has only two cyclic columns, so arbitrary lower bounds cause no convergence or size problem.
+
+There are no new statements to check for B1–B9, no hollow definitions, no source/target weakening, no clause relabelled as a new lemma, and no uncited SGA result. I checked every step for C1 and C4 and kept proof_deps equal to the union of uses. Every citation quote in citations.json is the full verbatim existing statement, allowing the independent reviewer to see its hypotheses as well as the clause used. All proof steps are under 2000 characters. Generic off-unit categorical results are declared as tool uses in split_report rather than changing a maintainer-owned tool_uses field.

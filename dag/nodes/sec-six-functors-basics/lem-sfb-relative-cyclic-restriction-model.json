@@ -18,9 +18,272 @@
   "lem-sfb-discrete-lattice-koszul-resolution",
   "lem-sfb-condensed-derived-invariant-bar"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\mathcal M_R$ for internal modules. Identify them with section-ring module sheaves by [def-weil-pbc-internal-abelian-sheaf-module-equivalence]. Apply [lem-sfb-internal-action-site-presentation] to the group sheaves $\\underline G$, $\\underline J$ and $\\underline G\\times\\underline J$, for $J=H,\\mathbf Z_{\\mathrm{disc}}$. They are sheaves: continuous maps glue along finite profinite quotient covers (for the discrete target their finite-image clopen fibers glue). The action sites are small in the fixed coefficient universe. The presentation and [lem-pur-ringed-site-grothendieck-abelian] make all the action categories Grothendieck abelian. In particular [lem-sp-grothendieck-enough-injectives] applies, including to $G\\times\\mathbf Z$, which is not profinite.",
+   "uses": [
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "lem-sfb-internal-action-site-presentation",
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "lem-sp-grothendieck-enough-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: relative cyclic calculation below the tame-boundary input; agent expansion, not a claim that the blueprint states this auxiliary result."
+   }
+  },
+  {
+   "text": "For projection inflation $L_J^G:\\mathcal A_G(R)\\to\\mathcal A_{G\\times J}(R)$, the underlying module and map do not change, so it is exact by the kernel/cokernel assertion of [lem-sfb-internal-action-site-presentation]. The sections fixed by $J$ after every base change form a submodule sheaf, stable under $G$ because the two actions commute. A map $L_J^G M\\to N$ is equivariant exactly when its image lies in that submodule; restriction of its codomain and composition with its inclusion are inverse transposes. This proves $L_J^G\\dashv\\Gamma_J^G$ with the required normalization, also for discrete $J$. For profinite $J$ this is precisely the datum of [lem-sfb-condensed-product-action-inflation].",
+   "uses": [
+    "lem-sfb-internal-action-site-presentation",
+    "def-sfb-condensed-action-module",
+    "lem-sfb-condensed-product-action-inflation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: relative cyclic calculation below the tame-boundary input; agent expansion, not a claim that the blueprint states this auxiliary result."
+   }
+  },
+  {
+   "text": "Let $U_J:\\mathcal A_{G\\times J}(R)\\to\\mathcal A_J(R)$ forget $G$, and $U_0:\\mathcal A_G(R)\\to\\mathcal M_R$. They create kernels and cokernels by the action-site presentation, and reflect zero objects and isomorphisms: the inverse of an equivariant isomorphism is equivariant. They are exact, so descend to triangulated functors on the ordinary derived categories. Exactness gives $H^n(UK)=U H^n(K)$. Thus $UK=0$ implies all $H^n(K)=0$ and $K\\to0$ is a quasi-isomorphism, so $K=0$. Applying this to the cone triangle of a morphism shows that derived $U$ is conservative as well. This argument has no boundedness restriction.",
+   "uses": [
+    "lem-sfb-internal-action-site-presentation",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: relative cyclic calculation below the tame-boundary input; agent expansion, not a claim that the blueprint states this auxiliary result."
+   }
+  },
+  {
+   "text": "There is an exact left adjoint to $U_J$, namely $F_G(M)=R[\\underline G]\\otimes_R M$, with $G$ translating the free generators and $J$ acting on $M$. Indeed $[g]\\otimes m\\mapsto g f(m)$ and evaluation at $[1]\\otimes m$ are inverse adjunction formulas, valid after every profinite base change. Here $R[\\underline G]=j_{G!}R_G$: both are the sheafification of the free module on maps into the profinite test object $G$. It is flat by [lem-pc-sites-modules-j-shriek-flat], so $F_G$ is exact. The same construction with $J=1$ gives an exact left adjoint to $U_0$. Therefore both $U_J$ and $U_0$ preserve injectives by [lem-sp-right-adjoint-preserves-injectives]. This does not use induction along a non-profinite subgroup.",
+   "uses": [
+    "lem-pc-sites-modules-j-shriek-flat",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "lem-sfb-internal-action-site-presentation",
+    "lem-sp-right-adjoint-preserves-injectives"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EV, lemma-j-shriek-flat; elementary free-module adjunction with commuting action."
+   }
+  },
+  {
+   "text": "Use bounded-below termwise injective resolutions on the small action sites [lem-sc-bounded-below-injective-resolution], and the normalized derived functors and units $\\alpha_J^G$ of [lem-weil-pbc-right-derived-plus-injective]. The exact adjunctions of step 2 induce canonical derived adjunctions [lem-trf-bounded-below-derived-adjunction]. Put $V=\\operatorname{Res}_{1_G\\times u}$. Restriction is exact and $V L_H^G=L_{\\mathbf Z}^G$. Take the derived mate of this identity square. This defines $\\beta^G$. Its model equation, by [lem-trf-bounded-below-derived-mate-model], is\n$$\\beta^G_{QP}\\alpha^G_{H,P}=\\alpha^G_{\\mathbf Z,VP}\\,Q(\\iota_P),$$\nwhere $\\iota_P:\\Gamma_H^G P\\to\\Gamma_{\\mathbf Z}^G VP$ is the invariant inclusion, termwise. In particular its degree-zero map is the claimed inclusion. The canonical derived adjunctions commute with canonical shifts [lem-sp-canonical-right-derived-adjunction-shift]; the mate, expressed as unit, identity and counit, consequently commutes with shifts and image-triangle boundaries.",
+   "uses": [
+    "lem-sc-bounded-below-injective-resolution",
+    "lem-weil-pbc-right-derived-plus-injective",
+    "lem-trf-bounded-below-derived-adjunction",
+    "lem-trf-bounded-below-derived-mate-model",
+    "lem-sp-canonical-right-derived-adjunction-shift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: relative cyclic calculation below the tame-boundary input; agent expansion, not a claim that the blueprint states this auxiliary result."
+   }
+  },
+  {
+   "text": "For every bounded-below injective complex $I$ in $\\mathcal A_{G\\times J}(R)$, step 4 makes $U_J I$ a bounded-below injective complex. The equality $U_0\\Gamma_J^G I=\\Gamma_{R,J}U_J I$ is equality of fixed-section submodules, with identical inclusion maps. The derived resolution comparisons [lem-sp-derived-injective-resolution-naturality] therefore give a natural isomorphism\n$$D(U_0)R\\Gamma_J^G\\cong R\\Gamma_{R,J}D(U_J).$$\nFor $\\beta$, apply its model equation in step 5 to $I$. Under these identifications it is the invariant-inclusion model equation for the canonical scalar restriction of [lem-sfb-condensed-derived-restriction-calculus]; uniqueness in [lem-weil-pbc-right-derived-plus-injective] identifies the transformations. This establishes equality of the actual derived arrows, not just of their degree-zero cohomology.",
+   "uses": [
+    "lem-sp-derived-injective-resolution-naturality",
+    "lem-sfb-condensed-derived-restriction-calculus",
+    "lem-weil-pbc-right-derived-plus-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: relative cyclic calculation below the tame-boundary input; agent expansion, not a claim that the blueprint states this auxiliary result."
+   }
+  },
+  {
+   "text": "The two-column total is explicitly\n$$K^G(N)^n=N^n\\oplus N^{n-1},\\qquad d(x,y)=(d_Nx,(T-1)x-d_Ny).$$\nThe actions commute, hence $T-1$ and this differential are $G$-equivariant. Squaring $d$ gives zero because $d_NT=Td_N$. A chain map acts on both summands; a chain homotopy $h$ gives the total homotopy $(h,-h)$, since the horizontal cross terms cancel. Each column functor is the underlying-module functor and is exact. Consequently a quasi-isomorphism of bounded-below inputs gives a columnwise quasi-isomorphism and hence a total quasi-isomorphism by [lem-sc-first-quadrant-total-column-comparison]. To apply the first-quadrant statement, shift the common vertical lower bound to zero and multiply column $a$ by the resulting constant sign $(-1)^{a b}$. Thus $QK^G$ descends to $D^+$.",
+   "uses": [
+    "def-sp-double-complex-total",
+    "lem-sfb-internal-action-site-presentation",
+    "lem-sc-first-quadrant-total-column-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: relative cyclic calculation below the tame-boundary input; agent expansion, not a claim that the blueprint states this auxiliary result."
+   }
+  },
+  {
+   "text": "The shift comparison $K^G(N[s])\\to K^G(N)[s]$ is $(x,y)\\mapsto(x,(-1)^s y)$. For a chain map $f:A\\to B$, reorder the summands of $K^G C(f)$ to those of $C(K^G f)$ and multiply each source-cone summand in cyclic degree $a$ by $(-1)^a$. Direct substitution in $d(x,y)$ gives a chain isomorphism. It is the identity on the target inclusion and agrees on the negative cone projection with the displayed shift comparison. Thus it identifies all three arrows of the cone triangles, in the convention $C(f)\\xrightarrow{-p}A[1]$ of [def-weil-abstract-derived-category]. Since distinguished triangles are images of cone triangles up to isomorphism, this makes $QK^G$ triangulated.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-sp-double-complex-total"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: relative cyclic calculation below the tame-boundary input; agent expansion, not a claim that the blueprint states this auxiliary result."
+   }
+  },
+  {
+   "text": "If $I$ is injective in $\\mathcal A_{G\\times\\mathbf Z}(R)$, then $U_{\\mathbf Z}I$ is injective by step 4. Apply [lem-sfb-discrete-lattice-koszul-resolution] with $r=1$ to $U_{\\mathbf Z}I$. Its invariant normalization says that the composite\n$$(U_{\\mathbf Z}I)^{\\mathbf Z}[0]\\longrightarrow[U_{\\mathbf Z}I\\xrightarrow{T-1}U_{\\mathbf Z}I]\\xrightarrow{\\lambda_R}R\\Gamma_{\\mathbf Z}(U_{\\mathbf Z}I)$$\nis the canonical derived-unit map. That last map is invertible on injectives by [lem-weil-pbc-right-derived-plus-injective]. Hence the first arrow is a quasi-isomorphism. It is the forgotten form of $\\Gamma_{\\mathbf Z}^G I[0]\\to K^G(I)$, which is therefore a quasi-isomorphism by step 3. Only the stated existence and invariant-normalization clause of the scalar lattice node is used here.",
+   "uses": [
+    "lem-sfb-discrete-lattice-koszul-resolution",
+    "lem-weil-pbc-right-derived-plus-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: relative cyclic calculation below the tame-boundary input; agent expansion, not a claim that the blueprint states this auxiliary result."
+   }
+  },
+  {
+   "text": "For a bounded-below injective complex $I$, apply step 9 in every vertical degree. The row augmentations assemble to\n$$b_I:\\Gamma_{\\mathbf Z}^G I\\longrightarrow K^G(I).$$\nIt is a quasi-isomorphism by total comparison [lem-sc-first-quadrant-total-column-comparison]. For the row version interchange indices and conjugate the total differential by $(-1)^{a b}$; this is $1$ on each augmentation axis. A lower vertical bound is removed as in step 7. The inclusion in cyclic degree zero defines a natural map $Q\\Gamma_{\\mathbf Z}^G\\to QK^G$ on bounded-below complexes. By the universal property in [lem-weil-pbc-right-derived-plus-injective] it uniquely induces\n$$\\theta^G:R\\Gamma_{\\mathbf Z}^G\\longrightarrow QK^G,\\qquad \\theta^G_{QP}\\alpha^G_{\\mathbf Z,P}=Q(b_P).$$\nOn $I$, both $\\alpha_I$ and $Q(b_I)$ are invertible, so $\\theta_I$ is invertible. Every derived object has such a resolution; naturality proves $\\theta^G$ is an isomorphism everywhere. Define $\\lambda^G=(\\theta^G)^{-1}$.",
+   "uses": [
+    "lem-sc-first-quadrant-total-column-comparison",
+    "lem-weil-pbc-right-derived-plus-injective",
+    "lem-sc-bounded-below-injective-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: relative cyclic calculation below the tame-boundary input; agent expansion, not a claim that the blueprint states this auxiliary result."
+   }
+  },
+  {
+   "text": "Here is the full normalization, which also controls naturality: for any resolution $a:N\\to I$,\n$$\\lambda^G_N=\\alpha^G_{\\mathbf Z,I}\\,Q(b_I)^{-1}\\,Q(K^G a),$$\nfollowed by the inverse of $R\\Gamma_{\\mathbf Z}^G(Qa)$ on its target. The equation defining $\\theta$ makes this independent of all choices by the derived-unit universal property. For a cone diagram, use the cone of a map of specified injective resolutions: it is again bounded below and termwise injective, and its augmentation is a quasi-isomorphism by [lem-sp-derived-injective-resolution-naturality]. The row inclusions $b$ commute with the cone and shift identifications of step 8. On these injective models the derived units are the normalized comparisons and their shifts are canonical [lem-sp-canonical-right-derived-adjunction-shift]. The displayed formula therefore makes $\\lambda^G$ a shift-compatible natural isomorphism of triangulated functors, retaining the negative cone boundary convention. On a module its map from invariants is exactly the invariant inclusion. Set $c_N^G=(\\lambda_N^G)^{-1}\\beta_N^G$.",
+   "uses": [
+    "lem-weil-pbc-right-derived-plus-injective",
+    "lem-sp-derived-injective-resolution-naturality",
+    "lem-sp-canonical-right-derived-adjunction-shift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: relative cyclic calculation below the tame-boundary input; agent expansion, not a claim that the blueprint states this auxiliary result."
+   }
+  },
+  {
+   "text": "Forgetting $G$ leaves $K$, $b$ and every differential unchanged and takes a chosen injective resolution to an injective resolution. Thus the formula of step 11 becomes the scalar rank-one comparison, and step 6 takes $c^G$ to its scalar composite with restriction. More precisely, the rank-one existence theorem [lem-sfb-discrete-lattice-koszul-resolution] may and here does use the witness obtained by this same row-augmentation construction with $G=1$; it satisfies its stated naturality and normalization. We do not infer uniqueness of a derived isomorphism from its degree-zero map alone. The strengthened equation $\\theta\\alpha=Qb$ fixes the comparison on all bounded-below complexes. All forgetting comparisons commute with shifts and boundaries because they identify the actual resolution and cone diagrams.",
+   "uses": [
+    "lem-sfb-discrete-lattice-koszul-resolution",
+    "lem-sp-derived-injective-resolution-naturality",
+    "lem-weil-pbc-right-derived-plus-injective"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: relative cyclic calculation below the tame-boundary input; agent expansion, not a claim that the blueprint states this auxiliary result."
+   }
+  },
+  {
+   "text": "Let $\\varphi:R\\to R'$ and $f:N\\to s_{G\\times J}N'$ be an equivariant coefficient map. The action topoi of [lem-sfb-action-topos-geometric-restriction] apply to the group-sheaf projection $G\\times J\\to G$: its module pullback is $L_J^G$ and its direct image is $\\Gamma_J^G$. On these topoi scalar restriction is direct image along the identity geometric morphism with ring map $\\varphi$. The commuting scalar/projection square gives, by [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] and its adjunction normalization [lem-sfb-ringed-derived-monoidal-comparisons], a canonical isomorphism\n$$d_J:R\\Gamma_J^{G,R}s_{G\\times J}\\xrightarrow{\\sim}s_G R\\Gamma_J^{G,R'}.$$\nDefine the coefficient map as $d_J R\\Gamma_J^{G,R}(f)$. This uses derived scalar-extension adjunctions, not exactness of ordinary scalar extension. For restriction along $1_G\\times u$, both paths around the coefficient square transpose to the same map $V L_H^G R\\Gamma_H^G N\\xrightarrow{V\\varepsilon_H}VN\\xrightarrow{Vf}VsN'$. Mate pasting [lem-weil-pbc-mate-pasting] proves equality. The same pasting with forgetting gives the coefficient compatibility of step 6.",
+   "uses": [
+    "lem-sfb-action-topos-geometric-restriction",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: relative cyclic calculation below the tame-boundary input; agent expansion, not a claim that the blueprint states this auxiliary result."
+   }
+  },
+  {
+   "text": "For the cyclic coefficient square, let $N'\\to I'$ be a bounded-below injective resolution over $R'$. Every augmented cyclic row for $I'$ is a quasi-isomorphism by step 9; scalar restriction is exact and leaves that row and $T-1$ unchanged, so the same is true for $sI'$, without claiming its terms are injective over $R$. Therefore $Q(b_{sI'})$ is invertible by step 10's row-total argument. The identity $K_R(sI')=s_GK_{R'}(I')$ identifies these row maps. By adjunction normalization in step 13, $d_{\\mathbf Z}^{-1}$ is the derived mate of the identity $L_{\\mathbf Z}^{G,R}s_G=s_{G\\times\\mathbf Z}L_{\\mathbf Z}^{G,R'}$. Apply [lem-trf-bounded-below-derived-mate-model], whose two horizontal functors here are exact scalar restrictions. Its model equation gives $d_{\\mathbf Z}\\alpha_R(sI')=s_G\\alpha_{R'}(I')$. Since $\\theta_R\\alpha_R(sI')=Q(b_{sI'})$ is invertible, $\\alpha_R(sI')$ is invertible as well. Thus the defining equations $\\theta\\alpha=Qb$ on this common acyclic model give $s_G\\lambda_{R'}=d_{\\mathbf Z}\\lambda_R$ under the termwise coefficient identification. Compose with $f$ and naturality to obtain the general coefficient square. Scalar comparisons commute with canonical shifts by [lem-weil-pbc-derived-adjunction-shift]; hence the squares for $\\beta,\\lambda,c$ also preserve triangle boundaries.",
+   "uses": [
+    "lem-sc-first-quadrant-total-column-comparison",
+    "lem-weil-pbc-right-derived-plus-injective",
+    "lem-trf-bounded-below-derived-mate-model",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-weil-pbc-derived-adjunction-shift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: relative cyclic calculation below the tame-boundary input; agent expansion, not a claim that the blueprint states this auxiliary result."
+   }
+  },
+  {
+   "text": "It remains to prove the bar identity, now with $G=1$ and $N=R$ having trivial $H$-action. Choose a nonnegative equivariant injective resolution $a:R[0]\\to I$. Use the explicit compatible bar model in [lem-sfb-internal-bar-roof-adjunction], which spells out the normalization of [lem-sfb-condensed-derived-invariant-bar]:\n$$D^{p,q}=\\underline{\\operatorname{Hom}}_R(R[\\underline H^p],UI^q),\\quad d_{\\mathrm{Tot}}=d_h+(-1)^p d_I.$$\nIts invariant-inclusion map $b_H:\\Gamma_H I\\to\\operatorname{Tot}D$ represents $\\eta$; the map $V^\\bullet\\to\\operatorname{Tot}D$ induced by $a$ in resolution degree zero represents $j$. These are exactly statements of the cited model node, not an assumption that $V$ computes derived invariants. All diagonals here are finite because both indices are nonnegative.",
+   "uses": [
+    "lem-sfb-internal-bar-roof-adjunction",
+    "lem-sfb-condensed-derived-invariant-bar",
+    "def-sp-double-complex-total"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: relative cyclic calculation below the tame-boundary input; agent expansion, not a claim that the blueprint states this auxiliary result."
+   }
+  },
+  {
+   "text": "Define $E:\\operatorname{Tot}D\\to K^1(VI)$, where $V$ now denotes restriction along $u$, by the identity on $D^{0,q}=UI^q$, evaluation at $\\tau$ from $D^{1,q}$ to cyclic degree $1$ and vertical degree $q$, and zero for $p\\geq2$. Evaluation is an internal module morphism: it is precomposition with $R\\to R[\\underline H]$, $1\\mapsto[\\tau]$, and so is natural after every profinite base change. The only horizontal chain equation needing a check is\n$$(d_h m)(\\tau)=\\tau m-m=(T-1)m.$$\nThere is no target in cyclic degree two. Vertical differentials commute with evaluation and both totals use $(-1)^p$ in column $p=0,1$, so $E$ is a cochain map. Moreover $Eb_H$ is the invariant inclusion $\\Gamma_H I\\to K^1(VI)$, in cyclic degree zero. This calculation uses the action-dependent bar differential even though the original coefficient module $R$ was trivial: the resolution terms need not have trivial action.",
+   "uses": [
+    "lem-sfb-internal-bar-roof-adjunction",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "def-sp-double-complex-total"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: relative cyclic calculation below the tame-boundary input; agent expansion, not a claim that the blueprint states this auxiliary result."
+   }
+  },
+  {
+   "text": "Put $k=K^1(Va):[R\\xrightarrow0R]\\to K^1(VI)$; it is a quasi-isomorphism by step 7 and exactness of restriction. Steps 5 and 10 give, on the resolution $I$,\n$$c_R^1=Q(k)^{-1}Q(Eb_H).$$\nIndeed the derived-mate equation for $\\beta$ followed by $\\theta\\alpha=Qb$ gives precisely the invariant inclusion into $K^1(VI)$; no injectivity of $VI$ is needed. With $\\eta=Q(b_H)$ in the chosen model, cancellation yields $c_R^1\\eta^{-1}j=Q(k)^{-1}Q(E)j$. On complexes, $E$ applied to the representative of $j$ is $k\\epsilon$: in degree zero it is $a$, in degree one it is $a$ after evaluation at $\\tau$, and in all higher degrees it is zero. Hence the last expression is $Q(\\epsilon)$. The map $\\epsilon$ is a cochain map since $R$ has trivial action and $d_h^0=0$. No invertibility of $\\beta$ was used or obtained.",
+   "uses": [
+    "lem-trf-bounded-below-derived-mate-model",
+    "lem-weil-pbc-right-derived-plus-injective",
+    "lem-sfb-internal-bar-roof-adjunction",
+    "lem-sfb-condensed-derived-invariant-bar"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: relative cyclic calculation below the tame-boundary input; agent expansion, not a claim that the blueprint states this auxiliary result."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-sfb-internal-action-site-presentation",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-sp-grothendieck-enough-injectives",
+  "def-sfb-condensed-action-module",
+  "lem-sfb-condensed-product-action-inflation",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "def-weil-abstract-derived-category",
+  "lem-pc-sites-modules-j-shriek-flat",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-sp-right-adjoint-preserves-injectives",
+  "lem-sc-bounded-below-injective-resolution",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "lem-trf-bounded-below-derived-adjunction",
+  "lem-trf-bounded-below-derived-mate-model",
+  "lem-sp-canonical-right-derived-adjunction-shift",
+  "lem-sp-derived-injective-resolution-naturality",
+  "lem-sfb-condensed-derived-restriction-calculus",
+  "def-sp-double-complex-total",
+  "lem-sc-first-quadrant-total-column-comparison",
+  "lem-sfb-discrete-lattice-koszul-resolution",
+  "lem-sfb-action-topos-geometric-restriction",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-derived-adjunction-shift",
+  "lem-sfb-internal-bar-roof-adjunction",
+  "lem-sfb-condensed-derived-invariant-bar"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct image; agent expansion of exact forgetting, the rank-one lattice row comparison and explicit bar evaluation. Stacks Tags 03EV, 0133, 05TH and 05TI supply cited categorical ingredients only; exact combined reference WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -49,10 +312,66 @@
    "results": "{\"t\": \"2026-10-21T19:39:11Z\", \"tool\": \"leanfinder\", \"query\": \"The canonical derived restriction from topological group invariants to infinite cyclic invariants has the two term generator minus one model and commutes with forgetting residual actions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"groupCohomology.H1InfRes_X₁\", \"groupCohomology.H1InfRes_f\", \"groupCohomology.H1InfRes_g\", \"groupCohomology.H1InfRes_X₂\", \"groupCohomology.H1InfRes\", \"groupCohomology.H1InfRes_X₃\", \"groupCohomology.infNatTrans_app\", \"Rep.FiniteCyclicGroup.normHomCompSub\"], \"digest\": \"6b41d6a69248697e\"}",
    "date": "2026-10-21",
    "verdict": "no match: abstract Rep inflation-restriction and finite cyclic resolutions do not state derived partial invariants with an internal condensed residual action, its conservative forgetting comparison, and the specified bar-evaluation normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived invariants of internal group actions computed by a finite free resolution with residual commuting action",
+   "results": "{\"t\": \"2026-10-21T19:58:58Z\", \"tool\": \"leanfinder\", \"query\": \"Derived invariants of internal group actions computed by a finite free resolution with residual commuting action\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"groupCohomology\", \"groupCohomology.H1InfRes_X₁\", \"groupCohomology.H1InfRes_X₃\", \"groupCohomology.H1InfRes\", \"groupCohomology.H1\", \"groupCohomology.subtype_comp_d₀₁_apply\", \"groupCohomology.H0\", \"groupCohomology.H2\"], \"digest\": \"8c2d3ebe639c17c2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary abstract-group representations over an ordinary ring or finite cyclic groups; none gives internal condensed-ring partial invariants, the relative cyclic derived comparison and its bar normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"invariants\"",
+   "results": "{\"t\": \"2026-10-21T19:58:59Z\", \"tool\": \"loogle\", \"query\": \"\\\"rightDerived\\\", \\\"invariants\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary abstract-group representations over an ordinary ring or finite cyclic groups; none gives internal condensed-ring partial invariants, the relative cyclic derived comparison and its bar normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "(invariant|Cohomology).*(residual|cyclic|forget)|(residual|cyclic|forget).*(invariant|Cohomology)",
+   "results": "{\"t\": \"2026-10-21T19:58:59Z\", \"tool\": \"grep\", \"query\": \"(invariant|Cohomology).*(residual|cyclic|forget)|(residual|cyclic|forget).*(invariant|Cohomology)\", \"sub\": \"Condensed\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary abstract-group representations over an ordinary ring or finite cyclic groups; none gives internal condensed-ring partial invariants, the relative cyclic derived comparison and its bar normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Infinite cyclic group derived fixed points mapping cone generator minus identity internal modules",
+   "results": "{\"t\": \"2026-10-21T19:59:00Z\", \"tool\": \"leansearch\", \"query\": \"Infinite cyclic group derived fixed points mapping cone generator minus identity internal modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsCyclic.exponent_eq_zero_of_infinite\", \"Representation.FiniteCyclicGroup.coinvariantsKer_eq_range\", \"Rep.FiniteCyclicGroup.leftRegular.range_applyAsHom_sub_eq_ker_norm\", \"Rep.FiniteCyclicGroup.groupHomologyIso₀\", \"Rep.FiniteCyclicGroup.leftRegular.range_applyAsHom_sub_eq_ker_linearCombination\", \"Rep.FiniteCyclicGroup.resolution\", \"Rep.FiniteCyclicGroup.groupCohomologyIso₀\", \"IsCyclic\"], \"digest\": \"b7f0b02a8d3f47ae\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary abstract-group representations over an ordinary ring or finite cyclic groups; none gives internal condensed-ring partial invariants, the relative cyclic derived comparison and its bar normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived invariants of internal group actions computed by a finite free resolution with residual commuting action",
+   "results": "{\"t\": \"2026-10-21T19:58:58Z\", \"tool\": \"leanfinder\", \"query\": \"Derived invariants of internal group actions computed by a finite free resolution with residual commuting action\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"groupCohomology\", \"groupCohomology.H1InfRes_X₁\", \"groupCohomology.H1InfRes_X₃\", \"groupCohomology.H1InfRes\", \"groupCohomology.H1\", \"groupCohomology.subtype_comp_d₀₁_apply\", \"groupCohomology.H0\", \"groupCohomology.H2\"], \"digest\": \"8c2d3ebe639c17c2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary abstract-group representations over an ordinary ring or finite cyclic groups; none gives internal condensed-ring partial invariants, the relative cyclic derived comparison and its bar normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"invariants\"",
+   "results": "{\"t\": \"2026-10-21T19:58:59Z\", \"tool\": \"loogle\", \"query\": \"\\\"rightDerived\\\", \\\"invariants\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary abstract-group representations over an ordinary ring or finite cyclic groups; none gives internal condensed-ring partial invariants, the relative cyclic derived comparison and its bar normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "(invariant|Cohomology).*(residual|cyclic|forget)|(residual|cyclic|forget).*(invariant|Cohomology)",
+   "results": "{\"t\": \"2026-10-21T19:58:59Z\", \"tool\": \"grep\", \"query\": \"(invariant|Cohomology).*(residual|cyclic|forget)|(residual|cyclic|forget).*(invariant|Cohomology)\", \"sub\": \"Condensed\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary abstract-group representations over an ordinary ring or finite cyclic groups; none gives internal condensed-ring partial invariants, the relative cyclic derived comparison and its bar normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Infinite cyclic group derived fixed points mapping cone generator minus identity internal modules",
+   "results": "{\"t\": \"2026-10-21T19:59:00Z\", \"tool\": \"leansearch\", \"query\": \"Infinite cyclic group derived fixed points mapping cone generator minus identity internal modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsCyclic.exponent_eq_zero_of_infinite\", \"Representation.FiniteCyclicGroup.coinvariantsKer_eq_range\", \"Rep.FiniteCyclicGroup.leftRegular.range_applyAsHom_sub_eq_ker_norm\", \"Rep.FiniteCyclicGroup.groupHomologyIso₀\", \"Rep.FiniteCyclicGroup.leftRegular.range_applyAsHom_sub_eq_ker_linearCombination\", \"Rep.FiniteCyclicGroup.resolution\", \"Rep.FiniteCyclicGroup.groupCohomologyIso₀\", \"IsCyclic\"], \"digest\": \"b7f0b02a8d3f47ae\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary abstract-group representations over an ordinary ring or finite cyclic groups; none gives internal condensed-ring partial invariants, the relative cyclic derived comparison and its bar normalization."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-ind-unipotent-procyclic-difference",
@@ -64,7 +383,7 @@
  "blueprint": {
   "from": {
    "node": null,
-   "place": "Paragraph (3), open direct image; scalar analytic base, nilpotent extension devissage and filtered passage below the polynomial translation acyclicity input. Relative cyclic restriction model and forgetting the residual action",
+   "place": "Paragraph (3), open direct image: relative cyclic restriction and residual-action forgetting below the tame-boundary analytic condensed calculation; explicit rank-one row augmentation and bar evaluation at the chosen generator.",
    "via": [
     "lem-sfb-ind-unipotent-procyclic-difference",
     "lem-sfb-polynomial-translation-acyclic",
@@ -80,5 +399,114 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-relative-cyclic-restriction-model",
+  "worker": "stage1",
+  "summary": "Unchanged statement, split in seventeen explicit steps using existing nodes only. Constructed exact induction for forgetting, derived restriction as a normalized mate, the cyclic total and its normalized right-derived comparison, coefficient compatibility and the bar-evaluation identity on an injective double-complex model. No continuous-cochain acyclicity, non-profinite split-coset induction or degree-zero uniqueness assertion is used.",
+  "blueprint": "The direct-images proof paragraph (3) supplies the open-image context, not this auxiliary theorem. Steps 1–6 supply relative restriction/forgetting, 7–14 the cyclic model and canonical comparisons, 15–17 the evaluation normalization. Whole-blueprint searches for cyclic restriction, residual and lattice found no node stating the item; the inherited nearest blueprint ancestor is null, as blueprint_refs.py ancestor confirms.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-ringed-site-grothendieck-abelian",
+    "why": "General small ringed-site Grothendieck property applied to the existing action-site presentation; no replacement in this unit."
+   },
+   {
+    "node": "lem-sp-grothendieck-enough-injectives",
+    "why": "General enough-injectives theorem for the action categories; a categorical tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-complex-cohomology",
+    "why": "Exact forgetting commutes with cohomology and reflects acyclicity; generic abelian-category tool."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Exact forgetting descends with canonical shifts to the ordinary derived category; generic localization tool."
+   },
+   {
+    "node": "lem-pc-sites-modules-j-shriek-flat",
+    "why": "Flatness of the free sheaf on the profinite test object G gives exact induction; no other unit route is substituted."
+   },
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "Tensor and internal Hom adjunction used for the explicit free-induction formula and evaluation; general ringed-site tool."
+   },
+   {
+    "node": "lem-sp-right-adjoint-preserves-injectives",
+    "why": "Exact induction implies that forgetting preserves injectives; generic adjunction tool."
+   },
+   {
+    "node": "lem-sc-bounded-below-injective-resolution",
+    "why": "Bounded-below resolutions on the small action sites; generic resolution tool."
+   },
+   {
+    "node": "lem-weil-pbc-right-derived-plus-injective",
+    "why": "Universal property and normalized unit of bounded-below right derived functors; needed to fix actual comparison arrows."
+   },
+   {
+    "node": "lem-trf-bounded-below-derived-adjunction",
+    "why": "Canonical bounded-below derived adjunction with its specified units and counits; no trace-formula theorem is used."
+   },
+   {
+    "node": "lem-trf-bounded-below-derived-mate-model",
+    "why": "Generic equation computing derived mates on arbitrary complexes; required since restriction need not preserve injectives."
+   },
+   {
+    "node": "lem-sp-canonical-right-derived-adjunction-shift",
+    "why": "The existing canonical shifts commute with derived adjunction units and counits; general categorical normalization."
+   },
+   {
+    "node": "lem-sp-derived-injective-resolution-naturality",
+    "why": "Actual derived-object comparisons and cone-resolution naturality; no cohomology-only identification is sufficient."
+   },
+   {
+    "node": "lem-sc-first-quadrant-total-column-comparison",
+    "why": "Finite-diagonal comparison after shifting a lower bound, and its signed row variant; generic double-complex tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Canonical scalar/projection right-derived composition on action topoi, without assuming a flat ring map."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic categorical input to the stated proof; the unit has no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Coefficient, restriction and forgetting squares commute by transposing the specified counit maps."
+   },
+   {
+    "node": "lem-weil-pbc-derived-adjunction-shift",
+    "why": "Canonical coefficient adjunctions preserve shifts even without flatness; generic ringed-topos tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-pc-sites-modules-j-shriek-flat",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-sp-right-adjoint-preserves-injectives",
+  "lem-sc-bounded-below-injective-resolution",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "lem-trf-bounded-below-derived-adjunction",
+  "lem-trf-bounded-below-derived-mate-model",
+  "lem-sp-canonical-right-derived-adjunction-shift",
+  "lem-sp-derived-injective-resolution-naturality",
+  "lem-sc-first-quadrant-total-column-comparison",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-derived-adjunction-shift"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NN-528b8a8fb",
+  "group": "NN",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-528b8a8fb (reviewer sub-agent of L); spot-checked: I read the full item and all 17 steps, plus the full statement of every cited node. There are no new nodes. The statement is unchanged from the base, which NF created unsplit. There is no repair note, so the re-split rule does not apply. Sources: Stacks 03EV checked at sites-modules.tex:4389 (2). The blueprint place is main-20261015 direct-images proof (3), inherited from the base with from.node null. No SGA is used. Hand checks: (1) the K differential has d²=0, and the homotopy (h,−h) works because h commutes with T. (2) The shift map (x,(−1)^s y) and the cone reordering with source cyclic-1 sign −1 are chain isomorphisms and match the −p convention. (3) The step-5 β mate fits the mate-model node with G=id, H=Res, σ=id and the underived mate ι. (4) The step-14 mate orientation gives d_Z α_R(sI') = s α_{R'}(I'), and b_{sI'} is a quasi-isomorphism without injectivity. (5) E (identity, evaluation at τ, 0) is a cochain map; on D^{0,q} it gives (T−1)m, and on D^{1,q} −d_Iφ(τ) on both sides. E b_H is the invariant inclusion, and E∘j_rep = kε in degrees 0, 1 and ≥2. Step 4 is sound: C(−,G) is representable, so R[G] = j_{G!}R_G is flat and U preserves injectives. Step 12 takes the lattice node's ∃-witness to be the G=1 construction θα=Qb. That construction satisfies the lattice statement, and it is literally the lattice node's own construction λ=b_P^{-1}c_P on B^{a,b}=K(I^b)^a (its proof steps 5–6). I accepted this as a reading of the witness, not a C3 fault, and no uniqueness is inferred from H^0. Maintainer note: stage 2 must pin this witness because the lattice Lean theorem is ∃. Edge cases checked: τ=1, G=1, the zero ring, and negative lower bounds. Batch-5 flags: lem-trf-bounded-below-derived-adjunction (closure 14, generic derived adjunction), lem-trf-bounded-below-derived-mate-model (closure 18, generic mate formula), and the internal-bar-roof-adjunction closure (adds only lem-trf-localization-essentially-surjective). None is part of the trace-formula or Poincaré-duality proofs, so all three are accepted."
  }
 }
