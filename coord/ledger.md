@@ -20187,3 +20187,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 2026-10-21T04:05:26Z L: superseded stage-1 delivery NC/lem-cbc-derived-finite-quotient-coherence at 69ff31162c917ac1c05933afab803eeb769ee422; current completion retained; packet archived at refs/superseded/NC/lem-cbc-derived-finite-quotient-coherence/69ff31162c917ac1c05933afab803eeb769ee422; stale return retired.
 - 04:05 L: merged deliver/Q20/lem-sfb-scalar-normalized-constant-models (reviewer PASS; first push; new nodes: 0)
 - 04:05 L: merged deliver/Q32/lem-sfb-derived-exchange-exact-normalization (reviewer FIX; first push; new nodes: 0)
+- 04:05 L: merged deliver/Q108/lem-sfb-lfp-scalar-isomorphism (reviewer FIX; first push; new nodes: 0)
