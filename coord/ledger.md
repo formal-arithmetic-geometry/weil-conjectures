@@ -19640,3 +19640,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:41 L: returned deliver/S2/Sheaf.CategoryTheory.DoubleComplexTotal (reviewer RETURN: (the landing tools, head a81b6d35e) the delivery did not land: (d) user Sheaf.AlgebraicGeometry.QcoherentComparisonDegre)
 - 02:41 L: returned deliver/T3/Sheaf.AlgebraicGeometry.GeoCartierCycleClass (reviewer RETURN: (the landing tools, head 711481a06) the delivery did not land: (d) user Sheaf.AlgebraicGeometry.ProEtaleP1DiagonalCompon)
 - 02:41 L: returned deliver/T3/Sheaf.Paper.RingedProjectionRestriction (reviewer RETURN: (the landing tools, head 0e29f8451) the delivery did not land: (d) user Sheaf.Paper.CoefficientHeartTriangulated (mentio)
+- 02:41 L: returned deliver/T8/Sheaf.Paper.ProjectionMateExact (reviewer RETURN: (the landing tools, head a810653d0) the delivery did not land: (d) user Sheaf.SixFunctors.RingedDerivedAdjointLift (ment)
