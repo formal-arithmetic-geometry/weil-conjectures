@@ -1,0 +1,93 @@
+{
+ "id": "lem-sfb-sheaf-pushforward-generator-comparison",
+ "kind": "statement",
+ "title": "The transported lax pushforward structure on sheafification generators",
+ "statement": "Fix a universe $\\mathcal V$, two $\\mathcal V$-small sites $(C,J)$ and $(D,K)$ [def-weil-pbc-sites-and-cohomology], and a closed braided monoidal Grothendieck abelian category $\\mathcal A$ relative to $\\mathcal V$, with $\\mathcal V$-small morphism sets. Use the canonical sheafified pointwise tensors and strong monoidal sheafification functors of [lem-sfb-braided-sheaf-tensor-generators]. Write $a_C\\dashv U_C$, $a_D\\dashv U_D$ for sheafification and inclusion, $\\eta_C,\\eta_D$ for their units and $\\epsilon_C,\\epsilon_D$ for their counits. Write $t_C,t_D$ and $u_C,u_D$ for their tensor and unit generators. Let $E:C\\to D$ be a functor such that restriction $r(P)=P\\circ E^{\\mathrm{op}}$ takes $K$-sheaves to $J$-sheaves, and let $R:\\operatorname{Sh}(D,K;\\mathcal A)\\to\\operatorname{Sh}(C,J;\\mathcal A)$ be that restriction, so $U_CR=rU_D$. Give $U_D$ the lax structure right-adjoint to the strong structure on $a_D$ [lem-sfb-monoidal-adjunction-mates]; give $r$ its pointwise strong monoidal structure; and give $R$ the lax structure transported from $a_CrU_D$ along the counit isomorphism $a_CU_CR\\xrightarrow{\\epsilon_C R}R$. Then its tensor and unit comparisons $\\mu_R$ and $e_R$ satisfy, for every pair of sheaves $F,G$ on $D$,\n$$\nU_C(\\mu_{R,F,G})\\circ t_C(RF,RG)=r(t_D(F,G)),\\qquad U_C(e_R)\\circ u_C=r(u_D).\n$$\nEquivalently, the transported structure maps are the unique sheaf extensions of $r(t_D(F,G))$ and $r(u_D)$ along the actual sheafification units. No assertion that evaluation preserves sheaf tensor products is made.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/lem-sfb-pushforward-comp-monoidal.proof.md",
+  "place": "Proof, second sentence; expanded identification of the transported lax structure. Project corroboration: WeilConjectures/Mathlib/CategoryTheory/Sites/Monoidal.lean:170-207,375-393 and WeilConjectures/CategoryTheory/Sites/PushforwardMonoidal.lean:85-114."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-sfb-braided-sheaf-tensor-generators",
+  "lem-sfb-monoidal-adjunction-mates"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The lax monoidal comparison for pushforward of sheaves along a continuous functor agrees on underlying presheaves with restriction of the tensor and unit sheafification maps",
+   "results": "8 hits: SheafOfModules.pushforwardCongr, SheafOfModules.unitToPushforwardObjUnit_val_app_apply, SheafOfModules.pushforwardSections_unitHomEquiv, SheafOfModules.pushforwardComp_hom_app_val_app, SheafOfModules.pushforwardNatIso, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.pushforwardComp_inv_app_val_app, SheafOfModules.pushforwardNatIso_hom; ; digest 0415668aa6e0c62b",
+   "date": "2026-10-21",
+   "verdict": "No match for the normalized arbitrary braided sheafification/pushforward comparison. CartesianMonoidal requires cartesian tensor; Sites/Monoidal provides the tensor structure, not these pushforward formulas."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafPushforwardContinuous.*(μ|ε)|μ.*sheafPushforwardContinuous|ε.*sheafPushforwardContinuous",
+   "results": "0 hits: ; ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-21",
+   "verdict": "No match for the normalized arbitrary braided sheafification/pushforward comparison. CartesianMonoidal requires cartesian tensor; Sites/Monoidal provides the tensor structure, not these pushforward formulas."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafPushforwardContinuous\", \"μ\"",
+   "results": "0 hits: ; ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-21",
+   "verdict": "No match for the normalized arbitrary braided sheafification/pushforward comparison. CartesianMonoidal requires cartesian tensor; Sites/Monoidal provides the tensor structure, not these pushforward formulas."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The tensor comparison of pushforward of sheaves restricts to the tensor comparison of the inclusion into presheaves",
+   "results": "8 hits: SheafOfModules.pushforward, SheafOfModules.pushforward_map_val, CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso, PresheafOfModules.pushforward₀_obj, PresheafOfModules.pushforward, SheafOfModules.pushforwardSections, TopCat.Sheaf.pushforward_forget, TopCat.Sheaf.pushforward; ; digest 012b517386ad84b9",
+   "date": "2026-10-21",
+   "verdict": "No match for the normalized arbitrary braided sheafification/pushforward comparison. CartesianMonoidal requires cartesian tensor; Sites/Monoidal provides the tensor structure, not these pushforward formulas."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction along a continuous functor of sites is lax monoidal and its comparison maps agree with the monoidal forgetful functor from sheaves to presheaves",
+   "results": "8 hits: CategoryTheory.sheafToPresheaf_μ, CategoryTheory.sheafToPresheafMonoidal, CategoryTheory.GrothendieckTopology.W.transport_isMonoidal, CategoryTheory.sheafToPresheaf_δ, CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf, CategoryTheory.sheafToPresheaf_ε, CategoryTheory.sheafToPresheaf_η, CategoryTheory.Sheaf.monoidalCategory; ; digest e1a0d6049c6ae9d1",
+   "date": "2026-10-21",
+   "verdict": "No match for the normalized arbitrary braided sheafification/pushforward comparison. CartesianMonoidal requires cartesian tensor; Sites/Monoidal provides the tensor structure, not these pushforward formulas."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafToPresheaf\", NatTrans.IsMonoidal",
+   "results": "0 hits: ; loogle: unknown identifier 'NatTrans.IsMonoidal'; digest 4f53cda18c2baa0c",
+   "date": "2026-10-21",
+   "verdict": "No match for the normalized arbitrary braided sheafification/pushforward comparison. CartesianMonoidal requires cartesian tensor; Sites/Monoidal provides the tensor structure, not these pushforward formulas."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafToPresheaf.*[Mm]onoidal|[Mm]onoidal.*sheafToPresheaf|sheafPushforwardContinuous",
+   "results": "1 hits: 122; ; digest 9a1a964449e87a5d",
+   "date": "2026-10-21",
+   "verdict": "No match for the normalized arbitrary braided sheafification/pushforward comparison. CartesianMonoidal requires cartesian tensor; Sites/Monoidal provides the tensor structure, not these pushforward formulas."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-pushforward-comp-monoidal",
+  "date": "2026-10-21",
+  "group": "Q42"
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-def-sfb-module-pushforward-pullback",
+ "mathlib_candidate": {
+  "declaration": "CategoryTheory.Functor.μ_sheafToPresheaf_app_comp_μ_sheafPushforwardContinuous_app; CategoryTheory.Functor.ε_sheafToPresheaf_app_comp_ε_sheafPushforwardContinuous_app",
+  "file": "project: WeilConjectures/CategoryTheory/Sites/PushforwardMonoidal.lean:107 and WeilConjectures/Mathlib/CategoryTheory/Sites/Monoidal.lean:388",
+  "note": "These sorry-free project lemmas state the two formulas for the localized Sheaf.monoidalCategory and the mate comparisons of sheafToPresheaf. This node additionally identifies those with the actual units of the prescribed tensor a(UF tensor UG); that normalization is the calculation in steps 1-2, not an assertion that sheaf tensor evaluates pointwise. Not a Mathlib match or an exact attachment of the whole normalized statement."
+ },
+ "blueprint": {
+  "from": {
+   "node": "lem-sfb-pushforward-comp-monoidal",
+   "place": "Proof, second sentence: the lax structures are obtained by restricting presheaves and sheafifying; identification on tensor and unit generators.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}

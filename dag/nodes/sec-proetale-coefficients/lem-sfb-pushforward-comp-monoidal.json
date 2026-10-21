@@ -22,33 +22,21 @@
  ],
  "proof": [
   {
-   "text": "For $T=X,Y,Z$ let $a_T\\dashv U_T$ be sheafification and let $t_T(F,G)$ and $u_T$ be the tensor and unit generators supplied by [lem-sfb-braided-sheaf-tensor-generators]. In particular a map out of $F\\otimes G$, respectively $\\mathbf1_T$, is determined by its composite with $t_T(F,G)$, respectively $u_T$, on underlying presheaves. These are morphisms in $\\mathcal A$ at each site object; no elementwise or concreteness assumption on $\\mathcal A$ is made. The small-site convention of [def-weil-pbc-proetale-site] permits applying the cited result to all three sites in a common sufficiently large universe.",
+   "text": "Use [lem-sfb-braided-sheaf-tensor-generators] on the three small sites of [def-weil-pbc-proetale-site], in one sufficiently large universe. Write $t_T,u_T$ for its natural tensor and unit generators. By [lem-sfb-sheaf-pushforward-generator-comparison], restriction followed by sheafification has the canonical comparisons characterized by\n$$\\mu_h(V)t_T(h_*F,h_*G)_V=t_S(F,G)_{V\\times_TS},\\qquad e_h(V)(u_T)_V=(u_S)_{V\\times_TS}.$$\nThese are the maps prescribed in the statement; their uniqueness is the cited Hom bijection. This applies to $h=f,g,k=g\\circ f$ since [def-sfb-finite-lower-star] identifies each pushforward with continuous restriction.",
    "uses": [
     "lem-sfb-braided-sheaf-tensor-generators",
-    "def-weil-pbc-proetale-site"
+    "def-weil-pbc-proetale-site",
+    "lem-sfb-sheaf-pushforward-generator-comparison",
+    "def-sfb-finite-lower-star"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/lem-sfb-pushforward-comp-monoidal.proof.md",
-    "place": "Proof, sentence 1; replace sectionwise equality after sheafification by the actual universal-property test"
+    "place": "Proof, sentences 1-2: use the extracted single-restriction comparison"
    }
   },
   {
-   "text": "For $h:S\\to T$, write $r_h$ for restriction of presheaves along $V\\mapsto V\\times_TS$. By [def-sfb-finite-lower-star], $U_T h_*=r_hU_S$. The strong monoidal sheafification gives its right adjoint $U_T$ the canonical lax structure by [lem-sfb-monoidal-adjunction-mates]; restriction is strong monoidal for pointwise tensor. For sheaves $F,G$ on $S$, the canonical tensor comparison $\\mu_h:h_*F\\otimes h_*G\\to h_*(F\\otimes G)$ is the unique extension of $r_h(t_S(F,G))$, and its unit comparison $e_h:\\mathbf1_T\\to h_*\\mathbf1_S$ is the unique extension of $r_h(u_S)$. Indeed their sources are $a_T(r_hU_SF\\otimes_p r_hU_SG)$ and $a_T(\\underline{\\mathbf1})$; restriction strictly preserves the pointwise tensor and constant unit, so the adjunction in [def-weil-pbc-sheafification] gives these extensions. This also identifies the maps with the canonical lax structure obtained by restricting underlying presheaves, sheafifying, and identifying $a_TU_Th_*\\cong h_*$ by the counit: the triangle identity says exactly that its composite with the sheafification unit is the restricted map. Thus, at every $V\\in T_{\\mathrm{proét}}$,\n$$\n(\\mu_h)_{F,G}(V)\\circ t_T(h_*F,h_*G)_V=t_S(F,G)_{V\\times_TS},\\quad\n(e_h)_V\\circ(u_T)_V=(u_S)_{V\\times_TS}.\n$$\nThese are equalities of maps from $F(V\\times_TS)\\otimes G(V\\times_TS)$ and $\\mathbf1_{\\mathcal A}$, respectively; they do not assert that evaluation commutes with sheaf tensor.",
-   "uses": [
-    "def-sfb-finite-lower-star",
-    "def-weil-pbc-sheafification",
-    "lem-sfb-braided-sheaf-tensor-generators",
-    "lem-sfb-monoidal-adjunction-mates"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/lem-sfb-pushforward-comp-monoidal.proof.md",
-    "place": "Proof, sentences 2-3: identify the lax comparison maps on the presheaf generators"
-   }
-  },
-  {
-   "text": "Put $k=g\\circ f$. For a site object $V$ of $Z$ set $W=(V\\times_ZY)\\times_YX$ and $W'=V\\times_ZX$. By [def-sfb-finite-lower-star-comp], $c_F(V):F(W)\\to F(W')$ is restriction along the canonical isomorphism $b:W'\\to W$. For sheaves $F,G$ on $X$, the tensor condition is\n$$\nc_{F\\otimes G}\\circ g_*(\\mu_f)\\circ\\mu_g\n=\\mu_k\\circ(c_F\\otimes c_G).\n$$\nPrecompose both sides with $t_Z(g_*f_*F,g_*f_*G)$. Twice applying the formulas of step 2 makes the left side at $V$ equal to $(F\\otimes G)(b)\\circ t_X(F,G)_W$. Naturality of $t_Z$ in the sheaf variables, followed by the formula for $\\mu_k$, makes the right side equal to $t_X(F,G)_{W'}\\circ(F(b)\\otimes G(b))$. These two maps agree by presheaf naturality of $t_X(F,G)$ at $b$. The equality-detection assertion of [lem-sfb-braided-sheaf-tensor-generators] proves the displayed tensor condition. This uses exactly the canonical pasting isomorphism, rather than a chosen replacement for it.",
+   "text": "For $V\\in Z_{\\mathrm{proét}}$ put $W=(V\\times_ZY)\\times_YX$, $W'=V\\times_ZX$. By [def-sfb-finite-lower-star-comp], $c_F(V)=F(b)$ for the canonical isomorphism $b:W'\\to W$. Precompose\n$$c_{F\\otimes G}\\circ g_*(\\mu_f)\\circ\\mu_g=\\mu_k\\circ(c_F\\otimes c_G)$$\nwith $t_Z(g_*f_*F,g_*f_*G)$. Twice the formulas of step 1 turn its left side at $V$ into $(F\\otimes G)(b)\\circ t_X(F,G)_W$. Naturality in $F,G$ of $t_Z$, then step 1 for $k$, turns its right side into $t_X(F,G)_{W'}\\circ(F(b)\\otimes G(b))$. Presheaf naturality of $t_X$ equates these expressions. The tensor equality test of [lem-sfb-braided-sheaf-tensor-generators] gives the tensor axiom.",
    "uses": [
     "def-sfb-finite-lower-star-comp",
     "lem-sfb-braided-sheaf-tensor-generators"
@@ -56,11 +44,11 @@
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/lem-sfb-pushforward-comp-monoidal.proof.md",
-    "place": "Proof, sentence 3: explicit tensor compatibility along the pasting isomorphism"
+    "place": "Proof, third sentence: tensor compatibility along the actual pasting isomorphism"
    }
   },
   {
-   "text": "The composite unit comparison is $g_*(e_f)\\circ e_g$. The remaining condition is\n$$\nc_{\\mathbf1_X}\\circ g_*(e_f)\\circ e_g=e_k.\n$$\nPrecompose on underlying presheaves with $u_Z$. At $V$, step 2 turns the left side into $\\mathbf1_X(b)\\circ(u_X)_W$, while the right side becomes $(u_X)_{W'}$. These agree by naturality of $u_X:\\underline{\\mathbf1}_{\\mathcal A}\\to U_X\\mathbf1_X$, because the constant presheaf sends $b$ to $\\mathrm{id}_{\\mathbf1_{\\mathcal A}}$. The unit equality-detection assertion of [lem-sfb-braided-sheaf-tensor-generators] proves the condition. The tensor and unit conditions are precisely the definition of a monoidal natural transformation; $c$ is already a natural isomorphism by [def-sfb-finite-lower-star-comp]. Hence it is a monoidal natural isomorphism.",
+   "text": "Precompose the unit equation $c_{\\mathbf1_X}\\circ g_*(e_f)\\circ e_g=e_k$ with $u_Z$. Step 1 gives respectively $\\mathbf1_X(b)\\circ(u_X)_W$ and $(u_X)_{W'}$. They agree by naturality of $u_X$, since the constant presheaf sends $b$ to the identity. The unit equality test of [lem-sfb-braided-sheaf-tensor-generators] proves the equation. These tensor and unit equations define a monoidal transformation. Since [def-sfb-finite-lower-star-comp] already gives a natural isomorphism, $c$ is a monoidal natural isomorphism.",
    "uses": [
     "lem-sfb-braided-sheaf-tensor-generators",
     "def-sfb-finite-lower-star-comp"
@@ -68,17 +56,16 @@
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/lem-sfb-pushforward-comp-monoidal.proof.md",
-    "place": "Proof, last sentence: explicit unit compatibility and conclusion"
+    "place": "Proof, final sentence: unit compatibility and assembly"
    }
   }
  ],
  "proof_deps": [
   "lem-sfb-braided-sheaf-tensor-generators",
   "def-weil-pbc-proetale-site",
+  "lem-sfb-sheaf-pushforward-generator-comparison",
   "def-sfb-finite-lower-star",
-  "def-weil-pbc-sheafification",
-  "def-sfb-finite-lower-star-comp",
-  "lem-sfb-monoidal-adjunction-mates"
+  "def-sfb-finite-lower-star-comp"
  ],
  "proof_origin": {
   "by": "agent",
@@ -189,11 +176,11 @@
   "note": "Exact pro-etale specialization of the previously attached general continuous-site instance. The published source, read through scompile.py --source, binds A : Type u' with Category.{u + 1}, Abelian, IsGrothendieckAbelian.{u + 1}, MonoidalCategory, BraidedCategory and MonoidalClosed, and arbitrary f : X ⟶ Y and g : Y ⟶ Z with X Y Z : Scheme.{u}. Its conclusion uses the canonical lowerStarComp induced by pullbackComp, with the existing composite lax monoidal structure. No additional hypotheses or replacement maps. The current published body applies the general monoidality instance and has no sorry."
  },
  "split_report": {
-  "date": "2026-10-20",
+  "date": "2026-10-21",
   "item": "lem-sfb-pushforward-comp-monoidal",
   "worker": "stage1",
-  "summary": "Expanded the imported argument into separate tensor and unit generator calculations. Preserved arbitrary closed braided coefficients; made the tensor construction explicit because the linked sk-def-sfb-sheaf-tensor assumes symmetry. Created one unsplit braided tensor input, not a composition restatement. Current project instance at Monoidal.lean:123 is sorry, despite the stale lean.note.",
-  "blueprint": "Steps 1-2 realize the first two sentences of the blueprint proof; step 3 proves its claimed compatibility along pullback pasting; step 4 proves its unit clause using naturality, with the actual sheafification equality tests.",
+  "summary": "Q42 repair of the 2026-10-21 coarse-split return: statement unchanged. Extracted the normalized single-restriction transport/generator identification as lem-sfb-sheaf-pushforward-generator-comparison, with its own explicit short proof. Parent now only applies that comparison and checks tensor and unit naturality along the prescribed pullback pasting isomorphism.",
+  "blueprint": "Step 1 realizes sentences 1-2 via the new single-restriction input; steps 2-3 realize the pasting tensor and unit calculations in sentences 3-4. Same unit and same route.",
   "tool_uses": [
    {
     "node": "def-weil-pbc-proetale-site",
@@ -206,14 +193,6 @@
    {
     "node": "def-sfb-finite-lower-star-comp",
     "why": "Defines the existing small pro-etale site, canonical restriction pushforward, its canonical pasting comparison, or the universal property of sheafification used on generators; this is generic infrastructure, not a replacement for the unit route."
-   },
-   {
-    "node": "def-weil-pbc-sheafification",
-    "why": "Defines the existing small pro-etale site, canonical restriction pushforward, its canonical pasting comparison, or the universal property of sheafification used on generators; this is generic infrastructure, not a replacement for the unit route."
-   },
-   {
-    "node": "lem-sfb-monoidal-adjunction-mates",
-    "why": "Generic adjunction-mate construction of the lax monoidal inclusion from the strong monoidal sheafification; no module-object composition result is used."
    }
   ]
  },
@@ -225,11 +204,11 @@
   "lem-sfb-monoidal-adjunction-mates"
  ],
  "reviewed": {
-  "date": "2026-10-20",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-ND-8df9c3f93",
-  "group": "ND",
+  "reviewer": "NT-cc-Q42-bfbb9d14c",
+  "group": "Q42",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-8df9c3f93 (reviewer sub-agent of L); spot-checked: Verdict FIX: the split is sound apart from one missing citation, now repaired. Full review in review.md. Lean: live Monoidal.lean:123 isMonoidal_lowerStarComp is still `:= sorry`, so the item is open and B10 does not apply. The item's lean.note claiming no sorry is stale. STATEMENT-DISPUTED is correct: sk-def-sfb-sheaf-tensor and the other existing sheaf-tensor nodes assume symmetric coefficients, while the blueprint item and the Lean assume only braided. Counterexample checked: Z-graded Q-vector spaces with braiding 2^{mn}·swap satisfy the hexagons, and the double braiding in degree (1,1) is 4. The delivery keeps the braided generality, the canonical map c and the target. The new node lem-sfb-braided-sheaf-tensor-generators is true: A is closed and complete, so presheaf internal homs exist and the internal hom into a sheaf is a sheaf, making the local isos stable under tensoring and sheafification strong braided; the Hom bijections are the adjunction a ⊣ U. Project GrothendieckAbelian/Monoidal/Defs.lean corroborates it under exactly the same hypotheses. It is statement-only and self-contained, it is not a restated clause of the item, and every existing candidate is symmetric-only, so it is not a duplicate. I recomputed steps 2–4 component by component: μ_h and e_h as unique extensions of the restricted sheafification maps; the tensor axiom reduces to (F⊗G)(b)∘t_X,W = t_X,W'∘(F(b)⊗G(b)), naturality of t_X at b: W'→W; the unit axiom reduces to naturality of u_X with const(b) = id. Equality detection then concludes. No symmetry is used and no SGA is cited. FIX (B3/missing citation): the item defined the pushforward lax structure inline and did not cite the existing def-sfb-finite-lower-star-lax-monoidal. That node's blueprint proof defines exactly these maps, and the citer def-sfb-module-lower-star-comp (A = Ab) transports module objects along them. The corrected item statement now gives the two comparison maps explicitly, as in step 2, says they are the structure maps of def-sfb-finite-lower-star-lax-monoidal for symmetric coefficients, and adds that node to stmt_deps (no cycle). Steps are unchanged. Accepted tool_uses: def-weil-pbc-proetale-site, def-sfb-finite-lower-star, def-sfb-finite-lower-star-comp, def-weil-pbc-sheafification, lem-sfb-monoidal-adjunction-mates and the added lax-monoidal definition; all are generic definitions or Mathlib facts. The worker wrote tool_uses itself, which C8 reserves for the maintainer; I accept them anyway.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-bfbb9d14c (reviewer sub-agent of L); spot-checked: PASS: I read the whole delivery and found no fault. It answers the 2026-10-21 human re-split note (repair-notes, released), which asked to split the landed 3731-character ND proof. Diffing against the live node, only proof, proof_deps and split_report change; the statement, stmt_deps, source and lean fields are byte-identical. The item proof is now 1810 characters in 3 steps, and the new node's proof (kept in the report) is 1626 characters. Lean: live Monoidal.lean:123 is still `:= sorry`, so B10 does not apply. New node lem-sfb-sheaf-pushforward-generator-comparison: I recomputed its proof and it is true. The mate tensor of U_D is U(ε⊗ε)∘U(a(η⊗η))∘η = η = t_D by the triangle identity. In the transported structure on R, the tensor of inverse counits is a_C(η_P⊗η_Q) = μ_a^{-1}, which cancels and leaves ε∘a_C(r t_D). Naturality of η with Uε∘η = id then gives U_C(μ_R)∘t_C = r(t_D), and the unit case is the same. It relies on the canonical conventions φ⊗ψ = a(Uφ⊗Uψ) and the strong structure of a from lem-sfb-braided-sheaf-tensor-generators, which it cites. The project lemma μ_sheafToPresheaf_comp_map_μ_sheafPushforwardContinuous (PushforwardMonoidal.lean) supports it. It is generic (one restriction, no schemes, no composition), so it does not restate a clause of the item. It is not a duplicate: def-sfb-finite-lower-star-lax-monoidal is symmetric-only and has no formulas, and an rg over all nodes found nothing else. It has 7 recorded searches. Item step 1 applies the node with E = −×_T S; the hypothesis that r preserves sheaves comes from def-sfb-finite-lower-star, and smallness from def-weil-pbc-proetale-site. Steps 2 and 3 are the tensor and unit naturality checks at b: W'→W through t_X and u_X (constant presheaf: b ↦ id); I re-verified both. There is no symmetry, no SGA and no cycle, and every step is under 2000 characters. The retained tool_uses (proetale-site, finite-lower-star, lower-star-comp) are accepted. Maintainer note: the item's lean.note still wrongly says the Lean has no sorry."
  }
 }

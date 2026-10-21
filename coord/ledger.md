@@ -19687,3 +19687,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:13 L: merged deliver/Q25/lem-sfb-dc-upper-star-preserves (reviewer FIX; after a return; new nodes: 0)
 - 03:13 L: merged deliver/Q10/det-sf-existence-brown (reviewer PASS; after a return; new nodes: 0)
 - 03:13 L: merged deliver/Q15/def-sfb-dc-upper-star-comp (reviewer PASS; after a return; new nodes: 1)
+- 03:13 L: merged deliver/Q42/lem-sfb-pushforward-comp-monoidal (reviewer PASS; after a return; new nodes: 1)
