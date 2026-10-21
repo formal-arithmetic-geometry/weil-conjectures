@@ -301,5 +301,37 @@
   "group": "NA",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-7eed46012 (reviewer sub-agent of L); spot-checked: NA lem-sfb-scalar-adjunction-unit-coefficient-normalization 7eed4601: first split of a node created 2026-10-21 in Q48's re-split of lem-sfb-divisible-extension-derived-reduction. Live it is unsplit; it is not on the drop list and has no repair note of its own. 9 steps, 0 new nodes, statement unchanged. I read all 9 cited statements, the main-20261015 sk-lem-geo-cartier proof (the boundary of (G1) under -⊗^L Z/ℓ^r), and how the parent's steps 1/4/5/6 use this item. One C3/C4/E5 fault, now fixed: Step 2 said lem-pur-sheaf-ring-derived-hom-comparison 'supplies the adjunction of derived-adjunction compatibility'. That lemma's statement only gives ∃ d with the formula; the identification with the adjunction the statement fixes via new-derived-adjunction-compatibility is in its proof, and the step never checked that node's essential-constancy hypotheses. The corrected Step 2 checks them: exact Res makes the ind-system constant (exact-functor-derived-functor), and Lq is everywhere defined via K-flat resolutions (change-of-rings (2) + lem-pc-kflat-resolution). It takes the pre-derived formula at identity denominators, Φ(Q(f)c_M)=βQ(g) (lem-pc-pre-derived-adjoint-functors-general). It then shows both adjunctions have the same unit on K-flat QM, hence everywhere by naturality, so they coincide. The two new cites are added to proof_deps and declared in split_report.tool_uses. The other steps hold. Step 1 inverts the explicit formulas by hand, balanced over the sheafified tensor. Step 4 applies clause (iii) to Res^op ⊣ Lq^op with shift ([−k])^op; opposition swaps unit and counit, so it holds for all k including negative ones. Step 5: Tot(A⊗Z[0]) ≅ A, so Z[0] is K-flat. Step 6: Res(e)η_Z = q checked on sections. Steps 7 and 9 use injectivity of Φ. Step 8: s̄(r) = r·p(s(1)), with no sectionwise lifting. Edge cases: for n=1 everything is zero; for n>1 nothing uses flatness of R; s=0 and T=0 are consistent. Duplicate search found nothing equal: resolving-class/K4/R6 adjunction nodes, the pro-étale O_E→A_n adjunction, the ringed pullback shift node and the Künneth unit are generic or other objects. Accepted 7+2 generic tool_uses.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.ScalarAdjunctionUnitCoefficientNormalization",
+  "declaration": "SheafOfModules.ScalarAdjunctionNormalization.scalarAdjunctionUnitCoefficientNormalization",
+  "declarations": [
+   "SheafOfModules.ScalarAdjunctionNormalization.integers",
+   "SheafOfModules.ScalarAdjunctionNormalization.residues",
+   "SheafOfModules.ScalarAdjunctionNormalization.quotient",
+   "SheafOfModules.ScalarAdjunctionNormalization.IntegerModules",
+   "SheafOfModules.ScalarAdjunctionNormalization.ResidueModules",
+   "SheafOfModules.ScalarAdjunctionNormalization.restriction",
+   "SheafOfModules.ScalarAdjunctionNormalization.integerUnit",
+   "SheafOfModules.ScalarAdjunctionNormalization.residueUnit",
+   "SheafOfModules.ScalarAdjunctionNormalization.coefficientQuotient",
+   "SheafOfModules.ScalarAdjunctionNormalization.Normalization",
+   "SheafOfModules.ScalarAdjunctionNormalization.scalarAdjunctionUnitCoefficientNormalization"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/ScalarAdjunctionUnitCoefficientNormalization.lean",
+  "statement": "theorem scalarAdjunctionUnitCoefficientNormalization [HasTerminal C] (hn : 1 ≤ n) (M : DerivedChangeOfRingsCochainModel (quotient J n)) : Nonempty (Normalization J n M)",
+  "branch": "sheaf-dag",
+  "by": "Q47",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The statement is packaged as Nonempty Normalization for any prescribed DerivedChangeOfRingsCochainModel, with exactness, both ordinary Hom formulas, the canonical derived Hom formula, K-flat unit normalization, induced integer-shift comparison, unique actual-quotient-normalized coefficient isomorphism, and the unique reduction with its derived identity. Helpers are explicit specializations of constantSheaf, ringedSiteModules, restrictScalars and unit; coefficientQuotient is the linear map determined by the compatible section 1. No canonical data are chosen from the existence theorem."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-db7597961",
+  "group": "Q47",
+  "result": "pass",
+  "note": "Clause-by-clause match. The ordinary adjunction is fixed by its forward Hom formula; the derived adjunction by derived_hom (the new-derived-adjunction-compatibility formula on complexes, which fixes the unit on K-flat objects and so everywhere). kflat_unit, unit_shift for all k (induced shift structure), integer_kflat, the unique e with (Res e)η=q via coefficientQuotient (the 1↦1 linear map), and the reduction clause (∃! t; t[0]=e⁻¹≫Lq(s[0])≫a) are correct; comparison directions checked against Mathlib. Edge cases n=1, all k, separate universes; no flatness or extra assumption. Node identical to live apart from lean; statement verbatim; docstrings complete; only sorry. Advisory: helpers duplicate those of the Lean-closed parent module DivisibleExtensionDerivedReduction (cannot be imported, cycle), so stage 3 needs bridges; unit_shift equals Mathlib compatibilityUnit_iso but is faithful to the node; worker compile 55 s is near the 60 s limit."
  }
 }

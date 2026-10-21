@@ -291,5 +291,32 @@
   "group": "Q115",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q115-566d84745 (reviewer sub-agent of L); spot-checked: I read the whole split: 8 steps, 0 new nodes, statement and stmt_deps byte-identical to the live/side-live base (still unsplit there; no repair note; not in any dropped list). Source: I read Stacks 0A91 (sites-cohomology l.8636), 0A8I (more-algebra l.17966, unsigned composition) and 0A98 (l.8998, K-injective I,J plus a K-flat H→Hom(K,J)). The item matches them, and it supplies the functoriality and the agreement with the adjunction, which Stacks omits (correctly marked by: agent). Steps 1-2: I recomputed target and parameter naturality and both uncurried sides of the dinaturality equation from the bijection and counit of lem-sf-ringed-derived-closed-symmetric-monoidal; they agree. Steps 3-4: I expanded d(fg)=(df)g+(-1)^p f(dg); the f d_J g terms cancel and no extra sign is needed. The evaluation identity also checks. Step 5: lem-pur-rhom-well-defined is applied only into the K-injectives J and I, or between K-injectives (η_I, η_J). lem-sf-ringed-derived-native-tensor allows a single K-flat factor, which the possibly non-K-flat Hom(J,I) needs. Steps 6-8: the def-coef-ringed-tensor-hom-model normalization (supplied by lem-sf-ringed-derived-tensor-hom-adjunction) is applied only to K-flat pairs (T,P), (U,V), (W,P), with the fixed I(-) as target. The native associator compatibility identifies the bracketings, and cancelling the invertible Qr, Qs, Qt gives Qd = c∘(1⊗Qt). Edge cases: zero complexes; degree-0 complexes on the one-point site over Z (ordinary composition); odd degrees. No boundedness or flat terms are used. Duplicate search (rg -L for 0A91/0A98/internal composition): the pullback-comparison, trf exchange, zl duality-model, ordinary-evaluation and thick-evaluation nodes are distinct. Route: biduality-general and picard-semicon are reachable transitively from sk-thm-sf-ctf-stability. The 5 declared generic tool_uses are accepted. Minor: step 6 relies on the step-1 parameter naturality without citing it again; not a fault. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.RingedHomCompositionModel",
+  "declaration": "CategoryTheory.ringedHomComposition_model",
+  "declarations": [
+   "CategoryTheory.RingedHomCompositionFormula",
+   "CategoryTheory.ringedHomComposition_existsUnique",
+   "CategoryTheory.ringedHomComposition",
+   "CategoryTheory.ringedHomAugmentation",
+   "CategoryTheory.ringedHomRepresentativeMap",
+   "CategoryTheory.ringedHomComposition_naturality",
+   "CategoryTheory.ringedHomComposition_model"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/RingedHomCompositionModel.lean",
+  "statement": "theorem ringedHomComposition_model (S : CoefficientClosedStructure (derivedInternalHomOfUniverses.{c, v, u, w} J R)) (N : CoefficientTensorModels.{u, c, v, w} J R S) (β : @SymmetricCategory (DerivedCategory (RingedTensorModules.{c, v, u} J R)) _ S.monoidal) (D : RingedDerivedTensorCoherence.{c, v, u, w} J R S N β) (E F G T : CochainComplex (RingedTensorModules.{c, v, u} J R) ℤ) [F.IsKInjective] [G.IsKInjective] (t : T ⟶ homComplex (R := R) E F) (ht : CochainComplex.IsKFlatResolutionIndependentCoefficients (J := J) (R := R) t) : (D.tensorIso (homComplex (R := R) F G) T (Or.inr ht.2)).hom ≫ S.tensor.map (ringedHomRepresentativeMap.{c, v, u, w} J R F G, DerivedCategory.Q.map t ≫ ringedHomRepresentativeMap.{c, v, u, w} J R E F) ≫ S.composition (DerivedCategory.Q.obj E) (DerivedCategory.Q.obj F) (DerivedCategory.Q.obj G) = DerivedCategory.Q.map ((coefficientTotalTensor.{u, c, v} J R).map (𝟙 (homComplex (R := R) F G), t) ≫ ringedHomComposition.{c, v, u} J R E F G) ≫ ringedHomRepresentativeMap.{c, v, u, w} J R E G",
+  "branch": "sheaf-dag",
+  "by": "Q21",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-97f92091f",
+  "group": "Q21",
+  "result": "pass",
+  "note": "Node unchanged except lean; statement verbatim; deps' recorded decls imported (stmt public, 6 proof-dep plain). c = S.composition (transpose of assoc≫(1⊗ev)≫ev); naturality in K, M and dinaturality in L have correct variance and sides. ∃! sign-free chain map f⊗g↦f∘g on arbitrary E,F,G is true (Hom d = dφ−(−1)^nφd, total tensor ε₂=(−1)^p). Model square uses D.tensorIso (Or.inr K-flat T), the fixed augmentation plus Localization.fac comparison, and Qt; only F,G K-injective, Hom(F,G) not assumed K-flat. Quantifying over S,N,β,D is pinned by uncurry_model, tensorIso_both/naturality and associator_model. No hollow defs (choose of the named ∃!), sorry-only proofs, docstrings with source and blueprint. Advisory: ringedSiteHomAugmentation/OrdinaryHomComparison in RingedSiteDualityMaps (a downstream theorem module) duplicate the new helpers; K-injective notion not in base stmt_deps. No compile (no file changed)."
  }
 }

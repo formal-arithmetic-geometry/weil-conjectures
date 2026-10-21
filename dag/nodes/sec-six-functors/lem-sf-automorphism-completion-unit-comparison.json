@@ -13,7 +13,8 @@
   "lem-weil-pbc-ringed-koszul-completion-reflector",
   "lem-weil-proetale-isomorphism-inverse-image",
   "def-weil-pbc-completed-pullback",
-  "lem-weil-pbc-ringed-topoi-module-adjunction"
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "def-wf-automorphism-completed-transport"
  ],
  "proof": [
   {
@@ -253,5 +254,23 @@
   "group": "Q32",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q32-22fec7d42 (reviewer sub-agent of L); spot-checked: Live node still unsplit; first review, not superseded, not dropped, no SGA. This is a first split of a statement-only node created by Q20's re-split of def-wf-tensor-product; the item has no repair note of its own. There are no new nodes, and the statement is unchanged and correct. I checked it on the identity automorphism, the empty tuple (I=0, A finite: the unit is the diagonal into the 1−t fibre, invertible) and the zero object; no boundedness or constructibility is needed. Steps 1–6 check out. Step 1 matches c_e with the components c_n∘e⁻¹π_n of def-weil-pbc-completed-pullback, and scalars are fixed on every quotient (clauses 2 and 3 of the isomorphism lemma). Step 2 gets the module equivalence from the relabelling model, θ of the scalar-extension lemma and the tensor-formula adjunction, so e_*≅S. Step 3 descends the exact functors termwise (Mathlib leaf), agreeing with Le^* and Re_*. Step 4 is the finite Koszul matrix computation, with signs and transitions verified. Step 5's β/γ chain equation was checked on both summands. Step 6 gives the exact chain-level unit square, natural in C. Fault (C4/E6): Steps 7–8 applied the reflector lemma, whose unit is the K-injective Rlim unit with local derived completeness, to the intrinsic product mapping-fibre unit without a bridge. I fixed this by citing lem-weil-pbc-completed-fiber-strict-limit-comparison (e: F(QΓC)≅D.completion(FQC) with F(Qγ_C);e = D.unit; general adic datum, r=0 allowed, no cycle). Step 7 now gets isomorphism-invariance of 𝒞 from it. Step 8 now derives K∈𝒞 ⇔ FK locally complete, LK∈𝒞, and the Hom bijection for η with targets in 𝒞 before the unchanged adjunct uniqueness argument. proof_deps and tool_uses are updated. Accepted tool_uses: isomorphism-inverse-image, scalar-extension-ring-iso, ringed-topoi-module-adjunction, exact-functor-derived (Mathlib), Koszul reflector, and the bridge. Advisory: the proof is 7718 characters, so a later length-based re-split note is possible. Corrected file: fixes/dag/nodes/sec-six-functors/lem-sf-automorphism-completion-unit-comparison.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.AutomorphismCompletionUnitComparison",
+  "declaration": "AlgebraicGeometry.Scheme.automorphism_completion_unit_comparison",
+  "file": "lean/Sheaf/Paper/AutomorphismCompletionUnitComparison.lean",
+  "statement": "theorem automorphism_completion_unit_comparison (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal) (e : Aut X) : (∀ M : PbcCompletedDerived X d, IsIso (((pbcActualDerivedAdjunction e.hom d).ofNatIsoLeft (pbcIsoOrdinaryDerivedComparison e.hom d)).unit.app M)) ∧ (∀ M : PbcCompletedDerived X d, IsIso (((pbcActualDerivedAdjunction e.hom d).ofNatIsoLeft (pbcIsoOrdinaryDerivedComparison e.hom d)).counit.app M)) ∧ (∃ (hH : ∀ M : WfCompleteCategory X d r a ha, WfIsComplete X d r a ha ((pbcIsoAmbientPullback e.hom d).obj M.obj)) (hG : ∀ M : WfCompleteCategory X d r a ha, WfIsComplete X d r a ha ((pbcActualDerivedPush e.hom d).obj M.obj)), ∃ adj : ObjectProperty.lift (WfIsComplete X d r a ha) (ObjectProperty.ι (WfIsComplete X d r a ha) ⋙ pbcIsoAmbientPullback e.hom d) hH ⊣ ObjectProperty.lift (WfIsComplete X d r a ha) (ObjectProperty.ι (WfIsComplete X d r a ha) ⋙ pbcActualDerivedPush e.hom d) hG, (∀ (M N : WfCompleteCategory X d r a ha) (f : (ObjectProperty.lift (WfIsComplete X d r a ha) (ObjectProperty.ι (WfIsComplete X d r a ha) ⋙ pbcIsoAmbientPullback e.hom d) hH).obj M ⟶ N), (adj.homEquiv M N f).hom = ((pbcActualDerivedAdjunction e.hom d).ofNatIsoLeft (pbcIsoOrdinaryDerivedComparison e.hom d)).homEquiv M.obj N.obj f.hom) ∧ (∀ M : WfCompleteCategory X d r a ha, IsIso (adj.unit.app M)) ∧ (∀ M : WfCompleteCategory X d r a ha, IsIso (adj.counit.app M))) ∧ ∀ (M : PbcCompletedDerived X d) (C : CochainComplex (pbcModules X (pbcAdicCompletion X d)) ℤ) (real : DerivedCategory.Q.obj C ≅ M) (D : CochainComplex (pbcModules X (pbcAdicCompletion X d)) ℤ) (realH : DerivedCategory.Q.obj D ≅ (pbcIsoAmbientPullback e.hom d).obj M), ∃! c : (pbcIsoAmbientPullback e.hom d).obj (intrinsicCompletion X d r a ha M C real) ≅ intrinsicCompletion X d r a ha ((pbcIsoAmbientPullback e.hom d).obj M) D realH, (pbcIsoAmbientPullback e.hom d).map (intrinsicCompletionUnit X d r a ha M C real) ≫ c.hom = intrinsicCompletionUnit X d r a ha ((pbcIsoAmbientPullback e.hom d).obj M) D realH",
+  "branch": "newtargets-dag",
+  "by": "Q04",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b6d273bd8",
+  "group": "Q04",
+  "result": "pass",
+  "note": "Statement matches the node clause by clause and uses only canonical objects. H = pbcIsoAmbientPullback (exact transport along the invertible completedCoefficientMap); G = pbcActualDerivedPush; the adjunction is pbcActualDerivedAdjunction transported by the counit-pinned pbcIsoOrdinaryDerivedComparison. Ambient unit/counit iso; preservation hH/hG as conclusions; restricted adjunction fixed by agreeing with the ambient homEquiv, unit/counit iso; ∃! iso c with H(η)≫c=η over all M and all representatives C, D with realizations. A : Type (u+1), datum fields only, no boundedness or constructibility. True: completion independent of representative, completeness iso-invariant (Steps 7-8). Edge cases e=id, r=0/I=0, zero object, empty scheme OK. H4: parent wfPullbackCompletion_exists lacks G-preservation, the restricted adjunction and arbitrary representatives, so a new theorem is justified. Item diff vs live = lean record + added stmt_dep def-wf-automorphism-completed-transport (landed def node owning pbcIso*, no cycle); four dep lean records identical to live; statement verbatim; docstrings with source, blueprint tag and 8 proof steps; sorry only. Advisories: the Second reading section says no independent reader was used; PbcCompletedPullbackActual has no owning node (genuine derived adjunction, accepted); possibly redundant public imports. No compile run (no change); worker deliver2 --no-push OK f62934a5a17."
  }
 }

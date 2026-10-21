@@ -281,5 +281,32 @@
   "group": "Q116",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q116-9b9016bb0 (reviewer sub-agent of L); spot-checked: I read the whole item. Its statement is byte-identical to NS's re-split creation and it has no new nodes. All 9 steps are recomputed. Step 2 chain map: d_Dφ=−(−1)^qφd_E, both sides dy·φ(x)−(−1)^{p+q}yφ(dx), no Koszul sign, the neighbouring degree a+q+1=0 included. Step 5: v_s is a chain map and untr(g_O)=Qv_sμ_{D,L}^{-1} by the model's ψ=η_Ov_s. Steps 6–7: b=η_F c. Step 8: the inverse transpose is ρ(1⊗e_s)α(μ⊗1) by α naturality and ε extranaturality, then the associator equation, μ naturality and the unitor give Qc μ_{T,L}^{-1}. Step 9 cancels a bijection and the iso H(Qs,1). Cited statements read in full (def-coef-ringed-tensor-hom-model, def-coef-hom-representative-evaluation, lem-sf-ringed-derived-closed-symmetric-monoidal, def-pur-derived-internal-hom, lem-pc-kflat-resolution, the elementary module definitions); each says what its step takes. Every model application is to a K-flat pair (T, W, O[0], L). Stacks 08JD/08JE (sites-cohomology lines 9114ff) and 0A98 match θ; tags 08J9/0A90/06YS/0FPT/03EK/03EM/04TT/03CY checked. Blueprint ancestor file read: statement only, so from.place is accurate. The closure has no cycle (BFS, 260 nodes). The two declared tool uses (K-flat resolution, closed symmetric monoidal) are accepted. No duplicate among the 08JD/08JE citers. No SGA. Edge cases: O[0], rank-one degree −1, zero objects, unbounded E. Remark, not a fault: the inherited statement attributes μ to the flat-term descent node, but F and D are only K-flat, so the item's fixed K-flat model comparison is the operative reading (worker documented it; the citer uses it the same way)."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.RingedOrdinaryEvaluationLocalization",
+  "declaration": "CategoryTheory.ringedOrdinaryEvaluation_localization",
+  "declarations": [
+   "CategoryTheory.ringedOrdinaryHomValue",
+   "CategoryTheory.ringedOrdinaryDualValue",
+   "CategoryTheory.RingedOrdinaryEvaluationFormula",
+   "CategoryTheory.ringedHomAugmentationMap",
+   "CategoryTheory.ringedOrdinaryHomComparison",
+   "CategoryTheory.ringedDualTensorHom",
+   "CategoryTheory.ringedOrdinaryEvaluation_localization"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/RingedOrdinaryEvaluationLocalization.lean",
+  "statement": "theorem ringedOrdinaryEvaluation_localization (S : CoefficientClosedStructure (derivedInternalHomOfUniverses.{c, v, u, w} J R)) (T : CoefficientTensorModels.{u, c, v, w} J R S) (β : @SymmetricCategory (DerivedCategory (RingedTensorModules.{c, v, u} J R)) _ S.monoidal) (coh : RingedDerivedTensorCoherence.{c, v, u, w} J R S T β) (E F : CochainComplex (RingedTensorModules.{c, v, u} J R) ℤ) : ∃ aEF : (coefficientTotalTensor.{u, c, v} J R).obj (F, homComplex (R := R) E (ringedTensorUnitComplex.{c, v, u} J R)) ⟶ homComplex (R := R) E F, RingedOrdinaryEvaluationFormula.{c, v, u} J R E F aEF ∧ (∀ bEF, RingedOrdinaryEvaluationFormula.{c, v, u} J R E F bEF → bEF = aEF) ∧ ∀ (hF : CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := R) F) (hD : CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := R) (homComplex (R := R) E (ringedTensorUnitComplex.{c, v, u} J R))), QuasiIso (ringedHomAugmentationMap.{c, v, u} J R E (ringedTensorUnitComplex.{c, v, u} J R)) → QuasiIso (ringedHomAugmentationMap.{c, v, u} J R E F) → IsIso (ringedOrdinaryHomComparison.{c, v, u, w} J R E (ringedTensorUnitComplex.{c, v, u} J R)) ∧ IsIso (ringedOrdinaryHomComparison.{c, v, u, w} J R E F) ∧ (T.iso J R S F (homComplex (R := R) E (ringedTensorUnitComplex.{c, v, u} J R)) hF hD).hom ≫ S.tensor.map (𝟙 (DerivedCategory.Q.obj F), ringedOrdinaryHomComparison.{c, v, u, w} J R E (ringedTensorUnitComplex.{c, v, u} J R)) ≫ ringedDualTensorHom.{c, v, u, w} J R S coh.unitIso (DerivedCategory.Q.obj E) (DerivedCategory.Q.obj F) = DerivedCategory.Q.map aEF ≫ ringedOrdinaryHomComparison.{c, v, u, w} J R E F",
+  "branch": "sheaf-dag",
+  "by": "Q22",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6c868a028",
+  "group": "Q22",
+  "result": "pass",
+  "note": "Statement matches the node clause by clause: existence and uniqueness of aEF outside the hypotheses, formula y·φ(x) tested on actual sheafified generators, all Hom projections and all U; homDiff and total-tensor signs make it a chain map; θ is transpose of associator, 1⊗ε, (1⊗unitIso.inv)≫ρ, pinned by the coherence conditions; γ is Q(Hom(E,η_G)) followed by the fixed comparison iso, with IsIso concluded for O and F; μ = T.iso; hypotheses only F,D K-flat plus the two augmentation quasi-isomorphisms; universes independent; node changed only in lean, statement verbatim, docstrings with 9 steps, one sorry. Advisory: helpers repeat parent RingedSiteDualityMaps ones (cycle-forced); coefficientHomAugmentation and coefficientHomSectionApply are lemma-module plain defs and coefficientHom* belong to def-coef-hom-representative-evaluation, none of them stmt_deps; lem-weil-pbc-site-derived-tensor-descent is imported but no declaration of it is used. Not compiled, per instruction."
  }
 }

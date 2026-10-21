@@ -302,5 +302,29 @@
   "group": "Q03",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-54dafa5b2 (reviewer sub-agent of L); spot-checked: I read the item's statement and all 8 steps, every cited statement, the blueprint's Complexes paragraph in lem-sfb-constructible-cocone-obj.proof.md, and Stacks 06UQ (derived.tex l.5936, bounded versions) and 015F. The item is not dropped and has no re-split note; it was created by Q45 and is still unsplit on live. It creates no new node and cites no SGA. The statement is unchanged and uses the same coefficients as the cited definitions (E with the restricted norm, Ω made of maps into one finite subfield, the constructibility of def-sfb-constructible-module, no completeness). I accept all 5 declared tool_uses. sk-lem-coefficient-heart, the on-route alternative, does not fit: it is stated only for standing schemes and the finite-constant-model predicate. Fault 1 (C4/E6, repaired): step 2 used lem-weil-pbc-condensed-constructible-serre, whose ring E_T^c and local-presentation predicate are the archived ones of def-weil-pbc-condensed-e-module-category, and asserted without citation that they are 'exactly ours'. The fix cites lem-sfb-condensed-coefficient-presentation-identification (same unit, unsplit) and def-sfb-constructible-module and transports the closure through them; a DFS shows no cycle. Fault 2 (minor, repaired): in step 6, the derived functor of def-sfb-left-derived-functor is taken along K(C)→D while the cited lemma uses CoCh→D. I added the sentence showing the two Kan-extension properties agree, because CoCh→K is a localization and Q∘C(F) factors through it. The other steps are correct: the extension hypotheses in step 1, additivity of shifts in step 3, condensed flatness and additivity via Δ/∇ in step 4, the shift compatibility of φ in step 5, the third triangle square in step 7 (checked), and the composite in step 8. Edge cases checked: X=∅, E=Q_ℓ, negative shifts, acyclic complexes. No duplicate found. The corrected item file is in fixes/dag/nodes/sec-six-functors-basics/; proof_deps are recomputed (17 ids, all existing).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ConstructibleExactScalarTriangulation",
+  "declaration": "AlgebraicGeometry.ProEtale.constructible_exact_scalar_triangulation",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.constructibleScalarExactComparison",
+   "AlgebraicGeometry.ProEtale.constructible_exact_scalar_triangulation"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ConstructibleExactScalarTriangulation.lean",
+  "statement": "theorem constructible_exact_scalar_triangulation [TopologicalSpace.NoetherianSpace X] (E : PadicAlgCl.FiniteIntermediateField ℓ) : (boundedConstructible (padicSubfieldRingObj X ℓ E)).IsTriangulated ∧ (∀ n : ℤ, (shiftFunctor (PadicSubfieldConstructible X ℓ E) n).Additive) ∧ (boundedConstructible (padicSubfieldRingObj X ℓ E)).ι.IsTriangulated ∧ (Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl X ℓ E)).Additive ∧ PreservesFiniteLimits (Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl X ℓ E)) ∧ PreservesFiniteColimits (Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl X ℓ E)) ∧ NatTrans.CommShift (constructibleScalarExactComparison X ℓ E).hom ℤ ∧ (derivedExtendScalarsToPadicAlgCl X ℓ E).IsTriangulated ∧ ((boundedConstructible (padicSubfieldRingObj X ℓ E)).ι ⋙ derivedExtendScalarsToPadicAlgCl X ℓ E).IsTriangulated ∧ NatTrans.CommShift (Functor.isoWhiskerLeft (boundedConstructible (padicSubfieldRingObj X ℓ E)).ι (constructibleScalarExactComparison X ℓ E)).hom ℤ",
+  "branch": "newtargets-dag",
+  "by": "Q48",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The real canonical comparison specializes the existing counit-normalized uniqueness isomorphism (Functor.leftDerivedFunctorIsoMapDerivedCategory) to the recorded derived coefficient extension. The integer-shift structure on derivedExtendScalarsToPadicAlgCl is the recorded condensedAlgClCoefficientCommShift of def-weil-pbc-condensed-coefficient-comparisons (Sheaf.Paper.CondensedCoefficientComparisons), i.e. Functor.CommShift.ofIso of the inverse of this same comparison; the delivery's duplicate instance constructibleScalarExactCommShift was removed by the reviewer (H4). The theorem includes inherited finite-coefficient triangles, additive shifts, ordinary exactness, and shift-compatible triangulated ambient extension and restriction; no triangulation is imposed on closure-coefficient constructible objects.",
+  "fixed_by": "NT-stage2-cc-001a02289"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-001a02289",
+  "group": "Q48",
+  "result": "fix",
+  "note": "Statement matches the node clause by clause: Noetherian underlying space only, recorded E_X/Omega_X rings, boundedConstructible = PadicSubfieldConstructible predicate, inherited triangulation, additive shifts for all n, iota triangulated, extendScalars additive/finite-limit/finite-colimit preserving, canonical counit-normalized leftDerivedFunctorIsoMapDerivedCategory, T and T∘iota triangulated, shift-compatible comparisons. Edge cases covered (X empty, E=Q_l, l=2, n<=0). H4 fixed: the delivered global instance constructibleScalarExactCommShift duplicated the public condensedAlgClCoefficientCommShift (Sheaf.Paper.CondensedCoefficientComparisons, def-weil-pbc-condensed-coefficient-comparisons), the same ofIso term. Fix drops it, publicly imports that module, updates the docstrings and lean-record declarations; statement text unchanged; nt_compile clean in 46.1 s; refit/check_record/check_lean_text clean. Advisories: that def node is not in stmt_deps (an S2 fix cannot add it); def-sfb-left-derived-exact records the FromTotalTensor iso, which does not fit leftDerivedFunctor, so the upstream canonical iso is used."
  }
 }

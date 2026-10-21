@@ -363,5 +363,28 @@
   "group": "NZ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-d014558d9 (reviewer sub-agent of L); spot-checked: I read the whole delivery: report plus item, no new nodes. Statement and stmt_deps are identical to live/side-live, where the item is unsplit; no repair note, not dropped, no SGA. Steps 1–2 hold. W is qcqs via 01T6/01OY, so Nagata applies. V̄ is finite type over k and so finite-dimensional, and the empty case with d=0 is fine. Step 3 meets every hypothesis of thm-amb-etale-exceptional-adjoint. Step 5 is correct: the kun relative bound (k separably closed, A torsion, p qc+lft) gives R^q p_*=0 for q>2d. The upper-amplitude node matches Stacks 07K7(4)(c) on unbounded input. The interface node gives R_c(D^+)⊂D^+ by orthogonality, before the restriction, so there is no circularity. Steps 6–8 hold: restriction to full subcategories; reflection of lower bounds via comparison-exact (3) plus faithfulness from BS Cor 5.1.6 (read: K→ν_*ν^*K is an equivalence on D^+); and the image of the invertible unit. FIX, C-type: step 4 applies lem-weil-pbc-derived-functor-negative-vanishing, whose hypothesis is Grothendieck abelian categories, without citing a node for it. The corrected item now cites lem-pur-ringed-site-grothendieck-abelian in step 4; proof_deps is unchanged. Advisory: no stmt_dep defines U_T=Rν_* or η_T. This gap predates this delivery, and thm-weil-pbc-site-comparison has it too. Read as the D^+ unit of that theorem, which is how step 8 uses it, it is consistent; a def node for Rν_{T,*} is suggested. Accept all 19 declared tool_uses as generic preliminaries.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.BoundaryEtaleAdjunctionRestriction",
+  "declaration": "AlgebraicGeometry.Etale.boundary_etale_adjunction_restriction",
+  "declarations": [
+   "AlgebraicGeometry.Etale.BoundaryEtaleCompactificationAdjunction",
+   "AlgebraicGeometry.Etale.BoundaryEtaleAdjunctionRestriction",
+   "AlgebraicGeometry.Etale.boundary_etale_adjunction_restriction"
+  ],
+  "file": "lean/Sheaf/Paper/BoundaryEtaleAdjunctionRestriction.lean",
+  "statement": "theorem boundary_etale_adjunction_restriction (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (_hn : 1 ≤ n) {V W : Scheme.{u}} (aV : V ⟶ Spec (.of D.k)) (aW : W ⟶ Spec (.of D.k)) [IsSeparated aV] [LocallyOfFiniteType aV] [QuasiCompact aV] [IsSeparated aW] [LocallyOfFiniteType aW] [QuasiCompact aW] (h : V ⟶ W) [IsSeparated h] [LocallyOfFiniteType h] [QuasiCompact h] (_hover : h ≫ aW = aV) : BoundaryEtaleAdjunctionRestriction (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n)) h aW",
+  "branch": "newtargets-dag",
+  "by": "Q94",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-df0063c3d",
+  "group": "Q94",
+  "result": "pass",
+  "note": "Snapshot differs from the side-live node only in the lean record; no statement change; item not dropped and has no repair note. Clause-by-clause match against the declarations: FiniteFieldDatum k, l ≠ D.p, E finite over Q_l, 1 ≤ n, ULift coefficientExtensionRing; V, W, h separated + LOFT + QC with h ≫ aW = aV. Conclusions: Nonempty Compactification h; IsNoetherian and QuasiSeparatedSpace for V, W and every c.Z; finite type of c.g ≫ aW; ∃ d : ℕ bounding topologicalKrullDim (empty case ⊥). F_c is the recorded unbounded D(i_!) ⋙ R(g_*) with an actual right adjoint R; both preserve t.plus. The restricted adjunction equals restrictFullyFaithful of the ambient one via the recorded PlusCompatibility (orientation checked). Comparison pullback reflects IsGE for arbitrary C and b. IsIso of S_V(R(unit_W L)) uses the actual derivedComparisonAdjunction unit (the BS 5.1.6 unit), both ends t.plus, no bound on R_c L assumed. Pro-étale side uses the fixed-ring ModuleCat presentation recorded under §1(B) for def-sf-comparison-derived-pullback, so no substitute. Statement verbatim, autoImplicit off, universes u/u+1 as in the records, no hollow defs, docstrings carry source, blueprint tag and 8 proof steps, sorry only, private proof-only imports with no cycle. Report has both required sections. No compile (2026-10-21 rule); no file changed. Advisory: U_T and η_T from modules outside stmt_deps (pre-existing gap, def node for Rν_* suggested); QuasiSeparatedSpace used where the record names QuasiSeparated (equivalent in Mathlib)."
  }
 }

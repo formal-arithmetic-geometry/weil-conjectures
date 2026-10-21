@@ -20,7 +20,8 @@
   "def-pod-lisse-l-adic-sheaves",
   "def-weil-l-adic-coefficient-extension",
   "def-constructible-stratification",
-  "def-weil-pbc-etale-constructible-sheaf"
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-weil-algebraically-closed-coefficients"
  ],
  "proof": [
   {
@@ -251,5 +252,36 @@
   "group": "Q22",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-0f9aefb22 (reviewer sub-agent of L); spot-checked: Read the item, the new node, every cited statement, Weil II (1.1.10)-(1.1.14) pp.151-153, L19 Def 1.1.7/1.1.10 and Props 1.1.9/1.1.11/1.1.12, and the main-20261015 unit. The statement is kept, with clarifications only: the product topology with discrete Z, the etale adic lisse Weil pair of def-wf-fundamental-representation, and a lattice invariant under P only. Steps 1-3 and 6 are correct. In step 6 I recomputed: sigma=gamma^-n r(g) lies in Gal(k/kappa(x)), which is abelian; w=g a^-1 lies in W; wF_xw^-1=gF_xg^-1 (Deligne 1.1.13). Edge cases checked: rank 0, a rank-1 non-unit Frobenius, e_x=1. The new node lem-real-compact-matrix-coefficient-descent is true (Baire over countably many closed E_i, reducing to the Hausdorff quotient; empty I gives E=Q_l). It matches L19 1.1.9 first bullet and is not a duplicate. It is stated exactly by the sorry-free project theorem PadicAlgCl.exists_finiteDimensional_forall_mem (IntegralModel.lean:58), reported for attachment. Batch 5: all six flagged citations (def-wf-weil-group, def-wf-fundamental-representation, def-pod-lisse-l-adic-sheaves, lem-pod-profinite-stable-lattice, prop-wf-weil-sheaf-representation-equivalence, lem-wf-fibre-functor-basepoint-transport) are general definitions or the Galois/lisse dictionary and are already in the batch-5 closure computed without the item's new proof. The closure grows only by the new generic node, so they are accepted. Repairs: (1) C6: Q16 landed prop-wf-weil-sheaf-representation-equivalence on 2026-10-21 citing sk-d-real-weil, so the item's step-4 citation would make a 2-cycle at merge. The cite is dropped and the prop is named as the theorem carrying the definition's equivalence clause (maintainer: record it in pointers). The prop's tool_uses entry and blueprint line are removed or adjusted. A cycle re-check on live plus the fix found none. (2) E5, step 5: r(d_x(sigma))=sigma needed the path's constant-cover conjugation by some u in Gal(k/k0) to drop out. This is now written out via lem-wf-arithmetic-lift-fibre-path for Spec k0, with det-base-field-cd-galois-group cited for abelianness. Advisory: the constructible-Weil-sheaf convention (Weil II 1.1.1 adic) differs from def-weil-weil-sheaf-complex(3) used by d-real-cohom; no comparison node exists. The snapshot dagsnap vanished mid-review, so the closure and cycle checks were redone on clones/live.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RealWeilSheaves",
+  "declaration": "RealSheaves.ConstructibleWeilSheaf",
+  "declarations": [
+   "RealSheaves.Setup.weilFieldDatum",
+   "RealSheaves.Setup.weilFrobenius",
+   "RealSheaves.weilDiagramDenominators",
+   "RealSheaves.WeilRationalDiagrams",
+   "RealSheaves.weilDiagramPullback",
+   "RealSheaves.IsConstructibleWeilDiagram",
+   "RealSheaves.ConstructibleWeilSheaf",
+   "AlgebraicGeometry.WeilGroup.IsLisseInEveryBasis",
+   "AlgebraicGeometry.WeilGroup.isLisse_iff_everyBasis",
+   "AlgebraicGeometry.WeilGroup.isLisse_iff_finiteModel"
+  ],
+  "file": "lean/Sheaf/Paper/RealWeilSheaves.lean",
+  "statement": "structure ConstructibleWeilSheaf (D : Setup.{u, v}) (C₀ : Scheme.{u}) [C₀.Over (Spec (.of D.k₀))] (hC : D.IsCurve C₀)",
+  "branch": "sheaf-dag",
+  "by": "Q159",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Reuses the existing WeilGroup presentation, local Frobenius and actual etale lisse Weil pairs/stalk representation. Adds the every-basis lissity predicate in independent group/coefficient/vector universes (the old predicate tested only finite bases), its finite-dimensional compatibility, the whole-Weil finite-field model criterion with only geometric lattice invariance, and global compatible-system representatives of constructible Weil sheaves with a rational global Frobenius isomorphism. The coefficient closure universe is independent of the scheme universe, via the existing canonical small finite-field models. The additional statement dependency supplies precisely that size transport; no statement correction or dependency replacement."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0510c8d61",
+  "group": "Q159",
+  "result": "pass",
+  "note": "Read the item, all 9 stmt_deps and the reused declarations in side-live (WeilGroup in RealSheaves/Basic, IsLisse, Lisse/AdicIntegralDiagramOfUniverses, EtaleLisseWeilSheaf/etaleFundamentalRep, FrobeniusDetailed.geometricFrobenius = id×Spec(z^{1/q}), FiniteLocallyClosedStratification, AlgebraicallyClosedCoefficients.Index/Coefficient). Clauses match: pinned Weil group, degree, topology and local Frobenius reused; IsLisseInEveryBasis is justified because the old IsLisse tests only Fin-n bases (vacuous in infinite dimension), with a finite-dim compatibility theorem; isLisse_iff_finiteModel is true (whole-W E-model, continuity and lattice only on the geometric subgroup, free rank-n spanning O_E lattice, n=0 covered); ConstructibleWeilSheaf has one global adic system, lisse on the geometric fibres of one stratification of C0, and a rational Phi_C^*F≅F (localization at ϖ^n·iso gives Hom⊗E and allows a non-integral Frobenius). Added stmt_dep def-weil-algebraically-closed-coefficients is a landed node (brief l.140) with no cycle (BFS). Records verbatim, 10 decls listed, no clashes, no hollow defs, theorems sorry with proof docstrings. Not compiled per the 2026-10-21 rule; worker reports clean compiles and an OK dry run. Advisory: Phi_C built from non-stmt_dep owners (def-weil-finite-field-fiber, def-weil-frobenius-detailed); redundant public imports (IsConstructibleEtaleModuleSheaf, RealSheaves.FundamentalGroup); second reading done by the worker itself; existing WeilGroup/IsLisse (the item's blueprint_lean) not listed in the record; no comparison to def-wf-weil-category."
  }
 }

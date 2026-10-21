@@ -224,5 +224,40 @@
   "group": "NE",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NE-2f02d6605 (reviewer sub-agent of L); spot-checked: Read in full: the item, Stacks 08JJ (sites-cohomology.tex lines 13048–13133, last three displays), 0A8X (Hom differential, line 8592), 11912, and the statement of every cited node: bounded-dual-components, def-pc-tensor-complex-sheaves, def-pur-hom-complex, def-pur-sheaf-hom, def-pur-sheaf-tensor-product, def-weil-presheaf-modules-sheafification and def-weil-sheaf-of-modules-category. Statement and stmt_deps are unchanged from base; this is the first split of an unsplit node, with no new nodes. The coefficient category is O-module sheaves on a small ringed site with commutative O throughout, and no hypothesis is added. I recomputed the sign: with d_D φ=(-1)^{q+1}φ d_E and the tensor sign (-1)^p, the tensor side gives (-1)^{n+1}yφ(d_E x) at r=-q-1, and the Hom differential -(-1)^n f d_E gives the same. The r=-q term is (d_F y)φ(x) on both sides by R-linearity, so no extra sign is needed, as the item states. Zero tensor factors (via the sheafification universal property), the finite product equal to the biproduct, the construction on slices (balanced because R is commutative, then extended through sheafification), the diagonal matrix of θ's, the diagonal inverse and the inverse chain map are all correct. Edge cases tested: a>b, E in a single degree, F unbounded, R=0, and an explicit sign check with E=R→R. The scheme-only lem-pc evaluation nodes are not duplicates and do not apply on a general ringed site. The only non-definition cite is the same-unit dual-components node, whose proof uses only definitions, so there is no cycle. tool_uses is empty. Mathlib searches cover all three kinds with no match. The one change: the report wrongly says the current blueprint has no proof paragraph. sk-thm-sf-ctf-stability-internal-hom.proof.md exists, and its second paragraph ('The formula') ends with the sentence this item serves: P is dualizable and cHom_S(P,-) ≃ P^∨⊗^L -. The corrected blueprint.from.place names that sentence instead of the statement display. from.node=null and via are kept as inherited.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.RingedSiteBoundedEvaluationAssembly",
+  "declaration": "CategoryTheory.RingedSiteBoundedEvaluation.assembly",
+  "declarations": [
+   "CategoryTheory.RingedSiteBoundedEvaluation.Modules",
+   "CategoryTheory.RingedSiteBoundedEvaluation.unitComplex",
+   "CategoryTheory.RingedSiteBoundedEvaluation.dual",
+   "CategoryTheory.RingedSiteBoundedEvaluation.smallColimits",
+   "CategoryTheory.RingedSiteBoundedEvaluation.hasTotal",
+   "CategoryTheory.RingedSiteBoundedEvaluation.total",
+   "CategoryTheory.RingedSiteBoundedEvaluation.inclusion",
+   "CategoryTheory.RingedSiteBoundedEvaluation.pureTensor",
+   "CategoryTheory.RingedSiteBoundedEvaluation.dualProjection",
+   "CategoryTheory.RingedSiteBoundedEvaluation.IsModuleEvaluation",
+   "CategoryTheory.RingedSiteBoundedEvaluation.sourceFamily",
+   "CategoryTheory.RingedSiteBoundedEvaluation.targetFamily",
+   "CategoryTheory.RingedSiteBoundedEvaluation.finiteBiproducts",
+   "CategoryTheory.RingedSiteBoundedEvaluation.assembly"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/RingedSiteBoundedEvaluationAssembly.lean",
+  "statement": "theorem assembly (E F : CochainComplex (Modules.{u, v, w} R) ℤ) (a b : ℤ) (hbounded : ∀ i : ℤ, i < a ∨ b < i → IsZero (E.X i)) : ∃ θ : ∀ (i : ℤ) (M : Modules.{u, v, w} R), M ⊗ SheafOfModules.homObj (E.X i) (𝟙_ (Modules.{u, v, w} R)) ⟶ SheafOfModules.homObj (E.X i) M, (∀ (i : ℤ) (M : Modules.{u, v, w} R), IsModuleEvaluation.{u, v, w} R (E.X i) M (θ i M)) ∧ ((∀ (i : ℤ) (M : Modules.{u, v, w} R), IsIso (θ i M)) → ∃ ε : total.{u, v, w} R E F ≅ homComplex E F, ∃ δ : ∀ i : ℤ, (dual.{u, v, w} R E).X (-i) ≅ SheafOfModules.homObj (E.X i) (𝟙_ (Modules.{u, v, w} R)), (∀ i : ℤ, (δ i).hom = dualProjection.{u, v, w} R E (-i) i (by omega)) ∧ (∀ (p q n r : ℤ) (hpq : p + q = n) (hrq : r + q = 0) (hrn : r + n = p) (U : Cᵒᵖ) (y : (F.X p).val.obj U) (φ : ((dual.{u, v, w} R E).X q).val.obj U) (V : (Over U.unop)ᵒᵖ) (x : (E.X r).val.obj (op V.unop.left)), ((((homComplexπ E F n r p hrn).val.app U).hom (((inclusion.{u, v, w} R E F p q n hpq ≫ ε.hom.f n).val.app U).hom (pureTensor.{u, v, w} R (F.X p) ((dual.{u, v, w} R E).X q) U y φ))).app V).hom x = ((((dualProjection.{u, v, w} R E q r hrq).val.app U).hom φ).app V).hom x • (F.X p).val.map V.unop.hom.op y) ∧ (∀ (p q n r t : ℤ) (hpq : p + q = n) (hrt : r + n = t) (_hrq : r + q ≠ 0), inclusion.{u, v, w} R E F p q n hpq ≫ ε.hom.f n ≫ homComplexπ E F n r t hrt = 0) ∧ (∀ n : ℤ, ∃ s : biproduct (sourceFamily.{u, v, w} R E F a b n) ≅ (total.{u, v, w} R E F).X n, ∃ t : (homComplex E F).X n ≅ biproduct (targetFamily.{u, v, w} R E F a b n), (∀ i : ↥(Finset.Icc a b), biproduct.ι (sourceFamily.{u, v, w} R E F a b n) i ≫ s.hom = F.X (i.val + n) ◁ (δ i.val).inv ≫ inclusion.{u, v, w} R E F (i.val + n) (-i.val) n (by omega)) ∧ (∀ i : ↥(Finset.Icc a b), t.hom ≫ biproduct.π (targetFamily.{u, v, w} R E F a b n) i = homComplexπ E F n i.val (i.val + n) rfl) ∧ s.hom ≫ ε.hom.f n ≫ t.hom = biproduct.map (fun i : ↥(Finset.Icc a b) ↦ θ i.val (F.X (i.val + n)))) ∧ (∀ (p q r : ℤ), inclusion.{u, v, w} R E F p q (p + q) rfl ≫ (total.{u, v, w} R E F).d (p + q) (p + q + 1) ≫ ε.hom.f (p + q + 1) ≫ homComplexπ E F (p + q + 1) r (r + (p + q + 1)) rfl = inclusion.{u, v, w} R E F p q (p + q) rfl ≫ ε.hom.f (p + q) ≫ (homComplexπ E F (p + q) r (r + (p + q)) rfl ≫ SheafOfModules.homObjMap (𝟙 (E.X r)) (F.d (r + (p + q)) (r + (p + q + 1))) - (p + q).negOnePow • (homComplexπ E F (p + q) (r + 1) (r + (p + q + 1)) (by omega) ≫ SheafOfModules.homObjMap (E.d r (r + 1)) (𝟙 _)))) ∧ (∀ n : ℤ, IsIso (ε.hom.f n)) ∧ (∀ n : ℤ, ε.inv.f n ≫ ε.hom.f n = 𝟙 _ ∧ ε.hom.f n ≫ ε.inv.f n = 𝟙 _))",
+  "branch": "sheaf-dag",
+  "by": "Q114",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "All helpers are transparent specializations of the recorded module, Hom and tensor constructions, or the local pure-tensor characterization of the canonical comparison. The sole postponed theorem states all finite-support, slice, diagonal, differential and inverse clauses. The initial existential constructs the uniquely characterized module comparisons; its implication imposes exactly the termwise-isomorphism hypothesis."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-53f60faa4",
+  "group": "Q114",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 08JJ final displays clause by clause. Hypotheses: bounded support, ∀ i M IsIso of the canonical θ; θ is uniquely pinned by IsModuleEvaluation on local pure tensors and slices. ε is pinned by the sign-free pure-tensor formula at r+q=0 and zero components elsewhere. Finite-sum identifications s/t/δ are pinned on biproduct ι/π and dualProjection; the diagonal biproduct.map θ identity matches. The differential clause is consistent with the recorded homComplex d; the sign (−1)^{p+q+1} was recomputed. Inverse chain map present. 𝟙_ = SheafOfModules.unit (LocalizedMonoidal), so smul is the R(V)-action. Universes max u v w, the project convention. Edge cases a>b, single degree, unbounded F and R=0 are OK. Docstrings and the 8-step proof are present, nothing hollow, no dropped imports, node unchanged except lean. Not recompiled (none needed): report gives 15.5 s/20.0 s clean. Advisories: homComplexπ (lem-sc-hom-complex-projections) and ringedSiteModules/sheafificationAdjunction are used without being stmt_deps; the dual-components module, landed 16:55 after base, has definitionally equal parallel helpers (complexDual/component) that stage 3 must bridge."
  }
 }

@@ -292,5 +292,33 @@
   "group": "Q02",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-97cf96b59 (reviewer sub-agent of L); spot-checked: Read the whole item: 7 steps, statement byte-identical to the live base. It is the first delivery for the item (live and side-live: unsplit), it is not on the dropped list and has no repair note, and it adds no new nodes. Sources checked: blueprint main-20261015 def-sfb-modobj-extension.md and .proof.md, and Mathlib Bimod.lean RightUnitorBimod hom/inv (680-690) and rightUnitorBimod for Bimod X Y (764-770). Statements read: every cited node plus det-def-sfb-sheaf-tensor-structure. Steps 1-3 are correct: the cokernel presheaf sheafifies to a coequalizer, the coequalizer and inverse in step 3 are exactly those of the mixed-bimodule right-unitor leaf, and the left action goes through the first factor. The q∘ι=φ computation in step 5 is correct. Three repairable faults, fixed in fixes/dag/nodes/sec-proetale-coefficients/lem-sfb-regular-scalar-extension-multiplication.json. F1 (C4/C1): steps 4-6 read the sheaf unitors as formulas on sections. Step 4 used the ρ⋆ clause without det-def-sfb-sheaf-tensor-structure, the only node saying the sheaf structure's unitors are ρ⋆ and λ⋆; steps 5-6 used λ_R⁻¹(a)=t(u(1)⊗a) with no citation at all. Both citations are added. F2 (E5/C4): steps 6-7 assumed associativity and commutativity on sections of a general commutative ring object, which no cited node gives. Replaced by checked diagrammatic proofs: m_tμ=μ(m_t⊗R)=μ(R⊗m_t) from the coherence identities, then φm_t=m_{φt}φ and S-linearity of m_{φt} give r(S⊗m_t)=m_{φt}r, and π cancels. F3: added the missing stmt_dep sk-def-sfb-ring-object, which defines commutative ring objects. proof_deps recomputed. Edge cases checked: φ=id, Z→Z/n (not flat), S=0, t=0, t=1, t not a unit, a site with no final object. Tool uses accepted: generators and unit-comparison are generic sheaf-tensor comparisons that this unit does not supply. No duplicate nodes, no cycle, no SGA.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RegularScalarExtensionMultiplication",
+  "declaration": "CategoryTheory.sfbRegularScalarExtensionMultiplication",
+  "declarations": [
+   "CategoryTheory.sfbRegularAbMonoidal",
+   "CategoryTheory.sfbRegularAbSymmetric",
+   "CategoryTheory.sfbRegularAbTensorLeft",
+   "CategoryTheory.sfbRegularAbTensorRight",
+   "CategoryTheory.sfbRegularTensorGenerators",
+   "CategoryTheory.sfbRegularSection",
+   "CategoryTheory.sfbRegularScalarExtensionMultiplication"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/RegularScalarExtensionMultiplication.lean",
+  "statement": "theorem sfbRegularScalarExtensionMultiplication (R S : Sheaf J Ab.{w}) [MonObj R] [MonObj S] [IsCommMonObj R] [IsCommMonObj S] (φ : R ⟶ S) [IsMonHom φ] : ∃! q : (Mod.extendScalars φ).obj (Mod.regular R) ≅ Mod.regular S, Mod.extendπ φ (Mod.regular R) ≫ q.hom.hom = S ◁ φ ≫ μ[S] ∧ q.inv.hom = (ρ_ S).inv ≫ S ◁ η[R] ≫ Mod.extendπ φ (Mod.regular R) ∧ Mod.extendUnitHom φ (Mod.regular R) ≫ q.hom.hom = φ ∧ (∀ (U : Cᵒᵖ) (b : S.obj.obj U) (a : R.obj.obj U), q.hom.hom.hom.app U ((Mod.extendπ φ (Mod.regular R)).hom.app U ((sfbRegularTensorGenerators J S R).app U (TensorProduct.tmul ℤ b a))) = μ[S].hom.app U ((sfbRegularTensorGenerators J S S).app U (TensorProduct.tmul ℤ b (φ.hom.app U a)))) ∧ (∀ (U : Cᵒᵖ) (b : S.obj.obj U), q.inv.hom.hom.app U b = (Mod.extendπ φ (Mod.regular R)).hom.app U ((sfbRegularTensorGenerators J S R).app U (TensorProduct.tmul ℤ b (sfbRegularSection J R η[R] U)))) ∧ (∀ (U : Cᵒᵖ) (a : R.obj.obj U), (Mod.extendUnitHom φ (Mod.regular R)).hom.app U a = (Mod.extendπ φ (Mod.regular R)).hom.app U ((sfbRegularTensorGenerators J S R).app U (TensorProduct.tmul ℤ (sfbRegularSection J S η[S] U) a))) ∧ ∀ t : 𝟙_ (Sheaf J Ab.{w}) ⟶ R, ∃ mR : Mod.regular R ⟶ Mod.regular R, ∃ mS : Mod.regular S ⟶ Mod.regular S, mR.hom = (λ_ R).inv ≫ t ▷ R ≫ μ[R] ∧ mS.hom = (λ_ S).inv ≫ (t ≫ φ) ▷ S ≫ μ[S] ∧ (∀ (U : Cᵒᵖ) (a : R.obj.obj U), mR.hom.hom.app U a = μ[R].hom.app U ((sfbRegularTensorGenerators J R R).app U (TensorProduct.tmul ℤ (sfbRegularSection J R t U) a))) ∧ (∀ (U : Cᵒᵖ) (b : S.obj.obj U), mS.hom.hom.app U b = μ[S].hom.app U ((sfbRegularTensorGenerators J S S).app U (TensorProduct.tmul ℤ (φ.hom.app U (sfbRegularSection J R t U)) b))) ∧ (Mod.extendScalars φ).map mR ≫ q.hom = q.hom ≫ mS",
+  "branch": "newtargets-dag",
+  "by": "Q68",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The auxiliary instances specialize the recorded canonical tensor structure and its colimit-preservation theorem; no new tensor is chosen. The two helper maps evaluate the actual sheafification generators. The unique regular-module isomorphism is normalized on the balancing projection, with explicit inverse, local generator equations, unit insertion, and multiplication conjugation. All maps use the recorded Mod.extendScalars construction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8c7302542",
+  "group": "Q68",
+  "result": "pass",
+  "note": "Read the item, its 4 stmt_deps and their Lean (SheafTensor comparison/properties, ExtendScalars ofMonHom/extendπ/extendScalars/extendUnitHom, Mathlib Mod, RingPresheaf), SheafTensorStructure (monoidal = Sheaf.monoidalCategory), BraidedSheafTensorGenerators and the Bimod.rightUnitorBimod leaf. Every node clause is rendered: ∃! S-linear q pinned by π≫q = S◁φ≫μ and q⁻¹ = ρ⁻¹≫S◁η≫π (= RightUnitorBimod hom/inv); section formulas via toSheafify≫comparison.inv (canonical t_{F,G}); ι = recorded extendUnitHom with q∘ι = φ; t : 𝟙 ⟶ R evaluated at u(1) (node permits this); m_t and m_{φt} pinned by formula with existence = linearity; conjugation in the right order; no assumptions on φ; independent universes. Edge cases checked: φ=id, Z→Z/n, S=0, t=0/1/non-unit, no final object. Node diff is lean only; statement verbatim; helpers have real data; sorry only in the proof; docstrings complete; imports = proof-dep modules; lines ≤ 91. No duplicate declaration (InternalExtensionFinitePresentation's e₀ is a clause of a different pro-étale theorem). No recompile per the 2026-10-21 rule. Advisory: global instances overlap Defs.lean:96 monoidalCategory_sheaf_of_essentiallySmall (both unfold to Sheaf.monoidalCategory); generator docstring could cite lem-sfb-braided-sheaf-tensor-generators."
  }
 }

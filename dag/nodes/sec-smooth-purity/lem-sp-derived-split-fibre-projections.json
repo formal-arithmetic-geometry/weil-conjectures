@@ -219,5 +219,23 @@
   "group": "Q157",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q157-8d32c8564 (reviewer sub-agent of L); spot-checked: Read in full: the item JSON (8 steps, no new nodes), all four cited statements (the def-weil-abstract-derived-category definition and three Mathlib leaves: HomologySequence.exact₁₂₃, DerivedCategory.isIso_iff at line 88, comp_distTriang_mor_zero₁₂), Stacks 08DG lemma-glue (cohomology.tex:11071-11125), and parent step 2 of lem-sp-ringed-topos-binary-descent, which uses case 1 on U, case 2 plus the transport clause on V, and df=0 on W. The statement is unchanged from side-live and is correct. Sign checks: d=(h,-1) has section (0,-1), its kernel is the graph (1,a), and df=hp-q. d=(1,-r) has section (1,0), its kernel is the image of (b,1), and df=p-rq. Step 2 uses the long exact sequence with δ^n and δ^{n-1} both zero to get a short exact sequence. Steps 3-4 and 6 are kernel comparisons with mono cancellation. Steps 5 and 7 conclude in D itself via isIso_iff and clause (i). In step 8 the transport section β⁻¹sγ is checked. Edge cases checked: zero objects, h=0, h=1, characteristic 2, unbounded objects. The item is not superseded (unsplit on live and side-live), not in route-pivot-dropped, has no repair note and cites no SGA. No duplicate: lem-pc-derived-zero-third-split and lem-pc-derived-splitting-unique do not give the specified projections. No tool_uses are needed because all cited nodes are definitions or Mathlib leaves."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DerivedCategory.SplitFibreProjections",
+  "declaration": "DerivedCategory.split_fibre_projections",
+  "file": "lean/Sheaf/CategoryTheory/DerivedCategory/SplitFibreProjections.lean",
+  "statement": "theorem split_fibre_projections (A : Type u) [Category.{v} A] [Abelian A] [HasDerivedCategory.{w} A] (T : Triangle (DerivedCategory A)) (hT : T ∈ distTriang (DerivedCategory A)) (X Y : DerivedCategory A) (β : T.obj₂ ≅ X ⊞ Y) : (∀ (h : X ⟶ Y) (γ : T.obj₃ ≅ Y), T.mor₂ ≫ γ.hom = β.hom ≫ biprod.desc h (-𝟙 Y) → IsIso (T.mor₁ ≫ β.hom ≫ biprod.fst) ∧ T.mor₁ ≫ β.hom ≫ biprod.snd = (T.mor₁ ≫ β.hom ≫ biprod.fst) ≫ h ∧ ∀ n : ℤ, IsSplitEpi ((homologyFunctor A n).map T.mor₂) ∧ Mono ((homologyFunctor A n).map T.mor₁) ∧ imageSubobject ((homologyFunctor A n).map (T.mor₁ ≫ β.hom) ≫ Functor.biprodComparison (homologyFunctor A n) X Y) = kernelSubobject (biprod.desc ((homologyFunctor A n).map h) (-𝟙 ((homologyFunctor A n).obj Y))) ∧ imageSubobject ((homologyFunctor A n).map (T.mor₁ ≫ β.hom) ≫ Functor.biprodComparison (homologyFunctor A n) X Y) = imageSubobject (biprod.lift (𝟙 ((homologyFunctor A n).obj X)) ((homologyFunctor A n).map h))) ∧ (∀ (r : Y ⟶ X) (γ : T.obj₃ ≅ X), T.mor₂ ≫ γ.hom = β.hom ≫ biprod.desc (𝟙 X) (-r) → IsIso (T.mor₁ ≫ β.hom ≫ biprod.snd) ∧ T.mor₁ ≫ β.hom ≫ biprod.fst = (T.mor₁ ≫ β.hom ≫ biprod.snd) ≫ r ∧ ∀ n : ℤ, IsSplitEpi ((homologyFunctor A n).map T.mor₂) ∧ Mono ((homologyFunctor A n).map T.mor₁) ∧ imageSubobject ((homologyFunctor A n).map (T.mor₁ ≫ β.hom) ≫ Functor.biprodComparison (homologyFunctor A n) X Y) = kernelSubobject (biprod.desc (𝟙 ((homologyFunctor A n).obj X)) (-((homologyFunctor A n).map r))) ∧ imageSubobject ((homologyFunctor A n).map (T.mor₁ ≫ β.hom) ≫ Functor.biprodComparison (homologyFunctor A n) X Y) = imageSubobject (biprod.lift ((homologyFunctor A n).map r) (𝟙 ((homologyFunctor A n).obj Y))))",
+  "branch": "newtargets-dag",
+  "by": "Q91",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-554981268",
+  "group": "Q91",
+  "result": "pass",
+  "note": "Q91 lem-sp-derived-split-fibre-projections 554981268ab8: one sorry-only theorem DerivedCategory.split_fibre_projections; only the lean field added, dep record identical to side-live, lean.statement matches the file verbatim, no live module or collision, not dropped, no repair note. Clause check: arbitrary distinguished T with specified β : obj₂ ≅ X⊞Y and γ cover the literal triangles and the specified-isomorphism clause; case 1 IsIso p, q = p≫h, per-degree split epi, mono, image = kernel of (Hh,-1) = graph lift(1,Hh); case 2 IsIso q, p = q≫r, kernel of (1,-Hr) = image of lift(Hr,1); signs verified, identification uses the canonical Functor.biprodComparison; all clauses true (section in D). Universes u,v,w independent, no extra hypotheses; edge cases zero summands, h=0/r=0, characteristic 2, all n, unbounded complexes. No duplicate (exists_iso_binaryBiproduct_of_distTriang needs mor3=0). Docstrings carry Stacks 08DG/05RS, the blueprint tag and the 8 proof steps; minimal imports; no defs. Not recompiled (no file changed)."
  }
 }
