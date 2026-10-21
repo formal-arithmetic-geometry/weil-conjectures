@@ -21016,3 +21016,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:11 L: merged deliver/NS/lem-pur-line-unbounded-derived-tensor (stage 2; reviewer PASS; parallel immutable checks)
 - 08:11 L: merged deliver/NH/sk-def-sfb-transport (stage 2; reviewer PASS; parallel immutable checks)
 - 08:11 L: returned deliver/NC/lem-coef-ringed-pullback-hom-evaluation-comparison (reviewer RETURN: L: independent stage-2 immutable head 6bf4bda2afc2: H2: delivery adds theorem node lem-sfb-ringed-derived-adjoint-lift t)
+- 08:12 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
