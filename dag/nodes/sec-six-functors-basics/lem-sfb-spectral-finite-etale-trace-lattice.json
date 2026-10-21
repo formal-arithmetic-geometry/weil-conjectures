@@ -1,0 +1,130 @@
+{
+ "id": "lem-sfb-spectral-finite-etale-trace-lattice",
+ "kind": "statement",
+ "title": "Finite etale trace descent in the spectral coefficient convention",
+ "statement": "For a finite extension E/Q_l with its canonical spectral topology and recorded valuation subring A, let p:U→X be finite etale surjective and P locally free over E_X. Given a locally free A_U-module M and an isomorphism E_U⊗M≅p*P, there is a locally free A_X-module N with a monic inclusion N→Res_A P whose actual scalar-extension adjoint is invertible. The source proof constructs N as the image of M under the sheet-sum trace. No etale-local lattice existence, Noetherianity, or stratification is asserted. The coefficient extension, pulled coefficients and internal modules are those of [def-weil-l-adic-coefficient-extension], [sk-def-sfb-pulled-back-coefficients] and [sk-def-sfb-module-objects].",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "def-weil-pbc-continuous-lattice-intersection"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice.proof.md",
+  "place": "Pushing down by the trace: exact rationalization of the integral image inclusion"
+ },
+ "proof": [
+  {
+   "text": "Apply continuousFiniteEtaleTrace_lattice to obtain an epic trace and its locally free integral image. Use that image as the lattice, with its canonical monic image inclusion.",
+   "uses": [
+    "lem-sfb-continuous-finite-etale-trace-lattice"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Extend scalars along integralScalarMap. Exact integral localization preserves monomorphisms. The pushed embedding becomes invertible: its comparison is the given lattice isomorphism, the integral push comparison and the localization counit. Naturality of the counit identifies F(g) followed by the counit with this invertible map followed by the epic trace, so F(g) is epic. The image factorization then makes F(image.ι g) epic; it is also monic and hence invertible. Its composite with the invertible counit is exactly the adjoint of the actual image inclusion. All these categorical identities and instances are proved in the private trace-image helpers.",
+   "uses": [
+    "lem-weil-pbc-continuous-integral-scalar-exact",
+    "lem-weil-pbc-integral-localization-counit",
+    "lem-weil-pbc-integral-underived-push-comparison",
+    "def-weil-pbc-continuous-lattice-intersection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use an explicit congruence for equality of the scalar maps, then continuousIntegers_eq to transport the norm ball to the valuation subring. Bundle the two coefficient rings and the inclusion as a coefficient diagram. Equality of the coherent normed field and algebra structures gives equality of these diagrams; transport the entire lattice property along that equality. Packing and unpacking preserve the original field, algebra and scalar-extension adjunction without large definitional reductions. Empty bases, zero rank and cover degrees divisible by l are included.",
+   "uses": [
+    "def-weil-pbc-continuous-coefficient-module-encoding"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-continuous-finite-etale-trace-lattice",
+  "lem-weil-pbc-continuous-integral-scalar-exact",
+  "lem-weil-pbc-integral-localization-counit",
+  "lem-weil-pbc-integral-underived-push-comparison",
+  "def-weil-pbc-continuous-lattice-intersection",
+  "def-weil-pbc-continuous-coefficient-module-encoding"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "U8",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice.proof.md",
+  "place": "The trace-image inclusion rationalizes by exact localization; explicit transport gives the original spectral coefficient convention."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Exact localization makes the inclusion of the image of a surjective trace an isomorphism after extension of scalars",
+   "results": "8 hits: Algebra.trace_localization, Algebra.traceMatrix_localizationLocalization, trace_quotient_eq_trace_localization_quotient, exact_of_isLocalized_span, surjective_of_isLocalized_span, KaehlerDifferential.exact_kerCotangentToTensor_mapBaseChange, exact_of_localized_span, exact_of_isLocalized_maximal.",
+   "verdict": "No continuous-sheaf trace-image theorem; generic mono/epi categorical facts are used in the proof.",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIso\", \"image.ι\"",
+   "results": "0 hits",
+   "verdict": "No direct match.",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "grep",
+   "query": "image.*localiz|localiz.*image|trace.*[Ii]mage",
+   "results": "25 hits concerning algebraic localization, basic-open preimages and categorical localization.",
+   "verdict": "No match for this continuous coefficient trace-image assertion.",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact localization makes the inclusion of the image of a surjective trace invertible after extension of scalars",
+   "results": "8 hits: IsLocalizedModule.map_surjective, RingHom.surjective_localizationPreserves, IsLocalizedModule.map_surjective_iff_localizedModuleMap_surjective, Algebra.Extension.localization, IsLocalization.map_surjective_of_surjective, Module.Invertible.instLocalizationLocalizedModule, Module.FinitePresentation.isLocalizedModule_mapExtendScalars, IsLocalization.mapₐ_surjective_of_surjective. These concern algebraic localized modules and maps, not categorical images in continuous-coefficient sheaf modules.",
+   "verdict": "No match; the objects and hypotheses differ from the sheaf assertion.",
+   "date": "2026-10-21"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.StratifiedLattice",
+  "date": "2026-10-21",
+  "group": "U8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": "sk-lem-stratified-lattice"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-stratified-lattice",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SpectralFiniteEtaleTraceLattice",
+  "file": "lean/Sheaf/Paper/SpectralFiniteEtaleTraceLattice.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.spectralFiniteEtaleTrace_lattice",
+  "statement": "theorem spectralFiniteEtaleTrace_lattice\n    (l : ℕ) [Fact l.Prime] (E : Type) [hField : Field E]\n    [hAlg : Algebra ℚ_[l] E] [hFin : FiniteDimensional ℚ_[l] E]\n    (X : Scheme.{u}) :\n    letI := spectralNorm.nontriviallyNormedField ℚ_[l] E\n    let A := Profinite.continuousMapRingObj.{u} (Padic.coefficientExtensionIntegers l E)\n    let B := Profinite.continuousMapRingObj.{u} E\n    let a : A ⟶ B := (sheafCompose (coherentTopology Profinite.{u})\n      (forget₂ RingCat.{u + 1} Ab.{u + 1})).map\n        (Profinite.continuousMapRingSheafMap\n          (Padic.coefficientExtensionIntegers l E).subtype continuous_subtype_val)\n    ∀ (P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj B X)),\n      LocallyFree (condensedRingObj B X) P →\n      ∀ {U : Scheme.{u}} (p : U ⟶ X) [IsFinite p] [Etale p] [Surjective p]\n        (M : Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1}) (condensedRingObj A U)),\n      LocallyFree (condensedRingObj A U) M →\n      ((Mod.extendScalars (coefficientMap a U)).obj M ≅ (upperStar B p).obj P) →\n      ∃ N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj A X),\n        LocallyFree (condensedRingObj A X) N ∧\n        ∃ ι : N ⟶ (Mod.comap (coefficientMap a X)).obj P,\n          Mono ι ∧ IsIso (((Mod.extendRestrictAdjunction\n            (coefficientMap a X)).homEquiv N P).symm ι)",
+  "branch": "sheaf-dag",
+  "by": "U8",
+  "date": "2026-10-21"
+ },
+ "mathlib_match": null,
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-47bc9",
+  "group": "U8",
+  "result": "pass",
+  "landing": "20261021T225228-L-3801584",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-47bc9",
+  "group": "U8",
+  "result": "pass",
+  "landing": "20261021T225228-L-3801584",
+  "kind": "interface",
+  "note": "independent cc review: delivered StratifiedLattice/Spectral*/ContinuousFiniteEtaleTraceLattice modules and 4 nodes vs live clone, unit sk-lem-stratified-lattice realized steps, #print axioms of the proved theorems, sandbox compile of the 4 direct importers of the item module"
+ }
+}

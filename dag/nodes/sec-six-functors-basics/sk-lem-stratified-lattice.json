@@ -20,109 +20,47 @@
  ],
  "proof": [
   {
-   "text": "A field is Noetherian. Thus [lem-weil-pbc-finite-type-over-noetherian] makes $X$ Noetherian. A finite affine cover has Noetherian underlying charts by [lem-sc-affine-noetherian-underlying-space]; an ascending chain of opens stabilizes on each chart, hence on $X$ at the maximum of the finitely many indices. By [lem-sfb-noetherian-space-compact-subsets] every open and every affine intersection is quasi-compact, so $X$ is qcqs.",
+   "text": "Finite type over a field and quasi-compactness make X a Noetherian scheme, using Mathlib LocallyOfFiniteType.isLocallyNoetherian and QuasiCompact.compactSpace_of_compactSpace.",
    "uses": [
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-sc-affine-noetherian-underlying-space",
-    "lem-sfb-noetherian-space-compact-subsets"
+    "lem-weil-pbc-finite-type-over-noetherian"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice.proof.md",
-    "place": "Standing finite-type hypothesis before Sheaf of lattices"
-   }
+   "elementary": false
   },
   {
-   "text": "Use [lem-weil-pbc-continuous-coefficient-realizations] to identify pulled condensed coefficients with continuous ones, compatibly with $A=\\cO_E\\to E$. Its total-disconnectedness hypothesis holds: disjoint clopen ultrametric balls separate points of $E$, and $A$ inherits this. Module-object actions are precisely the sectionwise module laws, so these ring isomorphisms transport the modules and their inclusions. By [det-prop-sfb-qlbar-colimit-x-invert-ell], scalar extension is inversion of $\\ell$. The same identifications apply on all schemes below.",
+   "text": "Apply spectralLisse_etale_lattice to get a qcqs etale surjection with a locally free integral module and its scalar-extension isomorphism, in exactly the original spectral coefficient convention.",
    "uses": [
-    "lem-weil-pbc-continuous-coefficient-realizations",
-    "det-prop-sfb-qlbar-colimit-x-invert-ell"
+    "lem-sfb-spectral-etale-local-lattice"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice.proof.md",
-    "place": "Sheaf of lattices: coefficient convention"
-   }
+   "elementary": false
   },
   {
-   "text": "By [lem-weil-pbc-continuous-etale-local-lattice], choose a qcqs étale surjection $p:V\\to X$ and locally finite free $M$ with $E_V\\otimes M\\cong p^*L$. Its unit inclusion is injective on free charts because $A\\to E$ is injective, so it embeds as a lattice in $p^*L$.",
-   "uses": [
-    "lem-weil-pbc-continuous-etale-local-lattice"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice.proof.md",
-    "place": "Sheaf of lattices: finite-cover reduction"
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-etale-stratified-finite] to $p$. On each stratum $S$, its base change $p_S$ is finite étale; it is surjective, since for a point of $S$ a point of the nonempty fibre of $p$ survives the residue-field extension defining the fibre of $p_S$. Part (2) of [det-lem-coefficient-heart-common-stratification] gives that $L|_S$ is lisse. Apply [lem-sfb-lattice-pullback] along $V\\times_X S\\to V$ to obtain an embedded lattice $M_S\\subseteq p_S^*(L|_S)$.",
+   "text": "Apply exists_etale_stratified_finite and retain all its actual scheme immersions and partition properties in FiniteLocallyClosedStratification. Pull back the integral module and its scalar-extension comparison around each pullback square, using pullIso, upperStarComp and pullback.condition. Local freeness and surjectivity survive pullback. These steps are proved by the coefficient-generic private helpers.",
    "uses": [
     "lem-weil-pbc-etale-stratified-finite",
-    "lem-sfb-lattice-pullback",
-    "det-lem-coefficient-heart-common-stratification"
+    "lem-weil-pbc-continuous-locally-free-pullback"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice.proof.md",
-    "place": "Pushing down by the trace"
-   }
+   "elementary": false
   },
   {
-   "text": "By [lem-sfb-finite-etale-trace-image], define $L_0$ as the integral trace image. By [lem-weil-pbc-finite-etale-etale-local-split], étale splitting neighbourhoods cover $S$; there the image is the sum of the sheet lattices. The sheet set is nonempty on every nonempty neighbourhood because $p_S$ is surjective.",
+   "text": "On each finite etale stratum apply spectralFiniteEtaleTrace_lattice to the pulled integral module and its comparison. This source result constructs the lattice by the sheet-sum trace and finite sum of local lattices, and provides a monic inclusion with its actual scalar-extension adjoint invertible. The parent combines this with the preceding geometric constructions.",
    "uses": [
-    "lem-sfb-finite-etale-trace-image",
-    "lem-weil-pbc-finite-etale-etale-local-split"
+    "lem-sfb-spectral-finite-etale-trace-lattice"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice.proof.md",
-    "place": "Pushing down by the trace"
-   }
-  },
-  {
-   "text": "Trivialize $L|_S$ pro-étale locally. By [lem-weil-pbc-lattice-sheaf-locally-constant] every sheet lattice is a section of the constant sheaf on $\\operatorname{GL}_r(E)/\\operatorname{GL}_r(A)$, hence locally one coset $g_j$: a fixed lattice $\\Lambda_j=g_jA^r\\subseteq E^r$. Refine the finitely many covers successively to fix them together. By [lem-sfb-finite-sum-lattice], $\\Lambda=\\sum_j\\Lambda_j$ has a basis homeomorphism $A^r\\simeq\\Lambda$. By [lem-sfb-continuous-lattice-sum], the sheet-sheaf sum is the continuous-function sheaf of $\\Lambda$, free over $A$, with inclusion inducing an isomorphism after rationalization.",
-   "uses": [
-    "lem-weil-pbc-lattice-sheaf-locally-constant",
-    "lem-sfb-finite-sum-lattice",
-    "lem-sfb-continuous-lattice-sum"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice.proof.md",
-    "place": "Pushing down by the trace"
-   }
-  },
-  {
-   "text": "These are local assertions: local freeness is the definition of lisse; the local inverses to rationalization agree and glue. Hence $L_0$ is a lattice on each stratum. Discard empty strata; empty $X$ has the empty stratification, and rank zero gives the zero lattice.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice.proof.md",
-    "place": "Pushing down by the trace"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-sc-affine-noetherian-underlying-space",
-  "lem-sfb-noetherian-space-compact-subsets",
-  "lem-weil-pbc-continuous-coefficient-realizations",
-  "det-prop-sfb-qlbar-colimit-x-invert-ell",
-  "lem-weil-pbc-continuous-etale-local-lattice",
+  "lem-sfb-spectral-etale-local-lattice",
   "lem-weil-pbc-etale-stratified-finite",
-  "lem-sfb-lattice-pullback",
-  "det-lem-coefficient-heart-common-stratification",
-  "lem-sfb-finite-etale-trace-image",
-  "lem-weil-pbc-finite-etale-etale-local-split",
-  "lem-weil-pbc-lattice-sheaf-locally-constant",
-  "lem-sfb-finite-sum-lattice",
-  "lem-sfb-continuous-lattice-sum"
+  "lem-weil-pbc-continuous-locally-free-pullback",
+  "lem-sfb-spectral-finite-etale-trace-lattice"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice.proof.md",
-  "place": "Sheaf of lattices, then stratification, then Pushing down by the trace; existing étale-local lattice theorem used in place of cyclic detail-node dependencies"
+  "group": "U8",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/_section.md",
+  "place": "The source etale-local existence and finite-cover trace descent steps, with coefficient-generic geometric stratification and pullback proved in the parent."
  },
  "mathlib_searches": [
   {
@@ -309,5 +247,15 @@
   "group": "Q60",
   "result": "pass",
   "note": "Read node, 4 stmt deps and exact declarations (coefficientExtensionIntegers, continuousMapRingObj/SheafMap, condensedRingObj/upperStarFromPoint, CondensedRing.upperStar, Mod.extendScalars/extendRestrictAdjunction, CondensedRing.LocallyFree, Scheme.FiniteLocallyClosedStratification). Every clause matches: standing scheme = separated + LOFT + QC over field k with CharP p, p≠l; pulled condensed coefficients and internal module objects on the small pro-etale site; lisse = pro-etale cover-wise Mod.IsFree (varying rank, 0 allowed); finite locally closed stratification with immersions; lattice = Mono ι into comap of the stratum pullback whose extendScalars adjoint is an iso, which is M[1/l] since C(S,E)=C(S,O_E)[1/l]. Canonical spectral-norm topology. Edge cases (empty X, rank 0, non-normal X) and universes fine; E : Type is the upstream convention. Only the lean field changed, statement verbatim, docstrings carry source, blueprint tag and all 7 steps, single sorry theorem, no hollow defs. nt_compile.py clean in 3.7 s; a planted error was reported; axioms are the standard three plus sorryAx. No findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-47bc9",
+  "group": "U8",
+  "result": "pass",
+  "landing": "20261021T225228-L-3801584",
+  "kind": "interface",
+  "note": "independent cc review: delivered StratifiedLattice/Spectral*/ContinuousFiniteEtaleTraceLattice modules and 4 nodes vs live clone, unit sk-lem-stratified-lattice realized steps, #print axioms of the proved theorems, sandbox compile of the 4 direct importers of the item module"
  }
 }

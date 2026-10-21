@@ -1,0 +1,137 @@
+{
+ "id": "lem-sfb-continuous-finite-etale-trace-lattice",
+ "kind": "statement",
+ "title": "The finite etale trace has locally free integral image",
+ "statement": "Let E be a finite normed extension of Q_l, X a scheme, and P a locally free finite-rank module over the continuous E coefficients on X. For a finite etale surjection p:U→X, a locally free integral module M on U and an isomorphism E_U⊗M≅p*P, there exists an epimorphism τ:p_*p*P→P such that the categorical image of p_*M→Res(P), using the pushed embedding and τ, is locally free over the continuous integral coefficients on X. No rationalization of the image inclusion, Noetherianity, or stratification is asserted. Coefficients and internal modules are those of [def-weil-pbc-continuous-integral-coefficients], [sk-def-sfb-pulled-back-coefficients] and [sk-def-sfb-module-objects]; the pushed embedding is that of [def-weil-pbc-continuous-lattice-intersection].",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "def-weil-pbc-continuous-integral-coefficients",
+  "def-weil-pbc-continuous-lattice-intersection"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice.proof.md",
+  "place": "Pushing down by the trace: sheet-sum trace and local freeness of its integral image"
+ },
+ "proof": [
+  {
+   "text": "Use the continuous coefficient module equivalence to encode P and M sectionwise; the restriction and scalar-extension comparisons carry e to the pulled lattice. Normalize the finite etale trace using finite_etale_trace_image: on a split chart it is the sum of the sheet counits. The integral sheaf image there is the sum of the sheet lattices. The equivalences preserve categorical images.",
+   "uses": [
+    "lem-sfb-finite-etale-trace-image",
+    "def-weil-pbc-continuous-coefficient-module-encoding",
+    "lem-weil-pbc-continuous-module-encoding-lattices",
+    "lem-weil-pbc-continuous-module-encoding-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take etale splitting neighbourhoods for p. On each the integral image is the sheaf sum of the finitely many sheet lattices. Choose a pro-etale trivialization of P on each neighbourhood. The sheaf of lattice classes is a constant coset sheaf there, so each of the finitely many sheet lattices becomes a fixed algebraic lattice on a common refinement. Equality is equality of embedded images, as specified by the class-presentation normalization. Surjectivity makes the set of sheets nonempty on every nonempty chart. Inserting a rational section in one sheet and zero in the others shows that the normalized trace is locally split epic, hence epic.",
+   "uses": [
+    "lem-sfb-finite-etale-trace-image",
+    "lem-weil-pbc-finite-etale-etale-local-split",
+    "lem-weil-pbc-lattice-sheaf-locally-constant"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The finite sum of these full lattices is finite free. The continuous sum theorem supplies a continuous linear section of the summation map and its basis homeomorphism, naturally under precomposition. Hence the sheaf sum is precisely the continuous-function sheaf of that sum lattice and is finite free on the refinement. Transport the free presentations back to internal modules and compose covers. The empty-scheme and rank-zero cases give zero modules. This proves local freeness of the actual categorical image, without asserting rationalization of its inclusion.",
+   "uses": [
+    "lem-sfb-finite-sum-lattice",
+    "lem-sfb-continuous-lattice-sum",
+    "lem-weil-pbc-continuous-module-encoding-lattices"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-finite-etale-trace-image",
+  "def-weil-pbc-continuous-coefficient-module-encoding",
+  "lem-weil-pbc-continuous-module-encoding-lattices",
+  "lem-weil-pbc-continuous-module-encoding-restriction",
+  "lem-weil-pbc-finite-etale-etale-local-split",
+  "lem-weil-pbc-lattice-sheaf-locally-constant",
+  "lem-sfb-finite-sum-lattice",
+  "lem-sfb-continuous-lattice-sum"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "U8",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice.proof.md",
+  "place": "Finite-cover trace image and its local freeness, retaining the source sheet-sum route."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The image under the sheet-sum trace of a lisse integral lattice on a finite etale cover is locally free",
+   "results": "8 hits: IsIntegralClosure.module_free, Algebra.intTraceAux, ClassGroup.fintypeOfAdmissibleOfFinite, Algebra.trace_localization, Algebra.intTrace, Algebra.etaleLocus_eq_compl_support, trace_quotient_eq_trace_localization_quotient, Algebra.instFreeCotangentToExtensionUnitLocalizationAway.",
+   "verdict": "No sheaf trace-image local-freeness theorem.",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIso\", \"sum\"",
+   "results": "0 hits",
+   "verdict": "No match.",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*[Ee]tale.*trace|trace.*lattice|image.*locally[Ff]ree",
+   "results": "0 hits",
+   "verdict": "No match.",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The image under the sheet-sum trace of an integral lattice on a finite etale cover is locally free",
+   "results": "8 hits: Algebra.intTrace_eq_trace, Algebra.intTrace.congr_simp, Algebra.intTrace, Algebra.isIntegral_trace, Algebra.intTraceAux, Algebra.trace_quotient_eq_of_isDedekindDomain, FractionalIdeal.trace_mem_dual_one, Submodule.mem_traceDual_iff_isIntegral. These concern algebraic field traces and integral closure, not continuous sheaf-module trace images.",
+   "verdict": "No match; the objects and hypotheses differ from the sheaf assertion.",
+   "date": "2026-10-21"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.StratifiedLattice",
+  "date": "2026-10-21",
+  "group": "U8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": "sk-lem-stratified-lattice"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-stratified-lattice",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ContinuousFiniteEtaleTraceLattice",
+  "file": "lean/Sheaf/Paper/ContinuousFiniteEtaleTraceLattice.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.continuousFiniteEtaleTrace_lattice",
+  "statement": "theorem continuousFiniteEtaleTrace_lattice\n    (l : ℕ) [Fact l.Prime] (E : Type) [NormedField E]\n    [NormedAlgebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (X : Scheme.{u})\n    (P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (condensedRingObj (Profinite.continuousMapRingObj E) X))\n    (hP : LocallyFree (condensedRingObj (Profinite.continuousMapRingObj E) X) P)\n    {U : Scheme.{u}} (p : U ⟶ X) [IsFinite p] [Etale p] [Surjective p]\n    (M : Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1})\n      (condensedRingObj (integralCoeff l E) U))\n    (hM : LocallyFree (condensedRingObj (integralCoeff l E) U) M)\n    (e : (Mod.extendScalars (coefficientMap (integralScalarMap l E) U)).obj M ≅\n      (upperStar (Profinite.continuousMapRingObj E) p).obj P) :\n    ∃ τ : (lowerStar (Profinite.continuousMapRingObj E) p).obj\n        ((upperStar (Profinite.continuousMapRingObj E) p).obj P) ⟶ P,\n      Epi τ ∧ LocallyFree (condensedRingObj (integralCoeff l E) X)\n        (image (latticePushedEmbedding (integralScalarMap l E) X P p M e ≫\n          (Mod.comap (coefficientMap (integralScalarMap l E) X)).map τ))",
+  "branch": "sheaf-dag",
+  "by": "U8",
+  "date": "2026-10-21"
+ },
+ "mathlib_match": null,
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-47bc9",
+  "group": "U8",
+  "result": "pass",
+  "landing": "20261021T225228-L-3801584",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-47bc9",
+  "group": "U8",
+  "result": "pass",
+  "landing": "20261021T225228-L-3801584",
+  "kind": "interface",
+  "note": "independent cc review: delivered StratifiedLattice/Spectral*/ContinuousFiniteEtaleTraceLattice modules and 4 nodes vs live clone, unit sk-lem-stratified-lattice realized steps, #print axioms of the proved theorems, sandbox compile of the 4 direct importers of the item module"
+ }
+}

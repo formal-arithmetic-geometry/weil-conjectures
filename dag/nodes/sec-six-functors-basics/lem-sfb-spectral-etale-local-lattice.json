@@ -1,0 +1,109 @@
+{
+ "id": "lem-sfb-spectral-etale-local-lattice",
+ "kind": "statement",
+ "title": "Etale local integral lattices in the spectral coefficient convention",
+ "statement": "Fix a prime l and a finite extension E/Q_l with its canonical spectral-norm topology and recorded valuation ring A. For any scheme X with Noetherian underlying space, every locally free finite-rank E_X-module has a locally free A_U-module M on some quasi-compact quasi-separated etale surjection f:U→X, with a specified scalar-extension isomorphism E_U⊗M≅f*P. No descent or stratification conclusion is asserted. The coefficient extension, pulled coefficients and internal modules are those of [def-weil-l-adic-coefficient-extension], [sk-def-sfb-pulled-back-coefficients] and [sk-def-sfb-module-objects].",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice.proof.md",
+  "place": "Sheaf of lattices; first etale-local existence paragraph"
+ },
+ "proof": [
+  {
+   "text": "Use the canonical spectral norm on E. Its norm ball equals the recorded valuation ring by continuousIntegers_eq. The spectral norm extends the original p-adic norm, and its induced algebra and field structures agree with the original ones. Apply continuousLisse_etale_lattice. Transport the two continuous-function rings, their inclusion, the module and its free cover along the coefficient equality. The actual scalar extension comparison is preserved. The underlying construction takes a finite coproduct of affine etale pointed lattice neighbourhoods; it is affine, hence qcqs, and covers X by Noetherian compactness. Empty base and rank zero are included. In Lean an explicit congruence first changes the equal scalar maps without unfolding extension of scalars. A private bundled coefficient diagram then transports the whole local-lattice property along equality of the coherent normed and original field/algebra structures; the packing and unpacking lemmas preserve the original scalar-extension types.",
+   "uses": [
+    "lem-weil-pbc-continuous-etale-local-lattice",
+    "def-weil-pbc-continuous-coefficient-module-encoding"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-continuous-etale-local-lattice",
+  "def-weil-pbc-continuous-coefficient-module-encoding"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "U8",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice.proof.md",
+  "place": "Etale-local lattice existence paragraph, transported to the spectral coefficient convention."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A lisse sheaf with finite p-adic spectral coefficients admits an integral lattice on a quasi-compact etale cover",
+   "results": "8 hits: BDeRham, BDeRhamPlus, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, AlgebraicGeometry.IsFinite.instIsIntegralHom, Algebra.Etale.exists_subalgebra_fg, Algebra.IsInvariant.isIntegral_of_profinite, WittVector.instModuleFractionRingStandardOneDimIsocrystal, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit. None states integral lattices in lisse sheaves.",
+   "verdict": "No spectral internal-module theorem located.",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"lattice\", \"Etale\"",
+   "results": "0 hits",
+   "verdict": "No match.",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "grep",
+   "query": "spectral.*lattice|lattice.*spectral",
+   "results": "3 unrelated prespectral-space lattice hits.",
+   "verdict": "No match.",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A lisse sheaf with finite p-adic coefficients admits an integral lattice on a quasi-compact etale cover",
+   "results": "8 hits: SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.instIsQuasicoherentOfIsFinitePresentation, PadicInt, SheafOfModules.IsFinitePresentation.exists_quasicoherentData, SheafOfModules.isFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation, LightCondensed.IsDiscrete, LocallyConstant.freeOfProfinite. These concern generic finite presentation, discrete condensed objects, p-adic integers or integer-valued locally constant functions.",
+   "verdict": "No match; the objects and hypotheses differ from the sheaf assertion.",
+   "date": "2026-10-21"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.StratifiedLattice",
+  "date": "2026-10-21",
+  "group": "U8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": "sk-lem-stratified-lattice"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-stratified-lattice",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SpectralEtaleLocalLattices",
+  "file": "lean/Sheaf/Paper/SpectralEtaleLocalLattices.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.spectralLisse_etale_lattice",
+  "statement": "theorem spectralLisse_etale_lattice\n    (l : ℕ) [Fact l.Prime] (E : Type) [hField : Field E]\n    [hAlg : Algebra ℚ_[l] E] [hFin : FiniteDimensional ℚ_[l] E]\n    (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X] :\n    letI := spectralNorm.nontriviallyNormedField ℚ_[l] E\n    let A := Profinite.continuousMapRingObj.{u} (Padic.coefficientExtensionIntegers l E)\n    let B := Profinite.continuousMapRingObj.{u} E\n    let a : A ⟶ B := (sheafCompose (coherentTopology Profinite.{u})\n      (forget₂ RingCat.{u + 1} Ab.{u + 1})).map\n        (Profinite.continuousMapRingSheafMap\n          (Padic.coefficientExtensionIntegers l E).subtype continuous_subtype_val)\n    ∀ L : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj B X),\n      LocallyFree (condensedRingObj B X) L →\n      ∃ (U : Scheme.{u}) (f : U ⟶ X), Etale f ∧ Surjective f ∧\n        CompactSpace U ∧ QuasiSeparatedSpace U ∧\n        ∃ M : Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1}) (condensedRingObj A U),\n          LocallyFree (condensedRingObj A U) M ∧\n          Nonempty ((Mod.extendScalars (coefficientMap a U)).obj M ≅ (upperStar B f).obj L)",
+  "branch": "sheaf-dag",
+  "by": "U8",
+  "date": "2026-10-21"
+ },
+ "mathlib_match": null,
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-47bc9",
+  "group": "U8",
+  "result": "pass",
+  "landing": "20261021T225228-L-3801584",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-47bc9",
+  "group": "U8",
+  "result": "pass",
+  "landing": "20261021T225228-L-3801584",
+  "kind": "interface",
+  "note": "independent cc review: delivered StratifiedLattice/Spectral*/ContinuousFiniteEtaleTraceLattice modules and 4 nodes vs live clone, unit sk-lem-stratified-lattice realized steps, #print axioms of the proved theorems, sandbox compile of the 4 direct importers of the item module"
+ }
+}
