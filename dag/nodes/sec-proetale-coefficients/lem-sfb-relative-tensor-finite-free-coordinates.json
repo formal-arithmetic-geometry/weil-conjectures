@@ -1,0 +1,76 @@
+{
+ "id": "lem-sfb-relative-tensor-finite-free-coordinates",
+ "kind": "statement",
+ "title": "Finite-free relative tensor coordinates and normalized unitors",
+ "statement": "Let $C$ be an essentially small site, and let $H=\\operatorname{Sh}(C,\\operatorname{Ab})$ have the canonical sheafified tensor over $\\mathbf Z$, with sheafification and closed symmetric monoidal structure as in [sk-def-sfb-sheaf-tensor]. Use internal module objects [sk-def-sfb-module-objects] and the coequalizer relative tensor and its induced monoidal structure [def-sfb-modobj-relative-tensor]. For any commutative ring object $R$, write $U:\\operatorname{Mod}_R(H)\\to H$ for the forgetful functor and $t_{P,M}:UP\\otimes UM\\to U(P\\otimes_R M)$ for the canonical coequalizer projection.\nLet $R$ be a commutative ring object of $H$, let $N$ be an $R$-module, let $n\\geq0$ be an integer, and let $\\theta:R^{\\oplus n}\\xrightarrow{\\sim}N$ be an $R$-module isomorphism. Here $R^{\\oplus n}$ is the finite biproduct of regular modules, with inclusions $\\iota_i$ and projections $\\pi_i$; put $e_i=\\theta\\iota_i:R\\to N$ and $q_i=\\pi_i\\theta^{-1}:N\\to R$. Write $\\rho_i:M^n\\to M$ for the finite-product projections, $L_M:R\\otimes_R M\\xrightarrow{\\sim}M$ for the left unitor of the relative module tensor, $\\lambda_{UM}:\\mathbf1\\otimes UM\\xrightarrow{\\sim}UM$ for the ambient left unitor, $\\eta_R:\\mathbf1\\to R$ for the ring unit, and $\\gamma_M:R\\otimes UM\\to UM$ for the action. The induced relative unitor has the following normalization in $H$:\n$$U(L_M)\\circ t_{R,M}=\\gamma_M,\\qquad U(L_M^{-1})=t_{R,M}\\circ(\\eta_R\\otimes\\operatorname{id}_{UM})\\circ\\lambda_{UM}^{-1}.$$\nThere is a natural isomorphism of $R$-module valued functors\n$$D_\\theta:N\\otimes_R-\\xrightarrow{\\sim}(-)^n$$\nwith the following identities in $\\operatorname{Mod}_R(H)$:\n$$\\rho_iD_{\\theta,M}=L_M\\circ(q_i\\otimes_R\\operatorname{id}_M),\\qquad D_{\\theta,M}^{-1}=\\sum_{i\\in\\operatorname{Fin}(n)}(e_i\\otimes_R\\operatorname{id}_M)\\circ L_M^{-1}\\circ\\rho_i.$$\nOn underlying sheaves these identities are normalized by the canonical coequalizer projections:\n$$U(\\rho_iD_{\\theta,M})\\circ t_{N,M}=\\gamma_M\\circ(Uq_i\\otimes\\operatorname{id}_{UM}),$$\n$$U(D_{\\theta,M}^{-1})=\\sum_{i\\in\\operatorname{Fin}(n)}t_{N,M}\\circ((Ue_i\\circ\\eta_R)\\otimes\\operatorname{id}_{UM})\\circ\\lambda_{UM}^{-1}\\circ U\\rho_i.$$\nFor every $R$-linear map $f:M\\to M'$ the naturality equation is\n$$D_{\\theta,M'}\\circ(\\operatorname{id}_N\\otimes_R f)=f^n\\circ D_{\\theta,M}.$$\nAll assertions include $n=0$, with empty biproduct, empty product and empty sums. The statements concern the canonical sheaf tensor and relative tensor; they do not identify sections of a tensor sheaf with sectionwise tensors.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
+  "place": "Last sentence, first inference, finite-biproduct tensor decomposition and both coordinate formulas; current item proof steps 3-5 and finite-product naturality and rank-zero parts of 6"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-sheaf-tensor",
+  "sk-def-sfb-module-objects",
+  "def-sfb-modobj-relative-tensor"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Tensoring a chosen finite free internal module with another internal module gives a natural finite product isomorphism with coordinate maps given by the basis projections and relative left unitor and inverse a sum of basis inclusions",
+   "results": "8 hits: ModuleCat.FreeMonoidal.μIso_hom_freeMk_tmul_freeMk; ModuleCat.FreeMonoidal.μIso; ModuleCat.free_μ_freeMk_tmul_freeMk; ModuleCat.FreeMonoidal.μIso_inv_freeMk; ModuleCat.free_δ_freeMk; Rep.leftRegularTensorTrivialIsoFree; TensorProduct.finsuppScalarLeft_apply; ModuleCat.instMonoidalFree; result digest 51e2fcd5219119b0",
+   "date": "2026-10-21",
+   "verdict": "no match: rightDistributor and biproduct.isoProduct supply parts of a composite, but do not assert its internal-module coordinate normalization, relative-unitor compatibility and naturality together"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDistributor\"",
+   "results": "12 hits: CategoryTheory.rightDistributor; CategoryTheory.biproduct_ι_comp_rightDistributor_inv; CategoryTheory.rightDistributor_hom_comp_biproduct_π; CategoryTheory.biproduct_ι_comp_rightDistributor_hom; CategoryTheory.rightDistributor_inv_comp_biproduct_π; CategoryTheory.rightDistributor_ext_left; CategoryTheory.rightDistributor_ext_right; CategoryTheory.rightDistributor_ext_left_iff; CategoryTheory.rightDistributor_ext_right_iff; CategoryTheory.biproduct_ι_comp_rightDistributor_inv_assoc; CategoryTheory.rightDistributor_hom_comp_biproduct_π_assoc; CategoryTheory.biproduct_ι_comp_rightDistributor_hom_assoc; result digest 9da6cd4ba6b9b038",
+   "date": "2026-10-21",
+   "verdict": "no match: rightDistributor and biproduct.isoProduct supply parts of a composite, but do not assert its internal-module coordinate normalization, relative-unitor compatibility and naturality together"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDistributor|rightDistributor_inv|rightDistributor_hom_comp_biproduct_pi",
+   "results": "5 hits: Mathlib/CategoryTheory/Monoidal/Preadditive.lean:221; Mathlib/CategoryTheory/Monoidal/Preadditive.lean:225; Mathlib/CategoryTheory/Monoidal/Preadditive.lean:226; Mathlib/CategoryTheory/Monoidal/Preadditive.lean:230; Mathlib/CategoryTheory/Monoidal/Preadditive.lean:237; result digest f44bd177c67c0b74",
+   "date": "2026-10-21",
+   "verdict": "no match: rightDistributor and biproduct.isoProduct supply parts of a composite, but do not assert its internal-module coordinate normalization, relative-unitor compatibility and naturality together"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite biproduct of copies of the tensor unit tensored with an object is naturally a finite product of that object, with projection and inverse sum formulas",
+   "results": "8 hits: CategoryTheory.Limits.biproduct.isoProduct; AddCommGrpCat.biproductIsoPi; CategoryTheory.Limits.hasFiniteProducts_of_hasFiniteBiproducts; CategoryTheory.Limits.biprod.desc_eq; CategoryTheory.CartesianMonoidalCategory.tensorProductIsBinaryProduct; CategoryTheory.Limits.biprod.isoProd; CategoryTheory.Limits.hasProduct_of_hasBiproduct; CategoryTheory.Limits.HasBiproduct.of_hasProduct; result digest c694d5754acc7c52",
+   "date": "2026-10-21",
+   "verdict": "no match: rightDistributor and biproduct.isoProduct supply parts of a composite, but do not assert its internal-module coordinate normalization, relative-unitor compatibility and naturality together"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For internal modules in abelian sheaves a chosen isomorphism N with R direct sum n gives N tensor_R M isomorphic to M power n, natural in M, with unitor coordinate and inverse sum equations",
+   "results": "8 hits: SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply; LightCondensed.instMonoidalLightCondSetLightCondModFree; PresheafOfModules.Monoidal.tensorObj; PresheafOfModules.monoidalCategory; PresheafOfModules.monoidalCategoryStruct; ModuleCat.instMonoidalFree; LightCondensed.instMonoidalCategoryLightCondMod; ModuleCat.MonoidalCategory.rightUnitor_def; result digest 440feeafc069faa6",
+   "date": "2026-10-21",
+   "verdict": "no match: rightDistributor and biproduct.isoProduct supply parts of a composite, but do not assert its internal-module coordinate normalization, relative-unitor compatibility and naturality together"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-free-scalar-coordinates",
+  "date": "2026-10-21",
+  "group": "NE"
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-prop-sfb-cartesian-coefficients",
+ "blueprint": {
+  "from": {
+   "node": "lem-sfb-subfield-flat",
+   "place": "Last sentence, first inference, finite-biproduct tensor decomposition and both coordinate formulas; current item proof steps 3-5 and finite-product naturality and rank-zero parts of 6",
+   "via": [
+    "lem-sfb-finite-free-scalar-coordinates"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

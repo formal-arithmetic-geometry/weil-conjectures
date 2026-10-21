@@ -14,75 +14,47 @@
  ],
  "proof": [
   {
-   "text": "Use sfbSheafTensor_properties to obtain closedness and preservation of small colimits on both sides for the canonical sheaf tensor. Closedness and the abelian structure give MonoidalPreadditive by sfbSheafTensor_monoidalPreadditive; the abelian sheaf category has coequalizers. Introduce arbitrary instances of these Prop-valued consequences as required by FiniteFreeScalarCoordinates.",
+   "text": "Work in $H=\\operatorname{Sh}(C,\\operatorname{Ab})$ with its canonical closed tensor. The sheaf-tensor statement supplies fixed-factor preservation of colimits. Put $N=\\operatorname{Res}_\\varphi B$ and $E=\\operatorname{Res}_\\varphi\\operatorname{Ext}_\\varphi$. Use $U$, $p_M$ and $t_{N,M}$ for the forgetful functor and the two quotient maps of the restricted-extension comparison. Its hypotheses hold for the given commutative $R,B$ and arbitrary $\\varphi$. It supplies a natural $R$-linear isomorphism $\\kappa_M:E(M)\\simeq N\\otimes_R M$ with $U\\kappa_M\\,p_M=t_{N,M}$ and $U\\kappa_M^{-1}\\,t_{N,M}=p_M$.",
    "uses": [
-    "sk-def-sfb-sheaf-tensor"
+    "sk-def-sfb-sheaf-tensor",
+    "lem-sfb-restricted-extension-relative-tensor"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
     "place": "Last sentence, first inference: the natural finite-power description of tensor with a finite free coefficient ring"
    }
   },
   {
-   "text": "Write N = Res_phi(regular B). Commutativity of B and naturality of the braiding identify its induced right R-action with B tensor phi followed by multiplication. Thus the coequalizers defining Res_phi(extendScalars phi M) and N tensor_R M have the same parallel arrows. Descend their canonical projections in both directions. Cancellation of these epimorphisms proves the inverse identities. After precomposing with R tensor extendPi, the induced action formulas prove R-linearity. This constructs scalarTensorIso, with extendPi followed by its forward map equal to tensorObjPi, and tensorObjPi followed by its inverse equal to extendPi.",
+   "text": "Apply the finite-free relative-tensor coordinate lemma to $N$ and the given $\\theta$. Its maps $e_i=\\theta\\iota_i$ and $q_i=\\pi_i\\theta^{-1}$ are exactly this basis and its inverse coordinates. It supplies $D_{\\theta,M}:N\\otimes_R M\\simeq M^n$ naturally in $M$. Set $\\Phi_M=D_{\\theta,M}\\circ\\kappa_M$ and $\\Psi_M=\\kappa_M^{-1}\\circ D_{\\theta,M}^{-1}$. Adjacent inverse factors cancel to give both inverse identities. Composing the cited naturality equations gives $f^n\\Phi_M=\\Phi_{M\\prime}E(f)$ for every $R$-linear $f:M\\to M\\prime$.",
    "uses": [
-    "sk-def-sfb-module-objects",
-    "sk-def-sfb-change-of-scalars",
-    "def-sfb-modobj-relative-tensor"
+    "lem-sfb-restricted-extension-relative-tensor",
+    "lem-sfb-relative-tensor-finite-free-coordinates"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
     "place": "Last sentence, first inference: the natural finite-power description of tensor with a finite free coefficient ring"
    }
   },
   {
-   "text": "Tensor theta inverse on the right by M, distribute tensor over the finite biproduct by Mathlib rightDistributor, apply the relative left unitor on each summand, and identify the biproduct with the finite product. Compose with scalarTensorIso. These actual isomorphisms construct finiteCoordinateIso; their inverse identities supply both composite identities without a separate sectionwise tensor calculation.",
+   "text": "For each $i$, the normalized forward coordinate identity for $D_\\theta$ and $U\\kappa_M\\,p_M=t_{N,M}$ give $U(\\rho_i\\Phi_M)p_M=\\gamma_M(Uq_i\\otimes\\operatorname{id})$. This is precisely the local rule $s\\otimes m\\mapsto q_i(s)m$. For the inverse, substitute the normalized finite-sum formula for $U(D_{\\theta,M}^{-1})$ into $U\\Psi_M$; replace $U\\kappa_M^{-1}t_{N,M}$ by $p_M$. The resulting sum is $\\sum_i p_M((Ue_i\\eta_R)\\otimes\\operatorname{id})\\lambda_{UM}^{-1}U\\rho_i$, which sends $(m_i)$ to $\\sum_i b_i\\otimes m_i$ since $b_i=e_i(1)$. These are identities through the coequalizer projections, hence specify sheaf morphisms as asserted.",
    "uses": [
-    "sk-def-sfb-module-objects",
-    "def-sfb-modobj-relative-tensor"
+    "lem-sfb-restricted-extension-relative-tensor",
+    "lem-sfb-relative-tensor-finite-free-coordinates"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
     "place": "Last sentence, first inference: the natural finite-power description of tensor with a finite free coefficient ring"
    }
   },
   {
-   "text": "Project this composite to coordinate i. Mathlib rightDistributor_hom_comp_biproduct_pi and biproduct.map_pi give scalarTensorIso.hom followed by (theta.inv followed by pi_i) tensor M and the relative left unitor. The relative left unitor composed after tensorObjPi is the module action, by the bimodule coequalizer description. Precomposing with extendPi therefore gives exactly the asserted forward formula.",
+   "text": "The relative-tensor coordinate lemma includes $n=0$. Thus this same composite and its normalized formulas apply to the empty finite product and empty sum, without a positivity assumption. No sectionwise tensor identification is used.",
    "uses": [
-    "sk-def-sfb-module-objects",
-    "sk-def-sfb-change-of-scalars",
-    "def-sfb-modobj-relative-tensor"
+    "lem-sfb-relative-tensor-finite-free-coordinates"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
-    "place": "Last sentence, first inference: the natural finite-power description of tensor with a finite free coefficient ring"
-   }
-  },
-  {
-   "text": "Expand the inverse of rightDistributor by Mathlib rightDistributor_inv. Transporting this finite sum through the product comparison and the summand unitors gives the sum of pi_i followed by the relative inverse left unitor, (iota_i followed by theta.hom) tensor M, and scalarTensorIso.inv. The relative inverse left unitor is ambient inverse left unitor followed by eta_R tensor M and tensorObjPi: compose with the relative left unitor to verify it using the module unit axiom. The inverse projection identity for scalarTensorIso gives exactly the asserted tuple formula after applying the additive forgetful functor.",
-   "uses": [
-    "sk-def-sfb-module-objects",
-    "sk-def-sfb-change-of-scalars",
-    "def-sfb-modobj-relative-tensor"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
-    "place": "Last sentence, first inference: the natural finite-power description of tensor with a finite free coefficient ring"
-   }
-  },
-  {
-   "text": "Check naturality of scalarTensorIso after precomposing with extendPi, using extendPi_extendScalarsMap and tensorObjPi_whiskerLeft. Check finiteCoordinateIso naturality after every finite-product projection; the coordinate formula reduces it to this comparison naturality, whisker_exchange and naturality of the left unitor. NatIso.ofComponents now supplies the natural isomorphism. The finite biproduct/distributor identities include the empty Fin 0 case, so the same construction and empty-sum formulas prove rank zero with no positivity hypothesis.",
-   "uses": [
-    "sk-def-sfb-module-objects",
-    "sk-def-sfb-change-of-scalars",
-    "def-sfb-modobj-relative-tensor"
-   ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
     "place": "Last sentence, first inference: the natural finite-power description of tensor with a finite free coefficient ring"
@@ -91,14 +63,13 @@
  ],
  "proof_deps": [
   "sk-def-sfb-sheaf-tensor",
-  "sk-def-sfb-module-objects",
-  "sk-def-sfb-change-of-scalars",
-  "def-sfb-modobj-relative-tensor"
+  "lem-sfb-restricted-extension-relative-tensor",
+  "lem-sfb-relative-tensor-finite-free-coordinates"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
-  "place": "Last sentence, first inference: the natural finite-power description of tensor with a finite free coefficient ring; K3 categorical implementation by the existing relative tensor, finite-biproduct distributor, and canonical coequalizer comparisons"
+  "place": "Last sentence, first inference: the natural finite-power description of tensor with a finite free coefficient ring; re-split into the scalar coequalizer comparison and finite-free relative-tensor coordinate calculation"
  },
  "mathlib_searches": [
   {
@@ -209,17 +180,17 @@
   "date": "2026-10-21",
   "item": "lem-sfb-finite-free-scalar-coordinates",
   "worker": "stage1",
-  "summary": "Expanded the finite-free scalar-coordinate inference into six elementary universal-property calculations. Preserved the statement, built both morphisms before checking their inverse and naturality identities, covered rank zero, and reused the three existing definition nodes. No new nodes.",
-  "blueprint": "All six steps realize the first inference in the last sentence of lem-sfb-subfield-flat.proof.md: F_X tensor over E_X with M is naturally M^n. This is inside step 3 of sk-prop-sfb-cartesian-coefficients; no unit-route departure.",
+  "summary": "Repair of return 84cf8fa1abb: accept its supersession chronology and completed K3 proof; withdraw reliance on the automatic attachment-refusal message. Proceed under the current user instruction explicitly requiring a deliberate stage-1 re-split of this already split and reviewed node. Preserve the live statement and every Lean/review field. Retain the mathematically accepted two independent statement-only intermediate arguments and the short assembly; record their exact correspondence to landed private lemmas and all old arguments in report.md. No Lean changes or invented mathematical delta.",
+  "blueprint": "All steps realize the last sentence, first inference, of lem-sfb-subfield-flat.proof.md (F_X tensor over E_X with M is naturally M^n), within step 3 of sk-prop-sfb-cartesian-coefficients. Both new nodes have nearest blueprint ancestor lem-sfb-subfield-flat via this item.",
   "tool_uses": []
  },
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-NM-1c6aff79a",
-  "group": "NM",
+  "reviewer": "NT-cc-NE-536982620",
+  "group": "NE",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-1c6aff79a (reviewer sub-agent of L); spot-checked: I read the item, the full statements of the three cited definition nodes (sk-def-sfb-sheaf-tensor, sk-def-sfb-module-objects, sk-def-sfb-change-of-scalars) and the source, the last sentence of lem-sfb-subfield-flat.proof.md in blueprint main-20261015 ('F_X ⊗_{E_X} M ≅ M^n naturally'). The statement, stmt_deps, source and blueprint fields are unchanged from the record Q43 created; only split-owned fields changed. There are no new nodes, no repair note for this item, it is not on the route-pivot dropped list, and it cites no SGA. Step 1 gets the Kronecker identity q_i e_j=δ and s=Σφ(q_i s)b_i from θ's two inverse identities and R-linearity of e_i, q_i under the Res action. Step 2 builds Φ through the presheaf tensor, sheafification and the coequalizer. Its balancing check is correct: q_i(sφ(r))m=q_i(s)(rm) uses that B and R are commutative and the action is associative. Testing on the triple tensor is valid because sheafification is strong monoidal. Step 3 builds t_i=b_i⊗–, which is R-linear by the coequalizer relation. In step 4 the composite ΦΨ is the identity because q_i(b_j)=δ_ij. In step 5, ΨΦ(s⊗m)=s⊗m on elementary tensors, and uniqueness out of the bilinear tensor, the sheafification and the coequalizer gives ΨΦ=id. Step 6 proves naturality from the linearity of f. Every step is truly elementary from the cited statements. I tested n=0 (B=0, both sides zero), n=1 with b_1 a unit other than 1, and ordinary modules on a point. No candidate duplicates it: monoidal-finite-free-transport, det-prop-sfb-cartesian-coefficients-finite-free, scalar-model-finite-flat-resolution and sbc pullback-free-coordinates are all different statements. A cosmetic point: mathlib_searches lists the six searches twice, which does no harm. No tool_uses."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NE-536982620 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, the four cited definitions and the source in full. The source is the last sentence of main-20261015 lem-sfb-subfield-flat.proof.md ('F_X⊗_{E_X}M≅M^n naturally'). (1) Authority. The re-split note is still 'released' in live and side-live. The 10:58 UTC maintenance (side-live reports/maintenance/NR-grothendieck-sheafification-20261021.md, 243a4db5baf) withdrew the rule 'note older than the stage-3 landing means superseded'. The earlier A7/B10 returns of this item, including 84cf8fa1 at 13:28Z, applied that withdrawn rule, so I judged this delivery on its merits. Against 84cf8fa1 the new nodes are sha-identical (ffd4afa8, 6be9b56a) and the item changed only in split_report. Statement, stmt_deps, lean and reviewed fields equal live. (2) Allocation of the old 6-step K3 proof (3005 chars). Old step 2 and the comparison-naturality part of step 6 went to lem-sfb-restricted-extension-relative-tensor. Old steps 3-5 and the rest of step 6 (naturality, n=0) went to lem-sfb-relative-tensor-finite-free-coordinates. Old step 1 (ambient infrastructure) is in parent step 1 and in both nodes' ambient hypotheses. Nothing was dropped. The node statements are 1584 and 2521 chars, and the parent is a 2007-char assembly of the cited identities. (3) Comparison node. With N=Res_φB, γ_Nβ_{B,R}=μ_Bβ(B⊗φ)=μ_B(B⊗φ) by braiding naturality and commutativity of B. So the extension and relative-tensor coequalizer pairs coincide, which gives κ with Uκp=t and Uκ⁻¹t=p. R-linearity and naturality hold, and no freeness of φ is needed. (4) Coordinate node. UL∘t=γ, and UL⁻¹=t(η⊗1)λ⁻¹ by the unit axiom. ρ_jDD⁻¹=ρ_j since q_je_i=δ_ij, and D⁻¹D=(Σe_iq_i)⊗1=id. The underlying formulas follow from U(f⊗_Rg)t=t(Uf⊗Ug), and naturality from naturality of L. I checked n=0, n=1 with a basis vector that is a non-identity unit (u⁻¹sm and u⊗m), M=0 and the zero ring. (5) Assembly. U(ρ_iΦ)p=γ(Uq_i⊗1) and UΨ=Σp(Ue_iη⊗1)λ⁻¹Uρ_i with b_i=e_i(1), as the item asserts. There is no cycle and no SGA. (6) Duplicates: none found. I checked extension-iso-quotient-formula (needs φ invertible), internal-scalar-tensor-comparison, internal-extension-monoidal, internal-extension-inverse-image, kflat-scalar-comparison-normalization, monoidal-finite-free-transport, ringed-finite-free-resolution-tensor, bimod-monoidal and mixed-bimodule-right-unitor. Searches cover semantic, loogle and grep. No fixes and no tool_uses. Maintainer: the new nodes mirror K3's private lemmas (FiniteFreeScalarCoordinates.lean:88-214), which can be reused at stages 2 and 3."
  },
  "lean": {
   "module": "Sheaf.CategoryTheory.FiniteFreeScalarCoordinates",

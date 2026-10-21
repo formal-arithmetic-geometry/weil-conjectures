@@ -22668,3 +22668,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:46 L: merged deliver/Y6/Sheaf.CategoryTheory.ConstantFiniteFreePresentationExtension (stage 3; reviewer PASS; first push; landing 20261021T134616-L-1396007 (proof); batch 20261021T134254; modules 1; new nodes 0)
 - 13:46 L: merged deliver/Y7/Sheaf.CategoryTheory.CofinalRoosRestriction (stage 3; reviewer PASS; first push; landing 20261021T134619-L-1401465 (interface); batch 20261021T134254; modules 1; new nodes 0; change records: coord/changes/cofinal-roos-proof-support.md)
 - 13:46 L: merged deliver/Y9/Sheaf.AlgebraicGeometry.ProEtaleClopenRingedModuleGluing (stage 3; reviewer PASS; first push; landing 20261021T134622-L-1405570 (proof); batch 20261021T134254; modules 1; new nodes 0)
+- 13:47 L: merged deliver/NE/lem-sfb-finite-free-scalar-coordinates (reviewer PASS; after a return; new nodes: 2)
