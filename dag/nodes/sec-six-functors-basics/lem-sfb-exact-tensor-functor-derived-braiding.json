@@ -29,7 +29,7 @@
    }
   },
   {
-   "text": "Now let $P,Q$ be K-flat and put $X=Q_{\\mathcal C}P$, $Y=Q_{\\mathcal C}Q$. By the preservation hypothesis $FP,FQ$ are K-flat too, so all the native model comparisons occurring below are isomorphisms. Abbreviate $m^C_{P,Q}=m_{\\mathcal C;P,Q}$, $m^D_{FP,FQ}=m_{\\mathcal D;FP,FQ}$, $b=b_{P,Q}$ and $k_{P\\otimes Q}=\\kappa_{P\\otimes Q}$. Precompose the desired equality at $(X,Y)$ with $E(m^C_{P,Q})$ and postcompose with $\\kappa_Q\\otimes\\kappa_P$. For its left side the source native-braiding normalization and then the normalization of $t$ for the reversed pair give\n$$\\begin{aligned}\n&(\\kappa_Q\\otimes\\kappa_P)t_{Y,X}E(\\beta^C_{X,Y})E(m^C_{P,Q})\\\\\n&=(\\kappa_Q\\otimes\\kappa_P)t_{Y,X}E(m^C_{Q,P})E(Q_{\\mathcal C}(b))\\\\\n&=m^D_{FQ,FP}Q_{\\mathcal D}(\\tau_{Q,P})\\kappa_{Q\\otimes P}E(Q_{\\mathcal C}(b))\\\\\n&=m^D_{FQ,FP}Q_{\\mathcal D}(\\tau_{Q,P}\\circ F(b))\\kappa_{P\\otimes Q}.\n\\end{aligned}$$\nThe last line is exactly naturality of the canonical factorization $\\kappa$ at the cochain map $b$, followed by functoriality of $Q_{\\mathcal D}$. Here $\\beta^C$ denotes the given derived braiding, not the ordinary symmetry.",
+   "text": "Let P,Q be K-flat complexes. The target tensor counit μ_D(FQ,FP) is invertible because FP is K-flat by hypothesis; this follows from DerivedMonoidal.isIso_counit_app_app_of_kFlat_right and HomotopyCategory.kFlat_quotient_obj_iff, transported along quotientCompQhIso. To prove the braiding equation, postcompose both sides with (κ_Q ⊗ κ_P) ≫ μ_D(FQ,FP). For its left side, hnormalized at (Q,P), source native-braiding normalization β_C ≫ μ_C(Q,P) = μ_C(P,Q) ≫ Q_C(b_PQ), functoriality of E, and naturality of κ give E(μ_C(P,Q)) ≫ κ_(P⊗Q) ≫ Q_D(F_Ch(b_PQ)) ≫ Q_D(τ_QP). The source normalization on complexes is obtained from DerivedMonoidal.braiding_hom_μ for the homotopy localization, the quotient Koszul braiding, and naturality along quotientCompQhIso.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -38,7 +38,7 @@
    }
   },
   {
-   "text": "For the right side of the same conjugated equality, naturality of the given target derived braiding, normalization of $t$, and then its native model formula give\n$$\\begin{aligned}\n&(\\kappa_Q\\otimes\\kappa_P)\\beta^D_{EX,EY}t_{X,Y}E(m^C_{P,Q})\\\\\n&=\\beta^D_{Q_{\\mathcal D}FP,Q_{\\mathcal D}FQ}(\\kappa_P\\otimes\\kappa_Q)t_{X,Y}E(m^C_{P,Q})\\\\\n&=\\beta^D_{Q_{\\mathcal D}FP,Q_{\\mathcal D}FQ}m^D_{FP,FQ}Q_{\\mathcal D}(\\tau_{P,Q})\\kappa_{P\\otimes Q}\\\\\n&=m^D_{FQ,FP}Q_{\\mathcal D}(b_{FP,FQ}\\circ\\tau_{P,Q})\\kappa_{P\\otimes Q}.\n\\end{aligned}$$\nEquation $(*)$ of Step 1 identifies this with the last line of Step 2. Both the precomposing map $E(m^C_{P,Q})$ and the postcomposing map $\\kappa_Q\\otimes\\kappa_P$ are isomorphisms, with inverses obtained by applying the functor and tensor bifunctor to their inverses. Cancelling them proves the required braiding equation at every pair $(Q_{\\mathcal C}P,Q_{\\mathcal C}Q)$ of K-flat models. This cancellation does not assume that $t$ has already been proved invertible.",
+   "text": "For the right side, naturality of the native target braiding moves κ_Q ⊗ κ_P past the braiding. Target native-braiding normalization gives β_D ≫ μ_D(FQ,FP) = μ_D(FP,FQ) ≫ Q_D(b_FP,FQ). The hnormalized equation at (P,Q) then identifies this side with E(μ_C(P,Q)) ≫ κ_(P⊗Q) ≫ Q_D(τ_PQ) ≫ Q_D(b_FP,FQ). Step 1 identifies the two complex composites, and functoriality of Q_D identifies their localizations. Cancel the postcomposing isomorphism to prove the square at localized K-flat pairs. Neither t nor the source tensor counit needs to be inverted.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -47,11 +47,10 @@
    }
   },
   {
-   "text": "Finally regard the two sides as natural transformations from the bifunctor $H(K,L)=E(K\\otimes^{\\mathbf L}L)$ to $J(K,L)=EL\\otimes^{\\mathbf L}EK$. They are natural because $t$ is natural by hypothesis and the prescribed braidings are natural. Closedness and symmetry make each fixed-factor tensor functor on $\\mathcal C$ a left adjoint; [lem-weil-pbc-left-adjoint-preserves-colimits] supplies its preservation of all small colimits. All the other hypotheses of [lem-sfb-kflat-derivability] are precisely the given Grothendieck, additive tensor and functorial flat-resolution assumptions. Thus the full subcategory of K-flat complexes in $K(\\mathcal C)$ is a left derivability structure for quasi-isomorphisms. Apply the last assertion of [lem-sfb-multivariable-derived-calculus] with $n=2$, both categories $K(\\mathcal C)$, both localizations $Q^h_{\\mathcal C}:K(\\mathcal C)\\to D(\\mathcal C)$ and both subcategories the K-flat complexes. It says that natural transformations between $H$ and $J$ are determined by their components at pairs of localized K-flat objects. The complexes-localization $Q_{\\mathcal C}P$ and homotopy-localization $Q^h_{\\mathcal C}P$ are canonically identified by the equivalent descriptions in [def-weil-abstract-derived-category]; naturality identifies their components. Step 3 proves equality at all such pairs, so the two transformations are equal on every pair $K,L$, including unbounded ones.",
+   "text": "Closedness and symmetry make tensoring on either side a left adjoint, so [lem-weil-pbc-left-adjoint-preserves-colimits] supplies the colimit-preservation hypotheses of [lem-sfb-kflat-derivability]. Apply that theorem to the given functorial flat resolution to obtain R with K-flat values and a natural quasi-isomorphism r:R→id on complexes. Every derived object X is isomorphic to Q_C(P) for some complex P by essential surjectivity of the localization [def-weil-abstract-derived-category]. Since Q_C(r_P) is invertible, it is also isomorphic to Q_C(RP). Regard the two sides of the desired square as natural transformations of curried bifunctors. Naturality in the first variable and cancellation of the image of an isomorphism transport the equality from (Q_C(RP),Q_C(RQ)) to (K,Q_C(RQ)); repeat in the second variable to obtain the equation at arbitrary K,L. This is the direct resolving-representative argument behind the determination clause of multivariable derived calculus; no multivariable calculus theorem is needed.",
    "uses": [
     "lem-weil-pbc-left-adjoint-preserves-colimits",
     "lem-sfb-kflat-derivability",
-    "lem-sfb-multivariable-derived-calculus",
     "def-weil-abstract-derived-category"
    ],
    "elementary": false,
@@ -66,13 +65,12 @@
   "lem-weil-pbc-left-adjoint-preserves-colimits",
   "def-weil-pbc-category-colimit",
   "lem-sfb-kflat-derivability",
-  "lem-sfb-multivariable-derived-calculus",
   "def-weil-abstract-derived-category"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 0FPQ (lemma-symmetric-monoidal-cat-complexes) and 0FPT (lemma-symmetric-monoidal-derived); agent-written cross-functor calculation for the prescribed native normalizations."
+  "place": "Tags 0FPQ (lemma-symmetric-monoidal-cat-complexes) and 0FPT (lemma-symmetric-monoidal-derived); agent-written cross-functor calculation for the prescribed native normalizations. Lean proof by T2: signed summand calculation, postcomposition with the target model isomorphism, and direct naturality transport along K-flat replacements."
  },
  "mathlib_searches": [
   {
@@ -215,5 +213,15 @@
   "group": "NM",
   "result": "pass",
   "note": "Clause-by-clause check of exactTensorFunctor_derived_braiding against the node, Stacks 0FPQ/0FPT and all 5 stmt_deps. Hypotheses: closed symmetric Grothendieck abelian with additive tensor and functorial flat resolutions for C and D, universes independent; F additive, exact, left adjoint, CoreMonoidal (the mathlib_match of def-sfb-strong-monoidal-functor), PreservesFlat, preserves all IsKFlatForTotalTensor complexes. hτ fixes τ by its bidegree summands (inverse tensorator), uniquely because F preserves coproducts. hnormalized E(μC)≫κ≫Q(τ)=t≫(κ⊗κ)≫μD on K-flat pairs is equivalent to the node's m=μ⁻¹ form; the comparison of lem-pur-derived-tensor-comparison satisfies it, so characterizing t this way is not a duplicate notion. hbraided and the conclusion match the node in direction; both braidings are the native DerivedMonoidal.braiding' built from the Koszul homotopy braiding; K and L are arbitrary unbounded. Statement verbatim; docstrings carry source, blueprint id and 4 proof steps; imports are statement plus proof_deps; sorry only; dep records unchanged. Compile: clean in 48.3 s at load ~200; timeouts at load ~265 (twice); about 26 s of kernel time in the conclusion. DerivedCategory.braidedCategory' would force a universe equality, so no speed-up FIX. Maintainer note: retry landing at lower load if it times out at 60 s."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261021T120528-L-3907022",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
