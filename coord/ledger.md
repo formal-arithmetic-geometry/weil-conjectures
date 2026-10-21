@@ -20111,3 +20111,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 2026-10-21T03:59:31Z L: superseded stage-1 delivery Q47/lem-sfb-coefficient-push-filtered-legs at fab024268a29d3b4269595a032ffbbb4fc304563; current completion retained; packet archived at refs/superseded/Q47/lem-sfb-coefficient-push-filtered-legs/fab024268a29d3b4269595a032ffbbb4fc304563; stale return retired.
 - 2026-10-21T03:59:35Z L: superseded stage-1 delivery Q01/lem-cbc-constant-derived-limit-resolution-unit at 3633f3917b8497c6a83acf8de3a3f6e7105a70a9; current completion retained; packet archived at refs/superseded/Q01/lem-cbc-constant-derived-limit-resolution-unit/3633f3917b8497c6a83acf8de3a3f6e7105a70a9; stale return retired.
 - 03:59 L: merged deliver/Q50/lem-sfb-exact-open-closed-unbounded-calculus (reviewer PASS; first push; new nodes: 0)
+- 03:59 L: merged deliver/Q40/lem-sf-semilinear-compositor-coherence (reviewer PASS; first push; new nodes: 0)
