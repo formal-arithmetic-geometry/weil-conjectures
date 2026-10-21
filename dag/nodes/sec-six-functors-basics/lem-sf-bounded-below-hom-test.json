@@ -11,9 +11,99 @@
   "def-weil-sheaf-of-modules-category",
   "def-weil-abstract-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix any object $X\\in D(\\mathcal A)$ and represent it by a complex $K^\\bullet$, so $X\\cong QK^\\bullet$. For $r\\in\\mathbf N$ put $E_r^\\bullet=\\sigma_{\\ge-r}K^\\bullet$: its term in degree $i$ is zero for $i<-r$ and $K^i$ otherwise, with the retained differentials. These are subcomplexes, with inclusions $E_r^\\bullet\\to E_{r+1}^\\bullet$. Each $QE_r^\\bullet$ has zero cohomology in degrees below $-r$, hence is an allowed bounded-below test object. In each fixed degree $i$ the sequence is eventually the constant diagram $K^i$ with identity transitions. Its colimit is $K^i$: a cocone factors uniquely by its stable value. These factorizations commute with the differentials because the original cocone maps do. Thus the degreewise colimit of the $E_r^\\bullet$ is $K^\\bullet$.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-kun-truncations",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0118 (homology-section-truncations), cochain stupid lower truncation; degreewise eventual-constant cocone argument"
+   }
+  },
+  {
+   "text": "Apply [lem-kun-complex-colimit-hocolim] to this sequence in $\\mathcal A=\\operatorname{Mod}(\\mathcal O)$. It applies to a sheaf of commutative rings on any small site and has no boundedness hypothesis. It identifies $P=Q(\\bigoplus_{r\\ge0}E_r^\\bullet)$ with the coproduct $\\bigoplus_{r\\ge0}QE_r^\\bullet$ in the ordinary unbounded derived category. Its last assertion, transported along $QK^\\bullet\\cong X$, supplies a distinguished triangle $P\\xrightarrow{u}P\\xrightarrow{j}X\\xrightarrow{d}P[1]$, where $u=1-s$ and $s$ is induced by the consecutive inclusions. This provides an actual coproduct and triangle, rather than an assertion that ordinary colimits in the derived category compute $X$.",
+   "uses": [
+    "lem-kun-complex-colimit-hocolim"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 0949 (derived-lemma-colim-hocolim), 090Z (derived-definition-derived-colimit); module-sheaf telescope statement of the cited node"
+   }
+  },
+  {
+   "text": "The composites of consecutive arrows of this triangle and its rotations vanish. Here is the elementary TR3 argument: for any distinguished $A\\xrightarrow{a}B\\xrightarrow{b}C\\to A[1]$, map the distinguished identity triangle $A\\xrightarrow{1}A\\to0\\to A[1]$ into it using $1_A,a$ on the first two vertices. TR3 supplies the third map, necessarily zero, so its second square gives $ba=0$. Rotate to get the other zero composites. In particular $ju=0$, $dj=0$, and $vd=0$ for $v=-u[1]:P[1]\\to P[1]$, the third arrow of the rotated triangle $P\\xrightarrow{j}X\\xrightarrow{d}P[1]\\xrightarrow{v}P[1]$.",
+   "uses": [
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0146 (derived-lemma-composition-zero), proof using TR3 and rotation"
+   }
+  },
+  {
+   "text": "For $W=B,G$, the coproduct universal property identifies $\\operatorname{Hom}(P,W)$ with $\\prod_r\\operatorname{Hom}(QE_r^\\bullet,W)$. Under these identifications postcomposition by $\\alpha$ is the product of the assumed bijections (use shift $n=0$), and so is bijective: invert each coordinate. The shift is an automorphism, hence $\\operatorname{Hom}(P[1],W)\\cong\\operatorname{Hom}(P,W[-1])\\cong\\prod_r\\operatorname{Hom}(QE_r^\\bullet[1],W)$. Thus postcomposition by $\\alpha$ is also bijective on $\\operatorname{Hom}(P[1],-)\\,$, using the hypothesis at shift $n=1$. Only the universal property of a coproduct is used; there is no compactness or commutation of Hom with a filtered colimit assumption.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 090Z (derived-definition-derived-colimit); coproduct universal property and shift equivalence"
+   }
+  },
+  {
+   "text": "To prove surjectivity on $\\operatorname{Hom}(X,-)$, take $g:X\\to G$. By step 4 lift $gj:P\\to G$ to $b:P\\to B$. Then $\\alpha bu=gju=0$, so injectivity on $\\operatorname{Hom}(P,-)$ gives $bu=0$. Clause (i) of [lem-weil-pbc-hom-out-of-triangle-exact] for $P\\xrightarrow{u}P\\xrightarrow{j}X$ gives $c:X\\to B$ with $cj=b$. The residual $g-\\alpha c$ vanishes after precomposition with $j$. Clause (ii) gives $k:P[1]\\to G$ with $g-\\alpha c=kd$. Lift $k$ to $l:P[1]\\to B$ by step 4. Now $\\alpha(c+ld)=g$, which proves surjectivity.",
+   "uses": [
+    "lem-weil-pbc-hom-out-of-triangle-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0149 (derived-lemma-representable-homological), clauses (i) and (ii) of cited node; explicit surjectivity chase"
+   }
+  },
+  {
+   "text": "For injectivity take $f:X\\to B$ with $\\alpha f=0$. Injectivity on $\\operatorname{Hom}(P,-)$ gives $fj=0$. Clause (ii) of [lem-weil-pbc-hom-out-of-triangle-exact] gives $k:P[1]\\to B$ with $f=kd$. Since $(\\alpha k)d=0$, clause (ii) applied to the rotated triangle $P\\xrightarrow{j}X\\xrightarrow{d}P[1]\\xrightarrow{v}P[1]$ gives $r:P[1]\\to G$ with $\\alpha k=rv$. Lift $r$ to $t:P[1]\\to B$ by step 4. Then $\\alpha(k-tv)=0$, so injectivity on $\\operatorname{Hom}(P[1],-)$ gives $k=tv$. Consequently $f=tvd=0$ by step 3. Taking the difference of two maps proves injectivity. Together with step 5 this proves the Hom bijection for every $X$, with no boundedness imposed on $B,G$, or $X$.",
+   "uses": [
+    "lem-weil-pbc-hom-out-of-triangle-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0149 (derived-lemma-representable-homological), clause (ii) before and after rotation; explicit injectivity chase"
+   }
+  },
+  {
+   "text": "Take $X=G$ in the surjectivity just proved to obtain $\\beta:G\\to B$ with $\\alpha\\beta=1_G$. Then $\\alpha(\\beta\\alpha)=\\alpha=\\alpha1_B$. Injectivity for $X=B$ implies $\\beta\\alpha=1_B$. Hence $\\beta$ is an inverse of $\\alpha$, as required.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Conclusion: elementary two-sided inverse construction from the Hom bijections"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "def-kun-truncations",
+  "def-weil-pbc-category-colimit",
+  "lem-kun-complex-colimit-hocolim",
+  "def-weil-triangulated-category",
+  "lem-weil-pbc-hom-out-of-triangle-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 0949 (lemma-colim-hocolim), 090Z (definition-derived-colimit), 0146 (lemma-composition-zero), 0149 (lemma-representable-homological); explicit Hom chase using the telescope of stupid lower truncations (homology.tex, Tag 0118)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -49,10 +139,52 @@
    "results": "HomologicalComplex.instRespectsIsoQuasiIso, HomologicalComplexUpToQuasiIso.isIso_Q_map_iff_mem_quasiIso, CategoryTheory.ShortComplex.QuasiIso.isIso, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.right_fac_of_isStrictlyLE, CategoryTheory.ShortComplex.hasLeftHomology_of_iso, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, quasiIso_of_isIso",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "boundedBelow.*(generat|[Ii]so)|isIso.*[Hh]om|brutal.*(colimit|hocolim)",
+   "results": "Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/Geometry/RingedSpace/PresheafedSpace/Gluing.lean, Mathlib/Geometry/RingedSpace/PresheafedSpace/Gluing.lean, Mathlib/Geometry/RingedSpace/PresheafedSpace/Gluing.lean, Mathlib/Geometry/RingedSpace/OpenImmersion.lean, Mathlib/Geometry/RingedSpace/OpenImmersion.lean, Mathlib/Geometry/RingedSpace/OpenImmersion.lean, Mathlib/Geometry/RingedSpace/OpenImmersion.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern individual truncations, localization or the cohomology criterion, not the bounded-below Hom detection statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bounded below complexes detect isomorphisms in the unbounded derived category of module sheaves",
+   "results": "HomologicalComplexUpToQuasiIso.isIso_Q_map_iff_mem_quasiIso, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, HomologicalComplex.instRespectsIsoQuasiIso, DerivedCategory.right_fac_of_isStrictlyLE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, CategoryTheory.ShortComplex.QuasiIso.isIso, CategoryTheory.ShortComplex.QuasiIso, quasiIso_of_isIso",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern individual truncations, localization or the cohomology criterion, not the bounded-below Hom detection statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"IsIso\"",
+   "results": "DerivedCategory.instIsIsoMapCochainComplexIntQOfQuasiIso, DerivedCategory.isIso_Q_map_iff_quasiIso, DerivedCategory.isIso_iff, DerivedCategory.isIso_Qh_map_iff, DerivedCategory.Plus.isIso_iff",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern individual truncations, localization or the cohomology criterion, not the bounded-below Hom detection statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism in the unbounded derived category of sheaves of modules is an isomorphism if postcomposition induces bijections on Hom from all bounded below objects and all shifts",
+   "results": "DerivedCategory.instIsIsoMapCochainComplexIntQ, DerivedCategory.isIso_Q_map_iff_quasiIso, DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isGE, HomologicalComplexUpToQuasiIso.isIso_Q_map_iff_mem_quasiIso, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKInjective",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern individual truncations, localization or the cohomology criterion, not the bounded-below Hom detection statement"
+  },
+  {
+   "tool": "grep",
+   "query": "isIso.*[Hh]om|[Hh]om.*isIso|[Bb]ounded[Bb]elow|telescope|hocolim",
+   "results": "Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean, Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean, Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean, Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean, Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean, Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean, Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean, Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean. Searched Mathlib/Algebra/Homology/DerivedCategory",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern individual truncations, localization or the cohomology criterion, not the bounded-below Hom detection statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bounded below brutal truncations generate the unbounded derived category under coproducts and mapping cones so Hom from them detects isomorphisms",
+   "results": "DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.IsGE, DerivedCategory.TStructure.t",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern individual truncations, localization or the cohomology criterion, not the bounded-below Hom detection statement"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "sk-prop-sf-rf-shriek-preservation",
@@ -69,5 +201,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sf-bounded-below-hom-test",
+  "worker": "stage1",
+  "summary": "Proved the test using the existing module-sheaf sequential telescope theorem and Hom-out-of-triangle exactness. Every complex is the degreewise union of its stupid lower truncations. Coproduct universal properties and an explicit surjectivity/injectivity chase yield all Hom bijections, then a two-sided inverse. No new nodes, no statement change, no whole-item project attachment or Mathlib match.",
+  "blueprint": "Realizes the bounded-below representing-object test isolated by Q13 for the final composition/open-locality paragraph of sk-prop-sf-rf-shriek-preservation; supplies the detection argument needed to identify the represented object in the ambient ordinary derived category.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-complex-colimit-hocolim",
+    "why": "Generic theorem on sequential colimits of complexes of module sheaves and their derived coproduct telescope; the upper-shriek preservation unit gives no such construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-complex-colimit-hocolim"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q62-f1644fb49",
+  "group": "Q62",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q62-f1644fb49 (reviewer sub-agent of L); spot-checked: Read item lem-sf-bounded-below-hom-test (7 steps, 0 new nodes), all cited statements, the parent sk-prop-sf-rf-shriek-preservation step 4 and its unit, the main-20261015 proof paragraph, and Stacks 0949/090Z/0146/0149/0118 (labels checked). Against clones/live: statement, stmt_deps and blueprint unchanged; the item is still unsplit live; base mathlib_searches kept with 6 appended; proof_deps equals the union of step uses; not in the dropped list; no SGA. Step 1: σ_{≥-r}K subcomplexes per def-kun-truncations, each QE_r bounded below, the degreewise colimit is K. Step 2: lem-kun-complex-colimit-hocolim covers Mod(O) on a site with no boundedness, giving the coproduct Q(⊕E_r) and the triangle P -(1-s)-> P -> X -> P[1]. Its tool use is accepted (generic telescope node, unit sk-prop-sf-kunneth-ordinary). Step 3: TR3/TR2 composition-zero argument correct, rotated third arrow −u[1]. Step 4: coproduct universal property plus the shift autoequivalence give bijections on Hom(P,-) and Hom(P[1],-) from the hypotheses at n=0,1. Steps 5 and 6: surjectivity and injectivity chases checked line by line against clauses (i)/(ii) of lem-weil-pbc-hom-out-of-triangle-exact (Mathlib yoneda_exact₂/₃), including the rotated triangle. Step 7: two-sided inverse, elementary. Edge cases: K=0, zero ring, K unbounded below, B and G unbounded. Not a duplicate of lem-sf-localizing-hom-test (needs B,G in Loc(S)), lem-sc-compact-generator-ambient-thick, lem-weil-pbc-derived-plus-iso-on-cohomology or the coyoneda leaf. Fits the parent's use. No fixes."
  }
 }
