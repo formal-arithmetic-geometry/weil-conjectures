@@ -147,7 +147,7 @@ def with_imports(new: str, ours: str, tipt: str, mod: str) -> str:
     return "\n".join(lines)
 
 
-def run(tip: str, up: str, write: bool = True, companions: bool = True) -> dict:
+def run(tip: str, up: str, write: bool = True, companions: bool = False) -> dict:
     """companions=False (2026-10-21): our extra declarations are dropped instead of moved to companion modules. Nothing
     imports the companions (0 consumers, 0 DAG nodes), and the moved proofs do not elaborate outside their file."""
     exc = exceptions()
@@ -278,7 +278,7 @@ def run(tip: str, up: str, write: bool = True, companions: bool = True) -> dict:
 def main() -> int:
     a = sys.argv[1:]
     tip = a[0]; up = a[a.index("--source-git") + 1]
-    r = run(tip, up, write="--dry-run" not in a, companions="--no-companions" not in a)
+    r = run(tip, up, write="--dry-run" not in a, companions="--companions" in a)
     if "--json" in a:
         pathlib.Path(a[a.index("--json") + 1]).write_text(json.dumps({k: v for k, v in r.items() if k != "lean"}, indent=1))
     print(f"upstream verbatim: {r['stats']}; {sum(len(v) for v in r['moved'].values())} declarations of ours moved to "
