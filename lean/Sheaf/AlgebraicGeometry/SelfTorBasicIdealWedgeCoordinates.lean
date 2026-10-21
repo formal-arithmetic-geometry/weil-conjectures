@@ -14,7 +14,8 @@ public import Mathlib.AlgebraicGeometry.Modules.Tilde
 
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 
-import Sheaf.AlgebraicGeometry.SelfTorConormalWedgeChart
+import WeilConjectures.AlgebraicGeometry.SelfTorConormalWedgeChart
+import Sheaf.AlgebraicGeometry.ExteriorSheafComparison
 import WeilConjectures.AlgebraicGeometry.SelfTorTargetBasicLocalization
 
 /-! # Self-Tor coordinates on principal affine localizations
@@ -173,9 +174,41 @@ theorem exists_basic_ideal_wedge_selfTor_coordinates
   let T := fun U : Y.affineOpens ↦
     tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom ⋙
       Scheme.Modules.pushforward U.1.ι ⋙ Scheme.Modules.tensorPullback i
-  let c := fun U : Y.affineOpens ↦
+  let cTor := fun U : Y.affineOpens ↦
     selfTorConormalComparison (Γ(Y, U.1) : Type u) (i.ker.ideal U) n
-  choose s hs using fun U ↦ exists_selfTor_conormal_wedge_chart i n U
+  let N := (Scheme.Modules.tensorPullback i).obj i.ker.toModules
+  let e₀ := fun U : Y.affineOpens ↦
+    ((SheafOfModules.evaluation Z.ringCatSheaf (op (i ⁻¹ᵁ U.1))).mapIso
+      (Scheme.Modules.exteriorSheafIsoExteriorPower N n)).toLinearEquiv
+  let c := fun U : Y.affineOpens ↦
+    (SheafOfModules.overFunctor Z.ringCatSheaf (i ⁻¹ᵁ U.1)).mapIso
+      (Scheme.Modules.exteriorSheafIsoExteriorPower N n)
+  choose s' hs' using fun U ↦ exists_selfTor_conormal_wedge_chart i n U
+  let s := fun U ↦ c U ≪≫ s' U
+  have hs (U : Y.affineOpens)
+      (b : Fin n → i.ker.toModules.val.obj (op U.1)) :
+      (s U).hom.val.app (op (Over.mk (𝟙 (i ⁻¹ᵁ U.1))))
+          (Scheme.Modules.exteriorSheafSection N n (i ⁻¹ᵁ U.1)
+            (fun j ↦ ((Classical.choose
+              (Scheme.Modules.exists_tensorPullbackAdjunction i)).unit.app
+                i.ker.toModules).val.app (op U.1) (b j))) =
+        selfTorAffineSection i U _ (selfTorIdealWedge i U n b) := by
+    change (s' U).hom.val.app (op (Over.mk (𝟙 (i ⁻¹ᵁ U.1))))
+      (e₀ U _) = _
+    have he :
+        e₀ U (Scheme.Modules.exteriorSheafSection N n (i ⁻¹ᵁ U.1)
+          (fun j ↦ ((Classical.choose
+            (Scheme.Modules.exists_tensorPullbackAdjunction i)).unit.app
+              i.ker.toModules).val.app (op U.1) (b j))) =
+          Scheme.Modules.wedge (M := N)
+            (fun j ↦ ((Classical.choose
+              (Scheme.Modules.exists_tensorPullbackAdjunction i)).unit.app
+                i.ker.toModules).val.app (op U.1) (b j)) := by
+      dsimp [e₀]
+      exact Scheme.Modules.exteriorSheafIsoExteriorPower_hom_wedge N n
+        (i ⁻¹ᵁ U.1) _
+    rw [he]
+    exact hs' U b
   obtain ⟨t, ht⟩ := exists_selfTor_target_basic_localization.{u, w} i n
   refine ⟨s, t, ?_⟩
   intro φ N η V U h hbasic b
@@ -186,16 +219,16 @@ theorem exists_basic_ideal_wedge_selfTor_coordinates
   dsimp only at hU
   rw [hs U b] at hU
   have hV := hs V bV
-  have hm := PresheafOfModules.naturality_apply ((T U).map (c U)).val d.op
+  have hm := PresheafOfModules.naturality_apply ((T U).map (cTor U)).val d.op
     (selfTorAffineSection i U _ (selfTorIdealWedge i U n b))
-  have hc := selfTorAffineSection_map i U (c U) (selfTorIdealWedge i U n b)
+  have hc := selfTorAffineSection_map i U (cTor U) (selfTorIdealWedge i U n b)
   change (t U).hom.val.app (op (Over.mk d))
-      (((T U).map (c U)).val.app (op (i ⁻¹ᵁ V.1))
+      (((T U).map (cTor U)).val.app (op (i ⁻¹ᵁ V.1))
         ((s U).hom.val.app (op (Over.mk d))
           (Scheme.Modules.exteriorSheafSection N n (i ⁻¹ᵁ V.1)
             (fun j ↦ η.val.app (op V.1) (bV j))))) =
     (t V).hom.val.app (op (Over.mk (𝟙 _)))
-      (((T V).map (c V)).val.app (op (i ⁻¹ᵁ V.1))
+      (((T V).map (cTor V)).val.app (op (i ⁻¹ᵁ V.1))
         ((s V).hom.val.app (op (Over.mk (𝟙 _)))
           (Scheme.Modules.exteriorSheafSection N n (i ⁻¹ᵁ V.1)
             (fun j ↦ η.val.app (op V.1) (bV j)))))

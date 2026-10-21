@@ -20,31 +20,28 @@
  },
  "proof": [
   {
-   "text": "Evaluate the canonical comparison `exteriorSheafIsoExteriorPower N n` on the inverse-image chart V to obtain a section equivalence e₀; `exteriorSheafIsoExteriorPower_hom_wedge` says e₀ sends `exteriorSheafSection` to `Scheme.Modules.wedge`. Obtain the affine conormal section equivalence e₁ from the upstream section-equivalence theorem.",
+   "text": "Obtain the affine conormal section equivalence from the existing section-equivalence theorem, then apply the section-to-sheaf extension theorem to obtain the chart isomorphism. The displayed pure-wedge equation is the composition of the extension equation with the section equivalence equation.",
    "uses": [
-    "lem-sc-exterior-sheaf-comparison",
-    "new-t2-self-tor-conormal-wedge-chart-section-equiv"
+    "new-t2-self-tor-conormal-wedge-chart-section-equiv",
+    "new-t2-self-tor-conormal-wedge-chart-from-sections"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the upstream section-to-sheaf extension theorem to e₁, then compose its over-site isomorphism on V with the canonical exterior-sheaf comparison. The resulting isomorphism has the original `exteriorSheaf` source, and the extension equation followed by the pure-wedge equation for e₁ gives the required formula.",
-   "uses": [
-    "new-t2-self-tor-conormal-wedge-chart-from-sections"
-   ],
-   "elementary": false
+   "text": "The source and target are exactly the exterior-power chart and the affine model. For each ideal tuple, rewrite by the extension equation and then apply the pure-wedge equation of the section equivalence.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sc-exterior-sheaf-comparison",
   "new-t2-self-tor-conormal-wedge-chart-section-equiv",
   "new-t2-self-tor-conormal-wedge-chart-from-sections"
  ],
  "proof_origin": {
-  "by": "E7 stage 3 retirement adaptation",
-  "document": "literature/blueprint/main-20261015/",
-  "place": "new-t2-self-tor-conormal-wedge-chart proof plan",
-  "note": "The surviving consumer transports the adopted upstream exteriorPower chart through the proved exteriorSheafIsoExteriorPower comparison; its public statement and unit route are unchanged."
+  "by": "C9 stage 3 retirement adaptation",
+  "document": "lean/WeilConjectures/AlgebraicGeometry/SelfTorConormalWedgeChart.lean",
+  "place": "exists_selfTor_conormal_wedge_chart",
+  "note": "The duplicate Sheaf module is withdrawn; the adopted upstream theorem carries this node and its direct section-equivalence route."
  },
  "mathlib_searches": [
   {
@@ -125,14 +122,15 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-duality",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.SelfTorConormalWedgeChart",
-  "file": "lean/Sheaf/AlgebraicGeometry/SelfTorConormalWedgeChart.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.SelfTorConormalWedgeChart",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/SelfTorConormalWedgeChart.lean",
   "declaration": "AlgebraicGeometry.exists_selfTor_conormal_wedge_chart",
-  "statement": "theorem exists_selfTor_conormal_wedge_chart\n    {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]\n    (n : ℕ) (U : Y.affineOpens) :\n    let N := (Scheme.Modules.tensorPullback i).obj i.ker.toModules\n    let E := Scheme.Modules.exteriorSheaf N n\n    let M := conormalExteriorModule (Γ(Y, U.1) : Type u) (i.ker.ideal U) n\n    let T := tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom ⋙\n      Scheme.Modules.pushforward U.1.ι ⋙ Scheme.Modules.tensorPullback i\n    ∃ s : E.over (i ⁻¹ᵁ U.1) ≅ (T.obj M).over (i ⁻¹ᵁ U.1),\n      ∀ b : Fin n → i.ker.toModules.val.obj (op U.1),\n        s.hom.val.app (op (Over.mk (𝟙 (i ⁻¹ᵁ U.1))))\n            (Scheme.Modules.exteriorSheafSection N n (i ⁻¹ᵁ U.1)\n              (fun j ↦ ((Classical.choose\n                (Scheme.Modules.exists_tensorPullbackAdjunction i)).unit.app\n                  i.ker.toModules).val.app (op U.1) (b j))) =\n          selfTorAffineSection i U M (selfTorIdealWedge i U n b)",
+  "statement": "theorem exists_selfTor_conormal_wedge_chart\n    {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]\n    (n : ℕ) (U : Y.affineOpens) :\n    let N := (Scheme.Modules.tensorPullback i).obj i.ker.toModules\n    let E := Scheme.Modules.exteriorPower N n\n    let M := conormalExteriorModule (Γ(Y, U.1) : Type u) (i.ker.ideal U) n\n    let T := tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom ⋙\n      Scheme.Modules.pushforward U.1.ι ⋙ Scheme.Modules.tensorPullback i\n    ∃ s : E.over (i ⁻¹ᵁ U.1) ≅ (T.obj M).over (i ⁻¹ᵁ U.1),\n      ∀ b : Fin n → i.ker.toModules.val.obj (op U.1),\n        s.hom.val.app (op (Over.mk (𝟙 (i ⁻¹ᵁ U.1))))\n            (Scheme.Modules.wedge (M := N) (r := n) (U := (i ⁻¹ᵁ U.1))\n              (fun j ↦ ((Classical.choose\n                (Scheme.Modules.exists_tensorPullbackAdjunction i)).unit.app\n                  i.ker.toModules).val.app (op U.1) (b j))) =\n          selfTorAffineSection i U M (selfTorIdealWedge i U n b)",
   "branch": "sheaf-dag",
-  "by": "T2",
-  "date": "2026-10-14"
+  "by": "C9",
+  "date": "2026-10-21",
+  "note": "Retired the Sheaf duplicate in favor of the adopted upstream twin; the direct consumer transports the upstream exterior-power chart through the canonical exterior-sheaf comparison."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -145,14 +143,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "C-41db4",
-  "group": "E7",
-  "result": "fix",
-  "landing": "20261020T233128-L-897642",
+  "reviewer": "C-96a36",
+  "group": "C9",
+  "result": "pass",
+  "landing": "20261021T004824-L-1791176",
   "kind": "interface",
-  "note": "independent cc review: delivered node lean record vs live WeilConjectures twin signature (verbatim); adapted consumer vs live original (public statement/imports identical, forced transport via exteriorSheafIsoExteriorPower); node proof fields vs twin's proof"
+  "note": "independent cc review: retired Sheaf chart vs live WeilConjectures twin (node lean.statement verbatim, proof_deps = twin's proof); adapted consumer vs live original (public imports/statement identical, transport via exteriorSheafIsoExteriorPower_hom_wedge); consumer and its importer SelfTorIdealWedgeCoordinates compiled; axioms clean"
  },
  "lean_audit": {
   "master": {

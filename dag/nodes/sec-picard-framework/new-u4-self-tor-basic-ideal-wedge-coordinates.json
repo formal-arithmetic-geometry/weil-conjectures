@@ -20,9 +20,10 @@
  },
  "proof": [
   {
-   "text": "Apply exists_selfTor_conormal_wedge_chart on every affine chart and choose the family s with its top ideal-wedge normalization. Apply exists_selfTor_target_basic_localization for the target family t and its localization equation on explicit algebraic Tor elements.",
+   "text": "Apply the adopted upstream exterior-power chart on every affine chart. Transport its chart isomorphism and wedge normalization through the canonical exteriorSheafIsoExteriorPower comparison to obtain the required exterior-sheaf family s. Apply exists_selfTor_target_basic_localization for the target family t and its localization equation on explicit algebraic Tor elements.",
    "uses": [
     "new-t2-self-tor-conormal-wedge-chart",
+    "lem-sc-exterior-sheaf-comparison",
     "new-t2-self-tor-target-basic-localization"
    ],
    "elementary": false
@@ -42,15 +43,15 @@
  ],
  "proof_deps": [
   "new-t2-self-tor-conormal-wedge-chart",
+  "lem-sc-exterior-sheaf-comparison",
   "new-t2-self-tor-target-basic-localization",
   "new-t2-self-tor-affine-section"
  ],
  "proof_origin": {
-  "by": "agent",
-  "agent": "T2",
-  "date": "2026-10-14",
-  "document": "https://stacks.math.columbia.edu/tag/09PQ",
-  "place": "Decomposition into source-chart normalization and target algebraic-image localization, assembled by proved restriction/unit and affine-section naturality."
+  "by": "C9 stage 3 retirement adaptation",
+  "document": "lean/Sheaf/AlgebraicGeometry/SelfTorBasicIdealWedgeCoordinates.lean",
+  "place": "exists_basic_ideal_wedge_selfTor_coordinates",
+  "note": "The upstream exterior-power chart replaces the withdrawn Sheaf chart; the private proof transport through exteriorSheafIsoExteriorPower supplies the unchanged exterior-sheaf statement."
  },
  "mathlib_searches": [
   {
@@ -143,14 +144,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "T2",
+  "reviewer": "C-96a36",
+  "group": "C9",
   "result": "pass",
-  "landing": "20261013T231546-L-1821225",
+  "landing": "20261021T004824-L-1791176",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: retired Sheaf chart vs live WeilConjectures twin (node lean.statement verbatim, proof_deps = twin's proof); adapted consumer vs live original (public imports/statement identical, transport via exteriorSheafIsoExteriorPower_hom_wedge); consumer and its importer SelfTorIdealWedgeCoordinates compiled; axioms clean"
  },
  "lean_audit": {
   "master": {
