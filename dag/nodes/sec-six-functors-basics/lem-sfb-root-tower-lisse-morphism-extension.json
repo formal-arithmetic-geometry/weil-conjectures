@@ -11,15 +11,121 @@
   "def-sfb-continuous-map-condensed-ring",
   "sk-def-sfb-pulled-back-coefficients",
   "sk-def-sfb-module-objects",
-  "sk-def-sfb-module-derived-pushpull",
   "def-weil-pbc-proetale-site",
   "def-weil-regular-scheme",
   "def-trf-strict-normal-crossings-boundary",
   "def-sfb-lisse-coefficient-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $B=\\operatorname{Spec}A$, $T=\\operatorname{Spec}S$ and $s=t_1\\cdots t_r\\in S$. An affine object $W=\\operatorname{Spec}Q\\to T$ of the small pro-etale site is weakly etale, by [def-weil-pbc-proetale-site]. Apply [lem-sfb-snc-root-limit-normal-charts] to the given chart and $A\\to R$, and to $S\\to Q$. It gives that $Q$ is normal and multiplication by $s$ on $Q$ is injective. The open $W^\\circ=W\\times_T T^\\circ$ is $\\operatorname{Spec}Q[1/s]$, directly by the localization universal property: a map factors through this inverse image exactly when the image of $s$ is invertible. No Noetherian assertion about $Q$ or $S$ is used.",
+   "uses": [
+    "lem-sfb-snc-root-limit-normal-charts",
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent expansion of the supplied-root-extension morphism argument; new geometric input"
+   }
+  },
+  {
+   "text": "The localization map $Q\\to Q[1/s]$ is injective: a fraction $q/1$ is zero only if $s^Nq=0$, and repeated injectivity of multiplication by $s$ gives $q=0$. Since $s$ is a nonzerodivisor, $Q[1/s]$ embeds into the total ring of fractions of $Q$. Every idempotent $e$ in $Q[1/s]$ is integral over $Q$, satisfying $e^2-e=0$. By [lem-weil-pbc-normal-ring-integrally-closed-total], $e$ is in $Q$; injectivity gives the idempotent equation there and uniqueness. Thus idempotents restrict bijectively. By [lem-weil-pbc-spec-clopen-idempotent], this is precisely the inverse-image bijection $\\operatorname{Clop}(W)\\to\\operatorname{Clop}(W^\\circ)$, because $D(e)$ pulls back to $D(e/1)$. This also works for $Q=0$, when both spectra are empty.",
+   "uses": [
+    "lem-weil-pbc-normal-ring-integrally-closed-total",
+    "lem-weil-pbc-spec-clopen-idempotent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 034M, lemma-normal-ring-integrally-closed; Tag 00EE, lemma-disjoint-decomposition"
+   }
+  },
+  {
+   "text": "Both $W$ and $W^\\circ$ are affine, hence qcqs by [lem-weil-pbc-affine-scheme-qcqs], and spectral by [lem-weil-pbc-qcqs-scheme-spectral]. Apply [lem-sfb-spectral-clopen-component-homeomorphism] to their inclusion and the clopen bijection of step 2. It gives the normalized homeomorphism $h_W:\\pi_0(W^\\circ)\\xrightarrow{\\sim}\\pi_0(W)$ with $h_Wq_{W^\\circ}=q_Wj_W$, where each $q$ is the quotient map to connected components. This includes empty $W$.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-qcqs-scheme-spectral",
+    "lem-sfb-spectral-clopen-component-homeomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 0906, lemma-spectral-pi0, clopen criterion; Properties Tag 094L"
+   }
+  },
+  {
+   "text": "The norm topology of $E$ is totally disconnected: ultrametric balls are clopen and separate any two distinct points. Hence a continuous function from a connected space to $E$ is constant. For $a:|W^\\circ|\\to E$, write $a=\\bar a q_{W^\\circ}$. The quotient topology makes $\\bar a$ continuous. Define $\\widetilde a=\\bar a h_W^{-1}q_W$. It is continuous and restricts to $a$. Conversely, factor any continuous function on $W$ through $q_W$ to see that this formula recovers it from its restriction. Thus actual restriction $C(|W|,E)\\to C(|W^\\circ|,E)$ is a bijection. It is a ring homomorphism by pointwise operations. For any $T$-map $v:Z\\to W$ between affine site objects, restriction commutes with precomposition, so uniqueness gives $\\widetilde{a\\circ v^\\circ}=\\widetilde a\\circ v$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 4.2.12, continuous functions and components; extension formula supplied by agent"
+   }
+  },
+  {
+   "text": "Use [lem-weil-pbc-condensed-field-continuous-realization] for the totally disconnected normed field $E$. Its canonical ring-sheaf isomorphism identifies the actual pulled-back continuous coefficient sections on $W$ with $C(|W|,E)$ and those on $W^\\circ$ with $C(|W^\\circ|,E)$. The normalization on profinite test functions identifies their restriction with the restriction of step 4. Consequently $\\Gamma(W,C_{E,T})\\to\\Gamma(W^\\circ,C_{E,T^\\circ})$ is bijective for every affine site object, naturally in that object. This is the all-continuous coefficient ring, not its discrete or locally constant substitute.",
+   "uses": [
+    "lem-weil-pbc-condensed-field-continuous-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Example 3.1, p.6; canonical continuous-function realization"
+   }
+  },
+  {
+   "text": "Choose a common pro-etale trivializing cover of $\\mathcal N,\\mathcal N'$ using [def-sfb-lisse-coefficient-module]: take fibre products of their trivializing covers and refine by affine opens. The site covering rule of [def-weil-pbc-proetale-site] permits these refinements. On a member $W$ the modules are finite free of ranks $a,b$. By [sk-def-sfb-module-objects], a linear sheaf map is determined by the images of the $a$ standard basis sections; each is a $b$-tuple of coefficient sections. Conversely a $b\\times a$ matrix of sections defines a linear map on every object over $W$ by restricting its entries and multiplying vectors. For a morphism on $T^\\circ$, extend its matrix entries uniquely by step 5, obtaining a linear sheaf map on each $W$. This description also proves local uniqueness. Empty matrices handle either rank zero.",
+   "uses": [
+    "def-sfb-lisse-coefficient-module",
+    "def-weil-pbc-proetale-site",
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent expansion of the supplied-root-extension morphism argument; elementary finite-free matrix argument"
+   }
+  },
+  {
+   "text": "On an overlap of two trivializing members, refine by affine opens. The two constructed maps have the same restriction to the punctured overlap, namely the given morphism. In either set of restricted bases their difference has zero matrix after restriction. Step 5 on each affine refinement forces every entry of that difference to vanish, so the maps agree. The sheaf gluing axiom, applied on every test object to the images of sections, glues them uniquely to a module morphism on $T$; additivity, scalar compatibility and naturality hold because they hold on this cover. The same local uniqueness shows that any two global maps with the same restriction agree. This proves surjectivity and injectivity of the required Hom restriction.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent expansion of the supplied-root-extension morphism argument; sheaf gluing and uniqueness"
+   }
+  },
+  {
+   "text": "For a pro-etale base change $U'\\to U$, put $T'=T\\times_U U'$; the root-algebra presentation base changes to the stated presentation over $U'$, since tensor products commute with the displayed generators, relations and filtered colimit. Coefficients identify under pullback by [sk-prop-sfb-cartesian-coefficients]. Pullback carries the restriction of a map to the restriction of its pullback by the fibre-product projection equations. It carries local free bases to local free bases. Therefore the pullback of the unique extension and the extension of the pulled-back morphism restrict to the same map on $T'^\\circ$; injectivity already proved for the new chart makes them equal. This is the requested base-change naturality. If $r=0$, $s=1$, $j$ is the identity and all formulas reduce to the identity. If the chart is empty, all Hom sets are singletons. The proof constructs only morphisms between the supplied modules.",
+   "uses": [
+    "sk-prop-sfb-cartesian-coefficients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent expansion of the supplied-root-extension morphism argument; base-change uniqueness and edge cases"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-snc-root-limit-normal-charts",
+  "def-weil-pbc-proetale-site",
+  "lem-weil-pbc-normal-ring-integrally-closed-total",
+  "lem-weil-pbc-spec-clopen-idempotent",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-qcqs-scheme-spectral",
+  "lem-sfb-spectral-clopen-component-homeomorphism",
+  "lem-weil-pbc-condensed-field-continuous-realization",
+  "def-sfb-lisse-coefficient-module",
+  "sk-def-sfb-module-objects",
+  "sk-prop-sfb-cartesian-coefficients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), agent expansion of the supplied-root-extension morphism argument"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -55,10 +161,45 @@
    "results": "8 hits: LightCondMod.LocallyConstant.fullyFaithfulFunctor, CondensedMod.LocallyConstant.fullyFaithfulFunctor, lightProfiniteToLightCondSetFullyFaithful, LightCondSet.fullyFaithfulSequentialToLightCondSet, LightCondSet.LocallyConstant.functorFullyFaithful, CondensedSet.LocallyConstant.functorFullyFaithful, CondensedMod.LocallyConstant.instFullModuleCatFunctor, LightCondMod.LocallyConstant.instFullModuleCatFunctor",
    "date": "2026-10-21",
    "verdict": "no match: the returned declarations do not state this ringed-topos or internal condensed-action assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "(lisse|localSystem).*(fullyFaithful|dense)|(fullyFaithful|dense).*(lisse|localSystem)",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits do not assert normality of Kummer root limits or extension of continuous-coefficient lisse morphisms"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Morphisms between finite locally free pro etale modules extend uniquely across a normal crossing divisor on an infinite root tower",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.normalization.hom_ext, AlgebraicGeometry.Scheme.Etale, PresheafOfModules.free_hom_ext, AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.FormallyUnramified.recOn, StandardEtalePair.instFormallyEtaleRing",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits do not assert normality of Kummer root limits or extension of continuous-coefficient lisse morphisms"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsNormal\", \"FullyFaithful\"",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits do not assert normality of Kummer root limits or extension of continuous-coefficient lisse morphisms"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of lisse continuous E coefficient modules along the complement of a normal crossing divisor on an infinite Kummer root tower is fully faithful",
+   "results": "8 hits: LightCondMod.LocallyConstant.fullyFaithfulFunctor, CondensedMod.LocallyConstant.fullyFaithfulFunctor, AlgebraicGeometry.Scheme.Modules.fullyFaithfulToPresheafOfModules, LightCondSet.LocallyConstant.functorFullyFaithful, AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, AlgebraicGeometry.Scheme.Modules.instFullPushforward, LightCondMod.LocallyConstant.instFullModuleCatFunctor, SheafOfModules.fullyFaithfulForget",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits do not assert normality of Kummer root limits or extension of continuous-coefficient lisse morphisms"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a normal infinite Kummer parameter root scheme restriction to its dense divisor complement is fully faithful on finite locally free continuous coefficient sheaves",
+   "results": "8 hits: LightCondMod.LocallyConstant.fullyFaithfulFunctor, CondensedMod.LocallyConstant.fullyFaithfulFunctor, AlgebraicGeometry.Scheme.Modules.fullyFaithfulToPresheafOfModules, AlgebraicGeometry.Spec.fullyFaithful, AlgebraicGeometry.Scheme.fullyFaithfulForgetToLocallyRingedSpace, AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, AlgebraicGeometry.Scheme.instFullOppositeIdealSheafDataOverSubschemeFunctor, AlgebraicGeometry.Scheme.instFullEtaleOverForget",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits do not assert normality of Kummer root limits or extension of continuous-coefficient lisse morphisms"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-partial-kummer-boundary-unit-model",
@@ -82,5 +223,74 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-root-tower-lisse-morphism-extension",
+  "worker": "stage1",
+  "summary": "Proved full faithfulness by normal-chart idempotent extension, a homeomorphism on component spaces, all-continuous coefficient realization, and explicit matrix extension and gluing. One new statement-only geometric lemma isolates normality and the boundary nonzerodivisor on weakly etale root-limit charts. No statement change; removed unused derived-pushpull statement dependency.",
+  "blueprint": "Paragraph (3) of main-20261015 direct-images proof: the supplied-root lisse-extension morphism argument below the open-direct-image finiteness input. The inherited nearest-blueprint ancestor is None; its chain and exact source place are retained.",
+  "tool_uses": [
+   {
+    "node": "def-weil-pbc-proetale-site",
+    "why": "Generic input for the local lisse-module and coefficient restriction argument; this unit has no replacement for this background lemma."
+   },
+   {
+    "node": "lem-weil-pbc-normal-ring-integrally-closed-total",
+    "why": "Generic input for normal affine idempotent extension; this unit has no replacement for this background lemma."
+   },
+   {
+    "node": "lem-weil-pbc-spec-clopen-idempotent",
+    "why": "Generic input for normal affine idempotent extension; this unit has no replacement for this background lemma."
+   },
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "Generic input for spectral component and continuous-coefficient comparison; this unit has no replacement for this background lemma."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-scheme-spectral",
+    "why": "Generic input for spectral component and continuous-coefficient comparison; this unit has no replacement for this background lemma."
+   },
+   {
+    "node": "lem-sfb-spectral-clopen-component-homeomorphism",
+    "why": "Generic input for spectral component and continuous-coefficient comparison; this unit has no replacement for this background lemma."
+   },
+   {
+    "node": "lem-weil-pbc-condensed-field-continuous-realization",
+    "why": "Generic input for spectral component and continuous-coefficient comparison; this unit has no replacement for this background lemma."
+   },
+   {
+    "node": "def-sfb-lisse-coefficient-module",
+    "why": "Generic input for spectral component and continuous-coefficient comparison; this unit has no replacement for this background lemma."
+   },
+   {
+    "node": "sk-def-sfb-module-objects",
+    "why": "Generic input for the local lisse-module and coefficient restriction argument; this unit has no replacement for this background lemma."
+   },
+   {
+    "node": "sk-prop-sfb-cartesian-coefficients",
+    "why": "Generic input for the local lisse-module and coefficient restriction argument; this unit has no replacement for this background lemma."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-pbc-proetale-site",
+  "lem-weil-pbc-normal-ring-integrally-closed-total",
+  "lem-weil-pbc-spec-clopen-idempotent",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-qcqs-scheme-spectral",
+  "lem-sfb-spectral-clopen-component-homeomorphism",
+  "lem-weil-pbc-condensed-field-continuous-realization",
+  "def-sfb-lisse-coefficient-module",
+  "sk-def-sfb-module-objects",
+  "sk-prop-sfb-cartesian-coefficients"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NY-e4baa03ab",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-e4baa03ab (reviewer sub-agent of L); spot-checked: I read the item, all eight steps and the new node lem-sfb-snc-root-limit-normal-charts in full, plus the statement of every cited node. Sources read: blueprint main-20261015 ctf-stability direct-images proof paragraph (3), which says nothing about root towers (the item is an agent node seven created nodes below it), and ILO IX Prop 2.1 printed pp.133-134 (finite root normal form; the SGA 1 citation there is only for essential surjectivity, which is not used). Neither file cites SGA. Steps 1-3: weakly etale affine W=Spec Q; Q is normal and s is a nonzerodivisor by the new node; idempotents of Q[1/s] lie in Q by lem-weil-pbc-normal-ring-integrally-closed-total; clopens correspond by the spec-clopen-idempotent leaf; both spaces are qcqs and spectral, so the reviewed spectral-clopen-component-homeomorphism lemma applies. Step 4: the extension formula ā h^{-1} q_W, its inverse identities and its uniqueness check out line by line. Step 5: the condensed-field realization gives sections C(|W|,E), the same reading as the normal-generic-continuous-sections sibling; the Noetherian sibling is correctly not used for T. Steps 6-7: Homs between free modules are matrices of sections, overlaps are affine because T is affine, and gluing is ordinary Hom-sheaf gluing. Step 8: base change uses cartesian-coefficients clause (1) plus uniqueness. The new node is true and self-contained. Proof sketch: SNC gives a regular system of parameters, so each finite root algebra is finite free and regular; a weakly etale extension stays normal via the BS 2.3.4 refinement, etale normality, 037D colimits and faithfully flat descent; s is a nonzerodivisor by flatness and freeness. Small cases checked: r=0, Q=0, empty chart, A^1, two axes. It is not a clause of the item and not a duplicate (compared with lem-per-snc-root-algebra-structure, the root-tower family, normal-generic-continuous-sections, and the filtered-colimit normality nodes). Batch-5 finding: def-trf-strict-normal-crossings-boundary is a general SNC definition with only general definitions as stmt_deps and no proof; it is not part of either assumption or their proofs, so accepted. Generic tool uses accepted: normal-integrally-closed-total, condensed-field realization, cartesian coefficients; the other declared entries are definitions, mathlib leaves or same-unit nodes. No repair note exists in the snapshot, and the parent's step 6 uses the item exactly as stated. No changes."
  }
 }
