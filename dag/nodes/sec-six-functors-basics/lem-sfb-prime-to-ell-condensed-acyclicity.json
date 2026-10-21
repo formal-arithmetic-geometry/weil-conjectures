@@ -11,7 +11,8 @@
   "def-sfb-continuous-map-condensed-ring",
   "def-weil-size-convention",
   "def-sfb-condensed-action-module",
-  "sk-def-sfb-derived-categories"
+  "sk-def-sfb-derived-categories",
+  "def-sfb-condensed-equivariant-bar-data"
  ],
  "proof": [
   {
@@ -216,5 +217,30 @@
   "group": "N5",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-61fc616b3 (reviewer sub-agent of L); spot-checked: I read the item, both new unsplit nodes, every cited statement and paragraph (3) of sk-thm-sf-ctf-stability-direct-images.proof.md. That paragraph only factors Rf_*=Rp_*Rj_*, and the item and both nodes honestly mark their proofs as agent-written WANTED inputs. The item's statement and stmt_deps are identical to its base copy in the N9 snapshots. Step 1: lem-sfb-condensed-derived-invariant-bar with A=C_F and trivial N=A gives the derived bar total and the invariant-inclusion normalization. Step 2: node 1 (degree-zero concentration of RHom(A_F[P],A_F) and its naturality), applied at P=K^n, plus lem-sc-first-quadrant-column-augmentation. I checked the tool's hypotheses: the first index is the resolution degree, a composed with d_{0,1} is zero because A->J^0->J^1 is zero, and the first face commutes because A->J^0 is equivariant and A is trivial. The tool use is declared in split_report and accepted as a generic black box. Step 3: node 2's iota; in degree zero L^0=C^0=A. Step 4: I recomputed the averaging. Summing dc over h gives da=(-1)^n m c, so b=(-1)^n a/m; for n=1, c=0. This needs only m invertible, which holds in characteristic 0, so all the prime-to-ell content sits in node 2. Steps 5-6: the quasi-isomorphism A[0]->L and the composite equal eta, with K=1 the identity. New nodes: B1-B3 OK, blueprint via is the item plus the inherited chain, and searches are recorded. They are not duplicates: lem-sfb-profinite-constant-derived-functions, the root-tower nodes and lem-sfb-polynomial-derived-bar-comparison all keep RHom derived, and the curve-estimates cochain nodes are for discrete coefficients only. Small cases: node 1 holds for P empty and P finite. Node 2 holds for K finite and K=1, and fails for K=Z_ell, so its hypothesis is needed. For F=E both nodes are classical Banach-coefficient facts. For noncomplete Omega both stay open WANTED inputs. My H^1/H^2 probes for K=Z_r found no counterexample: a Baire argument forces the candidates into one finite extension. Noncomplete Omega is kept throughout, with no Haar integral; Omega-valued functions can have transcendental Haar integrals. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.PrimeToEllCondensedAcyclicity",
+  "declaration": "Profinite.CondensedAction.prime_to_ell_condensed_acyclicity",
+  "declarations": [
+   "Profinite.CondensedAction.scalarRing",
+   "Profinite.CondensedAction.trivialDerivedAugmentation",
+   "Profinite.CondensedAction.ScalarAcyclic",
+   "Profinite.CondensedAction.prime_to_ell_condensed_acyclicity"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/PrimeToEllCondensedAcyclicity.lean",
+  "statement": "theorem prime_to_ell_condensed_acyclicity (ell : ℕ) [Fact ell.Prime] (Ω : Type u) [NormedField Ω] [NormedAlgebra ℚ_[ell] Ω] [IsAlgClosure ℚ_[ell] Ω] (E : IntermediateField ℚ_[ell] Ω) [FiniteDimensional ℚ_[ell] E] (K : Type u) [Group K] [TopologicalSpace K] [IsTopologicalGroup K] [CompactSpace K] [T2Space K] [TotallyDisconnectedSpace K] (hK : ∀ (Q : Type u) [Group Q] [Fintype Q] [TopologicalSpace Q] [DiscreteTopology Q] (q : K →ₜ* Q), Function.Surjective q → Nat.Coprime (Nat.card Q) ell) : ScalarAcyclic E K ∧ ScalarAcyclic Ω K",
+  "branch": "sheaf-dag",
+  "by": "Q11",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The helper definitions bundle the existing continuous-map ring, construct the canonical augmentation from the normalized invariants adjunction and any injective resolution, and express acyclicity with existence (not additional hypotheses) of the action-category structures. The landed def-sfb-condensed-equivariant-bar-data is added to stmt_deps for its ActionAbelian and ordinary right-derived resolutionComparison interface. No statement or stage-1 split is changed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1bf7c80ec",
+  "group": "Q11",
+  "result": "pass",
+  "note": "Only the item node and the new module differ from live. stmt_deps gains only the landed def-sfb-condensed-equivariant-bar-data, whose ActionAbelian/Equivariant/extend/resolutionComparison/Invariants are used (allowed). lean.statement is verbatim. Clauses: prime ell; normed IsAlgClosure Omega with no completeness, whose NormedAlgebra norm is the unique extension of the ell-adic norm; finite IntermediateField E, including bot; scalarRing bundles exactly the recorded continuousMapRingObjOfUniverse.{u,u} with its MonObj and comm proof; profinite K; hK quantifies over all finite discrete continuous surjective quotients with Nat.Coprime of the card and ell; trivial regular module; the augmentation is single0(unit) then singleMapHomologicalComplex.inv then Gamma(I.iota), extended and localized, then resolutionComparison.inv, with the unit forced by the transpose law; IsIso in D(Modules C_F) for E and Omega. The existentials are Prop-valued (ActionAbelian, IsGrothendieckAbelian), and Invariants is pinned up to unique iso, so it is not an arbitrary map; this matches the landed CondensedBar.Assertion. For all I is not vacuous. Edge cases K=1, finite K, K=Z_ell excluded, E=Q_ell, empty test set, noncomplete Omega. Docstrings carry source, blueprint id and the six proof steps; lines <=100; no duplicate or name collision; only sorry. No file changed, so no compile; the worker reports a clean compile. Advisory: RGamma uses Mathlib rightDerivedFunctor as in the bar-data dependency, which the sk-def-sfb-derived-categories note allows."
  }
 }

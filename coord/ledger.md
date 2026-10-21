@@ -23306,3 +23306,6 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:18 L: merged deliver/NW/lem-sfb-internal-bar-ordered-cup (reviewer FIX; first push; new nodes: 2)
 - 18:19 L: merged deliver/NL/lem-wf-tate-twist-frobenius (stage 2; reviewer PASS; parallel immutable checks)
 - 18:19 L: merged deliver/Q21/lem-sf-locally-closed-relative-transpose-normalization (stage 2; reviewer PASS; parallel immutable checks)
+- 18:20 L: merged deliver/N6/lem-sfb-filtered-colimit-strictly-henselian-local (stage 2; reviewer PASS; parallel immutable checks)
+- 18:20 L: merged deliver/Q11/lem-sfb-prime-to-ell-condensed-acyclicity (stage 2; reviewer PASS; parallel immutable checks)
+- 18:20 L: merged deliver/Q07/lem-sfb-integral-lisse-closed-base-change (stage 2; reviewer PASS; parallel immutable checks)
