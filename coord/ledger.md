@@ -20159,3 +20159,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:02 L: merged deliver/NF/lem-weil-pbc-finite-intersection-limit-compatibility (stage 2; reviewer PASS; parallel immutable checks)
 - 04:02 L: merged deliver/Q60/lem-sfb-locally-free-derived-scalars (stage 2; reviewer PASS; parallel immutable checks)
 - 04:02 L: merged deliver/Q24/lem-sfb-flat-scalar-cyclic-resolution (stage 2; reviewer PASS; parallel immutable checks)
+- 04:03 L: returned deliver/Q05/lem-sfb-ringed-complete-triangulated (reviewer RETURN: L: independent stage-2 immutable head 16342a5845dd: H13: the delivery overwrites NJ's landed record of lem-weil-pbc-ring)
