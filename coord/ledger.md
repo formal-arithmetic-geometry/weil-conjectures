@@ -23292,3 +23292,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:14 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
 - 2026-10-21T18:14:22Z L: superseded stage-1 delivery Q03/lem-sfb-tame-root-tower-extension at cf3685ec360fa619d8ca2eb3ccabbe588e1bea1a; current completion retained; packet archived at refs/superseded/Q03/lem-sfb-tame-root-tower-extension/cf3685ec360fa619d8ca2eb3ccabbe588e1bea1a; stale return retired.
 - 18:14 L: merged deliver/Q26/lem-wf-internal-hom-weil (stage 2; reviewer PASS; parallel immutable checks)
+- 18:14 L: returned deliver/NC/lem-sfb-lisse-lattice-potential-kummer-tameness (reviewer RETURN: C1 + F + G4. This is the 7th delivery of this item (after N5 68c9bff0, NX af5315f6, NL 1f51eeaf, NN b8613865, NZ 8589c9f)
