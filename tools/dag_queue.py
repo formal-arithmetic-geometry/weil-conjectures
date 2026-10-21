@@ -503,8 +503,10 @@ class Dag:
         except Exception:
             rank = {}
         big = 10**6
+        # A released human re-split reopens even closed Lean. Use the same
+        # completion predicate as claims and retirement, rather than unfolded().
         items = [((rank.get(self.live[i].get("unit"), big) if rank else 0) * 1000 + self.dist1[i], i)
-                 for i, d in self.live.items() if i in self.dist1 and not unfolded(d)]
+                 for i, d in self.live.items() if i in self.dist1 and not stage1_completed(d)]
         # the human, 2026-10-16 (STAGE 1 -> 2 HANDOFF): an unsplit node in the statement downstream (stmt_deps closure) of a
         # node on the reach blocks that statement's grounding; it is a stage-1 item even when the target route does not pass
         # through it (it was never offered: the route reaches it only through stmt_deps of nodes behind finished ones)
@@ -516,8 +518,8 @@ class Dag:
             if c in seen: continue
             seen.add(c)
             d = self.live.get(c)
-            if d is None or is_leaf(d) or finished(d): continue
-            if not unfolded(d):
+            if d is None or ((is_leaf(d) or finished(d)) and not stage1_repair_owed(c)): continue
+            if not stage1_completed(d):
                 if c not in have: items.append((big * 1000 + self.dist.get(c, 999), c)); have.add(c)
                 if not keeps_plan(c):   # 2026-10-17: a returned coarse split keeps its plan; its statement downstream stays open
                     continue
