@@ -19705,3 +19705,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:16 L: returned deliver/U2/Sheaf.Paper.IntegralScalarExtensionWellDefined (reviewer RETURN: (reviewer C-20907, head 209070cd6) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.IntegralScalar)
 - 03:17 L: merged deliver/NO/lem-sf-compact-support-restriction-of-scalars (reviewer PASS; after a return; new nodes: 1)
 - 03:17 L: merged deliver/Q57/lem-sp-direct-image-change-ring-transpose (reviewer FIX; after a return; new nodes: 1)
+- 03:17 L: merged deliver/Q26/lem-sfb-extend-to-qlbar-constructible (reviewer FIX; after a return; new nodes: 2)
