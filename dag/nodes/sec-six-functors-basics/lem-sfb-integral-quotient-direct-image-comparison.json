@@ -21,9 +21,114 @@
   "def-weil-pbc-proetale-site",
   "def-weil-size-convention"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First identify the actual quotient and its resolution, for every positive integer $j$. By [lem-weil-l-adic-extension-integers-dvr], $A$ is a discrete valuation domain; in particular it is Noetherian and $\\pi^j\\ne0$. The two-term free $A$-complex $[A\\xrightarrow{\\pi^j}A]$ resolves $A/\\pi^j$. The quotients are finite by [lem-weil-valued-dvr-finite-quotients]. The completed coefficient sheaf $R_T$ is the inverse limit of these constant quotients by [det-prop-sfb-qlbar-colimit-x-integral-limit]. Apply [lem-weil-pbc-completed-constant-sheaf-reduction] with $I=(\\pi)$: $R_T$ is flat over the constant sheaf $\\underline A$, and scalar extension of that finite free resolution is augmented to $S_{j,T}$ by the canonical finite projection. Consequently $R_T/\\pi^jR_T\\cong S_{j,T}$ with that projection, rather than an arbitrarily chosen quotient isomorphism. Apply [lem-sfb-flat-scalar-cyclic-resolution] with $a=\\pi^j$: multiplication is injective and $[R_T\\xrightarrow{\\pi^j}R_T]$, in degrees $-1,0$, is a K-flat resolution of $S_{j,T}$. This proves the resolution assertion and supplies perfect coefficient complexes at every level.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-valued-dvr-finite-quotients",
+    "det-prop-sfb-qlbar-colimit-x-integral-limit",
+    "lem-weil-pbc-completed-constant-sheaf-reduction",
+    "lem-sfb-flat-scalar-cyclic-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 093M, lemma-completion-flat, and Tag 093J, lemma-constant-exact, in sites-modules.tex; Tag 06YQ, lemma-bounded-flat-K-flat, in sites-cohomology.tex"
+   }
+  },
+  {
+   "text": "Work temporarily with section-ring module sheaves. The exact equivalences of [lem-pe-internal-section-tensor-comparison] identify the internal relative tensors, total tensor complexes and K-flat representatives with their section-module versions. Thus they also identify derived scalar extension: on a flat-term K-flat representative $P$, both are the complex $P\\otimes_{R_T}S_{j,T}$, by [lem-pur-derived-change-of-rings]. The unbounded functor and adjunction comparisons of [lem-pd-section-derived-pushpull-normalization] identify the specified internal $L_f\\dashv F_f$, including their counits, with the ringed-topos ones. Apply this separately to the integral condensed coefficient ring and the discrete finite quotient. Both coefficient identifications are cartesian by [sk-prop-sfb-cartesian-coefficients], and they commute with the finite projection, since all maps are pulled back from the point. Apply the normalized derived pullback composition comparisons of [lem-sfb-ringed-derived-monoidal-comparisons] to the two paths from $(X,S_{j,X})$ to $(Y,R_Y)$, through $(Y,S_{j,Y})$ and through $(X,R_X)$. They give $\\lambda_{f,j}:L_{f,S_j}D_{j,Y}\\cong D_{j,X}L_{f,R}$. Its flat-term formula is exactly the balancing map in the statement. These comparisons and the counit are natural, so taking their adjunct defines the specified natural transformation $\\rho_{f,j}$.",
+   "uses": [
+    "lem-pe-internal-section-tensor-comparison",
+    "lem-pur-derived-change-of-rings",
+    "lem-pd-section-derived-pushpull-normalization",
+    "sk-prop-sfb-cartesian-coefficients",
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0G7E, lemma-pullback-K-flat; 0D6D, lemma-derived-pullback-composition; 07A6, lemma-adjoint. Internal/section transport uses the cited comparison statements."
+   }
+  },
+  {
+   "text": "Record the balancing identity needed to identify the map, not merely its endpoints. Suppress $j$ and set $M=F_{f,R}K$. Write $b:V_XL_{f,S}\\cong L_{f,R}V_Y$ for the comparison of [lem-weil-pbc-ring-sheaf-change-adjunction]. Under $V_TD_TN=N\\otimes^L_{R_T}S_T$, the composite\n$$L_{f,R}(M\\otimes^L S_Y)\\xrightarrow{b^{-1}}V_XL_{f,S}D_YM\\xrightarrow{V_X\\lambda_{f,M}}V_XD_XL_{f,R}M$$\nis the canonical tensor comparison $L_{f,R}(M\\otimes^LS_Y)\\to L_{f,R}M\\otimes^LS_X$. Indeed the first arrow regards inverse image of the scalar-extended module as an $S_X$-module; the second sends the inverse image of $x\\otimes s$ to $f^{-1}x\\otimes f^{-1}s$. This is precisely the pullback-tensor map, with $L_{f,R}S_Y\\cong S_X$ from step 1 and the cartesian coefficient identification. The K-flat computation and coherence in [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] and [lem-sfb-ringed-derived-monoidal-comparisons] make this equality valid in the unbounded derived category, independently of representatives. The internal/section comparison used in step 2 preserves these same pure-tensor maps.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4, lemma-pullback-tensor-product; 0D6D, lemma-derived-pullback-composition; 0D6E, lemma-derived-pushforward-composition. Explicit specialization of their normalized balancing maps."
+   }
+  },
+  {
+   "text": "Now apply the adjunction-compatibility clause of [lem-weil-pbc-ring-sheaf-change-adjunction] to $t=D_X(\\varepsilon^R_{f,K})\\lambda_{f,M}$, whose $S$-adjunct is $\\rho_{f,j,K}$. It says that the $R$-adjunct of\n$$V_X(t)\\circ b^{-1}:L_{f,R}V_YD_YM\\longrightarrow V_XD_XK$$\nis exactly $d_f\\circ V_Y\\rho_{f,j,K}$. By step 3 and the K-flat description of derived scalar extension, this first morphism is\n$$L_{f,R}(M\\otimes^LS_Y)\\longrightarrow L_{f,R}M\\otimes^LS_X\\xrightarrow{\\varepsilon^R_{f,K}\\otimes1}K\\otimes^LS_X.$$\nThe definition [def-weil-pbc-projection-formula-map] identifies its adjunct with the specified projection morphism $\\pi_{f,K,S_Y}$. Uniqueness in the adjunction therefore gives $d_f V_Y\\rho_{f,j,K}=\\pi_{f,K,S_Y}$. All identifications are the internal/section and tensor identifications already fixed in steps 2 and 3. In particular this equality uses compatibility of the independently specified adjunctions; it does not infer equality of quotient-linear morphisms from equality after forgetting scalars.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "def-weil-pbc-projection-formula-map",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A6, lemma-adjoint; Tag 0D6E, lemma-derived-pushforward-composition; Tag 0B56, equation-projection-formula-map. Compare the actual adjuncts."
+   }
+  },
+  {
+   "text": "Apply [lemma-weil-pbc-perfect-projection-formula] to $(A,I)=(\\mathcal O_E,(\\pi))$. Its hypotheses hold: $A$ is commutative Noetherian, all $A/\\pi^j$ are finite (hence additively torsion), and all are perfect over $A$ by the two-term free resolutions of step 1. Its completed coefficient sheaves are exactly $R_X,R_Y$, and its finite quotient sheaves are $S_{j,X},S_{j,Y}$. It asserts that the precise $\\pi_{f,K,S_{j,Y}}$ of step 4 is invertible for every $K$ in the ordinary unbounded category. Since $d_f$ is an isomorphism, step 4 makes $V_Y\\rho_{f,j,K}$ invertible. Restriction reflects isomorphisms by [lem-weil-pbc-ring-sheaf-change-adjunction]; hence $\\rho_{f,j,K}$ is invertible in $D(S_{j,Y})$. This proves the claimed natural isomorphism without any condition on $f$ or on the cohomological range of $K$.",
+   "uses": [
+    "lemma-weil-pbc-perfect-projection-formula",
+    "lem-weil-pbc-ring-sheaf-change-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0944, lemma-projection-formula; Tag 0D6E, lemma-derived-pushforward-composition. The two-term coefficient resolution is the cone-of-uniformizer argument of blueprint paragraph (1)."
+   }
+  },
+  {
+   "text": "Finally fix $n\\geq m\\geq1$, put $E_T=-\\otimes^L_{S_{n,T}}S_{m,T}$, and write $\\beta_T:E_TD_{n,T}\\cong D_{m,T}$. Use exactly [lem-sfb-successive-derived-quotient-normalization]: on representatives $\\beta_T$ sends $(x\\otimes s)\\otimes t$ to $x\\otimes\\bar s t$ and identifies the composite scalar units with the unit for $R_T\\to S_{m,T}$. Let $\\lambda^{n,m}:L_{f,S_m}E_Y\\cong E_XL_{f,S_n}$ be the pullback balancing comparison and let $\\sigma:E_YF_{f,S_n}\\to F_{f,S_m}E_X$ be its mate. The normalized composition coherence of [lem-sfb-ringed-derived-monoidal-comparisons] identifies the pasted square $(E_X\\lambda_{f,n})\\circ(\\lambda^{n,m}D_{n,Y})$ with $\\lambda_{f,m}$ under $\\beta_Y,\\beta_X$: both balanced maps send the inverse image of $(x\\otimes s)\\otimes t$ to $f^{-1}x\\otimes f^{-1}(\\bar s t)$. Clause (1) of [lem-weil-pbc-mate-pasting] now gives the equality in $D(S_{m,Y})$\n$$\\rho_{f,m,K}\\circ\\beta_{Y,F_{f,R}K}=F_{f,S_m}(\\beta_{X,K})\\circ\\sigma_{D_{n,X}K}\\circ E_Y(\\rho_{f,n,K}).$$\nThis is the required reduction compatibility retaining the quotient scalar action. The scalar-unit normalization also identifies the corresponding reduction-unit maps: take their transposes using [lem-pur-sheaf-ring-derived-coefficient-adjunction], whose unit is $x\\mapsto x\\otimes1$. No flatness of $S_n\\to S_m$ is used. In particular the argument does not claim that $S_m$ is perfect over $S_n$ or that $\\sigma$ is invertible on arbitrary inputs. For $n=m$ all balancing maps and scalar units are identities, giving the identity compatibility.",
+   "uses": [
+    "lem-sfb-successive-derived-quotient-normalization",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-weil-pbc-mate-pasting",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0D6D, lemma-derived-pullback-composition; 0G7E, lemma-pullback-K-flat; 07A6, lemma-adjoint. Scalar balancing and pasting of adjunction mates."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-valued-dvr-finite-quotients",
+  "det-prop-sfb-qlbar-colimit-x-integral-limit",
+  "lem-weil-pbc-completed-constant-sheaf-reduction",
+  "lem-sfb-flat-scalar-cyclic-resolution",
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-pur-derived-change-of-rings",
+  "lem-pd-section-derived-pushpull-normalization",
+  "sk-prop-sfb-cartesian-coefficients",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-weil-pbc-projection-formula-map",
+  "lemma-weil-pbc-perfect-projection-formula",
+  "lem-sfb-successive-derived-quotient-normalization",
+  "lem-weil-pbc-mate-pasting",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.proof.md",
+  "place": "Paragraph (1), cone-of-uniformizer reduction, and paragraph (3), compatibility of canonical maps; refined using the cited Stacks constructions and existing DAG comparison lemmas."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,10 +157,45 @@
    "results": "0 hits; ",
    "date": "2026-10-21",
    "verdict": "no match: ordinary sheaf pushforward, algebraic reduction and condensed-module adjunctions do not state the unbounded derived quotient-scalar mate and its internal-module normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "projection.?formula|projectionFormula",
+   "results": "0 hits; ",
+   "date": "2026-10-21",
+   "verdict": "no match: the results do not state a quotient-linear unbounded sheaf direct-image mate with this adjunction normalization and successive scalar compatibility"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projectionFormula\"",
+   "results": "0 hits; ",
+   "date": "2026-10-21",
+   "verdict": "no match: the results do not state a quotient-linear unbounded sheaf direct-image mate with this adjunction normalization and successive scalar compatibility"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived extension of scalars along a regular principal quotient commutes with pushforward for unbounded complexes of sheaves of modules",
+   "results": "8 hits; SheafOfModules.pushforward, AlgebraicGeometry.Scheme.Modules.pushforward, SheafOfModules.pushforwardSections, PresheafOfModules.pushforward₀, PresheafOfModules.pushforward_obj_map_apply', PresheafOfModules.pushforward₀_obj, SheafOfModules.pushforward_assoc, SheafOfModules.pushforward_obj_val",
+   "date": "2026-10-21",
+   "verdict": "no match: the results do not state a quotient-linear unbounded sheaf direct-image mate with this adjunction normalization and successive scalar compatibility"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The projection formula for a perfect coefficient complex on a ringed topos implies derived quotient scalar extension commutes with unbounded derived direct image",
+   "results": "8 hits; CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Functor.leftDerived_map_eq, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app",
+   "date": "2026-10-21",
+   "verdict": "no match: the results do not state a quotient-linear unbounded sheaf direct-image mate with this adjunction normalization and successive scalar compatibility"
+  },
+  {
+   "tool": "grep",
+   "query": "projection.?formula|projectionFormula|derived.*restrictScalars",
+   "results": "3 hits; Mathlib/Geometry/Manifold/VectorBundle/CovariantDerivative/Basic.lean, Mathlib/RingTheory/WittVector/Identities.lean, Mathlib/RingTheory/WittVector/Identities.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: the results do not state a quotient-linear unbounded sheaf direct-image mate with this adjunction normalization and successive scalar compatibility"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-thm-sfb-proper-base-change-integral",
@@ -72,5 +212,109 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-integral-quotient-direct-image-comparison",
+  "worker": "stage1",
+  "summary": "Kept the statement. Proved the actual finite quotient resolution, transported the specified adjunctions through the unrestricted internal/section comparisons, computed the restricted adjunct to identify the actual projection map, used the existing perfect projection formula and scalar restriction conservativity, and proved successive quotient compatibility by normalized balancing and mate pasting. No new nodes.",
+  "blueprint": "det-thm-sfb-proper-base-change-integral.proof.md paragraph (1): the scalar-refined cone-of-uniformizer direct-image comparison; paragraph (3): canonical-map normalization and quotient reduction compatibility.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "The local-field coefficient ring is a domain and a Noetherian discrete valuation ring. No node specific to this proper-base-change unit supplies this generic fact."
+   },
+   {
+    "node": "lem-weil-valued-dvr-finite-quotients",
+    "why": "Finiteness of every coefficient quotient checks the adic projection-formula hypotheses. No node specific to this proper-base-change unit supplies this generic fact."
+   },
+   {
+    "node": "det-prop-sfb-qlbar-colimit-x-integral-limit",
+    "why": "Identifies the pulled-back integral ring with the actual inverse limit of constant finite quotients. No node specific to this proper-base-change unit supplies this generic fact."
+   },
+   {
+    "node": "lem-weil-pbc-completed-constant-sheaf-reduction",
+    "why": "Flatness and the canonically augmented finite reduction resolution of the completed coefficient sheaf. No node specific to this proper-base-change unit supplies this generic fact."
+   },
+   {
+    "node": "lem-sfb-flat-scalar-cyclic-resolution",
+    "why": "Generic normalized derived comparison used as a tool; it does not replace the integral cone route. No node specific to this proper-base-change unit supplies this generic fact."
+   },
+   {
+    "node": "lem-pe-internal-section-tensor-comparison",
+    "why": "Unrestricted exact tensor equivalence for internal and section modules, including K-flat representatives. No node specific to this proper-base-change unit supplies this generic fact."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Canonical unbounded scalar extension and its K-flat computation. No node specific to this proper-base-change unit supplies this generic fact."
+   },
+   {
+    "node": "lem-pd-section-derived-pushpull-normalization",
+    "why": "Unrestricted comparison of the independently derived internal and section adjunctions, including counits. No node specific to this proper-base-change unit supplies this generic fact."
+   },
+   {
+    "node": "sk-prop-sfb-cartesian-coefficients",
+    "why": "Cartesian inverse-image identifications for integral and finite coefficient sheaves. No node specific to this proper-base-change unit supplies this generic fact."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic normalized derived comparison used as a tool; it does not replace the integral cone route. No node specific to this proper-base-change unit supplies this generic fact."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "why": "Conservative restriction, pushforward comparison, and the precise adjunct compatibility. No node specific to this proper-base-change unit supplies this generic fact."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Unbounded K-flat tensor-pullback comparison with no flatness assumption on scalar maps. No node specific to this proper-base-change unit supplies this generic fact."
+   },
+   {
+    "node": "def-weil-pbc-projection-formula-map",
+    "why": "Defines the precise projection arrow by its counit adjunct. No node specific to this proper-base-change unit supplies this generic fact."
+   },
+   {
+    "node": "lemma-weil-pbc-perfect-projection-formula",
+    "why": "The blueprint cone argument is the regular-principal perfect-coefficient case of this general tool. No node specific to this proper-base-change unit supplies this generic fact."
+   },
+   {
+    "node": "lem-sfb-successive-derived-quotient-normalization",
+    "why": "Generic normalized derived comparison used as a tool; it does not replace the integral cone route. No node specific to this proper-base-change unit supplies this generic fact."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Formal pasting along scalar-extension squares proves tower compatibility in the quotient derived category. No node specific to this proper-base-change unit supplies this generic fact."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "Normalized derived scalar units convert the balancing compatibility to the reduction-unit compatibility. No node specific to this proper-base-change unit supplies this generic fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-valued-dvr-finite-quotients",
+  "det-prop-sfb-qlbar-colimit-x-integral-limit",
+  "lem-weil-pbc-completed-constant-sheaf-reduction",
+  "lem-sfb-flat-scalar-cyclic-resolution",
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-pur-derived-change-of-rings",
+  "lem-pd-section-derived-pushpull-normalization",
+  "sk-prop-sfb-cartesian-coefficients",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-weil-pbc-projection-formula-map",
+  "lemma-weil-pbc-perfect-projection-formula",
+  "lem-sfb-successive-derived-quotient-normalization",
+  "lem-weil-pbc-mate-pasting",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q25-e78bb5101",
+  "group": "Q25",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-e78bb5101 (reviewer sub-agent of L); spot-checked: I read the item in full. The split creates no new nodes, and statement, stmt_deps and blueprint are byte-identical to live and side-live (unsplit there). There is no repair note, the item is not in the dropped list, there is no SGA citation, every bracketed id is in its step's uses and the uses union equals proof_deps, and there is no cycle. The statement is true: after forgetting scalars ρ is the projection map with the K-flat [R→π^n R] resolution, i.e. the cone of π^n. Edge cases f=id, n=m, K=0 and n>m pass, and the proof correctly avoids a regular resolution of S_m over S_n. Step 1 is checked against Stacks 093M (sites-modules.tex l.8261): via completed-constant-sheaf-reduction and flat-scalar-cyclic-resolution the canonical projection gives R/π^j≅S_j, and O_E is a Noetherian DVR. Step 2: internal and section tensor and pushpull (counits included) are identified, cartesian coefficients are untwisted, and λ is the c_{f,g} comparison of the two factorizations. Step 3: since pullbacks are the exact f^{-1} lifts, r(λ)b^{-1} is the tensor comparison. Step 4: the adjunction-compatibility clause of lem-weil-pbc-ring-sheaf-change-adjunction gives d∘r(ρ) = adjunct of (ε⊗1)∘c = π_{f,K,S_Y}, matching def-weil-pbc-projection-formula-map and Stacks 0B56 (l.13666). Step 5: the perfect projection formula holds for (O_E,(π)) (Noetherian, k_E finite torsion, P_n finite and perfect), for unbounded K; d is invertible and restriction reflects isomorphisms. Step 6: β normalization plus mate-pasting clause (1), with the elementary naturality of mates under the invertible β; units normalize as x↦x⊗1. I accept all 17 declared tool_uses, including the 3 off-route generic tools (DVR algebra, the pd pushpull model comparison, ringed monoidal coherence). Batch-5 citation of lem-pd-section-derived-pushpull-normalization: it compares internal-module and ringed-topos derived pushpull, with no duality or trace content; neither nt-assume leaf gives it; and the b5 closure with and without this edge is 16477 nodes with zero difference. Accepted, not a RETURN. Duplicate sweep: lem-pur-completed-coefficient-pushforward-comparison, lemma-weil-pbc-projection-formula-tower-compatibility and lem-sfb-integral-ambient-tower-comparison do not state the quotient-linear ρ isomorphism. Maintainer note: group NO has a concurrent delivery of the same item (3068412e9c09), so whichever lands second is superseded."
  }
 }

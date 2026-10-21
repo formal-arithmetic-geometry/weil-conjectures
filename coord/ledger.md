@@ -20169,3 +20169,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:03 L: merged deliver/Q27/lem-weil-pbc-realization-adjoint-comparisons (reviewer PASS; after a return; new nodes: 0)
 - 04:03 L: merged deliver/NW/lem-sp-chart-finite-ring-adjunction (reviewer PASS; first push; new nodes: 0); claim not held by NW: not your claim
 - 04:03 L: merged deliver/Q18/lem-sfb-constant-scalar-geometric-adjunctions (reviewer FIX; first push; new nodes: 0)
+- 04:03 L: merged deliver/Q25/lem-sfb-integral-quotient-direct-image-comparison (reviewer PASS; first push; new nodes: 0); claim not held by Q25: not your claim
