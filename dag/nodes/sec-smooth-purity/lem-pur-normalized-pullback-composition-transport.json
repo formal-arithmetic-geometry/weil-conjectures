@@ -24,7 +24,8 @@
   "def-pc-kflat-complex",
   "def-pc-flat-sheaf-modules",
   "lem-pur-completed-primitive-counit-comparison",
-  "def-pc-tensor-complex-sheaves"
+  "def-pc-tensor-complex-sheaves",
+  "def-trf-integral-comparison-sequence-systems"
  ],
  "proof": [
   {
@@ -247,5 +248,39 @@
   "group": "NQ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NQ-cf13011df (reviewer sub-agent of L); spot-checked: I read the full item, all 8 cited statements, and the Stacks places 03D8 (sites-modules l.1236), 0D6D and 0941 (sites-cohomology l.3658/5067). The statement is unchanged from live and side-live, and the item is still unsplit there. There is no repair note for this item: it is a statement-only node from the parent's re-split, so this is a normal one-level split with no new nodes. The DAG is acyclic (closure of 1264 nodes) and proof_deps equals the union of the steps' uses. Step checks: (1) the inverse formulas t⊗x↦t⊗(1⊗x) and t⊗(s⊗x)↦t h♯(s)⊗x hold by balancing; finite exact u^* (prop-weil-pbc-proetale-constant-exact) computes the unbounded derived comparison termwise. (2) I recomputed the coefficient square with δ=κ^{-1}: both routes take (t⊗x)⊗r to r t̄⊗(1⊗(x⊗1)), so 'elementary' is fair. (3) α^Q q^*(a_m)=a_n α^P follows from the step-2 square plus naturality of a_n at the actual α^C. The system map comes from lem-coef-semilinear-derived-sections and is not inferred from its evaluations. (4) The recursion unwinds to β_P=β_{fh}(C) and β_Q=β_h(F_fC)F̂_h(β_f C), and â=β_Q^{-1}L(a)β_P has the right types. (5) ∏a_n commutes with 1−s and gives a Roos cone map, which is L_Z(a) by ρ-naturality; no pullback is moved past a product. (6) γ_Q R(â)=aγ_P by the stated counit naturality. Edge cases checked: identity maps, m=n, zero/empty, r≥m≥n, noncanonical transitions. Duplicate candidates (trf inverse-image composition, fd whole-tower pullback comparison, a1 completed comparison) state different things. Accepted tool_uses: lem-coef-semilinear-derived-sections and prop-weil-pbc-proetale-constant-exact; the other two declared tool uses are on the unit's route via sk-def-sf-operations. No SGA."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.NormalizedPullbackCompositionTransport",
+  "declaration": "WeilConjectures.PullbackCompositionTransport.normalizedPullbackCompositionTransport",
+  "declarations": [
+   "WeilConjectures.PullbackCompositionTransport.evaluation",
+   "WeilConjectures.PullbackCompositionTransport.finiteComposition",
+   "WeilConjectures.PullbackCompositionTransport.SystemLaws",
+   "WeilConjectures.PullbackCompositionTransport.strictComposition",
+   "WeilConjectures.PullbackCompositionTransport.restrictionFactor",
+   "WeilConjectures.PullbackCompositionTransport.iteratedRestrictionFactor",
+   "WeilConjectures.PullbackCompositionTransport.RepresentativeLaws",
+   "WeilConjectures.PullbackCompositionTransport.betaSource",
+   "WeilConjectures.PullbackCompositionTransport.betaTarget",
+   "WeilConjectures.PullbackCompositionTransport.gammaSource",
+   "WeilConjectures.PullbackCompositionTransport.gammaTarget",
+   "WeilConjectures.PullbackCompositionTransport.completed",
+   "WeilConjectures.PullbackCompositionTransport.TransportLaws",
+   "WeilConjectures.PullbackCompositionTransport.normalizedPullbackCompositionTransport"
+  ],
+  "file": "lean/Sheaf/Paper/NormalizedPullbackCompositionTransport.lean",
+  "statement": "theorem normalizedPullbackCompositionTransport (_hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x)) (_hY : ∀ y : Y, IsUnit (l : Y.presheaf.stalk y)) (_hZ : ∀ z : Z, IsUnit (l : Z.presheaf.stalk z)) (ρX : PrimitiveCounit.RoosRealization l E X) (ρZ : PrimitiveCounit.RoosRealization l E Z) (_hf : PrimitiveCounit.PullModel l E f SY ρX rf) (_hh : PrimitiveCounit.PullModel l E h SX ρZ rh) (_hhf : PrimitiveCounit.PullModel l E (h ≫ f) SY ρZ rhf) (C : coefficientSequenceDerived l E Y) (_hC : IsNormalizedCoefficientSequence l E Y C) [IsIso (betaSource l E h f SY rhf C)] [IsIso (betaTarget l E h f SY SX rf rh C)] [IsIso (gammaSource l E h f SY SZ rhf C)] [IsIso (gammaTarget l E h f SY SX SZ rf rh C)] : SystemLaws l E h f SZ ∧ RepresentativeLaws l E h f ρZ ∧ TransportLaws l E h f SY SX SZ rf rh rhf C",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-76d0ff6d4",
+  "group": "NB",
+  "result": "pass",
+  "note": "Item clauses checked against node: SystemLaws.finite pins the evaluation of the canonical integralComparisonSystemComposition to the unique-mate finite compositor via unit-normalized inverseEvaluation; transition/adjoint squares hold for all q:n≤m (formal naturality, as the node intends). betaSource/betaTarget follow the node's recursion, gamma = counit after R(beta), completed = beta_P then L(a) then beta_Q inverse. RepresentativeLaws gives Roos/product-cone representatives; TransportLaws gives the reduction square, its inverse and naturality. Hypotheses: l invertible on X,Y,Z, four IsIso as in the node, realization parameters pinned by PullModel/RoosRealization; universes t,u independent; edge cases n=0, m=n, identities, empty schemes covered. §1(B) dep module: independent-universe ∃! mate on coefficientProEtaleModulePullback, old proved theorem kept and publicly imported, only lean changed with note, statements verbatim, no competing record or duplicate. Added stmt_dep def-trf-integral-comparison-sequence-systems is landed (allowed). Docstrings, line lengths, sorry-only proofs, reports OK. No compile (no changes). Maintainer note: the dep had reviewed_proof (D5) and its main declaration is now the sorry'd generalized theorem, so stage 3 must re-open it."
  }
 }

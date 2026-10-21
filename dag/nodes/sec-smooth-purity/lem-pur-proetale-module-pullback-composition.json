@@ -213,25 +213,28 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q17-92711f7f7 (reviewer sub-agent of L); spot-checked: Read the item, every cited node, Stacks Tags 03D7/03D8, the unit/chapter route, current blueprint comparison, and recorded searches. Verified fibre-product base change, constant-section compatibility, module linearity, adjunction composition, mate direction, coefficient categories, hypotheses, edge cases, and duplicate risks. Wrote review.md; no repairs or dropped nodes needed."
  },
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.ProEtaleModulePullbackComposition",
-  "declaration": "AlgebraicGeometry.Scheme.proEtaleConstantRingModulePullbackComposition",
+  "module": "Sheaf.Paper.ProEtaleCoefficientModulePullbackComposition",
+  "declaration": "AlgebraicGeometry.Scheme.coefficientModulePullbackComposition_existsUnique",
   "declarations": [
-   "AlgebraicGeometry.Scheme.proEtaleConstantRingModulePullbackComposition"
+   "AlgebraicGeometry.Scheme.proEtaleConstantRingModulePullbackComposition",
+   "AlgebraicGeometry.Scheme.coefficientModulePullbackComposition_existsUnique",
+   "AlgebraicGeometry.Scheme.coefficientModulePullbackComposition"
   ],
-  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleModulePullbackComposition.lean",
-  "statement": "theorem proEtaleConstantRingModulePullbackComposition {X Y Z : Scheme.{u}} (g : Z ⟶ X) (f : X ⟶ Y) (Λ : Type u) [CommRing Λ] : ∃ (a : proEtaleConstantRingPullback Λ (g ≫ f) ≅ proEtaleConstantRingPullback Λ f ⋙ proEtaleConstantRingPullback Λ g), ∃ (d : proEtaleConstantRingPushforward Λ g ⋙ proEtaleConstantRingPushforward Λ f ≅ proEtaleConstantRingPushforward Λ (g ≫ f)), (∀ (N : proEtaleRingModules Z (proEtaleConstantRing Z Λ)) (U : Y.ProEt) (m : ((proEtaleConstantRingPushforward Λ g ⋙ proEtaleConstantRingPushforward Λ f).obj N).val.obj (Opposite.op U)), (d.hom.app N).val.app (Opposite.op U) m = N.val.map ((MorphismProperty.Over.pullbackComp g f).hom.app U).op m) ∧ conjugateIsoEquiv ((proEtaleConstantRingAdjunction Λ f).comp (proEtaleConstantRingAdjunction Λ g)) (proEtaleConstantRingAdjunction Λ (g ≫ f)) a = d",
+  "file": "lean/Sheaf/Paper/ProEtaleCoefficientModulePullbackComposition.lean",
+  "statement": "theorem coefficientModulePullbackComposition_existsUnique {X Y Z : Scheme.{t}} (h : Z ⟶ X) (f : X ⟶ Y) (A : CommRingCat.{max r (t + 1)}) : ∃! a : coefficientProEtaleModulePullback (h ≫ f) A ≅ coefficientProEtaleModulePullback f A ⋙ coefficientProEtaleModulePullback h A, ∃ d : coefficientProEtaleModuleDirectImage h A ⋙ coefficientProEtaleModuleDirectImage f A ≅ coefficientProEtaleModuleDirectImage (h ≫ f) A, conjugateIsoEquiv ((coefficientProEtaleModuleAdjunction f A).comp (coefficientProEtaleModuleAdjunction h A)) (coefficientProEtaleModuleAdjunction (h ≫ f) A) a = d ∧ ∀ (N : SheafOfModules.{max r (t + 1)} ((sheafCompose (ProEt.topology Z) (forget₂ CommRingCat.{max r (t + 1)} RingCat.{max r (t + 1)})).obj ((constantSheaf (ProEt.topology Z) CommRingCat.{max r (t + 1)}).obj A))) (U : Y.ProEt) (x : ((coefficientProEtaleModuleDirectImage h A ⋙ coefficientProEtaleModuleDirectImage f A).obj N).val.obj (op U)), (d.hom.app N).val.app (op U) x = N.val.map ((MorphismProperty.Over.pullbackComp h f).hom.app U).op x",
   "branch": "newtargets-dag",
-  "by": "Q34",
-  "date": "2026-10-17",
-  "existing": false
+  "by": "NB",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "§1(B): retain and publicly import the original common-universe compositor. Its coefficient Type u and Scheme.{u} interface cannot be applied to the independently sized finite coefficient rings in the consumer. State the identical canonical direct-image-section/mate characterization on coefficientProEtaleModulePullback with independent t,r. The unique mate theorem determines the compositor; the definition chooses that unique object, not an arbitrary existence witness. No mathematical hypothesis or conclusion changes."
  },
  "reviewed_lean": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-d74646b97",
-  "group": "Q34",
+  "reviewer": "NT-stage2-cc-76d0ff6d4",
+  "group": "NB",
   "result": "pass",
-  "note": "Audited packet, item, all dependencies, source/blueprint docstrings, exact Lean declaration, edge cases, and pro-etale framework. scompile.py sandbox and library checks passed with server confirmation; no substantive mismatches or fixes."
+  "note": "Item clauses checked against node: SystemLaws.finite pins the evaluation of the canonical integralComparisonSystemComposition to the unique-mate finite compositor via unit-normalized inverseEvaluation; transition/adjoint squares hold for all q:n≤m (formal naturality, as the node intends). betaSource/betaTarget follow the node's recursion, gamma = counit after R(beta), completed = beta_P then L(a) then beta_Q inverse. RepresentativeLaws gives Roos/product-cone representatives; TransportLaws gives the reduction square, its inverse and naturality. Hypotheses: l invertible on X,Y,Z, four IsIso as in the node, realization parameters pinned by PullModel/RoosRealization; universes t,u independent; edge cases n=0, m=n, identities, empty schemes covered. §1(B) dep module: independent-universe ∃! mate on coefficientProEtaleModulePullback, old proved theorem kept and publicly imported, only lean changed with note, statements verbatim, no competing record or duplicate. Added stmt_dep def-trf-integral-comparison-sequence-systems is landed (allowed). Docstrings, line lengths, sorry-only proofs, reports OK. No compile (no changes). Maintainer note: the dep had reviewed_proof (D5) and its main declaration is now the sorry'd generalized theorem, so stage 3 must re-open it."
  },
  "reviewed_proof": {
   "date": "2026-10-20",
