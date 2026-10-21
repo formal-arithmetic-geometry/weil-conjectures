@@ -21921,3 +21921,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:29 L: returned deliver/Q37/lem-sf-projective-cohomology-split-model (reviewer RETURN: L: independent stage-2 immutable head eb5d4689a2f1: H13: delivery rebinds the stmt_dep record def-weil-derived-cohomolog)
 - 09:30 L: merged deliver/Q22/lem-pd-section-derived-open-adjunction-normalization (reviewer PASS; first push; new nodes: 0)
 - 09:30 L: returned deliver/NS/lem-sfb-cohomology-tor-interval (reviewer RETURN: Returned because the item is already finished on live (A7, B10; brief-stage1 l.103: live finished or split-and-reviewed )
+- 09:31 L: returned deliver/A7/Sheaf.Paper.IntegralPullbackCompletedComparison (reviewer RETURN: (reviewer C-e5011, head e50118b76) D2/C5: the item's proof_deps drop all four re-split work packages (principal-koszul-s)
