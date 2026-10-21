@@ -10,9 +10,90 @@
  "stmt_deps": [
   "def-weil-pbc-free-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "All maps are defined first on the specified bases, then extended by finite integer linear combination. This gives well-defined homomorphisms: for $d$ there are $q+1$ terms, for $c_i$ at most one, and for $R_i$ at most two. By [def-weil-pbc-free-module], uniqueness of the finite basis expansion shows that two such homomorphisms agree once they agree on every basis symbol. Hence the following calculations on symbols prove identities on the groups; all maps on zero groups are zero.",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written ordered-join expansion below local continuous-cocycle descent, calculation 1; not a claim made by the blueprint."
+   }
+  },
+  {
+   "text": "Write $\\sigma=[z_0,\\ldots,z_q]$ and let $D_a\\sigma$ denote deletion of position $a$, numbered from zero. For $a<b$, the term deleting original positions $a,b$ occurs in $d^2\\sigma$ with coefficients $(-1)^{a+b-1}$ (delete $a$, then position $b-1$) and $(-1)^{a+b}$ (delete $b$, then position $a$). These sum to zero, and every term belongs to exactly one such pair. This also covers $q=1$, where both final symbols are $[\\varnothing]$. For $q=0,-1$ the second boundary is zero by definition. Thus $d^2=0$ in all degrees.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written ordered-join expansion below local continuous-cocycle descent, calculation 2; not a claim made by the blueprint."
+   }
+  },
+  {
+   "text": "Fix $i$ and suppose $\\sigma$ misses color $i$; let $k$ be the number of its colors less than $i$. In $dc_i\\sigma$, deletion of the inserted vertex has coefficient $(-1)^k(-1)^k=1$ and gives $\\sigma$. For an original vertex in position $a<k$, its deletion has coefficient $(-1)^{k+a}$, whereas its term in $c_id\\sigma$ has coefficient $(-1)^{a+k-1}$. For $a\\geq k$ these coefficients are respectively $(-1)^{k+a+1}$ and $(-1)^{a+k}$. Each pair cancels, so $(dc_i+c_id)\\sigma=\\sigma=(1-R_i)\\sigma$. For $\\sigma=[\\varnothing]$ this calculation reads $dc_i[\\varnothing]=d[(i,v_i)]=[\\varnothing]$, with $c_id[\\varnothing]=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written ordered-join expansion below local continuous-cocycle descent, calculation 3; not a claim made by the blueprint."
+   }
+  },
+  {
+   "text": "If instead $\\sigma$ contains color $i$ in position $k$, then $c_i\\sigma=0$. Among the faces of $\\sigma$, only $D_k\\sigma$ misses color $i$, so $c_id\\sigma=(-1)^k(-1)^kT_i\\sigma=T_i\\sigma$, where $T_i\\sigma$ is obtained by replacing that vertex by $(i,v_i)$. Since $R_i\\sigma=\\sigma-T_i\\sigma$, again $dc_i+c_id=1-R_i$. Together with the preceding step this identity holds on every nonzero degree, including the top degree (there every symbol contains $i$ and $c_i=0$); on the remaining zero groups it holds trivially. No equality between the original vertex and the chosen vertex was assumed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written ordered-join expansion below local continuous-cocycle descent, calculation 4; not a claim made by the blueprint."
+   }
+  },
+  {
+   "text": "Multiplying $R_i=1-dc_i-c_id$ on the left and right by $d$, and using $d^2=0$, gives $dR_i=d-dc_id=R_id$. Set $P_0=1$ and $P_i=R_0\\circ\\cdots\\circ R_{i-1}$ for $1\\leq i\\leq r$. Each $P_i$ commutes with $d$ by repeated substitution of $dR_j=R_jd$. Hence the stated sum $S=\\sum_{i=0}^{r-1}P_ic_i$ satisfies\n$$dS+Sd=\\sum_{i=0}^{r-1}P_i(dc_i+c_id)=\\sum_{i=0}^{r-1}(P_i-P_{i+1})=1-P_r.$$\nThe middle equality uses $P_iR_i=P_{i+1}$ with precisely the composition order in the statement, and requires no permutation of the factors.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written ordered-join expansion below local continuous-cocycle descent, calculation 5; not a claim made by the blueprint."
+   }
+  },
+  {
+   "text": "On a symbol of degree $-1\\leq q\\leq r-2$, at least one of the $r$ colors, say $j$, is missing. Every $R_i$ either kills a symbol or produces a difference of symbols with the same color list. Thus, when $P_r=R_0\\circ\\cdots\\circ R_{r-1}$ is applied from right to left, every term reaching $R_j$ still misses $j$, and $R_j$ kills it. Therefore $P_r=0$ in the specified degrees, and the preceding identity gives $dS_q+S_{q-1}d=1$. In degree $-1$ only $i=0$ contributes to $S[\\varnothing]$: for $i>0$, the factor $R_0$ kills $c_i[\\varnothing]$. Consequently $S_{-1}[\\varnothing]=[(0,v_0)]$ and $dS_{-1}=1$, consistently with $S_{-2}=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written ordered-join expansion below local continuous-cocycle descent, calculation 6; not a claim made by the blueprint."
+   }
+  },
+  {
+   "text": "For a family $u_i:X_i\\to Y_i$ with $u_i(v_i)=w_i$, applying $u$ to a symbol preserves its color list and hence every insertion position. If color $i$ is absent, $J(u)c_i^v\\sigma$ and $c_i^wJ(u)\\sigma$ are the identical signed symbol with inserted vertex $(i,w_i)$; if present both are zero. If color $i$ is present, both $J(u)R_i^v\\sigma$ and $R_i^wJ(u)\\sigma$ equal $J(u)\\sigma-T_i^wJ(u)\\sigma$; if absent both are zero. Thus $J(u)c_i^v=c_i^wJ(u)$ and $J(u)R_i^v=R_i^wJ(u)$ on the bases, including the empty symbol. Composing these equalities in the specified order and summing over $i$ proves $J_{q+1}(u)S_q^v=S_q^wJ_q(u)$. Injectivity of $u_i$ is unnecessary, since the calculation permits cancellation of coincident output symbols.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written ordered-join expansion below local continuous-cocycle descent, calculation 7; not a claim made by the blueprint."
+   }
+  },
+  {
+   "text": "For completeness an unreduced expansion gives the coefficient-list assertion explicitly. Let $C$ be the colors of $\\sigma$. The $i$-th summand $P_ic_i\\sigma$ is zero if $i\\in C$. It is also zero if some $j<i$ is missing from $C$: after inserting color $i$, every preceding replacement preserves the color list, and $R_j$ kills every term. Otherwise let $k=\\#\\{j\\in C:j<i\\}$ and, for $A\\subseteq\\{0,\\ldots,i-1\\}$, let $\\sigma_{i,A}$ be $\\sigma$ with $(i,v_i)$ inserted and the vertices of colors in $A$ replaced by their chosen vertices. Distributing the two terms of each $R_j$ gives\n$$P_ic_i\\sigma=\\sum_{A\\subseteq\\{0,\\ldots,i-1\\}}(-1)^{k+|A|}\\sigma_{i,A}.$$\nIndeed each subset records exactly the factors in which the negative replacement term was selected; replacements at different colors affect different positions and do not change any color. This list has $2^i$ terms, with repetitions and zero cancellation left uncollected. The list of indices, replacement choices and signs depends only on $r,C$. It never tests whether $x_j=v_j$, even when some terms coincide. Summing these lists proves the final assertion.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written ordered-join expansion below local continuous-cocycle descent, calculation 8; not a claim made by the blueprint."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-free-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), direct-image stability: elementary ordered-join calculation supplying the filling operator in the downstream arithmetic cocycle-descent expansion; the formula and this proof are agent-written, not present in the blueprint."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -181,10 +262,131 @@
    },
    "date": "2026-10-22",
    "verdict": "no match: the hits are ordinary extra-degeneracy contractions, unrelated augmented constructions, matroid contractions or path-connectedness; none states this finite-color partial contraction."
+  },
+  {
+   "tool": "grep",
+   "query": "(join|colored|coloured).*(chain|contract)|(chain|contract).*(join|colored|coloured)",
+   "results": {
+    "t": "2026-10-21T19:41:40Z",
+    "tool": "grep",
+    "query": "(join|colored|coloured).*(chain|contract)|(chain|contract).*(join|colored|coloured)",
+    "sub": "AlgebraicTopology",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: no ordered-join chain or contraction hits in AlgebraicTopology."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The augmented chains on the join of pointed sets have a natural contracting homotopy below top degree",
+   "results": {
+    "t": "2026-10-21T19:41:40Z",
+    "tool": "leansearch",
+    "query": "The augmented chains on the join of pointed sets have a natural contracting homotopy below top degree",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ChainComplex.augment",
+     "ChainComplex.toSingle₀AsComplex",
+     "Homotopy.noConfusionType",
+     "Homotopy.mk.congr_simp",
+     "CategoryTheory.SimplicialObject.Augmented.w₀_assoc",
+     "homotopic",
+     "Homotopy.nullHomotopy",
+     "ChainComplex.alternatingConstHomotopyEquiv"
+    ],
+    "digest": "6119105291a75eb5"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: augmentation constructors, abstract homotopies and alternating constant complexes do not state the colored-join formula."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ChainComplex\", \"homotopy\"",
+   "results": {
+    "t": "2026-10-21T19:41:41Z",
+    "tool": "loogle",
+    "query": "\"ChainComplex\", \"homotopy\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "Homotopy.dNext_cochainComplex",
+     "Homotopy.prevD_chainComplex",
+     "Homotopy.dNext_zero_chainComplex",
+     "Homotopy.prevD_zero_cochainComplex",
+     "Homotopy.dNext_succ_chainComplex",
+     "Homotopy.prevD_succ_cochainComplex",
+     "CochainComplex.HomComplex.Cochain.ofHomotopy",
+     "CochainComplex.HomComplex.Cochain.ofHomotopy_refl"
+    ],
+    "digest": "d275ca59202a37d8"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: abstract Homotopy component formulas do not construct the stated insertion and replacement operators."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ordered join augmented chains on pointed sets admit an explicit partial contraction by signed insertion of basepoints",
+   "results": {
+    "t": "2026-10-21T19:41:41Z",
+    "tool": "leanfinder",
+    "query": "Ordered join augmented chains on pointed sets admit an explicit partial contraction by signed insertion of basepoints",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "IsChain.insert",
+     "Profinite.NobelingProof.GoodProducts.chain'_cons_of_lt",
+     "SuccChain",
+     "List.chain'_split",
+     "List.isChain_split",
+     "Profinite.NobelingProof.GoodProducts.isChain_cons_of_lt",
+     "List.isChain_append_cons_cons",
+     "List.chain'_append_cons_cons"
+    ],
+    "digest": "3c345e87f5c745ec"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: returned order-theoretic chains or simplex face/degeneracy relations, not the stated colored-join contraction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Signed vertex insertion in a colored simplicial join satisfies d c plus c d equals identity minus vertex replacement",
+   "results": {
+    "t": "2026-10-21T19:41:55Z",
+    "tool": "leanfinder",
+    "query": "Signed vertex insertion in a colored simplicial join satisfies d c plus c d equals identity minus vertex replacement",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SimplexCategoryGenRel.P_δ.δ",
+     "SSet.horn.ι_ι",
+     "SimplexCategoryGenRel.standardσ_simplicialInsert",
+     "SimplexCategoryGenRel.P_σ.σ",
+     "SSet.prodStdSimplex.objEquiv_δ_apply",
+     "SSet.PtSimplex.MulStruct.δ_map_of_gt",
+     "SSet.PtSimplex.MulStruct.δ_map_of_lt",
+     "FreeSimplexQuiver.homRel.δ_comp_σ_of_gt"
+    ],
+    "digest": "7fdb81a9713d311f"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: returned order-theoretic chains or simplex face/degeneracy relations, not the stated colored-join contraction."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-homogeneous-cocycle-rectangle-detection",
@@ -212,5 +414,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-ordered-join-partial-contraction",
+  "worker": "stage1",
+  "summary": "Proved all clauses by eight elementary basis calculations: paired deletion signs, signed insertion with missing and present colors, boundary commutation, telescoping prefixes, annihilation below top degree, naturality and a subset-indexed expansion. Statement unchanged; no new nodes. Preserved inherited searches and added five logged searches.",
+  "blueprint": "Realizes the ordered-join filling-operator subproblem of paragraph (3) in the arithmetic continuous-cocycle-descent expansion below det-thm-sf-ctf-stability-direct-images. The blueprint itself has no ordered-join argument. The ancestor command returns None, since the inherited created.item chain stops at a Lean-module item; the inherited null ancestor and full via chain are retained.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NN-9149bef5a",
+  "group": "NN",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-9149bef5a (reviewer sub-agent of L); spot-checked: Shape: one commit, only the item node and the report, no new nodes. No repair note exists, so this is an ordinary one-level split. The statement is identical to the live and side-live versions (live is still unsplit). No SGA is cited. The null blueprint.from.node is inherited from a chain that ends at a Lean-module item, not a delivery fault. Statement: the citer lem-sfb-homogeneous-cocycle-rectangle-detection uses every clause with X_i=Ha_i, which may be infinite. Math: I checked all 8 steps. Step 1 correctly cites def-weil-pbc-free-module (Stacks 00AQ/00C2) for basis extension. Steps 2-4: deletion sign pairs, and dc_i+c_id=1-R_i for a missing colour (positions a<k and a>=k) and for a present colour (only D_k misses i). Steps 5-6: dR_i=R_id, telescoping to 1-P_r with P_iR_i=P_{i+1}, P_r=0 when q<=r-2, top degree correctly excluded, S_{-1}[∅]=[(0,v_0)]. Step 7: naturality without injectivity. Step 8: subset expansion with sign (-1)^{k+|A|}. My own brute-force script checked the identities for r=1..5 and naturality under all maps {0,1}->{0,1} for r<=3; all passed. Duplicates: none. poset-augmented-chain-prism needs finite posets; power-set-complex uses unrestricted tuples; lem-coef-extra-degeneracy-contraction is a simplicial extra degeneracy; lem-pc-s3 insertion homotopy is about sheaf Čech complexes; the lem-coef joins are infinity-categorical. No fixes, no tool_uses."
  }
 }
