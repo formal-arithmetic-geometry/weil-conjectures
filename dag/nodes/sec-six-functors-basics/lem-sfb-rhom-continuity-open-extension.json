@@ -21,9 +21,136 @@
   "def-sfb-module-open-lower-shriek",
   "def-pc-cochain-complex-modules"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each affine open $W\\subset T$, the inverse image $V\\times_TW$ identifies with the subset $v(V)\\cap W$ of $T$. It is quasi-compact by [lem-sfb-noetherian-space-compact-subsets], so $v$ is quasi-compact. An open immersion is separated by [lem-weil-pbc-separated-cancellation](a), hence quasi-separated by [lem-pc-separated-quasi-separated]. Thus $v$ satisfies the qcqs hypothesis used below. Apply [lem-weil-pbc-closed-subset-closed-subscheme] to $T\\setminus v(V)$ to choose a complementary closed immersion $i:Z\\hookrightarrow T$. This choice is only to instantiate the existing open/closed Hom formula; the open formula and its comparison map do not depend on $i$.",
+   "uses": [
+    "lem-sfb-noetherian-space-compact-subsets",
+    "lem-weil-pbc-separated-cancellation",
+    "lem-pc-separated-quasi-separated",
+    "lem-weil-pbc-closed-subset-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 04ZA, lemma-Noetherian-quasi-compact; schemes.tex Tags 01L7, 01K7 and 01J3, lemma-reduced-closed-subscheme"
+   }
+  },
+  {
+   "text": "For $S=T,V$, the sheaf category $\\operatorname{Sh}(S_{\\mathrm{pro\\acute et}},\\mathrm{Ab})$ is Grothendieck by [lem-sfb-proetale-sheaves-grothendieck]. Its closed additive tensor structure is [sk-def-sfb-sheaf-tensor]. Therefore [lem-sfb-modobj-grothendieck] applies to $B_S$ and makes $\\operatorname{Mod}_{B_S}$ Grothendieck. In particular its filtered colimits are exact, by [def-sp-grothendieck-abelian]. By [src-weil-homology-preserves-exact-colimits], $H^q(\\varinjlim C_i)=\\varinjlim H^q(C_i)$ for the termwise colimits in this proof. Consequently these colimits preserve a common cohomological lower bound and take objectwise quasi-isomorphisms to quasi-isomorphisms. Thus the good truncations and functorial representatives in the cited pushforward continuity statement compute precisely the colimits specified in the item.",
+   "uses": [
+    "lem-sfb-proetale-sheaves-grothendieck",
+    "sk-def-sfb-sheaf-tensor",
+    "lem-sfb-modobj-grothendieck",
+    "def-sp-grothendieck-abelian",
+    "src-weil-homology-preserves-exact-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 5.3, proof of (1): filtered colimits are t-exact; the strict-complex interpretation uses the cited exact-colimit homology theorem"
+   }
+  },
+  {
+   "text": "By [det-prop-sfb-module-pullback-exact-main], the coefficient-compatible $v^*$ on module objects is exact. It is a left adjoint by [def-sfb-module-upper-lower-adjunction], so [lem-weil-pbc-left-adjoint-preserves-colimits] identifies $\\varinjlim_i v^*N_i$ with $v^*(\\varinjlim_iN_i)$ by the map induced by the original cocone. Exactness gives $H^q(v^*N)=v^*H^q(N)$, so it preserves $D^{\\ge c}$ and all quasi-isomorphisms. Its termwise derived functor is therefore the same $v^*$ on the ordinary categories under consideration.",
+   "uses": [
+    "det-prop-sfb-module-pullback-exact-main",
+    "def-sfb-module-upper-lower-adjunction",
+    "lem-weil-pbc-left-adjoint-preserves-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 5.3, proof of (2), open-immersion case: inverse image is t-exact and commutes with colimits"
+   }
+  },
+  {
+   "text": "For later use, $Rv_*$ preserves every lower bound $b$. Indeed the Grothendieck source category has enough injectives by [lem-sp-grothendieck-enough-injectives]. If $M\\in D(B_V)^{\\ge b}$, choose a complex representing it which is zero below $b$, using [def-sbc-standard-tstructure-derived-category]. The resolution of [lem-weil-pbc-complex-injective-resolution-mono] gives a quasi-isomorphism to an injective complex $I^\\bullet$ still zero below $b$. This complex is K-injective by [lem-weil-pbc-bounded-below-injectives-kinjective]. Hence $Rv_*M$ is represented by the termwise complex $v_*I^\\bullet$, by [sk-def-sfb-module-derived-pushpull]. Since an additive functor takes zero to zero, this complex is zero below $b$, proving $Rv_*M\\in D(B_T)^{\\ge b}$. No upper cohomological-dimension bound is used.",
+   "uses": [
+    "lem-sp-grothendieck-enough-injectives",
+    "def-sbc-standard-tstructure-derived-category",
+    "lem-weil-pbc-complex-injective-resolution-mono",
+    "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "sk-def-sfb-module-derived-pushpull"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 013K, lemma-injective-resolutions-exist (3), and 070J, lemma-bounded-below-injectives-K-injective; total right derived pushforward as in the cited definition"
+   }
+  },
+  {
+   "text": "With the complementary $i$ from step 1, the open clause of [lem-sfb-open-closed-internal-hom-formulas] supplies the natural isomorphism $\\theta_N:R\\mathcal Hom_{B_T}(v_!A,N)\\xrightarrow{\\sim}Rv_*R\\mathcal Hom_{B_V}(A,v^*N)$. Its statement applies to arbitrary $A,N$ in the ordinary uncompleted categories, not just constructible objects, and specifies evaluation/adjunction compatibility. The coefficient ring in this formula is $B_S=p_S^*\\Lambda$, for $S=T,V$. The pushforward in [lem-weil-pbc-condensed-qcqs-pushforward-continuity] is the ordinary uncompleted one for $\\Lambda_S=p_S^*\\Lambda$, on sectionwise module sheaves. The section-action equivalence [def-weil-pbc-internal-abelian-sheaf-module-equivalence] identifies these with the internal $B_S$-modules used here; it is the identity on underlying sheaves and restriction maps, so it is exact, keeps K-injectives and commutes with $v_*$ and termwise colimits. Hence both $Rv_*$ agree.",
+   "uses": [
+    "lem-sfb-open-closed-internal-hom-formulas",
+    "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 5.3, proof of (2): internal Hom adjunction for an immersion and the open-immersion case; the normalized formula is the cited existing node"
+   }
+  },
+  {
+   "text": "If $N\\in D(B_T)^{\\ge c}$, then $v^*N\\in D(B_V)^{\\ge c}$ by step 3. Hypothesis $P_V(A)$(ii) gives $R\\mathcal Hom_{B_V}(A,v^*N)\\in D(B_V)^{\\ge c+d_A}$. Apply step 4 with $b=c+d_A$ and then $\\theta_N$ from step 5. This proves $R\\mathcal Hom_{B_T}(v_!A,N)\\in D(B_T)^{\\ge c+d_A}$, with the original $d_A$, independently of $N$ and $c$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 5.3, proof of (2), lower-bound check for the internal-Hom factors"
+   }
+  },
+  {
+   "text": "Let $(N_i)$ have common lower bound $c$, and set $F_i=R\\mathcal Hom_{B_V}(A,v^*N_i)$. They share the bound $c+d_A$ by $P_V(A)$(ii) and step 3. Apply [lem-weil-pbc-condensed-qcqs-pushforward-continuity] to $v$ and $(F_i)$, using step 1 for qcqs and step 2 for its functorial-complex interpretation. This gives the canonical isomorphism $\\varinjlim_i Rv_*F_i\\xrightarrow{\\sim}Rv_*(\\varinjlim_iF_i)$. Hypothesis $P_V(A)$(i), applied to $(v^*N_i)$, and the original-cocone identification of step 3 give $\\varinjlim_iF_i\\xrightarrow{\\sim}R\\mathcal Hom_{B_V}(A,v^*\\varinjlim_iN_i)$. Applying $Rv_*$ and conjugating by $\\theta$ from step 5 proves an isomorphism between the two sides of $P_T(v_!A)$(i).",
+   "uses": [
+    "lem-weil-pbc-condensed-qcqs-pushforward-continuity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 5.3(1) and proof of (2), open case; apply bounded-target pushforward continuity to the uniformly bounded internal-Hom diagram"
+   }
+  },
+  {
+   "text": "Write $\\iota_i:N_i\\to N=\\varinjlim_iN_i$ for the original cocone. The first map in step 7 has components $Rv_*(F_i\\to\\varinjlim_kF_k)$. By the definition of the comparison in $P_V(A)$(i), the second map carries this component to $Rv_*R\\mathcal Hom_{B_V}(A,v^*\\iota_i)$. Naturality of $\\theta$ in [lem-sfb-open-closed-internal-hom-formulas] says exactly that this component, conjugated by $\\theta_{N_i}$ and $\\theta_N^{-1}$, is $R\\mathcal Hom_{B_T}(v_!A,\\iota_i)$. The colimit universal property therefore identifies the resulting map with the evaluation-induced comparison specified in the item. Together with step 6 this proves both clauses of $P_T(v_!A)$ with the same bound.",
+   "uses": [
+    "lem-sfb-open-closed-internal-hom-formulas"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 5.3, canonical comparisons (5.4) and the internal-Hom adjunction in proof of (2): cocone-component calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-noetherian-space-compact-subsets",
+  "lem-weil-pbc-separated-cancellation",
+  "lem-pc-separated-quasi-separated",
+  "lem-weil-pbc-closed-subset-closed-subscheme",
+  "lem-sfb-proetale-sheaves-grothendieck",
+  "sk-def-sfb-sheaf-tensor",
+  "lem-sfb-modobj-grothendieck",
+  "def-sp-grothendieck-abelian",
+  "src-weil-homology-preserves-exact-colimits",
+  "det-prop-sfb-module-pullback-exact-main",
+  "def-sfb-module-upper-lower-adjunction",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-sp-grothendieck-enough-injectives",
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-weil-pbc-complex-injective-resolution-mono",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "sk-def-sfb-module-derived-pushpull",
+  "lem-sfb-open-closed-internal-hom-formulas",
+  "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Lemma 5.3(1) and the open-immersion part of the proof of (2), combined with the item hypothesis P_V(A); bounded-target refinement of Bhatt--Scholze Lemmas 6.3.14(2), 6.8.12."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -59,10 +186,45 @@
    "results": "Hits read: HasCompactSupport.continuous_extend_zero, TrivSqZeroExt.continuous_inr, AlgebraicGeometry.Scheme.Hom.instIsContinuousOpensOpensFunctorGrothendieckTopologyCarrierCarrierCommRingCat, ContinuousMapZero.instContinuousEval, TrivSqZeroExt.continuous_inl, ContinuousMapZero.instZeroHomClass, HasCompactSupport.extend_zero, ZeroAtInftyContinuousMap.ContinuousMap.liftZeroAtInfty",
    "date": "2026-10-21",
    "verdict": "no match: the returned statements provide general category, sheaf, truncation or colimit infrastructure, not conditional open-extension stability with the uniform bound (returned step 5)"
+  },
+  {
+   "tool": "grep",
+   "query": "(extensionByZero|lowerShriek).*(RHom|derivedHom|filtered)|(RHom|derivedHom|filtered).*(extensionByZero|lowerShriek)",
+   "results": "No hits.",
+   "date": "2026-10-21",
+   "verdict": "no match: no hit states open-extension stability of bounded-target internal-sheaf Hom for arbitrary condensed coefficients; hits are general colimit infrastructure or structure-sheaf module restriction adjunctions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived internal Hom from open extension by zero commutes with bounded below filtered colimits",
+   "results": "Hits read: HomologicalComplex.instHasFilteredColimitsOfSize, preservesFilteredColimits_coyoneda, AddGrpCat.FilteredColimits.colimit_zero_eq, CategoryTheory.Limits.Concrete.colimit_rep_eq_zero, CommRingCat.preservesFilteredColimits_coyoneda, instPreservesHomologyFunctorAddCommGrpCatColim, HomologicalComplex.instPreservesColimitsOfShapeSingle, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat. ",
+   "date": "2026-10-21",
+   "verdict": "no match: no hit states open-extension stability of bounded-target internal-sheaf Hom for arbitrary condensed coefficients; hits are general colimit infrastructure or structure-sheaf module restriction adjunctions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extensionByZero\", \"PreservesColimit\"",
+   "results": "No hits.",
+   "date": "2026-10-21",
+   "verdict": "no match: no hit states open-extension stability of bounded-target internal-sheaf Hom for arbitrary condensed coefficients; hits are general colimit infrastructure or structure-sheaf module restriction adjunctions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal sheaf Hom from extension by zero preserves filtered colimits with uniformly bounded below targets",
+   "results": "Hits read: CategoryTheory.Sheaf.hasFilteredColimitsOfSize, CategoryTheory.Sheaf.ab5ofSize, Condensed.hasExactColimitsOfShape, Condensed.instAB5CondensedMod, SheafOfModules.Presentation.isColimit, SheafOfModules.instHasColimitsOfSizeOfPresheafOfModulesValRingCat, CategoryTheory.Sheaf.instIsGrothendieckAbelian, CategoryTheory.GrothendieckTopology.Point.instPreservesColimitsOfSizeSheafSheafFiberOfHasSheafifyOfWEqualsLocallyBijectiveOfReflectsIsomorphismsOfPreservesFilteredColimitsOfSizeForgetOfLocallySmall. ",
+   "date": "2026-10-21",
+   "verdict": "no match: no hit states open-extension stability of bounded-target internal-sheaf Hom for arbitrary condensed coefficients; hits are general colimit infrastructure or structure-sheaf module restriction adjunctions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internal Hom adjunction for extension by zero along an open immersion is derived direct image of internal Hom on the open subset",
+   "results": "Hits read: AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app, AlgebraicGeometry.IsOpenImmersion.app_ΓIso_hom_apply, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.SheafedSpace.ofRestrict_hom_c_app. ",
+   "date": "2026-10-21",
+   "verdict": "no match: no hit states open-extension stability of bounded-target internal-sheaf Hom for arbitrary condensed coefficients; hits are general colimit infrastructure or structure-sheaf module restriction adjunctions."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-constructible-internal-hom-continuity",
@@ -81,5 +243,89 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-rhom-continuity-open-extension",
+  "worker": "stage1",
+  "summary": "Proved conditional open-extension stability using existing evaluation-normalized internal-Hom identities and bounded-below qcqs pushforward continuity. Checked topological Noetherianity suffices for qcqs, exact restriction and exact filtered colimits, and proved preservation of the identical lower bound with a supported injective resolution. Identified the resulting comparison on every original cocone component. No new nodes, no statement change.",
+  "blueprint": "Realizes the coefficient-localization continuity subargument extracted from the final paragraph of lem-sfb-dc-hom-preserves.proof.md, through parent lem-sfb-constructible-internal-hom-continuity: open-extension case of bounded-target internal-Hom continuity. Uses the open case of Hemo--Richarz--Scholbach Lemma 5.3; the unit route and chapter are unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-noetherian-space-compact-subsets",
+    "why": "Topological compactness makes the given open immersion quasi-compact; this is a generic topology tool, not an alternative finiteness route."
+   },
+   {
+    "node": "lem-weil-pbc-separated-cancellation",
+    "why": "Only the general fact that an open immersion is separated is used to check the qcqs hypothesis."
+   },
+   {
+    "node": "lem-pc-separated-quasi-separated",
+    "why": "Generic scheme-theoretic separated implies quasi-separated implication."
+   },
+   {
+    "node": "lem-weil-pbc-closed-subset-closed-subscheme",
+    "why": "Choose a complementary closed subscheme solely to instantiate the existing two-clause internal-Hom formula."
+   },
+   {
+    "node": "lem-sfb-proetale-sheaves-grothendieck",
+    "why": "Generic sheaf-category structure needed for exact filtered colimits and injective resolutions."
+   },
+   {
+    "node": "lem-sfb-modobj-grothendieck",
+    "why": "Generic module-object category structure, applied to the pulled-back coefficient rings."
+   },
+   {
+    "node": "src-weil-homology-preserves-exact-colimits",
+    "why": "Generic passage from exact termwise colimits to cohomology, fixing the precise complex interpretation."
+   },
+   {
+    "node": "det-prop-sfb-module-pullback-exact-main",
+    "why": "Generic exactness of the given coefficient-compatible module pullback."
+   },
+   {
+    "node": "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "why": "Generic adjunction tool applied to the stated module pullback adjunction."
+   },
+   {
+    "node": "lem-sp-grothendieck-enough-injectives",
+    "why": "Generic existence of injectives in the already established Grothendieck module category."
+   },
+   {
+    "node": "lem-weil-pbc-complex-injective-resolution-mono",
+    "why": "Generic injective resolution preserving the exact lower support bound, needed to prove left t-exactness."
+   },
+   {
+    "node": "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "why": "Generic K-injectivity criterion allowing that bounded-below resolution to compute the unbounded pushforward."
+   },
+   {
+    "node": "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
+    "why": "Generic bounded-below filtered pushforward continuity for the same arbitrary condensed coefficients; the unit has no separate such theorem. It is applied after the open internal-Hom identification and does not replace the unit finiteness route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-noetherian-space-compact-subsets",
+  "lem-weil-pbc-separated-cancellation",
+  "lem-pc-separated-quasi-separated",
+  "lem-weil-pbc-closed-subset-closed-subscheme",
+  "lem-sfb-proetale-sheaves-grothendieck",
+  "lem-sfb-modobj-grothendieck",
+  "src-weil-homology-preserves-exact-colimits",
+  "det-prop-sfb-module-pullback-exact-main",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-pbc-complex-injective-resolution-mono",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "lem-weil-pbc-condensed-qcqs-pushforward-continuity"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q16-eb90b8b49",
+  "group": "Q16",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-eb90b8b49 (reviewer sub-agent of L); spot-checked: I read every step against its cited statements and against the source; the maths is sound. One repairable fault, fixed. Fault (C4, coefficient category identified silently): step 5 applied lem-weil-pbc-condensed-qcqs-pushforward-continuity without a citation. That node is stated for sectionwise module sheaves (def-weil-pbc-proetale-operations), while the item works with internal B_S-module objects. Fix: step 5 now cites def-weil-pbc-internal-abelian-sheaf-module-equivalence and spells out why the two derived pushforwards Rv_* agree. The equivalence is the identity on underlying sheaves and restriction maps, so it is exact, keeps K-injectives and commutes with v_* and with termwise colimits. Λ and p_X^* are the same constructions in both frameworks. The node is added to uses and proof_deps. It is a definition, reaches neither the item nor its parent, and the step is 944 characters. Only the item file is changed (fixes/dag/nodes/sec-six-functors-basics/). Checks: one commit, no new nodes, statement and stmt_deps byte-identical to live. Live item still unsplit (mtime 11:35, re-checked after review), not in route-pivot-dropped, no repair note, no SGA, no cycle. Source: Hemo–Richarz–Scholbach Lemma 5.3, PDF p. 13–14, open case of (2) via Hom(ι_!−,−)=ι_*Hom(−,ι^!−) and (1). Uniform bound comes from hypothesis P_V(A)(ii) instead of constructible boundedness; proof correctly marked agent. Step 1: subsets of a Noetherian space are quasi-compact; open immersion separated (cancellation (a)) hence quasi-separated; closed complement from closed-subset-closed-subscheme. Steps 2–3: Grothendieck sheaf and module categories with exact colimits; v^* exact, a left adjoint, compatible with the cocone. Step 4: Rv_* keeps the same lower bound b via a bounded injective resolution, which is K-injective. Steps 6–8: bound c+d_A, continuity on the uniformly bounded F_i, map identified by naturality of θ. Edge cases checked: V empty, v=id, A=0, constant diagrams, shifts, base topologically but not locally Noetherian. The 13 tool_uses are generic and accepted.; 1 file(s) fixed by the reviewer"
  }
 }

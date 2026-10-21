@@ -20036,3 +20036,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:53 L: merged deliver/Q44/lem-sfb-subfield-extension-local-presentation (reviewer FIX; first push; new nodes: 0)
 - 03:53 L: merged deliver/NX/lem-weil-pbc-pullback-tensor-canonical-shift-unit (reviewer FIX; first push; new nodes: 0)
 - 03:53 L: merged deliver/Q24/lem-cbc-finite-constant-map-naturality (reviewer PASS; first push; new nodes: 0)
+- 03:53 L: merged deliver/Q16/lem-sfb-rhom-continuity-open-extension (reviewer FIX; first push; new nodes: 0)
