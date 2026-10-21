@@ -110,14 +110,15 @@
   "same_as": []
  },
  "lean": {
-  "existing": false,
-  "module": "Sheaf.Algebra.Homology.AffineBaseChangeSourceRepresentativeIso",
-  "file": "lean/Sheaf/Algebra/Homology/AffineBaseChangeSourceRepresentativeIso.lean",
+  "existing": true,
+  "module": "WeilConjectures.Algebra.Homology.AffineBaseChangeSourceRepresentativeIso",
+  "file": "lean/WeilConjectures/Algebra/Homology/AffineBaseChangeSourceRepresentativeIso.lean",
   "declaration": "AlgebraicGeometry.exists_affineBaseChangeIntoPullback_representativeIso",
-  "statement": "theorem exists_affineBaseChangeIntoPullback_representativeIso {X S X' S' : Scheme.{u}} (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X) (sq : IsPullback g' f' f g) (K : schemeDerivedCategory X) (P Q : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) (hP : P.IsAcyclicTensorKFlat) (hQ : Q.IsAcyclicTensorKFlat) (eP : DerivedCategory.Q.obj P ≅ K) (eQ : DerivedCategory.Q.obj Q ≅ K) (hcP : IsIso ((SingleComplexBaseChange.counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P))) (hcQ : IsIso ((SingleComplexBaseChange.counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj Q))) (p : X') (i : ℤ) : ∃ t : (Arrow.mk (affineBaseChangeIntoPullback f f' g g' sq K Q eQ hcQ p i)).left ≃+ (Arrow.mk (affineBaseChangeIntoPullback f f' g g' sq K P eP hcP p i)).left, ∀ x, affineBaseChangeIntoPullback f f' g g' sq K Q eQ hcQ p i x = affineBaseChangeIntoPullback f f' g g' sq K P eP hcP p i (t x)",
+  "statement": "theorem exists_affineBaseChangeIntoPullback_representativeIso {X S X' S' : Scheme.{u}} (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X) (sq : IsPullback g' f' f g) (K : schemeDerivedCategory X) (P Q : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) (hP : P.IsKFlatTensor) (hQ : Q.IsKFlatTensor) (eP : DerivedCategory.Q.obj P ≅ K) (eQ : DerivedCategory.Q.obj Q ≅ K) (hcP : IsIso ((SingleComplexBaseChange.counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P))) (hcQ : IsIso ((SingleComplexBaseChange.counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj Q))) (p : X') (i : ℤ) : ∃ t : (Arrow.mk (affineBaseChangeIntoPullback f f' g g' sq K Q eQ hcQ p i)).left ≃+ (Arrow.mk (affineBaseChangeIntoPullback f f' g g' sq K P eP hcP p i)).left, ∀ x, affineBaseChangeIntoPullback f f' g g' sq K Q eQ hcQ p i x = affineBaseChangeIntoPullback f f' g g' sq K P eP hcP p i (t x)",
   "branch": "sheaf-dag",
-  "by": "V3",
-  "date": "2026-10-13"
+  "by": "V8",
+  "date": "2026-10-21",
+  "note": "The historical Sheaf module publicly re-exports the existing proved source implementation and preserves the old KFlat import. IsAcyclicTensorKFlat and IsKFlatTensor have identical defining acyclic-test-complex formulas; the old theorem type is definitionally equal. Mathematical statement, dependencies and unit route are unchanged."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -130,13 +131,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "R3",
+  "reviewer": "C-017ae",
+  "group": "V8",
   "result": "pass",
-  "landing": "20261013T141532-L-380928",
+  "landing": "20261021T172406-L-3366097",
   "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: delivered Sheaf re-export module + node lean record (existing:true, WC canonical provider) against live WeilConjectures/Algebra/Homology/AffineBaseChangeSourceRepresentativeIso.lean:82 signature, Sheaf vs WC KFlat predicate bodies, rework.tsv quarantine row, scratch probe compile of both imports (3.1 s, clean axioms)"
  }
 }
