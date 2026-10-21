@@ -67,6 +67,53 @@ theorem exists_cokernel_action
         R ◁ π ≫ γ = ModObj.smul (M := R) (X := N.X) ≫ π → γ = a.smul) ∧
       ∃ (p : N ⟶ ({ X := Q, mod := a } : Mod C R)), p.hom = π ∧
         ∃ (wp : f ≫ p = 0), Nonempty (IsColimit (CokernelCofork.ofπ p wp)) := by
-  sorry
+  let c := CokernelCofork.ofπ π w
+  have hT := CokernelCofork.mapIsColimit c hπ (tensorLeft R)
+  have hTT := CokernelCofork.mapIsColimit _ hT (tensorLeft R)
+  have : Epi π := Cofork.IsColimit.epi hπ
+  have : Epi (R ◁ π) := Cofork.IsColimit.epi hT
+  have : Epi (R ◁ R ◁ π) := Cofork.IsColimit.epi hTT
+  obtain ⟨s, hs⟩ := CokernelCofork.IsColimit.desc' hT (act N.X ≫ π) (by
+    change R ◁ f.hom ≫ act N.X ≫ π = 0
+    rw [← act_hom_assoc, w, comp_zero])
+  change R ◁ π ≫ s = act N.X ≫ π at hs
+  have hs_assoc := reassoc_of% hs
+  let a : ModObj R Q := ModObj.mk' R s
+    (by
+      have : Epi (𝟙_ C ◁ π) := by
+        rw [id_whiskerLeft]
+        infer_instance
+      rw [← cancel_epi (𝟙_ C ◁ π), whisker_exchange_assoc, hs,
+        one_act_assoc, leftUnitor_naturality])
+    (by
+      have : Epi ((R ⊗ R) ◁ π) := by
+        rw [tensor_whiskerLeft]
+        infer_instance
+      rw [← cancel_epi ((R ⊗ R) ◁ π), whisker_exchange_assoc, hs,
+        mul_act_assoc, tensor_whiskerLeft_assoc, Iso.inv_hom_id_assoc,
+        ← whiskerLeft_comp_assoc, hs, whiskerLeft_comp_assoc, hs])
+  refine ⟨a, hs, ?_, ?_⟩
+  · intro γ hγ
+    exact (cancel_epi (R ◁ π)).1 (hγ.trans hs.symm)
+  · let p : N ⟶ ({ X := Q, mod := a } : Mod C R) := Hom.mk' π hs.symm
+    have wp : f ≫ p = 0 := hom_ext _ _ w
+    refine ⟨p, rfl, wp, ⟨?_⟩⟩
+    refine CokernelCofork.IsColimit.ofπ p wp (fun {L} g hg ↦ ?_) ?_ ?_
+    · have hg' : f.hom ≫ g.hom = 0 := by
+        simpa only [comp_hom', zero_hom] using congrArg Hom.hom hg
+      obtain ⟨h, hh⟩ := CokernelCofork.IsColimit.desc' hπ g.hom hg'
+      change π ≫ h = g.hom at hh
+      refine Hom.mk' h ?_
+      change s ≫ h = R ◁ h ≫ act L.X
+      rw [← cancel_epi (R ◁ π), hs_assoc, hh,
+        ← whiskerLeft_comp_assoc, hh, act_hom]
+    · intro L g hg
+      apply hom_ext
+      exact (CokernelCofork.IsColimit.desc' hπ g.hom _).property
+    · intro L g hg m hm
+      apply hom_ext
+      apply (cancel_epi π).1
+      exact (congrArg Hom.hom hm).trans
+        (CokernelCofork.IsColimit.desc' hπ g.hom _).property.symm
 
 end CategoryTheory.Mod
