@@ -358,5 +358,40 @@
   "group": "Q92",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q92-9b6900229 (reviewer sub-agent of L); spot-checked: Read the item's statement and all nine steps, the statement of every node they cite, and Bhatt–Scholze Prop. 6.6.11, Lemmas 6.5.8 and 6.5.9(4)-(5) and Remark 6.5.10 (via pdftotext). The statement is unchanged from base and the delivery has no new nodes. There is no cycle (closure check). The item is not in route-pivot-dropped and is still unsplit in live and side-live. It is a child node of the parent's re-split and carries no re-split note of its own. All 16 tool uses are generic, and I accept them; no SGA is cited. Steps 2-9 check out: immersion and slice restriction are exact and preserve limits, with coefficient and completion-unit identification (the Noetherian input is X or W, not V); γ directions are correct; Roos commutation follows from product comparisons; the H^j bound is a bound on cohomology only; the pulled-back strata are taken as fibre products, which avoids the E3 factorization error; base change keeps covers weakly étale and fpqc; D^b_c preservation means the composition lemma is used only on its domain; the c-chain orientations are consistent; triangles and shifts transport through γ_h. One fault, repaired (C4): in Step 1, characterization (ii) and def-constructible-stratification give only locally closed strata, but the step asserted constructible strata. I added the Noetherian-space argument (lem-sc-affine-noetherian-underlying-space, lem-sfb-noetherian-space-compact-subsets) to Step 1's uses; both were already in proof_deps. Edge cases checked: K=0, empty strata or empty W, h=id, and R/π (cohomology bound vs term bound).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralStratumChartRestrictions",
+  "declaration": "WeilConjectures.IntegralStratumCharts.integral_stratum_chart_restrictions",
+  "declarations": [
+   "WeilConjectures.IntegralStratumCharts.constructible",
+   "WeilConjectures.IntegralStratumCharts.completionMap",
+   "WeilConjectures.IntegralStratumCharts.ExactRestriction",
+   "WeilConjectures.IntegralStratumCharts.chartSquare",
+   "WeilConjectures.IntegralStratumCharts.finiteSquare",
+   "WeilConjectures.IntegralStratumCharts.leftReduction",
+   "WeilConjectures.IntegralStratumCharts.rightReduction",
+   "WeilConjectures.IntegralStratumCharts.PullbackSquare",
+   "WeilConjectures.IntegralStratumCharts.withConstructible",
+   "WeilConjectures.IntegralStratumCharts.chartMap",
+   "WeilConjectures.IntegralStratumCharts.Model",
+   "WeilConjectures.IntegralStratumCharts.Charts",
+   "WeilConjectures.IntegralStratumCharts.Charts.pulledStrata",
+   "WeilConjectures.IntegralStratumCharts.integral_stratum_chart_restrictions"
+  ],
+  "file": "lean/Sheaf/Paper/IntegralStratumChartRestrictions.lean",
+  "statement": "theorem integral_stratum_chart_restrictions {X W : Scheme.{u}} (h : W ⟶ X) [IsNoetherian X] [IsNoetherian W] (_hXdim : ∃ n : ℕ, topologicalKrullDim X ≤ n) (_hWdim : ∃ n : ℕ, topologicalKrullDim W ≤ n) (_hXl : IsUnit (l : Γ(X, ⊤))) (_hWl : IsUnit (l : Γ(W, ⊤))) : (∀ K : (constructible l E X).FullSubcategory, Nonempty (Charts l E h K.obj)) ∧ (∀ K : (constructible l E X).FullSubcategory, sfIntegralConstructible l E W ((IntegralCompletedComparison.integral l E h).obj K.obj)) ∧ ∃ c : IntegralCompletedComparison.Comparison l E h, (integralDerivedPullback l E h).Additive ∧ (∀ (a : Padic.coefficientExtensionIntegers l E) (K L : (constructible l E X).FullSubcategory) (f : K ⟶ L), (integralDerivedPullback l E h).map ((integralScalarDerivedAction l E X a).app ((ImmersionCompletedPullback.transport l E X).obj K.obj) ≫ (ImmersionCompletedPullback.transport l E X).map f.hom) = (integralScalarDerivedAction l E W a).app ((IntegralCompletedComparison.integral l E h).obj K.obj) ≫ (IntegralCompletedComparison.integral l E h).map f.hom) ∧ (fun [shift : (integralDerivedPullback l E h).CommShift ℤ] ↦ ∀ T : Triangle (DerivedCategory (integralTowerModules l E X)), T ∈ distTriang _ → sfIntegralConstructible l E X T.obj₁ → sfIntegralConstructible l E X T.obj₂ → sfIntegralConstructible l E X T.obj₃ → (integralDerivedPullback l E h).mapTriangle.obj T ∈ distTriang _) (shift := c.derivedShift)",
+  "branch": "newtargets-dag",
+  "by": "Q102",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The main theorem is read with ExactRestriction, Model, Charts, PullbackSquare and Charts.pulledStrata. The adic completed presentation is transported to the recorded intrinsic integral category by the projection-normalized completedRingIso. The chart square uses the actual composite chart inverse image and the strict completed pullback; the declared normalized comparisons identify these with the displayed iterated exact inverse images and specified integral pullbacks. Its reductions are an equation involving the actual derived-limit projection adjuncts and canonical finite composition comparison. All helpers belong to this node; no statement or dependency correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c37a7585b",
+  "group": "Q102",
+  "result": "pass",
+  "note": "Statement matches the node clause by clause. Hypotheses: Noetherian, finite topologicalKrullDim, l a unit on X and W, nothing extra. Input: integral constructible K through the exact coefficient-transport equivalence. Charts: finite constructible locally closed strata, ProEt covering sieves, actual bounded finite-projective models realised by integralConstantDerived = B tensor P. ExactRestriction: exact, limit-preserving, coefficient iso fixed by projections, strict Roos and Rlim comparisons, comparison with the specified integral pullback pinned by normalization to gamma, natural iso on H^j, cohomology bound on the model. Pulled strata are the proved upstream Stratification.pullback; base-changed covers are weakly etale and covering; reductions equation of the pullback square typechecks with canonical chi, Rlim adjunct and proEtaleAmbientRingedPullbackComparison. Lh*K constructible; Comparison c with pinned derivedShift gives shifts and triangles; Additive; scalar-action linearity. Edge cases (K=0, empty schemes or strata, n=0, empty or negative interval, non-Noetherian charts, universes) OK. Records: only the lean field changed; deps byte-identical; statement verbatim; declarations complete; docstrings, line length and the single sorry OK; not dropped; no name clash. No recompile, per brief. Advisories: (1) declarations owned by nodes outside stmt_deps: theorem nodes lem-a1-integral-pullback-completed-comparison, lem-sf-immersion-completed-pullback-comparison, lemma-weil-pbc-completed-pullback-reduction, lem-sf-strict-roos-derived-limit-comparison, lemma-constructible-pullback-stratification, plus seven def nodes; node-level gap, unchanged stmt_deps; (2) IsPerfectRingComplex written out, faithful form; (3) all-limits preservation stronger than the node, supported by steps 2-3; (4) cohomology iso is Nonempty, citers only use vanishing; (5) composite q' instead of iterated v'^-1 i'^-1, canonical composition iso."
  }
 }

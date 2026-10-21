@@ -305,5 +305,32 @@
   "group": "NU",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-95e85b527 (reviewer sub-agent of L); spot-checked: PASS, no changes. This is the first split of an unsplit node (no repair note, no proof on the base) that Q21's PASSed re-split of lem-weil-constant-coefficient-objects-constructible created. The statement and stmt_deps are byte-identical to side-live. The item is not in the drop list and is still unsplit in live. There are no new nodes. I read all eight steps against the cited statements. S1: the integers-DVR node plus clauses 2 and 3 of the valued-DVR node give finite, surjective A_{L,m}; the nonarchimedean hypothesis comes from clause 1 of def-weil-l-adic-coefficient-extension, though the step does not say so (advisory). S2: sheafification is local (00WK) and the cokernel is the sheafified sectionwise cokernel, so local lifts make the reduction epi in Mod(R_L). S3: the strict-unit u_m, the sectionwise module limit and R_L as the sectionwise ring limit identify lim F_m with R_L as an R_L-module, with projections u_m^{-1}π_m. S4 and S6: clauses 1 and 2 of the surjective-tower node, which holds for any scheme and any commutative ring sheaf, give 1−s epi with kernel R_L, the derived product B and the Roos triangle. S5: the kernel-cocone node gives κ=(0,ι) as a quasi-isomorphism; the cone convention is sign-irrelevant because d_B=0; strict-unit uniqueness then gives κ=η exactly. S7: C_{E,L} is literally Rlim^c of def-weil-integral-scalar-extension with P=R_E[0]; the inverse projection identity is right composition. S8: with q=id, c_n=[γ_n]=u_n^{-1}π_n and t_n=[id⊗ρ_n] match the strict tower, so def-weil-derived-complete holds for E=L. Bhatt–Scholze Prop 3.1.10 (p.17) and Def 3.5.2 (p.24) checked; no SGA. Edge cases Y=∅, disconnected Y, ramified E⊂L and E=L checked, plus the small case Spec F_q with Q_ℓ. I accept the six declared tool_uses (arithmetic, sheafification, module limits, kernel-cocone). lem-fd-etale-integral-line-derived-complete overlaps only the E=L corollary (advisory)."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ConstantScalarUnitQuasiIsomorphism",
+  "declaration": "WeilConjectures.ConstantScalarUnitQuasiIsomorphism.regular_scalar_unit_quasi_isomorphism",
+  "declarations": [
+   "WeilConjectures.ConstantScalarUnitQuasiIsomorphism.tower",
+   "WeilConjectures.ConstantScalarUnitQuasiIsomorphism.product",
+   "WeilConjectures.ConstantScalarUnitQuasiIsomorphism.inclusion",
+   "WeilConjectures.ConstantScalarUnitQuasiIsomorphism.leg",
+   "WeilConjectures.ConstantScalarUnitQuasiIsomorphism.regular_scalar_unit_quasi_isomorphism"
+  ],
+  "file": "lean/Sheaf/Paper/ConstantScalarUnitQuasiIsomorphism.lean",
+  "statement": "theorem regular_scalar_unit_quasi_isomorphism (D : FiniteFieldDatum.{d}) (_hl : l ≠ D.p) (η : regularComplex l L Y ⟶ (integralScalarComplexFunctor l E L ι Y).obj (regularComplex l E Y)) (_hη : quotientCoordinates l E Y L ι η ∧ zeroSecondComponent l E Y L ι η) : (∀ n : ℕ, Finite (Padic.coefficientExtensionRing l L (n + 1))) ∧ (∀ n : ℕ, Sheaf.IsLocallySurjective (integralCoefficientSheafTransition l L Y n)) ∧ (∃ e : regularComplex l L Y ≅ limit (tower l E L ι Y), ∀ n : ℕ, e.hom ≫ limit.π (tower l E L ι Y) (op n) = leg l E L ι Y η n) ∧ QuasiIso η ∧ Nonempty (IsLimit (Fan.mk (DerivedCategory.Q.obj (product l E L ι Y)) (fun n : ℕ ↦ DerivedCategory.Q.map (Pi.π (fun m : ℕ ↦ (tower l E L ι Y).obj (op m)) n)))) ∧ (∃ δ : DerivedCategory.Q.obj (product l E L ι Y) ⟶ (DerivedCategory.Q.obj (regularComplex l L Y))⟦(1 : ℤ)⟧, Pretriangulated.Triangle.mk (DerivedCategory.Q.map (inclusion l E L ι Y η)) (DerivedCategory.Q.map (boundary l E Y L ι)) δ ∈ distTriang (DerivedCategory (integralTowerModules l L Y))) ∧ (∃ e : DerivedCategory.Q.obj ((integralScalarComplexFunctor l E L ι Y).obj (regularComplex l E Y)) ≅ DerivedCategory.Q.obj (regularComplex l L Y), e.inv = DerivedCategory.Q.map η ∧ ∀ n : ℕ, e.hom ≫ DerivedCategory.Q.map (leg l E L ι Y η n) = DerivedCategory.Q.map (CochainComplex.mappingCocone.fst (boundary l E Y L ι) ≫ Pi.π (fun m : ℕ ↦ (tower l E L ι Y).obj (op m)) n)) ∧ IntegralOnSlice.IsComplete l E Y none (DerivedCategory.Q.obj (regularComplex l E Y))",
+  "branch": "sheaf-dag",
+  "by": "NL",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The map eta is bound together with exactly its recorded unique strict normalization, so there is no choice of an arbitrary quasi-isomorphism. The theorem includes finite quotients, epimorphic reductions, the ordinary limit with prescribed legs, the derived product with projections, the actual distinguished Roos triangle, its inverse projection formula, and canonical self-extension derived completeness. Independent datum/site/coefficient universes are retained. Reviewer FIX (2026-10-21): clause 2 states local surjectivity (Sheaf.IsLocallySurjective) of the constant-sheaf reductions, i.e. epimorphisms of sheaves as in the node's Step 2, instead of the weaker categorical Epi in sheaves of rings.",
+  "fixed_by": "NT-stage2-cc-281082b0e"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-281082b0e",
+  "group": "NL",
+  "result": "fix",
+  "note": "H3: clause 2 stated Epi of integralCoefficientSheafTransition in Sheaf RingCat, which is weaker than an epimorphism of sheaves (local surjectivity, which the node's Step 2 proves and Step 4 needs). Fixed to Sheaf.IsLocallySurjective with public import Mathlib.CategoryTheory.Sites.LocallySurjective; fixes/ConstantScalarUnitQuasiIsomorphism.lean plus lean-record.json with the new verbatim statement; refit_record clean; nt_compile --json clean, 11.6 s, against live ConstantScalarStrictUnit. All other clauses match the node: finite quotients, ordinary limit with leg = η≫fst≫pr pinned by quotientCoordinates, QuasiIso η, derived-product IsLimit, Roos triangle with Q(inclusion) and Q(boundary), inverse-projection identity, IsComplete none = IsDerivedCompleteUnrestricted for R_E[0]. η is bound with exactly the normalization the dependency proves unique. Universes d/t/u independent; E=L, ramified, empty or disconnected Y and n=0 covered; helpers not hollow; only sorry; source and blueprint docstrings present. Advisory: the §1(B) ConstantScalarStrictUnit module is code-identical to NM's landed module (docstring and by/note-only differences); base 10:00 predates NM's landing, so the landing will likely revert it; suggest --revert-nodes lem-weil-constant-scalar-strict-unit."
  }
 }

@@ -267,5 +267,52 @@
   "group": "Q03",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-274788ce9 (reviewer sub-agent of L); spot-checked: First split of the item. NZ created it as a statement-only node; its base proof was empty, it has no repair note and it is not on the 10-19 dropped list. The delivery is 7 steps with 0 new nodes, and the statement is unchanged. I read every cited statement and did not find a false step. Step 1: the common-quotient hypotheses come from constant-exact (the cokernel of A^e→A gives image I^n·R) and from constant-completion-equivalence (flatness and A_T/I^n ≅ P_n, matching Stacks 093M at sites-modules.tex:8261). Step 3: the direction of ρ is the inverse of the common-quotient comparison. p⊗s ↦ p⊗s holds because both sides are identified with P/J_nP and s is locally r·1. The augmentation equation holds at chain level. Step 4: the datum requires P_n to be finite as a set, so the profinite node applies. Pullback along the coefficient isomorphisms is exact. Step 5: Q_V is not flat; the step handles this with a K-flat resolution and exact u^*. Step 6: I re-did the pure-tensor chase; both sides give u^{-1}(p⊗_R s), and differentials and transitions agree. Step 7: the maps descend through the site-derived-tensor-descent equivalence. Edge cases I=0, I=A, identity u and n=1 are fine. The closure has no cycle, no trf node, no SGA source and no dropped node. Overlap with pulled-reduction-strict-tower-comparison and constant-completion-equivalence is advisory only. FIX, two C1 repairs: (1) Step 4 used u^{-1} of the constant ring sheaf of A (A is not finite) without a citation; I cited lem-pe-constant-left-module-inverse-image and added it to tool_uses. (2) Step 2 used levelwise tensor on the diagram site without a citation; I named evaluation as the inverse image along e_n and cited lem-weil-pbc-algebraic-inverse-image-tensor-comparison. proof_deps is recomputed. I accept the tool_uses kflat-resolution and derived-change-of-rings.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.StrictQuotientScalarBalancing",
+  "declaration": "AlgebraicGeometry.Scheme.StrictScalarBalancing.strictQuotientScalarBalancing",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.StrictScalarBalancing.topology",
+   "AlgebraicGeometry.Scheme.StrictScalarBalancing.ring",
+   "AlgebraicGeometry.Scheme.StrictScalarBalancing.scalar",
+   "AlgebraicGeometry.Scheme.StrictScalarBalancing.reduction",
+   "AlgebraicGeometry.Scheme.StrictScalarBalancing.delta",
+   "AlgebraicGeometry.Scheme.StrictScalarBalancing.deltaFactors",
+   "AlgebraicGeometry.Scheme.StrictScalarBalancing.inverse",
+   "AlgebraicGeometry.Scheme.StrictScalarBalancing.modelBaseChangeLimits",
+   "AlgebraicGeometry.Scheme.StrictScalarBalancing.modelBaseChangeFlat",
+   "AlgebraicGeometry.Scheme.StrictScalarBalancing.inverseLimits",
+   "AlgebraicGeometry.Scheme.StrictScalarBalancing.inverseData",
+   "AlgebraicGeometry.Scheme.StrictScalarBalancing.coefficient",
+   "AlgebraicGeometry.Scheme.StrictScalarBalancing.modulePull",
+   "AlgebraicGeometry.Scheme.StrictScalarBalancing.towerPull",
+   "AlgebraicGeometry.Scheme.StrictScalarBalancing.PullModel",
+   "AlgebraicGeometry.Scheme.StrictScalarBalancing.complexSquare",
+   "AlgebraicGeometry.Scheme.StrictScalarBalancing.balanceComplex",
+   "AlgebraicGeometry.Scheme.StrictScalarBalancing.constantRestrictionComplex",
+   "AlgebraicGeometry.Scheme.StrictScalarBalancing.PullReductionNormalized",
+   "AlgebraicGeometry.Scheme.StrictScalarBalancing.PullReductionComputes",
+   "AlgebraicGeometry.Scheme.StrictScalarBalancing.towerSquare",
+   "AlgebraicGeometry.Scheme.StrictScalarBalancing.PullCompatibility",
+   "AlgebraicGeometry.Scheme.StrictScalarBalancing.BalancingComputes",
+   "AlgebraicGeometry.Scheme.StrictScalarBalancing.AugmentationComputes",
+   "AlgebraicGeometry.Scheme.StrictScalarBalancing.DeltaRestrictionComputes",
+   "AlgebraicGeometry.Scheme.StrictScalarBalancing.Balancing",
+   "AlgebraicGeometry.Scheme.StrictScalarBalancing.strictQuotientScalarBalancing"
+  ],
+  "file": "lean/Sheaf/Paper/StrictQuotientScalarBalancing.lean",
+  "statement": "theorem strictQuotientScalarBalancing (d : AdicCoefficientDatum A) : Nonempty (Balancing d)",
+  "branch": "sheaf-dag",
+  "by": "NU",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-874ed4dd8",
+  "group": "NU",
+  "result": "pass",
+  "note": "Clause-by-clause match with node: ρ (inverse of common-quotient comparison) pinned by BalancingComputes on flat-term K-flat reps via reductionTowerComparisonComplex; augmentation pinned to reductionUnit, δ to Iso.refl square, augmentation_equation as node; a/p pinned through ordinaryPullComparison (insertion ∃!), τ and constant reassociation via PullReductionNormalized + K-flat formula; final equation arrow types/order traced = q r(τ) = R0(a) ρ. PullModel existential harmless (unique up to derived-functor iso). No extra hypotheses; A:Type(u+1) is the datum's convention; AsSmall model site; edge cases I=0, I=A, A=0, empty T, n+1 indexing, identity f covered. Statement verbatim; dep records byte-identical to side-live; stmt_deps = base; not dropped; only sorry is the theorem; docstrings OK. No file changed, no compile. Advisories: A1 ~25 ConstantCompletion plain decls owned by theorem lem-weil-pbc-constant-completion-equivalence used without stmt_dep (base stmt_deps unchanged, theorem not added → advisory, add the NL-20711db3 def node later); A2 Classical.choice InverseImageData pinned up to transport (Q32 precedent); A3 ConstantCompletion parallels of profinite/flat-restriction/tensor-pullback dep decls need stage-3 bridge; A4 ρ formula = derivedReductionTowerComparison."
  }
 }

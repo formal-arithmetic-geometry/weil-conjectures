@@ -22135,3 +22135,6 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 10:13 L: returned deliver/NQ/sk-thm-picard-rr (reviewer RETURN: L: independent stage-2 immutable head 872d46cafd32: H4/H2: picardRRPullbackIso uses Classical.choose of exists_tensorPul)
 - 10:13 L: returned deliver/Q58/lem-sf-boundary-bounded-tensor-comparison (reviewer RETURN: L: independent stage-2 immutable head edfbd9866b70: H13: the delivery replaces Q28's landed def-pc-kflat-complex lean re)
 - 10:14 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
+- 10:15 L: merged deliver/NL/lem-weil-constant-scalar-unit-quasi-isomorphism (stage 2; reviewer FIX; parallel immutable checks)
+- 10:15 L: merged deliver/NU/lem-weil-pbc-strict-quotient-scalar-balancing (stage 2; reviewer PASS; parallel immutable checks)
+- 10:15 L: merged deliver/Q102/lem-a1-integral-stratum-chart-restrictions (stage 2; reviewer PASS; parallel immutable checks)
