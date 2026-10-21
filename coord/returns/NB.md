@@ -84,10 +84,10 @@ L: independent stage-2 immutable head cfd6713a8ff9: H3/H13: the bound AlgebraicG
 
 L: approved by the reader, but the landing refused it: NOT MERGED lem-trf-restricted-quotient-complete: lem-trf-restricted-quotient-complete: completed in this project's DAG but not in the live DAG the queue reads (side completion never promoted; L promotes it) Rebase the delivery onto the current DAG, re-read every cited node that changed, adjust the split, and push again.
 
-## lem-weil-pbc-projection-mate-square-coherence (2026-10-21 09:16 UTC, branch head 38d06e5fe0f)
-
-L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-pbc-projection-mate-square-coherence: lem-weil-pbc-projection-mate-square-coherence: completed in this project's DAG but not in the live DAG the queue reads (side completion never promoted; L promotes it) Rebase the delivery onto the current DAG, re-read every cited node that changed, adjust the split, and push again.
-
 ## lem-pur-completed-primitive-counit-comparison (2026-10-21 09:25 UTC, branch head ed0adcb4771)
 
 L: independent stage-2 immutable head ed0adcb47716: H3 (hollow pin): the tensor realization rT, and so beta_T, is pinned to IntegralOnSlice.completedTensor_global_comparison(...).some, which is Classical.choice of a Nonempty theorem and therefore an arbitrary natural iso. The target functor has nontrivial automorphisms (-1, units of O_E), and the parent's intrinsic tensorRealization cannot match it. Fix: pin rT against the intrinsic composite (completion.map of duality.models.comparison inverse at (P,Q), then completionComparison at the good total tensor, then a generator-pinned strict iso from the slice tower), or make the global comparison a characterized def via a section 1(B) repair of IntegralDerivedOperationsOnSlices. All other clauses checked: hypotheses, n>=1 indexing, normalization, Roos rho computes and projections, rF via IsIntegralComparisonPullbackNormalized against the jointly chosen integralDerivedPullbackComparison, counit IsIso, beta hom/inv formulas, naturality, counit naturality, adjunct of projection, projection naturality; edge cases fine; stmt_dep additions are existing landed definition nodes; report sections and docstrings present; no recompile, no FIX files.
+
+## lem-weil-pbc-projection-mate-square-coherence (2026-10-21 09:32 UTC, branch head 404b08c2ec2)
+
+L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-pbc-projection-mate-square-coherence: lem-weil-pbc-projection-mate-square-coherence: completed in this project's DAG but not in the live DAG the queue reads (side completion never promoted; L promotes it) Rebase the delivery onto the current DAG, re-read every cited node that changed, adjust the split, and push again.
