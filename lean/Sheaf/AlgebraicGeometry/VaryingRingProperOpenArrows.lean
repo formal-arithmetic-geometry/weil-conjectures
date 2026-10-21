@@ -6,7 +6,6 @@ Authors: SHEAF group Q47
 module
 
 public import Sheaf.AlgebraicGeometry.VaryingRingOperations
-public import Sheaf.AlgebraicGeometry.StrictTowerProperOpenCalculus
 public import Sheaf.Paper.ConstantTowerDirectImageNormalization
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 import Mathlib.CategoryTheory.Adjunction.FullyFaithful

@@ -17,7 +17,6 @@ import WeilConjectures.Algebra.Homology.HomComplexComponents
 import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.InternalHomUnit
 import Sheaf.Algebra.Homology.RingedDerivedClosedSymmetricMonoidal
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
-import Sheaf.CategoryTheory.RingedSiteHomComponentProjection
 /-! # Canonical coefficient-duality maps on a ringed site
 
 Source: Stacks Project, sites-cohomology.tex, Tags 08JD, 08JE, 0A97 and 0A98
@@ -779,7 +778,7 @@ private theorem ringedSiteBidualFormula_ext
     (hβ : RingedSiteBidualFormula.{c, v, r} J R E β)
     (hγ : RingedSiteBidualFormula.{c, v, r} J R E γ) : β = γ := by
   unfold RingedSiteBidualFormula at hβ hγ
-  simp only [WeilConjectures.coefficientHomComponent_eq_homComplexπ] at hβ hγ
+  unfold WeilConjectures.coefficientHomComponent at hβ hγ
   apply HomologicalComplex.hom_ext
   intro i
   apply homComplex_hom_ext.{c, v, max c v r, max c v r}
@@ -826,9 +825,8 @@ theorem ringedSiteOrdinaryBidual_existsUnique (E : CochainComplex (SheafOfModule
         exact ringedSiteBidualDegree_comm.{c, v, r} J R E i }
   have hβ : RingedSiteBidualFormula.{c, v, r} J R E β := by
     intro i q h h' U x W φ
-    simpa only [WeilConjectures.coefficientHomComponent_eq_homComplexπ] using
-      ringedSiteBidualDegree_eval.{c, v, r} J R E
-        (ringedSiteDualityUnitComplex.{c, v, r} J R) i q 0 h' U x W φ
+    exact ringedSiteBidualDegree_eval.{c, v, r} J R E
+      (ringedSiteDualityUnitComplex.{c, v, r} J R) i q 0 h' U x W φ
   exact ⟨β, hβ, fun γ hγ ↦ ringedSiteBidualFormula_ext.{c, v, r} J R E γ β hγ hβ⟩
 
 end OrdinaryBidualConstruction
