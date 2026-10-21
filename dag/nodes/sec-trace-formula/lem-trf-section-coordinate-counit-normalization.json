@@ -26,7 +26,15 @@
   "def-weil-etale-morphism",
   "lem-amb-affine-space-top-trace",
   "lem-amb-etale-adjoint-locality",
-  "prop-asd-smooth-base-change"
+  "prop-asd-smooth-base-change",
+  "def-pur-noetherian-section-specialization-arrows",
+  "def-trf-section-local-comparison-data",
+  "def-trf-section-centred-chart-data",
+  "def-trf-coordinate-counit-arrows",
+  "def-amb-affine-trace-construction",
+  "def-amb-affine-linear-trace-action",
+  "def-asd-ordinary-finite-p1-data",
+  "def-asd-ordinary-finite-p1-arrows"
  ],
  "proof": [
   {
@@ -238,5 +246,30 @@
   "group": "Q124",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q124-6f51ea121 (reviewer sub-agent of L); spot-checked: I read the whole item. This delivery changes only the split-owned fields; statement, stmt_deps and blueprint are identical to live, where the item is still unsplit. It adds no new nodes. It expands the five-sentence Step 15 in Q58's report on the parent lem-trf-finite-ring-section-deformation into six explicit steps. No re-split repair note exists for this item and it is not in the dropped list. Sources: main-20261015 sk-thm-dnc 'Local construction' (lines 13-37: x_i=t u_i, the two affine identifications, correction at t=1) and orientation-charts Step 3 ('pulled-back comparison is the identity at t=1'). This is the blueprint's DNC route; no SGA is cited. Step 1: the composite tower adjunction F_d -| p^*(d)[2d] is built from unbounded pieces; I checked that lem-asd-ordinary-finite-p1-adjunction holds on the entire categories. The unbounded comparisons identify F_d with Rp_!, and they restrict to the bounded-below comparisons used to define t_p. Uniqueness of right adjoints then makes alpha_p invertible, without inferring that from the transpose alone. Step 2: the counit-defined beta of prop-asd-smooth-base-change, naturality of C, Step 1 and the trace base-change equality t_{p'} C = v^* t_p give the adjunct identity; I re-derived it. Step 3: in the Rees model R[x][t,x/t]=R[t,u] the fibre at 1 is u=x. Step 2 over X=A^1_S with v=i_1, restricted to the zero section, gives theta i_1^* o_F = o_C, hence i_1^* lambda_0 = theta. Step 4: the Rees etale clause applies to e (Cartesian centres by hypothesis) and to j (U contains s(T), so the square is Cartesian). The finite-type and Noetherian checks use the cited Mathlib leaves. Step 5: the etale clause of the sibling lem-trf-section-exceptional-fibre-coherence gives the two squares; I checked their map directions and that only the statement is used. Its base-change clause identifies theta_T with theta restricted to T. Step 6: I checked the cancellation, which gives h=1. Coefficient categories are ordinary unbounded etale D(T_et,A) with A finite and N invertible throughout; no pro-etale or ctf substitution. Edge cases checked: d=0, empty base, N=1 (so A=0), nonflat v. Duplicate search found no duplicate: det-sp-orientation-* (Z/l^n pro-etale), cor-pur-vector-bundle-purity, det-sp-tower-exceptional-bc, lem-amb-affine-trace-tower-counit-base-change (F_d counit only), lem-per-ordinary-smooth-orientation (F_l) and the sibling lem-trf-section-local-dualizing-comparisons (builds h_i; this item proves h_i=1) all differ. No cycle: the cited siblings are unsplit with empty proof_deps. Route: sk-prop-an and sk-prop-sf-cbc are reachable from sk-i-curve-zero, so no tool_uses are needed. Advisory only: the unchanged statement uses 'Rees family/deformation' without a defining stmt_dep, which is a pre-existing gap from Q58's extraction."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SectionCoordinateCounitNormalization",
+  "declaration": "AlgebraicGeometry.Etale.sectionCoordinateCounit_normalization",
+  "declarations": [
+   "AlgebraicGeometry.Etale.affineCoordinateCounit_baseChange",
+   "AlgebraicGeometry.Etale.exists_coordinateCounitAdjunction",
+   "AlgebraicGeometry.Etale.sectionCoordinateCounit_standard",
+   "AlgebraicGeometry.Etale.sectionCoordinateCounit_normalization"
+  ],
+  "file": "lean/Sheaf/Paper/SectionCoordinateCounitNormalization.lean",
+  "statement": "theorem sectionCoordinateCounit_normalization (N : ℕ) (hN : 0 < N) (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA) (D : ∀ (T : Scheme.{u}) [IsNoetherian T] (hT : IsUnit (N : Γ(T, ⊤))), OrdinaryFiniteP1Datum A N hA t T hT) {V S : Scheme.{u}} [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ) (g : V ⟶ S) [SmoothOfRelativeDimension d g] [IsSeparated g] [QuasiCompact g] [HasCompactification g] (s : S ⟶ V) [IsClosedImmersion s] (hs : s ≫ g = 𝟙 S) [HasCompactification (Scheme.Hom.deformationSpaceProj g s)] (c : Chart d g s hs) : ∃ (adjC : rightDerivedLowerShriek (ModuleCat.{u + 1} A) (AffineSpace (ULift.{u} (Fin d)) c.T ↘ c.T) ⊣ affineRight A N hA c.T d) (adjF : rightDerivedLowerShriek (ModuleCat.{u + 1} A) (AffineSpace (ULift.{u} (Fin d)) (AffineSpace (ULift.{u} (Fin 1)) c.T) ↘ _) ⊣ affineRight A N hA (AffineSpace (ULift.{u} (Fin 1)) c.T) d), @CoordinateCounitArrows.IsNormalized N hN A _ _ hA t D c.T (chartGeometry d g s hs c).noethT (invertibleOnSource N c.b hS) d adjC ∧ @CoordinateCounitArrows.IsNormalized N hN A _ _ hA t D (AffineSpace (ULift.{u} (Fin 1)) c.T) (chartGeometry d g s hs c).noethLine (invertibleOnSource N (AffineSpace (ULift.{u} (Fin 1)) c.T ↘ c.T) (invertibleOnSource N c.b hS)) d adjF ∧ ∃ (oC : (upperStar (ModuleCat.{u + 1} A) c.b).leftDerivedFunctor.obj (sectionInvariant A g s) ≅ SectionLocalDualizingComparisons.tateObject A N hA c.T d) (oF : (upperStar (ModuleCat.{u + 1} A) (AffineSpace.map (ULift.{u} (Fin 1)) c.b)).leftDerivedFunctor.obj (family A g s) ≅ SectionLocalDualizingComparisons.tateObject A N hA (AffineSpace (ULift.{u} (Fin 1)) c.T) d) (theta : (upperStar (ModuleCat.{u + 1} A) (AffineSpace.oneSection (ULift.{u} (Fin 1)) c.T)).leftDerivedFunctor.obj ((upperStar (ModuleCat.{u + 1} A) (AffineSpace.map (ULift.{u} (Fin 1)) c.b)).leftDerivedFunctor.obj (family A g s)) ≅ (upperStar (ModuleCat.{u + 1} A) c.b).leftDerivedFunctor.obj (sectionInvariant A g s)), oC.hom = localSourceMap A N hN hA hS d g s hs c adjC ∧ oF.hom = localFamilyMap A N hN hA hS d g s hs c adjF ∧ theta.hom = restrictedTheta A g s hs c.b ∧ (restrictionAtOne A c.T (rawComparison A N hN hA c.T (invertibleOnSource N c.b hS) d _ _ oC oF)).hom = restrictedTheta A g s hs c.b ∧ discrepancy A c.T (rawComparison A N hN hA c.T (invertibleOnSource N c.b hS) d _ _ oC oF) theta = Iso.refl _",
+  "branch": "newtargets-dag",
+  "by": "Q70",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Repairs independent return L on 8129faf75aff: SectionComparisonArrows replaces theorem-owned plain definitions; landed local comparison and centred-chart definitions replace the parent theorem import. The affine-open clause retains Chart.b to the original general S and equates restrictionAtOne to restrictedTheta, with discrepancy=refl. The separate definition node fixes the affine orientations by the actual ordered counit transpose. All adjunction presentations are supplied as conclusions, not extra orientation assumptions."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e06357d87",
+  "group": "Q70",
+  "result": "pass",
+  "note": "Re-delivery fixes all three findings of the 8129faf75aff RETURN. (1) lem-pur-noetherian-etale-section-specialization is no longer cited; family/sectionMap/atOne come from SectionComparisonArrows (owner def-pur-noetherian-section-specialization-arrows, now in stmt_deps). (2) FiniteRingSectionDeformation is no longer imported; my recursive import walk (9138 modules) reaches neither it nor NoetherianEtaleSectionSpecialization; the two proof-only sibling imports form no cycle. The missing counit transpose has its own definition node def-trf-coordinate-counit-arrows (§1(A)) with real data: towerAdjoint = homEquiv(compact comparison inv ≫ tower counit ≫ unit iso), and standardAdjoint transports it by fixed coordinate-iso, Tate-pullback and Cartesian base-change maps (standardSquare and tateFlat are true). (3) S stays general with affine open c.b; the conclusion is restrictionAtOne(rawComparison oC oF).hom = restrictedTheta … c.b, i.e. θ|_T of the original family, plus discrepancy = refl. IsNormalized pins affineDualizingIso, through which every chart map depends on adj, so the existential adjunction is not a free orientation. t and D are unique and satisfy base change (OrdinaryFiniteP1DatumUniqueness), so no hidden hD hypothesis is needed. Hypotheses match the node (Noetherian S, N a unit, smooth separated quasi-compact compactifiable g, closed section, compactifiable Rees projection); edge cases d=0, empty schemes, A=0 and non-flat v are covered. Ordinary unbounded étale categories, no pro-étale substitute. lean.statement verbatim in both nodes; all 12 declarations exist; only sorry proofs; docstrings carry source and blueprint tags; only the four delivery files differ from live. No compile by me (no file changed); the worker's dry run reports both modules compiling. Advisories: the base-change clause is on the tower model rather than standard A^d; the landed Chart requires U affine; four proof-only imports (H9); pre-existing Rees-family stmt_dep gap."
  }
 }

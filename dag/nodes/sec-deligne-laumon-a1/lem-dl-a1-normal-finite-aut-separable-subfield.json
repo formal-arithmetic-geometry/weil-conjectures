@@ -223,5 +223,23 @@
   "group": "N5",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-eb9a65089 (reviewer sub-agent of L); spot-checked: Read the item in full. The split is statement-preserving with no new nodes: six steps, eight proof_deps, all of them Mathlib-leaf nodes whose statements I opened. Step 1: E_s is a subfield, and finitely many of its elements generate a finite extension (generators node). Step 2: primitive element, using finiteness and separability of F ⊆ E_s; power basis; deg P = d proved explicitly because the power-basis node does not state it. Step 3: an algebraic closure Ω of E and the distinct-roots node give d distinct roots, and normality puts them in E (evaluating the factorization). Step 4: the normal-conjugacy node (algebraic and normal, no finiteness needed) maps G onto the roots, so [F:k] ≤ |G|. Steps 5–6: an elementary maximal-degree argument gives E_s = F_0. Small cases: the perfect closure of F_p(t) shows E/k need not be finite; Q(∛2) shows normality is needed. Sources: pione.tex 0BST (lemma-inertia-invariants-etale, l.2665ff) has exactly the 'algebraic, normal, finite automorphism group' hypotheses; the cited fields.tex labels exist. No SGA citation. No duplicate in the DAG (rg -L over finite-Aut and separable-closure-finite candidates). No repair or re-split note, no slopmaster2 declaration. Other-unit nodes are all Mathlib leaves, so no tool_uses are needed. Blueprint from/same_as and split_report are present."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.NormalFiniteAutSeparableSubfield",
+  "declaration": "separableClosure.finiteDimensional_of_normal_of_finite_aut",
+  "file": "lean/Sheaf/FieldTheory/NormalFiniteAutSeparableSubfield.lean",
+  "statement": "theorem finiteDimensional_of_normal_of_finite_aut (k : Type u) (E : Type v) [Field k] [Field E] [Algebra k E] [Normal k E] [Finite (E ≃ₐ[k] E)] : FiniteDimensional k (separableClosure k E)",
+  "branch": "newtargets-dag",
+  "by": "NG",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-547436e2b",
+  "group": "NG",
+  "result": "pass",
+  "note": "The node's lean record is the only change. The statement field matches the file verbatim. Algebra field extension, Normal (covers algebraicity and splitting), Finite (E ≃ₐ[k] E), separableClosure k E (dep mathlib_match) and FiniteDimensional k (separableClosure k E) render each clause exactly. No finite-dimensionality of E/k and no extra hypotheses; independent universes u v. Statement true and node proof sound; edge cases E=k, infinite purely inseparable, separable E covered. No duplicate in Mathlib or project (FiniteSeparableClosure needs finitely generated). Proof is sorry only; docstrings carry source, blueprint id and all 6 steps; lines within 100 chars. Advisory H9: proof-only imports unused in the sorry module, and Algebra.Defs redundant."
  }
 }
