@@ -3,25 +3,99 @@
  "blueprint": {
   "is": "def-wf-tate-twist",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Tate twists",
- "statement": "On the pro-etale site put\n\n$$\n\\mathbf Z_\\ell(1)=\\varprojlim_n\\mu_{\\ell^n},\\qquad\nE(1)=\\mathbf Z_\\ell(1)\\otimes_{\\mathbf Z_\\ell}E,\n$$\n\nwith transition the $\\ell$-th power map.\nPut $E(0)=E_X$, $E(m)=E(1)^{\\otimes^L_E m}$ for $m>0$, and\n$E(-m)=R\\operatorname{Hom}_E(E(m),E_X)$ for $m>0$, with the induced\ntensor and internal-Hom arrows. The *Tate twist* functor is\n\n$$\n(-)(m)=-\\otimes^L_E E(m):\\mathrm{WeilD}(X_0,E)\n\\longrightarrow\\mathrm{WeilD}(X_0,E).\n$$",
+ "statement": "Fix the finite-field and coefficient data of [def-wf-weil-category]: distinct primes $p,\\ell$, $a\\geq1$, $q=p^a$, $k_0=\\mathbf F_q$, $k=\\overline{\\mathbf F}_q$, a chosen algebraic closure $\\overline{\\mathbf Q}_\\ell$, a finite intermediate extension $E/\\mathbf Q_\\ell$, and a separated finite-type $k_0$-scheme $X_0$. Put $X=X_0\\times_{k_0}k$ and $\\Phi_X=\\operatorname{id}_{X_0}\\times\\operatorname{Spec}((z\\mapsto z^q)^{-1})$. Let $R=\\mathcal O_E$ and choose a uniformizer $\\varpi$. All sheaves below are on the small pro-etale site [def-weil-pbc-proetale-site]. Use the completed coefficient sheaf $B=\\varprojlim_{n\\geq1}(R/\\varpi^n)_X$ and the raw rational coefficient category $\\mathcal C_E=D^b_c(X,E)$ of [def-wf-weil-category]; in particular rational objects and arrows are obtained by inverting $\\varpi$ on integral representatives. Write $P_E=\\Phi_X^*$ for its completed, rationalized pullback, which in this automorphism case is exact coefficient transport as specified in that node.\n\nFor $r\\geq1$ use the roots-of-unity sheaf [def-pur-roots-of-unity-sheaf]\n$$\n \\mu_{\\ell^r,X}(U)=\\{u\\in\\Gamma(U,\\mathcal O_U)^\\times:u^{\\ell^r}=1\\},\n \\qquad t_r(u)=u^\\ell.\n$$\nUsing the sectionwise inverse limit of sheaves [def-pur-sheaf-inverse-limit], define\n$$\n \\mathbf Z_\\ell(1)_X=\\varprojlim_{r\\geq1}(\\mu_{\\ell^r,X},t_r),\n \\qquad L_R=\\mathbf Z_\\ell(1)_X\\otimes_{(\\mathbf Z_\\ell)_X}(R)_X\n$$\nas in [def-coefficient-twists-detailed]. Parenthesized rings here denote discrete constant sheaves; the limit has its completed $\\widehat{\\mathbf Z}_{\\ell,X}$-action: if $b=(b_r)$ is a compatible coefficient section and $u=(u_r)$ a compatible root section, $(b\\cdot u)_r=u_r^{b_r}$. Here exponentiation by $b_r$ means the action of $\\mathbf Z/\\ell^r\\mathbf Z$ on $\\mu_{\\ell^r,X}$. Give $L_R$ the resulting completed $B$-module structure of [lem-pur-twist-sheaf-locally-free], clauses 2 and 3. Define $E(1)$ to be the image of $L_R[0]$ in $\\mathcal C_E$, and $E_X$ the image of $B[0]$. These integral objects belong to the integral coefficient category: $L_R$ is pro-etale locally free of rank one by that lemma, and $B$ is the free module of rank one, so the single-stratum perfect-complex criterion [lem-weil-pbc-integral-stratified-perfect-characterization], with the complex $R[0]$, supplies precisely the bounded-constructible and compatible etale-origin conditions of [def-wf-weil-category]. The source notation\n$$E(1)=\\mathbf Z_\\ell(1)_X\\otimes_{\\mathbf Z_\\ell}E$$\nmeans this integral scalar extension followed by rationalization, as in [def-coefficient-twists-detailed].\n\nEquip these objects with the following specified Weil maps. For every $r$, use the roots-of-unity pullback comparison $c_r:\\Phi_X^{-1}\\mu_{\\ell^r,X}\\to\\mu_{\\ell^r,X}$ of [def-pur-roots-of-unity-inverse-image]. It is an isomorphism, is semilinear over the canonical constant coefficient map, and commutes with $t_r$ by [lem-pur-roots-of-unity-inverse-image-iso], clauses 1--3. Set\n$$\n \\tau_{\\mathbf Z_\\ell(1)}:\n \\Phi_X^{-1}\\mathbf Z_\\ell(1)_X\n \\xrightarrow{\\sim}\\varprojlim_r\\Phi_X^{-1}\\mu_{\\ell^r,X}\n \\xrightarrow{\\varprojlim_r c_r}\\mathbf Z_\\ell(1)_X,\n$$\nusing preservation of limits by the site equivalence [lem-weil-proetale-isomorphism-inverse-image], clause 2. On $B$ take the map $\\tau_B$ obtained from the same limit comparison and the canonical constant maps $\\Phi_X^{-1}(R/\\varpi^n)_X\\cong(R/\\varpi^n)_X$ of clause 3 of that node. On $L_R$ take the inverse-image tensor comparison [lem-pur-isomorphism-inverse-image-tensor-hom] followed by $\\tau_{\\mathbf Z_\\ell(1)}\\otimes c_R$, with $c_R:\\Phi_X^{-1}(R)_X\\cong(R)_X$ the constant-ring map. This map is semilinear over $\\tau_B$: after reduction its scalar identity is $c_r(b_r\\cdot u_r)=c_{\\mathbf Z/\\ell^r}(b_r)\\cdot c_r(u_r)$ and the tensor balancing identity for $c_R$. Thus, after the completed coefficient identification in $P_E$, these are linear isomorphisms. Place them in degree zero and rationalize to obtain\n$$\\varphi_0:P_EE_X\\xrightarrow{\\sim}E_X,\\qquad\n\\varphi_1:P_EE(1)\\xrightarrow{\\sim}E(1).$$\nHence $E_X$ and $E(1)$ denote the resulting Weil pairs when used in $\\mathrm{WeilD}(X_0,E)$.\n\nUse the completed, rationalized derived tensor and its induced tensor Weil map of [def-wf-tensor-product], and the derived internal Hom and its conjugation Weil map of [def-wf-internal-hom]. Define\n$$\n E(0)=E_X,\\qquad E(m)=E(1)^{\\otimes_E^{\\mathbf L}m}\\ (m>0),\\qquad\n E(-m)=R\\mathcal Hom_E(E(m),E_X)\\ (m>0).\n$$\nThe tensor power is the left-associated $m$-fold tensor, starting with $E(1)$ at $m=1$. The indicated tensor and internal-Hom arrows are exactly those of the cited definitions; in particular internal Hom uses the inverse of the first argument's Weil map contravariantly. Their restriction to Weil complexes is supplied by [lem-wf-tensor-weil] and [lem-wf-internal-hom-weil]. For every integer $m$, define the Tate twist functor by\n$$\n (-)(m):\\mathrm{WeilD}(X_0,E)\\longrightarrow\\mathrm{WeilD}(X_0,E),\n \\qquad W\\longmapsto W\\otimes_E^{\\mathbf L}E(m),\\qquad\n u\\longmapsto u\\otimes_E^{\\mathbf L}\\operatorname{id}_{E(m)}.\n$$\nFunctoriality and the commuting Weil square are the bifunctoriality in [lem-wf-tensor-weil].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-d-ab-cyclotomic/def-wf-tate-twist.md",
   "place": "node def-wf-tate-twist, order 2566"
  },
  "stmt_deps": [
   "def-weil-pbc-proetale-site",
-  "def-wf-weil-category"
+  "def-wf-weil-category",
+  "def-pur-roots-of-unity-sheaf",
+  "def-pur-sheaf-inverse-limit",
+  "def-coefficient-twists-detailed",
+  "lem-pur-twist-sheaf-locally-free",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "def-pur-roots-of-unity-inverse-image",
+  "lem-pur-roots-of-unity-inverse-image-iso",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-pur-isomorphism-inverse-image-tensor-hom",
+  "def-wf-tensor-product",
+  "def-wf-internal-hom",
+  "lem-wf-tensor-weil",
+  "lem-wf-internal-hom-weil"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"tateTwist\"",
+   "results": "No hits. Read the returned concepts: generic monoidal complexes, condensed modules and field cyclotomic characters do not give the finite-stage adic Weil twist definition.",
+   "date": "2026-10-21",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tate twist functor on derived Weil sheaves with finite l-adic coefficient field defined from inverse limit of roots of unity",
+   "results": "Returned 8 hits: LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondMod.LocallyConstant.functor, LightCondAb.ofSheafLightProfinite, LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology, CompHausLike.LocallyConstantModule.functor, LightCondMod.ofSheafLightProfinite, CondensedMod.LocallyConstant.functor Read the returned concepts: generic monoidal complexes, condensed modules and field cyclotomic characters do not give the finite-stage adic Weil twist definition.",
+   "date": "2026-10-21",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "grep",
+   "query": "tateTwist|TateTwist|Tate.twist|cyclotomic",
+   "subdirectory": "AlgebraicGeometry",
+   "results": "No hits. Read the returned concepts: generic monoidal complexes, condensed modules and field cyclotomic characters do not give the finite-stage adic Weil twist definition.",
+   "date": "2026-10-21",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tate twist of l-adic Weil complexes as derived tensor product with the cyclotomic rank one sheaf",
+   "results": "Returned 8 hits: HomologicalComplex.tensorObj, CategoryTheory.TwistShiftData.instCategoryCategory, HomologicalComplex.tensorHom, HomologicalComplex.instHasTensorTensorUnit_1, HomologicalComplex.instHasTensorTensorUnit, HomologicalComplex.HasTensor, HomologicalComplex.instHasTensorOfHasTensorX, HomologicalComplex.monoidalCategoryStruct Read the returned concepts: generic monoidal complexes, condensed modules and field cyclotomic characters do not give the finite-stage adic Weil twist definition.",
+   "date": "2026-10-21",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "grep",
+   "query": "Tate|rootsOfUnity|cyclotomic",
+   "subdirectory": "AlgebraicGeometry/Sites",
+   "results": "No hits. Read the returned concepts: generic monoidal complexes, condensed modules and field cyclotomic characters do not give the finite-stage adic Weil twist definition.",
+   "date": "2026-10-21",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse limit of sheaves of l power roots of unity defines cyclotomic Tate twist and its positive tensor powers and negative duals",
+   "results": "Returned 8 hits: cyclotomicCharacter, cyclotomicCharacter.toFun_apply, modularCyclotomicCharacter', LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, cyclotomicCharacter.toZModPow_toFun, cyclotomicCharacter.toFun, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, modularCyclotomicCharacter Read the returned concepts: generic monoidal complexes, condensed modules and field cyclotomic characters do not give the finite-stage adic Weil twist definition.",
+   "date": "2026-10-21",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "grep",
+   "query": "def.*tensorObj|def.*tensorHom|structure.*HasTensor",
+   "subdirectory": "Algebra/Homology/Monoidal.lean",
+   "results": "No hits. Read the returned concepts: generic monoidal complexes, condensed modules and field cyclotomic characters do not give the finite-stage adic Weil twist definition.",
+   "date": "2026-10-21",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "grep",
+   "query": "noncomputable def cyclotomicCharacter|def modularCyclotomicCharacter",
+   "subdirectory": "NumberTheory/Cyclotomic/CyclotomicCharacter.lean",
+   "results": "Five candidate-source lines returned in CyclotomicCharacter.lean (modularCyclotomicCharacter.aux:93, modularCyclotomicCharacter.toFun:123, modularCyclotomicCharacter′:190, modularCyclotomicCharacter:212, cyclotomicCharacter.toFun:263). Read lines 250--325, including cyclotomicCharacter:307: this is a character of automorphisms of one domain, not a sheaf or a Weil-complex twist. The helper formats single-file grep fields incorrectly; no leaf declaration is claimed.",
+   "date": "2026-10-21",
+   "verdict": "no match for the item"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -50,5 +124,21 @@
   ],
   "sorry_free": true,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "def-wf-tate-twist",
+  "worker": "stage1",
+  "summary": "Definition-only split with no new nodes. Unpacked the inherited finite-field/scheme/coefficient setting, roots-of-unity inverse limit and completed integral lattice, its raw rationalization, canonical Weil maps, all signed twists and the functor on arrows. Reused the integral stratified-perfect characterization to verify that rank-one lattices belong to the precise coefficient category, including compatible etale-origin witnesses. Reused existing tensor/internal-Hom constructions and restriction statements, never the circular twist-compatibility node. The old recorded Qbar Lean definitions cover only a different coefficient specialization and do not attach the whole finite-E item. All Mathlib queries were actually run; two phrasings found only generic ingredients.",
+  "blueprint": "Realizes every clause of def-wf-tate-twist in both master order 2566 and unchanged main-20261015 order 2910: the roots inverse limit and ell-th power transitions; E(1) via its integral lattice; E(0), positive tensor powers, negative derived duals and their induced Weil arrows; the Tate twist endofunctor. The enclosing cyclotomic unit is a definition with no proof steps, and this item is not its key node. Related ordinary/condensed coefficient twists omit these finite-stage Weil pairs and are not identical definitions.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q111-e4644082c",
+  "group": "Q111",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q111-e4644082c (reviewer sub-agent of L); spot-checked: PASS, no fixes. Shape (A): the delivery is one commit containing the item and its report; review_split gives PASS with 0 new nodes. Base: the item was 'imported' in an earlier run's snapshot and in both clones (live, side-live), so this is its first split. It is not superseded, has no repair note, is not dropped, and no SGA source is cited. Source: master order 2566 and main-20261015 order 2910 are verbatim identical apart from frontmatter. The delivered statement keeps every clause of the source (Z_ell(1) as lim mu with ell-power transitions; E(1) = Z_ell(1) tensor E; E(0); derived tensor powers E(m); E(-m) = RHom(E(m), E_X); and (-)(m) = - tensor^L E(m) on WeilD(X_0,E)) and only makes the inherited setting and the Weil maps explicit. I checked all 15 stmt_deps against how the item uses them: the setting matches def-wf-weil-category; mu, the transitions and the module structure come from def-pur-roots-of-unity-sheaf; the limit from def-pur-sheaf-inverse-limit; local freeness of the lattice and Zl-hat tensor R = B from lem-pur-twist-sheaf-locally-free clauses 2 and 3. Membership in the integral category comes from lem-weil-pbc-integral-stratified-perfect-characterization, (ii) implies (i), with one stratum and P = R[0]; its hypotheses hold because X is of finite type over k, hence noetherian and finite-dimensional, with ell != p invertible. The maps c_r come from def-pur-roots-of-unity-inverse-image and lem-pur-roots-of-unity-inverse-image-iso clauses 1-3. tau_B comes from lem-weil-proetale-isomorphism-inverse-image clauses 2 and 3 and is the same map as the coefficient identification in def-wf-automorphism-completed-transport and def-wf-tensor-product. The extension to L_R uses sigma from lem-pur-isomorphism-inverse-image-tensor-hom; its semilinearity over tau_B is a short check from clause 2 plus naturality. The tensor and internal-Hom Weil maps come from def-wf-tensor-product and def-wf-internal-hom (the latter uses phi_K^{-1} contravariantly), and restriction to WeilD from lem-wf-tensor-weil and lem-wf-internal-hom-weil. The full dependency closure (11,899 nodes) does not contain the item, so there is no cycle. Duplicate search: def-coefficient-twists-detailed has no Weil structure and is cited for the lattice; def-weil-frobenius-coefficient-twists is a separate blueprint node in D^b_{c,W}(Y,Lambda) with sheaf-level powers, related but not the same definition (advisory only: a future comparison of the two Weil structures may be worth recording); sk-def-sp-tate-twist uses another coefficient model. The slopmaster2 TateTwist.lean declarations build Qbar constant Weil twists, not this finite-E definition, so they are not an exact attachment; keeping the record unchanged is right. Edge cases checked: m = 0, 1, -1; E = Q_ell; ramified E (the ell-power tower against the varpi-power tower, reconciled by clause 3); X empty; the geometric-Frobenius convention. Three kinds of Mathlib search are recorded (LeanSearch, LeanFinder, Loogle, grep), all with no match."
  }
 }
