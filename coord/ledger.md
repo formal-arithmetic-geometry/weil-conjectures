@@ -21127,3 +21127,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:19 L: returned deliver/Q25/lem-sfb-cohomology-tor-interval (reviewer RETURN: Returned because the item is already finished on live (B10, A7; brief-stage1 says live finished nodes win and must never)
 - 08:20 L: returned deliver/Q42/lem-sfb-sheaf-pushforward-generator-comparison (reviewer RETURN: Superseded (A7/B10): the delivery's mathematics is sound and I would PASS it on an open item, but a stage-3 landing clos)
 - 08:20 L: returned deliver/O4/lem-pe-profinite-sections-finite-quotient (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-pe-profinite-sections-finite-quotient: lem-pe-prof)
+- 08:20 L: returned deliver/NB/lem-weil-pbc-projection-mate-square-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-pbc-projection-mate-square-coherence: lem-wei)
