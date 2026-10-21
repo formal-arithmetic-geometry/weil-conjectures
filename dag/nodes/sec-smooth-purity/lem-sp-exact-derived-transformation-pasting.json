@@ -9,11 +9,125 @@
  },
  "stmt_deps": [
   "def-weil-abstract-derived-category",
-  "lem-weil-pbc-exact-functor-derived-factorization"
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-sfb-exact-derived-composition"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use right-to-left composition throughout. For a word $P=F_r\\cdots F_1$ of composable edges let $C(P)$ be its termwise functor and $T_P=D(F_r)\\cdots D(F_1)$. An empty word denotes the identity. If $t:P\\to R$ is an ordinary cell, its components $t_{K^i}$ form a complex morphism $C(t)_K$, since naturality at $d_K^i$ says $R(d_K^i)t_{K^i}=t_{K^{i+1}}P(d_K^i)$. Naturality at complex morphisms is likewise degreewise. Termwise application preserves identities, vertical composition, and either whiskering: each assertion is the same equality at each $K^i$. Thus every given ordinary equation is an equation of transformations of complex functors.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VG, lemma-properties-left-localization, functor factorization; natural-transformation enhancement in Mathlib/CategoryTheory/Localization/Predicate.lean:278-361. Agent calculation with the exact factorizations of derived.tex, Tag 015F, lemma-right-derived-exact-functor."
+   }
+  },
+  {
+   "text": "Every composite of the edges is additive and exact: apply the two functors successively to a finite limiting or colimiting cone. By [lem-weil-pbc-exact-functor-derived-factorization], each $C(F)$ preserves quasi-isomorphisms and has its chosen natural factorization $a_F:D(F)Q\\xrightarrow{\\sim}QC(F)$. For a word define a natural isomorphism $a_P:T_PQ\\xrightarrow{\\sim}QC(P)$ recursively by $a_{\\varnothing}=1_Q$ and\n$$a_{FP,K}=a_{F,C(P)K}\\circ D(F)(a_{P,K}).$$\nConsequently $T_P$ is a lift of the quasi-isomorphism-inverting functor $QC(P)$. The compositor of [lem-sfb-exact-derived-composition] is in the direction $\\mu_{F,G}:D(GF)\\to D(G)D(F)$ and satisfies $a_{GF\\text{ as a word},K}\\mu_{F,G,QK}=a_{GF,K}$, where the last factor is the chosen factorization for the single exact functor $GF$. This fixes the direction of every comparison used below.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-sfb-exact-derived-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VG, lemma-properties-left-localization, functor factorization; natural-transformation enhancement in Mathlib/CategoryTheory/Localization/Predicate.lean:278-361. Agent calculation with the exact factorizations of derived.tex, Tag 015F, lemma-right-derived-exact-functor."
+   }
+  },
+  {
+   "text": "By [def-weil-abstract-derived-category], $Q$ is a localization at quasi-isomorphisms. Apply clause (2) of [lem-weil-pbc-localization-universal-property] with target $D(\\mathcal B)$, the functors $Q_{\\mathcal B}C(P),Q_{\\mathcal B}C(R)$, lifts $T_P,T_R$ and lifting isomorphisms $a_P,a_R$. It gives the unique transformation $t^D:T_P\\to T_R$ characterized by\n$$(*)\\qquad a_{R,K}\\circ t^D_{QK}=Q(C(t)_K)\\circ a_{P,K}.$$\nFor two-edge words, first lift $C(t)$ between the single functors $D(F_2F_1),D(H_2H_1)$. The equation for $\\mu$ in [lem-sfb-exact-derived-composition] shows that conjugating this lift by $\\mu_H$ and $\\mu_F^{-1}$ satisfies $(*)$. Uniqueness identifies it with $t^D$. This is precisely inverse source composition comparison, localized cell, forward target composition comparison as required, including for a specified ordinary compositor.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-localization-universal-property",
+    "lem-sfb-exact-derived-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VG, lemma-properties-left-localization, functor factorization; natural-transformation enhancement in Mathlib/CategoryTheory/Localization/Predicate.lean:278-361. Agent calculation with the exact factorizations of derived.tex, Tag 015F, lemma-right-derived-exact-functor."
+   }
+  },
+  {
+   "text": "For $t:P\\to R$ and $s:R\\to S$, equation $(*)$ gives\n$$a_S\\,s^D_{QK}t^D_{QK}=Q(C(s)_K)\\,a_Rt^D_{QK}=Q(C(s\\circ t)_K)\\,a_P.$$\nFor the identity cell the same formula is $a_P1=Q(1)a_P$. Cancellation of $a_S$ (respectively $a_P$) and clause (3) of [lem-weil-pbc-localization-universal-property] identify the lifts with $s^D\\circ t^D$ and $1_{T_P}$, respectively. This proves the vertical-composition and identity rules without cancelling a cell.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VG, lemma-properties-left-localization, functor factorization; natural-transformation enhancement in Mathlib/CategoryTheory/Localization/Predicate.lean:278-361. Agent calculation with the exact factorizations of derived.tex, Tag 015F, lemma-right-derived-exact-functor."
+   }
+  },
+  {
+   "text": "For output whiskering, let $V$ be an additional word with source the target of $P,R$. Use $a_{VP,K}=a_{V,C(P)K}\\,T_V(a_{P,K})$ and the analogous formula for $VR$; this follows by expanding the recursion in Step 2. Naturality of $a_V$ at the complex morphism $C(t)_K$ gives the full calculation\n$$\\begin{aligned}\na_{VR,K}\\,T_V(t^D_{QK})\n&=a_{V,C(R)K}\\,T_V(a_{R,K}t^D_{QK})\\\\\n&=a_{V,C(R)K}\\,T_V(Q(C(t)_K))\\,T_V(a_{P,K})\\\\\n&=Q(C(V)(C(t)_K))\\,a_{V,C(P)K}\\,T_V(a_{P,K})\\\\\n&=Q(C(Vt)_K)\\,a_{VP,K}.\n\\end{aligned}$$\nClause (3) of [lem-weil-pbc-localization-universal-property] identifies this whiskered transformation with $(Vt)^D$. For single-composite derived functors insert the comparisons normalized in Step 2; conjugation by them gives the same formula.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VG, lemma-properties-left-localization, functor factorization; natural-transformation enhancement in Mathlib/CategoryTheory/Localization/Predicate.lean:278-361. Agent calculation with the exact factorizations of derived.tex, Tag 015F, lemma-right-derived-exact-functor."
+   }
+  },
+  {
+   "text": "For input whiskering let $U$ be a word ending at the source of $P,R$. Naturality of the already constructed transformation $t^D:T_P\\to T_R$ at the derived morphism $a_{U,K}:T_UQK\\to QC(U)K$ says\n$$T_R(a_{U,K})\\,t^D_{T_UQK}=t^D_{QC(U)K}\\,T_P(a_{U,K}).$$\nMultiplying by $a_{R,C(U)K}$ and applying $(*)$ to the complex $C(U)K$ yields\n$$a_{RU,K}\\,t^D_{T_UQK}=Q(C(t)_{C(U)K})\\,a_{P,C(U)K}\\,T_P(a_{U,K})=Q(C(tU)_K)\\,a_{PU,K}.$$\nClause (3) of [lem-weil-pbc-localization-universal-property] now gives $(tU)^D=t^DT_U$, with the prescribed comparisons if a composite is represented by one derived functor. This uses naturality on the actual derived morphism $a_{U,K}$; it does not assume that this morphism comes from a complex morphism.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VG, lemma-properties-left-localization, functor factorization; natural-transformation enhancement in Mathlib/CategoryTheory/Localization/Predicate.lean:278-361. Agent calculation with the exact factorizations of derived.tex, Tag 015F, lemma-right-derived-exact-functor."
+   }
+  },
+  {
+   "text": "For completeness the canonical comparison $c_P:D(P)\\to T_P$ is the lift of the identity of $QC(P)$, using the chosen single-functor factorization $a_{P\\mathrm{,single}}$ and the word factorization $a_P$. Clause (2) of [lem-weil-pbc-localization-universal-property] makes it an isomorphism with $a_Pc_{P,QK}=a_{P\\mathrm{,single}}$. For a two-edge word it is exactly $\\mu$ by [lem-sfb-exact-derived-composition]. For three consecutive edges $F,G,H$, the word factorization is explicitly\n$$a_{H,C(G)C(F)K}\\,D(H)(a_{G,C(F)K})\\,D(H)D(G)(a_{F,K}).$$\nWrite $b=a_{HGF\\text{ as a word},K}$. For $l=D(H)(\\mu_{F,G})\\mu_{GF,H}$ the two-edge equations give $bl_{QK}=a_{H,C(GF)K}D(H)(a_{GF,K})\\mu_{GF,H,QK}=a_{HGF,K}$. For $r=(\\mu_{G,H}D(F))\\mu_{F,HG}$, naturality of $\\mu_{G,H}$ at $a_{F,K}$ first gives $br_{QK}=a_{HG,C(F)K}D(HG)(a_{F,K})\\mu_{F,HG,QK}=a_{HGF,K}$. Here $a_{HGF,K}$ is the factorization for the single composite functor. Cancel $b$ and apply clause (3) to obtain $l=r$. The same argument is induction on the length of a word: length one is $c_F=1$; appending the next edge uses the recursion for $a_P$ and the two-edge equation, so each iterated comparison is the unique normalized $c_P$. For length zero, lifting $1_Q$ between $D(1)$ and $1_{D(\\mathcal A)}$ gives the canonical unit comparison with component $a_{1,K}$ at $QK$. Inserting it in either side of a word gives the same normalization, hence both compositor unit equations. No extra coherence theorem is assumed.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property",
+    "lem-sfb-exact-derived-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VG, lemma-properties-left-localization, functor factorization; natural-transformation enhancement in Mathlib/CategoryTheory/Localization/Predicate.lean:278-361. Agent calculation with the exact factorizations of derived.tex, Tag 015F, lemma-right-derived-exact-functor."
+   }
+  },
+  {
+   "text": "Induct on a finite expression made from the specified cells and compositors by identities, vertical composition and either whiskering. Its base case is $(*)$ from Step 3, including ordinary compositor cells; identity and composition cases are Step 4; the two whiskering cases are Steps 5 and 6. Step 7 identifies all inserted comparisons with precisely the chosen exact-composition and unit comparisons. Thus an expression $E:P\\to R$ always satisfies $a_R E^D_{QK}=Q(C(E)_K)a_P$. If $E=E'$ is one of the given ordinary equations, Step 1 gives $C(E)=C(E')$ and hence equality of these normalized components. Cancel $a_R$ and apply clause (3) of [lem-weil-pbc-localization-universal-property]. This proves $E^D=E'^D$. In particular a horizontal paste is output whiskering followed by input whiskering and vertical composition, so both square-pasting orientations and all specified naturality and compositor unit equations follow.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VG, lemma-properties-left-localization, functor factorization; natural-transformation enhancement in Mathlib/CategoryTheory/Localization/Predicate.lean:278-361. Agent calculation with the exact factorizations of derived.tex, Tag 015F, lemma-right-derived-exact-functor."
+   }
+  },
+  {
+   "text": "If $t$ is invertible, apply the construction also to $t^{-1}$. Step 4 applied to the two ordinary inverse equations shows $(t^{-1})^Dt^D=1$ and $t^D(t^{-1})^D=1$. Thus $t^D$ is invertible. The only descent hypotheses used were that the word functors invert quasi-isomorphisms, supplied by exactness in [lem-weil-pbc-exact-functor-derived-factorization], and that $Q$ is a localization. All complexes were unrestricted $\\mathbf Z$-indexed complexes throughout; no resolutions or evaluation functors occurred.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VG, lemma-properties-left-localization, functor factorization; natural-transformation enhancement in Mathlib/CategoryTheory/Localization/Predicate.lean:278-361. Agent calculation with the exact factorizations of derived.tex, Tag 015F, lemma-right-derived-exact-functor."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-sfb-exact-derived-composition",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 015F, lemma-right-derived-exact-functor, combined with categories.tex Tag 04VG, lemma-properties-left-localization, and the fully faithful natural-transformation enhancement in Mathlib/CategoryTheory/Localization/Predicate.lean:278-361; explicit pasting calculations by Q22."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -111,10 +225,140 @@
    },
    "date": "2026-10-21",
    "verdict": "no match: Localization.liftNatTrans and mapDerivedCategoryCompIso are ingredients; no hit states both noninvertible exact-square pasting laws with the specified derived compositors."
+  },
+  {
+   "tool": "grep",
+   "query": "liftNatTrans|comp_liftNatTrans|natTrans_ext",
+   "results": {
+    "t": "2026-10-21T03:45:27Z",
+    "tool": "grep",
+    "query": "liftNatTrans|comp_liftNatTrans|natTrans_ext",
+    "sub": "CategoryTheory/Localization",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Localization/DerivabilityStructure/Basic.lean",
+     "Mathlib/CategoryTheory/Localization/Adjunction.lean",
+     "Mathlib/CategoryTheory/Localization/Adjunction.lean",
+     "Mathlib/CategoryTheory/Localization/Adjunction.lean",
+     "Mathlib/CategoryTheory/Localization/Adjunction.lean",
+     "Mathlib/CategoryTheory/Localization/Adjunction.lean",
+     "Mathlib/CategoryTheory/Localization/Bifunctor.lean",
+     "Mathlib/CategoryTheory/Localization/Bifunctor.lean"
+    ],
+    "digest": "301845eae561c6a8"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match for the full assertion: liftNatTrans, its identity/composition equations and natTrans_ext supply localization; exact functor factorizations and explicit whiskering/compositor calculations remain necessary. General derived transformations and invertible cocycle results do not state the arbitrary noninvertible square-pasting assertion with these comparisons."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The induced natural transformations on derived categories of exact functors preserve whiskering and pasting",
+   "results": {
+    "t": "2026-10-21T03:45:28Z",
+    "tool": "leansearch",
+    "query": "The induced natural transformations on derived categories of exact functors preserve whiskering and pasting",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.ExactFunctor.whiskeringRight_obj_map",
+     "CategoryTheory.Functor.rightDerivedNatTrans",
+     "CategoryTheory.Functor.leftDerivedNatTrans",
+     "CategoryTheory.Functor.mapDerivedCategorySingleFunctor",
+     "CategoryTheory.ExactFunctor.whiskeringRight_map_app",
+     "CategoryTheory.Functor.leftDerivedNatTrans_fac",
+     "CategoryTheory.NatTrans.leftDerived",
+     "CategoryTheory.Functor.whiskerRight"
+    ],
+    "digest": "6057a2e366cb99c5"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match for the full assertion: liftNatTrans, its identity/composition equations and natTrans_ext supply localization; exact functor factorizations and explicit whiskering/compositor calculations remain necessary. General derived transformations and invertible cocycle results do not state the arbitrary noninvertible square-pasting assertion with these comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.liftNatTrans",
+   "results": {
+    "t": "2026-10-21T03:45:28Z",
+    "tool": "loogle",
+    "query": "CategoryTheory.Localization.liftNatTrans",
+    "sub": "",
+    "ok": true,
+    "n_hits": 10,
+    "note": "",
+    "top": [
+     "CategoryTheory.Localization.liftNatTrans",
+     "CategoryTheory.Localization.liftNatTrans_id",
+     "CategoryTheory.Localization.liftNatIso_hom",
+     "CategoryTheory.Localization.liftNatIso_inv",
+     "CategoryTheory.Localization.comp_liftNatTrans",
+     "CategoryTheory.Localization.comp_liftNatTrans_assoc",
+     "CategoryTheory.Localization.liftNatTrans_app",
+     "CategoryTheory.NatTrans.CommShift.liftNatTrans"
+    ],
+    "digest": "cef4c5c3c9975579"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match for the full assertion: liftNatTrans, its identity/composition equations and natTrans_ext supply localization; exact functor factorizations and explicit whiskering/compositor calculations remain necessary. General derived transformations and invertible cocycle results do not state the arbitrary noninvertible square-pasting assertion with these comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization of arbitrary natural transformations between exact functors on unbounded derived categories preserves horizontal and vertical pasting with composition comparisons",
+   "results": {
+    "t": "2026-10-21T03:45:29Z",
+    "tool": "leanfinder",
+    "query": "Localization of arbitrary natural transformations between exact functors on unbounded derived categories preserves horizontal and vertical pasting with composition comparisons",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Functor.leftDerivedNatTrans_comp",
+     "CategoryTheory.Functor.leftDerivedNatTrans_fac_assoc",
+     "CategoryTheory.Functor.leftDerivedNatTrans_comp_assoc",
+     "CategoryTheory.Functor.mapDerivedCategoryFactorsh",
+     "CategoryTheory.Functor.leftDerivedNatTrans_fac",
+     "CategoryTheory.Functor.leftDerivedNatTrans_app_assoc",
+     "CategoryTheory.Functor.leftDerivedNatTrans_app",
+     "CategoryTheory.NatTrans.rightDerived_comp"
+    ],
+    "digest": "0ffb0506674d61f1"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match for the full assertion: liftNatTrans, its identity/composition equations and natTrans_ext supply localization; exact functor factorizations and explicit whiskering/compositor calculations remain necessary. General derived transformations and invertible cocycle results do not state the arbitrary noninvertible square-pasting assertion with these comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A localization is locally fully faithful on functor categories so equal diagrams of natural transformations descend",
+   "results": {
+    "t": "2026-10-21T03:45:30Z",
+    "tool": "leanfinder",
+    "query": "A localization is locally fully faithful on functor categories so equal diagrams of natural transformations descend",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Localization.liftNatTrans",
+     "CategoryTheory.Localization.Construction.natTransExtension",
+     "CategoryTheory.Localization.liftingLift",
+     "CategoryTheory.Localization.instFullFunctorWhiskeringLeftFunctor'",
+     "CategoryTheory.Localization.full_whiskeringLeft",
+     "CategoryTheory.Localization.Construction.NatTransExtension.app",
+     "CategoryTheory.MorphismProperty.LeftFraction.Localization.StrictUniversalPropertyFixedTarget.uniq",
+     "CategoryTheory.LocalizerMorphism.liftingLocalizedFunctor"
+    ],
+    "digest": "a5e9f210ef28e033"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match for the full assertion: liftNatTrans, its identity/composition equations and natTrans_ext supply localization; exact functor factorizations and explicit whiskering/compositor calculations remain necessary. General derived transformations and invertible cocycle results do not state the arbitrary noninvertible square-pasting assertion with these comparisons."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sp-varying-ring-proper-open-pasting",
@@ -134,5 +378,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sp-exact-derived-transformation-pasting",
+  "worker": "stage1",
+  "summary": "Kept the complete statement, including noninvertible cells, unchanged. Reused exact factorization, localization universal property and normalized exact-composition nodes; wrote the component normalization, both whiskering calculations, word induction and unit and inverse arguments. No new nodes. Searched the current project and Mathlib; no exact attachment or one-line Mathlib match for the whole pasting assertion.",
+  "blueprint": "det-sp-tower-gluing, Local pairs: descending the ordinary proper/open equations to actual transformations of tower derived categories, serving Charts and gluing of sk-prop-sp-tower-geometric. This supplies the localization step used by lem-sp-varying-ring-proper-open-pasting.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-exact-derived-composition",
+    "why": "The normalized compositor of arbitrary additive exact functors is a generic localization tool, not a replacement for the tower-geometric route; the unit has no separate statement of its normalization."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-exact-derived-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q22-3a028edba",
+  "group": "Q22",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-3a028edba (reviewer sub-agent of L); spot-checked: I read the item, the report, all four cited statements and the sources in full. It is one commit with zero new nodes. The item is still unsplit with no proof on side-live, there is no repair note for it, it is not in a dropped list, and it cites no SGA. Against side-live, the statement, source and blueprint are unchanged. The added stmt_dep lem-sfb-exact-derived-composition is right, because the statement's 'exact-composition comparison' is the mu of that node. Its direction is mu: D(GF) -> D(G)D(F) with a_{G,C(F)K} D(G)(a_{F,K}) mu_{QK} = a_{GF,K}, matching every use. Sources: Stacks Tag 015F (derived.tex 5883-5903) and Tag 04VG (categories.tex 4406), both checked in the tags file. Mathlib Localization liftNatTrans and natTrans_ext are at Predicate.lean 278-361. Clause (2) of lem-weil-pbc-localization-universal-property lifts transformations that need not be invertible. I recomputed every step myself. Step 3 gives the normalization (*), and conjugating by mu_H and mu_F^{-1} gives the same lift by uniqueness. Step 4 covers vertical composition and identities. In Step 5, output whiskering uses the a_{VP} expansion by induction and naturality of a_V at C(t)_K. In Step 6, input whiskering uses naturality of t^D at the derived morphism a_{U,K}. In Step 7, the three-edge coherence holds: b*l and b*r both equal a_{HGF,K}, with naturality of mu_{G,H} at a_{F,K}. The word-length induction and the unit comparison D(1)->1 are set up with base and step. Step 8 is a properly stated induction on expressions, and Step 9 gives invertibility. No cell is ever cancelled. Zero cells, empty words and unbounded complexes behave correctly. Duplicate search: the existing derived square-pasting nodes cover only invertible cells or particular squares, and this Mathlib has no mapDerivedCategory natural-transformation API. I accept the tool_use of the generic compositor lem-sfb-exact-derived-composition. No changes made."
  }
 }

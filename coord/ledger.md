@@ -20084,3 +20084,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:56 L: returned deliver/Q05/lem-sfb-hom-kflat-chain-transpose (reviewer RETURN: L: independent stage-2 immutable head a9eb1d31f866: H2/stmt_deps: the statement uses only plain definitions from theorem)
 - 2026-10-21T03:57:06Z L: superseded stage-1 delivery Q36/lem-sfb-adic-proper-localizing-adjunction-comparison at 6c810d48a14cb36e68682367e23308b3533c4e9e; current completion retained; packet archived at refs/superseded/Q36/lem-sfb-adic-proper-localizing-adjunction-comparison/6c810d48a14cb36e68682367e23308b3533c4e9e; stale return retired.
 - 03:57 L: merged deliver/Q36/lem-sp-varying-ring-pullback-unit-coherence (reviewer PASS; first push; new nodes: 0)
+- 03:57 L: merged deliver/Q22/lem-sp-exact-derived-transformation-pasting (reviewer PASS; first push; new nodes: 0)
