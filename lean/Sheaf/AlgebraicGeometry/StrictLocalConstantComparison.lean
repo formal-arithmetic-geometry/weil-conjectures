@@ -10,7 +10,9 @@ public import WeilConjectures.ConstructibleSheaf.Defs
 import WeilConjectures.ConstructibleSheaf.Pullback
 import WeilConjectures.AlgebraicGeometry.Sites.StrictlyHenselian
 import Sheaf.AlgebraicGeometry.StrictHenselizationCompatibility
-import Sheaf.AlgebraicGeometry.StrictLocalGermRestrictionIso
+import Sheaf.AlgebraicGeometry.PointedEtaleSectionConeStalkIso
+import Sheaf.Paper.StrictHenselizationFunctoriality
+import WeilConjectures.AlgebraicGeometry.StrictlyHenselianSectionsStalk
 
 /-!
 # A germ-compatible constant model on a strict-local fibre
@@ -182,7 +184,37 @@ theorem exists_strictLocalConstantComparison
   let r := Classical.choose ((strictLocalSectionCone x).existsUnique_restriction G)
   have hr : (strictLocalSectionCone x).IsRestriction G r :=
     (Classical.choose_spec ((strictLocalSectionCone x).existsUnique_restriction G)).1
-  have : IsIso r := isIso_strictHenselizationStalkRestriction x G r hr
+  have : IsIso r := by
+    let : Algebra (X.residueField (x (IsLocalRing.closedPoint Ω))) Ω :=
+      (Scheme.descResidueField (Scheme.stalkClosedPointTo x)).hom.toAlgebra
+    obtain ⟨hlocal, hstrict, _, _, σ, ⟨hpoint, hbase⟩, _⟩ :=
+      strictHenselizationResidue x rfl
+    let := hlocal
+    let y := Spec.map (CommRingCat.ofHom
+      (((IntermediateField.val
+        (separableClosure (X.residueField (x (IsLocalRing.closedPoint Ω))) Ω)).toRingHom.comp
+          σ.toRingHom).comp (IsLocalRing.residue (Scheme.strictHenselizationRing x))))
+    have hy : y default = IsLocalRing.closedPoint (Scheme.strictHenselizationRing x) := by
+      rw [Subsingleton.elim (default : Spec (.of Ω)) (IsLocalRing.closedPoint Ω)]
+      change PrimeSpectrum.comap
+        ((((IntermediateField.val
+          (separableClosure (X.residueField (x (IsLocalRing.closedPoint Ω))) Ω)).toRingHom).comp
+            σ.toRingHom).comp (IsLocalRing.residue (Scheme.strictHenselizationRing x)))
+        (IsLocalRing.closedPoint Ω) = _
+      rw [PrimeSpectrum.comap_comp]
+      exact IsLocalRing.PrimeSpectrum.comap_residue _ _
+    refine (strictLocalSectionCone x).isIso_restriction y hbase ?_
+      G ((Scheme.strictlyHenselianSections_geometricStalk_isIso hstrict y hy).1 _) r hr
+    intro i
+    let n := (equivSmallModel.{u}
+      (Scheme.strictHenselizationNeighbourhoods x)).inverse.obj i
+    change y ≫ (strictLocalNeighbourhoodSection x i).left ≫
+      pullback.fst ((Scheme.AffineEtale.Spec X).obj n.1).hom
+        (Scheme.strictHenselizationStructuralMap x) = n.2.left
+    dsimp only [n]
+    simp only [strictLocalNeighbourhoodSection,
+      MorphismProperty.Over.homMk, Over.homMk, CostructuredArrow.homMk, pullback.lift_fst]
+    simpa only [Scheme.isoSpec_Spec_inv, Category.assoc] using hpoint i
   let e₀ : C.obj M ≅ F := C.mapIso (asIso r) ≪≫ asIso (adj.counit.app F)
   have he₀ : adj.unit.app M ≫ Γ.map e₀.hom = r := by
     change adj.unit.app M ≫ Γ.map (C.map r ≫ adj.counit.app F) = r
