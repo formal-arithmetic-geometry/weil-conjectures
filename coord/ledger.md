@@ -21846,3 +21846,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:17 L: merged deliver/Q100/lem-zl-condensed-stalk-frobenius-orbit-trace (reviewer PASS; first push; new nodes: 1)
 - 09:17 L: merged deliver/Q105/lem-pc-tate-abstract-residue-calculus (reviewer FIX; first push; new nodes: 0)
 - 09:17 L: merged deliver/Q144/lem-weil-isomorphism-scalar-augmentation-cone (reviewer PASS; first push; new nodes: 0)
+- 2026-10-21T09:18:00Z L: superseded stage-1 delivery Q107/lem-per-adic-normalized-fibre-exactness at 1d9fe226f69c4caa4c9772dc84c39e851be75066; current completion retained; packet archived at refs/superseded/Q107/lem-per-adic-normalized-fibre-exactness/1d9fe226f69c4caa4c9772dc84c39e851be75066; stale return retired.
