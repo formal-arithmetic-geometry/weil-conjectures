@@ -20460,3 +20460,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:36 L: merged deliver/Q111/def-wf-tate-twist (reviewer PASS; first push; new nodes: 0)
 - 06:36 L: merged deliver/Q34/lem-sf-reduction-flat-model (reviewer FIX; after a return; new nodes: 1)
 - 06:36 L: merged deliver/Q29/sbc-thm-overline-mathbf-q-ell-coefficient-smooth-base-ch (reviewer FIX; after a return; new nodes: 2)
+- 06:36 L: returned deliver/N7/lem-pe-scalar-cone-tensor-model (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-pe-scalar-cone-tensor-model: lem-pe-scalar-cone-te)
