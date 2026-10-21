@@ -19969,3 +19969,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:47 L: merged deliver/Q126/lem-sp-open-scalar-site-coherence (reviewer FIX; first push; new nodes: 0)
 - 03:47 L: merged deliver/Q35/lem-sp-p1-counit-scalar (reviewer FIX; first push; new nodes: 0); claim not held by Q35: not your claim
 - 03:47 L: merged deliver/NF/lem-sfb-bounded-bifunctor-devissage (reviewer PASS; first push; new nodes: 0)
+- 03:47 L: merged deliver/Q135/lem-sfb-adic-stratum-completion-unit (reviewer FIX; first push; new nodes: 0)

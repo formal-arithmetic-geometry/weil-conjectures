@@ -21,9 +21,92 @@
   "def-constructible-stratification",
   "def-weil-proetale-inverse-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For every $n$, the canonical constant-section comparison identifies $i^{-1}\\underline{A/I^n}_X$ with $\\underline{A/I^n}_S$. Apply limit preservation for the locally closed immersion $i$ to the countable inverse system of these ring sheaves. Limits of ring sheaves are limits of the underlying sheaves with the induced operations, so this gives $c_i:i^{-1}B_X\\xrightarrow{\\sim}B_S$. Its $n$-th projection is the constant-section comparison composed with $i^{-1}$ of the $n$-th projection of $B_X$; hence it is exactly the comparison in the statement. Naturality on constant sections identifies every quotient transition and the images of $a_1,\\ldots,a_r$. Pure module inverse image, followed by this ring isomorphism, is exact, additive and preserves countable products by the same immersion lemma. Denote this functor by $F_i$.",
+   "uses": [
+    "lem-pe-constant-left-module-inverse-image",
+    "lem-weil-pbc-proetale-immersion-limit-preservation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.5.8(1) and its proof; Stacks proetale.tex Tag 09AA, lemma-closed-immersion(1)."
+   }
+  },
+  {
+   "text": "For an object $U$ of $S_{\\mathrm{pro\\acute et}}$, use the slice with coefficient ring $B_S|_U$. Module restriction $F_U$ is exact and has the left adjoint extension by zero; thus it preserves all small limits, in particular countable products. These limits are sectionwise, and its coefficient projections are the restricted projections of $B_S$. The weakly étale localization identifies this slice with $U_{\\mathrm{pro\\acute et}}$ and identifies restricted constant ring sheaves with the corresponding constant ring sheaves on $U$. Consequently it identifies $B_S|_U$ with $B_U$, also projection by projection. For $r:U\\to S$, the object inverse-image lemma identifies $r^{-1}$ of sheaves of sets, abelian groups and rings with restriction to $U$, naturally. So $r^{-1}B_S\\cong B_S|_U$, and the ringed module pullback $r^{-1}G\\otimes_{r^{-1}B_S}B_U$ along the coefficient isomorphism is $F_U(G)$, the tensor being along an isomorphism. Both $F_i$ and $F_U$ are therefore exact module pullbacks along morphisms of topoi with identified inverse-image coefficients. Their induced derived functors are computed termwise.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-proetale-weakly-etale-localization",
+    "def-weil-pbc-ringed-derived-restriction",
+    "lem-sfb-proetale-object-inverse-image-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DJ, lemma-extension-by-zero-exact, and its adjunction; localization as in proetale.tex Tag 09AE and sites.tex Section 00XZ."
+   }
+  },
+  {
+   "text": "Write $F$ for either restriction from the preceding steps, and $B,B'$ for its coefficient rings. The ringed-topos derived tensor comparison gives $F(M\\otimes_B^L N)\\cong F(M)\\otimes_{B'}^L F(N)$. For $N=\\underline{A/I^n}$ the right-hand second factor is the corresponding degree-zero constant ring sheaf, by steps 1–2. This proves the finite-reduction assertion. For the completion tower use $Q_m(B)=\\bigotimes_{j=1}^r[B\\xrightarrow{a_j^m}B]$ in degrees $[-r,0]$, with the transitions specified in the constant-completion-equivalence statement. Choose a flat-term K-flat representative $P$ of $M$. Ringed pullback carries it to a flat-term K-flat representative of $F(M)$. The termwise tensor comparisons identify the strict tower $F(P\\otimes_B Q_m(B))$ with $F(P)\\otimes_{B'}Q_m(B')$: each two-term differential remains multiplication by $a_j^m$, each transition remains multiplication by $a_j$ in degree $-1$ and identity in degree $0$. The maps $\\gamma_m:P\\to P\\otimes_B Q_m(B)$ use the identity in Koszul degree $0$; these too become the corresponding maps after $F$. Thus the comparison respects the strict tower and its augmentation, not just its derived objects.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, lemma-pullback-tensor-product, and Tag 0G7E, lemma-pullback-K-flat; algebraization.tex Tag 0A0E, lemma-derived-completion-koszul."
+   }
+  },
+  {
+   "text": "Countable products of modules over any pro-étale ring sheaf are exact, on $X$, on $S$, and on the slice by its site identification in step 2. The normalized strict Roos comparison therefore computes total derived inverse limit of the augmented tower $T_m=P\\otimes_B Q_m(B)$ by $\\mathsf C(T)=\\operatorname{Cone}(1-s:\\prod_mT_m\\to\\prod_mT_m)[-1]$. It identifies the actual derived augmentation with the chain map whose product component is $(\\gamma_m)_m$ and whose shifted-product component is zero. Apply the additive Roos comparison to $F$, whose canonical product comparisons are invertible by steps 1–2. It identifies $F\\mathsf C(T)$ with $\\mathsf C(FT)$ on both product coordinates, and is natural on strict tower maps. Explicitly, the $m$-th component of the shift remains $F(t_m)\\operatorname{pr}_{m+1}$, so the comparison intertwines $1-s$. On the augmentation it sends $(\\gamma_m)_m$ to $(F\\gamma_m)_m$ and zero to zero. Combining this with the strict tower identification of step 3 gives $F\\eta_M=\\eta_{F(M)}$ under the completion comparison, where $\\eta$ is the Koszul completion unit of the constant-completion-equivalence lemma. The normalized strict Roos statement ensures this is the specified map to total derived inverse limit, rather than an arbitrary choice of a cone isomorphism.",
+   "uses": [
+    "lem-weil-proetale-countable-products-exact",
+    "lem-weil-strict-roos-comparison",
+    "lem-pur-roos-additive-comparison",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok, with normalized strict Roos comparison; Bhatt–Scholze Propositions 3.1.9, 3.2.3 and 4.2.8 for exact products; algebraization.tex Tag 0A0E."
+   }
+  },
+  {
+   "text": "The constant-completion-equivalence lemma identifies local derived ideal completeness with invertibility of this Koszul unit, without a boundedness hypothesis. Step 4 therefore shows that local completeness restricts to every stratum and every further covering slice. Conversely assume completeness on all chosen stratum covers. Step 4 says that every composite restriction carries $\\eta_M$ to an invertible unit. Apply finite-stratum-and-cover detection to the morphism $\\eta_M$ in $D(\\operatorname{Mod}(B_X))$: its coefficients on each cover are exactly their inverse images by steps 1–2. The underlying abelian sheaf of $F_i$ is $i_\\alpha^{-1}$ of the underlying sheaf, and slice restriction to $V_{\\alpha j}$ is $v_{\\alpha j}^{-1}$ by the object inverse-image lemma, so the composite restrictions are the inverse images of the detection lemma. This detection lemma assumes only the stated Noetherian scheme and finite stratification, and says these exact restrictions jointly detect isomorphisms in the unbounded derived category. Hence $\\eta_M$ is invertible and $M$ is locally derived complete. The forward implication was already proved, yielding the asserted equivalence.",
+   "uses": [
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-weil-pbc-noetherian-stratum-detection",
+    "lem-sfb-proetale-object-inverse-image-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Remark 6.5.10 and Proposition 6.6.11, reverse implication (completeness local on stratum covers); Stacks proetale.tex Tag 099M, lemma-naive-completion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ringed-derived-restriction",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-pur-roos-additive-comparison",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sfb-proetale-object-inverse-image-restriction",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-noetherian-stratum-detection",
+  "lem-weil-pbc-proetale-immersion-limit-preservation",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-weil-strict-roos-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.8(1), Remark 6.5.10, Proposition 6.6.11 reverse implication; explicit Koszul augmentation and strict Roos refinement using the cited existing nodes."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -59,10 +142,52 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsAdicComplete.bot\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (M : Type u_4) [inst_1 : AddCommGroup M] [inst_2 : Module R M], IsAdicComplete ⊥ M\", \"doc\": \"For any commutative ring $ R $ and any $ R $-module $ M $, the module $ M $ is adic complete with respect to the zero ideal $ \\\\{0\\\\} $.\"}\n  {\"name\": \"IsAdicComplete\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → Ideal R → (M : Type u_4) → [inst_1 : AddCommGroup M] → [Module R M] → Prop\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $ of $ R $, and an $ R $-module $ M $, the proposition that $ M $ is adic complete with respect to $ I $.\"}\n  {\"name\": \"AdicCompletion\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → Ideal R → (M : Type u_4) → [inst_1 : AddCommGroup M] → [Module R M] → Type u_4\", \"doc\": \"The adic completion of an $ R $-module $ M $ with respect to an ideal $ I $ of a commutative ring $ R $ is the inverse limit of the quotient modules $ M/I^nM $, where $ I^n $ denotes the $ n $th power\"}\n  {\"name\": \"IsAdicComplete.toIsPrecomplete\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} {I : Ideal R} {M : Type u_4} {inst_1 : AddCommGroup M} {inst_2 : Module R M}\\n  [self : IsAdicComplete I M], IsPrecomplete I M\", \"doc\": \"For a commutative ring $ R $, an ideal $ I $ of $ R $, and an $ R $-module $ M $, if $ M $ is adic complete with respect to $ I $, then $ M $ is precomplete with respect to $ I $.\"}\n  {\"name\": \"PadicInt.instIsAdicCompleteMaximalIdeal\", \"module\": \"Mathlib.NumberTheory.Padics.PadicIntegers\", \"type\": \": IsAdicComplete (maximalIdeal ℤ_[p]) ℤ_[p]\", \"doc\": \"The ring of p-adic integers $\\\\mathbb{Z}_p$ is adic complete with respect to its maximal ideal, which consists of all p-adic integers with p-adic valuation strictly greater than 0. This means the canon\"}\n  {\"name\": \"IsAdic.isAdicComplete_iff\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Topology\", \"type\": \": IsAdicComplete I R ↔ CompleteSpace R ∧ T2Space R\", \"doc\": \"For a commutative ring $ R $ equipped with the adic topology induced by an ideal $ I $, $ R $ is adic complete with respect to $ I $ if and only if $ R $ is a complete Hausdorff space.\"}\n  {\"name\": \"isAdicComplete_iff\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) (M : Type u_4) [inst_1 : AddCommGroup M] [inst_2 : Module R M],\\n  IsAdicComplete I M ↔ IsHausdorff I M ∧ IsPrecomplete I M\", \"doc\": \"For a commutative ring $ R $, an ideal $ I $ of $ R $, and an $ R $-module $ M $, the module $ M $ is adic complete with respect to $ I $ if and only if it is both Hausdorff (the intersection of all $\"}\n  {\"name\": \"IsAdicComplete.toIsHausdorff\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} {I : Ideal R} {M : Type u_4} {inst_1 : AddCommGroup M} {inst_2 : Module R M}\\n  [self : IsAdicComplete I M], IsHausdorff I M\", \"doc\": \"If $ M $ is an adic complete module over a commutative ring $ R $ with respect to an ideal $ I $, then $ M $ is Hausdorff with respect to the $ I $-adic topology.\"}",
    "date": "2026-10-21",
    "verdict": "no match: the printed hits give ordinary module completion, abstract triangulated categories, constant sheaves, or cohomological bounds; none states this ringed pro-étale comparison and locality assertion or specializes to it in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "(pro[Ee]tale|[Kk]oszul).*(complet|[Ii]mmersion)|(complet|[Ii]mmersion).*(pro[Ee]tale|[Kk]oszul)",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-21",
+   "verdict": "no match: returned declarations do not state ringed pro-etale Koszul completion or stratum detection."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of a sheaf complex to locally closed strata preserves and detects derived ideal completeness",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.ΓRes\", \"AlgebraicGeometry.Scheme.IdealSheafData.map_ideal'\", \"HomologicalComplex.restriction\", \"AlgebraicGeometry.LocallyRingedSpace.restrict\", \"AlgebraicGeometry.SheafedSpace.restrict\", \"AlgebraicGeometry.LocallyRingedSpace.ofRestrict_stalkMap_isIso\", \"AlgebraicGeometry.Scheme.Modules.restrict\", \"AlgebraicGeometry.IsIntegralHom.instMorphismRestrict\"]}",
+   "date": "2026-10-21",
+   "verdict": "no match: returned declarations do not state ringed pro-etale Koszul completion or stratum detection."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, PreservesLimits",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'PreservesLimits'\", \"top\": []}",
+   "date": "2026-10-21",
+   "verdict": "inconclusive: Loogle did not recognize PreservesLimits; the other searches supplied the conceptual and source checks."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image along a locally closed immersion of pro etale sites commutes with Koszul derived completion and its unit",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app_assoc\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.inv_naturality\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app_apply\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.app_inv_app'_assoc\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.app_invApp_assoc\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.inv_invApp\"]}",
+   "date": "2026-10-21",
+   "verdict": "no match: returned declarations do not state ringed pro-etale Koszul completion or stratum detection."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact functor preserving countable products preserves the inverse limit completion map of powers of a finitely generated ideal on ringed sites",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.map_exact\", \"AdicCompletion.piEquivFin_apply\", \"LightCondMod.ofSheafLightProfinite\", \"CondensedMod.ofSheafProfinite\", \"localCohomology.diagram\", \"IsAdicComplete.of_comp_lift\", \"localCohomology\", \"AdicCompletion.eval_comp_of\"]}",
+   "date": "2026-10-21",
+   "verdict": "no match: returned declarations do not state ringed pro-etale Koszul completion or stratum detection."
+  },
+  {
+   "tool": "grep",
+   "query": "theorem map_exact|def piEquivFin|theorem eval_comp_of",
+   "results": "{\"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/AdicCompletion/Basic.lean\", \"Mathlib/RingTheory/AdicCompletion/Functoriality.lean\", \"Mathlib/RingTheory/AdicCompletion/Exactness.lean\"]}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected ordinary AdicCompletion source declarations; no ringed-site derived completion or stratum assertion."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-adic-stratified-perfect",
@@ -82,5 +207,84 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-adic-stratum-completion-unit",
+  "worker": "stage1",
+  "summary": "Retain the entire statement. Reuse existing immersion-limit, ringed tensor, normalized strict Roos and Noetherian stratum-detection statements. Give the finite-projection coefficient comparison and a strict augmented Koszul tower calculation proving compatibility with the actual completion unit. No new nodes, no additional finiteness or boundedness hypotheses.",
+  "blueprint": "det-lem-integral-models-stacks, first invocation of sk-prop-integral-criterion, through lem-sfb-integral-cohomological-adic-criterion and lem-sfb-adic-stratified-perfect: restriction and detection of completeness in the stratified-perfect intermediate characterization. Unit sk-lem-integral-models steps (1)–(2) and local-model step (3).",
+  "tool_uses": [
+   {
+    "node": "def-weil-pbc-ringed-derived-restriction",
+    "why": "The existing definition fixes the actual termwise derived slice restriction used in the statement."
+   },
+   {
+    "node": "lem-pe-constant-left-module-inverse-image",
+    "why": "Canonical inverse image of constant ring sheaves for any coefficient ring, needed to compare quotient projections; no node of the integral-model unit supplies this generic topos tool."
+   },
+   {
+    "node": "lem-pur-roos-additive-comparison",
+    "why": "Generic coordinate-normalized additive product-preserving functor comparison of strict Roos cones."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Exact slice restriction and its left adjoint give product preservation on covering slices for arbitrary ring sheaves."
+   },
+   {
+    "node": "lem-weil-pbc-constant-completion-equivalence",
+    "why": "Generic Noetherian constant/completed-coefficient Koszul unit and local-completeness criterion, already named in the item’s statement."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-stratum-detection",
+    "why": "Generic joint conservativity on finite strata with covering slices, applied to the unit morphism without constructibility or boundedness."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-immersion-limit-preservation",
+    "why": "Generic all-limit preservation and exactness for identified ringed immersion inverse images; this expands, rather than replaces, the unit’s stratum restriction argument."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic K-flat pullback and tensor comparison applied to the actual completed coefficient rings and their reductions."
+   },
+   {
+    "node": "lem-weil-proetale-countable-products-exact",
+    "why": "Exact countable products for arbitrary pro-etale ring sheaves permit computation by strict Roos cones."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Generic site equivalence identifies covering slices, their constants and their limits with the covering scheme’s pro-etale site."
+   },
+   {
+    "node": "lem-weil-strict-roos-comparison",
+    "why": "Generic normalized strict-tower computation of derived limit, including the actual augmentation map."
+   },
+   {
+    "node": "lem-sfb-proetale-object-inverse-image-restriction",
+    "why": "Inverse image along an object W→X of the pro-étale site is restriction to the localized site (sets, abelian groups, rings); identifies slice restriction with the ringed inverse image of the tensor-pullback lemma and with the inverse images of the stratum-detection lemma. Generic site tool; no node of the integral-model unit gives it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-pbc-ringed-derived-restriction",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-pur-roos-additive-comparison",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-noetherian-stratum-detection",
+  "lem-weil-pbc-proetale-immersion-limit-preservation",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-weil-strict-roos-comparison",
+  "lem-sfb-proetale-object-inverse-image-restriction"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q135-7944355cf",
+  "group": "Q135",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q135-7944355cf (reviewer sub-agent of L); spot-checked: I read the item, all five steps, the statement of every cited node, the unit sk-lem-integral-models, and the Bhatt–Scholze sources: Lemma 6.5.8(1)–(2) with its proof (k^* commutes with limits), Remark 6.5.10, and the reverse direction of Proposition 6.6.11. The retained statement is a faithful generalization: any Noetherian A, any finitely generated I, any locally closed immersion, and local derived completeness, which equals Koszul-unit invertibility by lem-weil-pbc-constant-completion-equivalence. There are no new nodes and no SGA source. Step checks: (1) Immersion limit preservation, which holds for every locally closed immersion with no Noetherian hypothesis, plus the scalar-identity constant-sheaf comparison, gives the isomorphism i^{-1}B_X ≅ B_S projection by projection. The isomorphism clause gives exactness and limit preservation of F_i. (2) Slice restriction is exact with the left adjoint j_!, and the weakly-étale localization identifies B_S|_U with B_U. (3) Tensor pullback plus K-flat preservation. Because Q_m is finite free, the Koszul tower, its transitions (a_j in degree −1, identity in degree 0) and the augmentations γ_m carry over termwise; I checked r=1 by hand. (4) Exact countable products for any pro-étale ring sheaf. The normalized strict Roos statement identifies the augmentation (γ_m, 0) with the derived augmentation, and the additive Roos comparison carries it to (Fγ_m, 0), so Fη_M = η_{FM}. (5) The detection lemma's hypotheses match: Noetherian X, a finite stratification, arbitrary chosen covers and an arbitrary ring sheaf, in the unbounded derived category. Edge cases tested: empty X or empty strata, I=0 or r=0, I=A, repeated generators, A/I^n of infinite projective dimension, and unbounded M. Fault (C1/C4), repaired: steps 3 and 5 apply the morphism-of-topoi tensor-pullback lemma and the stratum-detection lemma, both stated with r^{-1} of def-weil-proetale-inverse-image, to slice restriction, with no node identifying the two. I added the existing node lem-sfb-proetale-object-inverse-image-restriction (r^{-1}G ≅ G|_W for sets, abelian groups and rings) to steps 2 and 5 with explicit sentences, recomputed proof_deps, and added a tool_use entry. The 11 declared tool_uses are accepted as generic black boxes. Maintainer note: the unsplit NF node lem-weil-pbc-stratum-completion-unit-restriction, created the same day, states essentially the same result (intrinsic completeness and the quotient unit). It is a merge candidate, not a fault of this delivery. Advisory: 'locally closed immersion' in the retained statement has no definition citation.; 1 file(s) fixed by the reviewer"
  }
 }
