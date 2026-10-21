@@ -1,6 +1,6 @@
 # Work queue
 
-213 items; claim with `tools/claim.py next <group> [--stage N]`.
+212 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Rework: quarantined by the upstream sync (23 clusters, 997 modules)
 
@@ -34,7 +34,7 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 
 Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 87, stage 3 5 items.
 
-## Stage 1: nodes to split (12)
+## Stage 1: nodes to split (11)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -48,7 +48,6 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-tame-root-tower-extension` | 4011 | none |
 | `lem-sfb-condensed-internal-bar-resolution` | 4012 | none |
 | `lem-sfb-internal-action-site-presentation` | 4012 | none |
-| `det-lem-stratified-lattice-scheme` | - | none |
 | `def-per-support-condition` | - | none |
 
 ## Stage 2: nodes to state (32)
@@ -62,10 +61,10 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-per-adic-stratified-pullback-texact` | 1 | state | 1 |
 | `lem-sfb-condensed-product-action-inflation` | 1 | state | 1 |
 | `lem-sfb-field-separable-cech-coordinates` | 1 | state | 1 |
+| `det-lem-stratified-lattice-scheme` | 1 | state | 0 |
 | `lem-a1-finite-pullback-strict-tower-comparison` | 1 | state | 0 |
 | `lem-fd-whole-tower-integral-pullback-comparison` | 1 | state | 0 |
 | `lem-pod-fixed-pair-truncation-cohomology` | 1 | state | 0 |
-| `lem-pur-affine-coordinate-support-stalk-continuity` | 1 | state | 0 |
 | `lem-pur-concentrated-support-etale-transfer` | 1 | state | 0 |
 | `lem-sf-cbc-localized-strict-tensor-descent` | 1 | state | 0 |
 | `lem-sf-open-exchange-roos-restriction` | 1 | state | 0 |
@@ -88,7 +87,7 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-weil-pbc-finite-free-strict-tower-transport` | 1 | state | 0 |
 | `lem-weil-point-derived-tensor-tower-coherence` | 1 | state | 0 |
 
-Not open yet: 375 nodes that below a finished node, not needed, 109 nodes that wait for a statement dependency (bottom-up), 11 nodes that wait for stage 1 (statement downstream not grounded).
+Not open yet: 375 nodes that below a finished node, not needed, 109 nodes that wait for a statement dependency (bottom-up), 10 nodes that wait for stage 1 (statement downstream not grounded).
 
 ## Stage 3: modules to prove (138)
 
