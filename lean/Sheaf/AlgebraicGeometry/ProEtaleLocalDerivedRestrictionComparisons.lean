@@ -10,9 +10,9 @@ public import Sheaf.CategoryTheory.RingedSiteDerivedRestrictionUniverses
 public import Sheaf.CategoryTheory.RingedDerivedRestrictionGeneral
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Sheaf.AlgebraicGeometry.ProEtaleModuleInverseImageComparison
-import Sheaf.CategoryTheory.SiteInverseImageTensor
+import WeilConjectures.Mathlib.CategoryTheory.Functor.Flat
+import Mathlib.CategoryTheory.Adjunction.Additive
 import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
-import Sheaf.CategoryTheory.FiniteTypeRestrictionExact
 
 /-!
 # Exact inverse image and local derived restriction
@@ -74,7 +74,35 @@ theorem inverseImage_exact {S T : Scheme.{u}} (g : S ⟶ T)
     (proEtaleModuleInverseImage g R).Additive ∧
       PreservesFiniteLimits (proEtaleModuleInverseImage g R) ∧
       PreservesFiniteColimits (proEtaleModuleInverseImage g R) := by
-  sorry
+  let F := proEtaleModuleInverseImage g R
+  let V := SheafOfModules.toSheaf.{u + 1} (inverseRing g R)
+  let : PreservesFiniteColimits (SheafOfModules.toSheaf.{u + 1} (ring R)) :=
+    (moduleSheaves_colimits_forgetful (ring R)).2.2.1
+  let : PreservesFiniteColimits V :=
+    (moduleSheaves_colimits_forgetful (inverseRing g R)).2.2.1
+  let : (proEtaleSheafDirectImage g AddCommGrpCat.{u + 1}).Additive := ⟨by
+    intros
+    ext W
+    rfl⟩
+  let : (proEtaleSheafInverseImage g AddCommGrpCat.{u + 1}).Additive :=
+    (proEtaleSheafAdjunction g AddCommGrpCat.{u + 1}).left_adjoint_additive
+  let : RepresentablyFlat (proEtaleBaseChange g) := flat_of_preservesFiniteLimits _
+  let : PreservesFiniteLimits (proEtaleSheafInverseImage g AddCommGrpCat.{u + 1}) :=
+    inferInstance
+  let : PreservesColimitsOfSize.{0, 0}
+      (proEtaleSheafInverseImage g AddCommGrpCat.{u + 1}) :=
+    (proEtaleSheafAdjunction g AddCommGrpCat.{u + 1}).leftAdjoint_preservesColimits
+  obtain ⟨e⟩ := (proEtale_moduleInverseImage_comparison g R).1
+  let : (F ⋙ V).Additive := Functor.additive_of_iso e.symm
+  let : F.Additive := Functor.additive_of_comp_faithful F V
+  let : ReflectsFiniteLimits V := reflectsFiniteLimits_of_reflectsIsomorphisms V
+  let : PreservesFiniteLimits (F ⋙ V) := preservesFiniteLimits_of_natIso e.symm
+  let : PreservesFiniteLimits F := preservesFiniteLimits_of_reflects_of_preserves F V
+  let : ReflectsFiniteColimits V :=
+    { reflects := fun _ ↦ reflectsColimitsOfShape_of_reflectsIsomorphisms }
+  let : PreservesFiniteColimits (F ⋙ V) := preservesFiniteColimits_of_natIso e.symm
+  let : PreservesFiniteColimits F := preservesFiniteColimits_of_reflects_of_preserves F V
+  exact ⟨inferInstance, inferInstance, inferInstance⟩
 
 /-- Additivity supplied by the actual-ring exactness assertion.
 Source: Stacks, Tag 03DA (blueprint: lem-weil-pbc-local-derived-restriction-comparisons). -/
@@ -214,6 +242,41 @@ theorem comparisons :
                   (((proEtaleModuleInverseImage g R).mapDerivedCategorySingleFunctor 0).hom.app M) ≫
                 ((restriction g R U).mapDerivedCategorySingleFunctor 0).hom.app
                   ((proEtaleModuleInverseImage g R).obj M))) := by
-  sorry
+  let F := proEtaleModuleInverseImage g R
+  let G := restriction g R U
+  let D := F.mapDerivedCategory ⋙ G.mapDerivedCategory
+  let obj := fun K ↦ ringedSiteDerivedRestrictionOfUniverses (inverseRing g R) U
+    (F.mapDerivedCategory.obj K)
+  let L := D.copyObj obj (comparison g R U)
+  let α := D.isoCopyObj obj (comparison g R U)
+  refine ⟨L, (fun _ ↦ rfl), α, ?_, ?_, ?_, ?_⟩
+  · intro K
+    simp [α, Functor.isoCopyObj]
+  · intro K K' a
+    rfl
+  · intro q
+    let H := DerivedCategory.homologyFunctor
+      (SheafOfModules.{u + 1} ((inverseRing g R).over U)) q
+    refine ⟨Functor.isoWhiskerRight (F.mapDerivedCategoryHomologyFunctorIso q) G ≪≫
+      Functor.isoWhiskerLeft F.mapDerivedCategory (G.mapDerivedCategoryHomologyFunctorIso q) ≪≫
+      Functor.isoWhiskerRight α H, ?_⟩
+    intro K
+    rfl
+  · intro r
+    let single := DerivedCategory.singleFunctor (SheafOfModules.{u + 1} (ring R)) 0
+    let sF := F.mapDerivedCategorySingleFunctor 0
+    let sG := G.mapDerivedCategorySingleFunctor 0
+    refine ⟨Functor.isoWhiskerLeft (single ⋙ shiftFunctor _ r) α.symm ≪≫
+      Functor.isoWhiskerLeft single
+        (Functor.isoWhiskerRight (F.mapDerivedCategory.commShiftIso r) G.mapDerivedCategory ≪≫
+          Functor.isoWhiskerLeft F.mapDerivedCategory (G.mapDerivedCategory.commShiftIso r)) ≪≫
+      Functor.isoWhiskerRight
+        (Functor.isoWhiskerRight sF G.mapDerivedCategory ≪≫ Functor.isoWhiskerLeft F sG)
+        (shiftFunctor _ r), ?_⟩
+    intro M
+    simp only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
+      Functor.isoWhiskerRight_hom, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+      Iso.symm_hom, Functor.comp_obj, Functor.map_comp, Category.assoc]
+    rfl
 
 end AlgebraicGeometry.Scheme.ProEtaleLocalRestriction

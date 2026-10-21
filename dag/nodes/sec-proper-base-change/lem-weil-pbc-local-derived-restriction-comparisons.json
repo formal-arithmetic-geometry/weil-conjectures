@@ -21,70 +21,45 @@
  ],
  "proof": [
   {
-   "text": "Put $F=F_g$ and $G=G_U$. On underlying abelian sheaves, $F$ is naturally isomorphic to the exact abelian inverse image: use [lem-weil-pbc-proetale-module-inverse-image-comparison] and [lem-weil-pbc-left-exact-site-inverse-image-tensor], with the base-change functor defining $g^{-1}$ in [def-weil-proetale-inverse-image]. The forgetful functors from modules are faithful and exact by [lem-weil-pbc-module-sheaves-colimits-forgetful]. They reflect exact sequences: by [lem-sp-exact-functor-preserves-homology] the underlying homology of a sequence is the homology of its underlying sequence; a module with zero underlying abelian sheaf is zero, since faithfulness makes its identity zero. Applying this to the image under $F$ of a short exact sequence proves exactness of $F$. Additivity follows by forgetting addition of maps and using faithfulness. This uses the module action over the actual ring $g^{-1}R$, with no extension to a different ring.",
+   "text": "Write F for actual-ring module inverse image and V for the target module-to-abelian-sheaf functor. The comparison [lem-weil-pbc-proetale-module-inverse-image-comparison] identifies F followed by V with the source forgetful functor followed by abelian inverse image. For the base-change functor of [def-weil-proetale-inverse-image], finite-limit preservation gives representable flatness; the generic flat left-Kan-extension and sheafification instances give finite-limit preservation of abelian inverse image. Its adjunction gives finite-colimit preservation and, since direct image is additive sectionwise, additivity. The module forgetful functors are faithful, conservative and preserve finite limits and finite colimits [lem-weil-pbc-module-sheaves-colimits-forgetful]. Transfer additivity and finite-limit/finite-colimit preservation along the comparison, then reflect them through V. This proves inverseImage_exact, with no hypothesis on g or change of coefficient ring.",
    "uses": [
-    "lem-weil-pbc-proetale-module-inverse-image-comparison",
-    "lem-weil-pbc-left-exact-site-inverse-image-tensor",
     "def-weil-proetale-inverse-image",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful",
-    "lem-sp-exact-functor-preserves-homology"
+    "lem-weil-pbc-proetale-module-inverse-image-comparison",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 03D2 (lemma-pullback-module), 03DA (lemma-abelian); homology.tex Tag 010N (lemma-exact-functor)."
+    "place": "Tags 03D2 and 03DA; the flat Kan-extension implementation is WeilConjectures.Mathlib.CategoryTheory.Functor.Flat and the site pullback instances."
    }
   },
   {
-   "text": "On the ringed site $(S_{\\mathrm{proet}},R')$, [lem-weil-pbc-finite-type-restriction-exact] says that restriction of $R'$-module sheaves to $R'_U$-module sheaves on the slice over any object $U$ preserves finite limits and finite colimits; the site is small because the pro-etale site is taken on its chosen small skeleton, as in the statement's pro-etale site convention. A functor between abelian categories preserving finite limits and finite colimits is additive (Tag 010N (1)), so $G$ is exact as a functor of module sheaves, not merely of abelian sheaves. Its source and target rings and its sectionwise formula are precisely those of [def-pur-localized-ringed-site]. No assumption that $U$ is an open subscheme or immersion is introduced.",
+   "text": "For G equal to the existing slice restriction [def-pur-localized-ringed-site], apply the universe-independent ringedOverFunctor_exactGeneral interface [def-weil-pbc-ringed-derived-restriction]. It gives additivity and preservation of finite limits and finite colimits for precisely the existing source ring and restricted ring, without identifying object and Hom universes.",
    "uses": [
-    "lem-weil-pbc-finite-type-restriction-exact",
-    "def-pur-localized-ringed-site"
+    "def-pur-localized-ringed-site",
+    "def-weil-pbc-ringed-derived-restriction"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Section 03DH (section-localize), Definition 04IX (definition-localize-ringed-site), localization morphism with identity structure map; homology.tex Tag 010N (lemma-exact-functor) (1)."
+    "place": "Section 03DH and Tag 04IX: localization of a ringed site."
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-exact-functor-derived-factorization] separately to $F$ and $G$. Write $C(F),C(G)$ for their termwise complex functors, $Q_T,Q_S,Q_U$ for localization, and write their natural factorization isomorphisms as $\\varphi^F_A:DF(Q_TA)\\xrightarrow{\\sim}Q_SC(F)A$ and $\\varphi^G_B:DG(Q_SB)\\xrightarrow{\\sim}Q_UC(G)B$. The factors commute with every integer shift. In particular no boundedness or resolution hypothesis is needed for either factor.",
-   "uses": [
-    "lem-weil-pbc-exact-functor-derived-factorization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 015F (lemma-right-derived-exact-functor), parts (3)-(4); exact-functor termwise factorization."
-   }
-  },
-  {
-   "text": "For $X=DF(K)$ let $C$ be the chosen localization representative in [def-weil-pbc-ringed-site-derived-restriction], with its representative isomorphism $\\epsilon_X:Q_SC\\xrightarrow{\\sim}X$. By definition $L(K)=Q_UC(G)C$. Define, in functional order,\n$$\\alpha_K=\\varphi^G_C\\circ DG(\\epsilon_X^{-1}):DG(X)\\xrightarrow{\\sim}L(K).$$\nBoth arrows are isomorphisms, so this proves the asserted comparison. For $a:K\\to K'$ define\n$$L(a)=\\alpha_{K'}\\circ DG(DF(a))\\circ\\alpha_K^{-1}.$$\nCancellation of $\\alpha_K^{-1}\\alpha_K$ proves $L(1)=1$ and $L(ba)=L(b)L(a)$. This also gives $L(a)\\alpha_K=\\alpha_{K'}DG(DF(a))$ and $L(a^{-1})=L(a)^{-1}$ whenever $a$ is invertible. Thus an objectwise choice of representative need not be a functor on complexes: these formulas supply the functor on derived objects.",
-   "uses": [
-    "def-weil-pbc-ringed-site-derived-restriction",
-    "def-weil-abstract-derived-category",
-    "lem-weil-pbc-exact-functor-derived-factorization"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 015F (lemma-right-derived-exact-functor); explicit conjugation using the localization representative convention."
-   }
-  },
-  {
-   "text": "The construction also compares with every other representative. If $b:Q_SB\\xrightarrow{\\sim}X$, set $\\lambda_{B,b}=\\varphi^G_B\\circ DG(b^{-1})$. The comparison from the chosen local object to $Q_UC(G)B$ is $\\lambda_{B,b}\\alpha_K^{-1}$. Comparisons for three representatives compose because the middle $\\lambda^{-1}\\lambda$ cancels. If $h:B\\to B'$ is a chain map and $t:X\\to X'$ satisfies $t b=b'Q_S(h)$, naturality of $\\varphi^G$ gives\n$$Q_UC(G)(h)\\lambda_{B,b}=\\lambda_{B',b'}DG(t).$$\nIndeed substitute $Q_S(h)b^{-1}=(b')^{-1}t$ in that naturality equation. The same equation holds after inverting quasi-isomorphisms, since $C(G)$ preserves them. The localization universal property therefore gives the corresponding equation for arbitrary derived morphisms. This identifies the transported functor with termwise restriction on any representative, including the maps.",
+   "text": "Apply exact-functor localization [lem-weil-pbc-exact-functor-derived-factorization] to F and G. For X=DF(K), let C and epsilon:Q(C) isomorphic to X be the chosen localization representative [def-weil-abstract-derived-category]. The existing comparison is DG(epsilon inverse), followed by the factorization at C; its target is exactly the recorded representative restriction [def-weil-pbc-ringed-site-derived-restriction]. Use Mathlib Functor.copyObj on DF followed by DG with these objectwise isomorphisms. Its map is alpha_K inverse followed by DG(DF(a)) followed by alpha_K-prime; the functor laws and natural isomorphism are supplied by copyObj and isoCopyObj. Object equality and the specified comparison equation follow by reflexivity and the identity isomorphism laws.",
    "uses": [
     "lem-weil-pbc-exact-functor-derived-factorization",
-    "def-weil-abstract-derived-category"
+    "def-weil-abstract-derived-category",
+    "def-weil-pbc-ringed-site-derived-restriction"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 015F (lemma-right-derived-exact-functor); localization at quasi-isomorphisms, explicit factorization naturality calculation."
+    "place": "Tag 015F: every complex computes an exact derived functor; representative conjugation is implemented by Mathlib CategoryTheory.NatIso, Functor.copyObj and isoCopyObj."
    }
   },
   {
-   "text": "For an exact functor $E$, [lem-weil-pbc-exact-functor-complex-cohomology] gives natural isomorphisms $c^q_{E,A}:H^q(C(E)A)\\xrightarrow{\\sim}E H^q(A)$, induced by its maps on kernels and images. By [def-weil-abstract-derived-category], both sides factor through localization: the first through $DE$ and $\\varphi^E$, and the second through $H^q$. Thus the inverse of $c^q$, composed with the inverse cohomology of $\\varphi^E$, gives\n$$h^q_{E,Y}:E H^q(Y)\\xrightarrow{\\sim}H^q(DE(Y)).$$\nThis formula on $Y=QA$ extends to all derived objects and maps: naturality holds on chain maps by naturality of $c^q$ and $\\varphi^E$, on inverses of quasi-isomorphisms by cancellation, and hence on localization morphisms. Apply it to $F$ and $G$. The required local comparison is explicitly\n$$G F H^q(K)\\xrightarrow{G(h^q_{F,K})}G H^q(DFK)\\xrightarrow{h^q_{G,DFK}}H^q(DGDFK)\\xrightarrow{H^q(\\alpha_K)}H^q(LK).$$\nNaturality of the first two arrows and the equation for $L(a)$ in step 4 prove naturality of this composite. Step 5 identifies it on any representative with the kernel/image comparison for termwise $GF$, so it is compatible with $\\alpha$.",
+   "text": "For each integer q, take the canonical derived homology isomorphism h_F and h_G, descended from the exact-functor complex-cohomology comparison [lem-weil-pbc-exact-functor-complex-cohomology]. Whisker h_F on the right by G and h_G on the left by DF, then whisker alpha on the right by H^q. Their composite is the required natural isomorphism, with component G(h_F) followed by h_G followed by H^q(alpha). The displayed component equality is definitional.",
    "uses": [
     "lem-weil-pbc-exact-functor-complex-cohomology",
     "lem-weil-pbc-exact-functor-derived-factorization",
@@ -93,40 +68,37 @@
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 010N (lemma-exact-functor), kernel and image comparison; derived.tex Tag 015F and the localization definition."
+    "place": "Tag 010N; derived.tex Tag 015F. The canonical descent is mapDerivedCategoryHomologyFunctorIso in the adopted source library."
    }
   },
   {
-   "text": "For $M[0]$, termwise application gives the degree-zero complexes $F(M)[0]$ and $GF(M)[0]$: an additive exact functor sends the zero object and zero differentials to zero. Factorization therefore gives $DF(M[0])\\cong F(M)[0]$ and $DG(F(M)[0])\\cong GF(M)[0]$. Combine these with the integer-shift isomorphisms of [lem-weil-pbc-exact-functor-derived-factorization] to obtain\n$$DGDF(M[r])\\xrightarrow{\\sim}(GF M)[r].$$\nComposing with $\\alpha_{M[r]}^{-1}$ gives the asserted $L(M[r])\\cong(GFM)[r]$. The shift/factorization compatibility in that cited statement makes this the comparison computed on $M[0][r]$: in degree $n$ the term is $GF(M[0]^{n+r})$ and the differential is $(-1)^rGF(d^{n+r})$, the same on both sides. The cohomology comparison of step 6 uses those same kernels and image projections. On this single complex it is the identity on $GFM$ in degree $-r$, and the unique map between zero objects in other degrees. Step 5 transports these equalities to the chosen representatives. Consequently the single/shift and cohomology comparisons agree with $\\alpha$ and with maps of $M$, for positive, zero and negative $r$.",
+   "text": "For each integer r, first whisker alpha inverse by the degree-zero single functor followed by shift r. Compose with the DF shift isomorphism mapped through DG and then the DG shift isomorphism. Finally compose with the shift of the DG-image of the F single comparison followed by the G single comparison. These are natural isomorphisms, so their composite gives the required natural shifted-single isomorphism. Expand whiskering and composition, distribute the shift functor over the last composite, and reassociate to obtain exactly the stated component formula. The canonical commShiftIso already includes both positive and negative shifts and their signs.",
    "uses": [
     "lem-weil-pbc-exact-functor-derived-factorization",
-    "lem-weil-pbc-exact-functor-complex-cohomology",
     "def-weil-abstract-derived-category"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 015F (lemma-right-derived-exact-functor); signed shifts of complexes and degree-zero complexes, explicit calculation."
+    "place": "Tag 015F, exact termwise derived functors; canonical commShiftIso and mapDerivedCategorySingleFunctor."
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-proetale-module-inverse-image-comparison",
-  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
   "def-weil-proetale-inverse-image",
+  "lem-weil-pbc-proetale-module-inverse-image-comparison",
   "lem-weil-pbc-module-sheaves-colimits-forgetful",
-  "lem-sp-exact-functor-preserves-homology",
-  "lem-weil-pbc-finite-type-restriction-exact",
   "def-pur-localized-ringed-site",
+  "def-weil-pbc-ringed-derived-restriction",
   "lem-weil-pbc-exact-functor-derived-factorization",
-  "def-weil-pbc-ringed-site-derived-restriction",
   "def-weil-abstract-derived-category",
+  "def-weil-pbc-ringed-site-derived-restriction",
   "lem-weil-pbc-exact-functor-complex-cohomology"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Tag 015F (lemma-right-derived-exact-functor), with explicit representative-conjugation, cohomology descent and shifted-single calculations; sites-modules.tex Tags 03D2, 03DA, 04IX and homology.tex Tag 010N supply the ingredients."
+  "place": "Tag 015F, sites-modules.tex Tags 03D2, 03DA, 04IX and homology.tex Tag 010N; implemented by U6 using faithful conservative forgetful reflection, Functor.copyObj, and the canonical derived homology/shift/single natural isomorphisms."
  },
  "mathlib_searches": [
   {
@@ -272,5 +244,15 @@
   "group": "O4",
   "result": "pass",
   "note": "Read the item, 10 stmt_dep records, report and module; checked the declarations used in side-live (proEtaleModuleInverseImage over the actual ring g^{-1}R, ringedSiteDerivedRestrictionOfUniverses, ringedOverFunctor_exactGeneral, upstream mapDerivedCategoryHomologyFunctorIso = canonical liftNatIso). Every clause is rendered: inverseImage_exact for arbitrary g (no prior general-g duplicate; only an immersion-only theorem exists); slice exactness from the landed dep; hobj ties L to the recorded representative restriction; alpha is pinned to comparison = DG(eps^{-1}) then the factor (direction correct); L.map is pinned by conjugation; cohomology iso component G(h_F) then h_G then H^q(alpha); shifted-single iso via the canonical commShiftIso and single comparisons; q, r over all of Z; no extra hypotheses; universes bound. Node diff vs live: only lean plus added stmt_dep def-weil-pbc-ringed-derived-restriction (landed, no cycle, needed because overFunctor_exact is SmallCategory-only); statement verbatim; plain imports = proof_dep modules; docstrings carry source, blueprint and proof steps. Advisory: dep def-weil-derived-cohomology-sheaves lean record points to unrelated sfModelCohomology (worker correctly used its mathlib_match homologyFunctor); overFunctor_derivedRestrictionIso already gives the inverse of the slice-restriction part of comparison; the second-reading section is by the same worker, disclosed. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U6",
+  "result": "pass",
+  "landing": "20261021T120746-L-3943711",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
