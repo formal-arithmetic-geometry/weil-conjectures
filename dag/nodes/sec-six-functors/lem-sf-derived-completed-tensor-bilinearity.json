@@ -14,11 +14,120 @@
   "def-pc-tensor-complex-sheaves",
   "lem-weil-pbc-site-derived-tensor-descent",
   "lem-weil-pbc-ringed-koszul-completion-reflector",
-  "def-weil-linear-scalar-localization"
+  "def-weil-linear-scalar-localization",
+  "def-weil-linear-functor",
+  "def-weil-pbc-additive-functor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "On a module-sheaf Hom group define $(af)_U(x)=s(a)|_U f_U(x)$; restriction compatibility follows from the restriction rule in [def-weil-sheaf-of-modules-category]. Composition is bilinear by componentwise calculation. The same formulas on chain maps give an $A$-linear category of complexes. For the sheaf tensor of [def-pur-sheaf-tensor-product], $((af+bf')\\otimes g)(x\\otimes y)=s(a)f(x)\\otimes g(y)+s(b)f'(x)\\otimes g(y)$ sectionwise before sheafification; the balancing relation moves either scalar to the output. Equality passes through sheafification, and the other variable has the same formula. On each summand of the signed direct-sum totalization [def-pc-tensor-complex-sheaves] the induced chain map is $f^i\\otimes g^j$. Thus total tensor on complexes preserves sums and scalar multiplication separately: its fixed signs in the differential do not change these equalities.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-pur-sheaf-tensor-product",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section 03EK (section-tensor-product), sectionwise tensor followed by sheafification; explicit componentwise calculation"
+   }
+  },
+  {
+   "text": "Write $q:\\mathrm{CoCh}(R)\\to D(R)$ for the localization at quasi-isomorphisms in [def-weil-abstract-derived-category]. It is additive by [lem-sfb-derived-localization-additive]. Apply [lem-sfb-additive-localization-linear] to the $A$-linear complex category of Step 1, this additive localization, and the preadditive derived category. This gives exactly the induced $A$-linear structure on $D(R)$ and makes $q$ $A$-linear. Thus $q$ preserves both sums and scalar multiplication on all chain maps.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-sfb-derived-localization-additive",
+    "lem-sfb-additive-localization-linear"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Definition 05RU (definition-unbounded-derived-category), additive localization; scalar structure via the cited Mathlib localization leaf"
+   }
+  },
+  {
+   "text": "Fix a flat-term K-flat complex $P$. By [lem-weil-pbc-kflat-fixed-tensor-triangulated], the total-tensor functors with fixed factor $P$ descend to exact, hence additive, functors $G_P,H_P:D(R)\\to D(R)$ canonically identified with $T(qP,-)$ and $T(-,qP)$. Their descent comparisons identify $G_Pq$ with $q\\operatorname{Tot}(P\\otimes-)$ and $H_Pq$ with $q\\operatorname{Tot}(-\\otimes P)$. The latter functors are additive and $A$-linear by Steps 1–2. Apply [lem-sfb-linear-localization-descent] to $q$ and each comparison: $G_P$ and $H_P$ preserve scalar multiplication as well. The equivalence in [lem-weil-pbc-site-derived-tensor-descent] supplies for every derived object $M$ a flat-term K-flat $P$ and an isomorphism $e:qP\\cong M$. Bifunctoriality gives natural isomorphisms $T(e,1):T(qP,-)\\cong T(M,-)$ and $T(1,e):T(-,qP)\\cong T(-,M)$. Conjugating any sum or scalar multiple by an isomorphism preserves it, since composition is $A$-bilinear. Therefore both fixed-variable functors of $T$ are additive and $A$-linear for every $M$, independently of the chosen representative.",
+   "uses": [
+    "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+    "def-weil-triangulated-category",
+    "lem-sfb-linear-localization-descent",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution) and 06YU (definition-derived-tor and preceding construction); linear descent is the cited localization leaf"
+   }
+  },
+  {
+   "text": "The full subcategory $\\mathcal C$ inherits the Hom modules and bilinear composition of $D(R)$ [def-weil-linear-category]. For $f,f':X\\to Y$ and $a,b\\in A$, naturality of the unit gives\n$$\\bigl(aL(f)+bL(f')\\bigr)\\eta_X=\\eta_Y(af+bf')=L(af+bf')\\eta_X.$$\nHere $LY$ is complete. The bijection of [lem-weil-pbc-ringed-koszul-completion-reflector], with source $X$ and complete target $LY$, makes precomposition with $\\eta_X$ injective on $\\operatorname{Hom}(LX,LY)$. Hence $L(af+bf')=aL(f)+bL(f')$. This proves additivity and $A$-linearity of the specified reflector directly from its natural universal unit; it does not require a choice of a linear resolution functor.",
+   "uses": [
+    "def-weil-linear-category",
+    "lem-weil-pbc-ringed-koszul-completion-reflector"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tags 099B (lemma-derived-completion) and 0A0E (lemma-derived-completion-koszul); two-line universal-unit argument"
+   }
+  },
+  {
+   "text": "Restrict $T$ to $\\mathcal C\\times\\mathcal C$ and compose with $L$. Since both fixed-variable functors of $T$ and $L$ preserve sums and scalars, those of $B=L\\circ T$ do also. Its simultaneous morphism action is\n$$B(f,g)=B(1_{M'},g)\\circ B(f,1_N)\\quad(f:M\\to M',\\ g:N\\to N').$$\nThus this action is $A$-bilinear, by the separate linearity just proved and bilinearity of composition [def-weil-linear-category]. As a composite of functors it preserves identities and simultaneous composition.",
+   "uses": [
+    "def-weil-linear-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/def-wf-tensor-product.md",
+    "place": "first sentence, coefficient tensor model; explicit composition of the functors proved linear in Steps 3–4"
+   }
+  },
+  {
+   "text": "For the four fixed objects apply the bilinear base-change clause of [def-weil-module-base-change] to the $A$-bilinear map $(f,g)\\mapsto B(f,g)$ of Step 5 and the ring map $A\\to S=A[1/p]$. It supplies a unique $S$-bilinear map on the two base-changed Hom modules with $(f\\otimes x,g\\otimes y)\\mapsto B(f,g)\\otimes xy$. By [def-weil-linear-scalar-localization] these are precisely the raw localized Hom modules. The notation in the item puts the scalar first: $x\\otimes f$ denotes $f\\otimes x$ under the canonical tensor flip, and $xy\\otimes B(f,g)$ denotes $B(f,g)\\otimes xy$. Therefore the resulting map is exactly $\\beta$ with its required formula and uniqueness. The cited base-change assertion imposes no flatness or torsion-freeness condition on the Hom modules.",
+   "uses": [
+    "def-weil-module-base-change",
+    "def-weil-linear-scalar-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Section 00CV (section-tensor-product), Lemma 00CX (lemma-tensor-product), and Definition 05G4 (definition-base-change); the cited Mathlib base-change leaf supplies the bilinear extension"
+   }
+  },
+  {
+   "text": "Use the composition and identity formula of [lem-weil-linear-scalar-localization-category]. First $\\beta(1\\otimes1_M,1\\otimes1_N)=1\\otimes1_{B(M,N)}$. For integral composable $f_1,f_2$ and $g_1,g_2$ and scalars $x_1,x_2,y_1,y_2\\in S$, both the composite of their two $\\beta$-images and the $\\beta$-image of their simultaneous composites equal\n$$(x_2y_2x_1y_1)\\otimes B(f_2f_1,g_2g_1),$$\nbecause $B(f_2,g_2)B(f_1,g_1)=B(f_2f_1,g_2g_1)$ and $S$ is commutative. Each side is $S$-multilinear in the four localized arrows. Every tensor element is a finite sum of pure tensors, so distributing proves the same equation for arbitrary arrows. Thus the maps define the claimed bifunctor with object map $B$. Taking $x=p^{-r}$, $y=p^{-t}$ in Step 6 gives $\\bar B(f/p^r,g/p^t)=B(f,g)/p^{r+t}$. No cancellation of a power of $p$ was used, so this also covers torsion, zero localized Hom modules, and $S=0$.",
+   "uses": [
+    "lem-weil-linear-scalar-localization-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/def-wf-tensor-product.md",
+    "place": "first sentence, rational coefficient tensor model; explicit verification on tensor generators"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-abstract-derived-category",
+  "lem-sfb-derived-localization-additive",
+  "lem-sfb-additive-localization-linear",
+  "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+  "def-weil-triangulated-category",
+  "lem-sfb-linear-localization-descent",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "def-weil-linear-category",
+  "lem-weil-pbc-ringed-koszul-completion-reflector",
+  "def-weil-module-base-change",
+  "def-weil-linear-scalar-localization",
+  "lem-weil-linear-scalar-localization-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/def-wf-tensor-product.md",
+  "place": "coefficient tensor model, expanding current parent proof Step 3 (wfRationalTensorHom_exists) using Stacks 06YS/06YU and 099B/0A0E and existing linear-localization and module-base-change leaves"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,10 +163,45 @@
    "results": "8 hits; CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, DerivedCategory.instLinearCochainComplexIntQ, DerivedCategory.instLinear, DerivedCategory.instLinearHomotopyCategoryIntUpQh, DerivedCategory.instLinearSingleFunctor, DerivedCategory.instLinearShiftFunctorInt, CategoryTheory.Tor', CategoryTheory.Tor",
    "date": "2026-10-21",
    "verdict": "no match: ordinary tensor, linear exact derived functors and module base change are ingredients; no hit proves bilinearity of the specified K-flat tensor followed by the Koszul reflector"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*[Bb]ilinear|[Bb]ilinear.*derived|completionLinear|rationalTensorHom",
+   "results": "0 hits; ",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: existing ordinary tensor, derived linear localization and module-base-change ingredients only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived completed tensor product of module sheaves is additive and linear in each variable and extends to rationalized morphisms",
+   "results": "8 hits; CategoryTheory.tensorRight_additive, PiTensorProduct.instAddCommGroup, TensorProduct.directSumLeft, MultilinearMap.domCoprodDep_apply, TensorProduct.finsuppLeft, PresheafOfModules.Monoidal.tensorObjMap, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, SheafOfModules.instPreadditive",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: existing ordinary tensor, derived linear localization and module-base-change ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"functor_linear_iff\"",
+   "results": "1 hits; CategoryTheory.Localization.functor_linear_iff",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: existing ordinary tensor, derived linear localization and module-base-change ingredients only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The K-flat derived tensor of sheaves is bilinear over global scalars and remains bilinear after Koszul completion and scalar localization",
+   "results": "8 hits; PresheafOfModules.Monoidal.tensorObj, Module.Flat.lTensor_exact, Module.Flat.instTensorProduct, Module.Flat.iff_rTensor_exact', LightCondensed.instMonoidalLightCondSetLightCondModFree, Module.Flat.iff_lTensor_exact', Module.Flat.rTensor_exact, Module.Flat.lTensor_shortComplex_exact",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: existing ordinary tensor, derived linear localization and module-base-change ingredients only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive localization of a linear category makes derived functors linear and a reflective full subcategory inherits a linear reflector from its universal unit",
+   "results": "8 hits; CategoryTheory.Localization.functor_linear_iff, CategoryTheory.Localization.instLinearLocalization'Q', CategoryTheory.Localization.instLinearLocalizationQ, CategoryTheory.Localization.functor_linear, CategoryTheory.Shift.linear_of_localization, DerivedCategory.instLinearHomotopyCategoryIntUpQh, DerivedCategory.instLinearCochainComplexIntQ, CategoryTheory.Localization.linear",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: existing ordinary tensor, derived linear localization and module-base-change ingredients only"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "def-wf-tensor-product",
@@ -69,10 +213,49 @@
  "blueprint": {
   "from": {
    "node": "def-wf-tensor-product",
-   "place": "first sentence, the coefficient tensor model; base proof Step 7 (wfRationalTensorHom_exists): sheaf and derived bilinearity, reflector linearity, and the localized Hom map",
+   "place": "first sentence, the coefficient tensor model; current base proof Step 3 (wfRationalTensorHom_exists): sheaf and derived bilinearity, reflector linearity, and the localized Hom map",
    "via": []
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sf-derived-completed-tensor-bilinearity",
+  "worker": "stage1",
+  "summary": "Seven-step proof with no new nodes: pointwise tensor linearity, additive linear derived localization, scalar descent for both fixed K-flat tensor functors, universal-unit proof of reflector linearity, composition, bilinear base change of Hom modules, and generatorwise functor laws. Statement unchanged. Existing Q20 searches retained and five actual Q37 searches appended. Parent reference updated from old Step 7 to current Step 3.",
+  "blueprint": "def-wf-tensor-product first sentence, its adic/rational coefficient tensor model; current parent proof Step 3 (wfRationalTensorHom_exists). Steps 1–3 supply K-flat-derived linearity, Step 4 completion linearity, Steps 5–7 the rational Hom action and its bifunctor laws.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+    "why": "Generic ringed-site exactness and descent for the specified K-flat tensor; used only to obtain additive fixed-variable functors and their representative comparisons."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Generic ringed-site localization of flat-term K-flat representatives; fixes the specified tensor and ensures every fixed object has such a representative."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "why": "Generic universal completion unit and its injectivity on Hom into complete objects; this is the completion model already in the item statement."
+   },
+   {
+    "node": "lem-weil-linear-scalar-localization-category",
+    "why": "Raw localized category composition and identities; the unit has no alternative scalar-localization construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-pbc-ringed-koszul-completion-reflector",
+  "lem-weil-linear-scalar-localization-category"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q37-ef1c957bd",
+  "group": "Q37",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-ef1c957bd (reviewer sub-agent of L); spot-checked: I read the item and every cited statement in full. This is a first split: the statement is unchanged and the live node is unsplit with an empty proof. There is no re-split note and no dropped list entry, and the delivery adds no new nodes. Step 1 (sectionwise tensor linearity, which survives sheafification and totalization) is elementary and correct. Step 2: the hypotheses of lem-sfb-additive-localization-linear hold for q, which is the additive localization of def-weil-abstract-derived-category, so D(R) gets the induced A-linear structure. Step 3: lem-weil-pbc-kflat-fixed-tensor-triangulated gives exact fixed-P functors; lem-sfb-linear-localization-descent applies to q∘Tot(P⊗−), which is linear by Steps 1–2; essential surjectivity from lem-weil-pbc-site-derived-tensor-descent and conjugation by T(e,1) and T(1,e) cover every M without a functorial choice of resolutions. Step 4: linearity of the reflector follows from naturality of η and injectivity of the Hom bijection at LY; I rechecked it. lem-sbc-koszul-fibre-linear-descent assumes exact countable products and does not apply here. Step 5: B(f,g)=B(1,g)B(f,1) is well typed. Step 6: the bilinear base-change clause of def-weil-module-base-change gives β, and the scalar-first flip is stated explicitly. Step 7: I recomputed the four-variable multilinear check on pure tensors. Edge cases checked: S=0, p a unit, torsion Hom, an empty generator list, the unit ideal. Stacks tags 06YS/06YU/099B/0A0E/00CX/00CV/05G4/05RU/03EK all match their labels; I read 0A0E at algebraization.tex:1091 and it is the reflector model. No SGA, no cycle. lem-coef-completed-tensor-scalar-linearity, lem-sbc-ambient-operations-scalar-linearity, the reflector-adjunction node and lem-sbc-completed-operations-linear-natural-exchange are not duplicates. I accept the four declared generic tool_uses (kflat-fixed-tensor, site-derived-tensor-descent, Koszul reflector, linear-scalar-localization-category). Advisory only: source.place still says 'base proof Step 7', which is the parent's original-proof numbering; the current Step 3 is recorded in blueprint.from.place."
  }
 }
