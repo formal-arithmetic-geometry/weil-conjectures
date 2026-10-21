@@ -20696,3 +20696,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:31 L: merged deliver/Q79/lem-weil-pbc-lisse-lattice-reduced-open (reviewer FIX; first push; new nodes: 0)
 - 07:31 L: merged deliver/NM/lem-weil-pbc-tower-derived-evaluation-normalization (reviewer PASS; after a return; new nodes: 2)
 - 07:32 L: merged deliver/Q67/def-weil-punctual-weights (reviewer PASS; first push; new nodes: 0); claim not held by Q67: not your claim
+- 2026-10-21T07:32:06Z L: superseded stage-1 delivery Q68/lem-pur-completed-line-tensor-coherence at 6057a0e7eedc12451511e6533d666b3e2ffe365a; current completion retained; packet archived at refs/superseded/Q68/lem-pur-completed-line-tensor-coherence/6057a0e7eedc12451511e6533d666b3e2ffe365a; stale return retired.
