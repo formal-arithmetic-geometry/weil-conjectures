@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-per-dual-lisse-tensor",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Dual of a lisse tensor",
@@ -13,45 +13,184 @@
   "place": "node lem-per-dual-lisse-tensor, order 2740"
  },
  "stmt_deps": [
-  "def-weil-pbc-constructible-complexes",
-  "def-weil-pbc-scheme-conventions",
-  "def-wf-tate-twist"
+  "def-weil-finite-field-fiber",
+  "def-weil-pbc-qbar-category",
+  "def-pod-lisse-l-adic-sheaves",
+  "def-weil-derived-pullback-tensor-hom",
+  "thm-coef-qbar-verdier",
+  "lem-per-adic-lisse-cohomology-calculus",
+  "def-sbc-smooth-morphisms"
  ],
  "proof": [
   {
-   "text": "By [def-trf-dualizing-complex] and the derived tensor–Hom adjunction\nof [fix-lem-tensor-adjunction] of the framework chapter,\n\n$$\nD_X\\bigl(K\\otimes^L\\mathcal L\\bigr)\n=R\\mathcal Hom_{\\overline{\\mathbf Q}_\\ell}\\bigl(K\\otimes^L\\mathcal L,\n\\omega_X\\bigr)\n\\cong R\\mathcal Hom_{\\overline{\\mathbf Q}_\\ell}\\bigl(K,\nR\\mathcal Hom_{\\overline{\\mathbf Q}_\\ell}(\\mathcal L,\\omega_X)\\bigr).\n$$",
+   "text": "Use the standing geometric finite-field setting of [def-weil-finite-field-fiber], with $k=\\overline{\\mathbf F}_q$ and $\\ell\\ne\\operatorname{char}k$; the schemes in the constructible six-functor setting are separated and of finite type over $k$. Thus $X$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian] and finite dimensional by [lem-kun-dimension-finite-type]. By [def-weil-algebraically-closed-coefficients] and [def-pod-lisse-l-adic-sheaves], choose a common finite field $E\\subset\\overline{\\mathbf Q}_\\ell$ for $K$ and $\\mathcal L$. Write $R=\\mathcal O_E$, $\\varpi=\\varpi_E$ and $B=\\varprojlim_n(R/\\varpi^n)_X$. The rational category is the raw localization of the completed integral category: choose an integral representative $K_R$. By [lem-weil-pbc-integral-stratified-perfect-characterization], applied to the noetherian finite-dimensional scheme $X$, the integral category underlying $D^b_c(X,\\overline{\\mathbf Q}_\\ell)$ of the statement is exactly the derived-complete integral category used by the Verdier theorems cited below, with the same completed ring sheaf and reductions; hence the stage-$E$ rationalizations have the same objects and Hom groups. Every object and arrow below is formed at this one stage $E$, so no scalar-extension comparison between the two conventions is used. All the following ringed-site operations are over $B$, not over a discrete constant $R$-sheaf.",
    "uses": [
-    "def-trf-dualizing-complex",
-    "fix-lem-tensor-adjunction"
+    "def-weil-finite-field-fiber",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-kun-dimension-finite-type",
+    "def-weil-algebraically-closed-coefficients",
+    "def-pod-lisse-l-adic-sheaves",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "def-weil-derived-pullback-tensor-hom"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/lem-per-dual-lisse-tensor.proof.md",
+    "place": "paragraph 1: coefficient categories for the displayed tensor-Hom calculation"
+   }
   },
   {
-   "text": "For the lisse sheaf $\\mathcal L$, étale-locally constant of finite\nrank by [fin2-lem-lisse-trivialized-finite-etale] of the smooth-base-change chapter, the internal Hom into $\\omega_X$ is the tensor with the linear\ndual: on an étale neighborhood where\n$\\mathcal L\\cong\\overline{\\mathbf Q}_\\ell^{\\,r}$ one has\n$R\\mathcal Hom(\\mathcal L,\\omega_X)\\cong\\omega_X^{\\,r} \\cong\\mathcal L^\\vee\\otimes\\omega_X$, and the identification is\ncanonical and local, hence assembled into the global isomorphism\n\n$$\nR\\mathcal Hom_{\\overline{\\mathbf Q}_\\ell}(\\mathcal L,\\omega_X)\n\\cong\\mathcal L^\\vee\\otimes\\omega_X.\n$$",
+   "text": "The underlying space of the Noetherian scheme $X$ has minimal elements in every nonempty set of closed subsets by [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal]; taking complements, every ascending chain of open subsets stabilizes. Hence $X$ has finitely many connected components, each open, by [lem-sfb-noetherian-connected-components-open]. On each nonempty component choose a geometric point. The finite-field-stage lisse sheaf $\\mathcal L_E$ corresponds to a continuous finite-dimensional $E$-representation by [cor-galois-lisse-representations](2). By [lem-pod-profinite-stable-lattice] choose an invariant finite free $R$-lattice $V_R$. The finite coefficient equivalences in [cor-galois-lisse-representations](1), including their scalar compatibilities, turn $V_R/\\varpi^nV_R$ into finite locally free etale sheaves $L_n$ with the actual quotient transitions and $L_{n+1}\\otimes_{R/\\varpi^{n+1}}R/\\varpi^n\\cong L_n$. Their rational lisse sheaf is $\\mathcal L_E$ by clause (2). Combine these systems on the finitely many disjoint open components; the ranks are bounded and may vary or be zero. This does not assert that a single finite etale cover trivializes the rational sheaf.",
    "uses": [
-    "fin2-lem-lisse-trivialized-finite-etale"
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "lem-sfb-noetherian-connected-components-open",
+    "cor-galois-lisse-representations",
+    "lem-pod-profinite-stable-lattice"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stanford-weil2-seminar/L19.pdf",
+    "place": "Proposition 1.1.9, second and third bullets, p. 3; repair of blueprint paragraph 2"
+   }
   },
   {
-   "text": "Inserting this, and using once more that the internal Hom with a\nlisse sheaf commutes with the lisse tensor (the same étale-local\nargument applied to the second variable, with the identification\n$R\\mathcal Hom(K,\\mathcal L^\\vee\\otimes\\omega_X)\\cong R\\mathcal Hom(K,\\omega_X)\\otimes^L\\mathcal L^\\vee$),\n\n$$\nD_X\\bigl(K\\otimes^L\\mathcal L\\bigr)\n\\cong R\\mathcal Hom\\bigl(K,\\omega_X\\bigr)\\otimes^L\\mathcal L^\\vee\n=D_XK\\otimes^L\\mathcal L^\\vee,\n$$\n\nwhich is the asserted isomorphism.",
-   "uses": [],
-   "elementary": null
+   "text": "By [lem-per-lisse-completed-system-comparison], $N=\\varprojlim_n\\nu_X^*L_n$ is pro-etale locally finite free over $B$, with reductions $N/\\varpi^nN=\\nu_X^*L_n$, and its rationalization realizes $\\mathcal L_E$. Apply [lem-weil-pbc-integral-stratified-perfect-characterization](ii) to the single stratum $X$ and the local one-term models $R^r[0]$: $N[0]$ belongs to the exact integral constructible category, including its uniform reduction bounds and compatible etale-origin witnesses. In particular $N$ is perfect as a $B$-complex. Its ordinary dual $N^*=\\mathcal Hom_B(N,B)$ is locally $B^r[0]$ with the dual basis and belongs to the same integral category by the same criterion. By [lem-sfb-ringed-site-perfect-duality], its derived coefficient dual is represented by this ordinary dual: locally the complex of homomorphisms from $B^r[0]$ to any acyclic complex is a finite direct sum of that acyclic complex. These local identifications are the evaluation comparisons, so agree on overlaps.",
+   "uses": [
+    "lem-per-lisse-completed-system-comparison",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-sfb-ringed-site-perfect-duality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(1),(4); Proposition 6.8.11(3); Stacks Tag 08JJ, lemma-dual-perfect-complex"
+   }
+  },
+  {
+   "text": "Let $W_R=\\omega_{X,R}$. By [thm-coef-integral-verdier], $C_R=R\\mathcal Hom_B(K_R,W_R)=D_{X,R}K_R$ is integral bounded constructible. The lisse tensor $K\\otimes^L\\mathcal L$ is in $D^b_c(X,\\overline{\\mathbf Q}_\\ell)$ by [lem-per-adic-lisse-cohomology-calculus]. To relate the integral calculation to that tensor, use [lem-fix-constructible-tensor-completion] for $(K_R,N)$ and for $(N^*,C_R)$: their ordinary ambient derived tensors over $B$ are already complete and the canonical maps to the completed coefficient tensors are isomorphisms. Its hypotheses hold since $X$ is quasi-compact and quasi-separated and all four inputs just named are integral constructible.",
+   "uses": [
+    "thm-coef-integral-verdier",
+    "lem-per-adic-lisse-cohomology-calculus",
+    "lem-fix-constructible-tensor-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.5.5; blueprint paragraph 1, definition of Verdier dual"
+   }
+  },
+  {
+   "text": "In the ordinary ambient derived category $D(B)$, apply the tensor symmetry of [lem-sf-ringed-derived-closed-symmetric-monoidal] and then [lem-weil-pbc-ringed-internal-hom-exact-restriction] with its variables $(N,K_R,W_R)$. This gives the natural isomorphisms\n$$R\\mathcal Hom_B(K_R\\otimes_B^L N,W_R)\\cong R\\mathcal Hom_B(N\\otimes_B^L K_R,W_R)\\cong R\\mathcal Hom_B(N,R\\mathcal Hom_B(K_R,W_R))=R\\mathcal Hom_B(N,C_R).$$\nCurrying with $N$ as the outer Hom variable avoids any need to assert that tensoring the second variable of an arbitrary internal Hom commutes with a lisse tensor. Neither $K_R$ nor $C_R$ is assumed site-perfect.",
+   "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0FPT, lemma-symmetric-monoidal-derived; Tag 08J9, lemma-internal-hom"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-ringed-site-perfect-duality] to the perfect complex $P=N$ and the arbitrary second argument $C_R$. Inverting its evaluation isomorphism identifies $R\\mathcal Hom_B(N,C_R)$ with $N^*\\otimes_B^LC_R$. Compose with the preceding currying isomorphism and then the symmetry of [lem-sf-ringed-derived-closed-symmetric-monoidal] to obtain\n$$D_{X,R}(K_R\\otimes_B^LN)\\cong C_R\\otimes_B^LN^*.$$\nThe maps here are the global evaluation and currying maps of the cited statements. The local finite-free calculation is used only to check the perfectness hypothesis, not to glue independently chosen isomorphisms.",
+   "uses": [
+    "lem-sfb-ringed-site-perfect-duality",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JJ, lemma-dual-perfect-complex; blueprint paragraphs 2-3, evaluation identification"
+   }
+  },
+  {
+   "text": "Replace both ordinary tensors in the preceding isomorphism by their completed tensors using Step 4. Apply rationalization, and then the inclusion into the common-stage category. By [def-weil-derived-pullback-tensor-hom] these functors carry the completed integral tensor and coefficient internal dual to the tensor and coefficient internal dual at the field stages. By [thm-coef-rational-verdier] and [thm-coef-qbar-verdier], integral Verdier duality similarly becomes precisely $D_X$, and the scalar comparisons identify its dualizing object with $Ra_X^!\\overline{\\mathbf Q}_\\ell$. Finally [lem-per-adic-lisse-cohomology-calculus] identifies the image of $N^*=R\\mathcal Hom_B(N,B)$ with the degree-zero linear dual $\\mathcal L^\\vee$, rather than a Tate-twisted Verdier dual. Thus the transported composite is\n$$D_X(K\\otimes^L\\mathcal L)\\cong D_XK\\otimes^L\\mathcal L^\\vee.$$\nThis proves the assertion for the given $K$ and $\\mathcal L$. No perfectness of $K$, finite monodromy, or common finite etale trivialization is required.",
+   "uses": [
+    "def-weil-derived-pullback-tensor-hom",
+    "thm-coef-rational-verdier",
+    "thm-coef-qbar-verdier",
+    "lem-per-adic-lisse-cohomology-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/lem-per-dual-lisse-tensor.proof.md",
+    "place": "paragraph 3: final isomorphism, with rational and common-stage interpretations made explicit"
+   }
   }
  ],
  "proof_deps": [
-  "def-trf-dualizing-complex",
-  "fix-lem-tensor-adjunction",
-  "fin2-lem-lisse-trivialized-finite-etale"
+  "def-weil-finite-field-fiber",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-kun-dimension-finite-type",
+  "def-weil-algebraically-closed-coefficients",
+  "def-pod-lisse-l-adic-sheaves",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-sfb-noetherian-connected-components-open",
+  "cor-galois-lisse-representations",
+  "lem-pod-profinite-stable-lattice",
+  "lem-per-lisse-completed-system-comparison",
+  "lem-sfb-ringed-site-perfect-duality",
+  "thm-coef-integral-verdier",
+  "lem-per-adic-lisse-cohomology-calculus",
+  "lem-fix-constructible-tensor-completion",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "thm-coef-rational-verdier",
+  "thm-coef-qbar-verdier"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/lem-per-dual-lisse-tensor.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/lem-per-dual-lisse-tensor.proof.md",
+  "place": "paragraphs 1-3; repaired using Stacks Tags 08J9, 08JJ, 0FPT and Bhatt-Scholze Proposition 6.8.4 and Lemma 6.5.5"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "verdierDual|IsDualizable|ihom.*tensor",
+   "results": "Hits: Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean, Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean, Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory/Groupoid.lean, Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory/Groupoid.lean, Mathlib/CategoryTheory/Pi/Monoidal.lean. ",
+   "date": "2026-10-21",
+   "verdict": "no match: categorical duality tools or ordinary module duals do not state this adic lisse Verdier formula"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Internal Hom from tensor product with a dualizable object is tensor product of internal Hom with its dual",
+   "results": "Hits: CategoryTheory.tensorLeftHomEquiv, CategoryTheory.MonoidalClosed.internalHom, CategoryTheory.internalHom, CategoryTheory.tensorRightHomEquiv, CategoryTheory.tensorRightHomEquiv_tensor, CategoryTheory.Types.tensorProductAdjunction, CategoryTheory.ihom.adjunction, CategoryTheory.MonoidalClosed.internalHomAdjunction₂_adj. ",
+   "date": "2026-10-21",
+   "verdict": "no match: categorical duality tools or ordinary module duals do not state this adic lisse Verdier formula"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed, CategoryTheory.ExactPairing",
+   "results": "Hits: . ",
+   "date": "2026-10-21",
+   "verdict": "no match: categorical duality tools or ordinary module duals do not state this adic lisse Verdier formula"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Verdier dual of the derived tensor product with a finite rank lisse adic sheaf is the tensor product of the Verdier dual with the linear dual sheaf",
+   "results": "Hits: LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, CharacterModule.dual_rTensor_conj_homEquiv, TensorProduct.dualDistrib, LightCondensed.instMonoidalClosedLightCondMod, LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition. ",
+   "date": "2026-10-21",
+   "verdict": "no match: categorical duality tools or ordinary module duals do not state this adic lisse Verdier formula"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a closed symmetric monoidal category the internal Hom from K tensor L to W is the internal Hom from K to W tensored with the dual of L when L is dualizable",
+   "results": "Hits: CategoryTheory.closedOfHasLeftDual, CategoryTheory.MonoidalClosed.compTranspose, CategoryTheory.tensorLeftHomEquiv_symm_coevaluation_comp_whiskerRight, CategoryTheory.tensorRightHomEquiv_symm_coevaluation_comp_whiskerLeft, CategoryTheory.tensorRightHomEquiv_tensor, CategoryTheory.tensorLeftHomEquiv_tensor, CategoryTheory.tensorRightHomEquiv_whiskerLeft_comp_evaluation, CategoryTheory.tensorRightHomEquiv. ",
+   "date": "2026-10-21",
+   "verdict": "no match: categorical duality tools or ordinary module duals do not state this adic lisse Verdier formula"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorRightHomEquiv|tensorLeftHomEquiv|ihom.*[Ii]so",
+   "results": "Hits: Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Monoidal/Closed/Ideal.lean, Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean, Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean, Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean. ",
+   "date": "2026-10-21",
+   "verdict": "no match: categorical duality tools or ordinary module duals do not state this adic lisse Verdier formula"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -83,5 +222,84 @@
   ],
   "sorry_free": true,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-per-dual-lisse-tensor",
+  "worker": "stage1",
+  "summary": "Statement retained verbatim. Replaced three coefficient-inapplicable citations and the uncited internal-Hom interchange by a completed-integral finite-free lattice calculation, ringed-site currying with the lisse variable outermost, perfect evaluation, and explicit rational/common-stage passage. Reused all supporting nodes; no new nodes.",
+  "blueprint": "Step 1 establishes the coefficient meaning of paragraph 1; Steps 2-3 replace the invalid rational finite-etale trivialization in paragraph 2 by a pro-etale finite-free integral model; Steps 4-6 give the actual tensor-Hom and evaluation argument of paragraphs 1-3; Step 7 realizes the final displayed isomorphism.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Finite dimensionality needed by the existing adic category; no purity theorem is used. The perverse unit has no replacement for this general coefficient or categorical fact."
+   },
+   {
+    "node": "lem-sfb-noetherian-connected-components-open",
+    "why": "Finite open component decomposition for componentwise classical lisse lattices. The perverse unit has no replacement for this general coefficient or categorical fact."
+   },
+   {
+    "node": "cor-galois-lisse-representations",
+    "why": "Classical finite and adic lisse/representation equivalences construct a finite-free lattice model. The perverse unit has no replacement for this general coefficient or categorical fact."
+   },
+   {
+    "node": "lem-pod-profinite-stable-lattice",
+    "why": "Compact monodromy has an invariant free integral lattice; no finite-monodromy assertion. The perverse unit has no replacement for this general coefficient or categorical fact."
+   },
+   {
+    "node": "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "why": "Checks that the local finite-free model belongs to the exact integral category, including witnesses. The perverse unit has no replacement for this general coefficient or categorical fact."
+   },
+   {
+    "node": "lem-sfb-ringed-site-perfect-duality",
+    "why": "Generic perfect-complex evaluation with arbitrary second argument; does not restate the Verdier dual-tensor assertion. The perverse unit has no replacement for this general coefficient or categorical fact."
+   },
+   {
+    "node": "lem-fix-constructible-tensor-completion",
+    "why": "Identifies ordinary and completed integral tensors before the ringed-site calculation is passed to coefficients. The perverse unit has no replacement for this general coefficient or categorical fact."
+   },
+   {
+    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "why": "Generic symmetry of the ambient ringed-site derived tensor. The perverse unit has no replacement for this general coefficient or categorical fact."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "why": "Generic ringed-site currying with the lisse variable outermost. The perverse unit has no replacement for this general coefficient or categorical fact."
+   },
+   {
+    "node": "thm-coef-integral-verdier",
+    "why": "Integral Verdier dual is internal Hom and remains integral constructible. The perverse unit has no replacement for this general coefficient or categorical fact."
+   },
+   {
+    "node": "thm-coef-rational-verdier",
+    "why": "Identifies rationalized integral Verdier duality with field-stage Verdier duality. The perverse unit has no replacement for this general coefficient or categorical fact."
+   },
+   {
+    "node": "thm-coef-qbar-verdier",
+    "why": "Identifies the transported dual with common-stage Verdier duality. The perverse unit has no replacement for this general coefficient or categorical fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-dimension-finite-type",
+  "lem-sfb-noetherian-connected-components-open",
+  "cor-galois-lisse-representations",
+  "lem-pod-profinite-stable-lattice",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-sfb-ringed-site-perfect-duality",
+  "lem-fix-constructible-tensor-completion",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "thm-coef-integral-verdier",
+  "thm-coef-rational-verdier",
+  "thm-coef-qbar-verdier"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q20-a0a1764e1",
+  "group": "Q20",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-a0a1764e1 (reviewer sub-agent of L); spot-checked: Read the full item and its 7 steps against the base and main-20261015 proof, the unit sk-p-dl-a1-perverse, the statements of all 19 cited nodes, the pbc/sf category definitions and Stanford L19 p.3 Prop 1.1.9. The statement is verbatim and not weakened. The stmt_deps correctly name the adic common-stage category, the adic lisse definition, the coefficient operations and thm-coef-qbar-verdier; tate-twist and the finite-only constructible-complexes node are rightly dropped. The report's three base-proof faults are confirmed: fin2 lisse-trivialization is finite-ring only (an infinite-monodromy Z_l character of G_m is a counterexample); fix-lem-tensor-adjunction is the f_!/f^! adjunction, not currying; the second-variable interchange had no citation. The repaired route works: the component/Galois/stable-lattice construction gives a free lattice, the completed-system comparison gives N, the stratified characterization (ii) puts N in the integral category and makes it perfect, integral Verdier gives C_R, the completed tensor comparison applies on qcqs X, then currying with N outermost (exact-restriction), perfect evaluation (ringed-site-perfect-duality, arbitrary second argument), symmetry, and rational/Qbar Verdier plus the adic calculus give L^vee = N^* with no twist. Small cases checked: rank 0, X empty, constant L, a point, disconnected X with varying rank, infinite monodromy. No new nodes, no cycle, no SGA. All 12 declared tool_uses are accepted as generic coefficient or ringed-site black boxes. Two C1/C4 citation faults are fixed in fixes/dag/nodes/sec-deligne-laumon-a1/lem-per-dual-lisse-tensor.json. (1) Step 1: K lies in def-weil-pbc-qbar-category, but the Verdier theorems are stated on the derived-complete/Karoubi-rationalization category; I added lem-weil-pbc-integral-stratified-perfect-characterization, whose last clause identifies the integral categories, so everything is formed at the single stage E. (2) Step 2: I added the Mathlib leaf lem-weil-pbc-noetherian-scheme-closed-subsets-minimal for the Noetherian-space hypothesis of the connected-components lemma. Batch-5 check: by closure diff the item adds only itself to the batch-5 closure, and the flagged cor-galois-lisse-representations, lem-pod-profinite-stable-lattice and def-pod-lisse-l-adic-sheaves are already in it without the item. They are a general definition, the lisse/representation equivalence and compact-group lattice theory, neither assumed statement nor a step of their proofs. The two same-unit lemmas are flagged only through def-pod-lisse. All accepted. Maintainer notes: (a) the service deleted state/dagsnap/967e9e9a mid-review, so the snapshot DAG vanished after all cited statements had been read; (b) a parallel Q60 delivery of the same item (97e88a90) is in review, so whichever lands second is superseded; (c) advisory: lem-a1-smooth-lisse-integral-lattice is an alternative lattice tool.; 1 file(s) fixed by the reviewer"
  }
 }
