@@ -89,6 +89,51 @@ theorem leftCoefficientProjectionMap_coherence (adj : F ⊣ R) :
         (α_ B B' (R.obj N)).hom ≫
           (𝟙 B ⊗ₘ leftCoefficientProjectionMap adj B' N) ≫
           leftCoefficientProjectionMap adj B (F.obj B' ⊗ N)) := by
-  sorry
+  have transpose (B : C) (N : D) :
+      F.map (leftCoefficientProjectionMap adj B N) ≫ adj.counit.app _ =
+        Functor.OplaxMonoidal.δ F B (R.obj N) ≫
+          (𝟙 (F.obj B) ⊗ₘ adj.counit.app N) := by
+    unfold leftCoefficientProjectionMap
+    simp only [Functor.map_comp, Category.assoc]
+    erw [adj.counit_naturality]
+    rw [adj.map_rightAdjointProjectionMap_app_app_comp_counit_assoc]
+    change F.map (β_ B (R.obj N)).hom ≫
+      Functor.OplaxMonoidal.δ F (R.obj N) B ≫
+        adj.counit.app N ▷ F.obj B ≫ (β_ N (F.obj B)).hom = _
+    rw [← tensorHom_id]
+    erw [BraidedCategory.braiding_naturality]
+    simp only [Functor.map_braiding, Category.assoc, Functor.Monoidal.μ_δ_assoc,
+      Functor.comp_obj, SymmetricCategory.symmetry_assoc]
+  refine ⟨?_, transpose, ?_, ?_⟩
+  · intro B B' N N' f g
+    apply (adj.homEquiv _ _).symm.injective
+    rw [homEquiv_naturality_right_symm, homEquiv_naturality_left_symm]
+    simp only [homEquiv_counit, transpose]
+    rw [← Functor.OplaxMonoidal.δ_natural_assoc]
+    simp only [Category.assoc, tensorHom_comp_tensorHom, Category.id_comp, Category.comp_id]
+    congr 2
+    exact (adj.counit.naturality g).symm
+  · intro N
+    apply (adj.homEquiv _ _).symm.injective
+    rw [homEquiv_naturality_right_symm]
+    simp only [homEquiv_counit, transpose, Category.assoc]
+    rw [tensorHom_comp_tensorHom_assoc]
+    simp only [Category.id_comp]
+    rw [Functor.OplaxMonoidal.δ_comp_η_tensorHom_assoc]
+    simp only [leftUnitor_naturality, Iso.inv_hom_id_assoc]
+    erw [Category.comp_id]
+  · intro B B' N
+    apply (adj.homEquiv _ _).symm.injective
+    rw [homEquiv_naturality_right_symm, homEquiv_naturality_left_symm,
+      homEquiv_naturality_left_symm]
+    simp only [homEquiv_counit, transpose, Category.assoc]
+    rw [← Functor.OplaxMonoidal.δ_natural_assoc]
+    simp only [Functor.map_id, tensorHom_comp_tensorHom_assoc, tensorHom_comp_tensorHom,
+      Category.id_comp, Category.comp_id]
+    rw [transpose]
+    erw [Category.comp_id]
+    simp only [tensorHom_def, id_whiskerRight, Category.id_comp,
+      MonoidalCategory.whiskerLeft_comp, Category.assoc]
+    rw [associator_naturality_right, Functor.OplaxMonoidal.associativity_assoc]
 
 end CategoryTheory.Adjunction
