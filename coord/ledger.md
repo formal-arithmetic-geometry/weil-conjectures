@@ -20279,3 +20279,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:11 L: merged deliver/O4/sk-def-pe-derived-completion (reviewer FIX; after a return; new nodes: 2)
 - 04:11 L: merged deliver/NN/lem-sf-ringed-open-total-tensor-kflat (reviewer PASS; first push; new nodes: 0)
 - 04:11 L: merged deliver/NA/lem-sf-compact-support-proper-image-tower (reviewer PASS; first push; new nodes: 0); claim not held by NA: not your claim
+- 04:11 L: returned deliver/NY/lem-pur-scalar-hom-comparison-tower (reviewer RETURN: L: independent stage-2 immutable head e85e0a80dc1b: stmt_deps cite theorem node lem-coef-derived-system-evaluation-calcu)
