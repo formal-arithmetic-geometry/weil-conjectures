@@ -22,13 +22,6 @@ public import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
 public import Sheaf.CategoryTheory.RingedSectionLocalizationOfUniverses
 public import Sheaf.CategoryTheory.RingedSiteDerivedRestrictionUniverses
 public import Mathlib.Data.List.TFAE
-import Sheaf.Paper.CompletedCoefficientPresentationTransport
-import Sheaf.Paper.CompletedKoszulQuotientComparison
-import Sheaf.Paper.WeilCompletedTensorReflector
-import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
-import Sheaf.CategoryTheory.StrictRoosDerivation
-import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
-import Mathlib.CategoryTheory.Triangulated.Pretriangulated
 
 /-! # Roos and intrinsic completeness for completed local-field coefficients
 
@@ -80,7 +73,63 @@ define a chain map; equality on every section in every degree proves uniqueness.
 theorem integralKoszulScalar_existsUnique (P : IntegralOnSlice.Cx l E T none) :
     ∃! f : P ⟶ P, ∀ (q : ℤ) (U : T.ProEtᵒᵖ) (x : (P.X q).val.obj U),
       (f.f q).val.app U x = integralCompletionScalarValue l E T U • x := by
-  sorry
+  have hs {U V : T.ProEtᵒᵖ} (g : U ⟶ V) :
+      (completedIntegralCoefficientSheafUnrestricted l E T).obj.map g
+          (integralCompletionScalarValue l E T U) =
+        integralCompletionScalarValue l E T V := by
+    let α := Functor.whiskerRight
+      (toSheafify (AlgebraicGeometry.Scheme.ProEt.topology T)
+        ((Functor.const T.ProEtᵒᵖ).obj
+          (CommRingCat.of (ULift.{t + 1} (Padic.coefficientExtensionIntegers l E)))))
+      (forget₂ CommRingCat RingCat) ≫
+      (integralConstantToCompletionOfUniverses l E T).hom
+    exact (CategoryTheory.congr_fun (α.naturality g)
+      (ULift.up (Padic.coefficientExtensionUniformizer l E))).symm
+  let f : P ⟶ P :=
+    { f := fun q ↦
+        { val :=
+            { app := fun U ↦ ModuleCat.ofHom
+                { toFun := fun x ↦ integralCompletionScalarValue l E T U • x
+                  map_add' := fun x y ↦ smul_add _ x y
+                  map_smul' := fun a x ↦ by
+                    let : CommRing ((IntegralOnSlice.rings l E T none).obj.obj U) :=
+                      inferInstanceAs (CommRing ((IntegralOnSlice.ring l E T none).obj.obj U))
+                    change (integralCompletionScalarValue l E T U :
+                      (IntegralOnSlice.rings l E T none).obj.obj U) • (a • x) =
+                        a • ((integralCompletionScalarValue l E T U :
+                          (IntegralOnSlice.rings l E T none).obj.obj U) • x)
+                    let z : (IntegralOnSlice.rings l E T none).obj.obj U :=
+                      integralCompletionScalarValue l E T U
+                    change z • (a • x) = a • (z • x)
+                    rw [← mul_smul, ← mul_smul, mul_comm z a] }
+              naturality := by
+                intro U V g
+                ext x
+                change integralCompletionScalarValue l E T V • (P.X q).val.map g x =
+                  (P.X q).val.map g (integralCompletionScalarValue l E T U • x)
+                rw [PresheafOfModules.map_smul]
+                rw [show (IntegralOnSlice.rings l E T none).obj.map g
+                    (integralCompletionScalarValue l E T U) =
+                    integralCompletionScalarValue l E T V from hs g] } }
+      comm' := by
+        intro i j _hij
+        apply SheafOfModules.hom_ext
+        apply PresheafOfModules.hom_ext
+        intro U
+        ext x
+        exact ((P.d i j).val.app U).hom.map_smul
+          (integralCompletionScalarValue l E T U) x }
+  refine ⟨f, ?_, ?_⟩
+  · intro q U x
+    rfl
+  · intro g hg
+    apply HomologicalComplex.hom_ext
+    intro q
+    apply SheafOfModules.hom_ext
+    apply PresheafOfModules.hom_ext
+    intro U
+    ext x
+    exact hg q U x
 
 /-- The uniquely section-normalized scalar chain map.
 Source: Stacks 0A0E (blueprint: lem-pur-roos-intrinsic-completeness-equivalence). -/
@@ -99,7 +148,8 @@ Proof: compose the indicated powers of the same endomorphism. Both sides are its
 theorem integralKoszulStep_square (P : IntegralOnSlice.Cx l E T none) (n : ℕ) :
     (integralKoszulScalar l E T P ^ (n + 1 + 1)) ≫ 𝟙 P =
       integralKoszulScalar l E T P ≫ (integralKoszulScalar l E T P ^ (n + 1)) := by
-  sorry
+  simpa only [Category.comp_id, End.mul_def] using
+    (pow_succ (integralKoszulScalar l E T P) (n + 1))
 
 /-- The specified transition, multiplication by t in degree -1 and identity in degree 0.
 Source: Stacks 0A0E (blueprint: lem-pur-roos-intrinsic-completeness-equivalence). -/
@@ -122,7 +172,7 @@ theorem integralKoszulUnit_compatible (P : IntegralOnSlice.Cx l E T none) (n : �
     CochainComplex.mappingCone.inr (integralKoszulScalar l E T P ^ (n + 1 + 1)) ≫
         integralKoszulStep l E T P n =
       CochainComplex.mappingCone.inr (integralKoszulScalar l E T P ^ (n + 1)) := by
-  sorry
+  simp [integralKoszulStep, CochainComplex.mappingCone.map]
 
 /-- The product of the degree-zero inclusions.
 Source: Stacks 0A0E (blueprint: lem-pur-roos-intrinsic-completeness-equivalence). -/
@@ -137,6 +187,15 @@ def integralKoszulOneSubShift (P : IntegralOnSlice.Cx l E T none) :=
   towerTransitionEndomorphism
     (K := fun n : ℕ ↦ (integralKoszulTower l E T P).obj (op n))
     (integralKoszulStep l E T P)
+
+private theorem integralKoszulProductUnit_comp (P : IntegralOnSlice.Cx l E T none) :
+    integralKoszulProductUnit l E T P ≫ integralKoszulOneSubShift l E T P = 0 := by
+  apply Pi.hom_ext
+  intro n
+  simp only [integralKoszulOneSubShift, towerTransitionEndomorphism,
+    Preadditive.comp_sub, Category.comp_id, Preadditive.sub_comp,
+    towerProductShift, Category.assoc, Pi.lift_π, integralKoszulProductUnit,
+    Pi.lift_π_assoc, integralKoszulUnit_compatible, sub_self, zero_comp]
 
 /-- The explicit fiber has differential (dx,(1-s)x-dy), as in the owning node.
 Source: Stacks 0A0E (blueprint: lem-pur-roos-intrinsic-completeness-equivalence). -/
@@ -153,7 +212,7 @@ theorem integralKoszulIntrinsicUnit_condition (P : IntegralOnSlice.Cx l E T none
           (∏ᶜ fun n : ℕ ↦ (integralKoszulTower l E T P).obj (op n)) (-1)) +
       CochainComplex.HomComplex.Cochain.ofHom
         (integralKoszulProductUnit l E T P ≫ (-integralKoszulOneSubShift l E T P)) = 0 := by
-  sorry
+  simp [Preadditive.comp_neg, integralKoszulProductUnit_comp]
 
 /-- The actual (u,0) chain map into the signed intrinsic fiber.
 Source: Stacks 0A0E (blueprint: lem-pur-roos-intrinsic-completeness-equivalence). -/
@@ -185,7 +244,7 @@ theorem integralKoszulLimitUnit_condition (P : IntegralOnSlice.Cx l E T none) :
           (∏ᶜ fun n : ℕ ↦ (integralKoszulTower l E T P).obj (op n)) (-1)) +
       CochainComplex.HomComplex.Cochain.ofHom
         (integralKoszulProductUnit l E T P ≫ integralKoszulOneSubShift l E T P) = 0 := by
-  sorry
+  simp [integralKoszulProductUnit_comp]
 
 /-- The degree-zero Koszul unit into its total strict derived inverse limit.
 Source: Stacks 0A0E and 0941 (blueprint: lem-pur-roos-intrinsic-completeness-equivalence). -/
