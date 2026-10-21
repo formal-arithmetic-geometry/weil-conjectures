@@ -13,9 +13,96 @@
   "lem-weil-pbc-commshift-nattrans-comp-whisker",
   "def-weil-pbc-triangles-with-shift"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $E$. Write $T_E(Q)=E\\otimes Q$ in $\\mathcal D$ and $T_{RE}(P)=RE\\otimes P$ in $\\mathcal C$. These are additive exact functors with their supplied shifts. Thus $F_E=T_{RE}$ is exact. Apply [lem-weil-pbc-triangulated-functor-composite] first to $L$ followed by $T_E$, then to $H_E=T_E L$ followed by $R$: $H_E$ and $G_E=RH_E$ are exact. In particular, if $l,r,t^E$ denote the shift comparisons of $L,R,T_E$, respectively, then for every integer $n$ the induced comparisons are $s_{H_E,n,P}=t^E_{n,LP}\\,T_E(l_{n,P})$ and $s_{G_E,n,P}=r_{n,H_EP}\\,R(s_{H_E,n,P})$. The comparison of $F_E$ is the supplied one for $T_{RE}$. Exactness means precisely preservation of the triangles with connecting map given by these composites [def-weil-triangulated-category].",
+   "uses": [
+    "lem-weil-pbc-triangulated-functor-composite",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 014V (definition-exact-functor-triangulated-categories), 014Y (lemma-composition-exact), and 0A8D (lemma-adjoint-is-exact), with the supplied shift-compatible adjunction"
+   }
+  },
+  {
+   "text": "The adjunction formulas and naturality in [lem-weil-pbc-adjunction-of-natural-bijection] identify $R(\\beta)\\eta$ with the adjunct of $\\beta$. To check naturality explicitly, let $e:E\\to E'$ and $p:P\\to P'$, and put $f=R(e)\\otimes p$ and $h=e\\otimes L(p)$. Naturality of $\\mu$ and the counit identity $e\\varepsilon_E=\\varepsilon_{E'}LR(e)$ give\n$$h\\beta_{E,P}=(e\\varepsilon_E\\otimes Lp)\\mu_{RE,P}=(\\varepsilon_{E'}\\otimes1)\\mu_{RE',P'}L(f)=\\beta_{E',P'}L(f).$$\nConsequently, by naturality of $\\eta$,\n$$R(h)\\alpha_{E,P}=R(\\beta_{E',P'})RL(f)\\eta_{RE\\otimes P}=R(\\beta_{E',P'})\\eta_{RE'\\otimes P'}f=\\alpha_{E',P'}f.$$\nTaking either $e$ or $p$ to be an identity proves naturality in both variables.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0B56, equation-projection-formula-map; formal expansion with the specified tensor and adjunction data"
+   }
+  },
+  {
+   "text": "For fixed $E$, put $A_E=LF_E$ and $B_E(P)=LRE\\otimes LP$. Let $a_{n,P},b_{n,P},h_{n,P}$ be their induced shift comparisons for $A_E,B_E,H_E$, respectively. The hypothesis on $\\mu$ says\n$$b_{n,P}\\mu_{RE,P[n]}=(\\mu_{RE,P})[n]a_{n,P}.$$\nPut $q_P=\\varepsilon_E\\otimes1_{LP}:B_E(P)\\to H_E(P)$. Naturality of the second-input tensor shift comparison in the fixed input, applied to the specific morphism $\\varepsilon_E:LRE\\to E$, and bifunctoriality with $l_{n,P}$ give\n$$h_{n,P}q_{P[n]}=q_P[n]b_{n,P}.$$\nTheir composite $\\beta_E=q\\mu$ therefore satisfies\n$$h_{n,P}\\beta_{E,P[n]}=\\beta_{E,P}[n]a_{n,P}.$$\nThis is composition and whiskering of shift-compatible transformations [lem-weil-pbc-commshift-nattrans-comp-whisker], applied to each chosen shift $[n]$; that lemma's calculation is for an arbitrary shift auto-equivalence, so applies also for $n=0$ and negative $n$.",
+   "uses": [
+    "lem-weil-pbc-commshift-nattrans-comp-whisker"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 014V (definition-exact-functor-triangulated-categories), 014Y (lemma-composition-exact), and 0A8D (lemma-adjoint-is-exact), with the supplied shift-compatible adjunction"
+   }
+  },
+  {
+   "text": "Keep $E,n$ fixed and abbreviate $f_{n,P}=s_{F_E,n,P}$, $g_{n,P}=s_{G_E,n,P}$. The composite shift of $A_E$ is $a_{n,P}=l_{n,F_EP}L(f_{n,P})$. Naturality of $\\eta$ with respect to $f_{n,P}$ and the assumed shift compatibility of $\\eta$ give\n$$r_{n,A_EP}R(a_{n,P})\\eta_{F_E(P[n])}=\\eta_{F_EP}[n]f_{n,P}.$$\nIndeed, factor $R(a)$ as $R(l_{n,F_EP})RL(f_{n,P})$, move $RL(f_{n,P})$ across $\\eta$, and apply the unit shift equation at $F_EP$. Now the previous step, naturality of $r$ for $\\beta_{E,P}:A_EP\\to H_EP$, and this equality yield\n$$\\begin{aligned}\ng_{n,P}\\alpha_{E,P[n]}&=r_{n,H_EP}R(h_{n,P}\\beta_{E,P[n]})\\eta_{F_E(P[n])}\\\\\n&=r_{n,H_EP}R(\\beta_{E,P}[n])R(a_{n,P})\\eta_{F_E(P[n])}\\\\\n&=(R\\beta_{E,P})[n]\\eta_{F_EP}[n]f_{n,P}=\\alpha_{E,P}[n]f_{n,P}.\n\\end{aligned}$$\nEquivalently this is the whiskering by $F_E$ of $\\eta$, followed by $R\\beta_E$, using the composition/whiskering rules of [lem-weil-pbc-commshift-nattrans-comp-whisker].",
+   "uses": [
+    "lem-weil-pbc-commshift-nattrans-comp-whisker"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 014V (definition-exact-functor-triangulated-categories), 014Y (lemma-composition-exact), and 0A8D (lemma-adjoint-is-exact), with the supplied shift-compatible adjunction"
+   }
+  },
+  {
+   "text": "Let $P_1\\to P_2\\to P_3\\xrightarrow{w}P_1[1]$ be distinguished. The two image triangles are distinguished by step 1. Naturality from step 2 supplies their first two squares. For the third square, naturality at the actual morphism $w:P_3\\to P_1[1]$, followed by the shift identity of step 4 at $(n,P)=(1,P_1)$, gives\n$$s_{G_E,1,P_1}G_E(w)\\alpha_{E,P_3}=s_{G_E,1,P_1}\\alpha_{E,P_1[1]}F_E(w)=\\alpha_{E,P_1}[1]s_{F_E,1,P_1}F_E(w).$$\nThese are exactly the three equations defining a morphism of triangles in [def-weil-pbc-triangles-with-shift].",
+   "uses": [
+    "def-weil-pbc-triangles-with-shift"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 014V (definition-exact-functor-triangulated-categories), 014Y (lemma-composition-exact), and 0A8D (lemma-adjoint-is-exact), with the supplied shift-compatible adjunction"
+   }
+  },
+  {
+   "text": "Define $k_E=\\rho_E(1_E\\otimes u):E\\otimes L\\mathbf1_{\\mathcal C}\\to E$. Bifunctoriality, naturality of $\\rho$ at $\\varepsilon_E:LRE\\to E$, and the assumed right-unit equation for $\\mu$ at $M=RE$ give\n$$\\begin{aligned}\nk_E\\beta_{E,\\mathbf1_{\\mathcal C}}\n&=\\rho_E(\\varepsilon_E\\otimes u)\\mu_{RE,\\mathbf1_{\\mathcal C}}\\\\\n&=\\varepsilon_E\\rho_{LRE}(1_{LRE}\\otimes u)\\mu_{RE,\\mathbf1_{\\mathcal C}}\\\\\n&=\\varepsilon_E L(\\rho_{RE}).\n\\end{aligned}$$\nAll three expressions have source $L(RE\\otimes\\mathbf1_{\\mathcal C})$ and target $E$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0B56, equation-projection-formula-map; formal expansion with the specified tensor and adjunction data"
+   }
+  },
+  {
+   "text": "Apply $R$ to step 6, substitute the definition of $\\alpha$, and use naturality of $\\eta$ at $\\rho_{RE}:RE\\otimes\\mathbf1_{\\mathcal C}\\to RE$. The right triangle identity of the given adjunction [lem-weil-pbc-adjunction-of-natural-bijection] then gives\n$$\\begin{aligned}\nR(k_E)\\alpha_{E,\\mathbf1_{\\mathcal C}}\n&=R(\\varepsilon_E)RL(\\rho_{RE})\\eta_{RE\\otimes\\mathbf1_{\\mathcal C}}\\\\\n&=R(\\varepsilon_E)\\eta_{RE}\\rho_{RE}=\\rho_{RE}.\n\\end{aligned}$$\nThis is the specified right-unit equality, as an equality of morphisms $RE\\otimes\\mathbf1_{\\mathcal C}\\to RE$.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0B56, equation-projection-formula-map; formal expansion with the specified tensor and adjunction data"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-triangulated-functor-composite",
+  "def-weil-triangulated-category",
+  "lem-weil-pbc-adjunction-of-natural-bijection",
+  "lem-weil-pbc-commshift-nattrans-comp-whisker",
+  "def-weil-pbc-triangles-with-shift"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0B56, equation-projection-formula-map; formal expansion with the specified tensor and adjunction data; explicit categorical calculation; derived.tex Tags 014V, 014Y and 0A8D for the shift conventions"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,10 +138,52 @@
    "results": "8 hits: CategoryTheory.Adjunction.rightAdjointCommShift, CategoryTheory.Adjunction.RightAdjointCommShift.compatibilityUnit_iso, CategoryTheory.Adjunction.leftAdjointCommShift, CategoryTheory.Adjunction.unit_app_shift_commShiftIso_inv_app, CategoryTheory.Adjunction.RightAdjointCommShift.iso', CategoryTheory.Adjunction.LeftAdjointCommShift.iso', CategoryTheory.Adjunction.shift_unit_app, CategoryTheory.Adjunction.CommShift.CompatibilityUnit; ",
    "date": "2026-10-21",
    "verdict": "no match: generic monoidal adjunction identities and compatibility of an adjunction with shifts are components only; no hit states the projection transformation together with its induced exact functors, connecting square and normalized right-unit identity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact adjunction of triangulated categories compatible with tensor products projection transformation commutes with shifts and right unit isomorphisms",
+   "results": "8 hits: CategoryTheory.Adjunction.IsTriangulated.commShift, CategoryTheory.Adjunction.isTriangulated_rightAdjoint, CategoryTheory.Adjunction.IsTriangulated.rightAdjoint_isTriangulated, CategoryTheory.Adjunction.IsTriangulated.mk'', CategoryTheory.Adjunction.IsTriangulated.comp, CategoryTheory.Adjunction.isTriangulated_leftAdjoint, CategoryTheory.Adjunction.IsTriangulated.mk', CategoryTheory.Adjunction.IsTriangulated.leftAdjoint_isTriangulated; ",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern generic shift-compatible transformations or monoidal adjunction identities, not all clauses for the specified exact bifunctor and right-action data"
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*[Cc]ommShift|rightAdjointProjectionMap|projection.*[Uu]nital",
+   "results": "0 hits: ; ",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern generic shift-compatible transformations or monoidal adjunction identities, not all clauses for the specified exact bifunctor and right-action data"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projection\", \"shift\"",
+   "results": "0 hits: ; ",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern generic shift-compatible transformations or monoidal adjunction identities, not all clauses for the specified exact bifunctor and right-action data"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A projection formula natural transformation of exact tensor functors is compatible with integer shifts and the right unit",
+   "results": "8 hits: CategoryTheory.NatTrans.CommShiftCore.app_shift, CategoryTheory.NatTrans.CommShiftCore.shift_app_comm, CategoryTheory.NatTrans.app_shift, CategoryTheory.NatTrans.shift_app, CategoryTheory.NatTrans.CommShiftCore.mk, CategoryTheory.NatTrans.CommShiftCore, CategoryTheory.NatTrans.CommShiftCore.shift_app, CategoryTheory.NatTrans.CommShift.mk; ",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern generic shift-compatible transformations or monoidal adjunction identities, not all clauses for the specified exact bifunctor and right-action data"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The adjoint of the counit tensor identity of a strong tensor functor is a natural transformation of triangulated functors whose component at the unit is the right unitor",
+   "results": "8 hits: CategoryTheory.ε_app_obj, CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ, CategoryTheory.Adjunction.rightAdjointLaxMonoidal_ε, CategoryTheory.unitOfTensorIsoUnit_hom_app, CategoryTheory.Adjunction.ε_comp_map_ε_assoc, CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor, CategoryTheory.Adjunction.map_ε_comp_counit_app_unit, CategoryTheory.Adjunction.unit_app_unit_comp_map_η; ",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern generic shift-compatible transformations or monoidal adjunction identities, not all clauses for the specified exact bifunctor and right-action data"
+  },
+  {
+   "tool": "grep",
+   "query": "class CommShift|instance.*[Cc]omp|instance whisker|def mkOfHomEquiv",
+   "results": "25 hits: Mathlib/CategoryTheory/PathCategory/MorphismProperty.lean, Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean, Mathlib/CategoryTheory/FiberedCategory/HomLift.lean, Mathlib/CategoryTheory/FiberedCategory/HomLift.lean, Mathlib/CategoryTheory/FiberedCategory/HomLift.lean, Mathlib/CategoryTheory/FiberedCategory/HomLift.lean, Mathlib/CategoryTheory/FiberedCategory/HomLift.lean, Mathlib/CategoryTheory/FiberedCategory/Grothendieck.lean; ",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern generic shift-compatible transformations or monoidal adjunction identities, not all clauses for the specified exact bifunctor and right-action data"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-pbc-ringed-projection-mate-exact",
@@ -73,5 +202,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-weil-pbc-formal-exact-projection-mate",
+  "worker": "stage1",
+  "summary": "Kept the specified-data statement unchanged. Proved exactness with the existing exact-composite leaf, wrote simultaneous naturality, the all-integer shift calculation, the actual connecting square, and the right-unit normalization from naturality and the adjunction triangle identity. No new nodes; every non-elementary tool is already a Mathlib leaf. Searched the project declarations, whole DAG, blueprint and Mathlib; no declaration covers the full weaker bifunctor-and-right-action statement.",
+  "blueprint": "lemma-weil-pbc-perfect-projection-formula: detailed proof first paragraph, closure under shifts and cones and normalization at P=A, through lem-weil-pbc-ringed-projection-mate-exact. This item establishes only the formal mate calculation for already specified data."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NK-371782530",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-371782530 (reviewer sub-agent of L); spot-checked: Read in full: the item, all 7 steps and the 5 cited statements. Every cited node is a Mathlib leaf: triangulated-category def, triangulated-functor-composite, adjunction-of-natural-bijection, commshift-nattrans-comp-whisker and triangles-with-shift. The source is Stacks sites-cohomology l.13650-13672, Tag 0B56 equation-projection-formula-map; alpha=R(beta)eta is exactly its adjunct. The statement and stmt_deps are byte-identical to the copy NG created (run e44adc3443c7), so nothing was weakened. There are no new nodes. I recomputed each step. Step 2: beta is natural in (E,P) by counit naturality and naturality of mu. Step 3: h q = q[n] b uses the explicit hypothesis that the tensor shift is natural in the fixed input, at eps_E; this holds for all n with no induction. Step 4: unit-shift compatibility at F_E P plus naturality of r at beta gives g alpha = alpha[n] f. Step 5: the connecting square follows from naturality at w and step 4 with n=1. Steps 6-7: the right-unit equation follows from naturality of rho at eps_E, the mu unit hypothesis at M=RE, eta naturality and the triangle identity; no associator is used. Edge cases checked: n=0, E=0, identity adjunction, contractible triangle; invertibility of alpha is never used. DAG search found no duplicate: ringed-projection-first-shift, categorical-projection-mate-square, pinned-projection-counit-exact-shift and the qcqs/finite variants all state different settings. Route is fine (all cites are Mathlib leaves, no tool_uses needed). No SGA, no re-split note, item not dropped. No changes."
  }
 }
