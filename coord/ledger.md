@@ -21669,3 +21669,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:10 L: returned deliver/Q125/lem-pur-line-zero-class-exchange (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-pur-line-zero-class-exchange: cited node lem-pur-l)
 - 09:12 L: merged deliver/Q83/det-sp-composition-comparisons (reviewer PASS; first push; new nodes: 0); claim not held by Q83: not your claim
 - 09:12 L: merged deliver/Q36/lem-sf-locally-closed-closure-adjoint-realization (reviewer FIX; first push; new nodes: 0)
+- 09:12 L: merged deliver/Q38/lem-sf-locally-closed-relative-transpose-normalization (reviewer PASS; first push; new nodes: 0); claim not held by Q38: not your claim
