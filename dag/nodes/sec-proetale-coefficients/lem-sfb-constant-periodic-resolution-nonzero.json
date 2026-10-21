@@ -12,11 +12,77 @@
   "def-weil-pbc-constant-sheaf",
   "def-pc-cochain-complex-modules",
   "def-pc-kflat-complex",
-  "def-pc-flat-sheaf-modules"
+  "def-pc-flat-sheaf-modules",
+  "def-sf-site-constant-module-functor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $\\mu:R\\to R$ send $r$ to $tr$, and let $q:R\\to F$ be the quotient. Its image is $tR$, its kernel is $tR$ by hypothesis, and $q$ is surjective with kernel $tR$. Thus $\\ker\\mu=\\operatorname{im}\\mu$ and $\\operatorname{coker}\\mu=F$ via $q$. Also $\\mu^2(r)=t^2r=0$ and $t\\bar r=\\overline{tr}=0$ in $F$. These calculations include the zero ring.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.proof.md",
+    "place": "The examples, scalar calculation for the periodic multiplication resolution"
+   }
+  },
+  {
+   "text": "Work on the small site fixed by [def-weil-pbc-proetale-site]. Let $C$ be the constant module functor of [def-sf-site-constant-module-functor]. Its prescribed constant scalar action identifies $C(R)$ with $R_V$, $C(F)$ with $F_V$, $C(\\mu)$ with multiplication by the constant $t$, and $C(q)$ with $\\pi_V$. Apply [lem-weil-pbc-finite-type-constant-exact] with the commutative ring $R$: it preserves kernels and cokernels. It also preserves images, since $\\operatorname{im} f=\\ker(\\operatorname{coker} f)$. Applying this to step 1 gives $\\ker(\\mu_t)=\\operatorname{im}(\\mu_t)$ and the canonical identification $\\operatorname{coker}(\\mu_t)\\cong F_V$, with quotient map $\\pi_V$. The same constant scalar construction sends the zero scalar endomorphism of $F$ to zero on $F_V$, so $tF_V=0$; it sends $t^2=0$ to $\\mu_t^2=0$.",
+   "uses": [
+    "def-weil-pbc-proetale-site",
+    "def-sf-site-constant-module-functor",
+    "lem-weil-pbc-finite-type-constant-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 093J, lemma-constant-exact; Tag 03CY, lemma-sheafification-presheaf-modules"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-exact-scalar-periodic-resolution] on this small site with $\\mathcal O=R_V$ and $t_U$ the constant section $t$ on each object $U$. These sections are restriction-compatible and square to zero; step 2 verifies its kernel-equals-image hypothesis. Under its canonical cokernel identification $E\\cong F_V$, its complex is precisely $P_V$ and its augmentation has degree-zero component $\\pi_V$. The cited statement therefore gives exactness of the entire augmented sequence, flatness of every term, and that this augmentation is a K-flat resolution. In particular the zero cutoff is in degree $0$, not a lower bound on the complex.",
+   "uses": [
+    "lem-sfb-exact-scalar-periodic-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.proof.md",
+    "place": "The examples, periodic resolution; ringed-site specialization of the existing scalar-resolution node (K-flat input: Stacks Tag 06YQ, sites-cohomology lemma-bounded-flat-K-flat)"
+   }
+  },
+  {
+   "text": "Assume $V$ is nonempty and let $a,b\\in F$ have the same constant section in $F_V(V)$. Apply local injectivity of the unit in [lem-sf-constant-module-unit-locally-bijective] to $M=F$ over $R$: there is a covering family $\\{U_i\\to V\\}$ on which $a$ and $b$ have equal restrictions in the constant presheaf itself. By the covering condition in [def-weil-pbc-proetale-site], this family has a nonempty member: choose a point of $V$ and an affine neighborhood of it, and one of the finitely many covering affine opens whose image contains that point. On its containing $U_i$, restriction in the constant presheaf is the identity of $F$, so the equality is $a=b$. Thus $F\\to F_V(V)$ is injective.",
+   "uses": [
+    "lem-sf-constant-module-unit-locally-bijective",
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CY, lemma-sheafification-presheaf-modules, and the cited constant-module unit statement; pro-etale covering condition as defined in def-weil-pbc-proetale-site"
+   }
+  },
+  {
+   "text": "If also $F\\ne0$, choose $a\\in F$ with $a\\ne0$. Step 4 shows that its constant section differs from the zero section in $F_V(V)$. A zero module sheaf has only the zero section at every object, so $F_V\\ne0$. The argument for injection used nonemptiness only to find a covering member. For $V=\\varnothing$ the empty covering is allowed and no such conclusion follows; the exactness and K-flatness assertions in steps 2 and 3 still hold.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.proof.md",
+    "place": "The examples, nonzero quotient; elementary consequence of step 4"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-sf-site-constant-module-functor",
+  "lem-weil-pbc-finite-type-constant-exact",
+  "lem-sfb-exact-scalar-periodic-resolution",
+  "lem-sf-constant-module-unit-locally-bijective"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.proof.md",
+  "place": "The examples: generalized exact square-zero-divisor resolution, constant sheaf exactness, and local-unit detection on a nonempty scheme"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -52,10 +118,45 @@
    "results": "; Module.isLocallyConstant_rankAtStalk, exact_of_isLocalized_maximal, SheafOfModules.generatorsOfIsCokernelFree_I, Module.rankAtStalk_pos_iff_mem_support, Module.isLocallyConstant_rankAtStalk_freeLocus, exact_of_isLocalized_span, Profinite.NobelingProof.succ_exact, Module.rankAtStalk_eq_zero_iff_notMem_support",
    "date": "2026-10-21",
    "verdict": "no match: generic sheafification or constant-sheaf infrastructure and local-site full faithfulness do not state this specific augmented periodic K-flat resolution together with injectivity of constants on arbitrary nonempty schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "constantSheaf.*([Ee]xact|[Ii]njective)|periodic.*[Rr]esolution",
+   "results": "none",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits do not state the augmented periodic constant-module K-flat resolution and detection of constants on arbitrary nonempty schemes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constant sheaves of modules preserve the exact periodic free resolution of an exact square zero divisor and detect nonzero constants on a nonempty scheme",
+   "results": "CategoryTheory.constantSheaf, CategoryTheory.Sheaf.IsConstant.recOn, CategoryTheory.Sheaf.IsConstant.casesOn, CategoryTheory.Sheaf.IsConstant.rec, LightCondensed.IsDiscrete, CategoryTheory.Sheaf.IsConstant.mem_essImage, CategoryTheory.Sheaf.isConstant_of_iso, SheafOfModules.mapFree",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits do not state the augmented periodic constant-module K-flat resolution and detection of constants on arbitrary nonempty schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constantSheaf\", \"Exact\"",
+   "results": "none",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits do not state the augmented periodic constant-module K-flat resolution and detection of constants on arbitrary nonempty schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On the small pro-etale site of any scheme, the constant complex with multiplication by an exact square zero divisor is a K-flat resolution of the constant quotient and constant sections on a nonempty scheme are injective",
+   "results": "Algebra.FormallySmooth.iff_injective_lTensor_residueField, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField, Algebra.FormallyEtale.instFormallySmooth, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange, Algebra.Etale.formallyEtale, Algebra.Smooth.flat, Algebra.FormallyEtale.iff_comp_bijective, Algebra.FormallyEtale.of_formallyUnramified_and_formallySmooth",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits do not state the augmented periodic constant-module K-flat resolution and detection of constants on arbitrary nonempty schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheafification of an augmented exact complex with rank one free terms in nonpositive degrees gives a bounded above flat resolution; the constant sheafification unit is injective on sections over a nonempty scheme",
+   "results": "CategoryTheory.Sheaf.instIsGrothendieckAbelian, CategoryTheory.InjectiveResolution.ofCocomplex, SheafOfModules.instAbelian, CochainComplex.cm5b.instInjectiveXIntI, CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ, CategoryTheory.InjectiveResolution.of_def, CategoryTheory.InjectiveResolution.instIsLECochainComplexOfNatInt, CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits do not state the augmented periodic constant-module K-flat resolution and detection of constants on arbitrary nonempty schemes"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-square-zero-periodic-tensor",
@@ -74,5 +175,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-constant-periodic-resolution-nonzero",
+  "worker": "stage1",
+  "summary": "Q33 proves the scalar kernel/image/cokernel identities, transfers them using the existing exact constant module functor, and specializes the existing ringed-site periodic-resolution node. Local injectivity of the constant-module unit and the pro-etale covering condition prove injection of constants on every nonempty scheme. No new nodes, no changes to the statement, and no Lean edits or compilation.",
+  "blueprint": "The examples, first sentence: the infinite periodic resolution and nonzero quotient, realized by scalar calculation (step 1), constant transfer (step 2), resolution (step 3), and nonvanishing (steps 4-5).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-constant-exact",
+    "why": "Generic exactness of constant module sheafification transfers the scalar kernel/cokernel calculation; the localizing-closure unit has no replacement for this general site tool."
+   },
+   {
+    "node": "lem-sf-constant-module-unit-locally-bijective",
+    "why": "Generic local injectivity of the constant-module unit detects distinct constants on a pro-etale covering member; the localizing-closure unit does not state this sheafification tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-constant-exact",
+  "lem-sf-constant-module-unit-locally-bijective"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q33-d125f3c1d",
+  "group": "Q33",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q33-d125f3c1d (reviewer sub-agent of L); spot-checked: Read in full: the item's 5 steps, every cited statement, Stacks 093J/03CY/06YQ at their labels, and the blueprint ctf-equals-bc 'The examples'. No new nodes and no re-split note. The statement is byte-identical to Q43's creation; the only stmt_dep added is def-sf-site-constant-module-functor, which defines the constant-module action the statement uses. Step 1: ker t = Ann(t) = tR = im t, coker = F via q; elementary. Step 2: C from def-sf-site-constant-module-functor gives R_V, F_V, mult-by-t and pi_V. lem-weil-pbc-finite-type-constant-exact preserves kernels and cokernels over any ring with no finiteness hypotheses, so it also preserves images, giving ker = im on R_V, coker = F_V and tF_V = 0. Its functor (termwise sheafification of constant presheaves) is the same construction as C; advisory. Step 3: every hypothesis of lem-sfb-exact-scalar-periodic-resolution is met (small site, compatible square-zero t, ker = im) and degree conventions match; that node is unsplit, so no cycle. Step 4: local injectivity of the unit for M = F plus the pro-etale covering condition (a nonempty affine forces a nonempty member) and identity restrictions give a = b. Step 5: elementary. Edge cases: R = 0 fine; t = 0 with R nonzero is excluded, as it must be; Z/4 with t = 2 and k[e]/e^2 hold; Z/8 with t = 4 correctly excluded; V empty is handled. No SGA. Duplicate search found only the general scalar node (cited) and the unrelated cyclic-group resolution. Tool uses of the two generic sheafification lemmas are accepted."
  }
 }
