@@ -18,9 +18,116 @@
   "def-sfb-lisse-coefficient-module",
   "def-sfb-profinite-test-objects"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work throughout with the fixed condensed ring $C_F$, including when $F=\\Omega$. By [lem-sfb-alpha-iso], every coefficient comparison $f^{-1}C_{F,X}\\to C_{F,X'}$ is invertible. The exact equivalences and adjunction identification of [lem-sfb-internal-module-operations-transport] therefore identify internal module pullback with ordinary inverse image carrying its transported scalar action. In particular these pullbacks are exact, carry finite free modules to finite free modules, and respect composition. Thus the derived adjunction of [sk-def-sfb-module-derived-pushpull] has left adjoint the exact pullback used in the statement. These assertions apply to arbitrary schemes and arbitrary condensed rings; no finite-subextension description of $C_\\Omega$ is used.",
+   "uses": [
+    "lem-sfb-alpha-iso",
+    "lem-sfb-internal-module-operations-transport",
+    "sk-def-sfb-module-derived-pushpull"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent expansion of the one-term full-root boundary calculation"
+   }
+  },
+  {
+   "text": "First absorb the profinite parameter into the affine chart. By [def-sfb-profinite-test-objects], $U[P]=\\operatorname{Spec}LC(P,\\mathbf Z)\\times_{\\operatorname{Spec}\\mathbf Z}U$ is an affine pro-etale object over $U$, and hence over $B$. Its ring is $R_P=R\\otimes_{\\mathbf Z}LC(P,\\mathbf Z)$. Tensoring each finite root presentation with $R_P$ and taking the colimit gives the root presentation over $R_P$: a homomorphism out of either ring is exactly a homomorphism from $R_P$ together with roots satisfying the displayed relations and power transitions. This universal property also identifies its spectrum with $T[P]$, and identifies inversion of $\\prod_{a\\in A}t_a$ with $T_A^\\circ[P]$. The identifications send each coefficient and each root to itself, so commute with maps of profinite sets. Pulling back the local finite free trivializations in [def-sfb-lisse-coefficient-module] shows that $\\mathcal N_P$ is a supplied lisse module on this full tower. It suffices to prove the assertion for $P=*$ and every allowed affine pro-etale chart; applying it to $U[P]$ recovers every $P$.",
+   "uses": [
+    "def-sfb-profinite-test-objects",
+    "def-sfb-lisse-coefficient-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent expansion of the one-term full-root boundary calculation"
+   }
+  },
+  {
+   "text": "For $J\\subseteq\\{1,\\ldots,r\\}$ put $X_J=T[1/\\prod_{b\\in J}t_b]$ and $N_J=\\mathcal N|_{X_J}[0]$. If $a\\notin J$, write $e:X_{J\\cup\\{a\\}}\\hookrightarrow X_J$ and let $d:D\\hookrightarrow X_J$ be cut out by $t_a$. These are exactly the complementary pair in [lem-sfb-root-coordinate-supported-vanishing], which gives $R\\underline\\Gamma_D(N_J)=0$. Its hypotheses hold for the original supplied lisse module on $T$, not for a new extension chosen after puncturing. The complement is principal in an affine scheme, hence quasi-compact: on any affine open it is the principal open of the restricted equation. Apply clause 4 of [det-lem-formal-closed-support-adjunction] to this pair and $N_J$. Its triangle has first term $d_*0=0$, so the middle arrow $\\eta_{J,a}:N_J\\to Re_*e^*N_J$ is invertible. This arrow is the actual open-adjunction unit named in that triangle, rather than an unspecified isomorphism of its two objects.",
+   "uses": [
+    "lem-sfb-root-coordinate-supported-vanishing",
+    "det-lem-formal-closed-support-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent expansion of the one-term full-root boundary calculation"
+   }
+  },
+  {
+   "text": "Enumerate $A=\\{a_1,\\ldots,a_s\\}$ and put $J_m=\\{a_1,\\ldots,a_m\\}$. Write $i_m:X_{J_m}\\hookrightarrow T$ and $e_m:X_{J_{m+1}}\\hookrightarrow X_{J_m}$. Induct on $m$ that the actual unit $\\eta_m:\\mathcal N[0]\\to R(i_m)_*N_{J_m}$ is invertible. At $m=0$ it is the identity. The coefficient hypothesis for the exact pullbacks holds by step 1. Apply [lem-sfb-derived-composition-adjunction-normalization] to the module adjunctions for $i_m,e_m,i_{m+1}$, with the canonical pullback-composition isomorphism. The module categories are Grothendieck by [lem-weil-pbc-ring-sheaves-grothendieck], transported through the exact equivalence of step 1. Under its normalized comparison $R(i_{m+1})_*\\cong R(i_m)_*Re_{m,*}$ the unit $\\eta_{m+1}$ is exactly $R(i_m)_*(\\eta_{J_m,a_{m+1}})\\circ\\eta_m$. Both factors are invertible, the second by induction and the first by step 3 and functoriality. This proves the claim through $m=s$. In particular the result is independent of the enumeration: every enumeration gives the same specified adjunction unit for $j_A=i_s$.",
+   "uses": [
+    "lem-sfb-derived-composition-adjunction-normalization",
+    "lem-weil-pbc-ring-sheaves-grothendieck"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, lemma-derived-pushforward-composition; derived adjunction normalization from Tag 09T5"
+   }
+  },
+  {
+   "text": "The adjunction unit is natural in its argument: for a map $u:\\mathcal N\\to\\mathcal N'$ one has $Rj_*j^*u\\circ\\eta_{\\mathcal N}=\\eta_{\\mathcal N'}\\circ u$. Since both units are invertible, multiplying this equation by their inverses proves naturality of the inverses. This applies to the modules after any of the parameter or chart pullbacks in step 2, so does not require choosing compatible trivializations or compatible inverses.",
+   "uses": [
+    "sk-def-sfb-module-derived-pushpull"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent expansion of the one-term full-root boundary calculation"
+   }
+  },
+  {
+   "text": "Here is the unit compatibility for a cartesian pullback square of $j:X_A\\hookrightarrow T$ along $g:T'\\to T$, with open $j':X'_A\\hookrightarrow T'$ and other projection $g_A$. For $K=\\mathcal N[0]$, let $b:g^*Rj_*j^*K\\to Rj'_*g_A^*j^*K$ be the usual exchange, namely the adjunct of $g_A^*\\varepsilon$ under $j'^*\\dashv Rj'_*$, with the pullback-composition identification inserted. The derived adjunction is [sk-def-sfb-module-derived-pushpull]. Transposing $b\\circ g^*\\eta_K$ gives $g_A^*(\\varepsilon_{j^*K}\\circ j^*\\eta_K)=\\mathrm{id}$ by the triangle identity. Transposing $\\eta'_{g^*K}$ gives the same identity. The adjunction bijection therefore gives $b\\circ g^*\\eta_K=\\eta'_{g^*K}$. Whenever the source and target units have been proved invertible, this equation also proves $b$ invertible and gives $g^*(\\eta_K^{-1})=\\eta_{g^*K}'^{-1}\\circ b$. For a pro-etale base change of $U$, or a map of parameter sets, step 2 identifies the pulled-back tower and module with the required ones, so both units are invertible by steps 3--4. This proves the stated base-change and parameter naturality, for the canonical exchange itself.",
+   "uses": [
+    "sk-def-sfb-module-derived-pushpull"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent expansion of the one-term full-root boundary calculation"
+   }
+  },
+  {
+   "text": "Apply the same transpose calculation to an automorphism $h$ preserving the indicated open, and compose with the supplied isomorphism $h^*\\mathcal N\\cong\\mathcal N$; step 5 handles that module isomorphism. This gives equivariance of the unit and its inverse. For a continuous family indexed by a profinite $Q$, use the actual morphism $a:T[Q]\\to T$ defining the family, its restriction to the opens, and the supplied action isomorphism $a^*\\mathcal N\\cong\\operatorname{pr}^*\\mathcal N$. Step 2 and the already proved result for $Q$ give cleanness for $\\operatorname{pr}^*\\mathcal N$, hence also for $a^*\\mathcal N$ by this module isomorphism. The transpose calculation of step 6 applies directly to $a$ and the open square; no pointwise test on $Q$ is taken. Thus the equality of morphisms is on $T[Q]$ itself. Replacing $T$ by $T[P]$ yields the required equality on the $(P\\times Q)$-parametrized terms, since finite-quotient products in [def-sfb-profinite-test-objects] identify $(T[P])[Q]$ with $T[P\\times Q]$.",
+   "uses": [
+    "sk-def-sfb-module-derived-pushpull",
+    "def-sfb-profinite-test-objects"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent expansion of the one-term full-root boundary calculation"
+   }
+  },
+  {
+   "text": "If $A=\\varnothing$, the complementary open is $T$ and the normalized unit is the identity. This also covers $r=0$. A rank-zero module is zero and the unit is its identity; all functors send the zero object to zero. If $P$ or the chart is empty, the affine parameter chart in step 2 is empty and its module category has just the zero object. All the formulas above remain identities there. None of the steps assumes a nonempty coordinate face, a positive rank, a complete algebraic closure, or a global cohomological-dimension bound.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent expansion of the one-term full-root boundary calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-alpha-iso",
+  "lem-sfb-internal-module-operations-transport",
+  "sk-def-sfb-module-derived-pushpull",
+  "def-sfb-profinite-test-objects",
+  "def-sfb-lisse-coefficient-module",
+  "lem-sfb-root-coordinate-supported-vanishing",
+  "det-lem-formal-closed-support-adjunction",
+  "lem-sfb-derived-composition-adjunction-normalization",
+  "lem-weil-pbc-ring-sheaves-grothendieck"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct image; formal induction using the existing single-coordinate supported-vanishing input and the localization triangle. This is not a proof of the supported-vanishing input itself."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,10 +163,45 @@
    "results": "8 hits: SheafOfModules.unitToPushforwardObjUnit, SheafOfModules.pushforward, SheafOfModules.pushforwardSections, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, SheafOfModules.pushforwardSections_unitHomEquiv, SheafOfModules.pushforwardComp, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, PresheafOfModules.pushforward₀_obj_obj_isModule",
    "date": "2026-10-21",
    "verdict": "no match: hits do not state this pro-etale internal-module assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A lisse sheaf on an infinite prime to characteristic root tower is unchanged by derived pushforward from a coordinate puncture with continuous l adic coefficients",
+   "results": "8 hits: BDeRhamPlus, BDeRham, SheafOfModules.pushforwardCongr, SheafOfModules.pushforwardCongr_inv_app_val_app, SheafOfModules.pushforwardNatIso_hom, SheafOfModules.unitToPushforwardObjUnit_val_app_apply, SheafOfModules.pushforwardCongr_symm, SheafOfModules.pushforwardSections_unitHomEquiv",
+   "date": "2026-10-21",
+   "verdict": "no match: returned underived restriction/pushforward, affine-limit, and perfectoid declarations do not assert this root-tower derived-unit theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "(Kummer|rootTower|root_tower).*(acyclic|punctur|clean)|punctur.*(Kummer|rootTower)",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: returned underived restriction/pushforward, affine-limit, and perfectoid declarations do not assert this root-tower derived-unit theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived unit from a lisse module to pushforward of restriction to an open root tower is an isomorphism",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictAdjunction, SheafOfModules.unitToPushforwardObjUnit, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.LocallyRingedSpace.ofRestrict_stalkMap_isIso, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.isoRestrict_hom_ofRestrict_assoc, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback",
+   "date": "2026-10-21",
+   "verdict": "no match: returned underived restriction/pushforward, affine-limit, and perfectoid declarations do not assert this root-tower derived-unit theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"root\", \"isIso\"",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: returned underived restriction/pushforward, affine-limit, and perfectoid declarations do not assert this root-tower derived-unit theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Infinite normal crossings Kummer covers kill higher direct images of continuous coefficient sheaves along the boundary open inclusion",
+   "results": "8 hits: AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.liftCoborder_app, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.Scheme.Hom.normalizationDiagram, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux",
+   "date": "2026-10-21",
+   "verdict": "no match: returned underived restriction/pushforward, affine-limit, and perfectoid declarations do not assert this root-tower derived-unit theorem"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-root-tower-inner-support",
@@ -71,7 +213,7 @@
  "blueprint": {
   "from": {
    "node": null,
-   "place": "Paragraph (3), one-term tame-boundary calculation: remove a subset of the coordinate divisors on the full tower, before any descent or closed-support operation.",
+   "place": "Paragraph (3), open direct image: derive arbitrary-coordinate puncture invariance from the existing one-coordinate supported-vanishing input; preserve actual units, profinite parameters and family actions. Nearest blueprint ancestor command returns None.",
    "via": [
     "lem-sfb-root-tower-inner-support",
     "lem-sfb-partial-kummer-boundary-unit-model",
@@ -84,5 +226,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-root-tower-puncture-invariance",
+  "worker": "stage1",
+  "summary": "No statement change and no new nodes. Reused the existing one-coordinate supported-vanishing input; localization gives each single-step unit, and normalized composition gives the finite induction. Absorbed profinite parameters into the affine pro-etale chart and proved naturality, including parametrized actions, by transposing the actual exchange and using the triangle identity.",
+  "blueprint": "Realizes paragraph (3) of the recorded direct-image proof, at the extracted tame-boundary full-root term. The blueprint itself does not prove the all-continuous input. Whole-blueprint searches for puncture and root tower found no equivalent node.",
+  "tool_uses": [
+   {
+    "node": "det-lem-formal-closed-support-adjunction",
+    "why": "The generic localization triangle for any condensed ring turns the separately supplied one-coordinate supported vanishing into the actual open unit; it does not replace the tame-boundary calculation."
+   },
+   {
+    "node": "lem-sfb-derived-composition-adjunction-normalization",
+    "why": "Generic exact-adjoint composition identifies the successive units with the specified composite unit on ordinary unbounded derived categories; no geometric route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "Generic ring-sheaf module Grothendieck property supplies the category hypothesis of the normalized derived-adjunction composition tool."
+   },
+   {
+    "node": "lem-sfb-alpha-iso",
+    "why": "Generic coefficient pullback isomorphism for every condensed ring, including the all-continuous Omega ring; no change of geometric route."
+   },
+   {
+    "node": "lem-sfb-internal-module-operations-transport",
+    "why": "Generic exact identification of internal module operations and specified adjunctions with actual ring-sheaf operations, for arbitrary condensed coefficients."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-lem-formal-closed-support-adjunction",
+  "lem-sfb-derived-composition-adjunction-normalization",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-sfb-alpha-iso",
+  "lem-sfb-internal-module-operations-transport"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q03-a65aebd25",
+  "group": "Q03",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-a65aebd25 (reviewer sub-agent of L); spot-checked: I read every step in full. The statement, stmt_deps and source are unchanged from the live unsplit node. There are no new nodes, no cycle, nothing is on the dropped list and nothing cites SGA. Step 1: lem-sfb-alpha-iso holds for any condensed ring, so f^* is exact and Lj^*=D(j^*); lem-sfb-internal-module-operations-transport identifies the internal and sectionwise adjunctions, including units. Step 2: X[P]=Spec LC(P,Z)xX (def-sfb-profinite-test-objects), so T[P] is the root tower over the affine pro-etale U[P]; lisse modules pull back. Step 3: the hypotheses of lem-sfb-root-coordinate-supported-vanishing match the item exactly (chart B, reduced SNC t_1..t_r, affine pro-etale U, T_J, a not in J). The complement of D_{a,J} in the affine T_J is principal, hence quasi-compact, so clause 4 of det-lem-formal-closed-support-adjunction makes the unit invertible. Step 4: a proper induction from J_0 empty. The composite unit Ri_m*(eta_{J_m,a}) o eta_m comes from lem-sfb-derived-composition-adjunction-normalization, with the Grothendieck hypothesis via the E_T equivalence; I checked the formula. Step 6: I verified the mate identity b o g^*eta = eta' by hand through the triangle identity. Step 7: the Q-family case works on the actual action map, with (T[P])[Q]=T[P x Q]. Edge cases checked: A empty, r=0, rank 0, empty P or chart, and empty D; t_a is a nonzerodivisor otherwise. The split is not a relabelling: the cited input is strictly smaller (one-coordinate local cohomology, no naturality). Accepted tool_uses: det-lem-formal-closed-support-adjunction, lem-sfb-derived-composition-adjunction-normalization, lem-weil-pbc-ring-sheaves-grothendieck, lem-sfb-alpha-iso, lem-sfb-internal-module-operations-transport; all are generic. Maintainer note: lem-sfb-root-tower-boundary-acyclicity repeats this chain inline and could cite this item."
  }
 }
