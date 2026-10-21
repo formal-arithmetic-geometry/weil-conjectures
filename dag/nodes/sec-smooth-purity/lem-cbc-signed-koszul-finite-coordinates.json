@@ -1,0 +1,150 @@
+{
+ "id": "lem-cbc-signed-koszul-finite-coordinates",
+ "kind": "statement",
+ "title": "Finite pure-tensor coordinates of the ordered negative Koszul tensors",
+ "statement": "Let (C,J,O) be a small ringed site with commutative ring sheaf O [def-weil-sheaf-of-modules-category], A a commutative ring and rho:A -> Gamma(O) a coefficient map. Let a:Fin r -> A, allowing r=0. For the actual ordered negative Koszul tensor functors T_m(K)=K tensor_O tensor_i[O --rho(a_i)^(m+1)--> O] [def-pc-tensor-complex-sheaves], there are degreewise finite-subset coordinate isomorphisms T_m(K)^q = direct_sum_I K^(q+|I|), natural transition maps T_(m+1)->T_m and natural inclusions K->T_m satisfying the differential, coefficient-map, transition, and inclusion matrix equations of [def-cbc-signed-koszul-completion-model]. The coordinate inclusions are precisely the pure tensors ringedNegativeKoszulSummand, and the inclusions commute with the transitions. Each functor T_m preserves quasi-isomorphisms of arbitrary unbounded complexes. This finite statement involves no products, fibre, localization or coefficient-functor comparison.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0A0E, lemma-derived-completion-koszul, finite free negative Koszul complexes; finite-coordinate expansion in steps 1 and 3 of lem-cbc-exact-linear-koszul-fiber"
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-tensor-complex-sheaves",
+  "def-cbc-signed-koszul-completion-model"
+ ],
+ "proof": [
+  {
+   "text": "Induct on the ordered number of factors. For the empty tensor the right unitor identifies K tensor O[0] with K. For the successor split subsets by whether they contain index zero, and identify the two supported degrees of the new negative factor with O. Distribute tensor over the finite sums. Tensor unitors and total tensor inclusions give the specified pure-tensor inclusions; multiplication gives the inverse coordinates. Naturality makes maps of K diagonal. Expanding the signed total differential gives d_K plus the erased-index coefficients (-1)^(q+|I|)(-1)^#{j in I:j<i} a_i^(m+1), with precisely the equality transports in the Lean statement.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "def-pur-sheaf-tensor-product",
+    "def-cbc-signed-koszul-completion-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0A0E, lemma-derived-completion-koszul, finite free negative Koszul complexes; finite-coordinate expansion in steps 1 and 3 of lem-cbc-exact-linear-koszul-fiber"
+   }
+  },
+  {
+   "text": "Define transitions by conjugating the diagonal scalar product over I by these coordinates. The chain equation is (product over I of a_j) a_i^(m+1) = a_i^(m+2)(product over I.erase i of a_j). Empty-coordinate inclusions are chain maps and commute with the transitions because the empty product is one. All formulas apply at r=0 and require no scalar inversion.",
+   "uses": [
+    "def-cbc-signed-koszul-completion-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0A0E, lemma-derived-completion-koszul, finite free negative Koszul complexes; finite-coordinate expansion in steps 1 and 3 of lem-cbc-exact-linear-koszul-fiber"
+   }
+  },
+  {
+   "text": "Filter each tensor by subset cardinality at most k. The kth quotient is the finite sum of copies of K reindexed by |I|=k; multiplication by the standard degreewise signs identifies these with usual shifts. A quasi-isomorphism of K induces a quasi-isomorphism on each quotient. These short exact sequences are degreewise split, so the long exact homology sequences and induction on k give quasi-isomorphism invariance of the finite total tensor, even when K is unbounded.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0A0E, lemma-derived-completion-koszul, finite free negative Koszul complexes; finite-coordinate expansion in steps 1 and 3 of lem-cbc-exact-linear-koszul-fiber"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-sheaf-tensor-product",
+  "def-cbc-signed-koszul-completion-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+  "place": "Finite free negative Koszul tensor calculation of Stacks 0A0E, refined by the explicit signed pure-tensor normalization; no product or fibre assertion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The negative Koszul tensor has canonical finite subset coordinates and its countable product fibre preserves quasi isomorphisms",
+   "results": "8 hits on generic tensor/K-projective facts; no normalized Koszul model construction",
+   "date": "2026-10-21",
+   "verdict": "No matching construction theorem; the generic tensor and localization APIs do not specify the normalized negative Koszul model."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Koszul\"",
+   "results": "0 hits",
+   "date": "2026-10-21",
+   "verdict": "No matching construction theorem; the generic tensor and localization APIs do not specify the normalized negative Koszul model."
+  },
+  {
+   "tool": "grep",
+   "query": "negativeKoszul|NegativeKoszul|SignedKoszulCompletionModel",
+   "results": "0 Mathlib hits; repository search finds the model definition and the parent comparison only",
+   "date": "2026-10-21",
+   "verdict": "No matching construction theorem; the generic tensor and localization APIs do not specify the normalized negative Koszul model."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite tensor of two term complexes expands over subsets, with Koszul differential and canonical tensor unit coordinates",
+   "results": "8 hits including HomologicalComplex.unit_tensor_d₁, HomologicalComplex.ιTensorObj, HasTensor, tensorObj.",
+   "date": "2026-10-21",
+   "verdict": "Useful total-tensor infrastructure; no theorem of the normalized finite Koszul matrix statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bounded finite free Koszul tensor complex has canonical subset coordinates and preserves quasi-isomorphisms of unbounded complexes",
+   "results": "8 hits on the generic quasi-isomorphism predicate and derived-localization equivalence, including isIso_Q_map_iff_mem_quasiIso.",
+   "date": "2026-10-21",
+   "verdict": "No finite pure-tensor coordinate theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.ExactLinearKoszulFibre",
+  "date": "2026-10-21",
+  "group": "M1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-cbc-completed-extension-zero-comparison",
+   "place": "Proof, final paragraph applying lem-cbc-exact-functor-rlim to the defining derived limits: finite negative Koszul coordinates in the signed-fibre refinement.",
+   "via": [
+    "lem-cbc-exact-linear-koszul-fiber"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SignedKoszulFiniteCoordinates",
+  "file": "lean/Sheaf/CategoryTheory/SignedKoszulFiniteCoordinates.lean",
+  "declaration": "CategoryTheory.exists_ringedSignedKoszulFiniteCoordinates",
+  "statement": "theorem exists_ringedSignedKoszulFiniteCoordinates {C : Type u} [SmallCategory C] {J : GrothendieckTopology C} (O : Sheaf J CommRingCat.{u}) {A : Type z} [CommRing A] (ρ : A →+* RingCat.sectionsSubring (O.obj ⋙ forget₂ CommRingCat RingCat)) (r : ℕ) (a : Fin r → A) : letI := Abelian.hasFiniteBiproducts (C := ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O)) ∃ (coordinates : ∀ (m : ℕ) (K : ringedSiteComplex O) (q : ℤ), ((ringedNegativeKoszulTensor O ρ a m).obj K).X q ≅ ⨁ fun I : Finset (Fin r) ↦ K.X (q + I.card)) (step : ∀ m : ℕ, ringedNegativeKoszulTensor O ρ a (m + 1) ⟶ ringedNegativeKoszulTensor O ρ a m) (inclusion : ∀ m : ℕ, 𝟭 (ringedSiteComplex O) ⟶ (ringedNegativeKoszulTensor O ρ a) m), (∀ (m : ℕ) (K : ringedSiteComplex O) (q : ℤ) (I L : Finset (Fin r)), biproduct.ι _ I ≫ (coordinates m K q).inv ≫ (((ringedNegativeKoszulTensor O ρ a) m).obj K).d q (q + 1) ≫ (coordinates m K (q + 1)).hom ≫ biproduct.π _ L = (if I = L then K.d (q + I.card) ((q + 1) + L.card) else 0) + (if h : q + (I.card : ℤ) = (q + 1) + (L.card : ℤ) then ringedKoszulCoefficientSMul O ρ (∑ i ∈ I, if I.erase i = L then (if Even (q + (I.card : ℤ)) then (1 : A) else -1) * (-1 : A) ^ (I.filter (fun j ↦ j < i)).card * a i ^ (m + 1) else 0) (K.XIsoOfEq h).hom else 0)) ∧ (∀ (m : ℕ) {K L : ringedSiteComplex O} (f : K ⟶ L) (q : ℤ) (I P : Finset (Fin r)), biproduct.ι _ I ≫ (coordinates m K q).inv ≫ (((ringedNegativeKoszulTensor O ρ a) m).map f).f q ≫ (coordinates m L q).hom ≫ biproduct.π _ P = if h : I = P then f.f (q + I.card) ≫ (L.XIsoOfEq (congrArg (fun V : Finset (Fin r) ↦ q + (V.card : ℤ)) h)).hom else 0) ∧ (∀ (m : ℕ) (K : ringedSiteComplex O) (q : ℤ) (I L : Finset (Fin r)), biproduct.ι _ I ≫ (coordinates (m + 1) K q).inv ≫ ((step m).app K).f q ≫ (coordinates m K q).hom ≫ biproduct.π _ L = if h : I = L then ringedKoszulCoefficientSMul O ρ (∏ i ∈ I, a i) (K.XIsoOfEq (congrArg (fun V : Finset (Fin r) ↦ q + (V.card : ℤ)) h)).hom else 0) ∧ (∀ (m : ℕ) (K : ringedSiteComplex O) (q : ℤ) (I : Finset (Fin r)), ((inclusion m).app K).f q ≫ (coordinates m K q).hom ≫ biproduct.π _ I = if h : q = q + (I.card : ℤ) then (K.XIsoOfEq h).hom else 0) ∧ (∀ (m : ℕ) (K : ringedSiteComplex O) (q : ℤ) (I : Finset (Fin r)), biproduct.ι _ I ≫ (coordinates m K q).inv = ringedNegativeKoszulSummand O ρ a m K q I) ∧ (∀ (m : ℕ) (K : ringedSiteComplex O), (inclusion (m + 1)).app K ≫ (step m).app K = (inclusion m).app K) ∧ (∀ (m : ℕ) {K L : ringedSiteComplex O} (f : K ⟶ L), QuasiIso f → QuasiIso ((ringedNegativeKoszulTensor O ρ a m).map f))",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261021T140839-L-2761445",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261021T140839-L-2761445",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

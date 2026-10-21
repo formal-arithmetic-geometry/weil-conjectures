@@ -1,0 +1,166 @@
+{
+ "id": "lem-cbc-signed-koszul-model-exists",
+ "kind": "statement",
+ "title": "Normalized negative Koszul completion model exists and preserves quasi-isomorphisms",
+ "statement": "Let (C,J,R) be a small ringed site with commutative structure sheaf R [def-weil-sheaf-of-modules-category], let A be a commutative ring acting by global sections, and suppose the module category has exact countable products [def-weil-category-product]. Fix a finite ordered list a:Fin r -> A, allowing r=0. For the actual ordered negative Koszul tensor functors K -> K tensor_R tensor_i[R --a_i^(m+1)--> R] [def-pc-tensor-complex-sheaves], there exists a RingedSignedKoszulCompletionModel R rho a with the pure-tensor normalization and all coordinate, transition, product, signed-fibre and unit equations of [def-cbc-signed-koszul-completion-model]. Its fibre functor followed by the ordinary derived-category localization Q [def-weil-abstract-derived-category] inverts every quasi-isomorphism. This is a one-site construction with no coefficient-category functor or comparison as an input or output.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0A0E, lemma-derived-completion-koszul; normalized finite tensor and signed fibre construction from steps 1 and 7 of lem-cbc-exact-linear-koszul-fiber"
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-category-product",
+  "def-pc-tensor-complex-sheaves",
+  "def-cbc-signed-koszul-completion-model",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Apply lem-cbc-signed-koszul-finite-coordinates to obtain the normalized finite coordinates, their differential and map equations, the transition and inclusion natural transformations, inclusion compatibility, and quasi-isomorphism preservation of each level.",
+   "uses": [
+    "lem-cbc-signed-koszul-finite-coordinates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0A0E, lemma-derived-completion-koszul; normalized finite tensor and signed fibre construction from steps 1 and 7 of lem-cbc-exact-linear-koszul-fiber"
+   }
+  },
+  {
+   "text": "Form the actual categorical product of the tensor functors. Define the shift by its projections using the transitions and the diagonal using the empty-subset inclusions. These imply (1-shift) diagonal=0. Form the degreewise binary biproduct B^q plus B^(q-1) with differential (d,0;1-shift,-d), coordinatewise functor action, and unit (diagonal,0). The chain-map equation of the shift cancels the mixed terms in d squared; biproduct and product projection equations verify every model field.",
+   "uses": [
+    "def-cbc-signed-koszul-completion-model",
+    "def-weil-category-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0A0E, lemma-derived-completion-koszul; finite-coordinate refinement and exact-products argument of the parent node"
+   }
+  },
+  {
+   "text": "The localized countable-product cone is a limit by lem-weil-derived-countable-products-core. Construct the inverse to Q of the product map by the limit universal property using the inverses of its localized level maps. Product projection equations prove both inverse laws, so the product map is a quasi-isomorphism. Apply lem-pe-roos-coordinates-quasi-iso to the explicitly constructed diagonal fibre map and use that Q inverts quasi-isomorphisms.",
+   "uses": [
+    "lem-weil-derived-countable-products-core",
+    "lem-pe-roos-coordinates-quasi-iso",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0A0E, lemma-derived-completion-koszul; finite-coordinate refinement and exact-products argument of the parent node"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-signed-koszul-finite-coordinates",
+  "def-cbc-signed-koszul-completion-model",
+  "def-weil-category-product",
+  "lem-weil-derived-countable-products-core",
+  "lem-pe-roos-coordinates-quasi-iso",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+  "place": "M1 Lean construction of the actual product and two-coordinate fibre; finite pure-tensor calculation isolated in lem-cbc-signed-koszul-finite-coordinates."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The negative Koszul tensor has canonical finite subset coordinates and its countable product fibre preserves quasi isomorphisms",
+   "results": "8 hits on generic tensor/K-projective facts; no normalized Koszul model construction",
+   "date": "2026-10-21",
+   "verdict": "No matching construction theorem; the generic tensor and localization APIs do not specify the normalized negative Koszul model."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Koszul\"",
+   "results": "0 hits",
+   "date": "2026-10-21",
+   "verdict": "No matching construction theorem; the generic tensor and localization APIs do not specify the normalized negative Koszul model."
+  },
+  {
+   "tool": "grep",
+   "query": "negativeKoszul|NegativeKoszul|SignedKoszulCompletionModel",
+   "results": "0 Mathlib hits; repository search finds the model definition and the parent comparison only",
+   "date": "2026-10-21",
+   "verdict": "No matching construction theorem; the generic tensor and localization APIs do not specify the normalized negative Koszul model."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The fibre of one minus the shift on a countable product of finite Koszul tensor functors preserves quasi-isomorphisms",
+   "results": "8 hits on preservation of homology and quasi-isomorphisms under shifts, including HomologicalComplex.quasiIso_map_of_preservesHomology and CochainComplex.quasiIso_shift_iff.",
+   "date": "2026-10-21",
+   "verdict": "No normalized Koszul model constructor; the generic results do not supply the specified product, fibre and unit equations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.ExactLinearKoszulFibre",
+  "date": "2026-10-21",
+  "group": "M1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-cbc-completed-extension-zero-comparison",
+   "place": "Proof, final paragraph applying lem-cbc-exact-functor-rlim to the defining derived limits: product and signed fibre construction in the signed-Koszul refinement.",
+   "via": [
+    "lem-cbc-exact-linear-koszul-fiber"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SignedKoszulModelExists",
+  "file": "lean/Sheaf/CategoryTheory/SignedKoszulModelExists.lean",
+  "declaration": "CategoryTheory.exists_ringedSignedKoszulCompletionModel",
+  "statement": "theorem exists_ringedSignedKoszulCompletionModel {C : Type u} [SmallCategory C] {J : GrothendieckTopology C} (R : Sheaf J CommRingCat.{u}) {A : Type z} [CommRing A] (ρ : A →+* RingCat.sectionsSubring (R.obj ⋙ forget₂ CommRingCat RingCat)) [HasDerivedCategory.{w} (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))] [HasCountableProducts (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))] [CountableAB4Star (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))] (r : ℕ) (a : Fin r → A) : ∃ M : RingedSignedKoszulCompletionModel R ρ a, (HomologicalComplex.quasiIso (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) (.up ℤ)).IsInvertedBy (M.model.fibre ⋙ DerivedCategory.Q)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-21"
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-cbc-exact-linear-koszul-fiber",
+  "worker": "stage3",
+  "summary": "Explicit product and signed fibre construction from normalized finite tensors; proof completed in Lean.",
+  "blueprint": "Proof, final paragraph applying lem-cbc-exact-functor-rlim to the defining derived limits: product and signed fibre construction in the signed-Koszul refinement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-derived-countable-products-core",
+    "why": "Takes only the general localized product-cone limit for an abelian category with exact countable products; it supplies no coefficient comparison or replacement of the unit route."
+   },
+   {
+    "node": "lem-pe-roos-coordinates-quasi-iso",
+    "why": "Takes only the general two-coordinate mapping-fibre quasi-isomorphism criterion in an abelian category, applied to the explicitly constructed fibre."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261021T140839-L-2761445",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261021T140839-L-2761445",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
