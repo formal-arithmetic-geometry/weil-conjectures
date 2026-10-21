@@ -15,9 +15,109 @@
   "lem-sfb-total-tensor-homotopy",
   "def-sfb-strong-monoidal-functor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For fixed $n$, the index set $S_n=\\{(p,q)\\in\\mathbf Z^2:p+q=n\\}$ is countable, by the bijection $p\\mapsto(p,n-p)$. Since $F$ preserves this coproduct, the maps $F(\\iota_{p,q})$ make $F((P\\otimes Q)^n)$ a coproduct of the objects $F(P^p\\otimes Q^q)$. By the universal property [def-weil-pbc-category-colimit], there is a unique $\\tau^n$ with $\\tau^nF(\\iota_{p,q})=\\iota'_{p,q}c_{P^p,Q^q}$. Define $\\sigma^n$ out of the target coproduct by $\\sigma^n\\iota'_{p,q}=F(\\iota_{p,q})c_{P^p,Q^q}^{-1}$. Composing these equations and using $cc^{-1}=1$ gives $\\sigma^n\\tau^n=1$ and $\\tau^n\\sigma^n=1$, since maps out of either coproduct are determined by their composites with the injections.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-sfb-preserves-kflat-quasi-iso",
+    "def-sfb-strong-monoidal-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0FPQ, lemma-symmetric-monoidal-cat-complexes, total tensor convention; direct coproduct construction of the functor comparison (agent verification)."
+   }
+  },
+  {
+   "text": "Write $A=P^p$, $B=Q^q$. On $F(P^p\\otimes Q^q)$ the two composites $d_{FP\\otimes FQ}\\tau^n$ and $\\tau^{n+1}F(d_{P\\otimes Q})$ are both\n$$\\iota'_{p+1,q}(F(d_P^p)\\otimes1)c_{A,B}+(-1)^p\\iota'_{p,q+1}(1\\otimes F(d_Q^q))c_{A,B}.$$\nIndeed substitute the two summand terms of the differential in [def-sfb-preserves-kflat-quasi-iso], use $F(u+v)=F(u)+F(v)$ and $F(-u)=-F(u)$, and use naturality of $c=\\mu^{-1}$ from [def-sfb-strong-monoidal-functor] separately with $(d_P^p,1)$ and $(1,d_Q^q)$. The preserved-coproduct uniqueness of step 1 proves the chain equation. Its degreewise inverse $\\sigma$ is a chain map too: multiply that chain equation on the two sides by $\\sigma^{n+1}$ and $\\sigma^n$. Thus $\\tau$ is an isomorphism of complexes.",
+   "uses": [
+    "def-sfb-preserves-kflat-quasi-iso",
+    "def-sfb-strong-monoidal-functor",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0FPQ, lemma-symmetric-monoidal-cat-complexes; signed differential compatibility expanded on each summand (agent verification)."
+   }
+  },
+  {
+   "text": "For cochain maps $a:P\\to P'$ and $b:Q\\to Q'$, test naturality on $F(\\iota_{p,q})$. The two resulting maps are\n$$\\iota''_{p,q}(F(a^p)\\otimes F(b^q))c_{P^p,Q^q},\\qquad\\iota''_{p,q}c_{P'^p,Q'^q}F(a^p\\otimes b^q).$$\nThey agree by tensorator naturality in [def-sfb-strong-monoidal-functor], after taking the inverse tensorator. The summand formula for $a\\otimes b$ is part of [def-sfb-preserves-kflat-quasi-iso]. The coproduct universal property therefore proves naturality in both variables and uniqueness of the stated natural complex isomorphism.",
+   "uses": [
+    "def-sfb-strong-monoidal-functor",
+    "def-sfb-preserves-kflat-quasi-iso",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0FPQ, lemma-symmetric-monoidal-cat-complexes; functor comparison naturality checked on summands (agent verification)."
+   }
+  },
+  {
+   "text": "An additive functor sends a zero object to a zero object: $1_{F0}=F(1_0)=F(0)=0$, and an object whose identity is zero has exactly one arrow to and from every object. Thus $F_{\\rm Ch}(\\mathbf1_{\\mathcal C}[0])$ has $F\\mathbf1_{\\mathcal C}$ in degree zero and zero objects elsewhere. Its differentials vanish. The map $e_F^{-1}$ in degree zero and the unique zero-object isomorphisms elsewhere form the required chain isomorphism $j$, whose inverse is $e_F$ in degree zero. This uses the zero object supplied by [def-sp-abelian] and the given unit isomorphism of [def-sfb-strong-monoidal-functor].",
+   "uses": [
+    "def-sp-abelian",
+    "def-sfb-strong-monoidal-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0FPQ, lemma-symmetric-monoidal-cat-complexes, proof: unit concentrated in degree zero; extension under additive F (agent verification)."
+   }
+  },
+  {
+   "text": "Use [lem-sfb-total-tensor-homotopy]: the complex associators are induced by the coefficient associator and the reindexing $(p+q)+r=p+(q+r)$. Tensor preservation of coproducts and the universal property [def-weil-pbc-category-colimit] show that the nested triple inclusions determine maps out of $((P\\otimes Q)\\otimes R)^n$. Applying $F$ keeps this property: both nested indices are countable, so its assumed coproduct preservation applies twice. Precompose the proposed associativity equation with $F$ of such an inclusion, with $p+q+r=n$. Put $A=P^p,B=Q^q,C=R^r$. Naturality of $c$ moves the inner summand inclusions past the outer $c$. After the common final triple inclusion, the two coefficient maps are\n$$(1\\otimes c_{B,C})c_{A,B\\otimes C}F(\\alpha_{A,B,C}),\\qquad\\alpha_{FA,FB,FC}(c_{A,B}\\otimes1)c_{A\\otimes B,C}.$$\nThese agree: substitute $c=\\mu^{-1}$ in the associativity identity of [def-sfb-strong-monoidal-functor] and cancel the invertible tensorators. This proves the equation in every degree. No permutation of factors occurred, hence there is no Koszul sign or symmetry hypothesis in this check.",
+   "uses": [
+    "lem-sfb-total-tensor-homotopy",
+    "def-weil-pbc-category-colimit",
+    "def-sfb-strong-monoidal-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0FPQ, lemma-symmetric-monoidal-cat-complexes, proof: associator coherence; functor equation expanded using the coefficient tensorator (agent verification)."
+   }
+  },
+  {
+   "text": "For the left unit equation, the only potentially nonzero summand of $(I_{\\mathcal C}\\otimes P)^n$ is $(0,n)$; for the right unit equation, that of $(P\\otimes I_{\\mathcal C})^n$ is $(n,0)$. All other summands have a zero factor: additivity of tensor gives $1_{0\\otimes A}=0\\otimes1_A=0$ and similarly for $A\\otimes0$. By [lem-sfb-total-tensor-homotopy], the complex unitors on the surviving summands are the coefficient unitors. By steps 1 and 4, the claimed equations there become, for $A=P^n$,\n$$F(\\lambda_A)=\\lambda_{FA}(e_F^{-1}\\otimes1)c_{\\mathbf1,A},\\qquad F(\\rho_A)=\\rho_{FA}(1\\otimes e_F^{-1})c_{A,\\mathbf1}.$$\nThey follow by cancelling $\\mu_{\\mathbf1,A}(e_F\\otimes1)$ and $\\mu_{A,\\mathbf1}(1\\otimes e_F)$ respectively from the two unit identities in [def-sfb-strong-monoidal-functor]. On the zero summands both sides are the unique map. Coproduct uniqueness proves both full complex equations.",
+   "uses": [
+    "lem-sfb-total-tensor-homotopy",
+    "def-sfb-strong-monoidal-functor",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0FPQ, lemma-symmetric-monoidal-cat-complexes, proof: left and right unitors; coefficient unit identities after restriction to degrees (0,n) and (n,0) (agent verification)."
+   }
+  },
+  {
+   "text": "Set $\\mu^{\\rm Ch}_{P,Q}=\\tau_{P,Q}^{-1}$ and $e^{\\rm Ch}=j^{-1}$. Step 3 gives the naturality of $\\mu^{\\rm Ch}$. Substitute these inverses into the identities proved in steps 5 and 6 and compose with the invertible $\\tau$ and $j$ to cancel them. The resulting three identities are exactly the associativity, left unit and right unit identities in [def-sfb-strong-monoidal-functor], for the complex monoidal structures of [lem-sfb-total-tensor-homotopy]. They therefore give the stated strong monoidal structure on $F_{\\rm Ch}$.",
+   "uses": [
+    "def-sfb-strong-monoidal-functor",
+    "lem-sfb-total-tensor-homotopy"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0FPQ, lemma-symmetric-monoidal-cat-complexes; inverse comparison gives the strong monoidal structure by its defining equations (agent verification)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-sfb-preserves-kflat-quasi-iso",
+  "def-sfb-strong-monoidal-functor",
+  "def-sp-abelian",
+  "lem-sfb-total-tensor-homotopy"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0FPQ, lemma-symmetric-monoidal-cat-complexes, total tensor convention; abstract functor argument expanded directly and checked against lean/WeilConjectures/Algebra/Homology/Monoidal/MapHomologicalComplex.lean, lines 47-248."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -60,10 +160,45 @@
    "results": "{\"t\": \"2026-10-21T06:11:36Z\", \"tool\": \"grep\", \"query\": \"(def monoidalCategory|def inducingFunctorData|def associator)\", \"sub\": \"Algebra/Homology/Monoidal.lean\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-21",
    "verdict": "no match: Mathlib supplies the monoidal structure on complexes, not this termwise strong monoidal functor theorem; the identified monoidal functor theorem belongs to the project"
+  },
+  {
+   "tool": "grep",
+   "query": "mapCochainComplexMonoidal|mapHomologicalComplex.*[Mm]onoidal",
+   "results": "{\"t\": \"2026-10-21T06:45:44Z\", \"tool\": \"grep\", \"query\": \"mapCochainComplexMonoidal|mapHomologicalComplex.*[Mm]onoidal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the results concern the monoidal structure on complexes, additive termwise functors, or finite distributivity; none gives this termwise strong monoidal functor with its specified comparisons"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An additive monoidal functor extends to a monoidal functor on cochain complexes",
+   "results": "{\"t\": \"2026-10-21T06:45:45Z\", \"tool\": \"leansearch\", \"query\": \"An additive monoidal functor extends to a monoidal functor on cochain complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Discrete.addMonoidalFunctorMonoidal\", \"CategoryTheory.AdditiveFunctor.of\", \"CategoryTheory.Functor.map_homogical_complex_additive\", \"CategoryTheory.tensorLeft_additive\", \"CategoryTheory.Functor.Additive\", \"CochainComplex.HomComplex.Cochain.map_add\", \"CategoryTheory.Functor.mapExtAddHom\", \"CategoryTheory.tensoringLeft_additive\"], \"digest\": \"c9ef1d2e2531a0e3\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the results concern the monoidal structure on complexes, additive termwise functors, or finite distributivity; none gives this termwise strong monoidal functor with its specified comparisons"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapHomologicalComplex\", \"Monoidal\"",
+   "results": "{\"t\": \"2026-10-21T06:45:45Z\", \"tool\": \"loogle\", \"query\": \"\\\"mapHomologicalComplex\\\", \\\"Monoidal\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the results concern the monoidal structure on complexes, additive termwise functors, or finite distributivity; none gives this termwise strong monoidal functor with its specified comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive strong monoidal functor preserving countable coproducts induces a strong monoidal functor on cochain complexes with direct sum total tensor",
+   "results": "{\"t\": \"2026-10-21T06:45:46Z\", \"tool\": \"leanfinder\", \"query\": \"An additive strong monoidal functor preserving countable coproducts induces a strong monoidal functor on cochain complexes with direct sum total tensor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.Monoidal.inducingFunctorData\", \"HomologicalComplex.monoidalCategory\", \"HomologicalComplex.monoidalCategoryStruct\", \"HomologicalComplex.instHasTensorXTensorUnit_1\", \"HomologicalComplex.instHasTensorXTensorUnit\", \"HomologicalComplex.ιTensorObj\", \"HomologicalComplex.HasTensor\", \"HomologicalComplex.tensorObj\"], \"digest\": \"f86c78b89c666938\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the results concern the monoidal structure on complexes, additive termwise functors, or finite distributivity; none gives this termwise strong monoidal functor with its specified comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Termwise tensor comparison for a coproduct preserving monoidal additive functor respects complex associators and left and right unitors",
+   "results": "{\"t\": \"2026-10-21T06:45:58Z\", \"tool\": \"leanfinder\", \"query\": \"Termwise tensor comparison for a coproduct preserving monoidal additive functor respects complex associators and left and right unitors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.leftDistributor\", \"CategoryTheory.IsMonoidalLeftDistrib.of_isIso_coprodComparisonTensorLeft\", \"CategoryTheory.IsMonoidalDistrib.of_MonoidalPreadditive_with_binary_coproducts\", \"CategoryTheory.IsMonoidalRightDistrib.of_isIso_coprodComparisonTensorRight\", \"CategoryTheory.leftDistributor_assoc\", \"CategoryTheory.leftDistributor_rightDistributor_assoc\", \"CategoryTheory.rightDistributor_assoc\", \"CategoryTheory.biproduct_ι_comp_leftDistributor_inv_assoc\"], \"digest\": \"b8238076c3857ea4\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the results concern the monoidal structure on complexes, additive termwise functors, or finite distributivity; none gives this termwise strong monoidal functor with its specified comparisons"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-exact-tensor-functor-derived-normalization",
@@ -92,5 +227,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-termwise-strong-monoidal",
+  "worker": "stage1",
+  "summary": "Q39 writes the direct coproduct construction, signed chain-map and naturality checks, zero-degree unit, and explicit associator and both unitor calculations. Existing tensor-constraint and definition nodes suffice: no new node, no Mathlib leaf, and no repeated refused attachment. The statement and metadata are retained.",
+  "blueprint": "Realizes the coefficient-model identification underlying the reduction-of-RHom paragraph of lem-sfb-dc-hom-preserves, via the exact coefficient equivalence: constructs the ordinary complex associator/unit normalization required by lem-sfb-exact-tensor-functor-derived-normalization. The unit preservation/restriction route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-total-tensor-homotopy",
+    "why": "Generic complex monoidal constraints with explicit triple-sum associator and unitors; no node of this unit replaces this algebraic tool."
+   },
+   {
+    "node": "def-sfb-preserves-kflat-quasi-iso",
+    "why": "Uses its definition of the signed direct-sum total tensor and morphism on summands, not its K-flat assertion."
+   },
+   {
+    "node": "def-sfb-strong-monoidal-functor",
+    "why": "Uses the specified coefficient tensorator coherence identities to verify their complex counterparts."
+   },
+   {
+    "node": "def-weil-pbc-category-colimit",
+    "why": "Uses the coproduct universal property to construct and test all maps."
+   },
+   {
+    "node": "def-sp-abelian",
+    "why": "Uses the zero object and additive morphism groups for the degree-zero unit construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-total-tensor-homotopy",
+  "def-sfb-preserves-kflat-quasi-iso",
+  "def-sfb-strong-monoidal-functor",
+  "def-weil-pbc-category-colimit",
+  "def-sp-abelian"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q39-444a0e200",
+  "group": "Q39",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q39-444a0e200 (reviewer sub-agent of L); spot-checked: PASS, no changes or fixes. The delivery is one commit: the item plus its report, with no new nodes. The statement is byte-identical to live, stmt_deps are unchanged and the item is still unsplit in live and side-live. There is no repair note, the item is not on the dropped list and no earlier runs exist. I checked all seven steps by hand. (1) τ^n and its inverse are built from coproduct universal properties over S_n≅Z. (2) Chain-map check: both sides equal ι'(Fd⊗1)c+(−1)^pι'(1⊗Fd)c, using additivity of F and naturality of c. (3) Naturality c∘F(f⊗g)=(Ff⊗Fg)∘c. (4) F(0) is a zero object and j=e_F^{-1}[0]. (5) Associativity on nested triple coprojections, via naturality of c past F(1⊗ι) and the inverted strong-monoidal associativity identity (1⊗c)c F(α)=α(c⊗1)c, with no Koszul sign. (6) Unitors on the (0,n) and (n,0) summands with e^{-1}; the other summands are zero by additivity of the tensor. (7) Inverting gives the defining identities. Each cited statement says what its step uses: the def-sfb-strong-monoidal-functor equations, the summand formulas of def-sfb-preserves-kflat-quasi-iso, and the reindexing associator and unitors of lem-sfb-total-tensor-homotopy. Small cases tested: zero, single-degree, identity functor and odd negative degrees. The statement matches what parent lem-sfb-exact-tensor-functor-derived-normalization uses in steps 1 and 5–7. On route: the unit uses sk-def-sfb-derived-tensor-hom, and the tool_uses are acceptable. No duplicate: lem-pur-cochain-comparison-monoidal-equations is a sheaf-pullback special case with a braiding clause; a later repoint is possible, as an advisory. Stacks 0FPQ only hints at the monoidal structure of complexes, so proof_origin=agent is correct. The Lean candidate is recorded, not attached; no SGA source is used."
  }
 }

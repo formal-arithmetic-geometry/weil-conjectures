@@ -20907,3 +20907,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:08 L: merged deliver/Q04/lem-sfb-amplitude-truncation-family-comparison (reviewer PASS; first push; new nodes: 0)
 - 08:08 L: merged deliver/Q32/lem-sfb-rhom-colimit-source-transport (reviewer PASS; first push; new nodes: 0)
 - 08:08 L: merged deliver/NN/lem-weil-pbc-finite-free-strict-tower-transport (reviewer FIX; first push; new nodes: 0)
+- 08:08 L: merged deliver/Q39/lem-sfb-termwise-strong-monoidal (reviewer PASS; first push; new nodes: 0)
