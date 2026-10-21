@@ -10,26 +10,78 @@
  "stmt_deps": [
   "lem-weil-pbc-comparison-pullback",
   "stage3-proetale-comparison-square-component",
-  "def-cbc-open-immersion-square"
+  "def-weil-pbc-cartesian-square"
  ],
  "proof": [
   {
-   "text": "Flip the chosen Cartesian square using its pullback symmetry isomorphism, and apply comparison_square_component_of_commRing to this flipped square. Normalize comparisonSquareData: its coefficient isomorphisms are the inverses of comparisonUpperStarCompUpperStarIso, its etale square is Etale.squareUpperStarIso of the flipped square, and its pro-etale square is upperStarCompIso of the original commutativity equation. The abstract component_unpack lemma unfolds only the bundled component predicate and gives precisely the displayed component equation. The argument does not need an open-immersion hypothesis.",
+   "text": "Write $N_T=\\nu_T^*$, $P_f=f_{\\mathrm{proet}}^*$, $E_f=f_{\\mathrm{et}}^*$, and $w:g_U\\mathbin{\\gg}j=j'\\mathbin{\\gg}g$. Flip the chosen square, obtaining $s'$ with edges $(j',g_U,g,j)$ and commutativity $w^{-1}$. Its chosen pullback identification is the given $U'\\simeq U\\times_X X'$ followed by the map $U\\times_X X'\\to X'\\times_X U$ exchanging the projections. This map is an isomorphism: the reverse exchange is its inverse, since each composite has the two identity projections and the fibre-product universal property makes it the identity. The projection equations for $s'$ are the original two equations in the opposite order. Thus the flipped data really are a chosen Cartesian square, with no condition on $j$ or $j'$.",
+   "uses": [
+    "def-weil-pbc-cartesian-square",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-direct-image-comparison/lem-weil-pbc-comparison-pullback.md",
+    "place": "Final sentence: compatibility with the chosen Cartesian identification; explicit component specialization."
+   }
+  },
+  {
+   "text": "Apply [stage3-proetale-comparison-square-component] with the same commutative ring $\\Lambda$, the flipped square $s'$, and $F$ on its lower-right corner $X$. Let $d=\\operatorname{comparisonSquareData}(\\operatorname{ModuleCat}\\Lambda,s')$. The cited conclusion is precisely $\\operatorname{ComparisonSquareComponent}(d,F)$. This is applicable to every commutative ring, hence in particular to the finite commutative ring here. The remaining steps identify its specified fields; they do not replace the canonical comparison by an arbitrary natural isomorphism.",
+   "uses": [
+    "stage3-proetale-comparison-square-component"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-direct-image-comparison/lem-weil-pbc-comparison-pullback.md",
+    "place": "Final sentence: compatibility with the chosen Cartesian identification; explicit component specialization."
+   }
+  },
+  {
+   "text": "The canonical coefficient comparison in [lem-weil-pbc-comparison-pullback] is $c_f:N_{\\operatorname{dom}f}E_f\\simeq P_fN_{\\operatorname{cod}f}$. In the named construction, $c_f=\\operatorname{comparisonCoefficientPullbackIso}(\\Lambda,f)=\\rho_f^{-1}$: unfolding the two definitions gives the same inverse under the conjugate-isomorphism equivalence of the same restriction direct-image isomorphism. For the flipped square, direct substitution in the definition of $d$ gives $(L_1,L_2,L'_1,L'_2)=(E_j,E_{g_U},E_g,E_{j'})$, $(R_1,R_2,R'_1,R'_2)=(P_j,P_{g_U},P_g,P_{j'})$, and $(K_0,K_1,K'_1,K_2)=(N_X,N_U,N_{X'},N_{U'})$. Its four coefficient fields $(c_2,c_1,c'_2,c'_1)$ are respectively $(\\rho_{g_U}^{-1},\\rho_j^{-1},\\rho_{j'}^{-1},\\rho_g^{-1})$. This is an unfolding of the chosen maps, not an appeal to uniqueness without normalization.",
    "uses": [
     "lem-weil-pbc-comparison-pullback",
     "stage3-proetale-comparison-square-component"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-direct-image-comparison/lem-weil-pbc-comparison-pullback.md",
+    "place": "Final sentence: compatibility with the chosen Cartesian identification; explicit component specialization."
+   }
+  },
+  {
+   "text": "For either site, write $C(f,h):(f\\mathbin{\\gg}h)^*\\simeq h^*\\mathbin{\\gg}f^*$ (with functor composition written in application order) for its canonical composition comparison. By definition its square field for $s'$ is $C(g_U,j)^{-1}$, then equality transport along $w$, then $C(j',g)$. For the etale site this is exactly $\\operatorname{Etale.squareUpperStarIso}(\\Lambda,s'.\\operatorname{toCommSq})$. To check the convention for a comparison $h=f\\mathbin{\\gg}g$, substitute this equality: the general etale composition comparison is equality transport from $h^*$ followed by $C(f,g)$; when the equality is reflexive, the transport is the identity. Associativity and $(ab)^{-1}=b^{-1}a^{-1}$ then give the displayed square expression. For the pro-etale site the same expression is, by its definition, $\\operatorname{upperStarCompIso}(\\Lambda,w)$. Here $(s'.w)^{-1}=w$ by equality-proof irrelevance, so the specified commutativity proof is retained. Thus $d.se$ is the etale square of $\\operatorname{sq.toCommSq.flip}$ and $d.sp$ is the pro-etale square attached to the original $w$.",
+   "uses": [
+    "lem-weil-pbc-comparison-pullback",
+    "def-weil-pbc-cartesian-square"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-direct-image-comparison/lem-weil-pbc-comparison-pullback.md",
+    "place": "Final sentence: compatibility with the chosen Cartesian identification; explicit component specialization."
+   }
+  },
+  {
+   "text": "Unfold only the component predicate obtained in step 2. It reads $d.c_2(F\\text{ after }L_1)\\gg R_2(d.c_1(F))\\gg d.sp(K_0F)=K_2(d.se(F))\\gg d.c'_2(L'_1F)\\gg R'_2(d.c'_1(F))$, where each isomorphism denotes its hom component. Substitute the fields listed in steps 3 and 4, and use $(\\rho_f^{-1}).\\mathrm{hom}=\\rho_f.\\mathrm{inv}$. The left side is $\\rho_{g_U}^{-1}(E_jF)\\gg P_{g_U}(\\rho_j^{-1}(F))\\gg\\operatorname{upperStarCompIso}(\\Lambda,w)(N_XF)$. The right side is $N_{U'}(\\operatorname{Etale.squareUpperStarIso}(\\Lambda,\\operatorname{sq.toCommSq.flip})(F))\\gg\\rho_{j'}^{-1}(E_gF)\\gg P_{j'}(\\rho_g^{-1}(F))$. These are exactly the specified two composites in the statement. Both composites have source $N_{U'}E_{g_U}E_jF$ and target $P_{j'}P_gN_XF$.",
+   "uses": [
+    "stage3-proetale-comparison-square-component"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-direct-image-comparison/lem-weil-pbc-comparison-pullback.md",
+    "place": "Final sentence: compatibility with the chosen Cartesian identification; explicit component specialization."
+   }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-comparison-pullback",
-  "stage3-proetale-comparison-square-component"
+  "def-weil-pbc-cartesian-square",
+  "def-pc-fibre-product",
+  "stage3-proetale-comparison-square-component",
+  "lem-weil-pbc-comparison-pullback"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/proetale.tex",
-  "place": "Tags 099R and 0B65; component of the flipped canonical comparison square, with explicit data normalization."
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-direct-image-comparison/lem-weil-pbc-comparison-pullback.md",
+  "place": "Final sentence: compatibility with the chosen Cartesian identification; explicit component specialization."
  },
  "mathlib_searches": [
   {
@@ -52,10 +104,59 @@
    "results": "Only the closed monoidal functor exponential comparison square, not a site comparison.",
    "date": "2026-10-20",
    "verdict": "No direct match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical etale to proetale inverse image comparison commutes with the inverse image comparison of a Cartesian square of schemes",
+   "results": "AlgebraicGeometry.Scheme.IsLocallyDirected.fst_inv_eq_snd_inv; AlgebraicGeometry.Scheme.instHasPullbacksEtale; AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_pullbackHom_assoc; AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_map; AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity; AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_map_assoc; AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern scheme-module pseudofunctors, over-sites, gluing or presheaf composition; none identifies the named etale/pro-etale comparison square"
+  },
+  {
+   "tool": "grep",
+   "query": "comparisonUpperStarCompUpperStarIso|etaleComparisonSquare|proEtaleComparisonSquare",
+   "results": "0 hits",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern scheme-module pseudofunctors, over-sites, gluing or presheaf composition; none identifies the named etale/pro-etale comparison square"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"comparisonUpperStarCompUpperStarIso\"",
+   "results": "0 hits",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern scheme-module pseudofunctors, over-sites, gluing or presheaf composition; none identifies the named etale/pro-etale comparison square"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The inverse image comparison between the etale and proetale sites is coherent for Cartesian squares",
+   "results": "CategoryTheory.Equivalence.sheafCongr.inverse_map_val_app; CategoryTheory.Equivalence.instIsDenseSubsiteCoherentTopologyInverse; AlgebraicGeometry.PresheafedSpace.GlueData.opensImagePreimageMap_app'; AlgebraicGeometry.PresheafedSpace.GlueData.snd_invApp_t_app_assoc; AlgebraicGeometry.PresheafedSpace.GlueData.snd_invApp_t_app'; AlgebraicGeometry.PresheafedSpace.GlueData.snd_invApp_t_app; CategoryTheory.Equivalence.sheafCongr.inverse.congr_simp; CategoryTheory.Equivalence.isDenseSubsite_inverse_of_isCocontinuous",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern scheme-module pseudofunctors, over-sites, gluing or presheaf composition; none identifies the named etale/pro-etale comparison square"
+  },
+  {
+   "tool": "grep",
+   "query": "pro[Ee]tale|proetale",
+   "results": "0 hits; directory CategoryTheory",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern scheme-module pseudofunctors, over-sites, gluing or presheaf composition; none identifies the named etale/pro-etale comparison square"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheaf\", \"comp\"",
+   "results": "CategoryTheory.OverPresheafAux.YonedaCollection.map₂_comp; CategoryTheory.OverPresheafAux.toOverYonedaCompRestrictedYoneda; CategoryTheory.CostructuredArrow.toOverCompOverEquivPresheafCostructuredArrow; CategoryTheory.OverPresheafAux.YonedaCollection.map₁_comp; CategoryTheory.OverPresheafAux.map_mkPrecomp_eqToHom; CategoryTheory.CostructuredArrow.overEquivPresheafCostructuredArrow_functor_map_toOverCompYoneda; CategoryTheory.CostructuredArrow.overEquivPresheafCostructuredArrow_inverse_map_toOverCompYoneda; CategoryTheory.CostructuredArrow.overEquivPresheafCostructuredArrow_functor_map_toOverCompCoyoneda",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern scheme-module pseudofunctors, over-sites, gluing or presheaf composition; none identifies the named etale/pro-etale comparison square"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural isomorphism between two pseudofunctors of sheaf inverse images respects the exchange isomorphism attached to a commutative square",
+   "results": "CategoryTheory.GrothendieckTopology.pseudofunctorOver_mapComp_inv_toNatTrans_app_val_app; AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τl; AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τr; CategoryTheory.Functor.sheafPushforwardContinuousComp'_inv_app_val_app; CategoryTheory.GrothendieckTopology.pseudofunctorOver_mapId_inv_toNatTrans_app_val_app; CategoryTheory.GrothendieckTopology.pseudofunctorOver_mapComp_hom_toNatTrans_app_val_app; CategoryTheory.Functor.IsCoverDense.Types.appIso_inv; CategoryTheory.GrothendieckTopology.pseudofunctorOver_toPrelaxFunctor_toPrelaxFunctorStruct_toPrefunctor_map_toFunctor_map_val_app",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern scheme-module pseudofunctors, over-sites, gluing or presheaf composition; none identifies the named etale/pro-etale comparison square"
   }
  ],
  "mathlib_match": null,
- "status": "proved",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "Sheaf.AlgebraicGeometry.FixSiteOpenExchange",
@@ -65,9 +166,11 @@
  "blueprint": {
   "is": null,
   "from": {
-   "node": "lem-fix-site-open-exchange",
-   "place": "Ordinary sheaf comparison square coherence used in the open-exchange proof.",
-   "via": []
+   "node": "lem-fix-compact-support-coefficient-change",
+   "place": "Final compatibility clause, \"compatible with successive reductions, pullback, and the counits defining the projection transformation\": ordinary inverse-image square coherence used by lem-fix-site-open-exchange.",
+   "via": [
+    "lem-fix-site-open-exchange"
+   ]
   },
   "same_as": []
  },
@@ -87,14 +190,12 @@
   ]
  },
  "reviewed": {
-  "date": "2026-10-20",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "H3",
+  "reviewer": "NT-cc-Q27-4d1a65bd9",
+  "group": "Q27",
   "result": "pass",
-  "landing": "20261020T051348-L-1652640",
-  "kind": "interface",
-  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-4d1a65bd9 (reviewer sub-agent of L); spot-checked: The item is already Lean-closed but was still dispatched for splitting, so the merge should keep the live completion. On base and on side live it is status proved: AlgebraicGeometry.ProEtale.fixSiteOpenExchangeSquare at lean/Sheaf/AlgebraicGeometry/FixSiteOpenExchangeSquare.lean:147 has no sorry and was landed by H3 on 2026-10-20 with a COMPILER pass. It is still listed in coord/queue.tsv:186, which is a dispatcher issue (B10 type), not a worker fault. It is not in route-pivot-dropped.txt and has no re-split repair note. Delivery: 0 new nodes, the statement is unchanged (checked against the full Lean signature) and the one-step proof becomes 5 steps. Each step matches the landed Lean proof. Step 1: the flipped square is isoPullback composed with pullbackSymmetry, with the projections swapped. Step 2: stage3-proetale-comparison-square-component applies to the flipped square with F on its lower-right corner X; finite rings are a special case of commutative rings. Step 3: the coefficient fields are the inverses (symm) of comparisonUpperStarCompUpperStarIso for gU, j, j', g, matching comparison_coefficient_pullback_eq (rfl) and comparison_square_data_flip_eq. Step 4: the etale field is Etale.squareUpperStarIso of sq.toCommSq.flip and the pro-etale field is upperStarCompIso sq.w by proof irrelevance (comparison_etale_square, comparison_pro_square_reverse). Step 5: component_unpack; I typed each factor, giving source nu_U'^* gU^* j^* F and target j'^* g^* nu_X^* F. The stmt_dep swap from def-cbc-open-immersion-square to def-weil-pbc-cartesian-square is correct: the Lean module imports only ChosenCartesianSquare, never OpenImmersionSquare, and the statement has no open-immersion hypothesis. Edge cases (empty schemes, identity squares, Lambda = 0) are harmless. I read Stacks 099R (proetale.tex) and 0B65 (categories.tex), and the blueprint main-20261015 lem-weil-pbc-comparison-pullback statement and proof. Advisory: the inherited item source names proetale.tex for 0B65, which is in categories.tex. No duplicate found: stage3-proetale-comparison-square-transport is the derived transport, a different statement. I accept the two declared tool_uses (generic comparison-coherence nodes of sk-thm-properbasechange). No SGA is used and no changes were made."
  },
  "reviewed_proof": {
   "date": "2026-10-20",
@@ -106,5 +207,26 @@
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-fix-site-open-exchange-square",
+  "worker": "stage1",
+  "summary": "Expanded the bundled component argument into five steps: construct the flipped chosen square, apply the existing general component theorem, normalize the four coefficient fields and the two square fields, and substitute in the component predicate. Replaced the unnecessary open-immersion definition dependency with the general chosen Cartesian-square definition. No new nodes or Lean changes. The existing Sheaf realization is not an attachment under the brief, which requires a declaration under WeilConjectures.",
+  "blueprint": "Ordinary comparison-square coherence in the open-exchange argument of lem-fix-site-open-exchange, serving the final pullback-compatibility clause of lem-fix-compact-support-coefficient-change; the computation realizes the Cartesian-compatibility clause of lem-weil-pbc-comparison-pullback.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-comparison-pullback",
+    "why": "Generic etale/pro-etale inverse-image comparison with its canonical Cartesian coherence; the item only specializes its canonical maps."
+   },
+   {
+    "node": "stage3-proetale-comparison-square-component",
+    "why": "Generic underived component theorem for every commutative ring and chosen square, used before expanding its fields; it is not an alternate compact-support or purity route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-comparison-pullback",
+  "stage3-proetale-comparison-square-component"
+ ]
 }
