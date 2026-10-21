@@ -22270,3 +22270,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:14 L: merged deliver/P9/Sheaf.CategoryTheory.SheafTensorUnitComparison (stage 3; reviewer PASS; first push; landing 20261021T111428-L-128568 (proof); batch 20261021T110859; modules 1; new nodes 0)
 - 11:14 L: merged deliver/Q2/Sheaf.AlgebraicGeometry.EtaleChartAdjointComparison (stage 3; reviewer PASS; first push; landing 20261021T111431-L-132167 (proof); batch 20261021T110859; modules 1; new nodes 0)
 - 11:14 L: merged deliver/Q2/Sheaf.AlgebraicGeometry.Modules.DeterminantShortExact (stage 3; reviewer PASS; first push; landing 20261021T111434-L-136588 (interface); batch 20261021T110859; modules 2; new nodes 0; change records: coord/changes/Q2-retire-determinant-short-exact.md)
+- 11:14 L: merged deliver/Q2/Sheaf.AlgebraicGeometry.OpenSourceComposition (stage 3; reviewer PASS; first push; landing 20261021T111437-L-139590 (proof); batch 20261021T110859; modules 1; new nodes 0)
