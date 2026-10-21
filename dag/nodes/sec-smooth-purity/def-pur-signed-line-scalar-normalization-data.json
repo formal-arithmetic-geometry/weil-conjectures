@@ -1,0 +1,115 @@
+{
+ "id": "def-pur-signed-line-scalar-normalization-data",
+ "kind": "definition",
+ "title": "Signed line powers and normalized scalar comparisons",
+ "status": "split",
+ "statement": "Let $(\\mathcal C,J)$ be a site small relative to the coefficient universe, $R$ a commutative ring sheaf and $P$ an $R$-module sheaf [def-weil-sheaf-of-modules-category]. Using the powers of [def-sp-scalar-tensor-comparison-data], define $P^{[n]}=P^{\\otimes n}$ for $n\\geq0$ and $P^{[-n]}=\\mathcal Hom_R(P^{\\otimes n},R)$ for $n>0$, using [def-pur-sheaf-hom]. For $\\alpha:R\\to S$, an $S$-module $Q$, an isomorphism $b:S\\otimes_RP\\cong Q$ and a family $B_d:S\\otimes_RP^{[d]}\\cong Q^{[d]}$, SignedLineComparisonNormalized means: $B_0$ is the coefficient-unit map, $B_1=b$, positive powers obey the tensor recursion on every local pure tensor, and $B_{-n}$ is the canonical scalar-extension dual map of [def-sp-canonical-scalar-extension-maps] followed by precomposition with $B_n^{-1}$. This defines a predicate, without asserting existence of B.",
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-sp-scalar-tensor-comparison-data",
+  "def-pur-sheaf-hom",
+  "def-sp-canonical-scalar-extension-maps"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EK, 04TT and 0GMX: tensor powers, internal duals and the normalized scalar comparison; blueprint Powers and duals."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "signedLinePower|SignedLine.*Normalized|siteSheafTensorRightIso",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib declaration; bind the existing published project definitions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Signed powers of a line sheaf with normalized scalar and pullback comparisons",
+   "results": "[leansearch] OK 8 hit(s)\nVectorField.mpullback_smul_apply\nVectorField.mpullback_smul\nVectorField.mpullbackWithin_smul\nVectorField.mpullbackWithin_smul_apply\nMathlib.Tactic.FieldSimp.Sign.pow\nNormedSpace.normalize_smul\nsign_pow\nPresheafOfModules.pullback",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib declaration; bind the existing published project definitions."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, tensorRight",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'tensorRight'\n",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib declaration; bind the existing published project definitions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical comparison of sheafified sectionwise tensor and monoidal sheaf tensor",
+   "results": "[leanfinder] OK 8 hit(s)\nCategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf\nCategoryTheory.Sheaf.monoidalCategory\nCategoryTheory.sheafToPresheaf_μ\nCategoryTheory.sheafToPresheaf_δ\ninstMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite\nCategoryTheory.Sheaf.tensorProd_isSheaf\nPresheafOfModules.sheafificationCompToSheaf\nPresheafOfModules.sheafifyHomEquiv'",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib declaration; bind the existing published project definitions."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l signedLinePower|SignedLineComparisonNormalized|SignedLinePullbackNormalized|SignedLineScalarPullbackSquare|siteSheafTensorRightIso dag/nodes --glob def-*.json; rg -n same patterns lean/WeilConjectures lean/Sheaf; blueprint_refs.py search signed line; blueprint_refs.py search tensor presentation",
+   "results": "No definition node owns these five signed-line definitions or tensor presentation isomorphisms. Declaration owners found in SignedLineScalarTensorTower.lean, SignedLineScalarPullbackSquare.lean and TensorColimitsIndependentCoefficients.lean. No WeilConjectures duplicates. blueprint_refs: 0 blueprint nodes match signed line; 0 blueprint nodes match tensor presentation.",
+   "date": "2026-10-21",
+   "verdict": "Reuse existing published definitions with three existing:true owning definition nodes."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-signed-line-derived-base-change",
+  "date": "2026-10-21",
+  "group": "NL"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-sfb-cartesian-coefficients-twists",
+   "place": "Powers and duals paragraph: the normalized signed comparisons and their canonical derived tensor action.",
+   "via": [
+    "lem-pur-signed-line-derived-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "module": "Sheaf.Paper.SignedLineScalarTensorTower",
+  "declaration": "SheafOfModules.signedLinePower",
+  "declarations": [
+   "SheafOfModules.signedLinePower",
+   "SheafOfModules.SignedLineComparisonNormalized"
+  ],
+  "statement": "def signedLinePower {R : Sheaf J CommRingCat.{max uC vC u}} (L : ringedSiteModules.{max uC vC u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) : ℤ → ringedSiteModules.{max uC vC u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)",
+  "branch": "newtargets-dag",
+  "by": "NL",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Definition ownership only: exactly the existing published definitions listed here, with their actual data; no theorem or existence assertion and no new module. The containing theorem module is reused unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-eadbd99c1",
+  "group": "NL",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-eadbd99c1",
+  "group": "NL",
+  "result": "pass",
+  "note": "Re-delivery repairs the f56b3604 RETURN. H2: theorem stmt_deps replaced by three new existing:true def nodes (signedLinePower/SignedLineComparisonNormalized; SignedLinePullbackNormalized/SignedLineScalarPullbackSquare; siteTensorRightIso/tensorRightPresentation/siteSheafTensorRightIso), declarations and verbatim statements checked against the live modules, no existing def owner; plus def-sf-ringed-kflat-tensor-representative-data, def-pc-flat-sheaf-modules, def-pc-kflat-complex, def-sp-scalar-tensor-comparison-data, all used. H3: DerivedLineConstraints pins the derived right unitor, positive associator and evaluation via c (ResolvingNormalization) and pure-tensor ordinary maps, so they are unique and exist through Q-localization; DerivedFamilyCoherence states eta_0 vs unitors, eta_{m+1} = eta_1 . (eta_m tensor 1) . product, and F(ev) = eta_m . (eta_{-m} tensor 1) . ev for every X and m>=1; endpoints and indices checked, not tautological. Statement/proof/proof_deps unchanged vs live; lean.statement verbatim; one sorry; no hollow defs; docstrings OK. Advisory: owners of ringedSitePullback*, module_pushforward_isRightAdjoint_of_universes, changeOfRingsOfUniverses, siteSheafTensor* not in stmt_deps (as accepted before); shared C/D universes; compile 49.6/46.6 s near limit; parallel Q39 lineage. No compile (no file changed)."
+ }
+}
