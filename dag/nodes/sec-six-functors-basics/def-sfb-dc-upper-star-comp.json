@@ -22,80 +22,52 @@
  ],
  "proof": [
   {
-   "text": "For each $h=f,g,g\\circ f$, [det-prop-sfb-module-pullback-exact-main] gives that the underived module-object pullback $h^*$ is additive and exact. The derived pullback $L_h$ of [sk-def-sfb-module-derived-pushpull] is the total left derived functor of $h^*$ computed on K-flat resolutions, so the existence hypotheses of the left-derived clause of [sk-def-sfb-derived-categories] are in force; by its exact-functor clause $L_h$ is identified with the termwise functor $D(h^*)$. Since $h^*$ is exact, $\\operatorname{CoCh}(h^*)$ preserves quasi-isomorphisms, so the localized termwise functor inverts them.",
+   "text": "Write $L_h$ for ambient derived pullback and $P_h$ for its bounded constructible restriction. By [prop-sfb-module-left-derived-upper-star-comp] there is the ambient comparison $c:L_{g\\circ f}\\xrightarrow{\\sim}L_fL_g$, induced by the underived composition isomorphism. This uses the existing ambient theorem directly.",
    "uses": [
-    "det-prop-sfb-module-pullback-exact-main",
-    "sk-def-sfb-derived-categories",
-    "sk-def-sfb-module-derived-pushpull"
+    "prop-sfb-module-left-derived-upper-star-comp"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-pullback-exact/det-prop-sfb-module-pullback-exact-main.proof.md",
-    "place": "Conclusion: exactness of module-object pullback; literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-pullback-exact/det-prop-sfb-module-pullback-exact-main.md"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/def-sfb-dc-upper-star-comp.proof.md",
+    "place": "Ambient composition isomorphism cited in the first paragraph"
    }
   },
   {
-   "text": "Let $a:(g\\circ f)^*\\xrightarrow{\\sim}f^*g^*$ be [def-sfb-module-upper-star-comp]. The node [prop-sfb-module-left-derived-upper-star-comp] gives the ambient comparison $c:L_{g\\circ f}\\xrightarrow{\\sim}L_fL_g$ induced by $a$. Explicitly, if $Q_S$ denotes the derived localization and $\\psi_h:L_hQ_S\\xrightarrow{\\sim}Q_T\\operatorname{CoCh}(h^*)$ is the exact-functor comparison, then [lem-weil-pbc-localization-universal-property] descends the degreewise chain isomorphism $a_{K^n}$ to the unique transformation with $c_{Q_ZK}=L_f(\\psi_{g,K})^{-1}\\circ \\psi_{f,\\operatorname{CoCh}(g^*)K}^{-1}\\circ Q_X(a_{K^\\bullet})\\circ\\psi_{g\\circ f,K}$. Its inverse is the descent of $a^{-1}$, since descent preserves identities and compositions.",
-   "uses": [
-    "def-sfb-module-upper-star-comp",
-    "prop-sfb-module-left-derived-upper-star-comp",
-    "lem-weil-pbc-localization-universal-property"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sfb-module-derived-factorization/prop-sfb-module-left-derived-upper-star-comp.proof.md",
-    "place": "Levelwise comparison and transport to derived categories; literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sfb-module-derived-factorization/sk-prop-sfb-module-derived-factorization.proof.md",
-    "note": "The displayed component formula follows the localization node and the exact-functor comparisons."
-   }
-  },
-  {
-   "text": "Write $L_h^c$ for the restricted functors and $\\iota_T:D_{\\mathrm{cons}}(T,\\Lambda)\\hookrightarrow D(\\Mod_{\\Lambda_T})$ for the inclusions. By [def-sfb-dc-upper-star], for $h:T\\to S$ the restriction comes with its inclusion comparison $e_h:\\iota_TL_h^c\\xrightarrow{\\sim}L_h\\iota_S$ (an equality in the strict restriction model). Paste these comparisons with $c$ from step 2 to obtain\n$$A:\\iota_XL_{g\\circ f}^c\\xrightarrow{e_{g\\circ f}}L_{g\\circ f}\\iota_Z\\xrightarrow{c\\iota_Z}L_fL_g\\iota_Z\\xrightarrow{L_fe_g^{-1}}L_f\\iota_YL_g^c\\xrightarrow{e_f^{-1}L_g^c}\\iota_XL_f^cL_g^c.$$\nEach arrow is a natural isomorphism, so their componentwise composite is one. All objects lie in the indicated domains because the restricted pullbacks of the cited definition are defined for every morphism of the setting and every commutative condensed $\\Lambda$.",
+   "text": "Let $\\iota_T$ denote the inclusions. By [def-sfb-dc-upper-star] the restricted pullbacks have comparisons $e_h:\\iota_TP_h\\xrightarrow{\\sim}L_h\\iota_S$ for $h:T\\to S$. Whisker $c$ with $\\iota_Z$ and compose these comparisons to form\n$$A=(e_f^{-1}P_g)\\circ(L_fe_g^{-1})\\circ(c\\iota_Z)\\circ e_{g\\circ f}:\\iota_XP_{g\\circ f}\\xrightarrow{\\sim}\\iota_XP_fP_g.$$\nThe four displayed factors are natural isomorphisms with matching endpoints; their composite is therefore a natural isomorphism.",
    "uses": [
     "def-sfb-dc-upper-star"
    ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/def-sfb-dc-upper-star-comp.proof.md",
-    "place": "Proof"
+    "place": "Proof, first two sentences: restrict the ambient comparison"
    }
   },
   {
-   "text": "By [sk-def-sfb-bounded-constructible], morphisms between bounded constructible objects are exactly their ambient derived morphisms, with the same identities and composition. For each $K\\in D_{\\mathrm{cons}}(Z,\\Lambda)$ define $c^c_K:L_{g\\circ f}^cK\\to L_f^cL_g^cK$ to be the morphism $A_K$, now read in this full subcategory; define its inverse to be $A_K^{-1}$ in the same way. The two inverse equations hold because their images are the ambient inverse equations and the Hom sets are unchanged. For every $u:K\\to K\\prime$, the naturality equation for these components is exactly the naturality equation for $A$ on $u$ in $D_{\\mathrm{cons}}(Z,\\Lambda)$, again in the same Hom set. Hence $c^c$ is a natural isomorphism and its image under $\\iota_X$ is $A$.",
+   "text": "The inclusion $\\iota_X$ is fully faithful since [sk-def-sfb-bounded-constructible] gives exactly the ambient Hom sets, identities and composition. Apply [lem-sfb-fully-faithful-postcomposition] with source category $D_{\\mathrm{cons}}(Z,\\Lambda)$ and functor $\\iota_X$; thus $J(F)=\\iota_XF$ is fully faithful on these functor categories. Apply [lem-cbc-fully-faithful-isomorphism-lift] to $J$, the objects $P_{g\\circ f},P_fP_g$, and the isomorphism $A$. It gives a unique natural isomorphism $c^c:P_{g\\circ f}\\xrightarrow{\\sim}P_fP_g$ with $J(c^c)=A$. Define the requested composition isomorphism to be $c^c$. The formula for $A$ identifies its image, under the inclusion comparisons, with $c$; the same unique-lift property proves the required uniqueness.",
    "uses": [
-    "sk-def-sfb-bounded-constructible"
+    "sk-def-sfb-bounded-constructible",
+    "lem-sfb-fully-faithful-postcomposition",
+    "lem-cbc-fully-faithful-isomorphism-lift"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/def-sfb-dc-upper-star-comp.proof.md",
-    "place": "Proof"
-   }
-  },
-  {
-   "text": "If $b$ is another natural isomorphism with the specified ambient image, then for every $K$ its component $b_K$ and $c^c_K$ have the same image $A_K$. The inclusion is the identity on the Hom sets by [sk-def-sfb-bounded-constructible], so $b_K=c^c_K$ for every $K$; componentwise equality gives $b=c^c$. Define the composition isomorphism to be $c^c$. Under the inclusion comparisons $e_h$ of step 3 its ambient image is $c$ of step 2, exactly as required.",
-   "uses": [
-    "sk-def-sfb-bounded-constructible"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/def-sfb-dc-upper-star-comp.proof.md",
-    "place": "Proof"
+    "place": "Proof, last sentence: unique preimage under the fully faithful inclusion"
    }
   }
  ],
  "proof_deps": [
   "def-sfb-dc-upper-star",
-  "def-sfb-module-upper-star-comp",
-  "det-prop-sfb-module-pullback-exact-main",
-  "lem-weil-pbc-localization-universal-property",
+  "lem-cbc-fully-faithful-isomorphism-lift",
+  "lem-sfb-fully-faithful-postcomposition",
   "prop-sfb-module-left-derived-upper-star-comp",
-  "sk-def-sfb-bounded-constructible",
-  "sk-def-sfb-derived-categories",
-  "sk-def-sfb-module-derived-pushpull"
+  "sk-def-sfb-bounded-constructible"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/def-sfb-dc-upper-star-comp.proof.md",
-  "place": "Entire proof: ordinary module composition, explicitly cited exactness and localization with its normalized component formula; componentwise full-subcategory lift and uniqueness."
+  "place": "Short assembly of the existing ambient composition theorem, the inclusion comparisons, postcomposition full faithfulness and unique isomorphism lifting."
  },
  "mathlib_searches": [
   {
@@ -270,30 +242,31 @@
  "chapter": "sec-six-functors-basics",
  "unit": "sk-def-sfb-dc-restricted-functors",
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "item": "def-sfb-dc-upper-star-comp",
   "worker": "stage1",
-  "summary": "Repaired the returned split without changing the definition. The previous 3359-character ambient step hid exactness and derived-composition lemmas, so I added two statement-only nodes matching the current blueprint: exactness of module-object pullback and the ambient derived pullback composition comparison. The item now has five short steps: exactness and termwise derivation, explicit localized ambient comparison, restriction pasting, full-subcategory existence, and uniqueness. All citations and dependencies were refreshed; no Lean declaration exists in the designated attachment checkout.",
-  "blueprint": "Realizes the entire proof of def-sfb-dc-upper-star-comp. The new exactness node realizes the ambient-factorization exactness clause, and the new derived-composition node realizes its levelwise/localization clause; the remaining steps realize the restricted-functors proof.",
+  "summary": "Q15 repair of the human re-split return. Statement unchanged. Reused prop-sfb-module-left-derived-upper-star-comp rather than repeating its exactness/localization proof; isolated full faithfulness on functor categories as the Mathlib leaf lem-sfb-fully-faithful-postcomposition; reused the existing Mathlib leaf lem-cbc-fully-faithful-isomorphism-lift for existence, ambient compatibility and uniqueness. Only the explicit composition of inclusion comparisons remains elementary. The new leaf has no proof obligation and the item proof is 1554 characters.",
+  "blueprint": "The first sentence of the blueprint proof is step 2 (restriction comparisons); its ambient-composition clause is step 1; the final unique-preimage sentence is step 3, factored through the new postcomposition leaf and existing isomorphism-lifting leaf.",
   "tool_uses": [
    {
-    "node": "lem-weil-pbc-localization-universal-property",
-    "why": "Generic descent of transformations through derived localization, retaining the original ambient comparison normalization."
+    "node": "prop-sfb-module-left-derived-upper-star-comp",
+    "why": "The ambient derived composition comparison is the exact black box cited by the blueprint proof; restricted-functor unit does not reconstruct it."
    }
   ]
  },
  "tool_uses": [
   "lem-weil-pbc-localization-universal-property",
   "det-prop-sfb-module-pullback-exact-lifted",
-  "def-weil-sheaf-of-modules-category"
+  "def-weil-sheaf-of-modules-category",
+  "prop-sfb-module-left-derived-upper-star-comp"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-Q108-412d98057",
-  "group": "Q108",
+  "reviewer": "NT-cc-Q15-a18278468",
+  "group": "Q15",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q108-412d98057 (reviewer sub-agent of L); spot-checked: Verdict FIX: I read the whole delivery and the mathematics is sound. I made three small citation fixes and dropped no node. (1) Item: the item statement is unchanged and matches the blueprint def-sfb-dc-upper-star-comp. Step 2 checks out against the localization lemma (2): it uses F1 = Q_X CoCh((gf)^*) with φ1 = ψ_gf, F2 = Q_X CoCh(f^*)CoCh(g^*) with φ2 = ψ_f ∘ L_f ψ_g, and τ = Q(a). The displayed formula and the order of its factors are correct, and it matches the blueprint proof 1708 (L≅D transport) by naturality of ψ_f. In step 3 the pasting directions are correct. Steps 4–5 (lift through the full subcategory and uniqueness from equal Hom sets) are elementary from sk-def-sfb-bounded-constructible. (2) Both new statements match their blueprint nodes. det-prop-sfb-module-pullback-exact-main is true: f^*_Ab is exact, the forgetful functor creates finite limits and colimits, and α_f is an isomorphism; I tested f = id and Λ = 0. prop-sfb-module-left-derived-upper-star-comp is the referent of the item's 'ambient composition isomorphism'. Neither new node restates a clause of the item, and neither is circular. (3) No duplicates: I searched the whole DAG. The closest nodes are det-prop-sfb-module-pullback-exact-lifted (a generic ingredient), lem-sfb-finite-upper-star-exact (abelian sheaves only), and def-weil-pbc-ambient-ringed-exchange (a different coefficient category: sheaves of rings R_T, which I did not identify with module objects over Λ_X). (4) Fixes in fixes/dag/nodes/sec-six-functors-basics/: item step 1 now cites sk-def-sfb-module-derived-pushpull, where L_h is defined, and its wording about inverting quasi-isomorphisms is corrected; the ambient comparison node gets back the dropped citation [sk-def-sfb-module-derived-pushpull] for Lf^*; det-main now cites def-weil-pbc-additive-functor and def-galois-exact-functor (B3). (5) I accept the declared tool use of lem-weil-pbc-localization-universal-property (status mathlib, a generic descent). The maintainer should prune the stale node tool_uses det-prop-sfb-module-pullback-exact-lifted and def-weil-sheaf-of-modules-category at the merge. No SGA is cited. Details are in review.md.; 3 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q15-a18278468 (reviewer sub-agent of L); spot-checked: I read the item, the new node, every cited statement, the blueprint def-sfb-dc-upper-star-comp(.proof).md and the unit sk-def-sfb-dc-restricted-functors, and the PASS verdict follows from these checks. This re-split repairs the earlier Q108 split, which went over the proof ceiling at 3074 characters. Compared with the Q108 snapshot, the statement and stmt_deps are byte-identical. The proof now has 3 steps, 1554 characters in total. Step 1 cites the existing prop-sfb-module-left-derived-upper-star-comp, which is in the same unit. Its statement covers any commutative condensed ring and any scheme morphisms, and it is the ambient isomorphism the statement refers to. Step 2 composes A from e_{gf}, cι_Z, L_f e_g^{-1} and e_f^{-1}P_g, using the inclusion comparisons of def-sfb-dc-upper-star. I checked each endpoint, and the step is correctly marked elementary. Step 3 gets ι_X fully faithful from sk-def-sfb-bounded-constructible, where the Hom sets are the ambient ones. The new leaf then makes J=ι_X∘− fully faithful on functor categories, and lem-cbc-fully-faithful-isomorphism-lift (Mathlib isoEquiv, FullyFaithful.lean:217) gives the unique isomorphism u: P_{gf}≅P_fP_g with J(u)=A, which is both existence and uniqueness. This matches the blueprint's 'unique preimage' and the live Lean preimageIso construction. The new node lem-sfb-fully-faithful-postcomposition is an exact Mathlib leaf: FullyFaithful.whiskeringRight at Whiskering.lean:116 (with line 95 for the functor and the instances at 107 and 170), and I re-read those lines. Its statement is self-contained, and the TeX and blueprint fields are correct. My grep of the DAG and the blueprint search for 'fully faithful' found no duplicate. I tested the new node on an empty source, H=id, and a full inclusion that is not essentially surjective. The citations are acyclic, no SGA source is cited, and proof_deps equals the union of the steps' uses. I accept the declared tool use, though it is unnecessary because the node is in the same unit. Maintainer note: the node-level tool_uses (lem-weil-pbc-localization-universal-property, det-prop-sfb-module-pullback-exact-lifted, def-weil-sheaf-of-modules-category) is stale and can be pruned at the merge."
  },
  "lean_audit": {
   "master": {
