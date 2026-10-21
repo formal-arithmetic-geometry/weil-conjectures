@@ -28,48 +28,23 @@
  ],
  "proof": [
   {
-   "text": "For each coefficient field $F$ under consideration, apply [lem-weil-pbc-continuous-coefficients-immersion-restriction] to $X=s$. Its noetherian hypothesis holds: the spectrum of a field has only one point and its coordinate ring is noetherian. Its continuous-function sheaf description identifies $R_F$ canonically with $V\\mapsto C(|V|,\\mathcal O_F)$, compatibly with the finite quotient projections. In particular $\\Gamma(s,R_F)=C(\\{*\\},\\mathcal O_F)=\\mathcal O_F$, by evaluation at the unique point. These identifications respect coefficient inclusions, since their maps to each quotient send a constant value to its residue and the inverse-limit projections determine a map uniquely. Apply [lem-weil-finite-free-completed-scalar-comparison] to $Y=s$: $R_L$ is a finite free $R_E$-module sheaf, of rank $d=[L:E]$. Choose a sheaf-module basis $b_1,\\ldots,b_d$, meaning an isomorphism $R_E^{\\oplus d}\\to R_L$. Taking sections identifies it with an isomorphism $\\mathcal O_E^{\\oplus d}\\to\\mathcal O_L$: finite direct sums of sheaves of modules are finite products, and products of sheaves are sectionwise. Thus these same global sections $b_i$ are an $\\mathcal O_E$-basis of $\\mathcal O_L$. This derives precisely the compatible basis needed below; it does not identify the completed coefficient sheaf with the discrete constant sheaf.",
+   "text": "By [lem-weil-point-finite-free-sections-tensor] the coefficient sections and finite bases give the canonical balanced chain isomorphism. By [lem-weil-point-derived-sections-tensor-descent] its localization is the natural isomorphism $\\theta_{L/E,K}$ computed by K-flat derived tensor. The input is derived complete by [def-weil-derived-complete-integral-detailed], so [lem-weil-finite-free-completed-scalar-comparison] makes $\\psi_{L/E,K}=\\Gamma(s,\\chi_{L/E,K})\\theta_{L/E,K}$ a natural isomorphism. Set $\\varphi=\\psi^{-1}$, exactly as specified.",
    "uses": [
-    "lem-weil-pbc-continuous-coefficients-immersion-restriction",
-    "lem-weil-finite-free-completed-scalar-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemmas 4.2.12 and 6.8.2(1); finite-free comparison from the existing DAG node; evaluation on the one-point space"
-   }
-  },
-  {
-   "text": "For any sheaf $F$ of $R_E$-modules define the balanced map $\\theta_F:\\Gamma(s,F)\\otimes_{\\mathcal O_E}\\mathcal O_L\\to\\Gamma(s,F\\otimes_{R_E}R_L)$ by $n\\otimes a\\mapsto n\\otimes a$, where the tensor on the right is the image of the sectionwise tensor in the sheaf tensor product [def-pur-sheaf-tensor-product]. Under the basis of step 1, $F\\otimes_{R_E}R_L\\cong F^{\\oplus d}$: the inverse coordinate maps send $f\\otimes\\sum_i r_i b_i$ to $(r_i f)_i$. Taking sections gives $\\Gamma(s,F)^{\\oplus d}$, while the source of $\\theta_F$ has the same description, and $\\theta_F$ is the identity on each coordinate. Its inverse sends $(n_i)_i$ to $\\sum_i n_i\\otimes b_i$. In particular it is an isomorphism. For $a,c\\in\\mathcal O_L$, the equality $\\theta_F(n\\otimes ac)=c\\theta_F(n\\otimes a)$ shows $\\mathcal O_L$-linearity. Every sheaf map commutes with this formula, so it is natural. Apply degreewise to any complex; differentials commute with $\\theta$ by the same formula. The basis proves both tensor functors exact, since they are finite direct sums, so they preserve quasi-isomorphisms. Exactness of $\\Gamma(s,-)$ from [lem-weil-point-proetale-sections-exact] supplies quasi-isomorphism preservation on sections. These are inverse chain maps, not an assertion that arbitrary sheaf tensor products are computed sectionwise.",
-   "uses": [
-    "def-pur-sheaf-tensor-product",
-    "lem-weil-point-proetale-sections-exact"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.8.2(1); explicit finite-basis sections-tensor calculation written by the worker"
-   }
-  },
-  {
-   "text": "Choose a K-flat resolution $P\\to K$ with flat terms by [lem-pc-kflat-resolution]. Then $P\\otimes_{R_E}R_L$ computes $K\\otimes^L_{R_E}R_L$ by [lem-pur-derived-change-of-rings]. The degreewise map of step 2, applied to $P$, therefore gives $\\theta_{L/E,K}$ on derived categories: $\\Gamma(s,P)\\to\\Gamma(s,K)$ is a quasi-isomorphism by [lem-weil-point-proetale-sections-exact], and its tensor with $\\mathcal O_L$ is a quasi-isomorphism by step 1's basis. The integral input $K$ is derived complete by [def-weil-derived-complete-integral-detailed]. Hence [lem-weil-finite-free-completed-scalar-comparison] gives the specified natural isomorphism $\\chi_{L/E,K}$, and $\\Gamma(s,\\chi_{L/E,K})$ is an isomorphism. Define $\\varphi$ as the inverse of their composite, as in the statement. Naturality for chain maps follows from step 2 and naturality of $\\chi$. For an arbitrary derived morphism use a roof $K\\xleftarrow{q}H\\xrightarrow{f}J$ with $q$ a quasi-isomorphism. The termwise functors $A(C)=\\Gamma(s,C)\\otimes_{\\mathcal O_E}\\mathcal O_L$ and $B(C)=\\Gamma(s,C\\otimes_{R_E}R_L)$ both preserve every quasi-isomorphism by step 2, not only those between K-flat complexes. For a chain map $g:C\\to C'$ the formula on tensors gives $B(g)\\theta_C=\\theta_{C'}A(g)$. Applying this to $q,f$ and inverting $A(q),B(q)$ gives $B(f)B(q)^{-1}\\theta_K=\\theta_J A(f)A(q)^{-1}$, the required roof naturality. For a K-flat resolution $P\\to C$, step 2 also makes $P\\otimes_{R_E}R_L\\to C\\otimes_{R_E}R_L$ a quasi-isomorphism, so [lem-pur-derived-change-of-rings] identifies this termwise functor canonically with derived change of rings. Thus the roof calculation proves naturality and independence of representatives for the specified $\\theta_{L/E,K}$; composing with the natural $\\chi$ proves the assertion for $\\varphi$.",
-   "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-pur-derived-change-of-rings",
-    "lem-weil-point-proetale-sections-exact",
+    "lem-weil-point-finite-free-sections-tensor",
+    "lem-weil-point-derived-sections-tensor-descent",
     "def-weil-derived-complete-integral-detailed",
     "lem-weil-finite-free-completed-scalar-comparison"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Definition 3.4.10 and Lemma 3.4.12; explicit comparison using K-flat derived change of rings (Stacks Tag 06YY, sites-cohomology-lemma-derived-base-change)"
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
+    "place": "Final paragraph, stagewise passage; assembly of the extracted ordinary sections, derived descent, tower and rationalization lemmas"
    }
   },
   {
-   "text": "For $E\\subset L\\subset M$ put $R=R_E$, $S=R_L$, $U=R_M$. The complex $P\\otimes_R S$ is K-flat over $S$ with flat terms by [lem-pur-kflat-change-of-rings], so all ordinary derived tensors below are computed by the same complexes. The inverse balanced chain maps $((p\\otimes a)\\otimes b)\\mapsto p\\otimes ab$ and $p\\otimes b\\mapsto(p\\otimes1)\\otimes b$ give $(P\\otimes_R S)\\otimes_S U\\cong P\\otimes_R U$; the balancing equation $(p\\otimes a)\\otimes b=(p\\otimes1)\\otimes ab$ verifies the inverse. For a chain map $g:P\\to Q$, either order of applying $g$ and the associator sends $((p\\otimes a)\\otimes b)$ to $g(p)\\otimes ab$. For a roof $P\\xleftarrow{q}H\\xrightarrow{f}Q$, the resulting commutative squares for $q$ and $f$, with the arrows induced by $q$ inverted, give the naturality square for $f q^{-1}$, as in step 3. All tensor functors here preserve quasi-isomorphisms by the finite-free bases from step 1, so those inverses exist. Since $T_{L/E}K$ is constructible and derived complete by [lem-weil-integral-scalar-extension-constructible] and [def-weil-derived-complete-integral-detailed], the comparison [lem-weil-finite-free-completed-scalar-comparison] also applies to the input $T_{L/E}K$ for $L\\subset M$. Define the integral associator to be the following composite: $T_{M/L}T_{L/E}K\\xrightarrow{\\chi_{M/L,T_{L/E}K}^{-1}}T_{L/E}K\\otimes^L_S U\\xrightarrow{\\chi_{L/E,K}^{-1}\\otimes1}(K\\otimes^L_R S)\\otimes^L_S U\\xrightarrow{\\mathrm{assoc}}K\\otimes^L_R U\\xrightarrow{\\chi_{M/E,K}}T_{M/E}K$. Every arrow is an isomorphism and natural; the formula fixes the actual integral associator rather than taking it from a rational-only associativity theorem. The ordinary unit is $p\\otimes r\\mapsto rp$. For an identity extension the comparison $\\chi$ is the completeness unit by the finite-free comparison node, so the identity identification is $T_{E/E}K\\xrightarrow{\\chi_{E/E,K}^{-1}}K\\otimes^L_R R\\xrightarrow{\\mathrm{mult}}K$.",
+   "text": "For $E\\subset L\\subset M$, [lem-weil-point-derived-tensor-tower-coherence] supplies the ordinary derived associator $\\alpha$ and its sections equation. By [lem-weil-integral-scalar-extension-constructible] the first integral extension is again constructible; by [def-weil-derived-complete-integral-detailed] it is complete. Thus [lem-weil-finite-free-completed-scalar-comparison] applies also to that input. Write $A=K\\otimes^L_{R_E}R_L$, $C=\\chi_{L/E,K}$, $D=\\chi_{M/L,T_{L/E}K}$, $H=\\chi_{M/E,K}$ and $F=-\\otimes^L_{R_L}R_M$. The stipulated integral associator is $a^{\\mathrm{int}}=H\\alpha F(C^{-1})D^{-1}$.",
    "uses": [
-    "lem-pur-kflat-change-of-rings",
+    "lem-weil-point-derived-tensor-tower-coherence",
     "lem-weil-integral-scalar-extension-constructible",
     "def-weil-derived-complete-integral-detailed",
     "lem-weil-finite-free-completed-scalar-comparison"
@@ -77,43 +52,42 @@
    "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
-    "place": "Stagewise functor passage: integral composition maps supplied by balanced tensors; Stacks Tag 0G7E, sites-cohomology-lemma-pullback-K-flat, for K-flat change of rings"
+    "place": "Final paragraph, stagewise passage; assembly of the extracted ordinary sections, derived descent, tower and rationalization lemmas"
    }
   },
   {
-   "text": "Before completion, the two sections-tensor comparisons for $E\\subset L\\subset M$ satisfy\n$$\n\\Gamma(\\alpha)\\,\\theta_{M/L,A}(\\theta_{L/E,K}\\otimes1)=\\theta_{M/E,K}\\,a^{\\mathrm{mod}},\\qquad A=K\\otimes^L_R S,\n$$\nwhere $\\alpha:A\\otimes^L_S U\\to K\\otimes^L_R U$ is the ordinary associator from step 4. On complexes both sides send $((n\\otimes a)\\otimes b)$ to the section $n\\otimes ab$. Pure tensors generate the source in each degree, so the maps agree, including their coefficient actions; step 3 descends this equality to derived categories. To check every intervening completion map, abbreviate $C=\\chi_{L/E,K}$, $D=\\chi_{M/L,T_{L/E}K}$, $H=\\chi_{M/E,K}$, and $F(B)=B\\otimes^L_S U$. Thus step 4 defines $a^{\\mathrm{int}}=H\\alpha F(C^{-1})D^{-1}$. Naturality of $\\theta$ from step 3, applied to the derived isomorphism $C:A\\to T_{L/E}K$, says\n$$\n\\theta_{M/L,T_{L/E}K}(\\Gamma(C)\\otimes1)=\\Gamma(F(C))\\theta_{M/L,A}.\n$$\nWriting $\\psi_{L/E,K}=\\Gamma(\\chi_{L/E,K})\\theta_{L/E,K}$, substitution now gives the explicit cancellations\n$$\n\\begin{aligned}\n\\Gamma(a^{\\mathrm{int}})\\,\\psi_{M/L,T_{L/E}K}(\\psi_{L/E,K}\\otimes1)\n&=\\Gamma(H)\\Gamma(\\alpha)\\Gamma(F(C^{-1}))\\Gamma(D^{-1})\\Gamma(D)\\,\n\\theta_{M/L,T_{L/E}K}(\\Gamma(C)\\otimes1)(\\theta_{L/E,K}\\otimes1)\\\\\n&=\\Gamma(H)\\Gamma(\\alpha)\\Gamma(F(C^{-1}))\\Gamma(F(C))\\,\n\\theta_{M/L,A}(\\theta_{L/E,K}\\otimes1)\\\\\n&=\\Gamma(H)\\Gamma(\\alpha)\\theta_{M/L,A}(\\theta_{L/E,K}\\otimes1)\\\\\n&=\\psi_{M/E,K}\\,a^{\\mathrm{mod}}.\n\\end{aligned}\n$$\nThe common domain is $(\\Gamma(s,K)\\otimes_{\\mathcal O_E}\\mathcal O_L)\\otimes_{\\mathcal O_L}\\mathcal O_M$. Multiplying by the inverse maps $\\varphi=\\psi^{-1}$ gives the statement's composition equation. For $L=E$, $\\theta(n\\otimes r)$ followed by multiplication is $rn$, so under the completeness-unit identification of step 4 the comparison is the identity. For four coefficient fields, each ordinary iterated associator sends $(((n\\otimes a)\\otimes b)\\otimes c)$ to $n\\otimes abc$; substitution of the displayed conjugation cancels each intermediate $\\chi^{-1}\\chi$, proving the iterated coherence. The comparisons $C,D,H$ are natural isomorphisms by [lem-weil-finite-free-completed-scalar-comparison].",
+   "text": "Naturality from [lem-weil-point-derived-sections-tensor-descent] gives $\\theta_{M/L,T_{L/E}K}(\\Gamma(C)\\otimes1)=\\Gamma(F(C))\\theta_{M/L,A}$. Substitute this into the definition of $\\psi$:\n$$\\begin{aligned}\n\\Gamma(a^{\\mathrm{int}})\\psi_{M/L,T_{L/E}K}(\\psi_{L/E,K}\\otimes1)\n&=\\Gamma(H)\\Gamma(\\alpha)\\Gamma(F(C^{-1}))\\Gamma(D^{-1})\\Gamma(D)\\theta_{M/L,T_{L/E}K}(\\Gamma(C)\\otimes1)(\\theta_{L/E,K}\\otimes1)\\\\\n&=\\Gamma(H)\\Gamma(\\alpha)\\Gamma(F(C^{-1}))\\Gamma(F(C))\\theta_{M/L,A}(\\theta_{L/E,K}\\otimes1)\\\\\n&=\\Gamma(H)\\Gamma(\\alpha)\\theta_{M/L,A}(\\theta_{L/E,K}\\otimes1)\n=\\psi_{M/E,K}a^{\\mathrm{mod}}.\n\\end{aligned}$$\nThe last equality is [lem-weil-point-derived-tensor-tower-coherence]. Invert $\\psi$ to get the required composition equation. Its unit equation and the completeness-unit assertion of [lem-weil-finite-free-completed-scalar-comparison] give the identity assertion. For four fields its iterated equation and cancellation of intermediate $\\chi^{-1}\\chi$ give iterated coherence.",
    "uses": [
+    "lem-weil-point-derived-sections-tensor-descent",
+    "lem-weil-point-derived-tensor-tower-coherence",
     "lem-weil-finite-free-completed-scalar-comparison"
    ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
-    "place": "Stagewise finite-extension passage: explicit pure-tensor computation of identity and composition coherence"
+    "place": "Final paragraph, stagewise passage; assembly of the extracted ordinary sections, derived descent, tower and rationalization lemmas"
    }
   },
   {
-   "text": "Put $N=\\Gamma(s,K)$. Tensoring the integral comparison with $L$ gives $\\Gamma(s,T_{L/E}K)\\otimes_{\\mathcal O_L}L\\cong(N\\otimes_{\\mathcal O_E}\\mathcal O_L)\\otimes_{\\mathcal O_L}L\\cong N\\otimes_{\\mathcal O_E}L$, where the second map sends $(n\\otimes a)\\otimes b$ to $n\\otimes ab$ and its inverse sends $n\\otimes b$ to $(n\\otimes1)\\otimes b$. The DVR assertion [lem-weil-l-adic-extension-integers-dvr] makes $E$ the fraction field of $\\mathcal O_E$. For a nonzero $r\\in\\mathcal O_E$, multiplication by $r$ on $N\\otimes_{\\mathcal O_E}L$ is invertible, its inverse multiplying the $L$-coordinate by $r^{-1}$. Thus there are inverse maps $(N\\otimes_{\\mathcal O_E}E)\\otimes_E L\\leftrightarrows N\\otimes_{\\mathcal O_E}L$ given by $(n\\otimes x)\\otimes b\\mapsto n\\otimes xb$ and $n\\otimes b\\mapsto(n\\otimes1)\\otimes b$; moving a denominator across the tensor relation proves the other composite is the identity. These maps commute with differentials. Localization is exact: a fraction maps to zero precisely when some nonzero denominator annihilates its numerator, so localizing preserves kernels as well as images; hence all termwise localizations preserve quasi-isomorphisms. Extension from $E$ to $L$ is exact because every finite-dimensional field extension has a basis (successively choose a vector outside the span until the finite dimension is exhausted), so its underlying functor is a finite direct sum. The same reasoning applies to $L\\subset M$. Consequently these are isomorphisms in $D(L)$, natural in $K$. On a tower all localization and associativity maps send a pure tensor with coefficient factors $a,b,c$ to their product $abc$; applying step 5's integral equation and these balanced maps proves the rational identity and composition equations, including fractions since the inverted coefficients act by invertible maps.",
+   "text": "Tensor $\\varphi$ with $L$ and apply $\\beta_{L/E,\\Gamma(s,K)}$ of [lem-weil-coefficient-complex-rationalization]. Exactness there makes these maps well defined on derived categories. Its naturality, unit and mixed integral/field tower equation carry the integral equations just proved to the stated rational equations.",
    "uses": [
-    "lem-weil-l-adic-extension-integers-dvr"
+    "lem-weil-coefficient-complex-rationalization"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
-    "place": "Final sentence, passage stagewise to the finite-stage colimit; explicit localization and tensor-associativity formulas"
+    "place": "Final paragraph, stagewise passage; assembly of the extracted ordinary sections, derived descent, tower and rationalization lemmas"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-continuous-coefficients-immersion-restriction",
-  "lem-weil-finite-free-completed-scalar-comparison",
-  "def-pur-sheaf-tensor-product",
-  "lem-weil-point-proetale-sections-exact",
-  "lem-pc-kflat-resolution",
-  "lem-pur-derived-change-of-rings",
+  "lem-weil-point-finite-free-sections-tensor",
+  "lem-weil-point-derived-sections-tensor-descent",
   "def-weil-derived-complete-integral-detailed",
-  "lem-pur-kflat-change-of-rings",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-point-derived-tensor-tower-coherence",
   "lem-weil-integral-scalar-extension-constructible",
-  "lem-weil-l-adic-extension-integers-dvr"
+  "lem-weil-coefficient-complex-rationalization"
  ],
  "proof_origin": {
   "by": "agent",
@@ -183,39 +157,19 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-thm-sf-compatibility",
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-21",
   "item": "lem-weil-point-sections-scalar-extension",
   "worker": "stage1",
-  "summary": "Six steps, no new nodes: identify coefficient sections, construct the sections-tensor map by a common global basis, pass through K-flat and completed comparison maps, construct the integral associator, check coherence on tensors, and rationalize. Repaired constant/completed coefficient typing and the rational-only composition citation; the intended isomorphisms and all hypotheses are retained.",
-  "blueprint": "Realizes the final paragraph of def-weil-finite-coefficient-point: stagewise passage requires the integral/rational sections comparisons (steps 1-3,6) and identity/composition coherence (steps 4-5). This is a supporting lemma, not the unit's key statement.",
+  "summary": "Human-requested re-split: preserve the statement verbatim and distribute all six old arguments among four independent statement-only nodes. The parent retains only completion comparison, conjugation/cancellation, and rational assembly. The complete previous proof and its work allocation are preserved in report.md.",
+  "blueprint": "Final paragraph of def-weil-finite-coefficient-point: stagewise coefficient functors, their ordinary sections comparison, derived descent, unit/tower coherence, and rationalization. No change to the unit or chapter route.",
   "tool_uses": [
-   {
-    "node": "lem-weil-pbc-continuous-coefficients-immersion-restriction",
-    "why": "Generic identification of completed coefficients as continuous-function sheaves, used only to evaluate their sections on the noetherian point; no result of this unit supplies the coefficient identification."
-   },
    {
     "node": "lem-weil-finite-free-completed-scalar-comparison",
     "why": "Generic finite-free completed coefficient comparison; isolates completion from the finite-sum sections calculation and does not replace any step of the admissibility unit."
    },
    {
-    "node": "lem-pc-kflat-resolution",
-    "why": "Generic resolution existence on a ringed site, used to compute the ordinary derived tensor."
-   },
-   {
-    "node": "lem-pur-derived-change-of-rings",
-    "why": "Generic computation and quasi-isomorphism invariance of derived change of rings."
-   },
-   {
-    "node": "lem-pur-kflat-change-of-rings",
-    "why": "Generic K-flat preservation, used for the ordinary integral associator."
-   },
-   {
     "node": "lem-weil-integral-scalar-extension-constructible",
     "why": "Preservation of the integral input category, needed to apply the completion comparison on the second extension."
-   },
-   {
-    "node": "lem-weil-l-adic-extension-integers-dvr",
-    "why": "Generic fraction-field property of the coefficient valuation ring, used only for rational localization."
    }
   ]
  },
@@ -229,12 +183,12 @@
   "lem-weil-l-adic-extension-integers-dvr"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-Codex-NI-150187cc5",
-  "group": "NI",
+  "reviewer": "NT-cc-Q28-90fd4539f",
+  "group": "Q28",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-150187cc5 (reviewer sub-agent of L); spot-checked: Read the item, all six proof steps, cited statements and source locations in full. Verified completed coefficient types, the specified completion map, integral associator, coherence and rationalization; checked torsion and ramified cases, duplicates and dependency cycles. No new nodes or repairs. Accepted seven declared tool uses. Detailed findings written to review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-90fd4539f (reviewer sub-agent of L); spot-checked: I read all of the item and the four new nodes. The re-split answers the human's 2026-10-21 note (10371 chars, at least 3 nodes): the item statement and stmt_deps are byte-identical to live, the parent is a 4-step assembly of 2457 chars, and the four new nodes are unsplit statement-only nodes of 1997-2263 chars. Every old argument maps to a node. Old steps 1-2 (point coefficients, common sheaf/global basis, balanced θ, its inverse, exactness) became finite-free-sections-tensor. Old step 3 (quasi-isomorphism preservation, K-flat identification, the roof formula, resolution independence) became derived-sections-tensor-descent. The ordinary part of old steps 4-5 (balanced associator, roof naturality, pure-tensor sections equation, unit and four-field checks) became derived-tensor-tower-coherence. Old step 6 (β, denominators, exact localization and field extension, the mixed tower square) became coefficient-complex-rationalization. The parent keeps the χ completeness check, a^int = HαF(C^-1)D^-1 and the cancellation chain, which I rechecked. Inverting it gives exactly the item's equation. The identity case comes from the tower node's L=E clause together with the χ_{E/E} completeness clause of lem-weil-finite-free-completed-scalar-comparison. Hypotheses: k = F̄_q is algebraically closed (def-weil-finite-field-fiber), so lem-weil-point-proetale-sections-exact applies. D^b_c objects are derived complete by definition, so χ exists for K and for T_{L/E}K (via lem-weil-integral-scalar-extension-constructible). All new statements are true: BS 4.2.12 and 6.8.2(1) give Γ(s,R_F)=O_F, and R_L≅R_E^d gives θ and exactness. I tested E=L (d=1), the zero sheaf, torsion and unbounded N, β balancing over O_E, the inverse for x in E, and both tower paths giving (n⊗1)⊗abc. Sources: Stacks 06YY and 0G7E have the right labels, and the master def-weil-finite-coefficient-point final paragraph matches. No SGA. No cycles in the stmt/proof/uses DFS. The closure diff adds only the new nodes and def-weil-module-base-change. My rg duplicate search hit only lem-weil-scalar-extension-well-defined (a different statement) and two citers of the item. Advisory: the α clauses of the tower node repeat lem-sfb-successive-derived-quotient-normalization (another unit, not cited). The core sections equation is new, so this is not a relabelling. When the children are proved they should cite that node, plus the inputs the report allocates to them (continuous-coefficients, kflat-resolution, kflat-change-of-rings, sections-exact, DVR). No fixes and no tool_uses."
  },
  "lean": {
   "module": "Sheaf.Paper.PointSectionsScalarExtension",
