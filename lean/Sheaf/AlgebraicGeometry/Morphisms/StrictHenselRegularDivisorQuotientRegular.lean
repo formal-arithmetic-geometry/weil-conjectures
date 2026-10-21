@@ -2,7 +2,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMap
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 import WeilConjectures.AlgebraicGeometry.Morphisms.StrictHenselRegularDivisorQuotientRegularPart
-import Sheaf.AlgebraicGeometry.Morphisms.StrictHenselRegularDivisorQuotientDomainPart
+import WeilConjectures.AlgebraicGeometry.Morphisms.StrictHenselRegularDivisorQuotientDomainPart
 @[expose] public section
 universe u
 open CategoryTheory CategoryTheory.Limits
@@ -62,31 +62,29 @@ theorem strictHenselizationRing_regular_divisor_quotient
     (hg : ¬ IsUnit (b.hom f)) :
     IsRegularRing (strictHenselizationRing barY ⧸ Ideal.span {b.hom f}) ∧
       IsDomain (strictHenselizationRing barY ⧸ Ideal.span {b.hom f}) := by
-  have hregular : IsRegularRing
-      (strictHenselizationRing barY ⧸ Ideal.span {b.hom f}) := by
-    let e : strictHenselizationRing barY ≅ strictHenselization barY :=
-      smallStrictHenselizationColimitIso barY
-    have hbe : Spec.map (b ≫ e.hom) = strictLocalizationToBase barY := by
-      rw [Spec.map_comp, hb]
-      exact comparison_base barY
-    have hg' : ¬ IsUnit ((b ≫ e.hom).hom f) := by
-      intro h
-      apply hg
-      have h' := h.map e.inv.hom
-      change IsUnit (e.commRingCatIsoToRingEquiv.symm
-        (e.commRingCatIsoToRingEquiv (b.hom f))) at h'
-      simpa only [RingEquiv.symm_apply_apply] using h'
-    let : IsRegularRing
-        (strictHenselization barY ⧸ Ideal.span {(b ≫ e.hom).hom f}) :=
-      strictHenselizationRing_regular_divisor_quotient_part R f barY (b ≫ e.hom) hbe hg'
-    let eQ : (strictHenselization barY ⧸ Ideal.span {(b ≫ e.hom).hom f}) ≃+*
-        (strictHenselizationRing barY ⧸ Ideal.span {b.hom f}) :=
-      Ideal.quotientEquiv _ _ e.symm.commRingCatIsoToRingEquiv (by
-        rw [Ideal.map_span, Set.image_singleton]
-        change Ideal.span {b.hom f} = Ideal.span {
-          e.commRingCatIsoToRingEquiv.symm (e.commRingCatIsoToRingEquiv (b.hom f))}
-        rw [RingEquiv.symm_apply_apply])
-    exact IsRegularRing.of_ringEquiv eQ
-  exact ⟨hregular,
-    strictHenselizationRing_divisor_quotient_domain_part R f barY b hb hg⟩
+  let e : strictHenselizationRing barY ≅ strictHenselization barY :=
+    smallStrictHenselizationColimitIso barY
+  have hbe : Spec.map (b ≫ e.hom) = strictLocalizationToBase barY := by
+    rw [Spec.map_comp, hb]
+    exact comparison_base barY
+  have hg' : ¬ IsUnit ((b ≫ e.hom).hom f) := by
+    intro h
+    apply hg
+    have h' := h.map e.inv.hom
+    change IsUnit (e.commRingCatIsoToRingEquiv.symm
+      (e.commRingCatIsoToRingEquiv (b.hom f))) at h'
+    simpa only [RingEquiv.symm_apply_apply] using h'
+  let : IsRegularRing
+      (strictHenselization barY ⧸ Ideal.span {(b ≫ e.hom).hom f}) :=
+    strictHenselizationRing_regular_divisor_quotient_part R f barY (b ≫ e.hom) hbe hg'
+  let eQ : (strictHenselization barY ⧸ Ideal.span {(b ≫ e.hom).hom f}) ≃+*
+      (strictHenselizationRing barY ⧸ Ideal.span {b.hom f}) :=
+    Ideal.quotientEquiv _ _ e.symm.commRingCatIsoToRingEquiv (by
+      rw [Ideal.map_span, Set.image_singleton]
+      change Ideal.span {b.hom f} = Ideal.span {
+        e.commRingCatIsoToRingEquiv.symm (e.commRingCatIsoToRingEquiv (b.hom f))}
+      rw [RingEquiv.symm_apply_apply])
+  refine ⟨IsRegularRing.of_ringEquiv eQ, eQ.toMulEquiv.isDomain_iff.mp ?_⟩
+  exact strictHenselizationRing_divisor_quotient_domain_part R f barY (b ≫ e.hom) hbe hg'
+
 end AlgebraicGeometry.Scheme
