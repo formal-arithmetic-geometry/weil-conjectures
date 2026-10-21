@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 import WeilConjectures.AlgebraicGeometry.Modules.LocalSplittingFiniteFree
-import Sheaf.AlgebraicGeometry.Modules.DeterminantWedgeMorphism
+import WeilConjectures.AlgebraicGeometry.Modules.DeterminantWedgeMorphism
 import WeilConjectures.AlgebraicGeometry.Modules.DeterminantWedgeMorphismSplit
 import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafPowerComparison
 import WeilConjectures.AlgebraicGeometry.Modules.PullbackFreeGenerator
@@ -29,6 +29,14 @@ universe v
 open CategoryTheory Opposite MonoidalCategory
 
 namespace AlgebraicGeometry.Scheme.Modules
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem exteriorSheafPowerIso_hom_wedge {X : Scheme.{v}} (M : X.Modules) (n : ℕ)
+    (U : X.Opens) (a : Fin n → M.val.obj (op U)) :
+    (exteriorSheafPowerIso M n).hom.app U (exteriorSheafSection M n U a) =
+      wedge (M := M) (r := n) (U := U) a := by
+  rw [← exteriorSheafPowerIso_inv_wedge M n U a]
+  exact inv_app_hom_app_apply_of_iso (exteriorSheafPowerIso M n).symm _
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Existence, without uniqueness or invertibility assertions, of the determinant
@@ -65,35 +73,30 @@ theorem determinant_shortExact_exists {X : Scheme.{v}} (S : ShortComplex X.Modul
           exteriorSheafSection S.X₂ r₂ U
             (fun i ↦ Fin.append (fun j ↦ S.f.val.app (op U) (a j)) c (Fin.cast hr i)) :=
   by
-  obtain ⟨φ, hφ⟩ := determinant_wedgeMorphism_exists S hS r₁ r₂ r₃ hr
+  obtain ⟨ψ, hψ⟩ := determinant_wedgeMorphism_exists S hS r₁ r₂ r₃ hr
   obtain ⟨ι, U, hU, hsplit⟩ := exists_openCover_split_shortExact S hS r₁ r₂ r₃
   let eA := tensorIso (C := X.Modules) (exteriorSheafPowerIso S.X₁ r₁)
     (exteriorSheafPowerIso S.X₃ r₃)
   let eB := exteriorSheafPowerIso S.X₂ r₂
-  let ψ := eA.inv ≫ φ ≫ eB.hom
-  have hψ : ∀ (V : X.Opens) (a : Fin r₁ → S.X₁.val.obj (op V))
+  let φ := eA.hom ≫ ψ ≫ eB.inv
+  have hφ : ∀ (V : X.Opens) (a : Fin r₁ → S.X₁.val.obj (op V))
       (b : Fin r₃ → S.X₃.val.obj (op V)) (c : Fin r₃ → S.X₂.val.obj (op V)),
       (∀ i, S.g.val.app (op V) (c i) = b i) →
-      ψ.app V (tmulSection (wedge (M := S.X₁) (r := r₁) a)
-        (wedge (M := S.X₃) (r := r₃) b)) =
-        wedge (M := S.X₂) (r := r₂)
+      φ.val.app (op V)
+          (tmulSection (exteriorSheafSection S.X₁ r₁ V a)
+            (exteriorSheafSection S.X₃ r₃ V b)) =
+        exteriorSheafSection S.X₂ r₂ V
           (fun i ↦ Fin.append (fun j ↦ S.f.val.app (op V) (a j)) c (Fin.cast hr i)) := by
     intro V a b c hc
-    have ht := tensorHom_app_tmulSection
-      (M := exteriorPower S.X₁ r₁) (N := exteriorPower S.X₃ r₃)
-      (M' := exteriorSheaf S.X₁ r₁) (N' := exteriorSheaf S.X₃ r₃) (U := V)
-      (exteriorSheafPowerIso S.X₁ r₁).inv (exteriorSheafPowerIso S.X₃ r₃).inv
-      (wedge (M := S.X₁) (r := r₁) a) (wedge (M := S.X₃) (r := r₃) b)
-    rw [exteriorSheafPowerIso_inv_wedge, exteriorSheafPowerIso_inv_wedge] at ht
-    change eB.hom.app V (φ.app V (eA.inv.app V _)) = _
-    have hw := exteriorSheafPowerIso_inv_wedge S.X₂ r₂ V
-      (fun i ↦ Fin.append (fun j ↦ S.f.val.app (op V) (a j)) c (Fin.cast hr i))
-    exact (congrArg (fun z ↦ eB.hom.app V (φ.app V z)) ht).trans
-      ((congrArg (fun z ↦ eB.hom.app V z) (hφ V a b c hc)).trans
-        ((congrArg (fun z ↦ eB.hom.app V z) hw.symm).trans
-          (congrArg (fun k ↦ k.app V (wedge (M := S.X₂) (r := r₂)
-            (fun i ↦ Fin.append (fun j ↦ S.f.val.app (op V) (a j)) c (Fin.cast hr i))))
-            eB.inv_hom_id)))
+    change (exteriorSheafPowerIso S.X₂ r₂).inv.app V
+      (ψ.app V ((((exteriorSheafPowerIso S.X₁ r₁).hom ⊗ₘ
+        (exteriorSheafPowerIso S.X₃ r₃).hom).app V)
+          (tmulSection (exteriorSheafSection S.X₁ r₁ V a)
+            (exteriorSheafSection S.X₃ r₃ V b)))) = _
+    rw [tensorHom_app_tmulSection, exteriorSheafPowerIso_hom_wedge,
+      exteriorSheafPowerIso_hom_wedge]
+    exact (congrArg ((exteriorSheafPowerIso S.X₂ r₂).inv.app V) (hψ V a b c hc)).trans
+      (exteriorSheafPowerIso_inv_wedge S.X₂ r₂ V _)
   have hψiso : IsIso ψ := by
     apply Hom.isIso_of_forall_bijective_app
     intro x
@@ -103,7 +106,7 @@ theorem determinant_shortExact_exists {X : Scheme.{v}} (S : ShortComplex X.Modul
     exact ⟨U i, hi,
       determinant_wedgeMorphism_bijective_of_split S r₁ r₂ r₃ hr ψ hψ (U i) e hf hg⟩
   have hφiso : IsIso φ := by
-    have hfac : eA.hom ≫ ψ ≫ eB.inv = φ := by simp [ψ]
+    have hfac : eA.hom ≫ ψ ≫ eB.inv = φ := rfl
     rw [← hfac]
     infer_instance
   exact ⟨(asIso φ).symm, hφ⟩

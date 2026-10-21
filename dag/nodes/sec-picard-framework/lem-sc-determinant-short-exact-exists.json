@@ -10,14 +10,14 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "Construct phi and its wedge formula by determinant_wedgeMorphism_exists, without yet asserting invertibility.",
+   "text": "Apply the adopted determinant_wedgeMorphism_exists to obtain a canonical exteriorPower morphism psi and its formula on tensors of wedges.",
    "uses": [
     "lem-sc-determinant-wedge-morphism"
    ],
    "elementary": false
   },
   {
-   "text": "Let eA be the tensor of the exteriorSheafPowerIso comparisons for the outside terms and eB the comparison for the middle term. Conjugate phi to psi=eA.inv ≫ phi ≫ eB.hom. The tensor-section equation and exteriorSheafPowerIso_inv_wedge identify the source pure wedges. Apply the original wedge formula and use eB.inv_hom_id to get the canonical wedge formula for psi.",
+   "text": "Let eA be the tensor of the outside exteriorSheafPowerIso comparisons and eB the middle comparison. Define phi=eA.hom ≫ psi ≫ eB.inv. Derive the hom wedge equation from exteriorSheafPowerIso_inv_wedge and the inverse-hom identity. tensorHom_app_tmulSection, these hom equations, the formula for psi and the inverse wedge equation give the required legacy formula hphi. All ranks, including zero, and all opens, including the empty open, are covered.",
    "uses": [
     "lem-sc-exterior-sheaf-power-comparison"
    ],
@@ -52,10 +52,10 @@
   "lem-sc-exterior-sheaf-power-comparison"
  ],
  "proof_origin": {
-  "by": "R4",
+  "by": "B7 retirement",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
   "place": "Proof of (*), determinant paragraph: lift independence, local splitting and gluing; T2 decomposition into construction and split-local bijectivity",
-  "note": "Preserve the legacy existence signature and wedge formula; conjugate to canonical exteriorPower to use the adopted local bijectivity theorem. No target or unit route changes."
+  "note": "Use the adopted wedge morphism and split-local bijectivity theorems on canonical exterior powers. Transport the constructed morphism to the legacy exteriorSheaf representation and its wedge formula using the proved comparisons. Preserve the public statement and the determinant unit route."
  },
  "mathlib_searches": [
   {
@@ -134,11 +134,11 @@
  "reviewed_proof": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "C-01248",
-  "group": "R4",
+  "reviewer": "C-5c09d",
+  "group": "B7",
   "result": "pass",
-  "landing": "20261021T005748-L-1889502",
+  "landing": "20261021T023301-L-2944426",
   "kind": "interface",
-  "note": "independent cc review: Withdrawn Sheaf DeterminantWedgeMorphismSplit + node lean record vs WC adopted determinant_wedgeMorphism_bijective_of_split (statement verbatim, live lines 371-387); adapted DeterminantShortExactExists diffed vs live (imports + local set_option + proof only, signature identical); compiled --all clean, importer DeterminantShortExact compiled, axioms standard"
+  "note": "independent cc review: retired Sheaf DeterminantWedgeMorphism stub + adapted DeterminantShortExactExists + 2 node files vs live clone and WC adopted determinant_wedgeMorphism_exists (node lean.statement verbatim); --all compile clean, original consumer fails vs stub (forced), importer DeterminantShortExact compiles, axioms standard"
  }
 }
