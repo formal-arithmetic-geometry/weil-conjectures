@@ -23489,3 +23489,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:28 L: merged deliver/Q08/lem-sfb-proper-open-boundary-zero (stage 2; reviewer FIX; parallel immutable checks)
 - 19:28 L: merged deliver/NV/lem-sfb-profinite-constant-derived-functions (stage 2; reviewer PASS; parallel immutable checks)
 - 19:28 L: returned deliver/Q26/lem-sfb-closed-test-derived-exchange-model (reviewer RETURN: L: independent stage-2 immutable head 790046091fff: H12/H4: new definition node def-sfb-condensed-module-global-sections)
+- 19:28 L: returned deliver/Q04/lem-sfb-derived-invariants-normal-subgroup-comparison (reviewer RETURN: L: independent stage-2 immutable head adef578762a9: H2: the item's stmt_deps add the theorem node lem-sfb-derived-compos)
