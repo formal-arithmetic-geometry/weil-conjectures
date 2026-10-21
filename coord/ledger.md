@@ -22147,3 +22147,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 10:43 L: returned deliver/Q102/lem-a1-integral-stratum-chart-restrictions (reviewer RETURN: (the landing tools, head c37a7585b) the delivery did not land: (merge queue) your landing 20261021T101508-Q102-174793-17)
 
 - 18:45 L: batch 20261021T100250 dependency take-out
+- 2026-10-21T10:52:32Z L: superseded stage-1 delivery Q32/lem-sfb-monoidal-finite-free-transport at 424048e07679162550cbc3a71eae10e44a713f1a; current completion retained; packet archived at refs/superseded/Q32/lem-sfb-monoidal-finite-free-transport/424048e07679162550cbc3a71eae10e44a713f1a; stale return retired.
