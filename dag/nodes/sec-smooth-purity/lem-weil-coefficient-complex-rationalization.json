@@ -12,9 +12,123 @@
   "def-weil-module-base-change",
   "def-weil-abstract-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $A=\\mathcal O_E$, $B=\\mathcal O_L$. By [def-weil-l-adic-coefficient-extension], these are subrings of fields with the indicated compatible absolute values. For any nonzero $x\\in E$, either $|x|\\leq1$ or $|x^{-1}|<1$, so $A$ is a valuation ring in the precise sense of [lem-trf-valuation-torsionfree-flat]; the same argument applies to $B$ in $L$. Also $E=\\operatorname{Frac}(A)$: if $x\\notin A$ then $x=1/x^{-1}$ with $0\\ne x^{-1}\\in A$. The analogous statement holds for $L$. The $A$-modules $B,E$, the $B$-module $L$, and the $E$-module $L$ are torsion-free because all their scalar inclusions are inclusions into fields. A field is itself a valuation ring. Apply [lem-trf-valuation-torsionfree-flat] to these four modules to obtain their flatness. No finite-generation hypothesis on a module is used.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension",
+    "lem-trf-valuation-torsionfree-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0539, lemma-valuation-ring-torsion-free-flat; application to the coefficient subrings"
+   }
+  },
+  {
+   "text": "For each of the four flat scalar modules from step 1, [lem-weil-pbc-flat-tensor-exact] gives preservation of exact sequences and injections. Surjectivity after tensoring follows directly: lift the first entry of each pure tensor along a surjection, then add the lifts. Thus a short exact sequence remains short exact. The scalar-extension action on maps of [def-weil-module-base-change] is additive, since $(f+g)(n)\\otimes c=f(n)\\otimes c+g(n)\\otimes c$. Kernels are preserved by applying exactness to $0\\to\\ker f\\to P\\to Q$, and cokernels by applying it to $P\\to Q\\to\\operatorname{coker}f\\to0$. Finite direct sums are preserved by the two inverse maps $(p,q)\\otimes c\\mapsto(p\\otimes c,q\\otimes c)$ and $(p\\otimes c,q\\otimes d)\\mapsto(p,0)\\otimes c+(0,q)\\otimes d$, with their extensions by addition. The zero module is preserved. Consequently these additive functors preserve finite limits and colimits, as required for exact derived factorization.",
+   "uses": [
+    "lem-weil-pbc-flat-tensor-exact",
+    "def-weil-module-base-change",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HD, lemma-flat; Tag 00CX, lemma-tensor-product: pure-tensor generation"
+   }
+  },
+  {
+   "text": "Fix an $A$-module $P$ and put $S=P\\otimes_A L$. For $C=B$ or $E$, define $u_C:(P\\otimes_A C)\\otimes_C L\\to S$ by $((p\\otimes c)\\otimes b)\\mapsto p\\otimes cb$ and $v_C:S\\to(P\\otimes_A C)\\otimes_C L$ by $p\\otimes b\\mapsto(p\\otimes1)\\otimes b$. The tensor universal property [def-weil-pbc-module-tensor-product] applies twice: the inner $A$-balancing is $(rp)\\otimes cb=p\\otimes rcb$, and outer $C$-balancing is $p\\otimes(ca)b=p\\otimes c(ab)$. For $v_C$, $((rp)\\otimes1)\\otimes b=(p\\otimes r)\\otimes b=(p\\otimes1)\\otimes rb$. Additivity in each variable is immediate. Both maps are $L$-linear, and $u_Cv_C(p\\otimes b)=p\\otimes b$, whereas $v_Cu_C((p\\otimes c)\\otimes b)=(p\\otimes1)\\otimes cb=(p\\otimes c)\\otimes b$. Generation by pure tensors proves they are inverse. Define $\\beta_{L/E,P}=v_Eu_B$; its inverse is $v_Bu_E$, giving exactly both formulas in the statement.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-module-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CX, lemma-tensor-product, universal property and bilinearity relations; explicit two-step balancing argument"
+   }
+  },
+  {
+   "text": "The preceding construction treats every $x\\in E$ as an actual element of $L$. In particular, if $x=a/s=a'/s'$ with $a,a',s,s'\\in A$ and $ss'\\ne0$, then $as'=a's$ implies $ab/s=a'b/s'$ in $L$ for every $b\\in L$. Thus the inverse formula gives the same element $p\\otimes xb$ of $S$ and the same image under $v_B$ for either presentation. In the $E$-balanced target, $(p\\otimes x)\\otimes b=(p\\otimes1)\\otimes xb$, also for these fractions. There is no need to divide an element of $P$. Pure tensors span the iterated tensors by [def-weil-pbc-module-tensor-product], so the required formula determines $\\beta$ uniquely. For an $A$-linear map $f:P\\to P'$, both routes of the naturality square send $((p\\otimes a)\\otimes b)$ to $(f(p)\\otimes1)\\otimes ab$. Hence $\\beta$ is natural on modules.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-module-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CX, lemma-tensor-product: balancing, generation, and uniqueness; fraction equality in the coefficient field"
+   }
+  },
+  {
+   "text": "Apply the module maps of steps 3 and 4 in each degree of $N$. Naturality for $d_N^r:N^r\\to N^{r+1}$ gives the chain-map equations; the inverse maps obey the same equations. Naturality for each component of a chain morphism gives a natural $L$-linear chain isomorphism. For $L=E$, identify $N\\otimes_A A$ with $N$ by multiplication, and $(N\\otimes_A E)\\otimes_E E$ with $N\\otimes_A E$ in the same way. The formula sends $((n\\otimes a)\\otimes b)$ to $n\\otimes ab$ under both identifications, so the comparison is the identity. These calculations use only degreewise maps and therefore apply to complexes unbounded in both directions.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-module-base-change",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CX, lemma-tensor-product, applied degreewise; cochain conventions of def-weil-abstract-derived-category"
+   }
+  },
+  {
+   "text": "By step 2 each scalar functor satisfies all hypotheses of [lem-weil-pbc-exact-functor-derived-factorization]: it is additive and preserves finite limits and colimits between module categories, which are abelian by [lem-weil-pbc-ring-modules-grothendieck-abelian]. That node states that its termwise functor preserves quasi-isomorphisms, and supplies an induced functor with factorization through the cochain localization. Apply this to all four functors. Compose these factorizations to identify the restrictions of the two composite derived functors with the localization of the two composite cochain functors. Apply part (2) of [lem-weil-pbc-localization-universal-property] to the localized chain isomorphism of step 5. It yields a unique natural isomorphism between the composite derived functors with these components. Its naturality is for every arrow in $D(A)$, including inverses of quasi-isomorphisms; it is not merely natural for chain maps.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-localization-universal-property",
+    "lem-weil-pbc-ring-modules-grothendieck-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor; localization of natural transformations as stated by the cited universal-property node"
+   }
+  },
+  {
+   "text": "For $E\\subset L\\subset M$, put $C=\\mathcal O_M$. The integral associator sends $((n\\otimes a)\\otimes c)$ to $n\\otimes ac$; the field associator has the identical multiplication formula. Their well-definedness and inverse follow from the $u_C,v_C$ balancing calculation of step 3, with the corresponding rings substituted. Evaluate the first tower route on $(((n\\otimes a)\\otimes c)\\otimes d)$, for $a\\in B,c\\in C,d\\in M$: integral association and $\\beta_{M/E}$ give $(n\\otimes1)\\otimes(ac)d$. The second route first gives $((n\\otimes a)\\otimes1)\\otimes cd$, then $((n\\otimes1)\\otimes a)\\otimes cd$, and finally $(n\\otimes1)\\otimes a(cd)$. These agree by associativity in $M$. Here $d$ is any element of $M$, including a fraction; inserting any fraction from $L$ into an intermediate field tensor gives the same equality by its balancing relation. Pure-tensor generation proves equality in each degree and hence of chain maps.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-module-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CX, lemma-tensor-product; explicit multiplication calculation for both tower paths"
+   }
+  },
+  {
+   "text": "Apply the earlier exactness argument with the pairs $(E,M)$ and $(L,M)$ as well. The tensor associators in step 7 are natural module isomorphisms, so part (2) of [lem-weil-pbc-localization-universal-property] descends them just as in step 6. It respects identities and composition; whiskering is compatible as well, because after restriction along the localization each whiskered component is precisely the localized component evaluated on the termwise scalar complex. Therefore the restrictions of the two derived tower paths are the localized chain paths computed in step 7. Part (3) of that node makes the derived paths equal. The same argument descends the identity computation of step 5. This proves both coherence assertions in the derived categories with their specified factorization comparisons.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VG, lemma-properties-left-localization; full faithfulness and natural-transformation clauses of the cited localization node"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "lem-trf-valuation-torsionfree-flat",
+  "lem-weil-pbc-flat-tensor-exact",
+  "def-weil-module-base-change",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-ring-modules-grothendieck-abelian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
+  "place": "Final stagewise coefficient paragraph, elaborated by direct tensor balancing and Stacks Tags 0539, 00HD, 00CX, 015F; the coefficient-complex detail is not proved in the blueprint"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -64,10 +178,45 @@
    "results": "[grep] OK 22 hit(s)\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean\", \"line\": \"68\", \"text\": \"  · intros; ext1; apply extendScalars_assoc'\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"line\": \"1015\", \"text\": \"lemma extendScalars_assoc :\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"line\": \"1034\", \"text\": \"lemma extendScalars_assoc' :\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"line\": \"1040\", \"text\": \"  rw [extendScalars_assoc_assoc]\"}\n  {\"file\": \"Mathlib/LinearAlgebra/TensorProduct/Subalgebra.lean\", \"line\": \"61\", \"text\": \"  refine Algebra.TensorProduct.algEquivOfLinearEquivTensorProduct (toSubmodule A).lTensorOne ?_ ?_\"}\n  {\"file\": \"Mathlib/LinearAlgebra/TensorProduct/Subalgebra.lean\", \"line\": \"92\", \"text\": \"  refine Algebra.TensorProduct.algEquivOfLinearEquivTensorProduct (toSubmodule A).rTensorOne ?_ ?_\"}\n  {\"file\": \"Mathlib/LinearAlgebra/TensorProduct/Subalgebra.lean\", \"line\": \"178\", \"text\": \"  algEquivOfLinearEquivTensorProduct (linearEquivIncludeRange R S T) (by simp) rfl\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"line\": \"283\", \"text\": \"    LocalizedModule.equivTensorProduct p.asIdeal.primeCompl M\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"line\": \"329\", \"text\": \"    LocalizedModule.equivTensorProduct _ _ ≪≫ₗ\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"line\": \"333\", \"text\": \"        (LocalizedModule.equivTensorProduct _ M).symm)\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"line\": \"398\", \"text\": \"    (((LocalizedModule.equivTensorProduct p.primeCompl M).baseChange Rp K Mp _)).finrank_eq,\"}\n  {\"file\": \"Mathlib/RingTheory/Localization/BaseChange.lean\", \"line\": \"68\", \"text\": \"noncomputable def LocalizedModule.equivTensorProduct :\"}\n  {\"file\": \"Mathlib/RingTheory/Localization/BaseChange.lean\", \"line\": \"73\", \"text\": \"lemma LocalizedModule.equivTensorProduct_symm_apply_tmul (x : M) (r : R) (s : S) :\"}\n  {\"file\": \"Mathlib/RingTheory/Localization/BaseChange.lean\", \"line\": \"74\", \"text\": \"    (equivTensorProduct S M).symm (Localization.mk r s ⊗ₜ[R] x) = r • mk x s := by\"}\n  {\"file\": \"Mathlib/RingTheory/Localization/BaseChange.lean\", \"line\": \"75\", \"text\": \"  simp [equivTensorProduct, IsBaseChange.equiv_tmul, mk_smul_mk, smul'_mk]\"}\n  {\"file\": \"Mathlib/RingTheory/Localization/BaseChange.lean\", \"line\": \"78\", \"text\": \"lemma LocalizedModule.equivTensorProduct_symm_apply_tmul_one (x : M) :\"}\n  {\"file\": \"Mathlib/RingTheory/TensorProduct/Maps.lean\", \"line\": \"118\", \"text\": \"def algEquivOfLinearEquivTensorProduct (f : A ⊗[R] B ≃ₗ[S] C)\"}\n  {\"file\": \"Mathlib/RingTheory/TensorProduct/Maps.lean\", \"line\": \"124\", \"text\": \"theorem algEquivOfLinearEquivTensorProduct_apply (f h_mul h_one x) :\"}\n  {\"file\": \"Mathlib/RingTheory/TensorProduct/Maps.lean\", \"line\": \"125\", \"text\": \"    (algEquivOfLinearEquivTensorProduct f h_mul h_one : A ⊗[R] B ≃ₐ[S] C) x = f x :=\"}\n  {\"file\": \"Mathlib/RingTheory/TensorProduct/Maps.lean\", \"line\": \"253\", \"text\": \"  algEquivOfLinearEquivTensorProduct (TensorProduct.lid R A) (by\"}\n  {\"file\": \"Mathlib/RingTheory/TensorProduct/Maps.lean\", \"line\": \"277\", \"text\": \"  algEquivOfLinearEquivTensorProduct (AlgebraTensorModule.rid R S A)\"}\n  {\"file\": \"Mathlib/RingTheory/LocalRing/Module.lean\", \"line\": \"118\", \"text\": \"    (LocalizedModule.equivTensorProduct p.asIdeal.primeCompl M).nontrivial_congr,\"}",
    "date": "2026-10-21",
    "verdict": "no match: module localization and scalar associators are available individually; the coefficient-integer functor comparison with the specified fraction-normalized chain map, exact derived descent and mixed integral/field tower square is not a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact scalar extension for complexes over valuation rings and fraction fields with natural tensor reassociation and coherence for towers",
+   "results": "OK 8 hits: Module.Flat.rTensor_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, KaehlerDifferential.exact_mapBaseChange_map, lTensor_exact, LinearMap.rTensor_exact_iff_lTensor_exact, rTensor_exact, Module.Flat.rTensor_exact, Module.Flat.lTensor_exact",
+   "date": "2026-10-21",
+   "verdict": "no match: hits supply individual generic tensor or exactness ingredients, not the entire coefficient-complex comparison, exactness, fraction formulas and mixed integral/field tower assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.extendScalarsComp, ModuleCat.extendScalars_assoc",
+   "results": "OK 1 hits: ModuleCat.extendScalars_assoc",
+   "date": "2026-10-21",
+   "verdict": "no match: hits supply individual generic tensor or exactness ingredients, not the entire coefficient-complex comparison, exactness, fraction formulas and mixed integral/field tower assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalarsComp|extendScalars_assoc|preservesFiniteLimits.*extendScalars",
+   "results": "OK 12 hits: Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean, Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean, Mathlib/Algebra/Category/ModuleCat/Descent.lean, Mathlib/Algebra/Category/ModuleCat/Descent.lean, Mathlib/Algebra/Category/ModuleCat/Descent.lean, Mathlib/Algebra/Category/ModuleCat/Descent.lean, Mathlib/Algebra/Category/ModuleCat/Descent.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: hits supply individual generic tensor or exactness ingredients, not the entire coefficient-complex comparison, exactness, fraction formulas and mixed integral/field tower assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Rationalization and extension of scalars of unbounded complexes over rings of integers are naturally isomorphic with coherent tower comparisons",
+   "results": "OK 8 hits: instIsScalarTowerAtPrimeFractionRing_1, IsScalarTower.rat, LinearMap.coeIsScalarTower, LinearEquiv.extendScalarsOfIsLocalizationEquiv, ModuleCat.restrictCoextendScalarsAdj, Complex.instIsScalarTowerOfReal, Valuation.HasExtension.instIsScalarTowerInteger, ModuleCat.extendScalars_assoc",
+   "date": "2026-10-21",
+   "verdict": "no match: hits supply individual generic tensor or exactness ingredients, not the entire coefficient-complex comparison, exactness, fraction formulas and mixed integral/field tower assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transitivity isomorphism for extension of scalars along two different factorizations of a ring map, on derived categories of modules",
+   "results": "OK 8 hits: ModuleCat.extendScalars_assoc', ModuleCat.extendScalarsComp, ModuleCat.extendScalars_assoc_assoc, CommRingCat.moduleCatExtendScalarsPseudofunctor_mapComp, ModuleCat.extendScalars_assoc, ModuleCat.homEquiv_extendScalarsComp, ModuleCat.extendScalars_id_comp_assoc, ModuleCat.extendScalarsComp_hom_app_one_tmul",
+   "date": "2026-10-21",
+   "verdict": "no match: hits supply individual generic tensor or exactness ingredients, not the entire coefficient-complex comparison, exactness, fraction formulas and mixed integral/field tower assertion"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-point-sections-scalar-extension",
@@ -86,5 +235,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-weil-coefficient-complex-rationalization",
+  "worker": "stage1",
+  "summary": "Q136: retained the full statement; proved flatness using the existing valuation-ring torsion-free leaf, exactness and unbounded descent using existing leaves, and wrote explicit mutually inverse balanced maps, fraction independence, and both tower paths. No new nodes.",
+  "blueprint": "def-weil-finite-coefficient-point, final paragraph: finite-field stages and their scalar-extension comparisons; supplies the coefficient-module algebra extracted by lem-weil-point-sections-scalar-extension.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q136-642b13135",
+  "group": "Q136",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q136-642b13135 (reviewer sub-agent of L); spot-checked: PASS: this is a plain first split (no repair note), and the statement, stmt_deps and blueprint are byte-identical to the Q28-created node. It creates no new nodes and needs no tool_uses; all nine cited nodes are definitions or Mathlib leaves (O_E is a DVR, valuation-ring torsion-free => flat, flat tensor exactness, base change, tensor universal property, derived category as a localization, exact-functor derived factorization, localization universal property (2)/(3), Mod(R) abelian). I recomputed every step. Step 1: O_E and O_L are valuation rings with Frac = E and L; B, E over A, L over B and L over E are torsion-free, hence flat. Step 2: exact and additive, so finite limits and colimits are preserved. Step 3: u_C/v_C balancing and both inverse composites hold; beta=v_E u_B and its inverse v_B u_E match the stated formulas. Step 4: independence of the fraction presentation is equality in L; uniqueness and naturality hold on generators. Step 5: the L=E identity is correct under the multiplication identifications. Step 6: lifting via (2) gives naturality on all of D(A). Step 7: both tower paths give (n⊗1)⊗acd. Step 8: the whiskering claim holds with the composite factorization isos, via naturality of phi in chain maps; equality comes from (3). Edge cases N=0, torsion A/(s), E=L, degenerate triples and unbounded complexes are all fine. Stacks labels 0539/00HD/00CX/015F/04VG checked in tags/tags. rg duplicate search found only different sheaf-level or fibre-functor nodes; no SGA cited."
  }
 }
