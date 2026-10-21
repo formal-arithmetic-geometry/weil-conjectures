@@ -19888,3 +19888,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:38 L: merged deliver/NA/lem-sfb-internal-extension-inverse-image (stage 2; reviewer PASS; parallel immutable checks)
 - 03:39 L: merged deliver/Q66/lem-sf-etale-stalk-tor-test (reviewer PASS; first push; new nodes: 0)
 - 03:39 L: merged deliver/Q17/lem-weil-pbc-flat-constant-tensor-pro-zero-cones (reviewer PASS; first push; new nodes: 0)
+- 03:39 L: merged deliver/Q103/lem-sfb-coefficient-cocone-comparison-agreement (reviewer FIX; first push; new nodes: 0)
