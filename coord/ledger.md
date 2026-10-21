@@ -22151,3 +22151,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 10:43 L: returned deliver/J4/Sheaf.Paper.QlbarTailModuleColimit (reviewer RETURN: (the landing tools, head 4e6d67427) the delivery did not land: the global build of 67889a9512 failed in Sheaf.AlgebraicG)
 - 10:43 L: returned deliver/Q30/det-nagata-density-normalization-pushforward (reviewer RETURN: (the landing tools, head 6d83ef9d5) the delivery did not land: (merge queue) your landing 20261021T101217-Q30-11931-1769)
 - 10:43 L: returned deliver/Q23/lem-per-rational-realization-degree-reflection (reviewer RETURN: (the landing tools, head 8dd4c1026) the delivery did not land: (merge queue) your landing 20261021T101217-Q23-11931-1770)
+- 10:43 L: returned deliver/Q102/lem-a1-integral-stratum-chart-restrictions (reviewer RETURN: (the landing tools, head c37a7585b) the delivery did not land: (merge queue) your landing 20261021T101508-Q102-174793-17)
