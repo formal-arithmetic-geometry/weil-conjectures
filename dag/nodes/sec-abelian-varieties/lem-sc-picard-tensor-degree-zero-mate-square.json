@@ -158,10 +158,11 @@
   "module": "Sheaf.AlgebraicGeometry.Picard.TensorDegreeZeroMateSquare",
   "file": "lean/Sheaf/AlgebraicGeometry/Picard/TensorDegreeZeroMateSquare.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.tensorDegreeZeroMateSquare",
-  "statement": "theorem tensorDegreeZeroMateSquare\n    [∀ Y : Scheme.{u}, HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {X S T : Scheme.{u}} (f : X ⟶ S) (g : T ⟶ S)\n    [(tensorPullback (pullback.fst f g)).Additive]\n    [HasInjectiveResolutions (Limits.pullback f g).Modules]\n    (G : X.Modules) [((pushforward f).obj G).IsFiniteLocallyFree] :\n    let M := (pushforward f).obj G\n    let K := (schemeDerivedDirectImage f).obj ((DerivedCategory.singleFunctor\n      (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj G)\n    let H := DerivedCategory.homologyFunctor\n      (SheafOfModules.{u} (moduleRings T.toRingedSpace)) 0\n    ∃ (e0 : (tensorPullback g).obj M ≅\n        H.obj ((derivedPullback g).obj ((DerivedCategory.singleFunctor\n          (SheafOfModules.{u} (moduleRings S.toRingedSpace)) 0).obj M)))\n      (φ : (derivedPullback g).obj K ⟶\n        (schemeDerivedDirectImage (pullback.snd f g)).obj ((DerivedCategory.singleFunctor\n          (SheafOfModules.{u} (moduleRings (Limits.pullback f g).toRingedSpace)) 0).obj\n            ((tensorPullback (pullback.fst f g)).obj G))),\n      IsDerivedModuleBaseChangeMap f g G φ ∧\n      moduleBaseChangeMap f (pullback.snd f g) g (pullback.fst f g)\n          pullback.condition G =\n        e0.hom ≫ H.map ((derivedPullback g).map (canonicalSingleDirectImageMap f G)) ≫\n          H.map φ ≫ (canonicalDirectImageH0Iso (pullback.snd f g)\n            ((tensorPullback (pullback.fst f g)).obj G)).hom",
+  "statement": "theorem tensorDegreeZeroMateSquare\n    [∀ Y : Scheme.{u}, HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {X S T : Scheme.{u}} (f : X ⟶ S) (g : T ⟶ S)\n    [(tensorPullback (pullback.fst f g)).Additive]\n    [HasInjectiveResolutions (Limits.pullback f g).Modules]\n    (G : X.Modules) [((pushforward f).obj G).IsFiniteLocallyFree] :\n    let M := (pushforward f).obj G\n    let K := (schemeDerivedDirectImage f).obj ((DerivedCategory.singleFunctor\n      (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj G)\n    let H := DerivedCategory.homologyFunctor\n      (SheafOfModules.{u} (moduleRings T.toRingedSpace)) 0\n    ∃ (e0 : (tensorPullback g).obj M ≅\n        H.obj ((AlgebraicGeometry.derivedPullback.{u, w} g).obj ((DerivedCategory.singleFunctor\n          (SheafOfModules.{u} (moduleRings S.toRingedSpace)) 0).obj M)))\n      (φ : (AlgebraicGeometry.derivedPullback.{u, w} g).obj K ⟶\n        (schemeDerivedDirectImage (pullback.snd f g)).obj ((DerivedCategory.singleFunctor\n          (SheafOfModules.{u} (moduleRings (Limits.pullback f g).toRingedSpace)) 0).obj\n            ((tensorPullback (pullback.fst f g)).obj G))),\n      IsDerivedModuleBaseChangeMap f g G φ ∧\n      moduleBaseChangeMap f (pullback.snd f g) g (pullback.fst f g)\n          pullback.condition G =\n        e0.hom ≫ H.map ((AlgebraicGeometry.derivedPullback.{u, w} g).map\n          (canonicalSingleDirectImageMap f G)) ≫\n          H.map φ ≫ (canonicalDirectImageH0Iso (pullback.snd f g)\n            ((tensorPullback (pullback.fst f g)).obj G)).hom",
   "branch": "sheaf-dag",
-  "by": "B3",
-  "date": "2026-10-13"
+  "by": "P2",
+  "date": "2026-10-21",
+  "note": "Restore the complete quarantined zero-hole proof. Explicitly name AlgebraicGeometry.derivedPullback.{u, w} to retain the pinned shared derived-category functor after the upstream namespace collision. All binders, hypotheses, canonical comparisons, conclusion, dependencies and the unit route are retained."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -174,14 +175,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "F2",
+  "reviewer": "C-b7657",
+  "group": "P2",
   "result": "pass",
-  "landing": "20261013T082342-L-1634505",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261021T022440-L-2847936",
+  "kind": "proof",
+  "note": "independent cc review: delivered TensorDegreeZeroMateSquare.lean vs quarantine archive (only derivedPullback qualified as AlgebraicGeometry.derivedPullback.{u,w}, same functor as IsDerivedModuleBaseChangeMap); node vs live (lean field only); compile 25.8 s clean, axioms standard; no live importers"
  },
  "lean_audit": {
   "master": {
