@@ -19,7 +19,7 @@
  ],
  "proof": [
   {
-   "text": "Write $\\mathcal A=\\operatorname{Mod}(R)$ and $\\mathcal A'=\\operatorname{Mod}(S)$, and distinguish the complex/homotopy constant-tower functors $\\Delta_K,\\Delta'_K$ from their induced derived functors $\\Delta_D,\\Delta'_D$. Kernels and cokernels of towers are levelwise, so a constant short exact sequence is short exact; hence $\\Delta,\\Delta'$ are exact. Apply exact-functor derived factorization to obtain $\\Delta_D Q\\cong Q_{\\mathrm{Tow}}\\Delta_K$ and $\\Delta'_D Q'\\cong Q'_{\\mathrm{Tow}}\\Delta'_K$. Termwise module pullback of a constant tower has all levels $F(P)$ and identity transitions, so $\\widetilde F\\Delta_K=\\Delta'_K F$, naturally on complexes and homotopy classes. Set $U=\\Delta'_D L$ and $V=\\widetilde L\\Delta_D$; from now on use the preceding canonical identifications in their components.",
+   "text": "Write $\\mathcal A=\\operatorname{Mod}(R)$ and $\\mathcal A'=\\operatorname{Mod}(S)$, and distinguish the complex/homotopy constant-tower functors $\\Delta_K,\\Delta'_K$ from their induced derived functors $\\Delta_D,\\Delta'_D$. Kernels and cokernels of towers are levelwise, so a constant short exact sequence is short exact; hence $\\Delta,\\Delta'$ are exact. Apply exact-functor derived factorization to obtain $\\Delta_D Q\\cong Q_{\\mathrm{Tow}}\\Delta_K$ and $\\Delta'_D Q'\\cong Q'_{\\mathrm{Tow}}\\Delta'_K$. Termwise module pullback of a constant tower has all levels $F(P)$ and identity transitions, so $\\widetilde F\\Delta_K=\\Delta'_K F$, naturally on complexes and homotopy classes. Set $U=\\Delta'_D L$ and $V=\\widetilde L\\Delta_D$; from now on use the preceding canonical identifications in their components. In Lean the already defined constantTowerComplexComparison and transported source/target counits retain precisely these canonical identifications.",
    "uses": [
     "lem-weil-tower-category-levelwise-abelian",
     "lem-weil-pbc-exact-functor-derived-factorization"
@@ -31,7 +31,7 @@
    }
   },
   {
-   "text": "Let $\\mathcal P$ be the class of K-flat complexes with flat terms. The diagram-replacement theorem with the one-object category gives, for every complex $X$, a quasi-isomorphism $P\\to X$ with $P\\in\\mathcal P$. Its tower version gives the resolving class of objectwise K-flat flat-term tower complexes, and $\\Delta_KP$ belongs to this class because every evaluation is $P$. The same theorem says that pullback inverts quasi-isomorphisms between objects of these respective classes. The resolving-class derived-functor theorem therefore makes $\\varepsilon_P$ and $T_P:=\\tau_{\\Delta_KP}$ invertible. This applies to the chosen universal pairs: compare each with the pair supplied by that theorem using universality in both directions; uniqueness makes the composites identities and the comparison preserves the counit. Put $E_P=\\Delta'_D(\\varepsilon_P):U(QP)\\to Q'_{\\mathrm{Tow}}\\Delta'_KF(P)$ and $a_P=T_P^{-1}E_P:U(QP)\\to V(QP)$. Both factors are isomorphisms.",
+   "text": "Let $\\mathcal P$ be the class of K-flat complexes with flat terms. The diagram-replacement theorem with the one-object category gives, for every complex $X$, a quasi-isomorphism $P\\to X$ with $P\\in\\mathcal P$. Its tower version gives the resolving class of objectwise K-flat flat-term tower complexes, and $\\Delta_KP$ belongs to this class because every evaluation is $P$. The same theorem says that pullback inverts quasi-isomorphisms between objects of these respective classes. The resolving-class derived-functor theorem therefore makes $\\varepsilon_P$ and $T_P:=\\tau_{\\Delta_KP}$ invertible. This applies to the chosen universal pairs: compare each with the pair supplied by that theorem using universality in both directions; uniqueness makes the composites identities and the comparison preserves the counit. Put $E_P=\\Delta'_D(\\varepsilon_P):U(QP)\\to Q'_{\\mathrm{Tow}}\\Delta'_KF(P)$ and $a_P=T_P^{-1}E_P:U(QP)\\to V(QP)$. Both factors are isomorphisms. The private ringed_resolution and ringed_tower_resolution specialize the diagram theorem; towers are first indexed by AsSmall.{u} of Nat.op and then restricted back. The private counit_iso_on_resolving transports computation from the supplied homotopy universal pair to the chosen cochain pair by pointwise Kan restriction along the full homotopy quotient and leftDerivedUnique.",
    "uses": [
     "lem-weil-pbc-diagram-kflat-replacements",
     "lem-pur-left-derived-from-kflat-class"
@@ -43,7 +43,7 @@
    }
   },
   {
-   "text": "For any homotopy-category morphism $t:P\\to P'$ between objects of $\\mathcal P$, put $H(t)=Q'_{\\mathrm{Tow}}\\Delta'_KF(t)$. Naturality of the two counits gives $T_{P'}V(Qt)=H(t)T_P$ and $E_{P'}U(Qt)=H(t)E_P$. Consequently\n$$T_{P'}V(Qt)a_P=H(t)E_P=E_{P'}U(Qt)=T_{P'}a_{P'}U(Qt).$$\nCancel the isomorphism $T_{P'}$ to get $V(Qt)a_P=a_{P'}U(Qt)$. Thus the explicitly defined $a_P$ is natural on the full resolving class. This calculation uses the counits of the chosen pairs, not a comparison chosen without its counit.",
+   "text": "For any homotopy-category morphism $t:P\\to P'$ between objects of $\\mathcal P$, put $H(t)=Q'_{\\mathrm{Tow}}\\Delta'_KF(t)$. Naturality of the two counits gives $T_{P'}V(Qt)=H(t)T_P$ and $E_{P'}U(Qt)=H(t)E_P$. Consequently\n$$T_{P'}V(Qt)a_P=H(t)E_P=E_{P'}U(Qt)=T_{P'}a_{P'}U(Qt).$$\nCancel the isomorphism $T_{P'}$ to get $V(Qt)a_P=a_{P'}U(Qt)$. Thus the explicitly defined $a_P$ is natural on the full resolving class. This calculation uses the counits of the chosen pairs, not a comparison chosen without its counit. The private comparison_from_resolutions checks this cancellation using the naturality of both transported cochain counits, after the quotientCompQhIso transport.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -52,7 +52,7 @@
    }
   },
   {
-   "text": "In $K(\\mathcal A)$ the quasi-isomorphisms $W$ admit a right calculus of fractions and $Q$ is their localization. Apply the resolving-class extension lemma with source $K(\\mathcal A)$, target $D(\\operatorname{Tow}(\\mathcal A'))$, resolving predicate $\\mathcal P$, functors $UQ,VQ$, and components $a_P$. Its resolution hypothesis is Step 2, its naturality hypothesis is Step 3, and $UQ$ inverts $W$ because $Q$ does. It supplies a natural transformation $\\gamma:UQ\\to VQ$ with $\\gamma_P=a_P$. The homotopy-category objects here are the same underlying complexes; the replacements of Step 2 give the required morphisms in that category.",
+   "text": "In $K(\\mathcal A)$ the quasi-isomorphisms $W$ admit a right calculus of fractions and $Q$ is their localization. Apply the resolving-class extension lemma with source $K(\\mathcal A)$, target $D(\\operatorname{Tow}(\\mathcal A'))$, resolving predicate $\\mathcal P$, functors $UQ,VQ$, and components $a_P$. Its resolution hypothesis is Step 2, its naturality hypothesis is Step 3, and $UQ$ inverts $W$ because $Q$ does. It supplies a natural transformation $\\gamma:UQ\\to VQ$ with $\\gamma_P=a_P$. The homotopy-category objects here are the same underlying complexes; the replacements of Step 2 give the required morphisms in that category. The homotopy resolving predicate is p(X.as). Fullness of the homotopy quotient reduces the representative naturality check to a chain map, so exists_natTrans_from_resolvingClass applies directly.",
    "uses": [
     "lem-pc-quasi-isomorphisms-multiplicative-system",
     "lem-sc-nattrans-from-resolving-class"
@@ -64,7 +64,7 @@
    }
   },
   {
-   "text": "For a resolution $s:P\\to X$ as in Step 2, naturality of $\\gamma$ gives\n$$\\gamma_X=V(Qs)a_PU(Qs)^{-1}.$$\nEvery factor is invertible, since $Qs$ is invertible. Thus $\\gamma$ is a natural isomorphism (inverting its naturality squares gives the naturality of its componentwise inverse). Both $UQ$ and $VQ$ invert quasi-isomorphisms and are already lifts of $U,V$ along $Q$. Apply the natural-isomorphism lifting clause of the localization universal-property node to obtain $b:U\\xrightarrow{\\sim}V$ with $b_{QX}=\\gamma_X$. At $P\\in\\mathcal P$ this yields $b_{QP}=T_P^{-1}E_P$, so $\\tau_{\\Delta P}b_{QP}=\\Delta'(\\varepsilon_P)$ as required.",
+   "text": "For a resolution $s:P\\to X$ as in Step 2, naturality of $\\gamma$ gives\n$$\\gamma_X=V(Qs)a_PU(Qs)^{-1}.$$\nEvery factor is invertible, since $Qs$ is invertible. Thus $\\gamma$ is a natural isomorphism (inverting its naturality squares gives the naturality of its componentwise inverse). Both $UQ$ and $VQ$ invert quasi-isomorphisms and are already lifts of $U,V$ along $Q$. Apply the natural-isomorphism lifting clause of the localization universal-property node to obtain $b:U\\xrightarrow{\\sim}V$ with $b_{QX}=\\gamma_X$. At $P\\in\\mathcal P$ this yields $b_{QP}=T_P^{-1}E_P$, so $\\tau_{\\Delta P}b_{QP}=\\Delta'(\\varepsilon_P)$ as required. The extended transformation is componentwise invertible by a resolving quasi-isomorphism; Localization.liftNatIso supplies the derived comparison, and IsIso.eq_comp_inv gives the inverse formula.",
    "uses": [
     "lem-weil-pbc-localization-universal-property"
    ],
@@ -75,7 +75,7 @@
    }
   },
   {
-   "text": "Let $c:U\\xrightarrow{\\sim}V$ satisfy the displayed normalization. Cancelling $T_P$ gives $c_{QP}=a_P=b_{QP}$ for every $P\\in\\mathcal P$. For any complex $X$, choose $s:P\\to X$ as in Step 2. Naturality of $b,c$ gives\n$$c_{QX}=V(Qs)c_{QP}U(Qs)^{-1}=V(Qs)b_{QP}U(Qs)^{-1}=b_{QX}.$$\nThe faithfulness clause (3) of the localization universal-property node makes $c=b$ on the derived category. Equality of natural isomorphisms follows from equality of their forward transformations. This proves uniqueness under exactly the representative normalization in the statement, without imposing a counit equation on non-K-flat complexes.",
+   "text": "Let $c:U\\xrightarrow{\\sim}V$ satisfy the displayed normalization. Cancelling $T_P$ gives $c_{QP}=a_P=b_{QP}$ for every $P\\in\\mathcal P$. For any complex $X$, choose $s:P\\to X$ as in Step 2. Naturality of $b,c$ gives\n$$c_{QX}=V(Qs)c_{QP}U(Qs)^{-1}=V(Qs)b_{QP}U(Qs)^{-1}=b_{QX}.$$\nThe faithfulness clause (3) of the localization universal-property node makes $c=b$ on the derived category. Equality of natural isomorphisms follows from equality of their forward transformations. This proves uniqueness under exactly the representative normalization in the statement, without imposing a counit equation on non-K-flat complexes. The Lean proof cancels the image of a resolving quasi-isomorphism and then the invertible target counit on the resolving source; Localization.natTrans_ext and Iso.ext finish uniqueness.",
    "uses": [
     "lem-weil-pbc-localization-universal-property"
    ],
@@ -98,7 +98,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
-  "place": "Completed-pullback invocation, expanded constant-tower comparison in parent presentation-transport Step 4; resolving-class construction from Stacks 06XN and existing DAG descent/localization lemmas."
+  "place": "Completed-pullback invocation, expanded constant-tower comparison in parent presentation-transport Step 4; resolving-class construction from Stacks 06XN and existing DAG descent/localization lemmas. Formalized by T8 on 2026-10-21 following the same six steps, including universe lifting of tower diagrams and pointwise transfer of the cochain counit."
  },
  "mathlib_searches": [
   {
@@ -255,5 +255,15 @@
   "group": "NB",
   "result": "pass",
   "note": "Clause-by-clause match. The sites and coefficients use the recorded RingedToposMorphism convention. The pullback is an additive left adjoint to f.modules, the same interface as the landed diagram_pullback_quasiIso. (L,ε) and (Lt,τ) are arbitrary IsLeftDerivedFunctor pairs over quasiIso. The towers are ℕᵒᵖ functors. ∃! b : L⋙Δ'_D ≅ Δ_D⋙Lt is normalized only on IsAcyclicTensorKFlat ∧ flat-term P: b ≫ Lt(ρ)≫τ_{ΔK P} = Δ'_D(ε_P)≫ρ'≫Q(compConstIso), and the composites are parallel. The added inverse-formula clause is implied, so the ∃! is equivalent. Helpers are canonical composites or transparent packaging, not hollow. Docstrings carry the source, blueprint id and six proof steps. The proof is sorry only. lean.statement is verbatim and the declaration inventory matches. No duplicate found (CompletionMateComparison.constantPullIso is site-specific). Not dropped; only the lean record changed. nt_compile timed out at 60 s twice at load 183/193 (9-14 s CPU). lcompile.run(timeout=560) gave rc 0, no warnings, 274.8 s wall at load ~180. The worker recorded scompile at 26.4 s and a dry run OK. Advisory: wrapper-only and proof-only imports. Land at lower load."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T8",
+  "result": "pass",
+  "landing": "20261021T120647-L-3930039",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
