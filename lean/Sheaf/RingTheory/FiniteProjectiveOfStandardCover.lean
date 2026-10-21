@@ -9,6 +9,7 @@ public import Mathlib.Algebra.Module.LocalizedModule.Basic
 public import Mathlib.Algebra.Module.Projective
 public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.RingTheory.Localization.Away.Basic
+import Mathlib.RingTheory.Flat.EquationalCriterion
 import Sheaf.RingTheory.FinitePresentationAndFlatOfFiniteFreeStandardCover
 
 /-!
@@ -43,6 +44,10 @@ theorem finite_projective_of_localizationAway_free
       Module.Finite (Localization.Away (f i)) (LocalizedModule.Away (f i) N) ∧
       Module.Free (Localization.Away (f i)) (LocalizedModule.Away (f i) N)) :
     Module.Finite R N ∧ Module.Projective R N := by
-  sorry
+  obtain ⟨hfp, hflat⟩ :=
+    finitePresentation_and_flat_of_finite_free_standard_cover f hspan hlocal
+  let : Module.FinitePresentation R N := hfp
+  let : Module.Flat R N := hflat
+  exact ⟨inferInstance, Module.Flat.projective_of_finitePresentation⟩
 
 end Module
