@@ -1,6 +1,6 @@
 # Work queue
 
-385 items; claim with `tools/claim.py next <group> [--stage N]`.
+386 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Rework: quarantined by the upstream sync (13 clusters, 2095 modules)
 
@@ -76,13 +76,14 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 
 Not open yet: 355 nodes that below a finished node, not needed, 8 nodes that wait for stage 1 (statement downstream not grounded), 124 nodes that wait for a statement dependency (bottom-up).
 
-## Stage 3: modules to prove (323)
+## Stage 3: modules to prove (324)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
 | module | distance to a target | sorry | kind | route / steps to the nearest route sorry |
 |---|---|---|---|---|
 | `Sheaf.Paper.CompleteResidueCohomologyBounds` | - | 1 | repair | route |
+| `WeilConjectures.SixFunctors.Etale.Derived.Exchange` | 14 | 1 | repair | route |
 | `WeilConjectures.WeilSheaf.PoincareDualityLisse` | 9 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.ProEtaleTorIntervalLocalDetection` | - | 1 | proof | 1 |
 | `Sheaf.CategoryTheory.CoextensionIsoEvaluationFormula` | - | 1 | proof | 1 |
