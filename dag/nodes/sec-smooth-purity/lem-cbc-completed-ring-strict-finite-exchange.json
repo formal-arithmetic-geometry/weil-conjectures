@@ -17,9 +17,151 @@
   "lem-cbc-proetale-extension-zero-base-change",
   "prop-weil-pbc-proetale-constant-exact"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the slice-site equivalences of [lem-weil-proetale-weakly-etale-localization] for $j,j'$. The datum defines completed rings by compatible families of finite coefficient sections. Thus, on $V\\to U$, $A_X|_U(V)=\\varprojlim_n(P_n)_X(V)=\\varprojlim_n(P_n)_U(V)=A_U(V)$, with the same operations, restrictions and projections. This also identifies $A_{X'}|_{U'}=A_{U'}$. The coefficient maps $c_g$ and $c_{g_U}$ of [def-weil-pbc-completed-pullback] are compatible with these identifications: after each finite projection both are the constant-coefficient base-change map, and maps into the displayed limit agree when all projections agree. In particular the ring map on the localized square is exactly the map prescribed for $g_U$. No isomorphism $g^{-1}A_X=A_{X'}$ is asserted.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "def-weil-pbc-adic-coefficient-datum",
+    "def-weil-pbc-completed-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Restriction to localized sites; completed rings here are the sectionwise limits in the coefficient datum."
+   }
+  },
+  {
+   "text": "Write $E=j_!$ and $E'=j'_!$ for sheafified module extension for the completed rings. By [lem-pur-site-restriction-module-adjunction-exact], these are exact and satisfy $E\\dashv j^*$ and $E'\\dashv j'^*$. Apply [lem-weil-pbc-ringed-topoi-module-adjunction] to $c_g,c_{g_U}$: ordinary module pullbacks $g^*,g_U^*$ have the corresponding module direct images as right adjoints, with actions through the adjunct ring maps. The composite-adjunction formula [def-weil-pbc-composite-adjunction] therefore gives $L_1=g^*E\\dashv R_1=j^*g_*$ and $L_2=E'g_U^*\\dashv R_2=g_{U*}j'^*$. All these are adjunctions on sheaves over the completed rings, before deriving anything.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DI (lemma-extension-by-zero), 03DJ (lemma-extension-by-zero-exact), 03D7 (lemma-adjoint-pullback-pushforward-modules)."
+   }
+  },
+  {
+   "text": "The site functor for $g$ is $V\\mapsto X'\\times_X V$, by [def-weil-proetale-inverse-image]. Localize it at $U$ and apply [lem-weil-pbc-localize-ringed-site-morphism]. Its hypotheses hold because this is the continuous functor defining the pro-etale morphism, the sites use the fixed small skeleta, and step 1 identifies its restricted ring map. The cartesian square identifies $V\\times_UU'$ with $V\\times_XX'$ for every $V\\to U$: a pair $(v,x')$ determines its unique $U'$-coordinate by the fibre-product property. Denote this isomorphism by $a_V:V\\times_UU'\\to V\\times_XX'$. Its projections show it is natural in $V$. The localization theorem gives an $A_U$-linear natural isomorphism $t:R_1\\xrightarrow{\\sim}R_2$; on a sheaf $H$ its value at $V$ is $H(a_V):H(V\\times_XX')\\to H(V\\times_UU')$. Its inverse is $H(a_V^{-1})$. Thus the comparison is specified also on scalar actions, rather than only on the underlying abelian sheaves.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "lem-weil-pbc-localize-ringed-site-morphism",
+    "def-cbc-open-immersion-square"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04J0 (lemma-localize-morphism-ringed-sites), sectionwise direct-image comparison."
+   }
+  },
+  {
+   "text": "Put $\\delta=t^{-1}:R_2\\to R_1$. Let $\\eta_i,\\varepsilon_i$ be the units and counits of the composite adjunctions of step 2. By [lem-weil-pbc-conjugate-iso-unit-equation] there is a natural isomorphism $\\beta:L_1\\to L_2$ characterized by $R_1(\\beta_F)\\eta_{1,F}=\\delta_{L_2F}\\eta_{2,F}$. Explicitly,\n$$\\beta_F=\\varepsilon_{1,L_2F}\\,L_1(\\delta_{L_2F})\\,L_1(\\eta_{2,F}),\\qquad\n\\gamma_F=\\varepsilon_{2,L_1F}\\,L_2(t_{L_1F})\\,L_2(\\eta_{1,F}).$$\nThe reverse conjugation gives $\\gamma=\\beta^{-1}$; uniqueness under the unit equation proves both composite identities. These formulas specify actual maps of completed-ring module sheaves. They use the sectionwise cartesian comparison from step 3 and so specify the canonical open exchange, not an arbitrary isomorphism.",
+   "uses": [
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0B65 (lemma-transformation-between-functors-and-adjoints), applied to the two composite adjunctions."
+   }
+  },
+  {
+   "text": "For a strict tower complex $M_\\bullet$, apply $\\beta$ and $\\gamma$ in each tower index and complex degree. If $d$ is its differential and $v_n:M_{n+1}\\to M_n$ its transition, naturality gives\n$$L_2(d)\\beta=\\beta L_1(d),\\qquad L_2(v_n)\\beta_{M_{n+1}}=\\beta_{M_n}L_1(v_n),$$\nand the same equations with $\\gamma$ and $L_1,L_2$ interchanged. Hence these are inverse strict tower chain maps. The two composite identities hold in each degree and index already before localization. They are linear over $A_{X'}$ because each constituent in step 4 is a morphism in the module category. This is a simultaneous construction for every strict tower; it does not try to lift a family of morphisms in evaluated derived categories.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Degreewise application of the natural transformations constructed in step 4."
+   }
+  },
+  {
+   "text": "Represent $K_\\bullet$ by a strict tower complex $M_\\bullet$ and take one objectwise flat-term K-flat replacement $P_\\bullet\\to M_\\bullet$ from [lem-weil-pbc-diagram-kflat-replacements], with the small index category $\\mathbf N_{\\geq1}^{\\mathrm{op}}$. By [lem-cbc-ringed-open-flat-resolution], $EP_\\bullet\\to EM_\\bullet$ is again such a replacement, including the original strict transitions. Exactness of $E'$ and levelwise exactness of towers give its termwise derived functor [lem-pur-site-restriction-module-adjunction-exact, lem-weil-tower-category-levelwise-abelian, lem-sf-exact-functor-derived-triangulated]. Thus step 5 at $P_\\bullet$ is a strict chain isomorphism\n$$g^*EP_\\bullet\\xrightarrow{\\beta_{P_\\bullet}}E'g_U^*P_\\bullet$$\nrepresenting $G_gJ_jK_\\bullet\\to J_{j'}G_{g_U}K_\\bullet$, with inverse represented by $\\gamma_{P_\\bullet}$. The diagram replacement theorem says pullback preserves quasi-isomorphisms between these replacements. The resolving-class universal property [lem-pur-left-derived-from-kflat-class] then derives the two inverse natural transformations; their identities remain identities by that universal property. This makes the result natural in $K_\\bullet$ and independent of the chosen replacement, hence also natural in $K$ through the reduction functor.",
+   "uses": [
+    "lem-weil-pbc-diagram-kflat-replacements",
+    "lem-cbc-ringed-open-flat-resolution",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-tower-category-levelwise-abelian",
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-pur-left-derived-from-kflat-class"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Strict diagram K-flat replacement and open K-flat preservation as stated by the cited nodes; resolving-class descent in derived.tex Tag 06XN."
+   }
+  },
+  {
+   "text": "To identify the finite objects, use [lem-cbc-ringed-open-strict-reduction] for $j$: it gives the actual strict isomorphism $(j_!K)_\\bullet\\cong J_jK_\\bullet$, represented on a K-flat $Q$ by $[p]\\otimes b\\mapsto[p\\otimes b|_U]$. It applies to arbitrary $K$, with no quasi-compactness or completeness assumption. The finite-evaluation assertion in [def-weil-pbc-completed-pullback], applied to $j_!K$ and to $K$ for $g_U$, now identifies the evaluations of the two objects in step 6 with the restrictions of $g_n^*j_!K_n$ and $j'_!g_{U,n}^*K_n$. Here reduction of $j_!K$ as a $(P_n)_X$-complex is also part of the strict-reduction lemma. The comparisons are those of [lem-weil-pbc-constant-completion-equivalence], and finite pullback is exact by [prop-weil-pbc-proetale-constant-exact]. Thus $Lg_n^*$ and $Lg_{U,n}^*$ at these finite objects are represented by the specified exact finite module pullbacks, even when $K$ is unbounded.",
+   "uses": [
+    "lem-cbc-ringed-open-strict-reduction",
+    "def-weil-pbc-completed-pullback",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "prop-weil-pbc-proetale-constant-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+    "place": "Finite-exchange identification before derived inverse limits, with completed-ring typing supplied by the cited coefficient comparisons."
+   }
+  },
+  {
+   "text": "Check the map under these identifications. The ringed open normalization [lem-sf-open-tensor-normalization] applies to $B_X=A_X,B_{X'}=A_{X'}$ and $c_g$, by step 1. It characterizes the inverse derived exchange as the $j'_!\\dashv j'^*$-adjunct of $Lg_U^*u$ followed by the inverse pullback compositor, and says its restriction is the identity after the open unit identifications. The conjugation construction of steps 3-6 is this normalization: the right-adjoint comparison is exactly $H(a_V)$ and both composite units are the specified ones. The finite comparison preserves the open unit: on an extension summand it takes $p\\mapsto[p]$ to $p\\otimes a\\mapsto[p\\otimes a]$. Its balancing map is $(p\\otimes b)\\otimes a\\mapsto p\\otimes q(b)a$; inserting the unit gives $p\\otimes1$ on either side. Restriction and base-change identifications use $a_V$ on both sides, and the structural ring maps agree after each projection by step 1. These equalities on tensor sections and extension summands descend by sheafification and by the K-flat comparisons of step 7. Therefore the inverse finite component has precisely the adjunct $g_{U,n}^*u$ followed by the inverse pullback-composition identification. By [lem-cbc-finite-open-exchange-scalars] this is the inverse of the canonical finite exchange of [lem-cbc-proetale-extension-zero-base-change]. Uniqueness of an adjunction transpose identifies the inverse maps, and hence identifies $b_{K,n}$ with that finite exchange.",
+   "uses": [
+    "lem-sf-open-tensor-normalization",
+    "lem-cbc-finite-open-exchange-scalars",
+    "lem-cbc-proetale-extension-zero-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DI (lemma-extension-by-zero), explicit summand adjunction; ringed derived normalization and coefficient compatibility as stated in the cited nodes."
+   }
+  },
+  {
+   "text": "For $b\\ge a\\ge1$, the finite-exchange scalar lemma applies to the finite-ring quotient $P_b\\to P_a$. It says both normalized finite exchanges and their inverses commute with the strict semilinear quotient transitions, also as towers over a ring sheaf acting through compatible maps to the finite coefficient sheaves. The reduction tower has exactly these maps by [def-weil-pbc-adic-coefficient-datum], and the finite coefficient comparisons commute with them by [lem-weil-pbc-constant-completion-equivalence]. Thus the identifications in steps 7-8 respect every quotient transition, not only adjacent ones. At level $n$, restriction of scalars through $A_{X'}\\to(P_n)_{X'}$ gives the action in the statement, and the finite component maps and their inverses are linear for that action by [lem-cbc-finite-open-exchange-scalars]. Together with the strict representatives of step 6, this proves all the asserted compatibility clauses. The construction ended in $D(\\operatorname{Tow}_A(X'))$; no inverse limit, completeness, quasi-compactness, or constructibility was used.",
+   "uses": [
+    "lem-cbc-finite-open-exchange-scalars",
+    "def-weil-pbc-adic-coefficient-datum",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+    "place": "Finite-exchange/reduction identification before Rlim; scalar compatibility is the existing finite exchange lemma."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-proetale-weakly-etale-localization",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-completed-pullback",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "def-weil-pbc-composite-adjunction",
+  "def-weil-proetale-inverse-image",
+  "lem-weil-pbc-localize-ringed-site-morphism",
+  "def-cbc-open-immersion-square",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-weil-pbc-diagram-kflat-replacements",
+  "lem-cbc-ringed-open-flat-resolution",
+  "lem-weil-tower-category-levelwise-abelian",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-pur-left-derived-from-kflat-class",
+  "lem-cbc-ringed-open-strict-reduction",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "prop-weil-pbc-proetale-constant-exact",
+  "lem-sf-open-tensor-normalization",
+  "lem-cbc-finite-open-exchange-scalars",
+  "lem-cbc-proetale-extension-zero-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+  "place": "Finite-exchange/reduction identification before Rlim; ringed adjunction and strict K-flat representative refinement using the cited Stacks lemmas."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,10 +197,45 @@
    "results": "[leansearch] OK 8 hit(s) AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, ModuleCat.Tilde.toOpen_res, AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso, AlgebraicGeometry.pullbackRestrictIsoRestrict, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, IsAdicComplete.StrictMono.factorPow_comp_extend, SheafOfModules.sheafificationCompPullback",
    "date": "2026-10-21",
    "verdict": "no match: hits concern ordinary ring localization, simplicial/Dold-Kan comparisons, generic exact functors or geometric/module pullback, not this ringed strict completion statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived module pullback commutes with extension by zero for an open subtopos on strict diagrams over completed coefficient sheaves",
+   "results": "8 hits: SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullbackComp, SheafOfModules.Presentation.map_π_eq, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc",
+   "date": "2026-10-21",
+   "verdict": "no match: generic module pullback, free-module pullback and its composition do not state open extension exchange on completed-ring strict towers."
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|lowerShriek|strict.*tower",
+   "results": "Mathlib/CategoryTheory; 0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: generic module pullback, free-module pullback and its composition do not state open extension exchange on completed-ring strict towers."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"pullback\"",
+   "results": "12 hits: PresheafOfModules.pullbackId, PresheafOfModules.pullbackObjIsDefined, PresheafOfModules.pullback, PresheafOfModules.pullbackObjIsDefined_eq_top, PresheafOfModules.pullbackObjIsDefined_free_yoneda, PresheafOfModules.pullbackPushforwardAdjunction, PresheafOfModules.pullbackComp, PresheafOfModules.pullback_comp_id",
+   "date": "2026-10-21",
+   "verdict": "no match: generic module pullback, free-module pullback and its composition do not state open extension exchange on completed-ring strict towers."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived pullback of sheaves of modules commutes with open extension by zero and quotient coefficient transitions",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pullback, SheafOfModules.pullback, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso.congr_simp, SheafOfModules.pullbackObjFreeIso_hom_naturality, CategoryTheory.Functor.sheafPullbackConstruction.sheafPullback, SheafOfModules.pullback_assoc, SheafOfModules.PullbackConstruction.adjunction",
+   "date": "2026-10-21",
+   "verdict": "no match: generic module pullback, free-module pullback and its composition do not state open extension exchange on completed-ring strict towers."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a ringed topos morphism localized at an open subobject the left derived module pullback commutes with extension by zero on inverse systems",
+   "results": "8 hits: SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.Presentation.map_π_eq, SheafOfModules.pullbackComp, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullback_assoc, SheafOfModules.pullbackObjUnitToUnit",
+   "date": "2026-10-21",
+   "verdict": "no match: generic module pullback, free-module pullback and its composition do not state open extension exchange on completed-ring strict towers."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-cbc-completed-extension-zero-comparison",
@@ -76,5 +253,69 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-cbc-completed-ring-strict-finite-exchange",
+  "worker": "stage1",
+  "summary": "Q57 constructed the completed-ring open exchange from conjugate composite adjunctions, then derived actual inverse strict tower maps using one diagram K-flat replacement. Reused existing open-flat and strict-reduction lemmas and verified the finite component by its normalized adjoint mate and scalar-transition compatibility. No statement change, new nodes, Lean writing or compilation.",
+  "blueprint": "Realizes exactly the ancestor proof sentence identifying Lg_n^* j_!K_n with j′_! Lg_(U,n)^*K_n, before applying any Rlim. Steps 1-6 construct this simultaneously over completed rings; steps 7-9 identify all finite components and transitions. The ancestor is lem-cbc-completed-extension-zero-comparison; no assertion about products or derived limits is used.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Identifies the pro-etale open site with its slice; a generic site tool for completed coefficient typing."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Supplies exact ringed slice extension and its adjunction for arbitrary ring sheaves, rather than only finite constants."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "Supplies module pullback/pushforward adjunctions for possibly noninvertible completed coefficient ring maps."
+   },
+   {
+    "node": "lem-weil-pbc-localize-ringed-site-morphism",
+    "why": "Supplies the action-compatible sectionwise localization comparison of right adjoints."
+   },
+   {
+    "node": "lem-weil-pbc-diagram-kflat-replacements",
+    "why": "Resolves the whole strict tower at once, with flat-term K-flat evaluations."
+   },
+   {
+    "node": "lem-pur-left-derived-from-kflat-class",
+    "why": "Supplies the universal derived-functor construction and independence of resolving representatives."
+   },
+   {
+    "node": "lem-weil-pbc-constant-completion-equivalence",
+    "why": "Supplies the already specified canonical finite comparisons and their quotient naturality."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-exact",
+    "why": "Identifies the finite derived pullbacks with exact constant-coefficient module pullbacks."
+   },
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "Generic ringed open exchange normalization gives the adjoint-mate and open-unit characterizations, with arbitrary ring sheaves. It does not replace the finite compact-support route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-weil-pbc-localize-ringed-site-morphism",
+  "lem-weil-pbc-diagram-kflat-replacements",
+  "lem-pur-left-derived-from-kflat-class",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "prop-weil-pbc-proetale-constant-exact",
+  "lem-sf-open-tensor-normalization"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q57-8e4e16c58",
+  "group": "Q57",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q57-8e4e16c58 (reviewer sub-agent of L); spot-checked: Live node still unsplit and queued, not dropped, no repair note. Q52 is reviewing a parallel delivery of the same item, but nothing has landed, so I judged this one on its merits. Statement and stmt_deps are byte-identical to live; only split_report is new; proof_deps equals the union of uses (21); no cycle (the item is outside its 2964-node dependency closure; the only citer is the parent); no SGA. Step checks: (1) A_X|_U=A_U by sectionwise limits and weakly-etale localization; c_g|_U=c_{g_U} by projections. (2) Exact E with E⊣j^*, and the ringed module adjunction with no invertibility hypothesis, give composite adjunctions L1=g^*E, L2=E'g_U^*. (3) localize-ringed-site-morphism (Stacks 04J0) plus the cartesian a_V give t:R1≅R2. (4) The conjugate lemma with δ=t^{-1}; mate formulas typed; inverse by uniqueness (0B65). (5) Degreewise naturality gives strict inverse maps. (6) diagram-kflat-replacements plus ringed-open-flat-resolution (verbatim) plus resolving-class theorem: the iso descends independently of the replacement. (7) strict-reduction for arbitrary K and the completed-pullback evaluation clause, which is legitimate on reduction towers (Tor vanishing checked via flatness of Â); finite pullback exact. (8) open-tensor-normalization mate characterization plus finite-open-exchange-scalars pin b_{K,n} to the canonical 03DI-type exchange. (9) Transitions, cocycle and A_{X'}-linearity from the scalars lemma and the datum. The 9 tool_uses are the same ones the parent's reviewer accepted; I accept them. Edge cases: U empty, g=id, j=id, I=A, K=0, unbounded K, non-qc j. No fixes. Advisory: overlaps the diagram clause of lem-sf-open-tensor-normalization, but the item adds finite-component, transition and linearity pins."
+ }
 }

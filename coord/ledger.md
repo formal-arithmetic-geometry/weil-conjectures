@@ -20588,3 +20588,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:14 L: merged deliver/NE/lem-weil-pbc-affine-cohomology-etale-module-realization (reviewer FIX; first push; new nodes: 1)
 - 07:14 L: merged deliver/Q96/def-nagata-homogeneous-localization-degree-zero (reviewer PASS; first push; new nodes: 0)
 - 07:14 L: merged deliver/Q59/lem-sfb-joint-adjunction-model-embedding (reviewer PASS; first push; new nodes: 0)
+- 07:14 L: merged deliver/Q57/lem-cbc-completed-ring-strict-finite-exchange (reviewer PASS; first push; new nodes: 0); claim not held by Q57: not your claim
