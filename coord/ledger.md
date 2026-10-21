@@ -22213,3 +22213,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:11 L: merged deliver/F6/Sheaf.Algebra.Homology.FlatDvrScalarTensor (stage 3; reviewer PASS; first push; landing 20261021T111105-L-4071961 (interface); batch 20261021T110859; modules 9; new nodes 8)
 - 11:11 L: merged deliver/F6/Sheaf.AlgebraicGeometry.FiniteConstantMapNaturality (stage 3; reviewer PASS; after a return; landing 20261021T111108-L-4090733 (proof); batch 20261021T110859; modules 1; new nodes 0)
 - 11:11 L: merged deliver/F6/Sheaf.CategoryTheory.ExactDerivedTransformationPasting (stage 3; reviewer PASS; first push; landing 20261021T111111-L-4107956 (interface); batch 20261021T110859; modules 1; new nodes 0; change records: coord/changes/F6-exact-derived-pasting-imports.md)
+- 11:11 L: merged deliver/F6/Sheaf.Paper.IntegralCtfTriangulated (stage 3; reviewer PASS; first push; landing 20261021T111114-L-4120011 (proof); batch 20261021T110859; modules 1; new nodes 0)

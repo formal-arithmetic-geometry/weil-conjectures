@@ -26,89 +26,91 @@
  ],
  "proof": [
   {
-   "text": "Write $R_j(K)=K\\otimes^L_{\\mathcal O_E}A_{E,j}$. The derived-reduction definition identifies $R_j$ with the exact functor $L\\pi_j^*$ for $\\pi_j:\\widehat{\\mathcal O}_{E,Y}\\to(A_{E,j})_Y$. Thus $R_j$ preserves isomorphisms, zero and distinguished triangles and $R_j(K[m])\\cong R_j(K)[m]$. For $K\\in D^b_c(Y,\\mathcal O_E)$, every $R_j(K)$ is bounded constructible by its definition. All tensor tests below are in $D(Y_{\\mathrm{proet}},A_{E,j})$.",
+   "text": "For each $j\\geq1$ write $R_j(K)=K\\otimes^L_{\\mathcal O_E}A_{E,j}$. By the derived-reduction definition this is change of rings along $\\pi_j:\\widehat{\\mathcal O}_{E,Y}\\to(A_{E,j})_Y$. Apply the exact derived-change-of-rings functor to this morphism of sheaves of commutative rings on the same site. Thus $R_j$ preserves distinguished triangles, zero objects and isomorphisms, and has the shift comparison $R_j(K[m])\\cong R_j(K)[m]$. If $K\\in D^b_c(Y,\\mathcal O_E)$, every $R_j(K)$ is bounded constructible by the integral-category definition. All finite-stage applications below are consequently on the small pro-etale site, with coefficient ring $A_{E,j}$.",
    "uses": [
     "def-weil-integral-derived-reduction",
+    "lem-pur-derived-change-of-rings",
     "def-weil-derived-complete-integral-detailed"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YY, lemma-derived-base-change, coefficient projection on the same site"
+    "place": "Tag 06YY, label lemma-derived-base-change, applied to the identity of the site and the coefficient projection"
    }
   },
   {
-   "text": "The integral constructible subcategory is closed under isomorphisms and contains zero. For $K\\cong L$, step 1 and the fixed-interval isomorphism clause of [lem-weil-proetale-tor-interval-shift], applied with $A=A_{E,j}$ for every $j\\geq1$, transfer the same interval from $R_j(K)$ to $R_j(L)$. Its zero clause supplies $[0,0]$ for all $R_j(0)$. This proves isomorphism closure of $P$ and $P(0)$.",
+   "text": "Tor amplitude is invariant under isomorphisms: compose every cochain representative isomorphism with the inverse of the given isomorphism. A reduction of zero is zero by exactness. The finite-stage triangulation theorem gives this zero object a finite Tor interval [a,b]. At any test degree i, its shift by b-i+1 is another zero object and has Tor interval [a-(b-i+1),i-1] by the quantitative finite-stage shift clause. Transporting back along the isomorphism of zero objects proves vanishing at i. Thus [0,0] works at every reduction level. Integral bounded constructibility and its isomorphism closure are supplied by the existing integral triangulation theorem.",
    "uses": [
     "lem-weil-integral-constructible-triangulated",
-    "lem-weil-proetale-tor-interval-shift"
+    "def-weil-proetale-tor-amplitude",
+    "lem-weil-finite-ctf-triangulated"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08FZ, definition-tor-amplitude, isomorphisms and zero"
+    "place": "Tag 08FZ, label definition-tor-amplitude, and the zero complex in the derived-tensor construction"
    }
   },
   {
-   "text": "If $P(K)$ has uniform interval $[a,b]$, integral constructibility of $K[m]$ follows from [lem-weil-integral-constructible-triangulated]. Apply [lem-weil-proetale-tor-interval-shift] with $A=A_{E,j}$: $R_j(K)[m]$ has interval $[a-m,b-m]$. Step 1 and its isomorphism clause give that interval for $R_j(K[m])$. It is ordered and independent of $j$. Conversely use $-m$ and $(K[m])[-m]\\cong K$.",
+   "text": "For a uniform Tor interval [a,b] and an integer m, apply the quantitative shift clause of finite_ctf_isTriangulated to every reduction, obtaining [a-m,b-m]. Its clause requires only Tor amplitude, without a constructibility premise. Transport along the exact reduction functor's shift comparison using step 2. The endpoints do not depend on the reduction level. Integral constructibility is shift-stable by its existing triangulation theorem; intersect the two shift-stable predicates.",
    "uses": [
     "lem-weil-integral-constructible-triangulated",
-    "lem-weil-proetale-tor-interval-shift"
+    "lem-weil-finite-ctf-triangulated"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08FZ, definition-tor-amplitude, translation by an integer shift"
+    "place": "Tag 08G2, label lemma-cone-tor-amplitude, translation, as recorded with its interval in lem-weil-finite-ctf-triangulated"
    }
   },
   {
-   "text": "For a distinguished triangle $K\\to L\\to M\\to K[1]$ with $P(K),P(M)$, choose uniform intervals $[a_K,b_K]$, $[a_M,b_M]$ and set $a=\\min(a_K,a_M)$, $b=\\max(b_K,b_M)$. Then $a\\leq b$; an integer outside $[a,b]$ lies outside both original intervals, so both reduced outside vertices have Tor amplitude in $[a,b]$ for every $j$.",
+   "text": "Let $K\\to L\\to M\\to K[1]$ be distinguished, with $P(K)$ and $P(M)$. Choose their uniform Tor intervals $[a_K,b_K]$ and $[a_M,b_M]$ and put $a=\\min(a_K,a_M)$ and $b=\\max(b_K,b_M)$. Then $a\\leq b$. For every $j$ and every degree-zero $A_{E,j}$-module sheaf $N$, an integer outside $[a,b]$ is outside each original interval, so the defining tensor cohomology vanishes for both $R_j(K)$ and $R_j(M)$. Both therefore have Tor amplitude in the common interval $[a,b]$, which is independent of $j$.",
    "uses": [
     "def-weil-proetale-tor-amplitude"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08FZ, definition-tor-amplitude, enlargement of an interval"
+    "place": "Tag 08FZ, label definition-tor-amplitude: enlarging the interval"
    }
   },
   {
-   "text": "Integral constructibility of $L$ follows from [lem-weil-integral-constructible-triangulated]. The reduced triangle is distinguished by step 1. Apply the common-interval clause of [lem-weil-proetale-tor-interval-triangle] with $A=A_{E,j}$ and interval $[a,b]$. It gives this Tor interval for $R_j(L)$ for every $j$, so $P(L)$.",
+   "text": "Map the distinguished triangle through each exact integral reduction functor. Apply the quantitative extension clause of finite_ctf_isTriangulated to the outside vertices with the common interval of step 4. This clause requires only Tor amplitude. Thus the middle reduction has the same common interval at every level. The existing integral constructibility triangulation theorem supplies the middle vertex's integral constructibility, and intersection gives the desired property.",
    "uses": [
     "lem-weil-integral-constructible-triangulated",
-    "lem-weil-proetale-tor-interval-triangle"
+    "lem-weil-finite-ctf-triangulated"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08G2, lemma-cone-tor-amplitude, part (2)"
+    "place": "Tag 08G2, label lemma-cone-tor-amplitude, part (2), for each reduced distinguished triangle"
    }
   },
   {
-   "text": "Take the full subcategory on $P$. The preceding steps give isomorphism closure, zero, every integer shift in both directions, and closure under middle vertices of distinguished triangles. These are precisely [def-weil-triangulated-subcategory], with the inherited shifts and triangles.",
+   "text": "Take the full subcategory on the objects satisfying $P$. Step 2 supplies isomorphism closure and zero; step 3 supplies closure under every integer shift (in both directions); steps 4-5 supply extension closure in distinguished triangles. These are precisely the conditions in the definition of a full triangulated subcategory, so this subcategory has the asserted triangulation inherited from the ambient derived category.",
    "uses": [
     "def-weil-triangulated-subcategory"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Triangulated-subcategory criterion: literature/stacks-project/derived.tex, Tag 05QM, definition-triangulated-subcategory"
+    "place": "Tag 08G2 applied as above; subcategory criterion: literature/stacks-project/derived.tex, Tag 05QM, label definition-triangulated-subcategory"
    }
   }
  ],
  "proof_deps": [
   "def-weil-integral-derived-reduction",
+  "lem-pur-derived-change-of-rings",
   "def-weil-derived-complete-integral-detailed",
   "lem-weil-integral-constructible-triangulated",
-  "lem-weil-proetale-tor-interval-shift",
   "def-weil-proetale-tor-amplitude",
-  "lem-weil-proetale-tor-interval-triangle",
+  "lem-weil-finite-ctf-triangulated",
   "def-weil-triangulated-subcategory"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 06YY, 08FZ and 08G2 (2); extracted fixed-coefficient tensor/cohomology arguments are the new shift and triangle lemmas; the uniform-reduction assembly follows the integral paragraph of def-weil-finite-tor-amplitude."
+  "place": "Tags 06YY (lemma-derived-base-change) and 08G2 (lemma-cone-tor-amplitude), part (2), applied to each reduction with a common interval; finite-stage shift bounds as in lem-weil-finite-ctf-triangulated; zero amplitude is deduced from finite-stage zero closure and quantitative shifts, avoiding a separate tensor computation"
  },
  "mathlib_searches": [
   {
@@ -202,5 +204,15 @@
   "group": "NZ",
   "result": "pass",
   "note": "All hypotheses, conclusions, dependencies, docstrings, edge cases, universes, source correspondence, and ten-file compiler evidence checked; no findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261021T111114-L-4120011",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
