@@ -10,11 +10,7 @@ public import Sheaf.CategoryTheory.SiteCoveringAxioms
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 public import Sheaf.Paper.InvertibleTensorScalarExtensionDefinitions
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorBilinearUniversal
-import Sheaf.Algebra.Category.ModuleCat.Presheaf.SheafificationBilinearExtensionExistence
-import Sheaf.Algebra.Category.ModuleCat.Presheaf.SheafificationBilinearExtensionUniqueness
 import Sheaf.Paper.ScalarExtensionBinaryCoherence
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.LocalizedSiteTensorRestriction
 
 /-! # Common-line presentations and nonnegative powers under scalar extension
 
@@ -333,6 +329,580 @@ structure CoefficientNaturality {B A D₀ D₁ D₀' D₁' : Sheaf J CommRingCat
     extensionMap T n ≫ (restrict target.ringMap).map (p'.comparison T n).hom =
       (p.comparison T n).hom ≫ target.powerMap T n
 
+open scoped ChangeOfRings
+
+set_option backward.isDefEq.respectTransparency false
+
+attribute [local semireducible] siteSheafTensorRight changeOfRingsOfUniverses
+
+private def regularMap {R S S' : Sheaf J CommRingCat.{u}}
+    (c : R ⟶ S) (c' : R ⟶ S') (β : S ⟶ S') (h : c ≫ β = c') :
+    regular c ⟶ regular c' where
+  val :=
+    { app := fun U ↦ ModuleCat.ofHom
+        (X := (regular c).val.obj U) (Y := (regular c').val.obj U)
+        { toFun := β.hom.app U
+          map_add' := map_add _
+          map_smul' := by
+            intro r x
+            change S.obj.obj U at x
+            change β.hom.app U (c.hom.app U r * x) =
+              c'.hom.app U r * β.hom.app U x
+            rw [map_mul]
+            have e := ConcreteCategory.congr_hom (congrArg (fun f : R ⟶ S' ↦ f.hom.app U) h) r
+            change β.hom.app U (c.hom.app U r) = c'.hom.app U r at e
+            rw [e] }
+      naturality := by
+        intro U V f
+        ext x
+        exact ConcreteCategory.congr_hom (β.hom.naturality f) x }
+
+private def coefficientLinearMap
+    {B A D D' : Sheaf J CommRingCat.{u}} {a : B ⟶ A}
+    {c : B ⟶ D} {c' : B ⟶ D'} (K : Coefficients a c) (K' : Coefficients a c')
+    (β : D ⟶ D') (h : c ≫ β = c') :
+    regular (a ≫ K.left) ⟶ regular (a ≫ K'.left) :=
+  K.tensorIso.inv ≫ siteSheafTensorSecondMap (regular a) (regularMap c c' β h) ≫
+    K'.tensorIso.hom
+
+private theorem coefficientLinearMap_tmul
+    {B A D D' : Sheaf J CommRingCat.{u}} {a : B ⟶ A}
+    {c : B ⟶ D} {c' : B ⟶ D'} (K : Coefficients a c) (K' : Coefficients a c')
+    (β : D ⟶ D') (h : c ≫ β = c') (U : Cᵒᵖ) (x : A.obj.obj U) (y : D.obj.obj U) :
+    (coefficientLinearMap K K' β h).val.app U (K.left.hom.app U x * K.right.hom.app U y) =
+      K'.left.hom.app U x * K'.right.hom.app U (β.hom.app U y) := by
+  rw [← K.tensor_tmul]
+  change K'.tensorIso.hom.val.app U
+    ((siteSheafTensorSecondMap (regular a) (regularMap c c' β h)).val.app U
+      (K.tensorIso.inv.val.app U (K.tensorIso.hom.val.app U _))) = _
+  have e := congrArg (fun f ↦ f.val.app U) K.tensorIso.hom_inv_id
+  have ee := ConcreteCategory.congr_hom e
+    (siteSheafTensorTmul (regular a) (regular c) U x y)
+  change K.tensorIso.inv.val.app U (K.tensorIso.hom.val.app U _) =
+    siteSheafTensorTmul (regular a) (regular c) U x y at ee
+  rw [ee]
+  change K'.tensorIso.hom.val.app U
+    ((siteSheafTensorSecondMap (regular a) (regularMap c c' β h)).val.app U
+      (siteSheafTensorTmul (regular a) (regular c) U x y)) = _
+  rw [scalarTensor_second_tmul]
+  exact K'.tensor_tmul U x (β.hom.app U y)
+
+private def coefficientAddMap
+    {B A D D' : Sheaf J CommRingCat.{u}} {a : B ⟶ A}
+    {c : B ⟶ D} {c' : B ⟶ D'} (K : Coefficients a c) (K' : Coefficients a c')
+    (β : D ⟶ D') (h : c ≫ β = c') (U : Cᵒᵖ) :
+    K.ring.obj.obj U →+ K'.ring.obj.obj U where
+  toFun := (coefficientLinearMap K K' β h).val.app U
+  map_zero' := map_zero _
+  map_add' := map_add _
+
+private theorem coefficientAddMap_tmul
+    {B A D D' : Sheaf J CommRingCat.{u}} {a : B ⟶ A}
+    {c : B ⟶ D} {c' : B ⟶ D'} (K : Coefficients a c) (K' : Coefficients a c')
+    (β : D ⟶ D') (h : c ≫ β = c') (U : Cᵒᵖ) (x : A.obj.obj U) (y : D.obj.obj U) :
+    coefficientAddMap K K' β h U (K.left.hom.app U x * K.right.hom.app U y) =
+      K'.left.hom.app U x * K'.right.hom.app U (β.hom.app U y) :=
+  coefficientLinearMap_tmul K K' β h U x y
+
+private def coefficientUnit {B A D : Sheaf J CommRingCat.{u}}
+    {a : B ⟶ A} {c : B ⟶ D} (K : Coefficients a c) :
+    siteTensorPresheaf (regular a).val (regular c).val ⟶ (regular (a ≫ K.left)).val :=
+  scalarSheafificationUnit (siteTensorPresheaf (regular a).val (regular c).val) ≫
+    K.tensorIso.hom.val
+
+private theorem coefficientUnit_surjective {B A D : Sheaf J CommRingCat.{u}}
+    {a : B ⟶ A} {c : B ⟶ D} (K : Coefficients a c) :
+    PresheafOfModules.IsLocallySurjective J (coefficientUnit K) := by
+  have hunit : PresheafOfModules.IsLocallySurjective J
+      (scalarSheafificationUnit (siteTensorPresheaf (regular a).val (regular c).val)) :=
+    scalarSheafificationUnit_locallySurjective _
+  have hiso : IsIso ((PresheafOfModules.toPresheaf _).map K.tensorIso.hom.val) := by
+    change IsIso (((SheafOfModules.forget _ ⋙ PresheafOfModules.toPresheaf _).mapIso
+      K.tensorIso).hom)
+    infer_instance
+  dsimp only [coefficientUnit, PresheafOfModules.IsLocallySurjective]
+  rw [Functor.map_comp]
+  exact @Presheaf.isLocallySurjective_comp _ _ J _ _ _ _ _ _ _ _ _ _ _ hunit
+    (@Presheaf.isLocallySurjective_of_iso _ _ J _ _ _ _ _ _ _ _ _ hiso)
+
+private theorem coefficientUnit_tmul {B A D : Sheaf J CommRingCat.{u}}
+    {a : B ⟶ A} {c : B ⟶ D} (K : Coefficients a c) (U : Cᵒᵖ)
+    (x : A.obj.obj U) (y : D.obj.obj U) :
+    (coefficientUnit K).app U (x ⊗ₜ[B.obj.obj U] y) =
+      K.left.hom.app U x * K.right.hom.app U y := by
+  have he := K.tensor_tmul U x y
+  unfold siteSheafTensorTmul at he
+  exact he
+
+private def coefficientSectionUnit {B A D : Sheaf J CommRingCat.{u}}
+    {a : B ⟶ A} {c : B ⟶ D} (K : Coefficients a c) (U : Cᵒᵖ) :
+    (siteTensorPresheaf (regular a).val (regular c).val).obj U →+ K.ring.obj.obj U where
+  toFun := (coefficientUnit K).app U
+  map_zero' := map_zero _
+  map_add' := map_add _
+
+private theorem coefficientSectionUnit_tmul {B A D : Sheaf J CommRingCat.{u}}
+    {a : B ⟶ A} {c : B ⟶ D} (K : Coefficients a c) (U : Cᵒᵖ)
+    (x : (regular a).val.obj U) (y : (regular c).val.obj U) :
+    coefficientSectionUnit K U (x ⊗ₜ[B.obj.obj U] y) =
+      K.left.hom.app U (show A.obj.obj U from x) *
+        K.right.hom.app U (show D.obj.obj U from y) :=
+  coefficientUnit_tmul K U x y
+
+private def commonUnit {A R : Sheaf J CommRingCat.{u}} (α : A ⟶ R)
+    (T : Modules A) {L : Modules R} (e : changeOfRingsOfUniverses α T ≅ L) :
+    changeOfRingsPresheafOfUniverses α T ⟶ L.val :=
+  scalarSheafificationUnit (changeOfRingsPresheafOfUniverses α T) ≫ e.hom.val
+
+private theorem commonUnit_surjective {A R : Sheaf J CommRingCat.{u}} (α : A ⟶ R)
+    (T : Modules A) {L : Modules R} (e : changeOfRingsOfUniverses α T ≅ L) :
+    PresheafOfModules.IsLocallySurjective J (commonUnit α T e) := by
+  have hu : PresheafOfModules.IsLocallySurjective J
+      (scalarSheafificationUnit (changeOfRingsPresheafOfUniverses α T)) :=
+    scalarSheafificationUnit_locallySurjective _
+  have hi : IsIso ((PresheafOfModules.toPresheaf _).map e.hom.val) := by
+    change IsIso (((SheafOfModules.forget _ ⋙ PresheafOfModules.toPresheaf _).mapIso e).hom)
+    infer_instance
+  dsimp only [commonUnit, PresheafOfModules.IsLocallySurjective]
+  rw [Functor.map_comp]
+  exact @Presheaf.isLocallySurjective_comp _ _ J _ _ _ _ _ _ _ _ _ _ _ hu
+    (@Presheaf.isLocallySurjective_of_iso _ _ J _ _ _ _ _ _ _ _ _ hi)
+
+private theorem commonUnit_tmul {A R : Sheaf J CommRingCat.{u}} (α : A ⟶ R)
+    (T : Modules A) {L : Modules R} (e : changeOfRingsOfUniverses α T ≅ L)
+    (U : Cᵒᵖ) (r : R.obj.obj U) (t : T.val.obj U) :
+    (commonUnit α T e).app U (r ⊗ₜ[A.obj.obj U, (α.hom.app U).hom] t) =
+      e.hom.val.app U (scalarExtensionSection α T U r t) := by
+  unfold commonUnit scalarSheafificationUnit scalarExtensionSection
+  rfl
+
+attribute [local instance] coefficientUnit_surjective commonUnit_surjective
+
+attribute [local irreducible] siteSheafTensorRight changeOfRingsOfUniverses
+  coefficientLinearMap coefficientUnit commonUnit
+
+private theorem coefficientAddMap_mul
+    {B A D D' : Sheaf J CommRingCat.{u}} {a : B ⟶ A}
+    {c : B ⟶ D} {c' : B ⟶ D'} (K : Coefficients a c) (K' : Coefficients a c')
+    (β : D ⟶ D') (h : c ≫ β = c') (U : Cᵒᵖ) (z w : K.ring.obj.obj U) :
+    (coefficientAddMap K K' β h U) (z * w) =
+      coefficientAddMap K K' β h U z *
+        coefficientAddMap K K' β h U w := by
+  let f := coefficientAddMap K K' β h
+  have raw (V : Cᵒᵖ)
+      (x y : (siteTensorPresheaf (regular a).val (regular c).val).obj V) :
+      f V ((coefficientSectionUnit K V x) *
+        (coefficientSectionUnit K V y)) =
+        f V (coefficientSectionUnit K V x) *
+          f V (coefficientSectionUnit K V y) := by
+    induction x using TensorProduct.induction_on with
+    | zero => simp only [map_zero, zero_mul]
+    | add x x' hx hx' => simp only [map_add, add_mul, hx, hx']
+    | tmul a d =>
+      induction y using TensorProduct.induction_on with
+      | zero => simp only [map_zero, mul_zero]
+      | add y y' hy hy' => simp only [map_add, mul_add, hy, hy']
+      | tmul b e =>
+        erw [coefficientSectionUnit_tmul K V a d, coefficientSectionUnit_tmul K V b e]
+        change A.obj.obj V at a b
+        change D.obj.obj V at d e
+        have mul_tensor :
+            K.left.hom.app V a * K.right.hom.app V d *
+                (K.left.hom.app V b * K.right.hom.app V e) =
+              K.left.hom.app V (a * b) * K.right.hom.app V (d * e) := by
+          simp only [map_mul]
+          ring
+        rw [mul_tensor]
+        dsimp only [f]
+        rw [coefficientAddMap_tmul, coefficientAddMap_tmul,
+          coefficientAddMap_tmul]
+        simp only [map_mul]
+        ring
+  apply (regular (a ≫ K'.left)).isSheaf.isSeparated _ _
+    (Presheaf.imageSieve_mem J ((PresheafOfModules.toPresheaf _).map
+      (coefficientUnit K)) z)
+  intro V i hi
+  obtain ⟨x, hx⟩ := hi
+  change coefficientSectionUnit K (op V) x = K.ring.obj.map i.op z at hx
+  have nat (W W' : Cᵒᵖ) (j : W ⟶ W') (t : K.ring.obj.obj W) :
+      K'.ring.obj.map j (f W t) = f W' (K.ring.obj.map j t) :=
+    (PresheafOfModules.naturality_apply (coefficientLinearMap K K' β h).val j t).symm
+  change K'.ring.obj.map i.op (f U (z * w)) =
+    K'.ring.obj.map i.op (f U z * f U w)
+  rw [map_mul (K'.ring.obj.map i.op).hom, nat, nat, nat,
+    map_mul (K.ring.obj.map i.op).hom, ← hx]
+  apply (regular (a ≫ K'.left)).isSheaf.isSeparated _ _
+    (Presheaf.imageSieve_mem J ((PresheafOfModules.toPresheaf _).map
+      (coefficientUnit K)) (K.ring.obj.map i.op w))
+  intro W j hj
+  obtain ⟨y, hy⟩ := hj
+  change coefficientSectionUnit K (op W) y =
+    K.ring.obj.map j.op (K.ring.obj.map i.op w) at hy
+  change K'.ring.obj.map j.op
+    (f (op V) (coefficientSectionUnit K (op V) x * K.ring.obj.map i.op w)) =
+    K'.ring.obj.map j.op
+      (f (op V) (coefficientSectionUnit K (op V) x) *
+        f (op V) (K.ring.obj.map i.op w))
+  rw [map_mul (K'.ring.obj.map j.op).hom, nat, nat, nat,
+    map_mul (K.ring.obj.map j.op).hom, ← hy]
+  have hn := (PresheafOfModules.naturality_apply (coefficientUnit K) j.op x).symm
+  change K.ring.obj.map j.op (coefficientSectionUnit K (op V) x) =
+    coefficientSectionUnit K (op W)
+      ((siteTensorPresheaf (regular a).val (regular c).val).map j.op x) at hn
+  rw [hn]
+  exact raw _ _ _
+
+private def coefficientMap
+    {B A D D' : Sheaf J CommRingCat.{u}} {a : B ⟶ A}
+    {c : B ⟶ D} {c' : B ⟶ D'} (K : Coefficients a c) (K' : Coefficients a c')
+    (β : D ⟶ D') (h : c ≫ β = c') : K.ring ⟶ K'.ring where
+  hom :=
+    { app := fun U ↦ CommRingCat.ofHom
+        { toFun := coefficientAddMap K K' β h U
+          map_zero' := map_zero _
+          map_add' := map_add _
+          map_mul' := coefficientAddMap_mul K K' β h U
+          map_one' := by
+            simpa only [map_one, mul_one] using
+              coefficientAddMap_tmul K K' β h U 1 1 }
+      naturality := by
+        intro U V i
+        ext z
+        exact PresheafOfModules.naturality_apply (coefficientLinearMap K K' β h).val i z }
+
+private theorem coefficientMap_left
+    {B A D D' : Sheaf J CommRingCat.{u}} {a : B ⟶ A}
+    {c : B ⟶ D} {c' : B ⟶ D'} (K : Coefficients a c) (K' : Coefficients a c')
+    (β : D ⟶ D') (h : c ≫ β = c') :
+    K.left ≫ coefficientMap K K' β h = K'.left := by
+  ext U x
+  change (coefficientAddMap K K' β h U) (K.left.hom.app U x) = _
+  simpa only [map_one, mul_one] using coefficientAddMap_tmul K K' β h U x 1
+
+private theorem coefficientMap_right
+    {B A D D' : Sheaf J CommRingCat.{u}} {a : B ⟶ A}
+    {c : B ⟶ D} {c' : B ⟶ D'} (K : Coefficients a c) (K' : Coefficients a c')
+    (β : D ⟶ D') (h : c ≫ β = c') :
+    K.right ≫ coefficientMap K K' β h = β ≫ K'.right := by
+  ext U y
+  change (coefficientAddMap K K' β h U) (K.right.hom.app U y) =
+    K'.right.hom.app U (β.hom.app U y)
+  simpa only [map_one, one_mul] using coefficientAddMap_tmul K K' β h U 1 y
+
+private theorem coefficient_ring_ext
+    {B A D S : Sheaf J CommRingCat.{u}} {a : B ⟶ A} {c : B ⟶ D}
+    (K : Coefficients a c) (f g : K.ring ⟶ S)
+    (h : ∀ (U : Cᵒᵖ) (x : A.obj.obj U) (y : D.obj.obj U),
+      f.hom.app U (K.left.hom.app U x * K.right.hom.app U y) =
+        g.hom.app U (K.left.hom.app U x * K.right.hom.app U y)) : f = g := by
+  ext U z
+  apply (unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj S)).isSheaf.isSeparated
+    _ _ (Presheaf.imageSieve_mem J ((PresheafOfModules.toPresheaf _).map
+      (coefficientUnit K)) z)
+  intro V i hi
+  obtain ⟨t, ht⟩ := hi
+  change coefficientSectionUnit K (op V) t = K.ring.obj.map i.op z at ht
+  change S.obj.map i.op (f.hom.app U z) = S.obj.map i.op (g.hom.app U z)
+  have hf := ConcreteCategory.congr_hom (f.hom.naturality i.op) z
+  have hg := ConcreteCategory.congr_hom (g.hom.naturality i.op) z
+  change f.hom.app (op V) (K.ring.obj.map i.op z) =
+    S.obj.map i.op (f.hom.app U z) at hf
+  change g.hom.app (op V) (K.ring.obj.map i.op z) =
+    S.obj.map i.op (g.hom.app U z) at hg
+  rw [← hf, ← hg]
+  change f.hom.app (op V) (K.ring.obj.map i.op z) =
+    g.hom.app (op V) (K.ring.obj.map i.op z)
+  rw [← ht]
+  clear ht
+  induction t using TensorProduct.induction_on with
+  | zero => simp only [map_zero]
+  | add x y hx hy => simp only [map_add, hx, hy]
+  | tmul x y =>
+    erw [coefficientSectionUnit_tmul K (op V) x y]
+    exact h _ x y
+
+private def coefficientExtension
+    {A R S : Sheaf J CommRingCat.{u}}
+    (α : A ⟶ R) (α' : A ⟶ S) (ρ : R ⟶ S) (h : α ≫ ρ = α') (T : Modules A) :
+    changeOfRingsOfUniverses α T ⟶ (restrict ρ).obj (changeOfRingsOfUniverses α' T) :=
+  scalarExtensionLift α T ((restrict ρ).obj (changeOfRingsOfUniverses α' T))
+    { val :=
+      { app := fun U ↦ ModuleCat.ofHom
+          (X := T.val.obj U)
+          (Y := ((restrict α).obj ((restrict ρ).obj
+            (changeOfRingsOfUniverses α' T))).val.obj U)
+          { toFun := fun t ↦ scalarExtensionSection α' T U 1 t
+            map_add' := fun x y ↦ scalarExtensionSection_add α' T U 1 x y
+            map_smul' := by
+              intro r t
+              have he := ConcreteCategory.congr_hom (congrArg (fun f : A ⟶ S ↦ f.hom.app U) h) r
+              change ρ.hom.app U (α.hom.app U r) = α'.hom.app U r at he
+              change scalarExtensionSection α' T U 1 (r • t) =
+                ρ.hom.app U (α.hom.app U r) • scalarExtensionSection α' T U 1 t
+              rw [he, scalarExtensionSection_base_smul, one_mul,
+                scalarExtensionSection_smul, mul_one] }
+        naturality := by
+          intro U V i
+          ext t
+          change scalarExtensionSection α' T V 1 (T.val.map i t) =
+            (changeOfRingsOfUniverses α' T).val.map i (scalarExtensionSection α' T U 1 t)
+          rw [scalarExtensionSection_naturality, map_one] } }
+
+private theorem coefficientExtension_tmul
+    {A R S : Sheaf J CommRingCat.{u}}
+    (α : A ⟶ R) (α' : A ⟶ S) (ρ : R ⟶ S) (h : α ≫ ρ = α') (T : Modules A)
+    (U : Cᵒᵖ) (r : R.obj.obj U) (t : T.val.obj U) :
+    (coefficientExtension α α' ρ h T).val.app U (scalarExtensionSection α T U r t) =
+      scalarExtensionSection α' T U (ρ.hom.app U r) t := by
+  rw [coefficientExtension, scalarExtensionLift_tmul]
+  change ρ.hom.app U r • scalarExtensionSection α' T U 1 t = _
+  rw [scalarExtensionSection_smul, mul_one]
+
+private def scalarUnit {R S : Sheaf J CommRingCat.{u}} (ρ : R ⟶ S) (M : Modules R) :
+    M ⟶ (restrict ρ).obj (changeOfRingsOfUniverses ρ M) where
+  val :=
+    { app := fun U ↦ ModuleCat.ofHom
+        (X := M.val.obj U) (Y := ((restrict ρ).obj (changeOfRingsOfUniverses ρ M)).val.obj U)
+        { toFun := fun x ↦ scalarExtensionSection ρ M U 1 x
+          map_add' := fun x y ↦ scalarExtensionSection_add ρ M U 1 x y
+          map_smul' := by
+            intro r x
+            change scalarExtensionSection ρ M U 1 (r • x) =
+              ρ.hom.app U r • scalarExtensionSection ρ M U 1 x
+            rw [scalarExtensionSection_base_smul, one_mul,
+              scalarExtensionSection_smul, mul_one] }
+      naturality := by
+        intro U V i
+        ext x
+        change scalarExtensionSection ρ M V 1 (M.val.map i x) =
+          (changeOfRingsOfUniverses ρ M).val.map i (scalarExtensionSection ρ M U 1 x)
+        rw [scalarExtensionSection_naturality, map_one] }
+
+private def semilinearTensorMap {R S : Sheaf J CommRingCat.{u}} (ρ : R ⟶ S)
+    {M P : Modules R} {N Q : Modules S}
+    (f : M ⟶ (restrict ρ).obj N) (g : P ⟶ (restrict ρ).obj Q) :
+    tensor M P ⟶ (restrict ρ).obj (tensor N Q) :=
+  scalarUnit ρ (tensor M P) ≫ (restrict ρ).map
+    ((scalarTensorBinaryIso ρ M P).hom ≫
+      (siteSheafTensorRight (changeOfRingsOfUniverses ρ P)).map
+        (scalarExtensionLift ρ M N f) ≫
+      siteSheafTensorSecondMap N (scalarExtensionLift ρ P Q g))
+
+private theorem semilinearTensorMap_tmul {R S : Sheaf J CommRingCat.{u}} (ρ : R ⟶ S)
+    {M P : Modules R} {N Q : Modules S}
+    (f : M ⟶ (restrict ρ).obj N) (g : P ⟶ (restrict ρ).obj Q)
+    (U : Cᵒᵖ) (x : M.val.obj U) (y : P.val.obj U) :
+    (semilinearTensorMap ρ f g).val.app U (siteSheafTensorTmul M P U x y) =
+      siteSheafTensorTmul N Q U (show N.val.obj U from f.val.app U x)
+        (show Q.val.obj U from g.val.app U y) := by
+  change (siteSheafTensorSecondMap N (scalarExtensionLift ρ P Q g)).val.app U
+    (((siteSheafTensorRight (changeOfRingsOfUniverses ρ P)).map
+      (scalarExtensionLift ρ M N f)).val.app U
+      ((scalarTensorBinaryForward ρ M P).val.app U
+        (scalarExtensionSection ρ (tensor M P) U 1 (siteSheafTensorTmul M P U x y)))) = _
+  rw [scalarTensorBinaryForward_tmul, scalarTensor_first_tmul, scalarTensor_second_tmul,
+    scalarExtensionLift_tmul, scalarExtensionLift_tmul, one_smul, one_smul]
+
+private def presentationLineMap
+    {B A D D' : Sheaf J CommRingCat.{u}} {a : B ⟶ A}
+    {c : B ⟶ D} {c' : B ⟶ D'} {K : Coefficients a c} {K' : Coefficients a c'}
+    (p : Presentation K) (p' : Presentation K') (β : D ⟶ D') (h : c ≫ β = c') :
+    (T : Modules A) →
+      (p.line T ⟶ (restrict (coefficientMap K K' β h)).obj (p'.line T)) := fun T ↦
+  (p.common T).inv ≫
+    coefficientExtension K.left K'.left (coefficientMap K K' β h)
+      (coefficientMap_left K K' β h) T ≫
+    (restrict (coefficientMap K K' β h)).map (p'.common T).hom
+
+private theorem presentationLineMap_common
+    {B A D D' : Sheaf J CommRingCat.{u}} {a : B ⟶ A}
+    {c : B ⟶ D} {c' : B ⟶ D'} {K : Coefficients a c} {K' : Coefficients a c'}
+    (p : Presentation K) (p' : Presentation K') (β : D ⟶ D') (h : c ≫ β = c')
+    (T : Modules A) (U : Cᵒᵖ) (r : K.ring.obj.obj U) (t : T.val.obj U) :
+    (presentationLineMap p p' β h T).val.app U
+      ((p.common T).hom.val.app U (scalarExtensionSection K.left T U r t)) =
+      (p'.common T).hom.val.app U
+        (scalarExtensionSection K'.left T U ((coefficientMap K K' β h).hom.app U r) t) := by
+  change (p'.common T).hom.val.app U
+    ((coefficientExtension K.left K'.left (coefficientMap K K' β h)
+      (coefficientMap_left K K' β h) T).val.app U
+        ((p.common T).inv.val.app U ((p.common T).hom.val.app U _))) = _
+  have he := ConcreteCategory.congr_hom
+    (congrArg (fun f ↦ f.val.app U) (p.common T).hom_inv_id)
+      (scalarExtensionSection K.left T U r t)
+  change (p.common T).inv.val.app U ((p.common T).hom.val.app U _) =
+    scalarExtensionSection K.left T U r t at he
+  rw [he, coefficientExtension_tmul]
+
+private def presentationPowerMap
+    {B A D D' : Sheaf J CommRingCat.{u}} {a : B ⟶ A}
+    {c : B ⟶ D} {c' : B ⟶ D'} {K : Coefficients a c} {K' : Coefficients a c'}
+    (p : Presentation K) (p' : Presentation K') (β : D ⟶ D') (h : c ≫ β = c')
+    (T : Modules A) : (n : ℕ) →
+    scalarTensorPower K.ring (p.line T) n ⟶
+      (restrict (coefficientMap K K' β h)).obj (scalarTensorPower K'.ring (p'.line T) n)
+  | 0 =>
+    { val :=
+      { app := fun U ↦ ModuleCat.ofHom
+          (X := (scalarTensorPower K.ring (p.line T) 0).val.obj U)
+          (Y := ((restrict (coefficientMap K K' β h)).obj
+            (scalarTensorPower K'.ring (p'.line T) 0)).val.obj U)
+          { toFun := (coefficientMap K K' β h).hom.app U
+            map_add' := map_add _
+            map_smul' := by
+              intro r x
+              change K.ring.obj.obj U at r x
+              change (coefficientMap K K' β h).hom.app U (r * x) =
+                (coefficientMap K K' β h).hom.app U r *
+                  (coefficientMap K K' β h).hom.app U x
+              exact map_mul _ r x }
+        naturality := by
+          intro U V i
+          apply ModuleCat.hom_ext
+          apply LinearMap.ext
+          intro x
+          exact ConcreteCategory.congr_hom ((coefficientMap K K' β h).hom.naturality i) x } }
+  | 1 => presentationLineMap p p' β h T
+  | n + 2 => semilinearTensorMap (coefficientMap K K' β h)
+      (presentationPowerMap p p' β h T (n + 1)) (presentationLineMap p p' β h T)
+
+private def presentationChange
+    {B A D D' : Sheaf J CommRingCat.{u}} {a : B ⟶ A}
+    {c : B ⟶ D} {c' : B ⟶ D'} {K : Coefficients a c} {K' : Coefficients a c'}
+    (p : Presentation K) (p' : Presentation K') (β : D ⟶ D') (h : c ≫ β = c') :
+    PresentationChange p p' β where
+  ringMap := coefficientMap K K' β h
+  left := coefficientMap_left K K' β h
+  right := coefficientMap_right K K' β h
+  powerMap := presentationPowerMap p p' β h
+  zero _ _ _ := rfl
+  one T U t y := by
+    change (p'.common T).hom.val.app U
+      ((coefficientExtension K.left K'.left (coefficientMap K K' β h)
+        (coefficientMap_left K K' β h) T).val.app U
+          ((p.common T).inv.val.app U ((p.underlying T).hom.val.app U _))) = _
+    rw [p.inverse_tmul, coefficientExtension_tmul]
+    have he := ConcreteCategory.congr_hom
+      (congrArg (fun f ↦ f.hom.app U) (coefficientMap_right K K' β h)) y
+    change (coefficientMap K K' β h).hom.app U (K.right.hom.app U y) =
+      K'.right.hom.app U (β.hom.app U y) at he
+    rw [he]
+    simpa only [map_one, one_mul, one_smul] using p'.common_tmul T U t 1 (β.hom.app U y)
+  succ T n U x y := semilinearTensorMap_tmul _ _ _ U x y
+
+private theorem presentationChange_common
+    {B A D D' : Sheaf J CommRingCat.{u}} {a : B ⟶ A}
+    {c : B ⟶ D} {c' : B ⟶ D'} {K : Coefficients a c} {K' : Coefficients a c'}
+    (p : Presentation K) (p' : Presentation K') (β : D ⟶ D') (h : c ≫ β = c')
+    (T : Modules A) (U : Cᵒᵖ) (r : K.ring.obj.obj U) (t : T.val.obj U) :
+    ((presentationChange p p' β h).powerMap T 1).val.app U
+      ((p.common T).hom.val.app U (scalarExtensionSection K.left T U r t)) =
+      (p'.common T).hom.val.app U
+        (scalarExtensionSection K'.left T U
+          ((presentationChange p p' β h).ringMap.hom.app U r) t) :=
+  presentationLineMap_common p p' β h T U r t
+
+attribute [local irreducible] coefficientMap presentationLineMap presentationPowerMap
+  presentationChange coefficientExtension semilinearTensorMap
+
+private def squareExtension
+    {R S R' S' : Sheaf J CommRingCat.{u}}
+    (α : R ⟶ S) (α' : R' ⟶ S') (ρ : R ⟶ R') (σ : S ⟶ S')
+    (h : α ≫ σ = ρ ≫ α') {M : Modules R} {N : Modules R'}
+    (f : M ⟶ (restrict ρ).obj N) :
+    changeOfRingsOfUniverses α M ⟶ (restrict σ).obj (changeOfRingsOfUniverses α' N) :=
+  scalarExtensionLift α M ((restrict σ).obj (changeOfRingsOfUniverses α' N))
+    { val :=
+      { app := fun U ↦ ModuleCat.ofHom
+          (X := M.val.obj U)
+          (Y := ((restrict α).obj ((restrict σ).obj
+            (changeOfRingsOfUniverses α' N))).val.obj U)
+          { toFun := fun x ↦ scalarExtensionSection α' N U 1 (f.val.app U x)
+            map_add' := by
+              intro x y
+              rw [map_add, scalarExtensionSection_add]
+            map_smul' := by
+              intro r x
+              have he := ConcreteCategory.congr_hom
+                (congrArg (fun k : R ⟶ S' ↦ k.hom.app U) h) r
+              change σ.hom.app U (α.hom.app U r) =
+                α'.hom.app U (ρ.hom.app U r) at he
+              change scalarExtensionSection α' N U 1 (f.val.app U (r • x)) =
+                σ.hom.app U (α.hom.app U r) •
+                  scalarExtensionSection α' N U 1 (f.val.app U x)
+              rw [(f.val.app U).hom.map_smul]
+              change scalarExtensionSection α' N U 1
+                (ρ.hom.app U r • (show N.val.obj U from f.val.app U x)) = _
+              rw [scalarExtensionSection_base_smul, one_mul, he,
+                scalarExtensionSection_smul, mul_one] }
+        naturality := by
+          intro U V i
+          ext x
+          change scalarExtensionSection α' N V 1 (f.val.app V (M.val.map i x)) =
+            (changeOfRingsOfUniverses α' N).val.map i
+              (scalarExtensionSection α' N U 1 (f.val.app U x))
+          rw [scalarExtensionSection_naturality, map_one,
+            PresheafOfModules.naturality_apply f.val]
+          rfl } }
+
+private theorem squareExtension_tmul
+    {R S R' S' : Sheaf J CommRingCat.{u}}
+    (α : R ⟶ S) (α' : R' ⟶ S') (ρ : R ⟶ R') (σ : S ⟶ S')
+    (h : α ≫ σ = ρ ≫ α') {M : Modules R} {N : Modules R'}
+    (f : M ⟶ (restrict ρ).obj N) (U : Cᵒᵖ) (s : S.obj.obj U) (x : M.val.obj U) :
+    (squareExtension α α' ρ σ h f).val.app U (scalarExtensionSection α M U s x) =
+      scalarExtensionSection α' N U (σ.hom.app U s) (f.val.app U x) := by
+  rw [squareExtension, scalarExtensionLift_tmul]
+  change σ.hom.app U s • scalarExtensionSection α' N U 1 (f.val.app U x) = _
+  rw [scalarExtensionSection_smul, mul_one]
+
+private theorem extension_common_ext
+    {A R S : Sheaf J CommRingCat.{u}} (α : A ⟶ R) (ρ : R ⟶ S)
+    (T : Modules A) (L : Modules R) (e : changeOfRingsOfUniverses α T ≅ L)
+    {H : Modules S} (f g : changeOfRingsOfUniverses ρ L ⟶ H)
+    (h : ∀ U s r t, f.val.app U
+        (scalarExtensionSection ρ L U s (e.hom.val.app U
+          (scalarExtensionSection α T U r t))) =
+      g.val.app U (scalarExtensionSection ρ L U s (e.hom.val.app U
+        (scalarExtensionSection α T U r t)))) : f = g := by
+  apply scalarExtension_hom_ext ρ L
+  intro U s z
+  let η := commonUnit α T e
+  apply H.isSheaf.isSeparated _ _
+    (Presheaf.imageSieve_mem J ((PresheafOfModules.toPresheaf _).map η) z)
+  intro V i hi
+  obtain ⟨v, hv⟩ := hi
+  change η.app (op V) v = L.val.map i.op z at hv
+  change H.val.map i.op (f.val.app U _) = H.val.map i.op (g.val.app U _)
+  rw [← PresheafOfModules.naturality_apply f.val,
+    ← PresheafOfModules.naturality_apply g.val, scalarExtensionSection_naturality, ← hv]
+  clear hv
+  induction v using TensorProduct.induction_on with
+  | zero => simp only [map_zero, scalarExtensionSection_zero]
+  | add v w hv hw => simp only [map_add, scalarExtensionSection_add, hv, hw]
+  | tmul r t =>
+    rw [show η.app (op V) (r ⊗ₜ[A.obj.obj (op V), (α.hom.app (op V)).hom] t) =
+      e.hom.val.app (op V) (scalarExtensionSection α T (op V) r t) from
+        commonUnit_tmul α T e (op V) r t]
+    exact h (op V) (S.obj.map i.op s) r t
+
+private theorem coefficientMap_formula
+    {B A D D' : Sheaf J CommRingCat.{u}} {a : B ⟶ A}
+    {c : B ⟶ D} {c' : B ⟶ D'} (K : Coefficients a c) (K' : Coefficients a c')
+    (τ : K.ring ⟶ K'.ring) (β : D ⟶ D')
+    (hl : K.left ≫ τ = K'.left) (hr : K.right ≫ τ = β ≫ K'.right)
+    (U : Cᵒᵖ) (x : A.obj.obj U) (y : D.obj.obj U) :
+    τ.hom.app U (K.left.hom.app U x * K.right.hom.app U y) =
+      K'.left.hom.app U x * K'.right.hom.app U (β.hom.app U y) := by
+  have hleft := ConcreteCategory.congr_hom
+    (congrArg (fun k : A ⟶ K'.ring ↦ k.hom.app U) hl) x
+  have hright := ConcreteCategory.congr_hom
+    (congrArg (fun k : D ⟶ K'.ring ↦ k.hom.app U) hr) y
+  change τ.hom.app U (K.left.hom.app U x) = K'.left.hom.app U x at hleft
+  change τ.hom.app U (K.right.hom.app U y) =
+    K'.right.hom.app U (β.hom.app U y) at hright
+  rw [map_mul, hleft, hright]
+
 /-- The common presentations and all base-change comparisons are natural in
 commuting diagrams of coefficient algebra maps, with A and the common T fixed.
 
@@ -360,6 +930,113 @@ theorem exists_coefficientNaturality
     (β₀ : D₀ ⟶ D₀') (β₁ : D₁ ⟶ D₁')
     (h₀ : c₀ ≫ β₀ = c₀') (h₁ : c₁ ≫ β₁ = c₁')
     (hβ : φ ≫ β₁ = β₀ ≫ φ') : Nonempty (CoefficientNaturality p p' β₀ β₁) := by
-  sorry
+  let q₀ := presentationChange p.presentation₀ p'.presentation₀ β₀ h₀
+  let q₁ := presentationChange p.presentation₁ p'.presentation₁ β₁ h₁
+  have ring_square : p.iota ≫ q₁.ringMap = q₀.ringMap ≫ p'.iota := by
+    apply coefficient_ring_ext p.coefficients₀
+    intro U x y
+    change q₁.ringMap.hom.app U
+      (p.iota.hom.app U (p.coefficients₀.left.hom.app U x *
+        p.coefficients₀.right.hom.app U y)) =
+      p'.iota.hom.app U (q₀.ringMap.hom.app U
+        (p.coefficients₀.left.hom.app U x * p.coefficients₀.right.hom.app U y))
+    rw [coefficientMap_formula _ _ p.iota φ p.iota_left p.iota_right,
+      coefficientMap_formula _ _ q₁.ringMap β₁ q₁.left q₁.right,
+      coefficientMap_formula _ _ q₀.ringMap β₀ q₀.left q₀.right,
+      coefficientMap_formula _ _ p'.iota φ' p'.iota_left p'.iota_right]
+    have he := ConcreteCategory.congr_hom
+      (congrArg (fun k : D₀ ⟶ D₁' ↦ k.hom.app U) hβ) y
+    change β₁.hom.app U (φ.hom.app U y) = φ'.hom.app U (β₀.hom.app U y) at he
+    rw [he]
+  let e (T : Modules A) (n : ℕ) :=
+    squareExtension p.iota p'.iota q₀.ringMap q₁.ringMap ring_square (q₀.powerMap T n)
+  have formula (T : Modules A) (n : ℕ) (U : Cᵒᵖ)
+      (s : p.coefficients₁.ring.obj.obj U)
+      (x : (scalarTensorPower p.coefficients₀.ring (p.presentation₀.line T) n).val.obj U) :
+      (e T n).val.app U (scalarExtensionSection p.iota
+        (scalarTensorPower p.coefficients₀.ring (p.presentation₀.line T) n) U s x) =
+      scalarExtensionSection p'.iota
+        (scalarTensorPower p'.coefficients₀.ring (p'.presentation₀.line T) n) U
+        (q₁.ringMap.hom.app U s) ((q₀.powerMap T n).val.app U x) :=
+    squareExtension_tmul _ _ _ _ _ _ U s x
+  have hr (U : Cᵒᵖ) (r : p.coefficients₀.ring.obj.obj U) :
+      q₁.ringMap.hom.app U (p.iota.hom.app U r) =
+        p'.iota.hom.app U (q₀.ringMap.hom.app U r) := by
+    exact ConcreteCategory.congr_hom
+      (congrArg (fun k : p.coefficients₀.ring ⟶ p'.coefficients₁.ring ↦
+        k.hom.app U) ring_square) r
+  have one_square (T : Modules A) :
+      e T 1 ≫ (restrict q₁.ringMap).map (p'.comparison T 1).hom =
+        (p.comparison T 1).hom ≫ q₁.powerMap T 1 := by
+    apply extension_common_ext p.coefficients₀.left p.iota T
+      (p.presentation₀.line T) (p.presentation₀.common T)
+    intro U s r t
+    change (p'.comparison T 1).hom.val.app U
+      ((e T 1).val.app U (scalarExtensionSection p.iota (p.presentation₀.line T) U s
+        ((p.presentation₀.common T).hom.val.app U
+          (scalarExtensionSection p.coefficients₀.left T U r t)))) =
+      (q₁.powerMap T 1).val.app U ((p.comparison T 1).hom.val.app U
+        (scalarExtensionSection p.iota (p.presentation₀.line T) U s
+          ((p.presentation₀.common T).hom.val.app U
+            (scalarExtensionSection p.coefficients₀.left T U r t))))
+    have hf := formula T 1 U s
+      ((p.presentation₀.common T).hom.val.app U
+        (scalarExtensionSection p.coefficients₀.left T U r t))
+    dsimp only [scalarTensorPower] at hf
+    erw [hf, presentationChange_common, p'.one_tmul, p.one_tmul,
+      presentationChange_common, map_mul, hr]
+  have square (T : Modules A) (n : ℕ) :
+      e T n ≫ (restrict q₁.ringMap).map (p'.comparison T n).hom =
+        (p.comparison T n).hom ≫ q₁.powerMap T n := by
+    induction n using Nat.twoStepInduction with
+    | zero =>
+      apply scalarExtension_hom_ext p.iota
+      intro U s r
+      change (p'.comparison T 0).hom.val.app U
+        ((e T 0).val.app U (scalarExtensionSection p.iota
+          (scalarTensorPower p.coefficients₀.ring (p.presentation₀.line T) 0) U s r)) =
+        (q₁.powerMap T 0).val.app U ((p.comparison T 0).hom.val.app U
+          (scalarExtensionSection p.iota
+            (scalarTensorPower p.coefficients₀.ring (p.presentation₀.line T) 0) U s r))
+      rw [formula, q₀.zero, p'.zero_tmul, p.zero_tmul, q₁.zero, map_mul, hr]
+    | one => exact one_square T
+    | more n _ ih =>
+      apply scalarExtension_tensor_hom_ext p.iota
+        (scalarTensorPower p.coefficients₀.ring (p.presentation₀.line T) (n + 1))
+        (p.presentation₀.line T)
+      intro U s x y
+      change (p'.comparison T (n + 2)).hom.val.app U
+        ((e T (n + 2)).val.app U (scalarExtensionSection p.iota
+          (scalarTensorPower p.coefficients₀.ring (p.presentation₀.line T) (n + 2)) U s
+          (siteSheafTensorTmul _ _ U x y))) =
+        (q₁.powerMap T (n + 2)).val.app U ((p.comparison T (n + 2)).hom.val.app U
+          (scalarExtensionSection p.iota
+            (scalarTensorPower p.coefficients₀.ring (p.presentation₀.line T) (n + 2)) U s
+            (siteSheafTensorTmul _ _ U x y)))
+      rw [formula, q₀.succ, p'.succ_tmul, p.succ_tmul, q₁.succ]
+      have previous := ConcreteCategory.congr_hom
+        (congrArg (fun f ↦ f.val.app U) ih)
+          (scalarExtensionSection p.iota
+            (scalarTensorPower p.coefficients₀.ring (p.presentation₀.line T) (n + 1)) U s x)
+      have first := ConcreteCategory.congr_hom
+        (congrArg (fun f ↦ f.val.app U) (one_square T))
+          (scalarExtensionSection p.iota (p.presentation₀.line T) U 1 y)
+      change (p'.comparison T (n + 1)).hom.val.app U
+          ((e T (n + 1)).val.app U _) = _ at previous
+      change (p'.comparison T 1).hom.val.app U ((e T 1).val.app U _) = _ at first
+      rw [formula T (n + 1)] at previous
+      have hf := formula T 1 U 1 y
+      dsimp only [scalarTensorPower] at hf
+      erw [hf] at first
+      rw [map_one] at first
+      exact congrArg₂ (siteSheafTensorTmul
+        (scalarTensorPower p'.coefficients₁.ring (p'.presentation₁.line T) (n + 1))
+        (p'.presentation₁.line T) U) previous first
+  exact ⟨{ source := q₀
+           target := q₁
+           ring_square := ring_square
+           extensionMap := e
+           extension_tmul := formula
+           square := square }⟩
 
 end SheafOfModules.CommonLine
