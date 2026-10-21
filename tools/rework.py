@@ -820,6 +820,16 @@ def _drop_mine(ids: list[str], reason: str) -> list[dict]:
 PENDING = ROOT / "local" / "rework-cluster-pending.json"
 
 
+def _failing_of(rid: str) -> set:
+    """the modules the build that reverted landing `rid` named failing (from its closed record)"""
+    import json
+    try:
+        r = json.loads((ROOT / "local" / "builds" / "done" / f"{rid}.json").read_text()).get("reason", "")
+    except (OSError, ValueError):
+        return set()
+    return set(re.findall(r"[A-Z][\w.]+", r.split("failed in", 1)[1])) if "failed in" in r else set()
+
+
 def settle_restores() -> None:
     """Restored modules whose landing the merge queue reverted (file gone again from lean/) are put back in quarantine:
     their quarantined text is marked tried (so the next cluster restore does not put them back unchanged; the level-wise
@@ -843,10 +853,13 @@ def settle_restores() -> None:
         if (ROOT / opath(m)).is_file():
             continue                       # verified (or still in): reconcile closes the row
         q = ROOT / ((rows.get(m) or {}).get("quarantine") or qpath(m))
-        if q.is_file():
+        # 2026-10-21: only a module the build itself named failing is a root with its own error (marked tried); one the
+        # merge queue reverted with others (collateral) stays an ordinary quarantined module and comes back with the
+        # next batch once no unfixed root blocks it (1129 of 1191 were collateral and had been frozen as roots)
+        if q.is_file() and m in _failing_of(rid):
             tried[m] = hashlib.sha1(q.read_bytes()).hexdigest(); back += 1
-            if m in rows and not str(rows[m].get("cause", "")).startswith("error"):
-                rows[m]["cause"] = "error: reverted by the merge queue after a cluster restore (see the build log)"
+            if m in rows:
+                rows[m]["cause"] = "error: failed in the global build after a cluster restore (see the build log)"
     if back:
         save(rows)
     TRIED.write_text(json.dumps(tried)); PENDING.write_text(json.dumps(keep))
