@@ -8,11 +8,13 @@ module
 public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantGlobalSections
 public import WeilConjectures.WeilSheaf.Cohomology
+public import WeilConjectures.WeilSheaf.CohomologyNonneg
+public import WeilConjectures.WeilSheaf.CompactSupportAdicConstant
 public import WeilConjectures.WeilSheaf.Constant
 public import WeilConjectures.WeilSheaf.ConstantTwistCohomology
 public import WeilConjectures.WeilSheaf.LowerStar
 public import WeilConjectures.WeilSheaf.LowerStarPairing
-public import WeilConjectures.WeilSheaf.PoincareDuality
+public import WeilConjectures.WeilSheaf.CohomologyAdicConstant
 public import WeilConjectures.WeilSheaf.ProperCohomology
 public import WeilConjectures.WeilSheaf.StalkPairing
 
@@ -65,15 +67,6 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
-
-/-- The global sections of a zero Weil sheaf vanish. -/
-theorem WeilSheaf.subsingleton_globalSections_of_isZero {X : Scheme.{u}}
-    [X.Over (Spec (CommRingCat.of k₀))] [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
-    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] {F : WeilSheaf k₀ l X}
-    (hF : Limits.IsZero F) : Subsingleton F.globalSections.carrier :=
-  ModuleCat.subsingleton_of_isZero <| Functor.map_isZero
-    (ObjectProperty.ι _ ⋙ Endofunctor.IsoAlgebra.forget _ ⋙ ProEtale.AdicSheaf.forget _ ⋙
-      Sheaf.Γ _ (WeilCoefficients.{u} l) ⋙ WeilCoefficients.toModuleCat l) hF
 
 /-- The cohomology `Hʳ(Spec k̄, M)` of a Weil complex on `Spec k₀` vanishes outside a finite
 interval of degrees, a Weil complex being bounded. -/
@@ -230,7 +223,7 @@ theorem subsingleton_compactlySupportedCohomology_adicConstant (e : ℕ)
     (he : topologicalKrullDim (X ↘ Spec (CommRingCat.of k₀)).geometricFiber ≤ (e : WithBot ℕ∞))
     (r : ℤ) (hr : r < 0 ∨ 2 * (e : ℤ) < r) :
     Subsingleton ((adicConstant k₀ l X).compactlySupportedCohomology r).carrier :=
-  sorry
+  subsingleton_compactlySupportedCohomology_adicConstant_of_two_mul_lt k₀ l X e he r hr
 
 /-- Blueprint `prop-cohomological-finiteness`: Compact-support finiteness and Frobenius.
 
@@ -345,7 +338,7 @@ theorem subsingleton_cohomology_adicConstant_of_isProper (e : ℕ)
     (he : topologicalKrullDim (X ↘ Spec (CommRingCat.of k₀)).geometricFiber ≤ (e : WithBot ℕ∞))
     (r : ℤ) (hr : r < 0 ∨ 2 * (e : ℤ) < r) :
     Subsingleton ((adicConstant k₀ l X).cohomology r).carrier :=
-  sorry
+  subsingleton_cohomology_adicConstant_of_two_mul_lt k₀ l X e he hr
 
 end WeilSheaf
 

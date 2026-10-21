@@ -64,13 +64,6 @@ variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
 
-/-- The compactly supported cohomology `H_c^r(X ⊗ k̄, G)` of a Weil sheaf vanishes in negative
-degrees: the direct image with compact support of a sheaf is concentrated in degrees `≥ 0`. -/
-theorem subsingleton_compactlySupportedCohomology_of_neg (G : WeilSheaf k₀ l X) {r : ℤ}
-    (hr : r < 0) : Subsingleton (G.compactlySupportedCohomology r).carrier :=
-  subsingleton_globalSections_of_isZero
-    (isZero_homologySheaf_derivedLowerShriek_of_neg (f := X ↘ Spec (CommRingCat.of k₀)) G hr)
-
 /-- **The open–closed exact sequence.** Let `j : U ⟶ X` be a quasi-compact open immersion with
 closed complement `i : Z ⟶ X`. If `H_c^r(U ⊗ k̄, G|_U)` and `H_c^r(Z ⊗ k̄, G|_Z)` vanish, so does
 `H_c^r(X ⊗ k̄, G)`, by the exact sequence `H_c^r(U, G|_U) ⟶ H_c^r(X, G) ⟶ H_c^r(Z, G|_Z)`. -/

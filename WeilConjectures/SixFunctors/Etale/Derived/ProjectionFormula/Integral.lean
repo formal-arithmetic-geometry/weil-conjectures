@@ -179,14 +179,12 @@ theorem hasProjectionFormula_of_derivedCompleteIntegral (f : X ⟶ Y) [HasCompac
     (hL : _root_.DerivedCategory.derivedCompleteIntegral Y.smallEtaleTopology l E L)
     (hLt : DerivedCategory.finiteTorAmplitude 𝐌 Y L) :
     HasProjectionFormula 𝐌 f K L :=
-  hasProjectionFormula_of_isIso_reductionModIdeal_map l E f K L
-    (derivedCompleteIntegral_derivedTensor_rightDerivedLowerShriek l E f K L
-      hKc hK hKt hLc hL hLt)
-    (derivedCompleteIntegral_rightDerivedLowerShriek l E f _
-      (derivedCompleteIntegral_derivedTensor_leftDerivedUpperStar l E f K L
-        hKc hK hKt hLc hL hLt))
-    (isIso_reductionModIdeal_map_projectionMap_of_derivedCompleteIntegral l E f K L
-      hKc hK hKt hLc hL hLt)
+  -- The blueprint argument needs `Rf_!(K ⊗ᴸ Lf^* L)` to be derived complete. The repository's
+  -- `Rf_! = Rf̄_* j_!` does not preserve derived completeness for non-proper `f` (for
+  -- `f : 𝔸¹ ⟶ Spec k` and `K = R lim (ℤ/ℓⁿ)`, `H²_c` is not finitely generated), so
+  -- `AlgebraicGeometry.Etale.derivedCompleteIntegral_rightDerivedLowerShriek` is only available
+  -- for proper `f`; the general case needs the derived-complete `Rf_!` of the blueprint.
+  sorry
 
 end Etale
 
