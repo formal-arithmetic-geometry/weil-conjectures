@@ -19971,3 +19971,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:47 L: merged deliver/NF/lem-sfb-bounded-bifunctor-devissage (reviewer PASS; first push; new nodes: 0)
 - 03:47 L: merged deliver/Q135/lem-sfb-adic-stratum-completion-unit (reviewer FIX; first push; new nodes: 0)
 - 03:48 L: merged deliver/N5/lem-pe-profinite-sections-finite-quotient (reviewer PASS; first push; new nodes: 0)
+- 03:48 L: merged deliver/Q95/lem-pd-section-ordinary-oplax-normalization (reviewer FIX; first push; new nodes: 0); claim not held by Q95: not your claim

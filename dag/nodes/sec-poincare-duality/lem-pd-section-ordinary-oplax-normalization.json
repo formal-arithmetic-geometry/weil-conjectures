@@ -22,9 +22,108 @@
   "def-sfb-module-upper-star",
   "def-weil-pbc-canonical-ringed-tensor-comparison"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $L=f^*_{\\rm sec}$, $P=f_{*,\\rm sec}$, and let $\\Phi$ be their specified Hom bijection. By [lem-pe-internal-section-tensor-comparison], $E_X,E_Y$ identify the relative tensor, regular unit and constraints by the identity on local pure tensors. By [lem-sfb-internal-module-operations-transport], they identify the internal pull-push adjunction with $L\\dashv P$, including unit and counit. The comparisons are exactly those fixed in [def-pd-section-module-operations-data]. Thus $L(A)=S\\otimes_{R'}f^{-1}A$ and $P$ is geometric direct image with scalar restriction along $c:R_Y\\to f_*S$. The internal adjunction is the composite of the transported abelian adjunction, whose unit is the geometric insertion, with extension and restriction of scalars [def-sfb-module-upper-lower-adjunction]. The extension adjunction [def-sfb-modobj-extend-restrict-adjunction] says its unit is insertion of $1$; consequently the module unit $u_A:A\\to PLA$ is geometric insertion followed by $a\\mapsto1\\otimes a$. No alternative choice of adjunction is being made.",
+   "uses": [
+    "lem-pe-internal-section-tensor-comparison",
+    "lem-sfb-internal-module-operations-transport",
+    "def-pd-section-module-operations-data",
+    "def-sfb-modobj-extend-restrict-adjunction",
+    "def-sfb-module-upper-lower-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D7, lemma-adjoint-pullback-pushforward-modules; 03EK, section-tensor-product; internal/section comparison"
+   }
+  },
+  {
+   "text": "Identify the actual direct-image pairing before taking mates. The abelian direct image is restriction along $V\\mapsto V\\times_YX$. The generator equation [lem-sfb-sheaf-pushforward-generator-comparison] identifies its actual lax tensor map with the restriction of the sheaf pure-tensor pairing. In [def-sfb-module-lower-star], scalar restriction changes only the action. Compose this ambient pairing with the balancing projection defining relative tensor [def-sfb-modobj-relative-tensor]. For $a,b$ local sections and $r\\in R_Y$, the images of $(ra)\\otimes b$ and $a\\otimes(rb)$ agree: both equal $c(r)(a\\otimes b)$. Hence the pairing factors through the $R_Y$-balanced tensor, sending $a\\otimes b$ to $a\\otimes b$. Its unit sends $r$ to $c(r)$. The pure-tensor identifications of Step 1 therefore identify this internal pairing with the unique section-module lax structure of [lem-pd-ringed-direct-image-pairing-lax]. These statements concern maps out of the sheafified tensor, not preservation of tensor products by evaluation.",
+   "uses": [
+    "lem-sfb-sheaf-pushforward-generator-comparison",
+    "def-sfb-module-lower-star",
+    "def-sfb-modobj-relative-tensor",
+    "lem-pd-ringed-direct-image-pairing-lax"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D6, definition-pushforward; 03EK, section-tensor-product; ambient generator equation and balanced factorization"
+   }
+  },
+  {
+   "text": "Check that the stipulated internal oplax map is the mate of the pairing in Step 2. Write $F=f^*_{\\rm Ab}$, $G=f_*^{\\rm Ab}$ and $v$ for the abelian adjunction unit. By [def-sfb-finite-upper-star-monoidal] and [lem-sfb-adjunction-oplax-mate], its actual ambient tensor map $d$ satisfies $G(d)\\,v_{A\\otimes B}=m_{FA,FB}(v_A\\otimes v_B)$, with $m$ the actual lax map of $G$. Precompose with the relative-tensor balancing projection. Naturality of $v$ moves this projection through $v$, and the two action maps have equal images by the balance equation of Step 2; this gives the same mate equation for the induced relative-tensor map. For the extension-of-scalars part, [def-sfb-modobj-extend-restrict-adjunction] computes its transpose by precomposition with insertion $a\\mapsto1\\otimes a$. Its tensor mate therefore sends the inserted pair to $(1\\otimes a)\\otimes(1\\otimes b)$; scalar linearity determines its values with arbitrary leading scalar. The module adjunction is precisely the composite of these two Hom bijections [def-sfb-module-upper-lower-adjunction]. Applying them successively to the stipulated composite oplax map consequently gives $m_{f^*M,f^*N}(u_M\\otimes u_N)$. The same computation on the regular unit gives $c$. Thus both actual internal structure maps are the module adjunction mates of Step 2, not just isomorphisms with the correct endpoints.",
+   "uses": [
+    "def-sfb-finite-upper-star-monoidal",
+    "lem-sfb-adjunction-oplax-mate",
+    "def-sfb-modobj-relative-tensor",
+    "def-sfb-modobj-extend-restrict-adjunction",
+    "def-sfb-module-upper-lower-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D7, lemma-adjoint-pullback-pushforward-modules; 03EL, lemma-tensor-product-pullback; explicit composite mate calculation"
+   }
+  },
+  {
+   "text": "Use [lem-pd-monoidal-adjunction-equivalence-transport] with the strong monoidal equivalences of Step 1, its identified adjunctions, and the lax pairing identified in Step 2. Its hypotheses hold: the equivalences are fully faithful and essentially surjective, their constraints are the fixed pure-tensor constraints, and the right-adjoint comparison preserves both pairing and unit by Step 2. Step 3 then identifies the image of the actual internal oplax map with the specified section-adjunction mate. Apply [lem-pd-ringed-tensor-adjunction-mate] to this ringed geometric morphism. The sites have the required size, their rings are commutative, $P$ is precomposition with scalar restriction, its unit is $c$, and the module adjunction unit is geometric insertion followed by scalar insertion, as verified above. That lemma identifies this mate with the normalized canonical ringed tensor comparison, including its generalized pure-tensor equation. In particular its tensor map is $D:s\\otimes(m\\otimes n)\\mapsto(s\\otimes m)\\otimes(1\\otimes n)$, and its unit is $D_0:s\\otimes r\\mapsto s\\alpha_f(r)$.",
+   "uses": [
+    "lem-pd-monoidal-adjunction-equivalence-transport",
+    "lem-pd-ringed-tensor-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D7, lemma-adjoint-pullback-pushforward-modules; 03EL, lemma-tensor-product-pullback; transport and identification of specified mates"
+   }
+  },
+  {
+   "text": "For clarity check the inverse formulas using balanced tensors [def-pur-sheaf-tensor-product]. Put $B((s\\otimes m)\\otimes(t\\otimes n))=st\\otimes(m\\otimes n)$. Moving $r\\in R'$ across either inner tensor gives respectively $s\\alpha_f(r)t\\otimes(m\\otimes n)=st\\otimes(rm\\otimes n)$ or $st\\alpha_f(r)\\otimes(m\\otimes n)=st\\otimes(m\\otimes rn)$. Moving a scalar of $S$ between the outer factors gives the same product; commutativity of $S$ is used here. These equations and additivity make $B$ well-defined and compatible with restriction, so it sheafifies. Now $BD(s\\otimes(m\\otimes n))=s\\otimes(m\\otimes n)$, whereas $DB((s\\otimes m)\\otimes(t\\otimes n))=(st\\otimes m)\\otimes(1\\otimes n)=(s\\otimes m)\\otimes(t\\otimes n)$. The last equality is outer $S$-balancing. The unit inverse is $s\\mapsto s\\otimes1$, since $s\\alpha_f(r)\\otimes1=s\\otimes r$. Tensor and sheafification universal properties extend these identities from their defining generators.",
+   "uses": [
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product; scalar balancing and sheafification universal properties"
+   }
+  },
+  {
+   "text": "The constraints are the specified ones: [lem-pe-internal-section-tensor-comparison] identifies associators and both unitors with their ordinary balanced-tensor versions. After rebracketing, both paths in the oplax associativity diagram send $s\\otimes(m\\otimes n\\otimes p)$ to $(s\\otimes m)\\otimes(1\\otimes n)\\otimes(1\\otimes p)$. In the left-unit diagram both paths send $s\\otimes(r\\otimes m)$ to $s\\alpha_f(r)\\otimes m=s\\otimes rm$; in the right-unit diagram they send $s\\otimes(m\\otimes r)$ to $s\\alpha_f(r)\\otimes m=s\\otimes rm$. Additivity, balancing and the sheafification universal property give equality of the diagram maps [def-pur-sheaf-tensor-product]. As $B=D^{-1}$ and $D_0^{-1}(s)=s\\otimes1$, the inverse constraint diagrams follow by composing these equalities with the inverses. Hence the asserted formulas respect associators and unitors.",
+   "uses": [
+    "lem-pe-internal-section-tensor-comparison",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product; associativity and unit formulas"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pd-section-module-operations-data",
+  "def-pur-sheaf-tensor-product",
+  "def-sfb-finite-upper-star-monoidal",
+  "def-sfb-modobj-extend-restrict-adjunction",
+  "def-sfb-modobj-relative-tensor",
+  "def-sfb-module-lower-star",
+  "def-sfb-module-upper-lower-adjunction",
+  "lem-pd-monoidal-adjunction-equivalence-transport",
+  "lem-pd-ringed-direct-image-pairing-lax",
+  "lem-pd-ringed-tensor-adjunction-mate",
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-sfb-adjunction-oplax-mate",
+  "lem-sfb-internal-module-operations-transport",
+  "lem-sfb-sheaf-pushforward-generator-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D7 and 03EL; explicit identification of the specified internal mate using existing sheaf-generator, module-operation and monoidal-adjunction transport lemmas."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -53,10 +152,52 @@
    "results": "{\"n_hits\": 8, \"top\": [\"SheafOfModules.pullbackObjUnitToUnit\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc\", \"SheafOfModules.pullback_id_comp\"], \"note\": \"\", \"digest\": \"b22bdecc08c2cbd8\"}",
    "date": "2026-10-21",
    "verdict": "no match: the hits give general adjunction/localization or ordinary module facts, not this comparison of the specified internal and section-module constructions"
+  },
+  {
+   "tool": "grep",
+   "query": "oplax|[Tt]ensor.*[Cc]omparison|pullback.*[Tt]ensor",
+   "results": "{\"n_hits\": 0, \"top\": [], \"note\": \"\", \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits provide generic module pullback adjunctions or unit maps, not the specified internal-to-section oplax comparison; PullbackFree unit invertibility additionally assumes F.Final."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension of scalars pullback for module sheaves tensor comparison adjunction mate on pure tensors",
+   "results": "{\"n_hits\": 8, \"top\": [\"PresheafOfModules.pullbackPushforwardAdjunction\", \"SheafOfModules.pullback\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"PresheafOfModules.pullback\", \"ModuleCat.ExtendScalars.map'\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"SheafOfModules.PullbackConstruction.adjunction\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply\"], \"note\": \"\", \"digest\": \"b30f0141a811639a\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits provide generic module pullback adjunctions or unit maps, not the specified internal-to-section oplax comparison; PullbackFree unit invertibility additionally assumes F.Final."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback, CategoryTheory.Functor.OplaxMonoidal",
+   "results": "{\"n_hits\": 0, \"top\": [], \"note\": \"\", \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits provide generic module pullback adjunctions or unit maps, not the specified internal-to-section oplax comparison; PullbackFree unit invertibility additionally assumes F.Final."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For sheaves of modules, the pullback oplax tensor map defined as adjunction mate is the scalar extension map s tensor (m tensor n) to (s tensor m) tensor (1 tensor n)",
+   "results": "{\"n_hits\": 8, \"top\": [\"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.pullbackObjUnitToUnit\", \"SheafOfModules.pullbackComp\", \"SheafOfModules.pullbackIso\", \"SheafOfModules.pullback\", \"SheafOfModules.pullbackObjFreeIso\", \"SheafOfModules.instIsLeftAdjointPullback\", \"SheafOfModules.pullback_id_comp\"], \"note\": \"\", \"digest\": \"7f747b9c8157a54a\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits provide generic module pullback adjunctions or unit maps, not the specified internal-to-section oplax comparison; PullbackFree unit invertibility additionally assumes F.Final."
+  },
+  {
+   "tool": "grep",
+   "query": "tensor|[Oo]plax|[Mm]onoidal|pullbackObjUnitToUnit",
+   "results": "{\"n_hits\": 5, \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\"], \"note\": \"\", \"digest\": \"3b9b9665a832fd6d\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits provide generic module pullback adjunctions or unit maps, not the specified internal-to-section oplax comparison; PullbackFree unit invertibility additionally assumes F.Final."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A monoidal equivalence between internal modules in abelian sheaves and sectionwise module sheaves identifies the pullback tensor comparison and unit as scalar multiplication",
+   "results": "{\"n_hits\": 8, \"top\": [\"SheafOfModules.pullbackObjUnitToUnit\", \"SheafOfModules.pullbackObjFreeIso\", \"SheafOfModules.pushforwardSections_unitHomEquiv\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"SheafOfModules.unitHomEquiv_comp_apply\", \"SheafOfModules.unitHomEquiv_symm_comp\", \"SheafOfModules.unitHomEquiv\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\"], \"note\": \"\", \"digest\": \"d42c5852a14ee0fa\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits provide generic module pullback adjunctions or unit maps, not the specified internal-to-section oplax comparison; PullbackFree unit invertibility additionally assumes F.Final."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pd-module-ringed-topos-derived-comparison",
@@ -74,5 +215,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pd-section-ordinary-oplax-normalization",
+  "worker": "stage1",
+  "summary": "Checked the actual internal oplax structure via its ambient mate equation, balancing projection and scalar-insertion adjunction; identified the direct-image pairing and transported the specified mate to the canonical ringed comparison. Reused all needed generic lemmas; no new nodes. Checked inverse, unit and coherence on balanced generators. Statement unchanged.",
+  "blueprint": "No imported ancestor exists; realizes the seeded nt-target-poincare-isiso Step 2 comparison through lem-pd-module-ringed-topos-derived-comparison, specifically its ordinary tensor normalization. Whole-blueprint searches found no identical imported node.",
+  "tool_uses": [
+   {
+    "node": "lem-pe-internal-section-tensor-comparison",
+    "why": "Generic exact monoidal section realization of internal relative tensors; used to fix the tensor constraints, not to replace the unit route."
+   },
+   {
+    "node": "lem-sfb-adjunction-oplax-mate",
+    "why": "Generic mate formula for a lax right adjoint; used to calculate the stipulated ordinary oplax map."
+   },
+   {
+    "node": "lem-sfb-internal-module-operations-transport",
+    "why": "Generic comparison of specified ordinary internal and section adjunctions; the current unit has no other statement supplying its unit and counit."
+   },
+   {
+    "node": "lem-sfb-sheaf-pushforward-generator-comparison",
+    "why": "Generic sheafification generator equation for the actual lax direct image; needed before balancing, and not supplied by the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-sfb-adjunction-oplax-mate",
+  "lem-sfb-internal-module-operations-transport",
+  "lem-sfb-sheaf-pushforward-generator-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q95-ff272e570",
+  "group": "Q95",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q95-ff272e570 (reviewer sub-agent of L); spot-checked: Read the item, all 20 cited statements, the parent, the sibling citer, def-pd-proetale-section-module-functors and Stacks 03EL. The statement and stmt_deps are byte-identical to the side-live base, and the delivery has no new nodes. The item is not in the dropped list, has no repair note, has no earlier run, and closes no cycle (its only citer is lem-pd-section-derived-tensor-normalization). Step 2: checked against lean FiniteCoefficient/UpperLowerStar/Defs.lean:160 and Mathlib/CategoryTheory/Sites/Monoidal.lean:198. The actual lax structure of lowerStar is the counit transport of a∘r∘U, so lem-sfb-sheaf-pushforward-generator-comparison applies to it. Balancing ((ra)⊗b, a⊗(rb) ↦ c(r)(a⊗b)) and the uniqueness from lem-pd-ringed-direct-image-pairing-lax hold. Step 3: re-derived that the composite of Ext and mapMod structures equals the composite-adjunction mate: Φ_Ext(D) = m_Res(ins⊗ins)d̄ and G(d)v = m_G(v⊗v) give m_tot(u⊗u). Step 4: checked every hypothesis of lem-pd-monoidal-adjunction-equivalence-transport and lem-pd-ringed-tensor-adjunction-mate. Steps 5–6: inverse formulas, balancing (uses commutativity of S), associativity and both unit diagrams verified on generators; tested f=id, zero modules, zero ring, regular modules and the empty scheme. No duplicate found (def-pd-proetale-section-module-functors only defines the mates). Accepted all four declared tool_uses as generic. FIX: Step 1 derived the unit u_A = geometric insertion then 1⊗a without citing the composite module adjunction def-sfb-module-upper-lower-adjunction (only Step 3 did). I added one sentence and the citation to Step 1; proof_deps is unchanged.; 1 file(s) fixed by the reviewer"
  }
 }
