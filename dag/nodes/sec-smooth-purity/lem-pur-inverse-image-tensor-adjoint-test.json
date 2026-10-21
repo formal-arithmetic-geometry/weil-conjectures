@@ -16,82 +16,72 @@
  ],
  "proof": [
   {
-   "text": "Put $L=h^{-1}$ and $V=h_*$ on set sheaves. The specified pro-etale construction is an adjunction with finite-limit-preserving $L$, on compatible small sites. Apply [lem-weil-pbc-geometric-module-construction] with $A=S=h^{-1}R$, $c=1_A$ and the canonical identification $|A|=L|R|$. Its functor $I$ identifies with the specified inverse image on modules: the underlying isomorphism $e_I:|I(X)|\\cong L|X|$ preserves addition and scalar multiplication because both operations on the right are, by [def-weil-proetale-inverse-image], the images under $L$ of the operations on $X$. Its functor $P$ identifies with the specified direct image of modules: $e_P:|P(K)|\\cong V|K|$ preserves addition, and its scalar action is $V$ of the action on $K$, precomposed with the pair $(\\eta_{h,R},e_P)$. Indeed the adjunct of the identity $L|R|\\to L|R|$ is $\\eta_{h,R}$. On sections this is precisely $r\\cdot k=\\eta_{h,R,V}(r)k$ over $T'\\times_TV$. Thus these underlying isomorphisms are module isomorphisms to the actual functors in the statement, natural on module morphisms.",
-   "uses": [
-    "def-weil-proetale-inverse-image",
-    "lem-weil-pbc-geometric-module-construction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 03D1 and 03D2, lemma-pushforward-module and lemma-pullback-module; operation comparisons for the specified inverse image"
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-geometric-module-transport] to these functors. It supplies a natural bijection $\\operatorname{Hom}_{h^{-1}R}(h^{-1}X,K)\\cong\\operatorname{Hom}_R(X,h_*K)$ whose underlying functions are the given set-sheaf adjuncts, after the module identifications in step 1. Since a set-sheaf adjunct is $h_*\\alpha\\circ\\eta_{h,X}$, this proves that expression is $R$-linear, and proves surjectivity as well as injectivity on module morphisms. Specialize to $X=M\\otimes_RN$. For clarity the forward linearity formula on sections is $\\widehat\\alpha_V(rx)=\\alpha_{T'\\times_TV}(\\eta_R(r)\\eta_X(x))=\\eta_R(r)\\widehat\\alpha_V(x)$, with the identical addition formula. Linearity of the inverse adjunct, which cannot be inferred merely from original sections of the inverse image, is supplied by the cited transport bijection. Its naturality in $X,K$ gives naturality in $M,N,K$ by precomposing with the induced tensor morphisms.",
-   "uses": [
-    "lem-weil-pbc-geometric-module-transport"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03D3, lemma-adjoint-push-pull-modules, and Tag 03D7, lemma-adjoint-pullback-pushforward-modules, at the identity coefficient map"
-   }
-  },
-  {
-   "text": "Apply [lem-pc-sites-sheaf-tensor-bilinear-universal] on $T_{\\mathrm{proet}}$ with $\\mathcal F=M$, $\\mathcal G=N$, $\\mathcal H=h_*K$, using the $R$-action fixed in step 1. Its bijection sends a linear map $a:M\\otimes_RN\\to h_*K$ to $(s,t)\\mapsto a_V(s\\otimes t)$. Composing it with step 2 gives a bijection to exactly the set of bilinear sheaf maps specified in the item. Substituting the adjunct formula gives $a_V(s\\otimes t)=\\alpha_{T'\\times_TV}(\\eta_{h,M\\otimes_RN,V}(s\\otimes t))$, the displayed formula. This includes existence for every bilinear map and uniqueness of its inverse. Naturality in $K$ follows from both cited bijections. Naturality in $M,N$ follows directly from $(u\\otimes v)(s\\otimes t)=u(s)\\otimes v(t)$: the two bilinear maps after precomposition have the same displayed value for every $V,s,t$.",
-   "uses": [
-    "lem-pc-sites-sheaf-tensor-bilinear-universal"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Section 03EK, section-tensor-product, bilinear universal property following lemma-sheafification-tensor (Tag 0GMW)"
-   }
-  },
-  {
-   "text": "For two module maps $\\alpha,\\beta$, equality of their values on all original unit pure tensors is, by the formula in step 3, equality of their associated bilinear sheaf maps on every component and every pair of sections. The bijection in step 3 is injective, so $\\alpha=\\beta$. Conversely equal maps have equal values. This argument uses only the two established Hom-set bijections; it makes no assertion that original sections generate the sections on an arbitrary object of $T'_{\\mathrm{proet}}$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Agent deduction from the bijections of steps 2 and 3"
-   }
-  },
-  {
-   "text": "For coefficient change, write $x=s\\otimes_Rt$ and use naturality of the specified unit with respect to $\\pi$: $h^{-1}\\pi(h^{-1}x)=h^{-1}(\\pi(x))=h^{-1}(s\\otimes_{R'}t)$. By the assumed normalization for the supplied $b^h_{R',M,N}$, its image is $h^{-1}s\\otimes_{h^{-1}R'}h^{-1}t$. In the other composite, normalization of $b^h_{R,M,N}$ first gives $h^{-1}s\\otimes_{h^{-1}R}h^{-1}t$, and the defining formula for $\\pi'$ gives the same result. All maps can be read after restricting scalars to $h^{-1}R$; the underlying module inverse images agree because their additive structures are the same and their $h^{-1}R$-actions are obtained by applying $h^{-1}\\phi$. This is compatibility of the defined actions with composition of sheaf maps, not an invertibility or naturality assertion about $b$.",
+   "text": "Transport module morphisms along AsSmall.up and AsSmall.down by their actual section maps. Compose the resulting inverse Hom equivalences with Mathlib SheafOfModules.pullbackPushforwardAdjunction for proEtaleModelRingUnit. The naturality equations give an adjunction for the specified module inverse image and original direct image. Its transpose of the identity evaluates literally to inverseSection. This proves existence and uniqueness of the specified unit map; its composite with direct image of a morphism is the Hom-equivalence adjunct.",
    "uses": [
     "def-weil-proetale-inverse-image"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Agent evaluation using the specified unit naturality and the supplied pure-tensor formulas; Section 03EK for tensor notation"
+    "place": "Tags 03D2 and 03D3 and Section 03EK; concrete model-site module adjunction and sheafified tensor universal property."
    }
   },
   {
-   "text": "For composition, put $x=s\\otimes_Rt$. The supplied normalization of $\\delta$ sends $(h\\circ g)^{-1}x$ to $g^{-1}(h^{-1}x)$. Naturality of the $g$-unit with respect to the sheaf map $b^h$ sends this under $g^{-1}(b^h)$ to $g^{-1}(b^h(h^{-1}x))=g^{-1}(h^{-1}s\\otimes_{h^{-1}R}h^{-1}t)$. Here $h^{-1}s,h^{-1}t$ are sections over the site object $T'\\times_TV$, so the assumed normalization of $b^g$ applies to them and yields $g^{-1}h^{-1}s\\otimes g^{-1}h^{-1}t$. For the other composite, normalization of $b^{h\\circ g}$ first gives $(h\\circ g)^{-1}s\\otimes(h\\circ g)^{-1}t$. Applying $\\delta_M\\otimes\\delta_N$ gives $\\delta_M((h\\circ g)^{-1}s)\\otimes\\delta_N((h\\circ g)^{-1}t)$, which is the same result by the two supplied unit formulas. Every equality is over $T''\\times_TV\\cong T''\\times_{T'}(T'\\times_TV)$, and ring/module compatibility of $\\delta$ makes the second tensor map linear after identifying scalar rings by $\\delta_R$. The calculation uses no further property or existence of the supplied maps.",
+   "text": "A map from the sectionwise tensor presheaf is equivalently a family of bilinear maps commuting with restrictions: curry its linear components, and use TensorProduct.lift in the inverse direction. TensorProduct.ext proves the inverse equations and naturality. Compose this equivalence with the module sheafification adjunction. This works in the actual independent object and morphism universes of the pro-etale site.",
+   "uses": [
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D2 and 03D3 and Section 03EK; concrete model-site module adjunction and sheafified tensor universal property."
+   }
+  },
+  {
+   "text": "Compose the two Hom equivalences. Their section formulas give the displayed original unit pure-tensor formula. Adjunction naturality proves naturality in the input tensor and output. Naturality of the tensor sheafification unit proves the formula for tensorMap on pure tensors. The given unit-normalized moduleSetsIdentification identifies the underlying adjunct with the set-sheaf adjunct. Injectivity of the composite equivalence proves the equality test, without any generation assertion on arbitrary target-site sections.",
    "uses": [
     "def-weil-proetale-inverse-image",
-    "lem-pc-sites-sheaf-tensor-bilinear-universal"
+    "def-pur-sheaf-tensor-product"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Agent evaluation using unit naturality, the supplied algebraic compositor and normalized maps; Section 03EK, tensor maps on pure tensors"
+    "place": "Tags 03D2 and 03D3 and Section 03EK; concrete model-site module adjunction and sheafified tensor universal property."
+   }
+  },
+  {
+   "text": "For coefficients, use naturality of the actual model module unit for the coefficient quotient. The existing unique characterization of coefficientQuotient gives its pure-tensor formula and the existing scalarIdentification characterization gives its unit formula. Apply the supplied b normalization on each route. The tensorMap pure-tensor formula identifies the second route with the same larger-ring pure tensor.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D2 and 03D3 and Section 03EK; concrete model-site module adjunction and sheafified tensor universal property."
+   }
+  },
+  {
+   "text": "Evaluate the supplied compatibility of the module components with the set compositor on an original unit section. Its supplied adjunction-unit equation gives the iterated unit section restricted along the canonical pullback associator. Naturality of the underlying-set identifications with the g-unit yields the module component formula. On the first tensor route, module naturality moves both maps across that restriction; g-unit naturality and the two supplied normalizations give the claimed pure tensor. On the second route, the composite normalization, the tensorMap formula, the coefficient quotient formula and the two module component formulas give the tensor of restricted iterated sections. Naturality of the pure pairing gives the same restriction of the iterated pure tensor.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D2 and 03D3 and Section 03EK; concrete model-site module adjunction and sheafified tensor universal property."
    }
   }
  ],
  "proof_deps": [
   "def-weil-proetale-inverse-image",
-  "lem-pc-sites-sheaf-tensor-bilinear-universal",
-  "lem-weil-pbc-geometric-module-construction",
-  "lem-weil-pbc-geometric-module-transport"
+  "def-pur-sheaf-tensor-product"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tags 03D1-03D3 and 03D7 (operation transport and module adjunction), Section 03EK (bilinear universal property). Agent deductions identify the specified underlying set-sheaf adjunct, prove original-unit-section detection, and calculate the conditional coefficient/composition evaluations."
+  "place": "Tags 03D2/03D3 and Section 03EK. The concrete Hom-equivalence transport follows the already proved private construction in ProEtaleModuleInverseImageCanonicalUnit; the tensor equivalence is proved directly from Mathlib sheafification and TensorProduct.lift. Existing helper characterizations in ProEtaleInverseImageTensorComparison are used without its main comparison theorem."
  },
  "mathlib_searches": [
   {
@@ -236,11 +226,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-pbc-geometric-module-construction",
-  "lem-weil-pbc-geometric-module-transport",
-  "lem-pc-sites-sheaf-tensor-bilinear-universal"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
@@ -283,5 +269,15 @@
   "group": "N9",
   "result": "pass",
   "note": "Node changed only in lean; statement verbatim; 5 stmt_deps byte-identical to side-live; 0 new nodes. Clause-by-clause match: arbitrary h, R, M, N, K; h_*K action via the CommRingCat unit (pushforward along whiskerRight unit); adjunct = ∃!-pinned module unit (inverseSection components; true since proEtaleModelRingUnit is the whiskered η_R) ≫ h_*α; Bijective + naturality in M,N,K; underlying = proEtaleSheafAdjunction.homEquiv via unit-pinned moduleSetsIdentification; Bilin = upstream tensor_bilinear_universal family form; E pinned by its section formula plus naturality; α=β iff on all original unit pure tensors, no generation assumption. Coefficient and composition evaluations: b families only normalized (no IsIso or naturality), π/π' are the ∃!-pinned coefficientQuotient/scalarIdentification, hδ is the canonical setPullbackComp unit equation (satisfiable), c/d pinned to δ by hc/hd, associator orientation matches moduleComp_exists. Edge cases (id maps, zero modules/ring, empty scheme, universes u+1/u kept distinct) fine. Nothing hollow, all theorems sorry, docstrings ok, H9 ok; no compile (no FIX). Maintainer note: the module imports parent ProEtaleInverseImageTensorComparison whose proof_deps cite the item → stage-3 import cycle; split the parent's helper block (Rings…moduleMapSets with _exists) into a def-node module (precedent Q129/NB). Advisory: setPullback/lowerStarComp and the parent's helpers come from nodes outside stmt_deps; the proEtaleTest* abbrevs duplicate the parent's Modules/tensor/pure."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261021T193706-L-1266288",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
