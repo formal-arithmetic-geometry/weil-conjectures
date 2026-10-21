@@ -20884,3 +20884,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:07 L: merged deliver/Q12/lem-sf-etale-derived-pullback-stalk (reviewer PASS; first push; new nodes: 0)
 - 08:08 L: merged deliver/Q01/lem-sfb-condensed-coefficient-presentation-identification (reviewer PASS; first push; new nodes: 0)
 - 08:08 L: merged deliver/Q20/def-wf-tensor-product (reviewer PASS; after a return; new nodes: 6)
+- 08:08 L: merged deliver/Q95/lem-sfb-internal-hom-dual-tor-amplitude (reviewer PASS; after a return; new nodes: 2)

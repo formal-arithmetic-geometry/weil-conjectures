@@ -18,110 +18,62 @@
  ],
  "proof": [
   {
-   "text": "Use the module-object/ringed-site derived comparison with $X=S$ and $B=\\Lambda_S$. It leaves underlying abelian sheaves unchanged, identifies relative derived tensor and internal Hom with their ordinary ringed-site versions, and is compatible with slice restriction. We may therefore work throughout with sheaves of modules over the section-ring sheaf of $B$, retaining the notation $B$. In particular the dual in the question is the ringed-site $R\\mathcal Hom_B(P,B)$. No replacement of $B$ by the discrete constant sheaf $\\underline R$ is made.",
+   "text": "Apply the module-object/ringed-site derived comparison to $B=\\Lambda_S$. It preserves the underlying abelian sheaves, relative derived tensor, internal Hom and slice restrictions. Work with its section-ring sheaf, still denoted $B$; this does not identify $B$ with the discrete constant sheaf $\\underline R$.",
    "uses": [
     "lem-sfb-module-object-ringed-site-derived-comparison"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 08J9 (lemma-internal-hom), 08JB (lemma-restriction-RHom-to-U); module-object comparison as stated in the cited DAG node"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-internal-hom.proof.md",
+    "place": "Paragraph 2, final sentence (locally constant perfect coefficient dual); paragraph 3, parenthetical assertion that the perfect factors lie in Dctf: extracted uniform-Tor-bound part."
    }
   },
   {
-   "text": "If $S=\\varnothing$, all site objects are empty and their empty covering forces every module sheaf to be zero, so both required vanishings hold with $a=b=0$. Suppose henceforth $S\\ne\\varnothing$. Finite type over the affine scheme $\\operatorname{Spec}k$ gives a finite affine open cover of $S$. For each of these affines, the covering condition for $\\{U_i\\to S\\}$ supplies finitely many affine opens in the $U_i$ mapping into that affine and covering it. Combining these finite families gives a finite covering refinement $\\{V_j\\to S\\}_{j\\in J}$ subordinate to the original cover. This is a cover by the transitivity axiom of the site. It is nonempty because $S$ is nonempty. On $V_j$, choose the bounded scalar model supplied by its original $U_i$, and choose integers $a_j\\le b_j$ outside which that model is zero. Set $a=\\min_{j\\in J}a_j$ and $b=\\max_{j\\in J}b_j$. Then $a\\le b$ and $[a_j,b_j]\\subseteq[a,b]$ for every $j$.",
+   "text": "If $S=\\varnothing$, the empty covering forces every module sheaf to be zero, so take $a=b=0$. Otherwise finite type over $\\operatorname{Spec}k$ gives quasi-compactness. Apply the finite scalar-perfect refinement lemma to the cover and models in the hypothesis. It supplies a finite nonempty cover $\\{V_j\\}$, scalar-extended complexes $E_j^\\bullet\\simeq P|_{V_j}$, their degreewise finite-free splittings and intervals $[a_j,b_j]\\subseteq[a,b]$, where $a=\\min a_j$, $b=\\max b_j$. These choices precede every test sheaf.",
    "uses": [
+    "def-weil-pbc-proetale-site",
     "def-weil-finite-type-morphism",
-    "def-weil-pbc-proetale-site"
+    "lem-sfb-finite-scalar-perfect-refinement"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-internal-hom.proof.md",
-    "place": "Paragraph 2, locally constant perfect coefficient dual; finite refinement uses the fpqc covering condition spelled out in def-weil-pbc-proetale-site"
+    "place": "Paragraph 2, final sentence (locally constant perfect coefficient dual); paragraph 3, parenthetical assertion that the perfect factors lie in Dctf: extracted uniform-Tor-bound part."
    }
   },
   {
-   "text": "Write $B_j=B|_{V_j}$ and $E_j^\\bullet=B_j\\otimes_{\\underline R}\\underline{F_j^\\bullet}$, so $P|_{V_j}\\simeq E_j^\\bullet$. The strict-perfect coefficient package gives, in each degree $r$, splittings $F_j^r\\xrightarrow{i_r}R^{N_r}\\xrightarrow{p_r}F_j^r$ with $p_ri_r=1$. Its constant-sheaf construction, followed by scalar extension to $B_j$, gives $E_j^r\\xrightarrow{I_r}B_j^{N_r}\\xrightarrow{P_r}E_j^r$ with $P_rI_r=1$. Scalar extension preserves this equality by functoriality; it need not be exact or flat. Since tensor with $B_j^{N_r}$ is a finite direct sum of the identity, tensor with its retract $E_j^r$ is exact, so $E_j^r$ is flat. Likewise $\\mathcal Hom_{B_j}(E_j^r,-)$ is an exact retract of $\\mathcal Hom_{B_j}(B_j^{N_r},-)$, which is the finite direct sum functor by the cited finite-free Hom lemma. Exactness passes to these retracts because the corresponding short complex is a direct summand of an exact short complex.",
-   "uses": [
-    "def-weil-pbc-strict-perfect-coefficient-package",
-    "def-pc-flat-sheaf-modules",
-    "lem-sc-finite-free-internal-hom-exact"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Section 04TT (section-internal-hom) and Tag 03EM (lemma-internal-hom): the finite-free Hom calculation is evaluation on the standard basis; Tag 03ER (definition-flat), item (3). Constant projective splittings are supplied by the cited strict-perfect coefficient package."
-   }
-  },
-  {
-   "text": "Derived internal Hom commutes with slice restriction, hence $P^\\vee|_{V_j}\\simeq R\\mathcal Hom_{B_j}(E_j^\\bullet,B_j[0])$. By the bounded exact-term Hom lemma, applying $\\mathcal Hom^\\bullet(E_j^\\bullet,-)$ to a K-injective resolution $B_j[0]\\to I^\\bullet$ is a quasi-isomorphism: boundedness and the termwise exactness were proved in step 3. By the definition of derived internal Hom, the target computes the displayed derived object. Thus $P^\\vee|_{V_j}$ is represented by $D_j^\\bullet=\\mathcal Hom^\\bullet_{B_j}(E_j^\\bullet,B_j[0])$. Explicitly $D_j^n=\\mathcal Hom_{B_j}(E_j^{-n},B_j)$ and $d_{D_j}^n(\\phi)=(-1)^{n+1}\\phi\\circ d_{E_j}^{-n-1}$. In particular $D_j^n=0$ unless $n\\in[-b_j,-a_j]$.",
+   "text": "On each slice put $B_j=B|_{V_j}$. Internal Hom restriction identifies $P^\\vee|_{V_j}$ with $R\\mathcal Hom_{B_j}(E_j^\\bullet,B_j[0])$. Apply the split-perfect dual Tor-window lemma with $a_j,b_j$: it supplies the signed dual $D_j^n=\\mathcal Hom_{B_j}(E_j^{-n},B_j)$, $d^n(\\phi)=(-1)^{n+1}\\phi d_{E_j}^{-n-1}$, its dualized finite-free splittings, the K-injective comparison, flatness of both complexes, and the two Tor bounds for every $B_j$-module sheaf. Thus $P|_{V_j}$ has Tor amplitude in $[a_j,b_j]\\subseteq[a,b]$ and $P^\\vee|_{V_j}$ in $[-b_j,-a_j]\\subseteq[-b,-a]$.",
    "uses": [
     "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-    "lem-pc-bounded-exact-term-hom-quasi-iso",
-    "def-pur-derived-internal-hom",
-    "def-pur-hom-complex"
+    "lem-sfb-split-perfect-dual-tor-window"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08JB (lemma-restriction-RHom-to-U); Tag 08JH (lemma-Rhom-strictly-perfect), its K-injective comparison; Section 0A8X (section-hom-complexes)"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-internal-hom.proof.md",
+    "place": "Paragraph 2, final sentence (locally constant perfect coefficient dual); paragraph 3, parenthetical assertion that the perfect factors lie in Dctf: extracted uniform-Tor-bound part."
    }
   },
   {
-   "text": "Applying $\\mathcal Hom_{B_j}(-,B_j)$ to the splitting in step 3 exhibits each $D_j^n$ as a retract of $\\mathcal Hom_{B_j}(B_j^{N_{-n}},B_j)\\cong B_j^{N_{-n}}$: the inclusion is precomposition with $P_{-n}$, the retraction is precomposition with $I_{-n}$, and their composite is precomposition with $P_{-n}I_{-n}=1$. Hence $D_j^n$ is flat by the same finite-direct-sum and retract argument for tensor used in step 3. Apply implication (2)$\\Rightarrow$(1) of the ringed-site flat-model criterion first to $E_j^\\bullet$ in $[a_j,b_j]$ and then to $D_j^\\bullet$ in $[-b_j,-a_j]$. For every sheaf $M$ of $B_j$-modules, it gives $H^q(P|_{V_j}\\otimes_{B_j}^{\\mathbf L}M)=0$ outside $[a_j,b_j]$ and $H^q(P^\\vee|_{V_j}\\otimes_{B_j}^{\\mathbf L}M)=0$ outside $[-b_j,-a_j]$.",
+   "text": "Apply clause (i) of cover-local Tor detection to $P$ with $[a,b]$ and to $P^\\vee$ with $[-b,-a]$. It gives the required global vanishings for every degree-zero sheaf $N$: exact slice restriction commutes with cohomology and derived tensor, and the covering detects vanishing of those cohomology sheaves. The comparison of step 1 preserves these sheaves, so the same bounds hold for the original module objects. By the definition of Tor amplitude both objects have finite Tor amplitude.",
    "uses": [
-    "lem-sc-finite-free-internal-hom-exact",
-    "def-pur-sheaf-hom",
-    "def-pc-flat-sheaf-modules",
-    "lem-sp-ringed-site-tor-flat-model"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08JH (lemma-Rhom-strictly-perfect), dual terms as in the proof of Tag 08JJ (lemma-dual-perfect-complex); Tag 08G1 (lemma-tor-amplitude), implication (2) to (1)"
-   }
-  },
-  {
-   "text": "Fix any sheaf $N$ of $B$-modules. Slice restriction is exact, so it commutes with cohomology, and its derived pullback is its termwise restriction. The derived tensor-pullback comparison therefore gives, for $T=P$ and for $T=P^\\vee$, $H^q(T\\otimes_B^{\\mathbf L}N)|_{V_j}\\cong H^q(T|_{V_j}\\otimes_{B_j}^{\\mathbf L}N|_{V_j})$. Taking $M=N|_{V_j}$ in step 5 shows these restrictions vanish for $q\\notin[a,b]$ in the first case and $q\\notin[-b,-a]$ in the second, since both local intervals are contained in the corresponding global intervals.",
-   "uses": [
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A4 (lemma-pullback-tensor-product), applied to localization; sites-modules.tex Section 03DH (section-localize), the identity coefficient map and restriction formula, with Tags 03DI (lemma-extension-by-zero) and 03DJ (lemma-extension-by-zero-exact)."
-   }
-  },
-  {
-   "text": "The family $\\{V_j\\}$ covers the final object $S$, so its pullbacks cover every object of the small site. Apply the cover-local isomorphism criterion to the map from each of the cohomology sheaves in step 6 to zero, using underlying abelian sheaves: every slice restriction is an isomorphism to zero, hence the original map is an isomorphism. This proves both global vanishings for the arbitrary sheaf $N$. The same integers $a,b$ were fixed before choosing $N$, and the reflected interval is exactly $[-b,-a]$. By the definition of Tor amplitude these are the asserted finite Tor bounds. The comparison in step 1 transports the vanishings back to module objects without changing their cohomology sheaves.",
-   "uses": [
-    "lem-sfb-sheaf-cover-local-isomorphism",
+    "lem-sfb-tor-interval-local-detection",
     "sk-def-sfb-constructible"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 04TQ (lemma-glue-maps), cover-local isomorphism criterion; Tor-amplitude definition in blueprint sk-def-sfb-constructible"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-internal-hom.proof.md",
+    "place": "Paragraph 2, final sentence (locally constant perfect coefficient dual); paragraph 3, parenthetical assertion that the perfect factors lie in Dctf: extracted uniform-Tor-bound part."
    }
   }
  ],
  "proof_deps": [
   "lem-sfb-module-object-ringed-site-derived-comparison",
-  "def-weil-finite-type-morphism",
   "def-weil-pbc-proetale-site",
-  "def-weil-pbc-strict-perfect-coefficient-package",
-  "def-pc-flat-sheaf-modules",
-  "lem-sc-finite-free-internal-hom-exact",
+  "def-weil-finite-type-morphism",
+  "lem-sfb-finite-scalar-perfect-refinement",
   "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-  "lem-pc-bounded-exact-term-hom-quasi-iso",
-  "def-pur-derived-internal-hom",
-  "def-pur-hom-complex",
-  "def-pur-sheaf-hom",
-  "lem-sp-ringed-site-tor-flat-model",
-  "lem-pur-site-restriction-module-adjunction-exact",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-sfb-sheaf-cover-local-isomorphism",
+  "lem-sfb-split-perfect-dual-tor-window",
+  "lem-sfb-tor-interval-local-detection",
   "sk-def-sfb-constructible"
  ],
  "proof_origin": {
@@ -369,43 +321,23 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "item": "lem-sfb-internal-hom-dual-tor-amplitude",
   "worker": "stage1",
-  "summary": "Q18: retained the statement and coefficient categories; proved uniform intervals by a finite pro-etale covering refinement, scalar-extended projective splittings, an explicit signed Hom-complex model for the dual, the existing bounded-flat Tor criterion, exact tensor restriction and cover-local vanishing. All ingredients already have DAG nodes; no new node or Lean work.",
+  "summary": "Q95 repair of the human re-split request: statement retained verbatim; two independent unsplit nodes extract finite uniform scalar model construction and the signed local dual/flat Tor-window calculation. Existing cover-local Tor detection replaces the repeated exact-restriction and cover-detection argument. Full extracted arguments and old-to-new coverage map are preserved in report.md. No Lean edits or compiles.",
   "blueprint": "Realizes precisely the uniform finite-Tor part extracted from det-thm-sf-ctf-stability-internal-hom, paragraph 2 final sentence and paragraph 3 parenthetical about perfect factors; does not assert the separate constructible-cohomology clause.",
   "tool_uses": [
    {
     "node": "lem-sfb-module-object-ringed-site-derived-comparison",
-    "why": "General ringed-site, sheaf or homological-algebra tool used with its stated hypotheses; supplies Module-object and ringed-site derived internal Hom agree. It does not replace a unit step, and this unit has no separate statement giving this general interface."
-   },
-   {
-    "node": "lem-sc-finite-free-internal-hom-exact",
-    "why": "General ringed-site, sheaf or homological-algebra tool used with its stated hypotheses; supplies Internal Hom from a finite free sheaf is exact. It does not replace a unit step, and this unit has no separate statement giving this general interface."
+    "why": "Identifies module-object and section-ring tensor/Hom without changing coefficients; this generic comparison is outside the unit route."
    },
    {
     "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-    "why": "General ringed-site, sheaf or homological-algebra tool used with its stated hypotheses; supplies Derived internal Hom calculus on small ringed sites. It does not replace a unit step, and this unit has no separate statement giving this general interface."
+    "why": "General slice restriction of derived internal Hom, needed to identify the restricted dual before the local model calculation."
    },
    {
-    "node": "lem-pc-bounded-exact-term-hom-quasi-iso",
-    "why": "General ringed-site, sheaf or homological-algebra tool used with its stated hypotheses; supplies Bounded exact-term Hom preserves quasi-isomorphisms. It does not replace a unit step, and this unit has no separate statement giving this general interface."
-   },
-   {
-    "node": "lem-sp-ringed-site-tor-flat-model",
-    "why": "General ringed-site, sheaf or homological-algebra tool used with its stated hypotheses; supplies Finite Tor intervals and bounded flat models on a ringed site. It does not replace a unit step, and this unit has no separate statement giving this general interface."
-   },
-   {
-    "node": "lem-pur-site-restriction-module-adjunction-exact",
-    "why": "General ringed-site, sheaf or homological-algebra tool used with its stated hypotheses; supplies Restriction and extension by zero for modules on a localized site. It does not replace a unit step, and this unit has no separate statement giving this general interface."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "why": "General ringed-site, sheaf or homological-algebra tool used with its stated hypotheses; supplies Derived tensor comparison for arbitrary ringed topoi. It does not replace a unit step, and this unit has no separate statement giving this general interface."
-   },
-   {
-    "node": "lem-sfb-sheaf-cover-local-isomorphism",
-    "why": "General ringed-site, sheaf or homological-algebra tool used with its stated hypotheses; supplies Isomorphisms of category-valued sheaves are detected on a covering family of objects. It does not replace a unit step, and this unit has no separate statement giving this general interface."
+    "node": "lem-sfb-tor-interval-local-detection",
+    "why": "Clause (i) descends one fixed universal Tor interval from a pro-etale cover; avoids duplicating the existing exact-restriction/tensor/cover-detection proof."
    }
   ]
  },
@@ -417,15 +349,16 @@
   "lem-sp-ringed-site-tor-flat-model",
   "lem-pur-site-restriction-module-adjunction-exact",
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-sfb-sheaf-cover-local-isomorphism"
+  "lem-sfb-sheaf-cover-local-isomorphism",
+  "lem-sfb-tor-interval-local-detection"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-Codex-Q18-62d6496c5",
-  "group": "Q18",
+  "reviewer": "NT-cc-Q95-2c51add3d",
+  "group": "Q95",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q18-62d6496c5 (reviewer sub-agent of L); spot-checked: Read the full item, cited statements and sources; all seven mathematical steps are sound. Checked finite-cover uniformity, condensed-module comparison, reflected dual degrees, nonflat test modules, duplicates and cycles. Corrected Step 3’s erroneous Stacks 0GM8 locator and Step 6’s extension-by-zero labels. Whole corrected JSON and detailed review.md written; statement and hypotheses unchanged. All eight tool uses accepted.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q95-2c51add3d (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and every cited statement in full. The snapshot's out-of-chapter symlinks went dangling mid-review, so I read those cited statements from clones/live. Statement and stmt_deps are byte-identical to the live node. The live item still has the 5107-char 7-step proof, so the item is not superseded. The delivered proof is a 4-step assembly of 1882 chars. Re-split mapping: old 1 → same comparison node; old 2 and the scalar-extended splittings of old 3 → new lem-sfb-finite-scalar-perfect-refinement; exactness in old 3, the K-injective comparison and signed dual in old 4, and the dual retracts, flatness and 08G1 (2)⇒(1) in old 5 → new lem-sfb-split-perfect-dual-tor-window; RHom slice restriction → existing lem-weil-pbc-ringed-internal-hom-exact-restriction; old 6–7 → existing lem-sfb-tor-interval-local-detection clause (i), whose statement is exactly the fixed-interval cover descent for an arbitrary ring sheaf and arbitrary cover. No argument is dropped, and the two new nodes are independent and of comparable size; neither restates the item. Refinement node is true for quasi-compact S without quasi-separatedness: Stacks proetale 0989 plus 098A(4), with the chosen affine V_j as the quasi-compact opens; the splittings survive non-exact scalar extension by functoriality. Window node is true: retract exactness; lem-pc-bounded-exact-term-hom-quasi-iso gives D ≅ RHom; the sign (−1)^{n+1}φ d_E^{−n−1} follows from def-pur-hom-complex; i*p*=1; bounded flat complexes plus 08G1 give both windows. I tested E=B[0], the two-term identity complex and zero/rank-0 terms. It partly overlaps lem-sfb-ringed-site-strict-perfect-hom (package and K-injective comparison); this is advisory, because the window and Tor clauses are new. Duplicate search over the DAG found no other match. No cycle; all ids resolve; no SGA. Batch-5 flag on lem-sfb-tor-interval-local-detection → lem-trf-geometric-inverse-image-exact: the trf part of that closure is only Stacks 04JC (exactness of geometric-morphism inverse image on abelian/module sheaves), which is generic topos theory and not a step of the trace formula or Poincaré duality. It is already in the base proof's closure, and the delivered closure adds 0 new trf/pod nodes, so I accepted it. I accept the tool use of the detection node. Maintainer note: the item's tool_uses field still lists the old proof's tools; add lem-sfb-tor-interval-local-detection there."
  },
  "lean": {
   "module": "Sheaf.Paper.InternalHomDualTorAmplitude",
