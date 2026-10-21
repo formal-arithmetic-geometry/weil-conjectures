@@ -179,5 +179,41 @@
   "group": "NW",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-7aee17f08 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, every cited statement (including the proofs of the invariant-bar and restriction-calculus nodes, to see how ε, the cup and [a] are built), the parent's citing step and the main-20261015 direct-images paragraph (3). The item's statement is unchanged. z is a cocycle: checked by hand for q=1,2 and by script for q=3 on Z/5. Step 2: ∂L_a+L_a∂=0 (the terms with i≥2 cancel, leftover b(g0,g1)+b(g1,g2)-b(g0,g2)=0; script on Z/5 for n≤4) and L_a is equivariant. Step 3: the formula for F_q (script, q=3) and f_q∂_{q+1}=0 from the chain-map identity; the coordinate change takes f_q to z. Step 4: E_a matches the calculus node; ℓ∂_1=i(b_a), and the splitting defect ℓ[h]-ℓ[1]=(a(h),0) matches the calculus normalization of [a], so ε_1=1 is consistent. Steps 5 and 6: the middle e^{-1}e factors cancel, the induction via t_{q,1} is set up properly, and ε_q=s_qT_q with ε_0=ε_1=1. Both new nodes are true, statement-only, and not restatements of the item. Related nodes: lem-sfb-equivariant-resolution-bar-normalization is a coresolution-side cousin of the roof node, not a duplicate. The strong-monoidal part of graded-cup overlaps lem-sfb-ringed-derived-monoidal-comparisons (advisory); its graded composition law is in no existing node. FIX (B3/C4): the roof node used the canonical derived inflation/invariants adjunction without citing a node; it now cites lem-sfb-condensed-derived-restriction-calculus in its text and stmt_deps. The graded-cup text now names the calculus and product-action-inflation nodes it already listed in stmt_deps. Batch-5 flag (graded-cup → calculus → lem-trf-bounded-below-derived-mate-model): that node is a generic abelian-category mate lemma, not part of the trace formula or of Poincaré duality, and the item already cited calculus on base, so the closure is unchanged. Accepted. All cites are on-unit; no tool_uses; no SGA.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InternalBarOrderedCup",
+  "declaration": "CategoryTheory.CondensedBar.OrderedCup.internal_bar_ordered_cup",
+  "declarations": [
+   "CategoryTheory.CondensedBar.OrderedCup.regularZero",
+   "CategoryTheory.CondensedBar.OrderedCup.degreeSource",
+   "CategoryTheory.CondensedBar.OrderedCup.unitMultiply",
+   "CategoryTheory.CondensedBar.OrderedCup.assembleSource",
+   "CategoryTheory.CondensedBar.OrderedCup.assembleShiftedSource",
+   "CategoryTheory.CondensedBar.OrderedCup.sourceTensor",
+   "CategoryTheory.CondensedBar.OrderedCup.tensorList",
+   "CategoryTheory.CondensedBar.OrderedCup.characterCup",
+   "CategoryTheory.CondensedBar.OrderedCup.underived",
+   "CategoryTheory.CondensedBar.OrderedCup.resolved",
+   "CategoryTheory.CondensedBar.OrderedCup.augmentationArrow",
+   "CategoryTheory.CondensedBar.OrderedCup.IsUnderivedComparison",
+   "CategoryTheory.CondensedBar.OrderedCup.IsCharacterCocycle",
+   "CategoryTheory.CondensedBar.OrderedCup.cocycleArrow",
+   "CategoryTheory.CondensedBar.OrderedCup.internal_bar_ordered_cup"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/InternalBarOrderedCup.lean",
+  "statement": "theorem internal_bar_ordered_cup : ∃ ε : ℕ → ℤ, (∀ q : ℕ, ε q = 1 ∨ ε q = -1) ∧ ε 0 = 1 ∧ ε 1 = 1 ∧ ∀ (A : CondensedBar.Ring.{u}) (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G] (F : InternalFunctions A) (B : BarDiagram (G := G) F) (a : Augmentation (invariants A G) B) (t : TotalAugmentation (invariants A G) B a) (I : InjectiveResolution (regularTrivial A G)), IsIso (augmentationArrow t I) ∧ ∃ j : underived B ⟶ resolved B I, IsUnderivedComparison B I j ∧ ∀ (q : ℕ) (a : Fin q → Character A G), ∃ c : (HomologicalComplex.single (Modules A) (.up ℤ) (q : ℤ)).obj (Mod.regular A.X) ⟶ extend (underived B), IsCharacterCocycle B q a c ∧ cocycleArrow j q c = (ε q) • (characterCup q a ≫ augmentationArrow t I)",
+  "branch": "sheaf-dag",
+  "by": "O1",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The fixed shift-tensor convention is sourceTensor. The universal sign is quantified before every coefficient ring, group, compatible bar diagram, injective resolution and character list. The canonical maps are specified by actual augmentation and section formulas, in the restriction calculus small-Hom localization; no acyclicity of underived internal functions is assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e13b1be67",
+  "group": "O1",
+  "result": "pass",
+  "note": "Checked every clause of the node against the Lean. Arbitrary CondensedBar.Ring A and profinite G with no extra hypotheses. U and the total come from cochains/totalCochains for every bar model B and resolution I, which is correct because evaluate and the face formulas pin B and F. j is fixed by the (n,0) ιTotal formula and is a chain map. IsCharacterCocycle pins c on every generalized section, with the empty product 1. augmentationArrow is resolutionComparison then Q(t.map), the invariant-bar normalization written in the u+1 localization: an actual arrow, with IsIso asserted. ∃ε comes before all inputs, ε=±1, ε0=ε1=1. Signs at q=1: singleFunctors.shiftIso is sign-free, singleδ gives the +a class, and the q=1 sourceTensor composite is the identity, so ε1=1 holds. q=0 is the unit. Statement verbatim, declarations in order, docstrings with source and blueprint tags, proof docstring equal to the live node, one sorry, no hollow definitions, no stmt_dep change. Advisory: H11 second reading is the worker's own pass (dispatcher policy); binder a is shadowed; assembleShiftedSource repeats InternalInflationGradedCup's shiftedUnitTensorFromComparison; maintainer note that live proof steps 4/6 still say ε_q=s_qT_q (O2's (-1)^q repair after the Q07 roof correction was superseded), statement unaffected. No compile (no file changed)."
  }
 }

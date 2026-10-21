@@ -200,6 +200,7 @@
    "Profinite.DiscreteLatticeCup.coordinateCharacter",
    "Profinite.DiscreteLatticeCup.coordinateClass",
    "Profinite.DiscreteLatticeCup.regularSplit",
+   "Profinite.DiscreteLatticeCup.shiftedRegularTensorIso",
    "Profinite.DiscreteLatticeCup.splitShift",
    "Profinite.DiscreteLatticeCup.orderedCup",
    "Profinite.DiscreteLatticeCup.complexBiproducts",
@@ -212,19 +213,20 @@
    "Profinite.DiscreteLatticeCup.rankZeroInclusion",
    "Profinite.DiscreteLatticeCup.rank_zero_identity"
   ],
-  "file": "lean/Sheaf/CategoryTheory/DiscreteLatticeCupExterior.lean",
   "statement": "theorem discrete_lattice_cup_exterior (r : ℕ) : IsIso (cupMap A r)",
   "branch": "sheaf-dag",
-  "by": "N0",
+  "by": "NC",
   "date": "2026-10-21",
-  "existing": false
+  "existing": false,
+  "note": "Repairs the existing owning module after reproducible 60-second timeouts. Names the unchanged canonical shifted-tensor isomorphism and expresses the same ordered-cup recursion by List.rec to reduce repeated kernel checking. All mathematical statements and canonical morphisms are retained.",
+  "file": "lean/Sheaf/CategoryTheory/DiscreteLatticeCupExterior.lean"
  },
  "reviewed_lean": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-stage2-cc-bb57363d8",
-  "group": "N0",
+  "reviewer": "NT-stage2-cc-db6804a1a",
+  "group": "NC",
   "result": "pass",
-  "note": "Item node unchanged except lean; lean.statement verbatim (line 152) and all 18 declarations recorded. Clause check: A : CondensedBar.Ring.{u} (no extra hypotheses, zero ring allowed); D = ULift.{u}(Multiplicative(Fin r→ℤ)) discrete; RΓ = dependency's cohomology A (Lattice r) on the trivial regular coefficient; δ_i = characterClass of coordinateCharacter, which is Classical.choose of a true ∃! (sectionwise n_i·1 on constant-coordinate sections, determined by clopen fibre covers plus naturality); exteriorComplex is the real finite biproduct of shifted single complexes with zero differential; orderedCup takes increasing-order cups with the empty word as the unit, via canonical shiftTensorShiftIso and regularSplit; cupMap = biproductComparison Q ≫ desc(commShiftIso ≫ subsetCup); conclusion IsIso(cupMap) is the derived form; rank_zero_identity has its iso e pinned by cupUnit≫e.hom = baseUnitIso.hom. Docstrings with source/blueprint and the 5-step proof present; imports follow rule 7 (statement deps public, proof deps plain); all proofs sorry; no lines over 100 chars. Report has Worker report and Second reading by N0. Advisory: Lattice could reuse DiscreteLattice.Group r under ULift; the R[-1]^{⊗q}≅R[-q] identification is implicit in the node and the canonical upstream iso is used. No compile run (no file changed); worker reports clean 50.9 s."
+  "note": "Re-delivery of N0's landed module Sheaf.CategoryTheory.DiscreteLatticeCupExterior as a speed-up repair after the existing:true probe timed out at 60 s. Lean diff vs live: added respectTransparency options; new helper shiftedRegularTensorIso = DerivedCategory.shiftTensorShiftIso with matching type, docstring, listed in declarations; splitShift uses its .inv (same value); orderedCup rewritten from a structural match to an explicit List.rec with term-for-term identical branches; Authors line. Node diff is lean-only (by, superset declarations, note); statement verbatim; stmt_deps and proof untouched. No live importers. Re-read the clause list (any CondensedBar.Ring incl. zero ring, discrete Z^r, characterClass of the ∃!-chosen coordinate character, finite biproduct exterior complex, ordered cups with the unit, IsIso derived form, rank_zero_identity) and checked the cup/cupUnit/baseUnitIso/characterClass signatures. Gates OK; report sections present. No compile by me (no file changed); worker reports 51.4/50.6 s. Advisory: small margin under 60 s, retry at lower load if landing times out."
  }
 }

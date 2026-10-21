@@ -1,7 +1,7 @@
 /-
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: SHEAF group N0
+Authors: SHEAF groups N0 and NC
 -/
 module
 
@@ -20,6 +20,8 @@ agent expansion, exact internal-module reference wanted
 
 @[expose] public noncomputable section
 set_option autoImplicit false
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
 universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 open CategoryTheory.CondensedBar CategoryTheory.CondensedDerivedRestriction
@@ -71,25 +73,33 @@ Source: paragraph (3) (blueprint: lem-sfb-discrete-lattice-cup-exterior). -/
 def regularSplit : regular A ⟶ regular A ⊗ regular A :=
   (λ_ (regular A)).inv ≫ (baseUnitIso A).hom ▷ regular A
 
+/-- The canonical tensor comparison for the two shifted regular modules.
+Naming it avoids repeatedly reducing the derived tensor construction in composites.
+Source: paragraph (3) (blueprint: lem-sfb-discrete-lattice-cup-exterior). -/
+def shiftedRegularTensorIso (p q : ℕ) :
+    shiftedRegular A p ⊗ shiftedRegular A q ≅
+      (regular A ⊗ regular A)⟦(-(p : ℤ) + -(q : ℤ))⟧ :=
+  DerivedCategory.shiftTensorShiftIso (Modules A) (regular A) (regular A)
+    (-(p : ℤ)) (-(q : ℤ))
+
 /-- The canonical identification R[-(p+q)] with R[-p] tensor R[-q], without permutations.
 Source: paragraph (3) (blueprint: lem-sfb-discrete-lattice-cup-exterior). -/
 def splitShift (p q : ℕ) :
     shiftedRegular A (p + q) ⟶ shiftedRegular A p ⊗ shiftedRegular A q :=
   eqToHom (congrArg (fun n : ℤ ↦ (regular A)⟦n⟧) (by omega)) ≫
     (regularSplit A)⟦(-(p : ℤ) + -(q : ℤ))⟧' ≫
-    (DerivedCategory.shiftTensorShiftIso (Modules A) (regular A) (regular A)
-      (-(p : ℤ)) (-(q : ℤ))).inv
+    (shiftedRegularTensorIso A p q).inv
 
 /-- Ordered cups of coordinate classes; the empty word is the derived unit.
 Source: paragraph (3) (blueprint: lem-sfb-discrete-lattice-cup-exterior). -/
-def orderedCup (r : ℕ) : (l : List (Fin r)) →
-    shiftedRegular A l.length ⟶ cohomology A (Lattice.{u} r)
-  | [] => (shiftFunctorZero _ ℤ).hom.app (regular A) ≫
-      (baseUnitIso A).inv ≫ cupUnit
-  | i :: l =>
-      eqToHom (congrArg (shiftedRegular A) (Nat.add_comm l.length 1)) ≫
-      splitShift A 1 l.length ≫
-      (coordinateClass A r i ⊗ₘ orderedCup r l) ≫ cup
+def orderedCup (r : ℕ) (l : List (Fin r)) :
+    shiftedRegular A l.length ⟶ cohomology A (Lattice.{u} r) :=
+  List.rec
+    (motive := fun k ↦ shiftedRegular A k.length ⟶ cohomology A (Lattice.{u} r))
+    ((shiftFunctorZero _ ℤ).hom.app (regular A) ≫ (baseUnitIso A).inv ≫ cupUnit)
+    (fun i k product ↦
+      eqToHom (congrArg (shiftedRegular A) (Nat.add_comm k.length 1)) ≫
+        splitShift A 1 k.length ≫ (coordinateClass A r i ⊗ₘ product) ≫ cup) l
 
 /-- Finite biproducts of complexes use their degreewise finite products.
 Source: the ordinary complex category (blueprint: lem-sfb-discrete-lattice-cup-exterior). -/
