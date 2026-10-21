@@ -1,0 +1,87 @@
+{
+ "id": "lem-weil-boundary-q-defining-composite-comparison",
+ "kind": "statement",
+ "title": "Comparison of projection-inverse tensor composites before adjunction",
+ "statement": "Let $A$ be a finite commutative ring and let $i:Z\\to T$ be a proper morphism of schemes with $T$ quasi-compact [def-weil-proper-morphism]. Use the ordinary constant-$A$ module derived categories $D(W_e,A)$ and $D(W_p,A)$ on the small etale and pro-etale sites [def-weil-pbc-derived-categories, def-weil-pbc-proetale-modules]. Write $C_W=\\nu_W^*$ for the termwise exact comparison pullback [def-sf-comparison-derived-pullback], $F_e=Ri_{e,*}$ and $F_p=Ri_{p,*}$. Use the canonical tensor comparison $c_{W;U,V}:C_W(U\\otimes_A^LV)\\xrightarrow{\\sim}C_WU\\otimes_A^LC_WV$ [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], the ordinary pullback comparison $\\rho_M:i_p^*C_TM\\xrightarrow{\\sim}C_Zi_e^*M$ [lem-weil-pbc-comparison-pullback], and the signed tensor symmetry $\\sigma$ (on homogeneous degrees $a,b$, the swap multiplied by $(-1)^{ab}$). Let $\\eta:F_pC_Z\\xrightarrow{\\sim}C_TF_e$ be a natural comparison isomorphism. On each site use the ordinary-counit-defined projection transformation $\\pi^\\tau_{B,M}:F_\\tau B\\otimes_A^LM\\to F_\\tau(B\\otimes_A^Li_\\tau^*M)$, defined by the same composite as [def-kun-projection-formula-map].\n\nLet $B\\in D^+(Z_e,A)$, $M,Y\\in D^+(T_e,A)$, $B'\\in D^+(Z_p,A)$, $v:C_ZB\\xrightarrow{\\sim}B'$, and arrows $a_e:F_eB\\to Y$ and $a_p:F_pB'\\to C_TY$. Suppose\n$$a_p\\circ F_p(v)=C_T(a_e)\\circ\\eta_B.$$\nDefine\n$$s=(\\rho_M^{-1}\\otimes v)\\circ c_{Z;i_e^*M,B}:C_Z(i_e^*M\\otimes_A^LB)\\xrightarrow{\\sim}i_p^*C_TM\\otimes_A^LB',$$\n$$r=(v\\otimes\\rho_M^{-1})\\circ c_{Z;B,i_e^*M}:C_Z(B\\otimes_A^Li_e^*M)\\xrightarrow{\\sim}B'\\otimes_A^Li_p^*C_TM.$$\nAssume $\\pi_e=\\pi^e_{B,M}$ and $\\pi_p=\\pi^p_{B',C_TM}$ are isomorphisms and that their comparison square is\n$$\\eta_{B\\otimes_A^Li_e^*M}\\circ F_p(r^{-1})\\circ\\pi_p\\circ(F_p(v)\\otimes1)=C_T(\\pi_e)\\circ c_{T;F_eB,M}^{-1}\\circ(\\eta_B\\otimes1).$$\nDefine the two untransposed composites\n$$t_e=(1_M\\otimes a_e)\\circ\\sigma_{F_eB,M}\\circ\\pi_e^{-1}\\circ F_e(\\sigma_{i_e^*M,B}):F_e(i_e^*M\\otimes_A^LB)\\to M\\otimes_A^LY,$$\n$$t_p=(1_{C_TM}\\otimes a_p)\\circ\\sigma_{F_pB',C_TM}\\circ\\pi_p^{-1}\\circ F_p(\\sigma_{i_p^*C_TM,B'}):F_p(i_p^*C_TM\\otimes_A^LB')\\to C_TM\\otimes_A^LC_TY.$$\nThen\n$$c_{T;M,Y}\\circ C_T(t_e)\\circ\\eta_{i_e^*M\\otimes_A^LB}=t_p\\circ F_p(s).$$\nNo exceptional right adjoint, constructibility of $B$, or finite Tor amplitude of $B$ is required; only the displayed projection components are assumed invertible.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-pf-proetale/thm-sf-pf-proetale.proof.md",
+  "place": "Comparison paragraph, expanded by the agent-written calculation in step 1 of lem-weil-boundary-proetale-q-compatibility (reviewed 2026-10-17): invert the projection square, commute signed symmetry, and substitute the compatible final arrow."
+ },
+ "stmt_deps": [
+  "def-weil-proper-morphism",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-proetale-modules",
+  "def-sf-comparison-derived-pullback",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-comparison-pullback",
+  "def-kun-projection-formula-map"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.counit, CategoryTheory.BraidedCategory.braiding",
+   "results": "none",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits give individual counit, braiding, or unrelated pullback identities, not the displayed composite comparison on derived module sites."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived site comparison carrying projection transformations and exceptional counits identifies the untransposed composite defining the exceptional tensor map",
+   "results": "CategoryTheory.Adjunction.derivedε_fac_app; CategoryTheory.Adjunction.derivedε; CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison; CategoryTheory.Adjunction.derivedε_fac_app_assoc; CategoryTheory.Adjunction.derived'_counit; CategoryTheory.Adjunction.derivedη_fac_app; CategoryTheory.Adjunction.derived_counit; CategoryTheory.Adjunction.derived'_unit",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits give individual counit, braiding, or unrelated pullback identities, not the displayed composite comparison on derived module sites."
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*comparison|comparison.*projection|braiding.*naturality",
+   "results": "Mathlib/CategoryTheory/Localization/Monoidal/Braided.lean; Mathlib/CategoryTheory/Localization/Monoidal/Braided.lean; Mathlib/CategoryTheory/Localization/Monoidal/Braided.lean; Mathlib/CategoryTheory/Localization/Monoidal/Braided.lean; Mathlib/CategoryTheory/Localization/Monoidal/Braided.lean; Mathlib/CategoryTheory/GradedObject/Braiding.lean; Mathlib/CategoryTheory/GradedObject/Braiding.lean; Mathlib/CategoryTheory/GradedObject/Braiding.lean; searched Mathlib/CategoryTheory",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits give individual counit, braiding, or unrelated pullback identities, not the displayed composite comparison on derived module sites."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Symmetric monoidal derived pullback transports inverse projection formula and exceptional counit composite before adjunction",
+   "results": "CategoryTheory.Limits.pullbackSymmetry_inv_comp_fst_assoc; CategoryTheory.Limits.pullbackSymmetry_inv_comp_fst; CategoryTheory.Equivalence.isMonoidal_symm; CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.transformObjComp_inv_app_snd_app; CategoryTheory.Limits.pullbackSymmetry_inv_comp_snd_assoc; CategoryTheory.Limits.pullbackSymmetry_inv_comp_snd; CategoryTheory.ChosenPullbacksAlong.cartesianMonoidalCategoryToUnit_mapPullbackAdj_counit_app; CategoryTheory.Limits.pullbackSymmetry_hom_comp_fst",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits give individual counit, braiding, or unrelated pullback identities, not the displayed composite comparison on derived module sites."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of tensor symmetry and inverse projection formula under etale pro etale comparison for the exceptional adjunction",
+   "results": "LightCondensed.ihomPoints_symm_comp; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply; CategoryTheory.Sheaf.ΓHomEquiv_naturality_left_symm; AlgebraicTopology.DoldKan.Compatibility.τ₁_hom_app; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale; CategoryTheory.ExponentiableMorphism.coev_naturality; AlgebraicGeometry.pullbackSpecIso_inv_snd",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits give individual counit, braiding, or unrelated pullback identities, not the displayed composite comparison on derived module sites."
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*formula|projection.*[Mm]orphism",
+   "results": "none; searched Mathlib/CategoryTheory/Monoidal",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits give individual counit, braiding, or unrelated pullback identities, not the displayed composite comparison on derived module sites."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-boundary-proetale-q-compatibility",
+  "date": "2026-10-21",
+  "group": "Q104"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "cor-weil-boundary-duality-discharge",
+   "place": "Proof, final paragraph: 'adjointing back through tensor–Hom and $i_*\\dashv Ri^!$'; the untransposed projection-inverse/counit composite that must agree before exceptional adjunction.",
+   "via": [
+    "lem-weil-boundary-proetale-q-compatibility"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

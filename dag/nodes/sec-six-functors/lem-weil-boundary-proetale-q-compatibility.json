@@ -32,12 +32,9 @@
  },
  "proof": [
   {
-   "text": "Fix $M,N$ as in the statement and put $B=G_eN$. By [def-kun-projection-formula-map], $\\pi^\\tau$ is the counit-defined composite on each site. The hypotheses give, after the monoidal comparison $C_Z(B\\otimes_A^Li_e^*M)\\cong C_ZB\\otimes_A^LC_Zi_e^*M$ [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] and the pullback comparison $C_Zi_e^*M\\cong i_p^*C_TM$ [lem-weil-pbc-comparison-pullback], the two equalities $\\eta_{B\\otimes i_e^*M}\\circ\\pi^p=C_T(\\pi^e)\\circ(\\eta_B\\otimes1)$ and $\\mu^p_{C_TN}\\circ F_p(\\theta_N)=C_T(\\mu^e_N)\\circ\\eta_B$, where $\\theta:C_ZG_e\\cong G_pC_T$ is the adjunction comparison. Both $\\pi$'s are invertible by hypothesis, so inverting the first equality gives $C_T(\\pi^e)^{-1}\\circ\\eta=(\\eta_B\\otimes1)\\circ(\\pi^p)^{-1}$. Comparison $C_W=\\nu_W^*$ is applied termwise [def-sf-comparison-derived-pullback]; on K-flat flat-term representatives the monoidal comparison is the termwise identification of total tensor complexes, so it commutes with the termwise signed symmetry $\\sigma$. Now compute $C_T(t^e_{M,N})\\circ\\eta_{i_e^*M\\otimes B}$: naturality of $\\eta$ moves $C_TF_e(\\sigma)$ past $\\eta$ to $F_pC_Z(\\sigma)$; the inverted projection equality replaces $C_T(\\pi^e)^{-1}\\circ\\eta$ by $(\\eta_B\\otimes1)\\circ(\\pi^p)^{-1}$; naturality of $\\sigma$ moves $\\eta_B\\otimes1$ to $1\\otimes\\eta_B$; and the counit equality turns $C_T(1\\otimes\\mu^e_N)\\circ(1\\otimes\\eta_B)$ into $1\\otimes\\mu^p_{C_TN}F_p(\\theta_N)$. Hence $C_T(t^e_{M,N})\\circ\\eta=t^p_{C_TM,C_TN}\\circ F_p(1\\otimes\\theta_N)$ under the displayed identifications.",
+   "text": "Apply [lem-weil-boundary-q-defining-composite-comparison] with $B=G_eN$, $Y=N$, $B'=G_pC_TN$, $v=\\theta_N$, and $a_e=\\mu^e_N$, $a_p=\\mu^p_{C_TN}$. Its counit square is the assumed exceptional-counit identification, its invertibility assumptions are those of the statement, and its projection square is the assumed projection identification at $(C_ZG_eN,C_TM)$ transported to $B'$ by naturality of $\\pi^p$ in its first variable, $\\pi^p_{B',C_TM}\\circ(F_p(\\theta_N)\\otimes1)=F_p(\\theta_N\\otimes1)\\circ\\pi^p_{C_ZG_eN,C_TM}$. It gives $C_T(t^e)\\circ\\eta=t^p\\circ F_p(1\\otimes\\theta_N)$ in the canonical tensor/pullback coordinates.",
    "uses": [
-    "def-kun-projection-formula-map",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-pbc-comparison-pullback",
-    "def-sf-comparison-derived-pullback"
+    "lem-weil-boundary-q-defining-composite-comparison"
    ],
    "elementary": false,
    "source": {
@@ -46,10 +43,8 @@
    }
   },
   {
-   "text": "Transpose the equality of Step 1. For $X$ on $Z_e$ and $Y$ on $T_e$, the adjunction comparison $\\theta$ is by definition the mate of $\\eta$: the transpose of $C_T(\\mu^e_Y)\\circ\\eta_{G_eY}$ under $F_p\\dashv G_p$ is $\\theta_Y$. Hence, for any $f:F_eX\\to Y$ with $F_e\\dashv G_e$ transpose $g:X\\to G_eY$, the $F_p\\dashv G_p$ transpose of $C_T(f)\\circ\\eta_X$ is $\\theta_Y\\circ C_Z(g)$: both are obtained from $g$ by applying $C_Z$, then $\\theta_Y$, and the counit identity $\\mu^p\\circ F_p(\\theta_Y)=C_T(\\mu^e_Y)\\circ\\eta_{G_eY}$ with naturality of $\\eta$ shows they have the same transpose. Apply this with $X=i_e^*M\\otimes_A^LG_eN$, $Y=M\\otimes_A^LN$ and $f=t^e_{M,N}$, whose transpose is $q^e_{M,N}$. By Step 1 the left side is $t^p_{C_TM,C_TN}\\circ F_p(1\\otimes\\theta_N)$, whose transpose is $q^p_{C_TM,C_TN}\\circ(1\\otimes\\theta_N)$. Uniqueness of transposes gives $\\theta_{M\\otimes N}\\circ C_Z(q^e_{M,N})=q^p_{C_TM,C_TN}\\circ(1\\otimes\\theta_N)$, which is the statement $q^p_{C_TM,C_TN}=C_Z(q^e_{M,N})$ under the named comparisons.",
-   "uses": [
-    "def-kun-projection-formula-map"
-   ],
+   "text": "For $f:F_eX\\to Y$ with transpose $g:X\\to G_eY$, write $f=\\mu^e_Y\\circ F_e(g)$. Naturality of $\\eta$ and its mate's counit identity give\n$$C_T(f)\\circ\\eta_X=\\mu^p_{C_TY}\\circ F_p(\\theta_Y\\circ C_Z(g)).$$\nThus its pro-etale transpose is $\\theta_Y\\circ C_Z(g)$. Take $X=i_e^*M\\otimes_A^LG_eN$, $Y=M\\otimes_A^LN$, $f=t^e$ and $g=q^e$. Step 1 identifies the left side with $t^p\\circ F_p(1\\otimes\\theta_N)$, whose transpose is $q^p\\circ(1\\otimes\\theta_N)$. Injectivity of the adjunction Hom bijection gives $\\theta_{M\\otimes N}\\circ C_Z(q^e)=q^p\\circ(1\\otimes\\theta_N)$, the required q equality.",
+   "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/cor-weil-boundary-duality-discharge.proof.md",
@@ -57,11 +52,11 @@
    }
   },
   {
-   "text": "The main-20261015 finite-duality site-comparison statement identifies the internal-Hom comparison, the dualizing-object comparison, the evaluation pairings, and the double-dual maps on the bounded finite-Tor class. The duality-pairing statement defines the double-dual map as the tensor–Hom transpose of evaluation after tensor symmetry. Hence comparison commutes with each primitive arrow used in a pairing: q by Steps 1--2, evaluation and its transpose by the duality comparison, and tensor symmetry by the termwise symmetry compatibility of Step 1. Naturality and cancellation of comparison isomorphisms then show, by induction on finite composites, that every pairing built from these arrows has its transpose transported to the corresponding pro-etale transpose.",
+   "text": "The evaluation-defined comparison of [lem-weil-finite-duality-site-comparison] identifies evaluation and the double-dual transpose of [lem-weil-duality-pairing]. For any pairing $f:V\\otimes H\\to\\omega$, compose its proposed transported transpose with evaluation: the defining evaluation square for $\\chi$ gives $w\\circ C(f)$ after the tensor comparison. Uniqueness of tensor-Hom transposes proves the asserted transpose equality. The canonical pullback tensor comparison commutes with signed symmetry [lem-sfb-ringed-derived-monoidal-comparisons]. Together with Step 2 this gives the square for each primitive arrow. For a composite of two arrows, compose their squares and cancel the intervening comparison isomorphism. Induction on the number of arrows proves transport for every finite composite of q, evaluation and symmetry.",
    "uses": [
     "lem-weil-finite-duality-site-comparison",
     "lem-weil-duality-pairing",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+    "lem-sfb-ringed-derived-monoidal-comparisons"
    ],
    "elementary": false,
    "source": {
@@ -70,12 +65,9 @@
    }
   },
   {
-   "text": "Set H=D_{T,e}K. The displayed pairing is the finite composite consisting of tensor symmetry, the q-map of Steps 1--2, and evaluation followed by the compatible identification G_e omega_{T,e}≅omega_{Z,e}. The bounded finite-Tor assumptions ensure that every internal Hom, dualizing object, and projection map lies in the comparison class. Step 3 transports each arrow and its transpose, so the transpose of this etale composite is carried to the transpose of the identical pro-etale composite, with C_TK, G_p C_T D_{T,e}K and the pro-etale dualizing objects.",
-   "uses": [
-    "lem-weil-finite-duality-site-comparison",
-    "lem-weil-duality-pairing"
-   ],
-   "elementary": false,
+   "text": "Take $N=D_{T,e}K$. Apply Step 2 to the q factor of the displayed pairing and Step 3 to its symmetry and evaluation factors. Its final factor $G_e\\omega_{T,e}\\cong\\omega_{Z,e}$ has the assumed compatible dualizing square. Composing these squares and then transposing as in Step 3 gives exactly the displayed pro-etale pairing's transpose. The stated finite-Tor conditions on $K$, its dual, their ordinary and exceptional inverse images, and their indicated duals place every internal Hom in the assumed comparison class; no preservation theorem or ambient pro-etale adjoint is used.",
+   "uses": [],
+   "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/cor-weil-boundary-duality-discharge.proof.md",
     "place": "Final sentence: adjointing back through tensor–Hom and evaluation compatibility"
@@ -83,12 +75,10 @@
   }
  ],
  "proof_deps": [
-  "def-kun-projection-formula-map",
-  "def-sf-comparison-derived-pullback",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-weil-boundary-q-defining-composite-comparison",
   "lem-weil-duality-pairing",
-  "lem-weil-finite-duality-site-comparison",
-  "lem-weil-pbc-comparison-pullback",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+  "lem-weil-finite-duality-site-comparison"
  ],
  "proof_origin": {
   "by": "agent",
@@ -166,20 +156,25 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "item": "lem-weil-boundary-proetale-q-compatibility",
   "worker": "stage1",
-  "summary": "Repaired the returned split against main-20261015. The statement explicitly assumes invertibility of the two projection transformations whose inverses define q (the parent discharges this in its steps 5 and 12), fixes the identity compactification so that both projection transformations are the counit-defined composite, and writes q with its tensor symmetries. Steps 1--2 prove the q compatibility as a mate calculation from the assumed counit/projection compatibilities, monoidality and the pullback comparison; steps 3--4 transport evaluation and double-dual transposes by the current finite-duality comparison. Maintainer-reader FIX (Q58): removed the former step 1 (redundant re-proof of the assumed invertibility, which applied the pro-etale projection theorem to a first variable not known to be finite-Tor and cited two off-route theorems undeclared), corrected the tensor order in the definition of q, and added the missing pullback-comparison citation.",
+  "summary": "Q104 re-split of the long reviewed proof: extract its entire pre-adjunction projection-inverse/signed-symmetry/counit calculation into the independent statement-only composite-comparison node, with arbitrary final arrows rather than exceptional adjoints. Retain the exceptional mate argument, evaluation-normalized tensor-Hom transpose argument and boundary specialization as the short assembly. The item statement and all Lean records are unchanged. The full displaced calculation is preserved in report.md for the new worker.",
   "blueprint": "main-20261015 cor-weil-boundary-duality-discharge.proof.md final paragraph (tensor–Hom transposes, evaluation identities), with the comparison paragraph of thm-sf-pf-proetale.proof.md for the transport of the projection transformation.",
-  "tool_uses": []
+  "tool_uses": [
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic symmetric monoidal coherence of canonical derived pullback, applied to the comparison morphism; this supplies signed symmetry compatibility, which the tensor-isomorphism statement formerly cited does not itself state."
+   }
+  ]
  },
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-Q58-784ea32d8",
-  "group": "Q58",
+  "reviewer": "NT-cc-Q104-852266040",
+  "group": "Q104",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q58-784ea32d8 (reviewer sub-agent of L); spot-checked: I read all of the delivery's mathematics: the item, its unit and chapter, the parent cor-weil-boundary-duality-discharge (its step 14 cites the item, steps 5 and 12 discharge the new invertibility hypothesis), the main-20261015 and master proofs of the corollary (they are identical and contain no q comparison), the comparison paragraph of thm-sf-pf-proetale.proof.md, lem-weil-finite-duality-site-comparison.proof.md, and the statements of every cited node. Making the invertibility of the two projection maps an explicit hypothesis is a legitimate answer to the earlier E1/E5 return: the old text already called them isomorphisms, and the parent discharges it. Faults fixed in fixes/dag/nodes/sec-six-functors/lem-weil-boundary-proetale-q-compatibility.json: (1, E1/C8) the delivered step 1 applied sk-thm-sf-pf-proetale to G_pC_TN, which is only known to be D^b_c while the theorem needs finite Tor. It cited two theorems outside the unit's route without declaring them, and it re-proved an assumption, so I removed it. (2, E4) The definition of q had its tensor factors in an inconsistent order, so pi^{-1} followed by 1(x)mu did not type-check. q is now the transpose of (1(x)mu)∘sigma∘pi^{-1}∘F(sigma). (3, B3/C4, citations) The statement now fixes the identity compactification (F_tau=Ri_{tau,*}), says that the pro-etale pi^p is the same counit-defined composite as in def-kun-projection-formula-map, and cites lem-weil-pbc-comparison-pullback. Old step 2 is replaced by new steps 1–2, an explicit mate calculation from the assumed counit and projection equalities, monoidality and the pullback comparison: theta∘C_Z(q^e)=q^p∘(1(x)theta_N). Steps 3–4 (evaluation and double-dual transport) are kept, and I checked them against the site-comparison and duality-pairing statements. The source field now points to main-20261015. There are no new nodes and no duplicate (searched with rg over dag/nodes). After the fix every cited statement is on the unit's route, so no tool uses are needed. Edge cases Z empty, i=id and zero objects all check out. No SGA source is used.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q104-852266040 (reviewer sub-agent of L); spot-checked: Re-split note checked against clones/live/coord/repair-notes (at least 1 node, at most 3000 chars). The base proof is the live node; its steps are 1545/1029/767/557 chars, and the report preserves them verbatim. The item statement is unchanged. Old step 1, the projection-inverse/signed-symmetry/counit calculation, is now the statement-only node lem-weil-boundary-q-defining-composite-comparison, generalized to arbitrary B, Y, v, a_e, a_p. I checked every map type in it and proved its equality by hand: invert the projection square, then apply naturality of σ and η, symmetric monoidality of c, and the arrow square. I also checked the edge cases i=id, B=M=0, Z empty, nontrivial v and the (-1)^{ab} signs. It is neither a duplicate nor a restatement of the item. The closest nodes are lem-weil-boundary-proetale-projection-comparison (the squares it assumes), the q-foundation, q-maps and q-pairing-transport definition nodes, and lem-coef-site-closed-counit-transport. Its source (thm-sf-pf-proetale proof, lines 7-16), its blueprint.from (cor-weil-boundary-duality-discharge, final paragraph) and its three kinds of search are all fine. Old steps 2-4 stay as item steps; I compared each line by line and nothing was dropped. Step 2 is the same mate algebra, step 3 now actually argues the arbitrary-pairing transpose via the evaluation-normalized χ, and step 4 is the substitution. The step 3 symmetry citation was correctly moved to lem-sfb-ringed-derived-monoidal-comparisons, and I accept that tool_use: it is generic symmetric-monoidal coherence of derived pullback along ν_W. One fix, in step 1: the item assumes its projection square at (C_ZG_eN, C_TM), but the new node needs it at B'=G_pC_TN. Getting there takes naturality of π^p in its first variable, which the step did not mention. I added it; the proof is now 2626 chars. No SGA. Advisory: the spread is modest (one node, about 40% of the old proof), and steps 2-3 could be split further.; 1 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
   "date": "2026-10-18",
@@ -203,5 +198,8 @@
   "date": "2026-10-18",
   "existing": false
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "tool_uses": [
+  "lem-sfb-ringed-derived-monoidal-comparisons"
+ ]
 }
