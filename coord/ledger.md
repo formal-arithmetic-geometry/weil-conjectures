@@ -22528,3 +22528,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:27 L: returned deliver/NU/def-per-support-condition (reviewer RETURN: B/C: the item cites a dropped route node and the delivery gives no justification at any step (the definition has no step)
 - 13:28 L: merged deliver/NS/lem-sfb-tame-pair-proper-generators (reviewer PASS; first push; new nodes: 2); claim not held by NS: not your claim
 - 13:28 L: merged deliver/Q75/lem-dl-a1-galois-prime-residue-lifting (reviewer PASS; first push; new nodes: 2)
+- 13:28 L: returned deliver/NI/lem-sfb-filtered-ring-object-cocone-colimit (reviewer RETURN: A7/B10: superseded by the Lean closure that is live. On base be1f83d and in clones/live and side-live, the item is split)
