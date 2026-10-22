@@ -127,39 +127,60 @@ section Scalars
 
 open MonObj Functor.LaxMonoidal
 
+/-- The inverse image `p_X^*` is additive, being a left adjoint. -/
+instance additive_upperStarFromPoint (X : Scheme.{u}) : (upperStarFromPoint X).Additive := by
+  have adj : upperStarFromPoint X ⊣ _ := pointUpperStarLowerStarAdjunction.comp
+    (ProEtale.upperStarLowerStarAdjunction Ab.{u + 1} (toSpecZ X))
+  have : (upperStarFromPoint X).IsLeftAdjoint := adj.isLeftAdjoint
+  have := Functor.preservesZeroMorphisms_of_isLeftAdjoint (upperStarFromPoint X)
+  have : PreservesColimitsOfSize.{0, 0} (upperStarFromPoint X) :=
+    adj.leftAdjoint_preservesColimits
+  have := preservesBinaryBiproducts_of_preservesBinaryCoproducts (upperStarFromPoint X)
+  exact Functor.additive_of_preservesBinaryBiproducts _
+
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-  (X : Scheme.{u})
+  (ℓ : ℕ) [Fact ℓ.Prime] [IsEllAdicFinitenessCoefficient ℓ Λ] {k : Type u} [Field k]
+  [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] (X : Over (Spec (.of k)))
+  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
 
 /-- The global sections of the coefficient ring `Λ` act on the unit `Λ_X` of `Dᵇc(X)⟦Λ⟧`: a
 global section `s : 𝟙 ⟶ Λ` is sent to the multiplication by its pullback `p_X^* s` on `Λ_X`
 (`Mod.regularEndRingHom`), placed in degree `0`. -/
 noncomputable def boundedConstructibleUnitEndRingHom :
-    Γ Λ →+* End (𝟙_ (Dᵇc(X)⟦Λ⟧)) :=
-  ((RingEquiv.ofBijective ((ObjectProperty.ι _).mapEndRingHom (𝟙_ (Dᵇc(X)⟦Λ⟧)))
-      ((ObjectProperty.fullyFaithfulι _).map_bijective _ _)).symm.toRingHom.comp
-    ((asIso (ε (DerivedCategory.Qh (C := Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-        (condensedRingObj Λ X))))).symm.conjRingEquiv.toRingHom.comp
-      ((HomologicalComplex.single _ (ComplexShape.up ℤ) 0 ⋙
-          HomotopyCategory.quotient _ (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh).mapEndRingHom
-          (Mod.regular (condensedRingObj Λ X))).comp
-        (Mod.regularEndRingHom.comp (Γ.mapFunctor (upperStarFromPoint X))))))
-
-variable (ℓ : ℕ) [Fact ℓ.Prime]
+    Γ Λ →+* End (𝟙_ (Dᵇc(X.left)⟦Λ⟧)) :=
+  let F := HomologicalComplex.single
+      (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1}) (condensedRingObj Λ X.left))
+      (ComplexShape.up ℤ) 0 ⋙ HomotopyCategory.quotient _ (ComplexShape.up ℤ) ⋙
+    DerivedCategory.Qh
+  have hι : Function.Bijective ((ObjectProperty.ι _).mapEndRingHom (𝟙_ (Dᵇc(X.left)⟦Λ⟧))) :=
+    (ObjectProperty.fullyFaithfulι _).map_bijective _ _
+  have : IsIso (ε (DerivedCategory.Qh (C := Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
+      (condensedRingObj Λ X.left)))) := inferInstanceAs (IsIso (𝟙 _))
+  ((RingEquiv.ofBijective _ hι).symm.toRingHom.comp
+    ((asIso (ε (DerivedCategory.Qh (C := Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
+        (condensedRingObj Λ X.left))))).symm.conjRingEquiv.toRingHom.comp
+      ((F.mapEndRingHom (Mod.regular (condensedRingObj Λ X.left))).comp
+        (Mod.regularEndRingHom.comp (Γ.mapFunctor (upperStarFromPoint X.left))))))
 
 /-- The canonical map `ℚ̄_ℓ →+* End (𝟙_ Dᵇc(X)⟦ℚ̲̄_ℓ⟧)`: a scalar `a` acts on `ℚ̄_ℓ,X` by
 multiplication by the constant global section `a` of `ℚ̲̄_ℓ`
 (`Profinite.PadicAlgCl.constRingHom`). -/
 noncomputable def padicAlgClUnitEndRingHom :
-    PadicAlgCl ℓ →+* End (𝟙_ (Dᵇc(X)⟦Profinite.padicAlgClRingObj ℓ⟧)) :=
-  (boundedConstructibleUnitEndRingHom _ X).comp (Profinite.PadicAlgCl.constRingHom ℓ)
+    PadicAlgCl ℓ →+* End (𝟙_ (Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)) :=
+  (boundedConstructibleUnitEndRingHom _ ℓ X).comp (Profinite.PadicAlgCl.constRingHom ℓ)
 
-variable (k : Type u) [Field k] [IsSepClosed k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
+end Scalars
+
+section ScalarsPoint
+
+variable (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [IsSepClosed k] [Fact (ringChar k).Prime]
+  [Fact (ringChar k ≠ ℓ)]
 
 /-- For `k` separably closed, the endomorphisms of the unit of `Dᵇc(Spec k)⟦ℚ̲̄_ℓ⟧` are
 `H⁰(Spec k, ℚ̄_ℓ) = ℚ̄_ℓ`: the canonical map `ℚ̄_ℓ →+* End (𝟙_ Dᵇc(Spec k)⟦ℚ̲̄_ℓ⟧)` is
 bijective. -/
 theorem bijective_padicAlgClUnitEndRingHom_point :
-    Function.Bijective (padicAlgClUnitEndRingHom (point k).left ℓ) :=
+    Function.Bijective (padicAlgClUnitEndRingHom ℓ (point k)) :=
   sorry
 
 /-- For `k` separably closed, the endomorphisms of the unit of `Dᵇc(Spec k)⟦ℚ̲̄_ℓ⟧` are
@@ -169,7 +190,7 @@ noncomputable def unitEndRingEquiv :
     End (𝟙_ (Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧)) ≃+* PadicAlgCl ℓ :=
   (RingEquiv.ofBijective _ (bijective_padicAlgClUnitEndRingHom_point ℓ k)).symm
 
-end Scalars
+end ScalarsPoint
 
 /-! ### Weil objects for the identity -/
 
