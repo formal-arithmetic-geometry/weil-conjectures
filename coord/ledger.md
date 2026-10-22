@@ -24429,3 +24429,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:10 L: returned deliver/N9/sk-thm-groth-ss (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-thm-groth-ss: sk-thm-groth-ss: completed in this pr)
 - 03:10 L: returned deliver/NE/lem-sfb-equivariant-nodal-smooth-pair-resolution (reviewer RETURN: I read the item's 12 steps and both new nodes in full, and checked ILO X 2.2 on printed pp.149-150. The item is live: it)
 - 03:11 L: merged deliver/NJ/lem-sfb-flat-geometrically-reduced-pullback (reviewer PASS; first push; new nodes: 0)
+- 03:11 L: returned deliver/Q85/lem-weil-integral-twist-scalar-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-integral-twist-scalar-coherence: lem-weil-int)
