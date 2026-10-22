@@ -30,100 +30,57 @@
  ],
  "proof": [
   {
-   "text": "For each $i$, identify $(V_i)_{\\mathrm{proét}}$ with $S_{\\mathrm{proét}}/V_i$ by [lem-weil-proetale-weakly-etale-localization](1). Under this site identification inverse image is restriction, with the section formula of [def-pur-localized-ringed-site]. The ring isomorphism $g_i^{-1}\\Gamma_S\\cong\\Gamma_{V_i}$ of [lem-sfb-alpha-iso] identifies module inverse image with restriction and transport of the ring action. Thus, for a module sheaf $F$, $(g_i^*F)(W\\to V_i)=F(W\\to S)$ after this coefficient identification. Here only clause (1) of the localization lemma is used; its constant-ring clauses are not applied to the condensed ring $\\Gamma$.",
+   "text": "Convert the given sectionwise flatness to two-sided internal tensor flatness using InternalAbelianSheafModule.flat_iff_sectionModule [lem-c2-internal-section-module-flatness]. The support bounds give IsStrictlyGE r and IsStrictlyLE s; apply the existing generic source bounded-flat K-flat criterion CochainComplex.kFlat_of_bounded_of_flat [lem-sfb-bounded-above-flat-kflat] to each L_i. No flatness of the test module N is required.",
    "uses": [
-    "lem-weil-proetale-weakly-etale-localization",
-    "def-pur-localized-ringed-site",
-    "lem-sfb-alpha-iso"
+    "lem-c2-internal-section-module-flatness",
+    "lem-sfb-bounded-above-flat-kflat"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 098K (definition-big-small-proetale); sites.tex Tags 00XZ (section-localize), 00Y0 (definition-localize), and sites-modules.tex Tag 04IX (definition-localize-ringed-site)"
-   }
+   "elementary": false
   },
   {
-   "text": "The functor $g_i^*$ is exact, as stipulated in the statement. By [lem-weil-pbc-exact-functor-complex-cohomology], $H^q(g_i^*A^\\bullet)\\cong g_i^*H^q(A^\\bullet)$ for every complex. In particular it preserves every quasi-isomorphism. Hence its termwise action induces $D(g_i^*)$ on the derived category. To identify this with $Lg_i^*$, choose for a representative $A^\\bullet$ a K-flat flat-term resolution $P^\\bullet\\to A^\\bullet$ using [lem-pc-kflat-resolution]. The computation in [lem-weil-pbc-ringed-topoi-derived-pullback] identifies $Lg_i^*A$ with the image of $g_i^*P^\\bullet$, and exactness makes $g_i^*P^\\bullet\\to g_i^*A^\\bullet$ a quasi-isomorphism. These comparison maps give $Lg_i^*A\\cong D(g_i^*)A$. Write both as $g_i^*A$ below.",
+   "text": "For F_i = CondensedRing.upperStar Γ.X g_i, the coefficient isomorphism [lem-sfb-alpha-iso] makes F_i exact. Use its existing leftDerivedUpperStarIsoMapDerivedCategory to pass between total derived inverse image and termwise inverse image. Compose leftDerivedUpperStarTensorIso, the existing module-object tensor-pullback comparison of [new-proetale-derived-module-pullback-monoidal], with these exactness comparisons and the single-functor comparison F_i(N[0]) ≅ F_i(N)[0]. Substitute the supplied model F_i(Q) ≅ Q(L_i). This gives F_i(Q tensor-derived N[0]) ≅ Q(L_i) tensor-derived F_i(N)[0].",
+   "uses": [
+    "lem-sfb-alpha-iso",
+    "new-proetale-derived-module-pullback-monoidal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the already proved generic source declaration DerivedCategory.QObjTensorSingleFunctorObjIso [lem-weil-pbc-source-kflat-tensor-single-model], specialized to the internal module category and F_i(N). Compose with Q applied to the inverse of CochainComplex.mapBifunctorSingle₂Iso to identify its termwise tensor model with the ordinary total tensor complex L_i tensor F_i(N)[0] [def-pc-tensor-complex-sheaves]. This proves the first conclusion. For cohomology bounds, the generic proved source theorem DerivedCategory.torAmplitudeIn_Q_obj_of_flat [lem-trf-source-bounded-flat-tor-amplitude] applies to the same support and flatness hypotheses. Transport its Tor-test bound along the derived local tensor comparison of step 2. This avoids re-elaborating the total-complex comparison in the vanishing argument.",
+   "uses": [
+    "lem-weil-pbc-source-kflat-tensor-single-model",
+    "def-pc-tensor-complex-sheaves",
+    "lem-trf-source-bounded-flat-tor-amplitude"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let H be H^q(Q tensor-derived N[0]) for q outside [r,s]. The exact-functor comparison mapDerivedCategoryHomologyFunctorIso [lem-weil-pbc-exact-functor-complex-cohomology] and the local tensor isomorphism identify every F_i(H) with the zero local homology object. Package the finite family as a Scheme.Cover. Apply the public derived zero-object detection in [lem-zl-condensed-cover-restriction-conservative] to H[0]: mapDerivedCategorySingleFunctor identifies each restriction with F_i(H)[0], which is zero. Hence H[0] is zero. Full faithfulness of the derived single functor gives H=0. Private helpers perform this descent for an abstract module and abstract derived object so specialization does not unfold concrete tensor constructions. This includes empty covers. Finally apply the two derived t-structure vanishing criteria to obtain Tor amplitude [det-def-sfb-constructible-tor-amplitude].",
    "uses": [
     "lem-weil-pbc-exact-functor-complex-cohomology",
-    "lem-pc-kflat-resolution",
-    "lem-weil-pbc-ringed-topoi-derived-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YY (lemma-derived-base-change); homology.tex Tag 010N (lemma-exact-functor); Tag 06YS (lemma-K-flat-resolution)"
-   }
-  },
-  {
-   "text": "Fix any $\\Gamma_S$-module $N$ in degree zero. Apply [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] to the ringed-topos morphism $g_i$ and the two objects $Q,N[0]$. Step 2 turns its derived pullbacks into exact inverse images and gives\n$$g_i^*(Q\\otimes^{\\mathbf L}_{\\Gamma_S}N)\\cong (g_i^*Q)\\otimes^{\\mathbf L}_{\\Gamma_{V_i}}(g_i^*N).$$\nUse the given isomorphism $g_i^*Q\\cong L_i^\\bullet$ in this bifunctor to replace the first factor by $L_i^\\bullet$. No flatness of $N$ is used.",
-   "uses": [
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A4 (lemma-pullback-tensor-product)"
-   }
-  },
-  {
-   "text": "Each $L_i^\\bullet$ is bounded above by $s$ and has flat terms. Therefore it is K-flat by [lem-pc-bounded-above-flat-kflat-site]. To compute its tensor with $g_i^*N$ using precisely an existing ringed-site statement, specialize the representative-computation clause of [lem-trf-site-derived-tensor-restriction] to $\\mathcal R=\\mathcal S=\\Gamma_{V_i}$, $\\varphi=\\mathrm{id}$, $H=Q_{\\Gamma_{V_i}}(L_i^\\bullet)$, and the K-flat flat-term representative $\\mathrm{id}:L_i^\\bullet\\to L_i^\\bullet$. That clause explicitly says that its left derived object is computed by $P\\otimes_{\\mathcal R}\\operatorname{Res}_\\varphi N$. For this identity ring map it is exactly $L_i^\\bullet\\otimes_{\\Gamma_{V_i}}g_i^*N$. Together with step 3 this is the asserted local isomorphism.",
-   "uses": [
-    "lem-pc-bounded-above-flat-kflat-site",
-    "lem-trf-site-derived-tensor-restriction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YQ (lemma-bounded-flat-K-flat) and Tag 06YU (definition-derived-tor and its preceding construction)"
-   }
-  },
-  {
-   "text": "By the total-complex formula [def-pc-tensor-complex-sheaves], tensoring $L_i^\\bullet$ with the degree-zero complex $g_i^*N$ has degree-$q$ term $L_i^q\\otimes_{\\Gamma_{V_i}}g_i^*N$. This term is zero whenever $q\\notin[r,s]$. Its degree-$q$ cohomology is then zero, since $\\ker(0\\to C^{q+1})/\\operatorname{im}(C^{q-1}\\to0)=0$ [def-weil-abstract-derived-category]. Put $F^q=H^q(Q\\otimes^{\\mathbf L}_{\\Gamma_S}N)$. Applying the cohomology comparison of [lem-weil-pbc-exact-functor-complex-cohomology] and the local isomorphism of step 4 gives $g_i^*F^q=0$ for every $i$ and every $q\\notin[r,s]$.",
-   "uses": [
-    "def-pc-tensor-complex-sheaves",
-    "def-weil-abstract-derived-category",
-    "lem-weil-pbc-exact-functor-complex-cohomology"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YL (section-flat), total tensor used before Lemma 06YM (lemma-derived-tor-exact); homology.tex Tag 010N (lemma-exact-functor)"
-   }
-  },
-  {
-   "text": "Fix $q\\notin[r,s]$ and an arbitrary object $W\\to S$ of the site. The covering axiom in [def-weil-pbc-sites-and-cohomology](1)(iii) gives the covering $\\{W\\times_SV_i\\to W\\}_i$. Step 1 and the restriction formula [def-pur-localized-ringed-site] give $F^q(W\\times_SV_i)=0$, since $F^q|_{V_i}=0$. For any $x\\in F^q(W)$, all its restrictions equal those of the zero section. The equalizer (in particular uniqueness) part of the sheaf condition in [def-weil-pbc-sites-and-cohomology](1) therefore gives $x=0$. Thus every section group of $F^q$ is zero, so $F^q=0$. The argument also works for an empty covering, by the empty equalizer sheaf condition. Since $N$ and $q\\notin[r,s]$ were arbitrary, this is exactly Tor amplitude in $[r,s]$ by [det-def-sfb-constructible-tor-amplitude](3).",
-   "uses": [
-    "def-weil-pbc-sites-and-cohomology",
-    "def-pur-localized-ringed-site",
+    "lem-zl-condensed-cover-restriction-conservative",
     "det-def-sfb-constructible-tor-amplitude"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tags 00VH (definition-site), 00VM (definition-sheaf-sets), 00VR (definition-sheaf), 00Y0 (definition-localize)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-proetale-weakly-etale-localization",
-  "def-pur-localized-ringed-site",
+  "lem-c2-internal-section-module-flatness",
+  "lem-sfb-bounded-above-flat-kflat",
   "lem-sfb-alpha-iso",
-  "lem-weil-pbc-exact-functor-complex-cohomology",
-  "lem-pc-kflat-resolution",
-  "lem-weil-pbc-ringed-topoi-derived-pullback",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-pc-bounded-above-flat-kflat-site",
-  "lem-trf-site-derived-tensor-restriction",
+  "new-proetale-derived-module-pullback-monoidal",
+  "lem-weil-pbc-source-kflat-tensor-single-model",
   "def-pc-tensor-complex-sheaves",
-  "def-weil-abstract-derived-category",
-  "def-weil-pbc-sites-and-cohomology",
+  "lem-trf-source-bounded-flat-tor-amplitude",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-zl-condensed-cover-restriction-conservative",
   "det-def-sfb-constructible-tor-amplitude"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-ctf.proof.md",
-  "place": "Expansion of (2) Local models: termwise flat tensor computation and descent of the common Tor interval, using Stacks Tags 06YQ, 06YY, 07A4, 06YU and the sheaf condition."
+  "place": "(2) Local models; existing internal-module K-flat computation and condensed cover conservativity implement the same local-model and descent argument.",
+  "note": "P3: the Lean proof uses the already published module-object tensor-pullback and exactness comparisons, rather than reconstructing them through a second ringed-site presentation. All theorem hypotheses and conclusions are unchanged."
  },
  "mathlib_searches": [
   {
@@ -259,13 +216,7 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-proetale-weakly-etale-localization",
-  "lem-sfb-alpha-iso",
-  "lem-pc-kflat-resolution",
-  "lem-weil-pbc-ringed-topoi-derived-pullback",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-pc-bounded-above-flat-kflat-site",
-  "lem-trf-site-derived-tensor-restriction"
+  "lem-sfb-alpha-iso"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -293,5 +244,15 @@
   "group": "Q110",
   "result": "pass",
   "note": "Only lean changed, plus one added stmt_dep: the landed def-weil-pbc-internal-abelian-sheaf-module-equivalence (no cycle, allowed by brief-stage2 l.140). Statement unchanged. Clauses match: condensedRingObj coefficients; internal-module D(Mod) as in the recorded torAmplitudeIn; Fin n family in Scheme.proetalePrecoverage S (n=0 allowed); IsZero bounds; IsFlatOnSite on the sectionModuleEquivalence image over sectionRingSheaf (universes u+1,u,u+1,u+1); model isos through the exact upperStar.mapDerivedCategory; local iso as Nonempty with total mapBifunctor curriedTensor; homology vanishing; torAmplitudeIn r s Q. No extra hypotheses or universe restriction. Docstrings and six proof steps present; imports match proof_dep modules; no defs; sorry only; no duplicate. Advisory: upperStar is owned by def-sfb-module-upper-star, not a stmt_dep. No compile (no FIX)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261022T011912-L-3230758",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
