@@ -179,5 +179,23 @@
   "group": "NU",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-427631787 (reviewer sub-agent of L); spot-checked: I read the item and new node in full, both against their sources. The item states Divisors 0BUT (divisors.tex 3617-3652) exactly: finite p, invertible M, a neighbourhood V of z with M trivial on p^-1 V. Its 5 steps follow the source's proof. Step 1 (elementary): restrict to an affine U, using that def-weil-finite-integral-morphism makes the inverse image affine and the restriction finite. Step 2: the fibre is finite by clause 2 of the Mathlib leaf lem-weil-pbc-finite-closed-map-finite-fibres (finite_preimage_singleton), and the new node gives s nonvanishing on that fibre. Step 3: lem-weil-pbc-nonvanishing-section-trivializes (Stacks 01CY) gives W=X_s open with O_W ≅ L|_W, and its X_s condition s_x not in m_x L_x matches the new node's. Steps 4-5 (elementary): finite maps are closed, so V=U minus q(X minus W) is a neighbourhood of z with q^-1 V inside W, and restricting the isomorphism to it gives the trivialization. The new node lem-sfb-affine-invertible-finite-set-section is Properties 0F20 (properties.tex 5327-5380, tag/label checked in tags/tags) specialized to X affine and W=X, a correct weaker statement. It is self-contained and statement-only, with 7 searches logged and no Mathlib match. I tested it on: E empty, X empty, L=O_X, a Dedekind non-principal I with two maximal ideals (CRT), the generic point, finite residue fields and nilpotents, and found no counterexample. It is not a duplicate: rg -L finds no other 0F20 node; 09NV gives a section only of a power of an ample L, 01ZY gives only an affine open, 09NB and 00JS are different statements, and 01CY starts from a given s. It does not restate any clause of the item. The item and its citer finite-norm-invertible-sections are not in route-pivot-dropped.txt (live or side-live). The item is still unsplit live, so the delivery is not superseded. There is no repair note and no SGA citation. I accept the declared tool_use lem-weil-pbc-nonvanishing-section-trivializes: it is the generic line-bundle fact Stacks 01CY, from unit sk-thm-reduction, used as a black box. The citer's use of the item (a cover V_i with free generators on p^-1 V_i) matches the statement. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteTrivializeInvertibleUpstairs",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_trivialization_over_preimage_of_isFinite",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteTrivializeInvertibleUpstairs.lean",
+  "statement": "theorem exists_trivialization_over_preimage_of_isFinite {Y Z : AlgebraicGeometry.Scheme.{u}} (p : Y ⟶ Z) [AlgebraicGeometry.IsFinite p] (M : Y.Modules) [M.IsInvertible] (z : Z) : ∃ V : Z.Opens, z ∈ V ∧ Nonempty (M.restrict (p ⁻¹ᵁ V).ι ≅ SheafOfModules.unit (p ⁻¹ᵁ V).toScheme.ringCatSheaf)",
+  "branch": "newtargets-dag",
+  "by": "NE",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bb3759ed0",
+  "group": "NE",
+  "result": "pass",
+  "note": "Matches Stacks 0BUT and the node. Uses the recorded IsFinite and IsInvertible declarations; the conclusion is ∃ V : Z.Opens, z ∈ V ∧ Nonempty (M.restrict (p⁻¹ᵁV).ι ≅ unit), with restrictUnitIso identifying the right side as restricted O_Y. No extra hypotheses; the empty-fibre, empty-scheme and identity cases are covered. The only node change is the new lean record (the live node had none), and lean.statement is verbatim. Imports are the statement deps plus the proof-dep modules (Mathlib-leaf Proper/QuasiFinite, NonvanishingSectionTrivializes). Docstrings carry the source place, the five proof steps and the blueprint tag; the proof is sorry; report sections are present. No findings, no recompile."
  }
 }
