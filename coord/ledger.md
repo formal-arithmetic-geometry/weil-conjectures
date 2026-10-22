@@ -24376,3 +24376,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:46 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
 - 02:47 L: merged deliver/NB/lem-sfb-admissible-finite-type-field-quotient (reviewer PASS; first push; new nodes: 0)
 - 02:48 L: merged deliver/ND/lem-sfb-common-field-semilinear-induction (reviewer FIX; first push; new nodes: 2)
+- 02:48 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
