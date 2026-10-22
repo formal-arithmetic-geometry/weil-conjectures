@@ -2,7 +2,7 @@
 
 43 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Rework: quarantined by the upstream sync (3 clusters, 289 modules)
+## Rework: quarantined by the upstream sync (3 clusters, 271 modules)
 
 Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.tsv). One item per cluster: its root (a quarantined module importing no other quarantined one) and the quarantined modules importing it; fix the root, then the dependents as far as possible, deliver every module that compiles.
 
@@ -20,7 +20,7 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 |---|---|---|
 | `lem-sfb-proper-wcontractible-closed-fibre-rigidity` | 2008 | none |
 | `lem-sfb-affine-profinite-family-serre-cd` | 2009 | none |
-| `lem-sfb-zero-dimensional-base-affine-global` | 2009 | none |
+| `lem-sfb-spectral-space-cohomology-dimension` | 2010 | none |
 | `lem-sfb-equivariant-smooth-galois-model` | 4012 | none |
 | `lem-sfb-tame-snc-quotient-resolution` | 4012 | none |
 | `lem-sfb-ramified-cartier-supported-purity` | 4013 | none |
@@ -34,7 +34,7 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `def-sfb-finite-derived-adjunction` | 1 | state | 0 |
 | `lem-pur-diagonal-dnc-chart-normalization` | 1 | state | 1 |
 | `lem-pe-internal-module-sectionwise-short-exact` | 1 | state | 0 |
-| `lem-sfb-profinite-geometric-family-heart-cd` | 1 | state | 0 |
+| `lem-sfb-zero-dimensional-base-affine-global` | 1 | state | 0 |
 
 Not open yet: 369 nodes that below a finished node, not needed, 87 nodes that wait for a statement dependency (bottom-up), 7 nodes that wait for stage 1 (statement downstream not grounded).
 
