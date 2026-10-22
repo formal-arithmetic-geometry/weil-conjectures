@@ -17,9 +17,47 @@
   "document": "literature/stacks-project/sites-modules.tex",
   "place": "Definition definition-pushforward (Tag 03D6), Lemmas lemma-adjointness-tensor-restrict (Tag 03CZ) and lemma-adjoint-pullback-pushforward-modules; applied to the small sequence site of Tag 0941. Blueprint thm-trf-l-function-euler-product.proof.md, Step 1 Global powers: canonical pullback identifications."
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the map/pullback adjunction for the pro-etale site. Postcomposition along g is an equivalence, so its adjunction with base change is an equivalence. Take the product with the identity of the sequence index. Vertical coverings show that both product functors are continuous. The constant-section direct ring map is the sheafification compatibility isomorphism. Thus the levelwise sequence ring map is invertible, and Mathlib pushforwardPushforwardEquivalence makes the actual sequence direct image an equivalence. Its recorded left-adjoint unit is consequently invertible.",
+   "uses": [
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "def-trf-integral-comparison-sequence-systems",
+    "def-coef-ringed-sequence-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The direct constant-ring map followed by restriction along the canonical comma arrow has the defining constant-section normalization of inverseImageFiniteCoefficientMap. Uniqueness identifies these maps. The limit projection equation for inverseImageCompletedCoefficientMap then proves that the completed scalar action is respected by the sequence adjunction unit followed by comma restriction. At level n form this linear natural transformation using pushforwardNatIso and pushforwardCongr. Both its adjunction-unit and comma-restriction factors are isomorphisms.",
+   "uses": [
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "def-weil-inverse-image-pullback-comparison",
+    "def-trf-integral-comparison-sequence-systems"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the level isomorphisms through coefficientSequenceRestriction_evaluation. Its underlying section map carries the recorded cast of x to x. Naturality of the adjunction unit and the product-site composition equations prove compatibility with every quotient transition; naturality in the sequence module is inherited from the level transformations. NatIso.ofComponents assembles the whole-tower isomorphism. Every source section is a cast of an original sequence section, so extensionality and the prescribed formula prove uniqueness. The existing derived and diagonal definitions localize these exact constructions unchanged.",
+   "uses": [
+    "def-coef-ringed-sequence-site",
+    "def-trf-integral-comparison-realization-models",
+    "def-trf-integral-comparison-sequence-systems"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "def-trf-integral-comparison-sequence-systems",
+  "def-coef-ringed-sequence-site",
+  "def-weil-inverse-image-pullback-comparison",
+  "def-trf-integral-comparison-realization-models"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D6, 03D2 and 0941; explicit isomorphism specialization using Mathlib pushforwardPushforwardEquivalence, pushforwardNatIso and the canonical sequence adjunction unit. G4, 2026-10-21."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -103,5 +141,15 @@
   "group": "Q01",
   "result": "pass",
   "note": "Clause-by-clause match of the item node against integralPullbackResolutionMatching: the tower C_k, its identification of M = Lk^*N with Rlim C (written explicitly via (D.coefficient E).pullback k realization), h^*C, both derived-limit counits (K-injective-normalized), kappa applied to M, the recorded eta, and the termwise unit; correct composition order; the equality holds in the derived category of whole strict towers. D quantified over all normalized IntegralComparisonSystems, matching the existential realization lemma; the single universe u is inherited from that recorded interface. New def-trf-integral-tower-inverse-image-unit is genuinely absent elsewhere; its unit is fixed on every section as x tensor 1 by a named sorried existsUnique theorem (accepted pattern); derived unit and diagonal are canonical. Node fields unchanged except lean and the added stmt_dep; statements verbatim; docstrings, sources and blueprint tags present; only sorry proofs. Both modules compile clean via nt_compile --json (4.4 s, 3.5 s, exit 0). No findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261022T011841-L-3224229",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
