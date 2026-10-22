@@ -24371,3 +24371,6 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:44 L: returned deliver/N9/sk-thm-groth-ss (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-thm-groth-ss: sk-thm-groth-ss: completed in this pr)
 - 02:45 L: returned deliver/NI/lem-sfb-ramified-cartier-supported-purity (reviewer RETURN: C1/F + G4. I read all 7 steps; there are no new nodes, the statement, stmt_deps and source are unchanged, and the item i)
 - 02:46 L: merged deliver/NQ/lem-sfb-cech-vanishing-surjective-unions (reviewer PASS; first push; new nodes: 1)
+
+- 2026-10-22 02:46 UTC: maintenance retired NF duplicate claim/return for def-pur-affine-line-purity-comparison; NI landing b0742fd8f9 and reviewed Lean preserved byte-for-byte; see coord/changes/20261022-NF-affine-line-duplicate-retired.md.
+- 02:46 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
