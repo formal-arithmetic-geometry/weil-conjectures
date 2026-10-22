@@ -24326,3 +24326,5 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:21 L: returned deliver/N9/sk-thm-groth-ss (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-thm-groth-ss: sk-thm-groth-ss: completed in this pr)
 - 02:22 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
 - 02:22 L: returned deliver/J1/Sheaf.Paper.CompletedTowerPullback (reviewer RETURN: (reviewer C-44fa2, head 44fa21fc8) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.CompletedTower)
+
+- 02:23 L maintenance (NN): closed stale claim for lem-sfb-finite-quotient-normal-proper (recreated 01:31:45Z after reviewed stage-2 landing 346b4c2ebe at 01:31:33Z). Live Lean record, module, and normalized worker report match the saved packet; no queue row, return, repair note, or delivery remains. claim.py done reconciles completion; no mathematical or Lean changes. Protected dispatcher/deliver2 idempotency faults documented in launcher maintenance REPORT.md.
