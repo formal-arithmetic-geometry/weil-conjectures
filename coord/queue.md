@@ -1,6 +1,6 @@
 # Work queue
 
-47 items; claim with `tools/claim.py next <group> [--stage N]`.
+48 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Rework: quarantined by the upstream sync (5 clusters, 307 modules)
 
@@ -16,20 +16,22 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 
 Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 53, stage 3 1 items.
 
-## Stage 1: nodes to split (8)
+## Stage 1: nodes to split (10)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `lem-sfb-qcqs-proper-serre-heart-bound` | 2007 | none |
+| `lem-sfb-profinite-geometric-family-heart-cd` | 2008 | none |
+| `lem-sfb-proper-wcontractible-closed-fibre-rigidity` | 2008 | none |
 | `lem-sfb-equivariant-smooth-galois-model` | 4012 | none |
 | `lem-sfb-tame-snc-quotient-resolution` | 4012 | none |
 | `lem-sfb-ramified-cartier-supported-purity` | 4013 | none |
-| `lem-sfb-finite-norm-invertible-sections` | 4014 | none |
 | `lem-sfb-norm-completion-positive-cohomology-mono` | 4014 | none |
 | `lem-sfb-normal-integral-finite-sheaf-norm` | 4014 | none |
+| `lem-sfb-finite-trivialize-invertible-upstairs` | 4015 | none |
 | `def-per-support-condition` | - | none |
 
-## Stage 2: nodes to state (6)
+## Stage 2: nodes to state (5)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -37,10 +39,9 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-pur-diagonal-dnc-chart-normalization` | 1 | state | 1 |
 | `lem-pe-internal-module-sectionwise-short-exact` | 1 | state | 0 |
 | `lem-pur-adic-projection-shift-coherence` | 1 | state | 0 |
-| `lem-sfb-finite-quotient-normal-proper` | 1 | state | 0 |
-| `lem-sfb-semilinear-sylow-good-components` | 1 | state | 0 |
+| `lem-sfb-finite-norm-invertible-sections` | 1 | state | 0 |
 
-Not open yet: 369 nodes that below a finished node, not needed, 87 nodes that wait for a statement dependency (bottom-up), 7 nodes that wait for stage 1 (statement downstream not grounded).
+Not open yet: 369 nodes that below a finished node, not needed, 87 nodes that wait for a statement dependency (bottom-up), 9 nodes that wait for stage 1 (statement downstream not grounded).
 
 ## Stage 3: modules to prove (23)
 
