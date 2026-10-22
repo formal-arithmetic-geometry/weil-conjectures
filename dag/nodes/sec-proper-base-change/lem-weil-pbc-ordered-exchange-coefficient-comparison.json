@@ -1,347 +1,339 @@
 {
- "id": "lem-weil-pbc-ordered-exchange-coefficient-comparison",
- "blueprint": {
-  "from": {
-   "node": "lemma-weil-pbc-completed-exchange-coherence",
-   "place": "Second proof paragraph: conjugation by the same reconstruction, projection-formula, and direct-image/limit isomorphisms; coefficient normalization for intermediate complete inputs.",
-   "via": []
+  "id": "lem-weil-pbc-ordered-exchange-coefficient-comparison",
+  "blueprint": {
+    "from": {
+      "node": "lemma-weil-pbc-completed-exchange-coherence",
+      "place": "Second proof paragraph: conjugation by the same reconstruction, projection-formula, and direct-image/limit isomorphisms; coefficient normalization for intermediate complete inputs.",
+      "via": []
+    },
+    "same_as": [],
+    "is": null
   },
-  "same_as": [],
-  "is": null
- },
- "kind": "statement",
- "title": "Coefficient normalization of the raw ordered completed exchange",
- "statement": "Fix a cartesian square of schemes $\\square=(f:X\\to Y,f':X'\\to Y',g:Y'\\to Y,g':X'\\to X)$ [def-weil-pbc-cartesian-square], and the adic datum of [def-weil-pbc-adic-coefficient-datum]: $A$ is commutative Noetherian, $I$ is finitely generated, $A/I$ is additive torsion, and every $P_n=A/I^n$ is finite and perfect over $A$. Put $A_T=\\varprojlim_n\\underline{P_n}_T$ on the small pro-etale site of each corner $T$, with the canonical map $\\underline A_T\\to A_T$. Let $\\operatorname{Res}_T$ be derived restriction of scalars [def-pc-sheaf-restrict-scalars, lem-weil-pbc-constant-completion-equivalence]. Use the canonical coefficient isomorphisms $u^{-1}A_V\\cong A_U$ [lem-weil-pbc-profinite-coefficient-inverse-image] and the ringed operations over $A_T$ [def-weil-pbc-proetale-operations], the strict reduction tower functor $\\mathcal R^a_T$ of the datum, and completed pullback $F^a_u$ [def-weil-pbc-completed-pullback]. Let $\\mathcal T_T=\\operatorname{Fun}(\\mathbf N_{\\geq1}^{op},\\operatorname{Mod}(\\underline A_T))$, with $\\mathcal L_T=R\\lim$ on its derived category and strict constant-coefficient reduction functor $\\mathcal R_T$ as in [lem-sp-completion-mate-comparison]. For an edge $u:U\\to V$, write $G_u=u^{-1}$ termwise, $R_u^{\\mathcal T}$ for derived termwise direct image, $R_u^0=Ru_*$ on constant-coefficient complexes, $C_T=\\mathcal L_T\\mathcal R_T$, and $F_u^0=C_UG_u$ on the full derived-complete categories [lem-sp-completed-pullback-adjunction]. All sites and diagram sites are small in the convention of [def-weil-size-convention].\n\nLet $K\\in D(\\operatorname{Mod}(A_X))$ be any derived $I$-complete object, meaning that the canonical quotient completion map $K\\to\\mathcal L^a_X\\mathcal R^a_XK$ is invertible [prop-weil-pbc-koszul-reconstruction], and put $\\bar K=\\operatorname{Res}_XK$. No properness, constructibility, boundedness, or etale-origin hypothesis is imposed. Use derived strict-tower operations $\\mathscr L_u,\\mathscr R_u$ over $A_T$, computed on the diagram sites [lem-weil-pbc-diagram-site-realization]. Define the raw ordered construction as follows, before choosing any finite etale-origin witnesses. Put $E=Lg'^*K$, $M=Lg^*Rf_*K$, $N=Rf'_*E$, and let $e:M\\to N$ be the ambient ringed adjunction mate [def-weil-pbc-ambient-ringed-exchange]. Let\n$$B^a=\\mathscr L_g\\mathscr R_f\\mathcal R^a_XK,\\qquad D^a=\\mathscr R_{f'}\\mathscr L_{g'}\\mathcal R^a_XK.$$\nLet $H^a:\\mathcal R^a_{Y'}M\\xrightarrow{\\sim}B^a$ and $H'^a:\\mathcal R^a_{Y'}N\\xrightarrow{\\sim}D^a$ be the diagram-site projection-formula maps (adjuncts of counit tensored with identity [def-weil-pbc-projection-formula-map]), with the canonical derived pullback/tensor isomorphisms [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] on these ringed diagram sites, using the coefficient identifications $u^{-1}\\underline{P_n}_V\\cong\\underline{P_n}_U$ and $u^{-1}A_V\\cong A_U$ fixed above. Their inverses exist by perfection of the $P_n$. Set\n$$v^a=H'^a\\mathcal R^a_{Y'}(e)(H^a)^{-1},\\qquad s^a=\\mathcal L^a(H^a)r_S,\\qquad c^a:Rf'_*F^a_{g'}K\\xrightarrow{\\sim}\\mathcal L^aD^a,$$\nwhere $\\mathcal L^a$ is derived strict inverse limit with completed coefficients [prop-weil-pbc-rlim-functoriality], $r_S:F^a_gRf_*K\\xrightarrow{\\sim}\\mathcal L^a\\mathcal R^a_{Y'}M$ is the quotient reconstruction identification of completed pullback, and $c^a$ is the specified direct-image/limit comparison of [prop-weil-pbc-direct-image-limits]. Put $x^a_K=(c^a)^{-1}\\mathcal L^a(v^a)s^a$.\n\nThe following comparisons and equations hold in the derived strict-tower categories and derived module categories, naturally for all morphisms of complete $K$.\n\n(1) Restriction commutes canonically with derived direct image on ambient complexes:\n$$\\chi_u:\\operatorname{Res}_VRu_*\\xrightarrow{\\sim}R_u^0\\operatorname{Res}_U.$$\nOn complete objects it identifies the completed adjunctions, with their units and counits, under the equivalences of [lem-weil-pbc-constant-completion-equivalence]:\n$$\\phi_u:\\operatorname{Res}_UF^a_u\\xrightarrow{\\sim}F_u^0\\operatorname{Res}_V.$$\nHere $F^a_u\\dashv Ru_*$ is the adjunction induced by ordinary module pullback/direct image and the completion reflector; $\\phi_u$ is the isomorphism respecting their hom-set bijections and completion units. In particular these comparisons identify the canonical composition and identity comparisons defined as adjunction conjugates [def-weil-pbc-adjunction-conjugate] of direct-image composition and identity. The equivalences do not identify the ambient constant and completed module categories.\n\n(2) There is an isomorphism of actual derived strict towers\n$$\\rho_K:\\operatorname{Res}_X\\mathcal R^a_XK\\xrightarrow{\\sim}\\mathcal R_X\\bar K,$$\ninduced by derived tensor reassociation on the ringed diagram site and its single strict quotient diagram; it respects the quotient-tower unit. Put $B^0=G_gR_f^{\\mathcal T}\\mathcal R_X\\bar K$, $D^0=R_{f'}^{\\mathcal T}G_{g'}\\mathcal R_X\\bar K$. There are canonical tower isomorphisms\n$$\\beta:\\operatorname{Res}_{Y'}B^a\\xrightarrow{\\sim}B^0,\\qquad \\delta:\\operatorname{Res}_{Y'}D^a\\xrightarrow{\\sim}D^0.$$\nLet $H^0:\\mathcal R_{Y'}(G_gR_f^0\\bar K)\\to B^0$ be exactly the diagram projection-formula comparison in [lem-sp-completion-mate-comparison]. There is a canonical isomorphism $\\rho_M:\\operatorname{Res}_{Y'}\\mathcal R^a_{Y'}M\\to\\mathcal R_{Y'}(G_gR_f^0\\bar K)$, obtained from the finite-reduction scalar comparisons, $\\chi_f$, and derived pullback/tensor reassociation on that diagram site. They satisfy\n$$\\beta\\operatorname{Res}(H^a)=H^0\\rho_M,\\qquad \\delta\\operatorname{Res}(v^a)=E^{\\mathcal T}_{\\mathcal R_X\\bar K}\\beta,$$\nwhere $E^{\\mathcal T}$ is the strict constant-coefficient adjunction mate of [def-weil-pbc-strict-tower-operations]. In the witnessed proper situation of [lem-weil-pbc-strict-tower-exchange-mate-normalization], these $\\beta,\\delta$ are its specified $b,d$ followed by the images of $\\rho_K$. Its specified towers and witness-transported $v'_\\bullet$ agree with $B^a,D^a,v^a$. Thus $x^a_K$ is exactly the ordered completed exchange of [def-weil-pbc-completed-base-change-map] whenever the witnesses required there are provided, independently of their choice. Equality here is in the derived strict-tower category, not inferred from evaluations.\n\n(3) Write $\\lambda_Z:\\operatorname{Res}\\mathcal L^a Z\\xrightarrow{\\sim}\\mathcal L\\operatorname{Res}Z$ for the canonical restriction/derived-limit comparison, computed on strict K-injective models. Let $s^0:F_g^0R_f^0\\bar K\\to\\mathcal L B^0$ and $t^0:R_{f'}^0F_{g'}^0\\bar K\\to\\mathcal L D^0$ be exactly $s,t$ of [lem-sp-completion-mate-comparison]. Put\n$$\\iota_S=(F_g^0\\chi_f)\\phi_g:\\operatorname{Res}(F^a_gRf_*K)\\xrightarrow{\\sim}F_g^0R_f^0\\bar K,\\qquad \\iota_T=(R_{f'}^0\\phi_{g'})\\chi_{f'}:\\operatorname{Res}(Rf'_*F^a_{g'}K)\\xrightarrow{\\sim}R_{f'}^0F_{g'}^0\\bar K.$$\nBoth reconstruction identifications and the direct-image comparison have the following fixed normalization:\n$$\\mathcal L(\\rho_M)\\lambda_{\\mathcal R^a M}\\operatorname{Res}(r_S)=r_S^0\\iota_S,\\qquad \\mathcal L(\\rho_{g',K})\\lambda_{\\mathscr L_{g'}\\mathcal R^a K}\\operatorname{Res}(r_{g',K})=r_{g',K}^0\\phi_{g'},$$\nwhere $r_{g',K}:F^a_{g'}K\\to\\mathcal L^a(\\mathscr L_{g'}\\mathcal R^a_XK)$ is the defining reconstruction, $r_{g',K}^0:F_{g'}^0\\bar K\\to\\mathcal L G_{g'}\\mathcal R_X\\bar K$ is its constant-coefficient counterpart, and $\\rho_{g',K}:\\operatorname{Res}\\mathscr L_{g'}\\mathcal R^a_XK\\to G_{g'}\\mathcal R_X\\bar K$ is the same diagram-site finite-reduction scalar comparison. Here $r_S^0$ is the source reconstruction in the definition of $s^0$. Consequently\n$$\\mathcal L(\\beta)\\lambda_{B^a}\\operatorname{Res}(s^a)=s^0\\iota_S,\\qquad \\mathcal L(\\delta)\\lambda_{D^a}\\operatorname{Res}(c^a)=t^0\\iota_T.$$\nIn particular the equation for the raw ordered exchange is\n$$\\iota_T\\operatorname{Res}(x^a_K)= (t^0)^{-1}\\mathcal L(E^{\\mathcal T}_{\\mathcal R_X\\bar K})s^0\\iota_S.$$\nAll displayed comparisons are the specified scalar, projection-formula, completion-unit and direct-image/limit comparisons. The equations are natural-transformation equations on the full derived-complete category, valid without witnesses also at complete inputs obtained by completed pullback or derived direct image. No identity-square or pasting law for exchange is asserted here.",
- "source": {
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
-  "place": "Second paragraph, specified conjugating maps; agent-supplied strict coefficient comparison supplement. Ingredient sources only: proetale.tex Tag 099M (lemma-naive-completion), Tag 099N (lemma-pushforward-Noetherian-case); sites-cohomology.tex Tag 0A07 (lemma-Rf-commutes-with-Rlim), Tag 0E48 (remark-compatible-with-diagram). None states this combined comparison."
- },
- "stmt_deps": [
-  "def-pc-sheaf-restrict-scalars",
-  "def-weil-pbc-adic-coefficient-datum",
-  "def-weil-pbc-adjunction-conjugate",
-  "def-weil-pbc-ambient-ringed-exchange",
-  "def-weil-pbc-cartesian-square",
-  "def-weil-pbc-completed-base-change-map",
-  "def-weil-pbc-completed-pullback",
-  "def-weil-pbc-proetale-operations",
-  "def-weil-pbc-projection-formula-map",
-  "def-weil-pbc-strict-tower-operations",
-  "def-weil-size-convention",
-  "lem-sp-completed-pullback-adjunction",
-  "lem-sp-completion-mate-comparison",
-  "lem-weil-pbc-constant-completion-equivalence",
-  "lem-weil-pbc-diagram-site-realization",
-  "lem-weil-pbc-profinite-coefficient-inverse-image",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-pbc-strict-tower-exchange-mate-normalization",
-  "prop-weil-pbc-direct-image-limits",
-  "prop-weil-pbc-koszul-reconstruction",
-  "prop-weil-pbc-rlim-functoriality"
- ],
- "proof": [
-  {
-   "text": "The coefficient maps commute with $\\underline A\\to A_T$ on constant sections and hence on all finite projections. Profinite inverse image gives their composition compatibility; constant-completion gives flatness. Apply flat diagram restriction with one-object index and with $J$, obtaining $a,\\chi,p,d$ with their adjunct normalization. Apply the scalar-limit-square lemma to obtain $\\lambda$ and its canonical direct-image compatibility. Formalized ordinary-limit part: restriction preserves inverse limits because the faithful underlying-presheaf functor reflects them and creates the restricted limiting diagram. The standard preservesLimitNatIso has the required projection equations; limit.hom_ext proves uniqueness. T3 formalizes the derived-limit comparison by identifying the displayed complex unit with rightDerivedFunctorUnitQ. Flat scalar extension is an exact left adjoint, so termwise restriction preserves K-injectives. Apply the generic towerComparison_existsLimitIso construction to ordinaryLambda and the canonical units. LambdaNormalization retains exactly its equation, before conjugation by the two exact-restriction factorization isomorphisms; cancelling these isomorphisms recovers the original complex equation. Resolve any derived input by a K-injective complex. Its limit unit and the restriction factorization are invertible, so cancelling those two prefixes determines the component. Naturality transports component equality to every derived input.",
-   "uses": [
+  "kind": "statement",
+  "title": "Coefficient normalization of the raw ordered completed exchange",
+  "statement": "Fix a cartesian square of schemes $\\square=(f:X\\to Y,f':X'\\to Y',g:Y'\\to Y,g':X'\\to X)$ [def-weil-pbc-cartesian-square], and the adic datum of [def-weil-pbc-adic-coefficient-datum]: $A$ is commutative Noetherian, $I$ is finitely generated, $A/I$ is additive torsion, and every $P_n=A/I^n$ is finite and perfect over $A$. Put $A_T=\\varprojlim_n\\underline{P_n}_T$ on the small pro-etale site of each corner $T$, with the canonical map $\\underline A_T\\to A_T$. Let $\\operatorname{Res}_T$ be derived restriction of scalars [def-pc-sheaf-restrict-scalars, lem-weil-pbc-constant-completion-equivalence]. Use the canonical coefficient isomorphisms $u^{-1}A_V\\cong A_U$ [lem-weil-pbc-profinite-coefficient-inverse-image] and the ringed operations over $A_T$ [def-weil-pbc-proetale-operations], the strict reduction tower functor $\\mathcal R^a_T$ of the datum, and completed pullback $F^a_u$ [def-weil-pbc-completed-pullback]. Let $\\mathcal T_T=\\operatorname{Fun}(\\mathbf N_{\\geq1}^{op},\\operatorname{Mod}(\\underline A_T))$, with $\\mathcal L_T=R\\lim$ on its derived category and strict constant-coefficient reduction functor $\\mathcal R_T$ as in [lem-sp-completion-mate-comparison]. For an edge $u:U\\to V$, write $G_u=u^{-1}$ termwise, $R_u^{\\mathcal T}$ for derived termwise direct image, $R_u^0=Ru_*$ on constant-coefficient complexes, $C_T=\\mathcal L_T\\mathcal R_T$, and $F_u^0=C_UG_u$ on the full derived-complete categories [lem-sp-completed-pullback-adjunction]. All sites and diagram sites are small in the convention of [def-weil-size-convention].\n\nLet $K\\in D(\\operatorname{Mod}(A_X))$ be any derived $I$-complete object, meaning that the canonical quotient completion map $K\\to\\mathcal L^a_X\\mathcal R^a_XK$ is invertible [prop-weil-pbc-koszul-reconstruction], and put $\\bar K=\\operatorname{Res}_XK$. No properness, constructibility, boundedness, or etale-origin hypothesis is imposed. Use derived strict-tower operations $\\mathscr L_u,\\mathscr R_u$ over $A_T$, computed on the diagram sites [lem-weil-pbc-diagram-site-realization]. Define the raw ordered construction as follows, before choosing any finite etale-origin witnesses. Put $E=Lg'^*K$, $M=Lg^*Rf_*K$, $N=Rf'_*E$, and let $e:M\\to N$ be the ambient ringed adjunction mate [def-weil-pbc-ambient-ringed-exchange]. Let\n$$B^a=\\mathscr L_g\\mathscr R_f\\mathcal R^a_XK,\\qquad D^a=\\mathscr R_{f'}\\mathscr L_{g'}\\mathcal R^a_XK.$$\nLet $H^a:\\mathcal R^a_{Y'}M\\xrightarrow{\\sim}B^a$ and $H'^a:\\mathcal R^a_{Y'}N\\xrightarrow{\\sim}D^a$ be the diagram-site projection-formula maps (adjuncts of counit tensored with identity [def-weil-pbc-projection-formula-map]), with the canonical derived pullback/tensor isomorphisms [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] on these ringed diagram sites, using the coefficient identifications $u^{-1}\\underline{P_n}_V\\cong\\underline{P_n}_U$ and $u^{-1}A_V\\cong A_U$ fixed above. Their inverses exist by perfection of the $P_n$. Set\n$$v^a=H'^a\\mathcal R^a_{Y'}(e)(H^a)^{-1},\\qquad s^a=\\mathcal L^a(H^a)r_S,\\qquad c^a:Rf'_*F^a_{g'}K\\xrightarrow{\\sim}\\mathcal L^aD^a,$$\nwhere $\\mathcal L^a$ is derived strict inverse limit with completed coefficients [prop-weil-pbc-rlim-functoriality], $r_S:F^a_gRf_*K\\xrightarrow{\\sim}\\mathcal L^a\\mathcal R^a_{Y'}M$ is the quotient reconstruction identification of completed pullback, and $c^a$ is the specified direct-image/limit comparison of [prop-weil-pbc-direct-image-limits]. Put $x^a_K=(c^a)^{-1}\\mathcal L^a(v^a)s^a$.\n\nThe following comparisons and equations hold in the derived strict-tower categories and derived module categories, naturally for all morphisms of complete $K$.\n\n(1) Restriction commutes canonically with derived direct image on ambient complexes:\n$$\\chi_u:\\operatorname{Res}_VRu_*\\xrightarrow{\\sim}R_u^0\\operatorname{Res}_U.$$\nOn complete objects it identifies the completed adjunctions, with their units and counits, under the equivalences of [lem-weil-pbc-constant-completion-equivalence]:\n$$\\phi_u:\\operatorname{Res}_UF^a_u\\xrightarrow{\\sim}F_u^0\\operatorname{Res}_V.$$\nHere $F^a_u\\dashv Ru_*$ is the adjunction induced by ordinary module pullback/direct image and the completion reflector; $\\phi_u$ is the isomorphism respecting their hom-set bijections and completion units. In particular these comparisons identify the canonical composition and identity comparisons defined as adjunction conjugates [def-weil-pbc-adjunction-conjugate] of direct-image composition and identity. The equivalences do not identify the ambient constant and completed module categories.\n\n(2) There is an isomorphism of actual derived strict towers\n$$\\rho_K:\\operatorname{Res}_X\\mathcal R^a_XK\\xrightarrow{\\sim}\\mathcal R_X\\bar K,$$\ninduced by derived tensor reassociation on the ringed diagram site and its single strict quotient diagram; it respects the quotient-tower unit. Put $B^0=G_gR_f^{\\mathcal T}\\mathcal R_X\\bar K$, $D^0=R_{f'}^{\\mathcal T}G_{g'}\\mathcal R_X\\bar K$. There are canonical tower isomorphisms\n$$\\beta:\\operatorname{Res}_{Y'}B^a\\xrightarrow{\\sim}B^0,\\qquad \\delta:\\operatorname{Res}_{Y'}D^a\\xrightarrow{\\sim}D^0.$$\nLet $H^0:\\mathcal R_{Y'}(G_gR_f^0\\bar K)\\to B^0$ be exactly the diagram projection-formula comparison in [lem-sp-completion-mate-comparison]. There is a canonical isomorphism $\\rho_M:\\operatorname{Res}_{Y'}\\mathcal R^a_{Y'}M\\to\\mathcal R_{Y'}(G_gR_f^0\\bar K)$, obtained from the finite-reduction scalar comparisons, $\\chi_f$, and derived pullback/tensor reassociation on that diagram site. They satisfy\n$$\\beta\\operatorname{Res}(H^a)=H^0\\rho_M,\\qquad \\delta\\operatorname{Res}(v^a)=E^{\\mathcal T}_{\\mathcal R_X\\bar K}\\beta,$$\nwhere $E^{\\mathcal T}$ is the strict constant-coefficient adjunction mate of [def-weil-pbc-strict-tower-operations]. In the witnessed proper situation of [lem-weil-pbc-strict-tower-exchange-mate-normalization], these $\\beta,\\delta$ are its specified $b,d$ followed by the images of $\\rho_K$. Its specified towers and witness-transported $v'_\\bullet$ agree with $B^a,D^a,v^a$. Thus $x^a_K$ is exactly the ordered completed exchange of [def-weil-pbc-completed-base-change-map] whenever the witnesses required there are provided, independently of their choice. Equality here is in the derived strict-tower category, not inferred from evaluations.\n\n(3) Write $\\lambda_Z:\\operatorname{Res}\\mathcal L^a Z\\xrightarrow{\\sim}\\mathcal L\\operatorname{Res}Z$ for the canonical restriction/derived-limit comparison, computed on strict K-injective models. Let $s^0:F_g^0R_f^0\\bar K\\to\\mathcal L B^0$ and $t^0:R_{f'}^0F_{g'}^0\\bar K\\to\\mathcal L D^0$ be exactly $s,t$ of [lem-sp-completion-mate-comparison]. Put\n$$\\iota_S=(F_g^0\\chi_f)\\phi_g:\\operatorname{Res}(F^a_gRf_*K)\\xrightarrow{\\sim}F_g^0R_f^0\\bar K,\\qquad \\iota_T=(R_{f'}^0\\phi_{g'})\\chi_{f'}:\\operatorname{Res}(Rf'_*F^a_{g'}K)\\xrightarrow{\\sim}R_{f'}^0F_{g'}^0\\bar K.$$\nBoth reconstruction identifications and the direct-image comparison have the following fixed normalization:\n$$\\mathcal L(\\rho_M)\\lambda_{\\mathcal R^a M}\\operatorname{Res}(r_S)=r_S^0\\iota_S,\\qquad \\mathcal L(\\rho_{g',K})\\lambda_{\\mathscr L_{g'}\\mathcal R^a K}\\operatorname{Res}(r_{g',K})=r_{g',K}^0\\phi_{g'},$$\nwhere $r_{g',K}:F^a_{g'}K\\to\\mathcal L^a(\\mathscr L_{g'}\\mathcal R^a_XK)$ is the defining reconstruction, $r_{g',K}^0:F_{g'}^0\\bar K\\to\\mathcal L G_{g'}\\mathcal R_X\\bar K$ is its constant-coefficient counterpart, and $\\rho_{g',K}:\\operatorname{Res}\\mathscr L_{g'}\\mathcal R^a_XK\\to G_{g'}\\mathcal R_X\\bar K$ is the same diagram-site finite-reduction scalar comparison. Here $r_S^0$ is the source reconstruction in the definition of $s^0$. Consequently\n$$\\mathcal L(\\beta)\\lambda_{B^a}\\operatorname{Res}(s^a)=s^0\\iota_S,\\qquad \\mathcal L(\\delta)\\lambda_{D^a}\\operatorname{Res}(c^a)=t^0\\iota_T.$$\nIn particular the equation for the raw ordered exchange is\n$$\\iota_T\\operatorname{Res}(x^a_K)= (t^0)^{-1}\\mathcal L(E^{\\mathcal T}_{\\mathcal R_X\\bar K})s^0\\iota_S.$$\nAll displayed comparisons are the specified scalar, projection-formula, completion-unit and direct-image/limit comparisons. The equations are natural-transformation equations on the full derived-complete category, valid without witnesses also at complete inputs obtained by completed pullback or derived direct image. No identity-square or pasting law for exchange is asserted here.",
+  "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
+    "place": "Second paragraph, specified conjugating maps; agent-supplied strict coefficient comparison supplement. Ingredient sources only: proetale.tex Tag 099M (lemma-naive-completion), Tag 099N (lemma-pushforward-Noetherian-case); sites-cohomology.tex Tag 0A07 (lemma-Rf-commutes-with-Rlim), Tag 0E48 (remark-compatible-with-diagram). None states this combined comparison."
+  },
+  "stmt_deps": [
+    "def-pc-sheaf-restrict-scalars",
+    "def-weil-pbc-adic-coefficient-datum",
+    "def-weil-pbc-adjunction-conjugate",
+    "def-weil-pbc-ambient-ringed-exchange",
+    "def-weil-pbc-cartesian-square",
+    "def-weil-pbc-completed-base-change-map",
+    "def-weil-pbc-completed-pullback",
+    "def-weil-pbc-proetale-operations",
+    "def-weil-pbc-projection-formula-map",
+    "def-weil-pbc-strict-tower-operations",
+    "def-weil-size-convention",
+    "lem-sp-completed-pullback-adjunction",
+    "lem-sp-completion-mate-comparison",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-weil-pbc-diagram-site-realization",
     "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-strict-tower-exchange-mate-normalization",
+    "prop-weil-pbc-direct-image-limits",
+    "prop-weil-pbc-koszul-reconstruction",
+    "prop-weil-pbc-rlim-functoriality"
+  ],
+  "proof": [
+    {
+      "text": "The coefficient maps commute with $\\underline A\\to A_T$ on constant sections and hence on all finite projections. Profinite inverse image gives their composition compatibility; constant-completion gives flatness. Apply flat diagram restriction with one-object index and with $J$, obtaining $a,\\chi,p,d$ with their adjunct normalization. Apply the scalar-limit-square lemma to obtain $\\lambda$ and its canonical direct-image compatibility. Formalized ordinary-limit part: restriction preserves inverse limits because the faithful underlying-presheaf functor reflects them and creates the restricted limiting diagram. The standard preservesLimitNatIso has the required projection equations; limit.hom_ext proves uniqueness.",
+      "uses": [
+        "lem-weil-pbc-profinite-coefficient-inverse-image",
+        "lem-weil-pbc-constant-completion-equivalence",
+        "lem-weil-pbc-flat-ringed-diagram-restriction",
+        "lem-weil-pbc-flat-scalar-tower-limit-square"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
+        "place": "Second proof paragraph; assembly of the separated strict coefficient arguments."
+      }
+    },
+    {
+      "text": "Strict quotient scalar balancing gives $\\rho_L,q_{u,L}$, the augmentation equation and $q_{u,L}r(\\tau_{u,L})=\\mathcal R^0(a_{u,L})\\rho_{L_uL}$. Define $\\beta=(G_gR_f^{\\mathcal T}\\rho_K)(G_gd_f)p_g$ and $\\delta=(R_{f'}^{\\mathcal T}G_{g'}\\rho_K)(R_{f'}^{\\mathcal T}p_{g'})d_{f'}$; define $\\rho_M$ by balancing followed by $\\mathcal R(a_g)$ and $\\mathcal R(G_g\\chi_f)$. Pull the scalar projection equation for $f$ back by $G_g$; naturality of $p_g$ and the $q$-equation at $L=Rf_*K$ give $\\beta r(H^a)=H^0\\rho_M$.",
+      "uses": [
+        "lem-weil-pbc-strict-quotient-scalar-balancing",
+        "lem-weil-pbc-quotient-diagram-scalar-projection"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
+        "place": "Second proof paragraph; assembly of the separated strict coefficient arguments."
+      }
+    },
+    {
+      "text": "The exact-adjunction diagonal comparison and strict-quotient exchange lemma identify the specified $v^a$ with the completed-coefficient strict mate $W$; hypotheses: coefficient pullbacks are isomorphisms (profinite inverse image), and $P_n$ is perfect over $A_T$, as $A_T$ is flat over $\\underline A_T$ with $A_T/I^n=\\underline{P_n}_T$. Flat scalar tower exchange applied at $\\mathcal R_X^aK$, followed by naturality for $\\rho_K$, gives $\\delta r(v^a)=E^{\\mathcal T}_{\\mathcal R_X\\bar K}\\beta$. In the witnessed proper case the existing normalization lemma specifies exactly these towers, $v^a$ and the scalar corner maps. Substitution into the ordered definition identifies $x_K^a$ with its completed exchange, independently of witnesses.",
+      "uses": [
+        "lem-sbc-unbounded-exact-adjunction-square",
+        "lem-sbc-strict-quotient-exchange-unit-equation",
+        "lem-weil-pbc-flat-scalar-tower-exchange",
+        "lem-weil-pbc-strict-tower-exchange-mate-normalization",
+        "def-weil-pbc-completed-base-change-map",
+        "lem-weil-pbc-profinite-coefficient-inverse-image",
+        "lem-weil-pbc-constant-completion-equivalence"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
+        "place": "Second proof paragraph; assembly of the separated strict coefficient arguments."
+      }
+    },
+    {
+      "text": "Completion-unit scalar adjunction gives $\\phi$, its Hom bijections, units, counits and conjugates. Its reconstruction equation at $(g',K)$ is the target reconstruction equation. At $(g,Rf_*K)$, $r_S=\\mathcal L^a(\\tau_{g,Rf_*K})^{-1}r_{g,Rf_*K}$ (completed-pullback definition), and the balancing $q$-equation turns $q_{g,Rf_*K}$ into $\\rho_M$; transporting by $\\chi_f$, it is the source reconstruction equation with $\\rho_M,\\iota_S$; direct-image completeness verifies this input. Thus (1) and both fixed reconstruction equations hold on the full complete categories. Formalized Hom normalization: solve the defining phi unit equation for the inverse comparison, postcompose with the restricted map, and apply the constant-ring adjunction homEquiv. The transpose formula proEtaleRingSheafChangeAdjunction then gives exactly chi composed with the restricted completed transpose.",
+      "uses": [
+        "lem-weil-pbc-completed-scalar-unit-adjunction",
+        "prop-weil-pbc-direct-image-limits",
+        "lem-weil-pbc-strict-quotient-scalar-balancing",
+        "def-weil-pbc-completed-pullback",
+        "lem-weil-pbc-ring-sheaf-change-adjunction"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
+        "place": "Second proof paragraph; assembly of the separated strict coefficient arguments."
+      }
+    },
+    {
+      "text": "Naturality of $\\lambda$ and $s^a=\\mathcal L^a(H^a)r_S$ give $\\mathcal L(\\beta)\\lambda r(s^a)=\\mathcal L(H^0)r_S^0\\iota_S=s^0\\iota_S$. For $Z=\\mathscr L_{g'}\\mathcal R_X^aK$, use $c^a=\\kappa_{f'}^a(Z)Rf'_*(r_{g',K})$ and the scalar-limit square; substitute the target reconstruction equation to get $\\mathcal L(\\delta)\\lambda r(c^a)=t^0\\iota_T$. Here $s^0,t^0$ are precisely the specified constant comparisons. Applying $\\mathcal L$ to the mate equation and cancelling yields $\\iota_Tr(x_K^a)=(t^0)^{-1}\\mathcal L(E^{\\mathcal T})s^0\\iota_S$. These are compositions of natural transformations, hence apply to every complete-object morphism and intermediate complete input. Formalized naturality part: assemble the raw map from the natural tower projection isomorphism, exchangeStrictNatTrans, and the inverse direct-image/limit comparison. For the constant map, identify projection with the mate of reductionPullIso by mateEquiv_counit. Whisker the resulting natural isomorphisms and the constant exchange mate; their composite has exactly the displayed components, so its naturality proves the claim.",
+      "uses": [
+        "lem-weil-pbc-flat-scalar-tower-limit-square",
+        "prop-weil-pbc-direct-image-limits",
+        "lem-sp-completion-mate-comparison",
+        "prop-weil-pbc-rlim-functoriality"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
+        "place": "Second proof paragraph; assembly of the separated strict coefficient arguments."
+      }
+    }
+  ],
+  "proof_deps": [
+    "def-weil-pbc-completed-base-change-map",
+    "def-weil-pbc-completed-pullback",
+    "lem-sbc-strict-quotient-exchange-unit-equation",
+    "lem-sbc-unbounded-exact-adjunction-square",
+    "lem-sp-completion-mate-comparison",
+    "lem-weil-pbc-completed-scalar-unit-adjunction",
     "lem-weil-pbc-constant-completion-equivalence",
     "lem-weil-pbc-flat-ringed-diagram-restriction",
-    "lem-weil-pbc-flat-scalar-tower-limit-square",
-    "lem-weil-ringed-tower-pushforward-limit-comparison",
-    "lem-weil-pbc-strict-tower-exchange-mate-normalization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
-    "place": "Second proof paragraph; assembly of the separated strict coefficient arguments."
-   }
-  },
-  {
-   "text": "Strict quotient scalar balancing gives $\\rho_L,q_{u,L}$, the augmentation equation and $q_{u,L}r(\\tau_{u,L})=\\mathcal R^0(a_{u,L})\\rho_{L_uL}$. Define $\\beta=(G_gR_f^{\\mathcal T}\\rho_K)(G_gd_f)p_g$ and $\\delta=(R_{f'}^{\\mathcal T}G_{g'}\\rho_K)(R_{f'}^{\\mathcal T}p_{g'})d_{f'}$; define $\\rho_M$ by balancing followed by $\\mathcal R(a_g)$ and $\\mathcal R(G_g\\chi_f)$. Pull the scalar projection equation for $f$ back by $G_g$; naturality of $p_g$ and the $q$-equation at $L=Rf_*K$ give $\\beta r(H^a)=H^0\\rho_M$. T3 formalizes rho_existsUnique from ordinaryRho with the resolving class of flat-term K-flat complexes and flatKFlatResolution. In RhoNormalization, assemble DerivedReductionModelData from the recorded completed reduction functor, its actual counit, its universal property, and its K-flat computation law. The target is the fixed reductionData. Apply modelPull_existsUnique directly to these data and ordinaryRho.symm. Flat scalar restriction supplies preservation of the K-flat model condition. Its scalar flatness hypothesis is the first conclusion of completed_constant_algebra_flat_quotients, after checking the projections of the existing coefficient map. The generic normalization is the original complex-counit equation: its source and target counits are the recorded complex counits, and a conjunction of K-flatness and termwise flatness is equivalent to the original two curried hypotheses. Retaining the existing generic comparison-data presentation avoids costly unfolding of derived localization maps.",
-   "uses": [
-    "lem-weil-pbc-strict-quotient-scalar-balancing",
-    "lem-weil-pbc-quotient-diagram-scalar-projection",
-    "lem-weil-pbc-flat-scalar-restriction-kflat",
-    "lem-sp-completion-mate-comparison",
-    "lem-weil-pbc-completed-constant-algebra-flat-quotients"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
-    "place": "Second proof paragraph; assembly of the separated strict coefficient arguments."
-   }
-  },
-  {
-   "text": "The exact-adjunction diagonal comparison and strict-quotient exchange lemma identify the specified $v^a$ with the completed-coefficient strict mate $W$; hypotheses: coefficient pullbacks are isomorphisms (profinite inverse image), and $P_n$ is perfect over $A_T$, as $A_T$ is flat over $\\underline A_T$ with $A_T/I^n=\\underline{P_n}_T$. Flat scalar tower exchange applied at $\\mathcal R_X^aK$, followed by naturality for $\\rho_K$, gives $\\delta r(v^a)=E^{\\mathcal T}_{\\mathcal R_X\\bar K}\\beta$. In the witnessed proper case the existing normalization lemma specifies exactly these towers, $v^a$ and the scalar corner maps. Substitution into the ordered definition identifies $x_K^a$ with its completed exchange, independently of witnesses.",
-   "uses": [
-    "lem-sbc-unbounded-exact-adjunction-square",
-    "lem-sbc-strict-quotient-exchange-unit-equation",
     "lem-weil-pbc-flat-scalar-tower-exchange",
-    "lem-weil-pbc-strict-tower-exchange-mate-normalization",
-    "def-weil-pbc-completed-base-change-map",
-    "lem-weil-pbc-profinite-coefficient-inverse-image",
-    "lem-weil-pbc-constant-completion-equivalence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
-    "place": "Second proof paragraph; assembly of the separated strict coefficient arguments."
-   }
-  },
-  {
-   "text": "Completion-unit scalar adjunction gives $\\phi$, its Hom bijections, units, counits and conjugates. Its reconstruction equation at $(g',K)$ is the target reconstruction equation. At $(g,Rf_*K)$, $r_S=\\mathcal L^a(\\tau_{g,Rf_*K})^{-1}r_{g,Rf_*K}$ (completed-pullback definition), and the balancing $q$-equation turns $q_{g,Rf_*K}$ into $\\rho_M$; transporting by $\\chi_f$, it is the source reconstruction equation with $\\rho_M,\\iota_S$; direct-image completeness verifies this input. Thus (1) and both fixed reconstruction equations hold on the full complete categories. Formalized Hom normalization: solve the defining phi unit equation for the inverse comparison, postcompose with the restricted map, and apply the constant-ring adjunction homEquiv. The transpose formula proEtaleRingSheafChangeAdjunction then gives exactly chi composed with the restricted completed transpose.",
-   "uses": [
-    "lem-weil-pbc-completed-scalar-unit-adjunction",
-    "prop-weil-pbc-direct-image-limits",
-    "lem-weil-pbc-strict-quotient-scalar-balancing",
-    "def-weil-pbc-completed-pullback",
-    "lem-weil-pbc-ring-sheaf-change-adjunction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
-    "place": "Second proof paragraph; assembly of the separated strict coefficient arguments."
-   }
-  },
-  {
-   "text": "Naturality of $\\lambda$ and $s^a=\\mathcal L^a(H^a)r_S$ give $\\mathcal L(\\beta)\\lambda r(s^a)=\\mathcal L(H^0)r_S^0\\iota_S=s^0\\iota_S$. For $Z=\\mathscr L_{g'}\\mathcal R_X^aK$, use $c^a=\\kappa_{f'}^a(Z)Rf'_*(r_{g',K})$ and the scalar-limit square; substitute the target reconstruction equation to get $\\mathcal L(\\delta)\\lambda r(c^a)=t^0\\iota_T$. Here $s^0,t^0$ are precisely the specified constant comparisons. Applying $\\mathcal L$ to the mate equation and cancelling yields $\\iota_Tr(x_K^a)=(t^0)^{-1}\\mathcal L(E^{\\mathcal T})s^0\\iota_S$. These are compositions of natural transformations, hence apply to every complete-object morphism and intermediate complete input. Formalized naturality part: assemble the raw map from the natural tower projection isomorphism, exchangeStrictNatTrans, and the inverse direct-image/limit comparison. For the constant map, identify projection with the mate of reductionPullIso by mateEquiv_counit. Whisker the resulting natural isomorphisms and the constant exchange mate; their composite has exactly the displayed components, so its naturality proves the claim.",
-   "uses": [
     "lem-weil-pbc-flat-scalar-tower-limit-square",
+    "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "lem-weil-pbc-quotient-diagram-scalar-projection",
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "lem-weil-pbc-strict-quotient-scalar-balancing",
+    "lem-weil-pbc-strict-tower-exchange-mate-normalization",
     "prop-weil-pbc-direct-image-limits",
-    "lem-sp-completion-mate-comparison",
     "prop-weil-pbc-rlim-functoriality"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
-    "place": "Second proof paragraph; assembly of the separated strict coefficient arguments."
-   }
-  }
- ],
- "proof_deps": [
-  "def-weil-pbc-completed-base-change-map",
-  "def-weil-pbc-completed-pullback",
-  "lem-sbc-strict-quotient-exchange-unit-equation",
-  "lem-sbc-unbounded-exact-adjunction-square",
-  "lem-sp-completion-mate-comparison",
-  "lem-weil-pbc-completed-scalar-unit-adjunction",
-  "lem-weil-pbc-constant-completion-equivalence",
-  "lem-weil-pbc-flat-ringed-diagram-restriction",
-  "lem-weil-pbc-flat-scalar-tower-exchange",
-  "lem-weil-pbc-flat-scalar-tower-limit-square",
-  "lem-weil-pbc-profinite-coefficient-inverse-image",
-  "lem-weil-pbc-quotient-diagram-scalar-projection",
-  "lem-weil-pbc-ring-sheaf-change-adjunction",
-  "lem-weil-pbc-strict-quotient-scalar-balancing",
-  "lem-weil-pbc-strict-tower-exchange-mate-normalization",
-  "prop-weil-pbc-direct-image-limits",
-  "prop-weil-pbc-rlim-functoriality",
-  "lem-weil-ringed-tower-pushforward-limit-comparison",
-  "lem-weil-pbc-flat-scalar-restriction-kflat",
-  "lem-weil-pbc-completed-constant-algebra-flat-quotients"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
-  "place": "Second proof paragraph, coefficient normalization and reconstruction comparisons; strict coefficient comparison supplement; K9 formalizes the ordinary limit, completed Hom and naturality auxiliary statements. The current separated proof obligations are retained. The RhoNormalization model-data presentation and the LambdaNormalization equation before factorization conjugation express the same original complex formulas; their definition change records document this equivalence. T3 additionally formalizes the normalized derived reduction and derived inverse-limit comparisons using flat-term K-flat resolutions and K-injective resolutions, respectively; the other existing proof obligations remain."
- },
- "mathlib_searches": [
-  {
-   "tool": "leanfinder",
-   "query": "restriction of scalars carries ordered completed exchange c inverse Rlim v s to t inverse Rlim E s for every derived complete K without witnesses",
-   "results": "{\"t\": \"2026-10-17T08:23:30Z\", \"tool\": \"leanfinder\", \"query\": \"restriction of scalars carries ordered completed exchange c inverse Rlim v s to t inverse Rlim E s for every derived complete K without witnesses\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.IsPerfPair.restrictScalars\", \"LinearMap.IsPerfPair.restrictScalars_of_field\", \"IntermediateField.extendScalars.orderIso_symm_apply_coe\", \"ModuleCat.restrictScalarsComp'App_inv_naturality\", \"InverseSystem.PEquivOn.restrict_equiv\", \"ModuleCat.restrictScalarsComp'App_inv_apply\", \"ModuleCat.restrictScalarsComp'_inv_app\", \"Submodule.restrictScalarsLatticeHom\"], \"digest\": \"6321290c6d431fd3\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: ordinary scalar restriction, ordinary adic completion and generic diagram/adjunction results do not state the derived strict-tower coefficient comparison"
-  },
-  {
-   "tool": "loogle",
-   "query": "CategoryTheory.NatTrans, Rlim, IsIso",
-   "results": "{\"t\": \"2026-10-17T08:23:31Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.NatTrans, Rlim, IsIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Rlim'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-   "date": "2026-10-17",
-   "verdict": "invalid query: unknown identifier Rlim; no absence conclusion is drawn from this query"
-  },
-  {
-   "tool": "grep",
-   "query": "completed.*exchange|ordered.*Rlim|restriction.*scalars",
-   "results": "{\"t\": \"2026-10-17T08:23:31Z\", \"tool\": \"grep\", \"query\": \"completed.*exchange|ordered.*Rlim|restriction.*scalars\", \"sub\": \"Mathlib/CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: ordinary scalar restriction, ordinary adic completion and generic diagram/adjunction results do not state the derived strict-tower coefficient comparison"
-  },
-  {
-   "tool": "leansearch",
-   "query": "restriction of scalars carries an ordered completed exchange to the completed adjunction mate naturally for all derived complete objects",
-   "results": "{\"t\": \"2026-10-17T08:23:31Z\", \"tool\": \"leansearch\", \"query\": \"restriction of scalars carries an ordered completed exchange to the completed adjunction mate naturally for all derived complete objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.restrictScalars\", \"RestrictScalars\", \"LinearMap.restrictScalarsₗ\", \"ModuleCat.RestrictScalars.obj'\", \"RingCat.moduleCatRestrictScalarsPseudofunctor\", \"ModuleCat.instIsRightAdjointRestrictScalars\", \"ModuleCat.ExtendRestrictScalarsAdj.homEquiv\", \"PresheafOfModules.restrictScalars\"], \"digest\": \"06041d5fb7c3140f\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: ordinary scalar restriction, ordinary adic completion and generic diagram/adjunction results do not state the derived strict-tower coefficient comparison"
-  },
-  {
-   "tool": "grep",
-   "query": "completedExchange|completion.*mate|strict.*tower",
-   "results": "{\"t\": \"2026-10-17T08:24:39Z\", \"tool\": \"grep\", \"query\": \"completedExchange|completion.*mate|strict.*tower\", \"sub\": \"Mathlib\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: ordinary scalar restriction, ordinary adic completion and generic diagram/adjunction results do not state the derived strict-tower coefficient comparison"
-  },
-  {
-   "tool": "loogle",
-   "query": "CategoryTheory.Adjunction, CategoryTheory.NatTrans",
-   "results": "{\"t\": \"2026-10-17T08:24:40Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction, CategoryTheory.NatTrans\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: ordinary scalar restriction, ordinary adic completion and generic diagram/adjunction results do not state the derived strict-tower coefficient comparison"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "derived completion change of coefficient sheaves preserves strict quotient diagram projection formula exchange adjunction mate and reconstruction maps",
-   "results": "{\"t\": \"2026-10-17T08:24:46Z\", \"tool\": \"leanfinder\", \"query\": \"derived completion change of coefficient sheaves preserves strict quotient diagram projection formula exchange adjunction mate and reconstruction maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.Presentation.map_π_eq\", \"localCohomology.diagramComp\", \"IsAdicComplete.StrictMono.of_comp_lift\", \"IsAdicComplete.StrictMono.mkQ_comp_lift\", \"CategoryTheory.GrothendieckTopology.diagramCompIso_hom_ι\", \"CategoryTheory.sheafComposeNatTrans_fac\", \"AdicCompletion.eval_comp_of\", \"LightCondensed.ihomPoints_symm_comp\"], \"digest\": \"2f32ae505c4eadca\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: ordinary scalar restriction, ordinary adic completion and generic diagram/adjunction results do not state the derived strict-tower coefficient comparison"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "derived strict-tower coefficient comparison for restriction of scalars and ordered completed exchange",
-   "results": "{\"t\": \"2026-10-17T13:05:05Z\", \"tool\": \"leanfinder\", \"query\": \"derived strict-tower coefficient comparison for restriction of scalars and ordered completed exchange\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FormalMultilinearSeries.restrictScalars\", \"RootPairing.restrictScalars\", \"Module.Presentation.restrictScalars\", \"RootPairing.restrictScalars_pairing\", \"RootPairing.restrictScalars_coe_root\", \"Module.Basis.restrictScalars\", \"Module.Presentation.RestrictScalarsData\", \"RestrictScalars.isScalarTower\"], \"digest\": \"45bc424ceb9ba0e0\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: hits concern ordinary restriction of scalars, not the derived strict-tower ordered completed exchange with its specified reconstruction maps"
-  },
-  {
-   "tool": "loogle",
-   "query": "CategoryTheory.NatTrans, CategoryTheory.Adjunction, CategoryTheory.Limits",
-   "results": "{\"t\": \"2026-10-17T13:05:06Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.NatTrans, CategoryTheory.Adjunction, CategoryTheory.Limits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.Limits'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-   "date": "2026-10-17",
-   "verdict": "invalid query: unknown identifier CategoryTheory.Limits; no absence conclusion drawn"
-  },
-  {
-   "tool": "grep",
-   "query": "completed.*exchange|strict.*tower|restriction.*scalars",
-   "results": "{\"t\": \"2026-10-17T13:05:06Z\", \"tool\": \"grep\", \"query\": \"completed.*exchange|strict.*tower|restriction.*scalars\", \"sub\": \"Mathlib/CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: hits concern ordinary restriction of scalars, not the derived strict-tower ordered completed exchange with its specified reconstruction maps"
-  },
-  {
-   "tool": "leansearch",
-   "query": "restriction of scalars identifies completed ordered exchange with constant coefficient mate",
-   "results": "{\"t\": \"2026-10-17T13:05:06Z\", \"tool\": \"leansearch\", \"query\": \"restriction of scalars identifies completed ordered exchange with constant coefficient mate\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.restrictScalarsₗ\", \"RestrictScalars\", \"LinearMap.restrictScalars\", \"FormalMultilinearSeries.restrictScalars\", \"LinearEquiv.restrictScalars\", \"RestrictScalars.isScalarTower\", \"ContinuousLinearMap.coe_restrictScalarsₗ\", \"LinearMap.coeIsScalarTower\"], \"digest\": \"55afedc33595eb06\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: hits concern ordinary restriction of scalars, not the derived strict-tower ordered completed exchange with its specified reconstruction maps"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "created": {
-  "by": "worker",
-  "item": "lemma-weil-pbc-completed-exchange-coherence",
-  "date": "2026-10-17",
-  "group": "N8"
- },
- "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange",
- "lean_audit": {},
- "split_report": {
-  "date": "2026-10-21",
-  "item": "lem-weil-pbc-ordered-exchange-coefficient-comparison",
-  "worker": "stage1",
-  "summary": "Human-requested re-split: five independent statement-only strict-diagram comparison lemmas replace the long inline arguments; statement unchanged. The report preserves the old fourteen arguments verbatim and maps each to its new obligation or assembly step.",
-  "blueprint": "Second proof paragraph of lemma-weil-pbc-completed-exchange-coherence: same reconstruction, projection-formula and direct-image/limit conjugations; five statement-only nodes carry the coefficient supplement.",
-  "tool_uses": [
-   {
-    "node": "lem-sbc-unbounded-exact-adjunction-square",
-    "why": "Generic small ringed-site diagonal adjunction theorem; supplies the complete old diagonal argument without duplicating it."
-   },
-   {
-    "node": "lem-sbc-strict-quotient-exchange-unit-equation",
-    "why": "Generic perfect strict-quotient ringed square theorem already identifies the diagram mate with H prime reduction of ambient exchange H inverse; no proper or smooth base-change assertion is used."
-   },
-   {
-    "node": "lem-sp-completion-mate-comparison",
-    "why": "Fixes the constant-coefficient maps H,s,t used in the final assembly; not a proper-base-change theorem."
-   }
-  ]
- },
- "tool_uses": [
-  "lem-sp-completed-pullback-adjunction",
-  "lem-sp-completion-mate-comparison",
-  "lem-weil-ringed-tower-pushforward-limit-comparison",
-  "lem-sbc-unbounded-exact-adjunction-square",
-  "lem-sbc-strict-quotient-exchange-unit-equation"
- ],
- "reviewed": {
-  "date": "2026-10-21",
-  "by": "L",
-  "reviewer": "NT-cc-NZ-dab0f8079",
-  "group": "NZ",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-dab0f8079 (reviewer sub-agent of L); spot-checked: Read the item, all five new statement-only nodes and the 14 old steps (all byte-equal to the base, preserved in the report). Also read the cited statements: flat-ringed-diagram-restriction, lem-sbc-unbounded-exact-adjunction-square, lem-sbc-strict-quotient-exchange-unit-equation (both landed by NN at 11:50, before base 452e99a at 14:26), strict-tower-exchange-mate-normalization, lem-sp-completion-mate-comparison, constant-completion-equivalence and def-weil-pbc-completed-pullback. Checked the main-20261015 coherence proof ¶2 and the Stacks labels 0A07, 08BJ, 099M, 099N, 0B56 and 0E48. No SGA. Re-split note (≥5 nodes, parent ≤3000): met. 5 nodes of 2.1–4.4k characters; parent 2469, 2924 after the fix. Every old argument has a carrier: old 2→limit-square, 4→balancing, 5→projection, 7→flat-tower-exchange, 9–11→completed-unit-adjunction. Old 3 and 6 go to the existing lem-sbc tools, whose statements say exactly that Δ carries the mate and that v is the actual diagram mate with H and H′ invertible. Old 12–14 are elementary cancellation in step 5. No node restates the item. Type-checked every new equation and tested the small cases R=S, I=0, A=Z_ℓ and I=A. Hand-verified βr(H^a)=H⁰ρ_M, δr(v^a)=E^Tβ and both corner equations. No cycle. FIX: three gaps in the item assembly, corrected in fixes/dag/nodes/sec-proper-base-change/<item>.json with the statement unchanged. (1) Step 2 called the balancing node \"projection\" and left out the q-equation and the p_g naturality the derivation needs. (2) Step 3 did not check the hypotheses of the sbc strict-quotient tool: coefficient pullbacks are isomorphisms, and P_n is perfect over A_T because A_T is flat with A_T/I^n=P_n. (3) Step 4's source equation needs r_S=L^a(τ)^{-1}r_{g,Rf_*K} and the balancing q-equation; added both, citing balancing and def-weil-pbc-completed-pullback. Advisory: lem-weil-pbc-pulled-reduction-strict-tower-comparison (NF, already in the base) partly overlaps the φ/unit part of completed-scalar-unit-adjunction and the q part of balancing. Kept: it lacks the Hom bijections, conjugates and λ-normalization, and dropping a node would break the ≥5 count. The balancing, projection and unit nodes rely on A_T being flat (constant-completion) without citing it; minor, left for the prover. Maintainer note: snapshot chapter symlinks dangle, so cited nodes were read from clones/live.; 1 file(s) fixed by the reviewer"
- },
- "reviewed_lean": {
-  "date": "2026-10-17",
-  "by": "L",
-  "reviewer": "NT-stage2-Codex-4494e804e",
-  "group": "N8",
-  "result": "fix",
-  "note": "Review complete in review.md. Complete fixes replace the placeholder second reading and reuse the existing generic theorem through an alias. Original and fixed modules passed per-file scompile.py checks without diagnostics; no repository was modified."
- },
- "lean": {
-  "module": "Sheaf.Paper.OrderedExchangeCoefficientComparison",
-  "declaration": "AlgebraicGeometry.Scheme.OrderedExchange.coefficientComparison",
-  "declarations": [
-   "AlgebraicGeometry.Scheme.OrderedExchange.res",
-   "AlgebraicGeometry.Scheme.OrderedExchange.ordinaryRho_existsUnique",
-   "AlgebraicGeometry.Scheme.OrderedExchange.ordinaryRho",
-   "AlgebraicGeometry.Scheme.OrderedExchange.rho_existsUnique",
-   "AlgebraicGeometry.Scheme.OrderedExchange.rho",
-   "AlgebraicGeometry.Scheme.OrderedExchange.ordinaryLambda_existsUnique",
-   "AlgebraicGeometry.Scheme.OrderedExchange.ordinaryLambda",
-   "AlgebraicGeometry.Scheme.OrderedExchange.limitComplexUnit",
-   "AlgebraicGeometry.Scheme.OrderedExchange.lambda_existsUnique",
-   "AlgebraicGeometry.Scheme.OrderedExchange.lambda",
-   "AlgebraicGeometry.Scheme.OrderedExchange.chi",
-   "AlgebraicGeometry.Scheme.OrderedExchange.alpha",
-   "AlgebraicGeometry.Scheme.OrderedExchange.AComplete",
-   "AlgebraicGeometry.Scheme.OrderedExchange.inclusion",
-   "AlgebraicGeometry.Scheme.OrderedExchange.restriction_complete",
-   "AlgebraicGeometry.Scheme.OrderedExchange.phi_existsUnique",
-   "AlgebraicGeometry.Scheme.OrderedExchange.phi",
-   "AlgebraicGeometry.Scheme.OrderedExchange.sourceReconstruction",
-   "AlgebraicGeometry.Scheme.OrderedExchange.sourceA",
-   "AlgebraicGeometry.Scheme.OrderedExchange.targetA",
-   "AlgebraicGeometry.Scheme.OrderedExchange.beta",
-   "AlgebraicGeometry.Scheme.OrderedExchange.delta",
-   "AlgebraicGeometry.Scheme.OrderedExchange.rhoM",
-   "AlgebraicGeometry.Scheme.OrderedExchange.rhoPull",
-   "AlgebraicGeometry.Scheme.OrderedExchange.iotaS",
-   "AlgebraicGeometry.Scheme.OrderedExchange.iotaT",
-   "AlgebraicGeometry.Scheme.OrderedExchange.ordinaryScalarDiagonal",
-   "AlgebraicGeometry.Scheme.OrderedExchange.scalarDiagonal",
-   "AlgebraicGeometry.Scheme.OrderedExchange.rho_unit",
-   "AlgebraicGeometry.Scheme.OrderedExchange.completedHom_normalization",
-   "AlgebraicGeometry.Scheme.OrderedExchange.normalizedSource",
-   "AlgebraicGeometry.Scheme.OrderedExchange.normalizedTarget",
-   "AlgebraicGeometry.Scheme.OrderedExchange.rawComponent",
-   "AlgebraicGeometry.Scheme.OrderedExchange.constantComponent",
-   "AlgebraicGeometry.Scheme.OrderedExchange.normalized_naturality",
-   "AlgebraicGeometry.Scheme.OrderedExchange.rawNormalized",
-   "AlgebraicGeometry.Scheme.OrderedExchange.constantNormalized",
-   "AlgebraicGeometry.Scheme.OrderedExchange.coefficientComparison",
-   "AlgebraicGeometry.Scheme.OrderedExchange.RhoNormalization",
-   "AlgebraicGeometry.Scheme.OrderedExchange.rho_normalization",
-   "AlgebraicGeometry.Scheme.OrderedExchange.LambdaNormalization",
-   "AlgebraicGeometry.Scheme.OrderedExchange.lambda_normalization"
   ],
-  "file": "lean/Sheaf/Paper/OrderedExchangeCoefficientComparison.lean",
-  "statement": "theorem coefficientComparison (sq : ChosenCartesianSquare g' f' f g) : (∀ (K : d.derived X) (hK : d.TowerComplete X K), (d.towerV' sq K = (exchangeRealizationH (f := f) (g := g) d K).inv ≫ (completedReductionTower Y' d).map ((d.integralExchange sq).app K) ≫ (exchangeRealizationHPrime (f' := f') (g' := g') d K).hom) ∧ ((exchangeTowerRes d Y').map (exchangeRealizationH (f := f) (g := g) d K).hom ≫ (beta (f := f) (g := g) d K).hom = (rhoM (f := f) (g := g) d K).hom ≫ (H (f := f) (g := g) d ((res d X).obj K)).hom) ∧ ((exchangeTowerRes d Y').map (d.towerV' sq K) ≫ (delta (f' := f') (g' := g') d K).hom = (beta (f := f) (g := g) d K).hom ≫ (exchangeConstantSquare (A := A) sq).exchangeTowerMate.app ((reduction d X).obj ((res d X).obj K))) ∧ ((res d Y').map (sourceReconstruction (f := f) (g := g) d K).hom ≫ (lambda d Y').hom.app ((completedReductionTower Y' d).obj ((d.pull g).obj ((d.push f).obj K))) ≫ (rlim (A := A) Y').map (rhoM (f := f) (g := g) d K).hom = (iotaS (f := f) (g := g) d K hK).hom) ∧ ((lambda d X').hom.app ((d.towerPull g').obj ((completedReductionTower X d).obj K)) ≫ (rlim (A := A) X').map (rhoPull (g' := g') d K).hom = (phi d g').hom.app ⟨K, hK⟩ ≫ (reconstruction d g' ((res d X).obj K)).hom) ∧ ((res d Y').map (sourceA (f := f) (f' := f') (g := g) (g' := g') d K).hom ≫ (lambda d Y').hom.app ((d.towerPull g).obj ((d.towerPush f).obj ((completedReductionTower X d).obj K))) ≫ (rlim (A := A) Y').map (beta (f := f) (g := g) d K).hom = (iotaS (f := f) (g := g) d K hK).hom ≫ (S (f := f) (g := g) d ((res d X).obj K)).hom) ∧ ((res d Y').map (targetA (g' := g') (f' := f') d K).hom ≫ (lambda d Y').hom.app ((d.towerPush f').obj ((d.towerPull g').obj ((completedReductionTower X d).obj K))) ≫ (rlim (A := A) Y').map (delta (f' := f') (g' := g') d K).hom = (iotaT (f' := f') (g' := g') d K hK).hom ≫ (T (f' := f') (g' := g') d ((res d X).obj K)).hom)) ∧ rawNormalized d sq = constantNormalized d sq ∧ (∀ [IsProper f] (K : d.derived X) (hK : d.TowerComplete X K) (W : ∀ n : ℕ, FiniteEtaleOriginWitness X (A ⧸ d.ideal ^ (n + 1)) ((d.reduction X n).obj K)), d.completedExchange sq K = d.completedBaseChangeMap sq K hK W)",
-  "branch": "newtargets-dag",
-  "by": "N8",
-  "date": "2026-10-17",
-  "existing": false
- },
- "reviewed_proof": {
-  "date": "2026-10-22",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "T3",
-  "result": "pass",
-  "landing": "20261022T020117-L-34354",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
- }
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
+    "place": "Second proof paragraph, coefficient normalization and reconstruction comparisons; strict coefficient comparison supplement; K9 formalizes the ordinary limit, completed Hom and naturality auxiliary statements. The current separated proof obligations are retained. RhoNormalization and LambdaNormalization name the unchanged complex formulas."
+  },
+  "mathlib_searches": [
+    {
+      "tool": "leanfinder",
+      "query": "restriction of scalars carries ordered completed exchange c inverse Rlim v s to t inverse Rlim E s for every derived complete K without witnesses",
+      "results": "{\"t\": \"2026-10-17T08:23:30Z\", \"tool\": \"leanfinder\", \"query\": \"restriction of scalars carries ordered completed exchange c inverse Rlim v s to t inverse Rlim E s for every derived complete K without witnesses\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.IsPerfPair.restrictScalars\", \"LinearMap.IsPerfPair.restrictScalars_of_field\", \"IntermediateField.extendScalars.orderIso_symm_apply_coe\", \"ModuleCat.restrictScalarsComp'App_inv_naturality\", \"InverseSystem.PEquivOn.restrict_equiv\", \"ModuleCat.restrictScalarsComp'App_inv_apply\", \"ModuleCat.restrictScalarsComp'_inv_app\", \"Submodule.restrictScalarsLatticeHom\"], \"digest\": \"6321290c6d431fd3\"}",
+      "date": "2026-10-17",
+      "verdict": "no match: ordinary scalar restriction, ordinary adic completion and generic diagram/adjunction results do not state the derived strict-tower coefficient comparison"
+    },
+    {
+      "tool": "loogle",
+      "query": "CategoryTheory.NatTrans, Rlim, IsIso",
+      "results": "{\"t\": \"2026-10-17T08:23:31Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.NatTrans, Rlim, IsIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Rlim'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+      "date": "2026-10-17",
+      "verdict": "invalid query: unknown identifier Rlim; no absence conclusion is drawn from this query"
+    },
+    {
+      "tool": "grep",
+      "query": "completed.*exchange|ordered.*Rlim|restriction.*scalars",
+      "results": "{\"t\": \"2026-10-17T08:23:31Z\", \"tool\": \"grep\", \"query\": \"completed.*exchange|ordered.*Rlim|restriction.*scalars\", \"sub\": \"Mathlib/CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+      "date": "2026-10-17",
+      "verdict": "no match: ordinary scalar restriction, ordinary adic completion and generic diagram/adjunction results do not state the derived strict-tower coefficient comparison"
+    },
+    {
+      "tool": "leansearch",
+      "query": "restriction of scalars carries an ordered completed exchange to the completed adjunction mate naturally for all derived complete objects",
+      "results": "{\"t\": \"2026-10-17T08:23:31Z\", \"tool\": \"leansearch\", \"query\": \"restriction of scalars carries an ordered completed exchange to the completed adjunction mate naturally for all derived complete objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.restrictScalars\", \"RestrictScalars\", \"LinearMap.restrictScalarsₗ\", \"ModuleCat.RestrictScalars.obj'\", \"RingCat.moduleCatRestrictScalarsPseudofunctor\", \"ModuleCat.instIsRightAdjointRestrictScalars\", \"ModuleCat.ExtendRestrictScalarsAdj.homEquiv\", \"PresheafOfModules.restrictScalars\"], \"digest\": \"06041d5fb7c3140f\"}",
+      "date": "2026-10-17",
+      "verdict": "no match: ordinary scalar restriction, ordinary adic completion and generic diagram/adjunction results do not state the derived strict-tower coefficient comparison"
+    },
+    {
+      "tool": "grep",
+      "query": "completedExchange|completion.*mate|strict.*tower",
+      "results": "{\"t\": \"2026-10-17T08:24:39Z\", \"tool\": \"grep\", \"query\": \"completedExchange|completion.*mate|strict.*tower\", \"sub\": \"Mathlib\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+      "date": "2026-10-17",
+      "verdict": "no match: ordinary scalar restriction, ordinary adic completion and generic diagram/adjunction results do not state the derived strict-tower coefficient comparison"
+    },
+    {
+      "tool": "loogle",
+      "query": "CategoryTheory.Adjunction, CategoryTheory.NatTrans",
+      "results": "{\"t\": \"2026-10-17T08:24:40Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction, CategoryTheory.NatTrans\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+      "date": "2026-10-17",
+      "verdict": "no match: ordinary scalar restriction, ordinary adic completion and generic diagram/adjunction results do not state the derived strict-tower coefficient comparison"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "derived completion change of coefficient sheaves preserves strict quotient diagram projection formula exchange adjunction mate and reconstruction maps",
+      "results": "{\"t\": \"2026-10-17T08:24:46Z\", \"tool\": \"leanfinder\", \"query\": \"derived completion change of coefficient sheaves preserves strict quotient diagram projection formula exchange adjunction mate and reconstruction maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.Presentation.map_π_eq\", \"localCohomology.diagramComp\", \"IsAdicComplete.StrictMono.of_comp_lift\", \"IsAdicComplete.StrictMono.mkQ_comp_lift\", \"CategoryTheory.GrothendieckTopology.diagramCompIso_hom_ι\", \"CategoryTheory.sheafComposeNatTrans_fac\", \"AdicCompletion.eval_comp_of\", \"LightCondensed.ihomPoints_symm_comp\"], \"digest\": \"2f32ae505c4eadca\"}",
+      "date": "2026-10-17",
+      "verdict": "no match: ordinary scalar restriction, ordinary adic completion and generic diagram/adjunction results do not state the derived strict-tower coefficient comparison"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "derived strict-tower coefficient comparison for restriction of scalars and ordered completed exchange",
+      "results": "{\"t\": \"2026-10-17T13:05:05Z\", \"tool\": \"leanfinder\", \"query\": \"derived strict-tower coefficient comparison for restriction of scalars and ordered completed exchange\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FormalMultilinearSeries.restrictScalars\", \"RootPairing.restrictScalars\", \"Module.Presentation.restrictScalars\", \"RootPairing.restrictScalars_pairing\", \"RootPairing.restrictScalars_coe_root\", \"Module.Basis.restrictScalars\", \"Module.Presentation.RestrictScalarsData\", \"RestrictScalars.isScalarTower\"], \"digest\": \"45bc424ceb9ba0e0\"}",
+      "date": "2026-10-17",
+      "verdict": "no match: hits concern ordinary restriction of scalars, not the derived strict-tower ordered completed exchange with its specified reconstruction maps"
+    },
+    {
+      "tool": "loogle",
+      "query": "CategoryTheory.NatTrans, CategoryTheory.Adjunction, CategoryTheory.Limits",
+      "results": "{\"t\": \"2026-10-17T13:05:06Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.NatTrans, CategoryTheory.Adjunction, CategoryTheory.Limits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.Limits'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+      "date": "2026-10-17",
+      "verdict": "invalid query: unknown identifier CategoryTheory.Limits; no absence conclusion drawn"
+    },
+    {
+      "tool": "grep",
+      "query": "completed.*exchange|strict.*tower|restriction.*scalars",
+      "results": "{\"t\": \"2026-10-17T13:05:06Z\", \"tool\": \"grep\", \"query\": \"completed.*exchange|strict.*tower|restriction.*scalars\", \"sub\": \"Mathlib/CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+      "date": "2026-10-17",
+      "verdict": "no match: hits concern ordinary restriction of scalars, not the derived strict-tower ordered completed exchange with its specified reconstruction maps"
+    },
+    {
+      "tool": "leansearch",
+      "query": "restriction of scalars identifies completed ordered exchange with constant coefficient mate",
+      "results": "{\"t\": \"2026-10-17T13:05:06Z\", \"tool\": \"leansearch\", \"query\": \"restriction of scalars identifies completed ordered exchange with constant coefficient mate\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.restrictScalarsₗ\", \"RestrictScalars\", \"LinearMap.restrictScalars\", \"FormalMultilinearSeries.restrictScalars\", \"LinearEquiv.restrictScalars\", \"RestrictScalars.isScalarTower\", \"ContinuousLinearMap.coe_restrictScalarsₗ\", \"LinearMap.coeIsScalarTower\"], \"digest\": \"55afedc33595eb06\"}",
+      "date": "2026-10-17",
+      "verdict": "no match: hits concern ordinary restriction of scalars, not the derived strict-tower ordered completed exchange with its specified reconstruction maps"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "created": {
+    "by": "worker",
+    "item": "lemma-weil-pbc-completed-exchange-coherence",
+    "date": "2026-10-17",
+    "group": "N8"
+  },
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-thm-properbasechange",
+  "lean_audit": {},
+  "split_report": {
+    "date": "2026-10-21",
+    "item": "lem-weil-pbc-ordered-exchange-coefficient-comparison",
+    "worker": "stage1",
+    "summary": "Human-requested re-split: five independent statement-only strict-diagram comparison lemmas replace the long inline arguments; statement unchanged. The report preserves the old fourteen arguments verbatim and maps each to its new obligation or assembly step.",
+    "blueprint": "Second proof paragraph of lemma-weil-pbc-completed-exchange-coherence: same reconstruction, projection-formula and direct-image/limit conjugations; five statement-only nodes carry the coefficient supplement.",
+    "tool_uses": [
+      {
+        "node": "lem-sbc-unbounded-exact-adjunction-square",
+        "why": "Generic small ringed-site diagonal adjunction theorem; supplies the complete old diagonal argument without duplicating it."
+      },
+      {
+        "node": "lem-sbc-strict-quotient-exchange-unit-equation",
+        "why": "Generic perfect strict-quotient ringed square theorem already identifies the diagram mate with H prime reduction of ambient exchange H inverse; no proper or smooth base-change assertion is used."
+      },
+      {
+        "node": "lem-sp-completion-mate-comparison",
+        "why": "Fixes the constant-coefficient maps H,s,t used in the final assembly; not a proper-base-change theorem."
+      }
+    ]
+  },
+  "tool_uses": [
+    "lem-sp-completed-pullback-adjunction",
+    "lem-sp-completion-mate-comparison",
+    "lem-weil-ringed-tower-pushforward-limit-comparison",
+    "lem-sbc-unbounded-exact-adjunction-square",
+    "lem-sbc-strict-quotient-exchange-unit-equation"
+  ],
+  "reviewed": {
+    "date": "2026-10-21",
+    "by": "L",
+    "reviewer": "NT-cc-NZ-dab0f8079",
+    "group": "NZ",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-dab0f8079 (reviewer sub-agent of L); spot-checked: Read the item, all five new statement-only nodes and the 14 old steps (all byte-equal to the base, preserved in the report). Also read the cited statements: flat-ringed-diagram-restriction, lem-sbc-unbounded-exact-adjunction-square, lem-sbc-strict-quotient-exchange-unit-equation (both landed by NN at 11:50, before base 452e99a at 14:26), strict-tower-exchange-mate-normalization, lem-sp-completion-mate-comparison, constant-completion-equivalence and def-weil-pbc-completed-pullback. Checked the main-20261015 coherence proof ¶2 and the Stacks labels 0A07, 08BJ, 099M, 099N, 0B56 and 0E48. No SGA. Re-split note (≥5 nodes, parent ≤3000): met. 5 nodes of 2.1–4.4k characters; parent 2469, 2924 after the fix. Every old argument has a carrier: old 2→limit-square, 4→balancing, 5→projection, 7→flat-tower-exchange, 9–11→completed-unit-adjunction. Old 3 and 6 go to the existing lem-sbc tools, whose statements say exactly that Δ carries the mate and that v is the actual diagram mate with H and H′ invertible. Old 12–14 are elementary cancellation in step 5. No node restates the item. Type-checked every new equation and tested the small cases R=S, I=0, A=Z_ℓ and I=A. Hand-verified βr(H^a)=H⁰ρ_M, δr(v^a)=E^Tβ and both corner equations. No cycle. FIX: three gaps in the item assembly, corrected in fixes/dag/nodes/sec-proper-base-change/<item>.json with the statement unchanged. (1) Step 2 called the balancing node \"projection\" and left out the q-equation and the p_g naturality the derivation needs. (2) Step 3 did not check the hypotheses of the sbc strict-quotient tool: coefficient pullbacks are isomorphisms, and P_n is perfect over A_T because A_T is flat with A_T/I^n=P_n. (3) Step 4's source equation needs r_S=L^a(τ)^{-1}r_{g,Rf_*K} and the balancing q-equation; added both, citing balancing and def-weil-pbc-completed-pullback. Advisory: lem-weil-pbc-pulled-reduction-strict-tower-comparison (NF, already in the base) partly overlaps the φ/unit part of completed-scalar-unit-adjunction and the q part of balancing. Kept: it lacks the Hom bijections, conjugates and λ-normalization, and dropping a node would break the ≥5 count. The balancing, projection and unit nodes rely on A_T being flat (constant-completion) without citing it; minor, left for the prover. Maintainer note: snapshot chapter symlinks dangle, so cited nodes were read from clones/live.; 1 file(s) fixed by the reviewer"
+  },
+  "reviewed_lean": {
+    "date": "2026-10-17",
+    "by": "L",
+    "reviewer": "NT-stage2-Codex-4494e804e",
+    "group": "N8",
+    "result": "fix",
+    "note": "Review complete in review.md. Complete fixes replace the placeholder second reading and reuse the existing generic theorem through an alias. Original and fixed modules passed per-file scompile.py checks without diagnostics; no repository was modified."
+  },
+  "lean": {
+    "module": "Sheaf.Paper.OrderedExchangeCoefficientComparison",
+    "declaration": "AlgebraicGeometry.Scheme.OrderedExchange.coefficientComparison",
+    "declarations": [
+      "AlgebraicGeometry.Scheme.OrderedExchange.res",
+      "AlgebraicGeometry.Scheme.OrderedExchange.ordinaryRho_existsUnique",
+      "AlgebraicGeometry.Scheme.OrderedExchange.ordinaryRho",
+      "AlgebraicGeometry.Scheme.OrderedExchange.rho_existsUnique",
+      "AlgebraicGeometry.Scheme.OrderedExchange.rho",
+      "AlgebraicGeometry.Scheme.OrderedExchange.ordinaryLambda_existsUnique",
+      "AlgebraicGeometry.Scheme.OrderedExchange.ordinaryLambda",
+      "AlgebraicGeometry.Scheme.OrderedExchange.limitComplexUnit",
+      "AlgebraicGeometry.Scheme.OrderedExchange.lambda_existsUnique",
+      "AlgebraicGeometry.Scheme.OrderedExchange.lambda",
+      "AlgebraicGeometry.Scheme.OrderedExchange.chi",
+      "AlgebraicGeometry.Scheme.OrderedExchange.alpha",
+      "AlgebraicGeometry.Scheme.OrderedExchange.AComplete",
+      "AlgebraicGeometry.Scheme.OrderedExchange.inclusion",
+      "AlgebraicGeometry.Scheme.OrderedExchange.restriction_complete",
+      "AlgebraicGeometry.Scheme.OrderedExchange.phi_existsUnique",
+      "AlgebraicGeometry.Scheme.OrderedExchange.phi",
+      "AlgebraicGeometry.Scheme.OrderedExchange.sourceReconstruction",
+      "AlgebraicGeometry.Scheme.OrderedExchange.sourceA",
+      "AlgebraicGeometry.Scheme.OrderedExchange.targetA",
+      "AlgebraicGeometry.Scheme.OrderedExchange.beta",
+      "AlgebraicGeometry.Scheme.OrderedExchange.delta",
+      "AlgebraicGeometry.Scheme.OrderedExchange.rhoM",
+      "AlgebraicGeometry.Scheme.OrderedExchange.rhoPull",
+      "AlgebraicGeometry.Scheme.OrderedExchange.iotaS",
+      "AlgebraicGeometry.Scheme.OrderedExchange.iotaT",
+      "AlgebraicGeometry.Scheme.OrderedExchange.ordinaryScalarDiagonal",
+      "AlgebraicGeometry.Scheme.OrderedExchange.scalarDiagonal",
+      "AlgebraicGeometry.Scheme.OrderedExchange.rho_unit",
+      "AlgebraicGeometry.Scheme.OrderedExchange.completedHom_normalization",
+      "AlgebraicGeometry.Scheme.OrderedExchange.normalizedSource",
+      "AlgebraicGeometry.Scheme.OrderedExchange.normalizedTarget",
+      "AlgebraicGeometry.Scheme.OrderedExchange.rawComponent",
+      "AlgebraicGeometry.Scheme.OrderedExchange.constantComponent",
+      "AlgebraicGeometry.Scheme.OrderedExchange.normalized_naturality",
+      "AlgebraicGeometry.Scheme.OrderedExchange.rawNormalized",
+      "AlgebraicGeometry.Scheme.OrderedExchange.constantNormalized",
+      "AlgebraicGeometry.Scheme.OrderedExchange.coefficientComparison",
+      "AlgebraicGeometry.Scheme.OrderedExchange.RhoNormalization",
+      "AlgebraicGeometry.Scheme.OrderedExchange.rho_normalization",
+      "AlgebraicGeometry.Scheme.OrderedExchange.LambdaNormalization",
+      "AlgebraicGeometry.Scheme.OrderedExchange.lambda_normalization"
+    ],
+    "file": "lean/Sheaf/Paper/OrderedExchangeCoefficientComparison.lean",
+    "statement": "theorem coefficientComparison (sq : ChosenCartesianSquare g' f' f g) : (∀ (K : d.derived X) (hK : d.TowerComplete X K), (d.towerV' sq K = (exchangeRealizationH (f := f) (g := g) d K).inv ≫ (completedReductionTower Y' d).map ((d.integralExchange sq).app K) ≫ (exchangeRealizationHPrime (f' := f') (g' := g') d K).hom) ∧ ((exchangeTowerRes d Y').map (exchangeRealizationH (f := f) (g := g) d K).hom ≫ (beta (f := f) (g := g) d K).hom = (rhoM (f := f) (g := g) d K).hom ≫ (H (f := f) (g := g) d ((res d X).obj K)).hom) ∧ ((exchangeTowerRes d Y').map (d.towerV' sq K) ≫ (delta (f' := f') (g' := g') d K).hom = (beta (f := f) (g := g) d K).hom ≫ (exchangeConstantSquare (A := A) sq).exchangeTowerMate.app ((reduction d X).obj ((res d X).obj K))) ∧ ((res d Y').map (sourceReconstruction (f := f) (g := g) d K).hom ≫ (lambda d Y').hom.app ((completedReductionTower Y' d).obj ((d.pull g).obj ((d.push f).obj K))) ≫ (rlim (A := A) Y').map (rhoM (f := f) (g := g) d K).hom = (iotaS (f := f) (g := g) d K hK).hom) ∧ ((lambda d X').hom.app ((d.towerPull g').obj ((completedReductionTower X d).obj K)) ≫ (rlim (A := A) X').map (rhoPull (g' := g') d K).hom = (phi d g').hom.app ⟨K, hK⟩ ≫ (reconstruction d g' ((res d X).obj K)).hom) ∧ ((res d Y').map (sourceA (f := f) (f' := f') (g := g) (g' := g') d K).hom ≫ (lambda d Y').hom.app ((d.towerPull g).obj ((d.towerPush f).obj ((completedReductionTower X d).obj K))) ≫ (rlim (A := A) Y').map (beta (f := f) (g := g) d K).hom = (iotaS (f := f) (g := g) d K hK).hom ≫ (S (f := f) (g := g) d ((res d X).obj K)).hom) ∧ ((res d Y').map (targetA (g' := g') (f' := f') d K).hom ≫ (lambda d Y').hom.app ((d.towerPush f').obj ((d.towerPull g').obj ((completedReductionTower X d).obj K))) ≫ (rlim (A := A) Y').map (delta (f' := f') (g' := g') d K).hom = (iotaT (f' := f') (g' := g') d K hK).hom ≫ (T (f' := f') (g' := g') d ((res d X).obj K)).hom)) ∧ rawNormalized d sq = constantNormalized d sq ∧ (∀ [IsProper f] (K : d.derived X) (hK : d.TowerComplete X K) (W : ∀ n : ℕ, FiniteEtaleOriginWitness X (A ⧸ d.ideal ^ (n + 1)) ((d.reduction X n).obj K)), d.completedExchange sq K = d.completedBaseChangeMap sq K hK W)",
+    "branch": "newtargets-dag",
+    "by": "N8",
+    "date": "2026-10-17",
+    "existing": false
+  },
+  "reviewed_proof": {
+    "date": "2026-10-21",
+    "by": "L",
+    "reviewer": "C-4c1aa",
+    "group": "K9",
+    "result": "pass",
+    "landing": "20261021T203708-L-3854176",
+    "kind": "interface",
+    "note": "independent cc review: delivered OrderedExchangeCoefficientComparison.lean, node and change record vs clones/live: reworded rho/lambda_existsUnique equal the old formulas verbatim via the new predicates, limitComplexUnit/rawComponent/constantComponent only gain their inferred types; item + CompletedExchangeCoherence + PulledReductionStrictTowerComparison compiled clean; axioms checked"
+  }
 }

@@ -1,388 +1,398 @@
 {
- "id": "lem-pur-exact-pullback-signed-comparison",
- "kind": "statement",
- "title": "Exact ringed pullback identifies the canonical signed derived tensor comparison",
- "statement": "Let $(\\mathcal C,R)$ and $(\\mathcal D,S)$ be ringed sites small relative to a common universe of ordinary module sheaves [def-weil-sheaf-of-modules-category]. Let $u^{-1}\\dashv u_*$ be a geometric morphism of their sheaf topoi, with $u^{-1}$ preserving finite limits and a map of commutative ring sheaves $u^{-1}R\\to S$. The module pullback $F(M)=S\\otimes_{u^{-1}R}u^{-1}M$ uses [def-pur-sheaf-tensor-product]; assume $F$ exact. Use the unbounded derived categories [def-weil-abstract-derived-category], the actual K-flat derived tensors [lem-weil-pbc-site-derived-tensor-descent], and the canonical left derived pullback $L=Lu^*$ with its resolving-model comparison $e_E:L(q_RE)\\cong q_S(FE)$ [lem-weil-pbc-ringed-topoi-derived-pullback]. Let $U=D(F)$ be localization of termwise $F$, with factorization $\\kappa_E:U(q_RE)\\cong q_S(FE)$.\n\nThere is a unique natural isomorphism $\\eta:L\\xrightarrow{\\sim}U$ with $\\kappa_E\\eta_{q_RE}=e_E$ for every flat-term K-flat $E$. It respects all integer shift comparisons and the degree-zero sheaf comparisons. Module pullback preserves flat sheaves and flat-term K-flat complexes [def-pc-flat-sheaf-modules, def-pc-kflat-complex].\n\nTransport along $\\eta$ the canonical comparison of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] to $\\mu_{K,H}:U(K\\otimes_R^LH)\\cong UK\\otimes_S^LUH$. It is the unique natural comparison satisfying, for every resolving pair $E,G$, with $V=T(E,G)$ and the representative isomorphisms $r,r'$,\n$$(\\kappa_E\\otimes\\kappa_G)\\,\\mu_{q_RE,q_RG}\\,U(r_{E,G})=r'_{FE,FG}\\,q_S(c_{E,G})\\,\\kappa_V.$$\nHere $T$ is signed direct-sum total tensor [def-pc-tensor-complex-sheaves], and $c:FT(E,G)\\cong T(FE,FG)$ is the cochain comparison $c_{u;E,G}$ of [lem-pur-cochain-pullback-tensor-coherence], the total of the normalized ordinary pure-tensor comparison [def-weil-pbc-canonical-ringed-tensor-comparison]: on local generalized pure tensors it sends $s\\otimes(x\\otimes y)$ to $(s\\otimes x)\\otimes(1\\otimes y)$. Its inverse sends $(s\\otimes x)\\otimes(t\\otimes y)$ to $st\\otimes(x\\otimes y)$. The ordinary comparison and its total respect reassociation and signed interchange [lem-pur-cochain-pullback-tensor-coherence]; termwise $F$ preserves direct sums and all integer differential, shift and interchange signs.\n\nLet $s_{n,K}:U(K[n])\\cong(UK)[n]$, and let $t,\\alpha,\\sigma$ and $t',\\alpha',\\sigma'$ be the derived comparisons normalized on total models by $(-1)^{bp}$, unsigned reassociation, and $(-1)^{pq}$, respectively. For arbitrary derived $K,H,N$ and all integers $a,b$, the prescribed comparison satisfies\n$$t'_{a,b}(s_{a,K}\\otimes s_{b,H})\\mu_{K[a],H[b]}=\\mu_{K,H}[a+b]s_{a+b,K\\otimes^LH}U(t_{a,b}),$$\n$$\\mu_{H,K}U(\\sigma_{K,H})=\\sigma'_{UK,UH}\\mu_{K,H},$$\n$$(1\\otimes\\mu_{H,N})\\mu_{K,H\\otimes^LN}U(\\alpha_{K,H,N})=\\alpha'_{UK,UH,UN}(\\mu_{K,H}\\otimes1)\\mu_{K\\otimes^LH,N}.$$\nThese are equations for the canonical comparison with its specified representative normalization, including when both complexes are unbounded. Under $\\eta$, $\\mu$ is the normalized comparison of [lem-weil-pbc-pullback-tensor-canonical-shift-unit] (its representative formula is the displayed one, since $\\kappa\\eta=e$), so the first equation refines the separate-variable shift equations of that node to the composite signed comparisons $t,t'$.",
- "source": {
-  "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 07A4 (lemma-pullback-tensor-product), its proof by total K-flat models and the ordinary comparison of sites-modules.tex, lemma-tensor-product-pullback. Agent-formulated exact-functor identification and signed-coherence refinement."
- },
- "stmt_deps": [
-  "def-weil-sheaf-of-modules-category",
-  "def-pur-sheaf-tensor-product",
-  "def-weil-abstract-derived-category",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "lem-weil-pbc-ringed-topoi-derived-pullback",
-  "def-pc-flat-sheaf-modules",
-  "def-pc-kflat-complex",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "def-pc-tensor-complex-sheaves",
-  "def-weil-pbc-canonical-ringed-tensor-comparison",
-  "lem-pur-cochain-pullback-tensor-coherence",
-  "lem-weil-pbc-pullback-tensor-canonical-shift-unit"
- ],
- "proof": [
-  {
-   "text": "Use the exact derived functor U and its shift-compatible factorization kappa. Since Q composed with U is isomorphic to the termwise functor, U is a left derived functor by the universal property of localization. Uniqueness of left derived functors gives eta:L≅U and kappa_P eta_(QP)=epsilon_P for EVERY complex P. This also proves the degree-zero assertion without a flatness assumption.",
-   "uses": [
-    "lem-weil-pbc-exact-functor-derived-factorization",
-    "lem-weil-pbc-localization-universal-property"
-   ],
-   "elementary": false,
-   "source": {
+  "id": "lem-pur-exact-pullback-signed-comparison",
+  "kind": "statement",
+  "title": "Exact ringed pullback identifies the canonical signed derived tensor comparison",
+  "statement": "Let $(\\mathcal C,R)$ and $(\\mathcal D,S)$ be ringed sites small relative to a common universe of ordinary module sheaves [def-weil-sheaf-of-modules-category]. Let $u^{-1}\\dashv u_*$ be a geometric morphism of their sheaf topoi, with $u^{-1}$ preserving finite limits and a map of commutative ring sheaves $u^{-1}R\\to S$. The module pullback $F(M)=S\\otimes_{u^{-1}R}u^{-1}M$ uses [def-pur-sheaf-tensor-product]; assume $F$ exact. Use the unbounded derived categories [def-weil-abstract-derived-category], the actual K-flat derived tensors [lem-weil-pbc-site-derived-tensor-descent], and the canonical left derived pullback $L=Lu^*$ with its resolving-model comparison $e_E:L(q_RE)\\cong q_S(FE)$ [lem-weil-pbc-ringed-topoi-derived-pullback]. Let $U=D(F)$ be localization of termwise $F$, with factorization $\\kappa_E:U(q_RE)\\cong q_S(FE)$.\n\nThere is a unique natural isomorphism $\\eta:L\\xrightarrow{\\sim}U$ with $\\kappa_E\\eta_{q_RE}=e_E$ for every flat-term K-flat $E$. It respects all integer shift comparisons and the degree-zero sheaf comparisons. Module pullback preserves flat sheaves and flat-term K-flat complexes [def-pc-flat-sheaf-modules, def-pc-kflat-complex].\n\nTransport along $\\eta$ the canonical comparison of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] to $\\mu_{K,H}:U(K\\otimes_R^LH)\\cong UK\\otimes_S^LUH$. It is the unique natural comparison satisfying, for every resolving pair $E,G$, with $V=T(E,G)$ and the representative isomorphisms $r,r'$,\n$$(\\kappa_E\\otimes\\kappa_G)\\,\\mu_{q_RE,q_RG}\\,U(r_{E,G})=r'_{FE,FG}\\,q_S(c_{E,G})\\,\\kappa_V.$$\nHere $T$ is signed direct-sum total tensor [def-pc-tensor-complex-sheaves], and $c:FT(E,G)\\cong T(FE,FG)$ is the cochain comparison $c_{u;E,G}$ of [lem-pur-cochain-pullback-tensor-coherence], the total of the normalized ordinary pure-tensor comparison [def-weil-pbc-canonical-ringed-tensor-comparison]: on local generalized pure tensors it sends $s\\otimes(x\\otimes y)$ to $(s\\otimes x)\\otimes(1\\otimes y)$. Its inverse sends $(s\\otimes x)\\otimes(t\\otimes y)$ to $st\\otimes(x\\otimes y)$. The ordinary comparison and its total respect reassociation and signed interchange [lem-pur-cochain-pullback-tensor-coherence]; termwise $F$ preserves direct sums and all integer differential, shift and interchange signs.\n\nLet $s_{n,K}:U(K[n])\\cong(UK)[n]$, and let $t,\\alpha,\\sigma$ and $t',\\alpha',\\sigma'$ be the derived comparisons normalized on total models by $(-1)^{bp}$, unsigned reassociation, and $(-1)^{pq}$, respectively. For arbitrary derived $K,H,N$ and all integers $a,b$, the prescribed comparison satisfies\n$$t'_{a,b}(s_{a,K}\\otimes s_{b,H})\\mu_{K[a],H[b]}=\\mu_{K,H}[a+b]s_{a+b,K\\otimes^LH}U(t_{a,b}),$$\n$$\\mu_{H,K}U(\\sigma_{K,H})=\\sigma'_{UK,UH}\\mu_{K,H},$$\n$$(1\\otimes\\mu_{H,N})\\mu_{K,H\\otimes^LN}U(\\alpha_{K,H,N})=\\alpha'_{UK,UH,UN}(\\mu_{K,H}\\otimes1)\\mu_{K\\otimes^LH,N}.$$\nThese are equations for the canonical comparison with its specified representative normalization, including when both complexes are unbounded. Under $\\eta$, $\\mu$ is the normalized comparison of [lem-weil-pbc-pullback-tensor-canonical-shift-unit] (its representative formula is the displayed one, since $\\kappa\\eta=e$), so the first equation refines the separate-variable shift equations of that node to the composite signed comparisons $t,t'$.",
+  "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 07A4, 06YS, 0G7E; exact localization and shift functor laws in Mathlib."
-   }
+    "place": "Tag 07A4 (lemma-pullback-tensor-product), its proof by total K-flat models and the ordinary comparison of sites-modules.tex, lemma-tensor-product-pullback. Agent-formulated exact-functor identification and signed-coherence refinement."
   },
-  {
-   "text": "Transport the canonical CommShift structure of U to L along eta. Its inverse and hence eta commute with shifts, and epsilon does by the preceding factorization equation. Uniqueness of eta under the weaker resolving normalization follows by choosing a flat-term K-flat quasi-isomorphism P→A, cancelling its invertible image and using naturality. Localization tests equality on all QA.",
-   "uses": [
+  "stmt_deps": [
+    "def-weil-sheaf-of-modules-category",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "def-pc-flat-sheaf-modules",
+    "def-pc-kflat-complex",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "def-pc-tensor-complex-sheaves",
+    "def-weil-pbc-canonical-ringed-tensor-comparison",
+    "lem-pur-cochain-pullback-tensor-coherence",
+    "lem-weil-pbc-pullback-tensor-canonical-shift-unit"
+  ],
+  "proof": [
+    {
+      "text": "Apply [lem-weil-pbc-exact-functor-derived-factorization] to the assumed exact additive module functor $F$. It sends every quasi-isomorphism to a quasi-isomorphism, and supplies $U=D(F)$, its factorization $\\kappa_E:U(q_RE)\\cong q_S(FE)$, and all integer shift comparisons $s$. On complexes the shift comparison is the identity in each degree: $F((-1)^nd)=(-1)^nF(d)$. Thus its factorization commutes with shifts, without a boundedness assumption.",
+      "uses": [
+        "lem-weil-pbc-exact-functor-derived-factorization"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/derived.tex",
+        "place": "Tag 015F (lemma-right-derived-exact-functor), exact functors on all complexes; shift-compatible factorization as in the cited node."
+      }
+    },
+    {
+      "text": "The hypotheses are those of [lem-weil-pbc-ringed-topos-flat-module-pullback] and [lem-weil-pbc-ringed-topos-kflat-pullback]: therefore $F$ preserves flat sheaves and flat-term K-flat complexes. No flatness of $u^{-1}R\\to S$ is needed for either assertion. By [lem-weil-pbc-ringed-topoi-module-adjunction], this actual scalar-extension pullback is a left adjoint; [lem-weil-pbc-left-adjoint-preserves-colimits] then shows that it preserves all the direct sums in total tensor complexes, including infinite diagonals. Its additivity preserves every integer scalar, in particular the differential and Koszul signs.",
+      "uses": [
+        "lem-weil-pbc-ringed-topos-flat-module-pullback",
+        "lem-weil-pbc-ringed-topos-kflat-pullback",
+        "lem-weil-pbc-ringed-topoi-module-adjunction",
+        "lem-weil-pbc-left-adjoint-preserves-colimits"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "Tag 0G7E (lemma-pullback-K-flat); sites-modules.tex Tags 05VD (lemma-pullback-flat) and 03D7 (lemma-adjoint-pullback-pushforward-modules); categories.tex Tag 0038 (lemma-adjoint-exact)."
+      }
+    },
+    {
+      "text": "Write $\\epsilon:Lq_R\\to q_SF$ for the natural derived-pullback transformation of [lem-weil-pbc-ringed-topoi-derived-pullback]; its restriction to resolving complexes is $e$. For any complex $A$, take a flat-term K-flat quasi-isomorphism $p:P\\to A$ from [lem-pc-kflat-resolution]. Naturality says\n$$q_S(Fp)\\epsilon_P=\\epsilon_A L(q_Rp).$$\nHere $q_S(Fp)$ is invertible by Step 1, $L(q_Rp)$ is invertible because $q_Rp$ is, and $\\epsilon_P=e_P$ is invertible by the cited derived-pullback statement. Hence $\\epsilon_A$ is invertible for every $A$. The natural isomorphism $\\kappa^{-1}\\epsilon:Lq_R\\cong Uq_R$ descends uniquely through the homotopy-category localization by [lem-weil-pbc-localization-universal-property] to $\\eta:L\\cong U$. Its inverse descends as well, so this really is an isomorphism. In particular $\\kappa_P\\eta_{q_RP}=e_P$ on every resolving $P$.",
+      "uses": [
+        "lem-weil-pbc-ringed-topoi-derived-pullback",
+        "lem-pc-kflat-resolution",
+        "lem-weil-pbc-exact-functor-derived-factorization",
+        "lem-weil-pbc-localization-universal-property"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "Tag 06YY (lemma-derived-base-change), its natural transformation; Tag 06YS (lemma-K-flat-resolution). Exactness argument and localization identification supplied explicitly here."
+      }
+    },
+    {
+      "text": "For uniqueness, let $\\eta'$ obey the same normalization. Every $A$ admits $p:P\\to A$ as in Step 3. Naturality and invertibility of $L(q_Rp),U(q_Rp)$ force\n$$\\eta'_{q_RA}=U(q_Rp)\\eta'_{q_RP}L(q_Rp)^{-1}=\\eta_{q_RA}.$$\nEvery derived object is isomorphic to such an image; alternatively use the equivalence $W_R^{-1}\\mathcal P_R\\simeq D(R)$ of [lem-weil-pbc-site-derived-tensor-descent]. Naturality along that isomorphism forces equality at every object. Thus the prescribed normalization determines $\\eta$ uniquely.",
+      "uses": [
+        "lem-pc-kflat-resolution",
+        "lem-weil-pbc-site-derived-tensor-descent"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "Tag 06YS (lemma-K-flat-resolution); uniqueness under localization on resolving models."
+      }
+    },
+    {
+      "text": "For an integer $n$ and a resolving $P$, $P[n]$ is again resolving: its terms are reindexed flat terms, and $T(A,P[n])$ is a shift of $T(A,P)$ by [lem-weil-pbc-total-tensor-integer-shifts], so it is acyclic whenever $A$ is. The shift comparisons for $L$ are those obtained by shifting these resolutions, as specified in [lem-weil-pbc-pullback-tensor-canonical-shift-unit]. On $q_RP$ the shift-compatibility square for $\\eta$ is therefore the identity of $q_SF(P[n])$ with $q_S(FP)[n]$: both comparisons identify the degree $r$ term with $F(P^{r+n})$ and its differential with $(-1)^nF(d)$. Step 4 extends this square to all derived objects. For a sheaf $M$ in degree zero, Step 3 gives the comparison $\\epsilon_{M[0]}:L(M[0])\\cong(FM)[0]$; since $U(M[0])$ is represented by $F(M[0])=(FM)[0]$, the equation $\\kappa\\eta=\\epsilon$ identifies exactly the two degree-zero sheaf comparisons. No flatness of $M$ is used.",
+      "uses": [
+        "lem-weil-pbc-total-tensor-integer-shifts",
+        "lem-weil-pbc-pullback-tensor-canonical-shift-unit",
+        "lem-weil-pbc-exact-functor-derived-factorization",
+        "def-pc-kflat-complex",
+        "def-pc-flat-sheaf-modules"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "Tag 07A4 (lemma-pullback-tensor-product), resolution normalization; more-algebra.tex Tag 0FNH (item-shift-tensor)."
+      }
+    },
+    {
+      "text": "Let $\\mu^L$ be the canonical comparison with the representative formula stated in [lem-weil-pbc-pullback-tensor-canonical-shift-unit], and transport it by\n$$\\mu_{K,H}=(\\eta_K\\otimes\\eta_H)\\mu^L_{K,H}\\eta_{K\\otimes^LH}^{-1}.$$\nFor resolving $E,G$, [lem-pur-kflat-total-tensor-model] makes $V=T(E,G)$ resolving; Step 2 makes $FE,FG$ resolving over $S$. Thus all of $e_E,e_G,e_V,r,r'$ in that formula are available. Substitute $e_X=\\kappa_X\\eta_{q_RX}$ for $X=E,G,V$ and use naturality of $\\eta$ for $r_{E,G}$. Cancelling these isomorphisms gives precisely\n$$(\\kappa_E\\otimes\\kappa_G)\\mu_{q_RE,q_RG}U(r_{E,G})=r'_{FE,FG}q_S(c_{E,G})\\kappa_V.$$\nThe cochain map $c$ and its inverse have exactly the local pure-tensor formulas in [lem-pur-cochain-pullback-tensor-coherence]. Hence this is the normalization of the question, not a choice of an abstract tensor isomorphism. The full faithfulness assertion of [lem-weil-pbc-site-derived-tensor-descent] implies uniqueness among natural comparisons with these components. This also identifies $\\mu$ under $\\eta$ with the normalized comparison of the shift-unit node.",
+      "uses": [
+        "lem-weil-pbc-pullback-tensor-canonical-shift-unit",
+        "lem-pur-kflat-total-tensor-model",
+        "lem-pur-cochain-pullback-tensor-coherence",
+        "lem-weil-pbc-site-derived-tensor-descent"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "Tag 07A4 (lemma-pullback-tensor-product), proof by total flat-term K-flat representatives; normalized representative formula of the cited shift-unit node."
+      }
+    },
+    {
+      "text": "Check the two-variable shift equation first on $K=q_RE,H=q_RG$ with resolving $E,G$. By Step 6 and the shift-compatible factorization, cancel $\\kappa,r,r'$ throughout; what remains is the chain square between $c_{E[a],G[b]}$ and $c_{E,G}[a+b]$. On the summand corresponding to $x\\in E^p$, $y\\in G^q$, the stipulated total-shift map multiplies by $(-1)^{bp}$, using the same degree convention over both rings. The two routes both send $s\\otimes(x\\otimes y)$ to\n$$(-1)^{bp}(s\\otimes x)\\otimes(1\\otimes y).$$\nThe normalized maps $c$ are degree-preserving and $F$ preserves multiplication by $-1$, so this is equality of maps of signed total complexes, not only of their graded terms. The total shift maps themselves are the chain isomorphisms of [lem-weil-pbc-total-tensor-integer-shifts], with the chosen order of extracting the two shifts. This proves the first displayed square on resolving pairs for every positive, zero or negative $a,b$.",
+      "uses": [
+        "lem-pur-cochain-pullback-tensor-coherence",
+        "lem-weil-pbc-total-tensor-integer-shifts",
+        "def-pc-tensor-complex-sheaves"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "more-algebra.tex Tag 0FNH (item-shift-tensor); Tag 07A4 model comparison, explicit homogeneous summand calculation."
+      }
+    },
+    {
+      "text": "For symmetry on a resolving pair, the same cancellation using Step 6 reduces the derived equation to\n$$c_{G,E}F(\\sigma_{E,G})=\\sigma_{FE,FG}c_{E,G}.$$\nThis is the signed-interchange equation in [lem-pur-cochain-pullback-tensor-coherence]. More explicitly, on degree $(p,q)$ both routes send $s\\otimes(x\\otimes y)$ to $(-1)^{pq}(s\\otimes y)\\otimes(1\\otimes x)$: the route through symmetry on the target first gives $(-1)^{pq}(1\\otimes y)\\otimes(s\\otimes x)$, which equals that expression by $S$-balancing. Thus no sign has been dropped in passing from the ordinary pullback comparison to the Koszul comparison.",
+      "uses": [
+        "lem-pur-cochain-pullback-tensor-coherence"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "Tag 07A4 (lemma-pullback-tensor-product); more-algebra.tex Tag 0FNG (section-sign-rules), item-flip-tensor-product."
+      }
+    },
+    {
+      "text": "For associativity choose resolving $E,G,J$. Their pairwise total tensors and both triple totals are resolving by repeated application of [lem-pur-kflat-total-tensor-model]; hence Step 6 applies at every vertex. Substitution of its formula cancels the intermediate representative isomorphisms and leaves\n$$(1\\otimes c_{G,J})c_{E,T(G,J)}F(\\alpha)=\\alpha'(c_{E,G}\\otimes1)c_{T(E,G),J}.$$\nThis is the reassociation compatibility asserted in [lem-pur-cochain-pullback-tensor-coherence]. On a local homogeneous generator $s\\otimes((x\\otimes y)\\otimes z)$ both paths give $(s\\otimes x)\\otimes((1\\otimes y)\\otimes(1\\otimes z))$. Reassociation is unsigned and the total differential agrees on both sides; the cited cochain statement proves equality of chain maps for unbounded complexes as well.",
+      "uses": [
+        "lem-pur-kflat-total-tensor-model",
+        "lem-pur-cochain-pullback-tensor-coherence"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "Tag 07A4 (lemma-pullback-tensor-product); Tag 07A2 (lemma-tensor-product-K-flat); more-algebra.tex Tag 0FNG, unsigned triple reassociation."
+      }
+    },
+    {
+      "text": "Finally these chain calculations imply equations for arbitrary derived inputs. All arrows in each square are natural transformations. For the first two equations, restriction to resolving pairs is faithful by [lem-weil-pbc-site-derived-tensor-descent], so the equalities proved in Steps 7 and 8 hold everywhere. For the associativity equation, choose isomorphisms $q_RE\\cong K$, $q_RG\\cong H$, $q_RJ\\cong N$, possible by the same resolving-category equivalence. Naturality conjugates each side by the same source and target isomorphisms, reducing its value at $(K,H,N)$ to Step 9; cancelling those isomorphisms proves equality. All totalizations used direct sums, whose preservation was proved in Step 2; all resolving and tensor statements cited apply without bounds. This establishes the simultaneous signed shift, symmetry and associativity identities for the specified canonical comparison, including the doubly unbounded case.",
+      "uses": [
+        "lem-weil-pbc-site-derived-tensor-descent"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "Tag 07A4, proof on arbitrary K-flat models; faithful extension under the resolving-model localization."
+      }
+    }
+  ],
+  "proof_deps": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-ringed-topos-flat-module-pullback",
+    "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "lem-weil-pbc-ringed-topoi-derived-pullback",
     "lem-pc-kflat-resolution",
     "lem-weil-pbc-localization-universal-property",
-    "lem-weil-pbc-independent-sheaf-tensor-colimits"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 07A4, 06YS, 0G7E; exact localization and shift functor laws in Mathlib."
-   }
-  },
-  {
-   "text": "K-flat ringed pullback preserves resolving complexes. A flat sheaf M in degree zero is resolving by the resolving-model closure assertion of the normalized tensor-constraints node. Apply resolving pullback and evaluate in degree zero to prove F(M) flat. The existing field f.moduleAdj gives the adjunction directly, so the Mathlib left-adjoint preservation theorem proves preservation of all coproducts. Additivity gives map_zsmul.",
-   "uses": [
-    "lem-weil-pbc-ringed-topos-kflat-pullback",
-    "lem-pur-derived-tensor-additive-constraints",
-    "lem-weil-pbc-independent-sheaf-tensor-colimits",
-    "lem-weil-pbc-left-adjoint-preserves-colimits"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 07A4, 06YS, 0G7E; exact localization and shift functor laws in Mathlib."
-   }
-  },
-  {
-   "text": "Apply the canonical shift-unit comparison theorem directly to U and kappa. It gives tensor shifts, canonical representative comparisons, the unique normalized mu and the separate-input shift equations. Its returned shift structure on U equals the canonical exact-functor one: compatibility with kappa determines it after precomposition with Q, and localization is faithful. Transport mu backwards through eta to obtain the required normalized muL; naturality and cancellation prove both the representative equation and the stated transport formula.",
-   "uses": [
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-weil-pbc-total-tensor-integer-shifts",
     "lem-weil-pbc-pullback-tensor-canonical-shift-unit",
-    "lem-weil-pbc-localization-universal-property"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 07A4, 06YS, 0G7E; exact localization and shift functor laws in Mathlib."
-   }
-  },
-  {
-   "text": "Combine the two separate-input shift equations. CommShift naturality interchanges the second-input comparison with the first shift. The addition law for U.commShiftIso and naturality of shiftFunctorAdd combine the two successive shifts into a+b. This is exactly tensorShift as defined, for all signed integers.",
-   "uses": [
-    "lem-weil-pbc-pullback-tensor-canonical-shift-unit"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 07A4, 06YS, 0G7E; exact localization and shift functor laws in Mathlib."
-   }
-  },
-  {
-   "text": "Take the uniquely normalized associator and symmetry of the EXISTING tensor from the derived tensor additive-constraints node, and repackage their naturality and representative equations as TensorConstraints. Its totalModel construction supplies the resolving pair totals; no new tensor or constraints are postulated.",
-   "uses": [
-    "lem-pur-derived-tensor-additive-constraints",
-    "lem-pur-kflat-total-tensor-model"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 07A4, 06YS, 0G7E; exact localization and shift functor laws in Mathlib."
-   }
-  },
-  {
-   "text": "For symmetry on resolving pairs, precompose with U(r_PQ) and postcompose with tensor(kappa_Q,kappa_P). Substitute normalization of mu at (P,Q) and (Q,P), naturality of kappa, and the representative equations for the two symmetries. The remaining equation is precisely cochainPullbackTensorCoherence symmetry. Cancel the inserted isomorphisms.",
-   "uses": [
-    "lem-pur-cochain-pullback-tensor-coherence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 07A4, 06YS, 0G7E; exact localization and shift functor laws in Mathlib."
-   }
-  },
-  {
-   "text": "For associativity on resolving triples, form leftRepresentative and rightRepresentative from the pair and outer representative maps. Normalize the nested mu twice. Naturality of the representative maps, supplied by the canonical fixed-input comparisons, cancels the intermediate tensor comparison. The two composites become kappa, followed by Q of the two cochain associativity routes, followed by rightRepresentative over S. Cochain associativity coherence identifies those routes. The representative equation for alpha and its naturality allow cancellation of U(leftRepresentative) and tensor(kappa_P,tensor(kappa_Q,kappa_N)).",
-   "uses": [
-    "lem-weil-pbc-pullback-tensor-canonical-shift-unit",
-    "lem-pur-derived-tensor-additive-constraints",
+    "def-pc-kflat-complex",
+    "def-pc-flat-sheaf-modules",
+    "lem-pur-kflat-total-tensor-model",
     "lem-pur-cochain-pullback-tensor-coherence",
-    "lem-pur-kflat-total-tensor-model"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 07A4, 06YS, 0G7E; exact localization and shift functor laws in Mathlib."
-   }
-  },
-  {
-   "text": "Both sides of the symmetry and associativity equations are natural transformations. Every derived input is isomorphic to the localization of a resolving complex: resolve Q.objPreimage and compose with Q.objObjPreimageIso. Naturality along the product of two or three such isomorphisms extends the resolving-model equations to all inputs. This uses no boundedness assumptions.",
-   "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-weil-pbc-independent-sheaf-tensor-colimits"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 07A4, 06YS, 0G7E; exact localization and shift functor laws in Mathlib."
-   }
-  }
- ],
- "proof_deps": [
-  "lem-weil-pbc-exact-functor-derived-factorization",
-  "lem-weil-pbc-localization-universal-property",
-  "lem-pc-kflat-resolution",
-  "lem-weil-pbc-independent-sheaf-tensor-colimits",
-  "lem-weil-pbc-ringed-topos-kflat-pullback",
-  "lem-pur-derived-tensor-additive-constraints",
-  "lem-weil-pbc-left-adjoint-preserves-colimits",
-  "lem-weil-pbc-pullback-tensor-canonical-shift-unit",
-  "lem-pur-kflat-total-tensor-model",
-  "lem-pur-cochain-pullback-tensor-coherence"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 07A4, using existing normalized constraints and cochain coherence; exact identification by uniqueness of left derived functors; X8 Lean proof."
- },
- "mathlib_searches": [
-  {
-   "tool": "leanfinder",
-   "query": "Exact module inverse image of ringed topoi induces the canonical derived tensor comparison commuting with signed tensor shift associativity and Koszul symmetry",
-   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"rTensor.inverse_of_rightInverse_comp_rTensor\", \"module\": \"Mathlib/LinearAlgebra/TensorProduct/RightExactness\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} {N : Type u_3} {P : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : AddCommGroup N] [inst_3 : AddCommGroup P] [inst_4 : Module R M] [inst_5 : Module R N] [inst_6 : Module R P]\\n  {f : M →ₗ[R] N} {g : N →ₗ[R] P} (Q : Type u_5) [inst_7 : AddCommGroup \", \"doc\": \"Given a right inverse $ h $ of a linear map $ g $, the composition of the inverse of the right inverse tensor map $ h \\\\otimes \\\\text{id}_Q $ with the tensor map $ g \\\\otimes \\\\text{id}_Q $ equals the can\"}\n  {\"name\": \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {D' : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] {J : CategoryTheory.GrothendieckTopology C}\\n  {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functo\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ with Grothendieck topologies $J, K$, continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and ring sheaf m\"}\n  {\"name\": \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : CategoryTheory.Functor Y.Modules X.Modules}\\n  (h : AlgebraicGeometry.Scheme.Modules.pullback f ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometry.Scheme.Modules.pullbackComp (CategoryTheory.CategoryStruct.id X) f).inv\\n      (Catego\", \"doc\": \"For any scheme morphism $ f : X \\to Y $, the pseudofunctor structure of the pullback operation on module sheaves satisfies a right unitality associativity condition: the composition of the inverse of t\"}\n  {\"name\": \"lTensor.inverse_of_rightInverse_comp_lTensor\", \"module\": \"Mathlib/LinearAlgebra/TensorProduct/RightExactness\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} {N : Type u_3} {P : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : AddCommGroup N] [inst_3 : AddCommGroup P] [inst_4 : Module R M] [inst_5 : Module R N] [inst_6 : Module R P]\\n  {f : M →ₗ[R] N} {g : N →ₗ[R] P} (Q : Type u_5) [inst_7 : AddCommGroup \", \"doc\": \"Given linear maps $ f: N → P $ and $ g: N → P $ over a commutative semiring $ R $ with $ g $ having a right inverse $ h $, the composition of the inverse of the induced tensor product map $ M ⊗_R N → \"}\n  {\"name\": \"SheafOfModules.pushforwardComp_inv_app_val_app\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {D' : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] {J : CategoryTheory.GrothendieckTopology C}\\n  {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functo\", \"doc\": \"For any sheaf of modules $ M $, object $ U $ in $ \\\\mathcal{C}^\\\\mathrm{op} $, and element $ x $ in the module $ M(U) $, applying the inverse natural isomorphism of the composed pushforward functors $ \\\\\"}\n  {\"name\": \"SheafOfModules.pushforwardNatIso_inv\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F G : CategoryTheory.Functor C D} {T : CategoryTheory.Sheaf J RingCat} {S : CategoryThe\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, continuous functors $F,G: \\\\mathcal{C} \\\\to \\\\mathcal{D}$, a natural isomorphism $\\\\alpha: F \\\\cong G$, and sheave\"}\n  {\"name\": \"LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (CategoryTheory.presheafToSheaf (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R)).Monoidal\", \"doc\": \"The sheafification functor from presheaves to sheaves on the coherent topology of light profinite spaces (compact, Hausdorff, totally disconnected, second-countable topological spaces) with values in \"}",
-   "date": "2026-10-21",
-   "verdict": "No match for the full statement: ExactFunctor supplies D(F), factorization and shift comparisons; ordinary sheaf pullback exists, but the identification with the prescribed K-flat tensor comparison and all three signed coherence squares is additional."
-  },
-  {
-   "tool": "loogle",
-   "query": "\"mapDerivedCategory\", \"shift\"",
-   "results": "[loogle] OK 9 hit(s)\n  {\"name\": \"CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor\", \"type\": \" {C₁ : Type u_1} [CategoryTheory.Category.{v_1, u_1} C₁] [CategoryTheory.Abelian C₁] [HasDerivedCategory C₁] {C₂ : Type u_2} [CategoryTheory.Category.{v_2, u_2} C₂] [CategoryTheory.Abelian C₂] [HasDerivedCategory C₂] (F : CategoryTheory.Functor C₁ C₂) [F.Additive] [CategoryTheory.Limits.PreservesFin\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.NatTrans.instCommShiftDerivedCategoryMapDerivedCategoryInt\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor\", \"type\": \" {C₁ : Type u_1} [CategoryTheory.Category.{v_1, u_1} C₁] [CategoryTheory.Abelian C₁] [HasDerivedCategory C₁] {C₂ : Type u_2} [CategoryTheory.Category.{v_2, u_2} C₂] [CategoryTheory.Abelian C₂] [HasDerivedCategory C₂] {F : CategoryTheory.Functor C₁ C₂} [F.Additive] [CategoryTheory.Limits.PreservesFin\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.instCommShiftDerivedCategoryHomMapDerivedCategoryIdIsoInt\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor\", \"type\": \" {C₁ : Type u_1} [CategoryTheory.Category.{v_1, u_1} C₁] [CategoryTheory.Abelian C₁] [HasDerivedCategory C₁] : CategoryTheory.NatTrans.CommShift (CategoryTheory.Functor.mapDerivedCategoryIdIso C₁).hom ℤ\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.instCommShiftDerivedCategoryHomMapDerivedCategoryCompIsoInt\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor\", \"type\": \" {C₁ : Type u_1} [CategoryTheory.Category.{v_1, u_1} C₁] [CategoryTheory.Abelian C₁] [HasDerivedCategory C₁] {C₂ : Type u_2} [CategoryTheory.Category.{v_2, u_2} C₂] [CategoryTheory.Abelian C₂] [HasDerivedCategory C₂] {C₃ : Type u_3} [CategoryTheory.Category.{v_3, u_3} C₃] [CategoryTheory.Abelian C₃]\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomIsoQQuasiIsoUpMapDerivedCategoryId\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor\", \"type\": \" {C₁ : Type u_1} [CategoryTheory.Category.{v_1, u_1} C₁] [CategoryTheory.Abelian C₁] [HasDerivedCategory C₁] : CategoryTheory.NatTrans.CommShift (CategoryTheory.Localization.Lifting.iso DerivedCategory.Q (HomologicalComplex.quasiIso C₁ (ComplexShape.up ℤ)) DerivedCategory.Q (CategoryTheory.Functor.i\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor\", \"type\": \" {C₁ : Type u_1} [CategoryTheory.Category.{v_1, u_1} C₁] [CategoryTheory.Abelian C₁] [HasDerivedCategory C₁] {C₂ : Type u_2} [CategoryTheory.Category.{v_2, u_2} C₂] [CategoryTheory.Abelian C₂] [HasDerivedCategory C₂] (F : CategoryTheory.Functor C₁ C₂) [F.Additive] [CategoryTheory.Limits.PreservesFin\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomIsoQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor\", \"type\": \" {C₁ : Type u_1} [CategoryTheory.Category.{v_1, u_1} C₁] [CategoryTheory.Abelian C₁] [HasDerivedCategory C₁] {C₂ : Type u_2} [CategoryTheory.Category.{v_2, u_2} C₂] [CategoryTheory.Abelian C₂] [HasDerivedCategory C₂] (F : CategoryTheory.Functor C₁ C₂) [F.Additive] [CategoryTheory.Limits.PreservesFin\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.instCommShiftHomotopyCategoryIntUpDerivedCategoryHomMapDerivedCategoryFactorsh\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor\", \"type\": \" {C₁ : Type u_1} [CategoryTheory.Category.{v_1, u_1} C₁] [CategoryTheory.Abelian C₁] [HasDerivedCategory C₁] {C₂ : Type u_2} [CategoryTheory.Category.{v_2, u_2} C₂] [CategoryTheory.Abelian C₂] [HasDerivedCategory C₂] (F : CategoryTheory.Functor C₁ C₂) [F.Additive] [CategoryTheory.Limits.PreservesFin\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomIsoQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory_1\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor\", \"type\": \" {C₁ : Type u_1} [CategoryTheory.Category.{v_1, u_1} C₁] [CategoryTheory.Abelian C₁] [HasDerivedCategory C₁] {C₂ : Type u_2} [CategoryTheory.Category.{v_2, u_2} C₂] [CategoryTheory.Abelian C₂] [HasDerivedCategory C₂] {C₃ : Type u_3} [CategoryTheory.Category.{v_3, u_3} C₃] [CategoryTheory.Abelian C₃]\", \"doc\": \"\"}",
-   "date": "2026-10-21",
-   "verdict": "No match for the full statement: ExactFunctor supplies D(F), factorization and shift comparisons; ordinary sheaf pullback exists, but the identification with the prescribed K-flat tensor comparison and all three signed coherence squares is additional."
-  },
-  {
-   "tool": "grep",
-   "query": "mapDerivedCategory|derived.*[Mm]onoidal|[Mm]onoidal.*derived|[Pp]ullback.*[Ss]hift",
-   "results": "[grep] OK 10 hit(s)\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean\", \"line\": \"16\", \"text\": \"`F.mapDerivedCategory : DerivedCategory C₁ ⥤ DerivedCategory C₂`.\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean\", \"line\": \"36\", \"text\": \"noncomputable def mapDerivedCategory : DerivedCategory C₁ ⥤ DerivedCategory C₂ :=\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean\", \"line\": \"39\", \"text\": \"/-- The functor `F.mapDerivedCategory` is induced\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean\", \"line\": \"41\", \"text\": \"noncomputable def mapDerivedCategoryFactors :\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean\", \"line\": \"42\", \"text\": \"    DerivedCategory.Q ⋙ F.mapDerivedCategory ≅\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean\", \"line\": \"61\", \"text\": \"    dsimp% F.mapDerivedCategory.map (triangleOfSESδ hS) =\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean\", \"line\": \"62\", \"text\": \"    (F.mapDerivedCategoryFactors.hom.app S.X₃) ≫\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean\", \"line\": \"64\", \"text\": \"        (F.mapDerivedCategoryFactors.inv.app S.X₁)⟦1⟧' ≫\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean\", \"line\": \"65\", \"text\": \"          (F.mapDerivedCategory.commShiftIso (1 : ℤ)).inv.app (Q.obj S.X₁) := by\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean\", \"line\": \"67\", \"text\": \"  rw [← cancel_epi (F.mapDerivedCategory.map\"}",
-   "date": "2026-10-21",
-   "verdict": "No match for the full statement: ExactFunctor supplies D(F), factorization and shift comparisons; ordinary sheaf pullback exists, but the identification with the prescribed K-flat tensor comparison and all three signed coherence squares is additional."
-  },
-  {
-   "tool": "leansearch",
-   "query": "For exact ringed topos module pullback identify the K-flat left derived functor with termwise pullback and transport normalized signed tensor coherence",
-   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.pullback\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": SheafOfModules.{v} S ⥤ SheafOfModules.{v} R\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": pullback.{v} φ ⊣ pushforward.{v} φ\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullback\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": Y.Modules ⥤ X.Modules\", \"doc\": \"Given a morphism $ f : X \\to Y $ of schemes, this defines the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s st\"}\n  {\"name\": \"SheafOfModules.instIsLeftAdjointPullback\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": (pullback.{v} φ).IsLeftAdjoint\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullback_assoc\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \":\\n  isoWhiskerLeft _ (pullbackComp.{v} ψ ψ') ≪≫\\n      pullbackComp.{v} (G := G ⋙ G') φ (ψ ≫ (G.sheafPushforwardContinuous RingCat.{u} K K').map ψ') =\\n    (associator _ _ _).symm ≪≫\\n      isoWhiskerRight (pullbackComp.{v} φ ψ) _ ≪≫\\n        pullbackComp.{v} (F := F ⋙ G) (φ ≫ (F.sheafPushforwardContinu\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ with Grothendieck topologies $J, K$, continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and ring sheaf m\"}\n  {\"name\": \"CategoryTheory.Functor.sheafPullbackConstruction.sheafPullback\", \"module\": \"Mathlib.CategoryTheory.Sites.Pullback\", \"type\": \"[HasWeakSheafify K A] : Sheaf J A ⥤ Sheaf K A\", \"doc\": \"The functor from sheaves on a site $\\\\mathcal{C}$ with topology $J$ to sheaves on a site $\\\\mathcal{D}$ with topology $K$, constructed by first converting a sheaf to its underlying presheaf, then applyi\"}\n  {\"name\": \"SheafOfModules.PullbackConstruction.adjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": (forget S ⋙ PresheafOfModules.pullback.{v} φ.val ⋙ PresheafOfModules.sheafification (𝟙 R.val)) ⊣ pushforward.{v} φ\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on \"}\n  {\"name\": \"SheafOfModules.pullback_comp_id\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": pullbackComp.{v} (G := 𝟭 _) φ (𝟙 R) = isoWhiskerLeft _ (pullbackId R) ≪≫ Functor.rightUnitor _\", \"doc\": \"The pullback functor associated with the identity functor on a category of sheaves of modules, along the identity natural transformation of the structure sheaf, is naturally isomorphic to the identity\"}",
-   "date": "2026-10-21",
-   "verdict": "No match for the full statement: ExactFunctor supplies D(F), factorization and shift comparisons; ordinary sheaf pullback exists, but the identification with the prescribed K-flat tensor comparison and all three signed coherence squares is additional."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Canonical comparison between exact termwise derived inverse image and K-flat left derived inverse image preserves prescribed tensor shift and braiding normalizations",
-   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"∀ {C₁ : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C₁] [inst_1 : CategoryTheory.Abelian C₁]\\n  [inst_2 : HasDerivedCategory C₁] {C₂ : Type u₂} [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂]\\n  [inst_4 : CategoryTheory.Abelian C₂] [inst_5 : HasDerivedCategory C₂] (F : CategoryTheory.Functor C₁ C\", \"doc\": \"For an additive functor $ F : \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2 $ between abelian categories, the hom-component of the natural isomorphism asserting that composing the homotopy category functor with the\"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategorySingleFunctor\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"For an additive functor $ F : \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2 $ between abelian categories and integer $ n $, there is a natural isomorphism between the composition of the single-term complex functor \"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategoryFactorsh\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"A natural isomorphism asserting that composing the homotopy category functor with the derived category localization is equivalent to composing the derived category localization with the induced functo\"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"A natural isomorphism asserting that composing the derived category localization functor with the induced derived functor is naturally isomorphic to composing the homological complex functor with the \"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] {D : Type u'}\\n  [inst_2 : CategoryTheory.Category.{v', u'} D] [inst_3 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D)\\n  [inst_4 : F.Additive] [inst_5 : CategoryTheory.Limits.PreservesFiniteLimit\", \"doc\": \"For an exact functor $ F: \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories and an element $ e \\\\in \\\\text{Ext}^n(X, Y) $, the induced map $ \\\\text{Ext}^n(X, Y) \\\\to \\\\text{Ext}^n(F(X), F(Y)) $ corr\"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategory\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"Given an additive functor $ F : \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2 $ between abelian categories that preserves finite limits/colimits and homology, this constructs the induced functor between the derived\"}\n  {\"name\": \"CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"For any additive functor $ F $ between abelian categories that preserves finite limits/colimits and homology, the induced functor between their derived categories commutes with the integer-parameteriz\"}\n  {\"name\": \"CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"∀ {C₁ : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C₁] [inst_1 : CategoryTheory.Abelian C₁]\\n  [inst_2 : HasDerivedCategory C₁] {C₂ : Type u₂} [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂]\\n  [inst_4 : CategoryTheory.Abelian C₂] [inst_5 : HasDerivedCategory C₂] (F : CategoryTheory.Functor C₁ C\", \"doc\": \"For any additive functor $ F $ between abelian categories preserving finite limits/colimits and homology, the natural transformation associated with the derived functor factorization commutes with the\"}",
-   "date": "2026-10-21",
-   "verdict": "No match for the full statement: ExactFunctor supplies D(F), factorization and shift comparisons; ordinary sheaf pullback exists, but the identification with the prescribed K-flat tensor comparison and all three signed coherence squares is additional."
-  },
-  {
-   "tool": "grep",
-   "query": "mapDerivedCategoryFactors|mapDerivedCategorySingleFunctor|CommShift",
-   "results": "Search log digest 6ead554f13384347; 5 hits: 41, 47, 48, 49, 51",
-   "date": "2026-10-21",
-   "verdict": "No match for the full ringed-topos normalized tensor/coherence statement. ExactFunctor supplies the termwise derived functor and shift factorization only."
-  },
-  {
-   "tool": "leansearch",
-   "query": "Exact inverse image on ringed topoi commutes with the unbounded derived tensor product and Koszul symmetry",
-   "results": "Search log digest 57f0d73fbc660b02; 8 hits: AlgebraicGeometry.StructureSheaf.comap_id', Algebra.TensorProduct.congr_symm, SheafOfModules.pushforwardNatIso_inv, TensorProduct.comm_symm, SheafOfModules.pushforwardCongr_symm, TensorProduct.congr_symm_tmul, Algebra.TensorProduct.congr_symm_apply, TensorProduct.gradedComm_symm",
-   "date": "2026-10-21",
-   "verdict": "No match for the full ringed-topos normalized tensor/coherence statement. ExactFunctor supplies the termwise derived functor and shift factorization only."
-  },
-  {
-   "tool": "loogle",
-   "query": "Functor.mapDerivedCategory, Functor.CommShift",
-   "results": "Search log digest 4f53cda18c2baa0c; 0 hits: ; loogle: unknown identifier 'Functor.mapDerivedCategory'",
-   "date": "2026-10-21",
-   "verdict": "No match for the full ringed-topos normalized tensor/coherence statement. ExactFunctor supplies the termwise derived functor and shift factorization only."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Exact ringed topos pullback identifies derived pullback with termwise localization and its canonical signed tensor comparison compatible with shifts associativity and symmetry",
-   "results": "Search log digest 02f55de8166fc0ee; 8 hits: SheafOfModules.pullbackComp, SheafOfModules.pullbackIso, PresheafOfModules.pullbackComp, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc",
-   "date": "2026-10-21",
-   "verdict": "No match for the full ringed-topos normalized tensor/coherence statement. ExactFunctor supplies the termwise derived functor and shift factorization only."
-  },
-  {
-   "tool": "grep",
-   "query": "derived.*[Tt]ensor|[Tt]ensor.*derived|mapDerivedCategoryFactors",
-   "results": "Search log digest 04498fc16b588432; 10 hits: Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean",
-   "date": "2026-10-21",
-   "verdict": "No match for the full ringed-topos normalized tensor/coherence statement. ExactFunctor supplies the termwise derived functor and shift factorization only."
-  },
-  {
-   "tool": "loogle",
-   "query": "CategoryTheory.Functor.mapDerivedCategory",
-   "results": "Search log digest 3c19c5efb5a73fc2; 12 hits: CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt, CategoryTheory.Functor.mapDerivedCategoryIdIso, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, CategoryTheory.NatTrans.instCommShiftDerivedCategoryMapDerivedCategoryInt, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpMapDerivedCategoryId",
-   "date": "2026-10-21",
-   "verdict": "No match for the full ringed-topos normalized tensor/coherence statement. ExactFunctor supplies the termwise derived functor and shift factorization only."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "An exact additive functor induces a derived category functor with a factorization isomorphism that commutes with every integer shift",
-   "results": "Search log digest e22f3fd54bc68e98; 8 hits: CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Functor.instCommShiftHomotopyCategoryIntUpDerivedCategoryHomMapDerivedCategoryFactorsh",
-   "date": "2026-10-21",
-   "verdict": "No match for the full ringed-topos normalized tensor/coherence statement. ExactFunctor supplies the termwise derived functor and shift factorization only."
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "created": {
-  "by": "worker",
-  "item": "lem-pur-shifted-tensor-morphism-calculus",
-  "date": "2026-10-21",
-  "group": "Q84"
- },
- "chapter": "sec-smooth-purity",
- "unit": "sk-prop-a1-kummer",
- "blueprint": {
-  "from": {
-   "node": "lem-pur-frame-independence",
-   "place": "Unit multiples and Elementary shears: compatibility of the exterior/cup products with pullback; normalized exact inverse-image tensor comparisons underlying these operations.",
-   "via": [
-    "lem-pur-shifted-tensor-morphism-calculus",
-    "lem-pur-supported-cup-functoriality"
-   ]
-  },
-  "same_as": [],
-  "is": null
- },
- "split_report": {
-  "date": "2026-10-21",
-  "item": "lem-pur-exact-pullback-signed-comparison",
-  "worker": "stage1",
-  "group": "Q75",
-  "summary": "Kept the statement unchanged. Split into ten steps using existing DAG statements only: exact localization, flat/K-flat and coproduct preservation, normalized identification with derived pullback, uniqueness and shifts, the prescribed tensor representative formula, the three signed chain squares, and extension to arbitrary unbounded derived inputs. No new nodes.",
-  "blueprint": "lem-pur-frame-independence, Unit multiples / Permutations / Elementary shears: normalized pullback compatibility for the supported exterior/cup operations, reached through lem-pur-supported-cup-functoriality and lem-pur-shifted-tensor-morphism-calculus. The current main-20261015 text is under sk-prop-an; retained the inherited unit record.",
-  "tool_uses": [
-   {
-    "node": "lem-weil-pbc-exact-functor-derived-factorization",
-    "why": "Generic exact-functor localization and its signed shift factorization; not an alternative geometric proof of the unit."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topos-flat-module-pullback",
-    "why": "Generic preservation of flat modules under a ringed-topos pullback."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topos-kflat-pullback",
-    "why": "Generic preservation of the resolving class needed for the representative normalization."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
-    "why": "Actual scalar-extension module adjunction, used only to preserve direct sums."
-   },
-   {
-    "node": "lem-weil-pbc-left-adjoint-preserves-colimits",
-    "why": "Generic categorical preservation of direct sums by the module left adjoint."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topoi-derived-pullback",
-    "why": "Canonical derived counit and its computation on resolving complexes."
-   },
-   {
-    "node": "lem-pc-kflat-resolution",
-    "why": "Generic existence of resolving representatives for every unbounded complex."
-   },
-   {
-    "node": "lem-weil-pbc-localization-universal-property",
-    "why": "Generic descent and uniqueness for the natural exact-functor identification."
-   },
-   {
-    "node": "lem-weil-pbc-site-derived-tensor-descent",
-    "why": "Generic faithful testing of normalized comparisons on resolving pairs."
-   },
-   {
-    "node": "lem-weil-pbc-total-tensor-integer-shifts",
-    "why": "Signed chain shift isomorphisms needed to test the two-shift square."
-   },
-   {
-    "node": "lem-weil-pbc-pullback-tensor-canonical-shift-unit",
-    "why": "Generic representative normalization of the already named canonical derived tensor comparison."
-   },
-   {
-    "node": "lem-pur-kflat-total-tensor-model",
-    "why": "Closure of the resolving class under unbounded total tensor."
-   },
-   {
-    "node": "lem-pur-cochain-pullback-tensor-coherence",
-    "why": "Generic ordinary-to-cochain tensor normalization and signed monoidal equations."
-   }
-  ]
- },
- "tool_uses": [
-  "lem-weil-pbc-exact-functor-derived-factorization",
-  "lem-weil-pbc-ringed-topos-kflat-pullback",
-  "lem-weil-pbc-left-adjoint-preserves-colimits",
-  "lem-pc-kflat-resolution",
-  "lem-weil-pbc-localization-universal-property",
-  "lem-weil-pbc-pullback-tensor-canonical-shift-unit",
-  "lem-pur-kflat-total-tensor-model",
-  "lem-pur-cochain-pullback-tensor-coherence"
- ],
- "reviewed": {
-  "date": "2026-10-21",
-  "by": "L",
-  "reviewer": "NT-cc-Q75-19989edc0",
-  "group": "Q75",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q75-19989edc0 (reviewer sub-agent of L); spot-checked: I read the whole delivery: 0 new nodes and a ten-step proof, statement unchanged, which is what the parent lem-pur-shifted-tensor-morphism-calculus cites. Shape: the item is still unsplit in live and side-live (not superseded); it and its cited nodes are not in route-pivot-dropped; the cited-node closure has no cycle; proof_deps equals the union of uses; no SGA. Steps checked against the statements of the cited nodes. Step 3: an exact F preserves quasi-isomorphisms (exact-functor-derived-factorization); the naturality square for a K-flat resolution (kflat-resolution) makes the derived-pullback counit ε invertible everywhere, and localization-universal-property(2) lifts κ^{-1}ε to η. Step 4 uniqueness: elementary. Step 5: P[n] is resolving by total-tensor-integer-shifts; the shift square is the identity on resolving models (shift-unit fixes L's shifts, node 1(2) gives τ = id). Step 6: I recomputed (κ⊗κ)μU(r) = r'q(c)κ_V from the shift-unit formula with e = κη. V is resolving by kflat-total-tensor-model and FE, FG by kflat-pullback. Uniqueness comes from tensor descent. Steps 7-9, checked by element: shift (-1)^{bp}(s⊗x)⊗(1⊗y) on both routes; symmetry (-1)^{pq}(s⊗y)⊗(1⊗x) via S-balancing; associativity (s⊗x)⊗((1⊗y)⊗(1⊗z)). These match the signed-symmetry and reassociation clauses of lem-pur-cochain-pullback-tensor-coherence. Step 10: conjugating the trifunctor naturality is elementary. Sources: Stacks 07A4 (sites-cohomology l.3684, proof by flat-term K-flat totals), 015F, and 0FNH item-shift-tensor (sign (-1)^{pb}; the order of extraction is the same on both sides). Tags 0G7E, 06YY, 06YS, 05VD, 03D7, 0038, 07A2, 03EL exist. Duplicate search: lem-pc-flat-complex-derived-pullback (schemes, bounded above), lem-pc-isomorphism-pullback-counit and the shift-unit node (separate-variable squares only) state less, so there is no duplicate. All 13 declared tool_uses are generic black boxes and are accepted. Minor, no change: the identification of μ with the derived-tensor-pullback comparison rests on the shift-unit node's parenthetical plus uniqueness."
- },
- "lean": {
-  "module": "Sheaf.Algebra.Homology.ExactPullbackSignedComparison",
-  "declaration": "SheafOfModules.ExactPullbackSigned.exact_pullback_signed_comparison",
-  "declarations": [
-   "SheafOfModules.ExactPullbackSigned.tensor",
-   "SheafOfModules.ExactPullbackSigned.tensorMap",
-   "SheafOfModules.ExactPullbackSigned.tensorShift",
-   "SheafOfModules.ExactPullbackSigned.cochainHasTensor",
-   "SheafOfModules.ExactPullbackSigned.cochainGood12",
-   "SheafOfModules.ExactPullbackSigned.cochainGood23",
-   "SheafOfModules.ExactPullbackSigned.TensorSymmetryNatural",
-   "SheafOfModules.ExactPullbackSigned.TensorAssociativityNatural",
-   "SheafOfModules.ExactPullbackSigned.TensorSymmetryModel",
-   "SheafOfModules.ExactPullbackSigned.TensorAssociativityModel",
-   "SheafOfModules.ExactPullbackSigned.TensorConstraints",
-   "SheafOfModules.ExactPullbackSigned.exactDerivedFunctor",
-   "SheafOfModules.ExactPullbackSigned.exactFactorization",
-   "SheafOfModules.ExactPullbackSigned.IsNormalizedIdentification",
-   "SheafOfModules.ExactPullbackSigned.exact_pullback_signed_comparison"
+    "def-pc-tensor-complex-sheaves"
   ],
-  "file": "lean/Sheaf/Algebra/Homology/ExactPullbackSignedComparison.lean",
-  "statement": "theorem exact_pullback_signed_comparison (hL : L.IsLeftDerivedFunctor epsilon (HomologicalComplex.quasiIso (Modules R) (ComplexShape.up ℤ))) : ∃ (_ : L.CommShift ℤ) (_ : (derivedTensor R).CommShift₂Int) (_ : (derivedTensor S).CommShift₂Int), NatTrans.CommShift epsilon ℤ ∧ HasCanonicalTensorShifts (R := R) ∧ HasCanonicalTensorShifts (R := S) ∧ (∀ I : Type r, PreservesColimitsOfShape (Discrete I) f.L) ∧ (∀ (M N : Modules R) (a : M ⟶ N) (z : ℤ), f.L.map (z • a) = z • f.L.map a) ∧ (∀ M : Modules R, IsFlatOnSite (J := J) (R := R) M → IsFlatOnSite (J := K) (R := S) (f.L.obj M)) ∧ (∀ P : CochainComplex (Modules R) ℤ, P.IsKFlatIndependentCoefficients → (∀ n : ℤ, IsFlatOnSite (J := J) (R := R) (P.X n)) → CochainComplex.IsKFlatIndependentCoefficients ((pull.{r, uC, vC, uD, vD} f).obj P) ∧ ∀ n : ℤ, IsFlatOnSite (J := K) (R := S) (((pull.{r, uC, vC, uD, vD} f).obj P).X n)) ∧ ∃ (eta : L ≅ (exactDerivedFunctor f)), IsNormalizedIdentification f L epsilon eta ∧ (∀ eta' : L ≅ (exactDerivedFunctor f), IsNormalizedIdentification f L epsilon eta' → eta' = eta) ∧ NatTrans.CommShift eta.hom ℤ ∧ (∀ M : Modules R, eta.hom.app (DerivedCategory.Q.obj ((CochainComplex.singleFunctor (Modules R) 0).obj M)) ≫ (exactFactorization f).hom.app ((CochainComplex.singleFunctor (Modules R) 0).obj M) = epsilon.app ((CochainComplex.singleFunctor (Modules R) 0).obj M)) ∧ ∃ (cR : TensorConstraints.{uC, vC, r, wR} R) (cS : TensorConstraints.{uD, vD, r, wS} S) (mu : Phi (exactDerivedFunctor f) ≅ Psi (exactDerivedFunctor f)), IsNormalized f k (exactDerivedFunctor f) (exactFactorization f).hom mu.hom ∧ (∀ tau : Phi (exactDerivedFunctor f) ⟶ Psi (exactDerivedFunctor f), IsNormalized f k (exactDerivedFunctor f) (exactFactorization f).hom tau → tau = mu.hom) ∧ (∃ muL : Phi L ≅ Psi L, IsNormalized f k L epsilon muL.hom ∧ ∀ A B : DerivedCategory (Modules R), mu.hom.app (A, B) = eta.inv.app (tensor R A B) ≫ muL.hom.app (A, B) ≫ tensorMap S (eta.hom.app A) (eta.hom.app B)) ∧ (∀ (a b : ℤ) (A B : DerivedCategory (Modules R)), mu.hom.app (A⟦a⟧, B⟦b⟧) ≫ tensorMap S (((exactDerivedFunctor f).commShiftIso a).hom.app A) (((exactDerivedFunctor f).commShiftIso b).hom.app B) ≫ (tensorShift S a b ((exactDerivedFunctor f).obj A) ((exactDerivedFunctor f).obj B)).hom = (exactDerivedFunctor f).map (tensorShift R a b A B).hom ≫ ((exactDerivedFunctor f).commShiftIso (a + b)).hom.app (tensor R A B) ≫ (mu.hom.app (A, B))⟦a + b⟧') ∧ (∀ A B : DerivedCategory (Modules R), (exactDerivedFunctor f).map (cR.sigma A B).hom ≫ mu.hom.app (B, A) = mu.hom.app (A, B) ≫ (cS.sigma ((exactDerivedFunctor f).obj A) ((exactDerivedFunctor f).obj B)).hom) ∧ (∀ A B N : DerivedCategory (Modules R), (exactDerivedFunctor f).map (cR.alpha A B N).hom ≫ mu.hom.app (A, tensor R B N) ≫ tensorMap S (𝟙 _) (mu.hom.app (B, N)) = mu.hom.app (tensor R A B, N) ≫ tensorMap S (mu.hom.app (A, B)) (𝟙 _) ≫ (cS.alpha ((exactDerivedFunctor f).obj A) ((exactDerivedFunctor f).obj B) ((exactDerivedFunctor f).obj N)).hom)",
-  "branch": "sheaf-dag",
-  "by": "NX",
-  "date": "2026-10-21",
-  "existing": false,
-  "note": "Uses the published K-flat derived tensor and representativeIso, the actual RingedPullback/Comparison/pull/comparison, and exact Functor.mapDerivedCategory with its canonical factorization. TensorConstraints only packages the normalized natural associativity and Koszul symmetry of that tensor. IsNormalized from the shift-unit dependency states the prescribed square with epsilon = kappa; transport from the unique normalized comparison for L is explicit. Independent site, coefficient and derived-Hom universes; no boundedness or flatness of the ring map. X8 definition repair: transparent proof predicates and an equivalent bundled alpha_model using the existing totalModel and representative; proof-irrelevance and the checked old/new equivalence preserve the statement meaning. Three proved propositional tensor-instance cache lemmas support elaboration. Change record: coord/changes/exact-pullback-tensor-constraint-predicates.md."
- },
- "reviewed_lean": {
-  "date": "2026-10-21",
-  "by": "L",
-  "reviewer": "NT-stage2-cc-f164228ae",
-  "group": "NX",
-  "result": "pass",
-  "note": "Clause-by-clause match of the node and the Lean. Hypotheses: EssentiallySmall.{r} sites, RingedPullback pinned by hobj/hmap, exactness = finite limits+colimits, L any left derived functor with ε (same presentation as the landed shift-unit node), no extra assumptions, independent universes. Conclusions: η unique with κη=ε on flat-term K-flat complexes, CommShift of η, degree-zero comparison, flat and K-flat preservation, direct sums and integer scalars; μ normalized by IsNormalized with κ and unique among all natural transformations; transport from μ^L. Shift square via tensorShift: Mathlib totalShift₁ is unsigned and totalShift₂ gives (p·b).negOnePow, so (−1)^{bp}. The CommShift₂Int and L.CommShift existentials are pinned by HasCanonicalTensorShifts and NatTrans.CommShift ε. TensorConstraints σ/α are pinned by naturality plus the Koszul braiding and unsigned associator models, and are not hollow. Both records are verbatim and the declarations are present. The §1(B) dep change is options/attributes only, the module has no other importers, and the record changes only lean. Stacks tags exist. Worker compile evidence 22.8 s / 41.2 s. Advisory: the shift-unit record note replaced NQ's note."
- },
- "reviewed_proof": {
-  "date": "2026-10-22",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "X8",
-  "result": "pass",
-  "landing": "20261022T020124-L-42603",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
- }
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4 (lemma-pullback-tensor-product), expanded exact-functor identification and signed coherence, with Tags 06YS, 0G7E and 015F."
+  },
+  "mathlib_searches": [
+    {
+      "tool": "leanfinder",
+      "query": "Exact module inverse image of ringed topoi induces the canonical derived tensor comparison commuting with signed tensor shift associativity and Koszul symmetry",
+      "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"rTensor.inverse_of_rightInverse_comp_rTensor\", \"module\": \"Mathlib/LinearAlgebra/TensorProduct/RightExactness\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} {N : Type u_3} {P : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : AddCommGroup N] [inst_3 : AddCommGroup P] [inst_4 : Module R M] [inst_5 : Module R N] [inst_6 : Module R P]\\n  {f : M →ₗ[R] N} {g : N →ₗ[R] P} (Q : Type u_5) [inst_7 : AddCommGroup \", \"doc\": \"Given a right inverse $ h $ of a linear map $ g $, the composition of the inverse of the right inverse tensor map $ h \\\\otimes \\\\text{id}_Q $ with the tensor map $ g \\\\otimes \\\\text{id}_Q $ equals the can\"}\n  {\"name\": \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {D' : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] {J : CategoryTheory.GrothendieckTopology C}\\n  {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functo\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ with Grothendieck topologies $J, K$, continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and ring sheaf m\"}\n  {\"name\": \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : CategoryTheory.Functor Y.Modules X.Modules}\\n  (h : AlgebraicGeometry.Scheme.Modules.pullback f ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometry.Scheme.Modules.pullbackComp (CategoryTheory.CategoryStruct.id X) f).inv\\n      (Catego\", \"doc\": \"For any scheme morphism $ f : X \\to Y $, the pseudofunctor structure of the pullback operation on module sheaves satisfies a right unitality associativity condition: the composition of the inverse of t\"}\n  {\"name\": \"lTensor.inverse_of_rightInverse_comp_lTensor\", \"module\": \"Mathlib/LinearAlgebra/TensorProduct/RightExactness\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} {N : Type u_3} {P : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : AddCommGroup N] [inst_3 : AddCommGroup P] [inst_4 : Module R M] [inst_5 : Module R N] [inst_6 : Module R P]\\n  {f : M →ₗ[R] N} {g : N →ₗ[R] P} (Q : Type u_5) [inst_7 : AddCommGroup \", \"doc\": \"Given linear maps $ f: N → P $ and $ g: N → P $ over a commutative semiring $ R $ with $ g $ having a right inverse $ h $, the composition of the inverse of the induced tensor product map $ M ⊗_R N → \"}\n  {\"name\": \"SheafOfModules.pushforwardComp_inv_app_val_app\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {D' : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] {J : CategoryTheory.GrothendieckTopology C}\\n  {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functo\", \"doc\": \"For any sheaf of modules $ M $, object $ U $ in $ \\\\mathcal{C}^\\\\mathrm{op} $, and element $ x $ in the module $ M(U) $, applying the inverse natural isomorphism of the composed pushforward functors $ \\\\\"}\n  {\"name\": \"SheafOfModules.pushforwardNatIso_inv\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F G : CategoryTheory.Functor C D} {T : CategoryTheory.Sheaf J RingCat} {S : CategoryThe\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, continuous functors $F,G: \\\\mathcal{C} \\\\to \\\\mathcal{D}$, a natural isomorphism $\\\\alpha: F \\\\cong G$, and sheave\"}\n  {\"name\": \"LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (CategoryTheory.presheafToSheaf (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R)).Monoidal\", \"doc\": \"The sheafification functor from presheaves to sheaves on the coherent topology of light profinite spaces (compact, Hausdorff, totally disconnected, second-countable topological spaces) with values in \"}",
+      "date": "2026-10-21",
+      "verdict": "No match for the full statement: ExactFunctor supplies D(F), factorization and shift comparisons; ordinary sheaf pullback exists, but the identification with the prescribed K-flat tensor comparison and all three signed coherence squares is additional."
+    },
+    {
+      "tool": "loogle",
+      "query": "\"mapDerivedCategory\", \"shift\"",
+      "results": "[loogle] OK 9 hit(s)\n  {\"name\": \"CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor\", \"type\": \" {C₁ : Type u_1} [CategoryTheory.Category.{v_1, u_1} C₁] [CategoryTheory.Abelian C₁] [HasDerivedCategory C₁] {C₂ : Type u_2} [CategoryTheory.Category.{v_2, u_2} C₂] [CategoryTheory.Abelian C₂] [HasDerivedCategory C₂] (F : CategoryTheory.Functor C₁ C₂) [F.Additive] [CategoryTheory.Limits.PreservesFin\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.NatTrans.instCommShiftDerivedCategoryMapDerivedCategoryInt\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor\", \"type\": \" {C₁ : Type u_1} [CategoryTheory.Category.{v_1, u_1} C₁] [CategoryTheory.Abelian C₁] [HasDerivedCategory C₁] {C₂ : Type u_2} [CategoryTheory.Category.{v_2, u_2} C₂] [CategoryTheory.Abelian C₂] [HasDerivedCategory C₂] {F : CategoryTheory.Functor C₁ C₂} [F.Additive] [CategoryTheory.Limits.PreservesFin\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.instCommShiftDerivedCategoryHomMapDerivedCategoryIdIsoInt\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor\", \"type\": \" {C₁ : Type u_1} [CategoryTheory.Category.{v_1, u_1} C₁] [CategoryTheory.Abelian C₁] [HasDerivedCategory C₁] : CategoryTheory.NatTrans.CommShift (CategoryTheory.Functor.mapDerivedCategoryIdIso C₁).hom ℤ\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.instCommShiftDerivedCategoryHomMapDerivedCategoryCompIsoInt\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor\", \"type\": \" {C₁ : Type u_1} [CategoryTheory.Category.{v_1, u_1} C₁] [CategoryTheory.Abelian C₁] [HasDerivedCategory C₁] {C₂ : Type u_2} [CategoryTheory.Category.{v_2, u_2} C₂] [CategoryTheory.Abelian C₂] [HasDerivedCategory C₂] {C₃ : Type u_3} [CategoryTheory.Category.{v_3, u_3} C₃] [CategoryTheory.Abelian C₃]\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomIsoQQuasiIsoUpMapDerivedCategoryId\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor\", \"type\": \" {C₁ : Type u_1} [CategoryTheory.Category.{v_1, u_1} C₁] [CategoryTheory.Abelian C₁] [HasDerivedCategory C₁] : CategoryTheory.NatTrans.CommShift (CategoryTheory.Localization.Lifting.iso DerivedCategory.Q (HomologicalComplex.quasiIso C₁ (ComplexShape.up ℤ)) DerivedCategory.Q (CategoryTheory.Functor.i\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor\", \"type\": \" {C₁ : Type u_1} [CategoryTheory.Category.{v_1, u_1} C₁] [CategoryTheory.Abelian C₁] [HasDerivedCategory C₁] {C₂ : Type u_2} [CategoryTheory.Category.{v_2, u_2} C₂] [CategoryTheory.Abelian C₂] [HasDerivedCategory C₂] (F : CategoryTheory.Functor C₁ C₂) [F.Additive] [CategoryTheory.Limits.PreservesFin\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomIsoQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor\", \"type\": \" {C₁ : Type u_1} [CategoryTheory.Category.{v_1, u_1} C₁] [CategoryTheory.Abelian C₁] [HasDerivedCategory C₁] {C₂ : Type u_2} [CategoryTheory.Category.{v_2, u_2} C₂] [CategoryTheory.Abelian C₂] [HasDerivedCategory C₂] (F : CategoryTheory.Functor C₁ C₂) [F.Additive] [CategoryTheory.Limits.PreservesFin\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.instCommShiftHomotopyCategoryIntUpDerivedCategoryHomMapDerivedCategoryFactorsh\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor\", \"type\": \" {C₁ : Type u_1} [CategoryTheory.Category.{v_1, u_1} C₁] [CategoryTheory.Abelian C₁] [HasDerivedCategory C₁] {C₂ : Type u_2} [CategoryTheory.Category.{v_2, u_2} C₂] [CategoryTheory.Abelian C₂] [HasDerivedCategory C₂] (F : CategoryTheory.Functor C₁ C₂) [F.Additive] [CategoryTheory.Limits.PreservesFin\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomIsoQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory_1\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor\", \"type\": \" {C₁ : Type u_1} [CategoryTheory.Category.{v_1, u_1} C₁] [CategoryTheory.Abelian C₁] [HasDerivedCategory C₁] {C₂ : Type u_2} [CategoryTheory.Category.{v_2, u_2} C₂] [CategoryTheory.Abelian C₂] [HasDerivedCategory C₂] {C₃ : Type u_3} [CategoryTheory.Category.{v_3, u_3} C₃] [CategoryTheory.Abelian C₃]\", \"doc\": \"\"}",
+      "date": "2026-10-21",
+      "verdict": "No match for the full statement: ExactFunctor supplies D(F), factorization and shift comparisons; ordinary sheaf pullback exists, but the identification with the prescribed K-flat tensor comparison and all three signed coherence squares is additional."
+    },
+    {
+      "tool": "grep",
+      "query": "mapDerivedCategory|derived.*[Mm]onoidal|[Mm]onoidal.*derived|[Pp]ullback.*[Ss]hift",
+      "results": "[grep] OK 10 hit(s)\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean\", \"line\": \"16\", \"text\": \"`F.mapDerivedCategory : DerivedCategory C₁ ⥤ DerivedCategory C₂`.\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean\", \"line\": \"36\", \"text\": \"noncomputable def mapDerivedCategory : DerivedCategory C₁ ⥤ DerivedCategory C₂ :=\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean\", \"line\": \"39\", \"text\": \"/-- The functor `F.mapDerivedCategory` is induced\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean\", \"line\": \"41\", \"text\": \"noncomputable def mapDerivedCategoryFactors :\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean\", \"line\": \"42\", \"text\": \"    DerivedCategory.Q ⋙ F.mapDerivedCategory ≅\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean\", \"line\": \"61\", \"text\": \"    dsimp% F.mapDerivedCategory.map (triangleOfSESδ hS) =\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean\", \"line\": \"62\", \"text\": \"    (F.mapDerivedCategoryFactors.hom.app S.X₃) ≫\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean\", \"line\": \"64\", \"text\": \"        (F.mapDerivedCategoryFactors.inv.app S.X₁)⟦1⟧' ≫\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean\", \"line\": \"65\", \"text\": \"          (F.mapDerivedCategory.commShiftIso (1 : ℤ)).inv.app (Q.obj S.X₁) := by\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean\", \"line\": \"67\", \"text\": \"  rw [← cancel_epi (F.mapDerivedCategory.map\"}",
+      "date": "2026-10-21",
+      "verdict": "No match for the full statement: ExactFunctor supplies D(F), factorization and shift comparisons; ordinary sheaf pullback exists, but the identification with the prescribed K-flat tensor comparison and all three signed coherence squares is additional."
+    },
+    {
+      "tool": "leansearch",
+      "query": "For exact ringed topos module pullback identify the K-flat left derived functor with termwise pullback and transport normalized signed tensor coherence",
+      "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.pullback\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": SheafOfModules.{v} S ⥤ SheafOfModules.{v} R\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": pullback.{v} φ ⊣ pushforward.{v} φ\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullback\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": Y.Modules ⥤ X.Modules\", \"doc\": \"Given a morphism $ f : X \\to Y $ of schemes, this defines the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s st\"}\n  {\"name\": \"SheafOfModules.instIsLeftAdjointPullback\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": (pullback.{v} φ).IsLeftAdjoint\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullback_assoc\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \":\\n  isoWhiskerLeft _ (pullbackComp.{v} ψ ψ') ≪≫\\n      pullbackComp.{v} (G := G ⋙ G') φ (ψ ≫ (G.sheafPushforwardContinuous RingCat.{u} K K').map ψ') =\\n    (associator _ _ _).symm ≪≫\\n      isoWhiskerRight (pullbackComp.{v} φ ψ) _ ≪≫\\n        pullbackComp.{v} (F := F ⋙ G) (φ ≫ (F.sheafPushforwardContinu\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ with Grothendieck topologies $J, K$, continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and ring sheaf m\"}\n  {\"name\": \"CategoryTheory.Functor.sheafPullbackConstruction.sheafPullback\", \"module\": \"Mathlib.CategoryTheory.Sites.Pullback\", \"type\": \"[HasWeakSheafify K A] : Sheaf J A ⥤ Sheaf K A\", \"doc\": \"The functor from sheaves on a site $\\\\mathcal{C}$ with topology $J$ to sheaves on a site $\\\\mathcal{D}$ with topology $K$, constructed by first converting a sheaf to its underlying presheaf, then applyi\"}\n  {\"name\": \"SheafOfModules.PullbackConstruction.adjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": (forget S ⋙ PresheafOfModules.pullback.{v} φ.val ⋙ PresheafOfModules.sheafification (𝟙 R.val)) ⊣ pushforward.{v} φ\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on \"}\n  {\"name\": \"SheafOfModules.pullback_comp_id\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": pullbackComp.{v} (G := 𝟭 _) φ (𝟙 R) = isoWhiskerLeft _ (pullbackId R) ≪≫ Functor.rightUnitor _\", \"doc\": \"The pullback functor associated with the identity functor on a category of sheaves of modules, along the identity natural transformation of the structure sheaf, is naturally isomorphic to the identity\"}",
+      "date": "2026-10-21",
+      "verdict": "No match for the full statement: ExactFunctor supplies D(F), factorization and shift comparisons; ordinary sheaf pullback exists, but the identification with the prescribed K-flat tensor comparison and all three signed coherence squares is additional."
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Canonical comparison between exact termwise derived inverse image and K-flat left derived inverse image preserves prescribed tensor shift and braiding normalizations",
+      "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"∀ {C₁ : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C₁] [inst_1 : CategoryTheory.Abelian C₁]\\n  [inst_2 : HasDerivedCategory C₁] {C₂ : Type u₂} [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂]\\n  [inst_4 : CategoryTheory.Abelian C₂] [inst_5 : HasDerivedCategory C₂] (F : CategoryTheory.Functor C₁ C\", \"doc\": \"For an additive functor $ F : \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2 $ between abelian categories, the hom-component of the natural isomorphism asserting that composing the homotopy category functor with the\"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategorySingleFunctor\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"For an additive functor $ F : \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2 $ between abelian categories and integer $ n $, there is a natural isomorphism between the composition of the single-term complex functor \"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategoryFactorsh\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"A natural isomorphism asserting that composing the homotopy category functor with the derived category localization is equivalent to composing the derived category localization with the induced functo\"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"A natural isomorphism asserting that composing the derived category localization functor with the induced derived functor is naturally isomorphic to composing the homological complex functor with the \"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] {D : Type u'}\\n  [inst_2 : CategoryTheory.Category.{v', u'} D] [inst_3 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D)\\n  [inst_4 : F.Additive] [inst_5 : CategoryTheory.Limits.PreservesFiniteLimit\", \"doc\": \"For an exact functor $ F: \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories and an element $ e \\\\in \\\\text{Ext}^n(X, Y) $, the induced map $ \\\\text{Ext}^n(X, Y) \\\\to \\\\text{Ext}^n(F(X), F(Y)) $ corr\"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategory\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"Given an additive functor $ F : \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2 $ between abelian categories that preserves finite limits/colimits and homology, this constructs the induced functor between the derived\"}\n  {\"name\": \"CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"For any additive functor $ F $ between abelian categories that preserves finite limits/colimits and homology, the induced functor between their derived categories commutes with the integer-parameteriz\"}\n  {\"name\": \"CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"∀ {C₁ : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C₁] [inst_1 : CategoryTheory.Abelian C₁]\\n  [inst_2 : HasDerivedCategory C₁] {C₂ : Type u₂} [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂]\\n  [inst_4 : CategoryTheory.Abelian C₂] [inst_5 : HasDerivedCategory C₂] (F : CategoryTheory.Functor C₁ C\", \"doc\": \"For any additive functor $ F $ between abelian categories preserving finite limits/colimits and homology, the natural transformation associated with the derived functor factorization commutes with the\"}",
+      "date": "2026-10-21",
+      "verdict": "No match for the full statement: ExactFunctor supplies D(F), factorization and shift comparisons; ordinary sheaf pullback exists, but the identification with the prescribed K-flat tensor comparison and all three signed coherence squares is additional."
+    },
+    {
+      "tool": "grep",
+      "query": "mapDerivedCategoryFactors|mapDerivedCategorySingleFunctor|CommShift",
+      "results": "Search log digest 6ead554f13384347; 5 hits: 41, 47, 48, 49, 51",
+      "date": "2026-10-21",
+      "verdict": "No match for the full ringed-topos normalized tensor/coherence statement. ExactFunctor supplies the termwise derived functor and shift factorization only."
+    },
+    {
+      "tool": "leansearch",
+      "query": "Exact inverse image on ringed topoi commutes with the unbounded derived tensor product and Koszul symmetry",
+      "results": "Search log digest 57f0d73fbc660b02; 8 hits: AlgebraicGeometry.StructureSheaf.comap_id', Algebra.TensorProduct.congr_symm, SheafOfModules.pushforwardNatIso_inv, TensorProduct.comm_symm, SheafOfModules.pushforwardCongr_symm, TensorProduct.congr_symm_tmul, Algebra.TensorProduct.congr_symm_apply, TensorProduct.gradedComm_symm",
+      "date": "2026-10-21",
+      "verdict": "No match for the full ringed-topos normalized tensor/coherence statement. ExactFunctor supplies the termwise derived functor and shift factorization only."
+    },
+    {
+      "tool": "loogle",
+      "query": "Functor.mapDerivedCategory, Functor.CommShift",
+      "results": "Search log digest 4f53cda18c2baa0c; 0 hits: ; loogle: unknown identifier 'Functor.mapDerivedCategory'",
+      "date": "2026-10-21",
+      "verdict": "No match for the full ringed-topos normalized tensor/coherence statement. ExactFunctor supplies the termwise derived functor and shift factorization only."
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Exact ringed topos pullback identifies derived pullback with termwise localization and its canonical signed tensor comparison compatible with shifts associativity and symmetry",
+      "results": "Search log digest 02f55de8166fc0ee; 8 hits: SheafOfModules.pullbackComp, SheafOfModules.pullbackIso, PresheafOfModules.pullbackComp, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc",
+      "date": "2026-10-21",
+      "verdict": "No match for the full ringed-topos normalized tensor/coherence statement. ExactFunctor supplies the termwise derived functor and shift factorization only."
+    },
+    {
+      "tool": "grep",
+      "query": "derived.*[Tt]ensor|[Tt]ensor.*derived|mapDerivedCategoryFactors",
+      "results": "Search log digest 04498fc16b588432; 10 hits: Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean",
+      "date": "2026-10-21",
+      "verdict": "No match for the full ringed-topos normalized tensor/coherence statement. ExactFunctor supplies the termwise derived functor and shift factorization only."
+    },
+    {
+      "tool": "loogle",
+      "query": "CategoryTheory.Functor.mapDerivedCategory",
+      "results": "Search log digest 3c19c5efb5a73fc2; 12 hits: CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt, CategoryTheory.Functor.mapDerivedCategoryIdIso, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, CategoryTheory.NatTrans.instCommShiftDerivedCategoryMapDerivedCategoryInt, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpMapDerivedCategoryId",
+      "date": "2026-10-21",
+      "verdict": "No match for the full ringed-topos normalized tensor/coherence statement. ExactFunctor supplies the termwise derived functor and shift factorization only."
+    },
+    {
+      "tool": "leanfinder",
+      "query": "An exact additive functor induces a derived category functor with a factorization isomorphism that commutes with every integer shift",
+      "results": "Search log digest e22f3fd54bc68e98; 8 hits: CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Functor.instCommShiftHomotopyCategoryIntUpDerivedCategoryHomMapDerivedCategoryFactorsh",
+      "date": "2026-10-21",
+      "verdict": "No match for the full ringed-topos normalized tensor/coherence statement. ExactFunctor supplies the termwise derived functor and shift factorization only."
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "created": {
+    "by": "worker",
+    "item": "lem-pur-shifted-tensor-morphism-calculus",
+    "date": "2026-10-21",
+    "group": "Q84"
+  },
+  "chapter": "sec-smooth-purity",
+  "unit": "sk-prop-a1-kummer",
+  "blueprint": {
+    "from": {
+      "node": "lem-pur-frame-independence",
+      "place": "Unit multiples and Elementary shears: compatibility of the exterior/cup products with pullback; normalized exact inverse-image tensor comparisons underlying these operations.",
+      "via": [
+        "lem-pur-shifted-tensor-morphism-calculus",
+        "lem-pur-supported-cup-functoriality"
+      ]
+    },
+    "same_as": [],
+    "is": null
+  },
+  "split_report": {
+    "date": "2026-10-21",
+    "item": "lem-pur-exact-pullback-signed-comparison",
+    "worker": "stage1",
+    "group": "Q75",
+    "summary": "Kept the statement unchanged. Split into ten steps using existing DAG statements only: exact localization, flat/K-flat and coproduct preservation, normalized identification with derived pullback, uniqueness and shifts, the prescribed tensor representative formula, the three signed chain squares, and extension to arbitrary unbounded derived inputs. No new nodes.",
+    "blueprint": "lem-pur-frame-independence, Unit multiples / Permutations / Elementary shears: normalized pullback compatibility for the supported exterior/cup operations, reached through lem-pur-supported-cup-functoriality and lem-pur-shifted-tensor-morphism-calculus. The current main-20261015 text is under sk-prop-an; retained the inherited unit record.",
+    "tool_uses": [
+      {
+        "node": "lem-weil-pbc-exact-functor-derived-factorization",
+        "why": "Generic exact-functor localization and its signed shift factorization; not an alternative geometric proof of the unit."
+      },
+      {
+        "node": "lem-weil-pbc-ringed-topos-flat-module-pullback",
+        "why": "Generic preservation of flat modules under a ringed-topos pullback."
+      },
+      {
+        "node": "lem-weil-pbc-ringed-topos-kflat-pullback",
+        "why": "Generic preservation of the resolving class needed for the representative normalization."
+      },
+      {
+        "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+        "why": "Actual scalar-extension module adjunction, used only to preserve direct sums."
+      },
+      {
+        "node": "lem-weil-pbc-left-adjoint-preserves-colimits",
+        "why": "Generic categorical preservation of direct sums by the module left adjoint."
+      },
+      {
+        "node": "lem-weil-pbc-ringed-topoi-derived-pullback",
+        "why": "Canonical derived counit and its computation on resolving complexes."
+      },
+      {
+        "node": "lem-pc-kflat-resolution",
+        "why": "Generic existence of resolving representatives for every unbounded complex."
+      },
+      {
+        "node": "lem-weil-pbc-localization-universal-property",
+        "why": "Generic descent and uniqueness for the natural exact-functor identification."
+      },
+      {
+        "node": "lem-weil-pbc-site-derived-tensor-descent",
+        "why": "Generic faithful testing of normalized comparisons on resolving pairs."
+      },
+      {
+        "node": "lem-weil-pbc-total-tensor-integer-shifts",
+        "why": "Signed chain shift isomorphisms needed to test the two-shift square."
+      },
+      {
+        "node": "lem-weil-pbc-pullback-tensor-canonical-shift-unit",
+        "why": "Generic representative normalization of the already named canonical derived tensor comparison."
+      },
+      {
+        "node": "lem-pur-kflat-total-tensor-model",
+        "why": "Closure of the resolving class under unbounded total tensor."
+      },
+      {
+        "node": "lem-pur-cochain-pullback-tensor-coherence",
+        "why": "Generic ordinary-to-cochain tensor normalization and signed monoidal equations."
+      }
+    ]
+  },
+  "tool_uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-ringed-topos-flat-module-pullback",
+    "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-localization-universal-property",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-weil-pbc-total-tensor-integer-shifts",
+    "lem-weil-pbc-pullback-tensor-canonical-shift-unit",
+    "lem-pur-kflat-total-tensor-model",
+    "lem-pur-cochain-pullback-tensor-coherence"
+  ],
+  "reviewed": {
+    "date": "2026-10-21",
+    "by": "L",
+    "reviewer": "NT-cc-Q75-19989edc0",
+    "group": "Q75",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q75-19989edc0 (reviewer sub-agent of L); spot-checked: I read the whole delivery: 0 new nodes and a ten-step proof, statement unchanged, which is what the parent lem-pur-shifted-tensor-morphism-calculus cites. Shape: the item is still unsplit in live and side-live (not superseded); it and its cited nodes are not in route-pivot-dropped; the cited-node closure has no cycle; proof_deps equals the union of uses; no SGA. Steps checked against the statements of the cited nodes. Step 3: an exact F preserves quasi-isomorphisms (exact-functor-derived-factorization); the naturality square for a K-flat resolution (kflat-resolution) makes the derived-pullback counit ε invertible everywhere, and localization-universal-property(2) lifts κ^{-1}ε to η. Step 4 uniqueness: elementary. Step 5: P[n] is resolving by total-tensor-integer-shifts; the shift square is the identity on resolving models (shift-unit fixes L's shifts, node 1(2) gives τ = id). Step 6: I recomputed (κ⊗κ)μU(r) = r'q(c)κ_V from the shift-unit formula with e = κη. V is resolving by kflat-total-tensor-model and FE, FG by kflat-pullback. Uniqueness comes from tensor descent. Steps 7-9, checked by element: shift (-1)^{bp}(s⊗x)⊗(1⊗y) on both routes; symmetry (-1)^{pq}(s⊗y)⊗(1⊗x) via S-balancing; associativity (s⊗x)⊗((1⊗y)⊗(1⊗z)). These match the signed-symmetry and reassociation clauses of lem-pur-cochain-pullback-tensor-coherence. Step 10: conjugating the trifunctor naturality is elementary. Sources: Stacks 07A4 (sites-cohomology l.3684, proof by flat-term K-flat totals), 015F, and 0FNH item-shift-tensor (sign (-1)^{pb}; the order of extraction is the same on both sides). Tags 0G7E, 06YY, 06YS, 05VD, 03D7, 0038, 07A2, 03EL exist. Duplicate search: lem-pc-flat-complex-derived-pullback (schemes, bounded above), lem-pc-isomorphism-pullback-counit and the shift-unit node (separate-variable squares only) state less, so there is no duplicate. All 13 declared tool_uses are generic black boxes and are accepted. Minor, no change: the identification of μ with the derived-tensor-pullback comparison rests on the shift-unit node's parenthetical plus uniqueness."
+  },
+  "lean": {
+    "module": "Sheaf.Algebra.Homology.ExactPullbackSignedComparison",
+    "declaration": "SheafOfModules.ExactPullbackSigned.exact_pullback_signed_comparison",
+    "declarations": [
+      "SheafOfModules.ExactPullbackSigned.tensor",
+      "SheafOfModules.ExactPullbackSigned.tensorMap",
+      "SheafOfModules.ExactPullbackSigned.tensorShift",
+      "SheafOfModules.ExactPullbackSigned.TensorConstraints",
+      "SheafOfModules.ExactPullbackSigned.exactDerivedFunctor",
+      "SheafOfModules.ExactPullbackSigned.exactFactorization",
+      "SheafOfModules.ExactPullbackSigned.IsNormalizedIdentification",
+      "SheafOfModules.ExactPullbackSigned.exact_pullback_signed_comparison"
+    ],
+    "file": "lean/Sheaf/Algebra/Homology/ExactPullbackSignedComparison.lean",
+    "statement": "theorem exact_pullback_signed_comparison (hL : L.IsLeftDerivedFunctor epsilon (HomologicalComplex.quasiIso (Modules R) (ComplexShape.up ℤ))) : ∃ (_ : L.CommShift ℤ) (_ : (derivedTensor R).CommShift₂Int) (_ : (derivedTensor S).CommShift₂Int), NatTrans.CommShift epsilon ℤ ∧ HasCanonicalTensorShifts (R := R) ∧ HasCanonicalTensorShifts (R := S) ∧ (∀ I : Type r, PreservesColimitsOfShape (Discrete I) f.L) ∧ (∀ (M N : Modules R) (a : M ⟶ N) (z : ℤ), f.L.map (z • a) = z • f.L.map a) ∧ (∀ M : Modules R, IsFlatOnSite (J := J) (R := R) M → IsFlatOnSite (J := K) (R := S) (f.L.obj M)) ∧ (∀ P : CochainComplex (Modules R) ℤ, P.IsKFlatIndependentCoefficients → (∀ n : ℤ, IsFlatOnSite (J := J) (R := R) (P.X n)) → CochainComplex.IsKFlatIndependentCoefficients ((pull.{r, uC, vC, uD, vD} f).obj P) ∧ ∀ n : ℤ, IsFlatOnSite (J := K) (R := S) (((pull.{r, uC, vC, uD, vD} f).obj P).X n)) ∧ ∃ (eta : L ≅ (exactDerivedFunctor f)), IsNormalizedIdentification f L epsilon eta ∧ (∀ eta' : L ≅ (exactDerivedFunctor f), IsNormalizedIdentification f L epsilon eta' → eta' = eta) ∧ NatTrans.CommShift eta.hom ℤ ∧ (∀ M : Modules R, eta.hom.app (DerivedCategory.Q.obj ((CochainComplex.singleFunctor (Modules R) 0).obj M)) ≫ (exactFactorization f).hom.app ((CochainComplex.singleFunctor (Modules R) 0).obj M) = epsilon.app ((CochainComplex.singleFunctor (Modules R) 0).obj M)) ∧ ∃ (cR : TensorConstraints.{uC, vC, r, wR} R) (cS : TensorConstraints.{uD, vD, r, wS} S) (mu : Phi (exactDerivedFunctor f) ≅ Psi (exactDerivedFunctor f)), IsNormalized f k (exactDerivedFunctor f) (exactFactorization f).hom mu.hom ∧ (∀ tau : Phi (exactDerivedFunctor f) ⟶ Psi (exactDerivedFunctor f), IsNormalized f k (exactDerivedFunctor f) (exactFactorization f).hom tau → tau = mu.hom) ∧ (∃ muL : Phi L ≅ Psi L, IsNormalized f k L epsilon muL.hom ∧ ∀ A B : DerivedCategory (Modules R), mu.hom.app (A, B) = eta.inv.app (tensor R A B) ≫ muL.hom.app (A, B) ≫ tensorMap S (eta.hom.app A) (eta.hom.app B)) ∧ (∀ (a b : ℤ) (A B : DerivedCategory (Modules R)), mu.hom.app (A⟦a⟧, B⟦b⟧) ≫ tensorMap S (((exactDerivedFunctor f).commShiftIso a).hom.app A) (((exactDerivedFunctor f).commShiftIso b).hom.app B) ≫ (tensorShift S a b ((exactDerivedFunctor f).obj A) ((exactDerivedFunctor f).obj B)).hom = (exactDerivedFunctor f).map (tensorShift R a b A B).hom ≫ ((exactDerivedFunctor f).commShiftIso (a + b)).hom.app (tensor R A B) ≫ (mu.hom.app (A, B))⟦a + b⟧') ∧ (∀ A B : DerivedCategory (Modules R), (exactDerivedFunctor f).map (cR.sigma A B).hom ≫ mu.hom.app (B, A) = mu.hom.app (A, B) ≫ (cS.sigma ((exactDerivedFunctor f).obj A) ((exactDerivedFunctor f).obj B)).hom) ∧ (∀ A B N : DerivedCategory (Modules R), (exactDerivedFunctor f).map (cR.alpha A B N).hom ≫ mu.hom.app (A, tensor R B N) ≫ tensorMap S (𝟙 _) (mu.hom.app (B, N)) = mu.hom.app (tensor R A B, N) ≫ tensorMap S (mu.hom.app (A, B)) (𝟙 _) ≫ (cS.alpha ((exactDerivedFunctor f).obj A) ((exactDerivedFunctor f).obj B) ((exactDerivedFunctor f).obj N)).hom)",
+    "branch": "sheaf-dag",
+    "by": "NX",
+    "date": "2026-10-21",
+    "existing": false,
+    "note": "Uses the published K-flat derived tensor and representativeIso, the actual RingedPullback/Comparison/pull/comparison, and exact Functor.mapDerivedCategory with its canonical factorization. TensorConstraints only packages the normalized natural associativity and Koszul symmetry of that tensor. IsNormalized from the shift-unit dependency states the prescribed square with epsilon = kappa; transport from the unique normalized comparison for L is explicit. Independent site, coefficient and derived-Hom universes; no boundedness or flatness of the ring map."
+  },
+  "reviewed_lean": {
+    "date": "2026-10-21",
+    "by": "L",
+    "reviewer": "NT-stage2-cc-f164228ae",
+    "group": "NX",
+    "result": "pass",
+    "note": "Clause-by-clause match of the node and the Lean. Hypotheses: EssentiallySmall.{r} sites, RingedPullback pinned by hobj/hmap, exactness = finite limits+colimits, L any left derived functor with ε (same presentation as the landed shift-unit node), no extra assumptions, independent universes. Conclusions: η unique with κη=ε on flat-term K-flat complexes, CommShift of η, degree-zero comparison, flat and K-flat preservation, direct sums and integer scalars; μ normalized by IsNormalized with κ and unique among all natural transformations; transport from μ^L. Shift square via tensorShift: Mathlib totalShift₁ is unsigned and totalShift₂ gives (p·b).negOnePow, so (−1)^{bp}. The CommShift₂Int and L.CommShift existentials are pinned by HasCanonicalTensorShifts and NatTrans.CommShift ε. TensorConstraints σ/α are pinned by naturality plus the Koszul braiding and unsigned associator models, and are not hollow. Both records are verbatim and the declarations are present. The §1(B) dep change is options/attributes only, the module has no other importers, and the record changes only lean. Stacks tags exist. Worker compile evidence 22.8 s / 41.2 s. Advisory: the shift-unit record note replaced NQ's note."
+  }
 }
