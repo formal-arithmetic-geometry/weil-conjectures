@@ -9,6 +9,9 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Tensor
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.MonoidalModule
 
+import WeilConjectures.Mathlib.Algebra.Homology.Monoidal
+import WeilConjectures.CategoryTheory.Monoidal.Instances.CochainComplex
+
 /-!
 
 # The monoidal structure of the derived pullback on module objects over `Λ`
@@ -87,15 +90,110 @@ All the data is constructed; the following properties are `sorry`ed.
 
 @[expose] public section
 
+set_option Elab.async false
+
 universe u
 
 open CategoryTheory Limits MonoidalCategory
 
 open scoped CategoryTheory.Obj
 
+universe v v₁ v₂
+
+namespace CategoryTheory.Functor
+variable {C : Type v₁} [Category.{v + 1} C] [Abelian C]
+  [HasColimitsOfSize.{0, 0} C] [MonoidalCategory C] [MonoidalPreadditive C]
+  [MonoidalClosed C] [BraidedCategory C]
+  {D : Type v₂} [Category.{v + 1} D] [Abelian D]
+  [HasColimitsOfSize.{0, 0} D] [MonoidalCategory D] [MonoidalPreadditive D]
+  [MonoidalClosed D] [BraidedCategory D]
+  (F : C ⥤ D) [F.Additive] [F.LaxMonoidal]
+
+/-- Naturality of the tensorator identifies the two terms of the total differential. -/
+private lemma privateTensorDesc_comm (A B : CochainComplex C ℤ)
+    (H : ∀ n : ℤ, ((F.mapHomologicalComplex (.up ℤ)).obj A ⊗
+      (F.mapHomologicalComplex (.up ℤ)).obj B).X n ⟶
+      ((F.mapHomologicalComplex (.up ℤ)).obj (A ⊗ B)).X n)
+    (hH : ∀ (p q n : ℤ) (h : p + q = n),
+      HomologicalComplex.ιTensorObj ((F.mapHomologicalComplex (.up ℤ)).obj A)
+        ((F.mapHomologicalComplex (.up ℤ)).obj B) p q n h ≫ H n =
+      LaxMonoidal.μ F (A.X p) (B.X q) ≫
+        F.map (HomologicalComplex.ιTensorObj A B p q n h))
+    (n n' : ℤ) (hn : (ComplexShape.up ℤ).Rel n n') :
+    H n ≫ ((F.mapHomologicalComplex (.up ℤ)).obj (A ⊗ B)).d n n' =
+      ((F.mapHomologicalComplex (.up ℤ)).obj A ⊗
+        (F.mapHomologicalComplex (.up ℤ)).obj B).d n n' ≫ H n' := by
+  apply HomologicalComplex.mapBifunctor.hom_ext
+  intro p q hpq
+  have hn' : n + 1 = n' := hn
+  rw [← Category.assoc, hH, Category.assoc]
+  change _ ≫ (F.map _ ≫ F.map _) = _
+  rw [← F.map_comp,
+    CochainComplex.ιTensorObj_d A B p q n n' hpq hn']
+  rw [CochainComplex.ιTensorObj_d_assoc _ _ p q n n' hpq hn']
+  simp only [F.map_add, Functor.map_comp, Preadditive.comp_add,
+    Preadditive.add_comp, Linear.units_smul_comp]
+  simp only [Category.assoc, hH]
+  simp [Functor.mapHomologicalComplex_obj_d, ← LaxMonoidal.μ_natural_left_assoc,
+    ← LaxMonoidal.μ_natural_right_assoc]
+  rfl
+
+end CategoryTheory.Functor
+
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme Functor
+
+-- Cache the base sheaf properties used by the module-category structure instances.
+private theorem sheafGrothendieckShortcut (Z : Scheme.{u}) :
+    IsGrothendieckAbelian.{u + 1} (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) :=
+  inferInstance
+
+attribute [local instance 20000] sheafGrothendieckShortcut
+
+private theorem sheafFlatResolutionShortcut (Z : Scheme.{u}) :
+    Abelian.HasFunctorialFlatResolution (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) :=
+  inferInstance
+
+attribute [local instance 20000] sheafFlatResolutionShortcut
+
+private theorem sheafSmallColimitsShortcut (Z : Scheme.{u}) :
+    HasColimitsOfSize.{0, 0} (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) :=
+  inferInstance
+
+attribute [local instance 20000] sheafSmallColimitsShortcut
+
+private theorem sheafCoequalizersShortcut (Z : Scheme.{u}) :
+    HasCoequalizers (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) :=
+  inferInstance
+
+attribute [local instance 20000] sheafCoequalizersShortcut
+
+private theorem sheafSmallLimitsShortcut (Z : Scheme.{u}) :
+    HasLimitsOfSize.{0, 0} (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) :=
+  inferInstance
+
+attribute [local instance 20000] sheafSmallLimitsShortcut
+
+private theorem sheafMonoidalPreadditiveShortcut (Z : Scheme.{u}) :
+    MonoidalPreadditive (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) :=
+  inferInstance
+
+attribute [local instance 20000] sheafMonoidalPreadditiveShortcut
+
+private theorem sheafTensorLeftColimitsShortcut (Z : Scheme.{u})
+    (M : Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) :
+    PreservesColimitsOfSize.{0, 0} (tensorLeft M) :=
+  inferInstance
+
+attribute [local instance 20000] sheafTensorLeftColimitsShortcut
+
+private theorem sheafTensorRightColimitsShortcut (Z : Scheme.{u})
+    (M : Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) :
+    PreservesColimitsOfSize.{0, 0} (tensorRight M) :=
+  inferInstance
+
+attribute [local instance 20000] sheafTensorRightColimitsShortcut
 
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
   {X Y : Scheme.{u}} (f : X ⟶ Y)
@@ -154,7 +252,10 @@ lemma upperStarTensorComplexHom_comm
       (((f)^*⟦Λ⟧.mapHomologicalComplex (ComplexShape.up ℤ)).obj A ⊗
         ((f)^*⟦Λ⟧.mapHomologicalComplex (ComplexShape.up ℤ)).obj B).d n n' ≫
         upperStarTensorComplexHomX Λ f A B n' :=
-  sorry
+  by
+  refine (f)^*⟦Λ⟧.privateTensorDesc_comm A B (upperStarTensorComplexHomX Λ f A B) ?_ n n' ‹_›
+  intro p q k h
+  rw [upperStarTensorComplexHomX, HomologicalComplex.ι_mapBifunctorDesc]
 
 /-- The comparison `f^* A ⊗ f^* B ⟶ f^* (A ⊗ B)` of complexes of module objects, induced
 degreewise by the tensorator of the strong monoidal pullback `f^*`. -/
@@ -271,7 +372,11 @@ lemma leftDerivedUpperStarTensor_fac :
     (((whiskeringLeft₂ _).obj DerivedCategory.Qh).obj DerivedCategory.Qh).map
         (leftDerivedUpperStarTensor Λ f) ≫ leftDerivedUpperStarTensorRightCounit Λ f =
       leftDerivedUpperStarTensorLeftCounit Λ f :=
-  Functor.leftDerived₂_fac _ _ _ _ _ _
+  Functor.leftDerived₂_fac (leftDerivedUpperStarTensorRight Λ f)
+    (leftDerivedUpperStarTensorRightCounit Λ f)
+    (HomotopyCategory.quasiIso _ (.up ℤ)) (HomotopyCategory.quasiIso _ (.up ℤ))
+    (leftDerivedUpperStarTensorLeft Λ f) (leftDerivedUpperStarTensorLeftCounit Λ f)
+
 
 /-- The comparison `m : Lf^* (- ⊗ᴸ -) ⟶ Lf^* - ⊗ᴸ Lf^* -` is an isomorphism. See the module
 docstring. -/
