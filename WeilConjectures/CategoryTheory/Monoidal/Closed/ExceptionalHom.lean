@@ -29,13 +29,12 @@ the role of the exceptional projection morphism `PF^!`, for a morphism `c : C �
   `Hom(P 𝟙, RHom(M, N)) ≃ Hom(F M, S N)`, i.e.
   `Hom(Rc_! Λ_C, RHom(M, N)) ≃ Hom(Lc^* M, Rc^! N)`, by tensor–hom adjunction, the projection
   formula and the exceptional adjunction.
-* `CategoryTheory.Verdier.homMate`: the mate `𝟙 ⟶ RHom(A, B)` of a morphism `A ⟶ B`.
 
 ## Main results
 
 * `CategoryTheory.Verdier.isIso_exceptionalHomMap_of_isIso`: the exchange morphism is an
   isomorphism if the projection morphisms `pf` at `(T, M)` are, by the Yoneda lemma.
-* `CategoryTheory.Verdier.homMate_comp_exceptionalHomMap`: the exchange morphism sends the mate
+* `CategoryTheory.Verdier.curry'_comp_exceptionalHomMap`: the exchange morphism sends the mate
   of `u : F M ⟶ S N` to the exceptional adjoint of its class.
 
 -/
@@ -48,33 +47,22 @@ open CategoryTheory MonoidalCategory MonoidalClosed
 
 namespace CategoryTheory
 
+section IhomIso
+
+variable {𝒞 : Type*} [Category 𝒞] [MonoidalCategory 𝒞] [MonoidalClosed 𝒞]
+
+/-- The isomorphism `RHom(A, B) ≅ RHom(A', B')` induced by isomorphisms `A ≅ A'` and
+`B ≅ B'`. -/
+noncomputable def ihomIsoOfIso {A A' B B' : 𝒞} (eA : A ≅ A') (eB : B ≅ B') :
+    (ihom A).obj B ≅ (ihom A').obj B' :=
+  (ihom A).mapIso eB ≪≫ (internalHom.mapIso eA.symm.op).app B'
+
+end IhomIso
+
 namespace Verdier
 
 variable {C : Type u₁} [Category.{v₁} C] [MonoidalCategory C]
   {D : Type u₂} [Category.{v₂} D] [MonoidalCategory D]
-
-section Mate
-
-variable [MonoidalClosed C]
-
-/-- The *mate* `𝟙 ⟶ RHom(A, B)` of a morphism `u : A ⟶ B` in a monoidal closed category: the
-transpose of `A ⊗ 𝟙 ≅ A --u--> B` under the tensor–hom adjunction. -/
-noncomputable def homMate {A B : C} (u : A ⟶ B) : 𝟙_ C ⟶ (ihom A).obj B :=
-  curry ((ρ_ A).hom ≫ u)
-
-lemma uncurry_homMate {A B : C} (u : A ⟶ B) : uncurry (homMate u) = (ρ_ A).hom ≫ u :=
-  uncurry_curry _
-
-/-- The mate construction is a bijection `Hom(A, B) ≃ Hom(𝟙, RHom(A, B))`. -/
-noncomputable def homMateEquiv (A B : C) : (A ⟶ B) ≃ (𝟙_ C ⟶ (ihom A).obj B) where
-  toFun := homMate
-  invFun g := (ρ_ A).inv ≫ uncurry g
-  left_inv u := by simp [uncurry_homMate]
-  right_inv g := by
-    apply uncurry_injective
-    simp [uncurry_homMate]
-
-end Mate
 
 variable [BraidedCategory C] [BraidedCategory D]
   {F : D ⥤ C} {P : C ⥤ D} {S : D ⥤ C} (adj' : P ⊣ S)
@@ -182,16 +170,17 @@ lemma correspondenceClassEquiv_apply (M N : D) [IsIso ((pf.app (𝟙_ C)).app M)
 `lem-trf-trace-class-diagonal-pairing`, Step 1): for `u : F M ⟶ S N` with class
 `[u] = correspondenceClassEquiv.symm u`, the exceptional internal hom exchange sends the mate
 `𝟙 ⟶ RHom(F M, S N)` of `u` to the exceptional adjoint `𝟙 ⟶ S RHom(M, N)` of `[u]`. -/
-theorem homMate_comp_exceptionalHomMap (M N : D) [IsIso ((pf.app (𝟙_ C)).app M)]
+theorem curry'_comp_exceptionalHomMap (M N : D) [IsIso ((pf.app (𝟙_ C)).app M)]
     (u : F.obj M ⟶ S.obj N) :
-    homMate u ≫ exceptionalHomMap adj' pf M N =
+    curry' u ≫ exceptionalHomMap adj' pf M N =
       adj'.homEquiv _ _ ((correspondenceClassEquiv adj' pf M N).symm u) := by
   rw [exceptionalHomMap_comp_eq]
   congr 1
   apply (correspondenceClassEquiv adj' pf M N).injective
   rw [Equiv.apply_symm_apply, correspondenceClassEquiv_apply, uncurry_curry,
-    IsIso.inv_hom_id_assoc, uncurry_homMate, Adjunction.homEquiv_counit, ← Functor.map_comp_assoc,
-    Iso.inv_hom_id_assoc, ← Adjunction.homEquiv_counit, Equiv.apply_symm_apply]
+    IsIso.inv_hom_id_assoc, curry', uncurry_curry, Adjunction.homEquiv_counit,
+    ← Functor.map_comp_assoc, Iso.inv_hom_id_assoc, ← Adjunction.homEquiv_counit,
+    Equiv.apply_symm_apply]
 
 omit [MonoidalClosed C] [MonoidalClosed D] in
 /-- Naturality of `leftProjection` in the object `M`. -/

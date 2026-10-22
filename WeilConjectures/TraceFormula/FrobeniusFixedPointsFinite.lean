@@ -5,6 +5,8 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.Mathlib.CategoryTheory.Comma.Over.Basic
+public import WeilConjectures.Mathlib.CategoryTheory.Endomorphism
 public import WeilConjectures.PointCount
 public import WeilConjectures.TraceFormula.WeilTrace
 
@@ -31,30 +33,6 @@ universe u
 open CategoryTheory FiniteField
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
-
-/-- The powers `e.powSucc n` of an automorphism are the monoid powers `e.hom ^ (n + 1)` in
-`End X`. -/
-lemma _root_.CategoryTheory.Iso.powSucc_hom_eq_pow {C : Type*} [Category C] {X : C} (e : X ≅ X)
-    (n : ℕ) : (e.powSucc n).hom = (show End X from e.hom) ^ (n + 1) := by
-  induction n with
-  | zero => simp
-  | succ n ih => rw [Iso.powSucc_succ, Iso.trans_hom, ih, pow_succ' _ (n + 1)]; rfl
-
-/-- If `x ≫ A = S ≫ x` then `x ≫ A ^ j = S ^ j ≫ x` for the monoid powers in `End`. -/
-lemma comp_pow_eq_pow_comp {C : Type*} [Category C] {W X : C} (x : W ⟶ X) (A : End X)
-    (S : End W) (h : x ≫ A = S ≫ x) (j : ℕ) : x ≫ (A ^ j : End X) = (S ^ j : End W) ≫ x := by
-  induction j with
-  | zero => rw [pow_zero, pow_zero, End.one_def, End.one_def, Category.comp_id, Category.id_comp]
-  | succ j ih =>
-    rw [pow_succ, pow_succ, End.mul_def, End.mul_def, ← Category.assoc, h, Category.assoc, ih,
-      Category.assoc]
-
-lemma _root_.CategoryTheory.Over.pow_left {C : Type*} [Category C] {S : C} {X : Over S}
-    (a : End X) (j : ℕ) :
-    (a ^ j : End X).left = (show End X.left from a.left) ^ j := by
-  induction j with
-  | zero => rfl
-  | succ j ih => rw [pow_succ, pow_succ, End.mul_def, End.mul_def, Over.comp_left, ih]
 
 variable {k : Type u} [Field k] [Finite k]
 
@@ -171,7 +149,7 @@ theorem finite_frobeniusFixedPoints_of_powSucc_eq_refl {X : Over (Spec (.of k))}
       ((show End (Spec (.of (AlgebraicClosure k))) from (geometricFrobeniusField k).hom) ^ N) ≫
         x.1 = x.1 := by
     rintro ⟨y, -, hy⟩
-    have h := comp_pow_eq_pow_comp y (show End X.left from (e.powSucc n).hom.left)
+    have h := End.comp_pow_eq_pow_comp y (show End X.left from (e.powSucc n).hom.left)
       (show End _ from ((geometricFrobeniusField k).powSucc n).hom) hy (m + 1)
     rw [hA, Category.comp_id, Iso.powSucc_hom_eq_pow, ← pow_mul] at h
     exact h.symm

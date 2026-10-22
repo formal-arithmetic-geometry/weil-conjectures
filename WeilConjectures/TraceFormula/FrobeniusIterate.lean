@@ -76,6 +76,13 @@ lemma powSucc_zero : e.powSucc 0 = e :=
 lemma powSucc_succ (n : ℕ) : e.powSucc (n + 1) = e.powSucc n ≪≫ e :=
   rfl
 
+/-- The powers `e.powSucc n` of an automorphism are the monoid powers `e.hom ^ (n + 1)` in
+`End X`. -/
+lemma powSucc_hom_eq_pow (n : ℕ) : (e.powSucc n).hom = (show End X from e.hom) ^ (n + 1) := by
+  induction n with
+  | zero => simp
+  | succ n ih => rw [Iso.powSucc_succ, Iso.trans_hom, ih, pow_succ' _ (n + 1)]; rfl
+
 @[simp]
 lemma powSucc_refl (n : ℕ) : (Iso.refl X).powSucc n = Iso.refl X := by
   induction n with

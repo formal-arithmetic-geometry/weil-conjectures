@@ -81,20 +81,6 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [Fact (ringChar k ≠ ℓ)]
   {X : Over (Spec (.of k))}
 
-/-! ### Internal homs along isomorphisms -/
-
-section IhomIso
-
-variable {𝒞 : Type*} [Category 𝒞] [MonoidalCategory 𝒞] [MonoidalClosed 𝒞]
-
-/-- The isomorphism `RHom(A, B) ≅ RHom(A', B')` induced by isomorphisms `A ≅ A'` and
-`B ≅ B'`. -/
-noncomputable def ihomIsoOfIso {A A' B B' : 𝒞} (eA : A ≅ A') (eB : B ≅ B') :
-    (ihom A).obj B ≅ (ihom A').obj B' :=
-  (ihom A).mapIso eB ≪≫ (internalHom.mapIso eA.symm.op).app B'
-
-end IhomIso
-
 /-! ### Evaluation kernels -/
 
 section Evaluation
@@ -232,7 +218,7 @@ noncomputable def traceClassSource : Dᵇc(c.C.left)⟦Profinite.padicAlgClRingO
 /-- The *mate* `ũ : ℚ̄_ℓ,C ⟶ 𝓗_c(K)` of the coefficient map `u`, its transpose under the
 tensor–hom adjunction (blueprint `def-trf-trace-class-source`). -/
 noncomputable def mate : 𝟙_ _ ⟶ c.traceClassSource :=
-  Verdier.homMate c.u
+  curry' c.u
 
 /-- The mate construction identifies coefficient maps `Lc₂^* K ⟶ Rc₁^! K` with sections of the
 trace-class source (blueprint `def-trf-trace-class-source`). -/
@@ -240,7 +226,7 @@ noncomputable def mateEquiv :
     ((boundedConstructibleUpperStar _ ℓ c.c₂).obj K ⟶
         (boundedConstructibleUpperShriek _ ℓ c.c₁).obj K) ≃
       (𝟙_ _ ⟶ c.traceClassSource) :=
-  Verdier.homMateEquiv _ _
+  curryHomEquiv'
 
 lemma mateEquiv_apply_u : c.mateEquiv c.u = c.mate :=
   rfl

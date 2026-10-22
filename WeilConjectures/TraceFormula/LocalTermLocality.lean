@@ -5,6 +5,8 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.Morphisms.FrobeniusContracting
+public import WeilConjectures.Mathlib.CategoryTheory.Endomorphism
 public import WeilConjectures.TraceFormula.TraceClass
 
 /-!
@@ -163,6 +165,48 @@ theorem localTerm_traceClass_ofGraph_eq_trace_of_isContractingAt (h : X ⟶ X)
       trace (graphStalkMap K h v x (comp_eq_of_isContractingAt_ofGraph hc)) :=
   sorry
 
+omit [Fact (ringChar k).Prime] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
+  [IsSeparated X.hom] in
+/-- The underlying morphism of the iterate `Φ_m` of the model Frobenius lifts the `m`-th iterate
+of the Frobenius `F₀` of the model: `Φ_m ≫ p = p ≫ F₀^m`. -/
+lemma frobeniusIterate_left_comp_eq {X₀ : Scheme.{u}} {p : X.left ⟶ X₀}
+    {Φ : X ⟶ X} {F₀ : X₀ ⟶ X₀} (hp : Φ.left ≫ p = p ≫ F₀) (m : ℕ) :
+    (frobeniusIterate Φ m).left ≫ p = p ≫ End.asHom (End.of F₀ ^ m) := by
+  rw [frobeniusIterate_left]
+  exact End.asHom_pow_comp_eq_comp_asHom_pow hp m
+
+/-- The stalk map of the identity maps the maximal ideal onto itself. -/
+lemma _root_.AlgebraicGeometry.Scheme.map_maximalIdeal_stalkMap_id (S : Scheme.{u}) (y : S) :
+    (IsLocalRing.maximalIdeal (S.presheaf.stalk ((𝟙 S : S ⟶ S).base y))).map
+      ((𝟙 S : S ⟶ S).stalkMap y).hom = IsLocalRing.maximalIdeal (S.presheaf.stalk y) := by
+  rw [Scheme.Hom.stalkMap_id]
+  exact Ideal.map_id _
+
+/-- **The Frobenius graph is contracting at its fixed rational points** (blueprint
+`lem-trf-local-term-locality`, proof of item 3): for the model Frobenius `Φ` of a model over a
+finite field, `m ≥ 1` and any coefficient map `v`, the graph correspondence `(𝟙, Φ_m)` is
+contracting at a rational point `x` fixed by `Φ_m`: the fibre of `𝟙` is the reduced point, and
+`Φ_m^♯ 𝔪 ⊆ 𝔪²` since `Φ_m^♯ (t_i - a_i) = (t_i - a_i)^{q^m}` in affine coordinates
+(`AlgebraicGeometry.map_maximalIdeal_stalkMap_le_sq_of_isFrobenius`). -/
+theorem isContractingAt_ofGraph_frobeniusIterate {k₀ : Type u} [Field k₀] [Finite k₀]
+    [Algebra k₀ k] {X₀ : Scheme.{u}} {f₀ : X₀ ⟶ Spec (.of k₀)} {p : X.left ⟶ X₀} {Φ : X ⟶ X}
+    (hΦ : IsModelFrobenius Φ f₀ p) {m : ℕ} (hm : 1 ≤ m)
+    (v : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
+      (frobeniusIterate Φ m)).obj K ⟶ K) (x : RationalPoint X)
+    (hx : x ≫ (ofGraph K (frobeniusIterate Φ m) v).c₁ =
+      x ≫ (ofGraph K (frobeniusIterate Φ m) v).c₂) :
+    (ofGraph K (frobeniusIterate Φ m) v).IsContractingAt x := by
+  obtain ⟨F₀, hF₀, hp⟩ := hΦ.exists_isFrobenius
+  have hxa : x.left ≫ X.hom = 𝟙 _ := Over.w x
+  have hfix : x.left ≫ (frobeniusIterate Φ m).left = x.left := by
+    have := congrArg CommaMorphism.left hx
+    simpa [ofGraph] using this.symm
+  refine ⟨hx, rfl, Scheme.map_maximalIdeal_stalkMap_id X.left _, 1, le_rfl, ?_⟩
+  refine (pow_one _).le.trans (le_of_le_of_eq
+    (map_maximalIdeal_stalkMap_le_sq_of_isFrobenius hΦ.isPullback hm (hF₀.pow f₀ m)
+      (Over.w (frobeniusIterate Φ m)) (frobeniusIterate_left_comp_eq hp m) x.left hxa hfix _) ?_)
+  exact congrArg (· ^ 2) (Scheme.map_maximalIdeal_stalkMap_id X.left _).symm
+
 /-- **Zero-stalk vanishing for the Frobenius graph** (blueprint `lem-trf-local-term-locality`,
 item 3): let `Φ` be the model Frobenius of a model `X₀` of finite type over a finite field
 `k₀`, `m ≥ 1`, let `v : LΦ_m^* K ⟶ K` be an arbitrary, not necessarily invertible, map (for
@@ -184,8 +228,12 @@ theorem localTerm_traceClass_frobeniusGraph_eq_zero {k₀ : Type u} [Field k₀]
     [IsOpenImmersion j.left] [IsClosedImmersion j.left]
     (hB : Set.range j.left.base = {(F.liftPoint x hx).left.base (default : Spec (.of k))})
     (hK : IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj K)) :
-    ((ofGraph K (frobeniusIterate Φ m) v).traceClass F).localTerm j = 0 :=
-  sorry
+    ((ofGraph K (frobeniusIterate Φ m) v).traceClass F).localTerm j = 0 := by
+  have hc := isContractingAt_ofGraph_frobeniusIterate hΦ hm v x hx
+  refine localTerm_traceClass_eq_zero_of_isContractingAt _ F x hc j hB ?_
+  have h₁ : x ≫ (ofGraph K (frobeniusIterate Φ m) v).c₁ = x := Category.comp_id x
+  rw [h₁]
+  exact hK
 
 /-- **Zero-stalk vanishing on a smooth curve** (blueprint `sk-i-curve-zero`): for `X` smooth of
 relative dimension one over `s` with the model Frobenius `Φ` of a model over a finite field, an
