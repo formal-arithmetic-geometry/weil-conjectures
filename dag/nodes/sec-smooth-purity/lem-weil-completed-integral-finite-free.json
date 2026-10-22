@@ -1,0 +1,140 @@
+{
+ "id": "lem-weil-completed-integral-finite-free",
+ "kind": "statement",
+ "title": "The prescribed completed integral coefficient inclusion is finite free",
+ "statement": "Let l be prime, E and L finite extensions of Q_l, iota:E -> L a Q_l-algebra inclusion, and Y any scheme. Use the actual constant finite quotient sheaves and their completed inverse limits R_E and R_L [def-weil-completed-integral-coefficients], with the finite scalar maps determined by iota [lem-weil-integral-scalar-extension-well-defined]. If phi:R_E -> R_L commutes with every specified finite projection and scalar map, then restriction of the unit R_L-module along phi is isomorphic to the product of [L:E] copies of the unit R_E-module. The coefficient and site universes are independent; all module sheaves use universe max(u,t+1).",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.2(1), pp. 58-59, with the integral-basis and cofinal-filtration argument from the parent proof, step 1. The proof uses the already stated adic basis-limit theorem."
+ },
+ "stmt_deps": [
+  "def-weil-completed-integral-coefficients",
+  "lem-weil-integral-scalar-extension-well-defined",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Use uniqueness of the extended absolute value to identify the inclusion of integer DVRs. The integral-basis theorem gives a basis indexed by Fin([L:E]); its unique coordinate expansion is a linear equivalence, and therefore a Module.Basis.",
+   "uses": [
+    "lem-sfb-local-field-integral-basis",
+    "lem-weil-l-adic-extension-absolute-value"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The source uniformizer has absolute value less than one after inclusion. Decompose it in the target DVR as a unit times v^e. If e were zero its image would be a unit, contradicting that absolute value. Thus e >= 1.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-l-adic-extension-absolute-value"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Lift the source DVR and its basis to the coefficient universe. The ideal quotient of the lifted ring is canonically the lift of its ideal quotient. Sheafification commutes with forgetting commutativity, transported through the canonical small model. These quotient isomorphisms commute with all transition and scalar maps.",
+   "uses": [
+    "def-weil-completed-integral-coefficients"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the adic basis-limit theorem to the lifted basis and the positive ramification relation. Its scalar map commutes with finite projections. The normalized quotient-tower isomorphisms induce limit isomorphisms, and joint monicity of the target projections identifies that scalar map with phi. Transport the free module isomorphism along the ring-limit isomorphisms and the corresponding scalar restrictions.",
+   "uses": [
+    "lem-pur-adic-basis-limit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-local-field-integral-basis",
+  "lem-weil-l-adic-extension-absolute-value",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "def-weil-completed-integral-coefficients",
+  "lem-pur-adic-basis-limit"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "F1",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.2(1), pp. 58-59, with the integral-basis and cofinal-filtration argument from the parent proof, step 1. The proof uses the already stated adic basis-limit theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite integral basis of a finite extension of p-adic fields gives a finite free sheaf after inverse limits of constant quotient sheaves",
+   "results": "8 hits: BDeRhamPlus and finite-adele constructions; no sheaf basis-limit result",
+   "verdict": "No match: ordinary completions and adeles do not identify the prescribed inverse-limit scalar action.",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Basis\", \"AdicCompletion\"",
+   "results": "0 hits",
+   "verdict": "No match.",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "grep",
+   "query": "adic.*basis|basis.*[Ll]imit",
+   "results": "9 hits, including Ideal.adic_basis and topological bases for cofiltered limits",
+   "verdict": "No match: these are topological bases, not finite free bases of module sheaves.",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite integral bases give finite free inverse limits of constant quotient sheaves with normalized scalar action",
+   "results": "8 hits: SheafOfModules.Finite.hasFiniteLimits, NumberField.integralBasis, ProfiniteGrp.isIso_toLimit, AlgebraicGeometry.Scheme.Modules.instHasLimits, Module.finBasis, IsLocalRing.basisQuotient, Profinite.lim, LocallyConstant.freeOfProfinite",
+   "verdict": "No match: finite limits, number-field bases and locally constant free modules do not identify the actual completed scalar map.",
+   "date": "2026-10-22"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteFreeCompletedScalarComparison",
+  "date": "2026-10-21",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-finite-free-completed-scalar-comparison",
+   "place": "The prescribed completed integral coefficient inclusion is finite free",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedIntegralFiniteFree",
+  "file": "lean/Sheaf/Paper/CompletedIntegralFiniteFree.lean",
+  "declaration": "WeilConjectures.completedIntegralFiniteFree",
+  "statement": "theorem completedIntegralFiniteFree\n    (φ : completedIntegralCommRingSheafUnrestricted l E Y ⟶\n      completedIntegralCommRingSheafUnrestricted l L Y)\n    (hφ : ∀ n : ℕ, φ ≫ completedIntegralCommRingProjectionUnrestricted l L Y n =\n      completedIntegralCommRingProjectionUnrestricted l E Y n ≫\n        integralScalarQuotientSheafMap l E L ι Y n) :\n    let := ι.toAlgebra\n    Nonempty\n      ((SheafOfModules.restrictScalars\n        ((sheafCompose (AlgebraicGeometry.Scheme.ProEt.topology Y)\n          (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).map φ)).obj\n            (SheafOfModules.unit (completedIntegralCoefficientSheafUnrestricted l L Y)) ≅\n        ∏ᶜ fun _ : Fin (Module.finrank E L) ↦\n          SheafOfModules.unit (completedIntegralCoefficientSheafUnrestricted l E Y))",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261022T013407-L-3561985",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261022T013407-L-3561985",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,146 @@
+{
+ "id": "lem-weil-completed-integral-quotient-model-comparison",
+ "kind": "statement",
+ "title": "Balanced comparison from principal completion of ordinary extension to the actual integral tower",
+ "statement": "Let l, E, L, iota and Y be as for finite integral coefficient extension. Let phi:R_E -> R_L commute with the actual finite quotient projections and scalar maps [def-weil-completed-integral-coefficients, lem-weil-integral-scalar-extension-well-defined]. Let F be an ordinary/derived change-of-rings cochain Model for phi [lem-pur-derived-change-of-rings], and C any normalized principal quotient completion Model for R_L at its actual uniformizer [def-pur-principal-quotient-completion-model, lem-a1-principal-koszul-strict-replacement]. Suppose beta from termwise F.E to the actual integral scalar Roos complex has every prescribed finite tensor component s tensor x -> residue(s) tensor x and zero shifted-product component. Then there is a natural isomorphism c:F.T followed by C.completion -> the actual integral scalar extension [def-weil-integral-scalar-extension]. On every flat-term K-flat representative P, C.unit at F.T(QP), followed by c and the specified actual integral resolving comparison, equals F's derived counit at P followed by Q(beta at P). This comparison requires neither finite freeness nor completeness of the input.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 3.4.10 and Proposition 3.5.1, pp. 22,24; Stacks Tags 03EK, 06YT, 08TC and 093M. This is the balanced-tensor and normalized-descent argument of parent proof step 5."
+ },
+ "stmt_deps": [
+  "def-weil-completed-integral-coefficients",
+  "lem-weil-integral-scalar-extension-well-defined",
+  "lem-pur-derived-change-of-rings",
+  "def-pur-principal-quotient-completion-model",
+  "lem-a1-principal-koszul-strict-replacement",
+  "def-weil-integral-scalar-extension"
+ ],
+ "proof": [
+  {
+   "text": "Identify each target principal cokernel with the actual constant residue module using the completed exact sequence. This identifies the quotient map and transition morphisms, so it is a comparison of the specified quotient presentations.",
+   "uses": [
+    "lem-a1-principal-koszul-strict-replacement"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On an input module use tensor associativity and the scalar normalization to identify the target quotient of its ordinary extension with its direct actual scalar reduction. The maps on local pure tensors are (s tensor x) tensor z -> residue(s) z tensor x and z tensor x -> (1 tensor x) tensor z. Tensor balancing proves the inverse identities. Sheafification extends the identities to all sections and establishes naturality.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "lem-weil-integral-scalar-extension-well-defined"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply these isomorphisms in every complex degree and quotient level. The formulas commute with differentials and quotient transitions. Thus they give a strict tower isomorphism. Its product and signed-cone isomorphisms preserve both coordinates of the canonical augmentation, including the zero shifted coordinate.",
+   "uses": [
+    "def-weil-strict-roos-model",
+    "lem-pur-quotient-scalar-comparison-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Ordinary scalar extension preserves K-flatness. On the flat-term K-flat resolving category, use F and C counits to identify the composite derived functor with the strict tower just constructed. Localize that natural isomorphism and compare with the specified integral scalar extension descent. Their normalized unit equations agree on representatives by the two cone coordinates. The localization universal property gives the natural isomorphism and the full displayed counit equation on every resolving representative.",
+   "uses": [
+    "lem-pur-kflat-change-of-rings-all-independent",
+    "lem-weil-integral-scalar-extension-well-defined",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-a1-principal-koszul-strict-replacement",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-integral-scalar-extension-well-defined",
+  "def-weil-strict-roos-model",
+  "lem-pur-quotient-scalar-comparison-descent",
+  "lem-pur-kflat-change-of-rings-all-independent",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "F1",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 3.4.10 and Proposition 3.5.1, pp. 22,24; Stacks Tags 03EK, 06YT, 08TC and 093M. This is the balanced-tensor and normalized-descent argument of parent proof step 5."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Ordinary derived extension of scalars followed by principal quotient completion equals the derived inverse limit of the coefficient reduction tensor tower",
+   "results": "8 hits, all ordinary AdicCompletion tensor comparisons",
+   "verdict": "No match: these do not concern derived module sheaves or the prescribed strict tower and unit.",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"changeOfRings\", \"Iso\"",
+   "results": "0 hits",
+   "verdict": "No match.",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "grep",
+   "query": "changeOfRings.*[Cc]omp|quotient.*[Rr]oos",
+   "results": "0 Mathlib hits; repository contains scalar tensor comparison and quotient descent modules",
+   "verdict": "No existing theorem identifies this full composite with the actual integral tower, including its counit-normalized augmentation.",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Completing derived extension of scalars identifies its unit with the inverse limit of the quotient tensor tower",
+   "results": "8 hits: AdicCompletion.instOne, AdicCompletion, AdicCompletion.module, AdicCompletion.instModuleOfIsScalarTower, IsAdicComplete.StrictMono.of_comp_lift, ModuleCat.extendRestrictScalarsAdj_unit_app_apply, TensorProduct.directLimitLeft, AdicCompletion.instModuleOfIsScalarTower.congr_simp",
+   "verdict": "No match: ordinary adic completions and extension-restriction adjunction units do not provide the normalized derived strict-tower comparison.",
+   "date": "2026-10-22"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteFreeCompletedScalarComparison",
+  "date": "2026-10-21",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-finite-free-completed-scalar-comparison",
+   "place": "Balanced comparison from principal completion of ordinary extension to the actual integral tower",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedIntegralQuotientModelComparison",
+  "file": "lean/Sheaf/Paper/CompletedIntegralQuotientModelComparison.lean",
+  "declaration": "WeilConjectures.completedIntegralQuotientModelComparison",
+  "statement": "theorem completedIntegralQuotientModelComparison\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]\n    (ι : E →ₐ[ℚ_[l]] L) (Y : AlgebraicGeometry.Scheme.{t})\n    (φ : completedIntegralCommRingSheafUnrestricted l E Y ⟶\n      completedIntegralCommRingSheafUnrestricted l L Y)\n    (hφ : ∀ n : ℕ, φ ≫ completedIntegralCommRingProjectionUnrestricted l L Y n =\n      completedIntegralCommRingProjectionUnrestricted l E Y n ≫\n        integralScalarQuotientSheafMap l E L ι Y n)\n    (F : @SheafOfModules.DerivedChangeOfRingsCochainModel.{t + 1, t, max u (t + 1),\n      max u (t + 1) + 1, max u (t + 1) + 1}\n      Y.ProEt inferInstance (essentiallySmallSelf.{u} _)\n      (AlgebraicGeometry.Scheme.ProEt.topology Y) inferInstance\n      (integralCoefficientAbLocallyBijective.{t, u} Y)\n      (integralCoefficientAbSheafify.{t, u} Y)\n      (completedIntegralCommRingSheafUnrestricted l E Y)\n      (completedIntegralCommRingSheafUnrestricted l L Y) φ\n      (integralTowerHasDerivedCategory l E Y) (integralTowerHasDerivedCategory l L Y))\n    (C : @PrincipalQuotientCompletion.Model.{t + 1, t, max u (t + 1), max u (t + 1) + 1}\n      Y.ProEt inferInstance (essentiallySmallSelf.{u} _)\n      (AlgebraicGeometry.Scheme.ProEt.topology Y) inferInstance\n      (integralCoefficientAbSheafify.{t, u} Y)\n      (integralCoefficientAbLocallyBijective.{t, u} Y)\n      (completedIntegralCommRingSheafUnrestricted l L Y)\n      (integralTowerHasDerivedCategory l L Y)\n      (PrincipalKoszulStrictReplacement.uniformizer l L Y))\n    (β : F.E.mapHomologicalComplex (.up ℤ) ⟶ integralScalarComplexFunctor l E L ι Y)\n    (hβ :\n      (∀ (P : CochainComplex (integralTowerModules l E Y) ℤ) (i : ℤ) (n : ℕ)\n        (U : Y.ProEtᵒᵖ)\n        (s : (completedIntegralCommRingSheafUnrestricted l L Y).obj.obj U)\n        (x : (P.X i).val.obj U),\n        (((β.app P).f i ≫\n          (CochainComplex.mappingCocone.fst\n            (towerTransitionEndomorphism\n              (K := fun n ↦ ((integralScalarTowerFunctor l E L ι Y).obj P).obj (op n))\n              (integralOperationsTowerStep ((integralScalarTowerFunctor l E L ι Y).obj P)))).f i ≫\n          (Pi.π\n            (fun n ↦ ((integralScalarTowerFunctor l E L ι Y).obj P).obj (op n)) n).f i).val.app U)\n          ((eqToHom (F.obj_eq (P.X i)).symm).val.app U\n            ((toSheafify (AlgebraicGeometry.Scheme.ProEt.topology Y)\n              (SheafOfModules.changeOfRingsPresheaf φ (P.X i)).presheaf).app U\n                (s ⊗ₜ[(completedIntegralCommRingSheafUnrestricted l E Y).obj.obj U,\n                  (φ.hom.app U).hom] x))) =\n            integralScalarTensorSection l E L ι Y n (P.X i) U\n              ((completedIntegralCommRingProjectionUnrestricted l L Y n).hom.app U s) x) ∧\n      (∀ (P : CochainComplex (integralTowerModules l E Y) ℤ) (i : ℤ),\n        (β.app P).f i ≫\n          (CochainComplex.mappingCocone.snd\n            (towerTransitionEndomorphism\n              (K := fun n ↦ ((integralScalarTowerFunctor l E L ι Y).obj P).obj (op n))\n              (integralOperationsTowerStep ((integralScalarTowerFunctor l E L ι Y).obj P)))).v\n                i (i - 1) (by omega) = 0)) :\n    ∃ c : F.T ⋙ C.completion ≅ integralScalarExtensionOfUniverses l E L ι Y,\n      ∀ P : (integralOperationsGoodComplex l E Y).FullSubcategory,\n        C.unit.app (F.T.obj (DerivedCategory.Q.obj P.obj)) ≫\n            c.hom.app (DerivedCategory.Q.obj P.obj) ≫\n            (integralScalarExtensionComparisonOfUniverses l E L ι Y).hom.app P =\n          F.ε.app P.obj ≫ DerivedCategory.Q.map (β.app P.obj)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261022T013407-L-3561985",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261022T013407-L-3561985",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
