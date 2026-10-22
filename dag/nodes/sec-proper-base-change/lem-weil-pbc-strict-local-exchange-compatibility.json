@@ -21,11 +21,13 @@
  ],
  "proof": [
   {
-   "text": "Cancel the canonical inverse-image stalk isomorphism. Initiality of the small affine pointed representative functor identifies its germ cocone as a colimit, so apply colimit hom-ext. On each representative use exchange_pointed_representative; substitute strictLocal_section_pullback, and then the assumed comparison germ formula ha. Associativity gives the claimed equality.",
+   "text": "Cancel the inverse-image stalk isomorphism and use initiality of the small affine pointed representatives to apply colimit hom-ext. On each representative use exchange_pointed_representative. Apply unitSectionRestriction_comp to the small-model limit leg. Its composite with q has projections f′ followed by the marked point (hqt and hpoint), and g′ (hq), so pullback hom-ext identifies its graph with geometricFibreSectionLift. Expanding unitSectionRestriction yields the needed representative formula. Compose with the terminal evaluation factors and substitute ha; associativity gives the result.",
    "uses": [
     "def-weil-pbc-strict-henselization-limit",
     "lem-weil-pbc-exchange-pointed-representative",
-    "lem-weil-pbc-strict-local-section-pullback"
+    "lem-weil-pbc-etale-unit-section-restriction-comp",
+    "def-weil-pbc-small-strict-local-section-maps",
+    "lem-sbc-geometric-fibre-exchange-germs"
    ],
    "elementary": false
   },
@@ -41,14 +43,14 @@
  "proof_deps": [
   "def-weil-pbc-strict-henselization-limit",
   "lem-weil-pbc-exchange-pointed-representative",
-  "lem-weil-pbc-strict-local-section-pullback",
   "lem-weil-pbc-etale-unit-section-restriction-comp",
-  "def-weil-pbc-small-strict-local-section-maps"
+  "def-weil-pbc-small-strict-local-section-maps",
+  "lem-sbc-geometric-fibre-exchange-germs"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Original proof steps 1, 3 and 4; representative decomposition by U3"
+  "place": "Tags 03Q9 and 0A3U, canonical section restriction; F1 retirement, 2026-10-22: existing general composition lemma plus the small-model leg projection equations, with all original consumer signatures preserved."
  },
  "mathlib_searches": [
   {
@@ -129,12 +131,12 @@
  "reviewed_proof": {
   "date": "2026-10-22",
   "by": "L",
-  "reviewer": "C-8f877",
-  "group": "H2",
+  "reviewer": "C-145cc",
+  "group": "F1",
   "result": "pass",
-  "landing": "20261022T013415-L-3565988",
+  "landing": "20261022T021029-L-163874",
   "kind": "interface",
-  "note": "independent cc review: retired Sheaf copy (small strictHenselizationStructuralMap model) vs WC twin (strictLocalizationToBase) and retire-items row 2802; 4 restated consumer signatures vs old ones (defeq; unchanged proofs unfold to old form); 9 node lean.statements vs Lean (verbatim); downstream public envs for new Sheaf/WC twin pairs (none); sandbox compile of delivery + importers NormalConstantGenericUnit, ProperGeometricPointExchange (all rc 0), axioms clean"
+  "note": "independent cc review: retired Sheaf StrictLocalSectionPullback vs retire-items row 2860 and WC twin (node lean.statement byte-exact in twin source); 2 adapted consumers vs live (signatures/defs unchanged, only private import + proofs); sandbox compile of both consumers rc 0, axioms clean; 3 node diffs vs proofs"
  },
  "lean_audit": {}
 }

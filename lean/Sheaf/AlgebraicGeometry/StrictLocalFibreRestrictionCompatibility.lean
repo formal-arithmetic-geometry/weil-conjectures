@@ -9,7 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.GeometricFibreExchangeGerms
 public import WeilConjectures.AlgebraicGeometry.QcqsStrictLocalModuleComparison
 public import Sheaf.AlgebraicGeometry.EtaleUnitSectionRestriction
 public import Sheaf.AlgebraicGeometry.SmallStrictLocalSectionMaps
-import Sheaf.AlgebraicGeometry.StrictLocalSectionPullback
 
 /-! # Compatibility of the constructed strict-local fibre restriction
 
@@ -56,13 +55,14 @@ identities, and asserts neither continuity nor invertibility.
 Source: Stacks Project, Tag 0EYP, canonical restrictions, and Tag 03Q9.
 (blueprint: lem-sbc-strict-local-fibre-restriction-compatibility).
 
-Proof: Apply `strictLocal_section_pullback` with q = i and the two projection
-identities hi' and hi. It identifies the first two factors of the constructed
-restriction with geometricFibreSectionRestriction followed by inverse terminal
-evaluation. Postcompose with terminal evaluation and cancel its inverse. The
-pointed limit-leg calculation and composition-unit coherence are already proved
-in that theorem. No continuity or invertibility of the restriction is used,
-and the argument includes empty schemes and the zero coefficient ring. -/
+Proof: apply `unitSectionRestriction_comp` to the small-model limit leg. The
+composite lift has first projection f' followed by the marked point, using hi',
+the first-projection formula and ht; its second projection is g', using hi and
+the second-projection formula. Pullback extensionality identifies its graph with
+`geometricFibreSectionLift`. Expanding unit restriction gives the representative
+identity before terminal evaluation. Unfold the constructed restriction,
+postcompose with terminal evaluation and cancel its inverse. No continuity or
+invertibility is used; empty schemes and the zero coefficient ring are included. -/
 theorem strictLocalFibreRestriction_compatibility
     (Λ : Type (u + 1)) [CommRing Λ]
     {X' X Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
@@ -95,7 +95,49 @@ theorem strictLocalFibreRestriction_compatibility
         ((AffineEtale.Spec Y).obj
           ((equivSmallModel.{u} (strictHenselizationNeighbourhoods s)).inverse.obj j).1)
         ((equivSmallModel.{u} (strictHenselizationNeighbourhoods s)).inverse.obj j).2 := by
-  have h := strictLocal_section_pullback Λ sq F t ht i hi' hi j
+  let V := (Scheme.AffineEtale.Spec Y).obj
+    ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).1
+  let v := ((equivSmallModel.{u}
+    (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).2
+  let p := pullback.fst f (Scheme.strictHenselizationStructuralMap s)
+  let l := (pullbackSymmetry f (Scheme.strictHenselizationStructuralMap s)).hom ≫
+    Scheme.smallStrictHenselizationBaseChangeMap f s j
+  have hl : l ≫ (f.Etale.obj V).hom = p := by
+    change l ≫ pullback.snd _ f = p
+    simp only [l, p, Category.assoc,
+      Scheme.smallStrictHenselizationBaseChangeMap_snd, pullbackSymmetry_hom_comp_snd]
+  have hr := unitSectionRestriction_comp Λ i p g' hi.symm F (f.Etale.obj V) l hl
+  have hg : etaleSectionGraph g' (f.Etale.obj V) (i ≫ l)
+      (by rw [Category.assoc, hl, ← hi]) = geometricFibreSectionLift sq V v := by
+    apply MorphismProperty.Over.Hom.ext
+    apply pullback.hom_ext
+    · simp only [etaleSectionGraph, geometricFibreSectionLift,
+        MorphismProperty.Over.homMk_hom, Over.homMk_left, pullback.lift_fst]
+      apply pullback.hom_ext
+      · simp only [l, Category.assoc, pullback.lift_fst]
+        rw [Scheme.smallStrictHenselizationBaseChangeMap_fst]
+        simp only [← Category.assoc, pullbackSymmetry_hom_comp_fst]
+        rw [hi']
+        simp only [Category.assoc]
+        rw [← Scheme.isoSpec_Spec_inv, ht j]
+      · simp only [pullback.lift_snd]
+        change (i ≫ l) ≫ (f.Etale.obj V).hom = g'
+        rw [Category.assoc, hl, hi]
+    · exact (etaleSectionGraph g' (f.Etale.obj V) (i ≫ l)
+        (by rw [Category.assoc, hl, ← hi])).w.trans
+        (geometricFibreSectionLift sq V v).w.symm
+  have heq : unitSectionRestriction Λ g' F (f.Etale.obj V) (i ≫ l)
+      (by rw [Category.assoc, hl, ← hi]) =
+      geometricFibreSectionRestriction Λ sq F V v ≫
+        (Sheaf.ΓNatIsoSheafSections _ _
+          (IsTerminal.isTerminalOfObj
+            (MorphismProperty.Over.forget @AlgebraicGeometry.Etale ⊤ X')
+            (Scheme.Etale.mk (𝟙 X')) Over.mkIdTerminal)).inv.app
+              ((upperStar (ModuleCat.{u + 1} Λ) g').obj F) := by
+    unfold unitSectionRestriction
+    rw [hg]
+    rfl
+  have h := hr.trans heq
   unfold strictLocalFibreRestriction
   simp only [← Category.assoc] at h ⊢
   rw [h]

@@ -16,9 +16,11 @@
  },
  "proof": [
   {
-   "text": "Apply strictLocal_section_pullback with q = i, hqt = hi′, hq = hi, and the given pointed limit-leg identities ht. This identifies qcqsStrictLocalSectionRestriction followed by globalSectionsUpperStarMap and the inverse-image composition comparison with geometricFibreSectionRestriction followed by inverse terminal evaluation.",
+   "text": "Apply unitSectionRestriction_comp with q = i and p the small-model pullback projection, to the small-model limit leg l. Identify etaleSectionGraph g′ (f*V) (i followed by l) with geometricFibreSectionLift by over-category extensionality and two pullback hom-ext steps. The inner first projection is f′ followed by the marked point by hi′, the small-model first-projection lemma and ht; the inner second projection is g′ by hi and the small-model second-projection lemma. The outer second projection is the over-category structural equation. Unfold unitSectionRestriction to obtain the representative identity before terminal evaluation.",
    "uses": [
-    "lem-weil-pbc-strict-local-section-pullback"
+    "lem-weil-pbc-etale-unit-section-restriction-comp",
+    "def-weil-pbc-small-strict-local-section-maps",
+    "lem-sbc-geometric-fibre-exchange-germs"
    ],
    "elementary": false
   },
@@ -37,14 +39,14 @@
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-strict-local-section-pullback",
   "lem-weil-pbc-etale-unit-section-restriction-comp",
-  "def-weil-pbc-small-strict-local-section-maps"
+  "def-weil-pbc-small-strict-local-section-maps",
+  "lem-sbc-geometric-fibre-exchange-germs"
  ],
  "proof_origin": {
-  "by": "worker",
+  "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tags 03Q9 and 0EYP, canonical restrictions; D3 reuses the proved strictLocal_section_pullback and cancels terminal evaluation (2026-10-13)."
+  "place": "Tags 03Q9 and 0A3U, canonical section restriction; F1 retirement, 2026-10-22: existing general composition lemma plus the small-model leg projection equations, with all original consumer signatures preserved."
  },
  "mathlib_searches": [
   {
@@ -110,12 +112,12 @@
  "reviewed_proof": {
   "date": "2026-10-22",
   "by": "L",
-  "reviewer": "C-8f877",
-  "group": "H2",
+  "reviewer": "C-145cc",
+  "group": "F1",
   "result": "pass",
-  "landing": "20261022T013415-L-3565988",
+  "landing": "20261022T021029-L-163874",
   "kind": "interface",
-  "note": "independent cc review: retired Sheaf copy (small strictHenselizationStructuralMap model) vs WC twin (strictLocalizationToBase) and retire-items row 2802; 4 restated consumer signatures vs old ones (defeq; unchanged proofs unfold to old form); 9 node lean.statements vs Lean (verbatim); downstream public envs for new Sheaf/WC twin pairs (none); sandbox compile of delivery + importers NormalConstantGenericUnit, ProperGeometricPointExchange (all rc 0), axioms clean"
+  "note": "independent cc review: retired Sheaf StrictLocalSectionPullback vs retire-items row 2860 and WC twin (node lean.statement byte-exact in twin source); 2 adapted consumers vs live (signatures/defs unchanged, only private import + proofs); sandbox compile of both consumers rc 0, axioms clean; 3 node diffs vs proofs"
  },
  "lean_audit": {}
 }

@@ -11,7 +11,7 @@
  },
  "kind": "statement",
  "title": "Strict-local representative section pullback",
- "statement": "theorem strictLocal_section_pullback (Λ : Type (u + 1)) [CommRing Λ] {X' X Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω] {g' : X' ⟶ X} {f' : X' ⟶ Spec (.of Ω)} {f : X ⟶ Y} {s : Spec (.of Ω) ⟶ Y} (sq : CommSq g' f' f s) (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (t : Spec (.of Ω) ⟶ Scheme.strictHenselizationScheme s) (hpoint : ∀ j : SmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s), t ≫ (Scheme.strictHenselizationCone s).π.app (op (op j)) ≫ (Spec (unop ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).1.left)).isoSpec.inv = ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).2.left) (q : X' ⟶ pullback f (Scheme.strictHenselizationStructuralMap s)) (hqt : q ≫ pullback.snd f (Scheme.strictHenselizationStructuralMap s) = f' ≫ t) (hq : q ≫ pullback.fst f (Scheme.strictHenselizationStructuralMap s) = g') (j : SmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)) : qcqsStrictLocalSectionRestriction Λ f s F j ≫ globalSectionsUpperStarMap (ModuleCat.{u + 1} Λ) q ((upperStar (ModuleCat.{u + 1} Λ) (pullback.fst f (Scheme.strictHenselizationStructuralMap s))).obj F) ≫ (Sheaf.Γ _ (ModuleCat.{u + 1} Λ)).map ((upperStarComp (ModuleCat.{u + 1} Λ) q (pullback.fst f (Scheme.strictHenselizationStructuralMap s)) g' hq.symm).inv.app F) = geometricFibreSectionRestriction Λ sq F ((Scheme.AffineEtale.Spec Y).obj ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).1) ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).2 ≫ (Sheaf.ΓNatIsoSheafSections _ _ (IsTerminal.isTerminalOfObj (MorphismProperty.Over.forget @AlgebraicGeometry.Etale ⊤ X') (Scheme.Etale.mk (𝟙 X')) Over.mkIdTerminal)).inv.app ((upperStar (ModuleCat.{u + 1} Λ) g').obj F)",
+ "statement": "theorem strictLocal_section_pullback\n    (Λ : Type (u + 1)) [CommRing Λ] {X' X Y : Scheme.{u}}\n    {Ω : Type u} [Field Ω] [IsAlgClosed Ω]\n    {g' : X' ⟶ X} {f' : X' ⟶ Spec (.of Ω)} {f : X ⟶ Y}\n    {s : Spec (.of Ω) ⟶ Y} (sq : CommSq g' f' f s)\n    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))\n    (t : Spec (.of Ω) ⟶ Scheme.strictLocalization s)\n    (hpoint : ∀ j : SmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s),\n      t ≫ (Scheme.strictHenselizationAffineCone s).π.app (op (op j)) ≫\n        (Spec (unop ((equivSmallModel.{u}\n          (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).1.left)).isoSpec.inv =\n        ((equivSmallModel.{u}\n          (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).2.left)\n    (q : X' ⟶ pullback f (Scheme.strictLocalizationToBase s))\n    (hqt : q ≫ pullback.snd f (Scheme.strictLocalizationToBase s) = f' ≫ t)\n    (hq : q ≫ pullback.fst f (Scheme.strictLocalizationToBase s) = g')\n    (j : SmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)) :\n    qcqsStrictLocalSectionRestriction Λ f s F j ≫\n      globalSectionsUpperStarMap (ModuleCat.{u + 1} Λ) q\n        ((upperStar (ModuleCat.{u + 1} Λ)\n          (pullback.fst f (Scheme.strictLocalizationToBase s))).obj F) ≫\n      (Sheaf.Γ _ (ModuleCat.{u + 1} Λ)).map\n        ((upperStarComp (ModuleCat.{u + 1} Λ) q\n          (pullback.fst f (Scheme.strictLocalizationToBase s)) g' hq.symm).inv.app F) =\n      geometricFibreSectionRestriction Λ sq F\n        ((Scheme.AffineEtale.Spec Y).obj\n        ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).1)\n        ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).2 ≫\n      (Sheaf.ΓNatIsoSheafSections _ _\n        (IsTerminal.isTerminalOfObj\n          (MorphismProperty.Over.forget @AlgebraicGeometry.Etale ⊤ X')\n          (Scheme.Etale.mk (𝟙 X')) Over.mkIdTerminal)).inv.app\n            ((upperStar (ModuleCat.{u + 1} Λ) g').obj F)",
  "source": {
   "document": "literature/stacks-project/etale-cohomology.tex",
   "place": "Tag 03Q9, degree zero and canonical representative restriction; Tag 03Q1 (3); Tag 0A3U, degree-zero compatibility expanded in the parent node"
@@ -31,7 +31,7 @@
  ],
  "proof": [
   {
-   "text": "Expand qcqsStrictLocalSectionRestriction and geometricFibreSectionRestriction. Identify terminal evaluation with ΓRes and use terminal uniqueness and unit naturality to compute globalSectionsUpperStarMap at the identity étale object. Move the strict-local restriction past the q-unit and the inverse upperStarComp comparison. Use upperStarComp_hom_app_unit_app, cancel the comparison isomorphisms, and evaluate the resulting composition-unit identity at f*V. Identify the remaining lift with geometricFibreSectionLift by pullback hom-ext: the inner first projection follows from hqt and hpoint j, the inner second from hq, and the outer second from the over-category equations. Cancel terminal evaluation isomorphisms.",
+   "text": "Expand qcqsStrictLocalSectionRestriction and geometricFibreSectionRestriction. Identify terminal evaluation with ΓRes and use terminal uniqueness and unit naturality to compute globalSectionsUpperStarMap at the identity étale object. Move the strict-local restriction past the q-unit and the inverse upperStarComp comparison. Use upperStarComp_hom_app_unit_app, cancel the comparison isomorphisms, and evaluate the resulting composition-unit identity at f*V. Identify the remaining lift with geometricFibreSectionLift by pullback hom-ext: the inner first projection follows from hqt and hpoint j, the inner second from hq, and the outer second from the over-category equations. Cancel terminal evaluation isomorphisms. This is the adopted canonical full strictLocalization realization; its proof is preserved verbatim. The obsolete small-model consumer applications are replaced in their own nodes by the general composition theorem and projection extensionality.",
    "uses": [
     "lem-weil-pbc-qcqs-strict-local-module-comparison",
     "def-weil-pbc-finite-section-pullback",
@@ -39,35 +39,18 @@
     "lem-weil-pbc-inverse-image-composition"
    ],
    "elementary": false
-  },
-  {
-   "text": "Use the transported small-model leg and its two projection identities from [def-weil-pbc-small-strict-local-section-maps] in place of unfolding the retired duplicate definition. The representative restriction formula and all existing mathematical hypotheses remain unchanged.",
-   "uses": [
-    "def-weil-pbc-small-strict-local-section-maps"
-   ],
-   "elementary": true
-  },
-  {
-   "text": "Expand each former small-model qcqs restriction as unitSectionRestriction along the same small limit leg; expand the former comparison predicate as its germ equations. etaleSectionGraph is definitionally the former terminal graph. This changes only the spelling of the unit/restriction formulas and preserves every scheme, hypothesis, and conclusion.",
-   "uses": [
-    "lem-weil-pbc-etale-unit-section-restriction-comp",
-    "def-weil-pbc-small-strict-local-section-maps"
-   ],
-   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-qcqs-strict-local-module-comparison",
   "def-weil-pbc-finite-section-pullback",
   "lem-sbc-geometric-fibre-exchange-germs",
-  "lem-weil-pbc-inverse-image-composition",
-  "def-weil-pbc-small-strict-local-section-maps",
-  "lem-weil-pbc-etale-unit-section-restriction-comp"
+  "lem-weil-pbc-inverse-image-composition"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "J1 stage-3 proof and second reading, 2026-10-13: canonical representative restriction via terminal evaluation naturality, the proved upstream composition-unit identity, and pullback projection extensionality; original unit route retained."
+  "place": "Tags 03Q9 and 0A3U; existing adopted-source proof via terminal evaluation, composition-unit coherence, and pullback projections; F1 retirement, 2026-10-22."
  },
  "mathlib_searches": [
   {
@@ -152,18 +135,18 @@
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-iff",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.StrictLocalSectionPullback",
-  "file": "lean/Sheaf/AlgebraicGeometry/StrictLocalSectionPullback.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.StrictLocalSectionPullback",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/StrictLocalSectionPullback.lean",
   "declaration": "AlgebraicGeometry.Etale.strictLocal_section_pullback",
   "declarations": [
    "AlgebraicGeometry.Etale.strictLocal_section_pullback"
   ],
-  "statement": "theorem strictLocal_section_pullback (Λ : Type (u + 1)) [CommRing Λ] {X' X Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω] {g' : X' ⟶ X} {f' : X' ⟶ Spec (.of Ω)} {f : X ⟶ Y} {s : Spec (.of Ω) ⟶ Y} (sq : CommSq g' f' f s) (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (t : Spec (.of Ω) ⟶ Scheme.strictHenselizationScheme s) (hpoint : ∀ j : SmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s), t ≫ (Scheme.strictHenselizationCone s).π.app (op (op j)) ≫ (Spec (unop ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).1.left)).isoSpec.inv = ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).2.left) (q : X' ⟶ pullback f (Scheme.strictHenselizationStructuralMap s)) (hqt : q ≫ pullback.snd f (Scheme.strictHenselizationStructuralMap s) = f' ≫ t) (hq : q ≫ pullback.fst f (Scheme.strictHenselizationStructuralMap s) = g') (j : SmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)) : unitSectionRestriction Λ (pullback.fst f (Scheme.strictHenselizationStructuralMap s)) F (f.Etale.obj ((Scheme.AffineEtale.Spec Y).obj ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).1)) ((pullbackSymmetry f (Scheme.strictHenselizationStructuralMap s)).hom ≫ Scheme.smallStrictHenselizationBaseChangeMap f s j) (by change _ ≫ pullback.snd _ f = pullback.fst f (Scheme.strictHenselizationStructuralMap s) simp only [Category.assoc, Scheme.smallStrictHenselizationBaseChangeMap_snd, pullbackSymmetry_hom_comp_snd]) ≫ globalSectionsUpperStarMap (ModuleCat.{u + 1} Λ) q ((upperStar (ModuleCat.{u + 1} Λ) (pullback.fst f (Scheme.strictHenselizationStructuralMap s))).obj F) ≫ (Sheaf.Γ _ (ModuleCat.{u + 1} Λ)).map ((upperStarComp (ModuleCat.{u + 1} Λ) q (pullback.fst f (Scheme.strictHenselizationStructuralMap s)) g' hq.symm).inv.app F) = geometricFibreSectionRestriction Λ sq F ((Scheme.AffineEtale.Spec Y).obj ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).1) ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).2 ≫ (Sheaf.ΓNatIsoSheafSections _ _ (IsTerminal.isTerminalOfObj (MorphismProperty.Over.forget @AlgebraicGeometry.Etale ⊤ X') (Scheme.Etale.mk (𝟙 X')) Over.mkIdTerminal)).inv.app ((upperStar (ModuleCat.{u + 1} Λ) g').obj F)",
+  "statement": "theorem strictLocal_section_pullback\n    (Λ : Type (u + 1)) [CommRing Λ] {X' X Y : Scheme.{u}}\n    {Ω : Type u} [Field Ω] [IsAlgClosed Ω]\n    {g' : X' ⟶ X} {f' : X' ⟶ Spec (.of Ω)} {f : X ⟶ Y}\n    {s : Spec (.of Ω) ⟶ Y} (sq : CommSq g' f' f s)\n    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))\n    (t : Spec (.of Ω) ⟶ Scheme.strictLocalization s)\n    (hpoint : ∀ j : SmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s),\n      t ≫ (Scheme.strictHenselizationAffineCone s).π.app (op (op j)) ≫\n        (Spec (unop ((equivSmallModel.{u}\n          (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).1.left)).isoSpec.inv =\n        ((equivSmallModel.{u}\n          (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).2.left)\n    (q : X' ⟶ pullback f (Scheme.strictLocalizationToBase s))\n    (hqt : q ≫ pullback.snd f (Scheme.strictLocalizationToBase s) = f' ≫ t)\n    (hq : q ≫ pullback.fst f (Scheme.strictLocalizationToBase s) = g')\n    (j : SmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)) :\n    qcqsStrictLocalSectionRestriction Λ f s F j ≫\n      globalSectionsUpperStarMap (ModuleCat.{u + 1} Λ) q\n        ((upperStar (ModuleCat.{u + 1} Λ)\n          (pullback.fst f (Scheme.strictLocalizationToBase s))).obj F) ≫\n      (Sheaf.Γ _ (ModuleCat.{u + 1} Λ)).map\n        ((upperStarComp (ModuleCat.{u + 1} Λ) q\n          (pullback.fst f (Scheme.strictLocalizationToBase s)) g' hq.symm).inv.app F) =\n      geometricFibreSectionRestriction Λ sq F\n        ((Scheme.AffineEtale.Spec Y).obj\n        ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).1)\n        ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).2 ≫\n      (Sheaf.ΓNatIsoSheafSections _ _\n        (IsTerminal.isTerminalOfObj\n          (MorphismProperty.Over.forget @AlgebraicGeometry.Etale ⊤ X')\n          (Scheme.Etale.mk (𝟙 X')) Over.mkIdTerminal)).inv.app\n            ((upperStar (ModuleCat.{u + 1} Λ) g').obj F)",
   "branch": "sheaf-dag",
   "by": "U3",
   "date": "2026-10-12",
-  "note": "H2: retire the specialized Sheaf qcqs comparison; the small-model restrictions are applications of the general graph/unit construction, definitionally the former formulas."
+  "note": "F1 retirement: the adopted theorem realizes this representative identity in the canonical full strictLocalization presentation. The old small ring-colimit presentation is not definitionally equal. Both old consumers preserve their signatures by applying the existing general unitSectionRestriction_comp and identifying their small-model lifts by the two projection lemmas; no renamed duplicate, source-library edit, or new hole is introduced."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -178,12 +161,69 @@
  "reviewed_proof": {
   "date": "2026-10-22",
   "by": "L",
-  "reviewer": "C-8f877",
-  "group": "H2",
+  "reviewer": "C-145cc",
+  "group": "F1",
   "result": "pass",
-  "landing": "20261022T013415-L-3565988",
+  "landing": "20261022T021029-L-163874",
   "kind": "interface",
-  "note": "independent cc review: retired Sheaf copy (small strictHenselizationStructuralMap model) vs WC twin (strictLocalizationToBase) and retire-items row 2802; 4 restated consumer signatures vs old ones (defeq; unchanged proofs unfold to old form); 9 node lean.statements vs Lean (verbatim); downstream public envs for new Sheaf/WC twin pairs (none); sandbox compile of delivery + importers NormalConstantGenericUnit, ProperGeometricPointExchange (all rc 0), axioms clean"
+  "note": "independent cc review: retired Sheaf StrictLocalSectionPullback vs retire-items row 2860 and WC twin (node lean.statement byte-exact in twin source); 2 adapted consumers vs live (signatures/defs unchanged, only private import + proofs); sandbox compile of both consumers rc 0, axioms clean; 3 node diffs vs proofs"
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "statement_change": {
+  "date": "2026-10-22",
+  "by": "F1 stage 2",
+  "old_statement": "theorem strictLocal_section_pullback (Λ : Type (u + 1)) [CommRing Λ] {X' X Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω] {g' : X' ⟶ X} {f' : X' ⟶ Spec (.of Ω)} {f : X ⟶ Y} {s : Spec (.of Ω) ⟶ Y} (sq : CommSq g' f' f s) (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (t : Spec (.of Ω) ⟶ Scheme.strictHenselizationScheme s) (hpoint : ∀ j : SmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s), t ≫ (Scheme.strictHenselizationCone s).π.app (op (op j)) ≫ (Spec (unop ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).1.left)).isoSpec.inv = ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).2.left) (q : X' ⟶ pullback f (Scheme.strictHenselizationStructuralMap s)) (hqt : q ≫ pullback.snd f (Scheme.strictHenselizationStructuralMap s) = f' ≫ t) (hq : q ≫ pullback.fst f (Scheme.strictHenselizationStructuralMap s) = g') (j : SmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)) : qcqsStrictLocalSectionRestriction Λ f s F j ≫ globalSectionsUpperStarMap (ModuleCat.{u + 1} Λ) q ((upperStar (ModuleCat.{u + 1} Λ) (pullback.fst f (Scheme.strictHenselizationStructuralMap s))).obj F) ≫ (Sheaf.Γ _ (ModuleCat.{u + 1} Λ)).map ((upperStarComp (ModuleCat.{u + 1} Λ) q (pullback.fst f (Scheme.strictHenselizationStructuralMap s)) g' hq.symm).inv.app F) = geometricFibreSectionRestriction Λ sq F ((Scheme.AffineEtale.Spec Y).obj ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).1) ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).2 ≫ (Sheaf.ΓNatIsoSheafSections _ _ (IsTerminal.isTerminalOfObj (MorphismProperty.Over.forget @AlgebraicGeometry.Etale ⊤ X') (Scheme.Etale.mk (𝟙 X')) Over.mkIdTerminal)).inv.app ((upperStar (ModuleCat.{u + 1} Λ) g').obj F)",
+  "what": "Authorized retirement changes the Lean realization from the small ring-colimit presentation to the adopted canonical full strictLocalization presentation of the same strict-local representative restriction identity. These objects are canonically isomorphic but not definitionally equal, so the old small-model signature cannot be attached verbatim to the adopted theorem. Both unchanged small-model consumer conclusions are proved directly from the existing general unitSectionRestriction_comp and the small limit-leg projections in the same packet; no assumption or conclusion is weakened and no source-library or target statement is edited.",
+  "source": {
+   "document": "literature/stacks-project/etale-cohomology.tex",
+   "place": "Tag 03Q9, degree zero and canonical representative restriction; Tag 03Q1 (3); Tag 0A3U, degree-zero compatibility expanded in the parent node"
+  },
+  "citers": [
+   {
+    "id": "lem-weil-pbc-strict-local-exchange-compatibility",
+    "holds": true,
+    "note": "The unchanged small-model statement remains proved: this delivery replaces the old application by the general unit-restriction composition theorem and two projection calculations, and removes the obsolete proof dependency."
+   },
+   {
+    "id": "lem-sbc-strict-local-fibre-restriction-compatibility",
+    "holds": true,
+    "note": "The unchanged small-model statement remains proved: this delivery replaces the old application by the general unit-restriction composition theorem and two projection calculations, and removes the obsolete proof dependency."
+   }
+  ],
+  "old_proof": [
+   {
+    "text": "Expand qcqsStrictLocalSectionRestriction and geometricFibreSectionRestriction. Identify terminal evaluation with ΓRes and use terminal uniqueness and unit naturality to compute globalSectionsUpperStarMap at the identity étale object. Move the strict-local restriction past the q-unit and the inverse upperStarComp comparison. Use upperStarComp_hom_app_unit_app, cancel the comparison isomorphisms, and evaluate the resulting composition-unit identity at f*V. Identify the remaining lift with geometricFibreSectionLift by pullback hom-ext: the inner first projection follows from hqt and hpoint j, the inner second from hq, and the outer second from the over-category equations. Cancel terminal evaluation isomorphisms.",
+    "uses": [
+     "lem-weil-pbc-qcqs-strict-local-module-comparison",
+     "def-weil-pbc-finite-section-pullback",
+     "lem-sbc-geometric-fibre-exchange-germs",
+     "lem-weil-pbc-inverse-image-composition"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Use the transported small-model leg and its two projection identities from [def-weil-pbc-small-strict-local-section-maps] in place of unfolding the retired duplicate definition. The representative restriction formula and all existing mathematical hypotheses remain unchanged.",
+    "uses": [
+     "def-weil-pbc-small-strict-local-section-maps"
+    ],
+    "elementary": true
+   },
+   {
+    "text": "Expand each former small-model qcqs restriction as unitSectionRestriction along the same small limit leg; expand the former comparison predicate as its germ equations. etaleSectionGraph is definitionally the former terminal graph. This changes only the spelling of the unit/restriction formulas and preserves every scheme, hypothesis, and conclusion.",
+    "uses": [
+     "lem-weil-pbc-etale-unit-section-restriction-comp",
+     "def-weil-pbc-small-strict-local-section-maps"
+    ],
+    "elementary": true
+   }
+  ],
+  "old_proof_deps": [
+   "lem-weil-pbc-qcqs-strict-local-module-comparison",
+   "def-weil-pbc-finite-section-pullback",
+   "lem-sbc-geometric-fibre-exchange-germs",
+   "lem-weil-pbc-inverse-image-composition",
+   "def-weil-pbc-small-strict-local-section-maps",
+   "lem-weil-pbc-etale-unit-section-restriction-comp"
+  ]
+ }
 }
