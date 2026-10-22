@@ -52,7 +52,7 @@ For each x, rewrite using the localization equation, then apply the strict-local
 cohomology equation at the localized source element. No torsion or closed-fibre
 comparison enters this proof, and all original hypotheses remain unchanged.
 -/
-theorem Etale.projectiveLine_abelian_originalStalk_totalExchange
+theorem Etale.projectiveLine_abelian_originalStalk_totalExchange_smallModel
     {S T X' : Scheme.{u}} {g : T ⟶ S} {f' : X' ⟶ T} {g' : X' ⟶ ProjectiveLine S}
     (sq : IsPullback g' f' (ProjectiveLine S ↘ S) g)
     {k k' Ω : Type u} [Field k] [IsSepClosed k] [Field k'] [IsSepClosed k']

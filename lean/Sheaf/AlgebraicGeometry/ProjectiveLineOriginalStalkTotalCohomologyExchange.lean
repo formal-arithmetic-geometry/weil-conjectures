@@ -109,7 +109,7 @@ theorem Etale.projectiveLine_originalStalk_totalCohomologyExchange
   let h := ProjectiveSpace.map (ULift.{u} (Fin 2)) g₀
   obtain ⟨b₁, b₂, hb⟩ := Etale.exists_addEquiv_module_abelian_stalk_exchange
     Λ (ProjectiveLine S ↘ S) f' g' g sq τ F q
-  obtain ⟨a₁, a₂, ha⟩ := Etale.projectiveLine_abelian_originalStalk_totalExchange
+  obtain ⟨a₁, a₂, ha⟩ := Etale.projectiveLine_abelian_originalStalk_totalExchange_smallModel
     sq σ τ ι hι ν eA eB φ ρA ρB hφ hρA hρB hρ G q
   obtain ⟨d⟩ := Etale.pullback_forget_modules_iso Λ p F
   let c₁ := ((Sheaf.functorH _ q).mapIso d.symm).addCommGroupIsoToAddEquiv

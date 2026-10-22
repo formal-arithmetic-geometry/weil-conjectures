@@ -51,10 +51,10 @@
   }
  ],
  "proof_origin": {
-  "by": "P4 stage-3 rework worker",
+  "by": "K1 stage-3 worker",
   "document": "literature/stacks-project/etale-cohomology.tex",
   "place": "Tag 03Q9, theorem-higher-direct-images, first assertion and restriction-complex construction; Tag 095T, theorem-proper-base-change, final stalk calculation (only the total-space restriction part)",
-  "note": "Restore the archived, zero-hole small-model theorem with its entire signature unchanged. Use the existing proved small/full colimit comparison over the base, followed by the existing localization and strict-local cohomology assembly. No mathematical or unit route change."
+  "note": "Preserve the proved small/full model transport, localization and strict-local assembly. Only the small-model declaration name changes; the canonical source-library theorem remains verbatim."
  },
  "mathlib_searches": [
   {
@@ -116,11 +116,12 @@
   "existing": false,
   "module": "Sheaf.AlgebraicGeometry.ProjectiveLineAbelianOriginalStalkTotalExchange",
   "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveLineAbelianOriginalStalkTotalExchange.lean",
-  "declaration": "AlgebraicGeometry.Etale.projectiveLine_abelian_originalStalk_totalExchange",
-  "statement": "theorem Etale.projectiveLine_abelian_originalStalk_totalExchange\n    {S T X' : Scheme.{u}} {g : T ⟶ S} {f' : X' ⟶ T} {g' : X' ⟶ ProjectiveLine S}\n    (sq : IsPullback g' f' (ProjectiveLine S ↘ S) g)\n    {k k' Ω : Type u} [Field k] [IsSepClosed k] [Field k'] [IsSepClosed k']\n    [Field Ω] [IsAlgClosed Ω]\n    (σ : Spec (.of k) ⟶ S) (τ : Spec (.of k') ⟶ T)\n    (ι : Spec (.of k') ⟶ Spec (.of k)) (hι : ι ≫ σ = τ ≫ g)\n    (ν : Spec (.of Ω) ⟶ Spec (.of k'))\n    {A B : Type u} [CommRing A] [HenselianLocalRing A]\n    [CommRing B] [HenselianLocalRing B]\n    [IsSepClosed (IsLocalRing.ResidueField A)] [IsSepClosed (IsLocalRing.ResidueField B)]\n    (eA : Spec (.of A) ≅ strictHenselizationScheme (ν ≫ ι ≫ σ))\n    (eB : Spec (.of B) ≅ strictHenselizationScheme (ν ≫ τ))\n    (φ : A →+* B) [IsLocalHom φ]\n    (ρA : Spec (.of k) ⟶ Spec (.of (IsLocalRing.ResidueField A)))\n    (ρB : Spec (.of k') ⟶ Spec (.of (IsLocalRing.ResidueField B)))\n    (hφ : Spec.map (CommRingCat.ofHom φ) ≫ eA.hom ≫\n        strictHenselizationStructuralMap (ν ≫ ι ≫ σ) =\n      eB.hom ≫ strictHenselizationStructuralMap (ν ≫ τ) ≫ g)\n    (hρA : ρA ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.residue A)) ≫\n      eA.hom ≫ strictHenselizationStructuralMap (ν ≫ ι ≫ σ) = σ)\n    (hρB : ρB ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.residue B)) ≫\n      eB.hom ≫ strictHenselizationStructuralMap (ν ≫ τ) = τ)\n    (hρ : ρB ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.ResidueField.map φ)) = ι ≫ ρA)\n    (G : Sheaf (ProjectiveLine S).smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) :\n    let G₀ := (ProjectiveSpace.map _\n      (eA.hom ≫ strictHenselizationStructuralMap (ν ≫ ι ≫ σ)))^*[\n      AddCommGrpCat.{u + 1}].obj G\n    let g₀ := Spec.map (CommRingCat.ofHom φ)\n    let K := (DerivedCategory.Plus.singleFunctor _ 0).obj G\n    let C₁ := (DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).obj\n      ((R+((ProjectiveLine S ↘ S)_*[AddCommGrpCat.{u + 1}]) ⋙\n        D+((g)^*[AddCommGrpCat.{u + 1}])).obj K)\n    let C₂ := (DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).obj\n      ((D+((g')^*[AddCommGrpCat.{u + 1}]) ⋙\n        R+((f')_*[AddCommGrpCat.{u + 1}])).obj K)\n    let e := (DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).map\n      ((Etale.derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq.toCommSq).app K)\n    ∃ (a₁ : ((pointSmallEtale τ).sheafFiber\n          (A := AddCommGrpCat.{u + 1})).obj C₁ ≃+ Sheaf.H G₀ q)\n      (a₂ : ((pointSmallEtale τ).sheafFiber\n          (A := AddCommGrpCat.{u + 1})).obj C₂ ≃+\n        Sheaf.H ((ProjectiveSpace.map _ g₀)^*[AddCommGrpCat.{u + 1}].obj G₀) q),\n      ∀ x, a₂ ((((pointSmallEtale τ).sheafFiber\n          (A := AddCommGrpCat.{u + 1})).map e).hom x) =\n        Etale.cohomologyMap (ProjectiveSpace.map _ g₀) G₀ q (a₁ x)",
+  "declaration": "AlgebraicGeometry.Etale.projectiveLine_abelian_originalStalk_totalExchange_smallModel",
+  "statement": "theorem Etale.projectiveLine_abelian_originalStalk_totalExchange_smallModel\n    {S T X' : Scheme.{u}} {g : T ⟶ S} {f' : X' ⟶ T} {g' : X' ⟶ ProjectiveLine S}\n    (sq : IsPullback g' f' (ProjectiveLine S ↘ S) g)\n    {k k' Ω : Type u} [Field k] [IsSepClosed k] [Field k'] [IsSepClosed k']\n    [Field Ω] [IsAlgClosed Ω]\n    (σ : Spec (.of k) ⟶ S) (τ : Spec (.of k') ⟶ T)\n    (ι : Spec (.of k') ⟶ Spec (.of k)) (hι : ι ≫ σ = τ ≫ g)\n    (ν : Spec (.of Ω) ⟶ Spec (.of k'))\n    {A B : Type u} [CommRing A] [HenselianLocalRing A]\n    [CommRing B] [HenselianLocalRing B]\n    [IsSepClosed (IsLocalRing.ResidueField A)] [IsSepClosed (IsLocalRing.ResidueField B)]\n    (eA : Spec (.of A) ≅ strictHenselizationScheme (ν ≫ ι ≫ σ))\n    (eB : Spec (.of B) ≅ strictHenselizationScheme (ν ≫ τ))\n    (φ : A →+* B) [IsLocalHom φ]\n    (ρA : Spec (.of k) ⟶ Spec (.of (IsLocalRing.ResidueField A)))\n    (ρB : Spec (.of k') ⟶ Spec (.of (IsLocalRing.ResidueField B)))\n    (hφ : Spec.map (CommRingCat.ofHom φ) ≫ eA.hom ≫\n        strictHenselizationStructuralMap (ν ≫ ι ≫ σ) =\n      eB.hom ≫ strictHenselizationStructuralMap (ν ≫ τ) ≫ g)\n    (hρA : ρA ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.residue A)) ≫\n      eA.hom ≫ strictHenselizationStructuralMap (ν ≫ ι ≫ σ) = σ)\n    (hρB : ρB ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.residue B)) ≫\n      eB.hom ≫ strictHenselizationStructuralMap (ν ≫ τ) = τ)\n    (hρ : ρB ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.ResidueField.map φ)) = ι ≫ ρA)\n    (G : Sheaf (ProjectiveLine S).smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) :\n    let G₀ := (ProjectiveSpace.map _\n      (eA.hom ≫ strictHenselizationStructuralMap (ν ≫ ι ≫ σ)))^*[\n      AddCommGrpCat.{u + 1}].obj G\n    let g₀ := Spec.map (CommRingCat.ofHom φ)\n    let K := (DerivedCategory.Plus.singleFunctor _ 0).obj G\n    let C₁ := (DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).obj\n      ((R+((ProjectiveLine S ↘ S)_*[AddCommGrpCat.{u + 1}]) ⋙\n        D+((g)^*[AddCommGrpCat.{u + 1}])).obj K)\n    let C₂ := (DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).obj\n      ((D+((g')^*[AddCommGrpCat.{u + 1}]) ⋙\n        R+((f')_*[AddCommGrpCat.{u + 1}])).obj K)\n    let e := (DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).map\n      ((Etale.derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq.toCommSq).app K)\n    ∃ (a₁ : ((pointSmallEtale τ).sheafFiber\n          (A := AddCommGrpCat.{u + 1})).obj C₁ ≃+ Sheaf.H G₀ q)\n      (a₂ : ((pointSmallEtale τ).sheafFiber\n          (A := AddCommGrpCat.{u + 1})).obj C₂ ≃+\n        Sheaf.H ((ProjectiveSpace.map _ g₀)^*[AddCommGrpCat.{u + 1}].obj G₀) q),\n      ∀ x, a₂ ((((pointSmallEtale τ).sheafFiber\n          (A := AddCommGrpCat.{u + 1})).map e).hom x) =\n        Etale.cohomologyMap (ProjectiveSpace.map _ g₀) G₀ q (a₁ x)",
   "branch": "sheaf-dag",
   "by": "S2",
-  "date": "2026-10-12"
+  "date": "2026-10-12",
+  "note": "The proved small-colimit-model theorem retains its hypotheses and conclusion under the distinct smallModel suffix. The existing caller is adapted in the same delivery; the adopted canonical-model declaration stays unchanged."
  },
  "proof_deps": [
   "lem-weil-pbc-strict-henselization-small-closed-fiber-comparison",
@@ -139,14 +140,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "P4",
+  "reviewer": "C-f8d65",
+  "group": "K1",
   "result": "pass",
-  "landing": "20261021T233754-L-860048",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261022T022044-L-433026",
+  "kind": "interface",
+  "note": "independent cc review: delivered item/caller/nodes vs clones/live (one-token rename each); reader-gate compile of renamed item + adapted caller (exit 0, axioms clean) and of the original caller against the renamed item (fails at 112, as reported)"
  },
  "lean_audit": {}
 }
