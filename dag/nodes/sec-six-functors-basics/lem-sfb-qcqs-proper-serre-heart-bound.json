@@ -17,9 +17,101 @@
   "def-weil-quasi-separated-morphism",
   "def-weil-pbc-quasi-compact-scheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Since $q$ is proper it is quasi-compact. Take a finite affine open cover of the quasi-compact $S$; each inverse image is quasi-compact by the finite-type definition, so their finite union $Y$ is quasi-compact. Properness of $f$ makes it finite type. The finite-type fibre-dimension theorem supplies $e\\in\\mathbf N$ such that $\\dim X_y\\leq e$ for every $y\\in Y$. Every fibre is finite type over $\\kappa(y)$, and dimension is unchanged under a field extension. Thus the same $e$ bounds every geometric fibre of $f$ and of every base change of $f$. Fix $d=2e+2\\geq0$ once and for all.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism",
+    "def-weil-pbc-quasi-compact-scheme",
+    "lem-fin-finite-type-fibre-dimension-bound",
+    "lem-kun-dimension-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+    "place": "Refinement proof (2), first paragraph: direct-sum preservation on the ordinary ambient localizing hull; local geometric inputs for the uniform heart estimate before the lower-tail passage."
+   }
+  },
+  {
+   "text": "For any scheme map $a:T\\to X$, $a^*$ sends $\\mathcal P_X$ into $\\mathcal P_T$. Indeed it is additive exact, so preserves zero, kernels, cokernels and short exact sequences. Its adjunction to $a_*$ makes it preserve the small coproducts. The constructible-preimage lemma applies: to check retrocompactness of the inverse image of a retrocompact open, cover any affine source open by finitely many affine opens mapping into affine target opens; the target open in each of those is a finite union of principal opens, whose inverse images are principal. Thus inverse images preserve the required constructible subsets. Pulling back the finite locally closed strata consequently gives a finite constructible stratification; on the pullback of a scalar-model trivializing cover the model is still $\\Lambda\\otimes_{\\Lambda(*)}P$ for the very same finitely presented scalar module $P$, since the pulled-back coefficient map is an isomorphism. Thus it preserves the specified constructible generators, not merely arbitrary finite presentations. The class of $M$ such that $a^*M\\in\\mathcal P_T$ therefore has every closure property in the intersection defining $\\mathcal P_X$. Minimality gives the assertion.",
+   "uses": [
+    "det-prop-sfb-module-pullback-exact-main",
+    "sk-def-sfb-module-pushforward-pullback",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "lem-sfb-alpha-iso",
+    "sk-def-sfb-constructible",
+    "lem-weil-pbc-constructible-preimage"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+    "place": "Refinement proof (2), first paragraph: direct-sum preservation on the ordinary ambient localizing hull; local geometric inputs for the uniform heart estimate before the lower-tail passage."
+   }
+  },
+  {
+   "text": "Fix $M\\in\\mathcal P_X$ and an affine w-contractible object $W\\to Y$ of the small pro-étale site. Apply the proper closed-fibre rigidity theorem to $f,M,W$. It supplies the reduced closed-point scheme $C\\hookrightarrow W$: $C$ is affine, zero-dimensional and w-contractible with separably closed residue fields. With $X_C=X\\times_YC$ and $a:X_C\\to X$ it supplies the actual isomorphism in $D(\\mathbf{Ab})$\n$$R\\Gamma(X\\times_YW,M)\\simeq R\\Gamma((X_C)_{\\mathrm{pro\\acute et}},a^*M).$$\nThe left side is derived evaluation on the object $X\\times_YW$ of the original $X$-site. Thus no substitution of ordinary geometric stalks for arbitrary pro-étale module objects is involved.",
+   "uses": [
+    "lem-sfb-proper-wcontractible-closed-fibre-rigidity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+    "place": "Refinement proof (2), first paragraph: direct-sum preservation on the ordinary ambient localizing hull; local geometric inputs for the uniform heart estimate before the lower-tail passage."
+   }
+  },
+  {
+   "text": "The morphism $h:X_C\\to C$ is proper by base-change stability. A geometric fibre of $h$ is the base extension of the corresponding fibre of $f$, so Step 1 bounds its dimension by $e$. Step 2 gives $a^*M\\in\\mathcal P_{X_C}$. Apply the absolute profinite-family cohomological-dimension estimate with this $C,h,e,a^*M$. It gives $H^rR\\Gamma((X_C)_{\\mathrm{pro\\acute et}},a^*M)=0$ for $r>2e+2=d$. Taking cohomology of the isomorphism of Step 3 gives\n$$H^r(X\\times_YW,M)=0\\qquad(r>d).$$",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-sfb-profinite-geometric-family-heart-cd"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+    "place": "Refinement proof (2), first paragraph: direct-sum preservation on the ordinary ambient localizing hull; local geometric inputs for the uniform heart estimate before the lower-tail passage."
+   }
+  },
+  {
+   "text": "For each $r>d$ consider the abelian presheaf $V\\mapsto H^r(X\\times_YV,M)$ on $Y_{\\mathrm{pro\\acute et}}$. The bounded-below higher-direct-image presheaf theorem identifies its sheafification with the underlying abelian sheaf of $H^r(Rf_*(M[0]))$. To apply it to the actual module-object composite, use the exact internal-to-section-module equivalences. An injective resolution of $M$ in the source module category computes the actual direct image; before and after scalar restriction its underlying section complex at $V$ is exactly $I^\\bullet(X\\times_YV)$. Scalar restriction changes only the action and is exact, so these give the same underlying cohomology sheaf as the theorem with target coefficient ring $f_*\\Lambda_X$. Every $V$ has a covering by affine w-contractible $W$; on each such $W$ the presheaf is zero by Step 4. Its sheafification is therefore zero. A module sheaf with zero underlying abelian sheaf is zero. This proves the required vanishing for every $M\\in\\mathcal P_X$ with the fixed $d$ of Step 1.",
+   "uses": [
+    "lem-pe-bounded-complex-direct-image-presheaf",
+    "lem-sfb-internal-module-operations-transport",
+    "sk-def-sfb-module-derived-pushpull",
+    "sk-thm-pe-weakly-contractible-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+    "place": "Refinement proof (2), first paragraph: direct-sum preservation on the ordinary ambient localizing hull; local geometric inputs for the uniform heart estimate before the lower-tail passage."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-quasi-compact-scheme",
+  "lem-fin-finite-type-fibre-dimension-bound",
+  "lem-kun-dimension-extension",
+  "det-prop-sfb-module-pullback-exact-main",
+  "sk-def-sfb-module-pushforward-pullback",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-sfb-alpha-iso",
+  "sk-def-sfb-constructible",
+  "lem-weil-pbc-constructible-preimage",
+  "lem-sfb-proper-wcontractible-closed-fibre-rigidity",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-sfb-profinite-geometric-family-heart-cd",
+  "lem-pe-bounded-complex-direct-image-presheaf",
+  "lem-sfb-internal-module-operations-transport",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-thm-pe-weakly-contractible-basis"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+  "place": "Refinement proof (2), first paragraph: direct-sum preservation on the ordinary ambient localizing hull; local geometric inputs for the uniform heart estimate before the lower-tail passage. Local-to-global reduction using two new statement-only geometric inputs; their full scope is not attributed to existing narrower literature theorems."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -55,10 +147,31 @@
    "results": "8 hits: LightCondensed.instIsGrothendieckAbelianLightCondMod; Condensed.instAB5CondensedMod; AlgebraicGeometry.instPreservesLimitSchemeOppositeCommRingCatRightOpΓOfIsAffineHomMapOfCompactSpaceOfQuasiSeparatedSpaceCarrierCarrierObj; Condensed.instAB4CondensedMod; instHasFiniteColimitsCondensedOfHasWeakSheafifyCompHausCoherentTopology; CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall; SheafOfModules.IsFiniteType; DerivedCategory.isGE_Q_obj_iff",
    "date": "2026-10-21",
    "verdict": "no match: the hits give properness definitions, general condensed-category axioms, or truncation support; none states this relative proper cohomological estimate"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Uniform finite cohomological dimension of proper pushforward on weak Serre coproduct closure of constructible ell adic sheaves over arbitrary qcqs schemes",
+   "results": "8 hits: AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, LightCondensed.instIsGrothendieckAbelianLightCondMod, AlgebraicGeometry.Scheme.Hom.isConstructible_image, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, Condensed.instAB5CondensedMod, AlgebraicGeometry.instPreservesLimitSchemeOppositeCommRingCatRightOpΓOfIsAffineHomMapOfCompactSpaceOfQuasiSeparatedSpaceCarrierCarrierObj, CondensedMod.IsSolid",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this pro-etale module cohomology comparison or bound"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Uniform upper bound for higher proper direct images of constructible ell adic sheaves and their weak Serre coproduct closure over a qcqs base",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.instHasLimits, SheafOfModules.hasLimitsOfSize, TopCat.instHasLimitsOfSizeSheafOfHasLimits, instHasLimitsOfShapeCondensed, CategoryTheory.ObjectProperty.instIsSerreClassTop, instHasFiniteColimitsCondensedOfHasWeakSheafifyCompHausCoherentTopology, GaloisConnection.upperBounds_l_image, upperBounds_closure",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this pro-etale module cohomology comparison or bound"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Uniform finite upper amplitude of proper higher direct images of the weak Serre coproduct closure of constructible modules in ordinary pro etale derived categories",
+   "results": "8 hits: LightCondensed.instIsGrothendieckAbelianLightCondMod, Condensed.profiniteSolid, CondensedMod.IsSolid, localCohomology.diagram, CondensedMod.ofSheafProfinite, Condensed.instAB5CondensedMod, LightCondMod.ofSheafLightProfinite, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this pro-etale module cohomology comparison or bound"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-qcqs-proper-hull-tail-bound",
@@ -70,7 +183,7 @@
  "blueprint": {
   "from": {
    "node": "det-sf-comp-coherence-cocycle",
-   "place": "Refinement proof (2), first paragraph, direct-sum preservation on the ordinary ambient localizing hull: heart upper bound used before the Postnikov passage to unbounded lower tails.",
+   "place": "Refinement proof (2), first paragraph: direct-sum preservation on the ordinary ambient localizing hull; local geometric inputs for the uniform heart estimate before the lower-tail passage.",
    "via": [
     "lem-sfb-qcqs-proper-hull-tail-bound",
     "lem-sfb-qcqs-proper-localizing-coproducts",
@@ -79,5 +192,59 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-qcqs-proper-serre-heart-bound",
+  "worker": "stage1",
+  "summary": "Kept the statement and all coefficient conventions. Reduced the heart estimate to a common geometric fibre dimension bound, exact pullback of the weak Serre coproduct class, derived proper closed-fibre rigidity on w-contractible tests, an absolute profinite-family estimate, and sheafification of bounded-below derived evaluation. Two new unsplit inputs carry the genuinely new geometry; no finite-coefficient, Noetherian or finite-subextension convention is silently substituted.",
+  "blueprint": "Refinement proof (2), first paragraph: direct-sum preservation on the ordinary ambient localizing hull; local geometric inputs for the uniform heart estimate before the lower-tail passage.",
+  "tool_uses": [
+   {
+    "node": "lem-fin-finite-type-fibre-dimension-bound",
+    "why": "Generic geometry, exact inverse-image, or ringed-site cohomology tool for the local-to-global heart estimate; it does not replace any compactification-coherence step."
+   },
+   {
+    "node": "lem-kun-dimension-extension",
+    "why": "Generic geometry, exact inverse-image, or ringed-site cohomology tool for the local-to-global heart estimate; it does not replace any compactification-coherence step."
+   },
+   {
+    "node": "det-prop-sfb-module-pullback-exact-main",
+    "why": "Generic geometry, exact inverse-image, or ringed-site cohomology tool for the local-to-global heart estimate; it does not replace any compactification-coherence step."
+   },
+   {
+    "node": "lem-sfb-alpha-iso",
+    "why": "Generic geometry, exact inverse-image, or ringed-site cohomology tool for the local-to-global heart estimate; it does not replace any compactification-coherence step."
+   },
+   {
+    "node": "lem-pe-bounded-complex-direct-image-presheaf",
+    "why": "Generic geometry, exact inverse-image, or ringed-site cohomology tool for the local-to-global heart estimate; it does not replace any compactification-coherence step."
+   },
+   {
+    "node": "lem-sfb-internal-module-operations-transport",
+    "why": "Generic geometry, exact inverse-image, or ringed-site cohomology tool for the local-to-global heart estimate; it does not replace any compactification-coherence step."
+   },
+   {
+    "node": "sk-thm-pe-weakly-contractible-basis",
+    "why": "Generic geometry, exact inverse-image, or ringed-site cohomology tool for the local-to-global heart estimate; it does not replace any compactification-coherence step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-fin-finite-type-fibre-dimension-bound",
+  "lem-kun-dimension-extension",
+  "det-prop-sfb-module-pullback-exact-main",
+  "lem-sfb-alpha-iso",
+  "lem-pe-bounded-complex-direct-image-presheaf",
+  "lem-sfb-internal-module-operations-transport",
+  "sk-thm-pe-weakly-contractible-basis"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NB-eb5d559b1",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-eb5d559b1 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, every cited statement, the blueprint refinement (2), BS 6.1.1-6.1.8 and Remarks 6.1.4/6.1.7, RTW 1.1.2/1.1.4/1.1.5/1.2.7/1.2.8 and HHL Remark 7.15. The item statement is identical to base (sha ad8f87a4; still unsplit in the latest dagsnap). It keeps the all-continuous C(-,Qbar_l) convention, so the Q29/NE/NB narrowing is not repeated. It has no point-detection or Q_d kernel-closure step, so the ND/NH/NA faults are absent. No SGA source, no repair note, not dropped. Step 1: Y is qc, so lem-fin gives e, which is stable under field extension (kun clause 1). Step 2: a^* is exact and preserves coproducts; the retrocompact check is correct; the scalar-matrix local model is kept via alpha; the minimality argument is valid. Step 3: cites the rigidity node exactly. Step 4: proper base change (b), geometric fibre = X_y tensor K, bound r>2e+2=d. Step 5: the presheaf theorem is transported through E_T with exact scalar restriction; vanishing on the w-contractible basis gives zero sheafification. Rigidity node: C=V(J) is affine, reduced, zero-dimensional and w-contractible with separably closed residue fields (RTW 1.1.2). I checked the f=id case for all of P (both sides exact, agree on constructibles), torsion (BS Remark 6.1.4) and solid l-adic (RTW 1.2.7/1.2.8). HHL 7.15 concerns non-solid objects, not P. Absolute node: checked empty C, closed immersions (BS 6.1.8), torsion (at most 2e), solid (at most 2e+1) and P^1 with Q_l. Uniformity in C is needed because d must not depend on W. Neither node restates the item (D1/D2 fine). Not duplicates of closed-base-change (which would make a cycle), sp boundary, integral-lisse, torsion-stalk or the Noetherian/torsion heart nodes. Accepted the 7 generic tool_uses; one generic trf localization node lies in the closure. FIX (B3): the rigidity node did not cite quasi-compact scheme or closed immersion; added [def-weil-pbc-quasi-compact-scheme] and [def-weil-closed-immersion] to its text and stmt_deps in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-proper-wcontractible-closed-fibre-rigidity.json. Residual risk: the Qbar_l all-continuous case of both nodes is the item's own open convention, plausible but unproved.; 1 file(s) fixed by the reviewer"
  }
 }
