@@ -55,7 +55,7 @@ variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 
 /-- The ring characteristic of a finite field is prime. -/
 lemma fact_ringChar_prime_of_finite : Fact (ringChar k₀).Prime :=
-  ⟨CharP.char_is_prime_of_pos k₀ (ringChar k₀)⟩
+  ⟨CharP.char_is_prime k₀ (ringChar k₀)⟩
 
 attribute [local instance] fact_ringChar_prime_of_finite
 
@@ -107,9 +107,10 @@ theorem WeilComplex.finsum_trace_compactlySupportedCohomology_eq_of_comparison
   obtain ⟨n, rfl⟩ : ∃ n, m = n + 1 := ⟨m - 1, by omega⟩
   obtain ⟨K', ι, hglob, hloc⟩ := K.exists_weilBoundedConstructible_comparison
   obtain ⟨eqv, heqv⟩ := hloc n
-  haveI := finite_frobeniusFixedPoints_of_powSucc_eq_refl
+  have := finite_frobeniusFixedPoints_of_powSucc_eq_refl
     (Iso.refl (WeilComplex.overSpec (k₀ := k₀) X)) ⟨0, rfl⟩ n
-  rw [← hglob n, weilTraceFormula l _ ⟨0, rfl⟩ K' n,
+  rw [← hglob n,
+    weilTraceFormula l (Iso.refl (WeilComplex.overSpec (k₀ := k₀) X)) ⟨0, rfl⟩ K' n,
     map_finsum ι (Set.toFinite _)]
   exact (finsum_congr heqv).trans (finsum_comp_equiv eqv)
 
