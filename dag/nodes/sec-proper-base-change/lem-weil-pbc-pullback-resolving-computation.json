@@ -1,0 +1,134 @@
+{
+ "id": "lem-weil-pbc-pullback-resolving-computation",
+ "kind": "statement",
+ "title": "Derived pullback computes on resolving complexes with independent universes",
+ "statement": "Let f be a ringed-topos pullback between independently sized essentially small sites, with coefficients in a common independent universe. Let (L, epsilon) be its complex-level universal left-derived pair. For every K-flat complex P with flat terms, epsilon at P is invertible. No equality of site universes, no flatness of the structural ring map, and no boundedness is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY, 0G7E and 07A4; more-algebra.tex Tag 0FNH, item-shift-tensor."
+ },
+ "stmt_deps": [
+  "def-pur-cochain-tensor-coherence-data",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "The underlying-sheaf functor preserves finite limits and epimorphisms. Transfer these properties across the algebraic inverse-image comparison. Thus algebraic inverse image preserves homology. For the identity coefficient map, construct scalar extension and its inverse by the sheafification counit and multiplication; the balanced tensor identity identifies it naturally with the identity. Transport K-flatness through this isomorphism and apply preservation of the resolving class to deduce K-flatness after algebraic inverse image.",
+   "uses": [
+    "lem-weil-pbc-ringed-topos-kflat-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Factor ordinary pullback through algebraic inverse image followed by the prescribed scalar extension. The independent-coefficient scalar-extension theorem inverts quasi-isomorphisms between the K-flat images. The object and map presentation equalities give a natural isomorphism from the supplied ordinary pullback to this factorization, so it too inverts quasi-isomorphisms between resolving complexes.",
+   "uses": [
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Descend the supplied counit through the homotopy quotient, retaining its components. Every homotopy object admits a resolving complex. Apply the resolving-class left-derived theorem and identify its universal pair with the supplied pair by Kan-extension uniqueness. Its counit is invertible on the resolving class; the comparison isomorphism transfers that invertibility to the original counit.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-cochain-homotopy-derived-comparison",
+    "lem-pur-left-derived-from-kflat-class"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "lem-pur-derived-change-of-rings",
+  "lem-pc-kflat-resolution",
+  "lem-pur-cochain-homotopy-derived-comparison",
+  "lem-pur-left-derived-from-kflat-class"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY, 0G7E and 07A4; more-algebra.tex Tag 0FNH, item-shift-tensor."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Left derived functor counit is an isomorphism on K flat complexes of sheaves for an arbitrary ringed topos inverse image",
+   "results": "General derived/localization APIs; no independently sized ringed-topos specialization.",
+   "date": "2026-10-21",
+   "verdict": "Use the existing general API and supply the stated specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLeftDerivedFunctor\"",
+   "results": "12 hits including the universal pair and isIso_of_isLeftDerivedFunctor_of_inverts.",
+   "date": "2026-10-21",
+   "verdict": "Use the existing general API and supply the stated specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "derivedPullback.*computation|leftDerived_from_resolvingClass",
+   "results": "0 Mathlib hits. Local library has the resolving-class theorem and a representative-computation specialization with stricter universes.",
+   "date": "2026-10-21",
+   "verdict": "Use the existing general API and supply the stated specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Left derived functor counit is an isomorphism on K flat complexes of sheaves for an arbitrary ringed topos inverse image",
+   "results": "8 hits: CategoryTheory.Functor.totalLeftDerivedCounit and isLeftDerivedFunctor_iff_isIso_leftDerivedLift (Mathlib.CategoryTheory.Functor.Derived.LeftDerived); instIsIsoAppFromLeftDerivedZeroOfProjective and instIsIsoFunctorFromLeftDerivedZero (Mathlib.CategoryTheory.Abelian.LeftDerived); an invertible right-Kan counit for full pointwise extensions, and sheaf-equivalence counit formulas.",
+   "date": "2026-10-22",
+   "verdict": "No exact match: projective degree-zero derived functors and sheaf equivalences do not compute an arbitrary ringed-site inverse image on unbounded flat-term K-flat complexes. Apply the library resolving-class criterion with the independently sized sheaf inverse-image and coefficient-change argument."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PullbackTensorCanonicalShiftUnit",
+  "date": "2026-10-21",
+  "group": "C7"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-pullback-tensor-canonical-shift-unit",
+   "place": "Proof steps 1 through 4: resolving computation and signed cochain comparison.",
+   "via": [
+    "lem-weil-pbc-pullback-tensor-canonical-shift-unit"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PullbackTensorResolvingComputation",
+  "file": "lean/Sheaf/Paper/PullbackTensorResolvingComputation.lean",
+  "declaration": "SheafOfModules.PullbackTensorResolving.pullback_resolving_computation",
+  "statement": "theorem pullback_resolving_computation (f : RingedPullback.{r, uC, vC, uD, vD} R S) (L : DerivedCategory (Modules R) ⥤ DerivedCategory (Modules S)) (epsilon : DerivedCategory.Q ⋙ L ⟶ pull.{r, uC, vC, uD, vD} f ⋙ DerivedCategory.Q) (hL : L.IsLeftDerivedFunctor epsilon (HomologicalComplex.quasiIso (Modules R) (.up ℤ))) (P : CochainComplex (Modules R) ℤ) (hp : P.IsKFlatIndependentCoefficients) (hf : ∀ n : ℤ, IsFlatOnSite (J := J) (R := R) (P.X n)) : IsIso (epsilon.app P)",
+  "branch": "sheaf-dag",
+  "by": "C7",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-c968b",
+  "group": "C7",
+  "result": "pass",
+  "landing": "20261022T013357-L-3556675",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-c968b",
+  "group": "C7",
+  "result": "pass",
+  "landing": "20261022T013357-L-3556675",
+  "kind": "interface",
+  "note": "independent cc review: delivered item/helper modules and item node vs live clone and node statement; alias defs vs derivedTensor/representativeIso (rfl); direct importer ExactPullbackSignedComparison compiled against delivered oleans; #print axioms of the 3 theorems"
+ }
+}

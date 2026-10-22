@@ -22,11 +22,11 @@
  ],
  "proof": [
   {
-   "text": "Write $A=R_Y$, $B=R_X$, $F=f^*$ termwise, and $Q_A,Q_B$ for localization. Let $\\mathcal P_A$ be the flat-term K-flat complexes. The tensor-descent statement identifies their localization with $D(A)$ and makes restriction along $Q_A|_{\\mathcal P_A}\\times Q_A|_{\\mathcal P_A}$ fully faithful on bifunctors. Thus equations between natural transformations can be tested on these representatives. For $P\\in\\mathcal P_A$ write $e_P:L(Q_AP)\\cong Q_B(FP)$ for the canonical derived-pullback computation. It is natural in representative maps and compatible with their inversion. Shifts remain in $\\mathcal P_A$. The canonical comparison $t_{P,n}:F(P[n])\\cong(FP)[n]$ is termwise the identity: both differentials are $(-1)^nF(d_P)$. Consequently its localization, conjugated by $e_{P[n]}$ and $e_P[n]$, is precisely the stipulated comparison for $L$.",
+   "text": "Use the fixed-tensor theorem to obtain the published tensor shifts and their normalized comparisons in both arguments. The independently sized resolving-computation lemma makes epsilon invertible on flat-term K-flat complexes. Apply the proved right-Kan-extension coherent-shift theorem to the given universal derived pair; its shift structure makes epsilon commute with shifts. This uses the given L and epsilon, with no replacement derived functor.",
    "uses": [
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "lem-weil-pbc-ringed-topoi-derived-pullback",
-    "lem-weil-pbc-kflat-fixed-tensor-triangulated"
+    "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+    "lem-weil-pbc-pullback-resolving-computation",
+    "lem-pur-right-kan-extension-coherent-shift"
    ],
    "elementary": false,
    "source": {
@@ -35,13 +35,16 @@
    }
   },
   {
-   "text": "For $P,Q\\in\\mathcal P_A$ put $V=\\operatorname{Tot}(P\\otimes_AQ)$. The total-tensor-model lemma makes $V$ a flat-term K-flat representative of $Q_AP\\otimes_A^LQ_AQ$. The derived tensor-pullback statement makes $FP,FQ$ flat-term K-flat as well. The statement prescribes the components $\\mu_{Q_AP,Q_AQ}=(e_P^{-1}\\otimes e_Q^{-1})\\,r_{FP,FQ}\\,Q_B(c_{P,Q})\\,e_V\\,L(r_{P,Q}^{-1})$, which is the construction in Tag 07A4 (there the inverse of $c$ is displayed). Each factor is an isomorphism ($r_{FP,FQ}$ exists because $FP,FQ\\in\\mathcal P_B$) and natural in homotopy maps of $P,Q$: $c$ by the cochain-coherence statement, $e$ by the pullback statement, $r$ by tensor descent, and $e_V$ for $\\operatorname{Tot}$ of the maps, which preserves $\\mathcal P_A$ by the total-tensor-model lemma. By the extension clause of tensor descent these components extend uniquely to a natural transformation of bifunctors $\\Phi\\to\\Psi$; it is an isomorphism because every pair of objects is isomorphic to a pair $(Q_AP,Q_AQ)$, at which the component is invertible. The same extension clause, applied to the chain unitors (natural isomorphisms of complexes preserving $\\mathcal P$, since $\\operatorname{Tot}(P\\otimes A[0])\\cong P$), gives the action unitors $\\rho,\\ell$ of the statement. Its local formula is $b\\otimes(x\\otimes y)\\mapsto(b\\otimes x)\\otimes(1\\otimes y)$. All the inserted isomorphisms are natural, so this also specifies the normalization for shifted representatives.",
+   "text": "Obtain naturality of the published resolving tensor comparison by composing the two fixed-argument naturality squares. K-flat pullback preserves the resolving class, and the K-flat total tensor model lets epsilon compute on the total tensor. The resolving-representative whiskering theorem supplies fully faithful restriction in two variables; tensorComparisonDescent constructs the normalized comparison mu. Cancel the invertible representative and computation maps to prove uniqueness among all normalized natural transformations.",
    "uses": [
+    "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+    "lem-weil-pbc-ringed-topos-kflat-pullback",
     "lem-pur-kflat-total-tensor-model",
-    "lem-weil-pbc-ringed-topoi-derived-pullback",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-pur-cochain-pullback-tensor-coherence",
-    "lem-weil-pbc-site-derived-tensor-descent"
+    "lem-weil-pbc-pullback-resolving-computation",
+    "lem-weil-pbc-resolving-representative-whiskering",
+    "lem-weil-pbc-tensor-comparison-descent-representatives",
+    "lem-pur-cochain-comparison-monoidal-equations",
+    "lem-weil-pbc-cochain-pullback-tensor-shift"
    ],
    "elementary": false,
    "source": {
@@ -50,76 +53,76 @@
    }
   },
   {
-   "text": "First shift the first input. On representatives the desired square is\n$$s^1_{B,n}\\,(t_{P,n}\\otimes1)\\,c_{P[n],Q}=c_{P,Q}[n]\\,t_{V,n}\\,F(s^1_{A,n}).$$\nHere $s^1_{A,n},s^1_{B,n}$ are the unsigned first-input total-tensor comparisons, and the notation on the left includes totalization of $t_{P,n}\\otimes1$. On the summand with $x\\in P^{p+n}$ and $y\\in Q^q$, either composite sends $b\\otimes(x\\otimes y)$ to $(b\\otimes x)\\otimes(1\\otimes y)$, in the corresponding shifted summand. The maps $t$ are identities on coefficients and the maps $s^1$ introduce no sign. The cochain comparison and the shift maps are already chain maps by the cited statements. Equality on these local tensors is equality on each sheaf tensor summand and hence on the direct sum. This proves the first square before localization.",
+   "text": "For a fixed resolving second argument, restrict the derived comparison to resolving first arguments. The normalization expresses this restriction as the conjugate of the cochain tensor comparison whiskered with epsilon and the fixed-tensor comparison. The prescribed cochain comparison commutes with the unsigned first-input shift by the signed cochain-shift lemma. Composition and conjugation of commuting transformations preserve CommShift.",
    "uses": [
-    "lem-pur-cochain-pullback-tensor-coherence",
-    "lem-weil-pbc-total-tensor-integer-shifts"
+    "lem-weil-pbc-cochain-pullback-tensor-shift",
+    "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+    "lem-weil-pbc-pullback-resolving-computation"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
     "place": "Tag 0FNH (item-shift-tensor), first input; sites-cohomology.tex Tag 07A4, normalized cochain formula"
    }
   },
   {
-   "text": "For the second input the representative square is\n$$s^2_{B,n}\\,(1\\otimes t_{Q,n})\\,c_{P,Q[n]}=c_{P,Q}[n]\\,t_{V,n}\\,F(s^2_{A,n}).$$\nOn a summand $x\\in P^p$, $y\\in Q^{q+n}$, the left side is $(-1)^{np}(b\\otimes x)\\otimes(1\\otimes y)$. On the right, $F(s^2_{A,n})$ first contributes the same $(-1)^{np}$, since additive scalar extension sends multiplication by $-1$ to multiplication by $-1$; $c$ then gives the displayed tensor. Pullback changes neither degree $p$ nor $n$. Thus the two maps agree on every summand, as sheaf maps, and therefore as chain maps. This works for every integer $n$, including negative $n$, with no flatness condition on $f^{-1}A\\to B$.",
+   "text": "Repeat for a fixed resolving first argument, using the second-input cochain shift compatibility. That lemma identifies the prescribed comparison with the general additive bifunctor comparison and therefore retains the Koszul factor for every integer shift, including negative shifts.",
    "uses": [
-    "lem-pur-cochain-pullback-tensor-coherence",
-    "lem-weil-pbc-total-tensor-integer-shifts"
+    "lem-weil-pbc-cochain-pullback-tensor-shift",
+    "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+    "lem-weil-pbc-pullback-resolving-computation"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
     "place": "Tag 0FNH (item-shift-tensor), second-input sign; sites-cohomology.tex Tag 07A4"
    }
   },
   {
-   "text": "The comparisons $t_{P,0}$ are identities and $t_{P,n+m}$ is the composite of $t_{P[n],m}$ and $t_{P,n}[m]$, after the canonical shift-addition identification: each has identity components and differential $(-1)^{n+m}F(d_P)$. The total-tensor comparisons have their zero and addition laws by the integer-shift statement, and their localized comparisons are the ones specified by the fixed-tensor statement. For clarity, in the second input two successive shifts contribute $(-1)^{np}(-1)^{mp}=(-1)^{(n+m)p}$, while in the first input all components are unsigned. Hence the composite comparisons for $\\Phi$ and $\\Psi$ have these laws on representatives. Inserting the natural computation isomorphisms $e$ only conjugates these equations, so it preserves them.",
+   "text": "The resolving class is shift stable by the fixed-tensor theorem and essentially surjects onto the derived category by K-flat resolutions. Detect CommShift after restriction along this shift-compatible essentially surjective functor. For an arbitrary fixed derived argument, choose its resolving representative and transport the fixed-argument transformation along the resulting isomorphism using mu naturality. The existing CommShift and CommShift₂Int structures supply the zero and addition laws.",
    "uses": [
-    "lem-weil-pbc-total-tensor-integer-shifts",
     "lem-weil-pbc-kflat-fixed-tensor-triangulated",
-    "lem-weil-pbc-ringed-topoi-derived-pullback"
+    "lem-pc-kflat-resolution"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
     "place": "Tag 0FNH (item-shift-tensor), zero and addition coherence of the separate input shifts"
    }
   },
   {
-   "text": "The ring complex $A[0]$ is flat-term K-flat: tensoring by $A$ is the identity on module sheaves and hence exact, and total tensoring any acyclic complex by $A[0]$ is that same complex, with the same differential. These assertions use exactly the definitions of flatness, K-flatness and total tensor. Its termwise pullback is canonically $B[0]$: if $a\\in f^{-1}A$, the map $j:F(A[0])\\to B[0]$ is $b\\otimes a\\mapsto b\\,c(a)$, with inverse $b\\mapsto b\\otimes1$, where $c:f^{-1}A\\to B$ is the structural ring map. The balanced tensor relations give both inverse identities. Therefore $u$ is $L(A[0])\\xrightarrow{e_{A[0]}}Q_BF(A[0])\\xrightarrow{Q_Bj}B[0]$. This construction uses $A[0]$ itself as the resolution, so requires no flatness of $c$.",
+   "text": "Prove the ring complex resolving directly. Tensoring an acyclic complex with the cochain unit is isomorphic to that complex. Its degree zero term is the module tensor unit, whose tensor functor is isomorphic to the identity; all other terms are zero and yield zero exact tensor functors. Descend the cochain left and right unitors along Q using its fully faithful localization whiskering. Their normalization and resolving essential surjectivity prove uniqueness. Compose the computation isomorphism at the ring complex with Q of the prescribed cochain unit to define u.",
    "uses": [
-    "def-pc-flat-sheaf-modules",
     "def-pc-kflat-complex",
+    "def-pc-flat-sheaf-modules",
     "def-pc-tensor-complex-sheaves",
-    "lem-weil-pbc-ringed-topoi-derived-pullback"
+    "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+    "lem-weil-pbc-pullback-resolving-computation",
+    "lem-pc-kflat-resolution"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
     "place": "Tag 06YY (lemma-derived-base-change), computation on the ring complex; sites-modules.tex Tag 03EL, scalar-extension unit"
    }
   },
   {
-   "text": "For a flat-term K-flat $P$, evaluate the right-unit composite on $b\\otimes(x\\otimes a)$, with $a\\in f^{-1}A$ in degree zero. The cochain comparison, followed by $1\\otimes j$ and the right action, gives\n$$b\\otimes(x\\otimes a)\\longmapsto(b\\otimes x)\\otimes(1\\otimes a)\\longmapsto(b\\otimes x)\\otimes c(a)\\longmapsto b\\,c(a)\\otimes x=b\\otimes ax.$$\nThis is $F(\\rho_P)$. For the left-unit composite on $b\\otimes(a\\otimes y)$ the images are $(b\\otimes a)\\otimes(1\\otimes y)$, then $b\\,c(a)\\otimes(1\\otimes y)$, then $b\\,c(a)\\otimes y=b\\otimes ay$, which is $F(\\ell_P)$. These are also exactly the action-unitor compatibility asserted by the cochain-coherence statement. The ring factor has degree zero, so no Koszul sign occurs. Applying $Q_B$ and the natural $e$ comparisons from step 2 gives both required unit identities on representatives with the specific $u$ of step 6.",
+   "text": "On a resolving P, insert the normalization of mu at (P,R[0]) and (R[0],P). Naturality of the resolving comparison with the cochain unit, the normalized derived unitors, and epsilon naturality reduce the two equations to the existing cochain pullback action-unit equations. These equations use the prescribed insertion-of-one comparison and multiplication unit, so no sign occurs in the degree-zero ring factor.",
    "uses": [
-    "lem-pur-cochain-pullback-tensor-coherence",
-    "lem-weil-pbc-ringed-topoi-derived-pullback"
+    "lem-pur-cochain-comparison-monoidal-equations",
+    "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+    "lem-weil-pbc-pullback-resolving-computation"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
     "place": "Tag 07A4 (lemma-pullback-tensor-product), cochain comparison; sites-modules.tex Tag 03EL, scalar multiplication and action units"
    }
   },
   {
-   "text": "The representative shift squares in steps 3 and 4, after the computation identifications in steps 1 and 2, are exactly $s^i_{\\Psi,n}\\mu_{U_i}=\\mu_{M,N}[n]s^i_{\\Phi,n}$ restricted to $(M,N)=(Q_AP,Q_AQ)$. All their arrows are natural there: $c$ is natural in complex maps, $e$ in resolution maps, and the tensor shift comparisons in each argument; the cited descent statements give natural transformations on the derived categories. Such naturality also holds for an inverted quasi-isomorphism: rearrange its naturality square by multiplying on both sides by its inverse. Hence it holds under all compositions after localization. Faithfulness of restriction in the tensor-descent statement now proves the two equations and the zero/addition laws globally. The same argument proves the unit identities from step 7 globally: view a transformation in $M$ alone as a bifunctor transformation independent of its second argument (and use the first-independent version for $N$). Faithfulness then tests it on representatives too. This proves the asserted naturality for every derived map, without using direct images or adjunctions of module functors.",
+   "text": "Both action composites are natural transformations on the derived category. Every derived object is isomorphic to the localization of a flat-term K-flat resolution; cancellation of the resulting isomorphism and naturality extend the representative equations to every derived object. Finally expand the fixed-argument CommShift equations to obtain exactly the two stated composite shift squares.",
    "uses": [
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "lem-weil-pbc-ringed-topoi-derived-pullback",
-    "lem-weil-pbc-kflat-fixed-tensor-triangulated",
-    "lem-pur-cochain-pullback-tensor-coherence",
-    "lem-weil-pbc-total-tensor-integer-shifts"
+    "lem-pc-kflat-resolution"
    ],
    "elementary": false,
    "source": {
@@ -129,21 +132,24 @@
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "lem-weil-pbc-ringed-topoi-derived-pullback",
   "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+  "lem-weil-pbc-pullback-resolving-computation",
+  "lem-pur-right-kan-extension-coherent-shift",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
   "lem-pur-kflat-total-tensor-model",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-pur-cochain-pullback-tensor-coherence",
-  "lem-weil-pbc-total-tensor-integer-shifts",
-  "def-pc-flat-sheaf-modules",
+  "lem-weil-pbc-resolving-representative-whiskering",
+  "lem-weil-pbc-tensor-comparison-descent-representatives",
+  "lem-pur-cochain-comparison-monoidal-equations",
+  "lem-weil-pbc-cochain-pullback-tensor-shift",
+  "lem-pc-kflat-resolution",
   "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
   "def-pc-tensor-complex-sheaves"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 07A4 (lemma-pullback-tensor-product), with Tag 0FNH in more-algebra.tex; explicit normalized shift and unit calculations supplied by NX."
+  "place": "Tag 07A4 (lemma-pullback-tensor-product), with more-algebra.tex Tag 0FNH (item-shift-tensor) and the cochain action-unit calculation of lem-pur-cochain-pullback-tensor-coherence; agent expansion to normalized shift/unit equations. Lean realization C7: normalized representative descent, additive bifunctor comparison shifts and localization of the cochain action units. The naturality and action-unit inputs use the proved cochainComparison_monoidal component API. C7 uses canonicalDerivedTensor, a transparent alias of the published derivedTensor, and canonicalRepresentativeIso, the original representativeIso with that target spelling. These presentation names are locally irreducible during the proof. The public shift hypotheses and existential witnesses still use the original derivedTensor; canonicalDerivedTensorCommShift is the identity conversion of the supplied shift structure, registered as an instance only locally in this module. Every public predicate and action normalization is definitionally the original one; no tensor, comparison or shift data is reselected and no global instance is added."
  },
  "mathlib_searches": [
   {
@@ -278,15 +284,18 @@
    "SheafOfModules.PullbackTensorCanonical.Phi",
    "SheafOfModules.PullbackTensorCanonical.Psi",
    "SheafOfModules.PullbackTensorCanonical.IsNormalized",
-   "SheafOfModules.PullbackTensorCanonical.pullback_tensor_canonical_shift_unit"
+   "SheafOfModules.PullbackTensorCanonical.pullback_tensor_canonical_shift_unit",
+   "SheafOfModules.PullbackTensorCanonical.canonicalDerivedTensor",
+   "SheafOfModules.PullbackTensorCanonical.canonicalRepresentativeIso",
+   "SheafOfModules.PullbackTensorCanonical.canonicalDerivedTensorCommShift"
   ],
   "file": "lean/Sheaf/Paper/PullbackTensorCanonicalShiftUnit.lean",
   "statement": "theorem pullback_tensor_canonical_shift_unit (hL : L.IsLeftDerivedFunctor epsilon (HomologicalComplex.quasiIso (Modules R) (ComplexShape.up ℤ))) : ∃ (_ : L.CommShift ℤ) (_ : (derivedTensor R).CommShift₂Int) (_ : (derivedTensor S).CommShift₂Int), NatTrans.CommShift epsilon ℤ ∧ HasCanonicalTensorShifts (R := R) ∧ HasCanonicalTensorShifts (R := S) ∧ (∀ (P : CochainComplex (Modules R) ℤ), P.IsKFlatIndependentCoefficients → (∀ n : ℤ, IsFlatOnSite (J := J) (R := R) (P.X n)) → IsIso (epsilon.app P)) ∧ ∃ mu : Phi L ≅ Psi L, IsNormalized f k L epsilon mu.hom ∧ (∀ tau : Phi L ⟶ Psi L, IsNormalized f k L epsilon tau → tau = mu.hom) ∧ ∃ (aR : ActionUnits (R := R)) (aS : ActionUnits (R := S)) (u : L.obj (DerivedCategory.Q.obj (HomologicalComplex.tensorUnit (Modules R) (.up ℤ))) ≅ DerivedCategory.Q.obj (HomologicalComplex.tensorUnit (Modules S) (.up ℤ))), Subsingleton (ActionUnits (R := R)) ∧ Subsingleton (ActionUnits (R := S)) ∧ u.hom = epsilon.app (HomologicalComplex.tensorUnit (Modules R) (.up ℤ)) ≫ DerivedCategory.Q.map (CategoryTheory.CochainPullback.unit.{r, uC, vC, uD, vD} f k).hom ∧ (∀ (n : ℤ) (M N : DerivedCategory (Modules R)), mu.hom.app (M⟦n⟧, N) ≫ ((derivedTensor S).map ((L.commShiftIso n).hom.app M)).app (L.obj N) ≫ (((derivedTensor S).flip.obj (L.obj N)).commShiftIso n).hom.app (L.obj M) = L.map ((((derivedTensor R).flip.obj N).commShiftIso n).hom.app M) ≫ (L.commShiftIso n).hom.app (((derivedTensor R).obj M).obj N) ≫ (mu.hom.app (M, N))⟦n⟧') ∧ (∀ (n : ℤ) (M N : DerivedCategory (Modules R)), mu.hom.app (M, N⟦n⟧) ≫ ((derivedTensor S).obj (L.obj M)).map ((L.commShiftIso n).hom.app N) ≫ (((derivedTensor S).obj (L.obj M)).commShiftIso n).hom.app (L.obj N) = L.map ((((derivedTensor R).obj M).commShiftIso n).hom.app N) ≫ (L.commShiftIso n).hom.app (((derivedTensor R).obj M).obj N) ≫ (mu.hom.app (M, N))⟦n⟧') ∧ (∀ M : DerivedCategory (Modules R), mu.hom.app (M, DerivedCategory.Q.obj (HomologicalComplex.tensorUnit (Modules R) (.up ℤ))) ≫ ((derivedTensor S).obj (L.obj M)).map u.hom ≫ aS.rho.hom.app (L.obj M) = L.map (aR.rho.hom.app M)) ∧ (∀ N : DerivedCategory (Modules R), mu.hom.app (DerivedCategory.Q.obj (HomologicalComplex.tensorUnit (Modules R) (.up ℤ)), N) ≫ ((derivedTensor S).map u.hom).app (L.obj N) ≫ aS.ell.hom.app (L.obj N) = L.map (aR.ell.hom.app N))",
   "branch": "sheaf-dag",
-  "by": "NX",
+  "by": "NQ",
   "date": "2026-10-21",
   "existing": false,
-  "note": "Section 1(B): the published dependency source timed out during overlay compilation and again on server confirmation before the consumer could be checked. Preserve every declaration and mathematical signature. Disable unused generated structure auxiliaries for ActionUnits and prevent elaboration from expanding the large normalization predicates while checking the concluding theorem. The interface still states the complete representative normalization, uniqueness, both integer shift squares and both action-unit equations with independent universes. Enable the existing backward elaborator transparency options for the universe-sensitive monoidal equations; all signature terms remain unchanged. Profiling found the generic multicospan HasSheafCompose search expensive. Scoped per-command removal of the generic multicospan instance selects the existing Mathlib hasSheafComposeEssentiallySmallSite transport without changing exported instances or hypotheses."
+  "note": "Uses the existing KFlatFixedTensor derived bifunctor and representativeIso, and the independently sized CochainPullback.RingedPullback/Comparison/comparison/unit. The complex-localization universal counit is the equivalent presentation of the recorded homotopy derived pullback. IsNormalized writes the prescribed representative formula after cancelling the invertible computation maps; uniqueness ranges over all natural transformations. ActionUnits only packages the node's two normalized action isomorphisms. The single theorem supplies their uniqueness, both composite shift squares, and both action-unit equations, without a derived adjunction. C7 uses canonicalDerivedTensor, a transparent alias of the published derivedTensor, and canonicalRepresentativeIso, the original representativeIso with that target spelling. These presentation names are locally irreducible during the proof. The public shift hypotheses and existential witnesses still use the original derivedTensor; canonicalDerivedTensorCommShift is the identity conversion of the supplied shift structure, registered as an instance only locally in this module. Every public predicate and action normalization is definitionally the original one; no tensor, comparison or shift data is reselected and no global instance is added."
  },
  "reviewed_lean": {
   "date": "2026-10-21",
@@ -295,5 +304,15 @@
   "group": "NX",
   "result": "pass",
   "note": "Clause-by-clause match of the node and the Lean. Hypotheses: EssentiallySmall.{r} sites, RingedPullback pinned by hobj/hmap, exactness = finite limits+colimits, L any left derived functor with ε (same presentation as the landed shift-unit node), no extra assumptions, independent universes. Conclusions: η unique with κη=ε on flat-term K-flat complexes, CommShift of η, degree-zero comparison, flat and K-flat preservation, direct sums and integer scalars; μ normalized by IsNormalized with κ and unique among all natural transformations; transport from μ^L. Shift square via tensorShift: Mathlib totalShift₁ is unsigned and totalShift₂ gives (p·b).negOnePow, so (−1)^{bp}. The CommShift₂Int and L.CommShift existentials are pinned by HasCanonicalTensorShifts and NatTrans.CommShift ε. TensorConstraints σ/α are pinned by naturality plus the Koszul braiding and unsigned associator models, and are not hollow. Both records are verbatim and the declarations are present. The §1(B) dep change is options/attributes only, the module has no other importers, and the record changes only lean. Stacks tags exist. Worker compile evidence 22.8 s / 41.2 s. Advisory: the shift-unit record note replaced NQ's note."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-c968b",
+  "group": "C7",
+  "result": "pass",
+  "landing": "20261022T013357-L-3556675",
+  "kind": "interface",
+  "note": "independent cc review: delivered item/helper modules and item node vs live clone and node statement; alias defs vs derivedTensor/representativeIso (rfl); direct importer ExactPullbackSignedComparison compiled against delivered oleans; #print axioms of the 3 theorems"
  }
 }

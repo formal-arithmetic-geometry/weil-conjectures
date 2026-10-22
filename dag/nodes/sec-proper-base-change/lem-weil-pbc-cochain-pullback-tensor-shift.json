@@ -1,0 +1,130 @@
+{
+ "id": "lem-weil-pbc-cochain-pullback-tensor-shift",
+ "kind": "statement",
+ "title": "The prescribed cochain pullback tensor comparison commutes with both signed shifts",
+ "statement": "For a ringed pullback f and its prescribed tensor comparison k on independently sized sites, package the inverse-contraction cochain comparisons as a natural transformation of curried total tensor functors. For every fixed first input its component commutes with the canonical integer shifts in the second input; for every fixed second input its flipped component commutes with the shifts in the first input. The second-input shift includes the Koszul sign and the first-input shift is unsigned.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY, 0G7E and 07A4; more-algebra.tex Tag 0FNH, item-shift-tensor."
+ },
+ "stmt_deps": [
+  "def-pur-cochain-tensor-coherence-data",
+  "def-pc-tensor-complex-sheaves",
+  "lem-weil-pbc-total-tensor-integer-shifts"
+ ],
+ "proof": [
+  {
+   "text": "Package k.mu as a natural transformation of module bifunctors. Its naturality follows by specializing k.naturality to an identity in either input. Package the prescribed cochain comparison using the proved cochainComparison_monoidal naturality equation.",
+   "uses": [
+    "lem-pur-cochain-comparison-monoidal-equations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The ordinary pullback is a left adjoint, hence preserves the coproducts defining totalization. Test equality with the general additive mapBifunctorComparisonNatTrans on every coproduct summand. Compose with the prescribed comparison inverse. The inverse is the contraction map: its summand formula cancels k.mu with its inverse, leaving the same image of the inclusion map. Coproduct extensionality proves equality of the two chain comparisons.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the proved source-library instances HomologicalComplex.commShift_mapBifunctorComparisonNatTrans_app and commShift_mapBifunctorComparisonNatTrans_flipApp to that module transformation. These instances use precisely the canonical unsigned first-input and signed second-input total shifts. Rewrite by the summand identification. This proves compatibility for the prescribed cochain map, including every negative shift.",
+   "uses": [
+    "lem-weil-pbc-total-tensor-integer-shifts"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-cochain-comparison-monoidal-equations",
+  "lem-weil-pbc-total-tensor-integer-shifts"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY, 0G7E and 07A4; more-algebra.tex Tag 0FNH, item-shift-tensor. The naturality and action-unit inputs use the proved cochainComparison_monoidal component API."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A natural comparison of total tensor complexes induced by additive functors commutes with shifts in both inputs",
+   "results": "8 hits, including canonical bifunctor shifts and CommShift₂Int for map₂CochainComplex.",
+   "date": "2026-10-21",
+   "verdict": "Use the existing general API and supply the stated specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapBifunctorShift\"",
+   "results": "11 hits: both signed shift isomorphisms, their inclusion formulas and naturality.",
+   "date": "2026-10-21",
+   "verdict": "Use the existing general API and supply the stated specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "commShift_mapBifunctorComparisonNatTrans",
+   "results": "0 Mathlib hits. Local source-library search found the two proved general comparison instances in WeilConjectures.Mathlib.Algebra.Homology.BifunctorShift.",
+   "date": "2026-10-21",
+   "verdict": "Use the existing general API and supply the stated specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural comparison of total tensor complexes induced by additive functors commutes with shifts in both inputs",
+   "results": "8 hits: CategoryTheory.Functor.mapCochainComplexShiftIso (Mathlib.Algebra.Homology.HomotopyCategory.Shift); HomologicalComplex₂.totalShift₁Iso_hom_naturality, totalShift₂Iso_hom_naturality, totalShift₂Iso and shiftFunctor₁₂CommIso (Mathlib.Algebra.Homology.TotalComplexShift), with component and associativity lemmas.",
+   "date": "2026-10-22",
+   "verdict": "No exact match: these are totalization shift maps and their naturality. The required identification of the prescribed ringed-topos comparison with the additive bifunctor comparison is additional. Use the existing signed comparison instances from WeilConjectures after proving that identification."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PullbackTensorCanonicalShiftUnit",
+  "date": "2026-10-21",
+  "group": "C7"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-pullback-tensor-canonical-shift-unit",
+   "place": "Proof steps 1 through 4: resolving computation and signed cochain comparison.",
+   "via": [
+    "lem-weil-pbc-pullback-tensor-canonical-shift-unit"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CochainPullbackTensorShift",
+  "file": "lean/Sheaf/Paper/CochainPullbackTensorShift.lean",
+  "declaration": "CategoryTheory.CochainPullback.tensorComparison_commShift",
+  "statement": "theorem tensorComparison_commShift : (∀ P, NatTrans.CommShift (F₁ := (totalTensor.{uC, vC, r} R).obj P ⋙ (pull.{r, uC, vC, uD, vD} (J := J) (K := K) (R := R) (S := S) f)) (F₂ := (pull.{r, uC, vC, uD, vD} (J := J) (K := K) (R := R) (S := S) f) ⋙ (totalTensor.{uD, vD, r} S).obj (((pull.{r, uC, vC, uD, vD} (J := J) (K := K) (R := R) (S := S) f)).obj P)) ((tensorComparisonNatTrans f k).app P) ℤ) ∧ (∀ Q, NatTrans.CommShift (F₁ := (totalTensor.{uC, vC, r} R).flip.obj Q ⋙ (pull.{r, uC, vC, uD, vD} (J := J) (K := K) (R := R) (S := S) f)) (F₂ := (pull.{r, uC, vC, uD, vD} (J := J) (K := K) (R := R) (S := S) f) ⋙ (totalTensor.{uD, vD, r} S).flip.obj (((pull.{r, uC, vC, uD, vD} (J := J) (K := K) (R := R) (S := S) f)).obj Q)) ((tensorComparisonNatTrans f k).flipApp Q) ℤ)",
+  "branch": "sheaf-dag",
+  "by": "C7",
+  "date": "2026-10-21",
+  "existing": false,
+  "declarations": [
+   "CategoryTheory.CochainPullback.tensorComparisonNatTrans",
+   "CategoryTheory.CochainPullback.tensorComparison_commShift"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-c968b",
+  "group": "C7",
+  "result": "pass",
+  "landing": "20261022T013357-L-3556675",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-c968b",
+  "group": "C7",
+  "result": "pass",
+  "landing": "20261022T013357-L-3556675",
+  "kind": "interface",
+  "note": "independent cc review: delivered item/helper modules and item node vs live clone and node statement; alias defs vs derivedTensor/representativeIso (rfl); direct importer ExactPullbackSignedComparison compiled against delivered oleans; #print axioms of the 3 theorems"
+ }
+}
