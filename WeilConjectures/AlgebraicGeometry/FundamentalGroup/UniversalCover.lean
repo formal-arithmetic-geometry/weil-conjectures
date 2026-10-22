@@ -150,10 +150,10 @@ noncomputable def universalCovers [ConnectedSpace Y] [CompactSpace Y] [QuasiSepa
   transport := UniversalCover.transport
   transport_proj τ := UniversalCover.transportHom_proj τ
   transport_fiber {y z} τ P f hf := by
-    have hx : UniversalCover.toObj z P (fiberMk z P (UniversalCover.pt z ≫ f)
+    have hx : UniversalCover.toObj (Y := Y) z P (fiberMk z P (UniversalCover.pt z ≫ f)
         (by rw [Category.assoc, hf, UniversalCover.pt_proj])) = f :=
-      UniversalCover.eq_of_pt_comp_eq z P (UniversalCover.toObj_hom z P _) hf
-        (UniversalCover.pt_toObj z P _)
+      UniversalCover.eq_of_pt_comp_eq (Y := Y) z P (UniversalCover.toObj_hom (Y := Y) z P _) hf
+        (UniversalCover.pt_toObj (Y := Y) z P _)
     apply fiber_ext
     conv_lhs => rw [fiberMk_left, ← hx]
     rw [UniversalCover.transport_hom, UniversalCover.transportHom_toObj,

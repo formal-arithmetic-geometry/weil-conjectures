@@ -199,11 +199,11 @@ theorem isZero_rightDerived_sectionsFunctor_upperStar_of_isLimit_addCommGrpCat {
       ((Etale.upperStar AddCommGrpCat.{u + 1} (D.obj i).hom).obj F))) :
     IsZero (((sectionsFunctor AddCommGrpCat.{u + 1} c.pt.left).rightDerived q).obj
       ((Etale.upperStar AddCommGrpCat.{u + 1} c.pt.hom).obj F)) := by
-  refine (Sheaf.subsingleton_H_iff_isZero_rightDerived _
+  refine (Sheaf.subsingleton_H_iff_isZero_rightDerived c.pt.left.smallEtaleTopology
     (Scheme.isTerminalEtaleMkId c.pt.left) q _).1 (subsingleton_of_forall_eq 0 fun x ↦ ?_)
   obtain ⟨i, y, hy⟩ := (cohomologyMap_isColimit_of_isLimit F D c hc q).1 x
   have : Subsingleton (Sheaf.H ((Etale.upperStar AddCommGrpCat.{u + 1} (D.obj i).hom).obj F) q) :=
-    (Sheaf.subsingleton_H_iff_isZero_rightDerived _
+    (Sheaf.subsingleton_H_iff_isZero_rightDerived (D.obj i).left.smallEtaleTopology
       (Scheme.isTerminalEtaleMkId (D.obj i).left) q _).2 (h i)
   rw [Subsingleton.elim y 0, map_zero] at hy
   have := congrArg (Sheaf.H.map ((Etale.upperStarComp AddCommGrpCat.{u + 1} (c.π.app i).left

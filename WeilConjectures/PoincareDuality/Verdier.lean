@@ -5,8 +5,8 @@ Authors: Nailin Guan
 -/
 module
 
-public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Braided
 public import WeilConjectures.PoincareDuality.ProjectionFormula
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleBraided
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShriekComposition
 
 /-!
@@ -28,7 +28,9 @@ half of the chosen compactification to be a left adjoint. This is why the coeffi
 `ProEtale.CondensedRing.isLeftAdjoint_boundedConstructibleLowerStar_padicAlgClRingObj`. The
 monoidal closed structure on `Dᵇc` is that of
 `ProEtale.CondensedRing.isMonoidal_boundedConstructible` and
-`ProEtale.CondensedRing.isMonoidalClosed_boundedConstructible`.
+`ProEtale.CondensedRing.isMonoidalClosed_boundedConstructible`, and its braiding, used in the
+double-dual morphism, is the Koszul braiding `ProEtale.CondensedRing.boundedConstructibleBraiding`,
+made a local instance.
 
 ## Main definitions
 
@@ -75,6 +77,8 @@ open scoped CategoryTheory.Functor CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
+
+attribute [local instance] boundedConstructibleBraiding
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
   [Fact (ringChar k ≠ ℓ)]
