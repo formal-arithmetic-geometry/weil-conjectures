@@ -248,5 +248,23 @@
   "group": "NM",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-5cde4c9c7 (reviewer sub-agent of L); spot-checked: The item is live. It is not on route-pivot-dropped.txt (side-live/live), and neither is its only citer, finite-trivialize-invertible-upstairs, whose step uses exactly this statement. It is still unsplit live, there is no repair note, and the base proof was empty. The statement and stmt_deps are unchanged, there are 0 new nodes, and it does not duplicate any DAG statement. I read the 6 steps against Stacks Properties 0F20 (properties.tex 5327-5383) and Divisors 0BUT. S1: the localization node with U=X (c) gives a(x)!=0 iff a not in p_x, and the inverse argument u(ab-c)=0 is correct. S2: generators node with A=O_X, U=X gives an epi from a coproduct of copies of O_X; the nonvanishing-cover node then gives, for each point, a t nonzero there. S3: strong induction, removing the generalization x of y; openness of X_s restores x, in the right direction. S4-S6: for incomparable points, a_x in p_x minus p_z, f = product of the a_x, v = s + f t. This is a correct affine specialization of the source's ideal-section step; it needs no prime avoidance. Checked edge cases: E empty, zero ring, DVR {eta, closed point}, Spec(k x k), finite residue fields, nonreduced rings. I accept the three generic tool_uses (01IB/0H88, 01CY). No SGA. proof_deps = union of the step uses."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineInvertibleFiniteSetSection",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_section_nonvanishing_on_finite_set",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineInvertibleFiniteSetSection.lean",
+  "statement": "theorem exists_section_nonvanishing_on_finite_set (X : AlgebraicGeometry.Scheme.{u}) [AlgebraicGeometry.IsAffine X] (L : X.Modules) [L.IsInvertible] (E : Set X) (hE : E.Finite) : ∃ s : Γ(L, ⊤), ∀ (x : X), x ∈ E → L.presheaf.germ ⊤ x trivial s ∉ (IsLocalRing.maximalIdeal (X.presheaf.stalk x)) • (⊤ : Submodule (X.presheaf.stalk x) (L.presheaf.stalk x))",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3e8fa0c88",
+  "group": "NB",
+  "result": "pass",
+  "note": "Lean matches node clause by clause: IsAffine X, L.IsInvertible, E : Set X finite (no closedness), ∃ s : Γ(L,⊤) with germ ∉ m_x•⊤ = nonzero class in L_x/m_xL_x; true specialization of Stacks 0F20 (W=X, E⊂X_s). Node differs from live only in lean; lean.statement verbatim; imports per brief-stage2 rule (public statement modules incl. FlatPullbackStalk stalk Module instance = canonical inferInstanceAs; plain imports of the 3 stated proof-dep modules); docstrings with source place, blueprint tag, 6 proof steps; one sorry theorem, no defs; name unused; not route-pivot-dropped; sole citer finite-trivialize-invertible-upstairs uses it as stated. Edge cases E=∅, X=∅, comparable/nonclosed points, nontrivial Pic OK. Advisories: predicate equals Ample.nonvanishingLocus body (equivalent spelling); instance from non-stmt_dep owner module; report wording on localization node's Lean. Not recompiled (no file changed)."
  }
 }
