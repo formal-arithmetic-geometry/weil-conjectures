@@ -16,54 +16,59 @@
  ],
  "proof": [
   {
-   "text": "Use the finite free uniformizer-power resolutions to compare the strict quotient tower on P with its Koszul reduction tower. The comparisons preserve transitions and the tensor-unit maps.",
-   "uses": [
-    "lem-weil-l-adic-extension-integers-dvr",
-    "def-weil-integral-reduction-tower"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebraization.tex",
-    "place": "Tag 0A0E, lemma-derived-completion-koszul; completion-reflector consequence and comparison with the explicit completed-coefficient unit"
-   }
-  },
-  {
-   "text": "Exact pro-etale countable products identify the signed Koszul fiber with the strict quotient Roos model, carrying the explicit zero-homotopy unit to the quotient unit. The Roos/intrinsic completeness equivalence makes this particular unit invertible.",
+   "text": "Use a witness of the published Roos-triangle completeness condition. Its triangle and the explicit strict quotient Roos triangle have the same last two vertices and one-minus-shift map; rotation gives an isomorphism of their first vertices. The quotient Roos object is locally derived complete by the principal-cone quotient comparison and the local completion criterion. Transport local completeness to K. This is the first implication of the recorded Roos/intrinsic equivalence, specialized without its unused adic-datum parameter.",
    "uses": [
     "lem-pur-roos-intrinsic-completeness-equivalence",
-    "lem-weil-proetale-countable-products-exact"
+    "def-pur-integral-derived-operations",
+    "det-pe-products-exact"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebraization.tex",
-    "place": "Tag 0A0E, lemma-derived-completion-koszul; completion-reflector consequence and comparison with the explicit completed-coefficient unit"
+    "place": "Tags 0999, 099B and 0A0E; sites-cohomology.tex Tag 0941 for the normalized strict Roos computation"
    }
   },
   {
-   "text": "Strict Roos derivation and uniqueness of total right derived functors identify this normalized computation with L.limit. The section formula for a identifies its composite with L.limit.unit with the explicit unit. Precompose with r inverse.",
+   "text": "Apply the principal scalar-cone local criterion to the given K-flat representative P and r. The criterion makes its specified principal-cone unit invertible. Compose with the unit-preserving principal-cone/quotient Roos comparison to obtain invertibility of r.inv followed by Q of the actual quotient Roos unit. No flat-term hypothesis beyond the unchanged theorem signature is required here.",
    "uses": [
-    "lem-weil-strict-roos-derivation",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+    "lem-pur-integral-principal-cone-local-criterion",
+    "lem-pur-integral-principal-cone-quotient-comparison",
+    "lem-pur-roos-intrinsic-completeness-equivalence"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebraization.tex",
-    "place": "Tag 0A0E, lemma-derived-completion-koszul; completion-reflector consequence and comparison with the explicit completed-coefficient unit"
+    "place": "Tags 0999, 099B and 0A0E; sites-cohomology.tex Tag 0941 for the normalized strict Roos computation"
+   }
+  },
+  {
+   "text": "Construct the canonical isomorphism between the termwise ordinary limit and the limit in the category of complexes by their limit cones. Compare the strict Roos derivation with source.limit by uniqueness of total right derived functors, retaining its ordinary-limit unit equation. The sectionwise formula ha identifies the transported augmentation with the quotient units at every level. Naturality of the zero-homotopy mapping-cocone lift gives equality of the entire specified chain maps after the strict tower isomorphism e, including their zero second coordinates. Localization and composition with these comparison isomorphisms prove invertibility of the requested map itself.",
+   "uses": [
+    "lem-weil-strict-roos-derivation",
+    "def-weil-integral-reduction-tower",
+    "def-pur-integral-derived-operations",
+    "det-pe-products-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tags 0999, 099B and 0A0E; sites-cohomology.tex Tag 0941 for the normalized strict Roos computation"
    }
   }
  ],
  "proof_deps": [
+  "def-pur-integral-derived-operations",
   "def-weil-integral-reduction-tower",
+  "det-pe-products-exact",
+  "lem-pur-integral-principal-cone-local-criterion",
+  "lem-pur-integral-principal-cone-quotient-comparison",
   "lem-pur-roos-intrinsic-completeness-equivalence",
-  "lem-weil-l-adic-extension-integers-dvr",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "lem-weil-proetale-countable-products-exact",
   "lem-weil-strict-roos-derivation"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-mate/fix-prop-adjunctions.proof.md",
-  "place": "A separate construction or argument of completed-coefficient comparison; see source and complete Lean docstring."
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "K2, 2026-10-22: reuse the principal-cone implications of the recorded Roos/intrinsic equivalence and identify the actual strict augmentation by zero-homotopy lift naturality; compare the total right derived units by their universal property."
  },
  "mathlib_match": null,
  "mathlib_searches": [
@@ -135,13 +140,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "C-74e11",
-  "group": "F6",
+  "reviewer": "COMPILER",
+  "group": "K2",
   "result": "pass",
-  "landing": "20261021T233657-L-848362",
+  "landing": "20261022T011901-L-3228914",
   "kind": "interface",
-  "note": "independent cc review: delivered Models module vs clone item module (verbatim move, public imports kept); comparison signature byte-identical; 3 new sorry statements read against Stacks 099N/0A0E/0D6E and the old ComparisonData fields; 9 direct importers + 7 delivered modules compiled in /tmp/f6ccp all rc=0; #print axioms probe"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
