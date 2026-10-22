@@ -1,0 +1,119 @@
+{
+ "id": "lem-pur-constant-native-pullback-monoidal",
+ "kind": "statement",
+ "title": "Canonical native derived tensor comparison for constant coefficients",
+ "statement": "For a geometric inverse image between small sites, an algebraic inverse image datum F, and a commutative coefficient ring A, suppose its actual module pullback and specified left-derived pullback have right adjoints G and RF. The left-derived pullback between the native symmetric monoidal ordinary derived module categories admits a natural tensor isomorphism mu and unit isomorphism e, and an oplax monoidal structure with exactly these maps, compatible with the native Koszul braidings. There is a canonical ordinary pure-tensor comparison k for which mu satisfies ConstantTensorNormalization of def-pur-completed-tensor-unit-insertion-data on every pair of flat-term K-flat complexes. No Noetherian or completeness assumption is used.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 and 0FPT; canonical cochain comparison and native derived tensor coherence"
+ },
+ "stmt_deps": [
+  "def-pur-completed-tensor-unit-insertion-data"
+ ],
+ "proof": [
+  {
+   "text": "First descend the complex-level left-derived counit to the homotopy category using Quotient.natTransLift. Its right Kan universal property descends because precomposition by the homotopy quotient is fully faithful. Reuse the existing closed symmetric monoidal construction through its proved private native-witness API, which retains its native monoidal equality, symmetry identification and tensorIso equations. Restrict this model to flat-term K-flat representatives using the proved tensor_model helper of lem-sfb-ringed-derived-monoidal-comparisons. Assemble the actual scalar-extension pullback, canonical ordinary tensor comparison, module adjunction and derived adjunction into a RingedTensorEdge. The tensor lift supplies its CoreMonoidal structure and symmetry, with delta equal to the canonical derived comparison. The unique representative characterization of lem-weil-pbc-ringed-topoi-derived-tensor-pullback gives its cochain square. Replace both representative maps by native tensorIso, freeze the chosen comparison, replace the descended counit by the actual complex comparison, and postcompose by inverse target tensorIso and Q(k.total). The latter cancels the inverse Q(k.totalIso), yielding exactly ConstantTensorNormalization. The inverse of the CoreMonoidal unit is e.",
+   "uses": [
+    "lem-sfb-ringed-derived-tensor-lift",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-ringed-derived-tensor-lift",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-weil-pbc-constant-completion-equivalence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Extraction of independent categorical/cochain portions of the existing nine-step argument; no change to the target statement."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical derived pullback of module sheaves is symmetric monoidal normalized on K-flat representatives",
+   "results": "SheafOfModules.pullbackIso; pullbackComp; no native derived representative theorem",
+   "date": "2026-10-21",
+   "verdict": "Useful generic APIs or repository ingredients, but no theorem asserting this full normalized statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.RingedDerivedComparisons.tensorLift_exists",
+   "results": "No Mathlib match; repository declaration supplies the coherence",
+   "date": "2026-10-21",
+   "verdict": "Useful generic APIs or repository ingredients, but no theorem asserting this full normalized statement."
+  },
+  {
+   "tool": "grep",
+   "query": "canonicalTensorDiagrams|tensorLift_exists",
+   "results": "No Mathlib match; repository RingedDerivedTensorLift.lean has tensorLift_exists",
+   "date": "2026-10-21",
+   "verdict": "Useful generic APIs or repository ingredients, but no theorem asserting this full normalized statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived inverse image of module sheaves is symmetric monoidal, and its tensor comparison is normalized on flat K-flat cochain complexes.",
+   "results": "SheafOfModules.PullbackConstruction.adjunction (Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous); CategoryTheory.MorphismProperty.instIsMonoidalInverseImageOfMonoidalOfRespectsIso (Mathlib.CategoryTheory.Localization.Monoidal.Basic); CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf (Mathlib.CategoryTheory.Sites.Monoidal); ModuleCat.MonoidalCategory.symmetricCategory (Mathlib.Algebra.Category.ModuleCat.Monoidal.Symmetric); CategoryTheory.Sheaf.symmetricCategory (Mathlib.CategoryTheory.Sites.Monoidal); SheafOfModules.pushforwardCongr_symm (Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous); LightCondensed.instSymmetricCategoryLightCondMod (Mathlib.Condensed.Light.Monoidal); CategoryTheory.Monoidal.instMonoidalTransportedFunctorEquivalenceTransported (Mathlib.CategoryTheory.Monoidal.Transport)",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module-sheaf pullback adjunctions and symmetric module categories are present, but none states the native derived comparison and its flat-term K-flat normalization."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedTensorUnitInsertion",
+  "date": "2026-10-21",
+  "group": "E8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-completed-tensor-unit-insertion",
+   "place": "Proof step 4",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ConstantNativePullbackMonoidal",
+  "file": "lean/Sheaf/Paper/ConstantNativePullbackMonoidal.lean",
+  "declaration": "CategoryTheory.ConstantCompletion.constantNativePullbackMonoidal",
+  "declarations": [
+   "CategoryTheory.ConstantCompletion.constantNativePullbackMonoidal"
+  ],
+  "statement": "theorem constantNativePullbackMonoidal {C E : Type u} [SmallCategory C] [SmallCategory E] {JC : GrothendieckTopology C} {JD : GrothendieckTopology E} {L : Sheaf JC (Type u) ⥤ Sheaf JD (Type u)} (F : InverseImageData L) (V : Sheaf JD (Type u) ⥤ Sheaf JC (Type u)) (adj : L ⊣ V) [PreservesFiniteLimits L] (A : Type u) [CommRing A] (G : Mod (constant JD A) ⥤ Mod (constant JC A)) (aM : pull F (constantMap F A) ⊣ G) (RF : D (constant JD A) ⥤ D (constant JC A)) (aD : (derivedPull F V adj (constantMap F A)).functor ⊣ RF) : letI := constantDerivedMonoidal JC A letI := constantDerivedSymmetric JC A letI := constantDerivedMonoidal JD A letI := constantDerivedSymmetric JD A letI LF := (derivedPull F V adj (constantMap F A)).functor ∃ (k : ConstantTensorData F A) (μ : constantDerivedTensor JC A ⋙ LF ≅ (LF.prod LF) ⋙ constantDerivedTensor JD A) (e : LF.obj (𝟙_ (D (constant JC A))) ≅ 𝟙_ (D (constant JD A))) (o : LF.OplaxMonoidal), ConstantTensorNormalization F V adj A k μ ∧ (∀ X W : D (constant JC A), o.δ X W = μ.hom.app (X, W)) ∧ o.η = e.hom ∧ (∀ X W : D (constant JC A), μ.hom.app (X, W) ≫ (β_ (LF.obj X) (LF.obj W)).hom = LF.map (β_ X W).hom ≫ μ.hom.app (W, X))",
+  "branch": "sheaf-dag",
+  "by": "E8",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-cf92c",
+  "group": "E8",
+  "result": "pass",
+  "landing": "20261022T025322-L-1275852",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-cf92c",
+  "group": "E8",
+  "result": "pass",
+  "landing": "20261022T025322-L-1275852",
+  "kind": "interface",
+  "note": "independent cc review: item theorem statement byte-identical; 11 moved decls verbatim (block diff vs live item, blueprint markers aside) in CompletedTensorUnitInsertionData; RingedDerivedClosedSymmetricMonoidal public signature unchanged (proof + private helper only); all 6 modules + axiom probe compiled in sandbox (exit 0); sorryAx only via upstream completedPullbackAdjunction / tensorLift_exists / ConstantCompletion.equivalence; item node changed only lean/proof/proof_deps/proof_origin"
+ }
+}

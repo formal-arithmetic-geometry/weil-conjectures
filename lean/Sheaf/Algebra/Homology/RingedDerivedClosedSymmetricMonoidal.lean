@@ -239,6 +239,74 @@ structure RingedDerivedTensorCoherence
   /-- The right unitor is the corresponding coefficient multiplication. -/
   rightUnitor_model : RingedDerivedTensorRightUnitorModel.{c, v, u, w} J R S tensorIso unitIso
 
+/-- Retain the native identifications of the existing closed symmetric monoidal witness.
+The construction is exactly the native tensor, comparison and Koszul symmetry used
+by `ringedDerived_closed_symmetric_monoidal`; its forgetful public statement follows below. -/
+private theorem ringedDerived_closed_symmetric_monoidal_native :
+    ∃ S : CoefficientClosedStructure (derivedInternalHomOfUniverses.{c, v, u, w} J R),
+      S.monoidal = RingedDerivedNative.monoidal.{c, v, u, w} J R ∧
+      ∃ T : CoefficientTensorModels.{u, c, v, w} J R S,
+        ∃ β : @SymmetricCategory (DerivedCategory (RingedTensorModules.{c, v, u} J R))
+          _ S.monoidal,
+        ∃ _hc : RingedDerivedTensorCoherence.{c, v, u, w} J R S T β,
+          HEq β (RingedDerivedNative.symmetric.{c, v, u, w} J R) ∧
+          (∀ (P Q : CochainComplex (RingedTensorModules.{c, v, u} J R) ℤ)
+            (hP : P.IsKFlatIndependentCoefficients) (hQ : Q.IsKFlatIndependentCoefficients),
+            HEq (T.iso J R S P Q hP hQ)
+              (RingedDerivedNative.tensorIso.{c, v, u, w} J R P Q (Or.inl hP))) := by
+  set_option backward.isDefEq.respectTransparency true in
+  set_option backward.isDefEq.respectTransparency.types true in
+    obtain ⟨⟨m, adj, ev⟩, hm, T, hT⟩ :=
+      RingedDerivedNative.closedAdjunction.{c, v, u, w} J R
+    dsimp only [CoefficientClosedStructure.monoidal] at hm
+    subst m
+    let S : CoefficientClosedStructure (derivedInternalHomOfUniverses.{c, v, u, w} J R) :=
+      ⟨RingedDerivedNative.monoidal.{c, v, u, w} J R, adj, ev⟩
+    let : MonoidalCategory (DerivedCategory (RingedTensorModules.{c, v, u} J R)) :=
+      RingedDerivedNative.monoidal.{c, v, u, w} J R
+    let : SymmetricCategory (DerivedCategory (RingedTensorModules.{c, v, u} J R)) :=
+      RingedDerivedNative.symmetric.{c, v, u, w} J R
+    let : (DerivedCategory.Q : CochainComplex (RingedTensorModules.{c, v, u} J R) ℤ ⥤
+        DerivedCategory (RingedTensorModules.{c, v, u} J R)).LaxMonoidal :=
+      RingedDerivedNative.lax.{c, v, u, w} J R
+    have ht : T.comparison = RingedDerivedNative.comparison.{c, v, u, w} J R :=
+      eq_of_heq hT
+    have htensor : ∀ P Q hP hQ,
+        T.iso J R S P Q hP hQ =
+          RingedDerivedNative.tensorIso.{c, v, u, w} J R P Q (Or.inl hP) := by
+      intro P Q hP hQ
+      unfold CoefficientTensorModels.iso
+      rw [ht]
+      exact RingedDerivedNative.comparison_app.{c, v, u, w} J R ⟨P, hP⟩ ⟨Q, hQ⟩
+    have hc := RingedDerivedNative.complexConstraints.{c, v, u} J R
+    refine ⟨S, rfl, T, RingedDerivedNative.symmetric.{c, v, u, w} J R, {
+      tensorIso := RingedDerivedNative.tensorIso.{c, v, u, w} J R
+      tensorIso_both := ?_
+      tensorIso_naturality := RingedDerivedNative.tensorIso_naturality.{c, v, u, w} J R
+      unitIso := RingedDerivedNative.unitIso.{c, v, u, w} J R
+      symmetry_model := ?_
+      associator_model := ?_
+      leftUnitor_model := ?_
+      rightUnitor_model := ?_ }, HEq.rfl, (fun P Q hP hQ ↦ heq_of_eq (htensor P Q hP hQ))⟩
+    · intro P Q hP hQ
+      exact (htensor P Q hP hQ).symm
+    · intro P Q hP hQ
+      refine ⟨β_ P Q, hc.symmetry P Q, ?_⟩
+      rw [htensor P Q hP hQ, htensor Q P hQ hP]
+      exact RingedDerivedNative.symmetry_square.{c, v, u, w} J R P Q hP hQ
+    · intro P Q N hP hQ hN
+      refine ⟨MonoidalCategory.associator P Q N, hc.associator P Q N, ?_⟩
+      rw [htensor P Q hP hQ, htensor Q N hQ hN]
+      exact RingedDerivedNative.associator_square.{c, v, u, w} J R P Q N hP hQ hN
+    · intro P hP
+      refine ⟨MonoidalCategory.leftUnitor P, ?_, ?_⟩
+      · exact hc.leftUnitor P
+      · exact RingedDerivedNative.leftUnitor_square.{c, v, u, w} J R P hP
+    · intro P hP
+      refine ⟨MonoidalCategory.rightUnitor P, ?_, ?_⟩
+      · exact hc.rightUnitor P
+      · exact RingedDerivedNative.rightUnitor_square.{c, v, u, w} J R P hP
+
 /-- The unbounded derived category of modules on a small ringed site is closed symmetric
 monoidal, with its total-tensor constraints, Koszul symmetry and evaluation adjunction.
 
@@ -282,57 +350,8 @@ theorem ringedDerived_closed_symmetric_monoidal :
         ∃ β : @SymmetricCategory (DerivedCategory (RingedTensorModules.{c, v, u} J R))
           _ S.monoidal,
           Nonempty (RingedDerivedTensorCoherence.{c, v, u, w} J R S T β) := by
-  set_option backward.isDefEq.respectTransparency true in
-  set_option backward.isDefEq.respectTransparency.types true in
-    obtain ⟨⟨m, adj, ev⟩, hm, T, hT⟩ :=
-      RingedDerivedNative.closedAdjunction.{c, v, u, w} J R
-    dsimp only [CoefficientClosedStructure.monoidal] at hm
-    subst m
-    let S : CoefficientClosedStructure (derivedInternalHomOfUniverses.{c, v, u, w} J R) :=
-      ⟨RingedDerivedNative.monoidal.{c, v, u, w} J R, adj, ev⟩
-    let : MonoidalCategory (DerivedCategory (RingedTensorModules.{c, v, u} J R)) :=
-      RingedDerivedNative.monoidal.{c, v, u, w} J R
-    let : SymmetricCategory (DerivedCategory (RingedTensorModules.{c, v, u} J R)) :=
-      RingedDerivedNative.symmetric.{c, v, u, w} J R
-    let : (DerivedCategory.Q : CochainComplex (RingedTensorModules.{c, v, u} J R) ℤ ⥤
-        DerivedCategory (RingedTensorModules.{c, v, u} J R)).LaxMonoidal :=
-      RingedDerivedNative.lax.{c, v, u, w} J R
-    have ht : T.comparison = RingedDerivedNative.comparison.{c, v, u, w} J R :=
-      eq_of_heq hT
-    have htensor : ∀ P Q hP hQ,
-        T.iso J R S P Q hP hQ =
-          RingedDerivedNative.tensorIso.{c, v, u, w} J R P Q (Or.inl hP) := by
-      intro P Q hP hQ
-      unfold CoefficientTensorModels.iso
-      rw [ht]
-      exact RingedDerivedNative.comparison_app.{c, v, u, w} J R ⟨P, hP⟩ ⟨Q, hQ⟩
-    have hc := RingedDerivedNative.complexConstraints.{c, v, u} J R
-    refine ⟨S, T, RingedDerivedNative.symmetric.{c, v, u, w} J R, ⟨{
-      tensorIso := RingedDerivedNative.tensorIso.{c, v, u, w} J R
-      tensorIso_both := ?_
-      tensorIso_naturality := RingedDerivedNative.tensorIso_naturality.{c, v, u, w} J R
-      unitIso := RingedDerivedNative.unitIso.{c, v, u, w} J R
-      symmetry_model := ?_
-      associator_model := ?_
-      leftUnitor_model := ?_
-      rightUnitor_model := ?_ }⟩⟩
-    · intro P Q hP hQ
-      exact (htensor P Q hP hQ).symm
-    · intro P Q hP hQ
-      refine ⟨β_ P Q, hc.symmetry P Q, ?_⟩
-      rw [htensor P Q hP hQ, htensor Q P hQ hP]
-      exact RingedDerivedNative.symmetry_square.{c, v, u, w} J R P Q hP hQ
-    · intro P Q N hP hQ hN
-      refine ⟨MonoidalCategory.associator P Q N, hc.associator P Q N, ?_⟩
-      rw [htensor P Q hP hQ, htensor Q N hQ hN]
-      exact RingedDerivedNative.associator_square.{c, v, u, w} J R P Q N hP hQ hN
-    · intro P hP
-      refine ⟨MonoidalCategory.leftUnitor P, ?_, ?_⟩
-      · exact hc.leftUnitor P
-      · exact RingedDerivedNative.leftUnitor_square.{c, v, u, w} J R P hP
-    · intro P hP
-      refine ⟨MonoidalCategory.rightUnitor P, ?_, ?_⟩
-      · exact hc.rightUnitor P
-      · exact RingedDerivedNative.rightUnitor_square.{c, v, u, w} J R P hP
+  obtain ⟨S, _, T, β, hc, _, _⟩ :=
+    ringedDerived_closed_symmetric_monoidal_native.{c, v, u, w} J R
+  exact ⟨S, T, β, ⟨hc⟩⟩
 
 end CategoryTheory

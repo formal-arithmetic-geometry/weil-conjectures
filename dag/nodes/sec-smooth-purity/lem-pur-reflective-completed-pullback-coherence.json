@@ -1,0 +1,112 @@
+{
+ "id": "lem-pur-reflective-completed-pullback-coherence",
+ "kind": "statement",
+ "title": "Coherence of the normalized comparison between tensor-compatible reflections",
+ "statement": "Let B and E be symmetric monoidal categories, with reflective full subcategories P and P prime, reflectors T and T prime, and units eta and eta prime characterized by their Hom bijections. Assume their tensor insertion maps are invertible, and choose the completed monoidal constraint models specified in def-pur-completed-tensor-unit-insertion-data. Retain also their strong symmetric monoidal reflectors with cotensorator T(eta_X tensor eta_Y) and identity unit. Let L:B to E have an oplax monoidal structure whose tensor map is an isomorphism mu, whose unit map is an isomorphism e, and which commutes with the braidings. Assume T prime L eta_X is invertible for every X. Given a natural isomorphism mu_c from T prime L T(X tensor Y) to T prime(T prime LX tensor T prime LY) satisfying mu_c after T prime L eta = T prime of mu followed by eta prime tensor eta prime, and an isomorphism e_c satisfying its corresponding unit normalization, these comparisons form an oplax monoidal structure on the completed restriction of L, with exactly those components, and commute with the specified completed symmetries.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 099G, remark-completed-tensor-product; categorical construction and coherence expansion from proof steps 5--9 of lem-pur-completed-tensor-unit-insertion",
+  "note": "Agent-written categorical expansion of the completed pullback tensor coherence steps, with all reflection and normalization hypotheses explicit."
+ },
+ "stmt_deps": [
+  "def-pur-completed-tensor-unit-insertion-data"
+ ],
+ "proof": [
+  {
+   "text": "Proof: use the supplied strong symmetric monoidal reflectors R : B -> P and\nR' : E -> P', with their normalized cotensorators and units. The Hom bijections\nexhibit R as a localization at the arrows it inverts. The ordinary oplax structure,\nwhose comparison and unit are invertible, makes L strong symmetric monoidal.\nThus G = L followed by R' is strong symmetric monoidal. The hypothesis hPull\nmakes gamma_X = G(eta_X) invertible. Naturality of eta gives a natural isomorphism\ngamma : G -> R followed by F, where F is the displayed completed restriction.\nMonoidal localization supplies F with its strong monoidal structure and makes\ngamma monoidal.\n\nFor local V,W, let a_V : V -> R(V) be the invertible unit, and let\nc_(V,W) : V tensor W -> R(V tensor W) be the isomorphism of objects given by\nthe completed tensor model. The cotensorator of R on V,W equals inverse c_(V,W)\nfollowed by a_V tensor a_W. This follows from its specified cotensorator and the\nmodel's tensor-map equation. Naturality of F's cotensorator at a_V,a_W and\nmonoidality of gamma therefore give\n gamma_(V tensor W) ; F(inverse c_(V,W)) ; delta_F = delta_G.\nThe normalization hc gives the same equation for mu_c, transported across the\nmodel's two object equalities. Cancel the invertible prefix to identify delta_F\nwith that transported mu_c. The corresponding unit model and monoidality of\ngamma give the same argument for eta_F and e_c, using hec. Heterogeneous equality\nremoves precisely those object transports.\n\nFor braiding, first work on objects R(X),R(Y). Precompose the desired square by\ngamma_(X tensor Y) followed by F(delta_R). Monoidality of gamma, its naturality,\nthe ordinary braiding equation for G, and the braiding equation for R identify\nboth paths. Cancel the prefix. Every local V is isomorphic to R(V) via a_V;\nnaturality of the cotensorator and the braiding transports this square to V,W.\nThe oplax part of F's strong structure, with the identified maps, is the result.",
+   "uses": [
+    "lem-pur-reflective-completed-monoidal"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-reflective-completed-monoidal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "The normalized completed pullback: Mathlib monoidal localization, followed by explicit cotensorator, unit and braiding cancellation; the reflective adjunction is the proved helper of lem-pur-reflective-completed-monoidal."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A strong symmetric monoidal functor induces a strong symmetric monoidal functor on tensor-compatible reflective localizations",
+   "results": "CategoryTheory.Localization.Monoidal.functorCoreMonoidalOfComp; functorMonoidalOfComp",
+   "date": "2026-10-21",
+   "verdict": "Useful generic APIs or repository ingredients, but no theorem asserting this full normalized statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.Monoidal.functorCoreMonoidalOfComp",
+   "results": "functorCoreMonoidalOfComp and component formulas",
+   "date": "2026-10-21",
+   "verdict": "Useful generic APIs or repository ingredients, but no theorem asserting this full normalized statement."
+  },
+  {
+   "tool": "grep",
+   "query": "functorMonoidalOfComp|lifting_isMonoidal",
+   "results": "Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean",
+   "date": "2026-10-21",
+   "verdict": "Useful generic APIs or repository ingredients, but no theorem asserting this full normalized statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A symmetric monoidal functor descends between tensor compatible reflective subcategories, with the tensor and unit comparisons fixed by reflector units.",
+   "results": "CategoryTheory.cartesianClosedOfReflective (Mathlib.CategoryTheory.Monoidal.Closed.Ideal); CategoryTheory.symmetricCategoryOfFullyFaithful (Mathlib.CategoryTheory.Monoidal.Braided.Basic); CategoryTheory.Functor.Monoidal.ofLaxMonoidal (Mathlib.CategoryTheory.Monoidal.Functor); CategoryTheory.Monoidal.Reflective.monoidalClosed (Mathlib.CategoryTheory.Monoidal.Braided.Reflection); CategoryTheory.reflector (Mathlib.CategoryTheory.Adjunction.Reflective); CategoryTheory.Functor.CoreMonoidal (Mathlib.CategoryTheory.Monoidal.Functor); CategoryTheory.Reflective.noConfusion (Mathlib.CategoryTheory.Adjunction.Reflective); CategoryTheory.Monoidal.Reflective.instIsIsoMapTensorHomAppUnit (Mathlib.CategoryTheory.Monoidal.Braided.Reflection)",
+   "date": "2026-10-22",
+   "verdict": "no match: reflective closed structures, fully faithful transport, and monoidal functor structures are useful ingredients, but do not assert the prescribed completed tensor and unit comparison equations."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedTensorUnitInsertion",
+  "date": "2026-10-21",
+  "group": "E8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-completed-tensor-unit-insertion",
+   "place": "Proof steps 8--9",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ReflectiveCompletedPullbackCoherence",
+  "file": "lean/Sheaf/Paper/ReflectiveCompletedPullbackCoherence.lean",
+  "declaration": "CategoryTheory.ConstantCompletion.reflectiveCompletedPullbackCoherence",
+  "declarations": [
+   "CategoryTheory.ConstantCompletion.reflectiveCompletedPullbackCoherence"
+  ],
+  "statement": "theorem reflectiveCompletedPullbackCoherence (P : ObjectProperty B) (P' : ObjectProperty E) (L : B ⥤ E) (T : B ⥤ B) (T' : E ⥤ E) (η : 𝟭 B ⟶ T) (η' : 𝟭 E ⟶ T') (hT : ∀ X : B, P (T.obj X)) (hT' : ∀ X : E, P' (T'.obj X)) (hbij : ∀ (X Z : B), P Z → Function.Bijective (fun f : T.obj X ⟶ Z ↦ η.app X ≫ f)) (_hbij' : ∀ (X Z : E), P' Z → Function.Bijective (fun f : T'.obj X ⟶ Z ↦ η'.app X ≫ f)) (hη : ∀ X : P.FullSubcategory, IsIso (η.app X.obj)) (hη' : ∀ X : P'.FullSubcategory, IsIso (η'.app X.obj)) (hLeft : ∀ X W : B, IsIso (tensorInsertLeft T η X W)) (hRight : ∀ X W : B, IsIso (tensorInsertRight T η X W)) (hLeft' : ∀ X W : E, IsIso (tensorInsertLeft T' η' X W)) (hRight' : ∀ X W : E, IsIso (tensorInsertRight T' η' X W)) (hPull : ∀ X : B, IsIso (T'.map (L.map (η.app X)))) (μ : tensor B ⋙ L ≅ (L.prod L) ⋙ tensor E) (e : L.obj (𝟙_ B) ≅ 𝟙_ E) (o : L.OplaxMonoidal) (ho : ∀ X W : B, o.δ X W = μ.hom.app (X, W)) (he : o.η = e.hom) (hβ : ∀ X W : B, μ.hom.app (X, W) ≫ (β_ (L.obj X) (L.obj W)).hom = L.map (β_ X W).hom ≫ μ.hom.app (W, X)) (μc : tensor B ⋙ T ⋙ L ⋙ T' ≅ ((L ⋙ T').prod (L ⋙ T')) ⋙ tensor E ⋙ T') (hc : ∀ X W : B, T'.map (L.map (η.app (X ⊗ W))) ≫ μc.hom.app (X, W) = T'.map (μ.hom.app (X, W) ≫ (η'.app (L.obj X) ⊗ₘ η'.app (L.obj W)))) (ec : (L ⋙ T').obj (T.obj (𝟙_ B)) ≅ T'.obj (𝟙_ E)) (hec : T'.map (L.map (η.app (𝟙_ B))) ≫ ec.hom = T'.map e.hom) (m : MonoidalCategory P.FullSubcategory) (m' : MonoidalCategory P'.FullSubcategory) (s : @SymmetricCategory P.FullSubcategory _ m) (s' : @SymmetricCategory P'.FullSubcategory _ m') (hm : CompletedConstraintModel P T η hLeft hRight hη m s) (hm' : CompletedConstraintModel P' T' η' hLeft' hRight' hη' m' s') : letI := m letI := m' letI := s letI := s' ∀ (mr : (ObjectProperty.lift P T hT).Monoidal) (mr' : (ObjectProperty.lift P' T' hT').Monoidal), (letI := mr (∀ X Y : B, HEq (Functor.OplaxMonoidal.δ (ObjectProperty.lift P T hT) X Y).hom (T.map (η.app X ⊗ₘ η.app Y))) ∧ HEq (Functor.OplaxMonoidal.η (ObjectProperty.lift P T hT)).hom (𝟙 (T.obj (𝟙_ B))) ∧ (∀ X Y : B, Functor.OplaxMonoidal.δ (ObjectProperty.lift P T hT) X Y ≫ (β_ ((ObjectProperty.lift P T hT).obj X) ((ObjectProperty.lift P T hT).obj Y)).hom = (ObjectProperty.lift P T hT).map (β_ X Y).hom ≫ Functor.OplaxMonoidal.δ (ObjectProperty.lift P T hT) Y X)) → (letI := mr' (∀ X Y : E, HEq (Functor.OplaxMonoidal.δ (ObjectProperty.lift P' T' hT') X Y).hom (T'.map (η'.app X ⊗ₘ η'.app Y))) ∧ HEq (Functor.OplaxMonoidal.η (ObjectProperty.lift P' T' hT')).hom (𝟙 (T'.obj (𝟙_ E))) ∧ (∀ X Y : E, Functor.OplaxMonoidal.δ (ObjectProperty.lift P' T' hT') X Y ≫ (β_ ((ObjectProperty.lift P' T' hT').obj X) ((ObjectProperty.lift P' T' hT').obj Y)).hom = (ObjectProperty.lift P' T' hT').map (β_ X Y).hom ≫ Functor.OplaxMonoidal.δ (ObjectProperty.lift P' T' hT') Y X)) → CompletedPullbackCoherence P P' L T T' hT' μc ec m m' s s'",
+  "branch": "sheaf-dag",
+  "by": "E8",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-cf92c",
+  "group": "E8",
+  "result": "pass",
+  "landing": "20261022T025322-L-1275852",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-cf92c",
+  "group": "E8",
+  "result": "pass",
+  "landing": "20261022T025322-L-1275852",
+  "kind": "interface",
+  "note": "independent cc review: item theorem statement byte-identical; 11 moved decls verbatim (block diff vs live item, blueprint markers aside) in CompletedTensorUnitInsertionData; RingedDerivedClosedSymmetricMonoidal public signature unchanged (proof + private helper only); all 6 modules + axiom probe compiled in sandbox (exit 0); sorryAx only via upstream completedPullbackAdjunction / tensorLift_exists / ConstantCompletion.equivalence; item node changed only lean/proof/proof_deps/proof_origin"
+ }
+}

@@ -1,0 +1,120 @@
+{
+ "id": "def-pur-completed-tensor-unit-insertion-data",
+ "kind": "definition",
+ "title": "Data for normalized completed tensor constraints",
+ "statement": "Let B and E be symmetric monoidal categories, P and P prime object properties, T and T prime endofunctors with natural units eta and eta prime, and L:B→E. Define left insertion to be T(eta_X tensor 1_Y) and right insertion T(1_X tensor eta_Y). CompletedConstraintModel asserts tensor object T(X tensor Y), tensor map T(f tensor g), unit T(1), associator inverse left insertion followed by T(alpha) and right insertion, braiding T(beta), and both unitors inverse unit insertion followed by T of the original unitor and inverse eta on the local input. completeInverse is the restriction of L followed by T prime to the full local subcategories when T prime lands in P prime. CompletedPullbackCoherence asserts an oplax monoidal structure on that functor with the prescribed completed tensor and unit isomorphisms and symmetry square. CompletedTensorAssertions combines invertibility of the units on local objects and of all tensor/pullback insertions with the ordinary unit laws, completed comparison normalization and uniqueness, exact completed constraint models and completed functor coherence. For constant coefficient sites, use the actual completion reflector of lem-sp-completed-pullback-adjunction and the published native derived tensor structure of lem-sf-ringed-derived-closed-symmetric-monoidal. constantDerivedMonoidal, constantDerivedSymmetric and constantDerivedTensor name that native structure and bifunctor. ConstantTensorData is the canonical scalar-extension pure-tensor comparison. ConstantTensorNormalization is its flat-term K-flat cochain representative square using native tensorIso and the actual derived inverse-image comparison.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 099G, remark-completed-tensor-product; categorical construction and coherence expansion from proof steps 5--9 of lem-pur-completed-tensor-unit-insertion"
+ },
+ "stmt_deps": [
+  "lem-sp-completed-pullback-adjunction",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-sf-ringed-derived-native-tensor",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal"
+ ],
+ "proof": [
+  {
+   "text": "The definitions are copied verbatim from the original module. All data are explicit functors, maps and equations; there is no existence choice or postponed data field.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Extraction of independent categorical/cochain portions of the existing nine-step argument; no change to the target statement."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A tensor-compatible reflective localization of a symmetric monoidal category has a symmetric monoidal local subcategory",
+   "results": "CategoryTheory.Localization.Monoidal.instSymmetricCategoryLocalizedMonoidal; CategoryTheory.LocalizedMonoidal",
+   "date": "2026-10-21",
+   "verdict": "Useful generic APIs or repository ingredients, but no theorem asserting this full normalized statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.LocalizedMonoidal",
+   "results": "CategoryTheory.LocalizedMonoidal; CategoryTheory.Localization.Monoidal.tensorBifunctor",
+   "date": "2026-10-21",
+   "verdict": "Useful generic APIs or repository ingredients, but no theorem asserting this full normalized statement."
+  },
+  {
+   "tool": "grep",
+   "query": "reflective.*[Mm]onoidal|[Mm]onoidal.*reflective",
+   "results": "Mathlib/CategoryTheory/Monoidal/Braided/Reflection.lean: isIso_tfae and monoidalClosed; not the normalized constraint model",
+   "date": "2026-10-21",
+   "verdict": "Useful generic APIs or repository ingredients, but no theorem asserting this full normalized statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normalized tensor constraints on the full subcategory of complete objects, obtained by inserting the unit of a reflective localization.",
+   "results": "CategoryTheory.FreeMonoidalCategory.normalizeObj_unitor (Mathlib.CategoryTheory.Monoidal.Free.Coherence); CategoryTheory.Adjunction.Localization.η (Mathlib.CategoryTheory.Localization.Adjunction); CategoryTheory.Localization.Monoidal.instIsLocalizationLocalizedMonoidalToMonoidalCategory_1 (Mathlib.CategoryTheory.Localization.Monoidal.Braided); CategoryTheory.CartesianMonoidalCategory.fullSubcategory_tensorUnit_obj (Mathlib.CategoryTheory.Monoidal.Cartesian.Basic); CategoryTheory.Localization.Monoidal.rightUnitor (Mathlib.CategoryTheory.Localization.Monoidal.Basic); CategoryTheory.Localization.Monoidal.leftUnitor (Mathlib.CategoryTheory.Localization.Monoidal.Basic); CategoryTheory.Localization.Monoidal.instIsLocalizationLocalizedMonoidalToMonoidalCategory (Mathlib.CategoryTheory.Localization.Monoidal.Basic); CategoryTheory.Localization.Monoidal.toMonoidalCategory (Mathlib.CategoryTheory.Localization.Monoidal.Basic)",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern free or Cartesian tensor constraints and generic monoidal localization; they do not package the eleven unchanged completed-tensor definitions."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedTensorUnitInsertion",
+  "date": "2026-10-21",
+  "group": "E8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-completed-tensor-unit-insertion",
+   "place": "Existing Lean interface, unchanged",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedTensorUnitInsertionData",
+  "file": "lean/Sheaf/Paper/CompletedTensorUnitInsertionData.lean",
+  "declaration": "CategoryTheory.ConstantCompletion.tensorInsertLeft",
+  "declarations": [
+   "CategoryTheory.ConstantCompletion.tensorInsertLeft",
+   "CategoryTheory.ConstantCompletion.tensorInsertRight",
+   "CategoryTheory.ConstantCompletion.CompletedConstraintModel",
+   "CategoryTheory.ConstantCompletion.completeInverse",
+   "CategoryTheory.ConstantCompletion.CompletedPullbackCoherence",
+   "CategoryTheory.ConstantCompletion.CompletedTensorAssertions",
+   "CategoryTheory.ConstantCompletion.constantDerivedMonoidal",
+   "CategoryTheory.ConstantCompletion.constantDerivedSymmetric",
+   "CategoryTheory.ConstantCompletion.constantDerivedTensor",
+   "CategoryTheory.ConstantCompletion.ConstantTensorData",
+   "CategoryTheory.ConstantCompletion.ConstantTensorNormalization"
+  ],
+  "statement": "def tensorInsertLeft (T : B ⥤ B) (η : 𝟭 B ⟶ T) (V W : B)",
+  "branch": "sheaf-dag",
+  "by": "E8",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-cf92c",
+  "group": "E8",
+  "result": "pass",
+  "landing": "20261022T025322-L-1275852",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-cf92c",
+  "group": "E8",
+  "result": "pass",
+  "landing": "20261022T025322-L-1275852",
+  "kind": "interface",
+  "note": "independent cc review: item theorem statement byte-identical; 11 moved decls verbatim (block diff vs live item, blueprint markers aside) in CompletedTensorUnitInsertionData; RingedDerivedClosedSymmetricMonoidal public signature unchanged (proof + private helper only); all 6 modules + axiom probe compiled in sandbox (exit 0); sorryAx only via upstream completedPullbackAdjunction / tensorLift_exists / ConstantCompletion.equivalence; item node changed only lean/proof/proof_deps/proof_origin"
+ }
+}

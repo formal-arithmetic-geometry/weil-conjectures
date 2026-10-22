@@ -1,0 +1,112 @@
+{
+ "id": "lem-pur-reflective-completed-monoidal",
+ "kind": "statement",
+ "title": "Normalized symmetric monoidal structure on a tensor-compatible reflective subcategory",
+ "statement": "Let B be a symmetric monoidal category, P an object property, T an endofunctor with natural unit eta, with P(TX) for every X. Suppose precomposition by eta_X gives a bijection Hom(TX,Z) to Hom(X,Z) for each P-local Z, eta is invertible on P-local objects, and T(eta_X tensor 1_W) and T(1_X tensor eta_W) are invertible for all X,W. Then the full P-subcategory admits a symmetric monoidal structure with tensor object T(X tensor Y), tensor morphism T(f tensor g), unit T(1), associator inverse left insertion followed by T(alpha) and right insertion, braiding T(beta), and both unitors inverse unit insertion followed by T of the original unitor and inverse eta on the complete input, exactly as in def-pur-completed-tensor-unit-insertion-data. The reflector is retained as a strong symmetric monoidal functor with cotensorator T(eta_X tensor eta_Y), identity unit, and the braiding equation for these same data.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 099G, remark-completed-tensor-product; categorical construction and coherence expansion from proof steps 5--9 of lem-pur-completed-tensor-unit-insertion",
+  "note": "The source remarks that the derived-complete category is symmetric monoidal; the exact normalized categorical formulation and expanded coherence proof are agent-written."
+ },
+ "stmt_deps": [
+  "def-pur-completed-tensor-unit-insertion-data"
+ ],
+ "proof": [
+  {
+   "text": "Proof: lift tensor to the full subcategory by applying T, and take T(1) as unit.\nThe associator is inverse left insertion, T of the original associator, then right\ninsertion. The braiding is T of the original braiding. Each unitor is inverse\ninsertion of the unit followed by T of its original unitor and inverse eta on the\nlocal input. Reflection makes T eta invertible. Naturality of eta identifies both\nways of inserting completion into any parenthesized tensor expression. Tensoring\npreserves arrows inverted by T: conjugate with the two insertion isomorphisms and\nuse naturality. Therefore every iterated insertion is invertible. Precompose the\npentagon, triangle and hexagons with their common iterated insertion; they become T\nof the original diagrams. Cancel those isomorphisms. Involutivity follows from T\npreserving composition and the original symmetry equation. This also proves the\nlisted formulas, since they were the chosen constraints. Lean implementation: form the monoidal localization at morphisms inverted by the reflector (Mathlib Localization.Monoidal), then transport its tensor along the adjunction counit using the proved Retensor helper of lem-sfb-braided-sheaf-tensor-generators. The oplax localization identities reduce the transported constraints to the specified formulas. Retain the composite of the monoidal localization and the inverse Retensor equivalence. Naturality of the old cotensorator and the adjunction triangle give its cotensorator T(eta_X tensor eta_Y); the transported unit is identity and its braiding equation follows by composition.",
+   "uses": [
+    "lem-sfb-braided-sheaf-tensor-generators"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-braided-sheaf-tensor-generators"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Extraction of independent categorical/cochain portions of the existing nine-step argument; no change to the target statement."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A tensor-compatible reflective localization of a symmetric monoidal category has a symmetric monoidal local subcategory",
+   "results": "CategoryTheory.Localization.Monoidal.instSymmetricCategoryLocalizedMonoidal; CategoryTheory.LocalizedMonoidal",
+   "date": "2026-10-21",
+   "verdict": "Useful generic APIs or repository ingredients, but no theorem asserting this full normalized statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.LocalizedMonoidal",
+   "results": "CategoryTheory.LocalizedMonoidal; CategoryTheory.Localization.Monoidal.tensorBifunctor",
+   "date": "2026-10-21",
+   "verdict": "Useful generic APIs or repository ingredients, but no theorem asserting this full normalized statement."
+  },
+  {
+   "tool": "grep",
+   "query": "reflective.*[Mm]onoidal|[Mm]onoidal.*reflective",
+   "results": "Mathlib/CategoryTheory/Monoidal/Braided/Reflection.lean: isIso_tfae and monoidalClosed; not the normalized constraint model",
+   "date": "2026-10-21",
+   "verdict": "Useful generic APIs or repository ingredients, but no theorem asserting this full normalized statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A tensor compatible reflective localization of a symmetric monoidal category induces a symmetric monoidal structure on its full reflective subcategory.",
+   "results": "CategoryTheory.Localization.Monoidal.instSymmetricCategoryLocalizedMonoidal (Mathlib.CategoryTheory.Localization.Monoidal.Braided); CategoryTheory.ObjectProperty.instMonoidalCategoryStructFullSubcategory (Mathlib.CategoryTheory.Monoidal.Subcategory); CategoryTheory.Localization.Monoidal.instIsLocalizationLocalizedMonoidalToMonoidalCategory_1 (Mathlib.CategoryTheory.Localization.Monoidal.Braided); CategoryTheory.instMonoidalLocalizedMonoidalToMonoidalCategory (Mathlib.CategoryTheory.Localization.Monoidal.Basic); CategoryTheory.Localization.Monoidal.instIsLocalizationLocalizedMonoidalToMonoidalCategory (Mathlib.CategoryTheory.Localization.Monoidal.Basic); CategoryTheory.Localization.Monoidal.instMonoidalCategoryLocalizedMonoidal (Mathlib.CategoryTheory.Localization.Monoidal.Basic); CategoryTheory.symmetricCategoryOfFullyFaithful (Mathlib.CategoryTheory.Monoidal.Braided.Basic); CategoryTheory.Localization.Monoidal.monoidalCategoryStruct (Mathlib.CategoryTheory.Localization.Monoidal.Basic)",
+   "date": "2026-10-22",
+   "verdict": "no match: the generic localized monoidal and symmetric structures are used by the proof, which additionally establishes the exact insertion-normalized constraint formulas and reflector maps."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedTensorUnitInsertion",
+  "date": "2026-10-21",
+  "group": "E8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-completed-tensor-unit-insertion",
+   "place": "Proof steps 5--6",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ReflectiveCompletedMonoidal",
+  "file": "lean/Sheaf/Paper/ReflectiveCompletedMonoidal.lean",
+  "declaration": "CategoryTheory.ConstantCompletion.reflectiveCompletedMonoidal",
+  "declarations": [
+   "CategoryTheory.ConstantCompletion.reflectiveCompletedMonoidal"
+  ],
+  "statement": "theorem reflectiveCompletedMonoidal (P : ObjectProperty B) (T : B ⥤ B) (η : 𝟭 B ⟶ T) (hT : ∀ X : B, P (T.obj X)) (hbij : ∀ (X Z : B), P Z → Function.Bijective (fun f : T.obj X ⟶ Z ↦ η.app X ≫ f)) (hη : ∀ X : P.FullSubcategory, IsIso (η.app X.obj)) (hLeft : ∀ X W : B, IsIso (tensorInsertLeft T η X W)) (hRight : ∀ X W : B, IsIso (tensorInsertRight T η X W)) : ∃ (m : MonoidalCategory P.FullSubcategory) (s : @SymmetricCategory P.FullSubcategory _ m), CompletedConstraintModel P T η hLeft hRight hη m s ∧ (letI := m letI := s ∃ mr : (ObjectProperty.lift P T hT).Monoidal, letI := mr (∀ X Y : B, HEq (Functor.OplaxMonoidal.δ (ObjectProperty.lift P T hT) X Y).hom (T.map (η.app X ⊗ₘ η.app Y))) ∧ HEq (Functor.OplaxMonoidal.η (ObjectProperty.lift P T hT)).hom (𝟙 (T.obj (𝟙_ B))) ∧ (∀ X Y : B, Functor.OplaxMonoidal.δ (ObjectProperty.lift P T hT) X Y ≫ (β_ ((ObjectProperty.lift P T hT).obj X) ((ObjectProperty.lift P T hT).obj Y)).hom = (ObjectProperty.lift P T hT).map (β_ X Y).hom ≫ Functor.OplaxMonoidal.δ (ObjectProperty.lift P T hT) Y X))",
+  "branch": "sheaf-dag",
+  "by": "E8",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-cf92c",
+  "group": "E8",
+  "result": "pass",
+  "landing": "20261022T025322-L-1275852",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-cf92c",
+  "group": "E8",
+  "result": "pass",
+  "landing": "20261022T025322-L-1275852",
+  "kind": "interface",
+  "note": "independent cc review: item theorem statement byte-identical; 11 moved decls verbatim (block diff vs live item, blueprint markers aside) in CompletedTensorUnitInsertionData; RingedDerivedClosedSymmetricMonoidal public signature unchanged (proof + private helper only); all 6 modules + axiom probe compiled in sandbox (exit 0); sorryAx only via upstream completedPullbackAdjunction / tensorLift_exists / ConstantCompletion.equivalence; item node changed only lean/proof/proof_deps/proof_origin"
+ }
+}

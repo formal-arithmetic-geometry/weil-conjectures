@@ -19,119 +19,81 @@
  ],
  "proof": [
   {
-   "text": "Suppress inclusions of the full complete subcategories, and write $H(W,Z)=R\\mathcal Hom(W,Z)$ and $\\otimes=\\otimes_A^L$. The category $D_T$ is closed symmetric monoidal by [lem-sf-ringed-derived-closed-symmetric-monoidal]. For complete $Z$, [lem-sf-ringed-rhom-derived-complete] makes $H(W,Z)$ complete for arbitrary $W$. Reflectivity from [lem-sp-completed-pullback-adjunction] and the natural tensor–Hom bijection give\n$$\\operatorname{Hom}(C_T(C_TV\\otimes W),Z)\\cong\\operatorname{Hom}(C_TV,H(W,Z))\\xrightarrow{\\ -\\circ\\eta_V\\ }\\operatorname{Hom}(V,H(W,Z))\\cong\\operatorname{Hom}(C_T(V\\otimes W),Z).$$\nEvery arrow is a bijection, and naturality identifies this composite with precomposition by $C_T(\\eta_V\\otimes1_W)$. Thus that arrow is invertible: for an arrow $f:B\\to B'$ between complete objects, bijectivity of precomposition for $Z=B$ gives $t:B'\\to B$ with $tf=1$; injectivity for $Z=B'$ then gives $ft=1$.",
+   "text": "Use the unchanged tensor insertion and completed constraint interfaces, now reexported from the shared data module. For each complete Z, use the native tensorRight/RHom adjunction and internal-Hom completeness. Under these Hom bijections, precomposition by eta_X tensor 1 becomes precomposition by eta_X into a complete RHom. Reflection makes this bijective. Conjugate through reflection at the two tensor objects and test on source and target to construct the inverse of T(eta_X tensor 1).",
    "uses": [
+    "def-pur-completed-tensor-unit-insertion-data",
     "lem-sp-completed-pullback-adjunction",
-    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-sf-ringed-derived-tensor-hom-adjunction",
     "lem-sf-ringed-rhom-derived-complete"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebraization.tex",
-    "place": "Tags 099A (lemma-derived-complete-internal-hom) and 099G (remark-completed-tensor-product); explicit Hom argument for the unit insertion."
-   }
+   "elementary": false
   },
   {
-   "text": "The same Hom calculation shows that if $C_Tg$ is invertible, then $C_T(g\\otimes1_W)$ is invertible: replace $\\eta_V$ by $g$, and use $\\operatorname{Hom}(g,H(W,Z))\\cong\\operatorname{Hom}(C_Tg,H(W,Z))$. Symmetry from [lem-sf-ringed-derived-closed-symmetric-monoidal] gives the corresponding assertion for $C_T(1_W\\otimes g)$. Apply this to $g=\\eta_V$ or $\\eta_W$ to obtain the other stated tensor insertion. Here $C_T\\eta$ is invertible because reflection into a full subcategory is idempotent, directly by the unit-precomposition bijection of [lem-sp-completed-pullback-adjunction]. The insertions are natural by naturality of $\\eta$ and bifunctoriality of tensor. Their composites include the natural isomorphism $m_{V,W}=C_T(\\eta_V\\otimes\\eta_W)$.",
-   "uses": [
-    "lem-sp-completed-pullback-adjunction",
-    "lem-sf-ringed-derived-closed-symmetric-monoidal"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebraization.tex",
-    "place": "Tag 099G (remark-completed-tensor-product), formal consequences of the preceding Hom calculation."
-   }
+   "text": "Conjugate left insertion by the ordinary symmetric braiding to obtain right insertion. Apply the same argument on both sites. Compose left and right insertion to invert T(eta_X tensor eta_Y).",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "Put $L=u^*$ and $F=C_{\\mathcal X}L$. For complete $Z\\in D_{\\mathcal X}$, [lem-sp-completed-pullback-adjunction] says that $PZ$ is complete and supplies the ordinary derived and completion adjunctions. Hence\n$$\\operatorname{Hom}(F C_{\\mathcal Y}V,Z)\\cong\\operatorname{Hom}(C_{\\mathcal Y}V,PZ)\\xrightarrow{\\ -\\circ\\eta_V\\ }\\operatorname{Hom}(V,PZ)\\cong\\operatorname{Hom}(FV,Z).$$\nNaturality identifies the composite with precomposition by $a_V=F(\\eta_{\\mathcal Y,V})$, so the inverse argument of step 1 proves that $a_V$ is an isomorphism. More generally $F$ inverts every arrow $g$ inverted by $C_{\\mathcal Y}$: in this display replace $\\eta_V$ by $g$ and use the reflection bijection for the complete object $PZ$. All these conclusions are natural in $V$.",
+   "text": "Use the derived pullback/direct-image adjunction and preservation of complete objects by direct image. Precomposition by L(eta_X), followed by reflection on the target, becomes the reflection bijection into the complete direct image. The same source-and-target Hom test gives invertibility of target-completed L(eta_X).",
    "uses": [
     "lem-sp-completed-pullback-adjunction"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tags 099M (lemma-naive-completion) and 099N (lemma-pushforward-Noetherian-case), clauses (1),(2); formal Hom argument, without interchanging pullback and limits."
-   }
+   "elementary": false
   },
   {
-   "text": "The ordinary comparison $\\mu$ in the statement respects associators, signed symmetry and the tensor unit. To verify precisely this normalization, use [lem-weil-pbc-pullback-tensor-canonical-shift-unit]: on flat-term K-flat representatives its displayed formula identifies $\\mu$ with the localized cochain comparison $c_{u;P,Q}$. By [lem-pur-cochain-pullback-tensor-coherence], that cochain comparison respects triple reassociation, signed symmetry and both action unitors. [lem-weil-pbc-site-derived-tensor-descent] identifies every derived object with such a representative; therefore the equalities for each pair or triple of representatives give the equalities for arbitrary derived inputs, by naturality and conjugation with their representative isomorphisms. The ordinary constraints being compared are those of [lem-sf-ringed-derived-closed-symmetric-monoidal]. Thus this is coherence for the specified ordinary $\\mu$, rather than for an unspecified choice of tensor comparison.",
+   "text": "Apply the separate native pullback comparison lemma. It descends the actual complex-level left-derived counit to the homotopy category, uses the published native closed tensor models and the canonical derived comparison on flat-term K-flat representatives, and obtains the ordinary symmetric monoidal structure with exactly ConstantTensorNormalization. Its oplax unit laws give the required two ordinary action-unit equations.",
    "uses": [
-    "lem-weil-pbc-pullback-tensor-canonical-shift-unit",
-    "lem-pur-cochain-pullback-tensor-coherence",
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+    "lem-pur-constant-native-pullback-monoidal"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 07A4 (lemma-pullback-tensor-product) and 0FPT (lemma-symmetric-monoidal-derived); normalized cochain equations supplied by the cited nodes."
-   }
+   "elementary": false
   },
   {
-   "text": "Here are the completed constraints used in the conclusion. For complete $V,W,Z$, let $J_T=C_T\\mathbf1_T$ and put\n$$A=C_T(\\eta_{V\\otimes W}\\otimes1_Z),\\quad B=C_T(1_V\\otimes\\eta_{W\\otimes Z}),\\quad \\alpha^c_{V,W,Z}=B\\,C_T(\\alpha_{V,W,Z})\\,A^{-1},\\quad\\sigma^c_{V,W}=C_T(\\sigma_{V,W}).$$\nDefine the left unitor by\n$$\\lambda^c_V=\\eta_V^{-1}C_T(\\lambda_V)\\,C_T(\\eta_{\\mathbf1_T}\\otimes1_V)^{-1}:C_T(J_T\\otimes V)\\longrightarrow V,$$\nand the right unitor by $\\rho^c_V=\\eta_V^{-1}C_T(\\rho_V)C_T(1_V\\otimes\\eta_{\\mathbf1_T})^{-1}$. All inverses exist by steps 1–2 and completeness of $V$. These are natural isomorphisms by functoriality and the naturality of the ordinary constraints of [lem-sf-ringed-derived-closed-symmetric-monoidal].",
+   "text": "Apply the tensor-compatible reflective-subcategory theorem on each site with the actual reflection bijections and insertion isomorphisms proved above. This gives the full complete subcategories their prescribed tensor objects, tensor maps, completed units and all four constraint formulas. Retain the same strong monoidal reflectors and their normalized comparison formulas for the completed functor factorization.",
    "uses": [
-    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+    "lem-pur-reflective-completed-monoidal"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebraization.tex",
-    "place": "Tag 099G (remark-completed-tensor-product); explicit constraints on its completed tensor, with unit the completion of the ordinary unit."
-   }
+   "elementary": false
   },
   {
-   "text": "Check the coherence of these constraints by the following explicit cancellation. For any fixed parenthesized tensor expression, insert $\\eta$ at each internal tensor vertex and apply the outside $C_T$; the resulting map from the completion of the ordinary expression to the iterated completed expression is invertible, since each insertion is inverted by $C_T$ even after tensoring, by step 2. Naturality of $\\eta$ and the formula for $\\alpha^c$ in step 5 say that, across each reassociation edge, the composite is exactly $C_T$ of the ordinary reassociation followed by the insertion map for the new expression. Therefore both pentagon paths, precomposed with the same insertion isomorphism from the fourfold ordinary tensor, are $C_T$ of the ordinary pentagon paths followed by the same final insertion. They agree by [lem-sf-ringed-derived-closed-symmetric-monoidal]; cancel the isomorphism. For the triangle use the ordinary threefold expression with middle factor $\\mathbf1_T$, inserting $\\eta_{\\mathbf1_T}$ as well; the two paths reduce to its ordinary triangle. For the symmetry involution and hexagon the identical cancellation uses the twofold and threefold expressions respectively and the ordinary involution and hexagon. Thus all completed constraints satisfy their equations.",
+   "text": "The same reflective-subcategory theorem supplies the pentagon, triangle, symmetric involution and hexagons for those formulas. These are separate categorical coherence checks; no extra perfectness assumption on the quotients is used.",
    "uses": [
-    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+    "lem-pur-reflective-completed-monoidal"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebraization.tex",
-    "place": "Tag 099G (remark-completed-tensor-product), explicit formal cancellation using the ordinary coherence equations of sites-cohomology Tag 0FPT."
-   }
+   "elementary": false
   },
   {
-   "text": "Write $\\kappa_V=\\eta_{\\mathcal X,LV}:LV\\to FV$. For arbitrary $V,W$ define\n$$b_{V,W}=C_{\\mathcal X}(\\kappa_V\\otimes\\kappa_W)\\,C_{\\mathcal X}(\\mu_{V,W}),\\qquad \\mu^c_{V,W}=b_{V,W}\\,a_{V\\otimes W}^{-1}.$$\nThe maps $a$ are invertible by step 3; $b$ is invertible by the ordinary comparison in [lem-weil-pbc-pullback-tensor-canonical-shift-unit] and the two tensor insertions in steps 1–2. This gives exactly the displayed source and target in the statement. Naturality follows from that of $a,b$ and their inverses. The required equation is $\\mu^c a=b$, by cancellation; conversely this equation forces $\\mu^c=ba^{-1}$. It therefore gives uniqueness of the specified natural comparison, including when restricted to complete inputs.",
-   "uses": [
-    "lem-weil-pbc-pullback-tensor-canonical-shift-unit"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebraization.tex",
-    "place": "Tag 099G (remark-completed-tensor-product); formal definition and uniqueness from the insertion isomorphisms."
-   }
-  },
-  {
-   "text": "We verify the associativity equation for $F$ on complete inputs $V,W,Z$. Precompose its left-associated source $F(C_{\\mathcal Y}(C_{\\mathcal Y}(V\\otimes W)\\otimes Z))$ with\n$$F((V\\otimes W)\\otimes Z)\\xrightarrow{F(\\eta_{V\\otimes W}\\otimes1)}F(C_{\\mathcal Y}(V\\otimes W)\\otimes Z)\\xrightarrow{a_{C_{\\mathcal Y}(V\\otimes W)\\otimes Z}}F(C_{\\mathcal Y}(C_{\\mathcal Y}(V\\otimes W)\\otimes Z)).$$\nBoth arrows are invertible: use steps 2–3 for the first and step 3 for the second. Expand each $\\mu^c a=b$ and $\\alpha^c=B C(\\alpha)A^{-1}$. Cancel consecutive insertion maps and their inverses; move the remaining ones past each other using naturality of $\\eta$. The left path becomes $C_{\\mathcal X}$ of\n$$(\\kappa_V\\otimes(\\kappa_W\\otimes\\kappa_Z))\\,\\alpha_{LV,LW,LZ}\\,(\\mu_{V,W}\\otimes1)\\,\\mu_{V\\otimes W,Z},$$\nand the right path becomes $C_{\\mathcal X}$ of\n$$(\\kappa_V\\otimes(\\kappa_W\\otimes\\kappa_Z))\\,(1\\otimes\\mu_{W,Z})\\,\\mu_{V,W\\otimes Z}\\,L(\\alpha_{V,W,Z}),$$\neach followed by the same insertion into the final iterated completed tensor. They agree by step 4. Cancel the source isomorphism to obtain the completed associativity equation.",
+   "text": "Let a be the natural transformation target-completed L(eta) and b the ordinary comparison followed by target completion of the two target units. Naturality gives both transformations. All components of a and b are isomorphisms by steps 2 and 3. Define mu_c as a inverse followed by b. Cancel a to prove both normalization and uniqueness. Define e_c similarly from a at the ordinary unit and target completion of e.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebraization.tex",
-    "place": "Tag 099G (remark-completed-tensor-product); explicit associativity cancellation for the normalized comparison."
-   }
+   "elementary": true
   },
   {
-   "text": "For symmetry, precompose the comparison equation with $a_{V\\otimes W}$. By naturality $F C_{\\mathcal Y}(\\sigma)\\,a_{V\\otimes W}=a_{W\\otimes V}\\,F(\\sigma)$. Substitute $\\mu^c a=b$ on both sides. The two resulting arrows are\n$$C_{\\mathcal X}((\\kappa_W\\otimes\\kappa_V)\\,\\sigma_{LV,LW}\\,\\mu_{V,W}),\\qquad C_{\\mathcal X}((\\kappa_W\\otimes\\kappa_V)\\,\\mu_{W,V}\\,L(\\sigma_{V,W})).$$\nThey agree by step 4, so cancel $a_{V\\otimes W}$. For the unit let $e:L\\mathbf1_{\\mathcal Y}\\cong\\mathbf1_{\\mathcal X}$ be the ordinary unit comparison and define\n$$e^c=C_{\\mathcal X}(e)\\,a_{\\mathbf1_{\\mathcal Y}}^{-1}:FJ_{\\mathcal Y}\\longrightarrow J_{\\mathcal X}.$$\nIt is invertible. To check the left unit equation precompose its source $F(C_{\\mathcal Y}(J_{\\mathcal Y}\\otimes V))$ with the isomorphism $a_{J_{\\mathcal Y}\\otimes V}F(\\eta_{\\mathbf1_{\\mathcal Y}}\\otimes1_V)$ from $F(\\mathbf1_{\\mathcal Y}\\otimes V)$. Substitute step 5 and $\\mu^c a=b$; naturality of $\\eta$ cancels its insertions, leaving $C_{\\mathcal X}(\\kappa_V\\,\\lambda_{LV}(e\\otimes1)\\mu_{\\mathbf1,V})=C_{\\mathcal X}(\\kappa_V L\\lambda_V)$. Both sides have the same final identification $\\eta_{FV}^{-1}:C_{\\mathcal X}(FV)\\to FV$. This is the ordinary unit equation of step 4. The right unit equation uses $F(1_V\\otimes\\eta_{\\mathbf1})$ and the ordinary right unitor in exactly the same substitution, leaving $C_{\\mathcal X}(\\kappa_V\\,\\rho_{LV}(1\\otimes e)\\mu_{V,\\mathbf1})=C_{\\mathcal X}(\\kappa_V L\\rho_V)$. Apply the same final identification $\\eta_{FV}^{-1}$ and cancel the respective source isomorphisms. No step used perfectness of $A/I^n$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebraization.tex",
-    "place": "Tag 099G (remark-completed-tensor-product); explicit symmetry and both unit cancellations."
-   }
+   "text": "Apply the normalized completed-pullback coherence theorem to the two reflection data, ordinary symmetric monoidal comparison, the normalized mu_c and e_c, and both exact completed constraint models. It supplies oplax monoidal coherence for completeInverse. Supply the strong reflector structures and formulas retained in step 5; all parts of this categorical coherence theorem are proved in this packet.",
+   "uses": [
+    "lem-pur-reflective-completed-pullback-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The same coherence theorem identifies the cotensorator and unit with the separately constructed normalized comparisons and supplies the completed symmetry square. Combine these with all insertion isomorphisms, ordinary unit laws, normalization and uniqueness.",
+   "uses": [
+    "lem-pur-reflective-completed-pullback-coherence"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
+  "def-pur-completed-tensor-unit-insertion-data",
   "lem-sp-completed-pullback-adjunction",
-  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-sf-ringed-derived-tensor-hom-adjunction",
   "lem-sf-ringed-rhom-derived-complete",
-  "lem-weil-pbc-pullback-tensor-canonical-shift-unit",
-  "lem-pur-cochain-pullback-tensor-coherence",
-  "lem-weil-pbc-site-derived-tensor-descent"
+  "lem-pur-constant-native-pullback-monoidal",
+  "lem-pur-reflective-completed-monoidal",
+  "lem-pur-reflective-completed-pullback-coherence"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/algebraization.tex",
-  "place": "Tags 099A and 099G; formal Hom-bijection and unit-cancellation expansion, also using proetale Tags 099M/099N and the normalized ordinary derived tensor comparisons in sites-cohomology Tag 07A4."
+  "place": "E8: explicit Hom-bijection proofs of all three insertions; explicit normalized completed comparison and uniqueness; native ordinary monoidal comparison and the independent reflection/coherence theorems realize the remaining portions of the existing route."
  },
  "mathlib_searches": [
   {
@@ -254,17 +216,6 @@
   "module": "Sheaf.Paper.CompletedTensorUnitInsertion",
   "declaration": "CategoryTheory.ConstantCompletion.completedTensorUnitInsertion",
   "declarations": [
-   "CategoryTheory.ConstantCompletion.tensorInsertLeft",
-   "CategoryTheory.ConstantCompletion.tensorInsertRight",
-   "CategoryTheory.ConstantCompletion.CompletedConstraintModel",
-   "CategoryTheory.ConstantCompletion.completeInverse",
-   "CategoryTheory.ConstantCompletion.CompletedPullbackCoherence",
-   "CategoryTheory.ConstantCompletion.CompletedTensorAssertions",
-   "CategoryTheory.ConstantCompletion.constantDerivedMonoidal",
-   "CategoryTheory.ConstantCompletion.constantDerivedSymmetric",
-   "CategoryTheory.ConstantCompletion.constantDerivedTensor",
-   "CategoryTheory.ConstantCompletion.ConstantTensorData",
-   "CategoryTheory.ConstantCompletion.ConstantTensorNormalization",
    "CategoryTheory.ConstantCompletion.completedTensorUnitInsertion"
   ],
   "file": "lean/Sheaf/Paper/CompletedTensorUnitInsertion.lean",
@@ -281,5 +232,15 @@
   "group": "O2",
   "result": "pass",
   "note": "One Lean file plus the item lean record (only the lean field changed vs live); statement verbatim; 12 declarations match the file; only the theorem is sorry, no hollow defs; imports follow stage-2 rule 7; docstrings carry the source tags, blueprint id and all 9 proof steps. Setting is the completedPullbackAdjunction interface verbatim, no extra hypothesis, no perfectness. Ordinary mu is an existential fixed uniquely by a flat K-flat representative equation with the canonical comparison k.total (directions checked); derived tensor is RingedDerivedNative, the structure ringedDerived_closed_symmetric_monoidal uses. Tensor insertions on both sites and the pullback insertion asserted for arbitrary inputs; mu^c has the node's type, normalization and a separate uniqueness clause; unit comparisons e and e^c fixed uniquely; completed constraints match proof step 5; associativity and unit laws via OplaxMonoidal with delta = mu^c and eta = e^c, plus the symmetry square. Edge cases I=0, I=A, nilpotent I, A=0, u=id allowed; universes as the dependency. Advisories: CanonicalRingedTensorComparison and RingedDerivedNative come from nodes outside stmt_deps; the named RingedTensorEdge.tensorComparison is characterized by the same representative equation. No file changed, so no compile (worker reports clean compiles in 12.9 s and 13.9 s)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-cf92c",
+  "group": "E8",
+  "result": "pass",
+  "landing": "20261022T025322-L-1275852",
+  "kind": "interface",
+  "note": "independent cc review: item theorem statement byte-identical; 11 moved decls verbatim (block diff vs live item, blueprint markers aside) in CompletedTensorUnitInsertionData; RingedDerivedClosedSymmetricMonoidal public signature unchanged (proof + private helper only); all 6 modules + axiom probe compiled in sandbox (exit 0); sorryAx only via upstream completedPullbackAdjunction / tensorLift_exists / ConstantCompletion.equivalence; item node changed only lean/proof/proof_deps/proof_origin"
  }
 }
