@@ -24149,3 +24149,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:15 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
 - 01:16 L: returned deliver/A2/Sheaf.SecSmoothPurity.ScalarExtensionFunctor (reviewer RETURN: (the landing tools, head d35f796b7) the delivery did not land: lean/Sheaf/SecSmoothPurity/ScalarExtensionFunctor.lean: <)
 - 01:16 L: returned deliver/K1/Sheaf.AlgebraicGeometry.ProjectiveLineAbelianOriginalStalkTotalExchange (reviewer RETURN: (the landing tools, head 906f323c5) the delivery did not land: lean/Sheaf/AlgebraicGeometry/ProjectiveLineOriginalStalkT)
+- 01:17 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
