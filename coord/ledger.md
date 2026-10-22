@@ -24440,3 +24440,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:20 L: returned deliver/NJ/lem-sfb-ramified-cartier-supported-purity (reviewer RETURN: I read the item and all 7 steps; there are no new nodes. The item is live (not in route-pivot-dropped.txt) and has no re)
 - 03:20 L: returned deliver/NF/lem-sfb-equivariant-single-curve-nodal-reduction (reviewer RETURN: Main fault: Steps 1-7 of the item cite lem-per-separable-stable-modification-flat-pair, which is on the drop list (side-)
 - 03:21 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
+- 03:22 L: returned deliver/N9/sk-thm-groth-ss (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-thm-groth-ss: sk-thm-groth-ss: completed in this pr)
