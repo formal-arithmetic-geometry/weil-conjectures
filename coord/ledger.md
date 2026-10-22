@@ -24043,3 +24043,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:55 L: returned deliver/NI/lem-sfb-equivariant-smooth-galois-model (reviewer RETURN: C1/F + G4. The item is live. It is not on side-live route-pivot-dropped.txt, it was created by the FIXed parent split NB)
 - 23:58 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
 - 00:00 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
+- 00:01 L: merged deliver/NJ/lem-sfb-proper-pair-radicial-preparation (reviewer FIX; first push; new nodes: 0)

@@ -23,9 +23,269 @@
   "def-nagata-effective-cartier-ideal",
   "def-pc-field-tower"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [sk-thm-nagata-compactification] to $X\\to\\operatorname{Spec}k$; the base is affine and hence quasi-compact and quasi-separated. By the dense-compactification definition [sk-def-nagata-sketch-data] this gives $j:X\\hookrightarrow\\overline X$ with $\\overline X$ proper over $k$ and $X$ dense in $\\overline X$. Proper includes finite type. Set $C=\\overline{j(Z)}$ as a closed subset. Since $Z$ is closed in the open $X$, $C\\cap X=Z$. Both $X$ and $\\overline X$ are Noetherian by [lem-weil-pbc-finite-type-over-noetherian], because $\\operatorname{Spec}k$ is Noetherian (its only local ring is a field). Thus $\\overline X$ has finitely many components by [lem-weil-pbc-noetherian-finitely-many-components]. Each component has a generic point in $X$: its complement in the other finitely many components is a nonempty open subset of that component, which the dense open $X$ meets. No such generic point lies in $Z$, since $Z$ is nowhere dense in $X$. The equality $C\\cap X=Z$ now shows that $C$ contains no component; hence it is nowhere dense.",
+   "uses": [
+    "sk-thm-nagata-compactification",
+    "sk-def-nagata-sketch-data",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-finitely-many-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X 2.3 Step 1, printed p.150, compactification and closure of Z; Noetherian finiteness: Stacks 01T6 and 0BA8."
+   }
+  },
+  {
+   "text": "Apply [lem-pur-finite-inseparable-geometric-reduction] to $\\overline X/k$ and its finitely many irreducible components. Choose its single finite purely inseparable extension $e/k$, and put $T=(\\overline X\\times_k\\operatorname{Spec}e)_{\\mathrm{red}}$. Then $T$ is geometrically reduced over $e$. The reduced induced structure is the closed subscheme supplied by [lem-weil-pbc-reduced-induced-closed-subscheme], applied to the whole base change. Properness is stable under base change and closed subschemes, so $T$ is proper over $e$, and hence finite type and Noetherian. In characteristic zero, purely inseparable means equality, so this choice has $e=k$ [def-weil-pbc-finite-purely-inseparable-extension].",
+   "uses": [
+    "lem-pur-finite-inseparable-geometric-reduction",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-closed-immersion-proper",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "def-weil-pbc-finite-purely-inseparable-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X 2.3 Step 1, finite radicial constants; Stacks 04KT (lemma-finite-extension-geometrically-reduced)."
+   }
+  },
+  {
+   "text": "Write $t:T\\to\\overline X$. The field map $\\operatorname{Spec}e\\to\\operatorname{Spec}k$ is finite: a finite $k$-basis of $e$ is a finite module generating set. Its base change is finite, and the reduction closed immersion is finite; thus $t$ is finite [lem-weil-pbc-finite-morphism-permanence, lem-weil-pbc-closed-immersion-finite, lem-weil-pbc-finite-composition]. By [lem-pc-homeo-pure-insep], and since reduction changes no points, $t$ is a homeomorphism. The field map is universally injective by [lem-pc-spec-pure-insep-integral-radicial-surjective]; this property survives base change by [lem-trf-finite-radicial-basechange], and restriction to the reduction remains universally injective. The radicial equivalence [def-weil-radicial-morphism] therefore makes every residue extension of $t$ purely inseparable; it is finite because $t$ is finite (the residue field is a quotient of the finite-dimensional fibre algebra). In particular generic points correspond bijectively, with finite purely inseparable residue fields.",
+   "uses": [
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-closed-immersion-finite",
+    "lem-weil-pbc-finite-composition",
+    "lem-pc-homeo-pure-insep",
+    "lem-pc-spec-pure-insep-integral-radicial-surjective",
+    "lem-trf-finite-radicial-basechange",
+    "def-weil-radicial-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01S4 (lemma-universally-injective), 01WL (lemma-base-change-finite), 035C (lemma-closed-immersion-finite), 01WK (lemma-composition-finite); X 2.3 Step 1."
+   }
+  },
+  {
+   "text": "Let $T_1,\\ldots,T_s$ be the reduced induced closed subschemes on the components of $T$, using [lem-weil-pbc-reduced-induced-closed-subscheme]. The finite number $s$ is positive by [lem-weil-pbc-noetherian-finitely-many-components], since $X$ is nonempty and $t$ is a homeomorphism. Each $T_i$ is integral (reduced and irreducible), nonempty and proper over $e$; the last assertion is [lem-weil-pbc-closed-immersion-proper]. Set $C_i=t^{-1}C\\cap T_i$ as a closed subset, and give it its reduced induced structure. It misses the generic point of $T_i$, so is nowhere dense. Its ideal $\\mathcal I_i$ is quasi-coherent by the reduced-induced-structure theorem, and of finite type: on each Noetherian affine chart it is an ideal in a Noetherian ring and thus finitely generated. The complement $U_i=T_i\\setminus C_i$ is a nonempty quasi-compact dense open.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-weil-pbc-noetherian-finitely-many-components",
+    "lem-weil-pbc-closed-immersion-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X 2.3 Step 1, reduced components and the nowhere dense marking; Stacks 01J3 and 0BA8."
+   }
+  },
+  {
+   "text": "Form the ordinary blowup $b_i:S_i=\\operatorname{Bl}_{\\mathcal I_i}T_i\\to T_i$. It is proper by [lemma-nagata-blowup-proper] and is an isomorphism over $U_i$ by [thm-nagata-global-blowup-complement]. The extended ideal $\\mathcal I_i\\mathcal O_{S_i}$ is locally generated by a non-zero-divisor, by [thm-nagata-blowup-principalizes-center]; its support is $b_i^{-1}C_i$. The open $U_i$ is dense in $S_i$ by [lemma-nagata-conrad-dense-in-admissible-blowup], applied to this $U_i$-admissible blowup. The next step checks reducedness and integrality directly from the charts.",
+   "uses": [
+    "lemma-nagata-blowup-proper",
+    "thm-nagata-global-blowup-complement",
+    "thm-nagata-blowup-principalizes-center",
+    "lemma-nagata-conrad-dense-in-admissible-blowup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X 2.3 Step 1, blow up the marking; Stacks 01OF (blowing up), 02OS (lemma-blowing-up-gives-effective-Cartier-divisor)."
+   }
+  },
+  {
+   "text": "On a nonempty affine $\\operatorname{Spec}A\\subseteq T_i$, the ring $A$ is a domain. By [prop-nagata-affine-blowup-chart-cover, def-nagata-blowup-chart-ring], the nonempty blowup charts are spectra of the subalgebras $A[\\mathcal I_i/a]\\subseteq A_a$ for nonzero $a\\in\\mathcal I_i(\\operatorname{Spec}A)$. These are domains; the charts with $a=0$ are empty. Thus $S_i$ is reduced. Its dense open $U_i$ is irreducible, so its closure $S_i$ is irreducible. Hence $S_i$ is nonempty integral and $b_i$ is birational. Properness over $e$ follows by [lem-weil-pbc-proper-composition] from the properness of $b_i$ and $T_i/e$.",
+   "uses": [
+    "prop-nagata-affine-blowup-chart-cover",
+    "def-nagata-blowup-chart-ring",
+    "lem-weil-pbc-proper-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 02ND (lemma-blow-up-integral-scheme), expanded by the affine chart domains and the already established density; proper composition Tag 01W3."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-integral-chow-relatively-ample] over the field $e$ to $S_i$, which is integral, separated and finite type because it is proper over $e$. Obtain an integral $Y_i$, a proper surjection $c_i:Y_i\\to S_i$, an immersion $Y_i\\to\\mathbf P^{n_i}_e$ and a nonempty open $V_i\\subseteq S_i$ over which $c_i$ is an isomorphism. Hence $c_i$ induces equality of function fields. The scheme $Y_i$ is proper over $e$ by proper composition. Its immersion into projective space is proper by [lem-weil-pbc-proper-to-separated], since projective space is separated, and then is closed by [lem-weil-pbc-proper-immersion-closed]. Consequently $Y_i$ is projective over $e$. This auxiliary birational Chow modification is inserted to give an absolute projective embedding before normalizing.",
+   "uses": [
+    "lem-weil-pbc-integral-chow-relatively-ample",
+    "lem-weil-pbc-proper-composition",
+    "lem-weil-pbc-proper-to-separated",
+    "lemma-nagata-projective-space-base-change-proper",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-proper-immersion-closed",
+    "def-kun-projective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tags 0200 (lemma-chow-Noetherian) and 0201 (remark-chow-Noetherian (2),(3)), integral Chow model inserted into ILO X 2.3 Step 1; proper immersion closed: 01IQ."
+   }
+  },
+  {
+   "text": "Let $n_i:N_i=Y_i^\\nu\\to Y_i$ be the normalization in its own function field, as in [def-sc-normalization]. By [lem-sc-normalization-exists] it is finite, surjective and birational. It is integral and normal: on a nonempty affine chart of $Y_i$ its normalization ring is the integral closure of a domain $A$ in $\\operatorname{Frac}A$ [def-sc-normalization]; [lem-weil-pbc-integral-closure-finite-extension-normal] with the identity field extension makes that ring an integrally closed domain, and [lem-weil-pbc-localization-normal-domain] makes all of its local rings integrally closed domains. The closed immersion $Y_i\\hookrightarrow\\mathbf P^{n_i}_e$ of Step 7 together with quasi-compactness of $Y_i$ (it is of finite type over $e$) says that $Y_i\\to\\operatorname{Spec}e$ is projective in the convention of [def-pc-projective-morphism] (H-projective and quasi-compact), which is the hypothesis of [lem-fin-finite-over-projective]. By [lem-fin-finite-over-projective], with the affine Noetherian base $\\operatorname{Spec}e$, the finite map $n_i$ above the projective $Y_i/e$ makes $N_i$ projective over $e$ in that convention: there is a closed immersion $N_i\\hookrightarrow\\mathbf P^{m_i}_e$ over $e$. Thus $N_i$ is nonempty, integral, normal, proper and finite type over $e$, and $N_i\\to T_i$ induces equality of function fields.",
+   "uses": [
+    "def-sc-normalization",
+    "lem-sc-normalization-exists",
+    "lem-weil-pbc-integral-closure-finite-extension-normal",
+    "lem-weil-pbc-localization-normal-domain",
+    "def-pc-projective-morphism",
+    "lem-fin-finite-over-projective",
+    "lem-kun-projective-implies-proper",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X 2.3 Step 1, finite normalization; Stacks 0BXR (lemma-normalization-locally-algebraic), 034L (normal integral closure), and 01W8/087S for finite over projective above a field."
+   }
+  },
+  {
+   "text": "The Cartier marking survives both $c_i$ and $n_i$ without a flatness assumption. Write $f$ for a local non-zero-divisor generator of $\\mathcal I_i\\mathcal O_{S_i}$. It is nonzero in $k(S_i)$. Both $Y_i$ and $N_i$ are integral and their maps to $S_i$ induce inclusions (in fact equalities) of function fields. Their affine section rings inject into these function fields by [lem-sc-integral-function-field-affine-fraction]. Therefore the image of $f$ is nonzero in each target local domain and is a non-zero-divisor. The image ideal is generated by that image of $f$, so it is an effective Cartier ideal [def-nagata-effective-cartier-ideal]. Its vanishing set is exactly the inverse image of the vanishing set of $f$. Thus there is an effective Cartier divisor on $N_i$ with support $(t b_i c_i n_i)^{-1}C$.",
+   "uses": [
+    "lem-sc-integral-function-field-affine-fraction",
+    "def-nagata-effective-cartier-ideal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 02OO (lemma-pullback-effective-Cartier-defined (2)), integral dominant case, with the non-zero-divisor argument written explicitly; ILO X 2.3 Step 1."
+   }
+  },
+  {
+   "text": "The schemes $N_i$ remain geometrically reduced over $e$. Let $\\eta_i$ be the generic point of $T_i$. There is an affine open neighbourhood $W$ of $\\eta_i$ in $T$ meeting no other component. Then $W$ is an open subscheme of $T_i$ and is geometrically reduced, since after every field extension it is open in the reduced base change of $T$. Write $W=\\operatorname{Spec}A$. Its function field is $F_i=\\operatorname{Frac}A$ by [lem-sc-integral-function-field-affine-fraction]. For every extension $L/e$, $F_i\\otimes_e L$ is a localization of the reduced ring $A\\otimes_e L$ and is reduced: if a fraction has nilpotent numerator, multiplying by one denominator kills a power, and reducedness kills the fraction itself. The generic stalk of $N_i$ is this same $F_i$, because $b_i,c_i,n_i$ are birational. Now [lem-pur-geometric-reducedness-from-generic-stalks] applies to the reduced integral scheme $N_i$ and proves geometric reducedness. This verifies the extra condition through every inserted birational model.",
+   "uses": [
+    "lem-sc-integral-function-field-affine-fraction",
+    "lem-pur-geometric-reducedness-from-generic-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 04KS (lemma-generic-points-geometrically-reduced (3)); generic fields unchanged through ILO X 2.3 Step 1."
+   }
+  },
+  {
+   "text": "Set $B=\\coprod_{i=1}^sN_i$ and define $r:B\\to\\overline X$ by the maps $t b_i c_i n_i$, using [lem-weil-pbc-scheme-coproduct-family]. Each summand is open and closed, so $B$ is a finite disjoint union of nonempty integral normal schemes and is geometrically reduced (after any field extension each of its open summands is reduced). The effective Cartier ideals from Step 9 define an ideal on this disjoint union by restriction to the summands; it is locally generated by their non-zero-divisor generators and has support $r^{-1}C$. Every $N_i\\to T_i$ is surjective: $n_i$ and $c_i$ are surjective, and $b_i$ is proper with image containing the dense open $U_i$, hence has closed image all of $T_i$. Since the $T_i$ cover $T$ and $t$ is surjective, $r$ is surjective. Exactly one generic point is supplied by each $N_i$, and Step 3 and birationality show that they correspond bijectively to the generic points of $\\overline X$ with the same finite purely inseparable residue extensions as for $t$.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-nagata-effective-cartier-ideal",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X 2.3 Step 1, assemble the finitely many integral models over the same field e; generic points and Cartier ideals are checked on the disjoint open summands."
+   }
+  },
+  {
+   "text": "The finite disjoint union $B$ is projective over $e$. Indeed, choose the embeddings $N_i\\hookrightarrow\\mathbf P^{m_i}_e$ from Step 8, and give one projective space $\\mathbf P^M_e$, $M+1=\\sum_i(m_i+1)$, disjoint blocks of homogeneous coordinates of these sizes. The linear subspace defined by setting every coordinate outside block $i$ to zero is $\\mathbf P^{m_i}_e$. Distinct such subspaces are disjoint, since their simultaneous equations kill every homogeneous coordinate. Their finite union is a closed subscheme, and is the disjoint union of those subspaces: locally the other blocks are absent, so its structure sheaf restricts to that of the single block. The embeddings $N_i$ therefore give a closed immersion $B\\hookrightarrow\\mathbf P^M_e$. Hence $B/e$ is proper and finite type by [lem-kun-projective-implies-proper, def-weil-proper-morphism].",
+   "uses": [
+    "def-kun-projective",
+    "def-nagata-projective-space-base-change",
+    "lem-kun-projective-implies-proper",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01W8 (definition-projective, H-projective clause), explicit disjoint coordinate-block embedding over e."
+   }
+  },
+  {
+   "text": "The morphism $\\operatorname{Spec}e\\to\\operatorname{Spec}k$ is finite, so is projective in the projective-bundle sense by [lem-trf-finite-projective-bundle]. The structure sheaf of $\\operatorname{Spec}k$ is ample by [def-weil-pbc-ample-invertible-module]: the section $1$ has nonvanishing locus the entire affine scheme. Consequently [lem-trf-projective-bundle-to-h-projective] makes this finite field morphism H-projective. Since $B/e$ is H-projective by Step 12, [lem-trf-h-projective-composition] gives a closed immersion $\\iota:B\\hookrightarrow\\mathbf P^d_k$.",
+   "uses": [
+    "lem-trf-finite-projective-bundle",
+    "def-weil-pbc-ample-invertible-module",
+    "lem-trf-projective-bundle-to-h-projective",
+    "lem-trf-h-projective-composition",
+    "def-kun-projective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 0B3I (lemma-finite-projective), 087S (lemma-projective-over-quasi-projective-is-H-projective (1)) and 01WE (lemma-H-projective-composition)."
+   }
+  },
+  {
+   "text": "Because $\\overline X$ is separated over $k$, its diagonal is a closed immersion [def-weil-proper-morphism]. The graph $\\Gamma_r:B\\to B\\times_k\\overline X$ is its base change along $(r,\\mathrm{id}_{\\overline X})$, hence a closed immersion by [lem-weil-pbc-closed-immersion-base-change]. The morphism $\\iota\\times\\mathrm{id}_{\\overline X}$ is another base change of a closed immersion. Their composite is a closed immersion (on affine charts the corresponding surjections of rings compose) $B\\hookrightarrow\\mathbf P^d_k\\times_k\\overline X=\\mathbf P^d_{\\overline X}$ over $r$; the equality is fibre-product associativity in [def-nagata-projective-space-base-change]. Thus $r$ is H-projective. The finite projective space is the projective bundle of the finite free module $\\mathcal O_{\\overline X}^{d+1}$ [def-nagata-relative-projective-space], so $r$ is projective in the required projective-bundle convention [def-trf-projective-bundle-morphism]. Together with Steps 1--13 this proves every clause, including the empty-marking case: then each $\\mathcal I_i=\\mathcal O_{T_i}$, its blowup is the identity, and the Cartier ideals have empty support.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "def-nagata-projective-space-base-change",
+    "def-nagata-relative-projective-space",
+    "def-trf-projective-bundle-morphism",
+    "def-kun-projective"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01W8 (definition-projective); graph is the base change of the separated diagonal, using the fibre-product identification of Schemes Tag 01KR. Final projectivity verification for ILO X 2.3 Step 1."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-projective",
+  "def-nagata-blowup-chart-ring",
+  "def-nagata-effective-cartier-ideal",
+  "def-nagata-projective-space-base-change",
+  "def-nagata-relative-projective-space",
+  "def-pc-projective-morphism",
+  "def-sc-normalization",
+  "def-trf-projective-bundle-morphism",
+  "def-weil-pbc-ample-invertible-module",
+  "def-weil-pbc-finite-purely-inseparable-extension",
+  "def-weil-proper-morphism",
+  "def-weil-radicial-morphism",
+  "lem-fin-finite-over-projective",
+  "lem-kun-projective-implies-proper",
+  "lem-pc-homeo-pure-insep",
+  "lem-pc-spec-pure-insep-integral-radicial-surjective",
+  "lem-pur-finite-inseparable-geometric-reduction",
+  "lem-pur-geometric-reducedness-from-generic-stalks",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-sc-normalization-exists",
+  "lem-trf-finite-projective-bundle",
+  "lem-trf-finite-radicial-basechange",
+  "lem-trf-h-projective-composition",
+  "lem-trf-projective-bundle-to-h-projective",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-closed-immersion-finite",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-finite-composition",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-integral-chow-relatively-ample",
+  "lem-weil-pbc-integral-closure-finite-extension-normal",
+  "lem-weil-pbc-localization-normal-domain",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-proper-composition",
+  "lem-weil-pbc-proper-immersion-closed",
+  "lem-weil-pbc-proper-to-separated",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lemma-nagata-blowup-proper",
+  "lemma-nagata-conrad-dense-in-admissible-blowup",
+  "lemma-nagata-projective-space-base-change-proper",
+  "prop-nagata-affine-blowup-chart-cover",
+  "sk-def-nagata-sketch-data",
+  "sk-thm-nagata-compactification",
+  "thm-nagata-blowup-principalizes-center",
+  "thm-nagata-global-blowup-complement"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose X 2.3 Step 1, printed p.150, expanded using the cited Stacks inputs; inserted integral birational Chow modification (Stacks 0200/0201) before normalization to obtain projective-space embeddings and verify the projective-bundle convention by the graph."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -62,10 +322,46 @@
    "results": "[leanfinder] OK 8 hit(s); AlgebraicGeometry.IsIntegral; AlgebraicGeometry.IsReduced; AlgebraicGeometry.Scheme.Hom.normalization; AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization; AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization; AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization; AlgebraicGeometry.Scheme.Hom.toNormalization; AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization",
    "date": "2026-10-22",
    "verdict": "no match: the returned declarations do not state this combined geometric assertion or a one-line specialization of it"
+  },
+  {
+   "tool": "grep",
+   "query": "normalization|GeometricallyReduced|[Cc]ompactification|[Bb]lowup",
+   "results": "OK 24 hits; Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Group/Smooth.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits give constituent properties and relative normalization, not the simultaneous compactification, Cartier preparation, normality and geometric reducedness assertion",
+   "directory": "AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compactification followed by a generically purely inseparable projective cover by normal geometrically reduced varieties with Cartier boundary",
+   "results": "OK 8 hits; AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc, AlgebraicGeometry.compactSpace_iff_exists, Algebra.IsGeometricallyReduced.mk, AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization, AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.compactSpace_of_universallyClosed, AlgebraicGeometry.Scheme.Hom.ι_toNormalization",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits give constituent properties and relative normalization, not the simultaneous compactification, Cartier preparation, normality and geometric reducedness assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.GeometricallyReduced, AlgebraicGeometry.IsProper",
+   "results": "OK 0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits give constituent properties and relative normalization, not the simultaneous compactification, Cartier preparation, normality and geometric reducedness assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper normal model over a purely inseparable finite field extension with Cartier inverse image of a closed subset and unchanged generic points",
+   "results": "OK 8 hits; AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.Scheme.Hom.normalizationDiagram, AlgebraicGeometry.isField_of_universallyClosed",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits give constituent properties and relative normalization, not the simultaneous compactification, Cartier preparation, normality and geometric reducedness assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type scheme admits a generically radicial projective normal geometrically reduced cover after finite purely inseparable extension of constants",
+   "results": "OK 8 hits; AlgebraicGeometry.Scheme.Hom.normalizationOpenCover, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.IsIntegral, AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits give constituent properties and relative normalization, not the simultaneous compactification, Cartier preparation, normality and geometric reducedness assertion"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-gabber-global-snc-alteration",
@@ -89,5 +385,119 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-proper-pair-radicial-preparation",
+  "worker": "stage1",
+  "summary": "Expanded the compactification, common finite radicial base extension, reduced-component, blowup and finite-normalization construction of ILO X 2.3 Step 1. Reused existing DAG inputs throughout. Inserted a birational integral Chow model before normalization, preserving every generic field and the Cartier marking, to verify projectivity using absolute projective embeddings and a graph. Verified geometric reducedness through the unchanged generic fields. Statement unchanged; no new nodes.",
+  "blueprint": "Continues the recorded det-thm-sf-ctf-stability-direct-images proof (3), alteration/tame-boundary reduction, through lem-sfb-gabber-global-snc-alteration Step 2. All steps realize ILO X 2.3 Step 1; this created node has no imported blueprint ancestor (blueprint_refs.py ancestor returns None). Whole-blueprint searches found no equivalent item.",
+  "tool_uses": [
+   {
+    "node": "lem-fin-finite-over-projective",
+    "why": "Generic finite-over-projective fact over the affine field base; used solely for the normalization embedding."
+   },
+   {
+    "node": "lem-kun-projective-implies-proper",
+    "why": "Generic scheme or commutative-algebra tool: Projective morphisms are proper. Used only for the explicit model construction of ILO X 2.3 Step 1; the six-functor unit does not supply this constituent geometric fact."
+   },
+   {
+    "node": "lem-pc-homeo-pure-insep",
+    "why": "Generic scheme or commutative-algebra tool: Base change along a purely inseparable extension is a homeomorphism. Used only for the explicit model construction of ILO X 2.3 Step 1; the six-functor unit does not supply this constituent geometric fact."
+   },
+   {
+    "node": "lem-pc-spec-pure-insep-integral-radicial-surjective",
+    "why": "Generic scheme or commutative-algebra tool: Spec of a purely inseparable extension is integral, universally injective and surjective. Used only for the explicit model construction of ILO X 2.3 Step 1; the six-functor unit does not supply this constituent geometric fact."
+   },
+   {
+    "node": "lem-pur-finite-inseparable-geometric-reduction",
+    "why": "Generic algebraic geometry tool (Stacks 04KT): a single radicial constant extension makes the reduction geometrically reduced, prior to every alteration choice."
+   },
+   {
+    "node": "lem-pur-geometric-reducedness-from-generic-stalks",
+    "why": "Generic geometric-reducedness criterion (Stacks 04KS), applied to the unchanged function fields of the constructed birational models."
+   },
+   {
+    "node": "lem-sc-normalization-exists",
+    "why": "Generic scheme or commutative-algebra tool: Existence and finiteness of the normalization. Used only for the explicit model construction of ILO X 2.3 Step 1; the six-functor unit does not supply this constituent geometric fact."
+   },
+   {
+    "node": "lem-trf-finite-projective-bundle",
+    "why": "Generic scheme fact that finite morphisms embed in a projective bundle, used only for Spec e to Spec k."
+   },
+   {
+    "node": "lem-trf-h-projective-composition",
+    "why": "Generic finite-projective-space composition tool for B to Spec e to Spec k."
+   },
+   {
+    "node": "lem-trf-projective-bundle-to-h-projective",
+    "why": "Generic conversion over the ample affine field base; no six-functor or trace-formula assertion is used."
+   },
+   {
+    "node": "lem-weil-pbc-integral-chow-relatively-ample",
+    "why": "Generic integral Chow tool, used only to insert a birational projective model preserving the generic fields and marking; it proves no six-functor or purity result."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Generic scheme or commutative-algebra tool: Reduced induced closed subscheme structure on a closed subset: existence and uniqueness. Used only for the explicit model construction of ILO X 2.3 Step 1; the six-functor unit does not supply this constituent geometric fact."
+   },
+   {
+    "node": "lemma-nagata-blowup-proper",
+    "why": "Generic scheme or commutative-algebra tool: Properness of a blow-up. Used only for the explicit model construction of ILO X 2.3 Step 1; the six-functor unit does not supply this constituent geometric fact."
+   },
+   {
+    "node": "lemma-nagata-conrad-dense-in-admissible-blowup",
+    "why": "Generic scheme or commutative-algebra tool: Density in an admissible blow-up. Used only for the explicit model construction of ILO X 2.3 Step 1; the six-functor unit does not supply this constituent geometric fact."
+   },
+   {
+    "node": "lemma-nagata-projective-space-base-change-proper",
+    "why": "Generic scheme or commutative-algebra tool: Projective space is proper over its base. Used only for the explicit model construction of ILO X 2.3 Step 1; the six-functor unit does not supply this constituent geometric fact."
+   },
+   {
+    "node": "prop-nagata-affine-blowup-chart-cover",
+    "why": "Generic scheme or commutative-algebra tool: Finite affine chart cover. Used only for the explicit model construction of ILO X 2.3 Step 1; the six-functor unit does not supply this constituent geometric fact."
+   },
+   {
+    "node": "sk-thm-nagata-compactification",
+    "why": "Compactification is the generic Nagata tool used in ILO Step 1; the six-functor unit has no replacement compactification theorem."
+   },
+   {
+    "node": "thm-nagata-blowup-principalizes-center",
+    "why": "Generic scheme or commutative-algebra tool: Principalization of the center ideal. Used only for the explicit model construction of ILO X 2.3 Step 1; the six-functor unit does not supply this constituent geometric fact."
+   },
+   {
+    "node": "thm-nagata-global-blowup-complement",
+    "why": "Generic scheme or commutative-algebra tool: Complement of the center. Used only for the explicit model construction of ILO X 2.3 Step 1; the six-functor unit does not supply this constituent geometric fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-fin-finite-over-projective",
+  "lem-kun-projective-implies-proper",
+  "lem-pc-homeo-pure-insep",
+  "lem-pc-spec-pure-insep-integral-radicial-surjective",
+  "lem-pur-finite-inseparable-geometric-reduction",
+  "lem-pur-geometric-reducedness-from-generic-stalks",
+  "lem-sc-normalization-exists",
+  "lem-trf-finite-projective-bundle",
+  "lem-trf-h-projective-composition",
+  "lem-trf-projective-bundle-to-h-projective",
+  "lem-weil-pbc-integral-chow-relatively-ample",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lemma-nagata-blowup-proper",
+  "lemma-nagata-conrad-dense-in-admissible-blowup",
+  "lemma-nagata-projective-space-base-change-proper",
+  "prop-nagata-affine-blowup-chart-cover",
+  "sk-thm-nagata-compactification",
+  "thm-nagata-blowup-principalizes-center",
+  "thm-nagata-global-blowup-complement"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NJ-080c39002",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NJ-080c39002 (reviewer sub-agent of L); spot-checked: I read ILO Travaux de Gabber X 2.3 Step 1 (printed p.150) at the cited place, the item's 14 steps and the statements of all 47 cited nodes. The delivery has 0 new nodes and leaves the statement unchanged. The item is unsplit in live, side-live and clones/live, no LAND entry exists for it, and no repair note applies. Neither the item nor any node in its 510-node closure is in route-pivot-dropped.txt, there is no cycle, and no cited statement has changed in live. I searched the DAG and found no duplicate: generic-geometrically-reduced-preparation, proper-generic-curve-preparation, trf normalized-blowup-calculus, equivariant-smooth-galois-model and sbc radicial-preparation-construction all state other things. Step checks: (1) Nagata dense compactification, C=closure of Z with C∩X=Z, C nowhere dense via generic points in X. (2) 04KT gives one common e/k, with T=(X̄_e)_red geometrically reduced and proper. (3) t is finite, a homeomorphism and radicial (01S4), so residue extensions are finite purely inseparable. (4) The reduced components T_i are integral and C_i has a finite-type ideal. (5) The blowup is proper, an isomorphism off C_i, makes the ideal Cartier, and keeps U_i dense (U_i-admissible). (6) Chart domains give integrality (02ND). (7) The integral Chow model is a closed immersion into P^N_e via proper-to-separated and 01IQ; the Chow node's immersion is over k according to its own proof. (8) Normalization is finite, surjective, birational and normal. (9) The Cartier generator stays nonzero in integral dominant pullbacks (02OO(2)). (10) Geometric reducedness via 04KS: the generic stalk F_i⊗L is a localization of a reduced ring. (11) Surjectivity and the generic-point bijection hold. (12) Disjoint coordinate blocks embed B in P^M_e. (13) 0B3I, 087S with O_{Spec k} ample, and 01WE give B↪P^d_k. (14) The graph gives r projective in the projective-bundle sense, since P(d;X̄)=Proj Sym O^{d+1}. Edge cases checked: Z empty, dim 0, characteristic 0, imperfect k, and intersecting components. All 19 declared tool_uses are generic and accepted. Batch 5: lem-trf-finite-projective-bundle (0B3I), lem-trf-projective-bundle-to-h-projective (087S) and lem-trf-h-projective-composition (01WE) are generic projectivity conventions. Their closures (113/178/72 nodes) contain only generic sk-i-curve-zero trf nodes and no Poincaré-duality, trace-transport or nt-assume node, so all three are accepted. FIX (C1/C4): Step 8 applied lem-fin-finite-over-projective without citing def-pc-projective-morphism (H-projective and quasi-compact), which is the convention of that lemma's hypothesis and of the embedding Step 12 takes. The fixed file fixes/dag/nodes/sec-six-functors-basics/lem-sfb-proper-pair-radicial-preparation.json adds the convention match (Y_i is quasi-compact, being of finite type) and the explicit closed immersion N_i↪P^{m_i}_e, and adds def-pc-projective-morphism to the Step 8 uses and to proof_deps. Nothing else is changed.; 1 file(s) fixed by the reviewer"
  }
 }
