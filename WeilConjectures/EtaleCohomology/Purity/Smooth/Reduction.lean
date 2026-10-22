@@ -30,8 +30,8 @@ commutes, and so do the corresponding squares for the smooth traces.
 - `AlgebraicGeometry.Etale.map_smoothPurityIso_hom_comp`: the purity square commutes as soon as
   the three constituents of the purity map — the twist reassociation, the identification
   `θ : ω_f ≅ Λ_X(d)[2d]` and the tensor formula `φ` — are compatible with `Ψ`.
-- `AlgebraicGeometry.Etale.map_smoothPurityTrace`: the reduction of the smooth trace is the smooth
-  trace of the reduction, for a coefficient change compatible with the adjunction
+- `AlgebraicGeometry.Etale.map_smoothPurityTraceOfIso`: the reduction of the smooth trace is the
+  smooth trace of the reduction, for a coefficient change compatible with the adjunction
   `Rf_! ⊣ Rf^!`.
 
 ## Implementation notes
@@ -157,7 +157,7 @@ Rf_! Ψ_X Lf^* K(d)[2d]                        ‖
 Rf_! Lf^* (Ψ_Y K)(d)[2d] ──Tr^sm_{f,Ψ K}──▶ Ψ_Y K
 ```
 -/
-theorem map_smoothPurityTrace {d : ℤ} (ΨX : 𝐃(X, Λ) ⥤ 𝐃(X, Λ')) (ΨY : 𝐃(Y, Λ) ⥤ 𝐃(Y, Λ'))
+theorem map_smoothPurityTraceOfIso {d : ℤ} (ΨX : 𝐃(X, Λ) ⥤ 𝐃(X, Λ')) (ΨY : 𝐃(Y, Λ) ⥤ 𝐃(Y, Λ'))
     (ψ : R(f)_![ModuleCat.{u + 1} Λ] ⋙ ΨY ≅ ΨX ⋙ R(f)_![ModuleCat.{u + 1} Λ'])
     {K : 𝐃(Y, Λ)}
     (γ : (twistShift Λ X d).obj ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K) ≅
@@ -173,11 +173,12 @@ theorem map_smoothPurityTrace {d : ℤ} (ΨX : 𝐃(X, Λ) ⥤ 𝐃(X, Λ')) (Ψ
       ψ.inv.app _ ≫
         ΨY.map ((rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f).counit.app K))
     (hγ : ΨX.map γ.hom ≫ vS.hom = v₀.hom ≫ γ'.hom) :
-    ΨY.map (smoothPurityTrace Λ d f γ) =
-      ψ.hom.app _ ≫ (R(f)_![ModuleCat.{u + 1} Λ']).map v₀.hom ≫ smoothPurityTrace Λ' d f γ' := by
+    ΨY.map (smoothPurityTraceOfIso Λ d f γ) =
+      ψ.hom.app _ ≫ (R(f)_![ModuleCat.{u + 1} Λ']).map v₀.hom ≫
+        smoothPurityTraceOfIso Λ' d f γ' := by
   have hψ := ψ.hom.naturality γ.hom
   simp only [Functor.comp_obj, Functor.comp_map] at hψ
-  rw [smoothPurityTrace, smoothPurityTrace, ← Functor.map_comp_assoc, ← hγ,
+  rw [smoothPurityTraceOfIso, smoothPurityTraceOfIso, ← Functor.map_comp_assoc, ← hγ,
     Functor.map_comp_assoc, hS,
     ← reassoc_of% hψ, Iso.hom_inv_id_app_assoc, Functor.map_comp]
 
@@ -202,7 +203,7 @@ Rf_! Ψ_X Lf^* K(d)[2d] ──ψ⁻¹──▶ Ψ_Y Rf_! Lf^* K(d)[2d] ──Ψ_
 Hence the levelwise traces are a morphism
 of normalized systems, which is what the uniform-tower reconstruction realizes at the adic
 stage. -/
-theorem smoothPurityTrace_comp_eq_of_transition {d : ℤ} (ΨX : 𝐃(X, Λ) ⥤ 𝐃(X, Λ'))
+theorem smoothPurityTraceOfIso_comp_eq_of_transition {d : ℤ} (ΨX : 𝐃(X, Λ) ⥤ 𝐃(X, Λ'))
     (ΨY : 𝐃(Y, Λ) ⥤ 𝐃(Y, Λ'))
     (ψ : R(f)_![ModuleCat.{u + 1} Λ] ⋙ ΨY ≅ ΨX ⋙ R(f)_![ModuleCat.{u + 1} Λ'])
     {K : 𝐃(Y, Λ)} {K' : 𝐃(Y, Λ')} (v : K' ⟶ ΨY.obj K)
@@ -217,11 +218,13 @@ theorem smoothPurityTrace_comp_eq_of_transition {d : ℤ} (ΨX : 𝐃(X, Λ) ⥤
         ΨY.map ((rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f).counit.app K) =
       (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ') f).counit.app K' ≫ v)
     (hγ : γ'.hom ≫ vS = v₀ ≫ ΨX.map γ.hom) :
-    smoothPurityTrace Λ' d f γ' ≫ v =
-      (R(f)_![ModuleCat.{u + 1} Λ']).map v₀ ≫ ψ.inv.app _ ≫ ΨY.map (smoothPurityTrace Λ d f γ) := by
+    smoothPurityTraceOfIso Λ' d f γ' ≫ v =
+      (R(f)_![ModuleCat.{u + 1} Λ']).map v₀ ≫ ψ.inv.app _ ≫
+        ΨY.map (smoothPurityTraceOfIso Λ d f γ) := by
   have hψ := ψ.inv.naturality γ.hom
   simp only [Functor.comp_obj, Functor.comp_map] at hψ
-  rw [smoothPurityTrace, smoothPurityTrace, Category.assoc, ← hS, ← Functor.map_comp_assoc, hγ,
+  rw [smoothPurityTraceOfIso, smoothPurityTraceOfIso, Category.assoc, ← hS,
+    ← Functor.map_comp_assoc, hγ,
     Functor.map_comp, Category.assoc, reassoc_of% hψ, Functor.map_comp]
 
 end Purity

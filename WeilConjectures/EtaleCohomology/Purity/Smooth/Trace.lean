@@ -29,7 +29,7 @@ respect to the composition isomorphism `R(f ≫ g)^! ≅ Rg^! ⋙ Rf^!` conjugat
 
 ## Main definitions
 
-- `AlgebraicGeometry.Etale.smoothPurityTrace`: the smooth trace `Tr^sm_{f,K}` of a purity map.
+- `AlgebraicGeometry.Etale.smoothPurityTraceOfIso`: the smooth trace `Tr^sm_{f,K}` of a purity map.
 - `AlgebraicGeometry.Etale.rightDerivedUpperShriekCompIsoOfLowerShriek`: the composition
   isomorphism `Rg^! ⋙ Rf^! ≅ R(f ≫ g)^!` conjugate to a composition isomorphism of `R_!`.
 - `AlgebraicGeometry.Etale.twistShiftCompIso`: the pullback-composition and twist-additivity
@@ -37,11 +37,12 @@ respect to the composition isomorphism `R(f ≫ g)^! ≅ Rg^! ⋙ Rf^!` conjugat
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.homEquiv_smoothPurityTrace`: the purity map is the adjoint of the trace.
-- `AlgebraicGeometry.Etale.smoothPurityTrace_naturality`: the trace of a natural purity map is
+- `AlgebraicGeometry.Etale.homEquiv_smoothPurityTraceOfIso`: the purity map is the adjoint of the
+  trace.
+- `AlgebraicGeometry.Etale.smoothPurityTraceOfIso_naturality`: the trace of a natural purity map is
   natural.
-- `AlgebraicGeometry.Etale.smoothPurityTrace_comp`: transitivity of the smooth traces.
-- `AlgebraicGeometry.Etale.smoothPurityTrace_baseChange`: the smooth trace commutes with base
+- `AlgebraicGeometry.Etale.smoothPurityTraceOfIso_comp`: transitivity of the smooth traces.
+- `AlgebraicGeometry.Etale.smoothPurityTraceOfIso_baseChange`: the smooth trace commutes with base
   change.
 
 ## Implementation notes
@@ -53,7 +54,7 @@ arbitrary isomorphism `γ : Lf^* K(d)[2d] ≅ Rf^! K`, and the statements of thi
 every purity map satisfying the stated coherences. Two choices of `γ` differ by a unit of
 `H⁰(X, Λ)`, and so do their traces; the canonical purity map and trace over a separably closed
 field, pinned down by the normalization on fundamental classes of points, are
-`AlgebraicGeometry.Etale.normalizedSmoothPurityIso` and `AlgebraicGeometry.Etale.smoothTrace`
+`AlgebraicGeometry.Etale.normalizedSmoothPurityIso` and `AlgebraicGeometry.Etale.smoothPurityTrace`
 (`WeilConjectures.EtaleCohomology.Purity.Smooth.NormalizedTrace`). Likewise the composition law
 of `R_!` is only known to exist
 (`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_comp`), so it is an argument of
@@ -90,8 +91,12 @@ purity map `γ_{f,K} : Lf^* K(d)[2d] ≅ Rf^! K` (`AlgebraicGeometry.Etale.smoot
 `Tr^sm_{f,K} : Rf_! Lf^* K(d)[2d] ⟶ Rf_! Rf^! K ⟶ K`
 
 of `Rf_! γ_{f,K}` and the counit `Tr_{f,K}` of the adjunction `Rf_! ⊣ Rf^!`. For `K = Λ_Y` it
-is the smooth trace `Tr^sm_f : Rf_! Λ_X(d)[2d] ⟶ Λ_Y` of `f`. -/
-noncomputable def smoothPurityTrace
+is the smooth trace `Tr^sm_f : Rf_! Λ_X(d)[2d] ⟶ Λ_Y` of `f`.
+
+This is the trace of an arbitrary purity isomorphism `γ`; two choices differ by a unit of
+`H⁰(X, Λ)`. The canonical smooth trace, of the normalized purity map, is
+`AlgebraicGeometry.Etale.smoothPurityTrace`. -/
+noncomputable def smoothPurityTraceOfIso
     {K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (γ : (twistShift Λ X d).obj ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K) ≅
       (R(f)^![ModuleCat.{u + 1} Λ]).obj K) :
@@ -103,11 +108,11 @@ noncomputable def smoothPurityTrace
 variable {Λ d f}
 
 /-- The smooth trace is the adjoint of the purity map. -/
-lemma smoothPurityTrace_eq_homEquiv_symm
+lemma smoothPurityTraceOfIso_eq_homEquiv_symm
     {K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (γ : (twistShift Λ X d).obj ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K) ≅
       (R(f)^![ModuleCat.{u + 1} Λ]).obj K) :
-    smoothPurityTrace Λ d f γ =
+    smoothPurityTraceOfIso Λ d f γ =
       ((rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f).homEquiv _ _).symm γ.hom := by
   rw [Adjunction.homEquiv_counit]
   rfl
@@ -116,23 +121,23 @@ lemma smoothPurityTrace_eq_homEquiv_symm
 
 The purity map is recovered from the smooth trace: it is the adjoint of `Tr^sm_{f,K}` under
 `Rf_! ⊣ Rf^!`. In particular the smooth trace determines the purity map. -/
-lemma homEquiv_smoothPurityTrace
+lemma homEquiv_smoothPurityTraceOfIso
     {K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (γ : (twistShift Λ X d).obj ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K) ≅
       (R(f)^![ModuleCat.{u + 1} Λ]).obj K) :
     (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f).homEquiv _ _
-      (smoothPurityTrace Λ d f γ) = γ.hom := by
-  rw [smoothPurityTrace_eq_homEquiv_symm, Equiv.apply_symm_apply]
+      (smoothPurityTraceOfIso Λ d f γ) = γ.hom := by
+  rw [smoothPurityTraceOfIso_eq_homEquiv_symm, Equiv.apply_symm_apply]
 
 /-- The counit of `Rf_! ⊣ Rf^!` at `K` is the smooth trace, read through the purity
 isomorphism: `Tr_{f,K} = Tr^sm_{f,K} ∘ Rf_! γ_{f,K}⁻¹`. -/
-lemma rightDerivedUpperShriekAdjunction_counit_app_eq_smoothPurityTrace
+lemma rightDerivedUpperShriekAdjunction_counit_app_eq_smoothPurityTraceOfIso
     {K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (γ : (twistShift Λ X d).obj ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K) ≅
       (R(f)^![ModuleCat.{u + 1} Λ]).obj K) :
     (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f).counit.app K =
-      (R(f)_![ModuleCat.{u + 1} Λ]).map γ.inv ≫ smoothPurityTrace Λ d f γ := by
-  rw [smoothPurityTrace, ← Category.assoc, ← Functor.map_comp, Iso.inv_hom_id,
+      (R(f)_![ModuleCat.{u + 1} Λ]).map γ.inv ≫ smoothPurityTraceOfIso Λ d f γ := by
+  rw [smoothPurityTraceOfIso, ← Category.assoc, ← Functor.map_comp, Iso.inv_hom_id,
     CategoryTheory.Functor.map_id,
     Category.id_comp]
 
@@ -140,16 +145,16 @@ lemma rightDerivedUpperShriekAdjunction_counit_app_eq_smoothPurityTrace
 
 The smooth traces of a purity map natural in `K` are natural in `K`: for `u : K ⟶ K'`,
 `Tr^sm_{f,K'} ∘ Rf_! Lf^* u(d)[2d] = u ∘ Tr^sm_{f,K}`. -/
-lemma smoothPurityTrace_naturality
+lemma smoothPurityTraceOfIso_naturality
     (Γ : L((f)^*[ModuleCat.{u + 1} Λ]) ⋙ twistShift Λ X d ≅ R(f)^![ModuleCat.{u + 1} Λ])
     {K K' : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (v : K ⟶ K') :
     (R(f)_![ModuleCat.{u + 1} Λ]).map
         ((twistShift Λ X d).map ((L((f)^*[ModuleCat.{u + 1} Λ])).map v)) ≫
-      smoothPurityTrace Λ d f (Γ.app K') = smoothPurityTrace Λ d f (Γ.app K) ≫ v := by
+      smoothPurityTraceOfIso Λ d f (Γ.app K') = smoothPurityTraceOfIso Λ d f (Γ.app K) ≫ v := by
   have h := Γ.hom.naturality v
   simp only [Functor.comp_obj, Functor.comp_map] at h
-  simp only [smoothPurityTrace, Iso.app_hom, ← Functor.map_comp_assoc, h, Functor.map_comp,
+  simp only [smoothPurityTraceOfIso, Iso.app_hom, ← Functor.map_comp_assoc, h, Functor.map_comp,
     Category.assoc, Adjunction.counit_naturality]
 
 end Trace
@@ -230,7 +235,7 @@ after the identification `L(f ≫ g)^* K(d + e)[2d + 2e] ≅ Lf^*(Lg^* K(e)[2e])
 
 is the smooth trace `Tr^sm_{f ≫ g,K}`: the `f`-trace, with the twist `(e)[2e]` already
 present, is applied before the `g`-trace. -/
-theorem smoothPurityTrace_comp (d e : ℤ) (α : R(f ≫ g)_![ModuleCat.{u + 1} Λ] ≅
+theorem smoothPurityTraceOfIso_comp (d e : ℤ) (α : R(f ≫ g)_![ModuleCat.{u + 1} Λ] ≅
       R(f)_![ModuleCat.{u + 1} Λ] ⋙ R(g)_![ModuleCat.{u + 1} Λ])
     (Γf : L((f)^*[ModuleCat.{u + 1} Λ]) ⋙ twistShift Λ X d ≅ R(f)^![ModuleCat.{u + 1} Λ])
     {K : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
@@ -242,12 +247,12 @@ theorem smoothPurityTrace_comp (d e : ℤ) (α : R(f ≫ g)_![ModuleCat.{u + 1} 
       (twistShift Λ X d).map ((L((f)^*[ModuleCat.{u + 1} Λ])).map γg.hom) ≫
       Γf.hom.app ((R(g)^![ModuleCat.{u + 1} Λ]).obj K) ≫
       (rightDerivedUpperShriekCompIsoOfLowerShriek Λ f g α).hom.app K) :
-    smoothPurityTrace Λ (d + e) (f ≫ g) γfg =
+    smoothPurityTraceOfIso Λ (d + e) (f ≫ g) γfg =
       (R(f ≫ g)_![ModuleCat.{u + 1} Λ]).map (twistShiftCompIso Λ f g d e K).hom ≫
         α.hom.app _ ≫
-        (R(g)_![ModuleCat.{u + 1} Λ]).map (smoothPurityTrace Λ d f
+        (R(g)_![ModuleCat.{u + 1} Λ]).map (smoothPurityTraceOfIso Λ d f
           (Γf.app ((twistShift Λ Y e).obj ((L((g)^*[ModuleCat.{u + 1} Λ])).obj K)))) ≫
-        smoothPurityTrace Λ e g γg := by
+        smoothPurityTraceOfIso Λ e g γg := by
   have hΓ := Γf.hom.naturality γg.hom
   simp only [Functor.comp_obj, Functor.comp_map] at hΓ
   have hε := (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f).counit.naturality
@@ -258,13 +263,13 @@ theorem smoothPurityTrace_comp (d e : ℤ) (α : R(f ≫ g)_![ModuleCat.{u + 1} 
       (R(f)_![ModuleCat.{u + 1} Λ]).map (Γf.hom.app ((R(g)^![ModuleCat.{u + 1} Λ]).obj K)) ≫
         (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f).counit.app
           ((R(g)^![ModuleCat.{u + 1} Λ]).obj K) =
-      smoothPurityTrace Λ d f
+      smoothPurityTraceOfIso Λ d f
         (Γf.app ((twistShift Λ Y e).obj ((L((g)^*[ModuleCat.{u + 1} Λ])).obj K))) ≫
         γg.hom := by
     rw [← Functor.map_comp_assoc, hΓ, Functor.map_comp_assoc]
     erw [hε]
-    rw [smoothPurityTrace, Iso.app_hom, Category.assoc]
-  rw [smoothPurityTrace, hγ]
+    rw [smoothPurityTraceOfIso, Iso.app_hom, Category.assoc]
+  rw [smoothPurityTraceOfIso, hγ]
   simp only [Functor.map_comp, Category.assoc,
     rightDerivedUpperShriekCompIsoOfLowerShriek_hom_app_counit]
   congr 1
@@ -337,7 +342,7 @@ Rf'_! Lf'^* Lv^* K(d)[2d] ──Tr^sm_{f',Lv^* K}──▶ Lv^* K
 ```
 
 commutes. -/
-theorem smoothPurityTrace_baseChange {d : ℕ} (sq : IsPullback g f' f v)
+theorem smoothPurityTraceOfIso_baseChange {d : ℕ} (sq : IsPullback g f' f v)
     (β : L((g)^*[ModuleCat.{u + 1} Λ]) ⋙ R(f')_![ModuleCat.{u + 1} Λ] ≅
       R(f)_![ModuleCat.{u + 1} Λ] ⋙ L((v)^*[ModuleCat.{u + 1} Λ]))
     {K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
@@ -351,13 +356,13 @@ theorem smoothPurityTrace_baseChange {d : ℕ} (sq : IsPullback g f' f v)
       (leftDerivedUpperStarTwistShiftBaseChangeIso Λ d f sq.toCommSq K).hom ≫ γ'.hom) :
     (R(f')_![ModuleCat.{u + 1} Λ]).map
         (leftDerivedUpperStarTwistShiftBaseChangeIso Λ d f sq.toCommSq K).hom ≫
-      smoothPurityTrace Λ d f' γ' =
-    β.hom.app _ ≫ (L((v)^*[ModuleCat.{u + 1} Λ])).map (smoothPurityTrace Λ d f γ) := by
+      smoothPurityTraceOfIso Λ d f' γ' =
+    β.hom.app _ ≫ (L((v)^*[ModuleCat.{u + 1} Λ])).map (smoothPurityTraceOfIso Λ d f γ) := by
   have hβ := β.hom.naturality γ.hom
   simp only [Functor.comp_obj, Functor.comp_map] at hβ
-  rw [smoothPurityTrace, ← Functor.map_comp_assoc, ← hγ, Functor.map_comp_assoc,
+  rw [smoothPurityTraceOfIso, ← Functor.map_comp_assoc, ← hγ, Functor.map_comp_assoc,
     rightDerivedLowerShriek_map_upperShriekBaseChangeOfLowerShriek_comp_counit,
-    reassoc_of% hβ, smoothPurityTrace, Functor.map_comp]
+    reassoc_of% hβ, smoothPurityTraceOfIso, Functor.map_comp]
 
 end BaseChange
 
