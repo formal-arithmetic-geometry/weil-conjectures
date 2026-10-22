@@ -158,12 +158,9 @@ noncomputable def extLinearFunctor (n : ℕ) : X.Modulesᵒᵖ ⥤ ModuleCat.{u}
   obj G := ModuleCat.of k (Ext G.unop ω n)
   map f := ModuleCat.ofHom
     (Abelian.Ext.precompOfLinear (Abelian.Ext.mk₀ f.unop) k ω (zero_add n))
-  map_id G := by
-    ext x
-    exact Abelian.Ext.mk₀_id_comp x
-  map_comp f g := by
-    ext x
-    exact (Abelian.Ext.mk₀_comp_mk₀_assoc g.unop f.unop x).symm
+  map_id G := ModuleCat.hom_ext (LinearMap.ext fun x ↦ Abelian.Ext.mk₀_id_comp x)
+  map_comp f g := ModuleCat.hom_ext (LinearMap.ext fun x ↦
+    (Abelian.Ext.mk₀_comp_mk₀_assoc g.unop f.unop x).symm)
 
 /-- **`H⁰`-duality from a resolution.** Let `0 → 𝒦 → ℰ → 𝒢 → 0` be a short exact sequence of
 `𝒪_X`-modules with `H⁰(ℰ) = 0` and `Ext¹(ℰ, ω) = 0`, such that the duality pairing

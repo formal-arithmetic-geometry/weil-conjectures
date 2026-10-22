@@ -5,13 +5,9 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.DeligneLaumon.Reduction.FiniteDirectImage
 public import WeilConjectures.TraceFormula.Statement
-public import WeilConjectures.WeilSheaf.Finiteness
-public import WeilConjectures.WeilSheaf.StalkCharpoly
-public import WeilConjectures.WeilSheaf.StalkPairing
-public import WeilConjectures.WeilSheaf.TraceFunctionCongr
-public import WeilConjectures.ZetaSeries
+public import WeilConjectures.WeilSheaf.AlgClosedCoefficientCohomology
+public import WeilConjectures.WeilSheaf.Stalk
 
 /-!
 # Weil complexes as Weil objects of `Dᵇc(-)⟦ℚ̲̄_ℓ⟧`
