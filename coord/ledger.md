@@ -24262,3 +24262,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:56 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
 - 01:56 L: returned deliver/NC/lem-sfb-ultrametric-orthogonal-extension (reviewer RETURN: L: independent stage-2 immutable head 6504d1e1d80c: A7/A6 (H2 credit): thirteenth NC head 6504d1e1d80c of lem-sfb-ultram)
 - 01:57 L: returned deliver/N9/sk-thm-groth-ss (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-thm-groth-ss: sk-thm-groth-ss: completed in this pr)
+- 01:58 L: merged deliver/NA/lem-sfb-profinite-geometric-family-heart-cd (reviewer PASS; first push; new nodes: 2)
