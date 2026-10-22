@@ -14,14 +14,21 @@ public import Sheaf.Paper.SystemCochainTensorReduction
 public import Sheaf.Paper.CompletedIntegralConstantMapOfUniverses
 public import Sheaf.SecSmoothPurity.CochainPullbackTensorCoherence
 public import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
+import Mathlib.CategoryTheory.Sites.Pullback
+import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Types
+import WeilConjectures.Mathlib.CategoryTheory.Functor.Flat
+import Sheaf.Paper.CanonicalCoefficientSystemGeometry
+import Sheaf.Paper.GeometricScalarAssociationCocycle
+import all Sheaf.Paper.SystemTensorReductionFormula
+import all Sheaf.Paper.SemilinearSystemModels
+import all Sheaf.Paper.SystemOrdinaryTensorReduction
+import Sheaf.Algebra.Homology.BoundedFlatIndependentCoefficients
+import all Sheaf.Paper.SystemEvaluationFlat
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatAlgebraicInverseImageOfUniverses
+import Sheaf.Algebra.Homology.ChangeOfRingsKFlatIndependentCoefficients
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Paper.NormalizedDVRTower
-import Sheaf.CategoryTheory.SystemEvaluationKFlat
 import Sheaf.Algebra.Homology.KFlatTotalTensorModel
-import Sheaf.Paper.KFlatRingedToposPullback
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
-import Sheaf.Algebra.Homology.SheafRingDerivedCoefficientAdjunction
-import Sheaf.AlgebraicGeometry.ProEtaleConstantRingMap
+import all Sheaf.Paper.KFlatRingedToposPullback
 
 /-! # Normalized operations and simultaneous system models
 
@@ -45,8 +52,11 @@ set_option backward.isDefEq.respectTransparency.types false
 -- Retain the recorded localization instances during elaboration.
 attribute [local irreducible] WeilConjectures.SemilinearSections.hasDerived
   HasDerivedCategory.standard
+attribute [local irreducible] SheafOfModules.monoidalCategory
+attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 universe t u c v r
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
+open CategoryTheory.MonoidalCategory
 open WeilConjectures.SemilinearSections
 namespace WeilConjectures.NormalizedOperations
 
@@ -111,7 +121,7 @@ variable {C : Type c} [Category.{v} C] [EssentiallySmall.{max c v r} C]
 
 /-- The recorded scalar-extension functor, with all instance arguments retained.
 Source: Stacks 06YY (blueprint: lem-pur-normalized-operation-system-models). -/
-abbrev operationScalarFunctor {R S : Sheaf J CommRingCat.{max c v r}}
+def operationScalarFunctor {R S : Sheaf J CommRingCat.{max c v r}}
     (φ : R ⟶ S) (A : ScalarData.{c, v, max c v r} φ) :
     Mod.{c, v, max c v r} J R ⥤ Mod.{c, v, max c v r} J S :=
   @SheafOfModules.DerivedChangeOfRingsCochainModel.E
@@ -121,7 +131,7 @@ abbrev operationScalarFunctor {R S : Sheaf J CommRingCat.{max c v r}}
 
 /-- Termwise extension with its recorded additive witness made explicit.
 Source: Stacks 06YY (blueprint: lem-pur-normalized-operation-system-models). -/
-abbrev operationScalarComplex {R S : Sheaf J CommRingCat.{max c v r}}
+def operationScalarComplex {R S : Sheaf J CommRingCat.{max c v r}}
     (φ : R ⟶ S) (A : ScalarData.{c, v, max c v r} φ) :=
   letI : (operationScalarFunctor.{c, v, r} J φ A).Additive :=
     @SheafOfModules.DerivedChangeOfRingsCochainModel.additive
@@ -132,7 +142,7 @@ abbrev operationScalarComplex {R S : Sheaf J CommRingCat.{max c v r}}
 
 /-- The actual universal derived counit of scalar extension, at the chosen sizes.
 Source: Stacks 06YY (blueprint: lem-pur-normalized-operation-system-models). -/
-abbrev operationScalarCounit {R S : Sheaf J CommRingCat.{max c v r}}
+def operationScalarCounit {R S : Sheaf J CommRingCat.{max c v r}}
     (φ : R ⟶ S) (A : ScalarData.{c, v, max c v r} φ) :
     DerivedCategory.Q ⋙ A.T ⟶
       operationScalarComplex.{c, v, r} J φ A ⋙ DerivedCategory.Q :=
@@ -145,15 +155,72 @@ abbrev operationScalarCounit {R S : Sheaf J CommRingCat.{max c v r}}
 Its horizontal maps are the coefficient quotients because its underlying presheaf is
 that of the sequence-site ring itself. Source: Stacks 07A4
 (blueprint: lem-pur-normalized-operation-system-models). -/
-abbrev operationUnitComplex :=
+def operationUnitComplex :=
   (CochainComplex.singleFunctor (Systems.{c, v, max c v r} J B τ) 0).obj
     (SheafOfModules.unit (ring.{c, v, max c v r} (coefficientSequenceTopology J) (systemRing.{c,
       v, max c v r} J B τ)))
 
 /-- The whole-system unit in the ordinary unbounded localization.
 Source: Stacks 07A4 (blueprint: lem-pur-normalized-operation-system-models). -/
-abbrev operationUnit : DS.{c, v, max c v r} J B τ :=
+def operationUnit : DS.{c, v, max c v r} J B τ :=
   DerivedCategory.Q.obj (operationUnitComplex.{c, v, r} J B τ)
+
+attribute [local irreducible] operationUnitComplex operationUnit
+
+attribute [local irreducible] CategoryTheory.Functor.mapDerivedCategory
+  CategoryTheory.Functor.mapDerivedCategoryFactors evaluation
+  ordinaryTensorHom tensorSection
+
+/-- The explicit law formula, named to keep structure projections compact.
+Source: Stacks 07A4 and 0D6D
+(blueprint: lem-pur-normalized-operation-system-models). -/
+def operationTensorPureFormula (A : Data.{c, v, r} J B τ) : Prop :=
+  ∀ (M N : Systems.{c, v, max c v r} J B τ)
+    (_hM : flatTerms.{c, v, r} (coefficientSequenceTopology J)
+      (systemRing.{c, v, max c v r} J B τ)
+      ((CochainComplex.singleFunctor (Systems.{c, v, max c v r} J B τ) 0).obj M))
+    (_hN : flatTerms.{c, v, r} (coefficientSequenceTopology J)
+      (systemRing.{c, v, max c v r} J B τ)
+      ((CochainComplex.singleFunctor (Systems.{c, v, max c v r} J B τ) 0).obj N))
+    {m n : ℕ} (h : n ≤ m) (U : Cᵒᵖ) (a : ((evaluation.{c, v, max c v r} J B τ m).obj M).val.obj U)
+    (x : ((evaluation.{c, v, max c v r} J B τ m).obj N).val.obj U) (b : (B n).obj.obj U),
+    ((ordinaryEvaluationTensor.{c, v, r} J B τ n M N).hom.val.app U)
+        ((ordinaryReduction.{c, v, r} J B τ A h
+          (ordinaryTensor.{c, v, r} (coefficientSequenceTopology J) (systemRing.{c, v, max c v r}
+            J B τ) M N)).val.app U
+          (b • scalarExtensionSection.{c, v, r} (coefficientMap.{c, v, max c v r} J B τ h)
+            (A.scalar h)
+            ((evaluation.{c, v, max c v r} J B τ m).obj
+              (ordinaryTensor.{c, v, r} (coefficientSequenceTopology J) (systemRing.{c, v, max c v
+                r} J B τ) M N)) U
+            (((ordinaryEvaluationTensor.{c, v, r} J B τ m M N).inv.val.app U)
+              (tensorSection.{c, v, r} J (B m) ((evaluation.{c, v, max c v r} J B τ m).obj M)
+                ((evaluation.{c, v, max c v r} J B τ m).obj N) U a x)))) =
+      tensorSection.{c, v, r} J (B n) ((evaluation.{c, v, max c v r} J B τ n).obj M)
+        ((evaluation.{c, v, max c v r} J B τ n).obj N) U
+        (((SemilinearSections.transition J B τ h).app M).val.app U a)
+        (b • @id (((evaluation.{c, v, max c v r} J B τ n).obj N).val.obj U)
+          (((SemilinearSections.transition J B τ h).app N).val.app U x))
+
+/-- The explicit law formula, named to keep structure projections compact.
+Source: Stacks 07A4 and 0D6D
+(blueprint: lem-pur-normalized-operation-system-models). -/
+def operationTensorCochainFormula (A : Data.{c, v, r} J B τ) : Prop :=
+  ∀ (P Q : CochainComplex (Systems.{c, v, max c v r} J B τ) ℤ)
+    {m n : ℕ} (h : n ≤ m),
+    (A.scalarTensorModel h).chain
+        (((evaluation.{c, v, max c v r} J B τ m).mapHomologicalComplex (.up ℤ)).obj P)
+        (((evaluation.{c, v, max c v r} J B τ m).mapHomologicalComplex (.up ℤ)).obj Q) ≫
+      (operationScalarComplex.{c, v, r} J (coefficientMap.{c, v, max c v r} J B τ h) (A.scalar
+        h)).map
+        ((A.tensorEvaluationModel m).chain P Q) ≫
+      cochainReduction.{c, v, r} J B τ A h
+        ((totalTensor.{c, v, r} (coefficientSequenceTopology J) (systemRing.{c, v, max c v r} J B
+          τ)).obj (P, Q)) =
+    (totalTensor.{c, v, r} J (B n)).map
+        (Prod.mkHom (cochainReduction.{c, v, r} J B τ A h P) (cochainReduction.{c, v, r} J B τ A h
+          Q)) ≫
+      (A.tensorEvaluationModel n).chain P Q
 
 /-- Normalization, the actual tensor adjoint, and its quotient cocycle. These are
 properties of the tensor of whole systems, with evaluations only in the comparison
@@ -193,49 +260,27 @@ structure OperationTensorLaws (A : Data.{c, v, r} J B τ) : Prop where
           (M, N))
   /-- On local flat representatives the scalar adjoint uses the actual transitions,
   sending (a tensor x) tensor b to tau(a) tensor b tau(x). -/
-  pure : ∀ (M N : Systems.{c, v, max c v r} J B τ)
-    (_hM : flatTerms.{c, v, r} (coefficientSequenceTopology J)
-      (systemRing.{c, v, max c v r} J B τ)
-      ((CochainComplex.singleFunctor (Systems.{c, v, max c v r} J B τ) 0).obj M))
-    (_hN : flatTerms.{c, v, r} (coefficientSequenceTopology J)
-      (systemRing.{c, v, max c v r} J B τ)
-      ((CochainComplex.singleFunctor (Systems.{c, v, max c v r} J B τ) 0).obj N))
-    {m n : ℕ} (h : n ≤ m) (U : Cᵒᵖ) (a : ((evaluation.{c, v, max c v r} J B τ m).obj M).val.obj U)
-    (x : ((evaluation.{c, v, max c v r} J B τ m).obj N).val.obj U) (b : (B n).obj.obj U),
-    ((ordinaryEvaluationTensor.{c, v, r} J B τ n M N).hom.val.app U)
-        ((ordinaryReduction.{c, v, r} J B τ A h
-          (ordinaryTensor.{c, v, r} (coefficientSequenceTopology J) (systemRing.{c, v, max c v r}
-            J B τ) M N)).val.app U
-          (b • scalarExtensionSection.{c, v, r} (coefficientMap.{c, v, max c v r} J B τ h)
-            (A.scalar h)
-            ((evaluation.{c, v, max c v r} J B τ m).obj
-              (ordinaryTensor.{c, v, r} (coefficientSequenceTopology J) (systemRing.{c, v, max c v
-                r} J B τ) M N)) U
-            (((ordinaryEvaluationTensor.{c, v, r} J B τ m M N).inv.val.app U)
-              (tensorSection.{c, v, r} J (B m) ((evaluation.{c, v, max c v r} J B τ m).obj M)
-                ((evaluation.{c, v, max c v r} J B τ m).obj N) U a x)))) =
-      tensorSection.{c, v, r} J (B n) ((evaluation.{c, v, max c v r} J B τ n).obj M)
-        ((evaluation.{c, v, max c v r} J B τ n).obj N) U
-        (((SemilinearSections.transition J B τ h).app M).val.app U a)
-        (b • @id (((evaluation.{c, v, max c v r} J B τ n).obj N).val.obj U)
-          (((SemilinearSections.transition J B τ h).app N).val.app U x))
+  pure : operationTensorPureFormula.{c, v, r} J B τ A
   /-- The same tensor adjoint equation holds on whole-system cochain maps,
   before localization and before evaluating a derived morphism. -/
-  cochain : ∀ (P Q : CochainComplex (Systems.{c, v, max c v r} J B τ) ℤ)
-    {m n : ℕ} (h : n ≤ m),
-    (A.scalarTensorModel h).chain
-        (((evaluation.{c, v, max c v r} J B τ m).mapHomologicalComplex (.up ℤ)).obj P)
-        (((evaluation.{c, v, max c v r} J B τ m).mapHomologicalComplex (.up ℤ)).obj Q) ≫
-      (operationScalarComplex.{c, v, r} J (coefficientMap.{c, v, max c v r} J B τ h) (A.scalar
-        h)).map
-        ((A.tensorEvaluationModel m).chain P Q) ≫
-      cochainReduction.{c, v, r} J B τ A h
-        ((totalTensor.{c, v, r} (coefficientSequenceTopology J) (systemRing.{c, v, max c v r} J B
-          τ)).obj (P, Q)) =
-    (totalTensor.{c, v, r} J (B n)).map
-        (Prod.mkHom (cochainReduction.{c, v, r} J B τ A h P) (cochainReduction.{c, v, r} J B τ A h
-          Q)) ≫
-      (A.tensorEvaluationModel n).chain P Q
+  cochain : operationTensorCochainFormula.{c, v, r} J B τ A
+
+
+
+/-- The explicit law formula, named to keep structure projections compact.
+Source: Stacks 07A4 and 0D6D
+(blueprint: lem-pur-normalized-operation-system-models). -/
+def operationModelQuotientFormula (A : Data.{c, v, r} J B τ) : Prop :=
+  ∀ {m n : ℕ} (h : n ≤ m) (P : CochainComplex (Mod.{c, v, max c v r} J (B m)) ℤ),
+    CochainComplex.IsKFlatIndependentCoefficients (R := B m) P →
+    flatTerms.{c, v, r} J (B m) P →
+    CochainComplex.IsKFlatIndependentCoefficients (R := B n)
+        ((operationScalarComplex.{c, v, r} J (coefficientMap.{c, v, max c v r} J B τ h) (A.scalar
+          h)).obj P) ∧
+      flatTerms.{c, v, r} J (B n) ((operationScalarComplex.{c, v, r} J (coefficientMap.{c, v, max
+        c v r} J B τ h) (A.scalar h)).obj P) ∧
+      IsIso ((operationScalarCounit.{c, v, r} J
+        (coefficientMap.{c, v, max c v r} J B τ h) (A.scalar h)).app P)
 
 /-- The resolution and closure formulation of simultaneous finite expression models.
 A representative is chosen once on the sequence site. The closure clauses are for
@@ -290,16 +335,10 @@ structure OperationModelLaws (A : Data.{c, v, r} J B τ) : Prop where
       flatTerms.{c, v, r} J (B n) ((totalTensor.{c, v, r} J (B n)).obj (P, Q))
   /-- Coefficient quotients preserve K-flatness AND flat terms, and their actual
   universal derived counit computes them. There is no quotient-flatness hypothesis. -/
-  quotient : ∀ {m n : ℕ} (h : n ≤ m) (P : CochainComplex (Mod.{c, v, max c v r} J (B m)) ℤ),
-    CochainComplex.IsKFlatIndependentCoefficients (R := B m) P →
-    flatTerms.{c, v, r} J (B m) P →
-    CochainComplex.IsKFlatIndependentCoefficients (R := B n)
-        ((operationScalarComplex.{c, v, r} J (coefficientMap.{c, v, max c v r} J B τ h) (A.scalar
-          h)).obj P) ∧
-      flatTerms.{c, v, r} J (B n) ((operationScalarComplex.{c, v, r} J (coefficientMap.{c, v, max
-        c v r} J B τ h) (A.scalar h)).obj P) ∧
-      IsIso ((operationScalarCounit.{c, v, r} J
-        (coefficientMap.{c, v, max c v r} J B τ h) (A.scalar h)).app P)
+  quotient : operationModelQuotientFormula.{c, v, r} J B τ A
+
+
+attribute [local semireducible] evaluation
 
 /-- The unit is the coefficient system in degree zero, with quotient transitions,
 whose adjoints are invertible multiplication maps. Source: Stacks 07A4 and 07A6
@@ -421,7 +460,700 @@ structure OperationPullLaws : Prop where
       flatTerms.{c, v, r} J' (G.coefficients n)
         (((G.inverseImage n).modules.mapHomologicalComplex (.up ℤ)).obj P)
 end Geometric
+
+
+attribute [local semireducible] operationUnitComplex operationUnit
+  SheafOfModules.monoidalCategory
+
+attribute [local irreducible] evaluation
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem tensorSection_smul (R : Sheaf J CommRingCat.{max c v r})
+    (M N : Mod.{c, v, max c v r} J R) (U : Cᵒᵖ)
+    (x : M.val.obj U) (y : N.val.obj U) (b : R.obj.obj U) :
+    tensorSection.{c, v, r} J R M N U x (b • y) =
+      b • tensorSection.{c, v, r} J R M N U x y := by
+  let : HasSheafify J AddCommGrpCat.{max c v r} := abelianSheafify J
+  let : J.WEqualsLocallyBijective AddCommGrpCat.{max c v r} := locallyBijective J
+  let := SheafOfModules.isMonoidal_W_independentCoefficients R
+  let := SheafOfModules.monoidalCategory R
+  let a : M.val ⊗ N.val ⟶ (ordinaryTensor.{c, v, r} J R M N).val :=
+    (PresheafOfModules.sheafificationAdjunction
+      (𝟙 (ring.{c, v, max c v r} J R).obj)).unit.app (M.val ⊗ N.val) ≫
+        (SheafOfModules.tensorObjIsoSheafification M N).inv.val
+  unfold tensorSection
+  change (a.app U) (x ⊗ₜ (b • y)) = b • (a.app U) (x ⊗ₜ y)
+  change (a.app U) (TensorProduct.tmul (R.obj.obj U) x (b • y)) =
+    b • (a.app U) (TensorProduct.tmul (R.obj.obj U) x y)
+  erw [TensorProduct.tmul_smul (R := R.obj.obj U) (R' := R.obj.obj U)]
+  exact (a.app U).hom.map_smul b (x ⊗ₜ y)
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.defeqAttrib.useBackward true in
+private theorem operation_tensor_laws (A : Data.{c, v, r} J B τ) :
+    OperationTensorLaws.{c, v, r} J B τ A := by
+  have ht := tensor_reduction_formula.{c, v, r} J B τ A
+  refine {
+    normalized := ?_
+    transition := ht
+    input_factor := ?_
+    cocycle := by
+      intro M N k m n h j
+      exact A.reduction_cocycle h j (A.closed.tensor.obj (M, N))
+    pure := ?_
+    cochain := by
+      intro P Q m n h
+      exact cochain_tensor_reduction.{c, v, r} J B τ A h P Q
+  }
+  · intro M N hM hN m n h
+    have h₁ := hM h
+    have h₂ := hN h
+    have : IsIso (Prod.mkHom
+        (reduction.{c, v, max c v r} J B τ h (A.scalar h) M)
+        (reduction.{c, v, max c v r} J B τ h (A.scalar h) N)) :=
+      (asIso (reduction.{c, v, max c v r} J B τ h (A.scalar h) M) |>.prod
+        (asIso (reduction.{c, v, max c v r} J B τ h (A.scalar h) N))).isIso_hom
+    have hi : IsIso
+        (reduction.{c, v, max c v r} J B τ h (A.scalar h)
+          (A.closed.tensor.obj (M, N)) ≫ (A.tensorEvaluation n).hom.app (M, N)) := by
+      rw [ht M N h]
+      infer_instance
+    exact (isIso_comp_right_iff _ _).mp hi
+  · intro M m n h
+    simpa only [reduction, Equiv.apply_symm_apply] using
+      ((A.scalar h).adjunction.homEquiv_unit _ _
+        (reduction.{c, v, max c v r} J B τ h (A.scalar h) M))
+  · intro M N _ _ m n h U a x b
+    let z := (ordinaryEvaluationTensor.{c, v, r} J B τ m M N).inv.val.app U
+      (tensorSection.{c, v, r} J (B m) _ _ U a x)
+    have hh := congrArg ((A.scalar h).ordinaryAdjunction.homEquiv _ _)
+      (ordinary_tensor_reduction.{c, v, r} J B τ A h M N)
+    rw [(A.scalar h).ordinaryAdjunction.homEquiv_naturality_right,
+      (A.scalar h).ordinaryAdjunction.homEquiv_naturality_left] at hh
+    simp only [ordinaryReduction, Equiv.apply_symm_apply] at hh
+    have hs := congrArg (fun f ↦ f.val.app U z) hh
+    change (ordinaryEvaluationTensor.{c, v, r} J B τ n M N).hom.val.app U
+        (((SemilinearSections.transition J B τ h).app _).val.app U z) =
+      (((A.scalar h).ordinaryAdjunction.homEquiv _ _)
+        (((A.scalarTensorModel h).ordinary _ _).hom ≫
+          ordinaryTensorHom.{c, v, r} J (B n)
+            (ordinaryReduction.{c, v, r} J B τ A h M)
+            (ordinaryReduction.{c, v, r} J B τ A h N))).val.app U
+        ((ordinaryEvaluationTensor.{c, v, r} J B τ m M N).hom.val.app U z) at hs
+    have hz : (ordinaryEvaluationTensor.{c, v, r} J B τ m M N).hom.val.app U z =
+        tensorSection.{c, v, r} J (B m) _ _ U a x := by
+      change (((ordinaryEvaluationTensor.{c, v, r} J B τ m M N).inv ≫
+        (ordinaryEvaluationTensor.{c, v, r} J B τ m M N).hom).val.app U) _ = _
+      rw [Iso.inv_hom_id]
+      rfl
+    rw [hz, scalar_tensor_transpose_section.{c, v, r} J
+      (coefficientMap J B τ h) (A.scalar h) (A.scalarTensorModel h).ordinary
+      (A.scalarTensorModel h).ordinary_pure] at hs
+    simp only [ordinaryReduction, Equiv.apply_symm_apply] at hs
+    have hu := transpose_section.{c, v, r} J (coefficientMap J B τ h)
+      (A.scalar h)
+      ((evaluation.{c, v, max c v r} J B τ m).obj
+        (ordinaryTensor.{c, v, r} (coefficientSequenceTopology J)
+          (systemRing.{c, v, max c v r} J B τ) M N))
+      ((evaluation.{c, v, max c v r} J B τ n).obj
+        (ordinaryTensor.{c, v, r} (coefficientSequenceTopology J)
+          (systemRing.{c, v, max c v r} J B τ) M N)) (ordinaryReduction.{c, v, r} J B τ A h
+        (ordinaryTensor.{c, v, r} (coefficientSequenceTopology J)
+          (systemRing.{c, v, max c v r} J B τ) M N)) U z
+    simp only [ordinaryReduction, Equiv.apply_symm_apply] at hu
+    change _ = tensorSection.{c, v, r} J (B n) _ _ U _ (b • _)
+    rw [map_smul, map_smul]
+    change b • (ordinaryEvaluationTensor.{c, v, r} J B τ n M N).hom.val.app U
+      ((ordinaryReduction.{c, v, r} J B τ A h _).val.app U
+        (scalarExtensionSection.{c, v, r} (coefficientMap J B τ h)
+          (A.scalar h) _ U z)) = _
+    simp only [ordinaryReduction]
+    have heq := (congrArg
+      ((ordinaryEvaluationTensor.{c, v, r} J B τ n M N).hom.val.app U) hu.symm).trans hs
+    refine (congrArg (fun y ↦ b • y) heq).trans ?_
+    exact (tensorSection_smul.{c, v, r} J (B n) _ _ U _ _ b).symm
+
+
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.defeqAttrib.useBackward true in
+private theorem operation_model_laws (A : Data.{c, v, r} J B τ) :
+    OperationModelLaws.{c, v, r} J B τ A := by
+  have he (P : CochainComplex (Systems.{c, v, max c v r} J B τ) ℤ)
+      (hP : CochainComplex.IsKFlatIndependentCoefficients
+        (R := systemRing.{c, v, max c v r} J B τ) P)
+      (hf : flatTerms.{c, v, r} (coefficientSequenceTopology J)
+        (systemRing.{c, v, max c v r} J B τ) P) (n : ℕ) :=
+    And.intro ((A.tensorEvaluationModel n).kflat P hP hf)
+      (show flatTerms.{c, v, r} J (B n)
+        (((evaluation.{c, v, max c v r} J B τ n).mapHomologicalComplex (.up ℤ)).obj P)
+        from fun i ↦ evaluation_preserves_flat.{c, v, r} J B τ n (P.X i) (hf i))
+  refine {
+    resolution := ?_
+    evaluation := he
+    tensor := ?_
+    level_tensor := ?_
+    quotient := ?_
+  }
+  · intro K
+    obtain ⟨P, q, hP, hf, hq, _⟩ :=
+      CochainComplex.exists_isKFlatResolutionIndependentCoefficients.{max c v r, c, v}
+        (R := systemRing.{c, v, max c v r} J B τ) K
+    have hf' : flatTerms.{c, v, r} (coefficientSequenceTopology J)
+        (systemRing.{c, v, max c v r} J B τ) P := fun i ↦
+      (exactFunctor _ _).prop_of_iso
+        (SheafOfModules.siteSheafTensorRightIso
+          (systemRing.{c, v, max c v r} J B τ) (P.X i)).symm (hf i)
+    exact ⟨P, q, hq, hP, hf', he P hP hf'⟩
+  · intro P Q hP hQ hfP hfQ
+    have h := SheafOfModules.KFlatTotalTensorModel.kFlat_total_tensor_model
+      (systemRing.{c, v, max c v r} J B τ) P Q hP hQ hfP hfQ
+    exact ⟨h.1, h.2.1⟩
+  · intro n P Q hP hQ hfP hfQ
+    have h := SheafOfModules.KFlatTotalTensorModel.kFlat_total_tensor_model
+      (B n) P Q hP hQ hfP hfQ
+    exact ⟨h.1, h.2.1⟩
+  · intro m n h P hP hf
+    have hf' (i : ℤ) : exactFunctor _ _
+        (@MonoidalCategory.tensorRight _ _ (SheafOfModules.monoidalCategory (B m))
+          (P.X i)) :=
+      (exactFunctor _ _).prop_of_iso
+        (SheafOfModules.siteSheafTensorRightIso (B m) (P.X i)) (hf i)
+    have hc := SheafOfModules.changeOfRings_isKFlat_of_flat_terms_independentCoefficients
+      (coefficientMap.{c, v, max c v r} J B τ h) P
+      (A.scalar h).model.E (A.scalar h).model.obj_eq (A.scalar h).model.map_eq hP hf'
+    refine ⟨hc.1, ?_, (A.scalar h).model.computes P hP⟩
+    intro i
+    exact (exactFunctor _ _).prop_of_iso
+      (SheafOfModules.siteSheafTensorRightIso (B n) _).symm (hc.2 i)
+
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.defeqAttrib.useBackward true in
+private theorem operation_unit_flat :
+    flatTerms.{c, v, r} (coefficientSequenceTopology J)
+      (systemRing.{c, v, max c v r} J B τ) (operationUnitComplex.{c, v, r} J B τ) := by
+  let R := systemRing.{c, v, max c v r} J B τ
+  let := SheafOfModules.isMonoidal_W_independentCoefficients R
+  let := SheafOfModules.monoidalCategory R
+  let A := Systems.{c, v, max c v r} J B τ
+  have hunit : SheafOfModules.IsFlatOnSite.{c, v, max c v r, max c v r}
+      (J := coefficientSequenceTopology J) (R := R) (SheafOfModules.unit (ring _ R)) := by
+    have hf : exactFunctor A A (MonoidalCategory.tensorRight (𝟙_ A)) :=
+      (exactFunctor A A).prop_of_iso (MonoidalCategory.rightUnitorNatIso A).symm
+        ⟨inferInstanceAs (PreservesFiniteLimits (𝟭 A)),
+          inferInstanceAs (PreservesFiniteColimits (𝟭 A))⟩
+    exact (exactFunctor A A).prop_of_iso
+      (SheafOfModules.siteSheafTensorRightIso R _).symm hf
+  intro i
+  by_cases hi : i = 0
+  · subst i
+    exact hunit
+  · have hz : IsZero ((operationUnitComplex.{c, v, r} J B τ).X i) :=
+      HomologicalComplex.isZero_single_obj_X _ _ _ _ hi
+    have hcat : ObjectProperty.flat ((operationUnitComplex.{c, v, r} J B τ).X i) :=
+      ObjectProperty.flat.prop_of_isZero hz
+    exact (exactFunctor _ _).prop_of_iso
+      (SheafOfModules.siteSheafTensorRightIso R _).symm hcat.2
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.defeqAttrib.useBackward true in
+private theorem operation_unit_kflat :
+    CochainComplex.IsKFlatIndependentCoefficients
+      (R := systemRing.{c, v, max c v r} J B τ)
+      (operationUnitComplex.{c, v, r} J B τ) := by
+  let P := operationUnitComplex.{c, v, r} J B τ
+  have : P.IsStrictlyLE (0 : ℤ) := by
+    dsimp only [P, operationUnitComplex]
+    infer_instance
+  exact SheafOfModules.isKFlatIndependentCoefficients_of_boundedAbove_flatOnSite
+    (systemRing.{c, v, max c v r} J B τ) P 0 (operation_unit_flat.{c, v, r} J B τ)
+
+attribute [local semireducible] evaluation
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.defeqAttrib.useBackward true in
+private def evaluationUnitIso (n : ℕ) :
+    (evaluation.{c, v, max c v r} J B τ n).obj
+        (SheafOfModules.unit (ring (coefficientSequenceTopology J) (systemRing J B τ))) ≅
+      SheafOfModules.unit (ring J (B n)) := by
+  let R := ring.{c, v, max c v r} J (B n)
+  let M := SheafOfModules.unit
+    (ring.{c, v, max c v r} (coefficientSequenceTopology J) (systemRing J B τ))
+  let e (U : Cᵒᵖ) : ((evaluation J B τ n).obj M).val.obj U ≃ₗ[R.obj.obj U]
+      (SheafOfModules.unit R).val.obj U :=
+    { toFun := fun x ↦ x
+      invFun := fun x ↦ x
+      left_inv := fun _ ↦ rfl
+      right_inv := fun _ ↦ rfl
+      map_add' := fun _ _ ↦ rfl
+      map_smul' := fun a x ↦ evaluation_smul.{c, v, r} J B τ n M U a x }
+  exact (SheafOfModules.fullyFaithfulForget R).preimageIso
+    (PresheafOfModules.isoMk (fun U ↦ (e U).toModuleIso) (by
+      intro U V f
+      ext x
+      exact evaluation_ring_map.{c, v, r} J B τ n f x))
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.defeqAttrib.useBackward true in
+private theorem transition_unit_apply {m n : ℕ} (h : n ≤ m) (U : Cᵒᵖ)
+    (s : (B m).obj.obj U) :
+    ((transition.{c, v, max c v r} J B τ h).app
+      (SheafOfModules.unit (ring (coefficientSequenceTopology J) (systemRing J B τ)))).val.app U
+      s = (coefficientMap J B τ h).hom.app U s := by
+  let M := SheafOfModules.unit
+    (ring.{c, v, max c v r} (coefficientSequenceTopology J) (systemRing J B τ))
+  have hh := transition_apply_cast.{c, v, r} J B τ h M U s
+  simp only [evalSection, cast_eq] at hh
+  rw [hh]
+  change (ringPresheaf.{c, v, max c v r} J B τ).map
+    (Prod.mkHom (homOfLE h) (𝟙 U.unop)).op s = _
+  unfold ringPresheaf
+  rw [horizontal_map']
+  rfl
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.defeqAttrib.useBackward true in
+private theorem operation_unit_multiplication (A : Data.{c, v, r} J B τ)
+    {m n : ℕ} (h : n ≤ m) (U : Cᵒᵖ) (s : (B m).obj.obj U) (b : (B n).obj.obj U) :
+    (ordinaryReduction.{c, v, r} J B τ A h
+      (SheafOfModules.unit (ring (coefficientSequenceTopology J) (systemRing J B τ)))).val.app U
+      (b • scalarExtensionSection.{c, v, r} (coefficientMap J B τ h) (A.scalar h)
+        ((evaluation.{c, v, max c v r} J B τ m).obj
+          (SheafOfModules.unit (ring (coefficientSequenceTopology J) (systemRing J B τ))))
+        U s) = (coefficientMap J B τ h).hom.app U s * b := by
+  rw [map_smul]
+  let M := SheafOfModules.unit
+    (ring.{c, v, max c v r} (coefficientSequenceTopology J) (systemRing J B τ))
+  have ht := transpose_section.{c, v, r} J (coefficientMap J B τ h) (A.scalar h)
+    ((evaluation.{c, v, max c v r} J B τ m).obj M)
+    ((evaluation.{c, v, max c v r} J B τ n).obj M)
+    (ordinaryReduction.{c, v, r} J B τ A h M) U s
+  simp only [ordinaryReduction, Equiv.apply_symm_apply] at ht
+  have he : (ordinaryReduction.{c, v, r} J B τ A h M).val.app U
+      (scalarExtensionSection.{c, v, r} (coefficientMap J B τ h) (A.scalar h)
+        ((evaluation.{c, v, max c v r} J B τ m).obj M) U s) =
+      (coefficientMap J B τ h).hom.app U s :=
+    ht.symm.trans (transition_unit_apply.{c, v, r} J B τ h U s)
+  refine (congrArg (fun x ↦ b • x) he).trans ?_
+  exact (evaluation_smul.{c, v, r} J B τ n M U b
+    ((coefficientMap J B τ h).hom.app U s)).trans (by
+      change b * _ = _ * b
+      exact mul_comm _ _)
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.defeqAttrib.useBackward true in
+private theorem operation_unit_ordinary_iso (A : Data.{c, v, r} J B τ)
+    {m n : ℕ} (h : n ≤ m) :
+    IsIso (ordinaryReduction.{c, v, r} J B τ A h
+      (SheafOfModules.unit (ring (coefficientSequenceTopology J) (systemRing J B τ)))) := by
+  let M := SheafOfModules.unit
+    (ring.{c, v, max c v r} (coefficientSequenceTopology J) (systemRing J B τ))
+  let p := evaluationUnitIso.{c, v, r} J B τ m
+  let q := evaluationUnitIso.{c, v, r} J B τ n
+  apply isIso_of_coyoneda_map_bijective
+  intro N
+  let resN := (res (coefficientMap J B τ h)).obj N
+  let e : (((evaluation J B τ n).obj M) ⟶ N) ≃
+      ((A.scalar h).model.E.obj ((evaluation J B τ m).obj M) ⟶ N) :=
+    (Iso.homCongr q (Iso.refl N)) |>.trans (SheafOfModules.unitHomEquiv N)
+      |>.trans (SheafOfModules.unitHomEquiv resN).symm
+      |>.trans (Iso.homCongr p.symm (Iso.refl resN))
+      |>.trans ((A.scalar h).ordinaryAdjunction.homEquiv _ _).symm
+  have he (f : (evaluation J B τ n).obj M ⟶ N) :
+      e f = ordinaryReduction.{c, v, r} J B τ A h M ≫ f := by
+    apply ((A.scalar h).ordinaryAdjunction.homEquiv _ _).injective
+    dsimp only [e, Equiv.trans_apply]
+    rw [Equiv.apply_symm_apply]
+    change p.hom ≫ (SheafOfModules.unitHomEquiv resN).symm
+      (SheafOfModules.unitHomEquiv N (q.inv ≫ f)) = _
+    rw [(A.scalar h).ordinaryAdjunction.homEquiv_naturality_right]
+    simp only [ordinaryReduction, Equiv.apply_symm_apply]
+    apply (cancel_epi p.inv).mp
+    simp only [Iso.inv_hom_id_assoc]
+    apply (SheafOfModules.unitHomEquiv resN).injective
+    rw [Equiv.apply_symm_apply]
+    apply Subtype.ext
+    funext U
+    change f.val.app U (1 : (B n).obj.obj U) =
+      f.val.app U (((transition J B τ h).app M).val.app U (1 : (B m).obj.obj U))
+    rw [transition_unit_apply.{c, v, r} J B τ h,
+      ((coefficientMap J B τ h).hom.app U).hom.map_one]
+  have hh : (fun f ↦ ordinaryReduction.{c, v, r} J B τ A h M ≫ f) = e :=
+    funext fun f ↦ (he f).symm
+  rw [hh]
+  exact e.bijective
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.defeqAttrib.useBackward true in
+private theorem operation_unit_transition (A : Data.{c, v, r} J B τ)
+    {m n : ℕ} (h : n ≤ m) :
+    IsIso (cochainReduction.{c, v, r} J B τ A h
+      (operationUnitComplex.{c, v, r} J B τ)) := by
+  have : ∀ i : ℤ, IsIso ((cochainReduction.{c, v, r} J B τ A h
+      (operationUnitComplex.{c, v, r} J B τ)).f i) := by
+    intro i
+    by_cases hi : i = 0
+    · subst i
+      exact operation_unit_ordinary_iso.{c, v, r} J B τ A h
+    · have hz : IsZero ((operationUnitComplex.{c, v, r} J B τ).X i) :=
+        HomologicalComplex.isZero_single_obj_X _ _ _ _ hi
+      exact IsZero.isIso
+        ((A.scalar h).model.E.map_isZero
+          ((evaluation.{c, v, max c v r} J B τ m).map_isZero hz))
+        ((evaluation.{c, v, max c v r} J B τ n).map_isZero hz) _
+  exact HomologicalComplex.Hom.isIso_of_components _
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.defeqAttrib.useBackward true in
+private theorem operation_unit_laws (A : Data.{c, v, r} J B τ) :
+    OperationUnitLaws.{c, v, r} J B τ A := by
+  refine {
+    kflat := operation_unit_kflat.{c, v, r} J B τ
+    flat := operation_unit_flat.{c, v, r} J B τ
+    normalized := ?_
+    transition := operation_unit_transition.{c, v, r} J B τ A
+    multiplication := operation_unit_multiplication.{c, v, r} J B τ A
+  }
+  intro m n h
+  let P := operationUnitComplex.{c, v, r} J B τ
+  have hP := (operation_model_laws.{c, v, r} J B τ A).evaluation P
+    (operation_unit_kflat.{c, v, r} J B τ) (operation_unit_flat.{c, v, r} J B τ) m
+  have hf := reduction_on_kflat_evaluation.{c, v, r} J B τ A h P hP.1
+  rw [← cochainReduction_eq_transpose] at hf
+  have := operation_unit_transition.{c, v, r} J B τ A h
+  have := (A.scalar h).model.computes _ hP.1
+  have hi : IsIso
+      (reduction.{c, v, max c v r} J B τ h (A.scalar h) (DerivedCategory.Q.obj P) ≫
+        (Functor.mapDerivedCategoryFactors (evaluation J B τ n)).hom.app P) := by
+    rw [hf]
+    infer_instance
+  exact (isIso_comp_right_iff _ _).mp hi
+
+attribute [local irreducible] evaluation evaluationCoefficientEquiv evaluationSectionEquiv
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.defeqAttrib.useBackward true in
+private theorem flat_of_evaluation (M : Systems.{c, v, max c v r} J B τ)
+    (hf : ∀ n : ℕ, SheafOfModules.IsFlatOnSite.{c, v, max c v r, max c v r}
+      (J := J) (R := B n) ((evaluation.{c, v, max c v r} J B τ n).obj M)) :
+    SheafOfModules.IsFlatOnSite.{c, v, max c v r, max c v r}
+      (J := coefficientSequenceTopology J) (R := systemRing J B τ) M := by
+  apply SheafOfModules.isFlatOnSite_of_local_equationalCriterion
+    (systemRing.{c, v, max c v r} J B τ) M
+  rintro ⟨n, U⟩ t a s hs
+  have hs' : ∑ i, (evaluationCoefficientEquiv.{c, v, r} J B τ n (op U)).symm (a i) •
+      (evaluationSectionEquiv.{c, v, r} J B τ n M (op U)).symm (s i) = 0 := by
+    apply (evaluationSectionEquiv.{c, v, r} J B τ n M (op U)).injective
+    simpa only [map_sum, map_zero, evaluationSectionEquiv_smul.{c, v, r} J B τ n,
+      AddEquiv.apply_symm_apply, RingEquiv.apply_symm_apply] using hs
+  obtain ⟨S, hS, h⟩ :=
+    SheafOfModules.local_equationalCriterion_of_isFlatOnSite
+      (B n) ((evaluation.{c, v, max c v r} J B τ n).obj M) (hf n) U t
+      (fun i ↦ (evaluationCoefficientEquiv.{c, v, r} J B τ n (op U)).symm (a i))
+      (fun i ↦ (evaluationSectionEquiv.{c, v, r} J B τ n M (op U)).symm (s i)) hs'
+  let T : Sieve (n, U) :=
+    { arrows := fun Y f ↦ S f.2
+      downward_closed := by
+        intro Y Z f hf g
+        exact S.downward_closed hf g.2 }
+  refine ⟨T, hS, ?_⟩
+  rintro ⟨m, V⟩ f hf
+  obtain ⟨l, b, z, hz, hb⟩ := h V f.2 hf
+  let b₀ := fun i j ↦ evaluationCoefficientEquiv.{c, v, r} J B τ n (op V) (b i j)
+  let z₀ := fun j ↦ evaluationSectionEquiv.{c, v, r} J B τ n M (op V) (z j)
+  have hz₀ (i : Fin t) : M.val.map ((Prod.sectR n C).map f.2).op (s i) =
+      ∑ j, b₀ i j • z₀ j := by
+    have hi := congrArg (evaluationSectionEquiv.{c, v, r} J B τ n M (op V)) (hz i)
+    simp only [map_sum, evaluationSectionEquiv_smul.{c, v, r} J B τ n,
+      evaluationSectionEquiv_map.{c, v, r} J B τ n M,
+      AddEquiv.apply_symm_apply] at hi
+    convert hi using 1 <;> rfl
+  let R := (systemRing.{c, v, max c v r} J B τ).obj
+  have hb₀ (j : Fin l) : ∑ i, (show (systemRing.{c, v, max c v r} J B τ).obj.obj (op (n, V)) from
+        R.map ((Prod.sectR n C).map f.2).op (a i)) * b₀ i j = 0 := by
+    have hj := congrArg (evaluationCoefficientEquiv.{c, v, r} J B τ n (op V)) (hb j)
+    simp only [map_sum, map_mul, map_zero,
+      evaluationCoefficientEquiv_map.{c, v, r} J B τ n,
+      RingEquiv.apply_symm_apply] at hj
+    convert hj using 1
+    rfl
+  let k : (m, V) ⟶ (n, V) := Prod.mkHom f.1 (𝟙 V)
+  refine ⟨l, (fun i j ↦ R.map k.op (b₀ i j)),
+    (fun j ↦ M.val.map k.op (z₀ j)), ?_, ?_⟩
+  · intro i
+    have hi := congrArg (fun x ↦ M.val.map k.op x) (hz₀ i)
+    simp only [map_sum] at hi
+    have hsm (j : Fin l) := M.val.map_smul k.op (b₀ i j) (z₀ j)
+    have hi' : M.val.map k.op (M.val.map ((Prod.sectR n C).map f.2).op (s i)) =
+        ∑ j, (show M.val.obj (op (m, V)) from
+          (R.map k.op (b₀ i j)) • (show M.val.obj (op (m, V)) from M.val.map k.op (z₀ j))) := by
+      refine hi.trans (Finset.sum_congr rfl fun j _ ↦ ?_)
+      convert hsm j using 1 <;> rfl
+    change M.val.map f.op (s i) = _
+    rw [show f = k ≫ (Prod.sectR n C).map f.2 by ext <;> simp [k]]
+    erw [op_comp, M.val.map_comp_apply]
+    exact hi'
+  · intro j
+    have hj := congrArg (fun x ↦ R.map k.op x) (hb₀ j)
+    simp only [map_sum, map_mul, map_zero] at hj
+    change ∑ i, R.map f.op (a i) * R.map k.op (b₀ i j) = 0
+    rw [show f = k ≫ (Prod.sectR n C).map f.2 by ext <;> simp [k]]
+    refine Eq.trans ?_ hj
+    apply Finset.sum_congr rfl
+    intro i hi
+    erw [op_comp, R.map_comp]
+    rfl
+
+section PullProof
+variable {C' : Type c} [Category.{v} C'] [EssentiallySmall.{max c v r} C']
+  (J' : GrothendieckTopology C')
+  (uInv : Sheaf J (Type (max c v r)) ⥤ Sheaf J' (Type (max c v r)))
+  (uPush : Sheaf J' (Type (max c v r)) ⥤ Sheaf J (Type (max c v r)))
+  (adjSet : uInv ⊣ uPush)
+  (A : Data.{c, v, r} J B τ)
+  (G : Geometry.{c, v, r} J B τ A J' uInv uPush adjSet)
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.defeqAttrib.useBackward true in
+private theorem operation_level_adjunction_underlying (n : ℕ)
+    (M : Mod.{c, v, max c v r} J (B n))
+    (N : Mod.{c, v, max c v r} J' (G.coefficients n))
+    (f : (G.inverseImage n).modules.obj M ⟶ N) :
+    (underlying.{c, v, r} J (B n)).map
+        ((G.levelAdjunction n).homEquiv M N f) ≫
+      (G.levelPushUnderlying n).hom.app N =
+    adjSet.homEquiv _ _ ((G.inverseImage n).moduleUnderlying.inv.app M ≫
+      (underlying.{c, v, r} J' (G.coefficients n)).map f) := by
+  rw [Adjunction.homEquiv_unit, Functor.map_comp]
+  have hn := (G.levelPushUnderlying n).hom.naturality f
+  change (underlying.{c, v, r} J (B n)).map ((G.levelPush n).map f) ≫
+      (G.levelPushUnderlying n).hom.app N =
+    (G.levelPushUnderlying n).hom.app ((G.inverseImage n).modules.obj M) ≫
+      uPush.map ((underlying.{c, v, r} J' (G.coefficients n)).map f) at hn
+  rw [Category.assoc, hn]
+  change _ = _ ≫ uPush.map _
+  rw [← G.level_unit_underlying n M, Functor.map_comp]
+  simp only [Category.assoc, ← Functor.map_comp, Iso.hom_inv_id_app_assoc]
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.defeqAttrib.useBackward true in
+private theorem operation_restriction_mate_underlying {m n : ℕ} (h : n ≤ m)
+    (N : Mod.{c, v, max c v r} J' (G.coefficients n)) :
+    (underlying.{c, v, r} J (B m)).map
+        ((mateEquiv (G.levelAdjunction n) (G.levelAdjunction m)
+          (TwoSquare.mk _ _ _ _ (G.restrictionPullback h).hom)).app N) ≫
+      (G.levelPushUnderlying m).hom.app
+        ((res (coefficientMap J' G.coefficients G.coefficientTransition h)).obj N) =
+      (G.levelPushUnderlying n).hom.app N := by
+  let q := res (coefficientMap J' G.coefficients G.coefficientTransition h)
+  let p := res (coefficientMap J B τ h)
+  let f := (G.restrictionPullback h).hom.app ((G.levelPush n).obj N) ≫
+    q.map ((G.levelAdjunction n).counit.app N)
+  have hm : (G.levelAdjunction m).homEquiv _ _ f =
+      (mateEquiv (G.levelAdjunction n) (G.levelAdjunction m)
+        (TwoSquare.mk _ _ _ _ (G.restrictionPullback h).hom)).app N := by
+    apply ((G.levelAdjunction m).homEquiv _ _).symm.injective
+    rw [Equiv.symm_apply_apply, Adjunction.homEquiv_counit]
+    exact (mateEquiv_counit (G.levelAdjunction n) (G.levelAdjunction m)
+      (TwoSquare.mk _ _ _ _ (G.restrictionPullback h).hom) N).symm
+  rw [← hm]
+  erw [operation_level_adjunction_underlying.{c, v, r} J B τ J' uInv uPush adjSet A G m _ _ f]
+  have hf : (G.inverseImage m).moduleUnderlying.inv.app
+      (p.obj ((G.levelPush n).obj N)) ≫
+      (underlying.{c, v, r} J' (G.coefficients m)).map f =
+    (G.inverseImage n).moduleUnderlying.inv.app ((G.levelPush n).obj N) ≫
+      (underlying.{c, v, r} J' (G.coefficients n)).map
+        ((G.levelAdjunction n).counit.app N) := by
+    have hr := G.restrictionPullback_underlying h ((G.levelPush n).obj N)
+    have hr' : (underlying.{c, v, r} J' (G.coefficients m)).map
+        ((G.restrictionPullback h).hom.app ((G.levelPush n).obj N)) =
+      (G.inverseImage m).moduleUnderlying.hom.app (p.obj ((G.levelPush n).obj N)) ≫
+        (G.inverseImage n).moduleUnderlying.inv.app ((G.levelPush n).obj N) := by
+      apply (cancel_mono ((G.inverseImage n).moduleUnderlying.hom.app _)).mp
+      erw [Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
+      exact hr
+    dsimp only [f]
+    rw [Functor.map_comp, hr']
+    erw [← Category.assoc, Iso.inv_hom_id_app_assoc]
+    rfl
+  refine (congrArg (adjSet.homEquiv _ _) hf).trans ?_
+  refine (operation_level_adjunction_underlying.{c, v, r} J B τ J' uInv uPush adjSet A G n
+    ((G.levelPush n).obj N) N ((G.levelAdjunction n).counit.app N)).symm.trans ?_
+  rw [← (G.levelAdjunction n).homEquiv_symm_id, Equiv.apply_symm_apply]
+  rw [(underlying.{c, v, r} J (B n)).map_id]
+  exact Category.id_comp _
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.defeqAttrib.useBackward true in
+private theorem operation_ordinary_association_iso {m n : ℕ} (h : n ≤ m) :
+    IsIso ((mateEquiv (A.scalar h).ordinaryAdjunction
+      (G.target.scalar h).ordinaryAdjunction).symm
+        (TwoSquare.mk _ _ _ _ (G.restrictionPullback h).hom)).natTrans := by
+  let δ := (mateEquiv (G.levelAdjunction n) (G.levelAdjunction m)
+    (TwoSquare.mk _ _ _ _ (G.restrictionPullback h).hom)).natTrans
+  have hδ (N : Mod.{c, v, max c v r} J' (G.coefficients n)) : IsIso (δ.app N) := by
+    have he := operation_restriction_mate_underlying.{c, v, r} J B τ J' uInv uPush adjSet A G h N
+    have hi : IsIso ((underlying.{c, v, r} J (B m)).map (δ.app N) ≫
+        (G.levelPushUnderlying m).hom.app
+          ((res (coefficientMap J' G.coefficients G.coefficientTransition h)).obj N)) := by
+      rw [he]
+      exact (inferInstance : IsIso ((G.levelPushUnderlying n).hom.app N))
+    have : IsIso ((underlying.{c, v, r} J (B m)).map (δ.app N)) :=
+      IsIso.of_isIso_comp_right _ ((G.levelPushUnderlying m).hom.app _)
+    exact isIso_of_reflects_iso _ (underlying.{c, v, r} J (B m))
+  have : IsIso δ := NatIso.isIso_of_isIso_app _
+  let a := (A.scalar h).ordinaryAdjunction.comp (G.levelAdjunction n)
+  let b := (G.levelAdjunction m).comp (G.target.scalar h).ordinaryAdjunction
+  have he := iterated_mateEquiv_conjugateEquiv_symm
+    (A.scalar h).ordinaryAdjunction (G.target.scalar h).ordinaryAdjunction
+    (G.levelAdjunction m) (G.levelAdjunction n)
+    (mateEquiv (G.levelAdjunction n) (G.levelAdjunction m)
+      (TwoSquare.mk _ _ _ _ (G.restrictionPullback h).hom))
+  have hβ : IsIso ((conjugateEquiv a b).symm δ) := by infer_instance
+  have he' := congrArg TwoSquare.natTrans he
+  simp only [Equiv.symm_apply_apply, Equiv.trans_apply] at he'
+  rw [he']
+  exact hβ
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.defeqAttrib.useBackward true in
+private theorem operation_ordinary_scalar : ∃ κ : ∀ {m n : ℕ} (h : n ≤ m),
+      operationScalarFunctor.{c, v, r} J
+          (coefficientMap.{c, v, max c v r} J B τ h) (A.scalar h) ⋙
+          (G.inverseImage n).modules ≅
+        (G.inverseImage m).modules ⋙ operationScalarFunctor.{c, v, r} J'
+          (coefficientMap.{c, v, max c v r} J' G.coefficients G.coefficientTransition h)
+          (G.target.scalar h),
+    (∀ {m n : ℕ} (h : n ≤ m) (P : Mod.{c, v, max c v r} J (B m)),
+      ((G.target.scalar h).ordinaryAdjunction.homEquiv _ _) ((κ h).inv.app P) =
+        (G.inverseImage m).modules.map ((A.scalar h).ordinaryAdjunction.unit.app P) ≫
+          (G.restrictionPullback h).hom.app
+            ((operationScalarFunctor.{c, v, r} J
+              (coefficientMap.{c, v, max c v r} J B τ h) (A.scalar h)).obj P)) ∧
+    (∀ {m n : ℕ} (h : n ≤ m) (M : Systems.{c, v, max c v r} J B τ),
+      ordinaryReduction.{c, v, r} J' G.coefficients G.coefficientTransition G.target h
+          (G.pull.obj M) ≫ (G.ordinaryPullEvaluation n).hom.app M =
+        (operationScalarFunctor.{c, v, r} J'
+            (coefficientMap.{c, v, max c v r} J' G.coefficients G.coefficientTransition h)
+            (G.target.scalar h)).map ((G.ordinaryPullEvaluation m).hom.app M) ≫
+          (κ h).inv.app ((evaluation.{c, v, max c v r} J B τ m).obj M) ≫
+          (G.inverseImage n).modules.map (ordinaryReduction.{c, v, r} J B τ A h M)) := by
+  let β {m n : ℕ} (h : n ≤ m) :
+      (G.inverseImage m).modules ⋙ operationScalarFunctor.{c, v, r} J'
+          (coefficientMap J' G.coefficients G.coefficientTransition h) (G.target.scalar h) ⟶
+        operationScalarFunctor.{c, v, r} J (coefficientMap J B τ h) (A.scalar h) ⋙
+          (G.inverseImage n).modules :=
+    ((mateEquiv (A.scalar h).ordinaryAdjunction
+      (G.target.scalar h).ordinaryAdjunction).symm
+        (TwoSquare.mk _ _ _ _ (G.restrictionPullback h).hom)).natTrans
+  have hi {m n : ℕ} (h : n ≤ m) : IsIso (β h) :=
+    operation_ordinary_association_iso.{c, v, r} J B τ J' uInv uPush adjSet A G h
+  let κ {m n : ℕ} (h : n ≤ m) := (asIso (β h)).symm
+  have hb {m n : ℕ} (h : n ≤ m) (P : Mod.{c, v, max c v r} J (B m)) :
+      ((G.target.scalar h).ordinaryAdjunction.homEquiv _ _) ((κ h).inv.app P) =
+        (G.inverseImage m).modules.map ((A.scalar h).ordinaryAdjunction.unit.app P) ≫
+          (G.restrictionPullback h).hom.app
+            ((operationScalarFunctor.{c, v, r} J (coefficientMap J B τ h) (A.scalar h)).obj P) := by
+    exact (unit_mateEquiv_symm (A.scalar h).ordinaryAdjunction
+      (G.target.scalar h).ordinaryAdjunction
+      (TwoSquare.mk _ _ _ _ (G.restrictionPullback h).hom) P).symm
+  refine ⟨κ, hb, ?_⟩
+  intro m n h M
+  dsimp only [operationScalarFunctor]
+  apply ((G.target.scalar h).ordinaryAdjunction.homEquiv _ _).injective
+  rw [(G.target.scalar h).ordinaryAdjunction.homEquiv_naturality_right]
+  simp only [ordinaryReduction, Equiv.apply_symm_apply]
+  rw [(G.target.scalar h).ordinaryAdjunction.homEquiv_naturality_left,
+    (G.target.scalar h).ordinaryAdjunction.homEquiv_naturality_right]
+  dsimp only [Functor.comp_obj]
+  have hbm := hb h ((evaluation.{c, v, max c v r} J B τ m).obj M)
+  dsimp only [Functor.comp_obj, operationScalarFunctor] at hbm
+  erw [hbm]
+  have hn := (G.restrictionPullback h).hom.naturality
+    (ordinaryReduction.{c, v, r} J B τ A h M)
+  dsimp only [Functor.comp_map, ordinaryReduction] at hn
+  simp only [Category.assoc]
+  rw [← hn, ← (G.inverseImage m).modules.map_comp_assoc]
+  have hu := (A.scalar h).ordinaryAdjunction.homEquiv_unit _ _
+    (ordinaryReduction.{c, v, r} J B τ A h M)
+  simp only [ordinaryReduction, Equiv.apply_symm_apply] at hu
+  rw [← hu]
+  exact G.ordinaryPullTransition h M
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.defeqAttrib.useBackward true in
+private theorem operation_pull_normalized
+    (ht : G.PullTransitionFormula J B τ A J' uInv uPush adjSet)
+    (M : DS.{c, v, max c v r} J B τ)
+    (hM : Normalized.{c, v, max c v r} J B τ A.scalar M) :
+    Normalized.{c, v, max c v r} J' G.coefficients G.coefficientTransition G.target.scalar
+      (G.pull.mapDerivedCategory.obj M) := by
+  intro m n h
+  have := hM h
+  have hi : IsIso
+      (reduction.{c, v, max c v r} J' G.coefficients G.coefficientTransition h
+        (G.target.scalar h) (G.pull.mapDerivedCategory.obj M) ≫
+        (G.pullEvaluation n).hom.app M) := by
+    rw [ht h M]
+    infer_instance
+  exact (isIso_comp_right_iff _ _).mp hi
+
+variable [PreservesFiniteLimits uInv]
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.defeqAttrib.useBackward true in
+private theorem operation_pull_level_model (n : ℕ)
+    (P : CochainComplex (Mod.{c, v, max c v r} J (B n)) ℤ)
+    (hP : CochainComplex.IsKFlatIndependentCoefficients (R := B n) P)
+    (hf : flatTerms.{c, v, r} J (B n) P) :
+    CochainComplex.IsKFlatIndependentCoefficients (R := G.coefficients n)
+        (((G.inverseImage n).modules.mapHomologicalComplex (.up ℤ)).obj P) ∧
+      flatTerms.{c, v, r} J' (G.coefficients n)
+        (((G.inverseImage n).modules.mapHomologicalComplex (.up ℤ)).obj P) := by
+  refine ⟨(G.levelTensorModel n).kflat P hP hf, ?_⟩
+  intro i
+  let : HasSheafify J AddCommGrpCat.{max c v r} := abelianSheafify J
+  let : HasSheafify J' AddCommGrpCat.{max c v r} := abelianSheafify J'
+  let : J.WEqualsLocallyBijective AddCommGrpCat.{max c v r} := locallyBijective J
+  let : J'.WEqualsLocallyBijective AddCommGrpCat.{max c v r} := locallyBijective J'
+  exact SheafOfModules.isFlat_algebraicInverseImageOfUniverses.{c, v, c, v, max c v r, max c v r}
+    uInv uPush adjSet
+    (SheafOfModules.inverseImageOfUniverses.{c, v, c, v, max c v r} (G.inverseImage n))
+    (P.X i) (hf i)
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.defeqAttrib.useBackward true in
+private theorem operation_pull_whole_model
+    (P : CochainComplex (Systems.{c, v, max c v r} J B τ) ℤ)
+    (hP : CochainComplex.IsKFlatIndependentCoefficients
+      (R := systemRing.{c, v, max c v r} J B τ) P)
+    (hf : flatTerms.{c, v, r} (coefficientSequenceTopology J)
+      (systemRing.{c, v, max c v r} J B τ) P) :
+    CochainComplex.IsKFlatIndependentCoefficients
+        (R := systemRing.{c, v, max c v r} J' G.coefficients G.coefficientTransition)
+        ((G.pull.mapHomologicalComplex (.up ℤ)).obj P) ∧
+      flatTerms.{c, v, r} (coefficientSequenceTopology J')
+        (systemRing.{c, v, max c v r} J' G.coefficients G.coefficientTransition)
+        ((G.pull.mapHomologicalComplex (.up ℤ)).obj P) := by
+  refine ⟨G.tensorModel.kflat P hP hf, ?_⟩
+  intro i
+  apply flat_of_evaluation.{c, v, r} J' G.coefficients G.coefficientTransition
+  intro n
+  have hi :=
+    SheafOfModules.isFlat_algebraicInverseImageOfUniverses.{c, v, c, v, max c v r, max c v r}
+    uInv uPush adjSet
+    (SheafOfModules.inverseImageOfUniverses.{c, v, c, v, max c v r} (G.inverseImage n))
+    ((evaluation.{c, v, max c v r} J B τ n).obj (P.X i))
+    (evaluation_preserves_flat.{c, v, r} J B τ n (P.X i) (hf i))
+  exact SheafOfModules.flatOnSite_of_iso (G.coefficients n)
+    ((G.ordinaryPullEvaluation n).app (P.X i)).symm hi
+end PullProof
+
 end WeilConjectures.SemilinearSections
+
+attribute [local instance high]
+  CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 
 namespace WeilConjectures.NormalizedOperations
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
@@ -503,40 +1235,67 @@ Source: Stacks Project, sites-cohomology.tex, Tags 07A4 and 0D6D, together with
 06YS, 07A2, 0G7E and 07A6 (blueprint: lem-pur-normalized-operation-system-models).
 
 Proof:
-1. Resolve a complex on the ringed sequence site using lem-pc-kflat-resolution.
-   Evaluation preserves flat-term K-flat models by lem-pur-system-evaluation-kflat.
-   This is one resolution of systems, retaining all horizontal maps and cocycles.
-2. Induct on the finite expression. Tensor vertices use lem-pur-kflat-total-tensor-model;
-   pullback vertices, including nonflat coefficient quotients, use
-   lem-weil-pbc-ringed-pullback-preserves-kflat. The universal representative comparisons
-   in lem-coef-semilinear-derived-sections and
-   lem-weil-pbc-ringed-topoi-derived-tensor-pullback compute the derived operations.
-3. The actual tensor transition is tau(a) tensor tau(x). Its scalar adjoint sends
-   (a tensor x) tensor b to tau(a) tensor b tau(x), by
-   lem-pur-sheaf-ring-derived-coefficient-adjunction. Factor it through monoidal
-   scalar extension from lem-pur-cochain-pullback-tensor-coherence and the two input
-   adjoints. The factors are invertible on normalized inputs.
-4. The constant-section ring maps are invertible by
-   prop-weil-pbc-proetale-constant-ring-map. Their quotient square commutes on
-   constants, hence on sheafifications. Scalar association sends
-   b tensor (p tensor a) to (1 tensor p) tensor b c(a). Its inverse sends
-   (s tensor p) tensor b to b q(s) tensor (p tensor 1). Balancing proves the inverse
-   identities; the ordinary transpose in OperationPullLaws fixes this insertion of 1.
-5. The actual pulled transition has adjunct (s tensor p) tensor b mapped to
-   b q(s) tensor tau(p). Thus it is kappa inverse followed by pullback of the original
-   adjunct, not a replacement of tau by the scalar unit. It is invertible for a
-   normalized input.
-6. For three indices, both tensor paths give tau(a) tensor q(b)c tau(x). Both pullback
-   paths give c q(b)q(s) tensor tau(p). Input cocycles and associativity prove the
-   equations on system chain maps before localization. Equal indices give identities.
-7. The whole unit is the regular sequence-site module concentrated in degree zero.
-   Its adjunct s tensor b mapped to q(s)b is an isomorphism with inverse b mapped to
-   1 tensor b. It is flat-term K-flat and supplies the unit base case of the induction.
-   No boundedness or flatness of a quotient homomorphism is used.
+1. The supplied tensor-reduction formula factors the actual reduction through the
+   two input reductions and monoidal scalar extension. All these factors are
+   invertible on normalized inputs. Scalar transposition and tensor linearity give
+   the section formula; the supplied chain reduction and cocycle give coherence.
+2. Resolve once on the sequence site. The supplied evaluation model preserves
+   K-flatness, and evaluation preserves flat terms. Total tensor and scalar
+   change-of-rings preserve these models, including nonflat coefficient quotients.
+3. The regular sequence-site module is flat, and its degree-zero single complex
+   is K-flat. Evaluation identifies it with the regular coefficient module. The
+   ordinary unit reduction is invertible because precomposition with it is the
+   equivalence of sections supplied by the scalar adjunction. The representative
+   counit comparison proves normalization of its derived reduction.
+4. Realize geometric systems on the literal canonical coefficient tower using
+   canonicalCoefficientSystemGeometry. Its actual pull-transition formula
+   preserves normalization. The target reduction cocycle is supplied by its Data;
+   geometricScalarAssociationCocycle proves scalar coherence by localizing the
+   ordinary restriction square and transposing its composition equation.
+5. The ordinary scalar comparison is the mate of restrictionPullback. Its further
+   level-adjunction mate has identity underlying map by the normalized unit and
+   underlying-sheaf equations, hence is invertible. The iterated-mate identity
+   proves the scalar mate invertible. Hom-equivalence naturality gives its unit
+   formula and the actual transition formula.
+6. The supplied geometric models preserve K-flatness. Level algebraic inverse
+   image preserves flat terms. To recover whole-system flatness, use the local
+   finite-relation criterion at level n, lift its covering sieve to the sequence
+   site, and restrict the factorization witnesses horizontally to every m over n.
+   Semilinearity preserves both matrix equations. These closure clauses give every
+   finite iteration while retaining all original whole-system transitions.
 -/
 theorem normalizedOperationSystemModels
     (_hW : ∀ w : W, IsUnit (l : W.presheaf.stalk w)) (A : Calculus l E W) :
     HasOperationSystemModels l E W A := by
-  sorry
+  refine ⟨operation_tensor_laws.{t + 1, t, u} _ _ _ A.systems,
+    operation_unit_laws.{t + 1, t, u} _ _ _ A.systems,
+    operation_model_laws.{t + 1, t, u} _ _ _ A.systems, ?_⟩
+  intro X f _hX
+  let : RepresentablyFlat (Scheme.proEtaleBaseChange f) := flat_of_preservesFiniteLimits _
+  let : AB5OfSize.{t, t + 1} (Type (max u (t + 1))) :=
+    AB5OfSize_shrink.{t, t + 1, max u (t + 1), max u (t + 1)} _
+  let : PreservesFiniteLimits
+      ((Scheme.proEtaleBaseChange f).op.lan :
+        (W.ProEtᵒᵖ ⥤ Type (max u (t + 1))) ⥤ X.ProEtᵒᵖ ⥤ Type (max u (t + 1))) :=
+    preservesFiniteLimits_op_lan_of_flat _
+  let : PreservesFiniteLimits (inverse.{t, u} f) :=
+    Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback
+      (Scheme.proEtaleBaseChange f) (Type (max u (t + 1)))
+      (Scheme.ProEt.topology W) (Scheme.ProEt.topology X)
+  obtain ⟨G, hcoeff, hpull⟩ := canonicalCoefficientSystemGeometry l E W A X f
+  refine ⟨G, hcoeff, ?_, operation_tensor_laws.{t + 1, t, u} _ _ _ G.target,
+    operation_unit_laws.{t + 1, t, u} _ _ _ G.target,
+    operation_model_laws.{t + 1, t, u} _ _ _ G.target⟩
+  refine {
+    normalized := operation_pull_normalized.{t + 1, t, u} _ _ _ _ _ _ _ A.systems G hpull
+    transition := hpull
+    cocycle := by
+      intro M k m n h j
+      exact G.target.reduction_cocycle h j _
+    scalar_cocycle := geometricScalarAssociationCocycle.{t + 1, t, u} _ _ _ _ _ _ _ A.systems G
+    ordinary_scalar := operation_ordinary_scalar.{t + 1, t, u} _ _ _ _ _ _ _ A.systems G
+    whole_model := operation_pull_whole_model.{t + 1, t, u} _ _ _ _ _ _ _ A.systems G
+    level_model := operation_pull_level_model.{t + 1, t, u} _ _ _ _ _ _ _ A.systems G
+  }
 
 end WeilConjectures.NormalizedOperations

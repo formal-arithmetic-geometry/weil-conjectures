@@ -1,0 +1,131 @@
+{
+ "id": "lem-pur-geometric-scalar-association-cocycle",
+ "kind": "statement",
+ "title": "Scalar-association cocycle from normalized inverse-image restriction squares",
+ "statement": "Let J and J' be Grothendieck sites, B a tower of commutative coefficient sheaves with successive quotient maps, A its ordinary-derived system calculus [def-coef-semilinear-derived-calculus], and G a geometric realization with the specified underlying-sheaf and scalar-transpose normalizations [def-coef-semilinear-geometry-derived]. Write F_n for its exact derived level inverse image, T_h for scalar extension, c_{h,j} for source scalar composition and c'_{h,j} for target scalar composition. For n ≤ m ≤ k and P in D(B_k), the two maps from F_n(T_h(T_j(P))) to T'_h(T'_j(F_k(P))) agree: F_n(c_{h,j}) followed by κ_{h.trans j} equals κ_h(T_j(P)), followed by T'_h(κ_j(P)), followed by c'_{h,j}(F_k(P)). The κ are exactly G.coefficientPullback, not arbitrary scalar-association isomorphisms.",
+ "stmt_deps": [
+  "def-coef-semilinear-derived-calculus",
+  "def-coef-semilinear-geometry-derived"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Parent proof step 6, the three-index scalar-association cocycle; Stacks Tags 0D6D and 07A4, with the ordinary restriction square and its specified mates made explicit."
+ },
+ "proof": [
+  {
+   "text": "Ordinary restriction-composition is the chosen isomorphism whose hom is the identity on section carriers. Its inverse also has identity underlying map, by applying the underlying functor to hom_inv_id. Apply the faithful underlying-sheaf functor to the direct and successive inverse-image/restriction paths. Cancel the level-n module-underlying isomorphism and substitute the three equations G.restrictionPullback_underlying. Naturality of the level-k underlying isomorphism and identity underlying restriction composition give equality. This includes equal indices and zero rings.",
+   "uses": [
+    "def-coef-semilinear-geometry-derived"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the exact-square localization composition theorem to that ordinary equality, taking the inverses of the chosen restriction-composition isomorphisms. This proves the displayed cocycle for the localized restriction comparisons without any faithfulness assertion for derived evaluation.",
+   "uses": [
+    "lem-pod-derived-exact-square-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transpose the desired equality of inverse κ maps under the two target scalar adjunctions. Use target scalarComposition_transpose on the direct path and coefficientPullback_transpose on the three individual comparisons. Naturality of the direct restriction comparison moves source composition next to its unit. The source scalarComposition_transpose equation then identifies this unit word with the successive source units followed by inverse restriction composition. Substitute the localized restriction cocycle from the previous step; naturality of the first restriction comparison identifies the remaining two words. Injectivity of the two Hom equivalences proves equality of the inverse paths. Cancel the invertible composition maps, or equivalently take inverses of the resulting composite isomorphisms, to get the stated equality of hom maps.",
+   "uses": [
+    "def-coef-semilinear-derived-calculus",
+    "def-coef-semilinear-geometry-derived"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-coef-semilinear-geometry-derived",
+  "lem-pod-derived-exact-square-composition",
+  "def-coef-semilinear-derived-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Parent proof step 6, the three-index scalar-association cocycle; Stacks Tags 0D6D and 07A4, with the ordinary restriction square and its specified mates made explicit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "LeanFinder",
+   "query": "Inverse image of a constant sheaf of rings is the constant sheaf and commutes with scalar restriction composition",
+   "results": "8 hits, including Sheaf.isConstant_of_forget, restrictScalarsCompToPresheaf and conjugateEquiv_pullbackComp_inv.",
+   "date": "2026-10-22",
+   "verdict": "Ordinary constant sheaves, restriction, and pullback composition are present; none supplies the normalized whole-system geometric realization or its localized scalar-association cocycle."
+  },
+  {
+   "tool": "Loogle",
+   "query": "\"mateEquiv\", \"comp\"",
+   "results": "10 hits, including mateEquiv_hcomp, mateEquiv_vcomp, and conjugateEquiv_mateEquiv_vcomp.",
+   "date": "2026-10-22",
+   "verdict": "These give the abstract mate calculus used in the proof, but do not state the semilinear-system result or construct the canonical coefficient tower."
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*(pullback|inverseImage)|mateEquiv_hcomp|conjugateEquiv.*comp",
+   "results": "25 hits; Mathlib.CategoryTheory.Adjunction.Mates and CompositionIso, ordinary module pullback composition. ConstantSheaf.lean explicitly notes the missing general pullback/constant-sheaf commutation API.",
+   "date": "2026-10-22",
+   "verdict": "No matching theorem for the supplied Geometry interface and actual coefficient sheafifications."
+  },
+  {
+   "tool": "LeanSearch",
+   "query": "Mates of compatible restriction of scalars squares under adjunctions satisfy the scalar extension composition cocycle.",
+   "results": "8 hits: RestrictScalars, LinearEquiv.restrictScalars, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, RestrictionCoextensionAdj.HomEquiv.toRestriction, restrictCoextendScalarsAdj, LinearMap.restrictScalarsₗ, AlgHom.restrictScalars, ModuleCat.homEquiv_extendScalarsComp.",
+   "date": "2026-10-22",
+   "verdict": "No match: ModuleCat.homEquiv_extendScalarsComp gives the unit word for ordinary module scalar composition, but no result gives the cocycle of geometric comparisons in arbitrary supplied derived scalar adjunctions. The proof derives that word from the supplied normalization equations and localizes the ordinary restriction square."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NormalizedOperationSystemModels",
+  "date": "2026-10-22",
+  "group": "J6"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "Parent proof step 6, the three-index scalar-association cocycle; Stacks Tags 0D6D and 07A4, with the ordinary restriction square and its specified mates made explicit.",
+   "via": [
+    "lem-pur-normalized-operation-system-models",
+    "lem-pur-completed-operation-tower-substitution",
+    "lem-pur-derived-pullback-tensor-iso"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.GeometricScalarAssociationCocycle",
+  "file": "lean/Sheaf/Paper/GeometricScalarAssociationCocycle.lean",
+  "declaration": "WeilConjectures.SemilinearSections.geometricScalarAssociationCocycle",
+  "statement": "theorem geometricScalarAssociationCocycle : ∀ {k m n : ℕ} (h : n ≤ m) (j : m ≤ k)\n    (P : D.{c, v, max c v r} J (B k)),\n    (derivedExact.{c, v, max c v r, c, v} J J' (B n) (G.coefficients n) (G.inverseImage\n      n).modules).map\n        ((A.scalarComposition h j).hom.app P) ≫\n        (G.coefficientPullback (h.trans j)).hom.app P =\n      (G.coefficientPullback h).hom.app ((A.scalar j).T.obj P) ≫\n        (G.target.scalar h).T.map ((G.coefficientPullback j).hom.app P) ≫\n        (G.target.scalarComposition h j).hom.app\n          ((derivedExact.{c, v, max c v r, c, v} J J' (B k) (G.coefficients k) (G.inverseImage\n            k).modules).obj P)",
+  "branch": "sheaf-dag",
+  "by": "J6",
+  "date": "2026-10-22"
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-4ce6e",
+  "group": "J6",
+  "result": "pass",
+  "landing": "20261022T011850-L-3225647",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-4ce6e",
+  "group": "J6",
+  "result": "pass",
+  "landing": "20261022T011850-L-3225647",
+  "kind": "interface",
+  "note": "independent cc review: Delivered item/new modules and nodes vs clones/live: target and item statements unchanged; abbrev→def and named law formulas verbatim with change records and no users; sorry'd canonicalCoefficientSystemGeometry read against Geometry/SemilinearDerivedSectionsData.geometric and the constant-sheaf pullback; node proof_deps vs declarations used"
+ }
+}

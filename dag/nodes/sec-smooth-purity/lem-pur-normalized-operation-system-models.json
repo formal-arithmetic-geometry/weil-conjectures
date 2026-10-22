@@ -22,126 +22,77 @@
  ],
  "proof": [
   {
-   "text": "Choose complexes of whole strict semilinear systems representing each input in $D(\\mathscr S(B_{W,\\bullet}))$. Apply [lem-pc-kflat-resolution] on the ringed sequence site to obtain a whole-system K-flat resolution with flat terms; [lem-pur-system-evaluation-kflat] ensures that it is a quasi-isomorphic system complex $P_\\bullet$ whose every $P_n$ is K-flat with flat terms. The replacement is a morphism of systems, so its chain transitions $\\tau^P_{m,n}$ represent the original transitions and satisfy the identity and quotient composition laws as chain maps. In particular we have not chosen unrelated level resolutions. By [lem-coef-semilinear-derived-sections], whole-system tensor and inverse image exist and evaluate to the stated level operations. We use these whole-system operations on the chosen models throughout.",
+   "text": "Use the supplied Data tensor-reduction formula. On normalized inputs its two reduction maps and the monoidal scalar comparison are invertible, so cancellation of tensor evaluation proves tensor normalization. The chain-map formula is the existing system cochain tensor reduction equation. Its section formula is the ordinary tensor transition followed by the scalar adjunction; linearity and tensor balancing give tau(x) tensor b tau(y). The supplied reduction cocycle and the ordinary input transpose supply the remaining tensor laws.",
+   "uses": [
+    "lem-pur-system-tensor-reduction-formula",
+    "def-pur-system-horizontal-reduction-adjoints"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Resolve once on the sequence site by the flat-term K-flat resolution theorem. The supplied tensorEvaluationModel.kflat gives evaluated K-flatness; evaluation_preserves_flat gives evaluated termwise flatness. The direct-sum total tensor theorem gives whole and level tensor closure. Scalar change-of-rings preserves flat-term K-flat complexes, and its recorded computes isomorphism computes the quotient vertex. These are exactly the simultaneous model clauses.",
    "uses": [
     "lem-pc-kflat-resolution",
-    "lem-pur-system-evaluation-kflat",
-    "lem-coef-semilinear-derived-sections"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YS (lemma-K-flat-resolution), applied on the ringed sequence site; whole-system evaluation as in the cited DAG lemmas."
-   }
-  },
-  {
-   "text": "For any fixed finite well-typed expression, proceed by structural induction. The input models are supplied by step 1. For a tensor vertex take the ordinary direct-sum total tensor: [lem-pur-kflat-total-tensor-model] says that it is again K-flat with flat terms, even with two-sided unbounded inputs, and computes the derived tensor. For a geometric or coefficient-quotient pullback vertex apply the ordinary module pullback termwise. The hypotheses of [lem-weil-pbc-ringed-pullback-preserves-kflat] hold for both kinds of ringed-topos morphism and give a flat-term K-flat output; [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] identifies this computation with the derived pullback. Thus no further level replacements are needed at intermediate vertices. Use the actual induced chain transitions at each vertex. The construction takes place on the ringed sequence topos, and evaluating it gives these same component complexes and transitions.",
-   "uses": [
+    "lem-pur-system-evaluation-flat",
     "lem-pur-kflat-total-tensor-model",
-    "lem-weil-pbc-ringed-pullback-preserves-kflat",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-coef-semilinear-derived-sections"
+    "lem-pur-kflat-change-of-rings-independent"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 07A2 (lemma-tensor-product-K-flat), 0G7E (lemma-pullback-K-flat), 07A4 (lemma-pullback-tensor-product), and 0D6D (lemma-derived-pullback-composition)."
-   }
+   "elementary": false
   },
   {
-   "text": "Let $P_\\bullet,Q_\\bullet$ represent $A,N$. The actual tensor transition sends $a\\otimes x$ to $\\tau^P_{m,n}(a)\\otimes\\tau^Q_{m,n}(x)$. By [lem-pur-sheaf-ring-derived-coefficient-adjunction], its derived adjoint is represented by $(a\\otimes x)\\otimes b\\mapsto\\tau^P_{m,n}(a)\\otimes b\\tau^Q_{m,n}(x)$. Factor this map through the monoidal scalar-extension comparison of [lem-pur-cochain-pullback-tensor-coherence]: first $(a\\otimes x)\\otimes b\\mapsto(a\\otimes1)\\otimes(x\\otimes b)$, then apply the two input transition adjoints. This is exactly the first displayed transition in the statement. The first map is invertible by the derived monoidal pullback comparison [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], applied to the identity topos with ring map $q_{m,n}$. For normalized inputs, both input adjoints are isomorphisms by [def-coef-normalized-dvr-tower]; their derived tensor is an isomorphism, so the tensor output is normalized.",
+   "text": "The regular module is flat since tensoring with it is naturally the identity, and its degree-zero single complex is K-flat by the bounded flat-complex criterion. The evaluated regular module is identified by an explicit identity-on-section-carriers linear equivalence. For every target N, precomposition by the ordinary unit reduction is the equivalence obtained from unitHomEquiv at the two coefficient rings and the scalar adjunction. Hence that reduction is an isomorphism. Degreewise this makes the cochain unit reduction an isomorphism; the K-flat counit formula then proves normalization of the derived unit. The scalar transpose and transition of the regular sequence module give q(s)b, including zero degrees and zero rings.",
    "uses": [
-    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
-    "lem-pur-cochain-pullback-tensor-coherence",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "def-coef-normalized-dvr-tower"
+    "lem-weil-pbc-independent-bounded-flat-kflat",
+    "def-pur-system-horizontal-reduction-adjoints"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 07A4 (lemma-pullback-tensor-product), 07A6 (lemma-adjoint); scalar unit and adjunct representative normalization in the cited coefficient-adjunction lemma."
-   }
+   "elementary": false
   },
   {
-   "text": "For $f:X\\to Y$, let $c_j:f^{-1}B_{Y,j}\\to B_{X,j}$ be the constant-section structure map. It is invertible by [prop-weil-pbc-proetale-constant-ring-map]. The square with $q_Y,q_X$ commutes: both composites send a constant coefficient to its residue at level $n$, and the constant-sheaf universal property gives equality. Apply the coefficient-square comparison of [lem-pur-cochain-pullback-tensor-coherence]. For a flat-term K-flat $B_{Y,m}$-complex $P$, its map $\\kappa:f_n^*(P\\otimes_{B_{Y,m}}B_{Y,n})\\to(f_m^*P)\\otimes_{B_{X,m}}B_{X,n}$ is locally\n$$b\\otimes(p\\otimes a)\\longmapsto(1\\otimes p)\\otimes b c_n(a).$$\nIts inverse sends $(s\\otimes p)\\otimes b$ to $bq_X(s)\\otimes(p\\otimes1)$. The two composites are identities by balancing; these are degree-zero chain maps. Step 2 permits their use without deriving again, and they are the specified scalar-association comparison and its inverse.",
+   "text": "Choose the geometric realization with the literal target coefficient tower using the separate canonical coefficient-system construction. The derived pulled transition formula immediately preserves normalization, since its input reduction, coefficient comparison and evaluation isomorphisms are invertible. The output reduction cocycle is the target Data reduction_cocycle. The scalar-association cocycle is proved separately by ordinary restriction-square composition, localization and the specified adjunction transposes.",
    "uses": [
-    "prop-weil-pbc-proetale-constant-ring-map",
-    "lem-pur-cochain-pullback-tensor-coherence"
+    "lem-pur-canonical-coefficient-system-geometry",
+    "lem-pur-geometric-scalar-association-cocycle"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 07A4 (lemma-pullback-tensor-product), 0D6D (lemma-derived-pullback-composition); constant-section coefficient maps as in the cited pro-etale lemma."
-   }
+   "elementary": false
   },
   {
-   "text": "For the chosen system model $P_\\bullet$ of $C$, the actual pullback transition is locally $s\\otimes p\\mapsto q_X(s)\\otimes\\tau^P_{m,n}(p)$. Its scalar adjoint is therefore $(s\\otimes p)\\otimes b\\mapsto bq_X(s)\\otimes\\tau^P_{m,n}(p)$ by [lem-pur-sheaf-ring-derived-coefficient-adjunction]. Using step 4, this is the composite $\\kappa^{-1}$ followed by $f_n^*(\\alpha^P_{m,n})$, since the latter map sends $bq_X(s)\\otimes(p\\otimes1)$ to $bq_X(s)\\otimes\\tau^P_{m,n}(p)$. This proves the second displayed transition formula, including its orientation. The input transition itself factors through $p\\mapsto p\\otimes1$ followed by its adjunct, as the same adjunction lemma asserts. On localization, $\\kappa$ is invertible and $Lf_n^*$ carries the invertible input adjoint to an isomorphism; hence the output is normalized by [def-coef-normalized-dvr-tower]. The calculation uses the actual $\\tau^P$, not the scalar-insertion unit in its place.",
+   "text": "For the ordinary scalar comparison, form the mate of the ordinary restrictionPullback square under the scalar adjunctions. Its further level-adjunction mate has identity underlying map under the specified direct-image identifications: expand the Hom equivalence using the level unit, use naturality, the normalized underlying-unit equation and the counit triangle. It is therefore invertible, since underlying sheaves reflect isomorphisms. The iterated-mate/conjugate-equivalence identity makes the desired scalar mate invertible as well. Its inverse defines kappa; unit_mateEquiv_symm gives exactly the required transpose. Hom-equivalence naturality and ordinaryPullTransition prove the transition equation, retaining the actual input transition.",
    "uses": [
-    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
-    "def-coef-normalized-dvr-tower"
+    "def-coef-semilinear-geometry-derived"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A6 (lemma-adjoint), with the scalar-association calculation in step 4 and the normalized representative adjunct formula in the cited node."
-   }
+   "elementary": false
   },
   {
-   "text": "For $r\\ge m\\ge n$, check the tensor cocycle on the chosen system complexes. A local tensor $(a\\otimes x)\\otimes b\\otimes c$, with $b\\in B_m,c\\in B_n$, goes under the successive adjoints to\n$$\\tau^P_{r,n}(a)\\otimes q_{m,n}(b)c\\,\\tau^Q_{r,n}(x).$$\nThe direct adjoint gives the same result after the scalar-association map sends $b\\otimes c$ to $q_{m,n}(b)c$. Here we used precisely the two strict input transition cocycles; their derived formulation is that of [def-coef-normalized-dvr-tower]. The reassociations are the canonical ones in [lem-pur-cochain-pullback-tensor-coherence]. The equality holds on each total-degree summand, commutes with restrictions and sheafification, and hence is an equality of whole-system chain constructions, which remains an equality after localization. At $r=m=n$ the same calculation is the identity.",
+   "text": "The supplied whole and level tensor-model fields preserve K-flatness under geometric pullback. Algebraic inverse image preserves flat module sheaves at each level. Flatness of a system follows from flatness at every level: at (n,U) use the local finite-relation criterion in level n, lift its covering sieve to the sequence site, and restrict its factorization witnesses along the horizontal (m,V) to (n,V) arrow. Semilinearity and functoriality preserve both finite matrix equations, including empty families and empty covers. Thus ordinaryPullEvaluation transfers level flatness to the pulled system. Package these results with the source and target tensor, unit and model laws into the unchanged conjunction HasOperationSystemModels.",
    "uses": [
-    "def-coef-normalized-dvr-tower",
-    "lem-pur-cochain-pullback-tensor-coherence"
+    "lem-weil-pbc-flat-algebraic-inverse-image-universes",
+    "lem-pur-system-evaluation-flat",
+    "def-coef-semilinear-geometry-derived",
+    "lem-weil-pbc-flat-local-relations-universes",
+    "lem-exc-site-local-relations-imply-flat"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 07A4 (lemma-pullback-tensor-product) and 0D6D (lemma-derived-pullback-composition); explicit scalar multiplication and input cocycle calculation."
-   }
-  },
-  {
-   "text": "For pullback the same triple-index check is explicit. On $(s\\otimes p)\\otimes b\\otimes c$, $s\\in B_{X,r},b\\in B_{X,m},c\\in B_{X,n}$, the successive adjoints of step 5 give\n$$c q^X_{m,n}(b)q^X_{r,n}(s)\\otimes\\tau^P_{r,n}(p).$$\nThe direct adjoint applied after scalar association gives this identical expression, since $q^X_{r,n}=q^X_{m,n}q^X_{r,m}$ and the input transitions satisfy their cocycle [def-coef-normalized-dvr-tower]. This also checks the two possible composites of $\\kappa$ maps: step 4 moves scalar factors by multiplication, and both paths multiply these same factors. The canonical comparisons are those of [lem-pur-cochain-pullback-tensor-coherence]. Balancing and associativity prove equality before localization on the system complexes; the identity index inserts $1$ and gives the identity. No assertion that evaluations detect equality of arbitrary derived morphisms is used.",
-   "uses": [
-    "def-coef-normalized-dvr-tower",
-    "lem-pur-cochain-pullback-tensor-coherence"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0D6D (lemma-derived-pullback-composition), 07A4 (lemma-pullback-tensor-product); explicit triple-scalar and transition calculation."
-   }
-  },
-  {
-   "text": "Finally take the whole-system unit to be $B_\\bullet[0]$ with its quotient transitions. Each component has flat terms and is K-flat: tensoring by $B_n[0]$ is the identity functor, so it is exact and preserves acyclic complexes [def-pc-flat-sheaf-modules, def-pc-kflat-complex]. Its transition adjoint is $B_m\\otimes_{B_m}B_n\\to B_n$, $s\\otimes b\\mapsto q_{m,n}(s)b$, with inverse $b\\mapsto1\\otimes b$. Multiplication gives both the unit cocycle and identity. The unit comparison agrees with [lem-pur-cochain-pullback-tensor-coherence]. This supplies the unit base case in step 2. Every finite expression thus has simultaneous whole-system models retaining all the transitions just computed. All changes of rings used flat-term K-flat inputs, never flatness of the quotient homomorphism.",
-   "uses": [
-    "def-pc-flat-sheaf-modules",
-    "def-pc-kflat-complex",
-    "lem-pur-cochain-pullback-tensor-coherence"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 07A4 (lemma-pullback-tensor-product), 0G7E (lemma-pullback-K-flat); elementary unit-complex calculation."
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-pur-system-tensor-reduction-formula",
+  "def-pur-system-horizontal-reduction-adjoints",
   "lem-pc-kflat-resolution",
-  "lem-pur-system-evaluation-kflat",
-  "lem-coef-semilinear-derived-sections",
+  "lem-pur-system-evaluation-flat",
   "lem-pur-kflat-total-tensor-model",
-  "lem-weil-pbc-ringed-pullback-preserves-kflat",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
-  "lem-pur-cochain-pullback-tensor-coherence",
-  "def-coef-normalized-dvr-tower",
-  "prop-weil-pbc-proetale-constant-ring-map",
-  "def-pc-flat-sheaf-modules",
-  "def-pc-kflat-complex"
+  "lem-pur-kflat-change-of-rings-independent",
+  "lem-weil-pbc-independent-bounded-flat-kflat",
+  "lem-pur-canonical-coefficient-system-geometry",
+  "lem-pur-geometric-scalar-association-cocycle",
+  "def-coef-semilinear-geometry-derived",
+  "lem-weil-pbc-flat-algebraic-inverse-image-universes",
+  "lem-weil-pbc-flat-local-relations-universes",
+  "lem-exc-site-local-relations-imply-flat"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Explicit whole-semilinear-system transition argument based on Tags 06YS, 07A2, 0G7E, 07A4, 0D6D, 07A6; not a verbatim Stacks theorem."
+  "place": "J6 Lean proof: source and target Data model fields, ordinary scalar-adjunction mates, finite-relation flatness on the sequence site, and literal canonical coefficient realization. Tags 06YS, 07A2, 0G7E, 07A4 and 0D6D; coefficient transport is separated from operation closure."
  },
  "mathlib_searches": [
   {
@@ -283,12 +234,7 @@
  },
  "tool_uses": [
   "lem-pc-kflat-resolution",
-  "lem-pur-system-evaluation-kflat",
-  "lem-coef-semilinear-derived-sections",
-  "lem-weil-pbc-ringed-pullback-preserves-kflat",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
-  "prop-weil-pbc-proetale-constant-ring-map"
+  "lem-coef-semilinear-derived-sections"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -339,5 +285,15 @@
   "group": "NE",
   "result": "pass",
   "note": "Re-delivery of the f91cca03 H2 RETURN; item Lean byte-identical (sha 61387eb2); item record changes only stmt_deps (theorem node lem-pur-system-cochain-tensor-reduction replaced by new def-pur-system-horizontal-reduction-adjoints). New node: existing:true on unchanged Sheaf.Paper.SystemCochainTensorReduction owning ordinaryReduction (SystemOrdinaryTensorReduction:192, public import) and cochainReduction (:37); statement verbatim; check_existing and check_new_node clean; TeX matches homEquiv.symm(transition) and the degreewise cochain map; its stmt_deps (semilinear-system-models, semilinear-derived-calculus, cochain-complex-modules) own the body decls; no competing owner, no cycle. Maths re-read clause by clause: tensor/pull/unit adjoints, kappa^-1 fixed by its transpose, cocycles, simultaneous flat-term K-flat models, actual X coefficients via coefficientDirect, universes t+1/t/max u (t+1), edge cases OK; one sorry, no hollow def. Advisories: input_factor and cocycle clauses follow from the existing interface; transitive base-era owners; second-reading section is the maintainer recap. No compile (no fix; Lean unchanged)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-4ce6e",
+  "group": "J6",
+  "result": "pass",
+  "landing": "20261022T011850-L-3225647",
+  "kind": "interface",
+  "note": "independent cc review: Delivered item/new modules and nodes vs clones/live: target and item statements unchanged; abbrev→def and named law formulas verbatim with change records and no users; sorry'd canonicalCoefficientSystemGeometry read against Geometry/SemilinearDerivedSectionsData.geometric and the constant-sheaf pullback; node proof_deps vs declarations used"
  }
 }

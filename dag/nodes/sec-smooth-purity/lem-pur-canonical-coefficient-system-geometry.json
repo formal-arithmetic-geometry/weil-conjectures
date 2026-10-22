@@ -1,0 +1,146 @@
+{
+ "id": "lem-pur-canonical-coefficient-system-geometry",
+ "kind": "statement",
+ "title": "Geometric realization on the literal constant finite coefficient tower",
+ "statement": "Fix a prime ℓ, a finite extension E of Q_ℓ, and schemes W and X with f : X → W [def-weil-l-adic-coefficient-extension, def-weil-proetale-inverse-image]. Put B_{W,n}=(O_E/varpi^(n+1))_W and B_{X,n}=(O_E/varpi^(n+1))_X, using the actual constant-presheaf sheafifications and their actual successive quotient maps [def-weil-completed-integral-coefficients]. For every supplied SemilinearDerivedSectionsData A on W [lem-coef-semilinear-derived-sections], there exists a Geometry G for the actual pro-etale set-sheaf adjunction of f [def-coef-semilinear-geometry-derived] such that its coefficient family equals B_X literally, its transitions are heterogeneously equal to the actual quotient maps, its inverse-image ring comparison transposes to the sheafification extension of the constant-section map B_W → f_*B_X, and G.PullTransitionFormula holds. No prime-invertibility hypothesis on X or W is required for this coefficient-realization construction.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-proetale-inverse-image",
+  "lem-coef-semilinear-derived-sections",
+  "def-coef-semilinear-geometry-derived",
+  "def-coef-semilinear-geometry-ops"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Parent proof steps 4–5: identify the actual inverse-image coefficient tower by the constant-section maps before using scalar association; Stacks Sites Tag 00YV, pro-etale Tag 09A5, and Sites Cohomology Tags 07A4 and 0D6D. This is the geometric coefficient realization part of those steps, not the operation closure theorem."
+ },
+ "proof": [
+  {
+   "text": "Use the geometric field of the supplied A to obtain a realization G₀ and its whole-system pull-transition formula. This uses the supplied structure, rather than choosing a new source calculus. The inverse-image operation transports ring and module operation graphs, so it gives the ringed sequence-site realization specified by the geometric interface.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "def-coef-semilinear-geometry-derived"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each coefficient ring, compare the inverse image of its constant sheaf with the literal constant-presheaf sheafification on X. Both functors are left adjoint to the same constant-section direct-image functor; the unique left-adjoint comparison is the transpose of the constant-section structure map. Its ring operations are fixed on generalized sections by the algebraic inverse-image graph equations. Naturality in the coefficient ring gives compatibility with every successive quotient. Compose with G₀.ringUnderlying to obtain isomorphisms φ_n : G₀.coefficients n ≅ B_X,n, commuting with the tower transitions. The construction is functorial even on the empty site or for a zero coefficient ring.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "def-weil-completed-integral-coefficients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the target system calculus along this tower isomorphism. At each level use restriction along φ_n.inv; its inverse is restriction along φ_n.hom, with the identity-on-underlying-modules composition comparisons. On the sequence site use the corresponding single ring-sheaf isomorphism. These exact equivalences preserve underlying abelian sheaves, module morphisms, tensor products through the canonical balanced tensor comparison, flatness, and K-flatness. Conjugate the target closed calculus and scalar adjunctions by these equivalences; transport their representative models using the same tensor comparison. Take G.coefficients to be the literal B_X family, G.coefficientTransition to be its actual quotient, G.inverseImage_n to be G₀.inverseImage_n followed by the level equivalence, G.pull to be G₀.pull followed by the sequence-site equivalence, and G.push and levelPush to be their inverse equivalences followed by the old direct images. Use the composite adjunctions and their canonical derived localizations. Define evaluation, coefficient restriction, tensor, Hom, and unit comparisons by these same ordinary identity-on-carrier transports. Their naturality, operation-graph, unit, counit, representative-model and section-carrier equations follow by cancellation of the equivalence unit/counit and the old equations.",
+   "uses": [
+    "def-coef-semilinear-geometry-derived",
+    "def-coef-semilinear-geometry-ops"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The coefficient equality is reflexivity for the newly chosen family, and transition equality is reflexivity for the newly chosen quotient maps. The normalized transpose equation is exactly the uniqueness equation of the constant-sheaf comparison in step 2. Transport the ordinary pulled transition square through the sequence and level equivalences, retaining the actual input transition. Localization of this square, followed by scalar transposition, gives PullTransitionFormula for G; equivalence cancellation identifies it with the old formula and does not require derived evaluation to be faithful.",
+   "uses": [
+    "def-coef-semilinear-geometry-ops"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-semilinear-derived-sections",
+  "def-coef-semilinear-geometry-derived",
+  "def-weil-proetale-inverse-image",
+  "def-weil-completed-integral-coefficients",
+  "def-coef-semilinear-geometry-ops"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Parent proof steps 4–5: identify the actual inverse-image coefficient tower by the constant-section maps before using scalar association; Stacks Sites Tag 00YV, pro-etale Tag 09A5, and Sites Cohomology Tags 07A4 and 0D6D. This is the geometric coefficient realization part of those steps, not the operation closure theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "LeanFinder",
+   "query": "Inverse image of a constant sheaf of rings is the constant sheaf and commutes with scalar restriction composition",
+   "results": "8 hits, including Sheaf.isConstant_of_forget, restrictScalarsCompToPresheaf and conjugateEquiv_pullbackComp_inv.",
+   "date": "2026-10-22",
+   "verdict": "Ordinary constant sheaves, restriction, and pullback composition are present; none supplies the normalized whole-system geometric realization or its localized scalar-association cocycle."
+  },
+  {
+   "tool": "Loogle",
+   "query": "\"mateEquiv\", \"comp\"",
+   "results": "10 hits, including mateEquiv_hcomp, mateEquiv_vcomp, and conjugateEquiv_mateEquiv_vcomp.",
+   "date": "2026-10-22",
+   "verdict": "These give the abstract mate calculus used in the proof, but do not state the semilinear-system result or construct the canonical coefficient tower."
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*(pullback|inverseImage)|mateEquiv_hcomp|conjugateEquiv.*comp",
+   "results": "25 hits; Mathlib.CategoryTheory.Adjunction.Mates and CompositionIso, ordinary module pullback composition. ConstantSheaf.lean explicitly notes the missing general pullback/constant-sheaf commutation API.",
+   "date": "2026-10-22",
+   "verdict": "No matching theorem for the supplied Geometry interface and actual coefficient sheafifications."
+  },
+  {
+   "tool": "LeanSearch",
+   "query": "The inverse image of a constant sheaf of commutative rings is the constant sheaf, naturally in ring homomorphisms, and restriction along a ring isomorphism transports module systems and their adjunctions.",
+   "results": "8 hits: SheafOfModules.PullbackConstruction.adjunction, pullbackPushforwardAdjunction, Scheme.Modules.restrictFunctorIsoPullback, StructureSheaf.comap_id', SheafOfModules.pullback, instIsLeftAdjointPullback, Sheaf.IsConstant.mk, pullback_id_comp.",
+   "date": "2026-10-22",
+   "verdict": "No match: the hits construct ordinary module pullback or recognize a constant sheaf. They do not identify inverse images of the literal constant ring sheafifications or transport the supplied whole-system geometric calculus with its normalized adjunction and transition equations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NormalizedOperationSystemModels",
+  "date": "2026-10-22",
+  "group": "J6"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "Parent proof steps 4–5: identify the actual inverse-image coefficient tower by the constant-section maps before using scalar association; Stacks Sites Tag 00YV, pro-etale Tag 09A5, and Sites Cohomology Tags 07A4 and 0D6D. This is the geometric coefficient realization part of those steps, not the operation closure theorem.",
+   "via": [
+    "lem-pur-normalized-operation-system-models",
+    "lem-pur-completed-operation-tower-substitution",
+    "lem-pur-derived-pullback-tensor-iso"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CanonicalCoefficientSystemGeometry",
+  "file": "lean/Sheaf/Paper/CanonicalCoefficientSystemGeometry.lean",
+  "declaration": "WeilConjectures.NormalizedOperations.canonicalCoefficientSystemGeometry",
+  "statement": "theorem canonicalCoefficientSystemGeometry\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{t})\n    (A : SemilinearDerivedSectionsData.{t + 1, t, u} (Scheme.ProEt.topology W)\n      (integralCoefficientCommRingSheaf l E W) (coefficientSequenceCommRingTransition l E W))\n    (X : Scheme.{t}) (f : X ⟶ W) :\n    ∃ G : Geometry.{t + 1, t, u} (Scheme.ProEt.topology W)\n        (integralCoefficientCommRingSheaf l E W) (coefficientSequenceCommRingTransition l E W)\n        A.systems (Scheme.ProEt.topology X)\n        (Functor.sheafPullbackConstruction.sheafPullback (Scheme.proEtaleBaseChange f)\n          (Type (max u (t + 1))) (Scheme.ProEt.topology W) (Scheme.ProEt.topology X))\n        ((Scheme.proEtaleBaseChange f).sheafPushforwardContinuous (Type (max u (t + 1)))\n          (Scheme.ProEt.topology W) (Scheme.ProEt.topology X))\n        (Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\n          (Scheme.proEtaleBaseChange f) (Type (max u (t + 1)))\n          (Scheme.ProEt.topology W) (Scheme.ProEt.topology X)),\n      (∃ h : G.coefficients = integralCoefficientCommRingSheaf l E X,\n    (∀ n : ℕ, HEq (G.coefficientTransition n) (coefficientSequenceCommRingTransition l E X n)) ∧\n    ∀ n : ℕ,\n      ((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\n          (Scheme.proEtaleBaseChange f) (Type (max u (t + 1)))\n          (Scheme.ProEt.topology W) (Scheme.ProEt.topology X)).homEquiv _ _)\n        ((G.inverseImage n).ringUnderlying.hom ≫\n          (sheafCompose (Scheme.ProEt.topology X)\n            (CategoryTheory.forget CommRingCat.{max u (t + 1)})).map\n              (eqToHom (congrFun h n))) =\n        (sheafCompose (Scheme.ProEt.topology W)\n          (CategoryTheory.forget CommRingCat.{max u (t + 1)})).map\n            (show integralCoefficientCommRingSheaf l E W n ⟶\n                ((Scheme.proEtaleBaseChange f).sheafPushforwardContinuous\n                  CommRingCat.{max u (t + 1)} (Scheme.ProEt.topology W)\n                    (Scheme.ProEt.topology X)).obj\n                  (integralCoefficientCommRingSheaf l E X n) from\n              ((sheafificationAdjunction (Scheme.ProEt.topology W)\n                CommRingCat.{max u (t + 1)}).homEquiv _ _).symm\n                (Functor.whiskerLeft (Scheme.proEtaleBaseChange f).op\n                  (toSheafify (Scheme.ProEt.topology X)\n                    ((Functor.const X.ProEtᵒᵖ).obj\n                      (CommRingCat.of (ULift.{t + 1}\n                        (Padic.coefficientExtensionRing l E (n + 1)))))))) ) ∧\n      G.PullTransitionFormula (Scheme.ProEt.topology W)\n        (integralCoefficientCommRingSheaf l E W) (coefficientSequenceCommRingTransition l E W)\n        A.systems (Scheme.ProEt.topology X) _ _ _",
+  "branch": "sheaf-dag",
+  "by": "J6",
+  "date": "2026-10-22"
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-4ce6e",
+  "group": "J6",
+  "result": "pass",
+  "landing": "20261022T011850-L-3225647",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-4ce6e",
+  "group": "J6",
+  "result": "pass",
+  "landing": "20261022T011850-L-3225647",
+  "kind": "interface",
+  "note": "independent cc review: Delivered item/new modules and nodes vs clones/live: target and item statements unchanged; abbrev→def and named law formulas verbatim with change records and no users; sorry'd canonicalCoefficientSystemGeometry read against Geometry/SemilinearDerivedSectionsData.geometric and the constant-sheaf pullback; node proof_deps vs declarations used"
+ }
+}
