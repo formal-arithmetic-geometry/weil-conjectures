@@ -35,62 +35,10 @@
  ],
  "proof": [
   {
-   "text": "The standing separated finite-type $k$-scheme and finite extension $E/\\mathbf Q_\\ell$ satisfy the explicit opening hypotheses of [sk-lem-int-integral-heart]. By its clause (1), $C$ is bounded, each $H^q(C)$ lies in $\\Cons$, and all its standard truncations stay in $\\Dbc$. Apply [lem-pc-derived-lower-truncation-step-triangle] for the finitely many nonzero cohomological degrees: its triangle $H^{-n}(C)[n]\\to\\tau_{\\ge -n}C\\to\\tau_{\\ge -n+1}C\\to H^{-n}(C)[n+1]$ expresses $C$ by finitely many extensions of shifted constructible sheaves. Thus it suffices first to filter a constructible sheaf $F$. Choose its finite adapted stratification $T_b$ from [sk-lem-int-integral-heart](2).",
-   "uses": [
-    "sk-lem-int-integral-heart",
-    "lem-pc-derived-lower-truncation-step-triangle"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-ext/sk-lem-int-ext-formula.proof.md",
-    "place": "(1)"
-   }
-  },
-  {
-   "text": "The finite-type hypothesis gives a finite affine cover with finitely generated coordinate algebras over $k$ [def-weil-finite-type-morphism], and [lem-wf-affine-noetherian-components] makes each of these rings Noetherian. Thus $X$ is Noetherian. Apply clause (1) alone of [det-lem-coefficient-heart-common-stratification] to the finite adapted stratification (taking its unused coefficient parameter to be $E$). It gives a finite refinement of the underlying partition with open prefix unions $U_k=\\bigcup_{h\\le k}S_h$. This is a topological assertion; we do not apply its field-coefficient clauses (2) or (3) to integral sheaves. Put $Z_0=X$ and for $k\\ge1$ give $X\\setminus U_k$ the reduced induced closed subscheme structure supplied by [lem-weil-pbc-reduced-induced-closed-subscheme]. Choose each $S_k$ to be the open subscheme of $Z_{k-1}$ with underlying set $U_k\\setminus U_{k-1}$. The remaining closed subscheme of $Z_{k-1}$ is $Z_k$: both reduced structures agree by uniqueness in that same lemma, and for $k=1$ it is the stated closed subscheme of $X$. We have $S_k\\xrightarrow{u_k}Z_{k-1}\\xrightarrow{i_{k-1}}X$ and $Z_m=\\varnothing$. The standing scheme is Noetherian; its open complements, including those within the closed $Z_k$, are quasi-compact. The local-form assertion for the new scheme structures is established in steps 3-5, rather than inferred from topological containment.",
+   "step": 1,
+   "text": "The finite-type scheme is Noetherian by the Mathlib finite-type and Noetherian APIs. Bounded constructibility already supplies boundedness and constant-model constructibility of each cohomology sheaf. Choose the finite family of degrees in a bounded interval; outside it the cohomology is zero.",
    "uses": [
     "def-weil-finite-type-morphism",
-    "lem-wf-affine-noetherian-components",
-    "det-lem-coefficient-heart-common-stratification",
-    "lem-weil-pbc-reduced-induced-closed-subscheme"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-ext/sk-lem-int-ext-formula.proof.md",
-    "place": "(1)"
-   }
-  },
-  {
-   "text": "Fix a refined stratum $S=S_k$ whose underlying set lies in an original stratum $T=T_b$. Form $W=S\\times_XT$, with projections $v:W\\to S$ and $w:W\\to T$. By [lem-weil-pbc-immersion-base-change-lft](1), $v$ is an immersion. For every $s\\in S$, the fibre $W_s$ is the fibre of $T\\to X$ over the image of $s$, extended to $\\kappa(s)$. By [lem-weil-pbc-immersion-fibre-degree-one], that original fibre is $\\operatorname{Spec}\\kappa(x)$ because $x\\in T$; its extension is $\\operatorname{Spec}\\kappa(s)$. Thus $v$ is surjective. In its closed-then-open factorization [def-weil-closed-immersion], the open subscheme must be all of $S$, so $v$ is a surjective closed immersion.",
-   "uses": [
-    "lem-weil-pbc-immersion-base-change-lft",
-    "lem-weil-pbc-immersion-fibre-degree-one",
-    "def-weil-closed-immersion"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-ext/sk-lem-int-ext-formula.proof.md",
-    "place": "(1)"
-   }
-  },
-  {
-   "text": "Choose a pro-étale covering of $T$ on which $F|_T$ has its finite scalar-matrix local presentations, and pull the covering back along $w$ [def-weil-proetale-inverse-image]. For $\\Lambda=\\mathcal O_E$, [sk-prop-sfb-cartesian-coefficients](1) makes module pullback exact, with the scalar action transported by $w^{-1}\\mathcal O_{E,T}\\cong\\mathcal O_{E,W}$. Applying this exact functor to a presentation sends $\\mathcal O_{E,T}^m\\xrightarrow{A}\\mathcal O_{E,T}^n\\to F\\to0$ to the identical scalar matrix over $\\mathcal O_{E,W}$, with its cokernel. Thus $w^*(F|_T)$ has the same finite constant local models, including torsion; the scalar-matrix characterization is [sk-def-sfb-constructible](1). The composition isomorphisms of [sk-def-sfb-module-pushforward-pullback] identify this module with $v^*(F|_S)$, since both composites $W\\to X$ agree.",
-   "uses": [
-    "def-weil-proetale-inverse-image",
-    "sk-prop-sfb-cartesian-coefficients",
-    "sk-def-sfb-constructible",
-    "sk-def-sfb-module-pushforward-pullback"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-ext/sk-lem-int-ext-formula.proof.md",
-    "place": "(1)"
-   }
-  },
-  {
-   "text": "Apply [lem-sfb-integral-model-surjective-closed-reflection] to the surjective closed immersion $v:W\\to S$ of step 3 and the sheaf $F|_S$. Step 4 gives its hypothesis (b), so its conclusion (a) supplies the required finite integral constant local models on $S$ itself. This applies to every refined stratum, without assuming that its scheme structure factors through the original $T$. In particular $F|_S\\in\\Cons(S,\\mathcal O_E)$ by [sk-def-sfb-constructible](2), taking the one-stratum stratification of $S$.",
-   "uses": [
-    "lem-sfb-integral-model-surjective-closed-reflection",
     "sk-def-sfb-constructible"
    ],
    "elementary": false,
@@ -100,12 +48,11 @@
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-proetale-ringed-open-closed] on $Z_{k-1}$ with ring sheaf $\\mathcal O_{E,Z_{k-1}}$ to $F|_{Z_{k-1}}$, open $S_k$, and closed complement $Z_k$. Push its short exact sequence forward along $i_{k-1}$, which is exact by that same node. Use the canonical coefficient-ring identifications and exact module inverse images of [sk-prop-sfb-cartesian-coefficients]. For $h_k:Z_k\\hookrightarrow Z_{k-1}$, the composition isomorphisms explicitly stated in [sk-def-sfb-module-pushforward-pullback] give $i_{k-1,*}h_{k*}\\cong i_{k*}$ and $h_k^*i_{k-1}^*F\\cong i_k^*F$, and likewise $u_k^*i_{k-1}^*F\\cong a_k^*F$. These are isomorphisms of modules with their transported coefficient actions; no equality of the module pullback with a bare sheaf functor is required. With $F^{(k)}=i_{k*}(F|_{Z_k})$, $F^{(0)}=F$, and $L_k=F|_{S_k}$, this gives\n$$0\\to a_{k!}L_k\\to F^{(k-1)}\\to F^{(k)}\\to0.$$\nStarting with $F^{(m)}=0$, these finitely many sequences exhibit $F$ as successive extensions of the $a_{k!}L_k$. All terms and pieces are sheaves in degree zero. By [lem-weil-pbc-complex-ses-triangle] the same sequences give distinguished triangles in the unbounded derived category.",
+   "step": 2,
+   "text": "Apply the common-reduced-stratification theorem to that finite family. Its ordered reduced strata have open prefix unions and reduced closed tails. Their restrictions all have finite constant local models. Fixed-strata localization generation expresses each degree-zero cohomology sheaf in the extension closure of its stratum extensions by zero.",
    "uses": [
-    "lem-weil-pbc-proetale-ringed-open-closed",
-    "sk-prop-sfb-cartesian-coefficients",
-    "sk-def-sfb-module-pushforward-pullback",
-    "lem-weil-pbc-complex-ses-triangle"
+    "lem-finite-constant-models-common-reduced-stratification",
+    "lem-finite-constant-model-fixed-strata-generation"
    ],
    "elementary": false,
    "source": {
@@ -114,129 +61,102 @@
    }
   },
   {
-   "text": "Insert these filtrations, shifted by $[-q]$, into the finite truncation decomposition of step 1. Here is the elementary extension-refinement argument. For a distinguished triangle $A\\to B\\to D\\xrightarrow{\\delta}A[1]$ and a filtration $0=D_0\\to\\cdots\\to D_r=D$, let $g_j:D_j\\to D$ be the composite structure map and choose $B_j=\\operatorname{Cone}(\\delta g_j)[-1]$. Then $B_0\\simeq A$ and $B_r\\simeq B$ by the zero-map triangle and rotation of the original triangle. If $d_j:D_{j-1}\\to D_j$ and $E_j=\\operatorname{Cone}(d_j)$, then $g_jd_j=g_{j-1}$. Apply the octahedral axiom [def-weil-triangulated-category] to the composable maps $D_{j-1}\\xrightarrow{d_j}D_j\\xrightarrow{\\delta g_j}A[1]$. Its cone triangle is $E_j\\to B_{j-1}[1]\\to B_j[1]\\to E_j[1]$; shifting and rotating gives $B_{j-1}\\to B_j\\to E_j\\to B_{j-1}[1]$. Append a filtration of $A$ to the chain starting at $B_0$. Induction on the finite number of truncation triangles therefore refines their shifted cohomology pieces by the shifted sheaf filtrations of step 6. Use one common ordered refinement for the finitely many cohomology sheaves in step 2, and apply the fibre-product comparison of steps 3-5 and localization sequences of step 6 to each sheaf on this refinement. This proves clause (1) with one finite stratification. When $C$ is a sheaf, step 6 already gives only degree-zero pieces. For $C=0$ or $X=\\varnothing$ the filtration is empty.",
+   "step": 3,
+   "text": "Shift the generation property by minus the cohomological degree. If the original complex is concentrated in degree zero, each other cohomology sheaf vanishes; all retained stratum shifts are therefore zero. Apply bounded degreewise devissage to the isomorphism-invariant extension closure. Triangle-extension associativity flattens each finite extension product into a finite chain with zero initial vertex. Treat the zero complex by the empty chain.",
    "uses": [
+    "lem-sfb-degreewise-bounded-devissage",
     "def-weil-triangulated-category"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-ext/sk-lem-int-ext-formula.proof.md",
     "place": "(1)"
    }
   },
   {
-   "text": "Set $a_!L=i_*u_!L$ as in the statement. The coefficient $\\mathcal O_E$ is admissible by [sk-def-localizing-closure]; the support adjunction [det-lem-formal-closed-support-derived](1), whose sheaf hypotheses include all those admissible rings, applies to the closed immersion $i:Z\\to X$ with quasi-compact open complement. It gives naturally\n$$R\\operatorname{Hom}_X(a_!L,K)\\simeq R\\operatorname{Hom}_Z(u_!L,R\\underline\\Gamma_ZK).$$\nBoth sides are global derived Hom complexes: by [lem-sfb-derived-internal-hom-sections-model](2), applied on $X$ and on $Z$ (each module-object category over the pulled-back coefficients being the category of sheaves of modules over that ring sheaf on the small site), they are represented by global Hom complexes into K-injective representatives and agree with $R\\Gamma(T,R\\mathcal Hom(-,-))$ for the internal Hom of [sk-def-sfb-derived-tensor-hom], as in the statement. This is the stated derived support functor on the ambient module category, so no extension of a finite- or field-coefficient result is being assumed.",
+   "step": 4,
+   "text": "Use the local resolution of a finite constant integral model by two dualizable terms. Transport the derived mapping-cone dualizability and Tor amplitude [-1,0] through its cokernel isomorphism in the abstract category, then specialize to coefficient modules. Dualizability descends along the pro-etale cover. The Tor component of the existing local-duality-descent theorem supplies the same global Tor bound. Choose a right dual and use the derived braiding to obtain the reverse exact pairing. The tensor adjunction and uniqueness of right adjoints identify internal Hom from the original object with tensor by that chosen dual. Evaluation at the unit identifies the recorded internal dual with the chosen dual. Transport its exact pairing and Tor amplitude [0,1] to the recorded dual. Tensor by it also preserves small limits.",
    "uses": [
-    "sk-def-localizing-closure",
-    "det-lem-formal-closed-support-derived",
-    "lem-sfb-derived-internal-hom-sections-model",
-    "sk-def-sfb-derived-tensor-hom"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-ext/sk-lem-int-ext-formula.proof.md",
-    "place": "(2), closed-immersion adjunction"
-   }
-  },
-  {
-   "text": "For coefficients $\\mathcal O_E$, [sk-prop-sfb-cartesian-coefficients] gives the canonical natural isomorphism from $u^*$ to sheaf inverse image with module action transported through $\\alpha_u^{-1}$. Transporting the exact adjunction $u_!\\dashv u^{-1}$ of [lem-weil-pbc-proetale-ringed-open-closed] along this isomorphism gives the exact functors $u_!,u^*$ and their adjunction $u_!\\dashv u^*$. Take a K-injective representative $J^\\bullet$ of $R\\underline\\Gamma_ZK$, available by [prop-pur-kinjective-resolutions-exist]. Since $u_!$ is exact, [lem-weil-pbc-right-adjoint-preserves-kinjective] shows $u^*J^\\bullet$ is K-injective. Termwise adjunction gives a canonical isomorphism of global Hom complexes\n$$\\operatorname{Hom}^\\bullet_Z(u_!L,J^\\bullet)\\cong\\operatorname{Hom}^\\bullet_S(L,u^*J^\\bullet).$$\nThese complexes compute the global derived Hom complexes of the statement: [lem-sfb-derived-internal-hom-sections-model](2), applied on $Z$ to the representative $u_!L$ and the K-injective $J^\\bullet$, and on $S$ to $L$ and the K-injective $u^*J^\\bullet$, says that they represent $R\\Gamma(Z,R\\mathcal Hom(u_!L,R\\underline\\Gamma_ZK))$ and $R\\Gamma(S,R\\mathcal Hom(L,u^*R\\underline\\Gamma_ZK))$, with $R\\mathcal Hom$ the right adjoint of [sk-def-sfb-derived-tensor-hom]. Naturality in $K$ holds because maps of K-injective representatives compute derived morphisms [lem-weil-pbc-kinjective-hom-derived] and the termwise adjunction is natural in $J^\\bullet$. Therefore\n$$R\\operatorname{Hom}_Z(u_!L,R\\underline\\Gamma_ZK)\\simeq R\\operatorname{Hom}_S(L,u^*R\\underline\\Gamma_ZK).$$\nThis argument imposes no boundedness assumption on $K$.",
-   "uses": [
-    "lem-weil-pbc-proetale-ringed-open-closed",
-    "sk-prop-sfb-cartesian-coefficients",
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-weil-pbc-right-adjoint-preserves-kinjective",
-    "lem-weil-pbc-kinjective-hom-derived",
-    "lem-sfb-derived-internal-hom-sections-model",
-    "sk-def-sfb-derived-tensor-hom"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-ext/sk-lem-int-ext-formula.proof.md",
-    "place": "(2), open-immersion derived adjunction"
-   }
-  },
-  {
-   "text": "Clause (3) of [det-prop-sfb-qlbar-colimit-x-integral-limit], on $S$, identifies the pulled-back condensed coefficient ring with the completed ring sheaf $\\mathcal O_{E,S}\\cong\\varprojlim_n(\\mathcal O_E/\\pi_E^n)_S$. Apply [det-lem-int-integral-heart-dualizable] on the scheme $S$ to the constructible sheaf $L$ (with its one-stratum local model). It says that $L$ is dualizable with derived dual $D=L^\\vee=R\\mathcal Hom(L,\\mathcal O_{E,S})$, and $D$ has Tor amplitude in $[0,1]$. Apply [lem-sfb-dual-tensor-adjunctions] to this pairing. By symmetry of relative derived tensor, its right-tensor adjunction is $L\\otimes^{\\mathbf L}-\\dashv D\\otimes^{\\mathbf L}-$. But [sk-def-sfb-derived-tensor-hom] defines $R\\mathcal Hom(L,-)$ as a right adjoint of $L\\otimes^{\\mathbf L}-$. Uniqueness of right adjoints, including its evaluation-compatible comparison [det-sp-unique-right-adjoint], identifies the two right adjoints naturally:\n$$D\\otimes^{\\mathbf L}M\\simeq R\\mathcal Hom(L,M).$$\nTake $M=u^*R\\underline\\Gamma_ZK$, apply $R\\Gamma(S,-)$, and compose with steps 8-9. This is exactly the corrected global Hom formula. Ordinary $\\mathcal Hom$ cannot replace either derived internal Hom when $L$ has torsion.",
-   "uses": [
-    "det-prop-sfb-qlbar-colimit-x-integral-limit",
-    "det-lem-int-integral-heart-dualizable",
-    "lem-sfb-dual-tensor-adjunctions",
-    "sk-def-sfb-derived-tensor-hom",
+    "lem-integral-constant-model-local-resolution",
+    "lem-zl-condensed-lisse-proetale-locality",
+    "lem-integral-heart-local-duality-descent",
+    "lem-kun-flat-bounded-tor-amplitude",
+    "lem-sf-source-dual-tor-interval",
     "det-sp-unique-right-adjoint"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-ext/sk-lem-int-ext-formula.proof.md",
-    "place": "(2), derived dual and tensor–Hom comparison"
+    "place": "(2)"
    }
   },
   {
-   "text": "For filtered colimits, choose a fixed flat-term K-flat representative $P^\\bullet\\to D$, as supplied by [lem-pc-kflat-resolution]. For any small filtered diagram of module-sheaf complexes $M_\\alpha^\\bullet$, the termwise colimit represents the derived filtered colimit because filtered colimits are exact [lem-pc-module-filtered-colimits-tensor]. The same cited node gives\n$$\\varinjlim_\\alpha\\operatorname{Tot}(P^\\bullet\\otimes M_\\alpha^\\bullet)\\cong\\operatorname{Tot}(P^\\bullet\\otimes\\varinjlim_\\alpha M_\\alpha^\\bullet).$$\nBy the K-flat definition of relative derived tensor [sk-def-sfb-derived-tensor-hom] the two sides represent $\\varinjlim_\\alpha(D\\otimes^{\\mathbf L}M_\\alpha)$ and $D\\otimes^{\\mathbf L}\\varinjlim_\\alpha M_\\alpha$. This proves filtered continuity on the ambient unbounded category, without interpreting an ordinary categorical colimit in a triangulated category as a homotopy colimit.",
+   "step": 5,
+   "text": "The module kernel support construction is right adjoint to exact closed pushforward, by the sheaf support argument and closed/open detection. It is additive. Compare this adjunction with canonical closed support. Apply the closed and open internal Hom formulas. For every scheme morphism, the ordinary adjunction identifies sections of direct image with sections, and exact inverse image implies preservation of K-injectives by the right adjoint. Derive these comparisons and compose them with the dual-tensor comparison to obtain the natural global Hom formula.",
    "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-pc-module-filtered-colimits-tensor",
-    "sk-def-sfb-derived-tensor-hom"
+    "det-lem-formal-closed-support-sheaves",
+    "det-lem-formal-closed-support-adjunction",
+    "lem-sfb-open-closed-internal-hom-formulas",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-ext/sk-lem-int-ext-formula.proof.md",
-    "place": "(2), filtered-colimit compatibility"
+    "place": "(2)"
    }
   },
   {
-   "text": "For a strict countable tower $M_n^\\bullet$, [lem-weil-pbc-ringed-strict-tower-homotopy-limit] gives its functorial Roos triangle $R\\lim M_n\\to\\prod_n^D M_n\\xrightarrow{1-s}\\prod_n^D M_n\\to(R\\lim M_n)[1]$, with products in the derived category. By [lem-sfb-dual-tensor-adjunctions], $-\\otimes^{\\mathbf L}D$ is a right adjoint and preserves those products; symmetry gives the same assertion for $T=D\\otimes^{\\mathbf L}-$. Derived tensor is exact: for a fixed K-flat model $P$ and a chain map $f:M\\to N$, the map $\\operatorname{Tot}(P\\otimes\\operatorname{Cone}(f))\\to\\operatorname{Cone}(\\operatorname{Tot}(P\\otimes f))$ is identity on $P^p\\otimes N^q$ and multiplication by $(-1)^p$ on the shifted summand $P^p\\otimes M^{q+1}$. The cone differential of [def-weil-abstract-derived-category] and the total differential in [def-pc-tensor-complex-sheaves] makes this a chain isomorphism: on the shifted summand the horizontal differential acquires $(-1)^{p+1}$, the vertical differential becomes $-1\\otimes d_M$, and the off-diagonal map becomes $(-1)^p(1\\otimes f)$ on both sides. The inverse has the same signs. The shift comparison has the same $(-1)^p$ on the shifted factor. Thus tensor carries cone triangles and their shifts to distinguished triangles. Under the canonical product comparison, for every $n$ the $n$-th component of the transported $T(1-s)$ is $T(\\mathrm{pr}_n)-T(f_n)T(\\mathrm{pr}_{n+1})$, since tensor is additive. This is exactly the transition map $1-s_T$ for the tensored tower. Hence applying $T$ to the first Roos triangle gives the Roos triangle for $TM_n$. On the functorial resolution-and-cone models of the cited tower lemma this is the canonical comparison $T(R\\lim M_n)\\to R\\lim TM_n$, and it is an isomorphism because the two product comparisons are isomorphisms. This proves countable derived-inverse-limit compatibility without assuming exactness of products of module sheaves.",
+   "step": 6,
+   "text": "Essential surjectivity of localization on K-flat complexes gives a K-flat representative of the dual. The monoidal localization lifting comparison identifies its complex-level tensor functor followed by localization with derived tensor by the dual. Tensor by a complex has an internal-Hom right adjoint, hence preserves all small colimits and in particular filtered degreewise colimits.",
    "uses": [
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "lem-sfb-dual-tensor-adjunctions",
-    "def-pc-tensor-complex-sheaves",
-    "def-weil-abstract-derived-category"
+    "lem-pc-source-module-kflat-resolution",
+    "lem-pc-source-kflat-module-tensor-model"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-ext/sk-lem-int-ext-formula.proof.md",
-    "place": "(2), derived-inverse-limit compatibility"
+    "place": "(2)"
+   }
+  },
+  {
+   "step": 7,
+   "text": "Dual tensor is exact, commutes with shifts and preserves products. Map any distinguished strict-tower Roos triangle through it. The product comparison isomorphism identifies every mapped projection with the canonical projection; consequently it identifies the mapped successor difference with the successor difference of the mapped tower. Transport the mapped distinguished triangle along this product comparison to obtain the asserted derived-limit triangle and projection map.",
+   "uses": [
+    "def-weil-derived-limit",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-ext/sk-lem-int-ext-formula.proof.md",
+    "place": "(2)"
    }
   }
  ],
  "proof_deps": [
-  "sk-lem-int-integral-heart",
-  "lem-pc-derived-lower-truncation-step-triangle",
   "def-weil-finite-type-morphism",
-  "lem-wf-affine-noetherian-components",
-  "det-lem-coefficient-heart-common-stratification",
-  "lem-weil-pbc-reduced-induced-closed-subscheme",
-  "lem-weil-pbc-immersion-base-change-lft",
-  "lem-weil-pbc-immersion-fibre-degree-one",
-  "def-weil-closed-immersion",
-  "def-weil-proetale-inverse-image",
-  "sk-prop-sfb-cartesian-coefficients",
   "sk-def-sfb-constructible",
-  "sk-def-sfb-module-pushforward-pullback",
-  "lem-sfb-integral-model-surjective-closed-reflection",
-  "lem-weil-pbc-proetale-ringed-open-closed",
-  "lem-weil-pbc-complex-ses-triangle",
+  "lem-finite-constant-models-common-reduced-stratification",
+  "lem-finite-constant-model-fixed-strata-generation",
+  "lem-sfb-degreewise-bounded-devissage",
   "def-weil-triangulated-category",
-  "sk-def-localizing-closure",
-  "det-lem-formal-closed-support-derived",
-  "lem-sfb-derived-internal-hom-sections-model",
-  "sk-def-sfb-derived-tensor-hom",
-  "prop-pur-kinjective-resolutions-exist",
-  "lem-weil-pbc-right-adjoint-preserves-kinjective",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "det-prop-sfb-qlbar-colimit-x-integral-limit",
-  "det-lem-int-integral-heart-dualizable",
-  "lem-sfb-dual-tensor-adjunctions",
+  "lem-integral-constant-model-local-resolution",
+  "lem-kun-flat-bounded-tor-amplitude",
+  "lem-sf-source-dual-tor-interval",
   "det-sp-unique-right-adjoint",
-  "lem-pc-kflat-resolution",
-  "lem-pc-module-filtered-colimits-tensor",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "def-pc-tensor-complex-sheaves",
-  "def-weil-abstract-derived-category"
+  "det-lem-formal-closed-support-sheaves",
+  "det-lem-formal-closed-support-adjunction",
+  "lem-sfb-open-closed-internal-hom-formulas",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-pc-source-module-kflat-resolution",
+  "lem-pc-source-kflat-module-tensor-model",
+  "def-weil-derived-limit",
+  "lem-zl-condensed-lisse-proetale-locality",
+  "lem-integral-heart-local-duality-descent"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-ext/sk-lem-int-ext-formula.proof.md",
-  "place": "Proof (1)-(2), corrected to use the derived internal dual; explicit ordered refinement, coefficient-independent nilpotent comparison, and colimit/Roos arguments."
+  "place": "K6: reduced-source factorization, fixed-strata generation, local duality and monoidal localization; no unit step bypassed."
  },
  "mathlib_searches": [
   {
@@ -453,27 +373,11 @@
   ]
  },
  "tool_uses": [
-  "lem-wf-affine-noetherian-components",
-  "lem-pc-derived-lower-truncation-step-triangle",
-  "det-lem-coefficient-heart-common-stratification",
   "lem-weil-pbc-reduced-induced-closed-subscheme",
-  "lem-weil-pbc-immersion-base-change-lft",
-  "lem-weil-pbc-fibre-product-points",
-  "sk-prop-sfb-cartesian-coefficients",
-  "new-lem-weil-pbc-proetale-surjective-closed-cover-refinement",
-  "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
-  "new-lem-weil-pbc-condensed-surjective-closed-equivalence",
   "lem-weil-pbc-proetale-ringed-open-closed",
   "lem-weil-pbc-complex-ses-triangle",
-  "prop-pur-kinjective-resolutions-exist",
   "lem-weil-pbc-right-adjoint-preserves-kinjective",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "det-sp-unique-right-adjoint",
-  "lem-pc-kflat-resolution",
-  "lem-pc-module-filtered-colimits-tensor",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "det-prop-sfb-qlbar-colimit-x-integral-limit",
-  "lem-weil-pbc-immersion-fibre-degree-one"
+  "det-sp-unique-right-adjoint"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -488,6 +392,9 @@
   "module": "Sheaf.Paper.IntegralStratumHomFormula",
   "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.integral_stratum_filtration",
   "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.stratumModuleDerivedSections",
+   "AlgebraicGeometry.ProEtale.CondensedRing.stratumModuleDual",
+   "AlgebraicGeometry.ProEtale.CondensedRing.stratumModuleDualTensor",
    "AlgebraicGeometry.ProEtale.CondensedRing.integralStratumSections",
    "AlgebraicGeometry.ProEtale.CondensedRing.integralStratumDerivedSections",
    "AlgebraicGeometry.ProEtale.CondensedRing.integralStratumDual",
@@ -501,7 +408,7 @@
   "by": "Q06",
   "date": "2026-10-18",
   "existing": false,
-  "note": "Both clauses are in lean.declarations. The filtration has one common finite stratification and actual distinguished triangles, with zero shifts for degree-zero inputs. The formula is a natural isomorphism in the arbitrary unbounded target. Filtered colimits are degreewise colimits on a K-flat tensor model, not ordinary categorical colimits in a triangulated category. The strict-tower clause preserves the Roos triangle with its induced projection map. The added landed coefficient-data node supplies canonical aliases without a new coefficient construction."
+  "note": "Both clauses are in lean.declarations. The filtration has one common finite stratification and actual distinguished triangles, with zero shifts for degree-zero inputs. The formula is a natural isomorphism in the arbitrary unbounded target. Filtered colimits are degreewise colimits on a K-flat tensor model, not ordinary categorical colimits in a triangulated category. The strict-tower clause preserves the Roos triangle with its induced projection map. The added landed coefficient-data node supplies canonical aliases without a new coefficient construction. The three generic stratumModule constructions keep coefficients abstract before integral specialization; the existing specialized definitions delegate to precisely these constructions. See the definition-change records."
  },
  "reviewed_lean": {
   "date": "2026-10-18",
@@ -510,5 +417,15 @@
   "group": "Q06",
   "result": "pass",
   "note": "Read the node, the source place sk-lem-int-ext-formula.md, all 19 stmt_dep records and the declarations used in the side clone. Clause (1): constructible Dbc input; one common FiniteLocallyClosedStratification; a real Fin-indexed filtration of distinguished triangles from zero to C; graded pieces ≅ single(i_* u_! L)⟦n⟧ with v ≫ i equal to the stratum immersion, v open, i closed, L constructible with a finite constant local model; n = 0 forced when C is concentrated in degree 0. Clause (2): natural iso derivedHom(a_!L) ⋙ RΓ_X ≅ RΓ_Z ⋙ v^* ⋙ (L^∨ ⊗ −) ⋙ RΓ_S on unbounded D(X), with RΓ = total right derived functor of Hom(O,−) (real helper; no existing global-sections functor for these module objects) and L^∨ = RHom(L, unit); Tor amplitude [0,1] correct in cohomological convention (O/π dual is O/π[−1]); filtered colimits via a K-flat model; strict-tower Roos triangles preserved with canonical projections. No hollow definitions, only the two theorems are sorry, docstrings carry source and proof steps, lines ≤100, imports map to proof-dependency records, no name collisions, lean.statement verbatim. Only lean and stmt_deps changed; the added stmt_dep is an already landed definition node (allowed). nt_compile --json clean, 16.7 s at load ~72. Advisory: closedModuleSectionsWithSupport lives in a lemma node's module (existing DAG design); a common stratification is the natural reading and is what the proof builds."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-d86b0",
+  "group": "K6",
+  "result": "pass",
+  "landing": "20261022T020109-L-22063",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + 3 new modules/nodes vs clones/live base and unit sk-lem-int-ext (realized empty; cited units sk-lem-int-integral-heart and sk-lem-formal-closed-support still passed through); target statements byte-identical; 3 changed def bodies rfl-equal to the old ones; importer IntegralStratumExtBound compiled against the delivered item"
  }
 }

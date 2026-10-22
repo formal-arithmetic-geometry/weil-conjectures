@@ -1,0 +1,114 @@
+{
+ "id": "lem-finite-constant-models-common-reduced-stratification",
+ "kind": "statement",
+ "title": "Common ordered reduced stratification for finite families of constant-model constructible sheaves",
+ "statement": "Let Λ be a commutative condensed ring, X a Noetherian scheme, and M_j a finite family of constant-model constructible module sheaves [sk-def-sfb-constructible]. There exists a finite locally closed stratification R of X [def-constructible-stratification], with reduced stratum schemes, such that every restriction of every M_j has a finite constant local model. The prefixes of R are open. For every prefix index k there is a reduced closed subscheme i_k: Z_k → X whose image is the complement of that prefix. Each stratum inclusion factors as an open immersion into Z_k followed by i_k, where k is its index. The statement includes the empty family and empty scheme.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-ext/sk-lem-int-ext-formula.md",
+  "place": "Proof of clause (1), ordered strata and localization"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-constructible",
+  "def-constructible-stratification"
+ ],
+ "proof": [
+  {
+   "step": 1,
+   "text": "Proof: choose an adapted finite stratification for each sheaf. Intersections indexed\nby tuples of old stratum indices form a finite locally closed cover. Apply Noetherian\nordered refinement to this cover, obtaining a partition whose prefixes are open.\nRealize each piece as an open subscheme of the reduced closed tail before it.\nIts map into X factors through the corresponding old immersion: first factor through\nthe old open coborder, then use reducedness to factor through the closed part.\nExact inverse image pulls back the finite scalar presentation, and the composition\ncomparison identifies the resulting module with the restriction from X. The empty\nfamily and the empty scheme are included by the same finite-cover argument.",
+   "uses": [
+    "new-det-lem-coefficient-heart-common-stratification-refinement",
+    "lem-sfb-finite-model-stratum-filtration",
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "new-det-lem-coefficient-heart-common-stratification-refinement",
+  "lem-sfb-finite-model-stratum-filtration",
+  "lem-weil-pbc-reduced-induced-closed-subscheme"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-ext/sk-lem-int-ext-formula.md",
+  "place": "Explicit extraction and proof from the existing declarations; group K6."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite family of constructible sheaves admits a common reduced locally closed stratification with open prefix unions",
+   "results": "Eight generic sheaf/category hits, no matching stratum construction.",
+   "date": "2026-10-22",
+   "verdict": "Use the named project results and the generic Mathlib API."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocallyClosed",
+   "results": "12 hits: locally closed intersections, preimages, images and coborders. These supply the topological API; none constructs the required simultaneous reduced scheme stratification.",
+   "date": "2026-10-22",
+   "verdict": "Use the named project results and the generic Mathlib API."
+  },
+  {
+   "tool": "grep",
+   "query": "common.*stratification|ordered.*refinement",
+   "results": "No exact match.",
+   "date": "2026-10-22",
+   "verdict": "Use the named project results and the generic Mathlib API."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite family of constructible sheaves admits a common reduced locally closed stratification with open prefix unions",
+   "results": "Eight hits: finite constructible unions and intersections and locally constructible open-cover criteria. The finite intersections are useful topological input, but no theorem constructs the common ordered reduced scheme stratification and its finite constant models.",
+   "date": "2026-10-22",
+   "verdict": "No matching Mathlib leaf; use the recorded project constructions and the generic Mathlib APIs."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralStratumHomFormula",
+  "date": "2026-10-22",
+  "group": "K6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-int-ext-formula",
+   "place": "Proof, fixed common strata and localization",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-int-ext",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteConstantModelsCommonStratification",
+  "file": "lean/Sheaf/Paper/FiniteConstantModelsCommonStratification.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.finiteConstantModels_commonReducedStratification",
+  "statement": "theorem finiteConstantModels_commonReducedStratification\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n    [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X]\n    (n : ℕ)\n    (M : Fin n → supportModules Λ X)\n    (hM : ∀ j, IsConstantModelConstructible Λ X (M j)) :\n    ∃ R : X.FiniteLocallyClosedStratification,\n      (∀ a, IsReduced (R.domain a)) ∧\n      (∃ (Z : Fin (R.n + 1) → Scheme.{u}) (i : ∀ k, Z k ⟶ X)\n        (v : ∀ a : Fin R.n, R.domain a ⟶ Z a.castSucc),\n        (∀ k, IsClosedImmersion (i k) ∧ IsReduced (Z k)) ∧\n        (∀ a, IsOpenImmersion (v a) ∧ v a ≫ i a.castSucc = R.immersion a) ∧\n        ∀ k, Set.range (i k) =\n          (⋃ a : Fin R.n, ⋃ (_ : a.val < k.val), R.stratum a)ᶜ) ∧\n      (∀ j a, HasFiniteConstantLocalModel Λ (R.domain a)\n        ((upperStar Λ (R.immersion a)).obj (M j))) ∧\n      ∀ k : Fin (R.n + 1),\n        IsOpen (⋃ a : Fin R.n, ⋃ (_ : a.val < k.val), R.stratum a)",
+  "branch": "sheaf-dag",
+  "by": "K6",
+  "date": "2026-10-22"
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-d86b0",
+  "group": "K6",
+  "result": "pass",
+  "landing": "20261022T020109-L-22063",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-d86b0",
+  "group": "K6",
+  "result": "pass",
+  "landing": "20261022T020109-L-22063",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + 3 new modules/nodes vs clones/live base and unit sk-lem-int-ext (realized empty; cited units sk-lem-int-integral-heart and sk-lem-formal-closed-support still passed through); target statements byte-identical; 3 changed def bodies rfl-equal to the old ones; importer IntegralStratumExtBound compiled against the delivered item"
+ }
+}

@@ -1,0 +1,116 @@
+{
+ "id": "lem-integral-constant-model-local-resolution",
+ "kind": "statement",
+ "title": "Finite constant integral models have local dualizable two-term resolutions",
+ "statement": "Let l be prime and E a finite extension of Q_l, with condensed integral coefficient ring Λ and its module categories [def-sfb-integral-derived-coefficient-data]. Let X be a Noetherian scheme and M a Λ-module sheaf on its small pro-etale site with a finite constant local model [sk-def-sfb-constructible]. There exists a pro-etale cover U of X such that on every chart U_a there is a short exact sequence T_1 → T_2 → T_3 of Λ-module sheaves, the first two terms are dualizable, and T_3 is isomorphic to the inverse image of M. The tensor and dualizability here are those of the ordinary module-object category, before deriving.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-dualizable.proof.md",
+  "place": "First paragraph: the local free resolution of a finite integral scalar model."
+ },
+ "stmt_deps": [
+  "def-sfb-integral-derived-coefficient-data",
+  "sk-def-sfb-constructible"
+ ],
+ "proof": [
+  {
+   "step": 1,
+   "text": "Proof: the finite constant local models give a locally finite presentation. Equip E\nwith its coefficient-extension spectral norm, replace it by its small equivalent field,\nand identify their valuation rings isometrically. Continuous scalar realization transports\nthis ring isomorphism to the condensed coefficient rings. The integral locally free\nresolution theorem gives a short exact two-term resolution, and restriction along the\ncoefficient isomorphism transports it back to the stated coefficient ring. Refine the\ntwo locally finite free covers to a common cover. Exact module inverse image transports\nthe short exact sequence. On each chart its first two terms are finite free after the\ncanonical scalar-transport comparison. A finite free module is dualizable, so this is\nthe asserted local resolution. The quotient is identified with the inverse image of M\nby the transported counit. Zero ranks and empty covers are included.",
+   "uses": [
+    "lem-weil-pbc-integral-lfp-locally-free-resolution",
+    "det-def-sfb-constructible-local-model",
+    "det-lem-int-tensor-shriek",
+    "lem-proetale-finite-projective-dualizable"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-integral-lfp-locally-free-resolution",
+  "det-def-sfb-constructible-local-model",
+  "det-lem-int-tensor-shriek",
+  "lem-proetale-finite-projective-dualizable"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-ext/sk-lem-int-ext-formula.md",
+  "place": "Explicit extraction and proof from the existing declarations; group K6."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite locally presented modules over continuous integral padic coefficients admit local two term finite free resolutions",
+   "results": "Eight generic sheaf/category hits, no matching stratum construction.",
+   "date": "2026-10-22",
+   "verdict": "Use the named project results and the generic Mathlib API."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ExactPairing",
+   "results": "12 hits: ExactPairing, dual objects, unit pairings, isomorphism transport and tensor adjunctions. These supply the generic duality API, but not the geometric two-term resolution.",
+   "date": "2026-10-22",
+   "verdict": "Use the named project results and the generic Mathlib API."
+  },
+  {
+   "tool": "grep",
+   "query": "integral_lfp_locallyFree_resolution|finite_constant_model_two_term_free_resolution",
+   "results": "No exact match.",
+   "date": "2026-10-22",
+   "verdict": "Use the named project results and the generic Mathlib API."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite locally presented modules over continuous integral padic coefficients admit local two term finite free resolutions",
+   "results": "Eight hits: finite-presentation predicates for sheaves of modules, finite presentation of finite modules over Noetherian rings, finite projective modules, and localized freeness. None gives a pro-etale two-term dualizable resolution over the recorded condensed integral coefficients.",
+   "date": "2026-10-22",
+   "verdict": "No matching Mathlib leaf; use the recorded project constructions and the generic Mathlib APIs."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralStratumHomFormula",
+  "date": "2026-10-22",
+  "group": "K6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-int-ext-formula",
+   "place": "Proof, local duality",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-int-ext",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralConstantModelLocalResolution",
+  "file": "lean/Sheaf/Paper/IntegralConstantModelLocalResolution.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.integral_constantModel_localResolution",
+  "statement": "theorem integral_constantModel_localResolution\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X]\n    (M : supportModules (integralCoefficientRing l E) X)\n    (hM : HasFiniteConstantLocalModel (integralCoefficientRing l E) X M) :\n    ∃ U : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ a : U.I₀,\n      ∃ T : ShortComplex (supportModules (integralCoefficientRing l E) (U.X a)),\n        T.ShortExact ∧ IsDualizable T.X₁ ∧ IsDualizable T.X₂ ∧\n        Nonempty (T.X₃ ≅ (upperStar (integralCoefficientRing l E) (U.f a)).obj M)",
+  "branch": "sheaf-dag",
+  "by": "K6",
+  "date": "2026-10-22"
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-d86b0",
+  "group": "K6",
+  "result": "pass",
+  "landing": "20261022T020109-L-22063",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-d86b0",
+  "group": "K6",
+  "result": "pass",
+  "landing": "20261022T020109-L-22063",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + 3 new modules/nodes vs clones/live base and unit sk-lem-int-ext (realized empty; cited units sk-lem-int-integral-heart and sk-lem-formal-closed-support still passed through); target statements byte-identical; 3 changed def bodies rfl-equal to the old ones; importer IntegralStratumExtBound compiled against the delivered item"
+ }
+}
