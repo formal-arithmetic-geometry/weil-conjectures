@@ -24348,3 +24348,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:33 L: returned deliver/N9/sk-thm-groth-ss (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-thm-groth-ss: sk-thm-groth-ss: completed in this pr)
 - 02:34 L: merged deliver/NK/lem-sfb-equivariant-smooth-galois-model (reviewer PASS; first push; new nodes: 5)
 - 02:34 L: returned deliver/A4/Sheaf.AlgebraicGeometry.ModuleSpecializationAbelianIso (reviewer RETURN: (the landing tools, head f2a41f80b) the delivery did not land: lean/Sheaf/AlgebraicGeometry/SmoothProperPrimeSpecializat)
+- 02:34 L: returned deliver/J1/Sheaf.Paper.CompletedTowerPullback (reviewer RETURN: (the landing tools, head 72c2aa25d) the delivery did not land: (d) user Sheaf.Paper.NormalizedFiniteComparisonExistence )
