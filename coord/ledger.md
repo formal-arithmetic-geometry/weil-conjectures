@@ -24072,3 +24072,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:21 L: returned deliver/N9/sk-thm-groth-ss (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-thm-groth-ss: sk-thm-groth-ss: completed in this pr)
 - 00:22 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
 - 00:23 L: returned deliver/C2/Sheaf.Paper.RingedProjectionRestriction (reviewer RETURN: (the landing tools, head b2e2aba09) the delivery did not land: (d) user Sheaf.Paper.AffineSpacePurityComparison (mention)
+- 00:23 L: returned deliver/D2/Sheaf.AlgebraicGeometry.ModuleSpecializationAbelianIso (reviewer RETURN: (the landing tools, head 6b4754f01) the delivery did not land: missing import source modules: Sheaf.AlgebraicGeometry.Pr)
