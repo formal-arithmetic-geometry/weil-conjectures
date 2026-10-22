@@ -1,6 +1,6 @@
 # Work queue
 
-50 items; claim with `tools/claim.py next <group> [--stage N]`.
+53 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Rework: quarantined by the upstream sync (5 clusters, 327 modules)
 
@@ -14,39 +14,42 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 | `Sheaf.Paper.CoefficientExchangeFromComparisons` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.DerivedPullbackCompositionTensorKFlat` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 
-Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 53, stage 3 1 items.
+Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 54, stage 3 1 items.
 
-## Stage 1: nodes to split (7)
+## Stage 1: nodes to split (10)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `lem-sfb-qcqs-proper-serre-heart-bound` | 2007 | none |
 | `lem-sfb-equivariant-smooth-galois-model` | 4012 | none |
-| `lem-sfb-semilinear-sylow-good-components` | 4012 | none |
 | `lem-sfb-tame-snc-quotient-resolution` | 4012 | none |
+| `lem-sfb-finite-normal-ample-descent` | 4013 | none |
+| `lem-sfb-finite-quotient-generic-fields` | 4013 | none |
+| `lem-sfb-finite-quotient-normal-proper` | 4013 | none |
 | `lem-sfb-ramified-cartier-supported-purity` | 4013 | none |
 | `lem-sfb-norm-completion-positive-cohomology-mono` | 4014 | none |
+| `lemma-nagata-proper-to-separated-target` | 7013 | none |
 | `def-per-support-condition` | - | none |
 
-## Stage 2: nodes to state (4)
+## Stage 2: nodes to state (5)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
 | `def-sfb-finite-derived-adjunction` | 1 | state | 0 |
 | `cor-pur-affine-space-zero-section-purity` | 1 | state | 3 |
-| `lem-pur-projection-purity-agreement` | 1 | state | 3 |
+| `lem-pur-diagonal-dnc-chart-normalization` | 1 | state | 1 |
 | `lem-pe-internal-module-sectionwise-short-exact` | 1 | state | 0 |
+| `lem-sfb-semilinear-sylow-good-components` | 1 | state | 0 |
 
-Not open yet: 371 nodes that below a finished node, not needed, 89 nodes that wait for a statement dependency (bottom-up), 6 nodes that wait for stage 1 (statement downstream not grounded).
+Not open yet: 371 nodes that below a finished node, not needed, 87 nodes that wait for a statement dependency (bottom-up), 8 nodes that wait for stage 1 (statement downstream not grounded).
 
-## Stage 3: modules to prove (29)
+## Stage 3: modules to prove (28)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
 | module | distance to a target | sorry | kind | route / steps to the nearest route sorry |
 |---|---|---|---|---|
 | `Sheaf.AlgebraicGeometry.EtaleCompactSupportGraphGeometricBaseChange` | 9 | 1 | repair | route |
-| `Sheaf.Paper.RingedTopoiCanonicalTensorPullback` | 4 | 0 | repair | route |
 | `Sheaf.Algebra.Homology.ScalarHomTensorCoherence` | 6 | 1 | repair | route |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility` | 3 | 1 | disputed | route |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible` | 2 | 2 | proof | route |
