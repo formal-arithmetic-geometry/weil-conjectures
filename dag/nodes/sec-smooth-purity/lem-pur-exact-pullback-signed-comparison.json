@@ -23,155 +23,133 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-weil-pbc-exact-functor-derived-factorization] to the assumed exact additive module functor $F$. It sends every quasi-isomorphism to a quasi-isomorphism, and supplies $U=D(F)$, its factorization $\\kappa_E:U(q_RE)\\cong q_S(FE)$, and all integer shift comparisons $s$. On complexes the shift comparison is the identity in each degree: $F((-1)^nd)=(-1)^nF(d)$. Thus its factorization commutes with shifts, without a boundedness assumption.",
+   "text": "Use the exact derived functor U and its shift-compatible factorization kappa. Since Q composed with U is isomorphic to the termwise functor, U is a left derived functor by the universal property of localization. Uniqueness of left derived functors gives eta:L≅U and kappa_P eta_(QP)=epsilon_P for EVERY complex P. This also proves the degree-zero assertion without a flatness assumption.",
    "uses": [
-    "lem-weil-pbc-exact-functor-derived-factorization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 015F (lemma-right-derived-exact-functor), exact functors on all complexes; shift-compatible factorization as in the cited node."
-   }
-  },
-  {
-   "text": "The hypotheses are those of [lem-weil-pbc-ringed-topos-flat-module-pullback] and [lem-weil-pbc-ringed-topos-kflat-pullback]: therefore $F$ preserves flat sheaves and flat-term K-flat complexes. No flatness of $u^{-1}R\\to S$ is needed for either assertion. By [lem-weil-pbc-ringed-topoi-module-adjunction], this actual scalar-extension pullback is a left adjoint; [lem-weil-pbc-left-adjoint-preserves-colimits] then shows that it preserves all the direct sums in total tensor complexes, including infinite diagonals. Its additivity preserves every integer scalar, in particular the differential and Koszul signs.",
-   "uses": [
-    "lem-weil-pbc-ringed-topos-flat-module-pullback",
-    "lem-weil-pbc-ringed-topos-kflat-pullback",
-    "lem-weil-pbc-ringed-topoi-module-adjunction",
-    "lem-weil-pbc-left-adjoint-preserves-colimits"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0G7E (lemma-pullback-K-flat); sites-modules.tex Tags 05VD (lemma-pullback-flat) and 03D7 (lemma-adjoint-pullback-pushforward-modules); categories.tex Tag 0038 (lemma-adjoint-exact)."
-   }
-  },
-  {
-   "text": "Write $\\epsilon:Lq_R\\to q_SF$ for the natural derived-pullback transformation of [lem-weil-pbc-ringed-topoi-derived-pullback]; its restriction to resolving complexes is $e$. For any complex $A$, take a flat-term K-flat quasi-isomorphism $p:P\\to A$ from [lem-pc-kflat-resolution]. Naturality says\n$$q_S(Fp)\\epsilon_P=\\epsilon_A L(q_Rp).$$\nHere $q_S(Fp)$ is invertible by Step 1, $L(q_Rp)$ is invertible because $q_Rp$ is, and $\\epsilon_P=e_P$ is invertible by the cited derived-pullback statement. Hence $\\epsilon_A$ is invertible for every $A$. The natural isomorphism $\\kappa^{-1}\\epsilon:Lq_R\\cong Uq_R$ descends uniquely through the homotopy-category localization by [lem-weil-pbc-localization-universal-property] to $\\eta:L\\cong U$. Its inverse descends as well, so this really is an isomorphism. In particular $\\kappa_P\\eta_{q_RP}=e_P$ on every resolving $P$.",
-   "uses": [
-    "lem-weil-pbc-ringed-topoi-derived-pullback",
-    "lem-pc-kflat-resolution",
     "lem-weil-pbc-exact-functor-derived-factorization",
     "lem-weil-pbc-localization-universal-property"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YY (lemma-derived-base-change), its natural transformation; Tag 06YS (lemma-K-flat-resolution). Exactness argument and localization identification supplied explicitly here."
+    "place": "Tags 07A4, 06YS, 0G7E; exact localization and shift functor laws in Mathlib."
    }
   },
   {
-   "text": "For uniqueness, let $\\eta'$ obey the same normalization. Every $A$ admits $p:P\\to A$ as in Step 3. Naturality and invertibility of $L(q_Rp),U(q_Rp)$ force\n$$\\eta'_{q_RA}=U(q_Rp)\\eta'_{q_RP}L(q_Rp)^{-1}=\\eta_{q_RA}.$$\nEvery derived object is isomorphic to such an image; alternatively use the equivalence $W_R^{-1}\\mathcal P_R\\simeq D(R)$ of [lem-weil-pbc-site-derived-tensor-descent]. Naturality along that isomorphism forces equality at every object. Thus the prescribed normalization determines $\\eta$ uniquely.",
+   "text": "Transport the canonical CommShift structure of U to L along eta. Its inverse and hence eta commute with shifts, and epsilon does by the preceding factorization equation. Uniqueness of eta under the weaker resolving normalization follows by choosing a flat-term K-flat quasi-isomorphism P→A, cancelling its invertible image and using naturality. Localization tests equality on all QA.",
    "uses": [
     "lem-pc-kflat-resolution",
-    "lem-weil-pbc-site-derived-tensor-descent"
+    "lem-weil-pbc-localization-universal-property",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YS (lemma-K-flat-resolution); uniqueness under localization on resolving models."
+    "place": "Tags 07A4, 06YS, 0G7E; exact localization and shift functor laws in Mathlib."
    }
   },
   {
-   "text": "For an integer $n$ and a resolving $P$, $P[n]$ is again resolving: its terms are reindexed flat terms, and $T(A,P[n])$ is a shift of $T(A,P)$ by [lem-weil-pbc-total-tensor-integer-shifts], so it is acyclic whenever $A$ is. The shift comparisons for $L$ are those obtained by shifting these resolutions, as specified in [lem-weil-pbc-pullback-tensor-canonical-shift-unit]. On $q_RP$ the shift-compatibility square for $\\eta$ is therefore the identity of $q_SF(P[n])$ with $q_S(FP)[n]$: both comparisons identify the degree $r$ term with $F(P^{r+n})$ and its differential with $(-1)^nF(d)$. Step 4 extends this square to all derived objects. For a sheaf $M$ in degree zero, Step 3 gives the comparison $\\epsilon_{M[0]}:L(M[0])\\cong(FM)[0]$; since $U(M[0])$ is represented by $F(M[0])=(FM)[0]$, the equation $\\kappa\\eta=\\epsilon$ identifies exactly the two degree-zero sheaf comparisons. No flatness of $M$ is used.",
+   "text": "K-flat ringed pullback preserves resolving complexes. A flat sheaf M in degree zero is resolving by the resolving-model closure assertion of the normalized tensor-constraints node. Apply resolving pullback and evaluate in degree zero to prove F(M) flat. The existing field f.moduleAdj gives the adjunction directly, so the Mathlib left-adjoint preservation theorem proves preservation of all coproducts. Additivity gives map_zsmul.",
    "uses": [
-    "lem-weil-pbc-total-tensor-integer-shifts",
-    "lem-weil-pbc-pullback-tensor-canonical-shift-unit",
-    "lem-weil-pbc-exact-functor-derived-factorization",
-    "def-pc-kflat-complex",
-    "def-pc-flat-sheaf-modules"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A4 (lemma-pullback-tensor-product), resolution normalization; more-algebra.tex Tag 0FNH (item-shift-tensor)."
-   }
-  },
-  {
-   "text": "Let $\\mu^L$ be the canonical comparison with the representative formula stated in [lem-weil-pbc-pullback-tensor-canonical-shift-unit], and transport it by\n$$\\mu_{K,H}=(\\eta_K\\otimes\\eta_H)\\mu^L_{K,H}\\eta_{K\\otimes^LH}^{-1}.$$\nFor resolving $E,G$, [lem-pur-kflat-total-tensor-model] makes $V=T(E,G)$ resolving; Step 2 makes $FE,FG$ resolving over $S$. Thus all of $e_E,e_G,e_V,r,r'$ in that formula are available. Substitute $e_X=\\kappa_X\\eta_{q_RX}$ for $X=E,G,V$ and use naturality of $\\eta$ for $r_{E,G}$. Cancelling these isomorphisms gives precisely\n$$(\\kappa_E\\otimes\\kappa_G)\\mu_{q_RE,q_RG}U(r_{E,G})=r'_{FE,FG}q_S(c_{E,G})\\kappa_V.$$\nThe cochain map $c$ and its inverse have exactly the local pure-tensor formulas in [lem-pur-cochain-pullback-tensor-coherence]. Hence this is the normalization of the question, not a choice of an abstract tensor isomorphism. The full faithfulness assertion of [lem-weil-pbc-site-derived-tensor-descent] implies uniqueness among natural comparisons with these components. This also identifies $\\mu$ under $\\eta$ with the normalized comparison of the shift-unit node.",
-   "uses": [
-    "lem-weil-pbc-pullback-tensor-canonical-shift-unit",
-    "lem-pur-kflat-total-tensor-model",
-    "lem-pur-cochain-pullback-tensor-coherence",
-    "lem-weil-pbc-site-derived-tensor-descent"
+    "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "lem-pur-derived-tensor-additive-constraints",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "lem-weil-pbc-left-adjoint-preserves-colimits"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A4 (lemma-pullback-tensor-product), proof by total flat-term K-flat representatives; normalized representative formula of the cited shift-unit node."
+    "place": "Tags 07A4, 06YS, 0G7E; exact localization and shift functor laws in Mathlib."
    }
   },
   {
-   "text": "Check the two-variable shift equation first on $K=q_RE,H=q_RG$ with resolving $E,G$. By Step 6 and the shift-compatible factorization, cancel $\\kappa,r,r'$ throughout; what remains is the chain square between $c_{E[a],G[b]}$ and $c_{E,G}[a+b]$. On the summand corresponding to $x\\in E^p$, $y\\in G^q$, the stipulated total-shift map multiplies by $(-1)^{bp}$, using the same degree convention over both rings. The two routes both send $s\\otimes(x\\otimes y)$ to\n$$(-1)^{bp}(s\\otimes x)\\otimes(1\\otimes y).$$\nThe normalized maps $c$ are degree-preserving and $F$ preserves multiplication by $-1$, so this is equality of maps of signed total complexes, not only of their graded terms. The total shift maps themselves are the chain isomorphisms of [lem-weil-pbc-total-tensor-integer-shifts], with the chosen order of extracting the two shifts. This proves the first displayed square on resolving pairs for every positive, zero or negative $a,b$.",
+   "text": "Apply the canonical shift-unit comparison theorem directly to U and kappa. It gives tensor shifts, canonical representative comparisons, the unique normalized mu and the separate-input shift equations. Its returned shift structure on U equals the canonical exact-functor one: compatibility with kappa determines it after precomposition with Q, and localization is faithful. Transport mu backwards through eta to obtain the required normalized muL; naturality and cancellation prove both the representative equation and the stated transport formula.",
    "uses": [
-    "lem-pur-cochain-pullback-tensor-coherence",
-    "lem-weil-pbc-total-tensor-integer-shifts",
-    "def-pc-tensor-complex-sheaves"
+    "lem-weil-pbc-pullback-tensor-canonical-shift-unit",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4, 06YS, 0G7E; exact localization and shift functor laws in Mathlib."
+   }
+  },
+  {
+   "text": "Combine the two separate-input shift equations. CommShift naturality interchanges the second-input comparison with the first shift. The addition law for U.commShiftIso and naturality of shiftFunctorAdd combine the two successive shifts into a+b. This is exactly tensorShift as defined, for all signed integers.",
+   "uses": [
+    "lem-weil-pbc-pullback-tensor-canonical-shift-unit"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "more-algebra.tex Tag 0FNH (item-shift-tensor); Tag 07A4 model comparison, explicit homogeneous summand calculation."
+    "place": "Tags 07A4, 06YS, 0G7E; exact localization and shift functor laws in Mathlib."
    }
   },
   {
-   "text": "For symmetry on a resolving pair, the same cancellation using Step 6 reduces the derived equation to\n$$c_{G,E}F(\\sigma_{E,G})=\\sigma_{FE,FG}c_{E,G}.$$\nThis is the signed-interchange equation in [lem-pur-cochain-pullback-tensor-coherence]. More explicitly, on degree $(p,q)$ both routes send $s\\otimes(x\\otimes y)$ to $(-1)^{pq}(s\\otimes y)\\otimes(1\\otimes x)$: the route through symmetry on the target first gives $(-1)^{pq}(1\\otimes y)\\otimes(s\\otimes x)$, which equals that expression by $S$-balancing. Thus no sign has been dropped in passing from the ordinary pullback comparison to the Koszul comparison.",
+   "text": "Take the uniquely normalized associator and symmetry of the EXISTING tensor from the derived tensor additive-constraints node, and repackage their naturality and representative equations as TensorConstraints. Its totalModel construction supplies the resolving pair totals; no new tensor or constraints are postulated.",
+   "uses": [
+    "lem-pur-derived-tensor-additive-constraints",
+    "lem-pur-kflat-total-tensor-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4, 06YS, 0G7E; exact localization and shift functor laws in Mathlib."
+   }
+  },
+  {
+   "text": "For symmetry on resolving pairs, precompose with U(r_PQ) and postcompose with tensor(kappa_Q,kappa_P). Substitute normalization of mu at (P,Q) and (Q,P), naturality of kappa, and the representative equations for the two symmetries. The remaining equation is precisely cochainPullbackTensorCoherence symmetry. Cancel the inserted isomorphisms.",
    "uses": [
     "lem-pur-cochain-pullback-tensor-coherence"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A4 (lemma-pullback-tensor-product); more-algebra.tex Tag 0FNG (section-sign-rules), item-flip-tensor-product."
+    "place": "Tags 07A4, 06YS, 0G7E; exact localization and shift functor laws in Mathlib."
    }
   },
   {
-   "text": "For associativity choose resolving $E,G,J$. Their pairwise total tensors and both triple totals are resolving by repeated application of [lem-pur-kflat-total-tensor-model]; hence Step 6 applies at every vertex. Substitution of its formula cancels the intermediate representative isomorphisms and leaves\n$$(1\\otimes c_{G,J})c_{E,T(G,J)}F(\\alpha)=\\alpha'(c_{E,G}\\otimes1)c_{T(E,G),J}.$$\nThis is the reassociation compatibility asserted in [lem-pur-cochain-pullback-tensor-coherence]. On a local homogeneous generator $s\\otimes((x\\otimes y)\\otimes z)$ both paths give $(s\\otimes x)\\otimes((1\\otimes y)\\otimes(1\\otimes z))$. Reassociation is unsigned and the total differential agrees on both sides; the cited cochain statement proves equality of chain maps for unbounded complexes as well.",
+   "text": "For associativity on resolving triples, form leftRepresentative and rightRepresentative from the pair and outer representative maps. Normalize the nested mu twice. Naturality of the representative maps, supplied by the canonical fixed-input comparisons, cancels the intermediate tensor comparison. The two composites become kappa, followed by Q of the two cochain associativity routes, followed by rightRepresentative over S. Cochain associativity coherence identifies those routes. The representative equation for alpha and its naturality allow cancellation of U(leftRepresentative) and tensor(kappa_P,tensor(kappa_Q,kappa_N)).",
    "uses": [
-    "lem-pur-kflat-total-tensor-model",
-    "lem-pur-cochain-pullback-tensor-coherence"
+    "lem-weil-pbc-pullback-tensor-canonical-shift-unit",
+    "lem-pur-derived-tensor-additive-constraints",
+    "lem-pur-cochain-pullback-tensor-coherence",
+    "lem-pur-kflat-total-tensor-model"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A4 (lemma-pullback-tensor-product); Tag 07A2 (lemma-tensor-product-K-flat); more-algebra.tex Tag 0FNG, unsigned triple reassociation."
+    "place": "Tags 07A4, 06YS, 0G7E; exact localization and shift functor laws in Mathlib."
    }
   },
   {
-   "text": "Finally these chain calculations imply equations for arbitrary derived inputs. All arrows in each square are natural transformations. For the first two equations, restriction to resolving pairs is faithful by [lem-weil-pbc-site-derived-tensor-descent], so the equalities proved in Steps 7 and 8 hold everywhere. For the associativity equation, choose isomorphisms $q_RE\\cong K$, $q_RG\\cong H$, $q_RJ\\cong N$, possible by the same resolving-category equivalence. Naturality conjugates each side by the same source and target isomorphisms, reducing its value at $(K,H,N)$ to Step 9; cancelling those isomorphisms proves equality. All totalizations used direct sums, whose preservation was proved in Step 2; all resolving and tensor statements cited apply without bounds. This establishes the simultaneous signed shift, symmetry and associativity identities for the specified canonical comparison, including the doubly unbounded case.",
+   "text": "Both sides of the symmetry and associativity equations are natural transformations. Every derived input is isomorphic to the localization of a resolving complex: resolve Q.objPreimage and compose with Q.objObjPreimageIso. Naturality along the product of two or three such isomorphisms extends the resolving-model equations to all inputs. This uses no boundedness assumptions.",
    "uses": [
-    "lem-weil-pbc-site-derived-tensor-descent"
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A4, proof on arbitrary K-flat models; faithful extension under the resolving-model localization."
+    "place": "Tags 07A4, 06YS, 0G7E; exact localization and shift functor laws in Mathlib."
    }
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-exact-functor-derived-factorization",
-  "lem-weil-pbc-ringed-topos-flat-module-pullback",
-  "lem-weil-pbc-ringed-topos-kflat-pullback",
-  "lem-weil-pbc-ringed-topoi-module-adjunction",
-  "lem-weil-pbc-left-adjoint-preserves-colimits",
-  "lem-weil-pbc-ringed-topoi-derived-pullback",
-  "lem-pc-kflat-resolution",
   "lem-weil-pbc-localization-universal-property",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "lem-weil-pbc-total-tensor-integer-shifts",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "lem-pur-derived-tensor-additive-constraints",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
   "lem-weil-pbc-pullback-tensor-canonical-shift-unit",
-  "def-pc-kflat-complex",
-  "def-pc-flat-sheaf-modules",
   "lem-pur-kflat-total-tensor-model",
-  "lem-pur-cochain-pullback-tensor-coherence",
-  "def-pc-tensor-complex-sheaves"
+  "lem-pur-cochain-pullback-tensor-coherence"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 07A4 (lemma-pullback-tensor-product), expanded exact-functor identification and signed coherence, with Tags 06YS, 0G7E and 015F."
+  "place": "Tag 07A4, using existing normalized constraints and cochain coherence; exact identification by uniqueness of left derived functors; X8 Lean proof."
  },
  "mathlib_searches": [
   {
@@ -345,15 +323,10 @@
  },
  "tool_uses": [
   "lem-weil-pbc-exact-functor-derived-factorization",
-  "lem-weil-pbc-ringed-topos-flat-module-pullback",
   "lem-weil-pbc-ringed-topos-kflat-pullback",
-  "lem-weil-pbc-ringed-topoi-module-adjunction",
   "lem-weil-pbc-left-adjoint-preserves-colimits",
-  "lem-weil-pbc-ringed-topoi-derived-pullback",
   "lem-pc-kflat-resolution",
   "lem-weil-pbc-localization-universal-property",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "lem-weil-pbc-total-tensor-integer-shifts",
   "lem-weil-pbc-pullback-tensor-canonical-shift-unit",
   "lem-pur-kflat-total-tensor-model",
   "lem-pur-cochain-pullback-tensor-coherence"
@@ -373,6 +346,13 @@
    "SheafOfModules.ExactPullbackSigned.tensor",
    "SheafOfModules.ExactPullbackSigned.tensorMap",
    "SheafOfModules.ExactPullbackSigned.tensorShift",
+   "SheafOfModules.ExactPullbackSigned.cochainHasTensor",
+   "SheafOfModules.ExactPullbackSigned.cochainGood12",
+   "SheafOfModules.ExactPullbackSigned.cochainGood23",
+   "SheafOfModules.ExactPullbackSigned.TensorSymmetryNatural",
+   "SheafOfModules.ExactPullbackSigned.TensorAssociativityNatural",
+   "SheafOfModules.ExactPullbackSigned.TensorSymmetryModel",
+   "SheafOfModules.ExactPullbackSigned.TensorAssociativityModel",
    "SheafOfModules.ExactPullbackSigned.TensorConstraints",
    "SheafOfModules.ExactPullbackSigned.exactDerivedFunctor",
    "SheafOfModules.ExactPullbackSigned.exactFactorization",
@@ -385,7 +365,7 @@
   "by": "NX",
   "date": "2026-10-21",
   "existing": false,
-  "note": "Uses the published K-flat derived tensor and representativeIso, the actual RingedPullback/Comparison/pull/comparison, and exact Functor.mapDerivedCategory with its canonical factorization. TensorConstraints only packages the normalized natural associativity and Koszul symmetry of that tensor. IsNormalized from the shift-unit dependency states the prescribed square with epsilon = kappa; transport from the unique normalized comparison for L is explicit. Independent site, coefficient and derived-Hom universes; no boundedness or flatness of the ring map."
+  "note": "Uses the published K-flat derived tensor and representativeIso, the actual RingedPullback/Comparison/pull/comparison, and exact Functor.mapDerivedCategory with its canonical factorization. TensorConstraints only packages the normalized natural associativity and Koszul symmetry of that tensor. IsNormalized from the shift-unit dependency states the prescribed square with epsilon = kappa; transport from the unique normalized comparison for L is explicit. Independent site, coefficient and derived-Hom universes; no boundedness or flatness of the ring map. X8 definition repair: transparent proof predicates and an equivalent bundled alpha_model using the existing totalModel and representative; proof-irrelevance and the checked old/new equivalence preserve the statement meaning. Three proved propositional tensor-instance cache lemmas support elaboration. Change record: coord/changes/exact-pullback-tensor-constraint-predicates.md."
  },
  "reviewed_lean": {
   "date": "2026-10-21",
@@ -394,5 +374,15 @@
   "group": "NX",
   "result": "pass",
   "note": "Clause-by-clause match of the node and the Lean. Hypotheses: EssentiallySmall.{r} sites, RingedPullback pinned by hobj/hmap, exactness = finite limits+colimits, L any left derived functor with ε (same presentation as the landed shift-unit node), no extra assumptions, independent universes. Conclusions: η unique with κη=ε on flat-term K-flat complexes, CommShift of η, degree-zero comparison, flat and K-flat preservation, direct sums and integer scalars; μ normalized by IsNormalized with κ and unique among all natural transformations; transport from μ^L. Shift square via tensorShift: Mathlib totalShift₁ is unsigned and totalShift₂ gives (p·b).negOnePow, so (−1)^{bp}. The CommShift₂Int and L.CommShift existentials are pinned by HasCanonicalTensorShifts and NatTrans.CommShift ε. TensorConstraints σ/α are pinned by naturality plus the Koszul braiding and unsigned associator models, and are not hollow. Both records are verbatim and the declarations are present. The §1(B) dep change is options/attributes only, the module has no other importers, and the record changes only lean. Stacks tags exist. Worker compile evidence 22.8 s / 41.2 s. Advisory: the shift-unit record note replaced NQ's note."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X8",
+  "result": "pass",
+  "landing": "20261022T020124-L-42603",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
