@@ -3,28 +3,27 @@
  "blueprint": {
   "is": "lemma-nagata-proper-to-separated-target",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "lem-weil-pbc-proper-to-separated"
+  ]
  },
  "kind": "statement",
  "title": "[stacks-project]",
- "statement": "In a commutative triangle $T\\to Y\\to B$, if $T\\to B$ is proper and\n$Y\\to B$ is separated, then $T\\to Y$ is proper.",
+ "statement": "In a commutative triangle $T\\to Y\\to B$ of schemes [def-pc-scheme], if $T\\to B$ is proper and $Y\\to B$ is separated [def-weil-proper-morphism], then $T\\to Y$ is proper.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-common/lemma-nagata-proper-to-separated-target.md",
   "place": "node lemma-nagata-proper-to-separated-target, order 237"
  },
- "stmt_deps": [],
- "proof": [
-  {
-   "text": "Factor $T\\to Y$ through the graph\n$T\\to T\\times_BY$. The graph is closed because $Y\\to B$ is separated, and\nthe projection $T\\times_BY\\to Y$ is the base change of the proper morphism\n$T\\to B$.",
-   "uses": [],
-   "elementary": null
-  }
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-proper-morphism"
  ],
+ "proof": [],
  "proof_deps": [],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-common/lemma-nagata-proper-to-separated-target.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 01W6, label lemma-image-proper-scheme-closed, part (2); exact Mathlib implementation AlgebraicGeometry.IsProper.of_comp, Proper.lean:124-125"
  },
  "mathlib_searches": [
   {
@@ -34,10 +33,63 @@
     "Mathlib.AlgebraicGeometry.Morphisms.Proper:124 (lemma)"
    ],
    "date": "2026-10-08"
+  },
+  {
+   "tool": "grep",
+   "query": "lemma of_comp|theorem of_comp",
+   "sub": "AlgebraicGeometry/Morphisms/Proper.lean",
+   "results": "No hits: pattern omitted the qualified IsProper prefix.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A morphism from a proper scheme over a base to a separated scheme over that base is proper.",
+   "sub": "",
+   "results": "Returned AlgebraicGeometry.IsProper.of_comp_of_isSeparated with the exact statement; the available declaration in the pinned source is AlgebraicGeometry.IsProper.of_comp (Proper.lean:124-125).",
+   "date": "2026-10-22",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper.of_comp",
+   "sub": "",
+   "results": "AlgebraicGeometry.IsProper.of_comp, Mathlib.AlgebraicGeometry.Morphisms.Proper: proper (f ≫ g) and separated g imply proper f; tagged Stacks 01W6(2).",
+   "date": "2026-10-22",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a commutative triangle of schemes, if the composite is proper and the second morphism is separated, then the first morphism is proper.",
+   "sub": "",
+   "results": "AlgebraicGeometry.IsProper.of_comp and IsProper.of_comp_of_isSeparated were returned with exactly the required proper-composite and separated-second-map hypotheses; the pinned source has IsProper.of_comp at Proper.lean:124-125.",
+   "date": "2026-10-22",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "of_comp",
+   "sub": "AlgebraicGeometry/Morphisms/Proper.lean",
+   "results": "Single-file rg output contains lines 111, 121, 124, 129, 144; line 124 is lemma IsProper.of_comp. The search wrapper parsed line numbers as filenames for this single-file query, so a directory query below supplies the full path.",
+   "date": "2026-10-22",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "lemma IsProper.of_comp",
+   "sub": "AlgebraicGeometry/Morphisms",
+   "results": "Mathlib/AlgebraicGeometry/Morphisms/Proper.lean:124: lemma IsProper.of_comp [IsProper (f ≫ g)] [IsSeparated g] : IsProper f :=; source proof on line 125.",
+   "date": "2026-10-22",
+   "verdict": "match"
   }
  ],
- "mathlib_match": null,
- "status": "imported",
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.IsProper.of_comp",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/Proper.lean",
+  "line": 124,
+  "how": "exact: lines 124-125, with variables declared at line 38. Set X := T, Y := Y, Z := B, f := T → Y, g := Y → B. Commutativity identifies f ≫ g with the given proper T → B; IsSeparated g is exactly the other hypothesis. The conclusion is IsProper f. No further hypotheses."
+ },
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -66,5 +118,20 @@
   ],
   "sorry_free": true,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lemma-nagata-proper-to-separated-target",
+  "worker": "stage1",
+  "summary": "Verified the exact Mathlib leaf AlgebraicGeometry.IsProper.of_comp at Proper.lean:124-125 against Stacks Tag 01W6(2), label lemma-image-proper-scheme-closed. Added definition references without changing mathematical content, recorded the real searches, removed the obsolete imported proof sketch, and identified equivalent blueprint node lem-weil-pbc-proper-to-separated. No new nodes.",
+  "blueprint": "The whole graph-factorization paragraph of the item is supplied by the exact Mathlib theorem. The unit common-modification proof uses precisely this proper-over-separated implication. Whole-blueprint searches for proper-to-separated and separated target found equivalent lem-weil-pbc-proper-to-separated; from is null because the item is itself imported."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NJ-ea7d6f332",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NJ-ea7d6f332 (reviewer sub-agent of L); spot-checked: Exact Mathlib leaf; no new nodes, no fixes. Mathlib: pinned Proper.lean:123-125 is @[stacks 01W6 \"(2)\"] IsProper.of_comp [IsProper (f ≫ g)] [IsSeparated g] : IsProper f, with variables at line 38. Map T,Y,B to X,Y,Z; the triangle's commutativity gives f ≫ g = (T→B). The line number and the how text are correct. Definitions: Mathlib IsProper (separated + universally closed + locally of finite type) matches the finite-type definition in def-weil-proper-morphism via quasi-compactness from universal closedness; that node already has mathlib status. Sources: the master (order 237) and main-20261015 (order 244) statements are identical and match Stacks morphisms.tex lemma-image-proper-scheme-closed(2), lines 9948-9979 (tags/tags:2471 = 01W6). No SGA cited. Cited nodes: def-pc-scheme and def-weil-proper-morphism, statements read. Small cases: identity target and empty T pass; separatedness is necessary (doubled-origin chart). Duplicate: lem-weil-pbc-proper-to-separated is the same Mathlib leaf on the same declaration and is recorded in same_as. Not superseded: live and side-live item still imported. Not on the drop list; no repair note."
  }
 }
