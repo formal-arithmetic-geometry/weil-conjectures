@@ -18,20 +18,17 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-weil-pbc-flat-ringed-diagram-restriction] to each edge, with $J=\\mathbf N_{\\geq1}^{op}$. Its smallness, compatible coefficient isomorphisms and cornerwise flatness are precisely the present hypotheses. It supplies the specified natural isomorphisms $p_u,d_u$ on the unbounded derived diagram categories and, for every $t:L_u^SM\\to N$, the formula\n$$\\bigl(r_U(t)p_{u,M}^{-1}\\bigr)^\\sharp=d_{u,N}r_V(t^\\sharp).\\tag{A}$$\nIn particular the composites called $b_Z,d_Z$ in the statement are natural isomorphisms with exactly the displayed sources and targets. All compositions below are written right to left.",
-   "uses": [
-    "lem-weil-pbc-flat-ringed-diagram-restriction"
-   ],
-   "elementary": false,
+   "text": "Use the prescribed normalized comparisons in each DerivedEdge. Unpack their ordinary inverse/direct comparisons and their inverse, direct and adjunct normalizations. These are the same canonical flat-restriction normalization conditions as in the statement; no second comparison is chosen via the existence theorem. The composite comparisons are actual natural isomorphisms.",
+   "uses": [],
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
     "place": "Tag 07A7, remark-base-change, transpose definition; agent coefficient-comparison calculation, using the normalizations in the cited flat-restriction node. For localization in step 2: categories.tex Tag 04VG, lemma-properties-left-localization; natural-transformation enhancement is the cited localization node."
    }
   },
   {
-   "text": "First check composition before localization. For composable edges $u:U\\to V$, $v:V\\to W$, ordinary module pullback is the underlying inverse image with action transported by $c^R_u:u^{-1}R_V\\cong R_U$ or $c^S_u$. Its restriction comparison $p^0_u$ identifies that same underlying sheaf. On $u^{-1}v^{-1}R_W$, the two actions on the twice pulled back module agree because\n$$a_Uc^R_u\\,u^{-1}c^R_v=c^S_u\\,u^{-1}c^S_v\\,(vu)^{-1}a_W,$$\na direct substitution of the two edge compatibility equations. Thus the composite restriction comparison and $p^0_{vu}$ have the same underlying inverse-image composition map and the same action. Apply this along both paths in the specified geometric square; its coherent coefficient identifications give the same comparison at the common composite. This proves the ordinary square equation. It is an equality of natural maps of diagram functors: the calculation holds on each abelian diagram component and respects every diagram arrow. Apply it in every cochain degree and localize. The $p_u$ are exactly these normalized termwise comparisons; [lem-weil-pbc-localization-universal-property](2),(3) says that descent preserves their composites and detects equality of natural transformations. Hence, for every derived $S_Y$-diagram $M$,\n$$(L_{g'}^Rp_{f,M})p_{g',L_f^SM}\\,r_{X'}(\\theta^S_M)=\\theta^R_{r_YM}(L_{f'}^Rp_{g,M})p_{f',L_g^SM}.\\tag{C}$$\nThis proves the first assertion, including its coefficient actions.",
+   "text": "At each diagram component apply the faithful underlying set-sheaf functor. Compose with the two invertible R module-underlying comparisons. The four ordinary normalization equations, naturality of the module-underlying comparisons and equality transport along sameInverse reduce both paths to the common geometric square; sameGeometry identifies its two presentations. This proves the ordinary module square, including its actions. Apply this equation in each cochain degree. Compose the four given localization factors using functor associators and whiskering. Naturality and cancellation of the invertible factors transport the ordinary square to objects in the image of DerivedCategory.Q. Localization.natTrans_ext detects equality of the two derived natural transformations. Evaluating that equality gives the first conjunct (C).",
    "uses": [
-    "lem-weil-pbc-flat-ringed-diagram-restriction",
     "def-weil-pbc-ringed-topos-morphism",
     "def-pc-sheaf-restrict-scalars",
     "lem-weil-pbc-localization-universal-property"
@@ -44,9 +41,7 @@
   },
   {
    "text": "Fix $Z$ and put $A=F_f^SZ$. Apply (A) for $u=f$ to $t=\\varepsilon^S_{f,Z}:L_f^SA\\to Z$, whose adjunct is $1_A$. The adjunct of $r_X(\\varepsilon^S_{f,Z})p_{f,A}^{-1}$ is therefore $d_{f,Z}$. By the counit formula for the inverse adjunction bijection this says\n$$r_X(\\varepsilon^S_{f,Z})p_{f,A}^{-1}=\\varepsilon^R_{f,r_XZ}\\,L_f^R(d_{f,Z}).$$\nPrecomposing with $L_f^R(d_{f,Z}^{-1})$ gives the normalized counit equation\n$$r_X(\\varepsilon^S_{f,Z})p_{f,A}^{-1}L_f^R(d_{f,Z}^{-1})=\\varepsilon^R_{f,r_XZ}.\\tag{K}$$",
-   "uses": [
-    "lem-weil-pbc-flat-ringed-diagram-restriction"
-   ],
+   "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
@@ -56,8 +51,7 @@
   {
    "text": "By [def-weil-pbc-adjunction-mate], $E^S_Z$ is the adjunct of\n$$e^S_Z=L_{g'}^S(\\varepsilon^S_{f,Z})\\theta^S_A:L_{f'}^SL_g^SA\\longrightarrow L_{g'}^SZ.$$\nSet $h_Z=d_Zr_{Y'}(E^S_Z)b_Z^{-1}$. Formula (A) for $f'$ says that $d_{f',L_{g'}^SZ}r_{Y'}(E^S_Z)$ is the adjunct of $r_{X'}(e^S_Z)p_{f',L_g^SA}^{-1}$. Postcomposition with $F_{f'}^R(p_{g',Z})$ and precomposition with $b_Z^{-1}$ therefore show that the transpose of $h_Z$ is\n$$t_Z=p_{g',Z}\\,r_{X'}(e^S_Z)\\,p_{f',L_g^SA}^{-1}L_{f'}^R(b_Z^{-1}).\\tag{T}$$\nThe pre/postcomposition rule here follows directly by expanding transpose as counit followed by $L_{f'}^R$ of the morphism and using counit naturality.",
    "uses": [
-    "def-weil-pbc-adjunction-mate",
-    "lem-weil-pbc-flat-ringed-diagram-restriction"
+    "def-weil-pbc-adjunction-mate"
    ],
    "elementary": true,
    "source": {
@@ -67,9 +61,7 @@
   },
   {
    "text": "Expand $e^S_Z$ in (T). Naturality of $p_{g'}$ at $\\varepsilon^S_{f,Z}$ rewrites its first two factors as\n$$p_{g',Z}\\,r_{X'}(L_{g'}^S\\varepsilon^S_{f,Z})=L_{g'}^R(r_X\\varepsilon^S_{f,Z})p_{g',L_f^SA}.$$\nEquation (C) at $A$, cancelling $L_{g'}^Rp_{f,A}$, now gives\n$$t_Z=L_{g'}^R(r_X\\varepsilon^S_{f,Z})\\,(L_{g'}^Rp_{f,A})^{-1}\\theta^R_{r_YA}\\,L_{f'}^R(p_{g,A}b_Z^{-1}).$$\nThe definition $b_Z=(L_g^Rd_{f,Z})p_{g,A}$ yields $p_{g,A}b_Z^{-1}=L_g^R(d_{f,Z}^{-1})$. Thus\n$$t_Z=L_{g'}^R(r_X\\varepsilon^S_{f,Z}\\,p_{f,A}^{-1})\\theta^R_{r_YA}\\,L_{f'}^RL_g^R(d_{f,Z}^{-1}).\\tag{T'}$$\nEvery replacement is naturality or cancellation of a specified isomorphism.",
-   "uses": [
-    "lem-weil-pbc-flat-ringed-diagram-restriction"
-   ],
+   "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
@@ -88,9 +80,8 @@
    }
   },
   {
-   "text": "The comparisons $p_u,d_u$ are natural transformations of the derived diagram functors by [lem-weil-pbc-flat-ringed-diagram-restriction], and the square maps, counits and their mates are natural transformations. Whiskering, composition and inversion of the specified natural isomorphisms therefore make the equality just proved natural in $Z$. The proof took place in the unbounded derived category of the strict diagrams; it imposed no conditions on their transitions or cohomological bounds.",
+   "text": "The prescribed comparisons $p_u,d_u$ are already natural isomorphisms in the given DerivedEdge data, and the square maps, counits and their mates are natural transformations. Whiskering, composition and inversion of the specified natural isomorphisms therefore make the equality just proved natural in $Z$. The proof took place in the unbounded derived category of the strict diagrams; it imposed no conditions on their transitions or cohomological bounds.",
    "uses": [
-    "lem-weil-pbc-flat-ringed-diagram-restriction",
     "def-weil-pbc-adjunction-mate"
    ],
    "elementary": true,
@@ -101,7 +92,6 @@
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-flat-ringed-diagram-restriction",
   "def-weil-pbc-ringed-topos-morphism",
   "def-pc-sheaf-restrict-scalars",
   "lem-weil-pbc-localization-universal-property",
@@ -110,7 +100,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
-  "place": "Second paragraph, naturality of coefficient reduction; expanded on arbitrary strict diagrams using Stacks 07A7 (remark-base-change), not the projection-formula claim of 0E48."
+  "place": "Second paragraph, naturality of coefficient reduction. Lean proof by faithful underlying-sheaf comparison, degreewise passage to complexes, localization equality detection, the prescribed adjunct normalization, and the Mathlib mate-counit identity. The specified comparisons and all unit-route steps are retained."
  },
  "mathlib_searches": [
   {
@@ -254,7 +244,27 @@
    "CategoryTheory.FlatScalarTowerExchange.SquareNormalized",
    "CategoryTheory.FlatScalarTowerExchange.sourceComparison",
    "CategoryTheory.FlatScalarTowerExchange.targetComparison",
-   "CategoryTheory.FlatScalarTowerExchange.flatScalarTowerExchange"
+   "CategoryTheory.FlatScalarTowerExchange.flatScalarTowerExchange",
+   "CategoryTheory.FlatScalarTowerExchange.ringSheafCompose",
+   "CategoryTheory.FlatScalarTowerExchange.commRingSheafCompose",
+   "CategoryTheory.FlatScalarTowerExchange.groupSheafCompose",
+   "CategoryTheory.FlatScalarTowerExchange.diagramPreadditive",
+   "CategoryTheory.FlatScalarTowerExchange.diagramAbelian",
+   "CategoryTheory.FlatScalarTowerExchange.coefficientRing",
+   "CategoryTheory.FlatScalarTowerExchange.Corner.restrict_additive",
+   "CategoryTheory.FlatScalarTowerExchange.inverseDiagram",
+   "CategoryTheory.FlatScalarTowerExchange.directDiagram",
+   "CategoryTheory.FlatScalarTowerExchange.inverseDiagram_additive",
+   "CategoryTheory.FlatScalarTowerExchange.directDiagram_additive",
+   "CategoryTheory.FlatScalarTowerExchange.diagramAdjunction",
+   "CategoryTheory.FlatScalarTowerExchange.complexFunctor",
+   "CategoryTheory.FlatScalarTowerExchange.complexAdjunction",
+   "CategoryTheory.FlatScalarTowerExchange.complexComparison",
+   "CategoryTheory.FlatScalarTowerExchange.inverseNormalization",
+   "CategoryTheory.FlatScalarTowerExchange.derivedNormalization",
+   "CategoryTheory.FlatScalarTowerExchange.ordinaryNormalization",
+   "CategoryTheory.FlatScalarTowerExchange.composeFactor",
+   "CategoryTheory.FlatScalarTowerExchange.squareNormalization"
   ],
   "file": "lean/Sheaf/CategoryTheory/FlatScalarTowerExchange.lean",
   "statement": "theorem flatScalarTowerExchange (s : Square (f := f) (g := g) (fp := fp) (gp := gp)) (df : DerivedEdge f fR fS rX rY) (dg : DerivedEdge g gR gS rY' rY) (dfp : DerivedEdge fp fpR fpS rX' rY') (dgp : DerivedEdge gp gpR gpS rX' rX) (θR : gR.L ⋙ fpR.L ≅ fR.L ⋙ gpR.L) (θS : gS.L ⋙ fpS.L ≅ fS.L ⋙ gpS.L) (hθ : SquareNormalized s θR θS) : (∀ M : DerivedCategory Y.modulesS, rX'.functor.map (θS.hom.app M) ≫ dgp.p.hom.app (fS.L.obj M) ≫ gpR.L.map (df.p.hom.app M) = dfp.p.hom.app (gS.L.obj M) ≫ fpR.L.map (dg.p.hom.app M) ≫ θR.hom.app (rY.functor.obj M)) ∧ (whiskerRight (mateEquiv fS.adj fpS.adj (TwoSquare.mk _ _ _ _ θS.hom)).natTrans rY'.functor ≫ (targetComparison dfp dgp).hom = (sourceComparison df dg).hom ≫ whiskerLeft rX.functor (mateEquiv fR.adj fpR.adj (TwoSquare.mk _ _ _ _ θR.hom)).natTrans) ∧ (∀ Z : DerivedCategory X.modulesS, (fpR.adj.homEquiv _ _).symm ((sourceComparison df dg).inv.app Z ≫ rY'.functor.map ((mateEquiv fS.adj fpS.adj (TwoSquare.mk _ _ _ _ θS.hom)).app Z) ≫ (targetComparison dfp dgp).hom.app Z) = θR.hom.app (fR.F.obj (rX.functor.obj Z)) ≫ gpR.L.map (fR.adj.counit.app (rX.functor.obj Z)))",
@@ -270,5 +280,15 @@
   "group": "N0",
   "result": "pass",
   "note": "Read node, 7 stmt_deps, live FlatRingedDiagramRestriction Defs/Comparisons/Adjuncts and theorem, AlgebraicInverseImage, Mathlib mateEquiv/TwoSquare. Hypotheses match (cornerwise IsFlatOnSite, EdgeData = FlatRingedDiagramInput fields incl. coherent, ModuleSquare coefficient equations + sameGeometry); p,d pinned to DerivedRestrictionComparison b,d with shared rU/qU; θ pinned by underlying-sheaf and localization normalization; derived adjunctions = dep's 0FND hypotheses. Conclusions (C), mate equality as nat-trans equality, explicit transpose all checked factor by factor; J = ULiftHom ULift ℕ+ᵒᵖ. lean.statement verbatim; universes bound; no hollow defs; docstrings OK; no duplicate. Advisory: unused plain imports (stage-3), non-stmt_dep owner decls via flat-ringed-diagram-restriction. No compile (no changes); worker compile 37-38 s clean."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-f993e",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261022T025345-L-1292841",
+  "kind": "interface",
+  "note": "independent cc review: delivered FlatScalarTowerExchange.lean (theorem proved, axioms propext/choice/Quot.sound) and node lem-weil-pbc-flat-scalar-tower-exchange against live module, DerivedRestrictionComparison/LocalizationSquareNormalized definitions and change record; statement byte-identical, rewritten interfaces equivalent, no importers"
  }
 }
