@@ -24145,3 +24145,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:11 L: returned deliver/NC/lem-sfb-ultrametric-orthogonal-extension (reviewer RETURN: L: independent stage-2 immutable head 73224163b5cd: A7/A6 (H2 credit): eleventh NC head 73224163b5cd of lem-sfb-ultramet)
 - 01:12 L: returned deliver/NH/cor-pur-affine-space-zero-section-purity (reviewer RETURN: L: independent stage-2 immutable head 0fa11caf2d20: H2/H13: item cor-pur-affine-space-zero-section-purity (newly added) )
 - 01:15 L: merged deliver/NJ/lemma-nagata-proper-to-separated-target (reviewer PASS; first push; new nodes: 0)
+- 01:15 L: returned deliver/ND/lem-sfb-tame-snc-quotient-resolution (reviewer RETURN: 6th push after five RETURNs (NM 966655f0, NJ ca6120ce, NC 08353e52, NK 00a16f01, ND cd6dfa56). The drop list is unchange)
