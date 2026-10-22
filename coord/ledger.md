@@ -24355,3 +24355,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:35 L: merged deliver/NL/lem-sfb-punctured-spectral-neighborhood-dimension (reviewer PASS; first push; new nodes: 0)
 - 02:35 L: merged deliver/NM/lem-sfb-quasi-compact-restriction-acyclicity (reviewer PASS; first push; new nodes: 1)
 - 02:35 L: merged deliver/NE/lem-sfb-spectral-space-cohomology-dimension (stage 2; reviewer PASS; parallel immutable checks)
+- 02:35 L: returned deliver/Q85/lem-weil-integral-twist-scalar-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-integral-twist-scalar-coherence: lem-weil-int)
