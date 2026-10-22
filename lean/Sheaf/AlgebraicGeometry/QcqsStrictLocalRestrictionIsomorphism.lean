@@ -1,5 +1,3 @@
 module
 
-/-! Withdrawn duplicate: use the adopted theorem in
-`WeilConjectures.AlgebraicGeometry.QcqsStrictLocalRestrictionIsomorphism`.
--/
+/-! Withdrawn: no declarations remain. -/
