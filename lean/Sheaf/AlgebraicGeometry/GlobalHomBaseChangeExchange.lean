@@ -203,7 +203,8 @@ theorem schemeGlobalHom_baseChange_exchange
     set_option backward.isDefEq.respectTransparency.types true in
       simpa only [schemeGlobalDerivedHom, schemeGlobalHomDirectImageMap,
         schemeGlobalDerivedHom_pullback_comparison,
-        schemeGlobalSectionsDirectImageIso_eq_mixed, Functor.comp_map, Functor.comp_obj,
+        schemeGlobalSectionsDirectImageIso_eq_mixed, schemeHomTensorPullbackIso_eq_mixed,
+        Functor.comp_map, Functor.comp_obj,
         b, b₁, d, E, E', a, p, H, c, Functor.prod_obj, Functor.op_obj,
         Functor.map_comp, Category.assoc] using ht
 
