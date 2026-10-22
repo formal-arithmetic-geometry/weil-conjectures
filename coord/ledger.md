@@ -24268,3 +24268,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:59 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
 - 01:59 L: returned deliver/K1/Sheaf.AlgebraicGeometry.ProjectiveLineAbelianOriginalStalkTotalExchange (reviewer RETURN: (reviewer C-8c972, head 8c97217f5) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Pr)
 - 01:59 L: merged deliver/NB/lem-sfb-affine-invertible-finite-set-section (stage 2; reviewer PASS; parallel immutable checks)
+- 02:00 L: returned deliver/H1/Sheaf.AlgebraicGeometry.StrictLocalMateProjectionData (reviewer RETURN: (the landing tools, head eb36b8c58) the delivery did not land: (d) user Sheaf.AlgebraicGeometry.StrictLocalSmallModel.St)
