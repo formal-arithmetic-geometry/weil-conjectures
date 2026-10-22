@@ -17,35 +17,33 @@
  ],
  "proof": [
   {
-   "text": "Apply the ordinary local normal-form theorem. It gives a neighbourhood U and either a rank r whose universal ordinary direct-image freeness is exactly the reference-rank predicate, or a predicate equivalent to emptiness of the test scheme.",
+   "text": "Apply exists_picardRankMatchDirectImageNormalForm. It gives a neighbourhood U and either a rank r whose universal ordinary direct-image freeness is exactly the reference-rank predicate, or a predicate equivalent to emptiness of the test scheme.",
    "uses": [
     "lem-sc-picard-rank-match-direct-image-normal-form"
    ],
    "elementary": false
   },
   {
-   "text": "In the fixed-rank case refine U to an affine neighbourhood V of s and apply the existing proper flat affine Cech perfect-model theorem to F. Its bounded nonnegative complex D has perfect Q(D). Affine-local flatness implies tensor flatness and bounded-above flatness implies K-flatness. The bifunctor/single-complex isomorphism and zero terms outside the bounds prove the required tensor-cohomology vanishing.",
+   "text": "In the fixed-rank case apply the existing exists_properFlatDirectImagePerfectChart to f, F, U and s. It provides a smaller neighbourhood V, a perfect K, its nonnegative tensor-amplitude bound, and an isomorphism from every H^0 of a derived pullback to the ordinary direct image. This reuses the existing affine Cech construction and its derived comparison instead of duplicating that proof.",
    "uses": [
-    "lem-pc-proper-flat-affine-cech-perfect-model",
-    "lem-pc-affine-flat-module-tensor-flat",
-    "lem-pc-bounded-above-flat-kflat",
-    "def-pc-derived-tensor-cohomology-vanishes"
+    "lem-sc-proper-flat-direct-image-perfect-chart"
    ],
    "elementary": false
   },
   {
-   "text": "The derived-pullback counit is invertible on D, by its defining universal property. Compose the quotient comparison, homological-complex pullback comparison, Cech cohomology comparison, degree-zero right-derived pushforward comparison and uniqueness-of-left-adjoint tensor/pullback isomorphisms. This identifies all pulled-back H^0 sheaves with the ordinary direct images. Rewrite the neighbourhood inclusion composite and transfer rank-r freeness along these isomorphisms in both directions.",
+   "text": "Restrict the normal-form equivalence along V to U. For each further test h compose it with g and use the chart isomorphism. Rewrite associativity and homOfLE_ι to identify the ordinary direct-image expressions. Transfer fixed-rank local freeness along the isomorphism in both directions.",
    "uses": [
-    "def-pc-derived-pullback",
-    "lem-pc-proper-flat-affine-cech-perfect-model"
+    "lem-sc-picard-rank-match-direct-image-normal-form",
+    "lem-sc-proper-flat-direct-image-perfect-chart"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "In the emptiness case use the zero derived object, b=0 and r=1. Zero is perfect via the zero complex on each open. The zero complex is bounded, flat and K-flat, and has zero tensor cohomology in every degree. Derived pullback is additive by its triangulated structure, so it and homology preserve zero. Every module on an empty scheme has every rank, as witnessed by an empty cover. Conversely, a zero module of rank one on a scheme forces that scheme empty: at a point its stalk would have both finrank zero and one. Apply the universal rank condition to the identity test to obtain emptiness.",
+   "text": "In the emptiness case use the actual zero derived object, b=0 and r=1. Zero is perfect via the zero complex on every open. The zero complex is bounded, flat and K-flat; the bifunctor/single-complex isomorphism gives zero tensor cohomology in every degree. Derived pullback is additive by its triangulated structure, so it and homology preserve zero. Every module on an empty scheme has every rank by the empty open cover. Conversely a zero module of rank one forces emptiness: at a point stalk finrank would be both zero and one. Apply the universal rank condition to the identity test.",
    "uses": [
     "def-pc-perfect-complex",
     "def-pc-derived-pullback",
+    "def-pc-derived-tensor-cohomology-vanishes",
     "lem-pc-bounded-above-flat-kflat",
     "lem-sc-finite-locally-free-stalk-finrank"
    ],
@@ -56,17 +54,16 @@
   "def-pc-derived-pullback",
   "def-pc-derived-tensor-cohomology-vanishes",
   "def-pc-perfect-complex",
-  "lem-pc-affine-flat-module-tensor-flat",
   "lem-pc-bounded-above-flat-kflat",
-  "lem-pc-proper-flat-affine-cech-perfect-model",
   "lem-sc-finite-locally-free-stalk-finrank",
-  "lem-sc-picard-rank-match-direct-image-normal-form"
+  "lem-sc-picard-rank-match-direct-image-normal-form",
+  "lem-sc-proper-flat-direct-image-perfect-chart"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/0BDP",
   "place": "first three proof paragraphs; Tag 0B91(2); unrestricted fibre-rank adaptation from the original chart node",
-  "note": "U4: ordinary rank normal form plus explicit nonnegative affine Cech chart and actual zero complex. The unit route stays unchanged."
+  "note": "E2: reuse the already proved ordinary proper-flat direct-image chart for the complete fixed-rank construction and comparison. Preserve the rank transfer and actual-zero mixed-fibre argument. No new statements, holes, definitions or unit-route changes. The earlier quarantine import repair was already landed by N2 before this claim."
  },
  "mathlib_searches": [
   {
@@ -138,15 +135,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N2",
+  "group": "E2",
   "result": "pass",
-  "landing": "20261021T233746-L-857537",
+  "landing": "20261022T002355-L-1921767",
   "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [],
-  "sorry_after": []
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

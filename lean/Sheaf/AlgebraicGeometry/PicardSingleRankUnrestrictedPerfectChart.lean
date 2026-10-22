@@ -13,9 +13,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 import WeilConjectures.AlgebraicGeometry.PicardRankMatchDirectImage
-import Sheaf.AlgebraicGeometry.ProperFlatAffineCechPerfectModel
-import WeilConjectures.AlgebraicGeometry.AffineFlatModuleTensorFlat
-import all Sheaf.AlgebraicGeometry.PerfectCohomologyFromGeometric
+import Sheaf.AlgebraicGeometry.ProperFlatDirectImagePerfectChart
 import WeilConjectures.AlgebraicGeometry.FiniteLocallyFreeStalkFinrank
 import Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
 import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
@@ -198,88 +196,8 @@ theorem exists_picardSingleRankUnrestrictedPerfectChart
                   ((derivedPullback (h ≫ g)).obj K)) r := by
   obtain ⟨U, hsU, hnormal⟩ := exists_picardRankMatchDirectImageNormalForm f E F s
   rcases hnormal with ⟨r, hnormal⟩ | hnormal
-  · have hchart :
-    ∃ V : S.Opens, s ∈ V ∧ V ≤ U ∧
-      ∃ (K : schemeDerivedCategory V.toScheme) (b : ℤ),
-        IsPerfect V.toScheme K ∧
-        (∀ M : SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace),
-          ∀ i : ℤ, i < 0 ∨ b < i →
-            schemeDerivedTensorCohomologyVanishes V.toScheme K M i) ∧
-        ∀ (T : Scheme.{u}) (a : T ⟶ V.toScheme),
-          Nonempty (((DerivedCategory.homologyFunctor
-            (SheafOfModules.{u} (moduleRings T.toRingedSpace)) 0).obj
-              ((derivedPullback a).obj K)) ≅
-            ((Modules.pushforward (pullback.snd f (a ≫ V.ι))).obj
-              ((Modules.tensorPullback (pullback.fst f (a ≫ V.ι))).obj F))) := by
-      classical
-      obtain ⟨V, hV, hsV, hVU⟩ := exists_isAffineOpen_mem_and_subset hsU
-      have := Modules.isGrothendieckAbelian X
-      obtain ⟨D, d, hDge, hDle, hDflat, hDqc, hperfect, hcompare⟩ :=
-        Modules.exists_proper_flat_affine_cech_perfect_model f F
-          (Modules.isFlatOver_of_isFiniteLocallyFree f F) V hV
-      have : D.IsStrictlyGE 0 := hDge
-      have : D.IsStrictlyLE (d : ℤ) := hDle
-      have hD : CochainComplex.IsAcyclicTensorKFlat (R := V.toScheme.sheaf) D :=
-        CochainComplex.isKFlat_of_boundedAbove_flat_ringedSpace V.toScheme.toRingedSpace D
-          ⟨d, fun i hi ↦ D.isZero_of_isStrictlyLE d i hi⟩
-          (fun i ↦ isFlat_of_affineFlatOver_identity (D.X i) (hDflat i))
-      refine ⟨V, hsV, hVU, DerivedCategory.Q.obj D, d, hperfect, ?_, ?_⟩
-      · intro M i hi
-        let : MonoidalCategory V.toScheme.Modules :=
-          SheafOfModules.monoidalCategory V.toScheme.sheaf
-        let : SymmetricCategory V.toScheme.Modules :=
-          SheafOfModules.symmetricCategory V.toScheme.sheaf
-        let : MonoidalPreadditive V.toScheme.Modules :=
-          Classical.choice (SheafOfModules.tensorClosed V.toScheme.sheaf).1
-        refine ⟨D, hD, ⟨Iso.refl _⟩, ?_⟩
-        have hz : IsZero (D.X i) := by
-          rcases hi with hi | hi
-          · exact D.isZero_of_isStrictlyGE 0 i hi
-          · exact D.isZero_of_isStrictlyLE d i hi
-        let e := CochainComplex.mapBifunctorSingle₂Iso
-          (MonoidalCategory.curriedTensor V.toScheme.Modules) M D
-        have hzero : IsZero (((((MonoidalCategory.curriedTensor
-            V.toScheme.Modules).flip.obj M).mapHomologicalComplex (.up ℤ)).obj D).homology i) :=
-          ShortComplex.isZero_homology_of_isZero_X₂ _
-            (((MonoidalCategory.curriedTensor V.toScheme.Modules).flip.obj M).map_isZero hz)
-        exact (HomologicalComplex.homologyFunctor _ (.up ℤ) i).mapIso e |>.isZero_iff.mpr hzero
-      · intro T a
-        have := Modules.isGrothendieckAbelian (pullback f (a ≫ V.ι))
-        obtain ⟨I, hI, hImap, hIadd, hIlim, hIcolim, hIres,
-          A, hA, hAmap, hAadd, ε, hε, htri, hK⟩ :=
-          (derivedPullback_spec a)
-        have hAeq : A = Modules.tensorPullback a :=
-          CategoryTheory.Functor.ext hA (fun M N q ↦ hAmap q)
-        subst A
-        have := hAadd
-        have := hK D hD
-        let e : (derivedPullback a).obj (DerivedCategory.Q.obj D) ≅
-            DerivedCategory.Q.obj
-              (((Modules.tensorPullback a).mapHomologicalComplex (.up ℤ)).obj D) :=
-          (derivedPullback a).mapIso ((DerivedCategory.quotientCompQhIso
-            (SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace))).symm.app D) ≪≫
-            asIso (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj D)) ≪≫
-            DerivedCategory.Qh.mapIso
-              (((Modules.tensorPullback a).mapHomotopyCategoryFactors (.up ℤ)).app D) ≪≫
-            (DerivedCategory.quotientCompQhIso
-              (SheafOfModules.{u} (moduleRings T.toRingedSpace))).app _
-        let et : Modules.tensorPullback a ≅ Modules.pullback a :=
-          (Modules.nonempty_tensorPullbackAdjunction a).some.leftAdjointUniq
-            (Modules.pullbackPushforwardAdjunction a)
-        obtain ⟨ec⟩ := hcompare a (pullback.fst f (a ≫ V.ι))
-          (pullback.snd f (a ≫ V.ι)) (IsPullback.of_hasPullback f (a ≫ V.ι)) 0
-        let ep : Modules.pullback (pullback.fst f (a ≫ V.ι)) ≅
-            Modules.tensorPullback (pullback.fst f (a ≫ V.ι)) :=
-          ((Modules.nonempty_tensorPullbackAdjunction
-            (pullback.fst f (a ≫ V.ι))).some.leftAdjointUniq
-              (Modules.pullbackPushforwardAdjunction _)).symm
-        let q := Modules.pushforward (pullback.snd f (a ≫ V.ι))
-        exact ⟨(DerivedCategory.homologyFunctor _ 0).mapIso e ≪≫
-          (DerivedCategory.homologyFunctorFactors _ 0).app _ ≪≫
-          (HomologicalComplex.homologyFunctor _ (.up ℤ) 0).mapIso
-            ((NatIso.mapHomologicalComplex et (.up ℤ)).app D) ≪≫ ec ≪≫
-          q.rightDerivedZeroIsoSelf.app _ ≪≫ q.mapIso (ep.app F)⟩
-    obtain ⟨V, hsV, hVU, K, b, hK, hb, hcomp⟩ := hchart
+  · obtain ⟨V, hsV, hVU, K, b, hK, hb, hcomp⟩ :=
+      exists_properFlatDirectImagePerfectChart f F U s hsU
     refine ⟨V, hsV, K, b, r, hK, hb, ?_⟩
     intro T g
     have hn := hnormal T (g ≫ S.homOfLE hVU)
