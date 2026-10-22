@@ -15,7 +15,8 @@ import Sheaf.Paper.RingedTopoiTensorSections
 import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import Sheaf.CategoryTheory.DerivedCategory.AdjointFunctors
 import WeilConjectures.CategoryTheory.DerivedCategory.ResolvingClassEssentialConstancy
-import Sheaf.Algebra.Homology.KFlatResolution
+import Sheaf.Algebra.Homology.KFlat
+import WeilConjectures.Algebra.Homology.KFlatResolution
 import Sheaf.Algebra.Homology.ChangeOfRingsKFlatQuasiIso
 import WeilConjectures.Algebra.Homology.QuasiIsoSaturatedTriangulated
 import Mathlib.CategoryTheory.Functor.Derived.PointwiseRightDerived

@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 import Mathlib.Algebra.Homology.SingleHomology
 import Mathlib.CategoryTheory.Adjunction.Additive
-import Sheaf.Algebra.Homology.KFlatResolution
+import WeilConjectures.Algebra.Homology.KFlatResolution
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
 import Sheaf.AlgebraicGeometry.SelfExtPushforwardHomology
 import Sheaf.AlgebraicGeometry.SelfTorPushforwardHomology

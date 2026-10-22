@@ -6,7 +6,7 @@ Authors: SHEAF group V2
 module
 
 public import Sheaf.Paper.RingedProjectionCoherenceData
-import Sheaf.Algebra.Homology.KFlatResolution
+import WeilConjectures.Algebra.Homology.KFlatResolution
 import Sheaf.Paper.RingedProjectionPullbackComparisons
 import Sheaf.Paper.RingedProjectionTensorCompatibility
 

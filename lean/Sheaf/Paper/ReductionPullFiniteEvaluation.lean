@@ -7,7 +7,7 @@ module
 
 public import Sheaf.Paper.CompletionMateComparison
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
-import Sheaf.Algebra.Homology.KFlatResolution
+import WeilConjectures.Algebra.Homology.KFlatResolution
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.ScalarExtensionRingIso
 import Sheaf.Paper.KFlatRingedToposPullback
 import Sheaf.Algebra.Homology.TensorColimitsIndependentCoefficients
@@ -25,6 +25,14 @@ set_option backward.isDefEq.respectTransparency.types false
 universe u vModel vComplex vDerived
 open CategoryTheory CategoryTheory.Limits
 namespace CategoryTheory.AdicSites
+
+-- Keep tensor structures abstract while matching the derived comparison laws.
+attribute [local irreducible] constantSheaf SheafOfModules.monoidalCategory
+  HasDerivedCategory.standard
+
+private theorem legacy_kflat {S : Site.{u}} {R : Sheaf S.topology CommRingCat.{u}}
+    (P : CochainComplex (ConstantCompletion.Mod R) ℤ) (hP : P.IsKFlatTensor) :
+    P.IsAcyclicTensorKFlat := hP
 
 private theorem insertion_iso_properties {C : Type u} [SmallCategory C]
     (J : GrothendieckTopology C) {R B : Sheaf J CommRingCat.{u}} (c : R ≅ B) :
@@ -236,28 +244,55 @@ private theorem exact_square_factors
   simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
   rfl
 
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
+private theorem flatOnSite_iff {S : Site.{u}} {R : Sheaf S.topology CommRingCat.{u}}
+    (M : ConstantCompletion.Mod R) :
+    M.IsFlat ↔ SheafOfModules.IsFlatOnSite (R := R) M := by
+  let := SheafOfModules.monoidalCategory R
+  change exactFunctor _ _ (MonoidalCategory.tensorRight M) ↔ _
+  exact ⟨fun h ↦ ObjectProperty.prop_of_iso (exactFunctor _ _)
+      (SheafOfModules.siteSheafTensorRightIso R M).symm h,
+    fun h ↦ ObjectProperty.prop_of_iso (exactFunctor _ _)
+      (SheafOfModules.siteSheafTensorRightIso R M) h⟩
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
+private theorem pullback_kflat_bridge {V U : Site.{u}}
+    {R : Sheaf V.topology CommRingCat.{u}}
+    {S RI : Sheaf U.topology CommRingCat.{u}}
+    (L : Sheaf V.topology (Type u) ⥤ Sheaf U.topology (Type u))
+    (G : Sheaf U.topology (Type u) ⥤ Sheaf V.topology (Type u))
+    (adj : L ⊣ G) [PreservesFiniteLimits L]
+    (AI : SheafOfModules.AlgebraicInverseImage L R RI) (c : RI ⟶ S)
+    (F : ConstantCompletion.Mod R ⥤ ConstantCompletion.Mod S)
+    (hobj : ∀ M, F.obj M = SheafOfModules.changeOfRings c (AI.modules.obj M))
+    (hmap : ∀ {M N} (a : M ⟶ N), F.map a = eqToHom (hobj M) ≫
+      SheafOfModules.changeOfRingsHom c (AI.modules.obj M) (AI.modules.map a) ≫
+        eqToHom (hobj N).symm) [F.Additive]
+    (P : CochainComplex (ConstantCompletion.Mod R) ℤ)
+    (hP : P.IsAcyclicTensorKFlat) (hflat : ∀ q : ℤ, (P.X q).IsFlat) :
+    CochainComplex.IsAcyclicTensorKFlat
+      ((F.mapHomologicalComplex (.up ℤ)).obj P) ∧
+      ∀ q : ℤ, (((F.mapHomologicalComplex (.up ℤ)).obj P).X q).IsFlat := by
+  obtain ⟨hK, hterms⟩ := SheafOfModules.isKFlat_ringedToposPullback L G adj AI c
+    F hobj hmap P
+    ((CochainComplex.isKFlatIndependentCoefficients_iff_isKFlat P).mpr hP)
+    (fun q ↦ (flatOnSite_iff (P.X q)).mp (hflat q))
+  exact ⟨(CochainComplex.isKFlatIndependentCoefficients_iff_isKFlat _).mp hK,
+    fun q ↦ (flatOnSite_iff _).mpr (hterms q)⟩
+
 private theorem modulePull_kflat {V U : Site.{u}} (f : Morphism V U)
     (A : Type u) [CommRing A] (P : CochainComplex (V.modules A) ℤ)
     (hP : P.IsAcyclicTensorKFlat) (hflat : ∀ q : ℤ, (P.X q).IsFlat) :
     CochainComplex.IsAcyclicTensorKFlat
       (((f.modulePull A).mapHomologicalComplex (.up ℤ)).obj P) ∧
       ∀ q : ℤ, ((((f.modulePull A).mapHomologicalComplex (.up ℤ)).obj P).X q).IsFlat := by
-  have hflat' {S : Site.{u}} {R : Sheaf S.topology CommRingCat.{u}}
-      (M : ConstantCompletion.Mod R) :
-      M.IsFlat ↔ SheafOfModules.IsFlatOnSite (R := R) M := by
-    let := SheafOfModules.monoidalCategory R
-    change exactFunctor _ _ (MonoidalCategory.tensorRight M) ↔ _
-    exact ⟨fun h ↦ ObjectProperty.prop_of_iso (exactFunctor _ _)
-        (SheafOfModules.siteSheafTensorRightIso R M).symm h,
-      fun h ↦ ObjectProperty.prop_of_iso (exactFunctor _ _)
-        (SheafOfModules.siteSheafTensorRightIso R M) h⟩
-  have h := SheafOfModules.isKFlat_ringedToposPullback f.inverse f.direct f.adjunction
+  exact pullback_kflat_bridge f.inverse f.direct f.adjunction
     (f.algebra.algebra (V.ring A)) (ConstantCompletion.constantMap f.algebra A)
-    (f.modulePull A) (fun _ ↦ rfl) (fun _ ↦ by simp; rfl) P
-    ((CochainComplex.isKFlatIndependentCoefficients_iff_isKFlat P).mpr hP)
-    (fun q ↦ (hflat' (P.X q)).mp (hflat q))
-  exact ⟨(CochainComplex.isKFlatIndependentCoefficients_iff_isKFlat _).mp h.1,
-    fun q ↦ (hflat' _).mpr (h.2 q)⟩
+    (f.modulePull A) (fun _ ↦ rfl)
+    (fun _ ↦ by simp only [eqToHom_refl, Category.id_comp, Category.comp_id]; rfl)
+    P hP hflat
 
 private theorem exact_square_factors_cancel
     {C D D' E : Type*} [Category C] [Category D] [Category D'] [Category E]
@@ -372,40 +407,6 @@ private theorem naturality_paste_components
     _ = ηX ≫ Q.map (x ≫ s) := by rw [h]
     _ = _ := by simp only [Functor.map_comp, Category.assoc]
 
-private theorem lift_complex_cube
-    {C D V W B E : Type*}
-    [Category C] [Category D] [Category V] [Category W] [Category B] [Category E]
-    [Preadditive C] [Preadditive D] [Preadditive V] [Preadditive W]
-    [Preadditive B] [Preadditive E]
-    (F : C ⥤ D) (T : V ⥤ W) (ev : V ⥤ C) (eu : W ⥤ D)
-    (rv : C ⥤ V) (ru : D ⥤ W) (xv : C ⥤ B) (xu : D ⥤ E)
-    (sv : B ⥤ C) (su : E ⥤ D) (G : B ⥤ E)
-    [F.Additive] [T.Additive] [ev.Additive] [eu.Additive]
-    [rv.Additive] [ru.Additive] [xv.Additive] [xu.Additive]
-    [sv.Additive] [su.Additive] [G.Additive]
-    (a : T ⋙ eu ≅ ev ⋙ F) (b : rv ⋙ ev ≅ xv ⋙ sv)
-    (c : sv ⋙ F ≅ G ⋙ su) (d : rv ⋙ T ≅ F ⋙ ru)
-    (e : ru ⋙ eu ≅ xu ⋙ su) (g : F ⋙ xu ≅ xv ⋙ G)
-    (h : ∀ M, a.hom.app (rv.obj M) ≫ F.map (b.hom.app M) ≫ c.hom.app (xv.obj M) =
-      eu.map (d.hom.app M) ≫ e.hom.app (F.obj M) ≫ su.map (g.hom.app M))
-    (P : CochainComplex C ℤ) :
-    (ConstantCompletion.mapComplexSquare T eu ev F a).hom.app
-        ((rv.mapHomologicalComplex (.up ℤ)).obj P) ≫
-      (F.mapHomologicalComplex (.up ℤ)).map
-        ((ConstantCompletion.mapComplexSquare rv ev xv sv b).hom.app P) ≫
-      (ConstantCompletion.mapComplexSquare sv F G su c).hom.app
-        ((xv.mapHomologicalComplex (.up ℤ)).obj P) =
-    (eu.mapHomologicalComplex (.up ℤ)).map
-        ((ConstantCompletion.mapComplexSquare rv T F ru d).hom.app P) ≫
-      (ConstantCompletion.mapComplexSquare ru eu xu su e).hom.app
-        ((F.mapHomologicalComplex (.up ℤ)).obj P) ≫
-      (su.mapHomologicalComplex (.up ℤ)).map
-        ((ConstantCompletion.mapComplexSquare F xu xv G g).hom.app P) := by
-  unfold ConstantCompletion.mapComplexSquare
-  apply HomologicalComplex.hom_ext
-  intro q
-  exact h (P.X q)
-
 private theorem hom_comp_of_inv_comp {C : Type*} [Category C]
     {X Y Z : C} (e : X ≅ Y) {a : Y ⟶ Z} {b : X ⟶ Z}
     (h : e.inv ≫ b = a) : b = e.hom ≫ a := by
@@ -436,6 +437,17 @@ private theorem ordinary_reduction_cube {V U : Site.{u}} (f : Morphism V U)
   exact hh
 
 
+private theorem mapComplexSquare_hom_f
+    {C D D' E : Type*} [Category C] [Category D] [Category D'] [Category E]
+    [Preadditive C] [Preadditive D] [Preadditive D'] [Preadditive E]
+    (F : C ⥤ D) (G : D ⥤ E) (F' : C ⥤ D') (G' : D' ⥤ E)
+    [F.Additive] [G.Additive] [F'.Additive] [G'.Additive]
+    (e : F ⋙ G ≅ F' ⋙ G') (P : CochainComplex C ℤ) (q : ℤ) :
+    ((ConstantCompletion.mapComplexSquare F G F' G' e).hom.app P).f q =
+      e.hom.app (P.X q) := by
+  rw [ConstantCompletion.mapComplexSquare_hom]
+  rfl
+
 private theorem complex_reduction_finite {V U : Site.{u}} (f : Morphism V U)
     (A : Type u) [CommRing A] [IsNoetherianRing A] (I : Ideal A)
     (P : CochainComplex (V.modules A) ℤ) (n : ℕ) :
@@ -454,22 +466,18 @@ private theorem complex_reduction_finite {V U : Site.{u}} (f : Morphism V U)
         ).mapHomologicalComplex (.up ℤ)).map ((finiteComplexIso f A I n).hom.app P) := by
   have := ConstantCompletion.reductionTower_additive V.topology A I false
   have := ConstantCompletion.reductionTower_additive U.topology A I false
-  with_unfolding_all
-    exact lift_complex_cube (f.modulePull A) (f.towerModulePull A)
-      (V.evaluateModule A n) (U.evaluateModule A n)
-      (ConstantCompletion.reductionTower V.topology A I false)
-      (ConstantCompletion.reductionTower U.topology A I false)
-      (ConstantCompletion.change (ConstantCompletion.quotient V.topology A I n))
-      (ConstantCompletion.change (ConstantCompletion.quotient U.topology A I n))
-      (ConstantCompletion.res (ConstantCompletion.quotient V.topology A I n))
-      (ConstantCompletion.res (ConstantCompletion.quotient U.topology A I n))
-      (f.modulePull (quotientRing A I n))
-      (f.evaluateModulePullIso A n)
-      (ConstantCompletion.quotientEvaluationIso V.topology A I n)
-      (f.finiteModuleRestrictionPullIso A I n) (f.moduleReductionPullIso A I)
-      (ConstantCompletion.quotientEvaluationIso U.topology A I n)
-      (ConstantCompletion.ordinaryFinitePull f.algebra f.direct f.adjunction A I n)
-      (ordinary_reduction_cube f A I n) P
+  dsimp only [evaluationPullComplexIso, restrictionComplexIso, finiteComplexIso,
+    Morphism.moduleReductionPullComplexIso]
+  apply HomologicalComplex.hom_ext
+  intro q
+  dsimp only [HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f]
+  simp only [ConstantCompletion.quotientEvaluationComplexIso_hom_f, mapComplexSquare_hom_f]
+  dsimp only [ConstantCompletion.reductionComplex, Functor.comp_obj,
+    Functor.mapHomologicalComplex_obj_X]
+  simpa only [Functor.comp_obj, ConstantCompletion.quotientEvaluationIso,
+    Iso.refl_hom, NatTrans.id_app]
+    using ordinary_reduction_cube f A I n (P.X q)
+
 
 private theorem map_two_eq_three {C D : Type*} [Category C] [Category D]
     (F : C ⥤ D) {X Y Z W T : C}
@@ -540,6 +548,7 @@ private theorem iso_inv_comp_of_comp_eq {C : Type*} [Category C]
     (h : a = e.hom ≫ b) : e.inv ≫ a = b := by
   rw [h, ← Category.assoc, e.inv_hom_id, Category.id_comp]
 
+-- Only the component equations at the chosen representative enter the pasting argument.
 private theorem finite_model_abstract
     {C D B E V W C' D' B' E' V' W' : Type vModel}
     [Category.{vComplex} C] [Category.{vComplex} D] [Category.{vComplex} B] [Category.{vComplex}
@@ -574,10 +583,7 @@ private theorem finite_model_abstract
     (QE : E ⥤ E')
     (QV : V ⥤ V')
     (QW : W ⥤ W')
-    (kV : C → Prop)
-    (tV : C → Prop)
-    (kU : D → Prop)
-    (tU : D → Prop)
+    (P : C)
     (fF : QC ⋙ DF ≅ F ⋙ QD)
     (fT : QV ⋙ DT ≅ T ⋙ QW)
     (fEV : QV ⋙ EV ≅ ev ⋙ QC)
@@ -601,58 +607,43 @@ private theorem finite_model_abstract
     (reductionIso : RV ⋙ DT ≅ DF ⋙ RU)
     (finiteEvalIsoU : RU ⋙ EU ≅ XU ⋙ SU)
     (finiteIso : DF ⋙ XU ≅ XV ⋙ DG)
-    (isoC : ∀ P : C, kV P → IsIso (cXV.app P))
-    (pullKflat : ∀ P : C, kV P → tV P → kU (F.obj P) ∧ tU (F.obj P))
-    (hRestrict : ∀ YP : B,
-    DF.map (fSV.hom.app YP) ≫ restrictionIso.hom.app (QB.obj YP) ≫
-      SU.map (fG.hom.app YP) ≫ fSU.inv.app (G.obj YP) =
-    fF.hom.app (sv.obj YP) ≫ QD.map (restrictSquare.hom.app YP))
-    (hEval : ∀ XP : V,
-    evalIso.hom.app (QV.obj XP) ≫ DF.map (fEV.hom.app XP) ≫
-      fF.hom.app (ev.obj XP) =
-    EU.map (fT.hom.app XP) ≫ fEU.hom.app (T.obj XP) ≫
-      QD.map (evalSquare.hom.app XP))
-    (hFinite : ∀ P : C, kV P → tV P →
-    XU.map (fF.hom.app P) ≫ cXU.app (F.obj P) ≫
+    (isoC : IsIso (cXV.app P))
+    (hRestrict : DF.map (fSV.hom.app (xv.obj P)) ≫ restrictionIso.hom.app (QB.obj (xv.obj P)) ≫
+      SU.map (fG.hom.app (xv.obj P)) ≫ fSU.inv.app (G.obj (xv.obj P)) =
+    fF.hom.app (sv.obj (xv.obj P)) ≫ QD.map (restrictSquare.hom.app (xv.obj P)))
+    (hEval : evalIso.hom.app (QV.obj (rv.obj P)) ≫ DF.map (fEV.hom.app (rv.obj P)) ≫
+      fF.hom.app (ev.obj (rv.obj P)) =
+    EU.map (fT.hom.app (rv.obj P)) ≫ fEU.hom.app (T.obj (rv.obj P)) ≫
+      QD.map (evalSquare.hom.app (rv.obj P)))
+    (hFinite : XU.map (fF.hom.app P) ≫ cXU.app (F.obj P) ≫
       QE.map (finiteSquare.hom.app P) =
     finiteIso.hom.app (QC.obj P) ≫ DG.map (cXV.app P) ≫
       fG.hom.app (xv.obj P))
-    (hBV : ∀ P : C, kV P → tV P →
-    finiteEvalIsoV.hom.app (QC.obj P) ≫ SV.map (cXV.app P) =
+    (hBV : finiteEvalIsoV.hom.app (QC.obj P) ≫ SV.map (cXV.app P) =
     EV.map (cRV.app P) ≫
       (fEV.hom.app (rv.obj P) ≫ QC.map (finiteEvalV.hom.app P)) ≫
       fSV.hom.app (xv.obj P))
-    (hBU : ∀ P : D, kU P → tU P →
-    finiteEvalIsoU.hom.app (QD.obj P) ≫
-        SU.map (cXU.app P) =
-    EU.map (cRU.app P) ≫
-      (fEU.hom.app (ru.obj P) ≫
-        QD.map (finiteEvalU.hom.app P)) ≫
-      fSU.hom.app (xu.obj P))
-    (hReduction : ∀ P : C, kV P → tV P →
-    reductionIso.hom.app (QC.obj P) ≫ RU.map (fF.hom.app P) ≫
+    (hBU : finiteEvalIsoU.hom.app (QD.obj (F.obj P)) ≫
+        SU.map (cXU.app (F.obj P)) =
+    EU.map (cRU.app (F.obj P)) ≫
+      (fEU.hom.app (ru.obj (F.obj P)) ≫
+        QD.map (finiteEvalU.hom.app (F.obj P))) ≫
+      fSU.hom.app (xu.obj (F.obj P)))
+    (hReduction : reductionIso.hom.app (QC.obj P) ≫ RU.map (fF.hom.app P) ≫
       cRU.app (F.obj P) =
     DT.map (cRV.app P) ≫ fT.hom.app (rv.obj P) ≫
       QW.map (reductionSquare.hom.app P))
-    (hCube : ∀ P : C,
-    evalSquare.hom.app (rv.obj P) ≫ F.map (finiteEvalV.hom.app P) ≫
+    (hCube : evalSquare.hom.app (rv.obj P) ≫ F.map (finiteEvalV.hom.app P) ≫
       restrictSquare.hom.app (xv.obj P) =
     eu.map (reductionSquare.hom.app P) ≫
-      finiteEvalU.hom.app (F.obj P) ≫ su.map (finiteSquare.hom.app P))
-    (P : C) (hP : kV P) (hflat : tV P) :
+      finiteEvalU.hom.app (F.obj P) ≫ su.map (finiteSquare.hom.app P)) :
     evalIso.hom.app (RV.obj (QC.obj P)) ≫
         DF.map (finiteEvalIsoV.hom.app (QC.obj P)) ≫
         restrictionIso.hom.app (XV.obj (QC.obj P)) =
       EU.map (reductionIso.hom.app (QC.obj P)) ≫
         finiteEvalIsoU.hom.app (DF.obj (QC.obj P)) ≫
         SU.map (finiteIso.hom.app (QC.obj P)) := by
-  let : IsIso (cXV.app P) := isoC P hP
-  let hFinite := hFinite P hP hflat
-  let hBV := hBV P hP hflat
-  let hpull := pullKflat P hP hflat
-  let hBU := hBU (F.obj P) hpull.1 hpull.2
-  let hReduction := hReduction P hP hflat
-  let hCube := hCube P
+  let : IsIso (cXV.app P) := isoC
   let XP := rv.obj P
   let YP := xv.obj P
   let fP := F.obj P
@@ -701,14 +692,14 @@ private theorem finite_model_abstract
   · exact (restrictionIso.hom.naturality c).symm
   · exact map_two_eq_three DF hBV
   · exact (evalIso.hom.naturality cV).symm
-  · exact hRestrict YP
+  · exact hRestrict
   · exact postcompose_factors QC DF F QD
       fF.hom
       (Z := ev.obj XP) (Z' := sv.obj YP) vV
       (evalIso.hom.app (QV.obj XP)) (fEV.hom.app XP)
       (EU.map (fT.hom.app XP)) (fEU.hom.app
         (T.obj XP))
-      (evalSquare.hom.app XP) (hEval XP)
+      (evalSquare.hom.app XP) hEval
   · exact map_three_eq_three SU hFinite.symm
   · exact (finiteEvalIsoU.hom.naturality (fF.hom.app P)).symm
   · exact hBU
@@ -787,6 +778,7 @@ private theorem finite_model_on_resolution {V U : Site.{u}} (f : Morphism V U)
         (U.finiteRestriction A I n).map ((f.finitePullIso A I n).hom.app K₀) := by
   let := ConstantCompletion.reductionTower_additive V.topology A I false
   let := ConstantCompletion.reductionTower_additive U.topology A I false
+  have hpull := modulePull_kflat f A P hP hflat
   exact finite_model_abstract
     ((f.modulePull A).mapHomologicalComplex (.up ℤ))
     ((f.towerModulePull A).mapHomologicalComplex (.up ℤ))
@@ -822,10 +814,7 @@ private theorem finite_model_on_resolution {V U : Site.{u}} (f : Morphism V U)
     (ConstantCompletion.Q (U.ring (quotientRing A I n)))
     (ConstantCompletion.TQ (V.ring A))
     (ConstantCompletion.TQ (U.ring A))
-    (fun P ↦ CochainComplex.IsAcyclicTensorKFlat P)
-    (fun P ↦ ∀ q : ℤ, (P.X q).IsFlat)
-    (fun P ↦ CochainComplex.IsAcyclicTensorKFlat P)
-    (fun P ↦ ∀ q : ℤ, (P.X q).IsFlat)
+    P
     ((f.modulePull A).mapDerivedCategoryFactors)
     ((f.towerModulePull A).mapDerivedCategoryFactors)
     ((V.evaluateModule A n).mapDerivedCategoryFactors)
@@ -849,17 +838,19 @@ private theorem finite_model_on_resolution {V U : Site.{u}} (f : Morphism V U)
     (f.reductionPullIso A I)
     (U.finiteEvaluationIso A I n)
     (f.finitePullIso A I n)
-    ((ConstantCompletion.derivedExtension
-      (ConstantCompletion.quotient V.topology A I n)).computation)
-    (modulePull_kflat f A)
-    (restrictionPull_factors f A I n)
-    (evaluatePull_factors f A n)
-    ((f.finitePullIso_existsUnique A I n).exists.choose_spec)
-    ((V.finiteEvaluationIso_existsUnique A I n).exists.choose_spec)
-    ((U.finiteEvaluationIso_existsUnique A I n).exists.choose_spec)
-    ((f.reductionPullIso_existsUnique A I).exists.choose_spec)
-    (fun P ↦ complex_reduction_finite f A I P n)
-    P hP hflat
+    (((ConstantCompletion.derivedExtension
+      (ConstantCompletion.quotient V.topology A I n)).computation) P hP)
+    (restrictionPull_factors f A I n
+      (((ConstantCompletion.change (ConstantCompletion.quotient V.topology A I n)
+        ).mapHomologicalComplex (.up ℤ)).obj P))
+    ((evaluatePull_factors f A n) (((ConstantCompletion.reductionTower V.topology A I false
+      ).mapHomologicalComplex (.up ℤ)).obj P))
+    (((f.finitePullIso_existsUnique A I n).exists.choose_spec) P hP hflat)
+    (((V.finiteEvaluationIso_existsUnique A I n).exists.choose_spec) P hP hflat)
+    ((U.finiteEvaluationIso_existsUnique A I n).exists.choose_spec
+      (((f.modulePull A).mapHomologicalComplex (.up ℤ)).obj P) hpull.1 hpull.2)
+    (((f.reductionPullIso_existsUnique A I).exists.choose_spec) P hP hflat)
+    (complex_reduction_finite f A I P n)
 
 /-- Evaluation of the strict tensor comparison retains its finite quotient action.
 
@@ -889,10 +880,10 @@ theorem reductionPullFiniteEvaluation {V U : Site.{u}} (f : Morphism V U)
     (R := V.ring A) ((ConstantCompletion.Q (V.ring A)).objPreimage K)
   let : QuasiIso q := hq
   have : IsIso ((ConstantCompletion.Q (V.ring A)).map q) := inferInstance
-  let e : (ConstantCompletion.Q (V.ring A)).obj P ≅ K :=
-    asIso ((ConstantCompletion.Q (V.ring A)).map q) ≪≫
-      (ConstantCompletion.Q (V.ring A)).objObjPreimageIso K
-  have hp := finite_model_on_resolution f A I P hP hflat n
+  obtain ⟨e⟩ : Nonempty ((ConstantCompletion.Q (V.ring A)).obj P ≅ K) :=
+    ⟨asIso ((ConstantCompletion.Q (V.ring A)).map q) ≪≫
+      (ConstantCompletion.Q (V.ring A)).objObjPreimageIso K⟩
+  have hp := finite_model_on_resolution f A I P (legacy_kflat P hP) hflat n
   have hk := finite_model_transport
     (f.pull A)
     (f.towerPull A)

@@ -7,7 +7,7 @@ module
 
 public import Sheaf.Paper.CompletionMateComparison
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
-import Sheaf.Algebra.Homology.KFlatResolution
+import WeilConjectures.Algebra.Homology.KFlatResolution
 
 /-! # The finite projection of the quotient completion unit
 
@@ -22,6 +22,9 @@ set_option backward.isDefEq.respectTransparency.types false
 universe u
 open CategoryTheory CategoryTheory.Limits
 namespace CategoryTheory.AdicSites
+
+attribute [local irreducible] constantSheaf HasDerivedCategory.standard
+
 
 private instance ordinaryLimit_additive (S : Site.{u}) (A : Type u) [CommRing A] :
     (lim : S.towers A ⥤ S.modules A).Additive :=
@@ -174,6 +177,12 @@ private theorem ordinary_finite_unit (S : Site.{u}) (A : Type u) [CommRing A]
     CategoryTheory.Functor.map_id, Category.comp_id] at ha
   exact (ConstantCompletion.underlying (S.ring A)).map_injective (hr.trans ha.symm)
 
+private theorem limit_counit_app
+    {C J : Type*} [Category C] [Category J] [HasLimitsOfShape J C]
+    (X : J ⥤ C) (j : J) :
+    ((constLimAdj : (Functor.const J : C ⥤ J ⥤ C) ⊣ lim).counit.app X).app j =
+      limit.π X j := rfl
+
 private theorem ordinary_projection_unit (S : Site.{u}) (A : Type u) [CommRing A]
     (I : Ideal A) (P : CochainComplex (S.modules A) ℤ) (n : ℕ) :
     ConstantCompletion.ordinaryUnit S.topology A I false P ≫
@@ -184,9 +193,15 @@ private theorem ordinary_projection_unit (S : Site.{u}) (A : Type u) [CommRing A
       (NatTrans.mapHomologicalComplex (S.finiteModuleAdjunction A I n).unit (.up ℤ)).app P := by
   apply HomologicalComplex.hom_ext
   intro q
+  rw [HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f,
+    Adjunction.mapHomologicalComplex_counit_app_f,
+    NatTrans.mapHomologicalComplex_app_f]
   change (ConstantCompletion.ordinaryUnit S.topology A I false P).f q ≫
-    limit.π ((ConstantCompletion.reductionComplex S.topology A I false P).X q)
-      (Opposite.op n) = (S.finiteModuleAdjunction A I n).unit.app (P.X q)
+    ((constLimAdj : ConstantCompletion.constantTower S.topology (S.ring A) ⊣
+      (lim : S.towers A ⥤ S.modules A)).counit.app
+        ((ConstantCompletion.reductionComplex S.topology A I false P).X q)).app
+          (Opposite.op n) = (S.finiteModuleAdjunction A I n).unit.app (P.X q)
+  rw [limit_counit_app]
   exact ((ConstantCompletion.ordinaryUnit_existsUnique S.topology A I false P
     ).exists.choose_spec q n).trans (ordinary_finite_unit S A I (P.X q) n)
 
@@ -269,15 +284,15 @@ theorem completionUnitFiniteProjection (S : Site.{u}) (A : Type u) [CommRing A]
   suffices h : (S.unit A I).app N ≫ π S A ((S.reduction A I).obj N) n ≫
       (S.finiteEvaluationIso A I n).hom.app N = (S.finiteAdjunction A I n).unit.app N by
     convert h using 1
-    simp only [π, diagonal, Category.assoc]
+    simp only [π, diagonal, ConstantCompletion.completion, Functor.comp_obj, Category.assoc]
     rfl
   obtain ⟨P, q, hP, hflat, hq, _⟩ := CochainComplex.exists_isKFlatResolution
     (R := S.ring A) ((ConstantCompletion.Q (S.ring A)).objPreimage N)
   let : QuasiIso q := hq
   have : IsIso ((ConstantCompletion.Q (S.ring A)).map q) := inferInstance
-  let e : (ConstantCompletion.Q (S.ring A)).obj P ≅ N :=
-    asIso ((ConstantCompletion.Q (S.ring A)).map q) ≪≫
-      (ConstantCompletion.Q (S.ring A)).objObjPreimageIso N
+  obtain ⟨e⟩ : Nonempty ((ConstantCompletion.Q (S.ring A)).obj P ≅ N) :=
+    ⟨asIso ((ConstantCompletion.Q (S.ring A)).map q) ≪≫
+      (ConstantCompletion.Q (S.ring A)).objObjPreimageIso N⟩
   apply (cancel_epi e.hom).mp
   have hη := (S.unit A I).naturality e.hom
   dsimp only [Functor.id_map] at hη

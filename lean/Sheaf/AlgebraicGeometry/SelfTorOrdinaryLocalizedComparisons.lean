@@ -16,7 +16,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 
 import WeilConjectures.AlgebraicGeometry.SelfTorNonpositiveFlatSections
 import WeilConjectures.Algebra.Homology.BoundedFlatReplacement
-import Sheaf.Algebra.Homology.KFlatResolution
+import WeilConjectures.Algebra.Homology.KFlatResolution
 import Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
 import WeilConjectures.AlgebraicGeometry.QuotientResolutionTensorComparison
 import Mathlib.Algebra.Homology.BifunctorFlip

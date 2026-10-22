@@ -1,5 +1,6 @@
 module
-public import Sheaf.Algebra.Homology.KFlatResolution
+public import Sheaf.Algebra.Homology.KFlat
+import WeilConjectures.Algebra.Homology.KFlatResolution
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 public import Mathlib.Algebra.Homology.BifunctorFlip
 public import WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone

@@ -7,7 +7,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import Sheaf.Algebra.Homology.KFlatResolution
+import Sheaf.Algebra.Homology.KFlat
+import WeilConjectures.Algebra.Homology.KFlatResolution
 import Sheaf.AlgebraicGeometry.KFlatDerivedTensorComparison
 import Sheaf.AlgebraicGeometry.OpenRestrictionKFlatModel
 import WeilConjectures.AlgebraicGeometry.OpenRestrictionTotalTensor

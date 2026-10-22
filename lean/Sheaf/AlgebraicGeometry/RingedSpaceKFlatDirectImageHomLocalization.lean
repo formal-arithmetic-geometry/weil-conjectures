@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Sheaf.Algebra.Homology.KFlat
-import Sheaf.Algebra.Homology.KFlatResolution
+import WeilConjectures.Algebra.Homology.KFlatResolution
 import Sheaf.AlgebraicGeometry.RingedSpacePastedPullbackAdjunction
 import Mathlib.Algebra.Homology.DerivedCategory.Fractions
 

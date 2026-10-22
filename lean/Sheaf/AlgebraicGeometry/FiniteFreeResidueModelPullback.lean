@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.DerivedPullback
 import WeilConjectures.AlgebraicGeometry.DerivedPullbackOpenRestrictionUniverses
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
-import Sheaf.Algebra.Homology.KFlatResolution
+import WeilConjectures.Algebra.Homology.KFlatResolution
 import Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
 import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel

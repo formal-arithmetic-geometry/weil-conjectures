@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.DerivedFiberBetti
 public import Sheaf.AlgebraicGeometry.DerivedTensorCohomologyVanishes
 public import Mathlib.AlgebraicGeometry.AffineScheme
 import Sheaf.AlgebraicGeometry.ResidueBettiZeroOfTensorVanishing
-import Sheaf.Algebra.Homology.KFlatResolution
+import WeilConjectures.Algebra.Homology.KFlatResolution
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor

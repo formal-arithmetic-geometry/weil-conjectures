@@ -6,7 +6,7 @@ Authors: SHEAF group M1, SHEAF group K3
 module
 
 public import Sheaf.Algebra.Homology.KFlat
-import Sheaf.Algebra.Homology.KFlatResolution
+import WeilConjectures.Algebra.Homology.KFlatResolution
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 import Mathlib.Algebra.Homology.BifunctorFlip
 import WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone

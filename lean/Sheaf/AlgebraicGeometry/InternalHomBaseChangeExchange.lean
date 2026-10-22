@@ -5,7 +5,6 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.GlobalHomAdjunctionIso
-import Sheaf.Algebra.Homology.KFlatResolution
 import WeilConjectures.AlgebraicGeometry.CanonicalDerivedTensorHom
 import Sheaf.AlgebraicGeometry.CanonicalPullbackTensorComparison
 import Sheaf.AlgebraicGeometry.DerivedPullbackComposition

@@ -14,7 +14,7 @@ public import Mathlib.CategoryTheory.Functor.Derived.RightDerived
 public import Mathlib.CategoryTheory.Functor.Derived.LeftDerived
 import Sheaf.CategoryTheory.RingedToposKFlatPullback
 import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
-import Sheaf.Algebra.Homology.KFlatResolution
+import WeilConjectures.Algebra.Homology.KFlatResolution
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
 import WeilConjectures.CategoryTheory.DerivedCategory.ResolvingClassEssentialConstancy
 import all Sheaf.CategoryTheory.DerivedCategory.DerivedAdjunctionCompatibility

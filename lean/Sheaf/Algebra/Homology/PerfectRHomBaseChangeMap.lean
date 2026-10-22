@@ -9,7 +9,8 @@ public import Sheaf.Algebra.Homology.NormalizedRingHomExtension
 public import WeilConjectures.Algebra.Homology.DerivedInternalHom
 public import Mathlib.CategoryTheory.Functor.Derived.LeftDerived
 import Sheaf.Algebra.Homology.DerivedChangeOfRings
-import Sheaf.Algebra.Homology.KFlatResolution
+import Sheaf.Algebra.Homology.KFlat
+import WeilConjectures.Algebra.Homology.KFlatResolution
 public import Mathlib.Algebra.Module.Projective
 public import Mathlib.RingTheory.Finiteness.Defs
 import WeilConjectures.Algebra.Homology.BoundedExactTermHomQuasiIso

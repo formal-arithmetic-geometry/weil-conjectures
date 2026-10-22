@@ -9,7 +9,7 @@ public import Sheaf.SixFunctors.RingedDerivedComparisonData
 import Sheaf.SixFunctors.ResolvingDerivedAdjunction
 import Sheaf.SixFunctors.SuppliedTensorAdjunctionNormalization
 import all Sheaf.CategoryTheory.RingedToposKFlatPullback
-import Sheaf.Algebra.Homology.KFlatResolution
+import WeilConjectures.Algebra.Homology.KFlatResolution
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
 import Sheaf.Paper.RingedTopoiDerivedPullback
 import Sheaf.Paper.RingedTopoiTensorSections

@@ -9,7 +9,7 @@ public import Sheaf.Paper.RingedDerivedSliceData
 public import Sheaf.Algebra.Homology.KFlat
 import Sheaf.CategoryTheory.ContinuousRingedToposModuleDirectImage
 import Sheaf.CategoryTheory.RingedToposKFlatPullback
-import Sheaf.Algebra.Homology.KFlatResolution
+import WeilConjectures.Algebra.Homology.KFlatResolution
 import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
 import WeilConjectures.CategoryTheory.DerivedCategory.ResolvingClassEssentialConstancy

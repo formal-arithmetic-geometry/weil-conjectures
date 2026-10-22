@@ -6,7 +6,7 @@ Authors: SHEAF group K4
 module
 
 public import Sheaf.SixFunctors.RingedDerivedComparisonData
-import Sheaf.Algebra.Homology.KFlatResolution
+import WeilConjectures.Algebra.Homology.KFlatResolution
 import Mathlib.CategoryTheory.Sites.CartesianMonoidal
 import Sheaf.Paper.KFlatRingedToposPullback
 import Sheaf.Algebra.Homology.TensorColimitsIndependentCoefficients

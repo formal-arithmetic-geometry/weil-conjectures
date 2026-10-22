@@ -12,7 +12,7 @@ public import Mathlib.CategoryTheory.Localization.Construction
 public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 public import Mathlib.CategoryTheory.Functor.Currying
 public import Mathlib.CategoryTheory.Whiskering
-import Sheaf.Algebra.Homology.KFlatResolution
+import WeilConjectures.Algebra.Homology.KFlatResolution
 import Mathlib.Algebra.Homology.DerivedCategory.Fractions
 import Mathlib.CategoryTheory.Localization.CalculusOfFractions
 import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic

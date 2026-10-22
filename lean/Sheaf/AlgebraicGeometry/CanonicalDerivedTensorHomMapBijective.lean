@@ -6,7 +6,7 @@ Authors: SHEAF group M4
 module
 
 public import Sheaf.AlgebraicGeometry.CanonicalDerivedTensorHomModel
-import Sheaf.Algebra.Homology.KFlatResolution
+import WeilConjectures.Algebra.Homology.KFlatResolution
 import Sheaf.Algebra.Homology.KInjectiveHomComplex
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 import WeilConjectures.AlgebraicGeometry.NormalizedHomotopyTensorHom
@@ -166,7 +166,8 @@ theorem canonicalDerivedTensorHomMap_bijective (X : Scheme.{uCD})
   have : IsGrothendieckAbelian.{uCD} C := SheafOfModules.isGrothendieckAbelian _
   have : Limits.HasColimitsOfSize.{0, 0} C :=
     Limits.hasColimitsOfSizeShrink.{0, 0, uCD, uCD} C
-  have hrep (P L M : CochainComplex C ℤ) (hP : P.IsAcyclicTensorKFlat) (hL : L.IsAcyclicTensorKFlat) :
+  have hrep (P L M : CochainComplex C ℤ) (hP : P.IsAcyclicTensorKFlat)
+      (hL : L.IsAcyclicTensorKFlat) :
       Function.Bijective (t (Q.obj P) (Q.obj L) (Q.obj M)) := by
     let q := HomotopyCategory.quotient C (.up ℤ)
     let I := (schemeHomKInjectiveResolution X).obj M

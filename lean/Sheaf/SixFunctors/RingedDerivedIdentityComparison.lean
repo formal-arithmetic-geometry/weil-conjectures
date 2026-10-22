@@ -7,7 +7,7 @@ module
 
 public import Sheaf.SixFunctors.RingedDerivedComparisonData
 import Sheaf.CategoryTheory.GeometricModuleTransport
-import Sheaf.Algebra.Homology.KFlatResolution
+import WeilConjectures.Algebra.Homology.KFlatResolution
 import Mathlib.Algebra.Homology.DerivedCategory.Fractions
 
 /-! # Identity normalization

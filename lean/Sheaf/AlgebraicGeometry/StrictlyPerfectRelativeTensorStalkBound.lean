@@ -15,7 +15,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Projective
 import WeilConjectures.AlgebraicGeometry.OpenModuleStalkFreeProjective
 import WeilConjectures.Algebra.Homology.BoundedProjectiveRestrictionTorAmplitude
 import Sheaf.AlgebraicGeometry.RelativeTensorStalkLocalModelHomology
-import Sheaf.Algebra.Homology.KFlatResolution
+import WeilConjectures.Algebra.Homology.KFlatResolution
 import Sheaf.Algebra.Homology.KFlatStalkCriterion
 import Sheaf.Algebra.Homology.KFlatTensorQuasiIso
 import WeilConjectures.Algebra.Homology.ModuleStalkExact

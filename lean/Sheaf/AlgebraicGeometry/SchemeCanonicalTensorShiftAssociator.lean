@@ -7,7 +7,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.SchemeCanonicalTensorShift
 import Sheaf.AlgebraicGeometry.SchemeCanonicalTensorShiftAssociatorKFlatOne
-import Sheaf.Algebra.Homology.KFlatResolution
+import Sheaf.Algebra.Homology.KFlat
+import WeilConjectures.Algebra.Homology.KFlatResolution
 
 /-! # First-variable tensor translation and reassociation
 

@@ -11,7 +11,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
 public import Sheaf.CategoryTheory.AlgebraicInverseImage
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.CategoryTheory.Functor.Derived.LeftDerived
-import Sheaf.Algebra.Homology.KFlatResolution
+import WeilConjectures.Algebra.Homology.KFlatResolution
 import Sheaf.Algebra.Homology.ChangeOfRingsKFlatQuasiIso
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
 public import Sheaf.Algebra.Homology.KFlatCoefficientUniverse
@@ -400,7 +400,8 @@ theorem ringedTopoiDerivedPullback
           (p : P ⟶ A) (p' : P' ⟶ A) (p'' : P'' ⟶ A)
           (hp : P.IsAcyclicTensorKFlat) (hf : ∀ n : ℤ, (P.X n).IsFlat) (hq : QuasiIso p)
           (hp' : P'.IsAcyclicTensorKFlat) (hf' : ∀ n : ℤ, (P'.X n).IsFlat) (hq' : QuasiIso p')
-          (hp'' : P''.IsAcyclicTensorKFlat) (hf'' : ∀ n : ℤ, (P''.X n).IsFlat) (hq'' : QuasiIso p''),
+          (hp'' : P''.IsAcyclicTensorKFlat) (hf'' : ∀ n : ℤ, (P''.X n).IsFlat)
+          (hq'' : QuasiIso p''),
           ((alpha p hp hf hq).inv ≫ (alpha p' hp' hf' hq').hom) ≫
               ((alpha p' hp' hf' hq').inv ≫ (alpha p'' hp'' hf'' hq'').hom) =
             (alpha p hp hf hq).inv ≫ (alpha p'' hp'' hf'' hq'').hom) := by

@@ -9,7 +9,8 @@ public import Sheaf.Paper.RingedDerivedSliceData
 import Sheaf.Paper.RingedSliceDerivedAdjunction
 import Sheaf.Algebra.Homology.RingedSiteRestrictionKFlat
 import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
-import Sheaf.Algebra.Homology.KFlatResolution
+import Sheaf.Algebra.Homology.KFlat
+import WeilConjectures.Algebra.Homology.KFlatResolution
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.SliceRestrictionFlat
 
 /-!

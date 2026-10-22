@@ -13,7 +13,7 @@ public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 public import Mathlib.CategoryTheory.Functor.Currying
 public import Mathlib.CategoryTheory.Whiskering
 public import Sheaf.Algebra.Homology.KFlatCoefficientUniverse
-import Sheaf.Algebra.Homology.KFlatResolution
+import WeilConjectures.Algebra.Homology.KFlatResolution
 import Mathlib.Algebra.Homology.DerivedCategory.Fractions
 import Mathlib.CategoryTheory.Localization.CalculusOfFractions
 import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
@@ -248,7 +248,8 @@ theorem site_derived_tensor_descent
         ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R))] :
     ∃ P : ObjectProperty (HomotopyCategory (SheafOfModules.{u}
         ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) (ComplexShape.up ℤ)),
-      (∀ X, P X ↔ CochainComplex.IsAcyclicTensorKFlat X.as ∧ ∀ n : ℤ, SheafOfModules.IsFlat (X.as.X n)) ∧
+      (∀ X, P X ↔ CochainComplex.IsAcyclicTensorKFlat X.as ∧
+        ∀ n : ℤ, SheafOfModules.IsFlat (X.as.X n)) ∧
       (∃ F : ((HomotopyCategory.quasiIso (SheafOfModules.{u}
         ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) (ComplexShape.up
           ℤ)).inverseImage P.ι).Localization ⥤ (DerivedCategory (SheafOfModules.{u}

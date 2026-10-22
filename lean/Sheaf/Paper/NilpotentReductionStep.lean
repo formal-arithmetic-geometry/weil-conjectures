@@ -19,7 +19,7 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafificatio
 import Mathlib.RingTheory.Ideal.Quotient.Operations
 import Sheaf.Paper.ConstantCoefficientLisseTriangle
 import Sheaf.Paper.ConstantCoefficientLisseRestriction
-import Sheaf.Algebra.Homology.KFlatResolution
+import WeilConjectures.Algebra.Homology.KFlatResolution
 import Sheaf.Algebra.Homology.KFlat
 import WeilConjectures.Algebra.Homology.BoundedFlatReplacement
 import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
@@ -47,6 +47,7 @@ open scoped ZeroObject
 namespace SheafOfModules
 
 
+attribute [local irreducible] monoidalCategory in
 private theorem tensor_additivity
     {C : Type u} [Category.{u} C] {T : GrothendieckTopology C}
     (R : Sheaf T CommRingCat.{u}) :
@@ -232,19 +233,19 @@ private noncomputable def restrictionCompIso
     ext U x
     rfl
 
-private noncomputable def cancellationComplexIso
+private theorem cancellationComplexIso
     (φ : R ⟶ S) (N : SheafOfModules.{u} (𝓡(S)))
     (P : CochainComplex (SheafOfModules.{u} (𝓡(R))) ℤ) :
     letI := monoidalCategory R
     letI := monoidalCategory S
     let U := restrictScalars (𝓻(φ))
-    (U.mapHomologicalComplex (.up ℤ)).obj
+    Nonempty ((U.mapHomologicalComplex (.up ℤ)).obj
       (((tensorLeft N).mapHomologicalComplex (.up ℤ)).obj (changeOfRingsComplex.{u, u} φ P)) ≅
-    (((tensorLeft (U.obj N)).mapHomologicalComplex (.up ℤ)).obj P) := by
+    (((tensorLeft (U.obj N)).mapHomologicalComplex (.up ℤ)).obj P)) := by
   let := monoidalCategory R
   let := monoidalCategory S
   let e := (exists_changeOfRings_tensorCancellation.{u, u} φ).choose
-  refine HomologicalComplex.Hom.isoOfComponents (fun i ↦ e N (P.X i)) ?_
+  refine ⟨HomologicalComplex.Hom.isoOfComponents (fun i ↦ e N (P.X i)) ?_⟩
   intro i j hij
   change (e N (P.X i)).hom ≫
       ((restrictScalars (𝓻(φ))).obj N ◁ P.d i j) =
@@ -255,7 +256,7 @@ private noncomputable def cancellationComplexIso
   erw [(restrictScalars (𝓻(φ))).map_id] at hh
   simpa only [e, id_tensorHom] using hh
 
-private noncomputable def coefficientTensorIso
+private theorem coefficientTensorIso
     (φ : R ⟶ S) (ψ : S ⟶ A) (χ : R ⟶ A) (h : φ ≫ ψ = χ)
     [Presheaf.IsLocallySurjective T (𝓻(φ)).hom]
     (N : SheafOfModules.{u} (𝓡(A)))
@@ -263,10 +264,10 @@ private noncomputable def coefficientTensorIso
     letI := monoidalCategory S
     letI := monoidalCategory A
     let V := restrictScalars (𝓻(ψ))
-    (((tensorLeft (V.obj N)).mapHomologicalComplex (.up ℤ)).obj
+    Nonempty ((((tensorLeft (V.obj N)).mapHomologicalComplex (.up ℤ)).obj
       (changeOfRingsComplex.{u, u} φ P)) ≅
     ((V.mapHomologicalComplex (.up ℤ)).obj
-      (((tensorLeft N).mapHomologicalComplex (.up ℤ)).obj (changeOfRingsComplex.{u, u} χ P))) := by
+      (((tensorLeft N).mapHomologicalComplex (.up ℤ)).obj (changeOfRingsComplex.{u, u} χ P)))) := by
   let := monoidalCategory R
   let := monoidalCategory S
   let := monoidalCategory A
@@ -287,9 +288,10 @@ private noncomputable def coefficientTensorIso
       (W.mapHomologicalComplex (.up ℤ)).obj X :=
     ((Functor.mapHomologicalComplexCompIso (Iso.refl (V ⋙ U)) (.up ℤ)).app X) ≪≫
       (NatIso.mapHomologicalComplex c (.up ℤ)).app X
-  exact (U.mapHomologicalComplex (.up ℤ)).preimageIso
-    (cancellationComplexIso φ (V.obj N) P ≪≫ d ≪≫
-      (cancellationComplexIso χ N P).symm ≪≫ z.symm)
+  obtain ⟨cφ⟩ := cancellationComplexIso φ (V.obj N) P
+  obtain ⟨cχ⟩ := cancellationComplexIso χ N P
+  exact ⟨(U.mapHomologicalComplex (.up ℤ)).preimageIso
+    (cφ ≪≫ d ≪≫ cχ.symm ≪≫ z.symm)⟩
 
 end CoefficientTensor
 
@@ -401,22 +403,20 @@ private theorem bounded_flat_representative
     ⟨b, (hF X).2.1⟩, (hF X).1, ?_⟩
   exact CochainComplex.isKFlat_of_boundedAbove_flat _ ⟨b, (hF X).2.1⟩ (hF X).1
 
-private noncomputable def leftDerived_model
+private theorem leftDerived_model
     {V W : Type*} [Category V] [Category W] [Abelian V] [Abelian W]
     [HasDerivedCategory.{w} V] [HasDerivedCategory.{w} W]
     (E : V ⥤ W) [E.Additive] (LF : DerivedCategory V ⥤ DerivedCategory W)
     (ε : DerivedCategory.Qh ⋙ LF ⟶ E.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
     (P : CochainComplex V ℤ)
     [IsIso (ε.app ((HomotopyCategory.quotient V (.up ℤ)).obj P))] :
-    DerivedCategory.Q.obj ((E.mapHomologicalComplex (.up ℤ)).obj P) ≅
-      LF.obj (DerivedCategory.Q.obj P) :=
-  ((DerivedCategory.quotientCompQhIso W).app
+    Nonempty (DerivedCategory.Q.obj ((E.mapHomologicalComplex (.up ℤ)).obj P) ≅
+      LF.obj (DerivedCategory.Q.obj P)) := by
+  exact ⟨((DerivedCategory.quotientCompQhIso W).app
     ((E.mapHomologicalComplex (.up ℤ)).obj P)).symm ≪≫
   (DerivedCategory.Qh.mapIso ((E.mapHomotopyCategoryFactors (.up ℤ)).app P)).symm ≪≫
   (asIso (ε.app ((HomotopyCategory.quotient V (.up ℤ)).obj P))).symm ≪≫
-  LF.mapIso ((DerivedCategory.quotientCompQhIso V).app P)
-
-attribute [local irreducible] leftDerived_model
+  LF.mapIso ((DerivedCategory.quotientCompQhIso V).app P)⟩
 
 private theorem reduction_model
     {C : Type u} [Category.{u} C] (T : GrothendieckTopology C)
@@ -439,21 +439,17 @@ private theorem reduction_model
   let φ := (constantSheaf T CommRingCat.{u}).map (CommRingCat.ofHom f)
   let data := derivedChangeOfRings.{w, u} φ
   let E := data.choose
-  let ho := data.choose_spec.choose
-  have hm : ∀ {M N} (a : M ⟶ N), E.map a =
-      eqToHom (ho M) ≫ changeOfRingsHom φ M a ≫ eqToHom (ho N).symm :=
-    data.choose_spec.choose_spec.choose
-  let hadd := data.choose_spec.choose_spec.choose_spec.choose
+  obtain ⟨ho, hm, hadd, hdata⟩ := data.choose_spec
   let : E.Additive := hadd
   let LF : DerivedCategory (SheafOfModules.{u} (constantCoefficientRing T B)) ⥤
       DerivedCategory (SheafOfModules.{u} (constantCoefficientRing T D)) :=
-    data.choose_spec.choose_spec.choose_spec.choose_spec.2.2.choose
+    hdata.2.2.choose
   let ε : DerivedCategory.Qh ⋙ LF ⟶
       E.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh :=
-    data.choose_spec.choose_spec.choose_spec.choose_spec.2.2.choose_spec.choose
-  have hε := data.choose_spec.choose_spec.choose_spec.choose_spec.2.2.choose_spec.choose_spec.2.2
+    hdata.2.2.choose_spec.choose
+  have hε := hdata.2.2.choose_spec.choose_spec.2.2
   have := hε P hP
-  let e := leftDerived_model E LF ε P
+  obtain ⟨e⟩ := leftDerived_model E LF ε P
   exact ⟨E, ho, hm, hadd, ⟨e⟩⟩
 
 private theorem reduction_model_raw
@@ -672,9 +668,9 @@ private theorem quotient_tensor_iso
     coefficientMap_locallySurjective T f hf
   let q := constantRestrictionIso T g N
   let d := changeOfRingsComplex.{u, u} φ P
+  obtain ⟨c⟩ := coefficientTensorIso φ ψ χ hc ((constantCoefficientModule T A).obj N) P
   exact ⟨(NatIso.mapHomologicalComplex
-    ((MonoidalCategory.curriedTensor _).mapIso q) (.up ℤ)).app d ≪≫
-      coefficientTensorIso φ ψ χ hc ((constantCoefficientModule T A).obj N) P⟩
+    ((MonoidalCategory.curriedTensor _).mapIso q) (.up ℤ)).app d ≪≫ c⟩
 
 private theorem restriction_lisse_homology
     {C : Type u} [Category.{u} C] (T : GrothendieckTopology C)

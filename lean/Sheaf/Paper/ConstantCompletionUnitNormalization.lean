@@ -6,7 +6,7 @@ Authors: SHEAF group E4
 module
 
 public import Sheaf.Paper.ConstantCompletionEquivalence
-import Sheaf.Algebra.Homology.KFlatResolution
+import WeilConjectures.Algebra.Homology.KFlatResolution
 
 /-! # The quotient-completion unit on arbitrary complexes
 

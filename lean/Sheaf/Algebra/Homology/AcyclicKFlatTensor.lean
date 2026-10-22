@@ -9,7 +9,7 @@ public import Sheaf.Algebra.Homology.KFlat
 import Mathlib.Algebra.Homology.BifunctorFlip
 import WeilConjectures.FromJoel.Algebra.Homology.ShortComplex.HomologicalComplex
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
-import Sheaf.Algebra.Homology.KFlatResolution
+import WeilConjectures.Algebra.Homology.KFlatResolution
 import WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone
 import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 

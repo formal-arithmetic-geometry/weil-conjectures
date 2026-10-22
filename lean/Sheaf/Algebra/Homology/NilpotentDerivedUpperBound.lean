@@ -23,7 +23,8 @@ import WeilConjectures.Algebra.Homology.KFlatModuleBaseChange
 import WeilConjectures.Algebra.Homology.TensorRestrictExtendScalarsModule
 import Mathlib.Algebra.Module.Torsion.Basic
 import WeilConjectures.Mathlib.Algebra.Homology.Bifunctor
-import Sheaf.Algebra.Homology.KFlatResolution
+import Sheaf.Algebra.Homology.KFlat
+import WeilConjectures.Algebra.Homology.KFlatResolution
 import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 
 /-!
