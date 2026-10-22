@@ -234,6 +234,112 @@ theorem finite_support_weilSheafStalkTrace_homology (K : WeilBoundedConstructibl
 
 end Local
 
+/-! ### The unit Weil sheaf -/
+
+/-- Let `P g` be a family of endofunctors indexed by the endomorphisms `g` of `X`, contravariant
+up to the composition isomorphisms `comp`, and let `ε g : a ≅ P g a` be isomorphisms compatible
+with `comp`. Then the iterated structure isomorphisms of `(ε e)⁻¹` are the inverses of the
+`ε (e^{n+1})`. -/
+theorem _root_.CategoryTheory.Iso.powSuccStr_symm_hom_eq_inv {C D : Type*} [Category C]
+    [Category D] {X : C} (e : X ≅ X) (P : (X ⟶ X) → D ⥤ D)
+    (comp : ∀ f g : X ⟶ X, P (f ≫ g) ≅ P g ⋙ P f) {a : D} (ε : ∀ g : X ⟶ X, a ≅ (P g).obj a)
+    (h : ∀ f g : X ⟶ X, (comp f g).hom.app a ≫ (P f).map (ε g).inv ≫ (ε f).inv = (ε (f ≫ g)).inv)
+    (n : ℕ) : (e.powSuccStr P comp (ε e.hom).symm n).hom = (ε (e.powSucc n).hom).inv := by
+  induction n with
+  | zero => rfl
+  | succ n ih =>
+    simp only [Iso.powSuccStr, Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom, Iso.symm_hom, ih]
+    exact h _ _
+
+/-- An abstract form of the Frobenius of the stalk of a unit object: let `τ : σ^* ≅ 𝟭`,
+`c₁ : y^* ≅ x^* ⋙ σ^*`, `y^* = z^*` and `c₂ : z^* ≅ e^* ⋙ x^*` be compatible with unit
+comparisons `ε`. Then the composite `x^* a ≅ σ^* x^* a ≅ y^* a = z^* a ≅ x^* e^* a ≅ x^* a`,
+conjugated by `εₓ`, is `τ⁻¹ ≫ ε_σ⁻¹`. -/
+theorem _root_.CategoryTheory.Iso.hom_comp_whiskerLeft_comp_inv_eq {A B : Type*} [Category A]
+    [Category B] {xs : A ⥤ B} {es : A ⥤ A} {ss : B ⥤ B} {ys zs : A ⥤ B} (τ : ss ≅ 𝟭 B)
+    (c₁ : ys ≅ xs ⋙ ss) (hyz : ys = zs) (c₂ : zs ≅ es ⋙ xs) {a : A} {b : B}
+    (εx : b ≅ xs.obj a) (φ : es.obj a ≅ a) (εs : b ≅ ss.obj b) (εz : b ≅ zs.obj a)
+    (h₂ : c₂.hom.app a ≫ xs.map φ.hom ≫ εx.inv = εz.inv)
+    (h₁ : c₁.hom.app a ≫ ss.map εx.inv ≫ εs.inv =
+      eqToHom (congrArg (fun F ↦ F.obj a) hyz) ≫ εz.inv) :
+    εx.hom ≫ ((Functor.isoWhiskerLeft xs τ.symm ≪≫ c₁.symm ≪≫ eqToIso hyz ≪≫ c₂).app a ≪≫
+      xs.mapIso φ).hom ≫ εx.inv = τ.inv.app b ≫ εs.inv := by
+  simp only [Iso.trans_hom, Iso.app_hom, NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
+    Functor.whiskerLeft_app, Iso.symm_hom, eqToIso.hom, eqToHom_app, Functor.mapIso_hom,
+    Category.assoc, h₂]
+  rw [← h₁, Iso.inv_hom_id_app_assoc, ← Functor.id_map εx.hom, τ.inv.naturality_assoc,
+    ← Functor.map_comp_assoc, Iso.hom_inv_id, CategoryTheory.Functor.map_id, Category.id_comp]
+
+/-- The composition isomorphism of pullbacks of module objects, transported along an equality
+`f ≫ g = t`, is compatible with the unit comparisons. -/
+lemma upperStarComp_hom_app_unit_of_eq (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) {t : X ⟶ Z}
+    (ht : f ≫ g = t) (c : (t)^*⟦Λ⟧ ≅ (g)^*⟦Λ⟧ ⋙ (f)^*⟦Λ⟧)
+    (hc : c = eqToIso (congrArg (upperStar Λ) ht.symm) ≪≫ upperStarComp Λ f g) :
+    c.hom.app (𝟙_ _) ≫ (f)^*⟦Λ⟧.map (Functor.Monoidal.εIso (g)^*⟦Λ⟧).inv ≫
+      (Functor.Monoidal.εIso (f)^*⟦Λ⟧).inv = (Functor.Monoidal.εIso (t)^*⟦Λ⟧).inv := by
+  subst ht hc
+  rw [eqToIso_refl, Iso.refl_trans, upperStarComp_hom_app_unit]
+
+/-- The unit comparisons of the pullbacks of module objects along equal morphisms agree up to
+the cast. -/
+lemma eqToHom_comp_upperStar_εIso_inv {Y Z : Scheme.{u}} {f f' : Y ⟶ Z} (hf : f = f')
+    (h : (f)^*⟦Profinite.padicAlgClRingObj ℓ⟧.obj (𝟙_ _) =
+      (f')^*⟦Profinite.padicAlgClRingObj ℓ⟧.obj (𝟙_ _)) :
+    eqToHom h ≫ (Functor.Monoidal.εIso (f')^*⟦Profinite.padicAlgClRingObj ℓ⟧).inv =
+      (Functor.Monoidal.εIso (f)^*⟦Profinite.padicAlgClRingObj ℓ⟧).inv := by
+  subst hf
+  rw [eqToHom_refl, Category.id_comp]
+
+section UnitSheaf
+
+variable {X : Over (Spec (.of k))} (e : X ≅ X)
+
+/-- The unit Weil sheaf `ℚ̲̄_ℓ,X` for `e`: the unit module object with the structure isomorphism
+`e^* ℚ̲̄_ℓ,X ≅ ℚ̲̄_ℓ,X` of the monoidal functor `e^*`. -/
+noncomputable def WeilSheaf.unit : WeilSheaf ℓ e :=
+  IsoAlgebra.mk (𝟙_ _) (Functor.Monoidal.εIso (e.hom.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧).symm
+
+lemma WeilSheaf.unit_str :
+    (WeilSheaf.unit ℓ e).str =
+      (Functor.Monoidal.εIso (e.hom.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧).symm :=
+  IsoAlgebra.mk_str _ _
+
+/-- The composition isomorphism `(f.left ≫ g.left)^* ≅ g.left^* ⋙ f.left^*`, seen as an
+isomorphism out of `((f ≫ g).left)^*`, is its transport along `(f ≫ g).left = f.left ≫ g.left`.
+Stating it propositionally keeps the kernel from unfolding the pullbacks. -/
+lemma upperStarComp_left_eq (f g : X ⟶ X) :
+    (upperStarComp (Profinite.padicAlgClRingObj ℓ) f.left g.left :
+      ((f ≫ g).left)^*⟦Profinite.padicAlgClRingObj ℓ⟧ ≅ _) =
+    eqToIso (congrArg (upperStar (Profinite.padicAlgClRingObj ℓ)) (Over.comp_left _ _ _ f g)) ≪≫
+      upperStarComp (Profinite.padicAlgClRingObj ℓ) f.left g.left := by
+  rw [eqToIso_refl, Iso.refl_trans]
+
+/-- The iterated structure isomorphisms of the unit Weil sheaf are the inverses of the unit
+comparisons of the pullbacks `(e^{n+1})^*`. -/
+lemma powSuccStr_εIso_symm_hom (n : ℕ) :
+    (e.powSuccStr (fun g ↦ (g.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧)
+      (fun f g ↦ upperStarComp (Profinite.padicAlgClRingObj ℓ) f.left g.left)
+      (Functor.Monoidal.εIso (e.hom.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧).symm n).hom =
+      (Functor.Monoidal.εIso ((e.powSucc n).hom.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧).inv :=
+  e.powSuccStr_symm_hom_eq_inv _ _
+    (fun g ↦ Functor.Monoidal.εIso (g.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧)
+    (fun f g ↦ upperStarComp_hom_app_unit_of_eq _ f.left g.left (Over.comp_left _ _ _ f g).symm
+      _ (upperStarComp_left_eq ℓ f g)) n
+
+/-- The unit Weil sheaf for `e`, as a Weil sheaf for `e^{n+1}`, is the unit Weil sheaf for
+`e^{n+1}`. -/
+lemma WeilSheaf.powSucc_unit (n : ℕ) :
+    WeilSheaf.powSucc ℓ (WeilSheaf.unit ℓ e) n = WeilSheaf.unit ℓ (e.powSucc n) := by
+  simp only [WeilSheaf.powSucc, WeilSheaf.unit_str]
+  unfold WeilSheaf.unit
+  congr 1
+  ext1
+  rw [Iso.symm_hom]
+  exact powSuccStr_εIso_symm_hom ℓ e n
+
+end UnitSheaf
+
 /-! ### The canonical Weil unit -/
 
 section Unit
