@@ -27,145 +27,98 @@
  ],
  "proof": [
   {
-   "text": "Work on the small sites in the coefficient universe. By [lem-weil-proetale-weakly-etale-localization](1),(4), the sites over the opens $U\\subset Z$ and $U\\subset D$ are the corresponding slice sites. Replace internal modules by sectionwise modules using [def-weil-pbc-internal-abelian-sheaf-module-equivalence], which preserves the underlying sheaves and their section maps. The base-change functor $T\\mapsto D\\times_ZT$ defining $h_*$ is continuous by [def-sfb-finite-lower-star]; it preserves finite limits since both iterated fibre products represent the same tuples with the same equations. On slices over $U$, it becomes the identity: $D\\times_ZT\\cong T$ for $T\\to U$, naturally in $T$. Thus [lem-weil-pbc-localize-ringed-site-morphism] applies, with the given structural ring map, and identifies restricted direct image with the direct image of this identity localized morphism.",
+   "text": "Use identity_open_derived_restriction for invertibility of the canonical restriction, invertibility of identityOpenSectionArrow and its explicit section formula. The inverse-image condition follows from the assumed pullback square, and quasi-compactness of i is stable under base change.",
    "uses": [
-    "lem-weil-proetale-weakly-etale-localization",
-    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
-    "def-sfb-finite-lower-star",
-    "lem-weil-pbc-localize-ringed-site-morphism"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 04J0 (lemma-localize-morphism-ringed-sites) and 03CF (sites.tex, lemma-localize-morphism); application to the two open slices"
-   }
-  },
-  {
-   "text": "The coefficient identifications here are the canonical ones, not arbitrary ring isomorphisms. By [sk-prop-sfb-cartesian-coefficients](1), use $j^{-1}\\Lambda_Z\\cong\\Lambda_U$ and $i^{-1}\\Lambda_D\\cong\\Lambda_U$. Apply [lem-sfb-eta-comp] to $U\\xrightarrow{i}D\\xrightarrow{h}Z$: the coefficient map for $j=hi$ is the coefficient map for $h$ followed by that for $i$, with the specified pushforward composition. Therefore the localized structural map, expressed in these two copies of $\\Lambda_U$, is the identity. In particular, the direct-image comparison of [lem-weil-pbc-localize-ringed-site-morphism] is exactly $c_h$: on $T\\to U$ it is $N(D\\times_ZT)=N(T\\xrightarrow{i}D)$. The same equality holds for every restriction map and for multiplication by a section of the restricted ring. This proves that $c_h$ is a natural module isomorphism and fixes its action, including its direction.",
-   "uses": [
-    "sk-prop-sfb-cartesian-coefficients",
-    "lem-sfb-eta-comp",
-    "lem-weil-pbc-localize-ringed-site-morphism"
+    "lem-sfb-identity-open-derived-restriction",
+    "def-weil-pbc-cartesian-square"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 04J0, restricted structural ring map and sectionwise direct-image identity; coefficient composition for hi=j"
+    "place": "Tag 04J0, lemma-localize-morphism-ringed-sites; explicit adjunction/conjugate normalization for the identity localized map, and the pullback-composition comparison of sites-cohomology.tex, Tag 07A7, remark-base-change."
    }
   },
   {
-   "text": "Apply [lem-pur-ringed-site-pullback-localization-universes] to the same base-change functor and its slice at $U$. The finite-limit and continuity hypotheses were checked in step 1; slice continuity is also supplied by the induced morphism in [lem-weil-pbc-localize-ringed-site-morphism]. The global left adjoint is the specified $h^*$, by [def-sfb-module-upper-lower-adjunction]. The localized adjunction is that for the identity ringed site. Its pullback is $R\\otimes_R-$, $R=\\Lambda_U$, with unit $m\\mapsto1\\otimes m$ and counit $r\\otimes n\\mapsto rn$: these are the two Hom correspondences in [def-sfb-module-upper-lower-adjunction] when the underlying site functor and ring map are identities. They are inverse under $R\\otimes_RM\\cong M$. The localization lemma consequently gives an isomorphism $d_M:j^*M\\to i^*h^*M$ with $d_M=c_{h,h^*M}\\,j^*\\eta_{h,M}$. In localized tensor coordinates $d_M(m)=1\\otimes m$.",
+   "text": "For each open immersion, identify abelian pullback with restriction to the slice by the proved upperStarIsoLocalizationRestriction. The underlying module adjunction unit is the abelian unit followed by extension of scalars along condensedPullbackHom. This coefficient map is invertible, hence its extension unit is invertible. Naturality with the site adjunction unit identifies the displayed section coprojection with the evaluation of the composite of these two isomorphisms. Thus it is bijective. Retain CartesianCoefficients as the unit-route coefficient identification, as required by the unit route.",
    "uses": [
-    "lem-pur-ringed-site-pullback-localization-universes",
-    "lem-weil-pbc-localize-ringed-site-morphism",
-    "def-sfb-module-upper-lower-adjunction"
+    "def-sfb-module-upper-lower-adjunction",
+    "def-sfb-module-upper-star",
+    "sk-prop-sfb-cartesian-coefficients"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 04J0, localized module pullback with its restricted-unit Hom correspondence"
+    "place": "Tag 04J0, lemma-localize-morphism-ringed-sites; explicit adjunction/conjugate normalization for the identity localized map, and the pullback-composition comparison of sites-cohomology.tex, Tag 07A7, remark-base-change."
    }
   },
   {
-   "text": "Identify $d$ with the comparison required by the statement. Write $b:j^*\\to i^*h^*$ for the forward comparison of [def-sfb-module-upper-star-comp] for $hi=j$. Its conjugate is the specified $C:h_*i_*\\to j_*$ of [def-sfb-module-lower-star-comp]. The defining unit equation of [lem-weil-pbc-conjugate-iso-unit-equation], with $L_1=j^*$ and $L_2=i^*h^*$, is\n$$j_*(b_M)\\eta_{j,M}=C_{i^*h^*M}\\,h_*(\\eta_{i,h^*M})\\,\\eta_{h,M}.$$\nHere the second unit is the composite unit of [def-weil-pbc-composite-adjunction]. Evaluate this equation at an object $T\\to U$. For an open, restriction to its own slice makes its unit the identity under the tensor-unit identification, by the identity-site calculation in step 3 (applied also to $i$ and $j$). The map $C$ evaluates by the canonical fibre-product identification of [def-sfb-finite-lower-star-comp]; on this slice it is the identity. The displayed equation is therefore $b_M(T)=c_{h,h^*M}(T)\\,j^*\\eta_{h,M}(T)=d_M(T)$. This holds on every object and restriction map, so $b=d$. Since $a_h=b^{-1}$ by definition, $a_h$ is exactly $1\\otimes m\\mapsto m$, and $c_{h,h^*M}\\,j^*\\eta_{h,M}=a_{h,M}^{-1}$.",
+   "text": "Apply unit_mateEquiv to the defining open-square comparison and unit_conjugateEquiv to upperStarId. Naturality of lowerStarId reduces the equation to upperStarComp_id_left and cancellation of upperStarId. This proves the exact displayed unit equation for identityOpenRestriction. Naturality of the restriction gives the adjunct equation. Naturality of the coprojection and the section formula from step 1, followed by cancellation of the comparison and its inverse, give the tensor-unit section equation.",
    "uses": [
+    "def-sfb-open-square-restriction-mates",
+    "def-sfb-identity-open-restriction-arrows",
+    "def-sfb-identity-open-pullback-comparison",
     "def-sfb-module-upper-star-comp",
-    "def-sfb-module-lower-star-comp",
-    "def-sfb-finite-lower-star-comp",
-    "lem-weil-pbc-conjugate-iso-unit-equation",
-    "def-weil-pbc-composite-adjunction"
+    "lem-weil-pbc-conjugate-iso-unit-equation"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03D8, lemma-push-pull-composition-modules; explicit comparison of the localized unit with the conjugate-normalized composition"
+    "place": "Tag 04J0, lemma-localize-morphism-ringed-sites; explicit adjunction/conjugate normalization for the identity localized map, and the pullback-composition comparison of sites-cohomology.tex, Tag 07A7, remark-base-change."
    }
   },
   {
-   "text": "For $t:h^*M\\to N$, use the definition $t^\\sharp=h_*t\\,\\eta_{h,M}$. Naturality of the sectionwise comparison gives $c_{h,N}\\,j^*h_*t=i^*t\\,c_{h,h^*M}$. Compose this equation with $j^*\\eta_{h,M}$ and insert step 4. This is exactly $c_{h,N}\\,j^*(t^\\sharp)=i^*t\\,a_{h,M}^{-1}$. It proves the adjunct formula for the specified adjunction, not just for an isomorphic choice of adjunction.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 04J0; naturality of the comparison followed by the unit equality proved in step 4"
-   }
-  },
-  {
-   "text": "By the defining fibre-product identities [def-weil-pbc-cartesian-square], $(D\\times_ZZ')\\times_{Z'}U'\\cong D\\times_ZU'\\cong U'$, with the second isomorphism induced by the fixed identity locus. Thus $h'$ has the same identity-open configuration, with $h'i'=j'$. All primed schemes are standing schemes, all maps are the specified base changes, and the site sizes remain in the coefficient universe. Repeat steps 1--5 with $(h',i',j')$ to obtain $c_{h'},a_{h'}$ and both primed adjunct equations. This argument uses no properness or density; in particular it makes no assumption that density survives base change.",
+   "text": "The universal property of the chosen pullback D′ identifies any competing cone over h′ and j′ uniquely with its U′ projection: compare projections to D and Z′, and use the original identity-open pullback. This proves IsPullback i′ (identity) h′ j′. Quasi-compactness of j′ follows from the chosen U square. Repeat the normalization argument for this primed configuration.",
    "uses": [
     "def-weil-pbc-cartesian-square"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 04J0; base change of the identity localized morphism"
+    "place": "Tag 04J0, lemma-localize-morphism-ringed-sites; explicit adjunction/conjugate normalization for the identity localized map, and the pullback-composition comparison of sites-cohomology.tex, Tag 07A7, remark-base-change."
    }
   },
   {
-   "text": "For clarity write $m_{f,g}:f^*g^*\\to(gf)^*$ for the inverse of the specified pullback composition. These comparisons satisfy\n$$m_{f,qg}\\,f^*m_{g,q}=m_{gf,q}\\,(m_{f,g}q^*).$$\nIndeed [def-sfb-module-upper-star-comp] makes each $m$ the conjugate of inverse direct-image composition. On a site object $T$, both ways to compare three direct images are induced, by [def-sfb-finite-lower-star-comp], by the same map from an iterated fibre product to the unparenthesized fibre product: they preserve $T$ and each of the three other projections. The universal property makes these maps equal, and [def-sfb-module-lower-star-comp] lifts them to the same module morphism. The specified coefficient actions agree since both act through the same composite ring map. Apply [lem-weil-pbc-mate-pasting](2),(3) and the injective conjugation bijection [def-weil-pbc-adjunction-conjugate]; the two conjugates of the displayed equation are precisely those equal direct-image maps. Thus the displayed associativity identity holds with the composite-adjunction normalization, including the functor associators.",
+   "text": "Use the already proved upperStarComp_hom_app_comp_upperStarComp_hom_app, the component form of upperStarComp_assoc. Precompose with the forward composite and cancel inverse pairs to derive inverse-compositor associativity, transported to named composites, then use natural-transformation extensionality to obtain the corresponding natural-isomorphism equation. Apply it to triples (i′,h′,v), (i′,w,h), and (vU,i,h). Express each open-square comparison as the inverse compositor to the common composite followed by the inverse of the other inverse compositor. In the functor category, precompose the required square equality with the primed compositor and postcompose with the common two-step compositor. The middle two associativity equations cancel inverse pairs; the first associativity equation identifies the remaining sides. Cancel the common isomorphisms and the displayed associators to obtain equality of the two canonical path isomorphisms.",
    "uses": [
     "def-sfb-module-upper-star-comp",
-    "def-sfb-module-lower-star-comp",
-    "def-sfb-finite-lower-star-comp",
-    "lem-weil-pbc-mate-pasting",
-    "def-weil-pbc-adjunction-conjugate"
+    "def-sfb-open-square-restriction-mates",
+    "def-sfb-identity-open-pullback-comparison"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03D8; associativity obtained by conjugating the sectionwise direct-image associativity"
+    "place": "Tag 04J0, lemma-localize-morphism-ringed-sites; explicit adjunction/conjugate normalization for the identity localized map, and the pullback-composition comparison of sites-cohomology.tex, Tag 07A7, remark-base-change."
    }
   },
   {
-   "text": "The common composite is $q=vh'i'=hwi'=jv_U:U'\\to Z$. Use the notation of step 7, and suppress only canonical equality transports. By definition\n$$\\theta=m_{w,h}^{-1}m_{h',v},\\quad s=m_{v_U,j}^{-1}m_{j',v},\\quad t_0=m_{v_U,i}^{-1}m_{i',w},\\quad a_h=m_{i,h},\\quad a_{h'}=m_{i',h'}.$$\nApply step 7 to the triple $(i',h',v)$: since $h'i'=j'$, it gives\n$$i'^*m_{h',v}\\,(m_{i',h'}v^*)^{-1}=m_{i',vh'}^{-1}m_{j',v}.$$\nFor $(i',w,h)$ it gives\n$$m_{i',w}h^*\\,i'^*m_{w,h}^{-1}=m_{wi',h}^{-1}m_{i',hw}.$$\nInsert these into $t_0\\,i'^*\\theta\\,a_{h'}^{-1}$ and cancel $m_{i',hw}m_{i',vh'}^{-1}$, since $hw=vh'$. The result is\n$$m_{v_U,i}^{-1}h^*\\,m_{iv_U,h}^{-1}m_{j',v}.$$\nFinally step 7 for $(v_U,i,h)$ and $hi=j$ rewrites this as\n$$v_U^*(m_{i,h}^{-1})\\,m_{v_U,j}^{-1}m_{j',v}=v_U^*(a_h^{-1})\\,s.$$\nThis is the claimed square equality, with all components evaluated at $A$. Each operation used natural transformations, so it is natural in $A$.",
+   "text": "Evaluate the natural-isomorphism equality at an arbitrary module to obtain the component equation. Rewriting by the same equality proves both the termwise complex equality and the equality after passage to ordinary unbounded derived categories.",
    "uses": [
-    "def-sfb-module-upper-star-comp"
+    "sk-def-sfb-module-derived-pushpull"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03D8 and sites-cohomology.tex Tag 07A7 (remark-base-change); explicit reassociation around the two paths U′→Z"
-   }
-  },
-  {
-   "text": "All transformations in the square equation involve composites of pullbacks. They are additive exact functors by [det-prop-sfb-module-pullback-exact-main], so their termwise functors preserve quasi-isomorphisms and induce the ordinary unbounded derived pullbacks of [sk-def-sfb-module-derived-pushpull], by the exact-functor clause of [sk-def-sfb-derived-categories]. Naturality makes their degreewise components commute with every differential. The equality in step 8 is therefore an equality of chain maps, and applying localization at quasi-isomorphisms preserves it. This proves precisely the stated derived square equality with the same termwise comparisons. No descent of the generally nonexact underived $h_*$ is used.",
-   "uses": [
-    "det-prop-sfb-module-pullback-exact-main",
-    "sk-def-sfb-module-derived-pushpull",
-    "sk-def-sfb-derived-categories"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "sites-cohomology.tex Tag 07A7, remark-base-change; exact termwise pullback comparisons on the ordinary unbounded derived categories"
+    "place": "Tag 04J0, lemma-localize-morphism-ringed-sites; explicit adjunction/conjugate normalization for the identity localized map, and the pullback-composition comparison of sites-cohomology.tex, Tag 07A7, remark-base-change."
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-proetale-weakly-etale-localization",
-  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
-  "def-sfb-finite-lower-star",
-  "lem-weil-pbc-localize-ringed-site-morphism",
-  "sk-prop-sfb-cartesian-coefficients",
-  "lem-sfb-eta-comp",
-  "lem-pur-ringed-site-pullback-localization-universes",
-  "def-sfb-module-upper-lower-adjunction",
-  "def-sfb-module-upper-star-comp",
-  "def-sfb-module-lower-star-comp",
-  "def-sfb-finite-lower-star-comp",
-  "lem-weil-pbc-conjugate-iso-unit-equation",
-  "def-weil-pbc-composite-adjunction",
+  "lem-sfb-identity-open-derived-restriction",
   "def-weil-pbc-cartesian-square",
-  "lem-weil-pbc-mate-pasting",
-  "def-weil-pbc-adjunction-conjugate",
-  "det-prop-sfb-module-pullback-exact-main",
-  "sk-def-sfb-module-derived-pushpull",
-  "sk-def-sfb-derived-categories"
+  "def-sfb-module-upper-lower-adjunction",
+  "def-sfb-module-upper-star",
+  "sk-prop-sfb-cartesian-coefficients",
+  "def-sfb-open-square-restriction-mates",
+  "def-sfb-identity-open-restriction-arrows",
+  "def-sfb-identity-open-pullback-comparison",
+  "def-sfb-module-upper-star-comp",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "sk-def-sfb-module-derived-pushpull"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "H2",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tags 04J0 (lemma-localize-morphism-ringed-sites), 03D8 (lemma-push-pull-composition-modules); explicit adjunction-unit and reassociation calculations, with sites-cohomology.tex Tag 07A7 (remark-base-change) for the square convention."
+  "place": "Tags 04J0 and 03D8; direct use of the existing identity-open section formula and proved source compositor coherence; sites-cohomology.tex Tag 07A7."
  },
  "mathlib_searches": [
   {
@@ -355,15 +308,8 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-proetale-weakly-etale-localization",
-  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
-  "lem-weil-pbc-localize-ringed-site-morphism",
-  "lem-pur-ringed-site-pullback-localization-universes",
-  "lem-sfb-eta-comp",
   "sk-prop-sfb-cartesian-coefficients",
-  "det-prop-sfb-module-pullback-exact-main",
-  "sk-def-sfb-module-derived-pushpull",
-  "sk-def-sfb-derived-categories"
+  "sk-def-sfb-module-derived-pushpull"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -388,7 +334,7 @@
   "by": "NR",
   "date": "2026-10-21",
   "existing": false,
-  "note": "Reuses identityOpenRestriction and identityOpenSectionArrow through def-sfb-identity-open-restriction-arrows, and identityOpenPullbackComparison through def-sfb-identity-open-pullback-comparison. Both new definition nodes have existing:true records on the unchanged published modules. def-sfb-open-square-restriction-mates supplies the open-square comparisons and section coprojection. No theorem assertion or theorem choice supplies these maps. The two path definitions insert only canonical functor associators; complex and derived clauses apply those same paths. The Lean module and mathematical statement are unchanged from the returned delivery."
+  "note": "The main theorem statement, normalization predicate and canonical path definitions are unchanged. The proof uses the existing identity-open restriction theorem and proved source-library compositor coherence. All added proof helpers are private and proved."
  },
  "reviewed_lean": {
   "date": "2026-10-21",
@@ -397,5 +343,15 @@
   "group": "NR",
   "result": "pass",
   "note": "Re-delivery after H2 RETURN at 89f8904b. Item Lean module byte-identical (math previously verified in full: identity-open IsPullback hyp, primed config, unit/adjunct/tensor-unit clauses, square paths t0∘i'^*θ∘a_{h'}^{-1} = v_U^*(a_h^{-1})∘s with only associators, termwise complex/derived clauses, universes u/u+1, edge cases). Only stmt_deps changed: the two theorem nodes are replaced by new def nodes def-sfb-identity-open-pullback-comparison (existing:true identityOpenPullbackComparison = (upperStarComp i h).symm ≪≫ upperStarCongr, direction i^*h^*≅j^* correct) and def-sfb-identity-open-restriction-arrows (existing:true identityOpenRestriction = directImageOpenRestriction of CommSq j' 𝟙 h j + lowerStarId + unitor; identityOpenSectionArrow = pullback.lift (𝟙 V) (v≫j') under open immersions). Signatures verbatim vs side-live source, plain defs (not .choose), no competing owner, deps acyclic, statement/proof unchanged. Advisory: lowerStarId/upperStarCongr unowned framework decls; H9 import recheck at stage 3; second reading is a self-audit. No compile (no files changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261022T002413-L-1926204",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
