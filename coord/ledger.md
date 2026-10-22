@@ -24196,3 +24196,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:31 L: merged deliver/NN/lem-sfb-finite-quotient-normal-proper (stage 2; reviewer PASS; parallel immutable checks)
 - 01:31 L: returned deliver/NE/lem-sfb-equivariant-smooth-galois-model (reviewer RETURN: C1/F (2026-10-19 route drop) and G1/G3/G4. This is the 5th push of this item; NI 17be7ee3, NC 7dad7c28, NE 2c81bc4d and )
 - 01:31 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
+- 01:31 L: returned deliver/N9/sk-thm-groth-ss (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-thm-groth-ss: sk-thm-groth-ss: completed in this pr)
