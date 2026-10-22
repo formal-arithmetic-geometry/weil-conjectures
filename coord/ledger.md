@@ -24199,3 +24199,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:31 L: returned deliver/N9/sk-thm-groth-ss (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-thm-groth-ss: sk-thm-groth-ss: completed in this pr)
 - 01:32 L: merged deliver/NB/lem-sfb-qcqs-proper-serre-heart-bound (reviewer FIX; first push; new nodes: 2)
 - 01:32 L: merged deliver/NS/lem-sfb-normal-integral-finite-sheaf-norm (reviewer PASS; first push; new nodes: 2)
+- 01:33 L: returned deliver/C2/Sheaf.Paper.RingedProjectionRestriction (reviewer RETURN: (the landing tools, head b43e339e3) the delivery did not land: (d) user Sheaf.Paper.AffineDiagonalTensorCoordinates (men)
