@@ -1,6 +1,6 @@
 # Work queue
 
-45 items; claim with `tools/claim.py next <group> [--stage N]`.
+44 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Rework: quarantined by the upstream sync (4 clusters, 271 modules)
 
@@ -28,12 +28,11 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-norm-completion-positive-cohomology-mono` | 4014 | none |
 | `def-per-support-condition` | - | none |
 
-## Stage 2: nodes to state (4)
+## Stage 2: nodes to state (3)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
 | `def-sfb-finite-derived-adjunction` | 1 | state | 0 |
-| `lem-pur-diagonal-dnc-chart-normalization` | 1 | state | 1 |
 | `lem-pe-internal-module-sectionwise-short-exact` | 1 | state | 0 |
 | `lem-sfb-zero-dimensional-base-affine-global` | 1 | state | 0 |
 
