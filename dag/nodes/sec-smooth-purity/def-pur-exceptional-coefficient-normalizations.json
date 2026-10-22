@@ -1,0 +1,142 @@
+{
+ "id": "def-pur-exceptional-coefficient-normalizations",
+ "kind": "definition",
+ "title": "Normalized scalar tensor and unit constructions",
+ "status": "split",
+ "statement": "In the ordinary small-etale derived module categories [def-weil-pbc-derived-categories], scalar extension [lem-pur-derived-change-of-rings] has the tensor comparison and unit comparison uniquely normalized by ordinary balancing on cochain representatives. TensorNormalizationAux and UnitNormalizationAux state the two representative squares; SiteTensorNormalizationAux shares the site tensor parameters. tensorIso_existsUnique and unitIso_existsUnique give the unique comparisons; siteTensorIso_existsUnique identifies the very same tensor comparison at the site tensor functor. tensorIso and unitIso choose those uniquely determined isomorphisms. These are the unchanged lower constructions of the exceptional tensor compatibility interface.",
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "lem-pur-derived-change-of-rings",
+  "def-kun-derived-tensor",
+  "def-pur-etale-scalar-pullback-iso"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-compatibilities.proof.md",
+  "place": "Compatibility (3), Normalized scalar tensor and unit constructions"
+ },
+ "proof": [
+  {
+   "text": "For tensorIso_existsUnique use the already proved etaleHomTensorComparison_existsUnique, whose binary comparison is natural and normalized on flat-term K-flat pairs. Package its inverses as a natural isomorphism on the product category. The scalar cochain representatives are a natural transformation: apply the scalar derived adjunction to the ordinary cochain unit followed by the exact-restriction localization comparison. For arbitrary cochain P,Q choose flat-term K-flat resolutions Pprime -> P and Qprime -> Q. The two sides of TensorNormalizationAux are components of natural transformations of cochain pairs. The source maps of these resolutions are invertible after localization and derived tensor. Cancel their composite and use the known normalization at Pprime,Qprime. Uniqueness follows by restricting any all-complex-normalized comparison to the flat-term K-flat pairs and invoking the existing binary uniqueness theorem.",
+   "uses": [
+    "lem-coef-etale-tensor-model-comparison",
+    "lem-derived-right-exact-tensor-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For siteTensorIso_existsUnique the new generic SiteTensorNormalizationAux is exactly TensorNormalizationAux on small-etale sheaves, with derivedTensor constants in its argument type. TensorNormalization specializes this generic predicate. Thus the normalized chosen isomorphism has literally the site tensor type: use reflexive heterogeneous equality for existence and eq_of_heq for uniqueness. This representation avoids repeated comparison of nested sheafification proofs; the all-complex normalization equation and the canonical comparison are unchanged.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For unitIso_existsUnique the unit complex is K-flat, so the scalar cochain representative is invertible by the exact-right-adjoint K-flat representative theorem. Ordinary scalar extension preserves K-flat quasi-isomorphisms because, after faithful exact restriction, it is tensoring with the constant coefficient sheaf; tensoring an acyclic K-flat complex is acyclic. The localization unit comparison is invertible, as is ordinary scalar extension of the unit. Compose these three isomorphisms and the inverse target localization unit comparison. Its hom satisfies UnitNormalizationAux by cancellation, and cancellation also proves uniqueness.",
+   "uses": [
+    "lem-sfb-exact-right-adjoint-kflat-representative"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-etale-tensor-model-comparison",
+  "lem-derived-right-exact-tensor-comparison",
+  "lem-sfb-exact-right-adjoint-kflat-representative"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "T1",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-compatibilities.proof.md",
+  "place": "Compatibility (3), tensor and mixed Cartesian squares."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension commutes with exceptional inverse image tensor map and exceptional base change by taking mates of compact support projection and exchange",
+   "results": "{\"t\": \"2026-10-21T11:20:28Z\", \"tool\": \"leanfinder\", \"query\": \"Scalar extension commutes with exceptional inverse image tensor map and exceptional base change by taking mates of compact support projection and exchange\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.ihomPoints_symm_comp\", \"ModuleCat.homEquiv_extendScalarsComp\", \"LightCondensed.internallyProjective_iff_tensor_condition'\", \"LightCondensed.internallyProjective_iff_tensor_condition\", \"AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv\", \"SheafOfModules.pullbackComp\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\"], \"digest\": \"bea3902845c63681\"}",
+   "date": "2026-10-21",
+   "verdict": "Generic mate identities found; no site comparison theorem matches the specified normalizations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "{\"t\": \"2026-10-21T11:21:46Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.mateEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.mateEquiv\", \"CategoryTheory.mateEquiv_counit\", \"CategoryTheory.mateEquiv_counit_symm\", \"CategoryTheory.unit_mateEquiv\", \"CategoryTheory.unit_mateEquiv_symm\", \"CategoryTheory.conjugateEquiv_mateEquiv_vcomp\", \"CategoryTheory.mateEquiv_conjugateEquiv_vcomp\", \"CategoryTheory.mateEquiv_vcomp\"], \"digest\": \"b8ac30fd6644aa85\"}",
+   "date": "2026-10-21",
+   "verdict": "Generic mate identities found; no site comparison theorem matches the specified normalizations."
+  },
+  {
+   "tool": "grep",
+   "query": "coefficient.*(exchange|projection)|scalar.*(exchange|projection)",
+   "results": "{\"t\": \"2026-10-21T11:21:46Z\", \"tool\": \"grep\", \"query\": \"coefficient.*(exchange|projection)|scalar.*(exchange|projection)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "Generic mate identities found; no site comparison theorem matches the specified normalizations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normalized tensor and unit isomorphisms for derived extension of scalars on sheaves, characterized by cochain representatives",
+   "results": "{\"t\": \"2026-10-22T01:13:37Z\", \"tool\": \"leansearch\", \"query\": \"Normalized tensor and unit isomorphisms for derived extension of scalars on sheaves, characterized by cochain representatives\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.FreeMonoidalCategory.normalizeIsoApp'\", \"CategoryTheory.Presheaf.coherentExtensiveEquivalence_unitIso\", \"CategoryTheory.FreeMonoidalCategory.normalizeIsoApp\", \"CategoryTheory.Equivalence.sheafCongrPrecoherent_unitIso_hom_app_val_app\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale\", \"CategoryTheory.FreeMonoidalCategory.normalizeIso\", \"Mathlib.Tactic.Monoidal.normalizeIsoComp\", \"SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal\"], \"digest\": \"72a1c0e77e19ee5d\"}",
+   "date": "2026-10-22",
+   "verdict": "The search returns general monoidal or algebraic base-change constructions, not this normalized coefficient square. The delivered proof supplies the required specialization."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ExceptionalCoefficientComparison",
+  "date": "2026-10-21",
+  "group": "T1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "b3-exceptional-tensor-base-change",
+   "place": "Normalized scalar tensor and unit constructions",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-reduction",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ExceptionalCoefficientMaps",
+  "file": "lean/Sheaf/Paper/ExceptionalCoefficientMaps.lean",
+  "declaration": "AlgebraicGeometry.Etale.ExceptionalCoefficients.tensorIso",
+  "declarations": [
+   "AlgebraicGeometry.Etale.ExceptionalCoefficients.ordinaryIsLeftAdjoint",
+   "AlgebraicGeometry.Etale.ExceptionalCoefficients.ordinaryOplax",
+   "AlgebraicGeometry.Etale.ExceptionalCoefficients.TensorNormalizationAux",
+   "AlgebraicGeometry.Etale.ExceptionalCoefficients.SiteTensorNormalizationAux",
+   "AlgebraicGeometry.Etale.ExceptionalCoefficients.TensorNormalization",
+   "AlgebraicGeometry.Etale.ExceptionalCoefficients.tensorIso_existsUnique",
+   "AlgebraicGeometry.Etale.ExceptionalCoefficients.siteTensorIso_existsUnique",
+   "AlgebraicGeometry.Etale.ExceptionalCoefficients.tensorIso",
+   "AlgebraicGeometry.Etale.ExceptionalCoefficients.UnitNormalizationAux",
+   "AlgebraicGeometry.Etale.ExceptionalCoefficients.UnitNormalization",
+   "AlgebraicGeometry.Etale.ExceptionalCoefficients.unitIso_existsUnique",
+   "AlgebraicGeometry.Etale.ExceptionalCoefficients.unitIso"
+  ],
+  "statement": "def tensorIso (T : Scheme.{u}) :\n    Functor.uncurry.obj (derivedTensor (ModuleCat.{u + 1} A) T) ⋙ scalarExtension φ T ≅\n      (scalarExtension φ T).prod (scalarExtension φ T) ⋙\n        Functor.uncurry.obj (derivedTensor (ModuleCat.{u + 1} B) T)",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-6993d",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261022T022048-L-433470",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-6993d",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261022T022048-L-433470",
+  "kind": "interface",
+  "note": "independent cc review: Old vs new public declaration blocks (moved 14 byte-identical, headers unchanged); tensorDomainMap old δ≫κ≫v vs compactScalarProjectionTarget(=δ≫κ)≫v; node statement_change old texts vs live; sandbox build of 9 delivered modules + 5 direct importers (all compile, item 37.1 s alone); #print axioms (sorryAx only inherited from mateMap / EtaleCompactScalarCoherence)"
+ }
+}

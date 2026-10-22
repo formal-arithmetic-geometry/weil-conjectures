@@ -74,7 +74,7 @@
  "chapter": "sec-deligne-laumon-a1",
  "unit": "sk-p-dl-a1-perverse",
  "lean": {
-  "module": "Sheaf.Paper.ExceptionalCoefficientComparison",
+  "module": "Sheaf.Paper.ExceptionalCoefficientMaps",
   "declaration": "AlgebraicGeometry.Etale.ExceptionalCoefficients.compactSupportMap",
   "declarations": [
    "AlgebraicGeometry.Etale.ExceptionalCoefficients.openIso",
@@ -87,7 +87,8 @@
   "by": "Q06",
   "date": "2026-10-18",
   "existing": true,
-  "note": "Ownership repair requested in the return of immutable head 6aa5671b409f: these four are existing plain definitions, not choices extracted from exceptional_coefficient_comparison. The module and its defining terms are unchanged. openIso is the canonical open comparison; compactSupportMap its proper/open composite; comparisonInverse is inverse-or-zero; mateMap is the exceptional counit transpose. No tensorIso or unitIso is used by this node."
+  "note": "T1: unchanged declarations moved to a lower module to make the compact-support scalar coherence available to their exceptional mates. ExceptionalCoefficientComparison publicly reexports this module.",
+  "file": "lean/Sheaf/Paper/ExceptionalCoefficientMaps.lean"
  },
  "reviewed": {
   "date": "2026-10-18",
@@ -106,21 +107,13 @@
   "note": "Re-delivery after the 6aa5671b409f H2 RETURN. Item Lean file byte-identical (sha256 c937bce5); the only item change swaps the theorem stmt_dep lem-pur-exceptional-coefficient-comparison for the new def node def-per-exceptional-coefficient-maps. That node is existing:true on the unchanged ExceptionalCoefficientComparison and lists openIso/compactSupportMap/comparisonInverse/mateMap (plain defs, no .choose of the theorem). Its statement matches the compactSupportMap signature verbatim and its TeX matches the defining terms. check_new_node passes, the id is free, no other node owns these declarations, and there is no cycle. Item clauses re-confirmed: hypotheses, D^b_c preservation, restricted adjunction, c pinned to compactSupportMap, alpha pinned to mateMap, counit equation, edge cases. nt_compile timed out twice in side override OrientedNearbyCycles at load 115-133; judged from the earlier clean 6.6 s compile of the identical file. Advisory: scalarExtension has no owner node; the new node cites lem-sbc for the plain scalarRestrictionPullbackIso used only in openIso's body."
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "A8",
+  "reviewer": "C-6993d",
+  "group": "T1",
   "result": "pass",
-  "landing": "20261021T060932-L-1671794",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.Etale.exceptional_domain_and_counit",
-   "AlgebraicGeometry.Etale.exceptional_naturality_and_cocycle",
-   "AlgebraicGeometry.Etale.exceptional_tensor_and_base_change"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.Etale.exceptional_tensor_and_base_change"
-  ]
+  "landing": "20261022T022048-L-433470",
+  "kind": "interface",
+  "note": "independent cc review: Old vs new public declaration blocks (moved 14 byte-identical, headers unchanged); tensorDomainMap old δ≫κ≫v vs compactScalarProjectionTarget(=δ≫κ)≫v; node statement_change old texts vs live; sandbox build of 9 delivered modules + 5 direct importers (all compile, item 37.1 s alone); #print axioms (sorryAx only inherited from mateMap / EtaleCompactScalarCoherence)"
  }
 }

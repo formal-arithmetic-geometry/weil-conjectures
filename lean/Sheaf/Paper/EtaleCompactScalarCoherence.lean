@@ -8,7 +8,7 @@ module
 public import Sheaf.SecSmoothPurity.ProperFiniteCoefficientExtension
 public import Sheaf.AlgebraicGeometry.UnboundedEtaleCompactSupportComparisons
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjection
-public import Sheaf.Paper.ExceptionalCoefficientComparison
+public import Sheaf.Paper.ExceptionalCoefficientMaps
 public import Sheaf.Paper.ProperOpenCoefficientRefinement
 public import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
 public import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
