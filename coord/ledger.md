@@ -24230,3 +24230,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:36 L: returned deliver/NK/def-per-support-condition (reviewer RETURN: I read the whole delivery. It has 0 new nodes, it is a definition, and its displayed predicates are faithful to blueprin)
 - 01:38 L: returned deliver/N9/sk-thm-groth-ss (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-thm-groth-ss: sk-thm-groth-ss: completed in this pr)
 - 01:39 L: returned deliver/NB/lem-sfb-tame-snc-quotient-resolution (reviewer RETURN: C5/B9 + G1/G4. This is the 7th push of this live, still-unsplit item; the earlier six were NM 9666, NJ ca61, NC 0835, NK)
+- 01:39 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
