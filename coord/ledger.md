@@ -24233,3 +24233,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:39 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
 - 01:39 L: returned deliver/Q85/lem-weil-integral-twist-scalar-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-integral-twist-scalar-coherence: lem-weil-int)
 - 01:40 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
+- 01:40 L: returned deliver/K1/Sheaf.AlgebraicGeometry.ProjectiveLineAbelianOriginalStalkTotalExchange (reviewer RETURN: (reviewer C-72890, head 72890e8e1) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Pr)
