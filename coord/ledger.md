@@ -24102,3 +24102,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:28 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
 - 00:28 L: returned deliver/NC/lem-sfb-ultrametric-orthogonal-extension (reviewer RETURN: L: independent stage-2 immutable head ac4b9b3d9d0a: A7/A6 (H2 credit): eighth NC head ac4b9b3d9d0a; module and node sha2)
 - 00:29 L: returned deliver/N9/sk-thm-groth-ss (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-thm-groth-ss: sk-thm-groth-ss: completed in this pr)
+- 00:29 L: returned deliver/NJ/lem-sfb-semilinear-sylow-good-components (reviewer RETURN: C1/F + G4. The item lem-sfb-semilinear-sylow-good-components is live, but the delivered proof cites two nodes on the 202)
