@@ -24402,3 +24402,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:53 L: merged deliver/Y3/Sheaf.CategoryTheory.FlatScalarTowerExchange (stage 3; reviewer PASS; first push; landing 20261022T025345-L-1292841 (interface); batch 20261022T025310; modules 1; new nodes 0; change records: coord/changes/flat-scalar-tower-normalization.md)
 - 02:54 L: returned deliver/NK/lem-sfb-equivariant-plurinodal-field-alteration (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-sfb-equivariant-plurinodal-field-alteration: fix d)
 - 02:54 L: merged deliver/NC/lem-sfb-affine-profinite-family-serre-cd (reviewer PASS; first push; new nodes: 1)
+- 02:54 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
