@@ -2,7 +2,8 @@
 module
 
 public import Sheaf.AlgebraicGeometry.PerfectOverlapCompositeStageTail
-public import Sheaf.AlgebraicGeometry.PerfectOverlapStageTransport
+public import WeilConjectures.AlgebraicGeometry.PerfectOverlapStageTransport
+public import Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreComparisons
 import Sheaf.AlgebraicGeometry.PerfectHomCompositionPrism
 import Sheaf.AlgebraicGeometry.PerfectOverlapProjectionCompositeAbstract
 

@@ -13,7 +13,7 @@
  ],
  "proof": [
   {
-   "text": "The forward stage functors are definitionally the indicated derived pullbacks. Construct perfectOverlapDerivedPullbackTransport directly at these endpoints, without inserting equality transports by rewriting the two functors. This is exactly the original fixed transport and introduces no new witness.",
+   "text": "Rewrite the two endpoint stage functors using perfectOverlapStageEquivalence_functor_eq and apply the existing constructed perfectOverlapDerivedPullbackTransport. This is the canonical source construction; it is definitionally equal to the former direct transport.",
    "uses": [
     "def-pc-perfect-overlap-core-comparisons-api",
     "def-pc-perfect-overlap-stage-equivalence"
@@ -27,10 +27,10 @@
  ],
  "proof_origin": {
   "by": "worker",
-  "agent": "D3",
-  "date": "2026-10-18",
+  "agent": "M5",
+  "date": "2026-10-22",
   "document": "https://stacks.math.columbia.edu/tag/08DW",
-  "place": "Fixed derived transport at the definitionally equal cartesian stage endpoints."
+  "place": "Retire the Sheaf twin in favour of the unchanged canonical source construction; preserve all dependencies and the unit route."
  },
  "mathlib_searches": [
   {
@@ -91,14 +91,15 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-semicon",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.PerfectOverlapStageTransport",
-  "file": "lean/Sheaf/AlgebraicGeometry/PerfectOverlapStageTransport.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.PerfectOverlapStageTransport",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/PerfectOverlapStageTransport.lean",
   "declaration": "AlgebraicGeometry.perfectOverlapStageTransport",
   "statement": "def perfectOverlapStageTransport {X Y K C T S : Scheme.{u}} (g : X ⟶ Y) (f : K ⟶ Y) (pX : X ⟶ C) (pK : K ⟶ T) (pY : Y ⟶ S) (b : C ⟶ S) (q : T ⟶ S) (hg : IsPullback g pX pY b) (hf : IsPullback f pK pY q) (U V : Y.Opens) (r : (g ⁻¹ᵁ (U ⊓ V)).toScheme ⟶ (f ⁻¹ᵁ (U ⊓ V)).toScheme) (m : pullback ((U ⊓ V).ι ≫ pY) b ⟶ pullback ((U ⊓ V).ι ≫ pY) q) (hmap : ((isPullback_morphismRestrict g (U ⊓ V)).paste_vert hg).isoPullback.inv ≫ r = m ≫ ((isPullback_morphismRestrict f (U ⊓ V)).paste_vert hf).isoPullback.inv) : derivedPullback r ⋙ (perfectOverlapStageEquivalence g pX pY b hg U V).functor ≅ (perfectOverlapStageEquivalence f pK pY q hf U V).functor ⋙ derivedPullback m",
   "branch": "sheaf-dag",
-  "by": "D4",
-  "date": "2026-10-16"
+  "by": "M5",
+  "date": "2026-10-22",
+  "note": "Retired the Sheaf twin under the human-approved retirement hand-off. The canonical source definition preserves the archived signature and is definitionally the direct fixed derived transport."
  },
  "reviewed": {
   "date": "2026-10-16",
@@ -111,14 +112,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "D3",
+  "reviewer": "C-1a5d3",
+  "group": "M5",
   "result": "pass",
-  "landing": "20261017T191956-L-3002698",
+  "landing": "20261022T013427-L-3575231",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: Sheaf twin perfectOverlapStageTransport retired: WC upstream def signature byte-identical to the node lean.statement; both adapted consumers differ from live only in two import lines and compile alone against live (17.5 s, 23.0 s); node proof fields match the WC rw+transport construction"
  },
  "lean_audit": {}
 }
