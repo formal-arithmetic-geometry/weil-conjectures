@@ -109,7 +109,10 @@ tₙ(Rf_!^Weil K; ȳ) = ∑_{x̄ ↦ ȳ} tₙ(K; x̄),
 ```
 the sum running over the points `x̄` of `X` of degree `n` with `x̄ ≫ f = ȳ`. By compactly
 supported base change of the Weil lower shriek to `ȳ`, this is the trace formula for the fiber of
-`f` over `ȳ`. -/
+`f` over `ȳ`.
+
+This is the relative, twisted variant of blueprint `thm-trf-grothendieck-lefschetz-finite-ring`,
+which is stated for the model Frobenius. -/
 theorem weilShriekTraceFunction {X Y : Over (Spec (.of k))}
     [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
     [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
@@ -132,13 +135,14 @@ finite type over `𝔽_q`, an automorphism `e` of `X` over `𝔽_q` of finite or
 ∑ᵢ (-1)ⁱ Tr(Fr_{c,n} | Hⁱ_c(X_k̄, K)) = ∑_{x̄ ∈ X(𝔽_{qⁿ})} ∑ⱼ (-1)ʲ Tr(Fr_{x̄,n} | Hʲ(K)_x̄),
 ```
 the left side being the local trace of `RΓ_c(X, K)` at the geometric point `s` of the base. It is
-the case `Y = Spec k` of `weilShriekTraceFunction`. -/
+the case `Y = Spec k` of `weilShriekTraceFunction`. This is a variant of blueprint
+`thm-trf-grothendieck-lefschetz-finite-ring` for the Frobenius twisted by `e`. -/
 theorem weilTraceFormula (he : ∃ m > 0, e.pow m = Iso.refl X)
     (K : WeilBoundedConstructible ℓ e.hom) (n : ℕ) [NeZero n] :
     weilStalkTraceAlternatingSum ℓ n (specAlgebraicClosure k) (specAlgebraicClosure_comp_pow n)
         ((weilCompactSupportCohomology ℓ e).obj K) =
       ∑ x : frobeniusFixedPoints e n, weilStalkTraceAlternatingSum ℓ n x.1 x.2.2 K :=
-  (weilShriekTraceFunction ℓ e (Iso.refl (Over.mk (𝟙 _))) (hom_comp_homMk_hom e) he K n
+  (weilShriekTraceFunction ℓ e (Iso.refl (point k)) (f := toPoint X) (toPoint_ext _ _) he K n
     default).trans
       (Fintype.sum_equiv (Equiv.subtypeUnivEquiv fun x ↦ x.2.1) _ _ fun _ ↦ rfl)
 
@@ -147,7 +151,7 @@ is the number of points of degree `n`, that is `#X(𝔽_{qⁿ})` for `e = 𝟙`:
 ```
 ∑ᵢ (-1)ⁱ Tr(Fr_{c,n} | Hⁱ_c(X_k̄, ℚ̄_ℓ)) = #X(𝔽_{qⁿ}).
 ```
--/
+This is a variant of blueprint `cor-trf-point-counting` for the Frobenius twisted by `e`. -/
 theorem weilPointCount (he : ∃ m > 0, e.pow m = Iso.refl X) (n : ℕ) [NeZero n] :
     weilStalkTraceAlternatingSum ℓ n (specAlgebraicClosure k) (specAlgebraicClosure_comp_pow n)
         ((weilCompactSupportCohomology ℓ e).obj (weilUnit ℓ e)) =
@@ -161,8 +165,8 @@ theorem weilPointCount (he : ∃ m > 0, e.pow m = Iso.refl X) (n : ℕ) [NeZero 
 theorem weilStalkTraceAlternatingSum_weilCompactSupportCohomology_refl_weilUnit (n : ℕ)
     [NeZero n] :
     weilStalkTraceAlternatingSum ℓ n (specAlgebraicClosure k) (specAlgebraicClosure_comp_pow n)
-        ((weilCompactSupportCohomology ℓ (Iso.refl (Over.mk (𝟙 (Spec (.of k)))))).obj
-          (weilUnit ℓ (Iso.refl (Over.mk (𝟙 _))))) = 1 := by
+        ((weilCompactSupportCohomology ℓ (Iso.refl (point k))).obj
+          (weilUnit ℓ (Iso.refl (point k)))) = 1 := by
   rw [weilPointCount ℓ (Iso.refl _) ⟨1, Nat.one_pos, Iso.pow_refl 1⟩, Nat.card_unique,
     Nat.cast_one]
 

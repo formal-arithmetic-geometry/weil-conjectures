@@ -10,6 +10,7 @@ public import Mathlib.Algebra.Ring.NegOnePow
 public import WeilConjectures.CategoryTheory.ModuleObjects.Symmetric
 public import WeilConjectures.TraceFormula.CategoricalTrace
 public import WeilConjectures.TraceFormula.FrobeniusIterate
+public import WeilConjectures.TraceFormula.Main
 public import WeilConjectures.WeilObject.BoundedConstructible.Homology
 public import WeilConjectures.WeilObject.BoundedConstructible.LowerUpperShriek
 
@@ -57,9 +58,9 @@ condensed `ℚ̲̄_ℓ`-modules (`isEquivalence_upperStarFromPointMod`) this rin
   is `weilStalkTraceAlternatingSum`, the alternating sum of the traces on the stalks of the Weil
   homology sheaves. Since the stalk functor is exact, `Hʲ(K)_x̄ = Hʲ(K_x̄)`.
 * **Global trace.** The compactly supported cohomology `RΓ_c(X, K) = Ra_! K` of a Weil object is
-  the Weil object `Ra_!^Weil K` on the base `Spec k`, as the terminal object
-  `Over.mk (𝟙 (Spec k))` of `Over (Spec k)`, with the identity automorphism
-  (`weilCompactSupportCohomology`), for `a : X ⟶ Spec k` the structure morphism. Its stalk at
+  the Weil object `Ra_!^Weil K` on the base `Spec k` (`ProEtale.CondensedRing.point k`) with the
+  identity automorphism (`weilCompactSupportCohomology`), for `a : X ⟶ Spec k` the structure
+  morphism (`toPoint X`). Its stalk at
   `s`, with the `n`-th Frobenius operator, is `RΓ_c(X_k̄, K)` with `Fr_{c,n}`, and
   ```
   Lₙ(X, K) = ∑ᵢ (-1)ⁱ Tr(Fr_{c,n} | Hⁱ_c(X_k̄, K))
@@ -71,9 +72,25 @@ condensed `ℚ̲̄_ℓ`-modules (`isEquivalence_upperStarFromPointMod`) this rin
 ## Main definitions
 
 - `ProEtale.CondensedRing.frobeniusFixedPoints`: the points of degree `n`.
+- `ProEtale.CondensedRing.WeilSheaf.powStalkFunctor`: the stalk at a point of degree `n` with
+  its `n`-th Frobenius operator, as a functor.
+- `ProEtale.CondensedRing.weilSheafStalkTrace`: the trace of the `n`-th Frobenius on a stalk of
+  a Weil sheaf.
 - `ProEtale.CondensedRing.weilStalkTraceAlternatingSum`: the local trace `tₙ(K; x̄)`.
 - `ProEtale.CondensedRing.weilCompactSupportCohomology`: `RΓ_c(X, K)` as a Weil object.
-- `ProEtale.CondensedRing.weilUnit`: the unit `ℚ̲̄_ℓ,X` with its canonical Weil structure.
+- `ProEtale.CondensedRing.weilUnit`: the unit `ℚ̲̄_ℓ,X` with its canonical Weil structure, that is
+  `ProEtale.CondensedRing.WeilBoundedConstructible.unit` for `e`.
+
+The base `Spec k` is `ProEtale.CondensedRing.point k`, from
+`WeilConjectures.TraceFormula.Basic`.
+
+## Main results
+
+- `ProEtale.CondensedRing.weilSheafStalkTrace_congr`,
+  `ProEtale.CondensedRing.categoricalTrace_frobeniusStalk_congr`: the local trace only depends on
+  the Weil sheaf up to isomorphism.
+- `ProEtale.CondensedRing.finite_support_weilSheafStalkTrace_homology`: only finitely many
+  homology sheaves of a bounded complex contribute to the local trace.
 
 ## Sorried input
 
@@ -82,13 +99,6 @@ condensed `ℚ̲̄_ℓ`-modules (`isEquivalence_upperStarFromPointMod`) this rin
   finite type and unramified over `k`. The resulting `Fintype` structure
   `ProEtale.CondensedRing.fintypeFrobeniusFixedPoints` is a local instance where sums over
   points are taken.
-- `ProEtale.CondensedRing.hasRightDual_frobeniusStalk_homology`: the stalks of the homology
-  sheaves of a bounded constructible complex are dualizable, that is finite-dimensional over
-  `ℚ̄_ℓ`.
-- `ProEtale.CondensedRing.finite_support_categoricalTrace_frobeniusStalk_homology`: only finitely
-  many homology sheaves of a bounded complex contribute to the local trace.
-- `ProEtale.CondensedRing.categoricalTrace_frobeniusStalk_add`: the trace of the Frobenius on the
-  stalks is additive in short exact sequences of Weil sheaves.
 - `ProEtale.CondensedRing.weilStalkTraceAlternatingSum_weilUnit`: the canonical Weil unit has
   local trace `1` at every point, the normalization test N1.
 
@@ -132,7 +142,11 @@ def frobeniusFixedPoints : Type u :=
 
 /-- A scheme of finite type over a finite field has finitely many points of degree `n ≠ 0`: they
 are the `k`-points of the fixed-point scheme of `σⁿ` twisted by `eⁿ`, which is of finite type and
-unramified over `k`, the differential of the Frobenius being zero. -/
+unramified over `k`, the differential of the Frobenius being zero.
+
+This is the twisted analogue of the finiteness part of blueprint `thm-trf-frobenius-fixed-points`,
+which is stated for the model Frobenius
+(`ProEtale.CondensedRing.IsModelFrobenius.finite_fixedPoint`). -/
 theorem finite_frobeniusFixedPoints [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
     [IsSeparated X.hom] [NeZero n] : Finite (frobeniusFixedPoints e n) :=
   sorry
@@ -150,18 +164,34 @@ end Points
 
 /-! ### The local trace -/
 
+/-- The trace of the structure automorphism of an algebra for the identity functor only depends
+on the algebra up to isomorphism. -/
+lemma _root_.CategoryTheory.Endofunctor.IsoAlgebra.categoricalTrace_str_congr {C : Type*}
+    [Category C] [MonoidalCategory C] [BraidedCategory C] {A B : IsoAlgebra (𝟭 C)} (i : A ≅ B)
+    [HasRightDual A.carrier] [HasRightDual B.carrier] :
+    categoricalTrace (V := B.carrier) B.str.hom = categoricalTrace (V := A.carrier) A.str.hom := by
+  let e : A.carrier ≅ B.carrier := (IsoAlgebra.forget _).mapIso i
+  have h : B.str.hom = e.inv ≫ A.str.hom ≫ e.hom := (Iso.eq_inv_comp e).2 i.hom.hom.h
+  exact (congrArg (categoricalTrace (V := B.carrier)) h).trans (categoricalTrace_conj e _)
+
 section Local
 
 variable [Finite k] {X : Over (Spec (.of k))} {e : X ≅ X} (n : ℕ)
   (x : Spec (.of (AlgebraicClosure k)) ⟶ X.left)
   (hx : x ≫ (e.pow n).hom.left = ((geometricFrobeniusField k).pow n).hom ≫ x)
 
+/-- The stalk at a geometric point `x̄` with `x̄ ≫ eⁿ = σⁿ ≫ x̄` of Weil sheaves for `e`, with the
+`n`-th Frobenius operator: the stalk functor for `eⁿ` after `WeilSheaf.powFunctor`. -/
+noncomputable def WeilSheaf.powStalkFunctor :
+    WeilSheaf ℓ e ⥤ IsoAlgebra (𝟭 (GeometricPointMod ℓ (AlgebraicClosure k))) :=
+  WeilSheaf.powFunctor ℓ e n ⋙
+    WeilSheaf.stalkFunctor ℓ (e.pow n) ((geometricFrobeniusField k).pow n).hom x hx
+
 /-- The stalk at a geometric point `x̄` with `x̄ ≫ eⁿ = σⁿ ≫ x̄` of a Weil sheaf `F` for `e`, with
 its `n`-th Frobenius operator: the stalk of the Weil sheaf `(F, φ_F^{(n)})` for `eⁿ`. -/
 noncomputable def WeilSheaf.frobeniusStalk (F : WeilSheaf ℓ e) :
     IsoAlgebra (𝟭 (GeometricPointMod ℓ (AlgebraicClosure k))) :=
-  (WeilSheaf.stalkFunctor ℓ (e.pow n) ((geometricFrobeniusField k).pow n).hom x hx).obj
-    (WeilSheaf.pow ℓ F n)
+  (WeilSheaf.powStalkFunctor ℓ n x hx).obj F
 
 /-- The trace of the Frobenius on the stalk only depends on the Weil sheaf up to isomorphism. -/
 lemma categoricalTrace_frobeniusStalk_congr {F G : WeilSheaf ℓ e} (i : F ≅ G)
@@ -171,34 +201,54 @@ lemma categoricalTrace_frobeniusStalk_congr {F G : WeilSheaf ℓ e} (i : F ≅ G
         (WeilSheaf.frobeniusStalk ℓ n x hx F).str.hom =
       categoricalTrace (V := (WeilSheaf.frobeniusStalk ℓ n x hx G).carrier)
         (WeilSheaf.frobeniusStalk ℓ n x hx G).str.hom :=
-  sorry
+  (IsoAlgebra.categoricalTrace_str_congr (A := WeilSheaf.frobeniusStalk ℓ n x hx F)
+    (B := WeilSheaf.frobeniusStalk ℓ n x hx G) ((WeilSheaf.powStalkFunctor ℓ n x hx).mapIso i)).symm
 
-/-- The trace of the Frobenius on the stalks is additive in short exact sequences
-`0 ⟶ F' ⟶ F ⟶ F'' ⟶ 0` of Weil sheaves:
-`Tr(Fr_{x̄,n} | F_x̄) = Tr(Fr_{x̄,n} | F'_x̄) + Tr(Fr_{x̄,n} | F''_x̄)`. -/
-theorem categoricalTrace_frobeniusStalk_add {F' F F'' : WeilSheaf ℓ e} (i : F' ⟶ F)
-    (p : F ⟶ F'') (w : (IsoAlgebra.forget _).map i ≫ (IsoAlgebra.forget _).map p = 0)
-    (hS : (ShortComplex.mk _ _ w).ShortExact)
-    [HasRightDual (WeilSheaf.frobeniusStalk ℓ n x hx F').carrier]
-    [HasRightDual (WeilSheaf.frobeniusStalk ℓ n x hx F).carrier]
-    [HasRightDual (WeilSheaf.frobeniusStalk ℓ n x hx F'').carrier] :
+/-- The trace `Tr(Fr_{x̄,n} | F_x̄)` of the `n`-th Frobenius operator on the stalk of a Weil sheaf
+at a geometric point `x̄` with `x̄ ≫ eⁿ = σⁿ ≫ x̄`: the categorical trace computed with a right
+dual chosen from `Nonempty (HasRightDual F_x̄)` (`weilSheafStalkTrace_eq`), and `0` when the stalk
+has no right dual. The stalks of constructible sheaves are finite-dimensional over `ℚ̄_ℓ`, hence
+dualizable, so the second case does not occur for the homology sheaves of the trace formula. -/
+noncomputable def weilSheafStalkTrace (F : WeilSheaf ℓ e) :
+    End (𝟙_ (GeometricPointMod ℓ (AlgebraicClosure k))) :=
+  open Classical in
+  if h : Nonempty (HasRightDual (WeilSheaf.frobeniusStalk ℓ n x hx F).carrier) then
+    letI := h.some
     categoricalTrace (V := (WeilSheaf.frobeniusStalk ℓ n x hx F).carrier)
-        (WeilSheaf.frobeniusStalk ℓ n x hx F).str.hom =
-      categoricalTrace (V := (WeilSheaf.frobeniusStalk ℓ n x hx F').carrier)
-          (WeilSheaf.frobeniusStalk ℓ n x hx F').str.hom +
-        categoricalTrace (V := (WeilSheaf.frobeniusStalk ℓ n x hx F'').carrier)
-          (WeilSheaf.frobeniusStalk ℓ n x hx F'').str.hom :=
-  sorry
+      (WeilSheaf.frobeniusStalk ℓ n x hx F).str.hom
+  else 0
+
+/-- For any right dual of the stalk, `weilSheafStalkTrace` is the categorical trace computed with
+that dual. -/
+lemma weilSheafStalkTrace_eq (F : WeilSheaf ℓ e)
+    [d : HasRightDual (WeilSheaf.frobeniusStalk ℓ n x hx F).carrier] :
+    weilSheafStalkTrace ℓ n x hx F =
+      categoricalTrace (V := (WeilSheaf.frobeniusStalk ℓ n x hx F).carrier)
+        (WeilSheaf.frobeniusStalk ℓ n x hx F).str.hom := by
+  have h : Nonempty (HasRightDual (WeilSheaf.frobeniusStalk ℓ n x hx F).carrier) := ⟨d⟩
+  rw [weilSheafStalkTrace, dif_pos h]
+  exact categoricalTrace_congr _ _ _
+
+/-- The trace of the Frobenius on the stalk only depends on the Weil sheaf up to isomorphism. -/
+lemma weilSheafStalkTrace_congr {F G : WeilSheaf ℓ e} (i : F ≅ G) :
+    weilSheafStalkTrace ℓ n x hx F = weilSheafStalkTrace ℓ n x hx G := by
+  let c : (WeilSheaf.frobeniusStalk ℓ n x hx F).carrier ≅
+      (WeilSheaf.frobeniusStalk ℓ n x hx G).carrier :=
+    (IsoAlgebra.forget _).mapIso ((WeilSheaf.powStalkFunctor ℓ n x hx).mapIso i)
+  by_cases hF : Nonempty (HasRightDual (WeilSheaf.frobeniusStalk ℓ n x hx F).carrier)
+  · obtain ⟨dF⟩ := hF
+    let : HasRightDual (WeilSheaf.frobeniusStalk ℓ n x hx G).carrier :=
+      @HasRightDual.mk _ _ _ _ (WeilSheaf.frobeniusStalk ℓ n x hx F).carrierᘁ
+        (exactPairingCongrLeft c.symm)
+    rw [weilSheafStalkTrace_eq, weilSheafStalkTrace_eq,
+      categoricalTrace_frobeniusStalk_congr ℓ n x hx i]
+  · have hG : ¬ Nonempty (HasRightDual (WeilSheaf.frobeniusStalk ℓ n x hx G).carrier) :=
+      fun ⟨dG⟩ ↦ hF ⟨@HasRightDual.mk _ _ _ _ (WeilSheaf.frobeniusStalk ℓ n x hx G).carrierᘁ
+        (exactPairingCongrLeft c)⟩
+    rw [weilSheafStalkTrace, weilSheafStalkTrace, dif_neg hF, dif_neg hG]
 
 variable [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
-
-/-- The stalks of the homology sheaves of a bounded constructible complex at a geometric point
-are dualizable, that is finite-dimensional over `ℚ̄_ℓ`. -/
-noncomputable instance hasRightDual_frobeniusStalk_homology (K : WeilBoundedConstructible ℓ e.hom)
-    (j : ℤ) : HasRightDual (WeilSheaf.frobeniusStalk ℓ n x hx
-      ((WeilBoundedConstructible.homologyFunctor ℓ e j).obj K)).carrier :=
-  sorry
 
 /-- The local trace `tₙ(K; x̄) = ∑ⱼ (-1)ʲ Tr(Fr_{x̄,n} | Hʲ(K)_x̄)` of a Weil object `K` of
 `Dᵇc(X)⟦ℚ̲̄_ℓ⟧` at a geometric point `x̄` with `x̄ ≫ eⁿ = σⁿ ≫ x̄`: the alternating sum of the
@@ -206,21 +256,32 @@ traces of the `n`-th Frobenius on the stalks of the Weil homology sheaves. -/
 noncomputable def weilStalkTraceAlternatingSum (K : WeilBoundedConstructible ℓ e.hom) :
     End (𝟙_ (GeometricPointMod ℓ (AlgebraicClosure k))) :=
   ∑ᶠ j : ℤ, (j.negOnePow : ℤ) •
-    categoricalTrace (V := (WeilSheaf.frobeniusStalk ℓ n x hx
-        ((WeilBoundedConstructible.homologyFunctor ℓ e j).obj K)).carrier)
-      (WeilSheaf.frobeniusStalk ℓ n x hx
-        ((WeilBoundedConstructible.homologyFunctor ℓ e j).obj K)).str.hom
+    weilSheafStalkTrace ℓ n x hx ((WeilBoundedConstructible.homologyFunctor ℓ e j).obj K)
 
 /-- Only finitely many homology sheaves of a bounded complex contribute to the local trace, so
 that the `finsum` defining it is a finite sum. -/
-theorem finite_support_categoricalTrace_frobeniusStalk_homology
-    (K : WeilBoundedConstructible ℓ e.hom) :
+theorem finite_support_weilSheafStalkTrace_homology (K : WeilBoundedConstructible ℓ e.hom) :
     (Function.support fun j : ℤ ↦
-      categoricalTrace (V := (WeilSheaf.frobeniusStalk ℓ n x hx
-          ((WeilBoundedConstructible.homologyFunctor ℓ e j).obj K)).carrier)
-        (WeilSheaf.frobeniusStalk ℓ n x hx
-          ((WeilBoundedConstructible.homologyFunctor ℓ e j).obj K)).str.hom).Finite :=
-  sorry
+      weilSheafStalkTrace ℓ n x hx
+        ((WeilBoundedConstructible.homologyFunctor ℓ e j).obj K)).Finite := by
+  obtain ⟨⟨a, b, h⟩, -⟩ := (mem_boundedConstructible_iff _ _).1 K.carrier.property
+  refine (Set.finite_Icc a b).subset fun j hj ↦ ?_
+  by_contra hj'
+  have hZ : Limits.IsZero (WeilSheaf.frobeniusStalk ℓ n x hx
+      ((WeilBoundedConstructible.homologyFunctor ℓ e j).obj K)).carrier := by
+    rw [WeilSheaf.frobeniusStalk, WeilSheaf.powStalkFunctor, Functor.comp_obj,
+      WeilSheaf.stalkFunctor_obj_carrier, WeilSheaf.powFunctor_obj,
+      WeilSheaf.pow_carrier,
+      WeilBoundedConstructible.homologyFunctor_obj_carrier]
+    refine Functor.map_isZero _ (h j ?_)
+    simpa only [Set.mem_Icc, not_and_or, not_le] using hj'
+  refine hj ?_
+  change weilSheafStalkTrace ℓ n x hx _ = 0
+  rw [weilSheafStalkTrace]
+  split_ifs with hd
+  · let := hd.some
+    exact categoricalTrace_eq_zero_of_isZero hZ _
+  · rfl
 
 end Local
 
@@ -233,14 +294,14 @@ variable [Finite k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
   (e : X ≅ X)
 
 /-- The unit `ℚ̲̄_ℓ,X` of `Dᵇc(X)⟦ℚ̲̄_ℓ⟧` with its canonical Weil structure
-`Le^* ℚ̲̄_ℓ,X ≅ ℚ̲̄_ℓ,X`, the inverse of the unit isomorphism of the monoidal functor `Le^*`. -/
-noncomputable def weilUnit : WeilBoundedConstructible ℓ e.hom :=
-  IsoAlgebra.mk (𝟙_ _)
-    (Functor.Monoidal.εIso
-      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ e.hom)).symm
+`Le^* ℚ̲̄_ℓ,X ≅ ℚ̲̄_ℓ,X`, the inverse of the unit isomorphism of the monoidal functor `Le^*`: the
+constant Weil object `WeilBoundedConstructible.unit` for `e`. -/
+noncomputable abbrev weilUnit : WeilBoundedConstructible ℓ e.hom :=
+  WeilBoundedConstructible.unit ℓ e.hom
 
 /-- The canonical Weil unit has local trace `1` at every point: its stalk is `ℚ̄_ℓ` in degree `0`,
-on which the Frobenius acts trivially (normalization test N1). -/
+on which the Frobenius acts trivially (normalization test N1). This is the unit stalk trace used in
+the proof of the twisted variant of blueprint `cor-trf-point-counting`. -/
 theorem weilStalkTraceAlternatingSum_weilUnit (n : ℕ) (x : Spec (.of (AlgebraicClosure k)) ⟶ X.left)
     (hx : x ≫ (e.pow n).hom.left = ((geometricFrobeniusField k).pow n).hom ≫ x) :
     weilStalkTraceAlternatingSum ℓ n x hx (weilUnit ℓ e) = 1 :=
@@ -252,37 +313,19 @@ end Unit
 
 section Global
 
-instance (k : Type u) [Field k] : LocallyOfFiniteType (Over.mk (𝟙 (Spec (.of k)))).hom :=
-  inferInstanceAs (LocallyOfFiniteType (𝟙 _))
-
-instance (k : Type u) [Field k] : QuasiCompact (Over.mk (𝟙 (Spec (.of k)))).hom :=
-  inferInstanceAs (QuasiCompact (𝟙 _))
-
-instance (k : Type u) [Field k] : IsSeparated (Over.mk (𝟙 (Spec (.of k)))).hom :=
-  inferInstanceAs (IsSeparated (𝟙 _))
-
-/-- The structure morphism `a : X ⟶ Spec k` is compatible with every automorphism `e` of `X` over
-`Spec k` and the identity of the base. -/
-lemma hom_comp_homMk_hom {X : Over (Spec (.of k))} (e : X ≅ X) :
-    e.hom ≫ Over.homMk (V := Over.mk (𝟙 _)) X.hom (Category.comp_id _) =
-      Over.homMk X.hom (Category.comp_id _) ≫ (Iso.refl (Over.mk (𝟙 _))).hom := by
-  ext
-  simp
-
 variable [Finite k]
 
 /-- The geometric point `s : Spec k̄ ⟶ Spec k` of the base is fixed by the Frobenius:
 `s ≫ 𝟙 = σⁿ ≫ s`. -/
 lemma specAlgebraicClosure_comp_pow (n : ℕ) :
-    specAlgebraicClosure k ≫ ((Iso.refl (Over.mk (𝟙 (Spec (.of k))))).pow n).hom.left =
+    specAlgebraicClosure k ≫ ((Iso.refl (point k)).pow n).hom.left =
       ((geometricFrobeniusField k).pow n).hom ≫ specAlgebraicClosure k := by
   rw [Iso.pow_hom_comp_of_hom_comp _ (geometricFrobeniusField_hom_comp_specAlgebraicClosure k),
     Iso.pow_refl]
   exact Category.comp_id _
 
 /-- The geometric point `s` of the base is its unique point of degree `n`. -/
-noncomputable instance (n : ℕ) :
-    Unique (frobeniusFixedPoints (Iso.refl (Over.mk (𝟙 (Spec (.of k))))) n) where
+noncomputable instance (n : ℕ) : Unique (frobeniusFixedPoints (Iso.refl (point k)) n) where
   default := ⟨specAlgebraicClosure k, Category.comp_id _, specAlgebraicClosure_comp_pow n⟩
   uniq x := Subtype.ext ((Category.comp_id _).symm.trans x.2.1)
 
@@ -292,11 +335,10 @@ variable [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
 
 /-- The compactly supported cohomology `RΓ_c(X, K) = Ra_! K` of a Weil object `K` for `e`, as a
 Weil object on the base `Spec k` for the identity: the Weil lower shriek along the structure
-morphism `a`. -/
+morphism `a` (`toPoint X`). -/
 noncomputable def weilCompactSupportCohomology :
-    WeilBoundedConstructible ℓ e.hom ⥤
-      WeilBoundedConstructible ℓ (Iso.refl (Over.mk (𝟙 (Spec (.of k))))).hom :=
-  weilLowerShriek ℓ e (Iso.refl (Over.mk (𝟙 _))) (hom_comp_homMk_hom e)
+    WeilBoundedConstructible ℓ e.hom ⥤ WeilBoundedConstructible ℓ (Iso.refl (point k)).hom :=
+  weilLowerShriek ℓ e (Iso.refl (point k)) (f := toPoint X) (toPoint_ext _ _)
 
 end Global
 
