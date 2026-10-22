@@ -24235,3 +24235,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:40 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
 - 01:40 L: returned deliver/K1/Sheaf.AlgebraicGeometry.ProjectiveLineAbelianOriginalStalkTotalExchange (reviewer RETURN: (reviewer C-72890, head 72890e8e1) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Pr)
 - 01:40 L: merged deliver/NS/lem-sfb-normal-integral-finite-sheaf-norm (stage 2; reviewer PASS; parallel immutable checks)
+- 2026-10-22T01:41:06Z L: superseded stage-1 delivery NJ/lem-sfb-finite-normal-ample-descent at 5e1ae6e19866383c7008eae5b73bf2c0c8c11afc; current completion retained; packet archived at refs/superseded/NJ/lem-sfb-finite-normal-ample-descent/5e1ae6e19866383c7008eae5b73bf2c0c8c11afc; stale return retired.
