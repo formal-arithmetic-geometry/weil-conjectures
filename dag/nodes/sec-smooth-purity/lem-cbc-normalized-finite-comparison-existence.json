@@ -13,42 +13,59 @@
  ],
  "proof": [
   {
-   "text": "On a flat-term K-flat representative compute finite reduction by ordinary scalar extension. Exact open extension commutes with reduction through the summand tensor comparison, with every strict transition retained.",
+   "text": "The canonical completed coefficient map is invertible by the compatible inverse-image comparison for finite profinite coefficient towers. Scalar restriction along that isomorphism is an equivalence. Its inverse is ordinary scalar extension by uniqueness of left adjoints. Pro-etale module inverse image is exact, hence completed module pullback and its termwise strict-tower functor are exact. A universal left-derived counit of this exact functor is invertible everywhere by the localization universal property. This uses the existing completedCoefficient_isIso proof and proves the exactness and counit consequences privately in the item.",
    "uses": [
-    "lem-cbc-ringed-open-strict-reduction",
-    "lem-cbc-ringed-open-flat-resolution"
+    "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "lem-weil-pbc-proetale-module-inverse-image-underlying",
+    "def-weil-pbc-adic-coefficient-datum",
+    "def-weil-pbc-completed-pullback"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the normalized finite-evaluation theorem for completed pullback to both endpoints. The constant coefficient and scalar-mate comparisons give exactly cbcSourceLevel and cbcTargetLevel on ordinary models; their tensor formulas identify the universal counits.",
+   "text": "Compose the actual reduction, exact open-extension, tower-pullback and exact-evaluation counits, in source and target order, as natural transformations on complexes. Postcompose with the localized ordinary coordinate isomorphisms cbcSourceLevel and cbcTargetLevel. For each finite endpoint compose the scalar-extension counit with the exact scalar-restriction and finite source/target localization factors. Every resulting model map is invertible on K-flat complexes: use the reduction and scalar-extension computation properties, Step 1, and exact localization factors. These are natural transformations with the precise original model components.",
    "uses": [
-    "lemma-weil-pbc-completed-pullback-reduction",
-    "def-cbc-completed-finite-exchange-coordinates"
+    "def-cbc-completed-finite-exchange-coordinates",
+    "def-cbc-finite-comparison-models",
+    "def-weil-pbc-adic-coefficient-datum",
+    "def-weil-pbc-bounded-constructible-tower",
+    "def-weil-pbc-completed-pullback"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "The comparisons are invertible on K-flat representatives. Compose the evaluated strict model map with the inverse finite model map. Naturality on chain maps and the resolving-class property descend these maps to natural isomorphisms on the derived category, preserving the stated representative equations.",
+   "text": "The generic private descentComparison lemma passes natural model maps through the homotopy quotient using fullness of precomposition. Restrict to the full homotopy subcategory represented by K-flat complexes. Every homotopy object admits a denominator from this subcategory by K-flat resolutions. The resolving-subcategory localization lemma restriction_localization (already proved in SiteDerivedTensorDescentIndependentCoefficients) identifies its localization with the whole derived category. On this subcategory divide the first model comparison by the second; both are invertible. Lift this natural isomorphism through localization. The lift factorization, followed by naturality for quotientCompQhIso and cancellation, gives the model equation on every K-flat complex.",
    "uses": [
     "lem-pc-kflat-resolution",
-    "lem-pur-left-derived-from-kflat-class"
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-pur-quasi-isos-saturated-triangulated"
    ],
    "elementary": false
+  },
+  {
+   "text": "Apply the generic descentFourComparison lemma separately to the source and target counits of Step 2. Its conclusion explicitly retains the nested four-stage source formula and the two-stage finite model formula. Thus no concrete reassociation of complex-functor objects is required. Expanding the named representative maps identifies the two resulting equations with exactly CbcSourceFiniteNormalization and CbcTargetFiniteNormalization. Both specified finite comparison isomorphisms exist, without a boundedness, completeness, quasi-compactness, nonzero-ring or nonempty-scheme hypothesis.",
+   "uses": [
+    "def-cbc-finite-comparison-models"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-cbc-ringed-open-strict-reduction",
-  "lem-cbc-ringed-open-flat-resolution",
-  "lemma-weil-pbc-completed-pullback-reduction",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "lem-weil-pbc-proetale-module-inverse-image-underlying",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-completed-pullback",
   "def-cbc-completed-finite-exchange-coordinates",
+  "def-cbc-finite-comparison-models",
+  "def-weil-pbc-bounded-constructible-tower",
   "lem-pc-kflat-resolution",
-  "lem-pur-left-derived-from-kflat-class"
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-pur-quasi-isos-saturated-triangulated"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
-  "place": "Step 7, with the normalized representative equation made explicit."
+  "place": "Finite-exchange Step 7; R4 refinement using exactness of completed coefficient pullback and direct resolving-subcategory localization, preserving both original counit normalizations."
  },
  "mathlib_searches": [
   {
@@ -125,13 +142,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "C-c8801",
-  "group": "W4",
-  "result": "fix",
-  "landing": "20261021T183353-L-1610710",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261022T022952-L-767045",
   "kind": "interface",
-  "note": "independent cc review: moved model defs vs live item module (verbatim apart from blueprint tags); existence lemma vs old ∃! statement (existence half); uniqueness proof vs node step 7; both direct importers compiled against the delivery"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
