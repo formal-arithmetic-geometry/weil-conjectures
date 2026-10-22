@@ -16,11 +16,177 @@
   "def-weil-surjective-morphism",
   "def-weil-geometric-fibre",
   "def-pc-reduced-scheme",
-  "def-kun-projective"
+  "def-kun-projective",
+  "def-pc-fibre-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each orbit $E$, choose an affine open $W$ containing $E$. The finite intersection $W_E=\\bigcap_{h\\in H}hW$ still contains $E$ and is invariant. Each translate is affine, and repeated application of the separated-affine-intersection lemma over $\\operatorname{Spec}e$ shows that $W_E$ is affine. These opens cover $V$. In what follows use the cover consisting of all invariant affine opens, so the argument applies to any such open, not just a selected subcover.",
+   "uses": [
+    "lem-weil-pbc-separated-affine-open-intersection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01KP, lemma-characterize-separated (1)(a); separatedness simplifies the invariant-neighbourhood input of Tag 03JE"
+   }
+  },
+  {
+   "text": "Fix an invariant affine $W=\\operatorname{Spec}R$ and put $A=R^H=\\{r:h(r)=r\\text{ for all }h\\in H\\}$. The action groupoid has arrows $\\coprod_{h\\in H}W$, source $(h,x)\\mapsto x$, target $(h,x)\\mapsto hx$, inverse $(h,x)\\mapsto(h^{-1},hx)$ and composition $(g,hx)\\circ(h,x)=(gh,x)$. The group-action identities give its laws. The finite coproduct is $\\operatorname{Spec}(\\prod_H R)$. The source corresponds to the diagonal $R\\to\\prod_HR$, whose module has the coordinate basis indexed by $H$, hence is finite locally free; the target is isomorphic to the source via the inverse map. Thus both hypotheses on source and target in the orbit-fibre lemma hold. That lemma says that $p_W:W\\to\\operatorname{Spec}A$ is surjective with ordinary and algebraically closed-point fibres precisely the orbits. The finite-invariant-ring lemma says $R$ is integral over $A$; the integral-spectrum closed-map lemma makes $p_W$ closed. It is therefore a topological quotient, and identifies $|W|/H$ homeomorphically with $|\\operatorname{Spec}A|$.",
+   "uses": [
+    "lem-weil-pbc-finite-affine-coproduct-spectrum",
+    "lem-weil-pbc-finite-free-algebra-spectrum",
+    "lem-a1-affine-groupoid-orbit-fibres",
+    "lem-dl-a1-finite-invariant-prime-orbits-residues",
+    "lem-weil-pbc-integral-spec-closed-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03BL, lemma-points; finite free action groupoid via 02KB; integrality 0BRI and closedness 00GU/00HZ"
+   }
+  },
+  {
+   "text": "Define the set $|Q|=|V|/H$ with the quotient topology, and let $q$ be the orbit projection. It is open: the inverse image of the image of an open $O$ is $\\bigcup_{h\\in H}hO$. For an open $T\\subseteq |Q|$ define $\\mathcal O_Q(T)=\\mathcal O_V(q^{-1}T)^H$ with inherited restriction maps. This is a sheaf of rings: glue matching sections in $\\mathcal O_V$ and use uniqueness to see that their glue is fixed by every $h$. The inclusions into $\\mathcal O_V(q^{-1}T)$ form a map of sheaves. Every invariant open $W$ is saturated, $q^{-1}q(W)=W$; $q(W)$ is open and carries the orbit-space topology of $W$. For an invariant affine $W$, Step 2 consequently identifies $q(W)$ topologically with $\\operatorname{Spec}(R^H)$.",
+   "uses": [
+    "def-weil-locally-ringed-space-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX 1.4, pp.132--133, admissible quotient; explicit orbit-space and invariant-sheaf construction supplied here"
+   }
+  },
+  {
+   "text": "For $A=R^H$ and $f\\in A$, the canonical inclusion $A_f\\to R_f$ identifies $A_f$ with $(R_f)^H$. Injectivity follows from the fraction equality criterion, since $A\\subset R$. For surjectivity, write a fixed fraction as $r/f^n$. For each $h$, fixedness gives an exponent $m_h$ with $f^{m_h}(h(r)-r)=0$. Choose $m$ at least all $m_h$; then $f^mr\\in A$ and $r/f^n=(f^mr)/f^{n+m}$. The maps respect restrictions because they are induced by the same inclusions and localization maps. Sections over the inverse image of $D_A(f)$ are $R_f$, by the affine-basic-open section lemma. Hence the canonical map from the structure sheaf of $\\operatorname{Spec}A$ to $\\mathcal O_Q|_{q(W)}$ is an isomorphism on its basic-open basis. Sheaf gluing gives the isomorphism on every open. Thus $q(W)$ is the affine scheme $\\operatorname{Spec}A$ and $q|_W=p_W$ as a morphism of ringed spaces. These opens cover $Q$, so $Q$ is a scheme and $q$ is a scheme morphism, since the maps $p_W$ are local on stalks. Invariant constants $e\\to\\mathcal O_Q(T)$ give its $e$-structure; on nonempty stalks the map from the field $e$ is local. This makes $q$ an $e$-morphism.",
+   "uses": [
+    "def-weil-ring-localization-away",
+    "lem-weil-pbc-affine-open-section-vanishing-prime",
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "def-weil-affine-spectrum",
+    "def-pc-scheme",
+    "def-weil-locally-ringed-space-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01HV, lemma-spec-sheaves (3),(5), and 01I3, lemma-standard-open-affine; fraction calculation from Algebra 00CO; scheme definition 01IJ"
+   }
+  },
+  {
+   "text": "The affine opens $q(W)$ have affine inverse images $W$, so the affine-local-target criterion makes $q$ affine. Take any affine open $T=\\operatorname{Spec}A$ of $Q$. Its inverse image is now affine, say $\\operatorname{Spec}R$, and the sheaf definition gives $A=R^H$ under the canonical map. Since $V$ is locally of finite type over $e$, the affine-pairs criterion says $R$ is a finitely generated $e$-algebra. Choose finitely many $e$-algebra generators $r_1,\\ldots,r_n$. The same elements generate $R$ over $A$, because the image of $e$ is in $A$. Each is integral over $A$ by the finite-invariant-ring lemma. The finite-integral-adjoining lemma therefore says $R=A[r_1,\\ldots,r_n]$ is a finite $A$-module. This holds for every affine $T$, so the definition of a finite morphism proves $q$ finite. Surjectivity and the geometric-point orbit assertion already hold on the cover by $q(W)$ by Step 2, hence hold globally.",
+   "uses": [
+    "pqf-lem-affine-local-target",
+    "lem-weil-pbc-lft-affine-pairs",
+    "lem-dl-a1-finite-invariant-prime-orbits-residues",
+    "lem-sc-finite-generated-integral-subring",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02JJ, lemma-characterize-finite-in-terms-of-integral (3) => (1), with lemma-characterize-integral; integrality 0BRI; affine-pairs criterion Morphisms 01T2, affine criterion 01S8"
+   }
+  },
+  {
+   "text": "On each affine $T=\\operatorname{Spec}A$ just considered, $R$ is finite type over $e$ and finite as an $A$-module. A field is Noetherian (its only ideals are zero and the unit ideal), so Artin--Tate applied to $e\\to A\\subseteq R$ gives $A$ of finite type over $e$. These affine charts prove $Q$ locally of finite type, with no finite-cover assumption. If $V$ is reduced, every such $R$ is reduced. An element of its subring $A$ with a zero power is zero already in $R$, hence zero in $A$. Thus all affine rings of $Q$ are reduced, which is the reduced-scheme criterion.",
+   "uses": [
+    "lem-sfb-artin-tate-subalgebra-finite-type",
+    "def-weil-finite-type-morphism",
+    "def-pc-reduced-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00IS, lemma-Artin-Tate; reduced-scheme criterion Schemes 01J1"
+   }
+  },
+  {
+   "text": "Let $a:V\\to Z$ be any invariant scheme morphism. Its underlying continuous map factors uniquely through the quotient topology on $|Q|$. For every open $O\\subseteq Z$, $a^\\sharp$ takes values in $\\mathcal O_V(a^{-1}O)^H$, since $a\\circ h=a$ as scheme morphisms, so it factors through $\\mathcal O_Q$ and defines a ringed-space morphism $b:Q\\to Z$. This factor is local: for $y\\in Q$ choose $x$ above it. If a germ in the maximal ideal of $\\mathcal O_{Z,b(y)}$ mapped to a unit at $y$, its pullback would be a unit at $x$, contradicting locality of $a$. Thus $b$ is a scheme morphism. Uniqueness follows from surjectivity on points and the inclusions of section rings. In particular invariant $e$-morphisms factor by $e$-morphisms, since the two structure composites agree after $q$. The construction on any invariant open $V'\\subseteq V$ is literally the restriction of the orbit space and invariant sheaf to $q(V')$. It proves the same universal property there, and Step 4, applied to every invariant affine, gives exactly the asserted affine quotient formula.",
+   "uses": [
+    "def-weil-locally-ringed-space-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX 1.4, pp.132--133, and X 2.3 Step 2, p.151; explicit categorical and invariant-open verification supplied here"
+   }
+  },
+  {
+   "text": "For the finiteness assertion over $U\\subseteq B$, let $b:Q\\to B$ be the factor of $v$ from Step 7. Fix an affine open $T=\\operatorname{Spec}C$ of $U$. Finiteness of $v^{-1}U\\to U$ gives an affine $W=v^{-1}T=\\operatorname{Spec}R$ with $R$ a finite $C$-module. It is invariant, so Steps 3--4 give $b^{-1}T=q(W)=\\operatorname{Spec}A$ with $A=R^H$. The image $C'\\subseteq R$ of $C$ is contained in $A$ because $v$ is invariant, and it contains the image of $e$ because $v$ is an $e$-morphism. The same finite module generators show $R$ is finite over $C'$. The affine-pairs criterion makes $R$ finite type over $e$. Artin--Tate applied to $e\\to C'\\subseteq R$ gives $C'$ of finite type over $e$. This uses no Noetherian assumption on $C$ or on $B$.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-lft-affine-pairs",
+    "lem-sfb-artin-tate-subalgebra-finite-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00IS, lemma-Artin-Tate, applied to the image subalgebra of the arbitrary base section ring"
+   }
+  },
+  {
+   "text": "The finite-type Noetherian-ring lemma makes $C'$ Noetherian. Regard $A\\subseteq R$ as a $C'$-submodule; it is stable because $C'\\subseteq A$. Since $R$ is finite over $C'$, the Noetherian-submodule lemma makes $A$ finite over $C'$. Those same generators generate $A$ over $C$, since $C\\to C'$ is onto. Consequently $b^{-1}T\\to T$ is finite for every affine open $T$ of $U$. By the definition of a finite morphism, $Q\\times_B U=b^{-1}U\\to U$ is finite. The equality denotes the usual canonical identification of the inverse image of an open with its fibre product.",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-noetherian-submodule-finite",
+    "def-weil-finite-integral-morphism",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00FN, lemma-Noetherian-permanence, and 00IK, lemma-Noetherian-basic; Morphisms finite definition"
+   }
+  },
+  {
+   "text": "Finally suppose $V$ has a locally closed immersion into $\\mathbf P^n_e=\\operatorname{Proj}S$, $S=e[x_0,\\ldots,x_n]$. Factor it as a closed immersion into an open $O$ of $\\operatorname{Proj}S$. For a finite nonempty subset $E\\subseteq V$, write the complement of $O$ as $V_+(J)$ for a homogeneous ideal $J$, and let $I=J\\cap S_+$. For each homogeneous prime corresponding to a point of $E$, $I$ is not contained in that prime: $J$ is not contained in it and neither is $S_+$, so the product of a member of each outside the prime belongs to $I$ and is outside it. Graded prime avoidance supplies a positive-degree homogeneous $f\\in I$ missing all those primes. Then $D_+(f)$ is affine, contains the image of $E$ and is contained in $O$. Its inverse image in $V$ is affine, by the affine description of a closed immersion, and contains $E$. The empty set is contained in the empty affine open. In particular every finite-group orbit lies in an affine open. Every subgroup orbit is a subset of the corresponding whole-group orbit, so the same assertion holds for subgroup actions (indeed this last observation holds for any admissible action).",
+   "uses": [
+    "def-pc-proj",
+    "lem-sc-graded-prime-avoidance",
+    "lem-sc-proj-standard-open-basis",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01ZY, lemma-ample-finite-set-in-affine, case (4), with Algebra 00JS and Constructions 01MB; ILO IX 1.4 for subgroup admissibility"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-separated-affine-open-intersection",
+  "lem-weil-pbc-finite-affine-coproduct-spectrum",
+  "lem-weil-pbc-finite-free-algebra-spectrum",
+  "lem-a1-affine-groupoid-orbit-fibres",
+  "lem-dl-a1-finite-invariant-prime-orbits-residues",
+  "lem-weil-pbc-integral-spec-closed-map",
+  "def-weil-locally-ringed-space-morphism",
+  "def-weil-ring-localization-away",
+  "lem-weil-pbc-affine-open-section-vanishing-prime",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "def-weil-affine-spectrum",
+  "def-pc-scheme",
+  "pqf-lem-affine-local-target",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-sc-finite-generated-integral-subring",
+  "def-weil-finite-integral-morphism",
+  "lem-sfb-artin-tate-subalgebra-finite-type",
+  "def-weil-finite-type-morphism",
+  "def-pc-reduced-scheme",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "def-pc-fibre-product",
+  "def-pc-proj",
+  "lem-sc-graded-prime-avoidance",
+  "lem-sc-proj-standard-open-basis",
+  "def-weil-closed-immersion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "IX 1.4, pp.132--133, and X 2.3 Step 2, p.151, supply the quotient use. The explicit invariant-sheaf construction and arbitrary-base finiteness argument are written here, using the Stacks and Mathlib lemmas cited in the steps."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,10 +222,45 @@
    "results": "OK 8 hits: CategoryTheory.PreGaloisCategory.has_decomp_quotients, CategoryTheory.FintypeCat.instPreGaloisCategoryActionFintypeCat, Finite.of_finite_mulAction_orbitRel_quotient, CategoryTheory.PreGaloisCategory.hasQuotientsByFiniteGroups, MulAction.finite_quotient_of_finite_quotient_of_finite_quotient, MulAction.finite_quotient_of_pretransitive_of_finite_quotient, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, CategoryTheory.PreGaloisCategory.FiberFunctor.preservesQuotientsByFiniteGroups",
    "date": "2026-10-22",
    "verdict": "no match: inspected the returned signatures; none constructs this scheme-theoretic object or gives a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite group acting on a scheme locally of finite type over a field with affine orbit neighbourhoods has a finite categorical quotient scheme",
+   "results": "8 hits: CategoryTheory.PreGaloisCategory.hasQuotientsByFiniteGroups, Finite.of_finite_mulAction_orbitRel_quotient, MulAction.finite_quotient_of_finite_quotient_of_finite_quotient, AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop, CategoryTheory.PreGaloisCategory.has_decomp_quotients, MulAction.finite_quotient_of_pretransitive_of_finite_quotient, CategoryTheory.FintypeCat.instPreGaloisCategoryActionFintypeCat, CategoryTheory.FintypeCat.instGaloisCategoryActionFintypeCat",
+   "date": "2026-10-22",
+   "verdict": "no match: returned finite-set/Galois-category quotients, ring-ideal lifts, gluing or single finite-morphism criteria do not state the scheme quotient theorem or specialize to it in one line."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"quotient\"",
+   "results": "3 hits: AlgebraicGeometry.Scheme.Hom.liftQuotient, AlgebraicGeometry.Scheme.Hom.liftQuotient_comp, AlgebraicGeometry.Scheme.Hom.liftQuotient_comp_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: returned finite-set/Galois-category quotients, ring-ideal lifts, gluing or single finite-morphism criteria do not state the scheme quotient theorem or specialize to it in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "quotient|invariant",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean, Mathlib/AlgebraicGeometry/Morphisms/OpenImmersion.lean. Subdirectory: AlgebraicGeometry",
+   "date": "2026-10-22",
+   "verdict": "no match: returned finite-set/Galois-category quotients, ring-ideal lifts, gluing or single finite-morphism criteria do not state the scheme quotient theorem or specialize to it in one line."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Existence of geometric categorical quotient of a separated locally finite type scheme by an admissible finite group action",
+   "results": "8 hits: CategoryTheory.PreGaloisCategory.hasQuotientsByFiniteGroups, MulAction.orbitRel.Quotient, t2Space_quotient_mulAction_of_properSMul, MulAction.finite_quotient_of_finite_quotient_of_finite_quotient, CategoryTheory.FintypeCat.instPreGaloisCategoryActionFintypeCat, AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine, AddAction.orbitRel.Quotient, Finite.of_finite_addAction_orbitRel_quotient",
+   "date": "2026-10-22",
+   "verdict": "no match: returned finite-set/Galois-category quotients, ring-ideal lifts, gluing or single finite-morphism criteria do not state the scheme quotient theorem or specialize to it in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Invariant affine charts glue to a finite surjective quotient scheme for a finite group action without invertibility of the group order",
+   "results": "8 hits: AlgebraicGeometry.instIsAffineSigmaObjScheme, CategoryTheory.PreGaloisCategory.hasQuotientsByFiniteGroups, AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite, AlgebraicGeometry.Scheme.GlueData.gluedScheme, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, CategoryTheory.PreGaloisCategory.has_decomp_quotients, AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass",
+   "date": "2026-10-22",
+   "verdict": "no match: returned finite-set/Galois-category quotients, ring-ideal lifts, gluing or single finite-morphism criteria do not state the scheme quotient theorem or specialize to it in one line."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-equivariant-smooth-galois-model",
@@ -84,5 +285,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-admissible-finite-type-field-quotient",
+  "worker": "stage1",
+  "summary": "Wrote a ten-step constructive split from live affine inputs, without using the dropped general admissible-quotient branch. Separatedness supplies an invariant affine cover. Verified the action groupoid hypotheses, localization of invariants including zero divisors, ringed-space locality, finite type and module finiteness, arbitrary-base finiteness through the image subalgebra, and quasi-projective finite-set admissibility. No new nodes and no statement change.",
+  "blueprint": "Realizes the quotient ingredient of det-thm-sf-ctf-stability-direct-images, proof (3), via the existing alteration branch and ILO IX 1.4 / X 2.3 Step 2. The stored created.item ancestry currently ends with blueprint.from.node=null; blueprint_refs.py ancestor confirms None, retained without changing maintainer-owned ancestry. Whole-blueprint searches quotient scheme, invariant affine and admissible found no imported statement of this full locally finite-type field quotient theorem.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-free-algebra-spectrum",
+    "why": "Generic affine-scheme, ring, orbit-fibre or Proj tool used only through its displayed statement in this quotient construction; no same-unit node supplies this fact. It does not replace the alteration/direct-image unit route."
+   },
+   {
+    "node": "lem-a1-affine-groupoid-orbit-fibres",
+    "why": "Generic affine-scheme, ring, orbit-fibre or Proj tool used only through its displayed statement in this quotient construction; no same-unit node supplies this fact. It does not replace the alteration/direct-image unit route."
+   },
+   {
+    "node": "lem-sc-graded-prime-avoidance",
+    "why": "Generic affine-scheme, ring, orbit-fibre or Proj tool used only through its displayed statement in this quotient construction; no same-unit node supplies this fact. It does not replace the alteration/direct-image unit route."
+   },
+   {
+    "node": "lem-sc-proj-standard-open-basis",
+    "why": "Generic affine-scheme, ring, orbit-fibre or Proj tool used only through its displayed statement in this quotient construction; no same-unit node supplies this fact. It does not replace the alteration/direct-image unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-free-algebra-spectrum",
+  "lem-a1-affine-groupoid-orbit-fibres",
+  "lem-sc-graded-prime-avoidance",
+  "lem-sc-proj-standard-open-basis"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NB-35af7cbee",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-35af7cbee (reviewer sub-agent of L); spot-checked: I read the item, all ten steps and every cited statement in full. Supersession and dropped route: on side-live and live the item is still unsplit with an identical statement, and there is no repair note. It is a first split, so no re-split comparison applies. Its closure of 380 nodes contains no route-pivot-dropped id and no trf node. The only stmt_deps change adds def-pc-fibre-product, which the statement uses for Q x_B U. There are no new nodes. Mathematics: Step 1 builds invariant affines as intersections of translates, which are affine by separatedness over Spec e. Step 2 checks the action groupoid against Stacks 03BL: the arrow scheme is Spec of the product of copies of R, the source is the diagonal with an idempotent basis and so finite locally free, the target is the source composed with the inverse, and the equalizer C is R^H. Integrality makes the map closed, so it is a topological quotient. Steps 3-4 build the invariant-section sheaf, with q open and invariant opens saturated. The identity (R_f)^H = A_f holds with zero divisors, taking a common exponent over the finite group H. Step 5 makes q affine (01S8) and finite on every affine open: finite type over e, generators integral over the invariants. Step 6: Artin-Tate gives local finite type, and a subring of a reduced ring is reduced. Step 7 proves the categorical factorization, including the locality argument. Steps 8-9 handle finiteness over an arbitrary base through the image C' of C in R^H: Artin-Tate makes C' of finite type over e, hence Noetherian, so A is a finite C'-module; no Noetherian condition on B is used. Step 10 is Stacks 01ZY case (4) with I = J intersected with S_+ and graded prime avoidance, and is valid over finite fields. Edge cases checked: empty V, trivial and non-faithful actions, wild characteristic, nilpotents, a non-quasi-compact V, a non-Noetherian B. Accepted tool_uses: lem-weil-pbc-finite-free-algebra-spectrum, lem-a1-affine-groupoid-orbit-fibres, lem-sc-graded-prime-avoidance and lem-sc-proj-standard-open-basis, all generic algebra or Proj tools used only through their statements. No SGA source is cited. No changes."
  }
 }
