@@ -1,17 +1,16 @@
 # Work queue
 
-44 items; claim with `tools/claim.py next <group> [--stage N]`.
+42 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Rework: quarantined by the upstream sync (4 clusters, 271 modules)
+## Rework: quarantined by the upstream sync (3 clusters, 269 modules)
 
 Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.tsv). One item per cluster: its root (a quarantined module importing no other quarantined one) and the quarantined modules importing it; fix the root, then the dependents as far as possible, deliver every module that compiles.
 
 | item (root) | modules | other roots | cause of the root |
 |---|---|---|---|
 | `Sheaf.PoincareDuality.ProperProjectionFormulaBounded` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
-| `Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreOfData` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
+| `Sheaf.AlgebraicGeometry.ModuleSpecializationAbelianIso` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.MixedPullbackSquareTensorCoherence` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
-| `Sheaf.AlgebraicGeometry.ProjectiveLineStrictLocalStalkExchangeComparison` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 
 Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 53, stage 3 1 items.
 
@@ -28,13 +27,12 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-norm-completion-positive-cohomology-mono` | 4014 | none |
 | `def-per-support-condition` | - | none |
 
-## Stage 2: nodes to state (3)
+## Stage 2: nodes to state (2)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
 | `def-sfb-finite-derived-adjunction` | 1 | state | 0 |
 | `lem-pe-internal-module-sectionwise-short-exact` | 1 | state | 0 |
-| `lem-sfb-zero-dimensional-base-affine-global` | 1 | state | 0 |
 
 Not open yet: 369 nodes that below a finished node, not needed, 87 nodes that wait for a statement dependency (bottom-up), 7 nodes that wait for stage 1 (statement downstream not grounded).
 
