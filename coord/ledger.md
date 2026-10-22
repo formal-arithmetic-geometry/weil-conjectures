@@ -24369,3 +24369,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:44 L: merged deliver/NO/lem-sfb-quasi-compact-restriction-acyclicity (stage 2; reviewer PASS; parallel immutable checks)
 - 02:44 L: merged deliver/NN/lem-sfb-punctured-spectral-neighborhood-dimension (stage 2; reviewer PASS; parallel immutable checks)
 - 02:44 L: returned deliver/N9/sk-thm-groth-ss (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-thm-groth-ss: sk-thm-groth-ss: completed in this pr)
+- 02:45 L: returned deliver/NI/lem-sfb-ramified-cartier-supported-purity (reviewer RETURN: C1/F + G4. I read all 7 steps; there are no new nodes, the statement, stmt_deps and source are unchanged, and the item i)
