@@ -24345,3 +24345,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:29 L: merged deliver/T4/Sheaf.AlgebraicGeometry.PrimeCurveArtinSchreierKernel (stage 3; reviewer PASS; first push; landing 20261022T022955-L-767450 (interface); batch 20261022T022938; modules 1; new nodes 0; change records: coord/changes/T4-prime-curve-artin-schreier-proof-interface.md)
 - 02:31 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
 - 02:31 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
+- 02:33 L: returned deliver/N9/sk-thm-groth-ss (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-thm-groth-ss: sk-thm-groth-ss: completed in this pr)
