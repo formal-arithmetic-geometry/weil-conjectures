@@ -24417,3 +24417,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:02 L: merged deliver/NH/lem-sfb-affine-profinite-family-serre-cd (stage 2; reviewer PASS; parallel immutable checks)
 - 03:04 L: returned deliver/N9/sk-thm-groth-ss (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-thm-groth-ss: sk-thm-groth-ss: completed in this pr)
 - 03:05 L: merged deliver/NK/lem-sfb-equivariant-plurinodal-field-alteration (reviewer FIX+NODE(1); after a return; new nodes: 3)
+- 2026-10-22T03:05:13Z L: superseded stage-1 delivery NC/lem-sfb-flasque-open-cover-cech-acyclic at cd61c406f27d71e589dda6e6edef5144d8761ac7; current completion retained; packet archived at refs/superseded/NC/lem-sfb-flasque-open-cover-cech-acyclic/cd61c406f27d71e589dda6e6edef5144d8761ac7; stale return retired.
