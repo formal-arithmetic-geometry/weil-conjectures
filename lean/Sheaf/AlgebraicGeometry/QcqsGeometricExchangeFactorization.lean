@@ -14,7 +14,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import WeilConjectures.Mathlib.RingTheory.Henselian
 import Sheaf.Paper.StrictHenselizationFunctoriality
 import WeilConjectures.AlgebraicGeometry.QcqsStrictLocalModuleComparison
-import Sheaf.AlgebraicGeometry.StrictLocalExchangeCompatibility
+import WeilConjectures.AlgebraicGeometry.GeometricFibreExchangeRepresentative
 import Sheaf.AlgebraicGeometry.EtaleUnitSectionRestriction
 import Sheaf.AlgebraicGeometry.SmallStrictLocalSectionMaps
 
@@ -201,8 +201,93 @@ theorem qcqs_geometricExchange_factorization
           (pullback.fst f (Scheme.strictHenselizationStructuralMap s))).obj F) :=
     (eqToIso (by rw [Category.id_comp])) ≪≫ e₀
   refine ⟨e, ?_⟩
-  simpa only [e, Iso.trans_hom, eqToIso.hom, geometricPointGlobalGerm,
-    Category.assoc] using
-    strictLocal_exchange_compatibility Λ sq F t hpoint q hqt hq e₀.hom he₀
+  let P := (lowerStar (ModuleCat.{u + 1} Λ) f).obj F
+  let e := geometricPointSourceStalkIso Λ s P
+  let r := globalSectionsUpperStarMap (ModuleCat.{u + 1} Λ) q
+        ((upperStar (ModuleCat.{u + 1} Λ)
+          (pullback.fst f (Scheme.strictHenselizationStructuralMap s))).obj F) ≫
+      (Sheaf.Γ _ (ModuleCat.{u + 1} Λ)).map
+        ((upperStarComp (ModuleCat.{u + 1} Λ) q
+          (pullback.fst f (Scheme.strictHenselizationStructuralMap s)) g' hq.symm).inv.app F)
+  let b := (lowerStarCompGlobalSectionsIso (ModuleCat.{u + 1} Λ) f').inv.app
+        ((upperStar (ModuleCat.{u + 1} Λ) g').obj F) ≫
+      (Sheaf.ΓNatIsoSheafSections _ _
+        (IsTerminal.isTerminalOfObj
+          (MorphismProperty.Over.forget @AlgebraicGeometry.Etale ⊤ (Spec (.of Ω)))
+          (Scheme.Etale.mk (𝟙 (Spec (.of Ω)))) Over.mkIdTerminal)).hom.app
+            ((lowerStar (ModuleCat.{u + 1} Λ) f').obj
+              ((upperStar (ModuleCat.{u + 1} Λ) g').obj F)) ≫
+      (Scheme.pointSmallEtale (𝟙 (Spec (.of Ω)))).toPresheafFiber
+        (Scheme.Etale.mk (𝟙 (Spec (.of Ω))))
+        (Over.homMk (𝟙 _) (Category.comp_id _))
+        ((lowerStar (ModuleCat.{u + 1} Λ) f').obj
+          ((upperStar (ModuleCat.{u + 1} Λ) g').obj F)).obj
+  change _ = e.hom ≫ e₀.hom ≫ r ≫ b
+  apply (Iso.inv_comp_eq e).1
+  let N := (equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse ⋙
+    Scheme.strictHenselizationAffineInclusion s ⋙ ObjectProperty.ι
+      (fun n : (Scheme.pointSmallEtale s).fiber.Elements ↦ IsAffine n.1.left)
+  have : N.Initial := (Scheme.strictHenselization_properties s).1
+  let c := ((Scheme.pointSmallEtale s).presheafFiberCocone P.obj).whisker N.op
+  let hc : IsColimit c :=
+    (Functor.Final.isColimitWhiskerEquiv N.op _).symm
+      ((Scheme.pointSmallEtale s).isColimitPresheafFiberCocone P.obj)
+  apply hc.hom_ext
+  intro j
+  change (Scheme.pointSmallEtale s).toPresheafFiber _ _ P.obj ≫
+    (e.inv ≫ _) = (Scheme.pointSmallEtale s).toPresheafFiber _ _ P.obj ≫ (e₀.hom ≫ r ≫ b)
+  have he := exchange_pointed_representative Λ sq.toCommSq F
+    ((Scheme.AffineEtale.Spec Y).obj
+        ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j.unop).1)
+    ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j.unop).2
+  let V := (Scheme.AffineEtale.Spec Y).obj
+    ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j.unop).1
+  let v := ((equivSmallModel.{u}
+    (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j.unop).2
+  let p := pullback.fst f (Scheme.strictHenselizationStructuralMap s)
+  let l := (pullbackSymmetry f (Scheme.strictHenselizationStructuralMap s)).hom ≫
+    Scheme.smallStrictHenselizationBaseChangeMap f s j.unop
+  have hl : l ≫ (f.Etale.obj V).hom = p := by
+    change l ≫ pullback.snd _ f = p
+    simp only [l, p, Category.assoc,
+      Scheme.smallStrictHenselizationBaseChangeMap_snd, pullbackSymmetry_hom_comp_snd]
+  have hr := unitSectionRestriction_comp Λ q p g' hq.symm F (f.Etale.obj V) l hl
+  have hg : etaleSectionGraph g' (f.Etale.obj V) (q ≫ l)
+      (by rw [Category.assoc, hl, ← hq]) = geometricFibreSectionLift sq.toCommSq V v := by
+    apply MorphismProperty.Over.Hom.ext
+    apply pullback.hom_ext
+    · simp only [etaleSectionGraph, geometricFibreSectionLift,
+        MorphismProperty.Over.homMk_hom, Over.homMk_left, pullback.lift_fst]
+      apply pullback.hom_ext
+      · simp only [l, Category.assoc, pullback.lift_fst]
+        rw [Scheme.smallStrictHenselizationBaseChangeMap_fst]
+        simp only [← Category.assoc, pullbackSymmetry_hom_comp_fst]
+        rw [hqt]
+        simp only [Category.assoc]
+        rw [← Scheme.isoSpec_Spec_inv, hpoint j.unop]
+      · simp only [pullback.lift_snd]
+        change (q ≫ l) ≫ (f.Etale.obj V).hom = g'
+        rw [Category.assoc, hl, hq]
+    · exact (etaleSectionGraph g' (f.Etale.obj V) (q ≫ l)
+        (by rw [Category.assoc, hl, ← hq])).w.trans
+        (geometricFibreSectionLift sq.toCommSq V v).w.symm
+  have heq : unitSectionRestriction Λ g' F (f.Etale.obj V) (q ≫ l)
+      (by rw [Category.assoc, hl, ← hq]) =
+      geometricFibreSectionRestriction Λ sq.toCommSq F V v ≫
+        (Sheaf.ΓNatIsoSheafSections _ _
+          (IsTerminal.isTerminalOfObj
+            (MorphismProperty.Over.forget @AlgebraicGeometry.Etale ⊤ X')
+            (Scheme.Etale.mk (𝟙 X')) Over.mkIdTerminal)).inv.app
+              ((upperStar (ModuleCat.{u + 1} Λ) g').obj F) := by
+    unfold unitSectionRestriction
+    rw [hg]
+    rfl
+  have hr := hr.trans heq
+  have h := congrArg (fun k ↦ k ≫ r ≫ b) (he₀ j.unop)
+  simpa only [r, b, e, P, N, Scheme.strictHenselizationAffineInclusion,
+    Functor.comp_obj, Functor.op_obj, ObjectProperty.ι, ObjectProperty.lift,
+    Functor.Elements.precomp, inducedFunctor, Functor.elementsMk, Category.assoc] using
+    (he.trans (congrArg (fun k ↦ k ≫ b) hr).symm).trans h.symm
+
 
 end AlgebraicGeometry.Etale
