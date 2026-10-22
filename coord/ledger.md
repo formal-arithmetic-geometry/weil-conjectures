@@ -24201,3 +24201,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:32 L: merged deliver/NS/lem-sfb-normal-integral-finite-sheaf-norm (reviewer PASS; first push; new nodes: 2)
 - 01:33 L: returned deliver/C2/Sheaf.Paper.RingedProjectionRestriction (reviewer RETURN: (the landing tools, head b43e339e3) the delivery did not land: (d) user Sheaf.Paper.AffineDiagonalTensorCoordinates (men)
 - 01:33 L: returned deliver/F5/Sheaf.Paper.CompletedOperationTowerSubstitution (reviewer RETURN: (the landing tools, head 305fcaa04) the delivery did not land: (d) user Sheaf.Paper.AffineSpaceCoordinateBoundaries (men)
+- 01:33 L: merged deliver/A2/Sheaf.SecSmoothPurity.ScalarExtensionFunctor (stage 3; reviewer PASS; after a return; landing 20261022T013341-L-3548851 (interface); batch 20261022T013339; modules 1; new nodes 0; change records: coord/changes/A2-scalar-extension-functor-proof-context.md)

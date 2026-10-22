@@ -26,8 +26,9 @@
  ],
  "proof": [
   {
-   "text": "[lem-pur-derived-change-of-rings] for $A_T\\to B_T$ supplies (1), including target-ring action, maps and exactness. Choose a flat-term K-flat representative by [lem-pc-kflat-resolution].",
+   "text": "Use the published reductionDerivedExistence and its universal counit. Naturality on cochain representatives is the naturality equation of the quotient-factorized counit. K-flat invertibility is scalarCounit_isIso.",
    "uses": [
+    "def-weil-pbc-adic-coefficient-datum",
     "lem-pur-derived-change-of-rings",
     "lem-pc-kflat-resolution"
    ],
@@ -38,11 +39,18 @@
    }
   },
   {
-   "text": "For every $B_T$-module $N$, [lem-trf-site-derived-tensor-restriction] identifies $\\operatorname{Res}(K_B\\otimes^L_{B_T}N)$ with $K\\otimes^L_{A_T}\\operatorname{Res}N$. Exact conservative restriction [lem-weil-pbc-restriction-derived-products] and [def-weil-proetale-tor-amplitude] give the same interval $[a,b]$. Testing $N=B_T$ gives boundedness.",
+   "text": "Compare the stated Tor test with the native derived tensor test through QObjTensorSingleFunctorObjIso and a K-flat resolution. The native bounded flat-model theorem gives a representative supported in [a,b]. Ordinary coefficient extension preserves flatness and K-flatness, hence preserves this representative and the same Tor interval. Its support gives bounded cohomology.",
    "uses": [
-    "lem-trf-site-derived-tensor-restriction",
-    "lem-weil-pbc-restriction-derived-products",
-    "def-weil-proetale-tor-amplitude"
+    "lem-weil-pbc-source-kflat-tensor-single-model",
+    "lem-sc-source-tor-amplitude-flat-model",
+    "lem-trf-source-bounded-flat-tor-amplitude",
+    "lem-trf-site-functorial-flat-resolution",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-independent-bounded-flat-kflat",
+    "lem-pur-kflat-change-of-rings-independent",
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "def-pur-site-sheaf-tensor-presentation-data"
    ],
    "elementary": false,
    "source": {
@@ -51,12 +59,13 @@
    }
   },
   {
-   "text": "Refine the finitely many input cohomology stratifications by [lem-weil-pbc-constructible-stratification-intersection], using $T$ for the zero complex. [lem-sp-stratum-scalar-extension] retains finite constant models on refinements. Apply [lem-sp-restricted-scalar-cohomology-local-constancy] to each stratum: its finite $B$-module models witness constructibility [def-weil-proetale-constructible-sheaf]. With step 2 this proves (2).",
+   "text": "Use the proved common_stratification helper for the finitely many nonzero input cohomology sheaves. Uniqueness of universal left derived functors compares the published scalar functor with the cochain-model scalar functor. On every stratum restrictedScalarCohomology_finiteLocalModels gives finite constant B-module models. ConstantScalarComparison and finiteLocal_iff turn these into the intrinsic locally constant and finite geometric-stalk predicates.",
    "uses": [
+    "lem-pur-finite-tensor-constructible-cohomology",
     "lem-weil-pbc-constructible-stratification-intersection",
-    "lem-sp-stratum-scalar-extension",
     "lem-sp-restricted-scalar-cohomology-local-constancy",
-    "def-weil-proetale-constructible-sheaf"
+    "lem-weil-pbc-proetale-constant-module-constructibility",
+    "lem-weil-proetale-dbc-triangulated"
    ],
    "elementary": false,
    "source": {
@@ -65,22 +74,31 @@
    }
   },
   {
-   "text": "Locally write $s_i=b_i e$ in a basis of $L$. A relation $\\sum a_i s_i=0$ gives $\\sum a_i b_i=0$, proving flatness by [lem-weil-pbc-site-flat-equational-criterion]. Then [lem-weil-pbc-independent-bounded-flat-kflat] makes $L[0]$ K-flat. Step 1 computes $L_B=L\\otimes_{A_T}B_T$; in a local basis this is $B_T$.",
+   "text": "Tensoring with a rank-one sheaf is an equivalence, with inverse tensoring with its dual, so it is exact. The single-complex tensor comparison makes its degree-zero complex K-flat. ScalarExtensionDual_localIsomorphism shows ordinary extension remains rank one. Apply primitive-root local models and signedLineTensor_equivalence to all Tate lines.",
    "uses": [
-    "lem-weil-pbc-site-flat-equational-criterion",
-    "lem-weil-pbc-independent-bounded-flat-kflat"
+    "lem-weil-signed-line-tensor-equivalence",
+    "lem-sp-scalar-extension-dual-local-iso",
+    "lem-pur-twist-root-local-models",
+    "lem-pur-twist-sheaf-locally-free",
+    "def-pur-site-sheaf-tensor-presentation-data"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sp-scalar-extension/sk-def-sp-scalar-extension-functor.proof.md",
     "place": "(3), flat rank-one sheaves"
    }
   },
   {
-   "text": "The finite clauses of [det-def-sp-tate-twist-locally-free] (take $E=\\mathbf Q_\\ell$) identify the stated twists with the signed lines of [lem-sp-signed-tate-coefficient-exponent-normalization]. Its normalized isomorphisms give ordinary Tate scalar extension in every signed degree; its exponent square makes the comparison independent of $m$. Step 4 identifies this ordinary comparison with the derived one, proving (3).",
+   "text": "For degree one use the proved normalized scalar tensor tower and composition of constant coefficient ring maps. Construct positive coefficient powers recursively from scalarTensorBinaryIso and the degree-one isomorphism, using the first and second tensor-map formulas. For negative powers scalarExtensionDual_localIsomorphism makes the dual map invertible; compose it with precomposition by the inverse positive comparison. The proved dual evaluation formula cancels that inverse. Pure-tensor generation proves positive uniqueness and evaluation after the positive comparison proves negative uniqueness. Compare explicit extension with ordinary extension by ScalarHomOrdinary.extensionIso. The finite Kummer clause of tateTwist_locallyFree supplies the level-one isomorphism; tensor powers and inverse duals give the signed level family. The coefficient/exponent square holds on roots and positive tensors; both negative paths have equal evaluations on the positive comparison, and pure tensors give the ordinary square.",
    "uses": [
+    "lem-sfb-scalar-ordinary-tensor-comparison",
+    "def-sfb-sheaf-tensor-pure-section",
     "det-def-sp-tate-twist-locally-free",
-    "lem-sp-signed-tate-coefficient-exponent-normalization"
+    "def-sp-canonical-scalar-extension-maps",
+    "lem-sp-scalar-extension-binary-coherence",
+    "lem-sp-scalar-extension-dual-evaluation",
+    "lem-sp-scalar-extension-dual-tower-core",
+    "lem-sp-scalar-extension-dual-local-iso"
    ],
    "elementary": false,
    "source": {
@@ -89,10 +107,11 @@
    }
   },
   {
-   "text": "[lem-sfb-successive-derived-quotient-normalization] for $A_T\\to B_T\\to C_T$ gives $\\alpha_K$ and naturality on derived morphisms. Its iterated-comparison equality proves associativity. For $g=\\mathrm{id}_B$ its formula $(p\\otimes b)\\otimes c\\mapsto p\\otimes bc$ is the tensor unitor [def-pur-sheaf-tensor-product], proving (4).",
+   "text": "Use the published normalized derivedReductionComposition. Its naturality is automatic. Uniqueness of this comparison identifies the identity coefficient extension with the normalized ordinary tensor unitor from FieldStageOrdinaryRealization. Associativity is checked on cochain pure tensors and then descended by derived_natTrans_ext, using flat-term K-flat resolutions and cancellation of invertible counits.",
    "uses": [
-    "lem-sfb-successive-derived-quotient-normalization",
-    "def-pur-sheaf-tensor-product"
+    "def-weil-pbc-adic-coefficient-datum",
+    "lem-sf-field-stage-ordinary-realization",
+    "lem-pc-kflat-resolution"
    ],
    "elementary": false,
    "source": {
@@ -102,26 +121,40 @@
   }
  ],
  "proof_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
   "lem-pur-derived-change-of-rings",
   "lem-pc-kflat-resolution",
-  "lem-trf-site-derived-tensor-restriction",
-  "lem-weil-pbc-restriction-derived-products",
-  "def-weil-proetale-tor-amplitude",
-  "lem-weil-pbc-constructible-stratification-intersection",
-  "lem-sp-stratum-scalar-extension",
-  "lem-sp-restricted-scalar-cohomology-local-constancy",
-  "def-weil-proetale-constructible-sheaf",
-  "lem-weil-pbc-site-flat-equational-criterion",
+  "lem-weil-pbc-source-kflat-tensor-single-model",
+  "lem-sc-source-tor-amplitude-flat-model",
+  "lem-trf-source-bounded-flat-tor-amplitude",
+  "lem-trf-site-functorial-flat-resolution",
   "lem-weil-pbc-independent-bounded-flat-kflat",
+  "lem-pur-kflat-change-of-rings-independent",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "def-pur-site-sheaf-tensor-presentation-data",
+  "lem-pur-finite-tensor-constructible-cohomology",
+  "lem-weil-pbc-constructible-stratification-intersection",
+  "lem-sp-restricted-scalar-cohomology-local-constancy",
+  "lem-weil-pbc-proetale-constant-module-constructibility",
+  "lem-weil-proetale-dbc-triangulated",
+  "lem-weil-signed-line-tensor-equivalence",
+  "lem-sp-scalar-extension-dual-local-iso",
+  "lem-pur-twist-root-local-models",
+  "lem-pur-twist-sheaf-locally-free",
+  "lem-sfb-scalar-ordinary-tensor-comparison",
+  "def-sfb-sheaf-tensor-pure-section",
   "det-def-sp-tate-twist-locally-free",
-  "lem-sp-signed-tate-coefficient-exponent-normalization",
-  "lem-sfb-successive-derived-quotient-normalization",
-  "def-pur-sheaf-tensor-product"
+  "lem-sf-field-stage-ordinary-realization",
+  "def-sp-canonical-scalar-extension-maps",
+  "lem-sp-scalar-extension-binary-coherence",
+  "lem-sp-scalar-extension-dual-evaluation",
+  "lem-sp-scalar-extension-dual-tower-core"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sp-scalar-extension/sk-def-sp-scalar-extension-functor.md",
-  "place": "Proof paragraphs (1)--(4), expanded with Stacks 06YS, 06YY, 0G7E, 094H, 03EL and 06YQ; paragraph (2) uses stratified local-constant tensor rather than an unjustified global constructible flat model"
+  "place": "Constructed from the published universal scalar functor, native bounded flat models and intrinsic finite local models. Signed Tate comparisons use proved binary tensor and dual-evaluation maps directly; no cyclic Tate normalization child or holed generic signed-line comparison is imported."
  },
  "mathlib_searches": [
   {
@@ -315,5 +348,15 @@
   "date": "2026-10-17",
   "existing": false,
   "note": "Repair of returned a4717a1495b7: retain the published scalarExtension; state actual K-flat counit computations and morphism maps, constructibility and unchanged Tor bounds without flatness, ordinary rank-one extension, canonically normalized signed Tate base change with Kummer exponent independence, and uniquely normalized composition, its naturality, identity unitor and associativity coherence. All helpers belong to the four clauses of this definition node."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261022T013341-L-3548851",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
