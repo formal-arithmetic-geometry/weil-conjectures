@@ -24129,3 +24129,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:55 L: returned deliver/NC/lem-sfb-ultrametric-orthogonal-extension (reviewer RETURN: L: independent stage-2 immutable head 6a65a0f73fb7: A7/A6 (H2 credit): tenth NC head 6a65a0f73fb7 of lem-sfb-ultrametric)
 - 00:59 L: returned deliver/ND/lem-sfb-tame-snc-quotient-resolution (reviewer RETURN: 5th push of this item. NM 966655f0, NJ ca6120ce, NC 08353e52 and NK 00a16f01 were all RETURNed C1/F+C5/B9+G4. The report)
 - 00:59 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
+- 01:00 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
