@@ -50,9 +50,9 @@
    }
   },
   {
-   "text": "For an open $j$, apply [lem-pd-section-derived-open-adjunction-normalization]. It identifies extension by zero, the canonical derived open Hom bijection, unit and counit under the fixed section and pullback comparisons. With $e=D(j_!)$, the adjoint-of-unit open projection is $\\varepsilon_{eK\\otimes L}\\,e(\\mu_{eK,L})\\,e(\\eta_K\\otimes1)$. The cited comparison identifies $e,\\eta,\\varepsilon$, and Step 3 identifies the tensor and actual $\\mu_j$; hence it identifies each factor and their composite.",
+   "text": "For an open j, openComparison_existsUnique in lem-sfb-internal-module-operations-transport normalizes the chosen ordinary extension comparison as the inverse mate of upperComparison. Its choice specification and Mathlib unit_mateEquiv give the ordinary unit square directly, without using the broad transport theorem. Apply Adjunction.mapDerivedCategoryAdjunction_mate to this square: extension by zero and pullback are exact, so their levelwise localization identifies the specified derived open Hom bijections. Insert the canonical left-derived-pullback comparison and cancel its inverse, obtaining open_homEquiv. Evaluating on identity maps gives the derived unit square. Inverting the tensor square from Step 3 and applying the general projection-map mate identity identifies the actual adjoint-of-unit open projection morphisms. No separately normalized derived open adjunction theorem is needed.",
    "uses": [
-    "lem-pd-section-derived-open-adjunction-normalization"
+    "lem-sfb-internal-module-operations-transport"
    ],
    "elementary": false,
    "source": {
@@ -62,7 +62,6 @@
   }
  ],
  "proof_deps": [
-  "lem-pd-section-derived-open-adjunction-normalization",
   "lem-pd-section-derived-pushpull-normalization",
   "lem-pd-section-derived-tensor-normalization",
   "lem-pd-section-ordinary-oplax-normalization",
@@ -74,7 +73,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Short assembly of the refined comparison lemmas; Tags 07A4, 07A6, 0FPI, 0B56, with sites-modules.tex Tags 03DI and 03DJ."
+  "place": "Short assembly of the refined comparison lemmas; Tags 07A4, 07A6, 0FPI, 0B56, with sites-modules.tex Tags 03DI and 03DJ. The open clause instead localizes the ordinary module-operations unit square directly with mapDerivedCategoryAdjunction_mate; projection-square cancellation and inversion are proved in private categorical helpers."
  },
  "stmt_deps": [
   "sk-def-sfb-dc-setting",
@@ -542,32 +541,14 @@
   ]
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "M3",
+  "reviewer": "COMPILER",
+  "group": "B6",
   "result": "pass",
-  "landing": "20261019T005342-L-2756163",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.composition_comparison",
-   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.delta_comparison",
-   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.derived_homEquiv",
-   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.internalDelta_isIso",
-   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.module_ringed_topos_derived_comparison",
-   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.mu_comparison",
-   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.openProjection_comparison",
-   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.open_homEquiv",
-   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.ordinary_exact_flat_kflat",
-   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.ordinary_monoidal",
-   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.projection_comparison"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.composition_comparison",
-   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.delta_comparison",
-   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.derived_homEquiv"
-  ]
+  "landing": "20261022T022019-L-428771",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "lean_audit": {}
 }
