@@ -1,8 +1,8 @@
 # Work queue
 
-40 items; claim with `tools/claim.py next <group> [--stage N]`.
+44 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Rework: quarantined by the upstream sync (4 clusters, 267 modules)
+## Rework: quarantined by the upstream sync (3 clusters, 267 modules)
 
 Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.tsv). One item per cluster: its root (a quarantined module importing no other quarantined one) and the quarantined modules importing it; fix the root, then the dependents as far as possible, deliver every module that compiles.
 
@@ -10,12 +10,11 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 |---|---|---|---|
 | `Sheaf.PoincareDuality.ProperProjectionFormulaBounded` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.SmoothProperPrimeSpecialization` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
-| `Sheaf.AlgebraicGeometry.PerfectOverlapHomContinuity` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.RelativelyFlatTensorBaseChangeIso` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 
 Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 53, stage 3 1 items.
 
-## Stage 1: nodes to split (9)
+## Stage 1: nodes to split (13)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -23,21 +22,26 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-affine-profinite-family-serre-cd` | 2009 | none |
 | `lem-sfb-punctured-spectral-neighborhood-dimension` | 2011 | none |
 | `lem-sfb-quasi-compact-restriction-acyclicity` | 2011 | none |
-| `lem-sfb-equivariant-smooth-galois-model` | 4012 | none |
 | `lem-sfb-tame-snc-quotient-resolution` | 4012 | none |
+| `lem-sfb-admissible-finite-type-field-quotient` | 4013 | none |
+| `lem-sfb-common-field-semilinear-induction` | 4013 | none |
+| `lem-sfb-equivariant-nodal-smooth-pair-resolution` | 4013 | none |
+| `lem-sfb-equivariant-plurinodal-field-alteration` | 4013 | none |
+| `lem-sfb-galois-component-presentation` | 4013 | none |
 | `lem-sfb-ramified-cartier-supported-purity` | 4013 | none |
 | `lem-sfb-norm-completion-positive-cohomology-mono` | 4014 | none |
 | `def-per-support-condition` | - | none |
 
-## Stage 2: nodes to state (3)
+## Stage 2: nodes to state (4)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
 | `def-sfb-finite-derived-adjunction` | 1 | state | 0 |
 | `lem-pe-internal-module-sectionwise-short-exact` | 1 | state | 0 |
+| `lem-sfb-equivariant-smooth-galois-model` | 1 | state | 0 |
 | `lem-sfb-spectral-space-cohomology-dimension` | 1 | state | 0 |
 
-Not open yet: 369 nodes that below a finished node, not needed, 87 nodes that wait for a statement dependency (bottom-up), 8 nodes that wait for stage 1 (statement downstream not grounded).
+Not open yet: 369 nodes that below a finished node, not needed, 87 nodes that wait for a statement dependency (bottom-up), 12 nodes that wait for stage 1 (statement downstream not grounded).
 
 ## Stage 3: modules to prove (18)
 
