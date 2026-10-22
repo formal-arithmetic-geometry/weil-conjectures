@@ -33,9 +33,24 @@
    "elementary": false
   },
   {
-   "text": "The invertibility theorem for a given map with those germ equations supplies IsIso. Apply asIso; its hom is the constructed map, so its representative formula is unchanged.",
+   "text": "Base change Spec.map of the inverse canonical small/full ring-colimit isomorphism and compose with pullback symmetry. This gives an isomorphism over X between the small-model target scheme and the full strict localization; its composite with every full-model leg equals the symmetry followed by the small-model leg, by definition.",
    "uses": [
-    "lem-weil-pbc-strict-local-module-restriction-isomorphism"
+    "def-weil-pbc-small-strict-local-section-maps"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply exists_moduleSectionsIsoTransport to this isomorphism over X. It gives a bijection from module global sections to the full-model set terminal sections and the formula for transported units and graphs. The forgetful functor preserves the filtered colimit defining the stalk, so sheafFiberCompIso gives the source bijection compatibly with germs.",
+   "uses": [
+    "lem-weil-pbc-module-sections-iso-transport",
+    "def-weil-pbc-geometric-stalks"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Conjugate the constructed linear map by these bijections. Its cocone fac equations, the coefficient-forgetting germ identity and the transported graph formula identify it with the unique official set comparison. That comparison is bijective. Cancel the source and target bijections and use ConcreteCategory.isIso_iff_bijective, then asIso. This proves invertibility inside the construction; the separate small-model restriction-isomorphism declaration is no longer needed.",
+   "uses": [
+    "lem-weil-pbc-sets-pushforward-stalk-strict-henselization"
    ],
    "elementary": false
   },
@@ -48,16 +63,17 @@
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-strict-henselization-base-change-cone",
+  "def-weil-pbc-small-strict-local-section-maps",
   "def-weil-pbc-strict-henselization-limit",
   "def-weil-pbc-geometric-stalks",
-  "lem-weil-pbc-strict-local-module-restriction-isomorphism",
-  "def-weil-pbc-small-strict-local-section-maps",
-  "lem-weil-pbc-strict-henselization-base-change-cone"
+  "lem-weil-pbc-module-sections-iso-transport",
+  "lem-weil-pbc-sets-pushforward-stalk-strict-henselization"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 03Q9, proof, degree-zero comparison and the canonical maps from neighbourhood sections"
+  "place": "Tag 03Q9, degree-zero continuity; canonical small/full colimit transport and unit compatibility, with invertibility proved within the module comparison construction"
  },
  "mathlib_searches": [
   {
@@ -138,14 +154,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "C-4dddc",
-  "group": "N4",
+  "reviewer": "C-dabe5",
+  "group": "S2",
   "result": "pass",
-  "landing": "20261021T203716-L-3857412",
+  "landing": "20261022T002436-L-1930859",
   "kind": "interface",
-  "note": "independent cc review: withdrawn item stub + item node retargeted to the WeilConjectures twin (statement matches) against retire-items row 2601 and the retirement hand-off; inlined naturality proof in the unclaimed consumer QcqsStrictLocalModuleComparison against the retired proof (compiled, axioms clean, signatures/definitions/public imports unchanged)"
+  "note": "independent cc review: withdrawn Sheaf stub + item node retargeted to WC twin (lean.statement verbatim in WeilConjectures/AlgebraicGeometry/QcqsStrictLocalRestrictionIsomorphism.lean) vs retire-items row 2733; consumer QcqsStrictLocalModuleComparison inlined IsIso proof vs removed theorem body (identical), signatures/defs/public imports vs live unchanged; adapted consumer compiled 14.8 s, axioms clean"
  },
  "lean_audit": {}
 }

@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.SmallStrictLocalSectionMaps
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 import WeilConjectures.AlgebraicGeometry.StrictHenselizationBaseChangeCone
-import Sheaf.AlgebraicGeometry.QcqsStrictLocalRestrictionIsomorphism
+import Sheaf.AlgebraicGeometry.ModuleSectionsIsoTransport
 
 /-! # The module-valued strict-local continuity comparison
 
@@ -99,6 +99,9 @@ def IsQcqsStrictLocalModuleComparison
       ((lowerStar (ModuleCat.{u + 1} Λ) f).obj F).obj ≫ a =
         qcqsStrictLocalSectionRestriction Λ f s F j
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+set_option backward.defeqAttrib.useBackward true in
 /-- Qcqs continuity for module coefficients, with its canonical representative formula.
 Source: Stacks Project, Tag 03Q9, degree zero; Tags 03D3 and 03D7 for inverse images.
 (blueprint: lem-weil-pbc-qcqs-strict-local-module-comparison).
@@ -207,7 +210,62 @@ theorem exists_qcqsStrictLocalModuleComparison
   have ha : IsQcqsStrictLocalModuleComparison Λ f s F a := by
     intro j
     exact hc.fac c (op j)
-  have : IsIso a := isIso_qcqsStrictLocalRestriction_of_formula Λ f s F a ha
+  have : IsIso a := by
+    classical
+    let U := forget (ModuleCat.{u + 1} Λ)
+    let H := (sheafCompose X.smallEtaleTopology U).obj F
+    let P := (lowerStar (ModuleCat.{u + 1} Λ) f).obj F
+    let : PreservesFilteredColimitsOfSize.{u, u} U :=
+      preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} U
+    let γ := (Scheme.pointSmallEtale s).sheafFiberCompIso U
+    let τ := pullback.map (Scheme.strictHenselizationStructuralMap s) f
+      (Scheme.strictLocalizationToBase s) f
+      (Spec.map (Scheme.smallStrictHenselizationColimitIso s).inv) (𝟙 X) (𝟙 Y)
+      (by simpa using (Scheme.smallStrictLocalization_toBase s).symm) (by simp)
+    have : IsIso τ := by dsimp [τ]; infer_instance
+    let σ := pullbackSymmetry f (Scheme.strictHenselizationStructuralMap s) ≪≫ asIso τ
+    have hg : σ.hom ≫ pullback.snd (Scheme.strictLocalizationToBase s) f =
+        pullback.fst f (Scheme.strictHenselizationStructuralMap s) := by
+      simp [σ, τ, Category.assoc]
+    have hleg (j : SmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)) :
+        σ.hom ≫ Scheme.strictHenselizationBaseChangeMap f s j =
+          (pullbackSymmetry f (Scheme.strictHenselizationStructuralMap s)).hom ≫
+            Scheme.smallStrictHenselizationBaseChangeMap f s j := by
+      simp only [σ, Iso.trans_hom, asIso_hom,
+        Scheme.smallStrictHenselizationBaseChangeMap, Category.assoc, τ]
+    obtain ⟨e, he⟩ := exists_moduleSectionsIsoTransport Λ σ
+      (pullback.snd (Scheme.strictLocalizationToBase s) f)
+      (pullback.fst f (Scheme.strictHenselizationStructuralMap s)) hg F
+    obtain ⟨_, Θ, _, hbij, huniq⟩ := sets_pushforward_stalk_strictHenselization f H s
+    let b := fun t ↦ e (ConcreteCategory.hom a ((γ.hom.app P) t))
+    have hb : b = Θ := by
+      apply huniq
+      intro j z
+      dsimp only [b]
+      have hγ := ConcreteCategory.congr_hom
+        ((Scheme.pointSmallEtale s).toPresheafFiber_presheafFiberCompIso_hom_app U
+          ((Scheme.AffineEtale.Spec Y).obj
+            ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).1)
+          ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).2
+          P.obj) z
+      change (γ.hom.app P) _ = _ at hγ
+      erw [hγ]
+      have h := ConcreteCategory.congr_hom (ha j) z
+      change ConcreteCategory.hom a _ = _ at h
+      erw [h]
+      have hv : Scheme.strictHenselizationBaseChangeMap f s j ≫ pullback.snd _ f =
+          pullback.snd (Scheme.strictLocalizationToBase s) f := pullback.lift_snd _ _ _
+      have ht := he (f.Etale.obj ((Scheme.AffineEtale.Spec Y).obj
+        ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).1))
+        (Scheme.strictHenselizationBaseChangeMap f s j) hv z
+      dsimp only at ht
+      simp only [hleg j] at ht
+      convert ht using 1 <;> simp only [Scheme.strictHenselizationSectionMap, H, U] <;> rfl
+    have hb' : Function.Bijective b := hb ▸ hbij
+    have hγbij := ConcreteCategory.bijective_of_isIso (γ.hom.app P)
+    apply (ConcreteCategory.isIso_iff_bijective a).mpr
+    exact (Function.Bijective.of_comp_iff _ hγbij).mp
+      ((e.comp_bijective _).mp hb')
   exact ⟨asIso a, ha⟩
 
 end AlgebraicGeometry.Etale

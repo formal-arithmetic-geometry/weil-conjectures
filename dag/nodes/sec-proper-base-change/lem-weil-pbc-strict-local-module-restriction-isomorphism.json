@@ -17,38 +17,20 @@
  ],
  "proof": [
   {
-   "text": "Base change Spec.map of the inverse canonical small/full ring-colimit isomorphism, using smallStrictLocalization_toBase, and compose with pullback symmetry. The resulting scheme isomorphism is over X, and its composite with each full-model leg equals pullback symmetry followed by the small-model leg, by the latter's definition.",
+   "text": "Apply the adopted bijectivity theorem to the given module map and its representative equations. Mathlib ConcreteCategory.isIso_iff_bijective turns that bijectivity into IsIso. The small-model consumer no longer uses this node: it verifies the official set comparison directly after canonical transport, without changing its definitions or statement.",
    "uses": [
-    "def-weil-pbc-small-strict-local-section-maps"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Apply exists_moduleSectionsIsoTransport along this isomorphism, obtaining a bijection from the given target module to the full-model terminal set sections and the formula for each neighbourhood restriction. The forgetful functor preserves the relevant filtered colimits; sheafFiberCompIso supplies the source bijection and its germ formula.",
-   "uses": [
-    "lem-weil-pbc-module-sections-iso-transport",
-    "def-weil-pbc-geometric-stalks"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Apply the uniqueness clause of the official sets_pushforward_stalk_strictHenselization theorem to the conjugated given map. The assumed representative equation, coefficient-forgetting germ identity, and transported graph formula verify its hypotheses. The canonical set map is bijective. Cancel the source and target bijections using Mathlib Function.Bijective.of_comp_iff and Equiv.comp_bijective; the concrete-category criterion proves the given module map is an isomorphism.",
-   "uses": [
-    "lem-weil-pbc-sets-pushforward-stalk-strict-henselization"
+    "lem-weil-pbc-strict-local-module-restriction-bijective"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-small-strict-local-section-maps",
-  "lem-weil-pbc-module-sections-iso-transport",
-  "def-weil-pbc-geometric-stalks",
-  "lem-weil-pbc-sets-pushforward-stalk-strict-henselization"
+  "lem-weil-pbc-strict-local-module-restriction-bijective"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 03Q9, degree-zero comparison; Tags 03D3 and 03D7 for coefficient and inverse-image transport; canonical small/full colimit isomorphism"
+  "place": "Tag 03Q9, degree zero; retirement to the adopted theorem and ConcreteCategory.isIso_iff_bijective"
  },
  "mathlib_searches": [
   {
@@ -97,14 +79,15 @@
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-iff",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.QcqsStrictLocalRestrictionIsomorphism",
-  "file": "lean/Sheaf/AlgebraicGeometry/QcqsStrictLocalRestrictionIsomorphism.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.QcqsStrictLocalRestrictionIsomorphism",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/QcqsStrictLocalRestrictionIsomorphism.lean",
   "declaration": "AlgebraicGeometry.Etale.isIso_qcqsStrictLocalRestriction_of_formula",
-  "statement": "theorem isIso_qcqsStrictLocalRestriction_of_formula (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f] {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ Y) (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (a : (Scheme.pointSmallEtale s).sheafFiber.obj ((lowerStar (ModuleCat.{u + 1} Λ) f).obj F) ⟶ (Sheaf.Γ (pullback f (Scheme.strictHenselizationStructuralMap s)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj ((upperStar (ModuleCat.{u + 1} Λ) (pullback.fst f (Scheme.strictHenselizationStructuralMap s))).obj F)) (ha : ∀ j : SmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s), (Scheme.pointSmallEtale s).toPresheafFiber ((Scheme.AffineEtale.Spec Y).obj ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).1) ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).2 ((lowerStar (ModuleCat.{u + 1} Λ) f).obj F).obj ≫ a = ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) (pullback.fst f (Scheme.strictHenselizationStructuralMap s))).unit.app F).hom.app (op (f.Etale.obj ((Scheme.AffineEtale.Spec Y).obj ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).1))) ≫ ((upperStar (ModuleCat.{u + 1} Λ) (pullback.fst f (Scheme.strictHenselizationStructuralMap s))).obj F).obj.map (MorphismProperty.Over.homMk (pullback.lift ((pullbackSymmetry f (Scheme.strictHenselizationStructuralMap s)).hom ≫ Scheme.smallStrictHenselizationBaseChangeMap f s j) (𝟙 _) (by change (pullbackSymmetry f (Scheme.strictHenselizationStructuralMap s)).hom ≫ Scheme.smallStrictHenselizationBaseChangeMap f s j ≫ pullback.snd _ f = _ simp only [Scheme.smallStrictHenselizationBaseChangeMap_snd, pullbackSymmetry_hom_comp_snd, Category.id_comp])) (pullback.lift_snd _ _ _)).op ≫ (Sheaf.ΓNatIsoSheafSections _ _ (IsTerminal.isTerminalOfObj (MorphismProperty.Over.forget @AlgebraicGeometry.Etale ⊤ (pullback f (Scheme.strictHenselizationStructuralMap s))) (Scheme.Etale.mk (𝟙 _)) Over.mkIdTerminal)).inv.app _) : IsIso a",
+  "statement": "theorem isIso_qcqsStrictLocalRestriction_of_formula\n    (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}} (f : X ⟶ Y)\n    [QuasiCompact f] [QuasiSeparated f]\n    {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ Y)\n    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))\n    (a : (Scheme.pointSmallEtale s).sheafFiber.obj\n        ((lowerStar (ModuleCat.{u + 1} Λ) f).obj F) ⟶\n      (Sheaf.Γ (pullback f (Scheme.strictLocalizationToBase s)).smallEtaleTopology\n        (ModuleCat.{u + 1} Λ)).obj\n        ((upperStar (ModuleCat.{u + 1} Λ)\n          (pullback.fst f (Scheme.strictLocalizationToBase s))).obj F))\n    (ha : ∀ j : SmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s),\n      (Scheme.pointSmallEtale s).toPresheafFiber\n        ((Scheme.AffineEtale.Spec Y).obj\n          ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).1)\n        ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).2\n        ((lowerStar (ModuleCat.{u + 1} Λ) f).obj F).obj ≫ a =\n  ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)\n    (pullback.fst f (Scheme.strictLocalizationToBase s))).unit.app F).hom.app\n      (op (f.Etale.obj ((Scheme.AffineEtale.Spec Y).obj\n        ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).1))) ≫\n    ((upperStar (ModuleCat.{u + 1} Λ)\n      (pullback.fst f (Scheme.strictLocalizationToBase s))).obj F).obj.map\n        (MorphismProperty.Over.homMk\n    (pullback.lift\n      ((pullbackSymmetry f (Scheme.strictLocalizationToBase s)).hom ≫\n        Scheme.strictHenselizationBaseChangeMap f s j)\n      (𝟙 _)\n      (by\n        change (pullbackSymmetry f (Scheme.strictLocalizationToBase s)).hom ≫\n          Scheme.strictHenselizationBaseChangeMap f s j ≫ pullback.snd _ f = _\n        simp only [Scheme.strictHenselizationBaseChangeMap, pullback.lift_snd,\n          pullbackSymmetry_hom_comp_snd, Category.id_comp]))\n    (pullback.lift_snd _ _ _)).op ≫\n    (Sheaf.ΓNatIsoSheafSections _ _\n      (IsTerminal.isTerminalOfObj\n        (MorphismProperty.Over.forget @AlgebraicGeometry.Etale ⊤\n          (pullback f (Scheme.strictLocalizationToBase s)))\n        (Scheme.Etale.mk (𝟙 _)) Over.mkIdTerminal)).inv.app _) : IsIso a",
   "branch": "sheaf-dag",
-  "by": "T1",
-  "date": "2026-10-12"
+  "by": "S2",
+  "date": "2026-10-22",
+  "note": "Retired the Sheaf duplicate in favor of the adopted theorem on strictLocalizationToBase. The former small-model consumer proves invertibility inside its own comparison construction, using the canonical small/full colimit isomorphism and exists_moduleSectionsIsoTransport. Its complete public interface is unchanged; no equality of the two scheme presentations is assumed."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -117,14 +100,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "C-68254",
-  "group": "W2",
+  "reviewer": "C-dabe5",
+  "group": "S2",
   "result": "pass",
-  "landing": "20261021T225232-L-3803112",
+  "landing": "20261022T002436-L-1930859",
   "kind": "interface",
-  "note": "independent cc review: retired Sheaf copy vs WeilConjectures twin (node lean.statement verbatim); adapted QcqsStrictLocalRestrictionIsomorphism signature vs live clone, compiled in sandbox with ModuleSectionsIsoTransport (23.1 s, axioms clean); node field diffs vs live"
+  "note": "independent cc review: withdrawn Sheaf stub + item node retargeted to WC twin (lean.statement verbatim in WeilConjectures/AlgebraicGeometry/QcqsStrictLocalRestrictionIsomorphism.lean) vs retire-items row 2733; consumer QcqsStrictLocalModuleComparison inlined IsIso proof vs removed theorem body (identical), signatures/defs/public imports vs live unchanged; adapted consumer compiled 14.8 s, axioms clean"
  },
  "lean_audit": {}
 }
