@@ -1,0 +1,120 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03DB; categorical finite-product interchange used in the proof of Bhatt–Scholze, Lemma 3.4.12."
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 3.4.12, pp. 22-23; finite direct-sum calculation of the quotient-tower units, written here as a general ringed-site argument. Explicit finite-power refinement of the product-cone proof."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteFreeQuotientCompletion",
+  "date": "2026-10-21",
+  "group": "S1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-scalar-extension-composition",
+   "place": "Proof, first paragraph: completed derived tensor on integral representatives and finite free coefficient extensions; Finite free transport of regular quotient completion units; Finite free basis comparison for the strict quotient system; Finite powers commute with forming complexes",
+   "via": [
+    "lem-pur-finite-free-quotient-completion",
+    "lem-weil-finite-free-completed-scalar-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "id": "lem-pur-finite-power-complex",
+ "title": "Finite powers commute with forming complexes",
+ "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian] and $d\\in\\mathbf N$. The finite categorical power functor $M\\mapsto\\prod_{i<d}M$ is additive, preserves every existing shape of limits, and preserves finite colimits. Applying it degreewise to a cochain complex $P$ gives a natural isomorphism to $\\prod_{i<d}P$. Its $i$th projection in degree $k$ is the ordinary $i$th projection of $\\prod_{i<d}P^k$. This includes the empty power $d=0$.",
+ "stmt_deps": [
+  "def-sp-abelian"
+ ],
+ "proof": [
+  {
+   "text": "Identify finite power with the constant diagram functor followed by the limit functor on Discrete (Fin d). The constant functor preserves limits and colimits; finite limits in an abelian category are exact for discrete finite shapes by biproducts. Thus finite power is additive and preserves limits and finite colimits.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Lift the degreewise coordinate projections to a chain map from the degreewise product complex into the categorical product. Evaluating in any degree and composing with the product comparison is the identity by product extensionality. Both this comparison and hence the evaluated chain map are isomorphisms. Componentwise isomorphisms give a complex isomorphism. Projection and naturality follow by product extensionality.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FinitePowerComplex",
+  "file": "lean/Sheaf/Paper/FinitePowerComplex.lean",
+  "declaration": "CategoryTheory.finitePowerComplexIso",
+  "statement": "def finitePowerComplexIso (d : ℕ) (P : CochainComplex A ℤ) : ((finitePowerFunctor d).mapHomologicalComplex (.up ℤ)).obj P ≅ ∏ᶜ fun _ : Fin d ↦ P",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-21",
+  "declarations": [
+   "CategoryTheory.finitePowerFunctor",
+   "CategoryTheory.finitePowerComplexMap",
+   "CategoryTheory.finitePowerComplexIso",
+   "CategoryTheory.finitePowerComplexIso_projection",
+   "CategoryTheory.finitePowerFunctorIso"
+  ]
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite categorical power functor commutes with cochain complexes and preserves finite colimits in an abelian category",
+   "results": "; 8 hits; CategoryTheory.Limits.PreservesFiniteColimits.casesOn, CategoryTheory.Limits.PreservesColimitsOfSize.preservesFiniteColimits, CategoryTheory.Functor.preservesFiniteColimits_iff_forall_exact_map_and_epi, CategoryTheory.ObjectProperty.preservesFiniteColimits, CategoryTheory.Functor.preservesHomologyOfExact, CategoryTheory.instPreservesFiniteColimitsObjFunctorExactFunctor, CategoryTheory.Functor.preservesFiniteColimits_of_preservesHomology, CategoryTheory.Limits.PreservesFiniteColimits; the finite-colimit APIs are in Mathlib.CategoryTheory.Limits.Preserves.Finite and Mathlib.Algebra.Homology.ShortComplex.ExactFunctor.",
+   "date": "2026-10-21",
+   "verdict": "no match: these supply component APIs, not this normalized comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite categorical power functor commutes with cochain complexes and preserves finite colimits in an abelian category",
+   "results": "; 8 hits; HomologicalComplex.instPreservesFiniteColimitsSingle, CategoryTheory.Functor.mapCochainComplexSingleFunctor, HomologicalComplex.instPreservesFiniteColimitsEvalOfHasFiniteColimits, CochainComplex.singleFunctors, CategoryTheory.preservesFiniteColimits_preadditiveYonedaObj_of_injective, CochainComplex.singleFunctor, CochainComplex.instAdditiveIntFunctorSingleFunctors, HomotopyCategory.composableArrowsFunctor",
+   "date": "2026-10-21",
+   "verdict": "no match: these supply component APIs, not this normalized comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomologicalComplex\", \"piComparison\"",
+   "results": "; 0 hits; ",
+   "date": "2026-10-21",
+   "verdict": "no match: these supply component APIs, not this normalized comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "finitePowerComplex|FiniteFreeScalarCoordinates|piComparison",
+   "results": "; 25 hits; Mathlib/Topology/Category/CompHausLike/SigmaComparison.lean, Mathlib/Topology/Category/TopCat/Yoneda.lean, Mathlib/Topology/Category/TopCat/Yoneda.lean, Mathlib/Topology/Category/TopCat/Yoneda.lean, Mathlib/Topology/Category/TopCat/Yoneda.lean, Mathlib/CategoryTheory/Galois/Decomposition.lean, Mathlib/CategoryTheory/Galois/IsFundamentalgroup.lean, Mathlib/CategoryTheory/Preadditive/Biproducts.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: these supply component APIs, not this normalized comparison."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261022T011928-L-3234189",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261022T011928-L-3234189",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

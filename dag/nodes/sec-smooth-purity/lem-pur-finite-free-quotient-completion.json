@@ -30,56 +30,31 @@
    }
   },
   {
-   "text": "Let $b_i$ ($1\\leq i\\leq d$) be the images of the standard basis under the given isomorphism, and let $\\lambda_i:S\\to R$ be its inverse coordinates. In every cochain degree the maps\n$$p\\otimes s\\longmapsto(\\lambda_i(s)p)_i,\\qquad (p_i)_i\\longmapsto\\sum_i p_i\\otimes b_i$$\nare inverse $R$-linear maps $U(Q)\\rightleftarrows P^{\\oplus d}$. The forward formula is balanced since $\\lambda_i(rs)=r\\lambda_i(s)$; the inverse identities follow from $s=\\sum_i\\lambda_i(s)b_i$ and $\\lambda_i(b_j)=\\delta_{ij}$. These restriction-compatible formulas extend uniquely through sheafification. They commute with differentials since the $b_i$ and $\\lambda_i$ are fixed coefficient maps. Denote this chain isomorphism by $\\alpha$. The empty sum gives the same conclusion for $d=0$.",
+   "text": "Apply lem-pur-finite-free-scalar-extension to construct the normalized scalar-extension isomorphism α. Apply lem-pur-finite-free-quotient-tower to this α to obtain the strict quotient-tower isomorphism τ. Evaluate τ and use the finite-product comparison to define θ_n; its normalization is exactly the quotient square required here. These steps need no regularity or derived-category hypothesis.",
    "uses": [
-    "def-pur-sheaf-tensor-product",
-    "def-weil-presheaf-modules-sheafification",
-    "def-pc-sheaf-restrict-scalars"
+    "lem-pur-finite-free-scalar-extension",
+    "lem-pur-finite-free-quotient-tower"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Section 03EK (section-tensor-product), sheafified sectionwise tensor; Tag 03CY (lemma-sheafification-presheaf-modules), universal property. Explicit basis calculation."
-   }
+   "elementary": false
   },
   {
-   "text": "For any module sheaf $M$ over $T=R$ or $S$, the maps $m\\otimes\\bar t\\mapsto tm\\bmod a^nM$ and $m\\bmod a^nM\\mapsto m\\otimes1$ identify $M\\otimes_T T/a^nT$ with $M/a^nM$. Balancing makes both well-defined and gives the inverse identities. These are maps of sheaves: quotient sections have lifts locally, the formulas are independent of lifts, and the sheafification universal property glues them. This uses the cited theorem's sheafified-cokernel description, not surjectivity on sections. Since $\\alpha(a^n q)=a^n\\alpha(q)$, it induces chain isomorphisms\n$$\\theta_n:U(Q\\otimes_S S/a^nS)\\xrightarrow{\\sim}(P\\otimes_R R/a^nR)^{\\oplus d}.$$\nFor $s=\\sum_i r_i b_i$ their formula is $\\theta_n((p\\otimes s)\\otimes\\bar z)=(p\\otimes\\overline{\\lambda_i(sz)})_i$, where $z$ is any local lift in $S$. Changing $z$ by $a^n w$ changes each coordinate by an $a^n$-multiple. Thus the formula is independent of that lift.",
+   "text": "Apply lem-pur-finite-power-roos-comparison to the additive, countable-product-preserving restriction functor U and the strict isomorphism τ. Its two coordinate formulas, followed by the evaluation product identity for θ_n, give both specified block formulas for β.",
    "uses": [
-    "def-pur-sheaf-tensor-product",
-    "def-weil-presheaf-modules-sheafification",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+    "lem-pur-finite-power-roos-comparison"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 03DA (lemma-abelian), 03CY (lemma-sheafification-presheaf-modules) and Section 03EK: quotient sheaves and balanced tensor calculation."
-   }
+   "elementary": false
   },
   {
-   "text": "Put $V_n=P\\otimes_R R/a^nR$ and $W_n=Q\\otimes_S S/a^nS$. The quotient transitions in these towers are reduction modulo the lower power. Reducing $\\lambda_i(sz)$ modulo $a^n$ after reducing modulo $a^{n+1}$ gives exactly the same coordinate as reducing it directly modulo $a^n$. Hence $\\theta_n$ intertwines every tower transition. Products are computed sectionwise, and finite sums equal finite products; the mutually inverse reindexings $((x_{n,i})_i)_n\\rightleftarrows((x_{n,i})_n)_i$ identify $\\prod_n V_n^{\\oplus d}$ with $(\\prod_n V_n)^{\\oplus d}$. They intertwine $s$, since its $n$-th coordinate is the transition applied to $x_{n+1,i}$, and therefore intertwine $1-s$. Apply this reindexing and $\\prod_n\\theta_n$ to both product blocks of the shifted cone. Each block map commutes with its differential and with $1-s$, so it commutes with the signed cone differential and its shift. This gives a chain isomorphism $\\beta:U(C_{S,a}(Q))\\cong C_{R,a}(P)^{\\oplus d}$, using exactly the cone model in the cited completion-unit statement.",
+   "text": "The regular quotient unit has zero shifted block and quotient augmentation in the other block, by the explicit Roos augmentation formula and koszulRepresentativeAugmentation_quotient. Project the claimed unit square to finite factor i, both Roos blocks, and tower level n. The first block is zero on both sides. The second is the quotient square for θ_n. The two blocks and all their product projections jointly detect equality of chain maps, proving the unit square in the displayed complexes.",
    "uses": [
-    "lem-weil-pbc-module-sheaves-colimits-forgetful",
-    "lem-pur-regular-quotient-completion-unit"
+    "lem-pur-regular-quotient-completion-unit",
+    "def-pur-principal-koszul-quotient-towers",
+    "def-weil-strict-roos-model"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03DB (lemma-limits-colimits): sectionwise products; the two-block cone calculation uses the model of lem-pur-regular-quotient-completion-unit."
-   }
+   "elementary": true
   },
   {
-   "text": "For every local $q\\in Q$, its image under the specified unit is $((q\\otimes1)_n,0)$ in the two product blocks. The quotient calculation gives $\\theta_n(q\\otimes1)=(\\alpha_i(q)\\otimes1)_i$. The cone comparison acts separately on its two blocks and therefore carries the zero shifted-product component to zero. Consequently\n$$\\beta\\,U(\\eta_{S,a,Q})=(\\eta_{R,a,P})^{\\oplus d}\\alpha$$\nas chain maps, not merely as maps to the unshifted product. The formulas also show that the identifications commute with every chain map in $P$.",
-   "uses": [
-    "lem-pur-regular-quotient-completion-unit"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 3.4.12, pp. 22-23, natural completion map; explicit quotient and zero-component refinement from the cited regular quotient unit statement."
-   }
-  },
-  {
-   "text": "Suppose $P$ is locally derived $(a)$-complete as in the hypothesis. Apply the regular quotient completion-unit criterion with coefficient ring $R$: $P$ is K-flat, multiplication by $a$ on $R$ is injective, and countable products of $R$-modules are exact, exactly as required. It makes $\\eta_{R,a,P}$ an isomorphism in $D(R)$, hence a quasi-isomorphism of the displayed complexes. A finite direct sum of this map is a quasi-isomorphism: kernels and images of its differentials are the coordinatewise finite sums, so its $k$-th cohomology map is $H^k(\\eta_{R,a,P})^{\\oplus d}$. The identity in step 5 and the chain isomorphisms $\\alpha,\\beta$ make $U(\\eta_{S,a,Q})$ a quasi-isomorphism. Step 1 then makes $\\eta_{S,a,Q}$ a quasi-isomorphism over $S$. This includes $d=0$, where both complexes are zero.",
+   "text": "Suppose $P$ is locally derived $(a)$-complete as in the hypothesis. Apply the regular quotient completion-unit criterion with coefficient ring $R$: $P$ is K-flat, multiplication by $a$ on $R$ is injective, and countable products of $R$-modules are exact, exactly as required. It makes $\\eta_{R,a,P}$ an isomorphism in $D(R)$, hence a quasi-isomorphism of the displayed complexes. A finite direct sum of this map is a quasi-isomorphism: kernels and images of its differentials are the coordinatewise finite sums, so its $k$-th cohomology map is $H^k(\\eta_{R,a,P})^{\\oplus d}$. The identity in step 4 and the chain isomorphisms $\\alpha,\\beta$ make $U(\\eta_{S,a,Q})$ a quasi-isomorphism. Step 1 then makes $\\eta_{S,a,Q}$ a quasi-isomorphism over $S$. This includes $d=0$, where both complexes are zero.",
    "uses": [
     "lem-pur-regular-quotient-completion-unit",
     "lem-weil-pbc-module-sheaves-colimits-forgetful",
@@ -92,32 +67,29 @@
    }
   },
   {
-   "text": "Apply K-flat change of rings to $P$ and $R\\to S$. Its hypotheses hold because $P$ is K-flat with flat terms; thus $Q$ is K-flat over $S$ with flat terms. Derived change of rings also identifies this $Q$ with $P\\otimes_R^{\\mathbf L}S$. Now apply the regular quotient completion-unit criterion over $S$: multiplication by the image of $a$ is injective and countable products of $S$-module sheaves are exact by hypothesis, and step 6 supplies its specified invertible unit. Its equivalence gives local derived $(a)$-completeness of $Q$ as an $S$-object, including the required internal-Hom vanishing on every slice for every local section in $(a)S$. This last use of the criterion avoids assuming that an arbitrary local element of $(a)S$ is the image of an element of $R$.",
+   "text": "K-flat change of rings with flat terms gives K-flatness of the displayed termwise extension Q. The regular quotient completion-unit criterion over S applies to Q, the given regular image of a, and exact countable products. The quasi-isomorphism of its prescribed unit obtained above therefore implies local derived principal completeness over S. No derived comparison is needed: the conclusion already names this concrete Q.",
    "uses": [
     "lem-pur-kflat-change-of-rings",
-    "lem-pur-derived-change-of-rings",
     "lem-pur-regular-quotient-completion-unit"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0G7E (lemma-pullback-K-flat) and Tag 06YY (lemma-derived-base-change), followed by the canonical-unit criterion from algebraization.tex, Tag 0A0E and Bhatt--Scholze Lemma 3.4.12."
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-module-sheaves-colimits-forgetful",
   "def-pc-sheaf-restrict-scalars",
-  "def-pur-sheaf-tensor-product",
-  "def-weil-presheaf-modules-sheafification",
+  "lem-pur-finite-free-scalar-extension",
+  "lem-pur-finite-free-quotient-tower",
+  "lem-pur-finite-power-roos-comparison",
   "lem-pur-regular-quotient-completion-unit",
-  "lem-pur-kflat-change-of-rings",
-  "lem-pur-derived-change-of-rings"
+  "def-pur-principal-koszul-quotient-towers",
+  "def-weil-strict-roos-model",
+  "lem-pur-kflat-change-of-rings"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Lemma 3.4.12, pp. 22-23, motivates the completion-unit criterion; the finite-free basis, quotient-tower, cone and unit identifications are the explicit ringed-site calculation here, using Stacks Tags 03CY, 03DA, 03DB, 03EK and 0G7E."
+  "place": "Bhatt--Scholze Lemma 3.4.12, pp. 22-23; explicit normalized basis/quotient-system comparison and two-block Roos transport. Completion follows by finite products of quasi-isomorphisms and reflection under exact restriction."
  },
  "mathlib_searches": [
   {
@@ -243,7 +215,7 @@
    "CategoryTheory.finiteFreeQuotientCompletion"
   ],
   "file": "lean/Sheaf/Paper/FiniteFreeQuotientCompletion.lean",
-  "statement": "theorem finiteFreeQuotientCompletion [HasDerivedCategory.{wR} (ringedSiteModules.{u, u, u, u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R))] [HasDerivedCategory.{wS} (ringedSiteModules.{u, u, u, u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj S))] [∀ V : C, HasDerivedCategory.{wR} (ringedSiteModules.{u, u, u, u} ((sheafCompose (J.over V) (forget₂ CommRingCat.{u} RingCat.{u})).obj (R.over V)))] [∀ V : C, HasDerivedCategory.{wS} (ringedSiteModules.{u, u, u, u} ((sheafCompose (J.over V) (forget₂ CommRingCat.{u} RingCat.{u})).obj (S.over V)))] [HasExactLimitsOfShape (Discrete ℕ) (ringedSiteModules.{u, u, u, u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R))] [HasExactLimitsOfShape (Discrete ℕ) (ringedSiteModules.{u, u, u, u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj S))] (φ : R ⟶ S) (d : ℕ) (e : (∏ᶜ fun _ : Fin d ↦ SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ≅ (SheafOfModules.restrictScalars.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).map φ)).obj (SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj S))) (a : (SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)).sections) (_haR : Mono (globalSectionMultiplication R a)) (_haS : Mono (globalSectionMultiplication S (finiteFreeCoefficientSection φ a))) (P : CochainComplex (ringedSiteModules.{u, u, u, u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ) (_hP : CochainComplex.IsKFlatIndependentCoefficients (R := R) P) (_hflat : ∀ k : ℤ, exactFunctor _ _ (tensorRight (P.X k))) : IsFiniteFreeQuotientCompletionComparison φ d e a P ∧ (IsLocallyDerivedRingedIdealComplete R (SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) (globalSectionMultiplication R a) (DerivedCategory.Q.{wR}.obj P) → IsLocallyDerivedRingedIdealComplete S (SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj S)) (globalSectionMultiplication S (finiteFreeCoefficientSection φ a)) (DerivedCategory.Q.{wS}.obj (SheafOfModules.changeOfRingsComplex.{u, u} φ P)))",
+  "statement": "theorem finiteFreeQuotientCompletion\n    [HasDerivedCategory.{wR} (ringedSiteModules.{u, u, u, u}\n      ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R))]\n    [HasDerivedCategory.{wS} (ringedSiteModules.{u, u, u, u}\n      ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj S))]\n    [∀ V : C, HasDerivedCategory.{wR} (ringedSiteModules.{u, u, u, u}\n      ((sheafCompose (J.over V) (forget₂ CommRingCat.{u} RingCat.{u})).obj (R.over V)))]\n    [∀ V : C, HasDerivedCategory.{wS} (ringedSiteModules.{u, u, u, u}\n      ((sheafCompose (J.over V) (forget₂ CommRingCat.{u} RingCat.{u})).obj (S.over V)))]\n    [HasExactLimitsOfShape (Discrete ℕ) (ringedSiteModules.{u, u, u, u}\n      ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R))]\n    [HasExactLimitsOfShape (Discrete ℕ) (ringedSiteModules.{u, u, u, u}\n      ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj S))]\n    (φ : R ⟶ S) (d : ℕ)\n    (e : (∏ᶜ fun _ : Fin d ↦ SheafOfModules.unit\n      ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ≅\n      (SheafOfModules.restrictScalars.{u}\n        ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).map φ)).obj\n          (SheafOfModules.unit\n            ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj S)))\n    (a : (SheafOfModules.unit\n      ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)).sections)\n    (_haR : Mono (globalSectionMultiplication R a))\n    (_haS : Mono (globalSectionMultiplication S (finiteFreeCoefficientSection φ a)))\n    (P : CochainComplex (ringedSiteModules.{u, u, u, u}\n      ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ)\n    (_hP : CochainComplex.IsKFlatIndependentCoefficients (R",
   "branch": "sheaf-dag",
   "by": "NM",
   "date": "2026-10-21",
@@ -256,5 +228,15 @@
   "group": "NM",
   "result": "pass",
   "note": "Only the item's lean field differs from side-live; no new nodes or dependency modules; dependency records identical; lean.statement verbatim; 7 declarations present; one sorry (main theorem). H3: small site and CommRingCat.{u} R→S; basis e : ∏ᶜ Fin d unit R ≅ restrictScalars φ (unit S); Mono of multiplication by a on R and by its image (via sectionsFunctor of φ) on S; exact countable products in both; IsKFlatIndependentCoefficients P plus termwise exact tensorRight (instance cochainModulesMonoidal, as in changeOfRings_isKFlat_of_flat_terms); Q = changeOfRingsComplex φ P; recorded regularQuotientCompletion and its unit. α pinned by toSheafify(s⊗p) ↦ λ_i(s)•p with λ_i = e.inv≫π_i; θ_n pinned by its square with the epi quotient map; β pinned on both cone blocks through roosχ; unit square as actual chain maps; IsLocallyDerivedRingedIdealComplete R→S implication matching the dependency criterion. Edge cases d=0, d=1, P=0, a a unit, a=0, empty site covered. No duplicate found (grep finiteFree in Sheaf and WeilConjectures, item id). Docstrings carry source, blueprint and 7 steps. No compile (no file changed); worker reports 20.0/34.1 s clean. Advisories: changeOfRingsComplex is owned by def-pur-change-of-rings-complex, which is not in stmt_deps (H2 blocks adding it; reuse is correct); global Prop-valued HasProduct instance at priority 1100."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261022T011928-L-3234189",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

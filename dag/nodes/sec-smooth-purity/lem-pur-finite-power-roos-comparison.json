@@ -1,0 +1,128 @@
+{
+ "id": "lem-pur-finite-power-roos-comparison",
+ "kind": "statement",
+ "title": "Normalized Roos transport to a finite power",
+ "statement": "Let $\\mathcal A,\\mathcal B$ be abelian categories with countable products, $F:\\mathcal A\\to\\mathcal B$ additive and preserving countable products, and $d\\in\\mathbf N$. Let $X$ and $Y$ be cochain complexes in $\\mathbf N^{\\mathrm{op}}\\to\\mathcal A$ and $\\mathbf N^{\\mathrm{op}}\\to\\mathcal B$, and let $\\tau:F(X)\\cong\\prod_{i<d}Y$ be an isomorphism of complexes of towers. There is an isomorphism $\\beta:F(\\operatorname{Roos}(X))\\cong\\prod_{i<d}\\operatorname{Roos}(Y)$ for the strict Roos model [def-weil-strict-roos-model]. For every $p\\in\\mathbf Z$, $n\\in\\mathbf N$, and $i<d$, composing $\\beta^{p+1}$ with the $i$th finite projection and the shifted (respectively unshifted) Roos block projection to tower term $n$ equals $F$ applied to the corresponding block projection for $X$, followed by the $i$th projection of the level isomorphism $\\theta_n=E_n(\\tau)$ composed with the canonical product comparison, in degree $p$ (respectively $p+1$). Thus both blocks have their prescribed product comparison. The statement includes $d=0$.",
+ "stmt_deps": [
+  "def-weil-strict-roos-model"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 3.4.12, pp. 22-23; finite direct-sum calculation of the quotient-tower units, written here as a general ringed-site argument."
+ },
+ "proof": [
+  {
+   "text": "The Roos functor is additive: project its product map onto each tower factor and use additivity componentwise. Its coordinate formula then identifies the map on the shifted cone with the sum of the two block maps. Consequently it preserves finite products, including the empty product.",
+   "uses": [
+    "def-weil-strict-roos-model"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the normalized additive-functor comparison to move F through the strict Roos complex. Compose with the Roos image of τ and with the canonical finite-product comparison isomorphism.",
+   "uses": [
+    "lem-pur-roos-additive-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For either block, project first to finite coordinate i and then to tower level n. Naturality of the product comparison, the strict-map coordinate formula and the additive-functor comparison give exactly the displayed equality. These identities apply also to d=0, when they have no finite coordinates. Evaluation of τ followed by the product comparison has the same coordinate as evaluating its ith projection; functoriality proves this identity in the abstract category.",
+   "uses": [
+    "def-weil-strict-roos-model",
+    "lem-pur-roos-additive-comparison"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-strict-roos-model",
+  "lem-pur-roos-additive-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 3.4.12, pp. 22-23; finite direct-sum calculation of the quotient-tower units, written here as a general ringed-site argument. Explicit finite-power refinement of the product-cone proof."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteFreeQuotientCompletion",
+  "date": "2026-10-21",
+  "group": "S1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-scalar-extension-composition",
+   "place": "Proof, first paragraph: completed derived tensor on integral representatives and finite free coefficient extensions; Finite free transport of regular quotient completion units; Normalized Roos transport to a finite power",
+   "via": [
+    "lem-pur-finite-free-quotient-completion",
+    "lem-weil-finite-free-completed-scalar-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FinitePowerRoosComparison",
+  "file": "lean/Sheaf/CategoryTheory/FinitePowerRoosComparison.lean",
+  "declaration": "CategoryTheory.finitePowerRoosComparison",
+  "statement": "theorem finitePowerRoosComparison\n    (F : A ⥤ B) [F.Additive] [PreservesLimitsOfShape (Discrete ℕ) F]\n    (d : ℕ) (X : CochainComplex (ℕᵒᵖ ⥤ A) ℤ)\n    (Y : CochainComplex (ℕᵒᵖ ⥤ B) ℤ)\n    (τ : ((((Functor.whiskeringRight ℕᵒᵖ A B).obj F).mapHomologicalComplex\n      (.up ℤ)).obj X) ≅ ∏ᶜ fun _ : Fin d ↦ Y) :\n    let E (n : ℕ) := ((evaluation ℕᵒᵖ B).obj (op n)).mapHomologicalComplex (.up ℤ)\n    let θ (n : ℕ) := (E n).mapIso τ ≪≫ PreservesProduct.iso (E n)\n      (fun _ : Fin d ↦ Y)\n    ∃ β : (F.mapHomologicalComplex (.up ℤ)).obj (roosF.obj X) ≅\n        ∏ᶜ fun _ : Fin d ↦ roosF.obj Y,\n      (∀ (p : ℤ) (n : ℕ) (i : Fin d),\n        (β.hom ≫ Pi.π (fun _ : Fin d ↦ roosF.obj Y) i).f (p + 1) ≫\n          (roosχ Y p).hom ≫ biprod.fst ≫\n            (Pi.π (fun n : ℕ ↦ Y.asFunctor.obj (op n)) n).f p =\n        F.map ((roosχ X p).hom ≫ biprod.fst ≫\n          (Pi.π (fun n : ℕ ↦ X.asFunctor.obj (op n)) n).f p) ≫\n          ((θ n).hom ≫ Pi.π (fun _ : Fin d ↦ Y.asFunctor.obj (op n)) i).f p) ∧\n      (∀ (p : ℤ) (n : ℕ) (i : Fin d),\n        (β.hom ≫ Pi.π (fun _ : Fin d ↦ roosF.obj Y) i).f (p + 1) ≫\n          (roosχ Y p).hom ≫ biprod.snd ≫\n            (Pi.π (fun n : ℕ ↦ Y.asFunctor.obj (op n)) n).f (p + 1) =\n        F.map ((roosχ X p).hom ≫ biprod.snd ≫\n          (Pi.π (fun n : ℕ ↦ X.asFunctor.obj (op n)) n).f (p + 1)) ≫\n          ((θ n).hom ≫ Pi.π (fun _ : Fin d ↦ Y.asFunctor.obj (op n)) i).f (p + 1))",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-21"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An additive functor preserving countable products commutes with mapping cones of one minus the tower transition map, naturally in maps of strict towers.",
+   "results": "; 8 hits; CochainComplex.mappingCone.mapHomologicalComplexIso, CochainComplex.mappingCone.mapHomologicalComplexXIso'_hom, CategoryTheory.Functor.preservesFiniteProductsOfAdditive, CochainComplex.mappingCone.map_δ, CochainComplex.mappingCone.mapHomologicalComplexXIso, HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory, CategoryTheory.Functor.instAdditiveOfIsHomological, CochainComplex.mappingCone.mapHomologicalComplexXIso'; the mapping-cone comparison is in Mathlib.Algebra.Homology.HomotopyCategory.MappingCone; it supplies generic cone transport, not the specified strict two-block comparison.",
+   "date": "2026-10-21",
+   "verdict": "no match: these supply component APIs, not this normalized comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive functor preserving countable products commutes with the strict Roos cone, and the Roos cone of a finite product of strict towers is the finite product of the cones.",
+   "results": "; 8 hits; CategoryTheory.Limits.SequentialProduct.cone, LightCondensed.instPreservesFiniteProductsOppositeLightProfiniteVal, CategoryTheory.Limits.SequentialProduct.cone_π_app_comp_Pi_π_neg_assoc, CategoryTheory.Limits.SequentialProduct.cone_π_app_comp_Pi_π_pos_assoc, CategoryTheory.Limits.SequentialProduct.cone_π_app_comp_Pi_π_neg, CategoryTheory.Limits.ProductsFromFiniteCofiltered.finiteSubproductsCone, CategoryTheory.Limits.SequentialProduct.cone_π_app_comp_Pi_π_pos, CategoryTheory.Limits.SequentialProduct.isLimit; SequentialProduct.cone is in Mathlib.CategoryTheory.Limits.Shapes.SequentialProduct.",
+   "date": "2026-10-21",
+   "verdict": "no match: these supply component APIs, not this normalized comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"piComparison\", \"PreservesProduct\"",
+   "results": "; 0 hits; ",
+   "date": "2026-10-21",
+   "verdict": "no match: these supply component APIs, not this normalized comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "roosF.*Additive|strictRoosAdditiveComparison|koszulRepresentativeQuotient",
+   "results": "; 0 hits; ",
+   "date": "2026-10-21",
+   "verdict": "no match: these supply component APIs, not this normalized comparison."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261022T011928-L-3234189",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261022T011928-L-3234189",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

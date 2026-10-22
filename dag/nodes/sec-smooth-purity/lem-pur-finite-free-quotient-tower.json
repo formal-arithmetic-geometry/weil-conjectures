@@ -1,0 +1,127 @@
+{
+ "id": "lem-pur-finite-free-quotient-tower",
+ "kind": "statement",
+ "title": "Strict quotient tower comparison induced by scalar coordinates",
+ "statement": "Let $R\\to S$ be a map of commutative ring sheaves on a small site, and let $U$ be restriction of scalars [def-pc-sheaf-restrict-scalars]. Fix $d\\in\\mathbf N$, cochain complexes $P$ of $R$-module sheaves and $Q$ of $S$-module sheaves, a global section $a$ of $R$, and an $R$-linear chain isomorphism $\\alpha:U(Q)\\cong P^d$. Let $X$ and $Y$ be the complexes of strict towers obtained by tensoring $Q$ and $P$ with the quotients by positive powers of the image of $a$ and of $a$ [def-pur-principal-koszul-quotient-towers]. There is a strict isomorphism $\\tau:U(X)\\cong Y^d$. Write $\\theta_n$ for its evaluation followed by the finite-product comparison and $q_{R,n},q_{S,n}$ for the prescribed quotient augmentations. Then $U(q_{S,n})\\theta_n=\\alpha(q_{R,n})^d$ for every $n\\in\\mathbf N$. Empty finite powers are allowed. No regularity, flatness or exactness of infinite products is assumed.",
+ "stmt_deps": [
+  "def-pc-sheaf-restrict-scalars",
+  "def-pur-principal-koszul-quotient-towers"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 3.4.12, pp. 22-23; finite direct-sum calculation of the quotient-tower units, written here as a general ringed-site argument."
+ },
+ "proof": [
+  {
+   "text": "Tensor with P preserves cokernels. The canonical unit isomorphism identifies the tensor of the degree-zero unit with P, so the quotient augmentation is the cokernel of the conjugated tensor action. In each degree this action is scalar multiplication by a^(n+1), by the single-complex tensor component formula, the unit constraints and sectionwise scalar multiplication. The map alpha is R-linear, and multiplication by the image of a on restricted S-modules is multiplication by a as an R-module. Hence alpha intertwines the two actions. Restriction of scalars preserves cokernels because forgetting to abelian sheaves preserves colimits and reflects them. Finite categorical power also preserves cokernels. Apply finite categorical power directly in the abelian category of complexes. The induced isomorphism of cokernels gives theta with the exact quotient square, without an additional degreewise-power comparison.",
+   "uses": [
+    "def-pur-principal-koszul-quotient-towers",
+    "def-pur-sheaf-tensor-product",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-pur-finite-power-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DA (lemma-abelian), 03CY (lemma-sheafification-presheaf-modules) and Section 03EK: quotient sheaves and balanced tensor calculation."
+   }
+  },
+  {
+   "text": "The quotient augmentation is epic, since it is a cokernel. Precompose each transition square with that augmentation; naturality of the quotient maps and their normalization reduce both sides to the same map from U(Q). Epic cancellation gives strict transition compatibility. Transpose the tower isomorphism into a complex of towers and use the canonical finite-product comparison to obtain τ. Evaluation recovers θ_n and its quotient square. Rank zero gives zero modules and an empty product throughout.",
+   "uses": [
+    "def-pur-principal-koszul-quotient-towers",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-principal-koszul-quotient-towers",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-pur-finite-power-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 3.4.12, pp. 22-23; finite direct-sum calculation of the quotient-tower units, written here as a general ringed-site argument. Explicit finite-power refinement of the product-cone proof."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteFreeQuotientCompletion",
+  "date": "2026-10-21",
+  "group": "S1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-scalar-extension-composition",
+   "place": "Proof, first paragraph: completed derived tensor on integral representatives and finite free coefficient extensions; Finite free transport of regular quotient completion units; Finite free basis comparison for the strict quotient system",
+   "via": [
+    "lem-pur-finite-free-quotient-completion",
+    "lem-weil-finite-free-completed-scalar-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteFreeQuotientTower",
+  "file": "lean/Sheaf/Paper/FiniteFreeQuotientTower.lean",
+  "declaration": "CategoryTheory.finiteFreeQuotientTower",
+  "statement": "theorem finiteFreeQuotientTower (φ : R ⟶ S) (d : ℕ)\n    (P : CochainComplex (SheafOfModules.{u} (𝓡 R)) ℤ)\n    (Q : CochainComplex (SheafOfModules.{u} (𝓡 S)) ℤ)\n    (α : ((restrictScalars.{u} (𝓻 φ)).mapHomologicalComplex (.up ℤ)).obj\n        Q ≅ ∏ᶜ fun _ : Fin d ↦ P)\n    (a : (unit (𝓡 R)).sections) :\n    let U := restrictScalars.{u} (𝓻 φ)\n    let UC := U.mapHomologicalComplex (.up ℤ)\n    let aS := (Functor.sectionsFunctor Cᵒᵖ).map\n      (Functor.whiskerRight φ.hom (forget CommRingCat.{u})) a\n    let X := koszulTowerComplex S (reductionTensorTower S Q aS)\n    let Y := koszulTowerComplex R (reductionTensorTower R P a)\n    ∃ τ : ((((Functor.whiskeringRight ℕᵒᵖ _ _).obj U).mapHomologicalComplex\n        (.up ℤ)).obj X) ≅ ∏ᶜ fun _ : Fin d ↦ Y,\n      ∀ n : ℕ,\n        let E := ((evaluation ℕᵒᵖ (SheafOfModules.{u} (𝓡 R))).obj (op n)).mapHomologicalComplex\n          (.up ℤ)\n        let θ := E.mapIso τ ≪≫ PreservesProduct.iso E (fun _ : Fin d ↦ Y)\n        UC.map (koszulRepresentativeQuotient S Q aS n) ≫ θ.hom =\n          α.hom ≫ Limits.Pi.map (fun _ : Fin d ↦ koszulRepresentativeQuotient R P a n)",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-21",
+  "declarations": [
+   "CategoryTheory.finiteFreeQuotientTower"
+  ]
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite free extension of sheaves of rings identifies scalar extension of complexes and the tower of principal quotient complexes with finite direct sums.",
+   "results": "; 8 hits; SheafOfModules.free, SheafOfModules.ιFree, SheafOfModules.freeFunctor_obj, Algebra.TensorProduct.instFree, Algebra.Extension.instIsScalarTowerRing_1, comonadicExtendScalars, SheafOfModules.pullbackObjFreeIso.congr_simp, Module.FinitePresentation.isLocalizedModule_mapExtendScalars; SheafOfModules.free is in Mathlib.Algebra.Category.ModuleCat.Sheaf.Free; pullbackObjFreeIso is in Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree.",
+   "date": "2026-10-21",
+   "verdict": "no match: these supply component APIs, not this normalized comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"tensor\"",
+   "results": "; 10 hits; PresheafOfModulesOfCommRing.Monoidal.tensorObj, PresheafOfModulesOfCommRing.Monoidal.tensorObj_obj, PresheafOfModulesOfCommRing.tensorObj_obj, PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorLeft, PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorRight, PresheafOfModulesOfCommRing.Monoidal.tensorHom, PresheafOfModulesOfCommRing.Monoidal.tensorObjMap, PresheafOfModulesOfCommRing.Monoidal.tensorHom_app",
+   "date": "2026-10-21",
+   "verdict": "no match: these supply component APIs, not this normalized comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "roosF.*Additive|strictRoosAdditiveComparison|koszulRepresentativeQuotient",
+   "results": "; 0 hits; ",
+   "date": "2026-10-21",
+   "verdict": "no match: these supply component APIs, not this normalized comparison."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261022T011928-L-3234189",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261022T011928-L-3234189",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
