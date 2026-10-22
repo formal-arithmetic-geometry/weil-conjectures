@@ -24286,3 +24286,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 10:06 L: batch 20261022T020048 dependency take-out
 - 2026-10-22T02:06:40Z L: superseded stage-1 delivery NO/lem-sfb-affine-invertible-finite-set-section at d283b6df7391afa90f8f7dd202d341cb72c64fde; current completion retained; packet archived at refs/superseded/NO/lem-sfb-affine-invertible-finite-set-section/d283b6df7391afa90f8f7dd202d341cb72c64fde; stale return retired.
 - 02:07 L: returned deliver/C2/Sheaf.Paper.RingedProjectionRestriction (reviewer RETURN: (reviewer C-870ff, head 870ff0b86) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.RingedProjecti)
+- 02:08 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
