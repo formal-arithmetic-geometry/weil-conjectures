@@ -1,6 +1,6 @@
 # Work queue
 
-42 items; claim with `tools/claim.py next <group> [--stage N]`.
+44 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Rework: quarantined by the upstream sync (3 clusters, 269 modules)
 
@@ -14,27 +14,29 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 
 Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 53, stage 3 1 items.
 
-## Stage 1: nodes to split (8)
+## Stage 1: nodes to split (9)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `lem-sfb-proper-wcontractible-closed-fibre-rigidity` | 2008 | none |
 | `lem-sfb-affine-profinite-family-serre-cd` | 2009 | none |
-| `lem-sfb-spectral-space-cohomology-dimension` | 2010 | none |
+| `lem-sfb-punctured-spectral-neighborhood-dimension` | 2011 | none |
+| `lem-sfb-quasi-compact-restriction-acyclicity` | 2011 | none |
 | `lem-sfb-equivariant-smooth-galois-model` | 4012 | none |
 | `lem-sfb-tame-snc-quotient-resolution` | 4012 | none |
 | `lem-sfb-ramified-cartier-supported-purity` | 4013 | none |
 | `lem-sfb-norm-completion-positive-cohomology-mono` | 4014 | none |
 | `def-per-support-condition` | - | none |
 
-## Stage 2: nodes to state (2)
+## Stage 2: nodes to state (3)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
 | `def-sfb-finite-derived-adjunction` | 1 | state | 0 |
 | `lem-pe-internal-module-sectionwise-short-exact` | 1 | state | 0 |
+| `lem-sfb-spectral-space-cohomology-dimension` | 1 | state | 0 |
 
-Not open yet: 369 nodes that below a finished node, not needed, 87 nodes that wait for a statement dependency (bottom-up), 7 nodes that wait for stage 1 (statement downstream not grounded).
+Not open yet: 369 nodes that below a finished node, not needed, 87 nodes that wait for a statement dependency (bottom-up), 8 nodes that wait for stage 1 (statement downstream not grounded).
 
 ## Stage 3: modules to prove (22)
 
