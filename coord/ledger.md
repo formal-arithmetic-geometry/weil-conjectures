@@ -24368,3 +24368,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:44 L: merged deliver/NL/lem-sfb-galois-component-presentation (reviewer PASS; first push; new nodes: 0)
 - 02:44 L: merged deliver/NO/lem-sfb-quasi-compact-restriction-acyclicity (stage 2; reviewer PASS; parallel immutable checks)
 - 02:44 L: merged deliver/NN/lem-sfb-punctured-spectral-neighborhood-dimension (stage 2; reviewer PASS; parallel immutable checks)
+- 02:44 L: returned deliver/N9/sk-thm-groth-ss (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-thm-groth-ss: sk-thm-groth-ss: completed in this pr)
