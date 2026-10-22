@@ -5,6 +5,9 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.CategoryTheory.ModuleObjects.RegularEnd
+public import WeilConjectures.CategoryTheory.RingObjects.GlobalSections
+public import WeilConjectures.Mathlib.CategoryTheory.Conj
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Braided
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.ProperLowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleBraided
@@ -37,15 +40,18 @@ functors on `Dᵇc(-)⟦Λ⟧` do not provide yet.
   point `s`, and the Frobenius operators of the trace formula are their automorphisms.
 * **Traces.** The categorical trace (`CategoryTheory.MonoidalCategory.trace`) on `Dᵇc(s)⟦ℚ̲̄_ℓ⟧`
   takes values in `End (𝟙_ Dᵇc(s)⟦ℚ̲̄_ℓ⟧)`, which is `ℚ̄_ℓ` when `k` is separably closed
-  (`ProEtale.CondensedRing.unitEndRingEquiv`).
+  (`ProEtale.CondensedRing.unitEndRingEquiv`). The scalars act on the unit of every
+  `Dᵇc(X)⟦Λ⟧` through the global sections of `Λ`
+  (`ProEtale.CondensedRing.boundedConstructibleUnitEndRingHom`): a global section `s` of `Λ`
+  acts on `Λ_X = p_X^* Λ` by multiplication by `p_X^* s`. For `Λ = ℚ̲̄_ℓ`, the constant global
+  sections give the canonical map `ℚ̄_ℓ →+* End (𝟙_ Dᵇc(X)⟦ℚ̲̄_ℓ⟧)`
+  (`ProEtale.CondensedRing.padicAlgClUnitEndRingHom`), and `unitEndRingEquiv` is its inverse
+  over the base point.
 
 ## Sorried input
 
-- `ProEtale.CondensedRing.unitEndRingEquiv`: `End (𝟙_ Dᵇc(Spec k)⟦ℚ̲̄_ℓ⟧) = H⁰(Spec k, ℚ̄_ℓ) ≅ ℚ̄_ℓ`
-  for `k` separably closed.
-
-It is data, stated as a definition with value `sorry`, to be replaced by the construction;
-the trace formula is built from it.
+- `ProEtale.CondensedRing.bijective_padicAlgClUnitEndRingHom_point`: for `k` separably closed,
+  the canonical map `ℚ̄_ℓ ⟶ End (𝟙_ Dᵇc(Spec k)⟦ℚ̲̄_ℓ⟧) = H⁰(Spec k, ℚ̄_ℓ)` is bijective.
 
 ## Main definitions
 
@@ -119,15 +125,49 @@ end Point
 
 section Scalars
 
-variable (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [IsSepClosed k] [Fact (ringChar k).Prime]
-  [Fact (ringChar k ≠ ℓ)]
+open MonObj Functor.LaxMonoidal
+
+variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+  (X : Scheme.{u})
+
+/-- The global sections of the coefficient ring `Λ` act on the unit `Λ_X` of `Dᵇc(X)⟦Λ⟧`: a
+global section `s : 𝟙 ⟶ Λ` is sent to the multiplication by its pullback `p_X^* s` on `Λ_X`
+(`Mod.regularEndRingHom`), placed in degree `0`. -/
+noncomputable def boundedConstructibleUnitEndRingHom :
+    Γ Λ →+* End (𝟙_ (Dᵇc(X)⟦Λ⟧)) :=
+  ((RingEquiv.ofBijective ((ObjectProperty.ι _).mapEndRingHom (𝟙_ (Dᵇc(X)⟦Λ⟧)))
+      ((ObjectProperty.fullyFaithfulι _).map_bijective _ _)).symm.toRingHom.comp
+    ((asIso (ε (DerivedCategory.Qh (C := Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+        (condensedRingObj Λ X))))).symm.conjRingEquiv.toRingHom.comp
+      ((HomologicalComplex.single _ (ComplexShape.up ℤ) 0 ⋙
+          HomotopyCategory.quotient _ (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh).mapEndRingHom
+          (Mod.regular (condensedRingObj Λ X))).comp
+        (Mod.regularEndRingHom.comp (Γ.mapFunctor (upperStarFromPoint X))))))
+
+variable (ℓ : ℕ) [Fact ℓ.Prime]
+
+/-- The canonical map `ℚ̄_ℓ →+* End (𝟙_ Dᵇc(X)⟦ℚ̲̄_ℓ⟧)`: a scalar `a` acts on `ℚ̄_ℓ,X` by
+multiplication by the constant global section `a` of `ℚ̲̄_ℓ`
+(`Profinite.PadicAlgCl.constRingHom`). -/
+noncomputable def padicAlgClUnitEndRingHom :
+    PadicAlgCl ℓ →+* End (𝟙_ (Dᵇc(X)⟦Profinite.padicAlgClRingObj ℓ⟧)) :=
+  (boundedConstructibleUnitEndRingHom _ X).comp (Profinite.PadicAlgCl.constRingHom ℓ)
+
+variable (k : Type u) [Field k] [IsSepClosed k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
 
 /-- For `k` separably closed, the endomorphisms of the unit of `Dᵇc(Spec k)⟦ℚ̲̄_ℓ⟧` are
-`H⁰(Spec k, ℚ̄_ℓ) = ℚ̄_ℓ`. The categorical traces of the trace formula take values here. -/
-@[no_expose]
+`H⁰(Spec k, ℚ̄_ℓ) = ℚ̄_ℓ`: the canonical map `ℚ̄_ℓ →+* End (𝟙_ Dᵇc(Spec k)⟦ℚ̲̄_ℓ⟧)` is
+bijective. -/
+theorem bijective_padicAlgClUnitEndRingHom_point :
+    Function.Bijective (padicAlgClUnitEndRingHom (point k).left ℓ) :=
+  sorry
+
+/-- For `k` separably closed, the endomorphisms of the unit of `Dᵇc(Spec k)⟦ℚ̲̄_ℓ⟧` are
+`H⁰(Spec k, ℚ̄_ℓ) = ℚ̄_ℓ`: the inverse of the canonical map `padicAlgClUnitEndRingHom`. The
+categorical traces of the trace formula take values here. -/
 noncomputable def unitEndRingEquiv :
     End (𝟙_ (Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧)) ≃+* PadicAlgCl ℓ :=
-  sorry
+  (RingEquiv.ofBijective _ (bijective_padicAlgClUnitEndRingHom_point ℓ k)).symm
 
 end Scalars
 
