@@ -24363,3 +24363,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:42 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
 - 02:43 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
 - 02:43 L: merged deliver/NC/lem-sfb-equivariant-smooth-galois-model (stage 2; reviewer PASS; parallel immutable checks)
+- 2026-10-22T02:43:58Z L: superseded stage-1 delivery NP/lem-sfb-spectral-space-cohomology-dimension at 284ef26f4a582f848f50bcb215dc8c6f58d11595; current completion retained; packet archived at refs/superseded/NP/lem-sfb-spectral-space-cohomology-dimension/284ef26f4a582f848f50bcb215dc8c6f58d11595; stale return retired.
