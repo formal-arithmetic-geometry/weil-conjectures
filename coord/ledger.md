@@ -24366,3 +24366,5 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 2026-10-22T02:43:58Z L: superseded stage-1 delivery NP/lem-sfb-spectral-space-cohomology-dimension at 284ef26f4a582f848f50bcb215dc8c6f58d11595; current completion retained; packet archived at refs/superseded/NP/lem-sfb-spectral-space-cohomology-dimension/284ef26f4a582f848f50bcb215dc8c6f58d11595; stale return retired.
 - 02:44 L: returned deliver/Q85/lem-weil-integral-twist-scalar-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-integral-twist-scalar-coherence: lem-weil-int)
 - 02:44 L: merged deliver/NL/lem-sfb-galois-component-presentation (reviewer PASS; first push; new nodes: 0)
+- 02:44 L: merged deliver/NO/lem-sfb-quasi-compact-restriction-acyclicity (stage 2; reviewer PASS; parallel immutable checks)
+- 02:44 L: merged deliver/NN/lem-sfb-punctured-spectral-neighborhood-dimension (stage 2; reviewer PASS; parallel immutable checks)

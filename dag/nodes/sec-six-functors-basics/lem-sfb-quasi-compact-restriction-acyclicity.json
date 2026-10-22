@@ -202,5 +202,23 @@
   "group": "NM",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-9cd39d6d5 (reviewer sub-agent of L); spot-checked: Read the item, the one new node lem-sfb-cech-vanishing-surjective-unions, and all cited statements in full: def-weil-pbc-sites-and-cohomology, def-weil-pbc-site-cech-complex, def-sc-topological-abelian-cohomology, lem-weil-pbc-site-cech-vanishing-criterion (03F9). The new node states exactly Stacks 0A36 (cohomology.tex lemma-vanishing-ravi, statement and proof checked): taking unions over families of finite nonempty J ⊆ I gives the same opens as unions of tuple intersections. The empty family is harmless, and no finiteness or separation hypothesis is added. The node is not a clause of the item and duplicates nothing: rg -L for 0A36, 0A3G, flasque and unions of intersections finds only the parent sfb nodes, the Noetherian pbc top-degree nodes and lem-sc-topological-flasque-acyclic, which needs full flasqueness. The item proof follows the 0A3G proof of (1) from (2). Step 1: the qc opens of X inside V form a basis B_V, and finite ordinal-indexed covers in B_V are cofinal (pointwise basis refinement plus a finite subcover), giving 03F9(2). Step 2: finite intersections are qc by pairwise stability, so 03F9(1) holds, and with finitely many J any union W_S is a finite union of qc opens, hence qc and inside W, so the hypothesis on G gives surjectivity. Step 3: the new node gives Čech vanishing, 03F9(3). Step 4: 03F9 on the open site of V, with V in B_V, and def-sc identifies R^qΓ(V,-) with H^q(V,G|_V), so no restriction comparison is hidden. Tested on Z on an irreducible spectral space, discrete spaces, empty V and empty covers, and Z on S^1 with two arcs (the new node's hypothesis correctly fails there). Accepted the declared tool_use of lem-weil-pbc-site-cech-vanishing-criterion as a generic black box that realises the prescribed 01EW step. No SGA is cited. review_split.py reports 'no such node' for four cited ids, but all of them exist through the symlinked chapter directories, so this is a tooling artefact. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.QuasiCompactRestrictionAcyclicity",
+  "declaration": "TopCat.Sheaf.subsingleton_H'_of_quasiCompact_restriction_surjective",
+  "file": "lean/Sheaf/Topology/QuasiCompactRestrictionAcyclicity.lean",
+  "statement": "theorem subsingleton_H'_of_quasiCompact_restriction_surjective (X : Type u) [TopologicalSpace X] (hBasis : IsTopologicalBasis {U : Set X | IsOpen U ∧ IsCompact U}) (hInter : ∀ (U V : Opens X), IsCompact (U : Set X) → IsCompact (V : Set X) → IsCompact ((U ⊓ V : Opens X) : Set X)) (G : CategoryTheory.Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}) (hres : ∀ (U V : Opens X) (hUV : U ≤ V), IsCompact (U : Set X) → IsCompact (V : Set X) → Function.Surjective (G.obj.map (homOfLE hUV).op)) (V : Opens X) (hV : IsCompact (V : Set X)) (q : ℕ) (hq : 0 < q) : Subsingleton (@CategoryTheory.Sheaf.H'.{u, u, u} (Opens V) inferInstance (Opens.grothendieckTopology V) inferInstance (@hasExt_of_enoughInjectives _ _ _ inferInstance (@IsGrothendieckAbelian.enoughInjectives _ _ _ (CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall'.{u} (Opens.grothendieckTopology V) AddCommGrpCat.{u}))) ((Topology.IsOpenEmbedding.sheafPullback AddCommGrpCat.{u} (f := TopCat.ofHom ⟨Subtype.val, continuous_subtype_val⟩) V.isOpenEmbedding').obj G) q ⊤)",
+  "branch": "sheaf-dag",
+  "by": "NO",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-671d4808d",
+  "group": "NO",
+  "result": "pass",
+  "note": "Node differs from live only in lean; lean.statement verbatim; report has Worker report + Second reading by NO. Clause-by-clause: qc-open basis (IsTopologicalBasis, IsCompact = quasi-compact), pairwise qc intersections over Opens, abelian sheaf on Opens X in AddCommGrpCat.{u}, hres = surjectivity of the actual restriction G.obj.map (homOfLE).op for qc U≤V, every qc V and q>0, G|_V = Mathlib IsOpenEmbedding.sheafPullback (naive restriction, Functors.lean read), conclusion Subsingleton H' (G|_V) q ⊤ with the hasExt_of_enoughInjectives witness recorded for def-sc-topological-abelian-cohomology. No qc/Noetherian/separation assumption on X; universe convention same as def-sc note and the existing consumer SpectralSpaceCohomologyDimension. Edge cases empty X/V, non-qc X, q=0 excluded OK. Proof-dep plain imports match the recorded modules; isZero_H'_of_siteCech_vanishing signature matches Step 4. No existing declaration found by rg; no hollow defs; docstrings carry source and blueprint tags and the 4-step proof. No file changed, no compile run. No findings."
  }
 }

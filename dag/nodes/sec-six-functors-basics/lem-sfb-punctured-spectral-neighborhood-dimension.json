@@ -9,7 +9,8 @@
  },
  "stmt_deps": [
   "def-weil-spectral-space",
-  "def-kun-topological-krull-dimension"
+  "def-kun-topological-krull-dimension",
+  "def-weil-pbc-punctured-neighborhood-cohomology-diagram"
  ],
  "proof": [
   {
@@ -220,5 +221,23 @@
   "group": "NL",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-8dbbe1664 (reviewer sub-agent of L); spot-checked: Proof-only split of an unchanged statement (stmt_deps unchanged, no new nodes, no re-split note in coord). I read all six steps in full and found no faults. (1) Z is closed in quasi-compact X, so it is quasi-compact. lem-weil-pbc-spectral-generalizations-of-quasi-compact with E=Z gives W as the intersection of the quasi-compact open neighbourhoods N of Z. These N form a nonempty directed set: X belongs to it and quasi-separatedness closes it under intersection. (2) Each N∩U is quasi-compact open and spectral, checked directly: it inherits the basis and quasi-separatedness, and it is sober because generic points of ambient closures lie in the open. The inclusions between them are spectral maps. (3) S is the limit of the N∩U: a compatible tuple is a single point of S, and the coordinate at N=X already induces the subspace topology. All hypotheses of lem-weil-pbc-spectral-directed-limit-spectral hold, so S is spectral. (4)-(5) A chain in S lifts to a strict chain of closures in X. Appending cl{z} for some z in Z∩cl{η_0} makes it strictly longer by one, because η_0 is not in Z. Hence dim S ≤ n−1. (6) The empty cases are correct. Sources match: topology.tex 0A31 (5004ff), 0AP0 (5068ff, the closed-constructible case, proved directly in step 2 without citing 0902), 0A2Z; cohomology.tex 0A3G induction step (2). No SGA. Small cases: the three-point chain η→y→z with Z={z} gives dim S=1 against dim X=2, so the bound is sharp; Spec of a DVR with n=1 gives dim S=0. No duplicate: the punctured cohomology-colimit node and the closed-subspace node state different results. I accept both tool_uses, which are generic spectral-space topology."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.PuncturedSpectralNeighborhoodDimension",
+  "declaration": "Topology.spectralSpace_puncturedGeneralizations_and_dimension",
+  "file": "lean/Sheaf/Topology/PuncturedSpectralNeighborhoodDimension.lean",
+  "statement": "theorem spectralSpace_puncturedGeneralizations_and_dimension (X : Type u) [TopologicalSpace X] [SpectralSpace X] (n : ℕ) (hn : 1 ≤ n) (hdim : topologicalKrullDim X ≤ (n : WithBot ℕ∞)) (Z : Set X) (hZ : IsClosed Z) (hU : IsCompact Zᶜ) : SpectralSpace (TopCat.puncturedGeneralizations Z) ∧ topologicalKrullDim (TopCat.puncturedGeneralizations Z) ≤ ((n - 1 : ℕ) : WithBot ℕ∞)",
+  "branch": "sheaf-dag",
+  "by": "NN",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b6f1de298",
+  "group": "NN",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: [SpectralSpace X], n:ℕ with 1≤n, topologicalKrullDim X ≤ n, IsClosed Z, IsCompact Zᶜ; S = landed TopCat.puncturedGeneralizations Z (exact node set, subtype topology); conclusion SpectralSpace S ∧ dim S ≤ ((n-1:ℕ)) exact under hn. No extra hypotheses or universe restriction; empty/Z=X/X=∅ cases covered (⊥ dim). Record diff vs live: only lean + stmt_deps (+landed punctured-diagram def node, used, acyclic); statement verbatim; docstrings with source place, blueprint tag and 6 steps; sorry only, no defs. No public duplicate (only private dimension-only lemma in TopDegreeAbelianNeighborhoodZero). Proof-only imports exist (advisory: unused at stage 2). No compile run since no file changed; worker reports clean compile and deliver2 OK."
  }
 }
