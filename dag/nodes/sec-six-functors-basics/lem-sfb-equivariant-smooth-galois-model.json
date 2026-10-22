@@ -25,7 +25,8 @@
   "def-weil-finite-integral-morphism",
   "def-weil-universal-homeomorphism",
   "def-trf-smooth-strict-normal-crossings-divisor",
-  "def-pc-field-tower"
+  "def-pc-field-tower",
+  "def-per-admissible-finite-scheme-quotient"
  ],
  "proof": [
   {
@@ -346,5 +347,23 @@
   "group": "NK",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-dcd9fa8b4 (reviewer sub-agent of L); spot-checked: Live item, not on side-live route-pivot-dropped.txt, still unsplit in live with the same statement; this is the 8th push. No dropped id is cited and the closure is clean. The new lem-sfb-admissible-finite-type-field-quotient states a true field-level admissible quotient for separated, locally finite-type schemes: finite categorical quotient, orbit fibres, sections are invariants, and finite over U when v^{-1}U is finite. The proof is invariant affine charts (Stacks 03JE/03BJ/03BL) plus Noether finiteness, and the finiteness-over-U clause holds without B Noetherian because invariants are integral and of finite type. It is the field case of dropped 1397/1939, not 1814, and asserts no projectivity. It differs from the NC 7dad copy because it is restricted to exactly the Step 8 use. No live existence node exists, and the item states quotient existence itself, so I accept it with a maintainer note. The other four new nodes are true and none restates an item clause: Galois component presentation (e'=H^0 separable, Galois closure, Stacks 0551/033C); Vidal 4.4.3 plurinodal alteration and 4.4.4 smooth-pair resolution step, matching ILO X 2.2 proof pp.149-150 (read); common normal-field contracted-product induction (compatible pairs, K^{Aut}/e purely inseparable, orbit transfer). Item Steps 1-9 checked: Step 3 induction datum matches the resolution conclusion (Z_i recursion); Step 4 c is a unit in A[1/T], then u∏t_i^{a_i}; Step 6 SNC survives scalar extension; Step 7 graph gives H-projectivity over proper B; Step 8 generic-fibre dimension 0, then finiteness over an open, then a reduced invariant generic algebra that is a purely inseparable field; Step 9 common q-th powers in R[1/s] give radicial, then finite+radicial+surjective gives a universal homeomorphism. Edge cases checked: empty C_B, dim 0, disconnected B, characteristic 0, inseparable K/e. Batch-5: def-trf SNC/projective-bundle definitions, trf finite-projective-bundle/h-projective conversion and composition, regular-local UFD factorization, and lem-fin-projective-generically-finite (via lem-trf-proper-finite-fibre-finite-near) are all generic scheme theory outside the trace-formula and Poincare-duality proofs, so all accepted. Generic tool_uses accepted."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EquivariantSmoothGaloisModel",
+  "declaration": "AlgebraicGeometry.exists_equivariant_smooth_galois_model",
+  "file": "lean/Sheaf/AlgebraicGeometry/EquivariantSmoothGaloisModel.lean",
+  "statement": "theorem exists_equivariant_smooth_galois_model (e : Type u) [Field e] (B : Scheme.{u}) (b : B ⟶ Spec (.of e)) [Nonempty B] [IsProper b] [GeometricallyReduced b] (hBnormal : ∀ x : B, IsDomain (B.presheaf.stalk x) ∧ IsIntegrallyClosed (B.presheaf.stalk x)) (hBcomponents : ∃ (n : ℕ) (V : Fin n → B.Opens), (∀ i, IsIntegral (V i).toScheme) ∧ Pairwise (fun i j ↦ Disjoint (V i) (V j)) ∧ (⨆ i, V i) = ⊤) (C : B.IdealSheafData) (hC : C.IsInvertible) : ∃ (K : Type u) (_ : Field K) (_ : Algebra e K), Module.Finite e K ∧ ∃ (G : Type u) (_ : Group G) (_ : Finite G) (ρ : G →* (K ≃ₐ[e] K)), IsPurelyInseparable e (IntermediateField.fixedField ρ.range) ∧ ∃ (Y : Scheme.{u}) (p : Y ⟶ Spec (.of K)) (a : G →* Aut Y) (h : Y ⟶ B), Smooth p ∧ IsHProjective p ∧ IsProjectiveBundle h ∧ Surjective h ∧ h ≫ b = p ≫ Spec.map (CommRingCat.ofHom (algebraMap e K)) ∧ (∀ g : G, (a g).hom ≫ h = h) ∧ (∀ g : G, (a g).hom ≫ p = p ≫ Spec.map (CommRingCat.ofHom (ρ g⁻¹).toRingHom)) ∧ (∀ y ∈ genericPoints Y, h y ∈ genericPoints B ∧ (h.residueFieldMap y).hom.Finite) ∧ (C.comap h).radical.IsSmoothStrictNormalCrossingsDivisor p ∧ ∃ (Q : Subgroup G → Scheme.{u}) (q : ∀ H : Subgroup G, Y ⟶ Q H) (d : ∀ H : Subgroup G, Q H ⟶ B), (∀ H : Subgroup G, IsAdmissibleFiniteSchemeQuotient (a.comp H.subtype) (q H)) ∧ (∀ (H : Subgroup G) (T : Scheme.{u}) (f : Y ⟶ T), (∀ g : H, (a g).hom ≫ f = f) → ∃! r : Q H ⟶ T, q H ≫ r = f) ∧ (∀ (H : Subgroup G) (Ω : Type u) [Field Ω] [IsAlgClosed Ω], Function.Surjective (fun t : Spec (.of Ω) ⟶ Y ↦ t ≫ q H) ∧ ∀ t₁ t₂ : Spec (.of Ω) ⟶ Y, t₁ ≫ q H = t₂ ≫ q H ↔ ∃ g : H, t₁ ≫ (a g).hom = t₂) ∧ (∀ H : Subgroup G, q H ≫ d H = h) ∧ ∃ U : B.Opens, Dense (U : Set B) ∧ (∀ x ∈ genericPoints B, x ∈ U) ∧ IsFinite ((d ⊤).resLE U ((d ⊤) ⁻¹ᵁ U) le_rfl) ∧ (topologically IsHomeomorph).universally ((d ⊤).resLE U ((d ⊤) ⁻¹ᵁ U) le_rfl)",
+  "branch": "sheaf-dag",
+  "by": "NC",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b4e18ec56",
+  "group": "NC",
+  "result": "pass",
+  "note": "Clause-by-clause match of exists_equivariant_smooth_galois_model to the node and ILO X 2.2/2.3: normal (stalks domain and integrally closed), finite disjoint integral opens, proper and geometrically reduced, Cartier IsInvertible used only through comap.radical (reduced preimage; Mathlib comap = ker of pullback.fst). K finite over e, ρ into K≃ₐ[e]K, fixed field purely inseparable. Smooth+IsHProjective p, IsProjectiveBundle+Surjective h, base equation. Semilinear ρ g⁻¹ consistent as a left action (Aut mul and Spec contravariance checked), matches the SemilinearSylowGoodComponents interface. Generic points with finite residue maps. SNC predicate handles the empty divisor and empty intersections. All subgroup quotients: IsAdmissibleFiniteSchemeQuotient (affine-orbit clause true since Y is projective over e), categorical ∃!, Ω-point surjectivity and orbit fibres (SGA1 V 2.2), q≫d=h. Dense U containing generic points; finite universal homeomorphism of d⊤.resLE. Live diff: only lean plus added stmt_dep def-per-admissible-finite-scheme-quotient (live, Lean landed and reviewed). Item and dep not dropped. Statement verbatim; docstrings carry source place, blueprint tag and 9 proof steps; sorry only. Not recompiled per instruction. Advisory: unused plain proof-dep imports."
  }
 }
