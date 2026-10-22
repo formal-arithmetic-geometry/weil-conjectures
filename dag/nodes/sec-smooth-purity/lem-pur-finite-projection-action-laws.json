@@ -32,76 +32,47 @@
  ],
  "proof": [
   {
-   "text": "On each site use the canonical ringed-topos comparisons and associators of [lem-sfb-ringed-derived-monoidal-comparisons]. They are strong monoidal and their pullback-composition comparisons are monoidal. At finite pro-etale level these are precisely [lem-pur-derived-pullback-tensor-iso]; on the etale site the inverse of [lem-kun-inverse-image-monoidal] is the same canonical ringed comparison. Thus all following reassociations use these specified maps, separately on each site.",
-   "uses": [
-    "lem-sfb-ringed-derived-monoidal-comparisons",
-    "lem-pur-derived-pullback-tensor-iso",
-    "lem-kun-inverse-image-monoidal"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A4, lemma-pullback-tensor-product: canonical comparisons"
-   }
+   "text": "Use the adopted source library's general left-derived tensor comparison. Its K-flat left derivability structure provides resolutions of every derived object, so ofLaxSquareHδ supplies its oplax associativity. Invert the tensor comparisons and cancel their composites to obtain inverse associativity; no derived unit comparison or full monoidal structure is needed. The canonical pro-etale comparison is definitionally this general comparison. This replaces the ringed-topos comparison route without changing any specified tensor map.",
+   "uses": [],
+   "elementary": false
   },
   {
-   "text": "The proper maps in [def-exchange-projection] and, on the etale site, [def-kun-projection-formula-map] are exactly the counit mates in [lem-sfb-ringed-projection-tensor-composition]. Its tensor identity proves clause 1, and its naturality will apply to $Rp_*$. No projection invertibility is used.",
+   "text": "For proper maps apply Adjunction.rightAdjointProjectionMap_associativity to the canonical pullback comparison, on each site. Postcompose with the image of the inverse tensor associator and use functoriality and the isomorphism identities. This gives the requested action equation for the actual rightDerivedLowerStarProjectionMap, with no inverse projection map.",
    "uses": [
     "def-exchange-projection",
-    "def-kun-projection-formula-map",
-    "lem-sfb-ringed-projection-tensor-composition"
+    "def-kun-projection-formula-map"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0B56, equation-projection-formula-map"
-   }
+   "elementary": false
   },
   {
-   "text": "Put $J=j_!$, $Q=j^{-1}$ and $\\kappa=\\delta^{-1}$. Its transpose is $\\mu_{JM,N}^{-1}(v_M\\otimes1)$ by [lem-sf-open-tensor-normalization] on the pro-etale site and [lem-coef-etale-open-tensor] on the etale site (take the coefficient map $A\\to A$). Apply [lem-pur-unit-adjunct-tensor-action]. Inverting its first equation gives the open action identity. In its second equation compose on the right with $\\delta_{QF,N}$; $\\kappa_{QF,N}\\delta_{QF,N}=1$ gives exactly the stated open-counit equation. This proves clause 2 for the actual maps on unbounded categories.",
-   "uses": [
-    "lem-sf-open-tensor-normalization",
-    "lem-coef-etale-open-tensor",
-    "lem-pur-unit-adjunct-tensor-action"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0GL1, lemma-j-shriek-and-tensor; sites-modules.tex Tag 0E8I"
-   }
+   "text": "For an open immersion express the mixed tensor comparison using leftDerivedUpperStarIsoMapDerivedCategory and the inverse tensorator. Transport inverse tensor associativity across this natural isomorphism. Prove the projection-associativity calculation by the adjunction Hom equivalence, with the tensorator given explicitly, and invert the resulting equality of isomorphisms. On the ordinary etale site the adopted source already proves this inverse associativity. For the open-counit law prove the general projection/counit identity by injectivity of the adjunction Hom equivalence, naturality of the tensor comparison and the triangle identities; then cancel the open projection isomorphism.",
+   "uses": [],
+   "elementary": false
   },
   {
-   "text": "For $c=(j,p)$ set $R=Rp_*$, $P=Lp^*$, $J=j_!$, $Q=Lj^*$. By [def-exchange-projection], $\\mathrm{PF}^c_{M,N}=R(\\delta_{M,PN})\\pi_{JM,N}$ followed by $QP=Lf^*$. On etale categories use the identical formula with [def-kun-projection-formula-map] and the chosen composite [def-amb-etale-compact-support]. Steps 2 and 3 supply the two action hypotheses of [lem-pur-composite-relative-tensor-action]. Its conclusion proves clause 3; Step 1 identifies its composite tensor comparison with that of $Lf^*$. All calculations stay at the chosen compactification.",
+   "text": "The general leftDerivedTensorComparison_naturality_app and map_leftDerivedTensorComparison_app_app_comp show that the canonical pro-etale pullback-composition isomorphism respects the tensor comparison. Its underived comparison is monoidal by conjugating lowerStarComp. Normalize the compactification equality transport to leftDerivedUpperStarCongr before taking the inverse composition. Expand the compactification projection into the proper projection, the image of the inverse open projection and the pullback-composition comparison, using projectionMapOfCompactification_app_app. Prove the composite action calculation for these component families: proper naturality moves the two open factors across the second proper projection; proper and open action associativity combine each pair; the tensor coherence of the pullback-composition comparison identifies the resulting last map with the pullback of f. The remaining reassociation is monoidal coherence. This component calculation is proved with arbitrary categories before specialization, without comparing the entire natural-transformation structures of the derived bifunctors. On the ordinary etale site use its own proved inverse-open and tensor-composition coherences in the same calculation. The final interface retains all three canonical tensor bifunctors and their associators explicitly; a proved abstract transport along the defining tensor-functor and associator equalities avoids expanding the derived monoidal constructions during specialization. The specialization uses proved defining equalities for the three tensor bifunctors, heterogeneous equalities for their associators and pullback comparisons, and an explicit nested-object interface for the components of the composition isomorphism. Identify the canonical compactification projection with the composite component family by its source component formula, then rewrite its three occurrences in the action equation. Keep the composite functor objects in this final interface; expanding them into nested objects while comparing concrete derived-category types would force the kernel to unfold the localization construction.",
    "uses": [
-    "def-exchange-projection",
-    "def-kun-projection-formula-map",
     "def-amb-etale-compact-support",
-    "lem-pur-composite-relative-tensor-action"
+    "def-exchange-projection",
+    "def-kun-projection-formula-map"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0B56 and 0GL1: proper/open composition"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Specialize these coefficient-category identities to ModuleCat of the positive-level coefficient ring in PurityFiniteSetting. Keep the original scheme, morphism and compactification hypotheses and the exact eight public statements unchanged. The argument is at the chosen compactification and does not use projection invertibility.",
+   "uses": [],
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-amb-etale-compact-support",
   "def-exchange-projection",
-  "def-kun-projection-formula-map",
-  "lem-coef-etale-open-tensor",
-  "lem-kun-inverse-image-monoidal",
-  "lem-pur-composite-relative-tensor-action",
-  "lem-pur-derived-pullback-tensor-iso",
-  "lem-pur-unit-adjunct-tensor-action",
-  "lem-sf-open-tensor-normalization",
-  "lem-sfb-ringed-derived-monoidal-comparisons",
-  "lem-sfb-ringed-projection-tensor-composition"
+  "def-kun-projection-formula-map"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 0B56 (equation-projection-formula-map), 07A4 (lemma-pullback-tensor-product), 0GL1 (lemma-j-shriek-and-tensor); sites-modules.tex Tag 0E8I (lemma-j-shriek-and-tensor). The coherence calculations below expand these constructions."
+  "by": "G2",
+  "document": "lean/WeilConjectures/CategoryTheory/Adjunction/ProjectionMapCupProduct.lean",
+  "place": "ProjectionMapCupProduct.lean, compProjectionMap_associativity, adapted to arbitrary proper projection components and their action and naturality equations; ProjectionMapMonoidal.lean, rightAdjointProjectionMap_associativity; ProjectionMapAssoc.lean, the projectionMap_assoc proof adapted to an explicit tensorator without a unit structure; DerivedCategory/LeftDerivedFunctor/Monoidal.lean, leftDerivedTensorComparison_naturality_app and map_leftDerivedTensorComparison_app_app_comp; SixFunctors/Etale/Derived/LowerShriekProjectionMonoidal.lean, canonical pullback tensor-composition and inverse-open associativity; SixFunctors/{ProEtale/FiniteCoefficient,Etale}/Derived/LowerShriekProjection.lean, projectionMapOfCompactification_app_app. All categorical combination, component naturality, coherence transport and specialization are proved in the item module. Named private component interfaces and defining-equality certificates specialize this calculation while preserving the exact canonical compactification map and composite functor objects."
  },
  "mathlib_searches": [
   {
@@ -219,18 +190,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-sf-open-tensor-normalization",
-  "lem-sf-ringed-derived-closed-symmetric-monoidal",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "lem-weil-pbc-extension-by-zero-adjunction",
-  "lem-weil-pbc-extension-by-zero-exact",
-  "lem-kun-derived-pullback-composition-monoidal",
-  "lem-sfb-ringed-derived-monoidal-comparisons",
-  "lem-sfb-ringed-projection-tensor-composition",
-  "lem-coef-etale-open-tensor"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
@@ -270,5 +230,15 @@
   "result": "pass",
   "note": "Checked all 8 theorems clause by clause against the node. Proper/open/compactification actions: endpoints verified with the explicit α and μ=leftDerivedUpperStarTensorIso.hom, the same comparison used inside rightDerivedLowerStarProjectionMap (rightAdjointProjectionMap). δ is the .inv of derivedOpenImmersionLowerShriekProjectionIso, in the node's direction. Open counit uses mapDerivedCategoryUpperStarDerivedTensorIso.hom = μ^{-1} and the exact D(j_!)⊣D(j^*) counit. PF^c is the actual projectionMapOfCompactification with arbitrary c, the same maps finiteExchangeProjection returns. Etale side uses the def-weil-pbc categories and the upstream etale maps, derivedTensorAssociator and rightDerivedLowerShriekOfCompactification. Hypotheses are exactly separated finite-type k-schemes plus IsProper/IsOpenImmersion/separated finite-type f, with no invertibility; n≥1 via level_pos; universes bound. Helpers: projectionActionAssociator = α_ (counterpart of etale derivedTensorAssociator); the Finite instance is a real term but redundant with existing instances (minor). Docstrings have source and blueprint tags, all proofs are sorry, the statement is verbatim, the node's statement is unchanged, and the report sections are present. nt_compile --json: clean in 25.6 s; axioms probe shows only standard axioms plus sorryAx."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261022T022037-L-432158",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }
