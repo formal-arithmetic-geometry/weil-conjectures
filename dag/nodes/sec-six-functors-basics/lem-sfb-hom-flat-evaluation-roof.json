@@ -20,14 +20,13 @@
  ],
  "proof": [
   {
-   "text": "Exact-functor cohomology shows that $E$ preserves quasi-isomorphisms; the exact-derived-functor theorem makes termwise $E$ a left derived functor of itself, so uniqueness of left derived functors identifies the derived scalar extension $E^{\\mathbf L}$ canonically with it: $E^{\\mathbf L}QM\\cong Q(EM)$ for every complex $M$. Set $e=E\\eta_C:EC\\to EJ$. It is a quasi-isomorphism. The natural augmentation equation $I_R(e)\\eta_{EC}=\\eta_{EJ}e$ and two-out-of-three make $I_R(e)$ a quasi-isomorphism between K-injectives. Hom-invariance with first map $1_P$ gives that $v_S=\\mathcal Hom_R(P,I_R(e))$ is a quasi-isomorphism. Its localization represents $H_R(QP,[e])$.",
+   "text": "Use the exact-computes clause of the flat scalar evaluation model to identify exact derived scalar extension with termwise extension. The canonical single-zero/termwise tensor isomorphism gives the same identification for the recorded scalar tensor. Exact extension and exact restriction preserve quasi-isomorphisms by the Mathlib cohomology instances. Thus e=E eta_C is a quasi-isomorphism. Naturality of the fixed resolution augmentation and two-out-of-three show I_R(e) is a quasi-isomorphism between K-injectives. Apply the independent-universe Hom-invariance theorem with first map the identity of P to obtain the denominator quasi-isomorphism. Naturality of the localization factorization of Hom identifies its localization with H_R(QP,[e]).",
    "uses": [
-    "lem-weil-pbc-exact-functor-complex-cohomology",
-    "lem-weil-pbc-exact-functor-derived-functor",
     "lem-pur-derived-change-of-rings",
     "prop-pur-kinjective-resolutions-exist",
-    "lem-pur-rhom-well-defined",
-    "def-pur-derived-internal-hom"
+    "def-pur-derived-internal-hom",
+    "lem-sfb-hom-flat-scalar-evaluation-model",
+    "lem-pur-rhom-well-defined-universes"
    ],
    "elementary": false,
    "source": {
@@ -36,12 +35,13 @@
    }
   },
   {
-   "text": "Apply the strict-numerator transpose lemma with the restricted regular module $T=US$. It gives $h((s\\otimes f)\\otimes p)=s\\otimes f(p)$, transpose $[a_S]=[h]$, and evaluation into $QC$ as $[\\eta_C]^{-1}[\\operatorname{ev}_J]$. Apply the flat scalar evaluation model with $D=B$ and $b=1_B$. Its descent clause handles this possibly non-K-flat Hom complex. Naturality in the target along $[\\eta_C]^{-1}$ and the evaluation equation of $\\Theta$ then give the transpose of $d=\\Theta U(c)$ as $[e]^{-1}[h]$.",
+   "text": "Apply the strict-numerator transpose lemma with the restricted regular module $T=US$. It gives $h((s\\otimes f)\\otimes p)=s\\otimes f(p)$, transpose $[a_S]=[h]$, and evaluation into $QC$ as $[\\eta_C]^{-1}[\\operatorname{ev}_J]$. Apply the flat scalar evaluation model with $D=B$ and $b=1_B$. Its descent clause handles this possibly non-K-flat Hom complex. Naturality in the target along $[\\eta_C]^{-1}$ and the evaluation equation of $\\Theta$ then give the transpose of $d=\\Theta U(c)$ as $[e]^{-1}[h]$. To identify the two one-K-flat-factor tensor comparisons on an arbitrary first complex, choose a flat-term K-flat resolution, compare on that resolution using their common normalization, and cancel its tensor with P. Match the actual scalar chain evaluations on sheafified homogeneous pure tensors before applying closed transposition.",
    "uses": [
     "lem-sfb-hom-strict-numerator-transpose",
     "lem-sfb-hom-flat-scalar-evaluation-model",
     "lem-sfb-dc-hom-scalar-adjunction",
-    "def-coef-ringed-tensor-hom-model"
+    "def-coef-ringed-tensor-hom-model",
+    "lem-pc-kflat-resolution"
    ],
    "elementary": false,
    "source": {
@@ -52,7 +52,6 @@
   {
    "text": "By naturality of closed transposition, the transpose of $[v_S]d$ is $[e][e]^{-1}[h]=[h]$, the transpose of $[a_S]$ in step 2. The adjunction Hom-bijection is injective, hence $[v_S]\\Theta U(c)=[a_S]$. Invert $[v_S]$ using step 1 to obtain the roof identity. The evaluation normalization of $\\Theta$ makes it natural in both inputs and compatible with coefficient maps; the two new lemmas give naturality of the numerator evaluation and of the scalar comparison, on representatives, inverse quasi-isomorphisms and coefficient compositions. The fixed augmentation is natural, so the denominator squares also commute. Composition, inversion and these canonical identifications preserve the squares; consequently the displayed roof identity is natural in both derived inputs and in compatible coefficient maps. None of the cited statements assumes finite freeness, continuity or boundedness.",
    "uses": [
-    "lem-sfb-hom-strict-numerator-transpose",
     "lem-sfb-hom-flat-scalar-evaluation-model",
     "lem-sfb-dc-hom-scalar-adjunction",
     "def-coef-ringed-tensor-hom-model",
@@ -66,21 +65,20 @@
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-exact-functor-complex-cohomology",
-  "lem-weil-pbc-exact-functor-derived-functor",
   "lem-pur-derived-change-of-rings",
   "prop-pur-kinjective-resolutions-exist",
-  "lem-pur-rhom-well-defined",
   "def-pur-derived-internal-hom",
-  "lem-sfb-hom-strict-numerator-transpose",
   "lem-sfb-hom-flat-scalar-evaluation-model",
+  "lem-pur-rhom-well-defined-universes",
+  "lem-sfb-hom-strict-numerator-transpose",
   "lem-sfb-dc-hom-scalar-adjunction",
-  "def-coef-ringed-tensor-hom-model"
+  "def-coef-ringed-tensor-hom-model",
+  "lem-pc-kflat-resolution"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 08J9 and 0A95, with sites-modules.tex Tag 03CZ; agent exact-scalar evaluation-roof refinement, not a verbatim Stacks assertion."
+  "place": "Tags 08J9 and 0A95, with sites-modules.tex Tag 03CZ; agent exact-scalar evaluation-roof refinement, not a verbatim Stacks assertion. Lean proof by J2: the stated strict-numerator/scalar-evaluation assembly, with the canonical single-zero/termwise tensor bridge and an explicit K-flat-resolution uniqueness argument for its derived tensor comparisons."
  },
  "mathlib_searches": [
   {
@@ -241,7 +239,16 @@
    "CategoryTheory.SfbFlatHom.numerator",
    "CategoryTheory.SfbFlatHom.denominatorInverse",
    "CategoryTheory.SfbFlatHom.EvaluationRoof",
-   "CategoryTheory.SfbFlatHom.evaluationRoof"
+   "CategoryTheory.SfbFlatHom.evaluationRoof",
+   "CategoryTheory.SfbFlatHom.ScalarTensorIdentification",
+   "CategoryTheory.SfbFlatHom.ScalarTensorComparisons",
+   "CategoryTheory.SfbFlatHom.RoofTensorNormalized",
+   "CategoryTheory.SfbFlatHom.RoofExactComputes",
+   "CategoryTheory.SfbFlatHom.RoofDenominatorQuasiIso",
+   "CategoryTheory.SfbFlatHom.RoofEquation",
+   "CategoryTheory.SfbFlatHom.RoofFormula",
+   "CategoryTheory.SfbFlatHom.RoofNaturality",
+   "CategoryTheory.SfbFlatHom.RoofCoefficients"
   ],
   "file": "lean/Sheaf/Algebra/Homology/FlatInternalHomEvaluationRoof.lean",
   "statement": "theorem evaluationRoof : Nonempty (EvaluationRoof M μ α)",
@@ -258,5 +265,15 @@
   "result": "fix",
   "note": "Clause-by-clause check against node and deps (ScalarInternalHomData, DerivedInternalHomFilteredColimitData, CoefficientHomRepresentativeEvaluation): exactness = PreservesFiniteLimits of the left-adjoint extension; P flat-term K-flat, C arbitrary; a_S/v_S = recorded comparison/roofDenominator at U S; c = transpose of mu.inv then E^L(ev); Theta = evaluation-normalized alpha.iso; source/target transports canonical; nu pinned by generator formula (not hollow); equation, roof, naturality, coefficient clauses true; no finiteness/boundedness. Docstrings and verbatim statement OK; node unchanged except lean. H9 FIX: unused non-closure import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel dropped in fixes/FlatInternalHomEvaluationRoof.lean (only change). nt_compile: delivered clean 48.8 s, fixed clean 40.7 s. Advisory: ScalarHomModels etc. (def-sfb-scalar-hom-comparison-data) and IsFlatOnSite (def-pc-flat-sheaf-modules) owners not in stmt_deps; S2 cannot change stmt_deps."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-bfe95",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261022T013420-L-3569107",
+  "kind": "interface",
+  "note": "independent cc review: delivered EvaluationRoof/Roof* fields vs verbatim old structure (both-way field conversion compiles); evaluationRoof axioms vs open dep holes model_exists/strict_numerator_transpose; node proof_deps vs Lean uses; importer QlbarInternalHomCoefficientComparison compiled against delivered olean"
+ }
 }
