@@ -9,8 +9,9 @@ public import WeilConjectures.AlgebraicGeometry.TensorCounitOneKFlatCoordinates
 
 /-! # Tensor pullback counit in one K-flat coordinate
 
-Compatibility import of the adopted source proof of
-`AlgebraicGeometry.tensorCounit_oneKFlat_coordinates`. The source K-flat predicate
+Compatibility re-export of the adopted, fully proved source theorem
+`AlgebraicGeometry.tensorCounit_oneKFlat_coordinates`; this path is retained for the
+Sheaf namespace mirror after the quarantine rework. The source K-flat predicate
 `IsKFlatTensor` agrees by reduction with the legacy `IsAcyclicTensorKFlat` predicate.
 The canonical comparison import preserves the legacy statement vocabulary.
 
