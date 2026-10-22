@@ -1,63 +1,185 @@
-# Stage-1 delivery: lem-sfb-galois-component-presentation
+## Worker report
 
-## Files written
+Delivered module: `Sheaf.AlgebraicGeometry.GaloisComponentPresentation`.
+Declaration: `AlgebraicGeometry.exists_galois_component_presentation`.
+This is stage 2: the sole theorem has proof `by sorry`; there are no new definitions,
+new nodes, dependency repairs, or statement changes. All variables and the universe
+`u` are explicitly bound; `autoImplicit` is false.
 
-- dag/nodes/sec-six-functors-basics/lem-sfb-galois-component-presentation.json: item, statement; split into ten proof steps. No change to its statement or statement dependencies. Existing metadata and previous searches retained.
-- citations.json: one entry for every proof-step citation, quoting the cited node's statement verbatim, including its hypotheses.
-- report.md: this report. searches.jsonl contains the actual searches run with msearch.py; write_split.py is sandbox-only preparation material, not a DAG delivery file.
+I read the full node and its ten proof steps, every statement dependency and its
+recorded interface, and the relevant declarations/docstrings in the read-only Lean
+sources. I read ILO Expose X, 2.3 Steps 1--2, printed p.150 (PDF p.156), directly
+with pdftotext. Step 1 supplies properness, irreducibility, geometric reducedness,
+Cartier boundary and normality; Step 2 chooses the finite Galois extension, component
+and decomposition subgroup and states transitivity on components. The expanded
+DAG proof supplies the finite etale orbit and faithfulness assertions. Its ten
+steps, references and dependencies are carried into the theorem docstring.
 
-New nodes: 0. New Mathlib leaves: 0. All thirty distinct proof dependencies already exist.
+Hypothesis-by-hypothesis correspondence:
 
-## Attachments
+- The field e is `(e : Type u) [Field e]`. The e-scheme is `(B : Scheme.{u})`
+  with named structure morphism `b : B ⟶ Spec (.of e)`.
+- Nonempty and integral are `[IsIntegral B]`; Mathlib's class includes `Nonempty B`
+  and is equivalent to nonempty, reduced and irreducible. No empty B is admitted.
+- Normality is `hBnormal : ∀ x : B, IsDomain (B.presheaf.stalk x) ∧
+  IsIntegrallyClosed (B.presheaf.stalk x)`, exactly the local-ring convention in
+  the node. This is not geometric normality or smoothness.
+- Proper finite type is `[IsProper b]`. Its fields give separated, universally
+  closed and locally finite type; universally closed implies quasi-compact,
+  so this includes the entire finite-type hypothesis. Separate finite-type
+  instance parameters were removed after the overlapping-instances warning;
+  the hypothesis is mathematically unchanged.
+- Geometrically reduced is `[GeometricallyReduced b]`, the dependency's recorded
+  Mathlib notion, quantifying over field-valued base changes.
 
-None for the item. Searched the live lean/WeilConjectures source for its blueprint tag, its notion, Galois component terminology and geometrically integral components. No project declaration supplies the complete statement. The existing flat Cartier-pullback node records AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.comap_of_flat; its live source, lines 76 onward in WeilConjectures/Mathlib/AlgebraicGeometry/IdealSheaf/Invertible.lean, was read. That supplies only the boundary input and is not an attachment of this item.
+Conclusion-by-conclusion correspondence (the theorem uses L for e_0, U.toScheme
+for X, and writes u as `U.ι ≫ pullback.fst b (Spec.map ... )`):
 
-## WANTED
+- `IsNoetherian B` is the Noetherian conclusion. Mathlib's documented
+  `isNoetherian_iff_of_finite_iSup_eq_top` identifies it with the finite affine
+  cover by Noetherian rings specified in the node.
+- `∃ (L : Type u) (_ : Field L) (_ : Algebra e L), Module.Finite e L ∧
+  IsGalois e L ∧ ...` chooses a finite Galois field extension. `L ≃ₐ[e] L` is
+  exactly its group A; it is not an arbitrary finite group or a chosen subgroup.
+- `U : (pullback b (Spec.map (CommRingCat.ofHom (algebraMap e L)))).Opens`
+  defines X as the actual open subscheme of B_L. `IsClosed (U : Set ...)` makes
+  it clopen; membership in `irreducibleComponents` makes it an actual component.
+  `IsIntegral U.toScheme`, the same local normality assertion on its stalks,
+  `IsProper (U.ι ≫ pullback.snd ...)`, and `GeometricallyIntegral` of that same
+  map give integral, normal, proper and geometrically integral over L.
+- `a : (L ≃ₐ[e] L) →* Aut (pullback b ...)` is the scheme action. The two
+  projection equalities uniquely specify `id_B × Spec(g⁻¹)`: it fixes the first
+  projection, and acts on the second by `Spec.map ... g.symm.toRingHom`.
+  Thus no arbitrary or unspecified action replaces the canonical action.
+  A monoid homomorphism to `Aut` includes the action laws.
+- For every irreducible component Z, `∃ g, (a g).hom '' U = Z` says that the
+  orbit of U is all components. Automorphisms permute irreducible components,
+  so this is precisely transitivity of A on the components.
+- `H : Subgroup (L ≃ₐ[e] L)` with `∀ g, g ∈ H ↔ (a g).hom '' U = U` is exactly
+  the stabilizer, not a subgroup contained in it. Its action on L is evaluation
+  of its underlying algebra automorphism. That action is faithful by subtype
+  inclusion and extensionality of algebra automorphisms; no extra premise is
+  needed. `r : H →* Aut U.toScheme` with `(r h).hom ≫ U.ι = U.ι ≫ (a h.val).hom`
+  specifies the restricted action. Together with the second projection law this
+  is precisely semilinear compatibility with X → Spec L, using the same inverse
+  scalar convention. `Function.Injective r` asserts faithfulness on X as a
+  scheme (not merely on its topological point set).
+- `IsFinite u ∧ Etale u ∧ Surjective u` gives the three map properties;
+  `∀ h, (r h).hom ≫ u = u` gives H-invariance.
+- The geometric-fibre orbit clause quantifies over every algebraically closed
+  `Ω : Type u` and maps `x y : Spec (.of Ω) ⟶ U.toScheme` with `x ≫ u = y ≫ u`;
+  it concludes `∃ h : H, x ≫ (r h).hom = y`. By the pullback universal property,
+  these are Ω-valued lifts over the same geometric base point. Since u is finite
+  etale, its geometric fibre is a finite disjoint union of copies of Spec Ω:
+  each fibre point determines exactly one such lift, with its residue-field
+  embedding retained. This is exactly transitivity on points of the geometric
+  fibre `pullback u bΩ` from def-weil-geometric-fibre, and not the weaker orbit
+  assertion on underlying points of X. Surjectivity and finite etaleness ensure
+  that every such geometric fibre is nonempty.
+- An input Cartier support C is rendered by arbitrary `I : B.IdealSheafData`
+  with `I.IsInvertible`, and C = I.support. The conclusion supplies
+  `J : U.toScheme.IdealSheafData`, `J.IsInvertible`, equality of J.support with
+  `u ⁻¹' I.support`, and `∀ h, J.comap (r h).hom = J`. This is stability of the
+  effective Cartier divisor itself, including multiplicities, not merely its
+  closed support. Quantifying over all Cartier ideals represents the node's
+  conditional statement for every such C; the presentation is chosen before I.
 
-None. The ILO PDF and Stacks sources needed here are already in literature/.
+Dependency declarations used:
 
-## Findings and changes
+- def-weil-field: `Field`, Mathlib.Algebra.Field.Defs.
+- def-pc-integral-scheme: `AlgebraicGeometry.IsIntegral`,
+  Mathlib.AlgebraicGeometry.Properties.
+- def-weil-proper-morphism: `AlgebraicGeometry.IsProper`,
+  Mathlib.AlgebraicGeometry.Morphisms.Proper.
+- def-weil-finite-type-morphism: `LocallyOfFiniteType` and `QuasiCompact`,
+  Mathlib.AlgebraicGeometry.Morphisms.FiniteType and .QuasiCompact; supplied
+  by the properness instance rather than redundant binders.
+- def-pc-geometrically-irreducible: `GeometricallyReduced` and
+  `GeometricallyIntegral`, Mathlib.AlgebraicGeometry.Geometrically.Integral.
+- def-pc-field-extension: `Algebra`, Mathlib.Algebra.Algebra.Defs.
+- def-pc-field-tower: imports Sheaf.FieldTheory.FieldTower and uses the
+  `Module.Finite` encoding of finite extension documented there; no second
+  degree or finite-extension definition is introduced.
+- def-pc-fibre-product and def-weil-geometric-fibre: `pullback`, `pullback.fst`,
+  `pullback.snd`, Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback.
+  The orbit clause is the equivalent field-valued-lift expression explained above.
+- def-weil-pbc-noetherian-ring: `IsNoetherianRing`,
+  Mathlib.RingTheory.Noetherian.Defs, through `IsNoetherian` of
+  Mathlib.AlgebraicGeometry.Noetherian and its finite-affine-cover equivalence.
+- def-weil-finite-integral-morphism: `IsFinite`,
+  Mathlib.AlgebraicGeometry.Morphisms.Finite.
+- def-weil-etale-morphism: `Etale`, Mathlib.AlgebraicGeometry.Morphisms.Etale.
+- def-weil-surjective-morphism: `Surjective`,
+  Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap.
+- def-nagata-effective-cartier-ideal:
+  `Scheme.IdealSheafData.IsInvertible`,
+  WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Invertible.
 
-The imported item is true as stated. Its source is ILO, Expose X, proof 2.3 Step 2, printed page 150 (PDF page 156): choose a finite Galois extension splitting the components, take a component and its decomposition subgroup, and use the transitive contracted component presentation. I read the full paragraph in the PDF, as well as the preceding reduction to normal geometrically reduced schemes. No SGA source is used. I read the current main-20261015 unit and direct-image proof paragraph (3), together with the recorded DAG unit and chapter; this is a generic geometric prerequisite beneath that paragraph's alteration route, not a replacement of a unit-level proof.
+Statement dependencies are public imports, directly or through their recorded
+public dependency modules. The stated proof dependencies are private imports,
+including GenericComponentsSplit, FiniteGaloisReceivingSeparableExtensions,
+EtaleNormalComponents and FiniteGaloisTensorDecomposition, plus the Mathlib modules
+for the morphism and residue-field tools. The flat Cartier-pullback declaration
+`Scheme.IdealSheafData.IsInvertible.comap_of_flat` is in the same module that
+publicly supplies the Cartier definition. No downstream model theorem is imported.
 
-The split spells out the source's implicit geometric arguments rather than creating a node for each conclusion. The finite separable splitting input already exists as lem-sbc-generic-components-split, the Galois envelope as lem-weil-pbc-finite-galois-receiving-separable-extensions, and the normal-component input as lem-fin-etale-normal-components. The Cartier input already exists as lem-pc-flat-pullback-effective-cartier-ideal. No new lemma is needed.
+Edge cases checked before writing:
 
-Mathlib searches used leanfinder twice with different formulations, loogle, leansearch and the prescribed grep. The successful services returned geometric-reducedness definitions, normalization, geometric-irreducibility definitions and abstract Galois-category transitivity. Reading their returned signatures and Mathlib/AlgebraicGeometry/Geometrically/Integral.lean (especially the reduction to geometric irreducibility plus geometric reducedness) rules out an exact or one-line match for the full component presentation. All queries and results were recorded honestly; the original item searches were preserved as well.
+- B empty: correctly excluded by IsIntegral, as the node requires nonempty B.
+- B already geometrically integral: L = e, the only component is all of B and
+  the stabilizer can be trivial; u is the identity up to the pullback isomorphism.
+- B = Spec K for finite separable K/e: choose a Galois closure L; X = Spec L,
+  H = Aut_K(L), and each geometric fibre is the corresponding embedding orbit.
+- A scalar automorphism acts trivially on the one-point space Spec L but can
+  act nontrivially on its scheme. Faithfulness therefore uses Aut of schemes,
+  not an action on topological points alone.
+- Imperfect e and positive characteristic: only geometric reducedness and the
+  separable component-splitting extension are used; no perfectness assumption.
+- Empty Cartier divisor: the unit ideal is IsInvertible, its support is empty,
+  and its pullback remains the unit ideal. No nonempty-boundary assumption.
+- Trivial H and identity extension are allowed. There is no freeness, torsor
+  uniqueness, projectivity or geometric normality conclusion added.
+- Universe u is shared by the base field, scheme and test fields, exactly as in
+  the recorded geometric-property interfaces. Every finite extension and every
+  algebraic closure of a residue field has a representative in this universe.
+  No independent smaller universe can make the test-field quantifier vacuous.
 
-The blueprint search for Galois component, geometrically integral, components, normal closure, 054R and 0551 gives no duplicate of the entire item. The ancestor command reports None for the inherited creation chain. The item's existing blueprint.from.node is therefore retained as null, and its explicit place and via chain are retained. The split_report identifies the intended direct-image paragraph and the ILO paragraph precisely. No unit realization record is modified: this item is not its unit's key statement.
+Searches for an existing statement (2026-10-22):
 
-## Not duplicates
+- msearch.py leanfinder: “A normal geometrically reduced proper variety has a
+  finite Galois extension with a geometrically integral clopen component and
+  decomposition group transitive on geometric fibres”. Eight hits, including
+  IsGaloisGroup fraction-ring criteria, abstract Galois-category objects and
+  Ideal.isPretransitive_of_isGalois; none states the scheme presentation.
+- msearch.py loogle: `"GeometricallyIntegral", "IsGalois"`: zero hits.
+- msearch.py grep: `Galois.*[Cc]omponent|galois.*[Cc]omponent|[Cc]omponent.*[Gg]alois`
+  in Mathlib/AlgebraicGeometry: zero hits.
+- msearch.py leansearch: “A normal geometrically reduced proper integral variety
+  admits a finite Galois scalar extension with a geometrically integral clopen
+  component whose stabilizer is transitive on geometric fibres”. Eight hits on
+  ring geometric reducedness, Galois normality and invariant integral closures;
+  none is this result. Raw tool queries and results are in searches.jsonl.
+- rg with the same component/Galois pattern in lean/WeilConjectures and lean/Sheaf:
+  unrelated field-torsor components and abstract Galois-category material;
+  EquivariantSmoothGaloisModel cites this result in its proof but does not state it.
+  rg for the exact node id in lean/WeilConjectures: no match. I opened the
+  parent model statement and the component-splitting and normal-component modules.
 
-No new nodes are proposed. Existing field, component, finiteness, properness and Cartier lemmas are cited directly. In particular, the general 054R splitting theorem and the 033C normal-component consequence are not recreated under new names.
+No STATEMENT-DISPUTED flag or node fault was found.
 
-## Review by NL
+## Second reading by NL
 
-I checked the split against delivery-errors B through E, with the item, the statements of all cited nodes, the source PDF and Stacks sources open. The statement introduces its field, scheme and divisor; it defines normality and geometric integrality explicitly. The existing definition node def-pc-geometrically-irreducible actually defines geometric reducedness and geometric integrality as well as geometric irreducibility, so using it for those notions is correct. There are no unsplit new statements, no invented Mathlib matches, no new definition with hidden data, and no relabelled clause posing as a split.
-
-Step 1 uses the finite-type base-change clause of lem-sfb-finite-type-composition-base-change and the exact Noetherian-base conclusion of lem-weil-pbc-finite-type-over-noetherian. Fields satisfy the base hypothesis because their ideals are zero or the unit ideal. It applies to any extension field, which covers both L and e_0 later. This agrees with Stacks morphisms.tex Tags 01T4 and 01T6.
-
-Step 2 uses exactly the conclusion of lem-sbc-generic-components-split: finite etale L/e and geometrically irreducible full inverse images of components. The residue-field separability lemma applies at the unique point of Spec L. The finite-Galois-receiving lemma takes a finite family of finite separable extensions, so its one-member case receives L and produces e_0. I read varieties.tex Tag 054R, more-morphisms.tex Tag 0551 and fields.tex Tags 09DT and 0EXM; the latter two give the normal closure and its Galois property. No separability is inferred merely from normality or from geometric reducedness.
-
-Step 3 cites the finite-spectrum-map lemma, the finite-separable-etale lemma, field-spectrum surjectivity, finite base change and etale-cover base change, exactly as their statements assert. The one-element covering hypothesis is satisfied. The statement of lem-fin-etale-normal-components requires W Noetherian and Y normal integral; these are step 1 and the item hypotheses, respectively, with W=B_L or B_e0 and Y=B. I read the node and algebra.tex Tag 033C. The cited node explicitly supplies a finite disjoint clopen normal integral decomposition; I do not extract additional facts from its proof or from its Lean attachment.
-
-Step 4 retains the intermediate L-structure, so every extension of e_0 is an extension of L. Hence the full inverse images supplied by the splitting node stay irreducible and nonempty. They are reduced because they are open subschemes of B_E, which is reduced by the original geometric-reducedness hypothesis. The integral-scheme definition explicitly equates nonempty reduced irreducible with integral. The clopen disjoint covering identifies these inverse images with the components, with the maximality argument written out. Proper base change and closed-immersion properness supply precisely the two properness assertions used; the closed immersion is the inclusion of a clopen subscheme with its restricted scheme structure.
-
-Step 5 is a fibre-product construction. The inverse in Spec(a^{-1}) fixes the left-action convention. The cited fibre-product definition explicitly includes functoriality and uniqueness, which yield the action law and invariance over B. No quotient-existence theorem is assumed.
-
-Step 6 uses open-immersion etaleness and composition of covering families with the full component cover, not with a single component prematurely assumed surjective. The inclusions are also closed immersions, so the closed-immersion finite lemma and finite composition apply. The finite-proper node supplies properness; the properness definition supplies closed image; the etale-open-map node supplies open image. The integral definition gives irreducibility of B. Thus every nonempty component has all of B as its image. This explicitly proves surjectivity before it is needed in the orbit argument.
-
-Step 7 uses the exact algebra isomorphism in clause (1) of lem-exc-finite-galois-tensor-decomposition, not the sheaf clause or an abstract full-faithfulness assertion. The algebraic-extension embedding lemma applies because e_0/e is finite. The affine fibre-product lemma identifies the actual geometric fibre ring with Omega tensor_e e_0. The displayed coordinate map comes from extending the tensor decomposition along e_0 -> Omega. Finite-product extension of scalars is checked by its coordinate idempotents, and primes of a finite product of fields select one coordinate. Thus the fibre points include their residue embeddings and are simply transitively permuted by A. I read pione.tex Tag 03SF for the Galois-cover interpretation. I did not substitute transitivity of ordinary prime points for transitivity on geometric fibre points.
-
-Step 8 applies the surjective-base-change node only after step 6. A nonempty clopen part of the split Omega-fibre has an Omega-point by step 7's explicit product description. For components X_i and X_j, moving chosen points over the same geometric base point makes aX_i intersect X_j, which forces equality by disjointness. For two points of X's fibre, the same calculation forces the moving element into H. These are short set and component arguments from previous steps, so no standalone orbit lemma is created. The arbitrary geometric base point gives every fibre, rather than merely the generic fibre.
-
-Step 9 proves faithfulness explicitly on a residue field using nonemptiness of X and injectivity of a field homomorphism. Faithfulness on e_0 is built into H being a subgroup of Aut_e(e_0). Semilinearity was constructed in step 5. No implicit assumption that a semilinear action is linear over e_0 is made.
-
-Step 10 uses the actual flatness clause of the etale definition. The flat Cartier-pullback node states precisely that the inverse-image divisor has a locally principal nonzerodivisor ideal. I read divisors.tex Tag 02OO, case (6), and its affine proof. The formula for the inverse-image ideal and uh=u show equality of pulled-back ideals, which proves stability of the divisor itself, not only of its support. The local equation also gives the support assertion.
-
-For small cases I tested B=Spec e, a normal proper geometrically integral variety over e, and B=Spec K for a nontrivial finite separable K/e. In the first two cases e_0=e and H=1 can occur, and u is the identity; enlarging e_0 instead gives the expected field torsor. In the last case a component is Spec e_0 and its stabilizer is the subgroup fixing the embedding of K; its geometric fibres have the expected nonempty H-orbit. Imperfect e is allowed: geometric reducedness is used exactly to keep all extended components reduced, without asserting arbitrary field extension preserves normality. Empty Cartier divisors and zero-dimensional B are allowed. Empty B is excluded by the item and is used nowhere inadvertently.
-
-All non-elementary facts used by the steps are cited as existing nodes, with quotations in citations.json. The short group, local-ring restriction and tensor-coordinate calculations are written in the steps. Every step has fewer than 2000 characters. I checked dependency reachability for each proposed edge; none reaches back to the item. Off-unit generic tools are declared in split_report.tool_uses. No statement dispute or source error was found. The strengthened intermediate simply-transitive calculation is used only to prove the item's requested single-orbit property; no freeness hypothesis was added.
-
-## Unfinished work
-
-None within stage 1. No Lean file was written, no compiler or build tool was run, and no repository or launcher file was modified. Delivery validation is performed by the required server-side dry run.
+Author's second pass; the maintainer's independent review follows delivery, as
+specified by this worker brief. I reopened the node and the complete module and
+checked the field, integral/nonempty, proper finite type, geometric reducedness,
+and stalk normality assumptions against the signature. I checked the chosen
+extension and literal pullback, clopen component membership, normality, properness,
+geometric integrality, both canonical-action projection laws, component transitivity,
+exact stabilizer, restriction equation, scheme faithfulness, finite etale surjectivity,
+invariance, genuine geometric-fibre lifts and ideal-level Cartier stability against
+each conclusion. The correspondence is detailed above. I specifically checked that
+inversion on scalars agrees with categorical Aut multiplication and Spec
+contravariance; field faithfulness follows from the exact subgroup representation.
+The only implementation corrections were the explicit point-space coercion `↥`
+for pullback schemes in topological expressions and removal of redundant finite-type
+instance binders implied by properness. Neither changes the mathematical statement.

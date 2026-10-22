@@ -24403,3 +24403,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:54 L: returned deliver/NK/lem-sfb-equivariant-plurinodal-field-alteration (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-sfb-equivariant-plurinodal-field-alteration: fix d)
 - 02:54 L: merged deliver/NC/lem-sfb-affine-profinite-family-serre-cd (reviewer PASS; first push; new nodes: 1)
 - 02:54 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
+- 02:54 L: merged deliver/NL/lem-sfb-galois-component-presentation (stage 2; reviewer PASS; parallel immutable checks)
