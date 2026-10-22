@@ -6,6 +6,8 @@ Authors: SHEAF group NN
 module
 
 public import Sheaf.Paper.CommonTensorComparisonDescent
+import Sheaf.Paper.RationalComparisonValid
+import Sheaf.Paper.CommonTensorComparisonConstruction
 
 /-! # Tensor comparisons through rationalization and common finite fields
 
@@ -81,6 +83,10 @@ theorem tensor_comparison_localization_descent (A : IntegralData C) (hA : A.Vali
         ∃ cs : CommonStructures R,
           letI := cs
           ∃ M : CommonData R, M.Valid := by
-  sorry
+  let rs := rationalStructures C
+  let R := rationalDatum A hA
+  have hR : RationalData.Valid C A R := rationalDatum_valid A hA
+  obtain ⟨cs, hcs⟩ := common_tensor_comparison_construction (C := C) A R hR
+  exact ⟨rationalStructures C, R, hR, cs, hcs⟩
 
 end WeilConjectures.TensorComparisonDescent

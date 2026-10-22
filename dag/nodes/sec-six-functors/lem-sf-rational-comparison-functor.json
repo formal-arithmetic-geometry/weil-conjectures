@@ -1,0 +1,144 @@
+{
+ "id": "lem-sf-rational-comparison-functor",
+ "kind": "statement",
+ "title": "RationalComparisonFunctor",
+ "statement": "A valid integral comparison extends to the actual localized Hom modules by a tensor f mapped to coefficientEquiv(a) times the derived fraction-field extension of F(f). This is additive, perfect-valued and has bounded finite-dimensional cohomology.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
+  "place": "Final paragraph: rationalization and the common-stage coefficient construction; the following explicit conditional argument is agent-written."
+ },
+ "stmt_deps": [
+  "def-sf-integral-tensor-comparison-system",
+  "def-sf-rational-tensor-comparison-system",
+  "lem-sf-perfect-scalar-tensor-coherence"
+ ],
+ "proof": [
+  {
+   "text": "Use scalar coherence additivity and linearity on the perfect image to define a balanced additive Hom map with TensorProduct.liftAddHom. Tensor induction proves composition and the pure-tensor identity proves identities. Scalar coherence preserves perfectness. Existing perfect-complex boundedness and finite-homology theorems give finite-dimensional cohomology with finite support.",
+   "uses": [
+    "def-sf-integral-tensor-comparison-system",
+    "def-sf-rational-tensor-comparison-system",
+    "lem-sf-perfect-scalar-tensor-coherence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-integral-tensor-comparison-system",
+  "def-sf-rational-tensor-comparison-system",
+  "lem-sf-perfect-scalar-tensor-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
+  "place": "Final paragraph: rationalization and the common-stage coefficient construction; the following explicit conditional argument is agent-written."
+ },
+ "mathlib_searches": [
+  {
+   "t": "2026-10-21T15:02:59Z",
+   "tool": "leansearch",
+   "query": "A linear monoidal category admits scalar extension to a localization with tensor product on morphisms given by multiplying the scalar coefficients",
+   "sub": "",
+   "ok": true,
+   "n_hits": 8,
+   "note": "",
+   "top": [
+    "CategoryTheory.Localization.functor_linear",
+    "LinearEquiv.extendScalarsOfIsLocalization",
+    "CategoryTheory.Localization.instLinearLocalization'",
+    "CategoryTheory.Localization.instLinearLocalization'Q'",
+    "Module.FinitePresentation.isLocalizedModule_mapExtendScalars",
+    "CategoryTheory.Localization.instLinearLocalization",
+    "LinearMap.extendScalarsOfIsLocalization_apply'",
+    "CategoryTheory.LocalizedMonoidal"
+   ],
+   "digest": "5c45b8567565c3e4",
+   "date": "2026-10-21",
+   "results": "{\"t\": \"2026-10-21T15:02:59Z\", \"tool\": \"leansearch\", \"query\": \"A linear monoidal category admits scalar extension to a localization with tensor product on morphisms given by multiplying the scalar coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Localization.functor_linear\", \"LinearEquiv.extendScalarsOfIsLocalization\", \"CategoryTheory.Localization.instLinearLocalization'\", \"CategoryTheory.Localization.instLinearLocalization'Q'\", \"Module.FinitePresentation.isLocalizedModule_mapExtendScalars\", \"CategoryTheory.Localization.instLinearLocalization\", \"LinearMap.extendScalarsOfIsLocalization_apply'\", \"CategoryTheory.LocalizedMonoidal\"], \"digest\": \"5c45b8567565c3e4\"}",
+   "verdict": "The generic monoidal localization API does not provide the literal localized Hom formulas and normalized coefficient comparisons required here."
+  },
+  {
+   "t": "2026-10-21T14:43:49Z",
+   "tool": "leanfinder",
+   "query": "Scalar extension of a linear symmetric monoidal category preserves tensor comparisons through localization and filtered colimits",
+   "sub": "",
+   "ok": true,
+   "n_hits": 8,
+   "note": "",
+   "top": [
+    "CategoryTheory.Localization.Monoidal.tensor_comp",
+    "CategoryTheory.Localization.Monoidal.instSymmetricCategoryLocalizedMonoidal",
+    "CategoryTheory.Localization.Monoidal.tensorHom_id",
+    "CategoryTheory.Localization.Monoidal.id_tensorHom",
+    "CategoryTheory.Localization.Monoidal.μ",
+    "CategoryTheory.Localization.Monoidal.instLiftingLocalizedMonoidalToMonoidalCategoryCompTensorRightObjFunctorFlipTensorBifunctor",
+    "CategoryTheory.Localization.Monoidal.instLiftingLocalizedMonoidalToMonoidalCategoryCompTensorLeftObjFunctorTensorBifunctor",
+    "CategoryTheory.Localization.Monoidal.tensorBifunctorIso"
+   ],
+   "digest": "0be8efa7ac452aed",
+   "date": "2026-10-21",
+   "results": "{\"t\": \"2026-10-21T14:43:49Z\", \"tool\": \"leanfinder\", \"query\": \"Scalar extension of a linear symmetric monoidal category preserves tensor comparisons through localization and filtered colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Localization.Monoidal.tensor_comp\", \"CategoryTheory.Localization.Monoidal.instSymmetricCategoryLocalizedMonoidal\", \"CategoryTheory.Localization.Monoidal.tensorHom_id\", \"CategoryTheory.Localization.Monoidal.id_tensorHom\", \"CategoryTheory.Localization.Monoidal.\\u03bc\", \"CategoryTheory.Localization.Monoidal.instLiftingLocalizedMonoidalToMonoidalCategoryCompTensorRightObjFunctorFlipTensorBifunctor\", \"CategoryTheory.Localization.Monoidal.instLiftingLocalizedMonoidalToMonoidalCategoryCompTensorLeftObjFunctorTensorBifunctor\", \"CategoryTheory.Localization.Monoidal.tensorBifunctorIso\"], \"digest\": \"0be8efa7ac452aed\"}",
+   "verdict": "The concrete balanced Hom and prescribed comparison normalization require the explicit construction in this node."
+  },
+  {
+   "t": "2026-10-21T14:45:24Z",
+   "tool": "grep",
+   "query": "ScalarLocalization.*[Mm]onoidal|[Mm]onoidal.*ScalarLocalization",
+   "sub": "",
+   "ok": true,
+   "n_hits": 0,
+   "note": "",
+   "top": [],
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-21",
+   "results": "{\"t\": \"2026-10-21T14:45:24Z\", \"tool\": \"grep\", \"query\": \"ScalarLocalization.*[Mm]onoidal|[Mm]onoidal.*ScalarLocalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "verdict": "The concrete balanced Hom and prescribed comparison normalization require the explicit construction in this node."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TensorComparisonLocalizationDescent",
+  "date": "2026-10-21",
+  "group": "S9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-tensor-comparison-localization-descent",
+   "place": "Conditional construction steps 1--5"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-kunneth-relative",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RationalComparisonFunctor",
+  "file": "lean/Sheaf/Paper/RationalComparisonFunctor.lean",
+  "declaration": "WeilConjectures.TensorComparisonDescent.rationalFunctor",
+  "statement": "def rationalFunctor (E : Index l Ω) : Rat C E ⥤ D (FieldOf l Ω E)",
+  "branch": "sheaf-dag",
+  "by": "S9",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S9",
+  "result": "pass",
+  "landing": "20261022T011935-L-3235263",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S9",
+  "result": "pass",
+  "landing": "20261022T011935-L-3235263",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
