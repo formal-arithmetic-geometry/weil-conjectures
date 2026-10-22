@@ -21,7 +21,8 @@
   "def-pc-integral-scheme",
   "def-pc-geometrically-irreducible",
   "def-nagata-effective-cartier-ideal",
-  "def-pc-field-tower"
+  "def-pc-field-tower",
+  "def-sbc-normal-dominant-galois"
  ],
  "proof": [
   {
@@ -499,5 +500,23 @@
   "group": "NJ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NJ-080c39002 (reviewer sub-agent of L); spot-checked: I read ILO Travaux de Gabber X 2.3 Step 1 (printed p.150) at the cited place, the item's 14 steps and the statements of all 47 cited nodes. The delivery has 0 new nodes and leaves the statement unchanged. The item is unsplit in live, side-live and clones/live, no LAND entry exists for it, and no repair note applies. Neither the item nor any node in its 510-node closure is in route-pivot-dropped.txt, there is no cycle, and no cited statement has changed in live. I searched the DAG and found no duplicate: generic-geometrically-reduced-preparation, proper-generic-curve-preparation, trf normalized-blowup-calculus, equivariant-smooth-galois-model and sbc radicial-preparation-construction all state other things. Step checks: (1) Nagata dense compactification, C=closure of Z with C∩X=Z, C nowhere dense via generic points in X. (2) 04KT gives one common e/k, with T=(X̄_e)_red geometrically reduced and proper. (3) t is finite, a homeomorphism and radicial (01S4), so residue extensions are finite purely inseparable. (4) The reduced components T_i are integral and C_i has a finite-type ideal. (5) The blowup is proper, an isomorphism off C_i, makes the ideal Cartier, and keeps U_i dense (U_i-admissible). (6) Chart domains give integrality (02ND). (7) The integral Chow model is a closed immersion into P^N_e via proper-to-separated and 01IQ; the Chow node's immersion is over k according to its own proof. (8) Normalization is finite, surjective, birational and normal. (9) The Cartier generator stays nonzero in integral dominant pullbacks (02OO(2)). (10) Geometric reducedness via 04KS: the generic stalk F_i⊗L is a localization of a reduced ring. (11) Surjectivity and the generic-point bijection hold. (12) Disjoint coordinate blocks embed B in P^M_e. (13) 0B3I, 087S with O_{Spec k} ample, and 01WE give B↪P^d_k. (14) The graph gives r projective in the projective-bundle sense, since P(d;X̄)=Proj Sym O^{d+1}. Edge cases checked: Z empty, dim 0, characteristic 0, imperfect k, and intersecting components. All 19 declared tool_uses are generic and accepted. Batch 5: lem-trf-finite-projective-bundle (0B3I), lem-trf-projective-bundle-to-h-projective (087S) and lem-trf-h-projective-composition (01WE) are generic projectivity conventions. Their closures (113/178/72 nodes) contain only generic sk-i-curve-zero trf nodes and no Poincaré-duality, trace-transport or nt-assume node, so all three are accepted. FIX (C1/C4): Step 8 applied lem-fin-finite-over-projective without citing def-pc-projective-morphism (H-projective and quasi-compact), which is the convention of that lemma's hypothesis and of the embedding Step 12 takes. The fixed file fixes/dag/nodes/sec-six-functors-basics/lem-sfb-proper-pair-radicial-preparation.json adds the convention match (Y_i is quasi-compact, being of finite type) and the explicit closed immersion N_i↪P^{m_i}_e, and adds def-pc-projective-morphism to the Step 8 uses and to proof_deps. Nothing else is changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProperPairRadicialPreparation",
+  "declaration": "AlgebraicGeometry.exists_proper_pair_radicial_preparation",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperPairRadicialPreparation.lean",
+  "statement": "theorem exists_proper_pair_radicial_preparation (k : Type u) [Field k] (X : Scheme.{u}) [Nonempty X] (f : X ⟶ Spec (.of k)) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (Z : Set X) (hZ : IsClosed Z) (hZnd : interior Z = ∅) : ∃ (Xbar : Scheme.{u}) (fbar : Xbar ⟶ Spec (.of k)) (j : X ⟶ Xbar), IsProper fbar ∧ IsOpenImmersion j ∧ DenseRange j ∧ j ≫ fbar = f ∧ ∃ C : Set Xbar, IsClosed C ∧ interior C = ∅ ∧ j ⁻¹' C = Z ∧ ∃ (e : Type u) (_ : Field e) (i : k →+* e), i.Finite ∧ @IsPurelyInseparable k e _ _ i.toAlgebra ∧ (ringChar k = 0 → Function.Surjective i) ∧ ∃ (B : Scheme.{u}) (b : B ⟶ Spec (.of e)) (r : B ⟶ Xbar), IsProper b ∧ GeometricallyReduced b ∧ IsProjectiveBundle r ∧ Surjective r ∧ r ≫ fbar = b ≫ Spec.map (CommRingCat.ofHom i) ∧ (∃ (n : ℕ) (U : Fin n → B.Opens), Pairwise (fun a c ↦ Disjoint (U a) (U c)) ∧ (⨆ a, U a) = ⊤ ∧ ∀ a, IsNormalScheme (U a).toScheme) ∧ Set.BijOn r {η : B | ∃ T ∈ irreducibleComponents B, IsGenericPoint η T} {η : Xbar | ∃ T ∈ irreducibleComponents Xbar, IsGenericPoint η T} ∧ (∀ (T : Set B), T ∈ irreducibleComponents B → ∀ η : B, IsGenericPoint η T → (r.residueFieldMap η).hom.Finite ∧ @IsPurelyInseparable (Xbar.residueField (r η)) (B.residueField η) _ _ (r.residueFieldMap η).hom.toAlgebra) ∧ ∃ D : B.IdealSheafData, D.IsInvertible ∧ (D.support : Set B) = r ⁻¹' C",
+  "branch": "newtargets-dag",
+  "by": "NE",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1818d96eb",
+  "group": "NE",
+  "result": "pass",
+  "note": "All node clauses match the Lean exactly: dense open immersion over k (j⁻¹'C=Z), finite purely inseparable e/k via i.Finite and IsPurelyInseparable through i.toAlgebra, triviality in char 0 via surjectivity, IsProper b, GeometricallyReduced b, IsProjectiveBundle and Surjective r over k, finite disjoint open cover by IsNormalScheme pieces (integral and nonempty), BijOn on component generic points, finite purely inseparable residueFieldMap, IsInvertible ideal with support r⁻¹C. No extra hypotheses; single universe u. Edge cases Z=∅, X=∅ (excluded), n=0, char 0, imperfect k checked. Added stmt_dep def-sbc-normal-dominant-galois is the existing owner of IsNormalScheme. Statement field verbatim; one sorry; docstrings carry source, blueprint tag and 14 steps; no duplicate, not dropped, no repair note. No compile run because no file changed; worker scompile and dry run OK. Advisory: some proof-plan-only plain imports."
  }
 }
