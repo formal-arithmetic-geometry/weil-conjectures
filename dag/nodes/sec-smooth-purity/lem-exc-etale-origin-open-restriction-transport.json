@@ -35,26 +35,13 @@
  ],
  "proof": [
   {
-   "text": "Evaluate the underived restriction of direct image on a test object Q over W. Both paths are sections on V times_T Q, identified with U times_W Q by the Cartesian projections; the constant scalar sections act in the same way. The etale/pro-etale comparison therefore identifies these section maps, and the canonical constant-module realization retains the same scalar action.",
+   "text": "Take mates of the canonical inverse-image comparison cube. The fixed-site comparison-square coherence gives the inverse-image cube; cancellation of its comparison isomorphisms gives its forward orientation. The ordinary comparison of direct images is the specified mate. The fixed-scalar open-restriction isomorphism is the canonical base-change map.",
    "uses": [
-    "lem-weil-pbc-comparison-pullback",
-    "def-weil-pbc-proetale-operations",
-    "def-weil-proetale-inverse-image"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-exc-base-change-proper.proof.md",
-    "place": "Retained repaired Step 7, open-restriction and mate-pasting calculation (current Step 8); comparison and open-unit sources: Stacks proetale.tex section-comparison (099R), lemma-jshriek-comparison (09AF), lemma-open-immersion (09BN)."
-   }
-  },
-  {
-   "text": "Use the adjunction of open extension and restriction. Exact open extension implies restriction preserves K-injective complexes. Resolve the open-extended input on V and restrict its resolution on U. Derive the section square of the first step. Its comparison on the two direct-image edges is the counit-normalized comparison, by uniqueness of right derivation. On the D+ input insert the published inclusion comparisons before and after open extension; these are precisely the factors of etaleOriginOpenTargetComparison. Equivalently use the site-comparison exchange identity, transported from left-derived to exact termwise pullback.",
-   "uses": [
-    "lem-exc-proetale-derived-open-restriction",
+    "lem-fix-site-open-exchange-square",
+    "lem-weil-pbc-exchange-mate-cube",
     "lem-weil-pbc-comparison-direct-image-canonical-mate",
-    "lem-weil-pbc-transport-identifies-exchange",
-    "def-kun-unbounded-exchange",
-    "def-weil-proetale-inverse-image"
+    "lem-exc-proetale-derived-open-restriction",
+    "lem-fix-site-open-exchange-sheaf"
    ],
    "elementary": false,
    "source": {
@@ -63,11 +50,29 @@
    }
   },
   {
-   "text": "The unit-normalization theorem identifies the mate of inverse open-extension comparison with the restriction comparison on sheaves. Exact termwise derivation and the canonical realization equivalence preserve this mate and its unit equation. Apply it for both open edges i and k.",
+   "text": "Transport that ordinary cube through the canonical intrinsic module equivalences. Naturality of their units identifies the transported restriction isomorphism with the given sectionwise restriction. Derive both cubes using the universal property of right derivation, with exact transverse functors. Identify the canonical intrinsic derived direct-image comparison by its unique K-injective normalization. On bounded-below inputs, the inclusion comparison for the site-comparison mate gives precisely the published direct-image comparison.",
+   "uses": [
+    "lem-kun-unbounded-abelian-exchange-comparison",
+    "lem-kun-unbounded-exchange-agrees",
+    "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "lem-exc-proetale-derived-open-restriction",
+    "def-weil-pbc-proetale-operations",
+    "def-weil-proetale-inverse-image",
+    "def-kun-unbounded-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-exc-base-change-proper.proof.md",
+    "place": "Retained repaired Step 7, open-restriction and mate-pasting calculation (current Step 8); comparison and open-unit sources: Stacks proetale.tex section-comparison (099R), lemma-jshriek-comparison (09AF), lemma-open-immersion (09BN)."
+   }
+  },
+  {
+   "text": "The ordinary open-unit normalization identifies the mate of inverse extension comparison with inverse-image comparison. Exact localization preserves its unit equation: verify it on homotopy images using the normalized functor factorizations, then use essential surjectivity. Apply the same calculation to the realization equivalences and to the open adjunction localized on intrinsic complexes. The horizontal composition law for mates identifies the stated restriction mate with the composite pullback comparison.",
    "uses": [
     "lem-sf-open-comparison-unit-normalization",
     "lem-cbc-proetale-extension-zero-comparison",
-    "prop-exc-open-adjoint"
+    "prop-exc-open-adjoint",
+    "lem-fix-site-open-exchange-sheaf"
    ],
    "elementary": false,
    "source": {
@@ -76,13 +81,13 @@
    }
   },
   {
-   "text": "Apply the square of step 2 to k!K. Its etale restriction followed by Rr applied to the inverse open unit is lam.hom by the supplied equation. On the pro-etale side the corresponding composite is the inverse of the defined lambda inverse. Insert the two unit equations of step 3 and invert the restriction square. Cancel the forward and inverse open units and the D+ compatibility isomorphisms. The remaining factors, in order, are C_W(lam.inv), the mate at Rp_e(k!K), and i* of the target comparison on the left, and b_r followed by the intrinsic lambda inverse on the right. Empty opens and zero coefficients give the same identities in the zero category; no properness or Noetherian hypothesis was used.",
+   "text": "Paste the two derived cubes using naturality of the realization comparisons, obtaining the exchange square with the specified comparisons on all four edges. Evaluate at the exact open extension of the bounded-below input. Use the supplied formula for lam.hom, naturality of the direct-image comparison, and the mate unit identity to cancel the etale inverse open unit. Naturality of derived restriction with respect to extension comparison identifies the target comparison. Finally precompose by C(lam.hom) and cancel the restriction isomorphism to obtain the stated inverse formula. No properness or cohomological-dimension hypothesis is introduced; the same identities apply to empty opens and zero coefficients.",
    "uses": [
     "lem-exc-proetale-derived-open-restriction",
-    "def-kun-unbounded-exchange",
-    "prop-exc-open-adjoint"
+    "prop-exc-open-adjoint",
+    "def-kun-unbounded-exchange"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-exc-base-change-proper.proof.md",
     "place": "Retained repaired Step 7, open-restriction and mate-pasting calculation (current Step 8); comparison and open-unit sources: Stacks proetale.tex section-comparison (099R), lemma-jshriek-comparison (09AF), lemma-open-immersion (09BN)."
@@ -95,16 +100,19 @@
   "def-weil-proetale-inverse-image",
   "lem-cbc-proetale-extension-zero-comparison",
   "lem-exc-proetale-derived-open-restriction",
+  "lem-fix-site-open-exchange-sheaf",
+  "lem-fix-site-open-exchange-square",
+  "lem-kun-unbounded-abelian-exchange-comparison",
+  "lem-kun-unbounded-exchange-agrees",
   "lem-sf-open-comparison-unit-normalization",
   "lem-weil-pbc-comparison-direct-image-canonical-mate",
-  "lem-weil-pbc-comparison-pullback",
-  "lem-weil-pbc-transport-identifies-exchange",
+  "lem-weil-pbc-exchange-mate-cube",
   "prop-exc-open-adjoint"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-exc-base-change-proper.proof.md",
-  "place": "Retained repaired Step 7, open-restriction and mate-pasting calculation (current Step 8); comparison and open-unit sources: Stacks proetale.tex section-comparison (099R), lemma-jshriek-comparison (09AF), lemma-open-immersion (09BN)."
+  "place": "Retained Step 7: ordinary comparison mate cube, exact right-derivation, normalized localization of open units, and final naturality cancellation; proved by Q4."
  },
  "mathlib_searches": [
   {
@@ -171,13 +179,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "C-00d8e",
-  "group": "F7",
+  "reviewer": "COMPILER",
+  "group": "Q4",
   "result": "pass",
-  "landing": "20261020T051254-L-1616471",
+  "landing": "20261022T020113-L-27828",
   "kind": "interface",
-  "note": "independent cc review: delivered EtaleOriginOpenRestrictionTransport + item vs live clone: 4 moved defs byte-identical (docstring id only), interchange body defeq to old choose (unfold;rfl compiled), item proof complete except new restriction-transport sorry; both modules and importer CompactSupportUniformTorBound compile (560 s limit, load 250-440; base item itself timed out at 560 s)"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
