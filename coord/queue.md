@@ -1,15 +1,14 @@
 # Work queue
 
-44 items; claim with `tools/claim.py next <group> [--stage N]`.
+43 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Rework: quarantined by the upstream sync (3 clusters, 269 modules)
+## Rework: quarantined by the upstream sync (2 clusters, 269 modules)
 
 Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.tsv). One item per cluster: its root (a quarantined module importing no other quarantined one) and the quarantined modules importing it; fix the root, then the dependents as far as possible, deliver every module that compiles.
 
 | item (root) | modules | other roots | cause of the root |
 |---|---|---|---|
 | `Sheaf.PoincareDuality.ProperProjectionFormulaBounded` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
-| `Sheaf.AlgebraicGeometry.ModuleSpecializationAbelianIso` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.MixedPullbackSquareTensorCoherence` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 
 Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 53, stage 3 1 items.
