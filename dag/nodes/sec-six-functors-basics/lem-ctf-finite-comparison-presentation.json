@@ -18,31 +18,63 @@
  ],
  "proof": [
   {
-   "text": "Use the exact coefficient-model equivalences and the specified internal realization. Under constant scalars, local finite module models agree with the sheafified constant-module construction. The same finite module and covering sieve give trivializations in both directions.",
+   "text": "Use the specified exact coefficient-model and small-site equivalences. Express local finite constant modules using a covering sieve and transport these same sieves, modules and constant-sheaf isomorphisms across the equivalences and slice restrictions. On the pro-etale site identify the terminal covering sieve with scheme covers through the weakly etale slice equivalences and the public finite-models-over lemma.",
    "uses": [
     "lem-ctf-finite-comparison-model-realization",
     "lem-ctf-finite-comparison-coefficients",
-    "lem-weil-pbc-constant-coefficient-local-models-comparison"
+    "lem-weil-pbc-proetale-finite-model-local-constancy",
+    "lem-weil-proetale-weakly-etale-localization"
    ],
    "elementary": false
   },
   {
-   "text": "Apply these identifications on each locally closed stratum. A finite affine cover of a qcqs scheme and the global refinement of its local finite stratifications identify the affine-local convention with the global convention; pull back local models along the actual factorization morphisms. Finite B-modules are finitely presented over the Noetherian finite ring. Finite matrix presentations of point coefficient modules identify their pullbacks with these same constant finite models.",
+   "text": "Globalize affine-local finite stratifications on the qcqs scheme with the generic refinement argument. Apply the local constant-module comparisons on every stratum, keeping the actual pullback morphisms.",
    "uses": [
-    "lem-weil-pbc-etale-stratification-local-gluing-core",
-    "lem-sfb-coefficient-finite-local-systems-pullback"
+    "lem-sfb-noetherian-global-constructibility"
    ],
    "elementary": false
   },
   {
-   "text": "The scalar identifications are strong monoidal: the tensor comparison sends a pure tensor of the original sections to that same pure tensor and commutes with sheafification. Exactness and these comparisons transport bounded flat representatives in both directions. The coefficient-model flat-complex criterion therefore identifies the Tor predicates.",
+   "text": "For a finite module over the finite coefficient ring, use a finite free cokernel presentation. The common internal/ordinary encoding preserves the regular module, finite sums and cokernels, so its constant internal module is finitely presented. Construct its constant internal presheaf explicitly, with componentwise scalar action, and then sheafify. The action comparison gives the ordinary constant sheaf without unfolding identity scalar restriction. Transport it along eR inverse. The monoidal constant-sheaf pullback comparison identifies its point pullback with the specified scheme encoding, with explicit transport between the canonical and monoidally induced ring structures.",
    "uses": [
+    "lem-weil-pbc-internal-module-ab-equivalence",
+    "lem-weil-pbc-finite-discrete-encoded-presentation",
+    "def-sfb-constant-sheaf-scheme-pullback-comparison",
+    "lem-weil-pbc-finite-discrete-scheme-ring-constant"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The common encoding commutes with the specified normalized scheme pullbacks. Thus each ordinary finite local constant model supplies the same finite point model after encoding. Conversely the existing finite-constant-local-model theorem makes finite point models locally finitely presented, so the existing constructible encoding theorem recovers ordinary constructibility. Use the same finite stratification in both directions.",
+   "uses": [
+    "lem-weil-pbc-finite-discrete-restriction-encoding",
+    "lem-weil-pbc-module-constructible-pullback",
+    "lem-weil-pbc-finite-discrete-constructible-encoding",
+    "det-def-sfb-constructible-local-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify the literal internal realization with the common encoding using the sheafification adjunction. Its inverse is the section-module equivalence followed by restriction along the specified constant-ring isomorphism and constant scalar restriction. The section action and sheafification-unit equations identify these scalar actions exactly.",
+   "uses": [
+    "lem-ctf-finite-comparison-coefficients",
+    "lem-sf-finite-discrete-normalized-encoding",
+    "lem-weil-pbc-finite-discrete-restriction-encoding"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Build the strong monoidal structure with Mathlib's CoreMonoidal.mk' constructor from the normalized tensor and unit isomorphisms and coherence of the proved public section-tensor-comparison theorem. First prove existence of the coherent ordinary monoidal structure in a private lemma, then select it through that small interface. Only existence of the strong monoidal structure is needed for finite-Tor transport. Compose it with normalized ring-isomorphism tensor transport and constant scalar restriction. Equivalence preserves and reflects flatness, so the coefficient-model flat-complex criterion and the derived tensor transport identify the same finite Tor intervals.",
+   "uses": [
+    "lem-pe-internal-section-tensor-comparison",
+    "lem-sfb-ring-isomorphism-tensor-transport",
+    "lem-sfb-constant-scalar-restriction-tensor",
     "lem-pe-coefficient-tor-flat-model"
    ],
    "elementary": false
   },
   {
-   "text": "Exactness identifies homology and reflects its vanishing, hence preserves and reflects finite cohomological bounds. Essential surjectivity supplies representatives of every ordinary derived object; transport the predicates through the representative isomorphism to obtain the two replete-image equalities.",
+   "text": "Exact equivalences commute with homology and preserve and reflect zero objects, so they preserve the finite cohomological vanishing intervals. Apply the constructibility comparisons to homology. Finally essential surjectivity and closure under isomorphisms identify the two replete images.",
    "uses": [],
    "elementary": true
   }
@@ -50,15 +82,27 @@
  "proof_deps": [
   "lem-ctf-finite-comparison-model-realization",
   "lem-ctf-finite-comparison-coefficients",
-  "lem-weil-pbc-constant-coefficient-local-models-comparison",
-  "lem-weil-pbc-etale-stratification-local-gluing-core",
-  "lem-sfb-coefficient-finite-local-systems-pullback",
-  "lem-pe-coefficient-tor-flat-model"
+  "lem-weil-pbc-proetale-finite-model-local-constancy",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-sfb-noetherian-global-constructibility",
+  "lem-weil-pbc-internal-module-ab-equivalence",
+  "lem-weil-pbc-finite-discrete-encoded-presentation",
+  "def-sfb-constant-sheaf-scheme-pullback-comparison",
+  "lem-weil-pbc-finite-discrete-scheme-ring-constant",
+  "lem-weil-pbc-finite-discrete-restriction-encoding",
+  "lem-weil-pbc-module-constructible-pullback",
+  "lem-weil-pbc-finite-discrete-constructible-encoding",
+  "lem-sf-finite-discrete-normalized-encoding",
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-sfb-ring-isomorphism-tensor-transport",
+  "lem-sfb-constant-scalar-restriction-tensor",
+  "lem-pe-coefficient-tor-flat-model",
+  "det-def-sfb-constructible-local-model"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-comparison/sk-prop-ctf-finite-comparison-localizing.proof.md",
-  "place": "opening paragraph, expanded coefficient-presentation argument"
+  "place": "opening coefficient-presentation paragraph; explicit equivalences, direct covering-sieve comparison, finite presentations and tensor transport by J9"
  },
  "mathlib_searches": [
   {
@@ -167,14 +211,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "C-e8c8a",
-  "group": "C2",
+  "reviewer": "COMPILER",
+  "group": "J9",
   "result": "pass",
-  "landing": "20261021T024147-L-3039041",
+  "landing": "20261022T013423-L-3571527",
   "kind": "interface",
-  "note": "independent cc review: e8c8ab950083 Lean+node files byte-identical to PASSed e6b6ce7b2f; change record now lists both users FiniteDiscreteCtfOrigin and FiniteDiscreteCtfRealization; --all compile of 4 modules plus both importers against live, exit 0"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "lean_audit": {}
 }
