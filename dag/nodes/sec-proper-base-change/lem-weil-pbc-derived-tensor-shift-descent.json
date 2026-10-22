@@ -20,115 +20,77 @@
  ],
  "proof": [
   {
-   "text": "Put $L=Q_h|_{\\mathcal P_R}$ and write $\\lambda_n(X):Q_h(X[n])\\cong Q_h(X)[n]$ for the coherent comparisons of [lem-pur-homotopy-category-triangulated]. The total tensor of [def-pc-tensor-complex-sheaves] has the natural chain comparisons $s^i_n$ of [lem-weil-pbc-total-tensor-integer-shifts]; their naturality passes to homotopy classes by applying the quotient functor. Shift stability ensures $P[n],S[n]\\in\\mathcal P_R$. Define a natural isomorphism on resolving pairs by the following composite, written in order of application:\n$$T(LP[n],LS)\\xrightarrow{T(\\lambda_n(P)^{-1},1)}T(L(P[n]),LS)\\xrightarrow{c_{P[n],S}^{-1}}Q_h\\operatorname{Tot}(P[n]\\otimes S)\\xrightarrow{Q_hs^1_n}Q_h(\\operatorname{Tot}(P\\otimes S)[n])\\xrightarrow{\\lambda_n(\\operatorname{Tot}(P\\otimes S))}Q_h\\operatorname{Tot}(P\\otimes S)[n]\\xrightarrow{c_{P,S}[n]}T(LP,LS)[n].$$\nCall it $\\delta^1_n(P,S)$. Define $\\delta^2_n$ by replacing the first arrow with $T(1,\\lambda_n(S)^{-1})$, the next comparison with $c_{P,S[n]}^{-1}$, and the middle chain map with $Q_hs^2_n$. Naturality of $c$ in [lem-weil-pbc-site-derived-tensor-descent], of $\\lambda$, and of the chain comparisons proves naturality of these composites in both homotopy-category variables. Every arrow used here is an isomorphism.",
+   "text": "Apply the existing source-library theorem Functor.commShift₂OfLocalization to the homotopy quotient in both variables, using the published tensorDescentComplexIso. Postcomposition of signed bifunctors with the additive quotient preserves the mixed sign. This equips the published homotopy tensor with its coherent signed integer shifts.",
    "uses": [
-    "lem-weil-pbc-site-derived-tensor-descent",
     "lem-weil-pbc-total-tensor-integer-shifts",
     "lem-pur-homotopy-category-triangulated",
-    "def-pc-tensor-complex-sheaves"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0FNH (item-shift-tensor); Mathlib/Algebra/Homology/BifunctorShift.lean:95-174; sites-cohomology.tex Tag 06YU (definition-derived-tor), representative comparisons"
-   }
-  },
-  {
-   "text": "For $i=1,2$, let $U^1_n(M,N)=T(M[n],N)$, $U^2_n(M,N)=T(M,N[n])$, and $V_n(M,N)=T(M,N)[n]$. The arbitrary-transformation extension clause of [lem-weil-pbc-site-derived-tensor-descent], with target $D(R)$, extends $\\delta^i_n$ uniquely to $t^i_n:U^i_n\\to V_n$. Apply the same clause to $(\\delta^i_n)^{-1}$ to obtain $u^i_n:V_n\\to U^i_n$. Both $u^i_nt^i_n$ and the identity restrict to the identity on resolving pairs, and likewise for $t^i_nu^i_n$. The uniqueness clause makes these composites identities. Hence $t^i_n$ is a natural isomorphism. Any other natural isomorphism with the prescribed restriction has the same underlying transformation, again by uniqueness. This constructs the structures on the specified published $T$, without replacing that bifunctor.",
-   "uses": [
-    "lem-weil-pbc-site-derived-tensor-descent"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 04VK (lemma-properties-right-localization), arbitrary-transformation enhancement in the cited descent node"
-   }
-  },
-  {
-   "text": "For the zero law, compare $t^i_0$ with the canonical zero-shift identification. For the addition law, compare $t^i_{a+b}$ with the composite extracting $b$ and then $a$, inserting the canonical source and target shift-addition isomorphisms. In each case the two sides are natural transformations between the same bifunctors on $D(R)\\times D(R)$. Restrict along $L\\times L$. A component evaluated at a shifted object such as $(LP)[a]$, which is not itself of the form $L(P')$, is first rewritten by naturality of $t^i_b$ in that variable along the isomorphism $\\lambda_a(P):L(P[a])\\to(LP)[a]$; since $P[a]\\in\\mathcal P_R$, this replaces it by $\\delta^i_b(P[a],S)$ of Step 1, conjugated by $\\lambda_a(P)$. Substitute the composites in Step 1: consecutive $c^{-1}c$ cancel, and naturality moves the remaining $c$ past the canonical shift isomorphisms. The zero and addition laws for $\\lambda$ hold by [lem-pur-homotopy-category-triangulated]. The resulting equality is precisely the corresponding zero or addition law for $Q_hs^i$, supplied by [lem-weil-pbc-total-tensor-integer-shifts]. Faithfulness of restriction in [lem-weil-pbc-site-derived-tensor-descent] gives the desired equality on all derived pairs. All shifted representatives used in this restriction remain in $\\mathcal P_R$ by hypothesis.",
-   "uses": [
+    "def-pc-tensor-complex-sheaves",
     "lem-weil-pbc-site-derived-tensor-descent",
-    "lem-weil-pbc-total-tensor-integer-shifts",
-    "lem-pur-homotopy-category-triangulated"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0FNH (item-shift-tensor); Mathlib/Algebra/Homology/BifunctorShift.lean:234-265,281-311; categories.tex Tag 04VK"
-   }
-  },
-  {
-   "text": "For fixed $a,b$, form the two composites from $T(M[a],N[b])$ to $T(M,N)[a+b]$, one extracting the first shift first and the other extracting the second shift first. They are natural transformations in $(M,N)$. On resolving pairs, substitute Step 1 and cancel the intermediate representative comparisons as in Step 3. Coherence of $\\lambda$ identifies the two target iterated shifts. The remaining equality, including its sign, is the mixed-shift identity of [lem-weil-pbc-total-tensor-integer-shifts]. Concretely, on a summand whose first-factor degree in $P[a]$ is $p$, extracting the second shift first contributes $(-1)^{bp}$, whereas extracting the first shift first leaves first degree $p+a$ and contributes $(-1)^{b(p+a)}$; their quotient is $(-1)^{ab}$. The additive localization $Q_h$ preserves this sign, and conjugating by $c$ preserves multiplication by $-1$ in the additive derived category [def-weil-abstract-derived-category]. Thus the two transformations, with the sign inserted, have equal restrictions. Faithfulness in [lem-weil-pbc-site-derived-tensor-descent] makes them equal globally. Together with Step 3 this is the claimed coherent integer bifunctor shift structure.",
-   "uses": [
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "lem-weil-pbc-total-tensor-integer-shifts",
-    "lem-pur-homotopy-category-triangulated",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0FNH (item-shift-tensor); Mathlib/Algebra/Homology/BifunctorShift.lean:199-205,326-335; categories.tex Tag 04VK"
-   }
-  },
-  {
-   "text": "Naturality of the transformation $t^2_n$ constructed in Step 2, evaluated at $(f,1_N)$, is exactly\n$$t^2_n(M',N)\\circ T(f,1_{N[n]})=T(f,1_N)[n]\\circ t^2_n(M,N).$$\nNaturality of $t^1_n$ at $(1_M,g)$ gives the other required square. Here $f,g$ are arbitrary morphisms in $D(R)$; there is no restriction to chain maps. In particular a square for an invertible $f$ implies the square for $f^{-1}$ by multiplying by the inverse vertical arrows. Squares paste under composition. Therefore they hold for inverses of quasi-isomorphisms and every localization word. If two words represent the same morphism, functoriality of $T$ makes their vertical arrows equal, proving independence of the word.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 04VK (lemma-properties-right-localization); direct naturality equations for the transformations of Step 2"
-   }
-  },
-  {
-   "text": "Fix $A\\in\\mathcal P_R$ and a normalized comparison $e_L$ as in the statement. Write $H=H_A$ and $F=T(Q_hA,-)$. For each $n$ define two transformations from $B\\mapsto Q_hH(B[n])$ to $B\\mapsto F(Q_hB)[n]$:\n$$\\alpha_B=t^2_n(Q_hA,Q_hB)\\circ F(\\lambda_n(B))\\circ e_{L,B[n]},\\qquad\n\\beta_B=e_{L,B}[n]\\circ\\lambda_n(H(B))\\circ Q_h(s^2_n(A,B)).$$\nBoth are natural for homotopy-category maps: for $\\alpha$ use naturality of $t^2_n,e_L,\\lambda$, and for $\\beta$ use naturality of $e_L,\\lambda,s^2_n$ from [lem-weil-pbc-total-tensor-integer-shifts]. If $B=P\\in\\mathcal P_R$, then also $P[n]\\in\\mathcal P_R$ and normalization gives $e_{L,P}=c_{A,P}$ and $e_{L,P[n]}=c_{A,P[n]}$. Substituting Step 1 into $\\alpha_P$ cancels $F(\\lambda_n(P)^{-1})F(\\lambda_n(P))$ and $c_{A,P[n]}^{-1}c_{A,P[n]}$, giving exactly $\\beta_P$. This explicitly verifies the shift square on resolving objects.",
-   "uses": [
-    "lem-weil-pbc-total-tensor-integer-shifts",
-    "lem-pur-homotopy-category-triangulated"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0FNH (item-shift-tensor); sites-cohomology.tex Tag 06YU (definition-derived-tor); substitution into Step 1"
-   }
-  },
-  {
-   "text": "For an arbitrary $B\\in K(R)$, choose a complex representing it. By [lem-pc-kflat-resolution] there is a quasi-isomorphism $r:P\\to B$ with $P\\in\\mathcal P_R$. The shifted map $r[n]$ is a quasi-isomorphism because its cohomology maps are those of $r$ with degrees reindexed. The assumed quasi-isomorphism preservation by $H$ and the localization property [def-weil-abstract-derived-category] make $v=Q_hH(r[n])$ invertible. Naturality of the two transformations in Step 6 gives\n$$\\alpha_B\\circ v=F(Q_hr)[n]\\circ\\alpha_P=F(Q_hr)[n]\\circ\\beta_P=\\beta_B\\circ v.$$\nCancel $v$ to obtain $\\alpha_B=\\beta_B$. This proves that every such $e_L$ commutes with shifts on all $B$. For $e_R$ repeat these same equations with $H^A$, $F=T(-,Q_hA)$, $t^1_n$, and $s^1_n(B,A)$; the normalized resolving components are $c_{P,A}$. The resolution still replaces the varying argument $B$, so the proof requires no resolution or flatness condition on its cohomology.",
-   "uses": [
-    "lem-pc-kflat-resolution",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YS (lemma-K-flat-resolution); Tag 06YU (definition-derived-tor and preceding localization construction)"
-   }
-  },
-  {
-   "text": "Finally $Q_hH_A$ and $Q_hH^A$ invert quasi-isomorphisms by hypothesis. The localization universal property [lem-weil-pbc-localization-universal-property] descends each functor and its signed shift comparisons in one variable. More explicitly, $e_L$ exhibits $F=T(Q_hA,-)$ as a factorization of $Q_hH_A$ through $Q_h$. Conjugate $Q_hs^2_n$ using $e_L$ and $\\lambda_n$; the transformation-extension clause for $Q_h$ extends this to a unique transformation $F(-[n])\\to F(-)[n]$. Extend its inverse too; uniqueness makes the composites identities. The same uniqueness applied to zero and addition identities gives the one-variable coherent shifts. Steps 6-7 say exactly that $t^2_n(Q_hA,-)$ has this required conjugated restriction, so it equals that one-variable descended shift. Apply the identical argument with $e_R,H^A,s^1_n$ for $t^1_n(-,Q_hA)$. Any other factorization is identified with this one by the unique compatible natural isomorphism in the same universal property. All arguments used unbounded resolutions and direct-sum total tensor, with no boundedness assumption.",
-   "uses": [
     "lem-weil-pbc-localization-universal-property"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YU (definition-derived-tor and preceding construction); categories.tex Tag 04VK (lemma-properties-right-localization), transformation enhancement; Mathlib/CategoryTheory/Shift/Localization.lean:139-218"
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FNH (item-shift-tensor); sites-cohomology.tex Tags 06YS and 06YU; categories.tex Tag 04VK."
+   }
+  },
+  {
+   "text": "The assumed shift stability induces shifts on the full resolving subcategory. Its inclusion commutes with shifts. Restrict the homotopy tensor to this subcategory and postcompose with Qh. The published resolving localization equivalence makes the restricted Qh a localization. Apply Functor.commShift₂OfLocalization again using tensorDescentDerivedIso, obtaining shifts on exactly the specified published derived tensor, with zero, addition, mixed sign and naturality already proved by that general theorem.",
+   "uses": [
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-pur-homotopy-category-triangulated",
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FNH (item-shift-tensor); sites-cohomology.tex Tags 06YS and 06YU; categories.tex Tag 04VK."
+   }
+  },
+  {
+   "text": "For either variable, the liftingIsoApp theorem says that each of the two localization comparisons commutes with shifts. Paste these two squares. Naturality of the Qh shift comparison moves the complex-to-homotopy comparison through it. The quotient shift comparison and the full-subcategory inclusion shift comparison are identities on objects; the canonical quotientCompQhIso identifies the remaining comparison with that of Q. This gives exactly tensorResolvingShiftCompatible for tensorDescentPair. For uniqueness choose resolving representatives isomorphic to both arbitrary derived objects, use naturality of both candidate transformations along their product isomorphism, and cancel its invertible image.",
+   "uses": [
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-pur-homotopy-category-triangulated",
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FNH (item-shift-tensor); sites-cohomology.tex Tags 06YS and 06YU; categories.tex Tag 04VK."
+   }
+  },
+  {
+   "text": "For a normalized fixed-factor comparison the required shift square on a resolving varying argument is the normalization formula just proved, since its shift is still resolving. For any varying complex B choose a flat-term K-flat resolution f:P to B. Its shift is a quasi-isomorphism. Quasi-isomorphism preservation by the fixed tensor functor makes its localized shifted image invertible. Naturality of the comparison and of both shift comparisons identifies the two sides of the square at B after precomposition with that image with the equal sides at P. Cancel it. Repeat with the tensor order reversed. The resolution theorem states termwise exactness of the categorical tensor-right functor. Use the canonical siteSheafTensorRightIso of [lem-weil-pbc-independent-sheaf-tensor-colimits] and invariance of exactness under natural isomorphism to obtain precisely the IsFlatOnSite predicate in TensorFlatRepresentative.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-total-tensor-integer-shifts",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FNH (item-shift-tensor); sites-cohomology.tex Tags 06YS and 06YU; categories.tex Tag 04VK."
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-site-derived-tensor-descent",
   "lem-weil-pbc-total-tensor-integer-shifts",
   "lem-pur-homotopy-category-triangulated",
   "def-pc-tensor-complex-sheaves",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-pbc-localization-universal-property",
   "def-weil-abstract-derived-category",
   "lem-pc-kflat-resolution",
-  "lem-weil-pbc-localization-universal-property"
+  "lem-weil-pbc-independent-sheaf-tensor-colimits"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 06YU (definition-derived-tor), augmented by the published arbitrary-transformation extension property of lem-weil-pbc-site-derived-tensor-descent; signs from more-algebra.tex Tag 0FNH (item-shift-tensor). The explicit two-variable and normalized-comparison argument is written by Q13."
+  "place": "Tags 06YS and 06YU, with more-algebra.tex Tag 0FNH. V2 reuses the proved source-library two-variable localization and postcomposition theorems, pastes their exact comparison squares, proves representative uniqueness by naturality, and extends normalized fixed-comparison squares by cancellation along a K-flat resolution."
  },
  "mathlib_searches": [
   {
@@ -273,5 +235,15 @@
   "group": "Q29",
   "result": "pass",
   "note": "Re-delivery repairing the H2 return of 11346db0. Lean module byte-identical (sha256 dcd98fb9…), so the prior full clause-by-clause substance check stands. Item changes only lean and stmt_deps: the theorem node lem-trf-site-derived-tensor-restriction is replaced by new existing:true def node def-weil-pbc-tensor-descent-representative-comparison, which owns the 7 real defs in Sheaf.Paper.SiteDerivedTensorRestriction (SiteTensorComplexFunctor, tensorDescentClass/ComplexIso/DerivedIso, TensorFlatRepresentative, siteRestrictionDerivedTensor, tensorDescentPair). Their .choose terms come only from the cited descent theorem. Statement signatures verbatim (both nodes); TeX formula matches the Lean body and arrow directions; cited ids = stmt_deps; §5 fields OK; no competing owner or id collision in side-live; the item's used decls are covered. No compile (no file changed). Advisory: heavy import of the restriction module."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261022T013506-L-3591887",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
