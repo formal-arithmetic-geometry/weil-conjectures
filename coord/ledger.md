@@ -24177,3 +24177,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 2026-10-22T01:20:13Z L: superseded stage-1 delivery NH/lem-pur-projection-purity-agreement at bc829d07d11256e24b0243ed31682f258a1f3fe3; current completion retained; packet archived at refs/superseded/NH/lem-pur-projection-purity-agreement/bc829d07d11256e24b0243ed31682f258a1f3fe3; stale return retired.
 - 01:20 L: merged deliver/NK/lem-sfb-finite-normal-ample-descent (reviewer PASS; first push; new nodes: 2)
 - 01:20 L: merged deliver/NM/lem-sfb-finite-quotient-generic-fields (reviewer PASS; first push; new nodes: 0)
+- 01:20 L: merged deliver/NN/lem-sfb-finite-quotient-normal-proper (reviewer FIX+NODE(1); first push; new nodes: 1)
