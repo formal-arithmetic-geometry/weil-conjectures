@@ -1,0 +1,150 @@
+{
+ "id": "def-weil-pbc-ringed-projection-restriction-data",
+ "kind": "definition",
+ "title": "Normalized ringed projection and slice comparison data",
+ "statement": "For essentially small ringed sites with site objects in universe u+1, site arrows in u and coefficient elements in u+1, use the existing module category and standard ordinary unbounded derived localization. A tensor model consists of the signed total tensor on flat-term K-flat representatives, a natural representative isomorphism, and full faithfulness of restriction of transformations to pairs of such representatives. Tensor shifts are the two canonical integer shifts normalized by the signed total maps. An exact model is the termwise localization with its factorization. An operation datum is the canonical exact-left and K-injective-right construction of [def-pur-ringed-module-derived-operations]. For a scheme morphism f with a specified identification f-inverse RY isomorphic to RX, a Global datum records its fixed coefficient adjunct, the canonical module and derived adjunction, two such tensor models and normalized tensor comparisons. A Local datum at V records the actual overFunctor restrictions, Over.post localization, its fixed restricted coefficient maps, identity-on-sections ordinary direct-image square, K-injective restriction, and the normalized derived square and tensor comparisons. ProjectionCompatible is the equality between restriction of the actual counit projection mate and its localized mate under the explicit source and target composites. These are the unchanged definitions previously housed with the assembly theorem.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08FI (lemma-restrict-K-injective-to-open), 0FN5 (lemma-localize-cartesian-square-modules), 07A4 (lemma-pullback-tensor-product); slice-topos restriction of the counit map 0B56."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-proetale-operations",
+  "def-pc-kflat-complex",
+  "lem-pc-kflat-resolution",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-abstract-derived-category",
+  "def-pur-localized-ringed-site",
+  "def-pur-ringed-module-derived-operations"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction to localized ringed sites commutes with derived direct image and derived tensor product and detects isomorphisms locally",
+   "results": "8 ordinary pullback and restriction hits; no combined normalized package.",
+   "date": "2026-10-21",
+   "verdict": "Use existing project generic canonical tensor and slice results; their small-site universe convention requires bridging."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"overFunctor\"",
+   "results": "overFunctor and overFunctorMap.",
+   "date": "2026-10-21",
+   "verdict": "No normalized derived package."
+  },
+  {
+   "tool": "grep",
+   "query": "overFunctor|mapDerivedCategoryHomologyFunctorIso|CoversTop",
+   "results": "25 Mathlib hits; ordinary restrictions and sheaf covers. Project searches located RingedDerivedSliceLocalization, ProEtaleCanonicalTensorPullback and independent-universe tensor interfaces.",
+   "date": "2026-10-21",
+   "verdict": "No existing theorem has these normalized package conclusions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact restriction to slice sites detects isomorphisms of unbounded derived sheaves of modules on a covering family",
+   "results": "Eight hits, including the forgetful module-to-sheaf isomorphism reflection result. No normalized derived projection package.",
+   "date": "2026-10-21",
+   "verdict": "Use exact-derived cohomology, ordinary sheaf gluing and isomorphism reflection; construct the normalized tensor and localization interfaces separately."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingedProjectionRestriction",
+  "date": "2026-10-21",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-perfect-projection-formula",
+   "place": "Detailed form: first locality sentence preceding the finite-complex argument; normalized restriction of the ringed projection mate.",
+   "via": [
+    "lem-weil-pbc-ringed-projection-restriction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RingedProjectionRestrictionData",
+  "file": "lean/Sheaf/Paper/RingedProjectionRestrictionData.lean",
+  "declaration": "AlgebraicGeometry.Scheme.ProjectionRestriction.TensorModel",
+  "statement": "structure TensorModel (R : Sheaf J CommRingCat.{u + 1})",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-21",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.Mod",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.derived",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.derivedOver",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.derivedOverModules",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.Der",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.tensor",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.total",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.resolving",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.TensorModel",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.tensorShiftFirst",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.tensorShiftSecond",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.TensorShifts",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.pure",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.ExactModel",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.Operation",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.Operation.pullback",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.Operation.pushforward",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.Operation.left",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.Operation.right",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.Operation.leftShift",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.Operation.leftModel",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.Operation.leftModelShift",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.Operation.rightShift",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.Operation.rightComparison",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.Operation.moduleAdjunction",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.Operation.derivedAdjunction",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.Operation.derivedCounit",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.Operation.DerivedAdjunction",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.Operation.OrdinaryTensor",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.totalComponent",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.totalMap",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.TensorComparisonCore",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.TensorComparisonCore.Representative",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.TensorComparison",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.TensorComparisonShifts",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.Restriction",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.Restriction.model",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.Restriction.modelShift",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.Global",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.Local",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.Local.sourceIso",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.Local.targetIso",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.Local.ProjectionCompatible"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-755fa",
+  "group": "C2",
+  "result": "fix",
+  "landing": "20261022T023434-L-822000",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-755fa",
+  "group": "C2",
+  "result": "fix",
+  "landing": "20261022T023434-L-822000",
+  "kind": "interface",
+  "note": "independent cc review: delivered Lean/DAG vs heads 870ff0b861f1 and b43e339e3348 (byte-identical; b43e PASSed with 9 importers compiled); Data block vs live item module (identical); change-record Users vs live transitive importer closure (1890 modules)"
+ }
+}

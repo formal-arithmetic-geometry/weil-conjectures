@@ -1,0 +1,144 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08FI (lemma-restrict-K-injective-to-open), 0FN5 (lemma-localize-cartesian-square-modules), 07A4 (lemma-pullback-tensor-product); slice-topos restriction of the counit map 0B56."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ringed-projection-restriction-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Construct the normalized comparison by ordinary pure-tensor naturality, independent-universe totalization and fully faithful descent; only the signed shift squares use the separate result."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction to localized ringed sites commutes with derived direct image and derived tensor product and detects isomorphisms locally",
+   "results": "8 ordinary pullback and restriction hits; no combined normalized package.",
+   "date": "2026-10-21",
+   "verdict": "Use existing project generic canonical tensor and slice results; their small-site universe convention requires bridging."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"overFunctor\"",
+   "results": "overFunctor and overFunctorMap.",
+   "date": "2026-10-21",
+   "verdict": "No normalized derived package."
+  },
+  {
+   "tool": "grep",
+   "query": "overFunctor|mapDerivedCategoryHomologyFunctorIso|CoversTop",
+   "results": "25 Mathlib hits; ordinary restrictions and sheaf covers. Project searches located RingedDerivedSliceLocalization, ProEtaleCanonicalTensorPullback and independent-universe tensor interfaces.",
+   "date": "2026-10-21",
+   "verdict": "No existing theorem has these normalized package conclusions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact restriction to slice sites detects isomorphisms of unbounded derived sheaves of modules on a covering family",
+   "results": "Eight hits, including the forgetful module-to-sheaf isomorphism reflection result. No normalized derived projection package.",
+   "date": "2026-10-21",
+   "verdict": "Use exact-derived cohomology, ordinary sheaf gluing and isomorphism reflection; construct the normalized tensor and localization interfaces separately."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingedProjectionRestriction",
+  "date": "2026-10-21",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-perfect-projection-formula",
+   "place": "Detailed form: first locality sentence preceding the finite-complex argument; normalized restriction of the ringed projection mate.",
+   "via": [
+    "lem-weil-pbc-ringed-projection-restriction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "id": "lem-weil-pbc-ringed-projection-tensor-comparison",
+ "title": "Descent and signed shifts of the normalized pro-etale tensor comparison",
+ "statement": "Fix f:X to Y, ring sheaves R,S and an identification f-inverse R isomorphic to S. Let o be an exact module operation datum for the pro-etale base-change site functor whose coefficient map is exactly the adjunct of that identification. Let a,b be tensor models on the two sites and sa,sb their representative-normalized integer shifts, as in [def-weil-pbc-ringed-projection-restriction-data]. Given an ordinary tensor comparison mu for o satisfying its pure-unit equation, there is a TensorComparison for the actual exact derived functor o.leftModel, computed by mu in every total bidegree and normalized on all resolving pairs. It satisfies both TensorComparisonShifts equations for the supplied sa,sb and the canonical exact-functor shift. This asserts only the tensor comparison for already supplied operations, tensor models and shifts.",
+ "proof": [
+  {
+   "text": "Transpose the supplied ordinary tensor comparison under the canonical module adjunction. Naturality of its unit and functoriality of pure tensors show that its two naturality paths agree on every pure tensor. The sheafified pure-tensor extensionality lemma and the adjunction hom-bijection prove naturality.",
+   "uses": [
+    "def-weil-pbc-ringed-projection-restriction-data",
+    "def-weil-pbc-ringed-tensor-section-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify the module left adjoint with the explicit pro-etale inverse image using uniqueness of left adjoints. Map this isomorphism to cochain complexes. Transfer K-flatness across this isomorphism and termwise flatness across the tensor functor isomorphism. Apply canonical pro-etale tensor pullback preservation to the explicit model. This proves preservation for the supplied operation.",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-ringed-topos-kflat-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The natural ordinary comparison induces the signed total chain map; the module adjunction makes this map an isomorphism, and its naturality follows from total-sum inclusions. Cochain model rigidity supplies fully faithful restriction to resolving pairs with arbitrary target Der S. Apply tensor comparison descent to the exact-derived factors and this chain isomorphism. Postcompose its representative square with the inverse target representative and the chain map, cancelling inverse factors, to prove exactly TensorComparison.Representative.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-sf-cochain-tensor-model-rigidity",
+    "lem-weil-pbc-tensor-comparison-descent-representatives"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the separate signed-shift result to the already constructed normalized TensorComparison. This completes the pro-etale tensor comparison without constructing any new operation or localization datum.",
+   "uses": [
+    "lem-weil-pbc-ringed-projection-tensor-shifts"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ringed-projection-restriction-data",
+  "def-weil-pbc-ringed-tensor-section-calculus",
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "lem-sf-cochain-tensor-model-rigidity",
+  "lem-weil-pbc-tensor-comparison-descent-representatives",
+  "lem-weil-pbc-ringed-projection-tensor-shifts"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RingedProjectionTensorComparison",
+  "file": "lean/Sheaf/Paper/RingedProjectionTensorComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.ProjectionRestriction.globalTensorComparison_exists",
+  "statement": "theorem globalTensorComparison_exists {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})\n    (S : Sheaf (ProEt.topology X) CommRingCat.{u + 1})\n    (c : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R ≅ S)\n    (o : Operation (proEtaleBaseChange f) R S)\n    (ho : o.coefficient =\n      ⟨Functor.whiskerRight (proEtaleRingDirectImageMap f R S c).hom\n        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})⟩)\n    (a : TensorModel R) (b : TensorModel S) (sa : TensorShifts a) (sb : TensorShifts b)\n    (mu : o.OrdinaryTensor) :\n    ∃ t : TensorComparison o.pullback o.leftModel a b mu.iso,\n      TensorComparisonShifts t (sa := sa) (sb := sb) (sd := inferInstance)",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-22"
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-755fa",
+  "group": "C2",
+  "result": "fix",
+  "landing": "20261022T023434-L-822000",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-755fa",
+  "group": "C2",
+  "result": "fix",
+  "landing": "20261022T023434-L-822000",
+  "kind": "interface",
+  "note": "independent cc review: delivered Lean/DAG vs heads 870ff0b861f1 and b43e339e3348 (byte-identical; b43e PASSed with 9 importers compiled); Data block vs live item module (identical); change-record Users vs live transitive importer closure (1890 modules)"
+ }
+}

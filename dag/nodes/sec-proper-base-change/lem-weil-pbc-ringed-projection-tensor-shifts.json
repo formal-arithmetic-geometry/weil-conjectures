@@ -1,0 +1,122 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0FNH, item-shift-tensor; sites-cohomology.tex Tag 07A4, compatibility of derived pullback and tensor product."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ringed-projection-restriction-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0FNH, item-shift-tensor; sites-cohomology.tex Tag 07A4, compatibility of derived pullback and tensor product."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingedProjectionRestriction",
+  "date": "2026-10-22",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-ringed-projection-tensor-comparison",
+   "place": "The third proof step only: signed shift coherence after construction of the normalized comparison.",
+   "via": [
+    "lem-weil-pbc-ringed-projection-restriction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "id": "lem-weil-pbc-ringed-projection-tensor-shifts",
+ "title": "Signed shifts of an already normalized tensor comparison",
+ "statement": "Fix a universe u, categories C,D with objects in Type (u+1) and morphisms in Type u, Grothendieck topologies J,K, ring sheaves R on J and S on K valued in CommRingCat (u+1), and a site functor F:C to D. Let o:Operation F R S be exact, and let a,b be the resolving tensor models of [def-weil-pbc-ringed-projection-restriction-data], with normalized shifts sa,sb. Given an ordinary tensor comparison mu satisfying its pure-unit equation and an already constructed TensorComparison t for o.leftModel, normalized on every resolving pair, both TensorComparisonShifts equations hold for the canonical exact-derived shift. Only the two shift squares are asserted: no ordinary, chain or derived comparison is constructed.",
+ "proof": [
+  {
+   "text": "Package the two shift squares as equalities of natural transformations on the product of derived categories. Use cochain tensor model rigidity with arbitrary target category Der S to test equality on flat-term K-flat pairs.",
+   "uses": [
+    "lem-sf-cochain-tensor-model-rigidity"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At each resolving pair use the supplied tensor shift normalization fields, the representative equation of t at the original and shifted pairs, and the exact-derived factors shift equation. Naturality moves the factor identifications past the comparison; cancel the representative isomorphisms and shifted images.",
+   "uses": [
+    "def-weil-pbc-ringed-projection-restriction-data",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Test the remaining chain squares on every direct-sum tensor inclusion. The inverse ordinary comparison is natural by adjunction and the pure-unit formula. The first-variable square has coefficient one; the second-variable square has coefficient (-1)^(np) on both sides, preserved by additive pullback. The direct-sum universal property gives both chain equalities. Localize and use faithfulness to finish on all derived pairs. Zero shifts, empty sites and zero coefficient rings require no separate assumptions.",
+   "uses": [
+    "lem-weil-pbc-total-tensor-integer-shifts"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-cochain-tensor-model-rigidity",
+  "def-weil-pbc-ringed-projection-restriction-data",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-total-tensor-integer-shifts"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RingedProjectionTensorShifts",
+  "file": "lean/Sheaf/Paper/RingedProjectionTensorShifts.lean",
+  "declaration": "AlgebraicGeometry.Scheme.ProjectionRestriction.tensorComparison_shifts",
+  "statement": "theorem tensorComparison_shifts\n    {C D : Type (u + 1)} [Category.{u} C] [Category.{u} D]\n    [EssentiallySmall.{u + 1} C] [EssentiallySmall.{u + 1} D]\n    {J : GrothendieckTopology C} {K : GrothendieckTopology D}\n    {F : C ⥤ D} {R : Sheaf J CommRingCat.{u + 1}}\n    {S : Sheaf K CommRingCat.{u + 1}}\n    (o : Operation F R S) (a : TensorModel R) (b : TensorModel S)\n    (sa : TensorShifts a) (sb : TensorShifts b) (mu : o.OrdinaryTensor)\n    (t : TensorComparison o.pullback o.leftModel a b mu.iso) :\n    TensorComparisonShifts t (sa := sa) (sb := sb) (sd := inferInstance)",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-22"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An exact derived pullback comparison for tensor products commutes with integer shifts when its tensor representatives and shift isomorphisms are normalized",
+   "results": "Eight hits. Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor supplies the CommShift instance for mapDerivedCategory and NatTrans.CommShift for mapDerivedCategoryFactors.hom. Other hits concern pullback of shifts and totalShift₂XIso. The factor compatibility is used in the argument; no hit proves both tensor comparison squares for arbitrary normalized resolving models.",
+   "date": "2026-10-22",
+   "verdict": "Use the canonical exact-derived factors shift instance, together with tensor normalization, chain shift calculations and faithful restriction; no match for the whole statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural tensor comparison between exact derived functors commutes with both shifts if it agrees with total tensor maps on K-flat representatives",
+   "results": "Eight hits: Abelian.Ext.mapExactFunctor_hom, mapDerivedCategory CommShift, mapDerivedCategoryFactorsh and the Tor/Tor-prime functors and map lemmas. These cover exact-functor shifts or projective-resolution Tor, not the present comparison between arbitrary unbounded derived tensor models on ringed sites.",
+   "date": "2026-10-22",
+   "verdict": "No complete match; retain the separate normalized-comparison shift result."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryFactors|mapBifunctorShift|NatTrans.CommShift",
+   "results": "Twenty-five Mathlib source hits reported by msearch, including CategoryTheory/Shift/Localization.lean lines 239-241 and 306, Shift/CommShift.lean and Shift/CommShiftTwo.lean. Further direct source reading found the exact-derived factors CommShift instance in Algebra/Homology/DerivedCategory/ExactFunctor.lean at line 94 and the two total shift inclusion formulas in BifunctorShift.lean. These provide the component calculations, not the whole arbitrary-model comparison theorem.",
+   "date": "2026-10-22",
+   "verdict": "Use the existing normalization and shift APIs; prove the two total chain squares and descend their compatibility."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-755fa",
+  "group": "C2",
+  "result": "fix",
+  "landing": "20261022T023434-L-822000",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-755fa",
+  "group": "C2",
+  "result": "fix",
+  "landing": "20261022T023434-L-822000",
+  "kind": "interface",
+  "note": "independent cc review: delivered Lean/DAG vs heads 870ff0b861f1 and b43e339e3348 (byte-identical; b43e PASSed with 9 importers compiled); Data block vs live item module (identical); change-record Users vs live transitive importer closure (1890 modules)"
+ }
+}

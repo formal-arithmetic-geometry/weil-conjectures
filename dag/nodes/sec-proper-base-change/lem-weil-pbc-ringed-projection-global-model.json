@@ -1,0 +1,143 @@
+{
+ "id": "lem-weil-pbc-ringed-projection-global-model",
+ "kind": "statement",
+ "title": "Existence of the canonically normalized global projection package",
+ "statement": "For a scheme morphism f:X to Y and ring sheaves RY,RX with a specified isomorphism f-inverse RY to RX, the Global projection datum of [def-weil-pbc-ringed-projection-restriction-data] is inhabited. This asserts the global operations, representative-normalized tensor models and shifts only; it asserts neither a localization square nor cover-local detection.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08FI (lemma-restrict-K-injective-to-open), 0FN5 (lemma-localize-cartesian-square-modules), 07A4 (lemma-pullback-tensor-product); slice-topos restriction of the counit map 0B56."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ringed-projection-restriction-data"
+ ],
+ "proof": [
+  {
+   "text": "Use the specified coefficient adjunct for sectionwise module direct image. Its canonical left adjoint is isomorphic through adjoint uniqueness to the explicit pro-etale inverse-image module functor. Transfer additivity and exactness across this isomorphism. Construct the exact derived pullback and K-injective derived pushforward.",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "def-pur-ringed-module-derived-operations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The derived adjunction counit computes the module counit on K-injective representatives by its defining factorization. Compatibility of the right-derived unit with shifts descends through the K-injective equivalence; the exact-derived unit formula and the adjunction shift criterion give the counit shift equation.",
+   "uses": [
+    "lem-weil-pbc-termwise-adjunction-homotopy"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Localize the signed total tensor on flat-term K-flat pairs. Its full-faithfulness statement gives the required tensor-model descent; its representative comparison is the recorded cochain comparison. Descend the first and signed second integer shifts, and cancel the shifted representative isomorphisms to obtain the two tensor normalization equations.",
+   "uses": [
+    "lem-sf-cochain-tensor-model-rigidity",
+    "lem-weil-pbc-derived-tensor-shift-descent",
+    "lem-weil-pbc-slice-tensor-integer-shift-compatibility"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the ordinary pro-etale tensor pullback isomorphism through adjoint uniqueness. Its pure-unit equation follows from correspondence of the units and functoriality of sheafified pure tensors. Apply the separate canonical tensor comparison result to these already constructed operations, models and shifts, then fill the Global structure.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-ringed-projection-tensor-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proetale-operations",
+  "def-pur-ringed-module-derived-operations",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-sf-cochain-tensor-model-rigidity",
+  "lem-weil-pbc-derived-tensor-shift-descent",
+  "lem-weil-pbc-slice-tensor-integer-shift-compatibility",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-ringed-projection-tensor-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Construction and normalization subargument of lem-weil-pbc-ringed-projection-restriction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction to localized ringed sites commutes with derived direct image and derived tensor product and detects isomorphisms locally",
+   "results": "8 ordinary pullback and restriction hits; no combined normalized package.",
+   "date": "2026-10-21",
+   "verdict": "Use existing project generic canonical tensor and slice results; their small-site universe convention requires bridging."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"overFunctor\"",
+   "results": "overFunctor and overFunctorMap.",
+   "date": "2026-10-21",
+   "verdict": "No normalized derived package."
+  },
+  {
+   "tool": "grep",
+   "query": "overFunctor|mapDerivedCategoryHomologyFunctorIso|CoversTop",
+   "results": "25 Mathlib hits; ordinary restrictions and sheaf covers. Project searches located RingedDerivedSliceLocalization, ProEtaleCanonicalTensorPullback and independent-universe tensor interfaces.",
+   "date": "2026-10-21",
+   "verdict": "No existing theorem has these normalized package conclusions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact restriction to slice sites detects isomorphisms of unbounded derived sheaves of modules on a covering family",
+   "results": "Eight hits, including the forgetful module-to-sheaf isomorphism reflection result. No normalized derived projection package.",
+   "date": "2026-10-21",
+   "verdict": "Use exact-derived cohomology, ordinary sheaf gluing and isomorphism reflection; construct the normalized tensor and localization interfaces separately."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingedProjectionRestriction",
+  "date": "2026-10-21",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-perfect-projection-formula",
+   "place": "Detailed form: first locality sentence preceding the finite-complex argument; normalized restriction of the ringed projection mate.",
+   "via": [
+    "lem-weil-pbc-ringed-projection-restriction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RingedProjectionGlobalModel",
+  "file": "lean/Sheaf/Paper/RingedProjectionGlobalModel.lean",
+  "declaration": "AlgebraicGeometry.Scheme.ProjectionRestriction.globalModel_exists",
+  "statement": "theorem globalModel_exists {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (R_Y : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})\n    (R_X : Sheaf (ProEt.topology X) CommRingCat.{u + 1})\n    (c : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R_Y ≅ R_X) :\n    Nonempty (Global f R_Y R_X c)",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-755fa",
+  "group": "C2",
+  "result": "fix",
+  "landing": "20261022T023434-L-822000",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-755fa",
+  "group": "C2",
+  "result": "fix",
+  "landing": "20261022T023434-L-822000",
+  "kind": "interface",
+  "note": "independent cc review: delivered Lean/DAG vs heads 870ff0b861f1 and b43e339e3348 (byte-identical; b43e PASSed with 9 importers compiled); Data block vs live item module (identical); change-record Users vs live transitive importer closure (1890 modules)"
+ }
+}
