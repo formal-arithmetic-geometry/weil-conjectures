@@ -24406,3 +24406,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:54 L: merged deliver/NL/lem-sfb-galois-component-presentation (stage 2; reviewer PASS; parallel immutable checks)
 - 02:55 L: merged deliver/NM/lem-sfb-cech-vanishing-surjective-unions (stage 2; reviewer PASS; parallel immutable checks)
 - 02:57 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
+- 02:57 L: merged deliver/NE/lem-sfb-admissible-finite-type-field-quotient (stage 2; reviewer PASS; parallel immutable checks)

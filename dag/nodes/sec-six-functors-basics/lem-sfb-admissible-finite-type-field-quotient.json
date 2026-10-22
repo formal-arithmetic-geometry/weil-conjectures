@@ -17,7 +17,9 @@
   "def-weil-geometric-fibre",
   "def-pc-reduced-scheme",
   "def-kun-projective",
-  "def-pc-fibre-product"
+  "def-pc-fibre-product",
+  "def-per-admissible-finite-scheme-quotient",
+  "def-sc-quasi-projective"
  ],
  "proof": [
   {
@@ -324,5 +326,30 @@
   "group": "NB",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-35af7cbee (reviewer sub-agent of L); spot-checked: I read the item, all ten steps and every cited statement in full. Supersession and dropped route: on side-live and live the item is still unsplit with an identical statement, and there is no repair note. It is a first split, so no re-split comparison applies. Its closure of 380 nodes contains no route-pivot-dropped id and no trf node. The only stmt_deps change adds def-pc-fibre-product, which the statement uses for Q x_B U. There are no new nodes. Mathematics: Step 1 builds invariant affines as intersections of translates, which are affine by separatedness over Spec e. Step 2 checks the action groupoid against Stacks 03BL: the arrow scheme is Spec of the product of copies of R, the source is the diagonal with an idempotent basis and so finite locally free, the target is the source composed with the inverse, and the equalizer C is R^H. Integrality makes the map closed, so it is a topological quotient. Steps 3-4 build the invariant-section sheaf, with q open and invariant opens saturated. The identity (R_f)^H = A_f holds with zero divisors, taking a common exponent over the finite group H. Step 5 makes q affine (01S8) and finite on every affine open: finite type over e, generators integral over the invariants. Step 6: Artin-Tate gives local finite type, and a subring of a reduced ring is reduced. Step 7 proves the categorical factorization, including the locality argument. Steps 8-9 handle finiteness over an arbitrary base through the image C' of C in R^H: Artin-Tate makes C' of finite type over e, hence Noetherian, so A is a finite C'-module; no Noetherian condition on B is used. Step 10 is Stacks 01ZY case (4) with I = J intersected with S_+ and graded prime avoidance, and is valid over finite fields. Edge cases checked: empty V, trivial and non-faithful actions, wild characteristic, nilpotents, a non-quasi-compact V, a non-Noetherian B. Accepted tool_uses: lem-weil-pbc-finite-free-algebra-spectrum, lem-a1-affine-groupoid-orbit-fibres, lem-sc-graded-prime-avoidance and lem-sc-proj-standard-open-basis, all generic algebra or Proj tools used only through their statements. No SGA source is cited. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AdmissibleFiniteTypeFieldQuotient",
+  "declaration": "AlgebraicGeometry.exists_admissible_finite_type_field_quotient",
+  "declarations": [
+   "AlgebraicGeometry.finiteQuotientInvariantSections",
+   "AlgebraicGeometry.exists_admissible_finite_type_field_quotient",
+   "AlgebraicGeometry.orbit_in_affine_of_quasiProjective",
+   "AlgebraicGeometry.orbit_in_affine_subgroup"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AdmissibleFiniteTypeFieldQuotient.lean",
+  "statement": "theorem exists_admissible_finite_type_field_quotient (e : Type u) [Field e] (V : Scheme.{u}) (p : V ⟶ Spec (.of e)) [IsSeparated p] [LocallyOfFiniteType p] (H : Type v) [Group H] [Finite H] (a : H →* Aut V) (ha : ∀ g : H, (a g).hom ≫ p = p) (horbit : ∀ x : V, ∃ W : V.affineOpens, ∀ g : H, (a g).hom x ∈ W.1) : ∃ (Q : Scheme.{u}) (b : Q ⟶ Spec (.of e)) (q : V ⟶ Q), q ≫ b = p ∧ IsAdmissibleFiniteSchemeQuotient a q ∧ Surjective q ∧ (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ Q), Nonempty ↥(pullback (C := Scheme.{u}) q t) ∧ ∀ x y : ↥(pullback (C := Scheme.{u}) q t), ∃ (g : H) (l : pullback q t ⟶ pullback q t), l ≫ pullback.fst q t = pullback.fst q t ≫ (a g).hom ∧ l ≫ pullback.snd q t = pullback.snd q t ∧ l x = y) ∧ (∀ (Z : Scheme.{u}) (f : V ⟶ Z), (∀ g : H, (a g).hom ≫ f = f) → ∃! r : Q ⟶ Z, q ≫ r = f) ∧ LocallyOfFiniteType b ∧ (IsReduced V → IsReduced Q) ∧ (∀ W : V.Opens, (∀ g : H, (a g).hom ⁻¹ᵁ W = W) → ∃ (O : Q.Opens) (aW : H →* Aut W.toScheme) (r : W.toScheme ⟶ O.toScheme), q ⁻¹ᵁ O = W ∧ (∀ g : H, (aW g).hom ≫ W.ι = W.ι ≫ (a g).hom) ∧ r ≫ O.ι = W.ι ≫ q ∧ IsAdmissibleFiniteSchemeQuotient aW r ∧ ∀ (Z : Scheme.{u}) (f : W.toScheme ⟶ Z), (∀ g : H, (aW g).hom ≫ f = f) → ∃! s : O.toScheme ⟶ Z, r ≫ s = f) ∧ (∀ (W : V.Opens) (hW : IsAffineOpen W), (∀ g : H, (a g).hom ⁻¹ᵁ W = W) → ∃ (O : Q.Opens) (hpre : q ⁻¹ᵁ O = W) (_ : IsAffineOpen O) (i : O.toScheme ≅ Spec (.of (finiteQuotientInvariantSections a W))), q.resLE O W (le_of_eq hpre.symm) ≫ i.hom = hW.isoSpec.hom ≫ Spec.map (CommRingCat.ofHom (finiteQuotientInvariantSections a W).subtype)) ∧ ∀ (B : Scheme.{u}) (c : B ⟶ Spec (.of e)) (v : V ⟶ B), v ≫ c = p → (∀ g : H, (a g).hom ≫ v = v) → ∃ r : Q ⟶ B, q ≫ r = v ∧ r ≫ c = b ∧ ∀ U : B.Opens, IsFinite (v ∣_ U) → IsFinite (pullback.snd r U.ι)",
+  "branch": "newtargets-dag",
+  "by": "NE",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Reuses the landed admissible finite quotient predicate and upstream quasi-projectivity. The helper constructs the invariant section subring by intersections of equalizers; the two final theorems state the admission clauses of this same node. Geometric fibres are actual scheme pullbacks, with induced action maps characterized by both projections."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-93c2e649c",
+  "group": "NE",
+  "result": "pass",
+  "note": "Every clause of exists_admissible_finite_type_field_quotient matches the node: IsAdmissibleFiniteSchemeQuotient plus Surjective, pinned geometric-fibre transitivity over all alg. closed Ω : Type u, the universal property over all Scheme.{u}, LFT of b, reducedness, restriction to invariant opens with pinned aW/r, the affine formula fixing the map via isoSpec and Spec.map subtype, and finiteness of Q ×_B U over an arbitrary e-scheme B. The quasi-projective admission uses upstream IsQuasiProjective plus LFT ∧ QC; subgroup admission is fully general. The helper finiteQuotientInvariantSections is a real eqLocus infimum, consistent with the dep's invariance encoding. lean.statement is verbatim. Added stmt_deps def-per-admissible-finite-scheme-quotient and def-sc-quasi-projective are landed and not dropped; the item is not dropped. All proofs are sorry; docstrings carry the source, blueprint id and the 10 steps; universes are fine; edge cases (empty V, wild char, non-qc V, non-Noetherian B) are covered. Advisory: the public Morphisms.Projective import is unused in signatures. No compile, per the instruction of the human."
  }
 }
