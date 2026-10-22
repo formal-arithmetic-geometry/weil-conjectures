@@ -24101,3 +24101,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:28 L: returned deliver/NC/lem-sfb-tame-snc-quotient-resolution (reviewer RETURN: C1/F + C5/B9 + G4. This is the third push of this item, after NM 966655f0 and NJ ca6120ce were RETURNed for the same pro)
 - 00:28 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
 - 00:28 L: returned deliver/NC/lem-sfb-ultrametric-orthogonal-extension (reviewer RETURN: L: independent stage-2 immutable head ac4b9b3d9d0a: A7/A6 (H2 credit): eighth NC head ac4b9b3d9d0a; module and node sha2)
+- 00:29 L: returned deliver/N9/sk-thm-groth-ss (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-thm-groth-ss: sk-thm-groth-ss: completed in this pr)
