@@ -29,118 +29,124 @@
  ],
  "proof": [
   {
-   "text": "The standing schemes and their locally closed subschemes are Noetherian: finite type over the Noetherian field gives local Noetherianity, and a finite affine cover gives quasi-compactness. Their locally closed subsets are constructible and their opens quasi-compact. Locally closed extension is exact and transitive by the coherence lemma, with the pulled-back coefficient rings identified by Cartesian coefficients.",
+   "text": "Finite type over the field makes X Noetherian. Coefficient-heart generation expresses every bounded constructible finite-extension object by a finite cone-and-shift construction from degree-zero locally closed extensions of lisse sheaves.",
    "uses": [
     "sk-def-sfb-dc-setting",
     "pqf-lem-locnoeth-lft",
-    "def-weil-constructible-subset",
-    "lem-sfb-locally-closed-extension-coherence",
-    "sk-prop-sfb-cartesian-coefficients"
+    "det-cor-coefficient-heart-ii-generation"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-generators.proof.md",
-    "place": "Preliminaries to (1) and (3)"
+    "place": "(1): Noetherianity and reduction to the heart"
    }
   },
   {
-   "text": "For (1), finite cone generation reduces to $a_!L$. Apply the lattice-subquotient filtration lemma: every quotient is in $\\mathcal G_E$. The short exact sequences give distinguished triangles. Starting at zero (the rank-zero generator), induction on the filtration builds each term from its predecessor and quotient by a cone and shift. Substitute these finite constructions into that of $K$.",
+   "text": "Identify the spectral-norm coefficients of the lattice-subquotient theorem with the specified finite field and its integers, using ULift and equality of the spectral and given norms. Transport its filtration along these ring isomorphisms. Each successive quotient is a specified integral generator. Its short exact sequence gives a distinguished triangle, so finite filtration induction and then induction over the heart cone construction prove (1).",
    "uses": [
     "lem-sfb-lattice-subquotient-filtration",
-    "det-cor-coefficient-heart-ii-generation",
-    "lem-sf-derived-ses-triangle"
+    "sk-prop-sfb-cartesian-coefficients",
+    "lem-sf-derived-ses-triangle",
+    "det-cor-coefficient-heart-ii-generation"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-generators.proof.md",
-    "place": "(1): filtration followed by finite cone induction"
+    "place": "(1): lattice filtration and cone induction"
    }
   },
   {
-   "text": "For (2), descend $K$ to $K_E$ over one finite $E$. Scalar extension $T=\\QbarX\\otimes_{E_X}-$ is right exact as a left adjoint and left exact by flatness. Thus $LT=D(T)$ preserves triangles and shifts. Apply it to (1). On generators, $q\\otimes(e\\otimes m)\\mapsto qe\\otimes m$, with inverse $q\\otimes m\\mapsto q\\otimes(1\\otimes m)$, identifies the result with $\\QbarX\\otimes_{\\mathcal O_{E,X}}a_!L_0$. The finite construction uses the same $E$.",
+   "text": "Descend an algebraic-closure object to one finite E. The scalar-extension functor is exact, so its left-derived functor agrees with its termwise derived functor and preserves shifts and triangles. It sends each finite-extension generator to exactly the specified algebraic-closure generator. Transport the finite-extension construction and its final isomorphism to obtain (2), with the same E throughout.",
    "uses": [
     "det-lem-coefficient-finite-descent-objects",
     "sk-def-sfb-change-of-scalars",
     "lem-sfb-qlbar-flat",
-    "sk-def-sfb-derived-categories",
     "lem-sf-exact-functor-derived-triangulated"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-generators.proof.md",
-    "place": "(2): finite descent and exact coefficient change"
+    "place": "(2): descent and exact coefficient extension"
    }
   },
   {
-   "text": "For (3), the local models $\\mathcal O_{E,S}^r$ are finite constant models, so $L_0[0]$ is bounded constructible. Operations (3) gives $a_!L_0\\in\\Dbc(X,\\mathcal O_E)$.",
+   "text": "For (3), local freeness gives finite constant local models. Apply the generic stratified open-extension and closed-pushforward arguments from the lisse-extension constructibility proof to the integral module. Their degree-zero complex is bounded constructible. The same argument applies after any ordinary coefficient extension, which preserves local freeness via its regular-module isomorphism.",
    "uses": [
+    "lem-sfb-coefficient-heart-lisse-extension-constructible",
+    "new-det-lem-coefficient-heart-common-stratification-lisse",
     "sk-def-sfb-constructible",
     "sk-def-sfb-bounded-constructible",
-    "det-lem-integral-models-operations"
+    "lem-weil-pbc-regular-extension-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-generators.proof.md",
-    "place": "(3): integral constructibility"
+    "place": "(3): integral and reduced constructibility"
    }
   },
   {
-   "text": "Put $A_n=\\mathcal O_E/\\pi_E^n$, $n\\ge1$. The constant-coefficient comparison identifies the pulled-back quotient with $(A_n)_X$. Operations (4) and Cartesian coefficients give\n$$(a_!L_0)\\otimes^{\\mathbf L}(A_n)_X\\cong a_!(L_0\\otimes^{\\mathbf L}(A_n)_S)=a_!(L_0/\\pi_E^n).$$\nThe last equality is the locally free derived scalar lemma, applied on $S$; the ordinary quotient identity follows from the balancing relations.",
+   "text": "Tensor commutes with normalized inverse image. Flatness is detected on a closed subscheme and its complementary open by vanishing of the kernel of every tensor image of a monomorphism. The unit, counit and off-support zero identities imply that both open extension and closed pushforward preserve flatness. Thus the integral extension is flat, its single complex is K-flat, and its left-derived scalar extension is its ordinary scalar extension. Ordinary scalar extension commutes with open extension and with closed pushforward, by the same support identities; this gives the specified reduction isomorphism.",
    "uses": [
-    "det-prop-integral-criterion-constant-coefficients",
-    "det-lem-integral-models-operations",
+    "lem-weil-pbc-condensed-finite-free-tensor-exact",
     "sk-prop-sfb-cartesian-coefficients",
-    "lem-sfb-locally-free-derived-scalars"
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "sk-def-sfb-derived-categories"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-generators.proof.md",
-    "place": "(3): derived reduction of extension by zero"
+    "place": "(3): flat extension and derived reduction"
    }
   },
   {
-   "text": "This reduced sheaf restricts to the locally constant finite free $(A_n)_S$-module on $S$, and to zero on $\\overline S\\setminus S$ and $X\\setminus\\overline S$, by the open/closed identities. Hence it is constructible and bounded in $[0,0]$. The ring $A_n$ is finite, discrete and therefore Noetherian (every ideal is generated by its finite set of elements). The classical comparison applies to this constructible three-piece partition on qcqs $X$, so the reduction comes from $X_{\\mathrm{et}}$.",
+   "text": "Each residue ring is finite by the proved finite-quotient theorem for the ring of integers, since the given uniformizer generates its maximal ideal. Its uniformizer-power ideal contains an open norm ball, so the quotient topology is discrete. Finite discrete constructible encoding gives constructibility of the underlying sheaf. The explicit fixed-scalar realization has this same underlying sheaf; finite local constancy and finite stratifications transfer across that isomorphism. Its underlying abelian-sheaf functor is exact and conservative, hence the realization is exact. Derived homology comparison therefore preserves constructible cohomology and bounds. The finite-ring constructible derived-origin theorem supplies exactly the etale essential-image assertion required in (3).",
    "uses": [
-    "lem-weil-pbc-proetale-ringed-open-closed",
-    "sk-def-sfb-constructible",
-    "sk-def-sfb-bounded-constructible",
-    "def-weil-l-adic-coefficient-extension",
-    "det-pe-constructible-comparison-classical"
+    "lem-weil-pbc-finite-discrete-condensed-ring-constant",
+    "lem-weil-pbc-internal-module-ab-equivalence",
+    "lem-weil-pbc-finite-discrete-constructible-encoding",
+    "lem-weil-pbc-finite-coefficient-intrinsic-constructibility",
+    "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "det-def-sfb-constructible-tor-amplitude",
+    "lem-weil-valued-dvr-finite-quotients"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-generators.proof.md",
-    "place": "(3): constructible classical reductions"
+    "place": "(3): finite fixed-scalar realization and etale origin"
    }
   }
  ],
  "proof_deps": [
   "sk-def-sfb-dc-setting",
   "pqf-lem-locnoeth-lft",
-  "def-weil-constructible-subset",
-  "lem-sfb-locally-closed-extension-coherence",
-  "sk-prop-sfb-cartesian-coefficients",
-  "lem-sfb-lattice-subquotient-filtration",
   "det-cor-coefficient-heart-ii-generation",
+  "lem-sfb-lattice-subquotient-filtration",
+  "sk-prop-sfb-cartesian-coefficients",
   "lem-sf-derived-ses-triangle",
   "det-lem-coefficient-finite-descent-objects",
   "sk-def-sfb-change-of-scalars",
   "lem-sfb-qlbar-flat",
-  "sk-def-sfb-derived-categories",
   "lem-sf-exact-functor-derived-triangulated",
+  "lem-sfb-coefficient-heart-lisse-extension-constructible",
+  "new-det-lem-coefficient-heart-common-stratification-lisse",
   "sk-def-sfb-constructible",
   "sk-def-sfb-bounded-constructible",
-  "det-lem-integral-models-operations",
-  "det-prop-integral-criterion-constant-coefficients",
-  "lem-sfb-locally-free-derived-scalars",
+  "lem-weil-pbc-regular-extension-comparison",
+  "lem-weil-pbc-condensed-finite-free-tensor-exact",
   "lem-weil-pbc-proetale-ringed-open-closed",
-  "def-weil-l-adic-coefficient-extension",
-  "det-pe-constructible-comparison-classical"
+  "sk-def-sfb-derived-categories",
+  "lem-weil-pbc-finite-discrete-condensed-ring-constant",
+  "lem-weil-pbc-internal-module-ab-equivalence",
+  "lem-weil-pbc-finite-discrete-constructible-encoding",
+  "lem-weil-pbc-finite-coefficient-intrinsic-constructibility",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "det-def-sfb-constructible-tor-amplitude",
+  "lem-weil-valued-dvr-finite-quotients"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-generators.proof.md",
-  "place": "Proof (1)-(3), preserving the route and extracting the lattice-subquotient and locally free derived-scalar arguments"
+  "place": "Proof (1)-(3), formalized by W4: retain lattice filtration, finite cone generation and descent; prove the single reduction using flatness and support, and use finite-ring derived origin after the explicit fixed-scalar realization."
  },
  "mathlib_searches": [
   {
@@ -271,12 +277,10 @@
  },
  "lean_audit": {},
  "tool_uses": [
-  "lem-sfb-locally-closed-extension-coherence",
   "lem-weil-pbc-proetale-ringed-open-closed",
   "pqf-lem-locnoeth-lft",
   "lem-sf-derived-ses-triangle",
-  "lem-sf-exact-functor-derived-triangulated",
-  "det-pe-constructible-comparison-classical"
+  "lem-sf-exact-functor-derived-triangulated"
  ],
  "reviewed_lean": {
   "date": "2026-10-18",
@@ -318,5 +322,15 @@
   "by": "Q83",
   "date": "2026-10-18",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-15d77",
+  "group": "W4",
+  "result": "fix",
+  "landing": "20261022T025343-L-1291361",
+  "kind": "interface",
+  "note": "independent cc review: delivered IntegralModelsGenerators.lean and det-lem-integral-models-generators node against the clone base, unit sk-lem-integral-models realized steps, the two change records (rfl old=new verified), and the 6 direct importers compiled against the delivered module"
  }
 }

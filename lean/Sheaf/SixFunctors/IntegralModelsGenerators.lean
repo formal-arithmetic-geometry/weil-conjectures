@@ -13,30 +13,38 @@ public import WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteSubexte
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 public import Mathlib.CategoryTheory.Triangulated.Subcategory
 public import Sheaf.Paper.ContinuousCoefficientModuleEncoding
-import Sheaf.AlgebraicGeometry.ProEtaleBoundedConstructible
 public import Sheaf.Paper.CondensedConstantConstructibility
 public import Sheaf.Paper.ContinuousLocallyFreePullback
 public import WeilConjectures.CategoryTheory.ModuleObjects.EllAdicRationalization
 
+import Mathlib.Algebra.Field.ULift
 import Mathlib.AlgebraicGeometry.OpenImmersion
 import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
-import Sheaf.AlgebraicGeometry.CoefficientBoundedConstructibleProEtale
-import Sheaf.AlgebraicGeometry.ConstructibleProEtaleClassical
-import Sheaf.AlgebraicGeometry.IntegralConstantCompletion
-import Sheaf.AlgebraicGeometry.LocallyClosedExtensionCoherence
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.OpenClosed
 import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed
-import Sheaf.CategoryTheory.RightDerivedFunctorOfQuasiIsoResolutions
 import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
 import Sheaf.Paper.CartesianCoefficients
 import Sheaf.Paper.CoefficientFiniteDescentObjects
-import Sheaf.Paper.CoefficientHeartCommonStratification
-import Sheaf.Paper.CoefficientHeartFiltration
 import Sheaf.Paper.CoefficientHeartGeneration
-import Sheaf.Paper.IntegralModelsOperations
-import Sheaf.Paper.PadicIntegersInvertEll
-import Sheaf.Paper.StratifiedLattice
+import Sheaf.Paper.LatticeSubquotientFiltration
+import Sheaf.Paper.FiniteDiscreteConstructibleEncoding
+import Sheaf.Paper.FiniteDiscreteCondensedRing
+import Sheaf.Paper.InternalModuleAbEquivalence
+import Sheaf.Paper.RegularExtensionComparison
+import WeilConjectures.SixFunctors.ProEtale.Adic.PadicIntModuleComparison
+import all Sheaf.Paper.FiniteRingConstructibleDerivedOrigin
+import all Sheaf.Paper.FiniteCoefficientIntrinsicConstructibility
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
+import all Sheaf.Paper.ContinuousConstructibleIntegralTransport
+import all WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian
+import Sheaf.Paper.CondensedFiniteFreeTensorExact
+import all Sheaf.Paper.ContinuousConstructibleIntegralGluing
+import all Sheaf.AlgebraicGeometry.CondensedConstructibleSerre
+import all Sheaf.Paper.CoefficientHeartLisseExtensionConstructible
+import all Sheaf.Paper.CoefficientHeartLisseRestriction
 import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalars
+import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDerivedCategory
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
 
@@ -55,6 +63,8 @@ after the explicit restriction to constant scalars.
 @[expose] public section
 
 set_option autoImplicit false
+-- Preserve shared coefficient terms during proof cleanup.
+set_option cleanup.letToHave false
 
 open CategoryTheory CategoryTheory.Limits Opposite
 open AlgebraicGeometry AlgebraicGeometry.ProEtale
@@ -65,13 +75,16 @@ open scoped CategoryTheory.Functor
 
 universe u
 
+attribute [local irreducible] upperStarFromPoint upperStarFromPointComp
+  monoidal_upperStarFromPoint monoidal_pointUpperStar oplaxMonoidal_pointUpperStar
+
 /-- Canonical coefficient specialization used in the integral generator statement.
 Source: blueprint main-20261015, integral generators, clauses (1)--(3)
 (blueprint: det-lem-integral-models-generators). -/
 noncomputable instance integralModel_coefficientMonObj
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ]
     (X : Scheme.{u}) : MonObj (condensedRingObj Λ X) :=
-  (coefficientRing X (Mon.mk Λ)).mon
+  Functor.monObjObj (F := upperStarFromPoint X) Λ
 
 /-- Canonical extension of scalars from the integral coefficient ring to a finite subextension.
 
@@ -263,6 +276,7 @@ noncomputable instance integralModelFiniteCoefficient_isComm (X : Scheme.{u}) (A
     IsCommMonObj (completedCoefficient X (Profinite.continuousMapRingSheaf A)).X := by
   exact Functor.isCommMonObj_obj (F := upperStarFromPoint X)
 
+set_option backward.isDefEq.respectTransparency.types false in
 /-- Finite reductions of this very extension by zero are bounded constructible and have
 bounded constructible etale origin. `completedResidue` indexes powers by `m+1`, so at the
 positive level `n` we use `m=n-1`. Finiteness and discreteness are conclusions, not assumptions.
@@ -276,34 +290,1094 @@ noncomputable def integralReductionHasEtaleOrigin (X : Scheme.{u}) (ℓ : ℕ)
     [IsOpenImmersion u] [IsClosedImmersion i]
     (L₀ : Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1})
       (integralCoefficientObject S ℓ E)) : Prop :=
-  constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ E.1) X
-    ((DerivedCategory.singleFunctor _ 0).obj
-      (integralLowerShriek X (Profinite.padicIntegersRingObj ℓ E.1) u i L₀)) ∧
+  let derivedScalar {R A : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}}
+      [MonObj R] [IsCommMonObj R] [MonObj A] [IsCommMonObj A]
+      (φ : R ⟶ A) [IsMonHom φ] :
+      DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R) ⥤
+        DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) A) :=
+    (Mod.extendScalars φ).leftDerivedFunctor
+  let K := (DerivedCategory.singleFunctor _ 0).obj
+    (integralLowerShriek X (Profinite.padicIntegersRingObj ℓ E.1) u i L₀)
+  constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ E.1) X K ∧
   ∀ n : ℕ, 1 ≤ n →
-    Nonempty
-      (((Mod.extendScalars (integralModelReductionMap X ℓ E π n).hom).leftDerivedFunctor.obj
-        ((DerivedCategory.singleFunctor _ 0).obj
-          (integralLowerShriek X (Profinite.padicIntegersRingObj ℓ E.1) u i L₀))) ≅
-        (DerivedCategory.singleFunctor _ 0).obj
-          (integralLowerShriek X
-            (Profinite.continuousMapRingObj (completedResidue ℓ E π (n - 1))) u i
-            ((Mod.extendScalars (integralModelReductionMap S ℓ E π n).hom).obj L₀))) ∧
-    constantModelBoundedConstructible
-      (Profinite.continuousMapRingObj (completedResidue ℓ E π (n - 1))) X
-      ((Mod.extendScalars (integralModelReductionMap X ℓ E π n).hom).leftDerivedFunctor.obj
-        ((DerivedCategory.singleFunctor _ 0).obj
-          (integralLowerShriek X (Profinite.padicIntegersRingObj ℓ E.1) u i L₀))) ∧
-    ∃ (_ : Finite (completedResidue ℓ E π (n - 1)))
-      (_ : DiscreteTopology (completedResidue ℓ E π (n - 1))),
+    let A := completedResidue ℓ E π (n - 1)
+    let Kbar := (derivedScalar (integralModelReductionMap X ℓ E π n).hom).obj K
+    Nonempty (Kbar ≅ (DerivedCategory.singleFunctor _ 0).obj
+      (integralLowerShriek X (Profinite.continuousMapRingObj A) u i
+        ((Mod.extendScalars (integralModelReductionMap S ℓ E π n).hom).obj L₀))) ∧
+    constantModelBoundedConstructible (Profinite.continuousMapRingObj A) X Kbar ∧
+    ∃ (_ : Finite A) (_ : DiscreteTopology A),
       (ObjectProperty.ι (Etale.DerivedCategory.isBoundedConstructible
-          (ULift.{u + 1, u} (ULift.{u, 0} (completedResidue ℓ E π (n - 1)))) X) ⋙
-        finiteCoefficientIntrinsicDerivedComparison X
-          (ULift.{u, 0} (completedResidue ℓ E π (n - 1)))).essImage
-        ((integralModelIntrinsicRealization X
-          (completedResidue ℓ E π (n - 1))).rightDerivedFunctor.obj
-          ((Mod.extendScalars (integralModelReductionMap X ℓ E π n).hom).leftDerivedFunctor.obj
-            ((DerivedCategory.singleFunctor _ 0).obj
-              (integralLowerShriek X (Profinite.padicIntegersRingObj ℓ E.1) u i L₀))))
+          (ULift.{u + 1, u} (ULift.{u, 0} A)) X) ⋙
+        finiteCoefficientIntrinsicDerivedComparison X (ULift.{u, 0} A)).essImage
+        ((integralModelIntrinsicRealization X A).rightDerivedFunctor.obj Kbar)
+
+-- Keep concrete coefficient objects folded outside the few comparison lemmas below.
+set_option backward.isDefEq.respectTransparency true
+
+open scoped CategoryTheory.Obj in
+attribute [-instance] integralModel_coefficientMonObj in
+/-- The common condition that all locally closed lisse extensions lie in `P`.
+Keeping this condition named avoids repeatedly normalizing its derived coefficient data. -/
+@[irreducible] private def integralModel_lisseExtensions
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u}) [IsNoetherian X]
+    (P : ObjectProperty (DerivedCategory (Mod
+      (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)))) : Prop :=
+  ∀ (S : Scheme.{u}) (a : S ⟶ X) (ha : IsImmersion a)
+    (L : Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1}) (condensedRingObj Λ S)),
+    IsLisseCoefficientModule Λ L →
+    P ((DerivedCategory.singleFunctor _ 0).obj
+      ((coefficientHeartLocallyClosedExtension Λ a ha).obj L))
+
+private theorem integralModel_cone_induction {C : Type*} [Category C]
+    [HasZeroObject C] [HasShift C ℤ] [Preadditive C]
+    [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
+    (P : ObjectProperty C) [P.IsTriangulated] [P.IsClosedUnderIsomorphisms]
+    (G : C → Prop) (hG : ∀ K, G K → P K)
+    (N : ℕ) (F : Fin (N + 1) → C)
+    (hv : ∀ r, (∃ (K : C) (n : ℤ), G K ∧ Nonempty (F r ≅ K⟦n⟧)) ∨
+      ∃ i j : Fin (N + 1), i < r ∧ j < r ∧
+        ∃ (n : ℤ) (f : F i ⟶ F j) (g : F j ⟶ (F r)⟦n⟧)
+          (h : (F r)⟦n⟧ ⟶ (F i)⟦(1 : ℤ)⟧),
+          Pretriangulated.Triangle.mk f g h ∈ distTriang C) : P (F (Fin.last N)) := by
+  have h : ∀ n (hn : n < N + 1), P (F ⟨n, hn⟩) := by
+    intro n
+    induction n using Nat.strong_induction_on with
+    | h n ih =>
+      intro hn
+      rcases hv ⟨n, hn⟩ with ⟨K, m, hK, ⟨e⟩⟩ | ⟨i, j, hi, hj, m, f, g, h, hT⟩
+      · exact P.prop_of_iso e.symm (P.le_shift m _ (hG K hK))
+      · have hw := P.ext_of_isTriangulatedClosed₃
+          (Pretriangulated.Triangle.mk f g h) hT
+          (ih i.val hi i.isLt) (ih j.val hj j.isLt)
+        exact (ObjectProperty.prop_shift_iff_of_isStableUnderShift P _ m).mp hw
+  exact h N (Nat.lt_succ_self N)
+
+private theorem integralModel_closure_iso {C : Type*} [Category C]
+    [HasZeroObject C] [HasShift C ℤ] [Preadditive C]
+    [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
+    (G : ObjectProperty C) {K L : C} (e : K ≅ L)
+    (hK : (sInf {P | G ≤ P ∧ P.IsTriangulated ∧
+      P.IsClosedUnderIsomorphisms}) K) :
+    (sInf {P | G ≤ P ∧ P.IsTriangulated ∧ P.IsClosedUnderIsomorphisms}) L := by
+  rw [unary_relation_sInf_iff] at hK
+  rw [unary_relation_sInf_iff]
+  intro P hP
+  let := hP.2.2
+  exact ObjectProperty.prop_of_iso (P := P) e (hK P hP)
+
+private theorem integralModel_closure_map
+    {C D : Type*} [Category C] [Category D]
+    [HasZeroObject C] [HasShift C ℤ] [Preadditive C]
+    [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
+    [HasZeroObject D] [HasShift D ℤ] [Preadditive D]
+    [∀ n : ℤ, (shiftFunctor D n).Additive] [Pretriangulated D]
+    (T : C ⥤ D) [T.CommShift ℤ] [T.IsTriangulated]
+    (G : ObjectProperty C) (H : ObjectProperty D)
+    (hT : ∀ K, G K → ∃ L, H L ∧ Nonempty (T.obj K ≅ L)) (K : C)
+    (hK : (sInf {P | G ≤ P ∧ P.IsTriangulated ∧
+      P.IsClosedUnderIsomorphisms}) K) :
+    (sInf {P | H ≤ P ∧ P.IsTriangulated ∧ P.IsClosedUnderIsomorphisms}) (T.obj K) := by
+  rw [unary_relation_sInf_iff]
+  rintro P ⟨hP, ht, hi⟩
+  let := ht
+  let := hi
+  rw [unary_relation_sInf_iff] at hK
+  apply hK (ObjectProperty.inverseImage P T)
+  refine ⟨?_, inferInstance, inferInstance⟩
+  intro L hL
+  obtain ⟨M, hM, ⟨e⟩⟩ := hT L hL
+  exact ObjectProperty.prop_of_iso (P := P) e.symm (hP M hM)
+
+set_option backward.isDefEq.respectTransparency.types false in
+open scoped CategoryTheory.Obj in
+attribute [-instance] integralModel_coefficientMonObj in
+private theorem integralModel_generation_of_lisse
+    (X : Scheme.{u}) [IsNoetherian X] (ℓ : ℕ) [Fact ℓ.Prime]
+    (Λ : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1})
+    [IsCommMonObj (coefficientHeartRingObj Λ)]
+    (hΛ : (∃ E : IntermediateField ℚ_[ℓ] (PadicAlgCl ℓ),
+      FiniteDimensional ℚ_[ℓ] E ∧ Λ = Profinite.padicSubfieldCondensedRing ℓ E) ∨
+      Λ = Profinite.padicAlgClCondensedRing ℓ)
+    (P : ObjectProperty (DerivedCategory (Mod
+      (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj (coefficientHeartRingObj Λ) X))))
+    [htri : P.IsTriangulated] [hiso : P.IsClosedUnderIsomorphisms]
+    (hL : integralModel_lisseExtensions (coefficientHeartRingObj Λ) X P)
+    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj (coefficientHeartRingObj Λ) X)))
+    (hK : constantModelBoundedConstructible (coefficientHeartRingObj Λ) X K) :
+    P K := by
+  unfold integralModel_lisseExtensions at hL
+  obtain ⟨N, F, hF, hv⟩ :=
+    (coefficientHeart_generation ℓ Λ hΛ X K).mp hK
+  let G := fun W ↦ ∃ (S : Scheme.{u}) (a : S ⟶ X) (ha : IsImmersion a)
+    (L : Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1})
+      (condensedRingObj (coefficientHeartRingObj Λ) S)),
+      IsLisseCoefficientModule (coefficientHeartRingObj Λ) L ∧
+      W = (DerivedCategory.singleFunctor _ 0).obj
+        ((coefficientHeartLocallyClosedExtension
+          (coefficientHeartRingObj Λ) a ha).obj L)
+  have hg : ∀ W, G W → P W := by
+    rintro W ⟨S, a, ha, L, hL', rfl⟩
+    exact hL S a ha L hL'
+  rw [← hF]
+  apply integralModel_cone_induction P G hg N F
+  intro r
+  rcases hv r with ⟨S, a, ha, L, n, hL', e⟩ | h
+  · exact Or.inl ⟨_, n, ⟨S, a, ha, L, hL', rfl⟩, e⟩
+  · exact Or.inr h
+
+private theorem integralModel_extension_constructible
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u}) [IsNoetherian X]
+    {S V : Scheme.{u}} (j : S ⟶ V) (i : V ⟶ X)
+    [IsOpenImmersion j] [IsClosedImmersion i]
+    (L : Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1}) (condensedRingObj Λ S))
+    (hL : CondensedRing.LocallyFree (condensedRingObj Λ S) L) :
+    constantModelBoundedConstructible Λ X
+      ((DerivedCategory.singleFunctor _ 0).obj (integralLowerShriek X Λ j i L)) := by
+  have : TopologicalSpace.NoetherianSpace V := i.isEmbedding.isInducing.noetherianSpace
+  have : TopologicalSpace.NoetherianSpace S := j.isEmbedding.isInducing.noetherianSpace
+  have : QuasiCompact j :=
+    ⟨fun _ _ _ ↦ TopologicalSpace.NoetherianSpace.isCompact _⟩
+  have hL' := lisse_of_raw_free Λ S L hL
+  have hs := stratified_of_finiteModel Λ S L (lisse_finiteModel Λ S L hL')
+  have hu := stratified_openExtension Λ j L hs
+  have hi := stratified_closedPush Λ i _ hu
+  apply single_constructible Λ X
+  have hc : CompactSpace X := inferInstance
+  have hq : QuasiSeparatedSpace X := inferInstance
+  rw [IsConstantModelConstructible, if_pos (And.intro hc hq)]
+  exact hi
+
+set_option backward.isDefEq.respectTransparency.types false in
+set_option backward.isDefEq.respectTransparency false in
+private theorem integralModel_qlbar_of_finite
+    (k : Type u) [Field k] (p ℓ : ℕ) [Fact p.Prime] [Fact ℓ.Prime]
+    [CharP k p] (hℓp : ℓ ≠ p) (X : Scheme.{u})
+    [X.Over (Spec (.of k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of k))]
+    [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))]
+    (hfinite : ∀ (E : PadicAlgCl.FiniteIntermediateField ℓ)
+      (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+        (finiteCoefficientObject X ℓ E))),
+      constantModelBoundedConstructible (Profinite.continuousMapRingObj E.1) X K →
+      (sInf {P | integralModelGenerator X ℓ E ≤ P ∧ P.IsTriangulated ∧
+        P.IsClosedUnderIsomorphisms}) K)
+    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (qlbarCoefficientObject X ℓ)))
+    (hK : constantModelBoundedConstructible (Profinite.padicAlgClRingObj ℓ) X K) :
+    ∃ E : PadicAlgCl.FiniteIntermediateField ℓ,
+      (sInf {P | qlbarModelGenerator X ℓ E ≤ P ∧ P.IsTriangulated ∧
+        P.IsClosedUnderIsomorphisms}) K := by
+  obtain ⟨E, KE, ⟨e⟩⟩ := (coefficient_finite_descent_objects k p ℓ
+    (Fact.out : p.Prime).pos (Ne.symm hℓp) X).1 ⟨K, hK⟩
+  let T := Mod.extendScalars (AlgebraicGeometry.ProEtale.padicSubfieldRingObjToPadicAlgCl X ℓ E)
+  refine ⟨E, integralModel_closure_iso (qlbarModelGenerator X ℓ E)
+    ((T.leftDerivedFunctorIsoMapDerivedCategory.app KE.obj).symm ≪≫ e) ?_⟩
+  apply integralModel_closure_map T.mapDerivedCategory
+    (integralModelGenerator X ℓ E) (qlbarModelGenerator X ℓ E) ?_ KE.obj
+    (hfinite E KE.obj KE.property)
+  rintro L ⟨S, V, j, i, hj, hi, L₀, hL₀, rfl⟩
+  let := hj
+  let := hi
+  refine ⟨_, ⟨S, V, j, i, hj, hi, L₀, hL₀, rfl⟩, ⟨?_⟩⟩
+  exact (T.mapDerivedCategorySingleFunctor 0).app
+    ((finiteCoefficientExtension X ℓ E).obj
+      (integralLowerShriek X (Profinite.padicIntegersRingObj ℓ E.1) j i L₀))
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem integralModel_locallyFree_flat
+    {X : Scheme.{u}} (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+    [MonObj R] [IsCommMonObj R]
+    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R)
+    (hM : CondensedRing.LocallyFree R M) : ObjectProperty.flat M := by
+  have : PreservesFiniteLimits (Mod.tensorLeft M) :=
+    condensed_locally_free_tensor_preservesFiniteLimits R M hM
+  rw [ObjectProperty.flat_iff_preservesFiniteLimits]
+  have : PreservesFiniteLimits (MonoidalCategory.tensorRight M) :=
+    preservesFiniteLimits_of_natIso (Mod.relativeTensorRightIso M)
+  exact preservesFiniteLimits_of_natIso (BraidedCategory.tensorLeftIsoTensorRight M).symm
+
+-- Elaborate the derived functor while the internal rings are abstract. Specializing
+-- this construction avoids expensive comparisons of pulled-back coefficient instances.
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private noncomputable def integralModel_derivedScalar
+    {X : Scheme.{u}} {R A : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}}
+    [MonObj R] [IsCommMonObj R] [MonObj A] [IsCommMonObj A]
+    (φ : R ⟶ A) [IsMonHom φ] :
+    DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R) ⥤
+      DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) A) :=
+  (Mod.extendScalars φ).leftDerivedFunctor
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+open scoped CategoryTheory.Obj in
+attribute [-instance] integralModel_coefficientMonObj in
+private theorem integralModel_flat_derived_single
+    {X : Scheme.{u}} {R A : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}}
+    [MonObj R] [IsCommMonObj R] [MonObj A] [IsCommMonObj A]
+    (φ : R ⟶ A) [IsMonHom φ]
+    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R)
+    (hM : ObjectProperty.flat M) :
+    Nonempty ((integralModel_derivedScalar φ).obj
+      ((DerivedCategory.singleFunctor _ 0).obj M) ≅
+        (DerivedCategory.singleFunctor _ 0).obj ((Mod.extendScalars φ).obj M)) := by
+  let F := Mod.extendScalars φ
+  let K := (HomologicalComplex.single _ (.up ℤ) 0).obj M
+  have hK : (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat K :=
+    (CochainComplex.kFlat_single_obj_iff_flat M 0).mpr hM
+  have := F.isIso_leftDerivedFunctorCounit_app_of_kFlat K hK
+  exact ⟨asIso (F.leftDerivedFunctorCounit.app
+      ((HomotopyCategory.quotient _ (.up ℤ)).obj K)) ≪≫
+    DerivedCategory.Qh.mapIso ((F.mapHomotopyCategoryFactors (.up ℤ)).app K) ≪≫
+    (DerivedCategory.quotientCompQhIso _).app
+      ((F.mapHomologicalComplex (.up ℤ)).obj K) ≪≫
+    DerivedCategory.Q.mapIso ((HomologicalComplex.singleMapHomologicalComplex F
+      (.up ℤ) 0).app M)⟩
+
+set_option backward.isDefEq.respectTransparency.types false in
+open scoped CategoryTheory.Obj in
+attribute [-instance] integralModel_coefficientMonObj in
+private theorem integralModel_lisse_of_filtration
+    (A B : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj A] [IsCommMonObj A] [MonObj B] [IsCommMonObj B]
+    (c : A ⟶ B) [IsMonHom c]
+    (X : Scheme.{u}) [IsNoetherian X]
+    (P : ObjectProperty (DerivedCategory (Mod
+      (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj B X))))
+    [P.IsTriangulated] [P.IsClosedUnderIsomorphisms]
+    (hP : ∀ (T : Scheme.{u}) (b : T ⟶ X) (hb : IsImmersion b)
+      (M : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj A T)),
+      CondensedRing.LocallyFree (condensedRingObj A T) M →
+      P ((DerivedCategory.singleFunctor _ 0).obj
+        ((Mod.extendScalars ((upperStarFromPoint X).map c)).obj
+          ((coefficientHeartLocallyClosedExtension A b hb).obj M))))
+    {S : Scheme.{u}} (a : S ⟶ X) [IsImmersion a]
+    (hfil : LatticeSubquotientFiltrationData A B c a)
+    (L : Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1}) (condensedRingObj B S))
+    (hL : IsLisseCoefficientModule B L) :
+    P ((DerivedCategory.singleFunctor _ 0).obj
+      ((coefficientHeartLocallyClosedExtension B a inferInstance).obj L)) := by
+  obtain ⟨R, _, M, hM, F, h0, hlast, hle, hq⟩ := hfil L hL
+  apply CondensedRing.filtration_mem P _ R.n F
+  · exact Fin.monotone_iff_le_succ.mpr hle
+  · rw [h0]
+    exact (isZero_zero _).of_iso Subobject.botCoeIsoZero
+  · exact hlast
+  · intro b hb
+    have : IsImmersion (R.immersion b) := R.isImmersion b
+    have : TopologicalSpace.NoetherianSpace (R.domain b) :=
+      (R.immersion b ≫ a).isEmbedding.isInducing.noetherianSpace
+    have hf : CondensedRing.LocallyFree (condensedRingObj A (R.domain b)) (M b) := by
+      obtain ⟨C, hC⟩ := (hM b).1
+      exact ⟨C, fun t ↦ (CondensedRing.freeAt_iff_standard A (C.f t) (M b)).mpr (hC t)⟩
+    obtain ⟨e⟩ := hq b
+    exact P.prop_of_iso ((DerivedCategory.singleFunctor _ 0).mapIso e).symm
+      (hP (R.domain b) (R.immersion b ≫ a) inferInstance (M b) hf)
+
+@[irreducible] private noncomputable def integralModel_comap_extension
+    {A B : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
+    [MonObj A] [MonObj B] (c : A ⟶ B) [IsMonHom c]
+    {S X : Scheme.{u}} [TopologicalSpace.NoetherianSpace X]
+    (a : S ⟶ X) [IsImmersion a] :
+    coefficientHeartLocallyClosedExtension B a inferInstance ⋙
+        Mod.comap (coefficientMap c X) ≅
+      Mod.comap (coefficientMap c S) ⋙
+        coefficientHeartLocallyClosedExtension A a inferInstance := by
+  have : TopologicalSpace.NoetherianSpace S :=
+    a.isEmbedding.isInducing.noetherianSpace
+  change (CondensedRing.openImmersionLowerShriek B a.toImage ⋙
+      CondensedRing.lowerStar B a.imageι) ⋙ _ ≅ _ ⋙
+    (CondensedRing.openImmersionLowerShriek A a.toImage ⋙
+      CondensedRing.lowerStar A a.imageι)
+  exact Functor.associator _ _ _ ≪≫
+    Functor.isoWhiskerLeft _ (CondensedRing.comapLowerStarIso c a.imageι) ≪≫
+    (Functor.associator _ _ _).symm ≪≫
+    Functor.isoWhiskerRight
+      (CondensedRing.comapOpenImmersionLowerShriekIso c a.toImage) _ ≪≫
+    Functor.associator _ _ _
+
+set_option backward.isDefEq.respectTransparency.types false in
+open scoped CategoryTheory.Obj in
+attribute [-instance] integralModel_coefficientMonObj in
+private theorem integralModel_lisse_transport
+    {A B A' B' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
+    [MonObj A] [IsCommMonObj A] [MonObj B] [IsCommMonObj B]
+    [MonObj A'] [IsCommMonObj A'] [MonObj B'] [IsCommMonObj B']
+    (c : A ⟶ B) [IsMonHom c] (c' : A' ⟶ B') [IsMonHom c']
+    (a : A ⟶ A') [IsMonHom a] [IsIso a]
+    (b : B ⟶ B') [IsMonHom b] [IsIso b] (w : a ≫ c' = c ≫ b)
+    (X : Scheme.{u}) [IsNoetherian X]
+    (P : ObjectProperty (DerivedCategory (Mod
+      (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj B X))))
+    [P.IsTriangulated] [P.IsClosedUnderIsomorphisms]
+    (hP : ∀ (T : Scheme.{u}) (d : T ⟶ X) (hd : IsImmersion d)
+      (M : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj A T)),
+      CondensedRing.LocallyFree (condensedRingObj A T) M →
+      P ((DerivedCategory.singleFunctor _ 0).obj
+        ((Mod.extendScalars (coefficientMap c X)).obj
+          ((coefficientHeartLocallyClosedExtension A d hd).obj M))))
+    {S : Scheme.{u}} (d : S ⟶ X) [IsImmersion d]
+    (hfil : LatticeSubquotientFiltrationData A' B' c' d)
+    (L : Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1}) (condensedRingObj B S))
+    (hL : IsLisseCoefficientModule B L) :
+    P ((DerivedCategory.singleFunctor _ 0).obj
+      ((coefficientHeartLocallyClosedExtension B d inferInstance).obj L)) := by
+  let F : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj B' X) ⥤
+      Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj B X) :=
+    Mod.comap (coefficientMap b X)
+  let P' := ObjectProperty.inverseImage P F.mapDerivedCategory
+  let L' := (Mod.comap (coefficientMap (inv b) S)).obj L
+  have hLF : CondensedRing.LocallyFree (condensedRingObj B S) L := by
+    obtain ⟨C, hC⟩ := hL
+    exact ⟨C, fun t ↦ (CondensedRing.freeAt_iff_standard B (C.f t) L).mpr (hC t)⟩
+  have hL' : IsLisseCoefficientModule B' L' :=
+    lisse_of_raw_free B' S L'
+      (CondensedRing.locallyFree_comap (coefficientMap (inv b) S) hLF)
+  have hg (T : Scheme.{u}) (f : T ⟶ X) (hf : IsImmersion f)
+      (M : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj A' T))
+      (hM : CondensedRing.LocallyFree (condensedRingObj A' T) M) :
+      P' ((DerivedCategory.singleFunctor _ 0).obj
+        ((Mod.extendScalars (coefficientMap c' X)).obj
+          ((coefficientHeartLocallyClosedExtension A' f hf).obj M))) := by
+    let := hf
+    let N := (Mod.comap (coefficientMap a T)).obj M
+    have hN := CondensedRing.locallyFree_comap (coefficientMap a T) hM
+    have square : coefficientMap a X ≫ coefficientMap c' X =
+        coefficientMap c X ≫ coefficientMap b X := by
+      simpa only [coefficientMap, ← Functor.map_comp] using
+        congrArg ((upperStarFromPoint X).map) w
+    let e := (CondensedRing.scalarTransportIso (coefficientMap c X)
+      (coefficientMap c' X) (coefficientMap a X) (coefficientMap b X) square).app
+        ((coefficientHeartLocallyClosedExtension A' f hf).obj M)
+    have h := hP T f hf N hN
+    exact P.prop_of_iso
+      ((F.mapDerivedCategorySingleFunctor 0).app _ ≪≫
+        (DerivedCategory.singleFunctor _ 0).mapIso
+          (e.symm ≪≫ (Mod.extendScalars (coefficientMap c X)).mapIso
+            ((integralModel_comap_extension a f).app M))).symm h
+  have h := integralModel_lisse_of_filtration A' B' c' X P' hg d hfil L' hL'
+  let e : (Mod.comap (coefficientMap b S)).obj L' ≅ L :=
+    ((Mod.comapComp (coefficientMap b S) (coefficientMap (inv b) S)).symm ≪≫
+      Mod.comapCongr (by
+        simp only [coefficientMap, ← Functor.map_comp, IsIso.hom_inv_id]
+        exact (upperStarFromPoint S).map_id B) ≪≫ Mod.comapId _).app L
+  exact P.prop_of_iso
+    ((F.mapDerivedCategorySingleFunctor 0).app _ ≪≫
+      (DerivedCategory.singleFunctor _ 0).mapIso
+        ((integralModel_comap_extension b d).app L' ≪≫
+          (coefficientHeartLocallyClosedExtension B d inferInstance).mapIso e)) h
+
+@[irreducible] private noncomputable def integralModel_coefficientIso
+    {R : Type} {T : Type u} [TopologicalSpace R] [Ring R] [IsTopologicalRing R]
+    [TopologicalSpace T] [Ring T] [IsTopologicalRing T]
+    (e : R ≃+* T) (he : Continuous e) (hi : Continuous e.symm) :
+    Profinite.continuousMapRingSheaf.{u} R ≅
+      Profinite.continuousMapRingSheafOfUniverse.{u, u} T where
+  hom := ⟨{
+    app S := RingCat.ofHom
+      (ULift.ringEquiv.symm.toRingHom.comp
+        ((e.toRingHom.compLeftContinuous S.unop he).comp ULift.ringEquiv.toRingHom))
+    naturality := fun _ _ _ ↦ rfl }⟩
+  inv := ⟨{
+    app S := RingCat.ofHom
+      (ULift.ringEquiv.symm.toRingHom.comp
+        ((e.symm.toRingHom.compLeftContinuous S.unop hi).comp ULift.ringEquiv.toRingHom))
+    naturality := fun _ _ _ ↦ rfl }⟩
+  hom_inv_id := by
+    ext S f
+    apply ULift.ext
+    apply ContinuousMap.ext
+    intro x
+    exact e.symm_apply_apply _
+  inv_hom_id := by
+    ext S f
+    apply ULift.ext
+    apply ContinuousMap.ext
+    intro x
+    exact e.apply_symm_apply _
+
+private theorem integralModel_spectralMetric {T : Type u} (ℓ : ℕ) [Fact ℓ.Prime]
+    [hT : NormedField T] [NormedAlgebra ℚ_[ℓ] T] [FiniteDimensional ℚ_[ℓ] T] :
+    (spectralNorm.normedField ℚ_[ℓ] T).toMetricSpace = hT.toMetricSpace := by
+  apply MetricSpace.ext
+  apply Dist.ext
+  funext a b
+  rw [(spectralNorm.normedField ℚ_[ℓ] T).dist_eq, hT.dist_eq]
+  exact (NormedAlgebra.norm_eq_spectralNorm ℚ_[ℓ] (-a + b)).symm
+
+set_option backward.isDefEq.respectTransparency.types false in
+open scoped CategoryTheory.Obj in
+attribute [-instance] integralModel_coefficientMonObj in
+private theorem integralModel_generator_contains
+    (X : Scheme.{u}) [IsNoetherian X] (ℓ : ℕ) [Fact ℓ.Prime]
+    (E : PadicAlgCl.FiniteIntermediateField ℓ)
+    (P : ObjectProperty (DerivedCategory (Mod
+      (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+        (condensedRingObj (Profinite.continuousMapRingObj E.1) X))))
+    (hP : integralModelGenerator X ℓ E ≤ P)
+    (T : Scheme.{u}) (f : T ⟶ X) (hf : IsImmersion f)
+    (M : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) T))
+    (hM : CondensedRing.LocallyFree _ M) :
+    P ((DerivedCategory.singleFunctor _ 0).obj
+      ((Mod.extendScalars (coefficientMap
+        (ProEtale.padicIntegersRingObjToContinuousMapRingObj ℓ E) X)).obj
+          ((coefficientHeartLocallyClosedExtension
+            (Profinite.padicIntegersRingObj ℓ E.1) f hf).obj M))) := by
+  let := hf
+  have : TopologicalSpace.NoetherianSpace T := f.isEmbedding.isInducing.noetherianSpace
+  exact hP _ ⟨T, f.image, f.toImage, f.imageι, inferInstance, inferInstance, M, hM, rfl⟩
+
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem integralModel_liftIntegers (ℓ : ℕ) [Fact ℓ.Prime]
+    (E : PadicAlgCl.FiniteIntermediateField ℓ) (x : ULift.{u} E.1) :
+    x ∈ Padic.coefficientExtensionIntegers ℓ (ULift.{u} E.1) ↔ ‖x.down‖ ≤ 1 := by
+  let : NormedField (ULift.{u} E.1) :=
+    { (inferInstance : NormedCommRing (ULift.{u} E.1)),
+      (inferInstance : Field (ULift.{u} E.1)) with
+      norm_mul a b := norm_mul a.down b.down }
+  have h := (Padic.extension_integers_dvr ℓ (ULift.{u} E.1)
+    (Padic.coefficientExtensionAbsoluteValue ℓ (ULift.{u} E.1))
+    (spectralNorm_extends (K := ℚ_[ℓ]) (L := ULift.{u} E.1))).choose_spec.choose_spec.1 x
+  change x ∈ Padic.coefficientExtensionIntegers ℓ (ULift.{u} E.1) ↔ _ at h
+  rw [h]
+  change spectralNorm ℚ_[ℓ] (ULift.{u} E.1) x ≤ 1 ↔ _
+  rw [← NormedAlgebra.norm_eq_spectralNorm ℚ_[ℓ]]
+  rfl
+
+private theorem integralModel_liftTopology (ℓ : ℕ) [Fact ℓ.Prime]
+    (E : PadicAlgCl.FiniteIntermediateField ℓ) :
+    (fun m : MetricSpace (ULift.{u} E.1) ↦
+      m.toPseudoMetricSpace.toUniformSpace.toTopologicalSpace)
+        (spectralNorm.normedField ℚ_[ℓ] (ULift.{u} E.1)).toMetricSpace =
+        (inferInstance : TopologicalSpace (ULift.{u} E.1)) := by
+  let : NormedField (ULift.{u} E.1) :=
+    { (inferInstance : NormedCommRing (ULift.{u} E.1)),
+      (inferInstance : Field (ULift.{u} E.1)) with
+      norm_mul a b := norm_mul a.down b.down }
+  exact congrArg
+    (fun m : MetricSpace (ULift.{u} E.1) ↦
+      m.toPseudoMetricSpace.toUniformSpace.toTopologicalSpace)
+    (integralModel_spectralMetric (T := ULift.{u} E.1) ℓ)
+
+-- Convert the lattice predicate while its coefficient field is still abstract.
+-- Specializing both large ring-sheaf constructions before this conversion is expensive.
+private def integralModel_latticeTopology
+    (ℓ : ℕ) [Fact ℓ.Prime] (T : Type u) [Field T]
+    [Algebra ℚ_[ℓ] T] [FiniteDimensional ℚ_[ℓ] T]
+    {S X : Scheme.{u}} [IsNoetherian X] (d : S ⟶ X) [IsImmersion d]
+    (t : TopologicalSpace T)
+    (ht : @IsTopologicalRing T t inferInstance) : Prop :=
+  let := t
+  let := ht
+  let O := Padic.coefficientExtensionIntegers ℓ T
+  let A := coefficientHeartRingObj (Profinite.continuousMapRingSheafOfUniverse.{u, u} O)
+  let B := coefficientHeartRingObj
+    (Profinite.continuousMapRingSheafOfUniverse.{u, u} T)
+  let : IsCommMonObj A := Sheaf.isCommMonObj_sheafCompose_obj _
+    (Profinite.continuousMapRingSheafOfUniverse.{u, u} O)
+    (fun U (a b : ULift.{u + 1} C(U.unop, O)) ↦ mul_comm a b)
+  let : IsCommMonObj B := Sheaf.isCommMonObj_sheafCompose_obj _
+    (Profinite.continuousMapRingSheafOfUniverse.{u, u} T)
+    (fun U (a b : ULift.{u + 1} C(U.unop, T)) ↦ mul_comm a b)
+  let c := (sheafCompose (coherentTopology Profinite.{u})
+    (forget₂ RingCat.{u + 1} Ab.{u + 1})).map
+      (Profinite.continuousMapRingSheafMapOfUniverse.{u, u} O.subtype continuous_subtype_val)
+  LatticeSubquotientFiltrationData A B c d
+
+private theorem integralModel_lattice_data
+    (ℓ : ℕ) [Fact ℓ.Prime] (T : Type u) [Field T]
+    [Algebra ℚ_[ℓ] T] [FiniteDimensional ℚ_[ℓ] T] (k : Type u) [Field k]
+    {S X : Scheme.{u}} [X.Over (Spec (.of k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]
+    [IsNoetherian X] (d : S ⟶ X) [IsImmersion d]
+    (h : LatticeSubquotientFiltration ℓ T k d) :
+    letI := spectralNorm.nontriviallyNormedField ℚ_[ℓ] T
+    integralModel_latticeTopology ℓ T d inferInstance inferInstance := h
+
+private theorem integralModel_lattice_small
+    (k : Type u) [Field k] (p ℓ : ℕ) [Fact p.Prime] [Fact ℓ.Prime]
+    [CharP k p] (hℓp : ℓ ≠ p) (X : Scheme.{u})
+    [X.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))]
+    [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))]
+    [IsNoetherian X] (E : PadicAlgCl.FiniteIntermediateField ℓ)
+    {S : Scheme.{u}} (d : S ⟶ X) [IsImmersion d] :
+    integralModel_latticeTopology ℓ (ULift.{u} E.1) d ULift.topologicalSpace inferInstance := by
+  have : TopologicalSpace.NoetherianSpace S :=
+    d.isEmbedding.isInducing.noetherianSpace
+  have : IsLocallyNoetherian S := LocallyOfFiniteType.isLocallyNoetherian d
+  have : IsNoetherian S := ⟨⟩
+  let : S.Over (Spec (.of k)) := ⟨d ≫ (X ↘ Spec (.of k))⟩
+  have : d.IsOver (Spec (.of k)) := ⟨rfl⟩
+  have : LocallyOfFiniteType (S ↘ Spec (.of k)) := by
+    change LocallyOfFiniteType (d ≫ (X ↘ Spec (.of k)))
+    infer_instance
+  have : QuasiCompact (S ↘ Spec (.of k)) := by
+    change QuasiCompact (d ≫ (X ↘ Spec (.of k)))
+    infer_instance
+  have : IsSeparated (S ↘ Spec (.of k)) := by
+    change IsSeparated (d ≫ (X ↘ Spec (.of k)))
+    infer_instance
+  let t : TopologicalSpace (ULift.{u} E.1) :=
+    (fun m : MetricSpace (ULift.{u} E.1) ↦
+      m.toPseudoMetricSpace.toUniformSpace.toTopologicalSpace)
+        (spectralNorm.normedField ℚ_[ℓ] (ULift.{u} E.1)).toMetricSpace
+  have ht : t = ULift.topologicalSpace := integralModel_liftTopology ℓ E
+  have htop : @IsTopologicalRing (ULift.{u} E.1) t inferInstance := by
+    rw [ht]
+    infer_instance
+  have h : integralModel_latticeTopology ℓ (ULift.{u} E.1) d t htop :=
+    integralModel_lattice_data ℓ (ULift.{u} E.1) k d
+      (exists_latticeSubquotientFiltration ℓ (ULift.{u} E.1) p k (Ne.symm hℓp) S X d)
+  simpa only [ht] using h
+
+set_option backward.isDefEq.respectTransparency.types false in
+open scoped CategoryTheory.Obj in
+attribute [-instance] integralModel_coefficientMonObj in
+attribute [local irreducible] LatticeSubquotientFiltrationData in
+private theorem integralModel_lisse_small
+    (k : Type u) [Field k] (p ℓ : ℕ) [Fact p.Prime] [Fact ℓ.Prime]
+    [CharP k p] (hℓp : ℓ ≠ p) (X : Scheme.{u})
+    [X.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))]
+    [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))]
+    [IsNoetherian X] (E : PadicAlgCl.FiniteIntermediateField ℓ)
+    (P : ObjectProperty (DerivedCategory (Mod
+      (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+        (condensedRingObj (Profinite.continuousMapRingObj E.1) X))))
+    [htri : P.IsTriangulated] [hiso : P.IsClosedUnderIsomorphisms]
+    (hP : integralModelGenerator X ℓ E ≤ P) :
+    integralModel_lisseExtensions (Profinite.continuousMapRingObj E.1) X P := by
+  unfold integralModel_lisseExtensions
+  intro S d hd L hL
+  let := hd
+  have hgen := integralModel_generator_contains X ℓ E P hP
+  let E' := ULift.{u} E.1
+  have hm := integralModel_liftIntegers.{u} ℓ E
+  let O' := Padic.coefficientExtensionIntegers ℓ E'
+  let eO : PadicAlgCl.integers ℓ E.1 ≃+* O' :=
+    { toFun := fun x ↦ ⟨ULift.up x.val, (hm _).mpr (by
+        exact_mod_cast x.property)⟩
+      invFun := fun x ↦ ⟨x.val.down, by
+        have h := (hm x.val).mp x.property
+        exact_mod_cast h⟩
+      left_inv := fun x ↦ rfl
+      right_inv := fun x ↦ by cases x; rfl
+      map_mul' := fun x y ↦ rfl
+      map_add' := fun x y ↦ rfl }
+  let eF : E.1 ≃+* E' := ULift.ringEquiv.symm
+  let aO := integralModel_coefficientIso eO
+    ((continuous_uliftUp.comp continuous_subtype_val).subtype_mk _)
+    ((continuous_uliftDown.comp continuous_subtype_val).subtype_mk _)
+  let aF := integralModel_coefficientIso eF continuous_uliftUp continuous_uliftDown
+  let forget := sheafCompose (coherentTopology Profinite.{u})
+    (forget₂ RingCat.{u + 1} Ab.{u + 1})
+  let A' := coefficientHeartRingObj (Profinite.continuousMapRingSheafOfUniverse.{u, u} O')
+  let B' := coefficientHeartRingObj (Profinite.continuousMapRingSheafOfUniverse.{u, u} E')
+  let c' : A' ⟶ B' := forget.map
+    (Profinite.continuousMapRingSheafMapOfUniverse.{u, u} O'.subtype continuous_subtype_val)
+  have : IsCommMonObj A' := Sheaf.isCommMonObj_sheafCompose_obj _
+    (Profinite.continuousMapRingSheafOfUniverse.{u, u} O')
+    (fun U (a b : ULift.{u + 1} C(U.unop, O')) ↦ mul_comm a b)
+  have : IsCommMonObj B' := Sheaf.isCommMonObj_sheafCompose_obj _
+    (Profinite.continuousMapRingSheafOfUniverse.{u, u} E')
+    (fun U (a b : ULift.{u + 1} C(U.unop, E')) ↦ mul_comm a b)
+  have : IsMonHom c' := Sheaf.isMonHom_sheafCompose_map _
+    (Profinite.continuousMapRingSheafMapOfUniverse.{u, u} O'.subtype continuous_subtype_val)
+  have : IsMonHom (forget.map aO.hom) := Sheaf.isMonHom_sheafCompose_map _ aO.hom
+  have : IsMonHom (forget.map aF.hom) := Sheaf.isMonHom_sheafCompose_map _ aF.hom
+  have hf := integralModel_lattice_small k p ℓ hℓp X E d
+  apply integralModel_lisse_transport
+    (A := Profinite.padicIntegersRingObj ℓ E.1)
+    (B := Profinite.continuousMapRingObj E.1) (A' := A') (B' := B')
+    (AlgebraicGeometry.ProEtale.padicIntegersRingObjToContinuousMapRingObj ℓ E)
+    c' (forget.map aO.hom) (forget.map aF.hom) ?_ X P hgen d hf L hL
+  · dsimp only [aO, aF]
+    ext T f
+    delta integralModel_coefficientIso
+    rfl
+
+open scoped CategoryTheory.Obj in
+attribute [-instance] integralModel_coefficientMonObj in
+attribute [local instance] Sheaf.symmetricCategory in
+@[irreducible] private noncomputable def integralModel_tensor_pull
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} (f : Y ⟶ X)
+    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :
+    Mod.tensorLeft M ⋙ CondensedRing.upperStar Λ f ≅
+      CondensedRing.upperStar Λ f ⋙
+        Mod.tensorLeft ((CondensedRing.upperStar Λ f).obj M) := by
+  let : ((Scheme.ProEt.topology X).W (A := Ab.{u + 1})).IsMonoidal :=
+    GrothendieckTopology.W.monoidal
+  let : ((Scheme.ProEt.topology Y).W (A := Ab.{u + 1})).IsMonoidal :=
+    GrothendieckTopology.W.monoidal
+  let ρ := inv (condensedPullbackHom Λ f)
+  let H := Mod.mapModComap (G := ProEtale.upperStar Ab.{u + 1} f) ρ
+  let e : CondensedRing.upperStar Λ f ≅ H := CondensedRing.normalizedPullbackIso Λ f
+  have : PreservesFiniteColimits H := preservesFiniteColimits_of_natIso e
+  exact Functor.isoWhiskerLeft _ e ≪≫
+    Mod.tensorLeftCompMapModComapIso (G := ProEtale.upperStar Ab.{u + 1} f)
+      (A := condensedRingObj Λ X) ρ
+      (fun M N ↦ Functor.LaxBraided.braided (F := ProEtale.upperStar Ab.{u + 1} f) M N) M ≪≫
+    Functor.isoWhiskerRight e.symm _ ≪≫
+    Functor.isoWhiskerLeft _ (Mod.tensorLeftMapIso (e.app M).symm)
+
+set_option backward.isDefEq.respectTransparency false in
+open scoped CategoryTheory.Obj in
+attribute [-instance] integralModel_coefficientMonObj in
+private theorem integralModel_flat_detect
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] {X U Z : Scheme.{u}}
+    (i : Z ⟶ X) (j : U ⟶ X) [IsClosedImmersion i] [IsOpenImmersion j]
+    [QuasiCompact j] (hij : Set.range j = (Set.range i)ᶜ)
+    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
+    (hi : ObjectProperty.flat ((CondensedRing.upperStar Λ i).obj M))
+    (hj : ObjectProperty.flat ((CondensedRing.upperStar Λ j).obj M)) :
+    ObjectProperty.flat M := by
+  have pull_mono {T : Scheme.{u}} (f : T ⟶ X)
+      (hf : ObjectProperty.flat ((CondensedRing.upperStar Λ f).obj M)) :
+      (Mod.tensorLeft M ⋙ CondensedRing.upperStar Λ f).PreservesMonomorphisms := by
+    have : PreservesFiniteLimits
+        (MonoidalCategory.tensorLeft ((CondensedRing.upperStar Λ f).obj M)) := hf.1.1
+    have : PreservesFiniteLimits
+        (Mod.tensorLeft ((CondensedRing.upperStar Λ f).obj M)) :=
+      preservesFiniteLimits_of_natIso
+        (BraidedCategory.tensorLeftIsoTensorRight _ ≪≫
+          (Mod.relativeTensorRightIso _).symm)
+    have : PreservesFiniteLimits (CondensedRing.upperStar Λ f ⋙
+        Mod.tensorLeft ((CondensedRing.upperStar Λ f).obj M)) :=
+      comp_preservesFiniteLimits _ _
+    exact Functor.PreservesMonomorphisms.of_iso (integralModel_tensor_pull Λ f M).symm
+  have : (Mod.tensorLeft M).PreservesMonomorphisms := by
+    constructor
+    intro P Q f hf
+    have local_mono {T : Scheme.{u}} (g : T ⟶ X)
+        (hg : ObjectProperty.flat ((CondensedRing.upperStar Λ g).obj M)) :
+        IsZero ((CondensedRing.upperStar Λ g).obj
+          (kernel ((Mod.tensorLeft M).map f))) := by
+      have := pull_mono g hg
+      have : Mono ((Mod.tensorLeft M ⋙ CondensedRing.upperStar Λ g).map f) :=
+        Functor.map_mono _ f
+      have : Mono ((CondensedRing.upperStar Λ g).map ((Mod.tensorLeft M).map f)) :=
+        inferInstanceAs (Mono ((Mod.tensorLeft M ⋙ CondensedRing.upperStar Λ g).map f))
+      exact (isZero_kernel_of_mono _).of_iso (PreservesKernel.iso _ _)
+    exact Preadditive.mono_of_isZero_kernel _
+      (CondensedRing.isZero_of_isZero_upperStar_of_isCompl Λ i j
+        (by rw [hij]; exact isCompl_compl) _ (local_mono i hi) (local_mono j hj))
+  have : (Mod.tensorLeft M).Additive :=
+    Functor.additive_of_iso (Mod.relativeTensorRightIso M).symm
+  have := Functor.preservesHomology_of_preservesMonos_and_cokernels (Mod.tensorLeft M)
+  have : PreservesFiniteLimits (Mod.tensorLeft M) :=
+    Functor.preservesFiniteLimits_of_preservesHomology (Mod.tensorLeft M)
+  rw [ObjectProperty.flat_iff_preservesFiniteLimits]
+  exact preservesFiniteLimits_of_natIso
+    (Mod.relativeTensorRightIso M ≪≫ (BraidedCategory.tensorLeftIsoTensorRight M).symm)
+
+open scoped CategoryTheory.Obj in
+attribute [-instance] integralModel_coefficientMonObj in
+private theorem integralModel_open_closed_flat
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] {X U Z : Scheme.{u}}
+    (i : Z ⟶ X) (j : U ⟶ X) [IsClosedImmersion i] [IsOpenImmersion j]
+    [QuasiCompact j] (hij : Set.range j = (Set.range i)ᶜ) :
+    (∀ M : Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z),
+      ObjectProperty.flat M → ObjectProperty.flat ((CondensedRing.lowerStar Λ i).obj M)) ∧
+    (∀ M : Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1}) (condensedRingObj Λ U),
+      ObjectProperty.flat M →
+        ObjectProperty.flat ((CondensedRing.openImmersionLowerShriek Λ j).obj M)) := by
+  have hc := CondensedRing.moduleCounitOfAbelian Λ i
+    (ProEtale.abelian_closed_support i j hij).1
+  have ho := CondensedRing.openUnitIsIso Λ j
+  constructor
+  · intro M hM
+    apply integralModel_flat_detect Λ i j hij
+    · exact ObjectProperty.prop_of_iso ObjectProperty.flat
+        (asIso ((CondensedRing.upperStarLowerStarAdjunction Λ i).counit.app M)).symm hM
+    · exact ObjectProperty.flat_of_isZero
+        (CondensedRing.openRestrictionPushforwardZero Λ i j hij M)
+  · intro M hM
+    apply integralModel_flat_detect Λ i j hij
+    · exact ObjectProperty.flat_of_isZero (CondensedRing.closed_pull_open_zero Λ i j hij M)
+    · exact ObjectProperty.prop_of_iso ObjectProperty.flat
+        (asIso ((CondensedRing.openImmersionLowerShriekUpperStarAdjunction Λ j).unit.app M)) hM
+
+open scoped CategoryTheory.Obj in
+attribute [-instance] integralModel_coefficientMonObj in
+@[irreducible] private noncomputable def integralModel_closed_scalar
+    {A B : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
+    [MonObj A] [IsCommMonObj A] [MonObj B] [IsCommMonObj B]
+    (c : A ⟶ B) [IsMonHom c] {X U Z : Scheme.{u}}
+    (i : Z ⟶ X) (j : U ⟶ X) [IsClosedImmersion i] [IsOpenImmersion j]
+    [QuasiCompact j] (hij : Set.range j = (Set.range i)ᶜ)
+    (M : Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj A Z)) :
+    (Mod.extendScalars (coefficientMap c X)).obj ((CondensedRing.lowerStar A i).obj M) ≅
+      (CondensedRing.lowerStar B i).obj ((Mod.extendScalars (coefficientMap c Z)).obj M) := by
+  have hc := CondensedRing.moduleCounitOfAbelian A i
+    (ProEtale.abelian_closed_support i j hij).1
+  let F := Mod.extendScalars (coefficientMap c X)
+  have hz : IsZero ((CondensedRing.upperStar B j).obj
+      (F.obj ((CondensedRing.lowerStar A i).obj M))) := by
+    exact ((Mod.extendScalars (coefficientMap c U)).map_isZero
+      (CondensedRing.openRestrictionPushforwardZero A i j hij M)).of_iso
+        ((CondensedRing.pullIso c j).app ((CondensedRing.lowerStar A i).obj M)).symm
+  have hu := CondensedRing.supported_unit B i j hij _ hz
+  exact asIso ((CondensedRing.upperStarLowerStarAdjunction B i).unit.app
+      (F.obj ((CondensedRing.lowerStar A i).obj M))) ≪≫
+    (CondensedRing.lowerStar B i).mapIso
+      (((CondensedRing.pullIso c i).app ((CondensedRing.lowerStar A i).obj M)).symm ≪≫
+        (Mod.extendScalars (coefficientMap c Z)).mapIso
+          (asIso ((CondensedRing.upperStarLowerStarAdjunction A i).counit.app M)))
+
+open scoped CategoryTheory.Obj in
+attribute [-instance] integralModel_coefficientMonObj in
+private theorem integralModel_extension_flat
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] {X V S : Scheme.{u}}
+    [TopologicalSpace.NoetherianSpace X]
+    (j : S ⟶ V) (i : V ⟶ X) [IsOpenImmersion j] [IsClosedImmersion i]
+    (M : Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1}) (condensedRingObj Λ S))
+    (hM : CondensedRing.LocallyFree (condensedRingObj Λ S) M) :
+    ObjectProperty.flat (integralLowerShriek X Λ j i M) := by
+  have : TopologicalSpace.NoetherianSpace V := i.isEmbedding.isInducing.noetherianSpace
+  have : TopologicalSpace.NoetherianSpace S := j.isEmbedding.isInducing.noetherianSpace
+  have : QuasiCompact j := ⟨fun _ _ _ ↦ TopologicalSpace.NoetherianSpace.isCompact _⟩
+  let U : X.Opens := ⟨(Set.range i)ᶜ, i.isClosedEmbedding.isClosed_range.isOpen_compl⟩
+  have hU : Set.range U.ι = (Set.range i)ᶜ := Scheme.Opens.range_ι U
+  have : TopologicalSpace.NoetherianSpace U.toScheme :=
+    U.ι.isEmbedding.isInducing.noetherianSpace
+  have : QuasiCompact U.ι := ⟨fun _ _ _ ↦ TopologicalSpace.NoetherianSpace.isCompact _⟩
+  apply (integralModel_open_closed_flat Λ i U.ι hU).1
+  apply (integralModel_open_closed_flat Λ j.closedComplement j
+    (by rw [Scheme.Hom.range_closedComplement, compl_compl])).2
+  exact integralModel_locallyFree_flat _ M hM
+
+open scoped CategoryTheory.Obj in
+attribute [-instance] integralModel_coefficientMonObj in
+@[irreducible] private noncomputable def integralModel_extension_scalar
+    {A B : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
+    [MonObj A] [IsCommMonObj A] [MonObj B] [IsCommMonObj B]
+    (c : A ⟶ B) [IsMonHom c] {X V S : Scheme.{u}}
+    [TopologicalSpace.NoetherianSpace X]
+    (j : S ⟶ V) (i : V ⟶ X) [IsOpenImmersion j] [IsClosedImmersion i]
+    (M : Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1}) (condensedRingObj A S)) :
+    (Mod.extendScalars (coefficientMap c X)).obj (integralLowerShriek X A j i M) ≅
+      integralLowerShriek X B j i ((Mod.extendScalars (coefficientMap c S)).obj M) := by
+  let U : X.Opens := ⟨(Set.range i)ᶜ, i.isClosedEmbedding.isClosed_range.isOpen_compl⟩
+  have hU : Set.range U.ι = (Set.range i)ᶜ := Scheme.Opens.range_ι U
+  have : TopologicalSpace.NoetherianSpace U.toScheme :=
+    U.ι.isEmbedding.isInducing.noetherianSpace
+  have : QuasiCompact U.ι := ⟨fun _ _ _ ↦ TopologicalSpace.NoetherianSpace.isCompact _⟩
+  exact integralModel_closed_scalar c i U.ι hU
+      ((CondensedRing.openImmersionLowerShriek A j).obj M) ≪≫
+    (CondensedRing.lowerStar B i).mapIso ((CondensedRing.openImmersionShriekIso c j).app M)
+
+open scoped CategoryTheory.Obj in
+attribute [-instance] integralModel_coefficientMonObj in
+private theorem integralModel_locallyFree_scalar
+    {A B : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
+    [MonObj A] [IsCommMonObj A] [MonObj B] [IsCommMonObj B]
+    (c : A ⟶ B) [IsMonHom c] (S : Scheme.{u})
+    (M : Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1}) (condensedRingObj A S))
+    (hM : CondensedRing.LocallyFree (condensedRingObj A S) M) :
+    CondensedRing.LocallyFree (condensedRingObj B S)
+      ((Mod.extendScalars (coefficientMap c S)).obj M) := by
+  obtain ⟨C, hC⟩ := hM
+  refine ⟨C, fun a ↦ ?_⟩
+  apply (CondensedRing.freeAt_iff_standard B (C.f a) _).mpr
+  have h := (CondensedRing.freeAt_iff_standard A (C.f a) M).mp (hC a)
+  exact free_of_iso
+    (free_map (Mod.extendScalars (coefficientMap c (C.X a)))
+      (Mod.regularExtensionIso _) h)
+    ((CondensedRing.pullIso c (C.f a)).app M)
+
+private theorem integralModel_residue_discrete (ℓ : ℕ) [Fact ℓ.Prime]
+    (E : PadicAlgCl.FiniteIntermediateField ℓ) (π : PadicAlgCl.integers ℓ E.1)
+    (hπ : Ideal.span {π} = IsLocalRing.maximalIdeal (PadicAlgCl.integers ℓ E.1))
+    (n : ℕ) : DiscreteTopology (completedResidue ℓ E π n) := by
+  have hp : π ≠ 0 := by
+    intro h
+    apply PadicAlgCl.maximalIdeal_integers_ne_bot ℓ E.1
+    rw [← hπ, h, Ideal.span_singleton_zero]
+  let q := π ^ (n + 1)
+  have hq : (q.val : E.1) ≠ 0 := by
+    exact_mod_cast pow_ne_zero (n + 1) hp
+  let I : Ideal (PadicAlgCl.integers ℓ E.1) := (Ideal.span {π}) ^ (n + 1)
+  have hopen : IsOpen (I : Set (PadicAlgCl.integers ℓ E.1)) := by
+    apply I.toAddSubgroup.isOpen_of_mem_nhds (g := 0)
+    have ho : IsOpen ((fun x : PadicAlgCl.integers ℓ E.1 ↦ (x : E.1)) ⁻¹'
+        Metric.ball 0 ‖(q : E.1)‖) :=
+      Metric.isOpen_ball.preimage continuous_subtype_val
+    apply Filter.mem_of_superset (ho.mem_nhds (by
+      change dist (0 : E.1) 0 < ‖(q : E.1)‖
+      simpa only [dist_self] using norm_pos_iff.mpr hq))
+    intro x hx
+    have hx' : ‖(x : E.1)‖ < ‖(q : E.1)‖ := by
+      change dist (x : E.1) 0 < ‖(q : E.1)‖ at hx
+      simpa only [dist_zero_right] using hx
+    have hdiv : (x : E.1) / q ∈ PadicAlgCl.integers ℓ E.1 := by
+      change ‖(x : E.1) / q‖₊ ≤ 1
+      rw [← NNReal.coe_le_coe, NNReal.coe_one, coe_nnnorm, norm_div]
+      exact (div_le_one (norm_pos_iff.mpr hq)).2 hx'.le
+    change x ∈ (Ideal.span {π}) ^ (n + 1)
+    rw [Ideal.span_singleton_pow, Ideal.mem_span_singleton]
+    refine ⟨⟨(x : E.1) / q, hdiv⟩, ?_⟩
+    apply Subtype.ext
+    change (x : E.1) = (q : E.1) * ((x : E.1) / q)
+    exact (mul_div_cancel₀ _ hq).symm
+  exact QuotientAddGroup.discreteTopology hopen
+
+private theorem integralModel_fixed_lisse_transfer
+    (B C : Type (u + 1)) [CommRing B] [CommRing C] [Finite C]
+    (X : Scheme.{u})
+    (M : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} B))
+    (N : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} C))
+    (e : (sheafCompose _ (CategoryTheory.forget (ModuleCat.{u + 1} B))).obj M ≅
+      (sheafCompose _ (CategoryTheory.forget (ModuleCat.{u + 1} C))).obj N)
+    (hM : ProEtale.IsFiniteLocallyConstant B M) :
+    ProEtale.IsFiniteLocallyConstant C N := by
+  obtain ⟨I, U, f, hf, h⟩ := hM
+  have hl (a : I) : ProEtale.IsFiniteLocallyConstant C
+      ((ProEtale.upperStar (ModuleCat.{u + 1} C) (f a)).obj N) := by
+    obtain ⟨P, hP, ⟨eP⟩⟩ := h a
+    let := hP
+    apply Scheme.finiteConstantUnderlying_lisse (U a) C _ P
+    exact (Scheme.fixedUnderlyingPullback (f a) C).app N ≪≫
+      (Scheme.proEtaleSheafInverseImage (f a) (Type (u + 1))).mapIso e.symm ≪≫
+      ((Scheme.fixedUnderlyingPullback (f a) B).app M).symm ≪≫
+      (sheafCompose _ (CategoryTheory.forget (ModuleCat.{u + 1} B))).mapIso eP ≪≫
+      (sheafComposeNatIso _ (CategoryTheory.forget (ModuleCat.{u + 1} B))
+        (sheafificationAdjunction _ (ModuleCat.{u + 1} B))
+        (sheafificationAdjunction _ (Type (u + 1)))).symm.app
+          ((Functor.const (U a).ProEtᵒᵖ).obj P)
+  choose J V g hg hv using hl
+  refine ⟨(Σ a, J a), (fun a ↦ V a.1 a.2), (fun a ↦ g a.1 a.2 ≫ f a.1),
+    Precoverage.IsStableUnderComposition.comp_mem_coverings _ hf g hg, ?_⟩
+  rintro ⟨a, b⟩
+  obtain ⟨P, hP, ⟨eP⟩⟩ := hv a b
+  exact ⟨P, hP, ⟨(ProEtale.upperStarComp _ (g a b) (f a)).app N ≪≫ eP⟩⟩
+
+private theorem integralModel_fixed_constructible_transfer
+    (B C : Type (u + 1)) [CommRing B] [CommRing C] [Finite C]
+    (X : Scheme.{u})
+    (M : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} B))
+    (N : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} C))
+    (e : (sheafCompose _ (CategoryTheory.forget (ModuleCat.{u + 1} B))).obj M ≅
+      (sheafCompose _ (CategoryTheory.forget (ModuleCat.{u + 1} C))).obj N)
+    (hM : ProEtale.IsConstructible B M) : ProEtale.IsConstructible C N := by
+  obtain ⟨S, hS⟩ := hM
+  refine ⟨S, fun a ↦ ?_⟩
+  apply integralModel_fixed_lisse_transfer B C (S.domain a) _ _ ?_ (hS a)
+  exact (Scheme.fixedUnderlyingPullback (S.immersion a) B).app M ≪≫
+    (Scheme.proEtaleSheafInverseImage (S.immersion a) (Type (u + 1))).mapIso e ≪≫
+    ((Scheme.fixedUnderlyingPullback (S.immersion a) C).app N).symm
+
+@[irreducible] private noncomputable def integralModel_fixed_forget
+    (X : Scheme.{u}) (A : Type) [CommRing A] [TopologicalSpace A]
+    [IsTopologicalRing A] [Finite A] [DiscreteTopology A] :
+    ((CondensedRing.continuousRingModuleEquivalence X A).functor ⋙
+      integralModelFixedScalars X A) ⋙
+        sheafCompose _ (forget₂ (ModuleCat.{u + 1}
+          (ULift.{u + 1, u} (ULift.{u, 0} A))) Ab.{u + 1}) ≅
+      Mod.forget (condensedRingObj (Profinite.continuousMapRingObj A) X) := by
+  refine NatIso.ofComponents (fun M ↦ ?_) ?_
+  · exact ObjectProperty.isoMk _ (NatIso.ofComponents (fun _ ↦ Iso.refl _))
+  · intro M N f
+    ext U m
+    rfl
+
+open scoped CategoryTheory.Obj in
+attribute [-instance] integralModel_coefficientMonObj in
+private theorem integralModel_fixed_constructible
+    (X : Scheme.{u}) (A : Type) [CommRing A] [TopologicalSpace A]
+    [IsTopologicalRing A] [Finite A] [DiscreteTopology A]
+    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj (Profinite.continuousMapRingObj A) X))
+    (hM : IsConstructibleModuleObject
+      (condensedRingObj (Profinite.continuousMapRingObj A) X) M) :
+    ProEtale.IsConstructible (ULift.{u + 1, u} (ULift.{u, 0} A))
+      (((CondensedRing.continuousRingModuleEquivalence X A).functor ⋙
+        integralModelFixedScalars X A).obj M) := by
+  obtain ⟨eR, heR⟩ := Profinite.finiteDiscreteCondensedRing_constant.{u} A
+  let := heR
+  obtain ⟨G, hG, hforget⟩ := internalModuleAb_equivalence (ULift.{u + 1} A)
+  let := hG
+  let E := CondensedRing.finiteDiscreteCoefficientEquivalence A eR G hforget X
+  have h := CondensedRing.finiteDiscreteCoefficient_constructible A eR G hforget X M hM
+  have e : E.inverse ⋙ sheafCompose _
+      (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} A)) Ab.{u + 1}) ≅ Mod.forget _ :=
+    Functor.isoWhiskerLeft E.inverse
+        (CondensedRing.finiteDiscreteCoefficientEquivalenceForgetIso A eR G hforget X).symm ≪≫
+      (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight E.counitIso (Mod.forget _) ≪≫ Functor.leftUnitor _
+  apply integralModel_fixed_constructible_transfer (ULift.{u + 1} A)
+    (ULift.{u + 1, u} (ULift.{u, 0} A)) X _ _ ?_ h
+  exact (sheafCompose _ (CategoryTheory.forget Ab.{u + 1})).mapIso
+    (e.app M ≪≫ ((integralModel_fixed_forget X A).app M).symm)
+
+open scoped CategoryTheory.Obj in
+attribute [-instance] integralModel_coefficientMonObj in
+private theorem integralModel_constant_constructible
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]
+    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
+    (hM : IsConstantModelConstructible Λ X M) :
+    IsConstructibleModuleObject (condensedRingObj Λ X) M := by
+  rw [IsConstantModelConstructible, if_pos ⟨inferInstance, inferInstance⟩] at hM
+  obtain ⟨S, hS⟩ := hM
+  refine ⟨S, fun a ↦ ?_⟩
+  have h := constantModel_lfp Λ (S.domain a) _ (hS a)
+  exact lfp_of_comap (inv (condensedPullbackHom Λ (S.immersion a)))
+    (lfp_of_iso h ((CondensedRing.normalizedPullbackIso Λ
+      (S.immersion a)).app M))
+
+private theorem integralModel_fixed_exact
+    (X : Scheme.{u}) (A : Type) [CommRing A] [TopologicalSpace A]
+    [IsTopologicalRing A] [Finite A] [DiscreteTopology A] :
+    PreservesFiniteLimits (integralModelIntrinsicRealization X A) ∧
+      PreservesFiniteColimits (integralModelIntrinsicRealization X A) := by
+  let F := (CondensedRing.continuousRingModuleEquivalence X A).functor ⋙
+    integralModelFixedScalars X A
+  let U := sheafCompose (Scheme.ProEt.topology X)
+    (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1, u} (ULift.{u, 0} A))) Ab.{u + 1})
+  have : PreservesFiniteLimits (F ⋙ U) :=
+    preservesFiniteLimits_of_natIso (integralModel_fixed_forget X A).symm
+  have : PreservesFiniteColimits (F ⋙ U) :=
+    preservesFiniteColimits_of_natIso (integralModel_fixed_forget X A).symm
+  have : PreservesFiniteLimits U := inferInstance
+  have : PreservesFiniteColimits U := inferInstance
+  have : U.ReflectsIsomorphisms := inferInstance
+  have : PreservesFiniteLimits F := preservesFiniteLimits_of_reflects_of_preserves F U
+  have : PreservesFiniteColimits F := preservesFiniteColimits_of_reflects_of_preserves F U
+  have hR := (finiteCoefficientIntrinsicRealization_exact X (ULift.{u, 0} A)).1
+  let := hR
+  change PreservesFiniteLimits (F ⋙ finiteCoefficientIntrinsicRealization X (ULift.{u, 0} A)) ∧
+    PreservesFiniteColimits (F ⋙ finiteCoefficientIntrinsicRealization X (ULift.{u, 0} A))
+  exact ⟨comp_preservesFiniteLimits _ _, comp_preservesFiniteColimits _ _⟩
+
+private theorem integralModel_subfieldRing_eq (ℓ : ℕ) [Fact ℓ.Prime]
+    (E : PadicAlgCl.FiniteIntermediateField ℓ) :
+    Profinite.padicSubfieldCondensedRing.{u} ℓ E.1 =
+      Profinite.continuousMapRingSheaf.{u} E.1 := by
+  rfl
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem integralModel_finite_generation
+    (k : Type u) [Field k] (p ℓ : ℕ) [Fact p.Prime] [Fact ℓ.Prime]
+    [CharP k p] (hℓp : ℓ ≠ p) (X : Scheme.{u})
+    [X.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))]
+    [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))]
+    [IsNoetherian X] (E : PadicAlgCl.FiniteIntermediateField ℓ)
+    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (finiteCoefficientObject X ℓ E)))
+    (hK : constantModelBoundedConstructible (Profinite.continuousMapRingObj E.1) X K) :
+    (sInf {P | integralModelGenerator X ℓ E ≤ P ∧ P.IsTriangulated ∧
+      P.IsClosedUnderIsomorphisms}) K := by
+  rw [unary_relation_sInf_iff]
+  rintro P ⟨hP, htri, hiso⟩
+  let := htri
+  let := hiso
+  exact integralModel_generation_of_lisse X ℓ (Profinite.continuousMapRingSheaf E.1)
+    (Or.inl ⟨E.1, inferInstance, (integralModel_subfieldRing_eq ℓ E).symm⟩) P
+    (htri := htri) (hiso := hiso)
+    (integralModel_lisse_small k p ℓ hℓp X E P
+      (htri := htri) (hiso := hiso) hP) K hK
+
+private theorem integralModel_finite_origin
+    (X : Scheme.{u}) [IsNoetherian X] (A : Type) [CommRing A] [TopologicalSpace A]
+    [IsTopologicalRing A] [Finite A] [DiscreteTopology A]
+    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj (Profinite.continuousMapRingObj A) X)))
+    (hK : constantModelBoundedConstructible (Profinite.continuousMapRingObj A) X K) :
+    (ObjectProperty.ι (Etale.DerivedCategory.isBoundedConstructible
+        (ULift.{u + 1, u} (ULift.{u, 0} A)) X) ⋙
+      finiteCoefficientIntrinsicDerivedComparison X (ULift.{u, 0} A)).essImage
+        ((integralModelIntrinsicRealization X A).rightDerivedFunctor.obj K) := by
+  let F := integralModelIntrinsicRealization X A
+  have : PreservesFiniteLimits F := (integralModel_fixed_exact X A).1
+  have : PreservesFiniteColimits F := (integralModel_fixed_exact X A).2
+  apply ((Scheme.finiteRing_constructibleDerived_origin X (ULift.{u, 0} A)).2.2.1 _).mpr
+  constructor
+  · intro i
+    have h := integralModel_fixed_constructible X A _
+      (integralModel_constant_constructible (Profinite.continuousMapRingObj A) X _ (hK.2 i))
+    have h' := (Scheme.intrinsicRealization_constructible_iff X (ULift.{u, 0} A) _).mpr h
+    exact Scheme.intrinsicConstructible_of_iso X (ULift.{u, 0} A)
+      ((F.rightDerivedFunctorHomologyFunctorIso i).app K) h'
+  · obtain ⟨⟨a, ha⟩, ⟨b, hb⟩⟩ := hK.1
+    refine ⟨min a b, max a b, min_le_max, fun i hi ↦ ?_⟩
+    have hz : IsZero ((DerivedCategory.homologyFunctor _ i).obj K) := by
+      rcases hi with hi | hi
+      · exact (DerivedCategory.isGE_iff K a).mp ha i
+          (lt_of_lt_of_le hi (min_le_left _ _))
+      · exact (DerivedCategory.isLE_iff K b).mp hb i
+          (lt_of_le_of_lt (le_max_right _ _) hi)
+    exact (F.map_isZero hz).of_iso ((F.rightDerivedFunctorHomologyFunctorIso i).app K).symm
+
+set_option backward.isDefEq.respectTransparency.types false in
+open scoped CategoryTheory.Obj in
+attribute [-instance] integralModel_coefficientMonObj in
+private theorem integralModel_reduction_constructible
+    {A B : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
+    [MonObj A] [IsCommMonObj A] [MonObj B] [IsCommMonObj B]
+    (c : A ⟶ B) [IsMonHom c] (X : Scheme.{u}) [IsNoetherian X]
+    {S V : Scheme.{u}} (j : S ⟶ V) (i : V ⟶ X)
+    [IsOpenImmersion j] [IsClosedImmersion i]
+    (M : Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1}) (condensedRingObj A S))
+    (hM : CondensedRing.LocallyFree (condensedRingObj A S) M) :
+    Nonempty ((integralModel_derivedScalar (coefficientMap c X)).obj
+        ((DerivedCategory.singleFunctor (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+          (condensedRingObj A X)) 0).obj (integralLowerShriek X A j i M)) ≅
+      (DerivedCategory.singleFunctor (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+          (condensedRingObj B X)) 0).obj (integralLowerShriek X B j i
+        ((Mod.extendScalars (coefficientMap c S)).obj M))) ∧
+    constantModelBoundedConstructible B X
+      ((integralModel_derivedScalar (coefficientMap c X)).obj
+        ((DerivedCategory.singleFunctor (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+          (condensedRingObj A X)) 0).obj (integralLowerShriek X A j i M))) := by
+  obtain ⟨e⟩ := integralModel_flat_derived_single (coefficientMap c X) _
+    (integralModel_extension_flat A j i M hM)
+  let e' := e ≪≫ (DerivedCategory.singleFunctor _ 0).mapIso
+    (integralModel_extension_scalar c j i M)
+  have hM' := integralModel_locallyFree_scalar c S M hM
+  have hs := integralModel_extension_constructible B X j i _ hM'
+  let := (constantModelConstructibleFiniteTor_wellDefined B X).2.1
+  exact ⟨⟨e'⟩, ObjectProperty.prop_of_iso (constantModelBoundedConstructible B X)
+    e'.symm hs⟩
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+open scoped CategoryTheory.Obj in
+attribute [-instance] integralModel_coefficientMonObj in
+private theorem integralModel_reductions
+    (X : Scheme.{u}) [IsNoetherian X] (ℓ : ℕ) [Fact ℓ.Prime]
+    (E : PadicAlgCl.FiniteIntermediateField ℓ) (π : PadicAlgCl.integers ℓ E.1)
+    (hπ : Ideal.span {π} = IsLocalRing.maximalIdeal (PadicAlgCl.integers ℓ E.1))
+    {S V : Scheme.{u}} (j : S ⟶ V) (i : V ⟶ X)
+    [IsOpenImmersion j] [IsClosedImmersion i]
+    (M : Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1})
+      (integralCoefficientObject S ℓ E))
+    (hM : CondensedRing.LocallyFree (integralCoefficientObject S ℓ E) M) :
+    integralReductionHasEtaleOrigin X ℓ E π j i M := by
+  refine ⟨integralModel_extension_constructible _ X j i M hM, ?_⟩
+  intro n hn
+  let A := completedResidue ℓ E π (n - 1)
+  let c := (sheafCompose (coherentTopology Profinite.{u})
+    (forget₂ RingCat.{u + 1} Ab.{u + 1})).map (completedReduction ℓ E π (n - 1))
+  have : IsMonHom c := Sheaf.isMonHom_sheafCompose_map
+    (coherentTopology Profinite.{u}) (completedReduction ℓ E π (n - 1))
+  have h := integralModel_reduction_constructible c X j i M hM
+  refine ⟨h.1, h.2, ?_⟩
+  have hfin : Finite A := by
+    dsimp [A, completedResidue]
+    rw [hπ]
+    infer_instance
+  have hdis : DiscreteTopology A := integralModel_residue_discrete ℓ E π hπ (n - 1)
+  exact ⟨hfin, hdis, integralModel_finite_origin X A _ h.2⟩
 
 /-- Integral locally free models generate the bounded constructible categories using finitely
 many cones and shifts. In the algebraic-closure clause a single finite E is fixed before
@@ -314,121 +1388,37 @@ Source: blueprint main-20261015, sec-six-functors-basics/sk-lem-integral-models,
 Integral generators, clauses (1)--(3)
 (blueprint: det-lem-integral-models-generators).
 
-Proof (the node's eight steps):
-1. Preliminaries for the locally closed extensions used below. A standing scheme is separated of
-finite type over the field in [sk-def-sfb-dc-setting]; the field is Noetherian since its only
-ideals are zero and the unit ideal, and [pqf-lem-locnoeth-lft] makes X locally Noetherian.
-Finite type gives a finite affine cover, hence X is Noetherian. Open subschemes and closed
-subschemes have affine charts given by localizations and quotient rings, so the same holds for
-all the locally closed subschemes used here. The Noetherian topology and constructibility facts
-in [def-weil-constructible-subset] show that these schemes are qcqs, their open immersions are
-quasi-compact, and their locally closed strata are constructible. For a locally closed immersion
-$a=i\circ u$, use $a_!=i_*u_!$. By [lem-weil-pbc-proetale-ringed-open-closed], both factors are
-exact for any sheaf of coefficient rings. Their coefficient restrictions are the required ones
-by [sk-prop-sfb-cartesian-coefficients]. For locally closed $b:T\hookrightarrow S$, exactness,
-factorization independence and the canonical isomorphism $a_!b_!\simeq(ab)_!$ are precisely the
-statement of [lem-sfb-locally-closed-extension-coherence], applied with $R=\Lambda_X$. Its
-coefficients agree with ours by [sk-prop-sfb-cartesian-coefficients]. The composite immersion is
-locally closed: write $S$ closed in an open $V\subset X$, and $T$ closed in an open $W\subset
-S$; lift $W$ to an open $V\prime\subset V$. Then $T$ is closed in $V\prime$ because the two
-affine quotient maps compose, and $V\prime$ is open in $X$.
-Uses: sk-def-sfb-dc-setting, lem-weil-pbc-proetale-ringed-open-closed,
-sk-prop-sfb-cartesian-coefficients, pqf-lem-locnoeth-lft, def-weil-constructible-subset,
-def-weil-open-immersion, def-weil-closed-immersion, lem-sfb-locally-closed-extension-coherence.
-2. For any lisse finite free integral module $M_0$ on a locally closed $b:T\hookrightarrow X$,
-apply [det-lem-integral-models-operations] (4) to $L=M_0$ and $M=E_X$, viewed as an integral
-module. The coefficient restriction is $b^*E_X=E_T$ by [sk-prop-sfb-cartesian-coefficients]. By
-[det-prop-sfb-qlbar-colimit-x-invert-ell], $E_X=\mathcal O_{E,X}[1/\ell]$ is flat, and the same
-holds on $T$. Therefore this projection formula reads, in degree zero, $$E_X\otimes_{\mathcal
-O_{E,X}}b_!M_0\simeq b_!(E_T\otimes_{\mathcal O_{E,T}}M_0)=b_!(M_0[1/\ell]).$$ Here exactness of
-$b_!$ is step 1, so its application to the degree-zero tensor calculation introduces no higher
-cohomology. This establishes the scalar-extension identity needed for every integral generator,
-without presuming any unproved commutation with an infinite colimit.
-Uses: det-lem-integral-models-operations, sk-prop-sfb-cartesian-coefficients,
-det-prop-sfb-qlbar-colimit-x-invert-ell.
-3. Let $K\in D^b_c(X,E)$. By [det-cor-coefficient-heart-ii-generation], it suffices to build
-each sheaf $a_!L$, with $a:S\hookrightarrow X$ locally closed and $L$ lisse, from integral
-generators. Apply [sk-lem-stratified-lattice] to the standing scheme $S$ and $L$. It gives a
-finite locally closed stratification carrying lisse finite free lattices $L_{0,b}$ in
-$L|_{S_b}$. Apply [det-lem-coefficient-heart-common-stratification] (1) to refine and order it
-so that the successive unions are open in $S$. On a refined stratum restrict the old lattice: a
-trivialization of a finite free module restricts to a trivialization, and its scalar extension
-still equals the restricted $L$, since inverse image is exact and monoidal. This uses the
-coefficient and exact-inverse-image identification of [sk-prop-sfb-cartesian-coefficients];
-lisseness after restriction is also [det-lem-coefficient-heart-common-stratification] (2). Thus
-the refinement retains the lattices.
-Uses: det-cor-coefficient-heart-ii-generation, sk-lem-stratified-lattice,
-det-lem-coefficient-heart-common-stratification, sk-prop-sfb-cartesian-coefficients.
-4. The lisse sheaf $L$ is constructible by [sk-def-sfb-constructible], using its finite free
-local models and the single stratum $S$. Apply [det-lem-coefficient-heart-filtration] on $S$ to
-$L$ and the ordered stratification of step 3. It gives finitely many short exact sequences with
-quotients $b_!(L|_{S_b})$. Push these sequences forward by the exact $a_!$ of step 1;
-transitivity identifies their quotients with $(ab)_!(L|_{S_b})$. By step 2 and
-$L|_{S_b}=L_{0,b}[1/\ell]$, each is $( (ab)_!L_{0,b})[1/\ell]\in\mathcal G_E$. By
-[lem-sf-derived-ses-triangle], each short exact sequence of module sheaves gives a distinguished
-triangle of their degree-zero complexes in the ambient derived category. Induct on the
-filtration length: the zero first term is the rank-zero generator, and a triangle with earlier
-term and quotient already constructed expresses the next term as a cone up to a shift. This
-builds $a_!L$ by finitely many cones and shifts. Substitute these finite constructions into the
-finite cone construction of $K$ from [det-cor-coefficient-heart-ii-generation]; there are only
-finitely many such substitutions, proving (1).
-Uses: det-lem-coefficient-heart-filtration, lem-sf-derived-ses-triangle,
-det-cor-coefficient-heart-ii-generation, sk-def-sfb-constructible.
-5. For $K\in D^b_c(X,\overline{\mathbf Q}_\ell)$ choose one finite $E$ and $K_E\in D^b_c(X,E)$
-with $K\simeq(K_E)_{\overline{\mathbf Q}_\ell}$ by [det-lem-coefficient-finite-descent-objects].
-The functor $T=\overline{\mathbf Q}_{\ell,X}\otimes_{E_X}-$ is exact: it is right exact as the
-extension-of-scalars left adjoint in [sk-def-sfb-change-of-scalars], and preserves finite limits
-by [lem-sfb-qlbar-flat]. Since $T$ is exact, the derived extension $T_{E,\Qlb}=L(T)$ used in
-[det-lem-coefficient-finite-descent-objects] is the termwise functor $D(T)$, by the clause on
-exact functors in [sk-def-sfb-derived-categories]. Hence
-[lem-sf-exact-functor-derived-triangulated] shows that it preserves the cones and shifts in the
-construction of (1) for $K_E$. Its value on a generator is $$\overline{\mathbf
-Q}_{\ell,X}\otimes_{E_X}(E_X\otimes_{\mathcal O_{E,X}}a_!L_0)\simeq \overline{\mathbf
-Q}_{\ell,X}\otimes_{\mathcal O_{E,X}}a_!L_0.$$ This is the associativity of the relative tensor
-product: the maps on local pure tensors are $q\otimes(e\otimes m)\mapsto qe\otimes m$ and
-$q\otimes m\mapsto q\otimes(1\otimes m)$, mutually inverse and compatible with all balancing
-relations and restrictions. Thus all generators use this same $E$, proving (2).
-Uses: det-lem-coefficient-finite-descent-objects, sk-def-sfb-change-of-scalars,
-lem-sfb-qlbar-flat, lem-sf-exact-functor-derived-triangulated, sk-def-sfb-derived-categories.
-6. For (3), a lisse finite free $L_0$ on $S$ has finite constant local models $\mathcal
-O_{E,S}\otimes_{\mathcal O_E}\mathcal O_E^r$. This is precisely condition (1) of
-[sk-def-sfb-constructible], with the single stratum $S$; the rank may vary between trivializing
-opens. Hence the complex concentrated in degree zero is in $D^b_c(S,\mathcal O_E)$ by
-[sk-def-sfb-bounded-constructible]. Apply [det-lem-integral-models-operations] (3) to get
-$a_!L_0\in D^b_c(X,\mathcal O_E)$. This uses the blueprint's intrinsic category of bounded
-complexes with constructible cohomology; the integral criterion is an equivalent
-characterization, not an extra condition that must be proved anew here.
-Uses: sk-def-sfb-constructible, sk-def-sfb-bounded-constructible,
-det-lem-integral-models-operations.
-7. Fix $n\ge1$ and put $A_n=\mathcal O_E/\pi_E^n$. By
-[det-prop-integral-criterion-constant-coefficients] (1), $\mathcal O_{E,X}/\pi_E^n=(A_n)_X$, and
-likewise on $S$. Apply [det-lem-integral-models-operations] (4) with $L=L_0$ and $M=(A_n)_X$;
-its restriction to $S$ is $(A_n)_S$ by [sk-prop-sfb-cartesian-coefficients]. Finite free modules
-are flat, and this is local on the trivializing cover, so $L_0\otimes^{\mathbf L}_{\mathcal
-O_{E,S}}(A_n)_S=L_0/\pi_E^n$. The degree-zero formula and exactness from step 1 give
-$$(a_!L_0)\otimes^{\mathbf L}_{\mathcal O_{E,X}}(A_n)_X\simeq a_!(L_0/\pi_E^n).$$ The elementary
-flatness calculation here is that tensoring with $\mathcal O_{E,S}^r$ takes an exact sequence to
-its $r$-fold direct sum, so no higher terms of a flat resolution contribute. In particular the
-formula is derived reduction, not a claim that quotienting is exact on arbitrary integral
-sheaves.
-Uses: det-prop-integral-criterion-constant-coefficients, det-lem-integral-models-operations,
-sk-prop-sfb-cartesian-coefficients.
-8. On $S$, $L_0/\pi_E^n$ is locally the constant finite free $A_n$-module $A_n^r$. On $\overline
-S\setminus S$ and $X\setminus\overline S$ the sheaf $a_!(L_0/\pi_E^n)$ restricts to zero, by
-[lem-weil-pbc-proetale-ringed-open-closed]. These three locally closed pieces form a finite
-constructible stratification (discard empty pieces). Thus this degree-zero sheaf is
-constructible by [sk-def-sfb-constructible], so is in $D^b_c(X,A_n)$ by
-[sk-def-sfb-bounded-constructible]. The coefficient datum
-[def-weil-l-adic-coefficient-extension] (4) states that $A_n$ is finite for $n\ge1$. With its
-quotient topology it is discrete; every ideal is a finite set and is generated by that set, so
-$A_n$ is Noetherian. Also $X$ is qcqs by step 1. Consequently
-[det-pe-constructible-comparison-classical] applies to this very stratification: its
-restrictions are locally constant of finite type, and therefore the sheaf is classical, i.e. is
-a pullback from $X_{\mathrm{et}}$. This proves the remaining assertions of (3), with the
-cohomology of every reduction concentrated in the single interval $[0,0]$.
-Uses: lem-weil-pbc-proetale-ringed-open-closed, sk-def-sfb-constructible,
-sk-def-sfb-bounded-constructible, det-pe-constructible-comparison-classical,
-def-weil-l-adic-coefficient-extension.
+Proof:
+1. Finite type over a field makes X Noetherian. Coefficient-heart generation reduces
+   the finite-extension clause to degree-zero extensions of lisse sheaves.
+2. Apply the lattice-subquotient filtration on each locally closed stratum. Its
+   canonical spectral-norm coefficients are identified with the specified finite
+   coefficient field and its integers, using ULift and equality of the two norms.
+   Transporting the filtration gives integral generators as its successive quotients.
+   Short exact sequences give distinguished triangles; finite induction on the
+   filtration, followed by the heart's cone construction, proves the first clause.
+3. Descend an algebraic-closure object to one finite E. Exact scalar extension sends
+   its cone construction to a cone construction over the algebraic closure, and its
+   values on generators are exactly the specified algebraic-closure generators.
+4. A locally free integral module has finite constant local models. Open extension
+   and closed pushforward preserve the resulting stratified constructibility, hence
+   its extension in degree zero is bounded constructible.
+5. Tensor commutes with normalized inverse image. Joint conservativity of closed
+   and complementary open restriction therefore detects flatness. The unit, counit
+   and off-support zero identities show that open extension and closed pushforward
+   preserve flatness. The extended integral module is flat; its single complex is
+   K-flat, so derived reduction is ordinary reduction. Ordinary scalar extension
+   commutes with both extension functors, again by their support identities.
+6. Scalar extension preserves local freeness, so each reduced extension is bounded
+   constructible. The quotient ring is finite by the maximal-ideal-power quotient theorem.
+   Its quotient topology is discrete because the uniformizer-power ideal contains
+   an open ball. Finite discrete coefficient encoding makes the underlying sheaf
+   constructible. The specified fixed-scalar realization has the same underlying
+   sheaf; finite constructibility transfers along this identification. That
+   realization is exact, as detected by the exact faithful underlying-abelian-sheaf
+   functor. Its derived functor consequently preserves constructible cohomology and
+   bounds. The finite-ring constructible derived-origin theorem now gives etale
+   origin for the precise realization in the statement.
 -/
 theorem integral_models_generators
     (k : Type u) [Field k] (p ℓ : ℕ) [Fact p.Prime] [Fact ℓ.Prime]
@@ -456,6 +1446,14 @@ theorem integral_models_generators
         (integralCoefficientObject S ℓ E)),
       CondensedRing.LocallyFree (integralCoefficientObject S ℓ E) L₀ →
       integralReductionHasEtaleOrigin X ℓ E π u i L₀) := by
-  sorry
+  have : IsLocallyNoetherian X :=
+    LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of k))
+  have : CompactSpace X :=
+    QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k))
+  have : IsNoetherian X := ⟨⟩
+  exact ⟨integralModel_finite_generation k p ℓ hℓp X E,
+    integralModel_qlbar_of_finite k p ℓ hℓp X
+      (integralModel_finite_generation k p ℓ hℓp X),
+    fun _ _ j i _ _ M hM ↦ integralModel_reductions X ℓ E π hπ j i M hM⟩
 
 end WeilConjectures.SixFunctors
