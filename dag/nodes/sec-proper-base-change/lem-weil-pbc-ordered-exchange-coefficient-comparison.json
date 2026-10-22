@@ -41,12 +41,14 @@
  ],
  "proof": [
   {
-   "text": "The coefficient maps commute with $\\underline A\\to A_T$ on constant sections and hence on all finite projections. Profinite inverse image gives their composition compatibility; constant-completion gives flatness. Apply flat diagram restriction with one-object index and with $J$, obtaining $a,\\chi,p,d$ with their adjunct normalization. Apply the scalar-limit-square lemma to obtain $\\lambda$ and its canonical direct-image compatibility. Formalized ordinary-limit part: restriction preserves inverse limits because the faithful underlying-presheaf functor reflects them and creates the restricted limiting diagram. The standard preservesLimitNatIso has the required projection equations; limit.hom_ext proves uniqueness.",
+   "text": "The coefficient maps commute with $\\underline A\\to A_T$ on constant sections and hence on all finite projections. Profinite inverse image gives their composition compatibility; constant-completion gives flatness. Apply flat diagram restriction with one-object index and with $J$, obtaining $a,\\chi,p,d$ with their adjunct normalization. Apply the scalar-limit-square lemma to obtain $\\lambda$ and its canonical direct-image compatibility. Formalized ordinary-limit part: restriction preserves inverse limits because the faithful underlying-presheaf functor reflects them and creates the restricted limiting diagram. The standard preservesLimitNatIso has the required projection equations; limit.hom_ext proves uniqueness. T3 formalizes the derived-limit comparison by identifying the displayed complex unit with rightDerivedFunctorUnitQ. Flat scalar extension is an exact left adjoint, so termwise restriction preserves K-injectives. Apply the generic towerComparison_existsLimitIso construction to ordinaryLambda and the canonical units. LambdaNormalization retains exactly its equation, before conjugation by the two exact-restriction factorization isomorphisms; cancelling these isomorphisms recovers the original complex equation. Resolve any derived input by a K-injective complex. Its limit unit and the restriction factorization are invertible, so cancelling those two prefixes determines the component. Naturality transports component equality to every derived input.",
    "uses": [
     "lem-weil-pbc-profinite-coefficient-inverse-image",
     "lem-weil-pbc-constant-completion-equivalence",
     "lem-weil-pbc-flat-ringed-diagram-restriction",
-    "lem-weil-pbc-flat-scalar-tower-limit-square"
+    "lem-weil-pbc-flat-scalar-tower-limit-square",
+    "lem-weil-ringed-tower-pushforward-limit-comparison",
+    "lem-weil-pbc-strict-tower-exchange-mate-normalization"
    ],
    "elementary": false,
    "source": {
@@ -55,10 +57,13 @@
    }
   },
   {
-   "text": "Strict quotient scalar balancing gives $\\rho_L,q_{u,L}$, the augmentation equation and $q_{u,L}r(\\tau_{u,L})=\\mathcal R^0(a_{u,L})\\rho_{L_uL}$. Define $\\beta=(G_gR_f^{\\mathcal T}\\rho_K)(G_gd_f)p_g$ and $\\delta=(R_{f'}^{\\mathcal T}G_{g'}\\rho_K)(R_{f'}^{\\mathcal T}p_{g'})d_{f'}$; define $\\rho_M$ by balancing followed by $\\mathcal R(a_g)$ and $\\mathcal R(G_g\\chi_f)$. Pull the scalar projection equation for $f$ back by $G_g$; naturality of $p_g$ and the $q$-equation at $L=Rf_*K$ give $\\beta r(H^a)=H^0\\rho_M$.",
+   "text": "Strict quotient scalar balancing gives $\\rho_L,q_{u,L}$, the augmentation equation and $q_{u,L}r(\\tau_{u,L})=\\mathcal R^0(a_{u,L})\\rho_{L_uL}$. Define $\\beta=(G_gR_f^{\\mathcal T}\\rho_K)(G_gd_f)p_g$ and $\\delta=(R_{f'}^{\\mathcal T}G_{g'}\\rho_K)(R_{f'}^{\\mathcal T}p_{g'})d_{f'}$; define $\\rho_M$ by balancing followed by $\\mathcal R(a_g)$ and $\\mathcal R(G_g\\chi_f)$. Pull the scalar projection equation for $f$ back by $G_g$; naturality of $p_g$ and the $q$-equation at $L=Rf_*K$ give $\\beta r(H^a)=H^0\\rho_M$. T3 formalizes rho_existsUnique from ordinaryRho with the resolving class of flat-term K-flat complexes and flatKFlatResolution. In RhoNormalization, assemble DerivedReductionModelData from the recorded completed reduction functor, its actual counit, its universal property, and its K-flat computation law. The target is the fixed reductionData. Apply modelPull_existsUnique directly to these data and ordinaryRho.symm. Flat scalar restriction supplies preservation of the K-flat model condition. Its scalar flatness hypothesis is the first conclusion of completed_constant_algebra_flat_quotients, after checking the projections of the existing coefficient map. The generic normalization is the original complex-counit equation: its source and target counits are the recorded complex counits, and a conjunction of K-flatness and termwise flatness is equivalent to the original two curried hypotheses. Retaining the existing generic comparison-data presentation avoids costly unfolding of derived localization maps.",
    "uses": [
     "lem-weil-pbc-strict-quotient-scalar-balancing",
-    "lem-weil-pbc-quotient-diagram-scalar-projection"
+    "lem-weil-pbc-quotient-diagram-scalar-projection",
+    "lem-weil-pbc-flat-scalar-restriction-kflat",
+    "lem-sp-completion-mate-comparison",
+    "lem-weil-pbc-completed-constant-algebra-flat-quotients"
    ],
    "elementary": false,
    "source": {
@@ -130,12 +135,15 @@
   "lem-weil-pbc-strict-quotient-scalar-balancing",
   "lem-weil-pbc-strict-tower-exchange-mate-normalization",
   "prop-weil-pbc-direct-image-limits",
-  "prop-weil-pbc-rlim-functoriality"
+  "prop-weil-pbc-rlim-functoriality",
+  "lem-weil-ringed-tower-pushforward-limit-comparison",
+  "lem-weil-pbc-flat-scalar-restriction-kflat",
+  "lem-weil-pbc-completed-constant-algebra-flat-quotients"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
-  "place": "Second proof paragraph, coefficient normalization and reconstruction comparisons; strict coefficient comparison supplement; K9 formalizes the ordinary limit, completed Hom and naturality auxiliary statements. The current separated proof obligations are retained. RhoNormalization and LambdaNormalization name the unchanged complex formulas."
+  "place": "Second proof paragraph, coefficient normalization and reconstruction comparisons; strict coefficient comparison supplement; K9 formalizes the ordinary limit, completed Hom and naturality auxiliary statements. The current separated proof obligations are retained. The RhoNormalization model-data presentation and the LambdaNormalization equation before factorization conjugation express the same original complex formulas; their definition change records document this equivalence. T3 additionally formalizes the normalized derived reduction and derived inverse-limit comparisons using flat-term K-flat resolutions and K-injective resolutions, respectively; the other existing proof obligations remain."
  },
  "mathlib_searches": [
   {
@@ -327,13 +335,13 @@
   "existing": false
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "C-4c1aa",
-  "group": "K9",
+  "reviewer": "COMPILER",
+  "group": "T3",
   "result": "pass",
-  "landing": "20261021T203708-L-3854176",
+  "landing": "20261022T020117-L-34354",
   "kind": "interface",
-  "note": "independent cc review: delivered OrderedExchangeCoefficientComparison.lean, node and change record vs clones/live: reworded rho/lambda_existsUnique equal the old formulas verbatim via the new predicates, limitComplexUnit/rawComponent/constantComponent only gain their inferred types; item + CompletedExchangeCoherence + PulledReductionStrictTowerComparison compiled clean; axioms checked"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
