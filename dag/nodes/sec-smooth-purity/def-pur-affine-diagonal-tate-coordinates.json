@@ -1,0 +1,133 @@
+{
+ "id": "def-pur-affine-diagonal-tate-coordinates",
+ "kind": "definition",
+ "title": "Canonical finite Tate coordinates between diagonal and affine purity",
+ "status": "split",
+ "statement": "Use the finite purity setting [def-pur-conventions] and its specified twists [def-coefficient-twists-detailed]. Let F be the finite-field datum, C its coefficient datum, E a finite extension inside C's algebraic closure, and n>=0. Let Q be this existing setting at level n+1, with coefficient ring A=O_E/(varpi^(n+1)) in its existing sheaf-universe lift. For every k-scheme T with structural map a_T, let nu_T^* be exact etale-to-pro-etale comparison. The finite Tate site-descent normalization [lem-amb-finite-tate-site-descent] determines the unique isomorphism u_T : (mu_(ell^(n+2))^et tensor A) -> (mu_(ell^(n+1))^et tensor A)\nwhose value on every pure tensor is a tensor z |-> a tensor z^ell. Both powers annihilate A; no ramification-divisibility condition is imposed. Define the shifted-line comparison by applying single in degree zero, shift [2], and nu_T^* to u_T^(-1). Its target is precisely shiftedLine Q T of [def-pur-affine-space-comparison], whose exponent is ell^(n+2), and its source is the shifted ordinary finite line at exponent ell^(n+1). The ordinary constant coefficient and the diagonal coefficient power at degree zero have their canonical derived tensor-unit comparison: exact pullback commutes with single, followed by the ordinary comparison unit isomorphism and the derived single-unit isomorphism. Every change from these literal constructions to the recorded endpoint aliases is the uniquely specified transport with a heterogeneously equal isomorphism. These are coordinate isomorphisms, independent of either purity orientation.",
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-coefficient-twists-detailed",
+  "lem-amb-finite-tate-site-descent",
+  "def-pur-affine-space-comparison"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.md",
+  "place": "model paragraph: specified finite Tate realizations and canonical tensor/twist identifications"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "finiteEtaleTateTwist|diagonalTwist",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "No matching canonical comparison between the two existing finite Tate presentations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical root-power comparison and tensor reassociation between finite Tate presentations of purity",
+   "results": "8 hits: LinearEquiv.rTensor_zpow; IsPurelyInseparable.exists_pow_pow_mem_range_tensorProduct_of_expChar; TensorProduct.tensorTensorTensorComm; TensorPower.mulEquiv; TensorPower.cast_tprod; TensorProduct.tensorTensorTensorComm_comp_map; TensorPower.cast; TensorProduct.tensorTensorTensorComm_symm",
+   "date": "2026-10-22",
+   "verdict": "No matching canonical comparison between the two existing finite Tate presentations."
+  },
+  {
+   "tool": "loogle",
+   "query": "finiteEtaleTateTwist, derivedTensor",
+   "results": "0 hits: ; loogle: unknown identifier 'finiteEtaleTateTwist'",
+   "date": "2026-10-22",
+   "verdict": "No matching canonical comparison between the two existing finite Tate presentations."
+  },
+  {
+   "tool": "grep",
+   "query": "projection(LineIso|TensorActionIso)|affine-diagonal-(tate|tensor)-coordinates; dag/nodes, lean/WeilConjectures, lean/Sheaf",
+   "results": "0 hits",
+   "date": "2026-10-22",
+   "verdict": "No existing node or declaration for these connecting coordinate maps."
+  },
+  {
+   "tool": "blueprint_refs.py search",
+   "query": "Tate coefficient coordinates; tensor coordinates",
+   "results": "0 blueprint nodes match each query",
+   "date": "2026-10-22",
+   "verdict": "No existing blueprint definition of these connecting coordinates."
+  },
+  {
+   "tool": "rg",
+   "query": "diagonalTwist|affineSpacePurityComparison|smoothPurityMap; lean/WeilConjectures and lean/Sheaf",
+   "results": "Existing separate constructions in FixedFinitePositiveCoefficientTwist, SmoothPurityMap and AffineSpacePurityComparison; no map between their coefficient presentations.",
+   "date": "2026-10-22",
+   "verdict": "Reuse those definitions; add only their canonical connecting coordinates."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-projection-purity-agreement",
+  "date": "2026-10-22",
+  "group": "NI"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-projection-purity-agreement",
+   "place": "model paragraph: specified finite Tate realizations and canonical tensor/twist identifications",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "module": "Sheaf.Paper.AffineDiagonalTateCoordinates",
+  "declaration": "WeilConjectures.PurityFiniteSetting.projectionLineIso",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.projectionChooseUnique",
+   "WeilConjectures.PurityFiniteSetting.projectionSetting",
+   "WeilConjectures.PurityFiniteSetting.projectionRootTransition_existsUnique",
+   "WeilConjectures.PurityFiniteSetting.projectionRootTransition",
+   "WeilConjectures.PurityFiniteSetting.projectionSingleUnitIso",
+   "WeilConjectures.PurityFiniteSetting.projectionUnitRaw",
+   "WeilConjectures.PurityFiniteSetting.ProjectionSingleShiftIsoType",
+   "WeilConjectures.PurityFiniteSetting.projectionSingleShiftIso",
+   "WeilConjectures.PurityFiniteSetting.projectionTensorUnit",
+   "WeilConjectures.PurityFiniteSetting.ProjectionLineIsoType",
+   "WeilConjectures.PurityFiniteSetting.projectionLineIso_existsUnique",
+   "WeilConjectures.PurityFiniteSetting.projectionLineIso",
+   "WeilConjectures.PurityFiniteSetting.ProjectionDiagonalUnitType",
+   "WeilConjectures.PurityFiniteSetting.projectionDiagonalUnit_existsUnique",
+   "WeilConjectures.PurityFiniteSetting.projectionDiagonalUnit"
+  ],
+  "file": "lean/Sheaf/Paper/AffineDiagonalTateCoordinates.lean",
+  "statement": "def projectionLineIso (F : FiniteFieldDatum.{u}) (C : F.CoefficientDatum) (E : IntermediateField (Padic C.l) C.Qbar) [FiniteDimensional (Padic C.l) E] (n : ℕ) (T : Scheme.{u}) (aT : T ⟶ Spec (.of F.k)) : ProjectionLineIsoType F C E n T",
+  "branch": "sheaf-dag",
+  "by": "NI",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-03b908d1e",
+  "group": "NI",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-03b908d1e",
+  "group": "NI",
+  "result": "fix",
+  "note": "Mathematics correct: every hypothesis and clause matches the node. Coefficient level n+1 covers all n>=1 with no e|n restriction. Y is separated finite type over k; d:N on the recorded ordered tower; K is intrinsic with finiteTorConstructible only. Smooth side is the recorded smoothPurityMap with the diagonal orientation the node pins as beta.delta.alpha^-1; affine side is the recorded affineSpacePurityComparison; conclusion is equality of morphisms. Source, target and root-transition coordinates are canonical (zeta -> zeta^l is Kummer-compatible, even shifts, no braiding). New nodes OK. Fault F1 (H5/H6): IsProjectionTensorStep in AffineDiagonalTensorCoordinates quantifies over G H and s : G ≅ H but pins only s by HEq; that gives only (G≅H)=(G0≅H0), so projectionTensorStep_existsUnique existence is unprovable and projectionTensorStep/projectionTensorActionIso/projectionSourceIso would be chosen from an unprovable spec. FIX in fixes/AffineDiagonalTensorCoordinates.lean adds HEq G (finiteEtaleTateTwist T (l^(n+1)) ...) and HEq H (finiteEtaleTateTwist T (l^(n+2)) ...), docstrings updated. Compiles clean with nt_compile --json (15-20 s). Probe: after the substitutions eq_of_heq hs succeeds; control without the pins fails. No record or item-module change. Advisory: second reading is a self-review."
+ }
+}

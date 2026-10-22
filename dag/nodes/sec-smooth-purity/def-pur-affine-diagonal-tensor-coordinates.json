@@ -1,0 +1,133 @@
+{
+ "id": "def-pur-affine-diagonal-tensor-coordinates",
+ "kind": "definition",
+ "title": "Canonical tensor coordinates between diagonal and ordered affine purity",
+ "status": "split",
+ "statement": "Use the positive finite coefficient setting Q and the canonical shifted-line and degree-zero unit comparisons [def-pur-affine-diagonal-tate-coordinates]. For a k-scheme T, let D_d be Q.diagonalTwist T d, the exact comparison realization of the ordered tensor of d shifted ordinary finite Tate lines [def-coefficient-twists-detailed]. Let L be shiftedLine Q T and let F_T be tensoring on the right by L, with its ordered action F_T^d as in [def-pur-affine-space-comparison]. Use the published derived tensor and exact-comparison tensor constraint of [def-pur-smooth-purity-map]. For every ambient pro-etale derived object M and every d>=0, define the canonical isomorphism\nc_(M,d) : M tensor D_d -> F_T^d(M)\nas follows. In rank zero it is M tensor the specified diagonal-unit comparison, followed by the right unitor. The coefficient successor is exact comparison monoidality followed by identity on D_d tensor the canonical shifted-line comparison of [def-pur-affine-diagonal-tate-coordinates]. For d+1, tensor this successor constraint with M, apply the inverse associator from M tensor (D_d tensor L) to (M tensor D_d) tensor L, and then apply c_(M,d) tensor identity_L. The actual generic recursion is specialized to the existing coefficient category, and its recorded cached endpoint aliases are identified by the unique isomorphism heterogeneously equal to that recursion. No purity map, arbitrary orientation, finite-Tor hypothesis, or presentation witness enters these coordinates.",
+ "stmt_deps": [
+  "def-pur-affine-diagonal-tate-coordinates",
+  "def-coefficient-twists-detailed",
+  "def-pur-affine-space-comparison",
+  "def-pur-smooth-purity-map"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.md",
+  "place": "model paragraph: specified finite Tate realizations and canonical tensor/twist identifications"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "finiteEtaleTateTwist|diagonalTwist",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "No matching canonical comparison between the two existing finite Tate presentations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical root-power comparison and tensor reassociation between finite Tate presentations of purity",
+   "results": "8 hits: LinearEquiv.rTensor_zpow; IsPurelyInseparable.exists_pow_pow_mem_range_tensorProduct_of_expChar; TensorProduct.tensorTensorTensorComm; TensorPower.mulEquiv; TensorPower.cast_tprod; TensorProduct.tensorTensorTensorComm_comp_map; TensorPower.cast; TensorProduct.tensorTensorTensorComm_symm",
+   "date": "2026-10-22",
+   "verdict": "No matching canonical comparison between the two existing finite Tate presentations."
+  },
+  {
+   "tool": "loogle",
+   "query": "finiteEtaleTateTwist, derivedTensor",
+   "results": "0 hits: ; loogle: unknown identifier 'finiteEtaleTateTwist'",
+   "date": "2026-10-22",
+   "verdict": "No matching canonical comparison between the two existing finite Tate presentations."
+  },
+  {
+   "tool": "grep",
+   "query": "projection(LineIso|TensorActionIso)|affine-diagonal-(tate|tensor)-coordinates; dag/nodes, lean/WeilConjectures, lean/Sheaf",
+   "results": "0 hits",
+   "date": "2026-10-22",
+   "verdict": "No existing node or declaration for these connecting coordinate maps."
+  },
+  {
+   "tool": "blueprint_refs.py search",
+   "query": "Tate coefficient coordinates; tensor coordinates",
+   "results": "0 blueprint nodes match each query",
+   "date": "2026-10-22",
+   "verdict": "No existing blueprint definition of these connecting coordinates."
+  },
+  {
+   "tool": "rg",
+   "query": "diagonalTwist|affineSpacePurityComparison|smoothPurityMap; lean/WeilConjectures and lean/Sheaf",
+   "results": "Existing separate constructions in FixedFinitePositiveCoefficientTwist, SmoothPurityMap and AffineSpacePurityComparison; no map between their coefficient presentations.",
+   "date": "2026-10-22",
+   "verdict": "Reuse those definitions; add only their canonical connecting coordinates."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-projection-purity-agreement",
+  "date": "2026-10-22",
+  "group": "NI"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-projection-purity-agreement",
+   "place": "model paragraph: specified finite Tate realizations and canonical tensor/twist identifications",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "module": "Sheaf.Paper.AffineDiagonalTensorCoordinates",
+  "declaration": "WeilConjectures.PurityFiniteSetting.projectionTensorActionIso",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.projectionNextAnnihilator",
+   "WeilConjectures.PurityFiniteSetting.projectionShiftedLine",
+   "WeilConjectures.PurityFiniteSetting.projectionTensorActionGeneric",
+   "WeilConjectures.PurityFiniteSetting.projectionTensorStepGeneric",
+   "WeilConjectures.PurityFiniteSetting.projectionTensorStepFromSheafGeneric",
+   "WeilConjectures.PurityFiniteSetting.projectionTensorStepFromSheaf",
+   "WeilConjectures.PurityFiniteSetting.ProjectionTensorStepType",
+   "WeilConjectures.PurityFiniteSetting.IsProjectionTensorStep",
+   "WeilConjectures.PurityFiniteSetting.projectionTensorStep_existsUnique",
+   "WeilConjectures.PurityFiniteSetting.projectionTensorStep",
+   "WeilConjectures.PurityFiniteSetting.ProjectionTensorActionIsoType",
+   "WeilConjectures.PurityFiniteSetting.IsProjectionTensorAction",
+   "WeilConjectures.PurityFiniteSetting.projectionTensorActionIso_existsUnique",
+   "WeilConjectures.PurityFiniteSetting.projectionTensorActionIso"
+  ],
+  "file": "lean/Sheaf/Paper/AffineDiagonalTensorCoordinates.lean",
+  "statement": "def projectionTensorActionIso (F : FiniteFieldDatum.{u}) (C : F.CoefficientDatum) (E : IntermediateField (Padic C.l) C.Qbar) [FiniteDimensional (Padic C.l) E] (n : ℕ) (T : Scheme.{u}) (aT : T ⟶ Spec (.of F.k)) (M : AlgebraicGeometry.ProEtale.AffineSpacePurity.C (projectionSetting F C E n).Coefficient T) (d : ℕ) : ProjectionTensorActionIsoType F C E n T M d",
+  "branch": "sheaf-dag",
+  "by": "NI",
+  "date": "2026-10-22",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-03b908d1e"
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-03b908d1e",
+  "group": "NI",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-03b908d1e",
+  "group": "NI",
+  "result": "fix",
+  "note": "Mathematics correct: every hypothesis and clause matches the node. Coefficient level n+1 covers all n>=1 with no e|n restriction. Y is separated finite type over k; d:N on the recorded ordered tower; K is intrinsic with finiteTorConstructible only. Smooth side is the recorded smoothPurityMap with the diagonal orientation the node pins as beta.delta.alpha^-1; affine side is the recorded affineSpacePurityComparison; conclusion is equality of morphisms. Source, target and root-transition coordinates are canonical (zeta -> zeta^l is Kummer-compatible, even shifts, no braiding). New nodes OK. Fault F1 (H5/H6): IsProjectionTensorStep in AffineDiagonalTensorCoordinates quantifies over G H and s : G ≅ H but pins only s by HEq; that gives only (G≅H)=(G0≅H0), so projectionTensorStep_existsUnique existence is unprovable and projectionTensorStep/projectionTensorActionIso/projectionSourceIso would be chosen from an unprovable spec. FIX in fixes/AffineDiagonalTensorCoordinates.lean adds HEq G (finiteEtaleTateTwist T (l^(n+1)) ...) and HEq H (finiteEtaleTateTwist T (l^(n+2)) ...), docstrings updated. Compiles clean with nt_compile --json (15-20 s). Probe: after the substitutions eq_of_heq hs succeeds; control without the pins fails. No record or item-module change. Advisory: second reading is a self-review."
+ }
+}

@@ -34,7 +34,9 @@
   "def-pur-section-invariant",
   "thm-amb-vector-bundle-purity",
   "def-amb-vector-integration",
-  "thm-sf-ambient-adjoint-class"
+  "thm-sf-ambient-adjoint-class",
+  "def-pur-affine-diagonal-tate-coordinates",
+  "def-pur-affine-diagonal-tensor-coordinates"
  ],
  "proof": [
   {
@@ -568,5 +570,46 @@
    }
   ],
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ProjectionPurityAgreement",
+  "declaration": "WeilConjectures.PurityFiniteSetting.projection_purity_agreement",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.projection_smooth",
+   "WeilConjectures.PurityFiniteSetting.projectionSmoothSource",
+   "WeilConjectures.PurityFiniteSetting.projectionSourceRaw",
+   "WeilConjectures.PurityFiniteSetting.ProjectionSourceIsoType",
+   "WeilConjectures.PurityFiniteSetting.projectionSourceIso_existsUnique",
+   "WeilConjectures.PurityFiniteSetting.projectionSourceIso",
+   "WeilConjectures.PurityFiniteSetting.projectionSmoothTarget",
+   "WeilConjectures.PurityFiniteSetting.projectionTargetRaw",
+   "WeilConjectures.PurityFiniteSetting.ProjectionTargetMapType",
+   "WeilConjectures.PurityFiniteSetting.projectionTargetMap_existsUnique",
+   "WeilConjectures.PurityFiniteSetting.projectionTargetMap",
+   "WeilConjectures.PurityFiniteSetting.projectionTarget_isIso",
+   "WeilConjectures.PurityFiniteSetting.projectionAffineInPresentation",
+   "WeilConjectures.PurityFiniteSetting.ProjectionIntrinsicHom",
+   "WeilConjectures.PurityFiniteSetting.projectionAffineIntrinsic_existsUnique",
+   "WeilConjectures.PurityFiniteSetting.projectionAffineIntrinsic",
+   "WeilConjectures.PurityFiniteSetting.projectionSmoothIntrinsicRaw",
+   "WeilConjectures.PurityFiniteSetting.projectionSmoothIntrinsic_existsUnique",
+   "WeilConjectures.PurityFiniteSetting.projectionSmoothIntrinsic",
+   "WeilConjectures.PurityFiniteSetting.projection_purity_agreement"
+  ],
+  "file": "lean/Sheaf/Paper/ProjectionPurityAgreement.lean",
+  "statement": "theorem projection_purity_agreement (F : FiniteFieldDatum.{u}) (C : F.CoefficientDatum) (E : IntermediateField (Padic C.l) C.Qbar) [FiniteDimensional (Padic C.l) E] (n : ℕ) (Y : Scheme.{u}) (aY : Y ⟶ Spec (.of F.k)) [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aY] (K : Scheme.proEtaleDerivedCategory Y (projectionSetting F C E n).Ring) (hK : finiteTorConstructible C.l E (n + 1) (Nat.succ_pos n) Y K) (d : ℕ) : projectionSmoothIntrinsic (projectionSetting F C E n) Y aY K hK d = projectionAffineIntrinsic F C E n Y aY K hK d",
+  "branch": "sheaf-dag",
+  "by": "NI",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Equality of the actual normalized arrows on the original intrinsic pro-etale object at every positive coefficient level. Canonical connecting Tate and tensor coordinates are supplied by the two added definition nodes; the source and target normalizations are independent of either purity arrow."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-03b908d1e",
+  "group": "NI",
+  "result": "fix",
+  "note": "Mathematics correct: every hypothesis and clause matches the node. Coefficient level n+1 covers all n>=1 with no e|n restriction. Y is separated finite type over k; d:N on the recorded ordered tower; K is intrinsic with finiteTorConstructible only. Smooth side is the recorded smoothPurityMap with the diagonal orientation the node pins as beta.delta.alpha^-1; affine side is the recorded affineSpacePurityComparison; conclusion is equality of morphisms. Source, target and root-transition coordinates are canonical (zeta -> zeta^l is Kummer-compatible, even shifts, no braiding). New nodes OK. Fault F1 (H5/H6): IsProjectionTensorStep in AffineDiagonalTensorCoordinates quantifies over G H and s : G ≅ H but pins only s by HEq; that gives only (G≅H)=(G0≅H0), so projectionTensorStep_existsUnique existence is unprovable and projectionTensorStep/projectionTensorActionIso/projectionSourceIso would be chosen from an unprovable spec. FIX in fixes/AffineDiagonalTensorCoordinates.lean adds HEq G (finiteEtaleTateTwist T (l^(n+1)) ...) and HEq H (finiteEtaleTateTwist T (l^(n+2)) ...), docstrings updated. Compiles clean with nt_compile --json (15-20 s). Probe: after the substitutions eq_of_heq hs succeeds; control without the pins fails. No record or item-module change. Advisory: second reading is a self-review."
  }
 }
