@@ -105,14 +105,15 @@
   }
  ],
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.TensorCounitOneKFlatCoordinates",
-  "file": "lean/Sheaf/AlgebraicGeometry/TensorCounitOneKFlatCoordinates.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.TensorCounitOneKFlatCoordinates",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/TensorCounitOneKFlatCoordinates.lean",
   "declaration": "AlgebraicGeometry.tensorCounit_oneKFlat_coordinates",
-  "statement": "theorem tensorCounit_oneKFlat_coordinates\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {X T : Scheme.{u}} (k : T ⟶ X)\n    [@MonoidalPreadditive _ _ _ (SheafOfModules.monoidalCategory X.sheaf)]\n    (P G : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n    (hP : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) P)\n    (τ : ∀ A B : schemeDerivedCategory X,\n      (derivedPullback k).obj (A ⊗ B) ⟶\n        (derivedPullback k).obj A ⊗ (derivedPullback k).obj B)\n    (hτ : IsCanonicalPullbackTensorComparison k τ) :\n    ∃ a : DerivedCategory.Q.obj P ⊗ DerivedCategory.Q.obj G ≅\n        DerivedCategory.Q.obj (CochainComplex.mapBifunctor P G\n          (@curriedTensor _ _ (SheafOfModules.monoidalCategory X.sheaf))),\n      ∃ b : (DerivedCategory.Q\n          (C := SheafOfModules.{u} (moduleRings T.toRingedSpace))).obj\n          (((Scheme.Modules.tensorPullback k).mapHomologicalComplex (.up ℤ)).obj\n            (CochainComplex.mapBifunctor P G\n              (@curriedTensor _ _ (SheafOfModules.monoidalCategory X.sheaf)))) ≅\n        (derivedPullback k).obj (DerivedCategory.Q.obj P) ⊗ (DerivedCategory.Q\n          (C := SheafOfModules.{u} (moduleRings T.toRingedSpace))).obj\n          (((Scheme.Modules.tensorPullback k).mapHomologicalComplex (.up ℤ)).obj G),\n        (derivedPullback k).map a.hom ≫\n          (SingleComplexBaseChange.counit k).app\n            ((HomotopyCategory.quotient _ (.up ℤ)).obj (CochainComplex.mapBifunctor P G\n              (@curriedTensor _ _ (SheafOfModules.monoidalCategory X.sheaf)))) ≫ b.hom =\n          τ (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj G) ≫\n            (derivedPullback k).obj (DerivedCategory.Q.obj P) ◁\n            (SingleComplexBaseChange.counit k).app\n              ((HomotopyCategory.quotient _ (.up ℤ)).obj G)",
+  "statement": "theorem tensorCounit_oneKFlat_coordinates\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {X T : Scheme.{u}} (k : T ⟶ X)\n    [@MonoidalPreadditive _ _ _ (SheafOfModules.monoidalCategory X.sheaf)]\n    (P G : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n    (hP : CochainComplex.IsKFlatTensor (R := X.sheaf) P)\n    (τ : ∀ A B : schemeDerivedCategory X,\n      (derivedPullback k).obj (A ⊗ B) ⟶\n        (derivedPullback k).obj A ⊗ (derivedPullback k).obj B)\n    (hτ : IsCanonicalPullbackTensorComparison k τ) :\n    ∃ a : DerivedCategory.Q.obj P ⊗ DerivedCategory.Q.obj G ≅\n        DerivedCategory.Q.obj (CochainComplex.mapBifunctor P G\n          (@curriedTensor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) _\n            (SheafOfModules.monoidalCategory X.sheaf))),\n      ∃ b : (DerivedCategory.Q\n          (C := SheafOfModules.{u} (moduleRings T.toRingedSpace))).obj\n          (((Scheme.Modules.tensorPullback k).mapHomologicalComplex (.up ℤ)).obj\n            (CochainComplex.mapBifunctor P G\n              (@curriedTensor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) _\n            (SheafOfModules.monoidalCategory X.sheaf)))) ≅\n        (derivedPullback k).obj (DerivedCategory.Q.obj P) ⊗ (DerivedCategory.Q\n          (C := SheafOfModules.{u} (moduleRings T.toRingedSpace))).obj\n          (((Scheme.Modules.tensorPullback k).mapHomologicalComplex (.up ℤ)).obj G),\n        (derivedPullback k).map a.hom ≫\n          (SingleComplexBaseChange.counit k).app\n            ((HomotopyCategory.quotient _ (.up ℤ)).obj (CochainComplex.mapBifunctor P G\n              (@curriedTensor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) _\n            (SheafOfModules.monoidalCategory X.sheaf)))) ≫ b.hom =\n          τ (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj G) ≫\n            (derivedPullback k).obj (DerivedCategory.Q.obj P) ◁\n            (SingleComplexBaseChange.counit k).app\n              ((HomotopyCategory.quotient _ (.up ℤ)).obj G)",
   "branch": "sheaf-dag",
-  "by": "T4",
-  "date": "2026-10-13"
+  "by": "M4",
+  "date": "2026-10-22",
+  "note": "Restored the quarantined Sheaf import path as a compatibility import of the adopted source proof. The archived IsAcyclicTensorKFlat hypothesis and source IsKFlatTensor hypothesis are definitionally equal; the archived full theorem signature is checked by applying the source theorem. Mathematical statement, parent dependency and unit route are retained."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -125,13 +126,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "X-1d6a9",
-  "group": "K3",
+  "reviewer": "C-f29f7",
+  "group": "M4",
   "result": "pass",
-  "landing": "20261013T100025-L-2468000",
-  "kind": "interface",
-  "note": "independent Codex review: Matched both Lean signatures with their nodes, proof steps with cited declarations and Stacks sources; both delivered modules and sole direct importer RelativelyFlatDerivedBaseChangeComplex compile cleanly. Private helpers use only standard axioms; the parent additionally uses sorryAx through the documented coherence theorem. Existing interfaces and unit route are preserved."
+  "landing": "20261022T002424-L-1928043",
+  "kind": "proof",
+  "note": "independent cc review: Compatibility re-export module vs quarantined archive and the WeilConjectures source theorem: same public name; IsKFlatTensor and IsAcyclicTensorKFlat have identical bodies; node lean.statement is verbatim in the source; only private helpers removed; 0 live importers"
  }
 }
