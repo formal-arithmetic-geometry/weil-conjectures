@@ -39,9 +39,9 @@
    }
   },
   {
-   "text": "Apply [det-brown-hypotheses-ambient] to this finite-type standing scheme and admissible $\\Lambda$: $\\mathcal L=\\Loc(\\Dctf(X,\\Lambda))$ is locally small and triangulated, has arbitrary direct sums, and has split idempotents. Apply [det-brown-hypotheses-small] under the same hypotheses: $\\Dctf(X,\\Lambda)$ is thick and essentially small. Choose one representative of each isomorphism class in this essentially small category; their full subcategory is a small skeleton, so small skeletons exist. Let $G$ be any small skeleton of $\\Dctf(X,\\Lambda)$.",
+   "text": "Use the coefficient-independent structural theorem [h1-brown-hypotheses-structural] for local smallness, triangulation, coproducts and split idempotents. Use [det-brown-hypotheses-small] for thickness and essential smallness when the coefficient is among its six alternatives. The current admissibility predicate additionally includes all-continuous-map algebraic-closure coefficients, which this smallness declaration does not cover.",
    "uses": [
-    "det-brown-hypotheses-ambient",
+    "h1-brown-hypotheses-structural",
     "det-brown-hypotheses-small"
    ],
    "elementary": false,
@@ -51,9 +51,9 @@
    }
   },
   {
-   "text": "Apply [det-brown-hypotheses-generation] to this finite-type standing scheme, admissible $\\Lambda$, and small skeleton $G$. Every object of $G$ is compact in $\\Loc(\\Dctf(X,\\Lambda))$. Moreover, for every $K\\in\\Loc(\\Dctf(X,\\Lambda))$, if $\\Hom(C[n],K)=0$ for every $C\\in G$ and every $n\\in\\mathbf Z$, then $K=0$. The first clause is compactness of each object of $G$ in the sense of [def-pc-compact-object]. For the second, $\\mathcal L$ has direct sums, and $\\Hom(\\bigoplus_{C\\in G}C,K[-n])=\\prod_{C\\in G}\\Hom(C[n],K)$ for every $n\\in\\mathbf Z$; so every nonzero $K\\in\\mathcal L$ admits an integer $n$ and a nonzero morphism $\\bigoplus_{C\\in G}C\\to K[-n]$, i.e. the family $G$ generates $\\mathcal L$ in the sense of [def-pc-generators]. Since the standing datum and $\\Lambda$ were arbitrary, the conclusions hold throughout the stated range.",
+   "text": "For the geometric finite-field setting and the six supported coefficient alternatives, [a4-brown-finite-field-internal-compactness] converts the existing ambient canonical Hom-map assertion to compactness in the full localizing category. The private finiteIntermediateField specialization constructs a small skeletal model using essential smallness, transports compactness along representative isomorphisms, and applies brownHypothesesFor_of_compact. Generation in that assembly follows directly from the orthogonal argument and the minimality of the localizing intersection. The arbitrary-field theorem remains STATEMENT-DISPUTED and sorry: the compactness declaration requires a FiniteFieldDatum, and cannot be applied to an arbitrary positive-characteristic base field. This diagnostic does not assert the unsupported implication.",
    "uses": [
-    "det-brown-hypotheses-generation",
+    "a4-brown-finite-field-internal-compactness",
     "def-pc-compact-object",
     "def-pc-generators"
    ],
@@ -67,16 +67,16 @@
  "proof_deps": [
   "sk-def-sfb-dc-setting",
   "sk-def-localizing-closure",
-  "det-brown-hypotheses-ambient",
+  "h1-brown-hypotheses-structural",
   "det-brown-hypotheses-small",
-  "det-brown-hypotheses-generation",
+  "a4-brown-finite-field-internal-compactness",
   "def-pc-compact-object",
   "def-pc-generators"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-brown-hypotheses/_section.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-brown-hypotheses/sk-lem-brown-hypotheses-generation.proof.md",
+  "place": "A4: supported geometric finite-field diagnostic and canonical finite-extension Brown bundle; original arbitrary-field hole remains disputed"
  },
  "mathlib_searches": [
   {
@@ -202,16 +202,10 @@
   "date": "2026-10-22",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C3",
+  "group": "A4",
   "result": "pass",
-  "landing": "20261022T002349-L-1920406",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "CategoryTheory.brownHypotheses"
-  ],
-  "sorry_after": [
-   "CategoryTheory.brownHypotheses"
-  ]
+  "landing": "20261022T011821-L-3215698",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

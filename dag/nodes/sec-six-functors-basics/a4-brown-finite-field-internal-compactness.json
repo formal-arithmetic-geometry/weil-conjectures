@@ -1,0 +1,137 @@
+{
+ "id": "a4-brown-finite-field-internal-compactness",
+ "kind": "statement",
+ "title": "Internal compactness of a constructible skeleton in the geometric finite-field setting",
+ "statement": "Fix a finite-field datum $(p,a,q,k_0,k)$ as in [def-weil-finite-field-fiber], so $k$ is the chosen algebraic closure of the finite field $k_0$. Let $\\ell\\ne p$ be prime and let $X$ be a separated finite-type $k$-scheme. Let $\\Lambda$ be a condensed ring isomorphic to a finite discrete commutative ring killed by an $\\ell$-power, $\\mathbf Z_\\ell$, a valuation ring $\\mathcal O_E$, $\\mathbf Q_\\ell$, a finite extension $E$ of $\\mathbf Q_\\ell$, or the finite-subextension-valued condensed algebraic closure. Let $S=\\Dctf(X,\\Lambda)$ [sk-def-sfb-constructible], $L=\\Loc(S)$ [sk-def-localizing-closure], and let $g:G\\to S$ be an isomorphism-class representative family with $G:\\mathrm{Type}(u+1)$, surjective on isomorphism classes and skeletal. There exists a fixed-universe coproduct structure on the full category $L$ such that for every choice of membership proofs $h_L(i):L(g(i))$, every object $(g(i),h_L(i))$ is compact in $L$ in the sense of [def-pc-compact-object]. All coefficient isomorphisms are ring-object isomorphisms; the finite-subextension-valued algebraic closure is not replaced by the ring of all continuous maps.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-brown-hypotheses/sk-lem-brown-hypotheses-generation.proof.md",
+  "place": "Compactness, and its identification with compactness in the full localizing subcategory"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "sk-def-sfb-constructible",
+  "sk-def-localizing-closure",
+  "def-pc-compact-object"
+ ],
+ "proof": [
+  {
+   "text": "Apply the existing ambient canonical Hom-map compactness assertion to this datum, coefficient object, and skeletal representative family.",
+   "uses": [
+    "det-brown-hypotheses-generation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Obtain fixed-universe coproducts of the full localizing category from the generic structural theorem, and ambient coproducts from the localizing-closure existence theorem. The intersection defining L is closed under coproducts indexed in its object universe. Restrict this closure along the equivalence of a small discrete index type with its universe lift. The full inclusion therefore creates and preserves each required coproduct.",
+   "uses": [
+    "h1-brown-hypotheses-structural",
+    "det-def-localizing-closure-existence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the existing fully faithful compactness comparison from BrownHypothesesGeneration to the inclusion. Its additive Hom equivalences induce a direct-sum equivalence. The target Hom equivalence composes with the canonical coproduct comparison. The resulting square of canonical Hom maps commutes on each summand, so ambient bijectivity gives internal bijectivity. This works for every membership proof by proof irrelevance and includes empty coproduct index types.",
+   "uses": [
+    "det-brown-hypotheses-generation"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "det-brown-hypotheses-generation",
+  "h1-brown-hypotheses-structural",
+  "det-def-localizing-closure-existence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-brown-hypotheses/sk-lem-brown-hypotheses-generation.proof.md",
+  "place": "Compactness, and its identification with compactness in the full localizing subcategory"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An essentially small thick subcategory gives compact generators of its localizing closure",
+   "results": "EssentiallySmall.exists_small_le and general filtered-generator results, but no coefficient-specific compactness theorem. Reused the existing project theorem brownHypothesesGeneration.",
+   "date": "2026-10-22",
+   "verdict": "no exact Mathlib match; project dependency used"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsCompactObject",
+   "results": "Unknown identifier in the remote Mathlib-only index. Direct source search located the project compactness definition and its conversion theorem.",
+   "date": "2026-10-22",
+   "verdict": "index does not contain project definition"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compactness is reflected by a fully faithful additive functor preserving coproducts",
+   "results": "fullyFaithful_reflectsColimits, fullyFaithful_reflectsLimits, and preservesFiniteCoproductsOfAdditive; none states the required fixed-universe compactness comparison.",
+   "date": "2026-10-22",
+   "verdict": "supporting general facts only"
+  },
+  {
+   "tool": "grep",
+   "query": "compact.*localizing|localizing.*compact; compactness_of_fullyFaithful; CreatesColimit full subcategory",
+   "results": "The existing private helper WeilConjectures.compactness_of_fullyFaithful in BrownHypothesesGeneration proves the exact canonical-map comparison. Reused through a private import all. Mathlib Limits.FullSubcategory supplies the creation/preservation instances.",
+   "date": "2026-10-22",
+   "verdict": "existing project comparison reused"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctorsBasics.BrownHypotheses",
+  "date": "2026-10-22",
+  "group": "A4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-brown-hypotheses",
+   "place": "proof paragraph 2, compactness in the localizing full subcategory",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-brown-hypotheses",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctorsBasics.BrownHypothesesFiniteFieldCompactness",
+  "file": "lean/Sheaf/SixFunctorsBasics/BrownHypothesesFiniteFieldCompactness.lean",
+  "declaration": "CategoryTheory.brownHypothesesFiniteFieldCompactness",
+  "statement": "theorem brownHypothesesFiniteFieldCompactness\n    (D : WeilConjectures.FiniteFieldDatum.{u}) (ℓ : ℕ) [Fact ℓ.Prime] (hℓ : ℓ ≠ D.p)\n    (X : Scheme.{u}) [X.Over (Spec (.of D.k))]\n    [IsSeparated (X ↘ Spec (.of D.k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of D.k))]\n    [QuasiCompact (X ↘ Spec (.of D.k))]\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n    [MonObj Λ] [IsCommMonObj Λ]\n    (hΛ :\n      (∃ (A : Type) (_ : CommRing A) (_ : TopologicalSpace A)\n          (_ : DiscreteTopology A) (_ : IsTopologicalRing A),\n        Finite A ∧ (∃ r : ℕ, ∀ a : A, (ℓ ^ r) • a = 0) ∧\n          Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj A))) ∨\n      Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj ℤ_[ℓ])) ∨\n      (∃ E : PadicAlgCl.FiniteIntermediateField ℓ,\n        Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicIntegersRingObj ℓ E))) ∨\n      Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj ℚ_[ℓ])) ∨\n      (∃ E : PadicAlgCl.FiniteIntermediateField ℓ,\n        Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj E))) ∨\n      Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicAlgClRingObj ℓ)))\n    (G : Type (u + 1)) (g : G → ConstantModelConstructibleFiniteTor Λ X)\n    (hG : ∀ C : ConstantModelConstructibleFiniteTor Λ X,\n      ∃ i : G, Nonempty (C.obj ≅ (g i).obj))\n    (hG_skeletal : ∀ i j : G, Nonempty ((g i).obj ≅ (g j).obj) → i = j) :\n    ∃ hSums : HasCoproducts.{u + 1} (localizingClosureProEtale Λ X).FullSubcategory,\n      letI := hSums\n      ∀ (hL : ∀ i, localizingClosureProEtale Λ X (g i).obj) (i : G),\n        IsCompactObject (⟨(g i).obj, hL i⟩ :\n          (localizingClosureProEtale Λ X).FullSubcategory)",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-22"
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261022T011821-L-3215698",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261022T011821-L-3215698",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

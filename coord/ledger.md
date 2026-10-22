@@ -24150,3 +24150,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:16 L: returned deliver/A2/Sheaf.SecSmoothPurity.ScalarExtensionFunctor (reviewer RETURN: (the landing tools, head d35f796b7) the delivery did not land: lean/Sheaf/SecSmoothPurity/ScalarExtensionFunctor.lean: <)
 - 01:16 L: returned deliver/K1/Sheaf.AlgebraicGeometry.ProjectiveLineAbelianOriginalStalkTotalExchange (reviewer RETURN: (the landing tools, head 906f323c5) the delivery did not land: lean/Sheaf/AlgebraicGeometry/ProjectiveLineOriginalStalkT)
 - 01:17 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
+- 01:18 L: merged deliver/A4/Sheaf.SixFunctorsBasics.BrownHypotheses (stage 3; reviewer PASS; first push; landing 20261022T011821-L-3215698 (interface); batch 20261022T011628; modules 2; new nodes 1)

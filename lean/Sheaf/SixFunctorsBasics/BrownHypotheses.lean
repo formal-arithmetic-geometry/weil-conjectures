@@ -6,8 +6,7 @@ public import WeilConjectures.CategoryTheory.WeakTriangulatedGenerator
 public import Mathlib.CategoryTheory.Idempotents.Basic
 public import Mathlib.CategoryTheory.ObjectProperty.Small
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
-import Sheaf.SixFunctors.BrownHypothesesAmbient
-import Sheaf.Paper.BrownHypothesesGeneration
+import Sheaf.SixFunctorsBasics.BrownHypothesesFiniteFieldCompactness
 import Sheaf.SixFunctors.BrownHypothesesSmall
 import Sheaf.SixFunctorsBasics.BrownHypothesesStructural
 import Mathlib.CategoryTheory.Triangulated.Orthogonal
@@ -197,6 +196,85 @@ private theorem brownHypothesesFor_of_compact
   let B : S.FullSubcategory := ⟨Y, hY⟩
   exact ⟨e.inverse.obj B, ⟨(S.ι.mapIso (e.counitIso.app B)).symm⟩⟩
 
+/-- Compactness transports by precomposition with an isomorphism. -/
+private theorem compact_of_iso
+    {C : Type*} [Category C] [Preadditive C] [HasCoproducts.{u} C]
+    {K L : C} (e : K ≅ L) (hL : IsCompactObject L) : IsCompactObject K := by
+  classical
+  intro I A
+  let d := DirectSum.map (fun i ↦ Preadditive.leftComp (A i) e.hom)
+  have hd : Function.Bijective d :=
+    ⟨(DirectSum.map_injective _).2 (fun i ↦ e.symm.homFromEquiv.injective),
+      (DirectSum.map_surjective _).2 (fun i ↦ e.symm.homFromEquiv.surjective)⟩
+  let post := Preadditive.leftComp (∐ A) e.hom
+  have hp : Function.Bijective post := e.symm.homFromEquiv.bijective
+  let a := DirectSum.toAddMonoid (fun i ↦ Preadditive.rightComp K (Sigma.ι A i))
+  let b := DirectSum.toAddMonoid (fun i ↦ Preadditive.rightComp L (Sigma.ι A i))
+  have square : a.comp d = post.comp b := by
+    apply DirectSum.addHom_ext
+    intro i f
+    simp only [AddMonoidHom.comp_apply]
+    dsimp [a, b, d]
+    rw [DirectSum.map_of, DirectSum.toAddMonoid_of, DirectSum.toAddMonoid_of]
+    exact Category.assoc _ _ _
+  have hb : Function.Bijective b := hL I A
+  have hcomp : Function.Bijective (a ∘ d) := by
+    change Function.Bijective (a.comp d)
+    rw [square]
+    exact hp.comp hb
+  exact (Function.Bijective.of_comp_iff a hd).mp hcomp
+
+/-- The full Brown bundle in the geometric finite-field setting for a finite
+extension of the p-adic rationals. This uses the actual compactness dependency,
+whose hypotheses do not cover the arbitrary field in `brownHypotheses`.
+Source: blueprint sk-lem-brown-hypotheses, proof paragraphs 1--2. -/
+private theorem brownHypotheses_finiteIntermediateField
+    (D : WeilConjectures.FiniteFieldDatum.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
+    (hℓ : ℓ ≠ D.p) (F : PadicAlgCl.FiniteIntermediateField ℓ)
+    (X : Scheme.{u}) [X.Over (Spec (.of D.k))]
+    [IsSeparated (X ↘ Spec (.of D.k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of D.k))]
+    [QuasiCompact (X ↘ Spec (.of D.k))] :
+    BrownHypothesesFor (Profinite.continuousMapRingObj F) X := by
+  classical
+  let Λ := Profinite.continuousMapRingObj.{u} F
+  let S := constantModelBoundedConstructible Λ X ⊓
+    fun K ↦ DerivedCategory.finiteTorAmplitude _ K
+  let L := localizingClosureProEtale Λ X
+  let _ : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace
+    (X ↘ Spec (.of D.k))
+  let _ : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian
+    (X ↘ Spec (.of D.k))
+  let A := ULift.{u} (ZMod 1)
+  let _ : TopologicalSpace A := ⊥
+  have hA : ∃ n : ℕ, (ℓ ^ n : A) = 0 := ⟨0, Subsingleton.elim _ _⟩
+  have hS := det_brown_hypotheses_small ℓ A hA F Λ
+    (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl ⟨Iso.refl _⟩))))) X
+  obtain ⟨J, hJ, ⟨e⟩⟩ := (ObjectProperty.exists_equivalence_iff S).mpr hS.2.2.2
+  let _ := hJ
+  let G := Skeleton J
+  let H : G ⥤ S.FullSubcategory := fromSkeleton J ⋙ e.inverse
+  let g : G → ConstantModelConstructibleFiniteTor Λ X := H.obj
+  have hG (C : ConstantModelConstructibleFiniteTor Λ X) :
+      ∃ i : G, Nonempty (C.obj ≅ (g i).obj) := by
+    refine ⟨toSkeleton (e.functor.obj C), ⟨?_⟩⟩
+    exact S.ι.mapIso (e.unitIso.app C ≪≫
+      e.inverse.mapIso (fromSkeletonToSkeletonIso (e.functor.obj C)).symm)
+  have hsk (i j : G) (h : Nonempty ((g i).obj ≅ (g j).obj)) : i = j := by
+    obtain ⟨q⟩ := h
+    exact skeleton_skeletal J ⟨H.preimageIso (S.isoMk q)⟩
+  have hL (i : G) : L (g i).obj := fun _ _ hSP ↦ hSP _ (g i).property
+  obtain ⟨hcop, hc⟩ := brownHypothesesFiniteFieldCompactness D ℓ hℓ X Λ
+    (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl ⟨F, ⟨Iso.refl _⟩⟩))))) G g hG hsk
+  let _ := hcop
+  obtain ⟨hsmall, htri, hiso, hid, _⟩ := brownHypotheses_structural Λ X
+  let _ := hsmall
+  let _ := hid
+  apply brownHypothesesFor_of_compact Λ X hS
+  intro K hK
+  obtain ⟨i, ⟨q⟩⟩ := hG ⟨K.obj, hK⟩
+  exact compact_of_iso (L.isoMk q) (hc hL i)
+
 /-- Brown representability hypotheses for a separated finite-type scheme in positive
 characteristic different from the coefficient prime, for exactly the admissible rings.
 `IsLocalizingAdmissibleCoefficient` specifies the six concrete coefficient objects up to
@@ -231,6 +309,10 @@ coproduct universal properties. -/
 -- FiniteFieldDatum; the integral one requires an Ext bound. Finite type over an arbitrary
 -- positive-characteristic field does not supply finite ℓ-cohomological dimension.
 -- Generation itself is proved without this finiteness assumption by the helpers above.
+-- The supplied compactness theorem specifically uses D.k, the algebraic closure of a
+-- finite field. Its algebraic-closure coefficient is finite-subextension-valued; it
+-- does not cover the separate all-continuous-map compatibility clause in hΛ.
+-- The supported finite-intermediate-field Brown bundle is proved above.
 theorem brownHypotheses
     (ℓ : ℕ) [Fact ℓ.Prime]
     {k : Type u} [Field k] (p : ℕ) [CharP k p] (hp : 0 < p) (hpl : p ≠ ℓ)
