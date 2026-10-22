@@ -1,0 +1,47 @@
+# Stage-1 delivery: lem-sfb-finite-norm-invertible-sections
+
+1. Files written:
+   - `dag/nodes/sec-six-functors-basics/lem-sfb-finite-norm-invertible-sections.json`: item, statement, split; no Mathlib match after reading the inherited results and the new logged searches.
+   - `dag/nodes/sec-six-functors-basics/lem-sfb-finite-trivialize-invertible-upstairs.json`: new statement-only node, unsplit; Stacks 0BUT; no Mathlib match after two semantic phrasings, LeanSearch, Loogle and source grep.
+   - `citations.json`: verbatim statements of every node cited by each numbered step.
+   - `report.md`: this report. `searches.jsonl` is the search command's unmodified log. `write_split.py` is a sandbox-local generation script, not a repository deliverable.
+
+2. Attachments: none. Searched `lean/WeilConjectures/` for the blueprint item tag, norm line bundles, norm invertible sheaves, norms of tensor sections, and finite local trivialization. No project declaration states this item or the new node. Ring norms and finite locally free norm charts do not state the sheaf norm construction for the arbitrary multiplicative norm in this item.
+
+3. WANTED: none. All mathematical sources used are present in the read-only literature tree.
+
+4. Problems found: the item had no proof, although its statement already included the correct multiplicative sheaf norm hypotheses. No statement change was necessary. In particular, no flatness, normality, Noetherianity, ampleness, or finite presentation hypothesis is used or added. The imported chapter/unit assignment and blueprint ancestry (including the null nearest blueprint ancestor reported by `tools/blueprint_refs.py ancestor`) have been retained. This is an auxiliary norm input beneath the finite-normal ample descent used in the recorded alteration route, not the unit's key statement; no unit file needs realization edits.
+
+5. Unfinished: the new 0BUT node is deliberately statement-only, as required by a one-level split. There is no unfinished argument in the item's proof.
+
+## Searches and reuse
+
+The item and new lemma were searched using the required `batch2/msearch.py` command; all services answered. Each recorded query is copied exactly from `searches.jsonl`. For the new lemma, the first semantic search returned finite affine section algebras, finite restrictions and finite fibres. The second returned free-locus results, `Module.Invertible.instFinite` and `Module.free_of_flat_of_isLocalRing`; these concern a single localized ring, not freeness over the entire finite inverse image of a base neighborhood. I read the PicardGroup and FreeLocus descriptions: assembling a semilocal generator and shrinking the base would require an argument, so these are not one-line specializations of 0BUT. The extra single-file grep prints line numbers in its file field; the record retains this literal output and identifies the searched file, rather than claiming nonexistent declaration names.
+
+For the item, the hits concerned algebraic norms, integral closures and gluing schemes, not this sheaf construction. The second phrasing about norm transition functions returned scheme GlueData and representability declarations; their displayed types do not assert a norm on invertible modules or the zero criterion.
+
+I searched the whole DAG for 0BUT, 0BCY, 0BCZ, finite morphisms with invertible-sheaf trivializations, cocycle gluing, and finite closed maps. I also ran `blueprint_refs.py search` for norm-invertible, norm of, 0BUT, finite-trivialize, invertible-upstairs, finite trivial, 00AM and 09NE, and inspected the existing generic tools rather than creating replacements. The blueprint search for “norm of” found only the unrelated L2 weight norm. The specific 0BUT searches found no existing node.
+
+## Not duplicates
+
+No existing node carries Stacks 0BUT or states its simultaneous trivialization over inverse images of base neighborhoods. The new lemma is independent of the norm maps and says nothing about constructing a norm bundle or a norm section, so it is neither a clause nor a relabelling of the item. Existing cocycle gluing and finite closed-map results are cited directly, not recreated.
+
+## Review by NR
+
+I read Stacks `divisors.tex`, Section 0BCX (section-norms), both the statements and proofs of 0BCY (lemma-norm-invertible) and 0BCZ (lemma-norm-map-invertible), and the complete 0BUT proof (lemma-finite-trivialize-invertible-upstairs). For the existing tools I read their full DAG statements, Stacks 00AL/00AM in `sheaves.tex` for open-cover gluing, Modules 01CY (lemma-s-open) for nonvanishing trivialization, and Morphisms 01WN (lemma-finite-proper) for closedness. The construction follows 0BCY's actual cocycle proof and 0BCZ's local formula, spelling out compatibility and the converse vanishing implication rather than citing either whole conclusion as a newly created lemma.
+
+Step 1 uses precisely the statement of the new 0BUT node: finite morphism, invertible source module, and any base point give the inverse-image trivialization. These hypotheses are already in the item. The source's proof works for an arbitrary finite morphism; it does not assume flatness or Noetherian schemes. Its affine finite-fibre avoidance argument explains why trivializing pointwise on Y alone would not suffice. The cover and its frames are fixed before n and s, which verifies the required quantifier order for one N serving every section of every power.
+
+Step 2 uses only the free rank-one meaning of the invertible module definition. I checked the orientation explicitly: e_i = u_ij e_j gives u_ik = u_ij u_jk. Preservation of multiplication and 1 sends inverse units to inverse units and sends all cocycle equations to the analogous equations after restriction. No additivity of the norm is asserted or used.
+
+Step 3 cites `lem-sc-glue-component-transition-cocycle`. Its statement assumes exactly an arbitrary scheme open cover and units satisfying the three equations just proved, and concludes an invertible module with those transition functions. It has no reducedness or closed-component-cover hypothesis, despite the historical name. Its chosen-frame transition can therefore be taken as f_i = v_ij f_j. It is a generic geometric tool declared under split_report.tool_uses; it does not replace the six-functors unit route.
+
+Step 4 cites the tensor-invertibility clause (1) of `lem-weil-pbc-invertible-pullback-tensor` and applies it by induction to the positive tensor powers. Tensoring the actual local frames gives transitions u_ij^n and v_ij^n by multilinearity. I checked the coefficient orientation: b_j = b_i u_ij^n and thus nu(b_j) = nu(b_i) v_ij^n, exactly what is needed for nu(b_i) f_i^n to agree on overlaps. Gluing compatible sections is the sheaf axiom. There is no unproved comparison between an abstract norm functor and tensor powers: the construction directly uses N^n.
+
+Step 5 cites `def-weil-pbc-ample-invertible-module` only for the stipulated residue-field meaning of Y_s and Z_t, not for a theorem. In a free generator, zero section value is exactly zero coefficient value, and the item's vanishing hypothesis directly implies zero norm coefficient. This proves one inclusion without any lifting claim about residues.
+
+Step 6 uses exactly the openness and trivialization conclusion of `lem-weil-pbc-nonvanishing-section-trivializes`, and the closed-map conclusion (1) of `lem-weil-pbc-finite-closed-map-finite-fibres`. The positive tensor powers were already proved invertible, so openness of Y_s applies. The closed image is taken for the actual global closed subset Y minus Y_s, avoiding any unstated stability or affine-intersection hypothesis. For z whose whole fibre is in Y_s, W = V_i minus p(Y minus Y_s) is an open neighborhood with p^{-1}W inside Y_s. The nonvanishing trivialization lemma on the trivial bundle over this open scheme then makes multiplication by b_i an isomorphism: evaluating its inverse at 1 gives an actual inverse section c. Multiplicativity and restriction compatibility show its norm coefficient is a unit near z. This proves the reverse inclusion; nonzero on one point of the fibre would not suffice. All generic off-unit tools are explicitly declared in split_report.tool_uses.
+
+Step 7 is a set-theoretic equality of complements and fibres, after the two inclusions, and has no hidden geometric hypothesis. Every citation has its complete verbatim statement in citations.json, so each claimed clause is visible there. All proof steps are under 2,000 characters; none hides a separate comparison lemma.
+
+I tested the statements on identity maps (norm b = b^d), disjoint finite sheets (product norms), non-flat finite morphisms admitting the stated norm, and nonreduced schemes. The argument only tests residue-field values and never replaces zero in a residue field by zero as a section; hence nilpotents cause no gap. The new 0BUT node allows empty fibres: closedness permits a neighborhood with empty inverse image, whose trivial module has its unique trivialization. The empty target causes only empty-cover, empty-section assertions. For s = 0 and nonempty fibres, the item's vanishing hypothesis forces t to vanish at every base point, as required; for nowhere-zero s the inverse calculation makes t nowhere zero. The restriction d >= 1 and surjectivity are kept exactly, even though the cocycle construction and converse use only multiplicativity, preservation of 1 and finite closedness.

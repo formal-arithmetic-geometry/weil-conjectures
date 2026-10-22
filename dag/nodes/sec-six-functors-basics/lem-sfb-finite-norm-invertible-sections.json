@@ -15,9 +15,98 @@
   "def-sc-invertible-module",
   "def-weil-pbc-ample-invertible-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-finite-trivialize-invertible-upstairs] at each point of $Z$ to obtain an open cover $(V_i)$ and free generators $e_i$ of $M$ on $p^{-1}V_i$. Fix these choices once, independently of $n$ and $s$.",
+   "uses": [
+    "lem-sfb-finite-trivialize-invertible-upstairs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 0BCY and 0BCZ, divisors-lemma-norm-invertible and divisors-lemma-norm-map-invertible, with the opening observations of Section 0BCX."
+   }
+  },
+  {
+   "text": "On $p^{-1}(V_i\\cap V_j)$ write $e_i=u_{ij}e_j$. Uniqueness of coefficients in a free rank-one module gives $u_{ii}=1$, $u_{ji}=u_{ij}^{-1}$, and $u_{ik}=u_{ij}u_{jk}$ on triple overlaps. Put $v_{ij}=\\nu_{V_i\\cap V_j}(u_{ij})$. Multiplicativity and preservation of $1$ give $v_{ij}\\nu(u_{ij}^{-1})=1$, so $v_{ij}$ is a unit. Restriction compatibility then gives $v_{ii}=1$, $v_{ji}=v_{ij}^{-1}$, and $v_{ik}=v_{ij}v_{jk}$ on triple overlaps.",
+   "uses": [
+    "def-sc-invertible-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 0BCY and 0BCZ, divisors-lemma-norm-invertible and divisors-lemma-norm-map-invertible, with the opening observations of Section 0BCX."
+   }
+  },
+  {
+   "text": "Apply [lem-sc-glue-component-transition-cocycle] to the units $v_{ij}$ on the cover $(V_i)$. It supplies an invertible module $N$ on $Z$ with chosen generators $f_i$ satisfying $f_i=v_{ij}f_j$. This single $N$ will serve all tensor powers and all sections.",
+   "uses": [
+    "lem-sc-glue-component-transition-cocycle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 0BCY and 0BCZ, divisors-lemma-norm-invertible and divisors-lemma-norm-map-invertible, with the opening observations of Section 0BCX."
+   }
+  },
+  {
+   "text": "Fix $n\\geq1$ and $s\\in\\Gamma(Y,M^{\\otimes n})$. Iterating the tensor-product assertion of [lem-weil-pbc-invertible-pullback-tensor](1) makes $M^{\\otimes n}$ and $N^{\\otimes n}$ invertible. Tensoring the chosen trivializations gives generators $e_i^{\\otimes n}$ and $f_i^{\\otimes n}$, with transitions $u_{ij}^{n}$ and $v_{ij}^{n}$. Write $s=b_i e_i^{\\otimes n}$ over $p^{-1}V_i$; equality of its restrictions says $b_j=b_i u_{ij}^{n}$. Hence, on overlaps, $\\nu(b_j)=\\nu(b_i)v_{ij}^{n}$ by restriction compatibility and multiplicativity. The local sections $t_i=\\nu(b_i)f_i^{\\otimes n}$ therefore agree. The sheaf axiom for $N^{\\otimes n}$ glues them to a section $t\\in\\Gamma(Z,N^{\\otimes n})$.",
+   "uses": [
+    "lem-weil-pbc-invertible-pullback-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 0BCY and 0BCZ, divisors-lemma-norm-invertible and divisors-lemma-norm-map-invertible, with the opening observations of Section 0BCX."
+   }
+  },
+  {
+   "text": "If $y\\notin Y_s$ and $p(y)=z$, choose $i$ with $z\\in V_i$. In the chosen free generator, $s(y)=0$ means $b_i(y)=0$. The vanishing hypothesis on $\\nu_{V_i}$ gives $\\nu_{V_i}(b_i)(z)=0$, so $t(z)=0$. Consequently $Z_t\\subseteq Z\\setminus p(Y\\setminus Y_s)$.",
+   "uses": [
+    "def-weil-pbc-ample-invertible-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 0BCY and 0BCZ, divisors-lemma-norm-invertible and divisors-lemma-norm-map-invertible, with the opening observations of Section 0BCX."
+   }
+  },
+  {
+   "text": "Conversely let $z\\in Z$ have $p^{-1}(\\{z\\})\\subseteq Y_s$. By [lem-weil-pbc-nonvanishing-section-trivializes] applied to the invertible module $M^{\\otimes n}$, $Y_s$ is open. By [lem-weil-pbc-finite-closed-map-finite-fibres](1), $p(Y\\setminus Y_s)$ is closed. Choose $i$ with $z\\in V_i$ and put $W=V_i\\setminus p(Y\\setminus Y_s)$, an open neighborhood of $z$; then $p^{-1}W\\subseteq Y_s$. The function $b_i$ is nonzero in every residue field on $p^{-1}W$. Apply [lem-weil-pbc-nonvanishing-section-trivializes] to the trivial invertible module on the open scheme $p^{-1}W$ with section $b_i|$: its entire nonvanishing locus is $p^{-1}W$, so multiplication by $b_i|$ is an isomorphism. Its inverse evaluated at $1$ yields a section $c$ with $b_i|\\,c=1$. Multiplicativity gives $\\nu_W(b_i|)\\nu_W(c)=1$. Thus $\\nu_W(b_i|)(z)\\ne0$ in the residue field at $z$. Restriction compatibility identifies this with $\\nu_{V_i}(b_i)(z)$, and the frame $f_i^{\\otimes n}$ gives $t(z)\\ne0$.",
+   "uses": [
+    "lem-weil-pbc-nonvanishing-section-trivializes",
+    "lem-weil-pbc-finite-closed-map-finite-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 0BCY and 0BCZ, divisors-lemma-norm-invertible and divisors-lemma-norm-map-invertible, with the opening observations of Section 0BCX."
+   }
+  },
+  {
+   "text": "The two inclusions give $Z_t=Z\\setminus p(Y\\setminus Y_s)$. For any set map $p$, membership in that complement means there is no point of $Y\\setminus Y_s$ above $z$, equivalently $p^{-1}(\\{z\\})\\subseteq Y_s$. This proves the displayed equality for every $n$ and $s$ with the fixed $N$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 0BCY and 0BCZ, divisors-lemma-norm-invertible and divisors-lemma-norm-map-invertible, with the opening observations of Section 0BCX."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-finite-trivialize-invertible-upstairs",
+  "def-sc-invertible-module",
+  "lem-sc-glue-component-transition-cocycle",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "def-weil-pbc-ample-invertible-module",
+  "lem-weil-pbc-nonvanishing-section-trivializes",
+  "lem-weil-pbc-finite-closed-map-finite-fibres"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tags 0BCY and 0BCZ, divisors-lemma-norm-invertible and divisors-lemma-norm-map-invertible, with the opening observations of Section 0BCX."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -53,10 +142,45 @@
    "results": "Read returned hits: CommRing.Pic.mk, CommRing.Pic.mk_tensor, Submodule.unitsToPic, CommRing.Pic.AsModule, ModuleCat.Tilde.const, ModuleCat.Tilde.toOpen, Submodule.unitsToPic_apply, ModuleCat.Tilde.exists_const",
    "date": "2026-10-22",
    "verdict": "no match: algebraic norms and Picard classes of ring modules do not give norms of invertible sheaves and global sections with this fibrewise nonvanishing equality."
+  },
+  {
+   "tool": "grep",
+   "query": "norm.*(invertible|lineBundle|section)",
+   "results": "Read returned hits: Mathlib/AlgebraicGeometry/EllipticCurve/NormalForms.lean, Mathlib/AlgebraicGeometry/EllipticCurve/NormalForms.lean, Mathlib/AlgebraicGeometry/EllipticCurve/NormalForms.lean Searched AlgebraicGeometry.",
+   "date": "2026-10-22",
+   "verdict": "no match: these algebraic norms, scheme gluings, and finite-morphism declarations do not construct norm invertible sheaves with norm sections and the asserted fibrewise vanishing criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Construct a norm invertible sheaf and norm global sections for a finite morphism of schemes",
+   "results": "Read returned hits: AlgebraicGeometry.IsFinite.recOn, AlgebraicGeometry.Scheme.inv_appTop, AlgebraicGeometry.IsFinite.mk, AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop, AlgebraicGeometry.Scheme.Hom.inv_appTop, AlgebraicGeometry.IsFinite.instIsIntegralHom, AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, AlgebraicGeometry.Scheme.Hom.normalizationDiagram",
+   "date": "2026-10-22",
+   "verdict": "no match: these algebraic norms, scheme gluings, and finite-morphism declarations do not construct norm invertible sheaves with norm sections and the asserted fibrewise vanishing criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"norm\", \"Invertible\"",
+   "results": "Read returned hits: Mathlib.Meta.NormNum.invertibleOfMul, Mathlib.Meta.NormNum.invertibleOfMul', NormedSpace.invertibleExp, NormedSpace.invertibleExpOfMemBall",
+   "date": "2026-10-22",
+   "verdict": "no match: these algebraic norms, scheme gluings, and finite-morphism declarations do not construct norm invertible sheaves with norm sections and the asserted fibrewise vanishing criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A multiplicative norm on the structure sheaf of a finite morphism constructs norm line bundles and sections with saturated nonvanishing loci",
+   "results": "Read returned hits: AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation, Algebra.intNormAux, AlgebraicGeometry.Scheme.Hom.normalizationDiagram, Algebra.norm_localization, AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap, Ideal.spanIntNorm_localization, AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage, Algebra.norm_eq_iff",
+   "date": "2026-10-22",
+   "verdict": "no match: these algebraic norms, scheme gluings, and finite-morphism declarations do not construct norm invertible sheaves with norm sections and the asserted fibrewise vanishing criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Glue line bundles using the norm of their transition functions and glue norm coefficients of tensor power sections for a finite scheme morphism",
+   "results": "Read returned hits: AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk, AlgebraicGeometry.Scheme.LocalRepresentability.glueData_t, AlgebraicGeometry.Scheme.Pullback.gluing_t', AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk_val, AlgebraicGeometry.Scheme.LocalRepresentability.glueData_t', AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation, AlgebraicGeometry.Scheme.LocalRepresentability.glueData_V, AlgebraicGeometry.Scheme.Pullback.gluing_t",
+   "date": "2026-10-22",
+   "verdict": "no match: these algebraic norms, scheme gluings, and finite-morphism declarations do not construct norm invertible sheaves with norm sections and the asserted fibrewise vanishing criterion."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-finite-normal-ample-descent",
@@ -82,5 +206,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-finite-norm-invertible-sections",
+  "worker": "stage1",
+  "summary": "Expanded the norm construction into local frames, normed transition cocycles, compatible norm section coefficients, and both directions of the fibrewise zero criterion. Added only the independent finite-morphism local trivialization lemma 0BUT; reused existing generic gluing, tensor invertibility, nonvanishing, and closed-map statements. No statement correction.",
+  "blueprint": "Realizes the norm-of-invertible-sheaves auxiliary input of the recorded alteration/ample-descent ancestor route, following Stacks 0BCY and 0BCZ rather than introducing their conclusions as new nodes. The item is not a blueprint key statement.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-glue-component-transition-cocycle",
+    "why": "Generic open-cover unit-cocycle gluing constructs the norm bundle; no six-functors unit statement supplies this elementary geometric tool."
+   },
+   {
+    "node": "lem-weil-pbc-invertible-pullback-tensor",
+    "why": "Generic tensor-product invertibility ensures all powers are invertible, so the nonvanishing lemma applies."
+   },
+   {
+    "node": "lem-weil-pbc-nonvanishing-section-trivializes",
+    "why": "Generic line-bundle nonvanishing openness and trivialization supply the open locus and an inverse to a nowhere-zero function."
+   },
+   {
+    "node": "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "why": "Generic closed-map property of finite morphisms shrinks a base neighborhood into the nonvanishing locus."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-glue-component-transition-cocycle",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-weil-pbc-nonvanishing-section-trivializes",
+  "lem-weil-pbc-finite-closed-map-finite-fibres"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NR-c11c75396",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-c11c75396 (reviewer sub-agent of L); spot-checked: I read Stacks divisors.tex 0BCX/0BUT/0BCY/0BCZ/0BD0 (lines 3585-3770). The item faithfully bundles 0BCY and 0BCZ, with one N for every n and s; this is exactly what the citer lem-sfb-finite-normal-ample-descent needs in its Steps 3 and 6. The statement is unchanged; it is still unsplit on side-live, has no repair note, and nothing in it or its closure is on the drop list. Step 1 uses the new 0BUT node, with the frames fixed before n and s. Step 2 checks the u-cocycle and its ν-image, with units via ν(1)=1. Step 3 is cocycle gluing; the node's proof has e_a=g_ab e_b, and the units commute, so either convention works. Step 4 checks b_j=b_i u_ij^n, so ν(b_i)f_i^n agree on overlaps and glue. Step 5 uses condition (2) to get Z_t ⊆ Z∖p(Y∖Y_s). Step 6 gets 01CY openness and finite⇒closed, then W=V_i∖p(Y∖Y_s), a unit b_i on p^{-1}W, and ν of a unit is a unit; all are stated conclusions of the cited nodes. Step 7 is set theory. The new 0BUT node is the Stacks statement verbatim and is statement-only. It is a real lemma (nonvanishing section at a finite set on an affine, plus closedness), not a clause of the item, and rg -L found no duplicate in the DAG. Small cases tested: identity map (N=M^d, Z_t=Y_s), two disjoint sheets (product norm), s=0, empty fibres and nilpotents. I accept the four generic tool uses. No faults and no changes; review.md written."
  }
 }
