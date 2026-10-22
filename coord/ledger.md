@@ -24171,3 +24171,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:19 L: returned deliver/NI/lem-sfb-semilinear-sylow-good-components (reviewer RETURN: L: independent stage-2 immutable head ca314767d1bc: H1/H2: stage-2 delivery with no Lean module, no lean record and no ')
 - 01:19 L: merged deliver/S1/Sheaf.Paper.FiniteFreeQuotientCompletion (stage 3; reviewer PASS; first push; landing 20261022T011928-L-3234189 (interface); batch 20261022T011628; modules 5; new nodes 4; change records: coord/changes/finite-free-quotient-completion-imports.md)
 - 01:19 L: merged deliver/S9/Sheaf.Paper.TensorComparisonLocalizationDescent (stage 3; reviewer PASS; first push; landing 20261022T011935-L-3235263 (interface); batch 20261022T011628; modules 16; new nodes 15)
+- 01:19 L: returned deliver/N9/sk-thm-groth-ss (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-thm-groth-ss: sk-thm-groth-ss: completed in this pr)
