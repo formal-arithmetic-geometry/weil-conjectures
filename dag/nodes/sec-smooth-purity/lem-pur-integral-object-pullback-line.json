@@ -1,0 +1,146 @@
+{
+ "id": "lem-pur-integral-object-pullback-line",
+ "kind": "statement",
+ "title": "Completed inverse image of an integral line with a slice basis",
+ "statement": "Fix a prime l, a finite extension E of Q_l, and a scheme X on which l is invertible. Let W be an object of the small pro-etale site of X. Put R_X equal to the completed integral coefficient sheaf, and R_W to the corresponding sheaf on W.left [def-weil-completed-integral-coefficients]. For a rank-one locally free R_X-module sheaf L and an isomorphism from its restriction to the slice at W to the regular coefficient module restricted to that slice, the actual completed derived inverse image [def-weil-derived-pullback-tensor-hom] along W.hom of L placed in degree zero is isomorphic to R_W placed in degree zero. No noetherian or dimension hypothesis on X is imposed.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 3.4.10 and Lemma 6.5.9: completed inverse image and locally free coefficient modules",
+  "also": [
+   {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04J0, localization at an object of a ringed site"
+   },
+   {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YY, K-flat derived pullback; see also derived.tex Tag 08TC for the derived limit of the quotient tower"
+   },
+   {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+    "place": "Proof (3), local triviality of integral, rational and algebraically closed coefficient lines"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-completed-integral-coefficients",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-sc-invertible-module",
+  "def-pur-localized-ringed-site"
+ ],
+ "proof": [
+  {
+   "text": "Place L in degree zero. A locally free line is flat, so this is a flat-term K-flat representative for the actual integral completed pullback. Use the representative comparison from integralOperationsWellDefined to express the result as Q of the strict Roos complex of finite quotient inverse images.",
+   "uses": [
+    "lem-pur-line-unbounded-derived-tensor",
+    "lem-pur-integral-operations-well-defined"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At exponent n+1, extend the given slice basis to the finite coefficient quotient. Object inverse image is restriction to the slice followed by the pro-etale slice equivalence, and its constant-ring normalization sends the regular coefficient module to the regular coefficient module. Thus each finite pulled-back term is the regular quotient module. All bases are reductions of the same integral basis; hence the maps commute with every quotient transition and augmentation, not merely separately in the derived categories.",
+   "uses": [
+    "lem-sfb-proetale-object-inverse-image-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply products and the signed mapping-cocone functor to this strict tower isomorphism. The regular completed coefficient module is derived complete and its locally surjective quotient tower has the coefficient ring as limit. Its normalized augmentation to the quotient-tower Roos complex is a quasi-isomorphism. Compose this augmentation inverse with the representative and strict-tower comparisons to obtain the displayed isomorphism.",
+   "uses": [
+    "lem-pur-completed-line-complete",
+    "lem-pe-roos-cone-calculus"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-line-unbounded-derived-tensor",
+  "lem-pur-integral-operations-well-defined",
+  "lem-sfb-proetale-object-inverse-image-restriction",
+  "lem-pur-completed-line-complete",
+  "lem-pe-roos-cone-calculus"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+  "place": "Proof (3), local triviality after actual completed inverse image; independent generic line calculation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "pullback.*single|single.*pullback|pullback.*unit",
+   "results": "Mathlib/Topology/Sheaves/Stalks.lean; Mathlib/Topology/Sheaves/Stalks.lean; Mathlib/Topology/Sheaves/Stalks.lean; Mathlib/Topology/Sheaves/Stalks.lean; Mathlib/Topology/Sheaves/Stalks.lean; Mathlib/Topology/Category/TopCat/Limits/Pullbacks.lean; Mathlib/Algebra/Ring/InjSurj.lean; Mathlib/Algebra/Ring/InjSurj.lean",
+   "date": "2026-10-21",
+   "verdict": "No match for the completed pro-etale operation in the statement. Ordinary pullback and monoidal constraints are useful ingredients but do not identify these chosen coefficient operations."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.freeFunctorCompPullbackIso",
+   "results": "SheafOfModules.freeFunctorCompPullbackIso",
+   "date": "2026-10-21",
+   "verdict": "No match for the completed pro-etale operation in the statement. Ordinary pullback and monoidal constraints are useful ingredients but do not identify these chosen coefficient operations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback along an object of a pro etale site of a locally free rank one module trivialized on that object is the coefficient unit",
+   "results": "SheafOfModules.pullbackObjUnitToUnit; SheafOfModules.pullbackObjFreeIso; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal; AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_l; PresheafOfModules.DifferentialsConstruction.isUniversal'; PresheafOfModules.DifferentialsConstruction.relativeDifferentials'; PresheafOfModules.Derivation.Universal",
+   "date": "2026-10-21",
+   "verdict": "No match for the completed pro-etale operation in the statement. Ordinary pullback and monoidal constraints are useful ingredients but do not identify these chosen coefficient operations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Completed derived inverse image along a pro etale site object takes a line with a slice basis to the regular coefficient module",
+   "results": "KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap; ModuleCat.Tilde.stalkIso_inv; AlgebraicGeometry.StructureSheaf.isLocalizedModule_toPushforwardStalkAlgHom; CategoryTheory.Presheaf.coherentExtensiveEquivalence_inverse_map_val; Algebra.Generators.cotangentCompAwaySec; AdicCompletion.ofLinearEquiv_symm_of; CondensedMod.ofSheafProfinite; CategoryTheory.Equivalence.sheafCongrPreregular_inverse_obj_val_obj",
+   "date": "2026-10-21",
+   "verdict": "No match for the completed pro-etale operation in the statement. Ordinary pullback and monoidal constraints are useful ingredients but do not identify these chosen coefficient operations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TateTwistLocallyFree",
+  "date": "2026-10-22",
+  "group": "V7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-def-sp-tate-twist-locally-free",
+   "place": "Proof (3), local triviality after actual completed inverse image; independent generic line calculation",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralObjectPullbackLine",
+  "file": "lean/Sheaf/Paper/IntegralObjectPullbackLine.lean",
+  "declaration": "WeilConjectures.integralObjectPullbackLine",
+  "statement": "theorem integralObjectPullbackLine (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (X : Scheme.{u}) [∀ x : X, Invertible (l : X.residueField x)] (W : X.ProEt)\n    (L : integralTowerModules l E X) (hL : L.IsFiniteLocallyFreeOfRank 1)\n    (e : L.over W ≅\n      (SheafOfModules.unit (completedIntegralCoefficientSheafUnrestricted l E X)).over W) :\n    Nonempty ((integralDerivedPullback l E W.hom).obj\n      ((DerivedCategory.singleFunctor _ 0).obj L) ≅\n      (DerivedCategory.singleFunctor _ 0).obj\n        (SheafOfModules.unit (completedIntegralCoefficientSheafUnrestricted l E W.left)))",
+  "branch": "sheaf-dag",
+  "by": "V7",
+  "date": "2026-10-22"
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-7f26c",
+  "group": "V7",
+  "result": "pass",
+  "landing": "20261022T002501-L-1933458",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-7f26c",
+  "group": "V7",
+  "result": "pass",
+  "landing": "20261022T002501-L-1933458",
+  "kind": "interface",
+  "note": "independent cc review: delivered TateTwistLocallyFree + 2 new sorry modules/nodes vs clones/live item and node, unit sk-prop-an realized (empty), DerivedPullbackTensorIso objectwise associator/unitors; sandbox compile of item, new modules and all 7 direct importers against the delivered olean, axioms probe"
+ }
+}

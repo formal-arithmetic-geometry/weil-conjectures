@@ -20,149 +20,123 @@
  ],
  "proof": [
   {
-   "text": "[lem-poincare-compatible-primitive-roots] trivializes the root diagram, transitions included, on one pro-étale covering family $(U_i)$; put $\\widetilde X=\\coprod_iU_i$, a pro-étale cover whose sections are families of sections. Images of $1$ give $\\zeta_n$ with $\\zeta_{n+1}^\\ell=\\zeta_n$; an abelian map killed by $\\ell^n$ is residue-linear. Its inverse limit [def-pur-sheaf-inverse-limit] trivializes $T=\\varprojlim\\mu_{\\ell^n}$ on that cover.",
+   "text": "Use the existing local root-tower model to choose one pro-etale covering family with compatible generators and compatible integral root bases. Convert the generators to the stated residue-linear bases and prove the Kummer transition composition, identity, and generator formulas by the actual exponent maps.",
    "uses": [
-    "lem-poincare-compatible-primitive-roots",
-    "def-pur-sheaf-inverse-limit"
+    "lem-pur-twist-root-local-models",
+    "lem-pur-twist-sheaf-locally-free"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
-    "place": "Proof (1)"
+    "place": "Proof (1)-(3), Lean assembly step 1"
    }
   },
   {
-   "text": "The Kummer map sends $\\zeta_{r\\prime}\\otimes a$ to $\\zeta_r\\otimes a$, hence is the identity in the two $A$-bases [def-pur-sheaf-tensor-product]. Local inverses glue uniquely ($u=ufv=v$). Multiplying transition exponents gives canonical level independence.",
+   "text": "Define the finite Kummer map by scalar extension of the root transition. The adjunct pure-tensor formula is exactly the required formula. On each member of the chosen root cover, conjugate by the extended bases: the map sends the basis generator to the basis generator, so it is an isomorphism there and hence globally. The same bases trivialize the finite line.",
    "uses": [
-    "def-pur-sheaf-tensor-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
-    "place": "Proof (2)"
-   }
-  },
-  {
-   "text": "Clause 3 of [lem-pur-twist-sheaf-locally-free] gives $L_E=T\\otimes_{\\widehat{\\mathbf Z}_{\\ell,X}}R_E$. Restrict tensors [lem-sfb-localized-site-tensor-restriction]: $e\\otimes a\\mapsto a$ trivializes every integral first line on the root cover.",
-   "uses": [
-    "lem-pur-twist-sheaf-locally-free",
-    "lem-sfb-localized-site-tensor-restriction"
+    "lem-sp-scalar-extension-dual-local-iso",
+    "lem-pur-inverse-image-scalar-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
-    "place": "Proof (3), integral first line"
+    "place": "Proof (1)-(3), Lean assembly step 2"
    }
   },
   {
-   "text": "Identify the continuous coefficient ring by [det-prop-sfb-qlbar-colimit-x-integral-limit], then invert $\\ell$ [det-prop-sfb-qlbar-colimit-x-invert-ell]. The same presentations at finite stages give the rational and $\\Qlb$ lines [def-coefficient-twists-detailed].",
-   "uses": [
-    "det-prop-sfb-qlbar-colimit-x-integral-limit",
-    "det-prop-sfb-qlbar-colimit-x-invert-ell",
-    "def-coefficient-twists-detailed"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
-    "place": "Proof (3), rational and common-stage first lines"
-   }
-  },
-  {
-   "text": "[lem-weil-signed-line-tensor-equivalence] gives signed rank-one lines and opposite tensor inverses. In a local basis $p$, evaluation is $(ap)\\otimes(bp^\\vee)\\mapsto ab$, inverse $a\\mapsto(ap)\\otimes p^\\vee$ [def-pur-sheaf-hom]. These glue, including the unit at degree zero.",
+   "text": "SignedLineTensorEquivalence gives signed line bases and opposite tensor evaluations. Derive its exact tensor functors on unbounded complexes and identify the degree-zero tensor model, obtaining the specified finite inverse functors.",
    "uses": [
     "lem-weil-signed-line-tensor-equivalence",
-    "def-pur-sheaf-hom"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
-    "place": "Proof (3), signed lines and evaluation"
-   }
-  },
-  {
-   "text": "Apply [lem-pur-line-unbounded-derived-tensor] to each signed line. Its exact termwise model is derived tensor, and opposite evaluations give inverse functors on all of $D(X_{\\mathrm{proet}},A)$.",
-   "uses": [
+    "lem-sf-exact-functor-derived-triangulated",
     "lem-pur-line-unbounded-derived-tensor"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
-    "place": "Proof (3), final sentence, unbounded finite category"
+    "place": "Proof (1)-(3), Lean assembly step 3"
    }
   },
   {
-   "text": "Clause 3 of [lem-pur-twist-sheaf-locally-free] supplies finite locally constant reductions of $L_E$. Apply [lem-pur-integral-line-reduction-restriction]: the completed signed twists preserve completeness, constructibility and one uniform interval; their evaluations restrict.",
+   "text": "The root-cover integral extension basis trivializes each integral first line; signed line equivalence gives all its signed powers. Identify each ordinary finite reduction with the finite signed line using the scalar-extension tensor comparison and the existing integral local models. Apply integral line reduction/restriction and cancel the fully faithful inclusion to identify the restricted inverse pair with the actual intrinsic integral twist functors.",
    "uses": [
-    "lem-pur-twist-sheaf-locally-free",
+    "lem-pur-twist-integral-local-models",
+    "lem-sfb-scalar-ordinary-tensor-comparison",
+    "lem-weil-finite-line-tensor-conditions",
     "lem-pur-integral-line-reduction-restriction"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
-    "place": "Proof (3), final sentence, integral restriction"
+    "place": "Proof (1)-(3), Lean assembly step 4"
    }
   },
   {
-   "text": "The integral inverse pair is exact, $\\mathcal O_E$-linear and inverse by step 6 and preserves $D^b_c(X,\\mathcal O_E)$ by step 7. [lem-weil-twist-rationalization] therefore gives the specified rational inverse pair.",
+   "text": "Localize the integral inverse pair and its tensor comparison. Tensor-induction on coefficient morphisms identifies the localized tensor with the prescribed rational tensor; exactness and coefficient linearity give the rational inverse pair. Good line representatives and the completed tensor comparison give opposite integral object products, and localization gives the rational products.",
    "uses": [
-    "lem-weil-twist-rationalization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
-    "place": "Proof (3), final sentence, rationalization"
-   }
-  },
-  {
-   "text": "For $E\\subset F$ use $(t\\otimes a)\\otimes b\\mapsto t\\otimes ab$ and inverse $t\\otimes b\\mapsto(t\\otimes1)\\otimes b$ [lem-pc-sheaf-modules-tensor-closed]. For the strict quotient-tower scalar extension [def-weil-integral-scalar-extension], [lem-pur-completed-line-tensor-coherence] gives normalized signed scalar comparisons, tower laws and evaluation compatibility. For $E=F$ the map is multiplication, and both tower composites send $((t\\otimes a)\\otimes b)\\otimes c$ to $t\\otimes abc$: these are the hypotheses on $b_{ji}$ there.",
-   "uses": [
-    "lem-pc-sheaf-modules-tensor-closed",
+    "def-weil-linear-scalar-localization",
+    "lem-pur-semilinear-scalar-localization",
+    "lem-coef-completed-tensor-scalar-linearity",
     "lem-pur-completed-line-tensor-coherence",
-    "def-weil-integral-scalar-extension"
+    "lem-pur-line-unbounded-derived-tensor"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
-    "place": "Proof (3), final sentence, scalar coherence"
+    "place": "Proof (1)-(3), Lean assembly step 5"
    }
   },
   {
-   "text": "[lem-sbc-coherent-pair-functor-descent] descends this normalized rational inverse pair and its evaluations to the common-stage category [def-weil-algebraically-closed-coefficients]. Thus the prescribed opposite twists are inverse also at $\\Qlb$.",
+   "text": "For local rational signed lines, use the generic completed object-pullback calculation on each integral signed line and its slice basis; transport through the actual rational pullback object specification. Embed the rational line and product at the least coefficient field. The normalized same-stage scalar and tensor comparisons identify its image with the specified algebraically closed line and tensor product.",
    "uses": [
-    "lem-sbc-coherent-pair-functor-descent",
-    "def-weil-algebraically-closed-coefficients"
+    "lem-pur-integral-object-pullback-line",
+    "def-coefficient-twists-detailed",
+    "lem-pur-derived-pullback-tensor-iso"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
-    "place": "Proof (3), final sentence, common-stage inverse pair"
+    "place": "Proof (1)-(3), Lean assembly step 6"
+   }
+  },
+  {
+   "text": "At algebraically closed coefficients use natural fixed-right tensor associativity, the regular unit, and the already proved opposite line products to build the two inverse functor isomorphisms. The normalized braiding gives the reversed product. These isomorphisms give an equivalence by CategoryTheory.Equivalence.mk. Assemble every clause using the same root covering family.",
+   "uses": [
+    "lem-pur-common-stage-tensor-line-coherence",
+    "lem-pur-derived-pullback-tensor-iso",
+    "def-coefficient-twists-detailed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+    "place": "Proof (1)-(3), Lean assembly step 7"
    }
   }
  ],
  "proof_deps": [
-  "lem-poincare-compatible-primitive-roots",
-  "def-pur-sheaf-inverse-limit",
-  "def-pur-sheaf-tensor-product",
+  "lem-pur-twist-root-local-models",
   "lem-pur-twist-sheaf-locally-free",
-  "lem-sfb-localized-site-tensor-restriction",
-  "det-prop-sfb-qlbar-colimit-x-integral-limit",
-  "det-prop-sfb-qlbar-colimit-x-invert-ell",
-  "def-coefficient-twists-detailed",
+  "lem-sp-scalar-extension-dual-local-iso",
+  "lem-pur-inverse-image-scalar-comparison",
   "lem-weil-signed-line-tensor-equivalence",
-  "def-pur-sheaf-hom",
+  "lem-sf-exact-functor-derived-triangulated",
   "lem-pur-line-unbounded-derived-tensor",
+  "lem-pur-twist-integral-local-models",
+  "lem-sfb-scalar-ordinary-tensor-comparison",
+  "lem-weil-finite-line-tensor-conditions",
   "lem-pur-integral-line-reduction-restriction",
-  "lem-weil-twist-rationalization",
-  "lem-pc-sheaf-modules-tensor-closed",
+  "def-weil-linear-scalar-localization",
+  "lem-pur-semilinear-scalar-localization",
+  "lem-coef-completed-tensor-scalar-linearity",
   "lem-pur-completed-line-tensor-coherence",
-  "def-weil-integral-scalar-extension",
-  "lem-sbc-coherent-pair-functor-descent",
-  "def-weil-algebraically-closed-coefficients"
+  "lem-pur-integral-object-pullback-line",
+  "def-coefficient-twists-detailed",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-pur-common-stage-tensor-line-coherence"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
-  "place": "Proof (1)-(3); short assembly after extraction of three independent generic arguments"
+  "by": "worker",
+  "document": "lean/Sheaf/Paper/TateTwistLocallyFree.lean",
+  "place": "V7 complete finite/integral/rational assembly, with two separate generic pullback/coherence obligations; all original signatures unchanged"
  },
  "mathlib_searches": [
   {
@@ -351,24 +325,29 @@
  "tool_uses": [
   "lem-pur-twist-sheaf-locally-free",
   "lem-sfb-localized-site-tensor-restriction",
-  "det-prop-sfb-qlbar-colimit-x-integral-limit",
-  "det-prop-sfb-qlbar-colimit-x-invert-ell",
   "lem-weil-signed-line-tensor-equivalence",
   "lem-sf-exact-functor-derived-triangulated",
   "lem-weil-pbc-exact-functor-complex-cohomology",
   "lem-weil-pbc-site-derived-tensor-descent",
   "lem-weil-integral-line-tensor-completeness",
   "lem-weil-finite-line-tensor-conditions",
-  "lem-weil-twist-rationalization",
   "lem-pc-sheaf-modules-tensor-closed",
   "lem-weil-finite-free-completed-scalar-comparison",
-  "lem-sbc-coherent-pair-functor-descent",
   "lem-poincare-compatible-primitive-roots",
   "def-pur-sheaf-inverse-limit",
   "def-pur-sheaf-tensor-product",
   "def-coefficient-twists-detailed",
   "def-pur-sheaf-hom",
-  "def-weil-algebraically-closed-coefficients",
-  "def-weil-integral-scalar-extension"
- ]
+  "def-weil-algebraically-closed-coefficients"
+ ],
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-7f26c",
+  "group": "V7",
+  "result": "pass",
+  "landing": "20261022T002501-L-1933458",
+  "kind": "interface",
+  "note": "independent cc review: delivered TateTwistLocallyFree + 2 new sorry modules/nodes vs clones/live item and node, unit sk-prop-an realized (empty), DerivedPullbackTensorIso objectwise associator/unitors; sandbox compile of item, new modules and all 7 direct importers against the delivered olean, axioms probe"
+ }
 }

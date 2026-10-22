@@ -1,0 +1,146 @@
+{
+ "id": "lem-pur-common-stage-tensor-line-coherence",
+ "kind": "statement",
+ "title": "Natural associativity and regular right unit for common-stage tensor",
+ "statement": "Fix a prime l, a scheme X on which l is invertible, and an algebraic closure Omega of Q_l. Let C be the general algebraically closed constructible coefficient category and T its prescribed common-stage derived tensor bifunctor [def-weil-derived-pullback-tensor-hom]. For L in C set right(L) to the functor K ↦ T(K,L). For every L,M in C there is a natural isomorphism right(L) followed by right(M) ≅ right(T(L,M)). Moreover right of the prescribed degree-zero coefficient twist sfQbarTwistingCoefficient(l,X,Omega,0) [def-coefficient-twists-detailed] is naturally isomorphic to the identity functor. These are natural isomorphisms of the actual functors, not only objectwise equivalences, and the unit is the specified untwisted regular coefficient object.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS, 07A2 and 07A4: K-flat resolutions, tensor of K-flat complexes and tensor-pullback compatibility",
+  "also": [
+   {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, derived-limit construction used for the completed tensor model"
+   },
+   {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+    "place": "Proof (3), final sentence at algebraically closed coefficients; the common-stage construction of the tensor and its regular coefficient unit"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-derived-pullback-tensor-hom",
+  "def-coefficient-twists-detailed",
+  "def-weil-algebraically-closed-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "Use the normalized integral associator and right unitor of the actual completed tensor. Apply the faithful coherent reduction functor to their naturality squares; its natural tensor comparison reduces the squares to ordinary associator and unitor naturality. The regular sheaf in degree zero is derived complete and has exactly the coefficient-unit quotient system, so completeness identifies the reconstructed tensor unit with this specified object.",
+   "uses": [
+    "lem-pur-derived-pullback-tensor-iso",
+    "lem-pod-integral-system-reduction-fully-faithful",
+    "lem-pur-completed-line-complete"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Localize these integral squares. Every rational morphism is a finite sum of pure coefficient tensors; bilinearity proves naturality on a pure tensor from the integral square and then on every morphism. The inverse identities localize as well.",
+   "uses": [
+    "def-weil-linear-scalar-localization",
+    "lem-coef-completed-tensor-scalar-linearity"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Represent every object and map in each common-stage square over a single finite coefficient field. The normalized common-stage scalar tensor comparisons conjugate the associator and unitor components to their rational counterparts. Their tower and unit equations cancel the conjugations, so the squares commute by rational naturality. Eventual equality gives naturality in the pair quotient. Descend the inverse identities too and assemble with NatIso.ofComponents. The least-stage regular object is sfQbarTwistingCoefficient at zero by its defining intrinsic coefficient construction.",
+   "uses": [
+    "lem-pur-derived-pullback-tensor-iso",
+    "def-coefficient-twists-detailed",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-pod-integral-system-reduction-fully-faithful",
+  "lem-pur-completed-line-complete",
+  "def-weil-linear-scalar-localization",
+  "lem-coef-completed-tensor-scalar-linearity",
+  "def-coefficient-twists-detailed",
+  "def-weil-algebraically-closed-coefficients"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+  "place": "Proof (3), final sentence: inverse tensor functors at the algebraically closed coefficient stage; independent tensor coherence result"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "StageSystem.*Monoidal|commonStage.*Tensor.*natural",
+   "results": "0 hits",
+   "date": "2026-10-21",
+   "verdict": "No match for the completed pro-etale operation in the statement. Ordinary pullback and monoidal constraints are useful ingredients but do not identify these chosen coefficient operations."
+  },
+  {
+   "tool": "loogle",
+   "query": "MonoidalCategory, Functor",
+   "results": "loogle: unknown identifier 'MonoidalCategory'",
+   "date": "2026-10-21",
+   "verdict": "No match for the completed pro-etale operation in the statement. Ordinary pullback and monoidal constraints are useful ingredients but do not identify these chosen coefficient operations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Associativity natural isomorphism and right unit for tensor product of derived constructible l adic sheaves and algebraically closed coefficients formed at common finite stages",
+   "results": "LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat; AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian; LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf; LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology; LightCondensed.instMonoidalCategoryLightCondMod; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply",
+   "date": "2026-10-21",
+   "verdict": "No match for the completed pro-etale operation in the statement. Ordinary pullback and monoidal constraints are useful ingredients but do not identify these chosen coefficient operations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of associativity and right unit for tensor product on a derived category with algebraically closed l adic coefficients",
+   "results": "Algebra.TensorProduct.assoc; CategoryTheory.MonoidalCategory.rightUnitorNatIso; CategoryTheory.GradedObject.Monoidal.associator_naturality; CategoryTheory.Localization.Monoidal.associator_naturality; CategoryTheory.NatTrans.rightDerived_comp_assoc; CategoryTheory.Dial.rightUnitor_naturality; CategoryTheory.MonoidalCategory.MonoidalRightAction.actionAssocNatIso; CategoryTheory.MonoidalCategory.associatorNatIso",
+   "date": "2026-10-21",
+   "verdict": "No match for the completed pro-etale operation in the statement. Ordinary pullback and monoidal constraints are useful ingredients but do not identify these chosen coefficient operations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TateTwistLocallyFree",
+  "date": "2026-10-22",
+  "group": "V7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-def-sp-tate-twist-locally-free",
+   "place": "Proof (3), final sentence: inverse tensor functors at the algebraically closed coefficient stage; independent tensor coherence result",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CommonStageTensorLineCoherence",
+  "file": "lean/Sheaf/Paper/CommonStageTensorLineCoherence.lean",
+  "declaration": "WeilConjectures.commonStageTensorLineCoherence",
+  "statement": "theorem commonStageTensorLineCoherence\n    (l : ℕ) [Fact l.Prime] (X : Scheme.{u})\n    [∀ x : X, Invertible (l : X.residueField x)]\n    (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω] :\n    let C := generalAlgebraicallyClosedConstructibleCategory l Ω X\n    let T := commonStageDerivedTensor l Ω X\n    let right (L : C) := (𝟭 C).prod' ((Functor.const C).obj L) ⋙ T\n    (∀ (L M : C), Nonempty (right L ⋙ right M ≅ right (T.obj (L, M)))) ∧\n      Nonempty (right (sfQbarTwistingCoefficient l X Ω 0) ≅ 𝟭 C)",
+  "branch": "sheaf-dag",
+  "by": "V7",
+  "date": "2026-10-22"
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-7f26c",
+  "group": "V7",
+  "result": "pass",
+  "landing": "20261022T002501-L-1933458",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-7f26c",
+  "group": "V7",
+  "result": "pass",
+  "landing": "20261022T002501-L-1933458",
+  "kind": "interface",
+  "note": "independent cc review: delivered TateTwistLocallyFree + 2 new sorry modules/nodes vs clones/live item and node, unit sk-prop-an realized (empty), DerivedPullbackTensorIso objectwise associator/unitors; sandbox compile of item, new modules and all 7 direct importers against the delivered olean, axioms probe"
+ }
+}
