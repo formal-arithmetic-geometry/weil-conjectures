@@ -225,5 +225,23 @@
   "group": "NQ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NQ-80e24fe3b (reviewer sub-agent of L); spot-checked: Read Stacks 0A36 (lemma-vanishing-ravi, cohomology.tex 1999-2087) and 09SZ (lemma-flasque-acyclic-cech) in full. The item statement and stmt_deps match the unsplit base. No re-split note, no dropped-list entry and no SGA citation. Steps 1-3 are correct set arithmetic. The basis on P comes from B_J∩B_K=B_{J∪K}. B_J⊆B_K iff K⊆J, checked at the point J. An open containing J contains B_J, which gives the union criterion. T(B_K)=U_K, T(∅)=∅, T(P)=U, and T preserves unions and binary intersections. Using the canonical family {J: B_J⊆W} gives the same T as Stacks' minimal presentation. Step 4: (a) and (b) of lem-weil-pbc-site-continuous-pushforward-sheaf (00WW) are exactly step 3 on open sites, and its conclusion covers abelian sheaves. This is an off-unit generic tool used as a black box, and I accept the tool_use. Step 5: S={J: B_J⊆Z} gives surjectivity F(U)→F(T(Z)), hence flasque in the sense of def-sc-zariski-flasque; Z=∅ uses S=∅. Step 6: the Čech complexes agree component by component and face by face, repetitions included. Step 7 applies the new node to P, G, B. New node lem-sfb-flasque-open-cover-cech-acyclic: statement-only and self-contained, the true abelian specialization of 09SZ. Checked on I=∅, |I|=1 (alternating 0/id differentials) and infinite I. It is a strictly smaller special case of the item, not a restatement. Searching the DAG for flasque Čech nodes and 09SZ/0A36 sources found only finite-ordered scheme/module versions, so there is no duplicate. Its blueprint ancestry agrees with the item's. The attachment candidate TopCat.Sheaf.exactAt_cechComplex_of_isFlasque (CechFlasque.lean:41) matches the node's statement. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.CechVanishingSurjectiveUnions",
+  "declaration": "TopCat.Sheaf.isZero_siteCech_of_surjective_unions",
+  "file": "lean/Sheaf/Topology/CechVanishingSurjectiveUnions.lean",
+  "statement": "theorem isZero_siteCech_of_surjective_unions (Y : Type u) [TopologicalSpace Y] (F : CategoryTheory.Sheaf (Opens.grothendieckTopology Y) AddCommGrpCat.{w}) {I : Type v} (V : I → Opens Y) (U : Opens Y) (hU : (⨆ i, V i) = U) (hres : ∀ (S : Set {J : Finset I // J.Nonempty}) (W : Opens Y), W = (⨆ J : S, J.val.val.inf' J.val.property V) → ∀ hWU : W ≤ U, Function.Surjective (F.obj.map (homOfLE hWU).op)) (K : SiteCechComplex V (fun i ↦ homOfLE ((le_iSup V i).trans hU.le))) (p : ℕ) (hp : 0 < p) : IsZero ((K.cohomologyFunctor p).obj F.obj)",
+  "branch": "sheaf-dag",
+  "by": "NM",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-db17f540b",
+  "group": "NM",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 0A36 clause by clause: Y, F a Mathlib Sheaf on Opens.grothendieckTopology in AddCommGrpCat.{w}, cover V : I → Opens Y with ⨆ V = U, U_J as Finset.inf' over finite nonempty J, hres = surjectivity onto every union for all S : Set including ∅ (the W ≤ U binder always holds, so it adds no assumption), Cech complex via the recorded SiteCechComplex (universal-property binder, tuples with repetitions), conclusion IsZero of cohomologyFunctor p for p > 0. Edge cases (empty I, empty S, single-member cover, infinite I) and independent universes u/v/w checked. Node diff vs live: only the lean field; lean.statement verbatim in file; single sorry; docstrings carry source place, blueprint tag and all 7 proof steps. No existing duplicate (exactAt_cechComplex_of_isFlasque needs full flasqueness, strictly stronger); item not landed elsewhere. Report has both required sections. Advisory: unused plain proof imports. No compile run since no file changed."
  }
 }
