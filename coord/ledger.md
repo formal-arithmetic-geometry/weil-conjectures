@@ -24239,3 +24239,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:41 L: merged deliver/NU/lem-sfb-finite-trivialize-invertible-upstairs (reviewer PASS; first push; new nodes: 1)
 - 01:41 L: returned deliver/R2/Sheaf.Paper.IntegralOperationsWellDefined (reviewer RETURN: (reviewer C-d7dad, head d7dad401e) Brief point 2 (no delivery-errors.md letter fits): the new non-reducible public resul)
 - 01:41 L: returned deliver/ND/lem-sfb-finite-norm-invertible-sections (reviewer RETURN: L: independent stage-2 immutable head bcbe744ef723: S2-lane delivery with no stage-2 content: snapshot has no .lean file)
+- 01:43 L: merged deliver/NP/lem-sfb-qcqs-proper-serre-heart-bound (stage 2; reviewer PASS; parallel immutable checks)
