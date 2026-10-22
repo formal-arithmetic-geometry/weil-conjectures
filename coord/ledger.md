@@ -24140,3 +24140,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:09 L: merged deliver/NJ/lem-sfb-semilinear-sylow-good-components (reviewer FIX; first push; new nodes: 4)
 - 01:10 L: merged deliver/NI/lem-pur-projection-purity-agreement (stage 2; reviewer FIX; parallel immutable checks)
 - 01:10 L: returned deliver/Q85/lem-weil-integral-twist-scalar-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-integral-twist-scalar-coherence: lem-weil-int)
+- 01:10 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
