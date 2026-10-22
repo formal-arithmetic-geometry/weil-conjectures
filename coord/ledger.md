@@ -24263,3 +24263,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:56 L: returned deliver/NC/lem-sfb-ultrametric-orthogonal-extension (reviewer RETURN: L: independent stage-2 immutable head 6504d1e1d80c: A7/A6 (H2 credit): thirteenth NC head 6504d1e1d80c of lem-sfb-ultram)
 - 01:57 L: returned deliver/N9/sk-thm-groth-ss (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-thm-groth-ss: sk-thm-groth-ss: completed in this pr)
 - 01:58 L: merged deliver/NA/lem-sfb-profinite-geometric-family-heart-cd (reviewer PASS; first push; new nodes: 2)
+- 2026-10-22T01:58:44Z L: superseded stage-1 delivery ND/lem-sfb-finite-trivialize-invertible-upstairs at c417ca0954658d567a3ee7fae9a20faff9c1fe7f; current completion retained; packet archived at refs/superseded/ND/lem-sfb-finite-trivialize-invertible-upstairs/c417ca0954658d567a3ee7fae9a20faff9c1fe7f; stale return retired.
