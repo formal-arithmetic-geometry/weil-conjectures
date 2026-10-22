@@ -24191,3 +24191,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:28 L: merged deliver/NM/lem-sfb-finite-quotient-generic-fields (stage 2; reviewer PASS; parallel immutable checks)
 - 2026-10-22T01:29:25Z L: superseded stage-1 delivery NP/cor-pur-affine-space-zero-section-purity at a47542561b4c47d19e327c35caed9923785faddc; current completion retained; packet archived at refs/superseded/NP/cor-pur-affine-space-zero-section-purity/a47542561b4c47d19e327c35caed9923785faddc; stale return retired.
 - 01:29 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
+- 01:30 L: merged deliver/NI/lem-sfb-semilinear-sylow-good-components (stage 2; reviewer PASS; parallel immutable checks)
