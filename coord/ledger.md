@@ -24377,3 +24377,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:47 L: merged deliver/NB/lem-sfb-admissible-finite-type-field-quotient (reviewer PASS; first push; new nodes: 0)
 - 02:48 L: merged deliver/ND/lem-sfb-common-field-semilinear-induction (reviewer FIX; first push; new nodes: 2)
 - 02:48 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
+- 02:50 L: returned deliver/NE/lem-sfb-equivariant-nodal-smooth-pair-resolution (reviewer RETURN: I read the item's 13 steps and the 4 new nodes in full; the maths is sound but the proof rests on route nodes the human )
