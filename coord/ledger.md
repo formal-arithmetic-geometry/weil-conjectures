@@ -24249,3 +24249,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 2026-10-22T01:47:20Z L: superseded stage-1 delivery NP/lem-sfb-qcqs-proper-serre-heart-bound at 5d763416ea58bd8486b750a2597fe4931a7be52c; current completion retained; packet archived at refs/superseded/NP/lem-sfb-qcqs-proper-serre-heart-bound/5d763416ea58bd8486b750a2597fe4931a7be52c; stale return retired.
 - 01:47 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
 - 01:47 L: merged deliver/NE/lem-sfb-finite-trivialize-invertible-upstairs (stage 2; reviewer PASS; parallel immutable checks)
+- 01:47 L: returned deliver/NO/lem-pur-diagonal-dnc-chart-normalization (reviewer RETURN: L: independent stage-2 immutable head 4724fdefcdce: H3/H5: chartDiagonalDelta_coordinate_identity is verbatim the defini)
