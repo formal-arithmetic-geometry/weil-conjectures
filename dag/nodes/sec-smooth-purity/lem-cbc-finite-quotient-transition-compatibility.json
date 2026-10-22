@@ -1,0 +1,132 @@
+{
+ "id": "lem-cbc-finite-quotient-transition-compatibility",
+ "kind": "statement",
+ "title": "Canonical finite evaluation commutes with quotient transitions",
+ "statement": "For a scheme morphism $g:X\\to Y$ and an adic coefficient datum $d$, use the prescribed canonical finite interfaces of [def-cbc-completed-reduction-finite-interfaces], [def-weil-pbc-adic-coefficient-datum], and [def-weil-pbc-completed-pullback]. For every completed-coefficient derived object $K$ and every $a\\le b$ in $\\mathbb N$ (representing positive exponents $a+1$ and $b+1$), the canonical finite evaluation at $b$ followed by restriction of the finite target quotient transition and the canonical composition of restriction equals the actual strict pulled tower transition from $b$ to $a$ followed by finite evaluation at $a$. This includes $a=b$, $a=0$, the zero complex, and arbitrary unbounded $K$. No completeness or quotient-flatness hypothesis is added.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+  "place": "Finite-reduction compatibility, the strict quotient-transition square used by adicPresentationFiniteIso_transition; Steps 4 and 7--8 of the former all-quotient coherence plan."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-completed-pullback",
+  "def-cbc-completed-reduction-finite-interfaces"
+ ],
+ "proof": [
+  {
+   "text": "The canonical ordinary finite comparisons commute with every quotient transition, including equal indices, by their normalized section formulas and the strict tower unit. Apply ordinary_finite_quotient_comparison.",
+   "uses": [
+    "lem-cbc-ordinary-finite-quotient-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On a K-flat cochain representative, use the existing normalizations of the finite evaluation comparison and finite target transition. Naturality of the universal tower counits identifies the pulled model transition. The exact restriction factorization is compatible with composition, so the ordinary quotient square gives equality after the finite model computation map. That map is invertible on K-flat representatives; cancel it.",
+   "uses": [
+    "def-cbc-completed-reduction-finite-interfaces",
+    "def-weil-pbc-adic-coefficient-datum",
+    "def-weil-pbc-completed-pullback",
+    "lem-sfb-exact-derived-natural-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The two composites are natural transformations out of the derived category. Every complex has a K-flat resolution, whose quasi-isomorphism becomes invertible. Naturality transports their equality on K-flat representatives to arbitrary complexes, and derived localization detects equality. Evaluate the resulting transformation equality at the arbitrary derived object K. No flatness of a quotient over the completed ring is assumed.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "def-weil-pbc-adic-coefficient-datum"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-ordinary-finite-quotient-comparison",
+  "def-cbc-completed-reduction-finite-interfaces",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-completed-pullback",
+  "lem-pc-kflat-resolution",
+  "lem-sfb-exact-derived-natural-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+  "place": "Finite-reduction compatibility, the strict quotient-transition square used by adicPresentationFiniteIso_transition; Steps 4 and 7--8 of the former all-quotient coherence plan."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A canonical finite evaluation comparison of a derived strict tower pullback commutes with every quotient transition, by normalization on K-flat resolutions",
+   "results": "8 hits: AdicCompletion.transitionMap_comp_eval and elementary adic completion/tensor or flat-module results.",
+   "date": "2026-10-22",
+   "verdict": "No result about the prescribed derived sheaf-module comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.natTrans_ext",
+   "results": "1 hit: Mathlib.CategoryTheory.Localization.Predicate, Localization.natTrans_ext.",
+   "date": "2026-10-22",
+   "verdict": "Used through the existing resolving-class extensionality API; it does not itself prove the normalized finite comparison square."
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerived.*(transition|naturality)|mapDerivedCategory.*(comp|NatTrans)",
+   "results": "11 hits, including mapDerivedCategoryFactors_hom_naturality and homotopy factor equations in Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor.",
+   "date": "2026-10-22",
+   "verdict": "Generic factor naturality supplies the categorical calculation; no canonical quotient compatibility theorem is present."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical finite comparison between pullback of an adic reduction tower and finite coefficient pullback commutes with quotient transitions in derived categories",
+   "results": "8 hits: SheafOfModules.pullbackComp (Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous), ordinary category pullback comparisons, and mapDerivedCategoryFactors commutes with shift (Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor).",
+   "date": "2026-10-22",
+   "verdict": "No match: ordinary pullback composition and compatibility with shifts do not identify the prescribed normalized finite quotient arrows."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DerivedFiniteQuotientCoherence",
+  "date": "2026-10-22",
+  "group": "J4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-cbc-adic-pullback-presentation-transport",
+   "place": "The finite quotient transition identity used by adicPresentationFiniteIso_transition; the consumer needs this square and none of the additional five normalization clauses of the former conjunction."
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteQuotientTransitionCompatibility",
+  "file": "lean/Sheaf/Paper/FiniteQuotientTransitionCompatibility.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finite_quotient_transition_compatibility",
+  "statement": "theorem finite_quotient_transition_compatibility\n    (K : DerivedCategory (pbcModules Y (pbcAdicCompletion Y d)))\n    (a b : ℕ) (h : a ≤ b) :\n    (completedReductionFiniteEvaluation g d b).hom.app K ≫\n        (pbcDerivedRestrict (completedReductionProjection X d b)).map\n          ((completedReductionTargetTransition g d a b h).app K) ≫\n        (pbcDerivedRestrictComp (completedReductionProjection X d b)\n          (reductionCoefficientMap X d b a h) (completedReductionProjection X d a)\n          (completedReductionProjection_comp X d b a h)).hom.app\n            ((completedReductionFiniteTarget g d a).obj K) =\n      (pbcTowerTransition X (pbcAdicCompletion X d) b a h).app\n          ((completedTowerPullback g d).obj ((completedReductionTower Y d).obj K)) ≫\n        (completedReductionFiniteEvaluation g d a).hom.app K",
+  "branch": "sheaf-dag",
+  "by": "J4",
+  "date": "2026-10-22"
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-98704",
+  "group": "J4",
+  "result": "fix",
+  "landing": "20261022T023437-L-822290",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-98704",
+  "group": "J4",
+  "result": "fix",
+  "landing": "20261022T023437-L-822290",
+  "kind": "interface",
+  "note": "independent cc review: finite_quotient_transition_compatibility = conjunct .1 of withdrawn derived_finite_quotient_coherence, the only part used by adicPresentationFiniteIso_transition; consumer diff vs live = 2 lines; new modules and consumer compiled (6.1/34.7/42.3 s); sorryAx traced only to the open upstream ConstantCompletion.flat_and_quotients"
+ }
+}

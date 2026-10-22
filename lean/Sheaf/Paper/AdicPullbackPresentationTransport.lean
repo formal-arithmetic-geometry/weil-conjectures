@@ -16,7 +16,7 @@ public import Sheaf.Algebra.Category.ModuleCat.Sheaf.SiteTensorFunctoriality
 public import Mathlib.CategoryTheory.Adjunction.Mates
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
-import Sheaf.Paper.DerivedFiniteQuotientCoherence
+import Sheaf.Paper.FiniteQuotientTransitionCompatibility
 import all Sheaf.Algebra.Homology.DiagramKFlatReplacements
 import all Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
@@ -1192,7 +1192,7 @@ theorem adicPresentationFiniteIso_transition
   let R := (completedReductionTower Y d).obj K
   have hn := (pbcTowerTransition X (pbcAdicCompletion X d) b a h).naturality
     (t.hom.app R)
-  have hc := (derived_finite_quotient_coherence g d).1 K a b h
+  have hc := finite_quotient_transition_compatibility g d K a b h
   dsimp only [adicPresentationFiniteIso, Iso.trans_hom, NatTrans.comp_app,
     Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom,
     Functor.whiskerRight_app, Functor.whiskerLeft_app]

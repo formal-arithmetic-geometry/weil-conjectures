@@ -164,7 +164,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
-  "place": "Finite-reduction compatibility in the completed extension-by-zero proof; simultaneous constant-coefficient resolution argument, using Stacks Tags 093M, 06YS, 07A2, 0G7E, 03EL, 06YY and 0D6D."
+  "place": "Finite-reduction compatibility in the completed extension-by-zero proof; simultaneous constant-coefficient resolution argument, using Stacks Tags 093M, 06YS, 07A2, 0G7E, 03EL, 06YY and 0D6D. Withdrawal by J4, 2026-10-22: the sole Lean consumer needs only the finite transition square. It now uses lem-cbc-finite-quotient-transition-compatibility directly. The extended six-conjunct lemma and its two ordinary normalization definitions have no remaining Lean or proof-dependency consumer. Its mathematical statement and proof plan remain recorded here, but no Lean realization is retained."
  },
  "mathlib_searches": [
   {
@@ -349,22 +349,6 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q34-a8b68be9b (reviewer sub-agent of L); spot-checked: I read the item, all 20 cited statements, the ancestor proof (main-20261015 lem-cbc-completed-extension-zero-comparison) and Stacks 093M. The item is not on the drop list and its statement and stmt_deps are byte-identical to side-live; there are no new nodes and no SGA source. Step 1 builds one strict R-tower resolution V of (S_n) from the diagram K-flat node. Step 2 makes H_n=Tot(P⊗_R V_n) K-flat over B by the change-of-rings and total-tensor nodes. Step 3 shows r:H→F(P) is a quasi-isomorphism, using flat restriction R→B and the common-quotient node, without assuming S_n flat over B. Step 4: I recomputed that β_n is an isomorphism (g^{-1}S_n⊗_{g^{-1}B}B'=B'/I^n=S_n' via the c_g projection square) and that it commutes with transitions by finite constant-map naturality. Steps 5–6: α_n=1⊗g_R^*v_n is a quasi-isomorphism by the pullback-tensor coherence, G(P) being K-flat over R' and g_R^* exact; this is the Tor-vanishing, which I checked independently via flatness over constant A. Step 7: the evaluation normalization gives ev_n χ=ε L(r_n)^{-1}v_n; this matches the scalar-insertion representative that the constant-completion statement gives. Step 8 is formal naturality of derived transitions. Step 9: the successive-quotient normalization gives d_B, the unit identity and the cocycle. Edge cases checked: K=0, I=A, T' empty, b=a, A=Z with I=(ℓ). I accept the 14 tool_uses as generic. Advisory: the identification of (P_n)_T with the constant sheaf is an inherited DAG convention; a parallel Q05 delivery (f39e58ab) of the same item exists, so whichever lands second is superseded."
  },
  "lean_audit": {},
- "lean": {
-  "module": "Sheaf.Paper.DerivedFiniteQuotientCoherence",
-  "declaration": "AlgebraicGeometry.Scheme.derived_finite_quotient_coherence",
-  "declarations": [
-   "AlgebraicGeometry.Scheme.cbcFiniteOrdinaryTarget",
-   "AlgebraicGeometry.Scheme.cbcFiniteOrdinaryNormalization",
-   "AlgebraicGeometry.Scheme.derived_finite_quotient_coherence"
-  ],
-  "file": "lean/Sheaf/Paper/DerivedFiniteQuotientCoherence.lean",
-  "statement": "theorem derived_finite_quotient_coherence : (∀ (K : DerivedCategory (pbcModules Y (pbcAdicCompletion Y d))) (a b : ℕ) (h : a ≤ b), (completedReductionFiniteEvaluation g d b).hom.app K ≫ (pbcDerivedRestrict (completedReductionProjection X d b)).map ((completedReductionTargetTransition g d a b h).app K) ≫ (pbcDerivedRestrictComp (completedReductionProjection X d b) (reductionCoefficientMap X d b a h) (completedReductionProjection X d a) (completedReductionProjection_comp X d b a h)).hom.app ((completedReductionFiniteTarget g d a).obj K) = (pbcTowerTransition X (pbcAdicCompletion X d) b a h).app ((completedTowerPullback g d).obj ((completedReductionTower Y d).obj K)) ≫ (completedReductionFiniteEvaluation g d a).hom.app K) ∧ (∀ (K : DerivedCategory (pbcModules Y (pbcAdicCompletion Y d))) (a b : ℕ) (h : a ≤ b), IsIso (completedReductionTargetNormalization g d K a b h)) ∧ (∀ (a b : ℕ) (h : a ≤ b) (M : pbcModules Y (pbcAdicCompletion Y d)) (V : Y.ProEt) (U : X.ProEt) (f : U ⟶ (proEtaleBaseChange g).obj V) (s : (reductionCoefficient X d a).obj.obj (op U)) (r : (reductionCoefficient X d b).obj.obj (op U)) (z : (reductionCoefficient Y d b).obj.obj (op V)) (x : M.val.obj (op V)), ((cbcFiniteOrdinaryNormalization g d a b h).app M).val.app (op U) (pbcTensorSection (reductionCoefficientMap X d b a h) ((cbcFiniteOrdinaryTarget g d b).obj M) (op U) s (completedReductionFiniteGenerator g d b M V U f r z x)) = completedReductionFiniteGenerator g d a M V U f (((reductionCoefficientMap X d b a h).hom.app (op U) r) * s) ((reductionCoefficientMap Y d b a h).hom.app (op V) z) x) ∧ (∀ (a b : ℕ) (h : a ≤ b) (P : CochainComplex (pbcModules Y (pbcAdicCompletion Y d)) ℤ), CochainComplex.IsKFlatIndependentCoefficients (R := pbcAdicCompletion Y d) P → (reductionDerivedChange X (reductionCoefficientMap X d b a h)).map (completedReductionFiniteModelMap g d b P) ≫ pbcComplexCounit (reductionCoefficientMap X d b a h) (((cbcFiniteOrdinaryTarget g d b).mapHomologicalComplex (.up ℤ)).obj P) ≫ DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex (cbcFiniteOrdinaryNormalization g d a b h) (.up ℤ)).app P) = completedReductionTargetNormalization g d (DerivedCategory.Q.obj P) a b h ≫ completedReductionFiniteModelMap g d a P) ∧ (∀ (K : DerivedCategory (pbcModules Y (pbcAdicCompletion Y d))) (a b c : ℕ) (hab : a ≤ b) (hbc : b ≤ c), (reductionDerivedChange X (reductionCoefficientMap X d b a hab)).map (completedReductionTargetNormalization g d K b c hbc) ≫ completedReductionTargetNormalization g d K a b hab = (completedReductionQuotientAssoc d X a b c hab hbc ((completedReductionFiniteTarget g d c).obj K)).hom ≫ completedReductionTargetNormalization g d K a c (hab.trans hbc)) ∧ ∀ (K : DerivedCategory (pbcModules Y (pbcAdicCompletion Y d))) (a : ℕ), completedReductionTargetNormalization g d K a a (le_refl a) = completedReductionUnit d X a ((completedReductionFiniteTarget g d a).obj K)",
-  "branch": "newtargets-dag",
-  "by": "NN",
-  "date": "2026-10-21",
-  "existing": false,
-  "note": "Uses the published canonical finite evaluation and target quotient maps. Includes all quotient squares, the explicit balanced section formula and its derived computation equation, invertibility, equal-index normalization and the three-index cocycle for arbitrary K. The existing-definition node def-cbc-completed-reduction-finite-interfaces records the general adic canonical-map interface; the completedPullback_reduction theorem is not used. No completeness hypothesis or statement correction."
- },
  "reviewed_lean": {
   "date": "2026-10-21",
   "by": "L",
@@ -372,5 +356,15 @@
   "group": "NN",
   "result": "pass",
   "note": "Re-delivery after H2 RETURN of e76276c9418d. Lean file byte-identical (sha256 60b1e961…), whose six conjuncts were checked clause by clause in the earlier review: square for all K and b>=a>=1 with the actual F_0 maps and restriction-composition identity, normalization IsIso, (x⊗r)⊗s↦x⊗q(r)s section formula with K-flat derived link, cocycle, unit. Item vs live: only lean plus the added stmt_dep def-cbc-completed-reduction-finite-interfaces; the theorem node is no longer cited. The new node is existing:true on Sheaf.Paper.CompletedPullbackReduction with the 10 requested declarations; all exist in live before completedPullback_reduction (l.531) and none uses it; the chosen maps are ∃!-pinned .choose of module-local helpers; lean.statement verbatim (l.118-120); the TeX matches each construction; H12 fields OK; general adic datum, not a duplicate of the O_E-only def-a1 node. nt_compile --json item file clean 23-26 s; #check probe of all 10 declarations clean. Advisory: the new node cites theorem node lem-weil-pbc-constant-completion-equivalence (mathematical only, the set the returning reviewer asked for, def-a1 precedent); BoundedConstructibleTower pbc* helpers are inherited infrastructure."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-98704",
+  "group": "J4",
+  "result": "fix",
+  "landing": "20261022T023437-L-822290",
+  "kind": "interface",
+  "note": "independent cc review: finite_quotient_transition_compatibility = conjunct .1 of withdrawn derived_finite_quotient_coherence, the only part used by adicPresentationFiniteIso_transition; consumer diff vs live = 2 lines; new modules and consumer compiled (6.1/34.7/42.3 s); sorryAx traced only to the open upstream ConstantCompletion.flat_and_quotients"
  }
 }

@@ -77,9 +77,9 @@
    }
   },
   {
-   "text": "Uniqueness of the counit-preserving comparisons implies t₂ ẽ=t₁ and the corresponding ordinary identity. Substitute these in the definitions to obtain the constant and finite presentation-transport squares. Evaluation uniqueness gives its transport square. For every quotient arrow, compose the canonical finite-transition identity of derived_finite_quotient_coherence with evaluation of t₁; naturality of the tower transition moves t₁ across that arrow.",
+   "text": "Uniqueness of the counit-preserving comparisons implies t₂ ẽ=t₁ and the corresponding ordinary identity. Substitute these in the definitions to obtain the constant and finite presentation-transport squares. Evaluation uniqueness gives its transport square. For every quotient arrow, compose the canonical finite-transition identity of finite_quotient_transition_compatibility with evaluation of t₁; naturality of the tower transition moves t₁ across that arrow.",
    "uses": [
-    "lem-cbc-derived-finite-quotient-coherence",
+    "lem-cbc-finite-quotient-transition-compatibility",
     "lemma-weil-pbc-completed-pullback-reduction",
     "def-weil-pbc-completed-pullback"
    ],
@@ -142,7 +142,7 @@
   "lem-pc-kflat-resolution",
   "lem-weil-pbc-diagram-kflat-replacements",
   "lem-weil-pbc-reduction-pullback-derived-tower",
-  "lem-cbc-derived-finite-quotient-coherence",
+  "lem-cbc-finite-quotient-transition-compatibility",
   "lemma-weil-pbc-completed-pullback-reduction",
   "prop-weil-pbc-rlim-functoriality",
   "lem-pur-site-restriction-module-adjunction-exact",
@@ -156,7 +156,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
-  "place": "W7, 2026-10-22: four remaining Lean holes closed using canonical constant normalization, fully faithful descent of evaluation on functorially resolved towers, canonical finite-transition coherence, and abelian-sheaf locality of the open comparison. Two representative-normalization definitions are refactored through the same generic predicate, preserving their equations definitionally; all existing signatures and public imports stay unchanged."
+  "place": "W7, 2026-10-22: four remaining Lean holes closed using canonical constant normalization, fully faithful descent of evaluation on functorially resolved towers, canonical finite-transition coherence, and abelian-sheaf locality of the open comparison. Two representative-normalization definitions are refactored through the same generic predicate, preserving their equations definitionally; all existing signatures and public imports stay unchanged. J4, 2026-10-22: the finite transition square uses the directly proved finite_quotient_transition_compatibility, with no appeal to the unused extended normalization assertions."
  },
  "mathlib_searches": [
   {
@@ -373,14 +373,14 @@
   "fixed_by": "NT-stage2-Codex-e27840fb7"
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "W7",
-  "result": "pass",
-  "landing": "20261021T214915-L-1888546",
+  "reviewer": "C-98704",
+  "group": "J4",
+  "result": "fix",
+  "landing": "20261022T023437-L-822290",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: finite_quotient_transition_compatibility = conjunct .1 of withdrawn derived_finite_quotient_coherence, the only part used by adicPresentationFiniteIso_transition; consumer diff vs live = 2 lines; new modules and consumer compiled (6.1/34.7/42.3 s); sorryAx traced only to the open upstream ConstantCompletion.flat_and_quotients"
  },
  "lean_audit": {}
 }

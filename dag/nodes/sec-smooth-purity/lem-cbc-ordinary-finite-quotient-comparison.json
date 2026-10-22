@@ -1,0 +1,130 @@
+{
+ "id": "lem-cbc-ordinary-finite-quotient-comparison",
+ "kind": "statement",
+ "title": "Ordinary finite comparison commutes with quotient transitions",
+ "statement": "For the adic coefficient datum and the fixed ordinary finite interfaces of [def-cbc-completed-reduction-finite-interfaces], let E_n(M) be completedReductionOrdinaryComparison at M and let tau_ba be completedReductionOrdinaryTransition. The actual strict tower arrow from b to a, followed by E_a(M), equals E_b(M), followed by restriction of tau_ba and the canonical composition of scalar restrictions. This holds for every completed-coefficient module M and every a <= b, including a=b.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+  "place": "Finite-reduction compatibility invoked for g_U; strict compatibility of ordinary finite reductions, expanded in derived_finite_quotient_coherence docstring Step 4."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-cbc-completed-reduction-finite-interfaces"
+ ],
+ "proof": [
+  {
+   "text": "Transport the sectionwise surjectivity of the completed constant-coefficient projection through the completed and finite coefficient comparisons. The sheaf quotient unit is then an epimorphism by the ordinary quotient-unit lemma.",
+   "uses": [
+    "lem-weil-pbc-completed-constant-algebra-flat-quotients",
+    "lem-weil-pbc-ordinary-common-quotient-tower",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the canonical inverse-image adjunction with its normalized unit, composed with scalar extension. Its Hom equivalence evaluates a map on the completed tensor generator with scalar 1 and the inverse image of a section.",
+   "uses": [
+    "new-lem-weil-pbc-proetale-module-canonical-unit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the injective Hom equivalence to the required square and cancel the epimorphic quotient unit. Naturality of the strict tower unit identifies the two quotient-unit composites. On sections the normalized ordinary comparison and quotient transition each send the (1,1,m) generator to the corresponding finite generator. Restriction composition is identity on sections. These three normalized formulas prove the equality.",
+   "uses": [
+    "def-cbc-completed-reduction-finite-interfaces",
+    "def-weil-pbc-adic-coefficient-datum"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-completed-constant-algebra-flat-quotients",
+  "lem-weil-pbc-ordinary-common-quotient-tower",
+  "new-lem-weil-pbc-proetale-module-canonical-unit",
+  "def-cbc-completed-reduction-finite-interfaces",
+  "def-weil-pbc-adic-coefficient-datum",
+  "lem-weil-pbc-constant-completion-equivalence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+  "place": "Finite-reduction compatibility invoked for g_U. Ordinary portion of the argument in derived_finite_quotient_coherence docstring Step 4, proved separately from derived descent and coherence."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Sheaf module pullback commutes with scalar extension along a commuting square of coefficient rings",
+   "results": "8 hits: SheafOfModules.pullback_assoc, pullbackComp, pullbackObjFreeIso, pullbackObjFreeIso_hom_naturality and associated naturality formulas; none compares the fixed finite quotient interfaces.",
+   "date": "2026-10-21",
+   "verdict": "No exact match; general pullback composition does not compute the normalized quotient arrows."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointCompIso",
+   "results": "8 hits, including leftAdjointCompIso, hom, inv_app, hom_app, comp_id, id_comp, assoc and conjugateEquiv formulas.",
+   "date": "2026-10-21",
+   "verdict": "Useful categorical adjoint comparison, but no normalized sheaf coefficient comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "changeOfRings.*(comp|pullback)|pullback.*changeOfRings",
+   "results": "0 hits",
+   "date": "2026-10-21",
+   "verdict": "No exact comparison for these fixed functors."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ordinary sheaf module pullback and scalar extension commute with quotient transitions and canonical inverse image comparison",
+   "results": "8 hits: SheafOfModules.pullback (Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous), pullbackObjFreeIso and free-generator naturality (Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree), presheaf pullback, and Scheme.Modules.pullback.",
+   "date": "2026-10-22",
+   "verdict": "No match: these construct ordinary module pullback and compute free generators, without the adic projection and quotient transition normalization required here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DerivedFiniteQuotientCoherence",
+  "date": "2026-10-21",
+  "group": "J4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-cbc-finite-quotient-transition-compatibility",
+   "place": "The ordinary quotient square used before K-flat descent in finite_quotient_transition_compatibility."
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteQuotientOrdinaryComparison",
+  "file": "lean/Sheaf/Paper/FiniteQuotientOrdinaryComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.ordinary_finite_quotient_comparison",
+  "statement": "theorem ordinary_finite_quotient_comparison (M : pbcModules Y (pbcAdicCompletion Y d)) (a b : ℕ) (h : a ≤ b) : (completedReductionOrdinaryComparison g d b).hom.app M ≫ (pbcRestrict (completedReductionProjection X d b)).map ((completedReductionOrdinaryTransition g d a b h).app M) ≫ (pbcRestrictComp (completedReductionProjection X d b) (reductionCoefficientMap X d b a h) (completedReductionProjection X d a) (completedReductionProjection_comp X d b a h)).hom.app ((completedReductionFiniteModules g d a).obj ((reductionChange Y (completedReductionProjection Y d a)).obj M)) = (((completedTowerModulePullback g d).obj ((completedReductionModuleTowerFunctor Y d).obj M)).map (homOfLE h).op) ≫ (completedReductionOrdinaryComparison g d a).hom.app M",
+  "branch": "sheaf-dag",
+  "by": "J4",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-98704",
+  "group": "J4",
+  "result": "fix",
+  "landing": "20261022T023437-L-822290",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-98704",
+  "group": "J4",
+  "result": "fix",
+  "landing": "20261022T023437-L-822290",
+  "kind": "interface",
+  "note": "independent cc review: finite_quotient_transition_compatibility = conjunct .1 of withdrawn derived_finite_quotient_coherence, the only part used by adicPresentationFiniteIso_transition; consumer diff vs live = 2 lines; new modules and consumer compiled (6.1/34.7/42.3 s); sorryAx traced only to the open upstream ConstantCompletion.flat_and_quotients"
+ }
+}
