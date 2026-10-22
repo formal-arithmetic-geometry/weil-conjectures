@@ -1,0 +1,140 @@
+{
+ "id": "lem-pur-separable-field-tensor-sheaf",
+ "kind": "statement",
+ "title": "The separability retraction on sheaf tensor products",
+ "statement": "Let $F\\to B$ be a field extension and let $J$ be a site with sheafification. Let $\\underline F,\\underline B$ be the constant ring sheaves and let $U:\\operatorname{Mod}(\\underline B)\\to\\operatorname{Mod}(\\underline F)$ be restriction of scalars. Suppose $e\\in B\\otimes_F B$ satisfies $\\mu(e)=1$ and $(b\\otimes1-1\\otimes b)e=0$ for every $b\\in B$. The bifunctor $T(M,N)=UM\\otimes_{\\underline F}UN$ admits a natural ring action $a:B\\otimes_F B\\to\\operatorname{End}(T)$, a natural quotient $q:T\\to U(M\\otimes_{\\underline B}N)$ and a natural section $s$ with $s;q=1$ and $q;s=a(e)$. On pure sheaf tensor sections, $a(b\\otimes c)$ sends $m\\otimes n$ to $bm\\otimes cn$, and $q$ sends $m\\otimes_F n$ to $m\\otimes_B n$. The statement concerns module sheaves only, without complexes, derived categories, finiteness or resolutions.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Section 03EK, tensor products and the bilinear universal property after Tag 0GMW; applied to the diagonal idempotent of algebra.tex, Tag 0C2X. Original finite-field derived summand proof, step 3."
+ },
+ "stmt_deps": [
+  "def-pur-finite-field-derived-tensor-comparison"
+ ],
+ "proof": [
+  {
+   "text": "The commuting coefficient actions define the tensor-algebra action on sheaf tensor products. Sheafify the canonical balanced quotient, preserving its pure-section formula.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "lem-pc-sites-module-sheafification-bilinear-extension",
+    "lem-pc-sites-module-sheafification-interface"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Write e as a finite sum a_i tensor b_i. Define the section on a balanced generator m tensor_B n by sum_i a_i m tensor_F b_i n. The annihilator identities give B-balancing. Extend through constant-presheaf module sheafification; uniqueness handles locally constant sections and proves naturality.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "lem-pc-sites-module-sheafification-bilinear-extension",
+    "lem-pc-sites-module-sheafification-interface"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate the two composites on pure tensors. The balanced quotient of the e-action is multiplication by mu(e)=1, whereas section after quotient is the e-action itself. Tensor induction, followed by uniqueness of bilinear sheafification extension, proves both identities on all sections. The same uniqueness proves naturality in each module; all constructions also apply to zero modules and the empty site.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "lem-pc-sites-module-sheafification-bilinear-extension",
+    "lem-pc-sites-module-sheafification-interface"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "lem-pc-sites-module-sheafification-bilinear-extension",
+  "lem-pc-sites-module-sheafification-interface"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Section 03EK, tensor products and the bilinear universal property after Tag 0GMW; applied to the diagonal idempotent of algebra.tex, Tag 0C2X. Original finite-field derived summand proof, step 3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A separability element gives a natural split balanced quotient for tensor products of sheaves over constant fields",
+   "results": "{\"t\": \"2026-10-20T13:42:05Z\", \"tool\": \"leanfinder\", \"query\": \"A separability element gives a natural split balanced quotient for tensor products of sheaves over constant fields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"sectionOfRetractionKerToTensorAux\", \"retractionKerToTensorEquivSection\", \"sectionOfRetractionKerToTensor\", \"sectionOfRetractionKerToTensorAux_algebraMap\", \"sectionOfRetractionKerToTensor_algebraMap\", \"Algebra.FormallyUnramified.iff_exists_tensorProduct\", \"retractionOfSectionOfKerSqZero_tmul_D\", \"Algebra.Extension.tensorH1Cotangent\"], \"digest\": \"210e1ea8cc0dfe23\"}",
+   "date": "2026-10-20",
+   "verdict": "No matching natural split quotient of sheaf tensor products. The unramified criterion supplies an algebraic separability element; tensor lifts and bilinear sheafification still construct the claimed maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TensorProduct\", \"separable\"",
+   "results": "{\"t\": \"2026-10-20T13:42:52Z\", \"tool\": \"loogle\", \"query\": \"\\\"TensorProduct\\\", \\\"separable\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"IsPurelyInseparable.exists_pow_mem_range_tensorProduct\", \"IsPurelyInseparable.exists_pow_pow_mem_range_tensorProduct_of_expChar\", \"PrimeSpectrum.isHomeomorph_comap_tensorProductMap_of_isPurelyInseparable\"], \"digest\": \"51fe565bc904fa06\"}",
+   "date": "2026-10-20",
+   "verdict": "No matching natural split quotient of sheaf tensor products. The unramified criterion supplies an algebraic separability element; tensor lifts and bilinear sheafification still construct the claimed maps."
+  },
+  {
+   "tool": "grep",
+   "query": "separab.*tensor|tensor.*retract|sheafificationTensor",
+   "results": "{\"t\": \"2026-10-20T13:42:52Z\", \"tool\": \"grep\", \"query\": \"separab.*tensor|tensor.*retract|sheafificationTensor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Spectrum/Prime/Homeomorph.lean\", \"Mathlib/FieldTheory/PurelyInseparable/Basic.lean\", \"Mathlib/FieldTheory/PurelyInseparable/Basic.lean\"], \"digest\": \"c14b2367ac1e6049\"}",
+   "date": "2026-10-20",
+   "verdict": "No matching natural split quotient of sheaf tensor products. The unramified criterion supplies an algebraic separability element; tensor lifts and bilinear sheafification still construct the claimed maps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A separability element gives a natural split retraction from the tensor product over a smaller constant field to the tensor product over a larger field for sheaves of modules",
+   "results": "{\"t\": \"2026-10-20T17:23:04Z\", \"tool\": \"leansearch\", \"query\": \"A separability element gives a natural split retraction from the tensor product over a smaller constant field to the tensor product over a larger field for sheaves of modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsSeparable\", \"IsSeparable.tower_top\", \"separableClosure.isSeparable\", \"IsSeparable.tower_bot\", \"separableClosure\", \"CategoryTheory.retraction\", \"Algebra.IsSeparable.mk\", \"CategoryTheory.Retract.splitMono\"], \"digest\": \"daac678fe0e3a977\"}",
+   "date": "2026-10-20",
+   "verdict": "No match. Results concern field separability or abstract categorical retracts, not the balanced quotient of sheaf tensor bifunctors with prescribed coefficient actions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteFieldDerivedTensorSummand",
+  "date": "2026-10-20",
+  "group": "R1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-ordinary-kunneth-finite-ring",
+   "place": "Proof, finite-field paragraphs: the tensor square of a finite field extension splits by its diagonal idempotent, and this splitting is applied to sheaves of modules before passing to complexes.",
+   "via": [
+    "lem-pur-finite-field-derived-tensor-summand"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SeparableFieldTensorSheaf",
+  "file": "lean/Sheaf/Paper/SeparableFieldTensorSheaf.lean",
+  "declaration": "FiniteFieldDerivedTensor.exists_separableFieldTensorSheaf",
+  "statement": "theorem exists_separableFieldTensorSheaf (e : B ⊗[F] B)\n    (hμ : Algebra.TensorProduct.lmul' F e = 1)\n    (he : ∀ b : B, (b ⊗ₜ[F] (1 : B) - (1 : B) ⊗ₜ[F] b) * e = 0) :\n    ∃ (a : (B ⊗[F] B) →+* End (sheafSource J F B))\n      (q : sheafSource J F B ⟶ sheafTarget J F B)\n      (s : sheafTarget J F B ⟶ sheafSource J F B),\n      s ≫ q = 𝟙 _ ∧ q ≫ s = a e ∧\n      IsSheafTensorAction J F B a ∧\n      IsSheafBalancedMap J F B q",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-20",
+  "declarations": [
+   "FiniteFieldDerivedTensor.sheafSource",
+   "FiniteFieldDerivedTensor.sheafTarget",
+   "FiniteFieldDerivedTensor.IsSheafTensorAction",
+   "FiniteFieldDerivedTensor.IsSheafBalancedMap",
+   "FiniteFieldDerivedTensor.exists_separableFieldTensorSheaf"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-0b040",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261022T002433-L-1930318",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-0b040",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261022T002433-L-1930318",
+  "kind": "interface",
+  "note": "independent cc review: item theorem statement byte-identical to live; interface moved with unchanged signatures, total/generator bodies via Classical.choose model pinned by proved model_eq/totalFunctor_eq_mathlib (change record); delta vs passed head a536bb87 diffed; sorry'd sheaf retraction checked true; direct importer FiniteAlgebraExternalTensorFiltration compiled clean in sandbox; item axioms propext/Classical.choice/Quot.sound + sorryAx from the one sorry"
+ }
+}

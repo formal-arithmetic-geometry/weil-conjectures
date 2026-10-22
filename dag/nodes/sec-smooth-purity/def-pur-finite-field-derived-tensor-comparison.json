@@ -1,0 +1,132 @@
+{
+ "id": "def-pur-finite-field-derived-tensor-comparison",
+ "kind": "definition",
+ "title": "Canonical interfaces for the finite-field derived tensor comparison",
+ "statement": "For a small site, constant-ring module sheaves and unbounded derived categories, define total tensor, pure generators, coefficient restriction, flat-term K-flat representatives, tensor presentations, canonical comparison isomorphisms, and HasDiagonalComparison. This is exactly the interface formerly housed in lem-pur-finite-field-derived-tensor-summand; all original names and signatures are unchanged. Total tensor factors through a shared generic constructor, definitionally equal to the original Mathlib functor, as checked by a private rfl theorem.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03EK, 06YN and 06YU; unchanged canonical-comparison definitions."
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-size-convention",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "def-pc-sheaf-restrict-scalars"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03EK and 06YU: the original comparison definitions. The ordinary tensor wrapper is definitionally the original curried tensor, checked by rfl. The canonical totalization model contains the functor and all bidegree inclusions. Its existence theorem is proved by the concrete Mathlib model, and model_eq fixes the entire chosen model by equality to that model. totalFunctor_eq_mathlib identifies the total functor with the original construction. No data is chosen from an unproved existence assertion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A separability element splits the canonical balanced tensor quotient for sheaves of modules and unbounded total tensor complexes",
+   "results": "{\"t\": \"2026-10-20T01:57:19Z\", \"tool\": \"leanfinder\", \"query\": \"A separability element splits the canonical balanced tensor quotient for sheaves of modules and unbounded total tensor complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"rTensor.inverse_of_rightInverse\", \"lTensor.inverse\", \"lTensor.toFun\", \"lTensor.inverse_of_rightInverse\", \"PresheafOfModules.Monoidal.tensorObj\", \"rTensor.inverse\", \"rTensor.toFun\", \"rTensor.linearEquiv_of_rightInverse\"], \"digest\": \"ecf4e961acb766be\"}",
+   "date": "2026-10-20",
+   "verdict": "No matching sheaf-chain or representative-descent theorem; candidates concern ordinary algebra or dense subsites. Sources were inspected before constructing the present lemma."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tensor\", \"separable\"",
+   "results": "{\"t\": \"2026-10-20T01:57:19Z\", \"tool\": \"loogle\", \"query\": \"\\\"tensor\\\", \\\"separable\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"IsPurelyInseparable.exists_pow_mem_range_tensorProduct\", \"IsPurelyInseparable.exists_pow_pow_mem_range_tensorProduct_of_expChar\", \"PrimeSpectrum.isHomeomorph_comap_tensorProductMap_of_isPurelyInseparable\"], \"digest\": \"51fe565bc904fa06\"}",
+   "date": "2026-10-20",
+   "verdict": "No matching sheaf-chain or representative-descent theorem; candidates concern ordinary algebra or dense subsites. Sources were inspected before constructing the present lemma."
+  },
+  {
+   "tool": "grep",
+   "query": "whiskerLeft.*(bijective|full)|IsFlat.*constantField|separability.*tensor",
+   "results": "{\"t\": \"2026-10-20T01:54:34Z\", \"tool\": \"grep\", \"query\": \"whiskerLeft.*(bijective|full)|IsFlat.*constantField|separability.*tensor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean\", \"Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean\", \"Mathlib/CategoryTheory/Sites/Equivalence.lean\", \"Mathlib/CategoryTheory/Sites/Equivalence.lean\", \"Mathlib/CategoryTheory/Sites/DenseSubsite/Basic.lean\"], \"digest\": \"6ad060f675266202\"}",
+   "date": "2026-10-20",
+   "verdict": "No matching sheaf-chain or representative-descent theorem; candidates concern ordinary algebra or dense subsites. Sources were inspected before constructing the present lemma."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical total tensor functor on unbounded cochain complexes of sheaves of modules over constant rings, restriction of scalars, and K-flat representative comparison",
+   "results": "{\"t\": \"2026-10-20T17:23:05Z\", \"tool\": \"leansearch\", \"query\": \"Canonical total tensor functor on unbounded cochain complexes of sheaves of modules over constant rings, restriction of scalars, and K-flat representative comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.RestrictScalars.obj'\", \"ModuleCat.restrictScalars\", \"SheafOfModules.restrictScalars\", \"PresheafOfModules.restrictScalars\", \"PresheafOfModules.restrictScalarsObj\", \"RingCat.moduleCatRestrictScalarsPseudofunctor\", \"PresheafOfModules.instAdditiveRestrictScalars\", \"PresheafOfModules.instFaithfulRestrictScalars\"], \"digest\": \"972db22ecebd3aaf\"}",
+   "date": "2026-10-20",
+   "verdict": "Partial matches include SheafOfModules.restrictScalars and the ordinary module restriction functor, already used in the interface. No existing declaration packages these derived tensor comparisons and their generator normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteFieldDerivedTensorSummand",
+  "date": "2026-10-20",
+  "group": "R1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-ordinary-kunneth-finite-ring",
+   "place": "Proof, first two paragraphs: finite-field tensor diagonal summand. Tags 03EK, 06YN and 06YU; unchanged canonical-comparison definitions.",
+   "via": [
+    "lem-pur-finite-field-derived-tensor-summand"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteFieldDerivedTensorComparison",
+  "file": "lean/Sheaf/Paper/FiniteFieldDerivedTensorComparison.lean",
+  "declaration": "FiniteFieldDerivedTensor.HasDiagonalComparison",
+  "statement": "def HasDiagonalComparison (TF : Presentation J F) (TB : Presentation J B) (e : B ⊗[F] B) : Prop",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-20",
+  "declarations": [
+   "CochainTensorBifunctor.totalFunctor",
+   "FiniteFieldDerivedTensor.coefficients",
+   "FiniteFieldDerivedTensor.rings",
+   "FiniteFieldDerivedTensor.Modules",
+   "FiniteFieldDerivedTensor.Complexes",
+   "FiniteFieldDerivedTensor.total",
+   "FiniteFieldDerivedTensor.constantSection",
+   "FiniteFieldDerivedTensor.tensorSection",
+   "FiniteFieldDerivedTensor.generator",
+   "FiniteFieldDerivedTensor.coefficientMap",
+   "FiniteFieldDerivedTensor.restrictComplex",
+   "FiniteFieldDerivedTensor.representatives",
+   "FiniteFieldDerivedTensor.Derived",
+   "FiniteFieldDerivedTensor.Presentation",
+   "FiniteFieldDerivedTensor.source",
+   "FiniteFieldDerivedTensor.target",
+   "FiniteFieldDerivedTensor.sourceComparison",
+   "FiniteFieldDerivedTensor.targetComparison",
+   "FiniteFieldDerivedTensor.ChainComparison",
+   "FiniteFieldDerivedTensor.HasDiagonalComparison",
+   "FiniteFieldDerivedTensor.tensorFunctor",
+   "FiniteFieldDerivedTensor.tensorFunctor_preservesZeroMorphisms",
+   "FiniteFieldDerivedTensor.tensorFunctor_obj_preservesZeroMorphisms"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-0b040",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261022T002433-L-1930318",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-0b040",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261022T002433-L-1930318",
+  "kind": "interface",
+  "note": "independent cc review: item theorem statement byte-identical to live; interface moved with unchanged signatures, total/generator bodies via Classical.choose model pinned by proved model_eq/totalFunctor_eq_mathlib (change record); delta vs passed head a536bb87 diffed; sorry'd sheaf retraction checked true; direct importer FiniteAlgebraExternalTensorFiltration compiled clean in sandbox; item axioms propext/Classical.choice/Quot.sound + sorryAx from the one sorry"
+ }
+}

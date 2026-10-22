@@ -5,43 +5,25 @@ Authors: SHEAF group NU
 -/
 module
 
-public import Sheaf.Algebra.Homology.SiteDerivedTensorDescent
-public import Sheaf.CategoryTheory.RingedSiteModules
-public import Mathlib.CategoryTheory.Sites.ConstantSheaf
-public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
-public import Mathlib.RingTheory.TensorProduct.Maps
-public import Mathlib.Algebra.Category.Ring.FilteredColimits
-public import Mathlib.Algebra.Category.Ring.Limits
+public import Sheaf.Paper.FiniteFieldDerivedTensorComparison
+import Sheaf.Algebra.Homology.TensorColimitsIndependentCoefficients
+import Mathlib.RingTheory.Unramified.Field
 import Mathlib.FieldTheory.Finite.GaloisField
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
-import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.SheafificationBilinearExtension
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
-import Mathlib.CategoryTheory.Sites.PreservesSheafification
-import Mathlib.CategoryTheory.Sites.LeftExact
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
-import Sheaf.Algebra.Homology.KFlat
 import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
-import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+import Sheaf.CategoryTheory.DescentSplitTensorAction
+import Sheaf.Paper.SeparableFieldTensorChain
+import Sheaf.Paper.ConstantFieldRestrictionRepresentatives
+import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import Mathlib.CategoryTheory.Adjunction.FullyFaithful
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 
-/-!
-# The diagonal summand for finite-field derived tensor
-
-Source: Stacks Project, Tag 0C2X, finite-extension diagonal; Tags 03EK, 0GMW,
-06YN, 06YS, 06YT and 06YU for the agent-formulated sheaf and derived comparison
-(blueprint: lem-pur-finite-field-derived-tensor-summand).
-
-The comparison is expressed as a natural split retraction. Its projector is the tensor-square
-coefficient action, and both that action and the quotient map are specified on pure tensors
-in every bidegree of the total complex. Thus its split image is exactly the termwise
-idempotent summand, and its quotient map is the canonical balanced tensor morphism.
--/
+/-! # Finite-field diagonal summand: proof -/
 
 @[expose] public section
 
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048
-set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency true
 
 universe u v w
 
@@ -50,200 +32,285 @@ open scoped TensorProduct
 
 namespace FiniteFieldDerivedTensor
 
-variable {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
-  [HasSheafify J CommRingCat.{max u v}]
+variable {C : Type u} [Category.{v} C]
 
-/-- The existing constant commutative-ring sheaf.
-Source: Stacks 03EK (blueprint: lem-pur-finite-field-derived-tensor-summand). -/
-noncomputable abbrev coefficients (A : Type (max u v)) [CommRing A] :=
-  (constantSheaf J CommRingCat.{max u v}).obj (CommRingCat.of A)
+private theorem diagonal_idempotent (F B : Type u)
+    [Field F] [Field B] [Finite F] [Finite B] [Algebra F B] :
+    ∃ e : B ⊗[F] B,
+      e * e = e ∧ Algebra.TensorProduct.lmul' F e = 1 ∧
+      ∀ b : B, (b ⊗ₜ[F] (1 : B) - (1 : B) ⊗ₜ[F] b) * e = 0 := by
+  have : Algebra.FormallyUnramified F B := Algebra.FormallyUnramified.of_isSeparable F B
+  obtain ⟨e, he, hμ⟩ :=
+    (Algebra.FormallyUnramified.iff_exists_tensorProduct (R := F) (S := B)).1 this
+  have heq (b : B) : (1 ⊗ₜ[F] b) * e = (b ⊗ₜ[F] 1) * e := by
+    exact sub_eq_zero.mp (by simpa only [sub_mul] using he b)
+  have hmul (x : B ⊗[F] B) :
+      x * e = (Algebra.TensorProduct.lmul' F x ⊗ₜ[F] (1 : B)) * e := by
+    induction x using TensorProduct.induction_on with
+    | zero => simp
+    | tmul b c =>
+      calc
+        (b ⊗ₜ[F] c) * e = (b ⊗ₜ[F] 1) * ((1 ⊗ₜ[F] c) * e) := by
+          rw [← mul_assoc, Algebra.TensorProduct.tmul_mul_tmul, mul_one, one_mul]
+        _ = (b ⊗ₜ[F] 1) * ((c ⊗ₜ[F] 1) * e) := by rw [heq]
+        _ = ((b * c) ⊗ₜ[F] 1) * e := by
+          rw [← mul_assoc, Algebra.TensorProduct.tmul_mul_tmul, one_mul]
+        _ = _ := rfl
+    | add x y hx hy => simp only [add_mul, map_add, TensorProduct.add_tmul, hx, hy]
+  refine ⟨e, ?_, hμ, ?_⟩
+  · simpa only [hμ, ← Algebra.TensorProduct.one_def, one_mul] using hmul e
+  · intro b
+    rw [sub_mul, ← heq b, sub_self]
 
-/-- Its underlying ring sheaf, using the canonical forgetful functor.
-Source: Stacks 03EK (blueprint: lem-pur-finite-field-derived-tensor-summand). -/
-noncomputable abbrev rings (A : Type (max u v)) [CommRing A] :=
-  (sheafCompose J (forget₂ CommRingCat RingCat)).obj (coefficients J A)
+private theorem presentation_nonempty (J : GrothendieckTopology C)
+    [HasSheafify J CommRingCat.{max u v}] (A : Type (max u v)) [CommRing A]
+    [HasDerivedCategory.{w} (Modules J A)] : Nonempty (Presentation J A) := by
+  obtain ⟨P, hP, _, ⟨H, ⟨hH⟩, T, ⟨hT⟩⟩, _⟩ :=
+    SheafOfModules.site_derived_tensor_descent_independentCoefficients.{u, v, max u v, w, 0, 0}
+      J (coefficients J A)
+  let U : (representatives J A).FullSubcategory ⥤ P.FullSubcategory :=
+    { obj := fun K ↦ ⟨(HomotopyCategory.quotient (Modules J A) (.up ℤ)).obj K.obj,
+        (hP _).2 ⟨K.property.1, fun n ↦
+          (exactFunctor _ _).prop_of_iso
+            (SheafOfModules.siteSheafTensorRightIso (coefficients J A) (K.obj.X n)).symm
+            (K.property.2 n)⟩⟩
+      map := fun f ↦ ObjectProperty.homMk
+        ((HomotopyCategory.quotient (Modules J A) (.up ℤ)).map f.hom)
+      map_id := by
+        intro K
+        apply ObjectProperty.hom_ext
+        exact (HomotopyCategory.quotient (Modules J A) (.up ℤ)).map_id K.obj
+      map_comp := by
+        intro X Y Z f g
+        apply ObjectProperty.hom_ext
+        exact (HomotopyCategory.quotient (Modules J A) (.up ℤ)).map_comp f.hom g.hom }
+  refine ⟨⟨T, ?_⟩⟩
+  let h₁ := Functor.isoWhiskerRight (Functor.isoWhiskerLeft
+    ((representatives J A).ι.prod (representatives J A).ι) hH.symm) DerivedCategory.Qh
+  let h₂ := Functor.isoWhiskerLeft (U.prod U) hT
+  let q := DerivedCategory.quotientCompQhIso (Modules J A)
+  let itot : total J A ≅ CochainTensorBifunctor.rawFunctor (tensorFunctor J A) :=
+    eqToIso (CochainTensorBifunctor.totalFunctor_eq_mathlib (tensorFunctor J A))
+  exact Functor.isoWhiskerRight
+      (Functor.isoWhiskerLeft
+        ((representatives J A).ι.prod (representatives J A).ι) itot) DerivedCategory.Q ≪≫
+    Functor.isoWhiskerLeft
+      (((representatives J A).ι.prod (representatives J A).ι) ⋙
+        CochainTensorBifunctor.rawFunctor (tensorFunctor J A)) q.symm ≪≫
+    h₁ ≪≫ h₂ ≪≫ Functor.isoWhiskerRight
+      (NatIso.prod (Functor.isoWhiskerLeft (representatives J A).ι q)
+        (Functor.isoWhiskerLeft (representatives J A).ι q)) T
 
-/-- The recorded category of modules over the constant ring sheaf.
-Source: Stacks 03EK (blueprint: lem-pur-finite-field-derived-tensor-summand). -/
-noncomputable abbrev Modules (A : Type (max u v)) [CommRing A] :=
-  ringedSiteModules.{max u v} (rings J A)
+private theorem representatives_whisker_bijective
+    (J : GrothendieckTopology C) [HasSheafify J CommRingCat.{max u v}]
+    (A D : Type (max u v)) [CommRing A] [CommRing D]
+    [HasDerivedCategory.{w} (Modules J A)] [HasDerivedCategory.{w} (Modules J D)]
+    (U V : Derived J A × Derived J A ⥤ Derived J D) :
+    Function.Bijective (fun τ : U ⟶ V ↦ Functor.whiskerLeft
+      (((representatives J A).ι ⋙ DerivedCategory.Q).prod
+        ((representatives J A).ι ⋙ DerivedCategory.Q)) τ) := by
+  obtain ⟨P, hP, _, _, hnat⟩ :=
+    SheafOfModules.site_derived_tensor_descent_independentCoefficients.{u, v, max u v, w,
+      (max u v) + 1, w} J (coefficients J A)
+  let Q := HomotopyCategory.quotient (Modules J A) (.up ℤ)
+  let H : (representatives J A).FullSubcategory ⥤ P.FullSubcategory :=
+    { obj := fun K ↦ ⟨Q.obj K.obj, (hP _).2 ⟨K.property.1, fun n ↦
+        (exactFunctor _ _).prop_of_iso
+          (SheafOfModules.siteSheafTensorRightIso (coefficients J A) (K.obj.X n)).symm
+          (K.property.2 n)⟩⟩
+      map := fun f ↦ ObjectProperty.homMk (Q.map f.hom)
+      map_id := by intro K; apply ObjectProperty.hom_ext; exact Q.map_id _
+      map_comp := by intro X Y Z f g; apply ObjectProperty.hom_ext; exact Q.map_comp _ _ }
+  have : H.Full := ⟨fun {X Y} f ↦ ⟨ObjectProperty.homMk (Q.preimage f.hom), by
+    apply ObjectProperty.hom_ext
+    exact Q.map_preimage _⟩⟩
+  have : H.EssSurj := ⟨fun X ↦ ⟨⟨X.obj.as, (hP X.obj).1 X.property |>.1,
+      fun n ↦ (exactFunctor _ _).prop_of_iso
+        (SheafOfModules.siteSheafTensorRightIso (coefficients J A) (X.obj.as.X n))
+        ((hP X.obj).1 X.property |>.2 n)⟩, ⟨Iso.refl _⟩⟩⟩
+  have : (H.prod H).Full := ⟨fun {X Y} f ↦
+    ⟨(H.preimage f.1, H.preimage f.2), by
+      apply Prod.ext <;> exact H.map_preimage _⟩⟩
+  have : (H.prod H).EssSurj := ⟨fun X ↦
+    ⟨(H.objPreimage X.1, H.objPreimage X.2),
+      ⟨(H.objObjPreimageIso X.1).prod (H.objObjPreimageIso X.2)⟩⟩⟩
+  let L := (P.ι ⋙ DerivedCategory.Qh).prod (P.ι ⋙ DerivedCategory.Qh)
+  have h₁ := hnat (Derived J D) inferInstance U V
+  have h₂ := CategoryTheory.bijective_whiskerLeft_of_full_essSurj (H.prod H)
+    (L ⋙ U) (L ⋙ V)
+  have hc : Function.Bijective (fun τ : U ⟶ V ↦
+      Functor.whiskerLeft ((H.prod H) ⋙ L) τ) := h₂.comp h₁
+  let q := DerivedCategory.quotientCompQhIso (Modules J A)
+  let i : ((H.prod H) ⋙ L) ≅
+      (((representatives J A).ι ⋙ DerivedCategory.Q).prod
+        ((representatives J A).ι ⋙ DerivedCategory.Q)) :=
+    NatIso.prod (Functor.isoWhiskerLeft (representatives J A).ι q)
+      (Functor.isoWhiskerLeft (representatives J A).ι q)
+  exact CategoryTheory.bijective_whiskerLeft_of_iso i U V hc
 
-/-- Unbounded cochain complexes of those module sheaves.
-Source: Stacks 06YN (blueprint: lem-pur-finite-field-derived-tensor-summand). -/
-noncomputable abbrev Complexes (A : Type (max u v)) [CommRing A] :=
-  CochainComplex (Modules J A) ℤ
+private theorem restriction_derived_factor (J : GrothendieckTopology C)
+    [HasSheafify J CommRingCat.{max u v}] (F B : Type (max u v))
+    [Field F] [Field B] [Algebra F B]
+    [HasDerivedCategory.{w} (Modules J F)] [HasDerivedCategory.{w} (Modules J B)] :
+    ∃ res : Derived J B ⥤ Derived J F,
+      Nonempty (restrictComplex J F B ⋙ DerivedCategory.Q ≅ DerivedCategory.Q ⋙ res) := by
+  let U := SheafOfModules.restrictScalars.{max u v} (coefficientMap J F B)
+  have : PreservesFiniteLimits U := by
+    have : PreservesFiniteLimits (U ⋙ SheafOfModules.toSheaf (rings J F)) :=
+      inferInstanceAs (PreservesFiniteLimits (SheafOfModules.toSheaf (rings J B)))
+    exact preservesFiniteLimits_of_reflects_of_preserves U (SheafOfModules.toSheaf _)
+  have : PreservesFiniteColimits U := by
+    have : PreservesFiniteColimits (U ⋙ SheafOfModules.toSheaf (rings J F)) :=
+      inferInstanceAs (PreservesFiniteColimits (SheafOfModules.toSheaf (rings J B)))
+    exact preservesFiniteColimits_of_reflects_of_preserves U (SheafOfModules.toSheaf _)
+  refine ⟨U.mapDerivedCategory, ⟨?_⟩⟩
+  unfold restrictComplex
+  exact U.mapDerivedCategoryFactors.symm
 
-/-- The existing total tensor bifunctor, with direct sums along integer diagonals.
-Source: Stacks 06YU (blueprint: lem-pur-finite-field-derived-tensor-summand). -/
-noncomputable def total (A : Type (max u v)) [CommRing A] :
-    Complexes J A × Complexes J A ⥤ Complexes J A :=
-  Functor.uncurry.obj ((@curriedTensor (Modules J A) _
-    (SheafOfModules.monoidalCategory (coefficients J A))).map₂HomologicalComplex
-      (ComplexShape.up ℤ) (ComplexShape.up ℤ) (ComplexShape.up ℤ))
+-- Keep the total tensor functors folded while transporting the comparison maps.
+attribute [local irreducible] total restrictComplex coefficientMap
 
-/-- The canonical constant section associated to an element of the coefficient ring.
-Source: Stacks 03EK (blueprint: lem-pur-finite-field-derived-tensor-summand). -/
-noncomputable def constantSection (A : Type (max u v)) [CommRing A]
-    (X : Cᵒᵖ) (a : A) : (coefficients J A).obj.obj X :=
-  ((sheafificationAdjunction J CommRingCat.{max u v}).unit.app
-    ((Functor.const Cᵒᵖ).obj (CommRingCat.of A))).app X a
+private noncomputable def representativeRestriction
+    (J : GrothendieckTopology C) [HasSheafify J CommRingCat.{max u v}]
+    (F B : Type (max u v)) [Field F] [Field B] [Algebra F B]
+    (compatible : ∀ K : Complexes J B, representatives J B K →
+      representatives J F ((restrictComplex J F B).obj K)) :
+    (representatives J B).FullSubcategory ⥤ (representatives J F).FullSubcategory :=
+    { obj := fun K ↦ ⟨(restrictComplex J F B).obj K.obj, compatible K.obj K.property⟩
+      map := fun f ↦ ObjectProperty.homMk ((restrictComplex J F B).map f.hom)
+      map_id := by
+        intro K
+        apply ObjectProperty.hom_ext
+        exact (restrictComplex J F B).map_id _
+      map_comp := by
+        intro X Y Z f g
+        apply ObjectProperty.hom_ext
+        exact (restrictComplex J F B).map_comp _ _ }
 
-/-- A pure tensor in the sheaf tensor, through its sheafification presentation.
-Source: Stacks 03EK, 0GMW (blueprint: lem-pur-finite-field-derived-tensor-summand). -/
-noncomputable def tensorSection (A : Type (max u v)) [CommRing A]
-    (M N : Modules J A) (X : Cᵒᵖ) (m : M.val.obj X) (n : N.val.obj X) :
-    ((@tensorObj (Modules J A) _ (SheafOfModules.monoidalCategory
-      (coefficients J A)).toMonoidalCategoryStruct M N).val.obj X) :=
-  ((SheafOfModules.tensorObjIsoSheafification M N).inv.val.app X)
-    (((PresheafOfModules.sheafificationAdjunction (𝟙 (rings J A).obj)).unit.app
-      (PresheafOfModules.Monoidal.tensorObj M.val N.val)).app X
-        (TensorProduct.tmul ((coefficients J A).obj.obj X) m n))
-
-/-- A pure tensor in bidegree `(i,j)` included in the total complex.
-Source: Stacks 06YU (blueprint: lem-pur-finite-field-derived-tensor-summand). -/
-noncomputable def generator (A : Type (max u v)) [CommRing A]
-    (K L : Complexes J A) (i j : ℤ) (X : Cᵒᵖ)
-    (m : (K.X i).val.obj X) (n : (L.X j).val.obj X) :
-    (((total J A).obj (K, L)).X (i + j)).val.obj X :=
-  ((CochainComplex.ιMapBifunctor K L (@curriedTensor (Modules J A) _
-    (SheafOfModules.monoidalCategory (coefficients J A))) i j (i + j) rfl).val.app X)
-      (tensorSection J A (K.X i) (L.X j) X m n)
-
-/-- The existing constant-sheaf ring morphism of a field extension.
-Source: Stacks 03EK (blueprint: lem-pur-finite-field-derived-tensor-summand). -/
-noncomputable def coefficientMap (F B : Type (max u v))
-    [Field F] [Field B] [Algebra F B] : rings J F ⟶ rings J B :=
-  (sheafCompose J (forget₂ CommRingCat RingCat)).map
-    ((constantSheaf J CommRingCat.{max u v}).map (CommRingCat.ofHom (algebraMap F B)))
-
-/-- Termwise restriction of scalars, using the recorded restriction functor.
-Source: Stacks 03EK (blueprint: lem-pur-finite-field-derived-tensor-summand). -/
-noncomputable def restrictComplex (F B : Type (max u v))
-    [Field F] [Field B] [Algebra F B] : Complexes J B ⥤ Complexes J F :=
-  (SheafOfModules.restrictScalars.{max u v} (coefficientMap J F B)).mapHomologicalComplex
-    (ComplexShape.up ℤ)
-
-/-- The full subcategory of compatible flat-term K-flat representatives.
-Source: Stacks 06YN, 06YS (blueprint: lem-pur-finite-field-derived-tensor-summand). -/
-noncomputable def representatives (A : Type (max u v)) [CommRing A] :
-    ObjectProperty (Complexes J A) :=
-  fun K ↦ K.IsAcyclicTensorKFlat ∧ ∀ n : ℤ, exactFunctor _ _
-    ((@curriedTensor (Modules J A) _
-      (SheafOfModules.monoidalCategory (coefficients J A))).flip.obj (K.X n))
-
-variable (A : Type (max u v)) [CommRing A]
-  [HasDerivedCategory.{w} (Modules J A)]
-
-/-- The existing unbounded derived category.
-Source: Stacks 06YU (blueprint: lem-pur-finite-field-derived-tensor-summand). -/
-noncomputable abbrev Derived := DerivedCategory (Modules J A)
-
-/-- The representative comparison for a tensor functor supplied by derived tensor descent.
-This is packaging of the recorded tensor-computation clause, not another tensor definition.
-Source: Stacks 06YU (blueprint: lem-pur-finite-field-derived-tensor-summand). -/
-structure Presentation where
-  tensor : Derived J A × Derived J A ⥤ Derived J A
-  comparison : ((representatives J A).ι.prod (representatives J A).ι) ⋙ total J A ⋙
-    DerivedCategory.Q ≅
-    (((representatives J A).ι ⋙ DerivedCategory.Q).prod
-      ((representatives J A).ι ⋙ DerivedCategory.Q)) ⋙ tensor
-
-variable {J}
-variable {F B : Type (max u v)} [Field F] [Field B] [Algebra F B]
-  [HasDerivedCategory.{w} (Modules J F)] [HasDerivedCategory.{w} (Modules J B)]
-
-/-- The source tensor after restriction, as an existing tensor bifunctor composite.
-Source: Stacks 06YU (blueprint: lem-pur-finite-field-derived-tensor-summand). -/
-noncomputable def source (TF : Presentation J F)
-    (res : Derived J B ⥤ Derived J F) :
-    Derived J B × Derived J B ⥤ Derived J F := (res.prod res) ⋙ TF.tensor
-
-/-- The target tensor followed by restriction.
-Source: Stacks 06YU (blueprint: lem-pur-finite-field-derived-tensor-summand). -/
-noncomputable def target (TB : Presentation J B)
-    (res : Derived J B ⥤ Derived J F) :
-    Derived J B × Derived J B ⥤ Derived J F := TB.tensor ⋙ res
-
-/-- The canonical source comparison on compatible K-flat representatives.
-Source: Stacks 06YU (blueprint: lem-pur-finite-field-derived-tensor-summand). -/
-noncomputable def sourceComparison (TF : Presentation J F)
-    (res : Derived J B ⥤ Derived J F)
+private noncomputable def sourceNatComparison
+    (J : GrothendieckTopology C) [HasSheafify J CommRingCat.{max u v}]
+    (F B : Type (max u v)) [Field F] [Field B] [Algebra F B]
+    [HasDerivedCategory.{w} (Modules J F)] [HasDerivedCategory.{w} (Modules J B)]
+    (TF : Presentation J F) (res : Derived J B ⥤ Derived J F)
     (r : restrictComplex J F B ⋙ DerivedCategory.Q ≅ DerivedCategory.Q ⋙ res)
-    (K L : Complexes J B)
-    (hK : representatives J F ((restrictComplex J F B).obj K))
-    (hL : representatives J F ((restrictComplex J F B).obj L)) :
-    DerivedCategory.Q.obj ((total J F).obj
-      ((restrictComplex J F B).obj K, (restrictComplex J F B).obj L)) ≅
-      (source TF res).obj (DerivedCategory.Q.obj K, DerivedCategory.Q.obj L) :=
-  TF.comparison.app (⟨(restrictComplex J F B).obj K, hK⟩,
-    ⟨(restrictComplex J F B).obj L, hL⟩) ≪≫
-      TF.tensor.mapIso ((r.app K).prod (r.app L))
+    (compatible : ∀ K : Complexes J B, representatives J B K →
+      representatives J F ((restrictComplex J F B).obj K)) :
+    ((representatives J B).ι.prod (representatives J B).ι) ⋙
+      (((restrictComplex J F B).prod (restrictComplex J F B)) ⋙ total J F) ⋙
+        DerivedCategory.Q ≅
+    (((representatives J B).ι ⋙ DerivedCategory.Q).prod
+      ((representatives J B).ι ⋙ DerivedCategory.Q)) ⋙ source TF res :=
+  Functor.isoWhiskerLeft
+      ((representativeRestriction J F B compatible).prod
+        (representativeRestriction J F B compatible)) TF.comparison ≪≫
+    Functor.isoWhiskerRight
+      (NatIso.prod (Functor.isoWhiskerLeft (representatives J B).ι r)
+        (Functor.isoWhiskerLeft (representatives J B).ι r)) TF.tensor
 
-/-- The canonical target comparison on flat-term K-flat representatives.
-Source: Stacks 06YU (blueprint: lem-pur-finite-field-derived-tensor-summand). -/
-noncomputable def targetComparison (TB : Presentation J B)
-    (res : Derived J B ⥤ Derived J F)
+private noncomputable def targetNatComparison
+    (J : GrothendieckTopology C) [HasSheafify J CommRingCat.{max u v}]
+    (F B : Type (max u v)) [Field F] [Field B] [Algebra F B]
+    [HasDerivedCategory.{w} (Modules J F)] [HasDerivedCategory.{w} (Modules J B)]
+    (TB : Presentation J B) (res : Derived J B ⥤ Derived J F)
+    (r : restrictComplex J F B ⋙ DerivedCategory.Q ≅ DerivedCategory.Q ⋙ res) :
+    ((representatives J B).ι.prod (representatives J B).ι) ⋙
+      (total J B ⋙ restrictComplex J F B) ⋙ DerivedCategory.Q ≅
+    (((representatives J B).ι ⋙ DerivedCategory.Q).prod
+      ((representatives J B).ι ⋙ DerivedCategory.Q)) ⋙ target TB res :=
+  Functor.isoWhiskerLeft
+      (((representatives J B).ι.prod (representatives J B).ι) ⋙ total J B) r ≪≫
+    Functor.isoWhiskerRight TB.comparison res
+
+private theorem sourceNatComparison_hom_app
+    (J : GrothendieckTopology C) [HasSheafify J CommRingCat.{max u v}]
+    (F B : Type (max u v)) [Field F] [Field B] [Algebra F B]
+    [HasDerivedCategory.{w} (Modules J F)] [HasDerivedCategory.{w} (Modules J B)]
+    (TF : Presentation J F) (res : Derived J B ⥤ Derived J F)
     (r : restrictComplex J F B ⋙ DerivedCategory.Q ≅ DerivedCategory.Q ⋙ res)
-    (K L : Complexes J B) (hK : representatives J B K) (hL : representatives J B L) :
-    DerivedCategory.Q.obj ((restrictComplex J F B).obj ((total J B).obj (K, L))) ≅
-      (target TB res).obj (DerivedCategory.Q.obj K, DerivedCategory.Q.obj L) :=
-  r.app ((total J B).obj (K, L)) ≪≫ res.mapIso (TB.comparison.app (⟨K, hK⟩, ⟨L, hL⟩))
-
-/-- The canonical coefficient action and balanced tensor map on total complexes,
-with their pure-generator characterization in every bidegree.
-Source: Stacks 03EK, 0GMW, 06YU
-(blueprint: lem-pur-finite-field-derived-tensor-summand). -/
-structure ChainComparison where
-  chainAction : ∀ K L : Complexes J B,
-    (B ⊗[F] B) →+* End ((total J F).obj
-      ((restrictComplex J F B).obj K, (restrictComplex J F B).obj L))
-  chainBalanced :
-    ((restrictComplex J F B).prod (restrictComplex J F B)) ⋙ total J F ⟶
-      total J B ⋙ restrictComplex J F B
-  action_generator : ∀ (K L : Complexes J B) (a b : B) (i j : ℤ) (X : Cᵒᵖ)
-      (m : (K.X i).val.obj X) (n : (L.X j).val.obj X),
-    (((chainAction K L) (a ⊗ₜ[F] b)).f (i + j)).val.app X
-      (generator J F ((restrictComplex J F B).obj K)
-        ((restrictComplex J F B).obj L) i j X m n) =
-    generator J F ((restrictComplex J F B).obj K)
-      ((restrictComplex J F B).obj L) i j X
-        (constantSection J B X a • m) (constantSection J B X b • n)
-  balanced_generator : ∀ (K L : Complexes J B) (i j : ℤ) (X : Cᵒᵖ)
-      (m : (K.X i).val.obj X) (n : (L.X j).val.obj X),
-    (((chainBalanced.app (K, L)).f (i + j)).val.app X)
-      (generator J F ((restrictComplex J F B).obj K)
-        ((restrictComplex J F B).obj L) i j X m n) = generator J B K L i j X m n
-
-/-- The natural split-retraction formulation of the asserted diagonal-summand isomorphism.
-The pure-generator equations pin down the coefficient action and balanced quotient before
-localization; the comparison squares pin them down on arbitrary derived objects and arrows.
-`balanced ≫ splitting = action e` identifies the split image with the termwise e-image.
-Source: Stacks 0C2X, 03EK, 06YU and the node's explicit derived formulation
-(blueprint: lem-pur-finite-field-derived-tensor-summand). -/
-noncomputable def HasDiagonalComparison (TF : Presentation J F) (TB : Presentation J B)
-    (e : B ⊗[F] B) : Prop :=
-  ∃ (res : Derived J B ⥤ Derived J F)
-    (restriction : restrictComplex J F B ⋙ DerivedCategory.Q ≅ DerivedCategory.Q ⋙ res)
     (compatible : ∀ K : Complexes J B, representatives J B K →
       representatives J F ((restrictComplex J F B).obj K))
-    (action : (B ⊗[F] B) →+* End (source TF res))
-    (balanced : source TF res ⟶ target TB res)
-    (splitting : target TB res ⟶ source TF res)
-    (chain : ChainComparison (J := J) (F := F) (B := B)),
-    (splitting ≫ balanced = 𝟙 (target TB res)) ∧
-    (balanced ≫ splitting = action e) ∧
-    (∀ (K L : Complexes J B)
-      (hK : representatives J B K) (hL : representatives J B L) (x : B ⊗[F] B),
-      DerivedCategory.Q.map (chain.chainAction K L x) ≫
-        (sourceComparison TF res restriction K L (compatible K hK) (compatible L hL)).hom =
-      (sourceComparison TF res restriction K L (compatible K hK) (compatible L hL)).hom ≫
-        (action x).app (DerivedCategory.Q.obj K, DerivedCategory.Q.obj L)) ∧
-    (∀ (K L : Complexes J B)
-      (hK : representatives J B K) (hL : representatives J B L),
-      DerivedCategory.Q.map (chain.chainBalanced.app (K, L)) ≫
-        (targetComparison TB res restriction K L hK hL).hom =
-      (sourceComparison TF res restriction K L (compatible K hK) (compatible L hL)).hom ≫
-        balanced.app (DerivedCategory.Q.obj K, DerivedCategory.Q.obj L))
+    (K N : Complexes J B) (hK : representatives J B K) (hN : representatives J B N) :
+    (sourceNatComparison J F B TF res r compatible).hom.app (⟨K, hK⟩, ⟨N, hN⟩) =
+      (sourceComparison TF res r K N (compatible K hK) (compatible N hN)).hom := rfl
+
+private theorem targetNatComparison_hom_app
+    (J : GrothendieckTopology C) [HasSheafify J CommRingCat.{max u v}]
+    (F B : Type (max u v)) [Field F] [Field B] [Algebra F B]
+    [HasDerivedCategory.{w} (Modules J F)] [HasDerivedCategory.{w} (Modules J B)]
+    (TB : Presentation J B) (res : Derived J B ⥤ Derived J F)
+    (r : restrictComplex J F B ⋙ DerivedCategory.Q ≅ DerivedCategory.Q ⋙ res)
+    (K N : Complexes J B) (hK : representatives J B K) (hN : representatives J B N) :
+    (targetNatComparison J F B TB res r).hom.app (⟨K, hK⟩, ⟨N, hN⟩) =
+      (targetComparison TB res r K N hK hN).hom := rfl
+
+attribute [local irreducible] sourceNatComparison targetNatComparison
+
+private theorem diagonalComparison_of_chain
+    (J : GrothendieckTopology C) [HasSheafify J CommRingCat.{max u v}]
+    (F B : Type (max u v)) [Field F] [Field B] [Algebra F B]
+    [HasDerivedCategory.{w} (Modules J F)] [HasDerivedCategory.{w} (Modules J B)]
+    (TF : Presentation J F) (TB : Presentation J B) (e : B ⊗[F] B)
+    (res : Derived J B ⥤ Derived J F)
+    (r : restrictComplex J F B ⋙ DerivedCategory.Q ≅ DerivedCategory.Q ⋙ res)
+    (compatible : ∀ K : Complexes J B, representatives J B K →
+      representatives J F ((restrictComplex J F B).obj K))
+    (chain : ChainComparison (J := J) (F := F) (B := B))
+    (act : (B ⊗[F] B) →+* End
+      (((restrictComplex J F B).prod (restrictComplex J F B)) ⋙ total J F))
+    (split : total J B ⋙ restrictComplex J F B ⟶
+      ((restrictComplex J F B).prod (restrictComplex J F B)) ⋙ total J F)
+    (hsb : split ≫ chain.chainBalanced = 𝟙 _)
+    (hbs : chain.chainBalanced ≫ split = act e)
+    (hact : ∀ (K L : Complexes J B) (x : B ⊗[F] B),
+      (act x).app (K, L) = chain.chainAction K L x) : HasDiagonalComparison TF TB e := by
+  let I := (representatives J B).ι.prod (representatives J B).ι
+  let L := ((representatives J B).ι ⋙ DerivedCategory.Q).prod
+    ((representatives J B).ι ⋙ DerivedCategory.Q)
+  let A := ((restrictComplex J F B).prod (restrictComplex J F B)) ⋙ total J F
+  let T := total J B ⋙ restrictComplex J F B
+  let α := sourceNatComparison J F B TF res r compatible
+  let β := targetNatComparison J F B TB res r
+  let W : (Complexes J B × Complexes J B ⥤ Complexes J F) ⥤
+      ((representatives J B).FullSubcategory ×
+        (representatives J B).FullSubcategory ⥤ Complexes J F) :=
+    (Functor.whiskeringLeft _ _ _).obj I
+  let V : ((representatives J B).FullSubcategory ×
+        (representatives J B).FullSubcategory ⥤ Complexes J F) ⥤
+      ((representatives J B).FullSubcategory ×
+        (representatives J B).FullSubcategory ⥤ Derived J F) :=
+    (Functor.whiskeringRight _ _ _).obj
+      (DerivedCategory.Q : Complexes J F ⥤ Derived J F)
+  let G := W ⋙ V
+  obtain ⟨action, balanced, splitting, hsplit, hproject, ha, hb⟩ :=
+    CategoryTheory.exists_splitAction_of_comparison L
+      (representatives_whisker_bijective J B F) G (x := A) (y := T)
+      (source TF res) (target TB res) α β e act chain.chainBalanced split hsb hbs
+  refine ⟨res, r, compatible, action, balanced, splitting, chain,
+    hsplit, hproject, ?_, ?_⟩
+  · intro K N hK hN x
+    let Z : (representatives J B).FullSubcategory ×
+        (representatives J B).FullSubcategory := (⟨K, hK⟩, ⟨N, hN⟩)
+    have hh := congrArg (fun t ↦ t.app Z) (ha x)
+    change DerivedCategory.Q.map ((act x).app (K, N)) ≫ α.hom.app Z =
+      α.hom.app Z ≫ (action x).app (DerivedCategory.Q.obj K, DerivedCategory.Q.obj N) at hh
+    rw [hact] at hh
+    change _ ≫ (sourceNatComparison J F B TF res r compatible).hom.app Z =
+      (sourceNatComparison J F B TF res r compatible).hom.app Z ≫ _ at hh
+    dsimp only [Z] at hh
+    rw [sourceNatComparison_hom_app] at hh
+    exact hh
+  · intro K N hK hN
+    let Z : (representatives J B).FullSubcategory ×
+        (representatives J B).FullSubcategory := (⟨K, hK⟩, ⟨N, hN⟩)
+    have hh := congrArg (fun t ↦ t.app Z) hb
+    change DerivedCategory.Q.map (chain.chainBalanced.app (K, N)) ≫
+      (targetNatComparison J F B TB res r).hom.app Z =
+      (sourceNatComparison J F B TF res r compatible).hom.app Z ≫
+        balanced.app (DerivedCategory.Q.obj K, DerivedCategory.Q.obj N) at hh
+    dsimp only [Z] at hh
+    rw [sourceNatComparison_hom_app, targetNatComparison_hom_app] at hh
+    exact hh
+
 
 /-- Finite-field derived tensor over the larger field is the diagonal idempotent summand
 of derived tensor over the smaller field, naturally in both unbounded derived variables.
@@ -255,42 +322,19 @@ comparison are the agent formulation in the node. Sheaf tensor: 03EK, 0GMW;
 K-flat resolutions and derived descent: 06YN, 06YS, 06YT, 06YU
 (blueprint: lem-pur-finite-field-derived-tensor-summand).
 
-Proof plan:
-1. Put q = card B. The finite-field cardinal-power identity gives r^q = r in
-   B tensor_F B: Frobenius preserves sums and products, and it fixes pure tensors
-   (lem-weil-finite-field-pow-card; def-weil-finite-field-q-elements).
-2. For d_b = b tensor 1 - 1 tensor b take e = product_b (1 - d_b^(q-1)). Then
-   d_b e = 0 and multiplication sends e to 1. For every r one has
-   r e = (mu(r) tensor 1)e, whence e^2 = e. This includes F = B and q = 2.
-3. On ordinary sheaf tensors let beta(m tensor_F n) = m tensor_B n. Writing
-   e = sum a_i tensor c_i, define s(m tensor_B n) = sum a_i m tensor_F c_i n.
-   The annihilator identities ensure B-balancing. The module-sheafification interface
-   and bilinear extension extend these formulas to the sheafified constant ring,
-   including sections which are only locally constant. Uniqueness gives beta s = 1
-   and s beta = e and naturality in both sheaves
-   (lem-pc-sites-module-sheafification-interface;
-   lem-pc-sites-module-sheafification-bilinear-extension; def-pur-sheaf-tensor-product).
-4. A finite F-basis of B gives B_C = F_C^d, using underlying-set compatibility and
-   colimit preservation of sheafification. Extension is therefore exact. Restriction
-   is exact and preserves sums because its underlying abelian sheaf is unchanged
-   (lem-pc-sites-sheafification-underlying-sets;
-   lem-weil-pbc-site-r-module-presheaf-sheafification-exact; def-pc-sheaf-restrict-scalars).
-5. Choose flat-term K-flat resolutions over B. For an acyclic F-complex A,
-   Res Tot((A tensor_F B) tensor_B U) = Tot(A tensor_F Res U). Exact extension
-   and B-K-flatness imply F-K-flatness of Res U. The same identity in each degree
-   proves flatness of its terms; exact restriction preserves the resolutions
-   (lem-pc-kflat-resolution; def-pc-kflat-complex; def-pc-flat-sheaf-modules).
-6. Totalize the ordinary maps over all integer bidegrees. B-linear differentials
-   commute with e; the splitting t = et + (1-e)t is a splitting of complexes.
-   The formulas in step 3 commute with both total differentials and give the
-   displayed pure-generator equations and the coefficient tensor-square action
-   (def-pc-tensor-complex-sheaves).
-7. Apply lem-weil-pbc-site-derived-tensor-descent over both fields. Its computation and
-   transformation-uniqueness clauses descend the actions, beta and s to all derived
-   arrows, independently of representatives. The two retraction identities identify
-   the termwise e-image with Res(P tensor_B^L Q), through the canonical beta.
-   On the one-point site these are ordinary module derived categories. No
-   boundedness, finite-dimensionality, nonzero complex or nonempty site is used. -/
+Proof: finite fields are separable, so Mathlib's unramified-algebra criterion supplies
+an element e annihilated by the difference of the two coefficient actions and with
+multiplication(e) = 1. Tensor induction shows r e = (multiplication(r) tensor 1)e;
+putting r = e proves idempotence. The site tensor-descent theorem constructs both
+presentations. All sheaves over a constant field are flat; bounded upper truncations
+and their exact filtered colimit show that every complex is K-flat. In particular,
+restriction preserves representatives. The separate chain-level separability lemma
+constructs the canonical balanced retraction on total tensors. Exact scalar restriction
+factors through the derived category. Transport its action and retraction across the
+two presentation comparisons and descend them by fully faithful precomposition from
+K-flat representatives. Faithfulness gives the split identities; evaluation gives
+the two required normalization squares.
+-/
 theorem exists_diagonal_derived_tensor_summand
     (J : GrothendieckTopology C) [HasSheafify J CommRingCat.{max u v}]
     (F B : Type (max u v))
@@ -301,6 +345,15 @@ theorem exists_diagonal_derived_tensor_summand
       (∀ b : B, (b ⊗ₜ[F] (1 : B) - (1 : B) ⊗ₜ[F] b) * e = 0) ∧
       Nonempty (Presentation J F) ∧ Nonempty (Presentation J B) ∧
       ∀ (TF : Presentation J F) (TB : Presentation J B), HasDiagonalComparison TF TB e := by
-  sorry
+  classical
+  obtain ⟨e, he, hμ, hann⟩ := diagonal_idempotent F B
+  refine ⟨e, he, hμ, hann, presentation_nonempty J F, presentation_nonempty J B, ?_⟩
+  intro TF TB
+  obtain ⟨res, ⟨r⟩⟩ := restriction_derived_factor J F B
+  let compatible := restriction_preserves_representatives J F B
+  obtain ⟨chain, act, split, hsb, hbs, hact⟩ :=
+    exists_separableFieldTensorChain J F B e hμ hann
+  exact diagonalComparison_of_chain J F B TF TB e res r compatible chain act split
+    hsb hbs hact
 
 end FiniteFieldDerivedTensor

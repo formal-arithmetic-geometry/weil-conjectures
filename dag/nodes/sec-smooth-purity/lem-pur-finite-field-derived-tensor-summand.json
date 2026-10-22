@@ -27,115 +27,52 @@
  ],
  "proof": [
   {
-   "text": "Write $q=|B|$. By [def-weil-finite-field-q-elements], $q=p^a\\geq2$ for a prime $p=\\operatorname{char}B$ and $a\\geq1$. The ring $R=B\\otimes_FB$ is commutative and $p\\cdot1_R=0$, by its left $B$-algebra structure. In any commutative ring killed by $p$, the binomial expansion gives $(x+y)^p=x^p+y^p$: for $0<j<p$, $p$ divides $\\binom pj$, since $j!(p-j)!$ is prime to $p$. Iterating this identity $a$ times and using $(xy)^q=x^qy^q$ shows that $r\\mapsto r^q$ is additive and multiplicative on $R$. Each pure tensor satisfies $(b\\otimes c)^q=b^q\\otimes c^q=b\\otimes c$ by [lem-weil-finite-field-pow-card]. Every element of the balanced tensor algebra is a finite sum of pure tensors, so $r^q=r$ for every $r\\in R$. This calculation uses no choice of primitive element or separability theorem.",
-   "uses": [
-    "def-weil-finite-field-q-elements",
-    "lem-weil-finite-field-pow-card"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 0C2X, lemma-separable-algebraic-diagonal, finite-extension proof; elementary finite-field projector calculation replacing its primitive-element/localization construction."
-   }
-  },
-  {
-   "text": "For each $b\\in B$ set $d_b=b\\otimes1-1\\otimes b$ and define the finite product $e=\\prod_{b\\in B}(1-d_b^{q-1})\\in R$. Since $d_b^q=d_b$, the factor indexed by $b$ is annihilated by $d_b$; commutativity therefore gives $d_be=0$. Also $\\mu(d_b)=0$, so $\\mu(e)=1$. For any $r=\\sum_i a_i\\otimes c_i$, the identities $d_{c_i}e=0$ give $re=\\sum_i(a_ic_i\\otimes1)e=(\\mu(r)\\otimes1)e$. Taking $r=e$ yields $e^2=(\\mu(e)\\otimes1)e=e$. Thus this explicit $e$ has all three asserted properties, including when $F=B$ and when $q=2$.",
+   "text": "Finite fields are separable. Apply Algebra.FormallyUnramified.of_isSeparable and iff_exists_tensorProduct to obtain the annihilator element with multiplication one. Tensor induction gives r e = (mu(r) tensor 1)e; taking r=e proves idempotence.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 0C2X, lemma-separable-algebraic-diagonal, finite-extension proof; elementary finite-field projector calculation replacing its primitive-element/localization construction."
-   }
+   "elementary": true
   },
   {
-   "text": "First work with ordinary $B_{\\mathcal C}$-module sheaves $M,N$. Their two coefficient actions define $(a\\otimes c)(m\\otimes n)=am\\otimes cn$ on $T=\\operatorname{Res}M\\otimes_{F_{\\mathcal C}}\\operatorname{Res}N$. Use the presheaf tensor followed by sheafification of [def-pur-sheaf-tensor-product]. Let $\\beta:T\\to\\operatorname{Res}(M\\otimes_{B_{\\mathcal C}}N)$ be the balanced quotient, $m\\otimes n\\mapsto m\\otimes_Bn$. Write $e=\\sum_i a_i\\otimes c_i$ and define $s(m\\otimes_Bn)=\\sum_i a_im\\otimes_Fc_in$. This is independent of the expression for $e$, since it is the action of the fixed element $e$ on $m\\otimes_Fn$. It is balanced over the constant presheaf $B$: the difference between its values on $(bm,n)$ and $(m,bn)$ is $d_be(m\\otimes_Fn)=0$. By [lem-pc-sites-module-sheafification-interface], sheafifying the underlying constant-presheaf $B$-module structures of the already-sheaf objects $M,N$ recovers their given $B_{\\mathcal C}$-module structures. Apply [lem-pc-sites-module-sheafification-bilinear-extension] with the constant presheaf of rings $B$ and target $eT$ to extend this bilinear map to a $B_{\\mathcal C}$-bilinear map; here the $B_{\\mathcal C}$-action on $eT$ is the first coefficient action and the second agrees with it, by $d_be=0$ and the same sheafification extension. Hence it induces $s$ on the sheaf tensor, without assuming that sections of a constant sheaf are globally constant. On pure tensors $\\beta s=\\mu(e)\\operatorname{id}=\\operatorname{id}$ and $s\\beta=e$; these equalities extend to sheaves by uniqueness in sheafification and the tensor universal property. Also $es=s$ by $e^2=e$, so $\\beta|_{eT}:eT\\to\\operatorname{Res}(M\\otimes_{B_{\\mathcal C}}N)$ and $s$ are inverse. Both commute with homomorphisms in $M,N$, since those homomorphisms commute with multiplication by each $a_i,c_i$.",
+   "text": "Construct both tensor presentations by site_derived_tensor_descent_independentCoefficients and its comparison through the homotopy quotient. Convert site-flatness to categorical flatness by siteSheafTensorRightIso. Transport the tensor comparison explicitly along totalFunctor_eq_mathlib; the canonical model is exactly the existing totalization.",
    "uses": [
-    "def-pur-sheaf-tensor-product",
-    "lem-pc-sites-module-sheafification-bilinear-extension",
-    "lem-pc-sites-module-sheafification-interface"
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 03EK (section-tensor-product), 0GMW (lemma-sheafification-tensor and bilinear universal property), and 03EI (lemma-sheafification-exact)."
-   }
+   "elementary": false
   },
   {
-   "text": "We next check the coefficient compatibility needed for unbounded resolutions. Since the finite set $B$ spans itself over $F$, a maximal linearly independent subset is a finite basis $(v_1,\\ldots,v_d)$: if it did not span, adjoining an element outside the span would contradict maximality. By [lem-pc-sites-sheafification-underlying-sets], ring and abelian-group sheafification have the same underlying set sheafification, so the constant ring sheaves have the expected constant abelian sheaves underneath. The module action and extension of linear maps are precisely those of [lem-pc-sites-module-sheafification-interface]. The basis map $F^d\\to B$ and its coordinate inverse induce inverse maps on constant sheaves [def-weil-pbc-constant-sheaf]. By the colimit-preservation clause of [lem-weil-pbc-site-r-module-presheaf-sheafification-exact], sheafification of this finite presheaf direct sum is the direct sum $F_{\\mathcal C}^{\\oplus d}$, so $B_{\\mathcal C}\\cong F_{\\mathcal C}^{\\oplus d}$ as an $F_{\\mathcal C}$-module. Consequently $E(H)=H\\otimes_{F_{\\mathcal C}}B_{\\mathcal C}$ is, after restriction, $H^{\\oplus d}$: the maps are $h\\otimes\\sum_j f_jv_j\\mapsto(f_jh)_j$ and $(h_j)_j\\mapsto\\sum_jh_j\\otimes v_j$, extended through sheaf tensor [def-pur-sheaf-tensor-product]. A finite direct sum is exact, since kernels and cokernels of its diagonal maps are the finite sums of the individual kernels and cokernels. Restriction of scalars [def-pc-sheaf-restrict-scalars] is exact and conservative: by [def-weil-sheaf-of-modules-category] its kernels, sheafified cokernels and hence cohomology are the same underlying abelian sheaves. It also preserves direct sums, since in both module categories a sum is the sheafification of the same sectionwise sum of underlying modules. Thus $E$ is exact, and sends acyclic complexes to acyclic complexes.",
+   "text": "Restriction preserves representatives by the all-constant-field-complexes-flat-and-K-flat truncation argument. Exact restriction has the standard derived factorization.",
    "uses": [
-    "def-weil-pbc-constant-sheaf",
-    "lem-weil-pbc-site-r-module-presheaf-sheafification-exact",
-    "def-pur-sheaf-tensor-product",
-    "def-pc-sheaf-restrict-scalars",
-    "def-weil-sheaf-of-modules-category",
-    "lem-pc-sites-module-sheafification-interface",
-    "lem-pc-sites-sheafification-underlying-sets"
+    "lem-pur-constant-field-restriction-representatives"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 03EK (section-tensor-product), 0GMW (lemma-sheafification-tensor and bilinear universal property), and 03EI (lemma-sheafification-exact)."
-   }
+   "elementary": false
   },
   {
-   "text": "Choose $B_{\\mathcal C}$-K-flat resolutions $U\\to P$ and $V\\to Q$ with flat terms using [lem-pc-kflat-resolution]. If $A$ is an acyclic complex of $F_{\\mathcal C}$-modules, $E(A)$ is acyclic by step 4. The balanced maps $(a\\otimes b)\\otimes u\\mapsto a\\otimes bu$ and $a\\otimes u\\mapsto(a\\otimes1)\\otimes u$ give inverse chain isomorphisms\n$$\\operatorname{Res}\\operatorname{Tot}((A\\otimes_FB)\\otimes_BU)\\cong\\operatorname{Tot}(A\\otimes_F\\operatorname{Res}U).$$\nThey are defined on sheaves using [def-pur-sheaf-tensor-product]; both scalar factors have degree zero, so the two total differentials of [def-pc-tensor-complex-sheaves] agree. The left side is acyclic by the defining K-flat property of $U$ [def-pc-kflat-complex], hence $\\operatorname{Res}U$ is $F_{\\mathcal C}$-K-flat. The same applies to $V$. For each flat term $U^i$, the identical ordinary tensor isomorphism identifies $-\\otimes_F\\operatorname{Res}U^i$ with $\\operatorname{Res}\\circ(-\\otimes_BU^i)\\circ E$. All three functors are exact, the middle one by [def-pc-flat-sheaf-modules], so $\\operatorname{Res}U^i$ is flat over $F_{\\mathcal C}$; likewise for $V^i$. The restricted resolutions remain quasi-isomorphisms by step 4. Therefore these are compatible flat-term K-flat representatives over both coefficient fields, for arbitrary unbounded $P,Q$.",
+   "text": "Apply the separate chain-level separability retraction to the chosen element e. This gives the natural action, canonical balanced map and section with both split identities.",
    "uses": [
-    "lem-pc-kflat-resolution",
-    "def-pur-sheaf-tensor-product",
-    "def-pc-tensor-complex-sheaves",
-    "def-pc-kflat-complex",
-    "def-pc-flat-sheaf-modules"
+    "lem-pur-separable-field-tensor-chain"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YN (definition-K-flat), 06YS (lemma-K-flat-resolution), 06YT (lemma-derived-tor-quasi-isomorphism-other-side), and 06YU (definition-derived-tor and preceding construction)."
-   }
+   "elementary": false
   },
   {
-   "text": "Apply step 3 to every pair $(U^i,V^j)$ and take direct-sum total complexes as in [def-pc-tensor-complex-sheaves]. The endomorphism $e$ commutes with both differentials, since the differentials of $U,V$ are $B_{\\mathcal C}$-linear. Its images form a complex, with an actual degreewise splitting $t=et+(1-e)t$ and inverse the addition map. This splitting commutes with the total differentials, so $T^\\bullet=eT^\\bullet\\oplus(1-e)T^\\bullet$, where $T^\\bullet=\\operatorname{Tot}(\\operatorname{Res}U\\otimes_F\\operatorname{Res}V)$. The maps $s$ and $\\beta$ totalize: on the $(i,j)$ summand the identity $d(a_ku\\otimes c_kv)=a_k\\,du\\otimes c_kv+(-1)^i a_ku\\otimes c_k\\,dv$ verifies their compatibility with the differential (the coefficients in a chosen expression for $e$ are fixed scalars). Their two composites remain $\\beta s=1$ and $s\\beta=e$ on each summand. Thus $\\beta$ restricts to the chain isomorphism\n$$eT^\\bullet\\xrightarrow{\\sim}\\operatorname{Res}\\operatorname{Tot}(U\\otimes_BV)$$\nwith inverse $s$. The first and second coefficient actions commute and satisfy the $F$-balancing relation on every summand, so they give precisely the asserted $R$-action on $T^\\bullet$.",
+   "text": "The representative inclusion into the homotopy representative class is full and essentially surjective. Combine this with the bijectivity clause of the site tensor-descent theorem to obtain fully faithful precomposition from pairs of chain representatives. Transport the chain action and retraction through both presentation comparisons and descend them by the generic action-descent lemma. Evaluating its normalization squares gives exactly sourceComparison and targetComparison.",
    "uses": [
-    "def-pc-tensor-complex-sheaves"
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-pur-descent-split-tensor-action"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YN (definition-K-flat), 06YS (lemma-K-flat-resolution), 06YT (lemma-derived-tor-quasi-isomorphism-other-side), and 06YU (definition-derived-tor and preceding construction)."
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-site-derived-tensor-descent] over $B_{\\mathcal C}$ and over $F_{\\mathcal C}$. Its computation clause, together with step 5, identifies $T^\\bullet$ with $\\operatorname{Res}P\\otimes_F^{\\mathbf L}\\operatorname{Res}Q$ and $\\operatorname{Tot}(U\\otimes_BV)$ with $P\\otimes_B^{\\mathbf L}Q$. The localized map of the balanced quotient $\\beta$ is the canonical balanced tensor morphism in the statement, since it was defined by $u\\otimes_Fv\\mapsto u\\otimes_Bv$ on these compatible representatives. The coefficient actions and the maps in step 6 commute with all chain maps in the two variables and with chain homotopies, by linearity. They also commute with quasi-isomorphisms: the two tensor complexes descend by the cited computation clause; the $e$-image is a direct summand, so the restriction of a commuting quasi-isomorphism to it is again a quasi-isomorphism, since cohomology preserves the displayed finite direct-sum splitting. Inverting a commuting quasi-isomorphism preserves each naturality equation. The localization-equivalence and natural-transformation clauses of the cited descent node now show that the $R$-action, $e$-summand, and inverse maps descend independently of the compatible resolutions and are natural for all derived morphisms in $P,Q$. This gives the required natural isomorphism in $D(\\mathcal C,F)$. Taking the one-point site makes sheaves simply modules and gives the stated $D(F),D(B)$ case; at no step was any complex bounded or finite-dimensional.",
-   "uses": [
-    "lem-weil-pbc-site-derived-tensor-descent"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YN (definition-K-flat), 06YS (lemma-K-flat-resolution), 06YT (lemma-derived-tor-quasi-isomorphism-other-side), and 06YU (definition-derived-tor and preceding construction)."
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-finite-field-q-elements",
-  "lem-weil-finite-field-pow-card",
-  "def-pur-sheaf-tensor-product",
-  "lem-pc-sites-module-sheafification-bilinear-extension",
-  "lem-pc-sites-module-sheafification-interface",
-  "def-weil-pbc-constant-sheaf",
-  "lem-weil-pbc-site-r-module-presheaf-sheafification-exact",
-  "def-pc-sheaf-restrict-scalars",
-  "def-weil-sheaf-of-modules-category",
-  "lem-pc-sites-sheafification-underlying-sets",
-  "lem-pc-kflat-resolution",
-  "def-pc-tensor-complex-sheaves",
-  "def-pc-kflat-complex",
-  "def-pc-flat-sheaf-modules",
-  "lem-weil-pbc-site-derived-tensor-descent"
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-pur-constant-field-restriction-representatives",
+  "lem-pur-separable-field-tensor-chain",
+  "lem-pur-descent-split-tensor-action"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Tag 0C2X (lemma-separable-algebraic-diagonal), finite-extension motivation; explicit finite-field Frobenius projector and its tensor-retraction proof, combined with sites-modules Tags 03EI/03EK/0GMW and sites-cohomology Tags 06YN/06YS/06YT/06YU."
+  "place": "Tag 0C2X via Mathlib formally unramified separability element; constant-field flatness, upper-truncation colimits, and explicit fully faithful representative descent. The underived chain retraction is isolated with its original source."
  },
  "mathlib_searches": [
   {
@@ -233,8 +170,6 @@
   ]
  },
  "tool_uses": [
-  "lem-pc-sites-module-sheafification-bilinear-extension",
-  "lem-pc-kflat-resolution",
   "lem-weil-pbc-site-derived-tensor-descent"
  ],
  "reviewed": {
@@ -257,25 +192,6 @@
   "module": "Sheaf.Paper.FiniteFieldDerivedTensorSummand",
   "declaration": "FiniteFieldDerivedTensor.exists_diagonal_derived_tensor_summand",
   "declarations": [
-   "FiniteFieldDerivedTensor.coefficients",
-   "FiniteFieldDerivedTensor.rings",
-   "FiniteFieldDerivedTensor.Modules",
-   "FiniteFieldDerivedTensor.Complexes",
-   "FiniteFieldDerivedTensor.total",
-   "FiniteFieldDerivedTensor.constantSection",
-   "FiniteFieldDerivedTensor.tensorSection",
-   "FiniteFieldDerivedTensor.generator",
-   "FiniteFieldDerivedTensor.coefficientMap",
-   "FiniteFieldDerivedTensor.restrictComplex",
-   "FiniteFieldDerivedTensor.representatives",
-   "FiniteFieldDerivedTensor.Derived",
-   "FiniteFieldDerivedTensor.Presentation",
-   "FiniteFieldDerivedTensor.source",
-   "FiniteFieldDerivedTensor.target",
-   "FiniteFieldDerivedTensor.sourceComparison",
-   "FiniteFieldDerivedTensor.targetComparison",
-   "FiniteFieldDerivedTensor.ChainComparison",
-   "FiniteFieldDerivedTensor.HasDiagonalComparison",
    "FiniteFieldDerivedTensor.exists_diagonal_derived_tensor_summand"
   ],
   "file": "lean/Sheaf/Paper/FiniteFieldDerivedTensorSummand.lean",
@@ -286,5 +202,15 @@
   "existing": false,
   "note": "The canonical natural e-image isomorphism is encoded by a natural split retraction whose projector is the tensor-square action. Both the action and balanced quotient are fixed on pure total-complex generators and by their localization equations, so no arbitrary map or summand replaces the stated canonical construction."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-0b040",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261022T002433-L-1930318",
+  "kind": "interface",
+  "note": "independent cc review: item theorem statement byte-identical to live; interface moved with unchanged signatures, total/generator bodies via Classical.choose model pinned by proved model_eq/totalFunctor_eq_mathlib (change record); delta vs passed head a536bb87 diffed; sorry'd sheaf retraction checked true; direct importer FiniteAlgebraExternalTensorFiltration compiled clean in sandbox; item axioms propext/Classical.choice/Quot.sound + sorryAx from the one sorry"
+ }
 }

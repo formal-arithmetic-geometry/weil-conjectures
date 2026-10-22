@@ -1,0 +1,126 @@
+{
+ "id": "lem-pur-constant-field-restriction-representatives",
+ "kind": "statement",
+ "title": "Restriction preserves flat-term K-flat constant-field representatives",
+ "statement": "For any extension F -> B of fields on a small site with the comparison interfaces [def-pur-finite-field-derived-tensor-comparison], restriction of a flat-term K-flat B-complex is a flat-term K-flat F-complex. In fact every complex over the constant field F is a flat-term K-flat representative.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YN, 06YQ and 06YU; sites-modules Tags 03ER and 08FC. The upper-truncation filtered-colimit proof is an agent consequence."
+ },
+ "stmt_deps": [
+  "def-pur-finite-field-derived-tensor-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Every module sheaf over the constant field is flat, including every term and cycle sheaf in every good upper truncation.",
+   "uses": [
+    "lem-exc-constant-field-module-flat"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Each good upper truncation is bounded above with flat terms and hence K-flat. The source-library filtrationLE colimit is the original complex. Tensor preserves these colimits, and filtered module-sheaf colimits are exact; the source-library closedUnderColimitsOfShape_kFlat gives K-flatness of the colimit.",
+   "uses": [
+    "lem-weil-pbc-independent-bounded-flat-kflat",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply preservation of quasi-isomorphisms to the zero map from zero into an arbitrary acyclic complex. Its tensor source is zero, so its tensor target is acyclic. All terms are flat by the first step. Apply this result to the restricted complex.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-exc-constant-field-module-flat",
+  "lem-weil-pbc-independent-bounded-flat-kflat",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YN, 06YQ and 06YU; sites-modules Tags 03ER and 08FC. The upper-truncation filtered-colimit proof is an agent consequence."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A separability element splits the canonical balanced tensor quotient for sheaves of modules and unbounded total tensor complexes",
+   "results": "{\"t\": \"2026-10-20T01:57:19Z\", \"tool\": \"leanfinder\", \"query\": \"A separability element splits the canonical balanced tensor quotient for sheaves of modules and unbounded total tensor complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"rTensor.inverse_of_rightInverse\", \"lTensor.inverse\", \"lTensor.toFun\", \"lTensor.inverse_of_rightInverse\", \"PresheafOfModules.Monoidal.tensorObj\", \"rTensor.inverse\", \"rTensor.toFun\", \"rTensor.linearEquiv_of_rightInverse\"], \"digest\": \"ecf4e961acb766be\"}",
+   "date": "2026-10-20",
+   "verdict": "No matching sheaf-chain or representative-descent theorem; candidates concern ordinary algebra or dense subsites. Sources were inspected before constructing the present lemma."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tensor\", \"separable\"",
+   "results": "{\"t\": \"2026-10-20T01:57:19Z\", \"tool\": \"loogle\", \"query\": \"\\\"tensor\\\", \\\"separable\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"IsPurelyInseparable.exists_pow_mem_range_tensorProduct\", \"IsPurelyInseparable.exists_pow_pow_mem_range_tensorProduct_of_expChar\", \"PrimeSpectrum.isHomeomorph_comap_tensorProductMap_of_isPurelyInseparable\"], \"digest\": \"51fe565bc904fa06\"}",
+   "date": "2026-10-20",
+   "verdict": "No matching sheaf-chain or representative-descent theorem; candidates concern ordinary algebra or dense subsites. Sources were inspected before constructing the present lemma."
+  },
+  {
+   "tool": "grep",
+   "query": "whiskerLeft.*(bijective|full)|IsFlat.*constantField|separability.*tensor",
+   "results": "{\"t\": \"2026-10-20T01:54:34Z\", \"tool\": \"grep\", \"query\": \"whiskerLeft.*(bijective|full)|IsFlat.*constantField|separability.*tensor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean\", \"Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean\", \"Mathlib/CategoryTheory/Sites/Equivalence.lean\", \"Mathlib/CategoryTheory/Sites/Equivalence.lean\", \"Mathlib/CategoryTheory/Sites/DenseSubsite/Basic.lean\"], \"digest\": \"6ad060f675266202\"}",
+   "date": "2026-10-20",
+   "verdict": "No matching sheaf-chain or representative-descent theorem; candidates concern ordinary algebra or dense subsites. Sources were inspected before constructing the present lemma."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every unbounded complex of sheaves of vector spaces over a constant field is K-flat, so restriction of scalars along a field extension preserves K-flat representatives",
+   "results": "{\"t\": \"2026-10-20T17:23:05Z\", \"tool\": \"leansearch\", \"query\": \"Every unbounded complex of sheaves of vector spaces over a constant field is K-flat, so restriction of scalars along a field extension preserves K-flat representatives\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallyUnramified.flat_of_restrictScalars\", \"ModuleCat.preservesFiniteLimits_extendScalars_of_flat\", \"Module.RestrictScalars.normedSpaceOrig\", \"Bornology.IsVonNBounded.restrict_scalars\", \"AlgebraicGeometry.Flat.instMorphismRestrict\", \"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"ContinuousLinearMap.isUniformEmbedding_restrictScalars\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\"], \"digest\": \"7f029fbc93c27261\"}",
+   "date": "2026-10-20",
+   "verdict": "No match. Algebra.FormallyUnramified.flat_of_restrictScalars concerns ordinary algebraic module flatness, not all unbounded complexes of constant-field module sheaves. The proof here uses the existing flatness and truncation declarations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteFieldDerivedTensorSummand",
+  "date": "2026-10-20",
+  "group": "R1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-ordinary-kunneth-finite-ring",
+   "place": "Proof, first two paragraphs: finite-field tensor diagonal summand. Tags 06YN, 06YQ and 06YU; sites-modules Tags 03ER and 08FC. The upper-truncation filtered-colimit proof is an agent consequence.",
+   "via": [
+    "lem-pur-finite-field-derived-tensor-summand"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ConstantFieldRestrictionRepresentatives",
+  "file": "lean/Sheaf/Paper/ConstantFieldRestrictionRepresentatives.lean",
+  "declaration": "FiniteFieldDerivedTensor.restriction_preserves_representatives",
+  "statement": "theorem restriction_preserves_representatives (K : Complexes J B)\n    (_hK : representatives J B K) :\n    representatives J F ((restrictComplex J F B).obj K)",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-20"
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-0b040",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261022T002433-L-1930318",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-0b040",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261022T002433-L-1930318",
+  "kind": "interface",
+  "note": "independent cc review: item theorem statement byte-identical to live; interface moved with unchanged signatures, total/generator bodies via Classical.choose model pinned by proved model_eq/totalFunctor_eq_mathlib (change record); delta vs passed head a536bb87 diffed; sorry'd sheaf retraction checked true; direct importer FiniteAlgebraExternalTensorFiltration compiled clean in sandbox; item axioms propext/Classical.choice/Quot.sound + sorryAx from the one sorry"
+ }
+}

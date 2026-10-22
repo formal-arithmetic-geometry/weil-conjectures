@@ -1,0 +1,128 @@
+{
+ "id": "lem-pur-separable-field-tensor-chain",
+ "kind": "statement",
+ "title": "The chain-level separability retraction on sheaf tensors",
+ "statement": "Let F -> B be an arbitrary field extension on a small site, with the comparison interfaces [def-pur-finite-field-derived-tensor-comparison]. If e in B tensor_F B satisfies mu(e)=1 and (b tensor 1 - 1 tensor b)e=0 for every b, then the canonical balanced quotient of total tensor complexes has a natural section whose other composite is the natural e-action. The coefficient action and balanced quotient have the specified pure-generator formulas in every bidegree. Neither derived categories nor finiteness of fields or boundedness of complexes is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Original node proof steps 3 and 6; Stacks algebra Tag 0C2X, sites-modules Tags 03EK and 0GMW, sites-cohomology Tag 06YU."
+ },
+ "stmt_deps": [
+  "def-pur-finite-field-derived-tensor-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Obtain the coefficient action, canonical balanced quotient and its section on module sheaves from the underived separability lemma. These maps are natural and have the prescribed formulas on pure tensor sections.",
+   "uses": [
+    "lem-pur-separable-field-tensor-sheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The proved preservesColimitsOfShape_toSheaf instance gives preservation of the smallest colimits by the module-sheaf forgetful functors, which reflect colimits. A private helper for arbitrary ring sheaves deduces preservation by scalar restriction. Four proved generic zero-preservation lemmas supply the totalization instances. The existing total-bifunctor comparison gives the natural totalization isomorphisms. All raw totalization arguments are proved for arbitrary categories before specialization. A predicate parameterized by the whole canonical model transports the result along model_eq, carrying dependent endomorphism-ring instances and inclusions together.",
+   "uses": [
+    "lem-pc-total-bifunctor-comparison-iso",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply a natural transformation of bifunctors in every bidegree and use coproduct extensionality to prove preservation of identities, composition, addition and zero. Lift the tensor-ring action and both split identities, and conjugate by the comparison isomorphisms. Transport this complete result to the canonical totalization models, which are fixed by equality to the Mathlib constructions. Evaluation on their bidegree inclusions proves the action and balanced-quotient generator formulas. The concrete sheaf specialization uses the model API without expanding the chosen coproducts.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-separable-field-tensor-sheaf",
+  "lem-pc-total-bifunctor-comparison-iso",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YU and the proved source-library total-bifunctor comparison. The ordinary sheaf retraction is isolated in lem-pur-separable-field-tensor-sheaf. Small-colimit preservation follows from the proved forgetful-functor instance. Generic totalization, zero-preservation, equality transport of the complete canonical model, and summand combination are proved privately in the same chain module; the model equality fixes all data to the concrete Mathlib construction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A separability element splits the canonical balanced tensor quotient for sheaves of modules and unbounded total tensor complexes",
+   "results": "{\"t\": \"2026-10-20T01:57:19Z\", \"tool\": \"leanfinder\", \"query\": \"A separability element splits the canonical balanced tensor quotient for sheaves of modules and unbounded total tensor complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"rTensor.inverse_of_rightInverse\", \"lTensor.inverse\", \"lTensor.toFun\", \"lTensor.inverse_of_rightInverse\", \"PresheafOfModules.Monoidal.tensorObj\", \"rTensor.inverse\", \"rTensor.toFun\", \"rTensor.linearEquiv_of_rightInverse\"], \"digest\": \"ecf4e961acb766be\"}",
+   "date": "2026-10-20",
+   "verdict": "No matching sheaf-chain or representative-descent theorem; candidates concern ordinary algebra or dense subsites. Sources were inspected before constructing the present lemma."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tensor\", \"separable\"",
+   "results": "{\"t\": \"2026-10-20T01:57:19Z\", \"tool\": \"loogle\", \"query\": \"\\\"tensor\\\", \\\"separable\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"IsPurelyInseparable.exists_pow_mem_range_tensorProduct\", \"IsPurelyInseparable.exists_pow_pow_mem_range_tensorProduct_of_expChar\", \"PrimeSpectrum.isHomeomorph_comap_tensorProductMap_of_isPurelyInseparable\"], \"digest\": \"51fe565bc904fa06\"}",
+   "date": "2026-10-20",
+   "verdict": "No matching sheaf-chain or representative-descent theorem; candidates concern ordinary algebra or dense subsites. Sources were inspected before constructing the present lemma."
+  },
+  {
+   "tool": "grep",
+   "query": "whiskerLeft.*(bijective|full)|IsFlat.*constantField|separability.*tensor",
+   "results": "{\"t\": \"2026-10-20T01:54:34Z\", \"tool\": \"grep\", \"query\": \"whiskerLeft.*(bijective|full)|IsFlat.*constantField|separability.*tensor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean\", \"Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean\", \"Mathlib/CategoryTheory/Sites/Equivalence.lean\", \"Mathlib/CategoryTheory/Sites/Equivalence.lean\", \"Mathlib/CategoryTheory/Sites/DenseSubsite/Basic.lean\"], \"digest\": \"6ad060f675266202\"}",
+   "date": "2026-10-20",
+   "verdict": "No matching sheaf-chain or representative-descent theorem; candidates concern ordinary algebra or dense subsites. Sources were inspected before constructing the present lemma."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural split retraction of tensor bifunctors lifts to unbounded cochain total tensor complexes while preserving its coefficient action and pure tensor summand equations",
+   "results": "{\"t\": \"2026-10-20T17:23:05Z\", \"tool\": \"leansearch\", \"query\": \"A natural split retraction of tensor bifunctors lifts to unbounded cochain total tensor complexes while preserving its coefficient action and pure tensor summand equations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"retractionOfSectionOfKerSqZero_tmul_D\", \"CategoryTheory.ShortComplex.Splitting.map_r\", \"CategoryTheory.ShortComplex.Splitting.r\", \"TensorProduct.liftAux_tmul\", \"CochainComplex.mapBifunctor\", \"CategoryTheory.ShortComplex.Splitting.map\", \"TensorProduct.lift_mk_compr₂ₛₗ\", \"CategoryTheory.ShortComplex.Splitting.f_r\"], \"digest\": \"242e886d6458ee93\"}",
+   "date": "2026-10-20",
+   "verdict": "Partial match: CochainComplex.mapBifunctor is the total complex constructor used here. ShortComplex.Splitting.map preserves a single short-complex splitting, not a bifunctor action and its pure summand equations. No exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteFieldDerivedTensorSummand",
+  "date": "2026-10-20",
+  "group": "R1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-ordinary-kunneth-finite-ring",
+   "place": "Proof, first two paragraphs: finite-field tensor diagonal summand. Original node proof steps 3 and 6; Stacks algebra Tag 0C2X, sites-modules Tags 03EK and 0GMW, sites-cohomology Tag 06YU.",
+   "via": [
+    "lem-pur-finite-field-derived-tensor-summand"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SeparableFieldTensorChain",
+  "file": "lean/Sheaf/Paper/SeparableFieldTensorChain.lean",
+  "declaration": "FiniteFieldDerivedTensor.exists_separableFieldTensorChain",
+  "statement": "theorem exists_separableFieldTensorChain (e : B ⊗[F] B)\n    (hμ : Algebra.TensorProduct.lmul' F e = 1)\n    (he : ∀ b : B, (b ⊗ₜ[F] (1 : B) - (1 : B) ⊗ₜ[F] b) * e = 0) :\n    ∃ (chain : ChainComparison (J := J) (F := F) (B := B))\n      (a : (B ⊗[F] B) →+* End\n        (((restrictComplex J F B).prod (restrictComplex J F B)) ⋙ total J F))\n      (s : total J B ⋙ restrictComplex J F B ⟶\n        ((restrictComplex J F B).prod (restrictComplex J F B)) ⋙ total J F),\n      s ≫ chain.chainBalanced = 𝟙 _ ∧\n      chain.chainBalanced ≫ s = a e ∧\n      ∀ (K L : Complexes J B) (x : B ⊗[F] B),\n        (a x).app (K, L) = chain.chainAction K L x",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-20"
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-0b040",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261022T002433-L-1930318",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-0b040",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261022T002433-L-1930318",
+  "kind": "interface",
+  "note": "independent cc review: item theorem statement byte-identical to live; interface moved with unchanged signatures, total/generator bodies via Classical.choose model pinned by proved model_eq/totalFunctor_eq_mathlib (change record); delta vs passed head a536bb87 diffed; sorry'd sheaf retraction checked true; direct importer FiniteAlgebraExternalTensorFiltration compiled clean in sandbox; item axioms propext/Classical.choice/Quot.sound + sorryAx from the one sorry"
+ }
+}
