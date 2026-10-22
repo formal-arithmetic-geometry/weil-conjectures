@@ -1,0 +1,141 @@
+{
+ "id": "lem-trf-nilpotent-fiber-homology",
+ "kind": "statement",
+ "title": "Nilpotent natural fibre endomorphisms give a thick cohomology property",
+ "statement": "Let $\\mathcal C$ and $\\mathcal D$ be abelian categories, $F:\\mathcal C\\to\\mathcal D$ an additive functor preserving finite limits and finite colimits, and $t:F\\Rightarrow F$ a natural endomorphism. Suppose the ordinary derived category $D(\\mathcal C)$ exists. Define $P(M)$ by the existence of $n\\geq0$ with $t_M^n=0$. Then the class $Q$ of objects $K\\in D(\\mathcal C)$ such that $P(H^iK)$ holds for every integer $i$ is triangulated and stable under retracts, hence thick in the sense of [pur9-def-thick]. No boundedness or uniform exponent over the degrees is assumed.",
+ "stmt_deps": [
+  "pur9-def-thick",
+  "def-weil-abstract-derived-category"
+ ],
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-lem-sf-ctf-generation/lem-trf-devissage-generation.md",
+  "place": "Proof, Step 3: Nilpotent natural fibre endomorphisms give a thick cohomology property"
+ },
+ "proof": [
+  {
+   "text": "Naturality intertwines every power of t with F(f). Cancellation against a monomorphism or epimorphism shows that P passes to subobjects and quotients. The zero object has exponent one.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-lem-sf-ctf-generation/lem-trf-devissage-generation.md",
+    "place": "Proof, Step 3"
+   }
+  },
+  {
+   "text": "For a short exact sequence with nilpotence exponents a and b at its ends, exactness factors the b-th power on the middle fibre through the left fibre. Naturality then kills its composite with the a-th power. Thus a+b kills the middle fibre. These three closure properties make P a Serre property.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-lem-sf-ctf-generation/lem-trf-devissage-generation.md",
+    "place": "Proof, Step 3"
+   }
+  },
+  {
+   "text": "Apply the long exact cohomology sequence [lem-sf-derived-homology-long-exact]. Each cohomology object at the third vertex is an extension of a quotient and a subobject of adjacent cohomology objects at the other vertices. Shifts reindex the condition; zero has the condition. On a retract, each cohomology is a subobject of the corresponding cohomology of the ambient object, so P descends. This proves both clauses of thickness [pur9-def-thick]. The Lean proof uses the existing DerivedCategory.homologyProperty Serre-class API, with exactly these hypotheses.",
+   "uses": [
+    "lem-sf-derived-homology-long-exact",
+    "pur9-def-thick"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-lem-sf-ctf-generation/lem-trf-devissage-generation.md",
+    "place": "Proof, Step 3"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-derived-homology-long-exact",
+  "pur9-def-thick"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-lem-sf-ctf-generation/lem-trf-devissage-generation.md",
+  "place": "Expansion of the Kummer monodromy obstruction, preserving the flat-model and stratum-extension route."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Nilpotent natural endomorphism exact functor abelian category closed under extensions and homology thick subcategory",
+   "results": "{\"t\": \"2026-10-22T00:33:21Z\", \"tool\": \"leanfinder\", \"query\": \"Nilpotent natural endomorphism exact functor abelian category closed under extensions and homology thick subcategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Abelian.Ext.mapExactFunctor_zero\", \"CategoryTheory.Abelian.Ext.mapExactFunctor\", \"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\", \"CategoryTheory.Functor.exact_tfae\", \"CategoryTheory.Functor.mapExactFunctor_smul\", \"CategoryTheory.Functor.homologicalKernel\", \"CategoryTheory.ObjectProperty.prop_X₂_of_exact\", \"DerivedCategory.IsLE\"], \"digest\": \"5bd7fc48cddce06d\"}",
+   "date": "2026-10-22",
+   "verdict": "Partial ingredients only; no declaration gives the entire statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsNilpotent",
+   "results": "{\"t\": \"2026-10-22T00:33:22Z\", \"tool\": \"loogle\", \"query\": \"IsNilpotent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"IsNilpotent\", \"isNilpotent_of_subsingleton\", \"IsNilpotent.eq_zero\", \"IsReduced.eq_zero\", \"IsReduced.mk\", \"isReduced_iff\", \"exists_isNilpotent_of_not_isReduced\", \"IsNilpotent.mk\"], \"digest\": \"bdc4f773716d6805\"}",
+   "date": "2026-10-22",
+   "verdict": "Partial ingredients only; no declaration gives the entire statement."
+  },
+  {
+   "tool": "grep",
+   "query": "nilpotentFiber|nilpotent.*IsClosedUnder|IsNilpotent.*homologyProperty",
+   "results": "{\"t\": \"2026-10-22T00:33:22Z\", \"tool\": \"grep\", \"query\": \"nilpotentFiber|nilpotent.*IsClosedUnder|IsNilpotent.*homologyProperty\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "Partial ingredients only; no declaration gives the entire statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Nilpotence of a natural endomorphism of an exact functor is a Serre property and yields a thick subcategory on derived cohomology",
+   "results": "{\"t\": \"2026-10-22T00:54:24Z\", \"tool\": \"leansearch\", \"query\": \"Nilpotence of a natural endomorphism of an exact functor is a Serre property and yields a thick subcategory on derived cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.End.isNilpotent_iff_of_finite\", \"Module.End.IsNilpotent.mapQ\", \"Module.End.submodule_pow_eq_zero_of_pow_eq_zero\", \"CategoryTheory.ObjectProperty.IsSerreClass.casesOn\", \"CategoryTheory.ObjectProperty.IsSerreClass.recOn\", \"Module.End.isNilpotent.restrict\", \"CategoryTheory.ObjectProperty.IsSerreClass.toIsClosedUnderSubobjects\", \"CategoryTheory.ObjectProperty.IsSerreClass\"], \"digest\": \"9a714c205b131d02\"}",
+   "date": "2026-10-22",
+   "verdict": "Partial ingredients only; no declaration gives the entire statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TrfDevissageGeneration",
+  "date": "2026-10-22",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-devissage-generation",
+   "place": "Proof, Step 3: Nilpotent natural fibre endomorphisms give a thick cohomology property",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-lem-sf-ctf-generation",
+ "lean_audit": {},
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.NilpotentFiberHomology",
+  "file": "lean/Sheaf/CategoryTheory/NilpotentFiberHomology.lean",
+  "declaration": "CategoryTheory.nilpotentFiberHomology_thick",
+  "declarations": [
+   "CategoryTheory.nilpotentFiber",
+   "CategoryTheory.nilpotentFiberHomology",
+   "CategoryTheory.nilpotentFiberHomology_thick"
+  ],
+  "statement": "theorem nilpotentFiberHomology_thick [HasDerivedCategory.{w} C]\n    (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]\n    (t : F ⟶ F) :\n    (nilpotentFiberHomology F t).IsTriangulated ∧\n      (nilpotentFiberHomology F t).IsStableUnderRetracts",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-22"
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-56422",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261022T013353-L-3554919",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-56422",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261022T013353-L-3554919",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 4 new modules/nodes vs node lem-trf-devissage-generation, unit sk-lem-sf-ctf-generation (realized empty), sfProEtaleClosureGenerators/proEtaleStalkReparam definitions, scratch #print axioms compile of all five files"
+ }
+}

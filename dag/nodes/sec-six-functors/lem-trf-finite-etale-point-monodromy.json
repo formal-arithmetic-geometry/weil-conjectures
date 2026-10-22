@@ -1,0 +1,158 @@
+{
+ "id": "lem-trf-finite-etale-point-monodromy",
+ "kind": "statement",
+ "title": "A two-cycle of a finite etale cover separates constant stratum extensions",
+ "statement": "Let $\\pi:V\\to X$ be a finite etale morphism of schemes, $\\Omega$ an algebraically closed field, $x:\\operatorname{Spec}\\Omega\\to X$ a geometric point, and $\\sigma:\\Omega\\simeq\\Omega$ a field automorphism with $x\\operatorname{Spec}(\\sigma)=x$. Suppose a lift $y:\\operatorname{Spec}\\Omega\\to V$ satisfies $\\pi y=x$, $y\\operatorname{Spec}(\\sigma)\\ne y$, and $y\\operatorname{Spec}(\\sigma)^2=y$. Let $A$ be a nonzero finite commutative ring of characteristic three. On sheaves of modules over the constant ring $A_X$ on the small pro-etale site, let $F$ be the canonical exact geometric module stalk at $x$ [def-weil-proetale-geometric-stalk], and let $t:F\\Rightarrow F$ be the germ-normalized reparametrization by $\\sigma$ [lem-trf-proetale-pullback-stalk-coherence], identified back to $x$ by the specified equality, minus identity. There exists a sheaf $L$ such that (i) $L[0]$ belongs to the lisse flat stratum-extension generator family of [sk-lem-sf-flat-model]; (ii) $t_L$ is not nilpotent; (iii) for every finite stratification of $X$ and every stratum factorization $U\\xrightarrow{j}\\overline U\\xrightarrow{g}X$ through its scheme-theoretic closure, $t$ is zero on the intrinsic realization of $g_*j_!A_U$. Here $A_U$ is the sheafification of the constant regular module and the intrinsic realization is the canonical fixed-module/module-over-the-constant-ring equivalence. The three conditions refer to the same canonical F and t; they are the fields of SeparatingPointMonodromy.",
+ "stmt_deps": [
+  "def-weil-proetale-geometric-stalk",
+  "lem-trf-proetale-pullback-stalk-coherence",
+  "sk-lem-sf-flat-model"
+ ],
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-lem-sf-ctf-generation/lem-trf-devissage-generation.md",
+  "place": "Proof, Step 3: A two-cycle of a finite etale cover separates constant stratum extensions"
+ },
+ "proof": [
+  {
+   "text": "Take the etale sheaf pi_* A_V and apply comparison inverse image and intrinsic realization. Finite etale local splitting identifies it on an etale covering with a finite direct sum of regular modules, proving finite local constancy and flatness. Pro-etale lisse origin gives the lisse condition. The trivial one-stratum stratification, with both immersions identities, identifies its degree-zero complex with a generator of the flat-model family.",
+   "uses": [
+    "lem-weil-pbc-finite-etale-etale-local-split",
+    "lem-weil-pbc-etale-finite-pushforward-locally-constant",
+    "lem-sf-proetale-locally-constant-origin",
+    "sk-lem-sf-flat-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-lem-sf-ctf-generation/lem-trf-devissage-generation.md",
+    "place": "Proof, Step 3"
+   }
+  },
+  {
+   "text": "The finite stalk formula identifies the stalk of pi_* A_V with the A-valued functions on the finite set of geometric lifts. Its coordinate maps restrict germs to the chosen lift. The canonical comparison is normalized on unit germs and stalk reparametrization sends a pointed germ to the same section with its lift precomposed by Spec(sigma), so this identification carries reparametrization to permutation of the coordinates. For v=delta_y-delta_(sigma y), the two-cycle hypotheses give sigma(v)=-v and v(y)=1. Thus v is nonzero, and in characteristic three (sigma-1)v=-2v=v. Every positive power fixes v and the zeroth power is identity, so no power vanishes.",
+   "uses": [
+    "lemma-weil-pbc-finite-stalk-formula",
+    "lem-cbc-proetale-comparison-stalk",
+    "lem-trf-proetale-pullback-stalk-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-lem-sf-ctf-generation/lem-trf-devissage-generation.md",
+    "place": "Proof, Step 3"
+   }
+  },
+  {
+   "text": "For a stratum extension, use that its closed immersion is finite. The finite stalk formula gives zero if the geometric point has no lift, and the stalk at the unique lift otherwise, since the immersion is a monomorphism. The open extension-by-zero stalk is similarly zero outside the open and the original stalk inside. Every lift through these immersions is unique and therefore is fixed by precomposition by Spec(sigma) whenever x is fixed. The stalk of the constant regular module is its regular module, and each constant germ is fixed. Thus t is zero in all cases. Comparison of direct image and open extension by zero, together with the germ normalization of the stalk comparison, identifies this action with the canonical intrinsic-module action used in the statement; no genericity or reducedness hypothesis is required.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-finite",
+    "lemma-weil-pbc-finite-stalk-formula",
+    "lem-weil-pbc-extension-by-zero-stalks",
+    "prop-weil-pbc-comparison-direct-image",
+    "lem-cbc-proetale-extension-zero-comparison",
+    "lem-cbc-proetale-comparison-stalk",
+    "lem-trf-proetale-pullback-stalk-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-lem-sf-ctf-generation/lem-trf-devissage-generation.md",
+    "place": "Proof, Step 3"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-etale-etale-local-split",
+  "lem-weil-pbc-etale-finite-pushforward-locally-constant",
+  "lem-sf-proetale-locally-constant-origin",
+  "sk-lem-sf-flat-model",
+  "lemma-weil-pbc-finite-stalk-formula",
+  "lem-cbc-proetale-comparison-stalk",
+  "lem-trf-proetale-pullback-stalk-coherence",
+  "lem-weil-pbc-closed-immersion-finite",
+  "lem-weil-pbc-extension-by-zero-stalks",
+  "prop-weil-pbc-comparison-direct-image",
+  "lem-cbc-proetale-extension-zero-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-lem-sf-ctf-generation/lem-trf-devissage-generation.md",
+  "place": "Expansion of the Kummer monodromy obstruction, preserving the flat-model and stratum-extension route."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite etale cover with a two cycle in geometric generic monodromy gives a lisse sheaf with nonnilpotent monodromy minus identity",
+   "results": "{\"t\": \"2026-10-22T00:47:49Z\", \"tool\": \"leanfinder\", \"query\": \"A finite etale cover with a two cycle in geometric generic monodromy gives a lisse sheaf with nonnilpotent monodromy minus identity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.isNilpotent_of_isNilpotent_cover\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"AlgebraicGeometry.IsEtale.of_comp\", \"Algebra.etaleLocus_eq_compl_support\", \"Algebra.Etale.formallyEtale\", \"StandardEtalePair.instFormallyEtaleRing\"], \"digest\": \"d1e74bc0e5e0e2b3\"}",
+   "date": "2026-10-22",
+   "verdict": "Partial ingredients only; no declaration gives the entire statement."
+  },
+  {
+   "tool": "grep",
+   "query": "generic.*monodromy|monodromy.*generic",
+   "results": "{\"t\": \"2026-10-22T00:47:49Z\", \"tool\": \"grep\", \"query\": \"generic.*monodromy|monodromy.*generic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "Partial ingredients only; no declaration gives the entire statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite etale cover with a two-cycle at a geometric point yields nonnilpotent monodromy minus identity on its permutation local system",
+   "results": "{\"t\": \"2026-10-22T00:54:24Z\", \"tool\": \"leansearch\", \"query\": \"A finite etale cover with a two-cycle at a geometric point yields nonnilpotent monodromy minus identity on its permutation local system\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsCoveringMap.monodromy\", \"IsCoveringMap.monodromyFunctor\", \"IsCoveringMap.monodromy_map\", \"Equiv.Perm.IsCycle.ne_one\", \"IsCoveringMap.monodromy_bijective\", \"IsCoveringMap.monodromy_refl\", \"IsCoveringMap.monodromy_trans_apply\", \"IsCoveringMap.monodromyFunctor_obj\"], \"digest\": \"c498e04ddd7b4e7d\"}",
+   "date": "2026-10-22",
+   "verdict": "Partial ingredients only; no declaration gives the entire statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TrfDevissageGeneration",
+  "date": "2026-10-22",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-devissage-generation",
+   "place": "Proof, Step 3: A two-cycle of a finite etale cover separates constant stratum extensions",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-lem-sf-ctf-generation",
+ "lean_audit": {},
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteEtalePointMonodromy",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteEtalePointMonodromy.lean",
+  "declaration": "AlgebraicGeometry.finite_etale_point_monodromy",
+  "declarations": [
+   "AlgebraicGeometry.genericStalkMonodromy",
+   "AlgebraicGeometry.SeparatingPointMonodromy",
+   "AlgebraicGeometry.finite_etale_point_monodromy"
+  ],
+  "statement": "theorem finite_etale_point_monodromy\n    {X V : Scheme.{u}} (π : V ⟶ X) [IsFinite π] [Etale π]\n    (Ω : Type u) [Field Ω] [IsAlgClosed Ω]\n    (x : Spec (.of Ω) ⟶ X)\n    (σ : Ω ≃+* Ω)\n    (hs : Spec.map (CommRingCat.ofHom σ.toRingHom) ≫ x = x)\n    (y : Spec (.of Ω) ⟶ V) (hy : y ≫ π = x)\n    (hmove : Spec.map (CommRingCat.ofHom σ.toRingHom) ≫ y ≠ y)\n    (htwo : Spec.map (CommRingCat.ofHom σ.toRingHom) ≫\n      Spec.map (CommRingCat.ofHom σ.toRingHom) ≫ y = y)\n    (A : Type u) [CommRing A] [Finite A] [CharP A 3] [Nontrivial A] :\n    let F := finiteCoefficientModuleStalkFunctor x A\n    let t := genericStalkMonodromy A x σ hs\n    ∃ L : proEtaleRingModules X (proEtaleConstantRing X A),\n      SeparatingPointMonodromy X A F t L",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-22"
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-56422",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261022T013353-L-3554919",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-56422",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261022T013353-L-3554919",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 4 new modules/nodes vs node lem-trf-devissage-generation, unit sk-lem-sf-ctf-generation (realized empty), sfProEtaleClosureGenerators/proEtaleStalkReparam definitions, scratch #print axioms compile of all five files"
+ }
+}

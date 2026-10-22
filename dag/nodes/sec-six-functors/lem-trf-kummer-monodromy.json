@@ -1,0 +1,147 @@
+{
+ "id": "lem-trf-kummer-monodromy",
+ "kind": "statement",
+ "title": "Explicit quadratic Kummer monodromy on the punctured line",
+ "statement": "Let $k$ be an algebraically closed field of characteristic five, let $X=\\operatorname{Spec}k[t,t^{-1}]$, and let $A$ be a nonzero finite commutative ring of characteristic three. There exist an additive exact functor $F$ from intrinsic $A_X$-module sheaves on the small pro-etale site to $A$-modules, a natural endomorphism $t:F\\Rightarrow F$, and a sheaf $L$, such that $L[0]$ belongs to the lisse flat stratum-extension generator family [sk-lem-sf-flat-model], $t_L$ is not nilpotent, and $t$ is zero on every constant regular-module stratum extension $g_*j_!A_U$. The constant extensions and the three clauses use the convention of [lem-trf-finite-etale-point-monodromy]. This is SeparatingPointMonodromy X A F t L, with preservation of finite limits and finite colimits expressing exactness of F.",
+ "stmt_deps": [
+  "sk-lem-sf-flat-model",
+  "lem-trf-finite-etale-point-monodromy"
+ ],
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-lem-sf-ctf-generation/lem-trf-devissage-generation.md",
+  "place": "Proof, Step 3: Explicit quadratic Kummer monodromy on the punctured line"
+ },
+ "proof": [
+  {
+   "text": "Put R=k[t,t^-1], K=k(t) and Omega equal to the algebraic closure of K. The canonical localization map R to K to Omega defines a geometric point x of X. By [lem-trf-quadratic-kummer-action] choose r and sigma with r^2=t, sigma(r)=-r and r different from -r. Since sigma fixes K it fixes x.",
+   "uses": [
+    "lem-trf-quadratic-kummer-action"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-lem-sf-ctf-generation/lem-trf-devissage-generation.md",
+    "place": "Proof, Step 3"
+   }
+  },
+  {
+   "text": "Form B=R[z]/(z^2-t). Monicity makes B a finite R-module. Since 2 and t are units, the derivative criterion [lem-weil-pbc-standard-etale-monic-derivative], concretely AdjoinRoot.etale_X_pow_sub_C, makes it etale. Evaluation at r gives a lift y of x to Spec B. Evaluating the root proves that sigma moves y, and AdjoinRoot.ringHom_ext proves that sigma squared fixes y: both maps fix the coefficients and take the root to r.",
+   "uses": [
+    "lem-weil-pbc-standard-etale-monic-derivative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-lem-sf-ctf-generation/lem-trf-devissage-generation.md",
+    "place": "Proof, Step 3"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-finite-etale-point-monodromy] to this finite etale cover, point, automorphism and lift. The canonical finiteCoefficientModuleStalkFunctor is additive, and [lem-trf-proetale-pullback-stalk-coherence] supplies preservation of finite limits and colimits. Take these witnesses and the sheaf supplied by the point-monodromy lemma.",
+   "uses": [
+    "lem-trf-finite-etale-point-monodromy",
+    "lem-trf-proetale-pullback-stalk-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-lem-sf-ctf-generation/lem-trf-devissage-generation.md",
+    "place": "Proof, Step 3"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-quadratic-kummer-action",
+  "lem-weil-pbc-standard-etale-monic-derivative",
+  "lem-trf-finite-etale-point-monodromy",
+  "lem-trf-proetale-pullback-stalk-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-lem-sf-ctf-generation/lem-trf-devissage-generation.md",
+  "place": "Expansion of the Kummer monodromy obstruction, preserving the flat-model and stratum-extension route."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "constant sheaves do not thickly generate constructible derived category nontrivial rank one local system",
+   "results": "{\"t\": \"2026-10-22T00:25:12Z\", \"tool\": \"leanfinder\", \"query\": \"constant sheaves do not thickly generate constructible derived category nontrivial rank one local system\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.mem_essImage_of_isConstant\", \"CategoryTheory.Sheaf.IsConstant.mem_essImage\", \"LightCondMod.LocallyConstant.instFaithfulModuleCatSheafLightProfiniteCoherentTopologyConstantSheaf\", \"CondensedMod.LocallyConstant.instFaithfulModuleCatSheafCompHausCoherentTopologyConstantSheaf\", \"CategoryTheory.Sheaf.isConstant_of_forget\", \"CategoryTheory.Sheaf.isConstant_iff_forget\", \"CategoryTheory.Sheaf.IsConstant\", \"CondensedMod.isDiscrete_tfae\"], \"digest\": \"c558c53721d9a060\"}",
+   "date": "2026-10-22",
+   "verdict": "Partial ingredients only; no declaration gives the entire statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ObjectProperty.triangEnvelope",
+   "results": "{\"t\": \"2026-10-22T00:25:12Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.ObjectProperty.triangEnvelope\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.ObjectProperty.triangEnvelope\", \"CategoryTheory.ObjectProperty.instIsStableUnderRetractsTriangEnvelope\", \"CategoryTheory.ObjectProperty.instIsStableUnderShiftTriangEnvelopeInt\", \"CategoryTheory.ObjectProperty.instNonemptyTriangEnvelope\", \"CategoryTheory.ObjectProperty.le_triangEnvelope\", \"CategoryTheory.ObjectProperty.instIsTriangulatedClosed₂TriangEnvelopeOfIsTriangulated\", \"CategoryTheory.ObjectProperty.prop_triangEnvelope_iff\", \"CategoryTheory.ObjectProperty.instIsTriangulatedTriangEnvelopeOfNonemptyOfIsTriangulated\"], \"digest\": \"f58045bdbc3d6956\"}",
+   "date": "2026-10-22",
+   "verdict": "Partial ingredients only; no declaration gives the entire statement."
+  },
+  {
+   "tool": "grep",
+   "query": "unipotent|sign.*representation|not.*triangEnvelope",
+   "results": "{\"t\": \"2026-10-22T00:25:12Z\", \"tool\": \"grep\", \"query\": \"unipotent|sign.*representation|not.*triangEnvelope\", \"sub\": \"\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Projectivization/PSL/Stabilizer.lean\", \"Mathlib/LinearAlgebra/Projectivization/PSL/Stabilizer.lean\", \"Mathlib/LinearAlgebra/Projectivization/PSL/Stabilizer.lean\", \"Mathlib/CategoryTheory/Triangulated/Generators.lean\", \"Mathlib/CategoryTheory/Triangulated/Generators.lean\", \"Mathlib/CategoryTheory/Triangulated/Generators.lean\", \"Mathlib/CategoryTheory/Triangulated/Generators.lean\", \"Mathlib/CategoryTheory/Triangulated/Generators.lean\"], \"digest\": \"44d6cdf75179bada\"}",
+   "date": "2026-10-22",
+   "verdict": "Partial ingredients only; no declaration gives the entire statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constant sheaves on locally closed strata do not thickly generate finite Tor constructible complexes on the punctured line",
+   "results": "{\"t\": \"2026-10-22T00:54:24Z\", \"tool\": \"leansearch\", \"query\": \"Constant sheaves on locally closed strata do not thickly generate finite Tor constructible complexes on the punctured line\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.constantSheaf\", \"CategoryTheory.Sheaf.IsConstant.recOn\", \"CategoryTheory.Sheaf.IsConstant.casesOn\", \"CondensedSet.LocallyConstant.functorFullyFaithful\", \"CategoryTheory.Sheaf.IsConstant\", \"CategoryTheory.Sheaf.IsConstant.mk\", \"LightCondensed.IsDiscrete\", \"CategoryTheory.Sheaf.IsConstant.mem_essImage\"], \"digest\": \"5349d4a8a45ed909\"}",
+   "date": "2026-10-22",
+   "verdict": "Partial ingredients only; no declaration gives the entire statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TrfDevissageGeneration",
+  "date": "2026-10-22",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-devissage-generation",
+   "place": "Proof, Step 3: Explicit quadratic Kummer monodromy on the punctured line",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-lem-sf-ctf-generation",
+ "lean_audit": {},
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TrfKummerMonodromy",
+  "file": "lean/Sheaf/Paper/TrfKummerMonodromy.lean",
+  "declaration": "AlgebraicGeometry.exists_trf_kummer_monodromy",
+  "declarations": [
+   "AlgebraicGeometry.trfKummerBase",
+   "AlgebraicGeometry.trfKummerStructureMap",
+   "AlgebraicGeometry.exists_trf_kummer_monodromy"
+  ],
+  "statement": "theorem exists_trf_kummer_monodromy\n    (k : Type u) [Field k] [IsAlgClosed k] [CharP k 5]\n    (A : Type u) [CommRing A] [Finite A] [CharP A 3] [Nontrivial A] :\n    let X := trfKummerBase k\n    ∃ F : proEtaleRingModules X (proEtaleConstantRing X A) ⥤\n        ModuleCat.{u + 1} (ULift.{u + 1, u} A),\n      F.Additive ∧ PreservesFiniteLimits F ∧ PreservesFiniteColimits F ∧\n      ∃ (t : F ⟶ F) (L : proEtaleRingModules X (proEtaleConstantRing X A)),\n        SeparatingPointMonodromy X A F t L",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-22"
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-56422",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261022T013353-L-3554919",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-56422",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261022T013353-L-3554919",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 4 new modules/nodes vs node lem-trf-devissage-generation, unit sk-lem-sf-ctf-generation (realized empty), sfProEtaleClosureGenerators/proEtaleStalkReparam definitions, scratch #print axioms compile of all five files"
+ }
+}

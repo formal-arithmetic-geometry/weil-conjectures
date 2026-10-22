@@ -1,0 +1,121 @@
+{
+ "id": "lem-trf-quadratic-kummer-action",
+ "kind": "statement",
+ "title": "A quadratic Kummer root is moved by a function-field automorphism",
+ "statement": "Let $k$ be a field of characteristic five, let $K=k(t)$ be the rational function field, and let $\\Omega$ be its algebraic closure. Then there are $r\\in\\Omega$ and a $K$-algebra automorphism $\\sigma$ of $\\Omega$ such that $r^2=t$, $\\sigma(r)=-r$, and $r\\ne-r$.",
+ "stmt_deps": [],
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-lem-sf-ctf-generation/lem-trf-devissage-generation.md",
+  "place": "Proof, Step 3: A quadratic Kummer root is moved by a function-field automorphism"
+ },
+ "proof": [
+  {
+   "text": "For a nonzero rational function f, Mathlib RatFunc.intDegree_mul gives deg(f^2)=2deg(f), whereas deg(t)=1. The equality f^2=t would give an impossible equality of integers. The zero case contradicts RatFunc.X_ne_zero. This is the parity argument for the nonsquare coordinate.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-lem-sf-ctf-generation/lem-trf-devissage-generation.md",
+    "place": "Proof, Step 3"
+   }
+  },
+  {
+   "text": "Apply Polynomial.X_pow_sub_C_irreducible_of_prime with exponent two to the nonsquare coordinate. Algebraic closedness supplies a root r of z^2-t. Its minimal polynomial is this irreducible monic polynomial. Both r and -r are roots; minpoly.exists_algEquiv_of_root' extends the conjugacy to a K-automorphism of the normal extension Omega. Characteristic five implies 2 is nonzero, and r is nonzero because t is nonzero, so r differs from -r.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-lem-sf-ctf-generation/lem-trf-devissage-generation.md",
+    "place": "Proof, Step 3"
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-lem-sf-ctf-generation/lem-trf-devissage-generation.md",
+  "place": "Expansion of the Kummer monodromy obstruction, preserving the flat-model and stratum-extension route."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The coordinate rational function t is not a square, and an automorphism of its algebraic closure exchanges square roots of t",
+   "results": "{\"t\": \"2026-10-22T00:47:51Z\", \"tool\": \"leanfinder\", \"query\": \"The coordinate rational function t is not a square, and an automorphism of its algebraic closure exchanges square roots of t\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Field.primitive_element_inf_aux_exists_c\", \"IsAlgClosed.exists_eq_mul_self\", \"Polynomial.Gal.galActionHom_bijective_of_prime_degree\", \"Algebra.IsQuadraticExtension.isMulCommutative_galoisGroup\", \"RCLike.sqrt_map\", \"autAdjoinRootXPowSubCEquiv_symm_smul\", \"autAdjoinRootXPowSubC_root\", \"autEquivRootsOfUnity_apply_rootOfSplit\"], \"digest\": \"e105cb8ff47626f9\"}",
+   "date": "2026-10-22",
+   "verdict": "Partial ingredients only; no declaration gives the entire statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "minpoly.exists_algEquiv_of_root'",
+   "results": "{\"t\": \"2026-10-22T00:47:51Z\", \"tool\": \"loogle\", \"query\": \"minpoly.exists_algEquiv_of_root'\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"minpoly.exists_algEquiv_of_root'\"], \"digest\": \"6352fe767cce2e78\"}",
+   "date": "2026-10-22",
+   "verdict": "Partial ingredients only; no declaration gives the entire statement."
+  },
+  {
+   "tool": "grep",
+   "query": "X_pow_sub_C_irreducible|intDegree_mul",
+   "results": "{\"t\": \"2026-10-22T00:47:51Z\", \"tool\": \"grep\", \"query\": \"X_pow_sub_C_irreducible|intDegree_mul\", \"sub\": \"\", \"ok\": true, \"n_hits\": 14, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/RatFunc/Valuation.lean\", \"Mathlib/FieldTheory/RatFunc/Degree.lean\", \"Mathlib/FieldTheory/RatFunc/Degree.lean\", \"Mathlib/FieldTheory/RatFunc/Degree.lean\", \"Mathlib/FieldTheory/Perfect.lean\", \"Mathlib/FieldTheory/KummerPolynomial.lean\", \"Mathlib/FieldTheory/KummerPolynomial.lean\", \"Mathlib/FieldTheory/KummerPolynomial.lean\"], \"digest\": \"52f6b882f7592e2f\"}",
+   "date": "2026-10-22",
+   "verdict": "Partial ingredients only; no declaration gives the entire statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The rational function t has no square root in k(t), and a Galois automorphism exchanges its two square roots",
+   "results": "{\"t\": \"2026-10-22T00:54:23Z\", \"tool\": \"leansearch\", \"query\": \"The rational function t has no square root in k(t), and a Galois automorphism exchanges its two square roots\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"minpoly.exists_algEquiv_of_root'\", \"minpoly.exists_algEquiv_of_root\", \"IsConjRoot.exists_algEquiv\", \"autEquivRootsOfUnity_smul\", \"Polynomial.Gal.galActionAux\", \"autEquivRootsOfUnity_apply_rootOfSplit\", \"FiniteGaloisIntermediateField.adjoin_simple_map_algEquiv\", \"isConjRoot_iff_exists_algEquiv\"], \"digest\": \"162bebd6e1b92cc6\"}",
+   "date": "2026-10-22",
+   "verdict": "Partial ingredients only; no declaration gives the entire statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TrfDevissageGeneration",
+  "date": "2026-10-22",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-devissage-generation",
+   "place": "Proof, Step 3: A quadratic Kummer root is moved by a function-field automorphism",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-lem-sf-ctf-generation",
+ "lean_audit": {},
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.QuadraticKummerAction",
+  "file": "lean/Sheaf/AlgebraicGeometry/QuadraticKummerAction.lean",
+  "declaration": "AlgebraicGeometry.quadratic_kummer_generic_action",
+  "declarations": [
+   "AlgebraicGeometry.quadratic_kummer_generic_action"
+  ],
+  "statement": "theorem quadratic_kummer_generic_action (k : Type u) [Field k] [CharP k 5] :\n    ∃ (r : AlgebraicClosure (RatFunc k))\n      (σ : AlgebraicClosure (RatFunc k) ≃ₐ[RatFunc k] AlgebraicClosure (RatFunc k)),\n      r ^ 2 = algebraMap (RatFunc k) (AlgebraicClosure (RatFunc k)) RatFunc.X ∧\n      σ r = -r ∧ r ≠ -r",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-22"
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-56422",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261022T013353-L-3554919",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-56422",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261022T013353-L-3554919",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 4 new modules/nodes vs node lem-trf-devissage-generation, unit sk-lem-sf-ctf-generation (realized empty), sfProEtaleClosureGenerators/proEtaleStalkReparam definitions, scratch #print axioms compile of all five files"
+ }
+}
