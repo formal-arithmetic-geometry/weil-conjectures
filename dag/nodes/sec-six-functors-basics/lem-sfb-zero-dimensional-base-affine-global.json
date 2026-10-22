@@ -20,9 +20,170 @@
   "lem-weil-pbc-proetale-ringed-open-comparison",
   "def-sp-injective-resolutions"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Since $B$ is affine and $g$ is separated and of finite type, [lem-weil-pbc-qcqs-over-affine] makes $X$ quasi-compact and quasi-separated. Therefore [lem-weil-pbc-qcqs-scheme-spectral] makes $|X|$ spectral. In particular it is sober: each nonempty irreducible closed subset has a generic point, by [def-weil-spectral-space].",
+   "uses": [
+    "lem-weil-pbc-qcqs-over-affine",
+    "lem-weil-pbc-qcqs-scheme-spectral",
+    "def-weil-spectral-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 094L, lemma-quasi-compact-quasi-separated-spectral; Schemes Tags 01K4, 01KU."
+   }
+  },
+  {
+   "text": "For every $b\\in B$, the scheme-theoretic fibre $X_b$ is separated and of finite type over $\\kappa(b)$ by [lem-pod-separated-finite-type-base-change]. Choose an algebraic closure $\\overline{\\kappa(b)}$. The field-extension clause of [lem-kun-dimension-extension] gives $\\dim X_b=\\dim(X_b\\times_{\\kappa(b)}\\overline{\\kappa(b)})$. By [def-weil-geometric-fibre] this base change is the geometric fibre in the hypothesis, so $\\dim X_b\\leq e$. This also covers empty fibres.",
+   "uses": [
+    "lem-pod-separated-finite-type-base-change",
+    "lem-kun-dimension-extension",
+    "def-weil-geometric-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00P3, lemma-dimension-preserved-field-extension; morphisms.tex Tag 01T4, lemma-base-change-finite-type."
+   }
+  },
+  {
+   "text": "Consider a chain $Z_0\\subsetneq\\cdots\\subsetneq Z_n$ of nonempty irreducible closed subsets of $X$. Let $\\eta$ be the generic point of $Z_n$ supplied in step 1, and put $b=g(\\eta)$. Every point of $B$ is closed: under $B\\cong\\operatorname{Spec}\\Gamma(B,\\mathcal O_B)$ its prime ideal is maximal. Continuity gives $g(Z_n)=g(\\overline{\\{\\eta\\}})\\subseteq\\overline{\\{b\\}}=\\{b\\}$. Thus every $Z_i$ lies in $g^{-1}(b)$. It remains closed and irreducible in that subspace, with the same strict inclusions. The homeomorphism in [def-pc-scheme-fibre] turns this into a chain of length $n$ in $X_b$, so $n\\leq e$ by step 2. Taking the supremum of chain lengths, as in [def-kun-topological-krull-dimension], gives $\\dim X\\leq e$. If $X$ is empty the supremum is $-\\infty$ and the same inequality holds.",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01K1, lemma-fibre-topological; elementary chain argument using Topology Tag 0055."
+   }
+  },
+  {
+   "text": "First identify the internal $\\mathcal R$-module category with sectionwise modules over its reconstructed commutative ring sheaf, using [def-weil-pbc-internal-abelian-sheaf-module-equivalence] for the tensor of [sk-def-sfb-sheaf-tensor]. The site and coefficients are in the common universe of the statement. The equivalence leaves section groups and restrictions unchanged. It preserves kernels, cokernels and monomorphisms by their universal properties; the injective lifting condition is preserved by its fully faithful inverse. Thus it identifies injective resolutions and their evaluated complexes, hence the right-derived section groups. The same reasoning applies on each open slice, where the equivalence still leaves the restricted sheaves unchanged.",
+   "uses": [
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "sk-def-sfb-sheaf-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YV, algebraic structures in sheaves; elementary transport of injective resolutions along the indicated equivalence."
+   }
+  },
+  {
+   "text": "Using the identification in step 4, put $F=M_{ab}$ on $X_{\\mathrm{pro\\acute et}}$. The small skeleton and coefficient universe are those in the statement. For this site and each open slice, [lem-pur-ringed-site-grothendieck-abelian] and [lem-sp-grothendieck-enough-injectives] give enough injectives in modules over the actual restricted ring. Apply [lem-pe-ringed-site-derived-evaluation-slice] to $M$ at the terminal object and to $M|_V$ at the terminal object of each open slice. The open localization [lem-weil-proetale-weakly-etale-localization] and actual-ring comparison [lem-weil-pbc-proetale-ringed-open-comparison] identify these slices and coefficients with $V_{\\mathrm{pro\\acute et}}$, $\\mathcal R|_V$ and $M|_V$. Hence the module-derived groups in the statement identify with $H^q(X_{\\mathrm{pro\\acute et}},F)$ and $H^q(V_{\\mathrm{pro\\acute et}},F|_V)$. In particular the latter are zero for every affine $V$ and $q>a$. This uses the arbitrary-ring-sheaf comparison, not a constant-coefficient specialization; injectivity after forgetting scalars is not asserted.",
+   "uses": [
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "lem-sp-grothendieck-enough-injectives",
+    "lem-pe-ringed-site-derived-evaluation-slice",
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-weil-pbc-proetale-ringed-open-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 03FD, lemma-cohomology-modules-abelian-agree, and 03F3, lemma-cohomology-of-open; proetale.tex open localization."
+   }
+  },
+  {
+   "text": "Compose $\\nu_X:X_{\\mathrm{pro\\acute et}}\\to X_{\\mathrm{\\acute et}}$ of [def-weil-pbc-site-comparison-morphism] with $X_{\\mathrm{\\acute et}}\\to X_{\\rm Zar}$ of [lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites], using [lem-weil-pbc-site-morphism-composition]. Denote the composite by $\\epsilon$. Its defining continuous functor sends an open $V$ to the same $X$-scheme $V$, so $(\\epsilon_*F)(V)=F(V)$; it preserves the terminal object. On abelian sheaves $\\epsilon^{-1}$ is exact by [lem-weil-pbc-site-pullback-abelian-exact].",
+   "uses": [
+    "def-weil-pbc-site-comparison-morphism",
+    "lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites",
+    "lem-weil-pbc-site-morphism-composition",
+    "lem-weil-pbc-site-pullback-abelian-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00X6, proposition-get-morphism, and 03CB, lemma-composition-morphisms-sites; sites-modules.tex Tag 04JC."
+   }
+  },
+  {
+   "text": "For $q\\geq0$, [lem-weil-pbc-site-higher-direct-image-sheafified-presheaf] identifies $R^q\\epsilon_*F$ with the Zariski sheafification of $V\\mapsto H^q(V,F)$, where $V$ is the pro-etale object over $X$. By [lem-weil-pbc-cohomology-over-object-localization] and [lem-weil-proetale-weakly-etale-localization], this value is $H^q(V_{\\mathrm{pro\\acute et}},F|_V)$. For $q>a$ it is zero on affine opens by step 5. These form a basis by [lem-weil-pbc-affine-opens-basis]. On any open, every presheaf section therefore restricts to zero on an affine cover. For any Zariski sheaf $G$, every presheaf morphism from this presheaf to $G$ is zero, since its image on any section restricts to zero on an affine cover and $G$ is separated. Thus the zero sheaf has the sheafification universal property [def-weil-pbc-sheafification], and the associated sheaf is zero. Consequently $R^q\\epsilon_*F=0$ for $q>a$.",
+   "uses": [
+    "lem-weil-pbc-site-higher-direct-image-sheafified-presheaf",
+    "lem-weil-pbc-cohomology-over-object-localization",
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-weil-pbc-affine-opens-basis",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 072W, lemma-higher-direct-images; Tag 03F3; schemes.tex Tag 01IT, lemma-basis-affine-opens."
+   }
+  },
+  {
+   "text": "Apply [thm-sp-grothendieck] to $\\epsilon_*:\\operatorname{Ab}(X_{\\mathrm{pro\\acute et}})\\to\\operatorname{Ab}(X_{\\rm Zar})$ and $\\Gamma(X_{\\rm Zar},-)$. The source and intermediate categories are Grothendieck by [lem-pur-ringed-site-grothendieck-abelian] with the constant integer ring; the target $\\operatorname{Ab}$ is the same construction on the one-object trivial site. These functors are additive and left exact. Since $\\epsilon_*$ is right adjoint to the exact $\\epsilon^{-1}$ of step 6, [lem-sp-right-adjoint-preserves-injectives] says it sends injectives to injectives, hence to global-section-acyclics by [def-weil-pbc-sites-and-cohomology] (2). Evaluation at the terminal object gives $\\Gamma(X_{\\rm Zar},\\epsilon_*(-))=\\Gamma(X_{\\mathrm{pro\\acute et}},-)$. We obtain a convergent first-quadrant spectral sequence $E_2^{p,q}=H^p(X_{\\rm Zar},R^q\\epsilon_*F)\\Rightarrow H^{p+q}(X_{\\mathrm{pro\\acute et}},F)$.",
+   "uses": [
+    "thm-sp-grothendieck",
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "lem-sp-right-adjoint-preserves-injectives",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0732, lemma-Leray, specialized to abelian sheaves (the constant integer ring); derived.tex Tag 015N."
+   }
+  },
+  {
+   "text": "The space $|X|$ is spectral by step 1 and has dimension at most $e$ by step 3. For each $q\\geq0$, apply [lem-sfb-spectral-space-cohomology-dimension] to the abelian Zariski sheaf $R^q\\epsilon_*F$. This gives $E_2^{p,q}=0$ for $p>e$. Step 7 gives $E_2^{p,q}=0$ for $q>a$. Thus the entire $E_2$ page is supported in the rectangle $0\\leq p\\leq e$, $0\\leq q\\leq a$.",
+   "uses": [
+    "lem-sfb-spectral-space-cohomology-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0A3G, proposition-cohomological-dimension-spectral (1)."
+   }
+  },
+  {
+   "text": "If $r>e+a$ and $p+q=r$ with $p,q\\geq0$, either $p>e$ or $q>a$, so $E_2^{p,q}=0$. Each later term at that bidegree is a subquotient of the preceding one and is therefore zero. The first-quadrant convergence in step 8 gives a finite exhaustive separated filtration of $H^r(X_{\\mathrm{pro\\acute et}},F)$ whose associated graded terms are these zero $E_\\infty^{p,r-p}$. Induction through the finite filtration makes the abutment zero. The terminal-object identification of step 5 gives exactly $H^r(R\\Gamma(X_{\\mathrm{pro\\acute et}},M))=0$ as required. The argument applies to $e=0$ and $a=0$; for $X=\\varnothing$, sections and their derived groups are zero as well.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0732, elementary rectangle-vanishing consequence of first-quadrant convergence."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-qcqs-over-affine",
+  "lem-weil-pbc-qcqs-scheme-spectral",
+  "def-weil-spectral-space",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-kun-dimension-extension",
+  "def-weil-geometric-fibre",
+  "def-pc-scheme-fibre",
+  "def-kun-topological-krull-dimension",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "sk-def-sfb-sheaf-tensor",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-pe-ringed-site-derived-evaluation-slice",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-weil-pbc-proetale-ringed-open-comparison",
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites",
+  "lem-weil-pbc-site-morphism-composition",
+  "lem-weil-pbc-site-pullback-abelian-exact",
+  "lem-weil-pbc-site-higher-direct-image-sheafified-presheaf",
+  "lem-weil-pbc-cohomology-over-object-localization",
+  "lem-weil-pbc-affine-opens-basis",
+  "def-weil-pbc-sheafification",
+  "thm-sp-grothendieck",
+  "lem-sp-right-adjoint-preserves-injectives",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-sfb-spectral-space-cohomology-dimension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Agent synthesis of Tag 0732 with cohomology.tex Tag 0A3G (1), ringed-site comparison Tags 03FD/03F3, and the fibre-chain dimension argument (Schemes Tag 01K1; Algebra Tag 00P3)."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -58,10 +219,38 @@
    "results": "8 hits: AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, Algebra.FormallyEtale.subsingleton_h1Cotangent, Algebra.formallyEtale_iff, Algebra.etaleLocus_eq_compl_support, AlgebraicGeometry.Scheme.zero_of_zero_cover, Algebra.FormallySmooth.iff_subsingleton_and_projective",
    "date": "2026-10-22",
    "verdict": "no match: hits do not state this affine pro-etale bound or the stated coefficient-independent affine-to-global implication"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine local cohomology bound on a pro etale module sheaf implies global bound by dimension of a finite dimensional scheme",
+   "results": "8 hits: AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, SheafOfModules.IsFiniteType, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_lift_of_germInjective, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact",
+   "date": "2026-10-22",
+   "verdict": "no match: affine-local algebraic geometry and cohomology infrastructure hits do not state the affine-to-global implication for arbitrary internal pro-etale ring modules"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsAffine, CategoryTheory.Functor.rightDerived",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: affine-local algebraic geometry and cohomology infrastructure hits do not state the affine-to-global implication for arbitrary internal pro-etale ring modules"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomological.dimension.spectral|proetale.*[Zz]ariski|[Zz]ariski.*[Ll]eray",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: affine-local algebraic geometry and cohomology infrastructure hits do not state the affine-to-global implication for arbitrary internal pro-etale ring modules"
+  },
+  {
+   "tool": "leansearch",
+   "query": "affine local cohomology vanishing gives global cohomology vanishing above dimension plus local bound",
+   "results": "8 hits: AlgebraicGeometry.IsLocallyArtinian.isArtinianRing_of_isAffine, AlgebraicGeometry.HasAffineProperty.instTargetAffineLocallyOfIsLocal, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.HasAffineProperty.iff, AlgebraicGeometry.isLocallyArtinian_iff_of_isOpenCover, AlgebraicGeometry.sourceAffineLocally, AlgebraicGeometry.AffineTargetMorphismProperty.IsLocal.to_basicOpen, AlgebraicGeometry.HasAffineProperty.of_iSup_eq_top",
+   "date": "2026-10-22",
+   "verdict": "no match: affine-local algebraic geometry and cohomology infrastructure hits do not state the affine-to-global implication for arbitrary internal pro-etale ring modules"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-profinite-geometric-family-heart-cd",
@@ -84,5 +273,154 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-zero-dimensional-base-affine-global",
+  "worker": "stage1",
+  "summary": "NM keeps the statement unchanged and proves the bound by dimension of the total space, conversion from arbitrary internal ring modules to underlying abelian cohomology, and the pro-etale-to-Zariski Grothendieck spectral sequence. One new statement-only node supplies Stacks 0A3G without Noetherianity. The fibre-chain argument and finite filtration argument are written in the item instead of made into new nodes.",
+  "blueprint": "Refinement proof (2), first paragraph: direct-sum preservation on the ordinary ambient localizing hull; local geometric inputs for the uniform heart estimate before the lower-tail passage. The split supplies the affine-to-global local heart estimate used in the refinement direct-sum argument; it does not replace compactification comparison or purity routes.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-qcqs-over-affine",
+    "why": "Generic site, module, topology or spectral sequence input, used only for the affine-to-global local heart estimate; the compactification-coherence unit has no replacement for this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-scheme-spectral",
+    "why": "Generic site, module, topology or spectral sequence input, used only for the affine-to-global local heart estimate; the compactification-coherence unit has no replacement for this general tool."
+   },
+   {
+    "node": "def-weil-spectral-space",
+    "why": "Generic site, module, topology or spectral sequence input, used only for the affine-to-global local heart estimate; the compactification-coherence unit has no replacement for this general tool."
+   },
+   {
+    "node": "lem-pod-separated-finite-type-base-change",
+    "why": "Generic geometric fibre/dimension input, used only for the affine-to-global local heart estimate; the compactification-coherence unit has no replacement for this general tool."
+   },
+   {
+    "node": "lem-kun-dimension-extension",
+    "why": "Generic geometric fibre/dimension input, used only for the affine-to-global local heart estimate; the compactification-coherence unit has no replacement for this general tool."
+   },
+   {
+    "node": "def-weil-geometric-fibre",
+    "why": "Generic site, module, topology or spectral sequence input, used only for the affine-to-global local heart estimate; the compactification-coherence unit has no replacement for this general tool."
+   },
+   {
+    "node": "def-pc-scheme-fibre",
+    "why": "Generic geometric fibre/dimension input, used only for the affine-to-global local heart estimate; the compactification-coherence unit has no replacement for this general tool."
+   },
+   {
+    "node": "def-kun-topological-krull-dimension",
+    "why": "Generic geometric fibre/dimension input, used only for the affine-to-global local heart estimate; the compactification-coherence unit has no replacement for this general tool."
+   },
+   {
+    "node": "lem-pur-ringed-site-grothendieck-abelian",
+    "why": "Generic site, module, topology or spectral sequence input, used only for the affine-to-global local heart estimate; the compactification-coherence unit has no replacement for this general tool."
+   },
+   {
+    "node": "lem-sp-grothendieck-enough-injectives",
+    "why": "Generic site, module, topology or spectral sequence input, used only for the affine-to-global local heart estimate; the compactification-coherence unit has no replacement for this general tool."
+   },
+   {
+    "node": "lem-pe-ringed-site-derived-evaluation-slice",
+    "why": "Generic site, module, topology or spectral sequence input, used only for the affine-to-global local heart estimate; the compactification-coherence unit has no replacement for this general tool."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Generic site, module, topology or spectral sequence input, used only for the affine-to-global local heart estimate; the compactification-coherence unit has no replacement for this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-comparison",
+    "why": "Generic site, module, topology or spectral sequence input, used only for the affine-to-global local heart estimate; the compactification-coherence unit has no replacement for this general tool."
+   },
+   {
+    "node": "def-weil-pbc-site-comparison-morphism",
+    "why": "Generic site, module, topology or spectral sequence input, used only for the affine-to-global local heart estimate; the compactification-coherence unit has no replacement for this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites",
+    "why": "Generic site, module, topology or spectral sequence input, used only for the affine-to-global local heart estimate; the compactification-coherence unit has no replacement for this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-site-morphism-composition",
+    "why": "Generic site, module, topology or spectral sequence input, used only for the affine-to-global local heart estimate; the compactification-coherence unit has no replacement for this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-site-pullback-abelian-exact",
+    "why": "Generic site, module, topology or spectral sequence input, used only for the affine-to-global local heart estimate; the compactification-coherence unit has no replacement for this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-site-higher-direct-image-sheafified-presheaf",
+    "why": "Generic site, module, topology or spectral sequence input, used only for the affine-to-global local heart estimate; the compactification-coherence unit has no replacement for this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-cohomology-over-object-localization",
+    "why": "Generic site, module, topology or spectral sequence input, used only for the affine-to-global local heart estimate; the compactification-coherence unit has no replacement for this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-affine-opens-basis",
+    "why": "Generic site, module, topology or spectral sequence input, used only for the affine-to-global local heart estimate; the compactification-coherence unit has no replacement for this general tool."
+   },
+   {
+    "node": "thm-sp-grothendieck",
+    "why": "Generic site, module, topology or spectral sequence input, used only for the affine-to-global local heart estimate; the compactification-coherence unit has no replacement for this general tool."
+   },
+   {
+    "node": "lem-sp-right-adjoint-preserves-injectives",
+    "why": "Generic site, module, topology or spectral sequence input, used only for the affine-to-global local heart estimate; the compactification-coherence unit has no replacement for this general tool."
+   },
+   {
+    "node": "def-weil-pbc-sites-and-cohomology",
+    "why": "Generic site, module, topology or spectral sequence input, used only for the affine-to-global local heart estimate; the compactification-coherence unit has no replacement for this general tool."
+   },
+   {
+    "node": "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "why": "Generic internal/sectionwise module comparison or sheafification universal property needed for the arbitrary-ring local heart estimate; the compactification-coherence unit supplies no replacement."
+   },
+   {
+    "node": "sk-def-sfb-sheaf-tensor",
+    "why": "Generic internal/sectionwise module comparison or sheafification universal property needed for the arbitrary-ring local heart estimate; the compactification-coherence unit supplies no replacement."
+   },
+   {
+    "node": "def-weil-pbc-sheafification",
+    "why": "Generic internal/sectionwise module comparison or sheafification universal property needed for the arbitrary-ring local heart estimate; the compactification-coherence unit supplies no replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-qcqs-over-affine",
+  "lem-weil-pbc-qcqs-scheme-spectral",
+  "def-weil-spectral-space",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-kun-dimension-extension",
+  "def-weil-geometric-fibre",
+  "def-pc-scheme-fibre",
+  "def-kun-topological-krull-dimension",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-pe-ringed-site-derived-evaluation-slice",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-weil-pbc-proetale-ringed-open-comparison",
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites",
+  "lem-weil-pbc-site-morphism-composition",
+  "lem-weil-pbc-site-pullback-abelian-exact",
+  "lem-weil-pbc-site-higher-direct-image-sheafified-presheaf",
+  "lem-weil-pbc-cohomology-over-object-localization",
+  "lem-weil-pbc-affine-opens-basis",
+  "thm-sp-grothendieck",
+  "lem-sp-right-adjoint-preserves-injectives",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "sk-def-sfb-sheaf-tensor",
+  "def-weil-pbc-sheafification"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NM-37de593d9",
+  "group": "NM",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-37de593d9 (reviewer sub-agent of L); spot-checked: I read the item, all 10 steps, the new node and every cited statement. Item statement, stmt_deps, source and blueprint are byte-identical to the base copy in the NA snapshot, so the target is not weakened. New node lem-sfb-spectral-space-cohomology-dimension is exactly Stacks cohomology.tex 0A3G(1) (Scheiderer; 'dimension at most d' is equivalent to 'dimension d'). Tested on the empty space, profinite spaces (dim 0) and Spec of a DVR. Searched the DAG for 0A3G, 02UZ and spectral-space cohomology: every hit is Noetherian or unrelated, so there is no duplicate, and a Noetherian bound could not be applied to the possibly non-Noetherian base anyway. Route checks: step 1 shows X is qcqs, hence spectral and sober. Steps 2-3 give dim X <= e from the field-extension clause of lem-kun-dimension-extension and the elementary chain argument, using closed points of B and the homeomorphism clause of def-pc-scheme-fibre. Steps 4-5 compare internal modules with the arbitrary-ring sectionwise modules, then with underlying abelian cohomology through lem-pe-ringed-site-derived-evaluation-slice, the weakly-etale localization and the ringed open comparison. The equivalence node's 'local equivalences are monoidal' hypothesis follows in one line from clause 1 of sk-def-sfb-sheaf-tensor (strong monoidal sheafification); I accepted that as elementary. Step 6: nu is a morphism of sites because its left adjoint preserves finite limits; composing it with the Zariski-etale morphism by 03CB gives the composite with exact pullback. Step 7: R^q epsilon_* F is the sheafification of a presheaf that is locally zero on the affine basis, and it vanishes by the universal property of sheafification. Step 8: Grothendieck spectral sequence, injectives preserved by the right adjoint. Steps 9-10: the rectangle argument. All 26 declared split_report.tool_uses are generic inputs (site, sheaf, dimension and spectral-sequence tools); accepted. No SGA citation. Not a re-split item. No changes."
  }
 }
