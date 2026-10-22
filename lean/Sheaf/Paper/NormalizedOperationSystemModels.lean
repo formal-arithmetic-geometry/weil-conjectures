@@ -5,18 +5,8 @@ Authors: SHEAF group NE
 -/
 module
 
-public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
-public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
-public import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
-public import Mathlib.Algebra.Homology.BifunctorShift
 public import Sheaf.Paper.SemilinearDerivedSections
 public import Sheaf.Paper.SystemCochainTensorReduction
-public import Sheaf.Paper.CompletedIntegralConstantMapOfUniverses
-public import Sheaf.SecSmoothPurity.CochainPullbackTensorCoherence
-public import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
-import Mathlib.CategoryTheory.Sites.Pullback
-import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Types
-import WeilConjectures.Mathlib.CategoryTheory.Functor.Flat
 import Sheaf.Paper.CanonicalCoefficientSystemGeometry
 import Sheaf.Paper.GeometricScalarAssociationCocycle
 import all Sheaf.Paper.SystemTensorReductionFormula
@@ -26,8 +16,6 @@ import Sheaf.Algebra.Homology.BoundedFlatIndependentCoefficients
 import all Sheaf.Paper.SystemEvaluationFlat
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatAlgebraicInverseImageOfUniverses
 import Sheaf.Algebra.Homology.ChangeOfRingsKFlatIndependentCoefficients
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Algebra.Homology.KFlatTotalTensorModel
 import all Sheaf.Paper.KFlatRingedToposPullback
 
 /-! # Normalized operations and simultaneous system models

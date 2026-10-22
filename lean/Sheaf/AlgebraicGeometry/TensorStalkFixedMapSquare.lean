@@ -4,9 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
 public import Sheaf.AlgebraicGeometry.CanonicalPullbackTensorComparison
-public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Adjunction
 public import WeilConjectures.Algebra.Homology.Monoidal.MapHomologicalComplex
 import Sheaf.AlgebraicGeometry.StalkComparisonPullbackNaturality
 import WeilConjectures.Algebra.Homology.BaseDerivedTensorModelQuasiIsoComparison

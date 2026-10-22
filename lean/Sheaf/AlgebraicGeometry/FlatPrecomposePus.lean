@@ -6,8 +6,6 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.DualityEquationBaseChangeMap
 public import Sheaf.AlgebraicGeometry.GlobalHomPullbackComparison
-public import Sheaf.AlgebraicGeometry.GlobalHomAdjunctionIso
-import Mathlib.CategoryTheory.Adjunction.Mates
 import Sheaf.AlgebraicGeometry.GlobalHomBaseChangeCounitTransport
 
 /-!
