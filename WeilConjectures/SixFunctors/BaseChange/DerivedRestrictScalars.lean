@@ -17,20 +17,20 @@ commutes with the pullbacks (`AlgebraicGeometry.Etale.isIso_upperStarRestrictSca
 pushforwards and the derived pushforwards on `D⁺`
 (`AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarRestrictScalars`). Moreover it carries the
 underived base change map over `Λ'` to the one over `Λ`
-(`AlgebraicGeometry.Etale.baseChangeMap_app_restrictScalars`). Consequently, for an object
-`K ∈ D⁺(X_ét, Λ')`, the derived base change map over `Λ` is an isomorphism at `res K` if and
-only if the derived base change map over `Λ'` is one at `K`
-(`AlgebraicGeometry.Etale.isIso_derivedBaseChangeMapPlus_app_restrictScalars_iff`).
+(`AlgebraicGeometry.Etale.baseChangeMap_app_restrictScalars`). This file proves these
+compatibilities on bounded below complexes, together with the general change of coefficients
+criterion `AlgebraicGeometry.Etale.isIso_derivedBaseChangeMapPlus_app_mapDerivedCategoryPlus_iff`.
+From them `WeilConjectures.SixFunctors.BaseChange.DerivedRestrictScalars.IsIso` deduces that for
+an object `K ∈ D⁺(X_ét, Λ')`, the derived base change map over `Λ` is an isomorphism at `res K` if
+and only if the derived base change map over `Λ'` is one at `K`.
 
-The proof represents `K` by a bounded below complex `I` of injective sheaves of `Λ'`-modules.
-The derived base change maps at `I` and at `res I` are computed by the underived base change
-maps followed by the units of the derived pushforwards
-(`AlgebraicGeometry.Etale.derivedBaseChangeMapPlus_fac_app`), since the terms of `I` are
-`f_*`-acyclic, and so are those of `res I`
-(`AlgebraicGeometry.Etale.rightAcyclic_lowerStar_restrictScalars_obj`). This reduction is done
-for an arbitrary exact change of coefficients sending injectives to `f_*`-acyclics
-(`AlgebraicGeometry.Etale.isIso_derivedBaseChangeMapPlus_app_mapDerivedCategoryPlus_iff`); proving
-it over abstract coefficient categories keeps the kernel from unfolding the concrete pullback and
+The criterion represents `K` by a bounded below complex `I` of injective objects. The derived
+base change maps at `I` and at `R I` are computed by the underived base change maps followed by
+the units of the derived pushforwards (`AlgebraicGeometry.Etale.derivedBaseChangeMapPlus_fac_app`),
+since the terms of `I` are `f_*`-acyclic, and so are those of `R I` (for restriction of scalars,
+`AlgebraicGeometry.Etale.rightAcyclic_lowerStar_restrictScalars_obj`). It is proved for an
+arbitrary exact change of coefficients `R` sending injectives to `f_*`-acyclics; proving it over
+abstract coefficient categories keeps the kernel from unfolding the concrete pullback and
 pushforward functors.
 
 This is the change of coefficients in the proof of the proper base change theorem (blueprint
@@ -47,6 +47,38 @@ section Generic
 
 namespace CategoryTheory
 
+/-- The first half of the diagram chase
+`CategoryTheory.isIso_map_comp_iff_of_reflectsIsomorphisms`: a composite `Q(b) ≫ v` is an
+isomorphism if and only if `p₁ ≫ u₁` is one, when their images under a functor `R` reflecting
+isomorphisms agree up to isomorphisms. -/
+lemma isIso_map_comp_iff_isIso_comp_of_reflectsIsomorphisms {𝒟₁ 𝒟₂ ℋ : Type*} [Category* 𝒟₁]
+    [Category* 𝒟₂] [Category* ℋ] (R : 𝒟₁ ⥤ 𝒟₂)
+    (hR : ∀ {M N : 𝒟₁} (x : M ⟶ N), IsIso (R.map x) ↔ IsIso x) (Q : ℋ ⥤ 𝒟₂)
+    {A₁ B₁ C₁ : 𝒟₁} (p₁ : A₁ ⟶ B₁) (u₁ : B₁ ⟶ C₁) {H₃ H₄ : ℋ} {C' V : 𝒟₂}
+    (c : R.obj C₁ ⟶ C') [IsIso c] (e₁ : R.obj B₁ ⟶ Q.obj H₃) [IsIso e₁]
+    (v : Q.obj H₃ ⟶ V) (w : V ⟶ C') [IsIso w] (hu : R.map u₁ ≫ c = e₁ ≫ v ≫ w)
+    (e₀ : R.obj A₁ ⟶ Q.obj H₄) [IsIso e₀] (b : H₄ ⟶ H₃)
+    (hp : R.map p₁ ≫ e₁ = e₀ ≫ Q.map b) :
+    IsIso (Q.map b ≫ v) ↔ IsIso (p₁ ≫ u₁) := by
+  have eq₁ : R.map (p₁ ≫ u₁) ≫ c = e₀ ≫ (Q.map b ≫ v) ≫ w := by
+    rw [R.map_comp, Category.assoc, hu, ← Category.assoc, hp]
+    simp only [Category.assoc]
+  rw [← hR (p₁ ≫ u₁), ← isIso_comp_right_iff (R.map (p₁ ≫ u₁)) c, eq₁,
+    isIso_comp_left_iff e₀, isIso_comp_right_iff _ w]
+
+/-- The second half of the diagram chase
+`CategoryTheory.isIso_map_comp_iff_of_reflectsIsomorphisms`: a composite `Q(a₂) ≫ u₂` is an
+isomorphism if and only if `Q(b) ≫ v` is one, when both are related by a commutative diagram
+whose remaining sides are isomorphisms. -/
+lemma isIso_map_comp_iff_isIso_map_comp {𝒟 ℋ : Type*} [Category* 𝒟] [Category* ℋ]
+    (Q : ℋ ⥤ 𝒟) {H₁ H₂ H₃ H₄ : ℋ} (a₂ : H₁ ⟶ H₂) {C₂ V : 𝒟} (u₂ : Q.obj H₂ ⟶ C₂)
+    (b : H₄ ⟶ H₃) (v : Q.obj H₃ ⟶ V) (σ : H₁ ⟶ H₄) [IsIso (Q.map σ)] (τ : H₂ ⟶ H₃)
+    (ha : a₂ ≫ τ = σ ≫ b) (z : C₂ ⟶ V) [IsIso z] (ht : Q.map τ ≫ v = u₂ ≫ z) :
+    IsIso (Q.map a₂ ≫ u₂) ↔ IsIso (Q.map b ≫ v) := by
+  have eq₂ : Q.map σ ≫ Q.map b ≫ v = (Q.map a₂ ≫ u₂) ≫ z := by
+    rw [← Q.map_comp_assoc, ← ha, Q.map_comp, Category.assoc, ht, Category.assoc]
+  rw [← isIso_comp_left_iff (Q.map σ) (Q.map b ≫ v), eq₂, isIso_comp_right_iff _ z]
+
 /-- A diagram chase deciding when a composite `Q(a₂) ≫ u₂` is an isomorphism, by comparing it
 with a composite `p₁ ≫ u₁` through a functor `R` reflecting isomorphisms. In the application `R`
 is a change of coefficients on derived categories, `a₂` and `p₁` come from base change maps and
@@ -61,15 +93,9 @@ lemma isIso_map_comp_iff_of_reflectsIsomorphisms {𝒟₁ 𝒟₂ ℋ : Type*} [
     (e₀ : R.obj A₁ ⟶ Q.obj H₄) [IsIso e₀] (b : H₄ ⟶ H₃)
     (hp : R.map p₁ ≫ e₁ = e₀ ≫ Q.map b) (σ : H₁ ⟶ H₄) [IsIso (Q.map σ)] (τ : H₂ ⟶ H₃)
     (ha : a₂ ≫ τ = σ ≫ b) (z : C₂ ⟶ V) [IsIso z] (ht : Q.map τ ≫ v = u₂ ≫ z) :
-    IsIso (Q.map a₂ ≫ u₂) ↔ IsIso (p₁ ≫ u₁) := by
-  have eq₁ : R.map (p₁ ≫ u₁) ≫ c = e₀ ≫ (Q.map b ≫ v) ≫ w := by
-    rw [R.map_comp, Category.assoc, hu, ← Category.assoc, hp]
-    simp only [Category.assoc]
-  have eq₂ : Q.map σ ≫ Q.map b ≫ v = (Q.map a₂ ≫ u₂) ≫ z := by
-    rw [← Q.map_comp_assoc, ← ha, Q.map_comp, Category.assoc, ht, Category.assoc]
-  rw [← hR (p₁ ≫ u₁), ← isIso_comp_right_iff (R.map (p₁ ≫ u₁)) c, eq₁,
-    isIso_comp_left_iff e₀, isIso_comp_right_iff _ w,
-    ← isIso_comp_left_iff (Q.map σ) (Q.map b ≫ v), eq₂, isIso_comp_right_iff _ z]
+    IsIso (Q.map a₂ ≫ u₂) ↔ IsIso (p₁ ≫ u₁) :=
+  (isIso_map_comp_iff_isIso_map_comp Q a₂ u₂ b v σ τ ha z ht).trans
+    (isIso_map_comp_iff_isIso_comp_of_reflectsIsomorphisms R hR Q p₁ u₁ c e₁ v w hu e₀ b hp)
 
 end CategoryTheory
 
@@ -287,50 +313,6 @@ lemma mapHomotopyCategoryPlus_baseChangeMap_restrictScalars (sq : CommSq g' f' f
   congr 1
   exact HomologicalComplex.hom_ext _ _ fun n ↦
     baseChangeMap_app_restrictScalars φ sq (K.obj.as.X n)
-
-/-- The underived part `g^* f_* K ⟶ f'_* g'^* K ⟶ R⁺f'_*(g'^* K)` of the derived base change
-map over `Λ` at `res K` is an isomorphism if and only if the one over `Λ'` at `K` is one. -/
-lemma isIso_comp_rightDerivedFunctorPlusUnit_restrictScalars_iff (sq : CommSq g' f' f g)
-    (K : HomotopyCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ'))) :
-    IsIso (DerivedCategory.Plus.Qh.map ((NatTrans.mapHomotopyCategoryPlus
-          (baseChangeMap (ModuleCat.{u + 1} Λ) sq)).app
-          ((Sheaf.restrictScalars X.smallEtaleTopology φ).mapHomotopyCategoryPlus.obj K)) ≫
-        (f')_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlusUnit.app
-          (((g')^*[ModuleCat.{u + 1} Λ]).mapHomotopyCategoryPlus.obj
-            ((Sheaf.restrictScalars X.smallEtaleTopology φ).mapHomotopyCategoryPlus.obj K))) ↔
-      IsIso (DerivedCategory.Plus.Qh.map ((NatTrans.mapHomotopyCategoryPlus
-          (baseChangeMap (ModuleCat.{u + 1} Λ') sq)).app K) ≫
-        (f')_*[ModuleCat.{u + 1} Λ'].rightDerivedFunctorPlusUnit.app
-          (((g')^*[ModuleCat.{u + 1} Λ']).mapHomotopyCategoryPlus.obj K)) := by
-  have h₁ :=
-    (Sheaf.restrictScalars Y'.smallEtaleTopology φ).mapDerivedCategoryPlusFactorsh.hom.naturality
-    ((NatTrans.mapHomotopyCategoryPlus (baseChangeMap (ModuleCat.{u + 1} Λ') sq)).app K)
-  have h₃ := ((f')_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlusUnit.naturality
-    ((NatTrans.mapHomotopyCategoryPlus (upperStarRestrictScalars φ g').natTrans).app K)
-  exact isIso_map_comp_iff_of_reflectsIsomorphisms _
-    (isIso_restrictScalars_mapDerivedCategoryPlus_map_iff φ) _ _ _ _ _ _ _ _ _
-    (restrictScalars_map_rightDerivedFunctorPlusUnit_app φ f' _) _ _ h₁ _ _
-    (mapHomotopyCategoryPlus_baseChangeMap_restrictScalars φ sq K) _ h₃
-
-/-- **The derived base change map and restriction of scalars.** For a commutative square
-```
-X' --g'--> X
-|          |
-f'         f
-v          v
-Y' --g---> Y
-```
-and `K ∈ D⁺(X_ét, Λ')`, the derived base change map over `Λ` is an
-isomorphism at the restriction of scalars of `K` along `φ : Λ →+* Λ'` if and only if the derived
-base change map over `Λ'` is an isomorphism at `K`. -/
-theorem isIso_derivedBaseChangeMapPlus_app_restrictScalars_iff (sq : CommSq g' f' f g)
-    (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ'))) :
-    IsIso ((derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sq).app
-        ((Sheaf.restrictScalars X.smallEtaleTopology φ).mapDerivedCategoryPlus.obj K)) ↔
-      IsIso ((derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ') sq).app K) :=
-  isIso_derivedBaseChangeMapPlus_app_mapDerivedCategoryPlus_iff _ sq
-    (fun J _ ↦ rightAcyclic_lowerStar_restrictScalars_obj φ f J)
-    (isIso_comp_rightDerivedFunctorPlusUnit_restrictScalars_iff φ sq) K
 
 end BaseChange
 
