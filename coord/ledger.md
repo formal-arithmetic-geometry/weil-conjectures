@@ -24053,3 +24053,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:06 L: returned deliver/ND/lem-sfb-ramified-cartier-supported-purity (reviewer RETURN: F (route lock) + E1. I read all nine steps; the statement is unchanged; the base item was unsplit with no proof, and the)
 - 00:07 L: returned deliver/NK/lem-sfb-semilinear-sylow-good-components (reviewer RETURN: C1/F. The item lem-sfb-semilinear-sylow-good-components is live (not on the drop list), but Step 2 cites lem-per-project)
 - 00:07 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
+- 00:08 L: returned deliver/N9/sk-thm-groth-ss (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-thm-groth-ss: sk-thm-groth-ss: completed in this pr)
