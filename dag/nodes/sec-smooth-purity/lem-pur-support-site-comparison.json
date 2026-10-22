@@ -37,160 +37,127 @@
  ],
  "proof": [
   {
-   "text": "Write $H^\\tau_{T,C}=R\\Gamma_C(T_\\tau,-)$, computed on unbounded complexes by K-injectives and agreeing with [def-pur-support-cohomology] on bounded-below objects. By [lem-pur-derived-support-comparison-direct-image] there is a natural isomorphism\n$$b_{C,N}:H^{\\mathrm{et}}_{T,C}(R\\nu_{T,*}N)\\xrightarrow{\\sim}H^{\\mathrm{proet}}_{T,C}(N),$$\nnormalized by the support-kernel equality. For $M\\in D^+(T_{\\mathrm{et}},A)$ set\n$$c^C_{T,M}=b_{C,\\nu_T^*M}\\circ H^{\\mathrm{et}}_{T,C}(\\eta_M).$$\nThe unit is an isomorphism by [thm-weil-pbc-site-comparison], so $c^C_{T,M}$ is an isomorphism. Naturality follows from those of $b$ and $\\eta$. The forgetting-supports and open-restriction squares follow by applying the corresponding restriction maps to the same kernel equality and using the canonical inverse-image restriction comparison; the two squares commute by the elementary functoriality of kernels. For $C=T$, the support kernel is global sections, and the normalization is precisely [lem-weil-pbc-comparison-global-cohomology].",
+   "text": "Identify the global-section support kernel with terminal evaluation by preservation of kernels, normalized after the kernel inclusion. Derive this natural isomorphism and identify the given comparison with derived base change of the normalized ordinary unit. Naturality of derived base change proves the forgetting square. At full support, evaluation on the empty complement is zero, so the support inclusions are isomorphisms. Apply the existing finite-coefficient comparison-unit theorem to prove invertibility.",
    "uses": [
+    "def-pur-support-comparison-unit",
     "def-pur-support-cohomology",
-    "lem-pur-derived-support-comparison-direct-image",
     "thm-weil-pbc-site-comparison",
-    "lem-weil-pbc-comparison-pullback",
     "lem-weil-pbc-comparison-global-cohomology"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-kunneth-supported.proof.md",
-    "place": "Proof paragraph 4: identify etale and pro-etale support objects and transport restriction, forgetting supports, and the full-support normalization."
+    "place": "Proof paragraph 4; normalized support adjunction, tensor comparison, and restriction; Lean route D9."
    }
   },
   {
-   "text": "We use auxiliary sheaves only within the proof. For either topology, with $j:T\\setminus C\\hookrightarrow T$, set\n$$Q^\\tau_{T,C}=\\operatorname{coker}(j_!A_{T\\setminus C}\\to A_T).$$\nThe arrow is induced by the inclusion of the open object into the final object. The free-module Yoneda bijection [lem-weil-pbc-free-yoneda-presheaf-module], followed by sheafification, identifies $\\operatorname{Hom}(A_T,N)$ with $N(T)$ and $\\operatorname{Hom}(j_!A_{T\\setminus C},N)$ with $N(T\\setminus C)$. Here the free sheaf on the open object is $j_!A_{T\\setminus C}$ by the explicit definitions [def-weil-pbc-extension-by-zero] and [def-weil-extension-by-zero]. Therefore the cokernel universal property gives\n$$\\operatorname{Hom}(Q^\\tau_{T,C},N)=\\ker(N(T)\\to N(T\\setminus C)).$$\nFor any open object $V$ of $T$, adjunction and the direct-image formula give\n$$\\operatorname{Hom}(\\nu_T^*(j_{V!}A_V),N)=\\operatorname{Hom}(j_{V!}A_V,\\nu_{T,*}N)=N(V)=\\operatorname{Hom}(j_{V!}A_V,N),$$\nwhere the first free sheaf is etale and the last is pro-etale. The resulting canonical isomorphisms for $V=T$ and $V=T\\setminus C$ intertwine the arrows induced by inclusion, since both arrows represent restriction. The exactness of $\\nu_T^*$ then gives a specified isomorphism $\\nu_T^*Q^{\\mathrm{et}}_{T,C}\\cong Q^{\\mathrm{proet}}_{T,C}$, preserving these quotient generators.",
+   "text": "Compose the normalized etale supported-coefficient adjunction with comparison pullback and transport its right adjoint by the kernel-evaluation isomorphism. Uniqueness of left adjoints gives the coefficient comparison. Its inverse is the left mate of the actual support comparison. Checking after the monic support inclusion identifies the comparison on quotient generators with the constant-sheaf comparison. The derived-mate theorem identifies its exact derived map with the mate of derived support comparison.",
    "uses": [
-    "lem-weil-pbc-free-yoneda-presheaf-module",
-    "def-weil-pbc-extension-by-zero",
-    "def-weil-extension-by-zero",
-    "def-weil-pbc-site-comparison-morphism",
-    "lem-sf-comparison-pullback-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 09XP (section-cohomology-support), with the free-sheaf Yoneda description of sections and the cokernel universal property; sites-modules.tex Tag 03EJ (remark-localize-presheaves)."
-   }
-  },
-  {
-   "text": "For the quotient sheaves of step 2, [lem-pur-support-quotient-flat] gives flatness in both topologies and K-flatness in degree zero. The fixed-$A$ tensor and tensor over the constant ring sheaf agree after sheafification directly from [def-pur-sheaf-tensor-product], since constant scalars are locally elements of $A$. Put $P=X\\times_kY$ and $S=Z\\times_kW$. The generator multiplication of [lem-pur-support-quotient-product] gives\n$$e_\\tau:p_X^*Q^\\tau_{X,Z}\\otimes_A^Lp_Y^*Q^\\tau_{Y,W}\\xrightarrow{\\sim}Q^\\tau_{P,S}.$$\nIts ordinary sheaf map sends $\\overline a\\otimes\\overline b$ to $\\overline{ab}$. The comparison normalization is the elementary consequence of the generator-preserving comparison in [lem-pur-support-quotient-flat], naturality of pullback in [lem-weil-pbc-comparison-pullback], and the derived tensor comparison [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Thus no separate comparison lemma is needed, and the pro-etale assertion uses comparison pullback rather than geometric-stalk conservativity.",
-   "uses": [
-    "lem-pur-support-quotient-flat",
-    "def-pur-sheaf-tensor-product",
-    "lem-pur-support-quotient-product",
-    "lem-weil-pbc-comparison-pullback",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-kunneth-supported.proof.md",
-    "place": "Proof paragraph 4: verify tensor, pullback and quotient-generator multiplication on the two support objects."
-   }
-  },
-  {
-   "text": "For a complex $V$ of $A$-modules let $\\underline V_T^\\tau$ be its termwise constant sheaf and put\n$$E^\\tau_{T,C}(V)=Q^\\tau_{T,C}\\otimes_A^L\\underline V_T^\\tau.$$\nThis is the termwise exact functor $V\\mapsto Q^\\tau_{T,C}\\otimes_A\\underline V_T^\\tau$: constant presheaves are exact and module sheafification is exact by [lem-weil-pbc-site-module-presheaf-sheafification-exact], and the quotient sheaf is flat by step 3. Tensor and sheafification universal properties, together with step 2, give the ordinary adjunction\n$$\\operatorname{Hom}(Q^\\tau_{T,C}\\otimes_A\\underline V_T^\\tau,N)=\\operatorname{Hom}_A(V,\\Gamma_C(T_\\tau,N)).$$\nA map $\\sigma$ on the left corresponds to $v\\mapsto\\sigma(\\overline1\\otimes v)$; this section is supported on $C$ because the quotient generator restricts to zero on $T\\setminus C$. The exact functor on the left is its own derived functor by [lem-weil-pbc-exact-functor-derived-functor]. The right adjoint has a right derived functor on all complexes: compute it on the K-injective resolutions of [prop-pur-kinjective-resolutions-exist]. The derived adjunction of [lem-pc-derived-adjoint-functors] is therefore\n$$E^\\tau_{T,C}:D(A)\\rightleftarrows D(T_\\tau,A):H^\\tau_{T,C}.$$\nAlternatively, on complexes the displayed Hom adjunction shows that $\\Gamma_C(T_\\tau,J)$ is K-injective when $J$ is K-injective, by [lem-weil-pbc-right-adjoint-preserves-kinjective]; the bijection [lem-weil-pbc-kinjective-hom-derived] then gives this adjunction directly. Denote its counit by $\\varepsilon^\\tau_{T,C,M}:E^\\tau_{T,C}H^\\tau_{T,C}M\\to M$. This construction concerns the ordinary support-kernel functor, not a choice of a closed pro-etale exceptional inverse image.",
-   "uses": [
-    "lem-weil-pbc-site-module-presheaf-sheafification-exact",
-    "def-pur-sheaf-tensor-product",
-    "lem-weil-pbc-exact-functor-derived-functor",
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-pc-derived-adjoint-functors",
-    "lem-weil-pbc-right-adjoint-preserves-kinjective",
-    "lem-weil-pbc-kinjective-hom-derived",
-    "def-pur-support-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A6 (lemma-adjoint) and Tag 07A5 (section-unbounded); derived.tex Tag 09T5 (lemma-derived-adjoint-functors), applied to the support-kernel adjunction explicitly constructed in this step; etale-cohomology.tex Tag 09XP (section-cohomology-support)."
-   }
-  },
-  {
-   "text": "Step 2 and the tensor comparison give a canonical identification $E^{\\mathrm{proet}}_{T,C}=\\nu_T^*E^{\\mathrm{et}}_{T,C}$. Here $\\nu_T^*\\underline V_T^{\\mathrm{et}}=\\underline V_T^{\\mathrm{proet}}$: it holds for the free rank-one module by step 2, and hence for a presentation of any $A$-module by coproducts of free rank-one modules, since inverse image and sheafification preserve colimits. Apply this termwise and use [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. The unbounded adjunction $\\nu_T^*\\dashv R\\nu_{T,*}$ follows by the exact-derived adjunction argument of step 4, using [lem-pc-derived-adjoint-functors]; only its unit on bounded-below objects is claimed to be an isomorphism. The composite of $E^{\\mathrm{et}}_{T,C}\\dashv H^{\\mathrm{et}}_{T,C}$ with $\\nu_T^*\\dashv R\\nu_{T,*}$ has right adjoint $H^{\\mathrm{et}}_{T,C}R\\nu_{T,*}$, identified with $H^{\\mathrm{proet}}_{T,C}$ by the actual kernel equality $b$ in step 1. Its Hom bijection is the composite Hom bijection of [def-weil-pbc-composite-adjunction]. Under it, the transpose of $\\nu_T^*\\varepsilon^{\\mathrm{et}}_{T,C,M}$ is exactly $b\\circ H^{\\mathrm{et}}_{T,C}(\\eta_M)=c^C_{T,M}$. Consequently the counits satisfy the explicit identity\n$$\\varepsilon^{\\mathrm{proet}}_{T,C,\\nu_T^*M}\\circ E^{\\mathrm{proet}}_{T,C}(c^C_{T,M})=\\nu_T^*(\\varepsilon^{\\mathrm{et}}_{T,C,M}).\\tag{*}$$\nThe equality uses the identification of the two $E$ functors just specified. It holds for every bounded-below $M$ and is an equality of derived morphisms, not merely of the maps on their cohomology groups.",
-   "uses": [
-    "def-weil-pbc-composite-adjunction",
-    "lem-pc-derived-adjoint-functors",
-    "thm-weil-pbc-site-comparison",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "def-weil-pbc-site-comparison-morphism"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A6 (lemma-adjoint), with the composite adjunction counit calculation; proetale.tex Tag 09B1 (lemma-compare-derived)."
-   }
-  },
-  {
-   "text": "For $P=X\\times_kY$ and $F=K\\boxtimes_A^L L$, the canonical tensor-pullback comparison [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] followed by the comparison pullback identifications [lem-weil-pbc-comparison-pullback] gives the stated isomorphism $\\theta:\\nu_P^*F\\xrightarrow{\\sim}K_p\\boxtimes_A^L L_p$. The bounded-below hypothesis on $F$, and exactness of $\\nu_P^*$ from [lem-sf-comparison-pullback-exact], allow step 1 for this coefficient complex and ensure that the pro-etale target is bounded below. For either topology, step 3 and the tensor comparison also give, for arbitrary $V_1,V_2\\in D(A)$,\n$$d_\\tau:E^\\tau_{P,S}(V_1\\otimes_A^LV_2)\\xrightarrow{\\sim}p_X^*E^\\tau_{X,Z}(V_1)\\otimes_A^Lp_Y^*E^\\tau_{Y,W}(V_2).$$\nUse $e_\\tau^{-1}$ on the quotient sheaves and the canonical tensor and constant-sheaf pullback identifications, preserving the order of the factors. These $d_\\tau$ commute with comparison: $e_{\\mathrm{proet}}$ was the pullback of $e_{\\mathrm{et}}$ in step 3, and all remaining maps are the canonical pullback-tensor maps normalized on total tensor complexes in [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. The composition and identity comparisons of inverse images are monoidal by [lem-weil-pbc-left-exact-site-inverse-image-tensor]; their $A$-module comparisons follow by imposing the scalar balancing relations in [def-pur-sheaf-tensor-product]. Thus no additional scalar or sign is inserted in this square.",
-   "uses": [
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-pbc-comparison-pullback",
-    "lem-sf-comparison-pullback-exact",
-    "lem-weil-pbc-left-exact-site-inverse-image-tensor",
-    "def-pur-sheaf-tensor-product"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A4 (lemma-pullback-tensor-product), normalized by its K-flat total-complex proof; proetale.tex Tag 09B1 (lemma-compare-derived)."
-   }
-  },
-  {
-   "text": "Write $B_\\tau=H^\\tau_{X,Z}K_\\tau$ and $D_\\tau=H^\\tau_{Y,W}L_\\tau$, with the coefficients in the statement. By [lem-pur-supported-product-quotient-model], the quotient adjunctions of step 4 identify with the normalized $C_a$ adjunctions of [def-pur-supported-exterior-product] and [def-pur-proetale-supported-exterior-product], preserving their counits. Under these identifications the map $d_\\tau$ of step 6 is the tensor comparison in those definitions: for ordinary modules, precompose both maps with the epimorphism $e_h$ (etale) or $q_h$ (pro-etale). On $1\\otimes(v_1\\otimes v_2)$ each composite is the tensor of the two pulled-back quotient maps, since $e_\\tau^{-1}(\\overline 1)=\\overline 1\\otimes\\overline 1$. The defining uniqueness of the quotient factorization therefore gives equality. Apply this equality on every bidegree summand of the signed direct-sum total complexes, without exchanging factors. On K-flat representatives it gives equality of the localized comparisons; [lem-weil-pbc-site-derived-tensor-descent] then gives equality of the natural derived maps. Thus the specified products are the transposes of\n$$m_\\tau=(p_X^*\\varepsilon^\\tau_{X,Z,K_\\tau}\\otimes_A^Lp_Y^*\\varepsilon^\\tau_{Y,W,L_\\tau})\\circ d_\\tau:E^\\tau_{P,S}(B_\\tau\\otimes_A^LD_\\tau)\\longrightarrow K_\\tau\\boxtimes_A^LL_\\tau.$$\nThis equality holds before forgetting supports and does not require $B_\\tau\\otimes_A^LD_\\tau$ to be bounded below.",
-   "uses": [
-    "lem-pur-supported-product-quotient-model",
     "def-pur-supported-exterior-product",
     "def-pur-proetale-supported-exterior-product",
-    "lem-weil-pbc-site-derived-tensor-descent"
+    "lem-pur-supported-coefficient-derived-open-mate"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-kunneth-supported.proof.md",
-    "place": "Proof paragraph 4: identify the tensor and counits with the specified supported exterior-product maps."
+    "place": "Proof paragraph 4; normalized support adjunction, tensor comparison, and restriction; Lean route D9."
    }
   },
   {
-   "text": "Compare the two requested morphisms by their transposes under $E^{\\mathrm{proet}}_{P,S}\\dashv H^{\\mathrm{proet}}_{P,S}$, using the identification with the $C_h$ adjunction and normalized $\\vartheta_{\\mathrm{proet}}$ from [def-pur-proetale-supported-exterior-product] established in step 7. By naturality of its counit, identity $(*)$ for $(P,S,F)$, and the definition of $m_{\\mathrm{et}}$ in step 7, the transpose of the left-hand side is\n$$\\varepsilon^{\\mathrm{proet}}\\circ E^{\\mathrm{proet}}(H^{\\mathrm{proet}}(\\theta)\\circ c^S_{P,F}\\circ\\kappa_{K,L})=\\theta\\circ\\nu_P^*m_{\\mathrm{et}}.$$\nFor the right-hand side, naturality of $d_{\\mathrm{proet}}$ moves $E^{\\mathrm{proet}}(c^Z_{X,K}\\otimes_A^Lc^W_{Y,L})$ through $d_{\\mathrm{proet}}$. Its transpose is consequently\n$$\\bigl(p_X^*(\\varepsilon^{\\mathrm{proet}}_{X,Z,K_p}\\circ E^{\\mathrm{proet}}_{X,Z}(c^Z_{X,K}))\\otimes_A^Lp_Y^*(\\varepsilon^{\\mathrm{proet}}_{Y,W,L_p}\\circ E^{\\mathrm{proet}}_{Y,W}(c^W_{Y,L}))\\bigr)\\circ d_{\\mathrm{proet}}=\\theta\\circ\\nu_P^*m_{\\mathrm{et}},$$\nusing $(*)$ for the two factors and the explicit comparison compatibility of $d$ from step 6. The adjunction bijection therefore gives the displayed equality of the item. The source $B_{\\mathrm{et}}\\otimes_A^LD_{\\mathrm{et}}$ need not be bounded below; step 4 deliberately constructed its adjunction on $D(A)$, while the three coefficient complexes to which $(*)$ is applied are bounded below by the hypotheses and step 6.",
+   "text": "Construct the constant-sheaf comparison by uniqueness of left adjoints. Its terminal-evaluation presentation is monoidal, because the adjunctions and the direct-image terminal evaluation are monoidal. Identify the canonical constant pullback isomorphisms with the inverse-image adjunct of the constant direct-image map. The composite-adjunction Hom bijections then give the comparison/pullback square with the specified coefficient transport.",
    "uses": [
-    "def-weil-pbc-composite-adjunction",
-    "def-pur-proetale-supported-exterior-product",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "def-weil-pbc-site-comparison-morphism",
     "lem-weil-pbc-comparison-pullback",
-    "def-pur-supported-exterior-product"
+    "lem-pur-support-quotient-pair-pullback"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0H9A (lemma-base-change-cup-product): explicit counit/mate calculation with support, using the adjunction and tensor comparison of Tags 07A6 and 07A4."
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-kunneth-supported.proof.md",
+    "place": "Proof paragraph 4; normalized support adjunction, tensor comparison, and restriction; Lean route D9."
+   }
+  },
+  {
+   "text": "Precompose the ordinary supported tensor square with the epimorphic product-support quotient map. Both paths become constant tensor multiplication followed by the two pulled-back quotient maps. The constant comparison is monoidal, and its pullback square identifies those two projection quotient maps. Cancel the product quotient to prove the coefficient tensor square.",
+   "uses": [
+    "def-pur-supported-exterior-product",
+    "def-pur-proetale-supported-exterior-product",
+    "lem-pur-supported-coefficient-tensor-quotient-square"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-kunneth-supported.proof.md",
+    "place": "Proof paragraph 4; normalized support adjunction, tensor comparison, and restriction; Lean route D9."
+   }
+  },
+  {
+   "text": "Lift the ordinary coefficient tensor square to signed total complexes and then to derived categories using the model-normalized derived tensor API. Normalize the exact derived maps by their complex factorization isomorphisms; conjugating the left-derived tensor comparison to the exact derived functor gives exactly the specified tensor component of theta. The etale and pro-etale coefficient comparisons satisfy their unique complex-model normalizations, so localization gives the required derived coefficient tensor square. Carry out the conversion between the two signed-complex comparison APIs and the ordinary-to-complex square inside the generic coefficient argument, before specializing. Construct the pro-etale natural transformation and its component normalization first for an arbitrary coefficient category, then specialize to ModuleCat A; this retains the existing derived tensor presentation without unfolding sheaf tensor data.",
+   "uses": [
+    "lem-pur-supported-coefficient-open-tensor",
+    "def-pur-supported-exterior-product",
+    "def-pur-proetale-supported-exterior-product",
+    "lem-pur-derived-tensor-comparison",
+    "lem-pur-supported-tensor-complex-square"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-kunneth-supported.proof.md",
+    "place": "Proof paragraph 4; normalized support adjunction, tensor comparison, and restriction; Lean route D9."
+   }
+  },
+  {
+   "text": "Transport each pulled-back evaluation counit by the derived comparison mate and the canonical pullback isomorphism. The existing pro-etale coefficient naturality theorem transports the whole morphism-family tensor presentation before applying naturality. This naturality and the derived coefficient tensor square identify the two transposes under the product-support adjunction. Injectivity of the adjunction Hom bijection proves the supported exterior-product equality for unbounded inputs. Naturality of the support comparison at eF.inv and cancellation of eF.inv followed by eF.hom give the exact displayed bounded-presentation formula.",
+   "uses": [
+    "lem-pur-supported-product-localization",
+    "def-pur-supported-exterior-product",
+    "def-pur-proetale-supported-exterior-product",
+    "lem-weil-pbc-comparison-pullback",
+    "lem-pur-proetale-supported-product-naturality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-kunneth-supported.proof.md",
+    "place": "Proof paragraph 4; normalized support adjunction, tensor comparison, and restriction; Lean route D9."
+   }
+  },
+  {
+   "text": "Construct open pullback of pro-etale supported constants from closed base change and the canonical constant pullback, preserving quotient generators. Epimorphic quotient maps give uniqueness. Cancel the quotient in the comparison/open coefficient square, using the normalized etale open mate and the constant comparison square. The ordinary square of right mates derives to the support-restriction square, with the exact derived-composition and coefficient-pullback isomorphisms appearing in the statement.",
+   "uses": [
+    "def-pur-proetale-supported-exterior-product",
+    "lem-pur-supported-coefficient-open-mate-quotient",
+    "lem-pur-supported-coefficient-derived-open-mate",
+    "lem-pur-supported-product-localization",
+    "lem-weil-pbc-comparison-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-kunneth-supported.proof.md",
+    "place": "Proof paragraph 4; normalized support adjunction, tensor comparison, and restriction; Lean route D9."
    }
   }
  ],
  "proof_deps": [
   "def-pur-proetale-supported-exterior-product",
-  "def-pur-sheaf-tensor-product",
   "def-pur-support-cohomology",
+  "def-pur-support-comparison-unit",
   "def-pur-supported-exterior-product",
-  "def-weil-extension-by-zero",
-  "def-weil-pbc-composite-adjunction",
-  "def-weil-pbc-extension-by-zero",
   "def-weil-pbc-site-comparison-morphism",
-  "lem-pc-derived-adjoint-functors",
-  "lem-pur-derived-support-comparison-direct-image",
-  "lem-pur-support-quotient-flat",
-  "lem-pur-support-quotient-product",
-  "lem-pur-supported-product-quotient-model",
-  "lem-sf-comparison-pullback-exact",
+  "lem-pur-support-quotient-pair-pullback",
+  "lem-pur-supported-coefficient-derived-open-mate",
+  "lem-pur-supported-coefficient-open-mate-quotient",
+  "lem-pur-supported-coefficient-open-tensor",
+  "lem-pur-supported-coefficient-tensor-quotient-square",
+  "lem-pur-supported-product-localization",
   "lem-weil-pbc-comparison-global-cohomology",
   "lem-weil-pbc-comparison-pullback",
-  "lem-weil-pbc-exact-functor-derived-functor",
-  "lem-weil-pbc-free-yoneda-presheaf-module",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
-  "lem-weil-pbc-right-adjoint-preserves-kinjective",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "lem-weil-pbc-site-module-presheaf-sheafification-exact",
-  "prop-pur-kinjective-resolutions-exist",
-  "thm-weil-pbc-site-comparison"
+  "thm-weil-pbc-site-comparison",
+  "lem-pur-proetale-supported-product-naturality",
+  "lem-pur-derived-tensor-comparison",
+  "lem-pur-supported-tensor-complex-square"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/proetale.tex",
-  "place": "Tags 099V/099W/09B1, with etale-cohomology.tex 09XP; explicit support-kernel adjunction and counit calculation completing sites-cohomology.tex 0H9A for the supported exterior product."
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4, 07A6 and 0H9A; quotient-normalized comparison and counit/mate calculation, implemented from existing supported coefficient APIs by D9."
  },
  "mathlib_searches": [
   {
@@ -387,25 +354,9 @@
   ]
  },
  "tool_uses": [
-  "lem-cbc-proetale-extension-zero",
-  "lem-kun-kflat-criteria",
-  "lem-pod-etale-stalk-tensor-scalar",
   "lem-weil-pbc-comparison-global-cohomology",
   "lem-weil-pbc-comparison-pullback",
-  "lem-weil-pbc-constant-sheaf-geometric-stalk",
-  "lem-weil-pbc-etale-restriction-injectives",
-  "lem-weil-pbc-exact-functor-derived-functor",
-  "lem-weil-pbc-inverse-image-free-etale-module",
-  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
-  "lem-weil-pbc-right-adjoint-preserves-kinjective",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "thm-weil-pbc-site-comparison",
-  "lem-pur-derived-support-comparison-direct-image",
-  "lem-pur-support-quotient-flat",
-  "lem-pur-support-quotient-product",
-  "lem-pur-supported-product-quotient-model"
+  "thm-weil-pbc-site-comparison"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -464,5 +415,15 @@
   "existing": false,
   "note": "Section 1(B), correction (b) of return 17548e9ecadc: repair the existing owning module in place, removing the separate colliding Canonical module. The old import chain mixes retired pro-etale global/monoidal owners with finite-coefficient owners (duplicate rightDerivedLowerShriekOfCompactification / upperStarIsoLowerStarInv); the finite derived monoidal owner also collides with the existing exterior product tensor owner (laxMonoidal_Q). Reuse the original supported exterior product, the published ordinary comparison monoidality and generic leftDerivedTensorComparison directly, and the recorded finiteComparisonGlobalSections. The uniquely inclusion-normalized supportKernelEvaluationIso transports the existing global-section kernel to SupportLongExact's restriction-kernel model; its right-derived map transports the full exterior/open interface. The whole node is retained: canonical isomorphism and naturality, forgetting supports, C=T global-unit normalization, open restriction, and supported exterior-product equality with the specified theta and actual-product boundedness hypothesis. The main declaration and all old exported names stay in their original owner; helpers are listed in declarations. No natural-language node field changes. The canonical pullback and tensor transports are assembled for abstract coefficient categories before specializing to ModuleCat A, avoiding expensive unfolding of sheaf categorical instances without changing the maps."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D9",
+  "result": "pass",
+  "landing": "20261022T022029-L-430341",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

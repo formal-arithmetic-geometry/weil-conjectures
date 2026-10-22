@@ -12,9 +12,23 @@
   "def-weil-pbc-proetale-modules",
   "def-weil-pbc-site-comparison-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply the etale support-kernel functor to the comparison adjunction unit. Naturality is the naturality of that unit followed by functoriality. The kernel inclusion equation follows from kernel.lift_ι. Postcomposition with the monic kernel inclusion proves uniqueness.",
+   "uses": [
+    "def-weil-pbc-site-comparison-morphism"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-site-comparison-morphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-kunneth-supported.proof.md",
+  "place": "Support comparison by the adjunction unit and the universal property of the ordinary support kernel; Lean implementation D9."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -85,5 +99,15 @@
   "group": "Q72",
   "result": "pass",
   "note": "Re-delivery after d22a5c0338c1 (PASS, landing failed because two proof_deps were in no step's uses). Diffed the full snapshot against d22a: the only changes are Step 6 citing lem-sp-grothendieck-edge-maps (its left edge R^n(GF)->G R^nF is the grothendieckLeftEdgeMap used in relativeSupportEdge), Step 8 citing lem-weil-pbc-module-abelian-derived-direct-image-comparison (holds for any f and any Lambda, so it applies to the open complement), the matching uses, statement_change.old_proof plus an extended 'what', and two docstring lines in the module (no signature change). proof_deps now equals the union of uses exactly; steps are under 2000 chars; old_proof/old_statement/old_stmt_deps/old_proof_deps equal the live/side base exactly; both citers hold, statement mathematically unchanged. Re-checked hypotheses (frame = Ideal.span of the c functions via IsPullback, ringKrullDim codimension, smooth/etale/closed immersion) and all six clauses against the node; edge cases c=0, empty cover, negative r, no universe restriction. Statement verbatim, 36 declarations match, 16/16 proofs sorry, docstrings ok. nt_compile --json exit 0 in 16.4 s, no diagnostics."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D9",
+  "result": "pass",
+  "landing": "20261022T022029-L-430341",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
