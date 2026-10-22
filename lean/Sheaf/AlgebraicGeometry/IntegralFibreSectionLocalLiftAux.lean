@@ -7,7 +7,6 @@ public import Sheaf.AlgebraicGeometry.SmallStrictLocalSectionMaps
 import Sheaf.AlgebraicGeometry.StrictHenselizationCompatibility
 import Sheaf.Paper.StrictHenselizationPointedMap
 import Sheaf.AlgebraicGeometry.StrictHenselizationClosedFiberComparison
-import Sheaf.AlgebraicGeometry.StrictLocalFibreRestrictionCompatibility
 import WeilConjectures.AlgebraicGeometry.IntegralStrictHenselianGeometricFibreSections
 
 /-! # Integral strict-local fibre comparison
@@ -127,11 +126,70 @@ theorem exists_integralStrictLocalFibreComparison
     isIso_integralStrictHenselianGeometricFibreRestriction Λ (strictHenselizationRing s)
       (pullback.snd f (strictHenselizationStructuralMap s)) t hclosed hsq _
   let := hc
-  have : IsIso (strictLocalFibreRestriction Λ i hi F) := by
-    unfold strictLocalFibreRestriction
+  let r :=
+    globalSectionsUpperStarMap (ModuleCat.{u + 1} Λ) i
+        ((upperStar (ModuleCat.{u + 1} Λ)
+          (pullback.fst f (strictHenselizationStructuralMap s))).obj F) ≫
+      (Sheaf.Γ X'.smallEtaleTopology (ModuleCat.{u + 1} Λ)).map
+        ((upperStarComp (ModuleCat.{u + 1} Λ) i
+          (pullback.fst f (strictHenselizationStructuralMap s)) g' hi.symm).inv.app F) ≫
+      (Sheaf.ΓNatIsoSheafSections _ _
+        (IsTerminal.isTerminalOfObj
+          (MorphismProperty.Over.forget @AlgebraicGeometry.Etale ⊤ X')
+          (Scheme.Etale.mk (𝟙 X')) Over.mkIdTerminal)).hom.app _
+  have : IsIso r := by
+    dsimp only [r]
     infer_instance
-  refine ⟨asIso (strictLocalFibreRestriction Λ i hi F), ?_⟩
+  refine ⟨asIso r, ?_⟩
   intro j
-  exact strictLocalFibreRestriction_compatibility Λ sq.toCommSq t hpoint i hi hi' F j
+  let V := (Scheme.AffineEtale.Spec Y).obj
+    ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).1
+  let v := ((equivSmallModel.{u}
+    (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).2
+  let p := pullback.fst f (Scheme.strictHenselizationStructuralMap s)
+  let l := (pullbackSymmetry f (Scheme.strictHenselizationStructuralMap s)).hom ≫
+    Scheme.smallStrictHenselizationBaseChangeMap f s j
+  have hl : l ≫ (f.Etale.obj V).hom = p := by
+    change l ≫ pullback.snd _ f = p
+    simp only [l, p, Category.assoc,
+      Scheme.smallStrictHenselizationBaseChangeMap_snd, pullbackSymmetry_hom_comp_snd]
+  have hr := unitSectionRestriction_comp Λ i p g' hi.symm F (f.Etale.obj V) l hl
+  have hg : etaleSectionGraph g' (f.Etale.obj V) (i ≫ l)
+      (by rw [Category.assoc, hl, ← hi]) = geometricFibreSectionLift sq.toCommSq V v := by
+    apply MorphismProperty.Over.Hom.ext
+    apply pullback.hom_ext
+    · simp only [etaleSectionGraph, geometricFibreSectionLift,
+        MorphismProperty.Over.homMk_hom, Over.homMk_left, pullback.lift_fst]
+      apply pullback.hom_ext
+      · simp only [l, Category.assoc, pullback.lift_fst]
+        rw [Scheme.smallStrictHenselizationBaseChangeMap_fst]
+        simp only [← Category.assoc, pullbackSymmetry_hom_comp_fst]
+        rw [hi']
+        simp only [Category.assoc]
+        rw [← Scheme.isoSpec_Spec_inv, hpoint j]
+      · simp only [pullback.lift_snd]
+        change (i ≫ l) ≫ (f.Etale.obj V).hom = g'
+        rw [Category.assoc, hl, hi]
+    · exact (etaleSectionGraph g' (f.Etale.obj V) (i ≫ l)
+        (by rw [Category.assoc, hl, ← hi])).w.trans
+        (geometricFibreSectionLift sq.toCommSq V v).w.symm
+  have heq : unitSectionRestriction Λ g' F (f.Etale.obj V) (i ≫ l)
+      (by rw [Category.assoc, hl, ← hi]) =
+      geometricFibreSectionRestriction Λ sq.toCommSq F V v ≫
+        (Sheaf.ΓNatIsoSheafSections _ _
+          (IsTerminal.isTerminalOfObj
+            (MorphismProperty.Over.forget @AlgebraicGeometry.Etale ⊤ X')
+            (Scheme.Etale.mk (𝟙 X')) Over.mkIdTerminal)).inv.app
+              ((upperStar (ModuleCat.{u + 1} Λ) g').obj F) := by
+    unfold unitSectionRestriction
+    rw [hg]
+    rfl
+  have h := hr.trans heq
+  change _ ≫ r = _
+  dsimp only [r]
+  simp only [← Category.assoc] at h ⊢
+  rw [h]
+  simp only [Category.assoc, Iso.inv_hom_id_app]
+  exact Category.comp_id _
 
 end AlgebraicGeometry.Etale
