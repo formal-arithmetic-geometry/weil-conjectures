@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.Cohomology.Derived.Basic
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.MumfordComparison
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.RfPerfect
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Restrict
@@ -67,6 +68,33 @@ lemma isFiniteFreeComplex_freeComplexOfBasis {Z : Scheme.{u}} {R : Type u} [Comm
     have : IsEmpty (ULift.{u} (Fin (r i))) := by rw [hr i (Or.inr hi)]; infer_instance
     exact isZero_free_of_isEmpty _
   exists_iso_free n := ⟨r n, ⟨Iso.refl _⟩⟩
+
+/-- **Mumford's complex over a Noetherian affine base**, in the derived category. Let
+`p : Y ⟶ S` be proper of finite presentation over an affine scheme `S` with Noetherian ring of
+global sections, and `𝒢` an `𝒪_Y`-module of finite presentation which is flat over `S`. Every
+point `s₀` of `S` lies in a basic open `D(a)` over which there is a bounded complex `P` of finite
+free modules such that for every `g : T' ⟶ D(a)` and every cartesian square over `g ≫ ι` there
+is an isomorphism `g^* P ≅ R p'_* g'^* 𝒢` in `D(𝒪_{T'})`.
+
+The per-degree form is
+`AlgebraicGeometry.Scheme.Modules.exists_isFiniteFreeComplex_higherDirectImage_of_isNoetherianRing`.
+This derived form is stated with `sorry`: its proof needs the comparison of the Čech complex
+`Č(U, g'^* 𝒢)` with `R p'_* g'^* 𝒢` as objects of the derived category, while this file only has
+the comparison on cohomology sheaves.
+
+(blueprint: `sk-thm-picard-coherence`) -/
+theorem exists_isFiniteFreeComplex_derivedPushforward_of_isNoetherianRing {Y S : Scheme.{u}}
+    [IsAffine S] [IsNoetherianRing Γ(S, ⊤)] (p : Y ⟶ S) [IsProper p]
+    [LocallyOfFinitePresentation p] (𝒢 : Y.Modules) [𝒢.IsFinitePresentation]
+    (h𝒢 : 𝒢.IsFlatOver p) (s₀ : S) :
+    ∃ (a : Γ(S, ⊤)) (P : CochainComplex (S.basicOpen a).toScheme.Modules ℤ) (d : ℕ),
+      s₀ ∈ S.basicOpen a ∧ IsFiniteFreeComplex P d ∧
+      ∀ {T' X' : Scheme.{u}} (g : T' ⟶ (S.basicOpen a).toScheme) (g' : X' ⟶ Y) (f' : X' ⟶ T'),
+        IsPullback g' f' p (g ≫ (S.basicOpen a).ι) →
+        Nonempty (DerivedCategory.Q.obj (((Modules.pullback g).mapHomologicalComplex _).obj P) ≅
+          (derivedPushforward f').obj
+            ((DerivedCategory.singleFunctor _ 0).obj ((Modules.pullback g').obj 𝒢))) := by
+  sorry
 
 /-- **Mumford's complex over a Noetherian affine base.** Let `p : Y ⟶ S` be proper of finite
 presentation over an affine scheme `S` with Noetherian ring of global sections, and `𝒢` an

@@ -11,6 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.LocalUniformHigherDirectImageBou
 
 
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
+public import WeilConjectures.AlgebraicGeometry.Cohomology.Derived.Basic
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.MayerVietoris
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.ProjectionFormula
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
@@ -490,6 +491,22 @@ theorem nonempty_moduleSpecΓFunctor_obj_higherDirectImage_linearEquiv_H (K : Ty
     (smul_H_eq_globalSectionsRingHom_smul K ℱ q c (e y)).symm)
 
 section BaseChange
+
+/-- **The derived direct image commutes with restriction to an open subscheme of the base.** Let
+`g : T' ⟶ T` be an open immersion, and let `f' : X' ⟶ T'` and `g' : X' ⟶ X` be the base change
+of `f` along `g`, in a cartesian square `sq`. Then `R f'_* (g'^* ℱ) ≅ (R f_* ℱ)|_{T'}` in
+`D(𝒪_{T'})`.
+
+The per-degree form is `AlgebraicGeometry.Scheme.Modules.nonempty_higherDirectImage_iso_restrict`.
+This derived form is stated with `sorry`: its proof needs that restriction to an open subscheme
+preserves K-injective complexes of modules, which is not available yet. -/
+theorem nonempty_derivedPushforward_iso_restrict {T' X' : Scheme.{u}} (g : T' ⟶ T)
+    [IsOpenImmersion g] (g' : X' ⟶ X) (f' : X' ⟶ T') (sq : IsPullback g' f' f g) :
+    Nonempty ((derivedPushforward f').obj
+        ((DerivedCategory.singleFunctor _ 0).obj ((Modules.pullback g').obj ℱ)) ≅
+      (restrictFunctor g).mapDerivedCategory.obj
+        ((derivedPushforward f).obj ((DerivedCategory.singleFunctor _ 0).obj ℱ))) := by
+  sorry
 
 variable [HasInjectiveResolutions X.Modules]
 
