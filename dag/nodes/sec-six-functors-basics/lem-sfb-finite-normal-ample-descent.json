@@ -16,9 +16,112 @@
   "def-sc-invertible-module",
   "def-weil-pbc-ample-invertible-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-scheme-sober], the nonempty irreducible scheme $Z$ has a generic point $\\eta$. Surjectivity gives $x\\in X$ with $f(x)=\\eta$. Put $T=\\overline{\\{x\\}}$, and use [lem-weil-pbc-reduced-induced-closed-subscheme] to give $T$ its reduced induced closed subscheme $i:Y\\hookrightarrow X$. The closure of one point is irreducible: if $T$ is contained in the union of two closed subsets, the one containing $x$ contains its closure. Thus $Y$ is nonempty, reduced and irreducible, hence integral by [def-pc-integral-scheme].",
+   "uses": [
+    "lem-weil-pbc-scheme-sober",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD4, proof of case (2): reduction to a dominating reduced integral closed subscheme; Tags 01IS and 01J3 supply the construction."
+   }
+  },
+  {
+   "text": "The morphism $p=f\\circ i:Y\\to Z$ is finite by [lem-weil-pbc-closed-immersion-finite] and [lem-weil-pbc-finite-composition]. Its image is closed by [lem-weil-pbc-finite-closed-map-finite-fibres] and contains $\\eta$, so it contains $\\overline{\\{\\eta\\}}=Z$; hence $p$ is surjective. Choose an ample invertible module $L$ on $X$. Its restriction $M=i^*L$ is ample on $Y$ by [lem-trf-ample-restrict-closed-immersion].",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-finite",
+    "lem-weil-pbc-finite-composition",
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "lem-trf-ample-restrict-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD4, proof of case (2); ampleness on the reduced closed subscheme is Tag 01PU."
+   }
+  },
+  {
+   "text": "Now $Y,Z$ are integral, $Z$ is normal, and $p$ is finite surjective. Apply [lem-sfb-normal-integral-finite-sheaf-norm] to obtain $d\\geq1$ and the restriction-compatible multiplicative maps $\\nu_V$ with their scalar-power and vanishing properties. Apply [lem-sfb-finite-norm-invertible-sections] to $p,\\nu,M$ and fix the resulting invertible module $N$ on $Z$. Its single choice works for all positive powers and sections.",
+   "uses": [
+    "lem-sfb-normal-integral-finite-sheaf-norm",
+    "lem-sfb-finite-norm-invertible-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 0BD3, 0BCY and 0BCZ, the norm used in the proof of 0BD4(2) via 0BD0."
+   }
+  },
+  {
+   "text": "Ampleness of $M$ gives quasi-compactness of $Y$ by [def-weil-pbc-ample-invertible-module]. For any open cover of $Z$, its inverse images under $p$ cover $Y$; finitely many cover $Y$. Since $p$ is surjective, those same finitely many opens cover $Z$. Thus $Z$ is quasi-compact.",
+   "uses": [
+    "def-weil-pbc-ample-invertible-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD0 (divisors-lemma-norm-ample), first paragraph of proof."
+   }
+  },
+  {
+   "text": "Fix $z\\in Z$ and an affine open neighbourhood $V\\subseteq Z$. The set $E=p^{-1}(\\{z\\})$ is finite by [lem-weil-pbc-finite-closed-map-finite-fibres] and is contained in the open $p^{-1}V$. Apply [lem-sc-ample-finite-principal-affine] on $Y$ to $M,E,p^{-1}V$: there are $n>0$ and $s\\in\\Gamma(Y,M^{\\otimes n})$ with $E\\subseteq Y_s\\subseteq p^{-1}V$ (and $Y_s$ affine).",
+   "uses": [
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "lem-sc-ample-finite-principal-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD0, proof: the application of Properties Tag 09NV (lemma-ample-finite-set-in-principal-affine)."
+   }
+  },
+  {
+   "text": "By [lem-sfb-finite-norm-invertible-sections] choose $t\\in\\Gamma(Z,N^{\\otimes n})$ with $Z_t=\\{w:p^{-1}(\\{w\\})\\subseteq Y_s\\}$. Since $E\\subseteq Y_s$, we have $z\\in Z_t$. If $w\\in Z_t$, surjectivity gives $y\\in p^{-1}(\\{w\\})$; then $y\\in Y_s\\subseteq p^{-1}V$, so $w\\in V$. Consequently $Z_t\\subseteq V$, and $Z_t=V\\cap Z_t$ is affine by [lem-sc-affine-cap-section-open], applied to the invertible module $N$, its positive tensor power $n$, its section $t$ and the affine open $V$.",
+   "uses": [
+    "lem-sfb-finite-norm-invertible-sections",
+    "lem-sc-affine-cap-section-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD0, final sentences: 0BCZ gives the norm section and Properties Tag 01PV gives affineness."
+   }
+  },
+  {
+   "text": "For every $z\\in Z$ the preceding construction gives $n\\geq1$ and a global section of $N^{\\otimes n}$ whose affine nonvanishing open contains $z$. Together with quasi-compactness from step 4, these are exactly the two conditions of [def-weil-pbc-ample-invertible-module]. Therefore $N$ is ample, proving the required existence on $Z$.",
+   "uses": [
+    "def-weil-pbc-ample-invertible-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 0BD0 and 0BD4(2); Properties Definition 01PS (definition-ample)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-scheme-sober",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "def-pc-integral-scheme",
+  "lem-weil-pbc-closed-immersion-finite",
+  "lem-weil-pbc-finite-composition",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "lem-trf-ample-restrict-closed-immersion",
+  "lem-sfb-normal-integral-finite-sheaf-norm",
+  "lem-sfb-finite-norm-invertible-sections",
+  "def-weil-pbc-ample-invertible-module",
+  "lem-sc-ample-finite-principal-affine",
+  "lem-sc-affine-cap-section-open"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0BD4 (proposition-push-down-ample), case (2), using the complete ampleness argument in Tag 0BD0 (lemma-norm-ample)."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,10 +157,38 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsIntegral X],\\n  AlgebraicGeometry.IsIntegral (AlgebraicGeometry.Scheme.Hom.normalization f)\", \"doc\": \"If $ X $ is an integral scheme, then the normalization of a morphism $ f: X \\\\to Y $ is also an integral scheme. This instance asserts that the categorical construction of normalization preserves the i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → X ⟶ AlgebraicGeometry.Scheme.Hom.normalization f\", \"doc\": \"The morphism from a scheme $ X $ to the normalization of a scheme morphism $ f: X \\to Y $, constructed by gluing local normalization maps defined via the integral closure of structure sheaves over an a\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.Scheme.Hom.fromNormalization f)\", \"doc\": \"The canonical morphism from the normalization of a scheme morphism $ f: X \\to Y $ to the target scheme $ Y $ is an integral morphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → [AlgebraicGeometry.QuasiCompact f] → [AlgebraicGeometry.QuasiSeparated f] → AlgebraicGeometry.Scheme\", \"doc\": \"The normalization of a scheme morphism $ f: X \\to Y $ is defined as the colimit in the category of schemes of a diagram constructed by composing the opposite of the affine Zariski site inclusion functo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → (AlgebraicGeometry.Scheme.Hom.normalization f).OpenCover\", \"doc\": \"The open cover of the normalization scheme constructed via locally directed gluing data from the affine Zariski site, formed by canonical open immersion morphisms that collectively cover the colimit s\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalization.hom_ext\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {T : AlgebraicGeometry.Scheme}\\n  (f₁ f₂ : AlgebraicGeometry.Scheme.Hom.normalization f ⟶ T) (g : T ⟶ Y) [AlgebraicGeometry.IsAffineHom g],\\n  CategoryTheory.Categor\", \"doc\": \"Given two morphisms from the normalization of a scheme morphism $ f: X \\to Y $ to a scheme $ T $, if there exists an affine morphism $ g: T \\to Y $ such that both morphisms compose with $ g $ to yield t\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] →\\n        {T : AlgebraicGeometry.Scheme} →\\n          (f₁ : X ⟶ T) →\\n            (f₂ : T ⟶ Y) →\\n              [AlgebraicGeometry.IsIntegralHom f₂] →\\n \", \"doc\": \"A morphism from the normalization of a scheme morphism $ f: X \\to Y $ to another scheme $ T $, constructed as the colimit in the category of schemes of a diagram involving the affine Zariski site of $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {T : AlgebraicGeometry.Scheme} (f₁ : X ⟶ T) (f₂ : T ⟶ Y)\\n  [inst_2 : AlgebraicGeometry.IsIntegralHom f₂] (H : f = CategoryTheory.CategoryStruct.comp f₁ f₂),\\n  Alge\", \"doc\": \"The normalization morphism associated with a scheme morphism $ f: X \\to Y $, constructed via the colimit diagram involving the affine Zariski site of $ Y $ and the Spec functor, is an integral morphism\"}",
    "date": "2026-10-22",
    "verdict": "no match: read the hits; none descends existence of an ample invertible sheaf along a finite surjective map onto a normal integral scheme."
+  },
+  {
+   "tool": "grep",
+   "query": "\\bample\\b|IsAmple|norm.*ample",
+   "results": "No hits",
+   "date": "2026-10-22",
+   "verdict": "no match: no Mathlib theorem for ample invertible sheaves or their descent was returned."
+  },
+  {
+   "tool": "leansearch",
+   "query": "If a normal integral scheme has a finite surjective cover with an ample line bundle then it has an ample line bundle",
+   "results": "Read returned hits: AlgebraicGeometry.isNoetherian_iff_of_finite_affine_openCover, AlgebraicGeometry.isNoetherian_iff_of_finite_iSup_eq_top, AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, AlgebraicGeometry.Scheme.Cover.mkOfCovers, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.cover, AlgebraicGeometry.IsIntegralHom.hasAffineProperty, AlgebraicGeometry.IsIntegralHom.instUniversallyClosed",
+   "date": "2026-10-22",
+   "verdict": "no match: no Mathlib theorem for ample invertible sheaves or their descent was returned."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsFinite, \"ample\"",
+   "results": "No hits",
+   "date": "2026-10-22",
+   "verdict": "no match: no Mathlib theorem for ample invertible sheaves or their descent was returned."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An ample invertible sheaf descends in existence along a finite surjective morphism onto a normal integral scheme",
+   "results": "Read returned hits: AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc, AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, AlgebraicGeometry.Scheme.Hom.normalizationDiagram",
+   "date": "2026-10-22",
+   "verdict": "no match: no Mathlib theorem for ample invertible sheaves or their descent was returned."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-semilinear-sylow-good-components",
@@ -82,5 +213,64 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-finite-normal-ample-descent",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Followed Stacks 0BD4(2) and expanded 0BD0 into a seven-step proof using existing reduced-closed-subscheme, finite-morphism, and ample-section lemmas. Created only the two non-elementary norm inputs, both statement-only and searched; no flatness or Noetherian assumption was added.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration/tame-boundary reduction, through the global alteration input; ILO X 2.3: Expose X 2.3 Step 2, diagram (2.c), printed p.151, with explicit selection of components for the every-generic-point degree convention. The selection uses Sylow conjugacy in each decomposition group and invariant-field degrees, rather than interpreting a total degree as each residue degree. Auxiliary input: Existence of an ample invertible sheaf descends through a finite cover of a normal integral scheme. The seven steps supply the finite-normal ample-descent auxiliary input in the alteration reduction of det-thm-sf-ctf-stability-direct-images proof (3). blueprint_refs ancestor returns None for this created chain, retained verbatim.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-scheme-sober",
+    "why": "Generic point of the integral target, a generic scheme-theoretic tool. The current unit has no statement giving this generic algebraic-geometric fact."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Reduced closed structure on the closure of a chosen point; no alteration argument is replaced. The current unit has no statement giving this generic algebraic-geometric fact."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-finite",
+    "why": "Finiteness of the selected closed subscheme inclusion. The current unit has no statement giving this generic algebraic-geometric fact."
+   },
+   {
+    "node": "lem-weil-pbc-finite-composition",
+    "why": "Finiteness after restricting the original finite map. The current unit has no statement giving this generic algebraic-geometric fact."
+   },
+   {
+    "node": "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "why": "Closed image and finite set-theoretic fibres of the restricted finite map. The current unit has no statement giving this generic algebraic-geometric fact."
+   },
+   {
+    "node": "lem-trf-ample-restrict-closed-immersion",
+    "why": "Generic restriction theorem for ample invertible sheaves. The current unit has no statement giving this generic algebraic-geometric fact."
+   },
+   {
+    "node": "lem-sc-ample-finite-principal-affine",
+    "why": "Section of an ample power nonvanishing on the entire finite fibre inside a specified open. The current unit has no statement giving this generic algebraic-geometric fact."
+   },
+   {
+    "node": "lem-sc-affine-cap-section-open",
+    "why": "Affineness of a section nonvanishing locus contained in an affine open. The current unit has no statement giving this generic algebraic-geometric fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-scheme-sober",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-closed-immersion-finite",
+  "lem-weil-pbc-finite-composition",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "lem-trf-ample-restrict-closed-immersion",
+  "lem-sc-ample-finite-principal-affine",
+  "lem-sc-affine-cap-section-open"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NK-bc3258808",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-bc3258808 (reviewer sub-agent of L); spot-checked: PASS, no changes. This is a faithful split of Stacks 0BD4(2), checked at divisors.tex lines 3585-3940. The item statement and stmt_deps are unchanged from live, the base proof was empty, and there is no re-split note. Neither the item nor its citer is on the 2026-10-19 drop list. Steps: 1. 01IS gives the generic point, 01J3 gives the reduced closure of a point over it, and nonempty + reduced + irreducible makes it integral. 2. 035C and 01WK make p finite; the closed image contains η, so p is surjective; 01PU makes i*L ample. 3. The two new norm nodes, with N fixed once before n and s. 4. Quasi-compactness is elementary, by surjectivity. 5. Finite fibre, then 09NV with E = the fibre and W = p^-1 V. 6. The saturated-locus equality gives z in Z_t inside V (shown by choosing a point in each fibre), and 01PV makes Z_t affine. 7. Both clauses of the ample definition hold. New nodes: (a) normal-integral sheaf norm (0BD3 + 0BCX (1),(2)) is true. It is the field norm N_{K/L} with degree [K:L] >= 1; sections embed in K, so it is defined on all opens. Vanishing holds because the constant term b_m lies in fA ∩ B, inside the prime; the source's sign slip does not affect it. (b) The norm-sections node (0BCY/0BCZ) is true. N = Norm(M) with Norm(M^n) = N^n, by the cocycles u^n. For the converse direction of 0BCZ, units go to units after trivializing near the fibre (0BCW), since finite maps are closed. Small cases checked: s = 0, nowhere-vanishing s, the identity map, field extensions. Neither new node is a duplicate: lem-pur-finite-flat-kummer-norm-degree is finite-flat, Noetherian and Kummer; no other node or blueprint node carries 0BD3/0BCY/0BCZ. Neither restates the item. Batch-5 flag on lem-trf-ample-restrict-closed-immersion: it is generic Properties 01PU, its 97-node closure contains no other trace-formula or Poincare-duality node, and it is not a step of either assumption, so I accept it. I accept the 8 generic off-unit tool_uses."
  }
 }
