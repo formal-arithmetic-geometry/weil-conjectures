@@ -1,0 +1,127 @@
+{
+ "id": "lem-weil-pbc-restriction-limit-projection-unit",
+ "kind": "statement",
+ "title": "Restriction respects derived limit projections and constant units",
+ "statement": "For each scheme and coefficient datum in [def-weil-pbc-pulled-reduction-comparison-data], the fixed lambda of [lem-weil-pbc-ordered-exchange-coefficient-comparison] respects every specified derived-limit projection, using the fixed exact evaluation square. On a constant derived tower it sends the completed constant-limit unit to the constant-coefficient diagonal/derived-limit adjunction unit followed by derived limit of the fixed diagonal restriction square. The attached Lean statement specifies the equalities.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099N (lemma-pushforward-Noetherian-case), proof of (5); the augmented strict-tower and evaluation normalization of the second paragraph of the current blueprint proof is made explicit."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-pulled-reduction-comparison-data",
+  "lem-weil-pbc-ordered-exchange-coefficient-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Normalize lambda on complexes by its universal-unit equation. Compose with the projection and exact evaluation factors. Naturality moves the tower factor; the derived projection-unit formula reduces to the ordinary projection; ordinaryLambda preserves it. Cancel the unit on K-injective representatives and transport by naturality.",
+   "uses": [
+    "lem-weil-pbc-ordered-exchange-coefficient-comparison",
+    "prop-weil-pbc-rlim-functoriality",
+    "lem-pod-derived-exact-square-composition",
+    "def-weil-pbc-pulled-reduction-comparison-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The ordinaryLambda map is the adjunction mate of the identity restriction/constant square, by its coordinates. Universal right-derived normalization identifies lambda with the derived mate. The normalized completed constant-limit unit is the unit of the derived adjunction. The mate unit identity gives the constant-unit equation.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "lem-weil-pbc-ordered-exchange-coefficient-comparison",
+    "prop-weil-pbc-rlim-functoriality",
+    "def-weil-pbc-pulled-reduction-comparison-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-pulled-reduction-comparison-data",
+  "lem-pod-derived-exact-square-composition",
+  "lem-weil-pbc-ordered-exchange-coefficient-comparison",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "prop-weil-pbc-rlim-functoriality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "The strict-model and universal-limit-normalization portions of the original argument, separated by M1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars commutes with a derived inverse limit and preserves its projection maps and constant diagram adjunction unit",
+   "results": "ModuleCat.preservesLimit_restrictScalars, ModuleCat.restrictScalarsComp'App_inv_naturality, ModuleCat.restrictScalarsComp'App_inv_naturality_assoc, ModuleCat.restrictScalarsComp'App_inv_apply, ModuleCat.restrictScalarsComp'_inv_app, ModuleCat.restrictScalarsComp', PresheafOfModules.restrictScalarsCompToPresheaf, ModuleCat.restrictScalarsComp",
+   "date": "2026-10-21",
+   "verdict": "Used the abstract adjoint-mate unit law and the universal derived unit/projection APIs. No single result states both normalizations for the prescribed strict-tower maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv\", \"unit\"",
+   "results": "CategoryTheory.mateEquiv_counit, CategoryTheory.mateEquiv_counit_symm, CategoryTheory.unit_mateEquiv, CategoryTheory.unit_mateEquiv_symm, CategoryTheory.Bicategory.mateEquiv_leftUnitor_hom_rightUnitor_inv",
+   "date": "2026-10-21",
+   "verdict": "Used the abstract adjoint-mate unit law and the universal derived unit/projection APIs. No single result states both normalizations for the prescribed strict-tower maps."
+  },
+  {
+   "tool": "grep",
+   "query": "derivedη_fac_app|unit_mateEquiv|rightDerivedNatTrans_app",
+   "results": "Mathlib/CategoryTheory/Adjunction/Mates.lean:136, Mathlib/CategoryTheory/Adjunction/Mates.lean:151, Mathlib/CategoryTheory/Adjunction/Mates.lean:155, Mathlib/CategoryTheory/Adjunction/Mates.lean:305, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean:111, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean:103, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean:97",
+   "date": "2026-10-21",
+   "verdict": "Used the abstract adjoint-mate unit law and the universal derived unit/projection APIs. No single result states both normalizations for the prescribed strict-tower maps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars commutes with derived inverse limits and preserves their projection and adjunction unit normalization",
+   "results": "ModuleCat.preservesLimit_restrictScalars in Mathlib.Algebra.Category.ModuleCat.ChangeOfRings and SheafOfModules.restrictScalars in Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings. Neither states the derived-tower projection and unit normalization for these fixed comparisons.",
+   "date": "2026-10-21",
+   "verdict": "No exact match; use the existing categorical and sheaf APIs in the construction and proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PulledReductionStrictTowerComparison",
+  "date": "2026-10-21",
+  "group": "M1"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-pulled-reduction-strict-tower-comparison",
+   "place": "Restriction respects derived limit projections and constant units",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RestrictionLimitProjectionUnit",
+  "file": "lean/Sheaf/Paper/RestrictionLimitProjectionUnit.lean",
+  "declaration": "AlgebraicGeometry.Scheme.PulledReduction.restrictionLimitNormalization",
+  "statement": "theorem restrictionLimitNormalization (T : Scheme.{t}) :\n    (∀ (Z : DerivedCategory (d.towers T)) (n : ℕ),\n      (OrderedExchange.lambda d T).hom.app Z ≫\n          (completedRlimProjection T (exchangeConstantRing T A) n).app\n            ((tres d T).mapDerivedCategory.obj Z) ≫\n          (evaluationRes d T n).hom.app Z =\n        (res d T).mapDerivedCategory.map\n          ((completedRlimProjection T (d.completedRing T) n).app Z)) ∧\n    (∀ L : reductionDerivedCategory T (d.completedRing T),\n      (res d T).mapDerivedCategory.map ((completedConstantRlimUnit d T).app L) ≫\n          (OrderedExchange.lambda d T).hom.app ((completedDerivedConstant d T).obj L) =\n        (OrderedExchange.diagonalAdjunction (A := A) T).unit.app\n            ((res d T).mapDerivedCategory.obj L) ≫\n          (OrderedExchange.rlim (A := A) T).map ((diagonalRes d T).hom.app L))",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-177da",
+  "group": "M1",
+  "result": "fix",
+  "landing": "20261022T002420-L-1927389",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-177da",
+  "group": "M1",
+  "result": "fix",
+  "landing": "20261022T002420-L-1927389",
+  "kind": "interface",
+  "note": "independent cc review: item strictTowerComparison (statement byte-identical to live) vs node lem-weil-pbc-pulled-reduction-strict-tower-comparison; strictModelComparison = item conjuncts 1-5; moved decls = live text; CompletedTowerPullback public decl hashes = published; 18 direct importers rc 0"
+ }
+}

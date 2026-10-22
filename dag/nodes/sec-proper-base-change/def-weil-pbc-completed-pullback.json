@@ -53,6 +53,45 @@
     "def-weil-pbc-adic-coefficient-datum"
    ],
    "elementary": true
+  },
+  {
+   "text": "In CompletedTowerPullback, the finite coefficient map is definitionally the hom of finiteRingIso. Its component naturality is integralRingComponent_naturality. After every quotient projection, the completed coefficient map is integralRingIso.hom; limit extensionality proves equality.",
+   "uses": [
+    "def-weil-pbc-four-corners"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The specified scalar-extension object and map equations identify completedModulePullback with the exact ringed module pullback along integralRingIso. Actual-ring inverse image and scalar extension are additive. Tower pullback is additive and preserves finite limits and colimits componentwise. The exact induced derived functors, with their factorization isomorphisms, are universal left-derived pairs. Their counits are invertible on every representative, hence on each required K-flat class.",
+   "uses": [
+    "def-weil-pbc-four-corners",
+    "lem-weil-pbc-local-derived-restriction-comparisons",
+    "def-weil-pbc-adic-coefficient-datum"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For completedReductionModuleUnit_exists, use the tensor-unit normalized scalar adjunction at every quotient. The transition formula sends 1 tensor x to 1 tensor x because quotient ring maps preserve one. Unit naturality gives a natural transformation on modules; extensionality on sections gives uniqueness.",
+   "uses": [
+    "def-weil-pbc-bounded-constructible-tower",
+    "def-weil-pbc-adic-coefficient-datum"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For completedPullbackConstantComplex_eq, prove the equality between pullback followed by constant towers and constant towers followed by levelwise pullback. The object equality uses preservation of identities; map equality is componentwise. Mapping this functor equality to complexes gives the stipulated strict equality.",
+   "uses": [
+    "def-weil-pbc-adic-coefficient-datum"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For completedReductionTowerUnit_exists, lift the homotopy-level ordinary quotient unit through the universal left-derived counit. Its factorization law gives the required cochain normalization. On a K-flat representative the counit is invertible, so the equation determines the unit. Every derived object has such a representative, and naturality transports uniqueness to every object.",
+   "uses": [
+    "def-weil-pbc-adic-coefficient-datum",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -60,12 +99,16 @@
   "lem-weil-pbc-profinite-coefficient-inverse-image",
   "lem-weil-pbc-completed-koszul-quotient-comparison",
   "def-weil-pbc-intrinsic-completion",
-  "def-weil-pbc-adic-coefficient-datum"
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-four-corners",
+  "lem-weil-pbc-local-derived-restriction-comparisons",
+  "def-weil-pbc-bounded-constructible-tower",
+  "lem-pc-kflat-resolution"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/prop-weil-pbc-koszul-reconstruction.md",
-  "place": "H6: supplementary proof route of CompletedPullback exactness and completeness equivalence; definition and Qbar declaration attachment unchanged"
+  "place": "H6: supplementary proof route of CompletedPullback exactness and completeness equivalence; definition and Qbar declaration attachment unchanged; M1: supporting CompletedTowerPullback coefficient, exact-derived-pair, strict-unit and constant-complex proofs. Existing construction signatures and bodies stay unchanged."
  },
  "mathlib_searches": [
   {
@@ -188,17 +231,13 @@
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "M2",
-  "result": "pass",
-  "landing": "20261021T111321-L-73258",
+  "reviewer": "C-177da",
+  "group": "M1",
+  "result": "fix",
+  "landing": "20261022T002420-L-1927389",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.Scheme.pbcQbarIntegralPull_mem"
-  ],
-  "sorry_after": []
+  "note": "independent cc review: item strictTowerComparison (statement byte-identical to live) vs node lem-weil-pbc-pulled-reduction-strict-tower-comparison; strictModelComparison = item conjuncts 1-5; moved decls = live text; CompletedTowerPullback public decl hashes = published; 18 direct importers rc 0"
  }
 }

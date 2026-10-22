@@ -11,10 +11,11 @@ public import Sheaf.Paper.CompletedTowerDerivedLimitFunctor
 public import Sheaf.Paper.IntrinsicCompletion
 public import Mathlib.CategoryTheory.Whiskering
 public import Mathlib.CategoryTheory.Functor.Derived.LeftDerived
-import Sheaf.Algebra.Homology.DiagramKFlatReplacements
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
-import Sheaf.Algebra.Homology.KFlat
-import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
+import Sheaf.Paper.FourCorners
+import Mathlib.CategoryTheory.Limits.Preserves.FunctorCategory
+import Sheaf.AlgebraicGeometry.ProEtaleLocalDerivedRestrictionComparisons
+import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
+import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 /-!
@@ -30,6 +31,8 @@ precedes derived inverse limit and acts on every strict derived tower.
 
 @[expose] public noncomputable section
 set_option autoImplicit false
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
 universe u v₁ v₂ u₁ u₂
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace CategoryTheory.Functor
@@ -78,7 +81,8 @@ factors are the fixed constant-section coefficient comparisons. Compose these is
 @[instance]
 theorem completedFiniteCoefficientMap_isIso (n : ℕ) :
     IsIso (completedFiniteCoefficientMap g d n) := by
-  sorry
+  change IsIso (d.finiteRingIso g n).hom
+  infer_instance
 
 /-- The components of the completed coefficient structure map.
 Source: blueprint order 1261 (blueprint: def-weil-pbc-completed-pullback). -/
@@ -96,7 +100,7 @@ Apply inverse-image functoriality and these two equalities. -/
 theorem completedCoefficientComponent_naturality {b a : ℕᵒᵖ} (f : b ⟶ a) :
     completedCoefficientComponent g d b.unop ≫ (pbcAdicRings X d).map f =
       completedCoefficientComponent g d a.unop := by
-  sorry
+  exact d.integralRingComponent_naturality g f
 
 /-- The canonical coefficient structure map into the actual completed limit.
 Source: blueprint order 1261 (blueprint: def-weil-pbc-completed-pullback). -/
@@ -123,7 +127,8 @@ module inverse image. Sheafified scalar extension respects sums on tensor genera
 The composite therefore respects addition. -/
 @[instance]
 theorem completedModulePullback_additive : (completedModulePullback g d).Additive := by
-  sorry
+  dsimp only [completedModulePullback]
+  infer_instance
 
 /-- Apply the module pullback to objects and maps at each strict tower level.
 Source: blueprint order 1261 (blueprint: def-weil-pbc-completed-pullback). -/
@@ -138,7 +143,56 @@ natural transformations is componentwise. -/
 @[instance]
 theorem completedTowerModulePullback_additive :
     (completedTowerModulePullback g d).Additive := by
-  sorry
+  constructor
+  intro M N f h
+  apply NatTrans.ext
+  funext n
+  exact (completedModulePullback g d).map_add
+
+private theorem completedCoefficientMap_eq_integralRingIso :
+    completedCoefficientMap g d = (d.integralRingIso g).hom := by
+  apply limit.hom_ext
+  intro n
+  change completedCoefficientMap g d ≫ d.projection X n.unop =
+    (d.integralRingIso g).hom ≫ d.projection X n.unop
+  calc
+    _ = completedCoefficientComponent g d n.unop := limit.lift_π _ n
+    _ = _ := by
+      rw [d.projection_comm]
+      rfl
+
+private theorem completedModulePullback_eq_exact :
+    completedModulePullback g d =
+      proEtaleRingModulePullback g (d.completedRing Y) (d.completedRing X)
+        (d.integralRingIso g) := by
+  unfold completedModulePullback
+  rw [completedCoefficientMap_eq_integralRingIso]
+  refine CategoryTheory.Functor.ext (fun M ↦
+    (completedAdicChangeData X (d.integralRingIso g).hom).choose_spec.choose
+      ((proEtaleModuleInverseImage g (d.completedRing Y)).obj M)) ?_
+  intro M N f
+  exact (completedAdicChangeData X (d.integralRingIso g).hom).choose_spec.choose_spec.choose
+    ((proEtaleModuleInverseImage g (d.completedRing Y)).map f)
+
+private instance completedModulePullback_finiteLimits :
+    PreservesFiniteLimits (completedModulePullback g d) := by
+  rw [completedModulePullback_eq_exact]
+  infer_instance
+
+private instance completedModulePullback_finiteColimits :
+    PreservesFiniteColimits (completedModulePullback g d) := by
+  rw [completedModulePullback_eq_exact]
+  infer_instance
+
+private instance completedTowerModulePullback_finiteLimits :
+    PreservesFiniteLimits (completedTowerModulePullback g d) := by
+  dsimp only [completedTowerModulePullback]
+  exact ⟨fun _ _ _ ↦ inferInstance⟩
+
+private instance completedTowerModulePullback_finiteColimits :
+    PreservesFiniteColimits (completedTowerModulePullback g d) := by
+  dsimp only [completedTowerModulePullback]
+  exact ⟨fun _ _ _ ↦ inferInstance⟩
 
 /-- The universal left-derived property and K-flat representative computation of the
 specified pullback pair. Naming this property keeps later choice terms small.
@@ -173,7 +227,12 @@ theorem completedTowerPullback_exists :
       (ε : DerivedCategory.Qh ⋙ LF ⟶
         (completedTowerModulePullback g d).mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh),
       IsCompletedTowerPullbackPair g d LF ε := by
-  sorry
+  let F := completedTowerModulePullback g d
+  refine ⟨F.mapDerivedCategory, F.mapDerivedCategoryFactorsh.hom, ?_, ?_, ?_⟩
+  · exact Functor.isLeftDerivedFunctor_of_inverts _ _ F.mapDerivedCategoryFactorsh
+  · exact ⟨inferInstance, inferInstance⟩
+  · intro P _
+    infer_instance
 
 /-- Canonical total left derived levelwise pullback, with its universal comparison.
 Source: blueprint order 1261 (blueprint: def-weil-pbc-completed-pullback). -/
@@ -216,7 +275,11 @@ theorem completedOrdinaryPullback_exists :
       (ε : DerivedCategory.Qh ⋙ LF ⟶
         (completedModulePullback g d).mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh),
       IsCompletedOrdinaryPullbackPair g d LF ε := by
-  sorry
+  let F := completedModulePullback g d
+  refine ⟨F.mapDerivedCategory, F.mapDerivedCategoryFactorsh.hom, ?_, ?_⟩
+  · exact Functor.isLeftDerivedFunctor_of_inverts _ _ F.mapDerivedCategoryFactorsh
+  · intro P _
+    infer_instance
 
 /-- Ordinary total left derived completed-coefficient pullback.
 Source: blueprint order 1261 (blueprint: def-weil-pbc-completed-pullback). -/
@@ -245,7 +308,45 @@ theorem completedReductionModuleUnit_exists (T : Scheme.{u}) :
         (U : T.ProEtᵒᵖ) (x : M.val.obj U),
         ((τ.app M).app (op n)).val.app U x =
           reductionTensorSection T (pbcAdicProjection T d n) M U 1 x := by
-  sorry
+  let u (M : pbcModules T (pbcAdicCompletion T d)) (n : ℕ) :
+      M ⟶ (completedReductionLevel T d n).obj M :=
+    (pbcScalarAdjunction (pbcAdicProjection T d n)).unit.app M
+  have hu (M : pbcModules T (pbcAdicCompletion T d)) (n : ℕ)
+      (U : T.ProEtᵒᵖ) (x : M.val.obj U) :
+      (u M n).val.app U x =
+        reductionTensorSection T (pbcAdicProjection T d n) M U 1 x :=
+    (pbcScalarAdjunction_exists (pbcAdicProjection T d n)).exists.choose_spec M U x
+  let τ : completedTowerConstant d T ⟶ completedReductionModuleTowerFunctor T d :=
+    { app := fun M ↦ NatTrans.ofOpSequence (u M) (by
+        intro n
+        change u M n = u M (n + 1) ≫
+          (completedReductionModuleTower T d M).map
+            (homOfLE (n.le_add_right 1)).op
+        dsimp only [completedReductionModuleTower]
+        rw [Functor.ofOpSequence_map_homOfLE_succ]
+        ext U x
+        change (u M n).val.app U x =
+          ((completedReductionTransition T d (n + 1) n (Nat.le_succ n)).app M).val.app U
+            ((u M (n + 1)).val.app U x)
+        rw [hu, hu]
+        have ht := (completedReductionTransition_exists T d (n + 1) n
+          (Nat.le_succ n)).exists.choose_spec M U 1 x
+        dsimp only [completedReductionTransition] at *
+        simpa only [map_one, pbcAdicProjection, completedReductionProjection,
+          pbcAdicRings, reductionCoefficientSystem] using ht.symm)
+      naturality := by
+        intro M N a
+        apply NatTrans.ext
+        funext n
+        exact (pbcScalarAdjunction (pbcAdicProjection T d n.unop)).unit.naturality a }
+  refine ⟨τ, hu, ?_⟩
+  intro τ' hτ'
+  apply NatTrans.ext
+  funext M
+  apply NatTrans.ext
+  funext n
+  ext U x
+  exact (hτ' M n.unop U x).trans (hu M n.unop U x).symm
 
 /-- The actual module-to-strict-tower quotient unit.
 Source: blueprint order 1261 (blueprint: def-weil-pbc-completed-pullback). -/
@@ -275,6 +376,79 @@ def HasCompletedReductionTowerUnitNormalization (T : Scheme.{u})
               ((NatTrans.mapHomologicalComplex (completedReductionModuleUnit d T)
                 (.up ℤ)).app P)
 
+private theorem exactAugmentation_existsUnique
+    {B C : Type*} [Category B] [Abelian B] [Category C] [Abelian C]
+    [HasDerivedCategory B] [HasDerivedCategory C]
+    (E F : B ⥤ C) [E.Additive] [F.Additive]
+    [PreservesFiniteLimits E] [PreservesFiniteColimits E]
+    (L : DerivedCategory B ⥤ DerivedCategory C)
+    (ε : DerivedCategory.Qh ⋙ L ⟶
+      F.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
+    [L.IsLeftDerivedFunctor ε (HomotopyCategory.quasiIso B (.up ℤ))]
+    (u : E ⟶ F) (S : CochainComplex B ℤ → Prop)
+    (hiso : ∀ P, S P → IsIso (ε.app ((HomotopyCategory.quotient B (.up ℤ)).obj P)))
+    (hrep : ∀ K : DerivedCategory B, ∃ P, S P ∧ Nonempty (DerivedCategory.Q.obj P ≅ K)) :
+    ∃! τ : E.mapDerivedCategory ⟶ L, ∀ P : CochainComplex B ℤ, S P →
+      τ.app (DerivedCategory.Q.obj P) ≫
+          ε.app ((HomotopyCategory.quotient B (.up ℤ)).obj P) =
+        E.mapDerivedCategoryFactors.hom.app P ≫
+          DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex u (.up ℤ)).app P) := by
+  let W := HomotopyCategory.quasiIso B (.up ℤ)
+  let β : DerivedCategory.Qh ⋙ E.mapDerivedCategory ⟶
+      F.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh :=
+    E.mapDerivedCategoryFactorsh.hom ≫
+      Functor.whiskerRight (NatTrans.mapHomotopyCategory u (.up ℤ)) DerivedCategory.Qh
+  let τ := L.leftDerivedLift ε W E.mapDerivedCategory β
+  have hτ (P : CochainComplex B ℤ) :
+      τ.app (DerivedCategory.Q.obj P) ≫
+          ε.app ((HomotopyCategory.quotient B (.up ℤ)).obj P) =
+        E.mapDerivedCategoryFactors.hom.app P ≫
+          DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex u (.up ℤ)).app P) := by
+    have h := L.leftDerived_fac_app ε W E.mapDerivedCategory β
+      ((HomotopyCategory.quotient B (.up ℤ)).obj P)
+    change τ.app _ ≫ ε.app _ = E.mapDerivedCategoryFactorsh.hom.app _ ≫
+      DerivedCategory.Qh.map ((NatTrans.mapHomotopyCategory u (.up ℤ)).app _) at h
+    rw [E.mapDerivedCategoryFactorsh_hom_app] at h
+    change τ.app (DerivedCategory.Q.obj P) ≫
+      ε.app ((HomotopyCategory.quotient B (.up ℤ)).obj P) =
+      (E.mapDerivedCategory.map (𝟙 _) ≫ E.mapDerivedCategoryFactors.hom.app P ≫
+        𝟙 _ ≫ DerivedCategory.Qh.map (𝟙 _)) ≫
+          DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex u (.up ℤ)).app P) at h
+    erw [E.mapDerivedCategory.map_id, DerivedCategory.Qh.map_id,
+      Category.id_comp, Category.comp_id, Category.comp_id] at h
+    exact h
+  refine ⟨τ, fun P _ ↦ hτ P, ?_⟩
+  intro τ' hτ'
+  apply NatTrans.ext
+  funext K
+  obtain ⟨P, hP, ⟨e⟩⟩ := hrep K
+  have := hiso P hP
+  have he : τ'.app (DerivedCategory.Q.obj P) = τ.app (DerivedCategory.Q.obj P) := by
+    apply (cancel_mono (ε.app ((HomotopyCategory.quotient B (.up ℤ)).obj P))).1
+    exact (hτ' P hP).trans (hτ P).symm
+  apply (cancel_epi (E.mapDerivedCategory.map e.hom)).1
+  rw [τ'.naturality, τ.naturality, he]
+
+private theorem independentKFlatRepresentatives
+    {C : Type u₁} [Category.{v₁} C] [EssentiallySmall.{u₂} C]
+    {J : GrothendieckTopology C}
+    [J.HasSheafCompose (forget₂ CommRingCat.{u₂} RingCat.{u₂})]
+    [J.WEqualsLocallyBijective AddCommGrpCat.{u₂}]
+    [HasSheafify J AddCommGrpCat.{u₂}]
+    (R : Sheaf J CommRingCat.{u₂})
+    [HasDerivedCategory (SheafOfModules.{u₂}
+      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))]
+    (K : DerivedCategory (SheafOfModules.{u₂}
+      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))) :
+    ∃ P, CochainComplex.IsKFlatIndependentCoefficients (R := R) P ∧
+      Nonempty (DerivedCategory.Q.obj P ≅ K) := by
+  let G := DerivedCategory.Q.objPreimage K
+  let e := DerivedCategory.Q.objObjPreimageIso K
+  obtain ⟨P, p, hP, _, hp, _⟩ :=
+    CochainComplex.exists_isKFlatResolutionIndependentCoefficients (R := R) G
+  have := hp
+  exact ⟨P, hP, ⟨asIso (DerivedCategory.Q.map p) ≪≫ e⟩⟩
+
 /-- The quotient unit descends uniquely from its strict K-flat construction.
 Source: blueprint order 1261 (blueprint: def-weil-pbc-completed-pullback).
 Proof: for a K-flat representative use its strict quotient-unit map, transported by
@@ -284,7 +458,21 @@ such a representative, so the specified normalization determines the unit unique
 theorem completedReductionTowerUnit_exists (T : Scheme.{u}) :
     ∃! τ : completedDerivedConstant d T ⟶ completedReductionTower T d,
       HasCompletedReductionTowerUnitNormalization d T τ := by
-  sorry
+  have : DerivedCategory.Qh.IsLocalization
+      (HomotopyCategory.quasiIso (pbcModules T (pbcAdicCompletion T d)) (.up ℤ)) :=
+    inferInstance
+  have : (completedReductionTower T d).IsLeftDerivedFunctor
+      (completedReductionTowerCounit d T)
+      (HomotopyCategory.quasiIso (pbcModules T (pbcAdicCompletion T d)) (.up ℤ)) :=
+    (completedReductionTower_properties T d).1
+  have : (completedReductionModuleTowerFunctor T d).Additive :=
+    completedReductionModuleTowerFunctor_additive T d
+  have hrep := independentKFlatRepresentatives (pbcAdicCompletion T d)
+  exact exactAugmentation_existsUnique (completedTowerConstant d T)
+    (completedReductionModuleTowerFunctor T d) (completedReductionTower T d)
+    (completedReductionTowerCounit d T) (completedReductionModuleUnit d T)
+    (fun P ↦ CochainComplex.IsKFlatIndependentCoefficients (R := pbcAdicCompletion T d) P)
+    (completedReductionTower_properties T d).2.2 hrep
 
 /-- The canonical strict derived reduction unit ΔK → K_bullet.
 Source: blueprint order 1261 (blueprint: def-weil-pbc-completed-pullback). -/
@@ -312,6 +500,15 @@ def completedOrdinaryPullbackComplexCounit
   Functor.leftDerivedCounitOnComplex (completedModulePullback g d)
     (completedOrdinaryPullback g d) (completedOrdinaryPullbackCounit g d) P
 
+private theorem mapComplexObject_eq_of_functor_eq
+    {C D : Type*} [Category C] [Category D] [HasZeroMorphisms C] [HasZeroMorphisms D]
+    {F G : C ⥤ D} [F.PreservesZeroMorphisms] [G.PreservesZeroMorphisms]
+    (h : F = G) (P : CochainComplex C ℤ) :
+    (F.mapHomologicalComplex (.up ℤ)).obj P =
+      (G.mapHomologicalComplex (.up ℤ)).obj P := by
+  subst G
+  rfl
+
 /-- The two ordinary constant-tower pullback complexes are the same strict complex.
 Source: blueprint order 1261 (blueprint: def-weil-pbc-completed-pullback).
 Proof: at each degree and tower index both have g^*(P^q), differential g^*(d^q), and
@@ -322,7 +519,24 @@ theorem completedPullbackConstantComplex_eq
       (((completedModulePullback g d).mapHomologicalComplex (.up ℤ)).obj P) =
     ((completedTowerModulePullback g d).mapHomologicalComplex (.up ℤ)).obj
       (((completedTowerConstant d Y).mapHomologicalComplex (.up ℤ)).obj P) := by
-  sorry
+  have hobj (M : pbcModules Y (pbcAdicCompletion Y d)) :
+      (Functor.const ℕᵒᵖ).obj ((completedModulePullback g d).obj M) =
+        (Functor.const ℕᵒᵖ).obj M ⋙ completedModulePullback g d := by
+    refine CategoryTheory.Functor.ext (fun _ ↦ rfl) ?_
+    intro i j f
+    simp only [eqToHom_refl, Category.id_comp, Category.comp_id,
+      Functor.comp_map, Functor.const_obj_map]
+    exact ((completedModulePullback g d).map_id M).symm
+  have he : completedModulePullback g d ⋙ completedTowerConstant d X =
+      completedTowerConstant d Y ⋙ completedTowerModulePullback g d := by
+    refine CategoryTheory.Functor.ext hobj ?_
+    intro M N f
+    apply NatTrans.ext
+    funext n
+    simp only [NatTrans.comp_app, eqToHom_app, eqToHom_refl,
+      Category.id_comp, Category.comp_id]
+    rfl
+  exact mapComplexObject_eq_of_functor_eq he P
 
 /-- The representative normalization fixing the canonical comparison uniquely.
 Source: blueprint order 1261 (blueprint: def-weil-pbc-completed-pullback). -/

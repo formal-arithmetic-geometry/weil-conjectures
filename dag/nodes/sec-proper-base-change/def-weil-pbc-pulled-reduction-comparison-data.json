@@ -1,0 +1,160 @@
+{
+ "id": "def-weil-pbc-pulled-reduction-comparison-data",
+ "kind": "definition",
+ "title": "Fixed functors and canonical maps for pulled reductions",
+ "statement": "The constant scalar restriction, exact constant inverse image, pulled completed reduction tower, scalar-insertion normalization, strict tensor normalization, exact evaluation and diagonal squares, pulled augmentation and limit comparison are the existing concrete constructions of the pulled-reduction comparison. Their names and bodies are preserved; no new coefficient object or derived functor is chosen. These use [def-weil-pbc-completed-pullback], [def-sp-constant-reduction-models] and [lem-weil-pbc-ordered-exchange-coefficient-comparison].",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099N (lemma-pushforward-Noetherian-case), proof of (5); the augmented strict-tower and evaluation normalization of the second paragraph of the current blueprint proof is made explicit."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "def-weil-pbc-completed-pullback",
+  "def-weil-pbc-complete-coefficient-datum",
+  "def-pc-kflat-complex",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "def-sp-constant-reduction-models",
+  "lem-weil-pbc-ordered-exchange-coefficient-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Use the concrete functors, actual model-site pullback unit, scalar-one insertion, exact localization squares and normalized restriction-of-limits isomorphism. These are the unchanged definitions formerly in the strict tower comparison module.",
+   "uses": [
+    "def-weil-pbc-adic-coefficient-datum",
+    "def-pc-sheaf-restrict-scalars",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "def-weil-pbc-completed-pullback",
+    "def-weil-pbc-complete-coefficient-datum",
+    "def-pc-kflat-complex",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "def-sp-constant-reduction-models",
+    "lem-weil-pbc-ordered-exchange-coefficient-comparison"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-kflat-complex",
+  "def-pc-sheaf-restrict-scalars",
+  "def-sp-constant-reduction-models",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-complete-coefficient-datum",
+  "def-weil-pbc-completed-pullback",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-ordered-exchange-coefficient-comparison",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "The strict-model and universal-limit-normalization portions of the original argument, separated by M1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "derived.*[Tt]ower.*pullback|pullback.*[Tt]ower|augmented.*[Tt]ower",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "No direct augmented strict model comparison. Loogle gives ordinary pullback adjunctions; LeanFinder gives algebraic cotangent complexes. Local source search found common-quotient tower and constant reduction/pullback comparisons, but not the required augmented completed pullback counit normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"pullback\"",
+   "results": "12 hits: PresheafOfModules.pullbackId, PresheafOfModules.pullbackObjIsDefined, PresheafOfModules.pullback, PresheafOfModules.pullbackObjIsDefined_eq_top, PresheafOfModules.pullbackObjIsDefined_free_yoneda, PresheafOfModules.pullbackPushforwardAdjunction, PresheafOfModules.pullbackComp, PresheafOfModules.pullback_comp_id",
+   "date": "2026-10-21",
+   "verdict": "No direct augmented strict model comparison. Loogle gives ordinary pullback adjunctions; LeanFinder gives algebraic cotangent complexes. Local source search found common-quotient tower and constant reduction/pullback comparisons, but not the required augmented completed pullback counit normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback of an augmented strict quotient tower agrees with reduction of the constant coefficient pullback with its K flat counit normalization",
+   "results": "8 hits: Algebra.Generators.H1Cotangent.δAux_ofComp, KaehlerDifferential.cotangentComplexBaseChange, Algebra.Generators.H1Cotangent.map_comp_cotangentComplex_baseChange, Algebra.Generators.CotangentSpace.compEquiv_symm_inr, Algebra.Generators.CotangentSpace.fst_compEquiv, KaehlerDifferential.tensorKaehlerEquiv_left_inv, Algebra.Extension.cotangentComplexBaseChange_eq_lTensor_cotangentComplex, Algebra.Extension.lTensor_cotangentComplex_eq_cotangentComplexBaseChange",
+   "date": "2026-10-21",
+   "verdict": "No direct augmented strict model comparison. Loogle gives ordinary pullback adjunctions; LeanFinder gives algebraic cotangent complexes. Local source search found common-quotient tower and constant reduction/pullback comparisons, but not the required augmented completed pullback counit normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "strictModelComparison|strictTowerComparison|augmented.*[Tt]ower|pullback.*[Tt]ower, in lean/WeilConjectures, lean/Sheaf and Mathlib",
+   "results": "FlatCommonQuotientReductionTower, ProEtaleConstantReductionModels, FlatRingedDiagramRestriction and ReductionPullbackDerivedTower were read. The latter two require invertible structural coefficient maps; the first two supply portions of the strict model calculation.",
+   "date": "2026-10-21",
+   "verdict": "Retain the augmented coefficient resolution for the noninvertible completed structural map. The independent derived-limit normalization is proved in RestrictionLimitProjectionUnit."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars for sheaves of modules and functorial scalar insertion under inverse image",
+   "results": "SheafOfModules.restrictScalars in Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings; PresheafOfModules.restrictScalars in Mathlib.Algebra.Category.ModuleCat.Presheaf.ChangeOfRings. These are ingredients of the existing wrappers, not this fixed collection of small-site comparisons.",
+   "date": "2026-10-21",
+   "verdict": "No exact match; use the existing categorical and sheaf APIs in the construction and proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PulledReductionStrictTowerComparison",
+  "date": "2026-10-21",
+  "group": "M1"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-pulled-reduction-strict-tower-comparison",
+   "place": "Fixed functors and canonical maps for pulled reductions",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PulledReductionComparisonData",
+  "file": "lean/Sheaf/Paper/PulledReductionComparisonData.lean",
+  "declaration": "AlgebraicGeometry.Scheme.PulledReduction.res",
+  "statement": "abbrev res (T : Scheme.{t})",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-21",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.PulledReduction.res",
+   "AlgebraicGeometry.Scheme.PulledReduction.pull",
+   "AlgebraicGeometry.Scheme.PulledReduction.ordinarySource",
+   "AlgebraicGeometry.Scheme.PulledReduction.source",
+   "AlgebraicGeometry.Scheme.PulledReduction.tower",
+   "AlgebraicGeometry.Scheme.PulledReduction.tres",
+   "AlgebraicGeometry.Scheme.PulledReduction.ordinaryReductionSource",
+   "AlgebraicGeometry.Scheme.PulledReduction.ordinaryReductionTarget",
+   "AlgebraicGeometry.Scheme.PulledReduction.insertion",
+   "AlgebraicGeometry.Scheme.PulledReduction.IsOrdinaryNormalized",
+   "AlgebraicGeometry.Scheme.PulledReduction.IsStrictNormalized",
+   "AlgebraicGeometry.Scheme.PulledReduction.targetCounit",
+   "AlgebraicGeometry.Scheme.PulledReduction.evaluationRes",
+   "AlgebraicGeometry.Scheme.PulledReduction.diagonalRes",
+   "AlgebraicGeometry.Scheme.PulledReduction.pulledAugmentation",
+   "AlgebraicGeometry.Scheme.PulledReduction.limitComparison",
+   "AlgebraicGeometry.Scheme.PulledReduction.ordinaryComplexComparison",
+   "AlgebraicGeometry.Scheme.PulledReduction.ordinaryReductionTarget_preservesZeroMorphisms"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-177da",
+  "group": "M1",
+  "result": "fix",
+  "landing": "20261022T002420-L-1927389",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-177da",
+  "group": "M1",
+  "result": "fix",
+  "landing": "20261022T002420-L-1927389",
+  "kind": "interface",
+  "note": "independent cc review: item strictTowerComparison (statement byte-identical to live) vs node lem-weil-pbc-pulled-reduction-strict-tower-comparison; strictModelComparison = item conjuncts 1-5; moved decls = live text; CompletedTowerPullback public decl hashes = published; 18 direct importers rc 0"
+ }
+}

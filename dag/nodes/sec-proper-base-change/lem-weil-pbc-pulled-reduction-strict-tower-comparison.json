@@ -20,155 +20,38 @@
  ],
  "proof": [
   {
-   "text": "Write $U=g^{-1}$, $R=R_T$, $B=B_T$, $R'=R_{T'}$, $D=B_{T'}$, $C=UB$, $S_n=S_{n,T}$, and $S_n'=S_{n,T'}$. The flatness and quotient assertions of [lem-weil-pbc-constant-completion-equivalence] give $R\\to B$, $R'\\to D$ flat, with $B\\otimes_RS_n=S_n$ and $D\\otimes_{R'}S_n'=S_n'$. The constant-sheaf identifications and exactness of [lem-pe-constant-left-module-inverse-image] identify $UR=R'$ and $US_n=S_n'$. Choose a flat-term K-flat $B$-representative $P$ of $K$ by [lem-weil-pbc-diagram-kflat-replacements] for the one-object category. By [lem-weil-pbc-flat-scalar-restriction-kflat], $\\operatorname{Res}P$ is flat-term K-flat over $R$. By [lem-weil-pbc-ringed-pullback-preserves-kflat], $M=U\\operatorname{Res}P$ is such a representative of $N$ over $R'$, and $Q=UP$ is flat-term K-flat over $C$ (use the transported-ring structural isomorphism $UB=C$). Inverse image here is exact on underlying abelian sheaves, so computes the constant-coefficient derived pullback without boundedness.",
+   "text": "Use [lem-weil-pbc-pulled-reduction-strict-model-descent] for the ordinary and derived comparisons, both universal-counit formulas, and the strict augmented identity.",
    "uses": [
-    "lem-weil-pbc-constant-completion-equivalence",
-    "lem-pe-constant-left-module-inverse-image",
-    "lem-weil-pbc-diagram-kflat-replacements",
-    "lem-weil-pbc-flat-scalar-restriction-kflat",
-    "lem-weil-pbc-ringed-pullback-preserves-kflat"
+    "lem-weil-pbc-pulled-reduction-strict-model-descent"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YS (lemma-K-flat-resolution), 0G7E (lemma-pullback-K-flat); sites-modules.tex Tag 093M (lemma-completion-flat); sites.tex Tag 00YV (proposition-functoriality-algebraic-structures-topoi)."
-   }
+   "elementary": false
   },
   {
-   "text": "Put $F_n=P\\otimes_BS_n$, with transition $1\\otimes q_{b,a}$. By [def-weil-pbc-adic-coefficient-datum] this strict diagram represents $K_\\bullet$. The augmented strict comparison of [lem-weil-pbc-flat-common-quotient-reduction-tower] identifies $\\operatorname{Res}P\\otimes_RS_n$ with $\\operatorname{Res}F_n$. Applying the cochain tensor comparison [lem-pur-cochain-pullback-tensor-coherence] to constant-coefficient pullback, and then inverse image of this comparison, gives strict isomorphisms\n$$c_n:M\\otimes_{R'}S_n'\\longrightarrow\\operatorname{Res}'(UF_n).$$\nWrite $T_n=UF_n$, with its $S_n'$-action and induced $D$-action. Exact finite coefficient pullback [prop-weil-pbc-proetale-constant-exact] shows that $T_n$ represents $Lg_n^*K_n$. These complexes are K-flat over $S_n'$, by the normalization calculation in the adic datum and preservation of K-flatness under finite pullback [lem-weil-pbc-ringed-pullback-preserves-kflat]. No assertion that $T_n$ is K-flat over $D$ or $R'$ is needed.",
+   "text": "Use [lem-weil-pbc-restriction-limit-projection-unit] for lambda. Naturality of the derived projection along tau inverse and cancellation of tau inverse followed by tau give the projection formula for limitComparison.",
    "uses": [
-    "def-weil-pbc-adic-coefficient-datum",
-    "lem-weil-pbc-flat-common-quotient-reduction-tower",
-    "lem-pur-cochain-pullback-tensor-coherence",
-    "prop-weil-pbc-proetale-constant-exact",
-    "lem-weil-pbc-ringed-pullback-preserves-kflat"
+    "lem-weil-pbc-restriction-limit-projection-unit"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A4 (lemma-pullback-tensor-product), proof at the level of total tensor complexes; sites-modules.tex Tag 03EL (lemma-tensor-product-pullback); proetale.tex Tag 099N, proof of (5)."
-   }
+   "elementary": true
   },
   {
-   "text": "To identify this entire augmented diagram with the derived tower pullback, let $J$ be the small category with objects $*$ and positive integers, arrows $*\\to n$ and $b\\to a$ for $b\\geq a$, with the evident composition. Let $A_J$ be the $R$-diagram $R[0]\\to S_n[0]$. Choose one strict objectwise flat-term K-flat replacement $V_J\\to A_J$ by [lem-weil-pbc-diagram-kflat-replacements]. The augmented $B$-diagram $E_j=\\operatorname{Tot}(P\\otimes_RV_j)$ maps to $P$ at $*$ and to $F_n$ at $n$, using the strict common-quotient comparison in step 2. These are quasi-isomorphisms because $\\operatorname{Res}P$ is K-flat. Every $E_j$ is flat-term K-flat over $B$: write it as $\\operatorname{Tot}(P\\otimes_B(B\\otimes_RV_j))$, apply [lem-pur-kflat-change-of-rings] to $V_j$, and [lem-pur-kflat-total-tensor-model] to this tensor. Thus $E_J$ is a resolving-class replacement of the whole augmented reduction diagram, not unrelated choices at its levels.",
+   "text": "Naturality of lambda on the pulled augmentation and its constant-unit normalization rewrite the pulled completion comparison. Precompose with delta and apply naturality of the diagonal adjunction unit. The strict augmented identity rewrites the map inside derived limit; cancellation of tau followed by tau inverse gives the completion unit. Naturality of each derived projection along the quotient augmentation gives the final finite projection equation.",
    "uses": [
-    "lem-weil-pbc-diagram-kflat-replacements",
-    "def-pc-kflat-complex",
-    "lem-weil-pbc-flat-common-quotient-reduction-tower",
-    "lem-pur-kflat-change-of-rings",
-    "lem-pur-kflat-total-tensor-model"
+    "def-weil-pbc-pulled-reduction-comparison-data",
+    "lem-weil-pbc-pulled-reduction-strict-model-descent",
+    "lem-weil-pbc-restriction-limit-projection-unit"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YS (lemma-K-flat-resolution), 07A2 (lemma-tensor-product-K-flat), 06YY (lemma-derived-base-change); the small augmented-diagram application is the argument of this step."
-   }
-  },
-  {
-   "text": "Put $V_j'=UV_j$, so its augmentations to $A_j'=R'[0]$ for $j=*$ and $A_j'=S_j'[0]$ otherwise are quasi-isomorphisms. Pulling $E_J$ back over $B\\to D$ gives the strict diagram\n$$Z_j=\\operatorname{Tot}(Q\\otimes_C(D\\otimes_{R'}V_j')),$$\nby the ordinary tensor and scalar balancing maps [lem-pur-cochain-pullback-tensor-coherence]. Flatness of $D$ over $R'$ and its common quotients from [lem-weil-pbc-constant-completion-equivalence] make $D\\otimes_{R'}V_j'\\to D\\otimes_{R'}A_j'$ quasi-isomorphisms, with targets $D$ at $*$ and $S_n'$ at $n$. Since $Q$ is K-flat over $C$, tensoring these maps with $Q$ preserves quasi-isomorphisms [def-pc-kflat-complex]. Hence there is one strict objectwise quasi-isomorphism of augmented diagrams from $Z_J$ to the diagram with source $Q\\otimes_CD=g_B^*P$, levels $Q\\otimes_CS_n'=T_n$, and quotient augmentation. The finite identification is inverse image of the ordinary balancing map defining $F_n$; exactness of $U$ is [lem-pe-constant-left-module-inverse-image]. This proves that $T_\\bullet$ is a compatible representative of $H_\\bullet=Lg^*_{\\operatorname{Tow}}K_\\bullet$ by [def-weil-pbc-completed-pullback]. In particular no flatness of $C\\to D$ has been assumed.",
-   "uses": [
-    "lem-pur-cochain-pullback-tensor-coherence",
-    "lem-weil-pbc-constant-completion-equivalence",
-    "def-pc-kflat-complex",
-    "lem-pe-constant-left-module-inverse-image",
-    "def-weil-pbc-completed-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YY (lemma-derived-base-change) and 07A4 (lemma-pullback-tensor-product); sites-modules.tex Tag 093M (lemma-completion-flat). The quasi-isomorphism test is the K-flat definition applied to the cone."
-   }
-  },
-  {
-   "text": "The maps $c_n$ in step 2 are therefore an isomorphism of strict representatives of $\\mathcal R(N)$ and $\\operatorname{Res}'H_\\bullet$; let $\\tau$ be its localization. On the sheafified pure tensors of [def-weil-pbc-ringed-tensor-section-calculus], $c_n$ sends $x\\otimes s$ to the corresponding $x\\otimes s$. Both transition composites send $x\\otimes s$ to $x\\otimes q_{b,a}(s)$. The source map $M\\to\\operatorname{Res}'(Q\\otimes_CD)$ is scalar insertion $x\\mapsto x\\otimes1$. Following it by the pulled-back quotient augmentation sends $x$ to $x\\otimes1$ in $T_n$, as does $c_n$ after the quotient augmentation $M\\to M\\otimes_{R'}S_n'$. These are equalities of maps of strict complexes, including the augmented source. The tensor comparison and common-quotient comparison used in step 2 are exactly the two factors specified for $\\tau_n$ in the statement.",
-   "uses": [
-    "def-weil-pbc-ringed-tensor-section-calculus"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EL (lemma-tensor-product-pullback): pure tensor formulas; sites-cohomology.tex Tag 07A4, proof; quotient and scalar-insertion units as in steps 2–4."
-   }
-  },
-  {
-   "text": "For a chain map between flat-term K-flat representatives $P\\to\\widetilde P$, every displayed comparison commutes with it: on pure tensors both orders give $f(x)\\otimes s$, and all maps in $Z_J\\to T_J$ are induced by coefficient augmentations. By [lem-weil-pbc-diagram-kflat-replacements], pullback carries quasi-isomorphisms of resolving diagrams to quasi-isomorphisms; finite reduction has this property by [def-weil-pbc-adic-coefficient-datum]. The universal resolving-class construction [lem-pur-left-derived-from-kflat-class], applied also to the augmented indexing category $J$, therefore descends these comparisons and equalities to the derived functors, independently of the representatives. This proves the asserted canonicity and naturality of $\\tau$ as an augmented tower comparison, rather than only a collection of isomorphisms after evaluation.",
-   "uses": [
-    "lem-weil-pbc-diagram-kflat-replacements",
-    "def-weil-pbc-adic-coefficient-datum",
-    "lem-pur-left-derived-from-kflat-class"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YY (lemma-derived-base-change), resolving-class construction; derived.tex Tag 06XN (lemma-find-existence-computes); proetale.tex Tag 099N, proof of (5)."
-   }
-  },
-  {
-   "text": "Restriction along $R'\\to D$ is exact since it leaves underlying abelian sheaves unchanged [def-pc-sheaf-restrict-scalars]. Its left adjoint is scalar extension [lem-pur-sheaf-ring-coefficient-ordinary-adjunction], which is exact by the flatness of $D$ in [lem-weil-pbc-constant-completion-equivalence]. These adjunctions act levelwise on strict towers, and exactness there is levelwise [lem-weil-tower-category-levelwise-abelian]. Thus [lem-weil-pbc-right-adjoint-preserves-kinjective] says that restriction preserves K-injective tower complexes. Take a K-injective tower resolution $T_\\bullet\\to J_\\bullet$ as in [lem-weil-pbc-ringed-strict-tower-homotopy-limit]; its restriction is a K-injective resolution of $\\operatorname{Res}'T_\\bullet$. Inverse limit commutes with restriction literally: both are the sheaf of compatible families with its $R'$-action. Hence the same complex $\\operatorname{Res}'\\lim J_n=\\lim\\operatorname{Res}'J_n$ gives a canonical isomorphism\n$$\\lambda:\\operatorname{Res}'(R\\lim H_\\bullet)\\xrightarrow{\\sim}R\\lim\\operatorname{Res}'H_\\bullet.$$\nIt respects evaluations since both evaluation maps are the same projections $\\lim\\operatorname{Res}'J_n\\to\\operatorname{Res}'J_n$. This computation does not replace derived products with underived ones.",
-   "uses": [
-    "def-pc-sheaf-restrict-scalars",
-    "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
-    "lem-weil-pbc-constant-completion-equivalence",
-    "lem-weil-tower-category-levelwise-abelian",
-    "lem-weil-pbc-right-adjoint-preserves-kinjective",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 08BJ (lemma-adjoint-preserve-K-injectives); sites-cohomology.tex Tags 0940 (section-derived-limits), 0941 (lemma-derived-limit-is-ok); sites-modules.tex Tags 03D7 and 03DA for the scalar adjunction."
-   }
-  },
-  {
-   "text": "Using the total right derived limit functor of [lem-weil-pbc-ringed-strict-tower-homotopy-limit], define\n$$\\rho=(R\\lim\\tau)^{-1}\\lambda:\\operatorname{Res}'(R\\lim H_\\bullet)\\longrightarrow R\\lim\\mathcal R(N)=\\widehat N.$$\nIt is invertible because both factors are. Naturality of evaluation gives $p_n^{\\operatorname{Res}H}(R\\lim\\tau)=\\tau_np_n$; this is also the equality obtained by taking the $n$th component of the same map between K-injective tower resolutions. Step 7 identifies $p_n^{\\operatorname{Res}H}\\lambda$ with $\\operatorname{Res}'p_n^H$. Composing with $\\rho$ gives precisely $\\operatorname{Res}'p_n^H=\\tau_np_n\\rho$.",
-   "uses": [
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0940 (section-derived-limits), 0941 (lemma-derived-limit-is-ok): evaluation from a K-injective strict tower resolution."
-   }
-  },
-  {
-   "text": "The quotient-completion unit for $M$ is obtained from its strict compatible maps $M\\to M\\otimes_{R'}S_n'$ by composing with a tower K-injective resolution and factoring through the termwise limit. The pulled-back augmentation is constructed in exactly this way in [def-weil-pbc-completed-pullback]. By the strict augmented equality of step 5, precomposing it with scalar insertion gives those same quotient maps after $\\tau_n$. The resolution comparison defining $R\\lim\\tau$ and the common restricted resolution defining $\\lambda$ therefore identify the two factorization maps: after $\\rho$ the pulled-back augmentation is $\\eta:N\\to\\widehat N$. Projecting this factorization to its $n$th component gives $p_n\\eta=u_n$, not merely equality up to an unspecified choice of cone map. Steps 6–8 and the functorial total right derived limit [lem-weil-pbc-ringed-strict-tower-homotopy-limit] make $\\lambda,\\rho,\\eta$ and these identities natural in $K$. No completeness assumption on $K$ has entered any step.",
-   "uses": [
-    "def-weil-pbc-completed-pullback",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0940 (section-derived-limits), derived limit as direct image from the tower site; proetale.tex Tag 099N (lemma-pushforward-Noetherian-case), proof of (5), with the unit defined by the strict quotient augmentation."
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-kflat-complex",
-  "def-pc-sheaf-restrict-scalars",
-  "def-weil-pbc-adic-coefficient-datum",
-  "def-weil-pbc-completed-pullback",
-  "def-weil-pbc-ringed-tensor-section-calculus",
-  "lem-pe-constant-left-module-inverse-image",
-  "lem-pur-cochain-pullback-tensor-coherence",
-  "lem-pur-kflat-change-of-rings",
-  "lem-pur-kflat-total-tensor-model",
-  "lem-pur-left-derived-from-kflat-class",
-  "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
-  "lem-weil-pbc-constant-completion-equivalence",
-  "lem-weil-pbc-diagram-kflat-replacements",
-  "lem-weil-pbc-flat-common-quotient-reduction-tower",
-  "lem-weil-pbc-flat-scalar-restriction-kflat",
-  "lem-weil-pbc-right-adjoint-preserves-kinjective",
-  "lem-weil-pbc-ringed-pullback-preserves-kflat",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "lem-weil-tower-category-levelwise-abelian",
-  "prop-weil-pbc-proetale-constant-exact"
+  "def-weil-pbc-pulled-reduction-comparison-data",
+  "lem-weil-pbc-pulled-reduction-strict-model-descent",
+  "lem-weil-pbc-restriction-limit-projection-unit"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-prop-pbc-complete/lemma-weil-pbc-completed-pullback-reduction.proof.md",
-  "place": "Paragraph 2, derived pullback commutes with tensor: explicit augmented strict-model argument using Stacks 099N(5), 07A4, 06YY, 0G7E and 0940; the blueprint alone does not supply the augmentation or restriction-of-limit proof."
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "M1: strict-model descent plus normalized restriction of limits, combined by naturality and the adjunction mate unit identity."
  },
  "mathlib_searches": [
   {
@@ -315,32 +198,15 @@
   "module": "Sheaf.Paper.PulledReductionStrictTowerComparison",
   "declaration": "AlgebraicGeometry.Scheme.PulledReduction.strictTowerComparison",
   "declarations": [
-   "AlgebraicGeometry.Scheme.PulledReduction.res",
-   "AlgebraicGeometry.Scheme.PulledReduction.pull",
-   "AlgebraicGeometry.Scheme.PulledReduction.ordinarySource",
-   "AlgebraicGeometry.Scheme.PulledReduction.source",
-   "AlgebraicGeometry.Scheme.PulledReduction.tower",
-   "AlgebraicGeometry.Scheme.PulledReduction.tres",
-   "AlgebraicGeometry.Scheme.PulledReduction.ordinaryReductionSource",
-   "AlgebraicGeometry.Scheme.PulledReduction.ordinaryReductionTarget",
-   "AlgebraicGeometry.Scheme.PulledReduction.insertion",
-   "AlgebraicGeometry.Scheme.PulledReduction.IsOrdinaryNormalized",
-   "AlgebraicGeometry.Scheme.PulledReduction.IsStrictNormalized",
-   "AlgebraicGeometry.Scheme.PulledReduction.targetCounit",
-   "AlgebraicGeometry.Scheme.PulledReduction.evaluationRes",
-   "AlgebraicGeometry.Scheme.PulledReduction.diagonalRes",
-   "AlgebraicGeometry.Scheme.PulledReduction.pulledAugmentation",
-   "AlgebraicGeometry.Scheme.PulledReduction.limitComparison",
-   "AlgebraicGeometry.Scheme.PulledReduction.strictTowerComparison",
-   "AlgebraicGeometry.Scheme.PulledReduction.ordinaryComplexComparison"
+   "AlgebraicGeometry.Scheme.PulledReduction.strictTowerComparison"
   ],
   "file": "lean/Sheaf/Paper/PulledReductionStrictTowerComparison.lean",
   "statement": "theorem strictTowerComparison : ∃ (s : ordinarySource d g ⟶ completedModulePullback g d ⋙ res d X) (δ : source d g ⟶ completedOrdinaryPullback g d ⋙ (res d X).mapDerivedCategory) (e : ordinaryReductionSource d g ≅ ordinaryReductionTarget d g) (τ : source d g ⋙ OrderedExchange.reduction d X ≅ tower d g ⋙ (tres d X).mapDerivedCategory), IsOrdinaryNormalized d g s ∧ IsStrictNormalized d g e ∧ (∀ P : CochainComplex (reductionModules Y (d.completedRing Y)) ℤ, CochainComplex.IsKFlatIndependentCoefficients.{t + 1, t, t + 1} (R := d.completedRing Y) P → (∀ i : ℤ, SheafOfModules.IsFlatOnSite.{t + 1, t, t + 1, t + 1} (R := d.completedRing Y) (P.X i)) → δ.app (DerivedCategory.Q.obj P) ≫ (res d X).mapDerivedCategory.map (completedOrdinaryPullbackComplexCounit g d P) ≫ (res d X).mapDerivedCategoryFactors.hom.app (((completedModulePullback g d).mapHomologicalComplex (.up ℤ)).obj P) = (ordinarySource d g).mapDerivedCategoryFactors.hom.app P ≫ DerivedCategory.Q.map (ordinaryComplexComparison d g s P)) ∧ (∀ P : CochainComplex (reductionModules Y (d.completedRing Y)) ℤ, CochainComplex.IsKFlatIndependentCoefficients.{t + 1, t, t + 1} (R := d.completedRing Y) P → (∀ i : ℤ, SheafOfModules.IsFlatOnSite.{t + 1, t, t + 1, t + 1} (R := d.completedRing Y) (P.X i)) → IsIso (targetCounit d g P) ∧ τ.hom.app (DerivedCategory.Q.obj P) ≫ targetCounit d g P = (OrderedExchange.reduction d X).map ((ordinarySource d g).mapDerivedCategoryFactors.hom.app P) ≫ OrderedExchange.reductionComplexCounit d X (((ordinarySource d g).mapHomologicalComplex (.up ℤ)).obj P) ≫ DerivedCategory.Q.map ((NatIso.mapHomologicalComplex e (.up ℤ)).hom.app P)) ∧ (∀ K : reductionDerivedCategory Y (d.completedRing Y), (OrderedExchange.augmentation d X).app ((source d g).obj K) ≫ τ.hom.app K = (OrderedExchange.diagonal (A := A) X).map (δ.app K) ≫ (diagonalRes d X).hom.app ((completedOrdinaryPullback g d).obj K) ≫ (tres d X).mapDerivedCategory.map (pulledAugmentation d g K)) ∧ (∀ (K : reductionDerivedCategory Y (d.completedRing Y)) (n : ℕ), (res d X).mapDerivedCategory.map ((completedRlimProjection X (d.completedRing X) n).app ((tower d g).obj K)) = (limitComparison d g τ K).hom ≫ (completedRlimProjection X (exchangeConstantRing X A) n).app ((OrderedExchange.reduction d X).obj ((source d g).obj K)) ≫ (reductionTowerDerivedEvaluation X (reductionModuleRing X (exchangeConstantRing X A)) n).map (τ.hom.app K) ≫ (evaluationRes d X n).hom.app ((tower d g).obj K)) ∧ (∀ K : reductionDerivedCategory Y (d.completedRing Y), δ.app K ≫ (res d X).mapDerivedCategory.map (completedPullbackComparison g d K) ≫ (limitComparison d g τ K).hom = (OrderedExchange.unit d X).app ((source d g).obj K)) ∧ (∀ (K : reductionDerivedCategory Y (d.completedRing Y)) (n : ℕ), (OrderedExchange.unit d X).app ((source d g).obj K) ≫ (completedRlimProjection X (exchangeConstantRing X A) n).app ((OrderedExchange.reduction d X).obj ((source d g).obj K)) = (OrderedExchange.diagonalAdjunction (A := A) X).unit.app ((source d g).obj K) ≫ (completedRlimProjection X (exchangeConstantRing X A) n).app ((OrderedExchange.diagonal (A := A) X).obj ((source d g).obj K)) ≫ (reductionTowerDerivedEvaluation X (reductionModuleRing X (exchangeConstantRing X A)) n).map ((OrderedExchange.augmentation d X).app ((source d g).obj K)))",
   "branch": "sheaf-dag",
-  "by": "NG",
+  "by": "M1",
   "date": "2026-10-21",
   "existing": false,
-  "note": "The full augmented strict-tower comparison, normalized on a single flat-term K-flat completed representative, with the induced restriction/derived-limit isomorphism and its projections and unit. Reuses the published original-site reduction and normalized limit comparison; no completeness assumption, boundedness assumption, or invertibility of the completed coefficient structure map. Repair of da9b673d70a6: insertion evaluates the actual model-site pullback adjunction unit at AsSmall.up.op.obj U, then inserts coefficient one; it no longer chooses an adjunction from a bare existence theorem."
+  "note": "Statement unchanged. The pre-existing concrete definitions moved verbatim to PulledReductionComparisonData, publicly imported here. No change to coefficient maps, functors or normalization."
  },
  "reviewed_lean": {
   "date": "2026-10-21",
@@ -349,5 +215,15 @@
   "group": "NG",
   "result": "pass",
   "note": "Re-delivery of da9b673d70a6 RETURN F1. The only change is insertion, which now evaluates Mathlib's SheafOfModules.pullbackPushforwardAdjunction unit (ofIsRightAdjoint of pushforward; pullback := leftAdjoint, the functor inside proEtaleModuleInverseImage) at AsSmall.up.op.obj U, then inserts 1 via reductionTensorSection into completedModulePullback = inverse image ⋙ reductionChange(completedCoefficientMap). It agrees sectionwise with the private proEtaleModuleInverseImageAdjunction: pushforwardPushforwardEquivalence units are M.map(𝟙) and ofNatIsoRight uses Iso.refl. So s and e are canonically pinned and the −1 twist is excluded. The LHS proEtaleRingModuleAdjunction is ∃!-pinned. Statement and the other declarations are byte-identical to the reviewed version; the node differs from side-live only in lean and the 2 accepted stmt_deps; all 9 dep records are identical to side-live. Theorem stmt_dep ordered-exchange is genuine: lambda = lambda_existsUnique.exists.choose. Edge cases g=id, empty schemes, A=0, I=0/unit ideal, unbounded/noncomplete K are admitted. No compile (no file changed); worker's scompile is clean. Advisories A1, A2, A4, A5 carried over."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-177da",
+  "group": "M1",
+  "result": "fix",
+  "landing": "20261022T002420-L-1927389",
+  "kind": "interface",
+  "note": "independent cc review: item strictTowerComparison (statement byte-identical to live) vs node lem-weil-pbc-pulled-reduction-strict-tower-comparison; strictModelComparison = item conjuncts 1-5; moved decls = live text; CompletedTowerPullback public decl hashes = published; 18 direct importers rc 0"
  }
 }
