@@ -21,143 +21,97 @@
  ],
  "proof": [
   {
-   "text": "Construct the graded map before imposing any flatness hypotheses. For each $p,q,a$, and on every localized site over $U$, send $(y,\\phi)$ to the map $x\\mapsto y\\phi(x)$ if $a+q=0$, and to zero otherwise. Here $y$ is restricted along every object over $U$ before multiplication. This is bilinear over $\\mathcal O|_U$, commutes with restrictions, and is linear in $x$, hence gives a section of the sheaf Hom. The presheaf tensor universal property followed by the unique sheafification factorization gives $F^p\\otimes D^q\\to\\mathcal Hom(E^a,F^{a+p+q})$. The Hom-product universal property and then the total-coproduct universal property assemble these into $a^n$ for $n=p+q$. Those same universal properties imply uniqueness: equality can be checked after each total-summand inclusion, each Hom projection, and the presheaf-tensor sheafification unit. This uses all localized sections, not an assumption that every section of a sheaf tensor is globally a pure tensor.",
+   "text": "Use the proved chain-level right-tensor currying equivalence and its generator and naturality formulas from the ringed derived tensor-Hom adjunction construction. It compares the ordinary Hom complex with the native internal Hom complex and applies complex symmetry; the two Koszul signs cancel, so its formula on pure sections is unsigned. This supplies an actual chain equivalence for arbitrary complexes, before localization.",
    "uses": [
-    "def-pur-sheaf-hom",
+    "lem-sf-ringed-derived-tensor-hom-adjunction",
     "def-pur-hom-complex",
     "def-pur-sheaf-tensor-product",
-    "def-weil-presheaf-modules-sheafification",
-    "def-pc-tensor-complex-sheaves"
+    "def-weil-presheaf-modules-sheafification"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 04TT/03EM (section-internal-hom), 03EK (section-tensor-product), and 03CY (lemma-sheafification-presheaf-modules); degreewise construction."
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JD (lemma-dual), equation-eval (Tag 08JE), Tag 0A98 (lemma-internal-hom-composition), and section-hom-complexes; ordinary chain map and its fixed-augmentation derived comparison."
    }
   },
   {
-   "text": "Check the chain-map equation on the generators and projections of step 1. Regard $\\phi$ as a homogeneous graded map $E\\to O$ of degree $q$, zero in every unsupported component; since $d_O=0$, $d_D\\phi=-(-1)^q\\phi d_E$. Thus, writing $n=p+q$,\n$$a(d_Fy\\otimes\\phi+(-1)^py\\otimes d_D\\phi)(x)=d_Fy\\,\\phi(x)-(-1)^{p+q}y\\,\\phi(d_Ex)=d_{\\mathcal Hom(E,F)}(a(y\\otimes\\phi))(x).$$\nThe formula includes the case $a+q+1=0$, where the second term can be nonzero even though $\\phi(x)=0$; all other unsupported terms vanish. By step 1's detecting maps this proves the chain equation and the asserted uniqueness as a chain map. The sign in the second term comes from the differentials, with no sign multiplying $y\\phi(x)$.",
+   "text": "Define a_E,F by right-tensor currying of ordinary reassociation, F tensor ordinary evaluation into O[0], and the ordinary right unitor. These are chain maps, so the construction needs no new differential calculation. The pure-section formulas for the constraints give y φ(x) in the supported component a+q=0; O[0] vanishes in every other component. Hom product projections, total coproduct inclusions and the sheafification adjunction detect equality and prove uniqueness. Applying the same detection twice identifies the ordinary associator and right unitor with the representatives in the supplied coherence.",
    "uses": [
+    "lem-sf-ringed-tensor-complex-constraints",
     "def-pur-hom-complex",
-    "def-pc-tensor-complex-sheaves"
+    "def-pc-tensor-complex-sheaves",
+    "def-sfb-internal-hom-strict-models"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "section-hom-complexes, differential formula; Tag 08JE (equation-eval), ordinary representative calculation."
+    "place": "Tag 08JD (lemma-dual), equation-eval (Tag 08JE), Tag 0A98 (lemma-internal-hom-composition), and section-hom-complexes; ordinary chain map and its fixed-augmentation derived comparison."
    }
   },
   {
-   "text": "Now assume $F,D$ are K-flat and $\\mathcal Hom^\\bullet(E,\\eta_O)$, $\\mathcal Hom^\\bullet(E,\\eta_F)$ are quasi-isomorphisms, and choose a K-flat flat-term resolution $s:L\\to E$ using [lem-pc-kflat-resolution]. Put $T=\\operatorname{Tot}(F\\otimes D)$ and $W=\\operatorname{Tot}(D\\otimes L)$. The fixed model [def-coef-ringed-tensor-hom-model] says that $T$ and $W$ are K-flat. Also $O$ is K-flat: its degree-zero unit identifies $\\operatorname{Tot}(A\\otimes O)$ with $A$, so it preserves acyclicity. Write $\\mu_{X,Y}:Q\\operatorname{Tot}(X\\otimes Y)\\xrightarrow{\\sim}QX\\otimes^{\\mathbf L}QY$ for the fixed model on K-flat pairs, so $\\mu_{F,D}$ is the specified $\\mu$. The associator and unit constraints are induced by ordinary total-tensor constraints. We use the model on K-flat pairs as stated; we do not infer that $F$ or $D$ has flat terms from its K-flatness.",
-   "uses": [
-    "lem-pc-kflat-resolution",
-    "def-coef-ringed-tensor-hom-model",
-    "def-pc-kflat-complex",
-    "lem-sf-ringed-derived-closed-symmetric-monoidal"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YS (lemma-K-flat-resolution), Tag 0FPT (lemma-symmetric-monoidal-derived), and fixed representative model for Tag 08J9."
-   }
-  },
-  {
-   "text": "Let $h_G=\\mathcal Hom^\\bullet(E,\\eta_G)$, for $G=O,F$, and $h_{G,s}=\\mathcal Hom^\\bullet(s,I(G))h_G$. In the fixed representative coordinates the morphism\n$$g_G:=H(Qs,1)\\gamma_{E,G}:QD\\to H(QL,QO)\\quad(G=O)$$\n(and with domain $Q\\mathcal Hom^\\bullet(E,F)$ and target $H(QL,QF)$ for $G=F$) is precisely $Qh_{G,s}$ followed by the fixed derived-Hom comparison. This is the functoriality of the recorded Hom construction in its first variable. The assumptions on $h_O,h_F$ make the two original $\\gamma$ maps isomorphisms; $Qs$ is invertible because $s$ is a quasi-isomorphism, and $H(Qs,1)$ is invertible because $H$ is a functor. In particular no claim that $\\mathcal Hom(E,-)$ preserves every quasi-isomorphism is being made.",
+   "text": "The fixed localization factorization is a natural isomorphism on pairs of complexes. Its naturality and naturality of the fixed K-injective augmentation imply Q Hom(s,G) followed by γ_L,G equals γ_E,G followed by H(Qs,1). Each assumed augmentation quasi-isomorphism gives invertibility of its own γ. No general preservation of quasi-isomorphisms by Hom(E,-) is used.",
    "uses": [
     "def-pur-derived-internal-hom",
-    "def-pur-hom-complex",
+    "def-coef-hom-representative-evaluation",
     "def-weil-abstract-derived-category"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "section-internal-hom, construction and localization factorization of RHom; fixed augmentations."
+    "place": "Tag 08JD (lemma-dual), equation-eval (Tag 08JE), Tag 0A98 (lemma-internal-hom-composition), and section-hom-complexes; ordinary chain map and its fixed-augmentation derived comparison."
    }
   },
   {
-   "text": "Define $v_s:W\\to O$ by $v_s(\\phi\\otimes z)=\\phi(sz)$ for homogeneous $z\\in L^a$, interpreted as zero unless $a+q=0$. This is a chain map: on each tensor generator its differential condition is\n$$(d_D\\phi)(sz)+(-1)^q\\phi(s\\,d_Lz)=-(-1)^q\\phi(d_Esz)+(-1)^q\\phi(s\\,d_Lz)=0.$$\nIt descends and is detected by the same sheafification and coproduct maps as in step 1. The actual uncurrying of $h_{O,s}:D\\to\\mathcal Hom^\\bullet(L,I(O))$ sends $\\phi\\otimes z$ to $\\eta_O(\\phi(sz))$, so it equals $\\eta_Ov_s$. Apply the fixed uncurrying equation to the K-flat pair $(D,L)$. If $\\operatorname{untr}$ denotes inverse closed transposition, it gives\n$$\\operatorname{untr}(g_O)=(Q\\eta_O)^{-1}Q(\\eta_Ov_s)\\mu_{D,L}^{-1}=Qv_s\\mu_{D,L}^{-1}=:e_s.$$\nThe cancellation uses the fixed augmentation, with no substitute choice of an identification of $QD$ with the dual.",
+   "text": "Choose a K-flat resolution s:L→E. Put D=Hom(E,O), P=Tot(F tensor D), and v equal to the ordinary uncurrying of Hom(s,O). The tensor of K-flat complexes is K-flat. Apply the fixed coefficient tensor-curry normalization to (D,L) and (P,L). It identifies the inverse transpose of γ_E,O followed by H(Qs,1) with μ_D,L inverse followed by Qv; similarly the other inverse transpose is μ_P,L inverse followed by Qc, where c is the uncurrying of a followed by Hom(s,F). Naturality of ordinary uncurrying and of the ordinary associator identifies c with reassociation, F tensor v and the right unitor.",
    "uses": [
-    "def-pur-hom-complex",
+    "lem-pc-kflat-resolution",
+    "def-pc-kflat-complex",
     "def-coef-ringed-tensor-hom-model",
-    "def-coef-hom-representative-evaluation",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0A90 (lemma-compose) and 08J9 (lemma-internal-hom), fixed uncurrying normalization; evaluation calculation."
-   }
-  },
-  {
-   "text": "Apply the same fixed uncurrying equation to the K-flat pair $(T,L)$ and the chain map $h_{F,s}a:T\\to\\mathcal Hom^\\bullet(L,I(F))$. It supplies a chain map $b:\\operatorname{Tot}(T\\otimes L)\\to I(F)$ with its actual tensor-summand components prescribed by\n$$b((y\\otimes\\phi)\\otimes z)=\\eta_F\\bigl(y\\phi(sz)\\bigr).$$\nIndeed this is exactly the evaluation of the Hom section $h_{F,s}(a(y\\otimes\\phi))$ at $z$, first applying $s$ and then the actual coefficient augmentation. Consequently\n$$\\operatorname{untr}(g_F\\,Q(a))=(Q\\eta_F)^{-1}Qb\\,\\mu_{T,L}^{-1}.$$\nThis use of the model has K-flat tensor source $T$ and K-flat second input $L$, and K-injective target $I(F)$; it does not assume $F$ is K-injective.",
-   "uses": [
-    "def-coef-ringed-tensor-hom-model",
-    "def-coef-hom-representative-evaluation",
+    "lem-sf-coefficient-tensor-curry-normalization",
     "def-pur-hom-complex"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08J9 (lemma-internal-hom), representative uncurrying into the fixed K-injective target; Tag 08JE (equation-eval)."
+    "place": "Tag 08JD (lemma-dual), equation-eval (Tag 08JE), Tag 0A98 (lemma-internal-hom-composition), and section-hom-complexes; ordinary chain map and its fixed-augmentation derived comparison."
    }
   },
   {
-   "text": "Write $\\alpha^{\\rm ord}:\\operatorname{Tot}(T\\otimes L)\\to\\operatorname{Tot}(F\\otimes W)$ and $\\rho_F^{\\rm ord}:\\operatorname{Tot}(F\\otimes O)\\to F$ for the ordinary associator and coefficient unit action, and put\n$$c=\\rho_F^{\\rm ord}\\operatorname{Tot}(1_F\\otimes v_s)\\alpha^{\\rm ord}.$$\nBoth $b$ and $\\eta_Fc$ send $((y\\otimes\\phi)\\otimes z)$ to $\\eta_F(y\\phi(sz))$. The ordinary associator only changes parentheses and the right unitor acts by the actual coefficient action; neither exchanges factors. Apply the detecting maps of step 1 twice to obtain $b=\\eta_Fc$. Thus step 6 simplifies to\n$$\\operatorname{untr}(g_F Q(a))=Qc\\,\\mu_{T,L}^{-1}.$$\nAll cancellations are of localized augmentations, not chain-level inverses.",
+   "text": "Compute the inverse transpose of the left side of the desired square after postcomposition with H(Qs,1). Naturality of the adjunction in both inputs expresses it as the derived associator, tensor with the normalized inverse transpose from the preceding step, and the unit constraint. The supplied associator model, tensorIso naturality on v and right-unitor model turn this into μ_P,L inverse followed by Qc. For tensor with O only the one-K-flat comparison is needed. Injectivity of inverse transposition proves equality after H(Qs,1); cancel this isomorphism because Qs is invertible. Combine this equality with the two γ invertibility conclusions and the ordinary existence and uniqueness.",
    "uses": [
-    "def-pc-tensor-complex-sheaves",
-    "def-pur-sheaf-tensor-product",
     "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "def-coef-ringed-tensor-hom-model",
+    "def-pur-derived-internal-hom",
     "def-weil-abstract-derived-category"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 03EK (section-tensor-product), 0FPT (lemma-symmetric-monoidal-derived), and 08JE (equation-eval); actual associator and coefficient unit calculation."
-   }
-  },
-  {
-   "text": "Let $A=QE$, $B=QF$. By the definition of $\\theta$ and naturality of the right-tensor adjunction in its source and tensor parameter, the inverse transpose of\n$$H(Qs,1)\\theta_{A,B}(1\\otimes\\gamma_{E,O})\\mu_{F,D}$$\nis\n$$\\rho_B(1_B\\otimes e_s)\\alpha_{B,QD,QL}(\\mu_{F,D}\\otimes1_{QL}).$$\nHere counit naturality in the tensor parameter identifies the evaluation after $Qs$ with $\\operatorname{untr}(H(Qs,1)\\gamma_{E,O})=e_s$ from step 5. To compute this composite, use the induced associator constraint, naturality of the fixed tensor comparison on $v_s:W\\to O$, and the induced right-unit constraint, respectively:\n$$\\alpha(\\mu_{F,D}\\otimes1)\\mu_{T,L}=(1\\otimes\\mu_{D,L})\\mu_{F,W}Q\\alpha^{\\rm ord},$$\n$$(1\\otimes Qv_s)\\mu_{F,W}=\\mu_{F,O}Q\\operatorname{Tot}(1_F\\otimes v_s),\\qquad \\rho_B\\mu_{F,O}=Q\\rho_F^{\\rm ord}.$$\nSubstitution of $e_s=Qv_s\\mu_{D,L}^{-1}$ cancels $\\mu_{D,L}^{-1}\\mu_{D,L}$ and makes the displayed inverse transpose exactly $Qc\\mu_{T,L}^{-1}$. Every comparison in these equations is on K-flat pairs from step 3. This writes out the compatibility with both augmentation comparisons rather than asserting an unspecified transport.",
-   "uses": [
-    "lem-sf-ringed-derived-closed-symmetric-monoidal",
-    "def-coef-ringed-tensor-hom-model"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 08J9 (lemma-internal-hom) and 0FPT (lemma-symmetric-monoidal-derived), natural adjunction and induced associator/unit constraints; equation-eval (08JE)."
-   }
-  },
-  {
-   "text": "Steps 7 and 8 have equal inverse transposes. The closed adjunction is a bijection, hence their maps into $H(QL,QF)$ agree. Cancel the isomorphism $H(Qs,1)$ of step 4 to obtain\n$$\\theta_{QE,QF}(1\\otimes\\gamma_{E,O})\\mu_{F,D}=\\gamma_{E,F}Q(a_{E,F}).$$\nThe construction in steps 1-2 did not need any flatness. In the comparison, only $F,D$ and the auxiliary resolution $L$ were required to be K-flat. The two stated augmentation quasi-isomorphisms supply exactly the two $\\gamma$ isomorphisms; neither K-flatness of $E$ nor K-injectivity of $F$ entered.",
-   "uses": [
-    "lem-sf-ringed-derived-closed-symmetric-monoidal",
-    "def-pur-derived-internal-hom"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08J9 (equation-internal-hom and lemma-internal-hom), injectivity of transposition; Tag 08JE (equation-eval)."
+    "place": "Tag 08JD (lemma-dual), equation-eval (Tag 08JE), Tag 0A98 (lemma-internal-hom-composition), and section-hom-complexes; ordinary chain map and its fixed-augmentation derived comparison."
    }
   }
  ],
  "proof_deps": [
-  "def-pur-sheaf-hom",
+  "lem-sf-ringed-derived-tensor-hom-adjunction",
   "def-pur-hom-complex",
   "def-pur-sheaf-tensor-product",
   "def-weil-presheaf-modules-sheafification",
+  "lem-sf-ringed-tensor-complex-constraints",
   "def-pc-tensor-complex-sheaves",
-  "lem-pc-kflat-resolution",
-  "def-coef-ringed-tensor-hom-model",
-  "def-pc-kflat-complex",
-  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "def-sfb-internal-hom-strict-models",
   "def-pur-derived-internal-hom",
+  "def-coef-hom-representative-evaluation",
   "def-weil-abstract-derived-category",
-  "def-coef-hom-representative-evaluation"
+  "lem-pc-kflat-resolution",
+  "def-pc-kflat-complex",
+  "def-coef-ringed-tensor-hom-model",
+  "lem-sf-coefficient-tensor-curry-normalization",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 08JD/08JE (lemma-dual/equation-eval), 0A90 (lemma-compose), 08J9 (lemma-internal-hom), and 0FPT (lemma-symmetric-monoidal-derived); explicit fixed-augmentation representative calculation supplied by Q116."
+  "place": "C9: proved chain-level unsigned currying from RingedDerivedTensorHomAdjunction; Stacks 08JE, 0A90, 08J9 and 0FPT, with fixed augmentation normalization and supplied tensor coherence."
  },
  "mathlib_searches": [
   {
@@ -308,5 +262,15 @@
   "group": "Q22",
   "result": "pass",
   "note": "Statement matches the node clause by clause: existence and uniqueness of aEF outside the hypotheses, formula y·φ(x) tested on actual sheafified generators, all Hom projections and all U; homDiff and total-tensor signs make it a chain map; θ is transpose of associator, 1⊗ε, (1⊗unitIso.inv)≫ρ, pinned by the coherence conditions; γ is Q(Hom(E,η_G)) followed by the fixed comparison iso, with IsIso concluded for O and F; μ = T.iso; hypotheses only F,D K-flat plus the two augmentation quasi-isomorphisms; universes independent; node changed only in lean, statement verbatim, docstrings with 9 steps, one sorry. Advisory: helpers repeat parent RingedSiteDualityMaps ones (cycle-forced); coefficientHomAugmentation and coefficientHomSectionApply are lemma-module plain defs and coefficientHom* belong to def-coef-hom-representative-evaluation, none of them stmt_deps; lem-weil-pbc-site-derived-tensor-descent is imported but no declaration of it is used. Not compiled, per instruction."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C9",
+  "result": "pass",
+  "landing": "20261022T013400-L-3558675",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
