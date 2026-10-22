@@ -341,5 +341,23 @@
   "group": "NN",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-b7aa9f309 (reviewer sub-agent of L); spot-checked: Read in full: the item, all 9 steps, every cited statement, ILO X 2.3 printed pp.151-152, and Stacks 00IS. MECHANICAL FINDING: correct. Step 2 cites lem-per-artin-tate-subalgebra-finite-type, which is in the 2026-10-19 artin-gabber drop section (line 1427; created by Q134 for the dropped admissible-quotient-generic-degree). The item itself is not dropped. Its only citer, lem-sfb-semilinear-sylow-good-components, is live and split and uses exactly the item's conclusions, and the via chain is not dropped. The item is still unsplit in side-live. The use is generic Stacks 00IS (B_j^H inside B_j over k) and involves none of the excluded Qbar/Gabber/alteration machinery. No live Artin-Tate node exists: rg for 00IS/Artin-Tate/fg_of_fg_of_fg finds only dropped nodes. FIX: new reviewer leaf lem-sfb-artin-tate-subalgebra-finite-type (sec-six-functors-basics, unit sk-thm-sf-ctf-stability, created.item=this item). Its statement is verbatim 00IS (algebra.tex 12297), its stmt_deps are live, and its Mathlib candidate is fg_of_fg_of_fg (Adjoin/Tower.lean:145). Step 2 uses and proof_deps are re-cited to it; the text is unchanged. MATHS: Step 1: 01T6 over Spec k; Z quasi-compact via the surjection. Step 2: 01T2 for B_j finite type over k, A_j=B_j^H a k-subalgebra, Artin-Tate, then 00FN. Step 3: normal-sections finite product (hypotheses checked, empty case included). Steps 4-5: idempotent permutation and orbit/stabilizer fixed-ring isomorphism; well-definedness checked, also on swap and trivial actions. Step 6: fixed ring is a normal domain, with no averaging, so char dividing |H| is fine. Step 7: localization trick with s^(d-r)a_r. Step 8: 0CYA plus the stalk-localization lemma (c). Step 9: finite implies proper, then 09MQ(4) gives b separated and 03GN gives b universally closed, plus finite type, so b is proper. All correct. Edge cases: empty X, nonfaithful action, disconnected X. No statement change, no weakening, no SGA. Accepted tool_uses: sbc normal-sections, pbc finite-product-normal, pbc separatedness descent (all generic).; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteQuotientNormalProper",
+  "declaration": "AlgebraicGeometry.finiteQuotient_normal_proper",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteQuotientNormalProper.lean",
+  "statement": "theorem finiteQuotient_normal_proper (k : Type u) [Field k] {X Z : Scheme.{u}} (a : X ⟶ Spec (CommRingCat.of k)) (b : Z ⟶ Spec (CommRingCat.of k)) [IsProper a] (hX : ∀ x : X, IsDomain (X.presheaf.stalk x) ∧ IsIntegrallyClosed (X.presheaf.stalk x)) (H : Type v) [Group H] [Finite H] (α : H →* Aut X) (hα : ∀ h : H, (α h).hom ≫ a = a) (q : X ⟶ Z) (hq : q ≫ b = a) (hinv : ∀ h : H, (α h).hom ≫ q = q) [IsFinite q] [Surjective q] (horbits : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (x y : Spec (CommRingCat.of Ω) ⟶ X), x ≫ q = y ≫ q ↔ ∃ h : H, x ≫ (α h).hom = y) (hsections : ∀ U : Z.Opens, Function.Injective (q.app U) ∧ ∀ s : Γ(X, q ⁻¹ᵁ U), (∃ t : Γ(Z, U), q.app U t = s) ↔ ∀ (h : H) (e : q ⁻¹ᵁ U ≤ (α h).hom ⁻¹ᵁ (q ⁻¹ᵁ U)), (α h).hom.appLE (q ⁻¹ᵁ U) (q ⁻¹ᵁ U) e s = s) (hcategorical : ∀ (W : Scheme.{u}) (c : W ⟶ Spec (CommRingCat.of k)) (f : X ⟶ W), f ≫ c = a → (∀ h : H, (α h).hom ≫ f = f) → ∃! g : Z ⟶ W, g ≫ c = b ∧ q ≫ g = f) : (∀ z : Z, IsDomain (Z.presheaf.stalk z) ∧ IsIntegrallyClosed (Z.presheaf.stalk z)) ∧ IsProper b ∧ (LocallyOfFiniteType b ∧ QuasiCompact b) ∧ IsNoetherian Z",
+  "branch": "sheaf-dag",
+  "by": "NN",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8bc879365",
+  "group": "NN",
+  "result": "pass",
+  "note": "Lean-only delivery; the node differs from live only in lean. Every node clause is matched in Lean: normal stalks; IsProper a covers finite type; H →* Aut X over k; q finite, surjective and invariant; geometric orbits over Ω : Type u alg closed are equivalent to the node; hsections over all opens (the appLE ∀e is never vacuous); hcategorical gives ∃! k-morphism. Conclusions: normal stalks, IsProper b, LocallyOfFiniteType b ∧ QuasiCompact b, IsNoetherian Z. Edge cases checked: empty X, disconnected X, nonfaithful action, char | |H|, universes. The item and its citer are not dropped; the Artin–Tate re-cite is kept. Statement verbatim, name unique, lines ≤ 89, sorry only, docstrings with source, blueprint and 9 steps. Proof-dep imports follow rule 7; 3 plain Mathlib imports are redundant (advisory). No compile, as instructed."
  }
 }

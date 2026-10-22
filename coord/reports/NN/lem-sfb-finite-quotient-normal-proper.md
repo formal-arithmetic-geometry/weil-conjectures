@@ -1,47 +1,153 @@
-# Worker report: lem-sfb-finite-quotient-normal-proper
+## Worker report
 
-1. Files written: `dag/nodes/sec-six-functors-basics/lem-sfb-finite-quotient-normal-proper.json` (statement, split into nine proof steps, no exact Mathlib match); `citations.json` (17 verbatim statement quotes). Search outputs, `searches.jsonl`, and the drafting script are retained in the sandbox. No new nodes and no new Mathlib leaves. The item statement and its statement dependencies are unchanged.
-2. Attachments: none. I searched `lean/WeilConjectures/` for the blueprint tag and quotient/normal/proper terminology, then the algebraic-geometry and ring-theory directories for invariant-ring and fixed-ring formulations. No declaration states all the clauses under these hypotheses. The general finite-proper and invariant-field results are not attachments to this item.
-3. WANTED: none. The item source and all source inputs used here are locally available.
-4. The item had no proof. I retained its precise existing-quotient assumptions, its allowance for disconnected and empty schemes, and its nonfaithful-action convention. Its source already describes an agent-formulated prerequisite rather than a theorem quoted verbatim from ILO; the proof is correspondingly marked agent-written. A tempting but incorrect shortcut would call the affine inverse image a normal domain: it can be a product. The proof explicitly decomposes it and permits the action to permute factors. I did not add any projectivity or quotient-existence claim. The geometric-orbit and categorical assumptions are stronger than the hypotheses actually needed in this argument, and have not been removed.
-5. Nothing remains unfinished within this stage-1 split. The existing cited DAG lemmas remain their own items where appropriate. No Lean was written, and no compiler, Lake, local preflight, local check_dag, or local review_split was run.
+The module `Sheaf.AlgebraicGeometry.FiniteQuotientNormalProper` states
+`AlgebraicGeometry.finiteQuotient_normal_proper`. Its sole theorem has proof `sorry`.
+There are no new definitions, helper theorems, dependency repairs, or statement corrections.
+The node copy differs from the current live node only in `lean`. In particular the
+maintainer's Artin--Tate citation correction is preserved: the source, proof step 2,
+proof dependencies, and Lean docstring cite
+`lem-sfb-artin-tate-subalgebra-finite-type`, not the retired `lem-per-...` node.
+The previous attempt's stale stage-1 split was not reused.
 
-## Sources and route
+Source read: ILO, Travaux de Gabber, Expose X 2.3, Steps 2--3, printed pp. 151--152,
+including diagram (2.c) and the component/stabilizer reduction. This node is explicitly
+an agent-formulated prerequisite about an existing quotient, not the quotient existence
+or projectivity theorem. Also read Stacks `algebra.tex`, lemma-Artin-Tate (00IS), and the
+complete nine-step proof in the current node. Its source-specific hypotheses are all
+represented below; the proof is recorded step by step in the theorem's docstring.
 
-I read the chapter record `sec-six-functors-basics`, unit record `sk-thm-sf-ctf-stability`, the current main-20261015 blueprint file for `det-thm-sf-ctf-stability-direct-images`, and the existing parent quotient/Sylow node. The item supplies an algebraic-geometric prerequisite for the alteration reduction behind direct-image clause (3). I read ILO Expose X 2.3, printed pp.151--152 (PDF pages 157--158), including the finite intermediate quotient in diagram (2.c) and the component/stabilizer reduction in Step 3. That passage supplies the application and orbit route; it does not supply the entire general lemma verbatim. The detailed ring argument in steps 4--7 is explicitly my elementary expansion.
+Hypothesis and conclusion correspondence:
 
-For the algebraic-geometric inputs I read the local Stacks source: algebra.tex Tags 00IS (lemma-Artin-Tate), 00FN (lemma-Noetherian-permanence), 0309 (definition-domain-normal), 00GY (lemma-localize-normal-domain, including its denominator proof), 00EE (lemma-disjoint-decomposition), and 0CYA (lemma-finite-product-normal); properties.tex Tags 033N (lemma-normal-locally-Noetherian) and 0358 (lemma-normal-integral-sections); schemes.tex Tag 01HV (lemma-spec-sheaves, especially (6)); morphisms.tex Tags 01T2 (lemma-locally-finite-type-characterize), 01T6 (lemma-finite-type-noetherian), 01WN (lemma-finite-proper), 09MQ(4) (lemma-image-universally-closed-separated), and 03GN (lemma-image-proper-is-proper). The affine-open stalk lemma also specifies the open-subspace stalk identification from Example 01HF.
+- A field k: `(k : Type u) [Field k]`. The schemes `X Z : Scheme.{u}` have structure maps
+  `a : X ⟶ Spec (CommRingCat.of k)` and `b : Z ⟶ Spec (CommRingCat.of k)`.
+- X normal: `hX : ∀ x : X, IsDomain (X.presheaf.stalk x) ∧
+  IsIntegrallyClosed (X.presheaf.stalk x)`. This is the node's normal-domain condition at
+  every local ring, with neither global integrality nor connectedness imposed.
+- X proper of finite type: `[IsProper a]`. Mathlib's properness includes
+  `LocallyOfFiniteType a` and universal closedness, the latter implying `QuasiCompact a`.
+  Thus the node's full finite-type condition is included without a redundant binder.
+- A finite group acting on X over k: `(H : Type v) [Group H] [Finite H]`,
+  `(α : H →* Aut X)`, and `hα : ∀ h, (α h).hom ≫ a = a`.
+  Mathlib's automorphism multiplication agrees with composition of functions, so this is
+  a left action; there is no faithful-action hypothesis.
+- The supplied k-morphism q: `(q : X ⟶ Z)` and `hq : q ≫ b = a`.
+- H-invariance of q: `hinv : ∀ h, (α h).hom ≫ q = q`.
+- q finite and surjective: `[IsFinite q] [Surjective q]`, using the recorded Mathlib classes.
+- Geometric fibres are H-orbits: `horbits` tests every algebraically closed field Ω of
+  the schemes' universe and every pair `x y : Spec Ω ⟶ X`, asserting
+  `x ≫ q = y ≫ q ↔ ∃ h, x ≫ (α h).hom = y`. For a finite morphism, points of the
+  geometric fibre over Ω are exactly these Ω-valued lifts; finite algebras over an
+  algebraically closed field have residue field Ω. Surjectivity and finiteness already
+  supply a lift over each geometric point. This condition includes geometric points
+  above arbitrary residue fields, not only k-rational or closed points.
+- The canonical equality `O_Z = (q_* O_X)^H`: `hsections` asserts on EVERY open U of Z
+  that the canonical pullback `q.app U` is injective and that a section s on the inverse
+  image is in its image if and only if every h fixes s. The fixed-section formula is
+  `(α h).hom.appLE (q ⁻¹ᵁ U) (q ⁻¹ᵁ U) e s = s` for every containment proof e.
+  Invariance `hinv` gives `q ⁻¹ᵁ U = (α h).hom ⁻¹ᵁ (q ⁻¹ᵁ U)`, hence such an e
+  always exists. Quantifying over e only avoids choosing an equality transport;
+  by proof irrelevance all choices give the same ring map. This is exactly the
+  automorphism pullback on the stable open, not a condition on global sections alone.
+  Canonical pullback and its restriction naturality provide the sheaf identification.
+- The categorical property is `hcategorical`: for every k-scheme `(W,c)` and k-morphism
+  f (`f ≫ c = a`) invariant under every h, there exists a UNIQUE `g : Z ⟶ W` satisfying
+  `g ≫ c = b ∧ q ≫ g = f`. Uniqueness is among k-morphisms, precisely as in the node.
+- Z normal: the first conjunct quantifies over every z and gives both `IsDomain` and
+  `IsIntegrallyClosed` of its local ring.
+- Z proper: `IsProper b`.
+- Z of finite type: `LocallyOfFiniteType b ∧ QuasiCompact b`, written explicitly.
+- Z Noetherian: `IsNoetherian Z`. The class means locally Noetherian and quasi-compact.
+  Mathlib `isNoetherian_iff_of_finite_iSup_eq_top` (Noetherian.lean:284) identifies this
+  with the node's finite affine covering by spectra of Noetherian rings; the covering
+  can be empty. This is the usual scheme condition, not a global-sections condition.
+- No quotient existence, ample sheaf, projective embedding, or projectivity is asserted.
+  The statement starts with Z and q already supplied and ends with only the four properties.
 
-The existing blueprint ancestry helper prints `from.node = None` for this item because its inherited created.item chain has no recognized imported ancestor. I preserved that value and the already detailed place/via chain, rather than editing an upstream node or inventing a blueprint identity. The split report identifies the actual direct-image clause and ILO passage being served. Whole-blueprint searches for finite quotient, normal quotient, invariant normal, fixed ring, invariant product, stabilizer ring, and orbit product supplied no equivalent imported statement.
+Dependency declarations used (the exact recorded interfaces were read):
 
-The generic tools from other units are declared in `split_report.tool_uses`: normal-section finite-product decomposition, finite-product normality, and separatedness descent along a surjective universally closed map. These are algebraic-geometric tools for the existing quotient, not replacements for any step of the constructibility or alteration route.
+- `def-weil-field`: `Field`, Mathlib.Algebra.Field.Defs, including nontriviality.
+- `def-pc-scheme`: `AlgebraicGeometry.Scheme` and its morphisms in
+  Mathlib.AlgebraicGeometry.Scheme. Structure maps supply the schemes over k.
+- `def-weil-proper-morphism`: `AlgebraicGeometry.IsProper` in
+  Mathlib.AlgebraicGeometry.Morphisms.Proper, extending separatedness, universal
+  closedness and local finite type. Properness supplies quasi-compactness.
+- `def-weil-finite-type-morphism`: `AlgebraicGeometry.LocallyOfFiniteType` in
+  Mathlib.AlgebraicGeometry.Morphisms.FiniteType, and `AlgebraicGeometry.QuasiCompact`
+  in Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact.
+- `def-weil-pbc-normal-ring`: the recorded inline conjunction of `IsDomain` and
+  `IsIntegrallyClosed`, Mathlib.RingTheory.IntegralClosure.IntegrallyClosed, applied
+  to the stalks. No second normal-ring predicate is introduced.
+- `def-weil-finite-integral-morphism`: `AlgebraicGeometry.IsFinite`,
+  Mathlib.AlgebraicGeometry.Morphisms.Finite.
+- `def-weil-surjective-morphism`: `AlgebraicGeometry.Surjective`,
+  Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap.
+- `def-weil-pbc-noetherian-ring`: `IsNoetherianRing`,
+  Mathlib.RingTheory.Noetherian.Defs, used through the standard Noetherian scheme class
+  and its affine-chart characterization in Mathlib.AlgebraicGeometry.Noetherian.
+- The action and geometric tests use existing `CategoryTheory.Aut` from
+  Mathlib.CategoryTheory.Endomorphism and `IsAlgClosed` from
+  Mathlib.FieldTheory.IsAlgClosed.Basic. The stable-open section map is existing
+  `AlgebraicGeometry.Scheme.Hom.appLE`, Mathlib.AlgebraicGeometry.Scheme:196.
 
-## Searches and node economy
+Proof-only imports retain the available interfaces of the plan:
+`AlgebraicGeometry.Scheme.normal_sections_finite_product` from
+WeilConjectures.AlgebraicGeometry.NormalSectionsFiniteProduct;
+`Pi.isNormalRing_of_finite` from WeilConjectures.RingTheory.FiniteProductNormal;
+`AlgebraicGeometry.isSeparated_of_surjective_universallyClosed` from
+WeilConjectures.AlgebraicGeometry.IsSeparatedOfSurjectiveUniversallyClosed.
+The Mathlib proof dependencies are available in the directly imported Noetherian,
+FiniteType, Finite, Proper, UnderlyingMap, AffineScheme, UniversallyClosed, and
+RingTheory.FiniteType modules. The corrected Artin--Tate node is still unsplit without
+an attached Lean declaration, so it has no module to import at this stage. No proof
+prerequisite has been duplicated or bypassed.
 
-The item retains its inherited Mathlib search history and adds the searches actually executed with the required `msearch.py` command, with exact queries, outputs and verdicts. All outputs and their command-generated log are retained. LeanFinder and LeanSearch return finite-proper, normalization, abstract Galois-category quotient, invariant-field, integral-closure, and stabilizer-homomorphism results; none states this item. Fully qualified Loogle searches and source grep likewise supply no exact statement. The first Loogle query used an unqualified `fixedPoints` identifier and was rejected; the record says so, and I subsequently ran the fully qualified query. A rejected query is not evidence of absence.
+Edge cases checked:
 
-I also searched for the possible product/stabilizer helper before deciding whether to create one. I opened `lem-sbc-affine-torsor-equivariant-descent-algebra`, `lem-sbc-fixed-orbit-product-equiv-compatible-model`, `lem-sbc-fixed-orbit-product-equiv`, their equivariant-algebra definition, and the puncture-descent nodes. Those statements concern a single coefficient ring with a separately supplied permutation representation, rather than automorphisms of a product of possibly different domains. I do not cite them under missing hypotheses. Nevertheless a new variable-ring comparison node is unnecessary: step 4 proves the factor permutation directly from idempotents, and step 5 gives evaluation, its explicit inverse, independence of the choice of group element, equivariance and the ring identities in a short calculation. This is an elementary proof step under the brief's node-economy rule. The fixed-domain and localization arguments are likewise written out, not moved into new nodes repeating normality clauses.
+- X empty: surjectivity forces Z empty. Normality has no points to check, the zero
+  ring is permitted for sections, geometric-orbit tests have no lifts, and the empty
+  affine cover is permitted by `IsNoetherian`. No `Nonempty X` or `Nonempty Z` occurs.
+- Disconnected X and Z: normality is pointwise; neither `IsIntegral X` nor a global
+  domain hypothesis occurs. The proof uses finite products and orbit stabilizers.
+- Trivial and nonfaithful actions: α need not be injective. The identity quotient
+  satisfies all quotient properties, and kernel elements simply act trivially.
+- Characteristic dividing the group order: no invertibility or coprimality hypothesis
+  occurs. The fixed-ring argument uses cancellation in a domain, not averaging.
+- Arbitrary finite group universe v and scheme universe u are explicit. Geometric
+  fields and test schemes use u, which contains all residue-field algebraic closures
+  needed for these Scheme.{u} objects. Tests are not in a potentially smaller universe.
+- The empty open U is included in hsections. The stable-open containment e cannot be
+  vacuous, since its existence follows from hinv for every U and h.
 
-## Not duplicates
+Searches actually performed:
 
-No new nodes. Artin--Tate, finite-product normality, normal-section decomposition, finite-proper, the affine-open stalk comparison, and both descent facts are all reused from their existing nodes.
+1. `msearch.py ... leanfinder`, query "An existing finite geometric quotient of a normal
+   proper scheme over a field by a finite group is normal proper finite type and Noetherian".
+   Eight hits: properness of finite morphisms, finite section rings, and abstract
+   pre-Galois category decompositions. None states the existing quotient theorem.
+2. `msearch.py ... leansearch`, query "A finite group quotient of a normal proper scheme
+   over a field is normal and proper". Eight hits, comprising properness of finite
+   morphisms and unrelated finite group quotient facts; no exact match.
+3. `msearch.py ... loogle`, query
+   "AlgebraicGeometry.IsProper, AlgebraicGeometry.IsNormal". Zero hits;
+   `AlgebraicGeometry.IsNormal` is an unknown identifier. The node's recorded inline
+   normality interface is therefore used.
+4. `msearch.py ... grep`, query "quotient.*normal|normal.*quotient|GeometricQuotient"
+   in AlgebraicGeometry. Zero hits.
+5. `rg` in both `lean/WeilConjectures` and `lean/Sheaf` for quotient/normal,
+   invariant/proper, geometric-quotient, and finite-quotient spellings, together with
+   the item's exact id and the proposed declaration name in `dag/lean_names_upstream.json`.
+   Hits concern coefficient quotients, formal functions, or abstract group quotients;
+   none provides this theorem or a scheme geometric-quotient interface to reuse.
+   The proposed fully qualified declaration name is absent.
 
-## Review by NN
+Validation: the delivered module was compiled with scompile.py against the current
+published live library, both as a sandbox file and at its library module path. Both
+passes were clean. No local/global Lake build was run. The theorem proof is solely
+`sorry`; every universe and variable is explicitly bound.
 
-I checked the item against ILO X 2.3 Step 2 and Step 3 with the printed text open, and checked each non-elementary input against both its DAG statement and its local Stacks source. There are no new statements to audit or source separately. I made no statement correction because the existing statement is true with the stated hypotheses. I corrected the main prospective proof gap by keeping all components of the normal affine inverse image instead of assuming a domain; I also expanded the localization argument so that normal domain and normal ring are not silently identified.
+No STATEMENT-DISPUTED issue or node fault was found. The previous blocker was an obsolete
+stage-1 delivery; this packet is a Lean-only addition to the reviewed current DAG node.
 
-In step 1 the cited `lem-weil-pbc-finite-type-over-noetherian` says exactly that a finite-type scheme over a Noetherian base is Noetherian. Here the base is Spec k, with its single chart over a field, and a field's two possible ideals show the needed ring Noetherianity. The finite-type definition supplies quasi-compactness of X; the surjectivity definition justifies the explicit finite-subcover argument for Z. No theorem that finite surjections automatically preserve finite type is assumed.
+## Second reading by NN
 
-In step 2 `def-weil-finite-integral-morphism` explicitly supplies both affineness of U_j and module-finiteness of B_j over A_j. `lem-weil-pbc-lft-affine-pairs` applies to the structure morphism of X and every affine open U_j, so it supplies finite type over k even though U_j need not be a principal open. The hypotheses of `lem-per-artin-tate-subalgebra-finite-type` are all met: k is Noetherian, B_j is a finite-type k-algebra, A_j is a k-subalgebra by the invariant-section hypothesis and the k-compatibility of q, and B_j is finite as an A_j-module. `lem-weil-pbc-finite-type-algebra-noetherian` supplies exactly the ring Noetherianity claimed. The finite affine cover, with the finite-type definition, supplies the global finite-type assertion.
-
-In step 3 I checked the precise statement of `lem-sbc-normal-sections-finite-product`: it requires X locally Noetherian, normal stalks, and U quasi-compact open, not U integral or connected. Step 1, the item hypothesis, and finiteness of q give those hypotheses. Its conclusion explicitly includes the zero-ring/empty-index case and supplies the entire product of integrally closed domains used next.
-
-Steps 4 and 5 use no unquoted theorem about invariant rings. The idempotent classification is proved by e(e-1)=0 in each domain, automorphisms preserve primitive orthogonal decompositions, and the induced factor isomorphisms inherit the group law. I checked the inverse formula at h i = h' i using h^{-1}h' in the stabilizer. Thus the fixed tuple is uniquely reconstructed, and the map preserves ring operations. No equality of distinct factor rings, freeness, or faithful action is assumed. These short explicit arguments are why no helper node is created.
-
-Step 6 cites only the definition of normal domain, which is what it uses: a monic equation over the fixed subring is also one over B_i. After normality puts the fraction inside B_i, cancellation of its nonzero invariant denominator proves it is fixed. I checked that this never averages over H_i, so characteristic dividing the group order causes no problem. Step 7 is the full short proof of Stacks 00GY rather than an uncited localization theorem: choose s outside the prime, multiply the degree-d equation by s^d, and verify s^{d-r} a_r belongs to C_i for every r<d. This proves the prime-localization definition quoted from `def-weil-pbc-normal-ring`.
-
-In step 8 `lem-weil-pbc-finite-product-normal` states the needed conclusion for normal rings in the localization sense, which step 7 has established for every factor. I read `lem-weil-pbc-affine-open-stalk-localization` and used its actual clause (c), not merely the definition of Spec: it gives the ring isomorphism from the prime localization of the affine section ring to the ambient scheme's stalk. This proves exactly the item's local-ring normality.
-
-In step 9 `lem-weil-pbc-finite-proper` supplies properness of q; the properness definition supplies its universal closedness and the separatedness and universal closedness of a. The statement of `lem-weil-pbc-surjective-universally-closed-separated` has all three morphisms over the same S with bq=a, which is an explicit hypothesis of this item. It supplies separatedness of b under the verified surjective and universally closed q. The statement of `lem-weil-pbc-image-universally-closed` supplies universal closedness of b from universal closedness of a and surjectivity of q. Finally b is finite type by step 2, so the properness definition applies. In particular no source's proof was used in place of a node's statement.
-
-I tested the calculations on the empty scheme (surjectivity forces Z empty, empty products are zero and there are no local rings), on a trivial/nonfaithful action, on a component-swapping action on B_0 x B_0 (one stabilizer fixed ring per orbit, not the product of coordinatewise H-fixed rings), on several distinct component orbits (retained as separate factors), and in characteristic dividing |H| (no averaging). I checked definition citations, source tags, the equality of proof_deps with the union of uses, verbatim citations for all 17 step-node pairs, and absence of any new or renamed item clause. All steps are below 900 characters; no long step conceals a separate sublemma. The item statement, hypotheses, and source metadata are retained, and no SGA source is used.
+No second reading by a worker: since 2026-10-17 the worker delivers directly and the maintainer's independent review is the only review.

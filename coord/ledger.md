@@ -24193,3 +24193,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:29 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
 - 01:30 L: merged deliver/NI/lem-sfb-semilinear-sylow-good-components (stage 2; reviewer PASS; parallel immutable checks)
 - 01:31 L: merged deliver/NR/lem-sfb-finite-norm-invertible-sections (reviewer PASS; first push; new nodes: 1)
+- 01:31 L: merged deliver/NN/lem-sfb-finite-quotient-normal-proper (stage 2; reviewer PASS; parallel immutable checks)
