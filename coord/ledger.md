@@ -24291,3 +24291,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:08 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
 - 02:09 L: merged deliver/NM/lem-sfb-zero-dimensional-base-affine-global (reviewer PASS; first push; new nodes: 1)
 - 02:09 L: merged deliver/NE/lem-sfb-profinite-geometric-family-heart-cd (stage 2; reviewer PASS; parallel immutable checks)
+- 02:10 L: returned deliver/NB/lem-sfb-tame-snc-quotient-resolution (reviewer RETURN: 9th push of lem-sfb-tame-snc-quotient-resolution, after 8 RETURNs (NM 9666, NJ ca61, NC 0835, NK 00a1, ND cd6d, ND 3070,)
