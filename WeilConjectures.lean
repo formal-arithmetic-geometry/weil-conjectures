@@ -7880,6 +7880,7 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.Monoidal
 public import WeilConjectures.CategoryTheory.ModuleObjects.Preadditive
 public import WeilConjectures.CategoryTheory.ModuleObjects.ProjectionFormula
 public import WeilConjectures.CategoryTheory.ModuleObjects.ProjectionFormulaAdjunction
+public import WeilConjectures.CategoryTheory.ModuleObjects.RegularEnd
 public import WeilConjectures.CategoryTheory.ModuleObjects.SequentialLimitEpi
 public import WeilConjectures.CategoryTheory.ModuleObjects.Symmetric
 public import WeilConjectures.CategoryTheory.Monoidal.Braided.Adjunction
@@ -7971,6 +7972,7 @@ public import WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteSubexte
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.FinitenessCoefficient
 public import WeilConjectures.CategoryTheory.RingObjects.ContinuousMap
 public import WeilConjectures.CategoryTheory.RingObjects.EllAdic
+public import WeilConjectures.CategoryTheory.RingObjects.GlobalSections
 public import WeilConjectures.CategoryTheory.RingObjects.RingPresheaf
 public import WeilConjectures.CategoryTheory.RingedSiteGrothendieckAbelian
 public import WeilConjectures.CategoryTheory.RingedSiteKInjectiveResolutions
@@ -9099,6 +9101,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.CofilteredSystem
 public import WeilConjectures.Mathlib.CategoryTheory.Comma.Arrow
 public import WeilConjectures.Mathlib.CategoryTheory.Comma.CardinalArrow
 public import WeilConjectures.Mathlib.CategoryTheory.Comma.StructuredArrow.Basic
+public import WeilConjectures.Mathlib.CategoryTheory.Conj
 public import WeilConjectures.Mathlib.CategoryTheory.Elements
 public import WeilConjectures.Mathlib.CategoryTheory.Endofunctor.Algebra
 public import WeilConjectures.Mathlib.CategoryTheory.Endomorphism
