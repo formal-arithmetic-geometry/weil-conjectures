@@ -1,17 +1,12 @@
 module
 
-public import WeilConjectures.AlgebraicGeometry.AbelianHigherDirectImageNaturalComparison
-public import WeilConjectures.AlgebraicGeometry.RawRestrictedResolutionEvaluation
-public import WeilConjectures.AlgebraicGeometry.AbelianHigherDirectImageClassCompatibility
-public import WeilConjectures.AlgebraicGeometry.Sites.TorsionAcyclic
-public import
-  WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjectiveResolution
-public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
+public import Sheaf.AlgebraicGeometry.RawRestrictedClassNormalizationData
 import all WeilConjectures.AlgebraicGeometry.AbelianHigherDirectImageNaturalComparison
-import Sheaf.Paper.SiteHigherDirectImageSheafifiedPresheaf
+import all WeilConjectures.AlgebraicGeometry.AbelianHigherDirectImageClassCompatibility
 import WeilConjectures.AlgebraicGeometry.RawRestrictedCohomologyComparisonIsIso
-import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageExact
+import Sheaf.AlgebraicGeometry.RawRestrictedResolutionNaturality
+import Sheaf.AlgebraicGeometry.RawRestrictedResolutionRestriction
+import Sheaf.AlgebraicGeometry.RawRestrictedResolutionClass
 
 /-! # Normalization of raw and restricted cohomology classes
 
@@ -29,373 +24,326 @@ namespace AlgebraicGeometry.Etale
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
 set_option synthInstance.maxSize 2048
+set_option backward.isDefEq.respectTransparency.types false
+set_option backward.defeqAttrib.useBackward true
+attribute [local instance] RawRestrictedComparison.etaleComposition
+  RawRestrictedComparison.etaleIdentities RawRestrictedComparison.etalePullbacks
+  RawRestrictedComparison.etaleBaseChange RawRestrictedComparison.sheafifyInstance
+  RawRestrictedComparison.weakSheafifyInstance
 
-/-- Termwise restriction of the prescribed injective resolution.
-Source: Stacks Project, Tags 03Q8 and 072W
-(blueprint: lem-weil-pbc-raw-restricted-class-normalization). -/
-noncomputable def normalizationRestrictionComplex {X : Scheme.{u}} (W : X.Etale)
-    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (I : InjectiveResolution F) :
-    CochainComplex (Sheaf W.left.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ :=
-  ((upperStar AddCommGrpCat.{u + 1} W.hom).mapHomologicalComplex (.up ℤ)).obj I.cochainComplex
 
-/-- Map an injective-resolution augmentation through an additive functor.
-Source: Stacks Project, Tags 013K and 072W.
-(blueprint: lem-weil-pbc-raw-restricted-class-normalization). -/
-noncomputable def normalizationMappedAugmentation
-    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
-    (L : C ⥤ D) [L.Additive] (A : C) (I : InjectiveResolution A) :
-    (CochainComplex.singleFunctor D 0).obj (L.obj A) ⟶
-      (L.mapHomologicalComplex (.up ℤ)).obj I.cochainComplex :=
-  (L.mapCochainComplexSingleFunctor 0).inv.app A ≫
-    (L.mapHomologicalComplex (.up ℤ)).map I.ι'
+private theorem normalizationLift_eq {X S : Scheme.{u}} (f : X ⟶ S) (q : ℕ)
+    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) :
+    normalizationLift f q F = (canonicalComparison f q F).hom := by
+  apply ((sheafificationAdjunction S.smallEtaleTopology AddCommGrpCat.{u + 1}).homEquiv
+    _ _).injective
+  rw [normalizationLift, Equiv.apply_symm_apply, Adjunction.homEquiv_unit]
+  ext V z
+  exact (canonicalComparison_class f q F V.unop z).symm
 
-private theorem normalizationMappedAugmentation_quasiIso
-    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
-    (L : C ⥤ D) [L.Additive] [L.PreservesHomology]
-    (A : C) (I : InjectiveResolution A) :
-    QuasiIso (normalizationMappedAugmentation L A I) := by
-  dsimp only [normalizationMappedAugmentation]
+private theorem normalizationLift_isIso {X S : Scheme.{u}} (f : X ⟶ S) (q : ℕ)
+    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) :
+    IsIso (normalizationLift f q F) := by
+  rw [normalizationLift_eq]
   infer_instance
 
-/-- The restricted augmentation, with the single-complex comparison.
-Source: Stacks Project, Tags 03Q8 and 072W
-(blueprint: lem-weil-pbc-raw-restricted-class-normalization). -/
-noncomputable def normalizationRestrictionAugmentation {X : Scheme.{u}} (W : X.Etale)
-    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (I : InjectiveResolution F) :
-    (CochainComplex.singleFunctor _ 0).obj
-      ((upperStar AddCommGrpCat.{u + 1} W.hom).obj F) ⟶
-        normalizationRestrictionComplex W F I :=
-  normalizationMappedAugmentation (upperStar AddCommGrpCat.{u + 1} W.hom) F I
-
-/-- Exact restriction preserves the augmentation quasi-isomorphism.
-Source: Stacks Project, Tags 03Q8 and 072W
-(blueprint: lem-weil-pbc-raw-restricted-class-normalization).
-Proof: the augmentation is a quasi-isomorphism, inverse image is exact, and its
-single-complex comparison is an isomorphism (step 1 of the node's proof). -/
-theorem normalizationRestrictionAugmentation_quasiIso {X : Scheme.{u}} (W : X.Etale)
-    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (I : InjectiveResolution F) :
-    QuasiIso (normalizationRestrictionAugmentation W F I) := by
-  exact normalizationMappedAugmentation_quasiIso
-    (upperStar AddCommGrpCat.{u + 1} W.hom) F I
-
-/-- The restricted resolution is K-injective.
-Source: Stacks Project, Tags 03Q8, 072W and 070J
-(blueprint: lem-weil-pbc-raw-restricted-class-normalization).
-Proof: etale restriction preserves injective abelian sheaves by
-lem-sbc-etale-abelian-restriction-injectives. The restricted resolution is zero
-in negative degrees, so the bounded-below injective criterion applies (step 1). -/
-theorem normalizationRestrictionComplex_isKInjective {X : Scheme.{u}} (W : X.Etale)
-    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (I : InjectiveResolution F) :
-    (normalizationRestrictionComplex W F I).IsKInjective := by
-  have : ∀ n : ℤ, Injective
-      (((upperStar AddCommGrpCat.{u + 1} W.hom).mapHomologicalComplex
-        (.up ℤ)).obj I.cochainComplex |>.X n) :=
-    fun n ↦ injective_upperStar_obj_of_etale_addCommGrp W.hom (I.cochainComplex.X n)
-  change CochainComplex.IsKInjective
-    (((upperStar AddCommGrpCat.{u + 1} W.hom).mapHomologicalComplex
-      (.up ℤ)).obj I.cochainComplex)
-  exact CochainComplex.isKInjective_of_injective _ 0
-
-/-- Restrict the prescribed resolution, retaining its augmentation.
-Source: Stacks Project, Tags 03Q8 and 072W
-(blueprint: lem-weil-pbc-raw-restricted-class-normalization). -/
-noncomputable def normalizationRestrictedResolution {X : Scheme.{u}} (W : X.Etale)
-    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (I : InjectiveResolution F) :
-    ((CochainComplex.singleFunctor _ 0).obj
-      ((upperStar AddCommGrpCat.{u + 1} W.hom).obj F)).KInjectiveResolution where
-  I := normalizationRestrictionComplex W F I
-  ι := normalizationRestrictionAugmentation W F I
-  quasiIso_ι := normalizationRestrictionAugmentation_quasiIso W F I
-  isKInjective := normalizationRestrictionComplex_isKInjective W F I
-
-/-- Sections of an etale restriction, naturally in the coefficient sheaf.
-Source: Stacks Project, Tag 03Q8 (restriction to an etale object)
-(blueprint: lem-weil-pbc-raw-restricted-class-normalization). -/
-noncomputable def normalizationSectionsIso {X : Scheme.{u}} (W : X.Etale) :
-    RawRestrictedComparison.underivedSections W ≅
-      (sheafSections X.smallEtaleTopology AddCommGrpCat.{u + 1}).obj (op W) := by
-  let i : (MorphismProperty.Over.map ⊤ W.prop).obj
-      (Scheme.Etale.mk (𝟙 W.left)) ≅ W :=
-    MorphismProperty.Over.isoMk (Iso.refl W.left) (by rfl)
-  exact Functor.isoWhiskerRight
-      (upperStarIsoLocalizationRestriction AddCommGrpCat.{u + 1} W.hom W.prop)
-      (Sheaf.Γ W.left.smallEtaleTopology AddCommGrpCat.{u + 1}) ≪≫
-    Functor.isoWhiskerLeft _
-      (Sheaf.ΓNatIsoSheafSections W.left.smallEtaleTopology AddCommGrpCat.{u + 1}
-        (MorphismProperty.Over.mkIdTerminal @Etale W.left)) ≪≫
-    (sheafSections X.smallEtaleTopology AddCommGrpCat.{u + 1}).mapIso i.op.symm
-
-/-- The pushed-forward resolution as a complex of presheaves.
-Source: Stacks Project, Tag 072W
-(blueprint: lem-weil-pbc-raw-restricted-class-normalization). -/
-noncomputable abbrev normalizationPresheafComplex {X S : Scheme.{u}} (f : X ⟶ S)
-    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (I : InjectiveResolution F) :=
-  ((sheafToPresheaf S.smallEtaleTopology AddCommGrpCat.{u + 1}).mapHomologicalComplex
-    (.up ℤ)).obj
-    (((lowerStar AddCommGrpCat.{u + 1} f).mapHomologicalComplex (.up ℤ)).obj I.cochainComplex)
-
-/-- Canonical resolution computation of restricted cohomology, with no raw Hom involved.
-Source: Stacks Project, Tags 03Q8 and 072W
-(blueprint: lem-weil-pbc-raw-restricted-class-normalization). -/
-noncomputable def normalizationRestrictedIso {X S : Scheme.{u}} (f : X ⟶ S) (q : ℕ)
-    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (I : InjectiveResolution F)
-    (V : S.Etale) :
-    rawAffineRestrictedCohomology f q F V ≅
-      ((normalizationPresheafComplex f F I).homology (q : ℤ)).obj (op V) :=
-  (normalizationRestrictedResolution
-      ((MorphismProperty.Over.pullback @Etale ⊤ f).obj V) F I).homologyRightDerivedFunctorObjIso
-      (Sheaf.Γ (pullback V.hom f).smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℤ) ≪≫
-  (HomologicalComplex.homologyFunctor _ (.up ℤ) (q : ℤ)).mapIso
-    ((NatIso.mapHomologicalComplex
-      (normalizationSectionsIso ((MorphismProperty.Over.pullback @Etale ⊤ f).obj V))
-      (.up ℤ)).app I.cochainComplex) ≪≫
-  ((normalizationPresheafComplex f F I).sc (q : ℤ)).mapHomologyIso
-    ((evaluation S.Etaleᵒᵖ AddCommGrpCat.{u + 1}).obj (op V))
-
-/-- The canonical cocycle map: sheafify sectionwise homology, then use the counit
-and the augmentation comparison for the prescribed resolution. A section cocycle
-is sent to its class in the cohomology sheaf of the direct-image complex.
-Source: Stacks Project, Tags 03Q8 and 072W
-(blueprint: lem-weil-pbc-raw-restricted-class-normalization). -/
-noncomputable def normalizationResolutionClass {X S : Scheme.{u}} (f : X ⟶ S) (q : ℕ)
-    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (I : InjectiveResolution F) :
-    (normalizationPresheafComplex f F I).homology (q : ℤ) ⟶
-      ((DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).obj
-        (R+((f)_*[AddCommGrpCat.{u + 1}]).obj
-          ((DerivedCategory.Plus.singleFunctor _ 0).obj F))).obj :=
-  toSheafify S.smallEtaleTopology _ ≫
-    ((sheafToPresheaf S.smallEtaleTopology AddCommGrpCat.{u + 1}).map
-      ((((normalizationPresheafComplex f F I).sc (q : ℤ)).mapHomologyIso
-          (presheafToSheaf S.smallEtaleTopology AddCommGrpCat.{u + 1})).inv ≫
-        HomologicalComplex.homologyMap
-          ((NatTrans.mapHomologicalComplex
-            (sheafificationAdjunction S.smallEtaleTopology AddCommGrpCat.{u + 1}).counit
-            (.up ℤ)).app
-            (((lowerStar AddCommGrpCat.{u + 1} f).mapHomologicalComplex (.up ℤ)).obj
-              I.cochainComplex)) (q : ℤ) ≫
-        (I.isoRightDerivedObjCochainComplex
-          (lowerStar AddCommGrpCat.{u + 1} f) q).inv ≫
-        ((lowerStar AddCommGrpCat.{u + 1} f).homologyRightDerivedFunctorPlusObjSingleFunctorIso
-          F q).inv))
-
-/-- The specified map from restricted cohomology to higher-image sections.
-Source: Stacks Project, Tags 03Q8 and 072W
-(blueprint: lem-weil-pbc-raw-restricted-class-normalization). -/
-noncomputable def normalizationIota {X S : Scheme.{u}} (f : X ⟶ S) (q : ℕ)
-    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (V : S.Etale) :
-    rawAffineRestrictedCohomology f q F V ⟶
-      ((DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).obj
-        (R+((f)_*[AddCommGrpCat.{u + 1}]).obj
-          ((DerivedCategory.Plus.singleFunctor _ 0).obj F))).obj.obj (op V) :=
-  (normalizationRestrictedIso f q F (injectiveResolution F) V).hom ≫
-    (normalizationResolutionClass f q F (injectiveResolution F)).app (op V)
-
-/-- Restricted cohomology as a presheaf, transported from the sectionwise cohomology
-of the chosen injective resolution. Its restriction is identified with cohomology
-pullback in the normalization theorem below.
-Source: Stacks Project, Tags 03Q8 and 072W
-(blueprint: lem-weil-pbc-raw-restricted-class-normalization). -/
-noncomputable def normalizationRestrictedPresheaf {X S : Scheme.{u}} (f : X ⟶ S) (q : ℕ)
-    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) :
-    S.Etaleᵒᵖ ⥤ AddCommGrpCat.{u + 1} where
-  obj V := rawAffineRestrictedCohomology f q F V.unop
-  map {V V'} t := (normalizationRestrictedIso f q F (injectiveResolution F) V.unop).hom ≫
-    ((normalizationPresheafComplex f F (injectiveResolution F)).homology (q : ℤ)).map t ≫
-    (normalizationRestrictedIso f q F (injectiveResolution F) V'.unop).inv
-  map_id V := by simp
-  map_comp t t' := by simp
-
-/-- The map on the two fibre products induced by a morphism of etale objects.
-Source: Stacks Project, Tag 03Q8
-(blueprint: lem-weil-pbc-raw-restricted-class-normalization). -/
-noncomputable def normalizationChartMap {X S : Scheme.{u}} (f : X ⟶ S)
-    {V V' : S.Etale} (t : V' ⟶ V) : pullback V'.hom f ⟶ pullback V.hom f :=
-  (MorphismProperty.Over.pullback @Etale ⊤ f).map t |>.left
-
-/-- The actual cohomology pullback between etale charts, followed by inverse-image
-composition on the coefficients. No raw Hom or transported restriction is used.
-Source: Stacks Project, Tag 03Q8
-(blueprint: lem-weil-pbc-raw-restricted-class-normalization). -/
-noncomputable def normalizationCohomologyRestriction {X S : Scheme.{u}} (f : X ⟶ S)
-    (q : ℕ) (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
-    {V V' : S.Etale} (t : V' ⟶ V) :
-    rawAffineRestrictedCohomology f q F V ⟶ rawAffineRestrictedCohomology f q F V' :=
-  rawAffineComplexPullback (q : ℤ) (normalizationChartMap f t)
-      ((CochainComplex.singleFunctor _ 0).obj
-        ((upperStar AddCommGrpCat.{u + 1} (pullback.snd V.hom f)).obj F)) ≫
-    (cohomology AddCommGrpCat.{u + 1} (pullback V'.hom f) (q : ℤ)).map
-      (DerivedCategory.Q.map
-        (((upperStar AddCommGrpCat.{u + 1}
-            (normalizationChartMap f t)).mapCochainComplexSingleFunctor 0).hom.app _ ≫
-          (CochainComplex.singleFunctor _ 0).map
-            ((upperStarComp AddCommGrpCat.{u + 1} (normalizationChartMap f t)
-              (pullback.snd V.hom f) (pullback.snd V'.hom f)
-              (MorphismProperty.Over.w
-                ((MorphismProperty.Over.pullback @Etale ⊤ f).map t)).symm).inv.app F)))
-
-set_option backward.isDefEq.respectTransparency true in
-/-- Additivity of the prescribed derived-adjunction class construction.
-Source: Stacks Project, Tag 03Q8
-(blueprint: lem-weil-pbc-raw-restricted-class-normalization).
-Proof: precomposition with the exact inverse-image single comparison is additive;
-the derived adjunction is an additive Hom equivalence; zeroth homology and the
-shift comparison are additive. Evaluation at the fixed identity generator is
-additive as well. Their composite therefore preserves sums (proof step 6). -/
-theorem normalizationClass_add {X S : Scheme.{u}} (f : X ⟶ S) (q : ℕ)
-    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (V : S.Etale)
-    (z z' : (abelianHigherDirectImageRawPresheaf f q F).obj (op V)) :
-    abelianHigherDirectImageClass f q F V (z + z') =
-      abelianHigherDirectImageClass f q F V z + abelianHigherDirectImageClass f q F V z' := by
-  let c := toSheafify S.smallEtaleTopology (abelianHigherDirectImageRawPresheaf f q F) ≫
-    (canonicalComparison f q F).hom.hom
-  have h := (c.app (op V)).hom.map_add z z'
-  change (toSheafify S.smallEtaleTopology _ ≫
-      (canonicalComparison f q F).hom.hom).app (op V) (z + z') =
-    (toSheafify S.smallEtaleTopology _ ≫
-      (canonicalComparison f q F).hom.hom).app (op V) z +
-    (toSheafify S.smallEtaleTopology _ ≫
-      (canonicalComparison f q F).hom.hom).app (op V) z' at h
-  simpa only [canonicalComparison_class] using h
-
-/-- Bundle the existing canonical class function as an abelian-group morphism.
-Its value is exactly abelianHigherDirectImageClass, without selecting a map from
-an existence theorem.
-Source: Stacks Project, Tag 03Q8
-(blueprint: lem-weil-pbc-raw-restricted-class-normalization). -/
-noncomputable def normalizationKappaComponent {X S : Scheme.{u}} (f : X ⟶ S) (q : ℕ)
-    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (V : S.Etale) :
-    (abelianHigherDirectImageRawPresheaf f q F).obj (op V) ⟶
-      ((DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).obj
-        (R+((f)_*[AddCommGrpCat.{u + 1}]).obj
-          ((DerivedCategory.Plus.singleFunctor _ 0).obj F))).obj.obj (op V) :=
-  AddCommGrpCat.ofHom (AddMonoidHom.mk' (abelianHigherDirectImageClass f q F V)
-    (normalizationClass_add f q F V))
-
-set_option backward.isDefEq.respectTransparency true in
-/-- Naturality in etale objects of the prescribed canonical class map.
-Source: Stacks Project, Tag 03Q8
-(blueprint: lem-weil-pbc-raw-restricted-class-normalization).
-Proof: the free represented map sends the identity generator at V' to the
-restriction of the generator at V. Naturality of the single comparison and the
-derived adjunction turns precomposition by this map into precomposition of its
-adjunct. Zeroth homology and the shift comparison preserve this equality;
-evaluating the restricted generator gives the restriction of the original class.
-This is the generator calculation of proof steps 4 and 6. -/
-theorem normalizationKappaComponent_naturality {X S : Scheme.{u}} (f : X ⟶ S) (q : ℕ)
+private theorem normalizationKappa_apply {X S : Scheme.{u}} (f : X ⟶ S) (q : ℕ)
     (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
-    {V V' : S.Etaleᵒᵖ} (t : V ⟶ V') :
-    (abelianHigherDirectImageRawPresheaf f q F).map t ≫
-        normalizationKappaComponent f q F V'.unop =
-      normalizationKappaComponent f q F V.unop ≫
-        ((DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).obj
-          (R+((f)_*[AddCommGrpCat.{u + 1}]).obj
-            ((DerivedCategory.Plus.singleFunctor _ 0).obj F))).obj.map t := by
-  let c := toSheafify S.smallEtaleTopology (abelianHigherDirectImageRawPresheaf f q F) ≫
-    (canonicalComparison f q F).hom.hom
-  have hc (U : S.Etale) : normalizationKappaComponent f q F U = c.app (op U) := by
-    ext z
-    exact (canonicalComparison_class f q F U z).symm
-  rw [hc, hc]
-  exact c.naturality t
+    (V : S.Etale) (z : (abelianHigherDirectImageRawPresheaf f q F).obj (op V)) :
+    (normalizationKappa f q F).app (op V) z =
+      abelianHigherDirectImageClass f q F V z := rfl
 
-/-- The presheaf class map with components given by the landed canonical class
-construction, using its separately stated naturality.
-Source: Stacks Project, Tag 03Q8
-(blueprint: lem-weil-pbc-raw-restricted-class-normalization). -/
-noncomputable def normalizationKappa {X S : Scheme.{u}} (f : X ⟶ S) (q : ℕ)
-    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) :
-    abelianHigherDirectImageRawPresheaf f q F ⟶
-      ((DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).obj
-        (R+((f)_*[AddCommGrpCat.{u + 1}]).obj
-          ((DerivedCategory.Plus.singleFunctor _ 0).obj F))).obj where
-  app V := normalizationKappaComponent f q F V.unop
-  naturality _ _ t := normalizationKappaComponent_naturality f q F t
+private theorem adjunct_shift_naturality
+    {C D : Type*} [Category C] [Category D] [HasShift C ℤ] [HasShift D ℤ]
+    (L : C ⥤ D) (R : D ⥤ C) (adj : L ⊣ R) [R.CommShift ℤ]
+    (n : ℤ) {A : C} {K K' : D} (x : L.obj A ⟶ K⟦n⟧) (g : K ⟶ K') :
+    adj.homEquiv _ _ x ≫ (R.commShiftIso n).hom.app K ≫
+        (shiftFunctor C n).map (R.map g) =
+      adj.homEquiv _ _ (x ≫ (shiftFunctor D n).map g) ≫
+        (R.commShiftIso n).hom.app K' := by
+  rw [← R.commShiftIso_hom_naturality g n]
+  rw [← Category.assoc, ← adj.homEquiv_naturality_right]
 
-/-- The unique sheafification lift of the specified raw class map.
-Source: Stacks Project, Tag 03Q8 and the sheafification adjunction
-(blueprint: lem-weil-pbc-raw-restricted-class-normalization). -/
-noncomputable def normalizationLift {X S : Scheme.{u}} (f : X ⟶ S) (q : ℕ)
-    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) :
-    (presheafToSheaf S.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
-        (abelianHigherDirectImageRawPresheaf f q F) ⟶
-      (DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).obj
-        (R+((f)_*[AddCommGrpCat.{u + 1}]).obj
-          ((DerivedCategory.Plus.singleFunctor _ 0).obj F)) :=
-  ((sheafificationAdjunction S.smallEtaleTopology AddCommGrpCat.{u + 1}).homEquiv _ _).symm
-    (normalizationKappa f q F)
+private theorem adjunct_homology_naturality
+    {C D E : Type*} [Category C] [Category D] [Category E]
+    [HasShift C ℤ] [HasShift D ℤ]
+    (L : C ⥤ D) (R : D ⥤ C) (adj : L ⊣ R) [R.CommShift ℤ]
+    (H₀ Hn : C ⥤ E) (n : ℤ) (σ : shiftFunctor C n ⋙ H₀ ≅ Hn)
+    {A : C} {B : E} (s : B ⟶ H₀.obj A) {K K' : D}
+    (x : L.obj A ⟶ K⟦n⟧) (g : K ⟶ K') :
+    (s ≫ H₀.map (adj.homEquiv _ _ x) ≫
+        (H₀.mapIso ((R.commShiftIso n).app K) ≪≫ σ.app (R.obj K)).hom) ≫
+          Hn.map (R.map g) =
+      s ≫ H₀.map (adj.homEquiv _ _ (x ≫ (shiftFunctor D n).map g)) ≫
+        (H₀.mapIso ((R.commShiftIso n).app K') ≪≫ σ.app (R.obj K')).hom := by
+  exact map_shifted_triangle_iso H₀ Hn n σ s
+    (adj.homEquiv _ _ x) ((R.commShiftIso n).app K)
+    (adj.homEquiv _ _ (x ≫ (shiftFunctor D n).map g))
+    ((R.commShiftIso n).app K') _ _ rfl rfl (R.map g)
+    (adjunct_shift_naturality L R adj n x g)
 
-/-- The coefficient map on the raw derived-Hom presheaf.
-Source: Stacks Project, Tag 03Q8
-(blueprint: lem-weil-pbc-raw-restricted-class-normalization). -/
-noncomputable def normalizationRawCoefficient {X S : Scheme.{u}} (f : X ⟶ S) (q : ℕ)
+private theorem normalizationKappa_coefficient {X S : Scheme.{u}} (f : X ⟶ S) (q : ℕ)
     {F G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}} (φ : F ⟶ G) :
-    abelianHigherDirectImageRawPresheaf f q F ⟶ abelianHigherDirectImageRawPresheaf f q G :=
-  Functor.whiskerLeft _ (preadditiveYoneda.map
-    ((shiftFunctor _ (q : ℤ)).map ((DerivedCategory.Plus.singleFunctor _ 0).map φ)))
+    normalizationRawCoefficient f q φ ≫ normalizationKappa f q G =
+      normalizationKappa f q F ≫ (normalizationHigherCoefficient f q φ).hom := by
+  ext V z
+  simp only [NatTrans.comp_app, AddCommGrpCat.comp_apply]
+  let adj := (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).derivedPlus
+  let R := R+((f)_*[AddCommGrpCat.{u + 1}])
+  let A := (abelianComparisonFree S).obj V.unop
+  let K := (DerivedCategory.Plus.singleFunctor _ 0).obj F
+  let K' := (DerivedCategory.Plus.singleFunctor _ 0).obj G
+  let g := (DerivedCategory.Plus.singleFunctor _ 0).map φ
+  let x := (((f)^*[AddCommGrpCat.{u + 1}]).mapDerivedCategoryPlusSingleFunctor 0).hom.app A ≫ z
+  let x' := (((f)^*[AddCommGrpCat.{u + 1}]).mapDerivedCategoryPlusSingleFunctor 0).hom.app A ≫
+    z ≫ (shiftFunctor _ (q : ℤ)).map g
+  let H₀ := DerivedCategory.Plus.homologyFunctor
+    (Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1}) 0
+  let Hq := DerivedCategory.Plus.homologyFunctor
+    (Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℤ)
+  have hm :
+      ((DerivedCategory.Plus.singleFunctorCompHomologyFunctorIso 0).inv.app A ≫
+        H₀.map (adj.homEquiv _ _ x) ≫ (abelianComparisonShift f q F).hom) ≫ Hq.map (R.map g) =
+      (DerivedCategory.Plus.singleFunctorCompHomologyFunctorIso 0).inv.app A ≫
+        H₀.map (adj.homEquiv _ _ x') ≫ (abelianComparisonShift f q G).hom := by
+    simpa only [abelianComparisonShift, x, x', K, K', g, Category.assoc] using
+      adjunct_homology_naturality _ _ adj H₀ Hq (q : ℤ)
+        (H₀.shiftIso (q : ℤ) 0 (q : ℤ) (add_zero _))
+        ((DerivedCategory.Plus.singleFunctorCompHomologyFunctorIso 0).inv.app A) x g
+  exact (eval_sheaf_composition _ _ _ hm V
+    (((toSheafify S.smallEtaleTopology
+      (uliftYoneda.{u + 1}.obj V.unop ⋙ AddCommGrpCat.free)).app V).hom
+        (FreeAbelianGroup.of (ULift.up (𝟙 V.unop))))).symm
 
-/-- The coefficient map on restricted derived cohomology.
-Source: Stacks Project, Tag 03Q8
-(blueprint: lem-weil-pbc-raw-restricted-class-normalization). -/
-noncomputable def normalizationRestrictedCoefficient {X S : Scheme.{u}} (f : X ⟶ S)
-    (q : ℕ) {F G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}} (φ : F ⟶ G)
+
+private theorem normalizationLift_coefficient {X S : Scheme.{u}} (f : X ⟶ S) (q : ℕ)
+    {F G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}} (φ : F ⟶ G) :
+    (presheafToSheaf S.smallEtaleTopology AddCommGrpCat.{u + 1}).map
+        (normalizationRawCoefficient f q φ) ≫ normalizationLift f q G =
+      normalizationLift f q F ≫ normalizationHigherCoefficient f q φ := by
+  apply ((sheafificationAdjunction S.smallEtaleTopology AddCommGrpCat.{u + 1}).homEquiv
+    _ _).injective
+  rw [Adjunction.homEquiv_naturality_left, Adjunction.homEquiv_naturality_right]
+  simp only [normalizationLift, Equiv.apply_symm_apply]
+  exact normalizationKappa_coefficient f q φ
+
+private theorem compatible_comparisons
+    {C : Type*} [Category C] {A A' B B' H H' : C}
+    (c : A ⟶ B) [Epi c] (c' : A' ⟶ B') (i : B ⟶ H) (i' : B' ⟶ H')
+    (a : A ⟶ A') (b : B ⟶ B') (h : H ⟶ H') (k : A ⟶ H) (k' : A' ⟶ H')
+    (hr : a ≫ c' = c ≫ b) (hc : c ≫ i = k) (hc' : c' ≫ i' = k')
+    (hk : a ≫ k' = k ≫ h) : b ≫ i' = i ≫ h := by
+  apply (cancel_epi c).mp
+  rw [← Category.assoc, ← hr, Category.assoc, hc', hk, ← hc, Category.assoc]
+
+private theorem normalizationIota_coefficient_of_class
+    {X S : Scheme.{u}} (f : X ⟶ S) (q : ℕ)
+    {F G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}} (φ : F ⟶ G)
+    (hF : ∀ V : S.Etale,
+      rawRestrictedCohomologyComparison f q F V ≫ normalizationIota f q F V =
+        (normalizationKappa f q F).app (op V))
+    (hG : ∀ V : S.Etale,
+      rawRestrictedCohomologyComparison f q G V ≫ normalizationIota f q G V =
+        (normalizationKappa f q G).app (op V))
+    (hc : ∀ V : S.Etale,
+      (normalizationRawCoefficient f q φ).app (op V) ≫
+          rawRestrictedCohomologyComparison f q G V =
+        rawRestrictedCohomologyComparison f q F V ≫
+          normalizationRestrictedCoefficient f q φ V)
     (V : S.Etale) :
-    rawAffineRestrictedCohomology f q F V ⟶ rawAffineRestrictedCohomology f q G V :=
-  (cohomology AddCommGrpCat.{u + 1} (pullback V.hom f) (q : ℤ)).map
-    (DerivedCategory.Q.map ((CochainComplex.singleFunctor _ 0).map
-      ((upperStar AddCommGrpCat.{u + 1} (pullback.snd V.hom f)).map φ)))
+    normalizationRestrictedCoefficient f q φ V ≫ normalizationIota f q G V =
+      normalizationIota f q F V ≫ (normalizationHigherCoefficient f q φ).hom.app (op V) := by
+  have : IsIso (rawRestrictedCohomologyComparison f q F V) :=
+    isIso_rawRestrictedCohomologyComparison f q F V
+  apply compatible_comparisons
+    (rawRestrictedCohomologyComparison f q F V)
+    (rawRestrictedCohomologyComparison f q G V)
+    (normalizationIota f q F V) (normalizationIota f q G V)
+    ((normalizationRawCoefficient f q φ).app (op V))
+    (normalizationRestrictedCoefficient f q φ V)
+    ((normalizationHigherCoefficient f q φ).hom.app (op V))
+    ((normalizationKappa f q F).app (op V))
+    ((normalizationKappa f q G).app (op V)) (hc V) (hF V) (hG V)
+    (NatTrans.congr_app (normalizationKappa_coefficient f q φ) (op V))
 
-/-- The coefficient map on higher direct images.
-Source: Stacks Project, Tag 03Q8
-(blueprint: lem-weil-pbc-raw-restricted-class-normalization). -/
-noncomputable def normalizationHigherCoefficient {X S : Scheme.{u}} (f : X ⟶ S) (q : ℕ)
-    {F G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}} (φ : F ⟶ G) :
-    (DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).obj
-      (R+((f)_*[AddCommGrpCat.{u + 1}]).obj
-        ((DerivedCategory.Plus.singleFunctor _ 0).obj F)) ⟶
-    (DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).obj
-      (R+((f)_*[AddCommGrpCat.{u + 1}]).obj
-        ((DerivedCategory.Plus.singleFunctor _ 0).obj G)) :=
-  (DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).map
-    (R+((f)_*[AddCommGrpCat.{u + 1}]).map ((DerivedCategory.Plus.singleFunctor _ 0).map φ))
 
-/-- Raw evaluation is an isomorphism of presheaves, and its class in the higher
-direct image is exactly the canonical cocycle class. The specified sheafification
-lift is invertible, and all comparisons commute with coefficient morphisms.
-Source: Stacks Project, Tags 03Q8 and 072W; agent expansion of the class calculation
+private theorem evaluation_shiftIso_naturality
+    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+    [HasDerivedCategory C] [HasDerivedCategory D] [EnoughInjectives D]
+    [CategoryTheory.Abelian.HasKInjectiveResolutions D]
+    (L : C ⥤ D) [L.Additive] [PreservesFiniteLimits L] [PreservesFiniteColimits L]
+    (R₀ : D ⥤ AddCommGrpCat.{u + 1}) [R₀.Additive] [PreservesFiniteLimits R₀]
+    (q : ℕ) {F G : C} (φ : F ⟶ G) :
+    (RawRestrictedComparison.Evaluation.functor L R₀ ⋙
+        DerivedCategory.homologyFunctor AddCommGrpCat.{u + 1} 0).map
+        ((shiftFunctor _ (q : ℤ)).map ((DerivedCategory.Plus.singleFunctor C 0).map φ)) ≫
+      (RawRestrictedComparison.Evaluation.shiftIso L R₀ q G).hom =
+    (RawRestrictedComparison.Evaluation.shiftIso L R₀ q F).hom ≫
+      (R₀.rightDerivedFunctor ⋙
+        DerivedCategory.homologyFunctor AddCommGrpCat.{u + 1} (q : ℤ)).map
+        (DerivedCategory.Q.map ((CochainComplex.singleFunctor D 0).map (L.map φ))) := by
+  let R := R₀.rightDerivedFunctor
+  let S₀ := DerivedCategory.Plus.singleFunctor
+    C 0
+  let D := RawRestrictedComparison.Evaluation.functor L R₀
+  let H₀ := DerivedCategory.homologyFunctor AddCommGrpCat.{u + 1} 0
+  let Hq := DerivedCategory.homologyFunctor AddCommGrpCat.{u + 1} (q : ℤ)
+  let τ : shiftFunctor _ (q : ℤ) ⋙ D ⋙ H₀ ≅ D ⋙ Hq :=
+    Functor.isoWhiskerRight (D.commShiftIso (q : ℤ)) H₀ ≪≫
+      Functor.isoWhiskerLeft D (H₀.shiftIso (q : ℤ) 0 (q : ℤ) (add_zero _))
+  let δ : S₀ ⋙ D ≅ L ⋙ DerivedCategory.singleFunctor _ 0 ⋙ R :=
+    (Functor.associator S₀ DerivedCategory.Plus.ι (L.mapDerivedCategory ⋙ R)).symm ≪≫
+      Functor.isoWhiskerRight (DerivedCategory.Plus.singleFunctorιIso _ 0)
+        (L.mapDerivedCategory ⋙ R) ≪≫
+      (Functor.associator (DerivedCategory.singleFunctor _ 0) L.mapDerivedCategory R).symm ≪≫
+      Functor.isoWhiskerRight (L.mapDerivedCategorySingleFunctor 0) R ≪≫
+      Functor.associator L (DerivedCategory.singleFunctor _ 0) R
+  let e := Functor.isoWhiskerLeft S₀ τ ≪≫ Functor.isoWhiskerRight δ Hq ≪≫
+    Functor.isoWhiskerLeft L (Functor.isoWhiskerRight
+      (DerivedCategory.singleFunctorIsoCompQ _ 0) (R ⋙ Hq))
+  have he (A : C) :
+      e.hom.app A = (RawRestrictedComparison.Evaluation.shiftIso L R₀ q A).hom := by
+    dsimp only [e, τ, δ, Functor.isoWhiskerLeft, Functor.isoWhiskerRight,
+      Functor.mapIso, Functor.whiskeringLeft, Functor.whiskeringRight,
+      Functor.whiskerLeft, Functor.whiskerRight, Iso.trans, Iso.symm,
+      Functor.associator]
+    simp only [RawRestrictedComparison.Evaluation.shiftIso,
+      RawRestrictedComparison.Evaluation.singleIso, NatTrans.comp_app,
+      Iso.trans_hom,
+      Functor.mapIso_hom, Iso.app_hom, Functor.map_comp, Functor.comp_map,
+      Category.id_comp, Category.comp_id, Category.assoc]
+    erw [Hq.map_id, Category.id_comp]
+  have hn := e.hom.naturality (X := F) (Y := G) φ
+  rw [he, he] at hn
+  exact hn
+
+private theorem evaluate_naturality
+    {E : Type*} [Category.{u + 1} E] [Preadditive E]
+    (T : E ⥤ AddCommGrpCat.{u + 1}) [T.Additive]
+    {A B C : E} (x : T.obj A) (g : B ⟶ C) :
+    (preadditiveYoneda.map g).app (op A) ≫
+        RawRestrictedComparison.Evaluation.evaluate T x =
+      RawRestrictedComparison.Evaluation.evaluate T x ≫ T.map g := by
+  ext z
+  change T.map (z ≫ g) x = T.map g (T.map z x)
+  rw [T.map_comp]
+  rfl
+
+private theorem evaluation_coefficient
+    {C D : Type*} [Category.{u + 1} C] [Category D] [Abelian C] [Abelian D]
+    [HasDerivedCategory C] [HasDerivedCategory D] [EnoughInjectives D]
+    [CategoryTheory.Abelian.HasKInjectiveResolutions D]
+    (L : C ⥤ D) [L.Additive] [PreservesFiniteLimits L] [PreservesFiniteColimits L]
+    (R₀ : D ⥤ AddCommGrpCat.{u + 1}) [R₀.Additive] [PreservesFiniteLimits R₀]
+    (q : ℕ) {F G : C} (φ : F ⟶ G) (A : DerivedCategory.Plus C)
+    (x : (RawRestrictedComparison.Evaluation.functor L R₀ ⋙
+      DerivedCategory.homologyFunctor AddCommGrpCat.{u + 1} 0).obj A) :
+    (preadditiveYoneda.map ((shiftFunctor _ (q : ℤ)).map
+        ((DerivedCategory.Plus.singleFunctor C 0).map φ))).app (op A) ≫
+        (RawRestrictedComparison.Evaluation.evaluate
+          (RawRestrictedComparison.Evaluation.functor L R₀ ⋙
+            DerivedCategory.homologyFunctor AddCommGrpCat.{u + 1} 0) x ≫
+          (RawRestrictedComparison.Evaluation.shiftIso L R₀ q G).hom) =
+      (RawRestrictedComparison.Evaluation.evaluate
+          (RawRestrictedComparison.Evaluation.functor L R₀ ⋙
+            DerivedCategory.homologyFunctor AddCommGrpCat.{u + 1} 0) x ≫
+        (RawRestrictedComparison.Evaluation.shiftIso L R₀ q F).hom) ≫
+        (R₀.rightDerivedFunctor ⋙
+          DerivedCategory.homologyFunctor AddCommGrpCat.{u + 1} (q : ℤ)).map
+          (DerivedCategory.Q.map ((CochainComplex.singleFunctor D 0).map (L.map φ))) := by
+  rw [← Category.assoc, evaluate_naturality, Category.assoc]
+  simpa only [Category.assoc] using
+    congrArg (fun k ↦ RawRestrictedComparison.Evaluation.evaluate
+          (RawRestrictedComparison.Evaluation.functor L R₀ ⋙
+            DerivedCategory.homologyFunctor AddCommGrpCat.{u + 1} 0) x ≫ k)
+      (evaluation_shiftIso_naturality L R₀ q φ)
+
+private theorem raw_coefficient {X S : Scheme.{u}} (f : X ⟶ S) (q : ℕ)
+    {F G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}} (φ : F ⟶ G)
+    (V : S.Etale) :
+    (normalizationRawCoefficient f q φ).app (op V) ≫
+        rawRestrictedCohomologyComparison f q G V =
+      rawRestrictedCohomologyComparison f q F V ≫
+        normalizationRestrictedCoefficient f q φ V := by
+  let W : X.Etale := (MorphismProperty.Over.pullback @Etale ⊤ f).obj V
+  let x := (RawRestrictedComparison.zeroIso W
+    ((upperStar AddCommGrpCat.{u + 1} f).obj (RawRestrictedComparison.freeSheaf S V))).inv
+      (RawRestrictedComparison.generator f V)
+  exact evaluation_coefficient
+    (upperStar AddCommGrpCat.{u + 1} (pullback.snd V.hom f))
+    (Sheaf.Γ (pullback V.hom f).smallEtaleTopology AddCommGrpCat.{u + 1}) q φ
+    ((DerivedCategory.Plus.singleFunctor _ 0).obj
+      ((upperStar AddCommGrpCat.{u + 1} f).obj (RawRestrictedComparison.freeSheaf S V))) x
+
+
+private theorem transported_naturality
+    {C : Type*} [Category C] {P Q A B A' B' : C}
+    (a : P ⟶ A) (b : Q ⟶ B) (t : P ⟶ Q) (i : A ≅ A') (j : B ≅ B')
+    (s : A' ⟶ B') (h : t ≫ b ≫ j.hom = a ≫ i.hom ≫ s) :
+    t ≫ b = a ≫ (i.hom ≫ s ≫ j.inv) := by
+  apply (cancel_mono j.hom).mp
+  simpa only [Category.assoc, Iso.inv_hom_id, Category.comp_id] using h
+
+private theorem transported_map_eq
+    {C : Type*} [Category C] {A B A' B' : C}
+    (i : A ≅ A') (j : B ≅ B') (s : A' ⟶ B') (a : A ⟶ B)
+    (h : a ≫ j.hom = i.hom ≫ s) :
+    i.hom ≫ s ≫ j.inv = a := by
+  apply (cancel_mono j.hom).mp
+  simpa only [Category.assoc, Iso.inv_hom_id, Category.comp_id] using h.symm
+
+private theorem transported_presheaf_map_eq
+    {C D : Type*} [Category C] [Category D] (P : C ⥤ D)
+    (A : C → D) (e : ∀ V : C, A V ≅ P.obj V)
+    {V V' : C} (t : V ⟶ V') (a : A V ⟶ A V')
+    (h : a ≫ (e V').hom = (e V).hom ≫ P.map t) :
+    (normalizationTransportPresheaf P A e).map t = a :=
+  transported_map_eq (e V) (e V') (P.map t) a h
+
+private theorem transported_presheaf_iso
+    {C D : Type*} [Category C] [Category D] (P Q : C ⥤ D)
+    (A : C → D) (e : ∀ V : C, A V ≅ Q.obj V)
+    (c : ∀ V : C, P.obj V ⟶ A V) (h : ∀ V : C, IsIso (c V))
+    (hn : ∀ {V V' : C} (t : V ⟶ V'),
+      P.map t ≫ c V' ≫ (e V').hom = c V ≫ (e V).hom ≫ Q.map t) :
+    ∃ k : P ≅ normalizationTransportPresheaf Q A e,
+      ∀ V : C, k.hom.app V = c V := by
+  refine ⟨NatIso.ofComponents
+    (fun V ↦ @asIso _ _ _ _ (c V) (h V)) ?_, fun V ↦ rfl⟩
+  intro V V' t
+  exact transported_naturality (c V) (c V') (P.map t) (e V) (e V') (Q.map t) (hn t)
+
+private theorem comparison_class_value
+    {A B C : AddCommGrpCat.{u + 1}} (c : A ⟶ B) (i : B ⟶ C) (k : A ⟶ C)
+    (v : A → C) (h : c ≫ i = k) (hk : ∀ z : A, k z = v z) :
+    ∀ z : A, i (c z) = v z := by
+  intro z
+  exact (ConcreteCategory.congr_hom h z).trans (hk z)
+
+set_option backward.isDefEq.respectTransparency true in
+/-- Raw evaluation is an isomorphism of presheaves, with the specified restriction,
+cocycle class, sheafification lift and coefficient compatibilities.
+Source: Stacks Project, Tags 03Q8 and 072W.
 (blueprint: lem-weil-pbc-raw-restricted-class-normalization).
 
 Proof:
-1. Resolve F by a bounded-below complex I of injective abelian sheaves.
-Etale inverse image is exact and preserves injectives, so its restriction is a
-K-injective resolution. The restriction/sections isomorphism identifies its
-sections complex with I evaluated at the etale fibre product.
-2. By the K-injective Hom comparison, a raw derived class is represented by a
-chain map from the single free represented inverse image to I[q]. Its degree-zero
-component evaluated at the pulled-back identity generator is a section cycle s.
-3. The resolution evaluation equality of lem-sbc-raw-restricted-resolution-evaluation
-and chainEvaluation of lem-sbc-raw-restricted-homotopy-sections-iso say that the
-specified raw evaluation is the class of s. The homology shift comparison retains
-the same class: the invertible sign changes neither cycles nor boundaries.
-4. For a morphism of etale objects, free representability sends the identity
-generator to the restricted generator. Its ordinary adjunct therefore evaluates
-to the restriction of s. Etale cohomology pullback, inverse-image composition and
-restriction/sections comparisons give that same restricted cocycle. This proves
-presheaf naturality and the equality with the cohomology restriction map.
-5. The theorem lem-sbc-raw-restricted-cohomology-comparison-is-iso makes every
-component invertible. Their inverses are natural by cancelling the component maps.
-6. The derived inverse-image adjunction on I[q] is represented by the ordinary
-termwise adjunction: counit naturality and the triangle identity identify the
-adjunct of the representative. Zeroth homology, the direct-image shift comparison
-and the identity generator give exactly the cohomology-sheaf class of s.
-7. Apply lem-weil-pbc-site-higher-direct-image-sheafified-presheaf to the etale
-base-change continuous functor, with its exact inverse image. Its canonical cocycle
-map sends the class of s to that same section. Sheafify the presheaf evaluation
-isomorphism; the canonical site comparison is invertible. Sheafification uniqueness
-identifies their composite with normalizationLift, so that lift is invertible.
-8. Represent a coefficient morphism by a chain map I to I'. Each construction sends
-s to its image under that map. Homotopic choices differ by boundaries. Thus the
-raw evaluation, cocycle class, raw class map and sheafification lift commute with
-coefficients. The argument includes q = 0 and the empty fibre product. -/
+1. Use the chosen injective resolution. The three fixed-resolution comparisons
+identify raw evaluation with section homology, chart pullback with restriction on
+that homology, and the image of the section class with the canonical derived class.
+2. Cancel the restricted resolution isomorphism in the first comparison. The raw
+comparison is therefore natural. Its components are invertible by the existing
+raw comparison theorem, so they assemble into the required presheaf isomorphism.
+The second comparison identifies the transported presheaf restriction with the
+specified cohomology pullback. The third gives the specified iota class formula.
+3. The kappa class formula is its definition. Sheafification's Hom equivalence and
+the library's constructed canonicalComparison_class identify normalizationLift
+with canonicalComparison.hom. That map is invertible.
+4. For coefficients, naturality of the derived adjunction Hom equivalence and the
+homology shift comparison gives kappa naturality. Naturality of the restriction,
+single and shift isomorphisms gives raw evaluation naturality in coefficients.
+Cancel the invertible raw comparison and use the class formula to obtain iota
+naturality. Finally apply sheafification's Hom equivalence to kappa naturality;
+its naturality gives the required equality of sheafification lifts. -/
 theorem rawRestrictedClassNormalization {X S : Scheme.{u}} (f : X ⟶ S) (q : ℕ)
     (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) :
     (∃ c : abelianHigherDirectImageRawPresheaf f q F ≅
@@ -424,6 +372,35 @@ theorem rawRestrictedClassNormalization {X S : Scheme.{u}} (f : X ⟶ S) (q : �
       ((presheafToSheaf S.smallEtaleTopology AddCommGrpCat.{u + 1}).map
           (normalizationRawCoefficient f q φ) ≫ normalizationLift f q G =
         normalizationLift f q F ≫ normalizationHigherCoefficient f q φ)) := by
-  sorry
+  refine ⟨?_, ?_,
+    fun V z ↦ normalizationKappa_apply f q F V z,
+    normalizationLift_isIso f q F, ?_, ?_⟩
+  · obtain ⟨c, he⟩ := transported_presheaf_iso
+      (abelianHigherDirectImageRawPresheaf f q F)
+      ((normalizationPresheafComplex f F (injectiveResolution F)).homology (q : ℤ))
+      (fun V ↦ rawAffineRestrictedCohomology f q F V.unop)
+      (fun V ↦ normalizationRestrictedIso f q F (injectiveResolution F) V.unop)
+      (fun V ↦ rawRestrictedCohomologyComparison f q F V.unop)
+      (fun V ↦ isIso_rawRestrictedCohomologyComparison f q F V.unop)
+      (fun t ↦ rawRestrictedResolution_naturality f q F t)
+    exact ⟨c, fun V ↦ he (op V)⟩
+  · intro V V' t
+    exact transported_presheaf_map_eq
+      ((normalizationPresheafComplex f F (injectiveResolution F)).homology (q : ℤ))
+      (fun W ↦ rawAffineRestrictedCohomology f q F W.unop)
+      (fun W ↦ normalizationRestrictedIso f q F (injectiveResolution F) W.unop)
+      t.op (normalizationCohomologyRestriction f q F t)
+      (rawRestrictedResolution_restriction f q F t)
+  · intro V
+    exact comparison_class_value
+      (rawRestrictedCohomologyComparison f q F V) (normalizationIota f q F V)
+      ((normalizationKappa f q F).app (op V))
+      (abelianHigherDirectImageClass f q F V) (rawRestrictedResolution_class f q F V)
+      (normalizationKappa_apply f q F V)
+  · intro G φ
+    exact ⟨raw_coefficient f q φ,
+      normalizationIota_coefficient_of_class f q φ (rawRestrictedResolution_class f q F)
+        (rawRestrictedResolution_class f q G) (raw_coefficient f q φ),
+      normalizationKappa_coefficient f q φ, normalizationLift_coefficient f q φ⟩
 
 end AlgebraicGeometry.Etale

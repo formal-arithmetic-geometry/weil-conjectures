@@ -29,148 +29,46 @@
  ],
  "proof": [
   {
-   "text": "Choose a bounded-below injective resolution $F[0]\\simeq QI$. For each etale $V\\to S$, the projection $j_V:X_V\\to X$ is etale by clause (1) of the etale base-change finite-limits lemma. Its exact inverse image carries $I$ to a resolution of $j_V^{-1}F$ and preserves injectives. Both $I$ and $j_V^{-1}I$ are therefore K-injective by the bounded-below injective criterion. Consequently use the same $I$ to compute $P(V)=H^q(\\Gamma(X_V,j_V^{-1}I))$ for every $V$, and $R^qf_*F=\\mathcal H^q(f_*I)$. These are genuine abelian injectives; no assertion about forgotten module injectives is used. Moreover clause (1) of the etale inverse-image restriction lemma gives $\\rho_{I^r}:j_V^{-1}I^r\\cong I^r|_{X_V}$, natural in $I^r$, so $\\Gamma(X_V,j_V^{-1}I)\\cong I(X_V)=(f_*I)(V)$ as complexes; this is how a section cocycle $s\\in\\Gamma(X_V,j_V^{-1}I^q)$ is regarded below as an element of $I^q(X_V)=(f_*I^q)(V)$. Lean implementation: construct the augmentation generically for an additive functor, and apply preservation of homology to its quasi-isomorphism. For K-injectivity, use injective_upperStar_obj_of_etale_addCommGrp termwise and CochainComplex.isKInjective_of_injective with lower bound zero.",
+   "text": "Use the unchanged normalization constructions from [def-weil-pbc-raw-restricted-normalization-data]. Cancel the fixed-resolution sections isomorphism in [lem-weil-pbc-raw-restricted-resolution-naturality] to make the raw evaluation natural. Its components are invertible by [lem-sbc-raw-restricted-cohomology-comparison-is-iso], giving a presheaf isomorphism.",
    "uses": [
-    "lem-weil-pbc-dplus-injective-representative",
-    "lem-sbc-etale-abelian-restriction-injectives",
-    "prop-weil-pbc-inverse-image-exact",
-    "def-weil-pbc-etale-cohomology",
-    "def-weil-pbc-direct-image",
-    "lem-weil-pbc-etale-base-change-finite-limits",
-    "lem-weil-pbc-etale-inverse-image-restriction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 013K (lemma-injective-resolutions-exist), 070J (lemma-bounded-below-injectives-K-injective); etale restriction: lean/WeilConjectures/AlgebraicGeometry/Sites/TorsionAcyclic.lean, injective_upperStar_obj_of_etale_addCommGrp"
-   }
-  },
-  {
-   "text": "Put $B_V=f^{-1}\\mathbf Z[V]$. Since $I[q]$ is still a bounded-below complex of injectives, the K-injective Hom comparison represents every $z:B_V[0]\\to F[0][q]$ by a chain map $a:B_V[0]\\to I[q]$, uniquely up to homotopy after the fixed resolution comparison. Its only nonzero component is $a^0:B_V\\to I^q$, with $d_I^q a^0=0$. Write $g_V$ for the pulled-back identity section of the definition of $c$, and put $s_V=(j_V^{-1}a^0)(g_V)\\in\\Gamma(X_V,j_V^{-1}I^q)$. This is a cycle because $d_I^q a^0=0$.",
-   "uses": [
-    "lem-weil-pbc-dplus-injective-representative",
-    "lem-weil-pbc-kinjective-hom-derived",
-    "def-sbc-raw-restricted-cohomology-comparison-map"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 070I (lemma-K-injective), 070J; explicit single-complex representative"
-   }
-  },
-  {
-   "text": "Apply the chain-representative equality of lem-sbc-raw-restricted-resolution-evaluation to the bounded-below complex $I[q]$ and the chain map $a$ of step 2. Its restriction is K-injective by step 1 applied to this shifted complex. Under its prescribed resolutionSectionsIso, evaluation of the derived map at the degree-zero generator equals chainEvaluation of lem-sbc-raw-restricted-homotopy-sections-iso, which by that statement is the image of the generator's single-complex class under $H^0(\\Gamma(X_V,a|_{X_V}))$, namely $[s_V]\\in H^0(\\Gamma(X_V,j_V^{-1}(I[q])))$. Undoing the shift and single-complex comparisons in the definition of $c_V$ therefore gives $c_V(z)=[s_V]\\in H^q(\\Gamma(X_V,j_V^{-1}I))$. Explicitly $(I[q])^0=I^q$, the shifted differential is $(-1)^q d_I$, and both the cycle subgroup and boundary subgroup are unchanged by this invertible sign; the canonical homology shift comparison sends the class of $s_V$ to the class of the same $s_V$. Thus no sign or arbitrary isomorphism has entered this formula.",
-   "uses": [
-    "lem-sbc-raw-restricted-resolution-evaluation",
-    "def-sbc-raw-restricted-cohomology-comparison-map",
-    "lem-sbc-raw-restricted-homotopy-sections-iso"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 03Q8 (lemma-higher-direct-images), chain-level expansion using the existing resolution-evaluation equality"
-   }
-  },
-  {
-   "text": "Check restriction directly on this representative. Let $t:V'\\to V$ over $S$ and let $\\overline a:\\mathbf Z[V]\\to f_*I^q$ be the ordinary adjunct of $a^0$. If $\\eta_f$ is the inverse-image unit, the definition of $g_V$ gives $\\overline a_V(e_V)=a^0_{X_V}(\\eta_f(e_V))=s_V$ in $(f_*I^q)(V)$. The raw restriction is represented by $a^0\\circ f^{-1}\\mathbf Z[t]$, whose adjunct is $\\overline a\\circ\\mathbf Z[t]$. In the free represented sheaf, $\\mathbf Z[t]_{V'}(e_{V'})=e_V|_{V'}$: both are the generator indexed by $t$. Hence $(\\overline a\\circ\\mathbf Z[t])_{V'}(e_{V'})=\\overline a_V(e_V)|_{V'}=s_V|_{V'}$. Direct image restricts along $t_X:X_{V'}\\to X_V$, which is etale as a base change of the etale $t$. For the cohomology restriction $P(t)$, clause (5) of the cohomology-pullback functoriality theorem computes $t_X^*$ on the injective resolution $j_V^{-1}I$ with $J=t_X^{-1}j_V^{-1}I$ as restriction of sections through the restriction identifications of the etale inverse-image restriction lemma, and clause (4) with the inverse-image composition isomorphism $c_{j_V,t_X}$ (compatible with the units, hence with these restriction identifications by clause (2) of the restriction lemma) identifies the target with the resolution $j_{V'}^{-1}I$. Under $\\Gamma(X_V,j_V^{-1}I)\\cong I(X_V)$ of step 1 this induces exactly $[s_V]\\mapsto[s_V|_{X_{V'}}]$. With step 3 this is $c_{V'}(A(t)z)=P(t)c_V(z)$. Identity and composition restrictions follow from precomposition and ordinary restriction, so $c$ is a morphism of abelian presheaves.",
-   "uses": [
-    "def-weil-pbc-inverse-image",
-    "def-weil-pbc-direct-image",
-    "def-weil-pbc-sheafification",
-    "def-weil-pbc-cohomology-pullback",
-    "lem-weil-pbc-cohomology-pullback-functorial",
-    "lem-weil-pbc-etale-inverse-image-restriction",
-    "lem-weil-pbc-inverse-image-composition"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 072W (lemma-higher-direct-images), objectwise restriction formula; free generator and adjunction-unit calculation"
-   }
-  },
-  {
-   "text": "Each component $c_V$ is the constructed map, not just some isomorphism between its source and target. The pointwise-isomorphism theorem for this map applies to the present arbitrary $f,F,V,q$. Together with step 4 it gives an isomorphism of abelian presheaves: the component inverses are natural because $c_{V'}A(t)=P(t)c_V$ implies $A(t)c_V^{-1}=c_{V'}^{-1}P(t)$.",
-   "uses": [
+    "def-weil-pbc-raw-restricted-normalization-data",
+    "lem-weil-pbc-raw-restricted-resolution-naturality",
     "lem-sbc-raw-restricted-cohomology-comparison-is-iso"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 03Q8, derived-Hom interpretation; existing explicit comparison-is-iso theorem"
-   }
+   "elementary": false
   },
   {
-   "text": "Compute the specified $\\kappa_V$ on $a$. By the derived-adjunction theorem, on a K-injective target $I[q]$ the inverse adjunct is represented by the termwise ordinary counit. Thus the adjunct of $a$ is represented by the ordinary chain adjunct $b:\\mathbf Z[V][0]\\to f_*(I[q])$, with $b^0=f_*a^0\\circ\\eta_{f,\\mathbf Z[V]}$. Indeed its inverse adjunct is $\\varepsilon_{I[q]}\\circ f^{-1}b=a$, by counit naturality and the triangle identity; the Hom adjunction is bijective. Direct image and its canonical shift comparison compute this as a map to $(f_*I)[q]$. Taking zeroth homology, undoing the shift, and evaluating $e_V$ gives the cohomology-sheaf class of $b^0_V(e_V)=\\overline a_V(e_V)=s_V$. This is exactly the explicitly specified derived-adjunction class map (the class construction in lem-sbc-abelian-higher-direct-image-class-compatibility), and uses no choice of a sheafification isomorphism. The two supporting raw-class lemmas are now proved: additivity follows from additivity of the constructed comparison morphism and its canonicalComparison_class formula. For naturality in the etale object, use the already constructed canonicalComparison and its proved canonicalComparison_class formula from AbelianHigherDirectImageNaturalComparison; this identifies the specified component map with a natural transformation without choosing an existential witness. The main resolution-cocycle compatibility in this step remains to be formalized.",
+   "text": "Cancel the sections isomorphism in [lem-weil-pbc-raw-restricted-resolution-restriction] to identify the transported presheaf map with the specified chart pullback. The kappa value formula is definitional. Identify normalizationLift with the constructed canonicalComparison by the sheafification adjunction and its class formula in [lem-sbc-abelian-higher-direct-image-natural-comparison]; hence it is invertible.",
    "uses": [
-    "prop-weil-pbc-derived-inverse-image-adjunction",
-    "def-weil-pbc-direct-image",
-    "lem-sbc-abelian-higher-direct-image-class-compatibility",
+    "lem-weil-pbc-raw-restricted-resolution-restriction",
     "lem-sbc-abelian-higher-direct-image-natural-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 0DVC (lemma-pre-derived-adjoint-functors), 09T5 (lemma-derived-adjoint-functors); termwise adjunction triangle identity and shift on the fixed resolution"
-   }
+   "elementary": false
   },
   {
-   "text": "The site theorem applies to the morphism of sites $X_{\\mathrm{et}}\\to S_{\\mathrm{et}}$ given by the base-change functor $u(V)=X_V$: $u$ is continuous by the etale base-change continuity lemma, its $u_s$ is the inverse image $f^{-1}$ (both sheafify the presheaf inverse image along $u$), which is exact, and $u^s=f_*$ by the definition of the direct image. Its cohomology over the object $u(V)=X_V$ is computed by $I(X_V)$, which step 1 identifies with $\\Gamma(X_V,j_V^{-1}I)$, so its presheaf $\\mathcal P^q_F$ is $P$. By the canonical cocycle formula of lem-weil-pbc-site-higher-direct-image-sheafified-presheaf, $\\iota_V([s_V])$ is precisely the section of $\\mathcal H^q(f_*I)$ represented by $s_V$. Steps 3 and 6 now give $\\iota_V(c_V(z))=\\kappa_V(z)$ for every $z$. Both are independent of the representative: changing $a$ by a chain homotopy changes $s_V$ by a boundary. The same site theorem identifies $P^\\#$ with $R^qf_*F$ through the lift of this very $\\iota$. Sheafifying the presheaf isomorphism $c$ of step 5 and composing with that lift gives an isomorphism $A^\\#\\to R^qf_*F$ whose composite with $\\eta_A$ is $\\kappa$. The universal property of sheafification identifies it with the unique lift $E$. In particular $E$ is invertible and normalized, which does not follow just from existence of a natural comparison.",
+   "text": "Apply [lem-weil-pbc-raw-restricted-resolution-class] to the chosen resolution for the iota class formula. For coefficient maps, raw evaluation commutes by naturality of its shift/single comparison; kappa commutes by naturality of the derived adjunction and direct-image homology shift. Cancel the raw evaluation isomorphism and use the class formula to deduce iota compatibility. The sheafification hom-equivalence gives lift compatibility.",
    "uses": [
-    "lem-weil-pbc-site-higher-direct-image-sheafified-presheaf",
-    "def-weil-pbc-sheafification",
-    "lem-weil-pbc-etale-base-change-continuous",
-    "prop-weil-pbc-inverse-image-exact",
-    "lem-weil-pbc-etale-inverse-image-restriction"
+    "lem-weil-pbc-raw-restricted-resolution-class",
+    "prop-weil-pbc-derived-inverse-image-adjunction",
+    "lem-sbc-abelian-higher-direct-image-class-compatibility"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 072W (lemma-higher-direct-images), proof: cohomology sheaf is associated to the sectionwise cycles modulo boundaries; Tag 03Q8 etale specialization"
-   }
-  },
-  {
-   "text": "For a coefficient map $\\phi:F\\to F'$, choose injective representatives $I,I'$ as in step 1. The K-injective Hom bijection gives a chain map $u:I\\to I'$ representing $\\phi$ under these resolution comparisons. The raw coefficient image of $a$ is $u[q]\\circ a$, whose evaluated cycle is $u^q(s_V)$. The induced restricted cohomology map sends $[s_V]$ to $[u^q(s_V)]$, and the higher-direct-image map is induced by $f_*u$, so sends the sheaf class of $s_V$ to the sheaf class of $u^q(s_V)$. The formulas of steps 3, 6 and 7 therefore commute with coefficients. Homotopic choices give boundaries, hence the same maps, and uniqueness of the sheafification lift also makes $E$ natural in $F$. When $q=0$ these are the ordinary sections and the original adjunction unit calculation. For empty $X_V$, its sections complex is zero, so the same formulas give zero on both sides; the pointwise isomorphism covers this case too.",
-   "uses": [
-    "lem-weil-pbc-kinjective-hom-derived",
-    "def-weil-pbc-direct-image",
-    "def-weil-pbc-etale-cohomology",
-    "def-weil-pbc-sheafification"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 072W (lemma-higher-direct-images), resolution calculation natural in coefficients; Tag 03Q8, arbitrary schemes"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-dplus-injective-representative",
-  "lem-sbc-etale-abelian-restriction-injectives",
-  "prop-weil-pbc-inverse-image-exact",
-  "def-weil-pbc-etale-cohomology",
-  "def-weil-pbc-direct-image",
-  "lem-weil-pbc-etale-base-change-finite-limits",
-  "lem-weil-pbc-etale-inverse-image-restriction",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "def-sbc-raw-restricted-cohomology-comparison-map",
-  "lem-sbc-raw-restricted-resolution-evaluation",
-  "lem-sbc-raw-restricted-homotopy-sections-iso",
-  "def-weil-pbc-inverse-image",
-  "def-weil-pbc-sheafification",
-  "def-weil-pbc-cohomology-pullback",
-  "lem-weil-pbc-cohomology-pullback-functorial",
-  "lem-weil-pbc-inverse-image-composition",
+  "def-weil-pbc-raw-restricted-normalization-data",
+  "lem-weil-pbc-raw-restricted-resolution-naturality",
   "lem-sbc-raw-restricted-cohomology-comparison-is-iso",
-  "prop-weil-pbc-derived-inverse-image-adjunction",
-  "lem-sbc-abelian-higher-direct-image-class-compatibility",
+  "lem-weil-pbc-raw-restricted-resolution-restriction",
   "lem-sbc-abelian-higher-direct-image-natural-comparison",
-  "lem-weil-pbc-site-higher-direct-image-sheafified-presheaf",
-  "lem-weil-pbc-etale-base-change-continuous"
+  "lem-weil-pbc-raw-restricted-resolution-class",
+  "prop-weil-pbc-derived-inverse-image-adjunction",
+  "lem-sbc-abelian-higher-direct-image-class-compatibility"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 03Q8 and sites-cohomology.tex Tag 072W, explicit normalization of the already constructed raw derived evaluation; derived.tex Tags 0DVC, 09T5; V2: four helper proofs, generic exact-functor augmentation, bounded-below injective criterion, additive adjunction, and the constructed upstream canonicalComparison_class formula. Main normalization theorem remains unproved."
+  "by": "F2",
+  "document": "Stacks Project, Tags 03Q8, 072W, 0DVC and 09T5",
+  "place": "Separate fixed-resolution comparisons; canonicalComparison gives the sheafification lift; naturality of actual natural transformations gives coefficient compatibility."
  },
  "mathlib_searches": [
   {
@@ -308,14 +206,12 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-dplus-injective-representative",
   "lem-sbc-etale-abelian-restriction-injectives",
   "lem-weil-pbc-kinjective-hom-derived",
   "lem-sbc-raw-restricted-resolution-evaluation",
   "lem-sbc-raw-restricted-cohomology-comparison-is-iso",
   "prop-weil-pbc-derived-inverse-image-adjunction",
-  "lem-sbc-abelian-higher-direct-image-class-compatibility",
-  "lem-weil-pbc-site-higher-direct-image-sheafified-presheaf"
+  "lem-sbc-abelian-higher-direct-image-class-compatibility"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -329,28 +225,6 @@
   "module": "Sheaf.AlgebraicGeometry.RawRestrictedClassNormalization",
   "declaration": "AlgebraicGeometry.Etale.rawRestrictedClassNormalization",
   "declarations": [
-   "AlgebraicGeometry.Etale.normalizationRestrictionComplex",
-   "AlgebraicGeometry.Etale.normalizationMappedAugmentation",
-   "AlgebraicGeometry.Etale.normalizationRestrictionAugmentation",
-   "AlgebraicGeometry.Etale.normalizationRestrictionAugmentation_quasiIso",
-   "AlgebraicGeometry.Etale.normalizationRestrictionComplex_isKInjective",
-   "AlgebraicGeometry.Etale.normalizationRestrictedResolution",
-   "AlgebraicGeometry.Etale.normalizationSectionsIso",
-   "AlgebraicGeometry.Etale.normalizationPresheafComplex",
-   "AlgebraicGeometry.Etale.normalizationRestrictedIso",
-   "AlgebraicGeometry.Etale.normalizationResolutionClass",
-   "AlgebraicGeometry.Etale.normalizationIota",
-   "AlgebraicGeometry.Etale.normalizationRestrictedPresheaf",
-   "AlgebraicGeometry.Etale.normalizationChartMap",
-   "AlgebraicGeometry.Etale.normalizationCohomologyRestriction",
-   "AlgebraicGeometry.Etale.normalizationClass_add",
-   "AlgebraicGeometry.Etale.normalizationKappaComponent",
-   "AlgebraicGeometry.Etale.normalizationKappaComponent_naturality",
-   "AlgebraicGeometry.Etale.normalizationKappa",
-   "AlgebraicGeometry.Etale.normalizationLift",
-   "AlgebraicGeometry.Etale.normalizationRawCoefficient",
-   "AlgebraicGeometry.Etale.normalizationRestrictedCoefficient",
-   "AlgebraicGeometry.Etale.normalizationHigherCoefficient",
    "AlgebraicGeometry.Etale.rawRestrictedClassNormalization"
   ],
   "file": "lean/Sheaf/AlgebraicGeometry/RawRestrictedClassNormalization.lean",
@@ -369,13 +243,13 @@
   "note": "Re-delivery after H2 RETURN (bc0785c3579e). The diff against that head shows the requested route-1 repair exactly: theorem stmt_dep sbc-lem-higher-direct-image-presheaf removed, no decl from AbelianHigherDirectImagePresheaf used (grep), import switched to AbelianHigherDirectImageNaturalComparison (owner of abelianHigherDirectImageRawPresheaf). kappa is now built from abelianHigherDirectImageClass (def-weil-pbc-abelian-higher-image-class, the explicit adjunct/H0/shift/generator class, l.119-135) via AddMonoidHom.mk', with additivity and naturality as separately named sorry theorems with source/blueprint/proof docstrings; both true. Landed definition stmt_deps added: def-weil-pbc-abelian-higher-image-class, def-sbc-raw-affine-restricted-cohomology. Node differs from base only in lean + these two defs. lean.statement verbatim; 25 decls = lean.declarations; lines <=98 chars; only helper/main theorems sorry. Mathematics as previously accepted: c components pinned, P restriction pinned to cohomology pullback, explicit 072W iota, E = sheafification lift, IsIso E, iota(c z)=kappa z, coefficient naturality; no extra hypotheses, u/u+1, q=0/empty chart covered. Not compiled (no file changed); worker reports clean scompile and a passing deliver2 --no-push dry run."
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "V2",
+  "reviewer": "C-11761",
+  "group": "F2",
   "result": "pass",
-  "landing": "20261021T194502-L-1721562",
+  "landing": "20261022T011833-L-3222256",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: item statement vs clone (byte-identical); data module vs old item module construction block (same bodies; def/abbrev swaps and transport builder declared in change record); three sorry lemmas vs item clauses 1, 2, 5 (equivalent up to cancelling isomorphisms); node proof/proof_deps vs Lean proof"
  }
 }

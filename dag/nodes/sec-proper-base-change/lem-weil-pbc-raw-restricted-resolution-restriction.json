@@ -1,0 +1,119 @@
+{
+ "id": "lem-weil-pbc-raw-restricted-resolution-restriction",
+ "kind": "statement",
+ "title": "Etale cohomology pullback on a chosen resolution",
+ "statement": "For a scheme morphism f:X\\to S, a nonnegative integer q, an abelian etale sheaf F and the chosen injective resolution I, etale chart cohomology pullback, including inverse-image composition, agrees under normalizationRestrictedIso with restriction on homology of normalizationPresheafComplex. All maps and the augmentation are those of [def-weil-pbc-raw-restricted-normalization-data].",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03Q8; sites-cohomology.tex Tag 072W; derived.tex Tags 0DVC and 09T5; fixed-resolution part of the parent normalization argument."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-raw-restricted-normalization-data"
+ ],
+ "proof": [
+  {
+   "text": "Put W = V times_S X, W' = V' times_S X, a = t_X, g = W.hom,\nand h = W'.hom. Write sigma_g for the exact inverse-image single comparison,\nbeta_g for the homology/localization comparison on Gamma(W,g^*I), and C_g for\nthe sections comparison formed using the inverse of Q(F[0]) -> Q(I).\nExpanding the K-injective-resolution comparison gives its inverse as\nbeta_g.inv followed by C_g followed by H^q(RGamma(W).map sigma_g).\nTo verify this formula, naturality of the exact-localization comparison gives\nDg(Q(augmentation)) followed by the localization comparison on I equal to\nsigma_g followed by Q of the restricted augmentation. Cancel the two augmentation\nisomorphisms. The inverse right-derived comparison on g^*I is exactly the\nsections unit because g^*I is K-injective.\n\nApply sectionsComparison_triangle_naturality to I and the isomorphism\nQ(F[0]) -> Q(I). It gives C_g followed by derived chart restriction equal to\nQ of termwise chart restriction followed by C_h. The single-complex comparison\ncommutes with inverse-image composition: naturality of the derived composition\nisomorphism, followed by its single comparison and the coefficient composition\nisomorphism, gives sigma_g followed by cohomology pullback equal to derived\nchart restriction followed by sigma_h. Combine these squares and naturality of\nbeta. The result is inverse resolution comparison at W followed by cohomology\npullback equal to section-complex homology restriction followed by inverse\nresolution comparison at W'.\n\nIt remains to identify section-complex restriction. Evaluate the inverse-image\nadjunction unit at the terminal etale object of W' and use the localization\nrestriction isomorphism. The pullback diagonal identifies the unit at W with the\nidentity restriction of F. The composition unit equation identifies the unit at\nW' with that unit followed by a^*. Naturality of the a-unit moves the diagonal\nthrough a^*. The first unit followed by diagonal restriction is invertible,\nsince its localization image is the identity restriction of F(W). Cancel this\ncomposite and the localization isomorphisms. The resulting map on sections is\nprecisely F.map(t_X.op). Apply this equality in each degree\nof I. Naturality of homology under the resulting chain isomorphisms and\nNatTrans.app_homology for evaluation identify the remaining two factors of\nnormalizationRestrictedIso with the presheaf's restriction. Compose with the\nresolution square above and cancel the resolution isomorphisms. This proves the\ndisplayed formula. The same equations cover degree zero and empty charts.",
+   "uses": [
+    "lem-weil-pbc-sections-comparison-triangle-naturality",
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "lem-sbc-etale-abelian-restriction-injectives",
+    "lem-weil-pbc-inverse-image-composition",
+    "lem-weil-pbc-etale-restriction-pullback-unit-eq"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-sections-comparison-triangle-naturality",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-sbc-etale-abelian-restriction-injectives",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-etale-restriction-pullback-unit-eq"
+ ],
+ "proof_origin": {
+  "by": "F2",
+  "document": "Stacks Project",
+  "place": "Fixed-resolution part of parent normalization proof, steps 1 and 4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived evaluation at the represented identity generator agrees as a homomorphism with the injective resolution cocycle map to higher direct image sheaves",
+   "results": "OK 8 hits: CategoryTheory.InjectiveResolution.toRightDerivedZero', CategoryTheory.InjectiveResolution.extMk_hom, CategoryTheory.InjectiveResolution.toRightDerivedZero'_comp_iCycles, CategoryTheory.InjectiveResolution.rightDerived_app_eq, CategoryTheory.InjectiveResolution.toRightDerivedZero_eq, CategoryTheory.InjectiveResolution.ι'_f_zero, CategoryTheory.InjectiveResolution.Hom.hom'_f_assoc, CategoryTheory.InjectiveResolution.descFOne",
+   "date": "2026-10-22",
+   "verdict": "Generic resolution and homology infrastructure; no statement for the prescribed etale evaluation, chart restriction or cocycle class maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.InjectiveResolution.isoRightDerivedObj",
+   "results": "OK 8 hits: CategoryTheory.InjectiveResolution.isoRightDerivedObj, CategoryTheory.InjectiveResolution.rightDerived_app_eq, CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality, CategoryTheory.InjectiveResolution.toRightDerivedZero_eq, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc",
+   "date": "2026-10-22",
+   "verdict": "Generic resolution and homology infrastructure; no statement for the prescribed etale evaluation, chart restriction or cocycle class maps."
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomologyIso|rightDerivedFunctorObjQIso",
+   "results": "OK 8 hits: Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean:21, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean:455, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean:462, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean:512, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean:514, Mathlib/Algebra/Homology/HomologicalComplexAbelian.lean:54, Mathlib/Topology/Sheaves/Abelian.lean:113, Mathlib/CategoryTheory/Functor/ReflectsIso/Exact.lean:67",
+   "date": "2026-10-22",
+   "verdict": "Generic resolution and homology infrastructure; no statement for the prescribed etale evaluation, chart restriction or cocycle class maps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For an exact inverse image functor and injective resolution, derived sections and homology of its restriction give a natural comparison compatible with cocycle classes.",
+   "results": "OK 8 hits: CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc, CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.InjectiveResolution.rightDerived_app_eq, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_inv_naturality_assoc, CategoryTheory.Functor.toRightDerivedZero",
+   "date": "2026-10-22",
+   "verdict": "Generic derived-functor and injective-resolution naturality; no exact statement for the prescribed etale comparison maps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RawRestrictedClassNormalization",
+  "date": "2026-10-22",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "restriction of the specified fixed-resolution maps",
+   "via": [
+    "lem-weil-pbc-raw-restricted-class-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RawRestrictedResolutionRestriction",
+  "file": "lean/Sheaf/AlgebraicGeometry/RawRestrictedResolutionRestriction.lean",
+  "declaration": "AlgebraicGeometry.Etale.rawRestrictedResolution_restriction",
+  "statement": "theorem rawRestrictedResolution_restriction {X S : Scheme.{u}} (f : X ⟶ S) (q : ℕ) (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) {V V' : S.Etale} (t : V' ⟶ V) : normalizationCohomologyRestriction f q F t ≫ (normalizationRestrictedIso f q F (injectiveResolution F) V').hom = (normalizationRestrictedIso f q F (injectiveResolution F) V).hom ≫ ((normalizationPresheafComplex f F (injectiveResolution F)).homology (q : ℤ)).map t.op",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-22"
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-11761",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261022T011833-L-3222256",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-11761",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261022T011833-L-3222256",
+  "kind": "interface",
+  "note": "independent cc review: item statement vs clone (byte-identical); data module vs old item module construction block (same bodies; def/abbrev swaps and transport builder declared in change record); three sorry lemmas vs item clauses 1, 2, 5 (equivalent up to cancelling isomorphisms); node proof/proof_deps vs Lean proof"
+ }
+}

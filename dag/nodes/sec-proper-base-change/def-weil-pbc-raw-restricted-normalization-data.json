@@ -1,0 +1,162 @@
+{
+ "id": "def-weil-pbc-raw-restricted-normalization-data",
+ "kind": "definition",
+ "title": "The prescribed fixed-resolution normalization maps",
+ "statement": "For a scheme morphism f:X\\to S [def-pc-scheme] and abelian sheaf F [def-weil-pbc-abelian-etale-sheaves], prescribe an injective resolution I. For an etale chart V of S, let W=V\\times _S X and restrict I termwise by exact inverse image [def-weil-pbc-inverse-image]. Use the augmentation with the single-complex comparison to regard this as a K-injective resolution. Its derived-sections comparison [def-weil-pbc-etale-cohomology], the localization restriction/sections isomorphism and evaluation of homology identify H^q(W,F|W) with H^q((f_*I)(V)). Construct the cocycle map from the homology presheaf to R^qf_*F [def-weil-pbc-direct-image] by sheafifying homology, applying the sheafification counit, then the two augmentation-normalized classical derived-functor comparisons. Define iota by this map after the sections isomorphism, using the chosen resolution. Transport the homology-presheaf restriction to the chart cohomology groups. Define chart cohomology pullback independently by the usual pullback and inverse-image composition [def-weil-pbc-cohomology-pullback]. Bundle the explicitly prescribed derived-adjunction class [def-weil-pbc-abelian-higher-image-class] into an additive natural presheaf map kappa and define its unique sheafification lift. Define coefficient maps by the single, shifted-single and derived-direct-image functors. The augmentations, K-injectivity, additivity and naturality supporting these definitions are proved.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03Q8, label lemma-higher-direct-images, canonical associated-cohomology-presheaf construction. Agent expansion comparing its cocycle map with the explicitly constructed raw derived-adjunction evaluation."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-size-convention",
+  "def-pc-base-change",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-sheafification",
+  "def-sbc-raw-restricted-cohomology-comparison-map",
+  "def-weil-pbc-cohomology-pullback",
+  "lem-sbc-abelian-higher-direct-image-natural-comparison",
+  "prop-weil-pbc-derived-inverse-image-adjunction",
+  "def-weil-pbc-direct-image",
+  "lem-sbc-abelian-higher-direct-image-class-compatibility",
+  "def-weil-pbc-abelian-higher-image-class",
+  "def-sbc-raw-affine-restricted-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "The augmentation is the inverse additive-functor single-complex comparison followed by the mapped resolution augmentation; exactness preserves its quasi-isomorphism. Etale restriction preserves injectives and a bounded-below complex of injectives is K-injective. Define the restricted K-injective resolution and compose its sections comparison with localization restriction, terminal evaluation and homology evaluation. Transport the homology presheaf through the specified component isomorphisms with the generic normalizationTransportPresheaf constructor; the identity and composition laws follow by cancelling adjacent inverse isomorphisms.",
+   "uses": [
+    "lem-sbc-etale-abelian-restriction-injectives",
+    "lem-weil-pbc-etale-inverse-image-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For kappa additivity and naturality, the existing constructed canonicalComparison has exactly the specified class formula. Take its sheafification-unit composite: additivity of components and naturality give the required properties. Define kappa from this named class function, and lift it through the sheafification hom-equivalence. All other maps are explicit composites.",
+   "uses": [
+    "lem-sbc-abelian-higher-direct-image-natural-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-etale-abelian-restriction-injectives",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-sbc-abelian-higher-direct-image-natural-comparison"
+ ],
+ "proof_origin": {
+  "by": "F2",
+  "document": "Existing V2 constructions, with abstract transport of presheaf restrictions; Stacks Project Tags 03Q8 and 072W",
+  "place": "Data required to state the independent fixed-resolution comparison lemmas without a cycle."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived evaluation at the represented identity generator agrees as a homomorphism with the injective resolution cocycle map to higher direct image sheaves",
+   "results": "OK 8 hits: CategoryTheory.InjectiveResolution.toRightDerivedZero', CategoryTheory.InjectiveResolution.extMk_hom, CategoryTheory.InjectiveResolution.toRightDerivedZero'_comp_iCycles, CategoryTheory.InjectiveResolution.rightDerived_app_eq, CategoryTheory.InjectiveResolution.toRightDerivedZero_eq, CategoryTheory.InjectiveResolution.ι'_f_zero, CategoryTheory.InjectiveResolution.Hom.hom'_f_assoc, CategoryTheory.InjectiveResolution.descFOne",
+   "date": "2026-10-22",
+   "verdict": "Generic resolution and homology infrastructure; no statement for the prescribed etale evaluation, chart restriction or cocycle class maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.InjectiveResolution.isoRightDerivedObj",
+   "results": "OK 8 hits: CategoryTheory.InjectiveResolution.isoRightDerivedObj, CategoryTheory.InjectiveResolution.rightDerived_app_eq, CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality, CategoryTheory.InjectiveResolution.toRightDerivedZero_eq, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc",
+   "date": "2026-10-22",
+   "verdict": "Generic resolution and homology infrastructure; no statement for the prescribed etale evaluation, chart restriction or cocycle class maps."
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomologyIso|rightDerivedFunctorObjQIso",
+   "results": "OK 8 hits: Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean:21, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean:455, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean:462, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean:512, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean:514, Mathlib/Algebra/Homology/HomologicalComplexAbelian.lean:54, Mathlib/Topology/Sheaves/Abelian.lean:113, Mathlib/CategoryTheory/Functor/ReflectsIso/Exact.lean:67",
+   "date": "2026-10-22",
+   "verdict": "Generic resolution and homology infrastructure; no statement for the prescribed etale evaluation, chart restriction or cocycle class maps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For an exact inverse image functor and injective resolution, derived sections and homology of its restriction give a natural comparison compatible with cocycle classes.",
+   "results": "OK 8 hits: CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc, CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.InjectiveResolution.rightDerived_app_eq, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_inv_naturality_assoc, CategoryTheory.Functor.toRightDerivedZero",
+   "date": "2026-10-22",
+   "verdict": "Generic derived-functor and injective-resolution naturality; no exact statement for the prescribed etale comparison maps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RawRestrictedClassNormalization",
+  "date": "2026-10-22",
+  "group": "F2"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "specified normalization constructions",
+   "via": [
+    "lem-weil-pbc-raw-restricted-class-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RawRestrictedClassNormalizationData",
+  "declaration": "AlgebraicGeometry.Etale.normalizationRestrictionComplex",
+  "declarations": [
+   "AlgebraicGeometry.Etale.normalizationRestrictionComplex",
+   "AlgebraicGeometry.Etale.normalizationMappedAugmentation",
+   "AlgebraicGeometry.Etale.normalizationRestrictionAugmentation",
+   "AlgebraicGeometry.Etale.normalizationRestrictionAugmentation_quasiIso",
+   "AlgebraicGeometry.Etale.normalizationRestrictionComplex_isKInjective",
+   "AlgebraicGeometry.Etale.normalizationRestrictedResolution",
+   "AlgebraicGeometry.Etale.normalizationSectionsIso",
+   "AlgebraicGeometry.Etale.normalizationPresheafComplex",
+   "AlgebraicGeometry.Etale.normalizationRestrictedIso",
+   "AlgebraicGeometry.Etale.normalizationResolutionClass",
+   "AlgebraicGeometry.Etale.normalizationIota",
+   "AlgebraicGeometry.Etale.normalizationTransportPresheaf",
+   "AlgebraicGeometry.Etale.normalizationRestrictedPresheaf",
+   "AlgebraicGeometry.Etale.normalizationChartMap",
+   "AlgebraicGeometry.Etale.normalizationCohomologyRestriction",
+   "AlgebraicGeometry.Etale.normalizationClass_add",
+   "AlgebraicGeometry.Etale.normalizationKappaComponent",
+   "AlgebraicGeometry.Etale.normalizationKappaComponent_naturality",
+   "AlgebraicGeometry.Etale.normalizationKappa",
+   "AlgebraicGeometry.Etale.normalizationLift",
+   "AlgebraicGeometry.Etale.normalizationRawCoefficient",
+   "AlgebraicGeometry.Etale.normalizationRestrictedCoefficient",
+   "AlgebraicGeometry.Etale.normalizationHigherCoefficient"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/RawRestrictedClassNormalizationData.lean",
+  "statement": "def normalizationRestrictionComplex {X : Scheme.{u}} (W : X.Etale) (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (I : InjectiveResolution F) : CochainComplex (Sheaf W.left.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-11761",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261022T011833-L-3222256",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-11761",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261022T011833-L-3222256",
+  "kind": "interface",
+  "note": "independent cc review: item statement vs clone (byte-identical); data module vs old item module construction block (same bodies; def/abbrev swaps and transport builder declared in change record); three sorry lemmas vs item clauses 1, 2, 5 (equivalent up to cancelling isomorphisms); node proof/proof_deps vs Lean proof"
+ }
+}
