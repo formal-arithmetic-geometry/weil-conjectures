@@ -23,66 +23,59 @@
  ],
  "proof": [
   {
-   "text": "Use the total module operations [sk-def-sfb-module-derived-pushpull], their canonical adjunction [def-sfb-module-derived-pushpull-adjunction], and Cartesian coefficients [sk-prop-sfb-cartesian-coefficients] on small pro-etale sites. The normalized tensor, symmetry and composite-adjunction comparisons of [lem-sfb-ringed-derived-monoidal-comparisons] apply to these ordinary ringed-topos operations. Put $P=Rf_*$, $F=f^*$, $Q_i=Rp_{i*}$, $U_i=p_i^*$, $T=T_X$, $A=PN$, $C=PT$, $H=U_1N\\otimes U_2T$. The specified square comparison is monoidal and its conjugate identifies $PQ_1=Rh_*=PQ_2$ for $h=fp_1=fp_2$; also $U_1T=U_2T=T_W$.",
+   "text": "Prove uniqueness of the normalized ordinary tensor structure by transposing its tensor and unit equations under the module adjunction; cancel the epimorphism from the ambient tensor to the relative tensor. The existing strong monoidal pullback satisfies these equations by the scalar-extension tensor comparison and the monoidal sheaf adjunction. Identify the chosen structure with it. Preserve flat modules using inverseImageModule_preservesFlat and extension along the invertible coefficient map. Share the existing sheaf braiding explicitly in its symmetric structure; the generic record update is reflexively equal to the original structure, so no tensor or symmetry changes.",
    "uses": [
-    "sk-def-sfb-module-derived-pushpull",
-    "def-sfb-module-derived-pushpull-adjunction",
-    "sk-prop-sfb-cartesian-coefficients",
-    "lem-sfb-ringed-derived-monoidal-comparisons"
+    "new-proetale-inverse-image-module-flat"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 07A4, 0D6D, 07A6 and 0D6E: tensor, pullback composition, adjunction and direct-image composition"
+    "place": "Tags 03EL and 0G7E: inverse image, relative tensor and flat modules"
    }
   },
   {
-   "text": "Apply [lem-sfb-ringed-kunneth-factorizations] with $q=f$, $a=p_1$, $b=p_2$, the commutation $fp_1\\cong fp_2$ of step 1, its $M$ equal to $N$ and its $N$ equal to $T$. Its mates $\\beta,\\bar\\beta$ are $b_2,b_1$, and its $RU\\cong RS$ is the specified identification $PQ_2=Rh_*=PQ_1$. Write $\\lambda_{u;E,L}:Ru_*E\\otimes L\\to Ru_*(E\\otimes u^*L)$ for the projection map in direct-image-first order, the adjunct of $c_{u,E}\\otimes1$. By the symmetric monoidality of [lem-sfb-ringed-derived-monoidal-comparisons], $\\lambda_{u;E,L}$ is $\\pi_{u,L,E}$ conjugated by the two tensor symmetries, since both have the same transpose. So the two composites of that lemma are\n$$D_2=P(\\lambda_{p_2;U_1N,T})P(b_{2,N}\\otimes1)\\pi_{f,A,T},\\quad D_1=P(\\pi_{p_1,N,T_W})P(1\\otimes b_{1,T})\\lambda_{f;N,C},$$\nand the lemma gives $D_1=D_2:A\\otimes C\\to Rh_*H$ under that identification. Since $B_N=(b_{2,N}^{-1}\\otimes1)\\lambda_{p_2;U_1N,T}^{-1}$, cancellation gives $P(B_N)D_2=\\pi_{f,A,T}$. Thus $D_2$ is invertible by the assumed isomorphisms; no invertibility of $\\lambda_{f;N,C}$ is needed.",
+   "text": "Use the existing residueDerivedMonoidal structure on each exact flat-preserving pullback. Its tensor map is the specified leftDerivedTensorComparison. Check its unit against the explicit degree-zero comparison using leftDerivedFunctorIsoMapDerivedCategory_hom_app_fac and the quotient factorization. Descend ordinary braiding compatibility on flat resolutions; use the existing generic derived-braiding wrapper, whose braiding field is definitionally the specified Koszul construction. Prove monoidality of ordinary pullback composition by the conjugate pushforward tensor identity, checked after the balanced-tensor quotient. Derivation preserves that tensor identity by leftDerivedTensorComparison_naturality_app and map_leftDerivedTensorComparison_app_app_comp. Compose the two comparisons with transport along fp=fq to obtain tensor compatibility for the precise tracePullSquare. Name the explicit degree-zero unit composite and Koszul braiding as generic functions, then assemble the canonical derived unit, tensor and braiding comparisons with the ordinary categories still abstract before specializing them. These caches are definitionally the existing constructions. Store the three canonical derived monoidal structures, unit comparison, tensor comparisons and braidings in TraceComparisonData, constructed first over abstract abelian categories and then specialized to internal modules. TraceFirstAssertion uses the same TraceFirstFormula through traceDataFormula and the fields of traceNativeComparisonData. The bundle changes no map; it avoids proof-abstraction comparisons between independently expanded monoidal instances. Prove the bundled trace assembly over fully abstract ordinary abelian categories before any specialization to internal modules, and construct the proof-only derived braided functor instances inside that proof. The native square proof refers directly to the canonical leftDerivedTensorComparison; its unused public native alias is removed. Reassociate the square-family equation with Category.assoc explicitly; transport the canonical unit equality using the proved generic equality-transport helper. Express tensor compatibility as the private predicate traceDataSquare over the same canonical comparison-data bundle. Prove the entire composition-family square calculation over abstract ordinary abelian categories, and only then specialize this folded proposition to the native sheaf-module pullbacks.",
    "uses": [
-    "lem-sfb-ringed-kunneth-factorizations",
-    "lem-sfb-ringed-derived-monoidal-comparisons"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
-    "place": "First identity: equality of the two projection/exchange factorizations, specialized to the square $W=X\\times_YX$ of det-thm-int-restriction-line (1), first triangle"
-   }
-  },
-  {
-   "text": "Precomposing the required left side with $D_2$ gives $e_A P(B_N)D_2=e_A\\pi_{f,A,T}=1_A\\otimes t$. For the right side use $D_1=D_2$ and cancel $P(\\pi_{p_1,N,T_W}^{-1})$ against its forward factor. The result is\n$$P(1_N\\otimes t_1)P(\\pi_{p_1,N,T_W}^{-1})D_1=P(1_N\\otimes(t_1b_{1,T}))\\lambda_{f;N,C}=P(1_N\\otimes F(t))\\lambda_{f;N,C}.$$\nThe last equality is the given trace base-change equation. Naturality in the scalar input from [lem-sfb-ringed-projection-tensor-composition] identifies this with $\\lambda_{f;N,R_Y}(1_A\\otimes t)$. The tensor-unit normalization from [lem-weil-pbc-ringed-projection-mate-exact] makes this $1_A\\otimes t$, using $FR_Y=R_X$ and the canonical unitors.",
-   "uses": [
-    "lem-sfb-ringed-projection-tensor-composition",
-    "lem-weil-pbc-ringed-projection-mate-exact"
+    "new-integral-residue-derived-monoidal",
+    "new-proetale-derived-module-pullback-monoidal"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0B56, equation-projection-formula-map: naturality and tensor-unit specialization"
+    "place": "Tags 07A4, 0D6D and 07A7: derived tensor and composition comparisons"
    }
   },
   {
-   "text": "The two maps agree after precomposition with the same isomorphism $D_2$; cancel it. Substituting $A=Rf_*N$ and the specified $PQ_2=Rh_*=PQ_1$ gives exactly the displayed equality, with source and target as in the statement.",
+   "text": "Perform the Kunneth factorization directly for the three monoidal categories in the statement. Transpose the two composites through the composite adjunctions; mate-counit equations and the tensor compatibility of the specified square make their transposes equal. The conjugate square identifies their targets. The symmetric projection maps in direct-image-first and fixed-input-first order are identified by their adjunction transposes. Expanding B gives its inverse as the second factorization after the base-change map. This is the same argument as the ringed Kunneth lemma, with no conversion to a different ringed-topos model.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-int-restriction/sk-thm-int-restriction-line.proof.md",
-    "place": "(1), first triangle: finish the reassociation and trace rearrangement"
+    "place": "(1), first triangle: reassociate q p_2 = q p_1 and move M outside Rp_1*"
+   }
+  },
+  {
+   "text": "Prove naturality of B by naturality of projection, square mate and the two braidings. For the trace equation cancel the invertible projection and B, substitute the first Kunneth factorization, and move the square component through projection by naturality. Cancel the first inverse projection. Combine the scalar factors and apply trace1. The left-coefficient projection action, its naturality and right unit normalization identify the result with tensoring by the trace followed by the right unitor. Specialize this general calculation to the canonical condensed-module derived operations. The specialization compares applications of the same comparison-data bundle, keeping the concrete derived monoidal structures out of declared types.",
+   "uses": [
+    "lem-pur-adjoint-left-projection-action"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0B56: projection formula map and its unit normalization"
    }
   }
  ],
  "proof_deps": [
-  "sk-def-sfb-module-derived-pushpull",
-  "def-sfb-module-derived-pushpull-adjunction",
-  "sk-prop-sfb-cartesian-coefficients",
-  "lem-sfb-ringed-derived-monoidal-comparisons",
-  "lem-sfb-ringed-kunneth-factorizations",
-  "lem-sfb-ringed-projection-tensor-composition",
-  "lem-weil-pbc-ringed-projection-mate-exact"
+  "new-proetale-inverse-image-module-flat",
+  "new-integral-residue-derived-monoidal",
+  "new-proetale-derived-module-pullback-monoidal",
+  "lem-pur-adjoint-left-projection-action"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-int-restriction/sk-thm-int-restriction-line.proof.md",
-  "place": "(1), first triangle; explicit counit expansion of the standard compatibilities recalled in det-prop-p1-adjunction-rational-triangle.proof.md, first identity"
+  "place": "(1), first triangle: reassociate q p_2 = q p_1 and move M outside Rp_1*; the existing projection/mate argument carried out directly in the stated internal-module categories"
  },
  "mathlib_searches": [
   {
@@ -202,13 +195,6 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-sfb-ringed-derived-monoidal-comparisons",
-  "lem-weil-pbc-adjunct-counit-identity",
-  "lem-sfb-ringed-projection-tensor-composition",
-  "lem-weil-pbc-ringed-projection-mate-exact",
-  "lem-sfb-ringed-kunneth-factorizations"
- ],
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
@@ -226,10 +212,7 @@
    "AlgebraicGeometry.ProEtale.CondensedRing.condensedTensorCore",
    "AlgebraicGeometry.ProEtale.CondensedRing.condensedUpperStarMonoidal",
    "AlgebraicGeometry.ProEtale.CondensedRing.condensedUpperStarPreservesFlat",
-   "AlgebraicGeometry.ProEtale.CondensedRing.condensedDerivedTensorComparison",
-   "AlgebraicGeometry.ProEtale.CondensedRing.condensedDerivedTensorIso",
    "AlgebraicGeometry.ProEtale.CondensedRing.condensedDerivedUnitIso",
-   "AlgebraicGeometry.ProEtale.CondensedRing.condensedDerivedSymmetry",
    "AlgebraicGeometry.ProEtale.CondensedRing.traceProjectionFromComparison",
    "AlgebraicGeometry.ProEtale.CondensedRing.traceBFromComparisons",
    "AlgebraicGeometry.ProEtale.CondensedRing.TraceFirstHypotheses",
@@ -246,7 +229,15 @@
    "AlgebraicGeometry.ProEtale.CondensedRing.tracePullSquare",
    "AlgebraicGeometry.ProEtale.CondensedRing.traceTate",
    "AlgebraicGeometry.ProEtale.CondensedRing.TraceFirstAssertion",
-   "AlgebraicGeometry.ProEtale.CondensedRing.trace_base_change_first"
+   "AlgebraicGeometry.ProEtale.CondensedRing.trace_base_change_first",
+   "CategoryTheory.traceSheafSymmetric",
+   "CategoryTheory.traceCanonicalDerivedBraiding",
+   "CategoryTheory.Functor.traceDegreeZeroUnitIso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.TraceComparisonData",
+   "AlgebraicGeometry.ProEtale.CondensedRing.traceDataFormula",
+   "AlgebraicGeometry.ProEtale.CondensedRing.derivedTraceComparisonData",
+   "AlgebraicGeometry.ProEtale.CondensedRing.moduleTraceComparisonData",
+   "AlgebraicGeometry.ProEtale.CondensedRing.traceNativeComparisonData"
   ],
   "file": "lean/Sheaf/Paper/TraceBaseChangeFirst.lean",
   "statement": "theorem trace_base_change_first (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] {X Y W : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [W.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] [LocallyOfFiniteType (W ↘ Spec (.of k))] [QuasiCompact (W ↘ Spec (.of k))] [IsSeparated (W ↘ Spec (.of k))] (f : X ⟶ Y) [f.IsOver (Spec (.of k))] [IsProper f] (p q : W ⟶ X) [p.IsOver (Spec (.of k))] [q.IsOver (Spec (.of k))] (sq : ChosenCartesianSquare p q f f) : TraceFirstAssertion (Profinite.padicIntegersRingObj ℓ E.1) f p q sq (traceTate ℓ E Y)",
@@ -264,5 +255,15 @@
   "result": "pass",
   "note": "Re-delivery of returned 21f8aa1d2971; both earlier findings repaired. (1) H13: the dep record lem-weil-pbc-ringed-topoi-derived-tensor-pullback is identical to live; the only DAG difference is the item's lean field. CondensedModuleTensorPullback.lean is deleted; its nine helpers moved verbatim (only the blueprint tag changed) into Sheaf/Paper/TraceBaseChangeFirst.lean and are listed in lean.declarations. (2) H9: the three unused imports and the traceAbstractSquare/traceBaseChange/tracePushSquare wrappers are removed. Statement unchanged; I re-checked trace1/trace2 (t_i b_i = f*t, with the square comparison and the unit iso), the B_N order (symmetry, pi^-1_{p2,T_X,p1*N}, symmetry, b2^-1 tensor 1), e_K, the conjugateIsoEquiv common-source identification and both targets Rf*N. Hypotheses only on Loc(Dbc); no extra universe constraints; statement field verbatim; 26 declarations present; no name collisions or competing upperStar Monoidal instance. Sorries: two postponed helper theorems with proof docstrings plus the item theorem. nt_compile --json: first try a side dep (DerivedPullbackTensorHom) timed out at load ~118; retry exit 0, item 42.9 s/60 s, no errors or warnings. Notes: condensedDerivedTensorIso unused (moved at the earlier reviewer's request); stage 3 must prove the two helper theorems; the second reading is a worker self-check."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-f9e70",
+  "group": "V9",
+  "result": "pass",
+  "landing": "20261022T013535-L-3614540",
+  "kind": "interface",
+  "note": "independent cc review: delivered TraceBaseChangeFirst (bundle TraceComparisonData/traceDataFormula) against the clone's old TraceFirstAssertion/condensedDerivedUnitIso via sandbox defeq/HEq checks; node proof_deps against imports; removed aliases against clone lean/quarantine/dag"
+ }
 }
