@@ -1,6 +1,6 @@
 # Work queue
 
-53 items; claim with `tools/claim.py next <group> [--stage N]`.
+52 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Rework: quarantined by the upstream sync (5 clusters, 327 modules)
 
@@ -16,7 +16,7 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 
 Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 54, stage 3 1 items.
 
-## Stage 1: nodes to split (10)
+## Stage 1: nodes to split (9)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -28,7 +28,6 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-finite-quotient-normal-proper` | 4013 | none |
 | `lem-sfb-ramified-cartier-supported-purity` | 4013 | none |
 | `lem-sfb-norm-completion-positive-cohomology-mono` | 4014 | none |
-| `lemma-nagata-proper-to-separated-target` | 7013 | none |
 | `def-per-support-condition` | - | none |
 
 ## Stage 2: nodes to state (5)
