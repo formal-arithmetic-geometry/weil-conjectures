@@ -24293,3 +24293,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:09 L: merged deliver/NE/lem-sfb-profinite-geometric-family-heart-cd (stage 2; reviewer PASS; parallel immutable checks)
 - 02:10 L: returned deliver/NB/lem-sfb-tame-snc-quotient-resolution (reviewer RETURN: 9th push of lem-sfb-tame-snc-quotient-resolution, after 8 RETURNs (NM 9666, NJ ca61, NC 0835, NK 00a1, ND cd6d, ND 3070,)
 - 02:10 L: returned deliver/N9/sk-thm-groth-ss (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-thm-groth-ss: sk-thm-groth-ss: completed in this pr)
+- 02:10 L: returned deliver/A2/Sheaf.AlgebraicGeometry.ModuleSpecializationAbelianIso (reviewer RETURN: (the landing tools, head 1bc0863d9) the delivery did not land: lean/Sheaf/AlgebraicGeometry/ProperLocallyAcyclicSpeciali)
