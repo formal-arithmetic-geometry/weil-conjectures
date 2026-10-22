@@ -1,7 +1,8 @@
 module
 
 public import WeilConjectures.ConstructibleSheaf.Defs
-import Sheaf.AlgebraicGeometry.ConstantStrictFibreStalkComparison
+import WeilConjectures.AlgebraicGeometry.ConstantStrictFibreStalkComparison
+import WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMap
 import WeilConjectures.RingTheory.EtaleColimitNormalLocalDomain
 import WeilConjectures.AlgebraicGeometry.StrictHenselizationChartMaximalIdeal
 import WeilConjectures.AlgebraicGeometry.StrictHenselizationAffineChartIndEtale
@@ -246,7 +247,13 @@ private theorem isIso_constant_unit_stalk_of_connected_strict_fibre
       (CategoryTheory.forget (ModuleCat.{u + 1} Λ)) :=
     preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} _
   let Φ := Scheme.pointSmallEtale s
-  let Z := pullback f (Scheme.strictHenselizationStructuralMap s)
+  let τ := pullback.map f (Scheme.strictHenselizationStructuralMap s)
+    f (Scheme.strictLocalizationToBase s) (𝟙 X)
+    (Spec.map (Scheme.smallStrictHenselizationColimitIso s).inv) (𝟙 Y)
+    (by simp) (by simpa using (small_toBase s).symm)
+  have : IsIso τ := by dsimp [τ]; infer_instance
+  let Z := pullback f (Scheme.strictLocalizationToBase s)
+  have : ConnectedSpace ↥Z := τ.homeomorph.connectedSpace_iff.mp inferInstance
   let F := (constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M
   let η := (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f).unit.app F
   let T := Scheme.Etale.mk (𝟙 Y)

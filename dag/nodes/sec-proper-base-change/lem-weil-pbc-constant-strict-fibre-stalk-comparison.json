@@ -31,16 +31,7 @@
  },
  "proof": [
   {
-   "text": "Obtain the official full-presentation comparison. Base change Spec.map of the canonical small/full ring-colimit isomorphism to get an isomorphism over X. Compose the official comparison with globalSectionsUpperStarIso and the inverse-image composition isomorphism. The general unitSectionRestriction_comp equation transports each germ formula; pullback extensionality shows that base change commutes with symmetry and hence identifies the transported full-model leg with the small-model leg. All subsequent objects and the displayed conclusion remain in the original small presentation.",
-   "uses": [
-    "lem-weil-pbc-qcqs-strict-local-module-comparison",
-    "def-weil-pbc-small-strict-local-section-maps",
-    "lem-weil-pbc-etale-unit-section-restriction-comp"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Apply exists_qcqsStrictLocalModuleComparison to f^* M_Y. Its isomorphism Theta identifies (f_* f^* M_Y)_s with global sections of p^* f^* M_Y on Z, and its representative germ formula is the actual second adjunction unit followed by the strict-local neighbourhood section.",
+   "text": "Apply exists_qcqsStrictLocalModuleComparison to f^* M_Y in the adopted full strictLocalizationToBase presentation. Its isomorphism Theta identifies (f_* f^* M_Y)_s with global sections of p^* f^* M_Y on Z, and its representative germ formula is the actual second adjunction unit followed by the strict-local neighbourhood section. The canonical small/full colimit isomorphism identifies this presentation over Y with the strict henselization in the mathematical statement.",
    "uses": [
     "lem-weil-pbc-qcqs-strict-local-module-comparison"
    ],
@@ -88,8 +79,6 @@
  ],
  "proof_deps": [
   "lem-weil-pbc-qcqs-strict-local-module-comparison",
-  "def-weil-pbc-small-strict-local-section-maps",
-  "lem-weil-pbc-etale-unit-section-restriction-comp",
   "lemma-constructible-pullback-constant",
   "def-weil-pbc-strict-henselization-limit",
   "def-weil-pbc-geometric-stalks",
@@ -98,7 +87,8 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 03Q9 restriction construction, specialized to constants and checked using the module adjunction generator equations"
+  "place": "Tag 03Q9 restriction construction, specialized to constants and checked using the module adjunction generator equations",
+  "note": "D3: attach to the unchanged adopted full-model theorem; the consumer transports connectedness rather than recreating the small-model stalk comparison."
  },
  "mathlib_searches": [
   {
@@ -139,15 +129,15 @@
   "group": "X3"
  },
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.ConstantStrictFibreStalkComparison",
-  "file": "lean/Sheaf/AlgebraicGeometry/ConstantStrictFibreStalkComparison.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.ConstantStrictFibreStalkComparison",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/ConstantStrictFibreStalkComparison.lean",
   "declaration": "AlgebraicGeometry.Etale.constant_strict_fibre_stalk_comparison",
-  "statement": "theorem constant_strict_fibre_stalk_comparison (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f] {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ Y) (M : ModuleCat.{u + 1} Λ) (t : (Scheme.pointSmallEtale s).fiber.obj (Scheme.Etale.mk (𝟙 Y))) : let Φ := Scheme.pointSmallEtale s let Z := pullback f (Scheme.strictHenselizationStructuralMap s) let F := (constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M let η := (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f).unit.app F ∃ r : Φ.sheafFiber.obj ((lowerStar (ModuleCat.{u + 1} Λ) f).obj ((upperStar (ModuleCat.{u + 1} Λ) f).obj F)) ⟶ ((constantSheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M).obj.obj (op (Scheme.Etale.mk (𝟙 Z))), IsIso r ∧ (toSheafify Y.smallEtaleTopology ((Functor.const Y.Etaleᵒᵖ).obj M)).app (op (Scheme.Etale.mk (𝟙 Y))) ≫ Φ.toPresheafFiber (Scheme.Etale.mk (𝟙 Y)) t F.obj ≫ Φ.sheafFiber.map η ≫ r = (toSheafify Z.smallEtaleTopology ((Functor.const Z.Etaleᵒᵖ).obj M)).app (op (Scheme.Etale.mk (𝟙 Z)))",
+  "statement": "theorem constant_strict_fibre_stalk_comparison (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f] {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ Y) (M : ModuleCat.{u + 1} Λ) (t : (Scheme.pointSmallEtale s).fiber.obj (Scheme.Etale.mk (𝟙 Y))) : let Φ := Scheme.pointSmallEtale s let Z := pullback f (Scheme.strictLocalizationToBase s) let F := (constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M let η := (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f).unit.app F ∃ r : Φ.sheafFiber.obj ((lowerStar (ModuleCat.{u + 1} Λ) f).obj ((upperStar (ModuleCat.{u + 1} Λ) f).obj F)) ⟶ ((constantSheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M).obj.obj (op (Scheme.Etale.mk (𝟙 Z))), IsIso r ∧ (toSheafify Y.smallEtaleTopology ((Functor.const Y.Etaleᵒᵖ).obj M)).app (op (Scheme.Etale.mk (𝟙 Y))) ≫ Φ.toPresheafFiber (Scheme.Etale.mk (𝟙 Y)) t F.obj ≫ Φ.sheafFiber.map η ≫ r = (toSheafify Z.smallEtaleTopology ((Functor.const Z.Etaleᵒᵖ).obj M)).app (op (Scheme.Etale.mk (𝟙 Z)))",
   "branch": "sheaf-dag",
-  "by": "X3",
-  "date": "2026-10-15",
-  "note": "H2: retire the specialized Sheaf qcqs comparison; the small-model restrictions are applications of the general graph/unit construction, definitionally the former formulas."
+  "by": "D3",
+  "date": "2026-10-22",
+  "note": "D3 retirement: use the adopted theorem on the full strictLocalizationToBase presentation. The sole Sheaf consumer retains all signatures and transports connectedness from the small fibre to the full fibre via the base change of smallStrictHenselizationColimitIso; the private small_toBase equation verifies that this is over Y. The upstream theorem and all upstream files are unchanged."
  },
  "reviewed": {
   "date": "2026-10-14",
@@ -162,12 +152,12 @@
  "reviewed_proof": {
   "date": "2026-10-22",
   "by": "L",
-  "reviewer": "C-8f877",
-  "group": "H2",
+  "reviewer": "C-91ca5",
+  "group": "D3",
   "result": "pass",
-  "landing": "20261022T013415-L-3565988",
+  "landing": "20261022T021026-L-163230",
   "kind": "interface",
-  "note": "independent cc review: retired Sheaf copy (small strictHenselizationStructuralMap model) vs WC twin (strictLocalizationToBase) and retire-items row 2802; 4 restated consumer signatures vs old ones (defeq; unchanged proofs unfold to old form); 9 node lean.statements vs Lean (verbatim); downstream public envs for new Sheaf/WC twin pairs (none); sandbox compile of delivery + importers NormalConstantGenericUnit, ProperGeometricPointExchange (all rc 0), axioms clean"
+  "note": "independent cc review: Retired Sheaf copy (small strictHenselizationStructuralMap model) vs WC twin (strictLocalizationToBase, sig verbatim at WC line 112); consumer NormalConstantGenericUnit old vs delivered (all signatures identical, connectedness transported via base-changed smallStrictHenselizationColimitIso + small_toBase); 2 node diffs vs live; importer compiled rc 0, axioms clean"
  },
  "lean_audit": {}
 }
