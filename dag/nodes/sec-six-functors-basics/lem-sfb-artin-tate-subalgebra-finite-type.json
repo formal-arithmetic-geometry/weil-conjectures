@@ -14,7 +14,11 @@
  ],
  "proof": [],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00IS, algebra-lemma-Artin-Tate; exact Mathlib leaf fg_of_fg_of_fg at Mathlib/RingTheory/Adjoin/Tower.lean:145"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -22,15 +26,51 @@
    "results": "Mathlib/RingTheory/Adjoin/Tower.lean:17 (module doc: Artin--Tate lemma), :145 theorem fg_of_fg_of_fg [IsNoetherianRing A] (hAC : (⊤ : Subalgebra A C).FG) (hBC : (⊤ : Submodule B C).FG) (hBCi : Function.Injective (algebraMap B C)) : (⊤ : Subalgebra A B).FG, tagged @[stacks 00IS]",
    "date": "2026-10-22",
    "verdict": "candidate: exact Artin--Tate with A=R, B=the subalgebra, C=the ambient algebra; injectivity is the subalgebra inclusion."
+  },
+  {
+   "tool": "grep",
+   "query": "Artin.?Tate|fg_of_fg_of_fg",
+   "results": "4 hits; Mathlib/RingTheory/Adjoin/Tower.lean, Mathlib/RingTheory/Adjoin/Tower.lean, Mathlib/RingTheory/Adjoin/Tower.lean, Mathlib/RingTheory/Adjoin/Tower.lean",
+   "date": "2026-10-22",
+   "verdict": "match: fg_of_fg_of_fg states exactly the Artin--Tate conclusion; read Mathlib/RingTheory/Adjoin/Tower.lean:139-154, theorem at line 145."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Artin Tate lemma for a module finite intermediate subalgebra over a Noetherian ring",
+   "results": "8 hits; Ideal.exists_pow_inf_eq_pow_smul, IntermediateField.fg_of_noetherian, Subalgebra.fg_of_noetherian, IsArtinianRing.of_finite, fg_of_fg_of_fg, exists_subalgebra_of_fg, Module.Finite.of_quasiFinite, isNoetherian_of_finite_isArtinian",
+   "date": "2026-10-22",
+   "verdict": "match: fg_of_fg_of_fg states exactly the Artin--Tate conclusion; read Mathlib/RingTheory/Adjoin/Tower.lean:139-154, theorem at line 145."
+  },
+  {
+   "tool": "loogle",
+   "query": "fg_of_fg_of_fg",
+   "results": "1 hits; fg_of_fg_of_fg",
+   "date": "2026-10-22",
+   "verdict": "match: fg_of_fg_of_fg states exactly the Artin--Tate conclusion; read Mathlib/RingTheory/Adjoin/Tower.lean:139-154, theorem at line 145."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Artin Tate lemma: a subalgebra A of a finite type algebra B over a Noetherian ring R is finite type if B is a finite A module",
+   "results": "8 hits; fg_of_fg_of_fg, finite_of_algHom_finiteType_of_isJacobsonRing, Algebra.EssFiniteType.of_finiteType, IsIntegralClosure.finite, Algebra.fg_trans', Module.Finite.of_quasiFinite, instFiniteTypeSubtypePolynomialMemSubalgebraReesAlgebraOfIsNoetherianRing, Algebra.FiniteType.isNoetherianRing",
+   "date": "2026-10-22",
+   "verdict": "match: fg_of_fg_of_fg states exactly the Artin--Tate conclusion; read Mathlib/RingTheory/Adjoin/Tower.lean:139-154, theorem at line 145."
+  },
+  {
+   "tool": "grep",
+   "query": "class FiniteType|class Finite |fg_top|fg_iff_finiteType",
+   "results": "25 hits; Mathlib/RingTheory/Spectrum/Prime/Chevalley.lean, Mathlib/RingTheory/ReesAlgebra.lean, Mathlib/RingTheory/LocalProperties/Semilocal.lean, Mathlib/RingTheory/EssentialFiniteness.lean, Mathlib/RingTheory/EssentialFiniteness.lean, Mathlib/RingTheory/Finiteness/Finsupp.lean, Mathlib/RingTheory/Finiteness/Nilpotent.lean, Mathlib/RingTheory/ZariskisMainTheorem.lean",
+   "date": "2026-10-22",
+   "verdict": "related definitions: Module.Finite.fg_top in Mathlib/RingTheory/Finiteness/Defs.lean:119; Algebra.FiniteType is defined by top.FG in Mathlib/RingTheory/FiniteType.lean:39-40 (source read)."
   }
  ],
- "mathlib_match": null,
- "mathlib_candidate": {
+ "mathlib_match": {
   "declaration": "fg_of_fg_of_fg",
   "file": "Mathlib/RingTheory/Adjoin/Tower.lean",
-  "how": "line 145, @[stacks 00IS]: with A:=R, B:=the R-subalgebra, C:=the finite-type R-algebra; (⊤ : Subalgebra R B).FG is finite type of B over R."
+  "line": 145,
+  "how": "specializes in one line: in fg_of_fg_of_fg (lines 145-147, proof 148-154) set its A=R, B=the given R-subalgebra A, C=the ambient algebra B. The two FG hypotheses are finite type of B over R and module finiteness of B over A; algebraMap A B is the injective subtype inclusion. The scalar tower is the canonical R -> A -> B tower. The conclusion (top : Subalgebra R A).FG is finite type of A over R, by the definition Algebra.FiniteType in Mathlib/RingTheory/FiniteType.lean:39-40. No nontriviality, domain or injectivity of R -> B is assumed."
  },
- "status": "unsplit",
+ "mathlib_candidate": null,
+ "status": "mathlib",
  "merged_into": null,
  "created": {
   "by": "reviewer",
@@ -58,5 +98,20 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-artin-tate-subalgebra-finite-type",
+  "worker": "stage1",
+  "summary": "Checked Stacks Tag 00IS (algebra-lemma-Artin-Tate) and the full Mathlib theorem at Tower.lean:145-154. The recorded candidate is an exact one-line specialization; promoted this existing item to a Mathlib leaf with logged searches. No statement change, no new nodes and no proof steps. The identical older lem-per-artin-tate-subalgebra-finite-type is noted in the report for maintainer handling, not recreated.",
+  "blueprint": "The existing from.place identifies Step 2 of lem-sfb-finite-quotient-normal-proper: finite type of invariant section rings in ILO X 2.3, diagram (2.c), p.151. This algebraic tool closes at Stacks 00IS / Mathlib fg_of_fg_of_fg, without changing the unit or chapter route. Whole imported blueprint searches for Artin, 00IS and finite type.*subalgebra found no equivalent imported blueprint statement; same_as remains []. The ancestor command reports None, retained from the existing route-local item."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NB-f94a528e0",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-f94a528e0 (reviewer sub-agent of L); spot-checked: I read the whole delivery. It adds no new nodes and leaves the statement and stmt_deps unchanged; it makes the item a Mathlib leaf matched to fg_of_fg_of_fg (Mathlib/RingTheory/Adjoin/Tower.lean:145-154, tagged @[stacks 00IS], complete proof read). Mapping A:=R, B:=the subalgebra A, C:=B: Algebra.FiniteType is top.FG (FiniteType.lean:39-40), Module.Finite is top.FG, the subtype inclusion supplies the injectivity hypothesis, and the scalar tower is canonical. This is an exact one-line specialization with no hidden comparison. Checked against Stacks algebra.tex:12297-12322 (Tag 00IS): the statement matches word for word, with no hypothesis added or dropped. All three stmt_deps are Mathlib leaves (IsNoetherianRing, Algebra.FiniteType, Module.Finite). Grep, LeanSearch, Loogle and LeanFinder searches are recorded. Edge cases: A=B, B=0 (no Nontrivial needed), R->B non-injective, and empty generating sets are all covered. The statement duplicates the dropped (2026-10-19) lem-per-artin-tate-subalgebra-finite-type; the item was created on 2026-10-22 to replace it on the live route. Maintainer note: consider merging or setting merged_into on the old node. No SGA is cited. No fixes."
+ }
 }
