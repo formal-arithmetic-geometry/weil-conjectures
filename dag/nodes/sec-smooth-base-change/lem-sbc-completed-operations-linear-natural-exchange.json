@@ -32,122 +32,100 @@
  ],
  "proof": [
   {
-   "text": "By [lem-weil-l-adic-extension-integers-dvr] and [lem-weil-valued-dvr-finite-quotients], $A$ is Noetherian and $P_n$ is finite torsion and perfect, using $[A\\xrightarrow{\\varpi^n}A]$. The coefficient isomorphisms preserve projections and composites [lem-weil-pbc-profinite-coefficient-inverse-image]. Products are exact [lem-weil-proetale-countable-products-exact]. Apply [lem-sbc-koszul-fibre-linear-descent] to the intrinsic model; complete objects are additive and completion is linear. Ordinary operations are linear by [lem-sbc-ambient-operations-scalar-linearity].",
+   "text": "Identify ordinary pullback with the exact inverse-image functor using its module isomorphism and uniqueness of left derived functors. Transport the actual completed-operation linearity and preservation results through the unit-normalized strict comparison; identify right adjoints by uniqueness.",
    "uses": [
-    "lem-weil-l-adic-extension-integers-dvr",
-    "lem-weil-valued-dvr-finite-quotients",
-    "lem-weil-pbc-profinite-coefficient-inverse-image",
-    "lem-sbc-koszul-fibre-linear-descent",
-    "lem-sbc-ambient-operations-scalar-linearity",
-    "def-weil-pbc-intrinsic-completion",
-    "lem-weil-proetale-countable-products-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebraization.tex",
-    "place": "Tag 0A0E, Koszul model"
-   }
-  },
-  {
-   "text": "Direct image preserves completeness [prop-weil-pbc-direct-image-limits]. Completed pullback is ordinary pullback followed by Koszul completion, with its completion unit [def-weil-pbc-completed-pullback]. The Koszul reflector [lem-weil-pbc-ringed-koszul-completion-reflector], identified with intrinsic completion by [lem-weil-pbc-constant-completion-equivalence], and ordinary adjunction [def-weil-pbc-proetale-operations] satisfy [lem-sbc-reflector-adjunction-unit-formulas]. Thus $P_u=C_UL_u\\dashv D_u$ is linear, with its specified unit and counit.",
-   "uses": [
-    "prop-weil-pbc-direct-image-limits",
-    "def-weil-pbc-completed-pullback",
-    "lem-weil-pbc-ringed-koszul-completion-reflector",
-    "lem-weil-pbc-constant-completion-equivalence",
-    "def-weil-pbc-proetale-operations",
-    "lem-sbc-reflector-adjunction-unit-formulas"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebraization.tex",
-    "place": "Tag 099K, completed adjunction"
-   }
-  },
-  {
-   "text": "Use direct-image composition [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] and ordinary pullback composition [lem-weil-pbc-proetale-derived-pullback-composition]. Derived conjugacy is [lem-sfb-derived-composition-adjunction-normalization]. Their conjugates give $P_vP_u\\cong P_{uv}$; [lem-sbc-reflected-compositor-unit-normalization] identifies their completion-unit normalization. The two paths of the square therefore give the normalized $\\theta$.",
-   "uses": [
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-    "lem-weil-pbc-proetale-derived-pullback-composition",
-    "lem-sbc-reflected-compositor-unit-normalization",
-    "lem-sfb-derived-composition-adjunction-normalization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 099N (2), composition"
-   }
-  },
-  {
-   "text": "The mate [def-weil-pbc-adjunction-mate] is the displayed $\\alpha$. Naturality of its three factors proves the stated equation. By [lem-sbc-reflector-square-mate-factorization] it is uniquely characterized by $\\alpha_K\\kappa_{L_fR_gK}=R_h(\\kappa_{L_eK})b_K$, where $b$ is the ambient mate.",
-   "uses": [
-    "def-weil-pbc-adjunction-mate",
-    "lem-sbc-reflector-square-mate-factorization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A7, ordinary transpose"
-   }
-  },
-  {
-   "text": "Every edge $u$ has invertible coefficient map [lem-weil-pbc-profinite-coefficient-inverse-image], so [lem-sbc-unbounded-exact-adjunction-square] applies on the small diagram sites [lem-weil-pbc-diagram-site-realization]: constants and evaluations identify the ordinary derived units, counits and square mates with the termwise ones.",
-   "uses": [
-    "lem-weil-pbc-diagram-site-realization",
-    "lem-sbc-unbounded-exact-adjunction-square",
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "prop-weil-pbc-scalar-extension",
     "lem-weil-pbc-profinite-coefficient-inverse-image"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 0DVC and 08BJ, constants and evaluation"
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 099N and 06YY; actual completed-operation interfaces."
    }
   },
   {
-   "text": "$A_W$ is flat with $A_W/\\varpi^n=(P_n)_W$ [lem-weil-pbc-constant-completion-equivalence], so $[A_W\\xrightarrow{\\varpi^n}A_W]$ makes $Q_{W,n}=(P_n)_W$ perfect. Apply [lem-sbc-strict-quotient-exchange-unit-equation] with step 5: $\\gamma=c^{-1}R\\lim(v)s$ has finite evaluations the $P_n$ mates and $\\gamma\\,\\mathrm{comp}_M=R_h(\\mathrm{comp}_E)b$. By [prop-weil-pbc-koszul-reconstruction], $\\mathrm{comp}=\\rho\\kappa$ with $\\rho$ the natural Koszul/quotient isomorphism, so $\\tilde\\gamma=R_h(\\rho_E^{-1})\\gamma\\rho_M$ satisfies the equation of step 4; its source and target are $P_fD_gK$, $D_hP_eK$ with the specified identifications [def-weil-pbc-completed-pullback], [prop-weil-pbc-direct-image-limits]. Reflector uniqueness gives $\\alpha=\\tilde\\gamma$, without faithfulness of evaluations.",
+   "text": "The actual completion-unit Hom bijection and ordinary pullback adjunction construct the complete-subcategory adjunction. Two successive unit Hom bijections construct the unique unit-normalized compositor and square isomorphism. The component units, square comparison and counit form a natural mate. Transposing under the ordinary adjunction proves the equation relating this mate to the ambient mate.",
    "uses": [
-    "lem-weil-pbc-constant-completion-equivalence",
-    "lem-sbc-strict-quotient-exchange-unit-equation",
-    "prop-weil-pbc-koszul-reconstruction",
-    "def-weil-pbc-completed-pullback",
-    "prop-weil-pbc-direct-image-limits"
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "lem-weil-pbc-proetale-derived-pullback-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 099K and 07A7; reflection and ordinary transposition."
+   }
+  },
+  {
+   "text": "Finite quotient complexes restricted to constant coefficients are complete because ideal sections act nilpotently. Restriction along the constant-to-completed ring map reflects local completeness. The scalar-preserving small-site coefficient equivalences and the Koszul-to-constant comparison carry this completeness back to the actual completed category. The reflection Hom bijection and the finite scalar adjunction then show that reduction of the completion unit induces bijections into every finite-coefficient object; coyoneda detects its invertibility.",
+   "uses": [
+    "lem-sf-completion-finite-reduction",
+    "lem-weil-pbc-flat-ringed-ideal-complete-equivalence",
+    "lem-weil-pbc-completed-constant-coefficient-equivalence",
+    "lem-weil-pbc-completed-koszul-constant-transport",
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "lem-weil-pbc-intrinsic-to-tower-complete",
+    "def-weil-pbc-completed-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 099M, 099N and 099C; nilpotent quotient and coefficient transport."
+   }
+  },
+  {
+   "text": "The ordinary finite pullback comparison is the existing scalar-adjunction mate. The finite-perfect projection formula gives invertibility of the specified direct-image mate. Apply the finite reduction pullback square and the generic exchange-mate cube to the ordinary integral and finite adjunctions. Substitute the completed/ordinary mate-unit equation, use naturality of the direct-image projection, and cancel the invertible reduced units. This is exactly the stated finite exchange rectangle.",
+   "uses": [
+    "def-weil-pbc-four-arrows",
+    "prop-weil-pbc-direct-image-limits",
+    "lem-weil-pbc-finite-reduction-pullback-square",
+    "lem-weil-pbc-exchange-mate-cube"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0E48, strict projection-formula and unit equation"
+    "place": "Tags 0E47 and 0E48; finite scalar comparisons, projection-formula compatibility, and mates."
+   }
+  },
+  {
+   "text": "The defining representative formula uniquely identifies the published constant/Rlim unit with the derived constant-limit adjunction unit. The unit-normalized intrinsic-to-strict pullback comparison and Koszul/quotient comparison give the source comparison with strict completion. The direct-image tower projection and direct-image/Rlim comparison give the target comparison, preserving its unit. Reflection uniqueness proves both uniqueness clauses and equality of the completed exchange with its strict-limit realization.",
+   "uses": [
+    "lem-weil-pbc-completed-quotient-unit-normalization",
+    "lem-weil-pbc-completed-koszul-quotient-comparison",
+    "def-weil-pbc-completed-pullback",
+    "prop-weil-pbc-direct-image-limits",
+    "lem-weil-pbc-ringed-koszul-completion-reflector"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 099M, 099N and 0941; specified strict units and projection comparisons."
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-l-adic-extension-integers-dvr",
-  "lem-weil-valued-dvr-finite-quotients",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "prop-weil-pbc-scalar-extension",
   "lem-weil-pbc-profinite-coefficient-inverse-image",
-  "lem-sbc-koszul-fibre-linear-descent",
-  "lem-sbc-ambient-operations-scalar-linearity",
-  "def-weil-pbc-intrinsic-completion",
-  "lem-weil-proetale-countable-products-exact",
-  "prop-weil-pbc-direct-image-limits",
-  "def-weil-pbc-completed-pullback",
-  "lem-weil-pbc-ringed-koszul-completion-reflector",
-  "lem-weil-pbc-constant-completion-equivalence",
-  "def-weil-pbc-proetale-operations",
-  "lem-sbc-reflector-adjunction-unit-formulas",
-  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
   "lem-weil-pbc-proetale-derived-pullback-composition",
-  "lem-sbc-reflected-compositor-unit-normalization",
-  "lem-sfb-derived-composition-adjunction-normalization",
-  "def-weil-pbc-adjunction-mate",
-  "lem-sbc-reflector-square-mate-factorization",
-  "lem-weil-pbc-diagram-site-realization",
-  "lem-sbc-unbounded-exact-adjunction-square",
-  "lem-sbc-strict-quotient-exchange-unit-equation",
-  "prop-weil-pbc-koszul-reconstruction"
+  "lem-sf-completion-finite-reduction",
+  "lem-weil-pbc-flat-ringed-ideal-complete-equivalence",
+  "lem-weil-pbc-completed-constant-coefficient-equivalence",
+  "lem-weil-pbc-completed-koszul-constant-transport",
+  "lem-weil-pbc-ringed-koszul-completion-reflector",
+  "lem-weil-pbc-intrinsic-to-tower-complete",
+  "def-weil-pbc-completed-pullback",
+  "def-weil-pbc-four-arrows",
+  "prop-weil-pbc-direct-image-limits",
+  "lem-weil-pbc-finite-reduction-pullback-square",
+  "lem-weil-pbc-exchange-mate-cube",
+  "lem-weil-pbc-completed-quotient-unit-normalization",
+  "lem-weil-pbc-completed-koszul-quotient-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Tag 099N (1)-(5), with Tags 099K, 0A0E, 0DVC, 07A7 and 0E48: six independent model/normalization lemmas extracted from the inherited argument; assembly only."
+  "place": "M9: actual-operation reflection, finite quotient completeness, ordinary mate cube, and unit-normalized strict completion comparison; Tags 099N, 099K, 099C, 07A7, 0E48 and 0941."
  },
  "mathlib_searches": [
   {
@@ -378,38 +356,13 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-l-adic-extension-integers-dvr",
   "lem-weil-pbc-profinite-coefficient-inverse-image",
   "lem-weil-pbc-ringed-koszul-completion-reflector",
   "lem-weil-pbc-constant-completion-equivalence",
   "prop-weil-pbc-direct-image-limits",
   "lemma-weil-pbc-completed-pullback-reduction",
   "lem-weil-pbc-proetale-derived-pullback-composition",
-  "lem-weil-pbc-diagram-site-realization",
-  "lem-weil-pbc-ringed-topoi-module-adjunction",
-  "lem-weil-pbc-ringed-topoi-derived-pullback",
-  "prop-pur-kinjective-resolutions-exist",
-  "lem-weil-pbc-kinjective-total-derived",
-  "lem-pc-pre-derived-adjoint-functors-general",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-pbc-ringed-exchange-tensor-coherence",
-  "lemma-weil-pbc-perfect-projection-formula",
-  "lem-weil-pbc-ring-sheaf-change-adjunction",
-  "prop-weil-pbc-rlim-functoriality",
-  "lem-weil-tower-evaluation-kinjective",
-  "lem-pc-kflat-resolution",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "lem-kun-derived-adjoint-square-comparison",
-  "lem-weil-valued-dvr-finite-quotients",
-  "lem-weil-linear-abelian-derived-category",
-  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-  "lem-weil-pbc-conjugate-iso-unit-equation",
-  "lem-weil-pbc-ordered-exchange-coefficient-comparison",
-  "lem-sp-completion-mate-comparison",
-  "prop-weil-pbc-koszul-reconstruction",
-  "lem-sbc-ambient-operations-scalar-linearity",
-  "lem-weil-proetale-countable-products-exact",
-  "lem-sfb-derived-composition-adjunction-normalization"
+  "lem-weil-pbc-ringed-topoi-module-adjunction"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -516,55 +469,13 @@
   "fixed_by": "NT-stage2-Codex-9b278db75"
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "C5",
+  "reviewer": "COMPILER",
+  "group": "M9",
   "result": "pass",
-  "landing": "20261019T002516-L-2144137",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "CategoryTheory.ScalarLocalization.betweenNat_naturality",
-   "CategoryTheory.ScalarLocalization.between_laws",
-   "WeilConjectures.pbcConstructibleInclusion_linear",
-   "WeilConjectures.sbcAdjunction_exists",
-   "WeilConjectures.sbcCoefficientComp",
-   "WeilConjectures.sbcCoefficientSquare",
-   "WeilConjectures.sbcCompletedCoefficientMap_isIso",
-   "WeilConjectures.sbcCompletedExchange_strictLimit",
-   "WeilConjectures.sbcCompletedOperations_linear_natural_exchange",
-   "WeilConjectures.sbcCompletionUnit_reduction_isIso",
-   "WeilConjectures.sbcExchange_naturality",
-   "WeilConjectures.sbcFiniteCoefficientSquare",
-   "WeilConjectures.sbcOperations_linear",
-   "WeilConjectures.sbcOperations_preserveComplete",
-   "WeilConjectures.sbcOrdinaryDerivedIso_exists",
-   "WeilConjectures.sbcOrdinaryModuleIso_naturality",
-   "WeilConjectures.sbcOrdinaryReductionMap_isIso",
-   "WeilConjectures.sbcProjectionSquare",
-   "WeilConjectures.sbcPullComp_exists",
-   "WeilConjectures.sbcReductionComparisons_isIso",
-   "WeilConjectures.sbcStrictSourceComparison_exists",
-   "WeilConjectures.sbcStrictTargetComparison_exists",
-   "WeilConjectures.sbcTheta_exists"
-  ],
-  "sorry_after": [
-   "WeilConjectures.sbcAdjunction_exists",
-   "WeilConjectures.sbcCoefficientComp",
-   "WeilConjectures.sbcCompletedExchange_strictLimit",
-   "WeilConjectures.sbcCompletedOperations_linear_natural_exchange",
-   "WeilConjectures.sbcCompletionUnit_reduction_isIso",
-   "WeilConjectures.sbcFiniteCoefficientSquare",
-   "WeilConjectures.sbcOperations_linear",
-   "WeilConjectures.sbcOperations_preserveComplete",
-   "WeilConjectures.sbcOrdinaryDerivedIso_exists",
-   "WeilConjectures.sbcOrdinaryReductionMap_isIso",
-   "WeilConjectures.sbcPullComp_exists",
-   "WeilConjectures.sbcReductionComparisons_isIso",
-   "WeilConjectures.sbcStrictSourceComparison_exists",
-   "WeilConjectures.sbcStrictTargetComparison_exists",
-   "WeilConjectures.sbcTheta_exists"
-  ]
+  "landing": "20261022T011904-L-3229687",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
