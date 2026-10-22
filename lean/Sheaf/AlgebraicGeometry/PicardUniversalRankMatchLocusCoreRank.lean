@@ -11,12 +11,11 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
-import Sheaf.AlgebraicGeometry.PicardUniversalSingleRankLocus
-import WeilConjectures.AlgebraicGeometry.PicardUniversalRankMatchSynchronization
+import Sheaf.AlgebraicGeometry.PicardUniversalRankMatchLocusFinitePresentationCore
 
 /-! # The immersion representing universal common-rank matching
 
-Intersect the two single-image rank loci and synchronize their local rank witnesses.
+Reuse the locally finitely presented rank-match locus and forget the extra property.
 Source: Stacks Project, Tag 0BDP.
 (blueprint: lem-sc-picard-universal-rank-match-locus-core-rank).
 -/
@@ -31,22 +30,15 @@ abbrev PicardUniversalRankMatchCoreCondition {X S T : Scheme.{u}} (f : X ⟶ S)
     (E : X.Modules) (g : T ⟶ S) : Prop :=
   PicardUniversalRankMatch f E g
 
-/-- Fix the rank of E before constructing the two direct-image loci of that same rank.
-Source: Stacks Project, Tag 0BDP, first three proof paragraphs.
+/-- The locally finitely presented rank-match locus also represents the core condition.
+Source: Stacks Project, Tags 0BDP, 0B91 and 0BDL.
 (blueprint: lem-sc-picard-universal-rank-match-locus-core-rank)
 
-The universal structure-pushforward hypothesis makes each fibre connected. The locally
-constant rank of E is therefore constant on each fibre. Flatness and finite presentation
-make f open, and properness makes f closed, so these ranks give open-and-closed base
-strata S_r. On S_r the pullback of E has rank r after every base change. Proper flat
-cohomology and base change give perfect direct-image complexes for E and its dual,
-concentrated in nonnegative degrees. Apply the lowest-cohomology rank-r locus construction
-to both complexes. Their fibre product represents the two universal direct-image rank-r
-conditions. It is an immersion, and the third rank clause holds on this stratum by
-construction. Conversely that clause fixes the same rank r, so a test morphism satisfying
-all three clauses factors through both loci locally. Uniqueness of factorization through
-an immersion glues these local maps. Finally glue the constructions over the disjoint
-open-and-closed strata. Empty test schemes satisfy both sides vacuously.
+Apply the existing construction of the universal rank-match locus, which gives an
+immersion locally of finite presentation without the structure-pushforward hypothesis.
+Retain its immersion and factorization equivalence and forget local finite presentation.
+The core condition is definitionally the same universal rank-match predicate, so this
+is exactly the required universal property, including empty test schemes and rank zero.
 -/
 theorem exists_picardUniversalRankMatchLocus_core_rank {X S : Scheme.{u}} (f : X ⟶ S)
     [Flat f] [IsProper f] [LocallyOfFinitePresentation f]
@@ -58,45 +50,9 @@ theorem exists_picardUniversalRankMatchLocus_core_rank {X S : Scheme.{u}} (f : X
     ∃ (W : Scheme.{u}) (j : W ⟶ S),
       IsImmersion j ∧ ∀ {T : Scheme.{u}} (g : T ⟶ S),
         (∃ h : T ⟶ W, h ≫ j = g) ↔ PicardUniversalRankMatchCoreCondition f E g := by
-  have : (Modules.dual E).IsFiniteLocallyFree := Modules.IsFiniteLocallyFree.dual E
-  obtain ⟨W₁, j₁, hj₁, hW₁⟩ := exists_picardUniversalSingleRankLocus f hO E E
-  obtain ⟨W₂, j₂, hj₂, hW₂⟩ :=
-    exists_picardUniversalSingleRankLocus f hO E (Modules.dual E)
-  have : IsImmersion j₁ := hj₁
-  have : IsImmersion j₂ := hj₂
-  let j : pullback j₁ j₂ ⟶ S := pullback.fst j₁ j₂ ≫ j₁
-  refine ⟨pullback j₁ j₂, j, inferInstance, ?_⟩
-  intro T g
-  change (∃ h : T ⟶ pullback j₁ j₂, h ≫ j = g) ↔ PicardUniversalRankMatch f E g
-  have hmatch : PicardUniversalRankMatch f E g ↔
-      PicardUniversalSingleRankMatch f E E g ∧
-        PicardUniversalSingleRankMatch f E (Modules.dual E) g := by
-    constructor
-    · intro hR
-      constructor
-      · intro T' h t
-        obtain ⟨U, ht, r, hE, _, hr⟩ := hR h t
-        exact ⟨U, ht, r, hE, hr⟩
-      · intro T' h t
-        obtain ⟨U, ht, r, _, hd, hr⟩ := hR h t
-        exact ⟨U, ht, r, hd, hr⟩
-    · rintro ⟨hE, hd⟩
-      exact picardUniversalRankMatch_of_singleRankMatch_without_unit f E g hE hd
-  rw [hmatch]
-  constructor
-  · rintro ⟨h, hh⟩
-    constructor
-    · exact (hW₁ g).mp ⟨h ≫ pullback.fst j₁ j₂, by
-        simpa only [Category.assoc] using hh⟩
-    · exact (hW₂ g).mp ⟨h ≫ pullback.snd j₁ j₂, by
-        rw [Category.assoc, ← pullback.condition]
-        exact hh⟩
-  · rintro ⟨h₁, h₂⟩
-    obtain ⟨a, ha⟩ := (hW₁ g).mpr h₁
-    obtain ⟨b, hb⟩ := (hW₂ g).mpr h₂
-    refine ⟨pullback.lift a b (ha.trans hb.symm), ?_⟩
-    dsimp only [j]
-    rw [← Category.assoc, pullback.lift_fst, ha]
+  have _ := @hO
+  obtain ⟨W, j, hj, _, hW⟩ := exists_picardUniversalRankMatchLocus_finitePresentation_core f E
+  exact ⟨W, j, hj, fun g ↦ hW g⟩
 
 /-- The corrected core condition and PicardUniversalRankMatch have identical definitions:
 both require the two direct images and the pulled-back E to have the same local rank
