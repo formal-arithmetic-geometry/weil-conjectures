@@ -24114,3 +24114,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:40 L: returned deliver/NC/lem-sfb-ultrametric-orthogonal-extension (reviewer RETURN: L: independent stage-2 immutable head a56281a0c322: A7/A6 (H2 credit): ninth NC head a56281a0c322 of an item NK already )
 - 00:40 L: returned deliver/N9/sk-thm-groth-ss (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-thm-groth-ss: sk-thm-groth-ss: completed in this pr)
 - 00:41 L: returned deliver/Q85/lem-weil-integral-twist-scalar-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-integral-twist-scalar-coherence: lem-weil-int)
+- 00:41 L: returned deliver/NK/lem-sfb-tame-snc-quotient-resolution (reviewer RETURN: C1/F + C5/B9 + G4. This is the 4th push of this item; NM 966655f0, NJ ca6120ce and NC 08353e52 were RETURNed for the sam)
