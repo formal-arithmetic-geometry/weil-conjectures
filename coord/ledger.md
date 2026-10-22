@@ -24306,3 +24306,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:15 L: returned deliver/N9/sk-thm-groth-ss (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-thm-groth-ss: sk-thm-groth-ss: completed in this pr)
 - 02:15 L: merged deliver/NO/lem-pur-diagonal-dnc-chart-normalization (stage 2; reviewer PASS; parallel immutable checks)
 - 02:17 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
+- 2026-10-22T02:20:01Z L: superseded stage-1 delivery NE/lem-pur-adic-projection-shift-coherence at 4caeb4e275841ac52b55c88d0e0677bf86e893d9; current completion retained; packet archived at refs/superseded/NE/lem-pur-adic-projection-shift-coherence/4caeb4e275841ac52b55c88d0e0677bf86e893d9; stale return retired.
