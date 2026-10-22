@@ -1,14 +1,16 @@
 # Work queue
 
-44 items; claim with `tools/claim.py next <group> [--stage N]`.
+45 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Rework: quarantined by the upstream sync (2 clusters, 298 modules)
+## Rework: quarantined by the upstream sync (4 clusters, 289 modules)
 
 Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.tsv). One item per cluster: its root (a quarantined module importing no other quarantined one) and the quarantined modules importing it; fix the root, then the dependents as far as possible, deliver every module that compiles.
 
 | item (root) | modules | other roots | cause of the root |
 |---|---|---|---|
 | `Sheaf.PoincareDuality.ProperProjectionFormulaBounded` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
+| `Sheaf.AlgebraicGeometry.ProperLocallyAcyclicSpecialization` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
+| `Sheaf.AlgebraicGeometry.PerfectOverlapHomContinuity` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.RelativelyFlatDerivedBaseChangeComplex` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 
 Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 53, stage 3 1 items.
@@ -38,7 +40,7 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 
 Not open yet: 369 nodes that below a finished node, not needed, 87 nodes that wait for a statement dependency (bottom-up), 7 nodes that wait for stage 1 (statement downstream not grounded).
 
-## Stage 3: modules to prove (23)
+## Stage 3: modules to prove (22)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -59,7 +61,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.ProjectionMateExact` | 3 | 1 | proof | 2 |
 | `Sheaf.Paper.PbcDescentFunctors` | - | 1 | proof | 2 |
 | `Sheaf.Paper.RingedProjectionRestriction` | 4 | 1 | proof | 3 |
-| `Sheaf.Paper.KFlatScalarComparisonNormalization` | - | 1 | proof | 3 |
 | `Sheaf.Algebra.Homology.RingedSliceNormalizedComparisons` | - | 1 | proof | 5 |
 | `Sheaf.Paper.CompletedPullbackReduction` | - | 1 | proof | 6 |
 | `Sheaf.Paper.PulledReductionNormalizationComparison` | - | 1 | proof | 7 |
