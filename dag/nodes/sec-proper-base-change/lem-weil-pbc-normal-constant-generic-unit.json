@@ -37,12 +37,10 @@
  },
  "proof": [
   {
-   "text": "Choose an affine open chart Spec R containing the image of a geometric point s. Its stalks are isomorphic to stalks of Y, so R is an integrally closed domain by the normal-stalk criterion. The chart description supplies a local strict-henselization ring C, a chart ring map, and an ind-etale R-algebra structure on C. Apply the official chart theorem at the full affine colimit and transport its ring map and maximal ideal through smallStrictHenselizationColimitIso. Its inverse leg equation and the two defining structural-map equations identify the transported structure map with the existing small-model structure map. Where ind-etaleness is used, apply the official chart ind-etale theorem with the spectrum of this comparison isomorphism.",
+   "text": "Choose an affine open chart Spec R containing the image of a geometric point s. Its stalks are isomorphic to stalks of Y, so R is an integrally closed domain by the normal-stalk criterion. The adopted chart maximal-ideal theorem supplies a local full strict-henselization ring C and a chart ring map whose spectrum followed by the chart immersion equals strictLocalizationToBase s. Apply the adopted affine-chart ind-etale theorem with the identity spectrum isomorphism to equip C with an ind-etale R-algebra structure. Work throughout with this full presentation.",
    "uses": [
     "lem-weil-pbc-strict-henselization-chart-maximal-ideal",
-    "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
-    "def-weil-pbc-strict-henselization-limit",
-    "def-weil-pbc-strict-henselization-structural-map"
+    "lem-weil-pbc-strict-henselization-affine-chart-ind-etale"
    ],
    "elementary": false,
    "source": {
@@ -71,7 +69,7 @@
    }
   },
   {
-   "text": "Base change Spec.map of smallStrictHenselizationColimitIso.inv to obtain an isomorphism from the small strict fibre to the adopted full strict fibre. The already proved private small_toBase equation supplies its square over Y. Its homeomorphism transports ConnectedSpace to the full fibre. The adopted full-model constant-strict-fibre comparison identifies the unit on each geometric stalk with the canonical coefficient map to sections on the strict fibre. The latter is invertible because that fibre is connected: transfer the abelian-group constant-section theorem through ModuleCat→AddCommGrpCat, using preserved sheafification and reflection of isomorphisms. The coefficient germ to the constant-sheaf stalk is invertible directly by the proved generic Point.toPresheafFiber_presheafFiberConstIso_hom and Point.isIso_presheafFiber_map_toSheafify_const API, combined with Point.toPresheafFiber_naturality. This uses the generic coefficient-category result, not the separate abelian-group-specific ConstantSheafGeometricStalk module. Cancel the coefficient germ and the strict-fibre comparison to prove the stalk unit invertible.",
+   "text": "The adopted full-model constant-strict-fibre comparison identifies the unit on each geometric stalk with the canonical coefficient map to sections on the connected strict fibre. The latter is invertible: transfer the abelian-group constant-section theorem through ModuleCat to AddCommGrpCat, using preserved sheafification and reflection of isomorphisms. The coefficient germ to the constant-sheaf stalk is invertible by the generic Point.toPresheafFiber_presheafFiberConstIso_hom and Point.isIso_presheafFiber_map_toSheafify_const API, combined with Point.toPresheafFiber_naturality. Cancel the coefficient germ and strict-fibre comparison to prove the stalk unit invertible. No small/full fibre transport is needed.",
    "uses": [
     "lem-weil-pbc-constant-strict-fibre-stalk-comparison",
     "lem-weil-pbc-constant-sheaf-sections-connected"
@@ -100,15 +98,13 @@
   "lem-weil-pbc-etale-colimit-normal-local-domain",
   "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
   "lem-weil-pbc-strict-henselization-chart-maximal-ideal",
-  "lemma-weil-pbc-geometric-stalk-conservative",
-  "def-weil-pbc-strict-henselization-limit",
-  "def-weil-pbc-strict-henselization-structural-map"
+  "lemma-weil-pbc-geometric-stalk-conservative"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
   "place": "Tag 09Z5; affine-chart normality and generic-fibre localization, followed by the canonical degree-zero module stalk comparison",
-  "note": " E3 retirement: use the official full affine chart results with explicit small-colimit transport; all consumer signatures and definitions are preserved. D3 retirement: the full-model constant stalk comparison is used directly after transporting connectedness along the base-changed small/full colimit isomorphism; all public and private theorem signatures are unchanged."
+  "note": "D2 retirement: follow the already proved adopted theorem directly on the full strictLocalizationToBase presentation. The mathematical statement and unit route are unchanged. The small-model comparison helpers of the withdrawn copy are unnecessary."
  },
  "mathlib_searches": [
   {
@@ -134,14 +130,15 @@
   }
  ],
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.NormalConstantGenericUnit",
-  "file": "lean/Sheaf/AlgebraicGeometry/NormalConstantGenericUnit.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.NormalConstantGenericUnit",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/NormalConstantGenericUnit.lean",
   "declaration": "AlgebraicGeometry.Etale.isIso_unit_constantSheaf_generic_unit",
   "statement": "theorem isIso_unit_constantSheaf_generic_unit (Λ : Type (u + 1)) [CommRing Λ] {Y : Scheme.{u}} [IsIntegral Y] (hY : ∀ y : Y, IsIntegrallyClosed (Y.presheaf.stalk y)) (M : ModuleCat.{u + 1} Λ) : IsIso ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) (Y.fromSpecStalk (genericPoint Y))).unit.app ((constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M))",
   "branch": "sheaf-dag",
-  "by": "Q3",
-  "date": "2026-10-14"
+  "by": "D2",
+  "date": "2026-10-22",
+  "note": "D2 retirement: the adopted theorem has exactly the same public signature and a complete proof. Its private geometric argument works directly with the full strictLocalizationToBase model. No consumer uses the small-model private helpers; the existing consumers already import the adopted module. The Sheaf duplicate is withdrawn and this mathematical node is retained."
  },
  "reviewed": {
   "date": "2026-10-14",
@@ -156,12 +153,12 @@
  "reviewed_proof": {
   "date": "2026-10-22",
   "by": "L",
-  "reviewer": "C-91ca5",
-  "group": "D3",
+  "reviewer": "C-e6582",
+  "group": "D2",
   "result": "pass",
-  "landing": "20261022T021026-L-163230",
+  "landing": "20261022T022948-L-766640",
   "kind": "interface",
-  "note": "independent cc review: Retired Sheaf copy (small strictHenselizationStructuralMap model) vs WC twin (strictLocalizationToBase, sig verbatim at WC line 112); consumer NormalConstantGenericUnit old vs delivered (all signatures identical, connectedness transported via base-changed smallStrictHenselizationColimitIso + small_toBase); 2 node diffs vs live; importer compiled rc 0, axioms clean"
+  "note": "independent cc review: Withdrawn Sheaf isIso_unit_constantSheaf_generic_unit vs adopted WC twin (signature verbatim, WC line 259); delivered node vs live node (proof steps 1/4, proof_deps, lean record) vs WC proof text; no Lean importers of the Sheaf module; axioms of WC theorem clean"
  },
  "lean_audit": {}
 }
