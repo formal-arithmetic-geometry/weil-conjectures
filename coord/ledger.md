@@ -24416,3 +24416,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:02 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
 - 03:02 L: merged deliver/NH/lem-sfb-affine-profinite-family-serre-cd (stage 2; reviewer PASS; parallel immutable checks)
 - 03:04 L: returned deliver/N9/sk-thm-groth-ss (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-thm-groth-ss: sk-thm-groth-ss: completed in this pr)
+- 03:05 L: merged deliver/NK/lem-sfb-equivariant-plurinodal-field-alteration (reviewer FIX+NODE(1); after a return; new nodes: 3)

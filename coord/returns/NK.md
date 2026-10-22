@@ -64,6 +64,3 @@ L: independent stage-2 immutable head a8dd21e96468: H13: the delivered §1(B) re
 
 (the landing tools, head 2fd4eeb76) the delivery did not land: (merge queue) your landing 20261021T154126-NK-2783326-18 was taken out of the candidate: the global build of dc04907e06 failed in Sheaf.Paper.IntegralStratumChartRestrictions Sheaf.Paper.PerAdicStratifiedPullbackTExact job job computation; this change is a possible cause
 
-## lem-sfb-equivariant-plurinodal-field-alteration (2026-10-22 02:54 UTC, branch head e636cf98205)
-
-L: approved by the reader, but the landing refused it: NOT MERGED lem-sfb-equivariant-plurinodal-field-alteration: fix dag/nodes/sec-six-functors-basics/lem-sfb-flat-geometrically-reduced-pullback.json: a reviewer-added node is statement-only: status unsplit, empty proof, a statement citing nodes, stmt_deps Rebase the delivery onto the current DAG, re-read every cited node that changed, adjust the split, and push again.

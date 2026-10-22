@@ -2,7 +2,7 @@
  "id": "lem-sfb-equivariant-plurinodal-field-alteration",
  "kind": "statement",
  "title": "Equivariant marked plurinodal alteration over a field",
- "statement": "Let $k$ be a field [def-weil-field], $X$ a normal proper geometrically integral finite-type $k$-scheme [def-pc-integral-scheme] [def-weil-proper-morphism] [def-pc-geometrically-irreducible] [def-weil-finite-type-morphism], and $Z\\subseteq X$ an invariant nowhere dense closed subset. Normal means that all local rings are integrally closed domains. Let a finite group $H$ act faithfully on $X$ by scheme automorphisms and on $k$ by field automorphisms, compatibly with the structure map. There are a finite extension $F/k$ [def-pc-field-extension] [def-pc-field-tower], a finite group $J$ with a surjection $\\rho:J\\to H$, an action on $F$ extending the $H$-action on $k$, a tower of integral schemes $T_d\\xrightarrow{f_d}\\cdots\\xrightarrow{f_1}T_0=\\operatorname{Spec}F$, with $d=\\dim X$, and a $J$-equivariant projective surjective generically finite morphism $a:T_d\\to X$ [def-trf-projective-bundle-morphism] [def-weil-surjective-morphism]. Each $f_i$ is projective, flat and finitely presented, has nonempty geometrically connected reduced one-dimensional fibres with only ordinary double points, and has smooth geometrically integral generic fibre. An ordinary double point has completed geometric local ring $\\Omega[[x,y]]/(xy)$. Each $f_i$ has finitely many disjoint sections $s_{i\\nu}$ in its relative smooth locus. Set $Z_0=\\varnothing$ and $Z_i=f_i^{-1}Z_{i-1}\\cup\\bigcup_\\nu s_{i\\nu}(T_{i-1})$ as closed sets. The map $f_i$ is smooth away from $Z_{i-1}$, and $a^{-1}Z\\subseteq Z_d$. The tower is $J$-equivariant, its unions of sections are stable, and it is split: the geometric components, nodes and two branches of each fibre descend to its residue field, and each base-point stabilizer acts trivially on the fibre's dual graph (vertices are components, edges are nodes, marked legs are sections). Writing $N=\\ker\\rho$, the extension $F^N/k$ is purely inseparable. There is a dense open $U\\subseteq X$ with $a^{-1}U\\to U$ finite surjective and with every geometric fibre a single $N$-orbit. Generically finite means finite over a dense open. The tower of length zero is $T_0=\\operatorname{Spec}F$. Flatness, finite presentation and smoothness use [def-weil-flat-morphism], [def-sbc-locally-finite-presentation] and [def-sbc-smooth-morphisms]; fibres, sections and finite morphisms use [def-weil-geometric-fibre], [def-weil-closed-immersion] and [def-weil-finite-integral-morphism]. Dimension is [def-kun-topological-krull-dimension].",
+ "statement": "Let $k$ be a field [def-weil-field], $X$ a normal proper geometrically integral finite-type $k$-scheme [def-pc-integral-scheme] [def-weil-proper-morphism] [def-pc-geometrically-irreducible] [def-weil-finite-type-morphism], and $Z\\subseteq X$ an invariant nowhere dense closed subset. Normal means that all local rings are integrally closed domains. Let a finite group $H$ act faithfully on $X$ by scheme automorphisms and on $k$ by field automorphisms, compatibly with the structure map. There are a finite extension $F/k$ [def-pc-field-extension] [def-pc-field-tower], a finite group $J$ with a surjection $\\rho:J\\to H$, an action on $F$ extending the $H$-action on $k$, a tower of integral schemes $T_d\\xrightarrow{f_d}\\cdots\\xrightarrow{f_1}T_0=\\operatorname{Spec}F$, with $d=\\dim X$, and a $J$-equivariant projective surjective generically finite morphism $a:T_d\\to X$ [def-trf-projective-bundle-morphism] [def-weil-surjective-morphism]. Each $f_i$ is projective, flat and finitely presented, has nonempty geometrically connected reduced one-dimensional fibres with only ordinary double points, and has smooth geometrically integral generic fibre. An ordinary double point has completed geometric local ring $\\Omega[[x,y]]/(xy)$. Each $f_i$ has finitely many disjoint sections $s_{i\\nu}$ in its relative smooth locus. Set $Z_0=\\varnothing$ and $Z_i=f_i^{-1}Z_{i-1}\\cup\\bigcup_\\nu s_{i\\nu}(T_{i-1})$ as closed sets. The map $f_i$ is smooth away from $Z_{i-1}$, and $a^{-1}Z\\subseteq Z_d$. The tower is $J$-equivariant, its unions of sections are stable, and it is quasi-split: every node of every fibre and its two inverse images in the normalization are rational over the residue field of the base point. The group may permute sections and fibre graphs; no triviality of stabilizer actions on marked legs is asserted. Writing $N=\\ker\\rho$, the extension $F^N/k$ is purely inseparable. There is a dense open $U\\subseteq X$ with $a^{-1}U\\to U$ finite surjective and with every geometric fibre a single $N$-orbit. Generically finite means finite over a dense open. The tower of length zero is $T_0=\\operatorname{Spec}F$. Flatness, finite presentation and smoothness use [def-weil-flat-morphism], [def-sbc-locally-finite-presentation] and [def-sbc-smooth-morphisms]; fibres, sections and finite morphisms use [def-weil-geometric-fibre], [def-weil-closed-immersion] and [def-weil-finite-integral-morphism]. Dimension is [def-kun-topological-krull-dimension].",
  "source": {
   "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
   "place": "X Lemma 2.2 proof, printed pp.149--150: the application of Vidal 2004b Proposition 4.4.3, before the successive applications of 4.4.4; retain the generic Galois/radicial condition (iii), equivalently geometric N-orbits over a dense open. No smoothness of the total T_i is asserted. Vidal primary article is WANTED locally."
@@ -25,9 +25,201 @@
   "def-weil-finite-integral-morphism",
   "def-kun-topological-krull-dimension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use strong induction on $d$, proving also the following strengthened form: the input finite group may act nonfaithfully; the map to $X$ is H-projective; and, for $N=\\ker(J\\to H)$, the finite extension of function fields satisfies $k(T_d)^N/k(X)$ purely inseparable. All schemes in the tower are finite type over their constant field. The dense-open orbit assertion will be deduced uniformly in the final steps. For $d=0$, the zero-dimensional properness lemma makes $X$ finite over $k$. Its coordinate ring is a finite field extension $L/k$. Geometric integrality forces $L=k$: a nontrivial separable part splits after algebraic closure, and a nontrivial purely inseparable part creates nilpotents. Take $F=k$, $J=H$, $a=\\mathrm{id}$ and the length-zero tower. Its boundary is empty, since a nowhere dense closed subset of a point is empty. All strengthened claims are immediate.",
+   "uses": [
+    "lem-pc-dim-zero-finite-over-field",
+    "def-pc-geometrically-irreducible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+    "place": "Theorem 5.9 proof, induction; zero-dimensional field case added explicitly"
+   }
+  },
+  {
+   "text": "For $d=1$, apply the one-curve reduction node with $C=X$, $Y=\\operatorname{Spec}k$ and $E=Z$. Its zero-dimensional clause gives $B=\\operatorname{Spec}e$ and $D=\\varnothing$. Set $F=e$, $J=G$, $T_1=V$ and $a=c$. The single marked nodal curve is smooth over $B$ because $D$ is empty, and its sections contain $a^{-1}Z$. The reduction node gives H-projectivity, the constant-field assertion $e^{\\ker\\alpha}/k$, and the strengthened function-field assertion $k(V)^{\\ker\\alpha}/k(X)$. Thus only the uniform dense-open verification remains for this case. Henceforth assume $d\\geq2$.",
+   "uses": [
+    "lem-sfb-equivariant-single-curve-nodal-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+    "place": "Theorem 5.9 proof, dimension-one case via Theorem 2.4 and Lemma 5.7"
+   }
+  },
+  {
+   "text": "Apply the equivariant curve-pencil node to obtain $\\pi:X'\\to X$ and $g:X'\\to Y$. The inverse image $E=\\pi^{-1}Z$ is invariant and nowhere dense: $\\pi$ is an isomorphism over a dense open and the generic point maps outside $Z$. Apply the one-curve reduction to $g,E$, obtaining $e,G,\\alpha,B,V,v,c,b,D$ and sections $s_j$. Here $Y$ has dimension $d-1$, $B$ is normal proper geometrically integral over $e$, and $\\dim_e B=d-1$: the alteration $B\\to Y$ is proper with finite function-field extension, so dimensions agree by the closed-dominant dimension lemma; replacing $k$ by the finite extension $e$ does not change chains of irreducible closed subsets. Write $A=\\ker\\alpha$. Retain $e^A/k$ and $k(V)^A/k(X')$ purely inseparable.",
+   "uses": [
+    "lem-sfb-equivariant-curve-pencil",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-trf-closed-dominant-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+    "place": "Theorem 5.9 proof, curve pencil and marked one-curve reduction"
+   }
+  },
+  {
+   "text": "Apply the strengthened induction hypothesis in dimension $d-1$ to the $e$-scheme $B$, the finite group $G$ and its invariant nowhere dense boundary $D$. This gives $F/e$, a surjection $\\beta:J\\to G$, an H-projective alteration $h:P\\to B$, and a marked quasi-split tower $P=T_{d-1}\\to\\cdots\\to T_0=\\operatorname{Spec}F$. Put $Q=\\ker\\beta$. The inductive data give $h^{-1}D\\subseteq Z_{d-1}$, $F^Q/e$ purely inseparable and $k(P)^Q/k(B)$ purely inseparable. This is the induction hypothesis, not an invocation of the present theorem in unchanged dimension. No faithfulness of $G$ on $B$ is required in the strengthened claim.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+    "place": "Theorem 5.9 proof, induction on the lower-dimensional base"
+   }
+  },
+  {
+   "text": "Define $T_d=V\\times_B P$, let $f_d:T_d\\to P$ be the projection and let $a$ be the composite $T_d\\to V\\xrightarrow c X'\\xrightarrow\\pi X$. The diagonal $J$-action is defined by its action on $P$ and its action through $\\beta$ on $V$; the fibre-product universal property gives its group law and equivariance. The base-change clauses of the one-curve node supply H-projectivity, flatness, finite presentation, nonempty connected reduced nodal geometric fibres, quasi-splitness, and smooth geometrically integral generic fibre for $f_d$. Dominance of $h$ ensures that this generic fibre is a field extension of the generic fibre of $v$. Pull back the sections $s_j$ to $P$; the identities $v s_j=\\mathrm{id}$ and pairwise disjointness persist in the cartesian square.",
+   "uses": [
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+    "place": "Theorem 5.9 proof, final fibre-product construction"
+   }
+  },
+  {
+   "text": "The ordinary fibre product $T_d=V\\times_B P$ is reduced. To check precisely the hypothesis of the flat geometrically reduced pullback lemma, fix any field $K$ and map $\\operatorname{Spec}K\\to B$. Choose an algebraic closure $\\Omega/K$. Apply the arbitrary-base-change clause of the one-curve node over K; its geometric-fibre clause makes $V\\times_B\\operatorname{Spec}\\Omega$ reduced. For every affine chart $\\operatorname{Spec}A$ in $V\\times_B\\operatorname{Spec}K$, its scalar extension has ring $A\\otimes_K\\Omega$. The map $A\\to A\\otimes_K\\Omega$ is injective: a $K$-linear functional $\\Omega\\to K$ sending $1$ to $1$, obtained by extending $1$ to a basis, gives a retraction after tensoring. A nilpotent of $A$ therefore vanishes, so the $K$-fibre is reduced. This is the elementary descent from algebraically closed fibres to the field-valued hypothesis actually stated by the pullback lemma. The base $P$ is reduced because it is integral. It is locally Noetherian by finite type over $F$ and the finite-type-over-Noetherian lemma; $\\operatorname{Spec}F$ is Noetherian since a field has only the ideals $0$ and $F$. Apply the pullback lemma with $h=v$, $Y=V$, $S=B$, $T=P$ and $T\\to S=h:P\\to B$; it requires flatness of $v$, supplied by the one-curve node, and imposes no flatness condition on $P\\to B$. The result $P\\times_B V$ is our $T_d$ by the symmetry of the fibre-product universal property.",
+   "uses": [
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-flat-geometrically-reduced-pullback",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean",
+    "place": "GeometricallyReduced definition, lines 41--46, and the pullback instance at lines 128--131; elementary field-extension descent written explicitly; de Jong Theorem 5.9 induction, printed p.617."
+   }
+  },
+  {
+   "text": "The same ordinary fibre product is integral. The affine flatness criterion and the flat-module torsion-free lemma make its generic fibre over $P$ schematically dense: on affine charts over a domain $R$, a flat algebra injects into its localization at $R\\setminus\\{0\\}$. If a nonempty affine basic open missed that fibre, its defining nonnilpotent element would become nilpotent after localization, contradicting this injection and reducedness. The generic fibre is integral by the one-curve node and dominance of $P\\to B$, so its closure is irreducible and is the whole space. Thus $T_d$ is integral. Put $K=k(B)$, $M=k(P)$ and $L=k(V)$. Geometric integrality of the generic fibre of $v$ says $L\\otimes_K M$ is a domain; since $M/K$ is finite, it is a finite-dimensional domain over $L$, hence a field. The affine fibre-product formula and localization identify it with the function field $k(T_d)$.",
+   "uses": [
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "def-pc-geometrically-irreducible",
+    "lem-sc-integral-function-field-affine-fraction",
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-trf-flat-module-torsionfree-domain",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+    "place": "Theorem 5.9 proof, verification of the fibre product; reducedness and generic density written out"
+   }
+  },
+  {
+   "text": "Let $Z_d=f_d^{-1}Z_{d-1}\\cup\\bigcup_j s'_j(P)$, with $s'_j$ the pulled-back sections. Pulling back $c^{-1}E\\subseteq v^{-1}D\\cup\\bigcup_j s_j(B)$ and using $h^{-1}D\\subseteq Z_{d-1}$ gives $a^{-1}Z\\subseteq Z_d$. Every point of $P\\setminus Z_{d-1}$ maps into $B\\setminus D$, so the smoothness clause of the one-curve node makes $f_d$ smooth there. The lower tower already has the same properties by induction. Section unions and the recursively defined boundaries are $J$-stable. Quasi-splitness is the residue-field rationality of nodes and their two branches, preserved by base change; it does not prohibit the group from permuting the sections.",
+   "uses": [
+    "lem-sfb-equivariant-single-curve-nodal-reduction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+    "place": "Situation 5.8 and Theorem 5.9(b), boundary and equivariance verification"
+   }
+  },
+  {
+   "text": "The projection $T_d\\to V$ is the base change of the H-projective surjection $h$. The base-change and composition lemmas make $a=\\pi c\\operatorname{pr}_V$ H-projective and surjective. This also makes it projective in the projective-bundle sense: use the free module $\\mathcal O_X^{n+1}$ in an H-projective embedding. The tensor calculation in the preceding step shows that $k(T_d)/k(V)$ is finite. The one-curve reduction gives $k(V)/k(X')$ finite, while $k(X')=k(X)$ by the pencil. Hence $k(T_d)/k(X)$ is finite. The same finite-field argument applies to the lower-dimensional inductive map, and all maps to which these permanence statements are applied have already been constructed.",
+   "uses": [
+    "lem-pc-projective-base-change",
+    "lem-trf-h-projective-composition",
+    "lem-weil-pbc-surjective-base-change",
+    "lem-trf-surjective-morphism-composition",
+    "def-trf-projective-bundle-morphism",
+    "lem-sfb-equivariant-curve-pencil",
+    "lem-sfb-equivariant-single-curve-nodal-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+    "place": "Theorem 5.9 proof, projectivity, surjectivity and generic finiteness; Stacks 01WE"
+   }
+  },
+  {
+   "text": "Set $E_0=M^Q$. In $k(T_d)=L\\otimes_K M$, the group $Q$ acts trivially on $L$. Apply the tensor-invariants node over the field $E_0$, with vector space $L\\otimes_K E_0$ and extension $M/E_0$. Associativity of tensor products gives $(L\\otimes_K M)^Q=L\\otimes_K E_0$. This subalgebra is a field (it is the fixed subfield of a field). It is purely inseparable over $L$: in characteristic $p>0$, take a common $p$-power sending the finitely many coefficients of an element in $L\\otimes_K E_0$ into $K$ and expand by Frobenius; in characteristic zero $E_0=K$. Put $N=\\ker(\\alpha\\beta)$. The surjection $N\\to A$ has kernel $Q$. For $z\\in k(T_d)^N$ a $p$-power lies in $L$ by the preceding calculation, and lies in $L^A$ since $z$ was $N$-fixed. A further $p$-power lies in $k(X')=k(X)$ by the one-curve node. This proves the strengthened generic assertion. The identical two-power argument with $F^Q/e$ and $e^A/k$ gives $F^N/k$ purely inseparable. In characteristic zero both arguments use the first power. This establishes the induction.",
+   "uses": [
+    "lem-weil-pbc-tensor-field-extension-galois-invariants",
+    "lem-sfb-equivariant-single-curve-nodal-reduction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+    "place": "Theorem 5.9(a), Remarks 2.3(iii)--(iv); tensor-invariant and kernel calculations written out"
+   }
+  },
+  {
+   "text": "It remains to obtain the dense open in every dimension, including the one-curve and length-zero cases. The scheme $X$ is Noetherian by finite type over a field. Choose a nonempty affine open $\\operatorname{Spec}R\\subseteq X$. The morphism $a$ is H-projective, hence projective, and its generic fibre is zero-dimensional because its function-field extension is finite. The projective-generically-finite lemma supplies a smaller nonempty affine open $U$ on which $a$ is finite. It remains surjective, since we restricted a surjective map on its target. Write $a^{-1}U=\\operatorname{Spec}S$, with $S$ finite over $R=\\mathcal O_X(U)$ and a domain, and let $K_X=\\operatorname{Frac}R$, $P_X=\\operatorname{Frac}S$. The subgroup $N$ fixes $X$ and $k$, so acts on this affine $k$-scheme over $U$. The finite quotient node applies with its orbit-in-an-affine hypothesis witnessed by the whole affine scheme. It gives $\\operatorname{Spec}(S^N)$ as quotient, geometric quotient fibres equal to $N$-orbits, and $S^N$ finite over $R$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-fin-projective-generically-finite",
+    "lem-sfb-admissible-finite-type-field-quotient",
+    "lem-sc-integral-function-field-affine-fraction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+    "place": "ILO X 2.2(iii), generic quotient verification; Stacks 03JE, 03BJ, 03BL via the cited quotient node"
+   }
+  },
+  {
+   "text": "We have $\\operatorname{Frac}(S^N)=P_X^N$. Indeed, for $x=s/t\\in P_X^N$, the nonzero denominator $b=\\prod_{n\\in N}n(t)$ lies in $S^N$, and $bx\\in S$ is invariant; hence $x=(bx)/b$. The finite-dimensional generic algebra $(S^N)\\otimes_RK_X$ is a domain, so is this fixed field, which the induction proved purely inseparable over $K_X$. Choose finitely many $R$-module generators $r_i$ of $S^N$. In characteristic $p$ choose a common $q=p^m$ with $r_i^q\\in K_X$; in characteristic zero take $q=1$. After inverting one nonzero $s\\in R$ all these powers lie in $R[1/s]$. Frobenius then gives $r^q\\in R[1/s]$ for every $r\\in(S^N)[1/s]$. Two homomorphisms from this algebra to any field agreeing on $R[1/s]$ agree on all elements, since $q$th roots in a field are unique. The field-valued criterion in the radicial node therefore makes $\\operatorname{Spec}(S^N)[1/s]\\to\\operatorname{Spec}R[1/s]$ universally injective.",
+   "uses": [
+    "def-weil-radicial-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+    "place": "ILO X 2.2(iii); Stacks 01S4; explicit invariant fractions and common-power localization"
+   }
+  },
+  {
+   "text": "Replace $U$ by $\\operatorname{Spec}R[1/s]$. For any geometric point of $U$, the intermediate quotient has at most one geometric point by universal injectivity. It has at least one because $a$ is surjective and factors through it. The geometric-fibre statement of the finite quotient node now says that the entire geometric fibre of $a^{-1}U\\to U$ is one $N$-orbit. The map is finite surjective by construction, and $U$ is dense because $X$ is integral. Together with the inductively constructed tower, boundary, constant extension and group surjection this proves every clause of the corrected statement.",
+   "uses": [
+    "lem-sfb-admissible-finite-type-field-quotient",
+    "def-weil-radicial-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+    "place": "ILO X 2.2(iii); final geometric orbit verification"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-dim-zero-finite-over-field",
+  "def-pc-geometrically-irreducible",
+  "lem-sfb-equivariant-single-curve-nodal-reduction",
+  "lem-sfb-equivariant-curve-pencil",
+  "lem-trf-closed-dominant-dimension",
+  "def-pc-fibre-product",
+  "lem-sfb-flat-geometrically-reduced-pullback",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-trf-flat-module-torsionfree-domain",
+  "lem-pc-projective-base-change",
+  "lem-trf-h-projective-composition",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-trf-surjective-morphism-composition",
+  "def-trf-projective-bundle-morphism",
+  "lem-weil-pbc-tensor-field-extension-galois-invariants",
+  "lem-fin-projective-generically-finite",
+  "lem-sfb-admissible-finite-type-field-quotient",
+  "def-weil-radicial-morphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "X Lemma 2.2 proof p.149; detailed dimension induction follows de Jong 1997 Theorem 5.9 proof pp.616--617, read online. Vidal 4.4.3 primary text remains WANTED. The false marked-leg clause is explicitly corrected."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -63,10 +255,45 @@
    "results": "OK 8 hits: WeierstrassCurve.IsGoodReduction, WeierstrassCurve.reduction, WeierstrassCurve.exists_isMinimal, WeierstrassCurve.minimal, IsGaloisGroup.to_isFractionRing, IsGaloisGroup.iff_isFractionRing, WeierstrassCurve.isGoodReduction_iff_isElliptic_reduction, Algebra.IsGeometricallyReduced",
    "date": "2026-10-22",
    "verdict": "no match: inspected the returned signatures; none constructs this scheme-theoretic object or gives a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An equivariant alteration of a proper geometrically integral variety is a tower of quasi-split marked nodal curves over a finite field extension with generically radicial kernel quotient",
+   "results": "{\"t\": \"2026-10-22T02:38:53Z\", \"tool\": \"leanfinder\", \"query\": \"An equivariant alteration of a proper geometrically integral variety is a tower of quasi-split marked nodal curves over a finite field extension with generically radicial kernel quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"WeierstrassCurve.IsIntegral.integral\", \"WeierstrassCurve.baseChange_integralModel_eq\", \"AlgebraicGeometry.isField_of_universallyClosed\", \"AlgebraicGeometry.IsIntegralHom\", \"WeierstrassCurve.isIntegral_iff\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.normalization\"], \"digest\": \"ddd1c3a2130e360c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read returned signatures; no equivariant curve construction or one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"nodal\"",
+   "results": "{\"t\": \"2026-10-22T02:38:52Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"nodal\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read returned signatures; no equivariant curve construction or one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "plurinodal|pluri.nodal|Vidal|de.Jong",
+   "results": "{\"t\": \"2026-10-22T02:38:52Z\", \"tool\": \"grep\", \"query\": \"plurinodal|pluri.nodal|Vidal|de.Jong\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read returned signatures; no equivariant curve construction or one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite group equivariant semistable alteration by successive projective families of curves with boundary sections",
+   "results": "{\"t\": \"2026-10-22T02:38:52Z\", \"tool\": \"leansearch\", \"query\": \"Finite group equivariant semistable alteration by successive projective families of curves with boundary sections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Finite.exists_type_univ_nonempty_mulEquiv\", \"IsGalois.of_fixed_field\", \"AlgebraicGeometry.IsFinite.instIsStableUnderCompositionScheme\", \"AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme\", \"IsGaloisGroup.fixedPoints\", \"SubAddAction.ofFixingAddSubgroup_equivariantMap\", \"MulAction.orbitProdStabilizerEquivGroup\", \"GroupExtension.Equiv.noConfusionType\"], \"digest\": \"b18ea93342249190\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read returned signatures; no equivariant curve construction or one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Galois alteration of a variety by a marked tower of semistable curves over a field",
+   "results": "{\"t\": \"2026-10-22T02:38:54Z\", \"tool\": \"leanfinder\", \"query\": \"Galois alteration of a variety by a marked tower of semistable curves over a field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsGaloisGroup.of_isFractionRing\", \"WeierstrassCurve.IsIntegral.integral\", \"WeierstrassCurve.Affine.Point.map_some\", \"WeierstrassCurve.baseChange_integralModel_eq\", \"IsGaloisGroup.to_isFractionRing\", \"AlgebraicGeometry.ValuativeCommSq.field\", \"WeierstrassCurve.Affine.Point.baseChange\", \"AlgebraicGeometry.isField_of_universallyClosed\"], \"digest\": \"eb18800ad786881a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read returned signatures; no equivariant curve construction or one-line specialization"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-equivariant-smooth-galois-model",
@@ -91,5 +318,119 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-equivariant-plurinodal-field-alteration",
+  "worker": "stage1",
+  "summary": "STATEMENT-DISPUTED: an algebraically closed-field P1 involution swapping two boundary points disproves trivial stabilizer action on marked legs. Corrected to the source quasi-split condition permitting permutations. Split by strong dimension induction using two relative geometric prerequisites; reused tensor invariants and finite quotient tools, with explicit kernel and radicial spreading calculations. No Lean written or compiled. Repair of the 2026-10-22 landing return: prove the field-valued pullback hypothesis in detail, explicitly prove elementary descent from geometric fibres to arbitrary field-valued fibres, and separate reducedness from the integral generic-fibre calculation. Rebased and re-read current quotient node; its statement is unchanged. Reviewer FIX (NK, 2026-10-22): step 6 cites the new statement-only node lem-sfb-flat-geometrically-reduced-pullback (Mathlib candidate Reduced.lean:128-131), since the older pullback node is off the live route.",
+  "blueprint": "Realizes det-thm-sf-ctf-stability-direct-images proof (3), through ILO X Lemma 2.2 marked plurinodal input before smooth-pair resolution. The existing ancestor command returns None; retain the live null ancestor and via chain.",
+  "tool_uses": [
+   {
+    "node": "def-pc-fibre-product",
+    "why": "Generic scheme or field-theory tool for the dimension induction, base change, finite quotient, or invariant calculation; the ILO marked-plurinodal route is unchanged."
+   },
+   {
+    "node": "def-pc-geometrically-irreducible",
+    "why": "Generic scheme or field-theory tool for the dimension induction, base change, finite quotient, or invariant calculation; the ILO marked-plurinodal route is unchanged."
+   },
+   {
+    "node": "def-trf-projective-bundle-morphism",
+    "why": "Generic scheme or field-theory tool for the dimension induction, base change, finite quotient, or invariant calculation; the ILO marked-plurinodal route is unchanged."
+   },
+   {
+    "node": "def-weil-radicial-morphism",
+    "why": "Generic scheme or field-theory tool for the dimension induction, base change, finite quotient, or invariant calculation; the ILO marked-plurinodal route is unchanged."
+   },
+   {
+    "node": "lem-fin-projective-generically-finite",
+    "why": "Generic scheme or field-theory tool for the dimension induction, base change, finite quotient, or invariant calculation; the ILO marked-plurinodal route is unchanged."
+   },
+   {
+    "node": "lem-pc-dim-zero-finite-over-field",
+    "why": "Generic scheme or field-theory tool for the dimension induction, base change, finite quotient, or invariant calculation; the ILO marked-plurinodal route is unchanged."
+   },
+   {
+    "node": "lem-pc-projective-base-change",
+    "why": "Generic scheme or field-theory tool for the dimension induction, base change, finite quotient, or invariant calculation; the ILO marked-plurinodal route is unchanged."
+   },
+   {
+    "node": "lem-sfb-flat-geometrically-reduced-pullback",
+    "why": "Generic scheme or field-theory tool for the dimension induction, base change, finite quotient, or invariant calculation; the ILO marked-plurinodal route is unchanged."
+   },
+   {
+    "node": "lem-sc-integral-function-field-affine-fraction",
+    "why": "Generic scheme or field-theory tool for the dimension induction, base change, finite quotient, or invariant calculation; the ILO marked-plurinodal route is unchanged."
+   },
+   {
+    "node": "lem-sfb-admissible-finite-type-field-quotient",
+    "why": "Generic scheme or field-theory tool for the dimension induction, base change, finite quotient, or invariant calculation; the ILO marked-plurinodal route is unchanged."
+   },
+   {
+    "node": "lem-trf-closed-dominant-dimension",
+    "why": "Generic scheme or field-theory tool for the dimension induction, base change, finite quotient, or invariant calculation; the ILO marked-plurinodal route is unchanged."
+   },
+   {
+    "node": "lem-trf-flat-module-torsionfree-domain",
+    "why": "Generic scheme or field-theory tool for the dimension induction, base change, finite quotient, or invariant calculation; the ILO marked-plurinodal route is unchanged."
+   },
+   {
+    "node": "lem-trf-h-projective-composition",
+    "why": "Generic scheme or field-theory tool for the dimension induction, base change, finite quotient, or invariant calculation; the ILO marked-plurinodal route is unchanged."
+   },
+   {
+    "node": "lem-trf-surjective-morphism-composition",
+    "why": "Generic scheme or field-theory tool for the dimension induction, base change, finite quotient, or invariant calculation; the ILO marked-plurinodal route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Generic scheme or field-theory tool for the dimension induction, base change, finite quotient, or invariant calculation; the ILO marked-plurinodal route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic scheme or field-theory tool for the dimension induction, base change, finite quotient, or invariant calculation; the ILO marked-plurinodal route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-flat-morphism-affine-criterion",
+    "why": "Generic scheme or field-theory tool for the dimension induction, base change, finite quotient, or invariant calculation; the ILO marked-plurinodal route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-surjective-base-change",
+    "why": "Generic scheme or field-theory tool for the dimension induction, base change, finite quotient, or invariant calculation; the ILO marked-plurinodal route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-tensor-field-extension-galois-invariants",
+    "why": "Generic scheme or field-theory tool for the dimension induction, base change, finite quotient, or invariant calculation; the ILO marked-plurinodal route is unchanged."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-pc-fibre-product",
+  "def-pc-geometrically-irreducible",
+  "def-trf-projective-bundle-morphism",
+  "def-weil-radicial-morphism",
+  "lem-fin-projective-generically-finite",
+  "lem-pc-dim-zero-finite-over-field",
+  "lem-pc-projective-base-change",
+  "lem-sfb-flat-geometrically-reduced-pullback",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-sfb-admissible-finite-type-field-quotient",
+  "lem-trf-closed-dominant-dimension",
+  "lem-trf-flat-module-torsionfree-domain",
+  "lem-trf-h-projective-composition",
+  "lem-trf-surjective-morphism-composition",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-weil-pbc-tensor-field-extension-galois-invariants"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NK-58cea7755",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-58cea7755 (reviewer sub-agent of L); spot-checked: Re-delivery of e636cf98, which I FIXed earlier. Its landing was refused because my reviewer leaf had status mathlib, and merge_delivery.py:468 accepts only status unsplit for reviewer-added nodes. This head keeps the same corrected statement and the same two new nodes (byte-identical JSON). The statement correction stands: the trivial stabilizer action on marked legs is false (P^1, x->-x, Z={+-1}, d=1) and is replaced by de Jong 1997 Situation 5.8 quasi-split; every other clause, including F^N/k purely inseparable and the geometric N-orbits over a dense open (ILO X 2.2(iii), pp.149-150), is kept. The pencil node is de Jong 5.2; the single-curve node is de Jong 2.4/2.5/5.5/5.7. Both are true, self-contained and not duplicates. I re-read all 13 steps. The new Step 6 correctly gets the field-valued reducedness hypothesis from reduced geometric fibres through A -> A tensor_K Omega, which has a K-linear retraction; P is reduced and locally Noetherian; v is flat (Mathlib Reduced.lean:128-131, read). Step 7 gives integrality from torsion-free generic density and the integral generic fibre, and L tensor_K M is a field. Steps 8-13 are unchanged and sound, and the quotient node's statement is unchanged after its split. Edge cases checked: d=0/1, Z empty, char 0, inseparable constants, nonfaithful action. Batch-5: closed-dominant-dimension (02JX), flat-module-torsionfree, h-projective-composition (01WE), surjective-composition (01RZ) and projective-generically-finite (closure only via generic 02UP finite-near) are generic scheme facts, not trace-formula or Poincare steps, so all are accepted. Artin-gabber finding: Step 6 again cites the dropped lem-per-flat-geometrically-reduced-pullback (drop list line 1585, unchanged since 10-19). It is a generic Mathlib fact, so the citation can be replaced. FIX: added the reviewer node lem-sfb-flat-geometrically-reduced-pullback as statement-only (status unsplit, empty proof, mathlib_candidate instIsReducedPullbackSchemeOfGeometricallyReducedOfFlatOfIsLocallyNoetherian_1, created.item=this item), and re-pointed the item's Step 6 uses, proof_deps and split_report.tool_uses to it. No dropped id remains, and the 594-node closure is free of drop-list ids. No SGA. Maintainer note: lem-sfb-equivariant-nodal-smooth-pair-resolution (galois-model Step 3) still assumes split curves with trivial stabilizers on legs and must be weakened to quasi-split.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
  }
 }
