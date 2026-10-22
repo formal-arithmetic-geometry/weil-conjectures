@@ -1,0 +1,110 @@
+{
+ "id": "def-pur-integral-ringed-projection-maps",
+ "kind": "definition",
+ "title": "Canonical integral ringed proper and compactification projection maps",
+ "status": "split",
+ "statement": "Fix a prime $\\ell$ and a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ [def-weil-l-adic-coefficient-extension]. For a scheme $W$, use the completed-coefficient derived category $\\mathcal I_W=D(W_{\\mathrm{proet}},\\widehat{\\mathcal O}_{E,W})$ and its tensor calculus [def-sf-integral-system-operations]. Fix the normalized ringed models $d$ and open comparisons $b$ of [def-sf-integral-system-canonical-bridge]; write $\\otimes_W$ for their ordinary derived tensor, $P_v$ for their ringed inverse image, $S_v$ for their ringed derived direct image with $P_v\\dashv S_v$, and $J_j$ for their ringed open extension. For a morphism $v:X\\to Y$ and arbitrary $M\\in\\mathcal I_X$, $N\\in\\mathcal I_Y$, define the ringed proper projection $\\pi_v:S_vM\\otimes_Y N\\to S_v(M\\otimes_XP_vN)$ to be the counit-defined right-adjoint projection mate of the canonical tensor/pullback comparison, as in [def-exchange-projection]. For a chosen compactification $c=(j:X\\hookrightarrow\\overline X,p:\\overline X\\to Y)$ of $f=pj$ [def-weil-compactifications-refinements], define the ringed compactification projection, for arbitrary $M\\in\\mathcal I_X$ and $N\\in\\mathcal I_Y$, by the composite $$S_pJ_jM\\otimes_YN\\xrightarrow{\\pi_p}S_p(J_jM\\otimes_{\\overline X}P_pN)\\xrightarrow{S_p(b_j)}S_pJ_j(M\\otimes_XP_jP_pN)\\xrightarrow{S_pJ_j(1\\otimes\\kappa)}S_pJ_j(M\\otimes_XP_fN),$$ where $b_j$ is the specified canonical open tensor comparison and $\\kappa:P_jP_p\\cong P_f$ is the inverse pullback compositor followed by the compactification equation. These definitions introduce the displayed canonical maps; they assert neither invertibility nor a realization theorem.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-sf-integral-system-operations",
+  "def-sf-integral-system-canonical-bridge",
+  "def-exchange-projection",
+  "def-weil-compactifications-refinements"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sf-exchanges/def-exchange-projection.md",
+  "place": "Final projection-transformation paragraphs: direct-image projection followed by the open tensor identification, specialized to the published localized integral ringed models."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical ringed derived proper projection mate and compactification projection map proper direct image open extension tensor pullback",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"isProperMap_fst_of_compactSpace\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_right\", \"AlgebraicGeometry.IsProper.instMorphismRestrict\", \"AlgebraicGeometry.pullbackSpecIso_inv_snd\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.pullbackConeOfLeft\", \"AlgebraicGeometry.pullbackSpecIso_inv_fst'\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_left\"]}",
+   "date": "2026-10-22",
+   "verdict": "no matching integral ringed projection definition"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.rightAdjointProjectionMap",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.Adjunction.rightAdjointProjectionMap'\", \"top\": []}",
+   "date": "2026-10-22",
+   "verdict": "no matching integral ringed projection definition"
+  },
+  {
+   "tool": "grep",
+   "query": "ringedCompactificationProjection|ringedProperProjection|compactificationProjection [Mathlib/CategoryTheory]",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-22",
+   "verdict": "no matching integral ringed projection definition"
+  },
+  {
+   "tool": "rg / blueprint_refs.py",
+   "query": "ringedCompactificationProjection|ringedProperProjection in dag/nodes, lean/WeilConjectures and lean/Sheaf; blueprint_refs.py search ringedCompactificationProjection; blueprint_refs.py search compactification projection",
+   "results": "DAG exact-name search finds only lem-sf-integral-compactification-system-realization, a theorem owner. Both exact definitions exist in Sheaf.SixFunctors.IntegralCompactificationSystemRealization, lines 130 and 161; no upstream exact definition. Blueprint exact-name search: 0 matches; conceptual search: def-sf-pf, det-sp-tower-shriek-levels, thm-sf-pf-adic (not owners of these maps).",
+   "date": "2026-10-22",
+   "verdict": "reuse the two published definitions with existing:true; new definition node required for their DAG ownership"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-adic-projection-shift-coherence",
+  "date": "2026-10-22",
+  "group": "NH"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Adic Step 2: the canonical proper/open projection used before completion conjugation and its second-input shift square.",
+   "via": [
+    "lem-pur-adic-projection-shift-coherence",
+    "lem-pur-adic-purity-scalar-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "module": "Sheaf.SixFunctors.IntegralCompactificationSystemRealization",
+  "declaration": "WeilConjectures.IntegralSystemRealization.ringedCompactificationProjection",
+  "declarations": [
+   "WeilConjectures.IntegralSystemRealization.ringedProperProjection",
+   "WeilConjectures.IntegralSystemRealization.ringedCompactificationProjection"
+  ],
+  "statement": "def ringedCompactificationProjection (d : RingedModels l E)\n    (a : RingedOpenComparisons l E d) {X Y : Scheme.{u}} {f : X ⟶ Y}\n    (cf : Compactification f) (M : Integral l E X) (N : Integral l E Y) :\n    (d.tensor Y).ordinary.tensor.obj\n      ((ringedPush l E cf.g).obj ((ringedOpen l E cf.i).obj M), N) ⟶\n    (ringedPush l E cf.g).obj ((ringedOpen l E cf.i).obj\n      ((d.tensor X).ordinary.tensor.obj (M, (ringedPull l E f).obj N)))",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "Owns the two plain canonical ringed projection definitions already published in the unchanged realization module. No use of integralCompactificationSystemRealization is needed to define either map. Added at the explicit request of return L, immutable head 3fe5bb70672f; no duplicate declaration or new Lean module."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7ce831e81",
+  "group": "NH",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7ce831e81",
+  "group": "NH",
+  "result": "pass",
+  "note": "Re-delivery of the 3fe5bb70 H2 return; the Lean module is byte-identical (sha a8d53e3d), so the earlier substance check stands (pinned canonical projection, hχ/hA/hPF as conclusions, consistent image.commShiftIso shift, signed second slot, proper/open constituent clauses, ∃! counit characterization, u/γ equations, edge cases, universes). All 3 corrections made: (1) lem-sf-constructible-exceptional-adjunction-coefficients → def-weil-exceptional-inverse-image (record unchanged from live); (2) lem-sf-integral-compactification-system-realization → new existing:true node def-pur-integral-ringed-projection-maps, whose statement is verbatim the live signature, whose prose matches both definition bodies and the main-20261015 def-exchange-projection source, which asserts no isomorphism, and which duplicates no owner; (3) def-sf-integral-system-operations (owner of calculus) added. Base stmt_deps kept in order; item lean.statement verbatim; no live landing of the item; the report has a Worker report and a Second reading by NH. No fix, so no compile."
+ }
+}
