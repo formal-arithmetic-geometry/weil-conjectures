@@ -1,0 +1,119 @@
+{
+ "id": "def-pur-strict-quotient-diagonal-presentation",
+ "kind": "definition",
+ "title": "Section-normalized ordinary strict quotient presentation",
+ "statement": "Let T be a small site, A a commutative ring and I an ideal. The constant and quotient ring sheaves on the vertical sequence site are the sequence rings of the constant A diagram and (A/I^(n+1)) [lem-pur-system-ringed-sequence-site]. A strict quotient diagonal presentation consists of their actual quotient ring map, the section-normalized equivalence between constant-ring sequence modules and module towers, the exact constant diagonal, scalar insertion x ↦ 1 tensor x, and the pure-tensor-normalized comparison with the quotient-reduction tower [def-pur-strict-quotient-completion-data]. Its derived restriction, diagonal, reduction and representative comparison use the standard derived categories and existing universal scalar extension [lem-pur-derived-change-of-rings]. The derived restriction and reduction are stored as model fields with defining equalities to the original composite functors; these redundant fields add no comparison hypothesis, since the composites themselves fill them with reflexive equations.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DA and 03EK; sites-cohomology.tex Tags 0940 and 06YN; ordinary steps 1, 2 and 5 of the strict quotient normalization auxiliary."
+ },
+ "stmt_deps": [
+  "lem-pur-system-ringed-sequence-site",
+  "def-pur-strict-quotient-completion-data",
+  "lem-pur-derived-change-of-rings",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-kflat-complex"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Vertical sequence-site calculation in the proof of the parent auxiliary, steps 1, 2 and 5."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sheaves of modules on the inverse-sequence site have componentwise tensor products and their constant diagonal preserves flat modules and K-flat complexes",
+   "results": "PresheafOfModules.Monoidal.tensorObj; Module.Flat.iff_rTensor_preserves_shortComplex_exact; SheafOfModules; PresheafOfModules.Monoidal.tensorHom; SheafOfModules.free; other module flatness results",
+   "date": "2026-10-21",
+   "verdict": "No sequence-site sheafification, normalized quotient presentation, or diagonal K-flatness theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.const, CategoryTheory.Equivalence",
+   "results": "Limits.Cocone.equivStructuredArrow; Limits.Cone.equivCostructuredArrow; WithInitial.equivComma; WithTerminal.equivComma",
+   "date": "2026-10-21",
+   "verdict": "Only generic comma-category equivalences; none constructs a ringed sequence-site module equivalence."
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*KFlat|KFlat.*constant|diagonal.*flat",
+   "results": "10 unrelated hits in WeaklyEtale and NatAntidiagonal",
+   "date": "2026-10-21",
+   "verdict": "No match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.StrictQuotientDiagonalNormalization",
+  "date": "2026-10-21",
+  "group": "C4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Coefficient-extension independence: ordinary strict quotient and diagonal model, parent auxiliary proof steps 1, 2 and 5.",
+   "via": [
+    "lem-pur-strict-quotient-diagonal-normalization",
+    "lem-pur-compact-support-completed-projection-coherence",
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "lem-pur-adic-purity-scalar-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.StrictQuotientDiagonalPresentation",
+  "file": "lean/Sheaf/Paper/StrictQuotientDiagonalPresentation.lean",
+  "declaration": "CategoryTheory.ConstantCompletion.StrictQuotientDiagonalPresentation",
+  "statement": "structure StrictQuotientDiagonalPresentation",
+  "branch": "sheaf-dag",
+  "by": "C4",
+  "date": "2026-10-21",
+  "declarations": [
+   "CategoryTheory.ConstantCompletion.strictQuotientTowerHasDerived",
+   "CategoryTheory.ConstantCompletion.strictDiagonalRing",
+   "CategoryTheory.ConstantCompletion.strictQuotientRing",
+   "CategoryTheory.ConstantCompletion.StrictQuotientDiagonalPresentation",
+   "CategoryTheory.ConstantCompletion.StrictQuotientDiagonalPresentation.restriction",
+   "CategoryTheory.ConstantCompletion.StrictQuotientDiagonalPresentation.diagonalD",
+   "CategoryTheory.ConstantCompletion.StrictQuotientDiagonalPresentation.restrictionD",
+   "CategoryTheory.ConstantCompletion.StrictQuotientDiagonalPresentation.reductionD",
+   "CategoryTheory.ConstantCompletion.StrictQuotientDiagonalPresentation.representative",
+   "CategoryTheory.ConstantCompletion.fourComparisons",
+   "CategoryTheory.ConstantCompletion.fourComparisons_app",
+   "CategoryTheory.ConstantCompletion.StrictQuotientDiagonalPresentation.representativeTransformation",
+   "CategoryTheory.ConstantCompletion.StrictQuotientDiagonalPresentation.representative_isIso_of_comparison",
+   "CategoryTheory.ConstantCompletion.StrictQuotientDiagonalPresentation.restrictionDIso",
+   "CategoryTheory.ConstantCompletion.StrictQuotientDiagonalPresentation.reductionDIso"
+  ],
+  "note": "Original ordinary presentation data moved from the parent module. The derived definitions retain the same functors: restrictionD uses the definitionally equal mapDerivedCategory scalar restriction. The representative is the component of the canonical natural comparison, with an explicit identity functor associator and identity complex-composition isomorphisms. fourComparisons_app gives its generic four-square component formula; representative_isIso_of_comparison proves the invertibility API. The strictDiagonalRing and strictQuotientRing constructors retain their original bodies as named defs instead of abbreviations, so the derived proof can keep their data abstract."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-1ed5d",
+  "group": "C4",
+  "result": "fix",
+  "landing": "20261022T022026-L-429503",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-1ed5d",
+  "group": "C4",
+  "result": "fix",
+  "landing": "20261022T022026-L-429503",
+  "kind": "interface",
+  "note": "independent cc review: item lem-pur-strict-quotient-diagonal-normalization proof (1/1 sorry closed, axioms clean) + moved presentation module (fields pinned by defining equalities, representative = old formula up to identities) + 2 new proved nodes + forced 2-line eqToIso adaptation of unclaimed PerfectQuotientExchangeNormalization, all compiled in sandbox /tmp/c4sqdn against the live build"
+ }
+}

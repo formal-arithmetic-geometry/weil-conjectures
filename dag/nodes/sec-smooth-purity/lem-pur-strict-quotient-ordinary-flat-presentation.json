@@ -1,0 +1,134 @@
+{
+ "id": "lem-pur-strict-quotient-ordinary-flat-presentation",
+ "kind": "statement",
+ "title": "Ordinary strict quotient presentation and diagonal flatness",
+ "statement": "Let T be a small site, A a commutative ring and I an ideal. There exists a section-normalized strict quotient diagonal presentation d [def-pur-strict-quotient-diagonal-presentation] such that, for every K-flat complex P of sheaves of A-modules [def-pc-kflat-complex] with flat terms [def-pc-flat-sheaf-modules], its termwise diagonal d(Delta P) is K-flat on the constant-ring sequence site, and every term d(Delta P^q) is flat. This asserts only the ordinary normalized scalar model and diagonal flatness; it asserts no derived comparison, augmentation, limit, or completion-unit identity.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DA and 03EK; sites-cohomology.tex Tags 0940 and 06YN; ordinary steps 1, 2 and 5 of the strict quotient normalization auxiliary."
+ },
+ "stmt_deps": [
+  "def-pur-strict-quotient-diagonal-presentation",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules"
+ ],
+ "proof": [
+  {
+   "text": "Use the canonical normalized equivalence from constant-ring sequence modules to ordinary towers for the tower field. Assemble the quotient coefficient cone into the map of sequence ring sheaves. Reassembly of the constant module tower under the existing strict-system equivalence defines the diagonal; its section restrictions and maps are the original module sections. Its kernels and cokernels are computed componentwise, hence it is additive and exact. Store the derived restriction and reduction as their canonical composites, with reflexive defining equalities. These fields save the displayed functors and introduce no derived comparison assumption.",
+   "uses": [
+    "lem-pur-system-ringed-sequence-site",
+    "lem-pur-constant-sequence-module-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Sheafification on the vertical sequence site is performed on each slice. Transitions extend uniquely across the sheafification units, and uniqueness proves their composition and naturality. The universal property is checked slice by slice. Consequently scalar extension of the diagonal has nth slice A/I^(n+1) tensor M, with the actual quotient transitions. The ordinary scalar adjunction supplies insertion. The sheafification units send every local pure tensor to itself, giving the normalized reduction comparison.",
+   "uses": [
+    "lem-weil-pbc-module-sheafification-restriction",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-pur-system-ringed-sequence-site"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Projection of the sequence site to the base is continuous and cocontinuous, and precomposition is its exact algebraic inverse image. Apply the ringed-topos K-flat pullback theorem to this inverse image followed by extension along the identity. The normalized scalar adjunction unit identifies identity extension with the identity functor. Transport the resulting K-flatness and termwise flatness along this natural isomorphism. The argument permits zero rings, zero or unit ideals, empty sites and unbounded complexes.",
+   "uses": [
+    "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "lem-pur-system-scalar-coherence",
+    "lem-pur-system-scalar-model"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-constant-sequence-module-equivalence",
+  "lem-pur-system-ringed-sequence-site",
+  "lem-pur-system-scalar-coherence",
+  "lem-pur-system-scalar-model",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-module-sheafification-restriction",
+  "lem-weil-pbc-ringed-topos-kflat-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Vertical sequence-site calculation in the proof of the parent auxiliary, steps 1, 2 and 5."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sheaves of modules on the inverse-sequence site have componentwise tensor products and their constant diagonal preserves flat modules and K-flat complexes",
+   "results": "PresheafOfModules.Monoidal.tensorObj; Module.Flat.iff_rTensor_preserves_shortComplex_exact; SheafOfModules; PresheafOfModules.Monoidal.tensorHom; SheafOfModules.free; other module flatness results",
+   "date": "2026-10-21",
+   "verdict": "No sequence-site sheafification, normalized quotient presentation, or diagonal K-flatness theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.const, CategoryTheory.Equivalence",
+   "results": "Limits.Cocone.equivStructuredArrow; Limits.Cone.equivCostructuredArrow; WithInitial.equivComma; WithTerminal.equivComma",
+   "date": "2026-10-21",
+   "verdict": "Only generic comma-category equivalences; none constructs a ringed sequence-site module equivalence."
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*KFlat|KFlat.*constant|diagonal.*flat",
+   "results": "10 unrelated hits in WeaklyEtale and NatAntidiagonal",
+   "date": "2026-10-21",
+   "verdict": "No match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.StrictQuotientDiagonalNormalization",
+  "date": "2026-10-21",
+  "group": "C4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Coefficient-extension independence: ordinary strict quotient and diagonal model, parent auxiliary proof steps 1, 2 and 5.",
+   "via": [
+    "lem-pur-strict-quotient-diagonal-normalization",
+    "lem-pur-compact-support-completed-projection-coherence",
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "lem-pur-adic-purity-scalar-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.StrictQuotientOrdinaryFlatPresentation",
+  "file": "lean/Sheaf/Paper/StrictQuotientOrdinaryFlatPresentation.lean",
+  "declaration": "CategoryTheory.ConstantCompletion.strictQuotientOrdinaryFlatPresentation",
+  "statement": "theorem strictQuotientOrdinaryFlatPresentation\n    :\n    ∃ d : StrictQuotientDiagonalPresentation J A I,\n      ∀ P : Cx (constant J A),\n        CochainComplex.IsKFlatIndependentCoefficients (R := constant J A) P →\n        (∀ q : ℤ, SheafOfModules.IsFlatOnSite (J := J) (R := constant J A) (P.X q)) →\n        CochainComplex.IsKFlatIndependentCoefficients (R := strictDiagonalRing J A)\n          ((d.diagonal.mapHomologicalComplex (.up ℤ)).obj P) ∧\n        (∀ q : ℤ, SheafOfModules.IsFlatOnSite\n          (J := WeilConjectures.coefficientSequenceTopology J)\n          (R := strictDiagonalRing J A) (d.diagonal.obj (P.X q)))",
+  "branch": "sheaf-dag",
+  "by": "C4",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-1ed5d",
+  "group": "C4",
+  "result": "fix",
+  "landing": "20261022T022026-L-429503",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-1ed5d",
+  "group": "C4",
+  "result": "fix",
+  "landing": "20261022T022026-L-429503",
+  "kind": "interface",
+  "note": "independent cc review: item lem-pur-strict-quotient-diagonal-normalization proof (1/1 sorry closed, axioms clean) + moved presentation module (fields pinned by defining equalities, representative = old formula up to identities) + 2 new proved nodes + forced 2-line eqToIso adaptation of unclaimed PerfectQuotientExchangeNormalization, all compiled in sandbox /tmp/c4sqdn against the live build"
+ }
+}

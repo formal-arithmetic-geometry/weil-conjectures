@@ -132,6 +132,7 @@ def reductionComparison (d : StrictQuotientDiagonalPresentation T.topology A I)
     d.reductionD.obj ((Q (T.ring A)).obj P) ⟶
       (Q (strictQuotientRing T.topology A I)).obj
         (((reduction0 d).mapHomologicalComplex (.up ℤ)).obj P) :=
+  d.reductionDIso.hom.app ((Q (T.ring A)).obj P) ≫
   (extend d.ringMap).map (d.diagonal.mapDerivedCategoryFactors.hom.app P) ≫
     (extendComparison d.ringMap).app ((d.diagonal.mapHomologicalComplex (.up ℤ)).obj P)
 
@@ -142,6 +143,7 @@ def restrictionComparison (d : StrictQuotientDiagonalPresentation T.topology A I
     (P : CochainComplex (Modules T A I) ℤ) :
     d.restrictionD.obj ((Q (strictQuotientRing T.topology A I)).obj P) ⟶
       (TQ (T.ring A)).obj ((d.restriction.mapHomologicalComplex (.up ℤ)).obj P) :=
+  d.restrictionDIso.hom.app ((Q (strictQuotientRing T.topology A I)).obj P) ≫
   d.towers.functor.mapDerivedCategory.map
       ((res d.ringMap).mapDerivedCategoryFactors.hom.app P) ≫
     d.towers.functor.mapDerivedCategoryFactors.hom.app

@@ -1,0 +1,118 @@
+{
+ "id": "lem-pur-constant-sequence-module-equivalence",
+ "kind": "statement",
+ "title": "Constant-ring sequence modules are ordinary module towers",
+ "statement": "Let T be a small site and O a sheaf of commutative rings on it [def-weil-sheaf-of-modules-category]. Modules over the sequence ring of the constant O diagram [lem-pur-system-ringed-sequence-site] are additively equivalent to inverse sequences of O-module sheaves. The equivalence retains the literal section modules, vertical restriction maps, horizontal transition maps and components of module morphisms, under the index convention n in N.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0940, the constant-ring case of the vertical sequence-site calculation; sites-modules.tex Tag 03DA; Zheng Construction 4.1."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "lem-pur-system-ringed-sequence-site"
+ ],
+ "proof": [
+  {
+   "text": "In a constant coefficient system every coefficient transition is the identity, so restriction of scalars is definitionally the original module. Send a strict semilinear system to its levels and transitions as an ordinary inverse-sequence functor. The strict identity and composition equations give its functor laws. Conversely the map_id and map_comp laws of a tower give the strict system laws; naturality is exactly the morphism commutation equation.",
+   "uses": [
+    "def-pur-system-level-left-extension-basic"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Identity level maps give the unit and counit of the equivalence between these two system categories. Their naturality and the triangle identity are componentwise identities. Compose with the existing sequence-site/strict-system equivalence. The sections and vertical restrictions are literal. For horizontal transitions the two linear maps have the same underlying function; their scalar structures agree since the coefficient map is the identity. Equality after restriction along that identity proves the required heterogeneous equality. Module morphism formulas are literal, and componentwise addition proves additivity.",
+   "uses": [
+    "lem-pur-system-ringed-sequence-site",
+    "lem-pur-system-evaluation-topos"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-system-level-left-extension-basic",
+  "lem-pur-system-evaluation-topos",
+  "lem-pur-system-ringed-sequence-site"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Explicit constant-coefficient specialization of the strict-system equivalence used in parent proof step 1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sheaves of modules on the inverse-sequence site have componentwise tensor products and their constant diagonal preserves flat modules and K-flat complexes",
+   "results": "PresheafOfModules.Monoidal.tensorObj; Module.Flat.iff_rTensor_preserves_shortComplex_exact; SheafOfModules; PresheafOfModules.Monoidal.tensorHom; SheafOfModules.free; other module flatness results",
+   "date": "2026-10-21",
+   "verdict": "No sequence-site sheafification, normalized quotient presentation, or diagonal K-flatness theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.const, CategoryTheory.Equivalence",
+   "results": "Limits.Cocone.equivStructuredArrow; Limits.Cone.equivCostructuredArrow; WithInitial.equivComma; WithTerminal.equivComma",
+   "date": "2026-10-21",
+   "verdict": "Only generic comma-category equivalences; none constructs a ringed sequence-site module equivalence."
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*KFlat|KFlat.*constant|diagonal.*flat",
+   "results": "10 unrelated hits in WeaklyEtale and NatAntidiagonal",
+   "date": "2026-10-21",
+   "verdict": "No match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.StrictQuotientDiagonalNormalization",
+  "date": "2026-10-21",
+  "group": "C4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Coefficient-extension independence: the constant-ring sequence-site realization in parent auxiliary proof step 1.",
+   "via": [
+    "lem-pur-strict-quotient-diagonal-normalization",
+    "lem-pur-compact-support-completed-projection-coherence",
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "lem-pur-adic-purity-scalar-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ConstantSequenceModuleEquivalence",
+  "file": "lean/Sheaf/Paper/ConstantSequenceModuleEquivalence.lean",
+  "declaration": "CategoryTheory.ConstantCompletion.constantSequenceModuleEquivalence",
+  "statement": "theorem constantSequenceModuleEquivalence :\n    ∃ E : Mod (SheafOfModules.systemSequenceRing.{u, u, u} (J := J) ((Functor.const ℕᵒᵖ).obj O)) ≌\n        (ℕᵒᵖ ⥤ Mod O),\n      E.functor.Additive ∧\n      (∀ (M : Mod (SheafOfModules.systemSequenceRing.{u, u, u} (J := J)\n          ((Functor.const ℕᵒᵖ).obj O)))\n        (n : ℕ) (U : Cᵒᵖ),\n        HEq (((E.functor.obj M).obj (op n)).val.obj U) (M.val.obj (op (n, U.unop)))) ∧\n      (∀ (M : Mod (SheafOfModules.systemSequenceRing.{u, u, u} (J := J)\n          ((Functor.const ℕᵒᵖ).obj O)))\n        (n : ℕ) {U V : Cᵒᵖ} (f : U ⟶ V),\n        HEq (((E.functor.obj M).obj (op n)).val.map f)\n          (M.val.map (Prod.mkHom (𝟙 n) f.unop).op)) ∧\n      (∀ (M : Mod (SheafOfModules.systemSequenceRing.{u, u, u} (J := J)\n          ((Functor.const ℕᵒᵖ).obj O)))\n        {m n : ℕ} (h : m ≤ n) (U : Cᵒᵖ),\n        HEq (((E.functor.obj M).map (homOfLE h).op).val.app U)\n          (M.val.map (Prod.mkHom (homOfLE h) (𝟙 U.unop)).op)) ∧\n      (∀ {M N : Mod (SheafOfModules.systemSequenceRing.{u, u, u} (J := J)\n          ((Functor.const ℕᵒᵖ).obj O))}\n        (f : M ⟶ N) (n : ℕ) (U : Cᵒᵖ),\n        HEq (((E.functor.map f).app (op n)).val.app U) (f.val.app (op (n, U.unop))))",
+  "branch": "sheaf-dag",
+  "by": "C4",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-1ed5d",
+  "group": "C4",
+  "result": "fix",
+  "landing": "20261022T022026-L-429503",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-1ed5d",
+  "group": "C4",
+  "result": "fix",
+  "landing": "20261022T022026-L-429503",
+  "kind": "interface",
+  "note": "independent cc review: item lem-pur-strict-quotient-diagonal-normalization proof (1/1 sorry closed, axioms clean) + moved presentation module (fields pinned by defining equalities, representative = old formula up to identities) + 2 new proved nodes + forced 2-line eqToIso adaptation of unclaimed PerfectQuotientExchangeNormalization, all compiled in sandbox /tmp/c4sqdn against the live build"
+ }
+}
