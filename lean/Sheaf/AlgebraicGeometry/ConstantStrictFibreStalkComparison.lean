@@ -7,8 +7,10 @@ module
 
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMap
-import Sheaf.AlgebraicGeometry.QcqsStrictLocalModuleComparison
+import WeilConjectures.AlgebraicGeometry.QcqsStrictLocalModuleComparison
 import all WeilConjectures.AlgebraicGeometry.ConstantModulePushforwardFunctoriality
+import Sheaf.AlgebraicGeometry.EtaleUnitSectionRestriction
+import Sheaf.AlgebraicGeometry.SmallStrictLocalSectionMaps
 
 /-! # Degree-zero strict-local stalk comparison for constant coefficients
 
@@ -77,6 +79,8 @@ private theorem coefficient_two_pullbacks
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
+set_option backward.defeqAttrib.useBackward true in
+set_option maxRecDepth 2048 in
 /-- The canonical degree-zero strict-local stalk comparison for constant coefficients
 carries the unit applied to a coefficient to the same constant section on the strict fibre.
 Source: Stacks Project, Tag 03Q9, degree zero and its restriction construction,
@@ -134,7 +138,60 @@ theorem constant_strict_fibre_stalk_comparison
   let CY := (constantSheaf Y.smallEtaleTopology A).obj M
   let F := (upperStar A f).obj CY
   let H := (upperStar A p).obj F
-  obtain ⟨Θ, hΘ⟩ := exists_qcqsStrictLocalModuleComparison Λ f s F
+  obtain ⟨Θ₀, hΘ₀⟩ := exists_qcqsStrictLocalModuleComparison Λ f s F
+  let ps := pullback.fst f (Scheme.strictHenselizationStructuralMap s)
+  let pb := pullback.fst f (Scheme.strictLocalizationToBase s)
+  let τ := pullback.map f (Scheme.strictHenselizationStructuralMap s)
+    f (Scheme.strictLocalizationToBase s) (𝟙 X)
+    (Spec.map (Scheme.smallStrictHenselizationColimitIso s).inv) (𝟙 Y)
+    (by simp) (by simpa using (Scheme.smallStrictLocalization_toBase s).symm)
+  have : IsIso τ := by dsimp [τ]; infer_instance
+  have hp : ps = τ ≫ pb := by simp [τ, ps, pb]
+  let eΓ := globalSectionsUpperStarIso (ModuleCat.{u + 1} Λ) τ
+    ((upperStar (ModuleCat.{u + 1} Λ) pb).obj F) ≪≫
+    (Sheaf.Γ _ (ModuleCat.{u + 1} Λ)).mapIso
+      (((upperStarComp (ModuleCat.{u + 1} Λ) τ pb ps hp).app F).symm)
+  let Θ := Θ₀ ≪≫ eΓ
+  have hΘ (j : SmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)) :
+      (Scheme.pointSmallEtale s).toPresheafFiber
+        ((Scheme.AffineEtale.Spec Y).obj
+          ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).1)
+        ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).2
+        ((lowerStar (ModuleCat.{u + 1} Λ) f).obj F).obj ≫ Θ.hom =
+      unitSectionRestriction Λ ps F
+        (f.Etale.obj ((Scheme.AffineEtale.Spec Y).obj
+          ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).1))
+        ((pullbackSymmetry f (Scheme.strictHenselizationStructuralMap s)).hom ≫
+          Scheme.smallStrictHenselizationBaseChangeMap f s j)
+        (by
+          change _ ≫ pullback.snd _ f =
+            pullback.fst f (Scheme.strictHenselizationStructuralMap s)
+          simp only [Category.assoc, Scheme.smallStrictHenselizationBaseChangeMap_snd,
+          pullbackSymmetry_hom_comp_snd]) := by
+    have hj := hΘ₀ j
+    have hu : qcqsStrictLocalSectionRestriction Λ f s F j =
+        unitSectionRestriction Λ pb F
+          (f.Etale.obj ((Scheme.AffineEtale.Spec Y).obj
+            ((equivSmallModel.{u}
+              (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).1))
+          ((pullbackSymmetry f (Scheme.strictLocalizationToBase s)).hom ≫
+            Scheme.strictHenselizationBaseChangeMap f s j)
+          (by
+            change _ ≫ pullback.snd _ f = pullback.fst f (Scheme.strictLocalizationToBase s)
+            simp [Scheme.strictHenselizationBaseChangeMap, Category.assoc]) := by rfl
+    rw [hu] at hj
+    simp only [Θ, Iso.trans_hom]
+    rw [reassoc_of% hj]
+    change unitSectionRestriction Λ pb F _ _ _ ≫
+      globalSectionsUpperStarMap (ModuleCat.{u + 1} Λ) τ _ ≫
+        (Sheaf.Γ _ (ModuleCat.{u + 1} Λ)).map
+          ((upperStarComp (ModuleCat.{u + 1} Λ) τ pb ps hp).inv.app F) = _
+    rw [unitSectionRestriction_comp]
+    congr 1
+    simp only [Scheme.smallStrictHenselizationBaseChangeMap]
+    simp only [← Category.assoc]
+    congr 1
+    apply pullback.hom_ext <;> simp [τ, Category.assoc]
   let ec : H ≅ (constantSheaf Z.smallEtaleTopology A).obj M :=
     (upperStar A p).mapIso ((Scheme.upperStarConstantSheafIso A f).app M) ≪≫
       (Scheme.upperStarConstantSheafIso A p).app M
@@ -168,7 +225,18 @@ theorem constant_strict_fibre_stalk_comparison
     erw [← hw, ← Category.assoc, ← he]
   let ηf := (upperStarLowerStarAdjunction A f).unit.app CY
   let ηp := (upperStarLowerStarAdjunction A p).unit.app F
-  let σ := qcqsStrictLocalNeighbourhoodSection f s j
+  let σ := etaleSectionGraph
+    (pullback.fst f (Scheme.strictHenselizationStructuralMap s))
+    (f.Etale.obj ((Scheme.AffineEtale.Spec Y).obj
+      ((equivSmallModel.{u}
+        (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).1))
+    ((pullbackSymmetry f (Scheme.strictHenselizationStructuralMap s)).hom ≫
+      Scheme.smallStrictHenselizationBaseChangeMap f s j)
+    (by
+      change _ ≫ pullback.snd _ f =
+        pullback.fst f (Scheme.strictHenselizationStructuralMap s)
+      simp only [Category.assoc, Scheme.smallStrictHenselizationBaseChangeMap_snd,
+        pullbackSymmetry_hom_comp_snd])
   have hΓ := (Sheaf.ΓNatIsoSheafSections Z.smallEtaleTopology A hT).hom.naturality ec.hom
   change (Sheaf.Γ Z.smallEtaleTopology A).map ec.hom ≫ es.hom =
     (Sheaf.ΓNatIsoSheafSections Z.smallEtaleTopology A hT).hom.app H ≫

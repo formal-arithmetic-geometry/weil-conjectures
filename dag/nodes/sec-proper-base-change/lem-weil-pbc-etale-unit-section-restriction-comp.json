@@ -1,0 +1,137 @@
+{
+ "id": "lem-weil-pbc-etale-unit-section-restriction-comp",
+ "kind": "statement",
+ "title": "Functoriality of unit restriction along an arbitrary étale lift",
+ "statement": "Let $X,Z,W$ be schemes [def-weil-pbc-scheme-conventions], $p:Z\\to X$, $q:W\\to Z$, and $g:W\\to X$ with $g=p\\circ q$. Fix a commutative ring $\\Lambda$, a sheaf $F$ of $\\Lambda$-modules on $X_{et}$ [def-weil-pbc-etale-sheaves], an étale object $U\\to X$, and a lift $v:Z\\to U$ over $X$. Define $\\delta_v:Z\\to U\\times_X Z$ by $(v,1_Z)$ using the fibre product [def-pc-fibre-product]. Define $r(p,F,U,v):F(U)\\to\\Gamma(Z,p^{-1}F)$ by the inverse-image adjunction unit [def-weil-pbc-inverse-image] at $U$, restriction along $\\delta_v$, and inverse terminal evaluation. Then $r(p,F,U,v)$ followed by the global inverse-image map along $q$ and the canonical composition identification $q^{-1}p^{-1}F\\cong g^{-1}F$ equals $r(g,F,U,v\\circ q)$. Here the global inverse-image map is the same unit construction as [def-weil-pbc-finite-section-pullback], for arbitrary $q$. There are no qcqs, properness, geometric-point, or invertibility assumptions.",
+ "source": {
+  "document": "literature/stacks-project/topologies.tex",
+  "place": "Lemma Tag 021J (lemma-composition-etale), using sites.tex Lemma Tag 03CB (lemma-composition-morphisms-sites) and categories.tex Lemma Tag 0B65; formal unit and terminal-evaluation calculation, as in etale-cohomology.tex Tag 03Q9 (theorem-higher-direct-images)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-pc-fibre-product",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-finite-section-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Express the global inverse-image map via the unit evaluated at the identity étale object and its terminal lift. Terminal uniqueness and naturality of terminal evaluation prove this formula from the definition.",
+   "uses": [
+    "def-weil-pbc-finite-section-pullback",
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Move the first graph restriction through the second adjunction unit by naturality. The canonical composition comparison is the isomorphism of left adjoints compatible with the composed units; its unit equation (upperStarComp_hom_app_unit_app in the adopted source Coherence module) gives the displayed composite-unit equation, after cancelling its inverse. Evaluate at U and move the comparison through the restriction by naturality. This is a formal consequence of the adjunction definition, not any strict-local comparison theorem.",
+   "uses": [
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The remaining composite of the terminal lift, the pullback of the graph, and the iterated-fibre-product comparison has first projection q followed by v and second projection the identity. Pullback extensionality identifies it with the graph for q followed by v. Cancel terminal evaluation and its inverse. The same equations include empty schemes and the zero coefficient ring.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-finite-section-pullback",
+  "def-weil-pbc-inverse-image",
+  "def-pc-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/topologies.tex",
+  "place": "Lemma Tag 021J (lemma-composition-etale), using sites.tex Lemma Tag 03CB (lemma-composition-morphisms-sites) and categories.tex Lemma Tag 0B65; formal unit and terminal-evaluation calculation, as in etale-cohomology.tex Tag 03Q9 (theorem-higher-direct-images)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Transport module sheaf global sections and adjunction unit restriction along a scheme isomorphism",
+   "results": "Eight hits on GammaSpec and scheme module restriction; no étale section transport formula.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "globalSectionsUpperStarMap",
+   "results": "unknown identifier 'globalSectionsUpperStarMap'; no hits",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "unitSectionRestriction|sectionGraph|globalSectionsUpperStarMap",
+   "results": "msearch: zero hits; local source search finds globalSectionsUpperStarIso, the inverse-image composition unit equation, and specialized strict-local formulas, but no general lift restriction theorem.",
+   "date": "2026-10-22",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse image adjunction unit restriction of etale sheaf sections is compatible with composition of scheme maps",
+   "results": "Eight hits, including TopCat.Presheaf.pushforwardPullbackAdjunction_unit_pullback_map_germToPullbackStalk and Scheme.Modules.restrictAdjunction_unit_app_app; these do not state the small étale site formula.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.QcqsStrictLocalModuleComparison",
+  "date": "2026-10-22",
+  "group": "H2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-proper-underived-exchange",
+   "place": "degree-zero comparison on the strict-local pullback, canonical restrictions from pointed neighbourhoods; formal pullback functoriality in its qcqs comparison",
+   "via": [
+    "lem-weil-pbc-qcqs-strict-local-module-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleUnitSectionRestriction",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleUnitSectionRestriction.lean",
+  "declaration": "AlgebraicGeometry.Etale.unitSectionRestriction_comp",
+  "declarations": [
+   "AlgebraicGeometry.Etale.etaleSectionGraph",
+   "AlgebraicGeometry.Etale.unitSectionRestriction",
+   "AlgebraicGeometry.Etale.unitSectionRestriction_comp"
+  ],
+  "statement": "theorem unitSectionRestriction_comp (Λ : Type (u + 1)) [CommRing Λ] {X Z W : Scheme.{u}} (q : W ⟶ Z) (p : Z ⟶ X) (g : W ⟶ X) (hg : g = q ≫ p) (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (U : X.Etale) (v : Z ⟶ U.left) (hv : v ≫ U.hom = p) : unitSectionRestriction Λ p F U v hv ≫ globalSectionsUpperStarMap (ModuleCat.{u + 1} Λ) q ((upperStar (ModuleCat.{u + 1} Λ) p).obj F) ≫ (Sheaf.Γ _ (ModuleCat.{u + 1} Λ)).map ((upperStarComp (ModuleCat.{u + 1} Λ) q p g hg).inv.app F) = unitSectionRestriction Λ g F U (q ≫ v) (by rw [Category.assoc, hv, ← hg])",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-22"
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-8f877",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261022T013415-L-3565988",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-8f877",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261022T013415-L-3565988",
+  "kind": "interface",
+  "note": "independent cc review: retired Sheaf copy (small strictHenselizationStructuralMap model) vs WC twin (strictLocalizationToBase) and retire-items row 2802; 4 restated consumer signatures vs old ones (defeq; unchanged proofs unfold to old form); 9 node lean.statements vs Lean (verbatim); downstream public envs for new Sheaf/WC twin pairs (none); sandbox compile of delivery + importers NormalConstantGenericUnit, ProperGeometricPointExchange (all rc 0), axioms clean"
+ }
+}

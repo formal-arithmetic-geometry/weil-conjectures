@@ -1,7 +1,9 @@
 module
 
 public import WeilConjectures.AlgebraicGeometry.GeometricFibreExchangeGerms
-public import Sheaf.AlgebraicGeometry.QcqsStrictLocalModuleComparison
+public import WeilConjectures.AlgebraicGeometry.QcqsStrictLocalModuleComparison
+public import Sheaf.AlgebraicGeometry.EtaleUnitSectionRestriction
+public import Sheaf.AlgebraicGeometry.SmallStrictLocalSectionMaps
 import Sheaf.AlgebraicGeometry.StrictHenselizationCompatibility
 import Sheaf.Paper.StrictHenselizationPointedMap
 import Sheaf.AlgebraicGeometry.StrictHenselizationClosedFiberComparison
@@ -62,7 +64,18 @@ theorem exists_integralStrictLocalFibreComparison
       ((g')^*[ModuleCat.{u + 1} Λ].obj F).obj.obj
         (op (Scheme.Etale.mk (𝟙 X'))),
       ∀ j : SmallModel.{u} (strictHenselizationNeighbourhoods s),
-        qcqsStrictLocalSectionRestriction Λ f s F j ≫ e.hom =
+        unitSectionRestriction Λ
+          (pullback.fst f (Scheme.strictHenselizationStructuralMap s)) F
+          (f.Etale.obj ((Scheme.AffineEtale.Spec Y).obj
+            ((equivSmallModel.{u}
+              (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).1))
+          ((pullbackSymmetry f (Scheme.strictHenselizationStructuralMap s)).hom ≫
+            Scheme.smallStrictHenselizationBaseChangeMap f s j)
+          (by
+            change _ ≫ pullback.snd _ f =
+              pullback.fst f (Scheme.strictHenselizationStructuralMap s)
+            simp only [Category.assoc, Scheme.smallStrictHenselizationBaseChangeMap_snd,
+              pullbackSymmetry_hom_comp_snd]) ≫ e.hom =
           geometricFibreSectionRestriction Λ sq.toCommSq F
             ((AffineEtale.Spec Y).obj
               ((equivSmallModel.{u} (strictHenselizationNeighbourhoods s)).inverse.obj j).1)

@@ -5,8 +5,10 @@ Authors: SHEAF group P1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.QcqsStrictLocalModuleComparison
+public import WeilConjectures.AlgebraicGeometry.QcqsStrictLocalModuleComparison
 public import WeilConjectures.SixFunctors.BaseChange.Square
+public import Sheaf.AlgebraicGeometry.EtaleUnitSectionRestriction
+public import Sheaf.AlgebraicGeometry.SmallStrictLocalSectionMaps
 import WeilConjectures.AlgebraicGeometry.GeometricFibreExchangeRepresentative
 import Sheaf.AlgebraicGeometry.StrictLocalSectionPullback
 
@@ -102,7 +104,24 @@ theorem strictLocal_exchange_compatibility
         (ModuleCat.{u + 1} Λ)).obj
         ((upperStar (ModuleCat.{u + 1} Λ)
           (pullback.fst f (Scheme.strictHenselizationStructuralMap s))).obj F))
-    (ha : IsQcqsStrictLocalModuleComparison Λ f s F a) :
+    (ha : ∀ j : SmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s),
+      (Scheme.pointSmallEtale s).toPresheafFiber
+        ((Scheme.AffineEtale.Spec Y).obj
+          ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).1)
+        ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).2
+        ((lowerStar (ModuleCat.{u + 1} Λ) f).obj F).obj ≫ a =
+      unitSectionRestriction Λ
+        (pullback.fst f (Scheme.strictHenselizationStructuralMap s)) F
+        (f.Etale.obj ((Scheme.AffineEtale.Spec Y).obj
+          ((equivSmallModel.{u}
+            (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).1))
+        ((pullbackSymmetry f (Scheme.strictHenselizationStructuralMap s)).hom ≫
+          Scheme.smallStrictHenselizationBaseChangeMap f s j)
+        (by
+          change _ ≫ pullback.snd _ f =
+            pullback.fst f (Scheme.strictHenselizationStructuralMap s)
+          simp only [Category.assoc, Scheme.smallStrictHenselizationBaseChangeMap_snd,
+            pullbackSymmetry_hom_comp_snd])) :
     let H := (upperStar (ModuleCat.{u + 1} Λ)
       (pullback.fst f (Scheme.strictHenselizationStructuralMap s))).obj F
     (Scheme.pointSmallEtale (𝟙 (Spec (.of Ω)))).sheafFiber.map

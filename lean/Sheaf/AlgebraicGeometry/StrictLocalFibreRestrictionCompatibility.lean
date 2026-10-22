@@ -6,7 +6,9 @@ Authors: SHEAF group J1
 module
 
 public import WeilConjectures.AlgebraicGeometry.GeometricFibreExchangeGerms
-public import Sheaf.AlgebraicGeometry.QcqsStrictLocalModuleComparison
+public import WeilConjectures.AlgebraicGeometry.QcqsStrictLocalModuleComparison
+public import Sheaf.AlgebraicGeometry.EtaleUnitSectionRestriction
+public import Sheaf.AlgebraicGeometry.SmallStrictLocalSectionMaps
 import Sheaf.AlgebraicGeometry.StrictLocalSectionPullback
 
 /-! # Compatibility of the constructed strict-local fibre restriction
@@ -77,7 +79,18 @@ theorem strictLocalFibreRestriction_compatibility
     (hi' : i ≫ pullback.snd f (strictHenselizationStructuralMap s) = f' ≫ t)
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     (j : SmallModel.{u} (strictHenselizationNeighbourhoods s)) :
-    qcqsStrictLocalSectionRestriction Λ f s F j ≫ strictLocalFibreRestriction Λ i hi F =
+    unitSectionRestriction Λ
+      (pullback.fst f (Scheme.strictHenselizationStructuralMap s)) F
+      (f.Etale.obj ((Scheme.AffineEtale.Spec Y).obj
+        ((equivSmallModel.{u}
+          (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).1))
+      ((pullbackSymmetry f (Scheme.strictHenselizationStructuralMap s)).hom ≫
+        Scheme.smallStrictHenselizationBaseChangeMap f s j)
+      (by
+        change _ ≫ pullback.snd _ f =
+          pullback.fst f (Scheme.strictHenselizationStructuralMap s)
+        simp only [Category.assoc, Scheme.smallStrictHenselizationBaseChangeMap_snd,
+          pullbackSymmetry_hom_comp_snd]) ≫ strictLocalFibreRestriction Λ i hi F =
       geometricFibreSectionRestriction Λ sq F
         ((AffineEtale.Spec Y).obj
           ((equivSmallModel.{u} (strictHenselizationNeighbourhoods s)).inverse.obj j).1)

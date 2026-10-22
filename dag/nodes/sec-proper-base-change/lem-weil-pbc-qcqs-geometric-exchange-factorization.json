@@ -20,6 +20,15 @@
  ],
  "proof": [
   {
+   "text": "Obtain the official full-presentation comparison. Base change Spec.map of the canonical small/full ring-colimit isomorphism to get an isomorphism over X. Compose the official comparison with globalSectionsUpperStarIso and the inverse-image composition isomorphism. The general unitSectionRestriction_comp equation transports each germ formula; pullback extensionality shows that base change commutes with symmetry and hence identifies the transported full-model leg with the small-model leg. All subsequent objects and the displayed conclusion remain in the original small presentation.",
+   "uses": [
+    "lem-weil-pbc-qcqs-strict-local-module-comparison",
+    "def-weil-pbc-small-strict-local-section-maps",
+    "lem-weil-pbc-etale-unit-section-restriction-comp"
+   ],
+   "elementary": false
+  },
+  {
    "text": "Use strictHenselizationResidue with the geometric residue-field algebra structure. Construct t explicitly as Spec of the residue map followed by the residue-field equivalence and inclusion into Ω. PrimeSpectrum.comap_comp and IsLocalRing.PrimeSpectrum.comap_residue give t(default)=closedPoint. The residue theorem gives tρ=s and all pointed-neighbourhood equations.",
    "uses": [
     "lem-weil-pbc-strict-henselization-functoriality"
@@ -63,8 +72,10 @@
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-strict-henselization-functoriality",
   "lem-weil-pbc-qcqs-strict-local-module-comparison",
+  "def-weil-pbc-small-strict-local-section-maps",
+  "lem-weil-pbc-etale-unit-section-restriction-comp",
+  "lem-weil-pbc-strict-henselization-functoriality",
   "lem-weil-pbc-strict-local-exchange-compatibility"
  ],
  "proof_origin": {
@@ -129,7 +140,8 @@
   "declarations": [
    "AlgebraicGeometry.Etale.qcqs_geometricExchange_factorization",
    "AlgebraicGeometry.Etale.geometricPointGlobalGerm"
-  ]
+  ],
+  "note": "H2: retire the specialized Sheaf qcqs comparison; the small-model restrictions are applications of the general graph/unit construction, definitionally the former formulas."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -142,13 +154,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "P1",
+  "reviewer": "C-8f877",
+  "group": "H2",
   "result": "pass",
-  "landing": "20261012T153012-L-2351260",
+  "landing": "20261022T013415-L-3565988",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: retired Sheaf copy (small strictHenselizationStructuralMap model) vs WC twin (strictLocalizationToBase) and retire-items row 2802; 4 restated consumer signatures vs old ones (defeq; unchanged proofs unfold to old form); 9 node lean.statements vs Lean (verbatim); downstream public envs for new Sheaf/WC twin pairs (none); sandbox compile of delivery + importers NormalConstantGenericUnit, ProperGeometricPointExchange (all rc 0), axioms clean"
  }
 }

@@ -26,10 +26,20 @@
    "text": "Unfold strictLocalFibreRestriction, reassociate, postcompose the preceding identity with terminal evaluation, and cancel the inverse/hom pair of the terminal evaluation isomorphism. This gives exactly the asserted equality.",
    "uses": [],
    "elementary": true
+  },
+  {
+   "text": "Expand each former small-model qcqs restriction as unitSectionRestriction along the same small limit leg; expand the former comparison predicate as its germ equations. etaleSectionGraph is definitionally the former terminal graph. This changes only the spelling of the unit/restriction formulas and preserves every scheme, hypothesis, and conclusion.",
+   "uses": [
+    "lem-weil-pbc-etale-unit-section-restriction-comp",
+    "def-weil-pbc-small-strict-local-section-maps"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-strict-local-section-pullback"
+  "lem-weil-pbc-strict-local-section-pullback",
+  "lem-weil-pbc-etale-unit-section-restriction-comp",
+  "def-weil-pbc-small-strict-local-section-maps"
  ],
  "proof_origin": {
   "by": "worker",
@@ -81,10 +91,11 @@
   "module": "Sheaf.AlgebraicGeometry.StrictLocalFibreRestrictionCompatibility",
   "file": "lean/Sheaf/AlgebraicGeometry/StrictLocalFibreRestrictionCompatibility.lean",
   "declaration": "AlgebraicGeometry.Etale.strictLocalFibreRestriction_compatibility",
-  "statement": "theorem strictLocalFibreRestriction_compatibility\n    (Λ : Type (u + 1)) [CommRing Λ]\n    {X' X Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]\n    {g' : X' ⟶ X} {f' : X' ⟶ Spec (.of Ω)} {f : X ⟶ Y}\n    {s : Spec (.of Ω) ⟶ Y} (sq : CommSq g' f' f s)\n    (t : Spec (.of Ω) ⟶ strictHenselizationScheme s)\n    (ht : ∀ j : SmallModel.{u} (strictHenselizationNeighbourhoods s),\n      t ≫ (strictHenselizationCone s).π.app (op (op j)) ≫\n        (Spec (unop ((equivSmallModel.{u}\n          (strictHenselizationNeighbourhoods s)).inverse.obj j).1.left)).isoSpec.inv =\n        ((equivSmallModel.{u} (strictHenselizationNeighbourhoods s)).inverse.obj j).2.left)\n    (i : X' ⟶ pullback f (strictHenselizationStructuralMap s))\n    (hi : i ≫ pullback.fst f (strictHenselizationStructuralMap s) = g')\n    (hi' : i ≫ pullback.snd f (strictHenselizationStructuralMap s) = f' ≫ t)\n    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))\n    (j : SmallModel.{u} (strictHenselizationNeighbourhoods s)) :\n    qcqsStrictLocalSectionRestriction Λ f s F j ≫ strictLocalFibreRestriction Λ i hi F =\n      geometricFibreSectionRestriction Λ sq F\n        ((AffineEtale.Spec Y).obj\n          ((equivSmallModel.{u} (strictHenselizationNeighbourhoods s)).inverse.obj j).1)\n        ((equivSmallModel.{u} (strictHenselizationNeighbourhoods s)).inverse.obj j).2",
+  "statement": "theorem strictLocalFibreRestriction_compatibility (Λ : Type (u + 1)) [CommRing Λ] {X' X Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω] {g' : X' ⟶ X} {f' : X' ⟶ Spec (.of Ω)} {f : X ⟶ Y} {s : Spec (.of Ω) ⟶ Y} (sq : CommSq g' f' f s) (t : Spec (.of Ω) ⟶ strictHenselizationScheme s) (ht : ∀ j : SmallModel.{u} (strictHenselizationNeighbourhoods s), t ≫ (strictHenselizationCone s).π.app (op (op j)) ≫ (Spec (unop ((equivSmallModel.{u} (strictHenselizationNeighbourhoods s)).inverse.obj j).1.left)).isoSpec.inv = ((equivSmallModel.{u} (strictHenselizationNeighbourhoods s)).inverse.obj j).2.left) (i : X' ⟶ pullback f (strictHenselizationStructuralMap s)) (hi : i ≫ pullback.fst f (strictHenselizationStructuralMap s) = g') (hi' : i ≫ pullback.snd f (strictHenselizationStructuralMap s) = f' ≫ t) (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (j : SmallModel.{u} (strictHenselizationNeighbourhoods s)) : unitSectionRestriction Λ (pullback.fst f (Scheme.strictHenselizationStructuralMap s)) F (f.Etale.obj ((Scheme.AffineEtale.Spec Y).obj ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).1)) ((pullbackSymmetry f (Scheme.strictHenselizationStructuralMap s)).hom ≫ Scheme.smallStrictHenselizationBaseChangeMap f s j) (by change _ ≫ pullback.snd _ f = pullback.fst f (Scheme.strictHenselizationStructuralMap s) simp only [Category.assoc, Scheme.smallStrictHenselizationBaseChangeMap_snd, pullbackSymmetry_hom_comp_snd]) ≫ strictLocalFibreRestriction Λ i hi F = geometricFibreSectionRestriction Λ sq F ((AffineEtale.Spec Y).obj ((equivSmallModel.{u} (strictHenselizationNeighbourhoods s)).inverse.obj j).1) ((equivSmallModel.{u} (strictHenselizationNeighbourhoods s)).inverse.obj j).2",
   "branch": "sheaf-dag",
   "by": "J1",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "H2: retire the specialized Sheaf qcqs comparison; the small-model restrictions are applications of the general graph/unit construction, definitionally the former formulas."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -97,14 +108,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "X-98934",
-  "group": "D3",
+  "reviewer": "C-8f877",
+  "group": "H2",
   "result": "pass",
-  "landing": "20261013T054212-L-441543",
+  "landing": "20261022T013415-L-3565988",
   "kind": "interface",
-  "note": "independent Codex review: Unchanged Lean signature and definition match the node; proof and DAG match pullback specialization and terminal cancellation. Delivered module and sole direct importer compile cleanly; only permitted axioms occur."
+  "note": "independent cc review: retired Sheaf copy (small strictHenselizationStructuralMap model) vs WC twin (strictLocalizationToBase) and retire-items row 2802; 4 restated consumer signatures vs old ones (defeq; unchanged proofs unfold to old form); 9 node lean.statements vs Lean (verbatim); downstream public envs for new Sheaf/WC twin pairs (none); sandbox compile of delivery + importers NormalConstantGenericUnit, ProperGeometricPointExchange (all rc 0), axioms clean"
  },
  "lean_audit": {}
 }

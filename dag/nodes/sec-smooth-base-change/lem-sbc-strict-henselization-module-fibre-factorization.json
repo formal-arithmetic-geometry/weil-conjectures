@@ -15,6 +15,15 @@
  ],
  "proof": [
   {
+   "text": "Obtain the official full-presentation comparison. Base change Spec.map of the canonical small/full ring-colimit isomorphism to get an isomorphism over X. Compose the official comparison with globalSectionsUpperStarIso and the inverse-image composition isomorphism. The general unitSectionRestriction_comp equation transports each germ formula; pullback extensionality shows that base change commutes with symmetry and hence identifies the transported full-model leg with the small-model leg. All subsequent objects and the displayed conclusion remain in the original small presentation.",
+   "uses": [
+    "lem-weil-pbc-qcqs-strict-local-module-comparison",
+    "def-weil-pbc-small-strict-local-section-maps",
+    "lem-weil-pbc-etale-unit-section-restriction-comp"
+   ],
+   "elementary": false
+  },
+  {
    "text": "The marked maps define a cone on the double-opposite small affine diagram after composition with the Gamma-Spec unit. Naturality follows from Scheme.toSpecΓ_naturality and the point equation of each category-of-elements morphism. Lift this cone to strictHenselizationCone using the IsLimit furnished by strictHenselization_properties. Its fac equations and toSpecΓ_SpecMap_ΓSpecIso_inv give the pointed limit-leg equations. Choose one object using cofiltered nonemptiness and use strictHenselizationStructuralMap_eq and its marked point equation to get t followed by the structural map equal to s.",
    "uses": [
     "def-weil-pbc-strict-henselization-limit",
@@ -53,10 +62,12 @@
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-qcqs-strict-local-module-comparison",
+  "def-weil-pbc-small-strict-local-section-maps",
+  "lem-weil-pbc-etale-unit-section-restriction-comp",
   "def-weil-pbc-strict-henselization-limit",
   "def-weil-pbc-strict-henselization-structural-map",
   "lem-weil-pbc-strict-henselization-small-closed-fiber-comparison",
-  "lem-weil-pbc-qcqs-strict-local-module-comparison",
   "lem-weil-pbc-strict-local-exchange-compatibility",
   "lem-weil-pbc-exchange-pointed-representative",
   "lemma-openclosed-stalk-upperstar",
@@ -122,7 +133,8 @@
   "statement": "theorem strictHenselizationModuleFibre_factorization (Λ : Type (u + 1)) [CommRing Λ] {X' X Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω] {g' : X' ⟶ X} {f' : X' ⟶ Spec (.of Ω)} {f : X ⟶ Y} {s : Spec (.of Ω) ⟶ Y} (sq : IsPullback g' f' f s) [QuasiCompact f] [QuasiSeparated f] [IsLocalRing (strictHenselizationRing s)] (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) : ∃ (t : Spec (.of Ω) ⟶ strictHenselizationScheme s) (ht : t ≫ strictHenselizationStructuralMap s = s), t (IsLocalRing.closedPoint Ω) = IsLocalRing.closedPoint (strictHenselizationRing s) ∧ ∃ (i : X' ⟶ pullback f (strictHenselizationStructuralMap s)), IsPullback i f' (pullback.snd f (strictHenselizationStructuralMap s)) t ∧ i ≫ pullback.fst f (strictHenselizationStructuralMap s) = g' ∧ ∃ Θ : (pointSmallEtale s).sheafFiber.obj ((f)_*[ModuleCat.{u + 1} Λ].obj F) ≅ (Sheaf.Γ _ (ModuleCat.{u + 1} Λ)).obj ((pullback.fst f (strictHenselizationStructuralMap s))^*[ModuleCat.{u + 1} Λ].obj F), ∃ b : (Sheaf.Γ _ (ModuleCat.{u + 1} Λ)).obj ((i)^*[ModuleCat.{u + 1} Λ].obj ((pullback.fst f (strictHenselizationStructuralMap s))^*[ModuleCat.{u + 1} Λ].obj F)) ≅ ((g')^*[ModuleCat.{u + 1} Λ].obj F).obj.obj (op (Scheme.Etale.mk (𝟙 X'))), ∀ (V : Y.Etale) (v : (pointSmallEtale s).fiber.obj V) (z : F.obj.obj (op (f.Etale.obj V))), b.hom.hom ((globalSectionsUpperStarMap (ModuleCat.{u + 1} Λ) i ((pullback.fst f (strictHenselizationStructuralMap s))^*[ModuleCat.{u + 1} Λ].obj F)).hom (Θ.hom.hom ((pointSmallEtale s).toPresheafFiber V v ((f)_*[ModuleCat.{u + 1} Λ].obj F).obj z))) = (geometricFibreSectionRestriction Λ sq.toCommSq F V v).hom z",
   "branch": "sheaf-dag",
   "by": "R2",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "H2: retire the specialized Sheaf qcqs comparison; the small-model restrictions are applications of the general graph/unit construction, definitionally the former formulas."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -135,14 +147,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "C-3a343",
-  "group": "D5",
+  "reviewer": "C-8f877",
+  "group": "H2",
   "result": "pass",
-  "landing": "20261020T233117-L-894569",
+  "landing": "20261022T013415-L-3565988",
   "kind": "interface",
-  "note": "independent cc review: withdrawn Sheaf StrictHenselizationClosedFiber vs retire-items row and upstream WeilConjectures twin; node lean records vs upstream signatures; two adapted consumers vs live (import + forward call to _compat) compiled with the comparison module in a sandbox, axioms clean"
+  "note": "independent cc review: retired Sheaf copy (small strictHenselizationStructuralMap model) vs WC twin (strictLocalizationToBase) and retire-items row 2802; 4 restated consumer signatures vs old ones (defeq; unchanged proofs unfold to old form); 9 node lean.statements vs Lean (verbatim); downstream public envs for new Sheaf/WC twin pairs (none); sandbox compile of delivery + importers NormalConstantGenericUnit, ProperGeometricPointExchange (all rc 0), axioms clean"
  },
  "lean_audit": {}
 }

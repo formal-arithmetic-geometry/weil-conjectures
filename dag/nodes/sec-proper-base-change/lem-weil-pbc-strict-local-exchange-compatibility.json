@@ -28,12 +28,22 @@
     "lem-weil-pbc-strict-local-section-pullback"
    ],
    "elementary": false
+  },
+  {
+   "text": "Expand each former small-model qcqs restriction as unitSectionRestriction along the same small limit leg; expand the former comparison predicate as its germ equations. etaleSectionGraph is definitionally the former terminal graph. This changes only the spelling of the unit/restriction formulas and preserves every scheme, hypothesis, and conclusion.",
+   "uses": [
+    "lem-weil-pbc-etale-unit-section-restriction-comp",
+    "def-weil-pbc-small-strict-local-section-maps"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-pbc-strict-henselization-limit",
   "lem-weil-pbc-exchange-pointed-representative",
-  "lem-weil-pbc-strict-local-section-pullback"
+  "lem-weil-pbc-strict-local-section-pullback",
+  "lem-weil-pbc-etale-unit-section-restriction-comp",
+  "def-weil-pbc-small-strict-local-section-maps"
  ],
  "proof_origin": {
   "by": "agent",
@@ -100,10 +110,11 @@
   "declarations": [
    "AlgebraicGeometry.Etale.strictLocal_exchange_compatibility"
   ],
-  "statement": "theorem strictLocal_exchange_compatibility (Λ : Type (u + 1)) [CommRing Λ] {X' X Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω] {g' : X' ⟶ X} {f' : X' ⟶ Spec (.of Ω)} {f : X ⟶ Y} {s : Spec (.of Ω) ⟶ Y} (sq : IsPullback g' f' f s) (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (t : Spec (.of Ω) ⟶ Scheme.strictHenselizationScheme s) (hpoint : ∀ j : SmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s), t ≫ (Scheme.strictHenselizationCone s).π.app (op (op j)) ≫ (Spec (unop ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).1.left)).isoSpec.inv = ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).2.left) (q : X' ⟶ pullback f (Scheme.strictHenselizationStructuralMap s)) (hqt : q ≫ pullback.snd f (Scheme.strictHenselizationStructuralMap s) = f' ≫ t) (hq : q ≫ pullback.fst f (Scheme.strictHenselizationStructuralMap s) = g') (a : (Scheme.pointSmallEtale s).sheafFiber.obj ((lowerStar (ModuleCat.{u + 1} Λ) f).obj F) ⟶ (Sheaf.Γ (pullback f (Scheme.strictHenselizationStructuralMap s)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj ((upperStar (ModuleCat.{u + 1} Λ) (pullback.fst f (Scheme.strictHenselizationStructuralMap s))).obj F)) (ha : IsQcqsStrictLocalModuleComparison Λ f s F a) : let H := (upperStar (ModuleCat.{u + 1} Λ) (pullback.fst f (Scheme.strictHenselizationStructuralMap s))).obj F (Scheme.pointSmallEtale (𝟙 (Spec (.of Ω)))).sheafFiber.map ((baseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq).app F) = (upperStarCompSheafFiberIso (ModuleCat.{u + 1} Λ) s (𝟙 (Spec (.of Ω)))).hom.app ((lowerStar (ModuleCat.{u + 1} Λ) f).obj F) ≫ eqToHom (by rw [Category.id_comp]) ≫ a ≫ globalSectionsUpperStarMap (ModuleCat.{u + 1} Λ) q H ≫ (Sheaf.Γ _ (ModuleCat.{u + 1} Λ)).map ((upperStarComp (ModuleCat.{u + 1} Λ) q (pullback.fst f (Scheme.strictHenselizationStructuralMap s)) g' hq.symm).inv.app F) ≫ (lowerStarCompGlobalSectionsIso (ModuleCat.{u + 1} Λ) f').inv.app ((upperStar (ModuleCat.{u + 1} Λ) g').obj F) ≫ (Sheaf.ΓNatIsoSheafSections _ _ (IsTerminal.isTerminalOfObj (MorphismProperty.Over.forget @AlgebraicGeometry.Etale ⊤ (Spec (.of Ω))) (Scheme.Etale.mk (𝟙 (Spec (.of Ω)))) Over.mkIdTerminal)).hom.app ((lowerStar (ModuleCat.{u + 1} Λ) f').obj ((upperStar (ModuleCat.{u + 1} Λ) g').obj F)) ≫ (Scheme.pointSmallEtale (𝟙 (Spec (.of Ω)))).toPresheafFiber (Scheme.Etale.mk (𝟙 (Spec (.of Ω)))) (Over.homMk (𝟙 _) (Category.comp_id _)) ((lowerStar (ModuleCat.{u + 1} Λ) f').obj ((upperStar (ModuleCat.{u + 1} Λ) g').obj F)).obj",
+  "statement": "theorem strictLocal_exchange_compatibility (Λ : Type (u + 1)) [CommRing Λ] {X' X Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω] {g' : X' ⟶ X} {f' : X' ⟶ Spec (.of Ω)} {f : X ⟶ Y} {s : Spec (.of Ω) ⟶ Y} (sq : IsPullback g' f' f s) (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (t : Spec (.of Ω) ⟶ Scheme.strictHenselizationScheme s) (hpoint : ∀ j : SmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s), t ≫ (Scheme.strictHenselizationCone s).π.app (op (op j)) ≫ (Spec (unop ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).1.left)).isoSpec.inv = ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).2.left) (q : X' ⟶ pullback f (Scheme.strictHenselizationStructuralMap s)) (hqt : q ≫ pullback.snd f (Scheme.strictHenselizationStructuralMap s) = f' ≫ t) (hq : q ≫ pullback.fst f (Scheme.strictHenselizationStructuralMap s) = g') (a : (Scheme.pointSmallEtale s).sheafFiber.obj ((lowerStar (ModuleCat.{u + 1} Λ) f).obj F) ⟶ (Sheaf.Γ (pullback f (Scheme.strictHenselizationStructuralMap s)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj ((upperStar (ModuleCat.{u + 1} Λ) (pullback.fst f (Scheme.strictHenselizationStructuralMap s))).obj F)) (ha : ∀ j : SmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s), (Scheme.pointSmallEtale s).toPresheafFiber ((Scheme.AffineEtale.Spec Y).obj ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).1) ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).2 ((lowerStar (ModuleCat.{u + 1} Λ) f).obj F).obj ≫ a = unitSectionRestriction Λ (pullback.fst f (Scheme.strictHenselizationStructuralMap s)) F (f.Etale.obj ((Scheme.AffineEtale.Spec Y).obj ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).1)) ((pullbackSymmetry f (Scheme.strictHenselizationStructuralMap s)).hom ≫ Scheme.smallStrictHenselizationBaseChangeMap f s j) (by change _ ≫ pullback.snd _ f = pullback.fst f (Scheme.strictHenselizationStructuralMap s) simp only [Category.assoc, Scheme.smallStrictHenselizationBaseChangeMap_snd, pullbackSymmetry_hom_comp_snd])) : let H := (upperStar (ModuleCat.{u + 1} Λ) (pullback.fst f (Scheme.strictHenselizationStructuralMap s))).obj F (Scheme.pointSmallEtale (𝟙 (Spec (.of Ω)))).sheafFiber.map ((baseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq).app F) = (upperStarCompSheafFiberIso (ModuleCat.{u + 1} Λ) s (𝟙 (Spec (.of Ω)))).hom.app ((lowerStar (ModuleCat.{u + 1} Λ) f).obj F) ≫ eqToHom (by rw [Category.id_comp]) ≫ a ≫ globalSectionsUpperStarMap (ModuleCat.{u + 1} Λ) q H ≫ (Sheaf.Γ _ (ModuleCat.{u + 1} Λ)).map ((upperStarComp (ModuleCat.{u + 1} Λ) q (pullback.fst f (Scheme.strictHenselizationStructuralMap s)) g' hq.symm).inv.app F) ≫ (lowerStarCompGlobalSectionsIso (ModuleCat.{u + 1} Λ) f').inv.app ((upperStar (ModuleCat.{u + 1} Λ) g').obj F) ≫ (Sheaf.ΓNatIsoSheafSections _ _ (IsTerminal.isTerminalOfObj (MorphismProperty.Over.forget @AlgebraicGeometry.Etale ⊤ (Spec (.of Ω))) (Scheme.Etale.mk (𝟙 (Spec (.of Ω)))) Over.mkIdTerminal)).hom.app ((lowerStar (ModuleCat.{u + 1} Λ) f').obj ((upperStar (ModuleCat.{u + 1} Λ) g').obj F)) ≫ (Scheme.pointSmallEtale (𝟙 (Spec (.of Ω)))).toPresheafFiber (Scheme.Etale.mk (𝟙 (Spec (.of Ω)))) (Over.homMk (𝟙 _) (Category.comp_id _)) ((lowerStar (ModuleCat.{u + 1} Λ) f').obj ((upperStar (ModuleCat.{u + 1} Λ) g').obj F)).obj",
   "branch": "sheaf-dag",
   "by": "P1",
-  "date": "2026-10-12"
+  "date": "2026-10-12",
+  "note": "H2: retire the specialized Sheaf qcqs comparison; the small-model restrictions are applications of the general graph/unit construction, definitionally the former formulas."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -116,14 +127,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "U3",
+  "reviewer": "C-8f877",
+  "group": "H2",
   "result": "pass",
-  "landing": "20261012T184351-L-4022487",
+  "landing": "20261022T013415-L-3565988",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: retired Sheaf copy (small strictHenselizationStructuralMap model) vs WC twin (strictLocalizationToBase) and retire-items row 2802; 4 restated consumer signatures vs old ones (defeq; unchanged proofs unfold to old form); 9 node lean.statements vs Lean (verbatim); downstream public envs for new Sheaf/WC twin pairs (none); sandbox compile of delivery + importers NormalConstantGenericUnit, ProperGeometricPointExchange (all rc 0), axioms clean"
  },
  "lean_audit": {}
 }

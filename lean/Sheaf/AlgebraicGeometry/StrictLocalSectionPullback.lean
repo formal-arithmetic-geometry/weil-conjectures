@@ -5,8 +5,10 @@ Authors: SHEAF group U3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.QcqsStrictLocalModuleComparison
+public import WeilConjectures.AlgebraicGeometry.QcqsStrictLocalModuleComparison
 public import WeilConjectures.AlgebraicGeometry.GeometricFibreExchangeGerms
+public import Sheaf.AlgebraicGeometry.EtaleUnitSectionRestriction
+public import Sheaf.AlgebraicGeometry.SmallStrictLocalSectionMaps
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 
 /-! # Pullback of strict-local representative sections
@@ -162,7 +164,18 @@ theorem strictLocal_section_pullback
     (hqt : q ≫ pullback.snd f (Scheme.strictHenselizationStructuralMap s) = f' ≫ t)
     (hq : q ≫ pullback.fst f (Scheme.strictHenselizationStructuralMap s) = g')
     (j : SmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)) :
-    qcqsStrictLocalSectionRestriction Λ f s F j ≫
+    unitSectionRestriction Λ
+      (pullback.fst f (Scheme.strictHenselizationStructuralMap s)) F
+      (f.Etale.obj ((Scheme.AffineEtale.Spec Y).obj
+        ((equivSmallModel.{u}
+          (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).1))
+      ((pullbackSymmetry f (Scheme.strictHenselizationStructuralMap s)).hom ≫
+        Scheme.smallStrictHenselizationBaseChangeMap f s j)
+      (by
+        change _ ≫ pullback.snd _ f =
+          pullback.fst f (Scheme.strictHenselizationStructuralMap s)
+        simp only [Category.assoc, Scheme.smallStrictHenselizationBaseChangeMap_snd,
+          pullbackSymmetry_hom_comp_snd]) ≫
       globalSectionsUpperStarMap (ModuleCat.{u + 1} Λ) q
         ((upperStar (ModuleCat.{u + 1} Λ)
           (pullback.fst f (Scheme.strictHenselizationStructuralMap s))).obj F) ≫
@@ -186,7 +199,18 @@ theorem strictLocal_section_pullback
   let V := (Scheme.AffineEtale.Spec Y).obj
     ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).1
   let U := f.Etale.obj V
-  let δ := qcqsStrictLocalNeighbourhoodSection f s j
+  let δ := etaleSectionGraph
+    (pullback.fst f (Scheme.strictHenselizationStructuralMap s))
+    (f.Etale.obj ((Scheme.AffineEtale.Spec Y).obj
+      ((equivSmallModel.{u}
+        (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).1))
+    ((pullbackSymmetry f (Scheme.strictHenselizationStructuralMap s)).hom ≫
+      Scheme.smallStrictHenselizationBaseChangeMap f s j)
+    (by
+      change _ ≫ pullback.snd _ f =
+        pullback.fst f (Scheme.strictHenselizationStructuralMap s)
+      simp only [Category.assoc, Scheme.smallStrictHenselizationBaseChangeMap_snd,
+        pullbackSymmetry_hom_comp_snd])
   let θ : Scheme.Etale.mk (𝟙 X') ⟶ q.Etale.obj (Scheme.Etale.mk (𝟙 _)) :=
     MorphismProperty.Over.homMk
       (pullback.lift q (𝟙 X') (by
@@ -223,7 +247,7 @@ theorem strictLocal_section_pullback
   have he := tK.inv.naturality e.inv
   change e.inv.hom.app (op (Scheme.Etale.mk (𝟙 X'))) ≫ tK.inv.app G =
     tK.inv.app K ≫ (Sheaf.Γ _ (ModuleCat.{u + 1} Λ)).map e.inv at he
-  dsimp only [qcqsStrictLocalSectionRestriction]
+  dsimp only [unitSectionRestriction]
   change (((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) p).unit.app F).hom.app
     (op U) ≫ H.obj.map δ.op ≫ tH.inv.app H) ≫
     globalSectionsUpperStarMap (ModuleCat.{u + 1} Λ) q H ≫
@@ -267,7 +291,7 @@ theorem strictLocal_section_pullback
         erw [pullback.lift_fst_assoc, pullback.lift_fst_assoc]
         simp only [Category.assoc]
         erw [pullback.lift_fst_assoc]
-        simp only [δ, qcqsStrictLocalNeighbourhoodSection,
+        simp only [δ, etaleSectionGraph,
           MorphismProperty.Over.homMk_hom, Over.homMk_left]
         erw [pullback.lift_fst_assoc, pullback.lift_fst]
         simp only [Category.assoc]
@@ -281,7 +305,7 @@ theorem strictLocal_section_pullback
         erw [pullback.lift_fst_assoc, pullback.lift_fst_assoc]
         simp only [Category.assoc]
         erw [pullback.lift_fst_assoc]
-        simp only [δ, qcqsStrictLocalNeighbourhoodSection,
+        simp only [δ, etaleSectionGraph,
           MorphismProperty.Over.homMk_hom, Over.homMk_left]
         erw [pullback.lift_fst_assoc, pullback.lift_snd]
         simp only [Category.assoc]

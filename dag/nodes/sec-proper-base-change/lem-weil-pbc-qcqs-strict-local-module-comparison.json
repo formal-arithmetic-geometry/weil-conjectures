@@ -17,63 +17,26 @@
  ],
  "proof": [
   {
-   "text": "For the transported small-model graph maps, prove refinement compatibility directly inside the cocone construction. Identify base-change cone legs by their two projections, apply cone naturality, and use pullback extensionality for graph compatibility. Naturality of the module adjunction unit and contravariant functoriality then make the specified linear restrictions a cocone. This retains the original small-model definitions and all germ equations.",
-   "uses": [
-    "lem-weil-pbc-strict-henselization-base-change-cone",
-    "def-weil-pbc-small-strict-local-section-maps"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Initiality of the affine pointed-neighbourhood inclusion makes the whiskered module stalk cocone a colimit. Its desc to the restriction cocone constructs a linear map; the colimit fac equation gives every required germ equation.",
+   "text": "Use initiality of affine pointed neighbourhoods and the whiskered stalk colimit. The official qcqsStrictLocalRestriction_naturality makes the unit restrictions a cocone; its desc has the required germ formula. The official isIso_qcqsStrictLocalRestriction_of_formula proves this desc invertible. Take asIso. This is the unchanged complete adopted proof.",
    "uses": [
     "def-weil-pbc-strict-henselization-limit",
-    "def-weil-pbc-geometric-stalks"
+    "def-weil-pbc-geometric-stalks",
+    "lem-weil-pbc-strict-local-module-restriction-naturality",
+    "lem-weil-pbc-strict-local-module-restriction-isomorphism"
    ],
    "elementary": false
-  },
-  {
-   "text": "Base change Spec.map of the inverse canonical small/full ring-colimit isomorphism and compose with pullback symmetry. This gives an isomorphism over X between the small-model target scheme and the full strict localization; its composite with every full-model leg equals the symmetry followed by the small-model leg, by definition.",
-   "uses": [
-    "def-weil-pbc-small-strict-local-section-maps"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Apply exists_moduleSectionsIsoTransport to this isomorphism over X. It gives a bijection from module global sections to the full-model set terminal sections and the formula for transported units and graphs. The forgetful functor preserves the filtered colimit defining the stalk, so sheafFiberCompIso gives the source bijection compatibly with germs.",
-   "uses": [
-    "lem-weil-pbc-module-sections-iso-transport",
-    "def-weil-pbc-geometric-stalks"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Conjugate the constructed linear map by these bijections. Its cocone fac equations, the coefficient-forgetting germ identity and the transported graph formula identify it with the unique official set comparison. That comparison is bijective. Cancel the source and target bijections and use ConcreteCategory.isIso_iff_bijective, then asIso. This proves invertibility inside the construction; the separate small-model restriction-isomorphism declaration is no longer needed.",
-   "uses": [
-    "lem-weil-pbc-sets-pushforward-stalk-strict-henselization"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Use the transported small-model leg and its two projection identities from [def-weil-pbc-small-strict-local-section-maps] in place of unfolding the retired duplicate definition. The representative restriction formula and all existing mathematical hypotheses remain unchanged.",
-   "uses": [
-    "def-weil-pbc-small-strict-local-section-maps"
-   ],
-   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-strict-henselization-base-change-cone",
-  "def-weil-pbc-small-strict-local-section-maps",
   "def-weil-pbc-strict-henselization-limit",
   "def-weil-pbc-geometric-stalks",
-  "lem-weil-pbc-module-sections-iso-transport",
-  "lem-weil-pbc-sets-pushforward-stalk-strict-henselization"
+  "lem-weil-pbc-strict-local-module-restriction-naturality",
+  "lem-weil-pbc-strict-local-module-restriction-isomorphism"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 03Q9, degree-zero continuity; canonical small/full colimit transport and unit compatibility, with invertibility proved within the module comparison construction"
+  "place": "Tag 03Q9, unchanged adopted proof in WeilConjectures.AlgebraicGeometry.QcqsStrictLocalModuleComparison"
  },
  "mathlib_searches": [
   {
@@ -128,9 +91,9 @@
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-iff",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.QcqsStrictLocalModuleComparison",
-  "file": "lean/Sheaf/AlgebraicGeometry/QcqsStrictLocalModuleComparison.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.QcqsStrictLocalModuleComparison",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/QcqsStrictLocalModuleComparison.lean",
   "declaration": "AlgebraicGeometry.Etale.exists_qcqsStrictLocalModuleComparison",
   "declarations": [
    "AlgebraicGeometry.Etale.qcqsStrictLocalNeighbourhoodSection",
@@ -138,10 +101,11 @@
    "AlgebraicGeometry.Etale.IsQcqsStrictLocalModuleComparison",
    "AlgebraicGeometry.Etale.exists_qcqsStrictLocalModuleComparison"
   ],
-  "statement": "theorem exists_qcqsStrictLocalModuleComparison (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f] {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ Y) (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) : ∃ e : (Scheme.pointSmallEtale s).sheafFiber.obj ((lowerStar (ModuleCat.{u + 1} Λ) f).obj F) ≅ (Sheaf.Γ (pullback f (Scheme.strictHenselizationStructuralMap s)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj ((upperStar (ModuleCat.{u + 1} Λ) (pullback.fst f (Scheme.strictHenselizationStructuralMap s))).obj F), IsQcqsStrictLocalModuleComparison Λ f s F e.hom",
+  "statement": "theorem exists_qcqsStrictLocalModuleComparison (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f] {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ Y) (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) : ∃ e : (Scheme.pointSmallEtale s).sheafFiber.obj ((lowerStar (ModuleCat.{u + 1} Λ) f).obj F) ≅ (Sheaf.Γ (pullback f (Scheme.strictLocalizationToBase s)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj ((upperStar (ModuleCat.{u + 1} Λ) (pullback.fst f (Scheme.strictLocalizationToBase s))).obj F), IsQcqsStrictLocalModuleComparison Λ f s F e.hom",
   "branch": "sheaf-dag",
   "by": "P1",
-  "date": "2026-10-12"
+  "date": "2026-10-12",
+  "note": "H2 retirement: attach to the adopted full strictLocalizationToBase presentation. Consumers preserve the small-model objects by the canonical colimit base-change isomorphism and the general unitSectionRestriction_comp theorem; no source-library declaration is changed."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -156,12 +120,12 @@
  "reviewed_proof": {
   "date": "2026-10-22",
   "by": "L",
-  "reviewer": "C-dabe5",
-  "group": "S2",
+  "reviewer": "C-8f877",
+  "group": "H2",
   "result": "pass",
-  "landing": "20261022T002436-L-1930859",
+  "landing": "20261022T013415-L-3565988",
   "kind": "interface",
-  "note": "independent cc review: withdrawn Sheaf stub + item node retargeted to WC twin (lean.statement verbatim in WeilConjectures/AlgebraicGeometry/QcqsStrictLocalRestrictionIsomorphism.lean) vs retire-items row 2733; consumer QcqsStrictLocalModuleComparison inlined IsIso proof vs removed theorem body (identical), signatures/defs/public imports vs live unchanged; adapted consumer compiled 14.8 s, axioms clean"
+  "note": "independent cc review: retired Sheaf copy (small strictHenselizationStructuralMap model) vs WC twin (strictLocalizationToBase) and retire-items row 2802; 4 restated consumer signatures vs old ones (defeq; unchanged proofs unfold to old form); 9 node lean.statements vs Lean (verbatim); downstream public envs for new Sheaf/WC twin pairs (none); sandbox compile of delivery + importers NormalConstantGenericUnit, ProperGeometricPointExchange (all rc 0), axioms clean"
  },
  "lean_audit": {}
 }

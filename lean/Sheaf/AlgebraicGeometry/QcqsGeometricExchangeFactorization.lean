@@ -13,8 +13,10 @@ public import WeilConjectures.SixFunctors.BaseChange.Square
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import WeilConjectures.Mathlib.RingTheory.Henselian
 import Sheaf.Paper.StrictHenselizationFunctoriality
-import Sheaf.AlgebraicGeometry.QcqsStrictLocalModuleComparison
+import WeilConjectures.AlgebraicGeometry.QcqsStrictLocalModuleComparison
 import Sheaf.AlgebraicGeometry.StrictLocalExchangeCompatibility
+import Sheaf.AlgebraicGeometry.EtaleUnitSectionRestriction
+import Sheaf.AlgebraicGeometry.SmallStrictLocalSectionMaps
 
 /-! # The degree-zero exchange factorization through strict-local sections
 
@@ -46,6 +48,10 @@ noncomputable def geometricPointGlobalGerm
       (Scheme.Etale.mk (𝟙 (Spec (.of Ω))))
       (Over.homMk (𝟙 _) (Category.comp_id _)) G.obj
 
+set_option maxRecDepth 2048 in
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+set_option backward.defeqAttrib.useBackward true in
 /-- For a qcqs morphism, exchange on the identity geometric stalk factors through
 sections over the strict henselization and restriction to the given geometric fibre.
 There is no properness hypothesis and no invertibility claim for the fibre restriction.
@@ -133,7 +139,60 @@ theorem qcqs_geometricExchange_factorization
     apply IsPullback.of_right (s := ?_) hqt (IsPullback.of_hasPullback _ _)
     simpa only [hq, htbase] using sq
   refine ⟨hlocal, hstrict, t, q, ht, hcart, hq, ?_⟩
-  obtain ⟨e₀, he₀⟩ := exists_qcqsStrictLocalModuleComparison Λ f s F
+  obtain ⟨eFull, heFull⟩ := exists_qcqsStrictLocalModuleComparison Λ f s F
+  let ps := pullback.fst f (Scheme.strictHenselizationStructuralMap s)
+  let pb := pullback.fst f (Scheme.strictLocalizationToBase s)
+  let τ := pullback.map f (Scheme.strictHenselizationStructuralMap s)
+    f (Scheme.strictLocalizationToBase s) (𝟙 X)
+    (Spec.map (Scheme.smallStrictHenselizationColimitIso s).inv) (𝟙 Y)
+    (by simp) (by simpa using (Scheme.smallStrictLocalization_toBase s).symm)
+  have : IsIso τ := by dsimp [τ]; infer_instance
+  have hp : ps = τ ≫ pb := by simp [τ, ps, pb]
+  let eΓ := globalSectionsUpperStarIso (ModuleCat.{u + 1} Λ) τ
+    ((upperStar (ModuleCat.{u + 1} Λ) pb).obj F) ≪≫
+    (Sheaf.Γ _ (ModuleCat.{u + 1} Λ)).mapIso
+      (((upperStarComp (ModuleCat.{u + 1} Λ) τ pb ps hp).app F).symm)
+  let e₀ := eFull ≪≫ eΓ
+  have he₀ (j : SmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)) :
+      (Scheme.pointSmallEtale s).toPresheafFiber
+        ((Scheme.AffineEtale.Spec Y).obj
+          ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).1)
+        ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).2
+        ((lowerStar (ModuleCat.{u + 1} Λ) f).obj F).obj ≫ e₀.hom =
+      unitSectionRestriction Λ ps F
+        (f.Etale.obj ((Scheme.AffineEtale.Spec Y).obj
+          ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).1))
+        ((pullbackSymmetry f (Scheme.strictHenselizationStructuralMap s)).hom ≫
+          Scheme.smallStrictHenselizationBaseChangeMap f s j)
+        (by
+          change _ ≫ pullback.snd _ f =
+            pullback.fst f (Scheme.strictHenselizationStructuralMap s)
+          simp only [Category.assoc, Scheme.smallStrictHenselizationBaseChangeMap_snd,
+          pullbackSymmetry_hom_comp_snd]) := by
+    have hj := heFull j
+    have hu : qcqsStrictLocalSectionRestriction Λ f s F j =
+        unitSectionRestriction Λ pb F
+          (f.Etale.obj ((Scheme.AffineEtale.Spec Y).obj
+            ((equivSmallModel.{u}
+              (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).1))
+          ((pullbackSymmetry f (Scheme.strictLocalizationToBase s)).hom ≫
+            Scheme.strictHenselizationBaseChangeMap f s j)
+          (by
+            change _ ≫ pullback.snd _ f = pullback.fst f (Scheme.strictLocalizationToBase s)
+            simp [Scheme.strictHenselizationBaseChangeMap, Category.assoc]) := by rfl
+    rw [hu] at hj
+    simp only [e₀, Iso.trans_hom]
+    rw [reassoc_of% hj]
+    change unitSectionRestriction Λ pb F _ _ _ ≫
+      globalSectionsUpperStarMap (ModuleCat.{u + 1} Λ) τ _ ≫
+        (Sheaf.Γ _ (ModuleCat.{u + 1} Λ)).map
+          ((upperStarComp (ModuleCat.{u + 1} Λ) τ pb ps hp).inv.app F) = _
+    rw [unitSectionRestriction_comp]
+    congr 1
+    simp only [Scheme.smallStrictHenselizationBaseChangeMap]
+    simp only [← Category.assoc]
+    congr 1
+    apply pullback.hom_ext <;> simp [τ, Category.assoc]
   let e : (Scheme.pointSmallEtale ((𝟙 (Spec (.of Ω))) ≫ s)).sheafFiber.obj
       ((lowerStar (ModuleCat.{u + 1} Λ) f).obj F) ≅
       (Sheaf.Γ (pullback f (Scheme.strictHenselizationStructuralMap s)).smallEtaleTopology
