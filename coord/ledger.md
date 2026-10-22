@@ -24136,3 +24136,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:03 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
 - 01:04 L: returned deliver/NE/lem-sfb-equivariant-smooth-galois-model (reviewer RETURN: C1/F (2026-10-19 route drop) and G1/G3/G4. This is the 4th push of this item. NI 17be7ee3, NC 7dad7c28 and NE 2c81bc4d w)
 - 01:06 L: returned deliver/NC/lem-sfb-ramified-cartier-supported-purity (reviewer RETURN: C1/F + G4. I read all 8 steps; there are no new nodes. The statement is unchanged and there is no repair note. The item )
+- 01:08 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
