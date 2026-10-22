@@ -16,7 +16,8 @@
   "sk-def-pe-wlocal",
   "def-weil-pbc-proetale-site",
   "def-weil-geometric-fibre",
-  "def-kun-topological-krull-dimension"
+  "def-kun-topological-krull-dimension",
+  "def-sfb-condensed-module-sections"
  ],
  "proof": [
   {
@@ -210,5 +211,23 @@
   "group": "NA",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-6af4ab590 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every node they cite, and the sources: Stacks 0F0V (proposition-cd-affine), 0A3G (proposition-cohomological-dimension-spectral) and 0732, plus the blueprint refinement proof (2). The item's statement, stmt_deps, source and blueprint are byte-identical to live, where the node is still unsplit and no repair note exists. Every id cited exists and is unmerged, and proof_deps equals the union of the step uses. Step 1 (elementary): affine open V->C has finite type, and dimension does not increase on the open subspace V_cbar of Z_cbar. Step 2 (elementary): j^* is exact (det-prop-sfb-module-pullback-exact-main, declared tool use, same as the parent) and preserves coproducts as a left adjoint. Constructible strata restrict because Z is quasi-separated, and the local models keep the same P_i. The inverse-image class then gives j^*N in P_V by minimality. Step 3 applies the new affine node with identical coefficient, Omega-topology and class conventions. Step 4 applies the new generic node with a=e+2, giving the bound 2e+2. The ringed-open comparison is on route through sk-thm-properbasechange. The generic node is true: X is spectral; points of the zero-dimensional base are closed, so chains lie in one fibre and dim X<=e; R^q nu_* vanishes for q>a on the affine basis; Scheiderer 0A3G(1) and Leray give the result. The affine node is the Artin-type input with a different scope and constant (affine source, e+2), not a restatement. It holds in the small cases I checked (point base; discrete A through étale-origin images and Artin vanishing; Z_l through R lim, +1). The norm-topology Omega case remains a declared WANTED gap inherited from the item. No duplicates found among the existing torsion or Noetherian top-degree nodes or in the blueprint. No SGA cited. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ProfiniteGeometricFamilyHeartCd",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.profinite_geometric_family_serreHeart_cohomology_vanishes",
+  "file": "lean/Sheaf/Paper/ProfiniteGeometricFamilyHeartCd.lean",
+  "statement": "theorem profinite_geometric_family_serreHeart_cohomology_vanishes (ℓ : ℕ) [Fact ℓ.Prime] (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] (hΛ : (∃ (A : Type) (_ : CommRing A) (_ : TopologicalSpace A) (_ : DiscreteTopology A) (_ : IsTopologicalRing A), Finite A ∧ (∃ n : ℕ, ∀ a : A, (ℓ ^ n) • a = 0) ∧ Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj A))) ∨ Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj ℤ_[ℓ])) ∨ (∃ E : PadicAlgCl.FiniteIntermediateField ℓ, Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicIntegersRingObj ℓ E))) ∨ Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj ℚ_[ℓ])) ∨ (∃ E : PadicAlgCl.FiniteIntermediateField ℓ, Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj E))) ∨ Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj (PadicAlgCl ℓ)))) {C Z : Scheme.{u}} [IsAffine C] [IsReduced C] [IsWContractibleRing Γ(C, ⊤)] (hCdim : ∀ p : PrimeSpectrum Γ(C, ⊤), p.asIdeal.IsMaximal) (hCres : ∀ c : C, IsSepClosed (C.residueField c)) (h : Z ⟶ C) [IsProper h] (e : ℕ) (he : ∀ (K : Type u) [Field K] [IsAlgClosed K] (c : Spec (CommRingCat.of K) ⟶ C), topologicalKrullDim (pullback h c : Scheme.{u}) ≤ (e : WithBot ℕ∞)) (N : Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z)) (hN : ObjectProperty.weakSerreCoproductClosure.{u + 1} (IsConstantModelConstructible Λ Z) N) (r : ℤ) (hr : 2 * (e : ℤ) + 2 < r) : IsZero ((DerivedCategory.homologyFunctor _ r).obj ((condensedModuleSections Λ Z).rightDerivedFunctor.obj ((DerivedCategory.singleFunctor _ 0).obj N)))",
+  "branch": "sheaf-dag",
+  "by": "NE",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e9bf1d32e",
+  "group": "NE",
+  "result": "pass",
+  "note": "I read each clause of the node against the Lean: the six coefficient cases (identical to the landed citer exists_uniform_serreHeart_bound_of_isProper, no finite-subextension Ω case); the closure weakSerreCoproductClosure.{u+1}(IsConstantModelConstructible Λ Z); C affine, reduced, IsWContractibleRing Γ(C,⊤), every prime maximal, separably closed residue fields; h IsProper; the fibre bound topologicalKrullDim(pullback h c) ≤ e for every algebraically closed K : Type u; conclusion H^r of the right derived condensedModuleSections Λ Z on single N = 0 for r > 2e+2. Edge cases empty C/Z/fibres, e=0, N=0, A=0 and characteristic ℓ are covered. Item node changes only in lean and in stmt_deps gaining the landed def-sfb-condensed-module-sections; the 10 dependency nodes are byte-identical to side-live. No definitions, sorry only, docstrings have source place, blueprint tag and the 4 proof steps; proof-only imports are proof_dep modules; lean.statement matches the file. Not recompiled (no change; worker's clean compile and deliver2 dry run OK). Norm-topology Ω case is an inherited WANTED source gap, faithfully stated. No findings."
  }
 }
