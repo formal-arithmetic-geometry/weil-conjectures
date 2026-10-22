@@ -1,44 +1,129 @@
 ## Worker report
 
-Files written, all inside the NK sandbox:
+The module `Sheaf.AlgebraicGeometry.FiniteNormalAmpleDescent` states
+`AlgebraicGeometry.Scheme.Modules.exists_isAmple_of_finite_surjective_normal`.
+Its sole theorem has proof `sorry`; there are no definitions, auxiliary theorems,
+new nodes, dependency repairs, or statement corrections.
 
-- `dag/nodes/sec-six-functors-basics/lem-sfb-finite-normal-ample-descent.json`: item, split into seven steps; statement unchanged.
-- `dag/nodes/sec-six-functors-basics/lem-sfb-normal-integral-finite-sheaf-norm.json`: statement, unsplit; no Mathlib match. This is the positive-degree multiplicative sheaf norm of Stacks 0BD3, including both defining properties of 0BCX.
-- `dag/nodes/sec-six-functors-basics/lem-sfb-finite-norm-invertible-sections.json`: statement, unsplit; no Mathlib match. Given explicit norm data, this produces one invertible sheaf and sections of all positive powers whose nonvanishing loci are saturated fibre opens, using 0BCY and 0BCZ.
-- `citations.json`: one verbatim statement quote for each of the 15 step/node citations.
+Source read: `literature/stacks-project/divisors.tex`, Tag 0BD4,
+`proposition-push-down-ample`, case (2), and its proof; also Tag 0BD0,
+`lemma-norm-ample`, and the adjacent norm lemmas 0BCY, 0BCZ, and 0BD3.
+The node is precisely the existence assertion of case (2).
 
-Attachments: none. I searched the blueprint tag and the notions in `lean/WeilConjectures/`. `CoordinateCoverDescent.lean`, `BaseChangeNorm.lean` and `Morphisms/FiniteFlatNorm.lean` only provide norms and coordinate-cover descent under finite field-extension or finite-free hypotheses. They do not state the item for arbitrary finite covers of normal integral schemes. Neither new norm input has a project declaration with the required hypotheses and conclusions.
+Hypothesis-by-hypothesis and clause-by-clause correspondence:
 
-WANTED: none. All mathematical inputs used here are in the local Stacks sources.
+- Schemes and their morphism: `{X Z : Scheme.{u}} (f : X ⟶ Z)`.
+  The universe `u` is explicitly declared and unrestricted.
+- Finiteness of the morphism: `[IsFinite f]`, Mathlib's affine-local finite-ring-map
+  definition, exactly the finite part of `def-weil-finite-integral-morphism`.
+- Surjectivity: `[Surjective f]`, surjectivity of the underlying point map.
+- Integrality of the target: `[IsIntegral Z]`, including nonemptiness; no
+  integrality or reducedness hypothesis is put on `X`.
+- Normality of the target: `hZ : ∀ z : Z, IsDomain (Z.presheaf.stalk z) ∧
+  IsIntegrallyClosed (Z.presheaf.stalk z)`. These are exactly its local rings,
+  each required to be an integrally closed domain. This uses the recorded
+  inline normal-domain form, without introducing a second normality definition.
+- Existence of an ample invertible module on `X`: the hypothesis
+  `hX : ∃ L : X.Modules, ∃ hL : L.IsInvertible, @IsAmple X L hL`.
+  The dependent existential supplies the invertibility instance explicitly.
+- Existence of an ample invertible module on `Z`: the conclusion
+  `∃ N : Z.Modules, ∃ hN : N.IsInvertible, @IsAmple Z N hN`.
+  The conclusion concerns existence and imposes no descent datum or requirement
+  that a specified bundle pull back to `L`.
+- There are no extra flatness, group-action, Noetherian, properness, finite-type,
+  base-field, separatedness, or characteristic binders. The finiteness of `f`
+  of course already has its usual consequences.
 
-The original item already accurately stated existence of an ample sheaf, rather than descent of a specified sheaf. Its proof was empty. I retained its statement, provenance, recorded earlier searches, chapter, unit and blueprint chain. The newly expanded argument follows 0BD4(2) through the proof of 0BD0; it does not replace the unit's alteration route. The current blueprint's `sk-thm-sf-ctf-stability-direct-images.proof.md` paragraph (3) is the ancestor route. `blueprint_refs.py ancestor` returns `None` for the existing created-node chain; the new nodes use that same result, with the item prepended to `via` and the exact norm input appended to `from.place`.
+The dependency declarations and their source signatures/docstrings were read:
 
-Nothing mathematical is left unfinished at this one-level split. The two new norm theorems are deliberately statement-only, to be split later. No Lean was written, and no compiler or build was run.
+- `Mathlib.AlgebraicGeometry.Scheme`: `AlgebraicGeometry.Scheme`,
+  `AlgebraicGeometry.Scheme.Hom` (locally ringed spaces locally affine, and their maps).
+- `Mathlib.AlgebraicGeometry.Morphisms.Finite`: `AlgebraicGeometry.IsFinite`.
+- `Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap`: `AlgebraicGeometry.Surjective`.
+- `Mathlib.AlgebraicGeometry.Properties`: `AlgebraicGeometry.IsIntegral`.
+- `Mathlib.RingTheory.IntegralClosure.IntegrallyClosed`: `IsIntegrallyClosed`;
+  with Mathlib's `IsDomain` this renders each stalk's normal-domain condition.
+- `WeilConjectures.AlgebraicGeometry.Modules.Invertible`:
+  `AlgebraicGeometry.Scheme.Modules.IsInvertible`, local triviality of rank one.
+- `WeilConjectures.AlgebraicGeometry.Ample`:
+  `AlgebraicGeometry.Scheme.Modules.IsAmple`. Its two clauses are quasi-compactness
+  and an affine nonvanishing neighbourhood from a positive tensor power at every
+  point. This is the absolute predicate required here, not the separate relative
+  notion in `Modules.Ample`.
 
-## Searches and reuse
+All these statement dependencies are public imports. Available proof dependencies
+are ordinary imports: the reduced induced closed subscheme module, closed-immersion
+ample restriction, finite principal affine section neighbourhoods, affine intersection
+with a section locus, and Mathlib proper/quasi-finite morphisms. Scheme sobriety,
+integrality, closed-immersion finiteness and composition are already provided by the
+imported Mathlib modules. The two proof nodes
+`lem-sfb-normal-integral-finite-sheaf-norm` and
+`lem-sfb-finite-norm-invertible-sections` have no Lean records yet, so their modules
+cannot be imported. They are named in the seven-step proof docstring, and all DAG
+proof dependencies remain unchanged. They are not needed to type this statement.
 
-I searched the whole DAG by tags 0BD3, 0BCY, 0BCZ, 0BD0 and 0BD4, and by norm/line-bundle and ample-restriction/finite-fibre concepts. Whole-blueprint searches included `ample`, `norm of`, `norms of`, `multiplicative norm`, `line bundle`, and the specific tags. The broad `norm` search included irrelevant normality and normalization hits; none states a sheaf norm theorem. Existing generic lemmas were reused instead of creating nodes for reduced closed structures, finite-map composition/closedness/fibres, restriction of ampleness, finite-set section avoidance, or affineness of section opens.
+Edge cases checked before writing:
 
-For each new node I ran LeanFinder twice with distinct mathematical phrasings, LeanSearch, Loogle and the required Mathlib grep through msearch.py. Their exact query texts and actual returned declarations are recorded in the nodes and searches.jsonl. I read the hits before concluding no match. In particular, `Algebra.intNormAux` (IntegralRestrict.lean:382) assumes an integral-closure ring setup; `Algebra.intNorm` (:405) additionally uses integrally closed source and target domains. These do not directly give the sheaf-level theorem for a possibly nonnormal source, restriction compatibility and the vanishing condition. `Algebra.norm_eq_zero_iff` (Norm/Basic.lean:95) is a statement about zero elements of free finite domain algebras, not vanishing at points of arbitrary fibres. `CommRing.Pic.mk` and `mk_tensor` are ring-module Picard classes, not a norm construction on invertible sheaves. The Loogle hits involving invertibility of numerical factors or exponentials are unrelated. The grep hits were elliptic-curve normal forms, division sequences or tactic `norm_cast` calls; there is no matching scheme norm construction. I also reran all search kinds for the item; no ampleness theorem was returned.
+- Empty `Z` is excluded by the node's integrality assumption itself. Empty `X`
+  cannot surject onto nonempty `Z`; no extra nonemptiness hypothesis is needed.
+- The identity map gives the same ample-existence proposition on both sides.
+- A finite field extension gives finite surjective spectra with normal integral
+  target, and both spectra have an ample structure sheaf, in all characteristics.
+- Reducible or nonreduced `X`, and finite maps that are not flat, remain in scope;
+  the proof's passage to an integral reduced closed subscheme is not a hypothesis.
+- The conclusion chooses one invertible module on `Z`. The proof docstring fixes
+  its norm construction before selecting positive powers and sections.
+- No `n = 0` shortcut changes ampleness: the imported absolute predicate requires
+  `0 < n` for its section neighbourhoods.
 
-## Not duplicates
+Searches actually run with `msearch.py NK lem-sfb-finite-normal-ample-descent`:
 
-lem-sfb-finite-norm-invertible-sections vs lem-pur-finite-flat-kummer-norm-degree: the existing statement assumes finite locally free Noetherian schemes, fixes Kummer coefficients and proves cohomology/degree compatibilities; it supplies neither arbitrary supplied-norm section maps nor the fibrewise nonvanishing equality required here. Our new statement assumes explicit multiplicative norm data on an arbitrary finite surjective morphism, no flatness or Noetherian hypothesis, and has no Kummer or degree clause.
+- LeanFinder: `A finite surjective morphism to an integral normal scheme descends
+  existence of an ample invertible sheaf`. Eight hits, concerning normalization,
+  integral morphisms, and finite morphisms; none states ample existence descent.
+- LeanSearch: `Existence of an ample invertible sheaf descends along a finite
+  surjective morphism onto a normal integral scheme`. Eight hits, including flat
+  descent of morphism properties, finite affine morphisms, and normalization;
+  none matches this theorem.
+- Loogle: `AlgebraicGeometry.Scheme.Modules.IsAmple, AlgebraicGeometry.IsFinite`.
+  Zero hits; it reports unknown identifier for the project-only `IsAmple`, so this
+  query alone gives no evidence of absence. The source searches below supply that.
+- Mathlib grep: `ample.*finite|finite.*ample|ample.*surj|normal.*ample`, restricted
+  to `AlgebraicGeometry`. One hit, an unrelated introductory sentence in
+  `Morphisms/AffineAnd.lean:22`; no theorem match.
+- `rg` in `lean/WeilConjectures/AlgebraicGeometry` and
+  `lean/Sheaf/AlgebraicGeometry` for the same words, `IsAmple`, and normal-stalk
+  signatures: found the reused absolute ampleness definition, section lemmas,
+  and finite-surjective reflection of ampleness of a specified pullback. The
+  reflection theorem assumes a bundle downstairs, and does not give existence
+  downstairs for an arbitrary bundle upstairs, so it is not this statement.
+  `IntegralDimOneAmple` proves existence only for Noetherian separated curves.
+  Normal-scheme interfaces use the same stalk predicates used here.
+- `grep -rn 'lem-sfb-finite-normal-ample-descent' lean/WeilConjectures`:
+  no hits. `rg` for the proposed declaration name and finite/normal/ample word
+  combinations in `lean/WeilConjectures`, `lean/Sheaf`, and
+  `dag/lean_names_upstream.json`: no existing declaration of this theorem.
 
-lem-sfb-normal-integral-finite-sheaf-norm vs lem-sfb-finite-norm-invertible-sections: the former produces norm data from normality of the target and integrality of both schemes; the latter assumes those data on arbitrary schemes and produces invertible sheaves and section loci. They share the source definition 0BCX, but neither gives the other's conclusion.
+No mathematical node fault or disputed statement was found. The example
+`Sheaf.CategoryTheory.CompactObject` is now a withdrawn module with no declarations;
+this delivery follows the current required module/public-import/exposed-section
+convention and the extant ample modules instead.
 
-## Review by NK
+Validation: `scompile.py` compiled the delivered module as both
+`Sheaf.Stage2.Sandbox0` and `Sheaf.AlgebraicGeometry.FiniteNormalAmpleDescent`
+on the server, each in 2.3 seconds, with no errors or unexpected warnings.
+`set_option autoImplicit false` prevents auto-bound variables. All Lean lines
+are at most 100 characters. Only the node's `lean` record changed, with the
+signature copied verbatim from the file and the UTC date 2026-10-22.
 
-I read Divisors 0BD4 (`proposition-push-down-ample`), case (2), and 0BD0 (`lemma-norm-ample`) in divisors.tex. I also read the full local source statements and proofs of 0BD3 (`lemma-norm-in-normal-case`) and 0BCY/0BCZ (`lemma-norm-invertible`, `lemma-norm-map-invertible`) for the two new nodes, including the norm conditions in section 0BCX. For the new sheaf-norm statement, the field norm in 0BD3 has degree the positive finite function-field degree; it preserves products and 1 and restricts on affines, giving precisely the explicit data stated. The source has harmless notation slips in the final minimal-polynomial calculation (the constant coefficient is indexed differently and the norm includes a unit sign); neither slip changes its vanishing conclusion. The new statement records the vanishing property, not the erroneous signed formula.
+## Second reading by NK
 
-For the invertible-section node, 0BCY glues the norm of transition functions, and multiplicativity gives the tensor-power identifications. Apply 0BCZ to the map from the structure sheaf defined by a section of each positive power. Its equivalence says that the norm section vanishes at z exactly when the original section vanishes at some point over z. Taking complements is exactly the equality in the new statement. I checked the reverse implication too: after trivializing upstairs over an open neighbourhood of z using 0BUT, a coefficient nonvanishing on the whole fibre becomes a unit after shrinking, since a finite map is closed. Multiplicativity preserves units. This argument belongs to the new input, not to an unsupported assertion in the item's proof. Only one N is chosen for M, before n and s are quantified; the statement does not allow a different invertible sheaf for each section.
-
-I opened and read the statement of every node in the item's `uses` lists. Step 1 uses exactly the generic-point assertion of `lem-weil-pbc-scheme-sober` and the reduced closed-structure assertion of `lem-weil-pbc-reduced-induced-closed-subscheme`. The irreducibility of the closure is proved in the step, and `def-pc-integral-scheme` explicitly identifies reduced nonempty irreducible schemes with integral schemes. Step 2 uses `lem-weil-pbc-closed-immersion-finite` for i, `lem-weil-pbc-finite-composition` for p, the closed-map clause of `lem-weil-pbc-finite-closed-map-finite-fibres` for the image, and `lem-trf-ample-restrict-closed-immersion` for i*L. Each statement has arbitrary-scheme hypotheses. The image contains the target's generic point and is closed, hence equals Z; no finite irreducible-component decomposition is assumed.
-
-Step 3 applies the normal-norm input only after establishing integrality of Y and finite surjectivity of p, and applies the section-norm input with the precise multiplicative maps supplied by the first. The target's normality is retained from the original hypothesis. Step 4 uses the explicit quasi-compactness clause of `def-weil-pbc-ample-invertible-module`; the finite subcover descends by the written surjectivity argument. Step 5 uses the finite-fibre clause of the finite-map node, and the complete statement of `lem-sc-ample-finite-principal-affine`, with E the entire finite fibre and W=p^{-1}V open. This theorem does not require its points to be closed and imposes no Noetherian hypothesis.
-
-Step 6 uses precisely the saturated nonvanishing equality in the new section-norm statement. The proof of containment in V explicitly chooses a point of each fibre using surjectivity; image containment alone is not used to factor any scheme morphism. The affine conclusion uses `lem-sc-affine-cap-section-open`, whose statement explicitly covers positive powers, with the affine V and N already invertible. Step 7 uses the two stated conditions of the ample definition, and nothing about very ampleness or a chosen projective embedding. The local source checks for these reused lemmas were Properties 01PU (`lemma-ample-on-closed`), 09NV (`lemma-ample-finite-set-in-principal-affine`), 01PV (`lemma-affine-cap-s-open`), and 01PS (`definition-ample`), Schemes 01IS and 01J3, and Morphisms 035C, 01WK, 01WN and 02NU.
-
-Small cases checked: Z is nonempty by the definition of integral; surjectivity rules out empty X or empty fibres. The identity map gives d=1, ordinary sections and the original ample sheaf. Over a field the construction is the ordinary field norm and works for inseparable finite extensions too. A disconnected or nonreduced X is allowed, since the closure construction selects only a reduced integral closed source; no normality of that source is used. For the abstract section-norm input, empty source and target are harmless, and a zero section has empty nonvanishing locus over a nonempty target. With a nowhere-vanishing section both nonvanishing loci are the full schemes. Degree zero is excluded, since scalar powers and vanishing would otherwise be incompatible at a nonempty fibre.
-
-I checked B1--B10: both new files have standalone quantified statements and all notions inline or with definition dependencies, no proofs, TeX with single escapes, exact tags and labels, actual search records, blueprint fields and no unsupported Mathlib leaf or attachment. C1--C8: all non-elementary inputs are named nodes with verbatim statement quotes; no proof of a cited node is used, all generic off-unit tools are declared in split_report, and no new node depends on the item. D1--D5: neither new node mentions ampleness, and the substantive ampleness argument stays in the item; the construction and omitted arguments of the norm inputs remain their own future tasks, without circularity or a restated clause. E1--E7: no flatness, finite-type-over-a-field, Noetherian or proper-over-a-base assumption was introduced; the scheme and the finite fibre used in each step are explicitly identified; all nontrivial comparisons are in the stated norm input. All seven steps are shorter than 2000 characters. I corrected no source statement and found no statement dispute.
+Author's final rereading, not an independent review; the dispatcher brief assigns
+independent review to the maintainer and forbids starting another agent.
+With both the node and Lean file open, I checked the seven binders/conditions
+above and the dependent existential conclusion against 0BD4(2). In particular,
+`hZ` quantifies over every target stalk; `[IsIntegral Z]` does not accidentally
+restrict the source; `hX` asserts existence rather than a prescribed bundle;
+and the conclusion introduces a new bundle rather than a pullback isomorphism.
+No mismatch was found and no mathematical change was made. The sole `sorry`
+is the named theorem carrying the node's complete seven-step proof docstring.

@@ -272,5 +272,23 @@
   "group": "NK",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-bc3258808 (reviewer sub-agent of L); spot-checked: PASS, no changes. This is a faithful split of Stacks 0BD4(2), checked at divisors.tex lines 3585-3940. The item statement and stmt_deps are unchanged from live, the base proof was empty, and there is no re-split note. Neither the item nor its citer is on the 2026-10-19 drop list. Steps: 1. 01IS gives the generic point, 01J3 gives the reduced closure of a point over it, and nonempty + reduced + irreducible makes it integral. 2. 035C and 01WK make p finite; the closed image contains η, so p is surjective; 01PU makes i*L ample. 3. The two new norm nodes, with N fixed once before n and s. 4. Quasi-compactness is elementary, by surjectivity. 5. Finite fibre, then 09NV with E = the fibre and W = p^-1 V. 6. The saturated-locus equality gives z in Z_t inside V (shown by choosing a point in each fibre), and 01PV makes Z_t affine. 7. Both clauses of the ample definition hold. New nodes: (a) normal-integral sheaf norm (0BD3 + 0BCX (1),(2)) is true. It is the field norm N_{K/L} with degree [K:L] >= 1; sections embed in K, so it is defined on all opens. Vanishing holds because the constant term b_m lies in fA ∩ B, inside the prime; the source's sign slip does not affect it. (b) The norm-sections node (0BCY/0BCZ) is true. N = Norm(M) with Norm(M^n) = N^n, by the cocycles u^n. For the converse direction of 0BCZ, units go to units after trivializing near the fibre (0BCW), since finite maps are closed. Small cases checked: s = 0, nowhere-vanishing s, the identity map, field extensions. Neither new node is a duplicate: lem-pur-finite-flat-kummer-norm-degree is finite-flat, Noetherian and Kummer; no other node or blueprint node carries 0BD3/0BCY/0BCZ. Neither restates the item. Batch-5 flag on lem-trf-ample-restrict-closed-immersion: it is generic Properties 01PU, its 97-node closure contains no other trace-formula or Poincare-duality node, and it is not a step of either assumption, so I accept it. I accept the 8 generic off-unit tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteNormalAmpleDescent",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_isAmple_of_finite_surjective_normal",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteNormalAmpleDescent.lean",
+  "statement": "theorem exists_isAmple_of_finite_surjective_normal {X Z : Scheme.{u}} (f : X ⟶ Z) [IsFinite f] [Surjective f] [IsIntegral Z] (hZ : ∀ z : Z, IsDomain (Z.presheaf.stalk z) ∧ IsIntegrallyClosed (Z.presheaf.stalk z)) (hX : ∃ L : X.Modules, ∃ hL : L.IsInvertible, @IsAmple X L hL) : ∃ N : Z.Modules, ∃ hN : N.IsInvertible, @IsAmple Z N hN",
+  "branch": "newtargets-dag",
+  "by": "NK",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-645e7c42c",
+  "group": "NK",
+  "result": "pass",
+  "note": "Lean statement matches Stacks 0BD4(2) clause by clause: IsFinite, Surjective, IsIntegral Z, every stalk an integrally closed domain (recorded inline normal form), existential ample invertible module on X, existential conclusion on Z; no extra hypotheses, one universe u. IsAmple (Ample.lean:48) is the absolute 01PS notion and IsInvertible is local rank-one triviality. Node diff vs live: only the lean record changed; lean.statement is verbatim. Docstrings carry the source place, the blueprint tag and the 7 proof steps. Only sorry, no definitions, imports correct, both report sections present. No duplicate (FiniteSurjectiveAmpleReflection is about a specified bundle). No recompile, per the 2026-10-21 instruction."
  }
 }
