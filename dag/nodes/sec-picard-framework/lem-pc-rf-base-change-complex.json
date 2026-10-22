@@ -36,7 +36,7 @@
    "elementary": false
   },
   {
-   "text": "Convert hbounded to G.IsStrictlyLE using Mathlib CochainComplex.isStrictlyLE_iff. Obtain a canonical tensor comparison from exists_canonicalPullbackTensorComparison and apply singleComplexBaseChangeCriterion to E,hE,G, the boundedness, quasi-coherence, and the stalk condition.",
+   "text": "Obtain a canonical tensor comparison from exists_canonicalPullbackTensorComparison and apply singleComplexBaseChangeCriterion to E,hE,G, its termwise quasi-coherence, and the stalk condition. The source criterion no longer requires a separate boundedness argument; hbounded is used in the stalkwise flat-complex comparison of step 1.",
    "uses": [
     "def-pc-derived-pullback-tensor-comparison",
     "lem-pc-rf-base-change-single-complex-criterion"
@@ -73,7 +73,7 @@
   "date": "2026-10-13",
   "document": "literature/stacks-project/perfect.tex",
   "place": "Tag 0A1D (lemma-base-change-tensor), via Tags 0DJ8, 0DJ9, 0DJA and the tensor coordinate comparison of cohomology.tex Tag 079U",
-  "note": "The original three-step criterion route is retained; two explicit representative-transport interfaces are separated, and naturality and cancellation are proved in Lean."
+  "note": "The existing four-step argument is proved in the adopted source theorem. A4 restores the quarantined Sheaf path as a compatibility import and attaches this node to that theorem, with its full source signature; no mathematical dependency is bypassed."
  },
  "mathlib_searches": [
   {
@@ -132,15 +132,15 @@
  },
  "lean_audit": {},
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.RelativelyFlatDerivedBaseChangeComplex",
+  "module": "WeilConjectures.AlgebraicGeometry.RelativelyFlatDerivedBaseChangeComplex",
   "declaration": "AlgebraicGeometry.relativelyFlat_derivedBaseChange_complex",
-  "file": "lean/Sheaf/AlgebraicGeometry/RelativelyFlatDerivedBaseChangeComplex.lean",
-  "statement": "theorem relativelyFlat_derivedBaseChange_complex {X S T : Scheme.{u}} (f : X ⟶ S) [QuasiCompact f] [QuasiSeparated f] (g : T ⟶ S) [∀ Y : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] [@MonoidalPreadditive _ _ _ (SheafOfModules.monoidalCategory X.sheaf)] (E : schemeDerivedCategory X) (hE : schemeDerivedQCohProperty X E) (G : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) (hbounded : ∃ b : ℤ, ∀ i : ℤ, b < i → IsZero (G.X i)) (hqc : ∀ i : ℤ, (G.X i).IsQuasicoherent) (hflat : ∀ i : ℤ, Scheme.Modules.IsFlatOver (G.X i) f) (P : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) (hP : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) P) (e : DerivedCategory.Q.obj P ≅ E) (α : E ⊗ DerivedCategory.Q.obj G ≅ DerivedCategory.Q.obj (CochainComplex.mapBifunctor P G (@curriedTensor _ _ (SheafOfModules.monoidalCategory X.sheaf)))) : IsIso ((derivedPullback g).map ((schemeDerivedDirectImage f).map α.hom) ≫ schemeDerivedBaseChangeMap f (pullback.snd f g) g (pullback.fst f g) pullback.condition (DerivedCategory.Q.obj (CochainComplex.mapBifunctor P G (@curriedTensor _ _ (SheafOfModules.monoidalCategory X.sheaf)))) ≫ (schemeDerivedDirectImage (pullback.snd f g)).map ((SingleComplexBaseChange.counit (pullback.fst f g)).app ((HomotopyCategory.quotient _ (.up ℤ)).obj (CochainComplex.mapBifunctor P G (@curriedTensor _ _ (SheafOfModules.monoidalCategory X.sheaf))))))",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/RelativelyFlatDerivedBaseChangeComplex.lean",
+  "statement": "theorem relativelyFlat_derivedBaseChange_complex\n    {X S T : Scheme.{u}} (f : X ⟶ S) [QuasiCompact f] [QuasiSeparated f]\n    (g : T ⟶ S)\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [@MonoidalPreadditive _ _ _ (SheafOfModules.monoidalCategory X.sheaf)]\n    (E : schemeDerivedCategory X) (hE : schemeDerivedQCohProperty X E)\n    (G : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n    (hbounded : ∃ b : ℤ, ∀ i : ℤ, b < i → IsZero (G.X i))\n    (hqc : ∀ i : ℤ, (G.X i).IsQuasicoherent)\n    (hflat : ∀ i : ℤ, Scheme.Modules.IsFlatOver (G.X i) f)\n    (P : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n    (hP : CochainComplex.IsKFlatTensor (R := X.sheaf) P)\n    (e : DerivedCategory.Q.obj P ≅ E)\n    (α : E ⊗ DerivedCategory.Q.obj G ≅\n      DerivedCategory.Q.obj (CochainComplex.mapBifunctor P G\n        (@curriedTensor _ _ (SheafOfModules.monoidalCategory X.sheaf)))) :\n    IsIso ((derivedPullback g).map ((schemeDerivedDirectImage f).map α.hom) ≫\n      schemeDerivedBaseChangeMap f (pullback.snd f g) g (pullback.fst f g)\n        pullback.condition (DerivedCategory.Q.obj (CochainComplex.mapBifunctor P G\n          (@curriedTensor _ _ (SheafOfModules.monoidalCategory X.sheaf)))) ≫\n      (schemeDerivedDirectImage (pullback.snd f g)).map\n        ((SingleComplexBaseChange.counit (pullback.fst f g)).app\n          ((HomotopyCategory.quotient _ (.up ℤ)).obj (CochainComplex.mapBifunctor P G\n            (@curriedTensor _ _ (SheafOfModules.monoidalCategory X.sheaf))))))",
   "branch": "sheaf-dag",
-  "by": "R1",
-  "date": "2026-10-12",
-  "existing": false,
-  "note": "Canonical map invertibility in K-flat total-complex coordinates (form of lem-pc-tor-independent-perfect-tensor-base-change, 64cb2bb5b): derived base-change map at Tot(P ⊗ G) followed by the universal derived-to-ordinary counit; the identifications with E ⊗^L G (α) and with L(g')^*E ⊗^L (g')^*G (module pullback tensor iso, K-flat pullback) are isomorphisms that do not change IsIso. hE restores D_QCoh.",
+  "by": "A4",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "Restore the quarantined Sheaf import path as a compatibility re-export of the adopted source proof. The full archived signature compiles by application of this theorem: IsAcyclicTensorKFlat and IsKFlatTensor have identical definitions. The theorem, mathematical dependencies and unit route are retained; no new declaration or hole is introduced.",
   "fixed_by": "R-rbx"
  },
  "reviewed_lean": {
@@ -152,13 +152,13 @@
   "note": "qcqs f instances; E with hE schemeDerivedQCohProperty (D_QCoh); G bounded above (hbounded), termwise quasi-coherent (hqc) and IsFlatOver f (hflat); arbitrary g with pullback square; conclusion IsIso of schemeDerivedBaseChangeMap at Tot(P⊗G) then Rf_T* of SingleComplexBaseChange.counit, transported along α; fixed: dropped φ/hφ (Classical.choose of sorried module_pullback_tensor), β and two Prop instance binders, all postcomposed isomorphisms irrelevant to IsIso; stmt_deps additions checked (used or cited in docstring, as in 64cb2bb5b), check_dag 0 cycles; node JSON diff touches only stmt_deps and lean"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "T4",
+  "reviewer": "C-e7e50",
+  "group": "A4",
   "result": "pass",
-  "landing": "20261013T040802-L-3953194",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261022T021024-L-162401",
+  "kind": "proof",
+  "note": "independent cc review: Restored Sheaf module (re-export only) and lem-pc-rf-base-change-complex lean record (existing:true) against WeilConjectures.AlgebraicGeometry.RelativelyFlatDerivedBaseChangeComplex and the quarantined archive: only difference IsAcyclicTensorKFlat vs IsKFlatTensor, same definition body; WC theorem axioms clean; step-2 text matches the WC proof"
  }
 }
